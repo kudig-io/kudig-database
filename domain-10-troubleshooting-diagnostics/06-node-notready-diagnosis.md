@@ -191,7 +191,7 @@ created: "2026-05-23"
 | **MemoryPressure** | False | 可用内存低于 eviction 阈值 | kubelet cAdvisor | BestEffort Pod 驱逐 | 内存释放后立即 |
 | **DiskPressure** | False | 磁盘空间/inode 不足 | kubelet 磁盘监控 | 禁止调度; Pod 驱逐 | 磁盘释放后立即 |
 | **PIDPressure** | False | 进程数接近系统限制 | kubelet PID 监控 | 禁止调度; 可能驱逐 | PID 释放后立即 |
-| **NetworkUnavailable** | False | 节点网络未正确配置 | CNI 插件报告 | Pod 网络故障 | CNI 修复后 |
+| **NetworkUnavailable** | False | 节点网络未正确配置 | CNI 插件报告 | Pod 网络问题 | CNI 修复后 |
 
 ### 1.3 NotReady 状态时间线
 
@@ -200,7 +200,7 @@ created: "2026-05-23"
 │                         NotReady 状态演变时间线                                          │
 ├─────────────────────────────────────────────────────────────────────────────────────────┤
 │                                                                                          │
-│   T=0s        kubelet 停止心跳 (故障发生)                                               │
+│   T=0s        kubelet 停止心跳 (问题发生)                                               │
 │    │                                                                                     │
 │    ├── T+10s   Lease 超过更新周期 (kubelet 未更新)                                      │
 │    │           ⚠️ 此时节点仍然显示 Ready=True                                           │
@@ -228,7 +228,7 @@ created: "2026-05-23"
 │                                                                                          │
 │   恢复时间线:                                                                            │
 │    │                                                                                     │
-│    ├── 故障修复  kubelet 恢复心跳                                                       │
+│    ├── 问题修复  kubelet 恢复心跳                                                       │
 │    │                                                                                     │
 │    ├── +10s     Lease 更新成功                                                          │
 │    │                                                                                     │
@@ -279,7 +279,7 @@ created: "2026-05-23"
 │   │ Step 2: 检查连通性│                              │ 检查控制平面/网络    │          │
 │   │ SSH 能否连接?     │                              │ • API Server 状态    │          │
 │   └───────────────────┘                              │ • 网络基础设施       │          │
-│           │                                          │ • 云平台故障        │          │
+│           │                                          │ • 云平台问题        │          │
 │      ┌────┴────┐                                     └───────────────────────┘          │
 │      │         │                                                                        │
 │   能 SSH    不能 SSH                                                                    │
@@ -351,7 +351,7 @@ created: "2026-05-23"
 └─────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 2.2 故障原因分类矩阵
+### 2.2 问题原因分类矩阵
 
 | 原因类别 | 具体原因 | 发生频率 | 影响范围 | 诊断难度 | 恢复难度 |
 |---------|---------|---------|---------|---------|---------|
@@ -359,7 +359,7 @@ created: "2026-05-23"
 | **kubelet** | kubelet 配置错误 | 中 | 单节点 | 中 | 中 |
 | **kubelet** | kubelet 证书过期 | 低 | 可能多节点 | 低 | 中 |
 | **kubelet** | PLEG 超时 | 中 | 单节点 | 中 | 中 |
-| **运行时** | containerd 故障 | 中 | 单节点 | 低 | 低 |
+| **运行时** | containerd 问题 | 中 | 单节点 | 低 | 低 |
 | **运行时** | containerd OOM | 中 | 单节点 | 中 | 中 |
 | **运行时** | shim 进程泄漏 | 中 | 单节点 | 中 | 低 |
 | **运行时** | 镜像存储损坏 | 低 | 单节点 | 高 | 高 |
@@ -368,9 +368,9 @@ created: "2026-05-23"
 | **资源** | inode 耗尽 | 中 | 单节点 | 低 | 低 |
 | **资源** | PID 耗尽 | 低 | 单节点 | 低 | 低 |
 | **网络** | API Server 不可达 | 中 | 单/多节点 | 中 | 中 |
-| **网络** | CNI 插件故障 | 高 | 多节点 | 中 | 中 |
+| **网络** | CNI 插件问题 | 高 | 多节点 | 中 | 中 |
 | **网络** | DNS 解析失败 | 中 | 多节点 | 低 | 低 |
-| **网络** | 网卡故障 | 低 | 单节点 | 中 | 高 |
+| **网络** | 网卡问题 | 低 | 单节点 | 中 | 高 |
 | **证书** | kubelet 客户端证书过期 | 低 | 多节点 | 低 | 中 |
 | **证书** | CA 证书不匹配 | 低 | 多节点 | 中 | 高 |
 | **内核** | 内核 panic | 低 | 单节点 | 高 | 高 |
@@ -378,7 +378,7 @@ created: "2026-05-23"
 | **内核** | cgroup 异常 | 低 | 单节点 | 高 | 中 |
 | **硬件** | 物理服务器宕机 | 低 | 单节点 | - | 高 |
 | **云平台** | 实例被回收 | 中(竞价) | 单节点 | 低 | 中 |
-| **云平台** | 云平台故障 | 低 | 多节点 | - | - |
+| **云平台** | 云平台问题 | 低 | 多节点 | - | - |
 
 ---
 
@@ -480,7 +480,7 @@ journalctl -u kubelet --since "5 minutes ago" --no-pager 2>/dev/null | grep -E "
 | `failed to run Kubelet: running with swap on is not supported` | 未禁用 swap | `swapoff -a && sed -i '/swap/d' /etc/fstab` |
 | `error: failed to run Kubelet: unable to load bootstrap kubeconfig` | bootstrap 配置丢失 | 重新执行 kubeadm join |
 | `Unable to update cni config: no networks found` | CNI 未配置 | 安装 CNI 插件 |
-| `PLEG is not healthy: pleg was last seen active` | 容器运行时慢/故障 | 重启 containerd/清理容器 |
+| `PLEG is not healthy: pleg was last seen active` | 容器运行时慢/问题 | 重启 containerd/清理容器 |
 | `failed to get node info` | API Server 不可达 | 检查网络/证书 |
 | `certificate has expired` | 证书过期 | 更新证书 |
 | `error killing pod: context deadline exceeded` | 运行时响应慢 | 重启 containerd |
@@ -1580,7 +1580,7 @@ kubectl get node $(hostname) -o wide 2>/dev/null
 |------|------|------|---------|
 | **节点自动回收** | 节点突然消失 | 竞价实例被回收 | 使用混合实例策略 |
 | **节点池扩容失败** | 节点数不增加 | 库存不足/配额限制 | 检查配额/更换规格 |
-| **Terway 网络故障** | Pod 网络不通 | ENI 分配失败 | 检查 VSwitch/安全组 |
+| **Terway 网络问题** | Pod 网络不通 | ENI 分配失败 | 检查 VSwitch/安全组 |
 | **云盘挂载失败** | PVC Pending | 云盘不在同可用区 | 使用 WaitForFirstConsumer |
 | **节点标签丢失** | 节点池标签不生效 | 节点池配置问题 | 重新同步节点池配置 |
 
@@ -1790,7 +1790,7 @@ spec:
         severity: critical
       annotations:
         summary: "节点 {{ $labels.node }} 状态 Unknown"
-        description: "可能存在网络分区或 kubelet 故障"
+        description: "可能存在网络分区或 kubelet 问题"
     
     # 内存压力
     - alert: NodeMemoryPressure
@@ -2048,11 +2048,11 @@ shutdownGracePeriodByPodPriority:
 
 | 测试类型 | 测试目标 | 测试方法 |
 |---------|---------|---------|
-| **节点故障测试** | 验证故障检测时间 | 强制停止 kubelet |
+| **节点问题测试** | 验证故障检测时间 | 强制停止 kubelet |
 | **恢复测试** | 验证自动恢复 | 模拟后恢复节点 |
 | **驱逐测试** | 验证 Pod 迁移 | 触发节点 NotReady |
 | **资源压力测试** | 验证驱逐策略 | 消耗内存/磁盘 |
-| **混沌测试** | 验证整体稳定性 | [[ChaosBlade|ChaosBlade]] 节点故障 |
+| **混沌测试** | 验证整体稳定性 | [[ChaosBlade|ChaosBlade]] 节点问题 |
 
 ### 14.3 产品经理视角
 

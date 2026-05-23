@@ -553,7 +553,7 @@ spec:
         severity: critical
       annotations:
         summary: "应用实例离线 (instance {{ $labels.instance }})"
-        description: "应用实例无法访问，可能已停止或网络故障"
+        description: "应用实例无法访问，可能已停止或网络问题"
     
     # 数据库连接池告警
     - alert: DatabaseConnectionPoolFull

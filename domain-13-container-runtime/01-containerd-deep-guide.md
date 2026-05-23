@@ -5,6 +5,7 @@ tags: ["domain-13", "containerd", "容器运行时", "CRI", "镜像管理", "Run
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+status: reviewed
 ---
 
 # containerd 深度指南

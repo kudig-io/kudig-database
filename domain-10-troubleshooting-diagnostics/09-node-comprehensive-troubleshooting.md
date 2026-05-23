@@ -23,7 +23,7 @@ audience:
 estimated_read_time: 5min
 intent_queries:
 - Node 问题怎么排查
-- 节点硬件故障
+- 节点硬件问题
 - 内核参数
 - 系统资源
 trigger_keywords:
@@ -76,13 +76,13 @@ created: "2026-05-23"
 | 状态 | 含义 | 常见原因 | 优先检查项 |
 |:---|:---|:---|:---|
 | **Ready** | 节点正常 | - | 正常状态 |
-| **NotReady** | 节点异常 | kubelet故障/网络/资源压力 | kubelet日志/节点资源 |
+| **NotReady** | 节点异常 | kubelet问题/网络/资源压力 | kubelet日志/节点资源 |
 | **SchedulingDisabled** | 禁止调度 | 手动cordon/维护 | 检查是否手动操作 |
 | **Unknown** | 状态未知 | 节点失联/API Server连接断开 | 网络/kubelet |
 | **MemoryPressure** | 内存压力 | 内存不足 | 节点内存使用 |
 | **DiskPressure** | 磁盘压力 | 磁盘空间不足 | 节点磁盘使用 |
 | **PIDPressure** | PID压力 | 进程数过多 | 节点PID使用 |
-| **NetworkUnavailable** | 网络不可用 | CNI未配置/故障 | CNI状态 |
+| **NetworkUnavailable** | 网络不可用 | CNI未配置/问题 | CNI状态 |
 
 ### 1.2 Node Conditions 详解
 
@@ -185,7 +185,7 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 | `certificate has expired` | 证书过期 | 轮换证书 |
 | `failed to run Kubelet: cannot create certificate` | 证书问题 | 检查CA/重新生成 |
 | `node not found` | 节点未注册 | 检查kubelet配置/重新注册 |
-| `[[Container Runtime|container runtime]] is down` | 运行时故障 | 重启containerd/docker |
+| `[[Container Runtime|container runtime]] is down` | 运行时问题 | 重启containerd/docker |
 | `PLEG is not healthy` | PLEG超时 | 检查运行时/重启kubelet |
 
 ---

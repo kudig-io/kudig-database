@@ -139,7 +139,7 @@ k8s_versions:
 │   │                              │                                      │  │
 │   │   ┌────────────────────────────────────────────────────────────┐   │  │
 │   │   │                   Chaos Daemon (DaemonSet)                  │   │  │
-│   │   │  • 每个节点运行         • 注入故障到容器                    │   │  │
+│   │   │  • 每个节点运行         • 注入问题到容器                    │   │  │
 │   │   │  • 使用eBPF/ptrace      • 网络/IO/进程注入                  │   │  │
 │   │   └────────────────────────────────────────────────────────────┘   │  │
 │   └─────────────────────────────────────────────────────────────────────┘  │
@@ -166,7 +166,7 @@ k8s_versions:
 | 原则 | 说明 | 实践方式 | 重要性 |
 |-----|------|---------|-------|
 | **建立稳态假设** | 定义系统正常行为指标 | SLI/SLO定义,基线测量 | P0 |
-| **真实世界事件** | 模拟真实故障场景 | 基于历史故障,概率建模 | P0 |
+| **真实世界事件** | 模拟真实问题场景 | 基于历史问题,概率建模 | P0 |
 | **生产环境实验** | 真实环境才能发现真实问题 | 灰度实验,金丝雀发布 | P1 |
 | **自动化持续** | 持续运行实验 | CI/CD集成,定期执行 | P1 |
 | **最小爆炸半径** | 控制实验影响范围 | 渐进式扩大,紧急停止 | P0 |
@@ -183,24 +183,24 @@ k8s_versions:
 | **Gremlin** | SaaS | 全场景 | ✅ | 低 | ⭐⭐⭐⭐ | 企业级托管 |
 | **AWS FIS** | 托管 | AWS资源 | ❌ | 低 | ⭐⭐⭐⭐ | AWS环境 |
 | **Chaosblade** | Agent | 全场景 | ✅ | 中 | ⭐⭐⭐⭐ | 阿里生态 |
-| **Toxiproxy** | Proxy | 网络故障 | ❌ | 低 | ⭐⭐⭐ | 测试环境 |
-| **Pumba** | CLI | 容器故障 | ✅ | 低 | ⭐⭐⭐ | Docker环境 |
+| **Toxiproxy** | Proxy | 网络问题 | ❌ | 低 | ⭐⭐⭐ | 测试环境 |
+| **Pumba** | CLI | 容器问题 | ✅ | 低 | ⭐⭐⭐ | Docker环境 |
 
-<!-- chunk: Chaos Mesh故障类型详解 -->
-## Chaos Mesh故障类型详解
+<!-- chunk: Chaos Mesh问题类型详解 -->
+## Chaos Mesh问题类型详解
 
 | 类型 | CRD | 说明 | 注入方式 | 典型场景 |
 |-----|-----|------|---------|---------|
-| **Pod故障** | PodChaos | 杀Pod/容器失败 | API调用 | 测试自愈能力 |
-| **网络故障** | NetworkChaos | 延迟/丢包/分区 | tc/iptables | 测试服务降级 |
-| **文件系统** | IOChaos | IO延迟/错误 | fuse/eBPF | 测试存储故障 |
-| **内核故障** | KernelChaos | 内核错误注入 | eBPF | 测试系统稳定性 |
+| **Pod问题** | PodChaos | 杀Pod/容器失败 | API调用 | 测试自愈能力 |
+| **网络问题** | NetworkChaos | 延迟/丢包/分区 | tc/iptables | 测试服务降级 |
+| **文件系统** | IOChaos | IO延迟/错误 | fuse/eBPF | 测试存储问题 |
+| **内核问题** | KernelChaos | 内核错误注入 | eBPF | 测试系统稳定性 |
 | **时间偏移** | TimeChaos | 时钟偏移 | VDSO hook | 测试时间敏感逻辑 |
 | **压力测试** | StressChaos | CPU/内存压力 | stress-ng | 测试资源竞争 |
-| **JVM故障** | JVMChaos | Java异常注入 | Byteman | 测试Java应用 |
-| **HTTP故障** | HTTPChaos | HTTP请求故障 | eBPF/sidecar | 测试API容错 |
-| **DNS故障** | DNSChaos | DNS解析故障 | CoreDNS注入 | 测试DNS依赖 |
-| **云平台故障** | AWSChaos/GCPChaos | 云资源故障 | 云API | 测试云故障转移 |
+| **JVM问题** | JVMChaos | Java异常注入 | Byteman | 测试Java应用 |
+| **HTTP问题** | HTTPChaos | HTTP请求问题 | eBPF/sidecar | 测试API容错 |
+| **DNS问题** | DNSChaos | DNS解析问题 | CoreDNS注入 | 测试DNS依赖 |
+| **云平台问题** | AWSChaos/GCPChaos | 云资源问题 | 云API | 测试云故障转移 |
 
 <!-- chunk: Chaos Mesh安装部署 -->
 ## Chaos Mesh安装部署
@@ -289,7 +289,7 @@ metadata:
     experiment-type: resilience
     target-service: api-server
 spec:
-  # 故障动作: pod-kill/pod-failure/container-kill
+  # 问题动作: pod-kill/pod-failure/container-kill
   action: pod-kill
   
   # 选择模式
@@ -352,7 +352,7 @@ spec:
   duration: "30s"
   
 ---
-# pod-failure实验 - 模拟Pod故障但不删除
+# pod-failure实验 - 模拟Pod问题但不删除
 apiVersion: chaos-mesh.org/v1alpha1
 kind: PodChaos
 metadata:
@@ -361,13 +361,13 @@ metadata:
 spec:
   action: pod-failure
   mode: fixed
-  value: "2"  # 使2个Pod故障
+  value: "2"  # 使2个Pod问题
   selector:
     namespaces:
     - production
     labelSelectors:
       app: worker
-  duration: "120s"  # 故障持续2分钟后自动恢复
+  duration: "120s"  # 问题持续2分钟后自动恢复
 ```
 
 <!-- chunk: NetworkChaos详细配置 -->
@@ -1034,7 +1034,7 @@ spec:
     suspend:
       duration: "1m"        # 暂停1分钟进行验证
       
-  # 步骤2: Pod故障
+  # 步骤2: Pod问题
   - name: pod-kill-step
     templateType: PodChaos
     deadline: "3m"
@@ -1092,7 +1092,7 @@ spec:
     - pod-chaos-branch
     - stress-chaos-branch
     
-  # 分支1: 网络故障
+  # 分支1: 网络问题
   - name: network-chaos-branch
     templateType: NetworkChaos
     deadline: "5m"
@@ -1107,7 +1107,7 @@ spec:
         latency: "100ms"
       duration: "4m"
       
-  # 分支2: Pod故障
+  # 分支2: Pod问题
   - name: pod-chaos-branch
     templateType: PodChaos
     deadline: "5m"
@@ -1363,7 +1363,7 @@ rules:
 | **资源** | 内存使用率 | container_memory_working_set | <85% | cAdvisor |
 | **队列** | 消息堆积 | 队列深度 | <1000 | 中间件监控 |
 | **连接** | DB连接池使用率 | 活跃连接/最大连接 | <80% | 应用指标 |
-| **恢复** | MTTR | 故障到恢复时间 | <5min | 告警系统 |
+| **恢复** | MTTR | 问题到恢复时间 | <5min | 告警系统 |
 
 ### Prometheus告警规则
 

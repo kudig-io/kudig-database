@@ -138,7 +138,7 @@ kubectl logs -n kube-system -l app=alicloud-cloud-controller-manager --tail=50
 
 ### 诊断原理说明
 
-云厂商集成故障通常涉及以下几个层面：
+云厂商集成问题通常涉及以下几个层面：
 
 1. **认证授权层**：云厂商凭证配置、IAM 权限设置
 2. **网络层面**：VPC 配置、安全组规则、路由表设置
@@ -149,7 +149,7 @@ kubectl logs -n kube-system -l app=alicloud-cloud-controller-manager --tail=50
 ### 云厂商问题诊断决策树
 
 ```
-云厂商集成故障
+云厂商集成问题
     ├── 认证授权问题
     │   ├── 凭证配置检查
     │   ├── IAM 权限验证

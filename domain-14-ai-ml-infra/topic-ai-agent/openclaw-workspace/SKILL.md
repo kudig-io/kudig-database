@@ -200,7 +200,7 @@ kubectl describe node <node> | grep -A 5 "Allocated resources:"
 Node NotReady
 ├── kubelet 不响应
 │   ├── kubelet 进程挂了 → 重启 kubelet
-│   ├── 节点 SSH 不通 → 物理/VM 层面故障
+│   ├── 节点 SSH 不通 → 物理/VM 层面问题
 │   └── 证书过期 → 更新 kubelet 证书
 ├── MemoryPressure = True
 │   ├── 系统内存不足 → 清理内存 / 扩容
@@ -320,10 +320,10 @@ kubectl logs -n kube-system -l component=kube-apiserver --tail=20
 
 | 故障域 | kudig-database 参考文档 |
 |--------|------------------------|
-| Pod 故障 | `domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md` ~ `08-pod-comprehensive-troubleshooting.md` |
-| Node 故障 | `domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md`, `09-node-comprehensive-troubleshooting.md` |
-| Network 故障 | `domain-10-troubleshooting-diagnostics/25-network-connectivity-troubleshooting.md`, `26-dns-troubleshooting.md` |
-| Storage 故障 | `domain-10-troubleshooting-diagnostics/14-pvc-storage-troubleshooting.md`, `[[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting|04-storage-csi-troubleshooting]].md` |
+| Pod 问题 | `domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md` ~ `08-pod-comprehensive-troubleshooting.md` |
+| Node 问题 | `domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md`, `09-node-comprehensive-troubleshooting.md` |
+| Network 问题 | `domain-10-troubleshooting-diagnostics/25-network-connectivity-troubleshooting.md`, `26-dns-troubleshooting.md` |
+| Storage 问题 | `domain-10-troubleshooting-diagnostics/14-pvc-storage-troubleshooting.md`, `[[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting|04-storage-csi-troubleshooting]].md` |
 | 性能问题 | `domain-10-troubleshooting-diagnostics/33-performance-bottleneck-troubleshooting.md` |
 | 故障树 | `domain-10-troubleshooting-diagnostics/topic-fta/` 完整故障树分析模型 |
 

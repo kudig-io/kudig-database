@@ -159,7 +159,7 @@ created: "2026-05-23"
 | S2 | 节点版本不一致（Version Skew） | `kubectl get nodes` 显示多版本 | 0.90 | 升级过程中（临时） |
 | S3 | API 资源 apply 失败，提示版本不存在 | `kubectl apply` 错误输出 | 0.90 | 拼写错误 |
 | S4 | etcd 升级后 endpoint 不健康 | `etcdctl endpoint health` | 0.95 | 网络分区 |
-| S5 | 节点升级后 NotReady，kubelet 版本不匹配 | `kubectl get nodes` + `describe node` | 0.90 | 节点硬件故障 |
+| S5 | 节点升级后 NotReady，kubelet 版本不匹配 | `kubectl get nodes` + `describe node` | 0.90 | 节点硬件问题 |
 | S6 | CNI/CSI Pod 升级后 CrashLoopBackOff | `kubectl get pods -n kube-system` | 0.85 | 镜像拉取失败 |
 | S7 | 升级后证书验证失败 | 组件日志 TLS 错误 | 0.90 | 证书自然过期 |
 | S8 | 容器运行时升级后 Pod 无法启动 | `crictl info` / Pod Event | 0.85 | 节点磁盘满 |
@@ -180,7 +180,7 @@ created: "2026-05-23"
 ### 2.3 排除标准
 
 - 未进行升级操作但控制平面异常 → 使用 SKILL-CP-001
-- 节点硬件故障导致 NotReady → 使用 SKILL-NODE-001
+- 节点硬件问题导致 NotReady → 使用 SKILL-NODE-001
 - 存储问题与升级无关 → 使用 SKILL-STORE-001
 - 网络问题与升级无关 → 使用 SKILL-NET-001
 - 镜像拉取失败导致 Pod 无法启动 → 使用 SKILL-IMAGE-001
@@ -208,7 +208,7 @@ kubectl get nodes --no-headers | awk '
 '
 ```
 > **判断规则**: 
-> - 如果 API Server /healthz 返回非 200 → 控制平面故障，P0
+> - 如果 API Server /healthz 返回非 200 → 控制平面问题，P0
 > - 如果 NotReady 节点 > 30% → P0
 > - 如果 Version Skew 节点 > 50% → P1
 > - 如果仅单个节点受影响 → P2
@@ -511,8 +511,8 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
 - **目的**: 验证升级后的节点是否可以正常注册
 - **命令**:
   ```bash
-  # 对故障节点执行 kubeadm reset + join（仅限可替换节点）
-  # 先在故障节点上执行：
+  # 对问题节点执行 kubeadm reset + join（仅限可替换节点）
+  # 先在问题节点上执行：
   # kubeadm reset --force
   # kubeadm join <control-plane-endpoint> --token <token> --discovery-token-ca-cert-hash <hash>
   
@@ -678,7 +678,7 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
 
 ### 6.2 🟡 中风险（Agent 建议，人工审批）
 
-#### REM-004: 对故障节点执行 kubeadm reset + join
+#### REM-004: 对问题节点执行 kubeadm reset + join
 - **适用根因**: RC-005
 - **影响说明**: 节点上所有 Pod 将被删除并重新调度，业务会短暂中断
 - **审批提示**: "建议对节点 <node-name> 执行 kubeadm reset + join，将清空节点上所有 Pod，是否批准？"
@@ -783,7 +783,7 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
   4. 替换数据目录并启动 etcd
   5. 启动 API Server
   6. 验证集群状态
-- **安全检查**: 确认备份文件完整且时间点在故障发生之前
+- **安全检查**: 确认备份文件完整且时间点在问题发生之前
 - **回滚方案**: 保留原始 etcd 数据目录，如恢复失败可切回
 
 ### 6.4 ⚫ 严重（需高级 SRE 审批）
@@ -853,7 +853,7 @@ kubectl delete pod upgrade-verify
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 - [ ] API Server /healthz 和 /healthz/etcd 返回 ok
 - [ ] 所有节点状态为 Ready
 - [ ] 所有控制平面 Pod 状态为 Running
@@ -886,7 +886,7 @@ kubectl delete pod upgrade-verify
 
 ```
 【{severity}】{skill_name} - {cluster_name}
-- 故障概述: 集群升级/迁移过程中出现 {component} 异常
+- 问题概述: 集群升级/迁移过程中出现 {component} 异常
 - 影响范围: {affected_nodes}/{total_nodes} 节点，{affected_workloads} 工作负载
 - 已完成诊断: {completed_steps}
 - 初步发现: {root_cause_candidate}
@@ -964,7 +964,7 @@ kubectl delete pod upgrade-verify
 
 | 平台 | 差异 | 诊断命令 | 备注 |
 |------|------|---------|------|
-| ACK | 托管控制平面，用户无法执行 kubeadm upgrade | `aliyun cs GET /clusters/{cluster-id}` | 升级由平台托管，故障需提工单 |
+| ACK | 托管控制平面，用户无法执行 kubeadm upgrade | `aliyun cs GET /clusters/{cluster-id}` | 升级由平台托管，问题需提工单 |
 | EKS | 托管控制平面，节点升级通过 EKS Managed Node Group | `aws eks describe-nodegroup` | 注意 AMI 版本与 K8s 版本对应 |
 | GKE | 自动升级通道（Release Channel）可能导致意外升级 | `gcloud container clusters describe` | 检查维护窗口和发布通道设置 |
 | AKS | 支持自动升级和 Planned Maintenance | `az aks show` | 注意 Node Image Upgrade 与 K8s 升级的区别 |
@@ -1032,9 +1032,9 @@ receivers:
 ## Obsidian 相关文档
 
 - [[domain-10-troubleshooting-diagnostics/topic-skills/11-control-plane-failure.md|SKILL-CP-001 etcd 与控制平面故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/24-namespace-quota-limitrange.md|SKILL-CONFIG-002 Namespace/Quota/LimitRange 故障]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/24-namespace-quota-limitrange.md|SKILL-CONFIG-002 Namespace/Quota/LimitRange 问题]]
 - [[domain-10-troubleshooting-diagnostics/topic-skills/19-node-resource-pressure.md|SKILL-NODE-002 节点资源压力诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/20-networkpolicy-connectivity.md|SKILL-NET-004 NetworkPolicy 连通性故障]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/20-networkpolicy-connectivity.md|SKILL-NET-004 NetworkPolicy 连通性问题]]
 - [[domain-10-troubleshooting-diagnostics/topic-skills/21-statefulset-failure.md|SKILL-WORK-002 StatefulSet 故障诊断]]
 - [[domain-10-troubleshooting-diagnostics/topic-skills/22-daemonset-failure.md|SKILL-WORK-003 DaemonSet 故障诊断]]
 - [[domain-10-troubleshooting-diagnostics/topic-skills/23-job-cronjob-failure.md|SKILL-WORK-004 Job/CronJob 故障诊断]]

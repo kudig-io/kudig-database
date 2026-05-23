@@ -1210,7 +1210,7 @@ while true; do
         echo "$(date): DNS 查询失败，连续失败次数: $failure_count"
         
         if [ $failure_count -ge $THRESHOLD_FAILURE ]; then
-            echo "$(date): DNS 服务严重故障!"
+            echo "$(date): DNS 服务严重问题!"
             # 发送紧急告警
             failure_count=0
         fi
@@ -1231,7 +1231,7 @@ done
 ##<!-- chunk: DNS 故障切换策略 -->## DNS 故障切换策略
 
 ```bash
-# DNS 故障自动切换脚本
+# DNS 问题自动切换脚本
 #!/bin/bash
 
 PRIMARY_DNS="8.8.8.8"
@@ -1246,7 +1246,7 @@ check_dns_health() {
     if dig @$dns_server $test_domain >/dev/null 2>&1; then
         return 0  # 健康
     else
-        return 1  # 故障
+        return 1  # 问题
     fi
 }
 
@@ -1265,7 +1265,7 @@ switch_dns() {
 # 主监控循环
 while true; do
     if ! check_dns_health $PRIMARY_DNS; then
-        echo "$(date): 主 DNS $PRIMARY_DNS 故障，切换到备用"
+        echo "$(date): 主 DNS $PRIMARY_DNS 问题，切换到备用"
         switch_dns $SECONDARY_DNS $PRIMARY_DNS
         break
     fi

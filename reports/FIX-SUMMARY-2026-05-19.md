@@ -54,7 +54,7 @@ created: "2026-05-23"
 ### Agent QA 对语料库 (`domain-10-troubleshooting-diagnostics/topic-qa-corpus/`)
 - 18 个 YAML 文件, 2,336 个 QA 对
 - 覆盖: 15 个核心 domain + FTA + Skills + 应用架构
-- 命令输出诊断语料: 23 个常见故障场景 (command → output → diagnosis → action)
+- 命令输出诊断语料: 23 个常见问题场景 (command → output → diagnosis → action)
 
 ### 自动化脚本 (`scripts/`)
 | 脚本 | 用途 |
@@ -77,7 +77,7 @@ created: "2026-05-23"
 
 ### P1 (已全部完成)
 - [✓] Agent QA 对语料 — 2,336 对, 覆盖概念/操作/最佳实践/排障/对比
-- [✓] 命令输出解读语料 — 23 个故障场景的 command→diagnosis→action 映射
+- [✓] 命令输出解读语料 — 23 个问题场景的 command→diagnosis→action 映射
 
 ---
 

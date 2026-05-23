@@ -65,13 +65,13 @@ related_topics:
 
 # Day 20: 故障排查实战
 
-> **学习时间**: 4-5 小时 | **主题**: 构造并排查常见故障
+> **学习时间**: 4-5 小时 | **主题**: 构造并排查常见问题
 
 ---
 
 ## 今日目标
 
-- [ ] 实战排查 5 类常见故障
+- [ ] 实战排查 5 类常见问题
 - [ ] 熟练使用排障工具链
 - [ ] 建立排障肌肉记忆
 
@@ -95,12 +95,12 @@ related_topics:
 
 ---
 
-## 实践任务 (2.5h) - 构造 5 类故障并排查
+## 实践任务 (2.5h) - 构造 5 类问题并排查
 
-### 故障 1: ImagePullBackOff (30min)
+### 问题 1: ImagePullBackOff (30min)
 
 ```bash
-# 构造故障
+# 构造问题
 kubectl run image-error --image=nonexistent/image:v1
 
 # 排障流程
@@ -120,10 +120,10 @@ kubectl delete pod image-error
 kubectl run image-ok --image=nginx:alpine
 ```
 
-### 故障 2: OOMKilled (30min)
+### 问题 2: OOMKilled (30min)
 
 ```bash
-# 构造故障
+# 构造问题
 cat > oom-pod.yaml << 'EOF'
 apiVersion: v1
 kind: Pod
@@ -158,7 +158,7 @@ kubectl get events | grep OOM
 kubectl delete pod oom-test
 ```
 
-### 故障 3: Service 访问不通 (30min)
+### 问题 3: Service 访问不通 (30min)
 
 ```bash
 # 创建 Deployment 但故意设置错误的 label
@@ -198,10 +198,10 @@ kubectl expose deployment web --port=80
 kubectl get endpoints web
 ```
 
-### 故障 4: PVC Pending (30min)
+### 问题 4: PVC Pending (30min)
 
 ```bash
-# 构造故障: 请求不存在的 StorageClass
+# 构造问题: 请求不存在的 StorageClass
 cat > pvc-error.yaml << 'EOF'
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -231,10 +231,10 @@ kubectl get storageclass
 kubectl delete pvc pvc-error
 ```
 
-### 故障 5: CrashLoopBackOff (30min)
+### 问题 5: CrashLoopBackOff (30min)
 
 ```bash
-# 构造故障: 启动命令错误
+# 构造问题: 启动命令错误
 cat > crash-pod.yaml << 'EOF'
 apiVersion: v1
 kind: Pod
@@ -264,7 +264,7 @@ kubectl delete pod crash-test
 
 ## 费曼复述 (0.5h)
 
-针对每类故障，回答:
+针对每类问题，回答:
 1. 症状是什么？
 2. 如何定位？
 3. 根因是什么？

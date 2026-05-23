@@ -921,7 +921,7 @@ main() {
 main "$@"
 ```
 
-### 6. 故障排除与调试
+### 6. 问题排除与调试
 
 ```bash
 #!/bin/bash
@@ -1171,7 +1171,7 @@ main() {
 main "$@"
 ```
 
-### 6. 故障排除与调试
+### 6. 问题排除与调试
 
 ```bash
 #!/bin/bash
@@ -1298,8 +1298,8 @@ subresources:
     x-kubernetes-status-subresource: true
 ```
 
-<!-- chunk: CRD故障排除 -->
-## CRD故障排除
+<!-- chunk: CRD问题排除 -->
+## CRD问题排除
 
 ### 常见问题诊断
 

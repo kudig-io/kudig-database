@@ -20,7 +20,7 @@ audience:
 - 所有工程师
 estimated_read_time: 25min
 intent_queries:
-- 15-ingress-troubleshooting常见故障有哪些？
+- 15-ingress-troubleshooting常见问题有哪些？
 - 如何排查15-ingress-troubleshooting相关问题？
 - 15-ingress-troubleshooting的故障处理方法
 trigger_keywords:
@@ -109,9 +109,9 @@ authors:
 <!-- chunk: 1. Ingress 故障诊断总览 (Ingress Diagnosis Overview) -->
 ## 1. Ingress 故障诊断总览 (Ingress Diagnosis Overview)
 
-### 1.1 常见故障现象分类
+### 1.1 常见问题现象分类
 
-| 故障类型 | 症状表现 | 影响范围 | 紧急程度 |
+| 问题类型 | 症状表现 | 影响范围 | 紧急程度 |
 |---------|---------|---------|---------|
 | **Ingress Controller 未运行** | Pod Pending/CrashLoopBackOff | 所有Ingress失效 | P0 - 紧急 |
 | **路由规则不生效** | 404 Not Found | 特定服务不可访问 | P1 - 高 |

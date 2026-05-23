@@ -57,7 +57,7 @@ created: "2026-05-23"
 #<!-- chunk: 目标受众 -->## 目标受众
 
 - 架构师：理解调度策略对业务可用性的影响
-- SRE 工程师：掌握调度相关故障的排查方法
+- SRE 工程师：掌握调度相关问题的排查方法
 - 应用运维：合理配置资源请求和调度约束
 - 平台工程师：设计多租户环境的调度策略
 
@@ -90,7 +90,7 @@ created: "2026-05-23"
 1. 调度器的工作原理：过滤（Filtering）→ 打分（Scoring）→ 绑定（Binding）
 2. nodeSelector 是最简单的调度约束，Affinity 是进阶方案
 3. 污点与容忍（Taints & Tolerations）实现节点级隔离
-4. 反亲和性是防止单点故障的第一道防线
+4. 反亲和性是防止单点问题的第一道防线
 5. 优先级与抢占保证高优先级业务在资源不足时仍可运行
 6. 资源 requests 决定调度，limits 决定运行上限
 
@@ -295,7 +295,7 @@ spec:
 
 | 策略 | 效果 | topologyKey | 适用场景 |
 |------|------|-------------|---------|
-| 同节点反亲和 | 每个 Node 最多一个副本 | `kubernetes.io/hostname` | 防止单点故障 |
+| 同节点反亲和 | 每个 Node 最多一个副本 | `kubernetes.io/hostname` | 防止单点问题 |
 | 同可用区反亲和 | 每个 AZ 最多一个副本 | `topology.kubernetes.io/zone` | 跨可用区高可用 |
 | 自定义拓扑域 | 按机架/机柜分散 | 自定义 Label | 物理故障域隔离 |
 
@@ -384,7 +384,7 @@ spec:
 |--------|------|---------|
 | `NoSchedule` | 不调度新 Pod | 专用节点（如 GPU 节点） |
 | `PreferNoSchedule` | 尽量不调度（软性） | 临时保护节点资源 |
-| `NoExecute` | 不调度新 Pod + 驱逐已有 Pod | 节点故障、维护、磁盘满 |
+| `NoExecute` | 不调度新 Pod + 驱逐已有 Pod | 节点问题、维护、磁盘满 |
 
 **内置污点（自动管理）：**
 
@@ -704,7 +704,7 @@ EOF
 kubectl get pod affinity-demo -o wide
 ```
 
-#<!-- chunk: 演示 3：Pod 反亲和性（防单点故障） -->## 演示 3：Pod 反亲和性（防单点故障）
+#<!-- chunk: 演示 3：Pod 反亲和性（防单点问题） -->## 演示 3：Pod 反亲和性（防单点问题）
 
 ```bash
 # 步骤 1: 创建强制反亲和的 Deployment
@@ -1021,7 +1021,7 @@ EOF
 kubectl get pods -l app=ha-app -o wide --no-headers | awk '{print $7}' | sort | uniq -c
 # 预期: 每个 AZ 各 2 个 Pod
 
-# 4. 模拟一个 AZ 故障（cordon 该 AZ 的所有节点）
+# 4. 模拟一个 AZ 问题（cordon 该 AZ 的所有节点）
 kubectl cordon <node-1>
 
 # 5. 观察 Pod 重调度
@@ -1161,7 +1161,7 @@ affinity:
 | 指定节点标签 | nodeSelector | 低 | 简单场景 |
 | 灵活的节点匹配 | NodeAffinity | 中 | 推荐 |
 | 节点隔离/专用 | Taints & Tolerations | 中 | 推荐 |
-| 防止单点故障 | PodAntiAffinity | 中 | 必须 |
+| 防止单点问题 | PodAntiAffinity | 中 | 必须 |
 | 跨可用区分散 | TopologySpreadConstraints | 高 | 推荐 |
 | 亲近相关服务 | PodAffinity | 中 | 按需 |
 | 资源不足时保证 | PriorityClass + Preemption | 高 | 必须 |
@@ -1180,12 +1180,12 @@ affinity:
 
 | 红线 | 说明 | 违反后果 |
 |------|------|---------|
-| **红线 1** | 生产环境必须配置反亲和性 | 单节点故障导致服务完全不可用 |
+| **红线 1** | 生产环境必须配置反亲和性 | 单节点问题导致服务完全不可用 |
 | **红线 2** | 严禁滥用 `nodeName` 绕过调度器 | 调度器无法管理，资源分配失控 |
 | **红线 3** | 必须监控分配率 vs 使用率的差距 | 资源浪费严重，成本失控 |
 | **红线 4** | 关键业务必须配置 PriorityClass | 资源不足时关键业务可能被抢占 |
 | **红线 5** | 所有 Pod 必须配置 resources requests | 调度器无法做出正确决策 |
-| **红线 6** | 跨 AZ 部署必须使用拓扑约束 | AZ 故障导致服务全部不可用 |
+| **红线 6** | 跨 AZ 部署必须使用拓扑约束 | AZ 问题导致服务全部不可用 |
 | **红线 7** | 生产环境严禁使用 BestEffort QoS | 资源不足时最先被驱逐 |
 
 ---

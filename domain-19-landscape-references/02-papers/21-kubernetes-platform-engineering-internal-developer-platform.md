@@ -163,7 +163,7 @@ graph TB
     subgraph "平台工程生态三角"
         PE["🏗️ 平台工程<br/>Platform Engineering<br/>---<br/>构建内部开发者平台<br/>提供自助服务能力<br/>降低认知负载<br/>黄金路径标准化"]
         DO["🔄 DevOps<br/>---<br/>文化与协作模式<br/>Dev+Ops协同<br/>持续交付实践<br/>反馈循环优化"]
-        SR["🛡️ SRE<br/>Site Reliability Engineering<br/>---<br/>可靠性工程<br/>SLO/SLI/SLA定义<br/>故障响应与复盘<br/>容量规划"]
+        SR["🛡️ SRE<br/>Site Reliability Engineering<br/>---<br/>可靠性工程<br/>SLO/SLI/SLA定义<br/>问题响应与复盘<br/>容量规划"]
     end
 
     PE -->|"平台承载DevOps工具链"| DO
@@ -181,7 +181,7 @@ graph TB
 | 维度 | 平台工程 | DevOps | SRE |
 |------|---------|--------|-----|
 | 核心目标 | 降低认知负载，提升 DevEx | 打破 Dev/Ops 壁垒 | 保障系统可靠性 |
-| 主要产出 | IDP、黄金路径、自助服务 | 协作文化、实践方法 | SLO体系、故障手册 |
+| 主要产出 | IDP、黄金路径、自助服务 | 协作文化、实践方法 | SLO体系、问题手册 |
 | 服务对象 | 应用开发团队 | 整个工程组织 | 运维与可靠性 |
 | 技术重心 | 平台产品化 | 自动化与协作 | 监控与响应 |
 
@@ -317,7 +317,7 @@ graph TB
         end
 
         subgraph "可靠性域"
-            SRE1["🛡️ 平台SRE<br/>平台SLO · 容量规划 · 故障响应"]
+            SRE1["🛡️ 平台SRE<br/>平台SLO · 容量规划 · 问题响应"]
         end
     end
 
@@ -2038,7 +2038,7 @@ graph TB
 
         subgraph "AI 运维智能层"
             AO1["🚨 智能告警降噪\n相关告警自动聚合分组"]
-            AO2["🔎 故障根因分析\n日志+指标+链路联合分析"]
+            AO2["🔎 问题根因分析\n日志+指标+链路联合分析"]
             AO3["💊 自动修复建议\n基于历史事故知识库"]
         end
 
@@ -2140,7 +2140,7 @@ gantt
     section AI 集成
     AI Code Review 集成           :done,    2024-01-01, 2024-12-31
     自然语言平台操作               :active,  2025-06-01, 2026-06-30
-    AI 故障根因分析               :         2026-01-01, 2026-12-31
+    AI 问题根因分析               :         2026-01-01, 2026-12-31
 
     section 开发者体验
     SPACE 指标体系落地            :active,  2025-01-01, 2025-12-31

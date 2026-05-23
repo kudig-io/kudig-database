@@ -41,7 +41,7 @@ created: "2026-05-23"
 
 ## 高可用控制平面
 
-控制平面至少需要 3 个主节点，通过负载均衡器（HAProxy/Nginx）分发 API 请求。etcd 集群保证数据一致性，任意节点故障不影响集群功能 ^[inferred]。
+控制平面至少需要 3 个主节点，通过负载均衡器（HAProxy/Nginx）分发 API 请求。etcd 集群保证数据一致性，任意节点问题不影响集群功能 ^[inferred]。
 
 ### API Server 关键配置
 

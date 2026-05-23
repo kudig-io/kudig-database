@@ -158,7 +158,7 @@ route:
 
 # 告警抑制规则
 inhibit_rules:
-  # 抑制底层基础设施告警当上层服务已知故障时
+  # 抑制底层基础设施告警当上层服务已知问题时
   - source_match:
       alertname: ServiceDown
     target_match:

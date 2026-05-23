@@ -774,7 +774,7 @@ service-controller 尝试删除 LoadBalancer 资源时失败,可能导致云厂�
 **常见失败原因**:
 1. **LoadBalancer 仍有活动连接** - 云厂商拒绝删除
 2. **权限不足** - 无法删除云资源
-3. **云厂商 API 错误** - 临时性故障
+3. **云厂商 API 错误** - 临时性问题
 4. **LoadBalancer 已被手动删除** - 云资源与 Kubernetes 状态不同步
 5. **依赖资源未清理** - 如安全组、目标组等
 
@@ -887,7 +887,7 @@ Events:
 
 - **用户影响**: **高** - 服务完全不可用,外部流量无法访问
 - **服务影响**: **严重** - LoadBalancer 无法转发任何流量
-- **集群影响**: **警示** - 可能表明集群级别问题 (所有节点故障)
+- **集群影响**: **警示** - 可能表明集群级别问题 (所有节点问题)
 - **关联事件链**: 
   - `NodeNotReady` (Node 事件) → `UnAvailableLoadBalancer` (Service 事件)
   - `FailedToUpdateEndpoint` → `UnAvailableLoadBalancer`
@@ -924,8 +924,8 @@ curl http://$NODE_IP:$NODE_PORT
 |:---|:---|:---|:---|
 | **Endpoints 为空** | 无匹配的 Pod | `kubectl get pods -l <selector>` | 1. 检查 Service selector 是否正确<br>2. 确保 Deployment 的 Pod 正在运行 |
 | **Pod 未 Ready** | Pod 健康检查失败 | `kubectl describe pod <pod>` | 1. 修复 Pod 启动问题<br>2. 调整 readinessProbe 配置 |
-| **所有 Node NotReady** | 节点故障 | `kubectl describe node` | 1. 修复节点问题<br>2. 添加新节点 |
-| **NodePort 不可访问** | kube-proxy 故障 | 检查 kube-proxy 日志 | 重启 kube-proxy DaemonSet |
+| **所有 Node NotReady** | 节点问题 | `kubectl describe node` | 1. 修复节点问题<br>2. 添加新节点 |
+| **NodePort 不可访问** | kube-proxy 问题 | 检查 kube-proxy 日志 | 重启 kube-proxy DaemonSet |
 | **externalTrafficPolicy: Local 无本地 Pod** | Pod 未调度到节点 | `kubectl get pods -o wide` | 1. 调整 Pod affinity<br>2. 增加 Pod 副本数 |
 | **云厂商健康检查失败** | 健康检查配置错误 | 查看云厂商控制台 | 调整健康检查路径/端口/超时 |
 
@@ -1568,7 +1568,7 @@ Events:
 - **服务影响**: 
   - 无法访问其他 Service (如 `my-svc.default.svc.cluster.local`)
   - 无法访问外部域名 (如 `google.com`)
-- **集群影响**: **可能扩散** - 如果 CoreDNS 故障,影响所有新 Pod
+- **集群影响**: **可能扩散** - 如果 CoreDNS 问题,影响所有新 Pod
 - **关联事件链**: `Started` → `DNSConfigForming` → (Pod 启动完成但 DNS 异常)
 
 ##<!-- chunk: 排查建议 -->## 排查建议
@@ -1675,7 +1675,7 @@ spec:
 
 **IPAllocated**: IP 地址成功分配给 Pod 或 Service。
 
-**IPNotAllocated**: IP 地址分配失败,可能是 IP 地址池耗尽或网络插件故障。
+**IPNotAllocated**: IP 地址分配失败,可能是 IP 地址池耗尽或网络插件问题。
 
 **IP 分配场景**:
 - **Pod IP 分配**: CNI 插件从 PodCIDR 分配 IP 给 Pod
@@ -1745,7 +1745,7 @@ kubectl get pods -n kube-system kube-controller-manager-<node> -o yaml | grep se
 |:---|:---|:---|
 | **Pod IP 池耗尽** | 节点 PodCIDR 过小 (如 /24 仅 254 个 IP) | 1. 扩大 PodCIDR (需重建集群或节点)<br>2. 添加更多节点分散 Pod |
 | **Service ClusterIP 池耗尽** | Service CIDR 过小 | 1. 扩大 Service CIDR (需修改 kube-apiserver `--service-cluster-ip-range`)<br>2. 清理不使用的 Service |
-| **CNI 插件故障** | Calico/Flannel IPAM 异常 | 1. 重启 CNI 插件 DaemonSet<br>2. 检查 CNI 配置文件 /etc/cni/net.d/ |
+| **CNI 插件问题** | Calico/Flannel IPAM 异常 | 1. 重启 CNI 插件 DaemonSet<br>2. 检查 CNI 配置文件 /etc/cni/net.d/ |
 | **云厂商 IP 配额超限** | Elastic IP 配额不足 | 1. 申请提升配额<br>2. 释放不使用的 EIP |
 | **IP 冲突** | 手动分配的 IP 与自动分配冲突 | 1. 检查 Pod/Service 是否有 `spec.podIP` 或 `spec.clusterIP` 手动指定<br>2. 避免使用静态 IP |
 
@@ -1885,7 +1885,7 @@ sudo iptables-save | grep my-svc
 kubectl get pods -n kube-system -l k8s-app=kube-proxy
 ```
 
-**根本原因**: kube-proxy 故障,未创建 Service 的 iptables/ipvs 规则。
+**根本原因**: kube-proxy 问题,未创建 Service 的 iptables/ipvs 规则。
 
 **解决方案**:
 ```bash

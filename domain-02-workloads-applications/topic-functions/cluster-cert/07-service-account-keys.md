@@ -237,7 +237,7 @@ func (v *validator) Validate(ctx context.Context, tokenData string) (*user.Defau
 
 ## 密钥不匹配故障诊断
 
-### 故障现象：API Server 与 Controller Manager 使用不同密钥对
+### 问题现象：API Server 与 Controller Manager 使用不同密钥对
 
 当 API Server 的 `--service-account-key-file` 与 Controller Manager 的 `--service-account-private-key-file` 不匹配时：
 
@@ -254,7 +254,7 @@ Controller Manager 使用 sa.key_A 签名 Token
     验证失败 → Unauthorized
 ```
 
-**故障症状**：
+**问题症状**：
 - 所有 Pod 无法访问 API Server：`Unauthorized`
 - 新创建的 Pod 也无法启动（如果需要访问 API）
 - kube-controller-manager 日志正常，API Server 日志出现大量 `invalid token` 错误

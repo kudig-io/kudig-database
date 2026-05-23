@@ -349,7 +349,7 @@ sudo systemctl restart kube-apiserver
 ### 8.1 控制平面故障处理流程
 
 ```bash
-# ========== 控制平面故障 SOP ==========
+# ========== 控制平面问题 SOP ==========
 
 echo "[1] 检查所有控制平面 Pod"
 kubectl get pods -n kube-system | grep -E "apiserver|scheduler|controller|etcd"
@@ -391,13 +391,13 @@ sudo systemctl restart kubelet
 
 ## 9. 实战练习
 
-**练习 1**: 检查 API Server 健康状态，模拟 API Server 故障并恢复
+**练习 1**: 检查 API Server 健康状态，模拟 API Server 问题并恢复
 
 **练习 2**: 使用 `kubeadm certs renew` 续期所有证书
 
 **练习 3**: etcd 备份与恢复操作
 
-**练习 4**: 模拟节点 NotReady，排查 kubelet 故障
+**练习 4**: 模拟节点 NotReady，排查 kubelet 问题
 
 ---
 

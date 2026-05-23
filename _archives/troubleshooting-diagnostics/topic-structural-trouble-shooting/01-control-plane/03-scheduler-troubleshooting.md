@@ -177,13 +177,13 @@ curl -k https://127.0.0.1:10259/metrics | grep scheduler
 | **Deployment 扩容** | 失败 | 新副本无法调度 |
 | **DaemonSet 部署** | 部分影响 | 新节点上的 DaemonSet Pod 无法调度 |
 | **Job/CronJob** | 失败 | 新的 Job Pod 无法调度 |
-| **故障恢复** | 延迟 | 节点故障后 Pod 无法重新调度 |
+| **故障恢复** | 延迟 | 节点问题后 Pod 无法重新调度 |
 | **自动扩缩容** | 失效 | HPA 扩容的 Pod 无法调度 |
 | **滚动更新** | 阻塞 | 新版本 Pod 无法调度，更新无法完成 |
 
 #### 1.3.3 影响评估矩阵
 
-| 故障持续时间 | 影响程度 | 业务影响 | 响应优先级 |
+| 问题持续时间 | 影响程度 | 业务影响 | 响应优先级 |
 |--------------|----------|----------|------------|
 | < 5 分钟 | 低 | 少量 Pod 调度延迟 | P2 |
 | 5-30 分钟 | 中 | 新部署和扩容受阻 | P1 |
@@ -721,7 +721,7 @@ kubectl get pods -n kube-system | grep <scheduler-name>
 # 步骤 3：查看自定义调度器日志
 kubectl logs -n kube-system <custom-scheduler-pod>
 
-# 步骤 4：如果自定义调度器故障，临时使用默认调度器
+# 步骤 4：如果自定义调度器问题，临时使用默认调度器
 kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"schedulerName":"default-scheduler"}}}}'
 
 # 步骤 5：修复自定义调度器
@@ -795,7 +795,7 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"schedulerName"
 
 ### 案例 1：拓扑分布约束配置错误导致大规模 Pod Pending
 
-#### 🎯 故障场景
+#### 🎯 问题场景
 某电商公司在黑五促销前对核心服务进行扩容，将副本数从 50 提升至 200，结果 150 个新 Pod 全部 Pending，扩容失败，差点影响大促。
 
 #### 🔍 排查过程
@@ -940,7 +940,7 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"schedulerName"
 
 ### 案例 2：Inter-Pod Affinity 导致调度性能暴跌
 
-#### 🎯 故障场景
+#### 🎯 问题场景
 某 SaaS 公司集群规模 500 节点、5000 Pod，部署了一个新服务配置了 Pod 反亲和性，结果 Scheduler 调度延迟从 100ms 暴涨至 30s，导致所有新 Pod 调度缓慢，影响全局。
 
 #### 🔍 排查过程
@@ -1125,7 +1125,7 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"schedulerName"
 
 ### 案例 3：节点资源碎片化导致大 Pod 无法调度
 
-#### 🎯 故障场景
+#### 🎯 问题场景
 某 AI 公司需要部署 GPU 训练任务，Pod 请求 8 核 32GB 内存 + 1 GPU，但集群有 100 个节点，总资源充足，Pod 却一直 Pending。
 
 #### 🔍 排查过程

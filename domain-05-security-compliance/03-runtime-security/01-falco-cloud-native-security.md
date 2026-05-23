@@ -1001,7 +1001,7 @@ rules:
 
 #<!-- chunk: 9.1 常见问题 -->## 9.1 常见问题
 
-Falco 在生产环境中可能遇到各种运维问题。本节总结了最常见的故障场景及其排查方法。
+Falco 在生产环境中可能遇到各种运维问题。本节总结了最常见的问题场景及其排查方法。
 
 当 Falco Pod 处于 CrashLoopBackOff 状态时，最常见的原因是 eBPF probe 加载失败。这通常是因为内核版本不支持所需的 BPF 特性（要求 5.8+），或者内核配置缺少必要的选项（如 CONFIG_BPF=y, CONFIG_BPF_SYSCALL=y）。可以通过 `kubectl logs -n falco daemonset/falco` 查看具体错误信息，通过 `uname -r` 确认内核版本。
 

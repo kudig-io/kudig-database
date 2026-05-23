@@ -972,7 +972,7 @@ if __name__ == "__main__":
 
 #<!-- chunk: 3.1.4 高可用性配置 -->## 3.1.4 高可用性配置
 
-**关键原则**：证据基础设施本身不能成为单点故障
+**关键原则**：证据基础设施本身不能成为单点问题
 
 ```yaml
 # prometheus-ha.yaml
@@ -3064,7 +3064,7 @@ Level 2: 增强采集 (Anomaly-Triggered)
   → 资源开销: < 5% CPU, < 1GB 内存
 
 Level 3: 全量取证 (Incident-Triggered)
-  触发条件: 确认安全事件 / P0 故障
+  触发条件: 确认安全事件 / P0 问题
   • 容器检查点创建
   • 内存转储
   • 网络流量全量捕获
@@ -3262,7 +3262,7 @@ WORM (Write-Once-Read-Many) 实施:
 - [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|第六章：未来演进方向]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix.md|第七章:附录]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]]
 

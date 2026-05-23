@@ -952,9 +952,9 @@ CREATE TABLE orders (
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见故障速查表 -->## 常见故障速查表
+#<!-- chunk: 常见问题速查表 -->## 常见问题速查表
 
-| 故障现象 | 可能原因 | 排查方法 | 解决方案 |
+| 问题现象 | 可能原因 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
 | TiDB 查询超时 | 热点 Region / 统计信息过期 | `EXPLAIN ANALYZE` / `ADMIN SHOW SLOW` | `ANALYZE TABLE` /打散热点 Region |
 | TiKV 节点 Down | 磁盘满 / IO 过载 | `pd-ctl store` / `df -h` | 清理磁盘 / 扩容 |

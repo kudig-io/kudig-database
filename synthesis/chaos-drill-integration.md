@@ -39,7 +39,7 @@ created: "2026-05-23"
   → 团队轮换 On-call 响应
 
 月度 (Monthly):
-  → 跨服务依赖故障实验
+  → 跨服务依赖问题实验
   → 验证灾难恢复手册
 
 季度 (Quarterly):
@@ -54,9 +54,9 @@ created: "2026-05-23"
 1. 场景设定
    → "Region A 完全不可用"
 
-2. 注入故障
+2. 注入问题
    → Chaos Mesh 网络分区
-   → 模拟 DNS 故障
+   → 模拟 DNS 问题
 
 3. 团队响应
    → 执行 DR Playbook

@@ -175,7 +175,7 @@ class MLEnhancedFTA:
             return prob.item()
         
         elif event_type == "NodeFailure":
-            # 基于节点历史故障率的贝叶斯估计
+            # 基于节点历史问题率的贝叶斯估计
             return self._bayesian_node_failure_prob(context['node_name'])
         
         else:
@@ -255,11 +255,11 @@ predictor.train(load_historical_node_data())
 node_metrics = fetch_current_node_metrics("worker-node-5")
 failure_prob = predictor.predict_failure_probability(node_metrics)
 
-print(f"节点故障概率: {failure_prob:.2%}")
+print(f"节点问题概率: {failure_prob:.2%}")
 print(f"特征重要性: {predictor.get_feature_importance()}")
 
 # 输出示例:
-# 节点故障概率: 8.50%
+# 节点问题概率: 8.50%
 # 特征重要性: {
 #     'kernel_errors_count_1h': 0.35,
 #     'disk_io_wait_mean_1h': 0.22,
@@ -655,7 +655,7 @@ from dowhy import CausalModel
 
 class K8sCausalModel:
     """
-    Kubernetes 故障的因果图模型
+    Kubernetes 问题的因果图模型
     """
     def __init__(self):
         self.graph = nx.DiGraph()
@@ -765,7 +765,7 @@ class K8sCausalModel:
     def counterfactual_analysis(self, observed_scenario: dict, 
                                 intervention: dict) -> dict:
         """
-        反事实推理: "如果当时执行了 X 操作,会避免故障吗?"
+        反事实推理: "如果当时执行了 X 操作,会避免问题吗?"
         
         示例:
         observed_scenario = {
@@ -825,7 +825,7 @@ class CausalFEBM:
         observed = {
             'cpu_throttling': evidence['metrics']['cpu_throttling_ratio'],
             'memory_pressure': evidence['metrics']['memory_pressure'],
-            'request_timeout': 1,  # 已知故障发生
+            'request_timeout': 1,  # 已知问题发生
             'deployment_change': evidence['events']['recent_deployment'],
             # ...
         }
@@ -862,7 +862,7 @@ class CausalFEBM:
 **因果图示例**:
 
 ```
-Kubernetes 故障因果图
+Kubernetes 问题因果图
 
 ┌────────────────┐         ┌─────────────────┐
 │ Deployment     │────────>│ CPU Throttling  │
@@ -2606,7 +2606,7 @@ spec:
 ```python
 class IntentEvidenceFaultAnalyzer:
     """
-    意图-证据-故障三元分析框架
+    意图-证据-问题三元分析框架
     
     核心思想:
     - Intent: 声明式配置表达的期望状态
@@ -3021,7 +3021,7 @@ class K8sDigitalTwin:
         在数字孪生中仿真事件
         
         场景类型:
-        - node_failure: 节点故障
+        - node_failure: 节点问题
         - pod_oom: OOM 终止
         - network_partition: 网络分区
         - resource_exhaustion: 资源耗尽
@@ -3037,7 +3037,7 @@ class K8sDigitalTwin:
         # 设置初始状态
         self.simulator.set_initial_state(self.twin)
         
-        # 注入故障
+        # 注入问题
         if incident_scenario['type'] == 'node_failure':
             failed_node = incident_scenario['target_node']
             self.simulator.schedule_event(
@@ -3150,7 +3150,7 @@ class K8sDigitalTwin:
         
         scenario = random.choice(scenarios[difficulty])
         
-        # 注入故障并生成证据
+        # 注入问题并生成证据
         simulation = self.simulate_incident(scenario)
         
         # 隐藏部分信息,模拟真实调查
@@ -3753,7 +3753,7 @@ class DynamicFaultTreeFEBM:
         返回 JSON 格式的故障树节点定义,包含:
         - 节点类型 (basic_event, intermediate_event, gate)
         - 节点关系 (AND, OR)
-        - 故障概率估计
+        - 问题概率估计
         """
         
         branch_definition = call_llm(llm_prompt)
@@ -3955,7 +3955,7 @@ class CognitiveFEBM:
 7. **标准化协作**: 跨组织、跨云的互操作性与规范制定
 8. **学术研究深化**: AutoRCA 框架、可扩展性、形式化验证
 
-FEBM 不是静态的方法论,而是一个持续演进的生态系统。随着云原生技术的成熟和 AI 能力的提升,数字取证将从事后分析转向事中干预乃至事前预防,最终实现 **"Self-Healing Forensics"** —— 系统在故障发生的瞬间自动收集证据、分析根因、执行修复并生成报告,形成完整的闭环。
+FEBM 不是静态的方法论,而是一个持续演进的生态系统。随着云原生技术的成熟和 AI 能力的提升,数字取证将从事后分析转向事中干预乃至事前预防,最终实现 **"Self-Healing Forensics"** —— 系统在问题发生的瞬间自动收集证据、分析根因、执行修复并生成报告,形成完整的闭环。
 
 ---
 

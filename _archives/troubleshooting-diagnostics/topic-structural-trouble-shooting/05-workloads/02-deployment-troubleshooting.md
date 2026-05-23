@@ -1057,13 +1057,13 @@ kubectl describe deployment <name> | grep -A10 Conditions
 - [ ] 节点资源可用性
 
 
-### 1.5 专家级故障矩阵
+### 1.5 专家级问题矩阵
 
-#### 1.5.1 按更新阶段分类的故障场景
+#### 1.5.1 按更新阶段分类的问题场景
 
 **阶段 1: 更新触发 (0-5s)**
 
-| 故障现象 | 根因分析 | 排查路径 | 典型场景 |
+| 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
 | Webhook 拒绝更新 | Admission Controller 校验失败 | `kubectl get validatingwebhookconfigurations` 检查规则 | Istio/OPA 策略阻止 |
 | 资源配额超限 | ResourceQuota 限制创建 | `kubectl describe quota -n <ns>` | 命名空间资源已满 |
@@ -1072,7 +1072,7 @@ kubectl describe deployment <name> | grep -A10 Conditions
 
 **阶段 2: ReplicaSet 创建 (5-10s)**
 
-| 故障现象 | 根因分析 | 排查路径 | 典型场景 |
+| 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
 | 新 RS replicas=0 | Deployment Controller 计算错误 | 检查 `maxSurge`/`maxUnavailable` 配置 | 配置为 `0/0` 导致无法更新 |
 | RS 创建失败 | API Server 拒绝 | `kubectl get events` 查看失败原因 | 名称冲突、标签错误 |
@@ -1081,7 +1081,7 @@ kubectl describe deployment <name> | grep -A10 Conditions
 
 **阶段 3: Pod 创建与调度 (10-60s)**
 
-| 故障现象 | 根因分析 | 排查路径 | 典型场景 |
+| 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
 | Pod Pending | 资源不足/节点不匹配 | `kubectl describe pod` 查看调度失败原因 | CPU/内存不足、污点阻止 |
 | PVC 未绑定 | 存储类/PV 不可用 | `kubectl get pvc` 检查 PVC 状态 | 动态供应失败 |
@@ -1090,7 +1090,7 @@ kubectl describe deployment <name> | grep -A10 Conditions
 
 **阶段 4: 容器启动 (1-5min)**
 
-| 故障现象 | 根因分析 | 排查路径 | 典型场景 |
+| 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
 | ImagePullBackOff | 镜像拉取失败 | `kubectl describe pod` 查看镜像拉取事件 | 凭证错误、镜像不存在 |
 | CrashLoopBackOff | 容器启动即崩溃 | `kubectl logs <pod> --previous` 查看崩溃日志 | 配置错误、依赖不可用 |
@@ -1099,7 +1099,7 @@ kubectl describe deployment <name> | grep -A10 Conditions
 
 **阶段 5: 健康检查 (minReadySeconds 内)**
 
-| 故障现象 | 根因分析 | 排查路径 | 典型场景 |
+| 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
 | Readiness Probe 失败 | 应用未就绪 | `kubectl describe pod` 查看探针失败详情 | 启动时间超过 initialDelaySeconds |
 | Liveness Probe 失败 | 应用响应超时 | 检查探针超时配置 | 数据库慢查询阻塞主线程 |
@@ -1108,7 +1108,7 @@ kubectl describe deployment <name> | grep -A10 Conditions
 
 **阶段 6: 旧 Pod 缩容 (5-10min)**
 
-| 故障现象 | 根因分析 | 排查路径 | 典型场景 |
+| 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
 | 旧 Pod 不缩容 | 新 Pod 未达到 Ready | 检查新 Pod 健康状态 | 健康检查配置错误 |
 | Pod Terminating 卡住 | PreStop Hook 超时 | `kubectl describe pod` 查看终止事件 | PreStop 脚本死循环 |
@@ -1117,14 +1117,14 @@ kubectl describe deployment <name> | grep -A10 Conditions
 
 **阶段 7: 更新完成校验 (10-15min)**
 
-| 故障现象 | 根因分析 | 排查路径 | 典型场景 |
+| 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
 | progressDeadlineExceeded | 更新超时 | 检查 `progressDeadlineSeconds` 配置 | 启动时间超过 10 分钟 |
 | 新旧版本持续并存 | 滚动更新卡在中间状态 | 查看 Deployment Conditions | 健康检查间歇性失败 |
 | observedGeneration 不匹配 | Deployment 规范再次变更 | 比对 `metadata.generation` 和 `status.observedGeneration` | 更新过程中再次触发更新 |
 | 副本数不一致 | ReplicaSet 控制器异常 | 检查 kube-controller-manager 日志 | 控制器重启导致状态不同步 |
 
-#### 1.5.2 复合故障场景
+#### 1.5.2 复合问题场景
 
 **场景 1: 资源争抢导致滚动更新雪崩**
 
@@ -1134,7 +1134,7 @@ kubectl describe deployment <name> | grep -A10 Conditions
   - 多个 Deployment 同时更新
   - maxSurge > 0 导致峰值资源需求增加
 
-故障链:
+问题链:
   1. Deployment A 创建 surge Pod 消耗剩余资源
   2. Deployment B 的新 Pod 无法调度 → Pending
   3. Deployment B 的旧 Pod 因 maxUnavailable 无法删除
@@ -1160,7 +1160,7 @@ kubectl describe deployment <name> | grep -A10 Conditions
   - 部分节点进入维护模式 (kubectl drain)
   - Deployment 执行滚动更新
 
-故障链:
+问题链:
   1. 滚动更新尝试删除旧 Pod
   2. PDB 检查发现不满足 minAvailable 条件 → 阻止删除
   3. 新 Pod 创建但旧 Pod 无法删除 → 总副本数超过预期
@@ -1185,7 +1185,7 @@ kubectl describe deployment <name> | grep -A10 Conditions
   - Deployment 回滚到旧版本
   - 旧版本依赖的配置已被删除或修改
 
-故障链:
+问题链:
   1. kubectl rollout undo 回滚 Deployment
   2. 旧版本 Pod 启动，读取 ConfigMap
   3. ConfigMap 内容已变更，导致应用启动失败
@@ -1519,13 +1519,13 @@ echo "(assuming 2min per pod start time)"
 
 ### 案例 1: progressDeadlineSeconds 超时导致发布中断
 
-**故障背景**
+**问题背景**
 
 - **集群**: 阿里云 ACK 1.28，50 节点
 - **应用**: 电商订单服务 (order-service)
 - **配置**: replicas=30, maxSurge=50%, maxUnavailable=0, progressDeadlineSeconds=600
 
-**故障过程**
+**问题过程**
 
 ```
 时间线:
@@ -1652,13 +1652,13 @@ spec:
 
 ### 案例 2: PDB 阻塞导致滚动更新停滞 48 小时
 
-**故障背景**
+**问题背景**
 
 - **集群**: Google GKE 1.27，100 节点
 - **应用**: 推荐算法服务 (recommendation-engine)
 - **配置**: replicas=20, PDB minAvailable=19, maxUnavailable=1
 
-**故障过程**
+**问题过程**
 
 ```
 时间线:
@@ -1747,13 +1747,13 @@ $ journalctl -u kubelet | tail -50
 
 **根因分析**
 
-1. **直接原因**: 节点 kubelet 网络插件故障，导致 Pod 无法正常终止
+1. **直接原因**: 节点 kubelet 网络插件问题，导致 Pod 无法正常终止
 2. **PDB 计算错误**: Terminating 状态的 Pod 仍被计入 expectedPods，但不计入 currentHealthy
    - expectedPods = 21 (新 1 + 旧 19 + Terminating 1)
    - currentHealthy = 19 (不包括 Terminating)
    - disruptionsAllowed = currentHealthy - minAvailable = 19 - 19 = 0
 3. **配置过严**: minAvailable=19/20 (95%) 几乎不允许任何中断
-4. **PreStop Hook 缺陷**: 缓存刷新逻辑依赖 Redis，网络故障时会卡死
+4. **PreStop Hook 缺陷**: 缓存刷新逻辑依赖 Redis，网络问题时会卡死
 
 **修复方案**
 
@@ -1840,14 +1840,14 @@ spec:
 
 ### 案例 3: 镜像层共享导致滚动更新雪崩
 
-**故障背景**
+**问题背景**
 
 - **集群**: AWS EKS 1.29，200 节点
 - **应用**: 微服务网关 (api-gateway)
 - **配置**: replicas=100, maxSurge=50%, maxUnavailable=25%
 - **镜像**: 基于 alpine:3.18 (1.5GB 压缩后)
 
-**故障过程**
+**问题过程**
 
 ```
 时间线:
@@ -2324,8 +2324,8 @@ spec:
   - 滚动更新核心算法 (含伪代码)
   - 版本回滚机制详解
   - 金丝雀发布与蓝绿部署实战
-  - 专家级故障矩阵 (7 阶段分类)
-  - 复合故障场景 (3 个)
+  - 专家级问题矩阵 (7 阶段分类)
+  - 复合问题场景 (3 个)
   - progressDeadlineSeconds 深度解析
   - PDB 交互分析
   - 深度排查脚本 (时间线重建、并发分析)

@@ -530,7 +530,7 @@ class IntelligentFailureDetector:
             await self.prepare_failover(unhealthy_regions[0])
     
     def record_failure(self, region, failure_type, description):
-        """记录故障信息"""
+        """记录问题信息"""
         if region not in self.failure_history:
             self.failure_history[region] = []
         
@@ -548,7 +548,7 @@ class IntelligentFailureDetector:
             self.failure_history[region] = self.failure_history[region][-50:]
     
     def assess_failure_severity(self, failure_type, description):
-        """评估故障严重程度"""
+        """评估问题严重程度"""
         critical_indicators = ['unreachable', 'failure', 'timeout', 'critical']
         warning_indicators = ['slow', 'high', 'latency', 'degraded']
         

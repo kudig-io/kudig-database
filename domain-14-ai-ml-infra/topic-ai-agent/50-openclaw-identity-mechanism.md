@@ -441,7 +441,7 @@ output = identity.format_output(diagnosis)
 
 ---
 
-## 6. 故障排除
+## 6. 问题排除
 
 ### 6.1 常见问题
 

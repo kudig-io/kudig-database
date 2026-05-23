@@ -82,7 +82,7 @@ k8s_versions:
 
 <!-- chunk: 概述 -->## 概述
 
-SKILL.md 是 OpenClaw File-First 架构中定义 **Agent 领域知识和标准操作流程（SOP）** 的配置文件。它告诉 Agent "会什么"——覆盖哪些故障域、每个故障类型的标准诊断步骤、决策树和知识库关联。在 Harness Engineering 中映射到 **Context 层（知识上下文）+ Loop 层（SOP 驱动执行）**。
+SKILL.md 是 OpenClaw File-First 架构中定义 **Agent 领域知识和标准操作流程（SOP）** 的配置文件。它告诉 Agent "会什么"——覆盖哪些故障域、每个问题类型的标准诊断步骤、决策树和知识库关联。在 Harness Engineering 中映射到 **Context 层（知识上下文）+ Loop 层（SOP 驱动执行）**。
 
 SKILL.md 与 Anthropic Agent Skill 规范完全兼容，是连接"知识库"与"Agent 执行能力"的桥梁。
 
@@ -118,8 +118,8 @@ Level 3: 资源（按需加载）
 
 | 范式 | 说明 | 适用场景 | SKILL.md 对应 |
 |------|------|---------|--------------|
-| **SOP 范式** | Step-by-Step 标准操作流程 | 已知故障类型的确定性诊断 | 第 2-6 章的诊断流程 |
-| **决策树范式** | If-Then 分支判断 | 症状→根因的推导 | 每个故障类型的分支逻辑 |
+| **SOP 范式** | Step-by-Step 标准操作流程 | 已知问题类型的确定性诊断 | 第 2-6 章的诊断流程 |
+| **决策树范式** | If-Then 分支判断 | 症状→根因的推导 | 每个问题类型的分支逻辑 |
 | **知识图谱范式** | 实体-关系网络 | 复杂关联分析 | 第 8 章知识库关联表 |
 
 ```
@@ -128,8 +128,8 @@ Level 3: 资源（按需加载）
 用户描述症状
   │
   ▼ 决策树范式
-症状匹配 → 故障类型识别
-  │  "Pending" → Pod 调度故障
+症状匹配 → 问题类型识别
+  │  "Pending" → Pod 调度问题
   │  "CrashLoop" → Pod 运行异常
   │
   ▼ SOP 范式
@@ -189,7 +189,7 @@ SKILL.md      │  ◐   │       │    ●    │         │        │     
 | SKILL.md 内容 | Harness Context 实现 | 注入方式 |
 |--------------|---------------------|---------|
 | 技能覆盖范围（1） | `SkillRegistry` — 技能元数据 | 始终加载（~100 tokens） |
-| 诊断 SOP（2-6） | `SOPProvider` — 按需提供 SOP | 匹配故障类型后加载 |
+| 诊断 SOP（2-6） | `SOPProvider` — 按需提供 SOP | 匹配问题类型后加载 |
 | 知识库关联（8） | `KnowledgeLinker` — 关联外部文档 | Agent 需要深度参考时加载 |
 | 输出格式模板（7） | `OutputTemplate` — 格式化模板 | 输出阶段注入 |
 
@@ -200,7 +200,7 @@ SOP 驱动的执行逻辑:
 
 SKILL.md 的 SOP 直接影响 Agent 在 DIAGNOSE 阶段的行为:
 
-Agent 识别故障类型 → 从 SKILL.md 加载对应 SOP → 按步骤执行
+Agent 识别问题类型 → 从 SKILL.md 加载对应 SOP → 按步骤执行
 
 示例: Pod Pending
   SKILL.md SOP:
@@ -258,8 +258,8 @@ SKILL.md 知识库关联的实际使用:
 场景: Agent 完成诊断后，需要提供深度参考
 
 SKILL.md 第 8 章定义:
-  Pod 故障 → domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md
-  Node 故障 → domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md
+  Pod 问题 → domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md
+  Node 问题 → domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md
   故障树 → domain-10-troubleshooting-diagnostics/topic-fta/ 完整故障树分析模型
 
 Agent 输出:
@@ -415,7 +415,7 @@ class SkillLoader:
         }
 
     def get_relevant_sop(self, fault_type: str) -> str:
-        """根据故障类型加载对应的 SOP（Level 2-3 渐进披露）"""
+        """根据问题类型加载对应的 SOP（Level 2-3 渐进披露）"""
         skill_map = self.main_skill["skill_map"]
 
         # 匹配故障域
@@ -424,10 +424,10 @@ class SkillLoader:
                 if kw.lower() in fault_type.lower():
                     return self._extract_sop_section(domain, kw)
 
-        return "未找到匹配的 SOP，请提供更具体的故障描述。"
+        return "未找到匹配的 SOP，请提供更具体的问题描述。"
 
     def _extract_sop_section(self, domain: str, keyword: str) -> str:
-        """从 SKILL.md 提取特定故障类型的 SOP 章节"""
+        """从 SKILL.md 提取特定问题类型的 SOP 章节"""
         content = self.main_skill["full_content"]
         # 简化提取逻辑：匹配章节标题
         sections = content.split("\n<!-- chunk: ") -->## ")
@@ -483,7 +483,7 @@ refs = loader.get_knowledge_references("pod")
 
 ---
 
-<!-- chunk: 6. 故障排除 -->## 6. 故障排除
+<!-- chunk: 6. 问题排除 -->## 6. 问题排除
 
 #<!-- chunk: 6.1 常见问题 -->## 6.1 常见问题
 
@@ -492,7 +492,7 @@ refs = loader.get_knowledge_references("pod")
 | Agent 不按 SOP 执行 | SKILL.md 未在 Prompt 中注入 | 在 AGENTS.md Phase 2 明确引用 SKILL.md |
 | Token 消耗过高 | 每次全量注入 SKILL.md | 改用渐进式披露，按需加载章节 |
 | SOP 步骤与工具不一致 | SKILL.md 引用了 TOOLS.md 未授权的工具 | 同步更新两者，保持一致 |
-| Agent 无法匹配故障类型 | SKILL.md 覆盖范围的关键词不全 | 扩充技能覆盖范围的关键词列表 |
+| Agent 无法匹配问题类型 | SKILL.md 覆盖范围的关键词不全 | 扩充技能覆盖范围的关键词列表 |
 | 知识库链接失效 | kudig-database 文档路径变更 | 定期检查并更新第 8 章关联表 |
 
 #<!-- chunk: 6.2 调试检查清单 -->## 6.2 调试检查清单
@@ -502,7 +502,7 @@ SKILL.md 配置验证:
 
 □ 元数据：是否有 name 和 description（符合 Anthropic 规范）？
 □ 覆盖范围：是否列出了所有支持的故障域和类型？
-□ SOP 完整性：每个故障类型是否有完整的诊断步骤？
+□ SOP 完整性：每个问题类型是否有完整的诊断步骤？
 □ 决策树：关键分支点是否有明确的 If-Then 逻辑？
 □ 工具一致：SOP 中的命令是否都在 TOOLS.md 授权范围内？
 □ 知识关联：是否链接到 kudig-database 对应文档？

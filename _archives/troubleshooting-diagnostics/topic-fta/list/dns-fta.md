@@ -100,7 +100,7 @@ cross_refs:
 |---------|------|----------|--------------|------|
 | NET1A | Egress 策略拦截 53 端口 | `kubectl get networkpolicy -n ${NAMESPACE} -o yaml \| grep -A20 "egress"` | 检查出向规则 | 分析 DNS 出向策略 |
 | NET1B | Ingress 策略拦截 CoreDNS | `kubectl get networkpolicy -n kube-system -o yaml \| grep -A20 "ingress"` | 检查入向规则 | 分析 CoreDNS 入向策略 |
-| NET2 | 跨节点网络不通 | `kubectl run net-test --rm -i --restart=Never --image=busybox --overrides='{"spec":{"nodeName":"${NODE_NAME}"}}' -- ping -c 3 ${COREDNS_POD_IP}` | `0 packets received` | 确认跨节点网络故障 |
+| NET2 | 跨节点网络不通 | `kubectl run net-test --rm -i --restart=Never --image=busybox --overrides='{"spec":{"nodeName":"${NODE_NAME}"}}' -- ping -c 3 ${COREDNS_POD_IP}` | `0 packets received` | 确认跨节点网络问题 |
 | NET3 | Pod 网络未就绪 | `kubectl get pods -n ${NAMESPACE} ${POD_NAME} -o jsonpath='{.status.conditions[?(@.type=="PodReadyToStartContainers")].status}'` | `False` | 确认网络未就绪 |
 
 ### 4. 配置与缓存诊断

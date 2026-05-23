@@ -1,6 +1,6 @@
 ---
 title: nginx-ingress-controller 异常故障树分析
-description: nginx-ingress-controller 异常故障树分析，覆盖 Ingress 配置、502/503 错误、TLS 证书、 upstream 超时等故障路径
+description: nginx-ingress-controller 异常故障树分析，覆盖 Ingress 配置、502/503 错误、TLS 证书、 upstream 超时等问题路径
 category: fta
 tags:
 - fta
@@ -96,7 +96,7 @@ flowchart TD
   UPSTREAM_OR{{OR}}
   UPSTREAM --> UPSTREAM_OR
   UPSTREAM_OR --> UPSTREAM1[所有 Endpoints 不可用 (503)]
-  UPSTREAM_OR --> UPSTREAM2[单 endpoint 故障导致 502]
+  UPSTREAM_OR --> UPSTREAM2[单 endpoint 问题导致 502]
   UPSTREAM_OR --> UPSTREAM3[连接超时/读写超时]
   UPSTREAM_OR --> UPSTREAM4[keepalive 连接池耗尽]
 
@@ -137,7 +137,7 @@ flowchart TD
 
 ---
 
-## 常见故障场景
+## 常见问题场景
 
 ### 场景 1: 请求返回 502 Bad Gateway
 

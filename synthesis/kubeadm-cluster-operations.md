@@ -89,7 +89,7 @@ relationships:
 
 ### 3. 高可用部署（cluster-create/08-ha 等）
 
-生产集群必须消除单点故障。核心关注点：
+生产集群必须消除单点问题。核心关注点：
 - stacked etcd 适合中小型集群，external etcd 适合大型集群
 - 负载均衡器需支持 TCP 6443 和 TLS Passthrough
 - Controller Manager 和 Scheduler 通过 Leader Election 实现热备
@@ -147,7 +147,7 @@ Deployment 通过 ReplicaSet 间接管理 Pod。核心关注点：
 
 1. **证书管理**：设置 Prometheus 告警监控证书过期，维护窗口内主动轮换
 2. **升级流程**：先检查证书有效期 → 轮换证书 → 执行 upgrade
-3. **HA 部署**：3 节点 stacked etcd 是最小生产配置，5 节点可容忍 2 节点故障
+3. **HA 部署**：3 节点 stacked etcd 是最小生产配置，5 节点可容忍 2 节点问题
 4. **节点维护**：始终先 drain 再操作，配置 PDB 保护关键应用
 5. **发布策略**：生产环境推荐金丝雀或蓝绿发布，避免直接全量更新
 6. **删除操作**：删除前务必备份 etcd 快照，reset 后手动清理网络规则
@@ -170,7 +170,7 @@ Deployment 通过 ReplicaSet 间接管理 Pod。核心关注点：
 
 - [[synthesis/声明式 API × 控制器模式.md|声明式 API × 控制器模式]]
 
-- [[synthesis/K8s 故障分布与 MTTR 基准.md|K8s 故障分布与 MTTR 基准]]
+- [[synthesis/K8s 问题分布与 MTTR 基准.md|K8s 问题分布与 MTTR 基准]]
 
 - etcd x 高可用模式.md|etcd x 高可用模式]]
 

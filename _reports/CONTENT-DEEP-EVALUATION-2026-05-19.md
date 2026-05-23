@@ -133,7 +133,7 @@ created: "2026-05-23"
 |------|------|------|
 | 核心场景覆盖 | 8/10 | kubectl/Linux/Docker/PromQL/SQL/TLS/网络/Git |
 | 版本标注 | 9/10 | 明确标注适用版本范围 |
-| 场景化组织 | 9/10 | kubectl-scene-cheatsheet 按故障场景组织 |
+| 场景化组织 | 9/10 | kubectl-scene-cheatsheet 按问题场景组织 |
 | 缺失速查卡 | ⚠️ | 缺 Helm / GitOps / Gateway API / eBPF |
 
 ### 3.3 运维技能 SOP (topic-skills, 18 个核心 Skill)

@@ -62,7 +62,7 @@ created: "2026-05-23"
 
 ## 1. 概述
 
-Node NotReady 是 [[Kubernetes|Kubernetes]] 集群中**爆炸半径最大**的故障类型之一。当节点进入 NotReady 状态时，Kubernetes 控制平面（kube-controller-manager 的 node-lifecycle-controller）将在 `pod-eviction-timeout`（默认 5 分钟）后开始驱逐该节点上的所有非 [[DaemonSet|DaemonSet]] Pod，导致大规模服务中断。对于 control plane 节点，NotReady 可能直接威胁集群可用性。
+Node NotReady 是 [[Kubernetes|Kubernetes]] 集群中**爆炸半径最大**的问题类型之一。当节点进入 NotReady 状态时，Kubernetes 控制平面（kube-controller-manager 的 node-lifecycle-controller）将在 `pod-eviction-timeout`（默认 5 分钟）后开始驱逐该节点上的所有非 [[DaemonSet|DaemonSet]] Pod，导致大规模服务中断。对于 control plane 节点，NotReady 可能直接威胁集群可用性。
 
 > **版本差异说明 / Version Notes**:
 > - `pod-eviction-timeout` 默认 5 分钟，自 v1.28+ 可通过 kube-controller-manager 的 `--node-monitor-grace-period` 调整
@@ -73,8 +73,8 @@ Node NotReady 是 [[Kubernetes|Kubernetes]] 集群中**爆炸半径最大**的�
 ### 典型触发场景
 
 1. **kubelet 异常**: kubelet 进程崩溃、OOM、配置错误或无法启动，导致节点无法向 apiserver 上报心跳
-2. **容器运行时故障**: containerd / CRI-O 守护进程异常、socket 断开，kubelet 无法执行容器操作，PLEG (Pod Lifecycle Event Generator) 不健康
-3. **网络分区**: 节点与 apiserver 之间网络不通（防火墙规则变更、交换机故障、CNI 异常），apiserver 收不到心跳，标记节点为 Unknown → NotReady
+2. **容器运行时问题**: containerd / CRI-O 守护进程异常、socket 断开，kubelet 无法执行容器操作，PLEG (Pod Lifecycle Event Generator) 不健康
+3. **网络分区**: 节点与 apiserver 之间网络不通（防火墙规则变更、交换机问题、CNI 异常），apiserver 收不到心跳，标记节点为 Unknown → NotReady
 4. **资源压力**: 磁盘空间耗尽（DiskPressure）、内存耗尽（MemoryPressure）、PID 耗尽（PIDPressure），触发 kubelet 内置的驱逐管理器
 5. **证书过期**: kubelet 客户端证书或 serving 证书过期，无法与 apiserver 建立 TLS 连接
 
@@ -84,7 +84,7 @@ Node NotReady 是 [[Kubernetes|Kubernetes]] 集群中**爆炸半径最大**的�
   - 最小权限: 对 `nodes`, `pods`, `events`, `pods/log`, `pods/status`, `leases` (coordination.k8s.io) 的 `get/list/watch`
   - 如需执行修复: 额外需要 `nodes` 的 `patch`, `pods` 的 `delete/evict`
   - 验证命令: `kubectl auth can-i list nodes && kubectl auth can-i list pods`
-- **SSH 访问**: 深度诊断（Phase 2+）需要对故障节点的 SSH 访问权限
+- **SSH 访问**: 深度诊断（Phase 2+）需要对问题节点的 SSH 访问权限
 - **工具要求**:
   - `kubectl` >= v1.28（客户端版本建议与集群版本相差不超过 1 个 minor）
   - `ssh` 及目标节点登录权限
@@ -141,12 +141,12 @@ Node NotReady 是 [[Kubernetes|Kubernetes]] 集群中**爆炸半径最大**的�
 
 | 排除条件 | 正确路由 | 说明 |
 |---------|---------|------|
-| 节点状态 Ready，但 Pod 处于 CrashLoopBackOff | SKILL-POD-001 | Pod 自身问题，非节点级故障 |
+| 节点状态 Ready，但 Pod 处于 CrashLoopBackOff | SKILL-POD-001 | Pod 自身问题，非节点级问题 |
 | 节点状态 Ready，但 Pod 长期 Pending | SKILL-POD-002 | 调度问题（资源不足、亲和性约束等），节点本身正常 |
-| 节点状态 Ready，但出现证书相关错误 | SKILL-SEC-001 | 证书问题未影响到节点状态，属于安全类故障 |
-| 节点被标记为 SchedulingDisabled（已 cordon）但状态为 Ready | 不适用本 Skill | 人工主动操作，非故障 |
+| 节点状态 Ready，但出现证书相关错误 | SKILL-SEC-001 | 证书问题未影响到节点状态，属于安全类问题 |
+| 节点被标记为 SchedulingDisabled（已 cordon）但状态为 Ready | 不适用本 Skill | 人工主动操作，非问题 |
 | 新建集群中所有节点从未进入 Ready | 集群初始化问题 | 超出本 Skill 范围，需排查 bootstrap 流程 |
-| 仅 kubelet 版本偏旧但节点运行正常 | 升级规划 | 版本差异不构成故障 |
+| 仅 kubelet 版本偏旧但节点运行正常 | 升级规划 | 版本差异不构成问题 |
 
 ---
 
@@ -154,7 +154,7 @@ Node NotReady 是 [[Kubernetes|Kubernetes]] 集群中**爆炸半径最大**的�
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径：
+按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 统计 NotReady 节点数量和总节点数
 ```bash
@@ -204,19 +204,19 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 
 | 条件 | 级别 | 说明 | SLA 要求 |
 |------|------|------|---------|
-| >30% 节点 NotReady **或** 任何控制平面节点 NotReady | **P0** | 集群级故障，影响整体可用性。控制平面节点 NotReady 可能导致 apiserver 不可用（HA 场景下仍降级） | 立即响应，15min 内确认根因 |
-| 多个工作节点 NotReady（2-30%） | **P1** | 多节点故障，可能导致部分服务降级或资源不足无法调度 | 15min 内响应，30min 内修复 |
-| 单个工作节点 NotReady | **P2** | 单节点故障，影响该节点上的工作负载。如有足够冗余，影响可控 | 30min 内响应，2h 内修复 |
+| >30% 节点 NotReady **或** 任何控制平面节点 NotReady | **P0** | 集群级问题，影响整体可用性。控制平面节点 NotReady 可能导致 apiserver 不可用（HA 场景下仍降级） | 立即响应，15min 内确认根因 |
+| 多个工作节点 NotReady（2-30%） | **P1** | 多节点问题，可能导致部分服务降级或资源不足无法调度 | 15min 内响应，30min 内修复 |
+| 单个工作节点 NotReady | **P2** | 单节点问题，影响该节点上的工作负载。如有足够冗余，影响可控 | 30min 内响应，2h 内修复 |
 | 新加入的节点从未进入 Ready / 尚未承载业务流量 | **P3** | 新节点问题，不影响现有业务 | 4h 内处理 |
 
 ### 3.3 立即升级触发条件
 
 以下任一条件满足时，**跳过诊断流程，立即升级至人工 SRE / 值班工程师**：
 
-- **集群级故障**: >50% 的节点处于 NotReady 状态
+- **集群级问题**: >50% 的节点处于 NotReady 状态
 - **控制平面全部不可用**: 所有 control-plane 节点均 NotReady（etcd 集群可能已丢失 quorum）
 - **apiserver 不可达**: `kubectl get nodes` 命令本身超时或失败（无法执行任何诊断命令）
-- **级联故障**: NotReady 节点数量在 5 分钟内持续增加（可能是底层基础设施故障）
+- **级联问题**: NotReady 节点数量在 5 分钟内持续增加（可能是底层基础设施问题）
 - **安全事件**: 结合其他安全告警，怀疑节点被入侵导致的异常
 
 > **升级消息模板**: 参见 Section 8.2
@@ -265,7 +265,7 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   - `MemoryPressure` 为 `True` → 记录，可能根因为 RC-004
   - `DiskPressure` 为 `True` → 记录，可能根因为 RC-003
   - `PIDPressure` 为 `True` → 记录，可能根因为 RC-005
-  - Message 字段包含 `container runtime is down` → RC-002（容器运行时故障）
+  - Message 字段包含 `container runtime is down` → RC-002（容器运行时问题）
   - Message 字段包含 `PLEG is not healthy` → RC-008（PLEG 不健康）
   - Message 字段包含 `certificate` 或 `x509` → RC-007（证书问题），关联 SKILL-SEC-001
 - **版本差异**:
@@ -325,8 +325,8 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 
 ### Phase 2: 深度检查（只读，零风险，需 SSH）
 
-> **目标**: SSH 登录故障节点，检查系统级组件状态。所有命令均为只读操作。
-> **前提**: 需要对故障节点的 SSH 访问权限
+> **目标**: SSH 登录问题节点，检查系统级组件状态。所有命令均为只读操作。
+> **前提**: 需要对问题节点的 SSH 访问权限
 > **预计耗时**: 5-10 分钟
 
 **Step D2.1**: 检查 kubelet 服务状态
@@ -355,7 +355,7 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   - 日志包含 `connection refused` 或 `dial tcp <apiserver-ip>:6443: connect: connection refused` → 网络不通或 apiserver 不可达（RC-006）
   - 日志包含 `x509: certificate has expired` 或 `certificate signed by unknown authority` → 证书问题（RC-007），关联 SKILL-SEC-001
   - 日志包含 `PLEG is not healthy` → PLEG 不健康（RC-008），继续 D2.6
-  - 日志包含 `container runtime is not running` 或 `runtime connect using default endpoints` → 容器运行时故障（RC-002）
+  - 日志包含 `container runtime is not running` 或 `runtime connect using default endpoints` → 容器运行时问题（RC-002）
   - 日志包含 `failed to garbage collect` + 磁盘相关错误 → 磁盘空间不足（RC-003）
   - 日志包含 `OOM` 或 `oom_kill` → 内存压力（RC-004）
   - 日志包含 `too many open files` 或 `no space left on device` → 资源耗尽（RC-003 或 RC-005）
@@ -363,7 +363,7 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   - 日志包含 `failed to renew lease` → Lease 续租失败，检查网络和 apiserver
   - 日志包含 `use of closed network connection` → 网络连接异常（RC-006）
 - **版本差异**:
-  - **[v1.28+]**: GracefulNodeShutdown 默认启用。如果日志中出现 `shutting down gracefully`，可能节点正在优雅关机，不一定是故障
+  - **[v1.28+]**: GracefulNodeShutdown 默认启用。如果日志中出现 `shutting down gracefully`，可能节点正在优雅关机，不一定是问题
   - **[v1.30+]**: swap 相关日志 `swap is enabled` 在启用 NodeSwap feature gate 时属于正常信息
 
 **Step D2.3**: 检查容器运行时（containerd）服务状态
@@ -390,7 +390,7 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 - **判断规则**:
   - 日志包含 `failed to create shim` → shim 进程创建失败，可能磁盘满或 PID 耗尽
   - 日志包含 `context deadline exceeded` → containerd 内部操作超时，可能是磁盘 I/O 过慢
-  - 日志包含 `plugin` + `error` → 特定 containerd 插件故障
+  - 日志包含 `plugin` + `error` → 特定 containerd 插件问题
   - 日志包含 `no space left on device` → 磁盘空间不足（RC-003）
   - 无异常日志 → containerd 正常，问题可能在 kubelet 或网络层
 - **版本差异**: 无
@@ -492,8 +492,8 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 - **预期输出模式**: 内核日志条目
 - **判断规则**:
   - 出现 `Out of memory: Killed process` → OOM Killer 触发（RC-004），记录被杀的进程（如果是 kubelet/containerd 被杀，直接定位根因）
-  - 出现 `Hardware Error` 或 `MCE` (Machine Check Exception) → 硬件故障（RC-009）
-  - 出现 `I/O error` 或 `device not responding` → 磁盘硬件故障（RC-009）
+  - 出现 `Hardware Error` 或 `MCE` (Machine Check Exception) → 硬件问题（RC-009）
+  - 出现 `I/O error` 或 `device not responding` → 磁盘硬件问题（RC-009）
   - 出现 `NMI watchdog: BUG: soft lockup` → CPU 软锁死（RC-009）
   - 出现 `nf_conntrack: table full` → conntrack 表满，可能影响网络（RC-006 变种）
   - 出现 `EXT4-fs error` 或 `XFS error` → 文件系统错误（RC-009）
@@ -597,7 +597,7 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 ### Phase 4: 批量 NotReady 级联故障分析
 
 > **触发条件**: 多个节点同时进入 NotReady 状态（>2 个节点在 5 分钟内）
-> **目标**: 分析批量 NotReady 的关联性，确定是独立故障还是共同根因导致的级联故障
+> **目标**: 分析批量 NotReady 的关联性，确定是独立问题还是共同根因导致的级联问题
 > **预计耗时**: 5-15 分钟
 
 **Step D4.1**: 批量节点关联性分析
@@ -614,10 +614,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   ```
 - **超时**: 15s
 - **判断规则**:
-  - 多个节点在相同时间戳（±1 分钟）进入 NotReady → 可能是网络层面故障或控制平面问题
-  - NotReady 节点属于同一 Zone/Rack → 可能是物理网络设备故障（交换机、TOR 故障）
+  - 多个节点在相同时间戳（±1 分钟）进入 NotReady → 可能是网络层面问题或控制平面问题
+  - NotReady 节点属于同一 Zone/Rack → 可能是物理网络设备问题（交换机、TOR 问题）
   - NotReady 节点分布在不同 Zone → 可能是控制平面问题或 apiserver 网络问题
-  - NotReady 节点 IP 在同一网段 → VLAN/子网故障可能性高
+  - NotReady 节点 IP 在同一网段 → VLAN/子网问题可能性高
 
 **Step D4.2**: 网络层面排查
 - **命令**:
@@ -638,7 +638,7 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 - **超时**: 30s
 - **判断规则**:
   - 节点之间 ping 不通但 SSH 可达 → 云网络/SDN 配置问题
-  - 网卡状态 `DOWN` → 物理网络故障
+  - 网卡状态 `DOWN` → 物理网络问题
   - ARP 表异常（大量 incomplete/failed）→ 网络交换机问题
   - 路由表缺失默认路由 → 网络配置被破坏
 
@@ -680,7 +680,7 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   ```
 - **超时**: 30s
 - **判断规则**:
-  - 多节点时钟偏差 >5s → NTP 服务器故障或网络分区导致时钟无法同步
+  - 多节点时钟偏差 >5s → NTP 服务器问题或网络分区导致时钟无法同步
   - 时钟偏差方向一致（都快或都慢）→ NTP 源问题
   - 时钟偏差方向不一致 → 各节点独立的 NTP 配置问题
   - 时钟偏差 >1 分钟 → 几乎确定会导致 TLS 证书验证失败（RC-010 + RC-015 的组合）
@@ -696,14 +696,14 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 | RC-003 | **节点磁盘空间耗尽（DiskPressure）** — 根分区、/var/lib/kubelet、/var/lib/containerd 或 /var/log 分区磁盘使用率超过驱逐阈值（默认 85%），或 inode 耗尽 | 高 | D1.2 DiskPressure=True；D2.5 磁盘使用率 >85%；D1.3 事件包含 NodeHasDiskPressure | node-fta: BE-disk-pressure |
 | RC-004 | **节点内存耗尽（MemoryPressure）** — 节点可用内存低于 kubelet 驱逐阈值（默认 100Mi），触发内存压力条件 | 中 | D1.2 MemoryPressure=True；D2.5 可用内存极低；D2.9 OOM Killer 日志 | node-fta: BE-memory-pressure |
 | RC-005 | **节点 PID 耗尽（PIDPressure）** — 节点上进程数量接近或达到 pid_max 限制，kubelet 报告 PID 压力 | 中 | D1.2 PIDPressure=True；D2.5 PID 数量接近上限；D2.2 日志包含 PID 相关错误 | node-fta: BE-pid-pressure |
-| RC-006 | **节点与 apiserver 网络不通** — 防火墙规则变更、安全组配置、路由故障、物理网络问题导致节点无法与 apiserver 通信 | 中 | D2.7 TCP 连接失败；D2.2 日志包含 "connection refused"；D1.2 Ready=Unknown | node-fta: BE-network-partition |
+| RC-006 | **节点与 apiserver 网络不通** — 防火墙规则变更、安全组配置、路由问题、物理网络问题导致节点无法与 apiserver 通信 | 中 | D2.7 TCP 连接失败；D2.2 日志包含 "connection refused"；D1.2 Ready=Unknown | node-fta: BE-network-partition |
 | RC-007 | **kubelet 客户端证书过期** — kubelet 用于与 apiserver 通信的客户端证书过期或被吊销，TLS 握手失败 | 中 | D2.8 证书已过期；D2.2 日志包含 "x509"；D2.7 TLS 握手失败 | node-fta: BE-cert-expired |
 | RC-008 | **PLEG 不健康导致 NotReady** — Pod Lifecycle Event Generator 的 relist 操作超时（>3min），通常由 container runtime 响应慢引起 | 中 | D2.6 日志出现 "PLEG is not healthy"；D1.2 Message 包含 "PLEG"；D2.3 containerd 延迟高 | node-fta: BE-pleg-unhealthy |
-| RC-009 | **内核故障/硬件异常** — 服务器硬件故障（磁盘坏块、内存 ECC 错误、CPU MCE）、内核 panic、文件系统损坏 | 低 | D2.9 dmesg 包含 Hardware Error/MCE/I/O error；节点可能完全无法 SSH | node-fta: BE-hw-failure |
+| RC-009 | **内核问题/硬件异常** — 服务器硬件问题（磁盘坏块、内存 ECC 错误、CPU MCE）、内核 panic、文件系统损坏 | 低 | D2.9 dmesg 包含 Hardware Error/MCE/I/O error；节点可能完全无法 SSH | node-fta: BE-hw-failure |
 | RC-010 | **NTP 时间不同步** — 节点时钟偏差过大，导致 TLS 证书验证失败和 Lease 续租异常 | 低 | D2.10 时钟未同步或偏差 >5s；D2.8 证书看似有效但 TLS 仍失败 | node-fta: BE-ntp-drift |
 | RC-011 | **CNI 插件异常** — CNI 配置文件缺失、CNI 二进制文件损坏、CNI DaemonSet Pod 异常，导致节点网络不可用，kubelet 报告 NetworkUnavailable | 中 | D3.2 CNI 配置缺失或 Pod 未运行；D1.2 NetworkUnavailable=True | node-fta: BE-cni-failure |
-| RC-012 | **节点被手动 cordon/drain** — 运维人员手动执行了 `kubectl cordon` 或 `kubectl drain`，节点被标记为 SchedulingDisabled，不属于故障 | 低 | D1.4 存在 unschedulable taint；D1.1 STATUS 包含 "SchedulingDisabled" | N/A（非故障） |
-| RC-013 | **内核 panic / 硬件故障** — 服务器发生内核崩溃、MCE (Machine Check Exception)、EDAC 内存错误或其他硬件级别故障，导致节点完全不可用或反复重启 | ~5% | D2.9 dmesg 包含 `kernel panic`、`MCE`、`EDAC` 错误；SSH 可能完全不可达；节点可能反复重启 | node-fta: BE-kernel-panic |
+| RC-012 | **节点被手动 cordon/drain** — 运维人员手动执行了 `kubectl cordon` 或 `kubectl drain`，节点被标记为 SchedulingDisabled，不属于问题 | 低 | D1.4 存在 unschedulable taint；D1.1 STATUS 包含 "SchedulingDisabled" | N/A（非问题） |
+| RC-013 | **内核 panic / 硬件问题** — 服务器发生内核崩溃、MCE (Machine Check Exception)、EDAC 内存错误或其他硬件级别问题，导致节点完全不可用或反复重启 | ~5% | D2.9 dmesg 包含 `kernel panic`、`MCE`、`EDAC` 错误；SSH 可能完全不可达；节点可能反复重启 | node-fta: BE-kernel-panic |
 | RC-014 | **云厂商节点池异常** — 云平台层面的问题导致节点不可用，包括 ECS/EC2 实例状态异常、安全组变更、VPC 路由表异常、ENI 配额耗尽、节点池升级卡住等 | ~8% | 云厂商控制台/CLI 显示实例状态异常；D2.7 网络测试失败但非 K8s 层面问题；节点可能无法 SSH | node-fta: BE-cloud-provider |
 | RC-015 | **kubelet 证书自动轮转失败** — kubelet 的 RotateKubeletClientCertificate 或 RotateKubeletServerCertificate 机制失败，CSR 未被自动批准或证书轮转过程出错 | ~4% | D2.8 证书已过期或即将过期；D2.2 日志包含 `TLS handshake error`、`certificate has expired`；`kubectl get csr` 显示 Pending CSR | node-fta: BE-cert-rotation-fail |
 
@@ -968,7 +968,7 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 
 #### REM-007: 替换节点（云环境）
 - **适用根因**: RC-009, RC-001（反复发生且无法修复时）
-- **影响说明**: 在云环境中，直接终止故障节点实例并创建新实例加入集群。这要求集群使用了 node autoscaler 或有手动添加节点的运维流程。
+- **影响说明**: 在云环境中，直接终止问题节点实例并创建新实例加入集群。这要求集群使用了 node autoscaler 或有手动添加节点的运维流程。
 - **操作步骤**:
   1. **排空节点**（同 REM-006 步骤 1-3）
   2. **从集群中删除节点对象**:
@@ -1040,9 +1040,9 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   ```
 
 #### REM-011: 内核 panic 后的节点恢复
-- **适用根因**: RC-013（内核 panic / 硬件故障）
+- **适用根因**: RC-013（内核 panic / 硬件问题）
 - **风险等级**: 🔴 高
-- **影响说明**: 内核 panic 后的节点可能存在文件系统损坏、硬件故障残留问题。需要确认硬件健康后才能将节点重新投入使用。操作不当可能导致数据丢失或工作负载中断。
+- **影响说明**: 内核 panic 后的节点可能存在文件系统损坏、硬件问题残留问题。需要确认硬件健康后才能将节点重新投入使用。操作不当可能导致数据丢失或工作负载中断。
 - **操作步骤**:
   1. **收集 kdump 日志（如果可用）**:
      ```bash
@@ -1118,9 +1118,9 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   # 建议创建维护工单并记录：
   # - kdump 日志位置
   # - dmesg 错误输出
-  # - 疑似故障硬件组件
+  # - 疑似问题硬件组件
 
-  # 如果确认是硬件故障，按 REM-010 流程更换硬件或 REM-007 更换节点
+  # 如果确认是硬件问题，按 REM-010 流程更换硬件或 REM-007 更换节点
   ```
 
 ---
@@ -1168,7 +1168,7 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 - **操作步骤**:
   1. **排空节点并从集群中移除**（同 REM-007 步骤 1-2）
   2. **提交数据中心硬件更换工单**:
-     - 记录故障硬件信息（服务器型号、序列号、故障组件）
+     - 记录问题硬件信息（服务器型号、序列号、问题组件）
      - 附上 dmesg 和硬件诊断日志
   3. **硬件更换完成后**:
      - 重新安装 OS 和 K8s 组件
@@ -1181,7 +1181,7 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
      ```
 - **回滚方案**:
   - 硬件更换为不可逆操作
-  - 保留故障硬件的日志和诊断信息用于事后分析
+  - 保留问题硬件的日志和诊断信息用于事后分析
 
 ---
 
@@ -1222,7 +1222,7 @@ kubectl get node <node-name> -o jsonpath='kubelet={.status.nodeInfo.kubeletVersi
 | 节点 CPU 使用率 | `node_cpu_seconds_total` 或 `kubectl top node <node-name>` | 恢复后 CPU 使用率稳定在正常范围 | CPU 使用率持续 >90% 超过 5 分钟 |
 | 节点内存使用率 | `node_memory_MemAvailable_bytes` 或 `kubectl top node <node-name>` | 可用内存保持在驱逐阈值以上 | 可用内存 <200Mi 且持续下降 |
 | 节点磁盘使用率 | `node_filesystem_avail_bytes` 或 SSH `df -h` | 磁盘使用率保持在 85% 以下 | 磁盘使用率持续上升并再次接近阈值 |
-| kubelet 运行中 Pod 数 | `kubelet_running_pods` | Pod 数量恢复到故障前水平 | Pod 数量持续为 0 或远低于预期 |
+| kubelet 运行中 Pod 数 | `kubelet_running_pods` | Pod 数量恢复到问题前水平 | Pod 数量持续为 0 或远低于预期 |
 | kubelet 心跳 | `kube_node_status_condition{condition="Ready",status="true"}` | 持续为 1 | 值变为 0（节点再次 NotReady） |
 | PLEG 延迟 | `kubelet_pleg_relist_duration_seconds` | P99 < 10s | P99 > 60s 或 relist 超时 |
 | 容器重启次数 | `kube_pod_container_status_restarts_total` | 无异常增长 | 修复后容器重启次数持续增加 |
@@ -1230,7 +1230,7 @@ kubectl get node <node-name> -o jsonpath='kubelet={.status.nodeInfo.kubeletVersi
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 
 - [ ] 节点 STATUS 显示 Ready，且持续 Ready 超过 5 分钟
 - [ ] 所有 Conditions（MemoryPressure, DiskPressure, PIDPressure）均为 False
@@ -1273,7 +1273,7 @@ kubectl get node <node-name> -o jsonpath='kubelet={.status.nodeInfo.kubeletVersi
 ```
 【{severity}】节点 NotReady 诊断与修复 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: 节点 {node_name} ({node_ip}) 状态为 NotReady，持续 {duration}
+- 问题概述: 节点 {node_name} ({node_ip}) 状态为 NotReady，持续 {duration}
 - 影响范围: 
   - 受影响节点: {affected_node_count}/{total_node_count}
   - 受影响 Pod: {affected_pod_count} 个（namespace: {affected_namespaces}）
@@ -1366,7 +1366,7 @@ kubectl get node <node-name> -o jsonpath='kubelet={.status.nodeInfo.kubeletVersi
 
 - **[v1.28+]**: GracefulNodeShutdown 默认启用。当节点正在关机时，kubelet 会尝试优雅终止 Pod。在诊断时需注意区分计划关机和异常关机：
   - 检查 `shutdownGracePeriod` 和 `shutdownGracePeriodCriticalPods` 配置
-  - 日志中出现 `shutting down gracefully` 不一定是故障
+  - 日志中出现 `shutting down gracefully` 不一定是问题
 
 - **[v1.30+]**: Node swap support (beta) 可能影响内存压力的判断：
   - 如果 `NodeSwap` feature gate 启用且 `swapBehavior: LimitedSwap`，需同时检查 swap 使用情况
@@ -1399,10 +1399,10 @@ kubectl get node <node-name> -o jsonpath='kubelet={.status.nodeInfo.kubeletVersi
 |---------|---------|---------|---------|
 | **网络抖动误判为 kubelet 崩溃** | Node Condition 中 Ready=Unknown，看似 kubelet 停止发送心跳 | 网络链路不稳定（交换机端口 flapping、MTU 问题、云网络限流），kubelet 实际在运行但心跳包被丢弃 | 先 SSH 到节点确认 kubelet 进程状态（D2.1），再测试网络连通性（D2.7）。如果 kubelet 运行正常且本地 healthz 正常，优先排查网络 |
 | **DiskPressure 归因于镜像过多，实则是日志轮转失败** | DiskPressure=True，磁盘使用率高 | 容器日志（stdout/stderr）未正确配置轮转（logMaxSize/logMaxFiles），单个 Pod 的日志占用几十 GB | 在 D2.5 中不仅检查整体磁盘使用率，还要检查 `/var/log/pods/` 或 `/var/log/containers/` 下的大文件：`du -sh /var/log/pods/* \| sort -rh \| head -10` |
-| **PLEG 不健康误判为容器运行时故障** | kubelet 日志出现 `PLEG is not healthy`，初步判断为 containerd 异常 | 实际是某个 Pod 的 container 处于 D 状态（不可中断的 I/O 等待），阻塞了 CRI 调用，containerd 本身正常 | 在 D2.6 之后检查是否有 D 状态进程：`ps aux \| awk '$8=="D"'`。如果有，定位到具体容器和 Pod，问题在应用层而非运行时 |
-| **证书过期误判为网络故障** | kubelet 日志出现 "connection refused" 或 TLS 错误 | kubelet 客户端证书已过期，TLS 握手失败被解读为网络问题 | 在排查网络问题（D2.7）前先检查证书有效期（D2.8）。TLS 握手失败和 TCP 连接失败有本质区别 |
-| **cordon 操作误判为节点故障** | 用户报告 Pod 无法调度到某节点，误认为节点 NotReady | 运维人员之前执行了 `kubectl cordon` 但未记录，节点状态为 `Ready,SchedulingDisabled` | D1.1 中仔细区分 `NotReady` 和 `Ready,SchedulingDisabled`；D1.4 检查 taints 中的 `unschedulable` 标记 |
-| **时间偏差导致的间歇性故障** | 节点状态不稳定，时好时坏，难以找到明确根因 | 节点 NTP 未同步，时钟偏差导致 TLS 证书间歇性验证失败和 Lease 续租异常 | 在诊断早期（D2.10）就检查时间同步。时间偏差是最容易被忽视但影响广泛的根因 |
+| **PLEG 不健康误判为容器运行时问题** | kubelet 日志出现 `PLEG is not healthy`，初步判断为 containerd 异常 | 实际是某个 Pod 的 container 处于 D 状态（不可中断的 I/O 等待），阻塞了 CRI 调用，containerd 本身正常 | 在 D2.6 之后检查是否有 D 状态进程：`ps aux \| awk '$8=="D"'`。如果有，定位到具体容器和 Pod，问题在应用层而非运行时 |
+| **证书过期误判为网络问题** | kubelet 日志出现 "connection refused" 或 TLS 错误 | kubelet 客户端证书已过期，TLS 握手失败被解读为网络问题 | 在排查网络问题（D2.7）前先检查证书有效期（D2.8）。TLS 握手失败和 TCP 连接失败有本质区别 |
+| **cordon 操作误判为节点问题** | 用户报告 Pod 无法调度到某节点，误认为节点 NotReady | 运维人员之前执行了 `kubectl cordon` 但未记录，节点状态为 `Ready,SchedulingDisabled` | D1.1 中仔细区分 `NotReady` 和 `Ready,SchedulingDisabled`；D1.4 检查 taints 中的 `unschedulable` 标记 |
+| **时间偏差导致的间歇性问题** | 节点状态不稳定，时好时坏，难以找到明确根因 | 节点 NTP 未同步，时钟偏差导致 TLS 证书间歇性验证失败和 Lease 续租异常 | 在诊断早期（D2.10）就检查时间同步。时间偏差是最容易被忽视但影响广泛的根因 |
 
 ### 10.2 深度知识引用
 
@@ -1449,8 +1449,8 @@ kubectl get node <node-name> -o jsonpath='kubelet={.status.nodeInfo.kubeletVersi
 | RC-002 containerd 异常 | `ssh <node> "systemctl restart containerd && systemctl restart kubelet"` | 🟡 中风险（容器短暂中断 30-60s） | `kubectl get pods --field-selector spec.nodeName=<node> --all-namespaces` |
 | RC-005 资源压力阈值 | 调整 kubelet evictionHard 后重启 kubelet | 🟡 中风险（需重启 kubelet） | `kubectl get node <node> -o jsonpath='{range .status.conditions[*]}{.type}={.status}{"\n"}{end}'` |
 | RC-007 证书过期 | 手动证书轮转或触发 CSR 批准 | 🟡 中风险（涉及 TLS 重建） | `openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates` |
-| RC-001/RC-008 复杂故障 | `kubectl drain <node> --ignore-daemonsets --force` → 修复后 `kubectl uncordon <node>` | 🔴 高风险（驱逐所有 Pod） | `kubectl get pods --field-selector spec.nodeName=<node> --all-namespaces` |
-| RC-009 硬件故障 | 节点替换（云环境终止实例并新建） | 🔴 高风险（数据可能丢失） | `kubectl get nodes` |
+| RC-001/RC-008 复杂问题 | `kubectl drain <node> --ignore-daemonsets --force` → 修复后 `kubectl uncordon <node>` | 🔴 高风险（驱逐所有 Pod） | `kubectl get pods --field-selector spec.nodeName=<node> --all-namespaces` |
+| RC-009 硬件问题 | 节点替换（云环境终止实例并新建） | 🔴 高风险（数据可能丢失） | `kubectl get nodes` |
 
 ### danger_operations 高风险操作标注
 

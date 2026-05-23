@@ -1,6 +1,6 @@
 ---
 title: OpenKruise 工作负载异常故障树分析
-description: OpenKruise 增强工作负载异常故障树分析，覆盖 CloneSet、原地升级、Sidecar 管理等故障路径
+description: OpenKruise 增强工作负载异常故障树分析，覆盖 CloneSet、原地升级、Sidecar 管理等问题路径
 category: fta
 tags:
 - fta
@@ -23,7 +23,7 @@ audience:
 estimated_read_time: 5min
 intent_queries:
 - OpenKruise 工作负载异常故障树分析 是什么
-- CloneSet 故障 根因分析
+- CloneSet 问题 根因分析
 - OpenKruise 原地升级 故障树
 trigger_keywords:
 - OpenKruise
@@ -123,7 +123,7 @@ flowchart TD
 
 ---
 
-## 常见故障场景
+## 常见问题场景
 
 ### 场景 1: CloneSet Pod 创建失败
 

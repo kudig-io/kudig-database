@@ -621,7 +621,7 @@ RAS (Reliability, Availability, Serviceability):
       
     存储保护:
       RAID: 磁盘冗余
-      热备盘: 自动替换故障盘
+      热备盘: 自动替换问题盘
       端到端数据保护: T10-DIF/DIX
       
   可用性 (Availability):
@@ -689,7 +689,7 @@ RAS (Reliability, Availability, Serviceability):
 │                                    ↓                                        │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
 │  │  Memory Sparing (内存备用)                                           │   │
-│  │  - Rank Sparing: 备用Rank替换故障Rank                               │   │
+│  │  - Rank Sparing: 备用Rank替换问题Rank                               │   │
 │  │  - Partial Sparing: 部分行替换                                       │   │
 │  └─────────────────────────────────────────────────────────────────────┘   │
 │                                    ↓                                        │

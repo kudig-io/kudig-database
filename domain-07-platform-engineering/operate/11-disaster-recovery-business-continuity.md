@@ -65,7 +65,7 @@ created: "2026-05-23"
 <!-- chunk: 概述 -->
 ## 概述
 
-灾难恢复与业务连续性是平台运维的生命线，通过建立完善的备份恢复策略、多活架构和应急响应机制，确保在各种故障场景下业务的持续可用性。
+灾难恢复与业务连续性是平台运维的生命线，通过建立完善的备份恢复策略、多活架构和应急响应机制，确保在各种问题场景下业务的持续可用性。
 
 <!-- chunk: 灾难恢复策略 -->
 ## 灾难恢复策略
@@ -80,8 +80,8 @@ MTTR (Mean Time To Recovery): 30分钟
 ### 灾难类型分类
 - **自然灾害**: 地震、洪水、火灾等
 - **人为灾害**: 误操作、恶意攻击、代码缺陷
-- **技术故障**: 硬件故障、网络中断、电力故障
-- **供应商故障**: 云服务商故障、第三方服务中断
+- **技术问题**: 硬件问题、网络中断、电力问题
+- **供应商问题**: 云服务商问题、第三方服务中断
 
 <!-- chunk: 备份策略体系 -->
 ## 备份策略体系
@@ -584,26 +584,26 @@ spec:
 <!-- chunk: 应急响应流程 -->
 ## 应急响应流程
 
-### 故障等级定义
+### 问题等级定义
 ```yaml
-# 故障等级分类
+# 问题等级分类
 incident_levels:
-  P0:  # 紧急故障
+  P0:  # 紧急问题
     description: "核心业务中断，影响面>50%"
     response_time: "15分钟"
     escalation: "CTO通知"
     
-  P1:  # 高优先级故障
+  P1:  # 高优先级问题
     description: "重要业务受影响，影响面10-50%"
     response_time: "1小时"
     escalation: "技术总监通知"
     
-  P2:  # 中等故障
+  P2:  # 中等问题
     description: "一般业务受影响，影响面<10%"
     response_time: "4小时"
     escalation: "团队负责人通知"
     
-  P3:  # 低优先级故障
+  P3:  # 低优先级问题
     description: "轻微问题，无业务影响"
     response_time: "24小时"
     escalation: "常规处理"
@@ -623,11 +623,11 @@ incident_levels:
 <!-- chunk: 标准操作程序(SOP) -->
 ## 标准操作程序(SOP)
 
-### 1. 故障发现与确认
+### 1. 问题发现与确认
 - 监控告警接收
 - 初步故障定位
 - 影响范围评估
-- 故障等级确定
+- 问题等级确定
 
 ### 2. 应急响应启动
 - 通知相关人员
@@ -648,7 +648,7 @@ incident_levels:
 - 业务回归测试
 
 ### 5. 事后总结
-- 故障根本原因分析
+- 问题根本原因分析
 - 处理过程复盘
 - 改进措施制定
 - 知识库更新
@@ -675,10 +675,10 @@ class EmergencyResponseSystem:
             return self.handle_unknown_incident(incident_type, details)
     
     def handle_node_failure(self, details):
-        """处理节点故障"""
+        """处理节点问题"""
         affected_nodes = details.get('nodes', [])
         
-        # 1. 隔离故障节点
+        # 1. 隔离问题节点
         for node in affected_nodes:
             self.isolate_node(node)
         
@@ -700,7 +700,7 @@ class EmergencyResponseSystem:
         pass
     
     def isolate_node(self, node_name):
-        """隔离故障节点"""
+        """隔离问题节点"""
         cmd = f"kubectl cordon {node_name}"
         subprocess.run(cmd.split())
         cmd = f"kubectl drain {node_name} --ignore-daemonsets --delete-emptydir-data"
@@ -778,7 +778,7 @@ improvement_tracking:
     - training_program_updates
 ```
 
-通过建立完善的灾难恢复和业务连续性体系，可以最大程度地减少故障对业务的影响，确保在各种极端情况下都能维持业务的正常运转。
+通过建立完善的灾难恢复和业务连续性体系，可以最大程度地减少问题对业务的影响，确保在各种极端情况下都能维持业务的正常运转。
 
 ---
 

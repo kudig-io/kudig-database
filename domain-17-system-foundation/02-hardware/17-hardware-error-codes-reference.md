@@ -102,7 +102,7 @@ k8s_versions:
 │  │  └─────── CPU核心号                                                                    │ │
 │  │                                                                                        │ │
 │  │  MISC xxxxxxxxxxxxxxxx    ─── 附加信息                                                 │ │
-│  │  ADDR xxxxxxxxxxxxxxxx    ─── 故障地址                                                 │ │
+│  │  ADDR xxxxxxxxxxxxxxxx    ─── 问题地址                                                 │ │
 │  │  STATUS xxxxxxxxxxxxxxxx  ─── 错误状态码                                               │ │
 │  │  MCGSTATUS xxxxxxxx       ─── 全局状态                                                 │ │
 │  │                                                                                        │ │
@@ -161,7 +161,7 @@ Intel_Xeon_MCE_Bank:
     功能单元: 各内存通道
     常见错误:
       - 特定通道 ECC 错误
-      - DIMM 故障
+      - DIMM 问题
     
   Bank_8:
     名称: QPI/UPI Link
@@ -378,7 +378,7 @@ decode_memory_error() {
 | `UC=0, OVER=0` | 单次可纠正错误 | 轻微 | 监控频率 |
 | `UC=0, OVER=1` | 可纠正错误溢出 | 中等 | 增加监控粒度 |
 | `Bank 4-7, UC=1` | 内存控制器 UCE | 严重 | 检查 DIMM |
-| `Bank 0-2, UC=1` | 缓存严重错误 | 严重 | CPU 可能故障 |
+| `Bank 0-2, UC=1` | 缓存严重错误 | 严重 | CPU 可能问题 |
 
 <!-- chunk: S.M.A.R.T. 属性码 -->## S.M.A.R.T. 属性码
 
@@ -676,7 +676,7 @@ NVMe_SMART_日志:
       Bit_1: 温度超过阈值
       Bit_2: 可靠性降低
       Bit_3: 进入只读模式
-      Bit_4: 易失性内存备份设备故障
+      Bit_4: 易失性内存备份设备问题
       Bit_5: 持久内存只读
     正常值: 0
     任何非零: 需要立即关注
@@ -871,8 +871,8 @@ IPMI_Sensor_Type:
   0x0D_Drive_Slot:
     事件:
       Drive_Presence: 驱动器存在
-      Drive_Fault: 驱动器故障
-      Predictive_Failure: 预测性故障
+      Drive_Fault: 驱动器问题
+      Predictive_Failure: 预测性问题
       Hot_Spare: 热备盘
       Rebuild_In_Progress: 重建中
       Rebuild_Aborted: 重建中止
@@ -959,21 +959,21 @@ analyze_sel
 | 蜂鸣模式 | 含义 | 可能原因 | 处理方法 |
 |---------|------|---------|---------|
 | 1短 | DRAM刷新失败 | 内存问题 | 重新插拔内存/更换 |
-| 2短 | 内存奇偶校验错误 | 内存故障 | 更换内存 |
+| 2短 | 内存奇偶校验错误 | 内存问题 | 更换内存 |
 | 3短 | 基本64K内存错误 | 内存/主板问题 | 检测内存和主板 |
 | 4短 | 系统定时器失败 | 主板问题 | 检查/更换主板 |
 | 5短 | 处理器错误 | CPU问题 | 检查CPU安装/更换 |
 | 6短 | 键盘控制器错误 | 键盘/主板问题 | 检查键盘/主板 |
-| 7短 | 虚拟模式异常 | CPU问题 | CPU可能故障 |
+| 7短 | 虚拟模式异常 | CPU问题 | CPU可能问题 |
 | 8短 | 显卡内存错误 | 显卡问题 | 检查/更换显卡 |
 | 9短 | ROM校验失败 | BIOS损坏 | 刷新BIOS |
 | 10短 | CMOS读写错误 | CMOS电池/芯片 | 更换电池/检查主板 |
 | 11短 | 缓存错误 | CPU缓存问题 | 检查/更换CPU |
-| 1长1短 | 主板问题 | 主板故障 | 检查/更换主板 |
+| 1长1短 | 主板问题 | 主板问题 | 检查/更换主板 |
 | 1长2短 | 显卡错误 | 显卡/插槽问题 | 重新安装显卡 |
 | 1长3短 | 内存错误 | 内存问题 | 检测/更换内存 |
 | 1长8短 | 显示测试失败 | 显卡问题 | 检查显卡 |
-| 连续短响 | 电源问题 | PSU故障 | 检查电源 |
+| 连续短响 | 电源问题 | PSU问题 | 检查电源 |
 | 连续长响 | 内存未检测到 | 内存未安装 | 安装内存 |
 
 #<!-- chunk: Phoenix/Award BIOS 蜂鸣码 -->## Phoenix/Award BIOS 蜂鸣码
@@ -1015,7 +1015,7 @@ analyze_sel
 ```yaml
 Dell_LCD_Error_Code:
   E1000:
-    描述: 电源故障
+    描述: 电源问题
     原因: PSU失效或功率不足
     处理: 检查/更换电源
     
@@ -1040,17 +1040,17 @@ Dell_LCD_Error_Code:
     处理: 检查VRM模块
     
   E1216:
-    描述: 3.3V稳压器故障
+    描述: 3.3V稳压器问题
     原因: 主板问题
     处理: 更换主板
     
   E1229:
-    描述: CPU VCORE故障
+    描述: CPU VCORE问题
     原因: CPU供电异常
     处理: 检查CPU/主板
     
   E122A-E122C:
-    描述: CPU VRM故障
+    描述: CPU VRM问题
     原因: VRM模块问题
     处理: 更换VRM
     
@@ -1060,7 +1060,7 @@ Dell_LCD_Error_Code:
     处理: 安装风扇
     
   E1311:
-    描述: 风扇故障
+    描述: 风扇问题
     原因: 风扇失效
     处理: 更换风扇
     
@@ -1087,7 +1087,7 @@ Dell_LCD_Error_Code:
   E1618:
     描述: Power Supply冗余丢失
     原因: 一个PSU失效
-    处理: 更换故障PSU
+    处理: 更换问题PSU
     
   E161C:
     描述: Power Supply输入丢失
@@ -1117,7 +1117,7 @@ Dell_LCD_Error_Code:
   E1A1D:
     描述: DIMM ECC错误
     原因: 内存ECC错误
-    处理: 更换故障DIMM
+    处理: 更换问题DIMM
     
   E2010:
     描述: 内存初始化失败
@@ -1131,13 +1131,13 @@ Dell_LCD_Error_Code:
     
   E2012:
     描述: 内存训练失败
-    原因: 内存兼容/故障
+    原因: 内存兼容/问题
     处理: 更换内存
     
   E201C:
     描述: 内存备用触发
     原因: 内存错误达阈值
-    处理: 更换故障DIMM
+    处理: 更换问题DIMM
     
   E201D:
     描述: 内存镜像触发
@@ -1163,12 +1163,12 @@ HPE_iLO_Status:
     Fans:
       OK: 所有风扇正常
       Degraded: 部分风扇异常
-      Critical: 风扇严重故障
+      Critical: 风扇严重问题
       
     Power:
       OK: 电源正常
       Degraded: 冗余丢失
-      Critical: 电源故障
+      Critical: 电源问题
       
     Temperature:
       OK: 温度正常
@@ -1178,23 +1178,23 @@ HPE_iLO_Status:
     Memory:
       OK: 内存正常
       Degraded: 有ECC错误
-      Critical: 内存故障
+      Critical: 内存问题
       
     Processors:
       OK: CPU正常
       Degraded: 有错误记录
-      Critical: CPU故障
+      Critical: CPU问题
       
     Storage:
       OK: 存储正常
       Degraded: RAID降级/磁盘警告
-      Critical: 存储故障
+      Critical: 存储问题
 ```
 
 <!-- chunk: 快速排错检查清单 -->## 快速排错检查清单
 
 ```yaml
-硬件故障快速检查清单:
+硬件问题快速检查清单:
   系统无法启动:
     检查顺序:
       1. 电源LED是否亮起

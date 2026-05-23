@@ -417,7 +417,7 @@ echo "Inventory saved to $OUTPUT"
 |-------|------|---------|
 | 将 `ca.key` 提交到 Git | 私钥泄露，任何人可签发证书 | 使用 Git-Crypt / SOPS 加密，或外部 Secret 管理 |
 | 证书有效期 > 2 年 | 泄露的证书长期有效 | 使用 90 天 - 1 年有效期 |
-| 所有组件共用同一 CA | 单点故障，权限无法隔离 | 使用 kubernetes-ca / etcd-ca / front-proxy-ca 分离 |
+| 所有组件共用同一 CA | 单点问题，权限无法隔离 | 使用 kubernetes-ca / etcd-ca / front-proxy-ca 分离 |
 | 忽略证书过期告警 | 集群突然不可用 | 配置 Prometheus 告警 + PagerDuty |
 | 手动编辑证书文件 | 格式损坏、密钥不匹配 | 使用 kubeadm 或脚本自动化 |
 | 没有证书备份 | 丢失后无法恢复 | 定期备份 /etc/kubernetes/pki 到加密存储 |

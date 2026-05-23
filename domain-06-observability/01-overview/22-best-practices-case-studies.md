@@ -148,7 +148,7 @@ observability_architecture_patterns:
         
       disadvantages:
         - 扩展性受限
-        - 单点故障风险
+        - 单点问题风险
         - 技术锁定风险
         - 长期成本可能较高
         
@@ -367,7 +367,7 @@ case_study_e-commerce:
     industry: 电子商务
     scale: 日活用户1000万+
     environment: 完全云原生(Kubernetes+EKS)
-    challenge: 高并发场景下的性能监控和故障快速定位
+    challenge: 高并发场景下的性能监控和问题快速定位
     
   solution_implementation:
     real_time_monitoring:
@@ -850,7 +850,7 @@ future_trends_observability:
         - ar_dashboard_interfaces: AR仪表盘界面
         - spatial_data_visualization: 空间数据可视化
         - hands_free_operations: 免手持操作支持
-        - collaborative_troubleshooting: 协作式故障排除
+        - collaborative_troubleshooting: 协作式问题排除
         
   paradigm_shifts:
     shift_from_monitoring_to_observability:

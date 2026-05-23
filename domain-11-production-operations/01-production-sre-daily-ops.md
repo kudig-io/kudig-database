@@ -5,6 +5,7 @@ tags: ["domain-11", "SRE", "运维", "巡检", "值班", "变更管理", "visibi
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+status: reviewed
 ---
 
 # 生产环境日常巡检与值班手册

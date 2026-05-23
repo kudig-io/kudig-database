@@ -271,7 +271,7 @@ if [ $ETCD_HEALTH -gt 0 ]; then
   echo "❌ 发现根因: etcd集群不健康"
   
   # 执行恢复操作
-  echo "🔄 [14:50:00] 执行恢复: 重启etcd故障节点"
+  echo "🔄 [14:50:00] 执行恢复: 重启etcd问题节点"
   # systemctl restart etcd  # 实际操作
 fi
 
@@ -317,9 +317,9 @@ echo "✅ 事故生命周期完成"
 |------|----------|------|
 | ❌ 跳过分级，直接处理 | ✅ 先分级再响应 | 分级决定了响应速度和参与人员，P3问题不需要半夜叫醒所有人 |
 | ❌ 边修复边找根因 | ✅ 先止血再查根因 | 紧急时刻优先恢复服务，根因留给复盘阶段 |
-| ❌ 单人单打独斗 | ✅ 组建响应团队 | P0/P1级别需要多角色协同，避免单点故障 |
+| ❌ 单人单打独斗 | ✅ 组建响应团队 | P0/P1级别需要多角色协同，避免单点问题 |
 | ❌ 恢复后立即关闭工单 | ✅ 验证稳定性再关闭 | 避免"假恢复"，确保系统真正稳定 |
-| ❌ 不做事后复盘 | ✅ 48小时内完成复盘 | 复盘是最有价值的学习机会，不复盘=白白浪费故障 |
+| ❌ 不做事后复盘 | ✅ 48小时内完成复盘 | 复盘是最有价值的学习机会，不复盘=白白浪费问题 |
 | ❌ 复盘追责个人 | ✅ Blameless文化 | 追责导致隐瞒问题，Blameless才能真正改进系统 |
 
 ---
@@ -494,7 +494,7 @@ if [ $? -eq 0 ]; then
   ETCD_STATUS=$(ETCDCTL_API=3 etcdctl endpoint health 2>&1)
   if echo "$ETCD_STATUS" | grep -q "unhealthy"; then
     echo "🔧 [Tech Lead - Bob] 根因定位: etcd集群不健康"
-    echo "🔧 [Tech Lead - Bob] @IC: 建议方案 - 重启etcd故障节点，预计10分钟恢复"
+    echo "🔧 [Tech Lead - Bob] @IC: 建议方案 - 重启etcd问题节点，预计10分钟恢复"
   fi
 fi
 
@@ -577,16 +577,16 @@ echo "👔 [IC - Alice] 请所有参与者准备复盘材料"
 | ❌ 技术人员负责对外沟通 | ✅ 专人负责沟通 | 技术人员专注修复，Communications Lead负责对外 |
 | ❌ 等待所有人到齐再开始 | ✅ 先启动，人员陆续加入 | P0事故分秒必争，先开始处理 |
 | ❌ War Room没有记录 | ✅ 指定专人记录 | 记录是复盘的重要输入，可录音或指定Scribe角色 |
-| ❌ 角色固定不变 | ✅ 根据故障类型调整 | 网络故障需要网络专家，存储故障需要存储专家 |
+| ❌ 角色固定不变 | ✅ 根据问题类型调整 | 网络问题需要网络专家，存储问题需要存储专家 |
 | ❌ IC参与技术细节讨论 | ✅ IC保持全局视角 | IC应该关注整体进展，不陷入技术细节 |
 
 ---
 
 
 graph TD
-    A[监控告警触发] --> B{是否真实故障}
+    A[监控告警触发] --> B{是否真实问题}
     B -->|误报| C[调整告警规则]
-    B -->|真实故障| D[创建事故工单]
+    B -->|真实问题| D[创建事故工单]
     
     D --> E[事故分级]
     E --> F{严重程度}
@@ -624,15 +624,15 @@ graph TD
 
 | 等级 | 名称 | 业务影响 | 响应时间 | 解决目标 | 升级策略 | 通知范围 |
 |------|------|----------|----------|----------|----------|----------|
-| **P0** | 致命故障 | 核心业务完全中断，大量用户无法访问 | 立即响应（5分钟内） | 2小时内恢复 | 15分钟未进展升级 | CEO、CTO、所有相关团队 |
-| **P1** | 严重故障 | 重要功能受影响，部分用户无法使用 | 15分钟内响应 | 4小时内恢复 | 1小时未进展升级 | 技术VP、产品负责人 |
-| **P2** | 一般故障 | 非核心功能异常，用户体验下降 | 1小时内响应 | 8小时内解决 | 4小时未进展升级 | 相关技术团队 |
+| **P0** | 致命问题 | 核心业务完全中断，大量用户无法访问 | 立即响应（5分钟内） | 2小时内恢复 | 15分钟未进展升级 | CEO、CTO、所有相关团队 |
+| **P1** | 严重问题 | 重要功能受影响，部分用户无法使用 | 15分钟内响应 | 4小时内恢复 | 1小时未进展升级 | 技术VP、产品负责人 |
+| **P2** | 一般问题 | 非核心功能异常，用户体验下降 | 1小时内响应 | 8小时内解决 | 4小时未进展升级 | 相关技术团队 |
 | **P3** | 轻微问题 | 低优先级问题，影响极小 | 工作时间响应 | 3天内解决 | 按计划处理 | 责任工程师 |
 
-### 2.2 Kubernetes 故障分级示例
+### 2.2 Kubernetes 问题分级示例
 
 ```yaml
-# P0 级别故障示例
+# P0 级别问题示例
 incidentExamples:
   p0-critical:
     - title: "控制平面完全不可用"
@@ -648,14 +648,14 @@ incidentExamples:
         - "数据不一致"
       impact: "集群状态不可信，存在数据丢失风险"
       
-    - title: "认证系统故障"
+    - title: "认证系统问题"
       symptoms:
         - "用户无法登录"
         - "API 认证失败"
       impact: "所有用户无法访问系统"
 
   p1-high:
-    - title: "单个可用区故障"
+    - title: "单个可用区问题"
       symptoms:
         - "1/3 节点不可用"
         - "部分 Pod 无法调度"
@@ -755,13 +755,13 @@ severityDecisionMatrix:
       weight: 10
       
     high:
-      - "单个可用区故障"
+      - "单个可用区问题"
       - "性能严重下降(>80%)"
       - "部分服务不可用"
       weight: 7
       
     medium:
-      - "单个节点故障"
+      - "单个节点问题"
       - "性能轻微下降(20-80%)"
       - "告警异常"
       weight: 4
@@ -909,7 +909,7 @@ echo "  - 数据丢失风险: 无"
 echo "  → 技术严重程度: MEDIUM"
 
 echo ""
-echo "🔖 最终分级: P2 (一般故障)"
+echo "🔖 最终分级: P2 (一般问题)"
 echo "响应要求: 1小时内响应，8小时内解决"
 
 # ========== 案例2: etcd数据不一致 ==========
@@ -932,7 +932,7 @@ echo "  - 集群可用性: 完全不可用"
 echo "  → 技术严重程度: CRITICAL"
 
 echo ""
-echo "🚨 最终分级: P0 (致命故障)"
+echo "🚨 最终分级: P0 (致命问题)"
 echo "响应要求: 立即响应(5分钟内)，2小时内恢复"
 echo "立即启动War Room，通知CEO/CTO"
 
@@ -992,7 +992,7 @@ echo "响应要求: 立即启动War Room，全员响应"
 |------|----------|------|
 | ❌ 测试环境也按P0处理 | ✅ 测试环境最高P2 | 测试环境不直接影响用户，不应占用P0资源 |
 | ❌ 只看技术指标不看业务 | ✅ 业务影响优先 | 技术上很严重但不影响用户可以降级处理 |
-| ❌ 一成不变的分级标准 | ✅ 考虑时间因素 | 同样故障，高峰期和半夜3点的分级应该不同 |
+| ❌ 一成不变的分级标准 | ✅ 考虑时间因素 | 同样问题，高峰期和半夜3点的分级应该不同 |
 | ❌ 分级后不能改变 | ✅ 动态调整分级 | 发现影响扩大应及时升级，影响缩小也可降级 |
 | ❌ 分级由开发人员决定 | ✅ On-Call SRE决定 | 需要有经验的人快速判断，避免争论延误 |
 | ❌ 有争议就选高等级 | ✅ 按标准客观评估 | 分级过度导致"狼来了"效应 |
@@ -1355,7 +1355,7 @@ echo "  - 时间加权: 1.5x"
 echo "  - 最终分数: $WEIGHTED_SCORE"
 echo ""
 
-echo "🚨 **评估结论: P0 (致命故障)**"
+echo "🚨 **评估结论: P0 (致命问题)**"
 echo ""
 echo "📋 响应要求:"
 echo "  - 响应时间: 立即 (5分钟内)"
@@ -1372,7 +1372,7 @@ echo "  - 预计损失: \$$TOTAL_LOSS/小时 × 持续时长"
 |------|----------|------|
 | ❌ 只看当前影响，不看趋势 | ✅ 评估影响扩散速度 | 影响快速扩大应提前升级 |
 | ❌ 只评估技术指标 | ✅ 多维度综合评估 | 必须同时考虑用户、财务、技术、合规 |
-| ❌ 忽略时间因素 | ✅ 考虑时间敏感性 | 同样故障在高峰期和半夜3点影响差异巨大 |
+| ❌ 忽略时间因素 | ✅ 考虑时间敏感性 | 同样问题在高峰期和半夜3点影响差异巨大 |
 | ❌ 财务损失只算直接收入 | ✅ 包含间接成本 | 客服成本、补偿成本、品牌损失都要考虑 |
 | ❌ 评估完就结束 | ✅ 持续重新评估 | 事故进展中影响可能变化，需动态调整 |
 | ❌ 主观臆断 | ✅ 基于数据和公式 | 使用量化指标，减少主观判断 |
@@ -1389,8 +1389,8 @@ echo "  - 预计损失: \$$TOTAL_LOSS/小时 × 持续时长"
 #!/bin/bash
 # P0 事故应急响应标准流程（15分钟黄金窗口期）
 
-# ========== 第一步：立即确认故障（0-2分钟）==========
-echo "=== 步骤 1: 快速故障确认 ==="
+# ========== 第一步：立即确认问题（0-2分钟）==========
+echo "=== 步骤 1: 快速问题确认 ==="
 
 # 检查 API Server 健康状态
 kubectl get --raw='/healthz' || echo "API Server 不可用"
@@ -1446,7 +1446,7 @@ kubectl delete pod test-pod
 # ========== 第四步：执行应急恢复（10-15分钟）==========
 echo "=== 步骤 4: 执行应急恢复措施 ==="
 
-# 根据故障类型执行对应的应急手册
+# 根据问题类型执行对应的应急手册
 # 示例：API Server 重启
 # systemctl restart kube-apiserver
 
@@ -1544,10 +1544,10 @@ goldenThirtyMinutes:
         description: "回滚最近变更"
         time: "5-10分钟"
         risk: "low"
-        适用场景: "变更导致的故障"
+        适用场景: "变更导致的问题"
         
       quick_restart:
-        description: "重启故障组件"
+        description: "重启问题组件"
         time: "3-5分钟"
         risk: "medium"
         适用场景: "组件hang或内存泄漏"
@@ -1556,7 +1556,7 @@ goldenThirtyMinutes:
         description: "流量切换到备用系统"
         time: "5-10分钟"
         risk: "low"
-        适用场景: "单区域故障"
+        适用场景: "单区域问题"
         
       emergency_scale:
         description: "紧急扩容"
@@ -1612,13 +1612,13 @@ echo "  → 异常Pod数: $FAILED_PODS"
 echo "[00:03] 评估影响范围..."
 if [ $UNHEALTHY_NODES -gt 10 ] || [ $FAILED_PODS -gt 100 ]; then
   SEVERITY="P0"
-  echo "  → 判定等级: P0 (致命故障)"
+  echo "  → 判定等级: P0 (致命问题)"
 elif [ $UNHEALTHY_NODES -gt 3 ] || [ $FAILED_PODS -gt 20 ]; then
   SEVERITY="P1"
-  echo "  → 判定等级: P1 (严重故障)"
+  echo "  → 判定等级: P1 (严重问题)"
 else
   SEVERITY="P2"
-  echo "  → 判定等级: P2 (一般故障)"
+  echo "  → 判定等级: P2 (一般问题)"
 fi
 
 PHASE1_TIME=$(($(date +%s) - START_TIME))
@@ -1941,7 +1941,7 @@ stopBleedingStrategies:
     适用场景:
       - "数据损坏"
       - "etcd数据不一致"
-      - "存储卷故障"
+      - "存储卷问题"
     commands:
       - "etcdctl snapshot restore"
       - "kubectl apply -f pv-backup.yaml"
@@ -2003,11 +2003,11 @@ class StopBleedingDecisionEngine:
                 "confidence": 0.80
             })
             
-        # 规则4: 区域故障 → 流量转移
+        # 规则4: 区域问题 → 流量转移
         if "zone failure" in incident_context.get("symptoms", ""):
             recommended_strategies.append({
                 "strategy": "traffic_diversion",
-                "reason": "区域故障，切换到备用区域",
+                "reason": "区域问题，切换到备用区域",
                 "confidence": 0.90
             })
             
@@ -2232,7 +2232,7 @@ decisionMatrix:
 warRoomProtocol:
   meeting-setup:
     platform: "Zoom/Teams 专用应急会议室"
-    duration: "持续到故障解决"
+    duration: "持续到问题解决"
     recording: "必须录制，用于事后复盘"
     
   communication-rules:
@@ -2257,13 +2257,13 @@ warRoomProtocol:
 
 ## 5. 通用应急手册
 
-> **🔰 初学者导读**: Runbook是预先编写的"应急操作手册"——出了某种故障，按照手册一步步操作即可。就像飞行员的"紧急情况检查单"，不依赖个人记忆和经验。
+> **🔰 初学者导读**: Runbook是预先编写的"应急操作手册"——出了某种问题，按照手册一步步操作即可。就像飞行员的"紧急情况检查单"，不依赖个人记忆和经验。
 
-### 5.1 控制平面故障应急手册
+### 5.1 控制平面问题应急手册
 
 #### Runbook: API Server 不可用
 
-**故障现象**
+**问题现象**
 ```bash
 # kubectl 命令失败
 $ kubectl get nodes
@@ -2325,9 +2325,9 @@ kubectl run test-nginx --image=nginx --restart=Never
 kubectl delete pod test-nginx
 ```
 
-#### Runbook: etcd 集群故障
+#### Runbook: etcd 集群问题
 
-**故障现象**
+**问题现象**
 ```bash
 # etcd 健康检查失败
 ETCDCTL_API=3 etcdctl endpoint health
@@ -2356,7 +2356,7 @@ done
 **恢复步骤**
 ```bash
 # 场景1: 单个成员失败（3节点中1个失败）
-# 移除故障成员
+# 移除问题成员
 ETCDCTL_API=3 etcdctl member remove <member-id>
 # 添加新成员
 ETCDCTL_API=3 etcdctl member add etcd-3 --peer-urls=https://192.168.1.13:2380
@@ -2380,14 +2380,14 @@ etcdctl defrag --command-timeout=30s
 etcdctl compact $(etcdctl endpoint status --write-out="json" | jq -r '.[0].Status.raftIndex')
 ```
 
-### 5.2 工作负载故障应急手册
+### 5.2 工作负载问题应急手册
 
 #### Runbook: Pod 无法启动
 
 **快速诊断脚本**
 ```bash
 #!/bin/bash
-# pod-troubleshooting.sh - Pod 故障快速诊断工具
+# pod-troubleshooting.sh - Pod 问题快速诊断工具
 
 NAMESPACE=${1:-default}
 POD_NAME=${2}
@@ -2452,11 +2452,11 @@ kubectl scale deployment cluster-autoscaler --replicas=1
 
 ## 6. 特定场景 Runbook
 
-> **🔰 初学者导读**: 不同故障场景需要不同的排查和修复步骤。这里按照K8s常见故障分类提供专用手册：节点故障、网络故障、存储故障、控制平面故障等。
+> **🔰 初学者导读**: 不同问题场景需要不同的排查和修复步骤。这里按照K8s常见问题分类提供专用手册：节点问题、网络问题、存储问题、控制平面问题等。
 
-### 6.1 网络故障应急手册
+### 6.1 网络问题应急手册
 
-**故障类型：Service 无法访问**
+**问题类型：Service 无法访问**
 
 ```bash
 #!/bin/bash
@@ -2492,9 +2492,9 @@ kubectl exec dnsutils -- nslookup $SERVICE_NAME.$NAMESPACE.svc.cluster.local
 kubectl delete pod dnsutils
 ```
 
-### 6.2 存储故障应急手册
+### 6.2 存储问题应急手册
 
-**故障类型：PVC Pending**
+**问题类型：PVC Pending**
 
 ```bash
 #!/bin/bash
@@ -2564,7 +2564,7 @@ EOF
 | 时间 | 事件 | 责任人 | 备注 |
 |------|------|--------|------|
 | 14:32 | Prometheus 告警：API Server 不可用 | 自动告警 | - |
-| 14:35 | SRE 确认故障，启动 P0 响应 | Alice | - |
+| 14:35 | SRE 确认问题，启动 P0 响应 | Alice | - |
 | 14:40 | 启动 War Room，通知管理层 | Bob | - |
 | 14:50 | 诊断定位：etcd 磁盘空间不足 | Charlie | - |
 | 15:10 | 扩容 etcd 磁盘，重启服务 | Alice | - |
@@ -2993,7 +2993,7 @@ fiveWhysFramework:
   how_to_identify_root_cause:
     - "到达根因的标志: 再问Why，答案是'因为我们的流程/系统设计如此'"
     - "根因通常是: 流程缺失、配置错误、监控盲区、设计缺陷"
-    - "不是根因: 某个人的失误、硬件故障（除非没有冗余）"
+    - "不是根因: 某个人的失误、硬件问题（除非没有冗余）"
     
   common_patterns:
     configuration_error:
@@ -3065,7 +3065,7 @@ class FiveWhysAnalyzer:
         """生成分析报告"""
         report = []
         report.append("## 5 Whys 根因分析\n")
-        report.append(f"**故障现象**: {self.symptom}\n")
+        report.append(f"**问题现象**: {self.symptom}\n")
         
         for item in self.why_chain:
             report.append(f"\n### Why {item['level']}: {item['question']}")
@@ -3128,7 +3128,7 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 echo ""
 
 # ========== 案例: Pod频繁OOMKilled ==========
-echo "📋 故障现象: 生产环境Pod频繁OOMKilled，每小时重启10+次"
+echo "📋 问题现象: 生产环境Pod频繁OOMKilled，每小时重启10+次"
 echo ""
 
 # Why 1
@@ -3216,7 +3216,7 @@ echo "结论: 两个根因都要改进！"
 | ❌ 第一个Why就停止 | ✅ 至少问到3-5层 | "因为服务器宕机"不是根因，要追问为什么会宕机 |
 | ❌ 把"人的失误"当根因 | ✅ 追问系统为何允许失误 | "工程师误删"不是根因，"删除命令无确认"才是 |
 | ❌ 每层Why都是猜测 | ✅ 基于事实和数据 | 每个答案应该有日志、监控数据支撑 |
-| ❌ 只分析主要分支 | ✅ 多分支都要分析 | 一个故障可能有多个根因 |
+| ❌ 只分析主要分支 | ✅ 多分支都要分析 | 一个问题可能有多个根因 |
 | ❌ 到了根因继续问 | ✅ 识别根因后停止 | 过度分析没有意义 |
 | ❌ 根因指向个人 | ✅ 根因指向系统 | 如果根因是"某人不够细心"，说明还没问到真正的根因 |
 
@@ -3252,7 +3252,7 @@ incidentAnalytics:
       percentage: 25%
       trend: "下降 ⬇️"
       
-    - category: "依赖故障"
+    - category: "依赖问题"
       percentage: 20%
       trend: "持平 ➡️"
       
@@ -3272,7 +3272,7 @@ incidentAnalytics:
 | **配置错误** | GitOps 审批流程 | Policy-as-Code 校验 | 80% | P0 |
 | **容量不足** | 容量规划仪表板 | 自动扩缩容 | 90% | P0 |
 | **证书过期** | 证书监控告警 | 自动续期 | 95% | P0 |
-| **依赖故障** | 依赖健康检查 | 熔断降级 | 70% | P1 |
+| **依赖问题** | 依赖健康检查 | 熔断降级 | 70% | P1 |
 | **版本兼容性** | CI/CD 兼容性测试 | 金丝雀发布 | 60% | P1 |
 | **人为误操作** | 操作二次确认 | RBAC 最小权限 | 50% | P2 |
 

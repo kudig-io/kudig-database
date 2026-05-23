@@ -45,7 +45,7 @@ created: "2026-05-23"
 
 ```
 Litmus 架构:
-├── ChaosExperiment: 定义实验（故障类型、参数）
+├── ChaosExperiment: 定义实验（问题类型、参数）
 ├── ChaosEngine: 将实验绑定到应用
 ├── ChaosResult: 实验结果
 └── ChaosCenter: 控制平面（Web UI + API）

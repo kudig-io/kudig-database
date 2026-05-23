@@ -5,6 +5,7 @@ tags: ["core-concept", "domain-04-storage-data", "visibility/public"]
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+status: reviewed
 ---
 
 # PersistentVolumeClaim

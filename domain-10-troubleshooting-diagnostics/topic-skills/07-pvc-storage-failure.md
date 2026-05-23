@@ -69,14 +69,14 @@ created: "2026-05-23"
 
 ## 1. 概述
 
-PVC/PV/CSI 存储故障是 [[Kubernetes|Kubernetes]] 集群中**影响数据持久化和有状态服务**的关键故障类型。当存储子系统出现问题时，Pod 无法启动（卡在 ContainerCreating）、数据无法持久化、甚至可能导致数据丢失。对于 [[StatefulSet|StatefulSet]]、数据库等有状态工作负载，存储故障往往意味着业务完全中断。
+PVC/PV/CSI 存储问题是 [[Kubernetes|Kubernetes]] 集群中**影响数据持久化和有状态服务**的关键问题类型。当存储子系统出现问题时，Pod 无法启动（卡在 ContainerCreating）、数据无法持久化、甚至可能导致数据丢失。对于 [[StatefulSet|StatefulSet]]、数据库等有状态工作负载，存储问题往往意味着业务完全中断。
 
 ### 典型触发场景
 
 1. **PVC 长期 Pending**: StorageClass 不存在、CSI Provisioner 异常、存储后端容量不足，导致 PVC 无法绑定 PV
 2. **Volume 挂载失败**: CSI Node Driver 异常、Volume Attach 超时、文件系统损坏，Pod 卡在 ContainerCreating
 3. **存储扩容失败**: Volume 扩容不支持、文件系统扩容失败、云厂商 API 限流，导致应用因空间不足而异常
-4. **CSI Driver 故障**: CSI Controller/Node Pod 异常、RBAC 权限不足、存储后端连接失败
+4. **CSI Driver 问题**: CSI Controller/Node Pod 异常、RBAC 权限不足、存储后端连接失败
 5. **Access Mode 冲突**: 多节点同时挂载 RWO Volume、错误的 Access Mode 配置导致调度失败
 
 ### 前置条件
@@ -92,7 +92,7 @@ PVC/PV/CSI 存储故障是 [[Kubernetes|Kubernetes]] 集群中**影响数据持�
   - `jq` >= 1.6（可选）
   - SSH 访问（用于节点级诊断）
 
-> ⚠️ **重要**: 存储故障涉及数据安全，修复操作需格外谨慎。P0 级别的数据丢失风险场景需立即升级到高级 SRE。
+> ⚠️ **重要**: 存储问题涉及数据安全，修复操作需格外谨慎。P0 级别的数据丢失风险场景需立即升级到高级 SRE。
 
 ---
 
@@ -111,7 +111,7 @@ PVC/PV/CSI 存储故障是 [[Kubernetes|Kubernetes]] 集群中**影响数据持�
 | SP-07 | PV 状态 Released 无法回收 / PV stuck in Released status | `kubectl get pv \| grep Released` 持续显示 Released 状态 | 0.80 | ReclaimPolicy 为 Retain 且管理员有意保留数据；正在执行数据备份后的清理操作 |
 | SP-08 | 多节点同时挂载 RWO Volume 失败 / Multi-attach error for RWO volume | Pod 事件显示 `Multi-Attach error` 或调度失败原因包含 `volume node affinity conflict` | 0.95 | 使用了 RWX Volume 但配置错误；正在执行 Pod 迁移期间的短暂重叠 |
 | SP-09 | 存储空间不足 / Storage disk full | Pod 日志显示 `No space left on device` 或节点 DiskPressure | 0.90 | 容器 ephemeral storage 耗尽（非 PVC 问题）；临时文件导致的短暂满盘已自动清理 |
-| SP-10 | Volume detach 卡住 / Volume detach timeout | `kubectl get volumeattachment` 显示 Volume 长时间未释放；节点删除后 Volume 仍处于 Attached 状态 | 0.85 | 节点故障导致的正常 force-detach 流程（需等待 6 分钟超时）；CSI Driver 正在处理中 |
+| SP-10 | Volume detach 卡住 / Volume detach timeout | `kubectl get volumeattachment` 显示 Volume 长时间未释放；节点删除后 Volume 仍处于 Attached 状态 | 0.85 | 节点问题导致的正常 force-detach 流程（需等待 6 分钟超时）；CSI Driver 正在处理中 |
 | SP-11 | StorageClass 不存在或 Provisioner 不可用 / StorageClass not found | PVC 事件显示 `storageclass.storage.k8s.io "xxx" not found` 或 `no persistent volumes available` | 0.95 | PVC 指定了静态绑定的 PV 而非动态 Provisioning；集群正在初始化 StorageClass |
 
 ### 2.2 工单关键词映射
@@ -146,9 +146,9 @@ PVC/PV/CSI 存储故障是 [[Kubernetes|Kubernetes]] 集群中**影响数据持�
 |---------|---------|------|
 | PVC 状态 Bound，但 Pod 因其他原因 Pending | SKILL-POD-002 | 非存储问题，可能是调度约束、资源不足等 |
 | Node DiskPressure 导致 Pod 被驱逐 | SKILL-NODE-001 | 节点级磁盘压力，非 PVC 存储问题 |
-| Pod 内应用无法读写文件（权限问题） | 应用层问题 | SecurityContext 或应用配置问题，非存储子系统故障 |
+| Pod 内应用无法读写文件（权限问题） | 应用层问题 | SecurityContext 或应用配置问题，非存储子系统问题 |
 | 使用 emptyDir/hostPath 的存储问题 | SKILL-NODE-001 | 非 CSI/PVC 相关，属于节点本地存储 |
-| 存储后端本身故障（如 Ceph OSD down） | 存储团队 | 超出 Kubernetes 层面，需存储专家介入 |
+| 存储后端本身问题（如 Ceph OSD down） | 存储团队 | 超出 Kubernetes 层面，需存储专家介入 |
 | 新建集群的 StorageClass 配置问题 | 集群初始化 | 属于集群安装配置范畴 |
 
 ---
@@ -157,7 +157,7 @@ PVC/PV/CSI 存储故障是 [[Kubernetes|Kubernetes]] 集群中**影响数据持�
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径：
+按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 统计异常 PVC 数量和分布
 ```bash
@@ -167,7 +167,7 @@ kubectl get pvc -A --no-headers | grep -v "Bound" | wc -l && \
 kubectl get pvc -A | grep -v "Bound"
 ```
 > **判断规则**:
-> - Pending PVC 数量 > 10 且涉及多个 namespace → **P0**（大规模存储故障）
+> - Pending PVC 数量 > 10 且涉及多个 namespace → **P0**（大规模存储问题）
 > - Pending PVC 涉及生产 namespace（如 production, prod, default）→ **P1**
 > - Pending PVC 仅在测试/开发环境 → **P2**
 
@@ -210,9 +210,9 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
 
 | 条件 | 级别 | 说明 | SLA 要求 |
 |------|------|------|---------|
-| CSI Controller 完全不可用 **或** 生产数据卷数据丢失风险 **或** >50% PVC Pending | **P0** | 存储子系统全局故障，影响所有新建存储和可能的数据丢失 | 立即响应，15min 内确认根因 |
-| 多个 StatefulSet 存储挂载失败 **或** CSI Node 部分节点故障 | **P1** | 部分有状态服务不可用，影响业务连续性 | 15min 内响应，30min 内修复 |
-| 单个 PVC Pending/挂载失败 **或** 存储扩容失败但当前容量可用 | **P2** | 单点故障，影响单个应用但不影响整体集群 | 30min 内响应，2h 内修复 |
+| CSI Controller 完全不可用 **或** 生产数据卷数据丢失风险 **或** >50% PVC Pending | **P0** | 存储子系统全局问题，影响所有新建存储和可能的数据丢失 | 立即响应，15min 内确认根因 |
+| 多个 StatefulSet 存储挂载失败 **或** CSI Node 部分节点问题 | **P1** | 部分有状态服务不可用，影响业务连续性 | 15min 内响应，30min 内修复 |
+| 单个 PVC Pending/挂载失败 **或** 存储扩容失败但当前容量可用 | **P2** | 单点问题，影响单个应用但不影响整体集群 | 30min 内响应，2h 内修复 |
 | PV 回收问题 **或** 非生产环境存储问题 | **P3** | 非紧急问题，不影响当前业务运行 | 4h 内处理 |
 
 ### 3.3 立即升级触发条件
@@ -220,9 +220,9 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
 以下任一条件满足时，**跳过诊断流程，立即升级至人工 SRE / 值班工程师**：
 
 - **数据丢失风险**: PV 状态 Failed 且 ReclaimPolicy=Delete，或存储后端报告数据损坏
-- **CSI 全局故障**: 所有 CSI Controller Pod 均不可用，无法执行任何存储操作
+- **CSI 全局问题**: 所有 CSI Controller Pod 均不可用，无法执行任何存储操作
 - **存储后端不可达**: 存储后端（如 Ceph、云盘服务）完全不可访问
-- **级联故障**: PVC Pending 数量在 5 分钟内持续增加
+- **级联问题**: PVC Pending 数量在 5 分钟内持续增加
 - **生产数据库受影响**: MySQL/PostgreSQL/MongoDB 等核心数据库的存储卷不可用
 
 > **升级消息模板**: 参见 Section 8.2
@@ -388,7 +388,7 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
 **Step D2.2**: 检查 kubelet Volume 相关日志
 - **命令**:
   ```bash
-  # 在故障节点上检查 kubelet 日志
+  # 在问题节点上检查 kubelet 日志
   ssh <node-ip> "journalctl -u kubelet --since '30 minutes ago' --no-pager | grep -iE 'volume|mount|attach|csi' | tail -100"
   ```
 - **超时**: 15s
@@ -1167,7 +1167,7 @@ kubectl get volumeattachment -o json | jq '.items[] | select(.spec.source.persis
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 
 - [ ] 所有目标 PVC 状态为 Bound，且持续 Bound 超过 5 分钟
 - [ ] 使用该 PVC 的 Pod 状态为 Running
@@ -1211,16 +1211,16 @@ kubectl exec -n <namespace> <pod-name> -- rm /data/test-file
 | **诊断超时** | 诊断工作流执行超过 **15 分钟**未能确认根因 | Phase 2 结束后仍无明确根因 |
 | **修复失败** | 同一修复操作执行 **2 次**仍未通过后置验证 | REM-xxx 执行后验证失败 |
 | **数据丢失风险** | 发现 ReclaimPolicy=Delete 的 PV 状态异常 | 任何诊断步骤发现此情况 |
-| **CSI 全局故障** | 所有 CSI Controller Pod 不可用 | D1.3 检查发现 |
+| **CSI 全局问题** | 所有 CSI Controller Pod 不可用 | D1.3 检查发现 |
 | **多个 StatefulSet 受影响** | 多个有状态服务的存储卷不可用 | T3 评估发现 |
 | **未知根因** | 完成 Phase 1-3 但无法匹配任何已知根因 | 所有诊断步骤均无明确异常 |
 
 ### 8.2 升级消息模板
 
 ```
-【{severity}】PVC/PV/CSI 存储故障 - {cluster_name}
+【{severity}】PVC/PV/CSI 存储问题 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: {affected_pvc_count} 个 PVC 状态异常，{affected_pod_count} 个 Pod 无法正常运行
+- 问题概述: {affected_pvc_count} 个 PVC 状态异常，{affected_pod_count} 个 Pod 无法正常运行
 - 存储类型: {storage_class} (Provisioner: {provisioner})
 - 影响范围:
   - 受影响 Namespace: {affected_namespaces}
@@ -1384,10 +1384,10 @@ gcloud compute disks describe <disk-name> --zone <zone>
 
 | 误诊场景 | 表面现象 | 实际根因 | 避免方法 |
 |---------|---------|---------|---------|
-| **将 StorageClass 缺失误判为 CSI 故障** | PVC Pending，查看 CSI Pod 全部 Running | PVC 指定了不存在的 StorageClass，或未指定 SC 且无默认 SC | 先执行 D1.2 检查 StorageClass，确认 PVC 指定的 SC 存在且有 default |
+| **将 StorageClass 缺失误判为 CSI 问题** | PVC Pending，查看 CSI Pod 全部 Running | PVC 指定了不存在的 StorageClass，或未指定 SC 且无默认 SC | 先执行 D1.2 检查 StorageClass，确认 PVC 指定的 SC 存在且有 default |
 | **将 Node Affinity 约束误判为容量不足** | PVC Pending，事件显示 "no persistent volumes available" | PV 的 nodeAffinity 与 Pod 调度约束冲突，不是没有容量 | 检查 PV 的 `spec.nodeAffinity`，确认 Pod 可以调度到 PV 绑定的节点 |
 | **将 WaitForFirstConsumer 误判为 Provisioning 失败** | PVC 长期 Pending，事件显示 "waiting for first consumer" | 这是正常行为，StorageClass 配置了延迟绑定 | 检查是否有 Pod 引用该 PVC；如果有 Pod，再排查为什么 Pod 未被调度 |
-| **将 Access Mode 冲突误判为 CSI Node 故障** | Pod 挂载失败，错误 "volume is already exclusively attached" | RWO Volume 尝试挂载到多个节点，不是 CSI 问题 | 检查 VolumeAttachment 和 Pod 分布，确认 Access Mode 与使用方式匹配 |
+| **将 Access Mode 冲突误判为 CSI Node 问题** | Pod 挂载失败，错误 "volume is already exclusively attached" | RWO Volume 尝试挂载到多个节点，不是 CSI 问题 | 检查 VolumeAttachment 和 Pod 分布，确认 Access Mode 与使用方式匹配 |
 | **将云厂商 API 限流误判为 CSI Driver bug** | Provisioning 偶尔失败，CSI 日志显示错误 | 云厂商 API 触发限流，非 CSI 代码问题 | 检查错误信息是否包含 throttle/rate limit；分散 PVC 创建时间 |
 | **将 fsType 不匹配误判为文件系统损坏** | 挂载失败，错误 "wrong fs type" | PV 指定的 fsType 与 Volume 实际格式化的 fs 不一致 | 比对 PV spec 中的 fsType 和 Volume 实际的文件系统类型 |
 

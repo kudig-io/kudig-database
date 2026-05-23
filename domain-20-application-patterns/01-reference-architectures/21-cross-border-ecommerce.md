@@ -722,7 +722,7 @@ spec:
 | 大数据 | Spark/Flink 自建 | **MaxCompute + Flink** | 跨境数据合规分析 |
 | 可观测性 | Prometheus + Grafana | **ARMS + SLS** | 全链路追踪、前端监控 |
 | 安全 | Vault + Falco | **云盾 + WAF + KMS** | 等保合规、DDoS 防护 |
-| 全球流量 | Route53 | **Global DNS + GTM** | 智能解析、故障自动切换 |
+| 全球流量 | Route53 | **Global DNS + GTM** | 智能解析、问题自动切换 |
 | 网络互联 | IPSec VPN | **云企业网 CEN** | 全球私网互联、低延迟 |
 
 ---
@@ -738,7 +738,7 @@ spec:
 - [ ] 支付渠道沙箱环境端到端测试通过
 - [ ] 海关申报接口联调通过（测试环境）
 - [ ] GDPR 数据分类标记完成
-- [ ] 灾备演练：单 Region 故障自动切换验证
+- [ ] 灾备演练：单 Region 问题自动切换验证
 
 #<!-- chunk: 8.2 日常运维 -->## 8.2 日常运维
 

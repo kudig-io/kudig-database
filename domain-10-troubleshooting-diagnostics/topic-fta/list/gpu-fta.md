@@ -42,7 +42,7 @@ created: "2026-05-23"
 
 ## 适用范围与说明
 - **目标**：覆盖 GPU 设备不可用、调度失败、驱动不兼容、运行时异常与资源碎片化的关键成因与路径。
-- **范围**：Device Plugin、驱动/CUDA/cuDNN 兼容性、容器运行时（nvidia-container-runtime）、调度与拓扑、配额与资源管理、节点与硬件故障。
+- **范围**：Device Plugin、驱动/CUDA/cuDNN 兼容性、容器运行时（nvidia-container-runtime）、调度与拓扑、配额与资源管理、节点与硬件问题。
 - **符号**：
   - **OR 门**：任一子事件成立即可触发父事件
   - **AND 门**：所有子事件同时成立才触发父事件
@@ -63,7 +63,7 @@ flowchart TD
   OR0 --> CAT_SCHED["C. 调度与拓扑异常"]
   OR0 --> CAT_RT["D. 容器运行时/GPU 运行时异常"]
   OR0 --> CAT_RES["E. 资源配额与碎片化"]
-  OR0 --> CAT_HW["F. 节点/硬件故障"]
+  OR0 --> CAT_HW["F. 节点/硬件问题"]
 
   %% ======== A. Device Plugin ========
   A_OR{{OR}}
@@ -123,7 +123,7 @@ flowchart TD
   %% ======== F. 节点/硬件 ========
   F_OR{{OR}}
   CAT_HW --> F_OR
-  F_OR --> F1["F1. GPU 硬件故障<br/>ECC 错误 / Xid 错误"]
+  F_OR --> F1["F1. GPU 硬件问题<br/>ECC 错误 / Xid 错误"]
   F_OR --> F2["F2. GPU 温度过高<br/>降频/节流"]
   F_OR --> F3["F3. PCIe 链路异常<br/>带宽降级"]
   F_OR --> F4["F4. GPU 挂死<br/>需硬件重置"]

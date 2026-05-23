@@ -900,7 +900,7 @@ async def rate_limit_middleware(request: Request, call_next):
 #<!-- chunk: 7.1 常见故障处理 -->## 7.1 常见故障处理
 
 ```
-故障1: Agent API 响应时间突增（>10s P95）
+问题1: Agent API 响应时间突增（>10s P95）
 
 诊断步骤:
   1. kubectl top pods -n ai-agents
@@ -919,7 +919,7 @@ async def rate_limit_middleware(request: Request, call_next):
     curl -X POST http://k8s-agent-api.ai-agents/v1/agent/run \
     -d '{"task": "简单测试"}'
 
-故障2: Agent Pod OOMKilled
+问题2: Agent Pod OOMKilled
 
 诊断:
   1. kubectl describe pod <pod-name> -n ai-agents | grep -A5 OOM
@@ -932,7 +932,7 @@ async def rate_limit_middleware(request: Request, call_next):
      MAX_INPUT_TOKENS=10000 (环境变量)
   3. 添加内存告警: agent_memory_usage > 1.5Gi
 
-故障3: vLLM OOM（GPU 内存不足）
+问题3: vLLM OOM（GPU 内存不足）
 
 诊断:
   1. kubectl exec -n ai-serving <vllm-pod> -- nvidia-smi

@@ -94,7 +94,7 @@ related_topics:
 - 掌握核心组件（apiserver / etcd / controller-manager / scheduler）状态检查方法
 - 能够排查 kube-system 命名空间中关键组件异常
 - 了解 ACK 集群组件升级与自定义参数调整流程
-- 掌握组件级故障的应急响应和根因分析思路
+- 掌握组件级问题的应急响应和根因分析思路
 
 ---
 
@@ -352,7 +352,7 @@ aliyun cs GET /clusters/<cluster_id>/components --body '{"name":"coredns"}'
 
 ```bash
 # 场景 1: CoreDNS Pod 异常
-# 模拟 CoreDNS 故障
+# 模拟 CoreDNS 问题
 kubectl scale deployment coredns -n kube-system --replicas=0
 
 # 观察影响

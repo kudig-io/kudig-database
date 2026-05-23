@@ -724,7 +724,7 @@ disaster_recovery:
     rpo: "5 seconds"
     auto_failover: false
     procedure:
-      - "验证主机房故障不可恢复"
+      - "验证主机房问题不可恢复"
       - "提升 DR 机房 replica 为主"
       - "更新 DNS/VIP 指向新主"
       - "通知应用层刷新连接"
@@ -1164,9 +1164,9 @@ CREATE TABLE access_logs_default PARTITION OF access_logs DEFAULT;
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见故障速查表 -->## 常见故障速查表
+#<!-- chunk: 常见问题速查表 -->## 常见问题速查表
 
-| 故障现象 | 可能原因 | 排查方法 | 解决方案 |
+| 问题现象 | 可能原因 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
 | `FATAL: sorry, too many clients already` | 连接数耗尽 | `SELECT count(*) FROM pg_stat_activity;` | 增加 `max_connections`，配置 PgBouncer |
 | `ERROR: deadlock detected` | 死锁 | 查看 `log_lock_waits` 日志 | 调整事务访问顺序 |

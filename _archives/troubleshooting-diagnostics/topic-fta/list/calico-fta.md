@@ -73,7 +73,7 @@ flowchart TD
   OR0 --> CAT_CNI["B. Calico CNI 配置加载失败"]
   OR0 --> CAT_FELIX["C. Felix/Bird BGP 会话异常"]
   OR0 --> CAT_NETPOL["D. NetworkPolicy 不生效"]
-  OR0 --> CAT_TUNNEL["E. IPIP/VXLAN 隧道故障"]
+  OR0 --> CAT_TUNNEL["E. IPIP/VXLAN 隧道问题"]
   OR0 --> CAT_IPAM["F. IPAM 地址耗尽/冲突"]
   OR0 --> CAT_TYPHA["G. Felix-Typha 通信异常"]
 
@@ -143,7 +143,7 @@ flowchart TD
 
 ### A1. Typha/Confd 配置错误
 
-**故障现象**: calico-node pod 处于 CrashLoopBackOff 或 Init:CrashLoopBackOff
+**问题现象**: calico-node pod 处于 CrashLoopBackOff 或 Init:CrashLoopBackOff
 
 **可能原因**：
 - Calico manifest 版本与 K8s 版本不兼容（v3.24+ 支持 K8s 1.28+）
@@ -165,7 +165,7 @@ kubectl logs -n kube-system <calico-node-pod> --tail=100
 
 ### A2. CNI 二进制文件未找到
 
-**故障现象**: kubelet 日志显示 `stat /opt/cni/bin/calico: no such file or directory`
+**问题现象**: kubelet 日志显示 `stat /opt/cni/bin/calico: no such file or directory`
 
 **排查步骤**：
 ```bash
@@ -183,7 +183,7 @@ ls /etc/cni/net.d/
 
 ### A3. 容器镜像拉取失败
 
-**故障现象**: calico-node pod 卡在 ImagePullBackOff
+**问题现象**: calico-node pod 卡在 ImagePullBackOff
 
 **排查步骤**：
 ```bash
@@ -202,7 +202,7 @@ crictl pull calico/kube-controllers:v3.24.0
 
 ### B1. CNI config 顺序错误
 
-**故障现象**: kubelet 日志显示使用了错误的 CNI 插件（flannel 而非 calico）
+**问题现象**: kubelet 日志显示使用了错误的 CNI 插件（flannel 而非 calico）
 
 **排查步骤**：
 ```bash
@@ -219,7 +219,7 @@ systemctl restart kubelet
 
 ### B2. IPAM 配置错误
 
-**故障现象**: Pod 分配到的 IP 不在预期的 CIDR 范围内，或分配失败
+**问题现象**: Pod 分配到的 IP 不在预期的 CIDR 范围内，或分配失败
 
 **排查步骤**：
 ```bash
@@ -240,7 +240,7 @@ calicoctl ipam show --show-blocks
 
 ### C1. Felix 健康检查失败
 
-**故障现象**: `kubectl exec <calico-node-pod> -- calico-node node-status` 报错
+**问题现象**: `kubectl exec <calico-node-pod> -- calico-node node-status` 报错
 
 **排查步骤**：
 ```bash
@@ -257,7 +257,7 @@ kubectl exec -n kube-system <calico-node-pod> -- kill -HUP 1  # 重新加载配�
 
 ### C2. Bird BGP 会话建立失败
 
-**故障现象**: `birdcl show protocols` 显示 BGP 会话 down
+**问题现象**: `birdcl show protocols` 显示 BGP 会话 down
 
 **排查步骤**：
 ```bash
@@ -275,7 +275,7 @@ kubectl exec -n kube-system <calico-node-pod> -- birdc show log
 
 ### C3. BGP Route Reflector 配置错误
 
-**故障现象**: 超过 50 节点的全网状 BGP 连接数爆炸，新节点之间无法互通
+**问题现象**: 超过 50 节点的全网状 BGP 连接数爆炸，新节点之间无法互通
 
 **排查步骤**：
 ```bash
@@ -295,7 +295,7 @@ kubectl get bgppeer -o yaml
 
 ### D1. Policy 顺序导致 deny-all 优先
 
-**故障现象**: 配置了 allow 规则但流量仍然被阻止，或配置了 deny-all 后整个命名空间流量中断
+**问题现象**: 配置了 allow 规则但流量仍然被阻止，或配置了 deny-all 后整个命名空间流量中断
 
 **排查步骤**：
 ```bash
@@ -313,7 +313,7 @@ kubectl get profile
 
 ### D2. selector scope 不匹配
 
-**故障现象**: Policy 选择器配置正确但流量未被正确允许/阻止
+**问题现象**: Policy 选择器配置正确但流量未被正确允许/阻止
 
 **排查步骤**：
 ```bash
@@ -330,7 +330,7 @@ calicoctl get workloadendpoint -o yaml | grep -A10 policy
 
 ### D3. HostEndpoint 策略未生效
 
-**故障现象**: 配置了针对 HostEndpoint 的 policy 但不生效
+**问题现象**: 配置了针对 HostEndpoint 的 policy 但不生效
 
 **排查步骤**：
 ```bash
@@ -358,11 +358,11 @@ calicoctl policy ls | grep -i <policy-name>
 
 ---
 
-## E. IPIP/VXLAN 隧道故障
+## E. IPIP/VXLAN 隧道问题
 
 ### E1. IPIP 隧道断裂
 
-**故障现象**: 跨节点 Pod 通信失败，`tcpdump` 显示 IPIP 包但无响应
+**问题现象**: 跨节点 Pod 通信失败，`tcpdump` 显示 IPIP 包但无响应
 
 **排查步骤**：
 ```bash
@@ -380,7 +380,7 @@ kubectl patch felixconfiguration default -p '{"spec":{"vxlanEnabled":true}}'
 
 ### E2. VXLAN 隧道无法建立
 
-**故障现象**: 使用 VXLAN 模式时跨节点 Pod 不通，`calicoctl show wireshark` 无数据
+**问题现象**: 使用 VXLAN 模式时跨节点 Pod 不通，`calicoctl show wireshark` 无数据
 
 **排查步骤**：
 ```bash
@@ -401,7 +401,7 @@ ip neigh show | grep vxlan
 
 ### F1. IP 地址池耗尽
 
-**故障现象**: 新建 Pod 无法分配 IP，`calicoctl ipam show` 显示无可用 IP
+**问题现象**: 新建 Pod 无法分配 IP，`calicoctl ipam show` 显示无可用 IP
 
 **排查步骤**：
 ```bash
@@ -425,7 +425,7 @@ EOF
 
 ### F2. IP 冲突（双鸟现象）
 
-**故障现象**: 两个 Pod 使用相同 IP，互相 ping 不通对方
+**问题现象**: 两个 Pod 使用相同 IP，互相 ping 不通对方
 
 **排查步骤**：
 ```bash
@@ -445,7 +445,7 @@ ip neigh show | grep <ip-address>
 
 ### G1. Typha 连接不稳定
 
-**故障现象**: calico-node pod 日志中频繁出现 "Typha connection reset"
+**问题现象**: calico-node pod 日志中频繁出现 "Typha connection reset"
 
 **排查步骤**：
 ```bash
@@ -463,7 +463,7 @@ kubectl scale deployment calico-typha -n kube-system --replicas=3
 
 ## 附录：关键命令索引
 
-| 故障场景 | 诊断命令 |
+| 问题场景 | 诊断命令 |
 |---------|---------|
 | Calico 状态 | `calicoctl node status` |
 | BGP 会话 | `birdcl show protocols` |

@@ -348,7 +348,7 @@ unavailableReplicas := totalActualReplicas - availableReplicas
 **什么时候大于 0**：
 - 滚动更新期间，新 Pod 还未 Ready
 - Pod 因健康检查失败变成 NotReady
-- 节点故障导致 Pod 不可达
+- 节点问题导致 Pod 不可达
 - Pod 刚创建但 `minReadySeconds` 尚未到期
 
 ---

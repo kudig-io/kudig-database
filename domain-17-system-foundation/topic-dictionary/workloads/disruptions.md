@@ -40,7 +40,7 @@ created: "2026-05-23"
 本页介绍影响 Pod 可用性的中断类型，以及如何通过 Pod Disruption Budget（PDB）等机制来管理自愿中断，帮助应用所有者和集群管理员维护高可用性。
 
 ## 核心概念/原理
-- **非自愿中断（Involuntary Disruptions）**：无法避免的中断，例如硬件故障、节点内核崩溃、节点网络分区、资源不足导致的驱逐等。
+- **非自愿中断（Involuntary Disruptions）**：无法避免的中断，例如硬件问题、节点内核崩溃、节点网络分区、资源不足导致的驱逐等。
 - **自愿中断（Voluntary Disruptions）**：由人或控制器主动发起的中断，例如：
   - 删除 Deployment 或直接删除 Pod
   - 更新 Deployment 的 Pod 模板导致滚动重启
@@ -169,7 +169,7 @@ spec:
 - [ ] `unhealthyPodEvictionPolicy: AlwaysAllow` 已设置，防止 drain 卡死
 - [ ] PDB 选择器与工作负载标签正确匹配
 - [ ] 集群升级前验证所有 PDB 的 `disruptionsAllowed` > 0
-- [ ] 应用副本跨可用区分布，降低单点故障影响
+- [ ] 应用副本跨可用区分布，降低单点问题影响
 - [ ] 运维团队使用 `kubectl drain`（Eviction API）而非 `kubectl delete pod`
 
 ## 命令快速参考

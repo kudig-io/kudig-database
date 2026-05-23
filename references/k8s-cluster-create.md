@@ -358,7 +358,7 @@ func CreateEtcdStaticPodManifestHA(cfg *kubeadmapi.InitConfiguration, endpoints 
 
 #### 概述
 
-高可用（High Availability, HA）是生产环境 Kubernetes 集群的基本要求。单控制面节点的集群存在单点故障风险——一旦控制面节点宕机，集群将无法创建新的 Pod、处理 API 请求或进行调度决策。高可用控制面通过部署多个控制面节点和负载均衡器来消除单点故障，确保集群在部分节点故障时仍能正常提供服务。
+高可用（High Availability, HA）是生产环境 Kubernetes 集群的基本要求。单控制面节点的集群存在单点问题风险——一旦控制面节点宕机，集群将无法创建新的 Pod、处理 API 请求或进行调度决策。高可用控制面通过部署多个控制面节点和负载均衡器来消除单点问题，确保集群在部分节点问题时仍能正常提供服务。
 
 kubeadm 支持两种高可用 etcd 拓扑：
 

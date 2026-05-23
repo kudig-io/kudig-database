@@ -112,7 +112,7 @@ NetworkPolicy 依赖 CNI 插件正确实现策略。但 CNI 插件本身：
 
 - **NetworkPolicy 的一致性测试**：K8s 社区缺乏官方的 NetworkPolicy 一致性测试套件。不同 CNI 对同一策略的实现差异（如 ICMP 处理、连接跟踪超时）没有标准化。是否应该有一个类似 CNI 一致性认证的网络安全认证？
 - **策略即代码的验证**：NetworkPolicy 作为 YAML 可以通过 CI/CD 部署，但策略冲突检测（两个策略互相矛盾）、可达性分析（哪些 Pod 实际可以通信）需要专门工具（如 network-policy-api 的模拟器）。这些工具与 CNI 的绑定程度如何？
-- **CNI 故障时的安全降级**：当 CNI 守护进程故障时，kubelet 仍然可以创建 Pod（使用默认网络配置）。这些 Pod 将完全绕过 NetworkPolicy。如何检测和响应这种安全降级？是否应该有一个独立的策略执行监督层？
+- **CNI 问题时的安全降级**：当 CNI 守护进程问题时，kubelet 仍然可以创建 Pod（使用默认网络配置）。这些 Pod 将完全绕过 NetworkPolicy。如何检测和响应这种安全降级？是否应该有一个独立的策略执行监督层？
 - **eBPF 对策略执行的统一**：Cilium 的 eBPF 实现展示了 L3/L4/L7 策略统一执行的可能性。未来是否所有 CNI 都会转向 eBPF？iptables 在策略数量超过阈值后的性能劣化是否会迫使 Calico 等插件全面 eBPF 化？
 - **NetworkPolicy 与 [[domain-17-system-foundation/topic-dictionary/networking/service-mesh|Service Mesh]] 策略的层级关系**：NetworkPolicy（CNI 层，L3/L4）与 [[entities/istio|Istio]] AuthorizationPolicy（Service Mesh 层，L7）同时存在时，哪个优先？两者的冲突如何检测？当前没有标准工具可以回答"这个请求是否会被允许"的问题
 

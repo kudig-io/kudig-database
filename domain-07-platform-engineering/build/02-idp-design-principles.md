@@ -196,7 +196,7 @@ mindmap
    └── 任何功能不能妥协安全
    
 2. 可靠性 (Reliability)  
-   └── 平台故障比功能缺失危害更大
+   └── 平台问题比功能缺失危害更大
    
 3. 开发者体验 (Developer Experience)
    └── 好用的平台才会被使用
@@ -1623,7 +1623,7 @@ alertmanager_config: |
     receiver: 'platform-team-default'
     
     routes:
-      # P1: 生产故障 → PagerDuty + Slack
+      # P1: 生产问题 → PagerDuty + Slack
       - match:
           severity: critical
           environment: production

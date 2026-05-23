@@ -496,7 +496,7 @@ flowchart TD
           "logs": ["checksum mismatch", "data integrity check failed", "snapshot file corrupted"]
         },
         "remediation": {
-          "manual_steps": ["重新从源端下载备份文件", "启用存储端 server-side 完整性校验", "使用最近的其他备份", "排查存储介质是否有硬件故障"],
+          "manual_steps": ["重新从源端下载备份文件", "启用存储端 server-side 完整性校验", "使用最近的其他备份", "排查存储介质是否有硬件问题"],
           "auto_actions": ["备份完成后自动验证 checksum"]
         },
         "version_notes": ""

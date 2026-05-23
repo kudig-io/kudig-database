@@ -203,7 +203,7 @@ created: "2026-05-23"
 1. **[pod-fta.md](pod-fta.md)** - Pod 是所有工作负载的基础
 2. **[node-fta.md](node-fta.md)** - 节点异常影响范围大
 3. **[apiserver-fta.md](apiserver-fta.md)** - 控制面核心
-4. **[dns-fta.md](dns-fta.md)** - DNS 是最常见的网络故障源
+4. **[dns-fta.md](dns-fta.md)** - DNS 是最常见的网络问题源
 
 ### 日常运维高频 (P1)
 
@@ -225,7 +225,7 @@ created: "2026-05-23"
 
 ## 快速查找
 
-### 按故障现象
+### 按问题现象
 
 | 现象 | 相关 FTA |
 |:---|:---|
@@ -257,7 +257,7 @@ created: "2026-05-23"
 
 ### 人工排查
 
-1. 根据故障现象找到对应 FTA 文件
+1. 根据问题现象找到对应 FTA 文件
 2. 查看 Mermaid 图了解故障树结构
 3. 按 OR/AND 门逻辑逐层排查
 4. 参考底事件的 detection（检测方法）和 remediation（修复步骤）

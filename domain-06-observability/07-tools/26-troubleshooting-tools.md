@@ -20,7 +20,7 @@ audience:
 - 所有工程师
 estimated_read_time: 35min
 intent_queries:
-- 26-troubleshooting-tools常见故障有哪些？
+- 26-troubleshooting-tools常见问题有哪些？
 - 如何排查26-troubleshooting-tools相关问题？
 - 26-troubleshooting-tools的故障处理方法
 trigger_keywords:

@@ -196,7 +196,7 @@ tier: peripheral---
 - 掌握 CoreDNS 插件链机制与自定义配置方法
 - 深入理解 ndots 陷阱与搜索域优化策略
 - 能够部署和调优 NodeLocal DNSCache
-- 掌握 CoreDNS 常见故障的排查方法
+- 掌握 CoreDNS 常见问题的排查方法
 
 **详细章节：**
 
@@ -234,7 +234,7 @@ tier: peripheral---
 - 掌握 Nginx Ingress Controller 的内部架构与工作原理
 - 能够实现高级路由（基于 Header/Cookie/Path 的金丝雀发布和 A/B 测试）
 - 掌握 TLS 证书管理（cert-manager 自动签发与轮转）
-- 能够设计 Ingress 高可用架构并处理生产故障
+- 能够设计 Ingress 高可用架构并处理生产问题
 
 **详细章节：**
 
@@ -385,7 +385,7 @@ tier: peripheral---
 - 理解 Service 四种类型（ClusterIP/NodePort/LoadBalancer/ExternalName）的适用场景
 - 深入理解 kube-proxy iptables/IPVS 模式的工作原理与性能差异
 - 掌握 Headless Service、EndpointSlice、拓扑感知路由等高级特性
-- 能够排查 Service 流量链路上的各类故障
+- 能够排查 Service 流量链路上的各类问题
 - 理解 Service 与 CoreDNS 的协作机制
 
 **详细章节：**
@@ -461,7 +461,7 @@ tier: peripheral---
 - 深入理解 ENI/IPAM 机制与 Pod IP 分配策略
 - 掌握三种核心网络模式（VPC 路由/ENI 独占/ENIIP）的适用场景
 - 能够进行 Terway 生产部署配置与性能优化
-- 掌握 Terway 常见网络故障的排查方法
+- 掌握 Terway 常见网络问题的排查方法
 
 **详细章节：**
 
@@ -663,7 +663,7 @@ graph LR
 | 1 | 通读目标 Presentation 全文 | 理解所有知识点和实验步骤 | ☐ |
 | 2 | 准备实验集群 | 至少 3 节点集群，版本 v1.28+ | ☐ |
 | 3 | 验证所有 kubectl 命令 | 每条命令在目标集群上测试通过 | ☐ |
-| 4 | 准备故障模拟脚本 | CrashLoopBackOff / OOMKilled / 网络故障 | ☐ |
+| 4 | 准备问题模拟脚本 | CrashLoopBackOff / OOMKilled / 网络问题 | ☐ |
 | 5 | 准备 PPT/Slide 资料 | 按模板结构制作，含架构图和流程图 | ☐ |
 | 6 | 确认学员名单与环境 | 每位学员有独立 namespace 和 kubeconfig | ☐ |
 | 7 | 打印/分发速查卡 | 对应 topic-cheat-sheet 中的命令卡片 | ☐ |
@@ -1238,7 +1238,7 @@ echo "  KUBECONFIG=kubeconfig-student-${STUDENT_ID}.yaml kubectl auth can-i --li
 | 调度器 | 亲和性/反亲和、Taint/Toleration、拓扑分布 | 调度约束配置 | Descheduler 部署 | 多租户调度策略 |
 | 安全 RBAC | RBAC 资源模型、4C 安全模型、PSS | RBAC 配置与审计 | NetworkPolicy 配置 | 最小权限方案设计 |
 | Terway | ENIIP 模式、IPAM 策略、VPC 路由 | Terway 模式切换 | NetworkPolicy 验证 | 网络模式选型方案 |
-| 故障排查 | 分层排障模型、常见故障模式、应急 SOP | 限时故障排查实战 | 根因分析报告 | 生产故障复盘方案 |
+| 故障排查 | 分层排障模型、常见故障模式、应急 SOP | 限时故障排查实战 | 根因分析报告 | 生产问题复盘方案 |
 
 ### 证书等级
 

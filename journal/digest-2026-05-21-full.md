@@ -227,12 +227,12 @@ created: "2026-05-23"
 |---|---|---|---|
 | domain-10-troubleshooting-diagnostics 故障排查 | topic-fta | **144** | 故障排查方法论全面引用 FTA 故障树 |
 | topic-scenarios | (多域) | 89 | 场景导航链接到各领域 |
-| domain-17-system-foundation 硬件 | topic-fta | 21 | 硬件故障也用 FTA 分析 |
+| domain-17-system-foundation 硬件 | topic-fta | 21 | 硬件问题也用 FTA 分析 |
 | domain-03-networking-traffic 网络 | topic-fta | 17 | 网络问题用 FTA 定位 |
 | domain-06-observability 可观测性 | topic-fta | 6 | 监控告警触发 FTA 诊断 |
 | topic-结构化排查 | topic-fta | 10 | 排查框架引用 FTA |
-| domain-04-storage-data 存储 | topic-fta | 3 | 存储故障 FTA |
-| domain-02-workloads-applications 工作负载 | topic-fta | 3 | 工作负载故障 FTA |
+| domain-04-storage-data 存储 | topic-fta | 3 | 存储问题 FTA |
+| domain-02-workloads-applications 工作负载 | topic-fta | 3 | 工作负载问题 FTA |
 | domain-07-platform-engineering 平台运维 | topic-fta | 3 | 平台运维引用 FTA |
 | domain-05-security-compliance 安全 | (多域) | 3 | 安全领域交叉引用 |
 
@@ -264,11 +264,11 @@ created: "2026-05-23"
 | scheduler-fta | 调度器异常 |
 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta|controller-manager-fta]] | 控制器管理器异常 |
 | kubelet-fta | Kubelet 异常 |
-| calico-fta | Calico CNI 故障 |
-| cilium-fta | Cilium eBPF 故障 |
-| dns-fta | DNS 故障 |
-| [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta|ingress-fta]] | Ingress 故障 |
-| storage-fta | 存储故障 |
+| calico-fta | Calico CNI 问题 |
+| cilium-fta | Cilium eBPF 问题 |
+| dns-fta | DNS 问题 |
+| [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta|ingress-fta]] | Ingress 问题 |
+| storage-fta | 存储问题 |
 | certificate-fta | 证书异常 |
 | backup-restore-fta | 备份恢复异常 |
 | cluster-upgrade-fta | 集群升级异常 |

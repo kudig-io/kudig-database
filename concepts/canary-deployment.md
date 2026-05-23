@@ -5,6 +5,7 @@ tags: ["core-concept", "domain-08-release-change-management", "visibility/public
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+status: reviewed
 ---
 
 # 金丝雀发布

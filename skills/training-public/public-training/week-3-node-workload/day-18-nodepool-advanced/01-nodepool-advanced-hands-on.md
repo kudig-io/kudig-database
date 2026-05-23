@@ -347,7 +347,7 @@ kubectl get pods -o wide -A | awk '{print $NF}' | sort | uniq -c
 ### 5.2 多节点池容灾
 
 ```bash
-# 主节点池故障时切换到备用
+# 主节点池问题时切换到备用
 kubectl label node <standby-node> failover-pool=standby
 
 # 紧急扩容备用节点池

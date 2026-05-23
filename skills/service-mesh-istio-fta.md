@@ -1,6 +1,6 @@
 ---
 title: Service Mesh(Istio) 异常故障树分析 (skills)
-description: '- **目标**：覆盖 Istio 控制面不可用、Sidecar 注入失败、xDS 配置推送异常、mTLS 证书问题、数据面流量异常与多集群联邦故障的关键成因与路径。'
+description: '- **目标**：覆盖 Istio 控制面不可用、Sidecar 注入失败、xDS 配置推送异常、mTLS 证书问题、数据面流量异常与多集群联邦问题的关键成因与路径。'
 category: general
 tags:
 - k8s
@@ -52,7 +52,7 @@ base_confidence: 0.7
 # Service Mesh（Istio）异常 FTA 树
 
 ## 适用范围与说明
-- **目标**：覆盖 Istio 控制面不可用、Sidecar 注入失败、xDS 配置推送异常、mTLS 证书问题、数据面流量异常与多集群联邦故障的关键成因与路径。
+- **目标**：覆盖 Istio 控制面不可用、Sidecar 注入失败、xDS 配置推送异常、mTLS 证书问题、数据面流量异常与多集群联邦问题的关键成因与路径。
 - **范围**：istiod 控制面、Sidecar 注入器（MutatingWebhook）、xDS/Envoy 配置同步、mTLS 证书生命周期、VirtualService/DestinationRule 流量策略、Gateway、多集群/联邦。
 - **符号**：
   - **OR 门**：任一子事件成立即可触发父事件

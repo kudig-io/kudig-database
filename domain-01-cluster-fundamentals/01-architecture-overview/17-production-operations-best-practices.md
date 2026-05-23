@@ -373,7 +373,7 @@ groups:
     labels:
       severity: critical
     annotations:
-      summary: "etcd成员故障"
+      summary: "etcd成员问题"
       description: "etcd集群中有{{ $value }}个成员失去领导者，影响集群可用性"
       
   # 节点监控
@@ -1035,7 +1035,7 @@ spec:
 
 ### 9.1 调谐（Reconciliation）核心原理
 
-Kubernetes 的全部运行时行为都建立在**调谐（Reconciliation）**这一核心机制之上。理解调谐原理是掌握 Kubernetes 控制平面、编写可靠 Operator 以及排查生产故障的根基。
+Kubernetes 的全部运行时行为都建立在**调谐（Reconciliation）**这一核心机制之上。理解调谐原理是掌握 Kubernetes 控制平面、编写可靠 Operator 以及排查生产问题的根基。
 
 #### 9.1.1 控制论基础：声明式 vs 命令式
 
@@ -1342,7 +1342,7 @@ Kubernetes 不保证任何操作的"即时一致"，而是保证在没有新输�
 │  不收敛的情况（需要人工介入）:                                     │
 │  • 配置错误（如镜像不存在）→ Status.Condition 标记 Failed          │
 │  • 资源不足（如配额耗尽）→ Pod Pending + Event 告警                │
-│  • 外部依赖永久故障 → Reconcile 持续重试 + 告警                    │
+│  • 外部依赖永久问题 → Reconcile 持续重试 + 告警                    │
 └────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -1731,7 +1731,7 @@ groups:
       severity: warning
     annotations:
       summary: "{{ $labels.controller }}控制器Reconcile错误率超过10%"
-      description: "当前错误率: {{ $value | humanizePercentage }}，可能存在外部依赖故障或权限问题"
+      description: "当前错误率: {{ $value | humanizePercentage }}，可能存在外部依赖问题或权限问题"
       runbook_url: "https://wiki.example.com/runbooks/reconcile-error-rate"
 
   # Reconcile延迟告警
@@ -1849,7 +1849,7 @@ echo -e "\n=== 诊断完成 ==="
 2. **监控先行** - 在变更前确保有足够的监控覆盖
 3. **文档驱动** - 所有操作都应该有详细的文档记录
 4. **定期演练** - 定期进行DR演练和故障恢复训练
-5. **持续改进** - 基于监控数据和故障经验不断优化
+5. **持续改进** - 基于监控数据和问题经验不断优化
 
 ### 常见陷阱避免
 - ❌ 忽视etcd性能调优

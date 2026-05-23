@@ -36,7 +36,7 @@ ReplicationController 是一种遗留 API，用于确保指定数量的 Pod 副�
 - **副本保障**：ReplicationController 持续监控与选择器匹配的 Pod 数量，过多则删除，过少则创建。
 - **Pod 模板（`spec.template`）**：必填字段，`restartPolicy` 只能为 `Always`。
 - **标签选择器（`spec.selector`）**：基于等式（equality-based）的选择器，管理所有匹配的 Pod，不论其创建者是谁。
-- **Pod 替换**：当 Pod 因节点故障、维护或被删除而终止时，ReplicationController 会自动创建新的替代 Pod。
+- **Pod 替换**：当 Pod 因节点问题、维护或被删除而终止时，ReplicationController 会自动创建新的替代 Pod。
 
 ## 关键机制或特性
 - **扩缩容**：通过修改 `spec.replicas` 即可手动扩缩容；也支持外部 autoscaler 修改。

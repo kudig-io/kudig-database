@@ -135,7 +135,7 @@ K8s 的存储体系采用"供给-消费"模式：
 | NAS | nasplugin.csi.alibabacloud.com | alicloud-nas | RWX | 共享文件访问 | 多 Pod 共享文件 |
 | OSS | ossplugin.csi.alibabacloud.com | alicloud-oss | ROX | 低成本、高可靠 | 静态资源、日志归档 |
 
-云盘的关键限制：只支持 RWO（同一时间只能被一个节点挂载）。这意味着使用云盘的 Pod 不能在多个节点上运行（适合 [[StatefulSet|StatefulSet]]），且节点故障时需要等待 Volume Detach 后才能在另一个节点上 Attach。
+云盘的关键限制：只支持 RWO（同一时间只能被一个节点挂载）。这意味着使用云盘的 Pod 不能在多个节点上运行（适合 [[StatefulSet|StatefulSet]]），且节点问题时需要等待 Volume Detach 后才能在另一个节点上 Attach。
 
 ---
 
@@ -468,7 +468,7 @@ kubectl get pvc disk-pvc-demo
 
 ### Q3: 云盘 Detach 超时导致 Pod 无法调度怎么办？
 
-当节点故障时，云盘可能仍处于 Attached 状态，无法在新节点上挂载。解决方法：1）手动强制 Detach（通过阿里云控制台或 CLI）；2）使用 ACK 托管节点池的自动修复功能；3）配置 `volumeAttachment` 超时参数。
+当节点问题时，云盘可能仍处于 Attached 状态，无法在新节点上挂载。解决方法：1）手动强制 Detach（通过阿里云控制台或 CLI）；2）使用 ACK 托管节点池的自动修复功能；3）配置 `volumeAttachment` 超时参数。
 
 ### Q4: Retain 策略下 Released 的 PV 如何复用？
 

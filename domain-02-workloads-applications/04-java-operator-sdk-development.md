@@ -1241,7 +1241,7 @@ spec:
 **手动移除 Finalizer 的应急操作**：
 
 ```bash
-# 仅在 Operator 故障无法正常清理时使用
+# 仅在 Operator 问题无法正常清理时使用
 kubectl patch webapp <name> -n <namespace> --type='json' \
   -p='[{"op": "replace", "path": "/metadata/finalizers", "value": []}]'
 ```

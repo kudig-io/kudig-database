@@ -76,7 +76,7 @@ created: "2026-05-23"
 
 | 状态 | 含义 | 常见原因 | 严重程度 | 处理优先级 |
 |-----|------|---------|---------|-----------|
-| **Pending** | 等待绑定PV | 无匹配PV/SC配置错误/CSI驱动故障 | 高 | P1 |
+| **Pending** | 等待绑定PV | 无匹配PV/SC配置错误/CSI驱动问题 | 高 | P1 |
 | **Bound** | 已绑定PV | 正常状态 | - | - |
 | **Lost** | 后端PV丢失 | PV被删除/存储后端不可用 | 紧急 | P0 |
 | **Terminating** | 正在删除 | finalizer阻塞/被Pod使用中 | 中 | P2 |
@@ -135,10 +135,10 @@ created: "2026-05-23"
 | **无匹配PV** | `no [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes.md|persistent volumes]]es（卷）|volumes]] available` | `kubectl get pv` | 创建匹配的PV |
 | **PV容量不足** | `no persistent volumes available` | 检查PV/PVC容量 | 创建更大容量PV |
 | **访问模式不匹配** | `no persistent volumes available` | 检查accessModes | 调整访问模式 |
-| **CSI驱动故障** | `waiting for a volume to be created` | `kubectl get pods -n kube-system \| grep csi` | 修复CSI驱动 |
+| **CSI驱动问题** | `waiting for a volume to be created` | `kubectl get pods -n kube-system \| grep csi` | 修复CSI驱动 |
 | **配额限制** | `exceeded quota` | `kubectl get resourcequota` | 调整配额 |
 | **节点亲和性** | `volume node affinity conflict` | 检查allowedTopologies | 调整拓扑约束 |
-| **Provisioner故障** | `failed to provision volume` | 检查provisioner日志 | 修复provisioner |
+| **Provisioner问题** | `failed to provision volume` | 检查provisioner日志 | 修复provisioner |
 
 ### 2.2 详细诊断命令
 
@@ -293,12 +293,12 @@ kubectl logs -n kube-system -l app=csi-controller -c csi-attacher --tail=200
 kubectl logs -n kube-system <csi-node-pod> -c csi-driver --tail=200
 ```
 
-### 3.3 常见CSI故障
+### 3.3 常见CSI问题
 
-| 故障 | 症状 | 原因 | 解决方案 |
+| 问题 | 症状 | 原因 | 解决方案 |
 |-----|------|------|---------|
 | **Controller CrashLoop** | PVC无法provision | 配置错误/权限不足 | 检查日志修复配置 |
-| **Node未就绪** | Pod挂载失败 | CSI Node Pod故障 | 重启CSI Node |
+| **Node未就绪** | Pod挂载失败 | CSI Node Pod问题 | 重启CSI Node |
 | **Socket通信失败** | provision/attach超时 | CSI socket文件丢失 | 重启CSI Pod |
 | **Cloud API限流** | 批量创建失败 | 超出API调用限制 | 降低创建速率 |
 | **权限不足** | provision失败 | IAM/RBAC配置错误 | 检查权限配置 |
@@ -505,8 +505,8 @@ kubectl exec -it <pod> -- df -h /mnt/data
 
 ---
 
-<!-- chunk: 7. 快照与备份故障 (Snapshot & Backup Issues) -->
-## 7. 快照与备份故障 (Snapshot & Backup Issues)
+<!-- chunk: 7. 快照与备份问题 (Snapshot & Backup Issues) -->
+## 7. 快照与备份问题 (Snapshot & Backup Issues)
 
 ### 7.1 VolumeSnapshot诊断
 

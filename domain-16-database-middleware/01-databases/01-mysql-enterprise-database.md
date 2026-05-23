@@ -1162,9 +1162,9 @@ ALTER TABLE orders ADD PARTITION (PARTITION p202605 VALUES LESS THAN (TO_DAYS('2
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见故障与解决方案 -->## 常见故障与解决方案
+#<!-- chunk: 常见问题与解决方案 -->## 常见问题与解决方案
 
-| 故障现象 | 可能原因 | 排查命令 | 解决方案 |
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
 |:---|:---|:---|:---|
 | `ERROR 1040 (HY000): Too many connections` | 连接数耗尽 | `SHOW PROCESSLIST` | 增加 `max_connections`，排查连接泄漏 |
 | `ERROR 1205 (HY000): Lock wait timeout exceeded` | 行锁等待超时 | `SELECT * FROM sys.innodb_lock_waits` | 优化事务，缩短事务时长 |
@@ -1181,7 +1181,7 @@ ALTER TABLE orders ADD PARTITION (PARTITION p202605 VALUES LESS THAN (TO_DAYS('2
 
 ```bash
 #!/bin/bash
-# mysql_emergency.sh - 紧急故障快速处理
+# mysql_emergency.sh - 紧急问题快速处理
 
 # 场景1: 主库宕机，需要手动切换
 emergency_failover() {

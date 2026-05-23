@@ -65,14 +65,14 @@ created: "2026-05-23"
 
 <!-- chunk: 概述 -->## 概述
 
-混沌工程（[[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]]）是在分布式系统上进行实验的学科，目的是建立对系统抵御生产环境中失控条件能力的信心。与传统的被动式灾备不同，混沌工程主动向系统注入故障，在受控条件下发现系统的潜在弱点，从而在真实灾难发生之前修复问题。本文档深入探讨两大主流混沌工程平台——LitmusChaos（CNCF Incubating）和 Chaos Mesh（CNCF Incubating）——的部署、配置、实验设计和企业级实践，以及如何通过稳态假设（Steady State Hypothesis）和 Game Day 活动构建持续韧性验证体系。
+混沌工程（[[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]]）是在分布式系统上进行实验的学科，目的是建立对系统抵御生产环境中失控条件能力的信心。与传统的被动式灾备不同，混沌工程主动向系统注入问题，在受控条件下发现系统的潜在弱点，从而在真实灾难发生之前修复问题。本文档深入探讨两大主流混沌工程平台——LitmusChaos（CNCF Incubating）和 Chaos Mesh（CNCF Incubating）——的部署、配置、实验设计和企业级实践，以及如何通过稳态假设（Steady State Hypothesis）和 Game Day 活动构建持续韧性验证体系。
 
 #<!-- chunk: RPO 与 RTO 的混沌验证 -->## RPO 与 RTO 的混沌验证
 
 混沌工程并非直接设定 RPO 和 RTO，而是**验证**这些目标是否可达：
 
-- **RPO 验证**：通过注入数据同步组件故障（如数据库主从复制中断），测量实际的数据丢失量是否在 RPO 容忍范围内
-- **RTO 验证**：通过注入基础设施故障（如节点宕机、可用区中断），测量系统自动恢复或人工介入恢复的实际时间是否满足 RTO 目标
+- **RPO 验证**：通过注入数据同步组件问题（如数据库主从复制中断），测量实际的数据丢失量是否在 RPO 容忍范围内
+- **RTO 验证**：通过注入基础设施问题（如节点宕机、可用区中断），测量系统自动恢复或人工介入恢复的实际时间是否满足 RTO 目标
 
 ```yaml
 chaos_rpo_rto_validation:
@@ -88,13 +88,13 @@ chaos_rpo_rto_validation:
       measurement: "生产者已确认消息数 vs 消费者接收消息数"
       
   rto_experiments:
-    - name: "节点故障自动恢复时间"
+    - name: "节点问题自动恢复时间"
       hypothesis: "K8s 节点宕机后 Pod 在 60 秒内恢复"
       fault: "network partition node"
       measurement: "从故障注入到 Pod Running 的时间"
       
     - name: "可用区故障切换时间"
-      hypothesis: "AZ 故障后流量在 5 分钟内切换到备用 AZ"
+      hypothesis: "AZ 问题后流量在 5 分钟内切换到备用 AZ"
       fault: "simulate AZ failure via network blackhole"
       measurement: "从 AZ 不可达到请求成功率恢复 > 99% 的时间"
 ```
@@ -128,13 +128,13 @@ graph TB
     end
     
     subgraph "故障注入能力"
-        POD_KILL[Pod 故障<br/>删除/终止/驱逐]
-        NET_FAULT[网络故障<br/>延迟/丢包/分区/带宽限制]
+        POD_KILL[Pod 问题<br/>删除/终止/驱逐]
+        NET_FAULT[网络问题<br/>延迟/丢包/分区/带宽限制]
         CPU_STRESS[CPU 压力<br/>满载/抢占]
         MEM_STRESS[内存压力<br/>OOM/泄漏]
         DISK_IO[磁盘 I/O<br/>延迟/错误/满]
         TIME_SKEW[时钟偏移<br/>时间漂移]
-        DNS_FAULT[DNS 故障<br/>解析失败/劫持]
+        DNS_FAULT[DNS 问题<br/>解析失败/劫持]
     end
     
     subgraph "可观测性集成"
@@ -146,7 +146,7 @@ graph TB
     
     subgraph "稳态监控"
         SLO_MONITOR[SLO 监控<br/>可用性/延迟/错误率]
-        BASELINE[基线对比<br/>故障前后指标对比]
+        BASELINE[基线对比<br/>问题前后指标对比]
         STEADY[稳态假设<br/>自动判定实验结果]
     end
     
@@ -204,7 +204,7 @@ webhook:
     matchLabels:
       chaos-mesh.org/inject: "enabled"
 
-# 启用的故障类型
+# 启用的问题类型
 bpfki:
   enabled: true    # 内核级故障注入
   
@@ -245,7 +245,7 @@ kubectl get pods -n litmus
 
 #<!-- chunk: 稳态假设（Steady State Hypothesis） -->## 稳态假设（Steady State Hypothesis）
 
-稳态假设是混沌实验的核心概念：在注入故障前，定义系统"正常"行为可测量的指标；注入故障后，持续监控这些指标是否仍在可接受范围内。如果超出范围，说明假设被证伪——系统在故障条件下无法维持正常服务水平。
+稳态假设是混沌实验的核心概念：在注入问题前，定义系统"正常"行为可测量的指标；注入问题后，持续监控这些指标是否仍在可接受范围内。如果超出范围，说明假设被证伪——系统在问题条件下无法维持正常服务水平。
 
 ```yaml
 # 稳态假设定义 - Prometheus 规则
@@ -287,10 +287,10 @@ data:
           100 * mysql_connection_pool_active / mysql_connection_pool_max
 ```
 
-#<!-- chunk: Pod 故障实验 -->## Pod 故障实验
+#<!-- chunk: Pod 问题实验 -->## Pod 问题实验
 
 ```yaml
-# Chaos Mesh - Pod 故障实验
+# Chaos Mesh - Pod 问题实验
 apiVersion: chaos-mesh.org/v1alpha1
 kind: PodChaos
 metadata:
@@ -324,7 +324,7 @@ spec:
         timeout: 3s
 ```
 
-#<!-- chunk: 网络故障实验 -->## 网络故障实验
+#<!-- chunk: 网络问题实验 -->## 网络问题实验
 
 ```yaml
 # Chaos Mesh - 网络延迟注入
@@ -406,7 +406,7 @@ spec:
 #<!-- chunk: Chaos Workflow 编排 -->## Chaos Workflow 编排
 
 ```yaml
-# Chaos Mesh - 复合故障工作流
+# Chaos Mesh - 复合问题工作流
 apiVersion: chaos-mesh.org/v1alpha1
 kind: Schedule
 metadata:
@@ -552,7 +552,7 @@ echo "建议检查系统状态: kubectl get pods -A | grep -v Running"
 
 ```yaml
 game_day_program:
-  purpose: "通过模拟真实故障场景，验证系统韧性和灾备方案有效性"
+  purpose: "通过模拟真实问题场景，验证系统韧性和灾备方案有效性"
   
   roles:
     facilitator: "实验主持人 - 负责推进流程和记录"
@@ -580,7 +580,7 @@ game_day_program:
           
         - phase: "故障注入"
           duration: "1-2 小时"
-          action: "按计划依次注入故障"
+          action: "按计划依次注入问题"
           
         - phase: "恢复观察"
           duration: "1 小时"
@@ -601,7 +601,7 @@ game_day_program:
   abort_criteria:
     - "生产用户投诉超过阈值"
     - "关键指标无法恢复"
-    - "发现预期外的级联故障"
+    - "发现预期外的级联问题"
     - "管理层决定中止"
 ```
 
@@ -610,19 +610,19 @@ game_day_program:
 ```yaml
 game_day_scenarios:
   scenario_1_cascading_failure:
-    name: "级联故障模拟"
-    description: "模拟微服务调用链中的级联故障"
+    name: "级联问题模拟"
+    description: "模拟微服务调用链中的级联问题"
     steps:
       - "注入 user-service 延迟 5s"
       - "观察 api-gateway 超时和重试"
-      - "注入 order-service 故障"
+      - "注入 order-service 问题"
       - "验证断路器是否正确打开"
       - "验证降级策略是否生效"
     expected_outcome: "断路器在 30s 内打开，降级策略生效"
     
   scenario_2_data_layer_failure:
-    name: "数据层故障"
-    description: "模拟数据库主节点故障"
+    name: "数据层问题"
+    description: "模拟数据库主节点问题"
     steps:
       - "kill mysql-primary pod"
       - "等待自动选举新主节点"
@@ -632,7 +632,7 @@ game_day_scenarios:
     
   scenario_3_infrastructure_outage:
     name: "基础设施中断"
-    description: "模拟可用区级别故障"
+    description: "模拟可用区级别问题"
     steps:
       - "对整个 AZ 的 Pod 注入网络分区"
       - "验证跨 AZ 负载均衡"
@@ -689,7 +689,7 @@ chaos_monitoring:
 1. **从小做起**：先在 staging 环境实验，再逐步扩展到生产环境
 2. **定义稳态假设**：每个实验必须有明确的、可量化的稳态指标
 3. **设定中止条件**：明确什么情况下必须立即停止实验
-4. **爆炸半径控制**：使用 namespace/label selector 限制故障影响范围
+4. **爆炸半径控制**：使用 namespace/label selector 限制问题影响范围
 5. **自动化优先**：使用 Schedule 和 Workflow 自动化实验执行
 6. **GitOps 管理**：所有实验配置存储在 Git 仓库，变更通过 PR 审批
 7. **持续执行**：混沌工程是持续验证过程，不是一次性活动
@@ -729,10 +729,10 @@ kubectl logs -n chaos-mesh daemonset/chaos-daemon --tail=50
 
 #<!-- chunk: 故障排查手册 -->## 故障排查手册
 
-| 故障现象 | 可能原因 | 排查步骤 | 解决方案 |
+| 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
 |:---|:---|:---|:---|
 | 实验未生效 | namespace 未打标签 | 检查 `chaos-mesh.org/inject` 标签 | 给目标 namespace 打标签 |
-| 网络故障不生效 | containerd 配置问题 | 检查 Chaos Daemon 日志 | 确认 runtime 和 socket 路径 |
+| 网络问题不生效 | containerd 配置问题 | 检查 Chaos Daemon 日志 | 确认 runtime 和 socket 路径 |
 | Pod Kill 不执行 | RBAC 权限不足 | 检查 ServiceAccount 权限 | 添加必要的 ClusterRole |
 | Dashboard 不可访问 | Service 未暴露 | 检查 Service 和 [[Ingress|Ingress]] | 配置 port-forward 或 Ingress |
 | 实验卡住不结束 | duration 配置错误 | 检查实验 spec | 手动删除 CR 资源 |
@@ -750,7 +750,7 @@ kubectl logs -n chaos-mesh daemonset/chaos-daemon --tail=50
 
 #<!-- chunk: LitmusChaos 实验定义 -->## LitmusChaos 实验定义
 
-LitmusChaos 使用 ChaosEngine CRD 定义实验。每个 ChaosEngine 指定目标应用、故障类型、稳态假设和持续时间。与 Chaos Mesh 相比，LitmusChaos 的优势在于其 ChaosHub 生态系统——一个包含数百个预定义实验的公共仓库，覆盖了从 Pod 故障、网络延迟到云平台 API 模拟的广泛场景。
+LitmusChaos 使用 ChaosEngine CRD 定义实验。每个 ChaosEngine 指定目标应用、问题类型、稳态假设和持续时间。与 Chaos Mesh 相比，LitmusChaos 的优势在于其 ChaosHub 生态系统——一个包含数百个预定义实验的公共仓库，覆盖了从 Pod 问题、网络延迟到云平台 API 模拟的广泛场景。
 
 ```yaml
 # LitmusChaos - Pod 删除实验
@@ -864,7 +864,7 @@ spec:
 |:---|:---|:---|
 | CNCF 状态 | Incubating | Incubating |
 | 部署复杂度 | 低（单 Helm Chart） | 中（Portal + Agent） |
-| 故障类型 | 全面（含 IO、时钟偏移） | 全面（含云平台故障） |
+| 问题类型 | 全面（含 IO、时钟偏移） | 全面（含云平台问题） |
 | 实验编排 | Workflow（串行/并行） | ChaosWorkflow（Argo Workflows） |
 | 稳态验证 | 内置 Probe | Probe（HTTP/Prometheus/Cmd/K8s） |
 | 调度能力 | Schedule（Cron） | Resilience Probe（定时+持续） |
@@ -874,7 +874,7 @@ spec:
 | 多集群支持 | 有限 | 原生支持 |
 | 适用场景 | Kubernetes 深度混沌 | 企业级韧性管理平台 |
 
-建议：如果团队主要使用 Kubernetes 且关注深度混沌实验（IO 故障、时钟偏移等），选择 Chaos Mesh；如果需要企业级韧性管理平台，包含多集群管理、预定义实验库和 SRE 工作流集成，选择 LitmusChaos。
+建议：如果团队主要使用 Kubernetes 且关注深度混沌实验（IO 问题、时钟偏移等），选择 Chaos Mesh；如果需要企业级韧性管理平台，包含多集群管理、预定义实验库和 SRE 工作流集成，选择 LitmusChaos。
 
 ---
 
@@ -937,10 +937,10 @@ chaos_engineering_maturity:
 
 #<!-- chunk: 安全实验原则 -->## 安全实验原则
 
-混沌工程实验涉及向生产系统注入故障，如果操作不当可能造成严重的业务影响。以下是企业级混沌工程的安全准则：
+混沌工程实验涉及向生产系统注入问题，如果操作不当可能造成严重的业务影响。以下是企业级混沌工程的安全准则：
 
 1. **明确中止条件**：每个实验必须定义清晰的终止条件（如错误率超过阈值、用户投诉超过阈值），一旦触发立即自动中止
-2. **爆炸半径控制**：使用标签选择器、命名空间隔离和网络策略限制故障影响范围
+2. **爆炸半径控制**：使用标签选择器、命名空间隔离和网络策略限制问题影响范围
 3. **非生产优先**：新实验应先在 staging 环境验证，确认安全后再推广到生产
 4. **人员就绪**：实验期间必须有足够的值班人员，确保可以快速介入
 5. **回滚计划**：每个实验都应有预定义的回滚方案

@@ -109,7 +109,7 @@ monitoring_security_threats:
         
       consequences:
         - operational_blindness: 运维盲区
-        - incident_response_disruption: 故障响应中断
+        - incident_response_disruption: 问题响应中断
         - decision_making_impairment: 决策能力受损
         - business_continuity_threat: 业务连续性威胁
         

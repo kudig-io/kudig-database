@@ -93,7 +93,7 @@ kubectl get pods -n <namespace> -o json | \
 4. **资源请求**：HPA 需 requests，检查目标工作负载 resources 配置。
 5. **扩缩策略**：检查 `behavior.scaleUp/scaleDown` 与稳定窗口。
 6. **快速缓解**：
-   - metrics-server 故障：重启并调整证书/资源。
+   - metrics-server 问题：重启并调整证书/资源。
    - 扩缩振荡：收敛策略或提高稳定窗口。
 7. **证据留存**：保存 HPA/VPA 描述、metrics-server 日志与 metrics API 输出。
 
@@ -104,7 +104,7 @@ kubectl get pods -n <namespace> -o json | \
 #### 排查决策树
 
 ```
-HPA/VPA 故障
+HPA/VPA 问题
      │
      ├─── HPA 显示 `<unknown>`？
      │         │
@@ -132,7 +132,7 @@ HPA/VPA 故障
      │         ├─ 数据不足 ──→ 等待收集更多数据
      │         └─ Pod 控制器不支持 ──→ 检查 targetRef
      │
-     └─── metrics-server 故障？
+     └─── metrics-server 问题？
                │
                ├─ Pod 状态 ──→ kubectl get pods -n kube-system
                ├─ 证书问题 ──→ 检查 --kubelet-insecure-tls

@@ -37,13 +37,13 @@ created: "2026-05-23"
 
 #### 0. 10 分钟快速诊断与止血
 
-1. **节点面状态**：`kubectl get nodes -o wide`，抽样 `kubectl describe node <name>` 查看 Conditions/Taints，区分单点 vs 批量故障。
+1. **节点面状态**：`kubectl get nodes -o wide`，抽样 `kubectl describe node <name>` 查看 Conditions/Taints，区分单点 vs 批量问题。
 2. **kubelet 存活**：节点上执行 `curl -s localhost:10248/healthz`、`systemctl status kubelet`，若健康探针失败优先查证书/配置/资源。
 3. **资源与压力**：`free -m`、`df -h`、`df -i`、`pidstat -p $(pgrep kubelet)`，确认 Memory/Disk/PID Pressure；若磁盘吃满先清理 `/var/lib/containerd` 旧镜像与日志。
 4. **CRI 交互**：`crictl info`、`crictl ps -a | head`，若 CRI 超时则检查 containerd/Docker 服务、cgroup 驱动一致性（`cat /var/lib/kubelet/config.yaml | grep cgroupDriver`）。
 5. **PLEG/驱逐信号**：`journalctl -u kubelet | grep -E "PLEG is not healthy|eviction" | tail`，辨别是运行时阻塞还是驱逐触发。
 6. **快速缓解**：
-   - 将故障节点 `cordon`，必要时 `drain --ignore-daemonsets --delete-emptydir-data`。
+   - 将问题节点 `cordon`，必要时 `drain --ignore-daemonsets --delete-emptydir-data`。
    - 重启运行时与 kubelet（确认已备份配置/证书），并检查 cgroup 驱动一致后再放行。
    - 若磁盘/内存压力，立即清理镜像/容器/日志或扩容磁盘，调整 `evictionHard`。
 7. **证据留存**：保存 kubelet/CRI 关键日志、节点 Conditions、磁盘/PID/内存快照，便于复盘。
@@ -83,11 +83,11 @@ kubelet 的稳定依赖于多个层面的健康，深入理解其内部机制是
 #### 2.1.3 网络插件接口层（CNI）
 - **CNI 调用时机**：Pod 创建时调用 CNI 插件配置网络（veth pair、路由、iptables）
 - **配置路径**：`/etc/cni/net.d/` 和 `/opt/cni/bin/`
-- **常见故障**：CNI 二进制缺失、配置错误、IP 池耗尽、网络插件 Pod 未就绪
+- **常见问题**：CNI 二进制缺失、配置错误、IP 池耗尽、网络插件 Pod 未就绪
 
 #### 2.1.4 存储插件接口层（CSI）
 - **卷挂载流程**：kubelet → CSI Plugin → 云厂商 API → 挂载到宿主机 → bind mount 到容器
-- **挂载点泄露**：CSI 插件故障会导致挂载点僵死，kubelet 卡在清理阶段
+- **挂载点泄露**：CSI 插件问题会导致挂载点僵死，kubelet 卡在清理阶段
 - **检查命令**：`mount | grep kubernetes.io`
 
 #### 2.1.5 配置与证书层
@@ -115,10 +115,10 @@ kubelet 的稳定依赖于多个层面的健康，深入理解其内部机制是
 4. **conntrack/内核健康**：`conntrack -S` 观察表使用率；`dmesg | grep conntrack | tail`；`sysctl net.netfilter.nf_conntrack_max`。
 5. **NodePort/外访**：若 NodePort 不通，检查宿主机防火墙/云安全组；`nc -zv <node> <nodePort>` 与 `tcpdump -i eth0 port <nodePort>`。
 6. **快速缓解**：
-   - 单节点故障：重启该节点 kube-proxy Pod；若规则缺失，删除 Pod 触发重建规则。
+   - 单节点问题：重启该节点 kube-proxy Pod；若规则缺失，删除 Pod 触发重建规则。
    - 大规模性能：切换 IPVS、开启 `strictARP`，调高 conntrack 表并开启连接回收参数；限制 Service 爆炸增长。
    - Endpoints 空：修复上游工作负载或健康检查，避免空代理。
-7. **证据留存**：保存规则导出、kube-proxy 日志、conntrack 统计、故障节点的 iptables/ipvs 快照。
+7. **证据留存**：保存规则导出、kube-proxy 日志、conntrack 统计、问题节点的 iptables/ipvs 快照。
 
 ---
 
@@ -186,7 +186,7 @@ kubelet 的稳定依赖于多个层面的健康，深入理解其内部机制是
 #### 2.1 排查决策树
 
 ```
-节点故障
+节点问题
     │
     ├─── 节点 NotReady？
     │         │
@@ -221,7 +221,7 @@ kubelet 的稳定依赖于多个层面的健康，深入理解其内部机制是
 
 #### 0. 10 分钟快速诊断
 
-1. **快速定位失败**：在故障 Pod 上 `kubectl describe pod <name> | grep -A2 -E "Image|ErrImage|BackOff|429|unauthorized"`，记录错误码（DNS/TLS/401/429/空间）。
+1. **快速定位失败**：在问题 Pod 上 `kubectl describe pod <name> | grep -A2 -E "Image|ErrImage|BackOff|429|unauthorized"`，记录错误码（DNS/TLS/401/429/空间）。
 2. **连通性与 TLS**：`nslookup <registry>`、`curl -Iv https://<registry>/v2/`，若证书错误检查 CA/中间证书；云私有域注意 443/5000 安全组。
 3. **认证与凭据**：`crictl pull <image> --creds user:pass` 验证，检查 `imagePullSecrets`、SA 绑定；`cat ~/.docker/config.json` 或 `/etc/containerd/config.toml` registry 配置。
 4. **速率与并发**：观察 `toomanyrequests`/`rate limit exceeded`，临时切换私有镜像缓存/镜像加速器，或降低批量创建并开启预拉取。
@@ -238,7 +238,7 @@ kubelet 的稳定依赖于多个层面的健康，深入理解其内部机制是
 #### 2.1 排查决策树
 
 ```
-镜像拉取故障
+镜像拉取问题
       │
       ├─── ImagePullBackOff / ErrImagePull？
       │         │

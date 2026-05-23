@@ -70,9 +70,9 @@ created: "2026-05-23"
 <!-- chunk: 1. 云提供商集成故障诊断总览 (Cloud Provider Integration Diagnosis Overview) -->
 ## 1. 云提供商集成故障诊断总览 (Cloud Provider Integration Diagnosis Overview)
 
-### 1.1 常见故障现象分类
+### 1.1 常见问题现象分类
 
-| 故障类型 | 症状表现 | 影响范围 | 紧急程度 |
+| 问题类型 | 症状表现 | 影响范围 | 紧急程度 |
 |---------|---------|---------|---------|
 | **认证凭证失效** | API调用401/403 | 云资源操作失败 | P0 - 紧急 |
 | **网络配置错误** | LoadBalancer服务卡住 | 外部访问中断 | P0 - 紧急 |
@@ -409,7 +409,7 @@ kubectl get service <service-name> -n <namespace> -o jsonpath='{
 # 验证后端Pod健康状态
 kubectl get endpoints <service-name> -n <namespace> -o jsonpath='{.subsets[*].addresses[*].ip}'
 
-# ========== 故障排除工具 ==========
+# ========== 问题排除工具 ==========
 # LoadBalancer诊断脚本
 cat <<'EOF' > loadbalancer-diagnostic.sh
 #!/bin/bash
@@ -548,7 +548,7 @@ kubectl get pvc -n <namespace> -o jsonpath='{
     end
 }'
 
-# ========== 故障排除工具 ==========
+# ========== 问题排除工具 ==========
 # 存储诊断脚本
 cat <<'EOF' > storage-diagnostic.sh
 #!/bin/bash

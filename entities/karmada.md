@@ -42,7 +42,7 @@ Karmada（Kubernetes Armada）是开放的多云多集群 Kubernetes 管理系�
 
 - **多集群管理**: 统一管理多个 Kubernetes 集群
 - **跨集群调度**: 基于策略的工作负载分发
-- **故障转移**: 自动检测集群故障并迁移工作负载
+- **故障转移**: 自动检测集群问题并迁移工作负载
 - **Kubernetes 原生**: 完全兼容 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]]
 - **集群联邦**: 统一的资源视图和管理
 - **多云支持**: 支持公有云、私有云、边缘集群

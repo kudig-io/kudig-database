@@ -240,7 +240,7 @@ mdadm --detail --scan >> /etc/mdadm.conf
 # 添加磁盘
 mdadm --add /dev/md0 /dev/sde1
 
-# 标记故障
+# 标记问题
 mdadm --fail /dev/md0 /dev/sdc1
 
 # 移除磁盘
@@ -534,28 +534,28 @@ cat /proc/mdstat | grep recovery
 
 ```bash
 #!/bin/bash
-# raid-failure-handler.sh - RAID 磁盘故障自动处理
+# raid-failure-handler.sh - RAID 磁盘问题自动处理
 
 MD_DEVICE="${1:-/dev/md0}"
 FAILED_DISK="$2"
 
 if [ -z "$FAILED_DISK" ]; then
-  echo "用法: $0 <md设备> <故障磁盘设备>"
+  echo "用法: $0 <md设备> <问题磁盘设备>"
   exit 1
 fi
 
 echo "<!-- chunk: RAID 故障处理: $MD_DEVICE - $FAILED_DISK" -->## RAID 故障处理: $MD_DEVICE - $FAILED_DISK"
 
-# 1. 确认故障
+# 1. 确认问题
 echo "1. 确认当前 RAID 状态..."
 mdadm --detail "$MD_DEVICE" | grep -E "(State|Active|Working|Failed)"
 
-# 2. 标记故障磁盘
-echo "2. 标记磁盘为故障..."
+# 2. 标记问题磁盘
+echo "2. 标记磁盘为问题..."
 mdadm --fail "$MD_DEVICE" "$FAILED_DISK"
 
-# 3. 移除故障磁盘
-echo "3. 移除故障磁盘..."
+# 3. 移除问题磁盘
+echo "3. 移除问题磁盘..."
 mdadm --remove "$MD_DEVICE" "$FAILED_DISK"
 
 # 4. 物理更换磁盘后，添加新磁盘
@@ -853,7 +853,7 @@ vgs -o+vg_attr                        # VG 状态
 lvs -a -o+lv_attr,devices             # LV 状态（含隐藏 LV）
 pvs -a -o+pv_attr                     # PV 状态
 
-# RAID 故障
+# RAID 问题
 cat /proc/mdstat                       # RAID 状态
 mdadm --detail /dev/md0               # 详细信息
 mdadm --examine /dev/sdb1             # 检查磁盘超级块

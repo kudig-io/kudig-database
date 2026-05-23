@@ -356,7 +356,7 @@ kubectl get nodes -o jsonpath='{.items[*].spec.taints}'
 
 ### 应急响应流程
 
-**一级故障响应 (Critical)**
+**一级问题响应 (Critical)**
 - 响应时间：< 15分钟
 - 影响范围：核心业务中断
 - 处理步骤：
@@ -367,11 +367,11 @@ kubectl get nodes -o jsonpath='{.items[*].spec.taints}'
   5. 验证服务恢复
   6. 事后复盘总结
 
-**二级故障响应 (Major)**
+**二级问题响应 (Major)**
 - 响应时间：< 1小时
 - 影响范围：部分功能异常
 - 处理步骤：
-  1. 记录故障现象
+  1. 记录问题现象
   2. 分析影响范围
   3. 制定修复方案
   4. 逐步实施修复

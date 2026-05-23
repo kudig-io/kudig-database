@@ -160,7 +160,7 @@ related_docs:
 | Ingress TLS 与证书管理 | [22-ingress-tls-certificate.md](../domain-03-networking-traffic/22-ingress-tls-certificate.md) | cert-manager、ACME自动证书 |
 | Ingress 高级路由 | [23-ingress-advanced-routing.md](../domain-03-networking-traffic/23-ingress-advanced-routing.md) | 金丝雀发布、蓝绿部署、A/B测试 |
 | Ingress 安全加固 | [24-ingress-security-hardening.md](../domain-03-networking-traffic/24-ingress-security-hardening.md) | WAF、速率限制、IP白名单 |
-| Ingress 监控与故障排查 | [25-ingress-monitoring-troubleshooting.md](../domain-03-networking-traffic/25-ingress-monitoring-troubleshooting.md) | Prometheus指标、日志分析、常见故障 |
+| Ingress 监控与故障排查 | [25-ingress-monitoring-troubleshooting.md](../domain-03-networking-traffic/25-ingress-monitoring-troubleshooting.md) | Prometheus指标、日志分析、常见问题 |
 | Ingress 生产最佳实践 | [26-ingress-production-best-practices.md](../domain-03-networking-traffic/26-ingress-production-best-practices.md) | 高可用部署、Kustomize环境管理 |
 | Gateway API 配置 | [35-gateway-api-overview.md](../domain-03-networking-traffic/35-gateway-api-overview.md) | Gateway/HTTPRoute/GRPCRoute |
 | Ingress 和 API Gateway 对比 | [36-api-gateway-patterns.md](../domain-03-networking-traffic/36-api-gateway-patterns.md) | Ingress vs API Gateway选型 |
@@ -215,7 +215,7 @@ related_docs:
 | Service 与网络事件 | [10-service-networking-events.md](../domain-17-system-foundation/10-service-networking-events.md) | K8s网络相关Event解读 |
 | NetworkPolicy 异常 FTA 树 | [networkpolicy-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta.md) | 故障树分析 |
 | 网络硬件技术 | [08-network-hardware-technology.md](../domain-17-system-foundation/08-network-hardware-technology.md) | 高速网卡、RDMA、智能网卡 |
-| 网络硬件故障排查 | [13-network-hardware-troubleshooting.md](../domain-17-system-foundation/13-network-hardware-troubleshooting.md) | 网卡诊断、光模块故障、ethtool |
+| 网络硬件故障排查 | [13-network-hardware-troubleshooting.md](../domain-17-system-foundation/13-network-hardware-troubleshooting.md) | 网卡诊断、光模块问题、ethtool |
 
 ### 排查场景快速导航
 
@@ -229,9 +229,9 @@ related_docs:
 | **DNS 解析失败** | [26-DNS排查](26-dns-troubleshooting.md) | [DNS深度排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md)、[CoreDNS优化](../domain-03-networking-traffic/28-coredns-troubleshooting-optimization.md) |
 | **Ingress 访问异常** | [15-Ingress排查](15-ingress-troubleshooting.md) | [Service与Ingress排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md)、[Ingress监控](../domain-03-networking-traffic/25-ingress-monitoring-troubleshooting.md) |
 | **NetworkPolicy 不生效** | [16-NP排查](16-networkpolicy-troubleshooting.md) | [NP深度排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md) |
-| **CNI 插件故障** | 本文 | [27-CNI排查优化](../domain-03-networking-traffic/27-cni-troubleshooting-optimization.md)、[CNI深度排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md) |
-| **Service Mesh 故障** | [Istio排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md) | [Service Mesh解析](../domain-03-networking-traffic/30-service-mesh-deep-dive.md)、[Cilium Mesh](../domain-03-networking-traffic/05-cilium-service-mesh.md) |
-| **Gateway API 故障** | [Gateway API排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting.md) | [Gateway API配置](../domain-03-networking-traffic/35-gateway-api-overview.md) |
+| **CNI 插件问题** | 本文 | [27-CNI排查优化](../domain-03-networking-traffic/27-cni-troubleshooting-optimization.md)、[CNI深度排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md) |
+| **Service Mesh 问题** | [Istio排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md) | [Service Mesh解析](../domain-03-networking-traffic/30-service-mesh-deep-dive.md)、[Cilium Mesh](../domain-03-networking-traffic/05-cilium-service-mesh.md) |
+| **Gateway API 问题** | [Gateway API排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting.md) | [Gateway API配置](../domain-03-networking-traffic/35-gateway-api-overview.md) |
 | **网络性能问题** | [34-网络性能调优](../domain-03-networking-traffic/34-network-performance-tuning.md) | [生产网络优化](../domain-06-observability/20-network-performance-optimization.md) |
 | **conntrack 表满** | [27-CNI排查优化](../domain-03-networking-traffic/27-cni-troubleshooting-optimization.md) | [CNI深度排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md)、[网络协议栈](../domain-03-networking-traffic/01-network-protocols-stack.md) |
 | **MTU/分片问题** | [33-网络诊断](../domain-03-networking-traffic/33-network-troubleshooting.md) | [CNI容器网络深度](../domain-01-cluster-fundamentals/23-container-network-deep-dive.md) |
@@ -240,9 +240,9 @@ related_docs:
 <!-- chunk: 1. CNI 网络故障诊断总览 (CNI Diagnosis Overview) -->
 ## 1. CNI 网络故障诊断总览 (CNI Diagnosis Overview)
 
-### 1.1 常见网络故障类型
+### 1.1 常见网络问题类型
 
-| 故障类型 | 症状表现 | 影响范围 | 紧急程度 |
+| 问题类型 | 症状表现 | 影响范围 | 紧急程度 |
 |---------|---------|---------|---------|
 | **Pod网络不通** | Pod无法ping通其他Pod/Service | 应用间通信中断 | P0 - 紧急 |
 | **DNS解析失败** | nslookup失败、域名无法解析 | 服务发现异常 | P1 - 高 |
@@ -335,7 +335,7 @@ related_docs:
 │   │ kubectl exec -it <pod> -- ip addr show               │                 │
 │   └──────────────────────────────────────────────────────┘                 │
 │           │                                                                  │
-│           ├─── 无网络接口 ──▶ CNI插件故障                                  │
+│           ├─── 无网络接口 ──▶ CNI插件问题                                  │
 │           │                                                                  │
 │           ▼                                                                  │
 │   ┌──────────────────────────────────────────────────────┐                 │
@@ -518,7 +518,7 @@ iptables -t raw -D OUTPUT -s <src-pod-ip> -d <dst-pod-ip> -j TRACE
 
 ### 2.5 conntrack 连接跟踪诊断
 
-Linux 内核通过 conntrack（连接跟踪）实现有状态防火墙和 NAT。Kubernetes 的 Service DNAT/SNAT 完全依赖 conntrack，表满或条目异常会导致严重的网络故障。
+Linux 内核通过 conntrack（连接跟踪）实现有状态防火墙和 NAT。Kubernetes 的 Service DNAT/SNAT 完全依赖 conntrack，表满或条目异常会导致严重的网络问题。
 
 ```bash
 # ========== 1. conntrack 基础检查 ==========
@@ -634,8 +634,8 @@ kubectl cluster-info | grep dns
 
 ---
 
-<!-- chunk: 4. 跨节点网络通信故障 (Cross-Node Network Issues) -->
-## 4. 跨节点网络通信故障 (Cross-Node Network Issues)
+<!-- chunk: 4. 跨节点网络通信问题 (Cross-Node Network Issues) -->
+## 4. 跨节点网络通信问题 (Cross-Node Network Issues)
 
 ### 4.1 网络互通性检查
 
@@ -685,8 +685,8 @@ iptables -t mangle -L -n -v
 
 ---
 
-<!-- chunk: 5. CNI IP地址管理故障 (IPAM Issues) -->
-## 5. CNI IP地址管理故障 (IPAM Issues)
+<!-- chunk: 5. CNI IP地址管理问题 (IPAM Issues) -->
+## 5. CNI IP地址管理问题 (IPAM Issues)
 
 ### 5.1 IP地址耗尽问题
 
@@ -746,8 +746,8 @@ spec:
 
 ---
 
-<!-- chunk: 6. 不同CNI插件特有故障 (CNI-Specific Issues) -->
-## 6. 不同CNI插件特有故障 (CNI-Specific Issues)
+<!-- chunk: 6. 不同CNI插件特有问题 (CNI-Specific Issues) -->
+## 6. 不同CNI插件特有问题 (CNI-Specific Issues)
 
 ### 6.1 Calico 故障排查
 
@@ -797,7 +797,7 @@ cat /etc/kube-flannel/net-conf.json
 <!-- chunk: 7. 生产环境应急处理 (Production Emergency Response) -->
 ## 7. 生产环境应急处理 (Production Emergency Response)
 
-### 7.1 网络故障紧急诊断脚本
+### 7.1 网络问题紧急诊断脚本
 
 ```bash
 #!/bin/bash
@@ -837,7 +837,7 @@ echo -e "\n=== 诊断完成 ==="
 
 ### 7.2 故障处理优先级
 
-| 故障类型 | 响应时间 | 处理步骤 |
+| 问题类型 | 响应时间 | 处理步骤 |
 |---------|---------|---------|
 | **全集群网络中断** | 15分钟内 | 1. 确认CNI组件状态 2. 检查节点网络 3. 应急重启 |
 | **DNS解析失败** | 30分钟内 | 1. 检查CoreDNS 2. 验证网络策略 3. 重启CoreDNS |

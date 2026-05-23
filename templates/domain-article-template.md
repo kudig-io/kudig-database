@@ -479,7 +479,7 @@ curl -s localhost:{{port}}/metrics | grep {{metric}}
 
 > 指向对应的 FTA 故障树文档，系统化排查。
 
-| 故障场景 | FTA 文档 | 关键底事件 |
+| 问题场景 | FTA 文档 | 关键底事件 |
 |:---|:---|:---|
 | {{场景1}} | [{{component}}-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md) | BE-1 / BE-2 / BE-3 |
 | {{场景2}} | [{{component}}-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md) | BE-4 / BE-5 |
@@ -488,7 +488,7 @@ curl -s localhost:{{port}}/metrics | grep {{metric}}
 
 > 当主要方案不可用时的备选降级方案。
 
-| 故障场景 | 主要方案 | 降级方案 | 降级后影响 |
+| 问题场景 | 主要方案 | 降级方案 | 降级后影响 |
 |:---|:---|:---|:---|
 | {{场景}} | {{主方案}} | {{降级}} | {{影响}} |
 

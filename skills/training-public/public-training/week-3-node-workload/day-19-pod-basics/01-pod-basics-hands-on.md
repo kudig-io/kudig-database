@@ -431,7 +431,7 @@ spec:
 
 **练习 2**: 配置 livenessProbe、readinessProbe、startupProbe 三个探针
 
-**练习 3**: 模拟 CrashLoopBackOff 故障，排查并修复应用配置
+**练习 3**: 模拟 CrashLoopBackOff 问题，排查并修复应用配置
 
 **练习 4**: 配置 SecurityContext，禁止容器以 root 运行
 

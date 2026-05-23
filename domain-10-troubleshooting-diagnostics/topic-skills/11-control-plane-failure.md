@@ -35,7 +35,7 @@ trigger_keywords:
 - etcd member lost
 - control plane certificate expired
 - apiserver throttling
-- 控制平面故障
+- 控制平面问题
 - etcd 不健康
 - apiserver 不可用
 - apiserver 延迟高
@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 ## 1. 概述
 
-控制平面（Control Plane）是 [[Kubernetes|Kubernetes]] 集群的"大脑"，包括 API Server、etcd、Scheduler、Controller Manager 四大核心组件。控制平面故障是 Kubernetes 中**最严重的故障类型**，直接影响整个集群的可用性。etcd 作为唯一的状态存储，其健康状态更是生死攸关——etcd 集群丢失 quorum 意味着集群将无法进行任何状态变更。
+控制平面（Control Plane）是 [[Kubernetes|Kubernetes]] 集群的"大脑"，包括 API Server、etcd、Scheduler、Controller Manager 四大核心组件。控制平面问题是 Kubernetes 中**最严重的问题类型**，直接影响整个集群的可用性。etcd 作为唯一的状态存储，其健康状态更是生死攸关——etcd 集群丢失 quorum 意味着集群将无法进行任何状态变更。
 
 ### 典型触发场景
 
@@ -74,7 +74,7 @@ created: "2026-05-23"
 2. **API Server 可用性与性能问题**: 请求限流（APF throttling）、高延迟、Webhook 超时导致请求堆积、内存泄漏导致 OOM
 3. **Scheduler / Controller Manager 异常**: Leader 选举失败、组件频繁重启、work queue 深度过大
 4. **控制平面证书问题**: CA 证书或组件证书过期导致 TLS 握手失败、证书轮转失败
-5. **托管集群控制平面问题**: ACK/EKS/GKE 等托管集群的控制平面不可见故障
+5. **托管集群控制平面问题**: ACK/EKS/GKE 等托管集群的控制平面不可见问题
 
 ### 前置条件
 
@@ -90,7 +90,7 @@ created: "2026-05-23"
   - `openssl` >= 1.1.1
 - **监控系统**: Prometheus + etcd exporter + kube-state-metrics >= v2.10（用于 trigger_metrics 匹配）
 
-> ⚠️ **重要**: 本 Skill 覆盖自建集群和托管集群的控制平面故障场景。对于托管集群，部分诊断步骤不适用（控制平面不可见），需要通过云厂商控制台或 API 进行排查。所有 etcd 修复操作（🔴⚫级别）执行前**必须备份 etcd 快照**。
+> ⚠️ **重要**: 本 Skill 覆盖自建集群和托管集群的控制平面问题场景。对于托管集群，部分诊断步骤不适用（控制平面不可见），需要通过云厂商控制台或 API 进行排查。所有 etcd 修复操作（🔴⚫级别）执行前**必须备份 etcd 快照**。
 
 ---
 
@@ -102,7 +102,7 @@ created: "2026-05-23"
 |---|---------|---------|--------|---------|
 | SP-01 | `kubectl` 命令超时或无响应 / kubectl commands timeout or no response | `kubectl get nodes --request-timeout=10s` 超时或返回 "connection refused" | 0.95 | 客户端网络问题（本地 kubeconfig 错误、VPN 断开）；kubectl 版本与集群版本不兼容 |
 | SP-02 | etcd 成员报告 ALARM（NOSPACE/CORRUPT）/ etcd member reports ALARM | `etcdctl alarm list` 返回 NOSPACE 或 CORRUPT alarm | 0.98 | 已清除但未刷新的历史 alarm（执行 `etcdctl alarm disarm` 后残留） |
-| SP-03 | API Server 返回 429 Too Many Requests / API Server returns 429 | 客户端日志或 kubectl 输出包含 "429 Too Many Requests" | 0.90 | 客户端请求频率过高被正常限流；限流配置过于严格但非故障 |
+| SP-03 | API Server 返回 429 Too Many Requests / API Server returns 429 | 客户端日志或 kubectl 输出包含 "429 Too Many Requests" | 0.90 | 客户端请求频率过高被正常限流；限流配置过于严格但非问题 |
 | SP-04 | API Server 返回 504 Gateway Timeout / API Server returns 504 | kubectl 或客户端返回 "504 Gateway Timeout"；ingress/LB 层超时 | 0.85 | 外部负载均衡器配置问题；网络层超时而非 apiserver 问题 |
 | SP-05 | etcd leader 频繁切换 / etcd leader frequently changes | `etcd_server_leader_changes_seen_total` 指标短时间内持续增长；etcd 日志出现 "leader changed" | 0.92 | 集群刚启动期间的初始 leader 选举；计划内 etcd 成员滚动重启 |
 | SP-06 | Scheduler/CM 日志中 "lost lease" / "leader election failed" | `kubectl logs -n kube-system kube-scheduler-*` 包含 "lost lease" 或 "failed to acquire lease" | 0.88 | 组件正常启动期间的 leader 选举过程；计划内组件重启 |
@@ -146,12 +146,12 @@ created: "2026-05-23"
 
 | 排除条件 | 正确路由 | 说明 |
 |---------|---------|------|
-| API Server 正常响应，但特定 Pod Pending | SKILL-POD-002 | 调度问题（资源不足、亲和性约束），非控制平面故障 |
-| 节点状态 NotReady，但控制平面组件正常 | SKILL-NODE-001 | 节点级故障，非控制平面问题 |
+| API Server 正常响应，但特定 Pod Pending | SKILL-POD-002 | 调度问题（资源不足、亲和性约束），非控制平面问题 |
+| 节点状态 NotReady，但控制平面组件正常 | SKILL-NODE-001 | 节点级问题，非控制平面问题 |
 | 证书问题但仅影响 kubelet，控制平面正常 | SKILL-SEC-001 | kubelet 证书问题，非控制平面证书 |
-| 网络策略阻止 Pod 通信，控制平面正常 | SKILL-NET-001 | 网络策略问题，非控制平面故障 |
-| 仅 Webhook 服务本身故障，apiserver 正常 | 应用层问题 | Webhook 服务需要应用团队修复 |
-| 客户端 kubeconfig 配置错误 | 客户端问题 | 非集群故障，修正 kubeconfig 即可 |
+| 网络策略阻止 Pod 通信，控制平面正常 | SKILL-NET-001 | 网络策略问题，非控制平面问题 |
+| 仅 Webhook 服务本身问题，apiserver 正常 | 应用层问题 | Webhook 服务需要应用团队修复 |
+| 客户端 kubeconfig 配置错误 | 客户端问题 | 非集群问题，修正 kubeconfig 即可 |
 | 托管集群计划内维护（有维护通知）| 不适用本 Skill | 计划内维护，等待维护窗口结束 |
 
 ---
@@ -160,7 +160,7 @@ created: "2026-05-23"
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径：
+按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: API Server 基本可用性检测（10s）
 ```bash
@@ -237,7 +237,7 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
 - **集群完全不可用**: 所有 kubectl 命令超时或返回 "connection refused"
 - **etcd 丢失 quorum**: 3 节点 etcd 集群中 2+ 节点不可用，或 5 节点集群中 3+ 节点不可用
 - **etcd 数据损坏**: `etcdctl alarm list` 返回 CORRUPT alarm
-- **多控制平面节点故障**: 超过 50% 的控制平面节点不可用
+- **多控制平面节点问题**: 超过 50% 的控制平面节点不可用
 - **证书链完全失效**: 所有控制平面组件报告 TLS 握手失败
 - **托管集群控制平面异常**: ACK/EKS/GKE 控制台显示控制平面不健康且无法自愈
 
@@ -620,7 +620,7 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
 - **预期输出模式**: Webhook 列表和延迟数据
 - **判断规则**:
   - Webhook 延迟 P99 > 10s → Webhook 服务严重延迟（RC-003）
-  - Webhook 服务 Pod 不健康 → Webhook 服务故障
+  - Webhook 服务 Pod 不健康 → Webhook 服务问题
   - failurePolicy=Fail 的 Webhook 超时 → 会阻塞请求
   - failurePolicy=Ignore 的 Webhook 超时 → 不会阻塞但功能缺失
 - **版本差异**:
@@ -694,7 +694,7 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
 | 根因 ID | 描述 | 概率 | 风险 | 诊断证据 | FTA 映射 |
 |--------|------|------|------|---------|---------|
 | RC-001 | **etcd 磁盘性能不足（fsync 延迟 >10ms）** — etcd 数据目录所在磁盘 I/O 性能不足，导致 WAL 写入延迟，影响 leader 选举和数据持久化 | ~20% | 🟡 | D2.3 fsync P99 > 10ms；etcd 日志包含 "slow fdatasync"；D2.4 后端提交延迟高 | cp-fta: BE-etcd-disk-slow |
-| RC-002 | **etcd 成员丢失/不可达** — etcd 集群成员因节点故障、网络问题或配置错误而不可用，导致集群降级或丢失 quorum | ~15% | 🔴 | D2.1 成员 STATUS=unstarted；D1.2 显示缺少成员；etcd 日志包含 "peer unreachable" | cp-fta: BE-etcd-member-lost |
+| RC-002 | **etcd 成员丢失/不可达** — etcd 集群成员因节点问题、网络问题或配置错误而不可用，导致集群降级或丢失 quorum | ~15% | 🔴 | D2.1 成员 STATUS=unstarted；D1.2 显示缺少成员；etcd 日志包含 "peer unreachable" | cp-fta: BE-etcd-member-lost |
 | RC-003 | **API Server Webhook 级联延迟** — Admission Webhook 服务响应慢或不可用，导致 API 请求堆积和超时 | ~12% | 🟡 | D3.3 Webhook 延迟 P99 > 10s；D1.4 日志包含 webhook timeout；D3.1 大量 5xx | cp-fta: BE-webhook-slow |
 | RC-004 | **etcd 数据库配额耗尽（NOSPACE alarm）** — etcd 数据库大小达到配置的 quota 上限，触发 NOSPACE alarm，集群变为只读 | ~10% | 🔴 | T3 alarm list 包含 NOSPACE；D2.2 DB SIZE 接近 quota；D1.2 显示 ERRORS | cp-fta: BE-etcd-quota |
 | RC-005 | **API Server 请求限流配置不当** — APF（API Priority and Fairness）配置过于严格或不合理，导致正常请求被限流 | ~8% | 🟡 | D3.4 rejected_requests 增长；D3.1 大量 429；日志包含 "request throttled" | cp-fta: BE-apf-throttle |
@@ -702,10 +702,10 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
 | RC-007 | **etcd leader 选举风暴** — etcd 成员间网络延迟过高或时钟不同步，导致 leader 频繁切换，影响集群稳定性 | ~6% | 🔴 | D2.7 网络延迟 P99 > 50ms；etcd 日志包含 "leader changed"；`leader_changes_seen` 指标持续增长 | cp-fta: BE-etcd-leader-churn |
 | RC-008 | **Scheduler/CM leader 选举失败** — kube-scheduler 或 kube-controller-manager 无法获得或维持 leader lease | ~5% | 🟡 | D1.4 日志包含 "lost lease"；D3.5/D3.6 无 leader；组件频繁重启 | cp-fta: BE-component-leader |
 | RC-009 | **审计日志爆满导致 API Server OOM** — 审计日志配置不当，大量审计数据占用内存，导致 API Server OOM | ~5% | 🟡 | D3.2 审计日志巨大；apiserver Pod OOMKilled；内存使用持续增长 | cp-fta: BE-apiserver-oom |
-| RC-010 | **etcd 数据不一致/损坏** — etcd 数据文件损坏或成员间数据不一致，可能由磁盘故障或非正常关机导致 | ~4% | ⚫ | T3 alarm 包含 CORRUPT；D2.5 成员间 DB SIZE 差异大；etcd 日志包含 corruption 错误 | cp-fta: BE-etcd-corrupt |
+| RC-010 | **etcd 数据不一致/损坏** — etcd 数据文件损坏或成员间数据不一致，可能由磁盘问题或非正常关机导致 | ~4% | ⚫ | T3 alarm 包含 CORRUPT；D2.5 成员间 DB SIZE 差异大；etcd 日志包含 corruption 错误 | cp-fta: BE-etcd-corrupt |
 | RC-011 | **API Server 内存泄漏** — API Server 存在内存泄漏，导致内存使用持续增长直至 OOM | ~3% | 🔴 | apiserver Pod 内存使用线性增长；最终 OOMKilled；重启后短期恢复 | cp-fta: BE-apiserver-memleak |
 | RC-012 | **大量 Watch 连接导致 API Server 负载过高** — 客户端创建过多 watch 连接，导致 API Server 内存和 CPU 负载过高 | ~3% | 🟡 | `apiserver_watch_events_total` 极高；内存使用与 watch 数相关；LIST 请求过多 | cp-fta: BE-watch-overload |
-| RC-013 | **托管集群控制平面底层故障** — ACK/EKS/GKE 等托管集群的控制平面不可见故障，需要云厂商介入 | ~2% | 🟡 | 托管集群控制台显示异常；无法 SSH 到控制平面；云厂商 API 返回错误 | cp-fta: BE-managed-cp |
+| RC-013 | **托管集群控制平面底层问题** — ACK/EKS/GKE 等托管集群的控制平面不可见问题，需要云厂商介入 | ~2% | 🟡 | 托管集群控制台显示异常；无法 SSH 到控制平面；云厂商 API 返回错误 | cp-fta: BE-managed-cp |
 
 ---
 
@@ -1059,9 +1059,9 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
 
 ### 6.3 🔴 高风险（Agent 仅提供指导，人工执行）
 
-#### REM-007: etcd 成员替换（移除故障成员 + 添加新成员）
+#### REM-007: etcd 成员替换（移除问题成员 + 添加新成员）
 - **适用根因**: RC-002
-- **影响说明**: 替换 etcd 成员涉及移除故障成员和添加新成员。在操作期间集群仍可用（假设仍有 quorum），但操作不当可能导致数据丢失或集群不可用。**此操作必须在 etcd 快照备份后执行**。
+- **影响说明**: 替换 etcd 成员涉及移除问题成员和添加新成员。在操作期间集群仍可用（假设仍有 quorum），但操作不当可能导致数据丢失或集群不可用。**此操作必须在 etcd 快照备份后执行**。
 - **操作步骤**:
   1. **创建 etcd 快照备份**:
      ```bash
@@ -1075,7 +1075,7 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
      # 验证快照
      ETCDCTL_API=3 etcdctl snapshot status /backup/etcd-snapshot-*.db -w table
      ```
-  2. **识别故障成员**:
+  2. **识别问题成员**:
      ```bash
      ETCDCTL_API=3 etcdctl \
        --endpoints=https://127.0.0.1:2379 \
@@ -1083,9 +1083,9 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
        --cert=/etc/kubernetes/pki/etcd/peer.crt \
        --key=/etc/kubernetes/pki/etcd/peer.key \
        member list -w table
-     # 记录故障成员的 ID
+     # 记录问题成员的 ID
      ```
-  3. **移除故障成员**:
+  3. **移除问题成员**:
      ```bash
      ETCDCTL_API=3 etcdctl \
        --endpoints=https://127.0.0.1:2379 \
@@ -1357,7 +1357,7 @@ kubeadm certs check-expiration
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 
 - [ ] etcd 集群所有成员健康（`endpoint health` 全部 `is healthy: true`）
 - [ ] etcd 无 ALARM（`alarm list` 无输出）
@@ -1397,9 +1397,9 @@ kubeadm certs check-expiration
 ### 8.2 升级消息模板
 
 ```
-【{severity}】控制平面故障 - {cluster_name}
+【{severity}】控制平面问题 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: {summary}
+- 问题概述: {summary}
 - 影响范围: 
   - 集群类型: {cluster_type} (自建/ACK/EKS/GKE)
   - API Server 状态: {apiserver_status}
@@ -1508,9 +1508,9 @@ kubeadm certs check-expiration
 | 误诊场景 | 表面现象 | 实际根因 | 避免方法 |
 |---------|---------|---------|---------|
 | **将 Webhook 延迟误判为 etcd 慢** | API 请求延迟高，怀疑 etcd 性能问题 | 实际是 Admission Webhook 服务响应慢，etcd 指标正常 | 在 D2.3 检查 etcd 性能的同时，用 D3.3 检查 Webhook 延迟。如果 etcd fsync < 10ms 但 API 仍慢，优先排查 Webhook |
-| **将网络分区误判为 etcd 成员故障** | etcd 成员显示 unhealthy，怀疑成员崩溃 | 实际是网络问题导致成员间通信失败，但各成员本地进程正常 | 在判断成员故障前，先检查 D2.7 网络延迟。如果能 SSH 到"故障"成员且 etcd 进程运行正常，优先排查网络 |
+| **将网络分区误判为 etcd 成员问题** | etcd 成员显示 unhealthy，怀疑成员崩溃 | 实际是网络问题导致成员间通信失败，但各成员本地进程正常 | 在判断成员问题前，先检查 D2.7 网络延迟。如果能 SSH 到"问题"成员且 etcd 进程运行正常，优先排查网络 |
 | **将 APF 限流误判为 API Server 过载** | 收到 429 响应，怀疑 API Server 负载过高 | 实际是 APF 配置限制了特定客户端，API Server 本身资源充足 | 用 D3.4 检查 APF 配置和拒绝指标。如果只有特定 FlowSchema 被限流，问题在配置而非负载 |
-| **将 Scheduler 限流误判为 Scheduler 故障** | Pod 长期 Pending，Scheduler 日志有限流信息 | 实际是 Scheduler 被 APF 限流，而非 Scheduler 本身故障 | 检查 Scheduler 作为 API 客户端是否被限流。APF 可能限制了 Scheduler 的 LIST/WATCH 请求 |
+| **将 Scheduler 限流误判为 Scheduler 问题** | Pod 长期 Pending，Scheduler 日志有限流信息 | 实际是 Scheduler 被 APF 限流，而非 Scheduler 本身问题 | 检查 Scheduler 作为 API 客户端是否被限流。APF 可能限制了 Scheduler 的 LIST/WATCH 请求 |
 | **将证书即将过期误判为已过期** | TLS 错误，怀疑证书已过期 | 实际是客户端时钟偏差导致认为证书"未来"才有效 | 同时检查证书有效期和系统时钟。时钟偏差可能导致即使证书有效也出现 TLS 错误 |
 | **将 etcd 碎片化误判为配额不足** | etcd DB SIZE 接近 quota | 实际是碎片化导致 dbSize 虚高，实际使用量（dbSizeInUse）远低于 quota | 用 D2.5 同时检查 dbSize 和 dbSizeInUse。如果 dbSize >> dbSizeInUse，先 defrag 而非扩容 |
 
@@ -1531,15 +1531,15 @@ kubeadm certs check-expiration
 
 | 日期 | 版本 | 变更 | 原因 |
 |------|------|------|------|
-| 2026-03 | v1.0 | 初始版本发布。覆盖 K8s v1.28-v1.32，包含 13 个根因、11 个修复操作 | 基于 top 工单分析确定控制平面故障为高优先级场景 |
+| 2026-03 | v1.0 | 初始版本发布。覆盖 K8s v1.28-v1.32，包含 13 个根因、11 个修复操作 | 基于 top 工单分析确定控制平面问题为高优先级场景 |
 
 ### 10.4 待补充的知识空白
 
 以下领域在当前版本中覆盖有限，后续版本将增强：
 
-1. **etcd 加密静态数据**: KMS 集成和加密密钥轮转相关故障
-2. **多集群联邦控制平面**: Kubernetes Federation v2 的控制平面故障
-3. **API Server 高可用负载均衡**: HAProxy/Keepalived/云 LB 层面的故障
+1. **etcd 加密静态数据**: KMS 集成和加密密钥轮转相关问题
+2. **多集群联邦控制平面**: Kubernetes Federation v2 的控制平面问题
+3. **API Server 高可用负载均衡**: HAProxy/Keepalived/云 LB 层面的问题
 4. **etcd operator 管理模式**: 使用 etcd-operator 的集群的特定故障模式
 5. **边缘场景**: 边缘集群中控制平面与边缘节点的连接问题
 6. **AIoT 场景**: 大规模设备接入导致的 API Server 负载问题

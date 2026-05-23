@@ -76,7 +76,7 @@ created: "2026-05-23"
 <!-- chunk: 概述 -->
 ## 概述
 
-本文档提供生产环境监控系统的标准化运维手册、常见故障应急响应流程和SOP操作指南，帮助运维团队快速定位问题、标准化处理流程，提升故障响应效率和系统稳定性。
+本文档提供生产环境监控系统的标准化运维手册、常见问题应急响应流程和SOP操作指南，帮助运维团队快速定位问题、标准化处理流程，提升问题响应效率和系统稳定性。
 
 ---
 
@@ -175,12 +175,12 @@ scheduled_maintenance:
 
 ---
 
-<!-- chunk: 二、常见故障应急响应 -->
-## 二、常见故障应急响应
+<!-- chunk: 二、常见问题应急响应 -->
+## 二、常见问题应急响应
 
 ### 2.1 Prometheus故障处理
 
-#### 核心故障场景及解决方案
+#### 核心问题场景及解决方案
 ```yaml
 prometheus_incident_playbook:
   scrape_failure:
@@ -240,7 +240,7 @@ prometheus_incident_playbook:
 
 ### 2.2 Alertmanager故障处理
 
-#### 告警系统故障响应
+#### 告警系统问题响应
 ```yaml
 alertmanager_incident_playbook:
   notification_failure:

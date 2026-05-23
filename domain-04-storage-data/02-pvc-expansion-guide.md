@@ -5,6 +5,7 @@ tags: ["domain-04", "存储", "PVC", "扩容", "云盘", "NAS", "CSI", "visibili
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+status: reviewed
 ---
 
 # PVC 扩容指南

@@ -404,7 +404,7 @@ kubectl get pods -l app=nginx,tier=frontend --show-labels -n production
 # 3. 按重启次数排序查看 Pod (定位不稳定服务)
 kubectl get pods --sort-by=.status.containerStatuses[0].restartCount -n production
 
-# 4. 查看非运行状态的 Pod (排查故障)
+# 4. 查看非运行状态的 Pod (排查问题)
 kubectl get pods --field-selector=status.phase!=Running -A
 
 # 5. 实时监听 Pod 状态变化 (发布时观察滚动更新)
@@ -1929,7 +1929,7 @@ kubectl plugin list --name-only
 │  kubectl rollout undo deployment/app                                             │
 │  kubectl diff -f manifest.yaml                                                   │
 │                                                                                  │
-│  排查故障                                                                        │
+│  排查问题                                                                        │
 │  ─────────────────────────────────────────────────────────────────────────────   │
 │  kubectl get pods -A -o wide                                                     │
 │  kubectl describe pod <pod> -n <ns>                                              │

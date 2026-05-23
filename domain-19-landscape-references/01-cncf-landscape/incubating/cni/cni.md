@@ -125,7 +125,7 @@ CNI (Container Network Interface) 是一个定义容器网络配置的规范和�
 - [[synthesis/kubeadm-cluster-operations|kubeadm 集群运维全景]] — Cross-reference
 - [[synthesis/IaC x 多集群管理|基础设施即代码 x 多集群管理]] — Cross-reference
 - [[synthesis/Production Troubleshooting Playbook|Production Troubleshooting Playbook]] — Cross-reference
-- [[synthesis/K8s 故障分布与 MTTR 基准|K8s 故障分布与 MTTR 基准]] — Cross-reference
+- [[synthesis/K8s 问题分布与 MTTR 基准|K8s 问题分布与 MTTR 基准]] — Cross-reference
 - [[concepts/cni-networking-model|CNI 网络模型与插件对比]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[concepts/node-lifecycle-management|节点生命周期管理]] — Cross-reference

@@ -122,7 +122,7 @@ tier: peripheral---
 
 # NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 
-NetworkPolicy 是 Kubernetes 中实现零信任网络的核心机制。当 NetworkPolicy 配置错误时，可能导致合法流量被阻断（过度限制）或安全边界失效（策略未生效）。与 Service/DNS 连通性故障不同，NetworkPolicy 故障通常在应用部署或策略变更后出现，症状表现为特定 Pod 间通信失败但 Service 和 DNS 正常。
+NetworkPolicy 是 Kubernetes 中实现零信任网络的核心机制。当 NetworkPolicy 配置错误时，可能导致合法流量被阻断（过度限制）或安全边界失效（策略未生效）。与 Service/DNS 连通性问题不同，NetworkPolicy 问题通常在应用部署或策略变更后出现，症状表现为特定 Pod 间通信失败但 Service 和 DNS 正常。
 
 本 Skill 覆盖 CNI 不支持、默认拒绝策略、标签选择器错误、规则定义不完整、跨 namespace 通信阻断、CNI 策略引擎异常等 10 种根因的诊断和修复。
 
@@ -222,11 +222,11 @@ NetworkPolicy 是 Kubernetes 中实现零信任网络的核心机制。当 Netwo
 
 ### 2.3 排除标准
 
-- 所有 Pod 间通信均失败（不仅是特定 Pod）→ 可能是 CNI 级故障 → [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting|03-networking-cni-troubleshooting]].md
+- 所有 Pod 间通信均失败（不仅是特定 Pod）→ 可能是 CNI 级问题 → [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting|03-networking-cni-troubleshooting]].md
 - DNS 解析失败 → SKILL-NET-001
 - Service 无 Endpoint → SKILL-NET-002
 - 节点状态 NotReady → SKILL-NODE-001
-- 安全攻击流量被阻断（正常行为）→ 非故障
+- 安全攻击流量被阻断（正常行为）→ 非问题
 
 ## 快速分级（2 分钟内完成）
 
@@ -247,7 +247,7 @@ kubectl get events -A --field-selector reason=NetworkPolicy --sort-by=.lastTimes
 # 或使用 kubectl 查看策略创建/修改时间
 kubectl get networkpolicy -n <namespace> -o json | jq '.items[].metadata.creationTimestamp'
 ```
-> **判断规则**: 若故障时间与策略变更时间吻合 → 高置信度为 NetworkPolicy 故障
+> **判断规则**: 若问题时间与策略变更时间吻合 → 高置信度为 NetworkPolicy 问题
 
 **Step T3**: 检查 CNI 健康状态
 ```bash
@@ -545,7 +545,7 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
 | RC-004 | 跨 namespace 通信规则配置错误 | 中 | D1.4 namespace 标签缺失；D2.5 跨 ns 测试失败 | cross_namespace_misconfig |
 | RC-005 | 规则定义不完整（端口/协议/CIDR 缺失或错误） | 高 | D1.3 端口/协议不匹配；D3.3 特定端口失败 | incomplete_rules |
 | RC-006 | 多个 NetworkPolicy 规则冲突 | 低 | D2.1 多个策略覆盖同一 Pod；D2.2 全局策略冲突 | policy_conflict |
-| RC-007 | CNI 策略引擎异常（Calico/Cilium 故障） | 中 | D1.5 CNI Pod 不健康；D2.2/D2.3 CNI 状态异常 | cni_engine_failure |
+| RC-007 | CNI 策略引擎异常（Calico/Cilium 问题） | 中 | D1.5 CNI Pod 不健康；D2.2/D2.3 CNI 状态异常 | cni_engine_failure |
 | RC-008 | 策略未应用到目标 Pod（CNI 同步延迟） | 低 | D2.4 iptables 规则计数器为 0；新 Pod 创建后策略未生效 | policy_sync_delay |
 | RC-009 | IPBlock CIDR 范围不包含目标 Pod | 低 | D2.5 IP 不在 CIDR 内 | ipblock_mismatch |
 | RC-010 | 外部流量（非 Pod 流量）被策略阻断 | 中 | D1.3 无 externalIPs/nodeSelector 规则；外部访问失败 | external_traffic_blocked |
@@ -838,7 +838,7 @@ kubectl exec -n kube-system <cilium-pod> -- cilium policy get | grep -c "allow"
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 - [ ] 源 Pod 到目标 Pod 的连通性测试通过
 - [ ] 应用日志不再显示连接超时/拒绝错误
 - [ ] Cilium/Calico policy denied 指标停止增长
@@ -868,7 +868,7 @@ kubectl exec -n kube-system <cilium-pod> -- cilium policy get | grep -c "allow"
 
 ```
 【{severity}】{skill_name} - {cluster_name}
-- 故障概述: namespace {ns} 中 {src} 无法访问 {target}
+- 问题概述: namespace {ns} 中 {src} 无法访问 {target}
 - 影响范围: {affected_services} 服务通信受阻
 - 已完成诊断: {completed_steps}
 - 初步发现: {findings}

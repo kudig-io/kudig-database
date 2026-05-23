@@ -54,7 +54,7 @@ prerequisites:
 
 ## 概述
 
-ConfigMap 和 Secret 是 Kubernetes 中管理配置数据和敏感信息的核心资源。配置注入失败、数据更新不生效、权限问题等是常见故障。本文档覆盖 ConfigMap/Secret 相关故障的诊断与解决方案。
+ConfigMap 和 Secret 是 Kubernetes 中管理配置数据和敏感信息的核心资源。配置注入失败、数据更新不生效、权限问题等是常见问题。本文档覆盖 ConfigMap/Secret 相关问题的诊断与解决方案。
 
 ---
 
@@ -117,7 +117,7 @@ ConfigMap 和 Secret 是 Kubernetes 中管理配置数据和敏感信息的核�
 
 ### 1.3 影响分析
 
-| 故障类型 | 直接影响 | 间接影响 | 影响范围 |
+| 问题类型 | 直接影响 | 间接影响 | 影响范围 |
 |---------|---------|---------|---------|
 | ConfigMap 不存在 | Pod 无法启动 | 服务不可用 | 引用该 ConfigMap 的所有 Pod |
 | Secret 不存在 | Pod 无法启动或认证失败 | 服务不可用、安全凭据失效 | 引用该 Secret 的所有 Pod |
@@ -132,7 +132,7 @@ ConfigMap 和 Secret 是 Kubernetes 中管理配置数据和敏感信息的核�
 ### 2.1 排查决策树
 
 ```
-ConfigMap/Secret 故障
+ConfigMap/Secret 问题
         │
         ├─── Pod 启动失败？
         │         │

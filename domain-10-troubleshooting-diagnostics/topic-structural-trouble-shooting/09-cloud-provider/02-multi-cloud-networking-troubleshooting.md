@@ -217,7 +217,7 @@ ip route show table all | grep <remote-cidr>
 ### 2.2 排查逻辑决策树
 
 ```
-多云网络故障
+多云网络问题
     ├── 跨集群 Pod 无法连通
     │   ├── 基础网络层不可达？
     │   │   ├── VPC Peering/VPN 状态异常？──► 修复云厂商网络互联
@@ -738,11 +738,11 @@ groups:
    - 需要 Pod IP 直达：Submariner（CNI 级别互联）
    - 仅服务级互联：Linkerd Multicluster（Service 镜像）
    - 完整服务网格 + 安全：Istio Multicluster（mTLS + 流量管理）
-4. **逃生通道**：始终保留基于公共互联网 + TLS 的备用通信路径，防止专线/Peering 故障时业务完全中断
+4. **逃生通道**：始终保留基于公共互联网 + TLS 的备用通信路径，防止专线/Peering 问题时业务完全中断
 5. **监控覆盖**：对跨集群网络延迟、丢包率、VPN 隧道状态配置独立监控和告警
 6. **安全组最小权限**：仅放通必要的 CIDR 和端口，避免使用 0.0.0.0/0
 
-### 典型故障案例
+### 典型问题案例
 
 #### 案例一：Submariner 启用后跨集群 DNS 解析失败
 

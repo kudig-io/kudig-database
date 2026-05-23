@@ -132,9 +132,9 @@ NetworkPolicy 只是“意图声明”（Desired State），其执行依赖于 C
 
 ---
 
-## 2. 专家级故障矩阵与观测工具
+## 2. 专家级问题矩阵与观测工具
 
-### 2.1 专家级故障矩阵
+### 2.1 专家级问题矩阵
 
 | 现象分类 | 深度根因分析 | 关键观测工具/指令 |
 | :--- | :--- | :--- |
@@ -205,7 +205,7 @@ spec:
   # 不定义 ingress/egress 列表即代表全部拒绝
 ```
 
-### 4.2 解决“DNS 阻断”典型故障
+### 4.2 解决“DNS 阻断”典型问题
 **现象**：开启 Egress 限制后，Pod 无法拉取镜像、无法连接数据库，报错“Temporary failure in name resolution”。
 **修复方案**：
 ```yaml
@@ -490,13 +490,13 @@ table=1, priority=0, actions=drop
 
 ---
 
-## 2.3 专家级故障场景深度解析
+## 2.3 专家级问题场景深度解析
 
-### 2.3.1 按故障阶段分类
+### 2.3.1 按问题阶段分类
 
 **阶段 1: 策略创建与编译 (0-5s)**
 
-| 故障现象 | 根因分析 | 排查路径 | 典型场景 |
+| 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
 | NetworkPolicy 创建失败 | API Server Webhook 拒绝 | `kubectl describe netpol` 查看 Events | 策略语法错误、冲突标签 |
 | CNI Agent 未处理策略 | CNI 不支持或 Agent 异常 | `kubectl logs -n kube-system <cni-pod>` | Flannel 不支持策略 |
@@ -505,16 +505,16 @@ table=1, priority=0, actions=drop
 
 **阶段 2: 规则下发与生效 (5-30s)**
 
-| 故障现象 | 根因分析 | 排查路径 | 典型场景 |
+| 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
-| iptables 规则未生成 | Felix Agent 故障或策略不匹配 | `iptables-save \| grep cali` | Calico Felix 重启 |
+| iptables 规则未生成 | Felix Agent 问题或策略不匹配 | `iptables-save \| grep cali` | Calico Felix 重启 |
 | eBPF 程序未加载 | BPF 编译错误或权限不足 | `bpftool prog list` | SELinux 阻止 |
 | 规则下发延迟 > 30s | 控制面负载过高 | 检查 Cilium Operator CPU 使用率 | 10000+ Pod 集群 |
 | Pod 重启后策略失效 | Endpoint 未重新注册 | `cilium endpoint list` | Identity 回收延迟 |
 
 **阶段 3: 流量匹配与执行 (运行时)**
 
-| 故障现象 | 根因分析 | 排查路径 | 典型场景 |
+| 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
 | 策略匹配错误 | 标签选择器语法错误 | 手动测试 `kubectl get pods -l <selector>` | `matchLabels` 拼写错误 |
 | 命名空间标签缺失 | K8s < 1.21 需手动添加 | `kubectl get ns --show-labels` | 旧集群无自动标签 |
@@ -523,14 +523,14 @@ table=1, priority=0, actions=drop
 
 **阶段 4: 性能与规模化 (大规模集群)**
 
-| 故障现象 | 根因分析 | 排查路径 | 典型场景 |
+| 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
 | iptables 性能下降 | 规则数 > 10000 导致 O(n) 延迟 | `iptables -t filter -L \| wc -l` | 1000+ NetworkPolicy |
 | ipset 更新风暴 | Pod 频繁创建/删除触发重算 | 监控 Felix CPU 使用率 | 批量滚动更新 |
 | Cilium Identity 耗尽 | Identity 回收不及时 | `cilium identity list \| wc -l` | 短生命周期 Job |
 | eBPF Map 容量不足 | 默认 Map 大小不够 | `cilium bpf config list` | 100000+ Endpoint |
 
-### 2.3.2 复合故障场景
+### 2.3.2 复合问题场景
 
 **场景 1: 零信任改造导致全局网络中断**
 
@@ -540,7 +540,7 @@ table=1, priority=0, actions=drop
   - 未提前放行 CoreDNS/监控/日志采集流量
   - Ingress Controller 使用 hostNetwork
 
-故障链:
+问题链:
   1. 批量应用 Default Deny NetworkPolicy
   2. 所有 Pod Egress 流量被阻断
   3. DNS 解析失败 → 应用无法启动
@@ -638,7 +638,7 @@ table=1, priority=0, actions=drop
   - NetworkPolicy 数量: 2000+
   - Pod 频繁滚动更新 (每分钟 100+ Pod 变动)
 
-故障链:
+问题链:
   1. 滚动更新触发大量 Pod 创建/删除
   2. Felix Agent 重新计算 ipset 和 iptables 规则
   3. iptables 规则数突破 50000 条
@@ -715,7 +715,7 @@ table=1, priority=0, actions=drop
   - 大量短生命周期 Job/CronJob (每分钟创建 50+ Pod)
   - Pod Label 频繁变化
 
-故障链:
+问题链:
   1. Job Pod 创建时分配新的 Identity (例如 ID=1024)
   2. Job 完成后 Pod 删除
   3. Identity 1024 进入"待回收"状态 (默认延迟 15min)
@@ -1405,13 +1405,13 @@ kubectl delete netpol -n <ns> <unused-policy>
 
 ## 5.3 案例三: Cilium eBPF 与 iptables 模式冲突
 
-**故障背景**
+**问题背景**
 
 - **集群**: EKS 1.28, 150 节点
 - **迁移**: 从 Calico (iptables) 迁移到 Cilium (eBPF)
 - **配置**: 混合模式 (部分节点 Calico, 部分节点 Cilium)
 
-**故障过程**
+**问题过程**
 
 ```
 时间线:
@@ -1605,8 +1605,8 @@ echo -e "\n=== Check Complete ==="
 - **预计最终**: ~1260 行
 - **新增章节**:
   - CNI 插件策略实现深度对比 (Calico iptables/Cilium eBPF/Weave OVS)
-  - 专家级故障矩阵 (4 阶段分类)
-  - 复合故障场景 (零信任改造、大规模性能、Identity 冲突)
+  - 专家级问题矩阵 (4 阶段分类)
+  - 复合问题场景 (零信任改造、大规模性能、Identity 冲突)
   - 深度排查脚本 (连通性测试、Calico 调试、Cilium 追踪)
   - 零信任网络设计 (分层策略、验证流程、迁移策略)
   - 3 个生产案例 (全局中断、性能雪崩、CNI 冲突)

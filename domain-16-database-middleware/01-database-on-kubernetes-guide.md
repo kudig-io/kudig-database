@@ -5,6 +5,7 @@ tags: ["domain-16", "数据库", "StatefulSet", "MySQL", "Redis", "PostgreSQL", 
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+status: reviewed
 ---
 
 # 数据库在 Kubernetes 上的运行指南

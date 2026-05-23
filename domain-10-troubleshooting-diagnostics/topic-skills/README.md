@@ -55,7 +55,7 @@ created: "2026-05-23"
 
 ## 1. 什么是 Skill？
 
-Skill 是工单智能体（Ticket Handling Agent）在运行时可直接调用的**自包含诊断-修复执行单元**。每个 Skill 覆盖一类特定的 Kubernetes 故障场景，包含从症状识别到修复验证的完整闭环。
+Skill 是工单智能体（Ticket Handling Agent）在运行时可直接调用的**自包含诊断-修复执行单元**。每个 Skill 覆盖一类特定的 Kubernetes 问题场景，包含从症状识别到修复验证的完整闭环。
 
 ### 与现有知识资产的定位区分
 
@@ -80,7 +80,7 @@ Skill 是工单智能体（Ticket Handling Agent）在运行时可直接调用�
 | **定位** | 故障树分析模型 | 人类可读深度排查指南 | Agent 可执行工单处理 Runbook |
 | **结构** | Mermaid 图 + JSON 工作流 | 决策树 + 解释性文字 | YAML 元数据 + 症状触发 + 分步诊断 + 风险分级修复 |
 | **受众** | FTA 分析师 / Agent 推理引擎 | 初级到高级运维人员 | AI Agent 运行时（工单处理循环） |
-| **粒度** | 按组件（37 个） | 按组件（40+ 文档） | 按故障场景（高频工单类型） |
+| **粒度** | 按组件（37 个） | 按组件（40+ 文档） | 按问题场景（高频工单类型） |
 | **输出** | 根因路径 + 概率 | 解释 + 命令 | 结构化动作序列 + 风险门控 + 验证关卡 |
 
 ---
@@ -97,12 +97,12 @@ Skill 是工单智能体（Ticket Handling Agent）在运行时可直接调用�
 | 06 | SKILL-SEC-001 | 证书过期与 TLS 故障诊断 | Security | [06-certificate-expiry.md](./06-certificate-expiry.md) | GA |
 | 07 | SKILL-STORE-001 | PVC/PV/CSI 存储故障诊断 | Storage | [07-pvc-storage-failure.md](./07-pvc-storage-failure.md) | GA |
 | 08 | SKILL-WORK-001 | Deployment 滚动更新故障诊断 | Workload | [08-deployment-rollout-failure.md](./08-deployment-rollout-failure.md) | GA |
-| 09 | SKILL-SEC-002 | RBAC 权限与 ResourceQuota 故障 | Security | [09-rbac-quota-failure.md](./09-rbac-quota-failure.md) | GA |
+| 09 | SKILL-SEC-002 | RBAC 权限与 ResourceQuota 问题 | Security | [09-rbac-quota-failure.md](./09-rbac-quota-failure.md) | GA |
 | 10 | SKILL-IMAGE-001 | 镜像拉取与仓库故障诊断 | Image | [10-image-pull-failure.md](./10-image-pull-failure.md) | GA |
 | 11 | SKILL-CP-001 | etcd 与控制平面故障诊断 | ControlPlane | [11-control-plane-failure.md](./11-control-plane-failure.md) | GA |
-| 12 | SKILL-SCALE-001 | HPA/VPA/CA 弹性伸缩故障 | Scaling | [12-autoscaling-failure.md](./12-autoscaling-failure.md) | GA |
+| 12 | SKILL-SCALE-001 | HPA/VPA/CA 弹性伸缩问题 | Scaling | [12-autoscaling-failure.md](./12-autoscaling-failure.md) | GA |
 | 13 | SKILL-NET-003 | Ingress/Gateway 路由故障诊断 | Network | [13-ingress-gateway-failure.md](./13-ingress-gateway-failure.md) | GA |
-| 14 | SKILL-CONFIG-001 | ConfigMap/Secret 配置管理故障 | Configuration | [14-configmap-secret-failure.md](./14-configmap-secret-failure.md) | GA |
+| 14 | SKILL-CONFIG-001 | ConfigMap/Secret 配置管理问题 | Configuration | [14-configmap-secret-failure.md](./14-configmap-secret-failure.md) | GA |
 | 15 | SKILL-MONITOR-001 | 监控告警体系故障诊断 | Observability | [15-monitoring-alerting-failure.md](./15-monitoring-alerting-failure.md) | GA |
 | 16 | SKILL-LOG-001 | 日志收集与管理故障诊断 | Observability | [16-logging-pipeline-failure.md](./16-logging-pipeline-failure.md) | GA |
 | 17 | SKILL-PERF-001 | 性能瓶颈诊断与调优 | Performance | [17-performance-bottleneck.md](./17-performance-bottleneck.md) | GA |
@@ -123,11 +123,11 @@ Skill 是工单智能体（Ticket Handling Agent）在运行时可直接调用�
 ## 按运维场景快速导航
 
 ### 故障诊断
-- 节点故障: [01-node-notready](./01-node-notready.md) | [11-control-plane](./11-control-plane-failure.md)
+- 节点问题: [01-node-notready](./01-node-notready.md) | [11-control-plane](./11-control-plane-failure.md)
 - Pod 异常: [02-crashloop](./02-pod-crashloop-oomkilled.md) | [03-pending](./03-pod-pending.md) | [10-image-pull](./10-image-pull-failure.md)
-- 网络故障: [04-dns](./04-dns-resolution-failure.md) | [05-service](./05-service-connectivity.md) | [13-ingress](./13-ingress-gateway-failure.md)
-- 存储故障: [07-pvc-storage](./07-pvc-storage-failure.md)
-- 配置故障: [14-configmap-secret](./14-configmap-secret-failure.md)
+- 网络问题: [04-dns](./04-dns-resolution-failure.md) | [05-service](./05-service-connectivity.md) | [13-ingress](./13-ingress-gateway-failure.md)
+- 存储问题: [07-pvc-storage](./07-pvc-storage-failure.md)
+- 配置问题: [14-configmap-secret](./14-configmap-secret-failure.md)
 
 ### 工作负载管理
 - 部署与更新: [08-deployment-rollout](./08-deployment-rollout-failure.md)
@@ -376,7 +376,7 @@ bash teardown.sh                # 清理
 | 01 | 节点 Cordon | SKILL-NODE-001 / RC-012 | `kubectl cordon` | REM-001: uncordon |
 | 02 | Pod CrashLoop | SKILL-POD-001 | 错误启动命令 | 修正 Deployment |
 | 03 | Pod Pending | SKILL-POD-002 | 资源请求超限 | 调整 requests |
-| 04 | DNS 故障 | SKILL-NET-001 | CoreDNS 缩容 | 恢复 CoreDNS |
+| 04 | DNS 问题 | SKILL-NET-001 | CoreDNS 缩容 | 恢复 CoreDNS |
 | 05 | Service 无 EP | SKILL-NET-002 | Selector typo | 修正 selector |
 | 06 | PVC Pending | SKILL-STORE-001 / RC-001 | 无效 StorageClass | 创建 StorageClass |
 | 07 | Deployment 卡住 | SKILL-WORK-001 / RC-002 | readinessProbe 失败 | 修正配置 |
@@ -432,7 +432,7 @@ skill-set/k8s-node-notready/
 | 优先级 | Skill ID | 场景 | 分类 |
 |--------|---------|------|------|
 | P1 | SKILL-NODE-002 | 节点磁盘压力诊断 | node |
-| P1 | SKILL-NET-004 | NetworkPolicy 连通性故障 | network |
+| P1 | SKILL-NET-004 | NetworkPolicy 连通性问题 | network |
 | P2 | SKILL-WORK-002 | StatefulSet 故障诊断 | workload |
 | P2 | SKILL-WORK-003 | DaemonSet 故障诊断 | workload |
 | P2 | SKILL-WORK-004 | Job/CronJob 故障诊断 | workload |

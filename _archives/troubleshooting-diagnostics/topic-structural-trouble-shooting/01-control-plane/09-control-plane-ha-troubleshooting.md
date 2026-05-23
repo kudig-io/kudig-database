@@ -45,9 +45,9 @@ prerequisites:
 
 ## 问题现象与影响分析
 
-### 常见高可用故障现象
+### 常见高可用问题现象
 
-| 故障现象 | 典型表现 | 影响程度 | 紧急级别 |
+| 问题现象 | 典型表现 | 影响程度 | 紧急级别 |
 |---------|---------|---------|---------|
 | 控制平面节点宕机 | `control plane node NotReady` | ⭐⭐⭐ 高 | P0 |
 | etcd 集群脑裂 | `etcd cluster is unhealthy` | ⭐⭐⭐ 高 | P0 |
@@ -56,7 +56,7 @@ prerequisites:
 | 控制平面组件启动失败 | `control plane components crashlooping` | ⭐⭐⭐ 高 | P0 |
 | 证书不一致导致认证失败 | `certificate signed by unknown authority` | ⭐⭐⭐ 高 | P0 |
 
-### 故障影响范围评估
+### 问题影响范围评估
 
 ```bash
 # 快速评估控制平面健康状态
@@ -79,7 +79,7 @@ done
 
 ### 诊断原理说明
 
-控制平面高可用故障通常涉及以下关键组件的协同工作：
+控制平面高可用问题通常涉及以下关键组件的协同工作：
 
 1. **etcd 集群**：分布式键值存储，需要多数派节点存活
 2. **API Server**：无状态组件，可通过负载均衡器分发请求
@@ -90,7 +90,7 @@ done
 ### 故障诊断决策树
 
 ```
-控制平面故障
+控制平面问题
     ├── etcd 集群状态检查
     │   ├── 集群健康状态
     │   ├── 节点成员关系
@@ -230,18 +230,18 @@ kubectl get events -n kube-system --field-selector reason=LeaderElection | tail 
 #!/bin/bash
 # etcd 单节点故障恢复脚本
 
-FAILED_NODE="control-plane-03"  # 故障节点名称
+FAILED_NODE="control-plane-03"  # 问题节点名称
 CLUSTER_MEMBERS=("control-plane-01" "control-plane-02" "control-plane-03")
 
 echo "=== etcd 单节点故障恢复 ==="
 
-# 1. 移除故障节点
-echo "1. 移除故障节点 $FAILED_NODE:"
+# 1. 移除问题节点
+echo "1. 移除问题节点 $FAILED_NODE:"
 ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o name | head -1)
 kubectl exec -n kube-system $ETCD_POD -- ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --cacert=/etc/kubernetes/pki/etcd/ca.crt member remove $(kubectl exec -n kube-system $ETCD_POD -- ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --cacert=/etc/kubernetes/pki/etcd/ca.crt member list | grep $FAILED_NODE | cut -d',' -f1)
 
-# 2. 清理故障节点数据
-echo "2. 清理故障节点数据:"
+# 2. 清理问题节点数据
+echo "2. 清理问题节点数据:"
 ssh $FAILED_NODE "sudo rm -rf /var/lib/etcd/member"
 
 # 3. 重新加入集群
@@ -635,21 +635,21 @@ HEALTH_CHECK_LOG="/var/log/kubernetes/ha-health-check-$(date +%Y%m%d).log"
 } >> "$HEALTH_CHECK_LOG"
 ```
 
-## 🔄 典型高可用故障案例
+## 🔄 典型高可用问题案例
 
 ### 案例一：网络分区导致 etcd 脑裂
 
-**问题描述**：由于网络故障，etcd 集群被分割成两个独立的分区，各自选出不同的 leader。
+**问题描述**：由于网络问题，etcd 集群被分割成两个独立的分区，各自选出不同的 leader。
 
 **根本原因**：网络 ACL 配置错误，控制平面节点间网络通信中断。
 
 **解决方案**：
-1. 立即隔离故障分区，确保只有一个合法集群运行
+1. 立即隔离问题分区，确保只有一个合法集群运行
 2. 修复网络 ACL 配置，恢复节点间通信
 3. 从多数派集群恢复数据一致性
 4. 重新加入分离的节点
 
-### 案例二：证书不一致导致 API Server 故障
+### 案例二：证书不一致导致 API Server 问题
 
 **问题描述**：控制平面节点上的 API Server 证书不一致，导致部分节点无法正常服务。
 
@@ -663,7 +663,7 @@ HEALTH_CHECK_LOG="/var/log/kubernetes/ha-health-check-$(date +%Y%m%d).log"
 
 ## 📞 高可用支持
 
-**紧急故障响应**：
+**紧急问题响应**：
 - 立即启动备用控制平面
 - 联系云服务商技术支持
 - 执行预先准备的灾难恢复预案

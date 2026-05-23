@@ -66,7 +66,7 @@ prerequisites:
 
 ## 问题现象与影响分析
 
-### GitOps 核心组件故障现象
+### GitOps 核心组件问题现象
 
 | 问题类型 | 典型现象 | 影响程度 | 紧急级别 |
 |---------|---------|---------|---------|
@@ -120,7 +120,7 @@ GitOps 故障诊断需要从以下几个维度进行分析：
 ### GitOps 问题诊断决策树
 
 ```
-GitOps 故障
+GitOps 问题
     ├── Git 仓库连接问题
     │   ├── SSH 密钥配置
     │   ├── 访问令牌权限
@@ -1103,7 +1103,7 @@ BEST_PRACTICES_REPORT="/var/log/kubernetes/cicd-best-practices-$(date +%Y%m%d).l
 echo "最佳实践检查报告已生成: $BEST_PRACTICES_REPORT"
 ```
 
-### 典型故障案例
+### 典型问题案例
 
 ### 案例一：ArgoCD 应用持续 OutOfSync
 

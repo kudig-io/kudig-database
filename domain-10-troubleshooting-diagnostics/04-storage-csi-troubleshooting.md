@@ -76,7 +76,7 @@ created: "2026-05-23"
 3. [卷挂载故障排查](#3-卷挂载故障排查)
 4. [卷读写异常诊断](#4-卷读写异常诊断)
 5. [卷扩容问题处理](#5-卷扩容问题处理)
-6. [快照功能故障](#6-快照功能故障)
+6. [快照功能问题](#6-快照功能问题)
 7. [CSI组件异常处理](#7-csi组件异常处理)
 8. [存储类配置优化](#8-存储类配置优化)
 9. [监控告警配置](#9-监控告警配置)
@@ -97,9 +97,9 @@ CSI (Container Storage Interface) 是Kubernetes的标准存储接口，允许存
 - **External Resizer**: 卷扩容控制器
 - **External Snapshotter**: 快照控制器
 
-### 1.2 常见存储故障类型
+### 1.2 常见存储问题类型
 
-| 故障类型 | 症状表现 | 影响范围 | 紧急程度 |
+| 问题类型 | 症状表现 | 影响范围 | 紧急程度 |
 |---------|---------|---------|---------|
 | **卷创建失败** | PVC Pending、Provisioner报错 | 新应用无法部署 | P1 - 高 |
 | **卷挂载失败** | Pod卡在ContainerCreating、MountVolume失败 | 应用启动失败 | P0 - 紧急 |
@@ -273,7 +273,7 @@ kubectl get limitrange -n <namespace>
 | 错误信息 | 可能原因 | 解决方案 |
 |---------|---------|---------|
 | `no [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes.md|persistent volumes]]es（卷）|volumes]] available` | 无匹配的PV/StorageClass配置错误 | 检查StorageClass参数配置 |
-| `failed to provision volume` | CSI驱动故障/后端API错误 | 检查CSI驱动日志和后端连接 |
+| `failed to provision volume` | CSI驱动问题/后端API错误 | 检查CSI驱动日志和后端连接 |
 | `exceeded quota` | 超出命名空间配额限制 | 调整ResourceQuota或清理资源 |
 | `invalid capacity range` | 请求容量超出限制 | 调整PVC容量或StorageClass限制 |
 | `volume node affinity conflict` | 节点拓扑不匹配 | 检查allowedTopologies配置 |
@@ -381,7 +381,7 @@ ls -ld /var/lib/kubelet/plugins/kubernetes.io/csi/
 
 | 错误信息 | 可能原因 | 解决方案 |
 |---------|---------|---------|
-| `MountVolume.SetUp failed` | CSI Node插件故障 | 重启CSI Node组件 |
+| `MountVolume.SetUp failed` | CSI Node插件问题 | 重启CSI Node组件 |
 | `timeout expired waiting for volume` | 挂载超时 | 检查存储后端性能 |
 | `permission denied` | 文件系统权限问题 | 检查挂载点权限设置 |
 | `device or resource busy` | 设备被占用 | 检查是否有残留挂载 |
@@ -392,7 +392,7 @@ ls -ld /var/lib/kubelet/plugins/kubernetes.io/csi/
 <!-- chunk: 4. CSI 组件故障排查 (CSI Component Issues) -->
 ## 4. CSI 组件故障排查 (CSI Component Issues)
 
-### 4.1 CSI Controller故障
+### 4.1 CSI Controller问题
 
 ```bash
 # ========== Controller组件检查 ==========
@@ -414,7 +414,7 @@ kubectl port-forward -n kube-system svc/csi-controller 8080:8080
 curl localhost:8080/metrics | grep csi
 ```
 
-### 4.2 CSI Node故障
+### 4.2 CSI Node问题
 
 ```bash
 # ========== Node组件检查 ==========
@@ -491,7 +491,7 @@ kubectl exec -it <pod> -- cat /proc/vmstat | grep -E "pgsteal|pgactivate"
 <!-- chunk: 6. 生产环境应急处理 (Production Emergency Response) -->
 ## 6. 生产环境应急处理 (Production Emergency Response)
 
-### 6.1 存储故障紧急诊断脚本
+### 6.1 存储问题紧急诊断脚本
 
 ```bash
 #!/bin/bash
@@ -526,10 +526,10 @@ echo -e "\n=== 诊断完成 ==="
 
 ### 6.2 故障处理优先级
 
-| 故障类型 | 响应时间 | 处理步骤 |
+| 问题类型 | 响应时间 | 处理步骤 |
 |---------|---------|---------|
 | **卷挂载失败** | 30分钟内 | 1. 检查CSI Node组件 2. 验证挂载点 3. 重启相关组件 |
-| **数据读写异常** | 15分钟内 | 1. 立即隔离故障卷 2. 检查存储后端 3. 数据恢复 |
+| **数据读写异常** | 15分钟内 | 1. 立即隔离问题卷 2. 检查存储后端 3. 数据恢复 |
 | **PVC创建失败** | 1小时内 | 1. 检查Provisioner 2. 验证后端连接 3. 调整配置 |
 | **存储性能下降** | 2小时内 | 1. 性能分析 2. 资源扩容 3. 参数调优 |
 

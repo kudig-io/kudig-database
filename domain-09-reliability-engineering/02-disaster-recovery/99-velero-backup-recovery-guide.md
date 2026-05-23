@@ -955,7 +955,7 @@ velero restore get --sort-by=.metadata.creationTimestamp | tail -5
 
 #<!-- chunk: 故障排查手册 -->## 故障排查手册
 
-| 故障现象 | 可能原因 | 排查步骤 | 解决方案 |
+| 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
 |:---|:---|:---|:---|
 | 备份卡在 InProgress | Node Agent 未运行 | `kubectl get pods -n velero` | 重启 Node Agent DaemonSet |
 | CSI 快照失败 | CSI Driver 不支持快照 | 检查 VolumeSnapshotClass | 安装/升级 CSI Driver |

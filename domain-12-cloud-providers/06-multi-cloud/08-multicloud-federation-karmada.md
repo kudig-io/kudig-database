@@ -57,7 +57,7 @@ created: "2026-05-23"
 
 Karmada（[[Kubernetes|Kubernetes]] [[Armada|Armada]]）是华为云开源的多云多集群 Kubernetes 编排引擎，已捐赠至 CNCF 成为 Incubating 项目。Karmada 提供了 Kubernetes 原生的多云管理 API，通过 PropagationPolicy 和 OverridePolicy 实现精细化的跨集群工作负载分发和配置覆盖。Karmada 的生产用户包括华为、vivo、美团、字节跳动、中国工商银行等大型企业，在金融、互联网、制造等行业积累了丰富的生产实践经验。
 
-Karmada 的核心设计理念是"Kubernetes Native"——通过 CRD 和 Aggregated API Server [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|扩展 Kubernetes API]]PI|Kubernetes API]]，用户无需学习新的 API 概念即可管理多云环境。Karmada 支持多种调度策略：静态权重、动态资源感知、亲和性/反亲和性、以及基于故障域的智能调度。故障自动转移机制能够在成员集群不可用时，自动将工作负载迁移到健康的集群，确保业务连续性。多集群服务发现（MultiClusterService）允许跨集群的服务发现和负载均衡，使得应用可以透明地访问跨集群的服务。
+Karmada 的核心设计理念是"Kubernetes Native"——通过 CRD 和 Aggregated API Server [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|扩展 Kubernetes API]]PI|Kubernetes API]]，用户无需学习新的 API 概念即可管理多云环境。Karmada 支持多种调度策略：静态权重、动态资源感知、亲和性/反亲和性、以及基于故障域的智能调度。问题自动转移机制能够在成员集群不可用时，自动将工作负载迁移到健康的集群，确保业务连续性。多集群服务发现（MultiClusterService）允许跨集群的服务发现和负载均衡，使得应用可以透明地访问跨集群的服务。
 
 本文档深入探讨 Karmada 的架构设计、资源传播机制、故障转移策略和生产级部署实践。内容涵盖完整的控制平面部署、成员集群注册、策略配置、监控告警和运维自动化脚本，为企业构建基于 Karmada 的多云管理平台提供全面参考。
 
@@ -69,7 +69,7 @@ Karmada 的核心设计理念是"Kubernetes Native"——通过 CRD 和 Aggregat
 | PropagationPolicy | 定义工作负载跨集群分发策略 | 多集群应用部署 |
 | OverridePolicy | 按集群覆盖配置（镜像、副本数、环境变量等） | 跨云差异化配置 |
 | 多调度策略 | 静态权重、动态资源、亲和性、故障域 | 灵活的调度需求 |
-| 故障自动转移 | 集群故障时自动迁移工作负载 | 高可用、灾备 |
+| 问题自动转移 | 集群问题时自动迁移工作负载 | 高可用、灾备 |
 | 多集群服务发现 | MultiClusterService 跨集群服务暴露 | 跨集群微服务通信 |
 | Federation API | 统一的多集群资源查询和管理 | 集中运维管理 |
 | WorkloadRebalancer | 工作负载再平衡 | 资源优化、集群维护 |
@@ -1012,7 +1012,7 @@ echo "=== 迁移完成 ==="
 | staticWeight + dynamicWeight | 静态权重基础 + 动态资源感知 | 需要优先级的生产环境 |
 | spreadConstraints | 确保跨集群最低分布 | 高可用要求 |
 | clusterAffinity + labelSelector | 按标签选择目标集群 | 灵活的集群分组 |
-| clusterTolerations | 设置故障容忍时间 | 灾备故障转移 |
+| clusterTolerations | 设置问题容忍时间 | 灾备故障转移 |
 
 #<!-- chunk: 高可用最佳实践 -->## 高可用最佳实践
 
@@ -1040,7 +1040,7 @@ echo "=== 迁移完成 ==="
 | 副本分布不均 | 权重配置不合理 | 检查 weightPreference | `kubectl describe resourcebinding <name>` |
 | 集群注册失败 | kubeconfig 无效或网络不通 | 验证 kubeconfig | `karmadactl get clusters` |
 | Override 不生效 | dependentOverrides 未声明 | 检查 dependentOverrides 字段 | `kubectl describe pp <name>` |
-| 故障未转移 | tolerationSeconds 过长 | 调整 tolerationSeconds | `kubectl describe cluster <name>` |
+| 问题未转移 | tolerationSeconds 过长 | 调整 tolerationSeconds | `kubectl describe cluster <name>` |
 | API Server 压力大 | 成员集群过多 | 增加资源或启用缓存 | `kubectl top pods -n karmada-system` |
 | Work 状态不更新 | Agent 连接异常 | 检查 karmada-agent 日志 | `kubectl logs -n karmada-system -l app=karmada-agent` |
 | 调度器无法调度 | 资源不足或策略冲突 | 检查调度器日志 | `kubectl logs -n karmada-system -l app=karmada-scheduler` |

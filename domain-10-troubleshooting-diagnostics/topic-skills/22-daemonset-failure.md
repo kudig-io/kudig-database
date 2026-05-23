@@ -126,7 +126,7 @@ tier: peripheral---
 
 # DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 
-DaemonSet 确保集群中每个（或部分）节点上运行一个 Pod 副本，是集群基础设施的核心载体（如 kube-proxy、CNI 插件、日志收集器、监控代理）。当 DaemonSet 故障时，影响的不是单一应用，而是整个节点或集群的基础功能：网络不通、日志丢失、监控中断、安全代理失效。
+DaemonSet 确保集群中每个（或部分）节点上运行一个 Pod 副本，是集群基础设施的核心载体（如 kube-proxy、CNI 插件、日志收集器、监控代理）。当 DaemonSet 问题时，影响的不是单一应用，而是整个节点或集群的基础功能：网络不通、日志丢失、监控中断、安全代理失效。
 
 与 Deployment 不同，DaemonSet 的调度逻辑直接绑定节点，故障模式集中在节点排除（污点、亲和性）、资源竞争、特权权限、host 网络冲突等方面。
 
@@ -148,17 +148,17 @@ DaemonSet 确保集群中每个（或部分）节点上运行一个 Pod 副本�
 
 ```
 DaemonSet 类型 + 影响范围
-├── CNI 类 DaemonSet 故障（calico-node/cilium）──────→ P0（网络中断）
-├── kube-proxy 故障────────────────────────────────→ P0（Service 不通）
-├── 日志/监控类 DaemonSet 故障───────────────────────→ P1（可观测性中断）
-├── 安全/审计类 DaemonSet 故障───────────────────────→ P1（安全边界失效）
+├── CNI 类 DaemonSet 问题（calico-node/cilium）──────→ P0（网络中断）
+├── kube-proxy 问题────────────────────────────────→ P0（Service 不通）
+├── 日志/监控类 DaemonSet 问题───────────────────────→ P1（可观测性中断）
+├── 安全/审计类 DaemonSet 问题───────────────────────→ P1（安全边界失效）
 ├── 单节点缺失非关键 DaemonSet───────────────────────→ P2（局部影响）
 └── 更新策略卡住但不影响当前运行─────────────────────→ P2（4h 内处理）
 ```
 
 **立即升级条件**：
-- CNI DaemonSet（calico-node/cilium/flannel）大面积故障
-- kube-proxy DaemonSet 大面积故障
+- CNI DaemonSet（calico-node/cilium/flannel）大面积问题
+- kube-proxy DaemonSet 大面积问题
 - 超过 30% 节点缺失同一 DaemonSet
 
 ## 执行流程
@@ -259,7 +259,7 @@ kubectl describe node <missing-node> | grep -A 10 "Taints:"
 ```
 > **判断规则**: 节点有 NoSchedule/NoExecute 污点 → RC-003/004
 
-**Step T4**: 统计故障范围
+**Step T4**: 统计问题范围
 ```bash
 kubectl get daemonset <name> -n <namespace> -o jsonpath='{
   "desired": .status.desiredNumberScheduled,
@@ -274,7 +274,7 @@ kubectl get daemonset <name> -n <namespace> -o jsonpath='{
 
 | 条件 | 级别 | 说明 |
 |------|------|------|
-| CNI/kube-proxy 类 DaemonSet 大面积故障 | P0 | 15min 内修复 |
+| CNI/kube-proxy 类 DaemonSet 大面积问题 | P0 | 15min 内修复 |
 | >30% 节点缺失同一 DaemonSet | P0 | 30min 内修复 |
 | 单节点缺失关键 DaemonSet（如监控） | P1 | 1h 内修复 |
 | 单节点缺失非关键 DaemonSet | P2 | 4h 内修复 |
@@ -282,8 +282,8 @@ kubectl get daemonset <name> -n <namespace> -o jsonpath='{
 
 ### 3.3 立即升级触发条件
 
-- CNI DaemonSet 故障导致 Pod 间网络不通
-- kube-proxy 故障导致 Service 不通
+- CNI DaemonSet 问题导致 Pod 间网络不通
+- kube-proxy 问题导致 Service 不通
 - >50% 节点缺失同一基础设施 DaemonSet
 
 ## 诊断工作流
@@ -458,7 +458,7 @@ kubectl get daemonset <name> -n <namespace> -o jsonpath='{
   ```
 - **超时**: 15s
 - **风险级别**: 🟡 中（短暂服务中断）
-- **判断规则**: 删除后重建成功 → 可能是临时故障；仍失败 → 根因未解决
+- **判断规则**: 删除后重建成功 → 可能是临时问题；仍失败 → 根因未解决
 
 **Step D3.3**: 临时添加 toleration 测试
 - **命令**:
@@ -624,7 +624,7 @@ kubectl get pods -n <namespace> -l <selector> -o wide
 
 ## 升级协议
 
-- **升级条件**: >30% 节点故障、CNI/kube-proxy 故障、诊断超时 30min
+- **升级条件**: >30% 节点问题、CNI/kube-proxy 问题、诊断超时 30min
 - **升级消息**: 包含 DaemonSet 名称、缺失节点列表、影响功能
 
 ## 版本兼容矩阵

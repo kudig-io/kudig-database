@@ -210,7 +210,7 @@ node-3: etcd-3 + apiserver-3
 
 raft 共识:
 - 写操作需要多数节点确认 (3节点 -> 2节点确认)
-- 允许 1 节点故障
+- 允许 1 节点问题
 ```
 
 ### external etcd

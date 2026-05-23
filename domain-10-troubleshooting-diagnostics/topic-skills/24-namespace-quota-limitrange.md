@@ -294,7 +294,7 @@ done
 
 以下任一条件满足时，**跳过诊断流程，立即升级至人工**：
 - kube-system Namespace 配额超限导致核心组件无法扩容
-- 多个 Namespace 同时出现配额错误，怀疑集群级准入控制器故障
+- 多个 Namespace 同时出现配额错误，怀疑集群级准入控制器问题
 - Namespace Terminating 卡死导致业务连续性受影响且需要紧急重建
 - ResourceQuota 配置变更后导致大规模 Pod 驱逐
 
@@ -980,7 +980,7 @@ kubectl get namespace <namespace> -o jsonpath='{.status.phase}'
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 - [ ] ResourceQuota 的 `used` < `hard`（所有资源项）
 - [ ] LimitRange 的 `min` <= `default` <= `max`（所有类型）
 - [ ] 测试 Pod 可以在 Namespace 中正常创建并运行
@@ -1004,15 +1004,15 @@ kubectl get namespace <namespace> -o jsonpath='{.status.phase}'
 |------|------|
 | 诊断超时 | 诊断工作流执行超过 20 分钟未确认根因 |
 | 修复失败 | 同一修复操作执行 2 次仍未通过验证 |
-| 严重性升级 | 初始分级为 P2 但影响面扩大到 P0 级别（如多个 Namespace 同时故障） |
+| 严重性升级 | 初始分级为 P2 但影响面扩大到 P0 级别（如多个 Namespace 同时问题） |
 | 未知根因 | 诊断完成但无法匹配任何已知根因 |
-| 集群级故障 | 怀疑 API Server 准入控制器异常 |
+| 集群级问题 | 怀疑 API Server 准入控制器异常 |
 
 ### 8.2 升级消息模板
 
 ```
 【{severity}】{skill_name} - {cluster_name}
-- 故障概述: Namespace {namespace} 的 {resource} 配额/限制异常
+- 问题概述: Namespace {namespace} 的 {resource} 配额/限制异常
 - 影响范围: {affected_namespaces} 个 Namespace，{affected_pods} 个 Pod 创建受阻
 - 已完成诊断: {completed_steps}
 - 初步发现: {root_cause_candidate}
@@ -1065,7 +1065,7 @@ kubectl get namespace <namespace> -o jsonpath='{.status.phase}'
 |---------|---------|---------|---------|
 | 将节点资源不足误诊为配额超限 | Pod Pending，Event 提示 insufficient resource | 节点 CPU/Memory 不足 | 检查 `kubectl describe node` 的 Allocatable 和 Requested |
 | 将 RBAC Forbidden 误诊为配额超限 | Pod 创建失败，提示 Forbidden | RBAC 权限不足 | 检查用户是否有 create pod 权限 |
-| 将正常配额限制误诊为故障 | 非生产 Namespace 配额告警 | 预期行为，防止资源滥用 | 区分告警阈值和实际故障 |
+| 将正常配额限制误诊为问题 | 非生产 Namespace 配额告警 | 预期行为，防止资源滥用 | 区分告警阈值和实际问题 |
 | 将 Terminating Pod 计入配额异常 | ResourceQuota used > Running Pod 数 | Terminating Pod 仍占用配额 | 检查 Pod 是否真正完成终止 |
 
 ### 10.2 深度知识引用
@@ -1155,7 +1155,7 @@ receivers:
 
 - [[domain-10-troubleshooting-diagnostics/topic-skills/23-job-cronjob-failure.md|SKILL-WORK-004 Job/CronJob 故障诊断]]
 - [[domain-10-troubleshooting-diagnostics/topic-skills/19-node-resource-pressure.md|SKILL-NODE-002 节点资源压力诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/20-networkpolicy-connectivity.md|SKILL-NET-004 NetworkPolicy 连通性故障]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/20-networkpolicy-connectivity.md|SKILL-NET-004 NetworkPolicy 连通性问题]]
 - [[domain-10-troubleshooting-diagnostics/topic-skills/21-statefulset-failure.md|SKILL-WORK-002 StatefulSet 故障诊断]]
 - [[domain-10-troubleshooting-diagnostics/topic-skills/22-daemonset-failure.md|SKILL-WORK-003 DaemonSet 故障诊断]]
 - [[domain-10-troubleshooting-diagnostics/24-quota-limitrange-troubleshooting.md|Quota/LimitRange 深度排查]]

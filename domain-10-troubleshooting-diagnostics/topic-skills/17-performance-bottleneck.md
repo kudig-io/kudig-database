@@ -179,7 +179,7 @@ created: "2026-05-23"
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径：
+按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 快速获取集群资源使用概览
 ```bash
@@ -230,7 +230,7 @@ ssh <node-ip> "iostat -x 1 5"
 - **API Server 不可用**: `kubectl` 命令本身执行超时或失败
 - **etcd 集群异常**: etcd 成员不健康或 Leader 频繁切换
 - **大规模 OOM**: 多个节点同时出现 OOM 事件
-- **级联故障**: 性能问题导致服务雪崩，影响面持续扩大
+- **级联问题**: 性能问题导致服务雪崩，影响面持续扩大
 - **未知模式**: 所有常规诊断均未发现异常，但性能问题持续
 
 > **升级消息模板**: 参见 Section 8.2
@@ -1302,7 +1302,7 @@ kubectl get --raw /healthz?verbose
 ```
 【{severity}】性能瓶颈诊断与调优 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: {service_name} 服务性能下降，P99 延迟从 {baseline_latency} 升至 {current_latency}
+- 问题概述: {service_name} 服务性能下降，P99 延迟从 {baseline_latency} 升至 {current_latency}
 - 影响范围:
   - 受影响服务: {affected_services}
   - 受影响用户: {estimated_users}
@@ -1418,7 +1418,7 @@ ssh <node-ip> "mount | grep cgroup"
 | 误诊场景 | 表面现象 | 实际根因 | 避免方法 |
 |---------|---------|---------|---------|
 | **将 CPU throttling 误判为应用 bug** | 应用响应慢，CPU 使用率显示不高（因为被限制了） | CPU limit 过低导致 CFS throttling | 先检查 `container_cpu_cfs_throttled_periods_total` 指标；`kubectl top` 显示的 CPU 接近 limit 也是信号 |
-| **将 conntrack 溢出误判为 DNS 故障** | 服务间调用失败，怀疑 DNS 解析问题 | conntrack 表满导致新连接被丢弃 | 检查 `dmesg | grep conntrack`；网络故障前先排查 conntrack 使用率 |
+| **将 conntrack 溢出误判为 DNS 问题** | 服务间调用失败，怀疑 DNS 解析问题 | conntrack 表满导致新连接被丢弃 | 检查 `dmesg | grep conntrack`；网络问题前先排查 conntrack 使用率 |
 | **将磁盘 I/O 瓶颈误判为应用慢** | 应用 P99 延迟高，CPU/Memory 看起来正常 | 磁盘 I/O 等待导致应用阻塞 | 始终检查 `iostat` 的 await 和 %util；iowait 高是关键信号 |
 | **将 JVM GC 问题误判为内存不足** | 应用 OOM 或内存使用高，增加内存限制后仍然出问题 | GC 配置不当导致长时间 STW（Stop-The-World） | 先分析 GC 日志；Full GC 频繁是 GC 配置问题而非内存不足 |
 | **将 NUMA 亲和性问题误判为内存性能差** | 内存密集型应用性能下降，但内存使用率不高 | 跨 NUMA 访问内存导致延迟高 | 使用 `numastat` 检查 remote accesses；特别是多 socket 服务器 |

@@ -74,7 +74,7 @@ created: "2026-05-23"
 
 ## 1. 概述
 
-Deployment 滚动更新故障是 [[Kubernetes|Kubernetes]] 生产环境中**最常见的工作负载问题类型**之一。当滚动更新失败时，可能导致新版本无法上线、旧版本无法退役、甚至服务完全不可用。Deployment Controller 通过 [[ReplicaSet|ReplicaSet]] 管理 Pod 的创建和删除，任何一个环节的失败都可能导致整个更新流程卡住。
+Deployment 滚动更新问题是 [[Kubernetes|Kubernetes]] 生产环境中**最常见的工作负载问题类型**之一。当滚动更新失败时，可能导致新版本无法上线、旧版本无法退役、甚至服务完全不可用。Deployment Controller 通过 [[ReplicaSet|ReplicaSet]] 管理 Pod 的创建和删除，任何一个环节的失败都可能导致整个更新流程卡住。
 
 此 [[SKILL|Skill]] 同时覆盖 **Deployment**、**[[StatefulSet|StatefulSet]]** 和 **DaemonSet** 三种工作负载类型的滚动更新故障诊断，以及**金丝雀部署**和**蓝绿部署**等高级部署模式的故障排查。
 
@@ -164,7 +164,7 @@ Deployment 滚动更新故障是 [[Kubernetes|Kubernetes]] 生产环境中**最�
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径：
+按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 检查 Deployment 滚动更新状态（10s）
 ```bash
@@ -222,7 +222,7 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
 - **服务完全不可用**: Deployment 的 AVAILABLE=0 且 DESIRED>0，所有 Pod 都无法提供服务
 - **回滚失败**: 执行 `kubectl rollout undo` 后状态仍未改善（5 分钟内）
 - **数据一致性风险**: StatefulSet 更新涉及数据迁移且卡住，可能存在数据不一致
-- **级联故障**: 多个关联服务的 Deployment 同时失败
+- **级联问题**: 多个关联服务的 Deployment 同时失败
 - **安全紧急发布**: 正在进行安全漏洞修复的发布但失败，需权衡继续推进还是回滚
 
 > **升级消息模板**: 参见 Section 8.2
@@ -569,7 +569,7 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
 - **超时**: 15s
 - **预期输出模式**: Webhook 配置列表
 - **判断规则**:
-  - 存在针对 pods 的 Webhook 且 `failurePolicy: Fail` → Webhook 故障可能阻止 Pod 创建（RC-012）
+  - 存在针对 pods 的 Webhook 且 `failurePolicy: Fail` → Webhook 问题可能阻止 Pod 创建（RC-012）
   - Webhook endpoint 不可达 → Pod 创建被拒绝
   - 检查 Events 中是否有 `admission webhook denied the request` 消息
 - **版本差异**: 无
@@ -781,7 +781,7 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
 
 #### REM-005: 修复 ConfigMap/Secret 兼容性
 - **适用根因**: RC-004
-- **影响说明**: 修改 ConfigMap/Secret 可能影响所有引用它的 Pod。如果配置错误，可能导致更大范围的故障。建议在非生产环境验证后再应用。
+- **影响说明**: 修改 ConfigMap/Secret 可能影响所有引用它的 Pod。如果配置错误，可能导致更大范围的问题。建议在非生产环境验证后再应用。
 - **审批提示**: "建议修复 ConfigMap/Secret `CM_NAME` 的配置。该配置被 Deployment `NAME` 引用，修改将触发 Pod 重启。是否批准？"
 - **前置检查**:
   ```bash
@@ -1040,7 +1040,7 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   ```
 
 #### REM-011: 金丝雀/蓝绿部署流量切换修复
-- **适用根因**: 高级部署模式故障
+- **适用根因**: 高级部署模式问题
 - **审批要求**: 需要高级 SRE + 发布工程师审批
 - **操作步骤**:
   1. **确认当前流量路由配置**:
@@ -1124,7 +1124,7 @@ kubectl get deploy NAME -n NS -o jsonpath='{range .status.conditions[*]}{.type}:
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 
 - [ ] `kubectl rollout status` 显示 "successfully rolled out"
 - [ ] Deployment 的 READY、UP-TO-DATE、AVAILABLE 都等于 DESIRED
@@ -1164,9 +1164,9 @@ kubectl get deploy NAME -n NS -o jsonpath='{range .status.conditions[*]}{.type}:
 ### 8.2 升级消息模板
 
 ```
-【{severity}】Deployment 滚动更新故障 - {cluster_name}
+【{severity}】Deployment 滚动更新问题 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: Deployment {deployment_name} 在 namespace {namespace} 中滚动更新失败，持续 {duration}
+- 问题概述: Deployment {deployment_name} 在 namespace {namespace} 中滚动更新失败，持续 {duration}
 - 影响范围: 
   - 期望副本数: {desired_replicas}
   - 可用副本数: {available_replicas}
@@ -1318,15 +1318,15 @@ kubectl get deploy NAME -n NS -o jsonpath='{range .status.conditions[*]}{.type}:
 
 | 日期 | 版本 | 变更 | 原因 |
 |------|------|------|------|
-| 2026-04 | v1.0 | 初始版本发布。覆盖 K8s v1.28-v1.32，包含 12 个根因、11 个修复操作 | 滚动更新故障为高频运维问题，基于生产环境工单分析创建 |
+| 2026-04 | v1.0 | 初始版本发布。覆盖 K8s v1.28-v1.32，包含 12 个根因、11 个修复操作 | 滚动更新问题为高频运维问题，基于生产环境工单分析创建 |
 
 ### 10.4 待补充的知识空白
 
 以下领域在当前版本中覆盖有限，后续版本将增强：
 
 1. **Argo Rollouts**: Progressive Delivery 控制器的故障诊断（Canary/BlueGreen/Analysis）
-2. **Flagger**: 与 Flagger 集成的金丝雀部署故障
-3. **Istio Traffic Management**: Service Mesh 场景下的流量切换故障
+2. **Flagger**: 与 Flagger 集成的金丝雀部署问题
+3. **Istio Traffic Management**: Service Mesh 场景下的流量切换问题
 4. **Kustomize/Helm 部署**: 使用 GitOps 工具部署时的特定故障模式
 5. **GPU 工作负载**: GPU Pod 的特殊启动要求和失败模式
 6. **Spot/Preemptible 节点**: 在抢占式节点上的滚动更新策略

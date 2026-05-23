@@ -650,10 +650,10 @@ dr_drill_program:
     participants: ["全体IT团队", "业务部门", "管理层"]
     duration: "2 天"
     steps:
-      - "Day 1: 生产站点模拟故障"
+      - "Day 1: 生产站点模拟问题"
       - "Day 1: 执行完整故障切换到灾备站点"
       - "Day 1: 灾备站点承载生产流量（4小时）"
-      - "Day 2: 执行故障回切"
+      - "Day 2: 执行问题回切"
       - "Day 2: 验证数据完整性"
       - "Day 2: 演练总结与改进计划"
 ```
@@ -832,7 +832,7 @@ function Invoke-VeeamDiagnostics {
 
 #<!-- chunk: 故障排查手册 -->## 故障排查手册
 
-| 故障现象 | 可能原因 | 排查步骤 | 解决方案 |
+| 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
 |:---|:---|:---|:---|
 | 备份作业超时 | 存储性能瓶颈 | 检查存储 IOPS 和延迟 | 减少并发任务数，优化备份窗口 |
 | 即时恢复后性能差 | 备份存储 I/O 不足 | 监控备份存储读取速度 | 快速 vMotion 到生产存储 |
@@ -853,7 +853,7 @@ function Invoke-VeeamDiagnostics {
 
 #<!-- chunk: CDP 策略配置 -->## CDP 策略配置
 
-Veeam 的 Continuous Data Protection（CDP）功能基于 VMware vSphere 的 I/O Filter 框架，可以在虚拟机磁盘级别实现持续的数据复制。CDP 的 RPO 可以达到秒级——当源虚拟机发生故障时，CDP 副本的数据丢失量不超过配置的 RPO 目标。
+Veeam 的 Continuous Data Protection（CDP）功能基于 VMware vSphere 的 I/O Filter 框架，可以在虚拟机磁盘级别实现持续的数据复制。CDP 的 RPO 可以达到秒级——当源虚拟机发生问题时，CDP 副本的数据丢失量不超过配置的 RPO 目标。
 
 CDP 的核心优势在于它不依赖定时快照，而是通过 VMware VAIO（vSphere APIs for I/O Filtering）实时捕获虚拟机的每个写操作，将数据变更异步传输到目标站点。这意味着即使源站点完全崩溃，CDP 副本的数据也只丢失最后几秒的数据。
 

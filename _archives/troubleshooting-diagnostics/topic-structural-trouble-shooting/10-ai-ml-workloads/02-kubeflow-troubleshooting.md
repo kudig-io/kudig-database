@@ -69,7 +69,7 @@ prerequisites:
 
 ### 1.1 常见问题现象
 
-#### 1.1.1 Kubeflow Pipelines 故障
+#### 1.1.1 Kubeflow Pipelines 问题
 
 | 现象 | 报错信息 | 报错来源 | 查看方式 |
 |------|----------|----------|----------|
@@ -79,7 +79,7 @@ prerequisites:
 | 持久化代理失败 | `persistentagent failed to create client` | Persistence Agent | `kubectl logs -n kubeflow deployment/ml-pipeline-persistenceagent` |
 | 定时调度未触发 | `cron workflow not triggered` | Argo Events | `kubectl get cronworkflows -A` |
 
-#### 1.1.2 Katib 超参数调优故障
+#### 1.1.2 Katib 超参数调优问题
 
 | 现象 | 报错信息 | 报错来源 | 查看方式 |
 |------|----------|----------|----------|
@@ -88,7 +88,7 @@ prerequisites:
 | 建议算法报错 | `algorithm service error: ...` | Katib Suggestion | Suggestion Pod 日志 |
 | 指标收集失败 | `metrics collector cannot parse result` | Metrics Collector | Sidecar 日志 |
 
-#### 1.1.3 KServe 模型服务故障
+#### 1.1.3 KServe 模型服务问题
 
 | 现象 | 报错信息 | 报错来源 | 查看方式 |
 |------|----------|----------|----------|
@@ -98,7 +98,7 @@ prerequisites:
 | 金丝雀发布失败 | `traffic split failed` | KServe Controller | Controller 日志 |
 | 解释器服务报错 | `explainer container error` | KServe Explainer | Explainer Pod 日志 |
 
-#### 1.1.4 Notebook 服务器故障
+#### 1.1.4 Notebook 服务器问题
 
 | 现象 | 报错信息 | 报错来源 | 查看方式 |
 |------|----------|----------|----------|
@@ -187,7 +187,7 @@ Kubeflow 是一个复杂的 ML 平台，由多个独立组件组成：
 ### 2.2 排查逻辑决策树
 
 ```
-Kubeflow 故障
+Kubeflow 问题
     ├── Central Dashboard 无法访问
     │   ├── Istio Gateway 未就绪？──► 检查 istio-ingressgateway Pod
     │   ├── Dex/OIDC 认证失败？──► 检查 dex/auth 配置和 Secret
@@ -285,11 +285,11 @@ echo "  Istio IngressGateway:"
 kubectl get pods -n istio-system -l app=istio-ingressgateway -o jsonpath='{.items[*].status.phase}'
 ```
 
-#### Pipeline 故障深度诊断
+#### Pipeline 问题深度诊断
 
 ```bash
 #!/bin/bash
-# Pipeline 故障深度诊断脚本
+# Pipeline 问题深度诊断脚本
 # 用法: ./diagnose-pipeline.sh <workflow-name> <namespace>
 
 WORKFLOW_NAME=${1:-""}
@@ -900,7 +900,7 @@ groups:
 6. **定期清理**：建立 Workflow、过期 Trial、旧模型版本的自动清理策略
 7. **Istio 调优**：大规模 Kubeflow 部署时，调大 Istio Proxy 的 `concurrency` 和连接池参数
 
-### 典型故障案例
+### 典型问题案例
 
 #### 案例一：Pipeline 并发过高导致 Argo Controller 崩溃
 

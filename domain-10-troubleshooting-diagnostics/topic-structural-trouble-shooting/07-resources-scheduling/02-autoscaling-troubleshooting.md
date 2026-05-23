@@ -106,13 +106,13 @@ k8s_versions:
 4. **资源请求**：HPA 需 requests，检查目标工作负载 resources 配置。
 5. **扩缩策略**：检查 `behavior.scaleUp/scaleDown` 与稳定窗口。
 6. **快速缓解**：
-   - metrics-server 故障：重启并调整证书/资源。
+   - metrics-server 问题：重启并调整证书/资源。
    - 扩缩振荡：收敛策略或提高稳定窗口。
 7. **证据留存**：保存 HPA/VPA 描述、metrics-server 日志与 metrics API 输出。
 
 ## 概述
 
-Horizontal Pod Autoscaler (HPA) 和 Vertical Pod Autoscaler (VPA) 是 Kubernetes 的自动扩缩容机制。HPA 通过调整 Pod 副本数实现水平扩展，VPA 通过调整 Pod 资源请求/限制实现垂直扩展。本文档覆盖自动扩缩容相关故障的诊断与解决方案。
+Horizontal Pod Autoscaler (HPA) 和 Vertical Pod Autoscaler (VPA) 是 Kubernetes 的自动扩缩容机制。HPA 通过调整 Pod 副本数实现水平扩展，VPA 通过调整 Pod 资源请求/限制实现垂直扩展。本文档覆盖自动扩缩容相关问题的诊断与解决方案。
 
 ## 目录
 
@@ -168,7 +168,7 @@ Horizontal Pod Autoscaler (HPA) 和 Vertical Pod Autoscaler (VPA) 是 Kubernetes
 | 不缩容 | 负载低但副本数不减少 | 副本数持续高于 minReplicas | `kubectl get hpa` |
 | 扩容振荡 | 副本数频繁增减 | 事件显示反复 SuccessfulRescale | `kubectl describe hpa` |
 | 扩容不足 | 副本数达到 max 但仍不够 | `ScaleUpLimit` | `kubectl describe hpa` |
-| metrics-server 故障 | 所有 HPA 失效 | `the HPA was unable to compute the replica count` | API Server 日志 |
+| metrics-server 问题 | 所有 HPA 失效 | `the HPA was unable to compute the replica count` | API Server 日志 |
 
 ### VPA 常见问题
 
@@ -179,16 +179,16 @@ Horizontal Pod Autoscaler (HPA) 和 Vertical Pod Autoscaler (VPA) 是 Kubernetes
 | 资源推荐过大/过小 | 推荐值与实际需求差距大 | 应用性能问题 | `kubectl describe vpa` |
 | VPA 与 HPA 冲突 | 资源和副本同时变化 | 扩缩容行为异常 | 同时检查 HPA 和 VPA |
 | Pod 重启过频 | VPA 频繁调整导致重启 | Pod 频繁 Terminating | `kubectl get pods -w` |
-| VPA 组件故障 | Recommender/Updater 不工作 | VPA 相关 Pod 异常 | `kubectl get pods -n kube-system` |
+| VPA 组件问题 | Recommender/Updater 不工作 | VPA 相关 Pod 异常 | `kubectl get pods -n kube-system` |
 
 ### 影响分析
 
-| 故障类型 | 直接影响 | 间接影响 | 影响范围 |
+| 问题类型 | 直接影响 | 间接影响 | 影响范围 |
 |---------|---------|---------|---------|
-| HPA 不扩容 | 服务过载，响应变慢 | 用户体验下降，可能级联故障 | 受影响的服务 |
+| HPA 不扩容 | 服务过载，响应变慢 | 用户体验下降，可能级联问题 | 受影响的服务 |
 | HPA 不缩容 | 资源浪费 | 成本增加，资源紧张 | 集群资源 |
 | HPA 振荡 | 服务不稳定，频繁扩缩 | 连接中断，服务质量波动 | 受影响的服务及其客户端 |
-| metrics-server 故障 | 所有 HPA 失效 | kubectl top 不可用 | 整个集群 |
+| metrics-server 问题 | 所有 HPA 失效 | kubectl top 不可用 | 整个集群 |
 | VPA 过度调整 | Pod 频繁重启 | 服务可用性下降 | 受影响的工作负载 |
 
 ---
@@ -234,7 +234,7 @@ HPA 扩缩容决策流程
 ### 排查决策树
 
 ```
-HPA/VPA 故障
+HPA/VPA 问题
      │
      ├─── HPA 显示 `<unknown>`？
      │         │
@@ -262,7 +262,7 @@ HPA/VPA 故障
      │         ├─ 数据不足 ──→ 等待收集更多数据
      │         └─ Pod 控制器不支持 ──→ 检查 targetRef
      │
-     └─── metrics-server 故障？
+     └─── metrics-server 问题？
                │
                ├─ Pod 状态 ──→ kubectl get pods -n kube-system
                ├─ 证书问题 ──→ 检查 --kubelet-insecure-tls

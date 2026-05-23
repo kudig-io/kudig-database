@@ -120,10 +120,10 @@ cross_refs:
     label: "StatefulSet 深度排查"
   - type: "[[SKILL|skill]]"
     path: "../domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md"
-    label: "SKILL-WORK-001 Deployment 故障"
+    label: "SKILL-WORK-001 Deployment 问题"
   - type: "skill"
     path: "../domain-10-troubleshooting-diagnostics/topic-skills/07-pvc-storage-failure.md"
-    label: "SKILL-STORE-001 PVC 存储故障"
+    label: "SKILL-STORE-001 PVC 存储问题"
 authors:
   - name: KUDIG Team
     role: contributor
@@ -153,18 +153,18 @@ StatefulSet 是 [[entities/kubernetes|kubernetes]] 中管理有状态应用的�
 
 ```
 影响范围 + 数据风险
-├── 数据库主节点（如 mysql-0 / kafka-0）故障 ────→ P0（立即处理）
-├── 有状态集群多数节点故障─────────────────────→ P0（数据一致性风险）
-├── 单副本故障（非主节点）─────────────────────→ P1（1h 内修复）
+├── 数据库主节点（如 mysql-0 / kafka-0）问题 ────→ P0（立即处理）
+├── 有状态集群多数节点问题─────────────────────→ P0（数据一致性风险）
+├── 单副本问题（非主节点）─────────────────────→ P1（1h 内修复）
 ├── 更新策略卡住但不影响当前服务───────────────→ P2（4h 内修复）
 └── 新扩容副本无法启动─────────────────────────→ P2（4h 内修复）
 ```
 
 **立即升级条件**（跳过所有诊断步骤）：
 - 有状态集群出现脑裂（多主）或数据不一致
-- 主节点故障且无法自动故障转移
-- 所有副本同时故障（可能存储后端问题）
-- PVC 数据丢失风险（如存储系统故障）
+- 主节点问题且无法自动故障转移
+- 所有副本同时问题（可能存储后端问题）
+- PVC 数据丢失风险（如存储系统问题）
 
 ## 执行流程
 
@@ -217,7 +217,7 @@ StatefulSet 是 [[entities/kubernetes|kubernetes]] 中管理有状态应用的�
 | S4 | Headless Service 无 Endpoints | `kubectl get endpoints <svc>` | 0.85 | Service 配置错误 |
 | S5 | 滚动更新卡在特定序号 | `kubectl rollout status sts/<name>` | 0.90 | 应用启动慢 → SKILL-POD-001 |
 | S6 | Pod 删除后新 Pod 无法创建 | `kubectl get events` | 0.85 | 节点资源不足 → SKILL-POD-002 |
-| S7 | DNS 解析 `<pod>.<svc>` 失败 | `nslookup` from test Pod | 0.85 | CoreDNS 故障 → SKILL-NET-001 |
+| S7 | DNS 解析 `<pod>.<svc>` 失败 | `nslookup` from test Pod | 0.85 | CoreDNS 问题 → SKILL-NET-001 |
 | S8 | 有状态集群应用报告节点不一致 | 应用日志/状态检查 | 0.80 | 应用自身 bug |
 
 ### 2.2 工单关键词映射
@@ -278,17 +278,17 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
 
 | 条件 | 级别 | 说明 |
 |------|------|------|
-| 主节点（ordinal 0 或集群主）故障 | P0 | 15min 内修复 |
+| 主节点（ordinal 0 或集群主）问题 | P0 | 15min 内修复 |
 | 有状态集群多数节点不可用 | P0 | 30min 内修复 |
-| 单非主节点故障 | P1 | 1h 内修复 |
+| 单非主节点问题 | P1 | 1h 内修复 |
 | 更新策略卡住但不影响服务 | P2 | 4h 内修复 |
 | 新扩容副本无法启动 | P2 | 4h 内修复 |
 
 ### 3.3 立即升级触发条件
 
 - 有状态数据库集群脑裂（多主）
-- 主节点故障且无自动故障转移
-- PVC 数据丢失或存储后端故障
+- 主节点问题且无自动故障转移
+- PVC 数据丢失或存储后端问题
 - 所有副本同时无法启动
 
 ## 诊断工作流
@@ -547,7 +547,7 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
 | 根因 ID | 描述 | 概率 | 诊断证据 | FTA 映射 |
 |--------|------|------|---------|---------|
 | RC-001 | Pod 启动顺序卡住（前一 Pod 未 Ready，后续不启动） | 高 | D1.2 序号不连续；D2.1 Events | ordinal_startup_blocked |
-| RC-002 | PVC 绑定失败（StorageClass 缺失/后端故障） | 高 | D1.3 PVC Pending；D2.2 详情 | pvc_binding_failure |
+| RC-002 | PVC 绑定失败（StorageClass 缺失/后端问题） | 高 | D1.3 PVC Pending；D2.2 详情 | pvc_binding_failure |
 | RC-003 | 存储挂载失败（PV 拓扑/权限/格式问题） | 中 | D2.1 FailedMount；D2.4 挂载关系 | volume_mount_failure |
 | RC-004 | Headless Service 配置错误 | 中 | D1.4 clusterIP!=None 或 Endpoints 为空；D2.3 DNS 失败 | headless_service_misconfig |
 | RC-005 | 更新策略阻塞（Partition 设置不当） | 中 | D1.5 partition>0；D3.3 调整后恢复 | update_strategy_blocked |
@@ -785,7 +785,7 @@ kubectl run -n <namespace> dns-test --image=busybox:1.36 --rm -it --restart=Neve
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 - [ ] StatefulSet READY == DESIRED == CURRENT
 - [ ] 所有 Pod Running 且 Ready
 - [ ] 所有 PVC Bound
@@ -812,13 +812,13 @@ kubectl run -n <namespace> dns-test --image=busybox:1.36 --rm -it --restart=Neve
 | 修复失败 | 同一修复操作执行 2 次仍未通过验证 |
 | 数据风险 | 诊断发现数据丢失或不一致风险 |
 | 集群脑裂 | 有状态集群出现脑裂且无法自动恢复 |
-| 存储故障 | 存储后端（如 EBS/Ceph）故障 |
+| 存储问题 | 存储后端（如 EBS/Ceph）问题 |
 
 ### 8.2 升级消息模板
 
 ```
 【{severity}】{skill_name} - {cluster_name}
-- 故障概述: StatefulSet <name> 在 namespace <ns> 中有 <count> 个副本异常
+- 问题概述: StatefulSet <name> 在 namespace <ns> 中有 <count> 个副本异常
 - 影响范围: <affected-services> 有状态服务受影响
 - 已完成诊断: {completed_steps}
 - 初步发现: {findings}

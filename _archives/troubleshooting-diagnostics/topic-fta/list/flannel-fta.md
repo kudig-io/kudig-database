@@ -1,6 +1,6 @@
 ---
 title: Flannel 网络异常故障树分析
-description: Flannel CNI 网络插件异常故障树分析，覆盖 VXLAN/host-gw 模式、跨主机通信、IP 分配等故障路径
+description: Flannel CNI 网络插件异常故障树分析，覆盖 VXLAN/host-gw 模式、跨主机通信、IP 分配等问题路径
 category: fta
 tags:
 - fta
@@ -23,7 +23,7 @@ audience:
 estimated_read_time: 5min
 intent_queries:
 - Flannel 网络异常故障树分析 是什么
-- Flannel VXLAN 故障 根因分析
+- Flannel VXLAN 问题 根因分析
 - Flannel 跨主机通信 故障树
 trigger_keywords:
 - Flannel
@@ -124,7 +124,7 @@ flowchart TD
 
 ---
 
-## 常见故障场景
+## 常见问题场景
 
 ### 场景 1: Pod 无法跨节点通信
 

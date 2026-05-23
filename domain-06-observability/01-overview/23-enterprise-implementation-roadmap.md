@@ -134,7 +134,7 @@ observability_maturity_model:
       
   level_4_predictive:  # 预测级 - 前瞻预防
     characteristics:
-      - 预测性故障预警
+      - 预测性问题预警
       - 自适应资源配置
       - 智能容量规划
       - 业务风险量化
@@ -150,7 +150,7 @@ observability_maturity_model:
       
   level_5_autonomous:  # 自主级 - 智能自治
     characteristics:
-      - 自主故障修复
+      - 自主问题修复
       - 动态架构优化
       - 智能业务决策
       - 生态协同进化
@@ -185,8 +185,8 @@ assessment_questionnaire:
       
   incident_response:
     questions:
-      - "平均故障发现时间(MTTD)是多少？"
-      - "平均故障修复时间(MTTR)是多少？"
+      - "平均问题发现时间(MTTD)是多少？"
+      - "平均问题修复时间(MTTR)是多少？"
       - "是否有标准化的故障处理流程？"
       - "团队是否具备足够的排障技能？"
     benchmarks:
@@ -285,7 +285,7 @@ phase_2_enhancement:
 ```yaml
 phase_3_aiops:
   objectives:
-    - 实现预测性故障预警
+    - 实现预测性问题预警
     - 建立智能根因分析
     - 构建自主修复能力
     - 优化资源配置效率

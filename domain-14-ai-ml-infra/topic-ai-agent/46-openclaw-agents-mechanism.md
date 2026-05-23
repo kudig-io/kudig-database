@@ -424,7 +424,7 @@ engine.check_drift("kubectl get pods -n default")  # True → BLOCKED
 
 ---
 
-## 6. 故障排除
+## 6. 问题排除
 
 ### 6.1 常见问题
 
@@ -443,7 +443,7 @@ engine.check_drift("kubectl get pods -n default")  # True → BLOCKED
 AGENTS.md 配置验证:
 
 □ 唤醒协议：是否包含完整的 4 步序列？
-□ 任务分类：关键词列表是否覆盖所有常见故障类型？
+□ 任务分类：关键词列表是否覆盖所有常见问题类型？
 □ 工作流：五阶段是否有明确的 Token 预算分配？
 □ 异常处理：是否覆盖 信息不足/工具失败/安全拦截 三种异常？
 □ 反漂移：是否配置了连续相同操作的中断机制？

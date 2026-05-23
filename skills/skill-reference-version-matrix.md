@@ -48,7 +48,7 @@ created: "2026-05-23"
 当节点正在关机时，[[kubelet|kubelet]] 会尝试优雅终止 Pod。在诊断时需注意区分计划关机和异常关机：
 
 - 检查 `shutdownGracePeriod` 和 `shutdownGracePeriodCriticalPods` 配置
-- 日志中出现 `shutting down gracefully` 不一定是故障
+- 日志中出现 `shutting down gracefully` 不一定是问题
 - **诊断影响**: D2.2 中看到 `shutting down gracefully` 日志时，需确认是否为计划内操作
 
 #### [v1.30+]: Node swap support (beta)

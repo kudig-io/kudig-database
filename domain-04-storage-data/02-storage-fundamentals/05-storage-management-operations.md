@@ -369,7 +369,7 @@ groups:
       severity: critical
     annotations:
       summary: "磁盘故障预测 ({{ $labels.device }})"
-      description: "SMART状态异常，预计可能发生故障"
+      description: "SMART状态异常，预计可能发生问题"
 
   # 存储空间监控
   - alert: StorageSpaceCritical
@@ -473,7 +473,7 @@ EOF
           },
           {
             "expr": "count(node_smartctl_device_smart_healthy == 0)",
-            "legendFormat": "故障磁盘"
+            "legendFormat": "问题磁盘"
           }
         ]
       }
@@ -811,8 +811,8 @@ DR_RECOVERY_DRILL() {
         "full")
             echo "执行完整恢复演练..." | tee -a $drill_log
             
-            # 1. 模拟系统故障
-            echo "1. 模拟故障场景" | tee -a $drill_log
+            # 1. 模拟系统问题
+            echo "1. 模拟问题场景" | tee -a $drill_log
             systemctl stop mysql postgresql
             
             # 2. 执行恢复
@@ -866,9 +866,9 @@ chmod +x /usr/local/bin/drill-recovery.sh
 ```
 存储故障处理标准流程 (SOP):
 
-1. 故障发现与确认
+1. 问题发现与确认
    ├── 监控告警接收
-   ├── 故障现象确认
+   ├── 问题现象确认
    └── 影响范围评估
 
 2. 应急响应
@@ -892,7 +892,7 @@ chmod +x /usr/local/bin/drill-recovery.sh
    └── 用户验收确认
 
 6. 总结改进
-   ├── 故障复盘会议
+   ├── 问题复盘会议
    ├── 根因分析报告
    └── 预防措施制定
 ```
@@ -911,12 +911,12 @@ DISK_FAILURE_HANDLER() {
     local handler_log="/var/log/storage/disk_failure_$(date +%Y%m%d_%H%M%S).log"
     
     echo "=== 磁盘故障处理 ===" | tee $handler_log
-    echo "故障磁盘: $failed_disk" | tee -a $handler_log
+    echo "问题磁盘: $failed_disk" | tee -a $handler_log
     echo "处理时间: $(date)" | tee -a $handler_log
     echo "" | tee -a $handler_log
     
-    # 1. 故障确认
-    echo "1. 故障确认阶段" | tee -a $handler_log
+    # 1. 问题确认
+    echo "1. 问题确认阶段" | tee -a $handler_log
     smartctl -H $failed_disk | tee -a $handler_log
     smartctl -a $failed_disk | grep -E "(Reallocated_Sector|Pending_Sector|Uncorrectable_Error)" | tee -a $handler_log
     
@@ -934,7 +934,7 @@ DISK_FAILURE_HANDLER() {
     # 3. 应急处理
     echo -e "\n3. 应急处理" | tee -a $handler_log
     if mdadm --detail --scan | grep -q $failed_disk; then
-        echo "标记磁盘为故障状态" | tee -a $handler_log
+        echo "标记磁盘为问题状态" | tee -a $handler_log
         mdadm --fail $(mdadm --detail --scan | grep $failed_disk | cut -d' ' -f2) $failed_disk | tee -a $handler_log
         
         echo "从阵列中移除磁盘" | tee -a $handler_log
@@ -1584,7 +1584,7 @@ chmod +x /usr/local/bin/auto-inspector.py
 存储运维成熟度等级:
 
 Level 1 - 基础运维 (Reactive)
-├── 被动响应故障
+├── 被动响应问题
 ├── 手工操作为主
 ├── 缺乏标准化流程
 └── 监控覆盖不全
@@ -1608,7 +1608,7 @@ Level 4 - 智能化 (Preventive)
 └── 全面自动化运维
 
 Level 5 - 自主化 (Autonomous)
-├── 自主故障修复
+├── 自主问题修复
 ├── 智能资源调度
 ├── 无人值守运维
 └── 持续优化改进
@@ -1656,8 +1656,8 @@ Level 5 - 自主化 (Autonomous)
 |:---|:---|:---:|:---|
 | **可用性** | 系统可用率 | >99.9% | (总时间-宕机时间)/总时间 |
 | **性能** | 平均响应时间 | <10ms | 请求响应时间平均值 |
-| **可靠性** | MTBF(平均故障间隔) | >1000天 | 总运行时间/故障次数 |
-| **恢复力** | MTTR(平均恢复时间) | <30分钟 | 故障修复时间平均值 |
+| **可靠性** | MTBF(平均问题间隔) | >1000天 | 总运行时间/问题次数 |
+| **恢复力** | MTTR(平均恢复时间) | <30分钟 | 问题修复时间平均值 |
 | **效率** | 自动化率 | >80% | 自动化操作/总操作 |
 | **质量** | 变更成功率 | >95% | 成功变更/总变更 |
 

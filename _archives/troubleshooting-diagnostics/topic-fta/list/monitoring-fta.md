@@ -114,7 +114,7 @@ flowchart TD
   CAT_ALERT --> C_OR
   C_OR --> C1["C1. 规则语法错误<br/>PromQL 不合法"]
   C_OR --> C2["C2. 阈值配置不当<br/>过高/过低/硬编码"]
-  C_OR --> C3["C3. for 持续时间过长<br/>短暂故障无法触发"]
+  C_OR --> C3["C3. for 持续时间过长<br/>短暂问题无法触发"]
   C_OR --> C4["C4. 规则评估失败<br/>依赖指标不存在"]
   C_OR --> C5_AND["C5. 告警完全失效<br/>(AND 门)"]
 
@@ -264,7 +264,7 @@ flowchart TD
       "control": "and_gate", "gate_type": "AND",
       "conditions": ["Target 采集持续失败（up == 0）", "缺少 up==0 的告警规则"],
       "combined_severity": "critical",
-      "description": "采集失败但无告警，指标静默丢失，故障时无数据可查",
+      "description": "采集失败但无告警，指标静默丢失，问题时无数据可查",
       "next_steps": ["event_target_down_persistent", "event_no_up_alert"],
       "metadata": {
         "severity": "critical",
@@ -401,7 +401,7 @@ flowchart TD
         "probability": "common",
         "mttr_minutes": 15,
         "detection": {
-          "events": ["告警噪声过多或关键故障未触发告警"],
+          "events": ["告警噪声过多或关键问题未触发告警"],
           "metrics": [],
           "logs": []
         },
@@ -414,7 +414,7 @@ flowchart TD
     },
     {
       "name": "C3. for 持续时间过长", "action": "bottom_event", "step": "event_for_too_long",
-      "description": "告警规则 for 持续时间设置过长，短暂但严重的故障无法触发告警",
+      "description": "告警规则 for 持续时间设置过长，短暂但严重的问题无法触发告警",
       "next_step": "end",
       "metadata": {
         "severity": "medium",
@@ -426,7 +426,7 @@ flowchart TD
           "logs": []
         },
         "remediation": {
-          "manual_steps": ["根据故障严重程度调整 for 时间（critical: 1-5m, warning: 5-15m）", "对关键告警减小 for 时间", "使用不同 severity 设置不同 for 持续时间"],
+          "manual_steps": ["根据问题严重程度调整 for 时间（critical: 1-5m, warning: 5-15m）", "对关键告警减小 for 时间", "使用不同 severity 设置不同 for 持续时间"],
           "auto_actions": []
         },
         "version_notes": ""
@@ -457,14 +457,14 @@ flowchart TD
       "control": "and_gate", "gate_type": "AND",
       "conditions": ["规则评估持续报错（无法产生告警）", "缺少元告警监控规则评估状态"],
       "combined_severity": "critical",
-      "description": "告警系统本身失效但无人知晓，关键故障发生时无告警通知",
+      "description": "告警系统本身失效但无人知晓，关键问题发生时无告警通知",
       "next_steps": ["event_rule_eval_broken", "event_no_meta_alert"],
       "metadata": {
         "severity": "critical",
         "probability": "low",
         "mttr_minutes": 30,
         "detection": {
-          "events": ["事后排查发现告警系统在故障期间不工作"],
+          "events": ["事后排查发现告警系统在问题期间不工作"],
           "metrics": ["absent(ALERTS{alertname='Watchdog'})"],
           "logs": []
         },

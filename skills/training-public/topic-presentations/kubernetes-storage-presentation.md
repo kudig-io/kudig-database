@@ -86,7 +86,7 @@ created: "2026-05-23"
 2. 描述 CSI 挂载的完整流程（CreateVolume → Stage → Publish）
 3. 配置 WaitForFirstConsumer 解决多可用区调度问题
 4. 执行卷在线扩容、快照和恢复操作
-5. 排查 PVC Pending、Multi-Attach 等常见存储故障
+5. 排查 PVC Pending、Multi-Attach 等常见存储问题
 6. 设计完整的数据保护和备份恢复策略
 
 #<!-- chunk: 核心要点 -->## 核心要点
@@ -892,7 +892,7 @@ Kubernetes 存储
     └── 卷挂载失败告警
 ```
 
-#<!-- chunk: 存储故障速查表 -->## 存储故障速查表
+#<!-- chunk: 存储问题速查表 -->## 存储问题速查表
 
 | 现象 | 可能原因 | 排查命令 | 解决方案 |
 |------|---------|---------|---------|

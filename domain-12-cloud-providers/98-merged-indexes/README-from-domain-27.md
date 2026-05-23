@@ -859,9 +859,9 @@ document_version_specification:
 
 ## 多云运维故障排查
 
-### 常见故障速查表
+### 常见问题速查表
 
-| 故障现象 | 可能原因 | 诊断命令 | 解决方案 |
+| 问题现象 | 可能原因 | 诊断命令 | 解决方案 |
 |:---|:---|:---|:---|
 | Karmada 集群注册失败 | API 网络不通或证书错误 | `karmadactl get clusters` | 检查 kubeconfig 和网络连通性 |
 | 跨集群 Pod 无法通信 | Submariner 未建立隧道 | `subctl show connections` | 重新 join 并检查防火墙规则 |

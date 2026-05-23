@@ -466,7 +466,7 @@ kubectl get services -n <namespace> -o wide
 
 ### 应急响应预案
 
-**一级故障响应 (Critical)**
+**一级问题响应 (Critical)**
 - 响应时间：< 15分钟
 - 影响范围：核心业务中断
 - 处理流程：
@@ -477,11 +477,11 @@ kubectl get services -n <namespace> -o wide
   5. 服务恢复验证
   6. 事后复盘和改进
 
-**二级故障响应 (Major)**
+**二级问题响应 (Major)**
 - 响应时间：< 1小时
 - 影响范围：部分功能异常
 - 处理流程：
-  1. 记录故障详细信息
+  1. 记录问题详细信息
   2. 分析影响范围和用户群体
   3. 制定并评审修复方案
   4. 分阶段实施修复措施
@@ -992,7 +992,7 @@ options:
 - **Global Load Balancing**: 全球负载均衡
 - **Network Intelligence Center**: 网络智能中心
 
-## 故障排除
+## 问题排除
 
 ### 常见问题解决
 - **Node Pool Issues**: 节点池问题排查

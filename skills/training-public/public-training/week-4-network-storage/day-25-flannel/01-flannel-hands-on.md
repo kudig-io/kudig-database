@@ -133,7 +133,7 @@ etcdctl get /coreos.com/network/subnets
 
 ---
 
-## 4. Flannel 故障场景
+## 4. Flannel 问题场景
 
 ### 4.1 Pod 无法跨节点通信
 
@@ -258,7 +258,7 @@ difficulty: intermediate
 intent_queries:
   - "Flannel 网络怎么安装"
   - "VXLAN 隧道怎么工作"
-  - "Flannel 故障怎么排查"
+  - "Flannel 问题怎么排查"
   - "Pod 跨节点通信失败怎么办"
   - "Flannel 网络原理"
 trigger_keywords:

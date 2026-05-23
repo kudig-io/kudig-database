@@ -99,7 +99,7 @@ k8s_versions:
 
 ## 概述
 
-DaemonSet 确保所有（或部分）节点运行一个 Pod 副本，常用于日志收集、监控代理、网络插件等系统级服务。本文档覆盖 DaemonSet 常见故障的诊断与解决方案。
+DaemonSet 确保所有（或部分）节点运行一个 Pod 副本，常用于日志收集、监控代理、网络插件等系统级服务。本文档覆盖 DaemonSet 常见问题的诊断与解决方案。
 
 ---
 
@@ -145,13 +145,13 @@ DaemonSet 确保所有（或部分）节点运行一个 Pod 副本，常用于�
 
 ### 1.3 影响分析
 
-| 故障类型 | 直接影响 | 间接影响 | 影响范围 |
+| 问题类型 | 直接影响 | 间接影响 | 影响范围 |
 |---------|---------|---------|---------|
 | Pod 未调度到节点 | 特定节点缺少系统服务 | 日志丢失、监控盲区、网络不通 | 受影响节点 |
 | Pod CrashLoopBackOff | 系统服务不可用 | 依赖该服务的功能失效 | 单节点或全集群 |
-| CNI DaemonSet 故障 | 节点网络初始化失败 | 节点上所有 Pod 无法通信 | 全集群网络 |
-| 日志收集 DS 故障 | 日志无法采集 | 问题排查困难，合规风险 | 可观测性 |
-| 监控代理 DS 故障 | 指标无法采集 | 告警失效，问题无法及时发现 | 监控体系 |
+| CNI DaemonSet 问题 | 节点网络初始化失败 | 节点上所有 Pod 无法通信 | 全集群网络 |
+| 日志收集 DS 问题 | 日志无法采集 | 问题排查困难，合规风险 | 可观测性 |
+| 监控代理 DS 问题 | 指标无法采集 | 告警失效，问题无法及时发现 | 监控体系 |
 
 ---
 
@@ -197,7 +197,7 @@ fluentd     5         5         5       5            5           <none>         
 ### 2.3 排查决策树
 
 ```
-DaemonSet 故障
+DaemonSet 问题
        │
        ├─── DESIRED 数量不对？
        │         │
@@ -320,7 +320,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep <daemons
 
 | 注意事项 | 说明 |
 |---------|-----|
-| 系统关键组件 | CNI、kube-proxy 等系统 DaemonSet 故障会影响整个集群 |
+| 系统关键组件 | CNI、kube-proxy 等系统 DaemonSet 问题会影响整个集群 |
 | 节点污点 | 控制平面节点默认有污点，需要配置 tolerations 才能调度 |
 | 资源预留 | DaemonSet Pod 在每个节点运行，需考虑节点资源容量 |
 | 更新影响 | 系统级 DaemonSet 更新可能导致服务短暂中断 |
@@ -645,9 +645,9 @@ kubectl get pods -l <label-selector> -o wide
 
 ---
 
-### 3.5 系统关键 DaemonSet 故障
+### 3.5 系统关键 DaemonSet 问题
 
-#### 场景 1：CNI DaemonSet 故障 (如 Calico/Flannel)
+#### 场景 1：CNI DaemonSet 问题 (如 Calico/Flannel)
 
 **问题现象：**
 - 节点 NotReady
@@ -680,11 +680,11 @@ kubectl run test --rm -it --image=busybox --restart=Never -- ping <other-pod-ip>
 ```
 
 **风险提示：**
-- CNI 故障会导致节点网络中断
+- CNI 问题会导致节点网络中断
 - 重启 CNI Pod 可能导致短暂网络中断
 - 生产环境应逐节点处理
 
-#### 场景 2：kube-proxy DaemonSet 故障
+#### 场景 2：kube-proxy DaemonSet 问题
 
 **问题现象：**
 - Service 无法访问

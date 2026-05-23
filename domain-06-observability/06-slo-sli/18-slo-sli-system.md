@@ -338,7 +338,7 @@ sli_architecture:
       definition: 系统稳定性和可用性
       metrics:
         - uptime_percentage: 运行时间百分比
-        - mean_time_between_failures: 平均故障间隔时间
+        - mean_time_between_failures: 平均问题间隔时间
         - mean_time_to_recovery: 平均恢复时间
         - service_availability: 服务可用性
         
@@ -382,7 +382,7 @@ slo_setting_methodology:
         - application_metrics: 应用指标
         - user_behavior_data: 用户行为数据
         - business_outcomes: 业务结果数据
-        - incident_records: 故障记录
+        - incident_records: 问题记录
         
   step_2_stakeholder_alignment:
     key_stakeholders:
@@ -517,7 +517,7 @@ slo_monitoring_dashboard:
         metrics_displayed:
           - current_availability_percentage: 当前可用性百分比
           - historical_trend_chart: 历史趋势图表
-          - recent_incidents_timeline: 最近故障时间线
+          - recent_incidents_timeline: 最近问题时间线
           - error_budget_consumption: 错误预算消耗情况
           
       latency_panel:
@@ -532,7 +532,7 @@ slo_monitoring_dashboard:
           - current_error_rate: 当前错误率
           - error_classification_breakdown: 错误分类分解
           - root_cause_analysis: 根因分析
-          - incident_response_metrics: 故障响应指标
+          - incident_response_metrics: 问题响应指标
           
   alerting_section:
     proactive_alerts:
@@ -714,7 +714,7 @@ continuous_improvement_methodology:
         - capacity_planning: 容量规划
         
       corrective_actions:
-        - incident_response_improvement: 故障响应改进
+        - incident_response_improvement: 问题响应改进
         - postmortem_analysis: 事后复盘分析
         - process_refinement: 流程优化
         - tool_enhancement: 工具增强
@@ -774,7 +774,7 @@ continuous_improvement_methodology:
 |---------|---------|-------|---------|---------|
 | **业务价值** | 客户满意度提升 | 15-25% | NPS调研 | 季度 |
 | **技术效能** | 系统可用性改善 | 99.5%→99.9% | 监控系统 | 月度 |
-| **运营效率** | 故障响应时间缩短 | 50-70% | 工单系统 | 月度 |
+| **运营效率** | 问题响应时间缩短 | 50-70% | 工单系统 | 月度 |
 | **成本效益** | ROI投资回报率 | 300-500% | 财务分析 | 季度 |
 | **组织成熟度** | SLO覆盖率 | >80%服务 | 配置审计 | 季度 |
 | **创新促进** | 新功能发布频率 | 提升30-50% | 发布记录 | 月度 |

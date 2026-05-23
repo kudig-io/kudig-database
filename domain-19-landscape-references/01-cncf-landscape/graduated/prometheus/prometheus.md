@@ -190,7 +190,7 @@ description: '## 项目概述'
 - [[references/version-upgrade-guide|版本升级指南]] — Cross-reference
 - [[references/operations-terms|K8s 运维运营术语参考]] — Cross-reference
 - [[synthesis/kubeadm-cluster-operations|kubeadm 集群运维全景]] — Cross-reference
-- [[synthesis/K8s 故障分布与 MTTR 基准|K8s 故障分布与 MTTR 基准]] — Cross-reference
+- [[synthesis/K8s 问题分布与 MTTR 基准|K8s 问题分布与 MTTR 基准]] — Cross-reference
 - [[synthesis/控制器模式 × Operator 模式|控制器模式 × Operator 模式]] — Cross-reference
 - [[synthesis/Structural Troubleshooting Framework|Structural Troubleshooting Framework]] — Cross-reference
 - [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference

@@ -443,7 +443,7 @@ echo "Prometheus running: $(kubectl get pods -n monitoring -l app.kubernetes.io/
 | 网络存储 | 能配置复杂的网络和存储方案 | Week 2 |
 | 安全合规 | 能实施安全加固和合规检查 | Week 3-4 |
 | 监控告警 | 能构建完整的可观测性体系 | Week 3-4 |
-| 故障排查 | 能系统化排查和解决故障 | Week 3 |
+| 故障排查 | 能系统化排查和解决问题 | Week 3 |
 | GitOps | 能实施声明式持续部署 | Week 4 |
 
 ---

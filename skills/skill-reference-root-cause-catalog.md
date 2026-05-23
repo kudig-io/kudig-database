@@ -42,10 +42,10 @@ created: "2026-05-23"
 | RC-006 | **节点与 apiserver 网络不通** | 中 | D2.7, D2.2, D1.2 | `evt_api_unreachable`, `evt_policy_block`, `evt_route_fail` |
 | RC-007 | **kubelet 客户端证书过期** | 中 | D2.8, D2.2, D2.7 | `evt_kubelet_cert`, `evt_node_cert_expire` |
 | RC-008 | **PLEG 不健康导致 NotReady** | 中 | D2.6, D1.2, D2.3 | `evt_pleg`, `evt_and_pleg_timeout`, `evt_and_pleg_overload` |
-| RC-009 | **内核故障/硬件异常** | 低 | D2.9 | `evt_kernel_panic`, `evt_driver_issue` |
+| RC-009 | **内核问题/硬件异常** | 低 | D2.9 | `evt_kernel_panic`, `evt_driver_issue` |
 | RC-010 | **NTP 时间不同步** | 低 | D2.10, D2.8 | `evt_time_skew_tls` |
 | RC-011 | **CNI 插件异常** | 中 | D3.2, D1.2 | `evt_cni_fail` |
-| RC-012 | **节点被手动 cordon/drain** | 低 | D1.4, D1.1 | `evt_cordon`（非故障） |
+| RC-012 | **节点被手动 cordon/drain** | 低 | D1.4, D1.1 | `evt_cordon`（非问题） |
 
 ---
 

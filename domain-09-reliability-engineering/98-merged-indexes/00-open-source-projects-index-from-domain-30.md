@@ -119,7 +119,7 @@ k8s_versions:
 | **RPO** | Recovery Point Objective | 恢复点目标，即允许丢失的最大数据量，以时间衡量 |
 | **RTO** | Recovery Time Objective | 恢复时间目标，即从灾难发生到服务恢复的最大允许时间 |
 | **MTTR** | Mean Time To Recovery | 平均恢复时间，衡量灾备方案的实际恢复效率 |
-| **MTBF** | Mean Time Between Failures | 平均故障间隔时间，衡量系统可靠性 |
+| **MTBF** | Mean Time Between Failures | 平均问题间隔时间，衡量系统可靠性 |
 | **DR** | Disaster Recovery | 灾难恢复，从灾难中恢复IT服务的能力 |
 | **BC** | Business Continuity | 业务连续性，确保关键业务在灾难中持续运行 |
 | **HA** | High Availability | 高可用性，系统无中断运行的能力 |
@@ -151,7 +151,7 @@ k8s_versions:
 | **external-dns** | DNS 管理 | K8s DNS 记录自动管理 | — | 8k+ | v0.16 | Apache-2.0 | ★★★★ | 低 | 高 |
 | **Stash** | K8s 备份 | Restic 后端备份、应用钩子 | — | 4k+ | v2024.12 | Apache-2.0 | ★★★ | 低 | 中 |
 | **etcd-druid** | etcd 管理 | etcd 生命周期管理与备份编排 | — | 100+ | v0.27.0 | Apache-2.0 | ★★★ | 中 | 中 |
-| **Toxiproxy** | 网络模拟 | 网络故障模拟代理 | — | 11k+ | v2.11.0 | MIT | ★★★★ | 低 | 中 |
+| **Toxiproxy** | 网络模拟 | 网络问题模拟代理 | — | 11k+ | v2.11.0 | MIT | ★★★★ | 低 | 中 |
 
 ---
 
@@ -332,7 +332,7 @@ spec:
 | **Chaos Mesh** | Kubernetes 混沌编排 | CNCF Incubating | v2.7.0 | 6.5k+ | Apache-2.0 |
 | **PowerfulSeal** | K8s 混沌测试（已归档） | Bloomberg | v3.3.0 | 1k+ | Apache-2.0 |
 | **Chaos Monkey** | Netflix 微服务随机终止 | Netflix | v2.5.0 | 15k+ | Apache-2.0 |
-| **Toxiproxy** | 网络故障模拟代理 | Shopify | v2.11.0 | 11k+ | MIT |
+| **Toxiproxy** | 网络问题模拟代理 | Shopify | v2.11.0 | 11k+ | MIT |
 
 ##<!-- chunk: LitmusChaos 与 Chaos Mesh 对比 -->## LitmusChaos 与 Chaos Mesh 对比
 
@@ -340,7 +340,7 @@ spec:
 |:---|:---|:---|
 | **架构** | ChaosOperator + ChaosCenter | ChaosDashboard + ChaosController |
 | **实验定义** | ChaosEngine CRD | ChaosExperiment + Schedule CRD |
-| **故障类型** | Pod/Network/Storage/Node/Cloud | Pod/Network/IO/Time/Kernel/Stress |
+| **问题类型** | Pod/Network/Storage/Node/Cloud | Pod/Network/IO/Time/Kernel/Stress |
 | **调度能力** | 内建调度 | 内建 Schedule CRD |
 | **Web UI** | ChaosCenter（功能丰富） | Chaos Dashboard（直观易用） |
 | **CI/CD 集成** | Litmus SDK + GitHub Actions | 内建 Workflow 支持 |

@@ -525,7 +525,7 @@ kubectl get events --field-selector reason=Created
 kubectl get pods -l app=nginx-demo
 # 预期输出: 3 个 Running Pod
 
-# 步骤 2: 手动删除一个 Pod（模拟故障）
+# 步骤 2: 手动删除一个 Pod（模拟问题）
 kubectl delete pod nginx-demo-7c6b4f7d9b-abc12
 # 预期输出: pod "nginx-demo-7c6b4f7d9b-abc12" deleted
 
@@ -919,7 +919,7 @@ kubectl -n kube-system exec -it etcd-master -- \
 
 #<!-- chunk: Q8: etcd 的脑裂问题怎么解决？ -->## Q8: etcd 的脑裂问题怎么解决？
 
-**回答**: etcd 使用 Raft 共识算法来避免脑裂。关键设计是**必须部署奇数个节点**（3、5、7）。当网络分区发生时，只有拥有多数节点（quorum）的分区才能继续提供服务。例如 3 节点集群需要 2 节点存活，5 节点集群需要 3 节点存活。少数派分区会自动停止写入，避免数据不一致。生产环境推荐 3 节点起步（容忍 1 节点故障），超大规模集群使用 5 节点（容忍 2 节点故障）。
+**回答**: etcd 使用 Raft 共识算法来避免脑裂。关键设计是**必须部署奇数个节点**（3、5、7）。当网络分区发生时，只有拥有多数节点（quorum）的分区才能继续提供服务。例如 3 节点集群需要 2 节点存活，5 节点集群需要 3 节点存活。少数派分区会自动停止写入，避免数据不一致。生产环境推荐 3 节点起步（容忍 1 节点问题），超大规模集群使用 5 节点（容忍 2 节点问题）。
 
 #<!-- chunk: Q9: ResourceQuota 和 LimitRange 的区别是什么？ -->## Q9: ResourceQuota 和 LimitRange 的区别是什么？
 

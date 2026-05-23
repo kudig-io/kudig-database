@@ -106,7 +106,7 @@ graph TD
     B3["• 错误率 < 0.05%"]
     
     C1["• 99.9% 可用性保证"]
-    C2["• 故障赔偿条款"]
+    C2["• 问题赔偿条款"]
     C3["• 服务信用额度"]
     
     A --> A1
@@ -202,12 +202,12 @@ apiService:
 |---------|---------|---------|---------|---------|
 | **Latency** | 时速表 | 响应时间 | P95<200ms | 用户体验 |
 | **Traffic** | 转速表 | 请求量 | 10K QPS | 容量规划 |
-| **Errors** | 故障灯 | 错误率 | <0.1% | 功能可用性 |
+| **Errors** | 问题灯 | 错误率 | <0.1% | 功能可用性 |
 | **Saturation** | 油表/水温表 | 资源饱和度 | CPU<80% | 系统稳定性 |
 
 **为什么是这四个？**
 
-Google SRE团队研究发现，这四个信号能覆盖95%的故障场景：
+Google SRE团队研究发现，这四个信号能覆盖95%的问题场景：
 
 1. **Latency (延迟)** - 用户等待时间
    ```promql
@@ -228,7 +228,7 @@ Google SRE团队研究发现，这四个信号能覆盖95%的故障场景：
    
    # 为什么重要？
    # 流量突增 → 需要扩容
-   # 流量骤降 → 可能是故障导致用户无法访问
+   # 流量骤降 → 可能是问题导致用户无法访问
    ```
 
 3. **Errors (错误)** - 失败率
@@ -249,7 +249,7 @@ Google SRE团队研究发现，这四个信号能覆盖95%的故障场景：
    1 - avg(rate(node_cpu_seconds_total{mode="idle"}[5m]))
    
    # 为什么重要？
-   # 饱和度高 → 即将故障的预警信号
+   # 饱和度高 → 即将问题的预警信号
    # 类似汽车水温过高 → 即将开锅
    ```
 
@@ -516,7 +516,7 @@ echo "=== SLI 指标采集验证完成 ==="
 ```yaml
 sloSettingFramework:
   step1_用户期望:
-    question: "用户能容忍多少故障时间？"
+    question: "用户能容忍多少问题时间？"
     method:
       - "问卷调查用户满意度"
       - "分析历史投诉数据"
@@ -527,7 +527,7 @@ sloSettingFramework:
       slo: "P95延迟 < 3s"
       
   step2_业务影响:
-    question: "故障对业务影响有多大？"
+    question: "问题对业务影响有多大？"
     factors:
       revenue: "每小时宕机损失多少收入？"
       reputation: "用户流失率如何？"
@@ -722,7 +722,7 @@ CHECKLIST=(
   "[ ] 4. 时间窗口明确（滚动窗口或日历窗口）"
   "[ ] 5. 错误预算策略（不同阈值的应对措施）"
   "[ ] 6. 告警配置完整（快速燃烧+慢速燃烧）"
-  "[ ] 7. 排除条件明确（计划维护、依赖故障）"
+  "[ ] 7. 排除条件明确（计划维护、依赖问题）"
   "[ ] 8. Owner清晰（负责人和团队联系方式）"
   "[ ] 9. 回顾机制（定期回顾SLO合理性）"
   "[ ] 10. 版本管理（文档版本和生效日期）"
@@ -993,7 +993,7 @@ slaCompensation:
 
 ```yaml
 errorBudgetAnalogy:
-  # SLO 99.9% = 给你0.1%的"故障年假"
+  # SLO 99.9% = 给你0.1%的"问题年假"
   
   scenario1_谨慎使用:
     monthly: "每月用一点(43分钟)"
@@ -1001,7 +1001,7 @@ errorBudgetAnalogy:
     strategy: "小步快跑，持续交付"
     
   scenario2_一次用完:
-    incident: "一次大故障用完全年预算"
+    incident: "一次大问题用完全年预算"
     result: "剩余11个月禁止发布"
     strategy: "必须修复根因才能恢复发布"
     
@@ -1070,7 +1070,7 @@ calculate_error_budget() {
   echo "💡 实际场景示例"
   echo "  场景1: 完全宕机"
   echo "    - 宕机1分钟 = 消耗$(echo "scale=2; 1 / $ALLOWED_DOWNTIME_MIN * 100" | bc)%错误预算"
-  echo "  场景2: 部分故障"
+  echo "  场景2: 部分问题"
   echo "    - 50%请求失败持续1分钟 = 消耗$(echo "scale=2; 0.5 / $ALLOWED_DOWNTIME_MIN * 100" | bc)%错误预算"
 }
 
@@ -1199,13 +1199,13 @@ errorBudgetPolicy:
       example: "70% * 20分钟 = 14分钟用于正常发布"
       
     unplanned_20:
-      category: "计划外故障"
+      category: "计划外问题"
       allocation: "20%"
       includes:
         - "软件Bug"
         - "配置错误"
-        - "依赖故障"
-      example: "20% * 20分钟 = 4分钟应对意外故障"
+        - "依赖问题"
+      example: "20% * 20分钟 = 4分钟应对意外问题"
       
     reserve_10:
       category: "安全储备"
@@ -1242,7 +1242,7 @@ errorBudgetPolicy:
     redZone:
       approver: "VP Engineering + CTO"
       process: "紧急审批流程"
-      criteria: "仅允许P0故障修复"
+      criteria: "仅允许P0问题修复"
       timeToRelease: "根据紧急程度"
       
   # 策略4：预算重置
@@ -1353,7 +1353,7 @@ errorBudgetPolicy:
     featureReleases: 75
     # 15% 用于维护和优化
     maintenance: 15
-    # 10% 用于意外故障
+    # 10% 用于意外问题
     unplannedOutages: 10
     
   releaseThrottling:
@@ -1541,11 +1541,11 @@ groups:
 multiWindowReason:
   shortWindow_1h:
     pros:
-      - "快速检测突发故障"
+      - "快速检测突发问题"
       - "灵敏度高，响应及时"
     cons:
       - "容易误报(短暂波动)"
-    useCase: "检测部署导致的立即故障"
+    useCase: "检测部署导致的立即问题"
     
   mediumWindow_6h:
     pros:

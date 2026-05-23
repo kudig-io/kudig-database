@@ -316,7 +316,7 @@ metadata:
 # Error from server (NotFound): namespaces "protected-namespace" not found
 ```
 
-##<!-- chunk: 2.5.3 命名空间卡住（Stuck Namespace）故障排除 -->## 2.5.3 命名空间卡住（Stuck Namespace）故障排除
+##<!-- chunk: 2.5.3 命名空间卡住（Stuck Namespace）问题排除 -->## 2.5.3 命名空间卡住（Stuck Namespace）问题排除
 
 **症状**：`kubectl delete namespace <name>` 无法完成，命名空间长期处于 `Terminating` 状态。
 
@@ -339,7 +339,7 @@ status:
 
 1. **资源无法删除**：命名空间内有资源无法删除（如 PVC 被 Pod 使用）
 2. **自定义 Finalizer 未清理**：第三方控制器添加的 Finalizer 未移除
-3. **API Server 故障**：API Server 或 Controller Manager 异常
+3. **API Server 问题**：API Server 或 Controller Manager 异常
 
 **解决方案**：
 

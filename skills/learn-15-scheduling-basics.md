@@ -380,7 +380,7 @@ Pod 反亲和性 = Pod 不想和某些 Pod 调度到同一区域
 2. 将多个副本分散到不同节点（提高可用性）
    → Pod 反亲和性
 
-3. 将 Web 应用和数据库放不同可用区（防单点故障）
+3. 将 Web 应用和数据库放不同可用区（防单点问题）
    → Pod 反亲和性
 ```
 
@@ -744,7 +744,7 @@ kubectl label nodes <node> key=value
 **关联文档**:
 - [../10-advanced-workloads/10-daemonset-basics.md](../10-advanced-workloads/10-daemonset-basics.md) — [[DaemonSet|DaemonSet]]
 - [../10-advanced-workloads/11-statefulset-basics.md](../10-advanced-workloads/11-statefulset-basics.md) — [[StatefulSet|StatefulSet]]
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/16-scheduling-pdb-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/16-scheduling-pdb-failure.md) — 调度与 PDB 故障 [[SKILL|Skill]]
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/16-scheduling-pdb-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/16-scheduling-pdb-failure.md) — 调度与 PDB 问题 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 
 ## Related

@@ -1157,7 +1157,7 @@ graph TB
     subgraph "Data Sources（数据源）"
         GH[GitHub\nCommits/PRs/Deploys]
         PROM[Prometheus\n基础设施指标]
-        JIRA[Jira / Linear\n工单/故障]
+        JIRA[Jira / Linear\n工单/问题]
         SURVEY[Survey Tool\n满意度调研]
         PORTAL[Developer Portal\n使用数据]
     end

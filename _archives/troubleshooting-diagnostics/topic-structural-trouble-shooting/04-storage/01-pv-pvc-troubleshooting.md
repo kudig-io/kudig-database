@@ -93,7 +93,7 @@ prerequisites:
 1. **确认 PVC/PV/StorageClass 状态**：核对绑定关系与 `volumeBindingMode`。
 2. **检查 VolumeAttachment**：确认卷是否仍附着在旧节点。
 3. **节点侧挂载排查**：查看设备、挂载点与 kubelet 日志。
-4. **区分控制面与数据面**：判断是 Provision/Attach 还是 Mount 阶段故障。
+4. **区分控制面与数据面**：判断是 Provision/Attach 还是 Mount 阶段问题。
 5. **验证修复结果**：Pod 启动、挂载点可读写、监控指标恢复。
 
 ## 解决方案与风险控制
@@ -457,7 +457,7 @@ kubectl get volumeattachment
 # 1. 确认旧节点状态
 kubectl get node node-a
 # NAME     STATUS     ROLES    AGE   VERSION
-# node-a   NotReady   <none>   10d   v1.28.0  # ← 节点故障
+# node-a   NotReady   <none>   10d   v1.28.0  # ← 节点问题
 
 # 2. 强制删除旧 Pod（触发卸载流程）
 kubectl delete pod app-pod-old --force --grace-period=0
@@ -566,9 +566,9 @@ kubectl exec app-pod-new -- df -h /data
 
 ---
 
-## 2. 专家级故障矩阵与观测工具
+## 2. 专家级问题矩阵与观测工具
 
-### 2.1 专家级故障矩阵
+### 2.1 专家级问题矩阵
 
 | 现象分类 | 深度根因分析 | 关键观测对象/日志 |
 | :--- | :--- | :--- |
@@ -599,7 +599,7 @@ findmnt -lo source,target,fstype,label,options -t csi
 ## 3. 深度排查路径
 
 ### 3.1 第一阶段：生命周期状态验证
-确认故障点是在"创建"、"关联"还是"挂载"阶段。
+确认问题点是在"创建"、"关联"还是"挂载"阶段。
 
 ```bash
 # 检查 PV 是否成功创建 (控制面第 1 步)
@@ -664,7 +664,7 @@ ls -R /var/lib/kubelet/pods/<pod-uid>/volumes/kubernetes.io~csi/<pv-name>/
 
 ### 5.3 案例三：Multi-Attach 错误导致 StatefulSet 滚动更新失败
 
-**故障现场**
+**问题现场**
 
 - **现象**：数据库 StatefulSet 滚动更新时，新 Pod 卡在 ContainerCreating 状态超过 30 分钟
 - **影响范围**：3 个 MySQL 实例（主从架构），主库 Pod 无法更新
@@ -726,7 +726,7 @@ aws ec2 describe-volumes --volume-ids vol-0abc123
 # }]
 
 # 7. 根因分析：
-# - 滚动更新时，旧 Pod 被删除但节点故障导致卸载失败
+# - 滚动更新时，旧 Pod 被删除但节点问题导致卸载失败
 # - VolumeAttachment 未清理，云盘仍附着在旧节点
 # - 新 Pod 调度到新节点，尝试附着同一云盘时被拒绝（RWO 限制）
 # - kubelet 默认等待 6 分钟后强制删除 Pod，但云端卸载未触发
@@ -779,7 +779,7 @@ kubectl exec mysql-0 -- df -h /var/lib/mysql
 **长期优化**
 
 ```yaml
-# 1. 配置节点故障快速驱逐策略
+# 1. 配置节点问题快速驱逐策略
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -810,7 +810,7 @@ spec:
   # 卷生命周期模式：持久化（Persistent）
   volumeLifecycleModes:
   - Persistent
-  # 启用节点故障快速卸载
+  # 启用节点问题快速卸载
   storageCapacity: true
 
 # 3. 配置 StatefulSet 滚动更新策略
@@ -981,7 +981,7 @@ subjects:
 
 ### 5.4 案例四：PVC 扩容后文件系统容量未变导致应用 OOM
 
-**故障现场**
+**问题现场**
 
 - **现象**：业务 Pod 频繁 OOMKilled，但内存使用正常（<500MB）
 - **影响范围**：日志收集服务（50 个 Pod）
@@ -1140,7 +1140,7 @@ spec:
         severity: warning
       annotations:
         summary: "PVC {{ $labels.persistentvolumeclaim }} 使用率 >70%（{{ $value | humanizePercentage }}）"
-        description: "建议提前扩容，避免磁盘满导致应用故障"
+        description: "建议提前扩容，避免磁盘满导致应用问题"
     
     # PVC 使用率 >90% 紧急告警
     - alert: PVC_CriticalUsage

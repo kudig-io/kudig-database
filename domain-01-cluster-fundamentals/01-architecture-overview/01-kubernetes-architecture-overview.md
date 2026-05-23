@@ -1314,7 +1314,7 @@ sequenceDiagram
             O->>K8s: 检查 Pod 健康状态
             K8s-->>O: Pod 状态
 
-            alt Pod 故障
+            alt Pod 问题
                 O->>K8s: 重建 Pod
             else 配置变更
                 O->>K8s: 执行滚动更新
@@ -2123,7 +2123,7 @@ main() {
 main
 ```
 
-### 11.4 故障应急响应专家手册
+### 11.4 问题应急响应专家手册
 
 #### SRE故障处理黄金法则
 ```mermaid
@@ -2205,13 +2205,13 @@ main() {
     while true; do
         for component in "${COMPONENTS[@]}"; do
             if ! detect_failure "$component"; then
-                echo "🚨 检测到 $component 故障"
+                echo "🚨 检测到 $component 问题"
                 auto_recovery "${component}-down"
                 
                 # 发送告警通知
                 curl -X POST "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK" \
                     -H "Content-Type: application/json" \
-                    -d "{\"text\": \"🚨 Kubernetes组件故障: $component\"}"
+                    -d "{\"text\": \"🚨 Kubernetes组件问题: $component\"}"
             fi
         done
         
@@ -2221,7 +2221,7 @@ main() {
 
 # 后台运行监控
 main &
-echo "🎯 故障监控已启动 (PID: $!)"
+echo "🎯 问题监控已启动 (PID: $!)"
 ```
 
 ---

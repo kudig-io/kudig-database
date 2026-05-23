@@ -112,8 +112,8 @@ Service 是 [[Kubernetes|Kubernetes]] 中网络连通性的**核心抽象层**�
 | S3 | Service 的 Endpoints 列表为空 / Service Endpoints list is empty | `kubectl get endpoints <service> -n <namespace>` 的 ENDPOINTS 列显示 `<none>` | 0.95 | Service 类型为 ExternalName（本身不创建 Endpoints）；Service 刚创建，Endpoints controller 尚未同步（通常 <5s） |
 | S4 | EndpointSlice 显示无就绪地址 / EndpointSlice shows no ready addresses | `kubectl get endpointslices -l kubernetes.io/service-name=<service> -n <namespace> -o yaml` 中所有 endpoints 的 `conditions.ready` 均为 `false` | 0.95 | 所有后端 Pod 正在滚动更新中短暂全部未就绪；Pod 刚创建，readiness probe 初始延迟期内 |
 | S5 | NodePort 在任何节点上均无响应 / NodePort not responding on any node | `curl -s --connect-timeout 5 http://<node-ip>:<nodeport>/` 在多个节点上均超时或拒绝连接 | 0.85 | 防火墙/安全组阻止了外部到 NodePort 范围（默认 30000-32767）的访问（非 K8s 内部问题）；`--nodeport-addresses` 配置限制了监听的网段 |
-| S6 | LoadBalancer 类型 Service 的 External IP 长时间为 `<pending>` / LoadBalancer External IP stuck in pending | `kubectl get svc <service> -n <namespace>` 的 EXTERNAL-IP 列持续显示 `<pending>` 超过 5 分钟 | 0.90 | 使用 MetalLB 等裸金属 LB 方案时，IP 池耗尽属于容量规划问题而非故障；刚创建的 LB Service 在云端分配 IP 通常需要 1-3 分钟 |
-| S7 | Service 从部分 Pod 可达但从其他 Pod 不可达 / Service works from some pods but not others | 同一 Service，从不同 namespace 或不同节点上的 Pod 访问结果不一致 | 0.75 | 客户端 Pod 本身网络异常（应先排查客户端 Pod 网络栈）；NetworkPolicy 按 namespace 精细控制（预期行为而非故障） |
+| S6 | LoadBalancer 类型 Service 的 External IP 长时间为 `<pending>` / LoadBalancer External IP stuck in pending | `kubectl get svc <service> -n <namespace>` 的 EXTERNAL-IP 列持续显示 `<pending>` 超过 5 分钟 | 0.90 | 使用 MetalLB 等裸金属 LB 方案时，IP 池耗尽属于容量规划问题而非问题；刚创建的 LB Service 在云端分配 IP 通常需要 1-3 分钟 |
+| S7 | Service 从部分 Pod 可达但从其他 Pod 不可达 / Service works from some pods but not others | 同一 Service，从不同 namespace 或不同节点上的 Pod 访问结果不一致 | 0.75 | 客户端 Pod 本身网络异常（应先排查客户端 Pod 网络栈）；NetworkPolicy 按 namespace 精细控制（预期行为而非问题） |
 | S8 | Service 连通性间歇性失败 / Intermittent connection failures to service | 对同一 Service 的多次请求中，部分成功部分失败；监控显示错误率在 0-100% 之间波动 | 0.70 | 后端应用本身不稳定（如 OOM 重启周期）；负载过高导致部分请求超时（属于容量问题而非连通性问题） |
 | S9 | Ingress controller 到后端 Service 的健康检查失败 / Health check from Ingress controller to backend fails | Ingress controller 日志显示 upstream health check failure；`kubectl describe ingress <name>` 显示 backend unhealthy | 0.75 | Ingress controller 自身配置错误（如健康检查路径错误）；Ingress controller Pod 本身网络异常 |
 
@@ -152,10 +152,10 @@ Service 是 [[Kubernetes|Kubernetes]] 中网络连通性的**核心抽象层**�
 |---------|---------|------|
 | DNS 解析 Service 名称失败（`nslookup <svc>.<ns>.svc.cluster.local` 无法返回 ClusterIP） | SKILL-NET-001 | DNS 层面问题，需排查 CoreDNS 配置和状态 |
 | Pod 本身处于 CrashLoopBackOff 导致所有后端不可用 | SKILL-POD-001 | Pod 应用层问题，需优先排查 Pod 崩溃原因 |
-| 节点 NotReady 导致 Pod 无法正常运行，间接影响 Service | SKILL-NODE-001 | 节点级故障，需优先恢复节点状态 |
-| Ingress 规则配置错误（path、host 匹配问题），Service 本身可达 | Ingress 配置问题 | 非 Service 层面故障，Service 直接访问正常 |
+| 节点 NotReady 导致 Pod 无法正常运行，间接影响 Service | SKILL-NODE-001 | 节点级问题，需优先恢复节点状态 |
+| Ingress 规则配置错误（path、host 匹配问题），Service 本身可达 | Ingress 配置问题 | 非 Service 层面问题，Service 直接访问正常 |
 | Service Mesh（Istio/Linkerd）sidecar 导致的连通性问题 | Service Mesh 诊断 | 超出本 Skill 范围，需排查 sidecar proxy 配置 |
-| 集群外部客户端无法访问 ClusterIP（ClusterIP 设计上仅集群内可达） | 预期行为 | 非故障，需使用 NodePort/LoadBalancer/Ingress 暴露服务 |
+| 集群外部客户端无法访问 ClusterIP（ClusterIP 设计上仅集群内可达） | 预期行为 | 非问题，需使用 NodePort/LoadBalancer/Ingress 暴露服务 |
 
 ---
 
@@ -163,7 +163,7 @@ Service 是 [[Kubernetes|Kubernetes]] 中网络连通性的**核心抽象层**�
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径：
+按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 确认 Service 类型和基本信息
 ```bash
@@ -196,13 +196,13 @@ kubectl get pods -n <namespace> -l <selector-from-svc> -o wide
 
 **Step T4**: 评估爆炸半径
 ```bash
-# 检查是否有多个 Service 出现同样问题（排查系统级故障）
+# 检查是否有多个 Service 出现同样问题（排查系统级问题）
 kubectl get endpoints --all-namespaces | grep '<none>'
 ```
 > **判断规则**:
 > - 仅单个 Service 受影响 → 问题局限于该 Service 的配置或后端 Pod
 > - 多个 Service 同时无 Endpoints → 可能是 kube-controller-manager 的 endpoint-controller 异常（系统级问题）
-> - 跨多个 namespace 的多个 Service 均不通 → 可能是 kube-proxy 全局故障（P0）
+> - 跨多个 namespace 的多个 Service 均不通 → 可能是 kube-proxy 全局问题（P0）
 
 ### 3.2 严重性分级
 
@@ -217,7 +217,7 @@ kubectl get endpoints --all-namespaces | grep '<none>'
 
 以下任一条件满足时，**跳过诊断流程，立即升级至人工 SRE / 值班工程师**：
 
-- **全集群 Service 不通**: 所有 namespace 中的 Service 均不可达，疑似 kube-proxy 全局故障或控制平面异常
+- **全集群 Service 不通**: 所有 namespace 中的 Service 均不可达，疑似 kube-proxy 全局问题或控制平面异常
 - **CoreDNS Service 不可达**: `kube-dns` / `coredns` Service 无法响应，将导致全集群 DNS 解析中断
 - **Ingress controller Service 不可达**: 所有外部流量入口中断
 - **kube-controller-manager 异常**: endpoint-controller 无法正常工作，所有新建 Service 均无法自动创建 Endpoints
@@ -611,7 +611,7 @@ D1.2: Endpoints 是否为空？
 - **风险级别**: 🟢 低（只读 HTTP GET 请求）
 - **预期输出模式**: 各 Pod 访问 Service 的 HTTP 状态码
 - **判断规则**:
-  - 所有 Pod 均失败 → 全局 Service 连通性故障（kube-proxy 或 Endpoints 问题）
+  - 所有 Pod 均失败 → 全局 Service 连通性问题（kube-proxy 或 Endpoints 问题）
   - 部分 Pod 成功，部分失败 → 节点级别问题（特定节点的 kube-proxy 异常）或 NetworkPolicy（RC-005）
   - 同 namespace 成功，跨 namespace 失败 → NetworkPolicy 按 namespace 限制（RC-005）
   - 全部成功 → 问题可能是间歇性的或已恢复
@@ -891,8 +891,8 @@ D1.2: Endpoints 是否为空？
 | RC-008 | **Headless Service 但 Pod 未注册 DNS** — Headless Service（`ClusterIP: None`）依赖 DNS 返回 Pod IP 列表，但后端 Pod 未正确注册 DNS A/AAAA 记录。可能因为 Pod 未设置 `hostname`/`subdomain`、Pod 未就绪、或 CoreDNS 同步延迟 | 低 | Headless Service 的 DNS 查询返回空结果；Pod 存在且就绪但 DNS 记录缺失；CoreDNS 日志中无错误 | service-fta: BE-headless-dns |
 | RC-009 | **LoadBalancer 类型 Service 的云厂商控制器异常** — cloud-controller-manager 无法正常工作，未能在云端创建/更新 Load Balancer 资源，导致 `status.loadBalancer.ingress` 为空（External IP 持续 `<pending>`）。可能原因包括云端 API 权限不足、配额耗尽、Service annotations 配置错误 | 中 | D1.1 External IP 为 pending；D1.5 事件显示 LB 创建失败；D2.9 cloud-controller-manager 日志有错误 | service-fta: BE-cloud-lb-failure |
 | RC-010 | **Service 协议（TCP/UDP）与应用不匹配** — Service 定义的协议（如 TCP）与应用实际监听的协议（如 UDP）不一致，导致流量无法被正确处理。常见于 DNS 服务（需同时暴露 TCP 和 UDP）或游戏服务器（使用 UDP） | 低 | D2.2 Service protocol 与容器实际协议不一致；D3.2 协议测试失败 | service-fta: BE-protocol-mismatch |
-| RC-011 | **sessionAffinity 配置导致流量不均或粘滞故障** — `sessionAffinity: ClientIP` 配置导致特定客户端的所有请求被固定路由到同一后端 Pod，当该 Pod 异常时客户端持续失败直到 affinity 超时。或 `timeoutSeconds` 配置过大导致负载严重不均 | 低 | D2.10 sessionAffinity 为 ClientIP 且 timeout 过长；特定客户端持续失败但其他客户端正常；更换客户端 IP 后恢复 | service-fta: BE-session-affinity |
-| RC-012 | **跨节点网络（CNI）故障导致部分连通性问题** — CNI 插件（Calico/Cilium/Flannel 等）在某些节点上出现异常，导致跨节点的 Pod 间通信失败。表现为同一节点上的 Pod 互通，但跨节点访问 Service 失败 | 中 | D2.4 同节点 Pod 可直接通信但跨节点失败；D3.1 连通性矩阵显示特定节点模式的失败；CNI Pod 日志有错误 | service-fta: BE-cni-cross-node |
+| RC-011 | **sessionAffinity 配置导致流量不均或粘滞问题** — `sessionAffinity: ClientIP` 配置导致特定客户端的所有请求被固定路由到同一后端 Pod，当该 Pod 异常时客户端持续失败直到 affinity 超时。或 `timeoutSeconds` 配置过大导致负载严重不均 | 低 | D2.10 sessionAffinity 为 ClientIP 且 timeout 过长；特定客户端持续失败但其他客户端正常；更换客户端 IP 后恢复 | service-fta: BE-session-affinity |
+| RC-012 | **跨节点网络（CNI）问题导致部分连通性问题** — CNI 插件（Calico/Cilium/Flannel 等）在某些节点上出现异常，导致跨节点的 Pod 间通信失败。表现为同一节点上的 Pod 互通，但跨节点访问 Service 失败 | 中 | D2.4 同节点 Pod 可直接通信但跨节点失败；D3.1 连通性矩阵显示特定节点模式的失败；CNI Pod 日志有错误 | service-fta: BE-cni-cross-node |
 | RC-013 | **EndpointSlice 与 Endpoints 不一致** — v1.28+ 默认使用 EndpointSlice 作为 endpoint 分发机制，但某些旧版控制器或自定义组件可能仍依赖 legacy Endpoints。两者不一致时可能导致部分流量路由异常或 Service 不可达 | 低 | D1.2 EndpointSlice 与 Endpoints 数据不一致；`kubectl get endpointslices` 与 `kubectl get endpoints` 对比显示差异；kube-proxy 日志显示使用 EndpointSlice 但其他组件使用 Endpoints | service-fta: BE-endpointslice-inconsistent |
 | RC-014 | **Service Mesh sidecar 异常** — Istio/Linkerd 等 Service Mesh 的 sidecar proxy 出现问题，包括：sidecar 未注入、注入失败、mTLS 握手错误、VirtualService/DestinationRule 路由不匹配、identity 证书过期等。表现为 mesh 内部 Service 通信失败 | 中 | D4.1 Pod 不包含 istio-proxy/linkerd-proxy 容器；D4.3 mTLS tls-check 显示配置不一致；D4.4 Envoy 日志出现 upstream connect error 或 TLS error；D4.5 `linkerd check` 显示异常 | service-fta: BE-mesh-sidecar-failure |
 | RC-015 | **多集群 Service (MCS API) 连通性问题** — 使用 Multi-Cluster Service API (ServiceExport/ServiceImport) 或 Submariner 等方案时，跨集群 Service 发现或路由失败。表现为 `clusterset.local` 域名解析失败或跨集群流量无法路由 | 低 | ServiceExport/ServiceImport 状态不同步；跨集群 DNS 解析失败（`nslookup <service>.<namespace>.svc.clusterset.local`）；网络隧道/VPN 连接中断；MCS controller 日志有同步错误 | service-fta: BE-mcs-connectivity |
@@ -1479,7 +1479,7 @@ kubectl get events -n <namespace> --field-selector involvedObject.name=<service>
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 
 - [ ] Service 的 Endpoints 包含预期数量的后端 Pod IP 地址
 - [ ] 从集群内不同节点上的 Pod 均能成功访问 Service（ClusterIP 层面）
@@ -1514,7 +1514,7 @@ kubectl get events -n <namespace> --field-selector involvedObject.name=<service>
 | **修复失败** | 同一修复操作执行 **2 次**仍未通过后置验证 | REM-xxx 执行后 V1-V6 验证失败 |
 | **严重性升级** | 初始分级为 P2 但影响面扩大（如更多 Service 出现同样问题） | 诊断过程中受影响 Service 数量增加 |
 | **未知根因** | 完成 Phase 1-3 所有诊断步骤但无法匹配任何已知根因（RC-001 至 RC-012） | 所有诊断步骤均无明确异常发现 |
-| **全局故障** | 多个不相关的 Service 同时出现连通性问题 | T4 阶段发现多个 Service 受影响 |
+| **全局问题** | 多个不相关的 Service 同时出现连通性问题 | T4 阶段发现多个 Service 受影响 |
 | **控制平面组件异常** | kube-controller-manager 的 endpoint-controller 或 cloud-controller-manager 异常 | 所有新建 Service 的 Endpoints 均无法自动创建 |
 
 ### 8.2 升级消息模板
@@ -1522,7 +1522,7 @@ kubectl get events -n <namespace> --field-selector involvedObject.name=<service>
 ```
 【{severity}】Service 连通性与 Endpoint 异常 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: Service {service_name} ({namespace}/{service_type}) 连通性异常，持续 {duration}
+- 问题概述: Service {service_name} ({namespace}/{service_type}) 连通性异常，持续 {duration}
 - 影响范围:
   - 受影响 Service: {service_name} (type: {service_type})
   - Endpoint 状态: {endpoint_count} 个就绪 / {total_pods} 个后端 Pod
@@ -1653,7 +1653,7 @@ kubectl get events -n <namespace> --field-selector involvedObject.name=<service>
 
 | 误诊场景 | 表面现象 | 实际根因 | 避免方法 |
 |---------|---------|---------|---------|
-| **DNS 故障误判为 Service 连通性问题** | 应用日志显示 "connection refused" 或 "no such host" 访问 Service 名称失败 | CoreDNS 异常导致 Service 名称无法解析为 ClusterIP，而非 Service 本身不可达 | 先用 `nslookup <service>.<namespace>.svc.cluster.local` 验证 DNS 解析。如果 DNS 解析失败，转到 SKILL-NET-001。只有 DNS 解析成功但 IP 不可达才属于本 Skill 范围 |
+| **DNS 问题误判为 Service 连通性问题** | 应用日志显示 "connection refused" 或 "no such host" 访问 Service 名称失败 | CoreDNS 异常导致 Service 名称无法解析为 ClusterIP，而非 Service 本身不可达 | 先用 `nslookup <service>.<namespace>.svc.cluster.local` 验证 DNS 解析。如果 DNS 解析失败，转到 SKILL-NET-001。只有 DNS 解析成功但 IP 不可达才属于本 Skill 范围 |
 | **externalTrafficPolicy=Local 导致的"随机"失败** | NodePort/LoadBalancer Service 有时可达有时不可达，表现随机 | `externalTrafficPolicy: Local` 仅在有本地后端 Pod 的节点上接受外部流量，客户端访问不同节点时结果不同 | D2.8 中优先检查 externalTrafficPolicy 设置。如果为 Local，检查每个节点是否有就绪后端 Pod。"随机"的本质是客户端（或 LB 健康检查）轮询到不同节点 |
 | **readiness probe 配置错误误判为 selector 不匹配** | Endpoints 为空，初步判断为 label selector 不匹配 | 实际 selector 匹配，但所有 Pod 的 readiness probe 失败（如 probe 的 path/port 与应用不一致），导致 endpoint-controller 不注册这些 Pod | D1.3 中区分"无 Pod 匹配 selector"和"Pod 匹配但未就绪"两种情况。前者是 RC-001，后者是 RC-002 |
 | **conntrack 竞争条件导致间歇性断连** | Service 在滚动更新期间出现间歇性连接失败，更新完成后恢复 | 旧 Pod 被删除时其 conntrack 条目未及时清理，新连接被错误地路由到已不存在的旧 Pod IP | 如果问题仅在滚动更新期间出现，检查 conntrack 表中是否有指向旧 Pod IP 的条目。可通过增加 `terminationGracePeriodSeconds` 或使用 preStop hook 给 conntrack 留出清理时间 |
@@ -1667,13 +1667,13 @@ kubectl get events -n <namespace> --field-selector involvedObject.name=<service>
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
 | Kubernetes 网络模型与 Service 实现 | `domain-03-networking-traffic/` | 理解 Service 的底层实现（iptables/IPVS/nftables 规则生成机制） |
-| Service 故障树分析 | `domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md` | 理解 Service 连通性故障的完整因果链和概率模型 |
+| Service 故障树分析 | `domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md` | 理解 Service 连通性问题的完整因果链和概率模型 |
 | Ingress 故障树分析 | `domain-10-troubleshooting-diagnostics/topic-fta/[[skills/ingress-fta|ingress-fta]].md` | 当问题涉及 Ingress → Service 链路时的参考 |
 | 网络故障排查深度指南 | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/` | 超出本 Skill 覆盖范围的深度网络排查方法 |
 | Kubernetes 故障排查方法论 | `domain-10-troubleshooting-diagnostics/` | 系统化故障排查的理论基础和方法论 |
 | DNS 诊断 | `SKILL-NET-001` | 当问题根因在 DNS 层面时的关联 Skill |
 | Pod 崩溃诊断 | `SKILL-POD-001` | 当后端 Pod CrashLoopBackOff 导致 Endpoints 为空时的关联 Skill |
-| 节点 NotReady 诊断 | `SKILL-NODE-001` | 当节点故障间接影响 Service 连通性时的关联 Skill |
+| 节点 NotReady 诊断 | `SKILL-NODE-001` | 当节点问题间接影响 Service 连通性时的关联 Skill |
 | kube-proxy 架构与实现 | `domain-03-networking-traffic/` | 理解 kube-proxy 的三种模式（iptables/IPVS/nftables）及其规则同步机制 |
 | NetworkPolicy 原理与实现 | `domain-03-networking-traffic/` | 理解不同 CNI 插件对 NetworkPolicy 的实现差异 |
 

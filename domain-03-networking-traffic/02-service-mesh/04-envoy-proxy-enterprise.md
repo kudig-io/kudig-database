@@ -815,7 +815,7 @@ curl -s http://localhost:$ADMIN_PORT/config_dump > /tmp/envoy_config_dump.json
 
 性能最佳实践:
   1. 连接池复用 (maxRequestsPerConnection)
-  2. 异常检测避免级联故障
+  2. 异常检测避免级联问题
   3. overload_manager 防护
   4. 合理的 stats 前缀匹配
 ```

@@ -251,7 +251,7 @@ FINAL-BUILD.ps1 → generate-summary-utf8.ps1
    - 符号链接可能需要管理员权限
    - Junction 创建需要特殊权限
 
-## 🐛 故障排除
+## 🐛 问题排除
 
 **脚本执行失败**:
 ```powershell

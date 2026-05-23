@@ -191,7 +191,7 @@ graph TB
         SRC1[官方文档] --> S1
         SRC2[历史工单] --> S1
         SRC3[最佳实践] --> S1
-        SRC4[故障复盘] --> S1
+        SRC4[问题复盘] --> S1
         SRC5[内部 Wiki] --> S1
     end
 
@@ -380,7 +380,7 @@ graph TB
     end
 
     subgraph 故障诊断Workflow
-        WF2 --> F1[故障分类] --> F2[信息采集<br/>自动化]
+        WF2 --> F1[问题分类] --> F2[信息采集<br/>自动化]
         F2 --> F3[故障树推理] --> F4[根因定位]
         F4 --> F5[修复建议<br/>窄口径] --> F6[执行确认]
     end
@@ -390,8 +390,8 @@ graph TB
 
 ```mermaid
 graph TB
-    START[工单接入] --> INTENT[意图分类器<br/>咨询/故障/变更/投诉]
-    INTENT --> |故障| CLASSIFY[故障分类<br/>产品线 + 故障类型]
+    START[工单接入] --> INTENT[意图分类器<br/>咨询/问题/变更/投诉]
+    INTENT --> |问题| CLASSIFY[问题分类<br/>产品线 + 问题类型]
     CLASSIFY --> COLLECT[信息自动采集<br/>调用诊断 Skills]
     COLLECT --> FTA[故障树推理<br/>FTA 引擎]
     FTA --> ROOT[根因判定<br/>置信度评分]
@@ -500,7 +500,7 @@ graph LR
 |------|------|------|------|
 | **L1 - 基础** | 常见问题、标准配置查询 | 40% | "如何配置 ECS 安全组规则" |
 | **L2 - 中等** | 典型故障诊断、需多步推理 | 35% | "Pod 处于 CrashLoopBackOff 且日志显示 OOM" |
-| **L3 - 高难** | 复杂关联故障、跨组件排查 | 20% | "[[Service|Service]]Service Mesh）|Service Mesh]] 下 [[gRPC|gRPC]] 间歇性超时" |
+| **L3 - 高难** | 复杂关联问题、跨组件排查 | 20% | "[[Service|Service]]Service Mesh）|Service Mesh]] 下 [[gRPC|gRPC]] 间歇性超时" |
 | **L4 - 边界** | 超范围/模糊/对抗性问题 | 5% | "帮我写一个黑客工具" |
 
 ---
@@ -837,7 +837,7 @@ graph TB
 | [09 - 生产部署指南](./09-production-deployment-guide.md) | 智能体部署方案 |
 | [10 - 安全护栏与合规](./10-security-guardrails.md) | 安全质检标准参考 |
 | [topic-fta](../domain-10-troubleshooting-diagnostics/topic-fta/) | 故障树分析（FTA）方法论 |
-| [domain-10-troubleshooting-diagnostics](../domain-10-troubleshooting-diagnostics/) | 容器故障排障知识源 |
+| [domain-10-troubleshooting-diagnostics](../domain-10-troubleshooting-diagnostics/) | 容器问题排障知识源 |
 
 ---
 

@@ -418,7 +418,7 @@ cache {
     success 50000 3600 60      # 5万条成功缓存,最大1小时,最小1分钟
     denial 5000 600 30         # 5千条否定缓存,最大10分钟
     prefetch 10 1h 20%         # 剩余20%TTL时预取
-    serve_stale 2h             # 上游故障时服务2小时过期缓存
+    serve_stale 2h             # 上游问题时服务2小时过期缓存
     servfail 5s                # SERVFAIL缓存5秒
 }
 ```

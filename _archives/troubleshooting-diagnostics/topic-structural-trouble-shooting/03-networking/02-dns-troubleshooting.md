@@ -205,7 +205,7 @@ CoreDNS 采用插件化架构，每个 DNS 请求按照 Corefile 中定义的插
 
 **关键插件功能详解**
 
-| 插件名称 | 功能 | 关键参数 | 故障影响 |
+| 插件名称 | 功能 | 关键参数 | 问题影响 |
 |---------|------|---------|---------|
 | **errors** | 记录错误到日志 | - | 禁用导致错误排查困难 |
 | **health** | 健康检查端点 | `lameduck 5s` | 影响滚动更新平滑性 |
@@ -331,7 +331,7 @@ cache 30 {
 优势：
 - **零跳转**：Pod 直连本地 DNS（无 iptables/IPVS 开销）
 - **强缓存**：节点级缓存，减少 CoreDNS 负载
-- **HA 提升**：CoreDNS 故障时本地缓存仍可服务
+- **HA 提升**：CoreDNS 问题时本地缓存仍可服务
 
 配置示例：
 ```yaml
@@ -367,7 +367,7 @@ data:
 | 外部域名慢 | 上游 DNS 延迟高 | `coredns_forward_request_duration_seconds` | 更换上游或启用缓存 |
 | 缓存命中率低 | TTL 过短或缓存容量不足 | `coredns_cache_hits_total` / `coredns_cache_misses_total` | 调整缓存参数 |
 | CPU 使用率高 | 并发查询过多 | `coredns_dns_requests_total` | 扩展副本或启用 NodeLocal DNS |
-| SERVFAIL 错误 | 上游 DNS 故障或环路 | `coredns_dns_responses_total{rcode="SERVFAIL"}` | 检查 forward 与 loop 插件 |
+| SERVFAIL 错误 | 上游 DNS 问题或环路 | `coredns_dns_responses_total{rcode="SERVFAIL"}` | 检查 forward 与 loop 插件 |
 
 **ndots 对性能的影响**
 
@@ -391,7 +391,7 @@ data:
 # 中型集群（50-200 节点）: 3-5 副本
 # 大型集群（>200 节点）: 按 100 节点 : 1 副本
 
-# 设置反亲和性避免单点故障
+# 设置反亲和性避免单点问题
 kubectl patch deployment -n kube-system coredns -p '{
   "spec": {
     "replicas": 5,
@@ -719,7 +719,7 @@ kubectl run test --rm -it --image=busybox -- nslookup kubernetes
 #### 3.2.1 解决步骤
 
 ```bash
-# 步骤 1：确认故障范围
+# 步骤 1：确认问题范围
 # 测试集群内域名
 kubectl run test --rm -it --image=busybox -- nslookup kubernetes.default
 
@@ -954,7 +954,7 @@ kubectl exec <pod-name> -- nslookup kubernetes.default.svc.cluster.local
 
 ### 案例 1：ndots 配置不当导致外部 API 调用延迟暴增
 
-**故障现场**
+**问题现场**
 
 - **现象**：业务团队反馈调用第三方支付 API（`pay.example.com`）延迟从 50ms 激增至 500ms
 - **影响范围**：所有调用外部 API 的服务（~200 Pod）
@@ -1093,9 +1093,9 @@ EOF
 
 ---
 
-### 案例 2：CoreDNS 上游 DNS 故障导致集群级服务中断
+### 案例 2：CoreDNS 上游 DNS 问题导致集群级服务中断
 
-**故障现场**
+**问题现场**
 
 - **现象**：凌晨 2:35 所有 Pod 无法解析外部域名，集群内域名正常
 - **影响范围**：全集群（500+ 节点，10000+ Pod）
@@ -1107,7 +1107,7 @@ EOF
 **排查过程**
 
 ```bash
-# 1. 验证故障范围
+# 1. 验证问题范围
 kubectl run test --rm -it --image=busybox -- nslookup google.com
 # ;; connection timed out; no servers could be reached
 
@@ -1144,12 +1144,12 @@ kubectl exec -n kube-system coredns-7d8f4b6c9-5xqhz -- nslookup google.com 8.8.8
 
 # 4. 检查 Corefile 配置
 kubectl get cm -n kube-system coredns -o yaml | grep -A3 forward
-# forward . 10.0.0.53 {  # ← 单点故障：仅配置一个上游 DNS
+# forward . 10.0.0.53 {  # ← 单点问题：仅配置一个上游 DNS
 #     max_concurrent 1000
 # }
 
 # 5. 根因分析：
-# - 企业内网 DNS 服务器 10.0.0.53 故障（网络团队排查中）
+# - 企业内网 DNS 服务器 10.0.0.53 问题（网络团队排查中）
 # - CoreDNS 未配置备用上游 DNS
 # - 缓存机制无法覆盖未查询过的域名
 ```
@@ -1215,7 +1215,7 @@ data:
             success 9984 60   # 成功响应缓存 1 分钟
             denial 9984 10
             prefetch 10 60s
-            serve_stale       # ← 关键：上游故障时返回过期缓存
+            serve_stale       # ← 关键：上游问题时返回过期缓存
         }
         
         loop
@@ -1237,7 +1237,7 @@ data:
         cache {
             success 9984 600   # 本地缓存 10 分钟（更长时间）
             denial 9984 30
-            serve_stale        # 上游故障时返回过期缓存
+            serve_stale        # 上游问题时返回过期缓存
         }
         reload
         loop
@@ -1354,19 +1354,19 @@ EOF
 
 | 维度 | 问题 | 改进措施 |
 |-----|------|---------|
-| **架构** | 单点故障（仅 1 个上游 DNS） | 配置 3 个上游 DNS（主备 + 公网兜底） |
+| **架构** | 单点问题（仅 1 个上游 DNS） | 配置 3 个上游 DNS（主备 + 公网兜底） |
 | **缓存** | 缓存时间短（30s） | 延长至 60s，启用 `serve_stale` |
 | **监控** | 无上游健康监控 | 新增 `CoreDNS_UpstreamUnhealthy` 告警 |
 | **容灾** | 依赖集群级 DNS | 部署 NodeLocal DNSCache（节点级缓存） |
 | **变更** | 未做 DNS 容灾演练 | 每季度故障注入测试（Chaos Mesh） |
 
-**故障时间线**
+**问题时间线**
 
 ```
-02:35:00 - 企业内网 DNS 10.0.0.53 故障
+02:35:00 - 企业内网 DNS 10.0.0.53 问题
 02:35:15 - CoreDNS 开始报 timeout 错误
 02:36:00 - 业务告警：外部 API 调用失败
-02:38:00 - 运维介入，确认 DNS 故障
+02:38:00 - 运维介入，确认 DNS 问题
 02:41:00 - 切换到公网 DNS，滚动重启 CoreDNS
 02:44:00 - 外部域名解析恢复
 02:50:00 - 所有业务服务恢复正常
@@ -1377,7 +1377,7 @@ EOF
 
 ### 案例 3：CoreDNS 内存泄漏导致 OOMKilled
 
-**故障现场**
+**问题现场**
 
 - **现象**：CoreDNS Pod 每 2-3 小时重启一次（OOMKilled）
 - **影响范围**：重启期间 DNS 解析延迟增加（5-10s）

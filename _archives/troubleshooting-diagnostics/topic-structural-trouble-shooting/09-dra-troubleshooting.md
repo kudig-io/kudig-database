@@ -42,7 +42,7 @@ prerequisites:
 # DRA（动态资源分配）故障排查指南
 
 > **文档类型**: 故障排查手册 | **适用版本**: K8s 1.28-1.33 | **最后更新**: 2026-05
-> **使用场景**: Agent 处理 DRA（GPU/FPGA/网络设备）相关的故障，如 Pod 卡在 Allocating、设备不可见
+> **使用场景**: Agent 处理 DRA（GPU/FPGA/网络设备）相关的问题，如 Pod 卡在 Allocating、设备不可见
 
 ---
 
@@ -84,11 +84,11 @@ DeviceSelection (Claim 中选择的设备)
 
 ---
 
-## 2. 常见故障场景
+## 2. 常见问题场景
 
 ### 2.1 Pod 卡在 Allocating 状态
 
-**故障现象**: `kubectl get pods` 显示 Pod 状态正常但 `resourceClaims` 中有 claim 处于 `Allocating` 状态
+**问题现象**: `kubectl get pods` 显示 Pod 状态正常但 `resourceClaims` 中有 claim 处于 `Allocating` 状态
 
 **可能原因**：
 
@@ -123,7 +123,7 @@ ls /dev/  # 设备节点
 
 ### 2.2 设备节点不存在
 
-**故障现象**: Pod 启动后容器内 `/dev/` 目录中看不到预期的设备（如 /dev/nvidia0）
+**问题现象**: Pod 启动后容器内 `/dev/` 目录中看不到预期的设备（如 /dev/nvidia0）
 
 **可能原因**：
 
@@ -152,7 +152,7 @@ curl -s http://localhost:54356/apis/pluginregistry.k8s.io/v1/deviceplugins
 
 ### 2.3 ResourceClaim 配置错误
 
-**故障现象**: `kubectl describe resourceclaim` 报错 "no suitable node found" 或 "no devices available"
+**问题现象**: `kubectl describe resourceclaim` 报错 "no suitable node found" 或 "no devices available"
 
 **可能原因**：
 
@@ -179,11 +179,11 @@ kubectl describe resourceclaim <claim-name>
 
 ---
 
-## 3. 调度器 DRA 司机故障
+## 3. 调度器 DRA 司机问题
 
 ### 3.1 调度器未正确加载 DRA 司机
 
-**故障现象**: Pod 创建时错误 "scheduler drone plugin not enabled"
+**问题现象**: Pod 创建时错误 "scheduler drone plugin not enabled"
 
 **排查步骤**：
 ```bash
@@ -203,7 +203,7 @@ kubectl logs -n kube-system kube-scheduler-<node-name> --tail=100 | grep -i dra
 
 ### 3.2 拓扑约束导致调度失败
 
-**故障现象**: Pod 卡在 Pending，错误信息包含 "node(s) had no suitable topology"
+**问题现象**: Pod 卡在 Pending，错误信息包含 "node(s) had no suitable topology"
 
 **排查步骤**：
 ```bash
@@ -219,7 +219,7 @@ kubectl get node <node-name> -o jsonpath='{.metadata.labels}' | jq 'keys'
 
 ---
 
-## 4. DevicePlugin 故障
+## 4. DevicePlugin 问题
 
 ### 4.1 常见 DevicePlugin 列表
 
@@ -232,9 +232,9 @@ kubectl get node <node-name> -o jsonpath='{.metadata.labels}' | jq 'keys'
 | RDMA | kubernetes-device-plugin | RDMA | 网络加速 |
 | Custom | 厂商提供或自研 | - | 按厂商文档 |
 
-### 4.2 NVIDIA DevicePlugin 故障
+### 4.2 NVIDIA DevicePlugin 问题
 
-**故障现象**: GPU Pod 卡在 ContainerCreating 或 `nvidia-smi` 在容器内不可用
+**问题现象**: GPU Pod 卡在 ContainerCreating 或 `nvidia-smi` 在容器内不可用
 
 **排查步骤**：
 ```bash
@@ -259,7 +259,7 @@ kubectl exec -it <pod-name> -- nvidia-smi
 
 ### 4.3 DevicePlugin 注册失败
 
-**故障现象**: `kubectl logs` 显示 "failed to register device plugin: socket path already exists"
+**问题现象**: `kubectl logs` 显示 "failed to register device plugin: socket path already exists"
 
 **排查步骤**：
 ```bash
@@ -278,7 +278,7 @@ kubectl delete pod -n kube-system <device-plugin-pod>
 
 ---
 
-## 5. DRA 与调度器集成故障
+## 5. DRA 与调度器集成问题
 
 ### 5.1 Pod 调度时设备分配流程
 
@@ -373,7 +373,7 @@ spec:
 
 ## 7. 故障排查命令速查
 
-| 故障场景 | 诊断命令 |
+| 问题场景 | 诊断命令 |
 |---------|---------|
 | Pod 卡在 Allocating | `kubectl get pod <pod> -o jsonpath='{.status.resourceClaimStatuses}'` |
 | ResourceClaim 无法分配 | `kubectl describe resourceclaim <claim>` |

@@ -421,7 +421,7 @@ symptom_mappings:
     aliases:
       - "节点 NotReady"
       - "节点不可用"
-      - "kubelet 故障"
+      - "kubelet 问题"
 
     intent_queries:
       - "节点显示NotReady"
@@ -437,7 +437,7 @@ symptom_mappings:
 
     diagnostic_decision_tree:
       - condition: "kubectl describe node 显示 'KubeletNotReady' + 'PLEG'"
-        likely_root_cause: "kubelet 或容器运行时故障"
+        likely_root_cause: "kubelet 或容器运行时问题"
         fta_path: "TE-1 → IE-1.2 → BE-1.5"
         confidence: 0.85
         verification_steps:
@@ -447,7 +447,7 @@ symptom_mappings:
             expected: "kubelet 服务状态"
 
       - condition: "kubectl describe node 显示 'NetworkReady' + 'route failed'"
-        likely_root_cause: "节点网络故障"
+        likely_root_cause: "节点网络问题"
         fta_path: "TE-1 → IE-1.2 → BE-1.7"
         confidence: 0.80
         verification_steps:
@@ -559,7 +559,7 @@ symptom_mappings:
 
     diagnostic_decision_tree:
       - condition: "CoreDNS Pod 不 Running"
-        likely_root_cause: "CoreDNS Pod 故障"
+        likely_root_cause: "CoreDNS Pod 问题"
         fta_path: "TE-4 → IE-4.1 → BE-4.1"
         confidence: 0.90
         verification_steps:
@@ -707,9 +707,9 @@ symptom_mappings:
         relevance: 0.95
 
   # ============================================================================
-  # etcd 故障
+  # etcd 问题
   # ============================================================================
-  - symptom: "etcd 故障"
+  - symptom: "etcd 问题"
     category: "control-plane"
     aliases:
       - "etcd 不可用"
@@ -771,9 +771,9 @@ symptom_mappings:
         relevance: 0.90
 
   # ============================================================================
-  # Terway 网络故障 (ACK 特有)
+  # Terway 网络问题 (ACK 特有)
   # ============================================================================
-  - symptom: "Terway 网络故障"
+  - symptom: "Terway 网络问题"
     category: "network"
     cluster_type: "ACK"
     aliases:
@@ -795,7 +795,7 @@ symptom_mappings:
 
     diagnostic_decision_tree:
       - condition: "Pod 无法获取 IP"
-        likely_root_cause: "ENI 多队列压力或 IPAM 故障"
+        likely_root_cause: "ENI 多队列压力或 IPAM 问题"
         fta_path: "TE-9 → IE-9.1 → BE-9.1"
         confidence: 0.85
         verification_steps:
@@ -828,14 +828,14 @@ symptom_mappings:
       - path: "domain-03-networking-traffic/42-terway-usage-guide.md"
         type: "structural"
         relevance: 0.90
-      - path: "domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis-v2.md#十te-9-terway-网络故障-p1-新增"
+      - path: "domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis-v2.md#十te-9-terway-网络问题-p1-新增"
         type: "fta"
         relevance: 0.95
 
   # ============================================================================
-  # ASM 服务网格故障 (ACK 特有)
+  # ASM 服务网格问题 (ACK 特有)
   # ============================================================================
-  - symptom: "ASM 服务网格故障"
+  - symptom: "ASM 服务网格问题"
     category: "service-mesh"
     cluster_type: "ACK"
     aliases:
@@ -890,7 +890,7 @@ symptom_mappings:
       - path: "domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md"
         type: "structural"
         relevance: 0.95
-      - path: "domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis-v2.md#十一te-10-asm-服务网格故障-p1-新增"
+      - path: "domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis-v2.md#十一te-10-asm-服务网格问题-p1-新增"
         type: "fta"
         relevance: 0.95
 
@@ -1081,7 +1081,7 @@ symptom_mappings:
 
     diagnostic_decision_tree:
       - condition: "Redis 集群节点全部不可达"
-        likely_root_cause: "Redis 集群分片或 Sentinel 故障"
+        likely_root_cause: "Redis 集群分片或 Sentinel 问题"
         fta_path: "TE-2 → IE-2.4 → BE-2.11"
         confidence: 0.85
         verification_steps:
@@ -1238,7 +1238,7 @@ symptom_mappings:
             expected: "指标可获取"
 
       - condition: "VPA 推荐值未自动应用"
-        likely_root_cause: "VPA 模式为 Off 或 admission webhook 故障"
+        likely_root_cause: "VPA 模式为 Off 或 admission webhook 问题"
         fta_path: "TE-3 → IE-3.5 → BE-3.16"
         confidence: 0.80
         verification_steps:
@@ -1304,7 +1304,7 @@ unknown_symptom_handling:
 
 处理:
   1. 模糊匹配: 搜索 "sidecar" → 找到 ASM/Istio 相关文档
-  2. 扩展搜索: 搜索 "容器间连接" → TE-10 服务网格故障
+  2. 扩展搜索: 搜索 "容器间连接" → TE-10 服务网格问题
   3. FTA 回溯: TE-10 → IE-10.1 → BE-10.1 (Envoy 健康检查)
   4. 输出: "可能为 Envoy sidecar 配置问题，建议检查 05-service-mesh-istio-troubleshooting.md"
 ```
@@ -1445,7 +1445,7 @@ slo_integration:
           target: >= 3 nodes
           current_impact: -1 node
 
-    - symptom: "etcd 故障"
+    - symptom: "etcd 问题"
       affected_slo:
         - name: "集群可用性"
           target: 99.99%
@@ -1824,7 +1824,7 @@ security_guardrails:
 
 <!-- chunk: 十、多集群与云厂商适配 -->## 十、多集群与云厂商适配
 
-#<!-- chunk: 10.1 多集群统一故障映射 -->## 10.1 多集群统一故障映射
+#<!-- chunk: 10.1 多集群统一问题映射 -->## 10.1 多集群统一问题映射
 
 ```yaml
 multi_cluster_mapping:
@@ -1836,7 +1836,7 @@ multi_cluster_mapping:
       gke_equivalent: "Pod CrashLoopBackOff + GKE node issues"
       ack_equivalent: "Pod CrashLoopBackOff + ACK node issues + Terway"
 
-    - normalized_symptom: "etcd 故障"
+    - normalized_symptom: "etcd 问题"
       self_hosted: "etcd cluster health check"
       managed:
         aks: "Not applicable (Azure manages control plane)"
@@ -1849,7 +1849,7 @@ multi_cluster_mapping:
     enabled: true
     correlation_window: 5m
     min_clusters_affected: 2
-    action: "跨集群级联故障告警"
+    action: "跨集群级联问题告警"
 ```
 
 #<!-- chunk: 10.2 云厂商特定故障模式 -->## 10.2 云厂商特定故障模式

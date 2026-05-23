@@ -99,7 +99,7 @@ tier: peripheral---
 
 本套故障排查文档体系基于生产环境真实案例构建，提供：
 - **系统性覆盖**：42篇文档完整覆盖Kubernetes运维各个层面
-- **实战导向**：每篇文档包含真实故障场景和解决方案
+- **实战导向**：每篇文档包含真实问题场景和解决方案
 - **质量保证**：专家级内容标准，经过多轮审核优化
 - **持续更新**：定期补充新技术和最佳实践
 
@@ -110,10 +110,10 @@ tier: peripheral---
 ### 控制平面故障排查
 | 编号 | 文档名称 | 关键内容 |
 |:---:|:---|:---|
-| 01 | [API Server故障排查](./01-control-plane-apiserver-troubleshooting.md) | API Server不可用、性能问题、认证授权故障 |
+| 01 | [API Server故障排查](./01-control-plane-apiserver-troubleshooting.md) | API Server不可用、性能问题、认证授权问题 |
 | 02 | [etcd故障排查](./02-control-plane-etcd-troubleshooting.md) | etcd集群不可用、数据一致性、性能优化 |
 | 03 | [CNI网络故障排查](./03-networking-cni-troubleshooting.md) | Pod网络不通、DNS解析失败、跨节点通信 |
-| 04 | [CSI存储故障排查](./04-storage-csi-troubleshooting.md) | 卷创建/挂载失败、存储性能问题、CSI组件故障 |
+| 04 | [CSI存储故障排查](./04-storage-csi-troubleshooting.md) | 卷创建/挂载失败、存储性能问题、CSI组件问题 |
 
 ### 工作负载故障排查
 | 编号 | 文档名称 | 关键内容 |
@@ -183,7 +183,7 @@ tier: peripheral---
 ### 推荐使用路径
 
 ```
-故障现象 → 配置优先方法论 (疑难问题排查策略)
+问题现象 → 配置优先方法论 (疑难问题排查策略)
          → topic-fta (定位根因方向)
          → domain-10-troubleshooting-diagnostics (查看详细排查步骤)
          → topic-skills (执行自动化修复)

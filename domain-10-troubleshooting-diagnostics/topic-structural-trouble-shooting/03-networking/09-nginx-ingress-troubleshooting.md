@@ -44,7 +44,7 @@ created: "2026-05-23"
 
 title: nginx-ingress-controller 故障排查指南
 description: nginx-ingress-controller 故障排查指南，覆盖 [[Ingress|Ingress]] 配置、502/503 错误、TLS 证书、upstream
-  超时等故障场景
+  超时等问题场景
 category: structural-troubleshooting
 tags:
 - k8s
@@ -99,7 +99,7 @@ k8s_versions:
 
 1. [10 分钟快速诊断](#10-分钟快速诊断)
 2. [架构与核心组件](#架构与核心组件)
-3. [故障场景与排查步骤](#故障场景与排查步骤)
+3. [问题场景与排查步骤](#问题场景与排查步骤)
 4. [配置参考](#配置参考)
 
 ---
@@ -168,7 +168,7 @@ kubectl exec -it <nginx-pod> -n ingress-nginx -- nginx -t
 
 ---
 
-## 故障场景与排查步骤
+## 问题场景与排查步骤
 
 ### 场景 1: 请求返回 502 Bad Gateway
 

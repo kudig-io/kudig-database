@@ -400,7 +400,7 @@ flowchart TD
       },
       "metadata": { "severity": "critical", "probability": "low", "mttr_minutes": 60,
         "detection": { "events": ["NodeNotReady"], "metrics": ["node_boot_time_seconds"], "logs": ["reboot", "system startup"] },
-        "remediation": { "manual_steps": ["检查 dmesg/kern.log 定位重启原因", "检查硬件故障", "检查 OOM Killer 日志", "检查看门狗触发"], "auto_actions": [] } },
+        "remediation": { "manual_steps": ["检查 dmesg/kern.log 定位重启原因", "检查硬件问题", "检查 OOM Killer 日志", "检查看门狗触发"], "auto_actions": [] } },
       "next_step": "gate_root_or"
     },
     {
@@ -1173,7 +1173,7 @@ flowchart TD
       },
       "metadata": { "severity": "high", "probability": "low", "mttr_minutes": 60,
         "detection": { "events": ["FailedMount"], "metrics": [], "logs": ["read-only file system", "EXT4-fs error"] },
-        "remediation": { "manual_steps": ["mount | grep ro", "fsck 修复", "更换故障磁盘"], "auto_actions": [] } },
+        "remediation": { "manual_steps": ["mount | grep ro", "fsck 修复", "更换问题磁盘"], "auto_actions": [] } },
       "next_step": "gate_root_or"
     },
     {

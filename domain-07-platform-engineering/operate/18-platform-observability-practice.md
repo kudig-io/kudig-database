@@ -100,7 +100,7 @@ platform_observability_maturity:
       - 基础指标收集
       - 简单告警通知
       - 基础日志查询
-    business_impact: "故障响应滞后，用户体验受损"
+    business_impact: "问题响应滞后，用户体验受损"
     
   level_2_proactive_monitoring:  # 主动监控级
     characteristics:
@@ -113,7 +113,7 @@ platform_observability_maturity:
       - 分级告警机制
       - 自动化根因分析
       - 性能基线建立
-    business_impact: "提前发现问题，降低故障影响"
+    business_impact: "提前发现问题，降低问题影响"
     
   level_3_predictive_analytics:  # 预测分析级
     characteristics:
@@ -130,7 +130,7 @@ platform_observability_maturity:
     
   level_4_autonomous_operations:  # 自主运维级
     characteristics:
-      - 自动故障修复
+      - 自动问题修复
       - 动态资源调度
       - 智能容量伸缩
       - 自适应优化
@@ -330,7 +330,7 @@ alerting_hierarchy:
     examples:
       - "API Server不可用"
       - "etcd集群异常"
-      - "核心组件大面积故障"
+      - "核心组件大面积问题"
       
   infrastructure_alerts:  # 基础设施告警
     severity: medium
@@ -374,7 +374,7 @@ intelligent_alerting:
       
   alert_correlation:
     temporal_correlation:
-      - cascading_failure_detection: "级联故障识别"
+      - cascading_failure_detection: "级联问题识别"
       - correlated_alert_grouping: "相关告警分组"
       - root_cause_identification: "根本原因定位"
       
@@ -623,7 +623,7 @@ implementation_roadmap:
     deliverables:
       - 智能容量规划
       - 成本优化引擎
-      - 自主故障修复
+      - 自主问题修复
       - 业务价值量化
       
   phase_4_innovation:  # 创新引领阶段 (12个月+)

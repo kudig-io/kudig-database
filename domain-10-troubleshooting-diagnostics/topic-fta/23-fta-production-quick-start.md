@@ -133,9 +133,9 @@ k8s_versions:
 │                    FTA 快速启动 30 天路线图                         │
 └────────────────────────────────────────────────────────────────────┘
 
-Week 1: Foundation - 识别高频故障场景
+Week 1: Foundation - 识别高频问题场景
 ├─ Day 1-2: 回顾过去 3 个月的生产事件
-│   └─ 输出：Top 5 高频/高影响故障列表
+│   └─ 输出：Top 5 高频/高影响问题列表
 ├─ Day 3-4: 选择第一个场景，初步构建故障树
 │   └─ 输出：一棵完整的故障树图（至少 3 层）
 └─ Day 5:   团队评审，明确底事件和检测手段
@@ -158,11 +158,11 @@ Week 3: Response - 从故障树到 Runbook
     └─ 输出：培训材料 + Q&A 文档
 
 Week 4: Feedback Loop - 持续改进
-├─ Day 17-18: 复盘上月故障，更新故障树
+├─ Day 17-18: 复盘上月问题，更新故障树
 │   └─ 输出：故障树 v2（新增分支/底事件）
 ├─ Day 19-20: 建立 FTA 更新流程（纳入 Postmortem）
 │   └─ 输出：Postmortem 模板更新
-├─ Day 21-25: 扩展到第 2、3 个故障场景
+├─ Day 21-25: 扩展到第 2、3 个问题场景
 │   └─ 输出：新增 2 棵故障树
 └─ Day 26-30: 度量 FTA 效果（MTTR / 告警数量）
     └─ 输出：FTA ROI 报告
@@ -173,7 +173,7 @@ Week 4: Feedback Loop - 持续改进
 
 **Week 1 Deliverables**
 
-##<!-- chunk: 任务 1.1：识别 Top 5 高频故障场景（2天） -->## 任务 1.1：识别 Top 5 高频故障场景（2天）
+##<!-- chunk: 任务 1.1：识别 Top 5 高频问题场景（2天） -->## 任务 1.1：识别 Top 5 高频问题场景（2天）
 
 **输入材料**：
 - 过去 3-6 个月的事件记录（Incident Tickets）
@@ -197,7 +197,7 @@ jq '.issues[] | {summary: .fields.summary, resolution_time: .fields.resolutionda
 
 **输出模板**：
 
-| Rank | 故障类型 | 发生次数 | 平均 MTTR | 影响用户数 | 业务影响 | 优先级 |
+| Rank | 问题类型 | 发生次数 | 平均 MTTR | 影响用户数 | 业务影响 | 优先级 |
 |------|---------|---------|-----------|-----------|----------|--------|
 | 1 | Service 不可用 | 15 | 45min | 10000+ | Critical | P0 |
 | 2 | 数据库连接超时 | 12 | 30min | 5000 | High | P1 |
@@ -303,7 +303,7 @@ E8: Node NotReady
 
 **底事件检测映射表**：
 
-| 底事件 ID | 故障现象 | 检测手段 | 检测命令/指标 | 告警阈值 |
+| 底事件 ID | 问题现象 | 检测手段 | 检测命令/指标 | 告警阈值 |
 |-----------|---------|---------|--------------|---------|
 | E1 | Ingress 无后端 | kubectl describe | `kubectl describe ingress <name>` 查看 Backend | 人工检查 |
 | E2 | Label 不匹配 | kubectl get svc | `kubectl get svc <name> -o yaml` 对比 selector | 人工检查 |
@@ -738,7 +738,7 @@ kubectl edit ingress <ingress-name> -n <namespace>
 
 事件解决后，更新 FTA：
 
-- [ ] 此次故障是否已覆盖在 FTA 中？
+- [ ] 此次问题是否已覆盖在 FTA 中？
 - [ ] 是否需要新增底事件？
 - [ ] 检测手段是否生效？
 - [ ] Runbook 是否需要更新？
@@ -759,7 +759,7 @@ kubectl edit ingress <ingress-name> -n <namespace>
 - [ ] 识别 FTA 未覆盖的新故障模式
 - [ ] 更新故障树（新增分支/底事件）
 - [ ] 将 FTA 更新纳入 Postmortem 流程
-- [ ] 扩展到第 2、3 个高频故障场景
+- [ ] 扩展到第 2、3 个高频问题场景
 - [ ] 生成 FTA ROI 初步报告
 
 **Postmortem 模板更新**（添加 FTA 章节）：
@@ -767,11 +767,11 @@ kubectl edit ingress <ingress-name> -n <namespace>
 ```markdown
 <!-- chunk: FTA 分析 -->## FTA 分析
 
-#<!-- chunk: 故障在 FTA 中的位置 -->## 故障在 FTA 中的位置
-- [ ] 此故障已在现有 FTA 中覆盖
+#<!-- chunk: 问题在 FTA 中的位置 -->## 问题在 FTA 中的位置
+- [ ] 此问题已在现有 FTA 中覆盖
   - 故障树: _______________
   - 底事件: _______________
-- [ ] 此故障为新发现的故障模式（需要更新 FTA）
+- [ ] 此问题为新发现的故障模式（需要更新 FTA）
 
 #<!-- chunk: FTA 检测有效性 -->## FTA 检测有效性
 - [ ] 告警及时触发（检测延迟 < 1分钟）
@@ -802,7 +802,7 @@ kubectl edit ingress <ingress-name> -n <namespace>
 - **业务影响**：服务完全不可用，影响所有用户
 - **SLI 指标**：`probe_success{service="my-service"} == 0`（外部探测失败）
 
-#<!-- chunk: 23.2.2 第一层分解：确定主要故障路径 -->## 23.2.2 第一层分解：确定主要故障路径
+#<!-- chunk: 23.2.2 第一层分解：确定主要问题路径 -->## 23.2.2 第一层分解：确定主要问题路径
 
 使用 **OR 门** 分解，表示任意一个分支发生都会导致顶事件。
 
@@ -819,15 +819,15 @@ kubectl edit ingress <ingress-name> -n <namespace>
   ┌─────┴─────┐         ┌──────┴──────┐      ┌───────┴────────┐
   │ Backend   │         │ Kubernetes  │      │ Network/       │
   │ Pod       │         │ Service     │      │ Ingress        │
-  │ 不可用     │         │ 层故障       │      │ 层故障          │
+  │ 不可用     │         │ 层问题       │      │ 层问题          │
   └───────────┘         └─────────────┘      └────────────────┘
 ```
 
 **第一层决策逻辑**：
 
 1. **Backend Pod 不可用**：没有健康的 Pod 提供服务
-2. **Kubernetes Service 层故障**：Service、Endpoint 配置错误
-3. **Network/Ingress 层故障**：Ingress、负载均衡器配置错误或网络不通
+2. **Kubernetes Service 层问题**：Service、Endpoint 配置错误
+3. **Network/Ingress 层问题**：Ingress、负载均衡器配置错误或网络不通
 
 #<!-- chunk: 23.2.3 第二层分解：Backend Pod 不可用 -->## 23.2.3 第二层分解：Backend Pod 不可用
 
@@ -897,7 +897,7 @@ kubectl edit ingress <ingress-name> -n <namespace>
                 │                          │                          │
          ┌──────┴──────┐            ┌──────┴──────┐          ┌────────┴────────┐
          │ Backend Pod │            │ K8s Service │          │ Network/Ingress │
-         │ 不可用       │            │ 层故障       │          │ 层故障           │
+         │ 不可用       │            │ 层问题       │          │ 层问题           │
          └──────┬──────┘            └──────┬──────┘          └────────┬────────┘
                 │                          │                          │
              [OR]                       [OR]                        [OR]
@@ -1382,7 +1382,7 @@ Known Tree  Unknown Tree
 
 1. **缺乏系统性分析框架**：根因分析依赖个人经验，容易遗漏
 2. **知识无法沉淀**：Postmortem 写完就束之高阁，未转化为可执行的改进
-3. **重复故障频发**：相同或类似故障反复发生
+3. **重复问题频发**：相同或类似问题反复发生
 4. **改进措施不落地**：Action Items 执行率低
 
 #<!-- chunk: 23.4.2 FTA-Enhanced Postmortem 模板 -->## 23.4.2 FTA-Enhanced Postmortem 模板
@@ -1418,12 +1418,12 @@ Known Tree  Unknown Tree
 
 <!-- chunk: FTA 分析 -->## FTA 分析
 
-#<!-- chunk: 故障在 FTA 中的定位 -->## 故障在 FTA 中的定位
+#<!-- chunk: 问题在 FTA 中的定位 -->## 问题在 FTA 中的定位
 
-- ✅ **此故障已在现有 FTA 中覆盖**
+- ✅ **此问题已在现有 FTA 中覆盖**
   - **故障树**: `service_unavailable`
   - **顶事件**: Service 不可用
-  - **故障路径**: Backend Pod 不可用 -> Pod Crash -> OOMKilled
+  - **问题路径**: Backend Pod 不可用 -> Pod Crash -> OOMKilled
   - **底事件**: E6 (OOMKilled)
 
 #<!-- chunk: FTA 决策树演练 -->## FTA 决策树演练

@@ -51,32 +51,32 @@ FTA 设计 (多云扩展):
 
   TE-MC: 多云应用不可用 [OR门]
   │
-  ├── IE-MC.1: AWS EKS 集群故障 [OR门]
+  ├── IE-MC.1: AWS EKS 集群问题 [OR门]
   │   ├── BE-MC.1.1: ELB 健康检查失败
   │   ├── BE-MC.1.2: EBS 卷挂载失败  
-  │   ├── BE-MC.1.3: VPC 网络故障
-  │   └── BE-MC.1.4: EKS 控制平面故障 (AWS 管控)
+  │   ├── BE-MC.1.3: VPC 网络问题
+  │   └── BE-MC.1.4: EKS 控制平面问题 (AWS 管控)
   │
-  ├── IE-MC.2: Azure AKS 集群故障 [OR门]
+  ├── IE-MC.2: Azure AKS 集群问题 [OR门]
   │   ├── BE-MC.2.1: Azure LB 异常
-  │   ├── BE-MC.2.2: Azure Disk 故障
+  │   ├── BE-MC.2.2: Azure Disk 问题
   │   ├── BE-MC.2.3: VNet 连接中断
-  │   └── BE-MC.2.4: AKS 控制平面故障 (Azure 管控)
+  │   └── BE-MC.2.4: AKS 控制平面问题 (Azure 管控)
   │
-  ├── IE-MC.3: 自建 K8s 集群故障
+  ├── IE-MC.3: 自建 K8s 集群问题
   │   └── (引用标准 FTA: TE-1 ~ TE-8)
   │
-  └── IE-MC.4: 跨云网络故障 [OR门]
+  └── IE-MC.4: 跨云网络问题 [OR门]
       ├── BE-MC.4.1: VPN/专线中断
       ├── BE-MC.4.2: DNS 跨云解析失败
-      └── BE-MC.4.3: Service Mesh 跨云通信故障
+      └── BE-MC.4.3: Service Mesh 跨云通信问题
 
 Agent 方案:
   Multi-Cloud Agent:
   - 调用 AWS API (aws eks, aws elb)
   - 调用 Azure API (az aks, az network)
   - 调用 kubectl (自建集群)
-  - 跨云故障关联分析
+  - 跨云问题关联分析
 ```
 
 ## 18.2 有状态服务故障自愈
@@ -86,7 +86,7 @@ Agent 方案:
 
 FTA 路径:
   TE: 数据库服务不可用 [OR门]
-  ├── IE: 主节点故障 [OR门]
+  ├── IE: 主节点问题 [OR门]
   │   ├── BE: 主节点 OOM
   │   ├── BE: 主节点磁盘满
   │   └── BE: 主节点网络分区

@@ -643,7 +643,7 @@ nslookup $MY_IP
 <!-- chunk: 4. 故障诊断与排错 -->
 ## 4. 故障诊断与排错
 
-### 4.1 常见故障场景
+### 4.1 常见问题场景
 
 ```bash
 #!/bin/bash
@@ -736,11 +736,11 @@ data:
     www.baidu.com A
 ```
 
-### 4.3 故障排除清单
+### 4.3 问题排除清单
 
 ```markdown
-<!-- chunk: CoreDNS 故障排除 checklist -->
-## CoreDNS 故障排除 checklist
+<!-- chunk: CoreDNS 问题排除 checklist -->
+## CoreDNS 问题排除 checklist
 
 ### 🔍 基础检查
 - [ ] CoreDNS Pod 状态正常

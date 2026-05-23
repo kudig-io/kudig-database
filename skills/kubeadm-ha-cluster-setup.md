@@ -35,7 +35,7 @@ created: "2026-05-23"
 
 ## 概述
 
-生产环境 Kubernetes 集群必须部署高可用控制面以消除单点故障。kubeadm 支持两种 etcd 高可用拓扑，并通过 `--control-plane-endpoint` 参数统一配置负载均衡入口。
+生产环境 Kubernetes 集群必须部署高可用控制面以消除单点问题。kubeadm 支持两种 etcd 高可用拓扑，并通过 `--control-plane-endpoint` 参数统一配置负载均衡入口。
 
 ## 两种 etcd 拓扑对比
 
@@ -136,7 +136,7 @@ kubectl describe lease kube-scheduler -n kube-system
 
 ## etcd 仲裁规则
 
-| 节点数 | 容忍故障数 | 说明 |
+| 节点数 | 容忍问题数 | 说明 |
 |--------|-----------|------|
 | 1 | 0 | 开发环境 |
 | 3 | 1 | 小型生产 |

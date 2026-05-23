@@ -48,15 +48,15 @@ prerequisites:
 **完备性检查**：
 
 ```
-方法: 历史故障覆盖率测试
+方法: 历史问题覆盖率测试
 
 输入: 
-  - 过去 12 个月的故障工单列表 (N 条)
+  - 过去 12 个月的问题工单列表 (N 条)
   - 当前 FTA 故障树
 
 流程:
-  for each 故障工单 in 历史工单:
-    1. 提取故障根因
+  for each 问题工单 in 历史工单:
+    1. 提取问题根因
     2. 在 FTA 中查找对应路径
     3. if 找到路径:
          覆盖计数 += 1
@@ -67,7 +67,7 @@ prerequisites:
 
 目标: 覆盖率 ≥ 95%
 
-未覆盖的故障 → 作为新的底事件补充到 FTA
+未覆盖的问题 → 作为新的底事件补充到 FTA
 ```
 
 **逻辑一致性检查**：
@@ -117,7 +117,7 @@ spec:
       app: target-service
   duration: "5m"
   # FTA 预期: 内存压力 → OOMKilled → Pod重启 → 服务抖动
-  # 验证: 实际故障传播路径是否匹配
+  # 验证: 实际问题传播路径是否匹配
 ```
 
 **验证结果评估**：
@@ -126,9 +126,9 @@ spec:
 ┌──────────────┬────────────────────────┬─────────────────────────┐
 │ 验证结果      │ 含义                   │ 后续动作                 │
 ├──────────────┼────────────────────────┼─────────────────────────┤
-│ ✅ FTA 准确   │ 故障表现与FTA预测一致   │ FTA路径有效，无需修改     │
-│ ⚠️ FTA 不完整 │ 出现了FTA未覆盖的故障   │ 补充新的底事件/中间事件   │
-│ ❌ FTA 错误   │ 故障传播路径与FTA矛盾   │ 修正逻辑门类型或事件关系  │
+│ ✅ FTA 准确   │ 问题表现与FTA预测一致   │ FTA路径有效，无需修改     │
+│ ⚠️ FTA 不完整 │ 出现了FTA未覆盖的问题   │ 补充新的底事件/中间事件   │
+│ ❌ FTA 错误   │ 问题传播路径与FTA矛盾   │ 修正逻辑门类型或事件关系  │
 │ 🔄 FTA 过时   │ 系统已变更，FTA未同步   │ 更新FTA以反映当前架构     │
 └──────────────┴────────────────────────┴─────────────────────────┘
 ```
@@ -159,14 +159,14 @@ CREATE (te1:TopEvent {
 // 创建中间事件
 CREATE (ie11:IntermediateEvent {
   id: "IE-1.1", 
-  name: "控制平面故障",
+  name: "控制平面问题",
   gate_type: "OR"
 })
 
 // 创建底事件
 CREATE (be11:BasicEvent {
   id: "BE-1.1", 
-  name: "API Server故障",
+  name: "API Server问题",
   probability: 0.001,
   mttr_minutes: 30,
   observable: true,
@@ -175,7 +175,7 @@ CREATE (be11:BasicEvent {
 
 CREATE (be12:BasicEvent {
   id: "BE-1.2", 
-  name: "etcd集群故障",
+  name: "etcd集群问题",
   probability: 0.0005,
   mttr_minutes: 60,
   observable: true,
@@ -192,7 +192,7 @@ MATCH path = (te:TopEvent {id: "TE-1"})-[:HAS_CHILD*]->(be:BasicEvent)
 RETURN path
 ORDER BY length(path)
 
-// 查询: 找到所有 1 阶最小割集(单点故障)
+// 查询: 找到所有 1 阶最小割集(单点问题)
 MATCH (te:TopEvent)-[:HAS_CHILD {gate: "OR"}]->(be:BasicEvent)
 RETURN be.id, be.name, be.probability
 ORDER BY be.probability DESC

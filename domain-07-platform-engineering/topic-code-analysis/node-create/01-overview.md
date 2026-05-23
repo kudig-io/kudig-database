@@ -103,7 +103,7 @@ k8s_versions:
 
 节点（Node）是 Kubernetes 集群中的工作单元，它是运行 Pod 的物理机或虚拟机。每个节点包含运行 Pod 所需的核心服务：kubelet（节点代理）、容器运行时（containerd/cri-o）和网络插件（CNI）。理解节点的完整生命周期——从创建、注册、运行到维护和移除——是有效管理 Kubernetes 集群的基础。
 
-Kubernetes 中的节点管理采用了"声明式"的设计哲学：用户通过 API Server 定义期望的节点状态（如标签、污点、规格），kubelet 和各个控制器负责将实际状态与期望状态对齐。这种设计使得节点管理可以自动化——Cluster Autoscaler 可以根据负载自动增减节点，Node Lifecycle Controller 可以自动检测和隔离故障节点。
+Kubernetes 中的节点管理采用了"声明式"的设计哲学：用户通过 API Server 定义期望的节点状态（如标签、污点、规格），kubelet 和各个控制器负责将实际状态与期望状态对齐。这种设计使得节点管理可以自动化——Cluster Autoscaler 可以根据负载自动增减节点，Node Lifecycle Controller 可以自动检测和隔离问题节点。
 
 本文档作为节点生命周期管理的总览，详细介绍节点的核心组件、生命周期阶段、状态流转机制、Node 对象的结构以及节点角色管理。
 

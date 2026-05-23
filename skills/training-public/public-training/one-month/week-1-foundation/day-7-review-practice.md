@@ -420,7 +420,7 @@ kubectl exec -it $(kubectl get pod -l app=nginx-web -o jsonpath='{.items[0].meta
 kubectl get events --sort-by='.lastTimestamp'
 # 预期输出: 列出近期所有事件（Pod 调度、拉取镜像、探针检查等）
 
-# 模拟故障场景 1: 镜像拉取失败
+# 模拟问题场景 1: 镜像拉取失败
 kubectl set image deployment/nginx-web nginx=nginx:nonexistent-tag
 kubectl get pods
 # 预期输出: 新 Pod 处于 ImagePullBackOff 状态
@@ -440,7 +440,7 @@ kubectl rollout undo deployment/nginx-web
 kubectl rollout status deployment/nginx-web
 # 预期输出: deployment "nginx-web" successfully rolled out
 
-# 模拟故障场景 2: 资源不足导致 Pending
+# 模拟问题场景 2: 资源不足导致 Pending
 # 创建一个请求超大资源的 Pod
 cat <<EOF | kubectl apply -f -
 apiVersion: v1

@@ -101,7 +101,7 @@ k8s_versions:
 
 ## 问题现象与影响分析
 
-### 可观测性核心组件故障现象
+### 可观测性核心组件问题现象
 
 | 问题类型 | 典型现象 | 影响程度 | 紧急级别 |
 |---------|---------|---------|---------|
@@ -175,7 +175,7 @@ curl -s http://$alertmanager_url/api/v2/status && echo " ✓ AlertManager 正常
 ### 可观测性问题诊断决策树
 
 ```
-可观测性故障
+可观测性问题
     ├── 数据采集问题
     │   ├── Exporter 状态异常
     │   ├── ServiceMonitor 配置错误
@@ -1492,7 +1492,7 @@ QUALITY_REPORT="/var/log/kubernetes/observability-quality-$(date +%Y%m%d).log"
 echo "可观测性数据质量报告已生成: $QUALITY_REPORT"
 ```
 
-### 典型故障案例
+### 典型问题案例
 
 #### 案例：Prometheus 数据存储爆满
 

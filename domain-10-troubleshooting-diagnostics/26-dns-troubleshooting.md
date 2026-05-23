@@ -74,9 +74,9 @@ created: "2026-05-23"
 <!-- chunk: 1. DNS 故障诊断总览 (DNS Diagnosis Overview) -->
 ## 1. DNS 故障诊断总览 (DNS Diagnosis Overview)
 
-### 1.1 常见故障现象分类
+### 1.1 常见问题现象分类
 
-| 故障类型 | 症状表现 | 影响范围 | 紧急程度 |
+| 问题类型 | 症状表现 | 影响范围 | 紧急程度 |
 |---------|---------|---------|---------|
 | **内部域名解析失败** | [[Service|Service]]/Pod域名无法解析 | 服务间调用失败 | P0 - 紧急 |
 | **外部域名解析失败** | 无法访问互联网域名 | 依赖服务中断 | P1 - 高 |
@@ -769,7 +769,7 @@ EOF
 
 chmod +x dns-benchmark.sh
 
-# ========== DNS故障模拟和恢复测试 ==========
+# ========== DNS问题模拟和恢复测试 ==========
 cat <<'EOF' > dns-failure-test.sh
 #!/bin/bash
 
@@ -777,7 +777,7 @@ TEST_NAMESPACE=${1:-default}
 
 echo "Testing DNS failure scenarios"
 
-# 1. 模拟CoreDNS Pod故障
+# 1. 模拟CoreDNS Pod问题
 echo "=== Testing CoreDNS Pod Restart ==="
 COREDNS_POD=$(kubectl get pods -n kube-system -l k8s-app=kube-dns -o jsonpath='{.items[0].metadata.name}')
 echo "Restarting CoreDNS pod: $COREDNS_POD"
@@ -797,7 +797,7 @@ echo "CoreDNS recovered ✓"
 echo "=== Testing Network Partition Scenario ==="
 # 这里可以添加网络策略来模拟网络分区
 
-# 3. 测试上游DNS故障
+# 3. 测试上游DNS问题
 echo "=== Testing Upstream DNS Failure ==="
 # 临时修改CoreDNS配置指向不可达的DNS服务器
 # 然后测试解析行为

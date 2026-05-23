@@ -248,7 +248,7 @@ kube-bench run --targets master,node,controlplane,policies
 ```bash
 # 自动修复配置检查
 ✓ 节点自动修复 (Cluster Autoscaler)
-✓ Pod故障自动重启
+✓ Pod问题自动重启
 ✓ 应用健康检查配置
 ✓ 资源限制和请求设置
 ```

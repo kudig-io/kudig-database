@@ -70,7 +70,7 @@ created: "2026-05-23"
 
 ### Admission Webhook 最佳实践
 
-Admission Webhook 是扩展 Kubernetes API 的强大机制，但在设计和部署时需要格外谨慎。设计不良的 webhook 可能导致工作负载中断、升级后行为异常，甚至引发集群级故障。本文档为集群运维人员和 webhook 开发者提供了设计和部署 admission webhook 的推荐实践。
+Admission Webhook 是扩展 Kubernetes API 的强大机制，但在设计和部署时需要格外谨慎。设计不良的 webhook 可能导致工作负载中断、升级后行为异常，甚至引发集群级问题。本文档为集群运维人员和 webhook 开发者提供了设计和部署 admission webhook 的推荐实践。
 
 > *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/platform-engineering/admission-webhook-good-practices.md`）*
 

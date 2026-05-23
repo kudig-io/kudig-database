@@ -69,11 +69,11 @@ created: "2026-05-23"
 
 ## 1. 概述
 
-RBAC（Role-Based Access Control）和 ResourceQuota 是 [[Kubernetes|Kubernetes]] 中最核心的安全与资源治理机制。RBAC 故障会直接导致用户、ServiceAccount 或控制器无法执行预期操作，严重时可阻断整个 CI/CD 流水线或导致生产服务无法部署。ResourceQuota 和 LimitRange 故障则会导致工作负载无法创建或调度，影响业务扩容和新服务上线。此外，现代 Kubernetes 集群普遍部署 OPA/Gatekeeper 或 [[Kyverno|Kyverno]] 等策略引擎，其 Admission Controller 拦截也会产生类似 RBAC 403 的错误表象。
+RBAC（Role-Based Access Control）和 ResourceQuota 是 [[Kubernetes|Kubernetes]] 中最核心的安全与资源治理机制。RBAC 问题会直接导致用户、ServiceAccount 或控制器无法执行预期操作，严重时可阻断整个 CI/CD 流水线或导致生产服务无法部署。ResourceQuota 和 LimitRange 问题则会导致工作负载无法创建或调度，影响业务扩容和新服务上线。此外，现代 Kubernetes 集群普遍部署 OPA/Gatekeeper 或 [[Kyverno|Kyverno]] 等策略引擎，其 Admission Controller 拦截也会产生类似 RBAC 403 的错误表象。
 
 ### 典型触发场景
 
-1. **RBAC 授权故障**: 用户或 ServiceAccount 缺少必要的 Role/RoleBinding，导致 API 调用返回 403 Forbidden。常见于新服务部署、跨 Namespace 访问、CI/CD 权限配置不当
+1. **RBAC 授权问题**: 用户或 ServiceAccount 缺少必要的 Role/RoleBinding，导致 API 调用返回 403 Forbidden。常见于新服务部署、跨 Namespace 访问、CI/CD 权限配置不当
 2. **ResourceQuota 配额耗尽**: Namespace 内 CPU/Memory/对象数量达到配额上限，新 Pod/PVC/Service 创建被拒绝。常见于资源紧张的生产环境、批量任务执行、资源泄漏场景
 3. **LimitRange 约束冲突**: Pod 资源请求不满足 LimitRange 定义的最小/最大限制，或未设置 requests/limits 导致被 LimitRange 默认值覆盖后超限
 4. **Admission Controller 策略拦截**: OPA/Gatekeeper、Kyverno 或其他 ValidatingWebhook 基于安全/合规策略拒绝资源创建
@@ -149,7 +149,7 @@ RBAC（Role-Based Access Control）和 ResourceQuota 是 [[Kubernetes|Kubernetes
 | 错误信息为 NetworkPolicy 阻止网络访问 | SKILL-NET-xxx | 网络层面的隔离问题，非 RBAC 授权问题 |
 | Pod Pending 但原因是资源不足（无 quota 错误）| SKILL-POD-002 | 调度问题，节点资源不足而非配额问题 |
 | API Server 本身不可用（连接超时）| 控制平面问题 | 超出本 Skill 范围，需排查 apiserver |
-| 用户主动删除 RoleBinding 进行权限收回 | 非故障 | 正常的权限管理操作 |
+| 用户主动删除 RoleBinding 进行权限收回 | 非问题 | 正常的权限管理操作 |
 | 证书过期导致的认证失败 | SKILL-SEC-001 | 证书管理问题，非 RBAC 授权问题 |
 
 ---
@@ -158,7 +158,7 @@ RBAC（Role-Based Access Control）和 ResourceQuota 是 [[Kubernetes|Kubernetes
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障影响范围：
+按顺序执行以下命令，判断问题影响范围：
 
 **Step T1**: 确认 403 错误的主体和范围（10s）
 ```bash
@@ -184,7 +184,7 @@ kubectl get resourcequota -A -o custom-columns=NS:.metadata.namespace,NAME:.meta
 
 **Step T3**: 检查 RoleBinding/ClusterRoleBinding 状态（60s）
 ```bash
-# 查找与故障主体相关的绑定
+# 查找与问题主体相关的绑定
 SA_NAME="<serviceaccount-name>"
 NS="<namespace>"
 kubectl get rolebinding,clusterrolebinding -A -o wide | grep -E "${SA_NAME}|${NS}"
@@ -218,7 +218,7 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
 
 - **生产发布阻断**: 生产环境 CI/CD 流水线完全无法执行任何部署操作
 - **大规模权限异常**: 超过 5 个 Namespace 同时报告 RBAC 权限问题
-- **控制器级联故障**: 集群核心控制器（如 kube-controller-manager 使用的 SA）权限异常
+- **控制器级联问题**: 集群核心控制器（如 kube-controller-manager 使用的 SA）权限异常
 - **安全事件**: 怀疑存在权限提升攻击或未授权访问尝试
 - **配额全局耗尽**: 整个集群资源配额耗尽，无法进行任何资源创建
 
@@ -959,7 +959,7 @@ kubectl exec -it POD_NAME -n NS -- curl -sk \
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 
 - [ ] `kubectl auth can-i` 对受影响主体返回 `yes`
 - [ ] 资源创建操作成功执行（非 dry-run）
@@ -1000,7 +1000,7 @@ kubectl exec -it POD_NAME -n NS -- curl -sk \
 ```
 【{severity}】RBAC 权限与 ResourceQuota 故障诊断 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: {principal_type} {principal_name} 在 {namespace} 中执行 {operation} 操作失败
+- 问题概述: {principal_type} {principal_name} 在 {namespace} 中执行 {operation} 操作失败
 - 错误类型: {error_type} (403 Forbidden / Quota Exceeded / Admission Denied)
 - 影响范围: 
   - 受影响主体: {affected_principals}

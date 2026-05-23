@@ -59,7 +59,7 @@ prerequisites:
 | :--- | :--- | :--- |
 | **初学者** | 解决 Sidecar 注入、404/503 报错等基础问题 | 掌握 Istio 流量模型（VS/DR/GW）与 `istioctl` 基础诊断。 |
 | **中级运维** | 优化证书管理、实施精细化流量控制 | 理解 mTLS 原理、掌握 xDS 配置同步状态分析、[[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|Envoy]] 日志解读。 |
-| **资深专家** | 解决大规模集群瓶颈与 Ambient Mesh 落地 | 深入 xDS 底层报文（LDS/RDS/CDS/EDS）、Ambient Mesh 架构故障、硬件加速（TLS Offload）与性能调优。 |
+| **资深专家** | 解决大规模集群瓶颈与 Ambient Mesh 落地 | 深入 xDS 底层报文（LDS/RDS/CDS/EDS）、Ambient Mesh 架构问题、硬件加速（TLS Offload）与性能调优。 |
 
 ---
 
@@ -137,9 +137,9 @@ Istio 的控制面 `istiod` 与数据面 `Envoy` 之间通过 xDS（Discovery Se
 
 ---
 
-## 2. 专家级故障矩阵与观测工具
+## 2. 专家级问题矩阵与观测工具
 
-### 2.1 专家级故障矩阵
+### 2.1 专家级问题矩阵
 
 | 现象分类 | 深度根因分析 | 关键观测指令 |
 | :--- | :--- | :--- |
@@ -824,20 +824,20 @@ def connect_database():
 
 ---
 
-## 2.3 专家级故障矩阵 (按组件分类)
+## 2.3 专家级问题矩阵 (按组件分类)
 
-### 2.3.1 控制平面故障 (Istiod)
+### 2.3.1 控制平面问题 (Istiod)
 
-| 故障现象 | 根因分析 | 排查路径 | 典型场景 |
+| 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
 | Proxy Status: STALE | xDS 推送阻塞或超时 | `kubectl logs -n istio-system istiod-xxx \| grep "push error"` | 大规模集群 (5000+ Pod) |
 | Config 推送延迟 > 30s | Istiod CPU/内存不足 | `kubectl top pod -n istio-system` | EDS 推送风暴 |
 | VirtualService 不生效 | 配置语法错误 | `istioctl analyze -n <ns>` | 正则表达式错误 |
 | Certificate 签发失败 | CA Secret 丢失 | `kubectl get secret istio-ca-secret -n istio-system` | 误删除 Secret |
 
-### 2.3.2 数据平面故障 (Envoy Sidecar)
+### 2.3.2 数据平面问题 (Envoy Sidecar)
 
-| 故障现象 | 根因分析 | 排查路径 | 典型场景 |
+| 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
 | 503 UH (Upstream Unhealthy) | Endpoint 未就绪 | `istioctl pc endpoint <pod> --address <ip>` | Pod 健康检查失败 |
 | 503 UC (Upstream Connection Failure) | mTLS 握手失败 | `kubectl logs <pod> -c istio-proxy \| grep "TLS error"` | 证书过期/时钟偏移 |
@@ -846,9 +846,9 @@ def connect_database():
 | 429 RL (Rate Limited) | 触发限流 | 检查 EnvoyFilter 限流配置 | QPS 超限 |
 | 503 UO (Upstream Overflow) | 连接池耗尽 | `istioctl pc cluster <pod> \| grep circuit_breakers` | 并发过高 |
 
-### 2.3.3 Gateway 故障 (Ingress/Egress)
+### 2.3.3 Gateway 问题 (Ingress/Egress)
 
-| 故障现象 | 根因分析 | 排查路径 | 典型场景 |
+| 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
 | 502 Bad Gateway | 后端 Pod 不存在 | `kubectl get endpoints <svc>` | Service Selector 错误 |
 | 504 Gateway Timeout | 后端响应超时 | 检查 VirtualService timeout 配置 | 数据库慢查询 |
@@ -857,7 +857,7 @@ def connect_database():
 
 ### 2.3.4 性能问题
 
-| 故障现象 | 根因分析 | 排查路径 | 典型场景 |
+| 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
 | Envoy CPU 100% | 路由规则过多/正则复杂 | `kubectl top pod --containers` | VirtualService 使用复杂正则 |
 | 内存持续增长 | xDS 配置过大 | `kubectl exec -c istio-proxy -- curl localhost:15000/memory` | 未使用 Sidecar 资源限制作用域 |
@@ -1247,13 +1247,13 @@ spec:
 
 ## 5.4 案例四: Istio 升级导致 Sidecar 批量重启
 
-**故障背景**
+**问题背景**
 
 - **集群**: GKE 1.29, 800 节点, 15000+ Pod
 - **升级**: Istio 1.18 → 1.20
 - **方式**: 使用 `istioctl upgrade` 一键升级
 
-**故障过程**
+**问题过程**
 
 ```
 时间线:
@@ -1264,7 +1264,7 @@ spec:
 10:20 - 集群范围服务中断 (50% Pod 不可用)
 10:25 - 紧急回滚 Istio 1.18
 10:40 - 服务逐步恢复
-11:30 - 故障完全解决
+11:30 - 问题完全解决
 ```
 
 **根因分析**
@@ -1479,7 +1479,7 @@ echo -e "\n=== Check Complete ==="
 
 ---
 
-## 6. Terway + ASM (阿里云 ACK) 交互故障场景
+## 6. Terway + ASM (阿里云 ACK) 交互问题场景
 
 > **适用集群**: 阿里云 ACK + Terway 网络模式 + ASM (Alibaba Service Mesh)
 > **难度**: 高级
@@ -1691,11 +1691,11 @@ spec:
         PILOT_ENABLE_XDP_OFFLOAD: "false"
 ```
 
-### 6.4 Terway + ASM 故障快速检测命令
+### 6.4 Terway + ASM 问题快速检测命令
 
 ```bash
 #!/bin/bash
-# Terway + ASM 交互故障快速检测
+# Terway + ASM 交互问题快速检测
 
 echo "=== Terway + ASM 交互故障检测 ==="
 

@@ -79,7 +79,7 @@ Golden Path 是平台团队为开发者提供的" paved road "：
 ### 所有权模型（Ownership Model）
 
 Backstage 的 Catalog 使用 `owner` 标签明确每个组件的责任团队：
-- 当服务出现故障时，PagerDuty 可以直接路由到正确的 On-call 团队
+- 当服务出现问题时，PagerDuty 可以直接路由到正确的 On-call 团队
 - 当发现安全漏洞时，Snyk 可以自动向组件 owner 创建 Jira 工单
 - 当服务即将到期时，平台可以自动通知负责团队
 

@@ -64,7 +64,7 @@ prerequisites:
 |:---|:---|
 | 静态概率 | 无法适应动态环境变化 |
 | 单一证据判断 | 缺乏置信度评估 |
-| 无时序约束 | 忽略故障传播的时间窗口 |
+| 无时序约束 | 忽略问题传播的时间窗口 |
 | 修复无前置检查 | 可能执行无效修复 |
 | 无反馈学习 | 需人工更新概率 |
 | 无剪枝策略 | 并行探索效率低 |
@@ -76,7 +76,7 @@ prerequisites:
 
 ### 2.1 动态概率调整机制
 
-**问题**: 当前 FTA 使用静态概率（如 annual_rate），但实际故障概率随时间、负载、季节等因素动态变化。
+**问题**: 当前 FTA 使用静态概率（如 annual_rate），但实际问题概率随时间、负载、季节等因素动态变化。
 
 **改进方案**:
 
@@ -86,22 +86,22 @@ class DynamicProbabilityCalculator:
 
     def calculate_current_probability(self, basic_event, context):
         """
-        基于多维度上下文动态计算当前故障概率
+        基于多维度上下文动态计算当前问题概率
         """
 
         # 1. 基础概率 (来自 FTA 知识库)
         base_probability = basic_event.annual_rate / 8760  # 转为小时率
 
-        # 2. 时间因子 (夜间/周末故障率更高)
+        # 2. 时间因子 (夜间/周末问题率更高)
         time_factor = self.get_time_factor(context.timestamp)
 
-        # 3. 负载因子 (高负载时故障率上升)
+        # 3. 负载因子 (高负载时问题率上升)
         load_factor = self.get_load_factor(basic_event, context)
 
-        # 4. 趋势因子 (基于历史故障间隔)
+        # 4. 趋势因子 (基于历史问题间隔)
         trend_factor = self.get_trend_factor(basic_event, context)
 
-        # 5. 季节因子 (大促/节假日故障率变化)
+        # 5. 季节因子 (大促/节假日问题率变化)
         season_factor = self.get_season_factor(context)
 
         # 动态概率 = 基础概率 × 所有因子
@@ -119,37 +119,37 @@ class DynamicProbabilityCalculator:
         """时间因子: 工作日白天 vs 夜间/周末"""
         hour = timestamp.hour
         if 9 <= hour <= 18 and timestamp.weekday() < 5:
-            return 0.8  # 工作时间，故障率较低
+            return 0.8  # 工作时间，问题率较低
         else:
-            return 1.5  # 非工作时间，响应慢，故障影响大
+            return 1.5  # 非工作时间，响应慢，问题影响大
 
     def get_load_factor(self, basic_event, context):
         """负载因子: 基于实际资源使用率"""
         if "oom" in basic_event.id.lower():
-            # OOM 相关：内存使用率越高，故障概率越高
+            # OOM 相关：内存使用率越高，问题概率越高
             memory_usage = context.metrics.get("memory_usage_ratio", 0.5)
             return 1 + (memory_usage - 0.7) * 3  # 70%基准，>70%风险上升
         return 1.0
 
     def get_trend_factor(self, basic_event, context):
-        """趋势因子: 故障频率是否在上升"""
+        """趋势因子: 问题频率是否在上升"""
         recent_incidents = self.get_incident_history(
             basic_event.id,
             time_window="30d"
         )
         if len(recent_incidents) >= 3:
-            # 计算故障间隔趋势
+            # 计算问题间隔趋势
             intervals = self.calculate_intervals(recent_incidents)
             avg_interval = sum(intervals) / len(intervals)
             if avg_interval < basic_event.mtbf_hours * 0.5:
-                return 2.0  # 故障频率上升 2x
+                return 2.0  # 问题频率上升 2x
         return 1.0
 ```
 
 **效果**:
-- 故障概率从静态变为动态
+- 问题概率从静态变为动态
 - 诊断优先级可随环境变化自动调整
-- 避免"某组件平时很少故障但近期频繁出问题却仍排在低优先级"
+- 避免"某组件平时很少问题但近期频繁出问题却仍排在低优先级"
 
 ---
 
@@ -235,7 +235,7 @@ class EvidenceConfidenceEvaluator:
 
 ### 2.3 时间窗口约束
 
-**问题**: 故障传播有时序要求，如"持续超过 5 分钟"才触发，但当前 FTA 无此能力。
+**问题**: 问题传播有时序要求，如"持续超过 5 分钟"才触发，但当前 FTA 无此能力。
 
 **改进方案**:
 
@@ -248,11 +248,11 @@ bottom_event:
   # 时间窗口约束
   time_windows:
     - name: "持续性检测"
-      duration: "5m"          # 持续 5 分钟才算真正故障
+      duration: "5m"          # 持续 5 分钟才算真正问题
       condition: "memory_usage > 95%"
       action: "才开始 OOM 检测"
 
-    - name: "瞬时故障"
+    - name: "瞬时问题"
       duration: "0"
       condition: "exit_code = 137"
       action: "立即触发"
@@ -389,7 +389,7 @@ healing_action:
 
 ### 2.5 反馈学习机制
 
-**问题**: 当前 FTA 概率需人工更新，无法从实际故障中学习。
+**问题**: 当前 FTA 概率需人工更新，无法从实际问题中学习。
 
 **改进方案**:
 
@@ -465,7 +465,7 @@ learning_triggers:
   - trigger: "自动修复成功率变化 > 20%"
     action: "更新 probability.auto_heal_rate"
 
-  - trigger: "发现新故障路径（FTA 中不存在）"
+  - trigger: "发现新问题路径（FTA 中不存在）"
     action: "生成 PROPOSED 状态的新路径，待评审"
 
   - trigger: "相同根因 3 次以上"
@@ -694,7 +694,7 @@ FTA 先验概率:
 
 完善复杂场景支持：
 
-1. **时间窗口约束** - 处理时序敏感故障
+1. **时间窗口约束** - 处理时序敏感问题
 2. **修复前置条件** - 提升安全性
 3. **贝叶斯不确定性** - 处理边缘场景
 

@@ -178,7 +178,7 @@ spec:
 | Pod Pending，提示 ResourceClaim 未分配 | DRA 驱动未安装或 ResourceSlice 缺失 | `kubectl get resourceslices` 确认驱动已注册设备 |
 | DeviceClass 不匹配任何设备 | CEL 表达式属性名不正确 | `kubectl get resourceslices -o yaml` 检查设备属性名 |
 | 使用 `spec.nodeName` 后 Pod 卡住 | 绕过调度器导致 ResourceClaim 未分配 | 改用 nodeSelector / nodeAffinity 而非 nodeName |
-| ResourceClaim 分配后设备健康状态异常 | 设备硬件故障 | 检查 Pod 状态 `allocatedResourcesStatus` 字段 |
+| ResourceClaim 分配后设备健康状态异常 | 设备硬件问题 | 检查 Pod 状态 `allocatedResourcesStatus` 字段 |
 | 管理员访问请求被拒绝 | 未启用 DRAAdminAccess 特性门控 | 确认 apiserver 启用 `DRAAdminAccess` 特性门控 |
 
 ## 生产检查清单

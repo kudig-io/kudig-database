@@ -131,7 +131,7 @@ prerequisites:
 | # | 文档 | 核心内容 |
 |:---:|:---|:---|
 | 20 | [FTA + 大语言模型的新机遇](./20-fta-llm-opportunities.md) | LLM增强FTA推理、自然语言构建FTA |
-| 21 | [自进化的智能运维系统](./21-self-evolving-ops-system.md) | 强化学习、联邦学习、数字孪生故障仿真 |
+| 21 | [自进化的智能运维系统](./21-self-evolving-ops-system.md) | 强化学习、联邦学习、数字孪生问题仿真 |
 | 22 | [行业标准化建议](./22-industry-standardization.md) | CNCF标准化提议、OpenTelemetry语义约定 |
 
 ### 第七部分：生产环境落地（新增）

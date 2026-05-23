@@ -1,7 +1,7 @@
 ---
 title: etcd × Operator 模式
 description: '[[entities/etcd]] 是 K8s 的心脏，[[concepts/operator-pattern]] 描述自定义控制器管理有状态应用。两者的交叉点是 **etcd Operator**：将 etcd 集群的生命周期管理（部署、扩容、备份、恢复、升级）自动化。但
-  wiki 没有指出一个关键矛盾：**etcd 是 Operator 想要管理的最危险的目标**——因为 etcd 故障直接导'
+  wiki 没有指出一个关键矛盾：**etcd 是 Operator 想要管理的最危险的目标**——因为 etcd 问题直接导'
 category: synthesis
 tags:
 - k8s
@@ -50,7 +50,7 @@ relationships:
 
 ## 连接点
 
-[[entities/etcd]] 是 [[domain-17-system-foundation/topic-cheat-sheet/k8s|K8s]] 的心脏，[[concepts/operator-pattern]] 描述自定义控制器管理有状态应用。两者的交叉点是 **etcd Operator**：将 etcd 集群的生命周期管理（部署、扩容、备份、恢复、升级）自动化。但 wiki 没有指出一个关键矛盾：**etcd 是 Operator 想要管理的最危险的目标**——因为 etcd 故障直接导致整个集群不可用，而 Operator 本身的故障也可能引发 etcd 故障。
+[[entities/etcd]] 是 [[domain-17-system-foundation/topic-cheat-sheet/k8s|K8s]] 的心脏，[[concepts/operator-pattern]] 描述自定义控制器管理有状态应用。两者的交叉点是 **etcd Operator**：将 etcd 集群的生命周期管理（部署、扩容、备份、恢复、升级）自动化。但 wiki 没有指出一个关键矛盾：**etcd 是 Operator 想要管理的最危险的目标**——因为 etcd 问题直接导致整个集群不可用，而 Operator 本身的问题也可能引发 etcd 问题。
 
 ## 共现场景
 
@@ -65,12 +65,12 @@ relationships:
 **核心洞察：核心基础设施的 Operator 化遵循与普通有状态应用完全不同的风险模型——Operator 的每次协调都可能是"自杀式操作"。**
 
 普通 Operator（如数据库 Operator）的风险边界：
-- Operator 故障 → 数据库管理功能失效，但数据库本身继续运行
+- Operator 问题 → 数据库管理功能失效，但数据库本身继续运行
 - 错误配置 → 数据库性能下降，但不会立即崩溃
 - 协调错误 → 可以手动干预修复
 
 etcd Operator 的风险边界：
-- Operator 故障 → 如果 etcd 证书到期未轮换，集群通信中断
+- Operator 问题 → 如果 etcd 证书到期未轮换，集群通信中断
 - 错误配置 → 如果 Operator 错误地修改了 etcd 的 listen-peer-urls，节点间无法通信，仲裁丢失
 - 协调错误 → 自动恢复可能覆盖最新数据，导致整个集群状态回退
 
@@ -93,7 +93,7 @@ etcd 高负载 → Watch 延迟 → Operator 误判节点健康 → 触发节点
 | 张力 | 详情 |
 |------|------|
 | **自动化 vs 人工确认** | etcd 的灾难恢复、证书轮换、节点替换等操作风险极高。完全自动化可能在异常情况下做出错误决策，但人工确认增加了 MTTR。企业通常选择"自动监控 + 人工审批"的混合模式 |
-| **Operator 自身的 etcd 依赖** | etcd Operator 通常运行在它所管理的 K8s 集群中，这意味着它依赖 etcd 来协调自身。如果 etcd 故障，Operator 也无法运行——这是"自己给自己做手术"的悖论 |
+| **Operator 自身的 etcd 依赖** | etcd Operator 通常运行在它所管理的 K8s 集群中，这意味着它依赖 etcd 来协调自身。如果 etcd 问题，Operator 也无法运行——这是"自己给自己做手术"的悖论 |
 | **版本兼容性** | etcd 的升级需要严格遵循版本跳跃规则（如 3.4→3.5 不能直接跳过）。Operator 必须内置版本兼容性矩阵，错误升级可能导致数据格式不兼容 |
 
 ## 开放问题

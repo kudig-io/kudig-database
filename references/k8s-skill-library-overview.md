@@ -39,7 +39,7 @@ created: "2026-05-23"
 Skill 是 KUDIG 的核心知识单元，将运维经验编码为结构化的诊断-修复流程：
 
 ```
-故障现象（Symptom）
+问题现象（Symptom）
     ↓
 诊断工作流（Diagnostic Workflow）
     ↓
@@ -55,14 +55,14 @@ Skill 是 KUDIG 的核心知识单元，将运维经验编码为结构化的诊�
 每个 Skill 文档包含：
 - **skill_id**：唯一标识（如 SKILL-NODE-001）
 - **skill_name**：双语名称
-- **触发条件**：故障现象描述
+- **触发条件**：问题现象描述
 - **诊断步骤**：命令 + 预期输出 + 判断逻辑
 - **修复方案**：操作步骤 + 风险等级 + 回滚方案
 - **关联文档**：FTA 故障树、最佳实践、参考文档
 
 ## 覆盖领域
 
-Skill 库已覆盖 20+ 常见故障场景：
+Skill 库已覆盖 20+ 常见问题场景：
 - Node NotReady / 资源压力
 - Pod CrashLoopBackOff / OOMKilled
 - Service 不通 / DNS 解析失败

@@ -49,7 +49,7 @@ created: "2026-05-23"
 | S4 | Headless [[Service|Service]] 无 Endpoints | `kubectl get endpoints <svc>` | 0.85 | Service 配置错误 |
 | S5 | 滚动更新卡在特定序号 | `kubectl rollout status sts/<name>` | 0.90 | 应用启动慢 → SKILL-POD-001 |
 | S6 | Pod 删除后新 Pod 无法创建 | `kubectl get events` | 0.85 | 节点资源不足 → SKILL-POD-002 |
-| S7 | DNS 解析 `<pod>.<svc>` 失败 | `nslookup` from test Pod | 0.85 | CoreDNS 故障 → SKILL-NET-001 |
+| S7 | DNS 解析 `<pod>.<svc>` 失败 | `nslookup` from test Pod | 0.85 | CoreDNS 问题 → SKILL-NET-001 |
 | S8 | 有状态集群应用报告节点不一致 | 应用日志/状态检查 | 0.80 | 应用自身 bug |
 
 ### 诊断工作流

@@ -279,7 +279,7 @@ Controller Manager 运行多个控制器，负责维护集群期望状态。排�
 #### 2.1 排查决策树
 
 ```
-Webhook/准入控制故障
+Webhook/准入控制问题
         │
         ├─── 资源被拒绝？
         │         │
@@ -464,9 +464,9 @@ APF 问题
 
 ### 09 Control Plane Ha Troubleshooting
 
-#### 常见高可用故障现象
+#### 常见高可用问题现象
 
-| 故障现象 | 典型表现 | 影响程度 | 紧急级别 |
+| 问题现象 | 典型表现 | 影响程度 | 紧急级别 |
 |---------|---------|---------|---------|
 | 控制平面节点宕机 | `control plane node NotReady` | ⭐⭐⭐ 高 | P0 |
 | etcd 集群脑裂 | `etcd cluster is unhealthy` | ⭐⭐⭐ 高 | P0 |

@@ -435,7 +435,7 @@ result = manager.safe_execute("kubectl apply -f deployment.yaml")
 
 ---
 
-## 6. 故障排除
+## 6. 问题排除
 
 ### 6.1 常见问题
 
@@ -456,7 +456,7 @@ TOOLS.md 配置验证:
 □ 最小权限：注册工具数量是否 ≤ 15 个？
 □ 参数规范：每个工具是否定义了参数模板？
 □ 安全约束：命令黑名单是否覆盖 delete/drain/cordon/taint？
-□ 工具组合：是否提供了常见故障的工具链模板？
+□ 工具组合：是否提供了常见问题的工具链模板？
 □ MCP 配置：远程工具是否配置了超时和重试？
 □ 与 SOUL.md 一致：TOOLS.md 权限是否在 SOUL.md 红线范围内？
 ```

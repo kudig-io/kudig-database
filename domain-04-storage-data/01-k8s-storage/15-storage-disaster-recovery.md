@@ -486,7 +486,7 @@ DRILL_PLAN="quarterly-dr-drill"
 execute_dr_drill() {
   echo "开始灾备演练: $DRILL_PLAN"
   
-  # 1. 模拟故障
+  # 1. 模拟问题
   simulate_outage
   
   # 2. 验证自动故障转移
@@ -502,7 +502,7 @@ execute_dr_drill() {
 }
 
 simulate_outage() {
-  echo "模拟存储故障..."
+  echo "模拟存储问题..."
   kubectl cordon node-with-storage
   kubectl delete pod -n production -l app=storage-controller
 }

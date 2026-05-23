@@ -71,7 +71,7 @@ created: "2026-05-23"
 
 ### 🔗 关联故障排查文档
 - **[06-Node NotReady诊断](./06-node-notready-diagnosis.md)** - 节点故障注入测试
-- **[07-OOM内存诊断](./07-oom-memory-diagnosis.md)** - 内存压力故障测试
+- **[07-OOM内存诊断](./07-oom-memory-diagnosis.md)** - 内存压力问题测试
 - **[33-性能瓶颈故障排查](./33-performance-bottleneck-troubleshooting.md)** - 性能退化测试
 - **[34-升级迁移故障排查](./34-upgrade-migration-troubleshooting.md)** - 升级过程中断测试
 - **[39-企业级监控告警体系](./39-enterprise-monitoring-alerting-system.md)** - 混沌实验监控告警配置
@@ -118,8 +118,8 @@ created: "2026-05-23"
 │                                                                             │
 │  Principle 2: Vary Real-world Events                                        │
 │  原则二：引入真实世界事件                                                   │
-│  ├─ 硬件故障（磁盘、网络、CPU）                                            │
-│  ├─ 软件故障（进程崩溃、内存泄漏）                                         │
+│  ├─ 硬件问题（磁盘、网络、CPU）                                            │
+│  ├─ 软件问题（进程崩溃、内存泄漏）                                         │
 │  ├─ 网络问题（延迟、丢包、分区）                                           │
 │  └─ 资源竞争（CPU、内存、I/O争用）                                         │
 │                                                                             │
@@ -340,7 +340,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-### 2.2 核心故障类型实践
+### 2.2 核心问题类型实践
 
 #### 2.2.1 Pod故障注入
 ```yaml
@@ -710,13 +710,13 @@ spec:
 <!-- chunk: 4. 故障注入场景设计 -->
 ## 4. 故障注入场景设计
 
-### 4.1 典型故障场景矩阵
+### 4.1 典型问题场景矩阵
 
-#### 4.1.1 微服务架构故障场景
+#### 4.1.1 微服务架构问题场景
 ```yaml
 # microservice_failure_scenarios.yaml
 failure_scenarios:
-  # 网络相关故障
+  # 网络相关问题
   network_failures:
     - name: "service-to-service-network-delay"
       description: "模拟微服务间网络延迟"
@@ -736,7 +736,7 @@ failure_scenarios:
         target_hosts: ["payment-gateway.com", "shipping-api.com"]
       blast_radius: "egress"
       
-  # 资源相关故障
+  # 资源相关问题
   resource_failures:
     - name: "memory-leak-simulation"
       description: "模拟内存泄漏导致OOM"
@@ -757,7 +757,7 @@ failure_scenarios:
       target_services: ["compute-intensive-service"]
       blast_radius: "node"
       
-  # 应用层故障
+  # 应用层问题
   application_failures:
     - name: "database-connection-failure"
       description: "模拟数据库连接中断"
@@ -1295,7 +1295,7 @@ spec:
 
 ### 第四阶段：持续优化 (持续进行)
 - [ ] 基于实验结果持续优化系统
-- [ ] 扩展故障场景覆盖面
+- [ ] 扩展问题场景覆盖面
 - [ ] 提升自动化水平
 - [ ] 建立行业最佳实践
 ```
@@ -1307,7 +1307,7 @@ spec:
 # ecommerce_chaos_case_study.yaml
 case_study:
   company: "某大型电商平台"
-  objective: "验证购物车服务在各种故障下的可靠性"
+  objective: "验证购物车服务在各种问题下的可靠性"
   
   experiment_scenarios:
     - name: "black-friday-traffic-surge"
@@ -1329,7 +1329,7 @@ case_study:
         recovery_time: "15s"
         
     - name: "payment-gateway-outage"
-      description: "模拟支付网关故障"
+      description: "模拟支付网关问题"
       setup:
         concurrent_users: 50000
         transaction_rate: "1000tps"

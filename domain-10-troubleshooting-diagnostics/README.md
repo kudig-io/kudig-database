@@ -42,7 +42,7 @@ created: "2026-05-23"
 
 | 子目录 | 内容 |
 |---|---|
-| domain-10-troubleshooting-diagnostics/topic-febm/ | FEBM 故障事件基础模型 |
+| domain-10-troubleshooting-diagnostics/topic-febm/ | FEBM 问题事件基础模型 |
 | domain-10-troubleshooting-diagnostics/topic-fta/ | FTA 故障树分析 |
 | domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/ | 结构化排障框架 |
 | tools/ | 排障工具集合 |

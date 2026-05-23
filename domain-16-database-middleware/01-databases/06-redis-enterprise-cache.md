@@ -933,9 +933,9 @@ Cache-Aside (推荐):
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见故障速查表 -->## 常见故障速查表
+#<!-- chunk: 常见问题速查表 -->## 常见问题速查表
 
-| 故障现象 | 可能原因 | 排查方法 | 解决方案 |
+| 问题现象 | 可能原因 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
 | `OOM command not allowed` | 内存达到 maxmemory | `info memory` 查看 | 增大 maxmemory / 调整淘汰策略 |
 | `LOADING Redis is loading` | 正在恢复 RDB/AOF | `info persistence` 查看 | 等待加载完成 |

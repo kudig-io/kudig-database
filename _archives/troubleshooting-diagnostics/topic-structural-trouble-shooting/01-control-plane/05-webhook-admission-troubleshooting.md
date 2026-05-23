@@ -52,7 +52,7 @@ prerequisites:
 
 ## 概述
 
-Kubernetes 准入控制器 (Admission Controllers) 是 API 请求处理流程中的关键环节，包括内置控制器和可扩展的 Webhook。Webhook 分为 MutatingAdmissionWebhook (修改资源) 和 ValidatingAdmissionWebhook (验证资源)。本文档覆盖准入控制相关故障的诊断与解决方案。
+Kubernetes 准入控制器 (Admission Controllers) 是 API 请求处理流程中的关键环节，包括内置控制器和可扩展的 Webhook。Webhook 分为 MutatingAdmissionWebhook (修改资源) 和 ValidatingAdmissionWebhook (验证资源)。本文档覆盖准入控制相关问题的诊断与解决方案。
 
 ---
 
@@ -133,13 +133,13 @@ Kubernetes 准入控制器 (Admission Controllers) 是 API 请求处理流程中
 
 ### 1.3 影响分析
 
-| 故障类型 | 直接影响 | 间接影响 | 影响范围 |
+| 问题类型 | 直接影响 | 间接影响 | 影响范围 |
 |---------|---------|---------|---------|
 | Webhook 不可达 | 资源创建/更新失败 | 部署流程阻塞 | 受影响的资源类型和命名空间 |
 | Webhook 超时 | API 响应缓慢 | 用户体验下降，CI/CD 超时 | 整个集群 API 操作 |
 | Webhook 拒绝 | 合法资源被误拦截 | 业务无法正常部署 | 匹配 Webhook 规则的资源 |
 | 证书过期 | Webhook 全部失效 | 所有相关准入检查失败 | 对应 Webhook 的所有请求 |
-| 系统 Webhook 故障 | 集群核心功能受损 | 如 Pod 无法注入 Sidecar | 依赖该功能的所有服务 |
+| 系统 Webhook 问题 | 集群核心功能受损 | 如 Pod 无法注入 Sidecar | 依赖该功能的所有服务 |
 
 ---
 
@@ -148,7 +148,7 @@ Kubernetes 准入控制器 (Admission Controllers) 是 API 请求处理流程中
 ### 2.1 排查决策树
 
 ```
-Webhook/准入控制故障
+Webhook/准入控制问题
         │
         ├─── 资源被拒绝？
         │         │
@@ -557,7 +557,7 @@ kubectl patch <constraint-kind> <constraint-name> --type='json' -p='[
 ]'
 ```
 
-#### 场景 3：cert-manager Webhook 故障
+#### 场景 3：cert-manager Webhook 问题
 
 **问题现象：**
 ```
@@ -720,7 +720,7 @@ webhooks:
 | 操作 | 风险等级 | 风险说明 | 建议 |
 |-----|---------|---------|-----|
 | 删除 Webhook 配置 | 高 | 完全禁用相关准入检查 | 仅在紧急情况使用，事后恢复 |
-| 设置 failurePolicy: Ignore | 中 | Webhook 故障时跳过检查 | 仅用于临时恢复，尽快修复 |
+| 设置 failurePolicy: Ignore | 中 | Webhook 问题时跳过检查 | 仅用于临时恢复，尽快修复 |
 | 修改系统 Webhook | 高 | 可能影响集群核心功能 | 谨慎操作，先在测试环境验证 |
 | 更新 Webhook 证书 | 中 | 配置错误可能导致 Webhook 失效 | 备份原配置，验证证书链 |
 | 修改 Webhook 规则 | 中 | 可能导致误拦截或漏检 | 充分测试 rules 和 selector |

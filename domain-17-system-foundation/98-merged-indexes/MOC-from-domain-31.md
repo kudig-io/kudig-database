@@ -74,7 +74,7 @@ created: "2026-05-23"
 | 16 | BIOS与固件故障排查 |  | hardware, troubleshooting |  |
 | 17 | Kubernetes 运维硬件故障排查专题 |  | hardware, troubleshooting |  |
 | 18 | 硬件错误码速查大全 |  | hardware, troubleshooting, reference |  |
-| 19 | 硬件故障实战案例库 |  | hardware, case-study |  |
+| 19 | 硬件问题实战案例库 |  | hardware, case-study |  |
 
 ---
 

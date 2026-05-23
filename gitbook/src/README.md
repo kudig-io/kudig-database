@@ -194,7 +194,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 01 | K8s架构 | [kubernetes-architecture-overview](./domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md) | **新增第11章生产环境运维专家增强指南**：企业级高可用架构、零信任安全架构、成本优化专家策略、故障应急响应专家手册 |
+| 01 | K8s架构 | [kubernetes-architecture-overview](./domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md) | **新增第11章生产环境运维专家增强指南**：企业级高可用架构、零信任安全架构、成本优化专家策略、问题应急响应专家手册 |
 | 02 | 核心组件 | [core-components-deep-dive](./domain-01-cluster-fundamentals/02-core-components-deep-dive.md) | 各组件职责与协作 |
 | 03 | API版本 | [api-versions-features](./domain-01-cluster-fundamentals/03-api-versions-features.md) | API版本演进、特性门控 |
 | 04 | 源码结构 | [source-code-structure](./domain-01-cluster-fundamentals/04-source-code-structure.md) | 源码目录、模块划分 |
@@ -705,7 +705,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 - 01-kubelet-troubleshooting.md - kubelet 故障排查
 - 02-kube-proxy-troubleshooting.md - kube-proxy 故障排查
 - 03-container-runtime-troubleshooting.md - 容器运行时故障排查
-- 04-node-troubleshooting.md - 节点故障专项排查
+- 04-node-troubleshooting.md - 节点问题专项排查
 - 05-image-registry-troubleshooting.md - 镜像与镜像仓库故障排查
 - 06-gpu-device-plugin-troubleshooting.md - GPU/设备插件故障排查
 
@@ -767,10 +767,10 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 01 | API Server排障 | [control-plane-apiserver-troubleshooting](./domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md) | API Server不可用、性能问题、认证授权故障 |
+| 01 | API Server排障 | [control-plane-apiserver-troubleshooting](./domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md) | API Server不可用、性能问题、认证授权问题 |
 | 02 | etcd排障 | [control-plane-etcd-troubleshooting](./domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md) | etcd集群不可用、数据一致性、性能优化 |
 | 03 | CNI网络排障 | [networking-cni-troubleshooting](./domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md) | Pod网络不通、DNS解析失败、跨节点通信 |
-| 04 | CSI驱动排障 | [storage-csi-troubleshooting](./domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting.md) | 卷创建/挂载失败、存储性能问题、CSI组件故障 |
+| 04 | CSI驱动排障 | [storage-csi-troubleshooting](./domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting.md) | 卷创建/挂载失败、存储性能问题、CSI组件问题 |
 | 05 | Pod Pending诊断 | [pod-pending-diagnosis](./domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md) | Pod调度失败深度诊断 |
 | 06 | Node NotReady诊断 | [node-notready-diagnosis](./domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md) | 节点异常深度诊断 |
 | 07 | OOM内存诊断 | [oom-memory-diagnosis](./domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis.md) | 内存溢出、驱逐问题排查 |
@@ -898,8 +898,8 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | # | 文档名称 | 关键内容 | 适用场景 |
 |:---:|:---|:---|:---|
-| 01 | [运维最佳实践](./domain-17-system-foundation/topic-dictionary/01-operations-best-practices.md) | **生产环境配置标准、高可用架构模式、安全加固指南、监控告警最佳实践、灾备恢复方案、自动化运维策略、成本优化实践、多集群管理规范、生产环境故障应急响应** | 企业级Kubernetes生产环境部署和运维，新增真实故障案例和应急响应流程 |
-| 02 | [故障模式分析](./domain-17-system-foundation/topic-dictionary/02-failure-patterns-analysis.md) | **常见故障模式分类、根因分析方法论、故障树分析(FMEA)、MTTR优化策略、故障复盘模板、预防措施体系、真实故障案例库** | 故障诊断、根因分析、问题预防，新增经典故障案例和处理经验总结 |
+| 01 | [运维最佳实践](./domain-17-system-foundation/topic-dictionary/01-operations-best-practices.md) | **生产环境配置标准、高可用架构模式、安全加固指南、监控告警最佳实践、灾备恢复方案、自动化运维策略、成本优化实践、多集群管理规范、生产环境问题应急响应** | 企业级Kubernetes生产环境部署和运维，新增真实问题案例和应急响应流程 |
+| 02 | [故障模式分析](./domain-17-system-foundation/topic-dictionary/02-failure-patterns-analysis.md) | **常见故障模式分类、根因分析方法论、故障树分析(FMEA)、MTTR优化策略、问题复盘模板、预防措施体系、真实问题案例库** | 故障诊断、根因分析、问题预防，新增经典问题案例和处理经验总结 |
 | 03 | [性能调优专家](./domain-17-system-foundation/topic-dictionary/03-performance-tuning-expert.md) | **系统性能瓶颈识别、资源优化策略、调度器调优参数、网络性能优化、存储IO调优、应用层性能优化、监控与基准测试、性能优化实战案例** | 性能优化、容量规划、系统调优，新增大规模集群性能优化案例 |
 | 04 | [SRE成熟度模型](./domain-17-system-foundation/topic-dictionary/04-sre-maturity-model.md) | **运维成熟度评估标准、自动化能力分级、监控体系建设指南、运维流程标准化、团队能力建设路径、成熟度评估工具、SRE实践案例与最佳实践** | SRE团队建设、运维能力提升、组织成熟度评估，新增企业级SRE转型路线图 |
 | 05 | [概念参考手册](./domain-17-system-foundation/topic-dictionary/05-concept-reference.md) | **Kubernetes核心概念、API与认证机制、控制平面组件、工作负载资源、网络与服务发现、存储管理、安全与权限控制、可观测性与监控、分布式系统理论、AI/ML工程概念、前沿技术与新兴概念** | 技术概念查询、知识学习、术语参考，新增WebAssembly、eBPF等前沿技术概念 |
@@ -908,7 +908,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | 08 | [AI基础设施专家指南](./domain-17-system-foundation/topic-dictionary/08-ai-infra-specialist.md) | **AI工作负载优化、GPU调度策略、分布式训练管理、模型服务部署、AI成本治理、AI安全合规、模型生命周期管理** | AI/ML平台运维、GPU资源管理、机器学习工程化 |
 | 09 | [云原生安全专家指南](./domain-17-system-foundation/topic-dictionary/09-cloud-native-security.md) | **零信任安全架构、容器安全防护、镜像安全扫描、运行时安全监控、合规自动化体系、威胁检测响应、安全工具链集成** | 云原生安全防护、合规审计、安全运维 |
 | 10 | [多云混合云运维手册](./domain-17-system-foundation/topic-dictionary/10-multi-cloud-operations.md) | **多云架构设计、跨云部署策略、成本优化管理、统一监控体系、运维自动化、灾备容灾方案、多云治理框架** | 多云环境管理、混合云运维、跨云资源整合 |
-| 11 | [企业级运维最佳实践](./domain-17-system-foundation/topic-dictionary/11-enterprise-ops-practices.md) | **万级节点集群管理、渐进式交付流水线、智能回滚机制、SRE故障响应体系、灾难恢复策略、团队协作文化、运营指标体系** | 大规模集群运维、企业级DevOps、组织效能提升 |
+| 11 | [企业级运维最佳实践](./domain-17-system-foundation/topic-dictionary/11-enterprise-ops-practices.md) | **万级节点集群管理、渐进式交付流水线、智能回滚机制、SRE问题响应体系、灾难恢复策略、团队协作文化、运营指标体系** | 大规模集群运维、企业级DevOps、组织效能提升 |
 | 12 | [生产事故管理与应急手册](./domain-17-system-foundation/topic-dictionary/12-incident-management-runbooks.md) | **事故管理框架、事故分级标准、应急响应流程、War Room组织、通用应急手册、特定场景Runbook、事后复盘机制、持续改进实践** | 生产事故响应、应急处理、故障恢复、事故管理流程标准化 |
 | 13 | [容量规划与资源预测](./domain-17-system-foundation/topic-dictionary/13-capacity-planning-forecasting.md) | **容量规划框架、资源使用分析、容量预测模型、集群扩容策略、资源配额管理、成本优化实践、容量监控与告警、实战案例分析** | 容量规划、资源预测、成本优化、集群扩容决策、资源利用率提升 |
 | 14 | [变更管理与发布策略](./domain-17-system-foundation/topic-dictionary/14-change-management-release.md) | **变更管理框架、发布策略模式、变更审批流程、回滚与恢复策略、发布自动化、风险评估与控制、变更监控与验证、实战案例分析** | 变更管理、发布流程、风险控制、自动化发布、变更审批流程 |
@@ -1161,7 +1161,7 @@ gitbook/
 | 分类 | 文档数 | 核心内容 | 覆盖组件 |
 |:---|:---:|:---|:---|
 | **控制平面** | 6 | [01-control-plane](./domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/) | API Server、etcd、Scheduler、Controller Manager、Webhook、APF |
-| **节点组件** | 6 | [02-node-components](./domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/) | kubelet、kube-proxy、容器运行时、节点故障、镜像仓库、GPU/设备插件 |
+| **节点组件** | 6 | [02-node-components](./domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/) | kubelet、kube-proxy、容器运行时、节点问题、镜像仓库、GPU/设备插件 |
 | **网络** | 6 | [03-networking](./domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/) | CNI、DNS、Service/Ingress、NetworkPolicy、Istio、Gateway API |
 | **存储** | 2 | [04-storage](./domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/) | PV/PVC、CSI驱动 |
 | **工作负载** | 6 | [05-workloads](./domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/) | Pod、Deployment、StatefulSet、DaemonSet、Job/CronJob、ConfigMap/Secret |
@@ -1169,7 +1169,7 @@ gitbook/
 | **资源调度** | 4 | [07-resources-scheduling](./domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/) | 资源配额、HPA/VPA、Cluster Autoscaler、PDB |
 | **集群运维** | 6 | [08-cluster-operations](./domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/) | 维护升级、日志监控、Helm、高可用灾备、CRD/Operator、Kustomize |
 | **云厂商** | 1 | [09-cloud-provider](./domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/) | 云厂商特定故障排查 |
-| **AI/ML工作负载** | 1 | [10-ai-ml-workloads](./domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-ai-ml-workloads/) | GPU调度、分布式训练、模型服务故障 |
+| **AI/ML工作负载** | 1 | [10-ai-ml-workloads](./domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-ai-ml-workloads/) | GPU调度、分布式训练、模型服务问题 |
 | **GitOps/DevOps** | 1 | [11-gitops-devops](./domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/) | ArgoCD、FluxCD故障排查 |
 | **监控可观测性** | 1 | [12-monitoring-observability](./domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/) | Prometheus、Grafana故障排查 |
 
@@ -1229,7 +1229,7 @@ gitbook/
 | 252 | CSI存储深度实践 | [csi-storage](./domain-19-landscape-references/07-kubernetes-csi-storage-deep-practice.md) | 容器存储接口、驱动开发、性能优化、快照管理 |
 | 253 | 网络策略微隔离 | [network-microsegmentation](./domain-19-landscape-references/08-kubernetes-network-policies-security-micro-segmentation.md) | 网络策略、安全微隔离、CNI集成、零信任架构 |
 | 254 | 服务网格Istio | [service-mesh-istio](./domain-19-landscape-references/09-kubernetes-service-mesh-istio-integration.md) | 服务网格架构、Istio集成、流量管理、安全认证 |
-| 255 | 自动化SRE实践 | [automation-sre](./domain-19-landscape-references/10-kubernetes-automation-sre-practices.md) | SRE理念、自动化运维、故障响应、容量规划 |
+| 255 | 自动化SRE实践 | [automation-sre](./domain-19-landscape-references/10-kubernetes-automation-sre-practices.md) | SRE理念、自动化运维、问题响应、容量规划 |
 | 256 | API Server深度优化 | [api-server-optimization](./domain-19-landscape-references/11-kubernetes-api-server-deep-optimization-extension.md) | API Server架构、扩展机制、性能优化、安全加固 |
 | 257 | 调度器深度优化 | [scheduler-optimization](./domain-19-landscape-references/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md) | 调度算法、自定义调度、资源优化、性能分析 |
 | 258 | 多租户安全隔离 | [multi-tenancy-security](./domain-19-landscape-references/13-kubernetes-multi-tenancy-security-isolation-resource-quota.md) | 多租户平台、安全隔离、资源配额、RBAC权限 |
@@ -1320,7 +1320,7 @@ gitbook/
 | 07 | CSI存储深度实践 | [csi-storage](./domain-19-landscape-references/07-kubernetes-csi-storage-deep-practice.md) | 容器存储接口、驱动开发、性能优化、快照管理 |
 | 08 | 网络策略微隔离 | [network-microsegmentation](./domain-19-landscape-references/08-kubernetes-network-policies-security-micro-segmentation.md) | 网络策略、安全微隔离、CNI集成、零信任架构 |
 | 09 | 服务网格Istio | [service-mesh-istio](./domain-19-landscape-references/09-kubernetes-service-mesh-istio-integration.md) | 服务网格架构、Istio集成、流量管理、安全认证 |
-| 10 | 自动化SRE实践 | [automation-sre](./domain-19-landscape-references/10-kubernetes-automation-sre-practices.md) | SRE理念、自动化运维、故障响应、容量规划 |
+| 10 | 自动化SRE实践 | [automation-sre](./domain-19-landscape-references/10-kubernetes-automation-sre-practices.md) | SRE理念、自动化运维、问题响应、容量规划 |
 | 11 | API Server深度优化 | [api-server-optimization](./domain-19-landscape-references/11-kubernetes-api-server-deep-optimization-extension.md) | API Server架构、扩展机制、性能优化、安全加固 |
 | 12 | 调度器深度优化 | [scheduler-optimization](./domain-19-landscape-references/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md) | 调度算法、自定义调度、资源优化、性能分析 |
 | 13 | 多租户安全隔离 | [multi-tenancy-security](./domain-19-landscape-references/13-kubernetes-multi-tenancy-security-isolation-resource-quota.md) | 多租户平台、安全隔离、资源配额、RBAC权限 |
@@ -1441,7 +1441,7 @@ gitbook/
 
 ### 域31: 硬件基础设施 (Hardware Infrastructure)
 
-> 18 篇 | 云平台硬件架构、服务器原理、CPU/内存/存储/网络技术深度解析、硬件故障排查方法论、K8s硬件故障、错误码速查
+> 18 篇 | 云平台硬件架构、服务器原理、CPU/内存/存储/网络技术深度解析、硬件故障排查方法论、K8s硬件问题、错误码速查
 
 #### 基础架构 (01-04)
 
@@ -1466,15 +1466,15 @@ gitbook/
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 299 | 排查方法论 | [troubleshooting-methodology](./domain-17-system-foundation/10-hardware-troubleshooting-methodology.md) | 六步诊断法、故障分类、决策树、预测性维护Python框架 |
+| 299 | 排查方法论 | [troubleshooting-methodology](./domain-17-system-foundation/10-hardware-troubleshooting-methodology.md) | 六步诊断法、问题分类、决策树、预测性维护Python框架 |
 | 300 | CPU内存排查 | [cpu-memory-troubleshooting](./domain-17-system-foundation/11-cpu-memory-troubleshooting.md) | MCE错误分析、ECC故障定位、EDAC监控、turbostat诊断 |
 | 301 | 存储设备排查 | [storage-troubleshooting](./domain-17-system-foundation/12-storage-troubleshooting.md) | HDD S.M.A.R.T.分析、NVMe健康、RAID故障处理流程 |
-| 302 | 网络硬件排查 | [network-troubleshooting](./domain-17-system-foundation/13-network-hardware-troubleshooting.md) | 网卡故障诊断、ethtool分析、链路故障、光模块检测 |
-| 303 | 电源散热排查 | [power-thermal-troubleshooting](./domain-17-system-foundation/14-power-thermal-troubleshooting.md) | PSU故障、功耗监控、温度传感器、风扇故障、热设计 |
-| 304 | BIOS固件排查 | [bios-firmware-troubleshooting](./domain-17-system-foundation/15-bios-firmware-troubleshooting.md) | BIOS/UEFI故障、固件更新、启动问题、BMC故障诊断 |
-| 305 | K8s硬件故障 | [kubernetes-hardware-troubleshooting](./domain-17-system-foundation/16-kubernetes-hardware-troubleshooting.md) | K8s场景硬件故障、Node NotReady、PLEG、etcd磁盘问题 |
+| 302 | 网络硬件排查 | [network-troubleshooting](./domain-17-system-foundation/13-network-hardware-troubleshooting.md) | 网卡故障诊断、ethtool分析、链路问题、光模块检测 |
+| 303 | 电源散热排查 | [power-thermal-troubleshooting](./domain-17-system-foundation/14-power-thermal-troubleshooting.md) | PSU问题、功耗监控、温度传感器、风扇问题、热设计 |
+| 304 | BIOS固件排查 | [bios-firmware-troubleshooting](./domain-17-system-foundation/15-bios-firmware-troubleshooting.md) | BIOS/UEFI问题、固件更新、启动问题、BMC故障诊断 |
+| 305 | K8s硬件问题 | [kubernetes-hardware-troubleshooting](./domain-17-system-foundation/16-kubernetes-hardware-troubleshooting.md) | K8s场景硬件问题、Node NotReady、PLEG、etcd磁盘问题 |
 | 306 | 错误码速查 | [hardware-error-codes-reference](./domain-17-system-foundation/17-hardware-error-codes-reference.md) | MCE/SMART/IPMI/NVMe错误码详解、BIOS蜂鸣码、厂商诊断码 |
-| 307 | 故障案例库 | [hardware-failure-case-studies](./domain-17-system-foundation/18-hardware-failure-case-studies.md) | 生产环境真实故障案例、诊断过程、解决方案、复盘总结 |
+| 307 | 问题案例库 | [hardware-failure-case-studies](./domain-17-system-foundation/18-hardware-failure-case-studies.md) | 生产环境真实问题案例、诊断过程、解决方案、复盘总结 |
 
 ---
 

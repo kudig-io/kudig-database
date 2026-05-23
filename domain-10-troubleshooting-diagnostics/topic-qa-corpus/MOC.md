@@ -78,7 +78,7 @@ created: "2026-05-23"
 
 ## 按 Domain 索引
 
-| Domain | I-O 对数 | 对应故障场景 | 文件 |
+| Domain | I-O 对数 | 对应问题场景 | 文件 |
 |--------|----------|-------------|------|
 | POD | 81 | Pod CrashLoop、Pending、OOM | `generated/command-output-diagnosis-all.md` |
 | NET | 72 | [[Service|Service]]、Ingress、网络连通性 | 同上 |

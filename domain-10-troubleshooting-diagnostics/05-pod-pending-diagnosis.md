@@ -649,7 +649,7 @@ spec:
 | **动态供应失败** | PVC Pending无事件 | 检查CSI驱动、SC参数 | 稳定 |
 | **WaitForFirstConsumer** | PVC Pending等待Pod | 正常行为，等调度 | v1.17+ GA |
 | **CSI驱动异常** | 各种CSI错误 | 检查CSI Pod状态 | 稳定 |
-| **存储后端故障** | 超时/连接失败 | 检查存储系统 | - |
+| **存储后端问题** | 超时/连接失败 | 检查存储系统 | - |
 
 ### 5.2 存储诊断命令
 
@@ -939,9 +939,9 @@ metadata:
 <!-- chunk: 7. 调度器问题诊断 -->
 ## 7. 调度器问题诊断
 
-### 7.1 调度器故障类型
+### 7.1 调度器问题类型
 
-| 故障类型 | 现象 | 诊断方法 | 影响范围 |
+| 问题类型 | 现象 | 诊断方法 | 影响范围 |
 |---------|------|---------|---------|
 | **调度器不可用** | 新Pod无事件 | 检查scheduler Pod | 全集群 |
 | **Leader选举问题** | 调度延迟高 | 检查lease对象 | 全集群 |
@@ -1001,7 +1001,7 @@ kubectl get pods -A -o json | jq -r '.items[] | select(.spec.schedulerName != nu
 ### 7.3 调度器问题解决
 
 ```bash
-# 调度器故障紧急处理
+# 调度器问题紧急处理
 
 # 1. 重启调度器 (kubeadm 集群)
 kubectl delete pod -n kube-system -l component=kube-scheduler
@@ -1567,7 +1567,7 @@ PENDING_COUNT=$(kubectl get pods -A --field-selector=status.phase=Pending --no-h
 echo "当前 Pending Pod 数量: $PENDING_COUNT"
 
 if [ $PENDING_COUNT -gt 50 ]; then
-    echo "紧急级别: P0 - 大规模调度故障"
+    echo "紧急级别: P0 - 大规模调度问题"
 elif [ $PENDING_COUNT -gt 20 ]; then
     echo "紧急级别: P1 - 严重调度问题"
 elif [ $PENDING_COUNT -gt 5 ]; then
@@ -1584,7 +1584,7 @@ echo "# 1. 检查调度器状态"
 echo "kubectl get pods -n kube-system -l component=kube-scheduler"
 
 echo ""
-echo "# 2. 重启调度器 (如调度器故障)"
+echo "# 2. 重启调度器 (如调度器问题)"
 echo "kubectl delete pod -n kube-system -l component=kube-scheduler"
 
 echo ""

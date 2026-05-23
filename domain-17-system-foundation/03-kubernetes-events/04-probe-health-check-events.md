@@ -205,7 +205,7 @@ Warning  Unhealthy  1m    kubelet  Liveness probe failed: gRPC probe failed: rpc
 - **集群影响**: 
   - 频繁的容器重启增加 kubelet 和容器运行时（containerd/CRI-O）的负载
   - 镜像拉取可能增加网络和镜像仓库压力
-  - 大量 Pod 同时重启可能触发集群级联故障
+  - 大量 Pod 同时重启可能触发集群级联问题
   
 - **关联事件链**: 
   ```
@@ -306,7 +306,7 @@ kubectl get pods -o custom-columns='NAME:.metadata.name,RESTARTS:.status.contain
 Readiness Probe（就绪探针）失败表明容器虽然在运行，但暂时无法处理请求（如正在初始化、依赖服务不可用、过载等）。kubelet 会将此 Pod 从 Service 的 Endpoints 中移除，阻止新流量路由到此 Pod，但**不会重启容器**。
 
 **核心设计理念**：
-- **优雅降级**：临时故障时保护流量，而非激进地重启
+- **优雅降级**：临时问题时保护流量，而非激进地重启
 - **依赖检查**：适合检查外部依赖（数据库、缓存、消息队列）
 - **流量控制**：滚动更新时控制新 Pod 何时接收流量
 
@@ -337,7 +337,7 @@ Warning  Unhealthy  45s   kubelet  Readiness probe failed: command "/app/readine
   
 - **服务影响**: 
   - Pod 仍在运行，但被隔离不接收流量
-  - 如果是临时故障（依赖恢复），Pod 可自动恢复 Ready
+  - 如果是临时问题（依赖恢复），Pod 可自动恢复 Ready
   - 长期 Unready 可能需要人工介入（与 Liveness 配合使用）
   
 - **集群影响**: 
@@ -408,7 +408,7 @@ kubectl exec backend-api-7d9c8f-zx4mp -- wget -O- -S http://localhost:8080/ready
 | **依赖服务不可用** | 日志显示数据库/缓存连接失败 | 修复依赖服务，或调整探针逻辑支持降级 | Readiness 应检查关键依赖，非关键依赖失败可返回降级状态 |
 | **应用初始化未完成** | 启动后立即失败，随后恢复 | 增加 `initialDelaySeconds` | 对于需要预热的应用（如 JVM），设置足够的延迟 |
 | **流量过载** | 高峰期失败，低峰期正常 | 增加副本数（HPA），优化应用性能 | 设置 `successThreshold=2` 避免抖动 |
-| **探针与 Liveness 相同** | 依赖故障导致容器重启 | **反模式**：分离关注点，Liveness 检查进程，Readiness 检查依赖 | 永远不要让 Readiness 和 Liveness 完全相同 |
+| **探针与 Liveness 相同** | 依赖问题导致容器重启 | **反模式**：分离关注点，Liveness 检查进程，Readiness 检查依赖 | 永远不要让 Readiness 和 Liveness 完全相同 |
 | **网络分区/DNS 问题** | 偶发性连接超时 | 检查网络策略、DNS 解析，增加 `timeoutSeconds` | 使用 Service DNS 而非 IP 地址 |
 | **滚动更新期间** | 新 Pod 长时间 Unready | 检查新版本代码、配置、依赖版本 | 使用 `minReadySeconds` 确保稳定性 |
 | **资源配额不足** | CPU 节流导致响应慢 | 增加 CPU requests/limits | 监控 throttling metrics |
@@ -432,7 +432,7 @@ Startup Probe（启动探针）是 v1.20 正式引入的 GA 功能，专门用�
 **设计背景**：
 - 传统应用（如 Java Spring Boot、大型 Node.js 应用）启动可能需要 1-5 分钟
 - 如果 `initialDelaySeconds` 设置过大，会延迟故障检测
-- Startup Probe 允许给予足够的启动时间，同时在运行后快速检测故障
+- Startup Probe 允许给予足够的启动时间，同时在运行后快速检测问题
 
 **工作机制**：
 ```
@@ -609,7 +609,7 @@ Events:
   
 - **服务影响**: 
   - 服务处于降级状态，需要关注但无需立即干预
-  - 可能预示即将发生的故障
+  - 可能预示即将发生的问题
   
 - **集群影响**: 
   - 作为早期预警信号，可触发告警和自动扩容
@@ -769,7 +769,7 @@ livenessProbe:
 
 **问题**：
 - 数据库临时不可用 → Liveness 失败 → 容器重启
-- 所有 Pod 同时重启 → 级联故障 → 服务完全中断
+- 所有 Pod 同时重启 → 级联问题 → 服务完全中断
 - 重启无法解决外部依赖问题
 
 **正确配置**：
@@ -863,7 +863,7 @@ livenessProbe:
     path: /actuator/health/liveness
     port: 8080
   periodSeconds: 10
-  failureThreshold: 3  # 启动后，只需 30 秒即可检测到故障
+  failureThreshold: 3  # 启动后，只需 30 秒即可检测到问题
 
 readinessProbe:
   httpGet:
@@ -941,7 +941,7 @@ readinessProbe:
 
 **问题**：
 - 无法区分"进程死锁"和"依赖不可用"
-- 依赖故障导致不必要的容器重启
+- 依赖问题导致不必要的容器重启
 
 **✅ 正确配置**：
 ```yaml
@@ -1411,7 +1411,7 @@ spec:
 |:---|:---|:---|:---|
 | **探针失败率** | `rate(kube_pod_container_status_restarts_total[5m]) > 0` | > 0.1/min | 容器频繁重启 |
 | **Unready Pod 数量** | `kube_pod_status_ready{condition="false"} > 0` | > 1 (持续 5 分钟) | 服务容量下降 |
-| **CrashLoopBackOff** | `kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"} > 0` | > 0 | 严重故障 |
+| **CrashLoopBackOff** | `kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"} > 0` | > 0 | 严重问题 |
 | **探针延迟** | `kubelet_http_requests_duration_seconds{handler="/healthz"}` | P95 > 2s | 探针响应慢 |
 
 #<!-- chunk: Prometheus 告警规则示例 -->## Prometheus 告警规则示例
@@ -1430,7 +1430,7 @@ groups:
       severity: warning
     annotations:
       summary: "Pod {{ $labels.namespace }}/{{ $labels.pod }} 容器频繁重启"
-      description: "重启率: {{ $value | humanize }}/秒，可能是 Liveness Probe 配置不当或应用故障"
+      description: "重启率: {{ $value | humanize }}/秒，可能是 Liveness Probe 配置不当或应用问题"
   
   # Pod 长时间 Unready
   - alert: PodNotReady

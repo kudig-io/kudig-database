@@ -68,7 +68,7 @@ created: "2026-05-23"
 | 5 | [05-testing.md](./05-testing.md) | 1040+ | 测试验证 | Pod 网络验证、6 类跨节点测试、NetworkPolicy 3 场景测试、ENI 密度压测(50 Pod)、固定 IP/GC/安全组验证、iperf3 基准、MTU 测试、端到端测试套件(可执行脚本) |
 | 6 | [06-performance.md](./06-performance.md) | 600+ | 性能调优 | 5 模式性能基准、Pod 容量计算(5 规格)、内核调优(网卡多队列/sysctl/NUMA)、IP 池预热、eBPF 加速与迁移、生产基线(5 项指标+告警阈值)、性能故障排查 |
 | 7 | [03b-crd-operations.md](./03b-crd-operations.md) | 740+ | CRD 操作 | 5 个 CRD 全量清单、PodENI/NodeNetworking/PodNetworking/ReservedIP/IPInstance 完整 CRUD、ConfigMap 管理(jq)、综合诊断脚本、命令速查表 |
-| 8 | [07-troubleshooting-fta.md](./07-troubleshooting-fta.md) | 510+ | 故障树速查 | Mermaid FTA 全景图、6 大故障类别诊断、32 条错误信息目录、AND 门组合故障、SRE on-call 参考 |
+| 8 | [07-troubleshooting-fta.md](./07-troubleshooting-fta.md) | 510+ | 故障树速查 | Mermaid FTA 全景图、6 大问题类别诊断、32 条错误信息目录、AND 门组合问题、SRE on-call 参考 |
 
 ---
 
@@ -79,7 +79,7 @@ created: "2026-05-23"
 | **快速了解 Terway** | [01-product.md](./01-product.md) — 产品定位、模式对比、CNI 选型 |
 | **理解架构原理** | [02-architecture.md](./02-architecture.md) — 5 种模式数据流、IPAM、CRD 模型 |
 | **上手使用配置** | [03-usage.md](./03-usage.md) — 安装、模式配置 YAML、NetworkPolicy、固定 IP |
-| **生产运维排障** | [04-operations.md](./04-operations.md) — GC 机制、故障决策树、告警规则 |
+| **生产运维排障** | [04-operations.md](./04-operations.md) — GC 机制、问题决策树、告警规则 |
 | **网络测试验证** | [05-testing.md](./05-testing.md) — 端到端测试套件、压测、基准测试 |
 | **CRD 资源管理** | [03b-crd-operations.md](./03b-crd-operations.md) — 5 个 CRD 完整 CRUD、诊断脚本 |
 | **性能调优优化** | [06-performance.md](./06-performance.md) — 内核调优、eBPF 迁移、生产基线 |

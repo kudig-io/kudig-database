@@ -88,7 +88,7 @@ prerequisites:
 | [06-apf-troubleshooting.md](01-control-plane/06-apf-troubleshooting.md) | API 优先级与公平性故障排查 | 请求限流 (429)、API 延迟、FlowSchema 配置 |
 | [07-control-plane-security-troubleshooting.md](01-control-plane/07-control-plane-security-troubleshooting.md) | 控制平面安全故障排查 | PSA 策略冲突、安全上下文配置、准入控制绕过 |
 | [08-control-plane-performance-troubleshooting.md](01-control-plane/08-control-plane-performance-troubleshooting.md) | 控制平面性能故障排查 | API Server 延迟、etcd 性能退化、大规模 LIST 请求 |
-| [09-control-plane-ha-troubleshooting.md](01-control-plane/09-control-plane-ha-troubleshooting.md) | 控制平面高可用故障排查 | 多 master 节点故障、etcd 仲裁丢失、VIP 漂移 |
+| [09-control-plane-ha-troubleshooting.md](01-control-plane/09-control-plane-ha-troubleshooting.md) | 控制平面高可用故障排查 | 多 master 节点问题、etcd 仲裁丢失、VIP 漂移 |
 | [10-control-plane-upgrade-troubleshooting.md](01-control-plane/10-control-plane-upgrade-troubleshooting.md) | 控制平面升级故障排查 | 版本升级失败、API 废弃、 kubeadm 升级卡住 |
 
 ### 02-node-components（节点组件）
@@ -97,8 +97,8 @@ prerequisites:
 |------|------|----------|
 | [01-kubelet-troubleshooting.md](02-node-components/01-kubelet-troubleshooting.md) | kubelet 故障排查 | 节点 NotReady、Pod 创建失败、镜像拉取问题 |
 | [02-kube-proxy-troubleshooting.md](02-node-components/02-kube-proxy-troubleshooting.md) | kube-proxy 故障排查 | Service 不可达、iptables/IPVS 规则问题 |
-| [03-container-runtime-troubleshooting.md](02-node-components/03-container-runtime-troubleshooting.md) | 容器运行时故障排查 | containerd/Docker 故障、容器创建失败 |
-| [04-node-troubleshooting.md](02-node-components/04-node-troubleshooting.md) | 节点故障专项排查 | 节点压力、污点容忍、亲和性、资源驱逐 |
+| [03-container-runtime-troubleshooting.md](02-node-components/03-container-runtime-troubleshooting.md) | 容器运行时故障排查 | containerd/Docker 问题、容器创建失败 |
+| [04-node-troubleshooting.md](02-node-components/04-node-troubleshooting.md) | 节点问题专项排查 | 节点压力、污点容忍、亲和性、资源驱逐 |
 | [05-image-registry-troubleshooting.md](02-node-components/05-image-registry-troubleshooting.md) | 镜像与镜像仓库故障排查 | 镜像拉取失败、认证问题、TLS 错误、限流 |
 | [06-gpu-device-plugin-troubleshooting.md](02-node-components/06-gpu-device-plugin-troubleshooting.md) | GPU/设备插件故障排查 | GPU 不可见、设备分配失败、CUDA 兼容性、MIG 配置 |
 
@@ -120,7 +120,7 @@ prerequisites:
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
 | [01-pv-pvc-troubleshooting.md](04-storage/01-pv-pvc-troubleshooting.md) | PV/PVC 存储故障排查 | PVC Pending、卷挂载失败、存储类问题 |
-| [02-csi-troubleshooting.md](04-storage/02-csi-troubleshooting.md) | CSI 存储驱动故障排查 | CSI 驱动故障、卷创建/挂载/扩容问题 |
+| [02-csi-troubleshooting.md](04-storage/02-csi-troubleshooting.md) | CSI 存储驱动故障排查 | CSI 驱动问题、卷创建/挂载/扩容问题 |
 | [03-snapshot-backup-troubleshooting.md](04-storage/03-snapshot-backup-troubleshooting.md) | CSI 快照与卷备份故障排查 | VolumeSnapshot、快照恢复、数据一致性 |
 | [04-storage-performance-troubleshooting.md](04-storage/04-storage-performance-troubleshooting.md) | 存储 I/O 性能故障排查 | 高延迟 I/O、吞吐瓶颈、fio 基准测试 |
 | [05-storageclass-troubleshooting.md](04-storage/05-storageclass-troubleshooting.md) | StorageClass 配置与动态供给故障排查 | StorageClass 参数、volumeBindingMode、拓扑约束、扩容、性能等级 |
@@ -132,7 +132,7 @@ prerequisites:
 | [01-pod-troubleshooting.md](05-workloads/01-pod-troubleshooting.md) | Pod 故障排查 | Pod Pending/CrashLoopBackOff/OOMKilled、镜像拉取失败 |
 | [02-deployment-troubleshooting.md](05-workloads/02-deployment-troubleshooting.md) | Deployment 故障排查 | 滚动更新卡住、副本数不足、回滚问题 |
 | [03-statefulset-troubleshooting.md](05-workloads/03-statefulset-troubleshooting.md) | StatefulSet 故障排查 | 有序部署问题、PVC 绑定失败、网络标识异常 |
-| [04-daemonset-troubleshooting.md](05-workloads/04-daemonset-troubleshooting.md) | DaemonSet 故障排查 | 节点污点、Pod 未调度、系统组件故障 |
+| [04-daemonset-troubleshooting.md](05-workloads/04-daemonset-troubleshooting.md) | DaemonSet 故障排查 | 节点污点、Pod 未调度、系统组件问题 |
 | [05-job-cronjob-troubleshooting.md](05-workloads/05-job-cronjob-troubleshooting.md) | Job/CronJob 故障排查 | 任务失败、定时任务不触发、并行执行问题 |
 | [06-configmap-secret-troubleshooting.md](05-workloads/06-configmap-secret-troubleshooting.md) | ConfigMap/Secret 故障排查 | 配置注入失败、热更新问题、编码问题 |
 
@@ -150,7 +150,7 @@ prerequisites:
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
 | [01-resources-quota-troubleshooting.md](07-resources-scheduling/01-resources-quota-troubleshooting.md) | 资源与配额故障排查 | 资源配额超限、OOM、调度失败 |
-| [02-autoscaling-troubleshooting.md](07-resources-scheduling/02-autoscaling-troubleshooting.md) | HPA/VPA 自动扩缩容故障排查 | 自动扩缩不生效、metrics-server 故障、扩缩容振荡 |
+| [02-autoscaling-troubleshooting.md](07-resources-scheduling/02-autoscaling-troubleshooting.md) | HPA/VPA 自动扩缩容故障排查 | 自动扩缩不生效、metrics-server 问题、扩缩容振荡 |
 | [03-cluster-autoscaler-troubleshooting.md](07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md) | Cluster Autoscaler 故障排查 | 节点不扩容/不缩容、云 API 错误、扩容延迟 |
 | [04-pdb-troubleshooting.md](07-resources-scheduling/04-pdb-troubleshooting.md) | PodDisruptionBudget 故障排查 | drain 卡住、缩容阻塞、PDB 配置问题 |
 
@@ -159,9 +159,9 @@ prerequisites:
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
 | [01-cluster-maintenance-troubleshooting.md](08-cluster-operations/01-cluster-maintenance-troubleshooting.md) | 集群运维故障排查 | 集群升级、节点维护、版本兼容 |
-| [02-logging-monitoring-troubleshooting.md](08-cluster-operations/02-logging-monitoring-troubleshooting.md) | 日志与监控故障排查 | 日志丢失、Prometheus 故障、告警问题、Grafana 异常 |
+| [02-logging-monitoring-troubleshooting.md](08-cluster-operations/02-logging-monitoring-troubleshooting.md) | 日志与监控故障排查 | 日志丢失、Prometheus 问题、告警问题、Grafana 异常 |
 | [03-helm-troubleshooting.md](08-cluster-operations/03-helm-troubleshooting.md) | Helm 部署故障排查 | Release 失败、模板错误、升级回滚问题 |
-| [04-ha-disaster-recovery-troubleshooting.md](08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md) | 高可用与灾备故障排查 | 控制平面故障、etcd 恢复、备份还原、灾难恢复 |
+| [04-ha-disaster-recovery-troubleshooting.md](08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md) | 高可用与灾备故障排查 | 控制平面问题、etcd 恢复、备份还原、灾难恢复 |
 | [05-crd-operator-troubleshooting.md](08-cluster-operations/05-crd-operator-troubleshooting.md) | CRD/Operator 故障排查 | CRD 版本冲突、Operator 崩溃、Reconcile 失败、Finalizer 阻塞 |
 | [06-kustomize-troubleshooting.md](08-cluster-operations/06-kustomize-troubleshooting.md) | Kustomize 部署故障排查 | 构建失败、Patch 不生效、多环境配置、镜像替换问题 |
 
@@ -215,9 +215,9 @@ prerequisites:
 | 错误现象 | 推荐文档 |
 |----------|----------|
 | kubectl 连接失败 | API Server、证书、高可用 |
-| 节点 NotReady | kubelet、容器运行时、节点故障专项 |
-| 节点资源压力 | 节点故障专项、资源配额 |
-| Pod Pending | Scheduler、资源配额、PV/PVC、节点故障 |
+| 节点 NotReady | kubelet、容器运行时、节点问题专项 |
+| 节点资源压力 | 节点问题专项、资源配额 |
+| Pod Pending | Scheduler、资源配额、PV/PVC、节点问题 |
 | Pod CrashLoopBackOff | Pod 故障排查 |
 | Pod OOMKilled | 资源配额 |
 | Service 不可达 | kube-proxy、Service/Ingress |
@@ -235,7 +235,7 @@ prerequisites:
 | CronJob 未执行 | Job/CronJob 故障排查 |
 | ConfigMap/Secret 不生效 | ConfigMap/Secret 故障排查 |
 | Helm 安装/升级失败 | Helm 部署故障排查 |
-| etcd 集群故障 | etcd、高可用与灾备 |
+| etcd 集群问题 | etcd、高可用与灾备 |
 | PSA 拒绝 Pod | Pod 安全故障排查 |
 | GPU Pod 调度失败 | GPU/设备插件故障排查 |
 | 镜像拉取认证失败 | 镜像与镜像仓库故障排查 |
@@ -246,7 +246,7 @@ prerequisites:
 | API 请求限流 (429) | API 优先级与公平性故障排查 |
 | 控制平面安全告警 | 控制平面安全故障排查 |
 | API Server 响应缓慢 | 控制平面性能故障排查 |
-| 多 master 节点故障 | 控制平面高可用故障排查 |
+| 多 master 节点问题 | 控制平面高可用故障排查 |
 | 集群升级失败 | 控制平面升级故障排查 |
 | kubectl drain 卡住 | PodDisruptionBudget 故障排查 |
 | 节点不扩容/不缩容 | Cluster Autoscaler 故障排查 |
@@ -343,7 +343,7 @@ prerequisites:
     ├─► 确认影响范围
     │       │
     │       ├─► 单个 Pod ──► Pod 故障排查
-    │       ├─► 单个节点 ──► 节点故障专项/kubelet/容器运行时
+    │       ├─► 单个节点 ──► 节点问题专项/kubelet/容器运行时
     │       ├─► 多个节点 ──► 控制平面组件
     │       └─► 整个集群 ──► API Server/etcd/高可用
     │
@@ -374,7 +374,7 @@ prerequisites:
 | 类别 | 文档数 | 覆盖内容 | 生产环境重点 |
 |------|--------|----------|--------------|
 | 控制平面 | 10 | API Server、etcd、Scheduler、Controller Manager、Webhook、APF、安全、性能、高可用、升级 | ⭐⭐⭐ 集群核心组件 |
-| 节点组件 | 6 | kubelet、kube-proxy、容器运行时、节点故障专项、镜像仓库、GPU/设备插件 | ⭐⭐⭐ 节点稳定性保障 |
+| 节点组件 | 6 | kubelet、kube-proxy、容器运行时、节点问题专项、镜像仓库、GPU/设备插件 | ⭐⭐⭐ 节点稳定性保障 |
 | 网络 | 8 | CNI、DNS、Service/Ingress、NetworkPolicy、Service Mesh、Gateway API、Terway、Flannel | ⭐⭐ 网络连通性保障 |
 | 存储 | 5 | PV/PVC、CSI 驱动、快照备份、存储性能、StorageClass | ⭐⭐ 数据持久化保障 |
 | 工作负载 | 6 | Pod、Deployment、StatefulSet、DaemonSet、Job/CronJob、ConfigMap/Secret | ⭐⭐⭐ 业务应用保障 |
@@ -393,7 +393,7 @@ prerequisites:
 
 在遇到以下情况时，建议立即升级处理：
 - etcd 数据损坏或不可用
-- 多数控制平面节点故障
+- 多数控制平面节点问题
 - 大规模节点 NotReady
 - 证书全部过期导致集群不可用
 - 安全相关的紧急事件
@@ -435,7 +435,7 @@ prerequisites:
 
 ### 2026-01
 - ✨ 丰富所有文档内容，添加生产环境实战经验和最佳实践
-- ✨ 增加典型故障场景分析和预防措施
+- ✨ 增加典型问题场景分析和预防措施
 - ✨ 补充自动化运维脚本和监控告警配置
 - ✨ 优化文档结构，提升可读性和实用性
 - ✨ 更新目录命名规范，统一为结构化命名

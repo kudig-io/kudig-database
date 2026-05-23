@@ -45,7 +45,7 @@ prerequisites:
 
 | 读者对象 | 价值体现 |
 | :--- | :--- |
-| **初学者** | 理解 Service 负载均衡的“幕后英雄”，掌握 iptables 与 IPVS 的基本概念，学会通过日志和规则命令排查 ClusterIP 不通等基础网络故障。 |
+| **初学者** | 理解 Service 负载均衡的“幕后英雄”，掌握 iptables 与 IPVS 的基本概念，学会通过日志和规则命令排查 ClusterIP 不通等基础网络问题。 |
 | **资深专家** | 深入剖析 kube-proxy 的内核交互机制（conntrack、ipset、NFQUEUE）、在大规模集群下的性能瓶颈优化、IPVS 模式的深度调优，以及网络分区下的容错处理。 |
 
 ---
@@ -71,10 +71,10 @@ prerequisites:
 4. **conntrack/内核健康**：`conntrack -S` 观察表使用率；`dmesg | grep conntrack | tail`；`sysctl net.netfilter.nf_conntrack_max`。
 5. **NodePort/外访**：若 NodePort 不通，检查宿主机防火墙/云安全组；`nc -zv <node> <nodePort>` 与 `tcpdump -i eth0 port <nodePort>`。
 6. **快速缓解**：
-   - 单节点故障：重启该节点 kube-proxy Pod；若规则缺失，删除 Pod 触发重建规则。
+   - 单节点问题：重启该节点 kube-proxy Pod；若规则缺失，删除 Pod 触发重建规则。
    - 大规模性能：切换 IPVS、开启 `strictARP`，调高 conntrack 表并开启连接回收参数；限制 Service 爆炸增长。
    - Endpoints 空：修复上游工作负载或健康检查，避免空代理。
-7. **证据留存**：保存规则导出、kube-proxy 日志、conntrack 统计、故障节点的 iptables/ipvs 快照。
+7. **证据留存**：保存规则导出、kube-proxy 日志、conntrack 统计、问题节点的 iptables/ipvs 快照。
 
 ---
 
@@ -103,7 +103,7 @@ kube-proxy 并不是一个真正的 Proxy（如 Nginx），而是一个**规则�
 
 #### 1.2.2 Service 转发异常
 
-| 故障场景 | 典型表现 | 排查方向 |
+| 问题场景 | 典型表现 | 排查方向 |
 | :--- | :--- | :--- |
 | **Service 闪断** | 间歇性 `Connection Refused` | conntrack 表满、部分 Endpoints 探针失败 |
 | **固定节点不通** | 仅在某节点访问 Service 报错 | 该节点 kube-proxy Pod 僵死、iptables 规则丢失 |

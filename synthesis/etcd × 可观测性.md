@@ -1,7 +1,7 @@
 ---
 title: etcd × 可观测性
 description: '[[entities/etcd]] 是 K8s 控制平面的状态存储，[[entities/prometheus-grafana]] 是监控栈。wiki 将 etcd 作为架构组件、将监控作为运维工具分别介绍，但两者的关系是生死相依：etcd
-  是 Kubernetes 的心脏——所有资源定义、状态更新、事件流都通过 etcd 持久化。但 etcd 在故障前往往是静默的：它不会主动告警磁盘空间不足、不'
+  是 Kubernetes 的心脏——所有资源定义、状态更新、事件流都通过 etcd 持久化。但 etcd 在问题前往往是静默的：它不会主动告警磁盘空间不足、不'
 category: synthesis
 tags:
 - k8s
@@ -49,7 +49,7 @@ relationships:
 
 ## 连接点
 
-[[entities/etcd]] 是 K8s 控制平面的状态存储，[[entities/prometheus|prometheus]]-grafana]] 是监控栈。wiki 将 etcd 作为架构组件、将监控作为运维工具分别介绍，但两者的关系是生死相依：etcd 是 [[entities/kubernetes|Kubernetes]] 的心脏——所有资源定义、状态更新、事件流都通过 etcd 持久化。但 etcd 在故障前往往是静默的：它不会主动告警磁盘空间不足、不会预警性能退化、不会报告网络分区导致的仲裁风险。直到 API Server 开始超时、调度器停止工作、Pod 无法创建时，运维人员才意识到 etcd 出了问题。Prometheus 对 etcd 的监控不是可选项，而是集群运维的底线要求。
+[[entities/etcd]] 是 K8s 控制平面的状态存储，[[entities/prometheus|prometheus]]-grafana]] 是监控栈。wiki 将 etcd 作为架构组件、将监控作为运维工具分别介绍，但两者的关系是生死相依：etcd 是 [[entities/kubernetes|Kubernetes]] 的心脏——所有资源定义、状态更新、事件流都通过 etcd 持久化。但 etcd 在问题前往往是静默的：它不会主动告警磁盘空间不足、不会预警性能退化、不会报告网络分区导致的仲裁风险。直到 API Server 开始超时、调度器停止工作、Pod 无法创建时，运维人员才意识到 etcd 出了问题。Prometheus 对 etcd 的监控不是可选项，而是集群运维的底线要求。
 
 etcd 的可观测性与应用监控有本质区别：
 - 应用监控：关注吞吐量、延迟、错误率——目标是优化用户体验
@@ -83,7 +83,7 @@ etcd 的每一个 Prometheus 指标都直接对应 K8s 控制平面的某个健�
 **etcd 监控的独特性：它是唯一一个监控基础设施需要比被监控系统更高可用的场景。**
 
 Prometheus 监控 etcd，但如果 Prometheus 本身存储在依赖 etcd 的集群中（如 Thanos Query 通过 K8s Service 访问 etcd），就形成了一个循环依赖：
-- etcd 故障 → API Server 不可用 → Prometheus 无法通过 K8s API 发现目标 → etcd 的监控丢失 → 无法诊断 etcd 故障
+- etcd 问题 → API Server 不可用 → Prometheus 无法通过 K8s API 发现目标 → etcd 的监控丢失 → 无法诊断 etcd 问题
 
 **解决方案：etcd 的监控应该独立于被监控的集群。**
 - 使用独立的监控集群（或外部 VM）抓取 etcd 指标
@@ -105,7 +105,7 @@ etcd 的写入负载与 K8s 集群规模呈非线性关系：
 | 张力 | 详情 |
 |------|------|
 | **指标采集开销** | etcd 的 /metrics 端点在高负载下可能响应缓慢。Prometheus 的 scrape 操作本身会增加 etcd 的 CPU 和内存压力。在 etcd 已经处于压力边缘时，监控采集可能成为压垮骆驼的最后一根稻草 |
-| **告警噪音** | etcd 的许多指标在正常波动时也会触发短暂告警（如 leader 选举期间的 has_leader=0）。过于敏感的告警导致运维疲劳，过于宽松的告警则错过真正的故障 |
+| **告警噪音** | etcd 的许多指标在正常波动时也会触发短暂告警（如 leader 选举期间的 has_leader=0）。过于敏感的告警导致运维疲劳，过于宽松的告警则错过真正的问题 |
 | **网络分区下的监控盲区** | 当网络分区导致 etcd 节点隔离时，被隔离的节点可能仍然存活并响应 /metrics，但已不属于集群多数派。Prometheus 仍然采集到健康的指标，但实际上该节点已无法参与共识 |
 | **历史数据的价值** | etcd 的性能退化通常是渐进的（如磁盘 I/O 随时间劣化）。短期监控（7 天）可能无法发现趋势，长期存储（[[entities/cortex|Cortex]]）增加了运维复杂度 |
 | **安全与可观测性的冲突** | etcd 的 /metrics 端点默认不认证。在生产环境中，metrics 可能暴露集群内部状态（如 key 数量、watch 数量），成为信息泄露渠道。启用 etcd 客户端证书认证后，Prometheus 的配置复杂度增加 |
@@ -115,7 +115,7 @@ etcd 的写入负载与 K8s 集群规模呈非线性关系：
 - **etcd 的 SLO 定义**：K8s 社区没有官方定义的 etcd SLO。集群运维人员应该对 etcd 承诺什么样的可用性？99.9%？99.99%？etcd 的 SLO 是否应该与 API Server 的 SLO 绑定？
 - **etcd 容量的自动预测**：基于 etcd 的写入速率和 key 数量增长趋势，是否可以预测何时需要扩容（增加节点、升级磁盘、调优 compaction 策略）？当前缺乏成熟的 etcd 容量预测模型
 - **多集群 etcd 监控的聚合**：在联邦或多集群架构中，每个集群的 etcd 是独立的。如何在一个全局视图中监控所有 etcd 集群的健康状态？是否应该有一个 etcd 的 etcd 来存储跨集群的 etcd 元数据？
-- **etcd 故障的根因自动化**：当 etcd_server_has_leader=0 时，根因可能是磁盘故障、网络分区、CPU 饱和、或内存耗尽。当前依赖人工排查，是否可以构建一个基于指标模式的自动化根因分析工具？
+- **etcd 问题的根因自动化**：当 etcd_server_has_leader=0 时，根因可能是磁盘问题、网络分区、CPU 饱和、或内存耗尽。当前依赖人工排查，是否可以构建一个基于指标模式的自动化根因分析工具？
 - **WAL 和 snapshot 的可观测性**：etcd 的 WAL 日志和定期 snapshot 是恢复的关键，但它们的完整性无法通过 Prometheus 指标直接验证。是否需要定期的恢复演练，还是可以通过 checksum 监控来实现？
 
 ## 相关

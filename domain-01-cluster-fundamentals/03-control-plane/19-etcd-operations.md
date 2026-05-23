@@ -177,7 +177,7 @@ mv /var/lib/etcd-new /var/lib/etcd
 <!-- chunk: etcd故障处理 -->
 ## etcd故障处理
 
-| 故障类型 | 症状 | 诊断命令 | 解决方案 |
+| 问题类型 | 症状 | 诊断命令 | 解决方案 |
 |---------|-----|---------|---------|
 | Leader丢失 | API Server超时 | `etcdctl endpoint status` | 检查网络/磁盘 |
 | 配额超限 | NOSPACE告警 | `etcdctl alarm list` | 压缩+碎片整理 |
@@ -211,7 +211,7 @@ etcdctl alarm disarm
 | 特性 | 说明 |
 |-----|------|
 | 自动备份 | 每天自动备份,保留7天 |
-| 自动恢复 | 故障自动恢复 |
+| 自动恢复 | 问题自动恢复 |
 | 监控告警 | ARMS集成监控 |
 | 扩缩容 | 3节点→5节点 |
 | 跨AZ部署 | 高可用部署 |

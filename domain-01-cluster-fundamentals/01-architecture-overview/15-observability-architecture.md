@@ -1054,7 +1054,7 @@ sum by(namespace, pod) (
 increase(http_requests_total[1h])  # 而不是 [24h]
 ```
 
-### 6.3 故障排除方法论
+### 6.3 问题排除方法论
 
 #### 系统性故障诊断流程
 ```mermaid

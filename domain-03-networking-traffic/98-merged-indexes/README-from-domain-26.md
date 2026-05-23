@@ -286,7 +286,7 @@ created: "2026-05-23"
     circuit_breaker:
       application_layer: Resilience4j CircuitBreaker (Java)
       mesh_layer: Istio OutlierDetection (Envoy)
-      description: 熔断器, 防止级联故障, 保护下游服务
+      description: 熔断器, 防止级联问题, 保护下游服务
 
     retry_with_backoff:
       application_layer: Resilience4j Retry (constant/exponential)

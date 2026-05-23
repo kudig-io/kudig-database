@@ -76,9 +76,9 @@ created: "2026-05-23"
 <!-- chunk: 1. GitOps和ArgoCD故障诊断总览 (GitOps and ArgoCD Diagnosis Overview) -->
 ## 1. GitOps和ArgoCD故障诊断总览 (GitOps and ArgoCD Diagnosis Overview)
 
-### 1.1 常见故障现象分类
+### 1.1 常见问题现象分类
 
-| 故障类型 | 症状表现 | 影响范围 | 紧急程度 |
+| 问题类型 | 症状表现 | 影响范围 | 紧急程度 |
 |---------|---------|---------|---------|
 | **应用同步失败** | Application状态异常 | 应用部署中断 | P0 - 紧急 |
 | **Git仓库连接问题** | 无法访问代码仓库 | 部署流水线中断 | P0 - 紧急 |

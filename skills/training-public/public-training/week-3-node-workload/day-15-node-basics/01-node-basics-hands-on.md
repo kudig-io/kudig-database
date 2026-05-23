@@ -302,7 +302,7 @@ spec:
     - key: "node.kubernetes.io/not-ready"
       operator: "Exists"
       effect: "NoExecute"
-      tolerationSeconds: 300  # 节点故障后 300 秒才驱逐
+      tolerationSeconds: 300  # 节点问题后 300 秒才驱逐
   containers:
     - name: gpu-container
       image: nvidia/cuda:11.0
@@ -363,7 +363,7 @@ spec:
 
 ---
 
-## 6. 节点故障案例
+## 6. 节点问题案例
 
 ### 案例 1: 节点 NotReady 后自动恢复
 

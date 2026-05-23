@@ -77,7 +77,7 @@ created: "2026-05-23"
 2. 部署 Nginx Ingress Controller 并配置路由规则
 3. 实现金丝雀发布、A/B 测试等高级流量治理
 4. 配置 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|Cert-Manager]] 实现 TLS 证书自动化管理
-5. 排查 Ingress 502/504 等常见故障
+5. 排查 Ingress 502/504 等常见问题
 6. 设计生产级高可用 Ingress 架构
 
 ### 核心要点
@@ -924,7 +924,7 @@ Ingress
 | **红线 3** | 必须监控正则匹配逻辑，防止 CPU 正则回溯攻击 | 恶意请求导致 CPU 100% |
 | **红线 4** | TLS 证书必须配置自动续签（Cert-Manager） | 证书过期导致服务不可达 |
 | **红线 5** | Ingress Controller 必须部署在专用节点 | 业务 Pod 竞争资源导致网关不稳定 |
-| **红线 6** | 必须配置访问日志持久化 | 安全事件和故障无法追溯 |
+| **红线 6** | 必须配置访问日志持久化 | 安全事件和问题无法追溯 |
 
 ---
 

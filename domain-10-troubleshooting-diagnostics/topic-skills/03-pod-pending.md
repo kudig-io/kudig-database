@@ -155,7 +155,7 @@ Pod Pending 是 Kubernetes 集群中最常见的工单类型之一。当 Pod 被
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径：
+按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 统计当前 namespace 中 Pending Pod 的数量
 ```bash
@@ -198,13 +198,13 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
 | 生产环境关键服务无法扩容，正在影响用户流量；或核心 StatefulSet（如数据库）无法调度 | P1 | 直接影响用户，需立即处理 |
 | 新部署的生产服务全部 Pending，尚未接入流量但阻塞发布流程 | P2 | 阻塞部署流水线，需尽快处理 |
 | 预发/测试环境 Pod Pending，或生产环境非关键服务少量 Pod Pending | P3 | 不影响线上用户，可排队处理 |
-| 集群级调度器异常，所有新 Pod 均无法调度 | P1 | 全集群影响，属于基础设施故障 |
+| 集群级调度器异常，所有新 Pod 均无法调度 | P1 | 全集群影响，属于基础设施问题 |
 
 ### 3.3 立即升级触发条件
 
 以下任一条件满足时，**跳过标准诊断流程，立即升级至人工 SRE**：
 
-- **条件 1**: kube-scheduler Pod 本身处于非 Running 状态（控制面故障）
+- **条件 1**: kube-scheduler Pod 本身处于非 Running 状态（控制面问题）
   ```bash
   kubectl get pods -n kube-system -l component=kube-scheduler --no-headers | grep -v Running
   ```
@@ -212,7 +212,7 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   ```bash
   kubectl get nodes --no-headers | awk '{print $2}' | grep -c NotReady
   ```
-- **条件 3**: 同一集群中多个 namespace 的核心服务同时 Pending（控制面或基础设施故障嫌疑）
+- **条件 3**: 同一集群中多个 namespace 的核心服务同时 Pending（控制面或基础设施问题嫌疑）
 - **条件 4**: Pending 持续超过 1 小时且影响生产用户流量
 
 ---
@@ -238,7 +238,7 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
 - **判断规则**:
   - 如果 `.spec.schedulingGates` 非空 → 根因 RC-012（SchedulingGates 阻止），跳转 Section 5
   - 如果 `.spec.schedulerName` 不是 `default-scheduler` → 记录，继续 D1.4 检查自定义调度器
-  - 如果 `.spec.nodeName` 已分配 → 不是调度问题，可能是 kubelet 故障，转 SKILL-NODE-001
+  - 如果 `.spec.nodeName` 已分配 → 不是调度问题，可能是 kubelet 问题，转 SKILL-NODE-001
   - 其他情况 → 继续 D1.2
 
 **Step D1.2**: 获取 Pod Events，聚焦 FailedScheduling 消息
@@ -814,7 +814,7 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   ```
 - **执行命令**:
   ```bash
-  # 直接移除所有 schedulingGates（适用于门控控制器故障的紧急场景）
+  # 直接移除所有 schedulingGates（适用于门控控制器问题的紧急场景）
   kubectl patch pod <pod-name> -n <namespace> --type=json -p='[
     {
       "op": "remove",
@@ -1230,7 +1230,7 @@ kubectl rollout status deployment/<deployment-name> -n <namespace> --timeout=120
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 
 - [ ] 所有目标 Pod 的 `.status.phase` 为 `Running`
 - [ ] 所有目标 Pod 的 `.status.conditions` 中 `PodScheduled` 为 `True`
@@ -1262,14 +1262,14 @@ kubectl rollout status deployment/<deployment-name> -n <namespace> --timeout=120
 | 修复失败 | 同一修复操作执行 2 次仍未通过 Section 7 验证 |
 | 严重性升级 | 初始分级为 P3 但 Pending Pod 数量快速增长超过 10 个，或影响面扩展到生产关键服务 |
 | 未知根因 | 诊断完成（Phase 1-3 全部执行）但无法匹配 Section 5 中任何已知根因 |
-| 调度器层面故障 | kube-scheduler 本身异常，Agent 无法通过标准修复恢复 |
-| 多 Skill 交叉 | 诊断过程中发现问题涉及节点故障（SKILL-NODE-001）+ 调度失败的组合 |
+| 调度器层面问题 | kube-scheduler 本身异常，Agent 无法通过标准修复恢复 |
+| 多 Skill 交叉 | 诊断过程中发现问题涉及节点问题（SKILL-NODE-001）+ 调度失败的组合 |
 
 ### 8.2 升级消息模板
 
 ```
 【{severity}】Pod Pending 调度失败 - {cluster_name}/{namespace}
-- 故障概述: {pending_pod_count} 个 Pod 处于 Pending 状态，已持续 {duration}
+- 问题概述: {pending_pod_count} 个 Pod 处于 Pending 状态，已持续 {duration}
 - 影响范围: 
   - Namespace: {namespace}
   - 受影响 Workload: {workload_list}
@@ -1438,7 +1438,7 @@ Events:
            ...
 ```
 
-#### 9.5.4 DRA 调度故障根因补充
+#### 9.5.4 DRA 调度问题根因补充
 
 | 根因 | 症状 | 诊断命令 | 修复建议 |
 |-----|------|---------|----------|
@@ -1459,7 +1459,7 @@ Events:
 | 将 Taint 问题误诊为资源不足 | FailedScheduling 消息同时包含 `Insufficient cpu` 和 `had taint`（因为部分节点资源不足，部分有 taint），运维人员只关注资源 | 实际是 taint 阻止了资源充足的节点被使用，添加 toleration 即可解决 | 完整解析 FailedScheduling 消息中**每个节点的排除原因**，优先处理 taint/affinity 问题 |
 | 将 Affinity 问题误诊为资源不足 | 集群有空闲节点但 Pod 仍 Pending；消息显示 `Insufficient cpu` | nodeSelector 或 nodeAffinity 将 Pod 限制在特定节点上，这些节点确实资源不足，但其他空闲节点不满足 affinity | 检查 Pod 的 nodeSelector 和 affinity 配置，计算**符合约束条件的节点集合**的可用资源 |
 | 将 LimitRange 注入的资源误认为是用户设置 | Pod 没有显式设置 resource requests，但实际 request 很大 | LimitRange 自动注入了 `defaultRequest`，导致 Pod 的实际 request 超出预期 | 使用 `kubectl describe limitrange` 检查默认注入值；对比 Pod spec 中用户设置 vs LimitRange 注入 |
-| 忽略 SchedulingGates 导致的 "无 Event" Pending | Pod 长时间 Pending 但 Events 为空，怀疑是调度器故障 | **[v1.28+]** Pod 被 SchedulingGates 阻止进入调度队列，调度器根本不会处理它 | D1.1 中首先检查 `spec.schedulingGates` 字段是否非空 |
+| 忽略 SchedulingGates 导致的 "无 Event" Pending | Pod 长时间 Pending 但 Events 为空，怀疑是调度器问题 | **[v1.28+]** Pod 被 SchedulingGates 阻止进入调度队列，调度器根本不会处理它 | D1.1 中首先检查 `spec.schedulingGates` 字段是否非空 |
 | 将碎片化问题误诊为 "集群资源够用但调度器有 bug" | `kubectl top nodes` 显示集群总利用率只有 60%，但 Pod 就是调度不了 | 没有单个节点有足够的连续可用资源；例如 Pod 需要 4 CPU，但每个节点只剩 2 CPU | 执行 D2.8 碎片化分析，对比**单节点可用**与 Pod request，而非仅看集群总量 |
 | PVC 问题误诊为调度问题 | FailedScheduling 消息含 `unbound immediate PersistentVolumeClaims` | PVC 未绑定可能是 StorageClass 配置错误、provisioner 未部署、或存储后端异常 | 分支诊断 D2.4，独立排查 PVC 问题，可能需要 SKILL-STORE-001 |
 | 将 ResourceQuota 耗尽误诊为集群资源不足 | 新 Pod 无法创建，且 Events 中有资源相关错误 | ResourceQuota 限制了 namespace 级别的资源总量，集群实际上有足够资源 | 执行 D2.5，区分 "集群资源不足" 和 "namespace 配额不足" |
@@ -1472,8 +1472,8 @@ Events:
 | 主题 | 参考路径 | 说明 |
 |------|---------|------|
 | Kubernetes 调度器架构 | `domain-4-workloads-scheduling/` | 调度器工作原理：过滤（Filter）→ 打分（Score）→ 绑定（Bind）流程 |
-| FTA 调度故障树 | `domain-10-troubleshooting-diagnostics/topic-fta/list/scheduler-fta.md` | 调度器故障的完整 FTA 分析模型，含概率和因果链 |
-| FTA Pod 故障树 | `domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md` | Pod 生命周期中所有可能的故障点 |
+| FTA 调度故障树 | `domain-10-troubleshooting-diagnostics/topic-fta/list/scheduler-fta.md` | 调度器问题的完整 FTA 分析模型，含概率和因果链 |
+| FTA Pod 故障树 | `domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md` | Pod 生命周期中所有可能的问题点 |
 | 结构化故障排查 — 调度问题 | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/` | 人类可读的深度排查指南 |
 | 通用故障排查方法论 | `domain-10-troubleshooting-diagnostics/` | 系统化故障排查的理论基础和方法 |
 | 节点资源管理 | `domain-4-workloads-scheduling/` | Node allocatable、eviction threshold、resource requests/limits 的关系 |

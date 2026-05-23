@@ -1526,6 +1526,6 @@ flowchart TD
   - 支持更多细粒度的证书轮换控制
   - 推荐使用 cert-manager 管理所有证书
 - **共性**：
-  - 证书到期是集群最常见的故障原因之一
+  - 证书到期是集群最常见的问题原因之一
   - 时间同步是证书验证的前提条件
   - 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"

@@ -67,7 +67,7 @@ prerequisites:
 
 ## 概述
 
-Kubernetes 通过 Pod Security Standards (PSS)、SecurityContext 和 Pod Security Admission (PSA) 控制 Pod 的安全配置。安全配置不当会导致 Pod 无法启动、权限不足或安全风险。本文档覆盖 Pod 安全相关故障的诊断与解决方案。
+Kubernetes 通过 Pod Security Standards (PSS)、SecurityContext 和 Pod Security Admission (PSA) 控制 Pod 的安全配置。安全配置不当会导致 Pod 无法启动、权限不足或安全风险。本文档覆盖 Pod 安全相关问题的诊断与解决方案。
 
 ---
 
@@ -128,7 +128,7 @@ Kubernetes 通过 Pod Security Standards (PSS)、SecurityContext 和 Pod Securit
 
 ### 1.4 影响分析
 
-| 故障类型 | 直接影响 | 间接影响 | 影响范围 |
+| 问题类型 | 直接影响 | 间接影响 | 影响范围 |
 |---------|---------|---------|---------|
 | PSA 拒绝 Pod | Pod 无法创建 | 服务不可用 | 受 PSA 策略保护的命名空间 |
 | 权限不足 | 应用功能异常 | 服务部分不可用 | 单个 Pod |
@@ -142,7 +142,7 @@ Kubernetes 通过 Pod Security Standards (PSS)、SecurityContext 和 Pod Securit
 ### 2.1 排查决策树
 
 ```
-Pod 安全故障
+Pod 安全问题
       │
       ├─── Pod 创建被拒绝？
       │         │

@@ -53,18 +53,18 @@ created: "2026-05-23"
 
 <!-- chunk: 概述 -->## 概述
 
-Kubernetes 集群运维中，硬件故障是导致节点异常、Pod 驱逐、服务中断的重要原因。本文档专注于 K8s 场景下的硬件故障识别、诊断方法和应急处理流程。
+Kubernetes 集群运维中，硬件问题是导致节点异常、Pod 驱逐、服务中断的重要原因。本文档专注于 K8s 场景下的硬件问题识别、诊断方法和应急处理流程。
 
-<!-- chunk: K8s 硬件故障影响矩阵 -->## K8s 硬件故障影响矩阵
+<!-- chunk: K8s 硬件问题影响矩阵 -->## K8s 硬件问题影响矩阵
 
-#<!-- chunk: 硬件故障与 K8s 症状映射 -->## 硬件故障与 K8s 症状映射
+#<!-- chunk: 硬件问题与 K8s 症状映射 -->## 硬件问题与 K8s 症状映射
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────┐
-│                    硬件故障 → Kubernetes 症状映射表                                           │
+│                    硬件问题 → Kubernetes 症状映射表                                           │
 ├─────────────────────────────────────────────────────────────────────────────────────────────┤
 │                                                                                             │
-│  硬件故障类型          │  Kubernetes 表现                │  系统日志特征                    │
+│  硬件问题类型          │  Kubernetes 表现                │  系统日志特征                    │
 │  ─────────────────────┼─────────────────────────────────┼──────────────────────────────── │
 │  CPU MCE错误          │  • Node NotReady                │  • kernel: mce: CPU x           │
 │                       │  • kubelet 无响应               │  • Machine check events logged │
@@ -78,24 +78,24 @@ Kubernetes 集群运维中，硬件故障是导致节点异常、Pod 驱逐、�
 │                       │  • 应用数据错误                 │  • mcelog: corrected error      │
 │                       │  • 性能波动                     │                                  │
 │                       │                                 │                                  │
-│  磁盘故障             │  • PVC 挂载失败                │  • sd X: I/O error              │
+│  磁盘问题             │  • PVC 挂载失败                │  • sd X: I/O error              │
 │                       │  • Pod ContainerCreating 卡住   │  • blk_update_request: I/O      │
 │                       │  • etcd 延迟告警                │  • EXT4-fs error                │
 │                       │  • kubelet 日志写入失败         │  • XFS: metadata I/O error      │
 │                       │                                 │                                  │
-│  NVMe 故障            │  • nvme driver timeout          │  • nvme: I/O error              │
+│  NVMe 问题            │  • nvme driver timeout          │  • nvme: I/O error              │
 │                       │  • 高延迟 IOPS 下降             │  • nvme: controller fatal       │
 │                       │  • containerd 超时              │  • nvme: reset controller       │
 │                       │                                 │                                  │
-│  网卡故障             │  • Node NetworkUnavailable      │  • link is not ready            │
+│  网卡问题             │  • Node NetworkUnavailable      │  • link is not ready            │
 │                       │  • Service 不可达               │  • watchdog timeout             │
 │                       │  • CNI 报错                     │  • netdev_watchdog: TIMEOUT     │
 │                       │                                 │                                  │
-│  电源故障             │  • Node 突然消失                │  • (无日志-直接断电)            │
+│  电源问题             │  • Node 突然消失                │  • (无日志-直接断电)            │
 │                       │  • etcd 集群选举                │  • watchdog: BUG: soft lockup   │
 │                       │  • 数据不一致                   │                                  │
 │                       │                                 │                                  │
-│  散热故障             │  • CPU throttling 性能下降      │  • CPU temperature above        │
+│  散热问题             │  • CPU throttling 性能下降      │  • CPU temperature above        │
 │                       │  • 调度延迟增加                 │  • thermal_zone: critical       │
 │                       │  • Node 降频运行                │  • kernel: CPU freq limited     │
 │                       │                                 │                                  │
@@ -124,7 +124,7 @@ Node_NotReady_硬件诊断:
     硬件相关错误:
       - "failed to get node info" → 可能CPU/内存问题
       - "PLEG is not healthy" → 容器运行时或磁盘问题
-      - "NodeStatusUnknown" → 网络或严重硬件故障
+      - "NodeStatusUnknown" → 网络或严重硬件问题
 
   Step_3_硬件快速检查:
     CPU检查:
@@ -141,13 +141,13 @@ Node_NotReady_硬件诊断:
       - 从其他节点 ping 测试
 ```
 
-#<!-- chunk: PLEG 故障与硬件关联 -->## PLEG 故障与硬件关联
+#<!-- chunk: PLEG 问题与硬件关联 -->## PLEG 问题与硬件关联
 
 ```bash
 #!/bin/bash
-# PLEG故障硬件排查脚本
+# PLEG问题硬件排查脚本
 
-# PLEG (Pod Lifecycle Event Generator) 故障常与以下硬件问题关联:
+# PLEG (Pod Lifecycle Event Generator) 问题常与以下硬件问题关联:
 # 1. 磁盘I/O延迟过高
 # 2. 内存不足或内存错误
 # 3. CPU性能问题
@@ -249,7 +249,7 @@ main() {
 main
 ```
 
-<!-- chunk: Pod 异常与硬件故障关联 -->## Pod 异常与硬件故障关联
+<!-- chunk: Pod 异常与硬件问题关联 -->## Pod 异常与硬件问题关联
 
 #<!-- chunk: Pod OOMKilled 硬件误判分析 -->## Pod OOMKilled 硬件误判分析
 
@@ -263,7 +263,7 @@ OOMKilled_硬件误判场景:
     
     根因分析:
       - 内存 ECC 错误导致可用内存减少
-      - 内核将故障页面隔离
+      - 内核将问题页面隔离
       - 实际可用内存小于显示值
     
     诊断命令:
@@ -351,7 +351,7 @@ grep -r . /sys/devices/system/cpu/cpu0/thermal_throttle/ 2>/dev/null
 EOF
 ```
 
-<!-- chunk: etcd 硬件故障影响 -->## etcd 硬件故障影响
+<!-- chunk: etcd 硬件问题影响 -->## etcd 硬件问题影响
 
 #<!-- chunk: etcd 磁盘性能要求 -->## etcd 磁盘性能要求
 
@@ -373,11 +373,11 @@ etcd_硬件要求:
     
   性能下降原因:
     - NVMe/SSD 老化
-    - RAID 卡电池故障 (写缓存被禁用)
+    - RAID 卡电池问题 (写缓存被禁用)
     - 其他 I/O 争用
-    - 磁盘即将故障
+    - 磁盘即将问题
 
-etcd_磁盘故障症状:
+etcd_磁盘问题症状:
   日志特征:
     - "apply request took too long"
     - "failed to send out heartbeat"
@@ -483,13 +483,13 @@ echo "3. RAID 卡需确保 BBU/电容正常 (写缓存生效)"
 echo "4. 定期检查 SMART 状态和磁盘健康度"
 ```
 
-<!-- chunk: 硬件故障下的 K8s 应急响应 -->## 硬件故障下的 K8s 应急响应
+<!-- chunk: 硬件问题下的 K8s 应急响应 -->## 硬件问题下的 K8s 应急响应
 
-#<!-- chunk: Node 硬件故障应急流程 -->## Node 硬件故障应急流程
+#<!-- chunk: Node 硬件问题应急流程 -->## Node 硬件问题应急流程
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────┐
-│                    Node 硬件故障应急响应流程                                               │
+│                    Node 硬件问题应急响应流程                                               │
 ├─────────────────────────────────────────────────────────────────────────────────────────┤
 │                                                                                         │
 │  ┌─────────────────────────────────────────────────────────────────────────────────┐   │
@@ -501,7 +501,7 @@ echo "4. 定期检查 SMART 状态和磁盘健康度"
 │  │  │  2. 立即隔离节点 (阻止新 Pod 调度)                                         │ │   │
 │  │  │     kubectl cordon `<node>`                                                 │ │   │
 │  │  │                                                                            │ │   │
-│  │  │  3. 如果确认硬件故障严重，驱逐工作负载                                     │ │   │
+│  │  │  3. 如果确认硬件问题严重，驱逐工作负载                                     │ │   │
 │  │  │     kubectl drain `<node>` --ignore-daemonsets --delete-emptydir-data      │ │   │
 │  │  │     --force --grace-period=30                                            │ │   │
 │  │  │                                                                            │ │   │
@@ -538,13 +538,13 @@ echo "4. 定期检查 SMART 状态和磁盘健康度"
 │  │  │     - mcelog/EDAC 错误                                                    │ │   │
 │  │  │     - SMART 磁盘状态                                                      │ │   │
 │  │  │                                                                            │ │   │
-│  │  │  2. 确定故障组件                                                          │ │   │
+│  │  │  2. 确定问题组件                                                          │ │   │
 │  │  │     - CPU/内存/磁盘/网卡/电源/主板                                        │ │   │
 │  │  │                                                                            │ │   │
 │  │  │  3. 决定处理方式                                                          │ │   │
 │  │  │     - 在线修复 (软件/配置问题)                                            │ │   │
 │  │  │     - 硬件更换 (需停机)                                                   │ │   │
-│  │  │     - 报废替换 (整机故障)                                                 │ │   │
+│  │  │     - 报废替换 (整机问题)                                                 │ │   │
 │  │  └────────────────────────────────────────────────────────────────────────────┘ │   │
 │  └─────────────────────────────────────────────────────────────────────────────────┘   │
 │                                           │                                             │
@@ -564,7 +564,7 @@ echo "4. 定期检查 SMART 状态和磁盘健康度"
 │  │  │     - 检查工作负载正常运行                                                │ │   │
 │  │  │                                                                            │ │   │
 │  │  │  4. 事后复盘                                                              │ │   │
-│  │  │     - 编写故障报告                                                        │ │   │
+│  │  │     - 编写问题报告                                                        │ │   │
 │  │  │     - 更新监控告警                                                        │ │   │
 │  │  │     - 完善预防措施                                                        │ │   │
 │  │  └────────────────────────────────────────────────────────────────────────────┘ │   │

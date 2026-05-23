@@ -45,7 +45,7 @@ created: "2026-05-23"
 
 > **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
-> **生产环境实战经验总结**: 基于万级节点集群故障排查经验，涵盖从常见故障到复杂问题的全方位排查剧本
+> **生产环境实战经验总结**: 基于万级节点集群故障排查经验，涵盖从常见问题到复杂问题的全方位排查剧本
 
 ---
 
@@ -53,7 +53,7 @@ created: "2026-05-23"
 
 | 属性 | 说明 |
 |------|------|
-| **文件角色** | 生产环境故障排查剧本 — 按故障类型分类的标准化排查流程 |
+| **文件角色** | 生产环境故障排查剧本 — 按问题类型分类的标准化排查流程 |
 | **适合读者** | 开发者(应用排查) → 运维(系统排查) → SRE(复杂问题定位) |
 | **前置知识** | 05(概念参考)、06(CLI命令)、02(故障模式) |
 | **关联文件** | 02(故障分析)、06(CLI命令)、12(事故管理) |
@@ -218,7 +218,7 @@ troubleshootingStrategies:
     startFrom: "基础设施"
     path: "网络 → 节点 → Pod → 容器 → 应用"
     bestFor:
-      - "大规模故障"
+      - "大规模问题"
       - "基础设施问题"
       - "集群级异常"
     example:
@@ -233,7 +233,7 @@ troubleshootingStrategies:
   binarySearch:
     principle: "逐步缩小问题范围"
     bestFor:
-      - "间歇性故障"
+      - "间歇性问题"
       - "部分影响"
       - "不确定问题"
     example:
@@ -496,7 +496,7 @@ echo "=== 故障排查最佳实践 ==="
 
 # 1. 信息收集清单
 INFO_COLLECTION=(
-    "故障现象描述"
+    "问题现象描述"
     "影响范围统计"
     "发生时间点"
     "最近变更记录"
@@ -511,7 +511,7 @@ for i in "${!INFO_COLLECTION[@]}"; do
     printf "%2d. %s\n" $((i+1)) "${INFO_COLLECTION[$i]}"
 done
 
-# 2. 故障分类快速检查
+# 2. 问题分类快速检查
 echo ""
 echo "=== 快速分类检查 ==="
 
@@ -547,7 +547,7 @@ echo "5. 记录过程：详细记录排查步骤和发现"
 
 ## 2. 系统级故障排查
 
-> **🔰 初学者导读**: 系统级故障影响整个节点或集群，通常表现为节点NotReady、大量Pod异常。常见原因：磁盘满、内存不足、kubelet崩溃、证书过期。第一步永远是看节点状态和事件。
+> **🔰 初学者导读**: 系统级问题影响整个节点或集群，通常表现为节点NotReady、大量Pod异常。常见原因：磁盘满、内存不足、kubelet崩溃、证书过期。第一步永远是看节点状态和事件。
 
 ### 2.1 节点 NotReady 排查剧本
 
@@ -559,22 +559,22 @@ echo "5. 记录过程：详细记录排查步骤和发现"
 - 冷却（内存压力）
 - 通讯（网络连接）
 
-#### 剧本1：节点 NotReady 故障
+#### 剧本1：节点 NotReady 问题
 
-**故障现象**
+**问题现象**
 ```bash
 # 节点状态显示 NotReady
 $ kubectl get nodes
 NAME              STATUS     ROLES    AGE   VERSION
 node-1            Ready      <none>   30d   v1.28.0
-node-2            NotReady   <none>   30d   v1.28.0  ← 故障节点
+node-2            NotReady   <none>   30d   v1.28.0  ← 问题节点
 node-3            Ready      <none>   30d   v1.28.0
 ```
 
 **快速诊断脚本**
 ```bash
 #!/bin/bash
-# node-troubleshooting.sh - 节点故障快速诊断
+# node-troubleshooting.sh - 节点问题快速诊断
 
 NODE_NAME=$1
 echo "=== 节点 $NODE_NAME 故障诊断 ==="
@@ -644,7 +644,7 @@ ssh $NODE_NAME "
 
 OOMKilled (Out Of Memory Killed) 就像房间只能容纳10个人，但来了15个人，超出的5个人被保安赶出去。
 
-**故障现象**
+**问题现象**
 ```bash
 # Pod状态显示OOMKilled
 $ kubectl get pods
@@ -898,7 +898,7 @@ kubectl get pods --all-namespaces -o json | \
 
 ## 3. 网络故障排查
 
-> **🔰 初学者导读**: K8s网络故障是最难排查的类型之一，因为涉及多层网络(Pod网络、Service网络、外部网络)。黄金排查三步：DNS解析→Pod间连通性→Service端点。90%的网络问题是DNS相关。
+> **🔰 初学者导读**: K8s网络问题是最难排查的类型之一，因为涉及多层网络(Pod网络、Service网络、外部网络)。黄金排查三步：DNS解析→Pod间连通性→Service端点。90%的网络问题是DNS相关。
 
 ### 3.1 DNS 解析故障排查
 
@@ -906,7 +906,7 @@ kubectl get pods --all-namespaces -o json | \
 
 DNS就像电话簿，服务名(my-service)是姓名，IP地址是电话号码。DNS解析失败就像查不到电话号码，自然无法拨打。
 
-**故障现象**
+**问题现象**
 ```bash
 # 容器内无法解析服务名
 $ kubectl exec -it app-pod -- nslookup my-service
@@ -1029,7 +1029,7 @@ Service就像快递地址：
 - Selector是"根据特征找人"（戴眼镜、穿红衣服）
 - Endpoints是"实际收件人列表"
 
-**故障现象**
+**问题现象**
 ```bash
 # 服务无法访问
 $ kubectl run test --rm -it --image=busybox -- wget -qO- http://my-service
@@ -1208,7 +1208,7 @@ serviceToubleshootingDecisionTree:
 
 ### 3.3 网络策略故障排查
 
-**故障现象**
+**问题现象**
 ```bash
 # 服务无法访问
 $ kubectl run test-pod --image=busybox --rm -it --restart=Never -- wget -qO- http://my-service:80
@@ -1351,7 +1351,7 @@ chmod +x connectivity-test.sh
 
 #### 剧本7：PVC 无法绑定
 
-**故障现象**
+**问题现象**
 ```bash
 # PVC 状态为 Pending
 $ kubectl get pvc
@@ -1459,7 +1459,7 @@ fi
 
 ## 5. 应用故障排查
 
-> **🔰 初学者导读**: 应用故障是最常见的故障类型。CrashLoopBackOff(反复崩溃)、OOMKilled(内存不足被杀)、ImagePullBackOff(拉不到镜像)是三大常见问题。80%的问题通过describe+logs就能定位。
+> **🔰 初学者导读**: 应用问题是最常见的问题类型。CrashLoopBackOff(反复崩溃)、OOMKilled(内存不足被杀)、ImagePullBackOff(拉不到镜像)是三大常见问题。80%的问题通过describe+logs就能定位。
 
 ### 5.1 CrashLoopBackOff 排查剧本
 
@@ -1467,7 +1467,7 @@ fi
 
 CrashLoopBackOff就像电脑一开机就蓝屏，自动重启后又蓝屏，陷入死循环。Kubernetes发现容器启动后立即崩溃，会自动重启，但每次重启间隔会指数增长（1s, 2s, 4s, 8s... 最长5分钟）。
 
-**故障现象**
+**问题现象**
 ```bash
 # Pod反复重启
 $ kubectl get pods
@@ -1623,7 +1623,7 @@ ImagePullBackOff就像快递员找不到地址无法送货：
 - 路不通（网络问题）
 - 仓库关门（镜像仓库不可用）
 
-**故障现象**
+**问题现象**
 ```bash
 # Pod无法拉取镜像
 $ kubectl get pods
@@ -1792,7 +1792,7 @@ imagePullTroubleshooting:
 
 ### 5.3 应用性能问题
 
-**故障现象**
+**问题现象**
 ```bash
 # Pod 状态异常
 $ kubectl get pods
@@ -1805,7 +1805,7 @@ my-app-7d5b7c9f8c-def56        0/1     Pending             0          5m
 **综合诊断脚本**
 ```bash
 #!/bin/bash
-# pod-troubleshooting.sh - Pod故障综合诊断
+# pod-troubleshooting.sh - Pod问题综合诊断
 
 POD_NAME=$1
 NAMESPACE=${2:-default}
@@ -2005,7 +2005,7 @@ kubectl run simulate-schedule --image=busybox --restart=Never --dry-run=client -
 
 ## 7. 性能问题排查
 
-> **🔰 初学者导读**: 性能问题比功能故障更难定位，因为"能用但慢"。排查方向：CPU throttling(被限流)、内存swap、网络延迟、磁盘IO瓶颈。kubectl top是第一步诊断工具。
+> **🔰 初学者导读**: 性能问题比功能问题更难定位，因为"能用但慢"。排查方向：CPU throttling(被限流)、内存swap、网络延迟、磁盘IO瓶颈。kubectl top是第一步诊断工具。
 
 ### 7.1 CPU Throttling 定位
 
@@ -2017,7 +2017,7 @@ CPU Throttling就像汽车装了限速器：
 - 结果被限速器强制降到100km/h (被throttle)
 - 感觉：车子明明还能跑快，但被限制了，很"卡顿"
 
-**故障现象**
+**问题现象**
 ```bash
 # 应用响应慢，但CPU使用率不高
 $ kubectl top pods
@@ -2179,7 +2179,7 @@ cpuThrottlingIndicators:
 - 最后溢出（OOMKilled）
 - 关键特征：内存只增不减
 
-**故障现象**
+**问题现象**
 ```bash
 # 内存使用持续增长
 $ kubectl top pod app-pod
@@ -2468,9 +2468,9 @@ kubectl auth can-i get pods --as=system:serviceaccount:monitoring:prometheus-k8s
 
 ### 8.1 案例分析（完整演示）
 
-**案例标题: 电商促销期间订单服务大规模故障**
+**案例标题: 电商促销期间订单服务大规模问题**
 
-**1. 故障现象**
+**1. 问题现象**
 ```yaml
 incident:
   time: "2026-02-10 20:00"
@@ -2546,7 +2546,7 @@ rootCause:
     4: "内存超限 → OOMKilled"
     5: "Pod重启 → 可用副本减少"
     6: "负载集中 → 剩余Pod也崩溃"
-    7: "级联故障 → 服务大面积不可用"
+    7: "级联问题 → 服务大面积不可用"
 ```
 
 **6. 紧急修复**
@@ -2639,7 +2639,7 @@ preventiveMeasures:
     - action: "定期混沌工程演练"
       frequency: "每月一次"
       scenarios:
-        - "数据库故障模拟"
+        - "数据库问题模拟"
         - "Pod随机杀死"
         - "流量激增模拟"
 ```
@@ -2683,7 +2683,7 @@ postmortem:
 
 ### 8.2 故障排查总结
 
-**故障场景**
+**问题场景**
 - 50% 节点突然变为 NotReady
 - 大量 Pod 被驱逐
 - 服务大面积不可用
@@ -2713,7 +2713,7 @@ done
 
 ### 8.2 案例2：存储性能瓶颈
 
-**故障场景**
+**问题场景**
 - 应用响应时间突然增加
 - 数据库连接超时
 - 存储延迟指标异常
@@ -2754,9 +2754,9 @@ storagePerformanceInvestigation:
     - "启用缓存层"
 ```
 
-### 8.3 案例3：网络分区故障
+### 8.3 案例3：网络分区问题
 
-**故障场景**
+**问题场景**
 - 部分节点间网络不通
 - Pod 无法调度到某些节点
 - 服务间通信异常

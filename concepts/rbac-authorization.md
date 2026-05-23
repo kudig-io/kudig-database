@@ -5,6 +5,7 @@ tags: ["core-concept", "domain-05", "visibility/public"]
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+status: reviewed
 ---
 
 # RBAC 授权模型

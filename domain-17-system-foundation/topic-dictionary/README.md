@@ -261,7 +261,7 @@ created: "2026-05-23"
 | security | 27 | RBAC、Pod Security、供应链安全、运行时安全、零信任身份、配额、治理 |
 | scheduling | 16 | 调度器、亲和性、驱逐、资源分配、Karpenter |
 | observability | 10 | Metrics、Logs、Traces、OpenTelemetry、Loki |
-| operations | 20 | SRE、故障、容量、变更、优化、FinOps、GreenOps |
+| operations | 20 | SRE、问题、容量、变更、优化、FinOps、GreenOps |
 | platform-engineering | 19 | CRD、Operator、Webhook、GitOps、Cluster API、KubeVirt、Wasm |
 | specialized-workloads | 10 | Windows、AI/ML、GPU、KServe、Kueue、LLM 优化、RAG |
 | tooling | 5 | CLI、工具链、镜像优化 |

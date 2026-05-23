@@ -101,7 +101,7 @@ k8s_versions:
 | 术语 | 英文全称 | 定义 | 示例 |
 |------|---------|------|------|
 | **FEBM** | Forensic Evidence-Based Methodology | 法医鉴定循证方法论,强调通过系统化证据收集和分析来确定根本原因 | 在 Pod 崩溃事件中,收集日志、指标、审计记录等证据进行分析 |
-| **FTA** | Fault Tree Analysis | 故障树分析,一种自顶向下的演绎推理方法 | 从"应用不可用"顶事件开始,分解为 Pod 崩溃、网络故障等基础事件 |
+| **FTA** | Fault Tree Analysis | 故障树分析,一种自顶向下的演绎推理方法 | 从"应用不可用"顶事件开始,分解为 Pod 崩溃、网络问题等基础事件 |
 | **Chain of Custody** | - | 证据监管链,记录证据从收集到呈现的完整历史 | 记录日志文件的采集时间、采集人、存储位置、访问记录 |
 | **Locard's Exchange Principle** | - | 洛卡德交换原理,任何接触都会留下痕迹 | 攻击者进入容器必然留下系统调用、网络连接等痕迹 |
 | **RCA** | Root Cause Analysis | 根本原因分析 | 确定导致 OOMKilled 的真正原因是内存泄漏而非配置不当 |
@@ -115,7 +115,7 @@ k8s_versions:
 |------|---------|------|------------|
 | **OOMKilled** | Out Of Memory Killed | 因内存超限而被终止的容器 | 常见的基础事件,需分析是配置问题还是代码缺陷 |
 | **CrashLoopBackOff** | - | Pod 不断崩溃并重启的状态 | 表面症状,需通过 FEBM 追踪到启动脚本错误、依赖缺失等根因 |
-| **HPA** | Horizontal Pod Autoscaler | 水平 Pod 自动扩缩容器 | 扩容失败可能导致故障,需检查指标采集、资源配额 |
+| **HPA** | Horizontal Pod Autoscaler | 水平 Pod 自动扩缩容器 | 扩容失败可能导致问题,需检查指标采集、资源配额 |
 | **VPA** | Vertical Pod Autoscaler | 垂直 Pod 自动扩缩容器 | 资源调整不当可能触发 OOM,需审查调整策略 |
 | **NetworkPolicy** | - | 网络策略,控制 Pod 间通信 | 错误配置可能导致连接失败,需检查策略规则与实际流量 |
 | **RBAC** | Role-Based Access Control | 基于角色的访问控制 | 权限提升攻击的关键证据来源 |
@@ -166,7 +166,7 @@ k8s_versions:
 |------|---------|------|---------|
 | **GitOps** | - | 以 Git 为单一事实来源的运维模式 | 提供不可变的配置变更审计轨迹 |
 | **Policy as Code** | - | 策略即代码 | OPA, Gatekeeper 实现自动化合规检查 |
-| **Chaos Engineering** | - | 混沌工程,主动注入故障测试系统韧性 | 生成已知故障场景用于取证训练 |
+| **Chaos Engineering** | - | 混沌工程,主动注入问题测试系统韧性 | 生成已知问题场景用于取证训练 |
 | **Shift-Left** | - | 左移,将质量保证活动前移到开发阶段 | 在 CI/CD 中集成取证就绪性检查 |
 | **SOAR** | Security Orchestration, Automation and Response | 安全编排、自动化与响应 | 自动触发取证工作流 |
 | **SIEM** | Security Information and Event Management | 安全信息与事件管理 | 集中存储和分析安全日志 |
@@ -1366,7 +1366,7 @@ kubectl apply -f https://raw.githubusercontent.com/kudig-io/febm-examples/main/o
 - [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|第六章：未来演进方向]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]]
 

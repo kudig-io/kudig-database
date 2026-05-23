@@ -102,7 +102,7 @@ Controller Manager 是集群的“执行官”，负责确保集群的“实际�
 - **简单类比**：它就像一个恒温器的控制器。你设定了 26 度（期望状态），如果感应到是 28 度（实际状态），它就启动空调降温。
 
 ### 👨‍💻 资深专家视角
-- **工作队列（Workqueue）**：深度理解限速队列（Rate Limiting Queue）如何防止因为某个故障资源的反复同步而拖垮整个控制器。
+- **工作队列（Workqueue）**：深度理解限速队列（Rate Limiting Queue）如何防止因为某个问题资源的反复同步而拖垮整个控制器。
 - **Informer 机制**：分析控制器如何通过本地缓存减少对 API Server 的请求压力，以及 `resyncPeriod` 对资源最终一致性的保障。
 - **并发同步**：掌握如何通过 `--concurrent-*-syncs` 参数调优高压力集群下的资源同步吞吐量。
 
@@ -157,7 +157,7 @@ Controller Manager 是集群的“执行官”，负责确保集群的“实际�
 | PV 不绑定 | PVC 长期 Pending | kubectl | `kubectl get pvc` |
 | SA Token 不创建 | Pod 启动失败 | Pod Events | `kubectl describe pod` |
 
-#### 1.1.3 特定控制器故障
+#### 1.1.3 特定控制器问题
 
 | 现象 | 报错信息 | 报错来源 | 查看方式 |
 |------|----------|----------|----------|
@@ -231,12 +231,12 @@ curl -k https://127.0.0.1:10257/metrics | grep workqueue
 | **滚动更新** | 阻塞 | 无法完成 Deployment 更新 |
 | **扩缩容** | 失效 | 手动和自动扩缩容都无法执行 |
 | **服务发现** | 部分影响 | 新 Pod 无法加入 Endpoints |
-| **故障转移** | 失效 | 节点故障后 Pod 无法迁移 |
+| **故障转移** | 失效 | 节点问题后 Pod 无法迁移 |
 | **资源清理** | 累积 | 删除的资源无法清理 |
 
 #### 1.3.3 控制器影响矩阵
 
-| 控制器 | 管理资源 | 故障影响 |
+| 控制器 | 管理资源 | 问题影响 |
 |--------|----------|----------|
 | **Deployment Controller** | Deployment → ReplicaSet | 无法滚动更新 |
 | **ReplicaSet Controller** | ReplicaSet → Pod | 无法维护副本数 |
@@ -321,7 +321,7 @@ Controller Manager 运行多个控制器，负责维护集群期望状态。排�
 - **性能优化**：大规模集群（> 5000 Pod）建议提高并发数至 20-50
 
 ##### 4. Node Controller
-- **职责**：监控节点健康状态，处理节点故障（驱逐 Pod）
+- **职责**：监控节点健康状态，处理节点问题（驱逐 Pod）
 - **关键参数**：
   - `--node-monitor-period`（默认 5s）：节点状态检查间隔
   - `--node-monitor-grace-period`（默认 40s）：节点无响应宽限期
@@ -603,7 +603,7 @@ journalctl -u kube-controller-manager | grep -iE "(sync.*error|failed to sync)" 
 |--------|------|------|
 | **高可用场景** | 多 CM 实例需要 Leader 选举 | 确保只有一个 Leader |
 | **控制器耦合** | 某些控制器相互依赖 | 全面检查 |
-| **资源累积** | CM 故障可能导致资源累积 | 恢复后检查 |
+| **资源累积** | CM 问题可能导致资源累积 | 恢复后检查 |
 | **日志级别** | 高日志级别会影响性能 | 调试完成后恢复 |
 
 ### 🚀 2.5 深度解析（专家专区）
@@ -1062,7 +1062,7 @@ kube-controller-manager --controllers=* --help 2>&1 | grep -A100 "controllers"
 
 ### 案例 1：Endpoint Controller 并发数过低导致服务发现延迟
 
-#### 🎯 故障场景
+#### 🎯 问题场景
 某大型互联网公司，集群规模 500 节点、5000 Service、50000 Pod，在业务高峰期进行大规模发布，导致新 Pod 长时间无法加入 Endpoints，流量无法到达，持续 10 分钟影响用户访问。
 
 #### 🔍 排查过程
@@ -1270,7 +1270,7 @@ kube-controller-manager --controllers=* --help 2>&1 | grep -A100 "controllers"
 
 ### 案例 2：Node Controller 驱逐超时配置不当导致故障恢复慢
 
-#### 🎯 故障场景
+#### 🎯 问题场景
 某金融公司生产集群，某物理机突然掉电，节点 NotReady，但节点上的 Pod 在 5 分钟后才开始迁移，导致业务中断 5+ 分钟，超出 SLA 要求（2 分钟）。
 
 #### 🔍 排查过程
@@ -1302,7 +1302,7 @@ kube-controller-manager --controllers=* --help 2>&1 | grep -A100 "controllers"
 3. **根因分析**：
    - `--pod-eviction-timeout=5m`：节点 NotReady 后 5 分钟才开始驱逐 Pod
    - **设计初衷**：避免网络短暂抖动导致误驱逐
-   - **实际问题**：物理机掉电等永久性故障也要等待 5 分钟，恢复太慢
+   - **实际问题**：物理机掉电等永久性问题也要等待 5 分钟，恢复太慢
    - **时间轴**：
      ```
      08:00:00 节点掉电
@@ -1315,7 +1315,7 @@ kube-controller-manager --controllers=* --help 2>&1 | grep -A100 "controllers"
 #### ⚡ 应急措施
 1. **手动触发 Pod 重建**：
    ```bash
-   # 立即删除故障节点上的 Pod（不等待自动驱逐）
+   # 立即删除问题节点上的 Pod（不等待自动驱逐）
    kubectl get pods -A --field-selector spec.nodeName=node-worker-05 -o json | \
      jq -r '.items[] | "\(.metadata.namespace)/\(.metadata.name)"' | \
      xargs -I {} kubectl delete pod {} --grace-period=0 --force
@@ -1344,7 +1344,7 @@ kube-controller-manager --controllers=* --help 2>&1 | grep -A100 "controllers"
 
 3. **验证新配置**：
    ```bash
-   # 模拟节点故障（在测试环境）
+   # 模拟节点问题（在测试环境）
    kubectl drain test-node --ignore-daemonsets --delete-emptydir-data
    
    # 观察驱逐时间
@@ -1423,7 +1423,7 @@ kube-controller-manager --controllers=* --help 2>&1 | grep -A100 "controllers"
            - name: log
              mountPath: /var/log
    
-   # NPD 检测到硬件故障时立即给节点打 Taint，加速驱逐
+   # NPD 检测到硬件问题时立即给节点打 Taint，加速驱逐
    ```
 
 5. **监控与告警**：
@@ -1452,8 +1452,8 @@ kube-controller-manager --controllers=* --help 2>&1 | grep -A100 "controllers"
 
 #### 💡 经验总结
 - **默认配置过于保守**：5 分钟驱逐超时不适合对 RTO 要求高的业务
-- **一刀切策略**：未区分永久性故障（掉电）和临时性故障（网络抖动）
-- **缺乏主动检测**：依赖被动心跳检测，无法快速识别硬件故障
+- **一刀切策略**：未区分永久性问题（掉电）和临时性问题（网络抖动）
+- **缺乏主动检测**：依赖被动心跳检测，无法快速识别硬件问题
 - **改进方向**：差异化配置、Pod 级别容忍度、NPD 主动检测、PDB 保障高可用
 ```
 

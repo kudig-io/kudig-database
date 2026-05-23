@@ -69,7 +69,7 @@ flowchart TD
   OR0 --> CAT_RESET["C. kubeadm reset 失败"]
   OR0 --> CAT_UPGRADE["D. kubeadm upgrade 失败"]
   OR0 --> CAT_CONFIG["E. kubeadm config 生成错误"]
-  OR0 --> CAT_CERTS["F. 证书相关故障"]
+  OR0 --> CAT_CERTS["F. 证书相关问题"]
 
   %% ======== A. init ========
   A_OR{{OR}}
@@ -135,7 +135,7 @@ flowchart TD
 
 ### A1. Pre-flight 检查失败
 
-**故障现象**: `kubeadm init` 在 pre-flight 检查阶段报错退出
+**问题现象**: `kubeadm init` 在 pre-flight 检查阶段报错退出
 
 **可能原因**：
 
@@ -159,7 +159,7 @@ ss -tlnp | grep -E '6443|10250|10259|10257'  # 检查所需端口
 
 ### A2. 证书生成失败
 
-**故障现象**: init 在 `[ERROR] Certificate etcd/tls` 相关步骤失败
+**问题现象**: init 在 `[ERROR] Certificate etcd/tls` 相关步骤失败
 
 **可能原因**：
 - `/etc/kubernetes/pki` 目录权限异常（需要 root 权限）
@@ -177,7 +177,7 @@ ls -la /etc/kubernetes/pki/
 
 ### A3. etcd 集群初始化失败
 
-**故障现象**: `[etcd] Failed to bring up etcd Cluster` 并超时
+**问题现象**: `[etcd] Failed to bring up etcd Cluster` 并超时
 
 **可能原因**：
 - etcd 端口（2379-2380）被其他进程占用
@@ -197,7 +197,7 @@ iostat -x 1 5
 
 ### A4. 控制平面组件启动失败
 
-**故障现象**: kubeadm init 报告控制平面组件（kube-apiserver等）启动超时
+**问题现象**: kubeadm init 报告控制平面组件（kube-apiserver等）启动超时
 
 **排查步骤**：
 ```bash
@@ -217,7 +217,7 @@ ls /etc/kubernetes/manifests/
 
 ### B1. TLS bootstrapping 失败
 
-**故障现象**: `kubeadm join` 卡在 `[kubelet] Waiting for the kubelet to perform the TLS-bootstrap`
+**问题现象**: `kubeadm join` 卡在 `[kubelet] Waiting for the kubelet to perform the TLS-bootstrap`
 
 **可能原因**：
 
@@ -242,7 +242,7 @@ md5sum /etc/kubernetes/pki/ca.crt
 
 ### B2. kubelet 注册失败
 
-**故障现象**: kubelet 启动但节点状态为 `Unknown`，在 API Server 日志中有 `node not found`
+**问题现象**: kubelet 启动但节点状态为 `Unknown`，在 API Server 日志中有 `node not found`
 
 **可能原因**：
 - 节点 hostname 与集群中已有节点冲突
@@ -263,7 +263,7 @@ sudo kubeadm join ...
 
 ### B3. crictl check 失败
 
-**故障现象**: `kubeadm join` 报错 `[preflight] Running pre-flight checks ` CRI error: container runtime is not running
+**问题现象**: `kubeadm join` 报错 `[preflight] Running pre-flight checks ` CRI error: container runtime is not running
 
 **排查步骤**：
 ```bash
@@ -279,7 +279,7 @@ sudo kubeadm join ...
 
 ### B4. kubelet 启动后节点 NotReady
 
-**故障现象**: join 成功，节点出现在 `kubectl get nodes` 但状态为 NotReady
+**问题现象**: join 成功，节点出现在 `kubectl get nodes` 但状态为 NotReady
 
 **排查步骤**：
 ```bash
@@ -300,7 +300,7 @@ journalctl -u kubelet | grep -i error
 
 ### C1. 目录清理不完整
 
-**故障现象**: reset 后重新 init 报错 "pki directory already exists"
+**问题现象**: reset 后重新 init 报错 "pki directory already exists"
 
 **排查步骤**：
 ```bash
@@ -316,7 +316,7 @@ ls /etc/kubernetes/
 
 ### C2. iptables 规则残留
 
-**故障现象**: reset 后集群 IP 无法释放，重新 init 后 Service 访问异常
+**问题现象**: reset 后集群 IP 无法释放，重新 init 后 Service 访问异常
 
 **排查步骤**：
 ```bash
@@ -333,7 +333,7 @@ ipvsadm -C
 
 ### C3. reset 后重新 join 失败（残留清单不完整）
 
-**故障现象**: `kubeadm reset -f` 后重新 join 报错，原因是某些目录未清理干净
+**问题现象**: `kubeadm reset -f` 后重新 join 报错，原因是某些目录未清理干净
 
 **完整残留清单**：
 ```bash
@@ -389,7 +389,7 @@ hostname
 
 ### C4. etcd defrag 失败（磁盘空间不释放）
 
-**故障现象**: etcd 使用磁盘空间持续增长，即使删除了大量历史数据 `db size` 仍不减少
+**问题现象**: etcd 使用磁盘空间持续增长，即使删除了大量历史数据 `db size` 仍不减少
 
 **可能原因**：
 - etcd 使用 B-tree 存储，删除操作不会立即压缩空间
@@ -426,7 +426,7 @@ du -sh /var/lib/etcd/
 
 ### C5. etcd space quota exceeded（配额耗尽）
 
-**故障现象**: etcd 日志报错 "etcdserver: mvcc: database space exceeded"
+**问题现象**: etcd 日志报错 "etcdserver: mvcc: database space exceeded"
 
 **排查步骤**：
 ```bash
@@ -474,7 +474,7 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 
 ### C6. etcd leadership election 失败
 
-**故障现象**: etcd leader 频繁切换，集群日志显示 "lost leader" 或 "raft term changed"
+**问题现象**: etcd leader 频繁切换，集群日志显示 "lost leader" 或 "raft term changed"
 
 **排查步骤**：
 ```bash
@@ -500,7 +500,7 @@ top
 
 ### C7. kubelet kubeconfig 过期（kubeadm alpha kubeconfig user）
 
-**故障现象**: kubelet 无法与 API Server 通信，错误 "client certificate has expired or is not yet valid"
+**问题现象**: kubelet 无法与 API Server 通信，错误 "client certificate has expired or is not yet valid"
 
 **排查步骤**：
 ```bash
@@ -527,7 +527,7 @@ kubectl get nodes
 
 ### D1. upgrade plan 失败（版本不支持）
 
-**故障现象**: `kubeadm upgrade plan` 报错 "this version is not supported"
+**问题现象**: `kubeadm upgrade plan` 报错 "this version is not supported"
 
 **可能原因**：
 - 跳级升级（如 1.27 → 1.29，直接跳到 1.31）—— 不支持跨两个次版本
@@ -547,7 +547,7 @@ kubeadm upgrade plan --allow-release-missing  # 允许跳过版本检查
 
 ### D2. upgrade apply 失败
 
-**故障现象**: `kubeadm upgrade apply` 在升级控制平面组件时失败
+**问题现象**: `kubeadm upgrade apply` 在升级控制平面组件时失败
 
 **排查步骤**：
 ```bash
@@ -562,7 +562,7 @@ journalctl -u kube-apiserver --since "10 minutes ago" | tail -50
 
 ### D3. etcd 版本不兼容
 
-**故障现象**: 升级完成后 etcd 无法启动，日志显示 "db file is in a higher version"
+**问题现象**: 升级完成后 etcd 无法启动，日志显示 "db file is in a higher version"
 
 **排查步骤**：
 ```bash
@@ -575,7 +575,7 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 ... db info .var/lib/et
 
 ### D4. API Server 启动失败（回滚流程）
 
-**故障现象**: 升级后 kube-apiserver 无法启动
+**问题现象**: 升级后 kube-apiserver 无法启动
 
 **回滚步骤**：
 ```bash
@@ -594,7 +594,7 @@ kubectl get pods -n kube-system | grep apiserver
 
 ### D5. kubelet 版本不匹配
 
-**故障现象**: 升级完成后节点变为 NotReady，kubelet 日志显示 "version mismatch"
+**问题现象**: 升级完成后节点变为 NotReady，kubelet 日志显示 "version mismatch"
 
 **排查步骤**：
 ```bash
@@ -614,7 +614,7 @@ kubeadm upgrade node
 
 ### E1. 生成的 ClusterConfiguration 无法使用
 
-**故障现象**: `kubeadm init --config kubeadm-config.yaml` 报错 "invalid API version"
+**问题现象**: `kubeadm init --config kubeadm-config.yaml` 报错 "invalid API version"
 
 **排查步骤**：
 ```bash
@@ -629,11 +629,11 @@ kubeadm init --dry-run --config=init.yaml
 
 ---
 
-## F. 证书相关故障
+## F. 证书相关问题
 
 ### F1. 证书过期
 
-**故障现象**: API Server 无法访问，日志显示 "certificate has expired"
+**问题现象**: API Server 无法访问，日志显示 "certificate has expired"
 
 **排查步骤**：
 ```bash
@@ -649,7 +649,7 @@ kubeadm alpha certs check-expiration
 
 ### F2. 证书 SAN 不全
 
-**故障现象**: 新增节点 IP 或新 API Server IP 无法通过 TLS 验证
+**问题现象**: 新增节点 IP 或新 API Server IP 无法通过 TLS 验证
 
 **排查步骤**：
 ```bash
@@ -663,7 +663,7 @@ systemctl restart kubelet
 
 ### F3. 外部 etcd 证书错误
 
-**故障现象**: kubeadm init 报错 "无法连接到外部 etcd 集群"
+**问题现象**: kubeadm init 报错 "无法连接到外部 etcd 集群"
 
 **排查步骤**：
 ```bash

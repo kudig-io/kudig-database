@@ -587,7 +587,7 @@ FEBM → 经验主义 (Empiricism)
 |------|:---:|:---:|
 | **推理方向** | 自上而下：从假设到验证 | 自下而上：从证据到结论 |
 | **起点** | 预定义的顶事件和故障树模型 | 实际观察到的数字证据 |
-| **对未知的态度** | 无法处理模型外的故障 | 天然适应未预期的事件 |
+| **对未知的态度** | 无法处理模型外的问题 | 天然适应未预期的事件 |
 | **数学基础** | 布尔代数、概率论、最小割集 | 归纳逻辑、统计推断、贝叶斯推理 |
 | **动态适应性** | 弱：静态模型需人工维护 | 强：证据驱动，自适应 |
 | **核心假设** | 系统架构稳定、故障模式可枚举 | 每次接触留下痕迹（洛卡德原理） |
@@ -663,7 +663,7 @@ Kubernetes 的声明式管理和控制器调和机制确保了自愈能力，但
 FTA 的困境:
   静态快照可能迅速过时
   → 控制器不断调和期望状态和实际状态
-  → 故障可能在自愈过程中被掩盖
+  → 问题可能在自愈过程中被掩盖
   → 模型无法反映"自愈失败"的复杂场景
 
 FEBM 的机遇:
@@ -710,9 +710,9 @@ FEBM 和 FTA 并非互斥的方法论。在成熟的运维实践中，两者形�
 | 维度 | 优先选用 FTA | 优先选用 FEBM | 融合使用 |
 |------|:---:|:---:|:---:|
 | 新集群架构评审 | ✓ | | |
-| 生产环境实时故障 | | ✓ | |
+| 生产环境实时问题 | | ✓ | |
 | 安全事件调查 | | ✓ | |
-| 复杂故障深度 RCA | | | ✓ |
+| 复杂问题深度 RCA | | | ✓ |
 | etcd 集群可靠性设计 | ✓ | | |
 | 合规审计 | | ✓ | |
 | 持续可靠性工程 | | | ✓ |
@@ -781,7 +781,7 @@ FEBM 方法论明确识别并防范运维分析中常见的认知偏差：
 - [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|第六章：未来演进方向]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix.md|第七章:附录]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]]
 

@@ -43,10 +43,10 @@ created: "2026-05-23"
 
 ## 硬件故障排查
 
-| 组件 | 常见故障 | 排查工具 |
+| 组件 | 常见问题 | 排查工具 |
 |------|----------|----------|
 | CPU | 过热、锁死、软错误 | `lscpu`, `mpstat`, `perf` |
-| 内存 | ECC 错误、DIMM 故障 | `edac-util`, `mcelog`, `dmidecode` |
+| 内存 | ECC 错误、DIMM 问题 | `edac-util`, `mcelog`, `dmidecode` |
 | 磁盘 | 坏道、SMART 预警 | `smartctl`, `iostat`, `blktrace` |
 | 网卡 | CRC 错误、丢包 | `ethtool`, `tcpdump`, `ss` |
 

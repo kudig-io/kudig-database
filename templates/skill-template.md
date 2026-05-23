@@ -85,17 +85,17 @@ cross_refs:
 
 | 类别 | 前缀 | 说明 | 示例 |
 |------|------|------|------|
-| Node | SKILL-NODE-xxx | 节点级故障 | Node NotReady |
-| Pod | SKILL-POD-xxx | Pod 生命周期故障 | CrashLoop、Pending |
-| Network | SKILL-NET-xxx | 网络与连通性故障 | DNS、Service、Ingress |
-| Storage | SKILL-STORE-xxx | 存储与持久化故障 | PVC、CSI |
-| Security | SKILL-SEC-xxx | 安全与权限故障 | RBAC、Certificate、Incident |
-| Workload | SKILL-WORK-xxx | 工作负载管理故障 | Deployment Rollout |
-| Image | SKILL-IMAGE-xxx | 镜像管理故障 | ImagePull |
-| ControlPlane | SKILL-CP-xxx | 控制平面故障 | etcd、API Server |
-| Scaling | SKILL-SCALE-xxx | 弹性伸缩故障 | HPA、VPA、CA |
-| Configuration | SKILL-CONFIG-xxx | 配置管理故障 | ConfigMap、Secret |
-| Observability | SKILL-MONITOR-xxx / SKILL-LOG-xxx | 可观测性故障 | Prometheus、日志 |
+| Node | SKILL-NODE-xxx | 节点级问题 | Node NotReady |
+| Pod | SKILL-POD-xxx | Pod 生命周期问题 | CrashLoop、Pending |
+| Network | SKILL-NET-xxx | 网络与连通性问题 | DNS、Service、Ingress |
+| Storage | SKILL-STORE-xxx | 存储与持久化问题 | PVC、CSI |
+| Security | SKILL-SEC-xxx | 安全与权限问题 | RBAC、Certificate、Incident |
+| Workload | SKILL-WORK-xxx | 工作负载管理问题 | Deployment Rollout |
+| Image | SKILL-IMAGE-xxx | 镜像管理问题 | ImagePull |
+| ControlPlane | SKILL-CP-xxx | 控制平面问题 | etcd、API Server |
+| Scaling | SKILL-SCALE-xxx | 弹性伸缩问题 | HPA、VPA、CA |
+| Configuration | SKILL-CONFIG-xxx | 配置管理问题 | ConfigMap、Secret |
+| Observability | SKILL-MONITOR-xxx / SKILL-LOG-xxx | 可观测性问题 | Prometheus、日志 |
 | Performance | SKILL-PERF-xxx | 性能瓶颈 | CPU/Memory/IO |
 
 ---
@@ -149,7 +149,7 @@ cross_refs:
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径：
+按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: [目的]
 ```bash
@@ -331,7 +331,7 @@ kubectl ...
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 - [ ] 条件 1
 - [ ] 条件 2
 - [ ] 条件 3
@@ -361,7 +361,7 @@ kubectl ...
 
 ```
 【{severity}】{skill_name} - {cluster_name}
-- 故障概述: {summary}
+- 问题概述: {summary}
 - 影响范围: {impact}
 - 已完成诊断: {completed_steps}
 - 初步发现: {findings}
@@ -432,7 +432,7 @@ kubectl ...
 
 ## 11. 云厂商特异性
 
-当故障场景涉及云厂商特定行为时，本节提供平台差异化的诊断与修复指导。
+当问题场景涉及云厂商特定行为时，本节提供平台差异化的诊断与修复指导。
 
 ### 11.1 适用场景
 

@@ -96,7 +96,7 @@ prerequisites:
 | 证书验证失败 | `x509: certificate signed by unknown authority` | kubectl 客户端 | 直接命令行输出 |
 | 证书过期 | `x509: certificate has expired or is not yet valid` | kubectl 客户端 | 直接命令行输出 |
 | 服务端内部错误 | `Internal error occurred: the server is currently unable to handle the request` | API Server | kubectl 输出或 API 响应 |
-| 负载均衡器故障 | `502 Bad Gateway` | Load Balancer | 客户端响应 |
+| 负载均衡器问题 | `502 Bad Gateway` | Load Balancer | 客户端响应 |
 | API Server 内存溢出 | `OOMKilled` | Kubernetes | Pod 状态或日志 |
 | 请求队列积压 | `context deadline exceeded` | 客户端 | kubectl 命令输出 |
 
@@ -109,7 +109,7 @@ prerequisites:
 | 限流触发 | `429 Too Many Requests` | API Server | 客户端响应码 |
 | 优先级调度延迟 | `request is being throttled by APF` | API Server 日志 | API Server 日志 |
 
-#### 1.1.3 API Server 间歇性故障
+#### 1.1.3 API Server 间歇性问题
 
 | 现象 | 报错信息 | 报错来源 | 查看方式 |
 |------|----------|----------|----------|
@@ -187,7 +187,7 @@ curl -k https://localhost:6443/metrics | grep apiserver_request
 | **服务发现** | 部分影响 | 新的 Endpoints 无法更新，CoreDNS 无法感知变化 |
 | **监控告警** | 可能失效 | 依赖 API 的监控系统无法采集数据 |
 | **CI/CD 流程** | 中断 | 自动化部署流程无法执行 |
-| **故障自愈** | 失效 | 节点故障后 Pod 无法重新调度 |
+| **故障自愈** | 失效 | 节点问题后 Pod 无法重新调度 |
 | **证书轮转** | 中断 | 证书到期后无法自动更新 |
 | **审计日志** | 丢失 | 无法记录 API 操作审计日志 |
 
@@ -195,7 +195,7 @@ curl -k https://localhost:6443/metrics | grep apiserver_request
 
 ##### 业务连续性影响矩阵
 
-| 故障类型 | RTO(恢复时间目标) | RPO(数据丢失目标) | 业务影响等级 | 处理优先级 |
+| 问题类型 | RTO(恢复时间目标) | RPO(数据丢失目标) | 业务影响等级 | 处理优先级 |
 |----------|-------------------|-------------------|--------------|------------|
 | **完全不可用** | &lt; 5分钟 | 0 | P0-紧急 | 立即处理 |
 | **部分功能受限** | &lt; 30分钟 | 0 | P1-高 | 快速响应 |
@@ -206,7 +206,7 @@ curl -k https://localhost:6443/metrics | grep apiserver_request
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                    API Server 故障影响传播链                                  │
+│                    API Server 问题影响传播链                                  │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
 │   API Server 不可用                                                          │
@@ -541,7 +541,7 @@ kube-apiserver --help | grep -A2 "<flag-name>"
 
 ### 🚀 2.5 深度解析（专家专区）
 
-#### 2.5.1 API 聚合器（Aggregation Layer）故障
+#### 2.5.1 API 聚合器（Aggregation Layer）问题
 当使用了 Metrics Server 或 Prometheus Adapter 等扩展 API 时，如果这些 Aggregated API Server 响应极慢，会导致主 API Server 的某些请求（如 `kubectl get --all-namespaces`）整体超时。
 - **排查方法**：`kubectl get apiservice` 检查状态不为 `Available` 的服务。
 - **专家提示**：API Server 会串行处理某些聚合请求，一个坏掉的扩展可能会拖慢全局。
@@ -684,7 +684,7 @@ kubectl get nodes
 6. 生产环境建议配置证书自动轮转
 ```
 
-### 3.3 etcd 连接故障
+### 3.3 etcd 连接问题
 
 #### 3.3.1 解决步骤
 
@@ -891,11 +891,11 @@ curl http://localhost:8080/nginx_status
 ip addr show | grep <vip>
 systemctl status keepalived
 
-# 步骤 4：如果某个实例故障，手动从 LB 摘除
+# 步骤 4：如果某个实例问题，手动从 LB 摘除
 # haproxy 示例：
 echo "disable server kubernetes/master1" | socat unix-connect:/var/lib/haproxy/stats stdio
 
-# 步骤 5：修复故障实例后重新加入
+# 步骤 5：修复问题实例后重新加入
 echo "enable server kubernetes/master1" | socat unix-connect:/var/lib/haproxy/stats stdio
 
 # 步骤 6：验证集群状态
@@ -918,7 +918,7 @@ kubectl get --raw /healthz
 ⚠️  安全生产风险提示：
 1. 高可用集群至少保持 2 个 API Server 实例在线
 2. 故障切换期间避免执行大规模变更操作
-3. 修复故障实例前先确认数据一致性
+3. 修复问题实例前先确认数据一致性
 4. LB 健康检查间隔建议不超过 10 秒
 5. 考虑配置 API Server 的优雅终止时间
 6. 定期演练故障切换流程
@@ -1015,7 +1015,7 @@ kubectl get pods -A
 
 ### 案例 1：大促期间 API Server QPS 骤增导致集群瘫痪
 
-#### 🎯 故障场景
+#### 🎯 问题场景
 某电商公司在双十一大促期间，集群规模 1000+ 节点，运行 10000+ Pod。凌晨 0 点流量峰值时，所有 `kubectl` 命令超时，监控告警风暴，业务 Pod 无法扩容，损失预估数百万。
 
 #### 🔍 排查过程
@@ -1103,7 +1103,7 @@ kubectl get pods -A
 
 ### 案例 2：证书批量过期导致集群完全不可用
 
-#### 🎯 故障场景
+#### 🎯 问题场景
 某金融公司生产集群，周一早上 8 点突然所有 `kubectl` 命令报 `x509: certificate has expired`，所有自动化运维中断，业务 Pod 无法重启，持续 2 小时才恢复。
 
 #### 🔍 排查过程
@@ -1194,7 +1194,7 @@ kubectl get pods -A
        description: "证书 {{ $labels.name }} 将在 {{ $value | humanizeDuration }} 后过期"
    ```
 
-3. **定期演练**：每季度模拟证书过期故障，验证恢复流程。
+3. **定期演练**：每季度模拟证书过期问题，验证恢复流程。
 
 #### 💡 经验总结
 - **自动化缺失**：依赖手动续签，人为疏忽不可避免
@@ -1206,8 +1206,8 @@ kubectl get pods -A
 
 ### 案例 3：etcd 慢查询拖垮 API Server
 
-#### 🎯 故障场景
-某互联网公司，集群规模 500 节点、5000 Pod，用户反馈 `kubectl get pods` 经常超时 30s+，但偶尔又能秒返，影响运维效率和故障响应速度。
+#### 🎯 问题场景
+某互联网公司，集群规模 500 节点、5000 Pod，用户反馈 `kubectl get pods` 经常超时 30s+，但偶尔又能秒返，影响运维效率和问题响应速度。
 
 #### 🔍 排查过程
 1. **初步定位**：
@@ -1335,7 +1335,7 @@ kubectl get pods -A
 
 ### 案例 4：Webhook 自杀效应导致集群无法操作
 
-#### 🎯 故障场景
+#### 🎯 问题场景
 某科技公司部署了一个自研的准入控制 Webhook，用于校验 Pod 镜像来源。某天 Webhook Pod 因 OOM 崩溃，之后所有 `kubectl apply` 都失败，甚至无法删除该 Webhook 配置本身，陷入"死锁"。
 
 #### 🔍 排查过程
@@ -1426,12 +1426,12 @@ kubectl get pods -A
 
 3. **应急预案**：
    - 文档化跳过 Webhook 的恢复流程
-   - 定期演练 Webhook 故障场景
+   - 定期演练 Webhook 问题场景
    - 准备备用管理员 kubeconfig（绕过 Webhook）
 
 #### 💡 经验总结
 - **配置不当**：`failurePolicy: Fail` + 规则范围过大 = 灾难
-- **单点故障**：Webhook 服务无高可用保障
+- **单点问题**：Webhook 服务无高可用保障
 - **测试不足**：未模拟 Webhook 不可用场景
 - **改进方向**：防御性配置、高可用部署、定期演练、监控告警
 

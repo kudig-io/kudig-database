@@ -1,5 +1,5 @@
 ---
-title: 第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册
+title: 第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册
 description: '**目标读者**：需要在现有 Kubernetes 集群中快速落地 FEBM 方法论的 SRE 和安全团队'
 category: febm
 tags:
@@ -22,13 +22,13 @@ audience:
 - 技术支持
 estimated_read_time: 5min
 intent_queries:
-- 第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册 是什么
-- 如何 第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册
+- 第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册 是什么
+- 如何 第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册
 trigger_keywords:
 - 第八章：FEBM
 - 生产环境快速启动与
 - Kubernetes
-- 故障取证手册
+- 问题取证手册
 - febm
 prerequisites:
 - kubectl-basics
@@ -47,10 +47,10 @@ prerequisites:
 - tracing-basics
 ---
 
-# 第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册
+# 第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册
 
 > **目标读者**：需要在现有 Kubernetes 集群中快速落地 FEBM 方法论的 SRE 和安全团队  
-> **交付成果**：7 天内建立可运行的 FEBM 取证能力 + 6 个常见故障场景的标准化 Runbook
+> **交付成果**：7 天内建立可运行的 FEBM 取证能力 + 6 个常见问题场景的标准化 Runbook
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -59,7 +59,7 @@ prerequisites:
 │  Day 1-2: 证据采集层 (Falco + K8s Audit)                        │
 │  Day 3-4: 证据存储层 (Loki + Prometheus)                        │
 │  Day 5-6: 证据关联层 (Grafana + Alerting)                       │
-│  Day 7:   取证验证 (模拟故障验证)                                │
+│  Day 7:   取证验证 (模拟问题验证)                                │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -693,7 +693,7 @@ Prometheus 调优:
 │ ✅ 证据采集层: Falco (运行时) + K8s Audit (API)                 │
 │ ✅ 证据存储层: Loki (日志) + Prometheus (指标)                  │
 │ ✅ 证据关联层: Grafana (可视化) + Falcosidekick (告警)          │
-│ ✅ 端到端验证: 模拟故障 → 证据采集 → 告警触发                   │
+│ ✅ 端到端验证: 模拟问题 → 证据采集 → 告警触发                   │
 ├─────────────────────────────────────────────────────────────────┤
 │ 总资源开销:                                                      │
 │   - 内存: ~5GB (集群级)                                          │
@@ -701,9 +701,9 @@ Prometheus 调优:
 │   - CPU: ~1 Core (集群级)                                        │
 ├─────────────────────────────────────────────────────────────────┤
 │ 下一步:                                                          │
-│   1. 导入预定义的故障取证 Runbook (第 8.3 节)                   │
+│   1. 导入预定义的问题取证 Runbook (第 8.3 节)                   │
 │   2. 配置 FEBM KPI 仪表板 (第 8.5 节)                            │
-│   3. 进行首次真实故障取证演练                                    │
+│   3. 进行首次真实问题取证演练                                    │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -973,7 +973,7 @@ NTP_CONFIG
 
 ---
 
-## 8.3 Kubernetes 常见故障 FEBM 取证 Runbook
+## 8.3 Kubernetes 常见问题 FEBM 取证 Runbook
 
 ### 8.3.1 Pod OOMKilled 取证 Runbook
 
@@ -1841,7 +1841,7 @@ logcli query '{app="falco",k8s_node_name="<NODE_NAME>"}' --since=1h \
    └─► 检查: 容器运行时状态
          │
          ├─► containerd/docker 进程无响应
-         │    └─► 根因: 容器运行时故障
+         │    └─► 根因: 容器运行时问题
          │        证据:
          │          - crictl ps 超时或报错
          │          - containerd 进程 CPU 100% 或僵死
@@ -1851,7 +1851,7 @@ logcli query '{app="falco",k8s_node_name="<NODE_NAME>"}' --since=1h \
          │          2. 检查 /var/lib/containerd 磁盘空间
          │          3. 升级 containerd 版本
          │
-         └─► CNI 插件故障
+         └─► CNI 插件问题
               └─► 根因: 网络插件错误
                   证据:
                     - pod 状态 ContainerCreating (卡住)
@@ -2074,7 +2074,7 @@ sum(rate(container_cpu_cfs_throttled_seconds_total{pod=~"<POD_PATTERN>"}[5m])) b
 │              │ DNS 解析延迟           │ query_name, latency  │ CoreDNS│
 ├────────────────────────────────────────────────────────────────────────┤
 │ 系统层       │ CPU 节流事件           │ pod_name, timestamp  │ Prom   │
-│              │ 内存页故障             │ pod_name, timestamp  │ Falco  │
+│              │ 内存页问题             │ pod_name, timestamp  │ Falco  │
 │              │ 文件描述符耗尽         │ pod_name, fd_count   │ Node Ex│
 ├────────────────────────────────────────────────────────────────────────┤
 │ Kubernetes层 │ Endpoint 变更事件      │ service, timestamp   │ K8s API│
@@ -2761,11 +2761,11 @@ spec:
 │               FTA vs FEBM 决策流程图                             │
 └─────────────────────────────────────────────────────────────────┘
 
-                      [故障发生]
+                      [问题发生]
                            │
                            ▼
                  ┌──────────────────┐
-                 │ 是否是已知故障  │
+                 │ 是否是已知问题  │
                  │ 模式？          │
                  └────┬─────────┬───┘
                       │Yes      │No
@@ -2801,7 +2801,7 @@ spec:
 
 1. 优先使用 FTA（快速响应）:
    - 告警匹配已知模式
-   - 症状与历史故障相似
+   - 症状与历史问题相似
    - 需要快速恢复服务（MTTR 优先）
    - 例子: "Pod OOMKilled" → FTA 快速判断是内存泄漏还是配置不当
 
@@ -3009,7 +3009,7 @@ FEBM Runbook 归档:
 - 事件历史（kubectl get events）
 
 **P1 (高价值)**:
-- Prometheus 指标趋势（故障前后 1 小时）
+- Prometheus 指标趋势（问题前后 1 小时）
 - K8s 审计日志（配置变更）
 - 网络连通性测试
 - 资源使用率（CPU/内存/磁盘）
@@ -3022,7 +3022,7 @@ FEBM Runbook 归档:
 
 ## 3. 工具选择矩阵
 
-| 故障类型             | 首选 FTA | 首选 FEBM | 联合使用 |
+| 问题类型             | 首选 FTA | 首选 FEBM | 联合使用 |
 |---------------------|----------|-----------|----------|
 | Pod CrashLoop       | ✓        |           |          |
 | OOMKilled           | ✓        |           | ✓        |
@@ -3040,14 +3040,14 @@ FEBM Runbook 归档:
 - 现有 FTA 节点的准确率 < 80%
 
 **FEBM Runbook 更新触发条件**:
-- 新类型故障首次发生
+- 新类型问题首次发生
 - 新工具/命令加入工具栈
 - 合规要求变更
 
 **知识共享机制**:
-- 每次重大故障后 48 小时内完成 Postmortem
+- 每次重大问题后 48 小时内完成 Postmortem
 - 每月团队分享会，回顾典型案例
-- 维护"故障知识图谱"（故障→根因→证据的关联关系）
+- 维护"问题知识图谱"（问题→根因→证据的关联关系）
 ```
 
 ---
@@ -3062,13 +3062,13 @@ FEBM 成熟度 KPI 体系:
 1. 响应效率指标 (Response Efficiency Metrics):
    
    MTTR (Mean Time To Repair):
-     定义: 从故障发生到完全恢复的平均时间
+     定义: 从问题发生到完全恢复的平均时间
      目标值:
        - 基础级 (L1): < 60 分钟
        - 进阶级 (L2): < 30 分钟
        - 专家级 (L3): < 15 分钟
      计算公式: |
-       sum(故障恢复时间) / count(故障次数)
+       sum(故障恢复时间) / count(问题次数)
      Prometheus 查询: |
        avg_over_time(
          (time() - alert_start_time{severity="critical"})
@@ -3076,7 +3076,7 @@ FEBM 成熟度 KPI 体系:
        )
    
    MTTD (Mean Time To Detect):
-     定义: 从故障发生到被检测到的平均时间
+     定义: 从问题发生到被检测到的平均时间
      目标值: < 2 分钟
      Prometheus 查询: |
        histogram_quantile(0.95,
@@ -3113,10 +3113,10 @@ FEBM 成熟度 KPI 体系:
 3. 诊断准确性指标 (Diagnostic Accuracy Metrics):
    
    根因判断准确率 (Root Cause Accuracy):
-     定义: 首次判断正确的根因 / 总故障数
+     定义: 首次判断正确的根因 / 总问题数
      目标值: > 85%
      计算: |
-       (首次诊断正确次数 / 总故障次数) × 100%
+       (首次诊断正确次数 / 总问题次数) × 100%
    
    误报率 (False Positive Rate):
      定义: 误触发的告警 / 总告警数
@@ -3126,25 +3126,25 @@ FEBM 成熟度 KPI 体系:
        sum(alertmanager_notifications_total)
    
    漏报率 (False Negative Rate):
-     定义: 未被检测到的实际故障 / 实际故障总数
+     定义: 未被检测到的实际问题 / 实际问题总数
      目标值: < 2%
-     计算: 通过用户报告发现的故障 / 全部故障
+     计算: 通过用户报告发现的问题 / 全部问题
 
 4. 自动化程度指标 (Automation Metrics):
    
    自动取证率 (Auto-Forensics Rate):
-     定义: 自动执行 Runbook 的故障 / 总故障数
+     定义: 自动执行 Runbook 的问题 / 总问题数
      目标值: > 70%
      计算: |
-       (自动触发脚本的故障数 / 总故障数) × 100%
+       (自动触发脚本的问题数 / 总问题数) × 100%
    
    自动修复率 (Auto-Remediation Rate):
-     定义: 无需人工干预自动恢复的故障 / 总故障数
+     定义: 无需人工干预自动恢复的问题 / 总问题数
      目标值: > 30% (L2), > 50% (L3)
      示例: HPA 自动扩容、Pod 自动重启
    
    Runbook 覆盖率 (Runbook Coverage):
-     定义: 有标准 Runbook 的故障类型 / 已知故障类型
+     定义: 有标准 Runbook 的问题类型 / 已知问题类型
      目标值: > 95%
      计算: count(distinct runbook_id) / count(distinct incident_type)
 ```
@@ -3213,7 +3213,7 @@ FEBM 成熟度 KPI 体系:
       },
       {
         "id": 3,
-        "title": "证据完整度 (按故障类型)",
+        "title": "证据完整度 (按问题类型)",
         "type": "table",
         "targets": [
           {
@@ -3229,7 +3229,7 @@ FEBM 成熟度 KPI 体系:
               "excludeByName": {},
               "indexByName": {},
               "renameByName": {
-                "incident_type": "故障类型",
+                "incident_type": "问题类型",
                 "Value": "完整度 (%)"
               }
             }
@@ -3337,7 +3337,7 @@ FEBM 成熟度 KPI 体系:
       },
       {
         "id": 8,
-        "title": "故障类型分布 (Top 10)",
+        "title": "问题类型分布 (Top 10)",
         "type": "bargauge",
         "targets": [
           {
@@ -3390,7 +3390,7 @@ sum(rate(runbook_auto_executed_total[24h]))
 sum(rate(incident_total[24h])) 
 * 100
 
-# 5. 告警噪音比 (告警数 vs 真实故障数)
+# 5. 告警噪音比 (告警数 vs 真实问题数)
 sum(increase(alertmanager_alerts_received_total[24h])) 
 / 
 sum(increase(incident_confirmed_total[24h]))
@@ -3440,10 +3440,10 @@ sum(evidence_correlation_attempts_total)
 - ✅ MTTR 从 45 分钟降至 32 分钟 (降低 29%)
 - ✅ 自动取证率达到 75% (目标 70%)
 - ⚠️ 根因判断准确率 82% (未达标，目标 85%)
-- ❌ 新增 3 类故障未覆盖 Runbook
+- ❌ 新增 3 类问题未覆盖 Runbook
 
-### 故障概览
-- 总故障数: 28 起
+### 问题概览
+- 总问题数: 28 起
   - P0 (Critical): 3 起
   - P1 (High): 12 起
   - P2 (Medium): 13 起
@@ -3504,7 +3504,7 @@ sum(evidence_correlation_attempts_total)
 **分析**:
 - 自动取证率达标，脚本化效果显著
 - 自动修复率接近目标，HPA 和自动重启占主要比例
-- Runbook 覆盖率不足，新增 3 类故障需补充 Runbook
+- Runbook 覆盖率不足，新增 3 类问题需补充 Runbook
 
 ---
 
@@ -3616,14 +3616,14 @@ sum(evidence_correlation_attempts_total)
 
 ## 7. 附录
 
-### 附录 A: 本月所有故障清单
+### 附录 A: 本月所有问题清单
 (省略详细列表...)
 
 ### 附录 B: 证据采集质量抽查
 (省略详细数据...)
 
 ### 附录 C: 下月 OKR
-- Objective 1: 提升故障响应速度
+- Objective 1: 提升问题响应速度
   - KR1: MTTR < 30min (当前 32min)
   - KR2: 自动取证率 > 80% (当前 75%)
   
@@ -4014,7 +4014,7 @@ echo "报告生成时间: $(date)"
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│        第八章：FEBM 生产环境快速启动与 K8s 故障取证手册        │
+│        第八章：FEBM 生产环境快速启动与 K8s 问题取证手册        │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
 │  8.1 FEBM 第一周行动清单                                        │
@@ -4030,7 +4030,7 @@ echo "报告生成时间: $(date)"
 │      ├─ 资源开销明细 (~5GB 内存, ~160GB 存储)                  │
 │      └─ NTP 时钟同步验证 (关键！)                               │
 │                                                                  │
-│  8.3 Kubernetes 常见故障 FEBM 取证 Runbook                      │
+│  8.3 Kubernetes 常见问题 FEBM 取证 Runbook                      │
 │      ├─ 8.3.1 Pod OOMKilled (内存泄漏 vs 配置不当)             │
 │      ├─ 8.3.2 Pod CrashLoopBackOff (8 种常见根因)              │
 │      ├─ 8.3.3 Node NotReady (kubelet/网络/资源)                │
@@ -4058,7 +4058,7 @@ echo "报告生成时间: $(date)"
 
 关键交付物:
   ✅ 7 天部署计划 (从零到生产可用)
-  ✅ 6 个常见故障的标准化 Runbook (含自动化脚本)
+  ✅ 6 个常见问题的标准化 Runbook (含自动化脚本)
   ✅ FTA + FEBM 联合诊断方法论
   ✅ 完整的 KPI 度量体系和 Grafana 仪表板
   ✅ 等保 2.0 和 SOC 2 合规映射
@@ -4105,7 +4105,7 @@ echo "报告生成时间: $(date)"
 │  [第七章] FEBM 安全合规与审计                                    │
 │     └─ 等保 2.0、SOC 2、GDPR 合规要求                           │
 │                                                                  │
-│  ★ [第八章] FEBM 生产环境快速启动与 K8s 故障取证手册 (本章)    │
+│  ★ [第八章] FEBM 生产环境快速启动与 K8s 问题取证手册 (本章)    │
 │     └─ 7 天部署计划 + 6 个 Runbook + KPI 仪表板                 │
 │                                                                  │
 │  [第九章] FEBM 高级主题 (规划中)                                │
@@ -4127,7 +4127,7 @@ echo "报告生成时间: $(date)"
 专家 (架构师/合规官):
   第七章 → 第八章 8.6 → 第三章 → 第五章
 
-快速上手 (紧急故障):
+快速上手 (紧急问题):
   第八章 8.3 (Runbook) → 第六章 8.4 (联合诊断)
 ```
 
@@ -4335,9 +4335,9 @@ kubectl port-forward -n falco svc/falco-falcosidekick-ui 2802:2802
 
 <div align="center">
 
-**FEBM 生产环境快速启动与 Kubernetes 故障取证手册**
+**FEBM 生产环境快速启动与 Kubernetes 问题取证手册**
 
-*让每一次故障都成为能力提升的机会*
+*让每一次问题都成为能力提升的机会*
 
 📅 最后更新: 2024-03  
 📧 反馈与建议: [GitHub Issues](https://github.com/your-repo/febm-handbook/issues)  

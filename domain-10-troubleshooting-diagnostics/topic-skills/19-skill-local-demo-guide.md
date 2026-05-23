@@ -126,7 +126,7 @@ bash run-skill-demo.sh
 bash run-skill-demo.sh 1    # 节点 Cordon
 bash run-skill-demo.sh 2    # Pod CrashLoop
 bash run-skill-demo.sh 3    # Pod Pending
-bash run-skill-demo.sh 4    # DNS 故障
+bash run-skill-demo.sh 4    # DNS 问题
 bash run-skill-demo.sh 5    # Service 无 Endpoints
 
 # 顺序运行所有场景
@@ -159,7 +159,7 @@ bash teardown.sh
 | 验证 | Section 7 (V1-V4) | `get node`, `get lease` | Ready + 无 taint |
 
 **学习要点**: 
-- RC-012 的 `is_fault: false` — 这不是故障，是人为操作
+- RC-012 的 `is_fault: false` — 这不是问题，是人为操作
 - 最简单的修复路径：从 cordon 到 uncordon 的闭环
 
 ---
@@ -202,7 +202,7 @@ bash teardown.sh
 
 ---
 
-### 场景 04: DNS 解析故障 (SKILL-NET-001)
+### 场景 04: DNS 解析问题 (SKILL-NET-001)
 
 **故障注入**: CoreDNS 缩容到 0 副本
 
@@ -217,7 +217,7 @@ bash teardown.sh
 | 修复 | scale CoreDNS 回原始副本数 |
 
 **学习要点**: 
-- DNS 故障爆炸半径最大，默认 P0
+- DNS 问题爆炸半径最大，默认 P0
 - kube-dns Endpoints 为空是快速定位的关键信号
 
 ---

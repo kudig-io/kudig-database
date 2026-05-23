@@ -1393,22 +1393,22 @@ execute_backup_during_drill() {
     log "✓ 备份执行完成"
 }
 
-# 模拟故障
+# 模拟问题
 simulate_failure() {
     local failure_type=${1:-"node"}
     
-    log "模拟${failure_type}故障..."
+    log "模拟${failure_type}问题..."
     
     case $failure_type in
         "node")
-            # 模拟节点故障
+            # 模拟节点问题
             local target_node=$(kubectl get nodes -o jsonpath='{.items[0].metadata.name}')
-            log "模拟节点故障: $target_node"
-            # 这里可以集成具体的节点故障模拟工具
+            log "模拟节点问题: $target_node"
+            # 这里可以集成具体的节点问题模拟工具
             ;;
         "control-plane")
-            # 模拟控制平面故障
-            log "模拟控制平面组件故障"
+            # 模拟控制平面问题
+            log "模拟控制平面组件问题"
             systemctl stop kube-apiserver
             systemctl stop etcd
             ;;
@@ -1419,7 +1419,7 @@ simulate_failure() {
             ;;
     esac
     
-    log "✓ 故障模拟完成"
+    log "✓ 问题模拟完成"
 }
 
 # 执行恢复
@@ -1502,7 +1502,7 @@ generate_drill_report() {
 
 1. **环境准备**: ✓ 完成
 2. **备份执行**: ✓ 完成  
-3. **故障模拟**: ✓ 完成
+3. **问题模拟**: ✓ 完成
 4. **恢复执行**: ✓ 完成
 5. **结果验证**: $([ $drill_result -eq 0 ] && echo "✓" || echo "✗") 完成
 
@@ -1610,9 +1610,9 @@ main_drill
 
 ### 阶段1: 环境准备 (预计时间: 15分钟)
 
-1. **隔离故障环境**
+1. **隔离问题环境**
    ```bash
-   # 标记故障节点为不可调度
+   # 标记问题节点为不可调度
    kubectl cordon <faulty-node>
    
    # 如果需要，驱逐节点上的Pod
@@ -1750,8 +1750,8 @@ main_drill
 ## 后续行动
 
 ### 1. 根因分析
-- [ ] 收集故障期间的日志和指标
-- [ ] 分析故障根本原因
+- [ ] 收集问题期间的日志和指标
+- [ ] 分析问题根本原因
 - [ ] 编写事故报告
 
 ### 2. 系统加固

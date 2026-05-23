@@ -711,7 +711,7 @@ class PatternLibraryManager:
                 
     def suggest_new_pattern(self, symptoms, fta_path, evidence):
         """
-        从实际故障中学习，提议新模式
+        从实际问题中学习，提议新模式
         (由 FTA 学习引擎调用)
         """
         

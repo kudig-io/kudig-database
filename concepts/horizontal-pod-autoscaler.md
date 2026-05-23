@@ -5,6 +5,7 @@ tags: ["core-concept", "domain-02", "visibility/public"]
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+status: reviewed
 ---
 
 # Horizontal Pod Autoscaler
@@ -37,7 +38,7 @@ desiredReplicas = ceil[currentReplicas * (currentMetricValue / desiredMetricValu
 
 例如，当前 4 个副本，CPU 平均利用率 80%，目标 50%，则 `desiredReplicas = ceil[4 * (80/50)] = ceil[6.4] = 7`。
 
-当存在多条指标规则时，HPA 取各指标计算出的 `desiredReplicas` 中的**最大值**，确保所有指标都得到满足。若任一指标无法获取（如 Metrics Server 故障），HPA 将回退到上一次已知值，不会贸然缩容。
+当存在多条指标规则时，HPA 取各指标计算出的 `desiredReplicas` 中的**最大值**，确保所有指标都得到满足。若任一指标无法获取（如 Metrics Server 问题），HPA 将回退到上一次已知值，不会贸然缩容。
 
 ## 行为配置
 

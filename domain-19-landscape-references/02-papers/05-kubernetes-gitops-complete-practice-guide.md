@@ -784,7 +784,7 @@ sum(increase(argocd_app_sync_total{phase="Succeeded"}[1h]))
 / sum(increase(argocd_app_sync_total[1h])) * 100
 ```
 
-<!-- chunk: 8. 故障排除与最佳实践 -->## 8. 故障排除与最佳实践
+<!-- chunk: 8. 问题排除与最佳实践 -->## 8. 问题排除与最佳实践
 
 #<!-- chunk: 8.1 常见问题诊断 -->## 8.1 常见问题诊断
 

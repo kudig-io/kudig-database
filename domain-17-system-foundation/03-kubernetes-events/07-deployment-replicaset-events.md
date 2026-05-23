@@ -317,7 +317,7 @@ kubectl rollout resume deployment/<deployment-name>  # 如果被暂停
 
 ##<!-- chunk: 事件含义 -->## 事件含义
 
-**生产环境最常见的 Deployment 故障事件**。当滚动更新在 `spec.progressDeadlineSeconds` 时间内未取得进展时触发。这是 Kubernetes 自动检测更新失败的核心机制。
+**生产环境最常见的 Deployment 问题事件**。当滚动更新在 `spec.progressDeadlineSeconds` 时间内未取得进展时触发。这是 Kubernetes 自动检测更新失败的核心机制。
 
 ##<!-- chunk: 典型事件消息 -->## 典型事件消息
 
@@ -877,7 +877,7 @@ kubectl describe nodes | grep -A 5 "Non-terminated Pods"
 # 临时调整探测参数
 kubectl set probe deployment/<deployment-name> --readiness --failure-threshold=5
 
-# 场景 4: 外部依赖故障（数据库、Redis 等）
+# 场景 4: 外部依赖问题（数据库、Redis 等）
 # 检查应用日志
 kubectl logs -l app=<app-name> --tail=100
 ```
@@ -1452,7 +1452,7 @@ kubectl describe deployment <deployment-name>
 
 ##<!-- chunk: 事件含义 -->## 事件含义
 
-**生产环境最常见的 ReplicaSet 故障事件**。ReplicaSet Controller 向 API Server 提交 Pod 创建请求时被拒绝，导致副本数无法达到期望值。
+**生产环境最常见的 ReplicaSet 问题事件**。ReplicaSet Controller 向 API Server 提交 Pod 创建请求时被拒绝，导致副本数无法达到期望值。
 
 ##<!-- chunk: 典型事件消息 -->## 典型事件消息
 
@@ -1786,7 +1786,7 @@ kubectl patch deployment <deployment-name> -p '{"spec":{"template":{"spec":{"ser
 # 方案 C: 确保资源创建顺序（使用 Helm、Kustomize 等工具）
 ```
 
-###<!-- chunk: 错误类型 7: API Server 限流或故障（占 3%） -->## 错误类型 7: API Server 限流或故障（占 3%）
+###<!-- chunk: 错误类型 7: API Server 限流或问题（占 3%） -->## 错误类型 7: API Server 限流或问题（占 3%）
 
 **症状**：`too many requests` 或 `connection refused`
 

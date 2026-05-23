@@ -1,6 +1,6 @@
 ---
 title: Higress 网关异常故障树分析
-description: Higress API 网关异常故障树分析，覆盖路由配置、服务发现、xDS 推送、Wasm 插件、AI 网关等故障路径
+description: Higress API 网关异常故障树分析，覆盖路由配置、服务发现、xDS 推送、Wasm 插件、AI 网关等问题路径
 category: fta
 tags:
 - fta
@@ -23,7 +23,7 @@ audience:
 estimated_read_time: 5min
 intent_queries:
 - Higress 网关异常故障树分析 是什么
-- Higress 路由故障 根因分析
+- Higress 路由问题 根因分析
 - Higress xDS 推送 故障树
 trigger_keywords:
 - Higress
@@ -142,7 +142,7 @@ flowchart TD
 
 ---
 
-## 常见故障场景
+## 常见问题场景
 
 ### 场景 1: Ingress 路由不生效
 

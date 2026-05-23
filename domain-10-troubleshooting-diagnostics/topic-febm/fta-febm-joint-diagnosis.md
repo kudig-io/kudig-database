@@ -96,7 +96,7 @@ k8s_versions:
 │  ═══════════════════════════════                                         │
 │                                                                             │
 │  思维模式: "系统可能在哪里出问题？"                                          │
-│  起点:     顶事件 (系统级故障)                                             │
+│  起点:     顶事件 (系统级问题)                                             │
 │  方向:     自上而下，分解到根因                                             │
 │  方法:     假设 → 验证                                                      │
 │  知识来源: 预定义的故障树结构                                               │
@@ -117,8 +117,8 @@ k8s_versions:
 │  起点:     证据 (日志/指标/事件)                                           │
 │  方向:     自下而上，推理到根因                                             │
 │  方法:     证据 → 假设 → 验证                                              │
-│  知识来源: 实际故障中收集的证据                                             │
-│  适用:     未知故障、安全事件、动态环境、事后复盘                             │
+│  知识来源: 实际问题中收集的证据                                             │
+│  适用:     未知问题、安全事件、动态环境、事后复盘                             │
 │                                                                             │
 │  示例:                                                                   │
 │    证据: Pod OOMKilled, JVM heap 1.2Gi, limit 1Gi                           │
@@ -134,11 +134,11 @@ k8s_versions:
 | 场景 | 推荐方法 | 原因 |
 |:---|:---:|:---|
 | **已知故障模式** | FTA | 快速匹配，效率高 |
-| **常见故障** (Pod OOM、证书过期、网络不通) | FTA | 已有成熟故障树 |
-| **新故障/未知故障** | FEBM | 从证据推理，不依赖预设 |
-| **多因素复杂故障** | FTA + FEBM 联合 | FTA 提供假设，FEBM 验证证据 |
+| **常见问题** (Pod OOM、证书过期、网络不通) | FTA | 已有成熟故障树 |
+| **新问题/未知问题** | FEBM | 从证据推理，不依赖预设 |
+| **多因素复杂问题** | FTA + FEBM 联合 | FTA 提供假设，FEBM 验证证据 |
 | **安全事件/取证** | FEBM | 强调证据链完整性 |
-| **故障复盘** | FEBM | 时间线重建，因果追溯 |
+| **问题复盘** | FEBM | 时间线重建，因果追溯 |
 | **架构评审/风险评估** | FTA | 演绎分析，覆盖已知场景 |
 | **快速恢复优先** | FTA | 直接匹配已知路径 |
 | **深度分析优先** | FEBM | 探索未知，挖掘根因 |
@@ -155,7 +155,7 @@ k8s_versions:
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  ┌─────────────┐                                                           │
-│  │   故障发生   │                                                           │
+│  │   问题发生   │                                                           │
 │  └──────┬──────┘                                                           │
 │         │                                                                   │
 │         ▼                                                                   │
@@ -164,7 +164,7 @@ k8s_versions:
 │  │  ════════════════════════════════════════════                │           │
 │  │                                                             │           │
 │  │  1. 识别顶事件 (TE)                                          │           │
-│  │     输入: 故障现象                                          │           │
+│  │     输入: 问题现象                                          │           │
 │  │     输出: 候选 TE 列表 (如 TE-2 应用服务不可用)              │           │
 │  │                                                             │           │
 │  │  2. FTA 路径匹配                                            │           │
@@ -212,7 +212,7 @@ k8s_versions:
 #<!-- chunk: 2.2 联合诊断决策树 -->## 2.2 联合诊断决策树
 
 ```
-故障发生
+问题发生
     │
     ├─► FTA 快速匹配
     │       │
@@ -247,9 +247,9 @@ k8s_versions:
 
 <!-- chunk: 三、实战案例 -->## 三、实战案例
 
-#<!-- chunk: 3.1 案例 1：HPA 扩容后新型故障（FTA+FEBM 联合） -->## 3.1 案例 1：HPA 扩容后新型故障（FTA+FEBM 联合）
+#<!-- chunk: 3.1 案例 1：HPA 扩容后新型问题（FTA+FEBM 联合） -->## 3.1 案例 1：HPA 扩容后新型问题（FTA+FEBM 联合）
 
-**故障现象**:
+**问题现象**:
 - 部分用户登录超时（不是全部用户）
 - 持续时间约 3 分钟
 - 影响范围：华东 1 区
@@ -334,7 +334,7 @@ FEBM 案例存档:
 
 #<!-- chunk: 3.2 案例 2：ASM Istio 未知故障模式（FEBM 主导） -->## 3.2 案例 2：ASM Istio 未知故障模式（FEBM 主导）
 
-**故障现象**:
+**问题现象**:
 - Service A 调用 Service B 出现偶发性超时
 - 重试后通常成功
 - 告警显示 "xDS 配置推送延迟"
@@ -342,12 +342,12 @@ FEBM 案例存档:
 **Phase 1: FTA 快速匹配**
 
 ```
-匹配 TE: TE-10 ASM 服务网格故障
+匹配 TE: TE-10 ASM 服务网格问题
 
 FTA 路径遍历:
-  TE-10 → IE-10.1 数据面故障 → BE-10.1 Envoy 资源耗尽
-  TE-10 → IE-10.2 控制面故障 → BE-10.3 Istiod 配置推送失败
-  TE-10 → IE-10.3 流量管理故障 → BE-10.5 灰度发布异常
+  TE-10 → IE-10.1 数据面问题 → BE-10.1 Envoy 资源耗尽
+  TE-10 → IE-10.2 控制面问题 → BE-10.3 Istiod 配置推送失败
+  TE-10 → IE-10.3 流量管理问题 → BE-10.5 灰度发布异常
 
 收集证据:
   - kubectl get pods -n istio-system -l app=istiod
@@ -407,9 +407,9 @@ FTA 更新:
 
 ---
 
-#<!-- chunk: 3.3 案例 3：Terway ENI 复杂故障（FTA 主导 + FEBM 验证） -->## 3.3 案例 3：Terway ENI 复杂故障（FTA 主导 + FEBM 验证）
+#<!-- chunk: 3.3 案例 3：Terway ENI 复杂问题（FTA 主导 + FEBM 验证） -->## 3.3 案例 3：Terway ENI 复杂问题（FTA 主导 + FEBM 验证）
 
-**故障现象**:
+**问题现象**:
 - 大规模 Pod 调度失败
 - 错误: "failed to allocate pod IP: no available IP"
 - 影响: 新部署完全失败
@@ -417,11 +417,11 @@ FTA 更新:
 **Phase 1: FTA 快速匹配**
 
 ```
-匹配 TE: TE-9 Terway 网络故障
+匹配 TE: TE-9 Terway 网络问题
 
 FTA 路径遍历:
-  TE-9 → IE-9.1 ENI 模式故障 → BE-9.1 ENI 多队列压力
-  TE-9 → IE-9.1 ENI 模式故障 → BE-9.2 Pod IP 分配失败 → BE-9.2.1 VPC CIDR 子网容量耗尽
+  TE-9 → IE-9.1 ENI 模式问题 → BE-9.1 ENI 多队列压力
+  TE-9 → IE-9.1 ENI 模式问题 → BE-9.2 Pod IP 分配失败 → BE-9.2.1 VPC CIDR 子网容量耗尽
 
 检查 VPC CIDR:
   - aliyun vpc DescribeVSwitchAttributes --VSwitchId {vswitch}
@@ -464,7 +464,7 @@ FEBM 证据:
 
 ```
 □ 识别顶事件 (TE)
-  - 故障影响范围是什么？（单服务/多服务/集群级）
+  - 问题影响范围是什么？（单服务/多服务/集群级）
   - 严重程度是什么？（P0/P1/P2）
 
 □ 遍历 FTA 路径
@@ -485,9 +485,9 @@ FEBM 证据:
 
 ```
 □ 时间线重建
-  - 故障开始时间？
+  - 问题开始时间？
   - 关键事件时间点？
-  - 故障持续时间？
+  - 问题持续时间？
 
 □ 证据收集
   - metrics: 哪些指标异常？
@@ -498,7 +498,7 @@ FEBM 证据:
 □ 因果推理
   - 哪个事件是因，哪个是果？
   - 是否存在共因（Common Cause）？
-  - 是否存在级联故障？
+  - 是否存在级联问题？
 
 □ 根因确认
   - 直接原因？
@@ -520,7 +520,7 @@ FEBM 证据:
   - 回滚方案是什么？
 
 □ 验证
-  - 故障是否消除？
+  - 问题是否消除？
   - 关键指标是否恢复正常？
   - 是否引入新问题？
 
@@ -539,7 +539,7 @@ FEBM 证据:
 │                    FTA vs FEBM 选择决策表                                     │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
-│  问题 1: 故障是已知的常见模式吗？                                          │
+│  问题 1: 问题是已知的常见模式吗？                                          │
 │  ├─ 是 → 问题 2                                                          │
 │  └─ 否 → 使用 FEBM                                                        │
 │                                                                             │
@@ -567,13 +567,13 @@ FEBM 证据:
 │  DNS 解析失败                           │ FTA                            │
 │  PVC 挂载失败                           │ FTA                            │
 │  ───────────────────────────────────────┼─────────────────────────────── │
-│  新故障/未知故障                        │ FEBM                           │
-│  多因素复杂故障                         │ FTA + FEBM                     │
+│  新问题/未知问题                        │ FEBM                           │
+│  多因素复杂问题                         │ FTA + FEBM                     │
 │  安全事件/取证                         │ FEBM                           │
-│  故障复盘                              │ FEBM                           │
+│  问题复盘                              │ FEBM                           │
 │  HPA 扩容后异常                        │ FTA + FEBM (联合)              │
 │  服务网格流量异常                       │ FTA + FEBM (联合)              │
-│  Terway/IPVLAN 特有故障                │ FTA + FEBM (联合)              │
+│  Terway/IPVLAN 特有问题                │ FTA + FEBM (联合)              │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -591,7 +591,7 @@ incident_record:
   severity: "P0/P1/P2"
   duration: "X minutes"
 
-  symptom: "故障现象描述"
+  symptom: "问题现象描述"
 
   phase_1_fta:
     matched_te: "TE-X"
@@ -658,7 +658,7 @@ kubectl exec <pod> -- <diagnostic-command>
 |:---|:---|
 | **效率** | FTA 快速匹配已知路径，减少探索时间 |
 | **准确性** | FEBM 深度验证，避免 FTA 误判 |
-| **完整性** | 联合使用覆盖已知+未知故障 |
+| **完整性** | 联合使用覆盖已知+未知问题 |
 | **知识沉淀** | 发现新故障模式，持续更新 FTA |
 
 #<!-- chunk: 7.2 最佳实践 -->## 7.2 最佳实践
@@ -666,8 +666,8 @@ kubectl exec <pod> -- <diagnostic-command>
 ```
 1. 优先使用 FTA 进行快速匹配
 2. 置信度不足时及时切换到 FEBM
-3. 复杂故障使用联合诊断
-4. 每次故障后更新 FTA 知识库
+3. 复杂问题使用联合诊断
+4. 每次问题后更新 FTA 知识库
 5. FEBM 案例沉淀用于未来快速匹配
 ```
 
@@ -675,7 +675,7 @@ kubectl exec <pod> -- <diagnostic-command>
 
 ```
 FTA 主导:
-  - 常见故障（Pod OOM、证书过期、网络不通）
+  - 常见问题（Pod OOM、证书过期、网络不通）
   - 时间紧迫的恢复场景
   - 架构评审和风险评估
 
@@ -685,10 +685,10 @@ FEBM 主导:
   - 深度分析和复盘
 
 FTA + FEBM 联合:
-  - 多因素复杂故障
-  - HPA/自动扩缩容相关故障
-  - 服务网格（ASM/Istio）故障
-  - 云厂商特有组件（Terway/ACK-One）故障
+  - 多因素复杂问题
+  - HPA/自动扩缩容相关问题
+  - 服务网格（ASM/Istio）问题
+  - 云厂商特有组件（Terway/ACK-One）问题
   - 任何 FTA 置信度不足的场景
 ```
 
@@ -696,7 +696,7 @@ FTA + FEBM 联合:
 
 > **版本**: v1.0
 > **维护团队**: SRE Team / Platform Team
-> **下次更新**: 每次重大故障后补充新案例
+> **下次更新**: 每次重大问题后补充新案例
 
 ---
 
@@ -711,7 +711,7 @@ FTA + FEBM 联合:
 - [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|第六章：未来演进方向]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix.md|第七章:附录]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
 
 ## See Also

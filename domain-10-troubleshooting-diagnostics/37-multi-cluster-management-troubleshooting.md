@@ -71,9 +71,9 @@ created: "2026-05-23"
 <!-- chunk: 1. 多集群管理故障诊断总览 (Multi-Cluster Management Diagnosis Overview) -->
 ## 1. 多集群管理故障诊断总览 (Multi-Cluster Management Diagnosis Overview)
 
-### 1.1 常见故障现象分类
+### 1.1 常见问题现象分类
 
-| 故障类型 | 症状表现 | 影响范围 | 紧急程度 |
+| 问题类型 | 症状表现 | 影响范围 | 紧急程度 |
 |---------|---------|---------|---------|
 | **集群连接异常** | 无法访问远程集群 | 跨集群操作失败 | P0 - 紧急 |
 | **资源同步失败** | Federation控制器异常 | 多集群资源不一致 | P1 - 高 |
@@ -444,7 +444,7 @@ echo "Testing failover for $FEDERATED_RESOURCE from $FAULTY_CLUSTER"
 echo "Current resource distribution:"
 kubectl get $FEDERATED_RESOURCE -o jsonpath='{.spec.placement.clusters[*].name}'
 
-# 2. 模拟集群故障
+# 2. 模拟集群问题
 echo "Simulating cluster failure for $FAULTY_CLUSTER"
 kubectl cordon $FAULTY_CLUSTER
 

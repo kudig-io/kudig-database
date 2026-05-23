@@ -675,7 +675,7 @@ rules:
 - `level: Request` 会记录请求体（包括 Secret 内容）
 - `level: RequestResponse` 会记录请求和响应体
 
-### 3.6 审计 Webhook 故障
+### 3.6 审计 Webhook 问题
 
 **问题现象**：Webhook 发送失败，审计事件丢失。
 

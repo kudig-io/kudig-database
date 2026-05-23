@@ -100,7 +100,7 @@ API Priority and Fairness (APF) 是 Kubernetes v1.29 GA 的**流量控制机制*
 ┌─────────────────────────────────────────────────────────────────┐
 │ 3. Fair Queuing + Shuffle Sharding                              │
 │    - 每个 Flow(用户+命名空间)分配独立队列                       │
-│    - Shuffle Sharding 隔离故障流量                              │
+│    - Shuffle Sharding 隔离问题流量                              │
 │    - 超时拒绝或成功执行                                         │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -512,7 +512,7 @@ X-Retry-After: 1
 
 #<!-- chunk: 5.3 Shuffle Sharding 隔离原理 -->## 5.3 Shuffle Sharding 隔离原理
 
-**目标**: 防止单个故障 Flow(如故障控制器循环调用)影响其他 Flow
+**目标**: 防止单个问题 Flow(如问题控制器循环调用)影响其他 Flow
 
 ```
 假设:
@@ -526,13 +526,13 @@ Flow A: 正常请求(每秒 10 个)
 Flow B: 正常请求(每秒 10 个)
   → 随机分配到队列: [5, 20, 35, 50, 65, 80, 95, 110]
 
-Flow C: 故障循环(每秒 1000 个!)
+Flow C: 问题循环(每秒 1000 个!)
   → 随机分配到队列: [15, 30, 45, 60, 75, 90, 105, 120]
 
 结果:
 - Flow A 和 B 与 C 的队列重叠概率 = 8/128 = 6.25%(很低!)
 - 即使 Flow C 填满其 8 个队列,Flow A/B 的其他队列仍可正常使用
-- 隔离效果: 故障 Flow 不影响正常 Flow
+- 隔离效果: 问题 Flow 不影响正常 Flow
 ```
 
 **计算公式**:
@@ -546,7 +546,7 @@ Flow C: 故障循环(每秒 1000 个!)
 
 #<!-- chunk: 6.1 案例 1: 租户隔离(多团队共享集群) -->## 6.1 案例 1: 租户隔离(多团队共享集群)
 
-**场景**: 3 个团队共享集群,防止某团队的控制器故障影响其他团队
+**场景**: 3 个团队共享集群,防止某团队的控制器问题影响其他团队
 
 ```yaml
 # 团队 A(高优先级业务) - 高优先级
@@ -1058,7 +1058,7 @@ kubectl -n kube-system describe pod kube-apiserver-xxx | grep max-requests-infli
 
 1. **保留内置配置**: 不要删除或修改内置 FlowSchema/PriorityLevel,避免影响系统组件
 2. **优先级规划**: 关键业务使用低 `matchingPrecedence`(高优先级),避免被 `global-default` 捕获
-3. **Shuffle Sharding**: 使用推荐配置 `queues=64-128, handSize=8`,避免故障 Flow 影响全局
+3. **Shuffle Sharding**: 使用推荐配置 `queues=64-128, handSize=8`,避免问题 Flow 影响全局
 4. **监控告警**: 监控 `apiserver_flowcontrol_rejected_requests_total`,及时调整配额
 5. **避免滥用 Exempt**: `type: Exempt` 仅用于极少数关键组件(如 `system:masters`)
 6. **区分器选择**: 使用 `ByUser` 隔离不同用户/控制器,使用 `ByNamespace` 隔离租户

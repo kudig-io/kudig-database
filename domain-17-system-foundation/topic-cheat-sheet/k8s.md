@@ -1460,7 +1460,7 @@ kubectl apply -f cluster-backup.yaml
 
 ---
 
-## 常见故障速查
+## 常见问题速查
 
 | 问题 | 快速排查命令 | 常见原因 |
 |------|--------------|----------|
@@ -1468,9 +1468,9 @@ kubectl apply -f cluster-backup.yaml
 | Pod CrashLoopBackOff | `kubectl logs <pod> --previous` | 应用崩溃、配置错误、依赖不可用 |
 | ImagePullBackOff | `kubectl describe pod <pod>` | 镜像不存在、凭证错误、网络问题 |
 | Service 无法访问 | `kubectl get endpoints <svc>` | Pod 未 Ready、标签不匹配 |
-| Node NotReady | `kubectl describe node <node>` | kubelet 故障、网络问题、资源耗尽 |
-| PVC Pending | `kubectl describe pvc <pvc>` | StorageClass 不存在、Provisioner 故障 |
-| DNS 解析失败 | `kubectl logs -n kube-system -l k8s-app=kube-dns` | CoreDNS Pod 故障、NetworkPolicy 阻塞 |
+| Node NotReady | `kubectl describe node <node>` | kubelet 问题、网络问题、资源耗尽 |
+| PVC Pending | `kubectl describe pvc <pvc>` | StorageClass 不存在、Provisioner 问题 |
+| DNS 解析失败 | `kubectl logs -n kube-system -l k8s-app=kube-dns` | CoreDNS Pod 问题、NetworkPolicy 阻塞 |
 | 滚动更新卡住 | `kubectl rollout status deploy/<deploy>` | 健康检查失败、资源不足、PDB 阻塞 |
 
 ---

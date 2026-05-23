@@ -828,13 +828,13 @@ spec:
       port: 443
 ```
 
-<!-- chunk: 故障排除 (Troubleshooting) -->## 故障排除 (Troubleshooting)
+<!-- chunk: 问题排除 (Troubleshooting) -->## 问题排除 (Troubleshooting)
 
 #<!-- chunk: 常见问题诊断 (Common Issue Diagnosis) -->## 常见问题诊断 (Common Issue Diagnosis)
 
 ```bash
 #!/bin/bash
-# Loki 故障排除工具
+# Loki 问题排除工具
 
 # 组件状态检查
 check_loki_status() {

@@ -938,7 +938,7 @@ kubectl rollout status ds/terway-eniip -n kube-system
 
 ## 5. 常见故障排查
 
-### 5.1 故障现象速查表
+### 5.1 问题现象速查表
 
 | 现象 | 常见原因 | 快速排查命令 |
 |:---|:---|:---|
@@ -1351,7 +1351,7 @@ kubectl get ipinstances -A -o json | jq -r '
 | CRD 资源清理 | `kubectl get ipinstances,podenis -A` | 无大量孤儿 CRD |
 | 安全组规则审计 | 阿里云控制台 > 安全组 | 规则最小化，无过度放行 |
 | 容量规划 | 综合节点数、Pod 数、IP 使用率趋势 | 预测未来 3 个月资源需求 |
-| 灾备演练 | 模拟节点故障，验证 Pod IP 恢复 | 固定 IP 场景下 IP 恢复正常 |
+| 灾备演练 | 模拟节点问题，验证 Pod IP 恢复 | 固定 IP 场景下 IP 恢复正常 |
 
 ---
 

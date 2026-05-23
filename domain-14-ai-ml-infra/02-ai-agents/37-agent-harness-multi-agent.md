@@ -671,23 +671,23 @@ class ConflictResolver:
 
 ---
 
-<!-- chunk: 6. K8S 故障处置多 Agent 编排 -->## 6. K8S 故障处置多 Agent 编排
+<!-- chunk: 6. K8S 问题处置多 Agent 编排 -->## 6. K8S 问题处置多 Agent 编排
 
-#<!-- chunk: 6.1 故障处置流水线 -->## 6.1 故障处置流水线
+#<!-- chunk: 6.1 问题处置流水线 -->## 6.1 问题处置流水线
 
 ```python
 class IncidentResponsePipeline:
-    """K8S 故障处置多 Agent 流水线"""
+    """K8S 问题处置多 Agent 流水线"""
 
     def __init__(self, orchestrator: Orchestrator):
         self.orchestrator = orchestrator
 
     async def handle_incident(self, incident: dict) -> dict:
-        """处置故障"""
+        """处置问题"""
 
         # Stage 1: 并行诊断（多角度收集信息）
         parallel_diagnosis = await self.orchestrator.execute_parallel(
-            task=f"诊断以下故障: {incident['description']}",
+            task=f"诊断以下问题: {incident['description']}",
             agent_names=["pod_diagnostician", "node_diagnostician", "network_diagnostician"],
         )
 
@@ -710,7 +710,7 @@ class IncidentResponsePipeline:
 
         # Stage 4: 独立验证修复效果
         verification = await self.orchestrator.execute_pipeline(
-            task=f"验证故障是否已恢复: {incident['description']}",
+            task=f"验证问题是否已恢复: {incident['description']}",
             pipeline=[
                 {"agent": "verifier", "gate": False},
             ],

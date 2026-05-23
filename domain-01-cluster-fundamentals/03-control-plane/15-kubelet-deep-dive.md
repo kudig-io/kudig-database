@@ -737,7 +737,7 @@ groups:
 
 | 症状 | 可能原因 | 诊断方法 | 解决方案 |
 |:---|:---|:---|:---|
-| **节点NotReady** | kubelet未运行/运行时故障 | systemctl status kubelet | 重启kubelet/运行时 |
+| **节点NotReady** | kubelet未运行/运行时问题 | systemctl status kubelet | 重启kubelet/运行时 |
 | **Pod启动慢** | 镜像拉取慢/资源不足 | 检查events/PLEG指标 | 优化镜像/增加资源 |
 | **Pod Eviction** | 资源压力 | kubectl describe node | 检查驱逐原因 |
 | **容器CrashLoop** | 应用问题/资源不足 | kubectl logs/describe | 检查应用日志 |

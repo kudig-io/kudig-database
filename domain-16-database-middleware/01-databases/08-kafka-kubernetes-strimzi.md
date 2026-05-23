@@ -768,7 +768,7 @@ esac
 
 **安全配置**：生产环境必须启用认证和加密。推荐使用 TLS 双向认证（`authentication.type: tls`）进行集群内部通信，使用 SCRAM-SHA-512（`authentication.type: scram-sha-512`）进行外部客户端认证。通过 `KafkaUser` CRD 为每个应用创建独立的用户和 ACL，遵循最小权限原则。所有 listener 都应启用 TLS 加密。
 
-**Topic 管理**：生产环境应关闭 `auto.create.topics.enable`，通过 `KafkaTopic` CRD 声明式管理所有 Topic。每个 Topic 的 Partition 数量需要根据消费并行度需求设定（建议初始值为目标 Consumer 实例数的 1-2 倍）。Replication Factor 应设为 3（或至少 2），确保单节点故障时数据不丢失。`min.insync.replicas` 应设为 2，配合 Producer 的 `acks=all` 使用。
+**Topic 管理**：生产环境应关闭 `auto.create.topics.enable`，通过 `KafkaTopic` CRD 声明式管理所有 Topic。每个 Topic 的 Partition 数量需要根据消费并行度需求设定（建议初始值为目标 Consumer 实例数的 1-2 倍）。Replication Factor 应设为 3（或至少 2），确保单节点问题时数据不丢失。`min.insync.replicas` 应设为 2，配合 Producer 的 `acks=all` 使用。
 
 **监控体系**：Kafka 的监控需要覆盖 Broker 层面和 Consumer Group 层面。Broker 层面通过 JMX Exporter 采集 JVM 指标和 Kafka 内部指标（消息速率、请求延迟、磁盘使用、ISR 状态等）。Consumer Group 层面通过 Kafka Exporter 采集 Lag 指标。关键告警规则包括：Broker 宕机、Under-replicated Partition、Consumer Group Lag 过大、磁盘使用率超过 85%。
 
@@ -802,9 +802,9 @@ Partition 数量计算:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见故障速查表 -->## 常见故障速查表
+#<!-- chunk: 常见问题速查表 -->## 常见问题速查表
 
-| 故障现象 | 可能原因 | 排查方法 | 解决方案 |
+| 问题现象 | 可能原因 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
 | Broker CrashLoop | 磁盘满/配置错误 | `kubectl logs <pod>` | 清理磁盘/修复配置 |
 | Under-replicated | Broker 宕机/网络慢 | `kafka-topics --describe` | 恢复 Broker/检查网络 |

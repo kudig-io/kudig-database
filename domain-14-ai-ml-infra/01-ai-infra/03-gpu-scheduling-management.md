@@ -914,7 +914,7 @@ kubectl get nodes -L nvidia.com/gpu.product,nvidia.com/gpu.count,nvidia.com/mig.
 | **62** | Internal micro-controller halt | 固件严重错误 | 更换GPU |
 | **63** | ECC page retirement | ECC页面退役 | 监控趋势 |
 | **64** | ECC page retirement | 页面退役达上限 | 更换GPU |
-| **74** | NVLink Error | NVLink故障 | 检查硬件连接 |
+| **74** | NVLink Error | NVLink问题 | 检查硬件连接 |
 | **79** | GPU access to memory denied | 内存访问拒绝 | 检查驱动/BIOS |
 | **94** | Contained ECC error | ECC错误已隔离 | 监控 |
 | **95** | Uncontained ECC error | ECC错误未隔离 | 更换GPU |

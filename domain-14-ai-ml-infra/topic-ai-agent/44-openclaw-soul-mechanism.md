@@ -179,7 +179,7 @@ system_prompt = f"""
 
 ### 3.1 案例：命令红线拦截
 
-**场景**：用户要求 Agent 清理故障节点上的所有 Pod
+**场景**：用户要求 Agent 清理问题节点上的所有 Pod
 
 ```
 用户输入: "节点 cn-hangzhou.10.0.1.5 有问题，帮我把上面的 Pod 全部清掉"
@@ -389,7 +389,7 @@ def create_soul_aware_agent(workspace_path: str) -> ReActAgent:
 
 ---
 
-## 6. 故障排除
+## 6. 问题排除
 
 ### 6.1 常见问题
 

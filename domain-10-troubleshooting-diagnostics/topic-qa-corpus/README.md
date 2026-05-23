@@ -66,7 +66,7 @@ created: "2026-05-23"
 | `generated/command-output-diagnosis-all.md` | ALL | 469 | 全量合并版 |
 | `generated/command-output-diagnosis-all.json` | ALL | 469 | JSON 程序消费版 |
 | `generated/command-output-diagnosis-all.yaml` | ALL | 469 | YAML 程序消费版 |
-| `generated/command-output-diagnosis-p0.md` | P0 | 469 | 核心故障场景 |
+| `generated/command-output-diagnosis-p0.md` | P0 | 469 | 核心问题场景 |
 | `generated/command-output-diagnosis-p1.md` | P1 | 469 | 扩展场景 |
 | `generated/command-output-diagnosis-p2.md` | P2 | 469 | 高级/边缘场景 |
 | `seed/p0-core-scenarios.md` | P0 | 22 | 手工精调种子 |
@@ -112,7 +112,7 @@ tags: [node, status, notready, kubelet]
 |------|------|------|
 | `io_pair_id` | 全局唯一标识 | `IODIAG-NODE-0001` |
 | `skill_ref` | 关联 [[SKILL|Skill]] ID | `SKILL-01` |
-| `scenario` | 故障场景名称 | `节点 NotReady` |
+| `scenario` | 问题场景名称 | `节点 NotReady` |
 | `severity` | 严重程度 | `critical/high/medium/low` |
 | `command` | 执行命令 | `kubectl get nodes` |
 | `output_pattern` | 典型输出模式 | 含通配符/占位符 |

@@ -72,15 +72,15 @@ created: "2026-05-23"
 
 ## 1. 概述
 
-监控告警体系是 [[Kubernetes|Kubernetes]] 集群可观测性的核心基础设施。当 [[Prometheus|Prometheus]]、AlertManager、Grafana 或长期存储组件（Thanos/VictoriaMetrics/Cortex）出现故障时，会直接导致**监控盲区**——运维团队无法感知集群状态变化，业务故障无法及时发现和响应。这是**元故障**（monitoring the monitoring）场景，其严重性往往被低估。
+监控告警体系是 [[Kubernetes|Kubernetes]] 集群可观测性的核心基础设施。当 [[Prometheus|Prometheus]]、AlertManager、Grafana 或长期存储组件（Thanos/VictoriaMetrics/Cortex）出现问题时，会直接导致**监控盲区**——运维团队无法感知集群状态变化，业务问题无法及时发现和响应。这是**元问题**（monitoring the monitoring）场景，其严重性往往被低估。
 
 ### 典型触发场景
 
-1. **Prometheus 采集故障**: Prometheus Pod OOM/CrashLoopBackOff、Target 大面积 Down、ServiceMonitor 配置未被发现、TSDB 存储空间耗尽
-2. **AlertManager 通知故障**: 告警规则触发但通知未送达、告警路由配置错误、通知渠道（Webhook/Email/钉钉/Slack）不可达、告警被错误静默或抑制
+1. **Prometheus 采集问题**: Prometheus Pod OOM/CrashLoopBackOff、Target 大面积 Down、ServiceMonitor 配置未被发现、TSDB 存储空间耗尽
+2. **AlertManager 通知问题**: 告警规则触发但通知未送达、告警路由配置错误、通知渠道（Webhook/Email/钉钉/Slack）不可达、告警被错误静默或抑制
 3. **告警风暴**: 短时间内大量重复告警触发，导致通知渠道过载、值班人员疲劳、真正的关键告警被淹没
 4. **Grafana Dashboard 异常**: 数据源连接失败、Dashboard 显示 "No Data"、查询超时
-5. **长期存储故障**: Thanos Query/Store/Sidecar 通信故障、数据查询不完整或超时
+5. **长期存储问题**: Thanos Query/Store/Sidecar 通信问题、数据查询不完整或超时
 
 ### 前置条件
 
@@ -92,7 +92,7 @@ created: "2026-05-23"
 - **工具要求**: kubectl (v1.28+), curl, jq（可选但推荐）, promtool, amtool
 - **监控栈部署**: 本 Skill 假设使用 kube-prometheus-stack（Prometheus Operator）部署模式
 
-> ⚠️ **重要**: 监控系统故障属于**元故障**——当监控本身不可用时，其他故障可能无法被发现。P0 级监控故障应优先于其他 P1/P2 故障处理。
+> ⚠️ **重要**: 监控系统问题属于**元问题**——当监控本身不可用时，其他问题可能无法被发现。P0 级监控问题应优先于其他 P1/P2 故障处理。
 
 ---
 
@@ -105,7 +105,7 @@ created: "2026-05-23"
 | SP-01 | Prometheus Target 状态为 Down / Prometheus Target shows Down status | Prometheus `/targets` 页面显示特定 Target 为 `DOWN`；`up{job="xxx"} == 0` | 0.95 | Target 服务正在进行计划内维护或重启；新部署的服务尚未暴露 metrics 端点 |
 | SP-02 | Grafana Dashboard 显示 "No Data" / Grafana Dashboard shows "No Data" | Grafana 面板显示 "No Data" 或空白图表；查询 API 返回空结果 | 0.85 | 查询时间范围选择错误（如选择了未来时间）；指标名称变更导致 Dashboard 查询失效 |
 | SP-03 | AlertManager 不发送告警通知 / AlertManager not sending notifications | 告警在 Prometheus `/alerts` 页面处于 firing 状态，但 AlertManager `/#/alerts` 中未显示或通知渠道未收到 | 0.90 | 告警被手动静默（silence）；告警处于 pending 状态尚未达到 `for` 持续时间 |
-| SP-04 | 告警风暴（短时间大量重复告警）/ Alert storm (massive repeated alerts) | AlertManager `alertmanager_alerts{state="active"}` 指标急剧上升；通知渠道收到大量相似告警 | 0.90 | 真实的大规模基础设施故障（如网络分区导致多节点 Down）；计划内批量操作触发预期告警 |
+| SP-04 | 告警风暴（短时间大量重复告警）/ Alert storm (massive repeated alerts) | AlertManager `alertmanager_alerts{state="active"}` 指标急剧上升；通知渠道收到大量相似告警 | 0.90 | 真实的大规模基础设施问题（如网络分区导致多节点 Down）；计划内批量操作触发预期告警 |
 | SP-05 | Prometheus OOM/CrashLoopBackOff / Prometheus OOM or CrashLoopBackOff | `kubectl get pods -n monitoring` 显示 Prometheus Pod 状态为 OOMKilled/CrashLoopBackOff | 0.95 | 首次部署资源配置不足；高基数指标导致的预期内存增长 |
 | SP-06 | ServiceMonitor 配置未被 Prometheus 发现 / ServiceMonitor not discovered by Prometheus | `kubectl get servicemonitor -A` 有记录但 Prometheus `/service-discovery` 或 `/config` 中未显示对应配置 | 0.85 | ServiceMonitor 刚创建，Prometheus 尚未重载配置；ServiceMonitor 位于 Prometheus Operator 未监控的 namespace |
 | SP-07 | 自定义指标查询返回空结果 / Custom metrics query returns empty | PromQL 查询 `{__name__=~"custom_.*"}` 返回空；Grafana 中相关 Panel 无数据 | 0.80 | 指标名称/标签拼写错误；应用尚未产生该指标（如功能未被调用） |
@@ -147,12 +147,12 @@ created: "2026-05-23"
 
 | 排除条件 | 正确路由 | 说明 |
 |---------|---------|------|
-| 监控系统正常，但特定应用的 metrics 端点未暴露 | 应用部署问题 | 需要应用侧添加 metrics 端点暴露，非监控系统故障 |
-| Grafana 正常但 Dashboard JSON 导入失败 | Grafana 配置问题 | Dashboard 定义文件格式问题，非系统故障 |
-| 告警规则逻辑不正确导致误报/漏报 | 告警规则优化 | 属于告警治理范畴，非技术故障 |
+| 监控系统正常，但特定应用的 metrics 端点未暴露 | 应用部署问题 | 需要应用侧添加 metrics 端点暴露，非监控系统问题 |
+| Grafana 正常但 Dashboard JSON 导入失败 | Grafana 配置问题 | Dashboard 定义文件格式问题，非系统问题 |
+| 告警规则逻辑不正确导致误报/漏报 | 告警规则优化 | 属于告警治理范畴，非技术问题 |
 | Prometheus 指标存储策略导致的数据过期 | 存储策略配置 | 正常的数据生命周期管理 |
-| 监控组件资源扩容需求（非故障） | 容量规划 | 容量不足但系统仍在运行，属于规划问题 |
-| PromQL 查询语法错误 | 用户培训/文档 | 查询使用问题，非系统故障 |
+| 监控组件资源扩容需求（非问题） | 容量规划 | 容量不足但系统仍在运行，属于规划问题 |
+| PromQL 查询语法错误 | 用户培训/文档 | 查询使用问题，非系统问题 |
 
 ---
 
@@ -160,7 +160,7 @@ created: "2026-05-23"
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径：
+按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 检查监控核心组件健康状态 (15s)
 ```bash
@@ -185,7 +185,7 @@ curl -s http://localhost:9090/api/v1/targets | jq '.data.activeTargets | group_b
 ```
 > **判断规则**:
 > - 所有 Target 均为 Down → **P0**（完全监控盲区）
-> - >50% Target 为 Down → **P1**（大面积采集故障）
+> - >50% Target 为 Down → **P1**（大面积采集问题）
 > - 部分关键服务 Target Down → **P2**
 > - 仅个别非关键 Target Down → **P3**
 
@@ -209,9 +209,9 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
 
 | 条件 | 级别 | 说明 | SLA 要求 |
 |------|------|------|---------|
-| Prometheus 核心组件不可用（OOM/Crash） | **P0** | 完全监控盲区，任何业务故障都无法被发现 | 立即响应，15min 内恢复采集能力 |
-| AlertManager 完全不可用或通知渠道全部失败 | **P0** | 告警无法触达值班人员，可能错过关键故障 | 立即响应，15min 内恢复通知能力 |
-| >50% Target Down 或多个关键服务无监控 | **P1** | 大面积监控盲区，部分业务故障可能被遗漏 | 15min 内响应，30min 内修复 |
+| Prometheus 核心组件不可用（OOM/Crash） | **P0** | 完全监控盲区，任何业务问题都无法被发现 | 立即响应，15min 内恢复采集能力 |
+| AlertManager 完全不可用或通知渠道全部失败 | **P0** | 告警无法触达值班人员，可能错过关键问题 | 立即响应，15min 内恢复通知能力 |
+| >50% Target Down 或多个关键服务无监控 | **P1** | 大面积监控盲区，部分业务问题可能被遗漏 | 15min 内响应，30min 内修复 |
 | 告警风暴（短时间 >100 条重复告警） | **P1** | 通知过载可能导致关键告警被忽视 | 15min 内响应，实施降噪措施 |
 | 部分 Target Down 或 Grafana 不可用 | **P2** | 监控能力部分受损，但核心功能正常 | 30min 内响应，2h 内修复 |
 | 单个 ServiceMonitor 未生效/Recording Rule 失败 | **P3** | 局部功能异常，影响有限 | 4h 内处理 |
@@ -224,7 +224,7 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
 - **告警通道全部失效**: AlertManager 可用但所有通知渠道（Webhook、Email、SMS、IM）均不可达
 - **数据丢失风险**: Prometheus TSDB 损坏、WAL 损坏，存在数据不可恢复风险
 - **安全事件**: 发现监控配置被恶意篡改、Prometheus 被未授权访问
-- **级联故障**: 监控故障与其他 P0 业务故障同时发生，需要人工判断优先级
+- **级联问题**: 监控问题与其他 P0 业务问题同时发生，需要人工判断优先级
 
 > **升级消息模板**: 参见 Section 8.2
 
@@ -568,7 +568,7 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
 - **预期输出模式**: 所有组件健康，Store 端点可见
 - **判断规则**:
   - Sidecar 不健康 → 检查与 Prometheus 的连接
-  - Query 无法发现 Store → RC-009（Thanos 通信故障）
+  - Query 无法发现 Store → RC-009（Thanos 通信问题）
   - Store 数量少于预期 → 部分存储节点不可达
 - **版本差异**: 无
 
@@ -586,7 +586,7 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
 | RC-006 | **TSDB 存储空间耗尽** — Prometheus 的 PVC 存储空间不足，无法写入新数据，导致采集失败或数据丢失 | 中 (~7%) | D1.6 磁盘使用率 >90%；Prometheus 日志包含 "no space left on device" | 🔴 |
 | RC-007 | **告警规则表达式语法错误** — PrometheusRule 中的 PromQL 表达式语法错误或引用了不存在的指标 | 低 (~6%) | D2.6 规则 health 为 err；lastError 显示具体错误 | 🟢 |
 | RC-008 | **高基数指标导致性能劣化** — 指标 labels 值过多（如用户 ID、请求 ID 作为 label），导致 series 数量爆炸，内存和存储消耗剧增 | 低 (~5%) | D2.4 series 数量 >5M；seriesCountByMetricName 显示问题指标 | 🟡 |
-| RC-009 | **Thanos Sidecar/Store 通信故障** — Thanos 组件之间网络不通、gRPC 超时、证书问题，导致历史数据查询失败 | 低 (~5%) | D3.6 显示 Store 不可达；Thanos Query 查询超时 | 🟡 |
+| RC-009 | **Thanos Sidecar/Store 通信问题** — Thanos 组件之间网络不通、gRPC 超时、证书问题，导致历史数据查询失败 | 低 (~5%) | D3.6 显示 Store 不可达；Thanos Query 查询超时 | 🟡 |
 | RC-010 | **Grafana 数据源认证/配置错误** — Grafana 数据源的 URL、认证信息配置错误，或 Prometheus/Thanos 服务发生变更 | 低 (~4%) | D1.4 Grafana 健康但 Dashboard 报错；数据源测试失败 | 🟢 |
 | RC-011 | **Pushgateway 过期指标堆积** — Pushgateway 上存在大量已完成任务的陈旧指标，占用资源且可能导致误导性监控数据 | 低 (~4%) | D1.5 Pushgateway 相关 Target；push_time_seconds 很久未更新 | 🟢 |
 | RC-012 | **告警抑制/静默规则过宽** — AlertManager 中配置了过于宽泛的静默或抑制规则，导致合法告警被错误屏蔽 | 低 (~4%) | D3.2 显示宽泛的静默；告警在 Prometheus firing 但无通知 | 🟢 |
@@ -1156,7 +1156,7 @@ curl -s http://localhost:3000/api/health
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 
 - [ ] Prometheus 所有副本均为 Running 状态，且持续稳定 >5 分钟
 - [ ] AlertManager 集群成员数量正确，状态一致
@@ -1191,14 +1191,14 @@ curl -s http://localhost:3000/api/health
 | **严重性升级** | 初始分级为 P2 但影响面扩大（如 Prometheus 从部分异常变为完全不可用） | 诊断过程中症状恶化 |
 | **未知根因** | 完成 Phase 1-3 所有诊断步骤但无法匹配任何已知根因 | 所有诊断步骤均无明确异常发现 |
 | **数据丢失风险** | 诊断发现 TSDB 损坏或存储即将耗尽，存在不可逆数据丢失风险 | D1.6 或 D2.4 发现严重异常 |
-| **级联故障** | 监控故障与其他 P0 故障同时发生，需要人工判断优先级 | 多个高严重性告警同时触发 |
+| **级联问题** | 监控问题与其他 P0 问题同时发生，需要人工判断优先级 | 多个高严重性告警同时触发 |
 
 ### 8.2 升级消息模板
 
 ```
 【{severity}】监控告警体系故障诊断与修复 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: {component}({instance}) 状态异常，持续 {duration}
+- 问题概述: {component}({instance}) 状态异常，持续 {duration}
 - 影响范围:
   - 受影响组件: {affected_components}
   - Target 健康率: {target_health_rate}%
@@ -1315,10 +1315,10 @@ curl -s http://localhost:3000/api/health
 |---------|---------|---------|---------|
 | **将 ServiceMonitor selector 不匹配误判为网络问题** | Target 显示 Down，怀疑是 Pod 网络不通 | ServiceMonitor 的 selector 与 Service labels 不匹配，Prometheus 根本未尝试采集 | 先检查 D2.1/D2.2 确认 ServiceMonitor 已被 Prometheus 发现，再排查网络 |
 | **将高基数指标误判为 Prometheus Bug** | Prometheus 频繁 OOM，怀疑是 Prometheus 版本问题 | 应用侧指标设计不合理，将高基数字段（如 user_id、request_id）作为 label | D2.4 检查 seriesCountByMetricName，定位问题指标，与应用团队协作修复 |
-| **将告警静默误判为 AlertManager 故障** | 告警不发送，但 AlertManager Pod 正常运行 | 运维人员之前设置了宽泛的静默规则但未记录 | D3.2 先检查活跃的静默规则，确认是否有覆盖过宽的匹配 |
+| **将告警静默误判为 AlertManager 问题** | 告警不发送，但 AlertManager Pod 正常运行 | 运维人员之前设置了宽泛的静默规则但未记录 | D3.2 先检查活跃的静默规则，确认是否有覆盖过宽的匹配 |
 | **将 Thanos 查询慢误判为 Thanos Bug** | Thanos Query 查询历史数据超时 | 存储桶数据量过大或 Store 节点资源不足，非 Thanos 本身问题 | 检查 Store 节点资源使用，考虑增加 Store 副本或优化查询范围 |
 | **将 Grafana "No Data" 误判为 Prometheus 问题** | Grafana 面板显示 No Data | Dashboard 查询语法错误或时间范围选择不当，Prometheus 数据正常 | 先在 Prometheus UI 直接查询相同指标，确认数据是否存在 |
-| **将通知延迟误判为 AlertManager 故障** | 告警通知延迟到达 | AlertManager 的 group_wait、group_interval 配置过长，或通知渠道本身有延迟 | D3.1 检查 AlertManager 配置中的时间参数，理解告警分组机制 |
+| **将通知延迟误判为 AlertManager 问题** | 告警通知延迟到达 | AlertManager 的 group_wait、group_interval 配置过长，或通知渠道本身有延迟 | D3.1 检查 AlertManager 配置中的时间参数，理解告警分组机制 |
 
 ### 10.2 深度知识引用
 

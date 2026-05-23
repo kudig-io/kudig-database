@@ -39,7 +39,7 @@ created: "2026-05-23"
 
 节点（Node）是 Kubernetes 集群中的工作单元，它是运行 Pod 的物理机或虚拟机。每个节点包含运行 Pod 所需的核心服务：kubelet（节点代理）、容器运行时（containerd/cri-o）和网络插件（CNI）。理解节点的完整生命周期——从创建、注册、运行到维护和移除——是有效管理 Kubernetes 集群的基础。
 
-Kubernetes 中的节点管理采用了"声明式"的设计哲学：用户通过 API Server 定义期望的节点状态（如标签、污点、规格），kubelet 和各个控制器负责将实际状态与期望状态对齐。这种设计使得节点管理可以自动化——Cluster Autoscaler 可以根据负载自动增减节点，Node Lifecycle Controller 可以自动检测和隔离故障节点。
+Kubernetes 中的节点管理采用了"声明式"的设计哲学：用户通过 API Server 定义期望的节点状态（如标签、污点、规格），kubelet 和各个控制器负责将实际状态与期望状态对齐。这种设计使得节点管理可以自动化——Cluster Autoscaler 可以根据负载自动增减节点，Node Lifecycle Controller 可以自动检测和隔离问题节点。
 
 本文档作为节点生命周期管理的总览，详细介绍节点的核心组件、生命周期阶段、状态流转机制、Node 对象的结构以及节点角色管理。
 
@@ -280,7 +280,7 @@ func (o *DrainOptions) getPodsForDeletion(nodeName string) ([]corev1.Pod, error)
 
 Kubernetes 的升级遵循严格的顺序：先升级控制面节点（API Server、Controller Manager、Scheduler、etcd），再升级工作节点。工作节点的升级包括 kubelet 二进制、kubeadm 配置文件和容器运行时组件的更新。升级过程中需要确保工作负载的连续性——通过 drain/uncordon 机制将 Pod 从待升级节点迁移到其他节点。
 
-kubeadm 提供了 `kubeadm upgrade node` 命令来简化工作节点的升级过程。它自动处理配置文件更新、kubelet 服务重启等操作。本文档详细分析节点升级的完整流程、kubeadm 的源码实现、各组件的升级顺序以及常见故障的排查方法。
+kubeadm 提供了 `kubeadm upgrade node` 命令来简化工作节点的升级过程。它自动处理配置文件更新、kubelet 服务重启等操作。本文档详细分析节点升级的完整流程、kubeadm 的源码实现、各组件的升级顺序以及常见问题的排查方法。
 
 ---
 
@@ -333,7 +333,7 @@ kubeadm 提供了 `kubeadm upgrade node` 命令来简化工作节点的升级过
 
 kubelet 的证书管理分为两个阶段：**Bootstrap 阶段**和**正式证书阶段**。在 Bootstrap 阶段，kubelet 使用 Bootstrap Token 向 API Server 发起 CSR（Certificate Signing Request），获取正式的客户端证书。在正式证书阶段，kubelet 会监控证书的有效期，在证书即将过期时自动发起新的 CSR 来续期证书。
 
-这个自动轮换机制从 Kubernetes v1.19 起默认启用，是生产环境中 kubelet 证书管理的标准方案。本文档从源码层面深入分析 kubelet 证书轮换的完整流程、CSR 审批机制、常见故障及解决方案。
+这个自动轮换机制从 Kubernetes v1.19 起默认启用，是生产环境中 kubelet 证书管理的标准方案。本文档从源码层面深入分析 kubelet 证书轮换的完整流程、CSR 审批机制、常见问题及解决方案。
 
 ---
 
@@ -430,16 +430,16 @@ Cluster Autoscaler 工作循环:
 
 #### 概述
 
-节点故障排查是 Kubernetes 运维中最常见且最关键的任务之一。节点故障可能表现为多种症状：节点 NotReady、Pod 无法启动、网络不通、磁盘满、内存不足等。这些问题的根本原因可能涉及 kubelet 配置错误、证书过期、容器运行时异常、网络插件故障、系统资源耗尽等多个层面。
+节点故障排查是 Kubernetes 运维中最常见且最关键的任务之一。节点问题可能表现为多种症状：节点 NotReady、Pod 无法启动、网络不通、磁盘满、内存不足等。这些问题的根本原因可能涉及 kubelet 配置错误、证书过期、容器运行时异常、网络插件问题、系统资源耗尽等多个层面。
 
 有效的节点故障排查需要系统化的方法论：
 
 1. **分层排查**：从底层（硬件/OS）向上排查（容器运行时 → kubelet → 控制面 → 网络）
 2. **日志分析**：通过 systemd 日志、kubelet 日志、容器日志定位问题
 3. **状态检查**：通过 kubectl 命令和 API 查询获取节点和 Pod 的当前状态
-4. **对比分析**：将故障节点与正常节点对比，找出差异
+4. **对比分析**：将问题节点与正常节点对比，找出差异
 
-本文档提供了全面的节点故障排查指南，涵盖 NotReady 节点、kubelet 启动失败、容器异常、网络故障、磁盘问题和 OOM 等常见场景的排查流程和解决方案。
+本文档提供了全面的节点故障排查指南，涵盖 NotReady 节点、kubelet 启动失败、容器异常、网络问题、磁盘问题和 OOM 等常见场景的排查流程和解决方案。
 
 ---
 

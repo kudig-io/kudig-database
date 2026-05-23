@@ -913,13 +913,13 @@ restore_artifactory() {
 # restore_artifactory "2024-01-15" "s3"
 ```
 
-<!-- chunk: 故障排除 (Troubleshooting) -->## 故障排除 (Troubleshooting)
+<!-- chunk: 问题排除 (Troubleshooting) -->## 问题排除 (Troubleshooting)
 
 #<!-- chunk: 常见问题诊断 (Common Issue Diagnosis) -->## 常见问题诊断 (Common Issue Diagnosis)
 
 ```bash
 #!/bin/bash
-# Artifactory 故障排除工具
+# Artifactory 问题排除工具
 
 # 系统状态检查
 check_system_status() {

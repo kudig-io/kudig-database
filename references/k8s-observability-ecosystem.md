@@ -71,7 +71,7 @@ OpenTelemetry 统一了指标、日志、追踪三大信号：
 ## 混沌工程
 
 在生产前验证系统韧性：
-- **Chaos Mesh**：Pod 故障注入、网络延迟/丢包、IO 故障
+- **Chaos Mesh**：Pod 故障注入、网络延迟/丢包、IO 问题
 - **LitmusChaos**：场景库丰富，支持 GitOps 集成
 
 ---

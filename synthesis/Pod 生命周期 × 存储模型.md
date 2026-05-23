@@ -57,7 +57,7 @@ relationships:
 - **Pod Pending + PVC 绑定**：Pod 处于 Pending 的最常见原因之一是 PVC 未绑定到 PV。StorageClass 的动态置备失败、可用区不匹配、或者 CSI 驱动未就绪都会导致 Pod 无法启动
 - **容器重启与 Volume 保持**：当容器因 livenessProbe 失败而重启时，emptyDir 和 PVC 挂载的 Volume 内容保持不变。这是有状态应用的核心假设——但 ConfigMap/Secret 的更新不会自动重新挂载到运行中的容器
 - **Pod 终止与 Volume 卸载**：Pod 进入 Terminating 后，kubelet 先执行 PreStop hook，然后发送 SIGTERM，等待 terminationGracePeriodSeconds，最后调用 CSI NodeUnpublishVolume 卸载 Volume。如果应用未在宽限期内优雅关闭，Volume 可能处于未卸载状态
-- **节点驱逐与 Volume 漂移**：当节点因维护或故障被驱逐时，Pod 被重新调度到其他节点。StatefulSet 的 Pod 通过相同的 PVC 名称重新挂载原 Volume，但 [[entities/deployment|Deployment]] 的 Pod 会创建新的 PVC（如果使用动态置备），导致数据丢失
+- **节点驱逐与 Volume 漂移**：当节点因维护或问题被驱逐时，Pod 被重新调度到其他节点。StatefulSet 的 Pod 通过相同的 PVC 名称重新挂载原 Volume，但 [[entities/deployment|Deployment]] 的 Pod 会创建新的 PVC（如果使用动态置备），导致数据丢失
 - **Init 容器与 Volume 准备**：Init 容器在主容器启动前运行，常用于从对象存储下载数据到 emptyDir 或初始化数据库 schema。Volume 在 Init 容器和主容器之间共享，是初始化模式的基础设施
 
 ## 交叉洞察
@@ -74,7 +74,7 @@ Pod Pending
 
 Pod Running
   ├── 容器重启 → Volume 保持挂载
-  ├── 节点故障 → Volume 需要 detach/attach 到新节点
+  ├── 节点问题 → Volume 需要 detach/attach 到新节点
   └── CSI 驱动监控 Volume 健康
 
 Pod Terminating
@@ -109,7 +109,7 @@ StorageClass 的 volumeBindingMode: WaitForFirstConsumer 是 Pod 生命周期与
 | 张力 | 详情 |
 |------|------|
 | **Volume 挂载延迟** | CSI attach/mount 操作可能耗时数秒到数分钟（取决于存储后端）。在此期间 Pod 处于 ContainerCreating 状态，应用无法启动。高可用场景下，这种延迟直接转化为服务中断时间 |
-| **节点故障后的 Volume 残留** | 当节点突然故障（如网络分区）时，CSI 可能无法执行正常的 detach 操作。新节点上的 Pod 无法挂载同一 Volume，因为存储后端认为 Volume 仍附加在原节点。需要人工干预或 CSI 驱动的强制 detach 机制 |
+| **节点问题后的 Volume 残留** | 当节点突然问题（如网络分区）时，CSI 可能无法执行正常的 detach 操作。新节点上的 Pod 无法挂载同一 Volume，因为存储后端认为 Volume 仍附加在原节点。需要人工干预或 CSI 驱动的强制 detach 机制 |
 | **emptyDir 的容量陷阱** | emptyDir 的大小默认受节点磁盘限制，但没有配额机制。一个写入大量临时数据的 Pod 可能耗尽节点磁盘，影响同一节点上的其他 Pod。设置 sizeLimit 后超出部分会触发 Pod 驱逐，但这对应用来说是不可预期的 |
 | **ConfigMap/Secret 的不热重载** | ConfigMap 和 Secret 作为 Volume 挂载时，kubelet 会定期同步更新（默认 60s-300s），但应用通常不会监听文件变更。这导致配置更新后，Pod 需要重启才能生效 |
 | **多容器共享 Volume 的竞态** | 同一个 Pod 中的多个容器共享 emptyDir 或 PVC 时，可能出现文件读写竞态。Init 容器和主容器的执行顺序由 Pod spec 保证，但并行运行的主容器之间没有内置的同步机制 |
@@ -117,7 +117,7 @@ StorageClass 的 volumeBindingMode: WaitForFirstConsumer 是 Pod 生命周期与
 ## 开放问题
 
 - **Volume 快照与 Pod 一致性**：CSI 快照操作在存储后端执行，但应用可能正在写入数据。如何保证快照的崩溃一致性？是否需要应用层面的冻结机制（如 fsfreeze 或数据库的 [[skills/training-public/inner-training/week-3-node-workload/checkpoint|checkpoint]]）？
-- **跨可用区迁移的数据成本**：当 Pod 因节点故障被调度到不同可用区时，如果 PV 不能跨可用区挂载，需要创建新的 PV 并复制数据。这种隐性数据迁移成本在大规模集群中如何评估和优化？
+- **跨可用区迁移的数据成本**：当 Pod 因节点问题被调度到不同可用区时，如果 PV 不能跨可用区挂载，需要创建新的 PV 并复制数据。这种隐性数据迁移成本在大规模集群中如何评估和优化？
 - **本地存储与调度的死锁**：Local PV 绑定到特定节点，但 Pod 的调度受资源、亲和性、污点等多重约束。如果唯一满足调度条件的节点没有可用的 Local PV，Pod 将永远 Pending。如何在这种死锁中优雅降级？
 - **Sidecar 容器的 Volume 语义**：K8s v1.28+ 的 Sidecar 容器（restartPolicy: Always）在 Pod 终止时是否应该在主容器之前卸载 Volume？当前 CSI 的 unmount 顺序是否考虑了 Sidecar 的持久化需求？
 - **容器镜像层与 Volume 的 I/O 路径**：容器写入的数据先进入 overlayfs 的可写层（如果未挂载 Volume）。当 Pod 突然终止时，overlayfs 层的修改会丢失。应用开发者是否充分理解了 Volume 挂载与否对数据持久性的影响？

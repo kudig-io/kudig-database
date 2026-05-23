@@ -43,7 +43,7 @@ created: "2026-05-23"
 ---
 
 title: Higress 网关故障排查指南
-description: Higress 云原生 API 网关故障排查指南，覆盖路由配置、xDS 推送、服务发现、Wasm 插件、AI 网关等故障场景
+description: Higress 云原生 API 网关故障排查指南，覆盖路由配置、xDS 推送、服务发现、Wasm 插件、AI 网关等问题场景
 category: structural-troubleshooting
 tags:
 - k8s
@@ -98,7 +98,7 @@ k8s_versions:
 
 1. [10 分钟快速诊断](#10-分钟快速诊断)
 2. [架构与核心组件](#架构与核心组件)
-3. [故障场景与排查步骤](#故障场景与排查步骤)
+3. [问题场景与排查步骤](#问题场景与排查步骤)
 4. [配置参考](#配置参考)
 
 ---
@@ -163,7 +163,7 @@ kubectl exec -it <higress-gateway-pod> -c envoy -- curl localhost:15000/config_d
 
 ---
 
-## 故障场景与排查步骤
+## 问题场景与排查步骤
 
 ### 场景 1: Ingress 路由不生效
 
@@ -333,7 +333,7 @@ curl -v --insecure https://<higress-gateway>:443 -H "Host: <host>"
 
 ---
 
-### 场景 6: AI 网关能力故障 (LLM 代理)
+### 场景 6: AI 网关能力问题 (LLM 代理)
 
 **现象**: AI 网关路由到 LLM Provider 失败
 

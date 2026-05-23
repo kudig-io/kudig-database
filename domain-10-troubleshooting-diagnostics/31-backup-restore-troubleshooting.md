@@ -20,7 +20,7 @@ audience:
 - 所有工程师
 estimated_read_time: 25min
 intent_queries:
-- 31-backup-restore-troubleshooting常见故障有哪些？
+- 31-backup-restore-troubleshooting常见问题有哪些？
 - 如何排查31-backup-restore-troubleshooting相关问题？
 - 31-backup-restore-troubleshooting的故障处理方法
 trigger_keywords:
@@ -104,9 +104,9 @@ authors:
 <!-- chunk: 1. 备份恢复故障诊断总览 (Backup and Restore Diagnosis Overview) -->
 ## 1. 备份恢复故障诊断总览 (Backup and Restore Diagnosis Overview)
 
-### 1.1 常见故障现象分类
+### 1.1 常见问题现象分类
 
-| 故障类型 | 症状表现 | 影响范围 | 紧急程度 |
+| 问题类型 | 症状表现 | 影响范围 | 紧急程度 |
 |---------|---------|---------|---------|
 | **备份失败** | BackupPhase失败 | 数据保护缺失 | P0 - 紧急 |
 | **恢复失败** | RestorePhase失败 | 灾难恢复失败 | P0 - 紧急 |

@@ -284,16 +284,16 @@ API Server性能问题
 │   ├── 版本bug
 │   └── 网络问题
 └── 环境因素
-    ├── 硬件故障
+    ├── 硬件问题
     └── 云服务商问题
 ```
 
 #<!-- chunk: 3.2 Kubernetes常见故障模式 -->## 3.2 Kubernetes常见故障模式
 
-##<!-- chunk: 控制平面故障 -->## 控制平面故障
+##<!-- chunk: 控制平面问题 -->## 控制平面问题
 ```yaml
-故障类型:
-  API Server故障:
+问题类型:
+  API Server问题:
     症状: kubectl命令失败，集群不可访问
     常见原因:
       - 证书过期
@@ -303,17 +303,17 @@ API Server性能问题
       kubectl get componentstatuses
       systemctl status kube-apiserver
       
-  etcd故障:
+  etcd问题:
     症状: 数据读写失败，集群状态不一致
     常见原因:
       - 磁盘空间满
       - 网络分区
-      - 成员节点故障
+      - 成员节点问题
     诊断命令:
       etcdctl endpoint health
       etcdctl member list
       
-  Controller Manager故障:
+  Controller Manager问题:
     症状: Deployment不工作，服务无法调度
     常见原因:
       - 权限配置错误
@@ -323,9 +323,9 @@ API Server性能问题
       kubectl logs -n kube-system -l component=kube-controller-manager
 ```
 
-##<!-- chunk: 工作节点故障 -->## 工作节点故障
+##<!-- chunk: 工作节点问题 -->## 工作节点问题
 ```yaml
-故障类型:
+问题类型:
   Node NotReady:
     症状: 节点状态显示NotReady
     常见原因:
@@ -346,7 +346,7 @@ API Server性能问题
       kubectl describe node <node-name>
       kubectl get events --field-selector involvedObject.name=<node-name>
       
-  CNI网络故障:
+  CNI网络问题:
     症状: Pod间通信失败，DNS解析异常
     常见原因:
       - CNI插件配置错误

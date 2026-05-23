@@ -59,11 +59,11 @@ prerequisites:
 | TE-6 | 资源调度异常 | 🟡 P2 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#七te-6-资源调度异常-p2) | #7 |
 | TE-7 | 安全认证失败 | 🟠 P1 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#八te-7-安全认证失败-p1) | #8 |
 | TE-8 | 监控告警异常 | 🟡 P2 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#九te-8-监控告警异常-p2) | #9 |
-| TE-9 | Terway 网络故障 | 🟠 P1 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#十te-9-terway-网络故障-p1-新增) | #10 |
-| TE-10 | ASM 服务网格故障 | 🟠 P1 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#十一te-10-asm-服务网格故障-p1-新增) | #11 |
+| TE-9 | Terway 网络问题 | 🟠 P1 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#十te-9-terway-网络问题-p1-新增) | #10 |
+| TE-10 | ASM 服务网格问题 | 🟠 P1 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#十一te-10-asm-服务网格问题-p1-新增) | #11 |
 | TE-11 | ACK-One 多集群异常 | 🟠 P1 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#十二te-11-ack-one-多集群异常-p1-新增) | #12 |
 | TE-12 | 资源配额超限 | 🟡 P2 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#十三te-12-资源配额超限-p2-新增) | #13 |
-| TE-13 | 变更管理故障 | 🟠 P1 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#十四te-13-变更管理故障-p1-新增) | #14 |
+| TE-13 | 变更管理问题 | 🟠 P1 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#十四te-13-变更管理问题-p1-新增) | #14 |
 | TE-14 | 容量规划失效 | 🟡 P2 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#十五te-14-容量规划失效-p2-新增) | #15 |
 | TE-15 | 灾难恢复失败 | 🔴 P0 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#十六te-15-灾难恢复失败-p0-新增) | #16 |
 | TE-16 | 可观测性完整性缺失 | 🟡 P2 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#十七te-16-可观测性完整性缺失-p2-新增) | #17 |
@@ -76,10 +76,10 @@ prerequisites:
 
 | IE 编号 | 名称 | 逻辑门 | BE 数量 |
 |:---|:---|:---:|:---:|
-| IE-1.1 | 控制平面故障 | OR | 4 |
-| IE-1.2 | 工作节点批量故障 | AND | 3 |
-| IE-1.3 | 网络基础设施故障 | OR | 2 |
-| IE-1.4 | 阿里云 IaaS 层故障 | OR | 3 |
+| IE-1.1 | 控制平面问题 | OR | 4 |
+| IE-1.2 | 工作节点批量问题 | AND | 3 |
+| IE-1.3 | 网络基础设施问题 | OR | 2 |
+| IE-1.4 | 阿里云 IaaS 层问题 | OR | 3 |
 | IE-1.5 | 运维人为失误 | OR | 2 |
 
 ### 2.2 TE-2 应用服务不可用
@@ -89,8 +89,8 @@ prerequisites:
 | IE-2.1 | Pod运行异常 | OR | 4 |
 | IE-2.2 | Service/Endpoint 访问异常 | OR | 3 |
 | IE-2.3 | Ingress/IngressController 访问异常 | OR | 3 |
-| IE-2.4 | ASM 服务网格故障 | OR | 3 |
-| IE-2.5 | ARMS 应用监控故障 | OR | 3 |
+| IE-2.4 | ASM 服务网格问题 | OR | 3 |
+| IE-2.5 | ARMS 应用监控问题 | OR | 3 |
 
 ### 2.3 TE-3 ~ TE-8
 
@@ -112,32 +112,32 @@ prerequisites:
 | TE-6 | IE-6.2 | 调度结果不符合预期 | OR |
 | TE-6 | IE-6.3 | 自定义调度器问题 | OR |
 | TE-6 | IE-6.4 | ACK 资源配额限制 | OR |
-| TE-7 | IE-7.1 | 证书相关故障 | OR |
+| TE-7 | IE-7.1 | 证书相关问题 | OR |
 | TE-7 | IE-7.2 | RBAC 权限问题 | OR |
-| TE-7 | IE-7.3 | 准入控制故障 | OR |
-| TE-7 | IE-7.4 | 阿里云安全服务故障 | OR |
+| TE-7 | IE-7.3 | 准入控制问题 | OR |
+| TE-7 | IE-7.4 | 阿里云安全服务问题 | OR |
 | TE-8 | IE-8.1 | 监控数据采集异常 | OR |
 | TE-8 | IE-8.2 | 告警系统异常 | OR |
 | TE-8 | IE-8.3 | 可视化系统异常 | OR |
-| TE-8 | IE-8.4 | ARMS/MSP 特有故障 | OR |
+| TE-8 | IE-8.4 | ARMS/MSP 特有问题 | OR |
 
 ### 2.4 TE-9 ~ TE-16 (新增)
 
 | TE | IE 编号 | 名称 | ACK 特有 |
 |:---|:---|:---|:---:|
-| TE-9 | IE-9.1 | ENI 模式故障 | ✅ |
-| TE-9 | IE-9.2 | IPVLAN 模式故障 | ✅ |
-| TE-9 | IE-9.3 | BGP 模式故障 | ✅ |
+| TE-9 | IE-9.1 | ENI 模式问题 | ✅ |
+| TE-9 | IE-9.2 | IPVLAN 模式问题 | ✅ |
+| TE-9 | IE-9.3 | BGP 模式问题 | ✅ |
 | TE-9 | IE-9.4 | Service/Ingress 流量异常 | ✅ |
-| TE-10 | IE-10.1 | 数据面故障 | ✅ |
-| TE-10 | IE-10.2 | 控制面故障 | ✅ |
-| TE-10 | IE-10.3 | 流量管理故障 | ✅ |
-| TE-10 | IE-10.4 | 可观测性故障 | ✅ |
-| TE-10 | IE-10.5 | ASM 特有配置故障 | ✅ |
-| TE-11 | IE-11.1 | 集群注册故障 | ✅ |
-| TE-11 | IE-11.2 | 跨集群服务发现故障 | ✅ |
-| TE-11 | IE-11.3 | 配置同步故障 | ✅ |
-| TE-11 | IE-11.4 | 统一监控/日志故障 | ✅ |
+| TE-10 | IE-10.1 | 数据面问题 | ✅ |
+| TE-10 | IE-10.2 | 控制面问题 | ✅ |
+| TE-10 | IE-10.3 | 流量管理问题 | ✅ |
+| TE-10 | IE-10.4 | 可观测性问题 | ✅ |
+| TE-10 | IE-10.5 | ASM 特有配置问题 | ✅ |
+| TE-11 | IE-11.1 | 集群注册问题 | ✅ |
+| TE-11 | IE-11.2 | 跨集群服务发现问题 | ✅ |
+| TE-11 | IE-11.3 | 配置同步问题 | ✅ |
+| TE-11 | IE-11.4 | 统一监控/日志问题 | ✅ |
 | TE-12 | IE-12.1 | API 对象数量限制 | ✅ |
 | TE-12 | IE-12.2 | ACK 资源组配额 | ✅ |
 | TE-12 | IE-12.3 | 存储配额 | ✅ |
@@ -145,28 +145,28 @@ prerequisites:
 | TE-13 | IE-13.1 | 升级失败 | - |
 | TE-13 | IE-13.2 | 回滚失败 | - |
 | TE-13 | IE-13.3 | 配置漂移 | - |
-| TE-13 | IE-13.4 | 变更窗口故障 | - |
+| TE-13 | IE-13.4 | 变更窗口问题 | - |
 | TE-14 | IE-14.1 | 节点容量耗尽 | - |
 | TE-14 | IE-14.2 | 存储容量耗尽 | - |
-| TE-14 | IE-14.3 | 自动扩容故障 | ✅ |
+| TE-14 | IE-14.3 | 自动扩容问题 | ✅ |
 | TE-14 | IE-14.4 | 容量规划不当 | - |
 | TE-15 | IE-15.1 | 备份失败 | - |
 | TE-15 | IE-15.2 | 恢复失败 | - |
 | TE-15 | IE-15.3 | DR 演练失败 | - |
-| TE-15 | IE-15.4 | 跨区域故障 | ✅ |
+| TE-15 | IE-15.4 | 跨区域问题 | ✅ |
 | TE-16 | IE-16.1 | 指标完整性缺失 | - |
 | TE-16 | IE-16.2 | 日志完整性缺失 | - |
 | TE-16 | IE-16.3 | 链路追踪完整性缺失 | ✅ |
-| TE-16 | IE-16.4 | OpenTelemetry 集成故障 | ✅ |
+| TE-16 | IE-16.4 | OpenTelemetry 集成问题 | ✅ |
 | TE-16 | IE-16.5 | 可观测性盲区 | - |
 
 ---
 
 ## 三、底事件快速查找表
 
-### 3.1 按故障类型
+### 3.1 按问题类型
 
-| 故障类型 | BE 编号 | 所属 TE |
+| 问题类型 | BE 编号 | 所属 TE |
 |:---|:---|:---:|
 | **OOM 相关** | | |
 | OOMKilled (容器) | BE-2.3 | TE-2 |
@@ -179,7 +179,7 @@ prerequisites:
 | mTLS 证书过期 | BE-2.11.4 | TE-2 |
 | **网络相关** | | |
 | DNS 解析异常 | BE-4.1, BE-4.2, BE-4.3 | TE-4 |
-| CNI 插件故障 | BE-4.4 | TE-4 |
+| CNI 插件问题 | BE-4.4 | TE-4 |
 | SLB 健康检查失败 | BE-4.10 | TE-4 |
 | **存储相关** | | |
 | PVC 绑定失败 | BE-5.1, BE-5.2, BE-5.3 | TE-5 |
@@ -188,7 +188,7 @@ prerequisites:
 | ENI 多队列压力 | BE-1.8.1.1 | TE-1 |
 | ESSD 性能降级 | BE-1.2.1.1 | TE-1 |
 | VPC CIDR 耗尽 | BE-9.2.1.1 | TE-9 |
-| ASM Istiod 故障 | BE-10.3.1 | TE-10 |
+| ASM Istiod 问题 | BE-10.3.1 | TE-10 |
 
 ### 3.2 按阿里云服务
 
@@ -206,9 +206,9 @@ prerequisites:
 
 ---
 
-## 四、故障传播路径索引
+## 四、问题传播路径索引
 
-### 4.1 高频故障传播路径
+### 4.1 高频问题传播路径
 
 ```
 1. etcd → API Server → 集群不可用
@@ -229,14 +229,14 @@ prerequisites:
 6. SLB 健康检查失败 → Endpoint 为空 → Service 不可用
    BE-4.10.1 → BE-4.10 → IE-2.2 → TE-2
 
-7. CoreDNS 故障 → DNS 解析失败 → Pod 间通信异常
+7. CoreDNS 问题 → DNS 解析失败 → Pod 间通信异常
    BE-4.1.1 → BE-4.1 → IE-4.1 → TE-4
 
 8. CSI driver 异常 → PVC 挂载失败 → Pod 启动失败
    BE-5.3.1.1 → BE-5.3 → IE-5.1 → TE-5
 ```
 
-### 4.2 ACK 特有故障传播路径
+### 4.2 ACK 特有问题传播路径
 
 ```
 9. ESSD burst credits 用尽 → etcd 写入变慢 → API Server 超时
@@ -288,18 +288,18 @@ prerequisites:
 
 ### 6.1 高频底事件概率
 
-| BE 编号 | 名称 | 年故障率 | MTTR (min) | 自动修复率 |
+| BE 编号 | 名称 | 年问题率 | MTTR (min) | 自动修复率 |
 |:---|:---|:---:|:---:|:---:|
 | BE-2.3 | OOMKilled | 5% | 15 | 70% |
 | BE-1.2.1 | etcd 磁盘空间耗尽 | 3% | 45 | 50% |
-| BE-4.1.1 | CoreDNS Pod 故障 | 4% | 10 | 80% |
+| BE-4.1.1 | CoreDNS Pod 问题 | 4% | 10 | 80% |
 | BE-2.1.1 | CrashLoopBackOff (配置错误) | 8% | 20 | 60% |
 | BE-10.1.1 | Envoy OOMKilled | 2% | 5 | 90% |
 | BE-9.2.1.1 | VPC CIDR 耗尽 | 1% | 120 | 30% |
 
 ### 6.2 阿里云特有底事件概率
 
-| BE 编号 | 名称 | 年故障率 | MTTR (min) | 阿里云服务 |
+| BE 编号 | 名称 | 年问题率 | MTTR (min) | 阿里云服务 |
 |:---|:---|:---:|:---:|:---|
 | BE-1.8.1.1.1 | ENI 带宽瓶颈 | 2% | 30 | Terway |
 | BE-1.2.1.1.1 | ESSD 性能降级 | 1% | 15 | ESSD |
@@ -311,11 +311,11 @@ prerequisites:
 ## 七、快速查询算法
 
 ```
-输入: 故障现象/告警/症状
+输入: 问题现象/告警/症状
 输出: 候选 TE → IE → BE 路径
 
 步骤:
-1. 匹配故障现象 → 顶事件 (TE)
+1. 匹配问题现象 → 顶事件 (TE)
 2. 根据故障域 → 中间事件 (IE)
 3. 根据可观测性 → 底事件 (BE)
 4. 根据逻辑门类型 → 确定诊断策略 (OR=并行, AND=顺序)
@@ -326,4 +326,4 @@ prerequisites:
 
 > **索引版本**: v2.0
 > **维护团队**: SRE Team / Platform Team
-> **下次更新**: 每季度或重大故障后
+> **下次更新**: 每季度或重大问题后

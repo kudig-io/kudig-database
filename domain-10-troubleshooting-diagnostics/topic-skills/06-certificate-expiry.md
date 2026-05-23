@@ -156,12 +156,12 @@ Kubernetes 集群涉及以下几类证书，每类的有效期、管理方式和
 
 | 排除条件 | 正确路由 | 说明 |
 |---------|---------|------|
-| 仅 Service 连通性失败，无任何 TLS/x509 错误 | SKILL-NET-002 | 网络级故障，非证书问题 |
-| 节点 NotReady 但日志中无证书错误 | SKILL-NODE-001 | 节点故障的其他根因（资源压力、运行时故障等） |
+| 仅 Service 连通性失败，无任何 TLS/x509 错误 | SKILL-NET-002 | 网络级问题，非证书问题 |
+| 节点 NotReady 但日志中无证书错误 | SKILL-NODE-001 | 节点问题的其他根因（资源压力、运行时问题等） |
 | Pod CrashLoopBackOff 但非 TLS 相关 | SKILL-POD-001 | 应用自身错误 |
 | TLS 版本/密码套件不兼容（非过期） | 安全配置调优 | 需要调整 TLS 配置而非证书更新 |
 | 证书有效但域名/IP 不匹配（SAN 问题） | 证书重新签发 | 证书未过期，需重新生成含正确 SAN 的证书 |
-| OIDC / LDAP 外部认证故障 | 认证配置排查 | 不属于 X.509 证书过期范畴 |
+| OIDC / LDAP 外部认证问题 | 认证配置排查 | 不属于 X.509 证书过期范畴 |
 
 ---
 
@@ -169,7 +169,7 @@ Kubernetes 集群涉及以下几类证书，每类的有效期、管理方式和
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径：
+按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 验证 kubectl 是否可用（判断 apiserver 证书是否过期）
 ```bash
@@ -249,7 +249,7 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -enddate 2>/dev/null
 - **apiserver 证书过期且 kubectl 完全不可用**: 所有远程管理能力丧失，需要 SSH 到控制平面节点进行紧急恢复
 - **etcd 证书过期**: etcd 集群可能丢失 quorum，存在数据丢失风险
 - **CA 证书过期**: 影响所有由该 CA 签发的证书，需要集群范围内的证书重新签发
-- **多个控制平面组件证书同时过期**: 复合故障，恢复过程复杂且有严格顺序要求
+- **多个控制平面组件证书同时过期**: 复合问题，恢复过程复杂且有严格顺序要求
 - **证书过期 + etcd 不健康**: 可能需要 etcd 数据恢复，超出常规证书恢复范畴
 
 > **升级消息模板**: 参见 Section 8.2
@@ -260,7 +260,7 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -enddate 2>/dev/null
 
 ### Phase 1: 快速检查（只读，零风险）
 
-> **目标**: 快速定位是哪类证书过期，确定故障影响范围。优先使用 kubectl（如果可用），否则 SSH 到控制平面节点。
+> **目标**: 快速定位是哪类证书过期，确定问题影响范围。优先使用 kubectl（如果可用），否则 SSH 到控制平面节点。
 > **预计耗时**: 2-5 分钟
 
 **Step D1.1**: 检查 kubeadm 管理的证书到期状态
@@ -319,7 +319,7 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -enddate 2>/dev/null
 **Step D1.3**: 检查 kubelet 客户端证书
 - **命令**:
   ```bash
-  # SSH 到故障节点
+  # SSH 到问题节点
   openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates -subject 2>/dev/null
   # 如果上述路径不存在，尝试：
   openssl x509 -in /var/lib/kubelet/pki/kubelet-client.pem -noout -dates -subject 2>/dev/null
@@ -1706,7 +1706,7 @@ kubectl delete namespace test-webhook-verify 2>/dev/null
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 
 - [ ] `kubeadm certs check-expiration` 显示所有证书在有效期内（>7 天）
 - [ ] `kubectl` 命令正常工作，无 x509 或 TLS 错误
@@ -1749,9 +1749,9 @@ kubectl delete namespace test-webhook-verify 2>/dev/null
 ### 8.2 升级消息模板
 
 ```
-【{severity}】证书过期与 TLS 故障 - {cluster_name}
+【{severity}】证书过期与 TLS 问题 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: {certificate_type} 证书过期/TLS 故障，持续 {duration}
+- 问题概述: {certificate_type} 证书过期/TLS 问题，持续 {duration}
 - 影响范围:
   - kubectl 可用性: {kubectl_available}
   - 受影响组件: {affected_components}
@@ -1876,7 +1876,7 @@ kubectl delete namespace test-webhook-verify 2>/dev/null
 | 结构化故障排查方法论 | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/` | 系统化证书排查的理论基础 |
 | Kubernetes 故障排查总论 | `domain-10-troubleshooting-diagnostics/` | 跨组件的故障排查方法论 |
 | 节点 NotReady 诊断 | `SKILL-NODE-001` (01-node-notready.md) | 当证书过期导致节点 NotReady 时的关联诊断 |
-| 网络故障诊断 | `SKILL-NET-002` | 区分网络故障和 TLS 故障 |
+| 网络故障诊断 | `SKILL-NET-002` | 区分网络问题和 TLS 问题 |
 | etcd 运维与恢复 | `domain-10-troubleshooting-diagnostics/` | etcd 证书恢复后的集群健康验证 |
 
 ### 10.3 预防措施与最佳实践

@@ -207,7 +207,7 @@ Istio 自2017年由Google、IBM、Lyft联合推出以来，已发展成为功能
 
 | 特性 | 说明 | 生产级配置要点 |
 |:---|:---|:---|
-| 流量管理 | VirtualService、DestinationRule、流量分割、超时重试、故障注入 | 合理设置连接池、异常检测阈值避免级联故障 |
+| 流量管理 | VirtualService、DestinationRule、流量分割、超时重试、故障注入 | 合理设置连接池、异常检测阈值避免级联问题 |
 | 安全 | mTLS (STRICT/PERMISSIVE)、AuthorizationPolicy、RequestAuthentication、JWT | 生产环境必须启用 STRICT 模式 mTLS |
 | 可观测性 | 自动指标、分布式追踪、访问日志、Kiali 拓扑 | 设置合理采样率避免开销过大 |
 | 多集群 | 单网络/多网络多集群、外部控制平面、跨集群故障转移 | 确保网络连通性和时钟同步 |

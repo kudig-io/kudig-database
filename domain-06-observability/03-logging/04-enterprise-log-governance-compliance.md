@@ -529,7 +529,7 @@ audit_types:
     key_areas:
       - 系统性能监控
       - 资源利用效率
-      - 故障响应时效
+      - 问题响应时效
       
   security_audit:
     scope: "安全控制有效性验证"

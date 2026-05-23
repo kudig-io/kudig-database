@@ -358,7 +358,7 @@ spec:
 | 松耦合 | Loose Coupling | 组件间通过API交互 | RESTful API | 各组件独立部署 |
 | 可组合 | Composable | 小组件组合成复杂系统 | Pod组合容器 | Sidecar模式 |
 | 可移植 | Portable | 跨环境一致性运行 | 抽象层设计 | CRI/CNI/CSI |
-| 自愈 | Self-Healing | 自动检测并恢复故障 | 健康检查+重启策略 | livenessProbe |
+| 自愈 | Self-Healing | 自动检测并恢复问题 | 健康检查+重启策略 | livenessProbe |
 | 水平扩展 | Horizontal Scaling | 通过副本数扩展 | HPA/ReplicaSet | 无状态应用扩缩 |
 | 服务发现 | Service Discovery | 自动注册和发现服务 | DNS/Service | CoreDNS |
 
@@ -721,14 +721,14 @@ func (c *Controller) syncHandler(key string) error {
 <!-- chunk: 自愈机制 (Self-Healing) -->
 ## 自愈机制 (Self-Healing)
 
-| 故障类型 | 检测机制 | 恢复机制 | 配置方式 |
+| 问题类型 | 检测机制 | 恢复机制 | 配置方式 |
 |---------|---------|---------|---------|
 | 容器崩溃 | 进程退出码 | 容器重启 | restartPolicy |
 | 应用死锁 | livenessProbe | 容器重启 | HTTP/TCP/Exec探针 |
 | 应用未就绪 | readinessProbe | 从Service移除 | HTTP/TCP/Exec探针 |
 | 启动缓慢 | startupProbe | 延迟其他探针 | HTTP/TCP/Exec探针 |
 | Pod失败 | kubelet检测 | ReplicaSet重建 | 副本数维持 |
-| 节点故障 | Node Controller | Pod驱逐+重调度 | podEvictionTimeout |
+| 节点问题 | Node Controller | Pod驱逐+重调度 | podEvictionTimeout |
 | 资源不足 | OOMKiller | Pod重启/驱逐 | requests/limits |
 
 ### 探针配置示例
@@ -818,7 +818,7 @@ spec:
 │                                                                              │
 │  优势:                                                                      │
 │  • 组件可独立升级                                                          │
-│  • 组件故障不影响其他组件                                                  │
+│  • 组件问题不影响其他组件                                                  │
 │  • 易于扩展新组件                                                          │
 │  • 测试更容易(Mock API Server即可)                                         │
 │                                                                              │

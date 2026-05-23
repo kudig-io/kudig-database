@@ -582,7 +582,7 @@ kubectl get rs -l app=web-app
 |------|------|------|----------|
 | RS 创建失败 | `error creating new replica set` | RBAC 权限不足或资源配额超限 | 检查 controller-manager 权限和 ResourceQuota |
 | PodTemplateHash 冲突 | 两个 Deployment 产生相同 hash | 不同 Deployment 的 template 碰巧相同 | 添加不同的 label 区分 |
-| cleanup 卡住 | 删除 Deployment 后 RS 未清理 | OwnerReference 缺失或 GC controller 故障 | 手动删除 RS 或检查 GC 日志 |
+| cleanup 卡住 | 删除 Deployment 后 RS 未清理 | OwnerReference 缺失或 GC controller 问题 | 手动删除 RS 或检查 GC 日志 |
 | scale 失败 | RS 副本数不更新 | API Server 不可达或乐观锁冲突 | 检查 API Server 健康状态 |
 | 暂停后更新不生效 | resume 后无变化 | 暂停期间修改的不是 PodTemplate | 确认修改了 spec.template 字段 |
 

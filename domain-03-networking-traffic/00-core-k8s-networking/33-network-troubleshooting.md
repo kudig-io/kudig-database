@@ -71,7 +71,7 @@ created: "2026-05-23"
 
 # 33 - 网络故障诊断与链路排查 (Network Troubleshooting & Data Path Diagnosis)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-03 | **定位**: 场景化快速参考，适合故障现场速查
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-03 | **定位**: 场景化快速参考，适合问题现场速查
 
 ---
 
@@ -115,7 +115,7 @@ veth pair (宿主机侧: caliXXXX / vethXXXX)
 
 | 类型 | 症状 | 常见原因 | 首选排查手段 |
 |-----|------|---------|-------------|
-| DNS解析失败 | 无法解析服务名 | CoreDNS故障/策略阻断 | nslookup + [[CoreDNS|CoreDNS]] logs |
+| DNS解析失败 | 无法解析服务名 | CoreDNS问题/策略阻断 | nslookup + [[CoreDNS|CoreDNS]] logs |
 | Pod间不通 | 跨节点通信失败 | CNI问题/NetworkPolicy | 多跳 tcpdump |
 | Service不通 | ClusterIP无响应 | Endpoints为空/kube-proxy | iptables/IPVS 检查 |
 | 外部访问失败 | 无法访问外网 | NAT/防火墙/策略 | SNAT 规则 + 安全组 |

@@ -127,9 +127,9 @@ related_topics:
 
 | 演练类型 | 注入方式 | 验证目标 |
 |----------|---------|---------|
-| Pod 故障 | 删除 Pod/OOM 注入 | 自动恢复/告警触发 |
-| 节点故障 | cordon/drain | Pod 迁移/服务可用 |
-| 网络故障 | [[NetworkPolicy|NetworkPolicy]]/iptables | 降级策略/超时处理 |
+| Pod 问题 | 删除 Pod/OOM 注入 | 自动恢复/告警触发 |
+| 节点问题 | cordon/drain | Pod 迁移/服务可用 |
+| 网络问题 | [[NetworkPolicy|NetworkPolicy]]/iptables | 降级策略/超时处理 |
 | 资源耗尽 | stress-ng | 告警/HPA/驱逐 |
 
 ---
@@ -301,7 +301,7 @@ kubectl get pods -n fault-drill
 kubectl get svc -n fault-drill
 ```
 
-#### 4.2 故障 1: 模拟 OOM
+#### 4.2 问题 1: 模拟 OOM
 
 ```bash
 cat > oom-inject.yaml << 'EOF'
@@ -348,7 +348,7 @@ kubectl describe pod oom-inject -n fault-drill | grep -A 5 "Last State"
 kubectl delete pod oom-inject -n fault-drill
 ```
 
-#### 4.3 故障 2: 模拟 Service 不可用
+#### 4.3 问题 2: 模拟 Service 不可用
 
 ```bash
 # 删除 Endpoints (模拟 selector 不匹配)
@@ -379,7 +379,7 @@ kubectl get endpoints app -n fault-drill
 # app    10.244.1.x:80,10.244.2.x:80,10.244.3.x:80   5s
 ```
 
-#### 4.4 故障 3: 模拟节点故障
+#### 4.4 问题 3: 模拟节点问题
 
 ```bash
 # 选择一个节点

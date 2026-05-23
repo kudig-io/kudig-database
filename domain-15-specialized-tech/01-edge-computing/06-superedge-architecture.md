@@ -515,7 +515,7 @@ graph TB
         Node1["Edge Node 1\nedge-health"]
         Node2["Edge Node 2\nedge-health"]
         Node3["Edge Node 3\nedge-health"]
-        Node4["Edge Node 4\nedge-health (故障)"]
+        Node4["Edge Node 4\nedge-health (问题)"]
     end
 
     Node1 -->|"健康检查"| Node2
@@ -528,9 +528,9 @@ graph TB
     Node3 -->|"健康检查"| Node2
     Node3 -->|"健康检查"| Node4
 
-    Node1 -->|"上报投票(Node4故障)"| EC
-    Node2 -->|"上报投票(Node4故障)"| EC
-    Node3 -->|"上报投票(Node4故障)"| EC
+    Node1 -->|"上报投票(Node4问题)"| EC
+    Node2 -->|"上报投票(Node4问题)"| EC
+    Node3 -->|"上报投票(Node4问题)"| EC
 
     EC -->|"多数票确认\n更新Node4 Taint"| Master
 

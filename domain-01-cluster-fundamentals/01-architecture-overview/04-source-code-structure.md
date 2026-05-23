@@ -67,7 +67,7 @@ created: "2026-05-23"
 <!-- chunk: 文档概览 -->
 ## 文档概览
 
-本文档提供 Kubernetes 源码结构的全景图，涵盖顶层目录、核心组件、关键模块的代码路径、接口定义、版本演变和生产环境排障价值。适用于源码阅读、组件开发、故障调试、二次开发场景。
+本文档提供 Kubernetes 源码结构的全景图，涵盖顶层目录、核心组件、关键模块的代码路径、接口定义、版本演变和生产环境排障价值。适用于源码阅读、组件开发、问题调试、二次开发场景。
 
 **阅读对象**: 平台工程师、Operator 开发者、CRI/CNI/CSI 插件开发者、源码贡献者
 
@@ -327,7 +327,7 @@ staging 目录包含可独立发布为 Go 模块的代码，通过 `k8s.io/*` �
 
 ### 故障排查代码路径速查
 
-| 故障类型 | 关键代码路径 | 关键函数/方法 | 日志关键字 |
+| 问题类型 | 关键代码路径 | 关键函数/方法 | 日志关键字 |
 |---------|------------|--------------|----------|
 | **Pod Pending** | `pkg/scheduler/schedule_one.go` | `scheduleOne()`, `findNodesThatFitPod()` | `FailedScheduling`, `Unschedulable` |
 | **Node NotReady** | `pkg/kubelet/kubelet_node_status.go`<br>`pkg/controller/nodelifecycle/` | `updateNodeStatus()`, `doNoScheduleTaintingPass()` | `NodeNotReady`, `NodeStatusUnknown` |

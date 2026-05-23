@@ -122,7 +122,7 @@ LLM 增强 FTA 推理:
 ## 20.2 自然语言构建 FTA
 
 ```
-未来愿景: 运维人员用自然语言描述故障场景，LLM 自动生成 FTA
+未来愿景: 运维人员用自然语言描述问题场景，LLM 自动生成 FTA
 
 输入 (自然语言):
   "如果我们的 API Gateway 不可用，可能的原因有:
@@ -135,7 +135,7 @@ LLM 增强 FTA 推理:
 
 LLM 输出 (结构化 FTA):
   TE: API Gateway 不可用 [OR门]
-  ├── BE: Ingress Controller Pod 故障
+  ├── BE: Ingress Controller Pod 问题
   ├── IE: 后端服务全部不可用 [OR门]
   │   ├── BE: Pod 全部 OOMKilled
   │   └── BE: 新版本部署启动失败

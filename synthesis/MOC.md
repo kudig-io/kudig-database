@@ -84,8 +84,8 @@ relationships:
 ### SRE/可靠性
 
 - [[synthesis/slo-monitoring-integration.md|SLO × 监控集成]] — SLO 监控
-- K8s 故障分布与 MTTR 基准 — 故障统计
-- [[entities/kubernetes|Kubernetes]] Fault Distribution and MTTR.md|K8s 故障分布 (EN)]] — 英文版
+- K8s 问题分布与 MTTR 基准 — 问题统计
+- [[entities/kubernetes|Kubernetes]] Fault Distribution and MTTR.md|K8s 问题分布 (EN)]] — 英文版
 - [[domain-17-system-foundation/topic-dictionary/operations/production-troubleshooting-playbook.md|生产故障排查手册]] — 综合排查
 - [[synthesis/Structural Troubleshooting Framework.md|结构化故障排查框架]] — 方法论
 

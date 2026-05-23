@@ -282,7 +282,7 @@ created: "2026-05-23"
 > **🔧 工作原理**: 
 > - Taint应用在节点(Node)上,格式为`key=value:effect`,其中effect有三种:NoSchedule(禁止调度)、PreferNoSchedule(尽量不调度)、NoExecute(驱逐已有Pod)
 > - Toleration声明在Pod上,匹配节点的Taint才能被调度到该节点,支持精确匹配(key+value+effect)或模糊匹配(仅key或operator:Exists)
-> - 典型应用场景:GPU节点专用(打taint,只有GPU工作负载容忍)、主节点保护(master节点默认有NoSchedule taint)、故障节点隔离(自动添加NoExecute驱逐Pod)
+> - 典型应用场景:GPU节点专用(打taint,只有GPU工作负载容忍)、主节点保护(master节点默认有NoSchedule taint)、问题节点隔离(自动添加NoExecute驱逐Pod)
 > - 与Affinity的区别:Taint/Toleration是"排斥"机制(默认拒绝),Affinity是"吸引"机制(表达偏好)
 >
 > **📝 最小示例**:
@@ -308,7 +308,7 @@ created: "2026-05-23"
 >
 > **⚠️ 常见误区**:
 > - ❌ 认为Taint会吸引特定Pod → ✅ Taint是排斥机制,仅阻止不匹配的Pod,需配合nodeSelector或Affinity实现定向调度
-> - ❌ 只用NoSchedule效果 → ✅ NoExecute可驱逐已有Pod(如节点故障时),tolerationSeconds可设置容忍时长
+> - ❌ 只用NoSchedule效果 → ✅ NoExecute可驱逐已有Pod(如节点问题时),tolerationSeconds可设置容忍时长
 > - ❌ 忘记给关键系统Pod加Toleration → ✅ DaemonSet(如kube-proxy、CNI)必须容忍所有节点污点才能正常运行
 
 ### Affinity
@@ -641,7 +641,7 @@ created: "2026-05-23"
 >
 > **⚠️ 常见误区**:
 > - ❌ 在Validating Webhook中修改对象 → ✅ 修改对象必须在Mutating Webhook中完成,Validating只能验证
-> - ❌ failurePolicy设置为Ignore导致策略失效 → ✅ 生产环境应使用Fail模式,确保Webhook故障时不绕过检查
+> - ❌ failurePolicy设置为Ignore导致策略失效 → ✅ 生产环境应使用Fail模式,确保Webhook问题时不绕过检查
 > - ❌ Webhook响应时间过长阻塞API → ✅ 应设置合理的timeoutSeconds(建议≤10s),并优化Webhook性能
 
 ### Webhook
@@ -878,7 +878,7 @@ created: "2026-05-23"
 > **🔰 初学者理解**: etcd是Kubernetes集群的唯一数据库,存储所有资源对象的状态信息。类比:etcd像公司的档案室,所有文件(Pod、Service等)的档案都存在这里,只有前台(API Server)有钥匙,其他人要查档案必须通过前台。
 >
 > **🔧 工作原理**: 
-> - etcd使用Raft共识算法保证数据一致性,集群通常部署3或5个节点(奇数),可容忍(N-1)/2个节点故障
+> - etcd使用Raft共识算法保证数据一致性,集群通常部署3或5个节点(奇数),可容忍(N-1)/2个节点问题
 > - 采用MVCC(多版本并发控制)存储机制,每次修改都保留历史版本,支持Watch机制高效监听数据变化
 > - 所有写入先记录WAL(Write-Ahead Log)预写日志,再更新内存,最后定期快照压缩,保证数据持久性和故障恢复
 > - **只有API Server直接访问etcd**,其他组件(Controller、Scheduler、Kubelet)都通过API Server间接读写,实现访问控制和统一认证
@@ -1776,7 +1776,7 @@ created: "2026-05-23"
 #### kubectl debug
 | 属性 | 内容 |
 |------|------|
-| **简述** | Kubernetes 故障调试工具 |
+| **简述** | Kubernetes 问题调试工具 |
 | **Wikipedia** | N/A |
 | **首次论文** | kubectl debug 工具文档 |
 | **官方文档** | https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/ |
@@ -2136,7 +2136,7 @@ created: "2026-05-23"
 > **⚠️ 常见误区**:
 > - ❌ kubelet直接管理容器进程 → ✅ kubelet通过CRI接口调用containerd等运行时,运行时才真正管理容器进程
 > - ❌ 健康检查由API Server执行 → ✅ 健康检查由kubelet在本地执行,结果更新到Pod Status,API Server只负责存储状态
-> - ❌ kubelet故障会导致节点上Pod立即停止 → ✅ kubelet故障时已运行的容器继续运行,但无法创建新Pod或执行健康检查,节点会被标记为NotReady
+> - ❌ kubelet问题会导致节点上Pod立即停止 → ✅ kubelet问题时已运行的容器继续运行,但无法创建新Pod或执行健康检查,节点会被标记为NotReady
 
 ### kube-proxy
 | 属性 | 内容 |
@@ -2598,7 +2598,7 @@ created: "2026-05-23"
 ### Ephemeral Container
 | 属性 | 内容 |
 |------|------|
-| **简述** | 临时容器，用于调试和故障排除的短期运行容器 |
+| **简述** | 临时容器，用于调试和问题排除的短期运行容器 |
 | **Wikipedia** | N/A |
 | **首次论文** | Kubernetes Ephemeral Container 设计文档 |
 | **官方文档** | https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/ |
@@ -3753,7 +3753,7 @@ created: "2026-05-23"
 | **首次论文** | 系统日志管理相关文献 |
 | **官方文档** | https://kubernetes.io/docs/concepts/cluster-administration/logging/ |
 
-> **🔰 初学者理解**: 容器日志是应用运行时输出的事件记录,Kubernetes通过统一的日志收集系统(如EFK/Loki)将分散在各节点上的容器日志汇聚到中心化存储,便于检索和分析。类比:日志像飞机的黑匣子,记录所有关键事件和异常情况,系统故障时通过查看日志快速定位问题根因。
+> **🔰 初学者理解**: 容器日志是应用运行时输出的事件记录,Kubernetes通过统一的日志收集系统(如EFK/Loki)将分散在各节点上的容器日志汇聚到中心化存储,便于检索和分析。类比:日志像飞机的黑匣子,记录所有关键事件和异常情况,系统问题时通过查看日志快速定位问题根因。
 >
 > **🔧 工作原理**: 
 > - **容器日志路径**:容器通过stdout/stderr输出的日志,kubelet自动写入节点的`/var/log/pods/<namespace>_<pod>_<uid>/<container>/`目录,以JSON格式存储
@@ -3884,7 +3884,7 @@ created: "2026-05-23"
 | **首次论文** | 分布式追踪系统设计文献 |
 | **官方文档** | https://opentracing.io/docs/ |
 
-> **🔰 初学者理解**: 分布式追踪(Distributed Tracing)用于追踪一个请求在微服务架构中的完整调用链路,记录经过的每个服务、耗时、状态等信息,快速定位性能瓶颈和故障点。类比:分布式追踪像快递全程追踪系统,一个包裹(请求)从发件(前端)→中转站A(服务A)→中转站B(服务B)→收件(数据库),每个环节都记录时间戳和状态,出问题时能立即看到卡在哪个环节。
+> **🔰 初学者理解**: 分布式追踪(Distributed Tracing)用于追踪一个请求在微服务架构中的完整调用链路,记录经过的每个服务、耗时、状态等信息,快速定位性能瓶颈和问题点。类比:分布式追踪像快递全程追踪系统,一个包裹(请求)从发件(前端)→中转站A(服务A)→中转站B(服务B)→收件(数据库),每个环节都记录时间戳和状态,出问题时能立即看到卡在哪个环节。
 >
 > **🔧 工作原理**: 
 > - **核心概念**: **Trace**(完整的请求链路)由多个**Span**(单次服务调用)组成,每个Span记录操作名称、开始/结束时间、标签(tags)、日志(logs)等,Span之间通过parent-child关系形成调用树
@@ -4028,8 +4028,8 @@ created: "2026-05-23"
 >
 > **🔧 工作原理**: 
 > - **Consistency(一致性)**:所有节点在同一时刻看到相同的数据,任何写入立即对所有读取可见,强一致性要求所有副本同步后才返回成功
-> - **Availability(可用性)**:系统任何时刻都能响应请求(非错误响应),即使部分节点故障,剩余节点仍能提供服务
-> - **Partition Tolerance(分区容错)**:网络分区(节点间通信中断)发生时系统仍能继续运行,这是分布式系统必须满足的条件(网络故障不可避免)
+> - **Availability(可用性)**:系统任何时刻都能响应请求(非错误响应),即使部分节点问题,剩余节点仍能提供服务
+> - **Partition Tolerance(分区容错)**:网络分区(节点间通信中断)发生时系统仍能继续运行,这是分布式系统必须满足的条件(网络问题不可避免)
 > - **现实选择**:由于P(分区容错)必须满足,实际是在**CP(一致性+分区容错)**和**AP(可用性+分区容错)**之间选择:
 >   - **CP系统**:etcd、Zookeeper、HBase,发生分区时牺牲可用性(少数派节点拒绝服务),保证数据一致性,适合金融交易、配置中心
 >   - **AP系统**:Cassandra、DynamoDB、Eureka,发生分区时牺牲一致性(允许读到旧数据),保证高可用,适合社交媒体、内容推荐
@@ -4074,7 +4074,7 @@ created: "2026-05-23"
 > |---------|------|---------------|---------|
 > | **etcd** | CP | 少数派节点返回503错误,拒绝读写 | 配置中心、选主 |
 > | **Cassandra** | AP | 所有节点继续服务,可能读到旧数据 | 用户画像、推荐系统 |
-> | **单机MySQL** | CA | 无分区问题,但不容忍分区(单点故障) | 传统单体应用 |
+> | **单机MySQL** | CA | 无分区问题,但不容忍分区(单点问题) | 传统单体应用 |
 > 
 > ## Kubernetes中的体现:
 > 
@@ -4113,7 +4113,7 @@ created: "2026-05-23"
 >
 > **🔧 工作原理**: 
 > - **三个核心子问题**:
->   1. **Leader Election(领导选举)**:集群启动或Leader故障时,通过投票选举新Leader,获得多数票(quorum)的候选者成为Leader
+>   1. **Leader Election(领导选举)**:集群启动或Leader问题时,通过投票选举新Leader,获得多数票(quorum)的候选者成为Leader
 >   2. **Log Replication(日志复制)**:Leader接收客户端写入请求,先写入本地日志,再并行复制到所有Follower,超过半数确认后提交(commit)并应用到状态机
 >   3. **Safety(安全性)**:保证已提交的日志不会丢失,新Leader必须包含所有已提交的日志条目
 > - **任期(Term)**:逻辑时钟,每次选举增加Term号,防止过期Leader的消息干扰新Leader(Term小的消息被忽略),解决脑裂问题
@@ -4121,7 +4121,7 @@ created: "2026-05-23"
 >   - **Leader**:处理所有客户端请求,发送心跳维持权威,一个Term内最多一个Leader
 >   - **Follower**:被动接收Leader的日志复制和心跳,投票给候选者
 >   - **Candidate**:Follower在选举超时(150-300ms随机)后转为候选者,请求投票,获得多数票后成为Leader
-> - **容错能力**:N节点集群可容忍(N-1)/2个节点故障,如3节点容忍1个故障,5节点容忍2个故障,通常部署3或5个奇数节点
+> - **容错能力**:N节点集群可容忍(N-1)/2个节点问题,如3节点容忍1个问题,5节点容忍2个问题,通常部署3或5个奇数节点
 > - etcd的应用:Kubernetes的etcd使用Raft算法,所有API Server写入操作通过Raft Leader同步,保证集群状态强一致性
 >
 > **📝 最小示例**:
@@ -4166,11 +4166,11 @@ created: "2026-05-23"
 > # - RAFT TERM: 5,表示经历了5次选举(包括初始选举)
 > # - RAFT INDEX: 123456,日志条目索引,所有节点一致表示数据同步正常
 > 
-> # 3. Raft选举流程模拟(Leader故障场景)
+> # 3. Raft选举流程模拟(Leader问题场景)
 > # 
 > # 初始状态: master1(Leader), master2(Follower), master3(Follower), Term=5
 > # 
-> # T0: master1故障下线
+> # T0: master1问题下线
 > # - master2和master3不再收到Leader心跳
 > # 
 > # T1(150ms后): master2选举超时,转为Candidate
@@ -4201,9 +4201,9 @@ created: "2026-05-23"
 > ```
 >
 > **⚠️ 常见误区**:
-> - ❌ 认为etcd集群部署偶数节点(如2/4/6)能提高可用性 → ✅ 奇数节点最优,偶数节点不仅不提高容错能力(4节点仍只容忍1故障),反而降低写入性能(需要更多确认)
+> - ❌ 认为etcd集群部署偶数节点(如2/4/6)能提高可用性 → ✅ 奇数节点最优,偶数节点不仅不提高容错能力(4节点仍只容忍1问题),反而降低写入性能(需要更多确认)
 > - ❌ 所有节点都可以接受写入 → ✅ Raft中只有Leader接受写入,Follower收到写入请求会转发给Leader,读取可配置从Follower读(牺牲一致性)
-> - ❌ Leader故障后集群立即不可用 → ✅ 选举通常在150-300ms内完成,期间写入失败但已提交的数据不丢失,选举完成后服务恢复
+> - ❌ Leader问题后集群立即不可用 → ✅ 选举通常在150-300ms内完成,期间写入失败但已提交的数据不丢失,选举完成后服务恢复
 
 ### Paxos
 | 属性 | 内容 |
@@ -4783,7 +4783,7 @@ created: "2026-05-23"
 >
 > **⚠️ 常见误区**:
 > - ❌ 模型服务未配置资源限制导致OOM → ✅ 大模型推理消耗大量内存(如BERT可达数GB),必须合理配置requests/limits并监控内存使用
-> - ❌ 单副本部署导致单点故障 → ✅ 生产环境应部署多副本(replicas≥2)+HPA自动扩缩容+PDB保证高可用
+> - ❌ 单副本部署导致单点问题 → ✅ 生产环境应部署多副本(replicas≥2)+HPA自动扩缩容+PDB保证高可用
 > - ❌ GPU资源未正确配置 → ✅ 需要在容器中声明`resources.limits.nvidia.com/gpu: 1`,并确保节点安装GPU驱动和Device Plugin
 
 ### Distributed Training
@@ -4803,7 +4803,7 @@ created: "2026-05-23"
 > - **模型并行(Model Parallel)**:模型太大单GPU装不下时,将模型层切分到不同GPU,如Transformer的不同层分布在不同卡,适合超大模型(如GPT-3)
 > - **Pipeline并行**:模型并行的优化版,将mini-batch切分为micro-batch流水线执行,减少GPU空闲时间
 > - **梯度累积**:小batch多次前向反向传播累积梯度后再更新参数,模拟大batch训练,节省显存
-> - **Kubernetes上的实现**:通过Training Operator(原TF Operator/PyTorch Operator)管理分布式训练Job,自动配置worker通信、处理故障重启
+> - **Kubernetes上的实现**:通过Training Operator(原TF Operator/PyTorch Operator)管理分布式训练Job,自动配置worker通信、处理问题重启
 >
 > **📝 最小示例**:
 > ```yaml
@@ -5899,16 +5899,16 @@ created: "2026-05-23"
 #### Chaos Engineering
 | 属性 | 内容 |
 |------|------|
-| **简述** | 混沌工程，在生产环境中主动注入故障以提高系统韧性的实践 |
+| **简述** | 混沌工程，在生产环境中主动注入问题以提高系统韧性的实践 |
 | **Wikipedia** | https://en.wikipedia.org/wiki/Chaos_engineering |
 | **首次论文** | "Chaos Engineering: System Resiliency in Practice" - Netflix (2017) |
 | **官方文档** | https://principlesofchaos.org/ |
 
-> **🔰 初学者理解**: 混沌工程是在可控条件下主动向系统注入故障(如杀死Pod、网络延迟、磁盘故障),验证系统能否在故障下保持稳定运行,提前发现薄弱环节。类比:混沌工程像消防演习,在非真实火灾时模拟各种紧急情况(断电、浓烟、堵塞出口),测试员工是否能安全疏散,发现应急预案的不足并改进。
+> **🔰 初学者理解**: 混沌工程是在可控条件下主动向系统注入问题(如杀死Pod、网络延迟、磁盘问题),验证系统能否在问题下保持稳定运行,提前发现薄弱环节。类比:混沌工程像消防演习,在非真实火灾时模拟各种紧急情况(断电、浓烟、堵塞出口),测试员工是否能安全疏散,发现应急预案的不足并改进。
 >
 > **🔧 工作原理**: 
-> - **科学方法**:①定义"稳态假说"(系统在正常/异常情况下都应保持的指标,如99.9%可用性);②设计实验(注入故障);③执行并观察;④分析结果并改进系统
-> - **故障类型**:Pod故障(杀死随机Pod)、网络故障(延迟/丢包/分区)、资源故障(CPU/内存耗尽)、节点故障(节点宕机)、依赖故障(下游服务不可用)
+> - **科学方法**:①定义"稳态假说"(系统在正常/异常情况下都应保持的指标,如99.9%可用性);②设计实验(注入问题);③执行并观察;④分析结果并改进系统
+> - **问题类型**:Pod问题(杀死随机Pod)、网络问题(延迟/丢包/分区)、资源问题(CPU/内存耗尽)、节点问题(节点宕机)、依赖问题(下游服务不可用)
 > - **爆炸半径控制**:从小范围开始(单个命名空间) → 逐步扩大 → 生产环境,确保实验可控,避免真实事故
 > - **自动化与持续性**:不是一次性活动,而是持续在生产环境中运行混沌实验,像持续集成一样成为DevOps流程的一部分
 > - **Kubernetes工具**:LitmusChaos(CNCF沙箱项目,K8s原生)、ChaosBlade(阿里开源)、Chaos Mesh(PingCAP)、Chaos Monkey(Netflix原创)
@@ -5946,7 +5946,7 @@ created: "2026-05-23"
 > #   --evict-count 1       # 杀死1个Pod
 > 
 > # 混沌工程实验流程:
-> # 1. 定义稳态:nginx服务的可用性应保持>99%(即使部分Pod故障)
+> # 1. 定义稳态:nginx服务的可用性应保持>99%(即使部分Pod问题)
 > # 2. 设计实验:每10秒随机杀死1个nginx Pod,持续1分钟
 > # 3. 观察指标:监控服务响应时间、错误率、流量分布
 > # 4. 验证假说:

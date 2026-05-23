@@ -148,7 +148,7 @@ created: "2026-05-23"
 | HPA 配置正确但 Pod 扩容后仍无法调度 | SKILL-POD-002 | Pod Pending 问题，可能是资源不足或调度约束 |
 | Pod 已扩容但应用性能未改善 | 应用性能调优 | 非弹性伸缩问题，可能是应用瓶颈 |
 | 节点 NotReady 导致 CA 行为异常 | SKILL-NODE-001 | 先解决节点问题再处理伸缩问题 |
-| HPA 正常工作但业务方认为扩容阈值设置不合理 | 配置优化讨论 | 非故障，是阈值参数调优需求 |
+| HPA 正常工作但业务方认为扩容阈值设置不合理 | 配置优化讨论 | 非问题，是阈值参数调优需求 |
 | VPA 在 Off 模式下仅提供建议不自动应用 | 预期行为 | UpdateMode=Off 时 VPA 仅推荐不执行 |
 | 多租户集群中 ResourceQuota 阻止扩容 | 资源配额管理 | 检查 namespace 配额设置 |
 
@@ -158,7 +158,7 @@ created: "2026-05-23"
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径：
+按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 统计异常 HPA 数量和生产环境占比（15s）
 ```bash
@@ -170,7 +170,7 @@ echo "Total HPAs:" && kubectl get hpa -A --no-headers 2>/dev/null | wc -l
 kubectl get hpa -A -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metadata.name} TARGETS={.status.currentMetrics[*].resource.current.averageUtilization}{"\n"}{end}'
 ```
 > **判断规则**:
-> - 所有 HPA targets 均为 unknown → **Metrics Server 故障**（P1），跳转 D1.3
+> - 所有 HPA targets 均为 unknown → **Metrics Server 问题**（P1），跳转 D1.3
 > - 部分 HPA targets 为 unknown → **部分指标采集问题**（P2），继续 T2
 > - 生产环境关键服务的 HPA 异常 → 升级为 **P1**
 
@@ -218,9 +218,9 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
 
 - **核心服务不可用**: HPA 失效导致核心服务 Pod 数量不足，请求大量失败
 - **成本失控**: CA 异常导致节点数量在短时间内翻倍或更多
-- **云厂商 API 故障**: CA 与云厂商 API 通信完全失败（需云厂商支持介入）
+- **云厂商 API 问题**: CA 与云厂商 API 通信完全失败（需云厂商支持介入）
 - **数据一致性风险**: VPA Auto 模式异常导致 StatefulSet Pod 意外重启
-- **多集群级联**: 多个集群同时出现相同伸缩故障
+- **多集群级联**: 多个集群同时出现相同伸缩问题
 
 > **升级消息模板**: 参见 Section 8.2
 
@@ -1231,7 +1231,7 @@ kubectl get scaledobject -A
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 
 - [ ] 所有 HPA 的 TARGETS 列显示正常的百分比值
 - [ ] HPA Conditions 中 ScalingActive=True, AbleToScale=True
@@ -1274,7 +1274,7 @@ kubectl get scaledobject -A
 ```
 【{severity}】弹性伸缩故障诊断 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: {component}（HPA/VPA/CA/KEDA）异常，{symptom_summary}
+- 问题概述: {component}（HPA/VPA/CA/KEDA）异常，{symptom_summary}
 - 影响范围: 
   - 受影响 HPA/VPA: {affected_count}/{total_count}
   - Pending Pod 数量: {pending_pod_count}
@@ -1381,12 +1381,12 @@ kubectl get scaledobject -A
 
 | 误诊场景 | 表面现象 | 实际根因 | 避免方法 |
 |---------|---------|---------|---------|
-| **将 stabilization window 延迟误判为 HPA 故障** | HPA 配置正确，负载增加但副本数不变 | behavior.scaleUp.stabilizationWindowSeconds 配置导致预期的延迟 | D3.5 检查 behavior 配置，了解 stabilization window 是防抖动特性而非故障 |
+| **将 stabilization window 延迟误判为 HPA 问题** | HPA 配置正确，负载增加但副本数不变 | behavior.scaleUp.stabilizationWindowSeconds 配置导致预期的延迟 | D3.5 检查 behavior 配置，了解 stabilization window 是防抖动特性而非问题 |
 | **将资源碎片化误判为配额不足** | CA 日志显示无法扩容，集群总资源足够 | 单个节点无法满足 Pod 资源需求（如 Pod 请求 8 核，节点只剩 4 核） | D2.7 检查 Pending Pod 的具体资源需求，D2.6 检查节点池配置的实例规格 |
-| **将 VPA Off 模式误判为 VPA 故障** | VPA 有推荐值但 Pod 资源未更新 | UpdateMode=Off 设计如此，仅推荐不自动应用 | D2.1 检查 VPA updateMode 配置，Off 模式是预期行为 |
-| **将 HPA minReplicas 限制误判为缩容故障** | 负载很低但副本数维持在某个值不再下降 | 已达到 minReplicas 限制 | D1.1 检查 MINPODS 和 REPLICAS 的关系 |
-| **将 Metrics Server 启动延迟误判为故障** | 刚部署的 HPA 显示 unknown | Metrics Server 需要 30-60s 采集初始数据 | 给新部署的组件足够的启动时间（60s）再判断是否故障 |
-| **将 KEDA cooldownPeriod 误判为触发器故障** | ScaledObject READY=True 但不缩容 | cooldownPeriod 内不允许缩容 | D3.2 检查 cooldownPeriod 配置，理解这是防抖动特性 |
+| **将 VPA Off 模式误判为 VPA 问题** | VPA 有推荐值但 Pod 资源未更新 | UpdateMode=Off 设计如此，仅推荐不自动应用 | D2.1 检查 VPA updateMode 配置，Off 模式是预期行为 |
+| **将 HPA minReplicas 限制误判为缩容问题** | 负载很低但副本数维持在某个值不再下降 | 已达到 minReplicas 限制 | D1.1 检查 MINPODS 和 REPLICAS 的关系 |
+| **将 Metrics Server 启动延迟误判为问题** | 刚部署的 HPA 显示 unknown | Metrics Server 需要 30-60s 采集初始数据 | 给新部署的组件足够的启动时间（60s）再判断是否问题 |
+| **将 KEDA cooldownPeriod 误判为触发器问题** | ScaledObject READY=True 但不缩容 | cooldownPeriod 内不允许缩容 | D3.2 检查 cooldownPeriod 配置，理解这是防抖动特性 |
 
 ### 10.2 深度知识引用
 
@@ -1405,7 +1405,7 @@ kubectl get scaledobject -A
 
 | 日期 | 版本 | 变更 | 原因 |
 |------|------|------|------|
-| 2026-04 | v1.0 | 初始版本发布。覆盖 HPA/VPA/CA/KEDA 四种伸缩机制，12 个根因，11 个修复操作 | 弹性伸缩是 Kubernetes 核心能力，故障影响服务可用性和成本 |
+| 2026-04 | v1.0 | 初始版本发布。覆盖 HPA/VPA/CA/KEDA 四种伸缩机制，12 个根因，11 个修复操作 | 弹性伸缩是 Kubernetes 核心能力，问题影响服务可用性和成本 |
 
 ### 10.4 待补充的知识空白
 

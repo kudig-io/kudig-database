@@ -65,7 +65,7 @@ created: "2026-05-23"
 > 混沌工程不只是简单的“随手杀进程”，它是对分布式系统假设的严谨验证。
 > 1. **爆炸半径 (Blast [[Radius|Radius]]) 是红线**：在生产环境进行实验时，必须具备完善的“自动熔断”机制。当业务指标（如下单成功率）出现非预期下跌时，混沌系统应能在毫秒级停止故障注入并触发恢复逻辑。
 > 2. **eBPF 驱动的无侵入混沌**：现代混沌工具（如 [[Chaos Mesh|Chaos Mesh]]）正向 eBPF 演进，通过在内核态拦截系统调用来模拟 I/O 延迟或 DNS 错误。这种方式相比传统的 Sidecar 拦截或 iptables 更加透明，且能模拟更底层的硬件/内核异常。
-> 3. **混沌工程的终局是自动化**：实验不应是偶尔的“演习”，而应集成到 CI/CD 流水线中。每上线一个新服务，都应自动通过一套基础的故障集验证，确保系统的稳态（Steady State）是可维持的。
+> 3. **混沌工程的终局是自动化**：实验不应是偶尔的“演习”，而应集成到 CI/CD 流水线中。每上线一个新服务，都应自动通过一套基础的问题集验证，确保系统的稳态（Steady State）是可维持的。
 
 <!-- chunk: 概述 -->
 ## 概述
@@ -101,7 +101,7 @@ timeline
     2022 : eBPF 技术集成
          : 内核级故障注入
     2023 : AI 驱动的智能混沌实验
-         : 自适应故障生成
+         : 自适应问题生成
 ```
 
 ### 1.2 混沌工程核心原则
@@ -115,13 +115,13 @@ chaos_engineering_principles:
       - 明确实验假设
       - 定义可衡量的稳态指标
       - 设计对照实验
-    example: "假设：订单服务单节点故障不会影响整体下单成功率 > 99.5%"
+    example: "假设：订单服务单节点问题不会影响整体下单成功率 > 99.5%"
     
   principle_2_real_world_conditions:
-    description: "在生产环境中进行真实故障模拟"
+    description: "在生产环境中进行真实问题模拟"
     practice:
       - 使用真实的生产流量
-      - 模拟真实的故障场景
+      - 模拟真实的问题场景
       - 避免人工构造的理想环境
     example: "模拟网络分区而不是简单的服务停机"
     
@@ -265,7 +265,7 @@ func (pk *PodKiller) killPod(ctx context.Context, pod *corev1.Pod) string {
 }
 ```
 
-#### Pod 故障 CRD 定义
+#### Pod 问题 CRD 定义
 ```yaml
 # PodChaos CRD 定义
 apiVersion: chaos-mesh.org/v1alpha1
@@ -306,7 +306,7 @@ func (nci *NetworkChaosInjector) InjectNetworkFault(ctx context.Context, experim
         return err
     }
     
-    // 2. 在每个 Pod 中执行网络故障
+    // 2. 在每个 Pod 中执行网络问题
     for _, pod := range targetPods {
         if err := nci.injectNetworkChaos(ctx, pod, experiment); err != nil {
             return fmt.Errorf("failed to inject network chaos on pod %s: %w", pod.Name, err)
@@ -364,9 +364,9 @@ func (nci *NetworkChaosInjector) injectNetworkDelay(ctx context.Context, baseCmd
 }
 ```
 
-#### 网络故障 CRD 配置
+#### 网络问题 CRD 配置
 ```yaml
-# 网络延迟故障
+# 网络延迟问题
 apiVersion: chaos-mesh.org/v1alpha1
 kind: NetworkChaos
 metadata:
@@ -540,7 +540,7 @@ const (
 
 ### 3.2 实验场景库设计
 
-#### 典型故障场景分类
+#### 典型问题场景分类
 ```yaml
 fault_scenarios_library:
   infrastructure_faults:
@@ -556,7 +556,7 @@ fault_scenarios_library:
         - data_loss_risk
         
     disk_failure:
-      description: "模拟磁盘故障或满载"
+      description: "模拟磁盘问题或满载"
       injection_methods:
         - fill_disk_space
         - corrupt_filesystem
@@ -567,7 +567,7 @@ fault_scenarios_library:
         - persistent_volume_issues
         
     network_issues:
-      description: "模拟各种网络故障"
+      description: "模拟各种网络问题"
       injection_methods:
         - packet_loss
         - network_delay
@@ -602,7 +602,7 @@ fault_scenarios_library:
         - cascading_failures
         
     dependency_failure:
-      description: "模拟依赖服务故障"
+      description: "模拟依赖服务问题"
       injection_methods:
         - downstream_service_timeout
         - upstream_service_error
@@ -1136,7 +1136,7 @@ func (rg *ReportGenerator) performAnalysis(exp *chaosv1alpha1.ChaosExperiment) R
 chaos_maturity_model:
   level_1_adhoc:
     characteristics:
-      - 偶尔手动执行简单故障测试
+      - 偶尔手动执行简单问题测试
       - 缺乏系统性的实验规划
       - 无自动化工具支持
     metrics:
@@ -1145,7 +1145,7 @@ chaos_maturity_model:
       
   level_2_repeatable:
     characteristics:
-      - 定期执行预定义的故障场景
+      - 定期执行预定义的问题场景
       - 建立基础的监控和告警
       - 使用开源混沌工具
     metrics:
@@ -1164,7 +1164,7 @@ chaos_maturity_model:
   level_4_managed:
     characteristics:
       - 基于风险的实验规划
-      - 智能化的故障场景生成
+      - 智能化的问题场景生成
       - 与其他 DevOps 流程集成
     metrics:
       experiments_per_month: "12+"
@@ -1173,7 +1173,7 @@ chaos_maturity_model:
   level_5_optimizing:
     characteristics:
       - AI 驱动的混沌实验
-      - 预测性故障预防
+      - 预测性问题预防
       - 全栈韧性优化
     metrics:
       experiments_per_month: "continuous"
@@ -1266,9 +1266,9 @@ func (ra *ChaosROIAnalyzer) CalculateROI(ctx context.Context, period time.Durati
 
 ### 7.1 AI 驱动的智能混沌
 
-#### 自适应故障生成
+#### 自适应问题生成
 ```python
-# AI 驱动的故障场景生成
+# AI 驱动的问题场景生成
 class AIFaultGenerator:
     def __init__(self):
         self.ml_model = self.load_failure_prediction_model()
@@ -1276,22 +1276,22 @@ class AIFaultGenerator:
         self.anomaly_detector = AnomalyDetector()
         
     def generate_intelligent_faults(self, system_state: SystemState) -> List[FaultScenario]:
-        """基于系统状态智能生成故障场景"""
+        """基于系统状态智能生成问题场景"""
         
         # 1. 分析当前系统状态
         vulnerabilities = self.analyze_vulnerabilities(system_state)
         
-        # 2. 预测潜在故障点
+        # 2. 预测潜在问题点
         failure_probabilities = self.predict_failure_points(system_state)
         
-        # 3. 生成故障组合
+        # 3. 生成问题组合
         fault_combinations = self.generate_fault_combinations(
             vulnerabilities, failure_probabilities)
         
         # 4. 评估影响范围
         impact_analysis = self.assess_impact(fault_combinations)
         
-        # 5. 优化故障序列
+        # 5. 优化问题序列
         optimized_scenarios = self.optimize_fault_sequences(
             fault_combinations, impact_analysis)
         
@@ -1337,7 +1337,7 @@ class AdaptiveChaosController:
         experiment_history = []
         
         while not self.should_stop_experiment(current_scenario):
-            # 执行当前故障
+            # 执行当前问题
             result = self.execute_fault_injection(current_scenario)
             experiment_history.append(result)
             
@@ -1346,7 +1346,7 @@ class AdaptiveChaosController:
                 self.trigger_safety_protocol()
                 break
                 
-            # 基于反馈调整下一故障
+            # 基于反馈调整下一问题
             current_scenario = self.feedback_loop.adjust_scenario(
                 current_scenario, result, experiment_history)
                 

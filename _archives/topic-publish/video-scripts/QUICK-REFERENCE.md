@@ -70,12 +70,12 @@ python3 scripts/video-generator.py \
 
 ## Topic 优先级
 
-### P0 - 高频故障（建议优先生成）
+### P0 - 高频问题（建议优先生成）
 | Topic | 说明 | 时长 |
 |:---|:---|:---:|
 | `01-node-notready` | 节点 NotReady | 10min |
 | `02-pod-crashloop-oomkilled` | Pod 崩溃/OOM | 12min |
-| `04-dns-resolution-failure` | DNS 故障 | 8min |
+| `04-dns-resolution-failure` | DNS 问题 | 8min |
 | `06-certificate-expiry` | 证书过期 | 7min |
 | `05-service-connectivity` | Service 连通性 | 10min |
 

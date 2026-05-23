@@ -623,7 +623,7 @@ featureGates:
   APIListChunking: true
   APIPriorityAndFairness: true
 
-# 优化驱逐以避免级联故障
+# 优化驱逐以避免级联问题
 evictionPressureTransitionPeriod: 1m
 evictionSoftGracePeriod:
   memory.available: "1m"

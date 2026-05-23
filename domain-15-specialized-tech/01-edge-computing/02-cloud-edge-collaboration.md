@@ -1838,19 +1838,19 @@ service:
 
 <!-- chunk: 11. 故障处理与恢复 -->## 11. 故障处理与恢复
 
-#<!-- chunk: 11.1 故障分类与处理策略 (Failure Classification) -->## 11.1 故障分类与处理策略 (Failure Classification)
+#<!-- chunk: 11.1 问题分类与处理策略 (Failure Classification) -->## 11.1 问题分类与处理策略 (Failure Classification)
 
 ```mermaid
 graph TD
-    Failure[故障类型]
+    Failure[问题类型]
     
-    Failure --> NF[网络故障<br/>Network Failure]
-    Failure --> HF[硬件故障<br/>Hardware Failure]
-    Failure --> SF[软件故障<br/>Software Failure]
-    Failure --> DF[数据故障<br/>Data Corruption]
+    Failure --> NF[网络问题<br/>Network Failure]
+    Failure --> HF[硬件问题<br/>Hardware Failure]
+    Failure --> SF[软件问题<br/>Software Failure]
+    Failure --> DF[数据问题<br/>Data Corruption]
     
     NF --> NF_Strategy[策略:\n1. 自动重连+指数退避\n2. 离线模式接管\n3. 本地缓冲数据]
-    HF --> HF_Strategy[策略:\n1. Pod 自动重启\n2. 节点故障迁移\n3. 双机热备]
+    HF --> HF_Strategy[策略:\n1. Pod 自动重启\n2. 节点问题迁移\n3. 双机热备]
     SF --> SF_Strategy[策略:\n1. 健康检查自动重启\n2. 回滚到上一版本\n3. 熔断器保护]
     DF --> DF_Strategy[策略:\n1. 数据校验\n2. 备份恢复\n3. 日志回放]
 ```

@@ -47,7 +47,7 @@ HwameiStor 是一个 Kubernetes 原生的高可用本地存储系统，能够将
 
 - **磁盘分类**: 将 SSD 和 HDD 分配到不同存储池，按性能需求选择 StorageClass
 - **副本拓扑**: 配置副本拓扑约束确保副本分布在不同故障域
-- **监控告警**: 监控 LocalDisk 和 LocalVolume 的 conditions，及时发现故障
+- **监控告警**: 监控 LocalDisk 和 LocalVolume 的 conditions，及时发现问题
 - **定期迁移**: 在节点维护前提前进行卷迁移，减少业务影响
 - **资源预留**: 为每个节点预留足够的磁盘空间用于数据重建
 

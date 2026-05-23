@@ -48,7 +48,7 @@ created: "2026-05-23"
 Kubernetes 启动时包含四个初始命名空间：
 
 - `default`：默认命名空间，方便用户立即开始使用集群。
-- `kube-node-lease`：包含与每个节点关联的 Lease 对象，用于 [[kubelet|kubelet]] 发送心跳，使控制平面能够检测节点故障。
+- `kube-node-lease`：包含与每个节点关联的 Lease 对象，用于 [[kubelet|kubelet]] 发送心跳，使控制平面能够检测节点问题。
 - `kube-public`：所有客户端（包括未认证的）都可读取，主要用于集群范围内的公共资源。
 - `kube-system`：Kubernetes 系统创建的对象所在的命名空间。
 

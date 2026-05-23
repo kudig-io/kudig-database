@@ -1,5 +1,5 @@
 ---
-title: K8s 故障分布与 MTTR 基准
+title: K8s 问题分布与 MTTR 基准
 description: '| **应用配置错误** | 35% | 45 分钟 | 中 | 高 — 最常见 |'
 category: synthesis
 tags:
@@ -18,11 +18,11 @@ audience:
 - 所有工程师
 estimated_read_time: 5min
 intent_queries:
-- K8s 故障分布与 MTTR 基准 是什么
-- 如何 K8s 故障分布与 MTTR 基准
+- K8s 问题分布与 MTTR 基准 是什么
+- 如何 K8s 问题分布与 MTTR 基准
 trigger_keywords:
 - K8s
-- 故障分布与
+- 问题分布与
 - MTTR
 - 基准
 prerequisites:
@@ -41,11 +41,11 @@ relationships:
     type: related_to
 ---
 
-# K8s 故障分布与 MTTR 基准
+# K8s 问题分布与 MTTR 基准
 
-## 行业故障分布
+## 行业问题分布
 
-基于行业生产数据，Kubernetes 故障按类别分布如下：
+基于行业生产数据，Kubernetes 问题按类别分布如下：
 
 | 类别 | 占比 | MTTR | 诊断难度 | FTA 优先级 |
 |------|------|------|---------|-----------|
@@ -61,9 +61,9 @@ relationships:
 
 1. **应用配置错误占比 35%，排名第一**：FTA 应扩展与配置相关的底事件。大多数 YAML 错误、资源限制配置不当、ConfigMap/Secret 引用缺失都属于此类。
 
-2. **控制平面 MTTR 最长，达 90 分钟**：虽然只占故障的 10%，但控制平面故障（etcd、API Server）需要最深层的 FTA 覆盖，因为它们的严重性和诊断复杂度最高。
+2. **控制平面 MTTR 最长，达 90 分钟**：虽然只占问题的 10%，但控制平面问题（etcd、API Server）需要最深层的 FTA 覆盖，因为它们的严重性和诊断复杂度最高。
 
-3. **网络问题最难诊断**：仅占 18% 但 MTTR 达 60 分钟，表明诊断挑战巨大。FTA 需要为 DNS、CNI 和策略相关故障提供广泛的诊断分支。
+3. **网络问题最难诊断**：仅占 18% 但 MTTR 达 60 分钟，表明诊断挑战巨大。FTA 需要为 DNS、CNI 和策略相关问题提供广泛的诊断分支。
 
 4. **资源耗尽最适合自动化**：30 分钟 MTTR 且有明确的可观测信号（内存 > 95%、磁盘 > 90%），使其成为 [[skills/FTA-Driven Runbook Automation.md|FTA 驱动的 Runbook 自动化]] 的最佳候选。
 
@@ -97,7 +97,7 @@ relationships:
 | TE-2: 应用不可用 | P0 | 常见 | 收入影响 |
 | TE-3: Pod 启动失败 | P1 | 常见 | 部署受阻 |
 | TE-4: 网络异常 | P1 | 常见 | 部分服务降级 |
-| TE-5: 存储故障 | P1 | 不常见 | 数据访问受阻 |
+| TE-5: 存储问题 | P1 | 不常见 | 数据访问受阻 |
 | TE-15: 灾备失败 | P0 | 罕见 | 业务连续性风险 |
 
 ## 容量规划基准

@@ -1078,7 +1078,7 @@ flowchart TD
       "name": "底事件: Ignore 策略绕过安全检查",
       "action": "bottom_event",
       "step": "event_fail_pol_ignore",
-      "description": "failurePolicy=Ignore 在 Webhook 故障时绕过安全检查",
+      "description": "failurePolicy=Ignore 在 Webhook 问题时绕过安全检查",
       "metadata": {
         "severity": "high",
         "probability": "medium",
@@ -1500,7 +1500,7 @@ flowchart TD
       "name": "底事件: 无快速禁用机制",
       "action": "bottom_event",
       "step": "event_audit_disable",
-      "description": "Webhook 故障时无法快速禁用",
+      "description": "Webhook 问题时无法快速禁用",
       "metadata": {
         "severity": "high",
         "probability": "medium",

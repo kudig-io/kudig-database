@@ -78,7 +78,7 @@ created: "2026-05-23"
 
 **内存管理**在容器环境中更为复杂。Redis 的 `maxmemory` 设置需要小于 Pod 的内存限制（memory limit），否则可能触发 OOM Kill。经验法则是 `maxmemory = pod_memory_limit × 70-80%`，留出 20-30% 给 RDB/AOF 子进程的 COW（Copy-On-Write）开销、连接缓冲区和 Exporter sidecar。
 
-**网络分区与脑裂防护**是 Sentinel 和 Cluster 模式都需要面对的问题。在 K8s 中，网络分区可能因为 CNI 插件故障、Node NotReady 或网络策略（NetworkPolicy）误配而发生。Sentinel 模式下，建议至少部署 3 个 Sentinel 实例到不同的节点上，quorum 设置为 2。
+**网络分区与脑裂防护**是 Sentinel 和 Cluster 模式都需要面对的问题。在 K8s 中，网络分区可能因为 CNI 插件问题、Node NotReady 或网络策略（NetworkPolicy）误配而发生。Sentinel 模式下，建议至少部署 3 个 Sentinel 实例到不同的节点上，quorum 设置为 2。
 
 **Pod 生命周期管理**是 Redis on K8s 的另一个关键问题。Redis 的数据存储在 PVC 中，Pod 重启后数据不会丢失（前提是使用了 ReadWriteOncePersistentVolumeClaim）。但是，StatefulSet 的 Pod 名称是固定的，Sentinel 和 Cluster 的配置依赖这些固定名称。在 K8s 集群升级或节点维护时，需要通过 PodDisruptionBudget 确保同时只有一个 Redis Pod 被驱逐。
 
@@ -835,12 +835,12 @@ spec:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见故障速查表 -->## 常见故障速查表
+#<!-- chunk: 常见问题速查表 -->## 常见问题速查表
 
-| 故障现象 | 可能原因 | 排查方法 | 解决方案 |
+| 问题现象 | 可能原因 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
 | Pod Pending | PVC 无法绑定 / 资源不足 | `kubectl describe pod` | 检查 StorageClass / Node 资源 |
-| Cluster slot 不完整 | 节点故障 / reshard 失败 | `cluster info` + `cluster nodes` | 修复故障节点 / 手动 fix |
+| Cluster slot 不完整 | 节点问题 / reshard 失败 | `cluster info` + `cluster nodes` | 修复问题节点 / 手动 fix |
 | 复制断开 | 网络分区 / 密码错误 | `info replication` | 检查网络和 auth 配置 |
 | 内存 OOM | maxmemory 设置不当 | `info memory` | 调整 maxmemory 和淘汰策略 |
 | 持久化失败 | 磁盘满 / 权限错误 | Redis error log | 清理磁盘 / 修复 PVC |

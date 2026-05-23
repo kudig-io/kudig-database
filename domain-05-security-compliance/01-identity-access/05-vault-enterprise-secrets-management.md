@@ -947,7 +947,7 @@ find "$BACKUP_DIR" -type d -mtime +30 -exec rm -rf {} \;
 
 **Vault Sealed**：检查 Auto Unseal KMS 配置。确认 KMS 密钥存在且有权限。查看 Vault 日志中的 unseal 错误信息。手动使用 unseal key 解封。
 
-**Raft 集群不一致**：使用 `vault operator raft list-peers` 检查集群成员。检查网络连接和 TLS 证书。使用 `vault operator raft remove-peer` 移除故障节点后重新加入。
+**Raft 集群不一致**：使用 `vault operator raft list-peers` 检查集群成员。检查网络连接和 TLS 证书。使用 `vault operator raft remove-peer` 移除问题节点后重新加入。
 
 **认证失败**：检查 LDAP/K8s 配置是否正确。验证 ServiceAccount Token 是否有效。确认角色绑定的策略存在。
 

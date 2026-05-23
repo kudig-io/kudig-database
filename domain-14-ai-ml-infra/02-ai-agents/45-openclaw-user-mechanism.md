@@ -408,7 +408,7 @@ def create_user_aware_agent(workspace_path: str) -> ReActAgent:
 
 ---
 
-## 6. 故障排除
+## 6. 问题排除
 
 ### 6.1 常见问题
 

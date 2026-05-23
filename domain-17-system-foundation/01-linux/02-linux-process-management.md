@@ -466,7 +466,7 @@ cat /sys/fs/cgroup/myapp/io.stat
 
 #<!-- chunk: OOM Killer 机制 -->## OOM Killer 机制
 
-OOM Killer（Out-Of-Memory Killer）是 Linux 内核在内存不足时选择并终止进程的机制。在 Kubernetes 环境中，Pod 因 OOM 被终止（exit code 137）是最常见的故障之一。
+OOM Killer（Out-Of-Memory Killer）是 Linux 内核在内存不足时选择并终止进程的机制。在 Kubernetes 环境中，Pod 因 OOM 被终止（exit code 137）是最常见的问题之一。
 
 ##<!-- chunk: OOM Killer 工作流程 -->## OOM Killer 工作流程
 

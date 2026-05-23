@@ -1433,7 +1433,7 @@ fi
 
 #### 4.5.1 模拟故障演练
 
-**OOM故障模拟：**
+**OOM问题模拟：**
 ```bash
 # 模拟容器内存泄漏
 kubectl run oom-test --image=busybox --restart=Never \
@@ -1459,7 +1459,7 @@ watch -n 1 'kubectl get pods -o wide | grep oom-test'
    - 考虑节点扩容
 
 3. **Level 3 - 节点OOM (30分钟内响应)**
-   - 隔离故障节点
+   - 隔离问题节点
    - 迁移关键应用
    - 紧急扩容新节点
 

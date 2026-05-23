@@ -603,7 +603,7 @@ async def multi_agent_debate():
     opponent = create_agent(
         "方案B支持者",
         """你支持 Active-Active 多活高可用方案。
-论证它的优势: 无切换延迟、负载均衡、无单点故障。
+论证它的优势: 无切换延迟、负载均衡、无单点问题。
 要针对其他方案的缺点进行辩驳。""",
     )
 

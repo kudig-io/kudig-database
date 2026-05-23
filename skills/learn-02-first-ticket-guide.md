@@ -56,8 +56,8 @@ trigger_keywords:
 
 | 工单类型 | 典型描述 | SLA | 处理优先级 | 示例场景 |
 |---------|---------|-----|----------|---------|
-| P0 | 集群不可用、大规模 Pod 故障 | 15min | 立即处理 | etcd 宕机、全部节点 NotReady |
-| P1 | 单个服务故障、Pod 异常 | 30min | 快速处理 | 服务 503、Pod CrashLoopBackOff |
+| P0 | 集群不可用、大规模 Pod 问题 | 15min | 立即处理 | etcd 宕机、全部节点 NotReady |
+| P1 | 单个服务问题、Pod 异常 | 30min | 快速处理 | 服务 503、Pod CrashLoopBackOff |
 | P2 | 配置问题、非关键功能异常 | 2h | 计划处理 | ConfigMap 更新、HPA 未生效 |
 | P3 | 咨询、文档建议 | 24h | 日常处理 | 最佳实践咨询、资源规划建议 |
 
@@ -96,7 +96,7 @@ kubectl top pods -A --sort-by=memory 2>/dev/null | head -15 || echo "Metrics Ser
 
 ---
 
-## 2. 场景一：Pod 故障（最常见）
+## 2. 场景一：Pod 问题（最常见）
 
 ### 场景描述
 > "用户反映网站无法访问，检查发现 Pod 处于 CrashLoopBackOff 状态"
@@ -417,7 +417,7 @@ tar czf /tmp/k8s-debug-$(date +%Y%m%d%H%M).tar.gz /tmp/nodes.txt /tmp/pods.txt /
 
 | 场景 | 参考文档 |
 |------|---------|
-| Pod 故障 | `domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md` |
+| Pod 问题 | `domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md` |
 | Service 问题 | `P1-5-oncall-quick-reference-card.md` |
 | 节点问题 | `domain-10-troubleshooting-diagnostics/02-node-notready-troubleshooting.md` |
 | 网络问题 | `domain-10-troubleshooting-diagnostics/03-service-endpoints-troubleshooting.md` |

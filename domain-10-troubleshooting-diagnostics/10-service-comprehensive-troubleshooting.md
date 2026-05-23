@@ -69,8 +69,8 @@ created: "2026-05-23"
 <!-- chunk: 🎯 本文档价值 -->
 ## 🎯 本文档价值
 
-本文档专注于生产环境Service故障的系统性诊断和处理，提供：
-- **完整的故障分类体系**：从网络连通性到负载均衡的全流程覆盖
+本文档专注于生产环境Service问题的系统性诊断和处理，提供：
+- **完整的问题分类体系**：从网络连通性到负载均衡的全流程覆盖
 - **实战诊断方法**：基于真实生产案例的故障分析技巧
 - **自动化工具集**：可直接使用的诊断脚本和检查清单
 - **预防性最佳实践**：避免常见Service问题的配置建议
@@ -153,7 +153,7 @@ created: "2026-05-23"
 |:---|:---|:---|:---|
 | Service不存在 | 未创建/命名空间错误 | `kubectl get svc -A` | 创建Service |
 | Endpoints为空 | selector不匹配/Pod未Ready | `kubectl get ep` | 检查selector |
-| ClusterIP不通 | kube-proxy故障/iptables | `iptables -t nat -L` | 检查kube-proxy |
+| ClusterIP不通 | kube-proxy问题/iptables | `iptables -t nat -L` | 检查kube-proxy |
 | NodePort不通 | 防火墙/端口冲突 | `ss -tlnp` | 检查防火墙 |
 | LoadBalancer Pending | 云provider未配置 | `kubectl describe svc` | 配置LB provider |
 | 跨命名空间不通 | [[NetworkPolicy|NetworkPolicy]] | `kubectl get netpol` | 调整策略 |
@@ -370,7 +370,7 @@ netstat -tlnp | grep <node-port>
 | **防火墙阻断** | `iptables -L INPUT` | 开放端口 |
 | **云安全组** | 云控制台检查 | 添加规则 |
 | **端口冲突** | `ss -tlnp \| grep <port>` | 更换端口 |
-| **kube-proxy故障** | `kubectl get pods -n kube-system` | 重启kube-proxy |
+| **kube-proxy问题** | `kubectl get pods -n kube-system` | 重启kube-proxy |
 | **节点网络问题** | `ping <node-ip>` | 检查网络 |
 
 ### 4.3 防火墙配置

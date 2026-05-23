@@ -73,7 +73,7 @@ OpenRouter 的默认行为是在可用 Provider 间进行基于价格的加权�
 
 ### 2.1 默认策略流程
 
-1. **优先稳定 Provider**：排除最近 30 秒内出现显著故障的 Provider
+1. **优先稳定 Provider**：排除最近 30 秒内出现显著问题的 Provider
 2. **价格加权选择**：在稳定 Provider 中按价格反平方权重随机选择
 3. **Fallback 备份**：将不稳定 Provider 作为最后兜底
 
@@ -81,7 +81,7 @@ OpenRouter 的默认行为是在可用 Provider 间进行基于价格的加权�
 
 权重计算公式：`weight = 1 / price²`
 
-**示例**：Provider A ($1/M)、B ($2/M)、C ($3/M)，B 近期有故障：
+**示例**：Provider A ($1/M)、B ($2/M)、C ($3/M)，B 近期有问题：
 
 | Provider | 价格 | 权重 (1/p²) | 首选概率 | 顺序 |
 |----------|------|:----------:|:--------:|------|

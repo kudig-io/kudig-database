@@ -146,7 +146,7 @@ k8s_versions:
 │                        Multi-Cloud Strategic Advantages                 │
 ├─────────────────────────────────────────────────────────────────────────┤
 │  🏢 业务连续性保障    💰 成本优化      ⚡ 性能优化      🛡️ 风险分散     │
-│  避免供应商锁定      价格竞争优化    就近访问优化    单点故障消除     │
+│  避免供应商锁定      价格竞争优化    就近访问优化    单点问题消除     │
 │  跨云故障切换      按需资源调配    延迟敏感应用    安全威胁隔离     │
 │  地理冗余部署      预留实例优化    CDN全球分布    服务中断缓冲     │
 └─────────────────────────────────────────────────────────────────────────┘
@@ -851,7 +851,7 @@ EOF
     kubectl wait --for=condition=available --timeout=300s deployment/dr-test-app -n dr-test
 }
 
-# 模拟故障
+# 模拟问题
 simulate_failure() {
     echo "Simulating failure scenarios..."
     
@@ -861,7 +861,7 @@ simulate_failure() {
     sleep 60
     iptables -D INPUT -s $PRODUCTION_ENV -j DROP
     
-    # 模拟API Server故障
+    # 模拟API Server问题
     echo "Simulating API Server failure..."
     kubectl scale deployment kube-apiserver -n kube-system --replicas=0
     sleep 120

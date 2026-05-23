@@ -795,7 +795,7 @@ kubectl describe service <service>       # Service 详情
 
 ---
 
-#<!-- chunk: 常见网络故障场景 -->## 常见网络故障场景
+#<!-- chunk: 常见网络问题场景 -->## 常见网络问题场景
 
 ```bash
 # 场景 1: Pod 无法访问 Service

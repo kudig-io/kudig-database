@@ -42,7 +42,7 @@ created: "2026-05-23"
 
 ## 恢复流程
 
-### Step 1: 确认故障 (0-2 分钟)
+### Step 1: 确认问题 (0-2 分钟)
 
 ```bash
 # 检查 AZ 状态
@@ -55,7 +55,7 @@ kubectl get pods -o wide -n production | grep $FAILED_AZ
 ### Step 2: 流量切换 (2-5 分钟)
 
 ```bash
-# 从负载均衡器中移除故障 AZ
+# 从负载均衡器中移除问题 AZ
 # AWS ALB
 aws elbv2 modify-target-group \
   --target-group-arn $TG_ARN \
@@ -97,7 +97,7 @@ kubectl get pods -o wide -n production | grep Running
 # 检查业务核心流程
 ```
 
-### Step 5: 故障 AZ 恢复后
+### Step 5: 问题 AZ 恢复后
 
 ```bash
 # 逐步将流量切回

@@ -153,7 +153,7 @@ k8s_versions:
 | `workqueue_queue_duration_seconds` | Histogram | controller | 队列等待时间 | 稳定 | P99>30s | 处理延迟 |
 | `workqueue_work_duration_seconds` | Histogram | controller | 处理时间 | 稳定 | P99>10s | 处理性能 |
 | `workqueue_retries_total` | Counter | controller | 重试次数 | 稳定 | 快速增长 | 错误率 |
-| `node_collector_evictions_total` | Counter | controller | 节点驱逐数 | 稳定 | >0 | 节点故障 |
+| `node_collector_evictions_total` | Counter | controller | 节点驱逐数 | 稳定 | >0 | 节点问题 |
 | `cronjob_controller_cronjob_job_creation_skew_duration_seconds` | Histogram | controller | CronJob偏差 | v1.21+ | P99>60s | 定时准确性 |
 
 <!-- chunk: kubelet 关键指标 -->

@@ -100,7 +100,7 @@ dashboard_design_principles:
       audience: SRE、运维工程师
       
     operational_level:
-      purpose: 实时故障响应
+      purpose: 实时问题响应
       timeframe: 5m-1h
       metrics: 实时指标、告警状态
       audience: 值班工程师、一线支持

@@ -50,7 +50,7 @@ K Gateway（原 Gloo Gateway）是一个基于 Envoy 的 [[domain-17-system-foun
 - **Gateway API 优先**: 使用标准 Gateway API 资源定义路由，保持可移植性
 - **TLS 终止**: 在 Gateway 层终止 TLS，后端使用明文通信减少复杂度
 - **限流分层**: 组合全局限流和本地限流实现多层保护
-- **健康检查**: 配置上游健康检查，自动剔除故障后端
+- **健康检查**: 配置上游健康检查，自动剔除问题后端
 - **灰度发布**: 利用 HTTPRoute 的 weight 字段实现金丝雀发布
 
 ## 架构定位

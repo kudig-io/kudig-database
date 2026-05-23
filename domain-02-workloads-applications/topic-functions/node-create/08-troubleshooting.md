@@ -104,16 +104,16 @@ k8s_versions:
 
 ## 概述
 
-节点故障排查是 Kubernetes 运维中最常见且最关键的任务之一。节点故障可能表现为多种症状：节点 NotReady、Pod 无法启动、网络不通、磁盘满、内存不足等。这些问题的根本原因可能涉及 kubelet 配置错误、证书过期、容器运行时异常、网络插件故障、系统资源耗尽等多个层面。
+节点故障排查是 Kubernetes 运维中最常见且最关键的任务之一。节点问题可能表现为多种症状：节点 NotReady、Pod 无法启动、网络不通、磁盘满、内存不足等。这些问题的根本原因可能涉及 kubelet 配置错误、证书过期、容器运行时异常、网络插件问题、系统资源耗尽等多个层面。
 
 有效的节点故障排查需要系统化的方法论：
 
 1. **分层排查**：从底层（硬件/OS）向上排查（容器运行时 → kubelet → 控制面 → 网络）
 2. **日志分析**：通过 systemd 日志、kubelet 日志、容器日志定位问题
 3. **状态检查**：通过 kubectl 命令和 API 查询获取节点和 Pod 的当前状态
-4. **对比分析**：将故障节点与正常节点对比，找出差异
+4. **对比分析**：将问题节点与正常节点对比，找出差异
 
-本文档提供了全面的节点故障排查指南，涵盖 NotReady 节点、kubelet 启动失败、容器异常、网络故障、磁盘问题和 OOM 等常见场景的排查流程和解决方案。
+本文档提供了全面的节点故障排查指南，涵盖 NotReady 节点、kubelet 启动失败、容器异常、网络问题、磁盘问题和 OOM 等常见场景的排查流程和解决方案。
 
 ---
 
@@ -556,7 +556,7 @@ openssl verify -CAfile /etc/kubernetes/pki/ca.crt /var/lib/kubelet/pki/kubelet-c
 |------|---------|---------|---------|
 | kubelet NotReady | `journalctl -u kubelet` | kubelet 崩溃/配置错误 | 根据日志修复 |
 | 容器无法启动 | `crictl logs <id>` | 镜像/配置/资源问题 | 检查镜像和配置 |
-| 网络不通 | `ip link/route` | CNI 故障 | 重启 CNI DaemonSet |
+| 网络不通 | `ip link/route` | CNI 问题 | 重启 CNI DaemonSet |
 | 磁盘满 | `df -h` | 镜像/日志堆积 | 清理磁盘 |
 | OOM | `dmesg \| grep kill` | 内存不足 | 减少资源/扩容 |
 | 证书过期 | `openssl x509 -noout -dates` | 证书过期 | 续期证书 |

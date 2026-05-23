@@ -106,7 +106,7 @@ k8s_versions:
 
 Kubernetes 的升级遵循严格的顺序：先升级控制面节点（API Server、Controller Manager、Scheduler、etcd），再升级工作节点。工作节点的升级包括 kubelet 二进制、kubeadm 配置文件和容器运行时组件的更新。升级过程中需要确保工作负载的连续性——通过 drain/uncordon 机制将 Pod 从待升级节点迁移到其他节点。
 
-kubeadm 提供了 `kubeadm upgrade node` 命令来简化工作节点的升级过程。它自动处理配置文件更新、kubelet 服务重启等操作。本文档详细分析节点升级的完整流程、kubeadm 的源码实现、各组件的升级顺序以及常见故障的排查方法。
+kubeadm 提供了 `kubeadm upgrade node` 命令来简化工作节点的升级过程。它自动处理配置文件更新、kubelet 服务重启等操作。本文档详细分析节点升级的完整流程、kubeadm 的源码实现、各组件的升级顺序以及常见问题的排查方法。
 
 ---
 

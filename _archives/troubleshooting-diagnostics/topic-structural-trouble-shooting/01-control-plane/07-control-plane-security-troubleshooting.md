@@ -505,7 +505,7 @@ LOG_FILE="/var/log/kubernetes/security-check-$(date +%Y%m%d).log"
 #fi
 ```
 
-## 🔄 故障案例分析
+## 🔄 问题案例分析
 
 ### 案例一：证书过期导致集群不可用
 

@@ -249,7 +249,7 @@ kubectl get cronjob <name> -n <namespace> -o jsonpath='{
   "active": .status.active
 }' | jq .
 ```
-> **判断规则**: failed > 0 或 active 长时间不结束 → 有故障
+> **判断规则**: failed > 0 或 active 长时间不结束 → 有问题
 
 **Step T2**: 检查 Job 历史堆积
 ```bash
@@ -518,7 +518,7 @@ kubectl get events -n <namespace> --field-selector involvedObject.kind=CronJob -
 | RC-007 | Job 执行超时（activeDeadlineSeconds） | 中 | D1.1 active 时间长；D1.3 deadline 设置；D2.2 DeadlineExceeded | execution_timeout |
 | RC-008 | 资源竞争（并行 Job 过多/节点资源不足） | 低 | D2.5 资源耗尽；D2.6 并行 Pod 多 | resource_contention |
 | RC-009 | 历史 Job/Pod 堆积（无 TTL 或 TTL 过长） | 中 | D2.4 Job 数量异常；D1.3 ttl 未设置 | history_accumulation |
-| RC-010 | CronJob 控制器异常（Controller Manager 故障） | 低 | D1.5 Controller 不健康；D3.1 手动触发正常 | controller_malfunction |
+| RC-010 | CronJob 控制器异常（Controller Manager 问题） | 低 | D1.5 Controller 不健康；D3.1 手动触发正常 | controller_malfunction |
 
 ## 修复操作
 
@@ -698,7 +698,7 @@ kubectl get pods -n <namespace> --selector=job-name=<job-name>
 | 误诊场景 | 表面现象 | 实际根因 | 避免方法 |
 |---------|---------|---------|---------|
 | 将时区问题误判为未触发 | CronJob 没按时执行 | timezone 设置为 UTC | 检查时区配置 |
-| 将正常重试误判为故障 | Job 多次失败 | backoffLimit 内正常重试 | 等待 backoffLimit 耗尽 |
+| 将正常重试误判为问题 | Job 多次失败 | backoffLimit 内正常重试 | 等待 backoffLimit 耗尽 |
 | 将长时间任务误判为超时 | Job Running 很久 | 任务本身耗时 | 检查 activeDeadlineSeconds |
 
 ## 云厂商特异性

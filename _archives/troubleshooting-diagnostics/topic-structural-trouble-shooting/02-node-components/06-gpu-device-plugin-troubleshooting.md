@@ -86,7 +86,7 @@ Kubernetes 不原生感知 GPU。接入过程如下：
 1. **GPU 碎片化与抢占失败**：
    - **现象**：Node 上显示有 1 个空闲 GPU，但 Pod 依然 Pending。
    - **深层原因**：该 GPU 可能被分配给了某个正在创建或 Terminating 中的 Pod，或者因为 MIG 模式下，物理 GPU 的剩余空间不足以切分出请求的实例规格。
-2. **XID Errors（驱动/硬件故障）**：
+2. **XID Errors（驱动/硬件问题）**：
    - **现象**：`nvidia-smi` 报错 `Unable to determine the device handle`。
    - **对策**：查看内核 `dmesg`。XID 错误代码（如 XID 31 为内存错误）直接决定了是需要重启驱动还是更换物理硬件。
 
@@ -111,7 +111,7 @@ cat /etc/nvidia-container-runtime/config.toml
 
 1. [异构资源接入逻辑](#1-核心原理解析异构资源接入)
 2. [专家观测工具链](#专家级观测工具链experts-toolbox)
-3. [故障现象与分配逻辑解析](#12-常见问题现象)
+3. [问题现象与分配逻辑解析](#12-常见问题现象)
 4. [基础排查步骤（初学者）](#22-排查命令集)
 5. [深度治理方案](#第三部分解决方案与风险控制)
 

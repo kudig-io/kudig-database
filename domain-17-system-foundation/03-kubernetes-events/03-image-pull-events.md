@@ -812,7 +812,7 @@ skopeo inspect docker://nginx:1.25.3
 # 如果怀疑是临时网络问题,可以查看重试时间线
 kubectl get events --field-selector involvedObject.name=<pod-name> --sort-by='.lastTimestamp'
 
-# 如果失败时间集中在某个时间段,可能是网络或仓库临时故障
+# 如果失败时间集中在某个时间段,可能是网络或仓库临时问题
 ```
 
 4. **检查 Deployment/ReplicaSet 状态**
@@ -832,7 +832,7 @@ kubectl get replicaset -l app=<app-label>
 |:---|:---|:---|
 | **镜像配置错误** | 修正镜像名称/标签后,Deployment/Pod 会自动重新拉取 | 高 |
 | **认证问题** | 添加/更新 ImagePullSecret 后,kubelet 会在下次重试时使用新凭据 | 高 |
-| **临时网络故障** | 等待下次退避重试,如果网络恢复会自动成功 | 中 |
+| **临时网络问题** | 等待下次退避重试,如果网络恢复会自动成功 | 中 |
 | **持续失败** | 删除 Pod 强制重建(Deployment 会自动创建新 Pod): `kubectl delete pod <pod-name>` | 中 |
 | **回滚部署** | 如果是更新导致的问题,回滚到上一版本: `kubectl rollout undo deployment/<name>` | 中 |
 | **加速重试** | 删除 Pod 会立即创建新 Pod,跳过当前退避等待时间 | 低 |
@@ -977,8 +977,8 @@ curl -v https://registry-1.docker.io/v2/
 
 此事件非常罕见,可能的原因包括:
 - **镜像数据损坏**: 传输过程中镜像文件损坏或校验和不匹配
-- **容器运行时故障**: containerd/docker 的镜像存储或数据库出现问题
-- **磁盘 I/O 错误**: 节点磁盘故障导致镜像层读取失败
+- **容器运行时问题**: containerd/docker 的镜像存储或数据库出现问题
+- **磁盘 I/O 错误**: 节点磁盘问题导致镜像层读取失败
 - **镜像格式不兼容**: 镜像使用了当前运行时不支持的格式或特性
 - **权限问题**: 容器运行时进程无法读取镜像存储目录
 
@@ -1095,8 +1095,8 @@ crane config <image-name> | jq .
 | 问题原因 | 解决方案 | 优先级 |
 |:---|:---|:---|
 | **镜像数据损坏** | 删除镜像(`crictl rmi`)后重新拉取,或使用 digest 确保完整性 | 高 |
-| **容器运行时故障** | 重启容器运行时服务(`systemctl restart containerd`),或重启节点 | 高 |
-| **磁盘 I/O 错误** | 检查磁盘健康(SMART),修复文件系统,或更换故障磁盘 | 高 |
+| **容器运行时问题** | 重启容器运行时服务(`systemctl restart containerd`),或重启节点 | 高 |
+| **磁盘 I/O 错误** | 检查磁盘健康(SMART),修复文件系统,或更换问题磁盘 | 高 |
 | **运行时数据库损坏** | 备份并清理 containerd 数据库,重启服务(可能影响其他容器) | 中 |
 | **镜像格式不兼容** | 更新容器运行时版本,或重新构建镜像使用兼容格式 | 中 |
 | **权限问题** | 检查 containerd 用户权限,修复镜像存储目录权限 | 低 |

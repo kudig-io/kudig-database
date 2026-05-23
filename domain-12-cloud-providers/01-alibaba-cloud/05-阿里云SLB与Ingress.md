@@ -429,7 +429,7 @@ spec:
 | Pod跨AZ分布 | `kubectl get pods -o wide` | Pod分布在不同AZ |
 | SLB多AZ配置 | `aliyun slb DescribeLoadBalancerAttribute` | MasterZoneId != SlaveZoneId |
 | 后端健康状态 | `aliyun slb DescribeHealthStatus` | 所有后端normal |
-| 故障转移测试 | 模拟AZ故障 | 流量自动切换 |
+| 故障转移测试 | 模拟AZ问题 | 流量自动切换 |
 | 会话保持 | Service sessionAffinity配置 | 根据业务需要配置 |
 
 ### 4.4 故障切换流程
@@ -470,7 +470,7 @@ kubectl run -it --rm test --image=busybox:1.36 --restart=Never -- \
 | 证书错误 | TLS Secret过期/不匹配 | 检查证书有效期、Secret配置 |
 | 访问超时 | 安全组/健康检查失败 | 检查安全组规则、健康检查路径 |
 | 流量不均 | 会话保持/权重配置 | 调整调度算法、权重 |
-| 单点故障 | 单AZ部署 | 启用多AZ、Pod反亲和性 |
+| 单点问题 | 单AZ部署 | 启用多AZ、Pod反亲和性 |
 | Ingress不生效 | IngressClass未匹配 | 检查ingressClassName |
 | 域名不通 | DNS未解析 | 检查内部DNS、CoreDNS |
 

@@ -75,7 +75,7 @@ flowchart TD
   OR0 --> CAT_INIT["A. Cilium Agent 初始化失败"]
   OR0 --> CAT_HEALTH["B. Cilium 健康检查失败"]
   OR0 --> CAT_BPF["C. eBPF Map/Program 异常"]
-  OR0 --> CAT_NET["D. 网络连通性故障"]
+  OR0 --> CAT_NET["D. 网络连通性问题"]
   OR0 --> CAT_HUBBLE["E. Hubble 流量观测不可用"]
   OR0 --> CAT_SVC["F. Service/LoadBalancer 异常"]
   OR0 --> CAT_BGP["G. BGP Peering 异常"]
@@ -150,7 +150,7 @@ flowchart TD
 
 ### A1. Cilium Agent 无法启动
 
-**故障现象**: cilium-agent pod 不在 Running 状态，或重启循环
+**问题现象**: cilium-agent pod 不在 Running 状态，或重启循环
 
 **可能原因**：
 
@@ -174,7 +174,7 @@ mount | grep bpf
 
 ### A2. Kubernetes Mode 初始化失败
 
-**故障现象**: Cilium 启动报错 "Kubernetes mode: unable to get Kubernetes node"
+**问题现象**: Cilium 启动报错 "Kubernetes mode: unable to get Kubernetes node"
 
 **可能原因**：
 - Kubelet 未上报节点注解（`k8s.cilium.io/node-ip` 等）
@@ -196,7 +196,7 @@ kubectl logs -n kube-system -l name=cilium-operator --tail=50
 
 ### B1. cilium status 显示不健康
 
-**故障现象**: `cilium status` 输出中某项为 `✗`
+**问题现象**: `cilium status` 输出中某项为 `✗`
 
 **可能原因**：
 
@@ -215,7 +215,7 @@ cilium health list  # 查看所有健康检查项
 
 ### B2. 节点间 VXLAN 隧道断裂
 
-**故障现象**: 跨节点 Pod 无法通信，但同节点 Pod 通信正常
+**问题现象**: 跨节点 Pod 无法通信，但同节点 Pod 通信正常
 
 **排查步骤**：
 ```bash
@@ -235,7 +235,7 @@ iptables -L -n | grep 8472
 
 ### C1. eBPF Map 溢出
 
-**故障现象**: `dmesg` 显示 `BPF: Map-insertion rejected`，或 cilium status 报警 `BPF map pressure`
+**问题现象**: `dmesg` 显示 `BPF: Map-insertion rejected`，或 cilium status 报警 `BPF map pressure`
 
 **可能原因**：
 - `bpf.maps.size.max` 设置过小（默认 512K）
@@ -253,7 +253,7 @@ helm upgrade cilium cilium/cilium --set bpf.maps.size.max=2097152
 
 ### C2. eBPF Program 加载失败
 
-**故障现象**: `cilium status` 显示 BPF program 加载失败
+**问题现象**: `cilium status` 显示 BPF program 加载失败
 
 **可能原因**：
 - 内核版本不支持对应 BPF 功能（需要 5.10+）
@@ -271,11 +271,11 @@ kubectl logs -n kube-system -l name=cilium-operator | grep -i "program"
 
 ---
 
-## D. 网络连通性故障
+## D. 网络连通性问题
 
 ### D1. 跨节点 Pod 网络不通
 
-**故障现象**: Pod IP 无法 ping 通对端节点上的 Pod IP
+**问题现象**: Pod IP 无法 ping 通对端节点上的 Pod IP
 
 **排查步骤**：
 ```bash
@@ -291,7 +291,7 @@ cilium bgp peers
 
 ### D2. Pod 无法访问 ClusterIP Service
 
-**故障现象**: Pod 内 `curl 10.96.0.1:443` 超时
+**问题现象**: Pod 内 `curl 10.96.0.1:443` 超时
 
 **排查步骤**：
 ```bash
@@ -307,7 +307,7 @@ curl -s 10.96.0.1:443
 
 ### D3. Pod 无法访问外部网络
 
-**故障现象**: Pod 内 `curl google.com` 超时
+**问题现象**: Pod 内 `curl google.com` 超时
 
 **排查步骤**：
 ```bash
@@ -327,7 +327,7 @@ cilium egress list
 
 ### E1. Hubble Server 未运行
 
-**故障现象**: `hubble observe` 无输出或报错 "Hubble server not reachable"
+**问题现象**: `hubble observe` 无输出或报错 "Hubble server not reachable"
 
 **排查步骤**：
 ```bash
@@ -343,7 +343,7 @@ helm upgrade cilium cilium/cilium --set hubble.enabled=true --set hubble.relay.e
 
 ### E2. Hubble Relay 无法聚合
 
-**故障现象**: `hubble observe --server=grpc://<relay>:443` 无响应
+**问题现象**: `hubble observe --server=grpc://<relay>:443` 无响应
 
 **排查步骤**：
 ```bash
@@ -361,7 +361,7 @@ openssl x509 -in /var/run/cilium/hubble-relay.crt -noout -dates
 
 ### F1. Kubeproxy-free 模式下 Service 不通
 
-**故障现象**: 启用 Cilium kube-proxy replacement 后 ClusterIP Service 无法访问
+**问题现象**: 启用 Cilium kube-proxy replacement 后 ClusterIP Service 无法访问
 
 **排查步骤**：
 ```bash
@@ -381,7 +381,7 @@ helm upgrade cilium cilium/cilium --set kubeProxyReplacement=disabled
 
 ### G1. Bird/BGP 会话断开
 
-**故障现象**: `cilium bgp peers` 显示部分 peer 为 down
+**问题现象**: `cilium bgp peers` 显示部分 peer 为 down
 
 **排查步骤**：
 ```bash
@@ -398,7 +398,7 @@ birdcl show bfd session
 
 ## 附录：关键命令索引
 
-| 故障场景 | 诊断命令 |
+| 问题场景 | 诊断命令 |
 |---------|---------|
 | Cilium Agent 状态 | `cilium status` |
 | Endpoint 列表 | `cilium endpoint list` |

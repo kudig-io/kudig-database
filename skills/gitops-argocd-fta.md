@@ -44,7 +44,7 @@ created: "2026-05-23"
 # GitOps（ArgoCD）异常 FTA 树
 
 ## 适用范围与说明
-- **目标**：覆盖 ArgoCD 同步失败、应用状态漂移、清单渲染异常、集群连接故障、RBAC/准入拒绝与回滚失败的关键成因与路径。
+- **目标**：覆盖 ArgoCD 同步失败、应用状态漂移、清单渲染异常、集群连接问题、RBAC/准入拒绝与回滚失败的关键成因与路径。
 - **范围**：Git 仓库访问、Helm/Kustomize/Jsonnet 清单渲染、Application/ApplicationSet 同步、目标集群连接、RBAC 与准入控制、Diff/Drift 检测、回滚与版本管理。
 - **符号**：
   - **OR 门**：任一子事件成立即可触发父事件

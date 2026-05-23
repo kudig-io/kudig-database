@@ -86,7 +86,7 @@ flowchart TD
   A_OR --> A1["A1. API 限流<br/>请求频率超限"]
   A_OR --> A2["A2. API 超时<br/>云平台响应慢"]
   A_OR --> A3["A3. API 版本不兼容<br/>SDK/CCM 过旧"]
-  A_OR --> A4["A4. 区域/可用区故障<br/>服务降级"]
+  A_OR --> A4["A4. 区域/可用区问题<br/>服务降级"]
 
   %% ======== B. 凭证/IAM ========
   B_OR{{OR}}
@@ -225,8 +225,8 @@ flowchart TD
       }
     },
     {
-      "name": "A4. 区域/可用区故障", "action": "bottom_event", "step": "event_api_az_fail",
-      "description": "云平台特定可用区服务降级或故障，影响该 AZ 的所有操作",
+      "name": "A4. 区域/可用区问题", "action": "bottom_event", "step": "event_api_az_fail",
+      "description": "云平台特定可用区服务降级或问题，影响该 AZ 的所有操作",
       "next_step": "end",
       "metadata": {
         "severity": "critical",
@@ -572,7 +572,7 @@ flowchart TD
     },
     {
       "name": "E3. NAT 网关异常", "action": "bottom_event", "step": "event_nat_fail",
-      "description": "NAT 网关故障或带宽不足导致集群出站流量中断",
+      "description": "NAT 网关问题或带宽不足导致集群出站流量中断",
       "next_step": "end",
       "metadata": {
         "severity": "critical",

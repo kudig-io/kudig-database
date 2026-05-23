@@ -58,7 +58,7 @@ cross_refs:
 
 ## 适用范围与说明
 - **目标**：覆盖 GPU 设备不可用、调度失败、驱动不兼容、运行时异常与资源碎片化的关键成因与路径。
-- **范围**：Device Plugin、驱动/CUDA/cuDNN 兼容性、容器运行时（nvidia-container-runtime）、调度与拓扑、配额与资源管理、节点与硬件故障。
+- **范围**：Device Plugin、驱动/CUDA/cuDNN 兼容性、容器运行时（nvidia-container-runtime）、调度与拓扑、配额与资源管理、节点与硬件问题。
 - **符号**：
   - **OR 门**：任一子事件成立即可触发父事件
   - **AND 门**：所有子事件同时成立才触发父事件
@@ -79,7 +79,7 @@ flowchart TD
   OR0 --> CAT_SCHED["C. 调度与拓扑异常"]
   OR0 --> CAT_RT["D. 容器运行时/GPU 运行时异常"]
   OR0 --> CAT_RES["E. 资源配额与碎片化"]
-  OR0 --> CAT_HW["F. 节点/硬件故障"]
+  OR0 --> CAT_HW["F. 节点/硬件问题"]
 
   %% ======== A. Device Plugin ========
   A_OR{{OR}}
@@ -139,7 +139,7 @@ flowchart TD
   %% ======== F. 节点/硬件 ========
   F_OR{{OR}}
   CAT_HW --> F_OR
-  F_OR --> F1["F1. GPU 硬件故障<br/>ECC 错误 / Xid 错误"]
+  F_OR --> F1["F1. GPU 硬件问题<br/>ECC 错误 / Xid 错误"]
   F_OR --> F2["F2. GPU 温度过高<br/>降频/节流"]
   F_OR --> F3["F3. PCIe 链路异常<br/>带宽降级"]
   F_OR --> F4["F4. GPU 挂死<br/>需硬件重置"]
@@ -602,11 +602,11 @@ flowchart TD
     { "name": "GPU 已全部分配", "action": "and_condition", "step": "event_gpu_all_allocated", "next_step": "end" },
     { "name": "GPU 实际利用率极低", "action": "and_condition", "step": "event_gpu_low_util", "next_step": "end" },
 
-    { "name": "F. 节点/硬件故障", "action": "category", "step": "cat_hw", "next_step": "gate_hw_or" },
+    { "name": "F. 节点/硬件问题", "action": "category", "step": "cat_hw", "next_step": "gate_hw_or" },
     { "name": "硬件 OR 门", "action": "gate_or", "step": "gate_hw_or", "control": "or_gate", "gate_type": "OR", "next_steps": ["event_gpu_hw_fail", "event_gpu_overheat", "event_pcie_degrade", "event_gpu_hang"] },
 
     {
-      "name": "F1. GPU 硬件故障", "action": "bottom_event", "step": "event_gpu_hw_fail",
+      "name": "F1. GPU 硬件问题", "action": "bottom_event", "step": "event_gpu_hw_fail",
       "description": "GPU ECC 双位错误或 Xid 严重错误，GPU 不可用",
       "next_step": "end",
       "metadata": {
@@ -620,7 +620,7 @@ flowchart TD
         },
         "remediation": {
           "manual_steps": ["cordon 节点: kubectl cordon <node>", "排空工作负载: kubectl drain <node>", "联系硬件供应商更换 GPU", "运行 GPU 诊断: nvidia-smi -q -d ECC"],
-          "auto_actions": ["配置 GPU Health Check 自动 cordon 故障节点"]
+          "auto_actions": ["配置 GPU Health Check 自动 cordon 问题节点"]
         },
         "version_notes": ""
       }
@@ -659,7 +659,7 @@ flowchart TD
           "logs": ["PCIe: lnksta: Speed Gen3, Width x8 (与预期不符)"]
         },
         "remediation": {
-          "manual_steps": ["检查 PCIe 链路状态: nvidia-smi -q -d PCIE", "确认 GPU 物理安装正确", "检查主板 BIOS PCIe 设置", "排查 PCIe 线缆或转接卡故障"],
+          "manual_steps": ["检查 PCIe 链路状态: nvidia-smi -q -d PCIE", "确认 GPU 物理安装正确", "检查主板 BIOS PCIe 设置", "排查 PCIe 线缆或转接卡问题"],
           "auto_actions": []
         },
         "version_notes": ""

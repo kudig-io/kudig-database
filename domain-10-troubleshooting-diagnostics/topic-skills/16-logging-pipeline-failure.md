@@ -76,13 +76,13 @@ created: "2026-05-23"
 
 ## 1. 概述
 
-日志管道故障是 [[Kubernetes|Kubernetes]] 可观测性体系中**影响最广泛**的问题类型之一。当日志采集、传输或存储环节出现故障时，会导致应用日志缺失、审计日志不完整、告警延迟甚至安全事件无法追溯。在云原生环境中，日志管道通常由采集层（[[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|[[Fluentd|Fluentd]]]]/Fluent Bit/Vector）、传输层（Kafka/直接推送）和存储层（Elasticsearch/Loki/ClickHouse）组成，任一环节的故障都可能导致日志数据丢失。
+日志管道问题是 [[Kubernetes|Kubernetes]] 可观测性体系中**影响最广泛**的问题类型之一。当日志采集、传输或存储环节出现问题时，会导致应用日志缺失、审计日志不完整、告警延迟甚至安全事件无法追溯。在云原生环境中，日志管道通常由采集层（[[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|[[Fluentd|Fluentd]]]]/Fluent Bit/Vector）、传输层（Kafka/直接推送）和存储层（Elasticsearch/Loki/ClickHouse）组成，任一环节的问题都可能导致日志数据丢失。
 
 ### 典型触发场景
 
-1. **日志采集 Agent 故障**: Fluentd/Fluent Bit/Vector DaemonSet Pod 崩溃、OOM、配置错误，导致节点日志无法采集
+1. **日志采集 Agent 问题**: Fluentd/Fluent Bit/Vector DaemonSet Pod 崩溃、OOM、配置错误，导致节点日志无法采集
 2. **Buffer 溢出与背压**: 日志产生速率超过采集器处理能力，或下游存储不可用导致 buffer 积压，最终溢出丢失日志
-3. **存储后端故障**: Elasticsearch 集群状态 Red/Yellow、Loki 写入限速、磁盘空间耗尽，导致日志无法写入
+3. **存储后端问题**: Elasticsearch 集群状态 Red/Yellow、Loki 写入限速、磁盘空间耗尽，导致日志无法写入
 4. **日志解析配置错误**: Parser 配置与实际日志格式不匹配，导致时间戳解析错误、多行日志被拆分、字段提取失败
 5. **容器日志轮转问题**: kubelet 的 containerLogMaxSize 配置不当，导致节点磁盘被容器日志占满
 
@@ -94,7 +94,7 @@ created: "2026-05-23"
 - **日志平台访问**: 需要 Elasticsearch/Loki/Kibana/Grafana 的查询权限
 - **监控系统**: Prometheus + 日志采集器的 metrics exporter
 
-> ⚠️ **重要**: 本 Skill 覆盖 Fluentd、Fluent Bit、Vector 三种主流采集器，以及 Elasticsearch 和 Loki 两种主流存储后端。审计日志管理故障也在覆盖范围内。
+> ⚠️ **重要**: 本 Skill 覆盖 Fluentd、Fluent Bit、Vector 三种主流采集器，以及 Elasticsearch 和 Loki 两种主流存储后端。审计日志管理问题也在覆盖范围内。
 
 ---
 
@@ -105,7 +105,7 @@ created: "2026-05-23"
 | # | 症状描述 | 检测方法 | 置信度 | 排除条件 |
 |---|---------|---------|--------|---------|
 | S1 | 特定 Pod 日志在日志平台中缺失 / Specific Pod logs missing from logging platform | 在 Kibana/Grafana Loki 中查询特定 Pod 名称，无结果或结果不完整 | 0.85 | 应用本身未输出日志（stdout/stderr 为空）；日志查询时间范围或筛选条件错误 |
-| S2 | Fluentd/Fluent Bit DaemonSet Pod 处于 CrashLoopBackOff / Log agent DaemonSet Pod in CrashLoopBackOff | `kubectl get pods -n logging` 显示采集器 Pod 状态为 CrashLoopBackOff | 0.95 | 新部署的采集器配置错误导致启动失败（属于配置问题而非运行时故障） |
+| S2 | Fluentd/Fluent Bit DaemonSet Pod 处于 CrashLoopBackOff / Log agent DaemonSet Pod in CrashLoopBackOff | `kubectl get pods -n logging` 显示采集器 Pod 状态为 CrashLoopBackOff | 0.95 | 新部署的采集器配置错误导致启动失败（属于配置问题而非运行时问题） |
 | S3 | 日志延迟超过 5 分钟 / Log latency exceeds 5 minutes | 对比 Pod 中日志产生时间与日志平台中该日志的 @timestamp，延迟超过 5 分钟 | 0.80 | 应用时区配置错误导致时间戳偏差；日志平台时钟不同步 |
 | S4 | Elasticsearch 集群状态 Red/Yellow / Elasticsearch cluster status Red or Yellow | `curl -s localhost:9200/_cluster/health?pretty` 返回 status 为 red 或 yellow | 0.90 | 新创建索引分片正在初始化（短暂 yellow 可能是正常行为） |
 | S5 | Loki 写入返回 429 (rate limit) / Loki ingestion returns 429 rate limit | Fluent Bit/Vector 日志中出现 `429 Too Many Requests` 或 `rate limit` | 0.85 | 业务高峰期短暂触发限速后自行恢复；故意配置的限速策略 |
@@ -150,10 +150,10 @@ created: "2026-05-23"
 |---------|---------|------|
 | 应用本身未输出任何日志（stdout/stderr 为空） | 应用排查 | 非日志管道问题，需检查应用日志配置 |
 | 日志平台（Kibana/Grafana）UI 无法访问 | 服务排查 | 前端服务问题，非日志管道问题 |
-| Elasticsearch 全部节点宕机 | SKILL-STORE-001 | 存储集群级故障，超出日志管道范围 |
-| 节点 NotReady 导致采集器 Pod 无法运行 | SKILL-NODE-001 | 根因是节点问题，日志故障是症状 |
-| 日志格式设计问题（非技术故障） | 日志规范制定 | 属于架构设计范畴，非故障处理 |
-| 网络策略阻止采集器访问存储后端 | 网络排查 | 网络配置问题而非日志组件故障 |
+| Elasticsearch 全部节点宕机 | SKILL-STORE-001 | 存储集群级问题，超出日志管道范围 |
+| 节点 NotReady 导致采集器 Pod 无法运行 | SKILL-NODE-001 | 根因是节点问题，日志问题是症状 |
+| 日志格式设计问题（非技术问题） | 日志规范制定 | 属于架构设计范畴，非故障处理 |
+| 网络策略阻止采集器访问存储后端 | 网络排查 | 网络配置问题而非日志组件问题 |
 
 ---
 
@@ -161,7 +161,7 @@ created: "2026-05-23"
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径：
+按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 检查日志采集 DaemonSet 状态（15 秒）
 ```bash
@@ -232,7 +232,7 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
 - **完全失效**: 所有日志采集器 Pod 均处于 CrashLoopBackOff 且无法自动恢复（已重启 >5 次）
 - **存储灾难**: Elasticsearch 集群 status=red 且有 unassigned primary shards（数据丢失风险）
 - **审计合规**: 审计日志停止记录超过 1 小时且涉及生产环境
-- **磁盘危急**: 多个节点因日志占用磁盘空间导致 DiskPressure（关联节点故障）
+- **磁盘危急**: 多个节点因日志占用磁盘空间导致 DiskPressure（关联节点问题）
 - **安全事件**: 发现日志中存在大量敏感信息泄露需立即处理
 
 > **升级消息模板**: 参见 Section 8.2
@@ -574,7 +574,7 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   - `status: red` → 有 primary shard 不可用，数据丢失风险（RC-003）
   - `status: yellow` → 有 replica shard 不可用，容错能力下降
   - `unassigned_shards > 0` → 需要检查原因（磁盘、节点数、配置）
-  - `number_of_nodes` 低于预期 → ES 节点故障
+  - `number_of_nodes` 低于预期 → ES 节点问题
   - `active_primary_shards` 为 0 → 集群不可用
 - **版本差异**:
   - **Elasticsearch 8.x**: 安全默认启用，可能需要认证
@@ -1326,7 +1326,7 @@ kubectl exec -n logging $(kubectl get pod -n logging -l app=fluent-bit -o jsonpa
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 
 - [ ] 所有日志采集器 Pod Running 且 READY
 - [ ] 日志延迟 < 30 秒
@@ -1360,7 +1360,7 @@ kubectl exec -n logging $(kubectl get pod -n logging -l app=fluent-bit -o jsonpa
 |------|------|---------|
 | **诊断超时** | 诊断工作流执行超过 **15 分钟**未能确认根因 | Phase 2 结束后仍无明确根因 |
 | **修复失败** | 同一修复操作执行 **2 次**仍未通过后置验证 | REM-xxx 执行后验证失败 |
-| **严重性升级** | 初始分级为 P2/P3 但问题扩大（如更多节点采集器异常） | 诊断过程中故障范围扩大 |
+| **严重性升级** | 初始分级为 P2/P3 但问题扩大（如更多节点采集器异常） | 诊断过程中问题范围扩大 |
 | **未知根因** | 完成 Phase 1-3 所有诊断步骤但无法匹配任何已知根因 | 所有诊断步骤均无明确异常发现 |
 | **存储灾难** | Elasticsearch cluster status=red 且有 primary shards 丢失 | D3.1 或 D3.2 发现 |
 | **审计合规** | 审计日志停止记录超过 1 小时且为生产环境 | D3.6 发现审计失效 |
@@ -1369,10 +1369,10 @@ kubectl exec -n logging $(kubectl get pod -n logging -l app=fluent-bit -o jsonpa
 ### 8.2 升级消息模板
 
 ```
-【{severity}】日志收集与管理故障 - {cluster_name}
+【{severity}】日志收集与管理问题 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: {summary}
-  - 故障类型: {fault_type}（采集层/传输层/存储层/配置）
+- 问题概述: {summary}
+  - 问题类型: {fault_type}（采集层/传输层/存储层/配置）
   - 影响范围: {impact_scope}
 - 影响评估:
   - 受影响节点: {affected_nodes}/{total_nodes}
@@ -1478,8 +1478,8 @@ kubectl exec -n logging $(kubectl get pod -n logging -l app=fluent-bit -o jsonpa
 | **将 buffer 溢出误判为网络问题** | 采集器日志显示发送失败，初步判断网络不通 | 实际是 ES 磁盘满导致拒绝写入，buffer 积压后溢出 | 先检查存储后端状态（D3.1-D3.3），再检查网络（D2.5） |
 | **将日志轮转清理误判为日志丢失** | 用户报告某段时间日志查不到 | kubelet 日志轮转正常清理了旧日志，且该时段采集器未运行 | 确认 containerLogMaxFiles 和采集器运行历史，区分采集失败和正常轮转 |
 | **将时区问题误判为日志延迟** | 日志平台显示的时间与实际相差数小时 | 应用时区、采集器时区、存储时区不一致 | 检查所有组件的时区配置，使用 UTC 标准化 |
-| **将采集器正常背压误判为故障** | 高峰期短暂出现 backpressure 日志 | 流量高峰的正常行为，buffer 可以平滑处理 | 观察 buffer 是否持续增长，短暂波动可以忽略 |
-| **将存储 yellow 状态误判为严重故障** | ES 状态 yellow，触发告警 | 新创建索引分片正在初始化，或单节点集群 replica 无法分配 | 检查 unassigned 原因，yellow 不一定影响写入 |
+| **将采集器正常背压误判为问题** | 高峰期短暂出现 backpressure 日志 | 流量高峰的正常行为，buffer 可以平滑处理 | 观察 buffer 是否持续增长，短暂波动可以忽略 |
+| **将存储 yellow 状态误判为严重问题** | ES 状态 yellow，触发告警 | 新创建索引分片正在初始化，或单节点集群 replica 无法分配 | 检查 unassigned 原因，yellow 不一定影响写入 |
 | **将 OOM 误判为配置问题** | 采集器频繁重启，日志显示内存相关错误 | 实际是日志量激增超出 limits，而非配置错误 | 结合 D1.4 资源使用和 D2.8 采集速率综合判断 |
 
 ### 10.2 深度知识引用

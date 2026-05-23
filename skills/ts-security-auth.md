@@ -101,7 +101,7 @@ cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep -E "authentication|auth
 #### 2.1 排查决策树
 
 ```
-证书故障
+证书问题
     │
     ├─── 组件无法启动？
     │         │
@@ -151,7 +151,7 @@ cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep -E "authentication|auth
 #### 2.1 排查决策树
 
 ```
-Pod 安全故障
+Pod 安全问题
       │
       ├─── Pod 创建被拒绝？
       │         │

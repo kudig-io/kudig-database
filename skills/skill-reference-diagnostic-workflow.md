@@ -93,8 +93,8 @@ created: "2026-05-23"
 
 ### Phase 2: 深度检查（只读，零风险，需 SSH）
 
-> **目标**: SSH 登录故障节点，检查系统级组件状态。所有命令均为只读操作。
-> **前提**: 需要对故障节点的 SSH 访问权限
+> **目标**: SSH 登录问题节点，检查系统级组件状态。所有命令均为只读操作。
+> **前提**: 需要对问题节点的 SSH 访问权限
 > **预计耗时**: 5-10 分钟
 
 ### Step D2.1: 检查 kubelet 服务状态
@@ -127,7 +127,7 @@ created: "2026-05-23"
   - 日志包含 `connection refused` 或 `dial tcp <apiserver-ip>:6443: connect: connection refused` → 网络不通或 apiserver 不可达（RC-006）
   - 日志包含 `x509: certificate has expired` 或 `certificate signed by unknown authority` → 证书问题（RC-007），关联 SKILL-SEC-001
   - 日志包含 `PLEG is not healthy` → PLEG 不健康（RC-008），继续 D2.6
-  - 日志包含 `[[Container Runtime|container runtime]] is not running` 或 `runtime connect using default endpoints` → 容器运行时故障（RC-002）
+  - 日志包含 `[[Container Runtime|container runtime]] is not running` 或 `runtime connect using default endpoints` → 容器运行时问题（RC-002）
   - 日志包含 `failed to garbage collect` + 磁盘相关错误 → 磁盘空间不足（RC-003）
   - 日志包含 `OOM` 或 `oom_kill` → 内存压力（RC-004）
   - 日志包含 `too many open files` 或 `no space left on device` → 资源耗尽（RC-003 或 RC-005）
@@ -135,7 +135,7 @@ created: "2026-05-23"
   - 日志包含 `failed to renew lease` → Lease 续租失败，检查网络和 apiserver
   - 日志包含 `use of closed network connection` → 网络连接异常（RC-006）
 - **版本差异**:
-  - **[v1.28+]**: GracefulNodeShutdown 默认启用。如果日志中出现 `shutting down gracefully`，可能节点正在优雅关机，不一定是故障
+  - **[v1.28+]**: GracefulNodeShutdown 默认启用。如果日志中出现 `shutting down gracefully`，可能节点正在优雅关机，不一定是问题
   - **[v1.30+]**: swap 相关日志 `swap is enabled` 在启用 NodeSwap feature gate 时属于正常信息
 
 ---

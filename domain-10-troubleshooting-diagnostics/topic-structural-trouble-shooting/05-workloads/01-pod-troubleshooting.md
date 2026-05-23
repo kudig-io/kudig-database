@@ -104,7 +104,7 @@ k8s_versions:
 | :--- | :--- | :--- |
 | **初学者** | 解决 Pod 无法启动、不断重启或被杀掉的问题 | 掌握 Pod 状态机、标准排查 4 步法（Get/Describe/Logs/Exec）。 |
 | **中级运维** | 优化资源分配、解决复杂的挂载与网络连通性问题 | 理解 OOM 原理、探针调优、镜像拉取优化与 InitContainers 应用。 |
-| **资深专家** | 处理内核级故障、僵尸进程与大规模调度瓶颈 | 深入 Pod Sandbox 机制、PID 1 治理、eBPF 辅助诊断与 Sidecar 容器启动顺序调优。 |
+| **资深专家** | 处理内核级问题、僵尸进程与大规模调度瓶颈 | 深入 Pod Sandbox 机制、PID 1 治理、eBPF 辅助诊断与 Sidecar 容器启动顺序调优。 |
 
 ---
 
@@ -368,7 +368,7 @@ process.wait()  # 阻塞直到子进程退出
 | **Running** | 至少一个容器运行 | - | `kubectl get pod -o wide` 查看 READY 列 |
 | **CrashLoopBackOff** | 容器启动失败，等待重试 | 应用程序 bug、配置错误、依赖服务不可用 | `kubectl logs <pod> --previous` |
 | **Terminating** | Pod 正在删除 | - | `kubectl get pod` 查看 AGE 列（卡住则检查 Finalizers） |
-| **Unknown** | kubelet 与 API Server 失联 | 节点网络故障、kubelet 崩溃 | `kubectl describe node <node>` |
+| **Unknown** | kubelet 与 API Server 失联 | 节点网络问题、kubelet 崩溃 | `kubectl describe node <node>` |
 
 **CrashLoopBackOff 退避算法**：
 ```
@@ -391,7 +391,7 @@ process.wait()  # 阻塞直到子进程退出
 | **0** | - | 正常退出 | 对于服务型容器，检查为何主循环结束 |
 | **1** | - | 通用错误 | 查看应用日志，通常是业务逻辑错误 |
 | **2** | - | Shell 内置命令误用 | 检查 entrypoint 脚本语法 |
-| **125** | - | Docker 守护进程错误 | containerd/dockerd 故障，查看节点日志 |
+| **125** | - | Docker 守护进程错误 | containerd/dockerd 问题，查看节点日志 |
 | **126** | - | 命令无法执行 | 文件权限错误（`chmod +x`）或路径错误 |
 | **127** | - | 命令未找到 | entrypoint 拼写错误或镜像内路径不存在 |
 | **128+N** | Signal N | 被信号终止 | 例如 137=128+9=SIGKILL, 143=128+15=SIGTERM |
@@ -471,11 +471,11 @@ journalctl -u containerd | grep "RunPodSandbox\|CreateContainer" | tail -20
 
 ---
 
-## 2. 专家级故障矩阵与观测工具
+## 2. 专家级问题矩阵与观测工具
 
-### 2.1 专家级故障矩阵（按生命周期分类）
+### 2.1 专家级问题矩阵（按生命周期分类）
 
-#### 2.1.1 调度阶段故障
+#### 2.1.1 调度阶段问题
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
@@ -484,15 +484,15 @@ journalctl -u containerd | grep "RunPodSandbox\|CreateContainer" | tail -20
 | **Pending: PVC 未绑定** | StorageClass 不存在、后端存储配额不足、`volumeBindingMode: WaitForFirstConsumer` 延迟绑定 | `kubectl get pvc \| grep Pending`；`kubectl describe pvc` | 检查 StorageClass；扩容后端；手动创建 PV |
 | **Pending: 拓扑约束** | `topologySpreadConstraints` 约束无法满足（如强制均匀分布但节点不足） | `kubectl get pod -o yaml \| grep -A5 topologySpreadConstraints` | 放宽 `whenUnsatisfiable: DoNotSchedule` 为 `ScheduleAnyway` |
 
-#### 2.1.2 容器创建阶段故障
+#### 2.1.2 容器创建阶段问题
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
 | **ImagePullBackOff** | 镜像不存在、Registry 凭证过期、镜像层损坏、Registry 速率限制（Docker Hub 100次/6h） | `kubectl describe pod \| grep -A5 "Failed to pull image"`；`crictl pull <image>` 测试拉取 | 检查镜像 tag；重新创建 `imagePullSecrets`；使用镜像缓存代理 |
-| **CreateContainerError** | Volume 挂载失败（PVC 不存在、CSI 驱动故障）、SecurityContext 冲突（如 `runAsUser: 0` 被 PSP 拒绝） | `kubectl describe pod \| grep "CreateContainerError"`；`crictl ps -a \| grep Error` | 检查 Volume 状态；调整 SecurityContext；查看 PSP/PSA 策略 |
+| **CreateContainerError** | Volume 挂载失败（PVC 不存在、CSI 驱动问题）、SecurityContext 冲突（如 `runAsUser: 0` 被 PSP 拒绝） | `kubectl describe pod \| grep "CreateContainerError"`；`crictl ps -a \| grep Error` | 检查 Volume 状态；调整 SecurityContext；查看 PSP/PSA 策略 |
 | **Init:CrashLoopBackOff** | InitContainer 失败（如数据库迁移脚本错误） | `kubectl logs <pod> -c <init-container>`；`kubectl get pod -o jsonpath='{.status.initContainerStatuses}'` | 修复 InitContainer 逻辑；临时跳过（删除 initContainers） |
 
-#### 2.1.3 运行阶段故障
+#### 2.1.3 运行阶段问题
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
@@ -501,7 +501,7 @@ journalctl -u containerd | grep "RunPodSandbox\|CreateContainer" | tail -20
 | **Liveness 探针失败** | 探针超时时间过短、应用启动慢（大型 Java 应用）、探针依赖外部服务（数据库抖动导致全部重启） | `kubectl describe pod \| grep "Liveness probe failed"`；`kubectl get pod -o yaml \| grep -A10 livenessProbe` | 增加 `initialDelaySeconds` 和 `timeoutSeconds`；使用 `startupProbe`；探针改为本地检查 |
 | **Readiness 探针失败** | 应用未就绪（依赖服务连接中）、探针路径错误（/health vs /healthz） | `kubectl describe pod \| grep "Readiness probe failed"`；`kubectl get endpoints <service>` 确认 Pod 未加入 | 等待应用就绪；修正探针配置；临时禁用探针 |
 
-#### 2.1.4 停止阶段故障
+#### 2.1.4 停止阶段问题
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
@@ -747,7 +747,7 @@ spec:
 - [ ] **资源配额**：是否同时配置了 `requests` 和 `limits`（QoS 保证）？
 - [ ] **优雅停机**：是否配置了 `terminationGracePeriodSeconds`（默认 30s 是否够用）？
 - [ ] **探针覆盖**：是否同时具备 `readiness`（流量切入）和 `liveness`（存活检查）？
-- [ ] **反亲和性**：关键业务是否配置了 `podAntiAffinity` 防止单点故障？
+- [ ] **反亲和性**：关键业务是否配置了 `podAntiAffinity` 防止单点问题？
 - [ ] **安全加固**：是否设置了 `securityContext`（非 root 运行）？
 ### 3.1 第一阶段：调度决策验证
 
@@ -855,7 +855,7 @@ ls -la /var/lib/kubelet/pods/$POD_UID/volumes/
 # kubernetes.io~csi/data-pvc/
 ```
 
-**常见创建阶段故障**：
+**常见创建阶段问题**：
 - **ImagePullBackOff**：镜像不存在、Registry 限流、网络超时（Docker Hub 免费用户限制 100 次/6h）
 - **CreateContainerConfigError**：ConfigMap/Secret 不存在、环境变量引用错误
 - **CreateContainerError**：Volume 挂载失败、SecurityContext 配置冲突
@@ -1206,7 +1206,7 @@ spec:
 
 ### 5.1 案例一：Java 应用 OOMKilled 但堆内存使用正常
 
-#### 5.1.1 故障现场
+#### 5.1.1 问题现场
 
 **背景**：
 - 应用：Spring Boot 2.7 + JDK 17
@@ -1408,7 +1408,7 @@ spec:
 
 ### 5.2 案例二：Pod 删除卡在 Terminating 30 分钟+
 
-#### 5.2.1 故障现场
+#### 5.2.1 问题现场
 
 **背景**：
 - 应用：Nginx + NFS Volume（用于存储上传文件）
@@ -1689,7 +1689,7 @@ spec:
 
 ### 5.3 案例三：Pod 网络偶发超时（DNS 解析 5 秒延迟）
 
-#### 5.3.1 故障现场
+#### 5.3.1 问题现场
 
 **背景**：
 - 应用：微服务架构，服务间通过 Service 名称通信

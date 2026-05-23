@@ -467,7 +467,7 @@ ETCDCTL_API=3 etcdctl endpoint status -w table \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
 ```
 
-### 场景 4: 移除故障 etcd 成员
+### 场景 4: 移除问题 etcd 成员
 
 ```bash
 # 1. 列出成员
@@ -476,13 +476,13 @@ ETCDCTL_API=3 etcdctl member list -w table \
   --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
 
-# 2. 移除故障成员
+# 2. 移除问题成员
 ETCDCTL_API=3 etcdctl member remove <member-id> \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
   --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
 
-# 3. 在故障节点清理
+# 3. 在问题节点清理
 rm -rf /var/lib/etcd/*
 
 # 4. 重新加入
@@ -609,7 +609,7 @@ ETCDCTL_API=3 etcdctl endpoint status --cluster -w table \
 | `raft: leader changed` 频繁 | 网络延迟/磁盘 IO 慢 | 增大 election-timeout，检查磁盘 |
 | `wal: max entry size exceed` | 单个对象过大 | 调大 max-request-bytes |
 | `context deadline exceeded` | 操作超时 | 增大超时时间，检查网络 |
-| `etcdserver: unhealthy cluster` | 多数成员不可用 | 恢复故障成员或从快照恢复 |
+| `etcdserver: unhealthy cluster` | 多数成员不可用 | 恢复问题成员或从快照恢复 |
 
 ### etcd 数据查看与调试
 
@@ -743,7 +743,7 @@ ETCDCTL_API=3 etcdctl endpoint status --cluster -w json \
   jq '.[].Status.header.revision'
 
 # 所有成员的 revision 应该接近 (允许少量延迟)
-# 如果差距很大 → 有成员在同步中或故障
+# 如果差距很大 → 有成员在同步中或问题
 
 # 检查 etcd 存储backend 大小
 ETCDCTL_API=3 etcdctl endpoint status --cluster -w json \

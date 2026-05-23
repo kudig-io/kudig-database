@@ -48,13 +48,13 @@ created: "2026-05-23"
 
 ---
 
-#### 2. 专家级故障矩阵与观测工具
+#### 2. 专家级问题矩阵与观测工具
 
 
 
-#### 2.1 专家级故障矩阵（按生命周期分类）
+#### 2.1 专家级问题矩阵（按生命周期分类）
 
-#### 2.1.1 调度阶段故障
+#### 2.1.1 调度阶段问题
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
@@ -63,12 +63,12 @@ created: "2026-05-23"
 | **Pending: PVC 未绑定** | StorageClass 不存在、后端存储配额不足、`volumeBindingMode: WaitForFirstConsumer` 延迟绑定 | `kubectl get pvc \| grep Pending`；`kubectl describe pvc` | 检查 StorageClass；扩容后端；手动创建 PV |
 | **Pending: 拓扑约束** | `topologySpreadConstraints` 约束无法满足（如强制均匀分布但节点不足） | `kubectl get pod -o yaml \| grep -A5 topologySpreadConstraints` | 放宽 `whenUnsatisfiable: DoNotSchedule` 为 `ScheduleAnyway` |
 
-#### 2.1.2 容器创建阶段故障
+#### 2.1.2 容器创建阶段问题
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
 | **ImagePullBackOff** | 镜像不存在、Registry 凭证过期、镜像层损坏、Registry 速率限制（Docker Hub 100次/6h） | `kubectl describe pod \| grep -A5 "Failed to pull image"`；`crictl pull <image>` 测试拉取 | 检查镜像 tag；重新创建 `imagePullSecrets`；使用镜像缓存代理 |
-| **CreateContainerError** | Volume 挂载失败（PVC 不存在、CSI 驱动故障）、SecurityContext 冲突（如 `runAsUser: 0` 被 PSP 拒绝） | `kubectl describe pod \| grep "CreateContainerError"`；`crictl ps -a \| grep Error` | 检查 Volume 状态；调整 SecurityC
+| **CreateContainerError** | Volume 挂载失败（PVC 不存在、CSI 驱动问题）、SecurityContext 冲突（如 `runAsUser: 0` 被 PSP 拒绝） | `kubectl describe pod \| grep "CreateContainerError"`；`crictl ps -a \| grep Error` | 检查 Volume 状态；调整 SecurityC
 ...(截断)
 
 ---
@@ -168,7 +168,7 @@ Deployment 问题
 #### 2.2 排查决策树
 
 ```
-StatefulSet 故障
+StatefulSet 问题
        │
        ├─── Pod 数量不足？
        │         │
@@ -224,7 +224,7 @@ StatefulSet 故障
 #### 2.3 排查决策树
 
 ```
-DaemonSet 故障
+DaemonSet 问题
        │
        ├─── DESIRED 数量不对？
        │         │
@@ -278,7 +278,7 @@ DaemonSet 故障
 #### 2.3 排查决策树
 
 ```
-Job/CronJob 故障
+Job/CronJob 问题
        │
        ├─── Job 未完成？
        │         │
@@ -331,7 +331,7 @@ Job/CronJob 故障
 #### 2.1 排查决策树
 
 ```
-ConfigMap/Secret 故障
+ConfigMap/Secret 问题
         │
         ├─── Pod 启动失败？
         │         │

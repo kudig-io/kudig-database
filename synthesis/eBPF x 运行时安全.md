@@ -125,7 +125,7 @@ eBPF 从根本上改变了 Kubernetes 的安全格局——它将传统上相互
 
 - **eBPF 程序版本管理：** 如何安全地跨集群升级 eBPF 程序，而不引发内核恐慌或在滚动升级期间产生策略盲区？
 - **[[domain-17-system-foundation/topic-dictionary/security/multi-tenancy|多租户]] eBPF 策略：** 在多租户集群中，如何确保一个租户的 eBPF 程序不会干扰另一个租户的策略？
-- **回退策略：** 如果 eBPF 数据面故障（eBPF 程序导致内核恐慌），安全回退是什么——数据包是被丢弃还是放行？wiki 尚未全面覆盖 eBPF 故障模式。
+- **回退策略：** 如果 eBPF 数据面问题（eBPF 程序导致内核恐慌），安全回退是什么——数据包是被丢弃还是放行？wiki 尚未全面覆盖 eBPF 故障模式。
 - **Tetragon 的策略即代码：** CiliumNetworkPolicy 已有成熟的 GitOps 工作流，但 Tetragon 的 TracingPolicy 尚缺乏等效的标准化策略即代码模式，无法纳入 GitOps 管道。
 - **eBPF 安全成熟度评估：** 如何量化评估一个集群的 eBPF 安全覆盖率？哪些 eBPF 程序已部署、哪些内核挂载点已利用、哪些安全层已通过 eBPF 实现？
 

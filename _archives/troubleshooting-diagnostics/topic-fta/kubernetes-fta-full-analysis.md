@@ -46,7 +46,7 @@ prerequisites:
 # Kubernetes 全量故障树分析(FTA)排查手册
 
 > **文档版本**: v1.0  
-> **适用范围**: Kubernetes 生产环境全量故障场景  
+> **适用范围**: Kubernetes 生产环境全量问题场景  
 > **更新日期**: 2024年
 
 ---
@@ -70,7 +70,7 @@ prerequisites:
 
 ```
                                     ┌─────────────────────────────────────┐
-                                    │         Kubernetes 故障空间          │
+                                    │         Kubernetes 问题空间          │
                                     └──────────────────┬──────────────────┘
                                                        │
            ┌───────────────┬───────────────┬───────────┴───────────┬───────────────┬───────────────┐
@@ -98,20 +98,20 @@ prerequisites:
 
 TE-1: 集群完全不可用 [OR门]
 │
-├── IE-1.1 控制平面故障 [OR门]
-│   ├── BE-1.1 API Server故障
-│   ├── BE-1.2 etcd集群故障
-│   ├── BE-1.3 Scheduler故障
-│   └── BE-1.4 Controller Manager故障
+├── IE-1.1 控制平面问题 [OR门]
+│   ├── BE-1.1 API Server问题
+│   ├── BE-1.2 etcd集群问题
+│   ├── BE-1.3 Scheduler问题
+│   └── BE-1.4 Controller Manager问题
 │
-├── IE-1.2 工作节点批量故障 [AND门 - 多数节点]
-│   ├── BE-1.5 Kubelet服务故障
-│   ├── BE-1.6 容器运行时故障
-│   └── BE-1.7 节点网络故障
+├── IE-1.2 工作节点批量问题 [AND门 - 多数节点]
+│   ├── BE-1.5 Kubelet服务问题
+│   ├── BE-1.6 容器运行时问题
+│   └── BE-1.7 节点网络问题
 │
-└── IE-1.3 网络基础设施故障 [OR门]
-    ├── BE-1.8 CNI插件故障
-    └── BE-1.9 核心网络设备故障
+└── IE-1.3 网络基础设施问题 [OR门]
+    ├── BE-1.8 CNI插件问题
+    └── BE-1.9 核心网络设备问题
 
 
 TE-2: 应用服务不可用 [OR门]
@@ -125,12 +125,12 @@ TE-2: 应用服务不可用 [OR门]
 ├── IE-2.2 Service访问异常 [OR门]
 │   ├── BE-2.5 无可用Endpoint
 │   ├── BE-2.6 端口配置错误
-│   └── BE-2.7 kube-proxy故障
+│   └── BE-2.7 kube-proxy问题
 │
 └── IE-2.3 Ingress访问异常 [OR门]
-    ├── BE-2.8 Ingress Controller故障
+    ├── BE-2.8 Ingress Controller问题
     ├── BE-2.9 Ingress规则配置错误
-    └── BE-2.10 负载均衡器故障
+    └── BE-2.10 负载均衡器问题
 
 
 TE-3: Pod启动失败 [OR门]
@@ -155,12 +155,12 @@ TE-3: Pod启动失败 [OR门]
 TE-4: 网络通信异常 [OR门]
 │
 ├── IE-4.1 DNS解析异常 [OR门]
-│   ├── BE-4.1 CoreDNS Pod故障
+│   ├── BE-4.1 CoreDNS Pod问题
 │   ├── BE-4.2 DNS配置错误
 │   └── BE-4.3 网络策略阻止DNS
 │
 ├── IE-4.2 Pod间通信异常 [OR门]
-│   ├── BE-4.4 CNI插件故障
+│   ├── BE-4.4 CNI插件问题
 │   ├── BE-4.5 网络策略阻止
 │   └── BE-4.6 iptables规则错误
 │
@@ -206,7 +206,7 @@ TE-6: 资源调度异常 [OR门]
 
 TE-7: 安全认证失败 [OR门]
 │
-├── IE-7.1 证书相关故障 [OR门]
+├── IE-7.1 证书相关问题 [OR门]
 │   ├── BE-7.1 证书过期
 │   ├── BE-7.2 证书链不完整
 │   └── BE-7.3 CA配置错误
@@ -216,7 +216,7 @@ TE-7: 安全认证失败 [OR门]
 │   ├── BE-7.5 RoleBinding缺失
 │   └── BE-7.6 ServiceAccount问题
 │
-└── IE-7.3 准入控制故障 [OR门]
+└── IE-7.3 准入控制问题 [OR门]
     ├── BE-7.7 Webhook不可用
     ├── BE-7.8 Validating配置错误
     └── BE-7.9 Mutating配置错误
@@ -225,46 +225,46 @@ TE-7: 安全认证失败 [OR门]
 TE-8: 监控告警异常 [OR门]
 │
 ├── IE-8.1 监控数据采集异常 [OR门]
-│   ├── BE-8.1 Prometheus故障
+│   ├── BE-8.1 Prometheus问题
 │   ├── BE-8.2 ServiceMonitor错误
 │   └── BE-8.3 指标丢失
 │
 ├── IE-8.2 告警系统异常 [OR门]
-│   ├── BE-8.4 Alertmanager故障
+│   ├── BE-8.4 Alertmanager问题
 │   ├── BE-8.5 告警规则错误
 │   └── BE-8.6 通知渠道失败
 │
 └── IE-8.3 可视化系统异常 [OR门]
-    ├── BE-8.7 Grafana故障
+    ├── BE-8.7 Grafana问题
     ├── BE-8.8 Dashboard配置错误
     └── BE-8.9 数据源连接失败
 ```
 
-### 1.3 故障传播逻辑说明
+### 1.3 问题传播逻辑说明
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                        故障传播逻辑说明                                       │
+│                        问题传播逻辑说明                                       │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  【AND门 - 与门】                                                            │
 │  符号: ──┬──                                                                │
 │          │                                                                  │
 │  含义: 所有输入事件同时发生时，输出事件才会发生                                   │
-│  示例: 多数节点故障(需要多个节点同时故障才会导致服务不可用)                        │
+│  示例: 多数节点问题(需要多个节点同时问题才会导致服务不可用)                        │
 │                                                                             │
 │  【OR门 - 或门】                                                             │
 │  符号: ──┬──                                                                │
 │        ──┴──                                                                │
 │  含义: 任一输入事件发生，输出事件就会发生                                        │
-│  示例: 控制平面故障(任一组件故障都可能导致集群异常)                               │
+│  示例: 控制平面问题(任一组件问题都可能导致集群异常)                               │
 │                                                                             │
-│  【故障传播路径】                                                             │
+│  【问题传播路径】                                                             │
 │                                                                             │
 │  底部事件(BE) → 中间事件(IE) → 顶部事件(TE)                                   │
 │                                                                             │
 │  示例传播链:                                                                 │
-│  证书过期(BE-7.1) → 证书相关故障(IE-7.1) → 安全认证失败(TE-7)                  │
+│  证书过期(BE-7.1) → 证书相关问题(IE-7.1) → 安全认证失败(TE-7)                  │
 │                  → API Server无法启动 → 集群完全不可用(TE-1)                  │
 │                                                                             │
 │  【严重程度分级】                                                             │
@@ -282,28 +282,28 @@ TE-8: 监控告警异常 [OR门]
 
 ### 2.1 顶部事件1: 集群完全不可用 🔴 P0
 
-> **故障定义**: 整个Kubernetes集群无法正常工作，kubectl无法连接，所有应用服务中断
+> **问题定义**: 整个Kubernetes集群无法正常工作，kubectl无法连接，所有应用服务中断
 > **业务影响**: 所有业务完全中断，数据可能丢失
 > **响应时间**: 立即响应(15分钟内)
 
-#### 中间事件 IE-1.1: 控制平面故障
+#### 中间事件 IE-1.1: 控制平面问题
 
-**故障现象**: kubectl命令超时或返回连接错误，无法获取集群资源
+**问题现象**: kubectl命令超时或返回连接错误，无法获取集群资源
 
 ```
-IE-1.1 控制平面故障 [OR门]
+IE-1.1 控制平面问题 [OR门]
 │
-├── BE-1.1 API Server故障
-├── BE-1.2 etcd集群故障
-├── BE-1.3 Scheduler故障
-└── BE-1.4 Controller Manager故障
+├── BE-1.1 API Server问题
+├── BE-1.2 etcd集群问题
+├── BE-1.3 Scheduler问题
+└── BE-1.4 Controller Manager问题
 ```
 
 ---
 
-##### BE-1.1: API Server故障
+##### BE-1.1: API Server问题
 
-**故障现象**:
+**问题现象**:
 - `kubectl` 命令返回 `Unable to connect to the server: dial tcp <ip>:6443: connect: connection refused`
 - `kubectl` 命令超时无响应
 - API Server Pod处于 `CrashLoopBackOff` 或 `Error` 状态
@@ -354,16 +354,16 @@ top -p $(pgrep kube-apiserver)
 
 ---
 
-##### BE-1.2: etcd集群故障
+##### BE-1.2: etcd集群问题
 
-**故障现象**:
+**问题现象**:
 - API Server日志显示etcd连接错误
 - etcd Pod处于异常状态
 - `etcdctl endpoint health` 显示节点不健康
 - 集群状态变为只读或无法写入
 
 **可能原因**:
-- etcd集群多数节点故障(失去quorum)
+- etcd集群多数节点问题(失去quorum)
 - etcd数据目录损坏
 - etcd磁盘空间不足
 - 网络分区导致etcd节点间无法通信
@@ -411,9 +411,9 @@ openssl x509 -in /etc/kubernetes/pki/etcd/server.crt -noout -dates
 
 ---
 
-##### BE-1.3: Scheduler故障
+##### BE-1.3: Scheduler问题
 
-**故障现象**:
+**问题现象**:
 - 新Pod一直处于Pending状态，无法调度
 - Scheduler Pod处于异常状态
 - 调度器日志显示错误
@@ -451,9 +451,9 @@ kubectl describe pod <pod-name> | grep -A 10 Events
 
 ---
 
-##### BE-1.4: Controller Manager故障
+##### BE-1.4: Controller Manager问题
 
-**故障现象**:
+**问题现象**:
 - Deployment/ReplicaSet无法创建Pod
 - Service无法创建Endpoint
 - Node状态不更新
@@ -492,23 +492,23 @@ kubectl get rs --all-namespaces
 
 ---
 
-#### 中间事件 IE-1.2: 工作节点批量故障
+#### 中间事件 IE-1.2: 工作节点批量问题
 
-**故障现象**: 多个工作节点同时变为NotReady状态，节点上的Pod无法访问
+**问题现象**: 多个工作节点同时变为NotReady状态，节点上的Pod无法访问
 
 ```
-IE-1.2 工作节点批量故障 [AND门 - 多数节点]
+IE-1.2 工作节点批量问题 [AND门 - 多数节点]
 │
-├── BE-1.5 Kubelet服务故障
-├── BE-1.6 容器运行时故障
-└── BE-1.7 节点网络故障
+├── BE-1.5 Kubelet服务问题
+├── BE-1.6 容器运行时问题
+└── BE-1.7 节点网络问题
 ```
 
 ---
 
-##### BE-1.5: Kubelet服务故障
+##### BE-1.5: Kubelet服务问题
 
-**故障现象**:
+**问题现象**:
 - 节点状态显示 `NotReady`
 - `kubectl get nodes` 显示节点异常
 - 节点上Pod状态不更新
@@ -558,9 +558,9 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 
 ---
 
-##### BE-1.6: 容器运行时故障
+##### BE-1.6: 容器运行时问题
 
-**故障现象**:
+**问题现象**:
 - Kubelet日志显示容器运行时连接错误
 - 无法创建/启动容器
 - `crictl`/`[[entities/docker|docker]]` 命令无法执行
@@ -607,15 +607,15 @@ du -sh /var/lib/containerd
 
 ---
 
-##### BE-1.7: 节点网络故障
+##### BE-1.7: 节点网络问题
 
-**故障现象**:
+**问题现象**:
 - 节点网络接口异常
 - Pod无法分配IP
 - 节点间无法通信
 
 **可能原因**:
-- 网络接口故障
+- 网络接口问题
 - CNI插件未正确安装或配置
 - 网络策略阻止关键流量
 - 防火墙规则错误
@@ -661,22 +661,22 @@ kubectl get node <node-name> -o jsonpath='{.spec.podCIDR}'
 
 ---
 
-#### 中间事件 IE-1.3: 网络基础设施故障
+#### 中间事件 IE-1.3: 网络基础设施问题
 
-**故障现象**: 集群网络完全不可用，节点间无法通信
+**问题现象**: 集群网络完全不可用，节点间无法通信
 
 ```
-IE-1.3 网络基础设施故障 [OR门]
+IE-1.3 网络基础设施问题 [OR门]
 │
-├── BE-1.8 CNI插件故障
-└── BE-1.9 核心网络设备故障
+├── BE-1.8 CNI插件问题
+└── BE-1.9 核心网络设备问题
 ```
 
 ---
 
-##### BE-1.8: CNI插件故障
+##### BE-1.8: CNI插件问题
 
-**故障现象**:
+**问题现象**:
 - Pod无法分配IP地址
 - Pod网络不通
 - CNI Pod处于异常状态
@@ -717,18 +717,18 @@ kubectl get configmap kube-flannel-cfg -n kube-system -o yaml
 
 ---
 
-##### BE-1.9: 核心网络设备故障
+##### BE-1.9: 核心网络设备问题
 
-**故障现象**:
+**问题现象**:
 - 整个集群网络中断
 - 节点间无法ping通
 - 外部无法访问集群
 
 **可能原因**:
-- 物理网络设备故障(交换机/路由器)
+- 物理网络设备问题(交换机/路由器)
 - 云厂商网络服务异常
 - VPC/子网配置错误
-- 负载均衡器故障
+- 负载均衡器问题
 
 **排查命令**:
 ```bash
@@ -762,7 +762,7 @@ kubectl get ingress --all-namespaces
 
 ### 2.2 顶部事件2: 应用服务不可用 🔴 P0
 
-> **故障定义**: 用户无法正常访问应用服务，HTTP请求失败或超时
+> **问题定义**: 用户无法正常访问应用服务，HTTP请求失败或超时
 > **业务影响**: 业务功能不可用，用户体验受损
 > **响应时间**: 立即响应(30分钟内)
 
@@ -781,7 +781,7 @@ IE-2.1 Pod运行异常 [OR门]
 
 ##### BE-2.1: CrashLoopBackOff
 
-**故障现象**:
+**问题现象**:
 - Pod状态显示 `CrashLoopBackOff`
 - Pod反复重启
 - 应用容器启动后立即退出
@@ -834,7 +834,7 @@ kubectl get deployment <deployment-name> -o yaml
 
 ##### BE-2.2: ImagePullBackOff
 
-**故障现象**:
+**问题现象**:
 - Pod状态显示 `ImagePullBackOff` 或 `ErrImagePull`
 - 事件显示镜像拉取失败
 
@@ -879,7 +879,7 @@ echo <base64-encoded-auth> | base64 -d
 
 ##### BE-2.3: OOMKilled
 
-**故障现象**:
+**问题现象**:
 - Pod状态显示 `OOMKilled`
 - 容器退出代码为137(128+9 SIGKILL)
 - Pod频繁重启
@@ -923,7 +923,7 @@ free -h
 
 ##### BE-2.4: Evicted
 
-**故障现象**:
+**问题现象**:
 - Pod状态显示 `Evicted`
 - Pod被驱逐出节点
 - 事件显示驱逐原因
@@ -975,14 +975,14 @@ IE-2.2 Service访问异常 [OR门]
 │
 ├── BE-2.5 无可用Endpoint
 ├── BE-2.6 端口配置错误
-└── BE-2.7 kube-proxy故障
+└── BE-2.7 kube-proxy问题
 ```
 
 ---
 
 ##### BE-2.5: 无可用Endpoint
 
-**故障现象**:
+**问题现象**:
 - Service无Endpoint
 - 访问Service返回连接拒绝
 - `kubectl get endpoints` 显示为空
@@ -1025,7 +1025,7 @@ kubectl describe pod <pod-name> | grep -A 5 "Liveness\|Readiness"
 
 ##### BE-2.6: 端口配置错误
 
-**故障现象**:
+**问题现象**:
 - Service端口与Pod端口不匹配
 - 访问Service返回连接错误
 
@@ -1056,9 +1056,9 @@ kubectl run test --image=busybox --rm -it -- wget -O- <service-ip>:<port>
 
 ---
 
-##### BE-2.7: kube-proxy故障
+##### BE-2.7: kube-proxy问题
 
-**故障现象**:
+**问题现象**:
 - Service无法访问
 - iptables/IPVS规则未正确创建
 - kube-proxy Pod异常
@@ -1106,16 +1106,16 @@ kubectl get configmap kube-proxy -n kube-system -o yaml | grep mode
 ```
 IE-2.3 Ingress访问异常 [OR门]
 │
-├── BE-2.8 Ingress Controller故障
+├── BE-2.8 Ingress Controller问题
 ├── BE-2.9 Ingress规则配置错误
-└── BE-2.10 负载均衡器故障
+└── BE-2.10 负载均衡器问题
 ```
 
 ---
 
-##### BE-2.8: Ingress Controller故障
+##### BE-2.8: Ingress Controller问题
 
-**故障现象**:
+**问题现象**:
 - Ingress Controller Pod异常
 - 无法访问Ingress路由
 - 返回404/502/503错误
@@ -1155,7 +1155,7 @@ kubectl get svc -n ingress-nginx
 
 ##### BE-2.9: Ingress规则配置错误
 
-**故障现象**:
+**问题现象**:
 - Ingress规则不生效
 - 路由匹配错误
 - 返回404错误
@@ -1195,9 +1195,9 @@ openssl x509 -in <(kubectl get secret <tls-secret> -o jsonpath='{.data.tls\.crt}
 
 ---
 
-##### BE-2.10: 负载均衡器故障
+##### BE-2.10: 负载均衡器问题
 
-**故障现象**:
+**问题现象**:
 - 外部无法访问Ingress
 - 负载均衡器状态异常
 - 云厂商LB服务异常
@@ -1236,7 +1236,7 @@ kubectl describe svc -n ingress-nginx ingress-nginx-controller | grep -A 5 "Load
 
 ### 2.3 顶部事件3: Pod启动失败 🟠 P1
 
-> **故障定义**: Pod无法成功启动，长时间处于Pending或其他非Running状态
+> **问题定义**: Pod无法成功启动，长时间处于Pending或其他非Running状态
 > **业务影响**: 新应用无法部署，扩容失败
 > **响应时间**: 1小时内响应
 
@@ -1255,7 +1255,7 @@ IE-3.1 调度失败 [OR门]
 
 ##### BE-3.1: 节点资源不足
 
-**故障现象**:
+**问题现象**:
 - Pod处于Pending状态
 - 调度事件显示资源不足
 - `kubectl describe pod` 显示Insufficient资源
@@ -1298,7 +1298,7 @@ kubectl describe node | grep -E "Name:|Allocated resources:|pods|cpu|memory"
 
 ##### BE-3.2: 节点选择器不匹配
 
-**故障现象**:
+**问题现象**:
 - Pod处于Pending状态
 - 调度事件显示节点Selector不匹配
 
@@ -1335,7 +1335,7 @@ kubectl get nodes -l <selector-key>=<selector-value>
 
 ##### BE-3.3: 污点阻止调度
 
-**故障现象**:
+**问题现象**:
 - Pod处于Pending状态
 - 调度事件显示污点容忍不匹配
 
@@ -1369,7 +1369,7 @@ kubectl describe pod <pod-name> | grep -i taint
 
 ##### BE-3.4: 资源配额超限
 
-**故障现象**:
+**问题现象**:
 - Pod处于Pending状态
 - 事件显示Quota exceeded
 - 无法创建新资源
@@ -1418,7 +1418,7 @@ IE-3.2 镜像拉取失败 [OR门]
 
 ##### BE-3.5: 镜像不存在
 
-**故障现象**:
+**问题现象**:
 - Pod状态 `ErrImagePull` 或 `ImagePullBackOff`
 - 事件显示manifest unknown或repository not found
 
@@ -1454,7 +1454,7 @@ docker pull <image>:<tag>  # 或 crictl pull
 
 ##### BE-3.6: 镜像仓库认证失败
 
-**故障现象**:
+**问题现象**:
 - Pod状态 `ImagePullBackOff`
 - 事件显示unauthorized或authentication required
 
@@ -1492,7 +1492,7 @@ docker login <registry> -u <username> -p <password>
 
 ##### BE-3.7: 网络不可达
 
-**故障现象**:
+**问题现象**:
 - Pod状态 `ErrImagePull`
 - 事件显示timeout或connection refused
 
@@ -1547,7 +1547,7 @@ IE-3.3 容器创建失败 [OR门]
 
 ##### BE-3.8: CNI配置失败
 
-**故障现象**:
+**问题现象**:
 - Pod处于ContainerCreating状态
 - 事件显示CNI相关错误
 - Pod无法分配IP
@@ -1591,7 +1591,7 @@ journalctl -u kubelet | grep -i cni
 
 ##### BE-3.9: 存储挂载失败
 
-**故障现象**:
+**问题现象**:
 - Pod处于ContainerCreating状态
 - 事件显示mount volume失败
 - PVC无法绑定或挂载
@@ -1599,7 +1599,7 @@ journalctl -u kubelet | grep -i cni
 **可能原因**:
 - PVC未绑定
 - PV不存在或不可用
-- 存储后端故障
+- 存储后端问题
 - 挂载参数错误
 - 权限不足
 
@@ -1638,7 +1638,7 @@ kubectl logs -n kube-system <csi-pod-name>
 
 ##### BE-3.10: Init容器失败
 
-**故障现象**:
+**问题现象**:
 - Pod处于Init状态
 - Init容器反复重启
 - 主容器未启动
@@ -1677,7 +1677,7 @@ kubectl get pod <pod-name> -o yaml | grep -A 30 initContainers
 
 ### 2.4 顶部事件4: 网络通信异常 🟠 P1
 
-> **故障定义**: 集群内网络通信异常，包括DNS解析、Pod间通信、外部访问等问题
+> **问题定义**: 集群内网络通信异常，包括DNS解析、Pod间通信、外部访问等问题
 > **业务影响**: 服务间调用失败，外部访问中断
 > **响应时间**: 1小时内响应
 
@@ -1686,16 +1686,16 @@ kubectl get pod <pod-name> -o yaml | grep -A 30 initContainers
 ```
 IE-4.1 DNS解析异常 [OR门]
 │
-├── BE-4.1 CoreDNS Pod故障
+├── BE-4.1 CoreDNS Pod问题
 ├── BE-4.2 DNS配置错误
 └── BE-4.3 网络策略阻止DNS
 ```
 
 ---
 
-##### BE-4.1: CoreDNS Pod故障
+##### BE-4.1: CoreDNS Pod问题
 
-**故障现象**:
+**问题现象**:
 - Pod内DNS解析失败
 - `nslookup` 超时
 - CoreDNS Pod异常
@@ -1737,7 +1737,7 @@ kubectl get svc kube-dns -n kube-system -o jsonpath='{.spec.clusterIP}'
 
 ##### BE-4.2: DNS配置错误
 
-**故障现象**:
+**问题现象**:
 - 特定域名解析失败
 - 解析结果不正确
 - 解析超时
@@ -1775,7 +1775,7 @@ kubectl exec <pod-name> -- dig <domain>
 
 ##### BE-4.3: 网络策略阻止DNS
 
-**故障现象**:
+**问题现象**:
 - DNS解析失败
 - 网络策略阻止UDP 53端口
 
@@ -1811,16 +1811,16 @@ kubectl exec <pod-name> -- nc -zv <dns-ip> 53
 ```
 IE-4.2 Pod间通信异常 [OR门]
 │
-├── BE-4.4 CNI插件故障
+├── BE-4.4 CNI插件问题
 ├── BE-4.5 网络策略阻止
 └── BE-4.6 iptables规则错误
 ```
 
 ---
 
-##### BE-4.4: CNI插件故障
+##### BE-4.4: CNI插件问题
 
-**故障现象**:
+**问题现象**:
 - Pod间无法ping通
 - 跨节点Pod通信失败
 - Pod IP分配异常
@@ -1862,7 +1862,7 @@ ip route
 
 ##### BE-4.5: 网络策略阻止
 
-**故障现象**:
+**问题现象**:
 - 特定Pod间无法通信
 - 网络策略阻止合法流量
 
@@ -1896,7 +1896,7 @@ kubectl exec <source-pod> -- nc -zv <target-ip> <port>
 
 ##### BE-4.6: iptables规则错误
 
-**故障现象**:
+**问题现象**:
 - Pod间通信异常
 - Service访问失败
 - 路由不正确
@@ -1948,7 +1948,7 @@ IE-4.3 集群外部访问异常 [OR门]
 
 ##### BE-4.7: Egress配置错误
 
-**故障现象**:
+**问题现象**:
 - Pod无法访问外部网络
 - 外部API调用失败
 - 出站连接超时
@@ -1983,7 +1983,7 @@ ip route
 
 ##### BE-4.8: NAT配置问题
 
-**故障现象**:
+**问题现象**:
 - Pod可以ping通外部但TCP/UDP连接失败
 - SNAT/DNAT配置错误
 - 外部无法访问Service
@@ -2021,7 +2021,7 @@ ip addr
 
 ##### BE-4.9: 防火墙阻止
 
-**故障现象**:
+**问题现象**:
 - 外部连接被拒绝
 - 特定端口无法访问
 - 连接超时
@@ -2061,7 +2061,7 @@ ss -tlnp
 
 ### 2.5 顶部事件5: 存储访问失败 🟠 P1
 
-> **故障定义**: 存储卷无法正常挂载或访问，PVC绑定失败
+> **问题定义**: 存储卷无法正常挂载或访问，PVC绑定失败
 > **业务影响**: 有状态应用无法启动，数据无法持久化
 > **响应时间**: 1小时内响应
 
@@ -2079,7 +2079,7 @@ IE-5.1 PVC绑定失败 [OR门]
 
 ##### BE-5.1: StorageClass配置错误
 
-**故障现象**:
+**问题现象**:
 - PVC一直处于Pending状态
 - 事件显示StorageClass相关错误
 - 无法动态创建PV
@@ -2118,7 +2118,7 @@ kubectl describe pvc <pvc-name>
 
 ##### BE-5.2: PV资源不足
 
-**故障现象**:
+**问题现象**:
 - PVC无法绑定
 - 事件显示no volume available
 - 动态供应失败
@@ -2157,14 +2157,14 @@ kubectl get pvc <pvc-name> -o yaml | grep -A 5 resources
 
 ##### BE-5.3: CSI驱动异常
 
-**故障现象**:
+**问题现象**:
 - 动态供应失败
 - CSI Pod异常
 - 存储操作超时
 
 **可能原因**:
-- CSI Controller Pod故障
-- CSI Node Plugin故障
+- CSI Controller Pod问题
+- CSI Node Plugin问题
 - CSI驱动配置错误
 - CSI与存储后端通信失败
 
@@ -2208,7 +2208,7 @@ IE-5.2 存储卷挂载失败 [OR门]
 
 ##### BE-5.4: 挂载参数错误
 
-**故障现象**:
+**问题现象**:
 - Pod处于ContainerCreating状态
 - 事件显示mount失败
 - 挂载选项错误
@@ -2244,7 +2244,7 @@ journalctl -u kubelet | grep -i mount
 
 ##### BE-5.5: 权限不足
 
-**故障现象**:
+**问题现象**:
 - 挂载成功但无法读写
 - 权限被拒绝错误
 - 文件所有权错误
@@ -2283,7 +2283,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext.fsGroup}'
 
 ##### BE-5.6: 文件系统损坏
 
-**故障现象**:
+**问题现象**:
 - 挂载失败
 - 文件系统错误
 - 数据无法读取
@@ -2291,7 +2291,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext.fsGroup}'
 **可能原因**:
 - 文件系统损坏
 - 不干净的卸载
-- 存储硬件故障
+- 存储硬件问题
 - 文件系统类型不匹配
 
 **排查命令**:
@@ -2312,7 +2312,7 @@ dmesg | grep -i error
 **解决方案**:
 1. **修复文件系统**: 使用fsck修复文件系统
 2. **重新格式化**: 备份数据后重新格式化
-3. **更换存储**: 更换故障存储设备
+3. **更换存储**: 更换问题存储设备
 4. **数据恢复**: 从备份恢复数据
 
 ---
@@ -2331,7 +2331,7 @@ IE-5.3 存储性能/数据异常 [OR门]
 
 ##### BE-5.7: 存储后端性能下降
 
-**故障现象**:
+**问题现象**:
 - 应用响应变慢
 - I/O延迟增加
 - 存储吞吐量下降
@@ -2367,13 +2367,13 @@ kubectl top pod -n kube-system | grep csi
 
 ##### BE-5.8: 数据损坏
 
-**故障现象**:
+**问题现象**:
 - 应用报告数据错误
 - 文件读取失败
 - 校验和不匹配
 
 **可能原因**:
-- 存储硬件故障
+- 存储硬件问题
 - 网络传输错误
 - 软件bug
 - 不完整的写入操作
@@ -2396,14 +2396,14 @@ kubectl get events | grep -i data
 **解决方案**:
 1. **从备份恢复**: 使用最近的备份恢复数据
 2. **数据修复**: 使用数据修复工具
-3. **更换存储**: 更换故障存储设备
+3. **更换存储**: 更换问题存储设备
 4. **启用校验**: 启用数据校验机制
 
 ---
 
 ##### BE-5.9: 快照恢复失败
 
-**故障现象**:
+**问题现象**:
 - 快照恢复操作失败
 - 从快照创建的PVC无法使用
 - 恢复的数据不完整
@@ -2439,7 +2439,7 @@ kubectl describe volumesnapshot <snapshot-name>
 
 ### 2.6 顶部事件6: 资源调度异常 🟡 P2
 
-> **故障定义**: Pod调度行为异常，包括无法调度、调度结果不符合预期等问题
+> **问题定义**: Pod调度行为异常，包括无法调度、调度结果不符合预期等问题
 > **业务影响**: 资源利用率低，应用部署延迟
 > **响应时间**: 4小时内响应
 
@@ -2457,7 +2457,7 @@ IE-6.1 Pod无法调度 [OR门]
 
 ##### BE-6.1: 节点资源不足
 
-**故障现象**:
+**问题现象**:
 - Pod一直处于Pending状态
 - 调度事件显示Insufficient资源
 
@@ -2492,7 +2492,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].resources}'
 
 ##### BE-6.2: 亲和性冲突
 
-**故障现象**:
+**问题现象**:
 - Pod无法调度
 - 调度事件显示亲和性规则不满足
 
@@ -2527,7 +2527,7 @@ kubectl get node <node-name> -o jsonpath='{.metadata.labels}'
 
 ##### BE-6.3: 污点不匹配
 
-**故障现象**:
+**问题现象**:
 - Pod无法调度
 - 调度事件显示污点容忍不匹配
 
@@ -2563,7 +2563,7 @@ IE-6.2 调度结果不符合预期 [OR门]
 
 ##### BE-6.4: 调度器配置错误
 
-**故障现象**:
+**问题现象**:
 - Pod调度到不期望的节点
 - 调度策略不生效
 - 调度器插件行为异常
@@ -2599,7 +2599,7 @@ cat /etc/kubernetes/scheduler-policy-config.json
 
 ##### BE-6.5: 优先级抢占问题
 
-**故障现象**:
+**问题现象**:
 - 高优先级Pod无法抢占低优先级Pod
 - 抢占导致意外Pod终止
 - 优先级调度不生效
@@ -2646,7 +2646,7 @@ IE-6.3 自定义调度器问题 [OR门]
 
 ##### BE-6.6: 调度器插件错误
 
-**故障现象**:
+**问题现象**:
 - 自定义调度器插件不生效
 - 插件导致调度失败
 - 插件性能问题
@@ -2679,7 +2679,7 @@ kubectl logs -n kube-system kube-scheduler-<node-name>
 
 ##### BE-6.7: 扩展点配置错误
 
-**故障现象**:
+**问题现象**:
 - 调度扩展点不生效
 - Webhook扩展调度失败
 - 扩展调度结果异常
@@ -2715,14 +2715,14 @@ kubectl logs <webhook-pod>
 
 ### 2.7 顶部事件7: 安全认证失败 🟠 P1
 
-> **故障定义**: Kubernetes安全认证或授权失败，包括证书、RBAC、准入控制等问题
+> **问题定义**: Kubernetes安全认证或授权失败，包括证书、RBAC、准入控制等问题
 > **业务影响**: 用户/服务无法访问集群，安全策略无法生效
 > **响应时间**: 1小时内响应
 
-#### 中间事件 IE-7.1: 证书相关故障
+#### 中间事件 IE-7.1: 证书相关问题
 
 ```
-IE-7.1 证书相关故障 [OR门]
+IE-7.1 证书相关问题 [OR门]
 │
 ├── BE-7.1 证书过期
 ├── BE-7.2 证书链不完整
@@ -2733,7 +2733,7 @@ IE-7.1 证书相关故障 [OR门]
 
 ##### BE-7.1: 证书过期
 
-**故障现象**:
+**问题现象**:
 - API Server无法启动
 - kubectl连接失败，显示证书错误
 - 组件间通信失败
@@ -2779,7 +2779,7 @@ timedatectl status
 
 ##### BE-7.2: 证书链不完整
 
-**故障现象**:
+**问题现象**:
 - TLS握手失败
 - 证书验证错误
 - 客户端无法验证服务器证书
@@ -2810,7 +2810,7 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -text
 
 ##### BE-7.3: CA配置错误
 
-**故障现象**:
+**问题现象**:
 - 证书签名失败
 - 组件间认证失败
 - 客户端无法连接
@@ -2858,7 +2858,7 @@ IE-7.2 RBAC权限问题 [OR门]
 
 ##### BE-7.4: Role配置错误
 
-**故障现象**:
+**问题现象**:
 - 用户/服务操作被拒绝
 - 返回RBAC授权错误
 - 权限不足
@@ -2894,7 +2894,7 @@ kubectl auth can-i <verb> <resource> --as=system:serviceaccount:<namespace>:<sa-
 
 ##### BE-7.5: RoleBinding缺失
 
-**故障现象**:
+**问题现象**:
 - 用户有Role但无法使用权限
 - ServiceAccount权限不生效
 - 权限绑定错误
@@ -2929,7 +2929,7 @@ kubectl get rolebinding <binding-name> -o yaml
 
 ##### BE-7.6: ServiceAccount问题
 
-**故障现象**:
+**问题现象**:
 - Pod无法访问API Server
 - ServiceAccount令牌无效
 - 自动化任务权限不足
@@ -2964,10 +2964,10 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.serviceAccountName}'
 
 ---
 
-#### 中间事件 IE-7.3: 准入控制故障
+#### 中间事件 IE-7.3: 准入控制问题
 
 ```
-IE-7.3 准入控制故障 [OR门]
+IE-7.3 准入控制问题 [OR门]
 │
 ├── BE-7.7 Webhook不可用
 ├── BE-7.8 Validating配置错误
@@ -2978,7 +2978,7 @@ IE-7.3 准入控制故障 [OR门]
 
 ##### BE-7.7: Webhook不可用
 
-**故障现象**:
+**问题现象**:
 - API请求被Webhook拒绝
 - Webhook服务无法访问
 - 请求超时
@@ -3022,7 +3022,7 @@ kubectl run test --image=busybox --rm -it -- wget -O- <webhook-service>.<namespa
 
 ##### BE-7.8: Validating配置错误
 
-**故障现象**:
+**问题现象**:
 - 资源创建被错误拒绝
 - 验证规则过于严格
 - 验证逻辑错误
@@ -3058,7 +3058,7 @@ kubectl logs <webhook-pod> -n <webhook-namespace>
 
 ##### BE-7.9: Mutating配置错误
 
-**故障现象**:
+**问题现象**:
 - 资源被错误修改
 - 注入的sidecar不正确
 - 变异后资源无法使用
@@ -3094,8 +3094,8 @@ kubectl get pod <pod-name> -o yaml
 
 ### 2.8 顶部事件8: 监控告警异常 🟡 P2
 
-> **故障定义**: 监控告警系统异常，包括数据采集、告警触发、通知发送等问题
-> **业务影响**: 无法及时发现故障，告警风暴或告警遗漏
+> **问题定义**: 监控告警系统异常，包括数据采集、告警触发、通知发送等问题
+> **业务影响**: 无法及时发现问题，告警风暴或告警遗漏
 > **响应时间**: 4小时内响应
 
 #### 中间事件 IE-8.1: 监控数据采集异常
@@ -3103,16 +3103,16 @@ kubectl get pod <pod-name> -o yaml
 ```
 IE-8.1 监控数据采集异常 [OR门]
 │
-├── BE-8.1 Prometheus故障
+├── BE-8.1 Prometheus问题
 ├── BE-8.2 ServiceMonitor错误
 └── BE-8.3 指标丢失
 ```
 
 ---
 
-##### BE-8.1: Prometheus故障
+##### BE-8.1: Prometheus问题
 
-**故障现象**:
+**问题现象**:
 - Prometheus UI无法访问
 - 查询无数据返回
 - Prometheus Pod异常
@@ -3157,7 +3157,7 @@ kubectl get prometheusrules -n monitoring
 
 ##### BE-8.2: ServiceMonitor错误
 
-**故障现象**:
+**问题现象**:
 - 特定Target无法发现
 - 指标采集失败
 - ServiceMonitor配置不生效
@@ -3197,7 +3197,7 @@ kubectl get pods --show-labels
 
 ##### BE-8.3: 指标丢失
 
-**故障现象**:
+**问题现象**:
 - 特定指标无法查询
 - 指标数据不完整
 - 历史数据缺失
@@ -3240,16 +3240,16 @@ kubectl exec -it prometheus-pod -- wget -O- <target>:<port>/metrics
 ```
 IE-8.2 告警系统异常 [OR门]
 │
-├── BE-8.4 Alertmanager故障
+├── BE-8.4 Alertmanager问题
 ├── BE-8.5 告警规则错误
 └── BE-8.6 通知渠道失败
 ```
 
 ---
 
-##### BE-8.4: Alertmanager故障
+##### BE-8.4: Alertmanager问题
 
-**故障现象**:
+**问题现象**:
 - 告警不发送
 - Alertmanager UI无法访问
 - 告警路由错误
@@ -3288,7 +3288,7 @@ kubectl get secret alertmanager-config -n monitoring -o jsonpath='{.data.alertma
 
 ##### BE-8.5: 告警规则错误
 
-**故障现象**:
+**问题现象**:
 - 告警不触发
 - 告警触发条件错误
 - 告警表达式错误
@@ -3328,7 +3328,7 @@ kubectl logs prometheus-pod | grep -i rule
 
 ##### BE-8.6: 通知渠道失败
 
-**故障现象**:
+**问题现象**:
 - 告警发送失败
 - 通知渠道无响应
 - 告警丢失
@@ -3369,16 +3369,16 @@ kubectl logs alertmanager-pod | grep -i notify
 ```
 IE-8.3 可视化系统异常 [OR门]
 │
-├── BE-8.7 Grafana故障
+├── BE-8.7 Grafana问题
 ├── BE-8.8 Dashboard配置错误
 └── BE-8.9 数据源连接失败
 ```
 
 ---
 
-##### BE-8.7: Grafana故障
+##### BE-8.7: Grafana问题
 
-**故障现象**:
+**问题现象**:
 - Grafana UI无法访问
 - Grafana Pod异常
 - 查询超时
@@ -3419,7 +3419,7 @@ kubectl get pvc -n monitoring | grep grafana
 
 ##### BE-8.8: Dashboard配置错误
 
-**故障现象**:
+**问题现象**:
 - Dashboard显示错误
 - 图表无数据
 - 查询错误
@@ -3455,7 +3455,7 @@ kubectl get configmap -n monitoring | grep dashboard
 
 ##### BE-8.9: 数据源连接失败
 
-**故障现象**:
+**问题现象**:
 - Dashboard无数据
 - 数据源测试失败
 - 查询超时
@@ -3751,7 +3751,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 
 ## 四、故障处理优先级建议
 
-### 4.1 故障严重程度分级表(P0-P3)
+### 4.1 问题严重程度分级表(P0-P3)
 
 | 级别 | 名称 | 定义 | 响应时间 | 升级条件 | 典型场景 |
 |------|------|------|----------|----------|----------|
@@ -3768,14 +3768,14 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 └─────────────────────────────────────────────────────────────────────────────┘
 
     ┌───────────────┐
-    │  故障发现     │
+    │  问题发现     │
     │ (监控/告警/   │
     │  用户反馈)    │
     └───────┬───────┘
             │
             ▼
     ┌───────────────┐
-    │  故障定级     │◄────────────────────────────────────────┐
+    │  问题定级     │◄────────────────────────────────────────┐
     │ (P0/P1/P2/P3) │                                         │
     └───────┬───────┘                                         │
             │                                                 │
@@ -3809,7 +3809,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
               │                                               │
               ▼                                               │
       ┌───────────────┐                                       │
-      │  故障修复     │                                       │
+      │  问题修复     │                                       │
       │ (执行方案)    │                                       │
       └───────┬───────┘                                       │
               │                                               │
@@ -3839,39 +3839,39 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                        P0/P1级故障紧急恢复措施                                │
+│                        P0/P1级问题紧急恢复措施                                │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
-│  【控制平面故障】                                                            │
+│  【控制平面问题】                                                            │
 │  ├─ 证书过期: kubeadm certs renew all && systemctl restart kubelet         │
 │  ├─ API Server: 检查日志，重启Pod或修复配置                                   │
-│  ├─ etcd故障: 从备份恢复或重新初始化                                         │
+│  ├─ etcd问题: 从备份恢复或重新初始化                                         │
 │  └─ 组件崩溃: 删除Pod让其重新创建                                            │
 │                                                                             │
-│  【工作节点故障】                                                            │
+│  【工作节点问题】                                                            │
 │  ├─ Kubelet: systemctl restart kubelet                                      │
 │  ├─ Docker: systemctl restart docker                                        │
 │  ├─ 容器运行时: systemctl restart containerd                                │
 │  └─ 节点NotReady: 驱逐Pod，重启节点或替换节点                                 │
 │                                                                             │
-│  【网络故障】                                                                │
-│  ├─ CNI故障: 重启CNI Pod或重新部署CNI插件                                    │
+│  【网络问题】                                                                │
+│  ├─ CNI问题: 重启CNI Pod或重新部署CNI插件                                    │
 │  ├─ kube-proxy: 删除Pod重新创建                                             │
-│  ├─ DNS故障: 重启CoreDNS Pod                                                │
+│  ├─ DNS问题: 重启CoreDNS Pod                                                │
 │  └─ 网络策略: 临时删除阻止的网络策略                                          │
 │                                                                             │
-│  【存储故障】                                                                │
+│  【存储问题】                                                                │
 │  ├─ PVC绑定: 检查StorageClass，手动创建PV                                    │
 │  ├─ 挂载失败: 检查权限，修复文件系统                                         │
-│  └─ CSI故障: 重启CSI Pod                                                    │
+│  └─ CSI问题: 重启CSI Pod                                                    │
 │                                                                             │
-│  【应用故障】                                                                │
+│  【应用问题】                                                                │
 │  ├─ Pod崩溃: 查看日志，修复应用或配置                                         │
 │  ├─ OOMKilled: 增加内存限制                                                 │
 │  ├─ ImagePull: 检查镜像和认证                                               │
 │  └─ 服务不可用: 检查Service和Endpoint配置                                    │
 │                                                                             │
-│  【安全故障】                                                                │
+│  【安全问题】                                                                │
 │  ├─ 证书问题: 紧急续期证书                                                   │
 │  ├─ RBAC问题: 临时授予权限，再修正配置                                        │
 │  └─ Webhook: 临时禁用问题Webhook                                             │
@@ -3929,7 +3929,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
                                            ▼            │            ▼
                                  ┌─────────────────┐   │  ┌─────────────────┐
                                  │ 查看Pod事件和日志 │   │  │ 检查调度事件     │
-                                 │ 确定故障类型     │   │  │ (IE-3.1/IE-6.1)  │
+                                 │ 确定问题类型     │   │  │ (IE-3.1/IE-6.1)  │
                                  │ (IE-2.1)         │   │  └─────────────────┘
                                  └─────────────────┘   │
                                                         │
@@ -4152,7 +4152,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
   □ 系统日志
 
 □ 恢复验证
-  □ 故障是否已解决
+  □ 问题是否已解决
   □ 服务是否恢复正常
   □ 监控指标是否正常
   □ 用户访问是否正常
@@ -4175,7 +4175,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 
 ---
 
-*本文档基于Kubernetes故障树分析(FTA)方法编制，覆盖生产环境全量故障场景。*
+*本文档基于Kubernetes故障树分析(FTA)方法编制，覆盖生产环境全量问题场景。*
 ┌────────────┐                ┌───────────────┐
     │ 检查集群状态  │                │ 检查性能指标  │
     │ kubectl get   │                │ 监控Dashboard │

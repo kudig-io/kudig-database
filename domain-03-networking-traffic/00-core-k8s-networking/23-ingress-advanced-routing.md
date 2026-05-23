@@ -92,7 +92,7 @@ created: "2026-05-23"
 | **A/B 测试** | A/B Testing | 多版本对比测试 | 产品验证 |
 | **流量镜像** | Traffic Mirroring | 复制流量到测试环境 | 生产验证 |
 | **流量分割** | Traffic Splitting | 按规则分配流量 | 渐进式发布 |
-| **熔断** | Circuit Breaking | 故障时快速失败 | 服务保护 |
+| **熔断** | Circuit Breaking | 问题时快速失败 | 服务保护 |
 | **限流** | Rate Limiting | 限制请求速率 | 过载保护 |
 | **重试** | Retry | 失败时自动重试 | 提高可用性 |
 | **超时** | Timeout | 限制响应等待时间 | 资源保护 |
@@ -773,7 +773,7 @@ metadata:
   annotations:
     # 启用 Cookie 会话亲和
     nginx.ingress.kubernetes.io/affinity: "cookie"
-    # 亲和模式: balanced (默认，故障时重新分配) / persistent (严格保持)
+    # 亲和模式: balanced (默认，问题时重新分配) / persistent (严格保持)
     nginx.ingress.kubernetes.io/affinity-mode: "persistent"
     # Cookie 配置
     nginx.ingress.kubernetes.io/session-cookie-name: "SERVERID"

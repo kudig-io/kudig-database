@@ -68,7 +68,7 @@ created: "2026-05-23"
 | 阶段 | 推荐章节 | 掌握目标 |
 |------|----------|----------|
 | **入门（第1周）** | §1 kubectl基础、§3 Pod调试 | 能查看资源状态、进入Pod排查问题 |
-| **进阶（第2-3周）** | §2 集群管理、§4 资源创建、§8 故障排查 | 能独立管理资源、处理常见故障 |
+| **进阶（第2-3周）** | §2 集群管理、§4 资源创建、§8 故障排查 | 能独立管理资源、处理常见问题 |
 | **熟练（第1-2月）** | §5 配置参数、§9 安全认证、§10 监控告警 | 能进行集群配置调优和安全管理 |
 | **专家（持续）** | §6 GPU调度、§7 AI/ML、§11+ 企业级命令 | 能处理复杂场景和自动化运维 |
 
@@ -1036,7 +1036,7 @@ nvidia-smi -q -d PAGE_RETIREMENT
 # 执行方式: 查询ECC和页面退役信息
 # 用途: 检查GPU内存错误
 # 原理: 获取ECC错误计数和显存页面退役状态
-# 注意事项: ECC错误可能表明硬件故障
+# 注意事项: ECC错误可能表明硬件问题
 # 风险说明: 持续增加的ECC错误可能需要更换GPU
 
 cat /proc/driver/nvidia/version
@@ -1146,7 +1146,7 @@ kubectl port-forward <driver-pod> 4040:4040
 > **🔰 初学者导读**: 当标准 kubectl 命令无法定位问题时，需要使用专业的故障排查工具。这些工具就像"CT扫描仪"，能深入检查网络连通性、DNS解析、资源瓶颈等底层问题。建议在集群中预装 `kubectl-debug`、`tcpdump`、`strace` 等工具。
 >
 > **📋 常见故障排查路径**:
-> | 故障类型 | 排查命令 | 说明 |
+> | 问题类型 | 排查命令 | 说明 |
 > |----------|----------|------|
 > | Pod 启动失败 | `kubectl describe pod` + `kubectl logs` | 查看事件和日志 |
 > | 网络不通 | `kubectl exec -- ping/curl/nslookup` | 容器内网络诊断 |
@@ -1444,7 +1444,7 @@ kubectl diff -f <manifest-file>
 prometheus-query 'up{job="kubernetes-pods"}'
 prometheus-query 'histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))'
 
-# 故障影响范围分析
+# 问题影响范围分析
 kubectl get pods -n <namespace> -l app=<app-name> --field-selector=status.phase=Running
 
 # 变更风险评估
@@ -2360,7 +2360,7 @@ kubectl get --raw='/healthz?verbose'
 kubectl get --raw='/healthz/etcd'
 
 # 执行方式: 通过API Server执行紧急操作
-# 用途: 处理紧急故障情况
+# 用途: 处理紧急问题情况
 # 原理: 直接修改集群状态
 # 注意事项: 这些操作可能影响服务可用性
 # 风险说明: 强制操作可能导致数据丢失或服务中断
@@ -2399,7 +2399,7 @@ stern <pod-pattern> -n <ns>
 kubectl logs -l app=<label> --all-containers
 
 # 执行方式: 通过API Server诊断Pod和服务
-# 用途: 诊断各种资源故障
+# 用途: 诊断各种资源问题
 # 原理: 获取资源状态和事件信息
 # 注意事项: 需要适当的权限查看资源
 # 风险说明: 一般诊断操作无风险

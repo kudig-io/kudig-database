@@ -1,6 +1,6 @@
 ---
-title: 节点故障专项排查指南 [topic-structural-trouble-shooting]
-description: 'title: 节点故障专项排查指南'
+title: 节点问题专项排查指南 [topic-structural-trouble-shooting]
+description: 'title: 节点问题专项排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -22,13 +22,13 @@ audience:
 - 技术支持
 estimated_read_time: 25min
 intent_queries:
-- 节点故障专项排查指南 是什么
-- 如何 节点故障专项排查指南
+- 节点问题专项排查指南 是什么
+- 如何 节点问题专项排查指南
 - Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 节点故障专项排查指南 故障排查
-- 节点故障专项排查指南 排障步骤
+- 节点问题专项排查指南 故障排查
+- 节点问题专项排查指南 排障步骤
 trigger_keywords:
-- 节点故障专项排查指南
+- 节点问题专项排查指南
 - troubleshooting
 - diagnostics
 - structural
@@ -42,8 +42,8 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-title: 节点故障专项排查指南
-description: '# 节点故障专项排查指南'
+title: 节点问题专项排查指南
+description: '# 节点问题专项排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
@@ -65,12 +65,12 @@ audience:
 - 技术支持
 estimated_read_time: 5min
 intent_queries:
-- 节点故障专项排查指南 是什么
-- 如何 节点故障专项排查指南
-- 节点故障专项排查指南 故障排查
-- 节点故障专项排查指南 排障步骤
+- 节点问题专项排查指南 是什么
+- 如何 节点问题专项排查指南
+- 节点问题专项排查指南 故障排查
+- 节点问题专项排查指南 排障步骤
 trigger_keywords:
-- 节点故障专项排查指南
+- 节点问题专项排查指南
 - structural
 - trouble
 - shooting
@@ -85,7 +85,7 @@ k8s_versions:
 - '1.32'
 ---
 
-# 节点故障专项排查指南
+# 节点问题专项排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
 >
@@ -127,7 +127,7 @@ k8s_versions:
 ### 1.2 节点驱逐保护机制（ एक्सपर्ट's Perspective）
 
 在大规模集群中，节点批量 NotReady 是极度危险的场景。
-1. **驱逐速率限制**：当集群中超过 20% 的节点 NotReady 时，Node Controller 会进入“部分故障”模式，将驱逐速率降至每秒 0.01 个节点，防止因网络波动导致全集群 Pod 重新调度。
+1. **驱逐速率限制**：当集群中超过 20% 的节点 NotReady 时，Node Controller 会进入“部分问题”模式，将驱逐速率降至每秒 0.01 个节点，防止因网络波动导致全集群 Pod 重新调度。
 2. **Graceful Node Shutdown**：v1.26+ 默认开启。kubelet 能够感知节点关机信号，并优先终止 Pod，给予关键应用（如数据库）数据刷盘的时间。
 
 ### 1.3 生产环境典型“节点陷阱”
@@ -160,7 +160,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep "NodeLif
 
 1. [节点治理逻辑](#1-核心原理解析节点治理的逻辑)
 2. [专家观测工具链](#专家级观测工具链experts-toolbox)
-3. [故障现象与分级影响](#12-常见问题现象)
+3. [问题现象与分级影响](#12-常见问题现象)
 4. [基础排查步骤（初学者）](#22-排查命令集)
 5. [深度治理方案](#第三部分解决方案与风险控制)
 
@@ -205,7 +205,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep "NodeLif
 
 | 问题类型 | 现象描述 | 可能原因 | 查看方式 |
 |---------|---------|---------|---------|
-| 节点 NotReady | 节点状态不正常 | kubelet 故障/网络问题/资源压力 | `kubectl get nodes` |
+| 节点 NotReady | 节点状态不正常 | kubelet 问题/网络问题/资源压力 | `kubectl get nodes` |
 | 内存压力 | MemoryPressure=True | 内存使用过高/泄漏 | `kubectl describe node` |
 | 磁盘压力 | DiskPressure=True | 磁盘空间不足/inode 耗尽 | `kubectl describe node` |
 | PID 压力 | PIDPressure=True | 进程数过多 | `kubectl describe node` |
@@ -215,12 +215,12 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep "NodeLif
 
 ### 1.3 影响分析
 
-| 故障类型 | 直接影响 | 间接影响 | 影响范围 |
+| 问题类型 | 直接影响 | 间接影响 | 影响范围 |
 |---------|---------|---------|---------|
 | 节点 NotReady | 节点上 Pod 状态未知 | 服务可用性下降 | 单节点所有 Pod |
 | 资源压力 | Pod 被驱逐 | 服务中断，数据可能丢失 | 单节点优先级低的 Pod |
 | 网络不可用 | Pod 无法通信 | Service 不可达 | 单节点所有 Pod |
-| 多节点故障 | 大量 Pod 不可用 | 服务完全中断 | 受影响节点上的所有服务 |
+| 多节点问题 | 大量 Pod 不可用 | 服务完全中断 | 受影响节点上的所有服务 |
 
 ---
 
@@ -229,7 +229,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep "NodeLif
 ### 2.1 排查决策树
 
 ```
-节点故障
+节点问题
     │
     ├─── 节点 NotReady？
     │         │
@@ -674,16 +674,16 @@ kubectl get nodes
 kubectl get pods -o wide | grep <node>
 ```
 
-#### 场景 2：处理节点故障
+#### 场景 2：处理节点问题
 
 ```bash
-# 1. 如果节点永久故障，删除节点
+# 1. 如果节点永久问题，删除节点
 kubectl delete node <node>
 
 # 2. Pod 会被重新调度 (如果有副本控制器)
 kubectl get pods -o wide
 
-# 3. 强制删除卡在故障节点的 Pod
+# 3. 强制删除卡在问题节点的 Pod
 kubectl delete pod <pod-name> --force --grace-period=0
 
 # 4. 如果节点恢复，重新加入集群

@@ -162,7 +162,7 @@ kubectl get events -w
 | **OOMKilled** | `kubectl describe pod` | 内存超限 | 增加memory limits |
 | **应用崩溃** | `kubectl logs --previous` | 应用bug | 修复应用 |
 | **存活探针失败** | `kubectl describe pod` | 探针配置错误 | 调整探针参数 |
-| **节点重启** | 节点事件 | 节点维护/故障 | 配置PDB |
+| **节点重启** | 节点事件 | 节点维护/问题 | 配置PDB |
 | **抢占** | 事件 | 高优先级Pod抢占 | 调整优先级 |
 
 <!-- chunk: 探针配置最佳实践 -->

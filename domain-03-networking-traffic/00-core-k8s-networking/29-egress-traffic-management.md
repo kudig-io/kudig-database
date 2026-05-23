@@ -555,7 +555,7 @@ spec:
       matchLabels:
         egress-gateway: "ha-pool"
     # 使用IP池实现高可用
-    # 当主节点故障时自动切换到备用节点
+    # 当主节点问题时自动切换到备用节点
 ```
 
 ### Cilium节点标签配置

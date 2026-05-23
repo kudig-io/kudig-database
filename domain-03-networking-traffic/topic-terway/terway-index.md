@@ -55,7 +55,7 @@ created: "2026-05-23"
 | 5 | topic-terway | [04-operations.md](./04-operations.md) | 1388 | 专题 | 健康检查、GC 机制(设计原则/参数调优)、[[Prometheus|Prometheus]] 告警、升级回滚、巡检清单 |
 | 6 | topic-terway | [05-testing.md](./05-testing.md) | 1028 | 专题 | 端到端测试套件、ENI 密度压测、NetworkPolicy 测试、iperf3 基准、MTU 测试 |
 | 7 | topic-terway | [06-performance.md](./06-performance.md) | 682 | 专题 | 5 模式性能基准、Pod 容量计算、内核调优、eBPF 加速、生产基线指标 |
-| 8 | topic-terway | [07-troubleshooting-fta.md](./07-troubleshooting-fta.md) | 513 | 专题 | Mermaid FTA 全景图、6 大故障类别、32 条错误信息目录、AND 门组合故障 |
+| 8 | topic-terway | [07-troubleshooting-fta.md](./07-troubleshooting-fta.md) | 513 | 专题 | Mermaid FTA 全景图、6 大问题类别、32 条错误信息目录、AND 门组合问题 |
 | 9 | topic-terway | README.md](./README.md) | 85 | 索引 | 专题目录索引与阅读建议 |
 | 10 | domain-03-networking-traffic | [05-terway-advanced-guide.md](../domain-03-networking-traffic/05-terway-advanced-guide.md) | 369 | 源文件 | 模式对比、ENIIP 详解、固定 IP、NetworkPolicy、故障排查、最佳实践 |
 | 11 | domain-03-networking-traffic | [37-terway-resources-crud-operations.md](../domain-03-networking-traffic/37-terway-resources-crud-operations.md) | 1521 | 源文件 | CRD 资源架构、PodENI/NodeNetworking/PodNetworking CRUD、IPAM Manager |

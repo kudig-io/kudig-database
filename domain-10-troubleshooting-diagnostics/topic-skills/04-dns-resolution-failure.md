@@ -63,7 +63,7 @@ created: "2026-05-23"
 
 ## 1. 概述
 
-DNS 是 Kubernetes 集群中**所有服务发现的基石**。集群内部的 [[Service|Service]] 访问（`<service>.<namespace>.svc.cluster.local`）、Headless Service 的 Pod 发现、以及 Pod 对外部域名的访问，全部依赖 DNS 解析。当 DNS 出现故障时，影响呈**级联放大**——几乎所有依赖网络通信的应用组件都将失败，表现为大面积的连接超时、服务不可达和应用报错。DNS 故障的隐蔽性在于：应用层面的错误信息千变万化（HTTP 502/503、connection refused、timeout），但根因往往指向同一个问题——DNS 解析失败。
+DNS 是 Kubernetes 集群中**所有服务发现的基石**。集群内部的 [[Service|Service]] 访问（`<service>.<namespace>.svc.cluster.local`）、Headless Service 的 Pod 发现、以及 Pod 对外部域名的访问，全部依赖 DNS 解析。当 DNS 出现问题时，影响呈**级联放大**——几乎所有依赖网络通信的应用组件都将失败，表现为大面积的连接超时、服务不可达和应用报错。DNS 问题的隐蔽性在于：应用层面的错误信息千变万化（HTTP 502/503、connection refused、timeout），但根因往往指向同一个问题——DNS 解析失败。
 
 自 Kubernetes 1.12 起，**[[CoreDNS|CoreDNS]]** 取代 kube-dns 成为默认的集群 DNS 提供者。CoreDNS 以 Deployment 方式部署在 `kube-system` namespace 中，通过 `kube-dns` Service（ClusterIP）对外提供 DNS 服务。每个 Pod 的 `/etc/resolv.conf` 中的 `nameserver` 指向该 ClusterIP，所有 DNS 查询通过该地址路由到 CoreDNS Pod。
 
@@ -79,7 +79,7 @@ DNS 是 Kubernetes 集群中**所有服务发现的基石**。集群内部的 [[
 
 - 集群内部 DNS 解析（Service → ClusterIP、Headless Service → Pod IP）
 - 外部域名解析（Pod → 外部域名，如 `google.com`、API endpoints）
-- NodeLocal DNSCache 相关故障
+- NodeLocal DNSCache 相关问题
 - Headless Service DNS 记录异常
 - DNS 延迟与性能问题
 
@@ -90,7 +90,7 @@ DNS 是 Kubernetes 集群中**所有服务发现的基石**。集群内部的 [[
 - **SSH 访问**: 部分深度诊断（conntrack 检查、NodeLocal DNSCache 排查）需要节点 SSH 访问
 - **监控系统**: Prometheus + CoreDNS metrics（用于 trigger_metrics 匹配和性能分析）
 
-> ⚠️ **重要**: DNS 故障的爆炸半径极大。集群级 DNS 完全不可用属于 P0 事件，需立即响应。诊断过程中应首先判断是全局性还是局部性 DNS 故障，以快速定位根因范围。
+> ⚠️ **重要**: DNS 问题的爆炸半径极大。集群级 DNS 完全不可用属于 P0 事件，需立即响应。诊断过程中应首先判断是全局性还是局部性 DNS 问题，以快速定位根因范围。
 
 ---
 
@@ -109,7 +109,7 @@ DNS 是 Kubernetes 集群中**所有服务发现的基石**。集群内部的 [[
 | S7 | DNS 仅在部分 Pod 中失败，其他 Pod 正常 / DNS works on some pods but not others | 同一 Service 的不同 Pod 表现不一致；跨 namespace 的 Pod DNS 行为不一致 | 0.75 | 不同 Pod 使用了不同的 dnsPolicy（如某些 Pod 使用 `Default` 而非 `ClusterFirst`）；NetworkPolicy 仅影响特定 namespace/label 的 Pod |
 | S8 | kube-dns Service 没有可用 Endpoints / kube-dns Service has no endpoints | `kubectl get endpoints kube-dns -n kube-system` 显示 `<none>` 或 endpoints 列表为空 | 0.90 | kube-dns Service 的 selector 被误修改，与 CoreDNS Pod 的 label 不匹配（这本身就是根因之一） |
 | S9 | DNS 间歇性失败（时好时坏）/ Intermittent DNS failures (race condition / conntrack) | 应用偶尔报 DNS 超时，但重试后成功；DNS 失败没有明确的规律 | 0.70 | 网络链路不稳定（丢包导致的偶尔超时，不特定于 DNS）；应用自身的 DNS 缓存过期导致的周期性解析延迟 |
-| S10 | Prometheus 告警 CoreDNS SERVFAIL 率升高 / Prometheus alert: CoreDNS SERVFAIL rate increased | `coredns_dns_responses_total{rcode="SERVFAIL"}` 速率突增；CoreDNS 相关告警触发 | 0.85 | SERVFAIL 仅针对特定外部域名（上游 DNS 问题，非 CoreDNS 自身故障）；短暂的 SERVFAIL 尖刺后自行恢复 |
+| S10 | Prometheus 告警 CoreDNS SERVFAIL 率升高 / Prometheus alert: CoreDNS SERVFAIL rate increased | `coredns_dns_responses_total{rcode="SERVFAIL"}` 速率突增；CoreDNS 相关告警触发 | 0.85 | SERVFAIL 仅针对特定外部域名（上游 DNS 问题，非 CoreDNS 自身问题）；短暂的 SERVFAIL 尖刺后自行恢复 |
 
 ### 2.2 工单关键词映射
 
@@ -145,12 +145,12 @@ DNS 是 Kubernetes 集群中**所有服务发现的基石**。集群内部的 [[
 
 | 排除条件 | 正确路由 | 说明 |
 |---------|---------|------|
-| DNS 解析正常，但 HTTP 请求返回 502/503 | SKILL-NET-002 | Service 网络问题（kube-proxy、Endpoints、后端 Pod 不健康），非 DNS 故障 |
+| DNS 解析正常，但 HTTP 请求返回 502/503 | SKILL-NET-002 | Service 网络问题（kube-proxy、Endpoints、后端 Pod 不健康），非 DNS 问题 |
 | DNS 解析正常，但 Pod 无法连接到 Service 的 ClusterIP | SKILL-NET-002 | iptables/ipvs 规则问题或 Pod 网络路由异常，不涉及 DNS |
 | 仅特定 HTTP 端点访问失败，但 DNS 解析该域名可以返回 IP | 不适用本 Skill | 应用层或负载均衡器问题，DNS 工作正常 |
 | Pod 处于 Pending 状态且尚未运行 | SKILL-POD-002 | Pod 调度问题，DNS 测试无法在未运行的 Pod 中执行 |
-| 节点处于 NotReady 状态 | SKILL-NODE-001 | 节点级别故障可能间接影响 DNS，但根因在节点层面 |
-| 自定义 DNS 服务器（非 CoreDNS）的故障 | 手动处理 | 本 Skill 仅覆盖 CoreDNS 作为集群 DNS 提供者的场景 |
+| 节点处于 NotReady 状态 | SKILL-NODE-001 | 节点级别问题可能间接影响 DNS，但根因在节点层面 |
+| 自定义 DNS 服务器（非 CoreDNS）的问题 | 手动处理 | 本 Skill 仅覆盖 CoreDNS 作为集群 DNS 提供者的场景 |
 
 ---
 
@@ -158,7 +158,7 @@ DNS 是 Kubernetes 集群中**所有服务发现的基石**。集群内部的 [[
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径：
+按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 快速验证集群 DNS 是否完全不可用
 ```bash
@@ -186,7 +186,7 @@ kubectl get endpoints kube-dns -n kube-system
 > - 所有 CoreDNS Pod Running 且 Ready → CoreDNS 本身运行正常，问题在其他层面（配置、网络），继续 T3
 > - Endpoints 为空 → kube-dns Service 没有后端，等同于 DNS 不可用，**确认 P0**
 
-**Step T3**: 判断故障范围：集群级 / namespace 级 / Pod 级
+**Step T3**: 判断问题范围：集群级 / namespace 级 / Pod 级
 ```bash
 # 从不同 namespace 的 Pod 中测试 DNS
 # 测试 1: 从 default namespace
@@ -199,8 +199,8 @@ kubectl exec -n kube-system $(kubectl get pods -n kube-system -l k8s-app=kube-pr
 kubectl run dns-test-ext --image=busybox:1.36 --rm -it --restart=Never -- sh -c "nslookup kubernetes.default.svc.cluster.local && nslookup google.com"
 ```
 > **判断规则**:
-> - 所有 namespace 的 Pod 都无法解析 → 集群级故障，**P0**
-> - 仅特定 namespace 的 Pod 无法解析 → namespace 级故障（可能是 NetworkPolicy），**P1-P2**
+> - 所有 namespace 的 Pod 都无法解析 → 集群级问题，**P0**
+> - 仅特定 namespace 的 Pod 无法解析 → namespace 级问题（可能是 NetworkPolicy），**P1-P2**
 > - 仅特定 Pod 无法解析 → Pod 级配置问题，**P2**
 > - 内部解析失败、外部正常 → CoreDNS zone 数据问题，**P1**
 > - 外部解析失败、内部正常 → upstream DNS 问题，**P1-P2**
@@ -213,14 +213,14 @@ kubectl get events -A --sort-by=.lastTimestamp | grep -i "dns\|resolve\|coredns"
 kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeeded | head -20
 ```
 > **判断规则**:
-> - 大量跨 namespace 的 Pod 异常 + DNS 故障确认 → 高业务影响
+> - 大量跨 namespace 的 Pod 异常 + DNS 问题确认 → 高业务影响
 > - 仅少量 Pod 受影响 → 低业务影响
 
 ### 3.2 严重性分级
 
 | 条件 | 级别 | 说明 | SLA 要求 |
 |------|------|------|---------|
-| CoreDNS 完全不可用（所有 Pod 异常）**或** 集群级 DNS 解析全部失败 | **P0** | 集群级 DNS 故障，几乎所有服务间通信和外部访问中断。DNS 是最基础的基础设施，故障影响面极广 | 立即响应，10min 内确认根因并开始修复 |
+| CoreDNS 完全不可用（所有 Pod 异常）**或** 集群级 DNS 解析全部失败 | **P0** | 集群级 DNS 问题，几乎所有服务间通信和外部访问中断。DNS 是最基础的基础设施，问题影响面极广 | 立即响应，10min 内确认根因并开始修复 |
 | 多个 namespace 的 DNS 受影响 **或** 部分 CoreDNS Pod 异常导致 DNS 间歇性失败 | **P1** | DNS 服务降级，部分请求成功、部分失败，业务体验严重受损 | 15min 内响应，30min 内修复 |
 | 仅特定 namespace 或特定域名的 DNS 解析失败 **或** DNS 延迟升高但未完全中断 | **P2** | 局部 DNS 问题，影响范围有限。可能是 NetworkPolicy、ndots 配置或特定 Service 的 DNS 记录问题 | 30min 内响应，2h 内修复 |
 | 偶发性 DNS 超时，业务层面有重试机制可容忍 **或** DNS 延迟轻微升高 | **P3** | 轻微 DNS 性能问题，不影响核心业务功能 | 4h 内处理 |
@@ -233,7 +233,7 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 - **kube-dns Service 被删除或修改**: `kubectl get svc kube-dns -n kube-system` 不存在或 ClusterIP 被更改
 - **集群级 DNS 全面中断**: 从任意 Pod 均无法解析 `kubernetes.default.svc.cluster.local`
 - **CoreDNS ConfigMap 被误删**: `kubectl get configmap coredns -n kube-system` 不存在
-- **DNS 故障导致级联失败**: 因 DNS 不可用导致其他关键组件（如 Ingress Controller、外部 Secret 同步）也出现故障
+- **DNS 问题导致级联失败**: 因 DNS 不可用导致其他关键组件（如 Ingress Controller、外部 Secret 同步）也出现问题
 - **安全事件疑虑**: CoreDNS ConfigMap 被未授权修改，怀疑 DNS 劫持或投毒
 
 > **升级消息模板**: 参见 Section 8.2
@@ -244,7 +244,7 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 
 ### Phase 1: 快速检查（只读，零风险）
 
-> **目标**: 通过 kubectl 远程收集 DNS 服务和配置信息，快速定位故障层面。所有命令均为只读操作。
+> **目标**: 通过 kubectl 远程收集 DNS 服务和配置信息，快速定位问题层面。所有命令均为只读操作。
 > **预计耗时**: 2-5 分钟
 
 **Step D1.1**: 检查 CoreDNS Pod 状态和就绪情况
@@ -647,9 +647,9 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 - **风险级别**: 🟢 低（创建临时 Pod，完成后删除）
 - **预期输出模式**: 各 DNS 查询返回正确的记录
 - **判断规则**:
-  - 所有查询成功 → DNS 系统工作正常，原始故障可能已恢复或为应用级问题
+  - 所有查询成功 → DNS 系统工作正常，原始问题可能已恢复或为应用级问题
   - 内部查询成功但外部失败 → 确认 upstream DNS 问题（RC-003/RC-009）
-  - 所有查询失败 → 确认集群 DNS 系统性故障
+  - 所有查询失败 → 确认集群 DNS 系统性问题
   - SRV 记录查询失败但 A 记录正常 → CoreDNS kubernetes 插件部分功能异常
 - **清理**:
   ```bash
@@ -670,7 +670,7 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 - **风险级别**: 🟢 低（只读 DNS 查询）
 - **预期输出模式**: DNS 解析链路，从根服务器到最终结果
 - **判断规则**:
-  - 追踪在某一层级中断 → 定位到具体的故障 DNS 服务器
+  - 追踪在某一层级中断 → 定位到具体的问题 DNS 服务器
   - 追踪显示查询被发送到错误的服务器 → forward 配置问题（RC-003）
   - 追踪显示循环（查询被发回 CoreDNS）→ DNS 循环（RC-011）
 - **版本差异**: 无
@@ -714,7 +714,7 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 
 ### Phase 4: NodeLocal DNSCache 完整排查（如已部署）
 
-> **目标**: 深入排查 NodeLocal DNSCache 的运行状态、上游连接和缓存行为，确认是否为 DNS 故障根因。
+> **目标**: 深入排查 NodeLocal DNSCache 的运行状态、上游连接和缓存行为，确认是否为 DNS 问题根因。
 > **预计耗时**: 3-5 分钟
 > **前置条件**: 已确认集群部署了 NodeLocal DNSCache（D2.6 显示 DaemonSet 存在）
 
@@ -939,7 +939,7 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 | RC-004 | **NetworkPolicy 阻断 DNS 端口（53/UDP/TCP）** — 集群中的 NetworkPolicy 意外阻断了 Pod 到 kube-dns Service 的 UDP/TCP 53 端口流量，导致 DNS 查询被丢弃 | 中 | D2.3 存在影响 DNS 端口的 NetworkPolicy；D1.3 部分 namespace 的 Pod DNS 失败而其他正常 | dns-fta: BE-netpol-block |
 | RC-005 | **ndots 配置导致外部域名解析超慢** — Pod 默认的 `ndots:5` 设置导致对外部域名的每次查询先产生 4-5 次无效的搜索域扩展查询，大量增加 DNS 延迟和 CoreDNS 负载 | 中 | D1.4 resolv.conf 显示 ndots:5；D2.5 dig 显示大量搜索域扩展查询；D3.3 外部域名延迟 >1s 而内部正常 | dns-fta: BE-ndots-slow |
 | RC-006 | **CoreDNS 资源不足（CPU/内存限制过低）** — CoreDNS Pod 的 CPU limits 过低导致 throttling，或 memory limits 过低导致 OOMKilled，在高 DNS 查询负载下 CoreDNS 无法及时响应 | 中 | D2.4 CPU/内存接近 limits；D1.1 显示 OOMKilled；D2.1 日志显示处理延迟 | dns-fta: BE-resource-exhaustion |
-| RC-007 | **NodeLocal DNSCache 故障** — NodeLocal DNSCache DaemonSet Pod 在某些节点上不健康，但 Pod 的 resolv.conf 仍指向 NodeLocal DNS 的链路本地地址（169.254.20.10），导致 DNS 查询失败或超时后才 fallback | 中 | D2.6 NodeLocal DNS Pod 不健康；D1.4 nameserver 指向 169.254.20.10；D1.3 仅特定节点上的 Pod DNS 失败 | dns-fta: BE-nodelocal-failure |
+| RC-007 | **NodeLocal DNSCache 问题** — NodeLocal DNSCache DaemonSet Pod 在某些节点上不健康，但 Pod 的 resolv.conf 仍指向 NodeLocal DNS 的链路本地地址（169.254.20.10），导致 DNS 查询失败或超时后才 fallback | 中 | D2.6 NodeLocal DNS Pod 不健康；D1.4 nameserver 指向 169.254.20.10；D1.3 仅特定节点上的 Pod DNS 失败 | dns-fta: BE-nodelocal-failure |
 | RC-008 | **conntrack 表满导致 DNS 间歇性失败** — Linux 内核 conntrack 表溢出，或 UDP DNS 查询的 conntrack 竞态条件（race condition），导致 DNS 包被随机丢弃 | 低 | D2.7 conntrack 表接近满或有溢出日志；S9 症状（间歇性失败）；问题与高 DNS 查询量相关 | dns-fta: BE-conntrack-race |
 | RC-009 | **上游 DNS 服务器不可用** — CoreDNS 配置的上游 DNS 服务器（通常是节点的 `/etc/resolv.conf` 中指定的）不可达或响应超慢，导致所有需要 forward 到上游的查询失败 | 中 | D2.10 上游 DNS 查询超时或失败；D2.1 日志包含 "i/o timeout"；D1.3 外部 DNS 失败但内部正常 | dns-fta: BE-upstream-down |
 | RC-010 | **Headless Service DNS 记录未更新** — Headless Service 的 DNS 记录未反映当前的 Ready Pod 列表，可能由于 Endpoints 更新延迟或 CoreDNS 的 kubernetes 插件缓存问题 | 低 | D2.9 Headless Service DNS 返回的 IP 与实际 Ready Pod 不一致；Endpoints 数量与 Pod 数量不匹配 | dns-fta: BE-headless-stale |
@@ -1362,7 +1362,7 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   ```
 - **执行命令**:
   ```bash
-  # 场景 1: 已部署但故障，修复 NodeLocal DNS Pod
+  # 场景 1: 已部署但问题，修复 NodeLocal DNS Pod
   # 滚动重启 DaemonSet
   kubectl rollout restart ds/node-local-dns -n kube-system
   kubectl rollout status ds/node-local-dns -n kube-system --timeout=300s
@@ -1640,7 +1640,7 @@ kubectl run dns-v6 --image=busybox:1.36 --rm -it --restart=Never -- sh -c "time 
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 
 - [ ] CoreDNS 所有 Pod 处于 Running/Ready 状态，无新的重启
 - [ ] kube-dns Service Endpoints 完整，包含所有健康 CoreDNS Pod
@@ -1674,19 +1674,19 @@ kubectl run dns-v6 --image=busybox:1.36 --rm -it --restart=Never -- sh -c "time 
 |------|------|---------|
 | **诊断超时** | 诊断工作流执行超过 **10 分钟**未能确认根因 | Phase 2 结束后仍无明确根因 |
 | **修复失败** | 同一修复操作执行 **2 次**仍未通过后置验证（V1-V6） | REM-xxx 执行后验证持续失败 |
-| **严重性升级** | 初始分级为 P2 但影响面扩大（更多 namespace 或 Pod 受影响） | 诊断过程中 DNS 故障范围扩大 |
+| **严重性升级** | 初始分级为 P2 但影响面扩大（更多 namespace 或 Pod 受影响） | 诊断过程中 DNS 问题范围扩大 |
 | **未知根因** | 完成 Phase 1-3 所有诊断步骤但无法匹配任何已知根因（RC-001 至 RC-012） | 所有诊断步骤均无明确异常发现 |
 | **CoreDNS 完全不可恢复** | CoreDNS Pod 重启后仍持续崩溃，所有已知修复手段无效 | 尝试 REM-001 + REM-004/REM-010 后问题持续 |
 | **安全疑虑** | 发现 CoreDNS ConfigMap 被未授权修改，或 DNS 查询被劫持到异常 IP | 任何诊断步骤中发现安全异常 |
-| **级联故障** | DNS 故障导致其他关键基础设施组件（Ingress Controller、Cert Manager、External Secrets 等）也出现故障 | 诊断过程中发现更多受影响组件 |
+| **级联问题** | DNS 问题导致其他关键基础设施组件（Ingress Controller、Cert Manager、External Secrets 等）也出现问题 | 诊断过程中发现更多受影响组件 |
 
 ### 8.2 升级消息模板
 
 ```
 【{severity}】DNS 解析故障诊断与修复 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: 集群 DNS 解析故障，持续 {duration}
-- 故障范围:
+- 问题概述: 集群 DNS 解析问题，持续 {duration}
+- 问题范围:
   - 影响类型: {全局/namespace级/Pod级/间歇性}
   - 内部 DNS: {正常/失败/间歇性失败}
   - 外部 DNS: {正常/失败/间歇性失败}
@@ -1736,9 +1736,9 @@ kubectl run dns-v6 --image=busybox:1.36 --rm -it --restart=Never -- sh -c "time 
    kubectl exec <affected-pod> -- cat /etc/resolv.conf > pod-resolv-conf.txt
    ```
 5. **事件时间线**: 最近 30 分钟内的关键事件按时间排列
-   - `HH:MM:SS` - 首次检测到 DNS 故障
+   - `HH:MM:SS` - 首次检测到 DNS 问题
    - `HH:MM:SS` - 开始诊断
-   - `HH:MM:SS` - 确认故障范围（全局/局部）
+   - `HH:MM:SS` - 确认问题范围（全局/局部）
    - `HH:MM:SS` - 发现异常 [描述]
    - `HH:MM:SS` - 尝试修复 [操作]
    - `HH:MM:SS` - 修复结果 [成功/失败]
@@ -1824,11 +1824,11 @@ kubectl run dns-v6 --image=busybox:1.36 --rm -it --restart=Never -- sh -c "time 
 
 | 误诊场景 | 表面现象 | 实际根因 | 避免方法 |
 |---------|---------|---------|---------|
-| **ndots 导致的延迟被误判为 DNS 故障** | 应用报告 DNS 超时或极慢，但 CoreDNS 本身运行正常，日志无错误 | Pod 默认 `ndots:5` 导致每次外部域名查询先执行 4-5 次搜索域扩展查询，累计延迟 >5s 触发应用超时。CoreDNS 实际正常处理了所有查询，只是查询数量被放大了 5 倍 | 在 D1.4 中检查 ndots 值；在 D2.5 中用 `dig +search` 观察实际查询序列。如果 CoreDNS 日志显示大量 NXDOMAIN 且域名带有 `.svc.cluster.local` 后缀，几乎确定是 ndots 问题 |
+| **ndots 导致的延迟被误判为 DNS 问题** | 应用报告 DNS 超时或极慢，但 CoreDNS 本身运行正常，日志无错误 | Pod 默认 `ndots:5` 导致每次外部域名查询先执行 4-5 次搜索域扩展查询，累计延迟 >5s 触发应用超时。CoreDNS 实际正常处理了所有查询，只是查询数量被放大了 5 倍 | 在 D1.4 中检查 ndots 值；在 D2.5 中用 `dig +search` 观察实际查询序列。如果 CoreDNS 日志显示大量 NXDOMAIN 且域名带有 `.svc.cluster.local` 后缀，几乎确定是 ndots 问题 |
 | **NetworkPolicy 阻断 DNS 未被怀疑** | DNS 仅在特定 namespace 的 Pod 中失败，其他 namespace 正常。初步判断为 CoreDNS 配置问题 | namespace 中存在 `default-deny-egress` NetworkPolicy 但未为 DNS（UDP 53）创建例外规则 | 在 D2.3 中**始终**检查受影响 namespace 的 NetworkPolicy，特别是 egress 策略。关键线索是"部分 namespace 失败、部分正常"——这几乎肯定是 NetworkPolicy 而非 CoreDNS 问题 |
 | **conntrack 竞态导致的间歇性失败被误诊为应用 bug** | 应用偶尔报 DNS 超时，重试后成功。开发团队认为是应用代码问题（未正确处理 DNS 超时） | Linux 内核 conntrack 在处理 UDP DNS 查询时的竞态条件——当 glibc 同时发送 A 和 AAAA 查询到同一个 kube-dns ClusterIP 时，两个 UDP 包可能竞争同一个 conntrack 条目，导致其中一个被丢弃 | 如果 DNS 失败是间歇性的、随机的、且集中在高负载时段，优先检查 D2.7（conntrack）。解决方案：REM-003（ndots + single-request-reopen）或 REM-008（NodeLocal DNSCache）从根本上避免竞态 |
 | **CoreDNS 循环（loop）被误诊为上游 DNS 不可达** | CoreDNS 持续崩溃重启，日志中有超时信息。初步判断为上游 DNS 服务器不可达 | CoreDNS Pod 的 `/etc/resolv.conf` 中的 nameserver 指向了 kube-dns ClusterIP（即 CoreDNS 自身），形成 DNS 查询循环。`loop` 插件检测到循环后触发 CoreDNS 退出 | 在 D2.10 中检查 CoreDNS Pod 自身的 `/etc/resolv.conf`。如果 nameserver 指向 kube-dns ClusterIP，这就是循环的根因。常见于使用 systemd-resolved 的节点（/etc/resolv.conf 指向 127.0.0.53，而 127.0.0.53 又 forward 到 kube-dns） |
-| **Headless Service DNS 问题被误诊为 CoreDNS 故障** | 应用无法通过 DNS 发现 StatefulSet 的特定 Pod | Headless Service 的 Endpoints 为空（Pod 未就绪），或 Pod 的 hostname/subdomain 未正确配置 | 在 D2.9 中检查 Headless Service 的 Endpoints。如果 Endpoints 为空但 CoreDNS 对其他 Service 正常，问题在 Service/Pod 配置层面而非 DNS 系统 |
+| **Headless Service DNS 问题被误诊为 CoreDNS 问题** | 应用无法通过 DNS 发现 StatefulSet 的特定 Pod | Headless Service 的 Endpoints 为空（Pod 未就绪），或 Pod 的 hostname/subdomain 未正确配置 | 在 D2.9 中检查 Headless Service 的 Endpoints。如果 Endpoints 为空但 CoreDNS 对其他 Service 正常，问题在 Service/Pod 配置层面而非 DNS 系统 |
 | **应用 DNS 缓存导致的"DNS 失败"** | 应用报告无法连接到某个 Service，但手动 nslookup 正常 | 应用自身的 DNS 缓存（如 JVM、Node.js 等）缓存了旧的 DNS 记录（旧的 ClusterIP 或旧的 Pod IP），未随 Service 变更更新 | 确认是否最近有 Service 重建或迁移。如果手动 DNS 查询正常但应用仍失败，检查应用的 DNS 缓存配置。JVM 默认缓存 30s（`networkaddress.cache.ttl`），Node.js 的 `dns.lookup` 不缓存但 HTTP Agent 可能保持连接 |
 
 ### 10.2 深度知识引用
@@ -1838,11 +1838,11 @@ kubectl run dns-v6 --image=busybox:1.36 --rm -it --restart=Never -- sh -c "time 
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
 | Kubernetes DNS 架构与 CoreDNS 原理 | `domain-03-networking-traffic/` | 理解 CoreDNS 的工作原理、Corefile 配置语法、插件链机制 |
-| DNS 故障树分析 | `domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md` | 理解 DNS 故障的完整因果链和概率模型 |
-| 网络故障深度排查 | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/` | 超出本 Skill 覆盖范围的深度网络排查方法 |
+| DNS 故障树分析 | `domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md` | 理解 DNS 问题的完整因果链和概率模型 |
+| 网络问题深度排查 | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/` | 超出本 Skill 覆盖范围的深度网络排查方法 |
 | Kubernetes 故障排查方法论 | `domain-10-troubleshooting-diagnostics/` | 系统化故障排查的理论基础和方法论 |
 | Service 网络问题 | `SKILL-NET-002` | DNS 正常但 Service 连接失败的场景 |
-| 节点 NotReady 影响 DNS | `SKILL-NODE-001` (01-node-notready.md) | 节点级故障导致的间接 DNS 影响 |
+| 节点 NotReady 影响 DNS | `SKILL-NODE-001` (01-node-notready.md) | 节点级问题导致的间接 DNS 影响 |
 | conntrack 竞态条件详解 | `domain-03-networking-traffic/` | Linux 内核 conntrack 在 UDP/DNAT 场景下的竞态条件技术细节 |
 | NetworkPolicy 最佳实践 | `domain-03-networking-traffic/` | 如何正确配置 NetworkPolicy 以避免意外阻断 DNS 流量 |
 
@@ -1850,7 +1850,7 @@ kubectl run dns-v6 --image=busybox:1.36 --rm -it --restart=Never -- sh -c "time 
 
 | 日期 | 版本 | 变更 | 原因 |
 |------|------|------|------|
-| 2026-03 | v1.0 | 初始版本发布。覆盖 K8s v1.28-v1.32，包含 12 个根因、10 个修复操作、6 个常见误诊模式 | 首批 Skill 库建设，基于工单分析 DNS 解析故障为网络类最高频问题 |
+| 2026-03 | v1.0 | 初始版本发布。覆盖 K8s v1.28-v1.32，包含 12 个根因、10 个修复操作、6 个常见误诊模式 | 首批 Skill 库建设，基于工单分析 DNS 解析问题为网络类最高频问题 |
 
 ### 10.4 待补充的知识空白
 
@@ -1860,7 +1860,7 @@ kubectl run dns-v6 --image=busybox:1.36 --rm -it --restart=Never -- sh -c "time 
 2. **Service Mesh DNS 行为**: Istio / Linkerd 等 Service Mesh 对 DNS 行为的影响（如 Istio 的 DNS 代理、智能 DNS 解析）
 3. **自定义 CoreDNS 插件**: 使用自定义 CoreDNS 插件（如 `etcd`、`file`、`secondary`）时的特定故障模式
 4. **多集群 DNS**: 跨集群 DNS 解析（如 Submariner、Liqo 或 CoreDNS multicluster 插件）的故障诊断
-5. **Windows 节点 DNS**: Windows 容器节点的 DNS 配置和故障差异（kube-proxy for Windows、HNS DNS 策略）
+5. **Windows 节点 DNS**: Windows 容器节点的 DNS 配置和问题差异（kube-proxy for Windows、HNS DNS 策略）
 6. **DNS 安全**: DNSSEC 验证、DNS 投毒防护、CoreDNS 安全加固相关的诊断能力
 
 ## 修复动作

@@ -217,7 +217,7 @@ kubectl get events --field-selector reason=FailedScheduling --sort-by='.lastTime
 ### 2.2 排查逻辑决策树
 
 ```
-云资源配额/API 故障
+云资源配额/API 问题
     ├── 资源创建失败
     │   ├── 计算资源（实例/节点）
     │   │   ├── 配额超限？──► 查看账户/区域配额 → 申请提升或释放资源
@@ -239,7 +239,7 @@ kubectl get events --field-selector reason=FailedScheduling --sort-by='.lastTime
     │   │   ├── IAM 权限不足？──► 添加必要权限策略
     │   │   └── 实例角色脱落？──► 重新绑定 IAM Role
     │   └── 区域服务不可用
-    │       └── 云厂商区域故障？──► 切换到备用区域
+    │       └── 云厂商区域问题？──► 切换到备用区域
     └── 资源被回收/中断
         ├── Spot 实例被回收
         │   └── 部署 Spot 中断处理程序 + 使用 Spot 容量再平衡
@@ -644,7 +644,7 @@ echo "✓ 配额检查通过"
 6. **API 调用优化**：调大控制器（CA、CCM、CSI）的同步间隔，使用 adaptive retry 模式减少限流触发
 7. **预留容量**：对核心业务使用 Reserved Instances / Savings Plans + 适当的 On-Demand 配额，确保扩容能力
 
-### 典型故障案例
+### 典型问题案例
 
 #### 案例一：大促前夜无法扩容导致服务降级
 

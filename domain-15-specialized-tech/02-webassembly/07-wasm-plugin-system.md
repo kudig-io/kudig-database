@@ -2873,7 +2873,7 @@ kubectl exec -n default deployment/my-service \
 Wasm 插件系统通过 **proxy-wasm 规范** 提供了标准化的代理扩展机制，实现了：
 
 **核心优势**：
-- 🔒 **沙箱安全**：插件在隔离的 Wasm VM 中运行，故障不影响宿主进程
+- 🔒 **沙箱安全**：插件在隔离的 Wasm VM 中运行，问题不影响宿主进程
 - ⚡ **高性能**：接近原生代码执行效率，P99 延迟增加 < 1ms
 - 🌐 **多语言**：Rust、Go、AssemblyScript、C++ 均可编写插件
 - 🔄 **动态加载**：无需重启代理即可更新插件

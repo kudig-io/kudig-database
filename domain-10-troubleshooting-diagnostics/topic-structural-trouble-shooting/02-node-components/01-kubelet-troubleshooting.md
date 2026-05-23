@@ -96,20 +96,20 @@ k8s_versions:
 
 | 读者对象 | 价值体现 |
 | :--- | :--- |
-| **初学者** | 建立对 Node 节点核心组件 kubelet 的全局认识，掌握节点 Ready/NotReady 的底层逻辑，学会使用标准的 `journalctl` 和 `kubectl` 命令定位基础故障。 |
+| **初学者** | 建立对 Node 节点核心组件 kubelet 的全局认识，掌握节点 Ready/NotReady 的底层逻辑，学会使用标准的 `journalctl` 和 `kubectl` 命令定位基础问题。 |
 | **资深专家** | 深入理解 kubelet 内部架构（如 PLEG、Manager 机制）、CRI 交互细节、驱逐策略的数学边界，以及大规模集群下的性能调优 and 自动化自愈方案。 |
 
 ---
 
 ## 0. 10 分钟快速诊断与止血
 
-1. **节点面状态**：`kubectl get nodes -o wide`，抽样 `kubectl describe node <name>` 查看 Conditions/Taints，区分单点 vs 批量故障。
+1. **节点面状态**：`kubectl get nodes -o wide`，抽样 `kubectl describe node <name>` 查看 Conditions/Taints，区分单点 vs 批量问题。
 2. **kubelet 存活**：节点上执行 `curl -s localhost:10248/healthz`、`systemctl status kubelet`，若健康探针失败优先查证书/配置/资源。
 3. **资源与压力**：`free -m`、`df -h`、`df -i`、`pidstat -p $(pgrep kubelet)`，确认 Memory/Disk/PID Pressure；若磁盘吃满先清理 `/var/lib/containerd` 旧镜像与日志。
 4. **CRI 交互**：`crictl info`、`crictl ps -a | head`，若 CRI 超时则检查 containerd/Docker 服务、cgroup 驱动一致性（`cat /var/lib/kubelet/config.yaml | grep cgroupDriver`）。
 5. **PLEG/驱逐信号**：`journalctl -u kubelet | grep -E "PLEG is not healthy|eviction" | tail`，辨别是运行时阻塞还是驱逐触发。
 6. **快速缓解**：
-   - 将故障节点 `cordon`，必要时 `drain --ignore-daemonsets --delete-emptydir-data`。
+   - 将问题节点 `cordon`，必要时 `drain --ignore-daemonsets --delete-emptydir-data`。
    - 重启运行时与 kubelet（确认已备份配置/证书），并检查 cgroup 驱动一致后再放行。
    - 若磁盘/内存压力，立即清理镜像/容器/日志或扩容磁盘，调整 `evictionHard`。
 7. **证据留存**：保存 kubelet/CRI 关键日志、节点 Conditions、磁盘/PID/内存快照，便于复盘。
@@ -205,11 +205,11 @@ kubelet 的稳定依赖于多个层面的健康，深入理解其内部机制是
 #### 2.1.3 网络插件接口层（CNI）
 - **CNI 调用时机**：Pod 创建时调用 CNI 插件配置网络（veth pair、路由、iptables）
 - **配置路径**：`/etc/cni/net.d/` 和 `/opt/cni/bin/`
-- **常见故障**：CNI 二进制缺失、配置错误、IP 池耗尽、网络插件 Pod 未就绪
+- **常见问题**：CNI 二进制缺失、配置错误、IP 池耗尽、网络插件 Pod 未就绪
 
 #### 2.1.4 存储插件接口层（CSI）
 - **卷挂载流程**：kubelet → CSI Plugin → 云厂商 API → 挂载到宿主机 → bind mount 到容器
-- **挂载点泄露**：CSI 插件故障会导致挂载点僵死，kubelet 卡在清理阶段
+- **挂载点泄露**：CSI 插件问题会导致挂载点僵死，kubelet 卡在清理阶段
 - **检查命令**：`mount | grep kubernetes.io`
 
 #### 2.1.5 配置与证书层
@@ -247,7 +247,7 @@ kubelet 的稳定依赖于多个层面的健康，深入理解其内部机制是
 - **健康检查**：
   - 若 relist 耗时 > 3 分钟，PLEG 标记为不健康
   - 导致 kubelet 停止上报心跳，节点 NotReady
-- **常见故障**：
+- **常见问题**：
   - CRI 响应慢（IO 负载高、containerd 死锁）
   - 容器数量过多（建议单节点 < 110 Pod）
   - 容器频繁启停（每秒 > 10 个事件）
@@ -332,8 +332,8 @@ kubelet 的稳定依赖于多个层面的健康，深入理解其内部机制是
 
 #### 阶段一：快速止损
 1. **检查节点状态**：`kubectl get nodes`。
-2. **确认是否为全局故障**：如果是多节点 NotReady，优先查网络、API Server 或证书过期。
-3. **设置节点不可调度**：`kubectl cordon <node-name>`，防止故障期间负载继续涌入。
+2. **确认是否为全局问题**：如果是多节点 NotReady，优先查网络、API Server 或证书过期。
+3. **设置节点不可调度**：`kubectl cordon <node-name>`，防止问题期间负载继续涌入。
 
 #### 阶段二：现场诊断
 1. **查看服务状态**：`systemctl status kubelet`。
@@ -465,7 +465,7 @@ enforceNodeAllocatable: ["pods", "system-reserved", "kube-reserved"]
 |------|----------|----------|----------|
 | **磁盘爆满导致批量节点 NotReady** | 多节点同时变为 NotReady | 日志文件累积、镜像缓存膨胀 | 磁盘清理策略、监控告警 |
 | **内核版本升级后 kubelet 异常** | 节点状态异常、cgroup 错误 | 内核与容器运行时不兼容 | 灰度升级、版本验证 |
-| **网络分区导致节点失联** | 节点状态 Unknown | 网络故障、防火墙规则变更 | 网络质量监控、双网卡冗余 |
+| **网络分区导致节点失联** | 节点状态 Unknown | 网络问题、防火墙规则变更 | 网络质量监控、双网卡冗余 |
 | **恶意挖矿程序占用资源** | 节点压力异常、CPU 使用率飙升 | 安全漏洞被利用 | 安全加固、准入控制 |
 | **容器运行时版本不兼容** | Pod 启动失败、镜像拉取异常 | 运行时升级后兼容性问题 | 版本兼容性测试、回滚机制 |
 
@@ -524,14 +524,14 @@ curl -k https://localhost:10250/pods
 | **节点驱逐** | 触发 | 节点长时间 NotReady 会触发 Pod 驱逐 |
 | **监控告警** | 可能失效 | 节点级监控数据缺失 |
 
-#### 1.3.3 故障传播链
+#### 1.3.3 问题传播链
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                         kubelet 故障影响传播链                                │
+│                         kubelet 问题影响传播链                                │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│   kubelet 故障                                                               │
+│   kubelet 问题                                                               │
 │       │                                                                      │
 │       ├──► 节点状态无法上报 ──► 节点变为 NotReady                            │
 │       │                              │                                       │
@@ -579,7 +579,7 @@ kubelet 是节点上的核心代理，负责 Pod 生命周期管理。排查需�
     │
     ├─► 检查容器运行时
     │       │
-    │       ├─► 运行时故障 ──► 排查容器运行时
+    │       ├─► 运行时问题 ──► 排查容器运行时
     │       │
     │       └─► 运行时正常 ──► 继续下一步
     │
@@ -829,7 +829,7 @@ kubectl get node $(hostname)
 ⚠️  安全生产风险提示：
 1. kubelet 重启期间节点上的 Pod 管理暂停
 2. 已运行的容器不会被停止
-3. 长时间故障会触发 Pod 驱逐
+3. 长时间问题会触发 Pod 驱逐
 4. 修改配置前备份原始文件
 5. 确保容器运行时正常后再重启 kubelet
 ```
@@ -1255,7 +1255,7 @@ systemReserved:
 
 ### 案例 1：PLEG Not Healthy 导致节点雪崩式 NotReady
 
-#### 🎯 故障场景
+#### 🎯 问题场景
 某电商公司双十一大促，集群 300 节点突然在 10 分钟内有 50+ 节点状态在 Ready/NotReady 之间剧烈闪烁，导致大量 Pod 被驱逐和重新调度，业务出现大面积 5xx 错误。
 
 #### 🔍 排查过程
@@ -1274,7 +1274,7 @@ systemReserved:
 
 2. **kubelet 日志检查**：
    ```bash
-   # 登录故障节点查看日志
+   # 登录问题节点查看日志
    ssh node-worker-10
    journalctl -u kubelet | grep -i "PLEG"
    # Jan 10 08:15:23 kubelet[1234]: E0110 PLEG is not healthy: pleg was last seen active 3m15s ago
@@ -1320,7 +1320,7 @@ systemReserved:
    - **为什么是部分节点**：这些节点使用机械硬盘（300 IOPS），其他节点使用 SSD（10000 IOPS）
 
 #### ⚡ 应急措施
-1. **立即隔离故障节点**：
+1. **立即隔离问题节点**：
    ```bash
    # 批量 cordon 机械硬盘节点
    kubectl get nodes -l disk-type=hdd -o name | xargs kubectl cordon
@@ -1333,7 +1333,7 @@ systemReserved:
 
 2. **临时限制日志写入**：
    ```bash
-   # 在故障节点临时限制容器日志大小
+   # 在问题节点临时限制容器日志大小
    ssh node-worker-10 "crictl ps -q | xargs -I {} crictl inspect {} | \
      jq -r '.info.config.logPath' | xargs truncate -s 0"
    
@@ -1345,7 +1345,7 @@ systemReserved:
 
 3. **重启 kubelet 恢复心跳**：
    ```bash
-   # 批量重启故障节点 kubelet
+   # 批量重启问题节点 kubelet
    for node in $(kubectl get nodes -l disk-type=hdd -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}'); do
      ssh $node "systemctl restart kubelet" &
    done
@@ -1361,7 +1361,7 @@ systemReserved:
    # 评估成本
    # 机械硬盘：300 IOPS，$0.05/GB/月
    # SSD：10000+ IOPS，$0.10/GB/月
-   # ROI：减少 90% 故障率，值得投入
+   # ROI：减少 90% 问题率，值得投入
    
    # 逐步迁移
    # 1. 新节点全部使用 SSD
@@ -1478,7 +1478,7 @@ systemReserved:
 
 ### 案例 2：cgroup 驱动不一致导致 Pod 创建失败
 
-#### 🎯 故障场景
+#### 🎯 问题场景
 某科技公司升级 Kubernetes 从 v1.24 到 v1.28，升级后新节点加入集群，所有 Pod 都无法创建，报错 `FailedCreatePodSandBox`，但老节点正常运行。
 
 #### 🔍 排查过程

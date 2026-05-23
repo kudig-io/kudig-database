@@ -195,7 +195,7 @@ eBPF（extended Berkeley Packet Filter）允许在内核中安全执行沙箱程
 ### 2.2 排查逻辑决策树
 
 ```
-eBPF 可观测性故障
+eBPF 可观测性问题
     ├── eBPF 程序加载失败
     │   ├── 内核配置不支持？
     │   │   ├── CONFIG_BPF 未启用？──► 启用并重新编译内核
@@ -698,7 +698,7 @@ groups:
 6. **Map 大小监控**：监控 Cilium BPF map 的压力指标，接近满时及时扩容或清理
 7. **安全基线**：使用 Tetragon 建立进程执行基线，通过 TracingPolicy 检测异常执行
 
-### 典型故障案例
+### 典型问题案例
 
 #### 案例一：内核升级后 Cilium 无法启动
 

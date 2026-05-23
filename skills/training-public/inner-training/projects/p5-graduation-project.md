@@ -855,12 +855,12 @@ kubectl get prometheusrule -n monitoring
 #### 4.2 故障演练
 
 ```bash
-# 演练 1: 模拟 Pod 故障
+# 演练 1: 模拟 Pod 问题
 kubectl delete pod <api-pod-name> -n app-ns
 # 观察: 自动恢复、readinessProbe 生效
 kubectl get pods -n app-ns -w
 
-# 演练 2: 模拟节点故障
+# 演练 2: 模拟节点问题
 kubectl cordon <node-name>
 kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
 # 观察: Pod 迁移、Service 自动更新 Endpoints

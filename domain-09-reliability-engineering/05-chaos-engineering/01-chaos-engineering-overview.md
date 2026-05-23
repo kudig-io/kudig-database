@@ -40,21 +40,21 @@ created: "2026-05-23"
 稳态: 系统正常运行的可度量行为
 
 示例假设:
-  "当单个可用区故障时，订单服务的 P99 延迟增加不超过 50%"
+  "当单个可用区问题时，订单服务的 P99 延迟增加不超过 50%"
   "当 30% 的 Pod 被随机终止时，API 错误率不超过 1%"
 ```
 
 ### 2. 引入真实世界事件 (Vary Real-world Events)
 
 ```
-真实故障类型:
+真实问题类型:
 ├── 基础设施层
-│   ├── 节点故障 (Node failure)
+│   ├── 节点问题 (Node failure)
 │   ├── 网络分区 (Network partition)
-│   └── 磁盘故障 (Disk failure)
+│   └── 磁盘问题 (Disk failure)
 ├── Kubernetes 层
 │   ├── Pod 随机终止 (Pod kill)
-│   ├── 调度器故障 (Scheduler failure)
+│   ├── 调度器问题 (Scheduler failure)
 │   └── API Server 延迟 (API latency)
 ├── 应用层
 │   ├── 依赖服务超时 (Dependency timeout)

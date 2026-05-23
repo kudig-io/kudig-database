@@ -68,7 +68,7 @@ flowchart TD
   A_OR --> A1["A1. API 限流<br/>请求频率超限"]
   A_OR --> A2["A2. API 超时<br/>云平台响应慢"]
   A_OR --> A3["A3. API 版本不兼容<br/>SDK/CCM 过旧"]
-  A_OR --> A4["A4. 区域/可用区故障<br/>服务降级"]
+  A_OR --> A4["A4. 区域/可用区问题<br/>服务降级"]
 
   %% ======== B. 凭证/IAM ========
   B_OR{{OR}}

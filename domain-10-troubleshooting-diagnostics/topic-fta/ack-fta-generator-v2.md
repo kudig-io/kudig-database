@@ -150,7 +150,7 @@ input:
 
   severity:
     type: enum
-    description: "故障严重程度"
+    description: "问题严重程度"
     enum: [P0, P1, P2, P3]
 
   # 可选字段
@@ -187,7 +187,7 @@ input:
     enum:
       - source_code      # 直接从源码分析
       - alert_rule       # 从告警规则反推
-      - incident_log     # 从故障日志分析
+      - incident_log     # 从问题日志分析
       - architecture_doc # 从架构文档生成
 
   # 源码分析专用（当 source_context=source_code 时）
@@ -202,7 +202,7 @@ input:
     alert_expression: string   # PromQL/时序查询表达式
     alert_labels: object       # 标签键值对
 
-  # 故障日志专用（当 source_context=incident_log 时）
+  # 问题日志专用（当 source_context=incident_log 时）
   incident_details:
     ticket_id: string          # 工单编号
     symptoms: [string]        # 观察到的症状
@@ -299,9 +299,9 @@ output:
 
       # 概率数据（必须）
       probability:
-        annual_rate: float      # 年故障率
-        monthly_rate: float     # 月故障率
-        mtbf_hours: float       # 平均故障间隔
+        annual_rate: float      # 年问题率
+        monthly_rate: float     # 月问题率
+        mtbf_hours: float       # 平均问题间隔
         mttr_minutes: integer   # 平均修复时间
         auto_heal_rate: float   # 自动修复成功率
         detection_rate: float   # 可检测率
@@ -328,7 +328,7 @@ output:
     diagram: string            # Mermaid 代码
     theme: enum[default/dark]  # 主题
 
-  # ACK 特有故障路径（可选）
+  # ACK 特有问题路径（可选）
   ack_specific_paths:
     - path_id: string
       description: string
@@ -338,7 +338,7 @@ output:
   # FTA 完整度评分（必须）
   confidence_score:
     overall: float              # 0.0-1.0
-    coverage: float            # 故障覆盖率
+    coverage: float            # 问题覆盖率
     observability: float       # 可观测性评分
     automation: float          # 自动化程度
     completeness: float        # 完整性评分
@@ -370,24 +370,24 @@ output:
 │                     ACK IaaS 依赖层故障域                                    │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
-│  ECS 实例故障                                                              │
+│  ECS 实例问题                                                              │
 │  ├── BE-IaaS-1: ECS 实例被驱逐 (节点压力驱逐/竞价实例中断)                    │
 │  ├── BE-IaaS-2: ECS 实例网络分区 (ENI 链路中断)                              │
-│  ├── BE-IaaS-3: ECS 实例硬件故障 (内存/CPU/磁盘)                            │
+│  ├── BE-IaaS-3: ECS 实例硬件问题 (内存/CPU/磁盘)                            │
 │  └── BE-IaaS-4: ECS 实例计划维护 (阿里云系统事件)                            │
 │                                                                             │
-│  弹性网卡 (ENI) 故障                                                        │
+│  弹性网卡 (ENI) 问题                                                        │
 │  ├── BE-IaaS-5: ENI 多队列压力 (高并发网络流量)                             │
 │  ├── BE-IaaS-6: ENI 绑定数超限 (安全组/SG限制)                               │
 │  └── BE-IaaS-7: ENI 带宽限制 (实例规格瓶颈)                                  │
 │                                                                             │
-│  云盘 (ESSD/Cloud盘) 故障                                                   │
+│  云盘 (ESSD/Cloud盘) 问题                                                   │
 │  ├── BE-IaaS-8: ESSD 性能降级 (PL3→PL1 自动降级)                            │
 │  ├── BE-IaaS-9: 云盘 IOPS 抖动 (共享带宽冲突)                               │
 │  ├── BE-IaaS-10: 云盘容量不足 (磁盘满)                                       │
-│  └── BE-IaaS-11: 云盘延迟突增 (阿里云底层存储故障)                            │
+│  └── BE-IaaS-11: 云盘延迟突增 (阿里云底层存储问题)                            │
 │                                                                             │
-│  SLB (Server Load Balancer) 故障                                            │
+│  SLB (Server Load Balancer) 问题                                            │
 │  ├── BE-IaaS-12: SLB 配置异常 (后端权重/健康检查)                           │
 │  ├── BE-IaaS-13: SLB 连接数超限 (七层监听器限制)                             │
 │  ├── BE-IaaS-14: SLB SSL 证书问题 (阿里云证书服务)                            │
@@ -460,7 +460,7 @@ output:
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  controlplane                                                              │
-│  ├── BE-ASM-1: Istio 控制面组件故障 (Citadel/ Galley/ Pilot)                 │
+│  ├── BE-ASM-1: Istio 控制面组件问题 (Citadel/ Galley/ Pilot)                 │
 │  ├── BE-ASM-2: xDS 资源配置错误 (VirtualService/ DestinationRule)           │
 │  └── BE-ASM-3: mTLS 证书过期/撤销 (双向认证失效)                             │
 │                                                                             │
@@ -550,7 +550,7 @@ output:
 │               │                             │                               │
 │               │  FTA 路径 ←→ FEBM 案例      │                               │
 │               │  概率更新 ←→ 证据验证        │                               │
-│               │  新故障发现 ←→ 根因确认      │                               │
+│               │  新问题发现 ←→ 根因确认      │                               │
 │               └────────────────────────────┘                               │
 │                                    │                                        │
 │                                    ▼                                        │
@@ -581,7 +581,7 @@ fta_febm_mapping:
         - "dmesg -T | grep -E 'oom|kill'"
 
     BE-1.2:
-      febm_pattern: "etcd集群故障"
+      febm_pattern: "etcd集群问题"
       evidence_types:
         - "etcd_server_has_leader == 0"
         - "etcd_mvcc_db_total_size_in_bytes / quota > 0.8"
@@ -615,7 +615,7 @@ fta_febm_mapping:
   new_path_detection:
     trigger:
       - event: "FEBM 案例的根因不在现有 FTA 中"
-      - event: "FEBM 证据链指向新的故障传播路径"
+      - event: "FEBM 证据链指向新的问题传播路径"
     actions:
       - "生成 PROPOSED（待评审）状态的新 FTA 路径"
       - "通知 FTA 维护团队进行评审"
@@ -717,10 +717,10 @@ class ACKFTAGenerator:
     def map_to_ack_fault_domains(self, fault_modes):
         """映射到 ACK 故障域"""
         ack_mapping = {
-            "ECS 实例故障": ["BE-IaaS-1", "BE-IaaS-2", "BE-IaaS-3", "BE-IaaS-4"],
-            "弹性网卡故障": ["BE-IaaS-5", "BE-IaaS-6", "BE-IaaS-7"],
-            "云盘故障": ["BE-IaaS-8", "BE-IaaS-9", "BE-IaaS-10", "BE-IaaS-11"],
-            "SLB 故障": ["BE-IaaS-12", "BE-IaaS-13", "BE-IaaS-14", "BE-IaaS-15"],
+            "ECS 实例问题": ["BE-IaaS-1", "BE-IaaS-2", "BE-IaaS-3", "BE-IaaS-4"],
+            "弹性网卡问题": ["BE-IaaS-5", "BE-IaaS-6", "BE-IaaS-7"],
+            "云盘问题": ["BE-IaaS-8", "BE-IaaS-9", "BE-IaaS-10", "BE-IaaS-11"],
+            "SLB 问题": ["BE-IaaS-12", "BE-IaaS-13", "BE-IaaS-14", "BE-IaaS-15"],
         }
         return ack_mapping
 ```
@@ -767,14 +767,14 @@ class AlertToFTAGenerator:
         return "TE-2: 应用服务不可用"
 ```
 
-#<!-- chunk: 5.3 从故障日志生成 FTA -->## 5.3 从故障日志生成 FTA
+#<!-- chunk: 5.3 从问题日志生成 FTA -->## 5.3 从问题日志生成 FTA
 
 ```python
 class IncidentToFTAGenerator:
-    """从故障日志生成 FTA 扩展"""
+    """从问题日志生成 FTA 扩展"""
 
     def generate_from_incident(self, ticket_id, symptoms, time_window):
-        """从故障工单生成 FTA 路径扩展"""
+        """从问题工单生成 FTA 路径扩展"""
 
         # 1. 收集证据
         evidence = self.collect_evidence(ticket_id, time_window)
@@ -892,7 +892,7 @@ data:
 
 ```yaml
 # FTA 驱动的 Ansible Playbook 模板
-- name: FTA 驱动的故障修复 - etcd 磁盘空间
+- name: FTA 驱动的问题修复 - etcd 磁盘空间
   hosts: etcd_master_nodes
   gather_facts: yes
   vars:
@@ -965,7 +965,7 @@ otel_mapping:
           - oom_trigger
           - container_restart
 
-  BE-1.2:  # etcd 集群故障
+  BE-1.2:  # etcd 集群问题
     metrics:
       - name: etcd.db.size.in.bytes
         type: gauge
@@ -1270,7 +1270,7 @@ confidence_score:
   missing_items:
     - "ACK One 多集群场景未覆盖"
   recommended_actions:
-    - "补充 ACK One 故障路径"
+    - "补充 ACK One 问题路径"
     - "增加 ARMS Java Agent 内存泄漏检测"
 
 febm_integration:

@@ -645,7 +645,7 @@ openssl x509 -in /etc/kubernetes/pki/etcd/server.crt -text -noout
 | 推荐HA | 5 | 2 | 生产推荐 |
 | 大规模 | 7 | 3 | 大型集群 |
 
-> 公式: 容忍故障节点数 = (N-1)/2
+> 公式: 容忍问题节点数 = (N-1)/2
 
 <!-- chunk: etcd性能指标 -->
 ## etcd性能指标

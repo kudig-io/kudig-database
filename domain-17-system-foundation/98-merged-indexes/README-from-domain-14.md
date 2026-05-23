@@ -1175,16 +1175,16 @@ K8s节点维护:
 
 ---
 
-## 按故障现象查找
+## 按问题现象查找
 
-| 故障现象 | 可能的 Linux 层面原因 | 参考文档 |
+| 问题现象 | 可能的 Linux 层面原因 | 参考文档 |
 |:---|:---|:---|
 | Pod OOMKilled | cgroups 内存限制不足，OOM Killer 终止进程 | 02, 06 |
 | Pod CrashLoopBackOff | 容器进程异常退出，信号处理不当 | 02, 09 |
 | Service 无法访问 | iptables/IPVS 规则异常，conntrack 表满 | 04, 06 |
 | 节点 NotReady | 内核参数错误，磁盘满，kubelet 崩溃 | 01, 09 |
 | 容器启动失败 | OverlayFS 异常，SELinux 阻止，镜像损坏 | 03, 07, 08 |
-| 磁盘 I/O 慢 | I/O 调度器不当，RAID 重建，磁盘故障 | 03, 05, 06 |
+| 磁盘 I/O 慢 | I/O 调度器不当，RAID 重建，磁盘问题 | 03, 05, 06 |
 | 网络延迟高 | TCP 参数未优化，网络设备缓冲区不足 | 04, 06 |
 | 安全告警 | 文件被篡改，异常进程，权限提升尝试 | 07, 08 |
 | CPU throttling | CPU limit 设置过低，cgroup 配额不够 | 02, 06 |

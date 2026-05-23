@@ -897,7 +897,7 @@ mount /dev/mapper/encrypted /secure
 1. **XFS 用于容器存储**: XFS 处理大文件和并发 I/O 性能更优
 2. **ext4 用于通用场景**: ext4 稳定性和兼容性最好
 3. **noatime 挂载**: 减少不必要的磁盘写入
-4. **监控 inode 使用**: 防止 inode 耗尽导致的故障
+4. **监控 inode 使用**: 防止 inode 耗尽导致的问题
 5. **预留 10% 空间**: XFS 在 95% 满时性能严重下降
 6. **日志轮转**: 配置 logrotate 防止日志撑满磁盘
 7. **使用 Local PV**: 对 I/O 敏感的数据库使用本地持久卷
@@ -906,11 +906,11 @@ mount /dev/mapper/encrypted /secure
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 文件系统常见故障 -->## 文件系统常见故障
+#<!-- chunk: 文件系统常见问题 -->## 文件系统常见问题
 
 ```bash
 # 文件系统变为只读
-# 原因: 磁盘故障、文件系统损坏
+# 原因: 磁盘问题、文件系统损坏
 dmesg | grep -i "remounting\|read-only\|error"
 # 修复: fsck (ext4) 或 xfs_repair
 umount /data

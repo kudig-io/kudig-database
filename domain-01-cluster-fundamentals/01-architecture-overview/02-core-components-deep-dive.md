@@ -93,7 +93,7 @@ created: "2026-05-23"
 6. [cloud-controller-manager 云集成](#6-cloud-controller-manager-云集成)
 7. [节点组件深度解析](#7-节点组件深度解析)
 8. [附加组件](#8-附加组件)
-9. [组件故障场景与恢复](#9-组件故障场景与恢复)
+9. [组件问题场景与恢复](#9-组件问题场景与恢复)
 10. [性能基准与容量规划](#10-性能基准与容量规划)
 11. [生产级配置模板](#11-生产级配置模板)
 12. [诊断与排查工具](#12-诊断与排查工具)
@@ -155,14 +155,14 @@ created: "2026-05-23"
 
 ### 1.3 组件启动顺序与依赖
 
-| 启动顺序 | 组件 | 依赖条件 | 启动超时 | 健康检查 | 故障影响 |
+| 启动顺序 | 组件 | 依赖条件 | 启动超时 | 健康检查 | 问题影响 |
 |---------|------|---------|---------|---------|---------|
 | 1 | **etcd** | 网络, 存储 | 60s | `etcdctl endpoint health` | 整个集群不可用 |
 | 2 | **kube-apiserver** | etcd健康 | 30s | `curl -k https://localhost:6443/healthz` | 所有API调用失败 |
 | 3 | **kube-controller-manager** | apiserver可用 | 30s | `/healthz` 端点 | 控制器停止协调 |
 | 4 | **kube-scheduler** | apiserver可用 | 30s | `/healthz` 端点 | 新Pod无法调度 |
 | 5 | **kubelet** | apiserver可用 | 30s | `curl http://localhost:10248/healthz` | 节点NotReady |
-| 6 | **kube-proxy** | apiserver, kubelet | 30s | `/healthz` 端点 | Service网络故障 |
+| 6 | **kube-proxy** | apiserver, kubelet | 30s | `/healthz` 端点 | Service网络问题 |
 | 7 | **[[CoreDNS|CoreDNS]]** | kube-proxy, CNI | 60s | DNS查询测试 | 服务发现失败 |
 | 8 | **CNI** | kubelet | 60s | Pod网络测试 | Pod网络不通 |
 
@@ -672,7 +672,7 @@ find ${BACKUP_DIR} -name "etcd-*.db" -mtime +${RETENTION_DAYS} -delete
 | **碎片整理** | `etcdctl defrag --cluster` | 中 | 回收磁盘空间(会短暂阻塞) |
 | **解除告警** | `etcdctl alarm disarm` | 中 | 解除空间告警 |
 | **添加成员** | `etcdctl member add <name> --peer-urls=<url>` | 高 | 扩容集群 |
-| **移除成员** | `etcdctl member remove <id>` | 高 | 缩容或替换故障节点 |
+| **移除成员** | `etcdctl member remove <id>` | 高 | 缩容或替换问题节点 |
 
 ### 3.6 关键监控指标
 
@@ -1039,7 +1039,7 @@ spec:
 | `--node-monitor-grace-period` | 40s | 节点无响应标记Unknown前等待时间 |
 | `--pod-eviction-timeout` | 5m | 节点NotReady后开始驱逐Pod等待时间 |
 | `--node-eviction-rate` | 0.1 | 每秒驱逐节点数(正常情况) |
-| `--secondary-node-eviction-rate` | 0.01 | 大规模故障时驱逐速率 |
+| `--secondary-node-eviction-rate` | 0.01 | 大规模问题时驱逐速率 |
 | `--unhealthy-zone-threshold` | 0.55 | 不健康Zone阈值(>55%节点不健康) |
 | `--large-cluster-size-threshold` | 50 | 大集群节点数阈值 |
 
@@ -1047,7 +1047,7 @@ spec:
 节点状态机:
 Ready ──(40s无心跳)──▶ Unknown ──(5m)──▶ 开始驱逐Pod
 
-大规模故障保护:
+大规模问题保护:
 - 单Zone >55%节点不健康 → 降低驱逐速率为0.01/s
 - 所有Zone >55%不健康 → 停止驱逐
 - 防止网络分区导致大规模误驱逐
@@ -1211,7 +1211,7 @@ spec:
 │  │  4. 更新Pod状态缓存                                                       │   │
 │  │  5. 触发syncPod()调谐                                                     │   │
 │  │                                                                           │   │
-│  │  PLEG故障: "PLEG is not healthy: pleg was last seen active..."          │   │
+│  │  PLEG问题: "PLEG is not healthy: pleg was last seen active..."          │   │
 │  │  原因: CRI调用超时 (>3min) / 容器运行时hung                              │   │
 │  │  影响: 节点标记NotReady, Pod无法调度到该节点                             │   │
 │  └──────────────────────────────────────────────────────────────────────────┘   │
@@ -1371,23 +1371,23 @@ data:
 
 ---
 
-<!-- chunk: 9. 组件故障场景与恢复 -->
-## 9. 组件故障场景与恢复
+<!-- chunk: 9. 组件问题场景与恢复 -->
+## 9. 组件问题场景与恢复
 
-### 9.1 控制平面故障矩阵
+### 9.1 控制平面问题矩阵
 
-| 组件 | 故障现象 | 根因 | 诊断步骤 | 恢复方案 | 预防措施 |
+| 组件 | 问题现象 | 根因 | 诊断步骤 | 恢复方案 | 预防措施 |
 |------|---------|------|---------|---------|---------|
 | **apiserver** | 503错误 | 过载/etcd慢 | 检查`apiserver_current_inflight_requests` | 增大并发限制/修复etcd | 启用APF限流 |
 | **apiserver** | 证书过期 | 未自动轮转 | `kubeadm certs check-expiration` | `kubeadm certs renew all` | 监控证书有效期 |
 | **etcd** | 数据库满 | 超过quota | `etcdctl alarm list` | 压缩+碎片整理+解除告警 | 自动压缩 |
 | **etcd** | Leader切换频繁 | 网络/磁盘慢 | 检查`etcd_server_leader_changes_seen_total` | 检查网络/换SSD | 专用网络+NVMe |
 | **scheduler** | Pod长时间Pending | 资源不足 | `kubectl describe pod` | 增加节点/放宽约束 | 监控资源使用率 |
-| **controller** | Deployment不更新 | API限流/故障 | 检查`workqueue_depth` | 重启/提高QPS | 监控队列深度 |
+| **controller** | Deployment不更新 | API限流/问题 | 检查`workqueue_depth` | 重启/提高QPS | 监控队列深度 |
 
-### 9.2 节点组件故障矩阵
+### 9.2 节点组件问题矩阵
 
-| 组件 | 故障现象 | 根因 | 诊断步骤 | 恢复方案 | 预防措施 |
+| 组件 | 问题现象 | 根因 | 诊断步骤 | 恢复方案 | 预防措施 |
 |------|---------|------|---------|---------|---------|
 | **kubelet** | PLEG不健康 | CRI超时 | `journalctl -u kubelet \| grep PLEG` | 重启containerd/kubelet | SSD存储 |
 | **kubelet** | Node NotReady | 心跳失败 | `kubectl describe node` | 重启kubelet/检查网络 | 监控节点状态 |

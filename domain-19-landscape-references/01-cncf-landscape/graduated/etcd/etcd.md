@@ -132,7 +132,7 @@ Every write increments a global revision number. Watch streams track from a spec
 - [[synthesis/kubeadm-cluster-operations|kubeadm 集群运维全景]] — Cross-reference
 - [[synthesis/etcd x 高可用模式|etcd × 高可用模式]] — Cross-reference
 - [[synthesis/Production Troubleshooting Playbook|Production Troubleshooting Playbook]] — Cross-reference
-- [[synthesis/K8s 故障分布与 MTTR 基准|K8s 故障分布与 MTTR 基准]] — Cross-reference
+- [[synthesis/K8s 问题分布与 MTTR 基准|K8s 问题分布与 MTTR 基准]] — Cross-reference
 - [[synthesis/Structural Troubleshooting Framework|Structural Troubleshooting Framework]] — Cross-reference
 - [[synthesis/声明式 API × 控制器模式|声明式 API × 控制器模式]] — Cross-reference
 - [[concepts/deployment-controller-architecture|Deployment 控制器架构]] — Cross-reference

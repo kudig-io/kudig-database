@@ -941,7 +941,7 @@ K8s 1.33/1.34安全增强:
     
   ValidatingAdmissionPolicy (GA):
     - K8s原生CEL表达式准入策略
-    - 无需外部Webhook(降低延迟和故障面)
+    - 无需外部Webhook(降低延迟和问题面)
     - 替代部分Kyverno/OPA场景
     - 详见 "[24-策略即代码与治理自动化](./24-kubernetes-policy-as-code-governance-automation.md)"
     

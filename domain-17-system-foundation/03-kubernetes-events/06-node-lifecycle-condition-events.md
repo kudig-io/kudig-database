@@ -291,11 +291,11 @@ kubectl get node <node-name> -o jsonpath='{.status.allocatable}' | jq
 | **来源组件** | kubelet / node-controller |
 | **关联资源** | Node |
 | **适用版本** | v1.0+ |
-| **生产频率** | 低频 (故障时) |
+| **生产频率** | 低频 (问题时) |
 
 ##<!-- chunk: 事件含义 -->## 事件含义
 
-此事件表示节点的健康检查失败，节点变为 NotReady 状态。这可能是由于 kubelet 本身的问题、容器运行时故障、网络问题或其他关键组件故障导致的。
+此事件表示节点的健康检查失败，节点变为 NotReady 状态。这可能是由于 kubelet 本身的问题、容器运行时问题、网络问题或其他关键组件问题导致的。
 
 当节点变为 NotReady 状态时，scheduler 将不再调度新的 Pod 到此节点。如果节点持续 NotReady 超过一定时间（默认 5 分钟），node-controller 会开始驱逐节点上的 Pod。
 
@@ -373,13 +373,13 @@ dmesg | tail -100
 | 原因 | 解决方案 |
 |:---|:---|
 | kubelet 进程停止 | `systemctl restart kubelet` |
-| 容器运行时故障 | 重启容器运行时: `systemctl restart containerd` |
+| 容器运行时问题 | 重启容器运行时: `systemctl restart containerd` |
 | 网络连接中断 | 检查并修复网络配置，确保可以访问 API Server |
 | 资源耗尽 (内存/磁盘) | 清理资源，释放空间，增加资源配额 |
 | 系统负载过高 | 减少节点负载，迁移部分 Pod |
 | 证书过期 | 更新 kubelet 证书，重启 kubelet |
 | API Server 不可达 | 检查防火墙、网络策略，确保 API Server 健康 |
-| CNI 插件故障 | 检查并修复 CNI 插件配置 |
+| CNI 插件问题 | 检查并修复 CNI 插件配置 |
 
 ---
 
@@ -1104,7 +1104,7 @@ kubectl get volumeattachments | grep <node-name>
 | 系统更新/补丁 | 验证更新成功，监控节点稳定性 |
 | 内核 panic | 分析 panic 日志，可能是内核 bug 或硬件问题 |
 | OOM killer | 调整系统内存配置，优化应用内存使用 |
-| 断电/硬件故障 | 检查硬件状态，修复或更换故障硬件 |
+| 断电/硬件问题 | 检查硬件状态，修复或更换问题硬件 |
 | 人为误操作 | 审计操作记录，加强权限管理和操作规范 |
 | 自动重启（看门狗） | 检查触发自动重启的条件，解决根本问题 |
 | 卷挂载失败 | 检查存储系统，修复卷挂载问题 |
@@ -1236,7 +1236,7 @@ enforceNodeAllocatable:
 
 ##<!-- chunk: 事件含义 -->## 事件含义
 
-此事件表示 kubelet 检测到文件系统的容量为 0 或无效。这通常是由于文件系统挂载失败、磁盘故障或 cadvisor 获取磁盘信息失败导致的。
+此事件表示 kubelet 检测到文件系统的容量为 0 或无效。这通常是由于文件系统挂载失败、磁盘问题或 cadvisor 获取磁盘信息失败导致的。
 
 当磁盘容量无效时，kubelet 无法准确监控磁盘使用情况，可能导致：
 1. 无法正确执行磁盘压力检测
@@ -1307,8 +1307,8 @@ smartctl -a /dev/sda  # 需要安装 smartmontools
 | 原因 | 解决方案 |
 |:---|:---|
 | 文件系统未挂载 | 挂载文件系统，确保 kubelet 数据目录正常 |
-| 磁盘故障 | 修复或更换故障磁盘 |
-| cadvisor 故障 | 重启 kubelet 以重启 cadvisor |
+| 磁盘问题 | 修复或更换问题磁盘 |
+| cadvisor 问题 | 重启 kubelet 以重启 cadvisor |
 | 权限问题 | 检查 kubelet 对文件系统的访问权限 |
 | 容器运行时问题 | 检查并修复容器运行时配置 |
 | tmpfs 配置错误 | 检查 tmpfs 挂载配置，确保大小正确 |
@@ -1652,7 +1652,7 @@ iostat -x 1 5
 
 | 原因 | 解决方案 |
 |:---|:---|
-| 容器运行时故障 | 重启容器运行时: `systemctl restart containerd` |
+| 容器运行时问题 | 重启容器运行时: `systemctl restart containerd` |
 | 卷卸载失败 | 手动卸载: `umount <mount-point>` |
 | 文件系统繁忙 | 查找占用进程: `lsof <file>`, `fuser -m <mount-point>` |
 | 权限问题 | 检查 kubelet 和容器运行时的权限 |
@@ -1767,7 +1767,7 @@ crictl rmi --prune
 | 原因 | 解决方案 |
 |:---|:---|
 | 所有镜像都在使用 | 删除不需要的 Pod，释放镜像引用 |
-| 容器运行时故障 | 重启容器运行时: `systemctl restart containerd` |
+| 容器运行时问题 | 重启容器运行时: `systemctl restart containerd` |
 | GC 阈值过高 | 降低 imageGCHighThresholdPercent，更早触发 GC |
 | 镜像真的太多 | 手动删除未使用的镜像: `crictl rmi <image-id>` |
 | 磁盘真的满了 | 扩容磁盘，或为 imagefs 单独分配磁盘 |
@@ -1916,7 +1916,7 @@ kubectl logs -n kube-system <controller-manager-pod> | grep -i "remove\|delete"
 |:---|:---|
 | 计划内下线 | 正常操作，确认节点已 drain |
 | 意外删除 | 检查操作审计日志，找出删除来源 |
-| 节点故障后清理 | 正常情况，清理失败节点 |
+| 节点问题后清理 | 正常情况，清理失败节点 |
 
 ---
 
@@ -1991,7 +1991,7 @@ kubectl get nodes
 2. 删除节点上所有 Pod 的 API 对象
 3. 触发 Pod 在其他节点重建（如果是 Deployment, StatefulSet 等管理的）
 
-注意：这只是删除 API 对象，实际的容器进程可能仍在故障节点上运行（如果节点只是网络隔离而非真正宕机）。
+注意：这只是删除 API 对象，实际的容器进程可能仍在问题节点上运行（如果节点只是网络隔离而非真正宕机）。
 
 ##<!-- chunk: 典型事件消息 -->## 典型事件消息
 
@@ -2019,7 +2019,7 @@ Source:  node-controller
   - 裸 Pod（无控制器）：Pod 丢失，不会重建
 - **数据影响**：
   - EmptyDir 卷的数据丢失
-  - hostPath 卷的数据保留在故障节点
+  - hostPath 卷的数据保留在问题节点
   - PV 卷需要重新挂载（可能受 VolumeAttachment 限制）
 - **恢复时间**：取决于 Pod 重新调度和启动的时间
 
@@ -2060,8 +2060,8 @@ kubectl get endpoints --all-namespaces
 
 | 场景 | 解决方案 |
 |:---|:---|
-| 节点真的宕机 | 确认 Pod 已在其他节点重建，修复或更换故障节点 |
-| 网络隔离 | 修复网络问题，可能需要手动清理故障节点上的容器 |
+| 节点真的宕机 | 确认 Pod 已在其他节点重建，修复或更换问题节点 |
+| 网络隔离 | 修复网络问题，可能需要手动清理问题节点上的容器 |
 | 节点维护 | 如果是计划内维护，应该先 drain 而不是等待自动驱逐 |
 | Pod 未重建 | 检查控制器状态（Deployment, StatefulSet 等） |
 | 存储卷无法挂载 | 手动释放 VolumeAttachment: `kubectl delete volumeattachment <name>` |
@@ -2154,7 +2154,7 @@ kubectl describe node <node-name>
 | 节点 NotReady | 修复节点，或确认 Pod 已在其他节点重建 |
 | Pod 长时间 Terminating | 检查节点连通性，可能需要强制删除: `kubectl delete pod <pod> --grace-period=0 --force` |
 | 频繁驱逐 | 调查节点不稳定的根本原因，修复基础设施问题 |
-| 服务影响 | 确保有足够的副本数，避免单点故障 |
+| 服务影响 | 确保有足够的副本数，避免单点问题 |
 
 ---
 

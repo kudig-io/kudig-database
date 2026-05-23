@@ -101,7 +101,7 @@ scale_tier_requirements:
     challenges:
       - 监控数据量小(<10万series)
       - 简单告警规则
-      - 单点故障风险低
+      - 单点问题风险低
       
   medium_scale:  # 50-500节点
     characteristics:

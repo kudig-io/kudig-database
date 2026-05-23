@@ -116,7 +116,7 @@ kubectl patch pod ml-training-worker-0 -n ml-platform \
 | Pod 一直处于 SchedulingGated 状态 | schedulingGates 未被移除 | `kubectl get pod -o jsonpath='{.spec.schedulingGates}'` 检查剩余 gate |
 | 外部控制器 patch 失败 | RBAC 权限不足 | 确认控制器 ServiceAccount 有 [[Pods|pods]]/patch 权限 |
 | Pod 进入调度后因节点不足 Pending | gate 移除时机不当 | 先确认节点资源充足，再移除 gate；或配合 Cluster AutoScaler |
-| scheduler_pending_pods 指标中 gated 数量持续增长 | 外部系统故障导致 gate 未释放 | 检查外部控制器日志；设置 gated Pod 告警 |
+| scheduler_pending_pods 指标中 gated 数量持续增长 | 外部系统问题导致 gate 未释放 | 检查外部控制器日志；设置 gated Pod 告警 |
 | 尝试添加新 gate 被拒绝 | 只允许在创建时设置 gate | 使用 admission webhook 在创建时注入所有需要的 gate |
 
 ## 生产检查清单

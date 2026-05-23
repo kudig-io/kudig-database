@@ -608,7 +608,7 @@ spec:
       # 节点选择器(推荐部署到稳定节点)
       nodeSelector:
         kubernetes.io/os: linux
-      # 反亲和性(避免单点故障)
+      # 反亲和性(避免单点问题)
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -1116,7 +1116,7 @@ kubectl logs -n kube-system kube-apiserver-xxx | grep aggregator
 3. **健康检查**: 实现 `/livez`, `/readyz`, `/healthz` 端点,便于监控
 4. **认证授权**: 使用 `X-Remote-User` 请求头获取原始用户信息,配合 RBAC
 5. **性能优化**: 合理设置资源限制,避免 API Server Pod OOM
-6. **监控告警**: 监控 APIService `Available` 状态,及时发现后端服务故障
+6. **监控告警**: 监控 APIService `Available` 状态,及时发现后端服务问题
 7. **版本管理**: 使用独立的 APIService 版本(如 v1, v2),避免直接修改现有版本
 
 ---

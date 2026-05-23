@@ -866,12 +866,12 @@ class CostManagement:
 cost_mgmt = CostManagement(pulumi.get_stack())
 ```
 
-<!-- chunk: 故障排除 (Troubleshooting) -->## 故障排除 (Troubleshooting)
+<!-- chunk: 问题排除 (Troubleshooting) -->## 问题排除 (Troubleshooting)
 
 #<!-- chunk: 常见问题诊断 (Common Issue Diagnosis) -->## 常见问题诊断 (Common Issue Diagnosis)
 
 ```python
-# troubleshooting.py - 故障排除工具
+# troubleshooting.py - 问题排除工具
 import pulumi
 import json
 from typing import Dict, Any

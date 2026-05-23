@@ -420,7 +420,7 @@ kubectl purge jobs,deployments -n <namespace> --older-than=24h
 | `permission denied` | 文件没有执行权限 | `chmod +x kubectl-<name>` |
 | `krew install 失败` | 网络问题或下载超时 | 手动下载并直接放到 PATH |
 
-### 4.2 krew 自身故障
+### 4.2 krew 自身问题
 
 ```bash
 # 重置 krew（如果 krew 命令本身出错）
@@ -468,7 +468,7 @@ kubectl-whoami
 <!-- chunk: 6. 插件速查表 -->
 ## 6. 插件速查表
 
-| 插件 | 安装命令 | 主要用途 | 故障场景 |
+| 插件 | 安装命令 | 主要用途 | 问题场景 |
 |------|---------|---------|---------|
 | `kubectl-whoami` | `kubectl krew install whoami` | 查看当前身份 | RBAC 调试 |
 | `kubectl-neat` | `kubectl krew install neat` | 清理 YAML 噪音 | 导出配置 |

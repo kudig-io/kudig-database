@@ -301,7 +301,7 @@ llm_config = {
 # 2. 定义专业 Agent
 planner = AssistantAgent(
     name="Planner",
-    system_message="""你是运维规划专家。当收到故障报告时，制定诊断和修复计划。
+    system_message="""你是运维规划专家。当收到问题报告时，制定诊断和修复计划。
     将复杂问题分解为有序的诊断步骤，并分配给合适的专家。""",
     llm_config=llm_config,
 )

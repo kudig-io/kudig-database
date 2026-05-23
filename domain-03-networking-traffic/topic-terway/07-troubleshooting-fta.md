@@ -111,14 +111,14 @@ flowchart TD
 
 ---
 
-## 2. 6 大故障类别概览
+## 2. 6 大问题类别概览
 
 | 类别 | 子事件 | 严重度 | 门类型 | 典型触发场景 |
 |------|--------|--------|--------|-------------|
 | ENI 分配异常 | 配额不足 / 绑定失败 / 状态漂移 | High | OR (+ AND: 扩容阻塞) | 大规模扩容、实例规格不足 |
-| IP 地址池异常 | 池耗尽 / IP 泄漏 / IP 冲突 | Critical | OR (+ AND: 完全耗尽) | vSwitch CIDR 满载、GC 故障 |
+| IP 地址池异常 | 池耗尽 / IP 泄漏 / IP 冲突 | Critical | OR (+ AND: 完全耗尽) | vSwitch CIDR 满载、GC 问题 |
 | CNI 插件异常 | 配置错误 / 守护进程崩溃 / 路由失败 | High | OR | 升级失败、配置误改 |
-| 节点网络异常 | VPC 不通 / 跨节点失败 / MTU 异常 | High | OR | ECS 实例级故障、路由表变更 |
+| 节点网络异常 | VPC 不通 / 跨节点失败 / MTU 异常 | High | OR | ECS 实例级问题、路由表变更 |
 | 安全组/ACL 异常 | 安全组阻断 / 策略不一致 | Medium | OR | 安全组规则误操作 |
 | 控制面/云平台异常 | API 限流 / 控制面不可用 | High | OR | API 配额耗尽、API Server 异常 |
 
@@ -418,7 +418,7 @@ terway 日志含 Throttling / ServiceUnavailable / connection refused
 
 ---
 
-## 10. AND 门组合故障
+## 10. AND 门组合问题
 
 ### 10.1 IP 完全耗尽 (vSwitch 空 + IP 泄漏)
 
@@ -592,7 +592,7 @@ Pod 网络不可用，且 Terway 运行在 IPVLAN 模式下
 
 ## 14. BGP 模式故障诊断（Terway v1.5+）
 
-> **适用场景**: Terway BGP 模式的动态路由故障
+> **适用场景**: Terway BGP 模式的动态路由问题
 
 ### 14.1 决策树
 
@@ -679,9 +679,9 @@ Service/Ingress 流量异常（Terway 模式下）
 ## 16. Terway 故障树完整速查（TE-9 全部底事件）
 
 ```
-TE-9: Terway 网络故障 [OR门] 🟠 P1
+TE-9: Terway 网络问题 [OR门] 🟠 P1
 │
-├── IE-9.1 ENI 模式故障 [OR门]
+├── IE-9.1 ENI 模式问题 [OR门]
 │   ├── BE-9.1 ENI 多队列压力
 │   │   ├── BE-9.1.1 单 Pod ENI 带宽瓶颈
 │   │   │   └── BE-9.1.1.1 高并发 Pod 导致 VSwitch 带宽饱和
@@ -696,7 +696,7 @@ TE-9: Terway 网络故障 [OR门] 🟠 P1
 │   └── BE-9.3 ENI 安全组冲突
 │       └── BE-9.3.1 安全组规则被覆盖导致 Pod 无法通信
 │
-├── IE-9.2 IPVLAN 模式故障 [OR门]
+├── IE-9.2 IPVLAN 模式问题 [OR门]
 │   ├── BE-9.4 IPVLAN 网络策略不生效
 │   │   └── BE-9.4.1 内核版本 < 5.10 不支持 ipvlan network policy
 │   │
@@ -706,7 +706,7 @@ TE-9: Terway 网络故障 [OR门] 🟠 P1
 │   └── BE-9.6 IPVLAN MTU 问题
 │       └── BE-9.6.1 巨型帧 (9000) 导致分片
 │
-├── IE-9.3 BGP 模式故障 [OR门]
+├── IE-9.3 BGP 模式问题 [OR门]
 │   ├── BE-9.7 BGP 会话中断
 │   │   └── BE-9.7.1 Terway BGP 进程崩溃
 │   │
@@ -726,7 +726,7 @@ TE-9: Terway 网络故障 [OR门] 🟠 P1
 
 **快速索引**:
 
-| BE 编号 | 故障现象 | 诊断命令 | 快速修复 |
+| BE 编号 | 问题现象 | 诊断命令 | 快速修复 |
 |:---|:---|:---|:---|
 | BE-9.1.1.1 | VSwitch 带宽饱和 | `aliyun vpc DescribeVSwitches` | 扩展 vSwitch 或增加节点 |
 | BE-9.1.2.1 | ENI 绑定数超限 | `kubectl describe node \| grep aliyun.com/eni-max` | 升级实例规格 |
@@ -741,7 +741,7 @@ TE-9: Terway 网络故障 [OR门] 🟠 P1
 
 ```yaml
 # symptom-mapping-layer.md 引用
-symptom: "Terway 网络故障"
+symptom: "Terway 网络问题"
 category: "network"
 cluster_type: "ACK"
 aliases:

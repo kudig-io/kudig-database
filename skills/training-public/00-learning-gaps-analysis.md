@@ -177,7 +177,7 @@ created: "2026-05-23"
 #### 3.3 端到端完整项目案例
 - **现状**: 有 `p5-graduation-project.md` 毕业项目，但偏向运维场景（集群管理）
 - **缺口**: 一个**贯穿始终的开发+运维完整故事线**：
-  > 写 Hello World 应用 → 写 Dockerfile → 构建镜像 → 写 K8s manifest → 用 Helm 打包 → 用 ArgoCD 做 GitOps → 配置 Prometheus 监控 → 配置告警 → 模拟故障并排查
+  > 写 Hello World 应用 → 写 Dockerfile → 构建镜像 → 写 K8s manifest → 用 Helm 打包 → 用 ArgoCD 做 GitOps → 配置 Prometheus 监控 → 配置告警 → 模拟问题并排查
 - **影响**: 小白学到的是零散知识点，看不到"代码是怎么跑到生产环境的完整流水线"
 - **补齐建议**: 新增 `beginner-guides/03-end-to-end-project.md`
 

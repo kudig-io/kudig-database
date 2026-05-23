@@ -62,7 +62,7 @@ prerequisites:
 
 ## 概述
 
-Kubernetes 集群的高可用 (HA) 和灾难恢复 (DR) 能力对于生产环境至关重要。本文档覆盖控制平面高可用、etcd 集群故障、备份恢复、跨区域容灾等场景的诊断与解决方案。
+Kubernetes 集群的高可用 (HA) 和灾难恢复 (DR) 能力对于生产环境至关重要。本文档覆盖控制平面高可用、etcd 集群问题、备份恢复、跨区域容灾等场景的诊断与解决方案。
 
 ## 目录
 
@@ -116,19 +116,19 @@ Kubernetes 集群的高可用 (HA) 和灾难恢复 (DR) 能力对于生产环境
 | API Server 不可用 | kubectl 无法连接 | `connection refused` | `kubectl cluster-info` |
 | etcd 集群不健康 | 数据读写失败 | `etcdserver: no leader` | `etcdctl endpoint health` |
 | 脑裂 | 数据不一致 | 不同节点返回不同数据 | etcd 日志 |
-| 主节点故障 | 控制平面部分不可用 | API 间歇性失败 | `kubectl get nodes` |
+| 主节点问题 | 控制平面部分不可用 | API 间歇性失败 | `kubectl get nodes` |
 | 备份失败 | 无法创建备份 | `snapshot failed` | 备份任务日志 |
 | 恢复失败 | 无法从备份恢复 | `restore failed` | 恢复操作日志 |
 | 选主失败 | Controller/Scheduler 无 leader | `leader election lost` | 组件日志 |
 
 ### 影响分析
 
-| 故障类型 | 直接影响 | 间接影响 | 影响范围 |
+| 问题类型 | 直接影响 | 间接影响 | 影响范围 |
 |---------|---------|---------|---------|
-| 单 Master 故障 | API 负载增加 | 性能下降 | 整个集群 (如果没有 HA) |
-| etcd 少数节点故障 | 集群仍可用 | 容错能力下降 | 数据持久性 |
-| etcd 多数节点故障 | 集群只读或不可用 | 所有写操作失败 | 整个集群 |
-| 所有 Master 故障 | 集群完全不可管理 | 新 Pod 无法调度 | 整个集群管理能力 |
+| 单 Master 问题 | API 负载增加 | 性能下降 | 整个集群 (如果没有 HA) |
+| etcd 少数节点问题 | 集群仍可用 | 容错能力下降 | 数据持久性 |
+| etcd 多数节点问题 | 集群只读或不可用 | 所有写操作失败 | 整个集群 |
+| 所有 Master 问题 | 集群完全不可管理 | 新 Pod 无法调度 | 整个集群管理能力 |
 | 备份数据丢失 | 无法恢复到特定时间点 | 灾难恢复能力丧失 | 业务连续性 |
 
 ---
@@ -138,7 +138,7 @@ Kubernetes 集群的高可用 (HA) 和灾难恢复 (DR) 能力对于生产环境
 ### 排查决策树
 
 ```
-高可用/灾备故障
+高可用/灾备问题
       │
       ├─── API Server 不可用？
       │         │
@@ -234,7 +234,7 @@ kubectl get endpoints kube-scheduler -n kube-system -o yaml
 
 | 注意事项 | 说明 |
 |---------|-----|
-| etcd 节点数 | 推荐奇数个 (3, 5, 7)，容忍 (n-1)/2 个故障 |
+| etcd 节点数 | 推荐奇数个 (3, 5, 7)，容忍 (n-1)/2 个问题 |
 | 仲裁要求 | etcd 写操作需要多数节点同意 |
 | 时钟同步 | 所有节点必须时钟同步 (NTP) |
 | 网络延迟 | etcd 对网络延迟敏感，建议 <10ms |
@@ -244,7 +244,7 @@ kubectl get endpoints kube-scheduler -n kube-system -o yaml
 
 ## 解决方案与风险控制
 
-### etcd 集群故障
+### etcd 集群问题
 
 #### 场景：etcd 无 Leader
 
@@ -268,10 +268,10 @@ done
 # 3. 检查网络分区
 # 从各节点 ping 其他节点
 
-# 4. 如果是少数节点故障，等待自动选主
+# 4. 如果是少数节点问题，等待自动选主
 # etcd 会在心跳超时后自动选举
 
-# 5. 如果多数节点故障，需要从备份恢复
+# 5. 如果多数节点问题，需要从备份恢复
 # 参见备份恢复章节
 
 # 6. 检查 etcd 日志
@@ -283,9 +283,9 @@ journalctl -u etcd --tail=100
 #### 场景：etcd 成员故障恢复
 
 ```bash
-# 场景: 一个 etcd 成员永久故障，需要替换
+# 场景: 一个 etcd 成员永久问题，需要替换
 
-# 1. 移除故障成员
+# 1. 移除问题成员
 etcdctl member remove <member-id>
 
 # 2. 在新节点上准备 etcd
@@ -410,10 +410,10 @@ kubectl get pods -n kube-system
 
 ### 控制平面故障恢复
 
-#### 场景：单 Master 节点故障
+#### 场景：单 Master 节点问题
 
 ```bash
-# 1. 检查故障节点状态
+# 1. 检查问题节点状态
 kubectl get nodes
 
 # 2. 如果节点可恢复
@@ -436,7 +436,7 @@ kubeadm join <lb-endpoint>:6443 \
   --certificate-key <cert-key>
 ```
 
-#### 场景：所有 Master 故障后恢复
+#### 场景：所有 Master 问题后恢复
 
 ```bash
 # 最严重的情况: 所有 Master 都不可用
@@ -457,7 +457,7 @@ kubectl get nodes
 # 5. 逐个恢复其他 Master 节点
 ```
 
-### 负载均衡器故障
+### 负载均衡器问题
 
 #### 场景：检查和修复 LB
 
@@ -524,7 +524,7 @@ kubectl get lease -n kube-system
 echo -e "\n--- 证书状态 ---"
 kubeadm certs check-expiration
 
-# 6. 模拟故障 (可选，谨慎!)
+# 6. 模拟问题 (可选，谨慎!)
 # kubectl drain <master-1> --ignore-daemonsets
 # systemctl stop kubelet (on master-1)
 

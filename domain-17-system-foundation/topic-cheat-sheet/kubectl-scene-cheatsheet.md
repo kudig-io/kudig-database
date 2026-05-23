@@ -38,11 +38,11 @@ created: "2026-05-23"
 # kubectl 场景速查卡
 
 > **文档类型**: 速查卡 | **版本**: K8s 1.28-1.33 | **最后更新**: 2026-05
-> **使用场景**: on-call 工程师按故障场景快速查找 kubectl 命令（非按资源类型）
+> **使用场景**: on-call 工程师按问题场景快速查找 kubectl 命令（非按资源类型）
 
 ---
 
-## 1. 节点故障场景
+## 1. 节点问题场景
 
 ### 节点 NotReady / Unknown
 
@@ -86,7 +86,7 @@ kubectl uncordon <node-name>                        # 解封节点
 
 ---
 
-## 2. Pod 故障场景
+## 2. Pod 问题场景
 
 ### Pod Pending（调度失败）
 
@@ -156,7 +156,7 @@ kubectl run test --image=curlimages/curl --restart=Never -it -- sh  # 调试网�
 
 ---
 
-## 3. 网络故障场景
+## 3. 网络问题场景
 
 ### [[Service|Service]] 无 Endpoints / 503
 
@@ -234,7 +234,7 @@ cilium status                                      # 查看 Cilium 连接状态
 
 ---
 
-## 4. 控制平面故障场景
+## 4. 控制平面问题场景
 
 ### API Server 无法访问
 
@@ -299,7 +299,7 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 alarm disarm  # 解除�
 
 ---
 
-## 5. 存储故障场景
+## 5. 存储问题场景
 
 ### PVC Pending（绑定失败）
 
@@ -509,7 +509,7 @@ domain: cheatsheet
 type: quick-reference
 tags: [kubectl, cheatsheet, scenario-based, quick-reference, oncall, hands-on, k8s-1.28-1.33]
 intent_queries:
-  - "Pod 故障怎么快速排查"
+  - "Pod 问题怎么快速排查"
   - "Service 无 Endpoints 怎么处理"
   - "节点 NotReady 怎么修复"
   - "PVC 挂载失败怎么办"

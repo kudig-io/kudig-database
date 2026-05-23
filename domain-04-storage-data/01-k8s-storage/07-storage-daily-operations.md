@@ -566,7 +566,7 @@ echo "=========================================="
 <!-- chunk: 应急处理流程 -->
 ## 应急处理流程
 
-### 存储故障应急响应
+### 存储问题应急响应
 
 ```bash
 #!/bin/bash
@@ -617,7 +617,7 @@ handle_mount_failure() {
 }
 
 handle_csi_down() {
-  echo "处理CSI驱动故障..."
+  echo "处理CSI驱动问题..."
   # 1. 重启CSI Pod
   kubectl delete pods -n kube-system -l app=csi-driver
   # 2. 检查节点插件
@@ -653,10 +653,10 @@ emergency_response
 - [ ] 检查节点存储状态：`kubectl describe node <node-name>`
 
 ### ⚡ 应急措施
-- [ ] 隔离故障应用：暂停相关Deployment
+- [ ] 隔离问题应用：暂停相关Deployment
 - [ ] 数据保护：立即创建快照备份
 - [ ] 降级处理：切换到备用存储方案
-- [ ] 通知相关人员：发送故障告警
+- [ ] 通知相关人员：发送问题告警
 
 ### 📈 根因分析
 - [ ] 检查云服务商状态面板

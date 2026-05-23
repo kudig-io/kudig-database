@@ -277,7 +277,7 @@ groups:
       summary: "Ceph集群状态异常"
       description: "集群健康状态码 {{ $value }}"
 
-  # OSD故障
+  # OSD问题
   - alert: CephOSDDown
     expr: ceph_osd_up == 0
     for: 2m
@@ -330,7 +330,7 @@ docker run -d \
 
 ```bash
 # 默认 EC 配置: 数据块4 + 校验块4
-# 可容忍 4 块盘故障
+# 可容忍 4 块盘问题
 ```
 
 #<!-- chunk: MinIO 客户端 -->## MinIO 客户端

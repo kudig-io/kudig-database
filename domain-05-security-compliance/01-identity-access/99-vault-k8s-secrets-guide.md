@@ -957,7 +957,7 @@ spec:
 | 事件 | 严重程度 | 响应时间 | 操作 |
 |:---|:---|:---|:---|
 | Vault 密封 | Critical | < 15min | 检查 Auto-unseal，手动 unseal |
-| Raft 仲裁丢失 | Critical | < 15min | 检查节点状态，替换故障节点 |
+| Raft 仲裁丢失 | Critical | < 15min | 检查节点状态，替换问题节点 |
 | 审计日志失败 | High | < 1h | 检查审计设备配置，恢复日志 |
 | 密钥泄露 | Critical | < 30min | 轮换密钥，撤销相关 Token |
 | Token 续租失败 | Medium | < 4h | 检查 Vault 状态和应用日志 |

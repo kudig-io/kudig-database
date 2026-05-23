@@ -766,8 +766,8 @@ subjects:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-<!-- chunk: 故障排除与调试 -->
-## 故障排除与调试
+<!-- chunk: 问题排除与调试 -->
+## 问题排除与调试
 
 ### 多集群诊断工具
 

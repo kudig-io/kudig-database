@@ -43,7 +43,7 @@ created: "2026-05-23"
 ## 核心概念/原理
 
 - **CSI 驱动集成**：卷健康监控依赖于 CSI 驱动在控制器端和/或节点端支持的健康监控功能。
-- **异常检测**：驱动通过查询底层存储系统，发现卷的异常状态（如磁盘故障、连接断开、存储阵列告警等）。
+- **异常检测**：驱动通过查询底层存储系统，发现卷的异常状态（如磁盘问题、连接断开、存储阵列告警等）。
 - **事件报告**：检测到的异常以 Kubernetes Event 的形式报告到受影响的资源上。
 
 ## 关键机制或特性
@@ -53,7 +53,7 @@ created: "2026-05-23"
 1. **External Health Monitor Controller**
    - 运行在控制平面，监控 CSI 卷的异常状态。
    - 当检测到异常时，在相关的 PVC 上报告 Event。
-   - 支持节点故障监控（`enable-node-watcher=true`）：检测到节点故障时，会在使用该节点上 PVC 的 PVC 对象上报告 Event，提示 Pod 位于故障节点上。
+   - 支持节点问题监控（`enable-node-watcher=true`）：检测到节点问题时，会在使用该节点上 PVC 的 PVC 对象上报告 Event，提示 Pod 位于问题节点上。
 
 2. **[[kubelet|Kubelet]]（节点端）**
    - 当 CSI 驱动支持节点端的卷健康监控时，kubelet 会在检测到异常后在每个使用该 PVC 的 Pod 上报告 Event。
@@ -68,8 +68,8 @@ created: "2026-05-23"
 
 ## 使用场景
 
-- **存储故障告警**：当底层存储阵列或云盘出现异常时，及时在 PVC/Pod 上产生事件，触发告警系统通知运维人员。
-- **节点故障感知**：存储节点宕机或网络隔离时，通过节点故障监控快速识别受影响的应用和数据卷。
+- **存储问题告警**：当底层存储阵列或云盘出现异常时，及时在 PVC/Pod 上产生事件，触发告警系统通知运维人员。
+- **节点问题感知**：存储节点宕机或网络隔离时，通过节点问题监控快速识别受影响的应用和数据卷。
 - **可观测性集成**：将 `kubelet_volume_stats_health_status_abnormal` 指标接入 Prometheus/Grafana，实现存储健康的可视化监控。
 
 ## 最佳实践/注意事项
@@ -126,7 +126,7 @@ groups:
 
 | 症状 | 可能原因 | 排查步骤 |
 |------|----------|----------|
-| PVC 上出现 VolumeConditionAbnormal 事件 | 底层存储故障 | 检查存储系统告警；检查 CSI 驱动日志 |
+| PVC 上出现 VolumeConditionAbnormal 事件 | 底层存储问题 | 检查存储系统告警；检查 CSI 驱动日志 |
 | 指标 `kubelet_volume_stats_health_status_abnormal` = 1 | 卷不健康 | `kubectl describe pvc` 查看事件；联系存储管理员 |
 | 无健康监控事件产生 | CSI 驱动未实现健康监控 | 确认 CSI 驱动版本支持 Volume Health Monitoring |
 

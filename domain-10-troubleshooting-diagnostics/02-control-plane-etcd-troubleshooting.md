@@ -105,15 +105,15 @@ related_docs:
 <!-- chunk: 1. etcd 故障诊断总览 (etcd Diagnosis Overview) -->
 ## 1. etcd 故障诊断总览 (etcd Diagnosis Overview)
 
-### 1.1 etcd 常见故障类型
+### 1.1 etcd 常见问题类型
 
-| 故障类型 | 症状表现 | 影响范围 | 紧急程度 |
+| 问题类型 | 症状表现 | 影响范围 | 紧急程度 |
 |---------|---------|---------|---------|
 | **集群不可用** | etcdctl无法连接、leader选举失败 | 数据存储层瘫痪 | P0 - 紧急 |
 | **数据不一致** | 读写异常、key-value不一致 | 数据可靠性受损 | P0 - 紧急 |
 | **性能下降** | 读写延迟高、吞吐量下降 | API响应变慢 | P1 - 高 |
 | **磁盘空间不足** | no space left on device | 写入操作失败 | P1 - 高 |
-| **成员故障** | member unhealthy、follower lag | 集群稳定性下降 | P2 - 中 |
+| **成员问题** | member unhealthy、follower lag | 集群稳定性下降 | P2 - 中 |
 | **网络分区** | 网络隔离、脑裂现象 | 集群分裂风险 | P2 - 中 |
 
 ### 1.2 etcd 架构关键组件
@@ -295,7 +295,7 @@ etcdctl check perf --load="s"
 
 | 错误信息 | 可能原因 | 解决方案 |
 |---------|---------|---------|
-| `etcdserver: no leader` | 集群分裂/多数成员故障 | 恢复多数成员或重新初始化 |
+| `etcdserver: no leader` | 集群分裂/多数成员问题 | 恢复多数成员或重新初始化 |
 | `etcdserver: mvcc: database space exceeded` | 数据库空间满 | 清理旧版本(compact)+碎片整理 |
 | `etcdserver: walpb: crc mismatch` | WAL日志损坏 | 从快照恢复或重新初始化 |
 | `etcdserver: request timed out` | 网络延迟高/磁盘慢 | 检查网络和磁盘性能 |
@@ -378,7 +378,7 @@ systemctl start etcd
 
 # ========== 3. 成员替换 ==========
 
-# 移除故障成员
+# 移除问题成员
 ETCDCTL_API=3 etcdctl member remove <member-id>
 
 # 添加新成员
@@ -467,7 +467,7 @@ echo 'fs.file-max=1000000' >> /etc/sysctl.conf
 ### 5.1 单成员故障处理
 
 ```bash
-# ========== 1. 识别故障成员 ==========
+# ========== 1. 识别问题成员 ==========
 
 # 检查成员健康状态
 ETCDCTL_API=3 etcdctl endpoint health --cluster
@@ -475,12 +475,12 @@ ETCDCTL_API=3 etcdctl endpoint health --cluster
 # 查看详细状态
 ETCDCTL_API=3 etcdctl endpoint status --cluster -w table
 
-# ========== 2. 故障成员移除 ==========
+# ========== 2. 问题成员移除 ==========
 
-# 获取故障成员ID
+# 获取问题成员ID
 FAULTY_MEMBER_ID=$(ETCDCTL_API=3 etcdctl member list -w json | jq -r '.members[] | select(.name=="etcd-2") | .ID')
 
-# 移除故障成员
+# 移除问题成员
 ETCDCTL_API=3 etcdctl member remove $FAULTY_MEMBER_ID
 
 # ========== 3. 添加新成员 ==========
@@ -568,11 +568,11 @@ echo -e "\n=== 诊断完成 ==="
 
 ### 6.2 故障恢复优先级
 
-| 故障类型 | 恢复优先级 | 时间要求 | 操作步骤 |
+| 问题类型 | 恢复优先级 | 时间要求 | 操作步骤 |
 |---------|-----------|---------|---------|
 | **完全不可用** | 最高 | 30分钟内 | 1. 检查多数派 2. 恢复服务 3. 数据验证 |
 | **性能严重下降** | 高 | 2小时内 | 1. 性能分析 2. 资源扩容 3. 参数调优 |
-| **单成员故障** | 中 | 4小时内 | 1. 移除故障成员 2. 添加新成员 3. 数据同步 |
+| **单成员问题** | 中 | 4小时内 | 1. 移除问题成员 2. 添加新成员 3. 数据同步 |
 | **磁盘空间不足** | 高 | 1小时内 | 1. 紧急compact 2. 碎片整理 3. 扩容存储 |
 
 ---

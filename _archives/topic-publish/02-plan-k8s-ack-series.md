@@ -184,7 +184,7 @@ prerequisites:
 | 序号 | 帖子标题 | 对应来源 | 核心卖点 | 章节大纲 |
 |:---:|---------|---------|---------|---------|
 | 2.1 | **API Server 性能调优：APF 流量控制、并发限制、请求延迟优化** | domain-01-cluster-fundamentals/12,17,18 | 工单场景：API 慢/429 | ① APF（API Priority and Fairness）详解 ② 并发限制配置 ③ 请求延迟优化 ④ watch 机制优化 ⑤ 生产调优案例 |
-| 2.2 | **etcd 生产运维圣经：性能调优、备份恢复、集群维护** | domain-01-cluster-fundamentals/11,19 | 工单场景：etcd 异常 | ① etcd 性能基准与调优 ② 备份策略与自动化 ③ 恢复演练完整流程 ④ 集群扩缩容 ⑤ 常见故障与排障 |
+| 2.2 | **etcd 生产运维圣经：性能调优、备份恢复、集群维护** | domain-01-cluster-fundamentals/11,19 | 工单场景：etcd 异常 | ① etcd 性能基准与调优 ② 备份策略与自动化 ③ 恢复演练完整流程 ④ 集群扩缩容 ⑤ 常见问题与排障 |
 | 2.3 | **kube-scheduler 深度解析：调度算法、自定义调度、调度失败分析** | domain-01-cluster-fundamentals/20 | 工单场景：Pod Pending | ① 调度框架与扩展点 ② 谓词与优先级算法 ③ 自定义调度器开发 ④ 调度失败诊断 ⑤ 真实工单案例 |
 | 2.4 | **控制平面高可用与安全加固：HA 架构、TLS 配置、安全策略** | domain-01-cluster-fundamentals/03,04 | 企业级安全基线 | ① 多副本高可用架构 ② TLS 证书管理 ③ 安全加固清单 ④ 审计日志配置 ⑤ 安全基线检查 |
 | 2.5 | **控制平面升级策略：版本兼容、灰度升级、回滚自动化** | domain-01-cluster-fundamentals/07 + domain-01-cluster-fundamentals/07 | 工单场景：升级异常 | ① 版本兼容性矩阵 ② 灰度升级策略 ③ 回滚自动化方案 ④ 升级前检查清单 ⑤ 升级工单 TOP5 案例 |
@@ -260,8 +260,8 @@ prerequisites:
 | 序号 | 帖子标题 | 对应来源 | 核心卖点 | 章节大纲 |
 |:---:|---------|---------|---------|---------|
 | 7.1 | **Pod 全状态故障排查：Pending/CrashLoop/OOM/Evicted 完整诊断** | domain-10-troubleshooting-diagnostics/05-08 | 工单 TOP1 场景 | ① Pod 生命周期与状态机 ② Pending 根因分析（资源不足/亲和性/PV） ③ CrashLoopBackOff 排查链路 ④ OOMKilled 根因与调优 ⑤ Evicted 预防与处理 |
-| 7.2 | **Node NotReady 深度诊断：从 kubelet 到容器运行时的全链路排查** | domain-10-troubleshooting-diagnostics/06,09,35 | 工单 TOP2 场景 | ① Node 状态与条件 ② kubelet 故障排查 ③ 容器运行时诊断 ④ 资源压力排查 ⑤ 硬件故障关联 |
-| 7.3 | **网络故障三剑客：CNI/DNS/Service 连通性排查手册** | domain-10-troubleshooting-diagnostics/03,25,26,10 | 工单 TOP3 场景 | ① CNI 故障排查流程 ② DNS 解析问题诊断 ③ Service 连通性测试 ④ 完整排障决策树 ⑤ 15 个真实工单案例 |
+| 7.2 | **Node NotReady 深度诊断：从 kubelet 到容器运行时的全链路排查** | domain-10-troubleshooting-diagnostics/06,09,35 | 工单 TOP2 场景 | ① Node 状态与条件 ② kubelet 故障排查 ③ 容器运行时诊断 ④ 资源压力排查 ⑤ 硬件问题关联 |
+| 7.3 | **网络问题三剑客：CNI/DNS/Service 连通性排查手册** | domain-10-troubleshooting-diagnostics/03,25,26,10 | 工单 TOP3 场景 | ① CNI 故障排查流程 ② DNS 解析问题诊断 ③ Service 连通性测试 ④ 完整排障决策树 ⑤ 15 个真实工单案例 |
 | 7.4 | **控制平面故障排查：API Server / etcd 不可用的应急处理** | domain-10-troubleshooting-diagnostics/01,02 | 最高优先级工单 | ① API Server 不可用诊断 ② etcd 集群故障处理 ③ 控制平面恢复 SOP ④ 数据一致性验证 |
 | 7.5 | **存储故障排查：PVC Pending / 卷挂载失败 / CSI 驱动异常** | domain-10-troubleshooting-diagnostics/04,14 | 工单常见场景 | ① PVC Pending 排查流程 ② 卷挂载失败诊断 ③ CSI 驱动异常处理 ④ 数据安全与恢复 |
 | 7.6 | **安全故障排查：RBAC 权限不足 / 证书过期 / 准入控制拒绝** | domain-10-troubleshooting-diagnostics/12,13,32 | 安全类工单 | ① RBAC 权限诊断 ② 证书过期处理 ③ 准入控制拒绝分析 ④ 安全事件溯源 |
@@ -270,7 +270,7 @@ prerequisites:
 | 7.9 | **企业级监控告警体系建设与混沌工程测试** | domain-10-troubleshooting-diagnostics/39,42 | 高级运维能力 | ① 监控告警体系设计 ② 混沌工程工具选型 ③ 故障注入测试 ④ 弹性验证方法 |
 
 > **系列定位**：这是你的"杀手锏"系列。42 篇覆盖 K8S 运维全场景，3000+ 可执行命令，250+ 自动化脚本。分 2 周发布（**第 8-9 周**），每周 4-5 篇，保持热度。
-> **互动话题**："分享一个你印象最深的线上故障和排查过程？"
+> **互动话题**："分享一个你印象最深的线上问题和排查过程？"
 
 ---
 
@@ -295,7 +295,7 @@ prerequisites:
 | 9.1 | **FTA 故障树分析方法论：从贝尔实验室到 K8S 智能运维** | domain-10-troubleshooting-diagnostics/topic-fta/01-07 | 方法论创新 | ① FTA 起源与发展 ② 故障树构建方法 ③ 定性与定量分析 ④ K8S 场景适配 ⑤ 自动化故障树 |
 | 9.2 | **K8S 全量故障树：8 个顶事件、63 个底事件的完整分析手册** | domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis | 独家内容 | ① 8 大顶事件定义 ② 每个顶事件的故障树 ③ 63 个底事件分析 ④ 概率评估 ⑤ 预防措施 |
 | 9.3 | **FTA + AI Agent：故障树驱动的工单智能处理架构** | domain-10-troubleshooting-diagnostics/topic-fta/08-13 | AI+运维融合 | ① 故障树数字化 ② Agent 自动遍历 ③ 工单自动分类 ④ 修复建议生成 ⑤ 系统架构设计 |
-| 9.4 | **FEBM 法医鉴定循证方法论：从证据到结论的 K8S 故障取证** | domain-10-troubleshooting-diagnostics/topic-febm/01-03 | 方法论互补 | ① FEBM 原理与框架 ② 证据收集标准 ③ 分析链构建 ④ 结论推导规则 ⑤ K8S 场景应用 |
+| 9.4 | **FEBM 法医鉴定循证方法论：从证据到结论的 K8S 问题取证** | domain-10-troubleshooting-diagnostics/topic-febm/01-03 | 方法论互补 | ① FEBM 原理与框架 ② 证据收集标准 ③ 分析链构建 ④ 结论推导规则 ⑤ K8S 场景应用 |
 | 9.5 | **FTA vs FEBM：演绎法与归纳法在 K8S 运维中的适用性对比** | domain-10-troubleshooting-diagnostics/topic-febm/FTA-vs-FEBM + 总纲 | 学术深度 | ① 两种方法论的哲学基础 ② 适用场景分析 ③ 组合使用策略 ④ K8S 运维最佳实践 |
 
 > **系列定位**：最具差异化的系列，没有人在技术论坛写过这种方法论级别的内容。**第 11 周发布**。
@@ -311,7 +311,7 @@ prerequisites:
 | 10.2 | **工单智能体诊断 Skill 库：从症状到修复的自动化闭环** | topic-skills | AI 赋能运维 | ② Skill 架构设计 ② 6 个核心 Skill 详解 ③ 本地 Demo 部署 ④ 生产集成方案 |
 | 10.3 | **ACK 产品深度解析：Pro/Serverless/专有版架构与最佳实践** | domain-12-cloud-providers/04 | ACK 特色 | ① ACK 产品矩阵 ② Pro 版架构特点 ③ Serverless 模式 ④ 专有版场景 ⑤ 选型决策树 |
 | 10.4 | **云厂商 K8S 服务全景对比：ACK vs EKS vs GKE vs AKS** | domain-12-cloud-providers 全集 | 行业视野 | ① 13 家云厂商全景 ② 四大厂商深度对比 ③ 性能 benchmark ④ 成本对比 ⑤ 选型建议 |
-| 10.5 | **生产运维最佳实践：从架构设计到事件响应的完整 SRE 体系** | domain-11-production-operations 精选 | 体系化运维 | ① SRE 体系框架 ② 容量规划 ③ 变更管理 ④ 事件响应 SOP ⑤ 故障复盘模板 |
+| 10.5 | **生产运维最佳实践：从架构设计到事件响应的完整 SRE 体系** | domain-11-production-operations 精选 | 体系化运维 | ① SRE 体系框架 ② 容量规划 ③ 变更管理 ④ 事件响应 SOP ⑤ 问题复盘模板 |
 
 > **系列定位**：闭环收尾，从传统排障到智能运维到 ACK 产品力。**第 12 周发布**。
 > **互动话题**："AI Agent 处理工单，你觉得能替代多少人工？"
@@ -372,7 +372,7 @@ prerequisites:
 | 系列 | 名称 | 来源 | 篇数 | 发布周 | 核心卖点 |
 |:---:|:---|:---|:---:|:---:|:---|
 | 十四 | Docker + Linux + 底层原理 | domain-13-container-runtime/14/15/16 | 5 | W17 | 系统基础补全 |
-| 十五 | 硬件基础设施 | domain-17-system-foundation | 3 | W18 | 硬件故障根因 |
+| 十五 | 硬件基础设施 | domain-17-system-foundation | 3 | W18 | 硬件问题根因 |
 | 十六 | 企业级监控与日志 | domain-06-observability/21 | 4 | W19 | Prometheus/ELK/OTel |
 | 十七 | DevOps 工程化 | domain-03-networking-traffic/23/24 | 3 | W19 | Harbor/ArgoCD/Terraform |
 | 十八 | 服务网格与 API 网关 | domain-03-networking-traffic/40 | 4 | W20 | Istio/网关/Wasm |

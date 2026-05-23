@@ -298,14 +298,14 @@ spec:
 
 ```yaml
 # 故障注入类型
-- PodChaos: 杀 Pod、容器故障
+- PodChaos: 杀 Pod、容器问题
 - NetworkChaos: 延迟、丢包、分区、带宽限制
 - StressChaos: CPU/Memory 压力
 - IOChaos: 文件系统延迟/错误
-- DNSChaos: DNS 故障
+- DNSChaos: DNS 问题
 - HTTPChaos: HTTP  abort/delay
 - TimeChaos: 时间偏移
-- KernelChaos: 内核故障 (使用 bpf)
+- KernelChaos: 内核问题 (使用 bpf)
 ```
 
 ```yaml
@@ -334,7 +334,7 @@ spec:
 - 混沌工作流编排
 - ChaosHub: 预定义实验库
 - 与 Argo Workflows 集成
-- 故障分类与韧性评分
+- 问题分类与韧性评分
 
 ---
 

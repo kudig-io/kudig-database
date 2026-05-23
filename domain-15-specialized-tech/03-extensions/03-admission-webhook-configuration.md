@@ -522,7 +522,7 @@ func recordMetrics(webhookName, operation string, duration float64, allowed bool
 }
 ```
 
-### 5. 故障排除与调试
+### 5. 问题排除与调试
 
 ```yaml
 # debugging-config.yaml
@@ -1404,8 +1404,8 @@ func (cv *ComplexValidator) validateNamingConvention(cluster *databasev1beta1.My
 }
 ```
 
-<!-- chunk: Webhook监控与故障排除 -->
-## Webhook监控与故障排除
+<!-- chunk: Webhook监控与问题排除 -->
+## Webhook监控与问题排除
 
 ### 1. 监控指标
 
@@ -1454,7 +1454,7 @@ func init() {
 }
 ```
 
-### 2. 故障排除工具
+### 2. 问题排除工具
 
 ```bash
 #!/bin/bash

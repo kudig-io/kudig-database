@@ -94,15 +94,15 @@ tier: peripheral---
 
 | 编号 | 文档 | 描述 |
 |------|------|------|
-| 10 | [硬件故障排查方法论](10-hardware-troubleshooting-methodology.md) | 故障分类、诊断流程、工具体系、最佳实践 |
-| 11 | [CPU与内存故障排查](11-cpu-memory-troubleshooting.md) | MCE错误、ECC故障、温度问题、性能诊断 |
-| 12 | [存储设备故障排查](12-storage-troubleshooting.md) | HDD/SSD诊断、RAID故障、数据恢复 |
-| 13 | [网络硬件故障排查](13-network-hardware-troubleshooting.md) | 网卡诊断、光模块故障、性能问题 |
-| 14 | [电源与散热故障排查](14-power-thermal-troubleshooting.md) | PSU故障、温度监控、风扇诊断 |
+| 10 | [硬件故障排查方法论](10-hardware-troubleshooting-methodology.md) | 问题分类、诊断流程、工具体系、最佳实践 |
+| 11 | [CPU与内存故障排查](11-cpu-memory-troubleshooting.md) | MCE错误、ECC问题、温度问题、性能诊断 |
+| 12 | [存储设备故障排查](12-storage-troubleshooting.md) | HDD/SSD诊断、RAID问题、数据恢复 |
+| 13 | [网络硬件故障排查](13-network-hardware-troubleshooting.md) | 网卡诊断、光模块问题、性能问题 |
+| 14 | [电源与散热故障排查](14-power-thermal-troubleshooting.md) | PSU问题、温度监控、风扇诊断 |
 | 15 | [BIOS与固件故障排查](15-bios-firmware-troubleshooting.md) | POST错误、固件更新、CMOS问题 |
-| 16 | [Kubernetes硬件故障专题](16-kubernetes-hardware-troubleshooting.md) | K8s场景硬件故障、Node NotReady、PLEG、etcd磁盘 |
+| 16 | [Kubernetes硬件问题专题](16-kubernetes-hardware-troubleshooting.md) | K8s场景硬件问题、Node NotReady、PLEG、etcd磁盘 |
 | 17 | [硬件错误码速查大全](17-hardware-error-codes-reference.md) | MCE/SMART/IPMI/NVMe错误码详解、BIOS蜂鸣码 |
-| 18 | [硬件故障实战案例库](18-hardware-failure-case-studies.md) | 生产环境真实故障案例、诊断过程、解决方案 |
+| 18 | [硬件问题实战案例库](18-hardware-failure-case-studies.md) | 生产环境真实问题案例、诊断过程、解决方案 |
 
 ## 技术栈组件
 

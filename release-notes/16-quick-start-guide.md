@@ -87,7 +87,7 @@ python scripts/list_knowledge.py --profile $KUDIG_PROFILE
 | 你的情况 | 推荐 Profile |
 |----------|-------------|
 | 负责 CI/CD 流水线和部署自动化 | devops-engineer |
-| 负责监控、告警和故障响应 | sre |
+| 负责监控、告警和问题响应 | sre |
 | 负责 K8s 集群搭建和维护 | platform-engineer |
 | 负责云架构设计和技术选型 | cloud-architect |
 | 刚开始学 K8s | k8s-beginner |

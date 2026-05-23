@@ -563,7 +563,7 @@ evicting unhealthy pod web-2, reason: NodeShutdown
 ##<!-- chunk: 影响面说明 -->## 影响面说明
 
 - **自动恢复**: 控制器会删除不健康的 Pod 并重建
-- **节点故障**: 节点不可达或关闭时触发
+- **节点问题**: 节点不可达或关闭时触发
 - **PodDisruptionCondition**: 基于 Pod 的 DisruptionTarget condition 判断
 - **仅 StatefulSet**: 此特性目前仅适用于 StatefulSet
 

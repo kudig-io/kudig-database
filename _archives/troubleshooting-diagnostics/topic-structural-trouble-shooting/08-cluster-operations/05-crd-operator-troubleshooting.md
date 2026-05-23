@@ -386,7 +386,7 @@ kubectl logs -n <webhook-namespace> <webhook-pod>
 | 删除 CRD 会级联删除所有 CR | CRD 删除操作不可逆 | 高 |
 | 手动移除 Finalizer 可能导致资源泄露 | Finalizer 存在是有原因的 | 高 |
 | CRD 版本升级需要谨慎 | 可能导致数据迁移问题 | 中 |
-| Webhook 故障影响面广 | 可能阻塞整个资源类型的操作 | 高 |
+| Webhook 问题影响面广 | 可能阻塞整个资源类型的操作 | 高 |
 | Operator RBAC 变更需重启 | 权限变更后 Pod 需要重启 | 低 |
 
 ## 解决方案与风险控制

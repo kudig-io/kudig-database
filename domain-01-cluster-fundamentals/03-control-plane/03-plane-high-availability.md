@@ -721,12 +721,12 @@ etcd故障检测与切换流程:
 │  3. 自动恢复机制                                                        │
 │     ├── Raft协议自动重新选举Leader                                       │
 │     ├── 数据从healthy节点同步                                            │
-│     └── 故障节点自动重新加入集群                                         │
+│     └── 问题节点自动重新加入集群                                         │
 │                                                                          │
 │  4. 人工干预场景                                                        │
-│     ├── 磁盘故障                                                         │
+│     ├── 磁盘问题                                                         │
 │     ├── 网络分区                                                         │
-│     └── 硬件故障                                                         │
+│     └── 硬件问题                                                         │
 │                                                                          │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
@@ -798,7 +798,7 @@ fi
 │     └── 失去Lease时主动释放资源                                          │
 │                                                                          │
 │  3. 故障切换时间                                                        │
-│     ├── 检测到故障: < 15秒                                               │
+│     ├── 检测到问题: < 15秒                                               │
 │     ├── 新Leader选举: < 30秒                                             │
 │     └── 服务恢复: < 1分钟                                                │
 │                                                                          │
@@ -1032,14 +1032,14 @@ set -euo pipefail
 
 echo "=== Kubernetes Control Plane Failure Test ==="
 
-# 测试1: 单个API Server故障
+# 测试1: 单个API Server问题
 echo "Test 1: Simulating API Server failure..."
 kubectl drain control-1 --ignore-daemonsets --delete-emptydir-data
 sleep 60
 kubectl uncordon control-1
 echo "✓ API Server failover test completed"
 
-# 测试2: etcd节点故障
+# 测试2: etcd节点问题
 echo "Test 2: Simulating etcd node failure..."
 docker stop etcd-control-2
 sleep 120

@@ -373,7 +373,7 @@ flowchart TB
 flowchart TB
     subgraph Physical["物理世界"]
         DEV1["设备 A<br/>运行中"]
-        DEV2["设备 B<br/>故障"]
+        DEV2["设备 B<br/>问题"]
         DEV3["设备 C<br/>待机"]
     end
 

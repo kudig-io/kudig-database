@@ -136,7 +136,7 @@ k8s_versions:
 | Host 不可达 | `failed to find hostname in hostfile` | mpirun | Launcher 日志 |
 | 端口冲突 | `bind failed: Address already in use` | OpenMPI | Worker 日志 |
 
-#### 1.1.3 NCCL/Horovod 训练故障
+#### 1.1.3 NCCL/Horovod 训练问题
 
 | 现象 | 报错信息 | 报错来源 | 查看方式 |
 |------|----------|----------|----------|
@@ -218,7 +218,7 @@ MPI Operator 基于 Kubernetes CRD 实现 MPI 作业调度，其核心架构：
 ### 2.2 排查逻辑决策树
 
 ```
-MPI 训练故障
+MPI 训练问题
     ├── MPIJob 无法启动
     │   ├── Launcher/Worker Pod 未创建？
     │   │   ├── MPI Operator 未运行？──► 重启/部署 operator
@@ -752,7 +752,7 @@ groups:
 6. **检查点策略**：长时间训练配置定期 checkpoint，防止 Spot 实例中断导致全部重来
 7. **网络隔离**：为 MPI 通信分配独立网卡或 VLAN，避免与业务流量争用
 
-### 典型故障案例
+### 典型问题案例
 
 #### 案例一：多节点 NCCL all-reduce 超时
 

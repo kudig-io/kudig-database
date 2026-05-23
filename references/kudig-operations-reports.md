@@ -58,7 +58,7 @@ domain-03-networking-traffic 和 domain-04-storage-data 的内容增强计划。
 
 ## 结构化排查扩展
 
-topic-structural-trouble-shooting 的扩展计划，覆盖更多故障场景。
+topic-structural-trouble-shooting 的扩展计划，覆盖更多问题场景。
 
 ## Topic-Skills 增强
 

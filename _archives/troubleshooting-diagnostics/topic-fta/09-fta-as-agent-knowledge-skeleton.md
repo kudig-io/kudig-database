@@ -71,7 +71,7 @@ FTA 的逻辑门类型天然对应 Agent 的执行策略：
 │     ▼    ▼    ▼                                                      │
 │   Agent Agent Agent    ← 3个Agent并行执行诊断                        │
 │   检查   检查  检查                                                   │
-│   Pod   EP   Ingress   ← 谁先确认故障，谁触发修复                    │
+│   Pod   EP   Ingress   ← 谁先确认问题，谁触发修复                    │
 │                                                                       │
 │                                                                       │
 │  AND 门 → 顺序确认策略 (Sequential Verify)                           │
@@ -102,7 +102,7 @@ FTA 的逻辑门类型天然对应 Agent 的执行策略：
 │      ┌──────┼──────┐                                                 │
 │      ▼      ▼      ▼                                                 │
 │   Agent1  Agent2  Agent3   ← 3个Agent并行检查3个节点                 │
-│   节点1   节点2   节点3    ← 任意2个确认故障 → 判定集群降级           │
+│   节点1   节点2   节点3    ← 任意2个确认问题 → 判定集群降级           │
 │                                                                       │
 └───────────────────────────────────────────────────────────────────────┘
 ```
@@ -226,7 +226,7 @@ class FTADrivenAgent:
             results = parallel_execute(
                 [lambda c=c: self.diagnose(c) for c in sorted_children]
             )
-            # 返回第一个确认故障的路径
+            # 返回第一个确认问题的路径
             for r in results:
                 if r.is_faulty:
                     return r
@@ -237,7 +237,7 @@ class FTADrivenAgent:
                 result = self.diagnose(child)
                 if not result.is_faulty:
                     return DiagnosisResult(event, healthy=True)
-            # 所有子事件都故障
+            # 所有子事件都问题
             return DiagnosisResult(event, is_faulty=True, 
                                    children=children)
         
@@ -296,7 +296,7 @@ class FTADrivenAgent:
                              reason="所有修复方案均未生效")
     
     def learn(self, alert, diagnosis, result):
-        """从故障中学习，更新 FTA"""
+        """从问题中学习，更新 FTA"""
         record = {
             "timestamp": now(),
             "alert": alert,

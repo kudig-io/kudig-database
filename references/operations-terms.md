@@ -62,7 +62,7 @@ description: '**生产环境实战经验总结**: 基于万级节点集群容量
 description: '# 14 - 变更管理与发布策略'
 category: dictionary
 ta... |
-| **混沌工程（Chaos Engineering）** | Chaos Engineering | **混沌工程**是一种通过在生产环境中有控制地注入故障，来验证系统韧性和发现潜在弱点的工程实践 |
+| **混沌工程（Chaos Engineering）** | Chaos Engineering | **混沌工程**是一种通过在生产环境中有控制地注入问题，来验证系统韧性和发现潜在弱点的工程实践 |
 | **企业级运维最佳实践** | Enterprise Ops Practices | title: 企业级运维最佳实践
 description: '# 企业级运维最佳实践'
 category: dictionary
@@ -70,7 +70,7 @@ tags:
 - k8s
 ... |
 | **02 - Kubernetes 故障模式与根因分析字典** | Failure Patterns Analysis | title: 02 - Kubernetes 故障模式与根因分析字典
-description: '**本文定位**: 这是一份 Kubernetes 故障... |
+description: '**本文定位**: 这是一份 Kubernetes 问题... |
 | **FinOps 与成本优化** | Finops And Cost Optimization | 随着 Kubernetes 集群规模和复杂度的增长，云资源浪费已成为企业 IT 支出的主要痛点 |
 | **GreenOps 与碳感知计算** | Greenops And Carbon Aware Computing | 随着全球对气候变化的重视和企业 ESG（环境、社会与治理）合规要求的提升，**GreenOps** 正在成为云原生运维的重要分支 |
 | **12 - 生产事故管理与应急手册** | Incident Management Runbooks | title: 12 - 生产事故管理与应急手册
@@ -199,7 +199,7 @@ k8s_versions:
 
 ### 混沌工程（Chaos Engineering）
 
-**混沌工程**是一种通过在生产环境中有控制地注入故障，来验证系统韧性和发现潜在弱点的工程实践。其核心理念是"**主动制造故障，以避免被动承受故障**"。2026 年的 Kubernetes 生产环境中，混沌工程已成为 SRE 成熟度模型中的关键能力，主流工具包括 **Litmus、Chaos Mesh、Gremlin** 和 Netflix 开源的 **Chaos Monkey**。
+**混沌工程**是一种通过在生产环境中有控制地注入问题，来验证系统韧性和发现潜在弱点的工程实践。其核心理念是"**主动制造问题，以避免被动承受问题**"。2026 年的 Kubernetes 生产环境中，混沌工程已成为 SRE 成熟度模型中的关键能力，主流工具包括 **Litmus、Chaos Mesh、Gremlin** 和 Netflix 开源的 **Chaos Monkey**。
 
 > *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md`）*
 
@@ -250,7 +250,7 @@ k8s_versions:
 ### 02 - Kubernetes 故障模式与根因分析字典
 
 title: 02 - Kubernetes 故障模式与根因分析字典
-description: '**本文定位**: 这是一份 Kubernetes 故障分析的完整指南，涵盖故障分类、根因分析方法论、FMEA 分析、MTTR 优化、复盘流程和预防体系，帮助团队系统性地处理和预防故障。'
+description: '**本文定位**: 这是一份 Kubernetes 故障分析的完整指南，涵盖问题分类、根因分析方法论、FMEA 分析、MTTR 优化、复盘流程和预防体系，帮助团队系统性地处理和预防问题。'
 category: dictionary
 tags:
 - k8s

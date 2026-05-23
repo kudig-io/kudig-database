@@ -107,7 +107,7 @@ k8s_versions:
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/debug](https://kubernetes.io/docs/tasks/debug/)
 
-本文档从资深SRE运维专家视角，系统性地阐述Kubernetes生产环境故障排查的方法论、工具链和最佳实践，涵盖Pod、Node、网络、存储、控制平面等各组件的深度诊断技术，结合大规模集群运维经验，为企业构建标准化、自动化的故障响应体系提供完整指导。
+本文档从资深SRE运维专家视角，系统性地阐述Kubernetes生产环境故障排查的方法论、工具链和最佳实践，涵盖Pod、Node、网络、存储、控制平面等各组件的深度诊断技术，结合大规模集群运维经验，为企业构建标准化、自动化的问题响应体系提供完整指导。
 
 ---
 
@@ -171,7 +171,7 @@ k8s_versions:
 <!-- chunk: Pod故障排查 -->
 ## Pod故障排查
 
-### Pod状态机与故障映射
+### Pod状态机与问题映射
 
 ```yaml
 # Pod生命周期状态机
@@ -190,7 +190,7 @@ Pod状态流转:
 
 ### Pod Pending 深度排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **Pending - 资源不足** | CPU/Memory不足 | `kubectl describe pod`, `kubectl describe node` | - | 检查ResourceQuota，扩容节点池 | 配置Cluster Autoscaler，设置合理的resource requests |
 | **Pending - 调度约束** | nodeSelector/affinity无法满足 | `kubectl describe pod` 查看Events | v1.25+拓扑约束增强 | 检查节点标签，调整调度约束 | 使用preferredDuringScheduling替代required |
@@ -247,7 +247,7 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
 
 ### Pod CrashLoopBackOff 深度排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **启动即崩溃** | 应用代码异常 | `kubectl logs <pod> --previous` | - | 检查应用日志，修复代码bug | 本地测试，健壮的错误处理 |
 | **依赖服务不可用** | 启动依赖未满足 | `kubectl logs <pod>`, 检查Service状态 | v1.28 Native Sidecar | 使用init容器等待依赖，配置重试 | 依赖服务健康检查，就绪探针 |
@@ -311,7 +311,7 @@ kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{range .spec.containers[*]}
 
 ### Pod OOMKilled 深度排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **容器OOMKilled** | 内存超过limits | `kubectl describe pod`, 查看lastState.terminated.reason | v1.27就地Pod调整 | 增加memory limits，优化内存使用 | 压测确定内存需求，监控内存使用 |
 | **系统OOM** | 节点内存不足 | `dmesg \| grep -i oom`, `journalctl -k \| grep -i oom` | v1.26驱逐增强 | 驱逐Pod，扩容节点 | 配置系统预留资源，eviction-hard |
@@ -342,7 +342,7 @@ spec:
 
 ### Pod ImagePullBackOff 深度排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **镜像不存在** | tag错误/镜像已删除 | `kubectl describe pod`, Events | - | 检查镜像名称和tag，推送正确镜像 | CI/CD验证镜像存在，使用immutable tag |
 | **认证失败** | imagePullSecrets配置错误 | `kubectl describe pod`, `kubectl get secret` | - | 检查Secret内容，更新认证信息 | Secret自动轮换，使用ImagePullJob预热 |
@@ -393,7 +393,7 @@ fi
 
 ### Pod网络故障排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **Pod无法访问Service** | kube-proxy问题 | `kubectl exec <pod> -- nslookup kubernetes` | v1.29 IPVS增强 | 检查CoreDNS，kube-proxy状态 | 监控DNS解析延迟 |
 | **Pod间网络不通** | CNI问题 | `kubectl exec <pod> -- ping <pod-ip>` | v1.25双栈增强 | 检查CNI Pod状态，路由表 | CNI健康监控 |
@@ -419,17 +419,17 @@ NetworkUnavailable: # 节点网络配置不正确
 
 ### Node NotReady 深度排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **kubelet停止** | 进程崩溃/资源耗尽 | `systemctl status kubelet`, `journalctl -u kubelet` | - | 检查kubelet日志，重启kubelet | 监控kubelet进程，自动恢复 |
-| **节点网络断开** | 网络故障 | API Server端检查，节点无法SSH | - | 检查网络连通性，修复网络 | 多网卡冗余，网络监控 |
-| **容器运行时问题** | containerd/CRI-O故障 | `systemctl status containerd`, `crictl info` | v1.26 containerd 1.6+ | 重启容器运行时，检查磁盘空间 | 运行时健康监控 |
+| **节点网络断开** | 网络问题 | API Server端检查，节点无法SSH | - | 检查网络连通性，修复网络 | 多网卡冗余，网络监控 |
+| **容器运行时问题** | containerd/CRI-O问题 | `systemctl status containerd`, `crictl info` | v1.26 containerd 1.6+ | 重启容器运行时，检查磁盘空间 | 运行时健康监控 |
 | **证书过期** | kubelet证书过期 | `openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates` | v1.27证书轮换GA | 重新生成证书或配置自动轮换 | 证书过期告警，自动轮换 |
 | **磁盘满** | 根分区/数据分区满 | `df -h`, `du -sh /var/lib/kubelet/*` | v1.26驱逐增强 | 清理日志/镜像，扩容磁盘 | 磁盘使用监控告警 |
 | **内存耗尽** | 节点OOM | `dmesg \| grep -i oom`, `free -h` | - | 重启节点，驱逐Pod | 配置system-reserved |
-| **API Server不可达** | 控制平面故障 | 节点上`curl -k https://api-server:6443/healthz` | - | 检查API Server状态，网络 | API Server HA部署 |
+| **API Server不可达** | 控制平面问题 | 节点上`curl -k https://api-server:6443/healthz` | - | 检查API Server状态，网络 | API Server HA部署 |
 | **时钟不同步** | NTP问题 | `timedatectl`, `chronyc tracking` | - | 同步时间，配置NTP | NTP监控告警 |
-| **内核panic** | 内核bug/硬件故障 | `/var/log/kern.log`, `dmesg` | - | 分析crash dump，更新内核 | 内核版本管理，硬件监控 |
+| **内核panic** | 内核bug/硬件问题 | `/var/log/kern.log`, `dmesg` | - | 分析crash dump，更新内核 | 内核版本管理，硬件监控 |
 
 #### Node NotReady诊断脚本
 
@@ -544,7 +544,7 @@ EOF
 
 ### Service无法访问深度排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **ClusterIP无响应** | Endpoints为空 | `kubectl get endpoints <svc>` | - | 检查selector与Pod labels匹配 | Service监控，自动化测试 |
 | **Endpoints不健康** | Pod就绪探针失败 | `kubectl describe endpoints <svc>` | - | 修复Pod就绪探针 | 探针配置验证 |
@@ -593,7 +593,7 @@ echo "kubectl run test-conn --rm -it --image=curlimages/curl --restart=Never -- 
 
 ### DNS故障排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **DNS解析超时** | CoreDNS过载/Pod问题 | `kubectl exec <pod> -- nslookup kubernetes` | v1.28 DNS缓存增强 | 扩容CoreDNS，检查负载 | NodeLocal DNS Cache |
 | **解析错误域名** | CoreDNS配置错误 | `kubectl get cm coredns -n kube-system -o yaml` | - | 检查Corefile配置 | 配置变更审计 |
@@ -646,7 +646,7 @@ EOF
 
 ### NetworkPolicy排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **入站流量被阻断** | Ingress规则限制 | `kubectl get networkpolicy -n <ns> -o yaml` | v1.25+增强 | 添加允许的ingress规则 | NetworkPolicy测试 |
 | **出站流量被阻断** | Egress规则限制 | 同上 | - | 添加允许的egress规则 | 逐步收紧策略 |
@@ -680,9 +680,9 @@ spec:
 <!-- chunk: 存储故障排查 -->
 ## 存储故障排查
 
-### PVC/PV故障深度排查
+### PVC/PV问题深度排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **PVC Pending** | 无匹配PV/StorageClass问题 | `kubectl describe pvc <name>` | v1.29 CSI增强 | 检查StorageClass，创建PV | 配置默认StorageClass |
 | **PVC Pending - WaitForFirstConsumer** | 延迟绑定等待调度 | `kubectl describe pvc` | - | 创建使用该PVC的Pod | 理解VolumeBindingMode |
@@ -740,7 +740,7 @@ fi
 
 ### CSI驱动故障排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **provisioner Pod异常** | 资源不足/配置错误 | `kubectl logs <csi-provisioner>` | v1.29 CSI增强 | 检查provisioner日志 | provisioner监控 |
 | **attacher超时** | 云API问题 | `kubectl logs <csi-attacher>` | - | 检查云API权限/配额 | 云API监控 |
@@ -754,7 +754,7 @@ fi
 
 ### API Server故障排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **API Server 5xx错误** | etcd问题/过载 | `kubectl get --raw /healthz/etcd` | v1.29审计增强 | 检查etcd健康，增加限流 | API Server HA，APF限流 |
 | **请求超时** | API Server过载 | `kubectl logs kube-apiserver` | - | 检查负载，扩容，APF配置 | 合理的APF配置 |
@@ -802,7 +802,7 @@ kubectl api-resources --verbs=list --namespaced=false | head -20
 
 ### etcd故障排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **etcd存储满** | 数据增长/压缩失败 | `etcdctl endpoint status --write-out=table` | - | 压缩+碎片整理，增加配额 | 定期压缩，存储监控 |
 | **Leader频繁切换** | 网络问题/磁盘慢 | `etcdctl endpoint status`, etcd日志 | - | 检查网络延迟，使用SSD | 独立etcd节点，网络优化 |
@@ -864,7 +864,7 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 
 ### Controller Manager故障排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **控制器未工作** | Leader选举失败 | `kubectl get lease -n kube-system` | - | 检查Leader选举，重启 | HA部署 |
 | **Deployment不更新** | Deployment控制器问题 | `kubectl logs kube-controller-manager` | - | 检查控制器日志 | 控制器监控 |
@@ -878,7 +878,7 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 
 ### 调度失败深度排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **0/N nodes available** | 资源不足 | `kubectl describe pod`, 节点资源 | - | 扩容节点，调整资源请求 | Cluster Autoscaler |
 | **node(s) had taint** | Taint不容忍 | `kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.taints}{"\n"}{end}'` | - | 添加Toleration或移除Taint | Taint策略文档化 |
@@ -945,9 +945,9 @@ fi
 <!-- chunk: 应用部署故障排查 -->
 ## 应用部署故障排查
 
-### Deployment滚动更新故障
+### Deployment滚动更新问题
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **更新卡住** | 新Pod无法就绪 | `kubectl rollout status deployment/<name>` | - | 检查新Pod状态，回滚 | 就绪探针配置 |
 | **更新超时** | progressDeadlineSeconds | `kubectl describe deployment` | - | 增加超时或修复问题 | 合理的超时设置 |
@@ -998,7 +998,7 @@ kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$DEPLOY_NA
 
 ### HPA故障排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **HPA不扩缩** | Metrics不可用 | `kubectl describe hpa`, `kubectl top pods` | v1.23 HPA v2 GA | 检查Metrics Server | Metrics监控 |
 | **Targets unknown** | 自定义指标问题 | `kubectl get --raw "/apis/metrics.k8s.io/v1beta1/pods"` | v1.25 ContainerResource | 检查metrics-adapter | 指标可用性测试 |
@@ -1012,7 +1012,7 @@ kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$DEPLOY_NA
 
 ### RBAC故障排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **Forbidden错误** | 权限不足 | `kubectl auth can-i <verb> <resource> --as <user>` | - | 添加适当的RBAC规则 | 最小权限原则 |
 | **ServiceAccount无权限** | SA未绑定角色 | `kubectl get rolebinding,clusterrolebinding -A \| grep <sa>` | - | 创建RoleBinding | SA权限审计 |
@@ -1060,7 +1060,7 @@ done
 
 ### Pod Security Standards故障排查
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **Pod被拒绝创建** | PSS违规 | `kubectl describe pod`, Events | v1.25 PSS GA | 检查namespace的PSS标签 | 逐步收紧PSS级别 |
 | **privileged容器被拒** | baseline/restricted限制 | 检查securityContext配置 | - | 调整securityContext或PSS级别 | 应用安全加固 |
@@ -1124,9 +1124,9 @@ kubectl get events -A --sort-by='.count' | tail -20
 <!-- chunk: 集群升级故障排查 -->
 ## 集群升级故障排查
 
-### 升级故障矩阵
+### 升级问题矩阵
 
-| 故障症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
+| 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **控制平面升级失败** | kubeadm/组件问题 | `kubeadm upgrade plan`, 组件日志 | - | 检查兼容性，逐步升级 | 升级前备份 |
 | **节点升级失败** | kubelet/运行时问题 | `systemctl status kubelet`, `journalctl -u kubelet` | - | 检查kubelet日志 | 节点升级SOP |
@@ -1626,11 +1626,11 @@ spec:
 <!-- chunk: 生产SOP流程 -->
 ## 生产SOP流程
 
-### 故障响应流程
+### 问题响应流程
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                           故障响应SOP流程                                    │
+│                           问题响应SOP流程                                    │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  1. 告警触发 ─────────────────────────────────────────────────────────────  │
@@ -1656,7 +1656,7 @@ spec:
 │     │  - 变更审计                                                           │
 │     ▼                                                                       │
 │  6. 复盘与预防                                                               │
-│     │  - 故障报告                                                           │
+│     │  - 问题报告                                                           │
 │     │  - 监控补充                                                           │
 │     │  - 预防措施                                                           │
 │                                                                             │
@@ -1667,18 +1667,18 @@ spec:
 
 | 场景 | 快速恢复操作 | 预估恢复时间 |
 |:---|:---|:---:|
-| **单Pod故障** | `kubectl delete pod <pod>` 触发重建 | <1min |
+| **单Pod问题** | `kubectl delete pod <pod>` 触发重建 | <1min |
 | **Deployment异常** | `kubectl rollout undo deployment/<name>` | <5min |
 | **节点NotReady** | `kubectl drain/uncordon` 或重启kubelet | 5-15min |
-| **控制平面故障** | 重启控制平面组件，或切换到备节点 | 5-30min |
-| **etcd故障** | 从备份恢复，或剔除故障成员 | 10-60min |
-| **网络全局故障** | 重启CNI，检查配置 | 5-30min |
-| **存储挂载故障** | 重启CSI驱动，检查后端存储 | 10-30min |
+| **控制平面问题** | 重启控制平面组件，或切换到备节点 | 5-30min |
+| **etcd问题** | 从备份恢复，或剔除问题成员 | 10-60min |
+| **网络全局问题** | 重启CNI，检查配置 | 5-30min |
+| **存储挂载问题** | 重启CSI驱动，检查后端存储 | 10-30min |
 
 ### 值班工程师快速参考
 
 ```bash
-# ========== 紧急故障快速诊断命令 ==========
+# ========== 紧急问题快速诊断命令 ==========
 
 # 1. 快速检查集群状态
 kubectl cluster-info && kubectl get nodes && kubectl get pods -A --field-selector=status.phase!=Running,status.phase!=Succeeded | head -20
@@ -1724,7 +1724,7 @@ kubectl uncordon <node>
 - 优先恢复服务，再分析根因
 - 变更必须可回滚
 - 所有操作必须有审计记录
-- 故障必须复盘并预防
+- 问题必须复盘并预防
 
 ---
 

@@ -346,7 +346,7 @@ rate(DCGM_FI_PROF_NVLINK_RX_BYTES[1m]) / 1024 / 1024 / 1024
 #### 错误检测
 
 ```promql
-# XID错误(硬件故障)
+# XID错误(硬件问题)
 increase(DCGM_FI_DEV_XID_ERRORS[1h]) > 0
 
 # ECC单比特错误趋势
@@ -446,7 +446,7 @@ spec:
               温度达到 {{ $value }}℃ (阈值: 85℃)
               
               可能原因:
-              - 散热故障
+              - 散热问题
               - 环境温度过高
               - 负载过大
               
@@ -535,7 +535,7 @@ spec:
               
               可能原因:
               - 分布式训练通信不频繁
-              - NVLink硬件故障
+              - NVLink硬件问题
               - 训练框架配置问题
         
         - alert: GPUThrottling

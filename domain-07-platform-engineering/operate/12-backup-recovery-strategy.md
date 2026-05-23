@@ -207,7 +207,7 @@ financial_institution_dr_solution:
       
   recovery_process:
     failover_sequence:
-      1: "健康检查确认主集群故障"
+      1: "健康检查确认主集群问题"
       2: "启动备用集群资源"
       3: "恢复etcd集群状态"
       4: "部署控制平面组件"

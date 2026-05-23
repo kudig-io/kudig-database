@@ -782,13 +782,13 @@ k8s_versions:
 - **功能清单**:
   - 查看节点状态和信息
   - 管理节点角色（manager/worker）
-  - 节点维护和故障排除
+  - 节点维护和问题排除
 - **注意事项**:
   - 仅在 Swarm 模式下可用
   - manager 节点具有集群管理权限
 - **安全生产风险**:
   - manager 节点权限过高
-  - 节点故障可能影响整个集群
+  - 节点问题可能影响整个集群
 
 #<!-- chunk: docker service -->## docker service
 - **命令用途**: 管理 Swarm 服务

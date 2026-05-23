@@ -5,6 +5,7 @@ tags: ["domain-11", "变更管理", "SRE", "运维", "灰度发布", "回滚", "
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+status: reviewed
 ---
 
 # 变更管理指南

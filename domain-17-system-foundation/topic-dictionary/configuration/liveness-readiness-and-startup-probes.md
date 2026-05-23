@@ -79,7 +79,7 @@ created: "2026-05-23"
 ## 最佳实践/注意事项
 
 - **合理设置初始延迟**：避免探针过早开始检测导致误杀，尤其是启动慢的应用应优先使用 Startup Probe。
-- **Liveness 探针应简单快速**：Liveness 探针失败会导致容器重启，探测逻辑应尽量简单，避免因依赖外部服务故障而误重启。
+- **Liveness 探针应简单快速**：Liveness 探针失败会导致容器重启，探测逻辑应尽量简单，避免因依赖外部服务问题而误重启。
 - **Readiness 探针可检查依赖**：Readiness 探针可以检查应用依赖的外部服务状态，临时不可用时优雅地摘除流量而非重启容器。
 - **避免探针重叠副作用**：确保探针请求不会影响业务数据或状态，例如避免 HTTP 探针触发写操作。
 - **配置适当的超时和阈值**：根据应用实际响应时间调整 `timeoutSeconds` 和 `failureThreshold`，减少误报。
@@ -227,7 +227,7 @@ spec:
 | Pod Running 但无流量 | Readiness 探针失败，Pod 被从 Endpoints 摘除 | `kubectl describe pod` 查看 Readiness 事件；检查探针端点 |
 | 探针超时（Unhealthy: timeout） | `timeoutSeconds` 过短或应用响应慢 | 增大 `timeoutSeconds`；优化探针端点响应时间 |
 | exec 探针失败但手动执行成功 | 容器内 PATH 或权限不同 | 使用绝对路径；确认脚本有执行权限 |
-| 外部依赖故障导致 Liveness 失败引发重启雪崩 | Liveness 探针检查了外部依赖 | Liveness 只检查应用自身状态；外部依赖检查放在 Readiness |
+| 外部依赖问题导致 Liveness 失败引发重启雪崩 | Liveness 探针检查了外部依赖 | Liveness 只检查应用自身状态；外部依赖检查放在 Readiness |
 
 ## 生产检查清单
 

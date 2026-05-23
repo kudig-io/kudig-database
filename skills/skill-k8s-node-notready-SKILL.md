@@ -40,7 +40,7 @@ created: "2026-05-23"
 | RC-006 | 节点与 apiserver 网络不通 | 中 | 网络修复(手动) | HIGH |
 | RC-007 | kubelet 客户端证书过期 | 中 | REM-008 证书轮转 | HIGH |
 | RC-008 | PLEG 不健康 | 中 | REM-004 重启 containerd | MEDIUM |
-| RC-009 | 内核故障/硬件异常 | 低 | REM-007 替换节点 | HIGH |
+| RC-009 | 内核问题/硬件异常 | 低 | REM-007 替换节点 | HIGH |
 | RC-010 | NTP 时间不同步 | 低 | 修复 NTP(手动) | MEDIUM |
 | RC-011 | CNI 插件异常 | 中 | 重启 CNI Pod(手动) | MEDIUM |
 | RC-012 | 节点被手动 cordon | 低 | REM-001 uncordon | LOW |

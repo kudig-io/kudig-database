@@ -55,7 +55,7 @@ created: "2026-05-23"
 
 ## 1. 概述
 
-Helm Chart 部署与回滚故障诊断 是 [[Kubernetes|Kubernetes]] 生产环境中 **P2 级故障**。
+Helm Chart 部署与回滚故障诊断 是 [[Kubernetes|Kubernetes]] 生产环境中 **P2 级问题**。
 
 **典型触发条件**:
 - [请补充典型症状]
@@ -79,7 +79,7 @@ Helm Chart 部署与回滚故障诊断 是 [[Kubernetes|Kubernetes]] 生产环�
 ## 3. 快速检查（< 2 分钟）
 
 ```bash
-# 1. 确认故障范围
+# 1. 确认问题范围
 # [请补充快速检查命令]
 ```
 

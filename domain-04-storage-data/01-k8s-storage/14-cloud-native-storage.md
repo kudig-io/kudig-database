@@ -562,8 +562,8 @@ perform_dr_drill() {
   echo "策略: $DR_POLICY"
   echo "时间: $(date)"
   
-  # 1. 模拟主站点故障
-  echo "步骤1: 模拟主站点故障"
+  # 1. 模拟主站点问题
+  echo "步骤1: 模拟主站点问题"
   kubectl cordon primary-site-nodes
   
   # 2. 验证自动故障转移
@@ -597,7 +597,7 @@ perform_dr_drill() {
 
 <!-- chunk: 详细步骤 -->
 ## 详细步骤
-1. 主站点故障模拟: 完成
+1. 主站点问题模拟: 完成
 2. 故障转移验证: $FAILOVER_STATUS
 3. 数据一致性检查: 完成
 4. 主站点恢复: 完成
@@ -842,7 +842,7 @@ spec:
 
 ### Level 4 - 专业级 (Intelligent)
 - ✅ AI驱动的容量预测
-- ✅ 自动故障预防
+- ✅ 自动问题预防
 - ✅ 智能性能调优
 - ✅ 全面的成本治理
 - ✅ 自适应安全防护

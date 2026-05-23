@@ -206,7 +206,7 @@ namespace-controller 工作流程:
 | **Finalizer 未移除** | `NamespaceFinalizersRemaining` | 查看 `metadata.finalizers` | CR 的 controller 已删除或异常 |
 | **PV 保护** | Namespace 卡住 | 检查 PVC/PV 状态 | PVC 仍绑定 PV，无法删除 |
 | **Webhook 拦截** | 删除请求被拒绝 | 查看 kube-apiserver 日志 | ValidatingWebhook 阻止删除 |
-| **API Server 故障** | 删除请求超时 | 检查 API Server 健康 | etcd 故障或网络问题 |
+| **API Server 问题** | 删除请求超时 | 检查 API Server 健康 | etcd 问题或网络问题 |
 
 ---
 
@@ -1205,7 +1205,7 @@ API Server 在执行资源配额检查时遇到错误，导致无法判断是否
 **触发条件**:
 - ResourceQuota 对象配置错误
 - API Server 无法连接到 quota-controller
-- etcd 故障导致配额状态无法读取
+- etcd 问题导致配额状态无法读取
 
 ##<!-- chunk: 典型事件消息 -->## 典型事件消息
 
@@ -1247,7 +1247,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep quota
 |:---|:---|
 | ResourceQuota 配置错误 | 修正 ResourceQuota 的 `spec.hard` 字段 |
 | API Server 不可达 | 检查 API Server 和网络连接 |
-| etcd 故障 | 检查 etcd 集群健康状态 |
+| etcd 问题 | 检查 etcd 集群健康状态 |
 
 ---
 
@@ -1512,7 +1512,7 @@ resources:
 - ✅ `kubectl rollout` 滚动更新
 
 **PDB 不保护的场景** (Involuntary):
-- ❌ 节点故障 (NodeNotReady)
+- ❌ 节点问题 (NodeNotReady)
 - ❌ 节点资源不足导致的驱逐 (Evicted)
 - ❌ OOMKilled
 - ❌ 网络分区
@@ -1641,7 +1641,7 @@ kubectl edit pdb my-app-pdb -n my-namespace
 
 ##<!-- chunk: 事件含义 -->## 事件含义
 
-disruption-controller 无法计算 PDB 保护的 Pod 期望数量，通常是因为 PDB 配置错误或控制器故障。
+disruption-controller 无法计算 PDB 保护的 Pod 期望数量，通常是因为 PDB 配置错误或控制器问题。
 
 ##<!-- chunk: 典型事件消息 -->## 典型事件消息
 
@@ -1677,7 +1677,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep disrupti
 |:---|:---|
 | PDB 配置错误 | 修正 PDB 的 minAvailable/maxUnavailable 字段 |
 | Pod 没有控制器 | 确保 Pod 由 Deployment/StatefulSet 管理 |
-| controller-manager 故障 | 重启 kube-controller-manager |
+| controller-manager 问题 | 重启 kube-controller-manager |
 
 ---
 

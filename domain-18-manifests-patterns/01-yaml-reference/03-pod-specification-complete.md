@@ -2530,7 +2530,7 @@ containers:
 - 探针端点轻量级(避免复杂逻辑)
 
 ❌ **避免**:
-- readinessProbe 检查外部依赖(会导致级联故障)
+- readinessProbe 检查外部依赖(会导致级联问题)
 - livenessProbe 超时过短(误杀健康容器)
 - 探针 initialDelaySeconds 过短(容器未启动完成)
 

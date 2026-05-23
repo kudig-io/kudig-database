@@ -38,7 +38,7 @@ trigger_keywords:
 - certificate mismatch
 - cross-namespace route denied
 - 路由失败
-- 网关故障
+- 网关问题
 - 证书不匹配
 - 后端不可达
 - Ingress 无法访问
@@ -71,12 +71,12 @@ created: "2026-05-23"
 
 ## 1. 概述
 
-Ingress 和 Gateway API 是 [[Kubernetes|Kubernetes]] 集群中**南北向流量**的核心入口点。当 Ingress Controller 或 Gateway 发生故障时，所有通过该入口的外部请求都将受到影响，可能导致用户无法访问应用服务、API 调用失败、TLS 连接中断等严重后果。在微服务架构中，Ingress/Gateway 故障的**爆炸半径**往往覆盖多个服务，是高优先级的生产事件。
+Ingress 和 Gateway API 是 [[Kubernetes|Kubernetes]] 集群中**南北向流量**的核心入口点。当 Ingress Controller 或 Gateway 发生问题时，所有通过该入口的外部请求都将受到影响，可能导致用户无法访问应用服务、API 调用失败、TLS 连接中断等严重后果。在微服务架构中，Ingress/Gateway 问题的**爆炸半径**往往覆盖多个服务，是高优先级的生产事件。
 
 ### 典型触发场景
 
 1. **HTTP 错误响应**: 外部请求返回 404/502/503 等 HTTP 错误，表明路由规则、后端服务或 Ingress Controller 本身存在问题
-2. **TLS/SSL 故障**: 证书过期、证书不匹配、TLS 握手失败，导致 HTTPS 请求无法建立安全连接
+2. **TLS/SSL 问题**: 证书过期、证书不匹配、TLS 握手失败，导致 HTTPS 请求无法建立安全连接
 3. **Ingress Controller 异常**: Nginx/Traefik/ALB/Envoy Gateway Controller Pod 崩溃、OOM、配置重载失败
 4. **Gateway API 绑定失败**: HTTPRoute/GRPCRoute/TLSRoute 未被 Gateway 接受，或跨命名空间权限缺失
 5. **后端不可达**: Service 无 Ready Endpoints、后端 Pod 健康检查失败、upstream 连接超时
@@ -156,8 +156,8 @@ Ingress 和 Gateway API 是 [[Kubernetes|Kubernetes]] 集群中**南北向流量
 | Service 配置错误（selector 不匹配） | SKILL-NET-001 | Service 层面问题，虽然表现为 502/503 |
 | DNS 解析失败（域名无法解析到 Ingress IP） | SKILL-NET-002 | DNS 问题，不在 Ingress 控制范围 |
 | 云 LB 健康检查失败 | 云厂商文档 | 云厂商 LoadBalancer 层面问题 |
-| 集群 CNI 网络故障导致 Pod 间无法通信 | SKILL-NET-001 | 底层网络故障，影响范围超出 Ingress |
-| Ingress Controller 证书 Secret 问题但节点 NotReady | SKILL-NODE-001 | 节点故障是更根本的问题 |
+| 集群 CNI 网络问题导致 Pod 间无法通信 | SKILL-NET-001 | 底层网络问题，影响范围超出 Ingress |
+| Ingress Controller 证书 Secret 问题但节点 NotReady | SKILL-NODE-001 | 节点问题是更根本的问题 |
 
 ---
 
@@ -165,7 +165,7 @@ Ingress 和 Gateway API 是 [[Kubernetes|Kubernetes]] 集群中**南北向流量
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径：
+按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 确认 Ingress/Gateway 资源状态 (15s)
 ```bash
@@ -200,7 +200,7 @@ curl -sk -o /dev/null -w "%{http_code}" https://<domain>/
 > - HTTP 200/2xx → 服务可用，可能是特定路径问题
 > - HTTP 404 → 路由规则问题，检查 Ingress/HTTPRoute 配置
 > - HTTP 502/503 → 后端不可达或 Controller 问题
-> - HTTP 000 或连接失败 → 网络层面故障或 Controller 完全不可用
+> - HTTP 000 或连接失败 → 网络层面问题或 Controller 完全不可用
 
 **Step T3**: Ingress Controller 状态检查 (30s)
 ```bash
@@ -226,18 +226,18 @@ kubectl get pods -n envoy-gateway-system -l control-plane=envoy-gateway
 | 条件 | 级别 | 说明 | SLA 要求 |
 |------|------|------|---------|
 | Ingress Controller 完全不可用（所有 replica down） **或** 生产域名全部 502/503 | **P0** | 所有通过该 Ingress Controller 的流量中断 | 立即响应，15min 内恢复或降级方案 |
-| 多个关键服务的 Ingress 故障 **或** Gateway 状态非 Ready | **P1** | 部分服务不可用，影响多个业务线 | 15min 内响应，30min 内修复 |
-| 单个非关键服务的 Ingress 故障 **或** 单个 HTTPRoute 未被接受 | **P2** | 单个服务受影响，影响范围有限 | 30min 内响应，2h 内修复 |
+| 多个关键服务的 Ingress 问题 **或** Gateway 状态非 Ready | **P1** | 部分服务不可用，影响多个业务线 | 15min 内响应，30min 内修复 |
+| 单个非关键服务的 Ingress 问题 **或** 单个 HTTPRoute 未被接受 | **P2** | 单个服务受影响，影响范围有限 | 30min 内响应，2h 内修复 |
 | TLS 证书即将过期 **或** 注解配置优化需求 | **P3** | 预防性维护，当前服务正常 | 4h 内处理 |
 
 ### 3.3 立即升级触发条件
 
 以下任一条件满足时，**跳过诊断流程，立即升级至人工 SRE / 值班工程师**：
 
-- **全站故障**: 所有通过 Ingress 暴露的服务都返回 5xx 错误
+- **全站问题**: 所有通过 Ingress 暴露的服务都返回 5xx 错误
 - **Ingress Controller 无法恢复**: Controller Pod 反复 CrashLoop 超过 5 分钟
 - **安全事件**: 发现异常证书、疑似证书泄露、或 TLS 配置被篡改
-- **云 LB 故障**: 云厂商 LoadBalancer 状态异常（需联系云厂商支持）
+- **云 LB 问题**: 云厂商 LoadBalancer 状态异常（需联系云厂商支持）
 - **数据面完全中断**: 所有请求超时，无任何 HTTP 响应
 
 > **升级消息模板**: 参见 Section 8.2
@@ -1208,7 +1208,7 @@ kubectl logs -n ingress-nginx deploy/ingress-nginx-controller --tail=20 --since=
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 
 - [ ] Ingress ADDRESS 列有正确的 IP/Hostname
 - [ ] Gateway 状态为 Ready/Programmed
@@ -1240,7 +1240,7 @@ kubectl logs -n ingress-nginx deploy/ingress-nginx-controller --tail=20 --since=
 |------|------|---------|
 | **诊断超时** | 诊断工作流执行超过 **15 分钟**未能确认根因 | Phase 2 结束后仍无明确根因 |
 | **修复失败** | 同一修复操作执行 **2 次**仍未通过后置验证 | REM-xxx 执行后验证失败 |
-| **严重性升级** | 初始分级为 P2 但影响面扩大（如更多服务受影响） | 诊断过程中故障扩散 |
+| **严重性升级** | 初始分级为 P2 但影响面扩大（如更多服务受影响） | 诊断过程中问题扩散 |
 | **未知根因** | 完成所有诊断步骤但无法匹配任何已知根因 | 所有 RC 均已排除 |
 | **安全事件** | 发现证书泄露迹象、异常配置变更 | 任何阶段发现安全异常 |
 | **Controller 无法恢复** | Controller Pod 反复 CrashLoop >5min | REM-009 执行后仍无法恢复 |
@@ -1248,9 +1248,9 @@ kubectl logs -n ingress-nginx deploy/ingress-nginx-controller --tail=20 --since=
 ### 8.2 升级消息模板
 
 ```
-【{severity}】Ingress/Gateway 路由故障 - {cluster_name}
+【{severity}】Ingress/Gateway 路由问题 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: {domain} 通过 {ingress_name} 路由的请求返回 {http_status}，持续 {duration}
+- 问题概述: {domain} 通过 {ingress_name} 路由的请求返回 {http_status}，持续 {duration}
 - 影响范围:
   - 受影响域名: {affected_domains}
   - 受影响服务: {affected_services}
@@ -1358,8 +1358,8 @@ kubectl logs -n ingress-nginx deploy/ingress-nginx-controller --tail=20 --since=
 | 误诊场景 | 表面现象 | 实际根因 | 避免方法 |
 |---------|---------|---------|---------|
 | **后端 Pod 问题误判为 Ingress 配置问题** | 请求返回 502，初步判断为 Ingress 规则错误 | 后端 Pod 正在重启或不健康，Service Endpoints 为空或不稳定 | 先执行 D2.3 检查 Endpoints 状态。502 首先检查后端可用性，再检查 Ingress 配置 |
-| **云 LB 问题误判为 Controller 故障** | 外部完全无法访问，Controller 日志正常 | 云厂商 LoadBalancer 健康检查失败或安全组配置问题 | 在 D1.6 外部测试失败但 Controller 日志正常时，检查云控制台 LB 状态 |
-| **DNS 缓存导致的"故障"** | 修改后访问仍返回旧响应 | DNS 记录 TTL 未过期，客户端使用缓存的旧 IP | 使用 `curl -H "Host: domain" http://ingress-ip` 直接测试，绕过 DNS |
+| **云 LB 问题误判为 Controller 问题** | 外部完全无法访问，Controller 日志正常 | 云厂商 LoadBalancer 健康检查失败或安全组配置问题 | 在 D1.6 外部测试失败但 Controller 日志正常时，检查云控制台 LB 状态 |
+| **DNS 缓存导致的"问题"** | 修改后访问仍返回旧响应 | DNS 记录 TTL 未过期，客户端使用缓存的旧 IP | 使用 `curl -H "Host: domain" http://ingress-ip` 直接测试，绕过 DNS |
 | **CDN/WAF 层问题误判为 Ingress 问题** | HTTPS 请求失败，Ingress 看似正常 | CDN 或 WAF 层的 SSL 证书或规则问题 | 确认请求路径：客户端 → CDN → LB → Ingress → Pod。逐层排查 |
 | **pathType 配置不当** | Path 看似正确但匹配不到 | `pathType: Exact` 但请求带 trailing slash，或反之 | D2.2 检查 Nginx 实际生成的 location 配置，确认 pathType 与实际请求匹配 |
 | **跨命名空间引用被拒绝** | HTTPRoute 状态 Accepted=False，误认为 Gateway 配置问题 | 缺少 ReferenceGrant 授权跨命名空间引用 | D1.5 检查 HTTPRoute 状态的具体 Reason，`RefNotPermitted` 明确指向权限问题 |

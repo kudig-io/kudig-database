@@ -137,7 +137,7 @@ flowchart TD
   OR0 --> CAT_CNI["B. Calico CNI 配置加载失败"]
   OR0 --> CAT_FELIX["C. Felix/Bird BGP 会话异常"]
   OR0 --> CAT_NETPOL["D. NetworkPolicy 不生效"]
-  OR0 --> CAT_TUNNEL["E. IPIP/VXLAN 隧道故障"]
+  OR0 --> CAT_TUNNEL["E. IPIP/VXLAN 隧道问题"]
   OR0 --> CAT_IPAM["F. IPAM 地址耗尽/冲突"]
   OR0 --> CAT_TYPHA["G. Felix-Typha 通信异常"]
 

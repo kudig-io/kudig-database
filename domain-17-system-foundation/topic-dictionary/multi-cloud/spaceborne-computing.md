@@ -82,12 +82,12 @@ LEO 卫星星座
 - **单节点 K3s**：卫星上通常只有一个控制平面/工作节点合一的实例
 - **容器镜像精简**：使用 Distroless 或 Alpine 基础镜像，将镜像体积压缩到 MB 级
 - **不可变基础设施**： root 文件系统只读，所有配置通过 ConfigMap 和 Secret 注入
-- **Graceful Degradation**：当辐射导致某个 Pod 异常时，Kubernetes 自动重启；若节点整体故障，则降级到安全模式
+- **Graceful Degradation**：当辐射导致某个 Pod 异常时，Kubernetes 自动重启；若节点整体问题，则降级到安全模式
 
 ### 容错与辐射加固
 
 - **EDAC（Error Detection and Correction）**：使用带 ECC 的内存检测和纠正位翻转
-- **三模冗余（TMR）**：关键计算通过三个独立实例投票表决，屏蔽单点故障
+- **三模冗余（TMR）**：关键计算通过三个独立实例投票表决，屏蔽单点问题
 - **Watchdog 机制**：若 K3s 或主应用长时间无响应，硬件 Watchdog 强制重启整个计算单元
 - **Checkpoint 与状态恢复**：定期将关键状态持久化到辐射加固的存储器中
 

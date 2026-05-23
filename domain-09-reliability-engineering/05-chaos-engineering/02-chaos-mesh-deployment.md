@@ -96,14 +96,14 @@ roleRef:
 
 | 类型 | 说明 | 安全级别 |
 |------|------|---------|
-| PodChaos | Pod 故障/终止/容器重启 | 中 |
+| PodChaos | Pod 问题/终止/容器重启 | 中 |
 | NetworkChaos | 网络延迟/丢包/分区 | 高 |
-| IOChaos | 文件系统 I/O 故障 | 中 |
+| IOChaos | 文件系统 I/O 问题 | 中 |
 | StressChaos | CPU/内存压力测试 | 中 |
-| DNSChaos | DNS 故障 | 高 |
+| DNSChaos | DNS 问题 | 高 |
 | TimeChaos | 时间偏移 | 低 |
 | HTTPChaos | HTTP 请求/响应篡改 | 高 |
-| JVMChaos | JVM 级别故障 | 中 |
+| JVMChaos | JVM 级别问题 | 中 |
 
 ## 相关
 

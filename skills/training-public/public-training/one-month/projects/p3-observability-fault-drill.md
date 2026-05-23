@@ -92,7 +92,7 @@ related_topics:
 - 监控: Prometheus + Grafana Dashboard
 - 日志: Loki + Promtail
 - 告警: Alertmanager + PrometheusRule
-- 故障演练: 注入 3 类故障并按 FTA/FEBM 方法排查
+- 故障演练: 注入 3 类问题并按 FTA/FEBM 方法排查
 
 ### 前置条件
 
@@ -121,7 +121,7 @@ related_topics:
 
 ### FTA/FEBM 排查方法论
 
-**FTA（故障树分析）** 将故障分解为层次化的因果关系，从顶层故障向下追溯可能的根本原因。
+**FTA（故障树分析）** 将问题分解为层次化的因果关系，从顶层问题向下追溯可能的根本原因。
 
 **FEBM（取证循证方法）** 强调先收集证据（日志、指标、事件），然后基于证据形成假设，再通过实验验证假设。
 
@@ -328,10 +328,10 @@ kubectl get all -n fault-drill
 
 ### Step 5: 故障注入与排查 (45min)
 
-#### 故障 1: OOMKilled
+#### 问题 1: OOMKilled
 
 ```bash
-# 注入故障：创建一个内存使用超过 limits 的 Pod
+# 注入问题：创建一个内存使用超过 limits 的 Pod
 cat > oom-inject.yaml << 'EOF'
 apiVersion: v1
 kind: Pod
@@ -376,10 +376,10 @@ kubectl describe pod oom-inject -n fault-drill
 # 5. 修复: 增加内存限制到 256Mi
 ```
 
-#### 故障 2: CrashLoopBackOff
+#### 问题 2: CrashLoopBackOff
 
 ```bash
-# 注入故障：创建一个启动即退出的容器
+# 注入问题：创建一个启动即退出的容器
 kubectl run crash-app --image=busybox -n fault-drill -- /bin/sh -c "echo 'Error: something went wrong' >&2 && exit 1"
 # 预期输出: pod/crash-app created
 
@@ -408,10 +408,10 @@ kubectl describe pod crash-app -n fault-drill | grep -A 10 "Last State"
 # 6. 修复: 修正容器启动命令
 ```
 
-#### 故障 3: Service 不可访问
+#### 问题 3: Service 不可访问
 
 ```bash
-# 注入故障：删除 Endpoints（模拟 selector 不匹配）
+# 注入问题：删除 Endpoints（模拟 selector 不匹配）
 kubectl delete endpoints app -n fault-drill
 # 预期输出: endpoints "app" deleted
 
@@ -448,9 +448,9 @@ kubectl expose deployment app --port=80 -n fault-drill
 使用 FEBM 方法记录排查过程：
 
 ```markdown
-## 故障报告: OOMKilled
+## 问题报告: OOMKilled
 
-### 1. 故障现象
+### 1. 问题现象
 - **发现时间**: 2024-01-15 10:30
 - **发现方式**: Prometheus PodOOMKilled 告警
 - **症状**: Pod crash-app 处于 CrashLoopBackOff 状态
@@ -539,9 +539,9 @@ spec:
 
 Loki 使用 LogQL 查询语言。基本语法：`{label="value"}`（日志流选择器），例如 `{namespace="fault-drill", pod="oom-inject"}`。支持过滤：`{app="nginx"} |= "error"`（包含 error），`{app="nginx"} |~ "error|warn"`（正则匹配），`{app="nginx"} != "debug"`（不包含 debug）。
 
-### Q3: 如何模拟网络故障？
+### Q3: 如何模拟网络问题？
 
-可以使用 `tc`（Traffic Control）工具在节点上注入网络延迟和丢包。或者使用 Chaos Mesh / Litmus 等混沌工程工具来注入更复杂的故障场景（如 Pod 删除、网络分区、IO 故障等）。
+可以使用 `tc`（Traffic Control）工具在节点上注入网络延迟和丢包。或者使用 Chaos Mesh / Litmus 等混沌工程工具来注入更复杂的问题场景（如 Pod 删除、网络分区、IO 问题等）。
 
 ### Q4: 告警太多怎么降噪？
 
@@ -554,7 +554,7 @@ Loki 使用 LogQL 查询语言。基本语法：`{label="value"}`（日志流选
 - [ ] 告警规则配置成功并已加载到 Prometheus
 - [ ] Grafana Dashboard 可以展示监控数据
 - [ ] Loki 可以查询日志
-- [ ] 成功注入 3 类故障（OOMKilled、CrashLoopBackOff、Service 不可达）
+- [ ] 成功注入 3 类问题（OOMKilled、CrashLoopBackOff、Service 不可达）
 - [ ] 按 FTA/FEBM 方法完成排查
 - [ ] 完成故障排查报告
 
@@ -567,7 +567,7 @@ Loki 使用 LogQL 查询语言。基本语法：`{label="value"}`（日志流选
 | 监控 | 指标采集和可视化 | Prometheus + Grafana |
 | 日志 | 日志收集和查询 | Loki + Promtail |
 | 告警 | 异常检测和通知 | PrometheusRule + Alertmanager |
-| 故障注入 | 模拟生产故障 | kubectl + stress |
+| 故障注入 | 模拟生产问题 | kubectl + stress |
 | 排查 | 结构化故障分析 | FTA/FEBM 方法论 |
 
 ---

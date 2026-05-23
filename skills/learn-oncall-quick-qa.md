@@ -330,7 +330,7 @@ nameserver 应该是集群 DNS 的 IP（通常是 10.96.0.10）。
 
 【一句话总结】
 
-"DNS 故障不要慌，CoreDNS 先检查，再看 /etc/resolv.conf！"
+"DNS 问题不要慌，CoreDNS 先检查，再看 /etc/resolv.conf！"
 
 还有问题吗？
 "
@@ -1150,7 +1150,7 @@ kubectl rollout restart deployment/coredns -n kube-system
 ```
 【需要升级人工的情况】
 
-1. 生产环境故障（P0/P1 级别）
+1. 生产环境问题（P0/P1 级别）
 2. 需要执行危险操作（删除资源、修改配置）
 3. 涉及数据丢失风险
 4. 问题超过 3 轮对话仍未解决

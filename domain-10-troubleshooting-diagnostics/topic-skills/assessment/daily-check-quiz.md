@@ -107,11 +107,11 @@ E. Pod 使用了 hostNetwork 模式
 
 **题目**：你执行 `kubectl get nodes` 看到所有节点状态都是 Ready，但执行 `kubectl get pods -A | grep -v Running` 发现大量 Pod 处于 Evicted 状态。Evicted 的原因最可能是？
 
-A. 调度器故障
-B. API Server 故障
+A. 调度器问题
+B. API Server 问题
 C. 节点资源压力导致 kubelet 驱逐 Pod
 D. 网络分区
-E. etcd 故障
+E. etcd 问题
 
 **涉及知识点**：
 - Kubelet Eviction

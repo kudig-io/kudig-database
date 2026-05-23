@@ -67,14 +67,14 @@ created: "2026-05-23"
 
 ## 1. 概述
 
-**CrashLoopBackOff** 和 **OOMKilled** 是生产环境中最常见的 Pod 级别故障，占 [[Kubernetes|Kubernetes]] 工单总量的 30-40%。
+**CrashLoopBackOff** 和 **OOMKilled** 是生产环境中最常见的 Pod 级别问题，占 [[Kubernetes|Kubernetes]] 工单总量的 30-40%。
 
 - **CrashLoopBackOff**: 容器反复退出（exit），[[kubelet|kubelet]] 以指数退避（exponential backoff, 10s → 20s → 40s → ... → 5min cap）策略不断尝试重启容器。这是一个**状态描述**，不是根因本身——真正的问题隐藏在容器的 exit code 和日志中。
 - **OOMKilled**: Linux 内核的 OOM Killer 终止了容器进程（发送 SIGKILL, exit code 137），通常由容器实际内存用量超过 cgroup memory limit 触发。在 Kubernetes 中，这意味着 `resources.limits.memory` 设置不足或应用存在内存泄漏。
 
 > **版本差异说明 / Version Notes**:
 > - v1.28+ **Ephemeral Containers GA**: `kubectl debug` 可直接使用，无需启用 feature gate
-> - v1.28+ **Native Sidecar Containers** (beta, v1.32 GA): init container 类型为 `restartPolicy: Always` 时，sidecar 容器与主容器并行运行。sidecar 崩溃不会导致 Pod 进入 CrashLoopBackOff，但可能隐藏 sidecar 自身的故障
+> - v1.28+ **Native Sidecar Containers** (beta, v1.32 GA): init container 类型为 `restartPolicy: Always` 时，sidecar 容器与主容器并行运行。sidecar 崩溃不会导致 Pod 进入 CrashLoopBackOff，但可能隐藏 sidecar 自身的问题
 > - v1.25+ **cgroup v2 默认启用**: 内存统计使用 `memory.current` 而非 `memory.usage_in_bytes`，`kubectl top pod` 显示的内存值可能与 cgroup v1 环境有差异
 > - v1.29+ **PodDisruptionConditions** (GA): OOMKilled 的 Pod 会记录 `DisruptionTarget` condition，可用于关联分析
 
@@ -154,7 +154,7 @@ Agent 可通过以下常见工单描述进行 NLP 意图匹配：
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径（Blast Radius）：
+按顺序执行以下命令，判断问题爆炸半径（Blast Radius）：
 
 **Step T1**: 统计受影响 Pod 数量和分布范围
 
@@ -164,8 +164,8 @@ kubectl get pods -n <namespace> -l <label-selector> -o wide
 ```
 
 > **判断规则**:
-> - 如果只有单个 Pod 受影响 → 单点故障，影响可控
-> - 如果同一 Deployment 的多个/全部副本受影响 → Deployment 级别故障
+> - 如果只有单个 Pod 受影响 → 单点问题，影响可控
+> - 如果同一 Deployment 的多个/全部副本受影响 → Deployment 级别问题
 > - 如果跨多个 Deployment/Namespace 出现相同症状 → 可能是集群级别问题（共享依赖、节点问题）
 
 **Step T2**: 确认服务关键性等级
@@ -202,14 +202,14 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
 
 > **判断规则**:
 > - 如果最近有新 revision → 很可能是部署变更引入的问题，回滚是快速修复路径
-> - 如果无最近变更 → 可能是运行时问题（内存泄漏、依赖故障等）
+> - 如果无最近变更 → 可能是运行时问题（内存泄漏、依赖问题等）
 
 ### 3.2 严重性分级
 
 | 条件 | 级别 | 说明 | SLA |
 |------|------|------|-----|
 | 生产环境 + customer-facing + 所有副本 CrashLoop / OOMKilled + 无健康副本 | **P1** | 服务完全不可用，直接影响用户 | 响应 5min, 修复 30min |
-| 生产环境 + 部分副本 CrashLoop / OOMKilled + 剩余副本承载能力不足 | **P2** | 服务降级（Degraded），容量不足可能导致级联故障 | 响应 15min, 修复 1h |
+| 生产环境 + 部分副本 CrashLoop / OOMKilled + 剩余副本承载能力不足 | **P2** | 服务降级（Degraded），容量不足可能导致级联问题 | 响应 15min, 修复 1h |
 | 生产环境 + 部分副本问题 + 剩余副本可承载流量 | **P2** | 服务有冗余但风险存在 | 响应 15min, 修复 2h |
 | 非关键服务 / 开发测试环境 / 单个 Pod 影响 | **P3** | 影响有限，可在工作时间内处理 | 响应 1h, 修复 4h |
 
@@ -859,7 +859,7 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
 
 #### REM-003: 删除并重建异常 Pod
 
-- **适用根因**: 一次性临时故障（如依赖服务短暂不可用后已恢复）
+- **适用根因**: 一次性临时问题（如依赖服务短暂不可用后已恢复）
 - **前置检查**:
   ```bash
   # 确认 Pod 由 Deployment/StatefulSet 管理（会自动重建）
@@ -1218,7 +1218,7 @@ kubectl get pods -n <namespace> -l <label-selector> -w
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 
 - [ ] Pod 状态为 Running 且 READY，持续 5 分钟无重启
 - [ ] 容器内存使用率低于 limits 的 80%（如果是 OOM 场景）
@@ -1257,7 +1257,7 @@ kubectl get pods -n <namespace> -l <label-selector> -w
 ```
 【{severity}】Pod CrashLoopBackOff/OOMKilled - {cluster_name}/{namespace}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: {affected_pod_count} 个 Pod 处于 {status}，Exit Code: {exit_code}，Reason: {reason}
+- 问题概述: {affected_pod_count} 个 Pod 处于 {status}，Exit Code: {exit_code}，Reason: {reason}
 - 影响范围: Deployment {deployment_name}，{ready_replicas}/{total_replicas} 副本可用
 - 服务影响: {customer_facing ? "客户流量受影响" : "内部服务降级"}
 - 已完成诊断: {completed_diagnostic_steps}
@@ -1455,10 +1455,10 @@ Native Sidecar Containers 改变了 Init Container 的诊断逻辑：
 |------|---------|------|---------|
 | RC-002 内存 limits 过低 | `kubectl patch deployment <deploy> -n <ns> --type='json' -p='[{"op":"replace","path":"/spec/template/spec/containers/0/resources/limits/memory","value":"<new-limit>"}]'` | 🟢 低风险（触发滚动更新） | `kubectl rollout status deployment/<deploy> -n <ns> && kubectl top pod <pod> -n <ns>` |
 | RC-006 ConfigMap/Secret 缺失 | `kubectl create configmap <name> -n <ns> --from-literal=<key>=<value>` 或修正 Deployment 引用 | 🟢 低风险 | `kubectl rollout status deployment/<deploy> -n <ns>` |
-| RC-003 临时故障 | `kubectl delete pod <pod> -n <ns>`（Controller 自动重建） | 🟢 低风险 | `kubectl get pods -n <ns> -l <label-selector>` |
+| RC-003 临时问题 | `kubectl delete pod <pod> -n <ns>`（Controller 自动重建） | 🟢 低风险 | `kubectl get pods -n <ns> -l <label-selector>` |
 | RC-004 命令/镜像错误 | `kubectl set image deployment/<deploy> -n <ns> <container>=<new-image>:<tag>` | 🟡 中风险（触发滚动更新） | `kubectl rollout status deployment/<deploy> -n <ns> --timeout=180s` |
 | RC-008 探针过于激进 | `kubectl patch deployment <deploy> -n <ns> --type='json' -p='[{"op":"add","path":"/spec/template/spec/containers/0/startupProbe",...}]'` | 🟡 中风险（触发 Pod 重建） | `kubectl get pods -n <ns> -l <label-selector>` |
-| RC-006 批量临时故障 | `kubectl scale deployment/<deploy> -n <ns> --replicas=<new-count>` | 🟡 中风险（占用更多集群资源） | `kubectl get deployment/<deploy> -n <ns>` |
+| RC-006 批量临时问题 | `kubectl scale deployment/<deploy> -n <ns> --replicas=<new-count>` | 🟡 中风险（占用更多集群资源） | `kubectl get deployment/<deploy> -n <ns>` |
 | RC-003 内存泄漏（应用层） | 短期扩容 limits + 长期应用修复 | 🟡 中风险（掩盖根因） | `kubectl top pod <pod> -n <ns> --containers` |
 
 ### danger_operations 高风险操作标注

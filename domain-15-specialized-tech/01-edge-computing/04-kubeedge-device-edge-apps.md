@@ -247,9 +247,9 @@ spec:
           accessMode: ReadWrite
           defaultValue: false
           
-    # 故障代码
+    # 问题代码
     - name: fault-code
-      description: "当前故障代码"
+      description: "当前问题代码"
       type:
         int:
           accessMode: ReadOnly

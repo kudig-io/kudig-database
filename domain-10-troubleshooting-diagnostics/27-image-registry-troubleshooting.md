@@ -68,9 +68,9 @@ created: "2026-05-23"
 <!-- chunk: 1. 镜像仓库故障诊断总览 (Image Registry Diagnosis Overview) -->
 ## 1. 镜像仓库故障诊断总览 (Image Registry Diagnosis Overview)
 
-### 1.1 常见故障现象分类
+### 1.1 常见问题现象分类
 
-| 故障类型 | 症状表现 | 影响范围 | 紧急程度 |
+| 问题类型 | 症状表现 | 影响范围 | 紧急程度 |
 |---------|---------|---------|---------|
 | **镜像拉取失败** | ImagePullBackOff | 应用部署中断 | P0 - 紧急 |
 | **认证失败** | 401 Unauthorized | 私有仓库访问拒绝 | P0 - 紧急 |

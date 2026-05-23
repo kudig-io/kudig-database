@@ -700,7 +700,7 @@ limits:
 | **DefaultTolerationSeconds** | Mutating | 为 Pod 的 `node.kubernetes.io/not-ready` 和 `node.kubernetes.io/unreachable` 容忍设置默认的 `tolerationSeconds`（默认 300s） | ✅ 默认启用 | 生产环境建议配合 PodDisruptionBudget 使用，避免默认驱逐时间过长 |
 | **ExtendedResourceToleration** | Mutating | 当 Pod 请求扩展资源（如 GPU、FPGA）时，自动为 Pod 添加对应设备插件设置的污点容忍 | ✅ 推荐启用 | 简化 GPU/特殊硬件调度配置；确保设备插件正确设置了污点 |
 | **LimitRanger** | Mutating | 为 Namespace 中未设置资源限制的 Pod/Container 应用 LimitRange 默认值和最小/最大限制 | ✅ **必须启用** | 需提前在 Namespace 中创建 LimitRange 对象；否则无限制效果 |
-| **MutatingAdmissionWebhook** | Mutating | 调用外部 Mutating Webhook（如 Istio 注入、Secret 注入）进行动态变更 | ✅ **必须启用** | 外部 Webhook 故障可能导致所有 Pod 创建失败；建议设置 `failurePolicy: Ignore` 用于非关键注入 |
+| **MutatingAdmissionWebhook** | Mutating | 调用外部 Mutating Webhook（如 Istio 注入、Secret 注入）进行动态变更 | ✅ **必须启用** | 外部 Webhook 问题可能导致所有 Pod 创建失败；建议设置 `failurePolicy: Ignore` 用于非关键注入 |
 | **NamespaceAutoProvision** | Mutating | 当在不存在 Namespace 中创建资源时，自动创建该 Namespace | ❌ **已弃用** | 1.22+ 被移除；建议通过 CI/CD 或 Namespace 管理策略显式创建 Namespace |
 | **PersistentVolumeClaimResize** | Mutating | 处理 PVC 扩容请求，验证 StorageClass 是否允许扩容、目标大小是否合法 | ✅ 默认启用 | 需 StorageClass 设置 `allowVolumeExpansion: true`；不支持缩容 |
 | **ResourceQuota** | Validating | 检查 Namespace 级别的资源配额（CPU/内存/Pod/Service 等）是否超限 | ✅ **必须启用** | 需提前在 Namespace 中创建 ResourceQuota；注意配额更新非原子性 |
@@ -986,7 +986,7 @@ kubectl get --raw /metrics | grep apiserver_admission_webhook_admission_duration
         kubectl -v=8 <command>  # 查看完整请求/响应
 ```
 
-#### 3.9.2 常见故障场景
+#### 3.9.2 常见问题场景
 
 | 症状 | 可能原因 | 诊断命令 | 解决方案 |
 |:---|:---|:---|:---|
@@ -996,7 +996,7 @@ kubectl get --raw /metrics | grep apiserver_admission_webhook_admission_duration
 | **Pod 创建失败：No API token found** | ServiceAccount 插件异常 | `kubectl get sa default -n <ns>` | 确保 ServiceAccount 存在且 `automountServiceAccountToken: true` |
 | **PVC 创建失败：no storage class is set** | DefaultStorageClass 未生效 | `kubectl get sc` | 确保有一个 StorageClass 标记为 `storageclass.kubernetes.io/is-default-class: true` |
 | **API Server 启动失败：unrecognized admission controller** | 配置了已移除的插件 | `journalctl -u kube-apiserver` | 从 `--enable-admission-plugins` 中移除废弃插件名称 |
-| **所有请求超时** | Webhook 服务不可达 | `kubectl get pods -n <webhook-ns>`, `kubectl logs <webhook-pod>` | 检查 Webhook Pod 状态和网络连通性；必要时禁用故障 Webhook |
+| **所有请求超时** | Webhook 服务不可达 | `kubectl get pods -n <webhook-ns>`, `kubectl logs <webhook-pod>` | 检查 Webhook Pod 状态和网络连通性；必要时禁用问题 Webhook |
 | **Namespace 删除卡住** | NamespaceLifecycle 或 finalizer 问题 | `kubectl get ns <ns> -o yaml` 查看 finalizers | 手动清理 finalizer（谨慎操作）；检查是否有正在运行的 Pod |
 
 #### 3.9.3 日志关键字段速查
@@ -1016,12 +1016,12 @@ journalctl -u kube-apiserver -f | grep -E "admission|webhook|denied|rejected"
 #### 3.9.4 紧急恢复操作
 
 ```bash
-# 场景：某个 Mutating Webhook 故障导致所有 Pod 无法创建
+# 场景：某个 Mutating Webhook 问题导致所有 Pod 无法创建
 
 # 1. 查看当前 Webhook 配置
 kubectl get mutatingwebhookconfigurations
 
-# 2. 备份后删除故障 Webhook（谨慎！）
+# 2. 备份后删除问题 Webhook（谨慎！）
 kubectl get mutatingwebhookconfigurations <faulty-webhook> -o yaml > /tmp/webhook-backup.yaml
 kubectl delete mutatingwebhookconfigurations <faulty-webhook>
 

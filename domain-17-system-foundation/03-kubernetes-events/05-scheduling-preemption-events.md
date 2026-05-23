@@ -386,7 +386,7 @@ Message: 0/2 nodes are available: 2 node(s) didn't have free ports for the reque
 | **存储卷节点亲和性冲突** | 1. 检查 PV 的 nodeAffinity 配置<br>2. 使用 WaitForFirstConsumer 绑定模式<br>3. 迁移 PV 到正确的拓扑域 | P1 | 高 |
 | **PVC 不存在或未绑定** | 1. 创建缺失的 PVC<br>2. 检查 StorageClass 是否存在<br>3. 确认 PV 供应正常 | P0 | 高 |
 | **端口冲突** | 1. 移除 hostPort 配置<br>2. 使用 Service 代替 hostPort<br>3. 调度到其他节点 | P2 | 低 |
-| **节点未就绪** | 1. 修复节点故障(kubelet/docker/网络)<br>2. 标记节点为 Unschedulable<br>3. 从集群移除故障节点 | P0 | 高 |
+| **节点未就绪** | 1. 修复节点问题(kubelet/docker/网络)<br>2. 标记节点为 Unschedulable<br>3. 从集群移除问题节点 | P0 | 高 |
 | **节点不可调度** | 1. 移除节点 Unschedulable 标记<br>2. 检查节点是否在维护中<br>3. 确认节点是否被 drain | P1 | 中 |
 | **无法抢占低优先级 Pod** | 1. 检查 PriorityClass 配置<br>2. 确认是否有可抢占的 Pod<br>3. 扩容节点避免抢占 | P2 | 中 |
 
@@ -650,7 +650,7 @@ Message: All scheduling gates have been removed, proceeding with scheduling.
 | **生产频率** | 低频 |
 
 ##<!-- chunk: 事件含义 -->## 事件含义
-表示 Pod 因节点污点(Taint)导致不再容忍(Tolerate)而被 Taint Manager 驱逐。这是 Kubernetes 节点状态异常处理机制的关键部分,当节点出现故障(如 NotReady、磁盘压力、内存压力)时,kube-controller-manager 的 node-controller 组件会为节点添加污点,并根据 Pod 的容忍配置决定是否驱逐。
+表示 Pod 因节点污点(Taint)导致不再容忍(Tolerate)而被 Taint Manager 驱逐。这是 Kubernetes 节点状态异常处理机制的关键部分,当节点出现问题(如 NotReady、磁盘压力、内存压力)时,kube-controller-manager 的 node-controller 组件会为节点添加污点,并根据 Pod 的容忍配置决定是否驱逐。
 
 Taint Manager 是 node-controller 的一部分,负责监控节点污点变化,评估每个 Pod 的容忍时间(tolerationSeconds),并在超时后删除 Pod。这种机制比传统的节点故障检测更加灵活和可控,允许不同的 Pod 有不同的容忍策略。
 
@@ -726,7 +726,7 @@ spec:
 ##<!-- chunk: 影响面说明 -->## 影响面说明
 - **服务中断**: Pod 被驱逐导致服务中断
 - **迁移延迟**: Pod 重新调度到其他节点需要时间
-- **级联影响**: 节点故障可能导致大量 Pod 同时驱逐
+- **级联影响**: 节点问题可能导致大量 Pod 同时驱逐
 - **数据丢失**: StatefulSet Pod 驱逐可能导致数据访问中断
 
 ##<!-- chunk: 排查建议 -->## 排查建议
@@ -784,7 +784,7 @@ spec:
 
 | 原因 | 解决方案 | 优先级 |
 |:----|:--------|:------|
-| 节点故障(NotReady/Unreachable) | 修复节点问题(kubelet/网络/硬件),恢复节点就绪状态 | P0 |
+| 节点问题(NotReady/Unreachable) | 修复节点问题(kubelet/网络/硬件),恢复节点就绪状态 | P0 |
 | 节点磁盘压力 | 清理节点磁盘空间,增加磁盘容量,配置日志轮转 | P0 |
 | 节点内存压力 | 驱逐非关键 Pod,增加节点内存,优化 Pod 内存使用 | P0 |
 | 容忍时间过短 | 增加 Pod tolerationSeconds,给予更长恢复时间 | P2 |
@@ -805,7 +805,7 @@ spec:
 | **生产频率** | 罕见 |
 
 ##<!-- chunk: 事件含义 -->## 事件含义
-表示调度器已为 Pod 选择了目标节点,但在执行绑定操作(Binding)时失败。这是一个罕见但严重的错误,通常由于并发冲突、API Server 故障、权限问题或调度器内部错误导致。与 FailedScheduling 不同,FailedBinding 发生在调度决策完成后的绑定阶段。
+表示调度器已为 Pod 选择了目标节点,但在执行绑定操作(Binding)时失败。这是一个罕见但严重的错误,通常由于并发冲突、API Server 问题、权限问题或调度器内部错误导致。与 FailedScheduling 不同,FailedBinding 发生在调度决策完成后的绑定阶段。
 
 绑定流程:调度器通过 POST 请求向 API Server 发送 Binding 对象,将 Pod.spec.nodeName 设置为目标节点。如果绑定失败,Pod 会回退到 Pending 状态,调度器会重新调度。常见失败原因包括 Pod 已被其他调度器绑定、节点已被删除、API Server 不可达等。
 
@@ -831,7 +831,7 @@ Message: Failed to bind pod: node "worker-node-99" not found
 - **调度失败**: Pod 无法启动,持续 Pending
 - **资源浪费**: 调度决策完成但无法绑定,浪费调度资源
 - **并发冲突**: 可能反映集群并发控制问题
-- **API Server 故障**: 可能是 API Server 不稳定的信号
+- **API Server 问题**: 可能是 API Server 不稳定的信号
 
 ##<!-- chunk: 排查建议 -->## 排查建议
 
@@ -901,7 +901,7 @@ Message: Failed to bind pod: node "worker-node-99" not found
 |:----|:--------|:------|
 | Pod 已绑定到其他节点 | 删除 Pod 重建,或检查是否有多个调度器冲突 | P1 |
 | 目标节点不存在 | 清理已删除节点的遗留数据,重新调度 | P1 |
-| API Server 不可达 | 检查网络连接,修复 API Server 故障 | P0 |
+| API Server 不可达 | 检查网络连接,修复 API Server 问题 | P0 |
 | 调度器权限不足 | 修复 RBAC 配置,确保调度器有 pods/binding 权限 | P0 |
 | 并发调度冲突 | 确保只有一个默认调度器实例,或使用 Leader Election | P1 |
 | 调度器内部错误 | 重启调度器,升级调度器版本,检查日志排查 Bug | P1 |

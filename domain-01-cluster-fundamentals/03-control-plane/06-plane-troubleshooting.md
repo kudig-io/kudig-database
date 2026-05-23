@@ -20,7 +20,7 @@ audience:
 - 所有工程师
 estimated_read_time: 25min
 intent_queries:
-- 06-plane-troubleshooting常见故障有哪些？
+- 06-plane-troubleshooting常见问题有哪些？
 - 如何排查06-plane-troubleshooting相关问题？
 - 06-plane-troubleshooting的故障处理方法
 trigger_keywords:
@@ -125,9 +125,9 @@ k8s_versions:
 2. [API Server故障诊断](#2-api-server故障诊断)
 3. [etcd集群故障处理](#3-etcd集群故障处理)
 4. [控制器管理器问题](#4-控制器管理器问题)
-5. [调度器故障排除](#5-调度器故障排除)
+5. [调度器问题排除](#5-调度器问题排除)
 6. [网络连通性问题](#6-网络连通性问题)
-7. [认证授权故障](#7-认证授权故障)
+7. [认证授权问题](#7-认证授权问题)
 8. [性能问题诊断](#8-性能问题诊断)
 9. [日志分析技巧](#9-日志分析技巧)
 10. [应急恢复流程](#10-应急恢复流程)
@@ -164,7 +164,7 @@ k8s_versions:
 │  4. 根因定位阶段 (Root Cause Analysis)                                          │
 │     ├── 链路追踪: 从现象追溯到根本原因                                         │
 │     ├── 依赖分析: 检查组件间依赖关系                                           │
-│     ├── 时间线重建: 构建故障发生的时间序列                                     │
+│     ├── 时间线重建: 构建问题发生的时间序列                                     │
 │     └── 模式识别: 识别重复出现的问题模式                                       │
 │                                                                                  │
 │  5. 解决方案实施 (Solution Implementation)                                      │
@@ -181,16 +181,16 @@ k8s_versions:
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 1.2 故障分类矩阵
+### 1.2 问题分类矩阵
 
-| 故障类型 | 常见症状 | 影响范围 | 恢复时间 | 复杂度 |
+| 问题类型 | 常见症状 | 影响范围 | 恢复时间 | 复杂度 |
 |----------|----------|----------|----------|--------|
 | **配置错误** | Pod无法启动、API调用失败 | 单个应用 | 分钟级 | 低 |
 | **资源不足** | 调度失败、OOMKilled | 部分工作负载 | 分钟级 | 中 |
 | **网络问题** | 连接超时、DNS解析失败 | 跨组件通信 | 分钟到小时 | 中 |
-| **存储故障** | PV挂载失败、数据丢失 | 持久化应用 | 小时级 | 高 |
+| **存储问题** | PV挂载失败、数据丢失 | 持久化应用 | 小时级 | 高 |
 | **认证授权** | 401/403错误、权限拒绝 | 访问控制 | 分钟级 | 中 |
-| **组件故障** | 控制平面组件CrashLoop | 整个集群 | 分钟到小时 | 高 |
+| **组件问题** | 控制平面组件CrashLoop | 整个集群 | 分钟到小时 | 高 |
 | **数据不一致** | 状态不同步、脑裂 | 集群状态 | 小时级 | 高 |
 | **性能瓶颈** | 响应缓慢、超时 | 用户体验 | 持续优化 | 高 |
 
@@ -248,28 +248,28 @@ echo "=== Diagnosis completed ==="
 <!-- chunk: 2. API Server故障诊断 -->
 ## 2. API Server故障诊断
 
-### 2.1 常见故障类型
+### 2.1 常见问题类型
 
 ```
-API Server故障分类:
+API Server问题分类:
 
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                           API Server Issues                              │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                          │
-│  启动失败类故障                                                         │
+│  启动失败类问题                                                         │
 │  ├── 端口冲突 (Port already in use)                                     │
 │  ├── 证书问题 (Certificate errors)                                      │
 │  ├── 配置错误 (Invalid configuration)                                   │
 │  └── 依赖组件不可达 (Dependent components unreachable)                  │
 │                                                                          │
-│  运行时故障                                                             │
+│  运行时问题                                                             │
 │  ├── 内存泄漏 (Memory leak)                                             │
 │  ├── CPU使用过高 (High CPU usage)                                       │
 │  ├── 连接数超限 (Connection limits exceeded)                            │
 │  └── etcd连接问题 (etcd connectivity issues)                            │
 │                                                                          │
-│  功能性故障                                                             │
+│  功能性问题                                                             │
 │  ├── 认证失败 (Authentication failures)                                 │
 │  ├── 授权拒绝 (Authorization denials)                                   │
 │  ├── 准入控制阻塞 (Admission control blocks)                            │
@@ -348,7 +348,7 @@ kubectl auth can-i list pods --as=system:anonymous
 
 ### 2.3 典型故障处理
 
-#### 故障1: API Server无法启动
+#### 问题1: API Server无法启动
 
 ```bash
 # 诊断步骤:
@@ -372,7 +372,7 @@ netstat -tlnp | grep 6443
 # - 权限问题: 检查文件权限和SELinux/AppArmor
 ```
 
-#### 故障2: etcd连接失败
+#### 问题2: etcd连接失败
 
 ```bash
 # 诊断命令:
@@ -397,7 +397,7 @@ ls -la /etc/kubernetes/pki/apiserver-etcd-client.*
 # - 验证etcd配置参数
 ```
 
-#### 故障3: 认证授权失败
+#### 问题3: 认证授权失败
 
 ```bash
 # 诊断步骤:
@@ -428,34 +428,34 @@ curl -k -H "Authorization: Bearer $TOKEN" https://localhost:6443/api/v1/namespac
 <!-- chunk: 3. etcd集群故障处理 -->
 ## 3. etcd集群故障处理
 
-### 3.1 etcd故障类型识别
+### 3.1 etcd问题类型识别
 
 ```
-etcd故障分类:
+etcd问题分类:
 
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                           etcd Failure Types                              │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                          │
-│  数据层面故障                                                           │
+│  数据层面问题                                                           │
 │  ├── 数据不一致 (Data inconsistency)                                    │
 │  ├── 数据丢失 (Data loss)                                               │
 │  ├── 数据损坏 (Data corruption)                                         │
 │  └── 版本冲突 (Version conflicts)                                       │
 │                                                                          │
-│  集群层面故障                                                           │
+│  集群层面问题                                                           │
 │  ├── Leader选举失败 (Leader election failure)                           │
 │  ├── 集群分裂 (Cluster partition)                                       │
 │  ├── 成员变更失败 (Member change failure)                               │
 │  └── 配额超限 (Quota exceeded)                                          │
 │                                                                          │
-│  性能层面故障                                                           │
+│  性能层面问题                                                           │
 │  ├── 写入延迟高 (High write latency)                                    │
 │  ├── 读取超时 (Read timeouts)                                           │
 │  ├── 磁盘I/O瓶颈 (Disk I/O bottleneck)                                  │
 │  └── 内存使用过高 (High memory usage)                                   │
 │                                                                          │
-│  网络层面故障                                                           │
+│  网络层面问题                                                           │
 │  ├── 网络分区 (Network partition)                                       │
 │  ├── 连接超时 (Connection timeouts)                                     │
 │  ├── 包丢失 (Packet loss)                                               │
@@ -532,7 +532,7 @@ rm /var/lib/etcd/test
 
 ### 3.3 常见故障处理
 
-#### 故障1: Leader丢失
+#### 问题1: Leader丢失
 
 ```bash
 # 症状识别:
@@ -553,7 +553,7 @@ done
 df -h /var/lib/etcd
 
 # 恢复方案:
-# 方案1: 重启故障节点
+# 方案1: 重启问题节点
 kubectl delete pod -n kube-system etcd-control-plane-node
 
 # 方案2: 强制重新选举
@@ -569,7 +569,7 @@ ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-snapshot.db \
   --initial-advertise-peer-urls=https://etcd-0:2380
 ```
 
-#### 故障2: 数据库配额超限
+#### 问题2: 数据库配额超限
 
 ```bash
 # 症状:
@@ -605,7 +605,7 @@ ETCDCTL_API=3 etcdctl --endpoints=$ENDPOINTS $CERTS alarm disarm
 # 修改etcd启动参数: --quota-backend-bytes=8589934592 (8GB)
 ```
 
-#### 故障3: 网络分区
+#### 问题3: 网络分区
 
 ```bash
 # 症状:
@@ -650,7 +650,7 @@ watch -n 2 'ETCDCTL_API=3 etcdctl --endpoints=$ENDPOINTS $CERTS endpoint status 
 ### 4.1 控制器故障模式
 
 ```
-控制器管理器故障类型:
+控制器管理器问题类型:
 
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                      Controller Manager Failures                          │
@@ -758,8 +758,8 @@ kubectl logs -n kube-system -l component=kube-controller-manager | \
 
 ---
 
-<!-- chunk: 5. 调度器故障排除 -->
-## 5. 调度器故障排除
+<!-- chunk: 5. 调度器问题排除 -->
+## 5. 调度器问题排除
 
 ### 5.1 调度器问题识别
 
@@ -928,7 +928,7 @@ kubectl get networkpolicies -n <namespace>
 <!-- chunk: 总结 -->
 ## 总结
 
-这份故障排查手册涵盖了Kubernetes控制平面的主要故障类型和处理方法。通过系统性的诊断方法和具体的命令示例，可以帮助运维人员快速定位和解决各类问题。
+这份故障排查手册涵盖了Kubernetes控制平面的主要问题类型和处理方法。通过系统性的诊断方法和具体的命令示例，可以帮助运维人员快速定位和解决各类问题。
 
 关键要点:
 1. 建立标准化的故障排查流程

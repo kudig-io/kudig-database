@@ -176,7 +176,7 @@ grep
 ./scripts/domain12_troubleshooting_toolkit.sh full
 ```
 
-### 故障应急
+### 问题应急
 ```bash
 # 快速定位问题
 ./scripts/domain12_troubleshooting_toolkit.sh pods
@@ -224,7 +224,7 @@ export MEMORY_THRESHOLD="85"
     fi
 ```
 
-## 🔧 故障排除
+## 🔧 问题排除
 
 ### 常见问题
 

@@ -61,17 +61,17 @@ created: "2026-05-23"
 
 <!-- chunk: 概述 -->## 概述
 
-在云原生和微服务架构日益普及的今天，系统复杂性呈指数级增长，传统的"预防为主"的灾备思路已经无法应对分布式系统中的各种不确定性。混沌工程（[[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]]）作为一种主动发现系统弱点的学科方法论，通过在受控条件下向系统注入故障，验证系统的韧性（Resilience）能力，已成为现代灾备体系中不可或缺的环节。本文档深入探讨企业级容灾架构设计和混沌工程实践，提供从灾备策略到故障演练的完整技术指南。
+在云原生和微服务架构日益普及的今天，系统复杂性呈指数级增长，传统的"预防为主"的灾备思路已经无法应对分布式系统中的各种不确定性。混沌工程（[[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]]）作为一种主动发现系统弱点的学科方法论，通过在受控条件下向系统注入问题，验证系统的韧性（Resilience）能力，已成为现代灾备体系中不可或缺的环节。本文档深入探讨企业级容灾架构设计和混沌工程实践，提供从灾备策略到故障演练的完整技术指南。
 
 #<!-- chunk: RPO 与 RTO 定义 -->## RPO 与 RTO 定义
 
 - **RPO（Recovery Point Objective，恢复点目标）**：系统可容忍的最大数据丢失量。在混沌工程中，RPO 直接影响实验设计——若系统的 RPO 要求为秒级，则需要重点验证数据同步和持久化机制的可靠性。
-- **RTO（Recovery Time Objective，恢复时间目标）**：系统从故障中恢复到正常服务的最大允许时间。混沌实验通过测量系统在故障注入后的实际恢复时间，验证 RTO 目标是否可达成。
+- **RTO（Recovery Time Objective，恢复时间目标）**：系统从问题中恢复到正常服务的最大允许时间。混沌实验通过测量系统在故障注入后的实际恢复时间，验证 RTO 目标是否可达成。
 
 ```yaml
 chaos_engineering_rpo_rto:
   alignment_with_dr:
-    - principle: "混沌实验应覆盖所有影响 RPO/RTO 达成的故障场景"
+    - principle: "混沌实验应覆盖所有影响 RPO/RTO 达成的问题场景"
     - principle: "实验结果应量化为实际可达到的 RPO/RTO 数值"
     - principle: "稳态假设应基于业务 SLO，与 RPO/RTO 目标对齐"
     
@@ -79,11 +79,11 @@ chaos_engineering_rpo_rto:
     rpo_focused:
       - "数据库主从切换时的数据丢失量"
       - "消息队列宕机后的消息恢复"
-      - "缓存故障后的数据一致性"
+      - "缓存问题后的数据一致性"
     rto_focused:
-      - "节点故障后的自动恢复时间"
-      - "可用区故障后的流量切换时间"
-      - "完整数据中心故障后的业务恢复时间"
+      - "节点问题后的自动恢复时间"
+      - "可用区问题后的流量切换时间"
+      - "完整数据中心问题后的业务恢复时间"
 ```
 
 ---
@@ -124,7 +124,7 @@ graph TB
         F1[Pod 故障注入]
         F2[网络分区模拟]
         F3[资源耗尽测试]
-        F4[AZ/Region 故障]
+        F4[AZ/Region 问题]
         F5[完整站点故障演练]
     end
     
@@ -325,7 +325,7 @@ class ChaosEngineeringFramework:
             return True
             
         except Exception as e:
-            self.logger.error(f"注入Pod故障失败: {e}")
+            self.logger.error(f"注入Pod问题失败: {e}")
             return False
     
     def inject_network_partition(self, experiment_id: str, namespace: str,
@@ -509,7 +509,7 @@ class ChaosEngineeringFramework:
         faults = experiment.get('injected_faults', {})
         
         if monitoring.get('steady_state_breached'):
-            recommendations.append("系统在故障下未能保持稳态，需要加强容错能力")
+            recommendations.append("系统在问题下未能保持稳态，需要加强容错能力")
             
         fault_type = faults.get('type')
         if fault_type == 'pod_failure':
@@ -610,7 +610,7 @@ recovery_procedures:
         duration: "1 分钟"
         
   level_2_database_failover:
-    trigger: "数据库主节点故障"
+    trigger: "数据库主节点问题"
     rto_target: "30 秒"
     steps:
       - step: 1
@@ -631,11 +631,11 @@ recovery_procedures:
         duration: "5 分钟"
         
   level_3_availability_zone:
-    trigger: "整个可用区故障"
+    trigger: "整个可用区问题"
     rto_target: "5 分钟"
     steps:
       - step: 1
-        action: "DNS/GSLB 自动检测故障并切换"
+        action: "DNS/GSLB 自动检测问题并切换"
         responsible: "全局流量管理"
         duration: "30-60 秒"
         auto: true
@@ -658,7 +658,7 @@ recovery_procedures:
         duration: "持续"
         
   level_4_data_center:
-    trigger: "完整数据中心故障"
+    trigger: "完整数据中心问题"
     rto_target: "30 分钟"
     steps:
       - step: 1
@@ -730,10 +730,10 @@ game_day_program:
     frequency: "每半年一次"
     scope: "基础设施组件"
     experiments:
-      - "模拟可用区故障（关闭整个 AZ 的节点）"
-      - "模拟 DNS 服务故障"
-      - "模拟负载均衡器故障"
-      - "模拟 Kafka 集群故障"
+      - "模拟可用区问题（关闭整个 AZ 的节点）"
+      - "模拟 DNS 服务问题"
+      - "模拟负载均衡器问题"
+      - "模拟 Kafka 集群问题"
     participants: ["SRE 团队", "网络团队", "DBA 团队"]
     success_criteria:
       - "业务 RTO 达标"
@@ -752,7 +752,7 @@ game_day_program:
           - "模拟主数据中心断电"
           - "验证自动故障切换到灾备站点"
           - "灾备站点承载全部流量 4 小时"
-          - "执行故障回切"
+          - "执行问题回切"
           
       - scenario: "勒索软件攻击"
         steps:
@@ -761,9 +761,9 @@ game_day_program:
           - "从不可变备份恢复数据"
           - "验证数据完整性"
           
-      - scenario: "级联故障"
+      - scenario: "级联问题"
         steps:
-          - "注入多个关联服务故障"
+          - "注入多个关联服务问题"
           - "验证断路器和降级策略"
           - "验证自动扩缩容响应"
           - "验证监控和告警有效性"
@@ -874,7 +874,7 @@ data:
 
 #<!-- chunk: 混沌工程原则 -->## 混沌工程原则
 
-1. **建立稳态假设**：在注入故障前，先定义系统"正常"的行为基线
+1. **建立稳态假设**：在注入问题前，先定义系统"正常"的行为基线
 2. **最小爆炸半径**：从最小范围的实验开始，逐步扩大影响范围
 3. **生产环境优先**：虽然 staging 环境可以提前发现问题，但生产环境才能验证真实韧性
 4. **自动化和可重复**：所有实验应可脚本化执行和自动回滚
@@ -882,7 +882,7 @@ data:
 
 #<!-- chunk: 容灾架构最佳实践 -->## 容灾架构最佳实践
 
-1. **设计优先恢复**：在架构层面消除单点故障，而非依赖灾备工具
+1. **设计优先恢复**：在架构层面消除单点问题，而非依赖灾备工具
 2. **数据层韧性**：数据库多副本、跨 AZ 部署、自动故障切换
 3. **流量管理韧性**：全局负载均衡、DNS 故障转移、渐进式流量切换
 4. **自动化恢复**：Kubernetes 自愈能力、数据库自动选举、HPA 自动扩缩容
@@ -929,7 +929,7 @@ echo "  kubectl delete networkpolicy -A -l chaos-experiment=true"
 
 #<!-- chunk: 常见问题手册 -->## 常见问题手册
 
-| 故障现象 | 可能原因 | 排查步骤 | 解决方案 |
+| 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
 |:---|:---|:---|:---|
 | 实验无法注入 | RBAC 权限不足 | 检查 ServiceAccount 权限 | 添加必要的 ClusterRole 权限 |
 | 实验后服务未恢复 | 回滚脚本执行失败 | 检查回滚日志 | 手动恢复原始配置 |
@@ -950,15 +950,15 @@ echo "  kubectl delete networkpolicy -A -l chaos-experiment=true"
 
 #<!-- chunk: 实验设计四步法 -->## 实验设计四步法
 
-混沌工程实验的设计应遵循严格的科学方法论。Netflix 提出的混沌工程四步法是目前业界最广泛采用的框架：定义稳态、提出假设、注入故障、验证假设。
+混沌工程实验的设计应遵循严格的科学方法论。Netflix 提出的混沌工程四步法是目前业界最广泛采用的框架：定义稳态、提出假设、注入问题、验证假设。
 
 第一步是定义稳态（Define Steady State）。稳态是系统在正常条件下可观察、可测量的行为。例如"API 请求成功率 >= 99.95%"、"P99 延迟 < 500ms"、"数据库主从复制延迟 < 1秒"。这些指标应该与业务 SLO 对齐，因为混沌工程验证的最终目标是业务连续性。
 
 第二步是提出假设（Form Hypothesis）。假设是一个可以被证伪的陈述，例如"即使 30% 的 API 服务 Pod 被终止，服务仍能保持 99.9% 的可用性"。假设必须具体、可量化，并且与 RPO/RTO 目标对齐。
 
-第三步是注入故障（Inject Faults）。在可控条件下向系统注入真实可能发生的故障。故障类型和影响范围应从小到大逐步扩大（最小爆炸半径原则）。首次实验应在非生产环境进行。
+第三步是注入问题（Inject Faults）。在可控条件下向系统注入真实可能发生的问题。问题类型和影响范围应从小到大逐步扩大（最小爆炸半径原则）。首次实验应在非生产环境进行。
 
-第四步是验证假设（Validate Hypothesis）。通过对比注入故障前后的稳态指标，判断假设是否成立。如果假设被证伪（稳态被破坏），说明系统在对应故障场景下存在韧性缺陷，需要修复。
+第四步是验证假设（Validate Hypothesis）。通过对比注入问题前后的稳态指标，判断假设是否成立。如果假设被证伪（稳态被破坏），说明系统在对应问题场景下存在韧性缺陷，需要修复。
 
 ```yaml
 # 混沌实验设计模板

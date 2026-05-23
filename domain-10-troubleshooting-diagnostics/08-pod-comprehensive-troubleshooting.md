@@ -112,7 +112,7 @@ created: "2026-05-23"
 | **ImagePullBackOff** | 镜像拉取失败 | 镜像不存在/凭证错误/网络问题 | 镜像名/Secret/网络 |
 | **Init:Error** | 初始化失败 | InitContainer错误 | InitContainer日志 |
 | **Terminating** | 删除中 | Finalizer/PV卸载/preStop阻塞 | [[Finalizers|Finalizers]]/Events |
-| **Unknown** | 状态未知 | 节点失联/kubelet故障 | 节点状态/kubelet |
+| **Unknown** | 状态未知 | 节点失联/kubelet问题 | 节点状态/kubelet |
 | **Evicted** | 被驱逐 | 资源压力/节点维护 | 节点状态/资源 |
 | **OOMKilled** | 内存溢出 | 内存超限 | 容器limits/应用内存 |
 

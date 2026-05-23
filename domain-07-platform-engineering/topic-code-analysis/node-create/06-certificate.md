@@ -97,7 +97,7 @@ k8s_versions:
 
 kubelet 的证书管理分为两个阶段：**Bootstrap 阶段**和**正式证书阶段**。在 Bootstrap 阶段，kubelet 使用 Bootstrap Token 向 API Server 发起 CSR（Certificate Signing Request），获取正式的客户端证书。在正式证书阶段，kubelet 会监控证书的有效期，在证书即将过期时自动发起新的 CSR 来续期证书。
 
-这个自动轮换机制从 Kubernetes v1.19 起默认启用，是生产环境中 kubelet 证书管理的标准方案。本文档从源码层面深入分析 kubelet 证书轮换的完整流程、CSR 审批机制、常见故障及解决方案。
+这个自动轮换机制从 Kubernetes v1.19 起默认启用，是生产环境中 kubelet 证书管理的标准方案。本文档从源码层面深入分析 kubelet 证书轮换的完整流程、CSR 审批机制、常见问题及解决方案。
 
 ---
 

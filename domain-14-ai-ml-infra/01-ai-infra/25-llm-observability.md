@@ -1218,7 +1218,7 @@ spec:
       expr: |
         sum(rate(llm_requests_total{status="success"}[30d]))
         / sum(rate(llm_requests_total[30d]))
-      # 目标: 99.9% (允许43分钟/月故障)
+      # 目标: 99.9% (允许43分钟/月问题)
     
     - record: slo:latency:p99
       expr: histogram_quantile(0.99, rate(llm_request_duration_seconds_bucket[30d]))

@@ -36,7 +36,7 @@ created: "2026-05-23"
 
 ## 概述
 
-Admission Webhook 是扩展 [[Kubernetes|Kubernetes]]es API|Kubernetes API]] 的强大机制，但在设计和部署时需要格外谨慎。设计不良的 webhook 可能导致工作负载中断、升级后行为异常，甚至引发集群级故障。本文档为集群运维人员和 webhook 开发者提供了设计和部署 admission webhook 的推荐实践。
+Admission Webhook 是扩展 [[Kubernetes|Kubernetes]]es API|Kubernetes API]] 的强大机制，但在设计和部署时需要格外谨慎。设计不良的 webhook 可能导致工作负载中断、升级后行为异常，甚至引发集群级问题。本文档为集群运维人员和 webhook 开发者提供了设计和部署 admission webhook 的推荐实践。
 
 ## 核心概念/原理
 
@@ -111,7 +111,7 @@ Kubernetes 项目建议在可能的情况下优先使用基于 CEL 的内置准�
 - 对于 CRD，优先使用内置的 validation rules 和 defaulting，而非 webhook。
 - 测试 webhook 时，先在类似生产的 staging 环境中充分验证，特别关注小版本升级后的兼容性。
 - 审计变更 webhook 的行为，确保不会与其他控制器产生冲突或循环。
-- 为 webhook 配置适当的超时和失败策略，避免单个 webhook 故障拖垮整个集群的 API 请求处理。
+- 为 webhook 配置适当的超时和失败策略，避免单个 webhook 问题拖垮整个集群的 API 请求处理。
 - 使用 `matchConditions` 实现细粒度的请求过滤，显著减少不必要的 webhook 调用。
 
 ## 故障排查

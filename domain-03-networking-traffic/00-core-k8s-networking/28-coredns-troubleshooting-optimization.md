@@ -165,8 +165,8 @@ kubectl exec -n kube-system deploy/coredns -- wget -qO- http://localhost:9153/me
 
 ---
 
-<!-- chunk: 二、常见故障场景 (Common Issues) -->
-## 二、常见故障场景 (Common Issues)
+<!-- chunk: 二、常见问题场景 (Common Issues) -->
+## 二、常见问题场景 (Common Issues)
 
 ### 2.1 DNS解析超时
 
@@ -183,7 +183,7 @@ kubectl exec -n kube-system deploy/coredns -- wget -qO- http://localhost:9153/me
 | 2 | kube-dns Service | `kubectl get svc,ep kube-dns -n kube-system` | Service无Endpoints |
 | 3 | 网络连通性 | `kubectl exec <pod> -- nc -zv 10.96.0.10 53` | 网络策略阻断 |
 | 4 | kube-proxy规则 | `iptables -t nat -L KUBE-SERVICES \| grep dns` | iptables规则缺失 |
-| 5 | CNI状态 | `kubectl get pods -n kube-system -l k8s-app=<cni>` | CNI故障 |
+| 5 | CNI状态 | `kubectl get pods -n kube-system -l k8s-app=<cni>` | CNI问题 |
 
 **解决方案**:
 ```bash
@@ -430,7 +430,7 @@ cache {
     success 50000 300 60     # 5万条,最大5分钟,最小1分钟
     denial 5000 60 30        # 5千条否定缓存
     prefetch 10 1h 20%       # 剩余20%TTL时预取
-    serve_stale 1h           # 上游故障时服务1小时过期缓存
+    serve_stale 1h           # 上游问题时服务1小时过期缓存
 }
 ```
 

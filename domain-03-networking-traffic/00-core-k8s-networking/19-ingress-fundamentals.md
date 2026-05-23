@@ -1725,7 +1725,7 @@ kubectl get events -n $NAMESPACE --sort-by='.lastTimestamp' | grep -i ingress | 
 | 反模式 | 问题 | 正确做法 |
 |-------|-----|---------|
 | **无 IngressClass** | 依赖隐式默认，升级可能中断 | 始终指定 `ingressClassName` |
-| **单点故障** | 控制器无高可用 | 多副本 + PodAntiAffinity + PDB |
+| **单点问题** | 控制器无高可用 | 多副本 + PodAntiAffinity + PDB |
 | **资源无限制** | 控制器 OOM/CPU 饱和 | 配置合理的 requests/limits |
 | **无 TLS** | 明文传输敏感数据 | 启用 TLS，强制 HTTPS 重定向 |
 | **过长超时** | 连接资源耗尽 | 合理配置超时 (10s 连接，60s 读取) |
@@ -1756,8 +1756,8 @@ kubectl get events -n $NAMESPACE --sort-by='.lastTimestamp' | grep -i ingress | 
 
 ---
 
-<!-- chunk: 十、故障排除 -->
-## 十、故障排除
+<!-- chunk: 十、问题排除 -->
+## 十、问题排除
 
 ### 10.1 常见问题诊断
 

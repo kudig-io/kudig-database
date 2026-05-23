@@ -73,7 +73,7 @@ created: "2026-05-23"
 ```yaml
 多云部署核心价值:
   业务连续性:
-    ✓ 避免单云厂商故障影响
+    ✓ 避免单云厂商问题影响
     ✓ 跨区域容灾能力
     ✓ 业务不中断保障
   
@@ -715,7 +715,7 @@ class MultiCloudFailover:
             self.logger.info("主集群健康，无需切换")
             return
         
-        self.logger.warning("主集群故障，开始故障切换")
+        self.logger.warning("主集群问题，开始故障切换")
         
         # 2. 增加备集群副本数
         deployment = self.apps_v1.read_namespaced_deployment(

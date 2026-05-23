@@ -255,7 +255,7 @@ created: "2026-05-23"
 <!-- chunk: 3. 核心控制器详细解析 (Key Controllers Deep Dive) -->
 ## 3. 核心控制器详细解析 (Key Controllers Deep Dive)
 
-> 每个控制器按统一格式说明：**作用**、**监视资源**、**输出动作**、**启动参数**、**故障影响**
+> 每个控制器按统一格式说明：**作用**、**监视资源**、**输出动作**、**启动参数**、**问题影响**
 
 ---
 
@@ -269,7 +269,7 @@ created: "2026-05-23"
 | **监视资源** | Deployment, ReplicaSet, Pod |
 | **输出动作** | 1. 根据PodTemplateSpec变化创建新ReplicaSet<br>2. 按策略逐步扩缩新旧RS实现滚动更新<br>3. 更新Deployment Status (replicas/updatedReplicas/readyReplicas/conditions)<br>4. 清理历史RS (保留revisionHistoryLimit个) |
 | **启动参数** | `--concurrent-deployment-syncs` (默认5), `--deployment-controller-sync-period` |
-| **故障影响** | Deployment更新停滞、Pod无法扩缩容、滚动更新中断、回滚不可用；现有Pod不受影响 |
+| **问题影响** | Deployment更新停滞、Pod无法扩缩容、滚动更新中断、回滚不可用；现有Pod不受影响 |
 
 ```
 Deployment Controller 工作流程:
@@ -332,9 +332,9 @@ spec:
 |:---|:---|
 | **作用** | 确保指定数量的Pod副本始终运行，通过selector匹配Pod，多退少补 |
 | **监视资源** | ReplicaSet, Pod |
-| **输出动作** | 1. 创建/删除Pod以匹配replicas数量<br>2. 处理Pod被驱逐、节点故障等导致的副本缺失<br>3. 更新ReplicaSet Status |
+| **输出动作** | 1. 创建/删除Pod以匹配replicas数量<br>2. 处理Pod被驱逐、节点问题等导致的副本缺失<br>3. 更新ReplicaSet Status |
 | **启动参数** | `--concurrent-replicaset-syncs` (默认5) |
-| **故障影响** | Pod副本数无法维持，过多或过少；Deployment的滚动更新依赖RS，会级联故障 |
+| **问题影响** | Pod副本数无法维持，过多或过少；Deployment的滚动更新依赖RS，会级联问题 |
 
 #### 3.1.3 StatefulSet Controller
 
@@ -344,7 +344,7 @@ spec:
 | **监视资源** | StatefulSet, Pod, PVC |
 | **输出动作** | 1. 按序创建/删除Pod (从0到N-1创建，从N-1到0删除)<br>2. 为每个Pod创建/管理PVC (volumeClaimTemplates)<br>3. 管理Pod的hostname和ordinal index<br>4. 执行有序滚动更新 (partition策略) |
 | **启动参数** | `--concurrent-statefulset-syncs` (默认5), `--statefulset-pod-deletion-timeout` |
-| **故障影响** | 有状态应用无法扩缩容、有序更新失败、PVC无法创建；对运行中的Pod无直接影响 |
+| **问题影响** | 有状态应用无法扩缩容、有序更新失败、PVC无法创建；对运行中的Pod无直接影响 |
 
 #### 3.1.4 DaemonSet Controller
 
@@ -354,7 +354,7 @@ spec:
 | **监视资源** | DaemonSet, Node, Pod |
 | **输出动作** | 1. 根据nodeSelector/tolerations在每个匹配节点创建Pod<br>2. 新节点加入时自动调度Pod<br>3. 节点移除时清理对应Pod<br>4. 处理滚动更新 (maxUnavailable/maxSurge) |
 | **启动参数** | `--concurrent-daemonset-syncs` (默认2) |
-| **故障影响** | 新节点无法自动部署DaemonSet Pod；滚动更新停滞；节点监控/日志采集断链 |
+| **问题影响** | 新节点无法自动部署DaemonSet Pod；滚动更新停滞；节点监控/日志采集断链 |
 
 #### 3.1.5 Job Controller
 
@@ -364,7 +364,7 @@ spec:
 | **监视资源** | Job, Pod |
 | **输出动作** | 1. 创建Pod执行任务<br>2. 跟踪成功/失败次数，达到completions后停止创建<br>3. 处理backoffLimit失败重试<br>4. 支持Indexed Job为每个Pod分配索引 |
 | **启动参数** | `--concurrent-job-syncs` (默认5) |
-| **故障影响** | 批处理任务无法创建或无法完成计数；CronJob依赖Job，会级联故障 |
+| **问题影响** | 批处理任务无法创建或无法完成计数；CronJob依赖Job，会级联问题 |
 
 #### 3.1.6 CronJob Controller
 
@@ -374,7 +374,7 @@ spec:
 | **监视资源** | CronJob, Job |
 | **输出动作** | 1. 按schedule字段定时创建Job<br>2. 管理并发策略 (Allow/Forbid/Replace)<br>3. 清理历史Job (successfulJobsHistoryLimit/failedJobsHistoryLimit)<br>4. 处理时区 (timeZone字段) |
 | **启动参数** | `--concurrent-cronjob-syncs` (默认5), `--cronjob-schedule-duration` |
-| **故障影响** | 定时任务不再触发、历史Job堆积、并发策略失效 |
+| **问题影响** | 定时任务不再触发、历史Job堆积、并发策略失效 |
 
 #### 3.1.7 ReplicationController (Legacy)
 
@@ -384,7 +384,7 @@ spec:
 | **监视资源** | ReplicationController, Pod |
 | **输出动作** | 创建/删除Pod以匹配replicas数量 |
 | **启动参数** | `--concurrent-rc-syncs` (默认5) |
-| **故障影响** | Pod副本数无法维持 |
+| **问题影响** | Pod副本数无法维持 |
 | **备注** | 已弃用，仅用于兼容旧系统。新部署应使用Deployment+ReplicaSet |
 
 ---
@@ -399,7 +399,7 @@ spec:
 | **监视资源** | Service, Pod |
 | **输出动作** | 1. 根据Service selector匹配Pod，生成Endpoints.subsets<br>2. 当Pod IP/Port/Ready状态变化时更新Endpoints<br>3. headless Service也由此控制器管理 |
 | **启动参数** | `--concurrent-endpoint-syncs` (默认5) |
-| **故障影响** | Service无法解析到后端Pod，导致流量中断；kube-proxy依赖Endpoints，服务完全不可用 |
+| **问题影响** | Service无法解析到后端Pod，导致流量中断；kube-proxy依赖Endpoints，服务完全不可用 |
 | **与EndpointSlice关系** | Endpoints是legacy API，单个对象最多存储1000个端点；EndpointSlice将其分片，无此限制。两者通常并行运行，EndpointSliceMirroringController会将用户创建的Endpoints同步到EndpointSlice |
 
 #### 3.2.2 EndpointSlice Controller
@@ -410,7 +410,7 @@ spec:
 | **监视资源** | Service, Pod, Node |
 | **输出动作** | 1. 根据Service selector创建/更新/删除EndpointSlice<br>2. 每个EndpointSlice最多容纳100个端点，自动分片<br>3. 支持topology感知 (zone/region hints)<br>4. 管理端点条件 (Ready/Serving/Terminating) |
 | **启动参数** | `--concurrent-endpointslice-syncs` (默认5), `--max-endpoints-per-slice` (默认100) |
-| **故障影响** | Service无法发现后端端点，流量中断；EndpointSlice是kube-proxy的默认数据源 |
+| **问题影响** | Service无法发现后端端点，流量中断；EndpointSlice是kube-proxy的默认数据源 |
 
 ```
 EndpointSlice Controller 工作流程:
@@ -445,7 +445,7 @@ EndpointSlice Controller 工作流程:
 | **监视资源** | Endpoints |
 | **输出动作** | 1. 检测非EndpointSlice-managed的Endpoints<br>2. 创建对应的EndpointSlice副本<br>3. 保持Endpoints与EndpointSlice的实时同步<br>4. Endpoints删除时清理对应的EndpointSlice |
 | **启动参数** | `--concurrent-endpointslice-mirroring-syncs` (默认5) |
-| **故障影响** | 手动创建的Endpoints无法被kube-proxy(EndpointSlice模式)识别，导致Service流量黑洞 |
+| **问题影响** | 手动创建的Endpoints无法被kube-proxy(EndpointSlice模式)识别，导致Service流量黑洞 |
 
 #### 3.2.4 Service Controller
 
@@ -455,7 +455,7 @@ EndpointSlice Controller 工作流程:
 | **监视资源** | Service, Node |
 | **输出动作** | 1. 为LoadBalancer Service创建云LB<br>2. 更新Service Status.LoadBalancer.Ingress<br>3. 管理健康检查 (NodePort/HealthCheckNodePort)<br>4. 节点变化时更新LB后端池 |
 | **启动参数** | `--concurrent-service-syncs` (默认1), `--cloud-provider` |
-| **故障影响** | LoadBalancer类型Service无法分配外部IP，外部流量无法进入集群 |
+| **问题影响** | LoadBalancer类型Service无法分配外部IP，外部流量无法进入集群 |
 
 #### 3.2.5 Route Controller
 
@@ -465,7 +465,7 @@ EndpointSlice Controller 工作流程:
 | **监视资源** | Node |
 | **输出动作** | 1. 为每个节点在云路由表中创建路由 (目标: Node CIDR, 下一跳: Node IP)<br>2. 节点删除时清理路由 |
 | **启动参数** | `--configure-cloud-routes`, `--cluster-cidr`, `--allocate-node-cidrs` |
-| **故障影响** | 跨节点Pod通信失败；通常只在非CNI覆盖网络模式下使用 |
+| **问题影响** | 跨节点Pod通信失败；通常只在非CNI覆盖网络模式下使用 |
 
 #### 3.2.6 NodeIPAM Controller
 
@@ -475,7 +475,7 @@ EndpointSlice Controller 工作流程:
 | **监视资源** | Node |
 | **输出动作** | 1. 新节点注册时从cluster-cidr分配子网并写入node.spec.podCIDR<br>2. 节点删除时回收CIDR<br>3. 支持双栈(IPv4/IPv6) CIDR分配 |
 | **启动参数** | `--allocate-node-cidrs=true`, `--cluster-cidr=<CIDR>`, `--node-cidr-mask-size` (默认24), `--node-cidr-mask-size-ipv4`, `--node-cidr-mask-size-ipv6`, `--service-cluster-ip-range` |
-| **故障影响** | 新节点无法分配Pod CIDR，kubelet无法启动Pod；IP地址池耗尽导致节点无法注册 |
+| **问题影响** | 新节点无法分配Pod CIDR，kubelet无法启动Pod；IP地址池耗尽导致节点无法注册 |
 | **生产建议** | 大规模集群需合理规划cluster-cIDR大小和node-cidr-mask-size；使用CIDR计算器确保地址足够。禁用CNI自带IPAM时(如Flannel host-gw模式)此控制器必须启用 |
 
 ---
@@ -489,7 +489,7 @@ EndpointSlice Controller 工作流程:
 | **监视资源** | PV, PVC, StorageClass |
 | **输出动作** | 1. 将未绑定的PVC与匹配的PV绑定 (静态供给)<br>2. 无匹配PV时为PVC触发动态供给 (创建PV)<br>3. 处理PVC删除后的PV回收 (Retain/Recycle/Delete)<br>4. 更新PV/PVC的Phase (Pending/Bound/Released/Failed) |
 | **启动参数** | `--enable-dynamic-provisioning` (默认true), `--volume-host-cidr-deny-list` |
-| **故障影响** | PVC一直处于Pending无法绑定，Pod无法启动；PV释放后无法回收，存储泄漏 |
+| **问题影响** | PVC一直处于Pending无法绑定，Pod无法启动；PV释放后无法回收，存储泄漏 |
 
 #### 3.3.2 AttachDetach Controller
 
@@ -499,7 +499,7 @@ EndpointSlice Controller 工作流程:
 | **监视资源** | Pod, Node, VolumeAttachment |
 | **输出动作** | 1. Pod调度到节点后，调用CSI/内置插件将卷attach到节点<br>2. 创建/更新VolumeAttachment对象记录attach状态<br>3. Pod删除/迁移后触发detach<br>4. 处理多Pod共享卷的attach决策 |
 | **启动参数** | `--attach-detach-reconcile-sync-period` (默认1m), `--disable-attach-detach-reconcile-sync` |
-| **故障影响** | Pod无法挂载卷，处于ContainerCreating状态；卷无法卸载导致节点无法迁移Pod |
+| **问题影响** | Pod无法挂载卷，处于ContainerCreating状态；卷无法卸载导致节点无法迁移Pod |
 
 #### 3.3.3 PVCProtection Controller
 
@@ -509,7 +509,7 @@ EndpointSlice Controller 工作流程:
 | **监视资源** | PVC, Pod |
 | **输出动作** | 1. 为活跃PVC添加`kubernetes.io/pvc-protection` Finalizer<br>2. 检测PVC是否被Pod使用<br>3. PVC被使用时阻止删除完成，直到所有Pod解除绑定<br>4. PVC不再使用时移除Finalizer，允许删除 |
 | **启动参数** | (无独立参数，通过`--controllers`启用/禁用) |
-| **故障影响** | PVC可能被误删导致数据丢失；或PVC的Finalizer无法移除导致Namespace删除卡住 |
+| **问题影响** | PVC可能被误删导致数据丢失；或PVC的Finalizer无法移除导致Namespace删除卡住 |
 
 #### 3.3.4 StorageProtection Controller
 
@@ -519,7 +519,7 @@ EndpointSlice Controller 工作流程:
 | **监视资源** | PVC, PV, StorageClass, 相关存储资源 |
 | **输出动作** | 1. 监控存储对象的删除请求<br>2. 检查是否存在依赖关系 (如PVC引用StorageClass)<br>3. 通过Finalizer阻止有依赖的存储对象被删除<br>4. 依赖解除后自动清理Finalizer |
 | **启动参数** | (无独立参数) |
-| **故障影响** | 存储对象被误删导致数据不可恢复；Finalizer残留导致资源泄漏 |
+| **问题影响** | 存储对象被误删导致数据不可恢复；Finalizer残留导致资源泄漏 |
 
 #### 3.3.5 VolumeExpansion Controller
 
@@ -529,7 +529,7 @@ EndpointSlice Controller 工作流程:
 | **监视资源** | PVC, PV, StorageClass |
 | **输出动作** | 1. 检测PVC的`resources.requests.storage`增大<br>2. 验证StorageClass是否允许扩容 (allowVolumeExpansion)<br>3. 触发底层存储扩容<br>4. 更新PVC Status.Capacity |
 | **启动参数** | (无独立参数) |
-| **故障影响** | PVC扩容请求无法处理，存储空间不足导致应用故障 |
+| **问题影响** | PVC扩容请求无法处理，存储空间不足导致应用问题 |
 
 ---
 
@@ -541,9 +541,9 @@ EndpointSlice Controller 工作流程:
 |:---|:---|
 | **作用** | 监控节点健康状况，管理节点Taint，执行基于Taint的Pod驱逐 (TaintBasedEvictions)，是集群节点容错的核心控制器 |
 | **监视资源** | Node, Pod, NodeLease |
-| **输出动作** | 1. 检测节点心跳超时 (NodeLease/NodeStatus)<br>2. 为不健康节点添加Taint (not-ready, unreachable, memory-pressure, disk-pressure, pid-pressure, network-unavailable)<br>3. **TaintBasedEvictions**: 根据Pod的tolerations和Taint匹配决定是否驱逐<br>4. 大规模故障时执行速率限制驱逐 (zone级检测)<br>5. 节点恢复时移除Taint |
+| **输出动作** | 1. 检测节点心跳超时 (NodeLease/NodeStatus)<br>2. 为不健康节点添加Taint (not-ready, unreachable, memory-pressure, disk-pressure, pid-pressure, network-unavailable)<br>3. **TaintBasedEvictions**: 根据Pod的tolerations和Taint匹配决定是否驱逐<br>4. 大规模问题时执行速率限制驱逐 (zone级检测)<br>5. 节点恢复时移除Taint |
 | **启动参数** | `--node-monitor-period` (默认5s), `--node-monitor-grace-period` (默认40s), `--pod-eviction-timeout` (默认5m), `--node-eviction-rate` (默认0.1), `--secondary-node-eviction-rate` (默认0.01), `--large-cluster-size-threshold` (默认50), `--unhealthy-zone-threshold` (默认0.55) |
-| **故障影响** | 节点故障时Pod无法被驱逐，应用单点故障持续；或健康节点被误判导致不必要驱逐 |
+| **问题影响** | 节点问题时Pod无法被驱逐，应用单点问题持续；或健康节点被误判导致不必要驱逐 |
 
 ```
 NodeLifecycle Controller 工作流程:
@@ -567,7 +567,7 @@ NodeLifecycle Controller 工作流程:
    │   ├─ 无toleration或toleration秒数到期: 驱逐Pod
    │   └─ 例如: not-ready:NoExecute 默认容忍300s后驱逐
    │
-   └─▶ 大规模故障保护 (Zone检测)
+   └─▶ 大规模问题保护 (Zone检测)
        ├─ 检测不健康Zone比例
        ├─ 超过 unhealthy-zone-threshold: 降低驱逐速率
        └─ 防止雪崩式全部驱逐
@@ -581,7 +581,7 @@ NodeLifecycle Controller 工作流程:
 | **监视资源** | Node |
 | **输出动作** | 1. 根据节点的control-plane组件运行状态添加/移除角色标签<br>2. 维护`node-role.kubernetes.io/master`和`node-role.kubernetes.io/control-plane`标签的一致性<br>3. 协助调度器的角色感知调度 |
 | **启动参数** | (无独立参数) |
-| **故障影响** | 节点角色标签不一致可能导致调度器将工作负载调度到控制平面节点，或某些依赖标签的插件行为异常 |
+| **问题影响** | 节点角色标签不一致可能导致调度器将工作负载调度到控制平面节点，或某些依赖标签的插件行为异常 |
 
 #### 3.4.3 CloudNodeLifecycle Controller
 
@@ -591,7 +591,7 @@ NodeLifecycle Controller 工作流程:
 | **监视资源** | Node |
 | **输出动作** | 1. 定期查询云API获取实例状态<br>2. 云实例已删除: 删除对应Node对象<br>3. 云实例已停止: 更新Node为NotReady<br>4. 处理云节点初始化时的providerID设置 |
 | **启动参数** | `--cloud-provider`, `--cloud-config` |
-| **故障影响** | 已删除的云实例对应的Node对象残留，导致调度器继续向不存在节点调度Pod |
+| **问题影响** | 已删除的云实例对应的Node对象残留，导致调度器继续向不存在节点调度Pod |
 
 #### 3.4.4 PodGC Controller (Pod Garbage Collector)
 
@@ -601,7 +601,7 @@ NodeLifecycle Controller 工作流程:
 | **监视资源** | Pod, Node |
 | **输出动作** | 1. 删除处于Failed/Succeeded且超过阈值的Pod<br>2. 清理Node已不存在但Pod仍残留的孤儿Pod<br>3. 清理被调度到不存在节点的Pod<br>4. 管理终止中(Terminating)但kubelet已失联的Pod强制删除 |
 | **启动参数** | `--terminated-pod-gc-threshold` (默认12500) |
-| **故障影响** | 已完成Pod堆积导致etcd和API Server负载升高；孤儿Pod无法自动清理，Namespace删除可能卡住 |
+| **问题影响** | 已完成Pod堆积导致etcd和API Server负载升高；孤儿Pod无法自动清理，Namespace删除可能卡住 |
 
 #### 3.4.5 TTL / TTLAfterFinished Controller
 
@@ -611,7 +611,7 @@ NodeLifecycle Controller 工作流程:
 | **监视资源** | Job, Pod (带ttlSecondsAfterFinished字段) |
 | **输出动作** | 1. Job/Pod完成后开始TTL倒计时<br>2. TTL到期后触发级联删除 |
 | **启动参数** | `--ttl-after-finished-enabled` (默认true) |
-| **故障影响** | 历史Job/Pod无法自动清理，资源堆积 |
+| **问题影响** | 历史Job/Pod无法自动清理，资源堆积 |
 
 #### 3.4.6 Namespace Controller
 
@@ -621,7 +621,7 @@ NodeLifecycle Controller 工作流程:
 | **监视资源** | Namespace, 所有Namespace内资源 |
 | **输出动作** | 1. Namespace删除时设置DeletionTimestamp和`kubernetes` Finalizer<br>2. 发现Namespace内所有资源类型并发起删除<br>3. 按GVR分组并行删除资源<br>4. 所有资源清理完成后移除Finalizer，Namespace对象被删除 |
 | **启动参数** | `--concurrent-namespace-syncs` (默认10), `--namespace-sync-period` |
-| **故障影响** | Namespace删除卡住(一直处于Terminating)；或Namespace被误删时资源未清理干净导致泄漏 |
+| **问题影响** | Namespace删除卡住(一直处于Terminating)；或Namespace被误删时资源未清理干净导致泄漏 |
 
 ```
 Namespace Controller 终止流程:
@@ -661,7 +661,7 @@ Namespace Controller 终止流程:
 | **监视资源** | Namespace |
 | **输出动作** | 1. 新Namespace创建时自动生成`default` ServiceAccount<br>2. 默认SA被误删时自动重新创建<br>3. 为default SA关联Secret或Token (取决于legacy/auto模式) |
 | **启动参数** | `--service-account-private-key-file`, `--root-ca-file` |
-| **故障影响** | 新Namespace无法创建默认SA，Pod无法指定ServiceAccount导致启动失败或无法访问API Server |
+| **问题影响** | 新Namespace无法创建默认SA，Pod无法指定ServiceAccount导致启动失败或无法访问API Server |
 | **生产建议** | 确保SA私钥文件安全备份；轮转私钥时需同时更新所有已签发Token。在1.24+版本中，legacy Secret-based token自动创建已默认关闭，改用TokenRequest API |
 
 #### 3.5.2 Token Controller
@@ -672,7 +672,7 @@ Namespace Controller 终止流程:
 | **监视资源** | ServiceAccount, Secret |
 | **输出动作** | 1. 为ServiceAccount创建包含JWT的Secret (legacy模式)<br>2. 使用`--service-account-private-key-file`签发Token<br>3. 将`--root-ca-file`注入到Secret的ca.crt字段<br>4. 清理不再被引用的SA Secret |
 | **启动参数** | `--service-account-private-key-file`, `--root-ca-file`, `--service-account-max-token-expiration` |
-| **故障影响** | Pod无法获取API Server访问凭证，导致in-cluster客户端认证失败；Token签名失败导致API Server拒绝认证 |
+| **问题影响** | Pod无法获取API Server访问凭证，导致in-cluster客户端认证失败；Token签名失败导致API Server拒绝认证 |
 
 #### 3.5.3 LegacyServiceAccountTokenCleanUp Controller
 
@@ -682,7 +682,7 @@ Namespace Controller 终止流程:
 | **监视资源** | Secret (type=kubernetes.io/service-account-token) |
 | **输出动作** | 1. 扫描所有legacy SA Token Secret<br>2. 检测Token是否过期 (超过有效期且未被使用)<br>3. 安全删除过期Token Secret<br>4. 配合`--service-account-max-token-expiration`使用 |
 | **启动参数** | `--legacy-service-account-token-clean-up-period` |
-| **故障影响** | 过期Token残留增加安全风险；或活跃Token被误删导致Pod认证失败 |
+| **问题影响** | 过期Token残留增加安全风险；或活跃Token被误删导致Pod认证失败 |
 
 #### 3.5.4 CertificateSigning Controller
 
@@ -692,7 +692,7 @@ Namespace Controller 终止流程:
 | **监视资源** | CSR |
 | **输出动作** | 1. 自动审批特定CSR (如kubelet bootstrap, node client/server cert)<br>2. 使用`--cluster-signing-cert-file/key-file`签发证书<br>3. 将签发后的证书写入CSR Status.Certificate<br>4. 清理已处理的CSR |
 | **启动参数** | `--cluster-signing-cert-file`, `--cluster-signing-key-file`, `--cluster-signing-duration` (默认8760h=1年) |
-| **故障影响** | 新节点无法加入集群 (kubelet bootstrap失败)；现有节点证书到期无法自动轮换 |
+| **问题影响** | 新节点无法加入集群 (kubelet bootstrap失败)；现有节点证书到期无法自动轮换 |
 
 #### 3.5.5 ClusterTrustBundle Controller
 
@@ -702,7 +702,7 @@ Namespace Controller 终止流程:
 | **监视资源** | ClusterTrustBundle, ConfigMap, Secret |
 | **输出动作** | 1. 监控ClusterTrustBundle变化<br>2. 将信任包内容分发到目标Namespace的ConfigMap或Secret<br>3. 确保所有目标Namespace的信任包保持最新<br>4. 处理信任包的版本更新和回滚 |
 | **启动参数** | (无独立参数) |
-| **故障影响** | 集群服务间mTLS认证失败，因为信任锚点未分发或过期 |
+| **问题影响** | 集群服务间mTLS认证失败，因为信任锚点未分发或过期 |
 
 #### 3.5.6 ResourceQuota Controller
 
@@ -712,7 +712,7 @@ Namespace Controller 终止流程:
 | **监视资源** | ResourceQuota, Pod, Service, PVC, ConfigMap, Secret等所有配额涉及资源 |
 | **输出动作** | 1. 统计Namespace内所有资源的实际使用量<br>2. 更新ResourceQuota Status (used字段)<br>3. 创建/更新配额时进行准入检查<br>4. 处理Pod删除后的配额释放 |
 | **启动参数** | `--concurrent-resource-quota-syncs` (默认5), `--resource-quota-sync-period` |
-| **故障影响** | 配额使用量不准确导致Pod被错误拒绝或超配；Namespace资源泄漏 |
+| **问题影响** | 配额使用量不准确导致Pod被错误拒绝或超配；Namespace资源泄漏 |
 | **生产建议** | 大规模集群中ResourceQuota同步可能成为瓶颈，适当增加`--concurrent-resource-quota-syncs`；监控workqueue_depth避免队列堆积 |
 
 #### 3.5.7 RootCACertPublisher Controller
@@ -723,7 +723,7 @@ Namespace Controller 终止流程:
 | **监视资源** | Namespace, ConfigMap |
 | **输出动作** | 1. 在每个Namespace创建/维护`kube-root-ca.crt` ConfigMap<br>2. 包含集群根CA证书 ( PEM格式 )<br>3. 新Namespace自动创建，证书轮转时自动更新 |
 | **启动参数** | `--root-ca-file` |
-| **故障影响** | Pod无法验证API Server证书，导致`kubectl` in-cluster操作和客户端库TLS握手失败 |
+| **问题影响** | Pod无法验证API Server证书，导致`kubectl` in-cluster操作和客户端库TLS握手失败 |
 
 ---
 
@@ -737,7 +737,7 @@ Namespace Controller 终止流程:
 | **监视资源** | 所有API资源 (通过Discovery API动态发现) |
 | **输出动作** | 1. 维护资源依赖图 (ownerReference关系)<br>2. 前台删除: 先删子资源再删父资源<br>3. 后台删除: 父资源删除后异步扫描并删除孤儿子资源<br>4. 孤儿模式: 移除子资源的ownerReference |
 | **启动参数** | `--concurrent-gc-syncs` (默认20), `--enable-garbage-collector` (默认true) |
-| **故障影响** | 资源删除后子资源残留导致泄漏；级联删除异常可能导致误删 |
+| **问题影响** | 资源删除后子资源残留导致泄漏；级联删除异常可能导致误删 |
 
 ```
 GC Controller 级联删除流程:
@@ -789,7 +789,7 @@ kubectl delete deployment web --cascade=orphan
 | **监视资源** | PDB, Deployment, ReplicaSet, StatefulSet, DaemonSet, Pod |
 | **输出动作** | 1. 根据PDB selector计算匹配的Pod<br>2. 计算期望副本数和当前健康Pod数<br>3. 更新PDB Status ( disruptionsAllowed, currentHealthy, desiredHealthy, expectedPods )<br>4. evict API根据disruptionsAllowed决定是否允许驱逐 |
 | **启动参数** | `--concurrent-deployment-syncs` (共享Deployment参数) |
-| **故障影响** | PDB状态不准确，导致节点升级时过度驱逐Pod；或evict操作被错误拒绝，影响集群运维操作 |
+| **问题影响** | PDB状态不准确，导致节点升级时过度驱逐Pod；或evict操作被错误拒绝，影响集群运维操作 |
 
 ---
 
@@ -803,7 +803,7 @@ kubectl delete deployment web --cascade=orphan
 | **监视资源** | HPA, Metrics API (metrics.k8s.io/custom.metrics.k8s.io/external.metrics.k8s.io) |
 | **输出动作** | 1. 定期(默认15s)查询指标<br>2. 计算期望副本数 = 当前副本数 * (当前指标 / 目标指标)<br>3. 应用伸缩策略 (scaleUp/scaleDown stabilizationWindow, policies)<br>4. 更新目标资源的replicas<br>5. 更新HPA Status |
 | **启动参数** | `--concurrent-horizontal-pod-autoscaler-syncs` (默认5), `--horizontal-pod-autoscaler-sync-period` (默认15s), `--horizontal-pod-autoscaler-tolerance` (默认0.1), `--horizontal-pod-autoscaler-cpu-initialization-period`, `--horizontal-pod-autoscaler-initial-readiness-delay` |
-| **故障影响** | 应用负载高峰时无法自动扩容导致服务降级；低峰时无法缩容导致资源浪费 |
+| **问题影响** | 应用负载高峰时无法自动扩容导致服务降级；低峰时无法缩容导致资源浪费 |
 
 ---
 
@@ -853,8 +853,8 @@ curl -sk https://localhost:10257/healthz
 | **Pod未创建/副本数不对** | ReplicaSet, Deployment | `kubectl describe rs`, `kubectl get events` | 控制器未Leader/队列阻塞/权限不足 |
 | **Service无法访问** | EndpointSlice, Endpoints | `kubectl get endpointslices`, `kubectl get endpoints` | 端点未更新/selector不匹配 |
 | **PVC一直Pending** | PersistentVolume | `kubectl describe pvc`, `kubectl get pv` | 无匹配PV/动态供给失败/SC不允许 |
-| **Pod挂载卷失败** | AttachDetach | `kubectl get volumeattachment` | 卷未attach/detach卡住/CSI驱动故障 |
-| **节点故障Pod不驱逐** | NodeLifecycle | `kubectl describe node`, `kubectl get node -o yaml` | grace-period过长/Zone保护/驱逐速率限制 |
+| **Pod挂载卷失败** | AttachDetach | `kubectl get volumeattachment` | 卷未attach/detach卡住/CSI驱动问题 |
+| **节点问题Pod不驱逐** | NodeLifecycle | `kubectl describe node`, `kubectl get node -o yaml` | grace-period过长/Zone保护/驱逐速率限制 |
 | **Namespace删不掉** | Namespace | `kubectl get ns <name> -o yaml` | Finalizer阻塞/内有资源未清理 |
 | **资源删除后残留** | GarbageCollector | `kubectl get <resource> --show-labels` | GC被禁用/ownerReference缺失 |
 | **定时任务不触发** | CronJob | `kubectl get cronjob`, `kubectl get job` | 时区设置/schedule语法/并发策略 |
@@ -939,7 +939,7 @@ I0101 00:00:00.000000   1 pvc_protection_controller.go:95] PVC default/data is u
 | `--node-monitor-grace-period` | 40s | 40s | 节点不响应宽限期 |
 | `--pod-eviction-timeout` | 5m | 5m | Pod驱逐超时 |
 | `--node-eviction-rate` | 0.1 | 0.1 | 正常情况驱逐速率(节点/秒) |
-| `--secondary-node-eviction-rate` | 0.01 | 0.01 | 大规模故障驱逐速率 |
+| `--secondary-node-eviction-rate` | 0.01 | 0.01 | 大规模问题驱逐速率 |
 | `--large-cluster-size-threshold` | 50 | 50 | 大集群阈值 |
 | `--unhealthy-zone-threshold` | 0.55 | 0.55 | 不健康Zone阈值 |
 

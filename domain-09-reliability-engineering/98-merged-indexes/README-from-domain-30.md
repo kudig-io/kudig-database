@@ -71,7 +71,7 @@ created: "2026-05-23"
 | **RPO** | Recovery Point Objective | 恢复点目标，允许丢失的最大数据量 | RPO=15分钟表示最多丢失15分钟数据 |
 | **RTO** | Recovery Time Objective | 恢复时间目标，服务恢复所需时间 | RTO=4小时表示4小时内恢复服务 |
 | **MTTR** | Mean Time To Recovery | 平均恢复时间，衡量灾备效率 | MTTR=2小时 |
-| **MTBF** | Mean Time Between Failures | 平均故障间隔时间，衡量可靠性 | MTBF=8760小时(1年) |
+| **MTBF** | Mean Time Between Failures | 平均问题间隔时间，衡量可靠性 | MTBF=8760小时(1年) |
 | **DR** | Disaster Recovery | 灾难恢复 | 灾备中心切换 |
 | **BC** | Business Continuity | 业务连续性 | 完整业务流程连续保障 |
 | **BCP** | Business Continuity Plan | 业务连续性计划 | 灾难响应流程文档 |
@@ -291,7 +291,7 @@ disaster_recovery_maturity_checklist:
 | 文档 | 主题 | 难度 | 核心技术 |
 |:---|:---|:---|:---|
 | [07-Kubernetes 备份与恢复深度实践](./07-kubernetes-backup-restore-deep-dive.md) | Velero 深度配置、etcd 备份 | 高级 | CSI快照、FS Backup、集群迁移 |
-| [08-混沌工程平台实践](./08-chaos-engineering-platforms.md) | LitmusChaos、Chaos Mesh | 中级→高级 | 稳态假设、故障实验、Game Day |
+| [08-混沌工程平台实践](./08-chaos-engineering-platforms.md) | LitmusChaos、Chaos Mesh | 中级→高级 | 稳态假设、问题实验、Game Day |
 | [09-应用级灾备架构](./09-application-level-disaster-recovery.md) | 多区域部署、流量切换 | 专家 | Istio多集群、DNS故障转移、数据复制 |
 
 ### 工具指南
@@ -799,9 +799,9 @@ dr_site_monitoring:
 
 ## 故障排查
 
-### 灾备常见故障速查
+### 灾备常见问题速查
 
-| 故障现象 | 可能原因 | 排查方法 | 解决方案 |
+| 问题现象 | 可能原因 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
 | 备份失败 | 存储桶不可达 | 检查BSL状态和S3连通性 | 修复凭证或网络 |
 | 恢复超时 | 数据量过大 | 查看Velero恢复日志 | 增加超时参数 |

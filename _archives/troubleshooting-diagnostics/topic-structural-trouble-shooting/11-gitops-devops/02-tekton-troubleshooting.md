@@ -170,7 +170,7 @@ Tekton Pipelines 的执行流程：
 ### 2.2 排查逻辑决策树
 
 ```
-Tekton 流水线故障
+Tekton 流水线问题
     ├── PipelineRun 创建失败
     │   ├── Pipeline/Task 不存在？──► 检查 CRD 和引用名称
     │   ├── ServiceAccount 权限不足？──► 绑定正确 RBAC
@@ -252,11 +252,11 @@ kubectl logs -n tekton-pipelines deployment/tekton-pipelines-controller --tail=2
   grep -iE "error|fail|timeout" | tail -10
 ```
 
-#### PipelineRun 故障深度诊断
+#### PipelineRun 问题深度诊断
 
 ```bash
 #!/bin/bash
-# PipelineRun 故障深度诊断
+# PipelineRun 问题深度诊断
 # 用法: ./diagnose-pipelinerun.sh <pipelinerun-name> <namespace>
 
 PR_NAME=${1:-""}
@@ -658,7 +658,7 @@ groups:
 6. **日志留存**：配置外部日志收集（如 Loki），PipelineRun 删除后仍可查询历史日志
 7. **缓存策略**：对 `go mod`、`npm`、`maven` 等依赖管理工具配置持久化缓存 Workspace
 
-### 典型故障案例
+### 典型问题案例
 
 #### 案例一：并行构建导致节点磁盘耗尽
 

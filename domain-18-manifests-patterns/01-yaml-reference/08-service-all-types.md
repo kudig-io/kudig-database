@@ -1234,7 +1234,7 @@ spec:
 | 需要源 IP（日志、安全） | Local | 保留客户端源 IP |
 | 负载均衡优先 | Cluster | 全局负载均衡 |
 | 低延迟 | Local | 减少网络跳转 |
-| 跨节点容错 | Cluster | 避免单节点故障 |
+| 跨节点容错 | Cluster | 避免单节点问题 |
 
 **Local 策略注意事项**：
 - 使用 DaemonSet 确保每个节点都有 Pod

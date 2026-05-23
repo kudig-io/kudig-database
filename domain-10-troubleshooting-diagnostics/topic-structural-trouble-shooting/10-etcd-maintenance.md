@@ -140,11 +140,11 @@ du -sh /var/lib/etcd/
 
 ---
 
-<!-- chunk: 2. 故障场景 -->## 2. 故障场景
+<!-- chunk: 2. 问题场景 -->## 2. 问题场景
 
 #<!-- chunk: 2.1 磁盘空间不释放（最常见） -->## 2.1 磁盘空间不释放（最常见）
 
-**故障现象**: 删除大量历史资源后，`du -sh /var/lib/etcd/` 显示空间未减少，`db.size` 仍然很大
+**问题现象**: 删除大量历史资源后，`du -sh /var/lib/etcd/` 显示空间未减少，`db.size` 仍然很大
 
 **根因**: etcd 使用 B+tree 存储，删除操作只标记 tombstone，不立即压缩空间
 
@@ -194,7 +194,7 @@ du -sh /var/lib/etcd/
 
 #<!-- chunk: 2.2 etcd space quota exceeded -->## 2.2 etcd space quota exceeded
 
-**故障现象**: API Server 报 "etcdserver: mvcc: database space exceeded"，写入被拒绝
+**问题现象**: API Server 报 "etcdserver: mvcc: database space exceeded"，写入被拒绝
 
 **排查步骤**：
 ```bash
@@ -260,7 +260,7 @@ kubectl get pods -n kube-system | grep etcd  # 确认所有 etcd pod 健康
 
 #<!-- chunk: 2.3 Leadership election 失败（leader 频繁切换） -->## 2.3 Leadership election 失败（leader 频繁切换）
 
-**故障现象**: etcd 日志显示 "raft term changed" 或 "lost leader"，集群不稳定
+**问题现象**: etcd 日志显示 "raft term changed" 或 "lost leader"，集群不稳定
 
 **排查步骤**：
 ```bash
@@ -299,7 +299,7 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 
 #<!-- chunk: 2.4 Member add 失败 -->## 2.4 Member add 失败
 
-**故障现象**: `etcdctl member add` 成功但新节点无法加入，日志报 "conflicting cluster ID" 或 "peer cluster not found"
+**问题现象**: `etcdctl member add` 成功但新节点无法加入，日志报 "conflicting cluster ID" 或 "peer cluster not found"
 
 **排查步骤**：
 ```bash
@@ -337,7 +337,7 @@ kubeadm join phase etcd https://<existing-ip>:2379 --token <token> \
 
 #<!-- chunk: 2.5 Member remove 失败（节点退役） -->## 2.5 Member remove 失败（节点退役）
 
-**故障现象**: `etcdctl member remove` 卡住或超时
+**问题现象**: `etcdctl member remove` 卡住或超时
 
 **排查步骤**：
 ```bash
@@ -361,7 +361,7 @@ sudo systemctl stop etcd
 
 #<!-- chunk: 2.6 Snapshot backup 验证失败 -->## 2.6 Snapshot backup 验证失败
 
-**故障现象**: `etcdctl snapshot save` 成功，但 restore 时报错 "snapshot file is not valid"
+**问题现象**: `etcdctl snapshot save` 成功，但 restore 时报错 "snapshot file is not valid"
 
 **排查步骤**：
 ```bash

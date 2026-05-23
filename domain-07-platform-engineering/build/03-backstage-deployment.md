@@ -2428,7 +2428,7 @@ recovery_procedures:
     steps: ["Kubernetes 自动处理"]
   
   scenario_2_node_failure:
-    description: "节点故障"
+    description: "节点问题"
     detection: "Kubernetes Node Controller"
     rto_actual: "2-5 分钟"
     steps:
@@ -2436,7 +2436,7 @@ recovery_procedures:
       - "PDB 确保服务不中断"
   
   scenario_3_database_failure:
-    description: "主数据库故障"
+    description: "主数据库问题"
     detection: "CloudNativePG 检测 → 自动 Failover"
     rto_actual: "1-2 分钟"
     steps:
@@ -2444,7 +2444,7 @@ recovery_procedures:
       - "服务连接自动重定向到新主节点"
   
   scenario_4_full_cluster_failure:
-    description: "整个 Kubernetes 集群故障"
+    description: "整个 Kubernetes 集群问题"
     rto_actual: "30-60 分钟"
     steps:
       - "在备用区域（us-west-2）的集群执行恢复"

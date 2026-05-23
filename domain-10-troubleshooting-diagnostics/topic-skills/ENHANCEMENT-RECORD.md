@@ -91,16 +91,16 @@ created: "2026-05-23"
 
 | 文件 | Skill ID | 名称 | 类别 | 行数 | 覆盖场景 |
 |------|----------|------|------|------|---------|
-| 07-pvc-storage-failure.md | SKILL-STORE-001 | PVC/PV/CSI 存储故障 | Storage | ~1411 | PVC Pending/PV绑定/CSI故障/扩容/数据恢复 |
-| 08-deployment-rollout-failure.md | SKILL-WORK-001 | Deployment 滚动更新故障 | Workload | ~1328 | 滚动更新卡住/回滚/金丝雀/StatefulSet/DaemonSet |
-| 09-rbac-quota-failure.md | SKILL-SEC-002 | RBAC 权限与 Quota 故障 | Security | ~1511 | RBAC 403/Quota耗尽/LimitRange/Admission/多租户 |
-| 10-image-pull-failure.md | SKILL-IMAGE-001 | 镜像拉取与仓库故障 | Image | ~1392 | ImagePullBackOff/认证/限速/Air-Gap/安全扫描 |
-| 11-control-plane-failure.md | SKILL-CP-001 | etcd 与控制平面故障 | ControlPlane | ~1535 | etcd降级/API Server过载/证书恢复/托管集群 |
-| 12-autoscaling-failure.md | SKILL-SCALE-001 | 弹性伸缩故障 | Scaling | ~1414 | HPA/VPA/CA/KEDA/成本优化 |
-| 13-ingress-gateway-failure.md | SKILL-NET-003 | Ingress/Gateway 路由故障 | Network | ~1383 | Nginx/Traefik/ALB/Gateway API/TLS/gRPC |
-| 14-configmap-secret-failure.md | SKILL-CONFIG-001 | ConfigMap/Secret 故障 | Configuration | ~1283 | 挂载失败/热更新/KMS/External Secrets/Vault |
-| 15-monitoring-alerting-failure.md | SKILL-MONITOR-001 | 监控告警体系故障 | Observability | ~1343 | Prometheus/AlertManager/Grafana/Thanos |
-| 16-logging-pipeline-failure.md | SKILL-LOG-001 | 日志收集与管理故障 | Observability | ~1500 | Fluentd/Fluent Bit/Vector/ES/Loki/审计日志 |
+| 07-pvc-storage-failure.md | SKILL-STORE-001 | PVC/PV/CSI 存储问题 | Storage | ~1411 | PVC Pending/PV绑定/CSI问题/扩容/数据恢复 |
+| 08-deployment-rollout-failure.md | SKILL-WORK-001 | Deployment 滚动更新问题 | Workload | ~1328 | 滚动更新卡住/回滚/金丝雀/StatefulSet/DaemonSet |
+| 09-rbac-quota-failure.md | SKILL-SEC-002 | RBAC 权限与 Quota 问题 | Security | ~1511 | RBAC 403/Quota耗尽/LimitRange/Admission/多租户 |
+| 10-image-pull-failure.md | SKILL-IMAGE-001 | 镜像拉取与仓库问题 | Image | ~1392 | ImagePullBackOff/认证/限速/Air-Gap/安全扫描 |
+| 11-control-plane-failure.md | SKILL-CP-001 | etcd 与控制平面问题 | ControlPlane | ~1535 | etcd降级/API Server过载/证书恢复/托管集群 |
+| 12-autoscaling-failure.md | SKILL-SCALE-001 | 弹性伸缩问题 | Scaling | ~1414 | HPA/VPA/CA/KEDA/成本优化 |
+| 13-ingress-gateway-failure.md | SKILL-NET-003 | Ingress/Gateway 路由问题 | Network | ~1383 | Nginx/Traefik/ALB/Gateway API/TLS/gRPC |
+| 14-configmap-secret-failure.md | SKILL-CONFIG-001 | ConfigMap/Secret 问题 | Configuration | ~1283 | 挂载失败/热更新/KMS/External Secrets/Vault |
+| 15-monitoring-alerting-failure.md | SKILL-MONITOR-001 | 监控告警体系问题 | Observability | ~1343 | Prometheus/AlertManager/Grafana/Thanos |
+| 16-logging-pipeline-failure.md | SKILL-LOG-001 | 日志收集与管理问题 | Observability | ~1500 | Fluentd/Fluent Bit/Vector/ES/Loki/审计日志 |
 | 17-performance-bottleneck.md | SKILL-PERF-001 | 性能瓶颈诊断与调优 | Performance | ~1436 | CPU/内存/网络/IO/API Server/pprof/JFR |
 | 18-security-incident-response.md | SKILL-SECURITY-001 | 安全事件应急响应 | Security | ~1619 | 容器逃逸/供应链/Secret泄露/取证/合规 |
 

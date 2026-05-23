@@ -187,7 +187,7 @@ chmod +x /usr/local/bin/block-storage-monitor.sh
    └── 连接中断 -> multipath -ll
 
 2. 根因分析
-   ├── 硬件故障 -> smartctl -a /dev/sdX
+   ├── 硬件问题 -> smartctl -a /dev/sdX
    ├── 网络问题 -> ping target_ip, tcpdump
    ├── 配置错误 -> cat /etc/multipath.conf
    └── 资源争用 -> iotop, pidstat

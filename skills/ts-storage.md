@@ -54,7 +54,7 @@ created: "2026-05-23"
 1. **确认 PVC/PV/StorageClass 状态**：核对绑定关系与 `volumeBindingMode`。
 2. **检查 VolumeAttachment**：确认卷是否仍附着在旧节点。
 3. **节点侧挂载排查**：查看设备、挂载点与 [[kubelet|kubelet]] 日志。
-4. **区分控制面与数据面**：判断是 Provision/Attach 还是 Mount 阶段故障。
+4. **区分控制面与数据面**：判断是 Provision/Attach 还是 Mount 阶段问题。
 5. **验证修复结果**：Pod 启动、挂载点可读写、监控指标恢复。
 
 #### 常见修复策略

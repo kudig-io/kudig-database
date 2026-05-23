@@ -88,7 +88,7 @@ created: "2026-05-23"
 <!-- chunk: 二、核心组件故障诊断 -->
 ## 二、核心组件故障诊断
 
-### 2.1 API Server 故障
+### 2.1 API Server 问题
 - **现象**：`kubectl` 响应慢或返回 5xx。
 - **排查指标**：
   - `apiserver_request_duration_seconds` (P99 < 1s)
@@ -109,7 +109,7 @@ created: "2026-05-23"
 <!-- chunk: 三、网络与存储排查 -->
 ## 三、网络与存储排查
 
-### 3.1 CNI 网络故障 (以 [[Cilium|Cilium]] 为例)
+### 3.1 CNI 网络问题 (以 [[Cilium|Cilium]] 为例)
 - **工具**：`cilium-health`
 - **检查项**：
   - BPF Map 是否满额

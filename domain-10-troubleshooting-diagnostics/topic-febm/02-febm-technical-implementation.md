@@ -1794,7 +1794,7 @@ Step 4: 攻击链重建
 
 #<!-- chunk: 2.5.1 时间线重建的重要性 -->## 2.5.1 时间线重建的重要性
 
-在复杂的安全事件或故障调查中,**时间线重建 (Timeline Reconstruction)** 是理解"事件如何发生"的关键技术。它将分散在多个数据源中的事件按时间顺序排列,形成完整的因果叙事。
+在复杂的安全事件或问题调查中,**时间线重建 (Timeline Reconstruction)** 是理解"事件如何发生"的关键技术。它将分散在多个数据源中的事件按时间顺序排列,形成完整的因果叙事。
 
 ```
 时间线重建的核心价值:
@@ -1805,8 +1805,8 @@ Step 4: 攻击链重建
 │ "攻击者何时获得初始   不确定               2026-02-25        │
 │  访问权限?"                                 10:15:32 UTC     │
 │                                                              │
-│ "配置变更和故障的     时间顺序不清         变更 (10:28:15)  │
-│  因果关系?"                                 → 故障 (10:28:45)│
+│ "配置变更和问题的     时间顺序不清         变更 (10:28:15)  │
+│  因果关系?"                                 → 问题 (10:28:45)│
 │                                            相差 30 秒!       │
 │                                                              │
 │ "攻击者在系统中停留   无法确定停留时间     初始访问 (10:15) │
@@ -3492,7 +3492,7 @@ Step 5: 证据完整性评估
 - [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|第六章：未来演进方向]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix.md|第七章:附录]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]]
 

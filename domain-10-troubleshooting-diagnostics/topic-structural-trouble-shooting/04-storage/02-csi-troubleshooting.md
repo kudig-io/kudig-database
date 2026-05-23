@@ -456,15 +456,15 @@ journalctl -u kubelet -f | grep -i "csi\|volume"
 
 ### 1.4.2 从 Pod 删除到卷释放的 5 个阶段
 
-| 阶段 | 执行组件 | K8s 对象变化 | CSI gRPC 调用 | 故障风险点 |
+| 阶段 | 执行组件 | K8s 对象变化 | CSI gRPC 调用 | 问题风险点 |
 |:----|:--------|:------------|:-------------|:----------|
 | **1. Terminating** | kubelet | Pod: Terminating | - | 容器无法停止（SIGTERM/SIGKILL 超时） |
 | **2. Unpublishing** | kubelet + csi-node | 删除 Pod 挂载点 | `NodeUnpublishVolume` | 文件句柄未释放（进程占用） |
 | **3. Unstaging** | kubelet + csi-node | 删除全局挂载点 | `NodeUnstageVolume` | 设备繁忙（`umount: device busy`） |
-| **4. Detaching** | csi-attacher | 删除 `VolumeAttachment` | `ControllerUnpublishVolume` | 后端 API 故障（云平台限流） |
+| **4. Detaching** | csi-attacher | 删除 `VolumeAttachment` | `ControllerUnpublishVolume` | 后端 API 问题（云平台限流） |
 | **5. Reclaiming** | csi-provisioner | 删除 PV（若 `reclaimPolicy: Delete`） | `DeleteVolume` | 数据删除失败（后端卷已手动删除） |
 
-**典型故障链**：
+**典型问题链**：
 ```
 Pod 删除超时 (30min+)
   ↓
@@ -551,11 +551,11 @@ User                API Server         Scheduler          kubelet            CSI
 
 ---
 
-## 2. 专家级故障矩阵与观测工具
+## 2. 专家级问题矩阵与观测工具
 
-### 2.1 专家级故障矩阵（按生命周期分类）
+### 2.1 专家级问题矩阵（按生命周期分类）
 
-#### 2.1.1 控制面阶段故障
+#### 2.1.1 控制面阶段问题
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
@@ -564,7 +564,7 @@ User                API Server         Scheduler          kubelet            CSI
 | **Snapshot 永久 Pending** | 后端快照 ID 已失效但 `VolumeSnapshotContent` 未更新、CRD 版本不兼容（v1beta1 vs v1） | `kubectl get volumesnapshotcontent -o yaml` | 删除并重建快照；升级 snapshot-controller 至 v6.0+ |
 | **ControllerExpandVolume 失败** | 卷正在使用中且驱动不支持在线扩容（Capability: `ONLINE_EXPAND` 缺失）、后端文件系统限制（如 ext4 最大 16TB） | `kubectl describe pvc \| grep "Resizing"` | 检查 CSIDriver Capability；必要时卸载后扩容 |
 
-#### 2.1.2 节点侧阶段故障
+#### 2.1.2 节点侧阶段问题
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
@@ -573,7 +573,7 @@ User                API Server         Scheduler          kubelet            CSI
 | **NodePublishVolume 失败** | 全局挂载点不存在（Stage 失败但未报错）、Bind Mount 权限错误（容器用户 UID 不匹配）、文件系统满（inode 耗尽） | 节点执行 `findmnt \| grep csi`；`df -i` 检查 inode | 修复 Stage 阶段错误；调整容器 `securityContext`；扩容或清理文件 |
 | **Device Busy 无法卸载** | 进程占用挂载点（如僵尸进程、NFS 客户端卡住）、内核 bug（老版本内核的 mount namespace 泄漏） | `lsof +D /var/lib/kubelet/pods/<uid>/volumes/` | 强制杀死占用进程（`fuser -km <path>`）；重启节点；升级内核至 5.10+ |
 
-#### 2.1.3 跨阶段复合故障
+#### 2.1.3 跨阶段复合问题
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
@@ -889,7 +889,7 @@ aws ec2 describe-volumes --volume-ids vol-abc123 \
 # 预期：available 或 in-use, attached
 ```
 
-**云平台常见故障**：
+**云平台常见问题**：
 - **AWS EBS**：
   - `VolumeInUse` 错误：卷已附着到其他实例，需手动 Detach
   - `RequestLimitExceeded`：API 调用频率超限，需启用指数退避
@@ -1176,16 +1176,16 @@ parameters:
 
 ### 5.1 案例一：Socket 路径不一致导致 30% 节点批量挂载失败
 
-#### 5.1.1 故障现场
+#### 5.1.1 问题现场
 
 **时间线**：
 - **T+0min**：运维团队在 Rancher 集群（使用自定义 kubelet 路径）上部署 AWS EBS CSI 驱动 v1.15
 - **T+5min**：用户创建 100 个 StatefulSet Pod，30% 的 Pod 卡在 `ContainerCreating`
 - **T+10min**：查看事件发现错误：`MountVolume.SetUp failed: driver name ebs.csi.aws.com not found in the list of registered CSI drivers`
-- **T+15min**：查询发现故障节点均分布在特定节点池（节点池 B，使用 `/opt/rancher/kubelet` 作为根目录）
+- **T+15min**：查询发现问题节点均分布在特定节点池（节点池 B，使用 `/opt/rancher/kubelet` 作为根目录）
 
 **初始假设**：
-- ❌ CSI Controller Pod 故障 → 已验证 Controller 正常运行
+- ❌ CSI Controller Pod 问题 → 已验证 Controller 正常运行
 - ❌ 网络分区 → 已验证节点网络正常
 - ❌ kubelet 版本不兼容 → 已验证版本一致（v1.28.5）
 
@@ -1201,7 +1201,7 @@ kubectl get csinode node-a-1 -o yaml
 #     nodeID: i-0a1b2c3d
 #     ✅ 驱动已注册
 
-# 故障节点（节点池 B）
+# 问题节点（节点池 B）
 kubectl get csinode node-b-1 -o yaml
 # spec:
 #   drivers: []  # ❌ 驱动列表为空
@@ -1218,7 +1218,7 @@ kubectl logs -n kube-system csi-ebs-node-xxx -c node-driver-registrar
 
 **Step 3：检查节点的 kubelet 根目录**
 ```bash
-# 在故障节点上执行
+# 在问题节点上执行
 ps aux | grep kubelet | grep -o -- '--root-dir=[^ ]*'
 # --root-dir=/opt/rancher/kubelet  # ❌ 非默认路径
 
@@ -1406,7 +1406,7 @@ spec:
 ```
 
 **成果**：
-- ✅ 故障节点从 30% 降至 0%
+- ✅ 问题节点从 30% 降至 0%
 - ✅ 新节点池自动适配不同 kubelet 路径
 - ✅ 平均修复时间从 35 分钟降至 5 分钟
 
@@ -1414,7 +1414,7 @@ spec:
 
 ### 5.2 案例二：CSI 驱动升级导致挂载点残留与 Pod 卡死
 
-#### 5.2.1 故障现场
+#### 5.2.1 问题现场
 
 **背景**：
 - 集群运行 AWS EBS CSI 驱动 v1.10.0
@@ -1624,13 +1624,13 @@ done
 **成果**：
 - ✅ 所有 150 个卡死 Pod 恢复
 - ✅ 建立 CSI 驱动升级 Runbook（包含回滚计划）
-- ✅ 后续升级（v1.15 → v1.20）零故障
+- ✅ 后续升级（v1.15 → v1.20）零问题
 
 ---
 
 ### 5.3 案例三：VolumeSnapshot 快照创建超时与后端不一致
 
-#### 5.3.1 故障现场
+#### 5.3.1 问题现场
 
 **背景**：
 - 使用 AWS EBS CSI 驱动的 Snapshot 功能进行定期备份
@@ -2072,12 +2072,12 @@ spec:
 
 ### F. 故障演练清单
 
-- [ ] **模拟 CSI Controller 故障**：删除 Controller Pod，验证 Leader Election 切换时间（<30s）
-- [ ] **模拟 CSI Node 故障**：停止节点上的 CSI Node Pod，验证新 Pod 是否无法挂载卷
-- [ ] **模拟存储后端故障**：人为触发云平台 API 限流，验证指数退避重试机制
+- [ ] **模拟 CSI Controller 问题**：删除 Controller Pod，验证 Leader Election 切换时间（<30s）
+- [ ] **模拟 CSI Node 问题**：停止节点上的 CSI Node Pod，验证新 Pod 是否无法挂载卷
+- [ ] **模拟存储后端问题**：人为触发云平台 API 限流，验证指数退避重试机制
 - [ ] **模拟节点下线**：Drain 节点并删除，验证 VolumeAttachment 是否自动清理
 - [ ] **模拟并发创建压力**：批量创建 1000 个 PVC，验证 Controller 是否能稳定处理
-- [ ] **模拟快照故障**：创建快照时中断网络，验证是否能正确回滚或重试
+- [ ] **模拟快照问题**：创建快照时中断网络，验证是否能正确回滚或重试
 
 ---
 

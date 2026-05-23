@@ -1094,7 +1094,7 @@ func main() {
 │  RenewDeadline = 10s  (续期截止)                                    │
 │  RetryPeriod   = 2s   (重试间隔)                                    │
 │                                                                    │
-│  Leader故障时, Standby在 LeaseDuration 后自动接管                 │
+│  Leader问题时, Standby在 LeaseDuration 后自动接管                 │
 └────────────────────────────────────────────────────────────────────┘
 ```
 

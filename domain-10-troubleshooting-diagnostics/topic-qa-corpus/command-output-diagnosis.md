@@ -1,6 +1,6 @@
 ---
 title: 命令输出解读语料 — Agent 诊断推理核心数据 [domain-10-troubleshooting-diagnostics]
-description: kubectl/系统命令输出→诊断结论的结构化映射, 供 Agent 直接用于故障推理
+description: kubectl/系统命令输出→诊断结论的结构化映射, 供 Agent 直接用于问题推理
 category: agent-corpus
 tags:
 - k8s

@@ -125,7 +125,7 @@ created: "2026-05-23"
 - [44-terway-operations-manual.md](44-terway-operations-manual.md) - Terway 运维手册：健康检查、GC 调优、告警规则、升级回滚、巡检清单
 - [45-terway-testing-validation.md](45-terway-testing-validation.md) - Terway 测试验证：端到端测试套件、ENI 压测、性能基准、MTU 测试
 - [46-terway-performance-tuning.md](46-terway-performance-tuning.md) - Terway 性能调优：内核调优、eBPF 加速、IP 池预热、生产基线
-- [47-terway-troubleshooting-fta.md](47-terway-troubleshooting-fta.md) - Terway 故障树速查：FTA 全景图、6 大故障类别、32 条错误信息目录
+- [47-terway-troubleshooting-fta.md](47-terway-troubleshooting-fta.md) - Terway 故障树速查：FTA 全景图、6 大问题类别、32 条错误信息目录
 
 > **深度参考**: 关于各主流 API 网关产品（Higress、APISIX、Kong、Envoy Gateway、Traefik）的企业级实践，请参考 [Domain-98: 云原生 API 网关](../domain-40-cloud-native-api-gateway)。
 

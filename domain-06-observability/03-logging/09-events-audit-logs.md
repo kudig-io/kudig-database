@@ -396,7 +396,7 @@ sensitive_operations:
 
 ### 5.1 常见事件模式分析
 
-#### 典型故障事件序列
+#### 典型问题事件序列
 ```yaml
 failure_patterns:
   pod_scheduling_failure:

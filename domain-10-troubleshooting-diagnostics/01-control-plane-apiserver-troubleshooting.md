@@ -94,7 +94,7 @@ related_docs:
 ## 相关文档交叉引用
 
 ### 🔗 关联故障排查文档
-- **[02-etcd故障排查](./02-control-plane-etcd-troubleshooting.md)** - API Server依赖etcd存储，etcd故障会直接影响API Server
+- **[02-etcd故障排查](./02-control-plane-etcd-troubleshooting.md)** - API Server依赖etcd存储，etcd问题会直接影响API Server
 - **[03-CNI网络故障排查](./03-networking-cni-troubleshooting.md)** - 网络问题可能导致API Server无法正常通信
 - **[35-节点组件故障排查](./35-node-component-troubleshooting.md)** - kubelet和容器运行时问题可能影响API Server
 - **[30-监控告警故障排查](./30-monitoring-alerting-troubleshooting.md)** - 监控API Server健康状态的最佳实践
@@ -112,9 +112,9 @@ related_docs:
 <!-- chunk: 1. API Server 故障诊断总览 (API Server Diagnosis Overview) -->
 ## 1. API Server 故障诊断总览 (API Server Diagnosis Overview)
 
-### 1.1 常见故障现象分类
+### 1.1 常见问题现象分类
 
-| 故障类型 | 症状表现 | 影响范围 | 紧急程度 |
+| 问题类型 | 症状表现 | 影响范围 | 紧急程度 |
 |---------|---------|---------|---------|
 | **完全不可用** | kubectl无法连接、503 Service Unavailable | 整个集群瘫痪 | P0 - 紧急 |
 | **性能下降** | API响应慢、超时、延迟高 | 所有操作变慢 | P1 - 高 |
@@ -203,7 +203,7 @@ related_docs:
 │   │ curl -vk https://<lb-ip>:6443/healthz                │                 │
 │   └──────────────────────────────────────────────────────┘                 │
 │           │                                                                  │
-│           ├─── LB故障 ──▶ 检查LB配置/后端实例                             │
+│           ├─── LB问题 ──▶ 检查LB配置/后端实例                             │
 │           │                                                                  │
 │           ▼                                                                  │
 │   ┌──────────────────────────────────────────────────────┐                 │
@@ -219,7 +219,7 @@ related_docs:
 │   │ ETCDCTL_API=3 etcdctl endpoint health --cluster       │                 │
 │   └──────────────────────────────────────────────────────┘                 │
 │           │                                                                  │
-│           ├─── etcd故障 ──▶ 转etcd故障排查                                 │
+│           ├─── etcd问题 ──▶ 转etcd故障排查                                 │
 │           │                                                                  │
 │           ▼                                                                  │
 │   ┌──────────────────────────────────────────────────────┐                 │
@@ -508,9 +508,9 @@ mv /tmp/kube-apiserver.yaml /etc/kubernetes/manifests/
 watch -n 2 'curl -sk https://localhost:6443/healthz'
 ```
 
-### 5.2 故障升级流程
+### 5.2 问题升级流程
 
-| 故障等级 | 响应时间 | 处理流程 |
+| 问题等级 | 响应时间 | 处理流程 |
 |---------|---------|---------|
 | **P0 - 完全不可用** | 15分钟内 | 立即召集值班团队，执行应急预案 |
 | **P1 - 性能严重下降** | 1小时内 | 通知二线支持，准备扩容方案 |

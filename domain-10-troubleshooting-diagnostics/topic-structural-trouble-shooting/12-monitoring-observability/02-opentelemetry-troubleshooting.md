@@ -155,7 +155,7 @@ k8s_versions:
 | **大促期间 Collector OOM** | 流量激增后 Collector Pod 反复重启 | 未配置 `memory_limiter`，批处理积压 | 启用 memory_limiter + 增大内存 + HPA |
 | **链路追踪数据不完整** | Jaeger 中只能看到部分服务的 span | 部分服务未正确配置 OTLP endpoint | 统一 SDK 配置，验证所有服务上报 |
 | **指标标签爆炸导致后端卡死** | Prometheus remote write 超时，Cardinality 过高 | 未过滤的高基数标签（如 user_id） | 配置 `resource` / `attributes` processor 过滤 |
-| **跨集群 Collector 级联故障** | Region A Collector 故障后 Region B 也过载 | 未配置 exporter 失败回退 + 本地队列 | 配置 persistent_queue + 降级策略 |
+| **跨集群 Collector 级联问题** | Region A Collector 问题后 Region B 也过载 | 未配置 exporter 失败回退 + 本地队列 | 配置 persistent_queue + 降级策略 |
 
 ### 1.2 报错查看方式汇总
 
@@ -222,7 +222,7 @@ OpenTelemetry Collector 的数据流架构：
 ### 2.2 排查逻辑决策树
 
 ```
-OpenTelemetry Collector 故障
+OpenTelemetry Collector 问题
     ├── 客户端无法上报
     │   ├── 网络不可达？
     │   │   ├── Service DNS 解析失败？──► 检查 Service 和 DNS
@@ -782,7 +782,7 @@ groups:
 6. **配置验证**：使用 `otelcol validate --config=...` 在 CI 中验证配置变更
 7. **降级策略**：Exporter 配置多个后端，主后端失败时自动切换到备用 `debug` 或 `file` exporter
 
-### 典型故障案例
+### 典型问题案例
 
 #### 案例一：未配置 memory_limiter 导致生产 Collector 雪崩
 

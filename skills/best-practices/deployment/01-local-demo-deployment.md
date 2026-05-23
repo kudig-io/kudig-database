@@ -93,7 +93,7 @@ k8s_versions:
 - 用 kind 或 minikube 在本机创建 K8s 集群
 - 用 kubectl 部署第一个 nginx 应用
 - 通过 Service 暴露应用并访问
-- 基本的故障模拟和回滚操作
+- 基本的问题模拟和回滚操作
 - 查看和理解 K8s 系统组件
 
 ---

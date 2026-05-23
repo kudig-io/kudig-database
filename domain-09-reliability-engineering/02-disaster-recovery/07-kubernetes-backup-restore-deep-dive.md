@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 <!-- chunk: 概述 -->## 概述
 
-Kubernetes 已经成为企业应用部署的标准平台，但 Kubernetes 自身并不提供内置的备份与灾难恢复能力。当集群遭遇灾难性故障——无论是 [[etcd|etcd]] 数据损坏、整个集群不可用、还是误操作删除关键资源——如果没有完善的备份策略，将面临严重的数据丢失和业务中断。本文档全面探讨 Kubernetes 环境下的备份与恢复实践，涵盖 Velero 深度配置、etcd 备份恢复、持久卷（PV）数据保护、CSI 快照集成、集群迁移以及完整的灾难恢复编排。
+Kubernetes 已经成为企业应用部署的标准平台，但 Kubernetes 自身并不提供内置的备份与灾难恢复能力。当集群遭遇灾难性问题——无论是 [[etcd|etcd]] 数据损坏、整个集群不可用、还是误操作删除关键资源——如果没有完善的备份策略，将面临严重的数据丢失和业务中断。本文档全面探讨 Kubernetes 环境下的备份与恢复实践，涵盖 Velero 深度配置、etcd 备份恢复、持久卷（PV）数据保护、CSI 快照集成、集群迁移以及完整的灾难恢复编排。
 
 #<!-- chunk: RPO 与 RTO 定义 -->## RPO 与 RTO 定义
 
@@ -500,7 +500,7 @@ k8s_recovery_procedures:
       - "执行应用健康检查"
       
   level_3_node_failure:
-    trigger: "节点硬件故障"
+    trigger: "节点硬件问题"
     rto_target: "5 分钟（自动）"
     steps:
       - "Kubernetes 自动驱逐 Pod"
@@ -560,7 +560,7 @@ k8s_dr_drill:
     scope: "在隔离环境验证 etcd 恢复流程"
     steps:
       - "搭建测试集群"
-      - "模拟 etcd 故障"
+      - "模拟 etcd 问题"
       - "执行 etcd 恢复"
       - "验证集群功能"
       - "记录恢复时间"
@@ -679,7 +679,7 @@ kubectl get pvc -A | grep -v Bound
 
 #<!-- chunk: 故障排查手册 -->## 故障排查手册
 
-| 故障现象 | 可能原因 | 排查步骤 | 解决方案 |
+| 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
 |:---|:---|:---|:---|
 | etcd 恢复后 API Server 不启动 | 快照与集群配置不匹配 | 检查 etcd 恢复参数 | 确保initial-cluster参数正确 |
 | Velero 备份卡在 InProgress | Node Agent 未运行 | 检查 [[DaemonSet|DaemonSet]] 状态 | 重启 Node Agent |

@@ -463,7 +463,7 @@ alert_deduplication:
         - maintenance_windows: 维护窗口期间抑制
         - known_issues: 已知问题库匹配抑制
         - deployment_activities: 部署活动期间智能抑制
-        - dependency_failures: 依赖服务故障时抑制
+        - dependency_failures: 依赖服务问题时抑制
 ```
 
 ### 4.2 统一告警路由

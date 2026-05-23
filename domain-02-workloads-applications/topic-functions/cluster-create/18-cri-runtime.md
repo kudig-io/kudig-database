@@ -696,7 +696,7 @@ ctr -n=k8s.io images import /tmp/k8s-images.tar
 crictl images
 ```
 
-### 场景 5: containerd 降级故障排除
+### 场景 5: containerd 降级问题排除
 
 ```bash
 # containerd 不可用时，查看状态

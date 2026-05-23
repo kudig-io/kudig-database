@@ -131,7 +131,7 @@ tier: peripheral---
 
 # 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 
-节点资源压力（MemoryPressure / DiskPressure / PIDPressure）是 [[Kubernetes|Kubernetes]] 集群中最常见但常被忽视的故障类型。与 Node NotReady 不同，处于资源压力状态的节点仍标记为 `Ready`，但 kubelet 会主动驱逐 Pod 以回收资源。若不及时处理，资源压力可能级联扩散，导致大规模 Pod 驱逐、服务降级甚至集群雪崩。
+节点资源压力（MemoryPressure / DiskPressure / PIDPressure）是 [[Kubernetes|Kubernetes]] 集群中最常见但常被忽视的问题类型。与 Node NotReady 不同，处于资源压力状态的节点仍标记为 `Ready`，但 kubelet 会主动驱逐 Pod 以回收资源。若不及时处理，资源压力可能级联扩散，导致大规模 Pod 驱逐、服务降级甚至集群雪崩。
 
 本 Skill 覆盖内存压力、磁盘压力（含 inode 耗尽）、PID 压力、镜像/容器存储膨胀、系统 OOM 等全部 10 种根因的诊断和修复。
 
@@ -375,7 +375,7 @@ echo 'query: predict_linear(node_filesystem_avail_bytes[1h], 3600) < 0'
 - **判断规则**:
   - 节点内存使用接近 100% → RC-001/002/003
   - 单个 Pod 内存使用异常高 → 可能是内存泄漏（RC-003 变种）
-  - kubectl top 不可用（metrics-server 故障）→ 记录，后续通过 SSH 检查
+  - kubectl top 不可用（metrics-server 问题）→ 记录，后续通过 SSH 检查
 - **版本差异**: 无
 
 ### Phase 2: 深度检查（只读，零风险，需 SSH）
@@ -807,7 +807,7 @@ ssh <node-ip> "ps aux --no-heading | wc -l && cat /proc/sys/kernel/pid_max"
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 - [ ] 节点所有 Pressure 条件为 False
 - [ ] 5 分钟内无新的 Evicted Pod
 - [ ] 磁盘/内存可用量稳定在阈值之上（至少 20% 余量）
@@ -832,13 +832,13 @@ ssh <node-ip> "ps aux --no-heading | wc -l && cat /proc/sys/kernel/pid_max"
 | 修复失败 | 同一修复操作执行 2 次仍未通过验证 |
 | 严重性升级 | 初始分级为 P2 但影响面扩大到多节点 |
 | 根因不明 | 诊断完成但无法匹配任何已知根因 |
-| 硬件故障 | 诊断发现磁盘/内存硬件问题 |
+| 硬件问题 | 诊断发现磁盘/内存硬件问题 |
 
 ### 8.2 升级消息模板
 
 ```
 【{severity}】{skill_name} - {cluster_name}
-- 故障概述: 节点 {node_name} 出现 {pressure_type}，已驱逐 {evicted_count} 个 Pod
+- 问题概述: 节点 {node_name} 出现 {pressure_type}，已驱逐 {evicted_count} 个 Pod
 - 影响范围: {affected_namespaces} 命名空间受影响
 - 已完成诊断: {completed_steps}
 - 初步发现: {findings}

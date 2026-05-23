@@ -135,7 +135,7 @@ flowchart TD
   OR0 --> CAT_RESET["C. kubeadm reset 失败"]
   OR0 --> CAT_UPGRADE["D. kubeadm upgrade 失败"]
   OR0 --> CAT_CONFIG["E. kubeadm config 生成错误"]
-  OR0 --> CAT_CERTS["F. 证书相关故障"]
+  OR0 --> CAT_CERTS["F. 证书相关问题"]
 
   %% ======== A. init ========
   A_OR{{OR}}

@@ -304,7 +304,7 @@ kubectl get events --field-selector involvedObject.name=my-app-7d5bc-xyz12,type=
 |:---|:---|:---|
 | Created 后无 Started | 容器 entrypoint 配置错误 | 检查 Pod spec 的 `command` 和 `args` 字段 |
 | Created 后立即 Failed | PostStart 钩子失败 | 检查 `FailedPostStartHook` 事件 |
-| Created 后长时间无响应 | 容器运行时故障 | 检查节点上的 containerd/docker 日志 |
+| Created 后长时间无响应 | 容器运行时问题 | 检查节点上的 containerd/docker 日志 |
 
 ---
 
@@ -1102,7 +1102,7 @@ kubelet 无法创建 Pod 沙箱（Sandbox），导致 Pod 无法启动。**Pod �
 
 **失败原因分类**:
 1. **网络插件问题** - CNI 插件配置错误或不可用（最常见 ~70%）
-2. **容器运行时问题** - containerd/CRI-O 故障
+2. **容器运行时问题** - containerd/CRI-O 问题
 3. **节点资源问题** - 节点磁盘、内存、PID 资源耗尽
 4. **内核参数问题** - 如 `net.ipv4.ip_forward` 未开启
 5. **SELinux/AppArmor 限制** - 安全策略阻止
@@ -1135,7 +1135,7 @@ Events:
 
 - **用户影响**: **高** - Pod 完全无法启动，卡在 Pending 状态
 - **服务影响**: **严重** - 该 Pod 无法提供服务，可能导致服务容量不足
-- **集群影响**: **可能扩散** - 如果是节点级问题（如 CNI 故障），该节点上的所有新 Pod 都会失败
+- **集群影响**: **可能扩散** - 如果是节点级问题（如 CNI 问题），该节点上的所有新 Pod 都会失败
 - **关联事件链**: 
   - CNI 问题: `Scheduled` → `FailedCreatePodSandBox` (循环重试)
   - 节点问题: 多个 Pod 同时出现 `FailedCreatePodSandBox`
@@ -1256,7 +1256,7 @@ sudo modprobe br_netfilter
 
 **典型案例解决方案**:
 
-**案例 1: Calico CNI 插件故障**
+**案例 1: Calico CNI 插件问题**
 ```bash
 # 错误: failed to setup network for sandbox: plugin type="calico" failed
 
@@ -1345,11 +1345,11 @@ sudo sysctl -p
 
 ##<!-- chunk: 事件含义 -->## 事件含义
 
-kubelet 无法从容器运行时获取 Pod 沙箱的状态信息。这通常表明容器运行时（containerd/CRI-O）出现故障或响应缓慢。
+kubelet 无法从容器运行时获取 Pod 沙箱的状态信息。这通常表明容器运行时（containerd/CRI-O）出现问题或响应缓慢。
 
 **与 FailedCreatePodSandBox 的区别**:
 - `FailedCreatePodSandBox`: 创建沙箱失败（沙箱不存在）
-- `FailedPodSandBoxStatus`: 沙箱存在，但无法查询其状态（运行时故障）
+- `FailedPodSandBoxStatus`: 沙箱存在，但无法查询其状态（运行时问题）
 
 ##<!-- chunk: 典型事件消息 -->## 典型事件消息
 
@@ -1384,7 +1384,7 @@ sudo crictl --timeout=10s pods  # 如果超时，说明运行时响应慢
 # 3. 检查沙箱列表
 sudo crictl sandboxes | grep my-app
 
-# 4. 查看节点资源（运行时故障常因资源不足）
+# 4. 查看节点资源（运行时问题常因资源不足）
 top
 df -h
 ```
@@ -1395,7 +1395,7 @@ df -h
 |:---|:---|:---|
 | connection error | containerd/CRI-O 进程崩溃 | 重启容器运行时: `systemctl restart containerd` |
 | context deadline exceeded | 容器运行时响应超时 | 检查节点负载，考虑驱逐部分 Pod |
-| 节点资源耗尽 | 磁盘/内存/PID 耗尽导致运行时故障 | 清理资源或标记节点不可调度 |
+| 节点资源耗尽 | 磁盘/内存/PID 耗尽导致运行时问题 | 清理资源或标记节点不可调度 |
 
 ---
 
@@ -2204,7 +2204,7 @@ kubectl rollout status deployment web-app
 kubectl get pods
 ```
 
-#<!-- chunk: 案例 2: FailedCreatePodSandBox 网络故障 -->## 案例 2: FailedCreatePodSandBox 网络故障
+#<!-- chunk: 案例 2: FailedCreatePodSandBox 网络问题 -->## 案例 2: FailedCreatePodSandBox 网络问题
 
 **现象**:
 ```bash

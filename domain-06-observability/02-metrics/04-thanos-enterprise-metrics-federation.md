@@ -614,13 +614,13 @@ groups:
 }
 ```
 
-<!-- chunk: 故障排除 (Troubleshooting) -->## 故障排除 (Troubleshooting)
+<!-- chunk: 问题排除 (Troubleshooting) -->## 问题排除 (Troubleshooting)
 
 #<!-- chunk: 常见问题诊断 (Common Issue Diagnosis) -->## 常见问题诊断 (Common Issue Diagnosis)
 
 ```bash
 #!/bin/bash
-# Thanos 故障排除工具
+# Thanos 问题排除工具
 
 # 检查组件状态
 check_component_status() {
@@ -680,7 +680,7 @@ data_consistency_check() {
 1. **高可用部署**
    - Receive 组件至少3个副本
    - Query 组件水平扩展
-   - 使用 Pod Anti-Affinity 避免单点故障
+   - 使用 Pod Anti-Affinity 避免单点问题
 
 2. **资源配置**
    ```yaml

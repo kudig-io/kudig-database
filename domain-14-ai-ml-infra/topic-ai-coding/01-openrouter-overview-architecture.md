@@ -52,7 +52,7 @@ created: "2026-05-23"
 |------|------|
 | **统一接口** | 一个 API 端点 (`/api/v1/chat/completions`) 访问所有模型，完全兼容 OpenAI SDK |
 | **透明定价** | 直通 Provider 原始定价，无推理加价（仅充值时收取 5.5% 手续费） |
-| **高可用** | 自动故障转移 + 多 Provider 负载均衡，单 Provider 故障对应用透明 |
+| **高可用** | 自动故障转移 + 多 Provider 负载均衡，单 Provider 问题对应用透明 |
 | **智能路由** | 基于价格/吞吐量/延迟的智能排序，支持性能阈值和自动模型选择 |
 | **零迁移成本** | OpenAI SDK 直接兼容，仅需更改 `baseURL` 即可接入 |
 
@@ -240,7 +240,7 @@ graph TB
 |------|---------------------|---------|
 | **多模型 A/B 测试** | 一个端点切换模型，无需代码变更 | Model 参数动态切换 |
 | **成本优化** | 同一模型多 Provider 比价 + 自动选择最低价 | `:floor` 变体、Price Sort |
-| **高可用生产系统** | 自动故障转移，无单点故障 | Model Fallback、Provider LB |
+| **高可用生产系统** | 自动故障转移，无单点问题 | Model Fallback、Provider LB |
 | **快速原型** | 免费模型变体 (`:free`) + 内置 Web Search | Free Models、Plugins |
 | **企业合规** | EU Data Residency + Zero Data Retention | ZDR、EU Routing |
 | **Agent 工具后端** | 为 Aider、Cline、OpenCode 等 Agent 提供统一 LLM 后端 | OpenAI 兼容、BYOK |

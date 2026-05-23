@@ -139,7 +139,7 @@ MySQL 是全球使用最广泛的开源关系型数据库，由 Oracle 公司维
 
 ProxySQL 是 MySQL 生态中最流行的数据库代理，核心优势在于高性能的连接池（支持 transaction 级别的连接复用）和灵活的查询路由规则。在典型的企业架构中，应用通过 ProxySQL 连接数据库，ProxySQL 根据查询规则将 SELECT 语句路由到只读副本、将写操作路由到主库，实现了透明的读写分离。
 
-Orchestrator 是 MySQL 复制拓扑管理工具，提供了 Web UI 来可视化管理 MySQL 的主从关系。它支持自动故障检测和恢复（Automatic Recovery），可以在主库故障时自动执行故障转移，并通过 raft 共识协议实现自身的 HA 部署。
+Orchestrator 是 MySQL 复制拓扑管理工具，提供了 Web UI 来可视化管理 MySQL 的主从关系。它支持自动故障检测和恢复（Automatic Recovery），可以在主库问题时自动执行故障转移，并通过 raft 共识协议实现自身的 HA 部署。
 
 #<!-- chunk: 1.2 PostgreSQL 生态 -->## 1.2 PostgreSQL 生态
 

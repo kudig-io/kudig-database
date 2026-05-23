@@ -937,7 +937,7 @@ metadata:
 data:
   recovery-playbook.yaml: |
     failure_scenarios:
-      - name: "单集群故障"
+      - name: "单集群问题"
         detection:
           prometheus_alert: "ClusterDown"
           threshold: "持续5分钟"

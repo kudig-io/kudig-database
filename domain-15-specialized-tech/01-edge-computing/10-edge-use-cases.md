@@ -2531,7 +2531,7 @@ class EdgeROIAnalysis:
     bandwidth_savings_annual: float     # 带宽节省（年）
     latency_improvement_value: float    # 延迟改善带来的业务价值（年）
     efficiency_gain_value: float        # 效率提升带来的价值（年）
-    downtime_reduction_value: float     # 故障减少节省（年）
+    downtime_reduction_value: float     # 问题减少节省（年）
     compliance_cost_avoidance: float    # 合规风险规避（年）
     
     # 生命周期（年）

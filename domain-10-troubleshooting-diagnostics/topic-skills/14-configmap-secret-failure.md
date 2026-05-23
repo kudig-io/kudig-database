@@ -68,7 +68,7 @@ created: "2026-05-23"
 
 ## 1. 概述
 
-ConfigMap 和 Secret 是 [[Kubernetes|Kubernetes]] 中管理应用配置和敏感数据的核心资源。配置管理故障会导致 Pod 无法启动、应用行为异常、敏感数据泄露风险等问题。随着 External Secrets Operators]] Operator、Vault Agent Injector 等外部 Secret 管理方案的普及，配置管理的复杂度和故障模式也在增加。
+ConfigMap 和 Secret 是 [[Kubernetes|Kubernetes]] 中管理应用配置和敏感数据的核心资源。配置管理问题会导致 Pod 无法启动、应用行为异常、敏感数据泄露风险等问题。随着 External Secrets Operators]] Operator、Vault Agent Injector 等外部 Secret 管理方案的普及，配置管理的复杂度和故障模式也在增加。
 
 ### 典型触发场景
 
@@ -100,7 +100,7 @@ ConfigMap 和 Secret 是 [[Kubernetes|Kubernetes]] 中管理应用配置和敏�
 | SP-03 | 环境变量注入值为空，应用因缺少配置无法正常运行 / Environment variables from ConfigMap/Secret are empty | `kubectl exec POD -n NS -- env \| grep KEY` 返回空或变量不存在 | 0.85 | 应用自身覆盖了环境变量；ConfigMap/Secret 中该 Key 值本身为空 |
 | SP-04 | Volume 挂载的配置文件内容为空或仍是旧版本 / Mounted config file is empty or stale | `kubectl exec POD -n NS -- cat /path/to/config` 内容与 ConfigMap 不符 | 0.85 | 容器启动脚本修改了配置文件；应用自身生成了同名文件覆盖挂载 |
 | SP-05 | SubPath 挂载的配置文件更新 ConfigMap 后未自动刷新 / SubPath mounted file not auto-updating | 更新 ConfigMap 后，`kubectl exec POD -- cat /path/subpath-file` 仍显示旧内容 | 0.95 | 这是 SubPath 的预期行为，非 bug，需使用其他方案实现热更新 |
-| SP-06 | 尝试修改 Immutable ConfigMap/Secret 时报错 `field is immutable` / Cannot modify immutable ConfigMap/Secret | `kubectl apply/edit` 操作返回 `Invalid value: true: field is immutable` | 0.98 | 非故障，需删除重建或使用新名称 |
+| SP-06 | 尝试修改 Immutable ConfigMap/Secret 时报错 `field is immutable` / Cannot modify immutable ConfigMap/Secret | `kubectl apply/edit` 操作返回 `Invalid value: true: field is immutable` | 0.98 | 非问题，需删除重建或使用新名称 |
 | SP-07 | ExternalSecret 资源 status 为 NotReady 或 SecretSyncedError / ExternalSecret sync failed | `kubectl get externalsecret -n NS` STATUS 列非 Ready；`kubectl describe externalsecret` 显示错误 | 0.90 | External Secrets Operator 正在重启或升级中 |
 | SP-08 | Vault Agent sidecar 容器异常或 init container 失败 / Vault Agent injection failed | `kubectl get pods -n NS` 显示 Pod 有 vault-agent 容器处于 Error/CrashLoopBackOff | 0.85 | Vault 服务端正在维护；annotation 配置错误 |
 | SP-09 | apiserver 日志显示 Secret 解密失败 (KMS provider error) / Secret decryption failed with KMS error | `kubectl logs kube-apiserver-xxx -n kube-system` 包含 `failed to decrypt` 或 KMS 相关错误 | 0.80 | KMS 服务短暂不可用（网络抖动） |
@@ -138,9 +138,9 @@ ConfigMap 和 Secret 是 [[Kubernetes|Kubernetes]] 中管理应用配置和敏�
 | 排除条件 | 正确路由 | 说明 |
 |---------|---------|------|
 | Pod 因 ImagePullBackOff 启动失败，非配置问题 | SKILL-POD-001 | 镜像拉取问题，与 ConfigMap/Secret 无关 |
-| Secret 权限问题（RBAC 禁止访问）| SKILL-SEC-001 | ServiceAccount 无权读取 Secret，属于安全/权限类故障 |
+| Secret 权限问题（RBAC 禁止访问）| SKILL-SEC-001 | ServiceAccount 无权读取 Secret，属于安全/权限类问题 |
 | 应用配置解析错误（YAML/JSON 语法错误）| 应用层问题 | 配置内容正确挂载，但格式错误由应用负责 |
-| etcd 整体不可用导致所有资源无法读取 | 控制平面故障 | etcd 集群故障，超出本 Skill 范围 |
+| etcd 整体不可用导致所有资源无法读取 | 控制平面问题 | etcd 集群问题，超出本 Skill 范围 |
 | 网络策略阻止 Pod 访问外部 Secret 存储 | SKILL-NET-001 | NetworkPolicy 问题，非配置管理范畴 |
 
 ---
@@ -149,7 +149,7 @@ ConfigMap 和 Secret 是 [[Kubernetes|Kubernetes]] 中管理应用配置和敏�
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径：
+按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 检查受影响 Pod 数量和状态
 ```bash
@@ -190,7 +190,7 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
 
 | 条件 | 级别 | 说明 | SLA 要求 |
 |------|------|------|---------|
-| >10 个 Pod 因配置问题无法启动 **或** 涉及核心服务 ConfigMap/Secret | **P1** | 大规模配置故障，影响业务可用性 | 15min 内响应，30min 内修复 |
+| >10 个 Pod 因配置问题无法启动 **或** 涉及核心服务 ConfigMap/Secret | **P1** | 大规模配置问题，影响业务可用性 | 15min 内响应，30min 内修复 |
 | 3-10 个 Pod 受影响 **或** 外部 Secret 同步异常影响多个应用 | **P2** | 中等规模影响，部分服务降级 | 30min 内响应，2h 内修复 |
 | 1-2 个 Pod 受影响 **或** 配置更新不生效需人工干预 | **P3** | 小范围影响，可通过重启 Pod 临时缓解 | 4h 内处理 |
 
@@ -981,7 +981,7 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
      kubectl get nodes
      ```
 - **安全检查**:
-  - 确保有多个 control plane 节点（HA 模式），避免单点故障
+  - 确保有多个 control plane 节点（HA 模式），避免单点问题
   - 在变更前通知相关团队
   - 准备好回滚方案
 - **回滚方案**:
@@ -1112,7 +1112,7 @@ kubectl logs <pod-name> -n <namespace> --tail=20 | grep -i config
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 
 - [ ] 引用配置的 Pod 全部处于 Running 状态
 - [ ] ConfigMap/Secret 内容正确且可被 Pod 读取
@@ -1144,15 +1144,15 @@ kubectl logs <pod-name> -n <namespace> --tail=20 | grep -i config
 | **诊断超时** | 诊断工作流执行超过 **15 分钟**未能确认根因 | Phase 2 结束后仍无明确根因 |
 | **修复失败** | 同一修复操作执行 **2 次**仍未通过后置验证 | REM-xxx 执行后验证失败 |
 | **严重性升级** | 初始分级为 P3 但影响面扩大（更多 Pod 失败） | 诊断过程中受影响 Pod 数增加 |
-| **KMS 完全故障** | 所有 Secret 读取失败 | D2.7 显示 KMS 完全不可用 |
+| **KMS 完全问题** | 所有 Secret 读取失败 | D2.7 显示 KMS 完全不可用 |
 | **安全疑虑** | 怀疑 Secret 泄露或被恶意修改 | 任何诊断步骤发现安全异常 |
 
 ### 8.2 升级消息模板
 
 ```
-【{severity}】ConfigMap/Secret 配置故障 - {cluster_name}
+【{severity}】ConfigMap/Secret 配置问题 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: {config_type} `{config_name}` 在 namespace `{namespace}` 中存在问题
+- 问题概述: {config_type} `{config_name}` 在 namespace `{namespace}` 中存在问题
 - 影响范围:
   - 受影响 Pod: {affected_pod_count} 个
   - 受影响 Namespace: {affected_namespaces}
@@ -1280,7 +1280,7 @@ kubectl logs <pod-name> -n <namespace> --tail=20 | grep -i config
 
 | 日期 | 版本 | 变更 | 原因 |
 |------|------|------|------|
-| 2026-03 | v1.0 | 初始版本发布。覆盖 K8s v1.28-v1.32，包含 12 个根因、11 个修复操作 | 配置管理故障是高频问题，需要系统化的诊断流程 |
+| 2026-03 | v1.0 | 初始版本发布。覆盖 K8s v1.28-v1.32，包含 12 个根因、11 个修复操作 | 配置管理问题是高频问题，需要系统化的诊断流程 |
 
 ### 10.4 待补充的知识空白
 

@@ -101,7 +101,7 @@ def generate_runbook(basic_event):
 
 ## 11.2 结构化 Runbook 示例
 
-**示例：etcd 集群故障 Runbook**（从 FTA BE-1.2 自动生成）：
+**示例：etcd 集群问题 Runbook**（从 FTA BE-1.2 自动生成）：
 
 ```yaml
 runbook:

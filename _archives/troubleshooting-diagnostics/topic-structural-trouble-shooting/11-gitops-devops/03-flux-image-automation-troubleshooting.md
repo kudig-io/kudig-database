@@ -165,7 +165,7 @@ ImageUpdateAutomation
 ### 2.2 排查逻辑决策树
 
 ```
-Flux 镜像自动化故障
+Flux 镜像自动化问题
     ├── ImageRepository 未就绪
     │   ├── 认证失败？
     │   │   ├── Secret 不存在？──► 创建正确的 imagePullSecret
@@ -646,7 +646,7 @@ groups:
 6. **多架构过滤**：使用 `exclusionList` 排除非目标架构的标签，避免策略选择错误架构
 7. **监控仓库配额**：私有镜像仓库（如 Harbor）通常有项目配额，监控避免推送失败
 
-### 典型故障案例
+### 典型问题案例
 
 #### 案例一：GitHub PAT 权限不足导致提交失败
 

@@ -97,7 +97,7 @@ spec:
 | 能力 | 说明 | 适用场景 |
 |------|------|----------|
 | **负载均衡** | 支持轮询、最少连接、一致性哈希、基于权重的分发 | 通用流量分发 |
-| **熔断** | 当错误率超过阈值时自动切断流量，防止级联故障 | 保护下游依赖 |
+| **熔断** | 当错误率超过阈值时自动切断流量，防止级联问题 | 保护下游依赖 |
 | **重试与超时** | 自动重试失败请求并设置最大等待时间 | 提升容错能力 |
 | **流量镜像** | 将生产流量复制到影子环境用于测试 | 安全验证新版本 |
 | **金丝雀发布** | 按百分比逐步将流量切到新版本 | 降低发布风险 |
@@ -126,7 +126,7 @@ spec:
 ## 最佳实践/注意事项
 
 - **评估 Sidecar vs Sidecar-less**：资源敏感型工作负载优先考虑 Cilium Service Mesh 或 Istio Ambient；功能复杂场景优先 Istio Sidecar
-- **控制平面高可用**：istiod 或 linkerd-control-plane 必须多副本部署，避免单点故障导致全集群流量中断
+- **控制平面高可用**：istiod 或 linkerd-control-plane 必须多副本部署，避免单点问题导致全集群流量中断
 - **渐进式启用 mTLS**：生产环境建议从 `PERMISSIVE` 模式开始，验证无误后再切换到 `STRICT` 模式
 - **监控 Sidecar 资源消耗**：Istio Envoy 默认请求 100m CPU / 128Mi 内存，大规模部署时这笔开销不可忽视
 - **避免 L7 策略滥用**：过多的 HTTP 路由规则会降低代理性能，应定期审查和精简 VirtualService/HTTPRoute
@@ -151,7 +151,7 @@ spec:
 |------|----------|----------|
 | Sidecar 注入后 Pod 启动变慢 | Envoy 初始化和 xDS 配置拉取耗时 | 检查 istiod 负载；调整 Envoy concurrency |
 | 服务间 503 错误 | 目标 Pod 未注入 Sidecar 或 mTLS 模式不匹配 | `istioctl analyze`；检查 PeerAuthentication 模式 |
-| istiod 单点故障导致路由异常 | 控制平面未多副本部署 | `kubectl get deploy istiod -n istio-system` 确认副本数 ≥ 2 |
+| istiod 单点问题导致路由异常 | 控制平面未多副本部署 | `kubectl get deploy istiod -n istio-system` 确认副本数 ≥ 2 |
 | 证书过期导致通信中断 | CA 根证书过期或轮换失败 | `istioctl proxy-config secret <pod>` 检查证书有效期 |
 | L7 策略导致性能下降 | VirtualService/HTTPRoute 规则过多 | 精简路由规则；评估是否仅需 L4 策略 |
 

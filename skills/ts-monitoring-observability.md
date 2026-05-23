@@ -42,7 +42,7 @@ created: "2026-05-23"
 
 ### 01 Monitoring Observability TroubleshootingObservability）|Observability]] Troubleshooting
 
-#### 可观测性核心组件故障现象
+#### 可观测性核心组件问题现象
 
 | 问题类型 | 典型现象 | 影响程度 | 紧急级别 |
 |---------|---------|---------|---------|

@@ -57,7 +57,7 @@ FEBM 与 FTA 形成方法论互补：FTA 采用**演绎法**（自上而下，�
 | 目标 | 推荐起点 |
 |:---|:---|
 | **快速了解 FEBM** | 第一章：FEBM 方法论原理与理论基础](./01-febm-theory-foundations.md) |
-| **快速落地 FEBM** | [第八章：生产环境快速启动与 K8s 故障取证手册](./08-febm-production-quick-start.md) |
+| **快速落地 FEBM** | [第八章：生产环境快速启动与 K8s 问题取证手册](./08-febm-production-quick-start.md) |
 | **技术实现深度** | [第二章：FEBM 技术实现体系](./02-febm-technical-implementation.md) |
 | **AI Agent 工单处理** | 第四章：FEBM 对云平台工单智能体托管的意义](./04-febm-agent-ticket-processing.md) |
 | **FTA vs FEBM** | [FTA-vs-FEBM.pdf](./FTA-vs-FEBM.pdf)（原始论文） |
@@ -90,7 +90,7 @@ FEBM 与 FTA 形成方法论互补：FTA 采用**演绎法**（自上而下，�
 | 5 | [FEBM 体系建设方法论](./05-febm-construction-methodology.md) | 五级成熟度模型、分阶段建设路线（Phase 1-5）、工具链参考、组织角色矩阵、实施建议、预算规划、合规法律考量 | 2,873 |
 | 6 | [未来演进方向](./06-febm-future-evolution.md) | AI/ML 增强混合方法、云原生取证基础设施（OSDFIR）、DevSecOps 融合、意图模型协同、数字孪生、量子计算影响、标准化 | 3,916 |
 | 7 | [附录](./07-febm-appendix.md) | 50+ 术语表、参考标准与规范（NIST/ISO/RFC）、40+ 工具速查表、K8s 审计策略模板、[[entities/falco.md|[[Falco|Falco]]]] 检测规则模板、事件响应 Checklist | 1,267 |
-| 8 | [生产环境快速启动与 K8s 故障取证手册](./08-febm-production-quick-start.md) | **第一周行动清单**、最小化工具栈部署、6个 K8s 故障取证 Runbook（OOMKilled/CrashLoopBackOff/NodeNotReady/间歇超时/证书过期/配置漂移）、FTA+FEBM 联合诊断、KPI 仪表板、合规快速参考 | 1,600+ |
+| 8 | [生产环境快速启动与 K8s 问题取证手册](./08-febm-production-quick-start.md) | **第一周行动清单**、最小化工具栈部署、6个 K8s 问题取证 Runbook（OOMKilled/CrashLoopBackOff/NodeNotReady/间歇超时/证书过期/配置漂移）、FTA+FEBM 联合诊断、KPI 仪表板、合规快速参考 | 1,600+ |
 
 ---
 
@@ -116,7 +116,7 @@ FTA vs FEBM:
   FTA (演绎法)                          FEBM (归纳法)
   "系统可能在哪里出问题？"              "系统实际发生了什么？"
   自上而下：假设 → 验证                 自下而上：证据 → 结论
-  适合：已知故障模式、架构评审           适合：未知故障、安全事件、动态环境
+  适合：已知故障模式、架构评审           适合：未知问题、安全事件、动态环境
 ```
 
 ---

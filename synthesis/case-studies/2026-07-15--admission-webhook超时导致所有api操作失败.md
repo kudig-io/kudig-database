@@ -23,7 +23,7 @@ updated: "2026-05-23"
 11:05 检查webhook配置：kubectl get validatingwebhookconfiguration
 11:10 发现自定义admission webhook的service后端已不存在
 11:15 webhook配置了failurePolicy: Fail，导致所有请求被阻断
-11:20 临时删除故障webhook配置恢复服务
+11:20 临时删除问题webhook配置恢复服务
 11:30 检查webhook部署历史：namespace被误删除导致service消失
 11:45 重新部署webhook并验证
 12:00 制定webhook管理规范：必须配置failurePolicy: Ignore或确保高可用

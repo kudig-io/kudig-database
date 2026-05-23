@@ -212,7 +212,7 @@ spec:
 └────────────────────┬────────────────────────────────────────────┘
                      ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│ 3. Leader 故障 → Follower 接管                                  │
+│ 3. Leader 问题 → Follower 接管                                  │
 │    - Replica 1 Crash,停止续约                                   │
 │    - Replica 2 检测到 Lease 过期(renewTime + 15s < now)         │
 │    - Replica 2 尝试更新 Lease.holderIdentity = "replica-2"      │
@@ -849,7 +849,7 @@ kubectl logs -n default -l app=my-controller --tail=20
 # Pod my-controller-7d8f9b5c6-def456: Waiting for leader election...
 # Pod my-controller-7d8f9b5c6-ghi789: Waiting for leader election...
 
-# 模拟 Leader 故障
+# 模拟 Leader 问题
 kubectl delete pod my-controller-7d8f9b5c6-abc123 -n default
 
 # 观察新 Leader 产生(通常 10-15 秒内)

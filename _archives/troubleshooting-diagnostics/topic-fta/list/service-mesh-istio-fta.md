@@ -1,6 +1,6 @@
 ---
 title: Service Mesh(Istio) 异常故障树分析
-description: '- **目标**：覆盖 Istio 控制面不可用、Sidecar 注入失败、xDS 配置推送异常、mTLS 证书问题、数据面流量异常与多集群联邦故障的关键成因与路径。'
+description: '- **目标**：覆盖 Istio 控制面不可用、Sidecar 注入失败、xDS 配置推送异常、mTLS 证书问题、数据面流量异常与多集群联邦问题的关键成因与路径。'
 category: fta
 tags:
 - fta
@@ -60,7 +60,7 @@ cross_refs:
 # Service Mesh（Istio）异常 FTA 树
 
 ## 适用范围与说明
-- **目标**：覆盖 Istio 控制面不可用、Sidecar 注入失败、xDS 配置推送异常、mTLS 证书问题、数据面流量异常与多集群联邦故障的关键成因与路径。
+- **目标**：覆盖 Istio 控制面不可用、Sidecar 注入失败、xDS 配置推送异常、mTLS 证书问题、数据面流量异常与多集群联邦问题的关键成因与路径。
 - **范围**：istiod 控制面、Sidecar 注入器（MutatingWebhook）、xDS/Envoy 配置同步、mTLS 证书生命周期、VirtualService/DestinationRule 流量策略、Gateway、多集群/联邦。
 - **符号**：
   - **OR 门**：任一子事件成立即可触发父事件
@@ -628,7 +628,7 @@ flowchart TD
     },
     {
       "name": "E4. 重试/超时配置不当", "action": "bottom_event", "step": "event_retry_storm",
-      "description": "过于激进的重试配置导致重试风暴，放大后端故障",
+      "description": "过于激进的重试配置导致重试风暴，放大后端问题",
       "next_step": "end",
       "metadata": {
         "severity": "high",

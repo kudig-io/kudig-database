@@ -40,7 +40,7 @@ created: "2026-05-23"
 1. 定义稳态假设
    → "正常情况下，服务延迟 P99 < 200ms，错误率 < 0.1%"
 
-2. 识别变量（要注入的故障）
+2. 识别变量（要注入的问题）
    → 网络延迟增加 100ms
 
 3. 定义成功标准
@@ -50,7 +50,7 @@ created: "2026-05-23"
    → 错误率 > 5% 或 P99 > 2s
 
 5. 执行实验
-   → 使用 Chaos Mesh 注入故障
+   → 使用 Chaos Mesh 注入问题
 
 6. 监控和记录
    → 实时观察指标变化
@@ -89,7 +89,7 @@ spec:
   duration: "5m"
 ```
 
-### 2. Pod 级联故障实验
+### 2. Pod 级联问题实验
 
 ```yaml
 apiVersion: chaos-mesh.org/v1alpha1
@@ -200,10 +200,10 @@ spec:
   duration: "3m"
 ```
 
-### 8. 级联依赖故障实验
+### 8. 级联依赖问题实验
 
 ```yaml
-# 同时注入多个故障
+# 同时注入多个问题
 apiVersion: chaos-mesh.org/v1alpha1
 kind: Workflow
 metadata:

@@ -2279,7 +2279,7 @@ wash app status orders-update
 #<!-- chunk: 12.3 故障恢复 / Disaster Recovery -->## 12.3 故障恢复 / Disaster Recovery
 
 ```bash
-# 场景：Host 故障后自动恢复
+# 场景：Host 问题后自动恢复
 
 # wasmCloud 自动恢复机制：
 # 1. wadm 检测到 Host 离线（心跳超时）

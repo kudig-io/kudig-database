@@ -66,12 +66,12 @@ created: "2026-05-23"
 # Kind / [[k3s|K3s]] 单机集群故障排查
 
 > **文档类型**: 故障排查手册 | **适用版本**: Kind (K8s 1.28-1.33) / K3s | **最后更新**: 2026-05
-> **使用场景**: Agent 处理开发/测试环境（Kind/K3s）的常见故障
+> **使用场景**: Agent 处理开发/测试环境（Kind/K3s）的常见问题
 
 ---
 
-<!-- chunk: 1. Kind 单机集群故障 -->
-## 1. Kind 单机集群故障
+<!-- chunk: 1. Kind 单机集群问题 -->
+## 1. Kind 单机集群问题
 
 ### 1.1 Kind 简介与核心概念
 
@@ -106,7 +106,7 @@ kind load docker-image <image> --name=dev  # 加载镜像到节点
 
 ### 1.2 Kind 端口冲突导致创建失败
 
-**故障现象**: `kind create cluster` 报错 "port 6443 is already in use"
+**问题现象**: `kind create cluster` 报错 "port 6443 is already in use"
 
 **排查步骤**：
 ```bash
@@ -140,7 +140,7 @@ kind create cluster --config kind-config.yaml --name=dev
 
 ### 1.3 Kind 镜像加载失败
 
-**故障现象**: `kind load docker-image myapp:v1.0` 报错 "image not found" 或超时
+**问题现象**: `kind load docker-image myapp:v1.0` 报错 "image not found" 或超时
 
 **排查步骤**：
 ```bash
@@ -172,7 +172,7 @@ kind create cluster --config registry-config.yaml --name=dev
 
 ### 1.4 Kind 存储路径问题（Pod 数据丢失）
 
-**故障现象**: Pod 重启后数据丢失，或 PV 无法持久化
+**问题现象**: Pod 重启后数据丢失，或 PV 无法持久化
 
 **根因**: Kind 节点的 `/var/lib/kubelet` 等目录是容器内的匿名卷，重启后数据丢失
 
@@ -214,7 +214,7 @@ EOF
 
 ### 1.5 Kind 多节点集群网络问题
 
-**故障现象**: Worker 节点无法与 Control Plane 通信，Pod 之间跨节点不通
+**问题现象**: Worker 节点无法与 Control Plane 通信，Pod 之间跨节点不通
 
 **排查步骤**：
 ```bash
@@ -248,7 +248,7 @@ kubectl get nodes -o wide
 
 ### 1.6 Kind 集群无法删除（残留）
 
-**故障现象**: `kind delete cluster` 卡住或报错，容器无法删除
+**问题现象**: `kind delete cluster` 卡住或报错，容器无法删除
 
 **排查步骤**：
 ```bash
@@ -270,8 +270,8 @@ docker ps -a | grep kind  # 应无输出
 
 ---
 
-<!-- chunk: 2. K3s 单机集群故障 -->
-## 2. K3s 单机集群故障
+<!-- chunk: 2. K3s 单机集群问题 -->
+## 2. K3s 单机集群问题
 
 ### 2.1 K3s 简介与架构
 
@@ -297,7 +297,7 @@ K3s 是轻量级 K8s，二进制运行，无需 Docker（默认使用 containerd
 
 ### 2.2 K3s 内置 SQLite 数据库损坏
 
-**故障现象**: K3s 无法启动，报错 "database is locked" 或 "SQLite error"
+**问题现象**: K3s 无法启动，报错 "database is locked" 或 "SQLite error"
 
 **排查步骤**：
 ```bash
@@ -330,7 +330,7 @@ sudo systemctl start k3s
 
 ### 2.3 K3s agent 无法连接 server
 
-**故障现象**: K3s agent 节点无法注册到 server，日志报 "connection refused" 或 "node not found"
+**问题现象**: K3s agent 节点无法注册到 server，日志报 "connection refused" 或 "node not found"
 
 **排查步骤**：
 ```bash
@@ -362,7 +362,7 @@ sudo k3s agent --server https://<server-ip>:6443 \
 
 ### 2.4 K3s 单机多容器网络问题
 
-**故障现象**: Pod 之间无法通信，[[Service|Service]] ClusterIP 无法访问
+**问题现象**: Pod 之间无法通信，[[Service|Service]] ClusterIP 无法访问
 
 **排查步骤**：
 ```bash
@@ -392,7 +392,7 @@ kubectl delete pods -n kube-system -l app=flannel
 
 ### 2.5 K3s 资源不足导致组件崩溃
 
-**故障现象**: K3s 所有组件（apiserver/scheduler/controller）同时崩溃
+**问题现象**: K3s 所有组件（apiserver/scheduler/controller）同时崩溃
 
 **排查步骤**：
 ```bash
@@ -420,7 +420,7 @@ htop
 
 ### 2.6 K3s 卸载/重装
 
-**故障现象**: K3s 残留导致重装失败
+**问题现象**: K3s 残留导致重装失败
 
 **排查步骤**：
 ```bash
@@ -446,10 +446,10 @@ curl -sfL https://get.k3s.io | sh -
 
 ---
 
-<!-- chunk: 3. Kind vs K3s 故障对比 -->
-## 3. Kind vs K3s 故障对比
+<!-- chunk: 3. Kind vs K3s 问题对比 -->
+## 3. Kind vs K3s 问题对比
 
-| 故障场景 | Kind 特征 | K3s 特征 |
+| 问题场景 | Kind 特征 | K3s 特征 |
 |---------|----------|---------|
 | API Server 无响应 | Docker 容器崩溃（`docker ps` 查看） | K3s 进程崩溃（`journalctl` 查看） |
 | 网络不通 | 容器网络 vs 宿主机网络桥接问题 | CNI (flannel) vs iptables 问题 |

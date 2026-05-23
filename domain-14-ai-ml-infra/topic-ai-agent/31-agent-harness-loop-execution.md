@@ -678,7 +678,7 @@ Agent 执行策略分类:
 2. 自适应执行策略（Adaptive）
    根据每步结果动态调整下一步
    适用: 探索性任务
-   示例: 未知故障根因分析
+   示例: 未知问题根因分析
 
 3. 分支执行策略（Branching）
    在关键决策点分叉，并行探索多条路径
@@ -688,7 +688,7 @@ Agent 执行策略分类:
 4. 分阶段执行策略（Phased）
    分为信息收集、分析、行动三个阶段
    适用: 复杂运维任务
-   示例: 大规模故障处置
+   示例: 大规模问题处置
 
 5. 递归执行策略（Recursive）
    将大任务分解为子任务，递归执行
@@ -1013,11 +1013,11 @@ class PodPendingDiagnosisLoop:
         return self._synthesize_diagnosis(findings)
 ```
 
-#<!-- chunk: 6.2 故障处置执行引擎 -->## 6.2 故障处置执行引擎
+#<!-- chunk: 6.2 问题处置执行引擎 -->## 6.2 问题处置执行引擎
 
 ```python
 class IncidentExecutionEngine:
-    """故障处置专用执行引擎
+    """问题处置专用执行引擎
 
     特点：
     1. 三阶段执行（诊断→决策→修复）
@@ -1038,7 +1038,7 @@ class IncidentExecutionEngine:
         }
 
     async def handle_incident(self, incident: dict) -> dict:
-        """处置故障"""
+        """处置问题"""
         trajectory = ExecutionTrajectory(
             task_id=incident["id"],
             task=incident["description"],

@@ -70,7 +70,7 @@ created: "2026-05-23"
 
 ## 1. 概述
 
-镜像拉取故障是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 集群中**最常见的 Pod 启动失败原因之一**，约占所有 Pod 异常工单的 20-30%。当容器镜像无法成功拉取时，Pod 将持续处于 `ImagePullBackOff` 或 `ErrImagePull` 状态，导致服务无法启动或扩容失败。对于生产环境中的关键服务，镜像拉取问题可能直接导致业务中断。
+镜像拉取问题是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 集群中**最常见的 Pod 启动失败原因之一**，约占所有 Pod 异常工单的 20-30%。当容器镜像无法成功拉取时，Pod 将持续处于 `ImagePullBackOff` 或 `ErrImagePull` 状态，导致服务无法启动或扩容失败。对于生产环境中的关键服务，镜像拉取问题可能直接导致业务中断。
 
 ### 典型触发场景
 
@@ -151,7 +151,7 @@ created: "2026-05-23"
 | 排除条件 | 正确路由 | 说明 |
 |---------|---------|------|
 | 镜像拉取成功，但容器 CrashLoopBackOff | SKILL-POD-001 | 镜像本身正常，是应用程序问题 |
-| 节点 NotReady 导致所有 Pod 异常 | SKILL-NODE-001 | 节点级故障，非镜像问题 |
+| 节点 NotReady 导致所有 Pod 异常 | SKILL-NODE-001 | 节点级问题，非镜像问题 |
 | 网络策略阻止 Pod 间通信 | SKILL-NET-001 | 网络策略问题，非镜像拉取问题 |
 | 镜像已拉取但 Pod Pending（资源不足） | SKILL-POD-002 | 调度问题 |
 | 仅仓库管理员无法登录仓库 Web UI | 非 K8s 范畴 | 仓库自身管理问题 |
@@ -163,7 +163,7 @@ created: "2026-05-23"
 
 ### 3.1 影响评估
 
-按顺序执行以下命令，判断故障爆炸半径：
+按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 统计受影响 Pod 数量和影响范围（10s）
 ```bash
@@ -212,11 +212,11 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
 
 以下任一条件满足时，**跳过诊断流程，立即升级至人工 SRE / 值班工程师**：
 
-- **集群镜像基础设施故障**: 所有新 Pod 均无法拉取任何镜像（containerd/CRI-O 可能故障）
+- **集群镜像基础设施问题**: 所有新 Pod 均无法拉取任何镜像（containerd/CRI-O 可能问题）
 - **仓库完全不可用**: Harbor/私有仓库服务宕机，所有依赖该仓库的服务受影响
 - **凭证泄露风险**: 发现 imagePullSecrets 被意外暴露或疑似泄露
 - **安全事件**: 发现镜像被篡改或 digest 不匹配，怀疑供应链攻击
-- **级联故障**: 镜像问题导致 kube-proxy、CNI 等核心组件无法启动
+- **级联问题**: 镜像问题导致 kube-proxy、CNI 等核心组件无法启动
 
 > **升级消息模板**: 参见 Section 8.2
 
@@ -1218,7 +1218,7 @@ kubectl debug node/${NODE} -it --image=busybox -- crictl images | grep "<image-k
 
 ### 7.3 解决确认标准
 
-以下条件**全部满足**时，可确认故障已解决：
+以下条件**全部满足**时，可确认问题已解决：
 
 - [ ] 受影响的 Pod 均已恢复 Running 状态
 - [ ] Pod Events 中无新的 ImagePullBackOff/ErrImagePull 警告
@@ -1257,9 +1257,9 @@ kubectl debug node/${NODE} -it --image=busybox -- crictl images | grep "<image-k
 ### 8.2 升级消息模板
 
 ```
-【{severity}】镜像拉取故障 - {cluster_name}
+【{severity}】镜像拉取问题 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: {affected_pod_count} 个 Pod 无法拉取镜像，持续 {duration}
+- 问题概述: {affected_pod_count} 个 Pod 无法拉取镜像，持续 {duration}
 - 关键错误: {error_type} (如: unauthorized / manifest unknown / timeout)
 - 影响范围:
   - 受影响 Pod: {affected_pod_list}
@@ -1366,7 +1366,7 @@ kubectl debug node/${NODE} -it --image=busybox -- crictl images | grep "<image-k
 | **将 imagePullPolicy 问题误判为镜像不存在** | Pod 报告 ErrImagePull | imagePullPolicy=Never 但节点无本地镜像 | D1.5 中检查 imagePullPolicy；D1.6 确认本地缓存 |
 | **将多架构问题误判为镜像损坏** | "manifest unknown" 或 "no matching manifest" | 镜像存在但不支持目标架构 | 使用 D3.4 检查 manifest list；确认节点架构 |
 | **将代理配置问题误判为 TLS 错误** | TLS 握手失败或证书验证错误 | 代理服务器返回了自己的证书，而非仓库证书 | D2.5 确认代理配置；检查是否需要将仓库加入 NO_PROXY |
-| **将临时网络抖动误判为持久故障** | 偶发的 timeout 错误 | 网络临时不稳定，重试后可成功 | 等待 kubelet 重试（默认会 backoff 重试）；观察是否自动恢复 |
+| **将临时网络抖动误判为持久问题** | 偶发的 timeout 错误 | 网络临时不稳定，重试后可成功 | 等待 kubelet 重试（默认会 backoff 重试）；观察是否自动恢复 |
 
 ### 10.2 深度知识引用
 
@@ -1396,6 +1396,6 @@ kubectl debug node/${NODE} -it --image=busybox -- crictl images | grep "<image-k
 1. **OCI 工件拉取**: 使用 ImageVolume 挂载 OCI artifact 的问题诊断
 2. **Helm Chart 镜像问题**: Helm 部署时镜像配置错误的快速定位
 3. **跨云仓库同步**: 多云环境中镜像同步的问题诊断
-4. **仓库高可用故障**: Harbor/Registry HA 集群故障诊断
+4. **仓库高可用问题**: Harbor/Registry HA 集群故障诊断
 5. **GPU 容器镜像**: NVIDIA Container Toolkit 相关的镜像问题
 6. **Windows 容器镜像**: Windows 节点特有的镜像拉取问题

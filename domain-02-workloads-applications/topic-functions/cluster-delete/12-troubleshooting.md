@@ -50,7 +50,7 @@ tags:
 - unmount
 - kubernetes
 last_updated: 2026-05-18
-description: 集群删除过程中常遇到各种异常：reset 卡住、etcd 移除失败、容器无法删除、网络规则残留等。本文档汇总常见故障场景，提供系统化的排查方法和解决方案，涵盖
+description: 集群删除过程中常遇到各种异常：reset 卡住、etcd 移除失败、容器无法删除、网络规则残留等。本文档汇总常见问题场景，提供系统化的排查方法和解决方案，涵盖
   kubeadm reset、etcd、容器删除、卸载、kubectl delete node 以及重新初始化失败等场景。
 difficulty: intermediate
 intent_queries:
@@ -103,7 +103,7 @@ k8s_versions:
 
 ## 概述
 
-集群删除过程中常遇到各种异常：reset 卡住、etcd 移除失败、容器无法删除、网络规则残留等。本文档汇总常见故障场景，提供系统化的排查方法。
+集群删除过程中常遇到各种异常：reset 卡住、etcd 移除失败、容器无法删除、网络规则残留等。本文档汇总常见问题场景，提供系统化的排查方法。
 
 ---
 
@@ -167,7 +167,7 @@ reset 只检查 root 权限（`RunRootCheckOnly`），不检查其他系统条�
 
 ---
 
-## 2. etcd 相关故障
+## 2. etcd 相关问题
 
 ### 2.1 "Failed to remove etcd member"
 
@@ -244,7 +244,7 @@ etcdctl member remove <unhealthy-member-id>
 
 ---
 
-## 3. 容器删除故障
+## 3. 容器删除问题
 
 ### 3.1 "Failed to remove containers"
 
@@ -301,7 +301,7 @@ ctr -n k8s.io snapshots rm $(ctr -n k8s.io snapshots -q)
 
 ---
 
-## 4. 卸载故障
+## 4. 卸载问题
 
 ### 4.1 "failed to unmount" / device busy
 
@@ -364,7 +364,7 @@ reboot
 
 ---
 
-## 5. kubectl delete node 故障
+## 5. kubectl delete node 问题
 
 ### 5.1 Node 对象删除卡住
 
@@ -493,7 +493,7 @@ strace -f -e trace=umount kubeadm reset -f
 ## 参考
 
 - [kubeadm reset 故障排查](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-reset/)
-- [kubectl drain 故障](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)
+- [kubectl drain 问题](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)
 - [etcd 故障恢复](https://etcd.io/docs/latest/op-guide/recovery/)
 
 ## Related

@@ -5,6 +5,7 @@ tags: ["domain-09", "SLO", "SLI", "SLA", "可靠性", "错误预算", "监控", 
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+status: reviewed
 ---
 
 # SLO、SLI 与错误预算实践指南

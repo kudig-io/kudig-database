@@ -100,7 +100,7 @@ Operator 协调：
 | 张力 | 详情 |
 |------|------|
 | **CRD 爆炸** | Prometheus Operator 引入了 ServiceMonitor、PodMonitor、Probe、AlertmanagerConfig、PrometheusRule 等多个 CRD。大型集群中 CRD 实例数量可能超过普通工作负载，增加 API Server 负载 |
-| **监控递归** | Prometheus 监控 Prometheus Operator，Prometheus Operator 管理 Prometheus——循环依赖使得升级和故障排查复杂化。如果 Operator 故障，监控体系本身可能失效 |
+| **监控递归** | Prometheus 监控 Prometheus Operator，Prometheus Operator 管理 Prometheus——循环依赖使得升级和故障排查复杂化。如果 Operator 问题，监控体系本身可能失效 |
 | **指标标准化缺失** | 不同 Operator 暴露的指标命名、标签、单位不统一。CloudNativePG 的 cnpg_backends_total 和 MongoDB Operator 的 mongodb_connections 无法直接对比，跨 Operator 的统一告警难以实现 |
 | **资源开销** | 每个 Operator 的 /metrics 端点增加 Prometheus scrape 负担。在 100+ Operator 的集群中，仅 scrape Operator 指标就可能消耗显著的网络和 CPU 资源 |
 | **Dashboard 漂移** | GrafanaDashboard CRD 随 Operator 版本更新，但用户可能自定义了 Dashboard。Operator 升级时覆盖用户自定义导致配置丢失 |
@@ -109,7 +109,7 @@ Operator 协调：
 
 - **Operator 可观测性标准**：是否应该有一个类似 OpenTelemetry 的 Operator 指标标准，统一 Reconcile 延迟、队列深度、错误率的命名和标签？
 - **多层级监控架构**：当集群中存在平台级 Prometheus（监控基础设施）和租户级 Prometheus（监控应用）时，Operator 暴露的指标应该上报到哪一层？如何避免指标重复采集？
-- **Operator 故障的自我修复**：如果 Prometheus Operator 自身故障，谁来监控它？是否需要独立的元监控层？
+- **Operator 问题的自我修复**：如果 Prometheus Operator 自身问题，谁来监控它？是否需要独立的元监控层？
 - **CRD 变更的可观测性**：当 Operator 升级导致 CRD schema 变更时，如何追踪变更对现有监控配置（ServiceMonitor 选择器、PrometheusRule 标签）的影响？
 - **自定义指标与成本**：Prometheus 的拉取模型下，大量自定义指标导致存储成本线性增长。Operator 暴露的领域指标是否应该有配额或采样策略？
 

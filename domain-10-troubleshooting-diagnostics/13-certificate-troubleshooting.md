@@ -167,7 +167,7 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 | kubectl无法连接 | admin.conf | 管理员操作 |
 | Node NotReady | kubelet证书 | 节点通信 |
 | API Server无法启动 | apiserver.crt | 整个集群 |
-| etcd集群故障 | etcd证书 | 数据存储 |
+| etcd集群问题 | etcd证书 | 数据存储 |
 | Pod无法创建 | controller-manager证书 | 工作负载 |
 | 调度失败 | scheduler证书 | Pod调度 |
 

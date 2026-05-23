@@ -243,7 +243,7 @@ prerequisites:
 | 8.2 | **LLM 可观测性：Prompt 追踪、生成质量评估、Token 消耗分析** | `25-llm-observability` | LLM 专项可观测 | ① LLM 可观测性框架 ② Prompt 追踪与分析 ③ 生成质量评估指标 ④ Token 消耗监控 ⑤ 异常检测与告警 |
 | 8.3 | **模型漂移监控与预警：实时检测、自动重训练、闭环运维** | `35-model-drift-monitoring` | 模型运维的深水区 | ① 数据漂移 vs 概念漂移 ② 漂移检测算法 ③ 监控 Pipeline 设计 ④ 自动重训练触发 ⑤ 闭环运维体系 |
 | 8.4 | **AI 平台治理框架：策略引擎、自动化治理、平台标准化** | `31-ai-platform-governance` | 平台治理 | ① AI 治理需求分析 ② 策略引擎设计 ③ 自动化治理 Pipeline ④ 平台标准化规范 ⑤ 治理效果评估 |
-| 8.5 | **AI 平台故障排查圣经：从 GPU 故障到模型性能瓶颈的诊断手册（50KB）** | `14-troubleshooting-performance` | 50KB 超长排障手册 | ① GPU 故障排查（CUDA Error/OOM/Xid Error） ② 训练故障排查（Loss 爆炸/梯度消失/NCCL 超时） ③ 推理故障排查（延迟飙升/吞吐下降/OOM Kill） ④ 平台级故障排查 ⑤ 故障预防体系 |
+| 8.5 | **AI 平台故障排查圣经：从 GPU 问题到模型性能瓶颈的诊断手册（50KB）** | `14-troubleshooting-performance` | 50KB 超长排障手册 | ① GPU 故障排查（CUDA Error/OOM/Xid Error） ② 训练故障排查（Loss 爆炸/梯度消失/NCCL 超时） ③ 推理故障排查（延迟飙升/吞吐下降/OOM Kill） ④ 平台级故障排查 ⑤ 问题预防体系 |
 
 > **系列定位**：运维深度的终极体现。发布节奏：**第 9 周发布**。
 > **目标读者**：AI 平台 SRE、基础架构工程师、所有 AI 工程师

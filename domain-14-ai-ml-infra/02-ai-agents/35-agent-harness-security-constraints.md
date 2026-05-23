@@ -114,7 +114,7 @@ Layer 3: 角色级约束（Role Constraints）
   │
 Layer 4: 任务级约束（Task Constraints）
   │  按具体任务动态调整
-  │  示例: 紧急故障允许跳过审批
+  │  示例: 紧急问题允许跳过审批
   │
 约束生效规则: 严格叠加（取最严格）
   有效约束 = System ∩ Environment ∩ Role ∩ Task

@@ -194,7 +194,7 @@ class FTATraversalEngine:
         # 负载因子 (基于资源使用率动态调整)
         load_factor = self.get_load_factor(terminal_events, context)
         
-        # 趋势因子 (基于历史故障频率)
+        # 趋势因子 (基于历史问题频率)
         trend_factor = self.get_trend_factor(terminal_events, context)
         
         # 季节因子 (大促/节假日)
@@ -205,7 +205,7 @@ class FTATraversalEngine:
     def get_load_factor(self, terminal_events, context):
         """负载因子计算"""
         
-        # OOM 相关：内存使用率越高，故障概率越高
+        # OOM 相关：内存使用率越高，问题概率越高
         if any("oom" in e.id.lower() for e in terminal_events):
             memory_ratio = context.metrics.get("memory_usage_ratio", 0.5)
             # 基准线 70%，每超 10% 概率翻倍
@@ -213,7 +213,7 @@ class FTATraversalEngine:
                 return 1 + (memory_ratio - 0.7) * 5
             return 0.8  # 低于基准线略微降低
         
-        # 网络相关：高并发时故障率上升
+        # 网络相关：高并发时问题率上升
         if any("network" in e.id.lower() or "dns" in e.id.lower() for e in terminal_events):
             connection_count = context.metrics.get("active_connections", 0)
             threshold = context.metrics.get("connection_threshold", 10000)
@@ -643,7 +643,7 @@ class FTALearningEngine:
     
     def learn_from_incident(self, incident_record):
         """
-        从实际故障中学习，更新 FTA
+        从实际问题中学习，更新 FTA
         """
         
         # 1. 验证 FTA 路径准确性
@@ -740,7 +740,7 @@ learning_triggers:
       - name: "更新修复成功率"
         function: "update_heal_rate(path, success=false)"
         
-  - trigger: "新故障路径发现"
+  - trigger: "新问题路径发现"
     condition: "actual_root_cause not in FTA"
     action:
       - name: "创建提案节点"

@@ -210,7 +210,7 @@ tags: [pod, pending, scheduling, resource, node, taint, affinity]
 difficulty: intermediate
 target_roles: [sre, ops-engineer, developer]
 k8s_versions: [1.25, 1.26, 1.27, 1.28, 1.29, 1.30, 1.31, 1.32]
-severity_context: P0-P2  # 这篇文档覆盖的故障严重级别范围
+severity_context: P0-P2  # 这篇文档覆盖的问题严重级别范围
 intent_queries:
   - "Pod 一直 Pending 怎么办"
   - "Pod stuck in Pending state"
@@ -262,7 +262,7 @@ structural_ref: domain-10-troubleshooting-diagnostics/topic-structural-trouble-s
 | 9 | 集群版本升级 | 计划升级 | P1 | domain-01-cluster-fundamentals/07, domain-01-cluster-fundamentals/18 | 大 |
 | 10 | 应用滚动更新/回滚 | Deployment 更新失败 | P1 | domain-10-troubleshooting-diagnostics/11, domain-02-workloads-applications/02 | 中 |
 | 11 | HPA/VPA 调整 | 扩缩容异常 | P1 | domain-10-troubleshooting-diagnostics/17, domain-02-workloads-applications/21 | 中 |
-| 12 | DNS 故障应急 | 服务发现失败 | P1 | domain-10-troubleshooting-diagnostics/26, domain-03-networking-traffic/28 | 中 |
+| 12 | DNS 问题应急 | 服务发现失败 | P1 | domain-10-troubleshooting-diagnostics/26, domain-03-networking-traffic/28 | 中 |
 | 13 | PVC 存储故障处理 | PVC Pending/挂载失败 | P1 | domain-10-troubleshooting-diagnostics/14, domain-04-storage-data/09 | 中 |
 | 14 | Ingress/Gateway 故障处理 | 外部访问异常 | P1 | domain-10-troubleshooting-diagnostics/15, domain-03-networking-traffic/19-26 | 中 |
 | 15 | RBAC 权限问题处理 | 权限不足/过大 | P1 | domain-10-troubleshooting-diagnostics/12, domain-05-security-compliance/07 | 中 |
@@ -270,11 +270,11 @@ structural_ref: domain-10-troubleshooting-diagnostics/topic-structural-trouble-s
 | 17 | CronJob 故障处理 | 定时任务不触发 | P2 | domain-10-troubleshooting-diagnostics/18 | 小 |
 | 18 | DaemonSet 故障处理 | 系统组件异常 | P2 | domain-10-troubleshooting-diagnostics/20 | 小 |
 | 19 | StatefulSet 故障处理 | 有状态服务异常 | P2 | domain-10-troubleshooting-diagnostics/21 | 小 |
-| 20 | 监控告警系统故障 | Prometheus/Alertmanager 异常 | P2 | domain-10-troubleshooting-diagnostics/30 | 中 |
+| 20 | 监控告警系统问题 | Prometheus/Alertmanager 异常 | P2 | domain-10-troubleshooting-diagnostics/30 | 中 |
 | 21 | Helm Release 故障处理 | Chart 部署/升级失败 | P2 | domain-10-troubleshooting-diagnostics/36 | 中 |
 | 22 | ArgoCD 同步故障处理 | GitOps 同步失败 | P2 | domain-10-troubleshooting-diagnostics/38 | 中 |
 | 23 | 镜像仓库故障处理 | 镜像拉取失败 | P2 | domain-10-troubleshooting-diagnostics/27 | 中 |
-| 24 | 集群自动扩缩容故障 | Cluster Autoscaler 异常 | P2 | domain-10-troubleshooting-diagnostics/28 | 中 |
+| 24 | 集群自动扩缩容问题 | Cluster Autoscaler 异常 | P2 | domain-10-troubleshooting-diagnostics/28 | 中 |
 | 25 | NetworkPolicy 故障处理 | 网络策略异常 | P2 | domain-10-troubleshooting-diagnostics/16 | 小 |
 | 26 | GPU 设备故障处理 | GPU 不可见/分配失败 | P2 | domain-14-ai-ml-infra/03-04 | 大 |
 | 27 | Velero 备份恢复 SOP | 集群级备份恢复 | P2 | domain-10-troubleshooting-diagnostics/31 | 中 |
@@ -634,8 +634,8 @@ incident:
 | 场景类别 | 需要的工单数 | 典型场景 | 来源 |
 |---------|-----------|---------|------|
 | Pod 异常 | 15 | CrashLoop/OOM/Pending/Evicted/ImagePull | domain-10-troubleshooting-diagnostics/05,07,08 |
-| 网络故障 | 10 | DNS失败/Service不通/Ingress异常/跨节点不通 | domain-10-troubleshooting-diagnostics/03,10,15,25,26 |
-| 存储故障 | 8 | PVC Pending/挂载失败/性能下降 | domain-10-troubleshooting-diagnostics/04,14 |
+| 网络问题 | 10 | DNS失败/Service不通/Ingress异常/跨节点不通 | domain-10-troubleshooting-diagnostics/03,10,15,25,26 |
+| 存储问题 | 8 | PVC Pending/挂载失败/性能下降 | domain-10-troubleshooting-diagnostics/04,14 |
 | 控制平面 | 8 | apiserver 慢/etcd 不健康/证书过期 | domain-10-troubleshooting-diagnostics/01,02,13 |
 | 安全权限 | 5 | RBAC 拒绝/ServiceAccount 失效 | domain-10-troubleshooting-diagnostics/12,32 |
 | 扩缩容 | 5 | HPA 不触发/CA 不扩容 | domain-10-troubleshooting-diagnostics/17,28 |
@@ -978,7 +978,7 @@ Phase 2 (4-6 周) - SOP 和命令语料                          总工作量: ~
 │   ├── P1 级 SOP (9 个)                                ~9 天
 │   └── P2/P3 级 SOP (15 个)                            ~10 天
 ├── 补全 Top 20 高频 kubectl 命令输出解读            ~12 人天
-└── 收集/编写 66+ 真实故障工单案例                  ~20 人天
+└── 收集/编写 66+ 真实问题工单案例                  ~20 人天
 
 Phase 3 (3-4 周) - 交互和安全层                          总工作量: ~23 人天
 ├── 编写 40 个高频场景对话模板                      ~10 人天
@@ -1019,7 +1019,7 @@ Phase 4 (2-3 周) - 决策和验证层                          总工作量: ~1
 | 可执行 SOP 数 | ~5 (零散) | 30 | **~25 个** | ~25 人天 | P0 |
 | 症状→原因映射条目 | 0 (散落在文档) | 73+ | **~73 条** | ~15 人天 | P0 |
 | 命令输出解读模板 | ~20 (零散) | 50+ | **~30 个** | ~12 人天 | P1 |
-| 故障工单案例 | ~3 | 66+ | **~63 个** | ~20 人天 | P1 |
+| 问题工单案例 | ~3 | 66+ | **~63 个** | ~20 人天 | P1 |
 | 对话模板 | 0 | 40+ | **40+ 组** | ~10 人天 | P1 |
 | 版本差异矩阵条目 | ~10 (零散) | 60+ | **~50 条** | ~8 人天 | P2 |
 | 量化决策条件 | ~15 (散落) | 39+ | **~24 条** | ~8 人天 | P2 |

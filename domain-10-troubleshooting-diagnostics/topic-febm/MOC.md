@@ -48,7 +48,7 @@ created: "2026-05-23"
 
 ## 专题概述
 
-FEBM 取证 — 故障事件取证方法文档
+FEBM 取证 — 问题事件取证方法文档
 
 ### 专题定位
 
@@ -71,7 +71,7 @@ FEBM 取证 — 故障事件取证方法文档
 | 5 | [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]] |  | febm, troubleshooting |  |
 | 6 | [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|第六章：未来演进方向]] |  | febm, troubleshooting |  |
 | 7 | [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix.md|第七章:附录]] |  | febm, troubleshooting |  |
-| 8 | [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册]] |  | febm, troubleshooting, production |  |
+| 8 | [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]] |  | febm, troubleshooting, production |  |
 | 9 | [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]] |  | febm, troubleshooting |  |
 | 10 | [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]] |  | febm, troubleshooting |  |
 

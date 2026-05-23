@@ -71,9 +71,9 @@ created: "2026-05-23"
 <!-- chunk: 1. DaemonSet 故障诊断总览 (DaemonSet Diagnosis Overview) -->
 ## 1. DaemonSet 故障诊断总览 (DaemonSet Diagnosis Overview)
 
-### 1.1 常见故障现象分类
+### 1.1 常见问题现象分类
 
-| 故障类型 | 症状表现 | 影响范围 | 紧急程度 |
+| 问题类型 | 症状表现 | 影响范围 | 紧急程度 |
 |---------|---------|---------|---------|
 | **Pod未调度到节点** | 特定节点缺少系统服务 | 节点功能缺失 | P0 - 紧急 |
 | **Pod持续CrashLoopBackOff** | 系统组件反复重启 | 节点服务不可用 | P0 - 紧急 |

@@ -961,9 +961,9 @@ openssl s_client -connect <ingress-ip>:443 -servername <hostname>
 
 ## 生产环境典型案例
 
-### 案例 1：IPVS 模式下 Service 不可用导致业务大面积故障
+### 案例 1：IPVS 模式下 Service 不可用导致业务大面积问题
 
-**故障现场**
+**问题现场**
 
 - **现象**：某微服务集群升级 kube-proxy 至 IPVS 模式后，30% 的 Service 调用失败（`connection refused`）
 - **影响范围**：200+ 个微服务，涉及 50+ 个 Service
@@ -975,7 +975,7 @@ openssl s_client -connect <ingress-ip>:443 -servername <hostname>
 **排查过程**
 
 ```bash
-# 1. 确认故障范围
+# 1. 确认问题范围
 kubectl run test --rm -it --image=busybox -- sh
 # 在 Pod 内测试
 wget -qO- http://payment-service.default.svc.cluster.local
@@ -1215,7 +1215,7 @@ kubectl rollout restart daemonset -n kube-system kube-proxy
 
 ### 案例 2：Ingress TLS 证书过期导致 HTTPS 服务全面中断
 
-**故障现场**
+**问题现场**
 
 - **现象**：凌晨 00:00 所有 HTTPS 域名返回证书错误（`ERR_CERT_DATE_INVALID`）
 - **影响范围**：全站 20+ 域名，100% HTTPS 流量
@@ -1506,7 +1506,7 @@ spec:
 | **备份** | 无证书备份机制 | 每周自动备份证书到外部存储 |
 | **演练** | 未进行证书过期演练 | 每季度故障注入测试 |
 
-**故障时间线**
+**问题时间线**
 
 ```
 00:00:00 - 证书过期，用户开始报错
@@ -1522,7 +1522,7 @@ spec:
 
 ### 案例 3：externalTrafficPolicy: Local 导致负载不均与间歇性超时
 
-**故障现场**
+**问题现场**
 
 - **现象**：LoadBalancer Service 后端 Pod 负载极度不均（部分 Pod CPU 90%，部分 Pod 空闲）
 - **影响范围**：Web 服务（100 个 Pod）

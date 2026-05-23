@@ -100,7 +100,7 @@ flowchart TD
   CAT_ALERT --> C_OR
   C_OR --> C1["C1. 规则语法错误<br/>PromQL 不合法"]
   C_OR --> C2["C2. 阈值配置不当<br/>过高/过低/硬编码"]
-  C_OR --> C3["C3. for 持续时间过长<br/>短暂故障无法触发"]
+  C_OR --> C3["C3. for 持续时间过长<br/>短暂问题无法触发"]
   C_OR --> C4["C4. 规则评估失败<br/>依赖指标不存在"]
   C_OR --> C5_AND["C5. 告警完全失效<br/>(AND 门)"]
 

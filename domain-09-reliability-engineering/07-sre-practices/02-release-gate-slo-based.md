@@ -430,7 +430,7 @@ sum(kube_deployment_spec_replicas{deployment="order-service-canary"})
 | **SLO 违反** | P1 | 错误率 > SLO 目标 × 2 | 2min | 是 |
 | **延迟飙升** | P1 | P99 延迟 > 基线 × 2 | 5min | 是 |
 | **资源耗尽** | P2 | CPU Throttling > 10% 或 OOM | 3min | 是 |
-| **依赖故障** | P2 | 下游服务错误率 > 1% | 5min | 否 (人工确认) |
+| **依赖问题** | P2 | 下游服务错误率 > 1% | 5min | 否 (人工确认) |
 | **业务异常** | P2 | 自定义业务指标异常 | 10min | 否 |
 
 ### 自动回滚 PromQL 表达式
@@ -498,7 +498,7 @@ sum(increase(kube_pod_container_status_restarts_total{pod=~"order-service-.*"}[1
 and
 kube_pod_container_status_last_terminated_reason{reason="OOMKilled",pod=~"order-service-.*"} == 1
 
-# === 依赖故障触发器 ===
+# === 依赖问题触发器 ===
 
 # 触发器 9: 下游数据库连接错误率 > 1%
 (
@@ -800,7 +800,7 @@ argocd_app_info{sync_status="Synced",health_status="Healthy"}
   ✅ 设置合理的 warmup 期 (如 60s)
 
 ❌ 陷阱 5: 回滚后也触发告警
-  → 回滚操作本身被误判为故障
+  → 回滚操作本身被误判为问题
   ✅ 标注发布/回滚时间窗口，抑制预期内告警
 
 ❌ 陷阱 6: 忽略发布后的长尾影响

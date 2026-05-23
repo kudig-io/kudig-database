@@ -97,9 +97,9 @@ Google SRE 的 FTA 相关实践:
    → FTA 用于分析哪些底事件消耗了最多 Error Budget
 
 2. Postmortem Culture (事后分析文化)
-   ← FTA 故障回溯验证的制度化
+   ← FTA 问题回溯验证的制度化
    → 每次 P0/P1 事故后编写 Postmortem
-   → Postmortem 中包含故障传播路径分析
+   → Postmortem 中包含问题传播路径分析
    → 分析结果反馈到故障分析体系中
 
 3. Borgmon → Monarch → Prometheus
@@ -109,9 +109,9 @@ Google SRE 的 FTA 相关实践:
    → 告警规则与故障树路径直接关联
 
 关键成果:
-  - P0 故障 MTTR < 10 分钟
+  - P0 问题 MTTR < 10 分钟
   - 全球基础设施可用性 > 99.99%
-  - 自动化处理覆盖 > 80% 的已知故障
+  - 自动化处理覆盖 > 80% 的已知问题
 ```
 
 ## 17.2 Netflix 的混沌工程 + FTA
@@ -128,7 +128,7 @@ Netflix 的实践模型:
           ▼
    ┌─────────────┐
    │ Chaos Monkey│ ── 随机杀死实例
-   │ Chaos Kong  │ ── 区域故障
+   │ Chaos Kong  │ ── 区域问题
    │ Latency     │ ── 注入延迟
    │ Monkey      │
    └──────┬──────┘

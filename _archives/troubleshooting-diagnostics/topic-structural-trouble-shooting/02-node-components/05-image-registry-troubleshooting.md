@@ -56,7 +56,7 @@ prerequisites:
 
 ## 0. 10 分钟快速诊断
 
-1. **快速定位失败**：在故障 Pod 上 `kubectl describe pod <name> | grep -A2 -E "Image|ErrImage|BackOff|429|unauthorized"`，记录错误码（DNS/TLS/401/429/空间）。
+1. **快速定位失败**：在问题 Pod 上 `kubectl describe pod <name> | grep -A2 -E "Image|ErrImage|BackOff|429|unauthorized"`，记录错误码（DNS/TLS/401/429/空间）。
 2. **连通性与 TLS**：`nslookup <registry>`、`curl -Iv https://<registry>/v2/`，若证书错误检查 CA/中间证书；云私有域注意 443/5000 安全组。
 3. **认证与凭据**：`crictl pull <image> --creds user:pass` 验证，检查 `imagePullSecrets`、SA 绑定；`cat ~/.docker/config.json` 或 `/etc/containerd/config.toml` registry 配置。
 4. **速率与并发**：观察 `toomanyrequests`/`rate limit exceeded`，临时切换私有镜像缓存/镜像加速器，或降低批量创建并开启预拉取。
@@ -104,7 +104,7 @@ ctr -n k8s.io images check
 
 1. [镜像分发链路逻辑](#1-核心原理解析镜像分发链路)
 2. [专家观测工具链](#专家级观测工具链experts-toolbox)
-3. [故障现象与拉取策略解析](#12-常见问题现象)
+3. [问题现象与拉取策略解析](#12-常见问题现象)
 4. [基础排查步骤（初学者）](#22-排查命令集)
 5. [深度治理方案](#第三部分解决方案与风险控制)
 
@@ -180,7 +180,7 @@ ctr -n k8s.io images check
 
 ### 1.4 影响分析
 
-| 故障类型 | 直接影响 | 间接影响 | 影响范围 |
+| 问题类型 | 直接影响 | 间接影响 | 影响范围 |
 |---------|---------|---------|---------|
 | 镜像拉取失败 | Pod 无法启动 | 服务不可用 | 使用该镜像的所有 Pod |
 | 认证失败 | 私有镜像无法访问 | 依赖该镜像的服务中断 | 私有仓库的所有镜像 |
@@ -194,7 +194,7 @@ ctr -n k8s.io images check
 ### 2.1 排查决策树
 
 ```
-镜像拉取故障
+镜像拉取问题
       │
       ├─── ImagePullBackOff / ErrImagePull？
       │         │

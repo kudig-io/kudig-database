@@ -70,7 +70,7 @@ application/json;g=apidiscovery.k8s.io;v=v2;as=APIGroupDiscoveryList;profile=nop
 2. 如果请求的资源在本地发现文档中存在（如 `GET /api/v1/pods/some-pod`），则由本地处理。
 3. 如果资源不存在于本地发现文档中（如某个在新版本 Kubernetes 中才引入的 API），处理请求的 API 服务器会查询所有对等 API 服务器的非聚合发现文档，找到能够提供该资源的对等 API 服务器，然后将请求代理过去。
 4. 如果没有已知的对等 API 服务器能处理该请求，则由本地处理链返回 404 Not Found。
-5. 如果找到了对等 API 服务器但无法建立连接（如网络故障或数据竞争），则返回 503 [[Service|Service]] Unavailable。
+5. 如果找到了对等 API 服务器但无法建立连接（如网络问题或数据竞争），则返回 503 [[Service|Service]] Unavailable。
 
 ## 使用场景
 

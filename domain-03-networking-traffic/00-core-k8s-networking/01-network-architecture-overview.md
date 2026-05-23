@@ -1255,11 +1255,11 @@ data:
       kubeconfig: "/var/lib/kube-proxy/kubeconfig"
 ```
 
-### 网络故障应急响应预案
+### 网络问题应急响应预案
 
 ```bash
 #!/bin/bash
-# network-emergency-response.sh - 生产环境网络故障应急脚本
+# network-emergency-response.sh - 生产环境网络问题应急脚本
 
 set -euo pipefail
 

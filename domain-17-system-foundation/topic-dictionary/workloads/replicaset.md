@@ -37,7 +37,7 @@ ReplicaSet 的作用是维护一组稳定运行的 Pod 副本。它通常不直�
   - `spec.selector`：标签选择器，用于识别和获取受管理的 Pod。必须与 `spec.template.metadata.labels` 匹配，创建后不可变。
   - `spec.template`：Pod 模板，`restartPolicy` 只能为 `Always`。
 - **Pod 获取机制**：ReplicaSet 不仅管理自己创建的 Pod，也会立即获取与其选择器匹配且无控制器 OwnerReference（或 OwnerReference 非控制器）的裸 Pod。
-- **Pod 替换**：当受管 Pod 被删除或终止时（如节点故障、维护），ReplicaSet 会自动创建替代 Pod。
+- **Pod 替换**：当受管 Pod 被删除或终止时（如节点问题、维护），ReplicaSet 会自动创建替代 Pod。
 
 ## 关键机制或特性
 - **扩缩容**：通过修改 `spec.replicas` 即可手动扩缩容；也支持作为 HPA 的缩放目标。

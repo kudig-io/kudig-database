@@ -54,7 +54,7 @@ prerequisites:
    - 类似 OpenTelemetry 的标准化程度
 
 2. Incident Knowledge Graph API
-   - 故障知识图谱的标准 API 接口
+   - 问题知识图谱的标准 API 接口
    - 支持 FTA 数据的导入/导出
    - 跨平台 Agent 的互操作性
    - gRPC + OpenAPI 规范

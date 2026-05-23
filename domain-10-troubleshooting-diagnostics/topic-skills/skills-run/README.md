@@ -1,6 +1,6 @@
 ---
 title: Skills Demo — 本地运行工单诊断技能
-description: '| 04 | DNS 解析故障 | SKILL-NET-001 | CoreDNS 缩容 | LOW |'
+description: '| 04 | DNS 解析问题 | SKILL-NET-001 | CoreDNS 缩容 | LOW |'
 category: skills
 tags:
 - k8s
@@ -64,7 +64,7 @@ bash run-skill-demo.sh
 bash run-skill-demo.sh 1    # 节点 Cordon
 bash run-skill-demo.sh 2    # Pod CrashLoop
 bash run-skill-demo.sh 3    # Pod Pending
-bash run-skill-demo.sh 4    # DNS 故障
+bash run-skill-demo.sh 4    # DNS 问题
 bash run-skill-demo.sh 5    # Service 无 Endpoints
 bash run-skill-demo.sh 6    # PVC Pending
 bash run-skill-demo.sh 7    # Deployment 卡住
@@ -87,7 +87,7 @@ bash teardown.sh
 | 01 | 节点被 cordon | SKILL-NODE-001 | RC-012 | LOW |
 | 02 | Pod CrashLoopBackOff | SKILL-POD-001 | 启动命令错误 | LOW |
 | 03 | Pod Pending | SKILL-POD-002 | 资源超限 | LOW |
-| 04 | DNS 解析故障 | SKILL-NET-001 | [[CoreDNS|CoreDNS]] 缩容 | LOW |
+| 04 | DNS 解析问题 | SKILL-NET-001 | [[CoreDNS|CoreDNS]] 缩容 | LOW |
 | 05 | Service 无 Endpoints | SKILL-NET-002 | Selector 不匹配 | LOW |
 
 ### 扩展场景 (6-10)

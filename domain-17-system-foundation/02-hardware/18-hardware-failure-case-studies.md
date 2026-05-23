@@ -1,5 +1,5 @@
 ---
-title: 硬件故障实战案例库
+title: 硬件问题实战案例库
 description: '- hardware-failure-case-studies的最佳实践'
 category: general
 tags:
@@ -18,11 +18,11 @@ audience:
 - 所有工程师
 estimated_read_time: 15min
 intent_queries:
-- 硬件故障实战案例库 是什么
-- 如何 硬件故障实战案例库
+- 硬件问题实战案例库 是什么
+- 如何 硬件问题实战案例库
 - Kubernetes 17 system foundation 最佳实践
 trigger_keywords:
-- 硬件故障实战案例库
+- 硬件问题实战案例库
 - system
 - foundation
 prerequisites:
@@ -44,7 +44,7 @@ intent_queries:
 - hardware-failure-case-studies的最佳实践
 
 tier: peripheral---
-title: 硬件故障实战案例库
+title: 硬件问题实战案例库
 description: '<!-- chunk: 概述' -->## 概述'
 category: hardware
 tags:
@@ -67,11 +67,11 @@ audience:
 - 运维工程师
 estimated_read_time: 5min
 intent_queries:
-- 硬件故障实战案例库 是什么
-- 如何 硬件故障实战案例库
+- 硬件问题实战案例库 是什么
+- 如何 硬件问题实战案例库
 - Kubernetes 31 hardware 最佳实践
 trigger_keywords:
-- 硬件故障实战案例库
+- 硬件问题实战案例库
 - hardware
 authors:
 - name: KUDIG Team
@@ -84,42 +84,42 @@ k8s_versions:
 - '1.32'
 ---
 
-# 硬件故障实战案例库
+# 硬件问题实战案例库
 
 <!-- chunk: 概述 -->## 概述
 
-本文档收录数据中心和 Kubernetes 集群环境中的真实硬件故障案例，每个案例包含完整的故障现象、诊断过程、解决方案和事后复盘，为一线运维人员提供实战参考。
+本文档收录数据中心和 Kubernetes 集群环境中的真实硬件问题案例，每个案例包含完整的问题现象、诊断过程、解决方案和事后复盘，为一线运维人员提供实战参考。
 
 <!-- chunk: 案例分类索引 -->## 案例分类索引
 
-| 分类 | 案例编号 | 故障类型 | 严重程度 |
+| 分类 | 案例编号 | 问题类型 | 严重程度 |
 |------|---------|---------|---------|
 | CPU/处理器 | CASE-001 | CPU MCE 导致 K8s Node 随机 NotReady | Critical |
 | CPU/处理器 | CASE-002 | CPU 降频导致应用性能下降 50% | High |
 | 内存 | CASE-003 | 内存 ECC 错误导致 Pod 随机 OOMKilled | Critical |
 | 内存 | CASE-004 | NUMA 配置不当导致数据库性能异常 | High |
-| 存储 | CASE-005 | NVMe SSD 静默故障导致 etcd 数据损坏 | Critical |
-| 存储 | CASE-006 | RAID 卡电池故障导致写入性能骤降 | High |
+| 存储 | CASE-005 | NVMe SSD 静默问题导致 etcd 数据损坏 | Critical |
+| 存储 | CASE-006 | RAID 卡电池问题导致写入性能骤降 | High |
 | 存储 | CASE-007 | HDD 扇区错误导致 PVC 挂载失败 | Medium |
 | 网络 | CASE-008 | 网卡固件 Bug 导致 K8s 网络间歇中断 | Critical |
-| 网络 | CASE-009 | 光模块故障导致丢包率飙升 | High |
-| 电源 | CASE-010 | PSU 故障导致多节点突然宕机 | Critical |
+| 网络 | CASE-009 | 光模块问题导致丢包率飙升 | High |
+| 电源 | CASE-010 | PSU 问题导致多节点突然宕机 | Critical |
 | 散热 | CASE-011 | 数据中心温度异常导致集群大面积告警 | High |
 
 ---
 
 <!-- chunk: CASE-001: CPU MCE 导致 K8s Node 随机 NotReady -->## CASE-001: CPU MCE 导致 K8s Node 随机 NotReady
 
-#<!-- chunk: 故障概述 -->## 故障概述
+#<!-- chunk: 问题概述 -->## 问题概述
 
 | 项目 | 内容 |
 |------|------|
-| 故障时间 | 2025-03-15 14:30 |
+| 问题时间 | 2025-03-15 14:30 |
 | 影响范围 | 生产集群 node-worker-07 |
 | 业务影响 | 该节点 Pod 被驱逐，服务短暂中断 |
 | 解决时长 | 4 小时 |
 
-#<!-- chunk: 故障现象 -->## 故障现象
+#<!-- chunk: 问题现象 -->## 问题现象
 
 ```yaml
 初始告警:
@@ -167,7 +167,7 @@ ipmitool sel elist | grep -i cpu
 # 发现多条 CPU Machine Check 记录
 # 3月15日 14:25:30 | CPU 2 | Machine Check Exception | Asserted
 
-# Step 6: 确认故障 CPU
+# Step 6: 确认问题 CPU
 dmidecode -t processor
 # 确认 CPU 2 (物理插槽) 对应逻辑 CPU 12-23
 ```
@@ -189,7 +189,7 @@ MCE_Status_解析:
   BANK: 4 - 内存控制器
   错误码: 0x0136 - 内存读取错误
   
-  初步判断: CPU 内存控制器问题，可能是 CPU 或 DIMM 故障
+  初步判断: CPU 内存控制器问题，可能是 CPU 或 DIMM 问题
 ```
 
 #<!-- chunk: 解决方案 -->## 解决方案
@@ -217,7 +217,7 @@ MCE_Status_解析:
 
 ```yaml
 根本原因:
-  - CPU 内存控制器存在间歇性故障
+  - CPU 内存控制器存在间歇性问题
   - 触发条件: 高负载内存访问时更容易触发
 
 预防措施:
@@ -235,16 +235,16 @@ MCE_Status_解析:
 
 <!-- chunk: CASE-002: CPU 降频导致应用性能下降 50% -->## CASE-002: CPU 降频导致应用性能下降 50%
 
-#<!-- chunk: 故障概述 -->## 故障概述
+#<!-- chunk: 问题概述 -->## 问题概述
 
 | 项目 | 内容 |
 |------|------|
-| 故障时间 | 2025-04-22 09:00 |
+| 问题时间 | 2025-04-22 09:00 |
 | 影响范围 | 生产集群 3 个计算节点 |
 | 业务影响 | API 响应时间从 50ms 增加到 200ms |
 | 解决时长 | 2 小时 |
 
-#<!-- chunk: 故障现象 -->## 故障现象
+#<!-- chunk: 问题现象 -->## 问题现象
 
 ```yaml
 告警内容:
@@ -312,16 +312,16 @@ cat /sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count
 
 <!-- chunk: CASE-003: 内存 ECC 错误导致 Pod 随机 OOMKilled -->## CASE-003: 内存 ECC 错误导致 Pod 随机 OOMKilled
 
-#<!-- chunk: 故障概述 -->## 故障概述
+#<!-- chunk: 问题概述 -->## 问题概述
 
 | 项目 | 内容 |
 |------|------|
-| 故障时间 | 2025-05-10 持续一周 |
+| 问题时间 | 2025-05-10 持续一周 |
 | 影响范围 | node-worker-12 上的所有 Pod |
 | 业务影响 | 应用随机崩溃，重启后短时间内再次崩溃 |
 | 解决时长 | 3 天（定位困难） |
 
-#<!-- chunk: 故障现象 -->## 故障现象
+#<!-- chunk: 问题现象 -->## 问题现象
 
 ```yaml
 表面现象:
@@ -386,7 +386,7 @@ dmidecode -t memory | grep -A 16 "CPU0_DIMM_A2"
 根本原因:
   - DIMM CPU0_DIMM_A2 存在硬件缺陷
   - 大量 ECC 可纠正错误累积
-  - 内核将故障内存页标记为 HardwareCorrupted
+  - 内核将问题内存页标记为 HardwareCorrupted
   - 实际可用内存小于显示的 free 值
   - Pod 被分配到已损坏的内存页时触发 OOM
 
@@ -402,7 +402,7 @@ dmidecode -t memory | grep -A 16 "CPU0_DIMM_A2"
 # 临时措施: 隔离节点
 kubectl cordon node-worker-12
 
-# 根因处理: 更换故障 DIMM
+# 根因处理: 更换问题 DIMM
 # 1. 关机
 # 2. 更换 CPU0_DIMM_A2
 # 3. 开机，运行 memtest86+ 验证
@@ -429,18 +429,18 @@ kubectl uncordon node-worker-12
 
 ---
 
-<!-- chunk: CASE-005: NVMe SSD 静默故障导致 etcd 数据损坏 -->## CASE-005: NVMe SSD 静默故障导致 etcd 数据损坏
+<!-- chunk: CASE-005: NVMe SSD 静默问题导致 etcd 数据损坏 -->## CASE-005: NVMe SSD 静默问题导致 etcd 数据损坏
 
-#<!-- chunk: 故障概述 -->## 故障概述
+#<!-- chunk: 问题概述 -->## 问题概述
 
 | 项目 | 内容 |
 |------|------|
-| 故障时间 | 2025-06-05 03:00 (凌晨) |
+| 问题时间 | 2025-06-05 03:00 (凌晨) |
 | 影响范围 | K8s Master 节点 etcd |
 | 业务影响 | 集群 API 不可用 2 小时 |
 | 解决时长 | 4 小时 |
 
-#<!-- chunk: 故障现象 -->## 故障现象
+#<!-- chunk: 问题现象 -->## 问题现象
 
 ```yaml
 凌晨告警:
@@ -483,7 +483,7 @@ dmesg | grep nvme
 # nvme0n1: I/O error, dev nvme0n1, sector 12345678
 # blk_update_request: critical target error
 
-# 结论: NVMe SSD 发生静默故障，导致部分数据损坏
+# 结论: NVMe SSD 发生静默问题，导致部分数据损坏
 ```
 
 #<!-- chunk: 解决方案 -->## 解决方案
@@ -494,10 +494,10 @@ dmesg | grep nvme
      # 在 master-02 上备份
      etcdctl snapshot save /backup/etcd-snapshot.db
      
-  2. 停止故障节点 etcd:
+  2. 停止问题节点 etcd:
      systemctl stop etcd
      
-  3. 清理故障数据:
+  3. 清理问题数据:
      rm -rf /var/lib/etcd/member
      
   4. 从备份恢复:
@@ -508,7 +508,7 @@ dmesg | grep nvme
      systemctl start etcd
 
 后续处理:
-  - 更换故障 NVMe SSD
+  - 更换问题 NVMe SSD
   - 重建 etcd 成员
 ```
 
@@ -533,18 +533,18 @@ dmesg | grep nvme
 
 ---
 
-<!-- chunk: CASE-006: RAID 卡电池故障导致写入性能骤降 -->## CASE-006: RAID 卡电池故障导致写入性能骤降
+<!-- chunk: CASE-006: RAID 卡电池问题导致写入性能骤降 -->## CASE-006: RAID 卡电池问题导致写入性能骤降
 
-#<!-- chunk: 故障概述 -->## 故障概述
+#<!-- chunk: 问题概述 -->## 问题概述
 
 | 项目 | 内容 |
 |------|------|
-| 故障时间 | 2025-07-18 10:00 |
+| 问题时间 | 2025-07-18 10:00 |
 | 影响范围 | 数据库服务器 |
 | 业务影响 | 数据库写入延迟从 2ms 增加到 50ms |
 | 解决时长 | 1.5 小时 |
 
-#<!-- chunk: 故障现象 -->## 故障现象
+#<!-- chunk: 问题现象 -->## 问题现象
 
 ```yaml
 监控告警:
@@ -568,7 +568,7 @@ iostat -x 1 5
 # Step 2: 检查 RAID 状态
 storcli64 /c0 show
 # Controller Status: Optimal
-# BBU Status: Failed  # !!! BBU 故障 !!!
+# BBU Status: Failed  # !!! BBU 问题 !!!
 
 # Step 3: 检查写缓存状态
 storcli64 /c0 show all | grep -i cache
@@ -582,7 +582,7 @@ storcli64 /c0/bbu show all
 # Temperature: 0 C
 # Learn Cycle Status: Failed
 
-# 结论: BBU 故障导致写缓存被禁用
+# 结论: BBU 问题导致写缓存被禁用
 ```
 
 #<!-- chunk: 解决方案 -->## 解决方案
@@ -606,16 +606,16 @@ storcli64 /c0/bbu show all
 
 <!-- chunk: CASE-008: 网卡固件 Bug 导致 K8s 网络间歇中断 -->## CASE-008: 网卡固件 Bug 导致 K8s 网络间歇中断
 
-#<!-- chunk: 故障概述 -->## 故障概述
+#<!-- chunk: 问题概述 -->## 问题概述
 
 | 项目 | 内容 |
 |------|------|
-| 故障时间 | 2025-08-05 ~ 2025-08-10 |
+| 问题时间 | 2025-08-05 ~ 2025-08-10 |
 | 影响范围 | 多个节点网络间歇性中断 |
 | 业务影响 | Service 调用随机失败 |
 | 解决时长 | 5 天 |
 
-#<!-- chunk: 故障现象 -->## 故障现象
+#<!-- chunk: 问题现象 -->## 问题现象
 
 ```yaml
 告警:
@@ -634,7 +634,7 @@ storcli64 /c0/bbu show all
 # Step 1: 检查网卡状态
 ethtool eth0
 # Link detected: yes (正常时)
-# Link detected: no  (故障时)
+# Link detected: no  (问题时)
 
 # Step 2: 检查网卡统计
 ethtool -S eth0 | grep -i error
@@ -681,18 +681,18 @@ ethtool -i eth0
 
 ---
 
-<!-- chunk: CASE-010: PSU 故障导致多节点突然宕机 -->## CASE-010: PSU 故障导致多节点突然宕机
+<!-- chunk: CASE-010: PSU 问题导致多节点突然宕机 -->## CASE-010: PSU 问题导致多节点突然宕机
 
-#<!-- chunk: 故障概述 -->## 故障概述
+#<!-- chunk: 问题概述 -->## 问题概述
 
 | 项目 | 内容 |
 |------|------|
-| 故障时间 | 2025-09-12 15:30 |
+| 问题时间 | 2025-09-12 15:30 |
 | 影响范围 | 同一机柜 4 台服务器 |
 | 业务影响 | 多个服务不可用 |
 | 解决时长 | 30 分钟 |
 
-#<!-- chunk: 故障现象 -->## 故障现象
+#<!-- chunk: 问题现象 -->## 问题现象
 
 ```yaml
 告警:
@@ -748,8 +748,8 @@ ethtool -i eth0
 ```yaml
 硬件故障排查通用流程:
   1_信息收集:
-    - 故障现象描述
-    - 故障发生时间
+    - 问题现象描述
+    - 问题发生时间
     - 影响范围
     - 最近变更
     
@@ -781,7 +781,7 @@ ethtool -i eth0
 #<!-- chunk: K8s 环境专项检查 -->## K8s 环境专项检查
 
 ```yaml
-K8s_硬件故障检查:
+K8s_硬件问题检查:
   Node_NotReady:
     - kubectl describe node
     - kubelet 日志

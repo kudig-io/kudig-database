@@ -627,7 +627,7 @@ echo never > /sys/kernel/mm/transparent_hugepage/defrag
 
 | 症状 | 可能原因 | 诊断命令 | 解决方案 |
 |:---|:---|:---|:---|
-| **集群无Leader** | 网络分区/节点故障 | `etcdctl endpoint health --cluster` | 检查网络,恢复节点 |
+| **集群无Leader** | 网络分区/节点问题 | `etcdctl endpoint health --cluster` | 检查网络,恢复节点 |
 | **写入超时** | 磁盘慢/网络延迟 | `etcdctl endpoint status -w table` | 检查磁盘IOPS,网络RTT |
 | **空间不足** | 未配置压缩/碎片多 | `etcdctl endpoint status` | 执行压缩和碎片整理 |
 | **频繁Leader切换** | 网络不稳定/磁盘慢 | 检查Prometheus指标 | 优化网络/升级磁盘 |
@@ -662,11 +662,11 @@ journalctl -u etcd | grep -E "(quota|space|compact)"
 ### 7.3 紧急恢复流程
 
 ```bash
-# 场景1: 单节点故障 (3节点集群)
+# 场景1: 单节点问题 (3节点集群)
 # 1. 确认集群状态
 etcdctl endpoint health --cluster
 
-# 2. 移除故障成员
+# 2. 移除问题成员
 etcdctl member remove <failed_member_id>
 
 # 3. 添加新成员
@@ -674,7 +674,7 @@ etcdctl member add etcd-new --peer-urls=https://new-ip:2380
 
 # 4. 在新节点启动etcd (使用 --initial-cluster-state=existing)
 
-# 场景2: 多数节点故障 (需要从备份恢复)
+# 场景2: 多数节点问题 (需要从备份恢复)
 # 参考 4.2 备份与恢复 章节
 
 # 场景3: 空间配额耗尽

@@ -105,7 +105,7 @@ Kyverno 的价值在于将安全策略从人工审查转变为自动化执行。
 
 #<!-- chunk: 2.1 Kyverno 核心架构 -->## 2.1 Kyverno 核心架构
 
-Kyverno 的架构从 v1.11 开始采用多控制器模式，将不同职责拆分为独立的控制器，每个控制器可以独立扩展和升级。这种架构设计提高了系统的可靠性和可维护性，避免了单点故障。
+Kyverno 的架构从 v1.11 开始采用多控制器模式，将不同职责拆分为独立的控制器，每个控制器可以独立扩展和升级。这种架构设计提高了系统的可靠性和可维护性，避免了单点问题。
 
 Admission Controller 是最核心的组件，负责处理所有来自 K8s API Server 的 Admission Review 请求。它以 Webhook 的形式注册到 API Server，当有资源创建或修改请求时，API Server 会将请求转发给 Admission Controller 进行策略检查。Admission Controller 根据请求的资源类型和命名空间匹配相关的 ClusterPolicy 和 Policy，执行验证、变异或镜像验证操作，然后将结果返回给 API Server。为了保证高可用，建议在生产环境中运行至少三个副本，并使用 Pod 反亲和性和拓扑分布约束确保副本分布在不同节点和可用区。Admission Controller 的性能直接影响集群的部署速度，建议在大规模集群中为其分配充足的 CPU 和内存资源。
 
@@ -186,7 +186,7 @@ Kyverno 的策略处理流程设计为高性能和可扩展。当 API Server 接
 
 #<!-- chunk: 3.1 Helm 生产级部署 -->## 3.1 Helm 生产级部署
 
-生产环境的 Kyverno 部署需要考虑高可用性、资源管理和命名空间排除等因素。Admission Controller 至少需要三个副本以保证在节点故障时仍然可以处理准入请求。Background Controller 和 Reports Controller 各两个副本即可满足大多数场景的需求。资源请求和限制需要根据集群规模和策略数量进行调整。在大规模集群（500+ 节点）中，Admission Controller 的内存限制可能需要调高到 2Gi 以上。
+生产环境的 Kyverno 部署需要考虑高可用性、资源管理和命名空间排除等因素。Admission Controller 至少需要三个副本以保证在节点问题时仍然可以处理准入请求。Background Controller 和 Reports Controller 各两个副本即可满足大多数场景的需求。资源请求和限制需要根据集群规模和策略数量进行调整。在大规模集群（500+ 节点）中，Admission Controller 的内存限制可能需要调高到 2Gi 以上。
 
 ```bash
 helm repo add kyverno https://kyverno.github.io/kyverno/
@@ -286,7 +286,7 @@ features:
 
 Kyverno 注册了以下 Webhook 到 K8s API Server，理解每个 Webhook 的作用有助于排查问题：
 
-| Webhook 类型 | 用途 | 默认超时 | 故障策略 |
+| Webhook 类型 | 用途 | 默认超时 | 问题策略 |
 |:---|:---|:---|:---|
 | Validating Webhook | 验证策略执行 | 10s | Fail |
 | Mutating Webhook | 变异策略执行 | 10s | Fail |
@@ -1227,11 +1227,11 @@ spec:
 
 #<!-- chunk: 8.1 常见问题诊断 -->## 8.1 常见问题诊断
 
-Kyverno 在生产环境中运行时可能遇到各种问题，本节总结了最常见的故障场景及其诊断方法。
+Kyverno 在生产环境中运行时可能遇到各种问题，本节总结了最常见的问题场景及其诊断方法。
 
 **策略不生效**：当创建了验证策略但资源仍然可以绕过策略时，首先检查 ClusterPolicy 的 validationFailureAction 字段。如果设置为 audit，策略只会在策略报告中记录违规，但不会拒绝资源创建。需要将其改为 enforce 才能真正拒绝不合规的资源。另外，检查策略的 match 条件是否正确匹配了目标资源。如果 match 中的 kinds 列表没有包含目标资源类型，策略不会生效。还需要检查 PolicyException 是否豁免了该资源。
 
-**Webhook 拒绝所有请求**：这是一个严重的故障场景，可能导致整个集群无法创建或修改任何资源。通常发生在 Kyverno Admission Controller 不可达时（如 Pod 崩溃、网络问题），而 Webhook 的 failurePolicy 设置为 Fail。解决方法包括：确保 Kyverno 有足够的资源和高可用副本数，将 Webhook 的 failurePolicy 设置为 Ignore（但这意味着策略可能被绕过），以及配置 Webhook 的 namespaceSelector 排除关键命名空间。
+**Webhook 拒绝所有请求**：这是一个严重的问题场景，可能导致整个集群无法创建或修改任何资源。通常发生在 Kyverno Admission Controller 不可达时（如 Pod 崩溃、网络问题），而 Webhook 的 failurePolicy 设置为 Fail。解决方法包括：确保 Kyverno 有足够的资源和高可用副本数，将 Webhook 的 failurePolicy 设置为 Ignore（但这意味着策略可能被绕过），以及配置 Webhook 的 namespaceSelector 排除关键命名空间。
 
 **高延迟**：大规模集群中的常见问题。当 Kyverno 的 Webhook 处理延迟超过 API Server 的超时时间（默认 10 秒）时，请求会超时失败。导致高延迟的原因包括策略规则过多、规则条件过于复杂、或者 Admission Controller 资源不足。解决方法包括优化规则条件（使用更精确的 match 条件减少不必要的规则评估）、增加 Admission Controller 的 CPU 和内存配额、以及调整 Webhook 的 timeoutSeconds 参数。
 

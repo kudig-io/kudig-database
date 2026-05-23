@@ -308,7 +308,7 @@ fta_event_mappings:
 
   # TE-1: 集群完全不可用
   - fta_event: BE-1.1
-    name: "API Server 故障"
+    name: "API Server 问题"
     prometheus_alerts:
       - alert_name: KubeAPIDown
         expr: "up{job='kubernetes-apiservers'} == 0"
@@ -318,7 +318,7 @@ fta_event_mappings:
         severity: warning
     
   - fta_event: BE-1.2
-    name: "etcd 集群故障"
+    name: "etcd 集群问题"
     prometheus_alerts:
       - alert_name: etcdNoLeader
         expr: "etcd_server_has_leader == 0"

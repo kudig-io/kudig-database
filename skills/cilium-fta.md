@@ -140,7 +140,7 @@ flowchart TD
   OR0 --> CAT_INIT["A. Cilium Agent 初始化失败"]
   OR0 --> CAT_HEALTH["B. Cilium 健康检查失败"]
   OR0 --> CAT_BPF["C. eBPF Map/Program 异常"]
-  OR0 --> CAT_NET["D. 网络连通性故障"]
+  OR0 --> CAT_NET["D. 网络连通性问题"]
   OR0 --> CAT_HUBBLE["E. Hubble 流量观测不可用"]
   OR0 --> CAT_SVC["F. Service/LoadBalancer 异常"]
   OR0 --> CAT_BGP["G. BGP Peering 异常"]

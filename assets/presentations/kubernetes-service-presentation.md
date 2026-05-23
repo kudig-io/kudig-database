@@ -71,7 +71,7 @@ created: "2026-05-23"
 2. 描述 kube-proxy iptables 和 IPVS 模式的转发流程和性能差异
 3. 配置 Headless Service + StatefulSet 实现精确的 Pod 寻址
 4. 使用 EndpointSlice 解决大规模 Service 的性能问题
-5. 排查 Service 访问不通的常见故障
+5. 排查 Service 访问不通的常见问题
 6. 选择合适的 ExternalTrafficPolicy 策略
 
 ### 核心要点

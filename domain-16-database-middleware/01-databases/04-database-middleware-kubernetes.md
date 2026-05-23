@@ -1175,9 +1175,9 @@ echo "Traffic split: 100% new / 0% old"
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见故障速查表 -->## 常见故障速查表
+#<!-- chunk: 常见问题速查表 -->## 常见问题速查表
 
-| 故障现象 | 可能原因 | 排查方法 | 解决方案 |
+| 问题现象 | 可能原因 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
 | ProxySQL 连接拒绝 | max_connections 达上限 | `SHOW GLOBAL STATUS LIKE 'Connections'` | 增大 max_connections |
 | Vitess 查询路由错误 | Vindex 配置不当 | `VExplain ALL` 分析 | 修正 Vindex 定义 |

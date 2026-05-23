@@ -88,7 +88,7 @@ CKA 官方考纲 7 大领域，以及本知识库对应的复习资料：
 | 工作负载与调度 | 15% | Pod、Deployment、DaemonSet、Job、调度规则 | [fundamentals/02-15](../fundamentals/) |
 | 服务与网络 | 20% | Service、Ingress、NetworkPolicy、CoreDNS、CNI | [domain-03/00-core-k8s-networking](../../domain-03-networking-traffic/00-core-k8s-networking/) |
 | 存储 | 10% | PV、PVC、StorageClass、Volume 模式 | [fundamentals/08-pv-pvc-basics.md](../fundamentals/08-pv-pvc-basics.md) |
-| 故障排查 | 30% | 节点故障、Pod 排障、网络排障、组件排障 | [domain-10-troubleshooting-diagnostics](../../domain-10-troubleshooting-diagnostics/) |
+| 故障排查 | 30% | 节点问题、Pod 排障、网络排障、组件排障 | [domain-10-troubleshooting-diagnostics](../../domain-10-troubleshooting-diagnostics/) |
 
 > 📌 **考试真相**: 故障排查占 30%，是最大头。也是工作中最值钱的技能。
 
@@ -253,7 +253,7 @@ EOF
 | D22 | Pod 排障流程 | Pending/CrashLoopBackOff/ImagePullBackOff |
 | D23 | 节点排障 | NotReady、DiskPressure、MemoryPressure |
 | D24 | 网络排障 | Service 不通、DNS 失败、NetworkPolicy 拦截 |
-| D25 | 控制平面排障 | API Server、Scheduler、Controller Manager 故障 |
+| D25 | 控制平面排障 | API Server、Scheduler、Controller Manager 问题 |
 | D26 | 模拟考试 1 | Killer.sh 或本库模拟题，严格限时 2 小时 |
 | D27 | 模拟考试 2 | 分析错题，针对性补强 |
 | D28 | 模拟考试 3 + 预约真考 | 信心建立，预约考试 |

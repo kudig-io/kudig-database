@@ -114,7 +114,7 @@ k8s_versions:
 | **资深专家** | 深入剖析 VXLAN/IPIP 封装原理、BGP 路由分发机制、eBPF（Cilium）对内核协议栈的加速优化，以及在大规模集群下的 IPAM 地址池管理和跨可用区网络延迟调优。 |
 
 > **专项排查文档**：
-> - [Terway（阿里云 CNI）深度排查]([[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]].md) — 阿里云 ACK/ASK 集群网络故障
+> - [Terway（阿里云 CNI）深度排查]([[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]].md) — 阿里云 ACK/ASK 集群网络问题
 > - [Flannel 专项排查]([[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]].md) — VXLAN/host-gw/UDP 模式、子网分配、跨节点通信
 
 ---
@@ -200,7 +200,7 @@ tcpdump -i eth0 udp port 4789 -vv -X
 | 现象 | 报错信息 | 报错来源 | 查看方式 |
 |------|----------|----------|----------|
 | Calico 节点未就绪 | `calico/node is not ready` | kubectl | `kubectl get pods -n kube-system` |
-| Flannel 后端故障 | `failed to initialize VXLAN backend` | flannel 日志 | flannel Pod 日志 |
+| Flannel 后端问题 | `failed to initialize VXLAN backend` | flannel 日志 | flannel Pod 日志 |
 | Cilium 异常 | `cilium-agent unhealthy` | kubectl | `kubectl get pods -n kube-system` |
 | 网络策略不生效 | 流量未被阻止 | 测试 | 网络测试 |
 
@@ -926,7 +926,7 @@ conntrack -L
 
 ### D. conntrack 深度分析
 
-Kubernetes Service DNAT/SNAT 完全依赖 conntrack，它是生产网络故障中最常见但最难定位的问题源。
+Kubernetes Service DNAT/SNAT 完全依赖 conntrack，它是生产网络问题中最常见但最难定位的问题源。
 
 #### D.1 conntrack 状态机
 
@@ -1055,7 +1055,7 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
 
 ### 案例 1：Calico IPAM 地址池耗尽导致大规模 Pod 创建失败
 
-#### 🎯 故障场景
+#### 🎯 问题场景
 某互联网公司在业务高峰期自动扩容，10 分钟内需创建 2000+ Pod，但发现只有 500 个 Pod 成功启动，其余全部 Pending，报错 `failed to allocate IP address`，业务扩容失败。
 
 #### 🔍 排查过程
@@ -1335,7 +1335,7 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
 
 ### 案例 2：MTU 不匹配导致 HTTP 大文件传输超时
 
-#### 🎯 故障场景
+#### 🎯 问题场景
 某视频公司部署了视频转码服务，用户上传小文件（< 1MB）正常，但上传大文件（> 10MB）时连接总是中途超时，前端报 `ERR_CONNECTION_RESET`。
 
 #### 🔍 排查过程
@@ -1568,7 +1568,7 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
 
 ### 案例 3：conntrack 表满导致微服务间歇性超时
 
-#### 🎯 故障场景
+#### 🎯 问题场景
 某电商平台在大促期间，微服务间调用出现大量间歇性超时（约 2% 请求失败），重试后成功。应用日志显示 `connection timed out`。
 
 #### 🔍 排查过程
@@ -1615,7 +1615,7 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
 2. **根治优化**：迁移高并发服务到 Cilium eBPF 模式，绕过 conntrack/iptables
 
 #### 💡 经验总结
-- conntrack 表满是高并发 K8s 集群最常见的网络故障原因之一
+- conntrack 表满是高并发 K8s 集群最常见的网络问题原因之一
 - 表现为“随机丢包”，很容易被误诊为应用问题
 - 建议生产环境配置 conntrack Prometheus 告警
 
@@ -1623,7 +1623,7 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
 
 ### 案例 4：rp_filter 导致 Pod 无法访问宿主机
 
-#### 🎯 故障场景
+#### 🎯 问题场景
 升级节点操作系统后，Pod 内 `ping <host-ip>` 超时，但 `ping <other-pod-ip>` 正常。影响了所有依赖宿主机 IP 的健康检查和监控采集。
 
 #### 🔍 排查过程

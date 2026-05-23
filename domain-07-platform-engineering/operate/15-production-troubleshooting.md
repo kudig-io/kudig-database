@@ -19,7 +19,7 @@ audience:
 - 所有工程师
 estimated_read_time: 15min
 intent_queries:
-- 15-production-troubleshooting常见故障有哪些？
+- 15-production-troubleshooting常见问题有哪些？
 - 如何排查15-production-troubleshooting相关问题？
 - 15-production-troubleshooting的故障处理方法
 trigger_keywords:
@@ -202,10 +202,10 @@ layered_troubleshooting() {
 layered_troubleshooting "user-service" "production"
 ```
 
-<!-- chunk: 常见故障场景及解决方案 -->
-## 常见故障场景及解决方案
+<!-- chunk: 常见问题场景及解决方案 -->
+## 常见问题场景及解决方案
 
-### 1. Pod相关故障
+### 1. Pod相关问题
 
 #### Pod Pending状态
 ```bash

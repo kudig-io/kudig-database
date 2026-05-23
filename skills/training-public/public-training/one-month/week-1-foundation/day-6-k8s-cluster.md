@@ -377,7 +377,7 @@ kubectl describe pod <pod-name> -n learn-k8s | grep -A 20 Events
 # 实时监控事件
 kubectl get events -n learn-k8s -w
 
-# 模拟故障场景
+# 模拟问题场景
 kubectl set image deployment/nginx-deployment nginx=nginx:nonexistent -n learn-k8s
 # 预期输出: deployment.apps/nginx-deployment image updated
 

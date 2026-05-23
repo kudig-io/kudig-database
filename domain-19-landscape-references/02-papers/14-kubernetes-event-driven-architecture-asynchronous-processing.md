@@ -774,7 +774,7 @@ func (ec *EventConsumer) handlePodFailed(event KubernetesEvent) error {
     // 实现故障处理逻辑
     // - 发送告警通知
     // - 自动重启Pod
-    // - 记录故障日志
+    // - 记录问题日志
     
     return nil
 }
