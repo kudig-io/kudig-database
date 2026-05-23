@@ -53,7 +53,7 @@ created: "2026-05-23"
 
 ### 深度技术
 
-- [[domain-01-cluster-fundamentals/03-control-plane/11-etcd-deep-dive.md]]
+- [[domain-01-cluster-fundamentals/03-control-plane/11-etcd-deep-dive]]
 - etcd运维操作
 
 ### 故障排查与维护
@@ -257,21 +257,21 @@ created: "2026-05-23"
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)
 - Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Implementation)
 - Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)
-- [[domain-19-landscape-references/02-papers/07-kubernetes-csi-storage-deep-practice.md]]
+- [[domain-19-landscape-references/02-papers/07-kubernetes-csi-storage-deep-practice]]
 - Kubernetes 自动化运维与SRE实践 (Automation and SRE Practices)
-- [[domain-19-landscape-references/02-papers/11-kubernetes-api-server-deep-optimization-extension.md]]
-- [[domain-19-landscape-references/02-papers/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md]]
+- [[domain-19-landscape-references/02-papers/11-kubernetes-api-server-deep-optimization-extension]]
+- [[domain-19-landscape-references/02-papers/12-kubernetes-scheduler-deep-optimization-custom-scheduling]]
 - Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota Management)
 - Kubernetes 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous Processing)
 - Kubernetes 混沌工程与故障注入测试 (Chaos Engineering and Fault Injection Testing)
 - Kubernetes 边缘计算与KubeEdge实践 (Edge Computing and KubeEdge Practice)
 - Kubernetes Gateway API 与现代流量管理实践
 - Kubernetes 供应链安全实践 (Supply Chain Security: SBOM, SLSA, and Sigstore)
-- [[domain-19-landscape-references/02-papers/21-kubernetes-platform-engineering-internal-developer-platform.md]]
+- [[domain-19-landscape-references/02-papers/21-kubernetes-platform-engineering-internal-developer-platform]]
 - Kubernetes WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes)
 - Kubernetes OpenTelemetry 原生可观测性 (OpenTelemetry Native Observability)
 - Kubernetes 策略即代码与治理自动化 (Policy-as-Code and Governance Automation)
-- [[domain-19-landscape-references/02-papers/25-gke-autopilot-google-cloud-ai-infrastructure.md]]
+- [[domain-19-landscape-references/02-papers/25-gke-autopilot-google-cloud-ai-infrastructure]]
 - Kubernetes vCluster 与虚拟集群多租户 (vCluster and Virtual Cluster Multi-Tenancy)
 
 ## CNCF 生态

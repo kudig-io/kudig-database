@@ -1,6 +1,6 @@
 ---
 title: Docker
-description: '- [[domain-13-container-runtime/README.md|Docker 容器技术深度解析]]'
+description: '- [[domain-13-container-runtime/README|Docker 容器技术深度解析]]'
 category: entities
 tags:
 - k8s
@@ -58,20 +58,20 @@ Use Docker for development and image building. Use containerd or CRI-O for K8s p
 
 ## Related
 
-- [[entities/container-runtime.md|container-runtime]] — Container Runtime
+- [[entities/container-runtime|container-runtime]] — Container Runtime
 - [[containerd]] — containerd
 - [[cri-o]] — CRI-O
-- [[concepts/docker-architecture.md|docker-architecture]] — Docker Architecture and Container Runtime
-- [[concepts/container-runtime-comparison.md|container-runtime-comparison]] — Container Runtime Comparison
-- [[concepts/docker-architecture.md|Docker Architecture]]
-- [[concepts/container-runtime-comparison.md|Container Runtime Comparison]]
+- [[concepts/docker-architecture|docker-architecture]] — Docker Architecture and Container Runtime
+- [[concepts/container-runtime-comparison|container-runtime-comparison]] — Container Runtime Comparison
+- [[concepts/docker-architecture|Docker Architecture]]
+- [[concepts/container-runtime-comparison|Container Runtime Comparison]]
 - [[containerd|containerd]]
 
 - 00-open-source-projects-index
 - 02-docker-registry-enterprise-distribution
 - 05-docker-storage-volumes
 - 11-docker-automation-devops
-- [[domain-13-container-runtime/README.md|Docker 容器技术深度解析]]
+- [[domain-13-container-runtime/README|Docker 容器技术深度解析]]
 - 04-docker-networking-deep-dive
 - 03-docker-container-lifecycle
 - 09-docker-performance-monitoring

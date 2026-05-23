@@ -59,12 +59,12 @@ created: "2026-05-23"
 <!-- chunk: 目录 / Table of Contents -->## 目录 / Table of Contents
 
 1. [SpinKube 概述](#1-spinkube-概述)
-2. [[entities/spin.md|Spin]] 应用模型](#2-spin-应用模型)
+2. [[entities/spin|Spin]] 应用模型](#2-spin-应用模型)
 3. [SpinKube 架构](#3-spinkube-架构)
 4. [SpinApp CRD](#4-spinapp-crd)
 5. [安装与配置](#5-安装与配置)
 6. [HTTP 触发器](#6-http-触发器)
-7. [[entities/keda.md|KEDA]] 集成与 Scale-to-Zero](#7-keda-集成与-scale-to-zero)
+7. [[entities/keda|KEDA]] 集成与 Scale-to-Zero](#7-keda-集成与-scale-to-zero)
 8. [存储系统集成](#8-存储系统集成)
 9. [Redis 与 KV Store](#9-redis-与-kv-store)
 10. [SQLite 集成](#10-sqlite-集成)
@@ -2355,7 +2355,7 @@ data:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native MOC
-- [[domain-15-specialized-tech/README.md|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
+- [[domain-15-specialized-tech/README|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
 - Domain-38 WebAssembly 云原生 — 开源项目索引
 - WebAssembly 云原生基础
 - containerd Wasm 运行时

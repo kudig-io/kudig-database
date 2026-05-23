@@ -1,6 +1,6 @@
 ---
 title: Remediation Playbook
-description: '- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]'
+description: '- [[skills/troubleshoot-pod-issues|Pod 故障排查]]'
 category: skills
 tags:
 - k8s
@@ -32,14 +32,14 @@ created: "2026-05-23"
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
-- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
+- [[skills/Kubernetes Diagnostic Skills Overview|诊断技能总览]]
+- [[skills/troubleshoot-pod-issues|Pod 故障排查]]
 
 ## Related
 
-- [[skills/ts-workloads.md|ts-workloads]] — 工作负载故障排查
-- [[pdb-fta]] — [[skills/pdb-fta.md|[[PDB 异常故障树分析|PDB 异常故障树分析]]]]
-- [[skills/assessment-daily-check-quiz.md|assessment-daily-check-quiz]] — Daily Check Quiz
+- [[skills/ts-workloads|ts-workloads]] — 工作负载故障排查
+- [[pdb-fta]] — [[skills/pdb-fta|[[PDB 异常故障树分析|PDB 异常故障树分析]]]]
+- [[skills/assessment-daily-check-quiz|assessment-daily-check-quiz]] — Daily Check Quiz
 - [[psp-scc-fta]] — PSP/SCC 异常故障树分析
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

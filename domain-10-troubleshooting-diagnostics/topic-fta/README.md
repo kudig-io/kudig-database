@@ -178,11 +178,11 @@ Agent 工程师:  第8-13章 → 第14章
 
 ## Related
 
-- [[README.md|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/opentelemetry.md|OpenTelemetry]]
-- [[log.md|log]]
+- [[README|README]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[entities/kubernetes|kubernetes]]
+- [[entities/opentelemetry|OpenTelemetry]]
+- [[log|log]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference

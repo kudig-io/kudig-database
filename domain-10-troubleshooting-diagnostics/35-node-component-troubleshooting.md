@@ -72,7 +72,7 @@ created: "2026-05-23"
 ## 目录
 
 1. [概述与诊断框架](#1-概述与诊断框架)
-2. [[entities/kubelet.md|kubelet]] 故障排查](#2-kubelet-故障排查)
+2. [[entities/kubelet|kubelet]] 故障排查](#2-kubelet-故障排查)
 3. [容器运行时故障排查](#3-容器运行时故障排查)
 4. [kube-proxy 故障排查](#4-kube-proxy-故障排查)
 5. [节点资源压力诊断](#5-节点资源压力诊断)
@@ -813,27 +813,27 @@ chmod +x node-performance-benchmark.sh
 ## Obsidian 相关文档
 
 - domain-10-troubleshooting-diagnostics MOC
-- [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
+- [[domain-10-troubleshooting-diagnostics/README|Domain-12 故障排查 (Troubleshooting)]]
 - Domain-12 故障排查 — 开源项目索引
-- [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]
-- [[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]
-- [[domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断]]
-- [[domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md|Node NotReady 状态深度诊断]]
-- [[domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis.md|OOM 和内存问题诊断]]
-- [[domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/09-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting|API Server 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting|etcd 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting|CNI 网络插件故障排查]]
+- [[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting|CSI 存储驱动故障排查]]
+- [[domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis|Pod Pending 状态深度诊断]]
+- [[domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis|Node NotReady 状态深度诊断]]
+- [[domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis|OOM 和内存问题诊断]]
+- [[domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting|Pod 全面故障排查]]
+- [[domain-10-troubleshooting-diagnostics/09-node-comprehensive-troubleshooting|Node 全面故障排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/33-performance-bottleneck-troubleshooting.md|33-performance-bottleneck-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/34-upgrade-migration-troubleshooting.md|34-upgrade-migration-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/36-helm-chart-troubleshooting.md|36-helm-chart-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/37-multi-cluster-management-troubleshooting.md|37-multi-cluster-management-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/33-performance-bottleneck-troubleshooting|33-performance-bottleneck-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/34-upgrade-migration-troubleshooting|34-upgrade-migration-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/36-helm-chart-troubleshooting|36-helm-chart-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/37-multi-cluster-management-troubleshooting|37-multi-cluster-management-troubleshooting]]
 
 ## Related
 

@@ -77,17 +77,17 @@ graph TD
 
 ## 相关文档
 
-- [[domain-04-storage-data/README.md]]
-- [[domain-04-storage-data/README.md]]
+- [[domain-04-storage-data/README]]
+- [[domain-04-storage-data/README]]
 
 
 ---
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta]]
 
 
 ---
@@ -106,6 +106,6 @@ graph TD
 
 ## Related
 
-- [[references/kudig-metadata-index.md|README]].md|README]]
-- [[skills/csi-fta.md|csi-fta]]
+- [[references/kudig-metadata-index|README]].md|README]]
+- [[skills/csi-fta|csi-fta]]
 - storage

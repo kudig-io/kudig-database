@@ -106,10 +106,10 @@ created: "2026-05-23"
 - Volcano
 - Fluid
 - HAMi (Heterogeneous AI Computing Virtualization Middleware)
-- [[domain-15-specialized-tech/01-edge-computing/99-kubernetes-developer-toolchain-guide.md]]
+- [[domain-15-specialized-tech/01-edge-computing/99-kubernetes-developer-toolchain-guide]]
 - HolmesGPT
 - ModelPack
 
 ### 技术论文
 
-- [[domain-19-landscape-references/02-papers/17-kubernetes-aiml-gpu-scheduling-llm-inference.md]]
+- [[domain-19-landscape-references/02-papers/17-kubernetes-aiml-gpu-scheduling-llm-inference]]

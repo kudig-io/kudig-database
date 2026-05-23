@@ -110,16 +110,16 @@ created: "2026-05-23"
 ## 版本兼容矩阵
 
 核心依赖版本与 Kubernetes 版本的对应关系详见：
-- [[concepts/core-dependency-version-matrix.md|核心依赖版本矩阵]]
-- [[entities/core-deps-changelog.md|核心依赖变更日志索引]]
+- [[concepts/core-dependency-version-matrix|核心依赖版本矩阵]]
+- [[entities/core-deps-changelog|核心依赖变更日志索引]]
 
 ---
 
 ## 相关导航
 
-- [[concepts/core-dependency-version-matrix.md|核心依赖版本矩阵]]
-- [[entities/core-deps-changelog.md|核心依赖变更日志索引]]
-- [[references/release-notes-reading-guide.md|发布说明阅读指南]]
+- [[concepts/core-dependency-version-matrix|核心依赖版本矩阵]]
+- [[entities/core-deps-changelog|核心依赖变更日志索引]]
+- [[references/release-notes-reading-guide|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related

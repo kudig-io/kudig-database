@@ -1029,9 +1029,9 @@ Oracle OKE凭借其企业级架构设计、金融级安全特性和卓越的性�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
 - 06-monitoring-alerting-system
-- [[references/oracle-oke-overview.md|Oracle Container Engine for Kubernetes (OKE)]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[references/oracle-oke-overview|Oracle Container Engine for Kubernetes (OKE)]]
+- [[entities/kubernetes|kubernetes]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

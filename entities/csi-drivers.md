@@ -72,10 +72,10 @@ Kubernetes has migrated all in-tree volume plugins to CSI. The migration was gra
 - [[grpc]] — gRPC
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/storage-model.md|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
-- [[skills/manage-persistent-storage.md|manage-persistent-storage]] — Manage Persistent Storage
-- [[concepts/storage-model.md|Persistent Storage Model]]
-- [[skills/manage-persistent-storage.md|Manage Persistent Storage]]
-- [[entities/statefulset.md|StatefulSet]]
+- [[concepts/storage-model|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
+- [[skills/manage-persistent-storage|manage-persistent-storage]] — Manage Persistent Storage
+- [[concepts/storage-model|Persistent Storage Model]]
+- [[skills/manage-persistent-storage|Manage Persistent Storage]]
+- [[entities/statefulset|StatefulSet]]
 
 - 05-csi-drivers-integration

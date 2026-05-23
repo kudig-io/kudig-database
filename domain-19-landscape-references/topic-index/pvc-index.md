@@ -87,7 +87,7 @@ created: "2026-05-23"
 
 ### 控制平面组件
 
-- [[domain-01-cluster-fundamentals/03-control-plane/22-container-storage-deep-dive.md]]
+- [[domain-01-cluster-fundamentals/03-control-plane/22-container-storage-deep-dive]]
 - cloud-controller-manager 深度解析 (CCM Deep Dive)
 
 ### 技能卡片

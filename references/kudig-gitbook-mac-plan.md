@@ -1,6 +1,6 @@
 ---
 title: Gitbook macOS 导出计划
-description: '- [[references/kudig-gitbook-system.md|kudig-gitbook-system]] — Gitbook 本地文档浏览系统与构建指南'
+description: '- [[references/kudig-gitbook-system|kudig-gitbook-system]] — Gitbook 本地文档浏览系统与构建指南'
 category: reference
 tags:
 - k8s
@@ -47,5 +47,5 @@ created: "2026-05-23"
 
 ## Related
 
-- [[references/kudig-gitbook-system.md|kudig-gitbook-system]] — Gitbook 本地文档浏览系统与构建指南
+- [[references/kudig-gitbook-system|kudig-gitbook-system]] — Gitbook 本地文档浏览系统与构建指南
 - [[INDEX]] — Wiki Index

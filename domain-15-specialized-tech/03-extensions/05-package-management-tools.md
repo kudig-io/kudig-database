@@ -2055,7 +2055,7 @@ kustomize edit set namespace    # 设置命名空间
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
 - index.md|Domain-10 扩展与自定义 — 开源项目索引]]
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现
@@ -2069,7 +2069,7 @@ kustomize edit set namespace    # 设置命名空间
 
 ## Related
 
-- [[synthesis/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
+- [[synthesis/Operator 模式 × 可观测性|Operator 模式 × 可观测性]]
 
 - CRD 开发指南
 - CI/CD 管道

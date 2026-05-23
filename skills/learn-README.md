@@ -587,6 +587,6 @@ tags: [onboarding, quick-start, day-1-4, new-engineer, k8s-1.28-1.33]
 
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[skills/learn-02-first-ticket-guide.md|learn-02-first-ticket-guide]] — Day 2: 第一个工单处理指南
-- [[skills/learn-04-debug-tools-setup.md|learn-04-debug-tools-setup]] — Day 4: 调试工具全家桶安装
-- [[skills/learn-03-oncall-handoff.md|learn-03-oncall-handoff]] — Day 3: 值班交接 SOP
+- [[skills/learn-02-first-ticket-guide|learn-02-first-ticket-guide]] — Day 2: 第一个工单处理指南
+- [[skills/learn-04-debug-tools-setup|learn-04-debug-tools-setup]] — Day 4: 调试工具全家桶安装
+- [[skills/learn-03-oncall-handoff|learn-03-oncall-handoff]] — Day 3: 值班交接 SOP

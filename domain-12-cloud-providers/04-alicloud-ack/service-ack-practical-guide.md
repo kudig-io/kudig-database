@@ -393,15 +393,15 @@ spec:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[skills/service-fta.md|service-fta]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/coredns.md|coredns]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[skills/service-fta|service-fta]]
+- [[entities/kubernetes|kubernetes]]
+- [[entities/coredns|coredns]]
 
 ## See Also
 
-- [[domain-12-cloud-providers/04-alicloud-ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
-- [[domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md|alicloud-ack-overview]]
-- [[domain-12-cloud-providers/04-alicloud-ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
-- [[domain-12-cloud-providers/04-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
+- [[domain-12-cloud-providers/04-alicloud-ack/245-ack-ebs-storage|245-ack-ebs-storage]]
+- [[domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview|alicloud-ack-overview]]
+- [[domain-12-cloud-providers/04-alicloud-ack/240-ack-ecs-compute|240-ack-ecs-compute]]
+- [[domain-12-cloud-providers/04-alicloud-ack/241-ack-slb-nlb-alb|241-ack-slb-nlb-alb]]

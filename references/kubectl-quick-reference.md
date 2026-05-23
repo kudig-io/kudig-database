@@ -128,14 +128,14 @@ ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-snapshot.db --endpoints=https:/
 
 ## Related
 
-- [[skills/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — Troubleshoot Pod Issues
+- [[skills/troubleshoot-pod-issues|troubleshoot-pod-issues]] — Troubleshoot Pod Issues
 - [[deployment]] — Deployment
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
-- [[skills/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
-- [[skills/troubleshoot-node-issues.md|Troubleshoot Node Issues]]
-- [[entities/kube-apiserver.md|kube-apiserver]]
+- [[concepts/resource-management|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[skills/troubleshoot-pod-issues|Troubleshoot Pod Issues]]
+- [[skills/troubleshoot-node-issues|Troubleshoot Node Issues]]
+- [[entities/kube-apiserver|kube-apiserver]]
 - [[etcd|etcd]]
 
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/08-troubleshooting.md|08-troubleshooting]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/08-troubleshooting|08-troubleshooting]]

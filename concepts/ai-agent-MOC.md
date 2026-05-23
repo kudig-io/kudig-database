@@ -143,4 +143,4 @@ AI Agent — AI 智能体架构、工具调用、Agent 工作流
 
 ## 相关合成分析
 
-- [[synthesis/gpu-scheduling-ai-workloads.md|gpu-scheduling-ai-workloads]]
+- [[synthesis/gpu-scheduling-ai-workloads|gpu-scheduling-ai-workloads]]

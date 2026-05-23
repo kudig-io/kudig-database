@@ -97,15 +97,15 @@ Mem_Buf_Limit 设置过小会导致日志丢失。建议设置为 10MB ^[inferre
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
-- [[concepts/observability-pillars.md|Observability Pillars]]
-- [[skills/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]]
-- [[skills/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]]
+- [[concepts/k8s-production-best-practices|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
+- [[concepts/observability-pillars|Observability Pillars]]
+- [[skills/k8s-monitoring-guide|Kubernetes 监控最佳实践]]
+- [[skills/k8s-distributed-tracing-guide|Kubernetes 分布式追踪最佳实践]]
 
 ## Related
 
-- [[skills/k8s-distributed-tracing-guide.md|k8s-distributed-tracing-guide]] — Kubernetes 分布式追踪最佳实践
+- [[skills/k8s-distributed-tracing-guide|k8s-distributed-tracing-guide]] — Kubernetes 分布式追踪最佳实践
 - [[fluentd]] — Fluentd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/observability-pillars.md|observability-pillars]] — Observability Pillars
-- [[concepts/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[concepts/observability-pillars|observability-pillars]] — Observability Pillars
+- [[concepts/k8s-production-best-practices|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践

@@ -172,7 +172,7 @@ Domain Agent -> Meta Agent:
 - [[calico-fta]] — Calico Fta
 - [[helm]] — Helm
 - [[cert-manager]] — cert-manager
-- [[skills/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
-- [[skills/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]]
-- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
+- [[skills/FTA Methodology and Core Principles|FTA Methodology and Core Principles]]
+- [[skills/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
+- [[skills/FTA-Driven Runbook Automation|FTA-Driven Runbook Automation]]
+- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]]

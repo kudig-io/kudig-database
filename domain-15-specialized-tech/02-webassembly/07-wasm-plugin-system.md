@@ -62,8 +62,8 @@ created: "2026-05-23"
 
 1. [插件系统架构概述](#1-插件系统架构概述)
 2. [proxy-wasm 规范详解](#2-proxy-wasm-规范详解)
-3. [[entities/envoy.md|Envoy]] Wasm Filter 开发](#3-envoy-wasm-filter-开发)
-4. [[entities/istio.md|Istio]] Wasm Plugin 配置](#4-istio-wasm-plugin-配置)
+3. [[entities/envoy|Envoy]] Wasm Filter 开发](#3-envoy-wasm-filter-开发)
+4. [[entities/istio|Istio]] Wasm Plugin 配置](#4-istio-wasm-plugin-配置)
 5. [HTTP 头部操作插件](#5-http-头部操作插件)
 6. [限流插件实现](#6-限流插件实现)
 7. [可观测性插件](#7-可观测性插件)
@@ -2901,7 +2901,7 @@ Wasm 插件系统通过 **proxy-wasm 规范** 提供了标准化的代理扩展�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README.md|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
+- [[domain-15-specialized-tech/README|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
 - Domain-38 WebAssembly 云原生 — 开源项目索引
 - WebAssembly 云原生基础
 - containerd Wasm 运行时

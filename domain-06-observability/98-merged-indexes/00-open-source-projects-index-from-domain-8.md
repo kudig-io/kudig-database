@@ -106,7 +106,7 @@ created: "2026-05-23"
 ## Obsidian 相关文档
 
 - domain-06-observability MOC
-- [[domain-06-observability/README.md|Observability Domain (可观测性领域)]]
+- [[domain-06-observability/README|Observability Domain (可观测性领域)]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
 - 03 - 日志收集架构详解 (Logging Architecture)
@@ -120,9 +120,9 @@ created: "2026-05-23"
 
 ## See Also
 
-- [[domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-20.md|00-open-source-projects-index-from-domain-06-observability]]
-- [[domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-21.md|00-open-source-projects-index-from-domain-06-observability]]
-- [[domain-06-observability/98-merged-indexes/FINAL-QUALITY-ASSESSMENT.md|FINAL-QUALITY-ASSESSMENT]]
-- [[domain-06-observability/98-merged-indexes/MOC-from-domain-20.md|MOC-from-domain-06-observability]]
+- [[domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-20|00-open-source-projects-index-from-domain-06-observability]]
+- [[domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-21|00-open-source-projects-index-from-domain-06-observability]]
+- [[domain-06-observability/98-merged-indexes/FINAL-QUALITY-ASSESSMENT|FINAL-QUALITY-ASSESSMENT]]
+- [[domain-06-observability/98-merged-indexes/MOC-from-domain-20|MOC-from-domain-06-observability]]
 
-- [[domain-06-observability/README.md|返回目录]]
+- [[domain-06-observability/README|返回目录]]

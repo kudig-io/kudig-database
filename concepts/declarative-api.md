@@ -55,7 +55,7 @@ Every Kubernetes object follows a standard structure:
 Key metadata fields:
 - **resourceVersion**: etcd revision number, used for optimistic concurrency control
 - **generation**: Incremented each time spec changes
-- **ownerReferences**: Enables cascading deletion ([[domain-17-system-foundation/topic-dictionary/fundamentals/garbage-collection.md|garbage collection]])
+- **ownerReferences**: Enables cascading deletion ([[domain-17-system-foundation/topic-dictionary/fundamentals/garbage-collection|garbage collection]])
 - **[[Finalizers|finalizers]]**: Pre-delete hooks for resource cleanup
 
 ## Server-Side Apply (SSA)
@@ -66,12 +66,12 @@ Kubernetes v1.18+ supports Server-Side Apply, which enables multiple controllers
 
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/controller-pattern.md|controller-pattern]] — Controller Pattern (Reconciliation Loop)
-- [[concepts/eventual-consistency.md|eventual-consistency]] — Eventual Consistency in Kubernetes
-- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
-- [[concepts/controller-pattern.md|Controller Pattern]]
-- [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
-- [[entities/kube-apiserver.md|kube-apiserver]]
-- [[concepts/eventual-consistency.md|Eventual Consistency]]
+- [[concepts/controller-pattern|controller-pattern]] — Controller Pattern (Reconciliation Loop)
+- [[concepts/eventual-consistency|eventual-consistency]] — Eventual Consistency in Kubernetes
+- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/controller-pattern|Controller Pattern]]
+- [[concepts/kubernetes-architecture-overview|Kubernetes Architecture Overview]]
+- [[entities/kube-apiserver|kube-apiserver]]
+- [[concepts/eventual-consistency|Eventual Consistency]]
 
 - 声明式 API 与面向终态设计

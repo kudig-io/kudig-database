@@ -79,7 +79,7 @@ Flannel v0.20+ 支持 IPv6 Dual Stack，允许集群同时使用 IPv4 和 IPv6 �
 | 功能 | 支持情况 |
 |:-----|:-------:|
 | 单 IPv6 集群 | ✓ 支持 |
-| [[domain-17-system-foundation/topic-dictionary/networking/ipv4-ipv6-dual-stack.md|IPv4/IPv6 Dual Stack]] | ✓ v0.20+ |
+| [[domain-17-system-foundation/topic-dictionary/networking/ipv4-ipv6-dual-stack|IPv4/IPv6 Dual Stack]] | ✓ v0.20+ |
 | IPv6 only 后端 (VXLAN) | ✓ v0.21+ |
 | Windows 节点 IPv6 | ✗ 暂不支持 |
 
@@ -378,7 +378,7 @@ net-conf.json: |
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic KUDIG Database — Global MOC
-- [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档

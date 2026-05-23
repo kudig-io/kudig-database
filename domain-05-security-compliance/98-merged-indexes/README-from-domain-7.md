@@ -194,6 +194,6 @@ tier: peripheral---
 
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-06-observability
-- [[domain-17-system-foundation/topic-cheat-sheet/tls-pki.md|速查卡: tls-pki]]
+- [[domain-17-system-foundation/topic-cheat-sheet/tls-pki|速查卡: tls-pki]]
 
-- [[domain-05-security-compliance/README.md|返回目录]]
+- [[domain-05-security-compliance/README|返回目录]]

@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 # 03 - [[StatefulSet|StatefulSet]] 高级运维指南 (StatefulSet Advanced Operations)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|Kubernetes]] [[StatefulSets|StatefulSets]]](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes|Kubernetes]] [[StatefulSets|StatefulSets]]](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 
 <!-- chunk: StatefulSet 核心特性解析 -->
 ## StatefulSet 核心特性解析
@@ -785,7 +785,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications KUDIG Database — Global MOC
-- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
 - Domain-4 工作负载 — 开源项目索引
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)

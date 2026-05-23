@@ -68,7 +68,7 @@ created: "2026-05-23"
 3. [bpftrace 语言基础](#3-bpftrace-语言基础)
 4. [bpftrace 单行脚本示例](#4-bpftrace-单行脚本示例)
 5. [复杂 bpftrace 脚本开发](#5-复杂-bpftrace-脚本开发)
-6. [[entities/kubernetes.md|Kubernetes]] 环境中的 eBPF 性能分析](#6-kubernetes-环境中的-ebpf-性能分析)
+6. [[entities/kubernetes|Kubernetes]] 环境中的 eBPF 性能分析](#6-kubernetes-环境中的-ebpf-性能分析)
 7. [容器感知的 eBPF 工具](#7-容器感知的-ebpf-工具)
 8. [自定义 bcc/bpftrace 工具开发](#8-自定义-bccbpftrace-工具开发)
 9. [性能分析方法论 (USE/RED)](#9-性能分析方法论-usered)
@@ -2591,7 +2591,7 @@ ss -tnp | awk '{print $1}' | sort | uniq -c  # 按状态统计
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-35-ebpf-technology MOC
-- [[domain-03-networking-traffic/README.md|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
+- [[domain-03-networking-traffic/README|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
 - Domain-35 eBPF 技术 — 开源项目索引
 - eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...
 - eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)

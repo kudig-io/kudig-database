@@ -134,11 +134,11 @@ API [[entities/etcd|etcd]]/Scheduler 问题的诊断与修复 Skill。
 
 本Skill诊断过程中可能涉及的其他Skill：
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry.md]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry]]
 
-- [[video-scripts/node-notready.md]]
+- [[video-scripts/node-notready]]
 
-- [[skills/best-practices/scenarios/security-incident.md]]
+- [[skills/best-practices/scenarios/security-incident]]
 
 
 当本Skill的诊断步骤无法定位根因时，建议按上述顺序排查相关Skill。

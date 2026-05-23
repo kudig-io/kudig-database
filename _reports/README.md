@@ -96,9 +96,9 @@ reports/
 
 ## Related
 
-- [[MOC.md|MOC]]
-- [[_reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN.md|OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN]]
-- [[README.md|README]]
+- [[MOC|MOC]]
+- [[_reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN|OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN]]
+- [[README|README]]
 - [[domain-19-landscape-references/98-merged-indexes/README-from-domain-34|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-26|domain-26-service-mesh-microservices MOC]] — Cross-reference

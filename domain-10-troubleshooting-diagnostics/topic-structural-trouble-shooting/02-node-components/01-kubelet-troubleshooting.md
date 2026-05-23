@@ -1446,7 +1446,7 @@ systemReserved:
        labels:
          severity: warning
        annotations:
-         [[domain-10-troubleshooting-diagnostics/SUMMARY.md|SUMMARY]]: "PLEG relist 耗时过高"
+         [[domain-10-troubleshooting-diagnostics/SUMMARY|SUMMARY]]: "PLEG relist 耗时过高"
          description: "节点 {{ $labels.node }} PLEG P99 耗时 {{ $value }}s，可能导致 NotReady"
      
      - alert: ContainerdSlowResponse
@@ -1727,15 +1727,15 @@ systemReserved:
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[CHANGELOG.md|CHANGELOG]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[CHANGELOG|CHANGELOG]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting.md|05-image-registry-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.md|06-gpu-device-plugin-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting.md|02-kube-proxy-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting|05-image-registry-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting|06-gpu-device-plugin-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting|02-kube-proxy-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting|03-container-runtime-troubleshooting]]

@@ -76,12 +76,12 @@ Choose based on:
 - [[synthesis/CNI 插件 × NetworkPolicy|CNI 插件 × NetworkPolicy]] — 综合
 
 - [[cilium]] — Cilium
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/service-networking.md|service-networking]] — Service Networking
-- [[concepts/service-networking.md|Service Networking]]
-- [[entities/networkpolicy.md|NetworkPolicy]]
+- [[concepts/service-networking|service-networking]] — Service Networking
+- [[concepts/service-networking|Service Networking]]
+- [[entities/networkpolicy|NetworkPolicy]]
 - Kubernetes Network Model
 
 - 03-cni-plugins-comparison

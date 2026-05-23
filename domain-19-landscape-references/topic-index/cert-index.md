@@ -49,7 +49,7 @@ created: "2026-05-23"
 ### 深度技术
 
 - 证书管理与 TLS 配置
-- [[entities/kubernetes.md]]
+- [[entities/kubernetes]]
 
 ### 证书工具
 

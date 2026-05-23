@@ -1,3 +1,12 @@
+---
+title: "模板标题"
+category: templates
+tags: ["templates", "visibility/public"]
+sources: ["auto-generated"]
+created: 2026-05-24
+updated: 2026-05-24
+---
+
 # {{组件名称}} 故障树分析 (FTA)
 
 > **模板版本**: 2.0

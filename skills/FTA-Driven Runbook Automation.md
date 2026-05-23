@@ -147,13 +147,13 @@ Runbooks evolve through the learning feedback loop:
 ## Related
 
 - [[higress-fta]] — Higress 网关异常故障树分析
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
 - [[deployment]] — Deployment
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
-- [[skills/FTA Methodology and Core Principles.md|[[FTA Methodology and Core Principles|FTA Methodology and Core Principles]]]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
-- [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
-- [[skills/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
-- [[synthesis/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
-- [[synthesis/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]]
+- [[skills/FTA Methodology and Core Principles|[[FTA Methodology and Core Principles|FTA Methodology and Core Principles]]]]
+- [[skills/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
+- [[skills/Agent Orchestration Patterns|Agent Orchestration Patterns]]
+- [[skills/Kubernetes Diagnostic Skills Overview|Kubernetes Diagnostic Skills Overview]]
+- [[synthesis/Production Troubleshooting Playbook|Production Troubleshooting Playbook]]
+- [[synthesis/Structural Troubleshooting Framework|Structural Troubleshooting Framework]]

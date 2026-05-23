@@ -78,8 +78,8 @@ graph TD
 
 ## 相关文档
 
-- [[domain-05-security-compliance/README.md]]
-- [[domain-05-security-compliance/README.md]]
+- [[domain-05-security-compliance/README]]
+- [[domain-05-security-compliance/README]]
 - supply-chain-security/README.md]]
 
 
@@ -87,8 +87,8 @@ graph TD
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/rbac-fta.md]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/certificate-fta.md]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/rbac-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/certificate-fta]]
 
 
 ---
@@ -107,6 +107,6 @@ graph TD
 
 ## Related
 
-- [[references/kudig-metadata-index.md|README]].md|README]]
-- [[skills/certificate-fta.md|certificate-fta]]
-- [[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]
+- [[references/kudig-metadata-index|README]].md|README]]
+- [[skills/certificate-fta|certificate-fta]]
+- [[domain-17-system-foundation/topic-dictionary/security/cloud-native-security|cloud-native-security]]

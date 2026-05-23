@@ -49,7 +49,7 @@ K0s 是一个轻量级、全功能的 Kubernetes 发行版，打包为单一二�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -67,10 +67,10 @@ K0s 是一个轻量级、全功能的 Kubernetes 发行版，打包为单一二�
 ## 参考链接
 
 - [[etcd]]
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
 - [[containerd]]
 - networking.md|cilium-ebpf-networking]]
-- [[entities/cni-plugins.md|cni-plugins]]
+- [[entities/cni-plugins|cni-plugins]]
 
 ## Related
 

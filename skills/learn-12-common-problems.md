@@ -509,7 +509,7 @@ kubectl top pods -n <namespace>
 
 ## Related
 
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
 - [[deployment]] — Deployment
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)

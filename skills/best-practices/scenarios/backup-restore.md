@@ -79,16 +79,16 @@ graph TD
 
 ## 相关文档
 
-- [[domain-09-reliability-engineering/README.md]]
-- [[domain-01-cluster-fundamentals/README.md]]
+- [[domain-09-reliability-engineering/README]]
+- [[domain-01-cluster-fundamentals/README]]
 
 
 ---
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta]]
 
 
 ---
@@ -107,8 +107,8 @@ graph TD
 
 ## Related
 
-- [[references/kudig-metadata-index.md|README]].md|README]]
-- [[skills/backup-restore-fta.md|backup-restore-fta]]
-- [[skills/etcd-fta.md|etcd-fta]]
+- [[references/kudig-metadata-index|README]].md|README]]
+- [[skills/backup-restore-fta|backup-restore-fta]]
+- [[skills/etcd-fta|etcd-fta]]
 
-- [[release-notes/13-backup-demo-video.md|13-backup-demo-video]]
+- [[release-notes/13-backup-demo-video|13-backup-demo-video]]

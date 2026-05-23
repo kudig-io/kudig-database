@@ -1374,7 +1374,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications MOC
-- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
 - Domain-4 工作负载 — 开源项目索引
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)

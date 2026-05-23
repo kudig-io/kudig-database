@@ -47,8 +47,8 @@ created: "2026-05-23"
 
 ## 与其他 Domain 的关系
 
-- [[domain-09-reliability-engineering/README.md|domain-09-reliability-engineering]] — 可靠性工程
-- [[domain-07-platform-engineering/README.md|domain-07-platform-engineering]] — 平台治理
+- [[domain-09-reliability-engineering/README|domain-09-reliability-engineering]] — 可靠性工程
+- [[domain-07-platform-engineering/README|domain-07-platform-engineering]] — 平台治理
 
 ## Related
 

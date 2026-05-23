@@ -44,7 +44,7 @@ Kubean 是一个基于 Kubespray 的 Kubernetes 集群生命周期管理 Operato
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -62,13 +62,13 @@ Kubean 是一个基于 Kubespray 的 Kubernetes 集群生命周期管理 Operato
 
 - [[etcd]]
 - [[containerd]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
 - [[operator-pattern]]
-- [[concepts/controller-pattern.md|controller-pattern]]
+- [[concepts/controller-pattern|controller-pattern]]
 
 ## Related
 
-- [[references/k8s-advanced-ecosystem.md|k8s-advanced-ecosystem]] — 硬件知识体系、CNCF 全景生态与 eBPF 平台工程
+- [[references/k8s-advanced-ecosystem|k8s-advanced-ecosystem]] — 硬件知识体系、CNCF 全景生态与 eBPF 平台工程
 - observability.md|cncf-observability]] — CNCF 可观测性项目全景
 - [[chaos-mesh]] — Chaos Mesh
 - [[etcd]] — etcd

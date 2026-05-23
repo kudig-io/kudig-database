@@ -51,7 +51,7 @@ Dex 是一个身份联合服务，实现 OpenID Connect (OIDC) 协议。它作�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -67,11 +67,11 @@ Dex 是一个身份联合服务，实现 OpenID Connect (OIDC) 协议。它作�
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
-- [[entities/argocd.md|[[ArgoCD|argocd]]]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
-- [[concepts/storage-model.md|storage-model]]
-- [[concepts/secrets-management.md|secrets-management]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/argocd|[[ArgoCD|argocd]]]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[concepts/storage-model|storage-model]]
+- [[concepts/secrets-management|secrets-management]]
 
 ## Related
 
@@ -89,15 +89,15 @@ Dex 是一个身份联合服务，实现 OpenID Connect (OIDC) 协议。它作�
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
-- [[domain-06-observability/00-open-source-projects-index.md|00-open-source-projects-index]]
+- [[domain-06-observability/00-open-source-projects-index|00-open-source-projects-index]]
 - 00-open-source-projects-index
 - 04-cncf-fta-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
-- [[domain-06-observability/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-06-observability/00-open-source-projects-index.md|00-open-source-projects-index]]
+- [[domain-06-observability/00-open-source-projects-index|00-open-source-projects-index]]
+- [[domain-06-observability/00-open-source-projects-index|00-open-source-projects-index]]
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
@@ -107,22 +107,22 @@ Dex 是一个身份联合服务，实现 OpenID Connect (OIDC) 协议。它作�
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
-- [[domain-05-security-compliance/00-open-source-projects-index.md|00-open-source-projects-index]]
+- [[domain-05-security-compliance/00-open-source-projects-index|00-open-source-projects-index]]
 - 00-open-source-projects-index
 - 00-open-source-projects-index
-- [[domain-05-security-compliance/00-open-source-projects-index.md|00-open-source-projects-index]]
+- [[domain-05-security-compliance/00-open-source-projects-index|00-open-source-projects-index]]
 - 00-open-source-projects-index
-- [[domain-05-security-compliance/00-open-source-projects-index.md|00-open-source-projects-index]]
-- 00-open-source-projects-index
-- 00-open-source-projects-index
-- 00-open-source-projects-index
+- [[domain-05-security-compliance/00-open-source-projects-index|00-open-source-projects-index]]
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
-- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-index.md|fta-index]]
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-index|fta-index]]
 - dex
 - [[skills/ts-ai-ml-workloads|AI/ML 工作负载排查]] — Cross-reference
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference

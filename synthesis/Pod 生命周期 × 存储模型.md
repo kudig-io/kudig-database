@@ -135,7 +135,7 @@ StorageClass 的 volumeBindingMode: WaitForFirstConsumer 是 Pod 生命周期与
 
 ## See Also
 
-- [[synthesis/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
+- [[synthesis/Operator 模式 × 可观测性|Operator 模式 × 可观测性]]
 - Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]]
-- [[synthesis/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
-- [[synthesis/Secret 管理 × 存储模型.md|Secret 管理 × 存储模型]]
+- [[synthesis/Production Troubleshooting Playbook|Production Troubleshooting Playbook]]
+- [[synthesis/Secret 管理 × 存储模型|Secret 管理 × 存储模型]]

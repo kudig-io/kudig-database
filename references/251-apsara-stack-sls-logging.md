@@ -152,7 +152,7 @@ spec:
 ### 审计日志集成
 
 1. **ASOP 审计**: 记录平台管理员的操作日志。
-2. **ACK 审计**: 记录 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] Server 的所有请求。
+2. **ACK 审计**: 记录 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] Server 的所有请求。
 3. **RDS/OSS 审计**: 存储日志需定期同步至 SLS 进行合规性检查。
 
 ### 导出与转发
@@ -190,19 +190,19 @@ spec:
 ## 相关文档
 
 - [95-logging-auditing.md](./95-logging-auditing.md) - Kubernetes 日志总表
-- [241-ack-slb-nlb-alb.md](./[[domain-12-cloud-providers/04-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]].md) - 专有云负载均衡集成
+- [241-ack-slb-nlb-alb.md](./[[domain-12-cloud-providers/04-alicloud-ack/241-ack-slb-nlb-alb|241-ack-slb-nlb-alb]].md) - 专有云负载均衡集成
 - [252-apsara-stack-pop-operations.md](./252-apsara-stack-pop-operations.md) - 专有云平台运维 (POP)
 
 ## Related
 
-- [[log.md|log]]
-- [[index.md|index]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
+- [[log|log]]
+- [[index|index]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/sql|sql]]
 
 ## See Also
 
-- [[domain-12-cloud-providers/13-alicloud-apsara-ack/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
-- [[domain-12-cloud-providers/13-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
-- [[domain-12-cloud-providers/13-alicloud-apsara-ack/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
-- [[domain-12-cloud-providers/13-alicloud-apsara-ack/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
+- [[domain-12-cloud-providers/13-alicloud-apsara-ack/alicloud-apsara-ack-overview|alicloud-apsara-ack-overview]]
+- [[domain-12-cloud-providers/13-alicloud-apsara-ack/250-apsara-stack-ess-scaling|250-apsara-stack-ess-scaling]]
+- [[domain-12-cloud-providers/13-alicloud-apsara-ack/252-apsara-stack-pop-operations|252-apsara-stack-pop-operations]]
+- [[domain-12-cloud-providers/13-alicloud-apsara-ack/alicloud-apsara-ack-overview|alicloud-apsara-ack-overview]]

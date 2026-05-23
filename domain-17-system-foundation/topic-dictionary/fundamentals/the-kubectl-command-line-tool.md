@@ -31,7 +31,7 @@ created: "2026-05-23"
 
 ## 概述
 
-`kubectl` 是与 [[Kubernetes|Kubernetes]] 集群的控制平面进行通信的主要命令行工具。它通过 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 发送请求，是用户管理集群资源、检查集群状态和调试应用的主要接口。
+`kubectl` 是与 [[Kubernetes|Kubernetes]] 集群的控制平面进行通信的主要命令行工具。它通过 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 发送请求，是用户管理集群资源、检查集群状态和调试应用的主要接口。
 
 ## 核心概念/原理
 

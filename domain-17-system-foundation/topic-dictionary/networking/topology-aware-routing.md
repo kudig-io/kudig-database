@@ -156,8 +156,8 @@ kubectl get svc <name> -o jsonpath='{.metadata.annotations}'
 
 ## 交叉引用
 
-- [[domain-17-system-foundation/topic-dictionary/networking/service-internal-traffic-policy.md|Service Internal Traffic Policy]]](service-internal-traffic-policy.md) — 节点本地路由（互斥特性）
-- [[domain-17-system-foundation/topic-dictionary/networking/endpointslices.md|EndpointSlices]]](endpointslices.md) — hints 字段和 zone 信息
+- [[domain-17-system-foundation/topic-dictionary/networking/service-internal-traffic-policy|Service Internal Traffic Policy]]](service-internal-traffic-policy.md) — 节点本地路由（互斥特性）
+- [[domain-17-system-foundation/topic-dictionary/networking/endpointslices|EndpointSlices]]](endpointslices.md) — hints 字段和 zone 信息
 - [Service](service.md) — trafficDistribution 字段
 - [Cluster Networking](cluster-networking.md) — 跨可用区流量优化
 

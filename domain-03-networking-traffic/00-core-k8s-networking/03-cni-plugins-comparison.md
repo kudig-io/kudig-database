@@ -62,7 +62,7 @@ created: "2026-05-23"
 
 # 76 - CNI插件深度对比
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/cluster-administration/networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/concepts/cluster-administration/networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
 
 <!-- chunk: CNI插件功能对比 -->
 ## CNI插件功能对比
@@ -292,7 +292,7 @@ iptables -t filter -L -n -v
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档

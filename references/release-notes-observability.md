@@ -116,14 +116,14 @@ created: "2026-05-23"
 
 ## 相关导航
 
-- [[concepts/observability-stack-evolution.md|可观测性技术栈演进]]
-- [[references/release-notes-reading-guide.md|发布说明阅读指南]]
+- [[concepts/observability-stack-evolution|可观测性技术栈演进]]
+- [[references/release-notes-reading-guide|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
-- [[references/k8s-observability-ecosystem.md|k8s-observability-ecosystem]] — 可观测性体系：指标、日志、链路追踪与混沌工程
-- [[references/release-notes-networking.md|release-notes-networking]] — 发布说明索引 — 网络
+- [[references/k8s-observability-ecosystem|k8s-observability-ecosystem]] — 可观测性体系：指标、日志、链路追踪与混沌工程
+- [[references/release-notes-networking|release-notes-networking]] — 发布说明索引 — 网络
 - [[opentelemetry]] — OpenTelemetry
 - [[thanos]] — Thanos
 - [[prometheus]] — Prometheus

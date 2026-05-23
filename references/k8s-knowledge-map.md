@@ -115,15 +115,15 @@ graph LR
 
 ## 相关索引
 
-- [[references/k8s-difficulty-index.md|难度分级索引]]
+- [[references/k8s-difficulty-index|难度分级索引]]
 - [[MOC|学习路径导航]]
-- [[references/kubectl Scenario Quick Reference.md|kubectl 场景速查]]
-- [[references/KUDIG Cheat Sheet Index.md|KUDIG Cheat Sheet Index]]
-- [[references/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
+- [[references/kubectl Scenario Quick Reference|kubectl 场景速查]]
+- [[references/KUDIG Cheat Sheet Index|KUDIG Cheat Sheet Index]]
+- [[references/KUDIG Scenario Taxonomy|KUDIG Scenario Taxonomy]]
 
 ## Related
 
-- [[references/k8s-difficulty-index.md|k8s-difficulty-index]] — Kubernetes Difficulty Index
+- [[references/k8s-difficulty-index|k8s-difficulty-index]] — Kubernetes Difficulty Index
 - [[INDEX]] — Wiki Index
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

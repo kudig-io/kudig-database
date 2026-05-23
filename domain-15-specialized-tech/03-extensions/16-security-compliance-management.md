@@ -56,7 +56,7 @@ created: "2026-05-23"
 
 # 16 - 安全合规管理 (Security & Compliance Management)& Compliance]] Management)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/security](https://kubernetes.io/docs/concepts/security/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/concepts/security](https://kubernetes.io/docs/concepts/security/)
 
 <!-- chunk: 零信任安全架构 -->
 ## 零信任安全架构
@@ -1089,7 +1089,7 @@ data:
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech MOC
-- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
 - Domain-10 扩展与自定义 — 开源项目索引
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现

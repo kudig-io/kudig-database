@@ -182,10 +182,10 @@ Domain-4工作负载管理域已达到高质量标准：
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications KUDIG Database — Global MOC
-- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
 - index.md|Domain-4 工作负载 — 开源项目索引]]
-- 01 - [[concepts/kubernetes-architecture-overview.md]]
-- 02 - [[domain-02-workloads-applications/00-core-workloads/02-deployment-production-patterns.md]]
+- 01 - [[concepts/kubernetes-architecture-overview]]
+- 02 - [[domain-02-workloads-applications/00-core-workloads/02-deployment-production-patterns]]
 - 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)
 - 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)
 - 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)

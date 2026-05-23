@@ -1,6 +1,6 @@
 ---
 title: Platform Engineering and Internal Developer Platforms
-description: '- [[synthesis/IaC x 多集群管理.md|IaC x 多集群管理]] — synthesis'
+description: '- [[synthesis/IaC x 多集群管理|IaC x 多集群管理]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -30,7 +30,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-# [[synthesis/platform-engineering-sre.md|Platform Engineering]] and Internal Developer Platforms
+# [[synthesis/platform-engineering-sre|Platform Engineering]] and Internal Developer Platforms
 
 ## Platform Engineering Definition
 
@@ -83,14 +83,14 @@ Golden Paths are not mandates -- developers can opt out but lose platform suppor
 ## Related
 
 - [[crossplane]] — Crossplane
-- [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
-- [[concepts/production-operations-best-practices.md|production-operations-best-practices]] — Production Operations Best Practices
-- [[concepts/infrastructure-as-code.md|infrastructure-as-code]] — Infrastructure as Code
+- [[concepts/resource-management|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[concepts/production-operations-best-practices|production-operations-best-practices]] — Production Operations Best Practices
+- [[concepts/infrastructure-as-code|infrastructure-as-code]] — Infrastructure as Code
 - [[backstage]] — Backstage
-- [[concepts/gitops-principles.md|GitOps Principles]]
-- [[concepts/infrastructure-as-code.md|Infrastructure as Code]]
-- [[concepts/production-operations-best-practices.md|Production Operations Best Practices]]
+- [[concepts/gitops-principles|GitOps Principles]]
+- [[concepts/infrastructure-as-code|Infrastructure as Code]]
+- [[concepts/production-operations-best-practices|Production Operations Best Practices]]
 - [[backstage|Backstage]]
 - [[crossplane|Crossplane]]
-- [[synthesis/GitOps x 平台工程.md|GitOps x 平台工程]] — synthesis
-- [[synthesis/IaC x 多集群管理.md|IaC x 多集群管理]] — synthesis
+- [[synthesis/GitOps x 平台工程|GitOps x 平台工程]] — synthesis
+- [[synthesis/IaC x 多集群管理|IaC x 多集群管理]] — synthesis

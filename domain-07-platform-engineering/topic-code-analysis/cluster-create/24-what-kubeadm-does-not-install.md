@@ -695,8 +695,8 @@ kubectl get pods -A -o wide
 
 ## Related
 
-- [[log.md|log]]
-- [[man/INSTALL.md|INSTALL]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[log|log]]
+- [[man/INSTALL|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]

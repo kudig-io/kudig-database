@@ -92,11 +92,11 @@ crictl inspect <container-id>  # K8s nodes
 
 ## Related
 
-- [[concepts/block-file-object-storage.md|block-file-object-storage]] — Block, File, and Object Storage
+- [[concepts/block-file-object-storage|block-file-object-storage]] — Block, File, and Object Storage
 - [[docker]] — Docker
-- [[entities/container-runtime.md|container-runtime]] — Container Runtime
+- [[entities/container-runtime|container-runtime]] — Container Runtime
 - [[containerd]] — containerd
-- [[concepts/docker-architecture.md|docker-architecture]] — Docker Architecture and Container Runtime
-- [[concepts/docker-architecture.md|Docker Architecture]]
-- [[concepts/linux-container-foundation.md|Linux Container Foundation]]
-- [[concepts/block-file-object-storage.md|Block, File, and Object Storage]]
+- [[concepts/docker-architecture|docker-architecture]] — Docker Architecture and Container Runtime
+- [[concepts/docker-architecture|Docker Architecture]]
+- [[concepts/linux-container-foundation|Linux Container Foundation]]
+- [[concepts/block-file-object-storage|Block, File, and Object Storage]]

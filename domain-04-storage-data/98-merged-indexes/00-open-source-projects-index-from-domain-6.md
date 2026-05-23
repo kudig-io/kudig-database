@@ -250,7 +250,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-04-storage-data MOC
-- [[domain-04-storage-data/README.md|Storage Domain 存储领域知识库]]
+- [[domain-04-storage-data/README|Storage Domain 存储领域知识库]]
 - 存储架构概览与核心组件
 - PV/PVC 核心概念与企业级实践
 - 03 - PVC使用模式与最佳实践

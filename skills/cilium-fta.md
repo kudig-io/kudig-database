@@ -159,19 +159,19 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-- [[skills/ts-networking.md|网络故障排查]]
+- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine|FTA 诊断执行引擎]]
+- [[skills/ts-networking|网络故障排查]]
 
 ## Related
 
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[helm]] — Helm
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md|cilium-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta|cilium-fta]]
 - RELEASE-NOTES-1.9
 - RELEASE-NOTES-0.8
 - RELEASE-NOTES-1.18

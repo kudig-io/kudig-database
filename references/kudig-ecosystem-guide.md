@@ -76,7 +76,7 @@ created: "2026-05-23"
 
 ## Related
 
-- [[entities/vault.md|vault]] — HashiCorp Vault
+- [[entities/vault|vault]] — HashiCorp Vault
 - [[linkerd]] — Linkerd
 - [[external-secrets]] — External Secrets Operator
 - [[prometheus]] — Prometheus

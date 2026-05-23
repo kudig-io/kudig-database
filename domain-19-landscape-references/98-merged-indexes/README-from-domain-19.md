@@ -103,7 +103,7 @@ created: "2026-05-23"
 ### 🔬 高级测试与边缘计算 (15-16, 22)
 - **[15-Kubernetes混沌工程故障注入](./15-kubernetes-chaos-engineering-fault-injection-testing.md)** - 混沌工程实践与系统韧性测试
 - **[16-Kubernetes边缘计算KubeEdge](./16-kubernetes-edge-computing-kubeedge-practice.md)** - 边缘计算架构与KubeEdge实践
-- **[22-Kubernetes WebAssembly工作负载](./22-kubernetes-webassembly-wasm-workloads.md)** - 🆕 SpinKube、[[entities/wasmcloud.md|wasmcloud]]、Wasm运行时
+- **[22-Kubernetes WebAssembly工作负载](./22-kubernetes-webassembly-wasm-workloads.md)** - 🆕 SpinKube、[[entities/wasmcloud|wasmcloud]]、Wasm运行时
 
 ### 🤖 AI/ML与GPU工作负载 (17, 25)
 - **[17-Kubernetes AI/ML GPU调度与LLM推理](./17-kubernetes-aiml-gpu-scheduling-llm-inference.md)** - 🆕 KAI Scheduler、vLLM、Ray on K8s、TPU

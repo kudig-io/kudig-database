@@ -669,7 +669,7 @@ related:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -683,8 +683,8 @@ related:
 
 ## Related
 
-- [[release-notes/12-demo-env-guide.md|12-demo-env-guide]]
-- [[release-notes/21-platform-selection-guide.md|21-platform-selection-guide]]
+- [[release-notes/12-demo-env-guide|12-demo-env-guide]]
+- [[release-notes/21-platform-selection-guide|21-platform-selection-guide]]
 
 ## See Also
 

@@ -51,7 +51,7 @@ description: '## 项目概述'
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -63,11 +63,11 @@ description: '## 项目概述'
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
 - [[istio]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
-- [[concepts/controller-pattern.md|controller-pattern]]
-- [[concepts/service-mesh-architecture.md|service-mesh-architecture]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[concepts/controller-pattern|controller-pattern]]
+- [[concepts/service-mesh-architecture|service-mesh-architecture]]
 
 ## Related
 
@@ -80,9 +80,9 @@ description: '## 项目概述'
 - 99-linkerd-service-mesh-guide
 - 02-linkerd-enterprise-service-mesh
 - linkerd
-- [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-18.9.md|RELEASE-NOTES-18.9]]
-- [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-18.8.md|RELEASE-NOTES-18.8]]
-- [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-18.7.md|RELEASE-NOTES-18.7]]
+- [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-18.9|RELEASE-NOTES-18.9]]
+- [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-18.8|RELEASE-NOTES-18.8]]
+- [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-18.7|RELEASE-NOTES-18.7]]
 - RELEASE-NOTES-0.2
 - RELEASE-NOTES-0.3
 - RELEASE-NOTES-0.4

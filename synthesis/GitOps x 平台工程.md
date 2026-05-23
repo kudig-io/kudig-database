@@ -71,7 +71,7 @@ tier: supporting---
 
 ## 连接点
 
-GitOps 和平台工程在 wiki 中被当作两个独立学科来处理——[[concepts/gitops-principles.md|gitops-principles]] 覆盖 ArgoCD/Flux 和四个 OpenGitOps 原则，[[concepts/platform-engineering-idp.md|platform-engineering-idp]] 覆盖 Backstage、黄金路径和开发者体验。但它们是**相互增强**的关系：GitOps 提供了技术基础（声明式状态、自动化协调、漂移检测），使得平台工程的自助服务承诺变得可靠；平台工程则提供了面向开发者的界面，使得 GitOps 的采用是自然的而非强加的。
+GitOps 和平台工程在 wiki 中被当作两个独立学科来处理——[[concepts/gitops-principles|gitops-principles]] 覆盖 ArgoCD/Flux 和四个 OpenGitOps 原则，[[concepts/platform-engineering-idp|platform-engineering-idp]] 覆盖 Backstage、黄金路径和开发者体验。但它们是**相互增强**的关系：GitOps 提供了技术基础（声明式状态、自动化协调、漂移检测），使得平台工程的自助服务承诺变得可靠；平台工程则提供了面向开发者的界面，使得 GitOps 的采用是自然的而非强加的。
 
 两者共现于任何试图构建自助式基础设施的组织中：
 
@@ -116,10 +116,10 @@ GitOps 和平台工程在 wiki 中被当作两个独立学科来处理——[[co
 
 ## 相关
 
-- [[concepts/gitops-principles.md|gitops-principles]]
-- [[concepts/platform-engineering-idp.md|platform-engineering-idp]]
-- [[concepts/infrastructure-as-code.md|infrastructure-as-code]]
-- [[entities/argocd.md|argocd]]
+- [[concepts/gitops-principles|gitops-principles]]
+- [[concepts/platform-engineering-idp|platform-engineering-idp]]
+- [[concepts/infrastructure-as-code|infrastructure-as-code]]
+- [[entities/argocd|argocd]]
 - [[backstage]]
 - [[crossplane]]
 - [[flux]]
@@ -132,6 +132,6 @@ GitOps 和平台工程在 wiki 中被当作两个独立学科来处理——[[co
 - [[crossplane]] — Crossplane
 - [[opengitops]] — OpenGitOps
 - [[sops]] — SOPS (Secrets OPerationS)
-- [[entities/argocd.md|argocd]] — ArgoCD
+- [[entities/argocd|argocd]] — ArgoCD
 - [[entities/argo|Argo Workflows]]
 - [[domain-15-specialized-tech/03-extensions/06-helm-charts-management|47 - Helm Chart开发与管理]]

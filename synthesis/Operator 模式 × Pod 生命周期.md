@@ -104,13 +104,13 @@ Init (恢复/初始化) → Running (主/从角色) → Backup (定时快照)
 
 - [[operator-pattern]]
 - [[pod-lifecycle]]
-- [[entities/statefulset.md|statefulset]]
+- [[entities/statefulset|statefulset]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 
 ## See Also
 
-- [[synthesis/K8s 问题分布与 MTTR 基准.md|K8s 问题分布与 MTTR 基准]]
+- [[synthesis/K8s 问题分布与 MTTR 基准|K8s 问题分布与 MTTR 基准]]
 - [[entities/kubernetes|Kubernetes]] Fault [[entities/distribution|Distribution]] and MTTR.md|Kubernetes Fault Distribution and MTTR]]
-- [[synthesis/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
-- [[synthesis/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]]
+- [[synthesis/Operator 模式 × 可观测性|Operator 模式 × 可观测性]]
+- [[synthesis/Pod 生命周期 × Secret 管理|Pod 生命周期 × Secret 管理]]

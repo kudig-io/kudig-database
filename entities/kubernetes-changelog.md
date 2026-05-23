@@ -80,7 +80,7 @@ created: "2026-05-23"
 
 ## 使用方式
 
-1. 参考 [[concepts/kubernetes-version-evolution.md|Kubernetes 版本演进]] 了解里程碑版本的关键变更
+1. 参考 [[concepts/kubernetes-version-evolution|Kubernetes 版本演进]] 了解里程碑版本的关键变更
 2. 查看具体 CHANGELOG 文件了解某个版本的完整变更详情
 3. 关注弃用和移除的 API，在升级前做好准备
 
@@ -91,7 +91,7 @@ domain-19-landscape-references/topic-release-notes/kubernetes/ 目录下全部 5
 ## Related
 
 - [[docker]] — Docker
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
-- [[entities/statefulset.md|statefulset]] — StatefulSet
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
+- [[entities/statefulset|statefulset]] — StatefulSet
 - [[coredns]] — CoreDNS
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

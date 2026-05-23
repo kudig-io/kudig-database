@@ -41,7 +41,7 @@ Tinkerbell 是一个裸金属服务器自动化配置（provisioning）框架，
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -57,12 +57,12 @@ Tinkerbell 是一个裸金属服务器自动化配置（provisioning）框架，
 
 ## 参考链接
 
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
 
 ## Related
 
 - [[headlamp]] — Headlamp
-- [[entities/cncf-orchestration.md|cncf-orchestration]] — CNCF 编排与应用管理项目全景
+- [[entities/cncf-orchestration|cncf-orchestration]] — CNCF 编排与应用管理项目全景
 - [[prometheus]] — Prometheus
 - [[interlink]] — InterLink
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

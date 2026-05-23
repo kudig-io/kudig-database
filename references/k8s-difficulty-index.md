@@ -55,71 +55,71 @@ created: "2026-05-23"
 ### 推荐起步
 - [[MOC|1 个月学习计划]]
 - [[MOC|Kubernetes 速查卡]]
-- [[concepts/docker-architecture.md|Docker 架构概述]]
-- [[concepts/linux-container-foundation.md|Linux 运维基础]]
+- [[concepts/docker-architecture|Docker 架构概述]]
+- [[concepts/linux-container-foundation|Linux 运维基础]]
 
 ### 概念速查
-- [[references/KUDIG Tag Dictionary.md|运维词典]]
+- [[references/KUDIG Tag Dictionary|运维词典]]
 
 ---
 
 ## intermediate 中级
 
 ### 核心技术
-- [[references/k8s-architecture-domain-guide.md|K8s 架构、核心组件]]
+- [[references/k8s-architecture-domain-guide|K8s 架构、核心组件]]
 - [[pod-lifecycle|工作负载控制器、Pod 生命周期]]
-- [[concepts/service-networking.md|网络架构、Service、DNS]]
-- [[concepts/storage-model.md|存储架构、PV、StorageClass]]
-- [[concepts/security-defense-depth.md|认证授权、网络安全、运行时安全]]
+- [[concepts/service-networking|网络架构、Service、DNS]]
+- [[concepts/storage-model|存储架构、PV、StorageClass]]
+- [[concepts/security-defense-depth|认证授权、网络安全、运行时安全]]
 
 ### 日常运维
-- [[skills/troubleshoot-pod-issues.md|Pod 故障诊断]]
-- [[skills/troubleshoot-node-issues.md|Node 故障诊断]]
+- [[skills/troubleshoot-pod-issues|Pod 故障诊断]]
+- [[skills/troubleshoot-node-issues|Node 故障诊断]]
 
 ---
 
 ## advanced 高级
 
 ### 深度原理
-- [[references/k8s-architecture-domain-guide.md|设计原理全系列]]
-- [[concepts/kubernetes-architecture-overview.md|控制平面深度解析]]
-- [[concepts/cilium-ebpf-networking.md|Ingress/Gateway API 深度]]
-- [[concepts/observability-pillars.md|可观测性全系列]]
+- [[references/k8s-architecture-domain-guide|设计原理全系列]]
+- [[concepts/kubernetes-architecture-overview|控制平面深度解析]]
+- [[concepts/cilium-ebpf-networking|Ingress/Gateway API 深度]]
+- [[concepts/observability-pillars|可观测性全系列]]
 
 ### 生产实践
-- [[references/kubectl Scenario Quick Reference.md|平台运维全系列]]
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论体系]]
-- [[skills/Kubernetes Diagnostic Skills Overview.md|18 个诊断-修复 Skill]]
+- [[references/kubectl Scenario Quick Reference|平台运维全系列]]
+- [[skills/FTA Methodology and Core Principles|FTA 方法论体系]]
+- [[skills/Kubernetes Diagnostic Skills Overview|18 个诊断-修复 Skill]]
 
 ---
 
 ## expert 专家级
 
 ### 源码与架构
-- [[concepts/kubernetes-architecture-overview.md|K8s 源码架构]]
-- [[skills/develop-crd-operator.md|Operator 开发指南]]
-- [[concepts/kubernetes-architecture-overview.md|控制平面源码级分析]]
+- [[concepts/kubernetes-architecture-overview|K8s 源码架构]]
+- [[skills/develop-crd-operator|Operator 开发指南]]
+- [[concepts/kubernetes-architecture-overview|控制平面源码级分析]]
 
 ### 方法论
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论体系]]
+- [[skills/FTA Methodology and Core Principles|FTA 方法论体系]]
 
 ### 前沿技术
-- [[concepts/cilium-ebpf-networking.md|eBPF 技术]]
-- [[concepts/platform-engineering-idp.md|平台工程]]
-- [[references/k8s-ai-infra-domain-guide.md|LLM/AI 基础设施]]
+- [[concepts/cilium-ebpf-networking|eBPF 技术]]
+- [[concepts/platform-engineering-idp|平台工程]]
+- [[references/k8s-ai-infra-domain-guide|LLM/AI 基础设施]]
 
 ---
 
 ## 相关索引
 
-- [[references/k8s-knowledge-map.md|知识图谱]]
+- [[references/k8s-knowledge-map|知识图谱]]
 - [[MOC|学习路径导航]]
-- [[references/KUDIG Tag Dictionary.md|标签索引]]
+- [[references/KUDIG Tag Dictionary|标签索引]]
 
 ## Related
 
 - [[docker]] — Docker
 - [[cilium]] — Cilium
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/storage-model.md|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
-- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]] — Cilium eBPF Networking
+- [[concepts/storage-model|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
+- [[concepts/cilium-ebpf-networking|cilium-ebpf-networking]] — Cilium eBPF Networking

@@ -95,7 +95,7 @@ func (dc *DeploymentController) syncDeployment(ctx context.Context, key string) 
 | `dInformer` | `appsinformers.DeploymentInformer` | Deployment 资源 Informer，监听 Deployment 变更 |
 | `rsInformer` | `appsinformers.ReplicaSetInformer` | ReplicaSet 资源 Informer，监听 RS 变更 |
 | `podInformer` | `coreinformers.PodInformer` | Pod 资源 Informer，监听 Pod 变更 |
-| `client` | `clientset.Interface` | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 客户端，用于 CRUD 操作 |
+| `client` | `clientset.Interface` | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 客户端，用于 CRUD 操作 |
 
 ### DeploymentSpec 关键字段
 

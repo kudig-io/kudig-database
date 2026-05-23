@@ -133,7 +133,7 @@ created: "2026-05-23"
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README.md|Domain-15: 网络基础]]
+- [[domain-03-networking-traffic/README|Domain-15: 网络基础]]
 - 网络协议栈详解
 - TCP/UDP 协议深度解析
 - DNS 原理与配置

@@ -1,6 +1,6 @@
 ---
 title: CI/CD Pipeline Patterns
-description: '- [[synthesis/CI-CD 流水线 × Secret 管理.md|CI-CD 流水线 × Secret 管理]] — 综合'
+description: '- [[synthesis/CI-CD 流水线 × Secret 管理|CI-CD 流水线 × Secret 管理]] — 综合'
 category: concepts
 tags:
 - k8s
@@ -81,13 +81,13 @@ Modern CI/CD pipelines integrate:
 - Admission verification (Kyverno validates signatures before deployment)
 
 ## Related
-- [[synthesis/CI-CD 流水线 × Secret 管理.md|CI-CD 流水线 × Secret 管理]] — 综合
+- [[synthesis/CI-CD 流水线 × Secret 管理|CI-CD 流水线 × Secret 管理]] — 综合
 
-- [[entities/trivy.md|trivy]] — Trivy
-- [[entities/argocd.md|argocd]] — ArgoCD
-- [[concepts/microservice-resilience-patterns.md|microservice-resilience-patterns]] — Microservice Resilience Patterns
+- [[entities/trivy|trivy]] — Trivy
+- [[entities/argocd|argocd]] — ArgoCD
+- [[concepts/microservice-resilience-patterns|microservice-resilience-patterns]] — Microservice Resilience Patterns
 - [[supply-chain-security]] — Software Supply Chain Security
 - [[flux]] — Flux
-- [[concepts/gitops-principles.md|GitOps Principles]]
-- [[concepts/microservice-resilience-patterns.md|Microservice Resilience Patterns]]
+- [[concepts/gitops-principles|GitOps Principles]]
+- [[concepts/microservice-resilience-patterns|Microservice Resilience Patterns]]
 - [[supply-chain-security|Supply Chain Security]]

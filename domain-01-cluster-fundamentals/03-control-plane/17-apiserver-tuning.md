@@ -1109,7 +1109,7 @@ kubectl get events -n kube-system --field-selector source=kube-apiserver
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -1123,7 +1123,7 @@ kubectl get events -n kube-system --field-selector source=kube-apiserver
 
 ## Related
 
-- [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
+- [[domain-02-workloads-applications/03-jvm-gc-container-tuning|03-jvm-gc-container-tuning]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 
 ## See Also

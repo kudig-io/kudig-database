@@ -90,7 +90,7 @@ Falco 是云原生运行时威胁检测引擎。
 - 实时检测异常行为（异常进程、文件访问、网络连接）
 - 与 [[prometheus]] 集成指标输出
 
-### [[entities/tetragon.md|tetragon]] — 核心项目（基于 Cilium）
+### [[entities/tetragon|tetragon]] — 核心项目（基于 Cilium）
 
 Tetragon 基于 eBPF 的安全可观测性和运行时执行。
 
@@ -98,7 +98,7 @@ Tetragon 基于 eBPF 的安全可观测性和运行时执行。
 - 策略执行（阻断恶意行为）
 - 与 Cilium 生态集成
 
-### [[entities/trivy.md|trivy]] — 核心工具
+### [[entities/trivy|trivy]] — 核心工具
 
 Trivy 是全功能安全扫描器。
 
@@ -229,7 +229,7 @@ SOPS（Secrets OPerationS）加密 YAML/JSON/ENV 密钥文件。
 
 External Secrets Operator 从外部密钥管理服务同步到 K8s Secrets。
 
-### [[entities/vault.md|vault]] — 相关工具
+### [[entities/vault|vault]] — 相关工具
 
 HashiCorp Vault 提供集中式密钥管理（非 CNCF 但广泛使用）。
 
@@ -275,9 +275,9 @@ COPA 无重建修补容器镜像漏洞。
 
 ## 相关页面
 
-- [[entities/cncf-observability.md|cncf-observability]] — 可观测性
-- [[entities/cncf-storage.md|cncf-storage]] — 存储与数据库
-- [[entities/cncf-networking.md|cncf-networking]] — 网络与服务网格
+- [[entities/cncf-observability|cncf-observability]] — 可观测性
+- [[entities/cncf-storage|cncf-storage]] — 存储与数据库
+- [[entities/cncf-networking|cncf-networking]] — 网络与服务网格
 - concepts/kubernetes-security-architecture — K8s 安全架构
 
 ## Related

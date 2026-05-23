@@ -53,7 +53,7 @@ created: "2026-05-23"
 
 1. [系统架构概述](#1-系统架构概述)
 2. [文件清单与职责](#2-文件清单与职责)
-3. [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/SKILL.md|Skill]] 元系统 — 工作原理](#3-skill-元系统--工作原理)
+3. [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/SKILL|Skill]] 元系统 — 工作原理](#3-skill-元系统--工作原理)
 4. [FTA 系统 — 工作原理](#4-fta-系统--工作原理)
 5. [双向集成设计](#5-双向集成设计)
 6. [Agent 执行流程详解](#6-agent-执行流程详解)

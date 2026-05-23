@@ -58,7 +58,7 @@ created: "2026-05-23"
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[entities/kubernetes.md]] | 入门 | tutorial, k8s, training | 5min |
+| 1 | [[entities/kubernetes]] | 入门 | tutorial, k8s, training | 5min |
 | 2 | 第二课：Pod - K8s 的最小调度单元 | 入门 | tutorial, Pod, 容器组 | 5min |
 | 3 | 第三课：Deployment - 应用部署管理器 | 入门 | tutorial, deployment, Deployment | 5min |
 | 4 | 第四课：Service - 让应用可以被访问 | 入门 | tutorial, Service, 服务 | 5min |
@@ -68,13 +68,13 @@ created: "2026-05-23"
 | 8 | 第八课：存储 - PV 和 PVC | 入门 | tutorial, k8s, training | 5min |
 | 9 | 第九课：HPA - 自动伸缩 | 入门 | tutorial, k8s, training | 5min |
 | 10 | 10-health-check — 第14课：StatefulSet - 有状态应用管理
-- [[entities/statefulset.md|statefulset]] — StatefulSet
+- [[entities/statefulset|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 ## See Also
 
-- [[skills/learn-oncall-quick-qa.md|learn-oncall-quick-qa]]
-- [[skills/learn-public-training.md|learn-public-training]]
-- [[skills/manage-persistent-storage.md|manage-persistent-storage]]
-- [[skills/monitor-kubernetes-metrics.md|monitor-kubernetes-metrics]]
+- [[skills/learn-oncall-quick-qa|learn-oncall-quick-qa]]
+- [[skills/learn-public-training|learn-public-training]]
+- [[skills/manage-persistent-storage|manage-persistent-storage]]
+- [[skills/monitor-kubernetes-metrics|monitor-kubernetes-metrics]]

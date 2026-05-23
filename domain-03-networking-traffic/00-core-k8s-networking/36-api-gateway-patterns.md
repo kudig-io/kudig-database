@@ -60,7 +60,7 @@ created: "2026-05-23"
 
 # 38 - Ingress和API Gateway对比表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/services-networking/ingress-controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/concepts/services-networking/ingress-controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
 
 <!-- chunk: Ingress控制器对比 -->
 ## Ingress控制器对比
@@ -336,7 +336,7 @@ kubectl exec -n ingress-nginx <pod> -- cat /etc/nginx/nginx.conf  # 检查配置
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档

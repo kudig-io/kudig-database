@@ -1010,7 +1010,7 @@ disaster_recovery:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-22-container-image-management KUDIG Database — Global MOC
-- [[domain-13-container-runtime/README.md|[[Domain 22: 容器镜像管理 (Container Image Management)|Domain 22: 容器镜像管理 (Container Image Management)]]]]
+- [[domain-13-container-runtime/README|[[Domain 22: 容器镜像管理 (Container Image Management)|Domain 22: 容器镜像管理 (Container Image Management)]]]]
 - index.md|Domain-22 容器镜像管理 — 开源项目索引]]
 - distribution.md|Docker Registry企业级镜像分发深度实践]]
 - JFrog Artifactory Enterprise Container Registry Platform

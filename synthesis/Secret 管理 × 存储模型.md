@@ -98,15 +98,15 @@ API Server → etcd（静态加密）→ kubelet 内存 → 节点 tmpfs → 容
 
 ## 相关
 
-- [[concepts/secrets-management.md|secrets-management]]
-- [[concepts/storage-model.md|storage-model]]
-- [[entities/vault.md|vault]]
+- [[concepts/secrets-management|secrets-management]]
+- [[concepts/storage-model|storage-model]]
+- [[entities/vault|vault]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 
 ## See Also
 
-- [[synthesis/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
-- [[synthesis/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
-- [[synthesis/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]]
-- [[synthesis/consolidation-2026-05-21.md|consolidation-2026-05-21]]
+- [[synthesis/Pod 生命周期 × 存储模型|Pod 生命周期 × 存储模型]]
+- [[synthesis/Production Troubleshooting Playbook|Production Troubleshooting Playbook]]
+- [[synthesis/Structural Troubleshooting Framework|Structural Troubleshooting Framework]]
+- [[synthesis/consolidation-2026-05-21|consolidation-2026-05-21]]

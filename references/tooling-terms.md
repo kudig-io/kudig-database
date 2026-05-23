@@ -40,7 +40,7 @@ created: "2026-05-23"
 
 本页汇总了 **工具链** 领域的 3 个 Kubernetes 术语定义与概念说明。
 
-> **相关领域**: [[references/kubectl-quick-reference.md|kubectl-quick-reference]] | [[references/kudig-ecosystem-guide.md|kudig-ecosystem-guide]]
+> **相关领域**: [[references/kubectl-quick-reference|kubectl-quick-reference]] | [[references/kudig-ecosystem-guide|kudig-ecosystem-guide]]
 
 ---
 
@@ -144,8 +144,8 @@ authors:
 
 ## 相关页面
 
-- [[references/kubectl-quick-reference.md|kubectl-quick-reference]]
-- [[references/kudig-ecosystem-guide.md|kudig-ecosystem-guide]]
+- [[references/kubectl-quick-reference|kubectl-quick-reference]]
+- [[references/kudig-ecosystem-guide|kudig-ecosystem-guide]]
 
 ## 来源文件
 

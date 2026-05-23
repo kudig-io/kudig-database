@@ -92,7 +92,7 @@ relationships:
 ## 相关
 
 - [[pod-lifecycle]]
-- [[concepts/secrets-management.md|secrets-management]]
+- [[concepts/secrets-management|secrets-management]]
 - [[deployment]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
@@ -100,6 +100,6 @@ relationships:
 ## See Also
 
 - Operator 模式 × Pod 生命周期.md|Operator 模式 × Pod 生命周期]]
-- [[synthesis/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
+- [[synthesis/Operator 模式 × 可观测性|Operator 模式 × 可观测性]]
 - Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
-- [[synthesis/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
+- [[synthesis/Production Troubleshooting Playbook|Production Troubleshooting Playbook]]

@@ -301,9 +301,9 @@ created: "2026-05-23"
 ---
 
 **关联文档**:
-- [[00-learning-gaps-analysis.md]] — 本路线图的缺口分析依据
-- [[README.md]] — topic-learn 总入口
-- [[beginner-guides/01-cloud-native-evolution-story.md]] — 推荐第一课
-- [[beginner-guides/02-local-lab-environment.md]] — 本地实验环境搭建
-- [[beginner-guides/03-end-to-end-project.md]] — 端到端完整项目
-- [[beginner-guides/04-cka-exam-prep-guide.md]] — CKA 备考指南
+- [[00-learning-gaps-analysis]] — 本路线图的缺口分析依据
+- [[README]] — topic-learn 总入口
+- [[beginner-guides/01-cloud-native-evolution-story]] — 推荐第一课
+- [[beginner-guides/02-local-lab-environment]] — 本地实验环境搭建
+- [[beginner-guides/03-end-to-end-project]] — 端到端完整项目
+- [[beginner-guides/04-cka-exam-prep-guide]] — CKA 备考指南

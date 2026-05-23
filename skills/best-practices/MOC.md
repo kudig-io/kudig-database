@@ -60,9 +60,9 @@ topic-best-practices 专题
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[entities/kubernetes.md|Kubernetes 通用最佳实践参考]]]] |  | best-practice |  |
-| 2 | [[entities/kubernetes.md]] |  |  |  |
-| 3 | [[entities/kubernetes.md]] |  | networking |  |
+| 1 | [[entities/kubernetes|Kubernetes 通用最佳实践参考]]]] |  | best-practice |  |
+| 2 | [[entities/kubernetes]] |  |  |  |
+| 3 | [[entities/kubernetes]] |  | networking |  |
 | 4 | Kubernetes 存储配置最佳实践 |  | storage |  |
 | 5 | Kubernetes 日志管理最佳实践 |  |  |  |
 | 6 | Kubernetes 监控最佳实践 |  | monitoring |  |

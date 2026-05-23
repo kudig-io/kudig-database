@@ -204,10 +204,10 @@ kubectl edit * （直接修改线上资源）
 
 ## Related
 
-- [[log.md|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[log|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm|helm]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
 
 ## See Also
 

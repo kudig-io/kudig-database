@@ -1222,9 +1222,9 @@ flowchart TD
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README.md|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -1328,5 +1328,5 @@ flowchart TD
 
 - 99-kubernetes-deployment-patterns-architecture
 - 99-kubernetes-multi-tenant-architecture
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-production-architecture-design-principles]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-production-architecture-design-principles]]
 - 02-multi-cloud-hybrid-deployment-strategy

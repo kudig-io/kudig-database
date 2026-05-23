@@ -125,7 +125,7 @@ Kubernetes 生产运维终极 YAML 配置参考手册，覆盖所有原生 API �
 |:---:|:---|:---|:---|
 | 32 | [Lease/Event/Node](./32-lease-event-node.md) | 协调资源、事件、节点管理 | ⭐⭐⭐ |
 | 33 | [kubeadm 集群引导](./33-kubeadm-cluster-bootstrap.md) | 集群初始化、节点加入、高可用配置 | ⭐⭐⭐⭐ |
-| 34 | [组件配置](./34-component-configuration.md) | [[entities/kubelet.md|kubelet]]/KubeProxy/Scheduler/ControllerManager | ⭐⭐⭐⭐ |
+| 34 | [组件配置](./34-component-configuration.md) | [[entities/kubelet|kubelet]]/KubeProxy/Scheduler/ControllerManager | ⭐⭐⭐⭐ |
 
 ### 高级模式与生态工具 (35-36)
 | # | 文档 | 关键内容 | 适用层级 |
@@ -210,4 +210,4 @@ Kubernetes 生产运维终极 YAML 配置参考手册，覆盖所有原生 API �
 
 - [[helm]]
 - [[README]]
-- [[entities/kubelet.md|kubelet]]
+- [[entities/kubelet|kubelet]]

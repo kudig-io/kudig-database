@@ -663,10 +663,10 @@ Signed-off-by: Your Name <email@example.com>
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
 - index.md|Domain-1 架构基础 — 开源项目索引]]
 - Kubernetes 架构全景图
-- [[entities/kubernetes.md]]
+- [[entities/kubernetes]]
 - 03 - 功能和API表
 - structure.md|04 - Kubernetes 源码结构深度解析]]
 - kubectl 命令完整参考

@@ -41,7 +41,7 @@ created: "2026-05-23"
 
 本页汇总了 **专用工作负载** 领域的 10 个 Kubernetes 术语定义与概念说明。
 
-> **相关领域**: [[references/k8s-ai-infrastructure.md|k8s-ai-infrastructure]] | [[references/k8s-workload-management.md|k8s-workload-management]]
+> **相关领域**: [[references/k8s-ai-infrastructure|k8s-ai-infrastructure]] | [[references/k8s-workload-management|k8s-workload-management]]
 
 ---
 
@@ -177,8 +177,8 @@ Kubernetes 支持在 Windows 节点上运行 Windows 容器（仅支持进程隔
 
 ## 相关页面
 
-- [[references/k8s-ai-infrastructure.md|k8s-ai-infrastructure]]
-- [[references/k8s-workload-management.md|k8s-workload-management]]
+- [[references/k8s-ai-infrastructure|k8s-ai-infrastructure]]
+- [[references/k8s-workload-management|k8s-workload-management]]
 
 ## 来源文件
 
@@ -199,4 +199,4 @@ Kubernetes 支持在 Windows 节点上运行 Windows 容器（仅支持进程隔
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[concepts/resource-management|resource-management]] — Resource Management (Requests, Limits, QoS)

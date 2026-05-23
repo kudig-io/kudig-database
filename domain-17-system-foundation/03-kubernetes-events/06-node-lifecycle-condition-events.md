@@ -61,7 +61,7 @@ created: "2026-05-23"
 - [概述](#概述)
 - [节点生命周期状态机](#节点生命周期状态机)
 - [节点状态类型详解](#节点状态类型详解)
-- [[entities/kubelet.md|Kubelet]] 节点状态事件](#kubelet-节点状态事件)
+- [[entities/kubelet|Kubelet]] 节点状态事件](#kubelet-节点状态事件)
 - [Node Controller 事件](#node-controller-事件)
 - [节点驱逐机制](#节点驱逐机制)
 - [生产环境监控建议](#生产环境监控建议)
@@ -2537,7 +2537,7 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-33-kubernetes-events MOC
-- [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
+- [[domain-17-system-foundation/README|Domain-33: Kubernetes Events 全域事件大全]]
 - Domain-33 K8s 事件 — 开源项目索引
 - 01 - Kubernetes 事件系统架构与 API 参考
 - 02 - Pod 与容器生命周期事件

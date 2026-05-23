@@ -89,18 +89,18 @@ Request-level trace across microservices.
 - **Error Budget**: 100% - SLO; the room for failure before breaching SLA
 
 ## Related
-- [[synthesis/可观测性支柱 × Prometheus-Grafana.md|可观测性支柱 × Prometheus-Grafana]] — 综合
-- [[synthesis/控制器模式 × 可观测性.md|控制器模式 × 可观测性]] — 综合
+- [[synthesis/可观测性支柱 × Prometheus-Grafana|可观测性支柱 × Prometheus-Grafana]] — 综合
+- [[synthesis/控制器模式 × 可观测性|控制器模式 × 可观测性]] — 综合
 
 - [[opentelemetry]] — OpenTelemetry
 - [[fluentd]] — Fluentd
 - [[jaeger]] — Jaeger
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
-- [[skills/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]]
-- [[skills/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
-- [[concepts/high-availability-patterns.md|High Availability Patterns]]
+- [[concepts/kubernetes-architecture-overview|Kubernetes Architecture Overview]]
+- [[skills/monitor-kubernetes-metrics|Monitor Kubernetes Metrics]]
+- [[skills/troubleshoot-pod-issues|Troubleshoot Pod Issues]]
+- [[concepts/high-availability-patterns|High Availability Patterns]]
 
-- [[synthesis/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
+- [[synthesis/Operator 模式 × 可观测性|Operator 模式 × 可观测性]]
 - [[entities/inspektor-gadget|Inspektor Gadget]] — Cross-reference

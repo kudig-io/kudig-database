@@ -358,10 +358,10 @@ kubectl get pods -n kube-system
 
 ## Related
 
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/cni.md|cni]]
-- [[entities/coredns.md|coredns]]
-- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[entities/kubernetes|kubernetes]]
+- [[entities/cni|cni]]
+- [[entities/coredns|coredns]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking|networking]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference

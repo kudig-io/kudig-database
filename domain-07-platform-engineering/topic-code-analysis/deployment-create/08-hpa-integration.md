@@ -422,8 +422,8 @@ Events:
 
 ## Related
 
-- [[entities/kubernetes.md|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/replicaset.md|replicaset]]
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/03-replicaset-controller.md|03-replicaset-controller]]
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/05-deployment-status.md|05-deployment-status]]
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/02-deployment-controller.md|02-deployment-controller]]
+- [[entities/kubernetes|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/replicaset|replicaset]]
+- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/03-replicaset-controller|03-replicaset-controller]]
+- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/05-deployment-status|05-deployment-status]]
+- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/02-deployment-controller|02-deployment-controller]]

@@ -172,12 +172,12 @@ flowchart TD
 
 ## See Also
 
-- [[skills/cilium-fta.md|cilium-fta]]
-- [[skills/cloud-provider-fta.md|cloud-provider-fta]]
-- [[skills/cluster-upgrade-fta.md|cluster-upgrade-fta]]
-- [[skills/configure-health-probes.md|configure-health-probes]]
+- [[skills/cilium-fta|cilium-fta]]
+- [[skills/cloud-provider-fta|cloud-provider-fta]]
+- [[skills/cluster-upgrade-fta|cluster-upgrade-fta]]
+- [[skills/configure-health-probes|configure-health-probes]]
 
 ---
 
 > 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
-> [[_archives/troubleshooting-diagnostics/topic-fta/list/cluster-autoscaler-fta.md|Cluster-Autoscaler FTA 完整版]]
+> [[_archives/troubleshooting-diagnostics/topic-fta/list/cluster-autoscaler-fta|Cluster-Autoscaler FTA 完整版]]

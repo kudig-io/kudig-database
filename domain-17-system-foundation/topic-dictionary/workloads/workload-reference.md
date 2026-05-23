@@ -181,9 +181,9 @@ kubectl logs -n kube-system -l component=kube-scheduler --tail=100 | grep -i gan
 
 ## 交叉引用
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/workload-api.md|Workload API]]](workload-api.md) — Workload 资源的 API 定义和结构
-- [[domain-17-system-foundation/topic-dictionary/workloads/pod-group-policies.md|Pod Group Policies]]](pod-group-policies.md) — basic 和 gang 策略详解
-- [[domain-17-system-foundation/topic-dictionary/workloads/jobs.md|Jobs]]](jobs.md) — Job 控制器与 Workload 配合使用
+- [[domain-17-system-foundation/topic-dictionary/workloads/workload-api|Workload API]]](workload-api.md) — Workload 资源的 API 定义和结构
+- [[domain-17-system-foundation/topic-dictionary/workloads/pod-group-policies|Pod Group Policies]]](pod-group-policies.md) — basic 和 gang 策略详解
+- [[domain-17-system-foundation/topic-dictionary/workloads/jobs|Jobs]]](jobs.md) — Job 控制器与 Workload 配合使用
 - [调度与驱逐](../scheduling/) — 调度器行为和 Pod 放置决策
 
 ## 参考链接

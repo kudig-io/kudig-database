@@ -562,8 +562,8 @@ hostname
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/containerd.md|containerd]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|nodes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[entities/kubernetes|kubernetes]]
+- [[entities/containerd|containerd]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes|nodes]]

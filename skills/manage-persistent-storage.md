@@ -1,6 +1,6 @@
 ---
 title: Manage Persistent Storage
-description: '- [[references/release-notes-storage.md|release-notes-storage]] — 发布说明索引 — 存储'
+description: '- [[references/release-notes-storage|release-notes-storage]] — 发布说明索引 — 存储'
 category: skills
 tags:
 - k8s
@@ -94,14 +94,14 @@ kubectl get pv                           # Check PV status and reclaim policy
 
 ## Related
 
-- [[references/release-notes-storage.md|release-notes-storage]] — 发布说明索引 — 存储
-- [[skills/ts-storage.md|ts-storage]] — 存储故障排查
-- [[skills/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — [[Troubleshoot Pod Issues|Troubleshoot Pod Issues]]
+- [[references/release-notes-storage|release-notes-storage]] — 发布说明索引 — 存储
+- [[skills/ts-storage|ts-storage]] — 存储故障排查
+- [[skills/troubleshoot-pod-issues|troubleshoot-pod-issues]] — [[Troubleshoot Pod Issues|Troubleshoot Pod Issues]]
 - [[deployment]] — Deployment
-- [[concepts/storage-model.md|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
-- [[concepts/storage-model.md|Persistent Storage Model]]
-- [[entities/statefulset.md|StatefulSet]]
-- [[entities/csi-drivers.md|CSI Drivers]]
-- [[skills/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
+- [[concepts/storage-model|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
+- [[concepts/storage-model|Persistent Storage Model]]
+- [[entities/statefulset|StatefulSet]]
+- [[entities/csi-drivers|CSI Drivers]]
+- [[skills/troubleshoot-pod-issues|Troubleshoot Pod Issues]]
 
-- [[synthesis/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
+- [[synthesis/Pod 生命周期 × 存储模型|Pod 生命周期 × 存储模型]]

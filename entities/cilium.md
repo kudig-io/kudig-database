@@ -66,25 +66,25 @@ Hubble provides network flow observability:
 Cilium can replace kube-proxy entirely using eBPF for Service load balancing. Benefits: higher throughput, lower latency, no iptables/IPVS rules to manage.
 
 ## Related
-- [[synthesis/Cilium eBPF × 可观测性.md|Cilium eBPF × 可观测性]] — 综合
+- [[synthesis/Cilium eBPF × 可观测性|Cilium eBPF × 可观测性]] — 综合
 
 - [[envoy]] — Envoy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]] — Cilium eBPF Networking
-- [[concepts/service-mesh-architecture.md|service-mesh-architecture]] — Service Mesh Architecture
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
-- [[concepts/cilium-ebpf-networking.md|Cilium eBPF Networking]]
-- [[concepts/service-mesh-architecture.md|Service Mesh Architecture]]
-- [[entities/tetragon.md|Tetragon]]
+- [[concepts/cilium-ebpf-networking|cilium-ebpf-networking]] — Cilium eBPF Networking
+- [[concepts/service-mesh-architecture|service-mesh-architecture]] — Service Mesh Architecture
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
+- [[concepts/cilium-ebpf-networking|Cilium eBPF Networking]]
+- [[concepts/service-mesh-architecture|Service Mesh Architecture]]
+- [[entities/tetragon|Tetragon]]
 - Hubble
 
-- [[synthesis/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
+- [[synthesis/CNI 插件 × NetworkPolicy|CNI 插件 × NetworkPolicy]]
 - 18-kubernetes-ebpf-cilium-deep-practice
 - 03-cilium-cni-architecture
 - 99-cilium-ebpf-network-guide
 - 05-cilium-service-mesh
 - 04-cilium-network-policy
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md|cilium-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta|cilium-fta]]
 - RELEASE-NOTES-1.9
 - RELEASE-NOTES-0.8
 - RELEASE-NOTES-1.18

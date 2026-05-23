@@ -62,7 +62,7 @@ created: "2026-05-23"
 
 | 组件 | 文件数 | 演进参考 |
 |---|---|---|
-| Argo CD | 40 | [[concepts/gitops-tool-evolution.md|gitops-tool-evolution]] |
+| Argo CD | 40 | [[concepts/gitops-tool-evolution|gitops-tool-evolution]] |
 | Flux | 51 | concepts/gitops-tool-evolution#flux-版本演进 |
 | Tekton Pipelines | 80 | concepts/gitops-tool-evolution#tekton-pipelines-版本演进 |
 
@@ -70,7 +70,7 @@ created: "2026-05-23"
 
 | 组件 | 文件数 | 演进参考 |
 |---|---|---|
-| Istio | 38 | [[concepts/service-mesh-evolution.md|service-mesh-evolution]] |
+| Istio | 38 | [[concepts/service-mesh-evolution|service-mesh-evolution]] |
 | Envoy | 38 | concepts/service-mesh-evolution#envoy-版本演进 |
 | Cilium | 24 | concepts/service-mesh-evolution#cilium-版本演进 |
 | Calico | 35 | concepts/service-mesh-evolution#calico-版本演进 |
@@ -91,7 +91,7 @@ created: "2026-05-23"
 
 | 组件 | 文件数 | 演进参考 |
 |---|---|---|
-| OPA | 86 | [[concepts/security-tool-evolution.md|security-tool-evolution]] |
+| OPA | 86 | [[concepts/security-tool-evolution|security-tool-evolution]] |
 | Falco | 43 | concepts/security-tool-evolution#falco-版本演进 |
 | cert-manager | 37 | concepts/security-tool-evolution#cert-manager-版本演进 |
 | Trivy | 28 | concepts/security-tool-evolution#trivy-版本演进 |
@@ -109,7 +109,7 @@ created: "2026-05-23"
 
 | 组件 | 文件数 | 演进参考 |
 |---|---|---|
-| Minikube | 74 | [[concepts/cli-tools-evolution.md|cli-tools-evolution]] |
+| Minikube | 74 | [[concepts/cli-tools-evolution|cli-tools-evolution]] |
 | Helm | 42 | concepts/cli-tools-evolution#helm-版本演进 |
 | Kind | 32 | concepts/cli-tools-evolution#kind-版本演进 |
 | Kops | 32 | concepts/cli-tools-evolution#kops-版本演进 |
@@ -121,8 +121,8 @@ created: "2026-05-23"
 
 ## Related
 
-- [[concepts/observability-stack-evolution.md|observability-stack-evolution]] — 可观测性栈演进
-- [[entities/cni-plugins.md|cni-plugins]] — CNI Plugins
+- [[concepts/observability-stack-evolution|observability-stack-evolution]] — 可观测性栈演进
+- [[entities/cni-plugins|cni-plugins]] — CNI Plugins
 - [[cilium]] — Cilium
 - [[rook]] — Rook
 - [[istio]] — Istio

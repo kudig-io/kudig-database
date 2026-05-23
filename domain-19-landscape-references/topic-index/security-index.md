@@ -51,7 +51,7 @@ created: "2026-05-23"
 - 06 - Pod安全标准详解
 - 07 - RBAC权限矩阵表
 - 08 - 安全最佳实践表
-- [[entities/kubernetes.md|Kubernetes 安全加固]]]]
+- [[entities/kubernetes|Kubernetes 安全加固]]]]
 - 证书管理与 TLS 配置
 - 11 - 密钥与敏感信息管理工具
 - 14 - 策略引擎与合规
@@ -63,7 +63,7 @@ created: "2026-05-23"
 
 - 01 - NetworkPolicy 深度实践指南
 - 83 - 网络加密与mTLS
-- [[entities/03-containerd-security-hardening.md]]
+- [[entities/03-containerd-security-hardening]]
 
 ### 术语词典
 
@@ -124,8 +124,8 @@ created: "2026-05-23"
 
 ### 供应链安全
 
-- [[domain-05-security-compliance/05-supply-chain/05-slsa-levels-implementation.md]]
-- [[domain-05-security-compliance/05-supply-chain/07-sigstore-cosign-signing.md]]
+- [[domain-05-security-compliance/05-supply-chain/05-slsa-levels-implementation]]
+- [[domain-05-security-compliance/05-supply-chain/07-sigstore-cosign-signing]]
 
 ### 安全生态项目
 

@@ -77,8 +77,8 @@ graph TD
 
 ## 相关文档
 
-- [[domain-07-platform-engineering/README.md]]
-- [[domain-12-cloud-providers/README.md]]
+- [[domain-07-platform-engineering/README]]
+- [[domain-12-cloud-providers/README]]
 
 
 ---
@@ -104,4 +104,4 @@ graph TD
 
 ## Related
 
-- [[references/kudig-metadata-index.md|README]].md|README]]
+- [[references/kudig-metadata-index|README]].md|README]]

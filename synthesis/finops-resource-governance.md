@@ -481,7 +481,7 @@ kubectl get svc --all-namespaces -o json | jq '
 - domain-07-platform-engineering/03-governance
 - domain-07-platform-engineering/governance
 - domain-11-production-operations/01-finops
-- [[synthesis/observability-finops.md|observability-finops]]
+- [[synthesis/observability-finops|observability-finops]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 ## Related

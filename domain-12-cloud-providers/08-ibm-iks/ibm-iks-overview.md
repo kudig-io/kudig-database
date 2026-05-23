@@ -972,9 +972,9 @@ IBM Cloud Kubernetes Service凭借IBM在企业IT领域的深厚积累，为企�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/sql|sql]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
 - 06-monitoring-alerting-system
-- [[references/ibm-iks-overview.md|IBM Cloud Kubernetes Service]]
+- [[references/ibm-iks-overview|IBM Cloud Kubernetes Service]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

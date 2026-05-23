@@ -1106,7 +1106,7 @@ spec:
 **参考资料**:
 - [KEP-753: [[Sidecar Containers|Sidecar Containers]]](https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/753-sidecar-containers)
 - [Kubernetes Sidecar 模式](https://kubernetes.io/blog/2023/08/25/native-sidecar-containers/)
-- [[entities/istio.md|Istio]] Sidecar 注入](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/)
+- [[entities/istio|Istio]] Sidecar 注入](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/)
 
 ---
 
@@ -1114,7 +1114,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications MOC
-- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
 - Domain-4 工作负载 — 开源项目索引
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)

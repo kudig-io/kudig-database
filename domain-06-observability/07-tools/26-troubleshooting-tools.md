@@ -1537,8 +1537,8 @@ kubectl logs -l app=<label> --all-containers
 ## Obsidian 相关文档
 
 - domain-06-observability MOC
-- [[domain-06-observability/README.md|Observability Domain (可观测性领域)]]
-- [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
+- [[domain-06-observability/README|Observability Domain (可观测性领域)]]
+- [[domain-06-observability/00-open-source-projects-index|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
 - 03 - 日志收集架构详解 (Logging Architecture)
@@ -1548,15 +1548,15 @@ kubectl logs -l app=<label> --all-containers
 - 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)
 - 08 - 日志审计与合规管理 (Logging Auditing & Compliance)
 - 05 - 事件与审计日志管理 (Events & Audit Logs)
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
 
 ## Related
 
 - [[kudig-prompts-catalog]]
 
-- [[domain-06-observability/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-06-observability/README|返回目录]]- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
 
 ## See Also
 

@@ -264,7 +264,7 @@ diagnose_pending_pods "production"
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
+- [[domain-07-platform-engineering/README|Platform Ops Domain (平台运维领域)]]
 - Domain-9 平台运维 — 开源项目索引
 - 平台运维概述
 - 集群生命周期管理
@@ -275,15 +275,15 @@ diagnose_pending_pods "production"
 - GitOps配置管理 (GitOps Configuration Management)
 - 运维自动化工具链 (Operations Automation Toolchain)
 - 成本优化与FinOps实践 (Cost Optimization & FinOps)
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
 
 ## Related
 
-- [[release-notes/22-production-checklist.md|22-production-checklist]]
+- [[release-notes/22-production-checklist|22-production-checklist]]
 - [[kudig-prompts-catalog]]
-- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
+- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production|02-spring-boot-kubernetes-production]]
 
 ## See Also
 

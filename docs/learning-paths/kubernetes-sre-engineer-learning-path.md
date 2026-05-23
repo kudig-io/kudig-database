@@ -71,7 +71,7 @@ kubectl top pod -n <namespace>
 - [ ] 节点亲和性和反亲和性
 
 **推荐学习**：
-- [[video-scripts/node-notready.md]]
+- [[video-scripts/node-notready]]
 - `domain-01-cluster-fundamentals/07-performance-tuning/`
 
 ### 2.2 应用管理
@@ -81,8 +81,8 @@ kubectl top pod -n <namespace>
 - [ ] HPA和VPA配置
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/02-pod-crashloop-oomkilled.md]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/02-pod-crashloop-oomkilled]]
 - k8s-autoscaling
 
 ### 2.3 存储与配置
@@ -94,7 +94,7 @@ kubectl top pod -n <namespace>
 **推荐学习**：
 - k8s-pvc-storage
 - k8s-config-secret
-- [[domain-10-troubleshooting-diagnostics/topic-skills/21-statefulset-failure.md]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/21-statefulset-failure]]
 
 ### 2.4 网络排查
 - [ ] Service连通性诊断
@@ -103,9 +103,9 @@ kubectl top pod -n <namespace>
 - [ ] Ingress和SLB问题诊断
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity.md]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity]]
 - k8s-dns-failure
-- [[domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure]]
 
 ### 阶段二评估标准
 > 能够独立完成以下操作即达标：
@@ -127,8 +127,8 @@ kubectl top pod -n <namespace>
 - [ ] etcd备份和恢复
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/11-control-plane-failure.md]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry.md]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/11-control-plane-failure]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry]]
 - `domain-01-cluster-fundamentals/06-upgrade-paths/`
 
 ### 3.2 安全与合规
@@ -138,8 +138,8 @@ kubectl top pod -n <namespace>
 - [ ] 审计日志配置
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/09-rbac-quota-failure.md]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response.md]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/09-rbac-quota-failure]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response]]
 - `domain-05-security-compliance/`
 
 ### 3.3 可观测性体系
@@ -149,8 +149,8 @@ kubectl top pod -n <namespace>
 - [ ] 分布式链路追踪
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/15-monitoring-alerting-failure.md]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/16-logging-pipeline-failure.md]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/15-monitoring-alerting-failure]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/16-logging-pipeline-failure]]
 - `domain-06-observability/`
 
 ### 3.4 性能优化
@@ -160,7 +160,7 @@ kubectl top pod -n <namespace>
 - [ ] 大规模集群性能考量
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/17-performance-bottleneck.md]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/17-performance-bottleneck]]
 - `domain-01-cluster-fundamentals/07-performance-tuning/`
 
 ### 阶段三评估标准

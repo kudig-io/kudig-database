@@ -42,7 +42,7 @@ created: "2026-05-23"
 ### 网络知识域 ([[CoreDNS|CoreDNS]]/DNS 核心)
 
 - 04 - DNS 服务发现与 CoreDNS 调优
-- 33 - 服务发现与 DNS 配置 ([[domain-03-networking-traffic/00-core-k8s-networking/11-dns-service-discovery-coredns.md]]
+- 33 - 服务发现与 DNS 配置 ([[domain-03-networking-traffic/00-core-k8s-networking/11-dns-service-discovery-coredns]]
 - 53 - CoreDNS 架构与核心原理 (Architecture & Principles)
 - 54 - CoreDNS Corefile 配置详解 (Corefile Configuration)
 - 55 - CoreDNS 插件完整参考 (Plugins Reference)

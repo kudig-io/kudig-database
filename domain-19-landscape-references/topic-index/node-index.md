@@ -42,8 +42,8 @@ created: "2026-05-23"
 ### 节点管理
 
 - 27 - 节点与节点池管理 (Node & NodePool Management)
-- [[entities/kubefleet.md|Kubelet 配置与调优]]]]
-- [[domain-01-cluster-fundamentals/03-control-plane/15-kubelet-deep-dive.md|kubelet 深度解析 (kubelet Deep Dive)]]]]
+- [[entities/kubefleet|Kubelet 配置与调优]]]]
+- [[domain-01-cluster-fundamentals/03-control-plane/15-kubelet-deep-dive|kubelet 深度解析 (kubelet Deep Dive)]]]]
 
 ### 故障排查
 
@@ -92,7 +92,7 @@ created: "2026-05-23"
 
 ### 节点操作系统
 
-- [[entities/inclavare-containers.md]]
+- [[entities/inclavare-containers]]
 - K0s
 - k3s
 
@@ -105,5 +105,5 @@ created: "2026-05-23"
 ### 生产运维
 
 - 19-集群性能调优
-- [[domain-09-reliability-engineering/03-capacity-planning/24-capacity-planning-forecasting.md]]
+- [[domain-09-reliability-engineering/03-capacity-planning/24-capacity-planning-forecasting]]
 - K8s FinOps 成本优化实践指南

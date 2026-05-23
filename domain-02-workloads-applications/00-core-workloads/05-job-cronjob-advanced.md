@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 # 05 - Job 与 [[CronJob|CronJob]] 高级用法 (Job & CronJob Advanced Usage)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|Kubernetes]] [[Jobs|Jobs]]](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes|Kubernetes]] [[Jobs|Jobs]]](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
 
 <!-- chunk: Job 类型详解与使用场景 -->
 ## Job 类型详解与使用场景
@@ -755,10 +755,10 @@ spec:
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications KUDIG Database — Global MOC
-- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
 - Domain-4 工作负载 — 开源项目索引
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
-- 02 - [[domain-02-workloads-applications/00-core-workloads/02-deployment-production-patterns.md]]
+- 02 - [[domain-02-workloads-applications/00-core-workloads/02-deployment-production-patterns]]
 - 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)
 - 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)
 - 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)

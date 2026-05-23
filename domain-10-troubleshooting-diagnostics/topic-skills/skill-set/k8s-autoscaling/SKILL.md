@@ -133,7 +133,7 @@ HPA、VPA 和 Cluster Autoscaler 是 [[Kubernetes|Kubernetes]] 弹性能力的�
 
 ## Related
 
-- [[synthesis/platform-engineering-sre.md]]
+- [[synthesis/platform-engineering-sre]]
 
 
 ## 远程顾问信息收集

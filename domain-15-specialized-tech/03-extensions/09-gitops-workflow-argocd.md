@@ -52,7 +52,7 @@ created: "2026-05-23"
 
 # 48 - GitOps工作流
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/opengitops.md|opengitops]].dev](https://opengitops.dev/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/opengitops|opengitops]].dev](https://opengitops.dev/)
 
 <!-- chunk: GitOps核心原则 -->
 ## GitOps核心原则
@@ -527,7 +527,7 @@ argocd repo add https://github.com/org/repo.git \
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech MOC
-- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
 - Domain-10 扩展与自定义 — 开源项目索引
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现

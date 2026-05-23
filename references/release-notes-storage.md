@@ -92,14 +92,14 @@ created: "2026-05-23"
 
 ## 相关导航
 
-- [[concepts/storage-tool-evolution.md|存储工具演进]]
-- [[references/release-notes-reading-guide.md|发布说明阅读指南]]
+- [[concepts/storage-tool-evolution|存储工具演进]]
+- [[references/release-notes-reading-guide|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
-- [[references/release-notes-networking.md|release-notes-networking]] — 发布说明索引 — 网络
-- [[references/k8s-storage-ecosystem.md|k8s-storage-ecosystem]] — 存储体系：PV、PVC、StorageClass、CSI 驱动与灾备恢复
-- [[references/release-notes-observability.md|release-notes-observability]] — 发布说明索引 — 可观测性
+- [[references/release-notes-networking|release-notes-networking]] — 发布说明索引 — 网络
+- [[references/k8s-storage-ecosystem|k8s-storage-ecosystem]] — 存储体系：PV、PVC、StorageClass、CSI 驱动与灾备恢复
+- [[references/release-notes-observability|release-notes-observability]] — 发布说明索引 — 可观测性
 - [[rook]] — Rook
 - [[longhorn]] — Longhorn

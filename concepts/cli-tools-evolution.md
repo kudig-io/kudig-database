@@ -139,11 +139,11 @@ Kustomize 提供声明式的配置定制，已集成到 kubectl。
 
 ## Related
 
-- [[concepts/observability-stack-evolution.md|observability-stack-evolution]] — 可观测性栈演进
-- [[concepts/storage-tool-evolution.md|storage-tool-evolution]] — 存储工具演进
+- [[concepts/observability-stack-evolution|observability-stack-evolution]] — 可观测性栈演进
+- [[concepts/storage-tool-evolution|storage-tool-evolution]] — 存储工具演进
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[helm]] — Helm
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
 - [[ko|ko]]

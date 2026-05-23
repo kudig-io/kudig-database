@@ -106,11 +106,11 @@ User input: "How do I set up ArgoCD for my cluster?"
 ## Related
 
 - [[INDEX]] — Wiki Index
-- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
 - [[deployment]] — Deployment
 - [[etcd]] — etcd
-- [[entities/argocd.md|argocd]] — ArgoCD
-- [[references/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
-- [[skills/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
-- [[references/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
-- [[docs/SCENARIO-TAXONOMY.md|KUDIG 场景分类体系]]
+- [[entities/argocd|argocd]] — ArgoCD
+- [[references/KUDIG Tag Dictionary|KUDIG Tag Dictionary]]
+- [[skills/Kubernetes Diagnostic Skills Overview|Kubernetes Diagnostic Skills Overview]]
+- [[references/KUDIG Frontmatter Spec|KUDIG Frontmatter Spec]]
+- [[docs/SCENARIO-TAXONOMY|KUDIG 场景分类体系]]

@@ -875,4 +875,4 @@ echo "Total failover duration: $SECONDS seconds"
 - [[README]]
 - [[README]]
 
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist.md|集群删除前的数据备份与迁移检查清单]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist|集群删除前的数据备份与迁移检查清单]]

@@ -94,7 +94,7 @@ man 8 etcd
 ## 相关文档
 
 - [[KUDIG Man Pages Index|原版 Man Pages]]
-- [[references/kubectl Scenario Quick Reference.md|kubectl 场景速查]]
+- [[references/kubectl Scenario Quick Reference|kubectl 场景速查]]
 - 模板与 Prompt 集合
 
 ## Related
@@ -103,4 +103,4 @@ man 8 etcd
 - [[cert-manager]] — cert-manager
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[entities/argocd.md|argocd]] — ArgoCD
+- [[entities/argocd|argocd]] — ArgoCD

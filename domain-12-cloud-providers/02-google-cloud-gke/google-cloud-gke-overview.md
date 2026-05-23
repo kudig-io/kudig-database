@@ -1042,10 +1042,10 @@ options:
 
 ## Related
 
-- [[hot.md|hot]]
-- [[log.md|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
-- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
+- [[hot|hot]]
+- [[log|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/sql|sql]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

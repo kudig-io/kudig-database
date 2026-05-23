@@ -34,7 +34,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-# [[entities/network-service-mesh.md|Network Service Mesh]]rvice]]Service Mesh）|Service Mesh]] (NSM)
+# [[entities/network-service-mesh|Network Service Mesh]]rvice]]Service Mesh）|Service Mesh]] (NSM)
 
 > **CNCF 状态**: Sandbox | **类别**: Networking | **主要语言**: Go
 
@@ -48,7 +48,7 @@ Network Service Mesh (NSM) 是一个混合/多云的 IP 服务网格，提供 L2
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -65,11 +65,11 @@ Network Service Mesh (NSM) 是一个混合/多云的 IP 服务网格，提供 L2
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
 - [[istio]]
-- [[entities/cni-plugins.md|cni-plugins]]
+- [[entities/cni-plugins|cni-plugins]]
 - [[deployment]]
-- [[concepts/service-mesh-architecture.md|service-mesh-architecture]]
+- [[concepts/service-mesh-architecture|service-mesh-architecture]]
 
 ## Related
 

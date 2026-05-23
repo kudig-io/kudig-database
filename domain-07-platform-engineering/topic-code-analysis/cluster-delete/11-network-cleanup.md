@@ -511,7 +511,7 @@ echo "=== 网络清理完成 ==="
 ## Related
 
 - 22-networkpolicy-reference
-- [[README.md|README]]
-- [[man/INSTALL.md|INSTALL]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[README|README]]
+- [[man/INSTALL|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking|networking]]

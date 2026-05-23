@@ -391,10 +391,10 @@ source <(kubectl completion zsh)   # Zsh
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
 - index.md|Domain-1 架构基础 — 开源项目索引]]
-- [[entities/kubernetes.md]]
-- [[entities/kubernetes.md]]
+- [[entities/kubernetes]]
+- [[entities/kubernetes]]
 - 03 - 功能和API表
 - 04 - Kubernetes 源码结构深度解析
 - kubectl 命令完整参考

@@ -50,7 +50,7 @@ Antrea 是基于 Open vSwitch (OVS) 构建的 Kubernetes 网络解决方案，�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -67,18 +67,18 @@ Antrea 是基于 Open vSwitch (OVS) 构建的 Kubernetes 网络解决方案，�
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
-- [[entities/cni-plugins.md|cni-plugins]]
-- [[entities/networkpolicy.md|networkpolicy]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/cni-plugins|cni-plugins]]
+- [[entities/networkpolicy|networkpolicy]]
 - [[deployment]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
 
 ## Related
 
 - [[kgateway]] — kgateway
 - [[urunc]] — urunc
 - [[connect-rpc]] — Connect RPC
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - antrea

@@ -181,15 +181,15 @@ aliyun pop-cli GetQuota --OwnerId 12345
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[references/243-ack-ram-authorization.md|243-ack-ram-authorization]]
-- [[references/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|[[Go 生产环境速查卡|go]]]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[references/243-ack-ram-authorization|243-ack-ram-authorization]]
+- [[references/250-apsara-stack-ess-scaling|250-apsara-stack-ess-scaling]]
+- [[entities/kubernetes|kubernetes]]
 
 ## See Also
 
-- [[domain-12-cloud-providers/13-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
+- [[domain-12-cloud-providers/13-alicloud-apsara-ack/250-apsara-stack-ess-scaling|250-apsara-stack-ess-scaling]]
 - logging.md|251-apsara-stack-sls-logging]]
-- [[domain-12-cloud-providers/13-alicloud-apsara-ack/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
-- [[domain-12-cloud-providers/13-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
+- [[domain-12-cloud-providers/13-alicloud-apsara-ack/alicloud-apsara-ack-overview|alicloud-apsara-ack-overview]]
+- [[domain-12-cloud-providers/13-alicloud-apsara-ack/250-apsara-stack-ess-scaling|250-apsara-stack-ess-scaling]]

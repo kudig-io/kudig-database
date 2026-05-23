@@ -524,7 +524,7 @@ autoscaling:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README.md|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
@@ -624,6 +624,6 @@ autoscaling:
 ## See Also
 
 - 99-kubernetes-multi-tenant-architecture
-- [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
+- [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint|99-kubernetes-production-architecture-blueprint]]
 - 02-multi-cloud-hybrid-deployment-strategy
 - 03-edge-computing-production-deployment

@@ -68,7 +68,7 @@ created: "2026-05-23"
 
 # 07 - 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/tasks/run-application/horizontal-pod-autoscale](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/tasks/run-application/horizontal-pod-autoscale](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
 
 本文档从生产环境运维专家视角，深入解析 Kubernetes 自定义指标适配器体系，涵盖 [[Prometheus|Prometheus]] Adapter、外部指标集成、HPA高级配置、指标管道优化等核心内容，结合大规模集群实践经验，为企业构建灵活、高效的自动扩缩容系统提供完整指导。
 
@@ -436,8 +436,8 @@ kubectl get hpa -w
 ## Obsidian 相关文档
 
 - observability/MOC.md|domain-06-observability MOC]]
-- [[domain-06-observability/README.md|Observability Domain (可观测性领域)]]
-- [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
+- [[domain-06-observability/README|Observability Domain (可观测性领域)]]
+- [[domain-06-observability/00-open-source-projects-index|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
 - 03 - 日志收集架构详解 (Logging Architecture)
@@ -455,7 +455,7 @@ kubectl get hpa -w
 - 12-logging-auditing
 - 13-cluster-health-check
 
-- [[domain-06-observability/README.md|返回目录]]
+- [[domain-06-observability/README|返回目录]]
 
 ## Related
 

@@ -977,7 +977,7 @@ kubeadm upgrade diff v1.29.0
 
 ## Related
 
-- [[hot.md|hot]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[hot|hot]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[entities/kubernetes|kubernetes]]

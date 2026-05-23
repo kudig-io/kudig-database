@@ -455,7 +455,7 @@ tags: [onboarding, first-ticket, troubleshooting, sre, ops-engineer, k8s-1.28-1.
 
 ## Related
 
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[coredns]] — CoreDNS
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus

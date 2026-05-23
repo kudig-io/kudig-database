@@ -47,7 +47,7 @@ title: containerd 2.0 新特性
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -59,16 +59,16 @@ title: containerd 2.0 新特性
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
 - [[containerd]]
-- [[entities/cni-plugins.md|cni-plugins]]
-- [[concepts/storage-model.md|storage-model]]
+- [[entities/cni-plugins|cni-plugins]]
+- [[concepts/storage-model|storage-model]]
 - [[pod-lifecycle]]
 
 ## Related
 
 - [[k3s]] — k3s 轻量级 Kubernetes
-- [[entities/virtual-kubelet.md|kubelet]]]] — [[Virtual Kubelet|Virtual Kubelet]]
+- [[entities/virtual-kubelet|kubelet]]]] — [[Virtual Kubelet|Virtual Kubelet]]
 - [[kudo]] — KUDO
 - [[containerd]] — containerd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

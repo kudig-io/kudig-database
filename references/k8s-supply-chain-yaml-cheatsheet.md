@@ -69,8 +69,8 @@ KUDIG 提供全资源类型的 YAML 字段参考：
 
 ## Related
 
-- [[synthesis/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — 纵深防御 x 供应链安全
+- [[synthesis/纵深防御 x 供应链安全|纵深防御 x 供应链安全]] — 纵深防御 x 供应链安全
 - [[docker]] — Docker
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
 - [[deployment]] — Deployment
-- [[entities/trivy.md|trivy]] — Trivy
+- [[entities/trivy|trivy]] — Trivy

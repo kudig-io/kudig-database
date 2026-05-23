@@ -1840,13 +1840,13 @@ related:
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[log.md|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[log|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser|00-command-output-root-cause-parser]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/01-kubectl-watch-output-parser|01-kubectl-watch-output-parser]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/01-kubectl-watch-output-parser|01-kubectl-watch-output-parser]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser|00-command-output-root-cause-parser]]

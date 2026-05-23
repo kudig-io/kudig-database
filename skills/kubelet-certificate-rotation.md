@@ -172,18 +172,18 @@ journalctl -u kubelet | grep -i "certificate\|csr\|rotation"
 
 ## 相关技能
 
-- [[concepts/kubernetes-pki-certificate-system.md|[[Kubernetes PKI 证书体系|Kubernetes PKI 证书体系]]]]
-- [[skills/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
-- [[skills/node-drain-and-maintenance.md|[[节点驱逐与维护|节点驱逐与维护]]]]
-- [[entities/kubelet.md|kubelet]]
+- [[concepts/kubernetes-pki-certificate-system|[[Kubernetes PKI 证书体系|Kubernetes PKI 证书体系]]]]
+- [[skills/kubeadm-cluster-lifecycle|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
+- [[skills/node-drain-and-maintenance|[[节点驱逐与维护|节点驱逐与维护]]]]
+- [[entities/kubelet|kubelet]]
 
 ## Related
 
-- [[skills/troubleshoot-node-issues.md|troubleshoot-node-issues]] — Troubleshoot Node Issues
-- [[entities/kubelet.md|kubelet]] — kubelet
-- [[entities/kube-apiserver.md|kube-apiserver]] — kube-apiserver
+- [[skills/troubleshoot-node-issues|troubleshoot-node-issues]] — Troubleshoot Node Issues
+- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/kube-apiserver|kube-apiserver]] — kube-apiserver
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/kubernetes-pki-certificate-system.md|kubernetes-pki-certificate-system]] — Kubernetes PKI 证书体系
+- [[concepts/kubernetes-pki-certificate-system|kubernetes-pki-certificate-system]] — Kubernetes PKI 证书体系
 
-- [[skills/kubeadm-cluster-lifecycle.md|kubeadm-cluster-lifecycle]]
-- [[skills/node-drain-and-maintenance.md|node-drain-and-maintenance]]
+- [[skills/kubeadm-cluster-lifecycle|kubeadm-cluster-lifecycle]]
+- [[skills/node-drain-and-maintenance|node-drain-and-maintenance]]

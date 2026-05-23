@@ -46,7 +46,7 @@ Notary Project 提供容器镜像和 OCI 制品的签名、验证规范与工具
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -62,15 +62,15 @@ Notary Project 提供容器镜像和 OCI 制品的签名、验证规范与工具
 
 ## 参考链接
 
-- [[entities/vault.md|[[HashiCorp Vault|vault]]]]
+- [[entities/vault|[[HashiCorp Vault|vault]]]]
 - [[kyverno]]
-- [[concepts/secrets-management.md|secrets-management]]
+- [[concepts/secrets-management|secrets-management]]
 - [[pod-lifecycle]]
-- [[concepts/security-defense-depth.md|security-defense-depth]]
+- [[concepts/security-defense-depth|security-defense-depth]]
 
 ## Related
 
-- [[open-cluster-management]] — [[entities/open-cluster-management.md|Open Cluster Management (OCM)]]
+- [[open-cluster-management]] — [[entities/open-cluster-management|Open Cluster Management (OCM)]]
 - [[cdk8s]] — cdk8s (Cloud Development Kit for Kubernetes)
 - [[cloud-custodian]] — Cloud Custodian
 - [[kuadrant]] — Kuadrant

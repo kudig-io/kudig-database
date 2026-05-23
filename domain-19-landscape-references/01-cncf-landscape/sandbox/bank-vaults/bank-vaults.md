@@ -44,7 +44,7 @@ Bank-Vaults 是一套围绕 HashiCorp Vault 构建的 Kubernetes 原生密钥管
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -61,9 +61,9 @@ Bank-Vaults 是一套围绕 HashiCorp Vault 构建的 Kubernetes 原生密钥管
 ## 参考链接
 
 - [[etcd]]
-- [[entities/vault.md|vault]]
+- [[entities/vault|vault]]
 - [[deployment]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
 - [[operator-pattern]]
 
 ## Related
@@ -71,7 +71,7 @@ Bank-Vaults 是一套围绕 HashiCorp Vault 构建的 Kubernetes 原生密钥管
 - [[submariner]] — Submariner
 - [[03-prometheus-ha-deployment]] — [[Prometheus|Prometheus]]us 高可用部署|Prometheus 高可用部署]]
 - [[inclavare-containers]] — Inclavare Containers
-- [[entities/vault.md|vault]] — HashiCorp Vault
+- [[entities/vault|vault]] — HashiCorp Vault
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - bank-vaults

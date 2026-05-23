@@ -181,11 +181,11 @@ updated: "2026-05-23"
 
 本Skill诊断过程中可能涉及的其他Skill：
 
-- [[skills/ts-control-plane.md]]
+- [[skills/ts-control-plane]]
 
 - k8s-ingress-gateway
 
-- [[skills/best-practices/scenarios/security-incident.md]]
+- [[skills/best-practices/scenarios/security-incident]]
 
 
 当本Skill的诊断步骤无法定位根因时，建议按上述顺序排查相关Skill。

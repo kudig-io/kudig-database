@@ -84,13 +84,13 @@ created: "2026-05-23"
 
 ## Related
 
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[containerd]] — containerd
 - [[youki]] — youki
 - [[cri-o]] — CRI-O
-- [[concepts/docker-architecture.md|docker-architecture]] — Docker Architecture and Container Runtime
-- [[concepts/docker-architecture.md|Docker Architecture]]
-- [[concepts/linux-container-foundation.md|Linux Container Foundation]]
+- [[concepts/docker-architecture|docker-architecture]] — Docker Architecture and Container Runtime
+- [[concepts/docker-architecture|Docker Architecture]]
+- [[concepts/linux-container-foundation|Linux Container Foundation]]
 - [[containerd|containerd]]
 - [[cri-o|CRI-O]]
 - OCI Standard

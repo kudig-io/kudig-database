@@ -84,7 +84,7 @@ base_confidence: 0.7
 
 ## See Also
 
-- [[skills/etcd-fta.md|etcd-fta]]
-- [[skills/flannel-fta.md|flannel-fta]]
-- [[skills/gitops-argocd-fta.md|gitops-argocd-fta]]
-- [[skills/gpu-fta.md|gpu-fta]]
+- [[skills/etcd-fta|etcd-fta]]
+- [[skills/flannel-fta|flannel-fta]]
+- [[skills/gitops-argocd-fta|gitops-argocd-fta]]
+- [[skills/gpu-fta|gpu-fta]]

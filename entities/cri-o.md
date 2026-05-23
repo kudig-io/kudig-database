@@ -46,7 +46,7 @@ description: '## 项目概述'
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -58,11 +58,11 @@ description: '## 项目概述'
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
 - [[containerd]]
-- [[entities/cni-plugins.md|cni-plugins]]
-- [[concepts/container-runtime-comparison.md|container-runtime-comparison]]
-- [[concepts/storage-model.md|storage-model]]
+- [[entities/cni-plugins|cni-plugins]]
+- [[concepts/container-runtime-comparison|container-runtime-comparison]]
+- [[concepts/storage-model|storage-model]]
 
 ## Related
 
@@ -104,7 +104,7 @@ description: '## 项目概述'
 - RELEASE-NOTES-0.1
 - RELEASE-NOTES-1.25
 - RELEASE-NOTES-1.11
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.35.md|RELEASE-NOTES-1.35]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.35|RELEASE-NOTES-1.35]]
 - troubleshooting|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
 - [[references/k8s-control-plane-deep-dive|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]] — Cross-reference
 - [[references/release-notes-core-deps|发布说明索引 — 核心依赖]] — Cross-reference

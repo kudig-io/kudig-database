@@ -51,9 +51,9 @@ created: "2026-05-23"
 
 ## 架构基础
 
-- [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构全景图 (Architecture Overview)]]]]
-- [[domain-01-cluster-fundamentals/01-architecture-overview/02-core-components-deep-dive.md]]
-- [[domain-01-cluster-fundamentals/05-kubectl/05-kubectl-commands-reference.md]]
+- [[concepts/kubernetes-architecture-overview|Kubernetes 架构全景图 (Architecture Overview)]]]]
+- [[domain-01-cluster-fundamentals/01-architecture-overview/02-core-components-deep-dive]]
+- [[domain-01-cluster-fundamentals/05-kubectl/05-kubectl-commands-reference]]
 - 07 - 升级路径与策略指南
 - 08 - 多租户架构设计 (Multi-Tenancy Architecture)
 - 12 - Kubernetes 集群部署架构模式指南
@@ -230,7 +230,7 @@ created: "2026-05-23"
 
 ## 技术论文
 
-- [[domain-19-landscape-references/02-papers/05-kubernetes-gitops-complete-practice-guide.md]]
+- [[domain-19-landscape-references/02-papers/05-kubernetes-gitops-complete-practice-guide]]
 
 ## GitOps / CI-CD
 

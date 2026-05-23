@@ -355,7 +355,7 @@ graph TB
 
 ## Related
 
-- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
 - [[opentelemetry]] — OpenTelemetry
 - [[deployment]] — Deployment
 - [[prometheus]] — Prometheus

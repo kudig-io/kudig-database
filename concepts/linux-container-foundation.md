@@ -95,12 +95,12 @@ Debug OOM kills: `dmesg | grep -i oom` or `journalctl -k --grep="Out of memory"`
 ## Related
 
 - [[docker]] — Docker
-- [[concepts/docker-architecture.md|docker-architecture]] — Docker Architecture and Container Runtime
-- [[concepts/linux-sysctl-tuning.md|linux-sysctl-tuning]] — Linux Sysctl Tuning for Kubernetes
-- [[entities/kubelet.md|kubelet]] — kubelet
-- [[concepts/linux-security-modules.md|linux-security-modules]] — Linux Security Modules for Containers
-- [[concepts/docker-architecture.md|Docker Architecture]]
-- [[concepts/overlayfs-storage.md|OverlayFS Storage]]
-- [[concepts/linux-sysctl-tuning.md|Linux Sysctl Tuning]]
-- [[concepts/linux-security-modules.md|Linux Security Modules]]
+- [[concepts/docker-architecture|docker-architecture]] — Docker Architecture and Container Runtime
+- [[concepts/linux-sysctl-tuning|linux-sysctl-tuning]] — Linux Sysctl Tuning for Kubernetes
+- [[entities/kubelet|kubelet]] — kubelet
+- [[concepts/linux-security-modules|linux-security-modules]] — Linux Security Modules for Containers
+- [[concepts/docker-architecture|Docker Architecture]]
+- [[concepts/overlayfs-storage|OverlayFS Storage]]
+- [[concepts/linux-sysctl-tuning|Linux Sysctl Tuning]]
+- [[concepts/linux-security-modules|Linux Security Modules]]
 - [[containerd|containerd]]

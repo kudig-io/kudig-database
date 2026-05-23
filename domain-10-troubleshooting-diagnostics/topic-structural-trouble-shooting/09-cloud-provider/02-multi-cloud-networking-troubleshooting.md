@@ -1,6 +1,6 @@
 ---
 title: 多云/混合云网络故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: 多云/混合云[[skills/ts-networking.md|ts-networking]]指南'
+description: 'title: 多云/混合云[[skills/ts-networking|ts-networking]]指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -781,12 +781,12 @@ groups:
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md|03-cloud-resource-quota-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/01-cloud-provider-integration-troubleshooting.md|01-cloud-provider-integration-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md|03-cloud-resource-quota-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/01-cloud-provider-integration-troubleshooting.md|01-cloud-provider-integration-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting|03-cloud-resource-quota-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/01-cloud-provider-integration-troubleshooting|01-cloud-provider-integration-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting|03-cloud-resource-quota-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/01-cloud-provider-integration-troubleshooting|01-cloud-provider-integration-troubleshooting]]

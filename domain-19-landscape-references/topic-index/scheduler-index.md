@@ -49,9 +49,9 @@ created: "2026-05-23"
 
 ### 深度技术
 
-- [[domain-17-system-foundation/topic-dictionary/scheduling/kubernetes-scheduler.md|Kubernetes Scheduler]] 深度解析 (Kube-Scheduler Deep Dive)]]
+- [[domain-17-system-foundation/topic-dictionary/scheduling/kubernetes-scheduler|Kubernetes Scheduler]] 深度解析 (Kube-Scheduler Deep Dive)]]
 - 调度器配置与优化
-- 动态资源分配 ([[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation.md]]
+- 动态资源分配 ([[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation]]
 - HPA/VPA 自动伸缩配置
 - 集群容量规划
 - 资源管理表
@@ -83,7 +83,7 @@ created: "2026-05-23"
 
 ### 技术论文
 
-- [[domain-19-landscape-references/02-papers/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md]]
+- [[domain-19-landscape-references/02-papers/12-kubernetes-scheduler-deep-optimization-custom-scheduling]]
 
 ---
 
@@ -98,7 +98,7 @@ created: "2026-05-23"
 
 ### 资源管理
 
-- [[domain-07-platform-engineering/governance/03-capacity-planning-resource-assessment.md]]
+- [[domain-07-platform-engineering/governance/03-capacity-planning-resource-assessment]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/01-resources-quota-troubleshooting|资源与调度故障排查指南]]
 
 ### Pod调度

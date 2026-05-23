@@ -1626,9 +1626,9 @@ maintenance.run_daily_maintenance()
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - observability/MOC.md|domain-20-enterprise-monitoring-alerting MOC]]
-- [[domain-06-observability/README.md|[[Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]]]
-- [[domain-06-observability/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]]
-- [[entities/prometheus.md]]
+- [[domain-06-observability/README|[[Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]]]
+- [[domain-06-observability/00-open-source-projects-index|Domain-20 企业监控与告警 — 开源项目索引]]
+- [[entities/prometheus]]
 - Grafana Enterprise Observability Platform 深度实践
 - OpenTelemetry分布式追踪与可观测性深度实践
 - Thanos Enterprise Metrics Federation and Long-term Storage
@@ -1645,4 +1645,4 @@ maintenance.run_daily_maintenance()
 - 06-elastic-stack-enterprise-observability
 - 07-zabbix-enterprise-monitoring
 
-- [[domain-06-observability/README.md|返回目录]]
+- [[domain-06-observability/README|返回目录]]

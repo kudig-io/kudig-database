@@ -66,8 +66,8 @@ last_updated: 2026-04-01
 
 ## Related
 
-- [[entities/dex.md|Dex]]
-- [[index.md|index]]
+- [[entities/dex|Dex]]
+- [[index|index]]
 - knowledge-map
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference

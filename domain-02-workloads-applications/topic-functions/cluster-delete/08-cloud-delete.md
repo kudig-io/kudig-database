@@ -452,8 +452,8 @@ tencentcloud cli cvm DeleteCluster --cluster-id cls-xxx
 
 ## Related
 
-- [[README.md|README]]
-- [[log.md|log]]
-- [[man/INSTALL.md|INSTALL]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[README|README]]
+- [[log|log]]
+- [[man/INSTALL|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]

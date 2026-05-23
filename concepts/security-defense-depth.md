@@ -1,6 +1,6 @@
 ---
 title: Defense-in-Depth Security
-description: '- [[synthesis/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis'
+description: '- [[synthesis/eBPF x 运行时安全|eBPF x 运行时安全]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -94,16 +94,16 @@ In zero trust, no component is inherently trusted:
 ## Related
 
 - [[falco]] — Falco
-- [[entities/trivy.md|trivy]] — Trivy
-- [[entities/vault.md|vault]] — HashiCorp Vault
-- [[concepts/secrets-management.md|secrets-management]] — Secrets Management
-- [[concepts/multi-tenancy-isolation.md|multi-tenancy-isolation]] — Multi-Tenancy Isolation
+- [[entities/trivy|trivy]] — Trivy
+- [[entities/vault|vault]] — HashiCorp Vault
+- [[concepts/secrets-management|secrets-management]] — Secrets Management
+- [[concepts/multi-tenancy-isolation|multi-tenancy-isolation]] — Multi-Tenancy Isolation
 - [[pod-lifecycle|Pod Lifecycle]]
-- [[entities/networkpolicy.md|NetworkPolicy]]
-- [[skills/audit-rbac-configurations.md|Audit RBAC Configurations]]
-- [[concepts/multi-tenancy-isolation.md|Multi-Tenancy Isolation]]
-- [[synthesis/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis
-- [[synthesis/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis
-- [[synthesis/服务网格 x 零信任安全.md|服务网格 x 零信任安全]] — synthesis
+- [[entities/networkpolicy|NetworkPolicy]]
+- [[skills/audit-rbac-configurations|Audit RBAC Configurations]]
+- [[concepts/multi-tenancy-isolation|Multi-Tenancy Isolation]]
+- [[synthesis/eBPF x 运行时安全|eBPF x 运行时安全]] — synthesis
+- [[synthesis/纵深防御 x 供应链安全|纵深防御 x 供应链安全]] — synthesis
+- [[synthesis/服务网格 x 零信任安全|服务网格 x 零信任安全]] — synthesis
 
 - [[Deployment × Secret 管理]]

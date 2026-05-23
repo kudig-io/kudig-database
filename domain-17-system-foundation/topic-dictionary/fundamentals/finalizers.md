@@ -34,7 +34,7 @@ Finalizers 是带有命名空间限制的键，用于告诉 [[entities/kubernete
 
 ### Finalizers 如何工作
 
-当用户请求删除一个带有 Finalizers 的对象时，[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 服务器会：
+当用户请求删除一个带有 Finalizers 的对象时，[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 服务器会：
 
 1. 在对象上添加 `metadata.deletionTimestamp` 字段，标记对象已被请求删除。
 2. 阻止对象被移除，直到其 `metadata.finalizers` 字段中的所有项都被移除。

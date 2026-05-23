@@ -243,8 +243,8 @@ cross_refs:
 
 ## Related
 
-- [[skills/k8s-deployment-strategies-guide.md|k8s-deployment-strategies-guide]] — Kubernetes 部署策略最佳实践
-- [[skills/k8s-disaster-recovery-guide.md|k8s-disaster-recovery-guide]] — Kubernetes 灾难恢复最佳实践
-- [[skills/k8s-scaling-guide.md|k8s-scaling-guide]] — Kubernetes 扩缩容最佳实践
+- [[skills/k8s-deployment-strategies-guide|k8s-deployment-strategies-guide]] — Kubernetes 部署策略最佳实践
+- [[skills/k8s-disaster-recovery-guide|k8s-disaster-recovery-guide]] — Kubernetes 灾难恢复最佳实践
+- [[skills/k8s-scaling-guide|k8s-scaling-guide]] — Kubernetes 扩缩容最佳实践
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

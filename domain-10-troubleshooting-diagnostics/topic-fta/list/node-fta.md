@@ -89,4 +89,4 @@ base_confidence: 0.7
 ---
 
 > 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
-> [[_archives/troubleshooting-diagnostics/topic-fta/list/node-fta.md|Node FTA 完整版]]
+> [[_archives/troubleshooting-diagnostics/topic-fta/list/node-fta|Node FTA 完整版]]

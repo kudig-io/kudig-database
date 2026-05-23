@@ -60,7 +60,7 @@ created: "2026-05-23"
 1. [SBOM 基础概念](#1-sbom-基础概念)
 2. [SBOM 标准格式对比](#2-sbom-标准格式对比)
 3. [Syft CLI 完整指南](#3-syft-cli-完整指南)
-4. [[entities/trivy.md|Trivy]] SBOM 生成](#4-trivy-sbom-生成)
+4. [[entities/trivy|Trivy]] SBOM 生成](#4-trivy-sbom-生成)
 5. [其他 SBOM 生成工具](#5-其他-sbom-生成工具)
 6. [SBOM 生命周期管理](#6-sbom-生命周期管理)
 7. [CI/CD 集成实践](#7-cicd-集成实践)
@@ -2402,8 +2402,8 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance KUDIG Database — Global MOC
-- [[domain-05-security-compliance/README.md|[[Domain 39: 供应链安全 (Supply Chain Security)|Domain 39: 供应链安全 (Supply Chain Security)]] Security]])]]
-- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README|[[Domain 39: 供应链安全 (Supply Chain Security)|Domain 39: 供应链安全 (Supply Chain Security)]] Security]])]]
+- [[domain-05-security-compliance/00-open-source-projects-index|Domain-39 供应链安全 — 开源项目索引]]
 - 供应链安全概述 (Supply Chain Security Overview)
 - 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 - SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance)
@@ -2421,4 +2421,4 @@ if __name__ == "__main__":
 - 04-sbom-vulnerability-analysis
 - 05-slsa-levels-implementation
 
-- [[domain-05-security-compliance/README.md|返回目录]]
+- [[domain-05-security-compliance/README|返回目录]]

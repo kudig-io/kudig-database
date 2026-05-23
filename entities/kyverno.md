@@ -60,10 +60,10 @@ Kyverno automates compliance checks for SOC 2, ISO 27001, PCI-DSS, and NIST CSF 
 
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
+- [[concepts/cloud-native-defense-in-depth|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
 - [[supply-chain-security]] — Software Supply Chain Security
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
-- [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
+- [[concepts/cloud-native-defense-in-depth|Cloud Native Defense in Depth]]
 - [[supply-chain-security|Supply Chain Security]]
 
 - 14-policy-engines-opa-kyverno

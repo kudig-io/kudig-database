@@ -1,6 +1,6 @@
 ---
 title: Operator 模式 × 可观测性
-description: '[[operator-pattern]] 描述 CRD + 自定义控制器的扩展模式，[[entities/prometheus-grafana.md|prometheus-grafana]] 描述 K8s 监控栈。wiki
+description: '[[operator-pattern]] 描述 CRD + 自定义控制器的扩展模式，[[entities/prometheus-grafana|prometheus-grafana]] 描述 K8s 监控栈。wiki
   将两者视为独立主题，但它们是深度耦合的：Prometheus Operator 不仅是 Operator 最成功的生产案例，更直接塑造了现代 K8s 可观测性的架构范式——Se'
 category: synthesis
 tags:
@@ -116,17 +116,17 @@ Operator 协调：
 ## 相关
 
 - [[operator-pattern]]
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
-- [[concepts/observability-pillars.md|observability-pillars]]
-- [[concepts/controller-pattern.md|controller-pattern]]
-- [[skills/develop-crd-operator.md|develop-crd-operator]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[concepts/observability-pillars|observability-pillars]]
+- [[concepts/controller-pattern|controller-pattern]]
+- [[skills/develop-crd-operator|develop-crd-operator]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 
 ## See Also
 
 - [[entities/kubernetes|Kubernetes]] Fault [[entities/distribution|Distribution]] and MTTR.md|Kubernetes Fault Distribution and MTTR]]
-- [[synthesis/Operator 模式 × Pod 生命周期.md|Operator 模式 × Pod 生命周期]]
-- [[synthesis/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]]
-- [[synthesis/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
+- [[synthesis/Operator 模式 × Pod 生命周期|Operator 模式 × Pod 生命周期]]
+- [[synthesis/Pod 生命周期 × Secret 管理|Pod 生命周期 × Secret 管理]]
+- [[synthesis/Pod 生命周期 × 存储模型|Pod 生命周期 × 存储模型]]

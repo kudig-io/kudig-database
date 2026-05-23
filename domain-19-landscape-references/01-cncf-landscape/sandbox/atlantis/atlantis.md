@@ -50,7 +50,7 @@ Atlantis 是一个 Terraform/OpenTofu Pull Request 自动化工具。它监听 G
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -67,17 +67,17 @@ Atlantis 是一个 Terraform/OpenTofu Pull Request 自动化工具。它监听 G
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
-- [[entities/vault.md|vault]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/vault|vault]]
 - [[deployment]]
-- [[concepts/secrets-management.md|secrets-management]]
+- [[concepts/secrets-management|secrets-management]]
 
 ## Related
 
 - [[dragonfly]] — Dragonfly
 - [[aeraki-mesh]] — Aeraki Mesh
 - [[opentofu]] — OpenTofu
-- [[entities/vault.md|vault]] — HashiCorp Vault
+- [[entities/vault|vault]] — HashiCorp Vault
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - atlantis

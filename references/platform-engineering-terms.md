@@ -38,7 +38,7 @@ created: "2026-05-23"
 
 本页汇总了 **平台工程** 领域的 19 个 Kubernetes 术语定义与概念说明。
 
-> **相关领域**: [[references/k8s-platform-extensions.md|k8s-platform-extensions]] | [[references/k8s-advanced-ecosystem.md|k8s-advanced-ecosystem]]
+> **相关领域**: [[references/k8s-platform-extensions|k8s-platform-extensions]] | [[references/k8s-advanced-ecosystem|k8s-advanced-ecosystem]]
 
 ---
 
@@ -226,8 +226,8 @@ Operator 是 Kubernetes 的软件扩展，它利用自定义资源（Custom Reso
 
 ## 相关页面
 
-- [[references/k8s-platform-extensions.md|k8s-platform-extensions]]
-- [[references/k8s-advanced-ecosystem.md|k8s-advanced-ecosystem]]
+- [[references/k8s-platform-extensions|k8s-platform-extensions]]
+- [[references/k8s-advanced-ecosystem|k8s-advanced-ecosystem]]
 
 ## 来源文件
 
@@ -257,4 +257,4 @@ Operator 是 Kubernetes 的软件扩展，它利用自定义资源（Custom Reso
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[argo]] — Argo Workflows
 - [[operator-pattern]] — Operator Pattern (CRD + Controller)
-- [[concepts/infrastructure-as-code.md|infrastructure-as-code]] — Infrastructure as Code
+- [[concepts/infrastructure-as-code|infrastructure-as-code]] — Infrastructure as Code

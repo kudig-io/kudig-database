@@ -490,8 +490,8 @@ echo "  CSI mounters: $(ls /var/lib/kubelet/plugins/kubernetes.io/csi/ 2>/dev/nu
 
 ## Related
 
-- [[log.md|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[log|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
 - 22-container-storage-deep-dive
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

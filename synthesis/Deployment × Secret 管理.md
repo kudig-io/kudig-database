@@ -68,7 +68,7 @@ lifecycle: reviewed
 lifecycle_changed: 2026-05-21
 tier: supporting
 relationships:
-- target: '[[entities/deployment.md]]'
+- target: '[[entities/deployment]]'
   type: uses
 ---
 

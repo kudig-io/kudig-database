@@ -42,7 +42,7 @@ Parsec 是一个平台安全抽象层，为应用程序提供统一的 API 来�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -58,14 +58,14 @@ Parsec 是一个平台安全抽象层，为应用程序提供统一的 API 来�
 
 ## 参考链接
 
-- [[entities/argocd.md|[[ArgoCD|argocd]]]]
-- [[entities/vault.md|[[HashiCorp Vault|vault]]]]
-- [[concepts/secrets-management.md|secrets-management]]
-- [[concepts/security-defense-depth.md|security-defense-depth]]
+- [[entities/argocd|[[ArgoCD|argocd]]]]
+- [[entities/vault|[[HashiCorp Vault|vault]]]]
+- [[concepts/secrets-management|secrets-management]]
+- [[concepts/security-defense-depth|security-defense-depth]]
 
 ## Related
 
-- [[entities/emissary-ingress.md|ingress]]]] — Emissary-Ingress
+- [[entities/emissary-ingress|ingress]]]] — Emissary-Ingress
 - [[kubevela]] — KubeVela
 - [[piraeus-datastore]] — [[Piraeus Datastore|Piraeus Datastore]]
 - [[k8up]] — K8up

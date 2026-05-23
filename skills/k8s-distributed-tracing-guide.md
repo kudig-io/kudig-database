@@ -102,15 +102,15 @@ created: "2026-05-23"
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
-- [[concepts/observability-pillars.md|[[Observability Pillars|Observability Pillars]]]]
-- [[skills/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]]
-- [[skills/k8s-logging-management-guide.md|Kubernetes 日志管理最佳实践]]
+- [[concepts/k8s-production-best-practices|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
+- [[concepts/observability-pillars|[[Observability Pillars|Observability Pillars]]]]
+- [[skills/k8s-monitoring-guide|Kubernetes 监控最佳实践]]
+- [[skills/k8s-logging-management-guide|Kubernetes 日志管理最佳实践]]
 
 ## Related
 
 - [[jaeger]] — Jaeger
 - [[helm]] — Helm
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/observability-pillars.md|observability-pillars]] — Observability Pillars
-- [[concepts/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[concepts/observability-pillars|observability-pillars]] — Observability Pillars
+- [[concepts/k8s-production-best-practices|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践

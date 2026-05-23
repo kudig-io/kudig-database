@@ -42,7 +42,7 @@ Kuasar 是一个统一的容器沙箱管理框架，支持在同一个节点上�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -70,6 +70,6 @@ Kuasar 是一个统一的容器沙箱管理框架，支持在同一个节点上�
 - [[containerd]] — containerd
 
 - kuasar
-- [[entities/urunc.md|[[urunc (Unikernel Container Runtime)|urunc]]]]
-- [[entities/hyperlight.md|Hyperlight]]
+- [[entities/urunc|[[urunc (Unikernel Container Runtime)|urunc]]]]
+- [[entities/hyperlight|Hyperlight]]
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference

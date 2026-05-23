@@ -42,7 +42,7 @@ Spiderpool 是一个 Kubernetes 的 Underlay 网络 IPAM (IP Address Management)
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -55,10 +55,10 @@ Spiderpool 是一个 Kubernetes 的 Underlay 网络 IPAM (IP Address Management)
 ## 参考链接
 
 - [[cilium]]
-- [[entities/cni-plugins.md|cni-plugins]]
+- [[entities/cni-plugins|cni-plugins]]
 - [[deployment]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
-- [[concepts/controller-pattern.md|controller-pattern]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[concepts/controller-pattern|controller-pattern]]
 
 ## Related
 

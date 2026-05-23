@@ -49,8 +49,8 @@ created: "2026-05-23"
 
 ## 与其他 Domain 的关系
 
-- [[domain-01-cluster-fundamentals/README.md|domain-01-cluster-fundamentals]] — 扩展机制基础
-- [[domain-07-platform-engineering/README.md|domain-07-platform-engineering]] — 平台扩展
+- [[domain-01-cluster-fundamentals/README|domain-01-cluster-fundamentals]] — 扩展机制基础
+- [[domain-07-platform-engineering/README|domain-07-platform-engineering]] — 平台扩展
 
 ## Related
 

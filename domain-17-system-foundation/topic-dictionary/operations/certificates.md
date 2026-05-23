@@ -51,7 +51,7 @@ created: "2026-05-23"
 - **API Server**：集群入口点，所有 `kubectl` 和组件都通过其 REST API 访问。
 - **[[etcd|etcd]] Server**：Kubernetes 的后端数据库，需要 TLS 保护键值存储访问。
 - **[[kubelet|Kubelet]]**：每个节点上的代理，提供 Pod/容器管理接口。
-- **Front-Proxy（可选）**：用于 API Server 的聚合层（Aggregation Layer），[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|扩展 Kubernetes API]]PI|Kubernetes API]]。
+- **Front-Proxy（可选）**：用于 API Server 的聚合层（Aggregation Layer），[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|扩展 Kubernetes API]]PI|Kubernetes API]]。
 
 ### 2. 客户端证书（Client Certificates）
 

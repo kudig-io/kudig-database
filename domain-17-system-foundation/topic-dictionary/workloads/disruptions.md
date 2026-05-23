@@ -193,8 +193,8 @@ kubectl get pdb -n <namespace> -o wide
 
 ## 交叉引用
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/deployments.md|Deployments]] 中断管理](./deployments.md)
-- [[entities/statefulset.md|StatefulSet]] 有序管理](./statefulsets.md)
+- [[domain-17-system-foundation/topic-dictionary/workloads/deployments|Deployments]] 中断管理](./deployments.md)
+- [[entities/statefulset|StatefulSet]] 有序管理](./statefulsets.md)
 - [工作负载概览与架构](../../domain-02-workloads-applications/01-workload-overview-architecture.md)
 - [节点 NotReady 诊断](../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md)
 - [Pod Pending 诊断](../../domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md)

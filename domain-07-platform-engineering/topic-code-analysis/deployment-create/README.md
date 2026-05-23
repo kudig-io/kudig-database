@@ -531,10 +531,10 @@ REVISION  CHANGE-CAUSE
 
 ## Related
 
-- [[skills/deployment-canary-and-bluegreen.md|deployment-canary-and-bluegreen]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/ko.md|ko]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
+- [[skills/deployment-canary-and-bluegreen|deployment-canary-and-bluegreen]]
+- [[entities/kubernetes|kubernetes]]
+- [[entities/ko|ko]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git|git]]
 - [[templates/cheat-sheet-template]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference

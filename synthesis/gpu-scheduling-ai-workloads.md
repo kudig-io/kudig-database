@@ -547,7 +547,7 @@ spec:
 - domain-02-workloads-applications/00-core-workloads
 - domain-14-ai-ml-infra/01-ai-infra
 - domain-14-ai-ml-infra/03-mlops
-- [[synthesis/ai-agent-ops-patterns.md|ai-agent-ops-patterns]]
+- [[synthesis/ai-agent-ops-patterns|ai-agent-ops-patterns]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 ## Related

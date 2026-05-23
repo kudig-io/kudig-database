@@ -44,7 +44,7 @@ description: '## 项目概述'
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -56,15 +56,15 @@ description: '## 项目概述'
 
 ## 参考链接
 
-- [[concepts/observability-pillars.md|observability-pillars]]
+- [[concepts/observability-pillars|observability-pillars]]
 - [[pod-lifecycle]]
-- [[entities/kube-scheduler.md|kube-scheduler]]
+- [[entities/kube-scheduler|kube-scheduler]]
 
 ## Related
 
-- [[journal/digest-2026-05-21.md|digest-2026-05-21]] — Wiki 全量知识库摘要 — 2026-05-21
-- [[references/k8s-advanced-ecosystem.md|k8s-advanced-ecosystem]] — 硬件知识体系、CNCF 全景生态与 eBPF 平台工程
-- [[skills/Agent Orchestration Patterns.md|[[Agent Orchestration Patterns for FTA|Agent Orchestration Patterns]]]] — Agent Orchestration Patterns for FTA
+- [[journal/digest-2026-05-21|digest-2026-05-21]] — Wiki 全量知识库摘要 — 2026-05-21
+- [[references/k8s-advanced-ecosystem|k8s-advanced-ecosystem]] — 硬件知识体系、CNCF 全景生态与 eBPF 平台工程
+- [[skills/Agent Orchestration Patterns|[[Agent Orchestration Patterns for FTA|Agent Orchestration Patterns]]]] — Agent Orchestration Patterns for FTA
 - observability.md|cncf-observability]] — CNCF 可观测性项目全景
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

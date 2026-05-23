@@ -1309,7 +1309,7 @@ test_environment_health() {
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-29-automated-testing-quality KUDIG Database — Global MOC
-- [[domain-08-release-change-management/README.md|Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
+- [[domain-08-release-change-management/README|Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
 - Domain-29 自动化测试与质量 — 开源项目索引
 - Selenium 企业级自动化测试平台
 - 企业级AI测试与质量保障深度实践

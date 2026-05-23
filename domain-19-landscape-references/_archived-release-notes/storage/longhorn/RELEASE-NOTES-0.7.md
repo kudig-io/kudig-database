@@ -44,7 +44,7 @@ Longhorn CRD API Version has been upgraded from `longhorn.rancher.io/v1alpha1` t
 Highlights:
 1. [Automatically reattach volume](https://github.com/longhorn/longhorn/issues/851) if the detaching is caused by the node reboots, Docker restarts, Kubernetes upgrades, etc. See [here](https://github.com/longhorn/longhorn/blob/v0.7.0/docs/recover-volume.md) for details.
 1. [Container Storage Interface (CSI) v1.1.0](https://github.com/longhorn/longhorn/issues/347), with [raw block volume support](https://github.com/longhorn/longhorn/issues/678).
-1. [[entities/k3s.md|K3S]] v0.10.0+](https://github.com/longhorn/longhorn/issues/835). For K3S < v0.10.0, please refer to the [CSI configuration doc](https://github.com/longhorn/longhorn/blob/v0.7.0/docs/csi-config.md#k3s).
+1. [[entities/k3s|K3S]] v0.10.0+](https://github.com/longhorn/longhorn/issues/835). For K3S < v0.10.0, please refer to the [CSI configuration doc](https://github.com/longhorn/longhorn/blob/v0.7.0/docs/csi-config.md#k3s).
 1. [NFSv4.1 support](https://github.com/longhorn/longhorn/issues/823).
 
 Upgrade:

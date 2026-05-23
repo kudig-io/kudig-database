@@ -96,17 +96,17 @@ Deployment Controller（有状态策略层）
 
 ## 相关
 
-- [[concepts/controller-pattern.md|controller-pattern]]
+- [[concepts/controller-pattern|controller-pattern]]
 - [[deployment]]
-- [[concepts/declarative-api.md|declarative-api]]
+- [[concepts/declarative-api|declarative-api]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 
 ## See Also
 
 - [[entities/prometheus|Prometheus]]-Grafana.md|可观测性支柱 × Prometheus-Grafana]]
-- [[synthesis/声明式 API × 控制器模式.md|声明式 API × 控制器模式]]
-- [[synthesis/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]]
-- [[synthesis/控制器模式 × 可观测性.md|控制器模式 × 可观测性]]
+- [[synthesis/声明式 API × 控制器模式|声明式 API × 控制器模式]]
+- [[synthesis/控制器模式 × Operator 模式|控制器模式 × Operator 模式]]
+- [[synthesis/控制器模式 × 可观测性|控制器模式 × 可观测性]]
 
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|Deployment Create — [[entities/kubernetes|Kubernetes]] Deployment 控制器源码分析]]
+- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|Deployment Create — [[entities/kubernetes|Kubernetes]] Deployment 控制器源码分析]]

@@ -53,7 +53,7 @@ CNI (Container Network Interface) 是一个定义容器网络配置的规范和�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -71,14 +71,14 @@ CNI (Container Network Interface) 是一个定义容器网络配置的规范和�
 
 - [[cilium]]
 - [[containerd]]
-- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
-- [[entities/networkpolicy.md|networkpolicy]]
-- [[concepts/container-runtime-comparison.md|container-runtime-comparison]]
+- [[concepts/cilium-ebpf-networking|cilium-ebpf-networking]]
+- [[entities/networkpolicy|networkpolicy]]
+- [[concepts/container-runtime-comparison|container-runtime-comparison]]
 
 ## Related
 
 - [[slimtoolkit]] — SlimToolkit
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[containerd]] — containerd
 - [[cri-o]] — CRI-O
@@ -87,9 +87,9 @@ CNI (Container Network Interface) 是一个定义容器网络配置的规范和�
 - 27-cni-troubleshooting-optimization
 - 03-cni-plugins-comparison
 - CNI 架构与核心原理
-- [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|03-networking-cni-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting|03-networking-cni-troubleshooting]]
 - 03-cilium-cni-architecture
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting|01-cni-troubleshooting]]
 - cni
 - RELEASE-NOTES-1.9
 - RELEASE-NOTES-0.8

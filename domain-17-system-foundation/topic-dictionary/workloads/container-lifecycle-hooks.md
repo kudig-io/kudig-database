@@ -317,8 +317,8 @@ kubectl delete pod <name> --grace-period=0 --force
 
 - [Pod 生命周期](pod-lifecycle.md) — 完整的 Pod 生命周期阶段和终止流程
 - [容器环境](container-environment.md) — 容器运行时的环境信息
-- [[domain-17-system-foundation/topic-dictionary/workloads/disruptions.md|Disruptions]]](disruptions.md) — PDB 与优雅终止的配合
-- [[domain-17-system-foundation/topic-dictionary/workloads/deployments.md|Deployments]]](deployments.md) — 滚动更新中的 PreStop 行为
+- [[domain-17-system-foundation/topic-dictionary/workloads/disruptions|Disruptions]]](disruptions.md) — PDB 与优雅终止的配合
+- [[domain-17-system-foundation/topic-dictionary/workloads/deployments|Deployments]]](deployments.md) — 滚动更新中的 PreStop 行为
 
 ## 参考链接
 

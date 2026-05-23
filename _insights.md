@@ -23,23 +23,23 @@ updated: 2026-05-24
 | 1 | [[kubernetes]] | 415 | 21 |
 | 2 | [[etcd]] | 383 | 13 |
 | 3 | [[kubelet]] | 295 | 7 |
-| 4 | [[concepts/kubernetes-architecture-overview.md]] | 243 | 0 |
-| 5 | [[entities/kubernetes.md]] | 214 | 0 |
-| 6 | [[domain-17-system-foundation/topic-cheat-sheet/k8s.md]] | 175 | 0 |
-| 7 | [[domain-17-system-foundation/topic-cheat-sheet/go.md]] | 163 | 0 |
+| 4 | [[concepts/kubernetes-architecture-overview]] | 243 | 0 |
+| 5 | [[entities/kubernetes]] | 214 | 0 |
+| 6 | [[domain-17-system-foundation/topic-cheat-sheet/k8s]] | 175 | 0 |
+| 7 | [[domain-17-system-foundation/topic-cheat-sheet/go]] | 163 | 0 |
 | 8 | [[containerd]] | 149 | 5 |
 | 9 | [[deployment]] | 145 | 11 |
 | 10 | [[pod-lifecycle]] | 100 | 10 |
-| 11 | [[domain-20-application-patterns/topic-application-architecture/README.md]] | 96 | 0 |
-| 12 | [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md]] | 95 | 0 |
-| 13 | [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md]] | 95 | 0 |
-| 14 | [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md]] | 95 | 0 |
-| 15 | [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md]] | 95 | 0 |
-| 16 | [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md]] | 95 | 0 |
-| 17 | [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md]] | 95 | 0 |
-| 18 | [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md]] | 95 | 0 |
-| 19 | [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md]] | 95 | 0 |
-| 20 | [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md]] | 95 | 0 |
+| 11 | [[domain-20-application-patterns/topic-application-architecture/README]] | 96 | 0 |
+| 12 | [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture]] | 95 | 0 |
+| 13 | [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture]] | 95 | 0 |
+| 14 | [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture]] | 95 | 0 |
+| 15 | [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture]] | 95 | 0 |
+| 16 | [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture]] | 95 | 0 |
+| 17 | [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture]] | 95 | 0 |
+| 18 | [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture]] | 95 | 0 |
+| 19 | [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture]] | 95 | 0 |
+| 20 | [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture]] | 95 | 0 |
 
 ## 跨域桥梁页面（连接多个 Domain 的页面）
 

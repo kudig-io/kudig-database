@@ -36,8 +36,8 @@ relationships:
 - `domain-12-cloud-providers/01-alibaba-cloud/README.md` — [[domain-17-system-foundation/topic-dictionary/networking/ingress|ingress]]-gateway-failure.md]] → plain text
 
 ## Cross-References Added (orphan rescue)
-- `synthesis/gitops-sre-release-gate.md` — now linked from: [[entities/argo|argo]]-cd-enterprise-gitops.md]], [[domain-09-reliability-engineering/07-sre-practices/02-release-gate-slo-based.md]]
-- `[[domain-17-system-foundation/topic-dictionary/networking/service|service]]-mesh-zero-trust-security.md` — now linked from: [[entities/istio|istio]]-enterprise-service-mesh.md]], [[domain-05-security-compliance/02-network-security/07-zero-trust-security-architecture.md]]
+- `synthesis/gitops-sre-release-gate.md` — now linked from: [[entities/argo|argo]]-cd-enterprise-gitops.md]], [[domain-09-reliability-engineering/07-sre-practices/02-release-gate-slo-based]]
+- `[[domain-17-system-foundation/topic-dictionary/networking/service|service]]-mesh-zero-trust-security.md` — now linked from: [[entities/istio|istio]]-enterprise-service-mesh.md]], [[domain-05-security-compliance/02-network-security/07-zero-trust-security-architecture]]
 - `synthesis/finops-resource-governance.md` — already linked (previously fixed)
 
 ## Scope

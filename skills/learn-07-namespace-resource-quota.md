@@ -413,8 +413,8 @@ kubectl describe resourcequota -n <namespace>
 
 ## Related
 
-- [[skills/learn-root.md|learn-root]] — [[Kubernetes|Kubernetes]]es 培训：Root|Kubernetes 培训：Root]]
+- [[skills/learn-root|learn-root]] — [[Kubernetes|Kubernetes]]es 培训：Root|Kubernetes 培训：Root]]
 - cronjob.md|learn-11-job-cronjob]] — 第九课：Job 和 CronJob - 任务调度
-- [[skills/learn-09-hpa-basics.md|learn-09-hpa-basics]] — 第九课：HPA - 自动伸缩
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[skills/learn-09-hpa-basics|learn-09-hpa-basics]] — 第九课：HPA - 自动伸缩
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
 - [[deployment]] — Deployment

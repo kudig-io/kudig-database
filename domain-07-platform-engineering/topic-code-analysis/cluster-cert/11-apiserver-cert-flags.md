@@ -463,8 +463,8 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -ext subjectAltName
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/08-rbac-mapping.md|08-rbac-mapping]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md|12-kubeconfig-certs]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[entities/kubernetes|kubernetes]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/08-rbac-mapping|08-rbac-mapping]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/12-kubeconfig-certs|12-kubeconfig-certs]]

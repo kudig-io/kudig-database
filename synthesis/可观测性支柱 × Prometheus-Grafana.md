@@ -101,8 +101,8 @@ Prometheus 本身不存储日志和追踪，但它的标签模型定义了关联
 
 ## 相关
 
-- [[concepts/observability-pillars.md|observability-pillars]]
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[concepts/observability-pillars|observability-pillars]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
 - [[jaeger]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
@@ -110,8 +110,8 @@ Prometheus 本身不存储日志和追踪，但它的标签模型定义了关联
 ## See Also
 
 - [[entities/etcd|etcd]] × 可观测性.md|etcd × 可观测性]]
-- [[synthesis/kubeadm-cluster-operations.md|kubeadm-cluster-operations]]
-- [[synthesis/声明式 API × 控制器模式.md|声明式 API × 控制器模式]]
+- [[synthesis/kubeadm-cluster-operations|kubeadm-cluster-operations]]
+- [[synthesis/声明式 API × 控制器模式|声明式 API × 控制器模式]]
 - [[entities/deployment|Deployment]].md|控制器模式 × Deployment]]
 
 ## Related

@@ -157,10 +157,10 @@ kubeadm 采用最小化设计，以下组件需要手动安装：
 
 ## 相关技能
 
-- [[skills/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]]
-- [[skills/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]]
-- [[concepts/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]]
-- [[skills/configure-health-probes.md|配置健康探针]]
+- [[skills/kubeadm-ha-cluster-setup|kubeadm 高可用集群搭建]]
+- [[skills/kubeadm-cluster-deletion|kubeadm 集群删除操作]]
+- [[concepts/kubernetes-pki-certificate-system|Kubernetes PKI 证书体系]]
+- [[skills/configure-health-probes|配置健康探针]]
 - [[deployment|Deployment]]
 
 ## Related
@@ -169,7 +169,7 @@ kubeadm 采用最小化设计，以下组件需要手动安装：
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/kubernetes-pki-certificate-system.md|kubernetes-pki-certificate-system]] — Kubernetes PKI 证书体系
+- [[concepts/kubernetes-pki-certificate-system|kubernetes-pki-certificate-system]] — Kubernetes PKI 证书体系
 
 - 15-kubelet-deep-dive
 - 17-apiserver-tuning

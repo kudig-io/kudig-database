@@ -188,16 +188,16 @@ metadata:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/docker|docker]]
+- [[entities/kubernetes|kubernetes]]
 - USER
 - [[references/KUDIG Cheat Sheet Index|KUDIG Cheat Sheet Index]] — Cross-reference
 
 ## See Also
 
-- [[domain-12-cloud-providers/04-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
-- [[domain-12-cloud-providers/04-alicloud-ack/242-ack-vpc-network.md|242-ack-vpc-network]]
-- [[domain-12-cloud-providers/04-alicloud-ack/244-ack-ros-iac.md|244-ack-ros-iac]]
-- [[domain-12-cloud-providers/04-alicloud-ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
+- [[domain-12-cloud-providers/04-alicloud-ack/241-ack-slb-nlb-alb|241-ack-slb-nlb-alb]]
+- [[domain-12-cloud-providers/04-alicloud-ack/242-ack-vpc-network|242-ack-vpc-network]]
+- [[domain-12-cloud-providers/04-alicloud-ack/244-ack-ros-iac|244-ack-ros-iac]]
+- [[domain-12-cloud-providers/04-alicloud-ack/245-ack-ebs-storage|245-ack-ebs-storage]]

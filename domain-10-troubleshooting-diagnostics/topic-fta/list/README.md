@@ -64,7 +64,7 @@ created: "2026-05-23"
 - 完整的 Mermaid 故障树图（OR/AND 门结构）
 - 底事件详细定义（severity/probability/MTTR/detection/remediation）
 - JSON 工作流（支持 Agent 自动化遍历）
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|[[Kubernetes 生产环境速查卡|k8s]]]] 版本兼容说明（1.19–1.30）
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|[[Kubernetes 生产环境速查卡|k8s]]]] 版本兼容说明（1.19–1.30）
 
 ---
 
@@ -106,8 +106,8 @@ created: "2026-05-23"
 
 | 文件 | 大小 | 覆盖范围 | 底事件数 |
 |:---|---:|:---|:---:|
-| [apiserver-fta.md]([[skills/apiserver-fta.md|apiserver-fta]].md) | 36.1 KB | API Server 认证/授权/准入/etcd 连接/限流/审计 | ~42 |
-| [scheduler-fta.md]([[skills/scheduler-fta.md|scheduler-fta]].md) | 30.3 KB | Scheduler 过滤/打分/抢占/亲和性/资源/扩展点 | ~35 |
+| [apiserver-fta.md]([[skills/apiserver-fta|apiserver-fta]].md) | 36.1 KB | API Server 认证/授权/准入/etcd 连接/限流/审计 | ~42 |
+| [scheduler-fta.md]([[skills/scheduler-fta|scheduler-fta]].md) | 30.3 KB | Scheduler 过滤/打分/抢占/亲和性/资源/扩展点 | ~35 |
 | [controller-manager-fta.md](controller-manager-fta.md) | 29.4 KB | Controller Manager Leader 选举/控制器/同步/限速 | ~34 |
 | [etcd-fta.md](etcd-fta.md) | 27.4 KB | etcd 集群/Raft/存储/快照/认证/性能 | ~32 |
 
@@ -121,7 +121,7 @@ created: "2026-05-23"
 
 | 文件 | 大小 | 覆盖范围 | 底事件数 |
 |:---|---:|:---|:---:|
-| [rbac-fta.md]([[skills/rbac-fta.md|rbac-fta]].md) | 24.2 KB | RBAC Role/ClusterRole/Binding/ServiceAccount/权限不足 | ~28 |
+| [rbac-fta.md]([[skills/rbac-fta|rbac-fta]].md) | 24.2 KB | RBAC Role/ClusterRole/Binding/ServiceAccount/权限不足 | ~28 |
 | [certificate-fta.md](certificate-fta.md) | 52.6 KB | 证书签发/轮换/过期/CA 链/cert-manager/TLS | ~60 |
 | [webhook-admission-fta.md](webhook-admission-fta.md) | 50.5 KB | Webhook 超时/TLS/失败策略/副作用/匹配规则 | ~58 |
 | [psp-scc-fta.md](psp-scc-fta.md) | 44.0 KB | PSP/SCC/PSA 策略迁移/安全上下文/特权容器 | ~50 |
@@ -155,7 +155,7 @@ created: "2026-05-23"
 
 | 文件 | 大小 | 覆盖范围 | 底事件数 |
 |:---|---:|:---|:---:|
-| [helm-fta.md]([[skills/helm-fta.md|helm-fta]].md) | 14.8 KB | Helm Chart/Hook/API 兼容/RBAC/状态/回滚 | ~18 |
+| [helm-fta.md]([[skills/helm-fta|helm-fta]].md) | 14.8 KB | Helm Chart/Hook/API 兼容/RBAC/状态/回滚 | ~18 |
 | [crd-operator-fta.md](crd-operator-fta.md) | 35.9 KB | CRD 定义/Operator/控制器/Finalizer/版本转换 | ~42 |
 | [gitops-argocd-fta.md](gitops-argocd-fta.md) | 30.4 KB | ArgoCD 同步/漂移/Git 仓库/健康检查/RBAC | ~35 |
 

@@ -92,12 +92,12 @@ created: "2026-05-23"
 ## Related
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[entities/argocd.md|argocd]] — ArgoCD
-- [[concepts/tcp-udp-protocol-stack.md|tcp-udp-protocol-stack]] — TCP/UDP Protocol Stack
-- [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
-- [[concepts/service-mesh-architecture.md|service-mesh-architecture]] — Service Mesh Architecture
-- [[concepts/tcp-udp-protocol-stack.md|TCP/UDP Protocol Stack]]
-- [[concepts/service-mesh-architecture.md|Service Mesh Architecture]]
-- [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
+- [[entities/argocd|argocd]] — ArgoCD
+- [[concepts/tcp-udp-protocol-stack|tcp-udp-protocol-stack]] — TCP/UDP Protocol Stack
+- [[concepts/cloud-native-defense-in-depth|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
+- [[concepts/service-mesh-architecture|service-mesh-architecture]] — Service Mesh Architecture
+- [[concepts/tcp-udp-protocol-stack|TCP/UDP Protocol Stack]]
+- [[concepts/service-mesh-architecture|Service Mesh Architecture]]
+- [[concepts/cloud-native-defense-in-depth|Cloud Native Defense in Depth]]
 
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/11-network-cleanup.md|11-network-cleanup]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/11-network-cleanup|11-network-cleanup]]

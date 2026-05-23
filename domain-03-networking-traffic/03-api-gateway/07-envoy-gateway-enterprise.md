@@ -76,7 +76,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 项目概述 -->## 1. 项目概述
 
-Envoy Gateway（简称 EG）是 Envoy 社区于 2022 年正式发起的官方 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 网关项目，目标是以 **Gateway API First** 的设计原则，为 Envoy Proxy 提供标准化、云原生的控制平面。
+Envoy Gateway（简称 EG）是 Envoy 社区于 2022 年正式发起的官方 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 网关项目，目标是以 **Gateway API First** 的设计原则，为 Envoy Proxy 提供标准化、云原生的控制平面。
 
 #<!-- chunk: 核心定位 -->## 核心定位
 
@@ -1075,7 +1075,7 @@ curl http://localhost:19000/ready
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-40-cloud-native-api-gateway MOC
-- [[domain-03-networking-traffic/README.md|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
+- [[domain-03-networking-traffic/README|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
 - Domain-40 云原生 API 网关 — 开源项目索引
 - 01 - 云原生 API 网关架构总览
 - 02 - Kubernetes Gateway API 标准深度解析

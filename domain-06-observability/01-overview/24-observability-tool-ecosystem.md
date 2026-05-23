@@ -677,7 +677,7 @@ tco_analysis_framework:
 ## Obsidian 相关文档
 
 - domain-06-observability KUDIG Database — Global MOC
-- [[domain-06-observability/README.md|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
+- [[domain-06-observability/README|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
 - index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
@@ -696,7 +696,7 @@ tco_analysis_framework:
 - 25-troubleshooting-overview
 - 26-troubleshooting-tools
 
-- [[domain-06-observability/README.md|返回目录]]
+- [[domain-06-observability/README|返回目录]]
 
 ## Related
 

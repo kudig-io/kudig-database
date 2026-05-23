@@ -43,7 +43,7 @@ Defines the standardized YAML frontmatter format for all 3,337+ documents in the
 | `title` | string | Document title | "Kubernetes Production Environment Quick Reference" |
 | `description` | string | Brief document description | "Covers 90%+ of production commands" |
 | `category` | enum | Document category | `docs`, `fta`, `skills`, `cheatsheet`, `scenario`, `moc` |
-| `tags` | array | Document tags from [[references/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]] | `[k8s, troubleshooting, etcd]` |
+| `tags` | array | Document tags from [[references/KUDIG Tag Dictionary|KUDIG Tag Dictionary]] | `[k8s, troubleshooting, etcd]` |
 
 ## Recommended Fields
 
@@ -101,10 +101,10 @@ audience: [SRE, 运维工程师]  - name: KUDIG Team
 
 ## Related
 
-- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
+- [[entities/kubelet|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[references/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
-- [[references/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
-- [[docs/SYNONYM-DICTIONARY.md|SYNONYM-DICTIONARY]]
-- [[docs/FRONTMATTER-SPEC.md|KUDIG Frontmatter 规范]]
+- [[references/KUDIG Tag Dictionary|KUDIG Tag Dictionary]]
+- [[references/KUDIG Scenario Taxonomy|KUDIG Scenario Taxonomy]]
+- [[docs/SYNONYM-DICTIONARY|SYNONYM-DICTIONARY]]
+- [[docs/FRONTMATTER-SPEC|KUDIG Frontmatter 规范]]

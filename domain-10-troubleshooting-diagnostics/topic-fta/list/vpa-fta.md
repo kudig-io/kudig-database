@@ -175,7 +175,7 @@ flowchart TD
 
 ## See Also
 
-- [[skills/ts-storage.md|ts-storage]]
-- [[skills/ts-workloads.md|ts-workloads]]
-- [[skills/webhook-admission-fta.md|webhook-admission-fta]]
-- [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
+- [[skills/ts-storage|ts-storage]]
+- [[skills/ts-workloads|ts-workloads]]
+- [[skills/webhook-admission-fta|webhook-admission-fta]]
+- [[skills/Agent Orchestration Patterns|Agent Orchestration Patterns]]

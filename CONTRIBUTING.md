@@ -1,3 +1,12 @@
+---
+title: "文件标题"
+category: meta
+tags: ["meta", "visibility/public"]
+sources: ["auto-generated"]
+created: 2026-05-24
+updated: 2026-05-24
+---
+
 # How to Contribute
 
 ## Pull Requests

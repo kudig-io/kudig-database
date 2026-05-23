@@ -895,7 +895,7 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
     "major": "1",
     "minor": "35",
     "gitVersion": "v1.35.3",
-    "gitCommit": "6c1cd99aef09161ddb07b8ade6c9564e9b9[[entities/bfe.md|bfe]]27",
+    "gitCommit": "6c1cd99aef09161ddb07b8ade6c9564e9b9[[entities/bfe|bfe]]27",
     "gitTreeState": "clean",
     "buildDate": "2026-03-18T18:30:07Z",
     "goVersion": "go1.26.1",
@@ -2029,7 +2029,7 @@ kubectl plugin list --name-only
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -2048,5 +2048,5 @@ kubectl plugin list --name-only
 - 32-kubeadm-cluster-lifecycle
 - 32-kubeadm-upgrade-complete-guide
 
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/01-overview.md|01-overview]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/01-overview.md|01-overview]]
+- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/01-overview|01-overview]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/01-overview|01-overview]]

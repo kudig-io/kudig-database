@@ -375,10 +375,10 @@ kubectl logs -n kube-system -l component=kube-apiserver --tail=20
 ## Related
 
 - 29-agentscope-studio-skill-demo
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/coredns.md|coredns]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[entities/kubernetes|kubernetes]]
+- [[entities/coredns|coredns]]
 
 - 48-openclaw-skill-mechanism
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

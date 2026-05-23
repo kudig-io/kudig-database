@@ -1122,7 +1122,7 @@ kubectl logs -n gpu-operator -l app=nvidia-device-plugin-daemonset --tail=100
 ## Obsidian 相关文档
 
 - domain-11-ai-infra MOC
-- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
 - Domain-11 AI 基础设施 — 开源项目索引
 - AI 基础设施架构
 - 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
@@ -1143,7 +1143,7 @@ kubectl logs -n gpu-operator -l app=nvidia-device-plugin-daemonset --tail=100
 - 分布式训练框架
 - 相关知识域: domain-02-workloads-applications
 - 相关知识域: domain-03-networking-traffic
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|速查卡: go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|速查卡: go]]
 - [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
 
 ## See Also

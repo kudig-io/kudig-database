@@ -859,9 +859,9 @@ echo "Diagnostic package created: ${DIAG_DIR}.tar.gz"
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README.md|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 04-企业级监控体系
 - 05-日志收集分析平台
@@ -873,7 +873,7 @@ echo "Diagnostic package created: ${DIAG_DIR}.tar.gz"
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-production-architecture-design-principles]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-production-architecture-design-principles]]
 - 02-multi-cloud-hybrid-deployment-strategy
 - 04-enterprise-monitoring-system
 - 05-logging-collection-analysis-platform

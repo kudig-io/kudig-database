@@ -62,13 +62,13 @@ Multiple scheduler instances run with leader election. Only the leader schedules
 ## Related
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
-- [[concepts/scheduling-algorithm.md|scheduling-algorithm]] — Scheduling Algorithm
-- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
-- [[concepts/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
-- [[concepts/scheduling-algorithm.md|Scheduling Algorithm]]
-- [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
-- [[concepts/resource-management.md|Resource Management]]
-- [[concepts/high-availability-patterns.md|High Availability Patterns]]
+- [[concepts/resource-management|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[concepts/scheduling-algorithm|scheduling-algorithm]] — Scheduling Algorithm
+- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/high-availability-patterns|high-availability-patterns]] — High Availability Patterns
+- [[concepts/scheduling-algorithm|Scheduling Algorithm]]
+- [[concepts/kubernetes-architecture-overview|Kubernetes Architecture Overview]]
+- [[concepts/resource-management|Resource Management]]
+- [[concepts/high-availability-patterns|High Availability Patterns]]
 
 - 20-kube-scheduler-deep-dive

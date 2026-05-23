@@ -27,7 +27,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-# topic-application-architecture [[MOC.md|MOC]]
+# topic-application-architecture [[MOC|MOC]]
 
 > **MOC 版本**: 1.0
 > **专题**: topic-application-architecture
@@ -170,7 +170,7 @@ created: "2026-05-23"
 ## Related
 
 - 01-plane-architecture-overview
-- [[entities/kubernetes.md|kubernetes]]
+- [[entities/kubernetes|kubernetes]]
 - daily-ops
-- [[log.md|log]]
+- [[log|log]]
 - [[domain-19-landscape-references/topic-index/README|topic-index 深度研究入口使用指南]] — Cross-reference

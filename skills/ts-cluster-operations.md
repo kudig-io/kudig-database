@@ -361,8 +361,8 @@ Kustomize 问题
 
 ## 相关链接
 
-- [[references/k8s-knowledge-map.md|K8s 知识图谱]]
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[references/k8s-knowledge-map|K8s 知识图谱]]
+- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
 
 ## Related
 

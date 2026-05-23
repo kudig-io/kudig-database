@@ -170,7 +170,7 @@ kubectl get svc <name> -o jsonpath='{.spec.clusterIP}'
 
 - [Service](service.md) — Service 类型和 ClusterIP 的使用
 - [DNS for Services](dns-for-services-and-[[Pods|pods]].md) — ClusterIP 与 DNS 记录的关系
-- [[domain-17-system-foundation/topic-dictionary/networking/ipv4-ipv6-dual-stack.md|IPv4/IPv6 Dual Stack]]](ipv4-ipv6-dual-stack.md) — 双栈 Service 的 IP 分配
+- [[domain-17-system-foundation/topic-dictionary/networking/ipv4-ipv6-dual-stack|IPv4/IPv6 Dual Stack]]](ipv4-ipv6-dual-stack.md) — 双栈 Service 的 IP 分配
 
 ## 参考链接
 

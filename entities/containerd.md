@@ -72,25 +72,25 @@ journalctl -u containerd -f
 
 ## Related
 
-- [[concepts/linux-container-foundation.md|linux-container-foundation]] — Linux Container Foundation
-- [[concepts/docker-architecture.md|docker-architecture]] — Docker Architecture and Container Runtime
-- [[concepts/container-runtime-comparison.md|container-runtime-comparison]] — Container Runtime Comparison
+- [[concepts/linux-container-foundation|linux-container-foundation]] — Linux Container Foundation
+- [[concepts/docker-architecture|docker-architecture]] — Docker Architecture and Container Runtime
+- [[concepts/container-runtime-comparison|container-runtime-comparison]] — Container Runtime Comparison
 - [[docker]] — Docker
-- [[entities/container-runtime.md|container-runtime]] — Container Runtime
-- [[concepts/docker-architecture.md|Docker Architecture]]
-- [[concepts/container-runtime-comparison.md|Container Runtime Comparison]]
-- [[concepts/linux-container-foundation.md|Linux Container Foundation]]
+- [[entities/container-runtime|container-runtime]] — Container Runtime
+- [[concepts/docker-architecture|Docker Architecture]]
+- [[concepts/container-runtime-comparison|Container Runtime Comparison]]
+- [[concepts/linux-container-foundation|Linux Container Foundation]]
 
 - 07-containerd-disaster-recovery
 - RELEASE-NOTES-1.3
 - RELEASE-NOTES-0.2
 - RELEASE-NOTES-1.7
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.0|RELEASE-NOTES-2.0]]
 - RELEASE-NOTES-1.6
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.1|RELEASE-NOTES-2.1]]
 - RELEASE-NOTES-1.2
 - RELEASE-NOTES-1.5
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.2|RELEASE-NOTES-2.2]]
 - RELEASE-NOTES-1.1
 - RELEASE-NOTES-0.0
 - RELEASE-NOTES-1.0

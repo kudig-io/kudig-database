@@ -789,10 +789,10 @@ curl -s http://127.0.0.1:2381/metrics | grep -E 'etcd_server_has_leader|etcd_ser
 
 ## Related
 
-- [[hot.md|hot]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/operations/certificates.md|certificates]]
+- [[hot|hot]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[entities/kubernetes|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/operations/certificates|certificates]]
 - [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

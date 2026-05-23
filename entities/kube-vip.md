@@ -35,7 +35,7 @@ kube-vip 为 Kubernetes 集群提供虚拟 IP (VIP) 和负载均衡功能。它�
 
 ## 核心能力
 
-- **控制平面 HA**: 为 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] Server 提供 VIP
+- **控制平面 HA**: 为 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] Server 提供 VIP
 - **Service LoadBalancer**: 裸金属 LoadBalancer 实现
 - **ARP/BGP**: 支持 Layer 2 (ARP) 和 Layer 3 (BGP) 模式
 - **Leader 选举**: 基于 Raft 或 Kubernetes Lease 的选举
@@ -44,7 +44,7 @@ kube-vip 为 Kubernetes 集群提供虚拟 IP (VIP) 和负载均衡功能。它�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -63,9 +63,9 @@ kube-vip 为 Kubernetes 集群提供虚拟 IP (VIP) 和负载均衡功能。它�
 
 - [[deployment]]
 - [[operator-pattern]]
-- [[concepts/controller-pattern.md|controller-pattern]]
+- [[concepts/controller-pattern|controller-pattern]]
 - [[pod-lifecycle]]
-- [[concepts/security-defense-depth.md|security-defense-depth]]
+- [[concepts/security-defense-depth|security-defense-depth]]
 
 ## Related
 

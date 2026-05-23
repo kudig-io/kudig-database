@@ -65,19 +65,19 @@ created: "2026-05-23"
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-17-system-foundation/topic-cheat-sheet/docker.md|[[Docker & Containerd 速查卡|Docker]] & [[containerd|Containerd]] 速查表]] |  | cheatsheet, quick-reference |  |
-| 2 | [[domain-17-system-foundation/topic-cheat-sheet/gateway-api.md|[[Kubernetes|Kubernetes]]es Gateway API 速查卡|Kubernetes Gateway API 速查卡]]]] |  | cheatsheet, quick-reference |  |
-| 3 | [[domain-17-system-foundation/topic-cheat-sheet/git.md|Git 速查表]] |  | cheatsheet, quick-reference |  |
-| 4 | [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|GitOps 生产环境速查卡]] |  | cheatsheet, quick-reference, daily-ops |  |
-| 5 | [[domain-17-system-foundation/topic-cheat-sheet/go.md|Go 生产环境速查卡]] |  | cheatsheet, quick-reference |  |
-| 6 | [[domain-17-system-foundation/topic-cheat-sheet/helm.md|Helm 生产环境速查卡]] |  | cheatsheet, quick-reference |  |
-| 7 | [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|Kubernetes 生产环境速查卡]] | 入门 | k8s, kubernetes, cheatsheet | 5min |
-| 8 | [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|kubectl 场景速查卡]] |  | cheatsheet, quick-reference |  |
-| 9 | [[domain-17-system-foundation/topic-cheat-sheet/linux.md|Linux 生产环境速查卡]] |  | cheatsheet, quick-reference |  |
-| 10 | [[domain-17-system-foundation/topic-cheat-sheet/networking.md|网络诊断速查表]] |  | cheatsheet, quick-reference, networking |  |
-| 11 | [[domain-17-system-foundation/topic-cheat-sheet/promql.md|PromQL 速查表]] |  | cheatsheet, quick-reference |  |
-| 12 | [[domain-17-system-foundation/topic-cheat-sheet/sql.md|SQL 速查表]] |  | cheatsheet, quick-reference |  |
-| 13 | [[domain-17-system-foundation/topic-cheat-sheet/tls-pki.md|TLS/SSL 与 PKI 速查表]] |  | cheatsheet, quick-reference |  |
+| 1 | [[domain-17-system-foundation/topic-cheat-sheet/docker|[[Docker & Containerd 速查卡|Docker]] & [[containerd|Containerd]] 速查表]] |  | cheatsheet, quick-reference |  |
+| 2 | [[domain-17-system-foundation/topic-cheat-sheet/gateway-api|[[Kubernetes|Kubernetes]]es Gateway API 速查卡|Kubernetes Gateway API 速查卡]]]] |  | cheatsheet, quick-reference |  |
+| 3 | [[domain-17-system-foundation/topic-cheat-sheet/git|Git 速查表]] |  | cheatsheet, quick-reference |  |
+| 4 | [[domain-17-system-foundation/topic-cheat-sheet/gitops|GitOps 生产环境速查卡]] |  | cheatsheet, quick-reference, daily-ops |  |
+| 5 | [[domain-17-system-foundation/topic-cheat-sheet/go|Go 生产环境速查卡]] |  | cheatsheet, quick-reference |  |
+| 6 | [[domain-17-system-foundation/topic-cheat-sheet/helm|Helm 生产环境速查卡]] |  | cheatsheet, quick-reference |  |
+| 7 | [[domain-17-system-foundation/topic-cheat-sheet/k8s|Kubernetes 生产环境速查卡]] | 入门 | k8s, kubernetes, cheatsheet | 5min |
+| 8 | [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet|kubectl 场景速查卡]] |  | cheatsheet, quick-reference |  |
+| 9 | [[domain-17-system-foundation/topic-cheat-sheet/linux|Linux 生产环境速查卡]] |  | cheatsheet, quick-reference |  |
+| 10 | [[domain-17-system-foundation/topic-cheat-sheet/networking|网络诊断速查表]] |  | cheatsheet, quick-reference, networking |  |
+| 11 | [[domain-17-system-foundation/topic-cheat-sheet/promql|PromQL 速查表]] |  | cheatsheet, quick-reference |  |
+| 12 | [[domain-17-system-foundation/topic-cheat-sheet/sql|SQL 速查表]] |  | cheatsheet, quick-reference |  |
+| 13 | [[domain-17-system-foundation/topic-cheat-sheet/tls-pki|TLS/SSL 与 PKI 速查表]] |  | cheatsheet, quick-reference |  |
 
 ---
 
@@ -96,7 +96,7 @@ created: "2026-05-23"
 - [[MOC]]
 - [[MOC]]
 
-- [[domain-07-platform-engineering/topic-code-analysis/MOC.md|topic-functions MOC]]
+- [[domain-07-platform-engineering/topic-code-analysis/MOC|topic-functions MOC]]
 - [[_reports/WIKI-LINT-REPORT-2026-05-21|Wiki Lint Report — 2026-05-21]] — Cross-reference
 - [[references/release-notes-storage|发布说明索引 — 存储]] — Cross-reference
 - [[references/release-notes-observability|发布说明索引 — 可观测性]] — Cross-reference

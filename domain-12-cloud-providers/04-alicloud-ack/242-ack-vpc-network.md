@@ -185,16 +185,16 @@ graph TD
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/docker|docker]]
+- [[entities/kubernetes|kubernetes]]
 - [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
 
 ## See Also
 
-- [[domain-12-cloud-providers/04-alicloud-ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
-- [[domain-12-cloud-providers/04-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
-- [[domain-12-cloud-providers/04-alicloud-ack/243-ack-ram-authorization.md|243-ack-ram-authorization]]
-- [[domain-12-cloud-providers/04-alicloud-ack/244-ack-ros-iac.md|244-ack-ros-iac]]
+- [[domain-12-cloud-providers/04-alicloud-ack/240-ack-ecs-compute|240-ack-ecs-compute]]
+- [[domain-12-cloud-providers/04-alicloud-ack/241-ack-slb-nlb-alb|241-ack-slb-nlb-alb]]
+- [[domain-12-cloud-providers/04-alicloud-ack/243-ack-ram-authorization|243-ack-ram-authorization]]
+- [[domain-12-cloud-providers/04-alicloud-ack/244-ack-ros-iac|244-ack-ros-iac]]

@@ -149,7 +149,7 @@ curl -sk https://localhost:10259/metrics | grep 'scheduler_pending_pods.*gated'
 ## 交叉引用
 
 - [Kubernetes 调度器](./kubernetes-scheduler.md) — 调度器如何处理 gated Pod
-- [[domain-17-system-foundation/topic-dictionary/scheduling/gang-scheduling.md|Gang Scheduling]]](./gang-scheduling.md) — 结合 scheduling gate 实现组调度前置检查
+- [[domain-17-system-foundation/topic-dictionary/scheduling/gang-scheduling|Gang Scheduling]]](./gang-scheduling.md) — 结合 scheduling gate 实现组调度前置检查
 - [动态资源分配](./dynamic-resource-allocation.md) — DRA ResourceClaim 就绪后移除 gate
 - Karpenter 自动扩缩容](./karpenter-autoscaling.md) — 避免 gated Pod 触发不必要的扩容
 

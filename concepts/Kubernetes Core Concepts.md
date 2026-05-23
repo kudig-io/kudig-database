@@ -110,11 +110,11 @@ KUDIG covers Kubernetes v1.25 through v1.32, including:
 
 ## Related
 
-- [[concepts/declarative-api.md|declarative-api]] — Declarative API
-- [[entities/kube-scheduler.md|kube-scheduler]] — kube-scheduler
+- [[concepts/declarative-api|declarative-api]] — Declarative API
+- [[entities/kube-scheduler|kube-scheduler]] — kube-scheduler
 - [[cilium]] — Cilium
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
-- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
-- [[concepts/etcd Operational Reference.md|etcd Operational Reference]]
-- [[references/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
+- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]]
+- [[concepts/etcd Operational Reference|etcd Operational Reference]]
+- [[references/KUDIG Tag Dictionary|KUDIG Tag Dictionary]]

@@ -82,7 +82,7 @@ tier: supporting---
 
 ## 连接点
 
-[[concepts/service-mesh-architecture.md|service-mesh-architecture]] 描述了服务网格的通信能力（mTLS、流量管理、可观测性），[[concepts/security-defense-depth.md|security-defense-depth]] 在零信任架构部分提到"每个 API 请求需要认证、每次访问需要授权、所有流量受 NetworkPolicy 约束、运行行为被监控"。但两者没有明确指出：**服务网格就是零信任理念在 K8s 服务间通信层的具体技术实现**。
+[[concepts/service-mesh-architecture|service-mesh-architecture]] 描述了服务网格的通信能力（mTLS、流量管理、可观测性），[[concepts/security-defense-depth|security-defense-depth]] 在零信任架构部分提到"每个 API 请求需要认证、每次访问需要授权、所有流量受 NetworkPolicy 约束、运行行为被监控"。但两者没有明确指出：**服务网格就是零信任理念在 K8s 服务间通信层的具体技术实现**。
 
 零信任的四大原则与服务网格的四大能力形成精确的一一对应：
 
@@ -143,10 +143,10 @@ tier: supporting---
 
 ## 相关
 
-- [[concepts/service-mesh-architecture.md|service-mesh-architecture]]
-- [[concepts/security-defense-depth.md|security-defense-depth]]
-- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
-- [[concepts/multi-tenancy-isolation.md|multi-tenancy-isolation]]
+- [[concepts/service-mesh-architecture|service-mesh-architecture]]
+- [[concepts/security-defense-depth|security-defense-depth]]
+- [[concepts/cilium-ebpf-networking|cilium-ebpf-networking]]
+- [[concepts/multi-tenancy-isolation|multi-tenancy-isolation]]
 - [[istio]]
 - [[cilium]]
 
@@ -156,6 +156,6 @@ tier: supporting---
 
 - [[istio]] — Istio
 - [[falco]] — Falco
-- [[entities/vault.md|vault]] — HashiCorp Vault
+- [[entities/vault|vault]] — HashiCorp Vault
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus

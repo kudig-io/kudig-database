@@ -62,7 +62,7 @@ created: "2026-05-23"
 
 # 07 - 升级路径与策略指南
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/tasks/administer-cluster/cluster-upgrade](https://kubernetes.io/releases/version-skew-policy/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/tasks/administer-cluster/cluster-upgrade](https://kubernetes.io/releases/version-skew-policy/)
 
 <!-- chunk: 版本支持策略 -->
 ## 版本支持策略
@@ -804,7 +804,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析

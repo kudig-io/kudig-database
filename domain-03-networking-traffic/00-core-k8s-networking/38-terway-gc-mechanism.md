@@ -66,7 +66,7 @@ cross_refs:
 created: "2026-05-23"
 ---
 
-# 38 - Terway GC (垃圾回收) 机制详解 (Terway [[domain-17-system-foundation/topic-dictionary/fundamentals/garbage-collection.md|Garbage Collection]] Mechanism)
+# 38 - Terway GC (垃圾回收) 机制详解 (Terway [[domain-17-system-foundation/topic-dictionary/fundamentals/garbage-collection|Garbage Collection]] Mechanism)
 
 > **适用版本**: 阿里云 ACK v1.26 - v1.32 | **Terway 版本**: v1.5+ | **最后更新**: 2026-04
 
@@ -1024,7 +1024,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档

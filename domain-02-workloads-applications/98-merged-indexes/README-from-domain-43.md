@@ -74,7 +74,7 @@ Java 是企业级后端开发的第一大语言，Kubernetes 是容器编排的�
 
 ```mermaid
 graph TB
-    ROOT[Java on [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]<br/>综合实践指南] --> A[容器化]
+    ROOT[Java on [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]<br/>综合实践指南] --> A[容器化]
     ROOT --> B[运行时]
     ROOT --> C[框架]
     ROOT --> D[CI/CD]
@@ -135,7 +135,7 @@ graph TB
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
 | 5 | [Spring Boot on Kubernetes](./domain-02-workloads-applications/99-spring-boot-kubernetes-guide.md) | 探针、配置管理、优雅停机、数据库连接池、生产 Deployment | 中级 |
-| 6 | [Spring Cloud K8s + 服务网格](./domain-03-networking-traffic/99-spring-cloud-kubernetes-service-mesh-guide.md) | Spring Cloud → K8s 原生映射、[[entities/istio.md|Istio]] 集成、Resilience4j、迁移路径 | 高级 |
+| 6 | [Spring Cloud K8s + 服务网格](./domain-03-networking-traffic/99-spring-cloud-kubernetes-service-mesh-guide.md) | Spring Cloud → K8s 原生映射、[[entities/istio|Istio]] 集成、Resilience4j、迁移路径 | 高级 |
 | 7 | [Quarkus/Micronaut 云原生 Java](./domain-15-specialized-tech/99-quarkus-micronaut-cloud-native-java-guide.md) | Quarkus vs Micronaut vs Spring Boot、Dev Services、反应式编程 | 中级 |
 
 ### 2.4 CI/CD (1 篇)
@@ -701,6 +701,6 @@ EOF
 
 - 10-monitoring-metrics-prometheus
 
-- [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
-- [[domain-02-workloads-applications/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
+- [[domain-02-workloads-applications/05-quarkus-native-kubernetes|05-quarkus-native-kubernetes]]
+- [[domain-02-workloads-applications/04-java-operator-sdk-development|04-java-operator-sdk-development]]
+- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd|06-java-cicd-tekton-argocd]]

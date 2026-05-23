@@ -60,7 +60,7 @@ prerequisites:
 - [2026-05-21T16:45:00Z] CROSS_LINK phase=final pages_scanned=3982 links_added=7045 pages_modified=2433 orphans_remaining=954 domain_orphans=25 release_orphans=1
 
 
-- [2026-05-21T17:00:00+08:00] WIKI_[[_meta/dashboard.md|dashboard]] name=dashboard tool=dataview views=9 filter=concepts/entities/skills/references/synthesis
+- [2026-05-21T17:00:00+08:00] WIKI_[[_meta/dashboard|dashboard]] name=dashboard tool=dataview views=9 filter=concepts/entities/skills/references/synthesis
 
 
 - [2026-05-21T16:30:00Z] CROSS_LINK phase=domain-release-notes pages_scanned=3982 links_added=4918 pages_modified=3486 domain_orphans_remaining=586 release_orphans_remaining=355
@@ -485,11 +485,11 @@ CNCF 229 个项目文档不逐个生成聚合页面，而是按功能类别聚�
 
 ## Related
 
-- [[concepts/bp-observability.md|bp-observability]] — 最佳实践：Observability
-- [[concepts/bp-infrastructure.md|bp-infrastructure]] — 最佳实践：Infrastructure
-- [[concepts/kubernetes-pki-certificate-system.md|kubernetes-pki-certificate-system]] — Kubernetes PKI 证书体系
-- [[concepts/bp-common-best-practices.md|bp-common-best-practices]] — Kubernetes 通用最佳实践参考
-- [[concepts/deployment-controller-architecture.md|deployment-controller-architecture]] — Deployment 控制器架构
+- [[concepts/bp-observability|bp-observability]] — 最佳实践：Observability
+- [[concepts/bp-infrastructure|bp-infrastructure]] — 最佳实践：Infrastructure
+- [[concepts/kubernetes-pki-certificate-system|kubernetes-pki-certificate-system]] — Kubernetes PKI 证书体系
+- [[concepts/bp-common-best-practices|bp-common-best-practices]] — Kubernetes 通用最佳实践参考
+- [[concepts/deployment-controller-architecture|deployment-controller-architecture]] — Deployment 控制器架构
 - [2026-05-21] CROSS_LINK pages_scanned=588 links_added=2883 typed_relations_written=0 pages_modified=582 orphans_remaining=38 misc_affinity_updated=0 promotion_candidates=0
 - [2026-05-21] LINT_CONSOLIDATE links_fixed=0 orphans_rescued=496 lifecycle_updates=8 tier_demotions=0 tag_fixes=0 contradiction_callouts=0 report=synthesis/consolidation-2026-05-21.md
 - [2026-05-21] CROSS_LINK_FIX broken_links_fixed=152 nested_fixed=39 md_suffix_fixed=3041 path_normalized=5398 files_modified=83 final_orphans≈0 final_broken_links=0

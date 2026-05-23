@@ -60,7 +60,7 @@ Cloud native security follows defense-in-depth principles, implementing controls
 ## Zero Trust Architecture
 
 Zero trust principles: never trust, always verify; least privilege access; assume breach; explicit verification; micro-segmentation. In K8s, this means:
-- All Pod-to-Pod communication requires mTLS (via [[concepts/service-mesh-architecture.md|service mesh]] or Cilium)
+- All Pod-to-Pod communication requires mTLS (via [[concepts/service-mesh-architecture|service mesh]] or Cilium)
 - Default-deny NetworkPolicy blocks all traffic unless explicitly allowed
 - RBAC enforces least privilege for API access
 - Image signature verification ensures only trusted artifacts deploy
@@ -94,17 +94,17 @@ Security controls map to regulatory requirements:
 
 ## Related
 
-- [[entities/trivy.md|trivy]] — Trivy
-- [[entities/vault.md|vault]] — HashiCorp Vault
+- [[entities/trivy|trivy]] — Trivy
+- [[entities/vault|vault]] — HashiCorp Vault
 - [[cert-manager]] — cert-manager
-- [[concepts/secrets-management.md|secrets-management]] — Secrets Management
-- [[concepts/linux-security-modules.md|linux-security-modules]] — Linux Security Modules for Containers
-- [[concepts/linux-security-modules.md|Linux Security Modules]]
-- [[concepts/service-mesh-architecture.md|Service Mesh Architecture]]
+- [[concepts/secrets-management|secrets-management]] — Secrets Management
+- [[concepts/linux-security-modules|linux-security-modules]] — Linux Security Modules for Containers
+- [[concepts/linux-security-modules|Linux Security Modules]]
+- [[concepts/service-mesh-architecture|Service Mesh Architecture]]
 - [[supply-chain-security|Supply Chain Security]]
-- [[concepts/secrets-management.md|Secrets Management]]
+- [[concepts/secrets-management|Secrets Management]]
 - [[falco|Falco]]
 - [[kyverno|Kyverno]]
-- [[entities/vault.md|HashiCorp Vault]]
+- [[entities/vault|HashiCorp Vault]]
 
 - [[Deployment × Secret 管理]]

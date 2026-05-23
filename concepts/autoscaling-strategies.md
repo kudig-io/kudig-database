@@ -73,11 +73,11 @@ VPA adjusts resource requests/limits based on actual usage:
 
 ## Related
 
-- [[entities/statefulset.md|statefulset]] — StatefulSet
+- [[entities/statefulset|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
 - [[prometheus]] — Prometheus
-- [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
-- [[concepts/scheduling-algorithm.md|scheduling-algorithm]] — Scheduling Algorithm
-- [[concepts/resource-management.md|Resource Management]]
-- [[skills/configure-health-probes.md|Configure Health Probes]]
-- [[concepts/scheduling-algorithm.md|Scheduling Algorithm]]
+- [[concepts/resource-management|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[concepts/scheduling-algorithm|scheduling-algorithm]] — Scheduling Algorithm
+- [[concepts/resource-management|Resource Management]]
+- [[skills/configure-health-probes|Configure Health Probes]]
+- [[concepts/scheduling-algorithm|Scheduling Algorithm]]

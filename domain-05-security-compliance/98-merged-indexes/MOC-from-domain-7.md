@@ -59,7 +59,7 @@ created: "2026-05-23"
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]] |  | k8s, security, rbac |  |
+| 1 | [[domain-05-security-compliance/00-open-source-projects-index|Domain-7 安全 — 开源项目索引]] |  | k8s, security, rbac |  |
 | 2 | Kubernetes 认证授权体系详解 | 进阶 | k8s, rbac, authentication | 5min |
 | 3 | 网络安全策略与零信任架构 | 进阶 | k8s, network, networkpolicy | 5min |
 | 4 | 运行时安全防护与威胁检测 | 高级 | k8s, runtime, security | 5min |
@@ -132,9 +132,9 @@ graph TD
 
 ## See Also
 
-- [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-25.md|MOC-from-domain-05-security-compliance]]
-- [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-39.md|MOC-from-domain-05-security-compliance]]
-- [[domain-05-security-compliance/98-merged-indexes/README-from-domain-25.md|README-from-domain-05-security-compliance]]
-- [[domain-05-security-compliance/98-merged-indexes/README-from-domain-39.md|README-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-25|MOC-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-39|MOC-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/README-from-domain-25|README-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/README-from-domain-39|README-from-domain-05-security-compliance]]
 
-- [[domain-05-security-compliance/README.md|返回目录]]
+- [[domain-05-security-compliance/README|返回目录]]

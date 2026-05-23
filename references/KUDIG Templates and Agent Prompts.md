@@ -110,12 +110,12 @@ tags: [k8s, skills, sop, ...]
 ## Related
 
 - [[INDEX]] — Wiki Index
-- [[skills/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
-- [[skills/skill-reference-remediation-playbook.md|skill-reference-remediation-playbook]] — Remediation Playbook
-- [[skills/skill-reference-version-matrix.md|skill-reference-version-matrix]] — Version Matrix
-- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
-- [[references/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
-- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
-- [[skills/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[skills/skill-reference-root-cause-catalog|skill-reference-root-cause-catalog]] — Root Cause Catalog
+- [[skills/skill-reference-remediation-playbook|skill-reference-remediation-playbook]] — Remediation Playbook
+- [[skills/skill-reference-version-matrix|skill-reference-version-matrix]] — Version Matrix
+- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
+- [[references/KUDIG Frontmatter Spec|KUDIG Frontmatter Spec]]
+- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]]
+- [[skills/FTA Methodology and Core Principles|FTA Methodology and Core Principles]]
 
 - [[kudig-templates-catalog]]

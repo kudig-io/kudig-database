@@ -79,8 +79,8 @@ OWASP LLM Top 10 应对：
 
 ## Related
 
-- [[synthesis/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — 纵深防御 x 供应链安全
-- [[synthesis/服务网格 x 零信任安全.md|服务网格 x 零信任安全]] — 服务网格 x 零信任安全
-- [[references/kudig-rag-chunking-strategy.md|kudig-rag-chunking-strategy]] — RAG 分块策略指南与 Manpage 安装指南
-- [[references/k8s-security-compliance.md|k8s-security-compliance]] — 安全合规：RBAC、网络安全策略、运行时安全与零信任架构
+- [[synthesis/纵深防御 x 供应链安全|纵深防御 x 供应链安全]] — 纵深防御 x 供应链安全
+- [[synthesis/服务网格 x 零信任安全|服务网格 x 零信任安全]] — 服务网格 x 零信任安全
+- [[references/kudig-rag-chunking-strategy|kudig-rag-chunking-strategy]] — RAG 分块策略指南与 Manpage 安装指南
+- [[references/k8s-security-compliance|k8s-security-compliance]] — 安全合规：RBAC、网络安全策略、运行时安全与零信任架构
 - [[deployment]] — Deployment

@@ -71,7 +71,7 @@ estimated_read_time: 5min
 intent_queries:
 - 开发者体验度量 (Developer Experience Metrics) 是什么
 - 如何 开发者体验度量 (Developer Experience Metrics)
-- [[Kubernetes|Kubernetes]] 36 [[synthesis/platform-engineering-sre.md|platform engineering]] 最佳实践
+- [[Kubernetes|Kubernetes]] 36 [[synthesis/platform-engineering-sre|platform engineering]] 最佳实践
 trigger_keywords:
 - 开发者体验度量
 - Developer
@@ -1720,7 +1720,7 @@ graph LR
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README.md|Domain 36: 平台工程 (Platform Engineering)]]
+- [[domain-07-platform-engineering/README|Domain 36: 平台工程 (Platform Engineering)]]
 - Domain-36 平台工程 — 开源项目索引
 - 平台工程概述与成熟度模型
 - 内部开发者平台设计原则

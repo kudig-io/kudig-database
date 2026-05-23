@@ -85,7 +85,7 @@ created: "2026-05-23"
   - [Known Issues and Important Steps before Upgrading](#known-issues-and-important-steps-before-upgrading)
       - [ThirdPartyResource](#thirdpartyresource)
       - [kubectl](#kubectl)
-      - [[entities/kubernetes.md|kubernetes]] Core Known Issues](#kubernetes-core-known-issues)
+      - [[entities/kubernetes|kubernetes]] Core Known Issues](#kubernetes-core-known-issues)
       - Docker runtime Known Issues](#docker-runtime-known-issues)
       - [Rkt runtime Known Issues](#rkt-runtime-known-issues)
   - [Provider-specific Notes](#provider-specific-notes)

@@ -106,7 +106,7 @@ kubectl uncordon <node-name>
 
 ### Argo CD 升级
 
-- 参考 [[concepts/gitops-tool-evolution.md|GitOps 工具演进]] 了解版本变更
+- 参考 [[concepts/gitops-tool-evolution|GitOps 工具演进]] 了解版本变更
 - 备份 etcd 中 Argo CD 数据
 - 按官方升级指南操作
 
@@ -152,5 +152,5 @@ domain-19-landscape-references/topic-release-notes/ 目录下全部 1321 个文�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[argo]] — Argo Workflows
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
 - 07-upgrade-paths-strategy

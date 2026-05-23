@@ -46,7 +46,7 @@ title: containerd 升级迁移指南
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -58,29 +58,29 @@ title: containerd 升级迁移指南
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
 - [[containerd]]
-- [[entities/cni-plugins.md|cni-plugins]]
+- [[entities/cni-plugins|cni-plugins]]
 - [[pod-lifecycle]]
-- [[entities/kubelet.md|[[kubelet|kubelet]]]]
+- [[entities/kubelet|[[kubelet|kubelet]]]]
 
 ## Related
 
 - [[spinkube]] — SpinKube
 - [[wasmedge]] — WasmEdge
-- [[entities/cncf-runtime.md|cncf-runtime]] — CNCF 容器运行时与工具链项目全景
+- [[entities/cncf-runtime|cncf-runtime]] — CNCF 容器运行时与工具链项目全景
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[containerd]] — containerd
 
 - RELEASE-NOTES-1.3
 - RELEASE-NOTES-0.2
 - RELEASE-NOTES-1.7
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.0|RELEASE-NOTES-2.0]]
 - RELEASE-NOTES-1.6
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.1|RELEASE-NOTES-2.1]]
 - RELEASE-NOTES-1.2
 - RELEASE-NOTES-1.5
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.2|RELEASE-NOTES-2.2]]
 - RELEASE-NOTES-1.1
 - RELEASE-NOTES-0.0
 - RELEASE-NOTES-1.0

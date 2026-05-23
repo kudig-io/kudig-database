@@ -51,7 +51,7 @@ Keycloak 是开源的身份和访问管理（IAM）解决方案，提供单点�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -68,29 +68,29 @@ Keycloak 是开源的身份和访问管理（IAM）解决方案，提供单点�
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
 - [[operator-pattern]]
-- [[concepts/microservice-resilience-patterns.md|microservice-resilience-patterns]]
-- [[concepts/secrets-management.md|secrets-management]]
-- [[concepts/security-defense-depth.md|security-defense-depth]]
+- [[concepts/microservice-resilience-patterns|microservice-resilience-patterns]]
+- [[concepts/secrets-management|secrets-management]]
+- [[concepts/security-defense-depth|security-defense-depth]]
 
 ## Related
 
-- [[entities/argocd.md|[[ArgoCD|argocd]]]] — ArgoCD
+- [[entities/argocd|[[ArgoCD|argocd]]]] — ArgoCD
 - [[ovn-kubernetes]] — OVN-Kubernetes
 - [[vitess]] — Vitess
 - [[argo]] — Argo Workflows
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - keycloak
-- [[entities/pixie.md|Pixie]]
-- [[entities/kuberhealthy.md|Kuberhealthy]]
-- [[entities/kubescape.md|Kubescape]]
-- [[entities/perses.md|Perses]]
-- [[entities/03-prometheus-ha-deployment.md|Prometheus 高可用部署]]
-- [[entities/trickster.md|Trickster]]
-- [[entities/distribution.md|Distribution]]
-- [[entities/hami.md|HAMI]]
-- [[entities/06-containerd-observability.md|containerd 可观测性]]
-- [[entities/kubeelasti.md|KubeElastic]]
+- [[entities/pixie|Pixie]]
+- [[entities/kuberhealthy|Kuberhealthy]]
+- [[entities/kubescape|Kubescape]]
+- [[entities/perses|Perses]]
+- [[entities/03-prometheus-ha-deployment|Prometheus 高可用部署]]
+- [[entities/trickster|Trickster]]
+- [[entities/distribution|Distribution]]
+- [[entities/hami|HAMI]]
+- [[entities/06-containerd-observability|containerd 可观测性]]
+- [[entities/kubeelasti|KubeElastic]]
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference

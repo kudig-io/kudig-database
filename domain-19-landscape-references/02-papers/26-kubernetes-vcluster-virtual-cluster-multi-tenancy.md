@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 <!-- chunk: 摘要 -->## 摘要
 
-虚拟集群（Virtual Cluster）技术在 2026 年已成为 Kubernetes 多租户架构的主流方案之一。vCluster（由 Loft Labs 开源，CNCF Sandbox 项目）通过在物理 Kubernetes 集群中运行轻量级虚拟 Kubernetes 控制平面，为每个租户提供完整、隔离的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 体验，同时共享底层物理资源，兼顾了隔离性、成本和运维效率。
+虚拟集群（Virtual Cluster）技术在 2026 年已成为 Kubernetes 多租户架构的主流方案之一。vCluster（由 Loft Labs 开源，CNCF Sandbox 项目）通过在物理 Kubernetes 集群中运行轻量级虚拟 Kubernetes 控制平面，为每个租户提供完整、隔离的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 体验，同时共享底层物理资源，兼顾了隔离性、成本和运维效率。
 
 本文深度探讨 vCluster 的核心架构、生产部署实践、与 Cluster API 的集成模式，以及多租户 SaaS 平台的完整架构设计。通过真实的 CI/CD 自动化用例、安全边界分析和成本分配模型，帮助平台工程师选择最适合的多租户策略，构建高效、安全、可扩展的多租户 Kubernetes 平台。
 
@@ -1493,7 +1493,7 @@ Cluster API   ★★★★★   ★★★★★    ★★★☆☆  ★★★★
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers MOC
-- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...

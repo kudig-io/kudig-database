@@ -45,7 +45,7 @@ Cloud Custodian 是云资源治理和管理的规则引擎，通过 YAML 策略�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -62,17 +62,17 @@ Cloud Custodian 是云资源治理和管理的规则引擎，通过 YAML 策略�
 ## 参考链接
 
 - [[pod-lifecycle]]
-- [[concepts/security-defense-depth.md|security-defense-depth]]
+- [[concepts/security-defense-depth|security-defense-depth]]
 
 ## Related
 
 - [[kuasar]] — Kuasar
 - [[longhorn]] — Longhorn
-- [[open-cluster-management]] — [[entities/open-cluster-management.md|Open Cluster Management (OCM)]]
+- [[open-cluster-management]] — [[entities/open-cluster-management|Open Cluster Management (OCM)]]
 - [[cdk8s]] — cdk8s (Cloud Development Kit for Kubernetes)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - cloud-custodian
-- [[entities/capsule.md|Capsule]]
+- [[entities/capsule|Capsule]]
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

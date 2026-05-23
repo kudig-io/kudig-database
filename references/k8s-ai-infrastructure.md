@@ -76,5 +76,5 @@ K8s GPU 资源管理方式：
 
 ## Related
 
-- [[references/k8s-ai-infra-domain-guide.md|k8s-ai-infra-domain-guide]] — AI Infrastructure on Kubernetes Domain Guide
+- [[references/k8s-ai-infra-domain-guide|k8s-ai-infra-domain-guide]] — AI Infrastructure on Kubernetes Domain Guide
 - [[kubeflow]] — Kubeflow

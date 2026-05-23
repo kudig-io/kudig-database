@@ -51,7 +51,7 @@ created: "2026-05-23"
 
 ### 可观测性架构
 - 16 - 可观测性设计原则
-- 01 - [[entities/kubernetes.md|Kubernetes 可观测性架构体系]]]]
+- 01 - [[entities/kubernetes|Kubernetes 可观测性架构体系]]]]
 - index|00 - 可观测性开源项目索引]]
 
 ### 指标监控
@@ -140,18 +140,18 @@ created: "2026-05-23"
 
 ### 企业级监控方案
 - Prometheus企业级监控系统深度实践
-- [[domain-06-observability/07-tools/02-grafana-enterprise-observability.md]]
+- [[domain-06-observability/07-tools/02-grafana-enterprise-observability]]
 - OpenTelemetry分布式追踪与可观测性深度实践
 - Thanos Enterprise Metrics Federation and Long-term Storage
 - Datadog企业级APM深度实践
 - Datadog 企业级监控平台深度实践
-- [[domain-06-observability/07-tools/07-zabbix-enterprise-monitoring.md]]
-- [[domain-06-observability/07-tools/08-new-relic-enterprise-apm.md]]
+- [[domain-06-observability/07-tools/07-zabbix-enterprise-monitoring]]
+- [[domain-06-observability/07-tools/08-new-relic-enterprise-apm]]
 
 ### 日志管理与分析
 - ELK Stack企业级日志管理系统深度实践
 - Fluentd企业级日志收集与处理深度实践
-- [[domain-06-observability/03-logging/03-loki-enterprise-log-aggregation.md]]
+- [[domain-06-observability/03-logging/03-loki-enterprise-log-aggregation]]
 - 企业级日志治理与合规审计深度实践
 - Graylog 企业级日志管理平台深度实践
 - Splunk企业级日志分析与安全智能平台深度实践

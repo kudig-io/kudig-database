@@ -120,15 +120,15 @@ kubectl uncordon <node-name>
 
 ## Related
 
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[containerd]] — containerd
 - [[cni]] — CNI (Container Network Interface)
-- [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
-- [[skills/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
-- [[entities/kubelet.md|kubelet]]
-- [[entities/container-runtime.md|Container Runtime]]
-- [[concepts/resource-management.md|Resource Management]]
-- [[skills/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
-- [[concepts/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
-- [[skills/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
+- [[concepts/resource-management|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[skills/skill-reference-diagnostic-workflow|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
+- [[entities/kubelet|kubelet]]
+- [[entities/container-runtime|Container Runtime]]
+- [[concepts/resource-management|Resource Management]]
+- [[skills/troubleshoot-pod-issues|Troubleshoot Pod Issues]]
+- [[concepts/Symptom-SOP-RootCause Mapping|Symptom-SOP-RootCause Mapping]]
+- [[skills/Kubernetes FTA Top Events Index|Kubernetes FTA Top Events Index]]
 - [[skills/node-fta|Node 异常故障树分析]] — Cross-reference

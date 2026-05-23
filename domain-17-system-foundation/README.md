@@ -46,8 +46,8 @@ created: "2026-05-23"
 
 ## 与其他 Domain 的关系
 
-- [[domain-01-cluster-fundamentals/README.md|domain-01-cluster-fundamentals]] — 集群组件依赖
-- [[domain-13-container-runtime/README.md|domain-13-container-runtime]] — 容器运行时基础
+- [[domain-01-cluster-fundamentals/README|domain-01-cluster-fundamentals]] — 集群组件依赖
+- [[domain-13-container-runtime/README|domain-13-container-runtime]] — 容器运行时基础
 
 ## Related
 

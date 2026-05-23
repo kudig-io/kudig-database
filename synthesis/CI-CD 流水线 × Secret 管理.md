@@ -94,18 +94,18 @@ Secret 的"版本"与业务配置的"版本"不同步。ESO 的方案（只版�
 
 ## 相关
 
-- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
-- [[concepts/secrets-management.md|secrets-management]]
-- [[entities/argocd.md|argocd]]
+- [[concepts/ci-cd-pipeline-patterns|ci-cd-pipeline-patterns]]
+- [[concepts/secrets-management|secrets-management]]
+- [[entities/argocd|argocd]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 
 ## See Also
 
-- [[synthesis/服务网格 x 零信任安全.md|服务网格 x 零信任安全]]
-- [[synthesis/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]]
+- [[synthesis/服务网格 x 零信任安全|服务网格 x 零信任安全]]
+- [[synthesis/纵深防御 x 供应链安全|纵深防御 x 供应链安全]]
 - [[entities/cni|CNI]] 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
-- [[synthesis/CRD × 可观测性.md|CRD × 可观测性]]
+- [[synthesis/CRD × 可观测性|CRD × 可观测性]]
 ## Related
 
 - [[entities/argo|Argo Workflows]]

@@ -1,3 +1,12 @@
+---
+title: "报告标题"
+category: reports
+tags: ["reports", "visibility/public"]
+sources: ["auto-generated"]
+created: 2026-05-24
+updated: 2026-05-24
+---
+
 # KUDIG 远程顾问模式 — 三维度深度评估报告
 
 **评估日期**: 2026-05-23  

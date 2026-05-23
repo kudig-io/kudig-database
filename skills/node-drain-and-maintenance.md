@@ -150,15 +150,15 @@ spec:
 
 ## 相关技能
 
-- [[skills/kubeadm-cluster-deletion.md|[[kubeadm 集群删除操作|kubeadm 集群删除操作]]]]
-- [[skills/kubelet-eviction-mechanism.md|[[kubelet 资源驱逐机制|kubelet 资源驱逐机制]]]]
-- [[skills/backup-restore-etcd.md|备份和恢复 etcd]]
-- [[concepts/resource-management.md|资源管理]]
+- [[skills/kubeadm-cluster-deletion|[[kubeadm 集群删除操作|kubeadm 集群删除操作]]]]
+- [[skills/kubelet-eviction-mechanism|[[kubelet 资源驱逐机制|kubelet 资源驱逐机制]]]]
+- [[skills/backup-restore-etcd|备份和恢复 etcd]]
+- [[concepts/resource-management|资源管理]]
 
 ## Related
 
-- [[skills/kubeadm-cluster-deletion.md|kubeadm-cluster-deletion]] — kubeadm 集群删除操作
-- [[entities/statefulset.md|[[StatefulSet|statefulset]]]] — StatefulSet
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[skills/kubeadm-cluster-deletion|kubeadm-cluster-deletion]] — kubeadm 集群删除操作
+- [[entities/statefulset|[[StatefulSet|statefulset]]]] — StatefulSet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

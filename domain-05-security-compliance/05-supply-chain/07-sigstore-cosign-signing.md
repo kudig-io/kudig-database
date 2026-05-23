@@ -1653,8 +1653,8 @@ Sigstore 和 Cosign 提供了一个现代化、易用的软件签名框架：
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README.md|Domain 39: 供应链安全 (Supply Chain Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README|Domain 39: 供应链安全 (Supply Chain Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index|Domain-39 供应链安全 — 开源项目索引]]
 - 供应链安全概述 (Supply Chain Security Overview)
 - 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 - SBOM 生成与管理 (SBOM Generation and Management)
@@ -1672,7 +1672,7 @@ Sigstore 和 Cosign 提供了一个现代化、易用的软件签名框架：
 - 08-fulcio-rekor-transparency
 - 09-policy-controller-verification
 
-- [[domain-05-security-compliance/README.md|返回目录]]
+- [[domain-05-security-compliance/README|返回目录]]
 
 ## Related
 

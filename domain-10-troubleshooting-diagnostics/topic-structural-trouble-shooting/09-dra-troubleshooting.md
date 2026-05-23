@@ -464,21 +464,21 @@ related:
 
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/MOC.md|topic-structural-trouble-shooting MOC]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md|Kubernetes 结构化故障排查知识库]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance.md|etcd 维护专项文档]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer.md|症状快速映射层 (Symptom-SOP-RootCause Mapping)]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/certificate-fta.md|证书异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md|cilium FTA 树：eBPF/Cilium CNI 故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cloud-provider-fta.md|云平台集成异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-autoscaler-fta.md|Cluster Autoscaler 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-upgrade-fta.md|集群升级异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta.md|Controller Manager 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/crd-operator-fta.md|CRD/Operator 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/MOC|topic-structural-trouble-shooting MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README|Kubernetes 结构化故障排查知识库]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance|etcd 维护专项文档]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer|症状快速映射层 (Symptom-SOP-RootCause Mapping)]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/certificate-fta|证书异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta|cilium FTA 树：eBPF/Cilium CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cloud-provider-fta|云平台集成异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-autoscaler-fta|Cluster Autoscaler 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-upgrade-fta|集群升级异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta|Controller Manager 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/crd-operator-fta|CRD/Operator 异常故障树分析]]
 
 ## Related
 
@@ -487,7 +487,7 @@ related:
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer.md|symptom-mapping-layer]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md|00-configuration-first-methodology]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance.md|10-etcd-maintenance]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer.md|symptom-mapping-layer]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer|symptom-mapping-layer]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology|00-configuration-first-methodology]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance|10-etcd-maintenance]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer|symptom-mapping-layer]]

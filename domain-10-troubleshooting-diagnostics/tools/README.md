@@ -113,9 +113,9 @@ grep
 **功能**: 检查集群网络组件和服务连通性
 **输出文件**: `network_check.txt`
 **检查项目**:
-- [[entities/coredns.md|[[CoreDNS|coredns]]]]运行状态
+- [[entities/coredns|[[CoreDNS|coredns]]]]运行状态
 - Service和Endpoint状态
-- [[entities/networkpolicy.md|[[NetworkPolicy|networkpolicy]]]]配置
+- [[entities/networkpolicy|[[NetworkPolicy|networkpolicy]]]]配置
 - Ingress控制器状态
 
 ### 5. 存储系统检查
@@ -287,9 +287,9 @@ fi
 
 ## Related
 
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/ko.md|[[ko|ko]]]]
-- [[release-notes/16-quick-start-guide.md|16-quick-start-guide]]
+- [[entities/kubernetes|kubernetes]]
+- [[entities/ko|[[ko|ko]]]]
+- [[release-notes/16-quick-start-guide|16-quick-start-guide]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - networking|发布说明索引 — 网络]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference

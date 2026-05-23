@@ -32,7 +32,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-title: [[domain-17-system-foundation/topic-dictionary/workloads/replicaset.md|replicaset]] 控制器源码分析
+title: [[domain-17-system-foundation/topic-dictionary/workloads/replicaset|replicaset]] 控制器源码分析
 category: deployment
 tags:
 - replicaset
@@ -435,7 +435,7 @@ kubelet: 在节点上创建容器
 
 ## Related
 
-- [[README.md|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[README|README]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[entities/kubernetes|kubernetes]]

@@ -150,19 +150,19 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-- [[skills/ts-storage.md|存储故障排查]]
+- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine|FTA 诊断执行引擎]]
+- [[skills/ts-storage|存储故障排查]]
 
 ## Related
 
 - [[README]] — FTA 故障树清单索引
-- [[skills/ts-networking.md|ts-networking]] — 网络故障排查
+- [[skills/ts-networking|ts-networking]] — 网络故障排查
 - [[flannel-fta]] — Flannel 网络异常故障树分析
-- [[skills/skill-22-daemonset-failure.md|skill-22-daemonset-failure]] — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[skills/skill-22-daemonset-failure|skill-22-daemonset-failure]] — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
+- [[entities/kubelet|kubelet]] — kubelet
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md|CSI 存储异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta|CSI 存储异常故障树分析]]
 - [[skills/ts-command-output|命令输出根因解析]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

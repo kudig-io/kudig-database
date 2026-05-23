@@ -376,7 +376,7 @@ minikube addons list
 
 ## 方案 C：k3d（轻量之选）
 
-k3d 在 Docker 里跑 [[entities/k3s.md|k3s]]](https://k3s.io/)（Rancher 出品的轻量 K8s 发行版），资源占用极低。
+k3d 在 Docker 里跑 [[entities/k3s|k3s]]](https://k3s.io/)（Rancher 出品的轻量 K8s 发行版），资源占用极低。
 
 ### 安装 k3d
 
@@ -588,6 +588,6 @@ newgrp docker
 ---
 
 **关联文档**:
-- [[01-cloud-native-evolution-story.md]] — 上一课：为什么需要 K8s
+- [[01-cloud-native-evolution-story]] — 上一课：为什么需要 K8s
 - ../fundamentals/02-pod-basics.md — 下一课：跑第一个 Pod
 - ../public-training/one-month/resources/commands-cheatsheet.md — kubectl 命令速查表

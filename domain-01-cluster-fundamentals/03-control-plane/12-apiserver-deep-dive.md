@@ -1741,7 +1741,7 @@ systemctl restart kube-apiserver
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -1764,8 +1764,8 @@ systemctl restart kube-apiserver
 - 相关知识域: domain-03-networking-traffic
 - 相关知识域: domain-04-storage-data
 - 相关知识域: domain-05-security-compliance
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|速查卡: k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet|速查卡: kubectl-scene-cheatsheet]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 
 ## See Also

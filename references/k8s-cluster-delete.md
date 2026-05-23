@@ -517,13 +517,13 @@ ls /etc/cni/net.d/
 
 ## 相关链接
 
-- [[skills/troubleshoot-node-issues.md|节点故障排查]]
-- [[references/k8s-knowledge-map.md|K8s 知识图谱]]
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/troubleshoot-node-issues|节点故障排查]]
+- [[references/k8s-knowledge-map|K8s 知识图谱]]
+- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
 
 ## Related
 
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[kube-vip]] — kube-vip
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd

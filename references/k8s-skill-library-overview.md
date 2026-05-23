@@ -76,8 +76,8 @@ Skill 库已覆盖 20+ 常见问题场景：
 
 ## Related
 
-- [[references/k8s-ai-agent-engineering.md|k8s-ai-agent-engineering]] — AI Agent 工程：RAG、多 Agent 编排、安全护栏与生产部署
-- [[skills/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
-- [[skills/skill-reference-remediation-playbook.md|skill-reference-remediation-playbook]] — Remediation Playbook
-- [[skills/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
-- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[references/k8s-ai-agent-engineering|k8s-ai-agent-engineering]] — AI Agent 工程：RAG、多 Agent 编排、安全护栏与生产部署
+- [[skills/skill-reference-root-cause-catalog|skill-reference-root-cause-catalog]] — Root Cause Catalog
+- [[skills/skill-reference-remediation-playbook|skill-reference-remediation-playbook]] — Remediation Playbook
+- [[skills/skill-reference-diagnostic-workflow|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
+- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill

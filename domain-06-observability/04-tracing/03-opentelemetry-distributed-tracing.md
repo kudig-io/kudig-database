@@ -1166,9 +1166,9 @@ future_trends:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-20-enterprise-monitoring-alerting KUDIG Database — Global MOC
-- [[domain-06-observability/README.md|[[Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]nitoring]] & Alerting)]]
+- [[domain-06-observability/README|[[Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]nitoring]] & Alerting)]]
 - index.md|Domain-20 企业监控与告警 — 开源项目索引]]
-- [[entities/prometheus.md]]
+- [[entities/prometheus]]
 - Grafana Enterprise Observability Platform 深度实践
 - Thanos Enterprise Metrics Federation and Long-term Storage
 - Datadog企业级APM深度实践
@@ -1185,7 +1185,7 @@ future_trends:
 - 04-thanos-enterprise-metrics-federation
 - 05-datadog-enterprise-apm
 
-- [[domain-06-observability/README.md|返回目录]]
+- [[domain-06-observability/README|返回目录]]
 
 ## Related
 

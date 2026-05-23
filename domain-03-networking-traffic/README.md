@@ -55,8 +55,8 @@ created: "2026-05-23"
 
 ## 与其他 Domain 的关系
 
-- [[domain-01-cluster-fundamentals/README.md|domain-01-cluster-fundamentals]] — 集群架构
-- [[domain-10-troubleshooting-diagnostics/README.md|domain-10-troubleshooting-diagnostics]] — 网络排障
+- [[domain-01-cluster-fundamentals/README|domain-01-cluster-fundamentals]] — 集群架构
+- [[domain-10-troubleshooting-diagnostics/README|domain-10-troubleshooting-diagnostics]] — 网络排障
 
 ## Related
 

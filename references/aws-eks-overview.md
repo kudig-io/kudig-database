@@ -957,11 +957,11 @@ phases:
 
 ## Related
 
-- [[log.md|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[log|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/sql|sql]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
 - [[references/multi-cloud-terms|K8s 多云架构术语参考]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

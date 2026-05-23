@@ -59,7 +59,7 @@ cross_refs:
 created: "2026-05-23"
 ---
 
-# 安全合规管理 ([[domain-07-platform-engineering/governance/10-security-compliance.md|Security & Compliance]] Management)
+# 安全合规管理 ([[domain-07-platform-engineering/governance/10-security-compliance|Security & Compliance]] Management)
 
 > **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **文档版本**: v2.0 | **最后更新**: 2026-02
 > **专业级别**: 企业级生产环境 | **作者**: Allen Galler
@@ -776,7 +776,7 @@ class AuditAnalyzer:
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering KUDIG Database — Global MOC
-- [[domain-07-platform-engineering/README.md|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
+- [[domain-07-platform-engineering/README|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
 - index.md|Domain-9 平台运维 — 开源项目索引]]
 - 平台运维概述
 - 集群生命周期管理

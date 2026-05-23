@@ -40,7 +40,7 @@ This is a _bugfix release_. Users are encouraged to upgrade for the best experie
 This fixes a segmentation fault that could occur when hoisting variables from a subchart into its parent. A few other minor fixes are included as well. It also removes the duplicate commands that were showing up in help text.
 
 Our community is growing rapidly! Jump in!
-- Join the discussion in [[entities/kubernetes.md|Kubernetes]] Slack](https://slack.k8s.io/): `#helm` 
+- Join the discussion in [[entities/kubernetes|Kubernetes]] Slack](https://slack.k8s.io/): `#helm` 
 - Hang out at the Public Developer Call: Thursday, 9:30 Pacific via [Zoom](https://engineyard.zoom.us/j/366425549)
 - Test, debug, and contribute charts: [GitHub/kubernetes/charts](https://github.com/kubernetes/charts)
 

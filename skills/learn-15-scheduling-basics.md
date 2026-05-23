@@ -749,8 +749,8 @@ kubectl label nodes <node> key=value
 
 ## Related
 
-- [[skills/learn-07-namespace-resource-quota.md|learn-07-namespace-resource-quota]] — 第七课：Namespace 与资源隔离
-- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
-- [[entities/statefulset.md|statefulset]] — StatefulSet
+- [[skills/learn-07-namespace-resource-quota|learn-07-namespace-resource-quota]] — 第七课：Namespace 与资源隔离
+- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
+- [[entities/statefulset|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

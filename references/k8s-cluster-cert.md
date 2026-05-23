@@ -483,14 +483,14 @@ func createKubeAPIServerConfig(
 
 ## 相关链接
 
-- [[skills/ts-security-auth.md|安全认证排查]]
-- [[skills/backup-restore-etcd.md|etcd 备份恢复]]
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/ts-security-auth|安全认证排查]]
+- [[skills/backup-restore-etcd|etcd 备份恢复]]
+- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
 
 ## Related
 
-- [[entities/kube-scheduler.md|kube-scheduler]] — kube-scheduler
-- [[entities/kubelet.md|kubelet]] — kubelet
-- [[entities/kube-apiserver.md|kube-apiserver]] — kube-apiserver
+- [[entities/kube-scheduler|kube-scheduler]] — kube-scheduler
+- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/kube-apiserver|kube-apiserver]] — kube-apiserver
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

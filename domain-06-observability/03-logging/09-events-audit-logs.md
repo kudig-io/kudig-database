@@ -67,7 +67,7 @@ created: "2026-05-23"
 
 # 05 - 事件与审计日志管理 (Events & Audit Logs)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/tasks/debug-application-cluster/audit](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/tasks/debug-application-cluster/audit](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)
 
 <!-- chunk: 概述 -->
 ## 概述
@@ -614,7 +614,7 @@ automated_response:
 ## Obsidian 相关文档
 
 - observability/MOC.md|domain-06-observability MOC]]
-- [[domain-06-observability/README.md|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
+- [[domain-06-observability/README|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
 - index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
@@ -633,7 +633,7 @@ automated_response:
 - 10-monitoring-metrics-prometheus
 - 11-custom-metrics-adapter
 
-- [[domain-06-observability/README.md|返回目录]]
+- [[domain-06-observability/README|返回目录]]
 
 ## Related
 

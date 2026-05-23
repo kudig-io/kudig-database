@@ -843,7 +843,7 @@ performance_tuning_checklist
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
+- [[domain-07-platform-engineering/README|Platform Ops Domain (平台运维领域)]]
 - Domain-9 平台运维 — 开源项目索引
 - 平台运维概述
 - 集群生命周期管理
@@ -857,7 +857,7 @@ performance_tuning_checklist
 
 ## Related
 
-- [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
+- [[domain-02-workloads-applications/03-jvm-gc-container-tuning|03-jvm-gc-container-tuning]]
 
 ## See Also
 

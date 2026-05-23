@@ -74,7 +74,7 @@ created: "2026-05-23"
 
 # 30 - etcd运维操作
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/etcd.md|etcd]].io/docs](https://etcd.io/docs/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/etcd|etcd]].io/docs](https://etcd.io/docs/)
 
 <!-- chunk: etcd集群规格建议 -->
 ## etcd集群规格建议
@@ -596,7 +596,7 @@ etcdctl get /registry/leases --prefix --keys-only
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
 - index.md|Domain-3 控制平面 — 开源项目索引]]
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)

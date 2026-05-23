@@ -139,12 +139,12 @@ Example for etcd:
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[skills/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
-- [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
-- [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
-- [[skills/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
-- [[skills/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]]
-- [[concepts/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
+- [[skills/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
+- [[skills/Symptom Vector Matching Engine|Symptom Vector Matching Engine]]
+- [[skills/Agent Orchestration Patterns|Agent Orchestration Patterns]]
+- [[skills/Kubernetes FTA Top Events Index|Kubernetes FTA Top Events Index]]
+- [[skills/FTA-Driven Runbook Automation|FTA-Driven Runbook Automation]]
+- [[concepts/Symptom-SOP-RootCause Mapping|Symptom-SOP-RootCause Mapping]]
 - [[skills/dns-fta|DNS 异常故障树分析]] — Cross-reference
 - [[skills/node-fta|Node 异常故障树分析]] — Cross-reference
 - [[skills/service-mesh-istio-fta|Service Mesh(Istio) 异常故障树分析]] — Cross-reference

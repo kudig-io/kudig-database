@@ -272,7 +272,7 @@ kubectl get limitrange -n <namespace>
 
 | 错误信息 | 可能原因 | 解决方案 |
 |---------|---------|---------|
-| `no [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes.md|persistent volumes]]es（卷）|volumes]] available` | 无匹配的PV/StorageClass配置错误 | 检查StorageClass参数配置 |
+| `no [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes|persistent volumes]]es（卷）|volumes]] available` | 无匹配的PV/StorageClass配置错误 | 检查StorageClass参数配置 |
 | `failed to provision volume` | CSI驱动问题/后端API错误 | 检查CSI驱动日志和后端连接 |
 | `exceeded quota` | 超出命名空间配额限制 | 调整ResourceQuota或清理资源 |
 | `invalid capacity range` | 请求容量超出限制 | 调整PVC容量或StorageClass限制 |
@@ -591,27 +591,27 @@ groups:
 ## Obsidian 相关文档
 
 - domain-10-troubleshooting-diagnostics KUDIG Database — Global MOC
-- [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
+- [[domain-10-troubleshooting-diagnostics/README|Domain-12 故障排查 (Troubleshooting)]]
 - Domain-12 故障排查 — 开源项目索引
-- [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]
-- [[domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断]]
-- [[domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md|Node NotReady 状态深度诊断]]
-- [[domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis.md|OOM 和内存问题诊断]]
-- [[domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/09-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/10-service-comprehensive-troubleshooting.md|Service 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting|API Server 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting|etcd 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting|CNI 网络插件故障排查]]
+- [[domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis|Pod Pending 状态深度诊断]]
+- [[domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis|Node NotReady 状态深度诊断]]
+- [[domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis|OOM 和内存问题诊断]]
+- [[domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting|Pod 全面故障排查]]
+- [[domain-10-troubleshooting-diagnostics/09-node-comprehensive-troubleshooting|Node 全面故障排查]]
+- [[domain-10-troubleshooting-diagnostics/10-service-comprehensive-troubleshooting|Service 全面故障排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|02-control-plane-etcd-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|03-networking-cni-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md|05-pod-pending-diagnosis]]
-- [[domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md|06-node-notready-diagnosis]]
+- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting|02-control-plane-etcd-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting|03-networking-cni-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis|05-pod-pending-diagnosis]]
+- [[domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis|06-node-notready-diagnosis]]
 
 ## Related
 

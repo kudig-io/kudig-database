@@ -164,10 +164,10 @@ Pixie 提供无存储的全栈可观测性，利用 eBPF 实现零侵入数据�
 
 ## 相关页面
 
-- [[entities/cncf-security.md|cncf-security]] — 安全与合规
-- [[entities/cncf-storage.md|cncf-storage]] — 存储与数据库
-- [[entities/cncf-networking.md|cncf-networking]] — 网络与服务网格
-- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — K8s 架构
+- [[entities/cncf-security|cncf-security]] — 安全与合规
+- [[entities/cncf-storage|cncf-storage]] — 存储与数据库
+- [[entities/cncf-networking|cncf-networking]] — 网络与服务网格
+- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — K8s 架构
 
 ## Related
 

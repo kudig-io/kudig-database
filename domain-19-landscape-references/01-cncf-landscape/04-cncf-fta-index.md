@@ -306,7 +306,7 @@ flowchart TD
 ## Obsidian 相关文档
 
 - domain-19-landscape-references MOC
-- [[domain-19-landscape-references/README.md|Domain-34: CNCF Landscape 开源项目]]
+- [[domain-19-landscape-references/README|Domain-34: CNCF Landscape 开源项目]]
 - Domain-34 CNCF Landscape — 开源项目索引
 - CNCF 集成实践指南
 - CNCF 学习路径

@@ -49,7 +49,7 @@ Meshery 是云原生管理平面，提供服务网格和云原生基础设施的
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -69,7 +69,7 @@ Meshery 是云原生管理平面，提供服务网格和云原生基础设施的
 - [[istio]]
 - [[cilium]]
 - [[deployment]]
-- [[concepts/service-mesh-architecture.md|service-mesh-architecture]]
+- [[concepts/service-mesh-architecture|service-mesh-architecture]]
 
 ## Related
 

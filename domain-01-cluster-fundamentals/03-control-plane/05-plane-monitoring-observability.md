@@ -2045,7 +2045,7 @@ Level 5 - 自主运维 (Autonomous Operations)
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -2059,7 +2059,7 @@ Level 5 - 自主运维 (Autonomous Operations)
 
 ## Related
 
-- [[domain-02-workloads-applications/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
+- [[domain-02-workloads-applications/07-java-observability-kubernetes|07-java-observability-kubernetes]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
 

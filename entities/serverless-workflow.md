@@ -40,7 +40,7 @@ Serverless Workflow 是一个厂商中立的开源工作流规范，用于定义
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -57,7 +57,7 @@ Serverless Workflow 是一个厂商中立的开源工作流规范，用于定义
 
 ## 参考链接
 
-- [[concepts/secrets-management.md|secrets-management]]
+- [[concepts/secrets-management|secrets-management]]
 
 ## Related
 
@@ -68,5 +68,5 @@ Serverless Workflow 是一个厂商中立的开源工作流规范，用于定义
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - serverless-workflow
-- [[entities/slimfaas.md|SlimFaas]]
+- [[entities/slimfaas|SlimFaas]]
 - [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference

@@ -52,7 +52,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-title: [[Kubernetes|Kubernetes]] 平台工程与内部开发者平台 ([[synthesis/platform-engineering-sre.md|Platform Engineering]] and Internal Developer Platform)
+title: [[Kubernetes|Kubernetes]] 平台工程与内部开发者平台 ([[synthesis/platform-engineering-sre|Platform Engineering]] and Internal Developer Platform)
 description: '**作者:** 平台工程架构专家 | **版本:** v1.0 | **更新时间:** 2026-03-03 | **适用场景:** 开发者平台建设、DevEx优化、自助服务
   | **复杂度:** ⭐⭐⭐⭐⭐'
 category: papers
@@ -1868,7 +1868,7 @@ platform_as_product:
     practices:
       - name: "用户研究驱动"
         description: "定期与开发者进行用户访谈，理解真实痛点"
-        [[entities/cadence.md|cadence]]: "每季度至少 10 次 1:1 开发者访谈"
+        [[entities/cadence|cadence]]: "每季度至少 10 次 1:1 开发者访谈"
 
       - name: "产品路线图公开"
         description: "平台路线图对所有工程师透明可见"
@@ -2193,7 +2193,7 @@ gantt
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers MOC
-- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...

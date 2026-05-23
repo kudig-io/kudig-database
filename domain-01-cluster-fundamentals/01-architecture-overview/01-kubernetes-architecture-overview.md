@@ -2236,7 +2236,7 @@ echo "🎯 问题监控已启动 (PID: $!)"
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 核心组件深度剖析
 - 03 - 功能和API表
@@ -2252,11 +2252,11 @@ echo "🎯 问题监控已启动 (PID: $!)"
 
 - 设计原则——理解 K8s 的设计哲学
 - 控制平面架构深度解析
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s 命令速查卡]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|K8s 命令速查卡]]
 - 相关知识域: domain-13-container-runtime
 - 相关知识域: domain-01-cluster-fundamentals
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|速查卡: k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet|速查卡: kubectl-scene-cheatsheet]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 ## See Also

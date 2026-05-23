@@ -44,7 +44,7 @@ Hyperlight 是一个轻量级虚拟机管理器 (VMM)，专为在毫秒级启动
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -60,7 +60,7 @@ Hyperlight 是一个轻量级虚拟机管理器 (VMM)，专为在毫秒级启动
 
 ## 参考链接
 
-- [[entities/argocd.md|[[ArgoCD|argocd]]]]
+- [[entities/argocd|[[ArgoCD|argocd]]]]
 
 ## Related
 
@@ -71,19 +71,19 @@ Hyperlight 是一个轻量级虚拟机管理器 (VMM)，专为在毫秒级启动
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - hyperlight
-- [[entities/urunc.md|[[urunc (Unikernel Container Runtime)|urunc]]]]
-- [[entities/flatcar.md|Flatcar Container Linux]]
-- [[entities/composefs.md|composefs]]
-- [[entities/04-containerd-upgrade-migration.md|containerd 升级迁移]]
-- [[entities/wasmedge.md|WasmEdge]]
-- [[entities/spinkube.md|SpinKube]]
-- [[entities/05-containerd-windows-support.md|containerd Windows 支持]]
-- [[entities/02-containerd-v2-features.md|containerd 2.0 新特性]]
-- [[entities/08-containerd-multi-tenant.md|containerd 多租户]]
-- [[entities/k0s.md|K0s]]
-- [[entities/03-containerd-security-hardening.md|containerd 安全加固]]
-- [[entities/bootc.md|bootc]]
-- [[entities/container2wasm.md|container2wasm]]
-- [[entities/kubean.md|Kubean]]
+- [[entities/urunc|[[urunc (Unikernel Container Runtime)|urunc]]]]
+- [[entities/flatcar|Flatcar Container Linux]]
+- [[entities/composefs|composefs]]
+- [[entities/04-containerd-upgrade-migration|containerd 升级迁移]]
+- [[entities/wasmedge|WasmEdge]]
+- [[entities/spinkube|SpinKube]]
+- [[entities/05-containerd-windows-support|containerd Windows 支持]]
+- [[entities/02-containerd-v2-features|containerd 2.0 新特性]]
+- [[entities/08-containerd-multi-tenant|containerd 多租户]]
+- [[entities/k0s|K0s]]
+- [[entities/03-containerd-security-hardening|containerd 安全加固]]
+- [[entities/bootc|bootc]]
+- [[entities/container2wasm|container2wasm]]
+- [[entities/kubean|Kubean]]
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

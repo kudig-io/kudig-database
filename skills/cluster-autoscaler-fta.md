@@ -172,7 +172,7 @@ flowchart TD
 
 ## See Also
 
-- [[skills/cilium-fta.md|cilium-fta]]
-- [[skills/cloud-provider-fta.md|cloud-provider-fta]]
-- [[skills/cluster-upgrade-fta.md|cluster-upgrade-fta]]
-- [[skills/configure-health-probes.md|configure-health-probes]]
+- [[skills/cilium-fta|cilium-fta]]
+- [[skills/cloud-provider-fta|cloud-provider-fta]]
+- [[skills/cluster-upgrade-fta|cluster-upgrade-fta]]
+- [[skills/configure-health-probes|configure-health-probes]]

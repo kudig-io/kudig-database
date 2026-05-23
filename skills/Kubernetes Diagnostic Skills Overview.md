@@ -100,18 +100,18 @@ Diagnostic skills are the **operationalized form** of FTA bottom events. Each sk
 - Maps to specific FTA paths (TE -> IE -> BE)
 - Provides the `observable` data (metrics, logs, events) for each BE
 - Implements the `diagnosis_commands` and `healing_actions` defined in FTA
-- Feeds execution results back to the [[skills/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]] learning loop
+- Feeds execution results back to the [[skills/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]] learning loop
 
 ## Related
 
 - [[cert-manager]] — cert-manager
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[skills/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
-- [[skills/skill-reference-remediation-playbook.md|skill-reference-remediation-playbook]] — Remediation Playbook
-- [[concepts/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
-- [[references/KUDIG Cheat Sheet Index.md|KUDIG Cheat Sheet Index]]
-- [[skills/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
-- [[skills/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
-- [[references/kubectl Scenario Quick Reference.md|kubectl Scenario Quick Reference]]
-- [[references/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
+- [[skills/skill-reference-root-cause-catalog|skill-reference-root-cause-catalog]] — Root Cause Catalog
+- [[skills/skill-reference-remediation-playbook|skill-reference-remediation-playbook]] — Remediation Playbook
+- [[concepts/Symptom-SOP-RootCause Mapping|Symptom-SOP-RootCause Mapping]]
+- [[references/KUDIG Cheat Sheet Index|KUDIG Cheat Sheet Index]]
+- [[skills/FTA Methodology and Core Principles|FTA Methodology and Core Principles]]
+- [[skills/Kubernetes FTA Top Events Index|Kubernetes FTA Top Events Index]]
+- [[references/kubectl Scenario Quick Reference|kubectl Scenario Quick Reference]]
+- [[references/KUDIG Tag Dictionary|KUDIG Tag Dictionary]]

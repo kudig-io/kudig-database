@@ -282,7 +282,7 @@ kubectl patch configmap -n kube-flannel kube-flannel-cfg --type merge -p \
   '{"data":{"net-conf.json":"{\"Network\":\"10.245.0.0/16\",\"Backend\":{\"Type\":\"vxlan\"},\"EtcdPrefix\":\"/cluster-b/network\"}"}}'
 ```
 
-### 4.3 使用 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 后端
+### 4.3 使用 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 后端
 
 **推荐方案**：避免使用 etcd 后端，改用 Kubernetes API 后端
 
@@ -468,7 +468,7 @@ flannelctl subnet list
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic KUDIG Database — Global MOC
-- [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档

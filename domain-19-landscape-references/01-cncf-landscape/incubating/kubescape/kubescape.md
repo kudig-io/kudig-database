@@ -53,7 +53,7 @@ Kubescape 是第一个用于测试 Kubernetes 是否按照 NSA-CISA 和 MITRE AT
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -69,11 +69,11 @@ Kubescape 是第一个用于测试 Kubernetes 是否按照 NSA-CISA 和 MITRE AT
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
 - [[operator-pattern]]
 - networking.md|cilium-ebpf-networking]]
-- [[concepts/storage-model.md|storage-model]]
+- [[concepts/storage-model|storage-model]]
 
 ## Related
 

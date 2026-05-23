@@ -63,8 +63,8 @@ created: "2026-05-23"
 
 1. [Wasm Serverless 架构概述](#1-wasm-serverless-架构概述)
 2. [冷启动优化原理](#2-冷启动优化原理)
-3. [[entities/spin.md|Spin]] 框架详解](#3-spin-框架详解)
-4. [[entities/wasmcloud.md|wasmCloud]]ud 平台|wasmCloud 平台]]](#4-wasmcloud-平台)
+3. [[entities/spin|Spin]] 框架详解](#3-spin-框架详解)
+4. [[entities/wasmcloud|wasmCloud]]ud 平台|wasmCloud 平台]]](#4-wasmcloud-平台)
 5. [Fermyon Cloud 部署](#5-fermyon-cloud-部署)
 6. [事件触发器系统](#6-事件触发器系统)
 7. [Scale-to-Zero 实现](#7-scale-to-zero-实现)
@@ -2229,7 +2229,7 @@ compatibility_date = "2024-01-01"
 ENVIRONMENT = "production"
 API_KEY = "..."
 
-[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md]]
+[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces]]
 binding = "KV_STORE"
 id = "abc123..."
 
@@ -2940,7 +2940,7 @@ Wasm Serverless 通过独特的技术优势重新定义了 FaaS 计算：
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native MOC
-- [[domain-15-specialized-tech/README.md|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
+- [[domain-15-specialized-tech/README|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
 - Domain-38 WebAssembly 云原生 — 开源项目索引
 - WebAssembly 云原生基础
 - containerd Wasm 运行时

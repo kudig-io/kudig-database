@@ -83,9 +83,9 @@ Distilled from domain-11-ai-infra (37 documents, Kubernetes v1.28-v1.32).
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[argo]] — Argo Workflows
-- [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
-- [[concepts/scheduling-algorithm.md|scheduling-algorithm]] — Scheduling Algorithm
-- [[concepts/autoscaling-strategies.md|autoscaling-strategies]] — Autoscaling Strategies
-- [[concepts/autoscaling-strategies.md|Autoscaling Strategies]]
-- [[concepts/scheduling-algorithm.md|Scheduling Algorithm]]
-- [[concepts/resource-management.md|Resource Management]]
+- [[concepts/resource-management|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[concepts/scheduling-algorithm|scheduling-algorithm]] — Scheduling Algorithm
+- [[concepts/autoscaling-strategies|autoscaling-strategies]] — Autoscaling Strategies
+- [[concepts/autoscaling-strategies|Autoscaling Strategies]]
+- [[concepts/scheduling-algorithm|Scheduling Algorithm]]
+- [[concepts/resource-management|Resource Management]]

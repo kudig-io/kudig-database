@@ -203,16 +203,16 @@ parameters:
 
 ## Related
 
-- [[hot.md|hot]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[hot|hot]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/sql|sql]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 
 ## See Also
 
-- [[domain-12-cloud-providers/04-alicloud-ack/243-ack-ram-authorization.md|243-ack-ram-authorization]]
-- [[domain-12-cloud-providers/04-alicloud-ack/244-ack-ros-iac.md|244-ack-ros-iac]]
-- [[domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md|alicloud-ack-overview]]
-- [[domain-12-cloud-providers/04-alicloud-ack/service-ack-practical-guide.md|service-ack-practical-guide]]
+- [[domain-12-cloud-providers/04-alicloud-ack/243-ack-ram-authorization|243-ack-ram-authorization]]
+- [[domain-12-cloud-providers/04-alicloud-ack/244-ack-ros-iac|244-ack-ros-iac]]
+- [[domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview|alicloud-ack-overview]]
+- [[domain-12-cloud-providers/04-alicloud-ack/service-ack-practical-guide|service-ack-practical-guide]]

@@ -43,7 +43,7 @@ Kanister 是一个面向 Kubernetes 的应用级数据管理框架，专门用�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -59,10 +59,10 @@ Kanister 是一个面向 Kubernetes 的应用级数据管理框架，专门用�
 
 ## 参考链接
 
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
 - [[operator-pattern]]
-- [[concepts/controller-pattern.md|controller-pattern]]
-- [[concepts/secrets-management.md|secrets-management]]
+- [[concepts/controller-pattern|controller-pattern]]
+- [[concepts/secrets-management|secrets-management]]
 - [[pod-lifecycle]]
 
 ## Related
@@ -78,17 +78,17 @@ Kanister 是一个面向 Kubernetes 的应用级数据管理框架，专门用�
 - inspektor-gadget
 
 - [[kubearmor]] — KubeArmor
-- [[entities/cncf-cicd.md|cncf-cicd]] — CNCF CI/CD 与发布管理项目全景
-- [[entities/cncf-networking.md|cncf-networking]] — CNCF 网络与服务网格项目全景
+- [[entities/cncf-cicd|cncf-cicd]] — CNCF CI/CD 与发布管理项目全景
+- [[entities/cncf-networking|cncf-networking]] — CNCF 网络与服务网格项目全景
 - [[armada]] — Armada
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[journal/digest-2026-05-21-full.md|digest-2026-05-21-full]]
+- [[journal/digest-2026-05-21-full|digest-2026-05-21-full]]
 - kanister
-- [[entities/k8up.md|K8up]]
-- [[entities/openebs.md|OpenEBS]]
-- [[entities/hwameistor.md|HwameiStor]]
-- [[entities/carina.md|Carina]]
+- [[entities/k8up|K8up]]
+- [[entities/openebs|OpenEBS]]
+- [[entities/hwameistor|HwameiStor]]
+- [[entities/carina|Carina]]
 - [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

@@ -112,13 +112,13 @@ created: "2026-05-23"
 
 ## 相关导航
 
-- [[references/release-notes-reading-guide.md|发布说明阅读指南]]
+- [[references/release-notes-reading-guide|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
-- [[references/k8s-platform-extensions.md|k8s-platform-extensions]] — 平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格
-- [[references/release-notes-core-deps.md|release-notes-core-deps]] — 发布说明索引 — 核心依赖
+- [[references/k8s-platform-extensions|k8s-platform-extensions]] — 平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格
+- [[references/release-notes-core-deps|release-notes-core-deps]] — 发布说明索引 — 核心依赖
 - [[helm]] — Helm
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

@@ -676,7 +676,7 @@ echo "=== 检查完成 ==="
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
+- [[domain-07-platform-engineering/README|Platform Ops Domain (平台运维领域)]]
 - Domain-9 平台运维 — 开源项目索引
 - 平台运维概述
 - 集群生命周期管理
@@ -690,8 +690,8 @@ echo "=== 检查完成 ==="
 
 ## Related
 
-- [[release-notes/12-demo-env-guide.md|12-demo-env-guide]]
-- [[release-notes/21-platform-selection-guide.md|21-platform-selection-guide]]
+- [[release-notes/12-demo-env-guide|12-demo-env-guide]]
+- [[release-notes/21-platform-selection-guide|21-platform-selection-guide]]
 
 ## See Also
 

@@ -158,6 +158,6 @@ domain-19-landscape-references/topic-release-notes/ 目录下全部 1321 个发�
 
 - [[longhorn]] — Longhorn
 - [[falco]] — Falco
-- [[entities/trivy.md|trivy]] — Trivy
+- [[entities/trivy|trivy]] — Trivy
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

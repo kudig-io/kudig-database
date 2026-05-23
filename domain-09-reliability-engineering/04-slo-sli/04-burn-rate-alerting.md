@@ -909,7 +909,7 @@ Day 12: PaymentServiceSlowBurn 恢复
   → 短暂问题，预算影响很小
 ```
 
-### 故障注入验证 ([[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]])
+### 故障注入验证 ([[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering|Chaos Engineering]])
 
 ```yaml
 # burn-rate-chaos-experiment.yaml

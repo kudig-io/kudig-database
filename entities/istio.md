@@ -1,6 +1,6 @@
 ---
 title: Istio (entities)
-description: '- [[skills/k8s-network-security-guide.md|k8s-network-security-guide]] — Kubernetes 网络安全最佳实践'
+description: '- [[skills/k8s-network-security-guide|k8s-network-security-guide]] — Kubernetes 网络安全最佳实践'
 category: entities
 tags:
 - k8s
@@ -64,13 +64,13 @@ Benefits: lower resource overhead, simpler operations, no sidecar injection issu
 
 ## Related
 
-- [[skills/k8s-network-security-guide.md|k8s-network-security-guide]] — Kubernetes 网络安全最佳实践
+- [[skills/k8s-network-security-guide|k8s-network-security-guide]] — Kubernetes 网络安全最佳实践
 - [[03-istio-security-hardening]] — Istio 安全加固
 - [[envoy]] — Envoy
-- [[concepts/microservice-resilience-patterns.md|microservice-resilience-patterns]] — Microservice Resilience Patterns
-- [[concepts/service-mesh-architecture.md|service-mesh-architecture]] — Service Mesh Architecture
-- [[concepts/service-mesh-architecture.md|Service Mesh Architecture]]
-- [[concepts/microservice-resilience-patterns.md|Microservice Resilience Patterns]]
+- [[concepts/microservice-resilience-patterns|microservice-resilience-patterns]] — Microservice Resilience Patterns
+- [[concepts/service-mesh-architecture|service-mesh-architecture]] — Service Mesh Architecture
+- [[concepts/service-mesh-architecture|Service Mesh Architecture]]
+- [[concepts/microservice-resilience-patterns|Microservice Resilience Patterns]]
 - [[envoy|Envoy Proxy]]
 - [[linkerd|Linkerd]]
 
@@ -116,8 +116,8 @@ Benefits: lower resource overhead, simpler operations, no sidecar injection issu
 - RELEASE-NOTES-0.5
 - 99-istio-service-mesh-guide
 - 01-istio-enterprise-service-mesh
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md|05-service-mesh-istio-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-mesh-istio-fta|Service Mesh(Istio) 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting|05-service-mesh-istio-troubleshooting]]
 - istio
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - [[references/k8s-platform-extensions|平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格]] — Cross-reference

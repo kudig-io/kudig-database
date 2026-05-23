@@ -1757,7 +1757,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech MOC
-- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
 - Domain-10 扩展与自定义 — 开源项目索引
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现

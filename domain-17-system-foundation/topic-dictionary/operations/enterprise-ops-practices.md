@@ -890,7 +890,7 @@ spec:
    ✅ **正确**: 预案需要包含诊断命令、多种修复方案(快速方案/彻底方案)、验证步骤、权限要求
    
 2. ❌ **误区**: 预案从不演练——"写了就放那儿，出事再看"
-   ✅ **正确**: 每季度进行故障演练([[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]])，验证预案有效性，让新人熟悉流程
+   ✅ **正确**: 每季度进行故障演练([[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering|Chaos Engineering]])，验证预案有效性，让新人熟悉流程
    
 3. ❌ **误区**: 所有问题都写预案——"覆盖100%的问题场景"
    ✅ **正确**: 优先覆盖高频(每月>1次)和高影响(P0/P1)的场景，长尾问题靠工程师能力

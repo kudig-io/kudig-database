@@ -102,18 +102,18 @@ eBPF 的突破性在于：**它在处理网络数据包的同一个 eBPF 程序�
 
 ## 相关
 
-- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[concepts/cilium-ebpf-networking|cilium-ebpf-networking]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
 - [[cilium]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 
 ## See Also
 
-- [[synthesis/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
-- [[synthesis/CRD × 可观测性.md|CRD × 可观测性]]
+- [[synthesis/CNI 插件 × NetworkPolicy|CNI 插件 × NetworkPolicy]]
+- [[synthesis/CRD × 可观测性|CRD × 可观测性]]
 - [[entities/deployment|Deployment]] × Secret 管理.md|Deployment × Secret 管理]]
-- [[synthesis/GitOps x 平台工程.md|GitOps x 平台工程]]
+- [[synthesis/GitOps x 平台工程|GitOps x 平台工程]]
 ## Related
 
 - [[synthesis/Deployment × Secret 管理|[[deployment]] × Secret 管理]]

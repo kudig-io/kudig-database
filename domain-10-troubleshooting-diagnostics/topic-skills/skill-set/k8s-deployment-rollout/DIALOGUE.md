@@ -388,10 +388,10 @@ kubectl patch deployment <deploy> -p '{"spec":{"template":{"spec":{"imagePullSec
 
 ## 相关案例
 
-- [[synthesis/case-studies/2026-05-28-daemonset-affinity-miss.md|2026-05-28-daemonset-affinity-miss]]
-- [[synthesis/case-studies/2026-06-20-节点时区不一致导致cronjob调度错乱.md|2026-06-20-节点时区不一致导致cronjob调度错乱]]
+- [[synthesis/case-studies/2026-05-28-daemonset-affinity-miss|2026-05-28-daemonset-affinity-miss]]
+- [[synthesis/case-studies/2026-06-20-节点时区不一致导致cronjob调度错乱|2026-06-20-节点时区不一致导致cronjob调度错乱]]
 - [[synthesis/case-studies/2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点|污点容忍度配置错误导致pod无法调度到专用节点]].md|2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点]]
-- [[synthesis/case-studies/2026-10-15-pod-disruption-budget阻止节点维护排空.md|2026-10-15-pod-disruption-budget阻止节点维护排空]]
+- [[synthesis/case-studies/2026-10-15-pod-disruption-budget阻止节点维护排空|2026-10-15-pod-disruption-budget阻止节点维护排空]]
 ## Related
 
 - [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes|Nodes（节点）]]

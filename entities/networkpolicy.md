@@ -82,16 +82,16 @@ Then add explicit allow policies for required traffic flows.
 - [[cilium]] — Cilium
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/service-networking.md|service-networking]] — Service Networking
-- [[concepts/security-defense-depth.md|security-defense-depth]] — Defense-in-Depth Security
-- [[concepts/service-networking.md|Service Networking]]
-- [[entities/cni-plugins.md|CNI Plugins]]
-- [[concepts/security-defense-depth.md|Defense-in-Depth Security]]
+- [[concepts/service-networking|service-networking]] — Service Networking
+- [[concepts/security-defense-depth|security-defense-depth]] — Defense-in-Depth Security
+- [[concepts/service-networking|Service Networking]]
+- [[entities/cni-plugins|CNI Plugins]]
+- [[concepts/security-defense-depth|Defense-in-Depth Security]]
 
-- [[synthesis/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
+- [[synthesis/CNI 插件 × NetworkPolicy|CNI 插件 × NetworkPolicy]]
 - 22-networkpolicy-reference
 - 16-networkpolicy-deep-practice
-- [[domain-10-troubleshooting-diagnostics/16-networkpolicy-troubleshooting.md|16-networkpolicy-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/16-networkpolicy-troubleshooting|16-networkpolicy-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta|NetworkPolicy 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting|04-networkpolicy-troubleshooting]]
 - [[skills/networkpolicy-fta|NetworkPolicy 异常故障树分析]] — Cross-reference

@@ -230,7 +230,7 @@ created: "2026-05-23"
 
 - k8s-rbac-quota
 
-- [[skills/ts-control-plane.md]]
+- [[skills/ts-control-plane]]
 
 - k8s-ingress-gateway
 

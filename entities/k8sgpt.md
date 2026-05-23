@@ -50,7 +50,7 @@ K8sGPT 是一款 AI 驱动的 Kubernetes 诊断工具，利用大语言模型 (L
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -67,17 +67,17 @@ K8sGPT 是一款 AI 驱动的 Kubernetes 诊断工具，利用大语言模型 (L
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
-- [[entities/trivy.md|trivy]]
-- [[entities/networkpolicy.md|networkpolicy]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/trivy|trivy]]
+- [[entities/networkpolicy|networkpolicy]]
 - [[deployment]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
 
 ## Related
 
 - [[spire]] — SPIRE
 - [[akri]] — Akri
-- [[entities/cncf-edge-ai.md|cncf-edge-ai]] — CNCF 边缘计算与 AI/ML 项目全景
+- [[entities/cncf-edge-ai|cncf-edge-ai]] — CNCF 边缘计算与 AI/ML 项目全景
 - [[confidential-containers]] — Confidential Containers (CoCo)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

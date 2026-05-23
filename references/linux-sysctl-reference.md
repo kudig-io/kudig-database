@@ -140,11 +140,11 @@ spec:
 
 ## Related
 
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/linux-container-foundation.md|linux-container-foundation]] — Linux Container Foundation
-- [[concepts/linux-sysctl-tuning.md|linux-sysctl-tuning]] — Linux Sysctl Tuning for Kubernetes
-- [[concepts/linux-sysctl-tuning.md|Linux Sysctl Tuning]]
-- [[concepts/linux-container-foundation.md|Linux Container Foundation]]
-- [[skills/configure-health-probes.md|Configure Health Probes]]
+- [[concepts/linux-container-foundation|linux-container-foundation]] — Linux Container Foundation
+- [[concepts/linux-sysctl-tuning|linux-sysctl-tuning]] — Linux Sysctl Tuning for Kubernetes
+- [[concepts/linux-sysctl-tuning|Linux Sysctl Tuning]]
+- [[concepts/linux-container-foundation|Linux Container Foundation]]
+- [[skills/configure-health-probes|Configure Health Probes]]

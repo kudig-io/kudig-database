@@ -39,7 +39,7 @@ Devfile 是一个开放标准，用于定义云原生开发环境。它通过 YA
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -55,20 +55,20 @@ Devfile 是一个开放标准，用于定义云原生开发环境。它通过 YA
 
 ## 参考链接
 
-- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]]
+- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]]
 
 ## Related
 
-- [[entities/external-secrets.md|secrets]]]] — External Secrets Operator
+- [[entities/external-secrets|secrets]]]] — External Secrets Operator
 - [[kube-burner]] — Kube-burner
 - [[eraser]] — Eraser
 - [[kubewarden]] — Kubewarden
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - devfile
-- [[entities/shipwright.md|Shipwright]]
-- [[entities/atlantis.md|Atlantis]]
-- [[entities/dalec.md|Dalec]]
-- [[entities/werf.md|werf]]
-- [[entities/pipecd.md|PipeCD]]
+- [[entities/shipwright|Shipwright]]
+- [[entities/atlantis|Atlantis]]
+- [[entities/dalec|Dalec]]
+- [[entities/werf|werf]]
+- [[entities/pipecd|PipeCD]]
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference

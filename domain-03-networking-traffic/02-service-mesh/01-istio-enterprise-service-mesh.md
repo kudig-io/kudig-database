@@ -1087,7 +1087,7 @@ Info [IST0108]: DestinationRule "reviews-policy" uses outlier detection with bas
 | PILOT_EVICTION_INTERVAL | 0s | 清理无效代理配置的间隔 | 30s |
 | PILOT_CERT_PROVIDER | istiod | 证书提供者类型 | istiod |
 | ENABLE_DEBUG_ON_HTTP | true | 是否启用 /debug 端点 | false (生产) |
-| KUBE_API_REQUEST_TIMEOUT | 60s | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 请求超时 | 60s |
+| KUBE_API_REQUEST_TIMEOUT | 60s | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 请求超时 | 60s |
 | PILOT_WORKLOAD_ENTRY_GRACE_PERIOD | 30s | WorkloadEntry 注入后的宽限期 | 30s |
 | PILOT_SIDECAR_ENABLE_INBOUND_PASSTHROUGH_PORTS | true | 是否允许入站流量直通 | 按需 |
 
@@ -1331,7 +1331,7 @@ istioctl proxy-config listener deploy/istio-ingressgateway -n istio-system --jso
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README.md|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
+- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
 - Domain-26 服务网格与微服务 — 开源项目索引
 - Linkerd 企业级服务网格深度实践
 - Consul Connect 企业级服务网格管理
@@ -1356,5 +1356,5 @@ istioctl proxy-config listener deploy/istio-ingressgateway -n istio-system --jso
 
 ## 相关合成分析
 
-- [[synthesis/service-mesh-zero-trust-security.md|Service Mesh 零信任安全架构]]
+- [[synthesis/service-mesh-zero-trust-security|Service Mesh 零信任安全架构]]
 

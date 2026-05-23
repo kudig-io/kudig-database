@@ -58,11 +58,11 @@ Custom security policies defined as K8s CRDs. Each policy specifies which kernel
 ## Related
 
 - [[confidential-containers]] — Confidential Containers (CoCo)
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
 - [[bootc]] — bootc
-- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]] — Cilium eBPF Networking
+- [[concepts/cilium-ebpf-networking|cilium-ebpf-networking]] — Cilium eBPF Networking
 - [[cilium]] — Cilium
-- [[concepts/cilium-ebpf-networking.md|Cilium eBPF Networking]]
+- [[concepts/cilium-ebpf-networking|Cilium eBPF Networking]]
 - [[falco|Falco]]
 - [[cilium|Cilium]]
 

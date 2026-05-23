@@ -132,7 +132,7 @@ created: "2026-05-23"
 | 原因 | Events关键字 | 诊断命令 | 解决方案 |
 |-----|-------------|---------|---------|
 | **StorageClass不存在** | `storageclass.storage.k8s.io "xxx" not found` | `kubectl get sc` | 创建对应SC |
-| **无匹配PV** | `no [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes.md|persistent volumes]]es（卷）|volumes]] available` | `kubectl get pv` | 创建匹配的PV |
+| **无匹配PV** | `no [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes|persistent volumes]]es（卷）|volumes]] available` | `kubectl get pv` | 创建匹配的PV |
 | **PV容量不足** | `no persistent volumes available` | 检查PV/PVC容量 | 创建更大容量PV |
 | **访问模式不匹配** | `no persistent volumes available` | 检查accessModes | 调整访问模式 |
 | **CSI驱动问题** | `waiting for a volume to be created` | `kubectl get pods -n kube-system \| grep csi` | 修复CSI驱动 |
@@ -909,27 +909,27 @@ echo "=========================================="
 ## Obsidian 相关文档
 
 - domain-10-troubleshooting-diagnostics MOC
-- [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
+- [[domain-10-troubleshooting-diagnostics/README|Domain-12 故障排查 (Troubleshooting)]]
 - Domain-12 故障排查 — 开源项目索引
-- [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]
-- [[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]
-- [[domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断]]
-- [[domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md|Node NotReady 状态深度诊断]]
-- [[domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis.md|OOM 和内存问题诊断]]
-- [[domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/09-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting|API Server 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting|etcd 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting|CNI 网络插件故障排查]]
+- [[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting|CSI 存储驱动故障排查]]
+- [[domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis|Pod Pending 状态深度诊断]]
+- [[domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis|Node NotReady 状态深度诊断]]
+- [[domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis|OOM 和内存问题诊断]]
+- [[domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting|Pod 全面故障排查]]
+- [[domain-10-troubleshooting-diagnostics/09-node-comprehensive-troubleshooting|Node 全面故障排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/12-rbac-quota-troubleshooting.md|12-rbac-quota-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/13-certificate-troubleshooting.md|13-certificate-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/15-ingress-troubleshooting.md|15-ingress-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/16-networkpolicy-troubleshooting.md|16-networkpolicy-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/12-rbac-quota-troubleshooting|12-rbac-quota-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/13-certificate-troubleshooting|13-certificate-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/15-ingress-troubleshooting|15-ingress-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/16-networkpolicy-troubleshooting|16-networkpolicy-troubleshooting]]
 
 ## Related
 

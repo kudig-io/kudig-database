@@ -61,7 +61,7 @@ created: "2026-05-23"
 
 # AI模型部署与生命周期管理
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kserve.md|KServe]]](https://kserve.github.io/website/) | [Seldon Core](https://docs.seldon.io/projects/seldon-core/) | [BentoML](https://docs.bentoml.org/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kserve|KServe]]](https://kserve.github.io/website/) | [Seldon Core](https://docs.seldon.io/projects/seldon-core/) | [BentoML](https://docs.bentoml.org/)
 
 <!-- chunk: 一、模型部署架构概览 -->
 ## 一、模型部署架构概览
@@ -878,7 +878,7 @@ kubectl describe pods -l app=<app-name> -n ai-models
 ## Obsidian 相关文档
 
 - domain-11-ai-infra KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
 - Domain-11 AI 基础设施 — 开源项目索引
 - AI 基础设施架构
 - 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)

@@ -85,7 +85,7 @@ Distilled from domain-03-networking-traffic (39 documents, Kubernetes v1.28-v1.3
 - [[grpc]] — gRPC
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/service-networking.md|service-networking]] — Service Networking
-- [[concepts/service-networking.md|Service Networking]]
-- [[entities/cni-plugins.md|CNI Plugins]]
-- [[entities/networkpolicy.md|NetworkPolicy]]
+- [[concepts/service-networking|service-networking]] — Service Networking
+- [[concepts/service-networking|Service Networking]]
+- [[entities/cni-plugins|CNI Plugins]]
+- [[entities/networkpolicy|NetworkPolicy]]

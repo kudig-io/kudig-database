@@ -69,7 +69,7 @@ created: "2026-05-23"
 
 # 13 - 集群健康检查指南 (Cluster Health Check Guide)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/tasks/debug/debug-cluster](https://kubernetes.io/docs/tasks/debug/debug-cluster/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/tasks/debug/debug-cluster](https://kubernetes.io/docs/tasks/debug/debug-cluster/)
 
 <!-- chunk: 集群健康检查架构 -->
 ## 集群健康检查架构
@@ -1125,7 +1125,7 @@ aliyun cs DescribeClusterNodes --ClusterId <cluster-id>
 ## Obsidian 相关文档
 
 - observability/MOC.md|domain-06-observability MOC]]
-- [[domain-06-observability/README.md|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
+- [[domain-06-observability/README|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
 - index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
@@ -1144,7 +1144,7 @@ aliyun cs DescribeClusterNodes --ClusterId <cluster-id>
 - 14-chaos-engineering
 - 15-enterprise-scale-monitoring
 
-- [[domain-06-observability/README.md|返回目录]]
+- [[domain-06-observability/README|返回目录]]
 
 ## Related
 

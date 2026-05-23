@@ -1,6 +1,6 @@
 ---
 title: Deployment
-description: '- [[synthesis/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
+description: '- [[synthesis/Pod 生命周期 × Secret 管理|Pod 生命周期 × Secret 管理]] — 综合'
 category: entities
 tags:
 - k8s
@@ -66,20 +66,20 @@ For zero-downtime updates: set `maxUnavailable: 0` with `maxSurge: 1`.
 - **Progressing**: Deployment is making progress (new Pods created or old Pods terminated)
 
 ## Related
-- [[synthesis/Pod 生命周期 × Secret 管理.md|[[Pod 生命周期 × Secret 管理|Pod 生命周期 × Secret 管理]]]] — 综合
-- [[synthesis/控制器模式 × Deployment.md|控制器模式 × Deployment]] — 综合
+- [[synthesis/Pod 生命周期 × Secret 管理|[[Pod 生命周期 × Secret 管理|Pod 生命周期 × Secret 管理]]]] — 综合
+- [[synthesis/控制器模式 × Deployment|控制器模式 × Deployment]] — 综合
 
 - [[synthesis/Deployment × Secret 管理]]
 
-- [[skills/deployment-workload-selection.md|deployment-workload-selection]] — 工作负载控制器选型
-- [[skills/k8s-deployment-strategies-guide.md|k8s-deployment-strategies-guide]] — Kubernetes 部署策略最佳实践
-- [[skills/deployment-canary-and-bluegreen.md|deployment-canary-and-bluegreen]] — 金丝雀与蓝绿发布
-- [[entities/statefulset.md|statefulset]] — StatefulSet
-- [[concepts/autoscaling-strategies.md|autoscaling-strategies]] — Autoscaling Strategies
-- [[entities/statefulset.md|StatefulSet]]
+- [[skills/deployment-workload-selection|deployment-workload-selection]] — 工作负载控制器选型
+- [[skills/k8s-deployment-strategies-guide|k8s-deployment-strategies-guide]] — Kubernetes 部署策略最佳实践
+- [[skills/deployment-canary-and-bluegreen|deployment-canary-and-bluegreen]] — 金丝雀与蓝绿发布
+- [[entities/statefulset|statefulset]] — StatefulSet
+- [[concepts/autoscaling-strategies|autoscaling-strategies]] — Autoscaling Strategies
+- [[entities/statefulset|StatefulSet]]
 - ReplicaSet
 - [[pod-lifecycle|Pod Lifecycle]]
-- [[concepts/autoscaling-strategies.md|Autoscaling Strategies]]
+- [[concepts/autoscaling-strategies|Autoscaling Strategies]]
 
 - 04-kubernetes-multi-cloud-hybrid-deployment
 - 99-kubernetes-deployment-patterns-architecture
@@ -99,9 +99,9 @@ For zero-downtime updates: set `maxUnavailable: 0` with `maxSurge: 1`.
 - 03-kubeedge-architecture-deployment
 - 12-cluster-deployment-patterns
 - 10-model-deployment-management
-- [[domain-10-troubleshooting-diagnostics/11-deployment-comprehensive-troubleshooting.md|11-deployment-comprehensive-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md|Deployment 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/11-deployment-comprehensive-troubleshooting|11-deployment-comprehensive-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta|Deployment 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|02-deployment-troubleshooting]]
 - [[references/k8s-workloads-domain-guide|Kubernetes Workloads Domain Guide]] — Cross-reference
 - [[references/workloads-terms|K8s 工作负载术语参考]] — Cross-reference
 - [[references/fundamentals-terms|K8s 基础概念术语参考]] — Cross-reference

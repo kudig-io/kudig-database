@@ -78,9 +78,9 @@ created: "2026-05-23"
 
 ## Related
 
-- [[skills/skill-k8s-node-notready-SKILL.md|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod-fta]] — pod-fta
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md|dns-fta]] — dns-fta
+- [[skills/skill-k8s-node-notready-SKILL|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta|pod-fta]] — pod-fta
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta|dns-fta]] — dns-fta
 - [[etcd]] — etcd
 - [[apiserver-fta]] — API Server 异常故障树分析
 - observability/07-tools/26-troubleshooting-tools|100 - 故障排查增强工具]] — Cross-reference

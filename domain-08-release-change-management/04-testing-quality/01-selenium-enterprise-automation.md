@@ -982,7 +982,7 @@ health_check() {
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-29-automated-testing-quality MOC
-- [[domain-08-release-change-management/README.md|Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
+- [[domain-08-release-change-management/README|Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
 - Domain-29 自动化测试与质量 — 开源项目索引
 - JUnit 5 企业级单元测试框架深度实践
 - 企业级AI测试与质量保障深度实践

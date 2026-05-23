@@ -41,7 +41,7 @@ werf 是一个一致且可复现的 CI/CD 交付工具，将 Git 作为唯一真
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -59,13 +59,13 @@ werf 是一个一致且可复现的 CI/CD 交付工具，将 Git 作为唯一真
 ## 参考链接
 
 - [[deployment]]
-- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
+- [[concepts/ci-cd-pipeline-patterns|ci-cd-pipeline-patterns]]
 
 ## Related
 
 - [[pipecd]] — PipeCD
 - [[hami]] — HAMI
-- [[open-policy-containers]] — [[entities/open-policy-containers.md|Open Policy Containers (OPCR)]]
+- [[open-policy-containers]] — [[entities/open-policy-containers|Open Policy Containers (OPCR)]]
 - [[helm]] — Helm
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

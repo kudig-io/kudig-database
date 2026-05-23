@@ -39,7 +39,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-# [[skills/training-public/inner-training/week-4-network-storage/day-23-ingress.md|Day 23: Ingress]]ss|Ingress]] 实操
+# [[skills/training-public/inner-training/week-4-network-storage/day-23-ingress|Day 23: Ingress]]ss|Ingress]] 实操
 
 > **日期**: Week 4 Day 2 | **主题**: Ingress 路由规则与控制器配置 | **版本**: K8s 1.28-1.33
 

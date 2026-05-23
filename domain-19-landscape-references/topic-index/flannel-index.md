@@ -49,8 +49,8 @@ created: "2026-05-23"
 
 ### 进阶专题
 
-- [[domain-03-networking-traffic/00-core-k8s-networking/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]]]
-- [[domain-03-networking-traffic/00-core-k8s-networking/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]]]
+- [[domain-03-networking-traffic/00-core-k8s-networking/04a-flannel-wireguard-backend|Flannel WireGuard 加密后端配置]]]]
+- [[domain-03-networking-traffic/00-core-k8s-networking/04b-flannel-ipv6-dual-stack|Flannel IPv6 Dual Stack 支持]]]]
 - Flannel Windows 节点支持
 - Flannel 多集群场景与子网冲突处理
 - flanneld 启动参数详解
@@ -76,7 +76,7 @@ created: "2026-05-23"
 
 ### CNI 生态
 
-- [[domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md]]
+- [[domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces]]
 - Calico 网络
 - Cilium eBPF 网络与安全实践指南
 

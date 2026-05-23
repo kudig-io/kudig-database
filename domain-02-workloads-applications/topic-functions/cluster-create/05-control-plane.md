@@ -785,8 +785,8 @@ ls -la /etc/kubernetes/manifests/
 
 ## Related
 
-- [[log.md|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/01-overview.md|01-overview]]
+- [[log|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[entities/kubernetes|kubernetes]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/01-overview|01-overview]]

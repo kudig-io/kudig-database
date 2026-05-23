@@ -1,6 +1,6 @@
 ---
 title: Software Supply Chain Security
-description: '- [[synthesis/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis'
+description: '- [[synthesis/纵深防御 x 供应链安全|纵深防御 x 供应链安全]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -83,20 +83,20 @@ Kyverno or OPA Gatekeeper policies verify image signatures before deployment:
 
 ## Related
 
-- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]] — CI/CD Pipeline Patterns
+- [[concepts/ci-cd-pipeline-patterns|ci-cd-pipeline-patterns]] — CI/CD Pipeline Patterns
 - [[opa]] — OPA (Open Policy Agent)
 - [[kyverno]] — Kyverno
-- [[entities/trivy.md|trivy]] — Trivy
-- [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
-- [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
-- [[concepts/ci-cd-pipeline-patterns.md|CI/CD Pipeline Patterns]]
-- [[entities/trivy.md|Trivy]]
+- [[entities/trivy|trivy]] — Trivy
+- [[concepts/cloud-native-defense-in-depth|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
+- [[concepts/cloud-native-defense-in-depth|Cloud Native Defense in Depth]]
+- [[concepts/ci-cd-pipeline-patterns|CI/CD Pipeline Patterns]]
+- [[entities/trivy|Trivy]]
 - Cosign/Sigstore
 - [[kyverno|Kyverno]]
-- [[synthesis/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis
+- [[synthesis/纵深防御 x 供应链安全|纵深防御 x 供应链安全]] — synthesis
 
 - 20-kubernetes-supply-chain-security-sbom-slsa-sigstore
-- [[domain-05-security-compliance/00-open-source-projects-index.md|00-open-source-projects-index]]
+- [[domain-05-security-compliance/00-open-source-projects-index|00-open-source-projects-index]]
 - 02-supply-chain-maturity-model
 - 07-sigstore-cosign-signing
 - 01-supply-chain-security-overview
@@ -104,7 +104,7 @@ Kyverno or OPA Gatekeeper policies verify image signatures before deployment:
 - 06-github-actions-slsa-build
 - 08-fulcio-rekor-transparency
 - 10-compliance-automation-audit
-- [[domain-05-security-compliance/README.md|Domain 39: 供应链安全 (Supply Chain Security)]]
+- [[domain-05-security-compliance/README|Domain 39: 供应链安全 (Supply Chain Security)]]
 - 04-sbom-vulnerability-analysis
 - 05-slsa-levels-implementation
 - 09-policy-controller-verification

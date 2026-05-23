@@ -74,8 +74,8 @@ created: "2026-05-23"
 ## 目录
 
 1. [Service Mesh 核心架构](#1-service-mesh-核心架构)
-2. [[entities/istio.md|Istio]] 深度实践 (Sidecar & Ambient)](#2-istio-深度实践-sidecar--ambient)
-3. [[entities/linkerd.md|Linkerd]] 生产部署](#3-linkerd-生产部署)
+2. [[entities/istio|Istio]] 深度实践 (Sidecar & Ambient)](#2-istio-深度实践-sidecar--ambient)
+3. [[entities/linkerd|Linkerd]] 生产部署](#3-linkerd-生产部署)
 4. [Cilium Service Mesh](#4-cilium-service-mesh)
 5. [多集群服务网格](#5-多集群服务网格)
 6. [性能优化与调优](#6-性能优化与调优)
@@ -285,7 +285,7 @@ pilot:
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档

@@ -106,12 +106,12 @@ output_pattern:
 
 ## 相关链接
 
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断引擎]]
+- [[skills/FTA Diagnostic Execution Engine|FTA 诊断引擎]]
 
 ## Related
 
 - [[flannel-fta]] — Flannel 网络异常故障树分析
-- [[skills/skill-22-daemonset-failure.md|skill-22-daemonset-failure]] — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
+- [[skills/skill-22-daemonset-failure|skill-22-daemonset-failure]] — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 - [[csi-fta]] — CSI 存储异常故障树分析
 - [[helm-fta]] — Helm 发布异常故障树分析
-- [[skills/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
+- [[skills/skill-reference-diagnostic-workflow|skill-reference-diagnostic-workflow]] — Diagnostic Workflow

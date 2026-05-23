@@ -324,9 +324,9 @@ memory_metadata:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|[[Kubernetes 生产环境速查卡|k8s]]]]
-- [[entities/coredns.md|coredns]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|[[Go 生产环境速查卡|go]]]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|[[Kubernetes 生产环境速查卡|k8s]]]]
+- [[entities/coredns|coredns]]
 
 ## See Also
 

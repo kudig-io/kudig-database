@@ -1685,9 +1685,9 @@ Level 5 - 自主GitOps (Autonomous GitOps)
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
 - index.md|Domain-3 控制平面 — 开源项目索引]]
-- [[concepts/kubernetes-architecture-overview.md]]
+- [[concepts/kubernetes-architecture-overview]]
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
 - 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...
 - 控制平面安全加固指南 (Control Plane Security Hardening Guide)

@@ -506,14 +506,14 @@ web.production.svc.cluster.local
 
 ## 相关链接
 
-- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]
-- [[skills/ts-workloads.md|工作负载故障排查]]
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/troubleshoot-pod-issues|Pod 故障排查]]
+- [[skills/ts-workloads|工作负载故障排查]]
+- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
 
 ## Related
 
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[entities/argocd.md|argocd]] — ArgoCD
+- [[entities/argocd|argocd]] — ArgoCD
 - [[argo]] — Argo Workflows

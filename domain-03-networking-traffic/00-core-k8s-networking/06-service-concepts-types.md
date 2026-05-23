@@ -2665,7 +2665,7 @@ roleRef:
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -2679,11 +2679,11 @@ roleRef:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s 速查卡]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|K8s 速查卡]]
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-03-networking-traffic
 - 相关知识域: domain-06-observability
-- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|速查卡: networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking|速查卡: networking]]
 - [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
 
 ## See Also

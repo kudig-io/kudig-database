@@ -41,7 +41,7 @@ Kuadrant 是一个 Kubernetes Gateway API 的策略引擎，为 Gateway API 添�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -57,12 +57,12 @@ Kuadrant 是一个 Kubernetes Gateway API 的策略引擎，为 Gateway API 添�
 
 ## 参考链接
 
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
 - [[operator-pattern]]
 
 ## Related
 
-- [[open-cluster-management]] — [[entities/open-cluster-management.md|Open Cluster Management (OCM)]]
+- [[open-cluster-management]] — [[entities/open-cluster-management|Open Cluster Management (OCM)]]
 - [[cdk8s]] — cdk8s (Cloud Development Kit for Kubernetes)
 - [[cloud-custodian]] — Cloud Custodian
 - [[cert-manager]] — cert-manager

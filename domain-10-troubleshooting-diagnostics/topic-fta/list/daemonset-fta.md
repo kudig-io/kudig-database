@@ -189,7 +189,7 @@ flowchart TD
 
 ## See Also
 
-- [[skills/crd-operator-fta.md|crd-operator-fta]]
-- [[skills/csi-fta.md|csi-fta]]
-- [[skills/deployment-canary-and-bluegreen.md|deployment-canary-and-bluegreen]]
-- [[skills/deployment-fta.md|deployment-fta]]
+- [[skills/crd-operator-fta|crd-operator-fta]]
+- [[skills/csi-fta|csi-fta]]
+- [[skills/deployment-canary-and-bluegreen|deployment-canary-and-bluegreen]]
+- [[skills/deployment-fta|deployment-fta]]

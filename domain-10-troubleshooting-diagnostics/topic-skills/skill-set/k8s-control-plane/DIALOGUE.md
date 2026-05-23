@@ -432,7 +432,7 @@ kubectl无法连接
 
 ## 相关案例
 
-- [[synthesis/case-studies/2026-07-15--admission-webhook超时导致所有api操作失败.md|2026-07-15--admission-webhook超时导致所有api操作失败]]
+- [[synthesis/case-studies/2026-07-15--admission-webhook超时导致所有api操作失败|2026-07-15--admission-webhook超时导致所有api操作失败]]
 ## Related
 
 - [[domain-17-system-foundation/03-kubernetes-events/02-pod-container-lifecycle-events|02 - Pod 与容器生命周期事件]]

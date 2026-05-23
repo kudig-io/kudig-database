@@ -51,7 +51,7 @@ created: "2026-05-23"
 ### ServiceAccount
 
 - **避免使用 `default` ServiceAccount**。为每个工作负载或微服务创建独立的 ServiceAccount。
-- 除非 Pod 明确需要访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 才能运行，否则应将 `automountServiceAccountToken` 设置为 `false`。
+- 除非 Pod 明确需要访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 才能运行，否则应将 `automountServiceAccountToken` 设置为 `false`。
 
 ### Pod 级 `securityContext` 建议
 

@@ -1,6 +1,6 @@
 ---
 title: Persistent Storage Model (PV/PVC/StorageClass)
-description: '- [[synthesis/Secret 管理 × 存储模型.md|Secret 管理 × 存储模型]] — 综合'
+description: '- [[synthesis/Secret 管理 × 存储模型|Secret 管理 × 存储模型]] — 综合'
 category: concepts
 tags:
 - k8s
@@ -77,16 +77,16 @@ Popular [[CSI Drivers|CSI drivers]] include AWS EBS CSI, Azure Disk CSI, Ceph CS
 - Use appropriate access modes (RWO for databases, RWX for shared file storage)
 
 ## Related
-- [[synthesis/Secret 管理 × 存储模型.md|Secret 管理 × 存储模型]] — 综合
+- [[synthesis/Secret 管理 × 存储模型|Secret 管理 × 存储模型]] — 综合
 
 - [[kanister]] — Kanister
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
-- [[skills/manage-persistent-storage.md|manage-persistent-storage]] — Manage Persistent Storage
-- [[entities/csi-drivers.md|csi-drivers]] — CSI Drivers
-- [[entities/csi-drivers.md|CSI Drivers]]
-- [[entities/statefulset.md|StatefulSet]]
-- [[skills/manage-persistent-storage.md|Manage Persistent Storage]]
-- [[concepts/resource-management.md|Resource Management]]
+- [[concepts/resource-management|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[skills/manage-persistent-storage|manage-persistent-storage]] — Manage Persistent Storage
+- [[entities/csi-drivers|csi-drivers]] — CSI Drivers
+- [[entities/csi-drivers|CSI Drivers]]
+- [[entities/statefulset|StatefulSet]]
+- [[skills/manage-persistent-storage|Manage Persistent Storage]]
+- [[concepts/resource-management|Resource Management]]
 
-- [[synthesis/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
+- [[synthesis/Pod 生命周期 × 存储模型|Pod 生命周期 × 存储模型]]

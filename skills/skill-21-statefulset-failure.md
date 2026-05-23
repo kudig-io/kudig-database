@@ -165,14 +165,14 @@ created: "2026-05-23"
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
-- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
+- [[skills/Kubernetes Diagnostic Skills Overview|诊断技能总览]]
+- [[skills/troubleshoot-pod-issues|Pod 故障排查]]
 
 ## Related
 
-- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
-- [[entities/statefulset.md|statefulset]] — StatefulSet
+- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
+- [[entities/statefulset|statefulset]] — StatefulSet
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

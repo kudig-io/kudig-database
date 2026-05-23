@@ -232,7 +232,7 @@ echo -n "myhost.mysub.mynamespace.svc.cluster.local" | wc -c
 
 ## 交叉引用
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/statefulsets.md|StatefulSets]]](statefulsets.md) — 自动管理稳定网络标识的首选方案
+- [[domain-17-system-foundation/topic-dictionary/workloads/statefulsets|StatefulSets]]](statefulsets.md) — 自动管理稳定网络标识的首选方案
 - [Pods](pods.md) — Pod 基础概念和 metadata.name
 - [Downward API](downward-api.md) — 在容器内获取 Pod 元数据的其他方式
 

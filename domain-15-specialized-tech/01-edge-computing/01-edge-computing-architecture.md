@@ -1574,7 +1574,7 @@ print(f"推荐配置: {result['recommended_cpu_cores']} 核, "
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-37-edge-computing MOC
-- [[domain-15-specialized-tech/README.md|Domain 37: 边缘计算 (Edge Computing)]]
+- [[domain-15-specialized-tech/README|Domain 37: 边缘计算 (Edge Computing)]]
 - Domain-37 边缘计算 — 开源项目索引
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
 - KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)

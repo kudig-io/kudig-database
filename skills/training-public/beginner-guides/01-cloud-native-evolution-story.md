@@ -464,6 +464,6 @@ K8s 中，一切都是可以用 YAML 描述的资源对象：
 ---
 
 **关联文档**:
-- [[02-local-lab-environment.md]] — 下一步：本地搭建实验环境
+- [[02-local-lab-environment]] — 下一步：本地搭建实验环境
 - ../fundamentals/01-what-is-kubernetes.md — 系统学习 K8s 概念
 - ../../domain-01-cluster-fundamentals/01-architecture-overview/01-kubernetes-architecture-overview.md — 架构深度解析

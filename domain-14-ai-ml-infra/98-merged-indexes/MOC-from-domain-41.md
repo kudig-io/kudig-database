@@ -30,7 +30,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-# topic-ai-agent [[MOC.md|MOC]]
+# topic-ai-agent [[MOC|MOC]]
 
 > **MOC 版本**: 1.0
 > **专题**: topic-ai-agent
@@ -124,7 +124,7 @@ AI Agent — AI 智能体架构、工具调用、Agent 工作流
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
 - cost-optimization
 - daily-ops
-- [[man/INSTALL.md|INSTALL]]
+- [[man/INSTALL|INSTALL]]

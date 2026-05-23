@@ -286,7 +286,7 @@ created: "2026-05-23"
 ## Obsidian 相关文档
 
 - domain-20-enterprise-monitoring-alerting MOC
-- [[domain-06-observability/README.md|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
+- [[domain-06-observability/README|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
 - Prometheus企业级监控系统深度实践
 - Grafana Enterprise Observability Platform 深度实践
 - OpenTelemetry分布式追踪与可观测性深度实践
@@ -300,9 +300,9 @@ created: "2026-05-23"
 
 ## See Also
 
-- [[domain-06-observability/07-tools/26-troubleshooting-tools.md|26-troubleshooting-tools]]
-- [[domain-06-observability/07-tools/27-performance-profiling-tools.md|27-performance-profiling-tools]]
-- [[domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-21.md|00-open-source-projects-index-from-domain-06-observability]]
-- [[domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-8.md|00-open-source-projects-index-from-domain-06-observability]]
+- [[domain-06-observability/07-tools/26-troubleshooting-tools|26-troubleshooting-tools]]
+- [[domain-06-observability/07-tools/27-performance-profiling-tools|27-performance-profiling-tools]]
+- [[domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-21|00-open-source-projects-index-from-domain-06-observability]]
+- [[domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-8|00-open-source-projects-index-from-domain-06-observability]]
 
-- [[domain-06-observability/README.md|返回目录]]
+- [[domain-06-observability/README|返回目录]]

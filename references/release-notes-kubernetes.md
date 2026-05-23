@@ -87,16 +87,16 @@ created: "2026-05-23"
 ## 相关导航
 
 - [[kubernetes|Kubernetes]]
-- [[entities/kubernetes-changelog.md|Kubernetes 变更日志索引]]
-- [[concepts/kubernetes-version-evolution.md|Kubernetes 版本演进]]
-- [[references/version-upgrade-guide.md|版本升级指南]]
-- [[references/release-notes-reading-guide.md|发布说明阅读指南]]
+- [[entities/kubernetes-changelog|Kubernetes 变更日志索引]]
+- [[concepts/kubernetes-version-evolution|Kubernetes 版本演进]]
+- [[references/version-upgrade-guide|版本升级指南]]
+- [[references/release-notes-reading-guide|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
-- [[references/release-notes-reading-guide.md|release-notes-reading-guide]] — 发布说明阅读指南
-- [[references/kudig-contribution-guide.md|kudig-contribution-guide]] — 贡献指南、项目概览与版本发布说明
-- [[references/release-notes-security.md|release-notes-security]] — 发布说明索引 — 安全
+- [[references/release-notes-reading-guide|release-notes-reading-guide]] — 发布说明阅读指南
+- [[references/kudig-contribution-guide|kudig-contribution-guide]] — 贡献指南、项目概览与版本发布说明
+- [[references/release-notes-security|release-notes-security]] — 发布说明索引 — 安全
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

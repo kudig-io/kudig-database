@@ -47,7 +47,7 @@ Kubewarden 是一个 Kubernetes 策略引擎，使用 WebAssembly (Wasm) 运行�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -64,22 +64,22 @@ Kubewarden 是一个 Kubernetes 策略引擎，使用 WebAssembly (Wasm) 运行�
 
 ## 参考链接
 
-- [[entities/argocd.md|[[ArgoCD|argocd]]]]
+- [[entities/argocd|[[ArgoCD|argocd]]]]
 - [[deployment]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
-- [[concepts/controller-pattern.md|controller-pattern]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[concepts/controller-pattern|controller-pattern]]
 - [[pod-lifecycle]]
 
 ## Related
 
-- [[entities/cncf-infrastructure.md|cncf-infrastructure]] — CNCF 基础设施与混沌工程项目全景
-- [[entities/external-secrets.md|secrets]]]] — External Secrets Operator
+- [[entities/cncf-infrastructure|cncf-infrastructure]] — CNCF 基础设施与混沌工程项目全景
+- [[entities/external-secrets|secrets]]]] — External Secrets Operator
 - [[kube-burner]] — Kube-burner
 - [[eraser]] — Eraser
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - kubewarden
-- [[entities/capsule.md|Capsule]]
+- [[entities/capsule|Capsule]]
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]

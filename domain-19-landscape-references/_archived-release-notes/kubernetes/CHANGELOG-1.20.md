@@ -268,7 +268,7 @@ created: "2026-05-23"
   - [What's New (Major Themes)](#whats-new-major-themes)
     - [Dockershim deprecation](#dockershim-deprecation)
     - [External credential provider for client-go](#external-credential-provider-for-client-go)
-    - [[domain-17-system-foundation/topic-dictionary/workloads/cronjob.md|CronJob]] controller v2 is available through feature gate](#cronjob-controller-v2-is-available-through-feature-gate)
+    - [[domain-17-system-foundation/topic-dictionary/workloads/cronjob|CronJob]] controller v2 is available through feature gate](#cronjob-controller-v2-is-available-through-feature-gate)
     - [PID Limits graduates to General Availability](#pid-limits-graduates-to-general-availability)
     - API Priority and Fairness graduates to Beta](#api-priority-and-fairness-graduates-to-beta)
     - [IPv4/IPv6 run](#ipv4ipv6-run)

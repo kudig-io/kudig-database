@@ -354,8 +354,8 @@ graph TB
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[concepts/ai-agent-README.md|ai-agent-README]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/dex.md|Dex]]
-- [[entities/opentelemetry.md|OpenTelemetry]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[concepts/ai-agent-README|ai-agent-README]]
+- [[entities/kubernetes|kubernetes]]
+- [[entities/dex|Dex]]
+- [[entities/opentelemetry|OpenTelemetry]]

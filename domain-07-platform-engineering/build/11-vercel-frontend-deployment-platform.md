@@ -53,7 +53,7 @@ created: "2026-05-23"
 # Vercel 前端部署平台深度指南
 # Vercel Frontend Deployment Platform In-Depth Guide
 
-> **领域**: 平台工程 | [[synthesis/platform-engineering-sre.md|Platform Engineering]]  
+> **领域**: 平台工程 | [[synthesis/platform-engineering-sre|Platform Engineering]]  
 > **难度**: 入门到中级 | Beginner to Intermediate  
 > **阅读时间**: 约 45 分钟 | ~45 min read  
 > **最后更新**: 2026-04-03
@@ -1081,7 +1081,7 @@ vercel inspect <deployment-url>
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-07-platform-engineering KUDIG Database — Global MOC
-- [[domain-07-platform-engineering/README.md|Domain 36: 平台工程 (Platform Engineering)]]
+- [[domain-07-platform-engineering/README|Domain 36: 平台工程 (Platform Engineering)]]
 - Domain-36 平台工程 — 开源项目索引
 - 平台工程概述与成熟度模型
 - 内部开发者平台设计原则

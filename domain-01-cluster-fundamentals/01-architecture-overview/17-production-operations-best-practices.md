@@ -67,7 +67,7 @@ cross_refs:
 created: "2026-05-23"
 ---
 
-# 17 - 生产环境运维最佳实践 ([[references/k8s-production-operations.md|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])
+# 17 - 生产环境运维最佳实践 ([[references/k8s-production-operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])
 
 > **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [Kubernetes Production Guide](https://kubernetes.io/docs/setup/production-environment/), CNCF Production Readiness
 
@@ -1874,7 +1874,7 @@ echo -e "\n=== 诊断完成 ==="
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析

@@ -1019,7 +1019,7 @@ echo -e "\n=== 标签合规检查完成 ==="
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-27-multi-cloud-hybrid KUDIG Database — Global MOC
-- [[domain-12-cloud-providers/README.md|[[Domain 27: 多云与混合云架构管理|Domain 27: 多云与混合云架构管理]]]]
+- [[domain-12-cloud-providers/README|[[Domain 27: 多云与混合云架构管理|Domain 27: 多云与混合云架构管理]]]]
 - Domain-27 多云与混合云 — 开源项目索引
 - AWS EKS 企业级多云管理平台
 - Azure AKS 企业级多云管理平台

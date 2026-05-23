@@ -45,7 +45,7 @@ Confidential Containers (CoCo) 是一个为 Kubernetes 提供机密计算能力�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -64,15 +64,15 @@ Confidential Containers (CoCo) 是一个为 Kubernetes 提供机密计算能力�
 
 - [[deployment]]
 - [[operator-pattern]]
-- [[concepts/controller-pattern.md|controller-pattern]]
-- [[concepts/secrets-management.md|secrets-management]]
+- [[concepts/controller-pattern|controller-pattern]]
+- [[concepts/secrets-management|secrets-management]]
 - [[pod-lifecycle]]
 
 ## Related
 
 - [[spire]] — SPIRE
 - [[akri]] — Akri
-- [[entities/cncf-edge-ai.md|cncf-edge-ai]] — CNCF 边缘计算与 AI/ML 项目全景
+- [[entities/cncf-edge-ai|cncf-edge-ai]] — CNCF 边缘计算与 AI/ML 项目全景
 - [[opa]] — OPA (Open Policy Agent)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

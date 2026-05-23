@@ -41,7 +41,7 @@ Kube-OVN 是一个基于 OVN/OVS 的高级 Kubernetes 网络 CNI 插件，将 SD
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -58,17 +58,17 @@ Kube-OVN 是一个基于 OVN/OVS 的高级 Kubernetes 网络 CNI 插件，将 SD
 
 ## 参考链接
 
-- [[entities/cni-plugins.md|cni-plugins]]
-- [[entities/networkpolicy.md|[[NetworkPolicy|networkpolicy]]]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
-- [[concepts/controller-pattern.md|controller-pattern]]
+- [[entities/cni-plugins|cni-plugins]]
+- [[entities/networkpolicy|[[NetworkPolicy|networkpolicy]]]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[concepts/controller-pattern|controller-pattern]]
 - [[pod-lifecycle]]
 
 ## Related
 
 - [[sermant]] — Sermant
 - [[loxilb]] — LoxiLB
-- [[entities/statefulset.md|statefulset]] — StatefulSet
+- [[entities/statefulset|statefulset]] — StatefulSet
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

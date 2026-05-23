@@ -75,8 +75,8 @@ FEBM 是一种**归纳取证**方法，从证据出发推理结论：
 
 ## Related
 
-- [[synthesis/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]] — Structural Troubleshooting Framework
-- [[synthesis/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Production Troubleshooting Playbook
+- [[synthesis/Structural Troubleshooting Framework|Structural Troubleshooting Framework]] — Structural Troubleshooting Framework
+- [[synthesis/Production Troubleshooting Playbook|Production Troubleshooting Playbook]] — Production Troubleshooting Playbook
 
 - [[README]]
 - [[nginx-ingress-fta]]

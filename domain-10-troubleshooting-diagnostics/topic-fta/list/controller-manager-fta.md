@@ -203,7 +203,7 @@ flowchart TD
 
 ## See Also
 
-- [[skills/cluster-upgrade-fta.md|cluster-upgrade-fta]]
-- [[skills/configure-health-probes.md|configure-health-probes]]
-- [[skills/crd-operator-fta.md|crd-operator-fta]]
-- [[skills/csi-fta.md|csi-fta]]
+- [[skills/cluster-upgrade-fta|cluster-upgrade-fta]]
+- [[skills/configure-health-probes|configure-health-probes]]
+- [[skills/crd-operator-fta|crd-operator-fta]]
+- [[skills/csi-fta|csi-fta]]

@@ -95,7 +95,7 @@ topic-scenarios 专题
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
 - backup-restore
 - cost-optimization
 - network-diagnosis

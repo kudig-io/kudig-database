@@ -138,7 +138,7 @@ Velero（前身为 Heptio Ark）是 Kubernetes 备份和灾难恢复工具。
 
 ## Related
 
-- [[concepts/observability-stack-evolution.md|observability-stack-evolution]] — 可观测性栈演进
+- [[concepts/observability-stack-evolution|observability-stack-evolution]] — 可观测性栈演进
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[rook]] — Rook

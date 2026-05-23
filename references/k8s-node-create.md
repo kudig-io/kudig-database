@@ -474,14 +474,14 @@ Cluster Autoscaler 工作循环:
 
 ## 相关链接
 
-- [[skills/troubleshoot-node-issues.md|节点故障排查]]
-- [[skills/ts-node-components.md|节点组件排查]]
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/troubleshoot-node-issues|节点故障排查]]
+- [[skills/ts-node-components|节点组件排查]]
+- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
 
 ## Related
 
-- [[entities/kube-apiserver.md|kube-apiserver]] — kube-apiserver
+- [[entities/kube-apiserver|kube-apiserver]] — kube-apiserver
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/node-lifecycle-management.md|node-lifecycle-management]] — 节点生命周期管理
+- [[concepts/node-lifecycle-management|node-lifecycle-management]] — 节点生命周期管理

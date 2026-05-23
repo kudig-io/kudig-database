@@ -120,16 +120,16 @@ Pod 未自动注入 sidecar 会导致 mTLS 和授权策略不生效。应检查�
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
-- [[entities/networkpolicy.md|NetworkPolicy]]
+- [[concepts/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]
+- [[entities/networkpolicy|NetworkPolicy]]
 - [[istio|Istio]]
-- [[skills/k8s-network-configuration-guide.md|Kubernetes 网络配置最佳实践]]
-- [[concepts/service-mesh-architecture.md|Service Mesh Architecture]]
+- [[skills/k8s-network-configuration-guide|Kubernetes 网络配置最佳实践]]
+- [[concepts/service-mesh-architecture|Service Mesh Architecture]]
 
 ## Related
 
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
-- [[concepts/service-mesh-architecture.md|service-mesh-architecture]] — Service Mesh Architecture
-- [[skills/k8s-network-configuration-guide.md|k8s-network-configuration-guide]] — Kubernetes 网络配置最佳实践
+- [[concepts/k8s-production-best-practices|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[concepts/service-mesh-architecture|service-mesh-architecture]] — Service Mesh Architecture
+- [[skills/k8s-network-configuration-guide|k8s-network-configuration-guide]] — Kubernetes 网络配置最佳实践

@@ -610,7 +610,7 @@ spec:
 
 ---
 
-<!-- chunk: 6. [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|GitOps]] 速查卡|GitOps]] 集成 -->## 6. GitOps 集成
+<!-- chunk: 6. [[domain-17-system-foundation/topic-cheat-sheet/gitops|GitOps]] 速查卡|GitOps]] 集成 -->## 6. GitOps 集成
 
 #<!-- chunk: 6.1 Argo CD + Argo Rollouts + Flagger -->## 6.1 Argo CD + Argo Rollouts + Flagger
 

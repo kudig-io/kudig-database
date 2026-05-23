@@ -846,7 +846,7 @@ cosign sign --key cosign.key registry.example.com/my-spring-app:v1.0.0
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-13-container-runtime MOC
-- [[domain-13-container-runtime/README.md|Docker 容器技术深度解析]]
+- [[domain-13-container-runtime/README|Docker 容器技术深度解析]]
 - Domain-13 Docker — 开源项目索引
 - Docker 架构概述与核心概念
 - Docker 镜像管理详解

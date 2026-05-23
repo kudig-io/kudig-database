@@ -68,7 +68,7 @@ created: "2026-05-23"
 
 # 01 - CRD自定义资源定义开发指南
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/extend-kubernetes/api-extension/custom-resources/](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/concepts/extend-kubernetes/api-extension/custom-resources/](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
 
 <!-- chunk: CRD核心概念与架构 -->
 ## CRD核心概念与架构
@@ -1419,11 +1419,11 @@ echo "✅ CRD健康检查完成"
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
 - index.md|Domain-10 扩展与自定义 — 开源项目索引]]
 - 02 - Operator开发模式与控制器实现
 - 03 - 准入控制器(Webhook)配置与实现
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api]]
 - 包管理与应用分发工具
 - 47 - Helm Chart开发与管理
 - 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践
@@ -1433,7 +1433,7 @@ echo "✅ CRD健康检查完成"
 
 ## Related
 
-- [[synthesis/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
+- [[synthesis/Operator 模式 × 可观测性|Operator 模式 × 可观测性]]
 
 - 包管理与应用分发
 - CI/CD 管道

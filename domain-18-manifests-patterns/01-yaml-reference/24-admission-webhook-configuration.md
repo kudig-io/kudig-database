@@ -2634,7 +2634,7 @@ Admission Webhook 是 Kubernetes 准入控制的强大扩展机制:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -2653,10 +2653,10 @@ Admission Webhook 是 Kubernetes 准入控制的强大扩展机制:
 - 25-validatingadmissionpolicy
 - 26-priorityclass-runtimeclass
 
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/10-kubelet-config.md|10-kubelet-config]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/04-kubeconfig.md|04-kubeconfig]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md|24-what-kubeadm-does-not-install]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/13-cert-config.md|13-cert-config]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/10-kubelet-config|10-kubelet-config]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/04-kubeconfig|04-kubeconfig]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install|24-what-kubeadm-does-not-install]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/13-cert-config|13-cert-config]]
 
 ## Related
 

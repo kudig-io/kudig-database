@@ -168,11 +168,11 @@ kubectl get pod <pod-name> -n prod -o jsonpath='{.metadata.ownerReferences[0].na
 
 ## 交叉引用
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/deployments.md|Deployments]]](./deployments.md)
+- [[domain-17-system-foundation/topic-dictionary/workloads/deployments|Deployments]]](./deployments.md)
 - [工作负载概览与架构](../../domain-02-workloads-applications/01-workload-overview-architecture.md)
 - [HPA 水平自动扩缩](./horizontal-pod-autoscaling.md)
 - [工作负载管理总览](./workload-management.md)
-- [[domain-17-system-foundation/topic-dictionary/workloads/replicationcontroller.md|ReplicationController]]（旧版）](./replicationcontroller.md)
+- [[domain-17-system-foundation/topic-dictionary/workloads/replicationcontroller|ReplicationController]]（旧版）](./replicationcontroller.md)
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/

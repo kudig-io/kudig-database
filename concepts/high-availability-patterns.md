@@ -75,16 +75,16 @@ Stateful control plane components (scheduler, controller-manager) use [[Kubernet
 - Application data: Velero for PV and resource backup to object storage
 
 ## Related
-- [[synthesis/etcd × Operator 模式.md|etcd × Operator 模式]] — 综合
+- [[synthesis/etcd × Operator 模式|etcd × Operator 模式]] — 综合
 
-- [[concepts/eventual-consistency.md|eventual-consistency]] — Eventual Consistency in Kubernetes
-- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
-- [[concepts/security-defense-depth.md|security-defense-depth]] — Defense-in-Depth Security
-- [[skills/backup-restore-etcd.md|backup-restore-etcd]] — Backup and Restore etcd
+- [[concepts/eventual-consistency|eventual-consistency]] — Eventual Consistency in Kubernetes
+- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/security-defense-depth|security-defense-depth]] — Defense-in-Depth Security
+- [[skills/backup-restore-etcd|backup-restore-etcd]] — Backup and Restore etcd
 - [[etcd]] — etcd
-- [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
-- [[concepts/eventual-consistency.md|Eventual Consistency]]
-- [[concepts/security-defense-depth.md|Defense-in-Depth Security]]
-- [[skills/backup-restore-etcd.md|Backup and Restore etcd]]
+- [[concepts/kubernetes-architecture-overview|Kubernetes Architecture Overview]]
+- [[concepts/eventual-consistency|Eventual Consistency]]
+- [[concepts/security-defense-depth|Defense-in-Depth Security]]
+- [[skills/backup-restore-etcd|Backup and Restore etcd]]
 
 - 08-high-availability-patterns

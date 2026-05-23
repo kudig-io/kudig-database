@@ -46,8 +46,8 @@ created: "2026-05-23"
 
 ## 与其他 Domain 的关系
 
-- [[domain-05-security-compliance/README.md|domain-05-security-compliance]] — 镜像安全
-- [[domain-17-system-foundation/README.md|domain-90-system-foundation]] — Linux 容器基础
+- [[domain-05-security-compliance/README|domain-05-security-compliance]] — 镜像安全
+- [[domain-17-system-foundation/README|domain-90-system-foundation]] — Linux 容器基础
 
 ## Related
 

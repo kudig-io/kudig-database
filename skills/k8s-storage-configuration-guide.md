@@ -88,15 +88,15 @@ PVC 删除后 PV 被删除会导致数据丢失。生产环境应使用 Retain �
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
-- [[concepts/storage-model.md|Persistent [[Kubernetes 存储配置最佳实践|Storage]]stent Storage Model (PV/PVC/StorageClass)|Storage Model]]]]
-- [[concepts/block-file-object-storage.md|Block vs File vs Object Storage]]
-- [[skills/manage-persistent-storage.md|[[Manage Persistent Storage|Manage Persistent Storage]]]]
+- [[concepts/k8s-production-best-practices|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
+- [[concepts/storage-model|Persistent [[Kubernetes 存储配置最佳实践|Storage]]stent Storage Model (PV/PVC/StorageClass)|Storage Model]]]]
+- [[concepts/block-file-object-storage|Block vs File vs Object Storage]]
+- [[skills/manage-persistent-storage|[[Manage Persistent Storage|Manage Persistent Storage]]]]
 
 ## Related
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/storage-model.md|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
-- [[concepts/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
-- [[concepts/block-file-object-storage.md|block-file-object-storage]] — Block, File, and Object Storage
-- [[skills/manage-persistent-storage.md|manage-persistent-storage]] — Manage Persistent Storage
+- [[concepts/storage-model|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
+- [[concepts/k8s-production-best-practices|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[concepts/block-file-object-storage|block-file-object-storage]] — Block, File, and Object Storage
+- [[skills/manage-persistent-storage|manage-persistent-storage]] — Manage Persistent Storage

@@ -553,7 +553,7 @@ kubectl run netshoot --rm -it --image nicolaka/netshoot -- /bin/bash
 
 ## 相关案例
 
-- [[synthesis/case-studies/2026-01-15-node-notready-pod-eviction.md|2026-01-15-node-notready-pod-eviction]]
+- [[synthesis/case-studies/2026-01-15-node-notready-pod-eviction|2026-01-15-node-notready-pod-eviction]]
 ## Related
 
 - [[entities/kubelet|kubelet]]

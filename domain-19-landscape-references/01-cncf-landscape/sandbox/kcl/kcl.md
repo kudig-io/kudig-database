@@ -44,7 +44,7 @@ KCL (Kusion Configuration Language) 是一个开源的基于约束的记录与�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -61,11 +61,11 @@ KCL (Kusion Configuration Language) 是一个开源的基于约束的记录与�
 
 ## 参考链接
 
-- [[entities/argocd.md|[[ArgoCD|argocd]]]]
+- [[entities/argocd|[[ArgoCD|argocd]]]]
 - [[deployment]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
-- [[concepts/gitops-principles.md|gitops-principles]]
-- [[concepts/security-defense-depth.md|security-defense-depth]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[concepts/gitops-principles|gitops-principles]]
+- [[concepts/security-defense-depth|security-defense-depth]]
 
 ## Related
 
@@ -76,7 +76,7 @@ KCL (Kusion Configuration Language) 是一个开源的基于约束的记录与�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - kcl
-- [[entities/kpt.md|kpt]]
-- [[entities/cdk8s.md|cdk8s (Cloud Development Kit for Kubernetes)]]
+- [[entities/kpt|kpt]]
+- [[entities/cdk8s|cdk8s (Cloud Development Kit for Kubernetes)]]
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

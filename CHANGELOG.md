@@ -1,3 +1,12 @@
+---
+title: "文件标题"
+category: meta
+tags: ["meta", "visibility/public"]
+sources: ["auto-generated"]
+created: 2026-05-24
+updated: 2026-05-24
+---
+
 # 6.1.2
 
 - Fixed: erroneous trailing combinators in pseudos

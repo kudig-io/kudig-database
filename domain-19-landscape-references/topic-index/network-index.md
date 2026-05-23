@@ -44,13 +44,13 @@ created: "2026-05-23"
 
 ### 网络知识域 (核心)
 
-- [[domain-03-networking-traffic/00-core-k8s-networking/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]]]
-- 141 - [[domain-01-cluster-fundamentals/03-control-plane/23-container-network-deep-dive.md|CNI 架构与核心原理]] (CNI Architecture & Fundamentals)]]
+- [[domain-03-networking-traffic/00-core-k8s-networking/00-network-in-nutshell|Kubernetes 网络基础 Network in a Nutshell]]]]
+- 141 - [[domain-01-cluster-fundamentals/03-control-plane/23-container-network-deep-dive|CNI 架构与核心原理]] (CNI Architecture & Fundamentals)]]
 - 76 - CNI插件深度对比
 - Kubernetes Service 核心概念与类型深度解析 (Service Concepts & Types Deep Dive)]]
 - 77 - Service实现机制
 - Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)
-- [[domain-03-networking-traffic/00-core-k8s-networking/10-service-advanced-features.md]]
+- [[domain-03-networking-traffic/00-core-k8s-networking/10-service-advanced-features]]
 
 ### DNS 与服务发现
 
@@ -65,7 +65,7 @@ created: "2026-05-23"
 
 ### Ingress
 
-- [[assets/presentations/kubernetes-ingress-presentation.md]]
+- [[assets/presentations/kubernetes-ingress-presentation]]
 - 128 - Ingress Controller 深入剖析
 - 129 - NGINX Ingress 完整配置指南
 - 130 - Ingress TLS 与证书管理

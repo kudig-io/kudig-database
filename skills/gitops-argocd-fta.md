@@ -143,17 +143,17 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 
 ## Related
 
 - [[job-cronjob-fta]] — Job/CronJob 异常故障树分析
-- [[skills/skill-README.md|skill-README]] — topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
+- [[skills/skill-README|skill-README]] — topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
 - [[etcd-fta]] — etcd 异常故障树分析
 - [[helm]] — Helm
-- [[entities/argocd.md|argocd]] — ArgoCD
+- [[entities/argocd|argocd]] — ArgoCD
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/gitops-argocd-fta.md|GitOps(ArgoCD) 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/gitops-argocd-fta|GitOps(ArgoCD) 异常故障树分析]]
 - [[skills/Agent Orchestration Patterns|Agent Orchestration Patterns for FTA]] — Cross-reference
 - [[skills/skill-MOC|topic-skills MOC]] — Cross-reference

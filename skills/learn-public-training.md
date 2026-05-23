@@ -3162,6 +3162,6 @@ spec:
 
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[entities/argocd.md|argocd]] — ArgoCD
-- [[concepts/docker-architecture.md|docker-architecture]] — Docker Architecture and Container Runtime
+- [[entities/argocd|argocd]] — ArgoCD
+- [[concepts/docker-architecture|docker-architecture]] — Docker Architecture and Container Runtime
 - [[pod-lifecycle]] — Pod Lifecycle

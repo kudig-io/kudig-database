@@ -363,8 +363,8 @@ kubectl describe secret <name>
 
 ## Related
 
-- [[skills/learn-10-health-check.md|learn-10-health-check]] — 第八课：健康检查 - Probe 详解
-- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[skills/learn-10-health-check|learn-10-health-check]] — 第八课：健康检查 - Probe 详解
+- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
 - [[docker]] — Docker
 - [[deployment]] — Deployment
-- [[entities/vault.md|vault]] — HashiCorp Vault
+- [[entities/vault|vault]] — HashiCorp Vault

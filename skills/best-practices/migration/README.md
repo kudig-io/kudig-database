@@ -46,7 +46,7 @@ created: "2026-05-23"
 
 # 自建 [[Kubernetes|Kubernetes]] 迁移至阿里云 ACK 生产实践指南
 
-> **适用版本**: Kubernetes v1.24 - v1.32 → 阿里云 ACK | **文档类型**: 端到端迁移专题 | **最后更新**: 2026-03 | **关键词**: 自建 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|[[Kubernetes 生产环境速查卡|k8s]]]], kubeadm, ACK, 迁移, Velero, Terway, 零停机, 灰度切流
+> **适用版本**: Kubernetes v1.24 - v1.32 → 阿里云 ACK | **文档类型**: 端到端迁移专题 | **最后更新**: 2026-03 | **关键词**: 自建 [[domain-17-system-foundation/topic-cheat-sheet/k8s|[[Kubernetes 生产环境速查卡|k8s]]]], kubeadm, ACK, 迁移, Velero, Terway, 零停机, 灰度切流
 
 ---
 
@@ -193,9 +193,9 @@ aliyun ecs DescribeZones --RegionId cn-hangzhou --output cols=ZoneId,LocalName
 
 ## Related
 
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/cni.md|cni]]
-- [[entities/networkpolicy.md|networkpolicy]]
+- [[entities/kubernetes|kubernetes]]
+- [[entities/cni|cni]]
+- [[entities/networkpolicy|networkpolicy]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference

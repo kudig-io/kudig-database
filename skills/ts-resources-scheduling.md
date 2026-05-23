@@ -249,13 +249,13 @@ PDB 问题
 
 ## 相关链接
 
-- [[skills/monitor-kubernetes-metrics.md|K8s 监控指标]]
-- [[skills/troubleshoot-node-issues.md|节点故障排查]]
+- [[skills/monitor-kubernetes-metrics|K8s 监控指标]]
+- [[skills/troubleshoot-node-issues|节点故障排查]]
 
 ## Related
 
 - [[csi-fta]] — CSI 存储异常故障树分析
 - [[helm-fta]] — Helm 发布异常故障树分析
-- [[skills/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
-- [[skills/ts-command-output.md|ts-command-output]] — 命令输出根因解析
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[skills/skill-reference-diagnostic-workflow|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
+- [[skills/ts-command-output|ts-command-output]] — 命令输出根因解析
+- [[entities/kubelet|kubelet]] — kubelet

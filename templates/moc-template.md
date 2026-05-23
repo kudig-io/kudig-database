@@ -140,12 +140,12 @@ graph TD
 
 ## Obsidian 相关文档
 
-- [[templates/PROJECT-INDEX-TEMPLATE.md|开源项目索引模板]]
-- [[templates/README.md|KUDIG 文档模板体系]]
-- [[templates/best-practice-template.md|最佳实践模板]]
-- [[templates/cheat-sheet-template.md|{{主题名称}} 速查卡]]
-- [[templates/domain-article-template.md|{]]
-- [[templates/febm-template.md|{{主题名称}} FEBM 法医取证分析]]
-- [[templates/fta-template.md|{{组件名称}} 故障树分析 (FTA)]]
-- [[templates/presentation-template.md|Kubernetes [组件/技术名称] 全栈进阶培训 (从入门到专家)]]
-- [[templates/skill-template.md|Skill 运维技能文档模板]]
+- [[templates/PROJECT-INDEX-TEMPLATE|开源项目索引模板]]
+- [[templates/README|KUDIG 文档模板体系]]
+- [[templates/best-practice-template|最佳实践模板]]
+- [[templates/cheat-sheet-template|{{主题名称}} 速查卡]]
+- [[templates/domain-article-template|{]]
+- [[templates/febm-template|{{主题名称}} FEBM 法医取证分析]]
+- [[templates/fta-template|{{组件名称}} 故障树分析 (FTA)]]
+- [[templates/presentation-template|Kubernetes [组件/技术名称] 全栈进阶培训 (从入门到专家)]]
+- [[templates/skill-template|Skill 运维技能文档模板]]

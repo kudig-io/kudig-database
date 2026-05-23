@@ -60,16 +60,16 @@ created: "2026-05-23"
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]] |  | migration, upgrade |  |
-| 2 | [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]] |  | migration, upgrade |  |
-| 3 | [[domain-08-release-change-management/topic-migration/03-application-workload-migration.md|03 - 应用工作负载迁移]] |  | migration, upgrade |  |
-| 4 | [[domain-08-release-change-management/topic-migration/04-storage-data-migration.md|04 - 存储与数据迁移]] |  | migration, upgrade, storage |  |
-| 5 | [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换]] |  | migration, upgrade, networking |  |
-| 6 | [[domain-08-release-change-management/topic-migration/06-stateful-services-migration.md|06 - 有状态服务迁移]] |  | migration, upgrade |  |
-| 7 | [[domain-08-release-change-management/topic-migration/07-observability-security-migration.md|07 - 可观测性与安全迁移]] |  | migration, upgrade, observability |  |
-| 8 | [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission.md|08 - 验收、切换与旧集群退役]] |  | migration, upgrade |  |
-| 9 | [[domain-08-release-change-management/topic-migration/09-migration-toolchain.md|09 - 迁移工具链参考]] |  | migration, upgrade |  |
-| 10 | [[domain-08-release-change-management/topic-migration/10-real-world-case-study.md|10 - 生产迁移实战案例]] |  | migration, upgrade, tutorial |  |
+| 1 | [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning|01 - 迁移评估与规划]] |  | migration, upgrade |  |
+| 2 | [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design|02 - ACK 目标集群设计与搭建]] |  | migration, upgrade |  |
+| 3 | [[domain-08-release-change-management/topic-migration/03-application-workload-migration|03 - 应用工作负载迁移]] |  | migration, upgrade |  |
+| 4 | [[domain-08-release-change-management/topic-migration/04-storage-data-migration|04 - 存储与数据迁移]] |  | migration, upgrade, storage |  |
+| 5 | [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover|05 - 网络迁移与流量切换]] |  | migration, upgrade, networking |  |
+| 6 | [[domain-08-release-change-management/topic-migration/06-stateful-services-migration|06 - 有状态服务迁移]] |  | migration, upgrade |  |
+| 7 | [[domain-08-release-change-management/topic-migration/07-observability-security-migration|07 - 可观测性与安全迁移]] |  | migration, upgrade, observability |  |
+| 8 | [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission|08 - 验收、切换与旧集群退役]] |  | migration, upgrade |  |
+| 9 | [[domain-08-release-change-management/topic-migration/09-migration-toolchain|09 - 迁移工具链参考]] |  | migration, upgrade |  |
+| 10 | [[domain-08-release-change-management/topic-migration/10-real-world-case-study|10 - 生产迁移实战案例]] |  | migration, upgrade, tutorial |  |
 
 ---
 
@@ -85,7 +85,7 @@ created: "2026-05-23"
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking|networking]]
 - 01-observability-architecture-overview
 - storage
 - 05-network-migration-traffic-cutover

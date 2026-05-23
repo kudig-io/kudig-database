@@ -363,10 +363,10 @@ kubectl get nodes
 
 ## Related
 
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/cni.md|cni]]
+- [[entities/kubernetes|kubernetes]]
+- [[entities/cni|cni]]
 - [[templates/cheat-sheet-template]]
-- [[domain-17-system-foundation/topic-dictionary/operations/certificates.md|certificates]]
+- [[domain-17-system-foundation/topic-dictionary/operations/certificates|certificates]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference

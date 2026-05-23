@@ -62,7 +62,7 @@ created: "2026-05-23"
 
 <!-- chunk: 🎯 Abstract -->## 🎯 Abstract
 
-This document provides comprehensive exploration of Crossplane enterprise deployment architecture, multi-cloud management practices, and operational orchestration. Based on large-scale production environment experience, it offers complete technical guidance from control plane setup to provider management, helping enterprises build unified, vendor-agnostic infrastructure automation platforms with Kubernetes-native approach across AWS, Azure, GCP and other [[skills/ts-cloud-provider.md|cloud providers]].
+This document provides comprehensive exploration of Crossplane enterprise deployment architecture, multi-cloud management practices, and operational orchestration. Based on large-scale production environment experience, it offers complete technical guidance from control plane setup to provider management, helping enterprises build unified, vendor-agnostic infrastructure automation platforms with Kubernetes-native approach across AWS, Azure, GCP and other [[skills/ts-cloud-provider|cloud providers]].
 
 <!-- chunk: 1. Crossplane Enterprise Architecture -->## 1. Crossplane Enterprise Architecture
 
@@ -904,7 +904,7 @@ data:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-24-infrastructure-as-code MOC
-- [[domain-08-release-change-management/README.md|Domain 24: 基础设施即代码 (Infrastructure as Code)]]
+- [[domain-08-release-change-management/README|Domain 24: 基础设施即代码 (Infrastructure as Code)]]
 - Domain-24 基础设施即代码 — 开源项目索引
 - Terraform企业级基础设施即代码实践
 - Ansible企业级自动化运维深度实践

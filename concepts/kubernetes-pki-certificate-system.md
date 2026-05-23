@@ -193,16 +193,16 @@ sudo ntpdate -u pool.ntp.org
 
 ## 相关概念
 
-- [[skills/kubelet-certificate-rotation.md|[[kubelet 证书轮换机制|kubelet 证书轮换机制]]]]
-- [[concepts/security-defense-depth.md|安全纵深防御]]
-- [[concepts/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]]
-- [[skills/backup-restore-etcd.md|备份和恢复 etcd]]
-- [[skills/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
+- [[skills/kubelet-certificate-rotation|[[kubelet 证书轮换机制|kubelet 证书轮换机制]]]]
+- [[concepts/security-defense-depth|安全纵深防御]]
+- [[concepts/kubernetes-pki-certificate-system|Kubernetes PKI 证书体系]]
+- [[skills/backup-restore-etcd|备份和恢复 etcd]]
+- [[skills/kubeadm-cluster-lifecycle|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
 
 ## Related
 
-- [[concepts/secrets-management.md|secrets-management]] — [[Secrets|Secrets]]ts Management|Secrets Management]]
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[concepts/secrets-management|secrets-management]] — [[Secrets|Secrets]]ts Management|Secrets Management]]
+- [[entities/kubelet|kubelet]] — kubelet
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

@@ -381,13 +381,13 @@ kubectl delete svc <name>
 
 ## 相关概念
 
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|service]]
+- [[domain-17-system-foundation/topic-dictionary/networking/service|service]]
 - 网络模型
 
 ## Related
 
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
 - [[deployment]] — Deployment
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[coredns]] — CoreDNS
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

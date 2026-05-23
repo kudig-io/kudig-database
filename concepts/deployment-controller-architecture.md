@@ -139,36 +139,36 @@ spec:
 
 ## 相关概念
 
-- [[skills/deployment-rolling-update.md|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
-- [[skills/deployment-canary-and-bluegreen.md|[[金丝雀与蓝绿发布|金丝雀与蓝绿发布]]]]
+- [[skills/deployment-rolling-update|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
+- [[skills/deployment-canary-and-bluegreen|[[金丝雀与蓝绿发布|金丝雀与蓝绿发布]]]]
 - [[deployment|Deployment]]
-- [[concepts/controller-pattern.md|控制器模式]]
-- [[concepts/watch-mechanism.md|Watch 机制]]
+- [[concepts/controller-pattern|控制器模式]]
+- [[concepts/watch-mechanism|Watch 机制]]
 
 ## Related
 
-- [[concepts/bp-security.md|bp-security]]
+- [[concepts/bp-security|bp-security]]
 
 - MOC]]
 
 - README.md|bp-README]]
 
-- [[concepts/ai-agent-openclaw-workspace.md|ai-agent-openclaw-workspace]]
+- [[concepts/ai-agent-openclaw-workspace|ai-agent-openclaw-workspace]]
 
 - [[bp-MOC]]
 
-- [[concepts/bp-operations.md|bp-operations]]
+- [[concepts/bp-operations|bp-operations]]
 
-- [[concepts/bp-observability.md|bp-observability]]
+- [[concepts/bp-observability|bp-observability]]
 
-- [[concepts/bp-infrastructure.md|bp-infrastructure]]
+- [[concepts/bp-infrastructure|bp-infrastructure]]
 
-- [[concepts/bp-common-best-practices.md|bp-common-best-practices]]
+- [[concepts/bp-common-best-practices|bp-common-best-practices]]
 
 - [[operator-pattern]] — Operator Pattern (CRD + Controller)
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[deployment]] — Deployment
 
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|Deployment Create — Kubernetes Deployment 控制器源码分析]]
+- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|Deployment Create — Kubernetes Deployment 控制器源码分析]]

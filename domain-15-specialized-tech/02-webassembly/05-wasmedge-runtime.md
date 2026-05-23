@@ -55,7 +55,7 @@ created: "2026-05-23"
 1. [WasmEdge 概述](#1-wasmedge-概述)
 2. [架构与核心组件](#2-架构与核心组件)
 3. [WASI 支持与扩展](#3-wasi-支持与扩展)
-4. [[entities/kubernetes.md|Kubernetes]] 集成](#4-kubernetes-集成)
+4. [[entities/kubernetes|Kubernetes]] 集成](#4-kubernetes-集成)
 5. [边缘部署](#5-边缘部署)
 6. 网络插件](#6-网络插件)
 7. [AI 推理支持](#7-ai-推理支持)
@@ -2520,7 +2520,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native MOC
-- [[domain-15-specialized-tech/README.md|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
+- [[domain-15-specialized-tech/README|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
 - Domain-38 WebAssembly 云原生 — 开源项目索引
 - WebAssembly 云原生基础
 - containerd Wasm 运行时

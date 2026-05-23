@@ -72,7 +72,7 @@ created: "2026-05-23"
 从 Kubernetes v1.10 开始，控制平面和节点组件逐步支持通过**类型化配置文件**（Typed Configuration Files）进行配置，而不是仅依赖命令行标志（CLI flags）。这种方式提供了以下优势:
 
 - **结构化和类型安全**：配置文件有明确的 API schema，可验证字段类型和约束
-- **版本化**：配置 API 遵循 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 版本控制原则，支持平滑升级
+- **版本化**：配置 API 遵循 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 版本控制原则，支持平滑升级
 - **易于管理**：配置文件可以纳入版本控制，便于审计和自动化部署
 - **减少命令行复杂度**：避免冗长的启动参数
 
@@ -3316,7 +3316,7 @@ kubectl get --raw /metrics | grep scheduler_schedule_attempts_total
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -3335,7 +3335,7 @@ kubectl get --raw /metrics | grep scheduler_schedule_attempts_total
 - 35-advanced-pod-patterns
 - 36-ecosystem-kustomize-helm-argocd
 
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/10-kubelet-config.md|10-kubelet-config]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/04-kubeconfig.md|04-kubeconfig]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md|24-what-kubeadm-does-not-install]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/13-cert-config.md|13-cert-config]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/10-kubelet-config|10-kubelet-config]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/04-kubeconfig|04-kubeconfig]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install|24-what-kubeadm-does-not-install]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/13-cert-config|13-cert-config]]

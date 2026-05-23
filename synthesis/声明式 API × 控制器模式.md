@@ -130,10 +130,10 @@ while (Spec != Status) {
 - [[deployment]] — Deployment
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/declarative-api.md|declarative-api]]
-- [[concepts/controller-pattern.md|controller-pattern]]
-- [[concepts/eventual-consistency.md|eventual-consistency]]
-- [[concepts/watch-mechanism.md|watch-mechanism]]
+- [[concepts/declarative-api|declarative-api]]
+- [[concepts/controller-pattern|controller-pattern]]
+- [[concepts/eventual-consistency|eventual-consistency]]
+- [[concepts/watch-mechanism|watch-mechanism]]
 - [[operator-pattern]]
-- [[synthesis/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]]
+- [[synthesis/控制器模式 × Operator 模式|控制器模式 × Operator 模式]]
 - [[domain-17-system-foundation/topic-dictionary/platform-engineering/custom-resources|自定义资源]]

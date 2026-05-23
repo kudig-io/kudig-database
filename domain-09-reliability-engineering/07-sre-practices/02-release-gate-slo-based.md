@@ -819,5 +819,5 @@ argocd_app_info{sync_status="Synced",health_status="Healthy"}
 
 ## 相关合成分析
 
-- [[synthesis/gitops-sre-release-gate.md|GitOps SRE 发布门控]]
+- [[synthesis/gitops-sre-release-gate|GitOps SRE 发布门控]]
 

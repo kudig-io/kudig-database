@@ -45,7 +45,7 @@ wasmCloud 是用于构建分布式 WebAssembly 应用的平台。它提供安全
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -61,9 +61,9 @@ wasmCloud 是用于构建分布式 WebAssembly 应用的平台。它提供安全
 
 ## 参考链接
 
-- [[entities/vault.md|[[HashiCorp Vault|vault]]]]
+- [[entities/vault|[[HashiCorp Vault|vault]]]]
 - [[deployment]]
-- [[concepts/security-defense-depth.md|security-defense-depth]]
+- [[concepts/security-defense-depth|security-defense-depth]]
 
 ## Related
 

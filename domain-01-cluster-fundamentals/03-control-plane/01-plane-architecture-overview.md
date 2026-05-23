@@ -835,7 +835,7 @@ Kubernetes控制平面是整个系统的指挥中枢，其架构设计直接影�
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
 - 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...

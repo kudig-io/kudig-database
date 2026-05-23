@@ -77,4 +77,4 @@ created: "2026-05-23"
 - [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
-- [[concepts/platform-engineering-idp.md|Platform Engineering and Internal Developer Platforms]]
+- [[concepts/platform-engineering-idp|Platform Engineering and Internal Developer Platforms]]

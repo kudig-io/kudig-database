@@ -2387,7 +2387,7 @@ Backstage 软件目录和 TechDocs 是构建统一开发者体验的关键基础
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README.md|Domain 36: 平台工程 (Platform Engineering)]]
+- [[domain-07-platform-engineering/README|Domain 36: 平台工程 (Platform Engineering)]]
 - Domain-36 平台工程 — 开源项目索引
 - 平台工程概述与成熟度模型
 - 内部开发者平台设计原则

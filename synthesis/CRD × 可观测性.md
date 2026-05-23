@@ -104,16 +104,16 @@ spec:
 
 ## 相关
 
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
 - [[operator-pattern]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 
 ## See Also
 
-- [[synthesis/CI-CD 流水线 × Secret 管理.md|CI-CD 流水线 × Secret 管理]]
-- [[synthesis/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
+- [[synthesis/CI-CD 流水线 × Secret 管理|CI-CD 流水线 × Secret 管理]]
+- [[synthesis/CNI 插件 × NetworkPolicy|CNI 插件 × NetworkPolicy]]
 - [[entities/cilium|Cilium]] eBPF × 可观测性.md|Cilium eBPF × 可观测性]]
 - Deployment × Secret 管理.md|Deployment × Secret 管理]]
 ## Related

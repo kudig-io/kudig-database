@@ -449,8 +449,8 @@ kubeadm join ...
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/operations/certificates.md|certificates]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/02-registration.md|02-registration]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[entities/kubernetes|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/operations/certificates|certificates]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/02-registration|02-registration]]

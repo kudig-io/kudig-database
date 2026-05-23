@@ -49,7 +49,7 @@ Serverless Devs 是一个开源的 Serverless 开发者平台和命令行工具�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -61,10 +61,10 @@ Serverless Devs 是一个开源的 Serverless 开发者平台和命令行工具�
 
 ## 参考链接
 
-- [[concepts/microservice-resilience-patterns.md|microservice-resilience-patterns]]
-- [[concepts/secrets-management.md|secrets-management]]
-- [[entities/kube-scheduler.md|kube-scheduler]]
-- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
+- [[concepts/microservice-resilience-patterns|microservice-resilience-patterns]]
+- [[concepts/secrets-management|secrets-management]]
+- [[entities/kube-scheduler|kube-scheduler]]
+- [[concepts/ci-cd-pipeline-patterns|ci-cd-pipeline-patterns]]
 
 ## Related
 
@@ -75,7 +75,7 @@ Serverless Devs 是一个开源的 Serverless 开发者平台和命令行工具�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - serverless-devs
-- [[entities/slimfaas.md|[[SlimFaas|SlimFaas]]]]
+- [[entities/slimfaas|[[SlimFaas|SlimFaas]]]]
 - [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

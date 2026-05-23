@@ -475,14 +475,14 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 
 - [`CreatePKIAssets`](02-ca-generation.md) — 证书生成主入口
 - [`GetEtcdAltNames`](04-etcd-cert.md) — etcd SAN 收集
-- [`buildKubeConfigFromSpec`]([[domain-07-platform-engineering/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md|12-kubeconfig-certs]].md) — kubeconfig 生成
+- [`buildKubeConfigFromSpec`]([[domain-07-platform-engineering/topic-code-analysis/cluster-cert/12-kubeconfig-certs|12-kubeconfig-certs]].md) — kubeconfig 生成
 - [`kubeadm certs renew`](README.md) — 证书续期
 - [`kubeadm config validate`](17-init-phases.md) — 配置验证
 
 ## Related
 
-- [[README.md|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[README|README]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
 - [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]

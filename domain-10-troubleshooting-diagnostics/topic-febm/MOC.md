@@ -64,16 +64,16 @@ FEBM 取证 — 问题事件取证方法文档
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md|[[第一章：FEBM 方法论原理与理论基础|第一章：FEBM 方法论原理与理论基础]]]] |  | febm, troubleshooting |  |
-| 2 | [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|[[第二章:FEBM 技术实现体系|第二章:FEBM 技术实现体系]]]] |  | febm, troubleshooting |  |
-| 3 | [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices.md|[[第三章：FEBM 最佳实践|第三章：FEBM 最佳实践]]]] |  | febm, troubleshooting, best-practice |  |
-| 4 | [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]] |  | febm, troubleshooting |  |
-| 5 | [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]] |  | febm, troubleshooting |  |
-| 6 | [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|第六章：未来演进方向]] |  | febm, troubleshooting |  |
-| 7 | [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix.md|第七章:附录]] |  | febm, troubleshooting |  |
-| 8 | [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]] |  | febm, troubleshooting, production |  |
-| 9 | [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]] |  | febm, troubleshooting |  |
-| 10 | [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]] |  | febm, troubleshooting |  |
+| 1 | [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations|[[第一章：FEBM 方法论原理与理论基础|第一章：FEBM 方法论原理与理论基础]]]] |  | febm, troubleshooting |  |
+| 2 | [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation|[[第二章:FEBM 技术实现体系|第二章:FEBM 技术实现体系]]]] |  | febm, troubleshooting |  |
+| 3 | [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices|[[第三章：FEBM 最佳实践|第三章：FEBM 最佳实践]]]] |  | febm, troubleshooting, best-practice |  |
+| 4 | [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing|第四章：FEBM 对云平台工单智能体托管的意义]] |  | febm, troubleshooting |  |
+| 5 | [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology|第五章：FEBM 体系建设方法论]] |  | febm, troubleshooting |  |
+| 6 | [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution|第六章：未来演进方向]] |  | febm, troubleshooting |  |
+| 7 | [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix|第七章:附录]] |  | febm, troubleshooting |  |
+| 8 | [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]] |  | febm, troubleshooting, production |  |
+| 9 | [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive|法医鉴定循证方法论（FEBM）深度解析]] |  | febm, troubleshooting |  |
+| 10 | [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis|FTA-FEBM 联合诊断最佳实践]] |  | febm, troubleshooting |  |
 
 ---
 
@@ -89,10 +89,10 @@ FEBM 取证 — 问题事件取证方法文档
 
 ## Related
 
-- [[entities/kubernetes.md|kubernetes]]
-- [[log.md|log]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|08-febm-production-quick-start]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md|01-febm-theory-foundations]]
+- [[entities/kubernetes|kubernetes]]
+- [[log|log]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start|08-febm-production-quick-start]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations|01-febm-theory-foundations]]
 - [[_reports/WIKI-LINT-REPORT-2026-05-21|Wiki Lint Report — 2026-05-21]] — Cross-reference
 - [[references/release-notes-storage|发布说明索引 — 存储]] — Cross-reference
 - [[references/release-notes-observability|发布说明索引 — 可观测性]] — Cross-reference

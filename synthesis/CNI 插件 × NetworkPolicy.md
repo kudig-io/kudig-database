@@ -130,10 +130,10 @@ NetworkPolicy 依赖 CNI 插件正确实现策略。但 CNI 插件本身：
 
 ## See Also
 
-- [[synthesis/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]]
-- [[synthesis/CI-CD 流水线 × Secret 管理.md|CI-CD 流水线 × Secret 管理]]
-- [[synthesis/CRD × 可观测性.md|CRD × 可观测性]]
-- [[synthesis/Cilium eBPF × 可观测性.md|Cilium eBPF × 可观测性]]
+- [[synthesis/纵深防御 x 供应链安全|纵深防御 x 供应链安全]]
+- [[synthesis/CI-CD 流水线 × Secret 管理|CI-CD 流水线 × Secret 管理]]
+- [[synthesis/CRD × 可观测性|CRD × 可观测性]]
+- [[synthesis/Cilium eBPF × 可观测性|Cilium eBPF × 可观测性]]
 ## Related
 
 - [[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces|命名空间]]

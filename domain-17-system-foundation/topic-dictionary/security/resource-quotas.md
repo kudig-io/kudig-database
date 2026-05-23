@@ -37,7 +37,7 @@ created: "2026-05-23"
 
 ## 概述
 
-ResourceQuota 是 [[Kubernetes|Kubernetes]] 为管理员提供的一种工具，用于限制命名空间级别的聚合资源消耗。当多个用户或团队共享一个节点数量固定的集群时，ResourceQuota 可以防止某个团队使用超过其公平份额的资源。它不仅能限制计算资源、存储资源和扩展资源的总量，还能限制命名空间中各类 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 对象的数量。
+ResourceQuota 是 [[Kubernetes|Kubernetes]] 为管理员提供的一种工具，用于限制命名空间级别的聚合资源消耗。当多个用户或团队共享一个节点数量固定的集群时，ResourceQuota 可以防止某个团队使用超过其公平份额的资源。它不仅能限制计算资源、存储资源和扩展资源的总量，还能限制命名空间中各类 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 对象的数量。
 
 ## 核心概念/原理
 

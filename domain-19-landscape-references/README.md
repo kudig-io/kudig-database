@@ -72,11 +72,11 @@ created: "2026-05-23"
 
 ## 相关概念
 
-- [[concepts/etcd Operational Reference.md|etcd Operational Reference]]
-- [[skills/skill-reference-version-matrix.md|Version Matrix]]
-- [[skills/skill-reference-remediation-playbook.md|Remediation Playbook]]
-- [[skills/skill-reference-root-cause-catalog.md|Root Cause Catalog]]
-- [[entities/kubernetes.md|Kubernetes (CNCF Graduated)]]
-- [[entities/cncf-orchestration.md|CNCF 编排与应用管理项目全景]]
-- [[entities/cncf-infrastructure.md|CNCF 基础设施与混沌工程项目全景]]
-- [[entities/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]]
+- [[concepts/etcd Operational Reference|etcd Operational Reference]]
+- [[skills/skill-reference-version-matrix|Version Matrix]]
+- [[skills/skill-reference-remediation-playbook|Remediation Playbook]]
+- [[skills/skill-reference-root-cause-catalog|Root Cause Catalog]]
+- [[entities/kubernetes|Kubernetes (CNCF Graduated)]]
+- [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]]
+- [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]]
+- [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]]

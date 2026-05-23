@@ -53,7 +53,7 @@ Kepler (Kubernetes-based Efficient Power Level Exporter) 使用 eBPF 探测器�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -70,9 +70,9 @@ Kepler (Kubernetes-based Efficient Power Level Exporter) 使用 eBPF 探测器�
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
 - [[deployment]]
-- [[concepts/observability-pillars.md|observability-pillars]]
+- [[concepts/observability-pillars|observability-pillars]]
 - networking.md|cilium-ebpf-networking]]
 - [[pod-lifecycle]]
 

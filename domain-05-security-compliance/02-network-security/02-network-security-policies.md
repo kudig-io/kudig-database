@@ -75,7 +75,7 @@ created: "2026-05-23"
 
 # 02 - 网络安全策略与零信任架构
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/services-networking/network-policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/concepts/services-networking/network-policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 
 <!-- chunk: 网络安全架构全景 -->
 ## 网络安全架构全景
@@ -591,7 +591,7 @@ kubectl logs -n kube-system -l k8s-app=cilium
 ## Obsidian 相关文档
 
 - domain-05-security-compliance KUDIG Database — Global MOC
-- [[domain-05-security-compliance/README.md|[[Security Domain|Security Domain]]]]
+- [[domain-05-security-compliance/README|[[Security Domain|Security Domain]]]]
 - index.md|Domain-7 安全 — 开源项目索引]]
 - Kubernetes 认证授权体系详解
 - 运行时安全防护与威胁检测
@@ -605,15 +605,15 @@ kubectl logs -n kube-system -l k8s-app=cilium
 
 ## Related
 
-- [[synthesis/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
+- [[synthesis/CNI 插件 × NetworkPolicy|CNI 插件 × NetworkPolicy]]
 
 - 认证授权体系
 - 运行时安全防护
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-06-observability
-- [[domain-17-system-foundation/topic-cheat-sheet/tls-pki.md|速查卡: tls-pki]]
+- [[domain-17-system-foundation/topic-cheat-sheet/tls-pki|速查卡: tls-pki]]
 
-- [[domain-05-security-compliance/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-05-security-compliance/README|返回目录]]- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
 
 ## See Also
 

@@ -77,14 +77,14 @@ Eviction follows QoS priority: BestEffort first, then Burstable (proportional to
 
 ## Related
 
-- [[skills/learn-lecturer-persona.md|learn-lecturer-persona]] — K8S 讲师角色设定与场景规范
-- [[skills/node-drain-and-maintenance.md|node-drain-and-maintenance]] — 节点驱逐与维护
-- [[concepts/scheduling-algorithm.md|scheduling-algorithm]] — Scheduling Algorithm
-- [[concepts/autoscaling-strategies.md|autoscaling-strategies]] — Autoscaling Strategies
-- [[entities/kubelet.md|kubelet]] — kubelet
-- [[concepts/autoscaling-strategies.md|Autoscaling Strategies]]
-- [[concepts/scheduling-algorithm.md|Scheduling Algorithm]]
+- [[skills/learn-lecturer-persona|learn-lecturer-persona]] — K8S 讲师角色设定与场景规范
+- [[skills/node-drain-and-maintenance|node-drain-and-maintenance]] — 节点驱逐与维护
+- [[concepts/scheduling-algorithm|scheduling-algorithm]] — Scheduling Algorithm
+- [[concepts/autoscaling-strategies|autoscaling-strategies]] — Autoscaling Strategies
+- [[entities/kubelet|kubelet]] — kubelet
+- [[concepts/autoscaling-strategies|Autoscaling Strategies]]
+- [[concepts/scheduling-algorithm|Scheduling Algorithm]]
 - [[pod-lifecycle|Pod Lifecycle]]
-- [[entities/kubelet.md|kubelet]]
+- [[entities/kubelet|kubelet]]
 
 - 23-resource-management

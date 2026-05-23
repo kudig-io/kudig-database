@@ -386,40 +386,40 @@ kubectl delete ingress my-ingress
 
 ## Related
 
-- [[skills/learn-03-deployment-basics.md|learn-03-deployment-basics]]
+- [[skills/learn-03-deployment-basics|learn-03-deployment-basics]]
 
-- [[skills/learn-oncall-quick-qa.md|learn-oncall-quick-qa]]
+- [[skills/learn-oncall-quick-qa|learn-oncall-quick-qa]]
 
-- [[skills/learn-public-training.md|learn-public-training]]
+- [[skills/learn-public-training|learn-public-training]]
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/monitoring-fta.md|monitoring-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/monitoring-fta|monitoring-fta]]
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/crd-operator-fta.md|crd-operator-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/crd-operator-fta|crd-operator-fta]]
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/vpa-fta.md|vpa-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/vpa-fta|vpa-fta]]
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/hpa-fta.md|hpa-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/hpa-fta|hpa-fta]]
 
-- [[skills/learn-01-what-is-kubernetes.md|learn-01-what-is-kubernetes]]
+- [[skills/learn-01-what-is-kubernetes|learn-01-what-is-kubernetes]]
 
-- [[skills/kudig-agent-specs-collection.md|kudig-agent-specs-collection]]
+- [[skills/kudig-agent-specs-collection|kudig-agent-specs-collection]]
 
-- [[skills/learn-13-daemonset-basics.md|learn-13-daemonset-basics]]
+- [[skills/learn-13-daemonset-basics|learn-13-daemonset-basics]]
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|ingress-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta|ingress-fta]]
 
 - README.md|learn-README]]
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-mesh-istio-fta.md|service-mesh-istio-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-mesh-istio-fta|service-mesh-istio-fta]]
 
 - [[openkruise-fta]]
 
-- [[skills/ts-ai-ml-workloads.md|ts-ai-ml-workloads]]
+- [[skills/ts-ai-ml-workloads|ts-ai-ml-workloads]]
 
 - [[kubeadm-fta]]
 
-- [[skills/learn-01-day-one-checklist.md|learn-01-day-one-checklist]] — Day 1: 新人首日检查清单
-- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[skills/learn-01-day-one-checklist|learn-01-day-one-checklist]] — Day 1: 新人首日检查清单
+- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
 - [[istio]] — Istio
 - [[helm]] — Helm
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

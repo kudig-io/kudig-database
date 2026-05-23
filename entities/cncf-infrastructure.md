@@ -39,7 +39,7 @@ CNCF 基础设施项目覆盖 **混沌工程**、**消息中间件**、**API 与
 
 ---
 
-## [[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|混沌工程（Chaos Engineering）]]
+## [[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering|混沌工程（Chaos Engineering）]]
 
 ### [[chaos-mesh]] — 孵化项目
 
@@ -184,9 +184,9 @@ kube-rs 是 Rust 的 K8s 客户端库。
 
 ## 相关页面
 
-- [[entities/cncf-observability.md|cncf-observability]] — 可观测性
-- [[entities/cncf-orchestration.md|cncf-orchestration]] — 编排与应用管理
-- [[entities/cncf-edge-ai.md|cncf-edge-ai]] — 边缘计算与 AI/ML
+- [[entities/cncf-observability|cncf-observability]] — 可观测性
+- [[entities/cncf-orchestration|cncf-orchestration]] — 编排与应用管理
+- [[entities/cncf-edge-ai|cncf-edge-ai]] — 边缘计算与 AI/ML
 
 ## Related
 

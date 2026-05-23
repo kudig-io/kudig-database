@@ -93,14 +93,14 @@ created: "2026-05-23"
 
 ## 相关导航
 
-- [[concepts/gitops-tool-evolution.md|GitOps 工具演进]]
-- [[references/release-notes-reading-guide.md|发布说明阅读指南]]
+- [[concepts/gitops-tool-evolution|GitOps 工具演进]]
+- [[references/release-notes-reading-guide|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
-- [[references/release-notes-cli-tools.md|release-notes-cli-tools]] — 发布说明索引 — CLI 工具
-- [[references/k8s-production-operations.md|k8s-production-operations]] — 生产运维：GitOps、FinOps、灾备恢复与变更管理
+- [[references/release-notes-cli-tools|release-notes-cli-tools]] — 发布说明索引 — CLI 工具
+- [[references/k8s-production-operations|k8s-production-operations]] — 生产运维：GitOps、FinOps、灾备恢复与变更管理
 - [[flux]] — Flux
 - [[helm]] — Helm
 - [[argo]] — Argo Workflows

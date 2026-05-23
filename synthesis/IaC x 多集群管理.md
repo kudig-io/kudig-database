@@ -74,7 +74,7 @@ tier: supporting---
 
 ## 连接点
 
-[[concepts/infrastructure-as-code.md|infrastructure-as-code]] 描述了 Terraform、Pulumi、Crossplane 等 IaC 工具的模式，[[concepts/platform-engineering-idp.md|platform-engineering-idp]] 提到 Crossplane 用于"平台抽象层——多云资源管理"，[[concepts/gitops-principles.md|gitops-principles]] 描述了 [[entities/argocd|ArgoCD]] 和 Flux 的多集群能力。但 wiki 中没有一页专门讨论 **IaC 如何从根本上改变多集群管理的范式**——从手动 kubectl 切换到声明式集群生命周期管理。
+[[concepts/infrastructure-as-code|infrastructure-as-code]] 描述了 Terraform、Pulumi、Crossplane 等 IaC 工具的模式，[[concepts/platform-engineering-idp|platform-engineering-idp]] 提到 Crossplane 用于"平台抽象层——多云资源管理"，[[concepts/gitops-principles|gitops-principles]] 描述了 [[entities/argocd|ArgoCD]] 和 Flux 的多集群能力。但 wiki 中没有一页专门讨论 **IaC 如何从根本上改变多集群管理的范式**——从手动 kubectl 切换到声明式集群生命周期管理。
 
 ## 共现场景
 
@@ -130,24 +130,24 @@ GitOps 协调 (Flux/ArgoCD 跨 N 个集群同步)
 
 ## 相关
 
-- [[concepts/infrastructure-as-code.md|infrastructure-as-code]]
-- [[concepts/gitops-principles.md|gitops-principles]]
-- [[concepts/platform-engineering-idp.md|platform-engineering-idp]]
-- [[concepts/multi-tenancy-isolation.md|multi-tenancy-isolation]]
+- [[concepts/infrastructure-as-code|infrastructure-as-code]]
+- [[concepts/gitops-principles|gitops-principles]]
+- [[concepts/platform-engineering-idp|platform-engineering-idp]]
+- [[concepts/multi-tenancy-isolation|multi-tenancy-isolation]]
 - [[crossplane]]
 - [[flux]]
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd|argocd]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 
 ## Related
 
-- [[synthesis/kubeadm-cluster-operations.md|kubeadm-cluster-operations]]
+- [[synthesis/kubeadm-cluster-operations|kubeadm-cluster-operations]]
 
 - [[kyverno]] — Kyverno
 - [[crossplane]] — Crossplane
 - [[cni]] — CNI (Container Network Interface)
 - [[sops]] — SOPS ([[domain-17-system-foundation/topic-dictionary/configuration/secrets|Secrets]] OPerationS)
-- [[entities/argocd.md|argocd]] — ArgoCD
+- [[entities/argocd|argocd]] — ArgoCD
 - [[entities/helm|Helm (entities)]]
 - [[entities/argo|Argo Workflows]]

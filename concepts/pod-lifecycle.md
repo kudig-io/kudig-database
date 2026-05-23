@@ -1,6 +1,6 @@
 ---
 title: Pod Lifecycle (concepts)
-description: '- [[synthesis/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
+description: '- [[synthesis/Pod 生命周期 × Secret 管理|Pod 生命周期 × Secret 管理]] — 综合'
 category: concepts
 tags:
 - k8s
@@ -76,20 +76,20 @@ Each probe can use HTTP GET, TCP Socket, or Exec commands.
 6. Resources cleaned up by [[kubelet|kubelet]]
 
 ## Related
-- [[synthesis/Operator 模式 × Pod 生命周期.md|Operator 模式 × Pod 生命周期]] — 综合
-- [[synthesis/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合
+- [[synthesis/Operator 模式 × Pod 生命周期|Operator 模式 × Pod 生命周期]] — 综合
+- [[synthesis/Pod 生命周期 × Secret 管理|Pod 生命周期 × Secret 管理]] — 综合
 - [[synthesis/Pod 生命周期 × 存储模型|Pod 生命周期 × 存储模型]] — 综合
 
-- [[skills/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — Troubleshoot Pod Issues
-- [[concepts/node-lifecycle-management.md|node-lifecycle-management]] — 节点生命周期管理
-- [[entities/kubelet.md|kubelet]] — kubelet
-- [[concepts/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
-- [[skills/configure-health-probes.md|configure-health-probes]] — Configure Health Probes
+- [[skills/troubleshoot-pod-issues|troubleshoot-pod-issues]] — Troubleshoot Pod Issues
+- [[concepts/node-lifecycle-management|node-lifecycle-management]] — 节点生命周期管理
+- [[entities/kubelet|kubelet]] — kubelet
+- [[concepts/high-availability-patterns|high-availability-patterns]] — High Availability Patterns
+- [[skills/configure-health-probes|configure-health-probes]] — Configure Health Probes
 - [[deployment|Deployment]]
-- [[entities/statefulset.md|StatefulSet]]
-- [[concepts/high-availability-patterns.md|High Availability Patterns]]
-- [[skills/configure-health-probes.md|Configure Health Probes]]
-- [[entities/kubelet.md|kubelet]]
+- [[entities/statefulset|StatefulSet]]
+- [[concepts/high-availability-patterns|High Availability Patterns]]
+- [[skills/configure-health-probes|Configure Health Probes]]
+- [[entities/kubelet|kubelet]]
 
 - Pod 生命周期事件表
 - [[journal/digest-2026-05-21-full|Wiki 全量知识库摘要 — 2026-05-21]] — Cross-reference

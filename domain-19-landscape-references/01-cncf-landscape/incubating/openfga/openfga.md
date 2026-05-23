@@ -47,7 +47,7 @@ OpenFGA 是细粒度授权（Fine-Grained Authorization）系统，基于 Google
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -63,8 +63,8 @@ OpenFGA 是细粒度授权（Fine-Grained Authorization）系统，基于 Google
 
 ## 参考链接
 
-- [[concepts/microservice-resilience-patterns.md|microservice-resilience-patterns]]
-- [[concepts/security-defense-depth.md|security-defense-depth]]
+- [[concepts/microservice-resilience-patterns|microservice-resilience-patterns]]
+- [[concepts/security-defense-depth|security-defense-depth]]
 
 ## Related
 
@@ -75,15 +75,15 @@ OpenFGA 是细粒度授权（Fine-Grained Authorization）系统，基于 Google
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - openfga
-- [[entities/kubearmor.md|[[KubeArmor|KubeArmor]]]]
-- [[entities/tokenetes.md|Tokenetes]]
-- [[entities/containerssh.md|ContainerSSH]]
-- [[entities/parsec.md|Parsec]]
-- [[entities/athenz.md|Athenz]]
-- [[entities/keylime.md|Keylime]]
-- [[entities/cartography.md|Cartography]]
-- [[entities/bank-vaults.md|Bank-Vaults]]
-- [[entities/hexa.md|Hexa]]
-- [[entities/paralus.md|Paralus]]
+- [[entities/kubearmor|[[KubeArmor|KubeArmor]]]]
+- [[entities/tokenetes|Tokenetes]]
+- [[entities/containerssh|ContainerSSH]]
+- [[entities/parsec|Parsec]]
+- [[entities/athenz|Athenz]]
+- [[entities/keylime|Keylime]]
+- [[entities/cartography|Cartography]]
+- [[entities/bank-vaults|Bank-Vaults]]
+- [[entities/hexa|Hexa]]
+- [[entities/paralus|Paralus]]
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

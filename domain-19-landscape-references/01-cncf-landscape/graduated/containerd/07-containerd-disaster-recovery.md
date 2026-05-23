@@ -42,7 +42,7 @@ title: containerd 灾难恢复与业务连续性
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -56,15 +56,15 @@ title: containerd 灾难恢复与业务连续性
 
 - [[containerd]]
 - [[deployment]]
-- [[concepts/controller-pattern.md|controller-pattern]]
-- [[concepts/storage-model.md|storage-model]]
-- [[concepts/secrets-management.md|secrets-management]]
+- [[concepts/controller-pattern|controller-pattern]]
+- [[concepts/storage-model|storage-model]]
+- [[concepts/secrets-management|secrets-management]]
 
 ## Related
 
 - [[flatcar]] — Flatcar Container Linuxux 生产环境速查卡|Linux]]
 - [[kcp]] — kcp
-- [[entities/cncf-security.md|cncf-security]] — CNCF 安全与合规项目全景
+- [[entities/cncf-security|cncf-security]] — CNCF 安全与合规项目全景
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[containerd]] — containerd
 
@@ -72,15 +72,15 @@ title: containerd 灾难恢复与业务连续性
 - RELEASE-NOTES-1.3
 - RELEASE-NOTES-0.2
 - RELEASE-NOTES-1.7
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.0|RELEASE-NOTES-2.0]]
 - RELEASE-NOTES-1.6
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.1|RELEASE-NOTES-2.1]]
 - RELEASE-NOTES-1.2
 - RELEASE-NOTES-1.5
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.2|RELEASE-NOTES-2.2]]
 - RELEASE-NOTES-1.1
 - RELEASE-NOTES-0.0
 - RELEASE-NOTES-1.0
 - RELEASE-NOTES-1.4
-- [[entities/hyperlight.md|Hyperlight]]
+- [[entities/hyperlight|Hyperlight]]
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference

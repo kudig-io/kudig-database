@@ -104,7 +104,7 @@ k8s_versions:
 | **资深专家** | 解决大规模集群下的 I/O 瓶颈与数据一致性危机 | 深入底层：Attach/Detach 控制流、Mount 传播机制、块设备层故障诊断与专家级清理技巧。 |
 
 > **专项排查文档**：
-> - [StorageClass 配置与动态供给专项排查]([[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting.md|05-storageclass-troubleshooting]].md) — StorageClass 参数、volumeBindingMode、拓扑约束、扩容、性能等级
+> - [StorageClass 配置与动态供给专项排查]([[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting|05-storageclass-troubleshooting]].md) — StorageClass 参数、volumeBindingMode、拓扑约束、扩容、性能等级
 
 ---
 
@@ -1384,8 +1384,8 @@ spec:
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[hot.md|hot]]
-- [[log.md|log]]
+- [[hot|hot]]
+- [[log|log]]
 - [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
@@ -1396,7 +1396,7 @@ spec:
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting.md|04-storage-performance-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting.md|05-storageclass-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md|02-csi-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting.md|03-snapshot-backup-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting|04-storage-performance-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting|05-storageclass-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting|02-csi-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting|03-snapshot-backup-troubleshooting]]

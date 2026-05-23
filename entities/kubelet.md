@@ -76,19 +76,19 @@ kubelet auto-rotates its client certificate (`--rotate-certificates`), preventin
 ## Related
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
-- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/resource-management|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
 - [[pod-lifecycle]] — Pod Lifecycle
-- [[entities/container-runtime.md|container-runtime]] — Container Runtime
+- [[entities/container-runtime|container-runtime]] — Container Runtime
 - [[pod-lifecycle|Pod Lifecycle]]
-- [[concepts/resource-management.md|Resource Management]]
-- [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
-- [[entities/container-runtime.md|Container Runtime]]
+- [[concepts/resource-management|Resource Management]]
+- [[concepts/kubernetes-architecture-overview|Kubernetes Architecture Overview]]
+- [[entities/container-runtime|Container Runtime]]
 
 - 15-kubelet-deep-dive
 - 33-kubelet-eviction-thresholds
 - 20-kubelet-configuration
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting|01-kubelet-troubleshooting]]
 - virtual-kubelet
 - [[skills/node-fta|Node 异常故障树分析]] — Cross-reference
 - [[skills/deployment-fta|Deployment 异常故障树分析]] — Cross-reference

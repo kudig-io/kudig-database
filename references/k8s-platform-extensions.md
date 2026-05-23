@@ -74,7 +74,7 @@ Istio 架构：
 
 ## Related
 
-- [[synthesis/服务网格 x 零信任安全.md|服务网格 x 零信任安全]] — 服务网格 x 零信任安全
+- [[synthesis/服务网格 x 零信任安全|服务网格 x 零信任安全]] — 服务网格 x 零信任安全
 - [[istio]] — Istio
 - [[helm]] — Helm
 - [[envoy]] — Envoy

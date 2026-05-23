@@ -42,13 +42,13 @@ created: "2026-05-23"
 
 ### 集群生命周期
 
-- [[domain-07-platform-engineering/operate/02-cluster-lifecycle-management.md|集群生命周期管理 (Cluster Lifecycle Management)]]]]
+- [[domain-07-platform-engineering/operate/02-cluster-lifecycle-management|集群生命周期管理 (Cluster Lifecycle Management)]]]]
 - 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)
 - 集群容量规划
 
 ### 集群创建
 
-- [[entities/kubernetes.md|Kubernetes]] 集群新建逻辑 — 基于官方代码分析](domain-02-workloads-applications/topic-functions/cluster-create/01-overview.md)
+- [[entities/kubernetes|Kubernetes]] 集群新建逻辑 — 基于官方代码分析](domain-02-workloads-applications/topic-functions/cluster-create/01-overview.md)
 - [预检阶段 (Preflight Checks)](domain-02-workloads-applications/topic-functions/cluster-create/02-preflight.md)
 - [证书阶段 (Certificate Generation)](domain-02-workloads-applications/topic-functions/cluster-create/03-certs.md)
 - [kubeconfig 阶段 (Kubeconfig Generation)](domain-02-workloads-applications/topic-functions/cluster-create/04-kubeconfig.md)
@@ -106,5 +106,5 @@ created: "2026-05-23"
 
 ### 平台运维
 
-- [[domain-07-platform-engineering/governance/14-large-scale-cluster-optimization.md]]
+- [[domain-07-platform-engineering/governance/14-large-scale-cluster-optimization]]
 - Karpenter 节点自动扩展实践指南

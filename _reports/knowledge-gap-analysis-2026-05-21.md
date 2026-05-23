@@ -1,3 +1,12 @@
+---
+title: "报告标题"
+category: reports
+tags: ["reports", "visibility/public"]
+sources: ["auto-generated"]
+created: 2026-05-24
+updated: 2026-05-24
+---
+
 # KUDIG 语料库知识缺口分析报告
 
 **生成日期**: 2026-05-21  

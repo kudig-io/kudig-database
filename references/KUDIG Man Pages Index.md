@@ -41,7 +41,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-# [[references/kudig-man-pages-index.md|kudig-man-pages-index]]
+# [[references/kudig-man-pages-index|kudig-man-pages-index]]
 
 ## Section 1: KUDIG Tools
 
@@ -104,14 +104,14 @@ created: "2026-05-23"
 ## Related
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[entities/argocd.md|argocd]] — ArgoCD
-- [[concepts/controller-pattern.md|controller-pattern]] — Controller Pattern (Reconciliation Loop)
+- [[entities/argocd|argocd]] — ArgoCD
+- [[concepts/controller-pattern|controller-pattern]] — Controller Pattern (Reconciliation Loop)
 - [[pod-lifecycle]] — Pod Lifecycle
-- [[concepts/declarative-api.md|declarative-api]] — Declarative API
-- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
-- [[concepts/etcd Operational Reference.md|etcd Operational Reference]]
-- [[references/kubectl Scenario Quick Reference.md|kubectl Scenario Quick Reference]]
+- [[concepts/declarative-api|declarative-api]] — Declarative API
+- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]]
+- [[concepts/etcd Operational Reference|etcd Operational Reference]]
+- [[references/kubectl Scenario Quick Reference|kubectl Scenario Quick Reference]]
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[concepts/Kubernetes Core Concepts|Kubernetes Core Concepts]]
 - [[references/KUDIG Cheat Sheet Index|KUDIG Cheat Sheet Index]] — Cross-reference

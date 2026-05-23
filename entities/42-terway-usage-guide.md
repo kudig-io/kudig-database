@@ -60,14 +60,14 @@ Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod �
 
 - [[istio]]
 - [[cilium]]
-- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
-- [[entities/cni-plugins.md|cni-plugins]]
+- [[concepts/cilium-ebpf-networking|cilium-ebpf-networking]]
+- [[entities/cni-plugins|cni-plugins]]
 
 ## Related
 
 - [[bfe]] — BFE
-- [[skills/skill-k8s-node-notready-USAGE-GUIDE.md|skill-k8s-node-notready-USAGE-GUIDE]] — Usage Guide
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[skills/skill-k8s-node-notready-USAGE-GUIDE|skill-k8s-node-notready-USAGE-GUIDE]] — Usage Guide
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

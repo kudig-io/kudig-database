@@ -110,10 +110,10 @@ etcd 快照是灾难恢复的基础，但快照操作会短暂增加磁盘 I/O �
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[etcd]]
-- [[concepts/high-availability-patterns.md|high-availability-patterns]]
-- [[concepts/eventual-consistency.md|eventual-consistency]]
-- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]]
-- [[skills/backup-restore-etcd.md|backup-restore-etcd]]
+- [[concepts/high-availability-patterns|high-availability-patterns]]
+- [[concepts/eventual-consistency|eventual-consistency]]
+- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]]
+- [[skills/backup-restore-etcd|backup-restore-etcd]]
 - Kubernetes Fault Distribution and MTTR.md|Kubernetes Fault Distribution and MTTR]]
 - [[entities/armada|Armada (entities)]]
 - [[log|Wiki Log]]

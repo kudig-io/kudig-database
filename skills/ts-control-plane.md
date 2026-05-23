@@ -479,12 +479,12 @@ APF 问题
 
 ## 相关链接
 
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断引擎]]
-- [[skills/backup-restore-etcd.md|etcd 备份恢复]]
+- [[skills/FTA Diagnostic Execution Engine|FTA 诊断引擎]]
+- [[skills/backup-restore-etcd|etcd 备份恢复]]
 
 ## Related
 
-- [[entities/kube-apiserver.md|kube-apiserver]] — kube-apiserver
+- [[entities/kube-apiserver|kube-apiserver]] — kube-apiserver
 - [[etcd]] — etcd
 - [[cert-manager]] — cert-manager
 - [[prometheus]] — Prometheus

@@ -76,7 +76,7 @@ created: "2026-05-23"
 
 ### CNI Plugins
 
-- **实体页面**: [[entities/cni-plugins.md|CNI Plugins]]
+- **实体页面**: [[entities/cni-plugins|CNI Plugins]]
 - **最新版本**: v1.9
 - **发布说明目录**: `domain-19-landscape-references/topic-release-notes/networking/cni-plugins/`
 - **版本覆盖**: v0.1 → v1.9（14 个版本）
@@ -122,13 +122,13 @@ created: "2026-05-23"
 
 ## 相关导航
 
-- [[concepts/service-mesh-evolution.md|服务网格演进]]
-- [[references/release-notes-reading-guide.md|发布说明阅读指南]]
+- [[concepts/service-mesh-evolution|服务网格演进]]
+- [[references/release-notes-reading-guide|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
-- [[entities/tetragon.md|tetragon]] — Tetragon
+- [[entities/tetragon|tetragon]] — Tetragon
 - [[istio]] — Istio
 - [[linkerd]] — Linkerd
 - [[cni]] — CNI (Container Network Interface)

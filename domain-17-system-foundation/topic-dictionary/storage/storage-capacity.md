@@ -69,7 +69,7 @@ created: "2026-05-23"
 
 - 存储容量跟踪能提高首次调度成功的概率，但无法完全保证，因为容量信息可能不是实时的。
 - 如果一个 Pod 使用多个卷，可能出现第一个卷已在某个拓扑段创建成功，但剩余容量不足以创建第二个卷的情况，此时需要人工干预（如扩容或删除已创建卷）。
-- CSI 临时卷（CSI [[domain-17-system-foundation/topic-dictionary/storage/ephemeral-volumes.md|ephemeral volumes]]es（卷）|volumes]]）的调度**不**考虑存储容量。
+- CSI 临时卷（CSI [[domain-17-system-foundation/topic-dictionary/storage/ephemeral-volumes|ephemeral volumes]]es（卷）|volumes]]）的调度**不**考虑存储容量。
 
 ## 使用场景
 

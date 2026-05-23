@@ -1860,8 +1860,8 @@ Policy Controller 镜像验证是 Kubernetes 供应链安全的最后一道防�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README.md|Domain 39: 供应链安全 (Supply Chain Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README|Domain 39: 供应链安全 (Supply Chain Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index|Domain-39 供应链安全 — 开源项目索引]]
 - 供应链安全概述 (Supply Chain Security Overview)
 - 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 - SBOM 生成与管理 (SBOM Generation and Management)
@@ -1879,4 +1879,4 @@ Policy Controller 镜像验证是 Kubernetes 供应链安全的最后一道防�
 - 10-compliance-automation-audit
 - 99-slsa-supply-chain-security-guide
 
-- [[domain-05-security-compliance/README.md|返回目录]]
+- [[domain-05-security-compliance/README|返回目录]]

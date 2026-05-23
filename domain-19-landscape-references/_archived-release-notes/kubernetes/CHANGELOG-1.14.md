@@ -115,7 +115,7 @@ created: "2026-05-23"
     - [Client Binaries](#client-binaries-10)
     - [Server Binaries](#server-binaries-10)
     - [Node Binaries](#node-binaries-10)
-- [[entities/kubernetes.md|Kubernetes]] v1.14 Release Notes](#kubernetes-v114-release-notes)
+- [[entities/kubernetes|Kubernetes]] v1.14 Release Notes](#kubernetes-v114-release-notes)
   - [1.14 What’s New](#114-whats-new)
   - [Known Issues](#known-issues-1)
   - [Urgent Upgrade Notes](#urgent-upgrade-notes)

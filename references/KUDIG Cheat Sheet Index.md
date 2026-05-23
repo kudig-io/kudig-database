@@ -73,43 +73,43 @@ The scenario-based cheatsheet is organized by **fault scenario** rather than res
 
 ## Related
 
-- [[references/k8s-container-linux-fundamentals.md|k8s-container-linux-fundamentals]]
+- [[references/k8s-container-linux-fundamentals|k8s-container-linux-fundamentals]]
 
-- [[references/kudig-man-pages-index.md|kudig-man-pages-index]]
+- [[references/kudig-man-pages-index|kudig-man-pages-index]]
 
-- [[references/k8s-supply-chain-yaml-cheatsheet.md|k8s-supply-chain-yaml-cheatsheet]]
+- [[references/k8s-supply-chain-yaml-cheatsheet|k8s-supply-chain-yaml-cheatsheet]]
 
-- [[domain-12-cloud-providers/04-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
+- [[domain-12-cloud-providers/04-alicloud-ack/241-ack-slb-nlb-alb|241-ack-slb-nlb-alb]]
 
-- [[references/kudig-gitbook-mac-plan.md|kudig-gitbook-mac-plan]]
+- [[references/kudig-gitbook-mac-plan|kudig-gitbook-mac-plan]]
 
-- [[references/kudig-operations-reports.md|kudig-operations-reports]]
+- [[references/kudig-operations-reports|kudig-operations-reports]]
 
-- [[references/kudig-documentation-specs.md|kudig-documentation-specs]]
+- [[references/kudig-documentation-specs|kudig-documentation-specs]]
 
-- [[references/k8s-skill-library-overview.md|k8s-skill-library-overview]]
+- [[references/k8s-skill-library-overview|k8s-skill-library-overview]]
 
-- [[references/kudig-metadata-index.md|kudig-metadata-index]]
+- [[references/kudig-metadata-index|kudig-metadata-index]]
 
-- [[references/k8s-ai-corpus-configuration.md|k8s-ai-corpus-configuration]]
+- [[references/k8s-ai-corpus-configuration|k8s-ai-corpus-configuration]]
 
-- [[references/release-notes-kubernetes.md|release-notes-kubernetes]]
+- [[references/release-notes-kubernetes|release-notes-kubernetes]]
 
-- [[references/k8s-glossary-index.md|k8s-glossary-index]]
+- [[references/k8s-glossary-index|k8s-glossary-index]]
 
-- [[references/kubernetes-port-reference.md|kubernetes-port-reference]]
+- [[references/kubernetes-port-reference|kubernetes-port-reference]]
 
-- [[references/k8s-design-principles-deep-dive.md|k8s-design-principles-deep-dive]]
+- [[references/k8s-design-principles-deep-dive|k8s-design-principles-deep-dive]]
 
 - [[243-ack-ram-authorization]]
 
-- [[references/linux-sysctl-reference.md|linux-sysctl-reference]]
+- [[references/linux-sysctl-reference|linux-sysctl-reference]]
 
 - [[coredns]] — CoreDNS
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[entities/argocd.md|argocd]] — ArgoCD
-- [[references/kubectl Scenario Quick Reference.md|kubectl Scenario Quick Reference]]
+- [[entities/argocd|argocd]] — ArgoCD
+- [[references/kubectl Scenario Quick Reference|kubectl Scenario Quick Reference]]
 - [[KUDIG Man Pages Index]]
-- [[skills/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
+- [[skills/Kubernetes Diagnostic Skills Overview|Kubernetes Diagnostic Skills Overview]]

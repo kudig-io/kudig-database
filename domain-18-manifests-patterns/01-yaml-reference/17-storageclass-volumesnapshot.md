@@ -1468,7 +1468,7 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -1487,8 +1487,8 @@ groups:
 - 18-csi-driver-resources
 - 19-serviceaccount-token
 
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/14-storage-node.md|14-storage-node]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/22-storage-volumes.md|22-storage-volumes]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/14-storage-node|14-storage-node]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/22-storage-volumes|22-storage-volumes]]
 
 ## Related
 

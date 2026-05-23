@@ -65,7 +65,7 @@ created: "2026-05-23"
 3. [CloudCore 组件详解](#3-cloudcore-组件详解)
 4. [EdgeCore 组件详解](#4-edgecore-组件详解)
 5. [通信机制](#5-通信机制)
-6. [[entities/helm.md|Helm]] 部署](#6-helm-部署)
+6. [[entities/helm|Helm]] 部署](#6-helm-部署)
 7. [keadm CLI 部署](#7-keadm-cli-部署)
 8. [高可用部署](#8-高可用部署)
 9. [配置详解](#9-配置详解)
@@ -1892,7 +1892,7 @@ KubeEdge 部署检查清单:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-37-edge-computing MOC
-- [[domain-15-specialized-tech/README.md|Domain 37: 边缘计算 (Edge Computing)]]
+- [[domain-15-specialized-tech/README|Domain 37: 边缘计算 (Edge Computing)]]
 - Domain-37 边缘计算 — 开源项目索引
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)

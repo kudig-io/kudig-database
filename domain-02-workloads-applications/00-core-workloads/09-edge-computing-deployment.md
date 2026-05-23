@@ -65,7 +65,7 @@ created: "2026-05-23"
 
 # 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubeedge.md|KubeEdge]]](https://kubeedge.io/), [[entities/openyurt.md|OpenYurt]]](https://openyurt.io/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubeedge|KubeEdge]]](https://kubeedge.io/), [[entities/openyurt|OpenYurt]]](https://openyurt.io/)
 
 <!-- chunk: 边缘计算架构概览 -->
 ## 边缘计算架构概览
@@ -818,7 +818,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications KUDIG Database — Global MOC
-- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
 - index.md|Domain-4 工作负载 — 开源项目索引]]
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)

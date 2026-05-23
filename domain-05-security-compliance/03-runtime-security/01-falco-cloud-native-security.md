@@ -1361,8 +1361,8 @@ Falco 0.36+ 引入了插件系统，支持扩展事件源和字段提取器。�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README.md|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
 - Kyverno 企业级策略管理深度实践
@@ -1380,7 +1380,7 @@ Falco 0.36+ 引入了插件系统，支持扩展事件源和字段提取器。�
 - 02-sysdig-enterprise-container-security
 - 03-aqua-enterprise-container-security
 
-- [[domain-05-security-compliance/README.md|返回目录]]
+- [[domain-05-security-compliance/README|返回目录]]
 
 ## Related
 

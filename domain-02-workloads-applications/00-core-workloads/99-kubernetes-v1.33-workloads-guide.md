@@ -645,11 +645,11 @@ func (r *MyAppReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl
 <!-- chunk: 参考链接 -->
 ## 参考链接
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/sidecar-containers.md|Sidecar Containers]]](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
+- [[domain-17-system-foundation/topic-dictionary/workloads/sidecar-containers|Sidecar Containers]]](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
 - [Resize CPU and Memory Resources](https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/)
 - [Job Success Policy](https://kubernetes.io/docs/concepts/workloads/controllers/job/#success-policy)
-- [[domain-17-system-foundation/topic-dictionary/scheduling/pod-scheduling-readiness.md|Pod Scheduling Readiness]]](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-scheduling-readiness/)
-- [[domain-17-system-foundation/topic-dictionary/workloads/user-namespaces.md|User Namespaces]]](https://kubernetes.io/docs/concepts/workloads/pods/user-namespaces/)
+- [[domain-17-system-foundation/topic-dictionary/scheduling/pod-scheduling-readiness|Pod Scheduling Readiness]]](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-scheduling-readiness/)
+- [[domain-17-system-foundation/topic-dictionary/workloads/user-namespaces|User Namespaces]]](https://kubernetes.io/docs/concepts/workloads/pods/user-namespaces/)
 
 ---
 
@@ -657,7 +657,7 @@ func (r *MyAppReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications MOC
-- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
 - Domain-4 工作负载 — 开源项目索引
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)

@@ -1046,8 +1046,8 @@ kubectl exec -it vault-0 -n vault -- vault read pki/cert/ca-chain | grep -E "Not
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README.md|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
@@ -1065,4 +1065,4 @@ kubectl exec -it vault-0 -n vault -- vault read pki/cert/ca-chain | grep -E "Not
 - 01-falco-cloud-native-security
 - 02-sysdig-enterprise-container-security
 
-- [[domain-05-security-compliance/README.md|返回目录]]
+- [[domain-05-security-compliance/README|返回目录]]

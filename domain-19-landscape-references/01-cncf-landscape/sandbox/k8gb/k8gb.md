@@ -40,7 +40,7 @@ K8GB 是一个 Kubernetes 原生的全局负载均衡解决方案，基于 DNS �
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -56,8 +56,8 @@ K8GB 是一个 Kubernetes 原生的全局负载均衡解决方案，基于 DNS �
 
 ## 参考链接
 
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
-- [[concepts/controller-pattern.md|controller-pattern]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[concepts/controller-pattern|controller-pattern]]
 
 ## Related
 

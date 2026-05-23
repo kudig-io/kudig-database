@@ -70,9 +70,9 @@ created: "2026-05-23"
 1. [Hubble 概述与架构](#1-hubble-概述与架构)
 2. [Hubble 组件详解](#2-hubble-组件详解)
 3. [L3/L4/L7 流量可视化](#3-l3l4l7-流量可视化)
-4. [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]] Map 与依赖关系图](#4-service-map-与依赖关系图)
+4. [[domain-17-system-foundation/topic-dictionary/networking/service|Service]] Map 与依赖关系图](#4-service-map-与依赖关系图)
 5. [网络策略可视化](#5-网络策略可视化)
-6. [[entities/prometheus.md|Prometheus]] Metrics 导出](#6-prometheus-metrics-导出)
+6. [[entities/prometheus|Prometheus]] Metrics 导出](#6-prometheus-metrics-导出)
 7. [Hubble 部署与配置 ([[Helm|Helm]])](#7-hubble-部署与配置-helm)
 8. [与 Grafana 集成仪表板](#8-与-grafana-集成仪表板)
 9. [故障排查与网络诊断](#9-故障排查与网络诊断)
@@ -2299,7 +2299,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-35-ebpf-technology MOC
-- [[domain-03-networking-traffic/README.md|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
+- [[domain-03-networking-traffic/README|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
 - Domain-35 eBPF 技术 — 开源项目索引
 - eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...
 - eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)

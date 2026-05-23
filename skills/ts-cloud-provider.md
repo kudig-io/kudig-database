@@ -161,12 +161,12 @@ created: "2026-05-23"
 
 ## 相关链接
 
-- [[references/k8s-knowledge-map.md|K8s 知识图谱]]
+- [[references/k8s-knowledge-map|K8s 知识图谱]]
 
 ## Related
 
-- [[skills/assessment-k8s-fundamentals-quiz.md|assessment-k8s-fundamentals-quiz]] — K8S Fundamentals Quiz
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[skills/assessment-k8s-fundamentals-quiz|assessment-k8s-fundamentals-quiz]] — K8S Fundamentals Quiz
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
 - [[submariner]] — Submariner
 - [[istio]] — Istio
 - [[linkerd]] — Linkerd

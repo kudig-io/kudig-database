@@ -547,20 +547,20 @@ spec:
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications KUDIG Database — Global MOC
-- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
 - index.md|Domain-4 工作负载 — 开源项目索引]]
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
-- 03 - [[domain-02-workloads-applications/00-core-workloads/03-statefulset-advanced-operations.md]]
+- 03 - [[domain-02-workloads-applications/00-core-workloads/03-statefulset-advanced-operations]]
 - 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)
 - 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
 - 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)
 - 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload ...
 - 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patter...
 - 工作负载控制器详解
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 

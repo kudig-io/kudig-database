@@ -55,7 +55,7 @@ Kubernetes 中有五种主要的代理类型：
 - 客户端到代理使用 HTTP。
 - 代理到 apiserver 使用 HTTPS。
 - 自动定位 apiserver 并添加认证头。
-- 常用于本地安全访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]]。
+- 常用于本地安全访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]]。
 
 ### 2. apiserver proxy
 

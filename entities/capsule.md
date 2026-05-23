@@ -49,7 +49,7 @@ Capsule 是一个 Kubernetes 多租户框架，允许在单个集群中实现多
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -66,18 +66,18 @@ Capsule 是一个 Kubernetes 多租户框架，允许在单个集群中实现多
 
 ## 参考链接
 
-- [[entities/networkpolicy.md|networkpolicy]]
+- [[entities/networkpolicy|networkpolicy]]
 - [[deployment]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
 - [[operator-pattern]]
-- [[concepts/controller-pattern.md|controller-pattern]]
+- [[concepts/controller-pattern|controller-pattern]]
 
 ## Related
 
 - [[buildpacks]] — Cloud Native Buildpacks
 - [[kube-rs]] — kube-rs
 - [[02-prometheus-promql-advanced]] — PromQL 高级查询
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - capsule

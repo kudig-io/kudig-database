@@ -38,7 +38,7 @@ created: "2026-05-23"
 
 本页汇总了 **基础概念** 领域的 24 个 Kubernetes 术语定义与概念说明。
 
-> **相关领域**: [[references/k8s-architecture-fundamentals.md|k8s-architecture-fundamentals]] | [[references/k8s-knowledge-map.md|k8s-knowledge-map]]
+> **相关领域**: [[references/k8s-architecture-fundamentals|k8s-architecture-fundamentals]] | [[references/k8s-knowledge-map|k8s-knowledge-map]]
 
 ---
 
@@ -295,8 +295,8 @@ Kubernetes API 是查询和操作 Kubernetes 中对象状态的核心机制。Ku
 
 ## 相关页面
 
-- [[references/k8s-architecture-fundamentals.md|k8s-architecture-fundamentals]]
-- [[references/k8s-knowledge-map.md|k8s-knowledge-map]]
+- [[references/k8s-architecture-fundamentals|k8s-architecture-fundamentals]]
+- [[references/k8s-knowledge-map|k8s-knowledge-map]]
 
 ## 来源文件
 
@@ -328,7 +328,7 @@ Kubernetes API 是查询和操作 Kubernetes 中对象状态的核心机制。Ku
 ## Related
 
 - [[deployment]] — Deployment
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

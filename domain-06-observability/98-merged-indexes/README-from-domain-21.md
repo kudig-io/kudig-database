@@ -173,9 +173,9 @@ tier: peripheral---
 
 ## See Also
 
-- [[domain-06-observability/98-merged-indexes/QUALITY-REPORT.md|QUALITY-REPORT]]
-- [[domain-06-observability/98-merged-indexes/README-from-domain-20.md|README-from-domain-06-observability]]
-- [[domain-06-observability/98-merged-indexes/README-from-domain-8.md|README-from-domain-06-observability]]
-- [[domain-06-observability/98-merged-indexes/UPDATED-QUALITY-REPORT.md|UPDATED-QUALITY-REPORT]]
+- [[domain-06-observability/98-merged-indexes/QUALITY-REPORT|QUALITY-REPORT]]
+- [[domain-06-observability/98-merged-indexes/README-from-domain-20|README-from-domain-06-observability]]
+- [[domain-06-observability/98-merged-indexes/README-from-domain-8|README-from-domain-06-observability]]
+- [[domain-06-observability/98-merged-indexes/UPDATED-QUALITY-REPORT|UPDATED-QUALITY-REPORT]]
 
-- [[domain-06-observability/README.md|返回目录]]
+- [[domain-06-observability/README|返回目录]]

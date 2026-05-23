@@ -166,12 +166,12 @@ Unified tagging system for 3,337+ documents in the KUDIG knowledge base. Ensures
 
 ## Related
 
-- [[entities/argocd.md|argocd]] — ArgoCD
+- [[entities/argocd|argocd]] — ArgoCD
 - [[argo]] — Argo Workflows
 - [[operator-pattern]] — Operator Pattern (CRD + Controller)
-- [[concepts/infrastructure-as-code.md|infrastructure-as-code]] — Infrastructure as Code
-- [[concepts/service-networking.md|service-networking]] — Service Networking
-- [[references/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
-- [[skills/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
-- [[references/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
-- [[docs/TAG-DICTIONARY.md|KUDIG 全局标签字典]]
+- [[concepts/infrastructure-as-code|infrastructure-as-code]] — Infrastructure as Code
+- [[concepts/service-networking|service-networking]] — Service Networking
+- [[references/KUDIG Scenario Taxonomy|KUDIG Scenario Taxonomy]]
+- [[skills/Kubernetes Diagnostic Skills Overview|Kubernetes Diagnostic Skills Overview]]
+- [[references/KUDIG Frontmatter Spec|KUDIG Frontmatter Spec]]
+- [[docs/TAG-DICTIONARY|KUDIG 全局标签字典]]

@@ -598,6 +598,6 @@ kubectl get nodes
 ---
 
 **关联文档**:
-- [[skills/training-public/00-beginner-learning-roadmap.md]] — 完整学习路线图
+- [[skills/training-public/00-beginner-learning-roadmap]] — 完整学习路线图
 - ../../domain-10-troubleshooting-diagnostics/ — 故障排查深度文档
-- [[02-local-lab-environment.md]] — 本地实验环境搭建
+- [[02-local-lab-environment]] — 本地实验环境搭建

@@ -87,7 +87,7 @@ created: "2026-05-23"
 
 1. [控制平面组件概览](#1-控制平面组件概览)
 2. [kube-apiserver 深度剖析](#2-kube-apiserver-深度剖析)
-3. [[entities/etcd.md|etcd]] 生产实践](#3-etcd-生产实践)
+3. [[entities/etcd|etcd]] 生产实践](#3-etcd-生产实践)
 4. [kube-scheduler 调度优化](#4-kube-scheduler-调度优化)
 5. [kube-controller-manager 控制器详解](#5-kube-controller-manager-控制器详解)
 6. [cloud-controller-manager 云集成](#6-cloud-controller-manager-云集成)
@@ -1679,7 +1679,7 @@ resources:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - 03 - 功能和API表
@@ -1700,8 +1700,8 @@ resources:
 - etcd 深度解析
 - 相关知识域: domain-13-container-runtime
 - 相关知识域: domain-01-cluster-fundamentals
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|速查卡: k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet|速查卡: kubectl-scene-cheatsheet]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 

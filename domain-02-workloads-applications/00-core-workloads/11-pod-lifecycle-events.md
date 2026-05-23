@@ -72,7 +72,7 @@ created: "2026-05-23"
 
 # 37 - Pod生命周期事件表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/workloads/pods/pod-lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/concepts/workloads/pods/pod-lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
 
 <!-- chunk: Pod阶段(Phase) -->
 ## Pod阶段(Phase)
@@ -296,11 +296,11 @@ kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.m
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications KUDIG Database — Global MOC
-- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
 - index.md|Domain-4 工作负载 — 开源项目索引]]
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
-- 03 - [[domain-02-workloads-applications/00-core-workloads/03-statefulset-advanced-operations.md]]
+- 03 - [[domain-02-workloads-applications/00-core-workloads/03-statefulset-advanced-operations]]
 - 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)
 - 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
 - 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)
@@ -311,13 +311,13 @@ kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.m
 ## Related
 
 - [[deployment]]
-- [[synthesis/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
+- [[synthesis/Pod 生命周期 × 存储模型|Pod 生命周期 × 存储模型]]
 
 - 工作负载控制器详解
 - HPA/VPA 自动扩缩容
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-06-observability
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|速查卡: k8s]]
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
 
 ## See Also

@@ -52,7 +52,7 @@ description: '## 项目概述'
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -69,16 +69,16 @@ description: '## 项目概述'
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
 - [[crossplane]]
-- [[entities/vault.md|vault]]
-- [[concepts/controller-pattern.md|controller-pattern]]
-- [[concepts/gitops-principles.md|gitops-principles]]
+- [[entities/vault|vault]]
+- [[concepts/controller-pattern|controller-pattern]]
+- [[concepts/gitops-principles|gitops-principles]]
 
 ## Related
 
 - [[sops]] — SOPS (Secrets OPerationS)
-- [[entities/argocd.md|argocd]] — ArgoCD
+- [[entities/argocd|argocd]] — ArgoCD
 - [[ovn-kubernetes]] — OVN-Kubernetes
 - [[vitess]] — Vitess
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
@@ -87,13 +87,13 @@ description: '## 项目概述'
 - 99-argo-cd-gitops-guide
 - 36-ecosystem-kustomize-helm-argocd
 - 09-gitops-workflow-argocd
-- [[domain-10-troubleshooting-diagnostics/38-gitops-argocd-troubleshooting.md|38-gitops-argocd-troubleshooting]]
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/gitops-argocd-fta.md|GitOps(ArgoCD) 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/38-gitops-argocd-troubleshooting|38-gitops-argocd-troubleshooting]]
+- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd|06-java-cicd-tekton-argocd]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/gitops-argocd-fta|GitOps(ArgoCD) 异常故障树分析]]
 - RELEASE-NOTES-0.12
 - RELEASE-NOTES-0.8
-- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.12.md|RELEASE-NOTES-2.12]]
-- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.13.md|RELEASE-NOTES-2.13]]
+- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.12|RELEASE-NOTES-2.12]]
+- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.13|RELEASE-NOTES-2.13]]
 - RELEASE-NOTES-1.8
 - RELEASE-NOTES-0.9
 - RELEASE-NOTES-2.4
@@ -101,45 +101,45 @@ description: '## 项目概述'
 - RELEASE-NOTES-0.2
 - RELEASE-NOTES-1.7
 - RELEASE-NOTES-2.0
-- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.1.md|RELEASE-NOTES-3.1]]
+- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.1|RELEASE-NOTES-3.1]]
 - RELEASE-NOTES-0.6
 - RELEASE-NOTES-1.6
 - RELEASE-NOTES-2.1
-- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.0.md|RELEASE-NOTES-3.0]]
+- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.0|RELEASE-NOTES-3.0]]
 - RELEASE-NOTES-0.7
 - RELEASE-NOTES-2.5
 - RELEASE-NOTES-1.2
 - RELEASE-NOTES-0.3
 - RELEASE-NOTES-1.5
 - RELEASE-NOTES-2.2
-- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.3.md|RELEASE-NOTES-3.3]]
+- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.3|RELEASE-NOTES-3.3]]
 - RELEASE-NOTES-0.4
-- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.6.md|RELEASE-NOTES-2.6]]
+- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.6|RELEASE-NOTES-2.6]]
 - RELEASE-NOTES-1.1
-- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.7.md|RELEASE-NOTES-2.7]]
+- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.7|RELEASE-NOTES-2.7]]
 - RELEASE-NOTES-1.0
 - RELEASE-NOTES-0.1
 - RELEASE-NOTES-1.4
 - RELEASE-NOTES-2.3
-- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.2.md|RELEASE-NOTES-3.2]]
+- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.2|RELEASE-NOTES-3.2]]
 - RELEASE-NOTES-0.5
-- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.8.md|RELEASE-NOTES-2.8]]
-- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.10.md|RELEASE-NOTES-2.10]]
+- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.8|RELEASE-NOTES-2.8]]
+- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.10|RELEASE-NOTES-2.10]]
 - RELEASE-NOTES-0.10
-- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.14.md|RELEASE-NOTES-2.14]]
+- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.14|RELEASE-NOTES-2.14]]
 - RELEASE-NOTES-0.11
-- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.9.md|RELEASE-NOTES-2.9]]
-- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.11.md|RELEASE-NOTES-2.11]]
-- [[entities/pixie.md|Pixie]]
-- [[entities/kuberhealthy.md|Kuberhealthy]]
-- [[entities/kubescape.md|Kubescape]]
-- [[entities/perses.md|Perses]]
-- [[entities/03-prometheus-ha-deployment.md|Prometheus 高可用部署]]
-- [[entities/trickster.md|Trickster]]
-- [[entities/distribution.md|Distribution]]
-- [[entities/hami.md|HAMI]]
-- [[entities/06-containerd-observability.md|containerd 可观测性]]
-- [[entities/kubeelasti.md|KubeElastic]]
+- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.9|RELEASE-NOTES-2.9]]
+- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.11|RELEASE-NOTES-2.11]]
+- [[entities/pixie|Pixie]]
+- [[entities/kuberhealthy|Kuberhealthy]]
+- [[entities/kubescape|Kubescape]]
+- [[entities/perses|Perses]]
+- [[entities/03-prometheus-ha-deployment|Prometheus 高可用部署]]
+- [[entities/trickster|Trickster]]
+- [[entities/distribution|Distribution]]
+- [[entities/hami|HAMI]]
+- [[entities/06-containerd-observability|containerd 可观测性]]
+- [[entities/kubeelasti|KubeElastic]]
 - [[journal/digest-2026-05-21-full|Wiki 全量知识库摘要 — 2026-05-21]] — Cross-reference
 - [[references/kudig-ecosystem-guide|KUDIG 开源生态指南与深度研究指南]] — Cross-reference
 - [[references/k8s-advanced-ecosystem|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference

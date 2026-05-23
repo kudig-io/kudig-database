@@ -479,8 +479,8 @@ curl -s -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-versio
 
 ## Related
 
-- [[log.md|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/cloud-controller-manager.md|cloud-controller-manager]]
+- [[log|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[entities/kubernetes|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/cloud-controller-manager|cloud-controller-manager]]

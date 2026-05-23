@@ -292,8 +292,8 @@ s  - s
 
 ## Related
 
-- [[skills/learn-06-configmap-secret.md|learn-06-configmap-secret]] — 第六课：ConfigMap 和 Secret - 配置管理
+- [[skills/learn-06-configmap-secret|learn-06-configmap-secret]] — 第六课：ConfigMap 和 Secret - 配置管理
 - [[docker]] — Docker
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — [[Kubernetes Architecture Overview|Kubernetes Architecture Overview]]
+- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — [[Kubernetes Architecture Overview|Kubernetes Architecture Overview]]

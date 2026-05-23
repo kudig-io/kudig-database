@@ -50,7 +50,7 @@ related_topics:
 created: "2026-05-23"
 ---
 
-# Node Create — Kubernetes [[concepts/node-lifecycle-management.md|node-lifecycle-management]]
+# Node Create — Kubernetes [[concepts/node-lifecycle-management|node-lifecycle-management]]
 
 ## 函数签名
 
@@ -525,9 +525,9 @@ kubectl describe node worker-1
 
 ## Related
 
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/cni.md|cni]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/16-windows-node.md|16-windows-node]]
+- [[entities/kubernetes|kubernetes]]
+- [[entities/cni|cni]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/16-windows-node|16-windows-node]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference

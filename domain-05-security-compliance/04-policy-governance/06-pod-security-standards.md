@@ -57,7 +57,7 @@ created: "2026-05-23"
 
 # 06 - Pod安全标准详解
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/security/pod-security-standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/concepts/security/pod-security-standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
 
 <!-- chunk: Pod Securityod Security Standards]] (PSS) 级别 -->
 ## Pod Security Standards (PSS) 级别
@@ -329,8 +329,8 @@ done
 ## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README.md|Security Domain]]
-- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README|Security Domain]]
+- [[domain-05-security-compliance/00-open-source-projects-index|Domain-7 安全 — 开源项目索引]]
 - Kubernetes 认证授权体系详解
 - 网络安全策略与零信任架构
 - 运行时安全防护与威胁检测
@@ -348,7 +348,7 @@ done
 - 07-rbac-matrix-configuration
 - 08-security-best-practices
 
-- [[domain-05-security-compliance/README.md|返回目录]]
+- [[domain-05-security-compliance/README|返回目录]]
 
 ## Related
 

@@ -1,6 +1,6 @@
 ---
 title: Cilium eBPF Networking
-description: '- [[synthesis/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis'
+description: '- [[synthesis/eBPF x 运行时安全|eBPF x 运行时安全]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -98,20 +98,20 @@ Hubble provides L3/L4/L7 flow visibility:
 | Advanced features | 6.1+ |
 
 ## Related
-- [[synthesis/Cilium eBPF × 可观测性.md|Cilium eBPF × 可观测性]] — 综合
+- [[synthesis/Cilium eBPF × 可观测性|Cilium eBPF × 可观测性]] — 综合
 
-- [[entities/tetragon.md|tetragon]] — Tetragon
+- [[entities/tetragon|tetragon]] — Tetragon
 - [[grpc]] — gRPC
 - [[cni]] — CNI (Container Network Interface)
-- [[concepts/tcp-udp-protocol-stack.md|tcp-udp-protocol-stack]] — TCP/UDP Protocol Stack
-- [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
-- [[concepts/service-mesh-architecture.md|Service Mesh Architecture]]
-- [[concepts/tcp-udp-protocol-stack.md|TCP/UDP Protocol Stack]]
-- [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
+- [[concepts/tcp-udp-protocol-stack|tcp-udp-protocol-stack]] — TCP/UDP Protocol Stack
+- [[concepts/cloud-native-defense-in-depth|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
+- [[concepts/service-mesh-architecture|Service Mesh Architecture]]
+- [[concepts/tcp-udp-protocol-stack|TCP/UDP Protocol Stack]]
+- [[concepts/cloud-native-defense-in-depth|Cloud Native Defense in Depth]]
 - [[cilium|Cilium]]
-- [[entities/tetragon.md|Tetragon]]
+- [[entities/tetragon|Tetragon]]
 - Hubble
-- [[synthesis/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis
+- [[synthesis/eBPF x 运行时安全|eBPF x 运行时安全]] — synthesis
 
 - RELEASE-NOTES-1.9
 - RELEASE-NOTES-0.8

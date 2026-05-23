@@ -111,7 +111,7 @@ Red Hat 宣布将以下项目贡献给 CNCF Sandbox:
 ## Obsidian 相关文档
 
 - domain-13-container-runtime MOC
-- [[domain-13-container-runtime/README.md|Docker 容器技术深度解析]]
+- [[domain-13-container-runtime/README|Docker 容器技术深度解析]]
 - Docker 架构概述与核心概念
 - Docker 镜像管理详解
 - Docker 容器生命周期管理

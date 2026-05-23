@@ -923,4 +923,4 @@ CNCF项目状态:
 
 - 相关知识域: domain-07-platform-engineering
 - 相关知识域: domain-24-infrastructure-as-code
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|速查卡: git]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git|速查卡: git]]

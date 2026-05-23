@@ -41,7 +41,7 @@ bootc 是一个基于 OCI 容器镜像的 Linux 系统启动和升级工具，�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -58,11 +58,11 @@ bootc 是一个基于 OCI 容器镜像的 Linux 系统启动和升级工具，�
 ## 参考链接
 
 - [[pod-lifecycle]]
-- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
+- [[concepts/ci-cd-pipeline-patterns|ci-cd-pipeline-patterns]]
 
 ## Related
 
-- [[entities/cncf-edge-ai.md|cncf-edge-ai]] — CNCF 边缘计算与 AI/ML 项目全景
+- [[entities/cncf-edge-ai|cncf-edge-ai]] — CNCF 边缘计算与 AI/ML 项目全景
 - [[confidential-containers]] — [[Confidential Containers|Confidential Containers]]rs (CoCo)|Confidential Containers (CoCo)]]
 - [[k8sgpt]] — K8sGPT
 - [[trickster]] — Trickster

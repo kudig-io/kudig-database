@@ -780,8 +780,8 @@ kubectl get pod <pod-name> -o yaml | grep -A10 "probe"
 
 ## Related
 
-- [[skills/learn-inner-training.md|learn-inner-training]] — [[Kubernetes|Kubernetes]]es 培训：Inner Training|Kubernetes 培训：Inner Training]]
-- [[skills/learn-lecturer-persona.md|learn-lecturer-persona]] — K8S 讲师角色设定与场景规范
-- [[skills/learn-03-oncall-handoff.md|learn-03-oncall-handoff]] — Day 3: 值班交接 SOP
-- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[skills/learn-inner-training|learn-inner-training]] — [[Kubernetes|Kubernetes]]es 培训：Inner Training|Kubernetes 培训：Inner Training]]
+- [[skills/learn-lecturer-persona|learn-lecturer-persona]] — K8S 讲师角色设定与场景规范
+- [[skills/learn-03-oncall-handoff|learn-03-oncall-handoff]] — Day 3: 值班交接 SOP
+- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
 - [[deployment]] — Deployment

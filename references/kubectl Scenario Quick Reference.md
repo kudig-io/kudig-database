@@ -147,12 +147,12 @@ kubectl api-versions
 
 ## Related
 
-- [[references/kubectl-quick-reference.md|kubectl-quick-reference]] — Kubectl Quick Reference
-- [[references/fta-febm-methodology.md|fta-febm-methodology]] — 故障树分析（FTA）与取证循证方法论（FEBM）
+- [[references/kubectl-quick-reference|kubectl-quick-reference]] — Kubectl Quick Reference
+- [[references/fta-febm-methodology|fta-febm-methodology]] — 故障树分析（FTA）与取证循证方法论（FEBM）
 - [[deployment]] — Deployment
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[skills/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
-- [[skills/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
-- [[references/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
-- [[references/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
+- [[skills/Kubernetes FTA Top Events Index|Kubernetes FTA Top Events Index]]
+- [[skills/Kubernetes Diagnostic Skills Overview|Kubernetes Diagnostic Skills Overview]]
+- [[references/KUDIG Tag Dictionary|KUDIG Tag Dictionary]]
+- [[references/KUDIG Scenario Taxonomy|KUDIG Scenario Taxonomy]]

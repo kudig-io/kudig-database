@@ -28,7 +28,7 @@ created: "2026-05-23"
 
 本页汇总了 **配置管理** 领域的 6 个 Kubernetes 术语定义与概念说明。
 
-> **相关领域**: [[references/k8s-architecture-fundamentals.md|k8s-architecture-fundamentals]] | [[references/k8s-control-plane-deep-dive.md|k8s-control-plane-deep-dive]]
+> **相关领域**: [[references/k8s-architecture-fundamentals|k8s-architecture-fundamentals]] | [[references/k8s-control-plane-deep-dive|k8s-control-plane-deep-dive]]
 
 ---
 
@@ -95,8 +95,8 @@ Secret 是 Kubernetes 中用于存储敏感数据（如密码、令牌、密钥�
 
 ## 相关页面
 
-- [[references/k8s-architecture-fundamentals.md|k8s-architecture-fundamentals]]
-- [[references/k8s-control-plane-deep-dive.md|k8s-control-plane-deep-dive]]
+- [[references/k8s-architecture-fundamentals|k8s-architecture-fundamentals]]
+- [[references/k8s-control-plane-deep-dive|k8s-control-plane-deep-dive]]
 
 ## 来源文件
 
@@ -109,8 +109,8 @@ Secret 是 Kubernetes 中用于存储敏感数据（如密码、令牌、密钥�
 
 ## Related
 
-- [[references/platform-engineering-terms.md|platform-engineering-terms]] — K8s 平台工程术语参考
-- [[references/tooling-terms.md|tooling-terms]] — K8s 工具链术语参考
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[references/platform-engineering-terms|platform-engineering-terms]] — K8s 平台工程术语参考
+- [[references/tooling-terms|tooling-terms]] — K8s 工具链术语参考
+- [[entities/kubelet|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[concepts/resource-management|resource-management]] — Resource Management (Requests, Limits, QoS)

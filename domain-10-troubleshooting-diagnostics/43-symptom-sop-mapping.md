@@ -1526,24 +1526,24 @@ related:
 ## Obsidian 相关文档
 
 - domain-10-troubleshooting-diagnostics MOC
-- [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
+- [[domain-10-troubleshooting-diagnostics/README|Domain-12 故障排查 (Troubleshooting)]]
 - Domain-12 故障排查 — 开源项目索引
-- [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]
-- [[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]
-- [[domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断]]
-- [[domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md|Node NotReady 状态深度诊断]]
-- [[domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis.md|OOM 和内存问题诊断]]
-- [[domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/09-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting|API Server 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting|etcd 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting|CNI 网络插件故障排查]]
+- [[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting|CSI 存储驱动故障排查]]
+- [[domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis|Pod Pending 状态深度诊断]]
+- [[domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis|Node NotReady 状态深度诊断]]
+- [[domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis|OOM 和内存问题诊断]]
+- [[domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting|Pod 全面故障排查]]
+- [[domain-10-troubleshooting-diagnostics/09-node-comprehensive-troubleshooting|Node 全面故障排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/41-event-driven-architecture-troubleshooting.md|41-event-driven-architecture-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/42-chaos-engineering-fault-injection-testing.md|42-chaos-engineering-fault-injection-testing]]
-- [[domain-10-troubleshooting-diagnostics/44-kind-k3s-single-node-troubleshooting.md|44-kind-k3s-single-node-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/99-java-performance-resource-sizing-guide.md|99-java-performance-resource-sizing-guide]]
+- [[domain-10-troubleshooting-diagnostics/41-event-driven-architecture-troubleshooting|41-event-driven-architecture-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/42-chaos-engineering-fault-injection-testing|42-chaos-engineering-fault-injection-testing]]
+- [[domain-10-troubleshooting-diagnostics/44-kind-k3s-single-node-troubleshooting|44-kind-k3s-single-node-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/99-java-performance-resource-sizing-guide|99-java-performance-resource-sizing-guide]]

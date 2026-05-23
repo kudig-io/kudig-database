@@ -674,7 +674,7 @@ kubectl set image daemonset/kube-proxy kube-proxy=registry.k8s.io/kube-proxy:v1.
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/daemonset.md|daemonset]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[entities/kubernetes|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/daemonset|daemonset]]

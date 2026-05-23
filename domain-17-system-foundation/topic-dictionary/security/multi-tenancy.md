@@ -49,7 +49,7 @@ Kubernetes 中的多租户通常分为两大类：
 
 隔离水平通常用“硬多租户”（hard multi-tenancy，强隔离）和“软多租户”（soft multi-tenancy，弱隔离）来描述。实际上，隔离更像是一个连续光谱，包含多种技术：
 
-- **控制平面隔离**：确保不同租户无法访问或影响彼此的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 资源。
+- **控制平面隔离**：确保不同租户无法访问或影响彼此的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 资源。
 - **数据平面隔离**：确保不同租户的 Pod 和工作负载之间有足够的隔离。
 
 ## 关键机制或特性

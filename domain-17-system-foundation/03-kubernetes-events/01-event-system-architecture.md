@@ -590,7 +590,7 @@ echo "Warning: $(kubectl get events -A --field-selector type=Warning --no-header
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-33-kubernetes-events MOC
-- [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
+- [[domain-17-system-foundation/README|Domain-33: Kubernetes Events 全域事件大全]]
 - Domain-33 K8s 事件 — 开源项目索引
 - 02 - Pod 与容器生命周期事件
 - 03 - 镜像拉取事件

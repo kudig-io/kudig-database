@@ -1,6 +1,6 @@
 ---
 title: FTA Diagnostic Execution Engine
-description: '- [[skills/ts-resources-scheduling.md|ts-resources-scheduling]] — 资源调度故障排查'
+description: '- [[skills/ts-resources-scheduling|ts-resources-scheduling]] — 资源调度故障排查'
 category: skill
 tags:
 - k8s
@@ -136,17 +136,17 @@ The traversal engine prunes unlikely paths to reduce diagnosis time:
 
 ## Related
 
-- [[skills/ts-resources-scheduling.md|ts-resources-scheduling]] — 资源调度故障排查
+- [[skills/ts-resources-scheduling|ts-resources-scheduling]] — 资源调度故障排查
 - [[rbac-fta]] — RBAC 异常故障树分析
-- [[skills/skill-21-statefulset-failure.md|skill-21-statefulset-failure]] — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
-- [[skills/troubleshoot-node-issues.md|troubleshoot-node-issues]] — Troubleshoot Node Issues
+- [[skills/skill-21-statefulset-failure|skill-21-statefulset-failure]] — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+- [[skills/troubleshoot-node-issues|troubleshoot-node-issues]] — Troubleshoot Node Issues
 - [[score]] — Score
-- [[skills/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
-- [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
-- [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
-- [[skills/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
-- [[concepts/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
-- [[synthesis/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
+- [[skills/FTA Methodology and Core Principles|FTA Methodology and Core Principles]]
+- [[skills/Symptom Vector Matching Engine|Symptom Vector Matching Engine]]
+- [[skills/Agent Orchestration Patterns|Agent Orchestration Patterns]]
+- [[skills/Kubernetes FTA Top Events Index|Kubernetes FTA Top Events Index]]
+- [[concepts/Symptom-SOP-RootCause Mapping|Symptom-SOP-RootCause Mapping]]
+- [[synthesis/Production Troubleshooting Playbook|Production Troubleshooting Playbook]]
 
 - [[README]]
 - [[nginx-ingress-fta]]

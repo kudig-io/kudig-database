@@ -37,7 +37,7 @@ created: "2026-05-23"
 
 本页汇总了 **工作负载** 领域的 33 个 Kubernetes 术语定义与概念说明。
 
-> **相关领域**: [[references/k8s-workloads-domain-guide.md|k8s-workloads-domain-guide]] | [[references/k8s-workload-management.md|k8s-workload-management]]
+> **相关领域**: [[references/k8s-workloads-domain-guide|k8s-workloads-domain-guide]] | [[references/k8s-workload-management|k8s-workload-management]]
 
 ---
 
@@ -347,8 +347,8 @@ Workload Reference 是 Kubernetes v1.35 引入的 Alpha 特性（默认禁用，
 
 ## 相关页面
 
-- [[references/k8s-workloads-domain-guide.md|k8s-workloads-domain-guide]]
-- [[references/k8s-workload-management.md|k8s-workload-management]]
+- [[references/k8s-workloads-domain-guide|k8s-workloads-domain-guide]]
+- [[references/k8s-workload-management|k8s-workload-management]]
 
 ## 来源文件
 
@@ -389,7 +389,7 @@ Workload Reference 是 Kubernetes v1.35 引入的 Alpha 特性（默认禁用，
 ## Related
 
 - [[deployment]] — Deployment
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[pod-lifecycle]] — Pod Lifecycle

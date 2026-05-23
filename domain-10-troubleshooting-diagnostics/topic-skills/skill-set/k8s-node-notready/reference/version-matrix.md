@@ -57,7 +57,7 @@ created: "2026-05-23"
 - [知识进化](#知识进化)
   - [常见误诊模式](#101-常见误诊模式)
   - [深度知识引用](#102-深度知识引用)
-  - [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/SKILL.md|Skill]] 改进记录](#103-skill-改进记录)
+  - [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/SKILL|Skill]] 改进记录](#103-skill-改进记录)
   - [待补充的知识空白](#104-待补充的知识空白)
 
 ---

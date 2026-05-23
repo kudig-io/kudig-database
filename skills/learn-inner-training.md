@@ -2272,6 +2272,6 @@ tags: [week-4, day-28, review, checkpoint, k8s, k8s-1.28-1.33]
 
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[concepts/resource-management|resource-management]] — Resource Management (Requests, Limits, QoS)
 - [[pod-lifecycle]] — Pod Lifecycle
-- [[concepts/service-networking.md|service-networking]] — Service Networking
+- [[concepts/service-networking|service-networking]] — Service Networking

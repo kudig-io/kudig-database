@@ -42,8 +42,8 @@ created: "2026-05-23"
 
 ## 与其他 Domain 的关系
 
-- [[domain-01-cluster-fundamentals/README.md|domain-01-cluster-fundamentals]] — API 资源理解
-- [[domain-02-workloads-applications/README.md|domain-02-workloads-applications]] — 工作负载配置
+- [[domain-01-cluster-fundamentals/README|domain-01-cluster-fundamentals]] — API 资源理解
+- [[domain-02-workloads-applications/README|domain-02-workloads-applications]] — 工作负载配置
 
 ## Related
 

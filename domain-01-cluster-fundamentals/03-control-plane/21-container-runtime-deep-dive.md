@@ -83,7 +83,7 @@ created: "2026-05-23"
 1. [容器运行时演进历史](#1-容器运行时演进历史)
 2. [容器运行时架构](#2-容器运行时架构)
 3. [CRI 接口规范](#3-cri-接口规范)
-4. [[entities/containerd.md|containerd]] 深度解析](#4-containerd-深度解析)
+4. [[entities/containerd|containerd]] 深度解析](#4-containerd-深度解析)
 5. [CRI-O 深度解析](#5-cri-o-深度解析)
 6. [OCI 运行时详解](#6-oci-运行时详解)
 7. [安全容器运行时](#7-安全容器运行时)
@@ -2205,7 +2205,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)

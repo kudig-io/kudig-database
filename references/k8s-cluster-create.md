@@ -393,14 +393,14 @@ kubeadm 支持两种高可用 etcd 拓扑：
 
 ## 相关链接
 
-- [[skills/troubleshoot-node-issues.md|节点故障排查]]
-- [[references/k8s-knowledge-map.md|K8s 知识图谱]]
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/troubleshoot-node-issues|节点故障排查]]
+- [[references/k8s-knowledge-map|K8s 知识图谱]]
+- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
 
 ## Related
 
 - [[docker]] — Docker
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[helm]] — Helm
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

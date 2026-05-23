@@ -37,7 +37,7 @@ created: "2026-05-23"
 
 本页汇总了 **可观测性** 领域的 10 个 Kubernetes 术语定义与概念说明。
 
-> **相关领域**: [[references/k8s-observability-ecosystem.md|k8s-observability-ecosystem]]
+> **相关领域**: [[references/k8s-observability-ecosystem|k8s-observability-ecosystem]]
 
 ---
 
@@ -142,7 +142,7 @@ FEATURE STATE: `Kubernetes v1.27 [beta]`
 
 ## 相关页面
 
-- [[references/k8s-observability-ecosystem.md|k8s-observability-ecosystem]]
+- [[references/k8s-observability-ecosystem|k8s-observability-ecosystem]]
 
 ## 来源文件
 

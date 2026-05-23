@@ -46,7 +46,7 @@ description: '## 项目概述'
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -58,15 +58,15 @@ description: '## 项目概述'
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
-- [[entities/argocd.md|[[ArgoCD|argocd]]]]
-- [[concepts/microservice-resilience-patterns.md|microservice-resilience-patterns]]
-- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/argocd|[[ArgoCD|argocd]]]]
+- [[concepts/microservice-resilience-patterns|microservice-resilience-patterns]]
+- [[concepts/ci-cd-pipeline-patterns|ci-cd-pipeline-patterns]]
 
 ## Related
 
 - [[wasmedge]] — WasmEdge
-- [[entities/cncf-runtime.md|cncf-runtime]] — CNCF 容器运行时与工具链项目全景
+- [[entities/cncf-runtime|cncf-runtime]] — CNCF 容器运行时与工具链项目全景
 - [[04-containerd-upgrade-migration]] — [[containerd|containerd]]rd 升级迁移|containerd 升级迁移]]
 - [[spin]] — Spin
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

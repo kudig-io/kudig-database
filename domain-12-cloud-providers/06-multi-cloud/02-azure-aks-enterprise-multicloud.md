@@ -1172,7 +1172,7 @@ kubectl get nodes -o wide
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-27-multi-cloud-hybrid MOC
-- [[domain-12-cloud-providers/README.md|Domain 27: 多云与混合云架构管理]]
+- [[domain-12-cloud-providers/README|Domain 27: 多云与混合云架构管理]]
 - Domain-27 多云与混合云 — 开源项目索引
 - AWS EKS 企业级多云管理平台
 - 企业级多云治理与成本优化深度实践

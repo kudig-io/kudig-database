@@ -61,12 +61,12 @@ Falco deploys as a [[DaemonSet|DaemonSet]] with one pod per node, monitoring all
 
 - [[kuasar]] — Kuasar
 - [[deployment]] — Deployment
-- [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — [[Cloud Native Defense in Depth|Cloud Native Defense in Depth]]
+- [[concepts/cloud-native-defense-in-depth|cloud-native-defense-in-depth]] — [[Cloud Native Defense in Depth|Cloud Native Defense in Depth]]
 - networking.md|cilium-ebpf-networking]] — Cilium eBPF Networking
 - [[cilium]] — Cilium
-- [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
-- [[concepts/cilium-ebpf-networking.md|Cilium eBPF Networking]]
-- [[entities/tetragon.md|Tetragon]]
+- [[concepts/cloud-native-defense-in-depth|Cloud Native Defense in Depth]]
+- [[concepts/cilium-ebpf-networking|Cilium eBPF Networking]]
+- [[entities/tetragon|Tetragon]]
 
 - 99-falco-runtime-security-guide
 - 01-falco-cloud-native-security

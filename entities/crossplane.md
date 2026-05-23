@@ -48,7 +48,7 @@ Crossplane extends Kubernetes with custom resources for cloud infrastructure, en
 | XRD (Composite Resource Definition) | Define a new resource type that composes multiple underlying resources |
 | Claim | Namespace-scoped request for a composite resource |
 
-## [[synthesis/platform-engineering-sre.md|Platform Engineering]] Role
+## [[synthesis/platform-engineering-sre|Platform Engineering]] Role
 
 Crossplane enables platform teams to create self-service infrastructure abstractions. Developers request a "Database" claim, and Crossplane provisions RDS, creates K8s Secrets, and configures networking -- all declaratively.
 
@@ -57,11 +57,11 @@ Crossplane enables platform teams to create self-service infrastructure abstract
 - [[helm]] — Helm
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/infrastructure-as-code.md|infrastructure-as-code]] — Infrastructure as Code
-- [[concepts/platform-engineering-idp.md|platform-engineering-idp]] — Platform Engineering and Internal Developer Platforms
-- [[concepts/infrastructure-as-code.md|Infrastructure as Code]]
-- [[concepts/platform-engineering-idp.md|Platform Engineering and IDP]]
-- [[concepts/gitops-principles.md|GitOps Principles]]
+- [[concepts/infrastructure-as-code|infrastructure-as-code]] — Infrastructure as Code
+- [[concepts/platform-engineering-idp|platform-engineering-idp]] — Platform Engineering and Internal Developer Platforms
+- [[concepts/infrastructure-as-code|Infrastructure as Code]]
+- [[concepts/platform-engineering-idp|Platform Engineering and IDP]]
+- [[concepts/gitops-principles|GitOps Principles]]
 
 - 07-crossplane-platform-composition
 - 05-crossplane-enterprise-orchestration

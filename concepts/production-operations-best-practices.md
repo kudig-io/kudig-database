@@ -33,7 +33,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-# [[references/k8s-production-operations.md|Production Operations]]ernetes 生产环境运维最佳实践字典|Operations Best Practices]]
+# [[references/k8s-production-operations|Production Operations]]ernetes 生产环境运维最佳实践字典|Operations Best Practices]]
 
 ## Production Readiness Checklist
 
@@ -96,16 +96,16 @@ RFC (Request for Change) process for production changes:
 - radius — radius
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/microservice-resilience-patterns.md|microservice-resilience-patterns]] — Microservice Resilience Patterns
-- [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
-- [[concepts/gitops-principles.md|GitOps Principles]]
-- [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
-- [[concepts/microservice-resilience-patterns.md|Microservice Resilience Patterns]]
-- [[skills/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
-- [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
-- [[skills/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
-- [[skills/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]]
-- [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
+- [[concepts/microservice-resilience-patterns|microservice-resilience-patterns]] — Microservice Resilience Patterns
+- [[concepts/cloud-native-defense-in-depth|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
+- [[concepts/gitops-principles|GitOps Principles]]
+- [[concepts/cloud-native-defense-in-depth|Cloud Native Defense in Depth]]
+- [[concepts/microservice-resilience-patterns|Microservice Resilience Patterns]]
+- [[skills/FTA Methodology and Core Principles|FTA Methodology and Core Principles]]
+- [[skills/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
+- [[skills/Symptom Vector Matching Engine|Symptom Vector Matching Engine]]
+- [[skills/Kubernetes FTA Top Events Index|Kubernetes FTA Top Events Index]]
+- [[skills/FTA-Driven Runbook Automation|FTA-Driven Runbook Automation]]
+- [[skills/Agent Orchestration Patterns|Agent Orchestration Patterns]]
 
 - 17-production-operations-best-practices

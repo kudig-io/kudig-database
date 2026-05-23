@@ -543,7 +543,7 @@ chaos-gate:
 - domain-06-observability/02-metrics
 - domain-06-observability/05-alerting
 - domain-06-observability/06-slo-sli
-- [[synthesis/chaos-drill-integration.md|chaos-drill-integration]]
+- [[synthesis/chaos-drill-integration|chaos-drill-integration]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 ## Related

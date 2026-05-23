@@ -45,7 +45,7 @@ relationships:
 
 ## Symptom-to-Diagnosis Mapping
 
-This playbook synthesizes information from the [[entities/kubernetes|Kubernetes]] Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]], [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]], and Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]] into an actionable troubleshooting flow.
+This playbook synthesizes information from the [[entities/kubernetes|Kubernetes]] Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]], [[skills/Symptom Vector Matching Engine|Symptom Vector Matching Engine]], and Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]] into an actionable troubleshooting flow.
 
 ### Tier 1: Immediate Assessment (First 2 Minutes)
 
@@ -126,21 +126,21 @@ After every P0/P1 incident:
 2. If new: propose a new FTA path in PROPOSED state
 3. If existing but missed: update observability for the bottom event
 4. If existing but slow to fix: improve the remediation runbook
-5. Update probability weights in the [[skills/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]] based on outcome
+5. Update probability weights in the [[skills/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]] based on outcome
 
 ## Related
 
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
 - [[deployment]] — Deployment
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
-- [[concepts/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
-- [[synthesis/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]]
-- [[skills/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[concepts/Symptom-SOP-RootCause Mapping|Symptom-SOP-RootCause Mapping]]
+- [[synthesis/Structural Troubleshooting Framework|Structural Troubleshooting Framework]]
+- [[skills/FTA Methodology and Core Principles|FTA Methodology and Core Principles]]
 - [[skills/Kubernetes Diagnostic Skills Overview|Kubernetes Diagnostic Skills Overview]].md|Kubernetes Diagnostic Skills Overview]]
-- [[references/kubectl Scenario Quick Reference.md|kubectl Scenario Quick Reference]]
-- [[skills/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]]
+- [[references/kubectl Scenario Quick Reference|kubectl Scenario Quick Reference]]
+- [[skills/FTA-Driven Runbook Automation|FTA-Driven Runbook Automation]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 - [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]

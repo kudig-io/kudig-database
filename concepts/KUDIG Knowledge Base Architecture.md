@@ -39,7 +39,7 @@ created: "2026-05-23"
 
 ## Overview
 
-The KUDIG-DB is a 3,532-file Kubernetes operations knowledge base designed for both human operators and AI Agents. It spans 40+ knowledge domains from architecture fundamentals to cutting-edge topics like AI infrastructure, eBPF, and [[synthesis/platform-engineering-sre.md|platform engineering]].
+The KUDIG-DB is a 3,532-file Kubernetes operations knowledge base designed for both human operators and AI Agents. It spans 40+ knowledge domains from architecture fundamentals to cutting-edge topics like AI infrastructure, eBPF, and [[synthesis/platform-engineering-sre|platform engineering]].
 
 ## Knowledge Layers
 
@@ -142,9 +142,9 @@ Learning Feedback Loop
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[supply-chain-security]] — Software Supply Chain Security
-- [[references/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
-- [[references/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
-- [[skills/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
-- [[references/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
+- [[references/KUDIG Tag Dictionary|KUDIG Tag Dictionary]]
+- [[references/KUDIG Scenario Taxonomy|KUDIG Scenario Taxonomy]]
+- [[skills/FTA Methodology and Core Principles|FTA Methodology and Core Principles]]
+- [[references/KUDIG Frontmatter Spec|KUDIG Frontmatter Spec]]
 
 - [[README]]

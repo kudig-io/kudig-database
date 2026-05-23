@@ -1727,7 +1727,7 @@ graph TD
 ## Obsidian 相关文档
 
 - domain-04-storage-data MOC
-- [[domain-04-storage-data/README.md|Storage Domain 存储领域知识库]]
+- [[domain-04-storage-data/README|Storage Domain 存储领域知识库]]
 - Domain-6 存储 — 开源项目索引
 - PV/PVC 核心概念与企业级实践
 - 03 - PVC使用模式与最佳实践
@@ -1742,7 +1742,7 @@ graph TD
 ## Related
 
 - [[MOC]]
-- [[synthesis/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
+- [[synthesis/Pod 生命周期 × 存储模型|Pod 生命周期 × 存储模型]]
 
 - PV/PVC 核心概念
 - StorageClass 动态供给

@@ -82,8 +82,8 @@ Velero 备份策略：
 
 ## Related
 
-- [[references/k8s-control-plane-deep-dive.md|k8s-control-plane-deep-dive]] — 控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI
+- [[references/k8s-control-plane-deep-dive|k8s-control-plane-deep-dive]] — 控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[synthesis/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
+- [[synthesis/Pod 生命周期 × 存储模型|Pod 生命周期 × 存储模型]]

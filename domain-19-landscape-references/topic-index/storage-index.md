@@ -54,7 +54,7 @@ created: "2026-05-23"
 
 ### CSI 深度解析
 
-- [[domain-01-cluster-fundamentals/03-control-plane/22-container-storage-deep-dive.md|CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive)]]]]
+- [[domain-01-cluster-fundamentals/03-control-plane/22-container-storage-deep-dive|CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive)]]]]
 
 ### YAML 配置参考
 

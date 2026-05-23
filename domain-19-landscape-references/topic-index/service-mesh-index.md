@@ -61,14 +61,14 @@ created: "2026-05-23"
 - Linkerd 企业级服务网格深度实践
 - Consul Connect 企业级服务网格管理
 - Envoy Proxy 企业级服务网格数据平面深度实践
-- [[domain-16-database-middleware/01-databases/03-distributed-database-enterprise.md]]
+- [[domain-16-database-middleware/01-databases/03-distributed-database-enterprise]]
 - Traefik Mesh (Maesh) Enterprise Service Mesh 深度实践
 
 ### 入门指南
 
 - Istio 企业级服务网格入门指南
 - Linkerd 轻量级服务网格实践指南
-- [[domain-02-workloads-applications/00-core-workloads/99-spring-boot-kubernetes-guide.md]]
+- [[domain-02-workloads-applications/00-core-workloads/99-spring-boot-kubernetes-guide]]
 
 ### 故障排查
 

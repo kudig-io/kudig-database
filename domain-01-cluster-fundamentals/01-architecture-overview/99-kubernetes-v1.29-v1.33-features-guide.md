@@ -174,7 +174,7 @@ resources:
 | 弃用项 | 替代方案 | 操作 |
 |:---|:---|:---|
 | Node v1beta1 metrics | Node v1 metrics | 更新 [[Prometheus|Prometheus]] 查询 |
-| in-tree [[skills/ts-cloud-provider.md|cloud providers]] | 外部云控制器管理器 (CCM) | 迁移至 CCM |
+| in-tree [[skills/ts-cloud-provider|cloud providers]] | 外部云控制器管理器 (CCM) | 迁移至 CCM |
 | flowcontrol.apiserver.k8s.io/v1beta2 | v1 | 更新 FlowSchema |
 
 ---
@@ -547,7 +547,7 @@ featureGates:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析

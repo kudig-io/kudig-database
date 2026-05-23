@@ -70,8 +70,8 @@ topic-skills 的质量提升和内容扩展。
 
 ## Related
 
-- [[references/k8s-node-create.md|k8s-node-create]] — Kubernetes 节点管理操作指南
-- [[references/k8s-cluster-cert.md|k8s-cluster-cert]] — Kubernetes 集群证书管理操作指南
-- [[references/k8s-cluster-create.md|k8s-cluster-create]] — Kubernetes 集群创建操作指南
-- [[references/k8s-cluster-delete.md|k8s-cluster-delete]] — Kubernetes 集群删除操作指南
-- [[references/k8s-deployment-create.md|k8s-deployment-create]] — Kubernetes Deployment 创建操作指南
+- [[references/k8s-node-create|k8s-node-create]] — Kubernetes 节点管理操作指南
+- [[references/k8s-cluster-cert|k8s-cluster-cert]] — Kubernetes 集群证书管理操作指南
+- [[references/k8s-cluster-create|k8s-cluster-create]] — Kubernetes 集群创建操作指南
+- [[references/k8s-cluster-delete|k8s-cluster-delete]] — Kubernetes 集群删除操作指南
+- [[references/k8s-deployment-create|k8s-deployment-create]] — Kubernetes Deployment 创建操作指南

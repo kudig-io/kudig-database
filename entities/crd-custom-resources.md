@@ -37,7 +37,7 @@ created: "2026-05-23"
 
 ## Role
 
-CRDs allow users to define new resource types that are treated as first-class citizens by [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|the Kubernetes API]]. Once a CRD is created, you can `kubectl create/apply/get` instances of the custom resource.
+CRDs allow users to define new resource types that are treated as first-class citizens by [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|the Kubernetes API]]. Once a CRD is created, you can `kubectl create/apply/get` instances of the custom resource.
 
 ## CRD Specification
 
@@ -62,16 +62,16 @@ CRDs support multiple API versions simultaneously:
 **Not a fit**: Simple configuration (use ConfigMap), or configuration that doesn't need Kubernetes lifecycle management.
 
 ## Related
-- [[synthesis/CRD × 可观测性.md|CRD × 可观测性]] — 综合
+- [[synthesis/CRD × 可观测性|CRD × 可观测性]] — 综合
 
-- [[synthesis/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]] — 控制器模式 × Operator 模式
-- [[references/kubernetes-api-versions-reference.md|kubernetes-api-versions-reference]] — Kubernetes API Versions Reference
+- [[synthesis/控制器模式 × Operator 模式|控制器模式 × Operator 模式]] — 控制器模式 × Operator 模式
+- [[references/kubernetes-api-versions-reference|kubernetes-api-versions-reference]] — Kubernetes API Versions Reference
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[skills/develop-crd-operator.md|develop-crd-operator]] — Develop CRD Operator
+- [[skills/develop-crd-operator|develop-crd-operator]] — Develop CRD Operator
 - [[operator-pattern|Operator Pattern]]
 - Admission Webhooks
-- [[concepts/declarative-api.md|Declarative API]]
-- [[skills/develop-crd-operator.md|Develop CRD Operator]]
+- [[concepts/declarative-api|Declarative API]]
+- [[skills/develop-crd-operator|Develop CRD Operator]]
 - [[entities/metal3-io|Metal3]] — Cross-reference
 - [[entities/clusterpedia|Clusterpedia]] — Cross-reference

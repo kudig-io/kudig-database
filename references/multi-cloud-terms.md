@@ -39,7 +39,7 @@ created: "2026-05-23"
 
 本页汇总了 **多云架构** 领域的 3 个 Kubernetes 术语定义与概念说明。
 
-> **相关领域**: [[references/k8s-cloud-provider-comparison.md|k8s-cloud-provider-comparison]] | [[alicloud-ack-overview]] | [[aws-eks-overview]]
+> **相关领域**: [[references/k8s-cloud-provider-comparison|k8s-cloud-provider-comparison]] | [[alicloud-ack-overview]] | [[aws-eks-overview]]
 
 ---
 
@@ -114,7 +114,7 @@ k8s_versions:
 
 ## 相关页面
 
-- [[references/k8s-cloud-provider-comparison.md|k8s-cloud-provider-comparison]]
+- [[references/k8s-cloud-provider-comparison|k8s-cloud-provider-comparison]]
 - [[alicloud-ack-overview]]
 - [[aws-eks-overview]]
 

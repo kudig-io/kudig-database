@@ -608,10 +608,10 @@ echo "Logs collected to: $LOG_DIR"
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/sql|sql]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git|git]]
 - 06-monitoring-alerting-system
 - [[references/k8s-cloud-provider-comparison|云厂商托管 Kubernetes 服务全景对比（13 家）]] — Cross-reference
 - [[references/multi-cloud-terms|K8s 多云架构术语参考]] — Cross-reference
@@ -620,7 +620,7 @@ echo "Logs collected to: $LOG_DIR"
 
 ## See Also
 
-- [[domain-12-cloud-providers/04-alicloud-ack/244-ack-ros-iac.md|244-ack-ros-iac]]
-- [[domain-12-cloud-providers/04-alicloud-ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
-- [[domain-12-cloud-providers/04-alicloud-ack/service-ack-practical-guide.md|service-ack-practical-guide]]
-- [[domain-12-cloud-providers/04-alicloud-ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
+- [[domain-12-cloud-providers/04-alicloud-ack/244-ack-ros-iac|244-ack-ros-iac]]
+- [[domain-12-cloud-providers/04-alicloud-ack/245-ack-ebs-storage|245-ack-ebs-storage]]
+- [[domain-12-cloud-providers/04-alicloud-ack/service-ack-practical-guide|service-ack-practical-guide]]
+- [[domain-12-cloud-providers/04-alicloud-ack/240-ack-ecs-compute|240-ack-ecs-compute]]

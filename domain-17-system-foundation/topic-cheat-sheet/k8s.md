@@ -74,7 +74,7 @@ created: "2026-05-23"
 - [资源查询与筛选](#资源查询与筛选)
 - [Pod 操作](#pod-操作)
 - Deployment 管理](#deployment-管理)
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]] 与网络](#service-与网络)
+- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]] 与网络](#service-与网络)
 - [ConfigMap & Secret](#configmap--secret)
 - [存储管理](#存储管理)
 - [调度与亲和性](#调度与亲和性)
@@ -82,7 +82,7 @@ created: "2026-05-23"
 - [故障排查](#故障排查)
 - [资源监控](#资源监控)
 - [高级操作](#高级操作)
-- [[entities/etcd.md|etcd]] 操作](#etcd-操作)
+- [[entities/etcd|etcd]] 操作](#etcd-操作)
 - [API Server 管理](#api-server-管理)
 - [集群维护](#集群维护)
 

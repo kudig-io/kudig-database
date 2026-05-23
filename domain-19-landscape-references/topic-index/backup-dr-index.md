@@ -47,7 +47,7 @@ created: "2026-05-23"
 
 ### 灾备方案
 
-- [[domain-01-cluster-fundamentals/03-control-plane/10-plane-backup-disaster-recovery.md|控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)]]佳实践|Disaster Recovery]])]]
+- [[domain-01-cluster-fundamentals/03-control-plane/10-plane-backup-disaster-recovery|控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)]]佳实践|Disaster Recovery]])]]
 - 存储备份与灾难恢复
 - 存储灾备与迁移策略
 
@@ -108,7 +108,7 @@ created: "2026-05-23"
 
 ### 生产运维
 
-- [[concepts/kubernetes-architecture-overview.md]]
+- [[concepts/kubernetes-architecture-overview]]
 - 企业级备份策略
 - 灾难恢复演练
 - 跨区域容灾部署

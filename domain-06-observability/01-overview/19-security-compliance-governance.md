@@ -67,7 +67,7 @@ cross_refs:
 created: "2026-05-23"
 ---
 
-# 23 - 监控安全与合规治理 (Monitoring [[domain-07-platform-engineering/governance/10-security-compliance.md|Security & Compliance]] Governance)
+# 23 - 监控安全与合规治理 (Monitoring [[domain-07-platform-engineering/governance/10-security-compliance|Security & Compliance]] Governance)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [NIST网络安全框架](https://www.nist.gov/cyberframework)
 
@@ -904,8 +904,8 @@ disaster_recovery_planning:
 ## Obsidian 相关文档
 
 - observability/MOC.md|domain-06-observability MOC]]
-- [[domain-06-observability/README.md|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
-- [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
+- [[domain-06-observability/README|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
+- [[domain-06-observability/00-open-source-projects-index|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
 - 03 - 日志收集架构详解 (Logging Architecture)
@@ -923,7 +923,7 @@ disaster_recovery_planning:
 - 20-high-availability-disaster-recovery
 - 21-monitoring-playbooks
 
-- [[domain-06-observability/README.md|返回目录]]
+- [[domain-06-observability/README|返回目录]]
 
 ## Related
 

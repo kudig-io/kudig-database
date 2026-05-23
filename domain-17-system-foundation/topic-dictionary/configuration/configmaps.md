@@ -49,7 +49,7 @@ Pod 中使用 ConfigMap 的四种方式：
 1. **容器命令和参数**：在 `command` 或 `args` 中引用 ConfigMap 的值。
 2. **环境变量**：通过 `env.valueFrom.configMapKeyRef` 或 `envFrom.configMapRef` 将键值注入为环境变量。
 3. **只读卷挂载**：将 ConfigMap 挂载为卷中的文件，供应用读取。
-4. **[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 读取**：在 Pod 内通过代码直接调用 Kubernetes API 读取 ConfigMap，可订阅变更事件，也能访问其他命名空间的 ConfigMap。
+4. **[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 读取**：在 Pod 内通过代码直接调用 Kubernetes API 读取 ConfigMap，可订阅变更事件，也能访问其他命名空间的 ConfigMap。
 
 **自动更新机制**：
 - 通过卷挂载的 ConfigMap 在更新后会自动同步到 Pod（ eventual consistency，延迟取决于 [[kubelet|kubelet]] 同步周期和缓存策略）。

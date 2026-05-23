@@ -50,7 +50,7 @@ containerd 是行业标准容器运行时，K8s 最常用的 CRI 实现。
 - **安全加固**: seccomp、AppArmor、rootless
 - **迁移升级**: 从 dockershim 迁移
 - **多租户**: 资源隔离与配额
-- **可观测性**: [[entities/06-containerd-observability.md|observability]]|指标与日志]]
+- **可观测性**: [[entities/06-containerd-observability|observability]]|指标与日志]]
 - **Windows 支持**: Windows 容器支持
 - **灾备**: [[07-containerd-disaster-recovery|状态备份与恢复]]
 
@@ -193,14 +193,14 @@ VS Code Kubernetes 扩展工具。
 
 ## 相关页面
 
-- [[entities/cncf-networking.md|cncf-networking]] — 网络与服务网格
-- [[entities/cncf-storage.md|cncf-storage]] — 存储与数据库
-- [[entities/cncf-orchestration.md|cncf-orchestration]] — 编排与应用管理
-- [[entities/container-runtime.md|container-runtime]] — 容器运行时概念
+- [[entities/cncf-networking|cncf-networking]] — 网络与服务网格
+- [[entities/cncf-storage|cncf-storage]] — 存储与数据库
+- [[entities/cncf-orchestration|cncf-orchestration]] — 编排与应用管理
+- [[entities/container-runtime|container-runtime]] — 容器运行时概念
 
 ## Related
 
-- [[entities/container-runtime.md|container-runtime]] — Container Runtime
+- [[entities/container-runtime|container-runtime]] — Container Runtime
 - [[lima]] — Lima
 - [[podman-desktop]] — Podman Desktop
 - [[podman-container-tools]] — Podman Desktop

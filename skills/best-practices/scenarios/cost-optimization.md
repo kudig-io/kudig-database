@@ -79,15 +79,15 @@ graph TD
 
 ## 相关文档
 
-- [[domain-11-production-operations/README.md]]
-- [[domain-07-platform-engineering/README.md]]
+- [[domain-11-production-operations/README]]
+- [[domain-07-platform-engineering/README]]
 
 
 ---
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/hpa-fta.md]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/hpa-fta]]
 
 
 ---
@@ -106,5 +106,5 @@ graph TD
 
 ## Related
 
-- [[references/kudig-metadata-index.md|README]].md|README]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/vpa-fta.md|vpa-fta]]
+- [[references/kudig-metadata-index|README]].md|README]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/vpa-fta|vpa-fta]]

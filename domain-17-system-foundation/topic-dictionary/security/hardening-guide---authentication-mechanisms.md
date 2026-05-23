@@ -36,7 +36,7 @@ created: "2026-05-23"
 
 ## 核心概念/原理
 
-对于具有多个用户直接访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 的生产集群，**建议使用外部认证源（如 OIDC）**。内部认证机制（如下文所述的客户端证书和服务账号令牌）不适合人类用户的生产用例。
+对于具有多个用户直接访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 的生产集群，**建议使用外部认证源（如 OIDC）**。内部认证机制（如下文所述的客户端证书和服务账号令牌）不适合人类用户的生产用例。
 
 ## 关键机制或特性
 

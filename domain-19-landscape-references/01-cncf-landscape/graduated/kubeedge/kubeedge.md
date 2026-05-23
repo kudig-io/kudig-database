@@ -45,7 +45,7 @@ description: '## 项目概述'
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -58,10 +58,10 @@ description: '## 项目概述'
 ## 参考链接
 
 - [[deployment]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
 - [[operator-pattern]]
-- [[concepts/controller-pattern.md|controller-pattern]]
-- [[concepts/secrets-management.md|secrets-management]]
+- [[concepts/controller-pattern|controller-pattern]]
+- [[concepts/secrets-management|secrets-management]]
 
 ## Related
 
@@ -76,8 +76,8 @@ description: '## 项目概述'
 - 04-kubeedge-device-edge-apps
 - 09-edge-computing-kubeedge
 - kubeedge
-- [[entities/interlink.md|InterLink]]
-- [[entities/kairos.md|Kairos]]
+- [[entities/interlink|InterLink]]
+- [[entities/kairos|Kairos]]
 - [[references/k8s-cloud-provider-comparison|云厂商托管 Kubernetes 服务全景对比（13 家）]] — Cross-reference
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference

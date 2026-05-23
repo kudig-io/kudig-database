@@ -143,18 +143,18 @@ Step 3: kubectl exec -it <pod> -- curl <service-ip>
 
 ## Related
 
-- [[entities/statefulset.md|statefulset]] — StatefulSet
+- [[entities/statefulset|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[cni]] — CNI (Container Network Interface)
-- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
-- [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
-- [[synthesis/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
-- [[synthesis/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]]
-- [[skills/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
+- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
+- [[skills/Symptom Vector Matching Engine|Symptom Vector Matching Engine]]
+- [[skills/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
+- [[synthesis/Production Troubleshooting Playbook|Production Troubleshooting Playbook]]
+- [[synthesis/Structural Troubleshooting Framework|Structural Troubleshooting Framework]]
+- [[skills/Kubernetes Diagnostic Skills Overview|Kubernetes Diagnostic Skills Overview]]
 
-- [[templates/decision-tree-template.md|decision-tree-template]]
+- [[templates/decision-tree-template|decision-tree-template]]
 - [[docs/ERROR-FTA-MAP|KUDIG 错误码 → FTA 映射]] — Cross-reference
 - [[docs/COMMAND-DOC-MAP|KUDIG 命令 → 文档映射]] — Cross-reference
 - [[docs/API-DOC-MAP|KUDIG API → 文档映射]] — Cross-reference

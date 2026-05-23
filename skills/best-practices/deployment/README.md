@@ -67,7 +67,7 @@ created: "2026-05-23"
 ```
 Q1: 你的目标是什么？
 │
-├── 学习 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]] / 快速体验 → Q2
+├── 学习 [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]] / 快速体验 → Q2
 │   ├── 本机有 Docker？
 │   │   ├── 是 → 01-local-demo (kind/minikube)
 │   │   └── 否 → 先安装 Docker Desktop，再看 01-local-demo
@@ -187,7 +187,7 @@ Q1: 你的目标是什么？
 - 24-production-deployment-best-practices
 - 10-monitoring-metrics-prometheus
 - 99-kubernetes-deployment-patterns-architecture
-- [[entities/kubernetes.md|kubernetes]]
+- [[entities/kubernetes|kubernetes]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference

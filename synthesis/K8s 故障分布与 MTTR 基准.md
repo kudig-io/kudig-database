@@ -65,7 +65,7 @@ relationships:
 
 3. **网络问题最难诊断**：仅占 18% 但 MTTR 达 60 分钟，表明诊断挑战巨大。FTA 需要为 DNS、CNI 和策略相关问题提供广泛的诊断分支。
 
-4. **资源耗尽最适合自动化**：30 分钟 MTTR 且有明确的可观测信号（内存 > 95%、磁盘 > 90%），使其成为 [[skills/FTA-Driven Runbook Automation.md|FTA 驱动的 Runbook 自动化]] 的最佳候选。
+4. **资源耗尽最适合自动化**：30 分钟 MTTR 且有明确的可观测信号（内存 > 95%、磁盘 > 90%），使其成为 [[skills/FTA-Driven Runbook Automation|FTA 驱动的 Runbook 自动化]] 的最佳候选。
 
 ## etcd FMEA 风险优先数
 
@@ -113,13 +113,13 @@ relationships:
 - FTA Methodology and Core Principles.md|FTA 方法论与核心原则]]
 - [[docs/indexes/INDEX|Index]]|Kubernetes FTA Top Events Index]].md|Kubernetes FTA 顶事件索引]]
 - [[concepts/etcd Operational Reference|etcd Operational Reference]].md|etcd 运维参考]]
-- [[synthesis/Production Troubleshooting Playbook.md|生产排障手册]]
+- [[synthesis/Production Troubleshooting Playbook|生产排障手册]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 
 ## Related
 
-- [[entities/kube-scheduler.md|kube-scheduler]] — kube-scheduler
+- [[entities/kube-scheduler|kube-scheduler]] — kube-scheduler
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus

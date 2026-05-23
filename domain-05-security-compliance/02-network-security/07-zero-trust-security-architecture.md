@@ -805,9 +805,9 @@ data:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README.md|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -905,7 +905,7 @@ data:
 - 44-martech-adtech
 - 95-industrial-metaverse
 
-- [[domain-05-security-compliance/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-05-security-compliance/README|返回目录]]- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
 
@@ -918,5 +918,5 @@ data:
 
 ## 相关合成分析
 
-- [[synthesis/service-mesh-zero-trust-security.md|Service Mesh 零信任安全架构]]
+- [[synthesis/service-mesh-zero-trust-security|Service Mesh 零信任安全架构]]
 

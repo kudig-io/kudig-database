@@ -232,13 +232,13 @@ Pod 安全问题
 
 ## 相关链接
 
-- [[skills/audit-rbac-configurations.md|RBAC 审计配置]]
-- [[skills/ts-security-auth.md|安全认证排查]]
+- [[skills/audit-rbac-configurations|RBAC 审计配置]]
+- [[skills/ts-security-auth|安全认证排查]]
 
 ## Related
 
-- [[skills/skill-reference-version-matrix.md|skill-reference-version-matrix]] — Version Matrix
-- [[entities/kube-apiserver.md|kube-apiserver]] — kube-apiserver
+- [[skills/skill-reference-version-matrix|skill-reference-version-matrix]] — Version Matrix
+- [[entities/kube-apiserver|kube-apiserver]] — kube-apiserver
 - [[etcd]] — etcd
 - [[cert-manager]] — cert-manager
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

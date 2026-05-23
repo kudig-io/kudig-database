@@ -129,8 +129,8 @@ Week 9-12: 运维实践 (40h)
 
 **推荐文档**：
 - [Kubernetes](./graduated/kubernetes/kubernetes.md)
-- [[entities/containerd.md|containerd]]|containerd]]](./graduated/containerd/containerd.md)
-- [[entities/helm.md|Helm]]](./graduated/helm/helm.md)
+- [[entities/containerd|containerd]]|containerd]]](./graduated/containerd/containerd.md)
+- [[entities/helm|Helm]]](./graduated/helm/helm.md)
 - [Prometheus](./graduated/prometheus/prometheus.md)
 - [Argo CD](./graduated/argo/argo.md)
 - [Flux](./graduated/flux/flux.md)
@@ -192,7 +192,7 @@ Week 13-16: 生产实践 (40h)
 **推荐文档**：
 - [Prometheus](./graduated/prometheus/prometheus.md)
 - [Istio](./graduated/istio/istio.md)
-- [[entities/linkerd.md|Linkerd]]](./graduated/linkerd/linkerd.md)
+- [[entities/linkerd|Linkerd]]](./graduated/linkerd/linkerd.md)
 - [OpenTelemetry](./incubating/opentelemetry/opentelemetry.md)
 - [Falco](./graduated/falco/falco.md)
 - [Chaos Mesh](./incubating/chaos-mesh/chaos-mesh.md)
@@ -322,10 +322,10 @@ Month 3: 身份与零信任 (40h)
 - [OPA](./graduated/opa/opa.md)
 - [Falco](./graduated/falco/falco.md)
 - [SPIFFE](./graduated/spiffe/spiffe.md)
-- [[entities/spire.md|SPIRE]]](./graduated/spire/spire.md)
+- [[entities/spire|SPIRE]]](./graduated/spire/spire.md)
 - [Kyverno](./incubating/kyverno/kyverno.md)
 - [in-toto](./graduated/in-toto/in-toto.md)
-- [[entities/operator-framework.md|The Update Framework (TUF)]]|TUF]]](./graduated/tuf/tuf.md)
+- [[entities/operator-framework|The Update Framework (TUF)]]|TUF]]](./graduated/tuf/tuf.md)
 
 ---
 
@@ -550,7 +550,7 @@ Month 3: 身份与零信任 (40h)
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-landscape-references MOC
-- [[domain-19-landscape-references/README.md|Domain-34: CNCF Landscape 开源项目]]
+- [[domain-19-landscape-references/README|Domain-34: CNCF Landscape 开源项目]]
 - Domain-34 CNCF Landscape — 开源项目索引
 - CNCF 集成实践指南
 - CNCF 项目选型指南

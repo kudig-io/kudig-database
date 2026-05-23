@@ -40,7 +40,7 @@ description: '## 项目概述'
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -52,14 +52,14 @@ description: '## 项目概述'
 
 ## 参考链接
 
-- [[concepts/controller-pattern.md|controller-pattern]]
-- [[concepts/storage-model.md|storage-model]]
+- [[concepts/controller-pattern|controller-pattern]]
+- [[concepts/storage-model|storage-model]]
 
 ## Related
 
 - [[cozystack]] — Cozystack
 - [[fluid]] — Fluid
-- [[entities/cncf-storage.md|cncf-storage]] — CNCF 存储与数据库项目全景
+- [[entities/cncf-storage|cncf-storage]] — CNCF 存储与数据库项目全景
 - [[kuasar]] — Kuasar
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
@@ -83,11 +83,11 @@ description: '## 项目概述'
 - RELEASE-NOTES-1.4
 - RELEASE-NOTES-1.11
 - RELEASE-NOTES-0.5
-- [[entities/kanister.md|Kanister]]
-- [[entities/k8up.md|K8up]]
-- [[entities/openebs.md|OpenEBS]]
-- [[entities/hwameistor.md|HwameiStor]]
-- [[entities/carina.md|Carina]]
+- [[entities/kanister|Kanister]]
+- [[entities/k8up|K8up]]
+- [[entities/openebs|OpenEBS]]
+- [[entities/hwameistor|HwameiStor]]
+- [[entities/carina|Carina]]
 - [[references/release-notes-storage|发布说明索引 — 存储]] — Cross-reference
 - [[references/release-notes-reading-guide|发布说明阅读指南]] — Cross-reference
 - [[concepts/storage-tool-evolution|存储工具演进]] — Cross-reference

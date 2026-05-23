@@ -43,7 +43,7 @@ Kairos 是一个不可变 Linux 元发行版框架，专注于将任何 Linux �
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -59,7 +59,7 @@ Kairos 是一个不可变 Linux 元发行版框架，专注于将任何 Linux �
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
 
 ## Related
 
@@ -70,7 +70,7 @@ Kairos 是一个不可变 Linux 元发行版框架，专注于将任何 Linux �
 - [[k3s]] — k3s 轻量级 Kubernetes
 
 - kairos
-- [[entities/interlink.md|InterLink]]
-- [[entities/akri.md|Akri]]
-- [[entities/openyurt.md|OpenYurt]]
+- [[entities/interlink|InterLink]]
+- [[entities/akri|Akri]]
+- [[entities/openyurt|OpenYurt]]
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference

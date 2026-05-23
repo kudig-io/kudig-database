@@ -338,8 +338,8 @@ cat /proc/sys/net/netfilter/nf_conntrack_count
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[concepts/service-networking.md|service-networking]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[concepts/service-networking|service-networking]]
+- [[entities/kubernetes|kubernetes]]

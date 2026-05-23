@@ -716,7 +716,7 @@ RAS (Reliability, Availability, Serviceability):
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-31-hardware KUDIG Database — Global MOC
-- [[domain-17-system-foundation/README.md|Domain 31 - 硬件基础设施]]
+- [[domain-17-system-foundation/README|Domain 31 - 硬件基础设施]]
 - index.md|Domain-31 硬件 — 开源项目索引]]
 - 云平台硬件基础架构
 - CPU技术深度解析

@@ -296,7 +296,7 @@ kubectl get pod <ingress-pod> -n kube-system -o wide
 
 ## 相关案例
 
-- [[synthesis/case-studies/2026-04-10-ingress-502-bad-gateway.md|2026-04-10-ingress-502-bad-gateway]]
+- [[synthesis/case-studies/2026-04-10-ingress-502-bad-gateway|2026-04-10-ingress-502-bad-gateway]]
 ## Related
 
 - [[domain-12-cloud-providers/01-alibaba-cloud/05-阿里云SLB与Ingress|阿里云SLB与Ingress]]

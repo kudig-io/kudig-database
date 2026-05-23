@@ -38,7 +38,7 @@ created: "2026-05-23"
 
 ## 概述
 
-kube-rs 是 Rust 语言的 Kubernetes 客户端库，提供类型安全的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 交互能力。它包含低级 API 客户端（kube-client）、运行时抽象（kube-runtime）和 CRD 代码生成（kube-derive），使开发者能用 Rust 构建高性能、内存安全的 Kubernetes Controller 和 Operator。
+kube-rs 是 Rust 语言的 Kubernetes 客户端库，提供类型安全的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 交互能力。它包含低级 API 客户端（kube-client）、运行时抽象（kube-runtime）和 CRD 代码生成（kube-derive），使开发者能用 Rust 构建高性能、内存安全的 Kubernetes Controller 和 Operator。
 
 ## 核心能力
 
@@ -46,7 +46,7 @@ kube-rs 是 Rust 语言的 Kubernetes 客户端库，提供类型安全的 [[dom
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -63,11 +63,11 @@ kube-rs 是 Rust 语言的 Kubernetes 客户端库，提供类型安全的 [[dom
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
-- [[entities/argocd.md|[[ArgoCD|argocd]]]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/argocd|[[ArgoCD|argocd]]]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
 - [[operator-pattern]]
-- [[concepts/controller-pattern.md|controller-pattern]]
+- [[concepts/controller-pattern|controller-pattern]]
 
 ## Related
 

@@ -475,9 +475,9 @@ echo "Inventory saved to $OUTPUT"
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
-- [[entities/sops.md|sops]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git|git]]
+- [[entities/sops|sops]]
+- [[entities/kubernetes|kubernetes]]
 - [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]

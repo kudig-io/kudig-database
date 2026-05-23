@@ -51,8 +51,8 @@ created: "2026-05-23"
 
 ## 与其他 Domain 的关系
 
-- [[domain-04-storage-data/README.md|domain-04-storage-data]] — 存储基础
-- [[domain-14-ai-ml-infra/README.md|domain-14-ai-ml-infra]] — AI 数据管道
+- [[domain-04-storage-data/README|domain-04-storage-data]] — 存储基础
+- [[domain-14-ai-ml-infra/README|domain-14-ai-ml-infra]] — AI 数据管道
 
 ## Related
 

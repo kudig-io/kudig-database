@@ -54,8 +54,8 @@ created: "2026-05-23"
 ## 与其他 Domain 的关系
 
 - observability/README.md|domain-06-observability]] — SLO/SLI 监控
-- [[domain-11-production-operations/README.md|domain-11-production-operations]] — 生产运维
-- [[domain-08-release-change-management/README.md|domain-08-release-change-management]] — 发布管理
+- [[domain-11-production-operations/README|domain-11-production-operations]] — 生产运维
+- [[domain-08-release-change-management/README|domain-08-release-change-management]] — 发布管理
 
 ## Related
 

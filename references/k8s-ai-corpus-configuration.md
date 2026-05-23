@@ -68,5 +68,5 @@ created: "2026-05-23"
 
 ## Related
 
-- [[references/kudig-rag-chunking-strategy.md|kudig-rag-chunking-strategy]] — RAG 分块策略指南与 Manpage 安装指南
-- [[references/k8s-ai-agent-engineering.md|k8s-ai-agent-engineering]] — AI Agent 工程：RAG、多 Agent 编排、安全护栏与生产部署
+- [[references/kudig-rag-chunking-strategy|kudig-rag-chunking-strategy]] — RAG 分块策略指南与 Manpage 安装指南
+- [[references/k8s-ai-agent-engineering|k8s-ai-agent-engineering]] — AI Agent 工程：RAG、多 Agent 编排、安全护栏与生产部署

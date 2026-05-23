@@ -528,8 +528,8 @@ cat /run/flannel/subnet.env
 
 ## 相关链接
 
-- [[skills/ts-networking.md|网络故障排查总览]]
-- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[skills/ts-networking|网络故障排查总览]]
+- [[skills/troubleshoot-pod-issues|Pod 故障排查]]
 
 ## Related
 

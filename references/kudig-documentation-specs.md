@@ -74,8 +74,8 @@ created: "2026-05-23"
 
 ## Related
 
-- [[references/kudig-gitbook-system.md|kudig-gitbook-system]] — Gitbook 本地文档浏览系统与构建指南
+- [[references/kudig-gitbook-system|kudig-gitbook-system]] — Gitbook 本地文档浏览系统与构建指南
 - [[kudig-templates-catalog]] — KUDIG 文档模板目录
-- [[references/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]] — KUDIG Frontmatter Specification
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod-fta]] — pod-fta
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node-fta]] — node-fta
+- [[references/KUDIG Frontmatter Spec|KUDIG Frontmatter Spec]] — KUDIG Frontmatter Specification
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta|pod-fta]] — pod-fta
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta|node-fta]] — node-fta

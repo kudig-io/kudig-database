@@ -71,13 +71,13 @@ APF prevents API Server overload by classifying requests into priority levels an
 
 ## Related
 
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
-- [[concepts/security-defense-depth.md|security-defense-depth]] — Defense-in-Depth Security
-- [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
+- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/security-defense-depth|security-defense-depth]] — Defense-in-Depth Security
+- [[concepts/kubernetes-architecture-overview|Kubernetes Architecture Overview]]
 - [[etcd|etcd]]
-- [[concepts/security-defense-depth.md|Defense-in-Depth Security]]
+- [[concepts/security-defense-depth|Defense-in-Depth Security]]
 - [[operator-pattern|Operator Pattern]]
-- [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
+- [[concepts/Kubernetes Core Concepts|Kubernetes Core Concepts]]

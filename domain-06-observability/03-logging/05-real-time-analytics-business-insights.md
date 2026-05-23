@@ -1301,7 +1301,7 @@ monitoring_and_alerting:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - observability/MOC.md|domain-21-logging-management-analytics MOC]]
-- [[domain-06-observability/README.md|[[Domain 21: 日志管理与分析 (Logging Management & Analytics)|Domain 21: 日志管理与分析 (Logging Management & Analytics)]] Management & Analytics)]]
+- [[domain-06-observability/README|[[Domain 21: 日志管理与分析 (Logging Management & Analytics)|Domain 21: 日志管理与分析 (Logging Management & Analytics)]] Management & Analytics)]]
 - index.md|Domain-21 日志管理与分析 — 开源项目索引]]
 - ELK Stack企业级日志管理系统深度实践
 - Fluentd企业级日志收集与处理深度实践
@@ -1319,4 +1319,4 @@ monitoring_and_alerting:
 - 05-splunk-enterprise-log-analytics
 - 06-loggly-cloud-log-management
 
-- [[domain-06-observability/README.md|返回目录]]
+- [[domain-06-observability/README|返回目录]]

@@ -53,9 +53,9 @@ created: "2026-05-23"
 
 ## 与其他 Domain 的关系
 
-- [[domain-02-workloads-applications/README.md|domain-02-workloads-applications]] — 工作负载部署
-- [[domain-03-networking-traffic/README.md|domain-03-networking-traffic]] — 网络流量管理
-- [[domain-07-platform-engineering/README.md|domain-07-platform-engineering]] — 平台运维
+- [[domain-02-workloads-applications/README|domain-02-workloads-applications]] — 工作负载部署
+- [[domain-03-networking-traffic/README|domain-03-networking-traffic]] — 网络流量管理
+- [[domain-07-platform-engineering/README|domain-07-platform-engineering]] — 平台运维
 
 ## Related
 

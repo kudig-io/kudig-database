@@ -327,8 +327,8 @@ GPU/设备 Pod 问题
 
 ## 相关链接
 
-- [[skills/troubleshoot-node-issues.md|节点故障排查]]
-- [[skills/monitor-kubernetes-metrics.md|K8s 监控指标]]
+- [[skills/troubleshoot-node-issues|节点故障排查]]
+- [[skills/monitor-kubernetes-metrics|K8s 监控指标]]
 
 ## Related
 

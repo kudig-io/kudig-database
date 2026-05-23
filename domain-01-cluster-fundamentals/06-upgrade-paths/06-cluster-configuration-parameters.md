@@ -72,10 +72,10 @@ created: "2026-05-23"
 ## 目录
 
 - [kube-apiserver 参数](#kube-apiserver-参数)
-- [[entities/etcd.md|etcd]] 参数](#etcd-参数)
+- [[entities/etcd|etcd]] 参数](#etcd-参数)
 - [kube-scheduler 参数](#kube-scheduler-参数)
 - [kube-controller-manager 参数](#kube-controller-manager-参数)
-- [[entities/kubelet.md|kubelet]] 参数](#kubelet-参数)
+- [[entities/kubelet|kubelet]] 参数](#kubelet-参数)
 - [kube-proxy 参数](#kube-proxy-参数)
 - [Feature Gates 完整参考](#feature-gates-完整参考)
 - [生产配置示例](#生产配置示例)
@@ -1781,7 +1781,7 @@ kubectl get componentstatuses  # 已弃用但仍可用
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析

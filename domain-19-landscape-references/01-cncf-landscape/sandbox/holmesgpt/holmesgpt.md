@@ -46,7 +46,7 @@ HolmesGPT 是一个基于大语言模型（LLM）的 Kubernetes 故障排查助�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -62,14 +62,14 @@ HolmesGPT 是一个基于大语言模型（LLM）的 Kubernetes 故障排查助�
 
 ## 参考链接
 
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
 - [[deployment]]
-- [[concepts/secrets-management.md|secrets-management]]
+- [[concepts/secrets-management|secrets-management]]
 - [[pod-lifecycle]]
 
 ## Related
 
-- [[kubeelasti]] — [[entities/kubeelasti.md|KubeElastic]]
+- [[kubeelasti]] — [[entities/kubeelasti|KubeElastic]]
 - [[xregistry]] — xRegistry
 - [[carvel]] — Carvel
 - [[helm]] — Helm

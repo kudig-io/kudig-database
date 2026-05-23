@@ -139,7 +139,7 @@ k8s_versions:
 | **Kuma** | Envoy 服务网格 | Sandbox | v2.10.0 | 3k+ | Apache-2.0 | C++ (Envoy) |
 | **Consul Connect** | HashiCorp 服务网格 | - | v1.20.0 | 28k+ | BSL-1.1 | C++ (Envoy) |
 | **Gateway API** | K8s 流量管理标准 | K8s SIG | v1.2.0 | - | Apache-2.0 | - |
-| **[[entities/emissary-ingress.md|emissary-ingress]]** | API 网关 | Incubating | v3.10.0 | 4.5k+ | Apache-2.0 | C++ (Envoy) |
+| **[[entities/emissary-ingress|emissary-ingress]]** | API 网关 | Incubating | v3.10.0 | 4.5k+ | Apache-2.0 | C++ (Envoy) |
 | **Contour** | Envoy Ingress | Incubating | v1.30.0 | 3.5k+ | Apache-2.0 | C++ (Envoy) |
 | **Traefik** | 云原生代理/网关 | - | v3.3 | 54k+ | MIT | Go |
 
@@ -659,7 +659,7 @@ graph TD
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README.md|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
+- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
 - Istio 企业级服务网格架构与实践
 - Linkerd 企业级服务网格深度实践
 - Consul Connect 企业级服务网格管理

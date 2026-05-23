@@ -47,7 +47,7 @@ created: "2026-05-23"
 
 ## 与其他 Domain 的关系
 
-- [[domain-08-release-change-management/README.md|domain-08-release-change-management]] — 发布管理
+- [[domain-08-release-change-management/README|domain-08-release-change-management]] — 发布管理
 - observability/README.md|domain-06-observability]] — 可观测性建设
 
 ## Related

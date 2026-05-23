@@ -45,7 +45,7 @@ relationships:
 
 ## 连接点
 
-在 wiki 中，纵深防御和供应链安全被当作两个独立的安全域——[[concepts/security-defense-depth.md|security-defense-depth]] 覆盖运行时分层模型（认证、RBAC、[[entities/networkpolicy|NetworkPolicy]]、[[domain-17-system-foundation/topic-dictionary/security/pod-security-standards|Pod 安全标准]]），[[supply-chain-security]] 覆盖构建和分发管道（SBOM、镜像签名、SLSA、准入验证）。但它们是**同一安全模型的两半**：供应链安全是代码到达集群**之前**发生的事情，纵深防御是代码到达集群**之后**发生的事情。两者单独都不够——供应链控制假设构建管道是最弱环节，而纵深防御假设最终会有什么东西突破防线。
+在 wiki 中，纵深防御和供应链安全被当作两个独立的安全域——[[concepts/security-defense-depth|security-defense-depth]] 覆盖运行时分层模型（认证、RBAC、[[entities/networkpolicy|NetworkPolicy]]、[[domain-17-system-foundation/topic-dictionary/security/pod-security-standards|Pod 安全标准]]），[[supply-chain-security]] 覆盖构建和分发管道（SBOM、镜像签名、SLSA、准入验证）。但它们是**同一安全模型的两半**：供应链安全是代码到达集群**之前**发生的事情，纵深防御是代码到达集群**之后**发生的事情。两者单独都不够——供应链控制假设构建管道是最弱环节，而纵深防御假设最终会有什么东西突破防线。
 
 两者在以下场景中交叉共现：
 
@@ -101,12 +101,12 @@ relationships:
 
 ## 相关
 
-- [[concepts/security-defense-depth.md|security-defense-depth]]
+- [[concepts/security-defense-depth|security-defense-depth]]
 - [[supply-chain-security]]
-- [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]]
-- [[entities/trivy.md|trivy]]
+- [[concepts/cloud-native-defense-in-depth|cloud-native-defense-in-depth]]
+- [[entities/trivy|trivy]]
 - [[kyverno]]
-- [[entities/vault.md|vault]]
+- [[entities/vault|vault]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 
@@ -115,7 +115,7 @@ relationships:
 - [[opa]] — OPA (Open Policy Agent)
 - [[falco]] — Falco
 - [[kyverno]] — Kyverno
-- [[entities/trivy.md|trivy]] — Trivy
-- [[entities/vault.md|vault]] — HashiCorp Vault
+- [[entities/trivy|trivy]] — Trivy
+- [[entities/vault|vault]] — HashiCorp Vault
 
 - [[Deployment × Secret 管理]]- [[domain-17-system-foundation/topic-dictionary/security/runtime-security|运行时安全]]

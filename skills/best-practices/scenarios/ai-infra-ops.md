@@ -79,8 +79,8 @@ graph TD
 
 ## 相关文档
 
-- [[domain-14-ai-ml-infra/README.md]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/README.md]]
+- [[domain-14-ai-ml-infra/README]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README]]
 
 
 ---
@@ -106,5 +106,5 @@ graph TD
 
 ## Related
 
-- [[references/kudig-metadata-index.md|README]].md|README]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[references/kudig-metadata-index|README]].md|README]]
+- [[entities/kubernetes|kubernetes]]

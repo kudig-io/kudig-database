@@ -904,6 +904,6 @@ spec:
 
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[entities/argocd.md|argocd]] — ArgoCD
-- [[concepts/secrets-management.md|secrets-management]] — Secrets Management
-- [[concepts/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[entities/argocd|argocd]] — ArgoCD
+- [[concepts/secrets-management|secrets-management]] — Secrets Management
+- [[concepts/k8s-production-best-practices|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践

@@ -873,13 +873,13 @@ sla_reporting:
 ## Related
 
 - 08-docker-troubleshooting-guide
-- [[entities/kubernetes.md|kubernetes]]
-- [[hot.md|hot]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/cronjob.md|cronjob]]
+- [[entities/kubernetes|kubernetes]]
+- [[hot|hot]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/cronjob|cronjob]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting.md|02-tekton-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting.md|01-gitops-devops-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting.md|02-tekton-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting|02-tekton-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/03-flux-image-automation-troubleshooting|03-flux-image-automation-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting|01-gitops-devops-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting|02-tekton-troubleshooting]]

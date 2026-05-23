@@ -1401,7 +1401,7 @@ export default defineConfig({
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-29-automated-testing-quality KUDIG Database — Global MOC
-- [[domain-08-release-change-management/README.md|Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
+- [[domain-08-release-change-management/README|Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
 - index.md|Domain-29 自动化测试与质量 — 开源项目索引]]
 - Selenium 企业级自动化测试平台
 - JUnit 5 企业级单元测试框架深度实践

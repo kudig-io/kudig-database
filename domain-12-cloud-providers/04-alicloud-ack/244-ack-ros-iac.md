@@ -193,16 +193,16 @@ graph LR
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|gitops]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|[[Go 生产环境速查卡|go]]]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/gitops|gitops]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git|git]]
 - 06-cluster-configuration-parameters
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-12-cloud-providers/04-alicloud-ack/242-ack-vpc-network.md|242-ack-vpc-network]]
-- [[domain-12-cloud-providers/04-alicloud-ack/243-ack-ram-authorization.md|243-ack-ram-authorization]]
-- [[domain-12-cloud-providers/04-alicloud-ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
-- [[domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md|alicloud-ack-overview]]
+- [[domain-12-cloud-providers/04-alicloud-ack/242-ack-vpc-network|242-ack-vpc-network]]
+- [[domain-12-cloud-providers/04-alicloud-ack/243-ack-ram-authorization|243-ack-ram-authorization]]
+- [[domain-12-cloud-providers/04-alicloud-ack/245-ack-ebs-storage|245-ack-ebs-storage]]
+- [[domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview|alicloud-ack-overview]]

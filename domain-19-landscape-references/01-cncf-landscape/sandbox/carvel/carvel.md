@@ -40,7 +40,7 @@ Carvel 是一组专注于 Kubernetes 应用构建、配置和部署的工具集�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -58,16 +58,16 @@ Carvel 是一组专注于 Kubernetes 应用构建、配置和部署的工具集�
 ## 参考链接
 
 - [[deployment]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
-- [[concepts/controller-pattern.md|controller-pattern]]
-- [[concepts/gitops-principles.md|gitops-principles]]
-- [[concepts/secrets-management.md|secrets-management]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[concepts/controller-pattern|controller-pattern]]
+- [[concepts/gitops-principles|gitops-principles]]
+- [[concepts/secrets-management|secrets-management]]
 
 ## Related
 
 - [[kubeflow]] — Kubeflow
 - [[spiffe]] — SPIFFE
-- [[kubeelasti]] — [[entities/kubeelasti.md|KubeElastic]]
+- [[kubeelasti]] — [[entities/kubeelasti|KubeElastic]]
 - [[xregistry]] — xRegistry
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

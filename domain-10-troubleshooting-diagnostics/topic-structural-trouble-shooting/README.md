@@ -114,13 +114,13 @@ created: "2026-05-23"
 | [05-service-mesh-istio-troubleshooting.md](03-networking/05-service-mesh-istio-troubleshooting.md) | Service Mesh (Istio) 故障排查 | Sidecar 注入失败、mTLS 问题、流量路由异常、Gateway 不可用 |
 | [06-gateway-api-troubleshooting.md](03-networking/06-gateway-api-troubleshooting.md) | Gateway API 故障排查 | GatewayClass/Gateway/HTTPRoute 配置、跨 namespace 路由、TLS 配置 |
 | [07-terway-troubleshooting.md](03-networking/07-terway-troubleshooting.md) | Terway（阿里云 CNI）故障排查 | ENI/IPVlan 模式、IPAM、安全组、跨节点通信、网络策略 |
-| [08-flannel-troubleshooting.md](03-networking/08-flannel-troubleshooting.md) | Flannel [[skills/ts-networking.md|ts-networking]] | VXLAN/host-gw 模式、子网分配、跨节点通信、MTU、后端切换 |
+| [08-flannel-troubleshooting.md](03-networking/08-flannel-troubleshooting.md) | Flannel [[skills/ts-networking|ts-networking]] | VXLAN/host-gw 模式、子网分配、跨节点通信、MTU、后端切换 |
 
 ### 04-storage（存储）
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-pv-pvc-troubleshooting.md](04-storage/01-pv-pvc-troubleshooting.md) | PV/PVC [[skills/ts-storage.md|ts-storage]] | PVC Pending、卷挂载失败、存储类问题 |
+| [01-pv-pvc-troubleshooting.md](04-storage/01-pv-pvc-troubleshooting.md) | PV/PVC [[skills/ts-storage|ts-storage]] | PVC Pending、卷挂载失败、存储类问题 |
 | [02-csi-troubleshooting.md](04-storage/02-csi-troubleshooting.md) | CSI 存储驱动故障排查 | CSI 驱动问题、卷创建/挂载/扩容问题 |
 | [03-snapshot-backup-troubleshooting.md](04-storage/03-snapshot-backup-troubleshooting.md) | CSI 快照与卷备份故障排查 | VolumeSnapshot、快照恢复、数据一致性 |
 | [04-storage-performance-troubleshooting.md](04-storage/04-storage-performance-troubleshooting.md) | 存储 I/O 性能故障排查 | 高延迟 I/O、吞吐瓶颈、fio 基准测试 |
@@ -159,7 +159,7 @@ created: "2026-05-23"
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-cluster-maintenance-troubleshooting.md](08-cluster-operations/01-cluster-maintenance-troubleshooting.md) | [[skills/ts-cluster-operations.md|ts-cluster-operations]] | 集群升级、节点维护、版本兼容 |
+| [01-cluster-maintenance-troubleshooting.md](08-cluster-operations/01-cluster-maintenance-troubleshooting.md) | [[skills/ts-cluster-operations|ts-cluster-operations]] | 集群升级、节点维护、版本兼容 |
 | [02-logging-monitoring-troubleshooting.md](08-cluster-operations/02-logging-monitoring-troubleshooting.md) | 日志与监控故障排查 | 日志丢失、Prometheus 问题、告警问题、Grafana 异常 |
 | [03-helm-troubleshooting.md](08-cluster-operations/03-helm-troubleshooting.md) | Helm 部署故障排查 | Release 失败、模板错误、升级回滚问题 |
 | [04-ha-disaster-recovery-troubleshooting.md](08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md) | 高可用与灾备故障排查 | 控制平面问题、etcd 恢复、备份还原、灾难恢复 |
@@ -447,9 +447,9 @@ created: "2026-05-23"
 
 ## Related
 
-- [[README.md|README]]
+- [[README|README]]
 
-- [[templates/decision-tree-template.md|decision-tree-template]]
+- [[templates/decision-tree-template|decision-tree-template]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference

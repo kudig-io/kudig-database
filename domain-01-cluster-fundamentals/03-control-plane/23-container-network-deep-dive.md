@@ -87,7 +87,7 @@ created: "2026-05-23"
 2. [CNI 规范详解](#2-cni-规范详解)
 3. [CNI 插件类型](#3-cni-插件类型)
 4. [Calico 深度解析](#4-calico-深度解析)
-5. [[entities/cilium.md|Cilium]] 深度解析](#5-cilium-深度解析)
+5. [[entities/cilium|Cilium]] 深度解析](#5-cilium-深度解析)
 6. [其他主流 CNI](#6-其他主流-cni)
 7. [网络策略实现](#7-网络策略实现)
 8. [CNI 配置与调优](#8-cni-配置与调优)
@@ -1921,7 +1921,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)

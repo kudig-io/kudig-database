@@ -72,11 +72,11 @@ created: "2026-05-23"
 
 ## Related
 
-- [[entities/tetragon.md|tetragon]] — Tetragon
+- [[entities/tetragon|tetragon]] — Tetragon
 - [[istio]] — Istio
 - [[falco]] — Falco
 - [[linkerd]] — Linkerd
 - [[kubearmor]] — KubeArmor
 
 - [[Deployment × Secret 管理]]
-- [[synthesis/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
+- [[synthesis/CNI 插件 × NetworkPolicy|CNI 插件 × NetworkPolicy]]

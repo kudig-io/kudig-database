@@ -93,10 +93,10 @@ Istio circuit breaker (OutlierDetection):
 
 - [[istio]] — Istio
 - [[envoy]] — Envoy
-- [[concepts/production-operations-best-practices.md|production-operations-best-practices]] — [[references/k8s-production-operations.md|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]]
-- [[concepts/service-mesh-architecture.md|service-mesh-architecture]] — [[Service Mesh Architecture|Service Mesh Architecture]]
-- [[concepts/service-mesh-architecture.md|Service Mesh Architecture]]
-- [[concepts/production-operations-best-practices.md|Production Operations Best Practices]]
+- [[concepts/production-operations-best-practices|production-operations-best-practices]] — [[references/k8s-production-operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]]
+- [[concepts/service-mesh-architecture|service-mesh-architecture]] — [[Service Mesh Architecture|Service Mesh Architecture]]
+- [[concepts/service-mesh-architecture|Service Mesh Architecture]]
+- [[concepts/production-operations-best-practices|Production Operations Best Practices]]
 - [[istio|Istio]]
 
 - 09-microservice-resilience-patterns

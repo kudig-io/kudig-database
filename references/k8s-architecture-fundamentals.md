@@ -103,8 +103,8 @@ Kubernetes 的核心设计模式是**声明式 API + 控制器调谐**：
 
 ## Related
 
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/controller-pattern.md|controller-pattern]] — Controller Pattern (Reconciliation Loop)
+- [[concepts/controller-pattern|controller-pattern]] — Controller Pattern (Reconciliation Loop)

@@ -87,4 +87,4 @@ eBPF 在 K8s 生态中的应用：
 - [[argo]] — Argo Workflows
 
 - [[helm]]
-- [[journal/digest-2026-05-21-full.md|digest-2026-05-21-full]]
+- [[journal/digest-2026-05-21-full|digest-2026-05-21-full]]

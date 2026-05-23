@@ -131,7 +131,7 @@ etcd 的写入负载与 K8s 集群规模呈非线性关系：
 
 ## See Also
 
-- [[synthesis/etcd x 高可用模式.md|etcd x 高可用模式]]
-- [[synthesis/etcd × Operator 模式.md|etcd × Operator 模式]]
-- [[synthesis/kubeadm-cluster-operations.md|kubeadm-cluster-operations]]
-- [[synthesis/可观测性支柱 × Prometheus-Grafana.md|可观测性支柱 × Prometheus-Grafana]]
+- [[synthesis/etcd x 高可用模式|etcd x 高可用模式]]
+- [[synthesis/etcd × Operator 模式|etcd × Operator 模式]]
+- [[synthesis/kubeadm-cluster-operations|kubeadm-cluster-operations]]
+- [[synthesis/可观测性支柱 × Prometheus-Grafana|可观测性支柱 × Prometheus-Grafana]]

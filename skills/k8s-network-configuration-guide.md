@@ -108,16 +108,16 @@ CoreDNS 配置不当会导致 Service 发现失败。应检查 CoreDNS Pod 状�
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
-- [[concepts/service-networking.md|Service Networking]]
-- [[entities/cni-plugins.md|CNI Plugins]]
-- [[entities/networkpolicy.md|NetworkPolicy]]
-- [[skills/k8s-network-security-guide.md|Kubernetes 网络安全最佳实践]]
+- [[concepts/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]
+- [[concepts/service-networking|Service Networking]]
+- [[entities/cni-plugins|CNI Plugins]]
+- [[entities/networkpolicy|NetworkPolicy]]
+- [[skills/k8s-network-security-guide|Kubernetes 网络安全最佳实践]]
 
 ## Related
 
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
-- [[concepts/service-networking.md|service-networking]] — Service Networking
+- [[concepts/k8s-production-best-practices|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[concepts/service-networking|service-networking]] — Service Networking

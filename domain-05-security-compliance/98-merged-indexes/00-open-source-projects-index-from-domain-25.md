@@ -1024,7 +1024,7 @@ sequenceDiagram
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README.md|Domain 25: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
@@ -1038,9 +1038,9 @@ sequenceDiagram
 
 ## See Also
 
-- [[domain-05-security-compliance/06-compliance/99-java-security-kubernetes-guide.md|99-java-security-kubernetes-guide]]
-- [[domain-05-security-compliance/07-incident-response/20-incident-response-process.md|20-incident-response-process]]
-- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-39.md|00-open-source-projects-index-from-domain-05-security-compliance]]
-- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/06-compliance/99-java-security-kubernetes-guide|99-java-security-kubernetes-guide]]
+- [[domain-05-security-compliance/07-incident-response/20-incident-response-process|20-incident-response-process]]
+- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-39|00-open-source-projects-index-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-7|00-open-source-projects-index-from-domain-05-security-compliance]]
 
-- [[domain-05-security-compliance/README.md|返回目录]]
+- [[domain-05-security-compliance/README|返回目录]]

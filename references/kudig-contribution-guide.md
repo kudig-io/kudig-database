@@ -63,8 +63,8 @@ created: "2026-05-23"
 
 ## Related
 
-- [[references/release-notes-cli-tools.md|release-notes-cli-tools]] — 发布说明索引 — CLI 工具
-- [[references/release-notes-cicd-gitops.md|release-notes-cicd-gitops]] — 发布说明索引 — CI/CD 与 GitOps
-- [[references/release-notes-reading-guide.md|release-notes-reading-guide]] — 发布说明阅读指南
+- [[references/release-notes-cli-tools|release-notes-cli-tools]] — 发布说明索引 — CLI 工具
+- [[references/release-notes-cicd-gitops|release-notes-cicd-gitops]] — 发布说明索引 — CI/CD 与 GitOps
+- [[references/release-notes-reading-guide|release-notes-reading-guide]] — 发布说明阅读指南
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

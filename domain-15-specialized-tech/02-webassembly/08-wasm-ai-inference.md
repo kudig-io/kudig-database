@@ -60,7 +60,7 @@ created: "2026-05-23"
 
 1. [Wasm AI 推理架构概述](#1-wasm-ai-推理架构概述)
 2. [WASI-NN 标准接口](#2-wasi-nn-标准接口)
-3. [[entities/wasmedge.md|WasmEdge]] WASI-NN 实践](#3-wasmedge-wasi-nn-实践)
+3. [[entities/wasmedge|WasmEdge]] WASI-NN 实践](#3-wasmedge-wasi-nn-实践)
 4. [ONNX Runtime Wasm](#4-onnx-runtime-wasm)
 5. [llama.cpp Wasm 移植](#5-llamacpp-wasm-移植)
 6. [模型优化与量化](#6-模型优化与量化)
@@ -69,7 +69,7 @@ created: "2026-05-23"
 9. [Python/JS AI 推理集成](#9-pythonjs-ai-推理集成)
 10. [多模型服务架构](#10-多模型服务架构)
 11. [性能基准与对比](#11-性能基准与对比)
-12. [[entities/kubernetes.md|Kubernetes]] AI 推理集成](#12-kubernetes-ai-推理集成)
+12. [[entities/kubernetes|Kubernetes]] AI 推理集成](#12-kubernetes-ai-推理集成)
 13. [实战案例：图像分类服务](#13-实战案例图像分类服务)
 14. [实战案例：LLM 推理服务](#14-实战案例llm-推理服务)
 
@@ -2851,7 +2851,7 @@ Wasm AI 推理通过 **WASI-NN** 标准接口实现了跨平台、安全的 AI �
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README.md|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
+- [[domain-15-specialized-tech/README|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
 - Domain-38 WebAssembly 云原生 — 开源项目索引
 - WebAssembly 云原生基础
 - containerd Wasm 运行时

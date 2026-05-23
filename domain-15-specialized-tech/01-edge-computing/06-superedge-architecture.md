@@ -1831,7 +1831,7 @@ SuperEdge 已在腾讯内部数万台边缘节点的生产环境中验证，是�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-37-edge-computing KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README.md|[[Domain 37: 边缘计算 (Edge Computing)|Domain 37: 边缘计算 (Edge Computing)]]]]
+- [[domain-15-specialized-tech/README|[[Domain 37: 边缘计算 (Edge Computing)|Domain 37: 边缘计算 (Edge Computing)]]]]
 - Domain-37 边缘计算 — 开源项目索引
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)

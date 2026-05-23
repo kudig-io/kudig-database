@@ -64,22 +64,22 @@ Each Pod gets a dedicated PVC. Unlike Deployment where Pods share a volume templ
 Databases (MySQL, PostgreSQL, MongoDB), message brokers (Kafka, RabbitMQ), search engines (Elasticsearch), and any application requiring persistent identity and storage.
 
 ## Related
-- [[synthesis/Operator 模式 × Pod 生命周期.md|Operator 模式 × Pod 生命周期]] — 综合
+- [[synthesis/Operator 模式 × Pod 生命周期|Operator 模式 × Pod 生命周期]] — 综合
 
-- [[skills/deployment-workload-selection.md|deployment-workload-selection]] — 工作负载控制器选型
-- [[skills/skill-21-statefulset-failure.md|skill-21-statefulset-failure]] — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+- [[skills/deployment-workload-selection|deployment-workload-selection]] — 工作负载控制器选型
+- [[skills/skill-21-statefulset-failure|skill-21-statefulset-failure]] — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 - [[INDEX]] — Wiki Index
 - [[deployment]] — Deployment
-- [[concepts/storage-model.md|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
+- [[concepts/storage-model|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
 - [[deployment|Deployment]]
-- [[concepts/storage-model.md|Persistent Storage Model]]
+- [[concepts/storage-model|Persistent Storage Model]]
 - [[pod-lifecycle|Pod Lifecycle]]
 - Headless Service
 
 - 08-statefulset-daemonset-events
 - 05-statefulset-reference
 - 03-statefulset-advanced-operations
-- [[domain-10-troubleshooting-diagnostics/21-statefulset-troubleshooting.md|21-statefulset-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta.md|StatefulSet 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/21-statefulset-troubleshooting|21-statefulset-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta|StatefulSet 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting|03-statefulset-troubleshooting]]
 - [[skills/statefulset-fta|StatefulSet 异常故障树分析]] — Cross-reference

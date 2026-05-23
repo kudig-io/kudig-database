@@ -170,7 +170,7 @@ Calico 提供网络策略和 CNI 实现。
 
 ## Related
 
-- [[entities/cni-plugins.md|cni-plugins]] — [[entities/cni-plugins.md|cni-plugins]]
+- [[entities/cni-plugins|cni-plugins]] — [[entities/cni-plugins|cni-plugins]]
 - [[cilium]] — Cilium
 - [[istio]] — Istio
 - [[linkerd]] — Linkerd

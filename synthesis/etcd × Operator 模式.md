@@ -106,7 +106,7 @@ etcd 高负载 → Watch 延迟 → Operator 误判节点健康 → 触发节点
 
 - [[etcd]]
 - [[operator-pattern]]
-- [[concepts/high-availability-patterns.md|high-availability-patterns]]
+- [[concepts/high-availability-patterns|high-availability-patterns]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 
@@ -115,4 +115,4 @@ etcd 高负载 → Watch 延迟 → Operator 误判节点健康 → 触发节点
 - eBPF x 运行时安全.md|eBPF x 运行时安全]]
 - etcd x 高可用模式.md|etcd x 高可用模式]]
 - etcd × 可观测性.md|etcd × 可观测性]]
-- [[synthesis/kubeadm-cluster-operations.md|kubeadm-cluster-operations]]
+- [[synthesis/kubeadm-cluster-operations|kubeadm-cluster-operations]]

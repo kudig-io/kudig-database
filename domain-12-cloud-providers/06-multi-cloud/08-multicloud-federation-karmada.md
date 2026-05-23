@@ -57,7 +57,7 @@ created: "2026-05-23"
 
 Karmada（[[Kubernetes|Kubernetes]] [[Armada|Armada]]）是华为云开源的多云多集群 Kubernetes 编排引擎，已捐赠至 CNCF 成为 Incubating 项目。Karmada 提供了 Kubernetes 原生的多云管理 API，通过 PropagationPolicy 和 OverridePolicy 实现精细化的跨集群工作负载分发和配置覆盖。Karmada 的生产用户包括华为、vivo、美团、字节跳动、中国工商银行等大型企业，在金融、互联网、制造等行业积累了丰富的生产实践经验。
 
-Karmada 的核心设计理念是"Kubernetes Native"——通过 CRD 和 Aggregated API Server [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|扩展 Kubernetes API]]PI|Kubernetes API]]，用户无需学习新的 API 概念即可管理多云环境。Karmada 支持多种调度策略：静态权重、动态资源感知、亲和性/反亲和性、以及基于故障域的智能调度。问题自动转移机制能够在成员集群不可用时，自动将工作负载迁移到健康的集群，确保业务连续性。多集群服务发现（MultiClusterService）允许跨集群的服务发现和负载均衡，使得应用可以透明地访问跨集群的服务。
+Karmada 的核心设计理念是"Kubernetes Native"——通过 CRD 和 Aggregated API Server [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|扩展 Kubernetes API]]PI|Kubernetes API]]，用户无需学习新的 API 概念即可管理多云环境。Karmada 支持多种调度策略：静态权重、动态资源感知、亲和性/反亲和性、以及基于故障域的智能调度。问题自动转移机制能够在成员集群不可用时，自动将工作负载迁移到健康的集群，确保业务连续性。多集群服务发现（MultiClusterService）允许跨集群的服务发现和负载均衡，使得应用可以透明地访问跨集群的服务。
 
 本文档深入探讨 Karmada 的架构设计、资源传播机制、故障转移策略和生产级部署实践。内容涵盖完整的控制平面部署、成员集群注册、策略配置、监控告警和运维自动化脚本，为企业构建基于 Karmada 的多云管理平台提供全面参考。
 
@@ -1094,7 +1094,7 @@ kubectl --kubeconfig $KARMADA_KUBECONFIG get overridepolicies -A -o yaml
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-27-multi-cloud-hybrid MOC
-- [[domain-12-cloud-providers/README.md|Domain 27: 多云与混合云架构管理]]
+- [[domain-12-cloud-providers/README|Domain 27: 多云与混合云架构管理]]
 - Domain-27 多云与混合云 — 开源项目索引
 - AWS EKS 企业级多云管理平台
 - Azure AKS 企业级多云管理平台

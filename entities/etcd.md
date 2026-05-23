@@ -67,43 +67,43 @@ Every write increments a global revision number. Watch streams track from a spec
 - **Monitoring**: Watch disk commit duration, db size, leader changes, proposal failures
 
 ## Related
-- [[synthesis/etcd × Operator 模式.md|etcd × Operator 模式]] — 综合
+- [[synthesis/etcd × Operator 模式|etcd × Operator 模式]] — 综合
 - [[synthesis/etcd × 可观测性|etcd × 可观测性]] — 综合
 
 - [[grpc]] — gRPC
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
-- [[concepts/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
-- [[skills/backup-restore-etcd.md|backup-restore-etcd]] — Backup and Restore etcd
-- [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
-- [[concepts/watch-mechanism.md|Watch Mechanism]]
-- [[concepts/high-availability-patterns.md|High Availability Patterns]]
-- [[skills/backup-restore-etcd.md|Backup and Restore etcd]]
-- [[entities/kube-apiserver.md|kube-apiserver]]
-- [[concepts/etcd Operational Reference.md|etcd Operational Reference]]
+- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/high-availability-patterns|high-availability-patterns]] — High Availability Patterns
+- [[skills/backup-restore-etcd|backup-restore-etcd]] — Backup and Restore etcd
+- [[concepts/kubernetes-architecture-overview|Kubernetes Architecture Overview]]
+- [[concepts/watch-mechanism|Watch Mechanism]]
+- [[concepts/high-availability-patterns|High Availability Patterns]]
+- [[skills/backup-restore-etcd|Backup and Restore etcd]]
+- [[entities/kube-apiserver|kube-apiserver]]
+- [[concepts/etcd Operational Reference|etcd Operational Reference]]
 
 - etcd 深度解析
 - 19-etcd-operations
 - 07-distributed-consensus-etcd
-- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|02-control-plane-etcd-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance.md|10-etcd-maintenance]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md|etcd 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting|02-control-plane-etcd-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance|10-etcd-maintenance]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta|etcd 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting|02-etcd-troubleshooting]]
 - RELEASE-NOTES-0.2
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.5.md|RELEASE-NOTES-3.5]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.1.md|RELEASE-NOTES-3.1]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.0.md|RELEASE-NOTES-3.0]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.5|RELEASE-NOTES-3.5]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.0|RELEASE-NOTES-2.0]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.1|RELEASE-NOTES-3.1]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.1|RELEASE-NOTES-2.1]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.0|RELEASE-NOTES-3.0]]
 - RELEASE-NOTES-0.3
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.4.md|RELEASE-NOTES-3.4]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.3.md|RELEASE-NOTES-3.3]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.4|RELEASE-NOTES-3.4]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.2|RELEASE-NOTES-2.2]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.3|RELEASE-NOTES-3.3]]
 - RELEASE-NOTES-0.4
 - RELEASE-NOTES-0.1
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.6.md|RELEASE-NOTES-3.6]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.3.md|RELEASE-NOTES-2.3]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.2.md|RELEASE-NOTES-3.2]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.6|RELEASE-NOTES-3.6]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.3|RELEASE-NOTES-2.3]]
+- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.2|RELEASE-NOTES-3.2]]
 - [[journal/digest-2026-05-21|Wiki Digest — Daily (2026-05-21)]] — Cross-reference
 - [[references/KUDIG Cheat Sheet Index|KUDIG Cheat Sheet Index]] — Cross-reference
 - [[references/specialized-workloads-terms|K8s 专用工作负载术语参考]] — Cross-reference

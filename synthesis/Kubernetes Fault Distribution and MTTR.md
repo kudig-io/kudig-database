@@ -68,7 +68,7 @@ Based on production data across the industry:
 
 3. **Network issues are hardest to diagnose**: 60-minute MTTR despite only 18% frequency indicates significant diagnostic challenge. FTA needs extensive diagnostic branching for DNS, CNI, and policy-related failures.
 
-4. **Resource exhaustion is most automatable**: 30-minute MTTR with clear observable signals (memory > 95%, disk > 90%) makes this the best candidate for [[skills/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]].
+4. **Resource exhaustion is most automatable**: 30-minute MTTR with clear observable signals (memory > 95%, disk > 90%) makes this the best candidate for [[skills/FTA-Driven Runbook Automation|FTA-Driven Runbook Automation]].
 
 ## etcd FMEA Risk Priority Numbers
 
@@ -118,10 +118,10 @@ Based on production data across the industry:
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[skills/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[skills/FTA Methodology and Core Principles|FTA Methodology and Core Principles]]
 - Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
 - [[concepts/etcd Operational Reference|etcd Operational Reference]].md|etcd Operational Reference]]
-- [[synthesis/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
+- [[synthesis/Production Troubleshooting Playbook|Production Troubleshooting Playbook]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 - [[entities/dex|Dex (entities)]]

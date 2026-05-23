@@ -356,10 +356,10 @@ kubectl delete pvc <pvc-name>
 ## 相关概念
 
 - 持久化存储
-- [[domain-17-system-foundation/topic-dictionary/storage/storage-classes.md|storage-classes]]
+- [[domain-17-system-foundation/topic-dictionary/storage/storage-classes|storage-classes]]
 
 ## Related
 
-- [[references/fundamentals-terms.md|fundamentals-terms]] — K8s 基础概念术语参考
-- [[skills/learn-analogy-dictionary.md|learn-analogy-dictionary]] — K8S 概念类比词典
-- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[references/fundamentals-terms|fundamentals-terms]] — K8s 基础概念术语参考
+- [[skills/learn-analogy-dictionary|learn-analogy-dictionary]] — K8S 概念类比词典
+- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill

@@ -72,38 +72,38 @@ created: "2026-05-23"
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md|[[节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation|节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation]]iagnosis & Remediation — 数字人播报脚本|Node NotReady]] Diagnosis & Remediation]] |  | [[SKILL|skill]], daily-ops |  |
-| 2 | [[domain-10-troubleshooting-diagnostics/topic-skills/02-pod-crashloop-oomkilled.md|[[Pod CrashLoopBackOff & OOMKilled 诊断与修复|Pod CrashLoopBackOff & OOMKilled 诊断与修复]]]] |  | skill, daily-ops |  |
-| 3 | [[domain-10-troubleshooting-diagnostics/topic-skills/03-pod-pending.md|Pod Pending 调度失败诊断与修复]] |  | skill, daily-ops |  |
-| 4 | [[domain-10-troubleshooting-diagnostics/topic-skills/04-dns-resolution-failure.md|DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation]] |  | skill, daily-ops |  |
-| 5 | [[domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis]] |  | skill, daily-ops |  |
-| 6 | [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry.md|证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis]] |  | skill, daily-ops |  |
-| 7 | [[domain-10-troubleshooting-diagnostics/topic-skills/07-pvc-storage-failure.md|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]] |  | skill, daily-ops, storage |  |
-| 8 | [[domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md|Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis]] |  | skill, daily-ops, deployment |  |
-| 9 | [[domain-10-troubleshooting-diagnostics/topic-skills/09-rbac-quota-failure.md|RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting]] |  | skill, daily-ops, rbac |  |
-| 10 | [[domain-10-troubleshooting-diagnostics/topic-skills/10-image-pull-failure.md|镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting]] |  | skill, daily-ops |  |
-| 11 | [[domain-10-troubleshooting-diagnostics/topic-skills/11-control-plane-failure.md|etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation]] |  | skill, daily-ops |  |
-| 12 | [[domain-10-troubleshooting-diagnostics/topic-skills/12-autoscaling-failure.md|HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation]] |  | skill, daily-ops |  |
-| 13 | [[domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md|Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation]] |  | skill, daily-ops |  |
-| 14 | [[domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure.md|ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting]] |  | skill, daily-ops, configuration |  |
-| 15 | [[domain-10-troubleshooting-diagnostics/topic-skills/15-monitoring-alerting-failure.md|监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation]] |  | skill, daily-ops, monitoring |  |
-| 16 | [[domain-10-troubleshooting-diagnostics/topic-skills/16-logging-pipeline-failure.md|日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation]] |  | skill, daily-ops |  |
-| 17 | [[domain-10-troubleshooting-diagnostics/topic-skills/17-performance-bottleneck.md|性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning]] |  | skill, daily-ops, performance |  |
-| 18 | [[domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response.md|安全事件应急响应 / Security Incident Response]] |  | skill, daily-ops, security |  |
-| 19 | [[domain-10-troubleshooting-diagnostics/topic-skills/19-skill-local-demo-guide.md|Skill 本地运行 Demo 指南]] |  | skill, daily-ops, guide |  |
-| 20 | [[domain-10-troubleshooting-diagnostics/topic-skills/ENHANCEMENT-RECORD.md|topic-skills 全面增强记录]] |  | skill, daily-ops |  |
-| 21 | [[domain-10-troubleshooting-diagnostics/topic-skills/assessment/answer-keys/k8s-fundamentals-quiz-answers.md|K8s 基础知识考核 - 答案解析]] |  | skill, daily-ops |  |
-| 22 | [[domain-10-troubleshooting-diagnostics/topic-skills/assessment/daily-check-quiz.md|每日一题]] |  | skill, daily-ops |  |
-| 23 | [[domain-10-troubleshooting-diagnostics/topic-skills/assessment/k8s-fundamentals-quiz.md|K8s 基础知识考核]] |  | skill, daily-ops |  |
-| 24 | [[domain-10-troubleshooting-diagnostics/topic-skills/assessment/troubleshooting-lab-exam.md|故障排查实验考核]] |  | skill, daily-ops, troubleshooting |  |
-| 25 | [[domain-10-troubleshooting-diagnostics/topic-skills/skill-schema.md|Skill Schema (历史参考)]] |  | skill, daily-ops |  |
-| 26 | [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/SKILL.md|K8s Node NotReady 诊断与修复]] |  | skill, daily-ops |  |
-| 27 | [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/USAGE-GUIDE.md|Skills + FTA 使用指南 — k8s-node-notready & node-fta]] |  | skill, daily-ops, guide |  |
-| 28 | [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/assets/escalation-template.md|升级消息模板 / Escalation Message Template]] |  | skill, daily-ops |  |
-| 29 | [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/reference/diagnostic-workflow.md|诊断工作流 / Diagnostic Workflow]] |  | skill, daily-ops |  |
-| 30 | [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/reference/remediation-playbook.md|修复操作手册 / Remediation Playbook]] |  | skill, daily-ops |  |
-| 31 | [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/reference/root-cause-catalog.md|根因分类 / Root Cause Catalog]] |  | skill, daily-ops |  |
-| 32 | [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/reference/version-matrix.md|版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution]] |  | skill, daily-ops |  |
+| 1 | [[domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready|[[节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation|节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation]]iagnosis & Remediation — 数字人播报脚本|Node NotReady]] Diagnosis & Remediation]] |  | [[SKILL|skill]], daily-ops |  |
+| 2 | [[domain-10-troubleshooting-diagnostics/topic-skills/02-pod-crashloop-oomkilled|[[Pod CrashLoopBackOff & OOMKilled 诊断与修复|Pod CrashLoopBackOff & OOMKilled 诊断与修复]]]] |  | skill, daily-ops |  |
+| 3 | [[domain-10-troubleshooting-diagnostics/topic-skills/03-pod-pending|Pod Pending 调度失败诊断与修复]] |  | skill, daily-ops |  |
+| 4 | [[domain-10-troubleshooting-diagnostics/topic-skills/04-dns-resolution-failure|DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation]] |  | skill, daily-ops |  |
+| 5 | [[domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity|Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis]] |  | skill, daily-ops |  |
+| 6 | [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry|证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis]] |  | skill, daily-ops |  |
+| 7 | [[domain-10-troubleshooting-diagnostics/topic-skills/07-pvc-storage-failure|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]] |  | skill, daily-ops, storage |  |
+| 8 | [[domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure|Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis]] |  | skill, daily-ops, deployment |  |
+| 9 | [[domain-10-troubleshooting-diagnostics/topic-skills/09-rbac-quota-failure|RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting]] |  | skill, daily-ops, rbac |  |
+| 10 | [[domain-10-troubleshooting-diagnostics/topic-skills/10-image-pull-failure|镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting]] |  | skill, daily-ops |  |
+| 11 | [[domain-10-troubleshooting-diagnostics/topic-skills/11-control-plane-failure|etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation]] |  | skill, daily-ops |  |
+| 12 | [[domain-10-troubleshooting-diagnostics/topic-skills/12-autoscaling-failure|HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation]] |  | skill, daily-ops |  |
+| 13 | [[domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure|Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation]] |  | skill, daily-ops |  |
+| 14 | [[domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure|ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting]] |  | skill, daily-ops, configuration |  |
+| 15 | [[domain-10-troubleshooting-diagnostics/topic-skills/15-monitoring-alerting-failure|监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation]] |  | skill, daily-ops, monitoring |  |
+| 16 | [[domain-10-troubleshooting-diagnostics/topic-skills/16-logging-pipeline-failure|日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation]] |  | skill, daily-ops |  |
+| 17 | [[domain-10-troubleshooting-diagnostics/topic-skills/17-performance-bottleneck|性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning]] |  | skill, daily-ops, performance |  |
+| 18 | [[domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response|安全事件应急响应 / Security Incident Response]] |  | skill, daily-ops, security |  |
+| 19 | [[domain-10-troubleshooting-diagnostics/topic-skills/19-skill-local-demo-guide|Skill 本地运行 Demo 指南]] |  | skill, daily-ops, guide |  |
+| 20 | [[domain-10-troubleshooting-diagnostics/topic-skills/ENHANCEMENT-RECORD|topic-skills 全面增强记录]] |  | skill, daily-ops |  |
+| 21 | [[domain-10-troubleshooting-diagnostics/topic-skills/assessment/answer-keys/k8s-fundamentals-quiz-answers|K8s 基础知识考核 - 答案解析]] |  | skill, daily-ops |  |
+| 22 | [[domain-10-troubleshooting-diagnostics/topic-skills/assessment/daily-check-quiz|每日一题]] |  | skill, daily-ops |  |
+| 23 | [[domain-10-troubleshooting-diagnostics/topic-skills/assessment/k8s-fundamentals-quiz|K8s 基础知识考核]] |  | skill, daily-ops |  |
+| 24 | [[domain-10-troubleshooting-diagnostics/topic-skills/assessment/troubleshooting-lab-exam|故障排查实验考核]] |  | skill, daily-ops, troubleshooting |  |
+| 25 | [[domain-10-troubleshooting-diagnostics/topic-skills/skill-schema|Skill Schema (历史参考)]] |  | skill, daily-ops |  |
+| 26 | [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/SKILL|K8s Node NotReady 诊断与修复]] |  | skill, daily-ops |  |
+| 27 | [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/USAGE-GUIDE|Skills + FTA 使用指南 — k8s-node-notready & node-fta]] |  | skill, daily-ops, guide |  |
+| 28 | [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/assets/escalation-template|升级消息模板 / Escalation Message Template]] |  | skill, daily-ops |  |
+| 29 | [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/reference/diagnostic-workflow|诊断工作流 / Diagnostic Workflow]] |  | skill, daily-ops |  |
+| 30 | [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/reference/remediation-playbook|修复操作手册 / Remediation Playbook]] |  | skill, daily-ops |  |
+| 31 | [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/reference/root-cause-catalog|根因分类 / Root Cause Catalog]] |  | skill, daily-ops |  |
+| 32 | [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/reference/version-matrix|版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution]] |  | skill, daily-ops |  |
 
 ---
 

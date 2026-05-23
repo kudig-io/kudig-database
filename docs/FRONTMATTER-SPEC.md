@@ -194,5 +194,5 @@ last_updated: "YYYY-MM-DD"
 
 - [[references/KUDIG Tag Dictionary|KUDIG Tag Dictionary]]
 - [[references/KUDIG Scenario Taxonomy|KUDIG Scenario Taxonomy]]
-- [[docs/SYNONYM-DICTIONARY.md]]
+- [[docs/SYNONYM-DICTIONARY]]
 - [[docs/TAG-DICTIONARY|KUDIG 全局标签字典]]

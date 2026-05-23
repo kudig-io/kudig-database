@@ -224,16 +224,16 @@ fs.file-max = 2000000
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[references/245-ack-ebs-storage.md|245-ack-ebs-storage]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/containerd.md|containerd]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|[[Go 生产环境速查卡|go]]]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[references/245-ack-ebs-storage|245-ack-ebs-storage]]
+- [[entities/kubernetes|kubernetes]]
+- [[entities/containerd|containerd]]
 - [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
 
 ## See Also
 
-- [[domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md|alicloud-ack-overview]]
-- [[domain-12-cloud-providers/04-alicloud-ack/service-ack-practical-guide.md|service-ack-practical-guide]]
-- [[domain-12-cloud-providers/04-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
-- [[domain-12-cloud-providers/04-alicloud-ack/242-ack-vpc-network.md|242-ack-vpc-network]]
+- [[domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview|alicloud-ack-overview]]
+- [[domain-12-cloud-providers/04-alicloud-ack/service-ack-practical-guide|service-ack-practical-guide]]
+- [[domain-12-cloud-providers/04-alicloud-ack/241-ack-slb-nlb-alb|241-ack-slb-nlb-alb]]
+- [[domain-12-cloud-providers/04-alicloud-ack/242-ack-vpc-network|242-ack-vpc-network]]

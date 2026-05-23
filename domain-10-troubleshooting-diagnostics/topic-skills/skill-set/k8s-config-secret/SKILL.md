@@ -223,7 +223,7 @@ ConfigMap 和 Secret 是 [[Kubernetes|Kubernetes]] 中管理应用配置和敏�
 
 - k8s-deployment-rollout
 
-- [[video-scripts/pod-crashloop.md]]
+- [[video-scripts/pod-crashloop]]
 
 - k8s-rbac-quota
 

@@ -48,7 +48,7 @@ Kube-burner 是一个 Kubernetes 性能和规模测试工具，通过在集群�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -66,16 +66,16 @@ Kube-burner 是一个 Kubernetes 性能和规模测试工具，通过在集群�
 ## 参考链接
 
 - [[etcd]]
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
 - networking.md|cilium-ebpf-networking]]
-- [[entities/cni-plugins.md|cni-plugins]]
+- [[entities/cni-plugins|cni-plugins]]
 - [[deployment]]
 
 ## Related
 
 - [[slimtoolkit]] — SlimToolkit
 - [[cni]] — CNI (Container Network Interface)
-- [[entities/cncf-infrastructure.md|cncf-infrastructure]] — CNCF 基础设施与混沌工程项目全景
+- [[entities/cncf-infrastructure|cncf-infrastructure]] — CNCF 基础设施与混沌工程项目全景
 - [[external-secrets]] — External Secrets Operator
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

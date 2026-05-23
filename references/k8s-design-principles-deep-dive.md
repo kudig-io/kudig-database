@@ -93,8 +93,8 @@ etcd 使用 Raft 共识协议保证分布式一致性：
 
 ## Related
 
-- [[references/release-notes-core-deps.md|release-notes-core-deps]] — 发布说明索引 — 核心依赖
-- [[references/k8s-architecture-fundamentals.md|k8s-architecture-fundamentals]] — K8s 架构基础与核心组件原理
+- [[references/release-notes-core-deps|release-notes-core-deps]] — 发布说明索引 — 核心依赖
+- [[references/k8s-architecture-fundamentals|k8s-architecture-fundamentals]] — K8s 架构基础与核心组件原理
 - [[docker]] — Docker
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

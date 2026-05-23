@@ -218,8 +218,8 @@ kubectl get resourceclaimtemplates -n ml-platform
 
 - [Kubernetes 调度器](./kubernetes-scheduler.md) — 调度器如何处理 ResourceClaim
 - [调度框架](./scheduling-framework.md) — Reserve / PreBind 阶段与 DRA 的交互
-- [[domain-17-system-foundation/topic-dictionary/scheduling/gang-scheduling.md|Gang Scheduling]]](./gang-scheduling.md) — 分布式 GPU 训练需要 DRA + gang 调度
-- [[domain-17-system-foundation/topic-dictionary/scheduling/pod-overhead.md|Pod Overhead]]](./pod-overhead.md) — DRA 设备的额外资源开销
+- [[domain-17-system-foundation/topic-dictionary/scheduling/gang-scheduling|Gang Scheduling]]](./gang-scheduling.md) — 分布式 GPU 训练需要 DRA + gang 调度
+- [[domain-17-system-foundation/topic-dictionary/scheduling/pod-overhead|Pod Overhead]]](./pod-overhead.md) — DRA 设备的额外资源开销
 - Karpenter 自动扩缩容](./karpenter-autoscaling.md) — 为 DRA 设备需求自动扩展 GPU 节点
 
 ## 参考链接

@@ -65,12 +65,12 @@ trivy image --format spdx-json --output sbom.json nginx:1.25
 
 - [[falco]] — Falco
 - [[kyverno]] — Kyverno
-- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]] — [[concepts/ci-cd-pipeline-patterns.md|CI/CD Pipeline Patterns]]
-- [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
+- [[concepts/ci-cd-pipeline-patterns|ci-cd-pipeline-patterns]] — [[concepts/ci-cd-pipeline-patterns|CI/CD Pipeline Patterns]]
+- [[concepts/cloud-native-defense-in-depth|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
 - [[supply-chain-security]] — Software Supply Chain Security
 - [[supply-chain-security|Supply Chain Security]]
-- [[concepts/ci-cd-pipeline-patterns.md|CI/CD Pipeline Patterns]]
-- [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
+- [[concepts/ci-cd-pipeline-patterns|CI/CD Pipeline Patterns]]
+- [[concepts/cloud-native-defense-in-depth|Cloud Native Defense in Depth]]
 
 - RELEASE-NOTES-0.12
 - RELEASE-NOTES-0.26

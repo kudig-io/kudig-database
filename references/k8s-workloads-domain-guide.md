@@ -69,14 +69,14 @@ v1.28+ native sidecar containers: init containers with `restartPolicy: Always` r
 
 ## Related
 
-- [[entities/statefulset.md|statefulset]] — StatefulSet
+- [[entities/statefulset|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[pod-lifecycle]] — Pod Lifecycle
 - [[pod-lifecycle|Pod Lifecycle]]
 - [[deployment|Deployment]]
-- [[entities/statefulset.md|StatefulSet]]
-- [[skills/configure-health-probes.md|Configure Health Probes]]
+- [[entities/statefulset|StatefulSet]]
+- [[skills/configure-health-probes|Configure Health Probes]]
 
 - [[Deployment × Secret 管理]]

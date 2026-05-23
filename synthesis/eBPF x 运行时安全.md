@@ -80,7 +80,7 @@ tier: supporting---
 
 eBPF 从根本上改变了 Kubernetes 的安全格局——它将传统上相互独立的三大关注点**网络**、**可观测性**和**运行时安全**——统一到一个内核级数据面中。在 eBPF 之前，这些由互不关联的工具各自处理：iptables 负责网络策略、独立 agent 负责指标采集、另一套运行时安全监控负责进程审计。eBPF 让这三者共享相同的内核挂载点、相同的 eBPF Map 和相同的策略引擎，创造出用户态工具无法实现的整体安全态势。
 
-[[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]] 描述了 eBPF 在网络和 L7 策略中的应用，[[entities/tetragon.md|tetragon]] 描述了 eBPF 在运行时安全中的进程追踪能力，[[falco]] 描述了基于内核模块/ eBPF 的运行时安全检测，但 wiki 中没有一页明确指出：**eBPF 创造了一个"安全连续体"，网络策略违规和运行时安全事件之间的边界是人为划分的。**
+[[concepts/cilium-ebpf-networking|cilium-ebpf-networking]] 描述了 eBPF 在网络和 L7 策略中的应用，[[entities/tetragon|tetragon]] 描述了 eBPF 在运行时安全中的进程追踪能力，[[falco]] 描述了基于内核模块/ eBPF 的运行时安全检测，但 wiki 中没有一页明确指出：**eBPF 创造了一个"安全连续体"，网络策略违规和运行时安全事件之间的边界是人为划分的。**
 
 ## 共现场景
 
@@ -131,11 +131,11 @@ eBPF 从根本上改变了 Kubernetes 的安全格局——它将传统上相互
 
 ## 相关
 
-- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
-- [[concepts/security-defense-depth.md|security-defense-depth]]
-- [[concepts/service-mesh-architecture.md|service-mesh-architecture]]
+- [[concepts/cilium-ebpf-networking|cilium-ebpf-networking]]
+- [[concepts/security-defense-depth|security-defense-depth]]
+- [[concepts/service-mesh-architecture|service-mesh-architecture]]
 - [[cilium]]
-- [[entities/tetragon.md|tetragon]]
+- [[entities/tetragon|tetragon]]
 - [[falco]]
 - entities/hubble
 
@@ -143,5 +143,5 @@ eBPF 从根本上改变了 Kubernetes 的安全格局——它将传统上相互
 
 ## Related
 
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

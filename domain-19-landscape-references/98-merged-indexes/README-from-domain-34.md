@@ -476,7 +476,7 @@ Flux → Argo → Helm → Crossplane
 
 - [[helm]]
 - [[README]]
-- [[journal/digest-2026-05-21-full.md|digest-2026-05-21-full]]
+- [[journal/digest-2026-05-21-full|digest-2026-05-21-full]]
 
-- [[entities/tinkerbell.md|Tinkerbell]]
-- [[entities/chaosblade.md|ChaosBlade]]
+- [[entities/tinkerbell|Tinkerbell]]
+- [[entities/chaosblade|ChaosBlade]]

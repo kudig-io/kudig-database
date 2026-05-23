@@ -79,20 +79,20 @@ graph TD
 
 ## 相关文档
 
-- [[domain-03-networking-traffic/README.md]]
-- [[domain-03-networking-traffic/README.md]]
-- [[domain-03-networking-traffic/README.md|Domain 5: [[网络诊断速查卡|Networking]] — Terway 专题]]
+- [[domain-03-networking-traffic/README]]
+- [[domain-03-networking-traffic/README]]
+- [[domain-03-networking-traffic/README|Domain 5: [[网络诊断速查卡|Networking]] — Terway 专题]]
 
 
 ---
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta.md]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta]]
 
 
 ---
@@ -111,8 +111,8 @@ graph TD
 
 ## Related
 
-- [[references/kudig-metadata-index.md|README]].md|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[skills/service-fta.md|service-fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md|dns-fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|ingress-fta]]
+- [[references/kudig-metadata-index|README]].md|README]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[skills/service-fta|service-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta|dns-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta|ingress-fta]]

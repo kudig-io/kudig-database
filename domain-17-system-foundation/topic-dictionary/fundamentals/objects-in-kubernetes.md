@@ -56,7 +56,7 @@ Kubernetes 控制平面持续主动管理每个对象的实际状态，使其与
 
 在对象的 manifest（YAML 或 JSON）中，必须设置以下字段：
 
-- `apiVersion`：创建对象时使用的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 版本
+- `apiVersion`：创建对象时使用的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 版本
 - `kind`：要创建的对象类型
 - `metadata`：帮助唯一标识对象的数据，包括 `name`、可选的 `namespace` 等
 - `spec`：对象的期望状态

@@ -1035,15 +1035,15 @@ sudo snap remove microk8s
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-deployment MOC
-- [[domain-08-release-change-management/topic-deployment/README.md|Kubernetes 部署方案指南 (Deployment Guide)]]
-- [[domain-08-release-change-management/topic-deployment/01-local-demo-deployment.md|01 - 本机单机 Demo 部署]]
-- [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment)]]
-- [[domain-08-release-change-management/topic-deployment/04-production-environment-deployment.md|04 - 生产环境部署 (Production Environment Deployment)]]
+- [[domain-08-release-change-management/topic-deployment/README|Kubernetes 部署方案指南 (Deployment Guide)]]
+- [[domain-08-release-change-management/topic-deployment/01-local-demo-deployment|01 - 本机单机 Demo 部署]]
+- [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment|03 - 研发环境部署 (Development Environment Deployment)]]
+- [[domain-08-release-change-management/topic-deployment/04-production-environment-deployment|04 - 生产环境部署 (Production Environment Deployment)]]
 
 ## Related
 
-- [[README.md|README]]
-- [[MOC.md|MOC]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[README|README]]
+- [[MOC|MOC]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]

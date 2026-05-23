@@ -371,9 +371,9 @@ kubectl get node <node> -o jsonpath='{.status.capacity}'
 
 ## Related
 
-- [[log.md|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/fluentd.md|Fluentd]]
+- [[log|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[entities/kubernetes|kubernetes]]
+- [[entities/fluentd|Fluentd]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

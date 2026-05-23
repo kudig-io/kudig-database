@@ -65,7 +65,7 @@ created: "2026-05-23"
 
 # 03 - 功能和API表
 
-> **适用版本**: v1.25 - v1.33 | **最后更新**: 2026-04-24 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/reference/kubernetes-api](https://kubernetes.io/docs/reference/kubernetes-api/)
+> **适用版本**: v1.25 - v1.33 | **最后更新**: 2026-04-24 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/reference/kubernetes-api](https://kubernetes.io/docs/reference/kubernetes-api/)
 
 <!-- chunk: 核心工作负载API -->
 ## 核心工作负载API
@@ -320,7 +320,7 @@ kubectl get ns -o json | jq '.items[].metadata.labels | keys[]' | grep pod-secur
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析

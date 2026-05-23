@@ -206,10 +206,10 @@ Node Ready
 
 ## 相关概念
 
-- [[skills/node-drain-and-maintenance.md|[[节点驱逐与维护|节点驱逐与维护]]]]
-- [[skills/kubelet-certificate-rotation.md|[[kubelet 证书轮换机制|kubelet 证书轮换机制]]]]
-- [[skills/kubelet-eviction-mechanism.md|[[kubelet 资源驱逐机制|kubelet 资源驱逐机制]]]]
-- [[entities/kubelet.md|kubelet]]
+- [[skills/node-drain-and-maintenance|[[节点驱逐与维护|节点驱逐与维护]]]]
+- [[skills/kubelet-certificate-rotation|[[kubelet 证书轮换机制|kubelet 证书轮换机制]]]]
+- [[skills/kubelet-eviction-mechanism|[[kubelet 资源驱逐机制|kubelet 资源驱逐机制]]]]
+- [[entities/kubelet|kubelet]]
 - [[pod-lifecycle|Pod 生命周期]]
 
 ## Related
@@ -218,4 +218,4 @@ Node Ready
 - [[cri-o]] — CRI-O
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/kubelet|kubelet]] — kubelet

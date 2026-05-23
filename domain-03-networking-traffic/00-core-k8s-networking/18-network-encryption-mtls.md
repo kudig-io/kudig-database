@@ -309,8 +309,8 @@ spec:
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic KUDIG Database — Global MOC
-- [[domain-03-networking-traffic/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]working]] 网络]]
-- [[domain-03-networking-traffic/00-core-k8s-networking/00-network-in-nutshell.md]]
+- [[domain-03-networking-traffic/README|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]working]] 网络]]
+- [[domain-03-networking-traffic/00-core-k8s-networking/00-network-in-nutshell]]
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
 - 网络核心组件

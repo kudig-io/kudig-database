@@ -39,9 +39,9 @@ created: "2026-05-23"
 
 五层架构 ^[inferred]：
 
-- **生产环境**：Kubernetes 集群 + [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes.md|Persistent Volumes]]es（卷）|Volumes]] + etcd
+- **生产环境**：Kubernetes 集群 + [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes|Persistent Volumes]]es（卷）|Volumes]] + etcd
 - **备份层**：Velero 备份工具 + 定时备份任务
-- **存储层**：S3/OSS 对象存储 + [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshots.md|Volume Snapshots]] + etcd 备份
+- **存储层**：S3/OSS 对象存储 + [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshots|Volume Snapshots]] + etcd 备份
 - **恢复层**：Velero Restore 任务 + 集群恢复 + 数据恢复
 - **灾备环境**：灾备集群 + 灾备数据
 
@@ -108,14 +108,14 @@ etcd 是集群状态的核心，必须单独备份。可使用 `etcdctl snapshot
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
-- [[skills/backup-restore-etcd.md|Backup and Restore etcd]]
-- [[concepts/high-availability-patterns.md|High Availability Patterns]]
+- [[concepts/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]
+- [[skills/backup-restore-etcd|Backup and Restore etcd]]
+- [[concepts/high-availability-patterns|High Availability Patterns]]
 
 ## Related
 
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
-- [[concepts/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
-- [[skills/backup-restore-etcd.md|backup-restore-etcd]] — Backup and Restore etcd
+- [[concepts/k8s-production-best-practices|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[concepts/high-availability-patterns|high-availability-patterns]] — High Availability Patterns
+- [[skills/backup-restore-etcd|backup-restore-etcd]] — Backup and Restore etcd

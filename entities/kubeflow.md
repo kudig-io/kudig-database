@@ -39,7 +39,7 @@ description: '## 项目概述'
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -64,7 +64,7 @@ description: '## 项目概述'
 - 99-kubeflow-ai-platform-guide
 - troubleshooting.md|02-kubeflow-troubleshooting]]
 - kubeflow
-- [[entities/kaito.md|[[KAITO (Kubernetes AI Toolchain Operator)|KAITO]]]]
+- [[entities/kaito|[[KAITO (Kubernetes AI Toolchain Operator)|KAITO]]]]
 - [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

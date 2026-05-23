@@ -58,7 +58,7 @@ created: "2026-05-23"
 
 # 32 - MLOps端到端流水线
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [[entities/kubeflow.md|Kubeflow]] Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | [[entities/argo.md|Argo]]go Workflows|Argo Workflows]]](https://argoproj.github.io/argo-workflows/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [[entities/kubeflow|Kubeflow]] Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | [[entities/argo|Argo]]go Workflows|Argo Workflows]]](https://argoproj.github.io/argo-workflows/)
 
 <!-- chunk: 一、MLOps流水线架构 -->
 ## 一、MLOps流水线架构
@@ -753,7 +753,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-11-ai-infra MOC
-- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
 - Domain-11 AI 基础设施 — 开源项目索引
 - AI 基础设施架构
 - 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)

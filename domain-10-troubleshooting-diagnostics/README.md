@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting & Diagnostics
-description: '- [[domain-06-observability/README.md|domain-06-observability]] — 监控与告警'
+description: '- [[domain-06-observability/README|domain-06-observability]] — 监控与告警'
 category: domain
 tags:
 - troubleshooting
@@ -50,7 +50,7 @@ created: "2026-05-23"
 ## 与其他 Domain 的关系
 
 - observability/README.md|domain-06-observability]] — 监控与告警
-- [[domain-05-security-compliance/README.md|domain-05-security-compliance]] — 安全事件响应
+- [[domain-05-security-compliance/README|domain-05-security-compliance]] — 安全事件响应
 
 ## Related
 

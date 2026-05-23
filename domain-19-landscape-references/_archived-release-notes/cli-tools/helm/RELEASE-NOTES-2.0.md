@@ -35,7 +35,7 @@ created: "2026-05-23"
 Source: [v2.0.2](https://github.com/helm/helm/releases/tag/v2.0.2)
 
 The Helm 2.0.2 release is a bug fix release. No new features have been added.
-- Join the discussion in [[entities/kubernetes.md|Kubernetes]] Slack](https://slack.k8s.io/): `#helm` 
+- Join the discussion in [[entities/kubernetes|Kubernetes]] Slack](https://slack.k8s.io/): `#helm` 
 - Hang out at the Public Developer Call: Thursday, 9:30 Pacific via [Zoom](https://engineyard.zoom.us/j/366425549)
 - Test, debug, and contribute charts: [GitHub/kubernetes/charts](https://github.com/kubernetes/charts)
 

@@ -41,7 +41,7 @@ Breaking changes:
 New features:
 - Add support for S3 SSE with KMS (#29)
 - Validate cloud provider configurations & make persistentVolumeProvider optional (#35)
-- Add [[domain-17-system-foundation/topic-dictionary/fundamentals/garbage-collection.md|garbage collection]] of Restore objects (#63)
+- Add [[domain-17-system-foundation/topic-dictionary/fundamentals/garbage-collection|garbage collection]] of Restore objects (#63)
 - Save logs per backup (#40)
 - Save logs per restore (#79)
 - Add `--include-resources/--exclude-resources` for restores (#78)

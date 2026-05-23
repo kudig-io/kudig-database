@@ -60,7 +60,7 @@ related_topics:
 created: "2026-05-23"
 ---
 
-# Deployment [[skills/deployment-canary-and-bluegreen.md|deployment-canary-and-bluegreen]]模式
+# Deployment [[skills/deployment-canary-and-bluegreen|deployment-canary-and-bluegreen]]模式
 
 ## 函数签名
 
@@ -480,7 +480,7 @@ flowchart TD
 
 ## Related
 
-- [[entities/argo.md|argo]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/linkerd.md|Linkerd]]
-- [[entities/istio.md|Istio]]
+- [[entities/argo|argo]]
+- [[entities/kubernetes|kubernetes]]
+- [[entities/linkerd|Linkerd]]
+- [[entities/istio|Istio]]

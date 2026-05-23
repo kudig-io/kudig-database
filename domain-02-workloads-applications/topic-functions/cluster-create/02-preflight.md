@@ -657,8 +657,8 @@ func (c DirAvailableCheck) Check() error {
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/containerd.md|containerd]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/docker|docker]]
+- [[entities/kubernetes|kubernetes]]
+- [[entities/containerd|containerd]]

@@ -42,7 +42,7 @@ Piraeus Datastore 是基于 LINSTOR 和 DRBD 技术的 Kubernetes 高可用存�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -59,16 +59,16 @@ Piraeus Datastore 是基于 LINSTOR 和 DRBD 技术的 Kubernetes 高可用存�
 ## 参考链接
 
 - [[operator-pattern]]
-- [[concepts/controller-pattern.md|controller-pattern]]
-- [[concepts/storage-model.md|storage-model]]
+- [[concepts/controller-pattern|controller-pattern]]
+- [[concepts/storage-model|storage-model]]
 - [[pod-lifecycle]]
-- [[entities/csi-drivers.md|csi-drivers]]
+- [[entities/csi-drivers|csi-drivers]]
 
 ## Related
 
 - [[spin]] — Spin
 - [[backstage]] — Backstage
-- [[entities/emissary-ingress.md|ingress]]]] — Emissary-Ingress
+- [[entities/emissary-ingress|ingress]]]] — Emissary-Ingress
 - [[kubevela]] — KubeVela
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

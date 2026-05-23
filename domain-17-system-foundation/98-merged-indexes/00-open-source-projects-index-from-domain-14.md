@@ -733,7 +733,7 @@ EOF
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-17-system-foundation MOC
-- [[domain-17-system-foundation/README.md|Domain-14: Linux 基础知识体系]]
+- [[domain-17-system-foundation/README|Domain-14: Linux 基础知识体系]]
 - 01 - Linux 系统架构与内核深度解析：生产环境运维专家指南
 - 02 - Linux 进程管理与系统监控：生产环境运维专家实践
 - 03 - Linux 文件系统深度解析：生产环境存储管理专家指南

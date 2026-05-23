@@ -94,7 +94,7 @@ created: "2026-05-23"
 
 ### Trivy
 
-- **实体页面**: [[entities/trivy.md|Trivy]]
+- **实体页面**: [[entities/trivy|Trivy]]
 - **最新版本**: v0.69
 - **发布说明目录**: `domain-19-landscape-references/topic-release-notes/security/trivy/`
 - **版本覆盖**: v0.1 → v0.69（28 个版本）
@@ -118,14 +118,14 @@ created: "2026-05-23"
 
 ## 相关导航
 
-- [[concepts/security-tool-evolution.md|安全工具演进]]
-- [[references/release-notes-reading-guide.md|发布说明阅读指南]]
+- [[concepts/security-tool-evolution|安全工具演进]]
+- [[references/release-notes-reading-guide|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
-- [[references/kudig-contribution-guide.md|kudig-contribution-guide]] — 贡献指南、项目概览与版本发布说明
+- [[references/kudig-contribution-guide|kudig-contribution-guide]] — 贡献指南、项目概览与版本发布说明
 - [[opa]] — OPA (Open Policy Agent)
 - [[falco]] — Falco
-- [[entities/trivy.md|trivy]] — Trivy
+- [[entities/trivy|trivy]] — Trivy
 - [[cert-manager]] — cert-manager

@@ -86,4 +86,4 @@ OpenTelemetry 统一了指标、日志、追踪三大信号：
 - [[litmus]] — LitmusChaos
 - [[prometheus]] — Prometheus
 
-- [[synthesis/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
+- [[synthesis/Operator 模式 × 可观测性|Operator 模式 × 可观测性]]

@@ -2707,7 +2707,7 @@ Backstage Scaffolder 是平台工程中**黄金路径**的核心实现工具。�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README.md|Domain 36: 平台工程 (Platform Engineering)]]
+- [[domain-07-platform-engineering/README|Domain 36: 平台工程 (Platform Engineering)]]
 - Domain-36 平台工程 — 开源项目索引
 - 平台工程概述与成熟度模型
 - 内部开发者平台设计原则

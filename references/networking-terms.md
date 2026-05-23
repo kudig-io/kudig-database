@@ -37,7 +37,7 @@ created: "2026-05-23"
 
 本页汇总了 **网络** 领域的 17 个 Kubernetes 术语定义与概念说明。
 
-> **相关领域**: [[references/k8s-networking-domain-guide.md|k8s-networking-domain-guide]] | [[references/k8s-networking-ecosystem.md|k8s-networking-ecosystem]]
+> **相关领域**: [[references/k8s-networking-domain-guide|k8s-networking-domain-guide]] | [[references/k8s-networking-ecosystem|k8s-networking-ecosystem]]
 
 ---
 
@@ -203,8 +203,8 @@ Service 是 Kubernetes 中用于将运行在一组 Pod 上的网络应用暴露�
 
 ## 相关页面
 
-- [[references/k8s-networking-domain-guide.md|k8s-networking-domain-guide]]
-- [[references/k8s-networking-ecosystem.md|k8s-networking-ecosystem]]
+- [[references/k8s-networking-domain-guide|k8s-networking-domain-guide]]
+- [[references/k8s-networking-ecosystem|k8s-networking-ecosystem]]
 
 ## 来源文件
 

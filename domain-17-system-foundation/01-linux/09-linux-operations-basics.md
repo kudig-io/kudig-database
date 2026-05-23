@@ -903,7 +903,7 @@ echo "=== 诊断完成 ==="
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-17-system-foundation MOC
-- [[domain-17-system-foundation/README.md|Domain-14: Linux 基础知识体系]]
+- [[domain-17-system-foundation/README|Domain-14: Linux 基础知识体系]]
 - Domain-14 Linux — 开源项目索引
 - 01 - Linux 系统架构与内核深度解析：生产环境运维专家指南
 - 02 - Linux 进程管理与系统监控：生产环境运维专家实践

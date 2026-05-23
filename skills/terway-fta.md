@@ -75,10 +75,10 @@ base_confidence: 0.7
 
 ## See Also
 
-- [[skills/skills-run-README.md|skills-run-README]]
-- [[skills/statefulset-fta.md|statefulset-fta]]
-- [[skills/troubleshoot-node-issues.md|troubleshoot-node-issues]]
-- [[skills/troubleshoot-pod-issues.md|troubleshoot-pod-issues]]
+- [[skills/skills-run-README|skills-run-README]]
+- [[skills/statefulset-fta|statefulset-fta]]
+- [[skills/troubleshoot-node-issues|troubleshoot-node-issues]]
+- [[skills/troubleshoot-pod-issues|troubleshoot-pod-issues]]
 
 ## Related
 

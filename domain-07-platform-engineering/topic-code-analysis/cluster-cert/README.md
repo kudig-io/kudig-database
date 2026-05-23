@@ -250,13 +250,13 @@ func CreateAsCA(cfg *kubeadmapi.InitConfiguration) (*x509.Certificate, crypto.Si
 ## Related
 
 - 10-monitoring-metrics-prometheus
-- [[entities/kubernetes.md|kubernetes]]
+- [[entities/kubernetes|kubernetes]]
 - [[templates/cheat-sheet-template]]
-- [[domain-17-system-foundation/topic-dictionary/operations/certificates.md|certificates]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/11-apiserver-cert-flags.md|11-apiserver-cert-flags]]
+- [[domain-17-system-foundation/topic-dictionary/operations/certificates|certificates]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/11-apiserver-cert-flags|11-apiserver-cert-flags]]
 
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/README.md|Node Create 模块函数索引]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/README.md|Cluster Create — Kubernetes 集群新建源码分析]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/README|Node Create 模块函数索引]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/README|Cluster Create — Kubernetes 集群新建源码分析]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference

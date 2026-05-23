@@ -204,21 +204,21 @@ Kanister 提供应用级数据保护框架。
 
 ## 相关页面
 
-- [[entities/cncf-observability.md|cncf-observability]] — 可观测性
-- [[entities/cncf-security.md|cncf-security]] — 安全与合规
-- [[entities/cncf-networking.md|cncf-networking]] — 网络与服务网格
-- [[concepts/block-file-object-storage.md|block-file-object-storage]] — 存储类型概念
+- [[entities/cncf-observability|cncf-observability]] — 可观测性
+- [[entities/cncf-security|cncf-security]] — 安全与合规
+- [[entities/cncf-networking|cncf-networking]] — 网络与服务网格
+- [[concepts/block-file-object-storage|block-file-object-storage]] — 存储类型概念
 
 ## Related
 
 - [[docker]] — Docker
 - [[containerd]] — containerd
-- [[entities/trivy.md|trivy]] — Trivy
+- [[entities/trivy|trivy]] — Trivy
 - [[harbor]] — Harbor
 - [[piraeus-datastore]] — Piraeus Datastore
 
-- [[entities/kanister.md|Kanister]]
-- [[entities/oxia.md|Oxia]]
-- [[entities/opengemini.md|openGemini]]
-- [[entities/schemahero.md|SchemaHero]]
-- [[entities/vineyard.md|Vineyard]]
+- [[entities/kanister|Kanister]]
+- [[entities/oxia|Oxia]]
+- [[entities/opengemini|openGemini]]
+- [[entities/schemahero|SchemaHero]]
+- [[entities/vineyard|Vineyard]]

@@ -128,4 +128,4 @@ graph TD
 - [[README]]
 - [[MOC]]
 
-- [[domain-07-platform-engineering/topic-code-analysis/MOC.md|topic-functions MOC]]
+- [[domain-07-platform-engineering/topic-code-analysis/MOC|topic-functions MOC]]

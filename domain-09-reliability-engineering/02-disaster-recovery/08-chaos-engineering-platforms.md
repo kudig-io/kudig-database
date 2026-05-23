@@ -65,7 +65,7 @@ created: "2026-05-23"
 
 <!-- chunk: 概述 -->## 概述
 
-混沌工程（[[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]]）是在分布式系统上进行实验的学科，目的是建立对系统抵御生产环境中失控条件能力的信心。与传统的被动式灾备不同，混沌工程主动向系统注入问题，在受控条件下发现系统的潜在弱点，从而在真实灾难发生之前修复问题。本文档深入探讨两大主流混沌工程平台——LitmusChaos（CNCF Incubating）和 Chaos Mesh（CNCF Incubating）——的部署、配置、实验设计和企业级实践，以及如何通过稳态假设（Steady State Hypothesis）和 Game Day 活动构建持续韧性验证体系。
+混沌工程（[[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering|Chaos Engineering]]）是在分布式系统上进行实验的学科，目的是建立对系统抵御生产环境中失控条件能力的信心。与传统的被动式灾备不同，混沌工程主动向系统注入问题，在受控条件下发现系统的潜在弱点，从而在真实灾难发生之前修复问题。本文档深入探讨两大主流混沌工程平台——LitmusChaos（CNCF Incubating）和 Chaos Mesh（CNCF Incubating）——的部署、配置、实验设计和企业级实践，以及如何通过稳态假设（Steady State Hypothesis）和 Game Day 活动构建持续韧性验证体系。
 
 #<!-- chunk: RPO 与 RTO 的混沌验证 -->## RPO 与 RTO 的混沌验证
 
@@ -990,7 +990,7 @@ experiment_safety_policy:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-30-disaster-recovery-business-continuity MOC
-- [[domain-09-reliability-engineering/README.md|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
+- [[domain-09-reliability-engineering/README|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
 - Domain-30 灾备与业务连续性 — 开源项目索引
 - VMware vSphere 企业级灾备与业务连续性
 - Veeam Backup & Replication 企业级备份恢复解决方案

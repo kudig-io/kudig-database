@@ -46,7 +46,7 @@ created: "2026-05-23"
 
 本页汇总了 **运维运营** 领域的 20 个 Kubernetes 术语定义与概念说明。
 
-> **相关领域**: [[references/k8s-production-operations.md|k8s-production-operations]] | [[references/k8s-structured-troubleshooting.md|k8s-structured-troubleshooting]]
+> **相关领域**: [[references/k8s-production-operations|k8s-production-operations]] | [[references/k8s-structured-troubleshooting|k8s-structured-troubleshooting]]
 
 ---
 
@@ -565,8 +565,8 @@ Kubernetes 可以配置为在节点上使用 swap（交换）内存，允许内�
 
 ## 相关页面
 
-- [[references/k8s-production-operations.md|k8s-production-operations]]
-- [[references/k8s-structured-troubleshooting.md|k8s-structured-troubleshooting]]
+- [[references/k8s-production-operations|k8s-production-operations]]
+- [[references/k8s-structured-troubleshooting|k8s-structured-troubleshooting]]
 
 ## 来源文件
 
@@ -597,4 +597,4 @@ Kubernetes 可以配置为在节点上使用 swap（交换）内存，允许内�
 - [[litmus]] — LitmusChaos
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[entities/argocd.md|argocd]] — ArgoCD
+- [[entities/argocd|argocd]] — ArgoCD

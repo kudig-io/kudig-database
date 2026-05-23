@@ -40,7 +40,7 @@ This is a _bugfix release_. Users are encouraged to upgrade for the best experie
 Additionally, this fixes five other bugs, none of which were marked critical.
 
 Our community is growing rapidly! Jump in!
-- Join the discussion in [[entities/kubernetes.md|Kubernetes]] Slack](https://slack.k8s.io/): `#helm` 
+- Join the discussion in [[entities/kubernetes|Kubernetes]] Slack](https://slack.k8s.io/): `#helm` 
 - Hang out at the Public Developer Call: Thursday, 9:30 Pacific via [Zoom](https://engineyard.zoom.us/j/366425549)
 - Test, debug, and contribute charts: [GitHub/kubernetes/charts](https://github.com/kubernetes/charts)
 

@@ -41,7 +41,7 @@ Helm v2.11.0 is a feature release. This release continues our focus on improving
 
 The community keeps growing, and we'd love to see you there!
 
-- Join the discussion in [[entities/kubernetes.md|Kubernetes]] Slack](https://slack.k8s.io/):
+- Join the discussion in [[entities/kubernetes|Kubernetes]] Slack](https://slack.k8s.io/):
   - `#helm-users` for questions and just to hang out
   - `#helm-dev` for discussing PRs, code, and bugs
   - `#charts` for discussion on the community chart repositories

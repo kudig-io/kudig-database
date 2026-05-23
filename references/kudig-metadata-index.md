@@ -52,5 +52,5 @@ created: "2026-05-23"
 
 ## Related
 
-- [[references/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]] — KUDIG Frontmatter Specification
-- [[references/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]] — KUDIG Tag Dictionary
+- [[references/KUDIG Frontmatter Spec|KUDIG Frontmatter Spec]] — KUDIG Frontmatter Specification
+- [[references/KUDIG Tag Dictionary|KUDIG Tag Dictionary]] — KUDIG Tag Dictionary

@@ -154,23 +154,23 @@ Deployment 通过 ReplicaSet 间接管理 Pod。核心关注点：
 
 ## 相关文档
 
-- [[skills/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]]
-- [[skills/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]]
-- [[skills/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]]
-- [[concepts/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]]
-- [[skills/kubelet-certificate-rotation.md|kubelet 证书轮换机制]]
-- [[concepts/node-lifecycle-management.md|节点生命周期管理]]
-- [[skills/deployment-rolling-update.md|Deployment 滚动更新策略]]
-- [[skills/deployment-canary-and-bluegreen.md|金丝雀与蓝绿发布]]
-- [[skills/deployment-workload-selection.md|工作负载控制器选型]]
+- [[skills/kubeadm-cluster-lifecycle|kubeadm 集群创建生命周期]]
+- [[skills/kubeadm-cluster-deletion|kubeadm 集群删除操作]]
+- [[skills/kubeadm-ha-cluster-setup|kubeadm 高可用集群搭建]]
+- [[concepts/kubernetes-pki-certificate-system|Kubernetes PKI 证书体系]]
+- [[skills/kubelet-certificate-rotation|kubelet 证书轮换机制]]
+- [[concepts/node-lifecycle-management|节点生命周期管理]]
+- [[skills/deployment-rolling-update|Deployment 滚动更新策略]]
+- [[skills/deployment-canary-and-bluegreen|金丝雀与蓝绿发布]]
+- [[skills/deployment-workload-selection|工作负载控制器选型]]
 
 ## Related
 
-- [[synthesis/eBPF x 运行时安全.md|eBPF x 运行时安全]]
+- [[synthesis/eBPF x 运行时安全|eBPF x 运行时安全]]
 
-- [[synthesis/声明式 API × 控制器模式.md|声明式 API × 控制器模式]]
+- [[synthesis/声明式 API × 控制器模式|声明式 API × 控制器模式]]
 
-- [[synthesis/K8s 问题分布与 MTTR 基准.md|K8s 问题分布与 MTTR 基准]]
+- [[synthesis/K8s 问题分布与 MTTR 基准|K8s 问题分布与 MTTR 基准]]
 
 - etcd x 高可用模式.md|etcd x 高可用模式]]
 
@@ -178,5 +178,5 @@ Deployment 通过 ReplicaSet 间接管理 Pod。核心关注点：
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/kubernetes-pki-certificate-system.md|kubernetes-pki-certificate-system]] — [[concepts/kubernetes-pki-certificate-system|Kubernetes PKI 证书体系]]
+- [[concepts/kubernetes-pki-certificate-system|kubernetes-pki-certificate-system]] — [[concepts/kubernetes-pki-certificate-system|Kubernetes PKI 证书体系]]
 - [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes|Nodes（节点）]]

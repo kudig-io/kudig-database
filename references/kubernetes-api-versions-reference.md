@@ -132,11 +132,11 @@ kubectl api-versions | grep networking.k8s.io/v1
 
 ## Related
 
-- [[entities/statefulset.md|statefulset]] — StatefulSet
+- [[entities/statefulset|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/eventual-consistency.md|eventual-consistency]] — Eventual Consistency in Kubernetes
-- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
-- [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
-- [[concepts/declarative-api.md|Declarative API]]
-- [[concepts/eventual-consistency.md|Eventual Consistency]]
+- [[concepts/eventual-consistency|eventual-consistency]] — Eventual Consistency in Kubernetes
+- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/kubernetes-architecture-overview|Kubernetes Architecture Overview]]
+- [[concepts/declarative-api|Declarative API]]
+- [[concepts/eventual-consistency|Eventual Consistency]]

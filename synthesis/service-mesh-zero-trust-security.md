@@ -571,7 +571,7 @@ flowchart TD
 - domain-03-networking-traffic/05-service-mesh
 - domain-05-security-compliance/02-network-security
 - domain-05-security-compliance/01-identity-access
-- [[synthesis/服务网格 x 零信任安全.md|服务网格 x 零信任安全]]
+- [[synthesis/服务网格 x 零信任安全|服务网格 x 零信任安全]]
 - Cilium eBPF × 可观测性.md|Cilium eBPF × 可观测性]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]

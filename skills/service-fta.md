@@ -58,18 +58,18 @@ created: "2026-05-23"
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 - networking.md|网络故障排查]]
 
 ## Related
 
 - [[webhook-admission-fta]] — Admission Webhook 异常 FTA 树
 - [[calico-fta]] — Calico Fta
-- [[skills/ts-gitops-devops.md|ts-gitops-devops]] — GitOps/DevOps 排查
-- [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
+- [[skills/ts-gitops-devops|ts-gitops-devops]] — GitOps/DevOps 排查
+- [[skills/Agent Orchestration Patterns|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md|Service 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta|Service 异常故障树分析]]
 - [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]

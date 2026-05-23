@@ -227,7 +227,7 @@ Phase 5: 附加组件 (addon)
 
 | 组件 | 端口 | 协议 | 方向 | 说明 |
 |------|------|------|------|------|
-| **API Server** | 6443 | TCP | Inbound | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 入口 |
+| **API Server** | 6443 | TCP | Inbound | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 入口 |
 | **etcd** | 2379-2380 | TCP | Inbound | etcd 客户端/对等通信 |
 | **kubelet** | 10250 | TCP | Inbound | Kubelet API |
 | **Scheduler** | 10259 | TCP | Inbound | 调度器度量端点 |
@@ -2283,7 +2283,7 @@ kubeadm 作为 Kubernetes 官方推荐的集群生命周期管理工具，在生
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)

@@ -62,7 +62,7 @@ created: "2026-05-23"
 3. [Wasm Shim 实现原理](#3-wasm-shim-实现原理)
 4. [安装与配置](#4-安装与配置)
 5. [RuntimeClass 配置](#5-runtimeclass-配置)
-6. [[entities/kubernetes.md|Kubernetes]] 集成](#6-kubernetes-集成)
+6. [[entities/kubernetes|Kubernetes]] 集成](#6-kubernetes-集成)
 7. [多运行时部署](#7-多运行时部署)
 8. [OCI Wasm 工件](#8-oci-wasm-工件)
 9. [性能调优](#9-性能调优)
@@ -1963,7 +1963,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native MOC
-- [[domain-15-specialized-tech/README.md|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
+- [[domain-15-specialized-tech/README|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
 - Domain-38 WebAssembly 云原生 — 开源项目索引
 - WebAssembly 云原生基础
 - SpinKube 框架实践

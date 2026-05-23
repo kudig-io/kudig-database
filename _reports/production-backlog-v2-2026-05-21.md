@@ -1,3 +1,12 @@
+---
+title: "报告标题"
+category: reports
+tags: ["reports", "visibility/public"]
+sources: ["auto-generated"]
+created: 2026-05-24
+updated: 2026-05-24
+---
+
 # KUDIG 生产环境 llm-wiki 后续待办评估 V2
 
 **评估日期**: 2026-05-21  

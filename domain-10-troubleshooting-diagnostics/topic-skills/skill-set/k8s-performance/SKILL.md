@@ -237,11 +237,11 @@ created: "2026-05-23"
 
 本Skill诊断过程中可能涉及的其他Skill：
 
-- [[video-scripts/node-notready.md]]
+- [[video-scripts/node-notready]]
 
 - k8s-autoscaling
 
-- [[skills/best-practices/scenarios/monitoring-alerting.md]]
+- [[skills/best-practices/scenarios/monitoring-alerting]]
 
 
 当本Skill的诊断步骤无法定位根因时，建议按上述顺序排查相关Skill。

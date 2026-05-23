@@ -43,8 +43,8 @@ created: "2026-05-23"
 
 ## 与其他 Domain 的关系
 
-- [[domain-02-workloads-applications/README.md|domain-02-workloads-applications]] — 工作负载选型
-- [[domain-03-networking-traffic/README.md|domain-03-networking-traffic]] — 服务网格
+- [[domain-02-workloads-applications/README|domain-02-workloads-applications]] — 工作负载选型
+- [[domain-03-networking-traffic/README|domain-03-networking-traffic]] — 服务网格
 
 ## Related
 

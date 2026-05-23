@@ -829,8 +829,8 @@ kubectl get events --field-selector reason=Evicted -A
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[skills/node-drain-and-maintenance.md|node-drain-and-maintenance]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/sql|sql]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[skills/node-drain-and-maintenance|node-drain-and-maintenance]]
+- [[entities/kubernetes|kubernetes]]

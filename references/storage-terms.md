@@ -33,7 +33,7 @@ created: "2026-05-23"
 
 本页汇总了 **存储** 领域的 17 个 Kubernetes 术语定义与概念说明。
 
-> **相关领域**: [[references/k8s-storage-ecosystem.md|k8s-storage-ecosystem]]
+> **相关领域**: [[references/k8s-storage-ecosystem|k8s-storage-ecosystem]]
 
 ---
 
@@ -199,7 +199,7 @@ Windows 节点上的存储行为与 Linux 节点存在显著差异，主要是�
 
 ## 相关页面
 
-- [[references/k8s-storage-ecosystem.md|k8s-storage-ecosystem]]
+- [[references/k8s-storage-ecosystem|k8s-storage-ecosystem]]
 
 ## 来源文件
 
@@ -223,8 +223,8 @@ Windows 节点上的存储行为与 Linux 节点存在显著差异，主要是�
 
 ## Related
 
-- [[references/configuration-terms.md|configuration-terms]] — K8s 配置管理术语参考
-- [[references/observability-terms.md|observability-terms]] — K8s 可观测性术语参考
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[references/configuration-terms|configuration-terms]] — K8s 配置管理术语参考
+- [[references/observability-terms|observability-terms]] — K8s 可观测性术语参考
+- [[entities/kubelet|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[argo]] — Argo Workflows

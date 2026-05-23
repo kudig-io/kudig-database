@@ -60,10 +60,10 @@ created: "2026-05-23"
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-08-release-change-management/topic-deployment/01-local-demo-deployment.md|01 - 本机单机 Demo 部署]] |  | deployment |  |
-| 2 | [[domain-08-release-change-management/topic-deployment/02-single-node-deployment.md|02 - 单节点部署 (Single Node All-in-One)]] |  | deployment |  |
-| 3 | [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment)]] |  | deployment |  |
-| 4 | [[domain-08-release-change-management/topic-deployment/04-production-environment-deployment.md|04 - 生产环境部署 (Production Environment Deployment)]] |  | deployment, production |  |
+| 1 | [[domain-08-release-change-management/topic-deployment/01-local-demo-deployment|01 - 本机单机 Demo 部署]] |  | deployment |  |
+| 2 | [[domain-08-release-change-management/topic-deployment/02-single-node-deployment|02 - 单节点部署 (Single Node All-in-One)]] |  | deployment |  |
+| 3 | [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment|03 - 研发环境部署 (Development Environment Deployment)]] |  | deployment |  |
+| 4 | [[domain-08-release-change-management/topic-deployment/04-production-environment-deployment|04 - 生产环境部署 (Production Environment Deployment)]] |  | deployment, production |  |
 
 ---
 

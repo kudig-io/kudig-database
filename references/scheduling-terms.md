@@ -30,7 +30,7 @@ created: "2026-05-23"
 
 本页汇总了 **调度** 领域的 16 个 Kubernetes 术语定义与概念说明。
 
-> **相关领域**: [[references/k8s-workload-management.md|k8s-workload-management]]
+> **相关领域**: [[references/k8s-workload-management|k8s-workload-management]]
 
 ---
 
@@ -189,7 +189,7 @@ kube-scheduler 是 Kubernetes 的默认调度器，负责将 Pod 放置到集群
 
 ## 相关页面
 
-- [[references/k8s-workload-management.md|k8s-workload-management]]
+- [[references/k8s-workload-management|k8s-workload-management]]
 
 ## 来源文件
 
@@ -212,8 +212,8 @@ kube-scheduler 是 Kubernetes 的默认调度器，负责将 Pod 放置到集群
 
 ## Related
 
-- [[references/observability-terms.md|observability-terms]] — K8s 可观测性术语参考
-- [[references/storage-terms.md|storage-terms]] — K8s 存储术语参考
-- [[entities/kube-scheduler.md|kube-scheduler]] — kube-scheduler
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[references/observability-terms|observability-terms]] — K8s 可观测性术语参考
+- [[references/storage-terms|storage-terms]] — K8s 存储术语参考
+- [[entities/kube-scheduler|kube-scheduler]] — kube-scheduler
+- [[entities/kubelet|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

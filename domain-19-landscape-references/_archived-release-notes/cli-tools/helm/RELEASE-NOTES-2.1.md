@@ -39,7 +39,7 @@ We know we said 2.1.2 would be the last release of the year, but we just couldn'
 The Helm Core Team would like to wish you all a happy holidays. Our team is made up of many people from several organizations, but for the holiday season we are going to collectively take a holiday to spend time with our friends, loved ones, and other pet GitHub projects. 🎉 
 
 We will resume our regular meetings the first week of January. Slack, as always, is open for ongoing conversation, though core contributors will be offline from December 23 to January 3. We look forward in seeing you all again in 2017!
-- Join the discussion in [[entities/kubernetes.md|Kubernetes]] Slack](https://slack.k8s.io/): `#helm` 
+- Join the discussion in [[entities/kubernetes|Kubernetes]] Slack](https://slack.k8s.io/): `#helm` 
 - Hang out at the Public Developer Call: Thursday, 9:30 Pacific via [Zoom](https://engineyard.zoom.us/j/366425549)
 - Test, debug, and contribute charts: [GitHub/kubernetes/charts](https://github.com/kubernetes/charts)
 

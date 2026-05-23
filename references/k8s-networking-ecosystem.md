@@ -80,10 +80,10 @@ Gateway API 是 Ingress 的下一代替代方案：
 
 ## Related
 
-- [[synthesis/IaC x 多集群管理.md|IaC x 多集群管理]] — 基础设施即代码 x 多集群管理
-- [[references/k8s-networking-domain-guide.md|k8s-networking-domain-guide]] — Kubernetes Networking Domain Guide
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[synthesis/IaC x 多集群管理|IaC x 多集群管理]] — 基础设施即代码 x 多集群管理
+- [[references/k8s-networking-domain-guide|k8s-networking-domain-guide]] — Kubernetes Networking Domain Guide
+- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
 - [[cilium]] — Cilium
 - [[cni]] — CNI (Container Network Interface)
 
-- [[synthesis/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
+- [[synthesis/CNI 插件 × NetworkPolicy|CNI 插件 × NetworkPolicy]]

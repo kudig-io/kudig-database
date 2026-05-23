@@ -84,7 +84,7 @@ created: "2026-05-23"
 ## Obsidian 相关文档
 
 - domain-37-edge-computing MOC
-- [[domain-15-specialized-tech/README.md|Domain 37: 边缘计算 (Edge Computing)]]
+- [[domain-15-specialized-tech/README|Domain 37: 边缘计算 (Edge Computing)]]
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
 - KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)

@@ -2142,7 +2142,7 @@ reference_architecture:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-37-edge-computing MOC
-- [[domain-15-specialized-tech/README.md|Domain 37: 边缘计算 (Edge Computing)]]
+- [[domain-15-specialized-tech/README|Domain 37: 边缘计算 (Edge Computing)]]
 - Domain-37 边缘计算 — 开源项目索引
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)

@@ -163,9 +163,9 @@ OPA/Gatekeeper                  # 通用策略引擎
 
 ## See Also
 
-- [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-7.md|MOC-from-domain-05-security-compliance]]
-- [[domain-05-security-compliance/98-merged-indexes/README-from-domain-25.md|README-from-domain-05-security-compliance]]
-- [[domain-05-security-compliance/98-merged-indexes/README-from-domain-7.md|README-from-domain-05-security-compliance]]
-- [[domain-05-security-compliance/01-identity-access/01-authentication-authorization-system.md|01-authentication-authorization-system]]
+- [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-7|MOC-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/README-from-domain-25|README-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/README-from-domain-7|README-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/01-identity-access/01-authentication-authorization-system|01-authentication-authorization-system]]
 
-- [[domain-05-security-compliance/README.md|返回目录]]
+- [[domain-05-security-compliance/README|返回目录]]

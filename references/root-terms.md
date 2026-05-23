@@ -108,8 +108,8 @@ created: "2026-05-23"
 
 ## Related
 
-- [[entities/container-runtime.md|container-runtime]] — Container Runtime
+- [[entities/container-runtime|container-runtime]] — Container Runtime
 - [[kserve]] — KServe
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[concepts/resource-management|resource-management]] — Resource Management (Requests, Limits, QoS)

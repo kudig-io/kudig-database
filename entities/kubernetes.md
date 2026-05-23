@@ -61,7 +61,7 @@ description: '## 项目概述'
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -79,20 +79,20 @@ description: '## 项目概述'
 ## 参考链接
 
 - [[etcd]]
-- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/prometheus-grafana|prometheus-grafana]]
 - [[istio]]
 - [[containerd]]
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd|argocd]]
 
 ## Related
 
-- [[entities/cncf-orchestration.md|cncf-orchestration]] — CNCF 编排与应用管理项目全景
+- [[entities/cncf-orchestration|cncf-orchestration]] — CNCF 编排与应用管理项目全景
 - [[prometheus]] — Prometheus
 - [[interlink]] — InterLink
-- [[entities/kubernetes-changelog.md|kubernetes-changelog]] — Kubernetes 变更日志索引
+- [[entities/kubernetes-changelog|kubernetes-changelog]] — Kubernetes 变更日志索引
 - [[etcd]] — etcd
 
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
+- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd|06-java-cicd-tekton-argocd]]
 - ovn-kubernetes
 - 99-spring-cloud-kubernetes-service-mesh-guide
 - 08-kubernetes-network-policies-security-micro-segmentation
@@ -125,7 +125,7 @@ description: '## 项目概述'
 - 99-kubernetes-v1.33-platform-ops-guide
 - 99-kubernetes-deployment-patterns-architecture
 - 99-kubernetes-multi-tenant-architecture
-- [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
+- [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint|99-kubernetes-production-architecture-blueprint]]
 - 13-kubernetes-cost-governance
 - 99-kubernetes-v1.33-workloads-guide
 - 99-spring-boot-kubernetes-guide
@@ -137,7 +137,7 @@ description: '## 项目概述'
 - 03-image-pull-events
 - 15-ecosystem-addon-events
 - 08-statefulset-daemonset-events
-- [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
+- [[domain-17-system-foundation/README|Domain-33: Kubernetes Events 全域事件大全]]
 - 02-pod-container-lifecycle-events
 - 00-open-source-projects-index
 - 04-probe-health-check-events
@@ -173,16 +173,16 @@ description: '## 项目概述'
 - 99-java-security-kubernetes-guide
 - 05-ibm-cloud-kubernetes-service-enterprise
 - 02-kubernetes-gateway-api-deep-dive
-- [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
-- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
-- [[domain-02-workloads-applications/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
-- [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
-- [[domain-02-workloads-applications/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
-- [[domain-02-workloads-applications/README.md|Java on Kubernetes 综合实践指南]]
+- [[domain-02-workloads-applications/05-quarkus-native-kubernetes|05-quarkus-native-kubernetes]]
+- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production|02-spring-boot-kubernetes-production]]
+- [[domain-02-workloads-applications/07-java-observability-kubernetes|07-java-observability-kubernetes]]
+- [[domain-02-workloads-applications/03-jvm-gc-container-tuning|03-jvm-gc-container-tuning]]
+- [[domain-02-workloads-applications/04-java-operator-sdk-development|04-java-operator-sdk-development]]
+- [[domain-02-workloads-applications/README|Java on Kubernetes 综合实践指南]]
 - domain-java-kubernetes MOC
 - 16-kubernetes-hardware-troubleshooting
-- [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis-v2.md|kubernetes-fta-full-analysis-v2]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis-v2|kubernetes-fta-full-analysis-v2]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis|kubernetes-fta-full-analysis]]
 - vscode-kubernetes-tools
 - [[journal/digest-2026-05-21-full|Wiki 全量知识库摘要 — 2026-05-21]] — Cross-reference
 - [[_reports/WIKI-LINT-REPORT-2026-05-21|Wiki Lint Report — 2026-05-21]] — Cross-reference

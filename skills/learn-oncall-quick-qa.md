@@ -1197,7 +1197,7 @@ kubectl rollout restart deployment/coredns -n kube-system
 ## Related
 
 - [[coredns]] — CoreDNS
-- [[entities/vault.md|vault]] — HashiCorp Vault
+- [[entities/vault|vault]] — HashiCorp Vault
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

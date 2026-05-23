@@ -77,17 +77,17 @@ Distilled from domain-01-cluster-fundamentals (25 documents, Kubernetes v1.29-v1
 
 ## Related
 
-- [[concepts/observability-pillars.md|observability-pillars]] — 01-observability-architecture-overview Pillars
-- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/observability-pillars|observability-pillars]] — 01-observability-architecture-overview Pillars
+- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
 - [[pod-lifecycle]] — Pod Lifecycle
-- [[concepts/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
-- [[concepts/security-defense-depth.md|security-defense-depth]] — Defense-in-Depth Security
-- [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
-- [[concepts/high-availability-patterns.md|High Availability Patterns]]
-- [[concepts/security-defense-depth.md|Defense-in-Depth Security]]
-- [[concepts/observability-pillars.md|Observability Pillars]]
-- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
-- [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
+- [[concepts/high-availability-patterns|high-availability-patterns]] — High Availability Patterns
+- [[concepts/security-defense-depth|security-defense-depth]] — Defense-in-Depth Security
+- [[concepts/kubernetes-architecture-overview|Kubernetes Architecture Overview]]
+- [[concepts/high-availability-patterns|High Availability Patterns]]
+- [[concepts/security-defense-depth|Defense-in-Depth Security]]
+- [[concepts/observability-pillars|Observability Pillars]]
+- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]]
+- [[concepts/Kubernetes Core Concepts|Kubernetes Core Concepts]]
 
 - 01-plane-architecture-overview
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/01-pki-architecture.md|01-pki-architecture]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/01-pki-architecture|01-pki-architecture]]

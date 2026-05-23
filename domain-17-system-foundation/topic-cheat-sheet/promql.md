@@ -56,7 +56,7 @@ created: "2026-05-23"
 - [聚合操作](#聚合操作)
 - [函数大全](#函数大全)
 - [常用查询模式](#常用查询模式)
-- [[entities/kubernetes.md|Kubernetes]] 监控](#kubernetes-监控)
+- [[entities/kubernetes|Kubernetes]] 监控](#kubernetes-监控)
 - [告警规则模板](#告警规则模板)
 
 ---

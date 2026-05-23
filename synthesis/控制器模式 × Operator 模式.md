@@ -157,9 +157,9 @@ Operator 自身也需要升级，而升级过程必须保证：
 - [[kyverno]] — Kyverno
 - [[cert-manager]] — cert-manager
 - [[prometheus]] — Prometheus
-- [[concepts/controller-pattern.md|controller-pattern]]
+- [[concepts/controller-pattern|controller-pattern]]
 - [[operator-pattern]]
-- [[entities/crd-custom-resources.md|crd-custom-resources]]
-- [[concepts/declarative-api.md|declarative-api]]
-- [[synthesis/声明式 API × 控制器模式.md|声明式 API × 控制器模式]]
+- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[concepts/declarative-api|declarative-api]]
+- [[synthesis/声明式 API × 控制器模式|声明式 API × 控制器模式]]
 - [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]

@@ -113,9 +113,9 @@ sysctl --system
 
 - [[containerd]] — containerd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/tcp-udp-protocol-stack.md|tcp-udp-protocol-stack]] — TCP/UDP Protocol Stack
-- [[concepts/block-file-object-storage.md|block-file-object-storage]] — Block, File, and Object Storage
-- [[concepts/linux-container-foundation.md|linux-container-foundation]] — Linux Container Foundation
-- [[concepts/linux-container-foundation.md|Linux Container Foundation]]
-- [[concepts/tcp-udp-protocol-stack.md|TCP/UDP Protocol Stack]]
-- [[concepts/block-file-object-storage.md|Block, File, and Object Storage]]
+- [[concepts/tcp-udp-protocol-stack|tcp-udp-protocol-stack]] — TCP/UDP Protocol Stack
+- [[concepts/block-file-object-storage|block-file-object-storage]] — Block, File, and Object Storage
+- [[concepts/linux-container-foundation|linux-container-foundation]] — Linux Container Foundation
+- [[concepts/linux-container-foundation|Linux Container Foundation]]
+- [[concepts/tcp-udp-protocol-stack|TCP/UDP Protocol Stack]]
+- [[concepts/block-file-object-storage|Block, File, and Object Storage]]

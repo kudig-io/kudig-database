@@ -245,7 +245,7 @@ Kubernetes 第一个正式生产版本，确立了核心 API 对象模型：
 
 1. **跳版本升级**：Kubernetes 支持相邻小版本升级（如 v1.28 -> v1.29），不支持跨多版本直接升级
 2. **API 迁移**：升级前使用 `kubectl api-resources` 检查已弃用的 API
-3. **组件兼容**：确保 etcd、coredns、kube-proxy 等核心组件版本与 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]] 版本兼容
+3. **组件兼容**：确保 etcd、coredns、kube-proxy 等核心组件版本与 [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]] 版本兼容
 
 ## 来源文档
 
@@ -256,11 +256,11 @@ Kubernetes 第一个正式生产版本，确立了核心 API 对象模型：
 
 ## Related
 
-- [[entities/statefulset.md|statefulset]] — StatefulSet
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[entities/statefulset|statefulset]] — StatefulSet
+- [[entities/kubelet|kubelet]] — kubelet
 - [[coredns]] — CoreDNS
 - [[etcd]] — etcd
 - [[kubernetes]] — [[kubernetes|Kubernetes (CNCF Graduated)]]
 
-- [[CHANGELOG.md|CHANGELOG]]
-- [[entities/networkpolicy.md|networkpolicy]]
+- [[CHANGELOG|CHANGELOG]]
+- [[entities/networkpolicy|networkpolicy]]
