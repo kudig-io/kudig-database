@@ -56,7 +56,7 @@ description: '## 项目概述'
 
 - [[istio]]
 - [[entities/vault|[[HashiCorp Vault|vault]]]]
-- [[entities/csi-drivers|csi-drivers]]
+- [[entities/[[csi-drivers]]|csi-drivers]]
 - [[concepts/security-defense-depth|security-defense-depth]]
 
 ## Related

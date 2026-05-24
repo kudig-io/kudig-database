@@ -51,7 +51,7 @@ created: "2026-05-23"
 
 - [[domain-17-system-foundation/topic-dictionary/scheduling/kubernetes-scheduler|Kubernetes Scheduler]] 深度解析 (Kube-Scheduler Deep Dive)]]
 - 调度器配置与优化
-- 动态资源分配 ([[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation]]
+- 动态资源分配 ([[domain-17-system-foundation/topic-dictionary/scheduling/[[dynamic-resource-allocation]]]]
 - HPA/VPA 自动伸缩配置
 - 集群容量规划
 - 资源管理表
@@ -125,13 +125,13 @@ created: "2026-05-23"
 - [[domain-17-system-foundation/topic-dictionary/scheduling/pod-topology-spread-constraints|Pod Topology Spread Constraints]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/scheduling-framework|Scheduling Framework]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/scheduler-performance-tuning|Scheduler Performance Tuning]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/gang-scheduling|Gang Scheduling]]
+- [[domain-17-system-foundation/topic-dictionary/scheduling/[[gang-scheduling]]|Gang Scheduling]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/karpenter-autoscaling|Karpenter 自动扩缩容]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/assigning-pods-to-nodes|Assigning Pods to Nodes]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/pod-scheduling-readiness|Pod Scheduling Readiness]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/resource-bin-packing|Resource Bin Packing]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/node-declared-features|Node Declared Features]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/pod-overhead|Pod Overhead]]
+- [[domain-17-system-foundation/topic-dictionary/scheduling/[[pod-overhead]]|Pod Overhead]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/node-pressure-eviction|Node-pressure Eviction]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/api-initiated-eviction|API-initiated Eviction]]
 - [[domain-17-system-foundation/topic-dictionary/platform-engineering/device-plugins|Device Plugins]]

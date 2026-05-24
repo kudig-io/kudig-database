@@ -576,3 +576,12 @@ Tier 4: 部署生态域 (5) / Tier 5: 基础参考域 (4)
 - synthesis_gaps=22
 - lifecycle_pages=1
 - 报告: reports/wiki-lint-2026-05-24.md
+
+## [2026-05-24] update | wiki-lint 全面修复执行
+- P0: taxonomy 补全 34 个高频标签
+- P0: orphan 入站链接修复（概念 stub 30 + 报告 14 + 归档 78 + 元数据 3 + cross-linker 18）= 143 links
+- P1: 碎片化标签 cross-linker（6 个标签, 18 files）
+- P1: hub 页面 summary 补全（18 个 top hub 页面）
+- P2: 创建 5 个高价值 synthesis 页面
+- P2: 模糊匹配链接规范化（4 files, 6 links）
+- 总计: 74 files changed, 143+ new wikilinks, 5 new pages

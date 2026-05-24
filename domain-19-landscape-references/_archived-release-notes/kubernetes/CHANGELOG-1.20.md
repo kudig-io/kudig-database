@@ -1455,7 +1455,7 @@ filename | sha512 hash
 ### Bug or Regression
 
 - Avoid systemd-logind loading configuration warning ([#97950](https://github.com/kubernetes/kubernetes/pull/97950), [@wzshiming](https://github.com/wzshiming)) [SIG Node]
-- Count pod overhead against an entity's ResourceQuota ([#99600](https://github.com/kubernetes/kubernetes/pull/99600), [@gjkim42](https://github.com/gjkim42)) [SIG API Machinery and Node]
+- Count [[pod-overhead]] against an entity's ResourceQuota ([#99600](https://github.com/kubernetes/kubernetes/pull/99600), [@gjkim42](https://github.com/gjkim42)) [SIG API Machinery and Node]
 - EndpointSlice controller is now less likely to emit FailedToUpdateEndpointSlices events. ([#100113](https://github.com/kubernetes/kubernetes/pull/100113), [@robscott](https://github.com/robscott)) [SIG Apps and Network]
 - EndpointSliceMirroring controller is now less likely to emit FailedToUpdateEndpointSlices events. ([#100143](https://github.com/kubernetes/kubernetes/pull/100143), [@robscott](https://github.com/robscott)) [SIG Apps and Network]
 - Ensure only one LoadBalancer rule is created when HA mode is enabled ([#99825](https://github.com/kubernetes/kubernetes/pull/99825), [@feiskyer](https://github.com/feiskyer)) [SIG Cloud Provider]
@@ -1920,7 +1920,7 @@ https://docs.k8s.io/concepts/cluster-administration/system-metrics#kube-schedule
 `kubectl alpha debug` graduates from alpha to beta in 1.20, becoming `kubectl debug`.
 `kubectl debug` provides support for common debugging workflows directly from kubectl. Troubleshooting scenarios supported in this release of `kubectl` include:
 Troubleshoot workloads that crash on startup by creating a copy of the pod that uses a different container image or command.
-Troubleshoot distroless containers by adding a new container with debugging tools, either in a new copy of the pod or using an ephemeral container. (Ephemeral containers are an alpha feature that are not enabled by default.)
+Troubleshoot distroless containers by adding a new container with debugging tools, either in a new copy of the pod or using an ephemeral container. ([[ephemeral-containers]] are an alpha feature that are not enabled by default.)
 Troubleshoot on a node by creating a container running in the host namespaces and with access to the host’s filesystem.
 Note that as a new builtin command, `kubectl debug` takes priority over any `kubectl` plugin named “debug”. You will need to rename the affected plugin.
 Invocations using `kubectl alpha debug` are now deprecated and will be removed in a subsequent release. Update your scripts to use `kubectl debug` instead of `kubectl alpha debug`!

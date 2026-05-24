@@ -159,3 +159,37 @@ New tags require discussion and addition to this file.
 - `cross-domain` — Multi-domain topics
 - `remote-consultant` — Remote advisor mode
 - `career` — Learning paths, career development
+
+## Content Tags (2026-05-24 补全)
+
+- `index` — 索引页、合并索引、导航入口
+- `core-concept` — 核心概念定义与解释
+- `incident` — 事件响应、故障处理、On-Call
+- `production` — 生产环境运维、FinOps、治理
+- `dialogue` — 对话式教学脚本、场景演练
+- `navigation` — MOC、README、导航页面
+- `k8s` — Kubernetes 通用标签（与 cluster 互换使用）
+- `reference` — 参考文档、速查表、配置模板
+- `remediation` — 修复方案、修复手册
+- `playbook` — 操作手册、标准操作流程
+- `uncategorized` — 待分类页面
+- `skill` — Agent Skill 定义、能力模块
+- `reports` — 质量报告、审计报告、修复报告
+- `remote-advisor` — 远程顾问模式内容
+- `quality` — 质量保证、测试、验证
+- `pod` — Pod 相关（调度、生命周期、调试）
+- `training` — 培训材料、课程、讲师指南
+- `best-practices` — 最佳实践、设计模式
+- `cncf` — CNCF 项目、毕业/孵化/沙箱状态
+- `gitops` — GitOps 工作流、ArgoCD、Flux
+- `monitoring` — 监控体系（Prometheus、Grafana）
+- `logging` — 日志收集与分析（Fluentd、Loki）
+- `service-mesh` — Istio、Linkerd、Envoy
+- `ingress` — Ingress Controller、Gateway API
+- `rbac` — 角色访问控制
+- `helm` — Helm Chart 管理
+- `etcd` — etcd 运维与调优
+- `containerd` — containerd 运行时
+- `argocd` — ArgoCD 持续部署
+- `prometheus` — Prometheus 监控
+- `deployment` — Deployment 策略与管理

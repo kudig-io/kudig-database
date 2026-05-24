@@ -111,5 +111,5 @@ The scenario-based cheatsheet is organized by **fault scenario** rather than res
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[entities/argocd|argocd]] — ArgoCD
 - [[references/kubectl Scenario Quick Reference|kubectl Scenario Quick Reference]]
-- [[KUDIG Man Pages Index]]
+- [[kudig-man-pages-index]]
 - [[skills/Kubernetes Diagnostic Skills Overview|Kubernetes Diagnostic Skills Overview]]

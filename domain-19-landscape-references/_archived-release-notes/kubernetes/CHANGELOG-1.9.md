@@ -1631,7 +1631,7 @@ As announced with the release of version 1.8, the Kubernetes Workloads API is at
 
 #### **Pod API**
 
-*   A single value in metadata.annotations/metadata.labels can now be passed into the containers via the Downward API. ([#55902](https://github.com/kubernetes/kubernetes/pull/55902),[ @yguo0905](https://github.com/yguo0905))
+*   A single value in metadata.annotations/metadata.labels can now be passed into the containers via the [[downward-api]]. ([#55902](https://github.com/kubernetes/kubernetes/pull/55902),[ @yguo0905](https://github.com/yguo0905))
 *   Pods will no longer briefly transition to a "Pending" state during the deletion process. ([#54593](https://github.com/kubernetes/kubernetes/pull/54593),[ @dashpole](https://github.com/dashpole))
 *   Added pod-level local ephemeral storage metric to the Summary API. Pod-level ephemeral storage reports the total filesystem usage for the containers and emptyDir volumes in the measured Pod. ([#55447](https://github.com/kubernetes/kubernetes/pull/55447),[ @jingxu97](https://github.com/jingxu97))
 

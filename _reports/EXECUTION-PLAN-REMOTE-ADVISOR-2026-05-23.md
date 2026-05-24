@@ -37,3 +37,8 @@ updated: "2026-05-23"
 - 每个 Skill 有信息收集清单
 - 每个核心命令有替代方案
 - QA Action 覆盖率 ≥80%
+
+
+## 参见
+
+- [[DIALOGUE]] — dialogue 领域核心页面

@@ -318,3 +318,8 @@ kubectl rollout status deployment/<name> -n <namespace>
 - Skill 版本: SKILL-DEPLOY-001 v1.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+
+
+## 参见
+
+- [[remediation-playbook]] — remediation 领域核心页面

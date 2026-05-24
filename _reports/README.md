@@ -152,3 +152,17 @@ reports/
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
 - [[_reports/LESSONS-LEARNED-2026-05-21|LESSONS-LEARNED-2026-05-21]]
+
+
+## 历史报告
+
+- [[_reports/STATS|STATS]]
+- [[_reports/EVALUATION-2026-05-19|EVALUATION-2026-05-19]]
+- [[_reports/ROUND4-PROGRESS-2026-05-19|ROUND4-PROGRESS-2026-05-19]]
+- [[_reports/CONTENT-DEEP-EVALUATION-2026-05-19|CONTENT-DEEP-EVALUATION]]
+- [[_reports/EXTRACT-TROUBLESHOOTING|EXTRACT-TROUBLESHOOTING]]
+- [[_reports/QUALITY-BLIND-SPOT-SCAN-2026-05-19|QUALITY-BLIND-SPOT-SCAN]]
+- [[_reports/CONTENT-GAP-ANALYSIS|CONTENT-GAP-ANALYSIS]]
+- [[_reports/FIX-SUMMARY-2026-05-19|FIX-SUMMARY]]
+- [[_reports/DEEP-RESEARCH-ASSESSMENT|DEEP-RESEARCH-ASSESSMENT]]
+- [[_reports/FULL-FIX-PROGRESS-2026-05-19|FULL-FIX-PROGRESS]]

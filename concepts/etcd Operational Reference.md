@@ -156,7 +156,7 @@ etcdctl snapshot restore /path/to/backup.db --data-dir=/var/lib/etcd
 - [[synthesis/Kubernetes Fault Distribution and MTTR|Kubernetes Fault Distribution and MTTR]]
 - [[skills/backup-restore-etcd|Backup and Restore etcd]]
 - [[skills/Kubernetes FTA Top Events Index|Kubernetes FTA Top Events Index]]
-- [[KUDIG Man Pages Index]]
+- [[kudig-man-pages-index]]
 
 - RELEASE-NOTES-0.2
 - [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.5|RELEASE-NOTES-3.5]]

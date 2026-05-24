@@ -240,3 +240,8 @@ af4cec65  feat: KUDIG知识缺口全面修复（17 files）
 > 报告生成时间: 2026-05-24
 > 最后更新: 2026-05-24（路径前缀修复 + insights 修正）
 > 生成方式: 自动化统计 + 人工确认
+
+
+## 参见
+
+- [[kubernetes]] — visibility/public 领域核心页面

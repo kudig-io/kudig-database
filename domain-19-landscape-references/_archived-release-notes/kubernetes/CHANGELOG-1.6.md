@@ -1464,7 +1464,7 @@ Features for this release were tracked via the use of the [kubernetes/features](
 * **[stable]** Volume plugin for Portworx added capability to use [Portworx](http://www.portworx.com) as a storage provider for Kubernetes clusters. Portworx pools server capacity and turns servers or cloud instances into converged, highly available compute and storage nodes.
 * **[stable]** Add support to use NFSv3, NFSv4, and GlusterFS on GCE/GKE GCI image based clusters.
 * **[beta]** Added support for mount options in persistent volumes.
-* **[alpha]** All in one volume proposal - a new volume driver capable of projecting secrets, configmaps, and downward API items into the same directory.
+* **[alpha]** All in one volume proposal - a new volume driver capable of projecting secrets, configmaps, and [[downward-api]] items into the same directory.
 
 ## Deprecations
 * Remove extensions/v1beta1 Jobs resource, and job/v1beta1 generator. ([#38614](https://github.com/kubernetes/kubernetes/pull/38614), [@soltysh](https://github.com/soltysh))

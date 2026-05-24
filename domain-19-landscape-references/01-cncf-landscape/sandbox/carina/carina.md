@@ -61,7 +61,7 @@ Carina 是一个 Kubernetes 本地存储供应器，基于 LVM（Logical Volume 
 - [[concepts/storage-model|storage-model]]
 - [[pod-lifecycle]]
 - [[entities/kube-scheduler|kube-scheduler]]
-- [[entities/csi-drivers|csi-drivers]]
+- [[entities/[[csi-drivers]]|csi-drivers]]
 
 ## Related
 

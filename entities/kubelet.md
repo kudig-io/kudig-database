@@ -1,4 +1,5 @@
 ---
+summary: "kubelet runs on every worker node and is responsible for:"
 title: kubelet
 description: kubelet — Kubernetes 生产运维知识库
 category: entities

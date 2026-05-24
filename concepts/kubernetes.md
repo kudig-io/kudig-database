@@ -1,4 +1,5 @@
 ---
+summary: "Kubernetes 是一个开源的容器编排平台，用于自动化容器化应用的部署、扩展和管理。"
 title: "Kubernetes"
 category: concepts
 tags: ['core-concept', 'k8s', 'visibility/public']

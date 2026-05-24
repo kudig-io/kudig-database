@@ -293,3 +293,8 @@ kubectl run test-cp --image=nginx --rm -i --restart=Never -- /bin/true
 - Skill 版本: SKILL-CTRL-001 v1.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+
+
+## 参见
+
+- [[remediation-playbook]] — remediation 领域核心页面

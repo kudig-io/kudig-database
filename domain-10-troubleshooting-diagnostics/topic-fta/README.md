@@ -203,3 +203,22 @@ Agent 工程师:  第8-13章 → 第14章
 - [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+
+
+## 历史归档版本
+
+- [[_archives/troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution|01-fta-origin-and-evolution]]
+- [[_archives/troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations|02-fta-mathematical-foundations]]
+- [[_archives/troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards|03-fta-symbol-system-and-standards]]
+- [[_archives/troubleshooting-diagnostics/topic-fta/04-fta-core-principles|04-fta-core-principles]]
+- [[_archives/troubleshooting-diagnostics/topic-fta/05-fta-construction-process|05-fta-construction-process]]
+- [[_archives/troubleshooting-diagnostics/topic-fta/06-fta-verification-and-quality|06-fta-verification-and-quality]]
+- [[_archives/troubleshooting-diagnostics/topic-fta/07-fta-maintenance-and-evolution|07-fta-maintenance-and-evolution]]
+- [[_archives/troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution|08-ai-agent-ops-revolution]]
+- [[_archives/troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton|09-fta-as-agent-knowledge-skeleton]]
+- [[_archives/troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns|10-agent-orchestration-patterns]]
+- [[_archives/troubleshooting-diagnostics/topic-fta/11-fta-driven-runbook-automation|11-fta-driven-runbook-automation]]
+- [[_archives/troubleshooting-diagnostics/topic-fta/12-fta-aiops-integration|12-fta-aiops-integration]]
+- [[_archives/troubleshooting-diagnostics/topic-fta/13-intelligent-ticket-processing|13-intelligent-ticket-processing]]
+- [[_archives/troubleshooting-diagnostics/topic-fta/14-fta-system-engineering|14-fta-system-engineering]]
+- [[_archives/troubleshooting-diagnostics/topic-fta/15-fta-quality-assessment|15-fta-quality-assessment]]

@@ -64,7 +64,7 @@ status: reviewed
 报告声称 0 broken links，实际扫描发现 858 个未解析的 wikilink 目标。分三类：
 
 #### 类 A：Obsidian 模糊匹配可解析（非真正 broken）
-- 空格↔连字符：`[[Aeraki Mesh]]` → `aeraki-mesh.md`
+- 空格↔连字符：`[[aeraki-mesh]]` → `aeraki-mesh.md`
 - 大小写差异：Obsidian 不区分大小写
 - **数量**: ~218 个简单 basename 链接（大部分属于此类）
 - **结论**: 在 Obsidian 中可正常导航，不是真正 broken

@@ -221,3 +221,8 @@ kubectl exec <pod> -n <namespace> -- env | grep <ENV_NAME>
 - Skill 版本: SKILL-CFG-001 v1.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+
+
+## 参见
+
+- [[remediation-playbook]] — reference 领域核心页面

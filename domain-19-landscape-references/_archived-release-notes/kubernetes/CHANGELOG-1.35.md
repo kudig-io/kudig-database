@@ -615,7 +615,7 @@ name | architectures
 - Introduced a new declarative validation tag `+k8s:customUnique` to control listmap uniqueness. ([#134279](https://github.com/kubernetes/kubernetes/pull/134279), [@yongruilin](https://github.com/yongruilin)) [SIG API Machinery and Auth]
 - Introduced a structured and versioned `v1alpha1` response for the `statusz` endpoint. ([#134313](https://github.com/kubernetes/kubernetes/pull/134313), [@richabanker](https://github.com/richabanker)) [SIG API Machinery, Architecture, Instrumentation, Network, Node, Scheduling and Testing]
 - Introduced a structured and versioned `v1alpha1` response format for the `flagz` endpoint. ([#134995](https://github.com/kubernetes/kubernetes/pull/134995), [@yongruilin](https://github.com/yongruilin)) [SIG API Machinery, Architecture, Instrumentation, Network, Node, Scheduling and Testing]
-- Introduced the GangScheduling kube-scheduler plugin to support "all-or-nothing" scheduling using the `scheduling.k8s.io/v1alpha1` Workload API. ([#134722](https://github.com/kubernetes/kubernetes/pull/134722), [@macsko](https://github.com/macsko)) [SIG API Machinery, Apps, Auth, CLI, Etcd, Scheduling and Testing]
+- Introduced the GangScheduling kube-scheduler plugin to support "all-or-nothing" scheduling using the `scheduling.k8s.io/v1alpha1` [[workload-api]]. ([#134722](https://github.com/kubernetes/kubernetes/pull/134722), [@macsko](https://github.com/macsko)) [SIG API Machinery, Apps, Auth, CLI, Etcd, Scheduling and Testing]
 - Introduced the Node Declared Features capability (alpha), which includes:
   - A new `Node.Status.DeclaredFeatures` field for publishing node-specific features.
   - A `component-helpers` library for feature registration and inference.

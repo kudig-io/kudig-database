@@ -182,3 +182,8 @@ domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-d
 *报告生成时间: 2026-05-23*
 *执行方式: 4 个并行子代理 + 主代理批量操作*
 *总执行时间: ~2 小时*
+
+
+## 参见
+
+- [[DIALOGUE]] — dialogue 领域核心页面

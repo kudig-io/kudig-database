@@ -15,3 +15,10 @@ status: reviewed
 - [[_meta/dashboard|dashboard]]
 - [[_meta/schema|schema]]
 - [[_meta/taxonomy|taxonomy]]
+
+
+## 元数据文件
+
+- [[_meta/metadata/knowledge-map|knowledge-map]]
+- [[_meta/metadata/tags-index|tags-index]]
+- [[_meta/metadata/difficulty-index|difficulty-index]]

@@ -129,5 +129,5 @@ created: "2026-05-23"
 - [[domain-17-system-foundation/topic-dictionary/workloads/pods|Pods]]
 - [[domain-17-system-foundation/topic-dictionary/workloads/pod-lifecycle|Pod Lifecycle]]
 - [[domain-17-system-foundation/topic-dictionary/workloads/managing-workloads|Managing Workloads]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/sidecar-containers|Sidecar Containers]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/[[sidecar-containers]]|Sidecar Containers]]
 - [[domain-17-system-foundation/topic-dictionary/workloads/vertical-pod-autoscaling|[[Vertical Pod Autoscaling|Vertical Pod Autoscaling]]]]

@@ -1,4 +1,5 @@
 ---
+summary: "Kubernetes follows a layered architecture with seven distinct layers:"
 title: Kubernetes Architecture Overview
 description: '- Kubernetes 架构全景图'
 category: concepts

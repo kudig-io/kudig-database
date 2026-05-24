@@ -1,4 +1,5 @@
 ---
+summary: "本 Domain 整合了原三个分散的安全相关 Domain："
 title: Security & Compliance
 description: '# Domain 05 — Security & Compliance（安全与合规）'
 category: domain

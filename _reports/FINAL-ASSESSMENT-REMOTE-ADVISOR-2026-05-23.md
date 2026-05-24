@@ -172,3 +172,8 @@ kubectl get, kubectl describe, kubectl logs, kubectl exec, kubectl rollout, ssh,
 | 深度评估（远程顾问） | `_reports/DEEP-ASSESSMENT-REMOTE-ADVISOR-2026-05-23.md` |
 | 改进后评估 | `_reports/DEEP-ASSESSMENT-POST-EXECUTION-2026-05-23.md` |
 | **最终满分报告** | `_reports/FINAL-ASSESSMENT-REMOTE-ADVISOR-2026-05-23.md` |
+
+
+## 参见
+
+- [[kubernetes]] — visibility/public 领域核心页面

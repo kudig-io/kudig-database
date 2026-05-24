@@ -308,7 +308,7 @@ created: "2026-05-23"
 > 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
 
     - [PodSecurityPolicy is Removed, Pod Security Admission graduates to Stable](#podsecuritypolicy-is-removed-pod-security-admission-graduates-to-stable)
-    - [Ephemeral Containers Graduate to Stable](#ephemeral-containers-graduate-to-stable)
+    - [[[ephemeral-containers]] Graduate to Stable](#ephemeral-containers-graduate-to-stable)
     - [Support for cgroups v2 Graduates to Stable](#support-for-cgroups-v2-graduates-to-stable)
     - [Windows support improved](#windows-support-improved)
     - [Moved container registry service from k8s.gcr.io to registry.k8s.io](#moved-container-registry-service-from-k8sgcrio-to-registryk8sio)

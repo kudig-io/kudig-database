@@ -38,3 +38,8 @@ kubectl patch deployment coredns -n kube-system -p '{"spec":{"template":{"spec":
 ```bash
 kubectl patch pod <pod> --type merge -p '{"spec":{"dnsPolicy":"ClusterFirst","dnsConfig":{"nameservers":["10.96.0.10"],"searches":["default.svc.cluster.local","svc.cluster.local","cluster.local"]}}}'
 ```
+
+
+## 参见
+
+- [[remediation-playbook]] — remediation 领域核心页面

@@ -100,7 +100,7 @@ created: "2026-05-23"
 | 32 | [[domain-02-workloads-applications/topic-functions/cluster-create/15-upgrade-advanced|集群升级进阶: 滚动升级与回滚策略]] |  | reference, upgrade |  |
 | 33 | [[domain-02-workloads-applications/topic-functions/cluster-create/16-security|安全机制: ServiceAccount Token 与 Audit]] |  | reference, security |  |
 | 34 | [[domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases|init 阶段详解: mark-control-plane 与 upload-config]] |  | reference |  |
-| 35 | [[domain-02-workloads-applications/topic-functions/cluster-create/18-cri-runtime|CRI 运行时管理 (Container Runtime Interface)]] |  | reference |  |
+| 35 | [[domain-02-workloads-applications/topic-functions/cluster-create/18-cri-runtime|CRI 运行时管理 ([[container-runtime]] Interface)]] |  | reference |  |
 | 36 | [[domain-02-workloads-applications/topic-functions/cluster-create/19-cni-networking|CNI 网络插件与集群网络]] |  | reference, networking |  |
 | 37 | [[domain-02-workloads-applications/topic-functions/cluster-create/20-node-registration|Node 注册与 kubeadm token 详解]] |  | reference |  |
 | 38 | [[domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy|kube-proxy 与 Service 负载均衡]] |  | reference |  |

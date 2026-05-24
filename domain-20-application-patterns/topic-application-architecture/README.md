@@ -1,4 +1,5 @@
 ---
+summary: "本专题聚焦于**基于 Kubernetes 的生产级应用层架构设计**，覆盖电商、社交、金融、教育、游戏、IoT、AI 等核心行业场景。每篇文档均包含完整的 **Mermaid 架构图解**、**K8s YAML 配置示例**、**生产最佳实践**与**高可用设计**，可直接作为企业架构设计的参考蓝图。"
 title: Topic 应用层架构设计最佳实践 (domain-20-application-patterns)
 description: '# Topic: 应用层架构设计最佳实践'
 category: application-architecture

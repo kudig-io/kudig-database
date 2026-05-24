@@ -1,4 +1,5 @@
 ---
+summary: "brew install helm"
 title: Helm 速查卡
 description: Helm 3.x 包管理器快速参考, 覆盖 Chart 开发、仓库管理、发布回滚、安全审计
 category: cheatsheet

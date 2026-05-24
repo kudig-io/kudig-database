@@ -74,8 +74,8 @@ created: "2026-05-23"
 - [[domain-17-system-foundation/topic-dictionary/specialized-workloads/mlops-pipelines-and-model-registry|MLOps 流水线与模型仓库]]
 - [[domain-17-system-foundation/topic-dictionary/specialized-workloads/vector-databases-and-rag-infrastructure|向量数据库与 RAG 基础设施]]
 - [[domain-17-system-foundation/topic-dictionary/platform-engineering/device-plugins|设备插件]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation|[[Dynamic Resource Allocation|Dynamic Resource Allocation]]]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/gang-scheduling|Gang Scheduling]]
+- [[domain-17-system-foundation/topic-dictionary/scheduling/[[dynamic-resource-allocation]]|[[Dynamic Resource Allocation|Dynamic Resource Allocation]]]]
+- [[domain-17-system-foundation/topic-dictionary/scheduling/[[gang-scheduling]]|Gang Scheduling]]
 
 ## 关联文档 (K8s 集成)
 

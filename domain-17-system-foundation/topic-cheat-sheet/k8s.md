@@ -1,4 +1,5 @@
 ---
+summary: "kubectl version --short"
 title: Kubernetes 生产环境速查卡
 description: 涵盖 Kubernetes 生产环境 90% 以上常用命令，支持快速查阅和故障排查
 category: cheatsheet

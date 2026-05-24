@@ -1269,7 +1269,7 @@ filename | sha256 hash
 
 ### Other notable changes
 
-* Fix to prevent downward api change break on older versions ([#53673](https://github.com/kubernetes/kubernetes/pull/53673), [@timothysc](https://github.com/timothysc))
+* Fix to prevent [[downward-api]] change break on older versions ([#53673](https://github.com/kubernetes/kubernetes/pull/53673), [@timothysc](https://github.com/timothysc))
 * Ignore extended resources that are not registered with kubelet during container resource allocation. ([#53547](https://github.com/kubernetes/kubernetes/pull/53547), [@jiayingz](https://github.com/jiayingz))
 * GCE: Bump GLBC version to [0.9.7](https://github.com/kubernetes/ingress/releases/tag/0.9.7). ([#53625](https://github.com/kubernetes/kubernetes/pull/53625), [@nikhiljindal](https://github.com/nikhiljindal))
 * kubeadm 1.8 now properly handles upgrades from to 1.7.x to newer release in 1.7 branch ([#53338](https://github.com/kubernetes/kubernetes/pull/53338), [@kad](https://github.com/kad))
@@ -1770,7 +1770,7 @@ kind.
   rule sets. This means that we cannot use `kubectl apply` to update RBAC roles
   without risking breaking old clients, such as controllers.
 
-- `kubectl delete` no longer scales down workload API objects before deletion.
+- `kubectl delete` no longer scales down [[workload-api]] objects before deletion.
   Users who depend on ordered termination for the Pods of their StatefulSets
   must use `kubectl scale` to scale down the StatefulSet before deletion.
 
@@ -2307,7 +2307,7 @@ filename | sha256 hash
 ### Action Required
 
 * The OwnerReferencesPermissionEnforcement admission plugin now requires `update` permission on the `finalizers` subresource of the referenced owner in order to set `blockOwnerDeletion` on an owner reference. ([#49133](https://github.com/kubernetes/kubernetes/pull/49133), [@deads2k](https://github.com/deads2k))
-* The deprecated alpha and beta initContainer annotations are no longer supported. Init containers must be specified using the initContainers field in the pod spec. ([#51816](https://github.com/kubernetes/kubernetes/pull/51816), [@liggitt](https://github.com/liggitt))
+* The deprecated alpha and beta initContainer annotations are no longer supported. [[init-containers]] must be specified using the initContainers field in the pod spec. ([#51816](https://github.com/kubernetes/kubernetes/pull/51816), [@liggitt](https://github.com/liggitt))
 * Action required: validation rule on metadata.initializers.pending[x].name is tightened. The initializer name needs to contain at least three segments separated by dots. If you create objects with pending initializers, (i.e., not relying on apiserver adding pending initializers according to initializerconfiguration), you need to update the initializer name in existing objects and in configuration files to comply to the new validation rule. ([#51283](https://github.com/kubernetes/kubernetes/pull/51283), [@caesarxuchao](https://github.com/caesarxuchao))
 * Audit policy supports matching subresources and resource names, but the top level resource no longer matches the subresouce. For example "pods" no longer matches requests to the logs subresource of pods. Use "pods/logs" to match subresources. ([#48836](https://github.com/kubernetes/kubernetes/pull/48836), [@ericchiang](https://github.com/ericchiang))
 * Protobuf serialization does not distinguish between `[]` and `null`. ([#45294](https://github.com/kubernetes/kubernetes/pull/45294), [@liggitt](https://github.com/liggitt))

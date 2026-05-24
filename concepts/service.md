@@ -1,4 +1,5 @@
 ---
+summary: "Kubernetes Service 是一种抽象，定义了一组 Pod 的逻辑集合和一个访问它们的策略。"
 title: "Service"
 category: concepts
 tags: ['core-concept', 'k8s', 'networking', 'visibility/public']

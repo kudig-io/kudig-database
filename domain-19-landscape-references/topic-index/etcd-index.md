@@ -169,7 +169,7 @@ created: "2026-05-23"
 - [[domain-17-system-foundation/topic-dictionary/platform-engineering/gitops-and-continuous-delivery|GitOps 与持续交付]]
 - [[domain-17-system-foundation/topic-dictionary/platform-engineering/infrastructure-as-code-for-kubernetes|Kubernetes 基础设施即代码（IaC）]]
 - [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern|Operator 模式]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/gang-scheduling|Gang Scheduling]]
+- [[domain-17-system-foundation/topic-dictionary/scheduling/[[gang-scheduling]]|Gang Scheduling]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/kubernetes-scheduler|Kubernetes Scheduler]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/pod-topology-spread-constraints|Pod Topology Spread Constraints]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/scheduler-performance-tuning|Scheduler Performance Tuning]]

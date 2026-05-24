@@ -178,7 +178,7 @@ If taskrun fails and task results not emitted, pipelinerun fails because of task
 
 * :bug: Remove enable-api-fields validation for array index replacements (#6646)
 * :bug: Keeps Deprecated Fields in Step and StepTemplate When Switching Versions (#6623)
-* :bug: Refactor Sidecar Containers Construction If Script Exists (#6619)
+* :bug: Refactor [[sidecar-containers]] Construction If Script Exists (#6619)
 * :bug: Add Unit Tests for Array Results using [] notation (#6577)
 
 

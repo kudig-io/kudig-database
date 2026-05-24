@@ -70,7 +70,7 @@ description: '## 项目概述'
 
 - [[entities/prometheus-grafana|prometheus-grafana]]
 - [[concepts/storage-model|storage-model]]
-- [[entities/csi-drivers|csi-drivers]]
+- [[entities/[[csi-drivers]]|csi-drivers]]
 
 ## Related
 

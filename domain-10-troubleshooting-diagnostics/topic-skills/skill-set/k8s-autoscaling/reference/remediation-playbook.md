@@ -221,3 +221,8 @@ kubectl get hpa <name> -n <namespace> -w
 - Skill 版本: SKILL-AUTO-001 v1.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+
+
+## 参见
+
+- [[remediation-playbook]] — reference 领域核心页面

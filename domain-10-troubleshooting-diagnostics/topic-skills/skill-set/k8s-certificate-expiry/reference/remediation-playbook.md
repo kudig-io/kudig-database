@@ -77,3 +77,8 @@ mv /tmp/kube-apiserver.yaml /etc/kubernetes/manifests/
 cp -r /etc/kubernetes/pki.bak.20260101 /etc/kubernetes/pki
 systemctl restart kubelet
 ```
+
+
+## 参见
+
+- [[remediation-playbook]] — reference 领域核心页面

@@ -1,4 +1,5 @@
 ---
+summary: "Deployment is the primary workload controller for stateless applications. It manages ReplicaSets, which in turn manage [[Pods|Pods]]."
 title: Deployment
 description: '- [[synthesis/Pod 生命周期 × Secret 管理|Pod 生命周期 × Secret 管理]] — 综合'
 category: entities

@@ -46,7 +46,7 @@ Released 2019-10-31
 
 * falco [[gRPC|grpc]] api server implementation, contains a subscribe method to subscribe to outputs from any grpc capable language [[#822](https://github.com/falcosecurity/falco/pull/822)]
 * add support for converting k8s pod securityod security policies]] (psps) into set of falco rules that can be used to evaluate the conditions specified in the psp. [[#826](https://github.com/falcosecurity/falco/pull/826)]
-* initial redesign container images to remove build tools and leverage init containers for kernel module delivery. [[#776](https://github.com/falcosecurity/falco/pull/776)]
+* initial redesign container images to remove build tools and leverage [[init-containers]] for kernel module delivery. [[#776](https://github.com/falcosecurity/falco/pull/776)]
 * add flags to disable `syscall` event source or `k8s_audit` event source [[#779](https://github.com/falcosecurity/falco/pull/779)]
 
 ### Minor Changes

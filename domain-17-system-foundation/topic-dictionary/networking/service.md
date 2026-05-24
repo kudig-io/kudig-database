@@ -1,4 +1,5 @@
 ---
+summary: "Service 是 [[Kubernetes|Kubernetes]] 中用于将运行在一组 Pod 上的网络应用暴露给集群内外的核心抽象对象。由于 Pod 是临时的、会被动态创建和销毁的，其 IP 地址也随之变化，Service 通过稳定的虚拟 IP（ClusterIP）和 DNS 名称，解耦了前端客户端与后端 Pod 的耦合，使现有应用无需改造即可在 Kubernetes 中运行。"
 title: Service
 description: '## 概述'
 category: dictionary
