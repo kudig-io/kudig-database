@@ -44,7 +44,7 @@ created: "2026-05-23"
 
 # GitOps 生产环境速查卡
 
-> **适用版本**: [[Argo|Argo]] CD 2.10+ / [[domain-19-landscape-references/01-cncf-landscape/graduated/flux/flux|[[Flux|Flux]]]] 2.2+ | **最后更新**: 2026-05
+> **适用版本**: [[Argo|Argo]] CD 2.10+ / [[flux|[[Flux]]]] 2.2+ | **最后更新**: 2026-05
 
 ---
 

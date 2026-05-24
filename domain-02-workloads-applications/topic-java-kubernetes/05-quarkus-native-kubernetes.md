@@ -61,7 +61,7 @@ Quarkus 是 Red Hat 主导的云原生 Java 框架，核心理念是"容器优�
 | 镜像大小 | 300-500MB | 200-350MB | 40-80MB |
 | GC 暂停 P99 | 50-200ms | 20-80ms | 1-5ms |
 
-这种特性使 Quarkus 特别适合 Kubernetes 环境中的 Serverless（[[domain-19-landscape-references/01-cncf-landscape/graduated/knative/knative|[[Knative|Knative]]]]）、微服务和事件驱动架构。
+这种特性使 Quarkus 特别适合 Kubernetes 环境中的 Serverless（[[knative|[[Knative]]]]）、微服务和事件驱动架构。
 
 ### 1.2 Quarkus 架构核心理念
 

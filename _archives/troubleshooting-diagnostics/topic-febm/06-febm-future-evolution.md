@@ -1399,7 +1399,7 @@ timesketch:
   ingress:
     enabled: true
     annotations:
-      [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]].io/cluster-issuer: letsencrypt-prod
+      [[cert-manager|cert-manager]].io/cluster-issuer: letsencrypt-prod
       nginx.ingress.kubernetes.io/auth-type: oauth2
     hosts:
       - host: timesketch.forensics.company.com

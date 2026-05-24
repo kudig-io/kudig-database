@@ -208,7 +208,7 @@ created: "2026-05-23"
 | Prometheus | Prometheus | 监控系统 |
 | Grafana | Grafana | 可视化仪表盘 |
 | Alertmanager | 告警管理器 | 处理和发送告警 |
-| [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]/Fluent Bit | 日志收集器 | 收集容器日志 |
+| [[fluentd|Fluentd]]/Fluent Bit | 日志收集器 | 收集容器日志 |
 | Kubernetes Events | K8s 事件 | 集群中发生的操作记录 |
 
 ---

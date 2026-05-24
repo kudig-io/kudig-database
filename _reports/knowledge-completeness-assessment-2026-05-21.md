@@ -84,7 +84,7 @@ created: "2026-05-23"
 
 **Tier 1 缺口**:
 - ❌ **调度器框架深入** — 无 Scheduler Framework Plugins 开发指南
-- ❌ **证书管理** — [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 虽有提及，但缺少大规模证书轮换实践
+- ❌ **证书管理** — [[cert-manager|cert-manager]] 虽有提及，但缺少大规模证书轮换实践
 - ❌ **NetworkPolicy 审计** — 有策略定义，缺少策略合规审计流程
 
 ### 2.2 Tier 2 — 平台与工程域（3个）

@@ -107,7 +107,7 @@ echo -n 'my-password' | kubectl create secret generic my-secret \
   kubeseal --controller-namespace=kube-system --format yaml > my-sealed-secret.yaml
 ```
 
-### 5. [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]
+### 5. [[cert-manager|cert-manager]]
 
 **cert-manager** 是 Kubernetes 上自动化 TLS 证书管理的 CNCF 项目：
 - 自动从 Let's Encrypt、Vault PKI、AWS PCA 等 CA 申请和更新证书

@@ -181,7 +181,7 @@ kudig-man kubernetes
 ```bash
 # Linux
 sudo rm -f /usr/local/share/man/man1/kudig-*.1
-sudo rm -f /usr/local/share/man/man8/{kubernetes,prometheus,etcd,containerd,cilium,helm,argocd,istio,velero,[[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]}.8
+sudo rm -f /usr/local/share/man/man8/{kubernetes,prometheus,etcd,containerd,cilium,helm,argocd,istio,velero,[[cert-manager|cert-manager]]}.8
 sudo mandb
 
 # macOS

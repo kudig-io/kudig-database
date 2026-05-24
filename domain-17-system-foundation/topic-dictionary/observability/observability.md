@@ -78,7 +78,7 @@ kubelet 还暴露了 `/metrics/cadvisor`、`/metrics/resource` 和 `/metrics/pro
 - **系统组件日志**：
   - 运行在容器中的组件（如 kube-scheduler、kube-proxy）写入 `/var/log` 下的 `.log` 文件。
   - 不运行在容器中的组件（如 kubelet、容器运行时）在 systemd 系统上写入 `journald`，否则写入 `/var/log`。
-- **集群级日志架构**：通常在每个节点上运行日志代理（如 Fluent Bit、[[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]），将日志转发到集中式日志存储（如 Elasticsearch、Grafana Loki、OpenSearch）。
+- **集群级日志架构**：通常在每个节点上运行日志代理（如 Fluent Bit、[[fluentd|Fluentd]]），将日志转发到集中式日志存储（如 Elasticsearch、Grafana Loki、OpenSearch）。
 
 ### 链路追踪（Traces）
 

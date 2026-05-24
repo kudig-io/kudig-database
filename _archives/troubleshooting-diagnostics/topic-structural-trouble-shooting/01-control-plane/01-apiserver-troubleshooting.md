@@ -1200,7 +1200,7 @@ kubectl get pods -A
 - **自动化缺失**：依赖手动续签，人为疏忽不可避免
 - **监控盲区**：未监控证书到期时间
 - **应急准备不足**：周末值班人员未掌握证书续签流程
-- **改进方向**：自动化证书管理（[[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]）、提前 60 天告警、定期演练
+- **改进方向**：自动化证书管理（[[cert-manager|cert-manager]]）、提前 60 天告警、定期演练
 
 ---
 

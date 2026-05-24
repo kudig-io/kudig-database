@@ -302,7 +302,7 @@ FEBM 案例存档:
 匹配 TE: TE-10 ASM 服务网格问题
 
 FTA 路径遍历:
-  TE-10 → IE-10.1 数据面问题 → BE-10.1 [[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|Envoy]] 资源耗尽
+  TE-10 → IE-10.1 数据面问题 → BE-10.1 [[envoy|Envoy]] 资源耗尽
   TE-10 → IE-10.2 控制面问题 → BE-10.3 Istiod 配置推送失败
   TE-10 → IE-10.3 流量管理问题 → BE-10.5 灰度发布异常
 

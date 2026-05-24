@@ -174,7 +174,7 @@ Kubeflow 是一个复杂的 ML 平台，由多个独立组件组成：
 ├─────────────────────────────────────────────────────────────────┤
 │  共享基础设施                                                   │
 │  - MinIO/S3 (Artifact Store)  │  - MySQL (Pipeline DB)         │
-│  - Istio Ingress Gateway      │  - [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|Cert-manager]] (TLS)          │
+│  - Istio Ingress Gateway      │  - [[cert-manager|Cert-manager]] (TLS)          │
 └─────────────────────────────────────────────────────────────────┘
 ```
 

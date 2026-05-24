@@ -153,7 +153,7 @@ created: "2026-05-23"
 
 | 场景 | 推荐方案 | 指南位置 |
 |:---|:---|:---|
-| 自动 TLS (必装) | **[[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]** | domain-05-security-compliance/99-cert-manager-tls-guide.md |
+| 自动 TLS (必装) | **[[cert-manager|cert-manager]]** | domain-05-security-compliance/99-cert-manager-tls-guide.md |
 | 内部 CA | cert-manager + 自建 CA | domain-05-security-compliance/99-cert-manager-tls-guide.md |
 | 通配符证书 | cert-manager + DNS-01 | domain-05-security-compliance/99-cert-manager-tls-guide.md |
 

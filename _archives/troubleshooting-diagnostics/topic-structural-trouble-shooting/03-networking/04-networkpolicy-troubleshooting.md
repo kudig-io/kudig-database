@@ -1592,7 +1592,7 @@ echo -e "\n=== Check Complete ==="
 - [ ] **标签规范**: 检查 Pod 和 Namespace 标签是否符合命名规范
 - [ ] **DNS 放行**: 确认所有 Egress 策略都包含 DNS 放行
 - [ ] **监控集成**: 验证 Prometheus/Grafana 可以抓取所有 Pod metrics
-- [ ] **日志采集**: 验证 [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]/Fluent Bit 可以采集所有 Pod 日志
+- [ ] **日志采集**: 验证 [[fluentd|Fluentd]]/Fluent Bit 可以采集所有 Pod 日志
 - [ ] **性能基准**: 对比策略启用前后的网络延迟和吞吐量
 - [ ] **故障演练**: 模拟策略错误配置,验证告警和恢复流程
 

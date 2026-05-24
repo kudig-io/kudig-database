@@ -315,7 +315,7 @@ Exit Code 137 等于 128 加 9, 就是被 SIGKILL 信号终止。OOMKilled 表�
 
 [情绪: 自信]
 
-kudig-database 的知识覆盖了 218 个 CNCF 项目。从 Kubernetes 核心, 到 etcd、Prometheus、[[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|Envoy]]、Istio、ArgoCD, 到各种云厂商的托管服务, 都有覆盖。
+kudig-database 的知识覆盖了 218 个 CNCF 项目。从 Kubernetes 核心, 到 etcd、Prometheus、[[envoy|Envoy]]、Istio、ArgoCD, 到各种云厂商的托管服务, 都有覆盖。
 
 [停顿]
 

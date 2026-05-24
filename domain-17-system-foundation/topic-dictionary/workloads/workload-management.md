@@ -60,7 +60,7 @@ created: "2026-05-23"
 ## 使用场景
 - **Deployment**：Web 前端、API 服务、无状态微服务。
 - **StatefulSet**：数据库（MySQL、PostgreSQL、MongoDB）、消息队列（Kafka、RabbitMQ）、分布式存储（ZooKeeper、etcd）。
-- **DaemonSet**：节点监控（Prometheus Node Exporter）、日志收集（[[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]/Fluent Bit）、CNI 插件、存储驱动。
+- **DaemonSet**：节点监控（Prometheus Node Exporter）、日志收集（[[fluentd|Fluentd]]/Fluent Bit）、CNI 插件、存储驱动。
 - **Job/CronJob**：数据备份、报表生成、定时清理任务、批处理计算。
 
 ## 最佳实践/注意事项

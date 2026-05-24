@@ -278,7 +278,7 @@ data:
 
 **Ingress Controller 作用**：
 - Ingress 只是一个规则定义，需要 Ingress Controller 来实际处理请求
-- 常见的 Ingress Controller：Nginx、Traefik、[[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|Envoy]]、Cloud Load Balancer
+- 常见的 Ingress Controller：Nginx、Traefik、[[envoy|Envoy]]、Cloud Load Balancer
 - Controller 监听 Ingress 资源变化，将规则转换为具体的负载均衡配置
 
 **返回 404 的可能原因**：

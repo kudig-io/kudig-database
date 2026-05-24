@@ -48,7 +48,7 @@ prerequisites:
 > **版本说明**:
 > - Prometheus v2.45+ 支持 native histogram
 > - Prometheus Operator v0.70+ 支持 scrapeClass
-> - Fluent Bit v2.x 推荐替代 [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]
+> - Fluent Bit v2.x 推荐替代 [[fluentd|Fluentd]]
 > - Loki v2.9+ 支持 TSDB 存储
 
 ## 0. 10 分钟快速诊断

@@ -638,7 +638,7 @@ echo 'query: predict_linear(node_filesystem_avail_bytes[1h], 3600) < 0'
 - **前置检查**:
   ```bash
   ssh <node-ip> "find /var/log -type f -size +100M -exec ls -lh {} \; | head -10"
-  # 确认日志收集状态（如 [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]/Fluent Bit 是否正常运行）
+  # 确认日志收集状态（如 [[fluentd|Fluentd]]/Fluent Bit 是否正常运行）
   kubectl get pods -n logging -l app=fluentd
   ```
 - **执行命令**:

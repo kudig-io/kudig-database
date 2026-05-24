@@ -107,7 +107,7 @@ created: "2026-05-23"
 | **CubeFS** | 云原生存储 | 2019.12 | v3.5.0 | 4k+ |
 | **Dragonfly** | 镜像分发 | 2018.11 | v2.2.0 | 2k+ |
 | **Knative** |  Serverless | 2022.03 | v1.18.0 | 4k+ |
-| **[[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]** | 安全 | 2020.11 | v1.17.0 | 12k+ |
+| **[[cert-manager|cert-manager]]** | 安全 | 2020.11 | v1.17.0 | 12k+ |
 | **Kyverno** | 安全 | 2020.11 | v1.14.0 | 5k+ |
 
 ### 1.2 Incubating 项目 (40+)

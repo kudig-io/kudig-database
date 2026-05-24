@@ -345,7 +345,7 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 # JDK 17+ 统一日志框架 (JEP 158 / JEP 271)
 GC_LOG_OPTS="-Xlog:gc*=info:stdout:time,uptime,level,tags"
 
-# 生产环境推荐 — 写到 stdout 被 [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]/Filebeat 采集
+# 生产环境推荐 — 写到 stdout 被 [[fluentd|Fluentd]]/Filebeat 采集
 GC_LOG_OPTS="-Xlog:gc*:stdout:time,uptime,level,tags \
   -Xlog:gc+heap=debug:stdout:time,uptime \
   -Xlog:gc+phases=debug:stdout:time,uptime"

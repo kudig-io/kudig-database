@@ -374,7 +374,7 @@ Layer 3: 数据存储与查询层
 
 Layer 2: 数据采集与转发层
   ┌─────────────────────────────────────────────────────┐
-  │ [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]/Fluent Bit | OpenTelemetry Collector         │
+  │ [[fluentd|Fluentd]]/Fluent Bit | OpenTelemetry Collector         │
   │ (日志采集)           (统一遥测采集)                    │
   └─────────────────────────────────────────────────────┘
 

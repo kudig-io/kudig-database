@@ -119,7 +119,7 @@ argocd app sync <app> --force
 argocd repo get <repo> --details | grep webhook
 ```
 
-### 2.2 [[domain-19-landscape-references/01-cncf-landscape/graduated/flux/flux|Flux]] 多集群配置问题
+### 2.2 [[flux|Flux]] 多集群配置问题
 
 | 症状 | 诊断命令 | 根因 | 修复 |
 |------|---------|------|------|

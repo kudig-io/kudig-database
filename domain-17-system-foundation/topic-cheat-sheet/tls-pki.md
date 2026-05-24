@@ -264,7 +264,7 @@ kubeadm certs renew front-proxy-client
 kubeadm certs renew etcd-server
 ```
 
-### [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 操作
+### [[cert-manager|cert-manager]] 操作
 
 ```bash
 # 查看证书状态

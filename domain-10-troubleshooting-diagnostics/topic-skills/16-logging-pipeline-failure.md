@@ -76,7 +76,7 @@ created: "2026-05-23"
 
 ## 1. 概述
 
-日志管道问题是 [[Kubernetes|Kubernetes]] 可观测性体系中**影响最广泛**的问题类型之一。当日志采集、传输或存储环节出现问题时，会导致应用日志缺失、审计日志不完整、告警延迟甚至安全事件无法追溯。在云原生环境中，日志管道通常由采集层（[[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|[[Fluentd|Fluentd]]]]/Fluent Bit/Vector）、传输层（Kafka/直接推送）和存储层（Elasticsearch/Loki/ClickHouse）组成，任一环节的问题都可能导致日志数据丢失。
+日志管道问题是 [[Kubernetes|Kubernetes]] 可观测性体系中**影响最广泛**的问题类型之一。当日志采集、传输或存储环节出现问题时，会导致应用日志缺失、审计日志不完整、告警延迟甚至安全事件无法追溯。在云原生环境中，日志管道通常由采集层（[[fluentd|[[Fluentd]]]]/Fluent Bit/Vector）、传输层（Kafka/直接推送）和存储层（Elasticsearch/Loki/ClickHouse）组成，任一环节的问题都可能导致日志数据丢失。
 
 ### 典型触发场景
 

@@ -1413,7 +1413,7 @@ kubectl get scaledobject -A
 
 1. **GPU 工作负载伸缩**: 基于 GPU 利用率的 HPA 配置和 GPU 节点池 CA
 2. **多集群伸缩**: Cluster Federation 场景下的跨集群伸缩
-3. **Serverless 伸缩**: [[domain-19-landscape-references/01-cncf-landscape/graduated/knative/knative|Knative]] / OpenFaaS 等 Serverless 框架的伸缩机制
+3. **Serverless 伸缩**: [[knative|Knative]] / OpenFaaS 等 Serverless 框架的伸缩机制
 4. **预测性伸缩**: 基于历史数据和 ML 的预测性伸缩方案
 5. **混合云伸缩**: 跨云厂商的节点池伸缩协调
 6. **FinOps 集成**: 伸缩决策与成本优化的深度集成

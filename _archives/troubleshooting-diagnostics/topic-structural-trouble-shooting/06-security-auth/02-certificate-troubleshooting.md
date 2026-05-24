@@ -41,7 +41,7 @@ prerequisites:
 
 # Kubernetes 证书故障排查指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32, [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] v1.12+ | **最后更新**: 2026-01 | **难度**: 高级
+> **适用版本**: Kubernetes v1.25 - v1.32, [[cert-manager|cert-manager]] v1.12+ | **最后更新**: 2026-01 | **难度**: 高级
 >
 > **版本说明**:
 > - v1.25+ 移除内置 ServiceAccount 令牌自动挂载

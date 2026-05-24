@@ -53,7 +53,7 @@ Kubernetes 环境中的备份对象包括四个层次：
 | 层次 | 备份内容 | 工具示例 |
 |------|----------|----------|
 | **集群状态** | etcd 数据、所有 K8s 资源（Deployment、Service、ConfigMap、Secret 等） | etcd snapshot、Velero |
-| **应用配置** | YAML 清单、Helm Chart、Kustomize 配置、Git 仓库 | Git、[[domain-19-landscape-references/01-cncf-landscape/graduated/flux/flux|Flux]]、Argo CD |
+| **应用配置** | YAML 清单、Helm Chart、Kustomize 配置、Git 仓库 | Git、[[flux|Flux]]、Argo CD |
 | **持久化数据** | PVC 中的业务数据、数据库、对象存储 | Velero、Kasten、数据库原生备份 |
 | **镜像与 Artifact** | 容器镜像、Helm Chart 包、SBOM | Harbor、Registry replication |
 

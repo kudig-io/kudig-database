@@ -81,7 +81,7 @@ kubectl get mcphbridge -A
 # 7. 检查 WasmPlugin 配置
 kubectl get wasmplugin -A
 
-# 8. 查看 [[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|Envoy]] 配置
+# 8. 查看 [[envoy|Envoy]] 配置
 kubectl exec -it <higress-gateway-pod> -c envoy -- curl localhost:15000/config_dump
 ```
 

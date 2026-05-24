@@ -532,7 +532,7 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   - **[v1.28+]** Native Sidecar Containers 使用 `initContainers` + `restartPolicy: Always` 定义
   - 如果 sidecar 容器 CrashLoop → 可能影响主容器的网络（如 Istio sidecar）或日志收集
   - 如果非 sidecar 的 init container CrashLoop → 会阻塞主容器启动（RC-010）
-  - 检查 sidecar 依赖: 某些应用依赖 sidecar proxy（如 Istio [[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|envoy]]）才能正常通信
+  - 检查 sidecar 依赖: 某些应用依赖 sidecar proxy（如 Istio [[envoy|envoy]]）才能正常通信
 
 **Step D2.9**: 检查文件系统和权限问题
 

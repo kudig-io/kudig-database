@@ -137,7 +137,7 @@ Pod 的生命周期包含以下几个阶段（Phase）：
 
 常见的 Sidecar 场景：
 - 日志采集：主容器写日志到共享 Volume，Sidecar 读取并上传到日志系统
-- 代理/网络：[[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|Envoy]]/Istio Sidecar 拦截所有进出流量，实现服务网格功能
+- 代理/网络：[[envoy|Envoy]]/Istio Sidecar 拦截所有进出流量，实现服务网格功能
 - 配置更新：Sidecar 监听配置变化并通知主容器重新加载
 
 **Init Container** 在主容器启动前按顺序执行，每个 Init Container 必须成功完成后下一个才能启动。Init Container 的应用场景包括：等待依赖服务就绪、初始化数据库、下载配置文件、注册服务发现等。与普通容器不同，Init Container 不支持 livenessProbe/readinessProbe。

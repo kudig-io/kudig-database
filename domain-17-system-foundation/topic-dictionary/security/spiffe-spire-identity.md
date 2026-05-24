@@ -123,7 +123,7 @@ SPIFFE/SPIRE 解决的是**身份验证（Authentication）**问题：
 主流服务网格已原生支持 SPIFFE/SPIRE：
 - **Istio**：Citadel 签发的身份基于 SPIFFE 标准，可与 SPIRE 集成
 - **Cilium Service Mesh**：支持 SPIFFE 身份作为 NetworkPolicy 的匹配条件
-- **[[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|Envoy]]**：通过 SDS（Secret Discovery Service）从 SPIRE Agent 动态获取 SVID
+- **[[envoy|Envoy]]**：通过 SDS（Secret Discovery Service）从 SPIRE Agent 动态获取 SVID
 
 ### 动态凭证轮换
 

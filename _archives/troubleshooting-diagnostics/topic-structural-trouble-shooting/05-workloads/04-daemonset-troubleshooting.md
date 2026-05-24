@@ -135,7 +135,7 @@ DaemonSet 确保所有（或部分）节点运行一个 Pod 副本，常用于�
 ```bash
 $ kubectl get ds -o wide
 NAME        DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
-[[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|fluentd]]     5         5         5       5            5           <none>          10d
+[[fluentd|fluentd]]     5         5         5       5            5           <none>          10d
 ```
 
 | 字段 | 含义 | 异常判断 |

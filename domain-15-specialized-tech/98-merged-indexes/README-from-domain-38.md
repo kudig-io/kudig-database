@@ -92,7 +92,7 @@ WebAssembly (Wasm) 正在从浏览器扩展到服务器端和边缘计算领域�
 ### 🌐 Wasm 应用框架 (03-05)
 - **[03-SpinKube框架实践](./03-spinkube-framework.md)** - Spin 应用、SpinKube Operator、KEDA 集成
 - **[04-wasmCloud平台](./04-wasmcloud-platform.md)** - wasmCloud 架构、Actor 模型、Lattice 网络
-- **[05-[[domain-19-landscape-references/01-cncf-landscape/sandbox/wasmedge/wasmedge|WasmEdge]]运行时](./05-wasmedge-runtime.md)** - WasmEdge 特性、Kubernetes 集成、性能优化
+- **[05-[[wasmedge|WasmEdge]]运行时](./05-wasmedge-runtime.md)** - WasmEdge 特性、Kubernetes 集成、性能优化
 
 ### 🔧 组件与扩展 (06-07)
 - **[06-Wasm组件模型](./06-wasm-component-model.md)** - Component Model、WIT、组件组合

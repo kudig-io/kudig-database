@@ -841,7 +841,7 @@ metadata:
   name: unified-logging-config
   namespace: unified-monitoring
 data:
-  [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|fluentd]]-config.yaml: |
+  [[fluentd|fluentd]]-config.yaml: |
     # AWS CloudWatch Logs输入
     <source>
       @type cloudwatch_logs

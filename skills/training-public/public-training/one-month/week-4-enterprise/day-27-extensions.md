@@ -157,7 +157,7 @@ Operator 的典型应用场景：
 
 - **数据库运维**: 自动创建数据库实例、执行备份和恢复、管理主从切换（如 MySQL Operator、PostgreSQL Operator）
 - **中间件运维**: 自动部署和配置 Kafka、Redis、Elasticsearch 等中间件集群
-- **证书管理**: 自动签发和轮转 TLS 证书（如 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]）
+- **证书管理**: 自动签发和轮转 TLS 证书（如 [[cert-manager|cert-manager]]）
 - **GitOps**: 自动同步 Git 仓库中的配置到集群（如 ArgoCD）
 - **监控配置**: 自动管理 Prometheus 的采集目标和告警规则（如 Prometheus Operator）
 

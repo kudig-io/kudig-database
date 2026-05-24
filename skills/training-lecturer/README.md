@@ -444,3 +444,8 @@ kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
 - [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+
+
+## 参见
+
+- [[skills/training-public/README|公开版]]

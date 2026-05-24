@@ -153,7 +153,7 @@ spec:
 - [ ] 设置 resource requests/limits 防止 OOM
 - [ ] 配置 Prometheus 指标暴露和告警
 - [ ] 集群中仅有一个默认 IngressClass
-- [ ] 使用 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 自动管理 TLS 证书
+- [ ] 使用 [[cert-manager|cert-manager]] 自动管理 TLS 证书
 - [ ] 定期更新控制器版本修复安全漏洞
 - [ ] 评估是否迁移到 Gateway API
 

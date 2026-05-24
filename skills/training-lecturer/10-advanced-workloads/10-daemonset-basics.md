@@ -96,7 +96,7 @@ DaemonSet = 教室管理员
 【K8s 类比】
 
 DaemonSet = 确保每个节点都运行一个 Pod
-• 日志收集 agent（如 [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]）
+• 日志收集 agent（如 [[fluentd|Fluentd]]）
 • 监控 exporter（如 node-exporter）
 • 网络插件（如 Calico CNI）
 • 存储插件（如 Ceph CSI）

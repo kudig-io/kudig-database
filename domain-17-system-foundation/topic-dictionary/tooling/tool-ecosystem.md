@@ -83,7 +83,7 @@ created: "2026-05-23"
 | ⭐5 | [[Prometheus|Prometheus]]+Grafana | 监控 | 监控集群和应用的标准方案 |
 | ⭐6 | [[ArgoCD|ArgoCD]] | GitOps | 声明式持续部署,现代DevOps必备 |
 | ⭐7 | Ingress-NGINX | 流量入口 | 最成熟的Ingress Controller |
-| ⭐8 | [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] | 证书管理 | 自动化管理TLS证书 |
+| ⭐8 | [[cert-manager|cert-manager]] | 证书管理 | 自动化管理TLS证书 |
 | ⭐9 | kustomize | 配置管理 | kubectl内置的配置叠加工具 |
 | ⭐10 | trivy | 安全扫描 | 一站式容器安全扫描 |
 

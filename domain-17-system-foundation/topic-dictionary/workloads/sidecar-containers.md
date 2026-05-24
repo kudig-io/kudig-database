@@ -51,7 +51,7 @@ Sidecar 容器是与主应用容器运行在同一 Pod 内的辅助容器，用�
 
 ## 使用场景
 - 日志/指标收集代理（如 Fluent Bit、[[Prometheus|Prometheus]] exporter）。
-- 服务网格代理（如 [[Istio|Istio]] [[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|[[Envoy|Envoy]]]]）。
+- 服务网格代理（如 [[Istio|Istio]] [[envoy|[[Envoy]]]]）。
 - 配置重载或文件同步工具。
 - 安全审计或身份验证代理。
 

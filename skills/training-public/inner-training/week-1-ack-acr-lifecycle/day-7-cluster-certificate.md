@@ -450,7 +450,7 @@ ACK 托管版的管控面证书轮换是滚动进行的，不会导致服务中�
 
 ### Q3: 如何监控证书即将过期？
 
-推荐使用 `[[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]` 或自定义脚本定期检查证书过期时间。可以在 Prometheus 中配置告警规则，当证书剩余有效期少于 30 天时触发告警。ACK 托管版的管控面证书由阿里云自动监控和轮换，用户无需关注。但用户管理的 Webhook 证书、自定义证书需要自行监控。
+推荐使用 `[[cert-manager|cert-manager]]` 或自定义脚本定期检查证书过期时间。可以在 Prometheus 中配置告警规则，当证书剩余有效期少于 30 天时触发告警。ACK 托管版的管控面证书由阿里云自动监控和轮换，用户无需关注。但用户管理的 Webhook 证书、自定义证书需要自行监控。
 
 ### Q4: Webhook 的 caBundle 证书过期后怎么更新？
 

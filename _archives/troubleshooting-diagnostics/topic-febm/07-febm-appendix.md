@@ -389,7 +389,7 @@ fi
 |---------|------|----------|--------|---------|---------|
 | **Elasticsearch** | Search & Analytics | 证据存储与全文搜索 | Elastic License / SSPL | 集群 | https://www.elastic.co |
 | **Loki** | Log Aggregation | 轻量级日志聚合 | AGPL-3.0 | 分布式 | https://grafana.com/oss/loki |
-| **[[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]** | Log Collector | 日志采集与转发 | Apache 2.0 | DaemonSet | https://www.fluentd.org |
+| **[[fluentd|Fluentd]]** | Log Collector | 日志采集与转发 | Apache 2.0 | DaemonSet | https://www.fluentd.org |
 | **Fluent Bit** | Log Collector | 轻量级日志采集 | Apache 2.0 | DaemonSet | https://fluentbit.io |
 | **Plaso** | Timeline Generation | 超级时间线生成 | Apache 2.0 | 离线分析 | https://plaso.readthedocs.io |
 | **Timesketch** | Forensic Timeline | 取证时间线可视化 | Apache 2.0 | Web UI | https://timesketch.org |

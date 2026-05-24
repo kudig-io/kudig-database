@@ -184,7 +184,7 @@ APF 暴露了大量 [[Prometheus|Prometheus]] 指标，包括：
 - [ ] 确认 APF 已启用（1.29+ 默认稳定版启用）
 - [ ] 监控 `apiserver_flowcontrol_rejected_requests_total`，配置告警阈值
 - [ ] 监控 `apiserver_flowcontrol_request_wait_duration_seconds` P99 延迟
-- [ ] 为关键控制器（如 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]、ArgoCD）创建独立 FlowSchema 和高份额 PriorityLevel
+- [ ] 为关键控制器（如 [[cert-manager|cert-manager]]、ArgoCD）创建独立 FlowSchema 和高份额 PriorityLevel
 - [ ] 自定义配置的 `apf.kubernetes.io/autoupdate-spec` 注解已设为 `false`
 - [ ] 避免大量未分页的 list 请求，使用 `limit` 和 `continue` 参数
 - [ ] 递归 webhook 场景已测试，确保无死锁风险

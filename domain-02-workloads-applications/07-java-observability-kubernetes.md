@@ -104,7 +104,7 @@ graph LR
 
     subgraph "集群服务"
         PROM_SCRAPE --> PROM_SERVER[Prometheus Server]
-        STDOUT --> [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|FLUENTD]][Fluentd DaemonSet]
+        STDOUT --> [[fluentd|FLUENTD]][Fluentd DaemonSet]
         OTEL_SIDE --> OTEL_COLLECTOR[OTel Collector Deployment]
     end
 

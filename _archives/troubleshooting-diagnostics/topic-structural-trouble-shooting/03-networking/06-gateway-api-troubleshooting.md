@@ -57,7 +57,7 @@ prerequisites:
 3. **跨 NS 引用**：`kubectl get referencegrant -A`，缺失时会出现 `ResolvedRefs=False`。
 4. **后端健康**：检查 Service/Endpoints/探针，排除 503/502 来自后端不可用。
 5. **TLS/证书**：确认 Listener 绑定的 Secret 存在、证书链正确；gRPC 场景核对 H2。
-6. **控制器日志**：查看 Gateway 控制器日志（如 [[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|Envoy]] Gateway / Nginx Gateway）定位 reconcile 失败原因。
+6. **控制器日志**：查看 Gateway 控制器日志（如 [[envoy|Envoy]] Gateway / Nginx Gateway）定位 reconcile 失败原因。
 7. **快速缓解**：
    - 回滚最近 Route/Listener 变更。
    - 临时放宽 Route 绑定限制（AllowedRoutes）以恢复流量，再逐步收敛。

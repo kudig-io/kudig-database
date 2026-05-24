@@ -65,7 +65,7 @@ Kubernetes 准入控制器 (Admission Controllers) 是 API 请求处理流程中
 5. **性能与超时**：`kubectl top pod -n <ns> -l app=<webhook>`，必要时提高 Webhook 副本、HPA，或提升 `timeoutSeconds`（默认 10s，建议 ≤ 30s）。
 6. **快速缓解**：
    - 非关键拦截：临时将 `failurePolicy` 改为 `Ignore`，或收窄 `rules`/`namespaceSelector` 以放行核心流量。
-   - 证书问题：立即轮转 TLS Secret 并更新 CA Bundle；使用 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 时触发 `renewBefore`。
+   - 证书问题：立即轮转 TLS Secret 并更新 CA Bundle；使用 [[cert-manager|cert-manager]] 时触发 `renewBefore`。
    - 循环依赖：为 Webhook 自身资源添加排除标签/命名空间，必要时使用 `reinvocationPolicy=IfNeeded`。
 7. **证据留存**：保存拒绝事件、API Server Webhook 调用日志、Webhook Pod 日志、配置 diff 和 CA/证书到期时间。
 

@@ -855,7 +855,7 @@ TE-13: 变更管理问题 [OR门] 🟠 P1
 │   │       └── BE-13.1.2.1 节点池升级导致 Pod 反复重启
 │   │
 │   └── BE-13.2 组件升级失败
-│       ├── BE-13.2.1 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 升级失败
+│       ├── BE-13.2.1 [[cert-manager|cert-manager]] 升级失败
 │       │   └── BE-13.2.1.1 cert-manager CRD 迁移失败
 │       └── BE-13.2.2 Ingress Controller 升级失败
 │

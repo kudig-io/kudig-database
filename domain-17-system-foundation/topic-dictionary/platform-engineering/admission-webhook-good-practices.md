@@ -121,7 +121,7 @@ Kubernetes 项目建议在可能的情况下优先使用基于 CEL 的内置准�
 | 所有 Pod 创建被拒绝 | Webhook 服务不可用 + failurePolicy: Fail | 检查 Webhook Pod 健康；临时改为 Ignore |
 | Webhook 超时导致 API 慢 | Webhook 处理逻辑过慢 | 降低 `timeoutSeconds`；优化 Webhook 代码 |
 | Webhook 未被调用 | namespace/objectSelector 不匹配 | 检查 WebhookConfiguration 的 selector 规则 |
-| TLS 证书错误 | caBundle 与 Webhook 服务证书不匹配 | 使用 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 自动管理证书 |
+| TLS 证书错误 | caBundle 与 Webhook 服务证书不匹配 | 使用 [[cert-manager|cert-manager]] 自动管理证书 |
 
 ## 生产检查清单
 

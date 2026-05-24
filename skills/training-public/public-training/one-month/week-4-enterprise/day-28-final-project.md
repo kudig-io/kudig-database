@@ -212,7 +212,7 @@ K8s 知识图谱框架:
 
 3. 运维层
    Monitoring: Prometheus → Grafana → Alertmanager
-   Logging: [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]/Promtail → Loki/ELK
+   Logging: [[fluentd|Fluentd]]/Promtail → Loki/ELK
    CI/CD: Git → ArgoCD → Cluster
    Troubleshooting: FTA + FEBM
 ```

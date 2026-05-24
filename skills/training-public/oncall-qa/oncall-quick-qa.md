@@ -1250,3 +1250,8 @@ kubectl rollout restart deployment/coredns -n kube-system
 - day-28-comprehensive-review
 - p1-k8s-cluster-setup
 - p2-production-app-orchestration
+
+
+## 参见
+
+- [[skills/training-lecturer/11-oncall-qa/oncall-quick-qa|讲师版]]

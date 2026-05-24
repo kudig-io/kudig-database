@@ -94,7 +94,7 @@ created: "2026-05-23"
 | 文件 | 用途 |
 |------|------|
 | `domain-17-system-foundation/topic-cheat-sheet/helm.md` | Helm 包管理器速查卡 |
-| `domain-17-system-foundation/topic-cheat-sheet/gitops.md` | GitOps (Argo CD / [[domain-19-landscape-references/01-cncf-landscape/graduated/flux/flux|Flux]]) 速查卡 |
+| `domain-17-system-foundation/topic-cheat-sheet/gitops.md` | GitOps (Argo CD / [[flux|Flux]]) 速查卡 |
 | `domain-17-system-foundation/topic-cheat-sheet/gateway-api.md` | Kubernetes Gateway API 速查卡 |
 | `scripts/fix-read-time.py` | estimated_read_time 批量校准脚本 |
 | `reports/CONTENT-DEEP-EVALUATION-2026-05-19.md` | 内容深度评估报告 |

@@ -595,3 +595,8 @@ flowchart TD
 - presentation-template
 - 01-what-is-kubernetes
 - 02-pod-basics
+
+
+## 参见
+
+- [[skills/training-public/troubleshooting/decision-tree-mermaid|公开版]]

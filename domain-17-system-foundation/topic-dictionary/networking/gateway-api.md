@@ -212,7 +212,7 @@ spec:
 - [ ] 部署选定的实现控制器（Envoy Gateway、NGINX Gateway Fabric 等）
 - [ ] 按角色分配 RBAC（infra 团队管 Gateway，dev 团队管 Route）
 - [ ] 命名空间标记 `gateway-access` 标签用于 allowedRoutes
-- [ ] TLS Secret 使用 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 自动管理
+- [ ] TLS Secret 使用 [[cert-manager|cert-manager]] 自动管理
 - [ ] 新项目直接使用 Gateway API，存量 Ingress 规划迁移
 
 ## 命令快速参考

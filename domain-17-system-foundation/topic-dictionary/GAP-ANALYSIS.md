@@ -132,7 +132,7 @@ created: "2026-05-23"
 - **开发者门户（Developer Portal）**：Backstage、Port 在 K8s 平台工程中的应用
 - **内部平台度量**：DORA 指标、平台工程成功度量体系
 - **Terraform / Pulumi 与 Kubernetes**：IaC 管理集群资源
-- **Identity Federation**：SPIFFE/SPIRE、 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 在平台工程中的深度集成
+- **Identity Federation**：SPIFFE/SPIRE、 [[cert-manager|cert-manager]] 在平台工程中的深度集成
 
 ---
 

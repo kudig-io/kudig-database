@@ -85,7 +85,7 @@ created: "2026-05-23"
 | 03-pod-pending.md | 新增 SchedulingGates/Topology Spread/GPU 诊断、RC-014/015（PriorityClass抢占/GPU调度）、DRA 调度演进 |
 | 04-dns-resolution-failure.md | 新增 Phase 4/5（NodeLocal DNSCache/自定义DNS策略）、RC-013/014（插件链异常/QPS压力）、REM-011/012 |
 | 05-service-connectivity.md | 新增 Phase 4/5（[[Service|Service]]Service Mesh）|Service Mesh]]/Gateway API）、RC-013/014/015（EndpointSlice/Mesh sidecar/MCS API） |
-| 06-certificate-expiry.md | 新增 Phase 4/5（[[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]轮转/mTLS诊断）、RC-013/014/015（cert-manager/mTLS/OCSP）、REM-012/013 |
+| 06-certificate-expiry.md | 新增 Phase 4/5（[[cert-manager|cert-manager]]轮转/mTLS诊断）、RC-013/014/015（cert-manager/mTLS/OCSP）、REM-012/013 |
 
 ### 3.2 新增 Skill（12 个文件）
 

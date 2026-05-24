@@ -72,7 +72,7 @@ trigger_keywords:
   - "kube-proxy"
   - "calico-node"
   - "[[Cilium|cilium]]"
-  - "[[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|[[Fluentd|fluentd]]]]"
+  - "[[fluentd|[[Fluentd]]]]"
   - "node-exporter"
   - "系统组件"
   - "污点"

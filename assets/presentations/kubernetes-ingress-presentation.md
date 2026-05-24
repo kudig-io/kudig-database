@@ -76,7 +76,7 @@ created: "2026-05-23"
 1. 区分 Service（L4）和 Ingress（L7）的功能差异
 2. 部署 Nginx Ingress Controller 并配置路由规则
 3. 实现金丝雀发布、A/B 测试等高级流量治理
-4. 配置 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|Cert-Manager]] 实现 TLS 证书自动化管理
+4. 配置 [[cert-manager|Cert-Manager]] 实现 TLS 证书自动化管理
 5. 排查 Ingress 502/504 等常见问题
 6. 设计生产级高可用 Ingress 架构
 

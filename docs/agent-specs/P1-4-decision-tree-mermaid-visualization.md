@@ -532,7 +532,7 @@ flowchart TD
 ```mermaid
 flowchart TD
     START(["日志缺失/收集中断"]) --> T1{检查日志收集状态}
-    T1 -->|[[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]/Fluent Bit Pod| T2{Pod 状态?}
+    T1 -->|[[fluentd|Fluentd]]/Fluent Bit Pod| T2{Pod 状态?}
     T2 -->|Pod 未运行| R1["RC-001: 日志收集 Pod 未运行"]
     T2 -->|Pod 运行但不发送| T3{检查配置}
     T3 -->|Input 配置错误| R2["RC-002: 日志输入配置错误"]

@@ -550,7 +550,7 @@ spec:
       - key: node-role.kubernetes.io/control-plane
         effect: NoSchedule
       containers:
-      - name: [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|fluentd]]
+      - name: [[fluentd|fluentd]]
         image: fluent/fluentd:v1.16
         resources:
           limits:

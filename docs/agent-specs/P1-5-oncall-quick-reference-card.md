@@ -204,7 +204,7 @@ created: "2026-05-23"
 | 告警现象 | 诊断命令 | 修复命令 |
 |---------|---------|---------|
 | 日志缺失 | `kubectl get pods -n logging` | `kubectl rollout restart daemonset -n logging fluent-bit` (低风险) |
-| [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]] 不发送 | `kubectl logs -n logging fluentd-* --tail=100` | 检查 output 配置 (Elasticsearch 连接) |
+| [[fluentd|Fluentd]] 不发送 | `kubectl logs -n logging fluentd-* --tail=100` | 检查 output 配置 (Elasticsearch 连接) |
 
 > **升级条件**: 所有日志不可用、审计日志缺失
 

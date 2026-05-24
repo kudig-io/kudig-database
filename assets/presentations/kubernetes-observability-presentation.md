@@ -252,7 +252,7 @@ Prometheus 是 Kubernetes 监控的事实标准，采用 **Pull 模式**主动�
 |------|------|------|------|---------|
 | **PLG** | Promtail + Loki + Grafana | 轻量、与 Prometheus 生态统一 | 全文搜索能力弱 | 中小规模、已有 Grafana |
 | **ELK** | Elasticsearch + Logstash + Kibana | 功能强大、全文搜索 | 资源消耗大 | 大规模、复杂查询需求 |
-| **EFK** | Elasticsearch + [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]] + Kibana | Fluentd 比 Logstash 更轻量 | 学习曲线陡 | Kubernetes 原生日志 |
+| **EFK** | Elasticsearch + [[fluentd|Fluentd]] + Kibana | Fluentd 比 Logstash 更轻量 | 学习曲线陡 | Kubernetes 原生日志 |
 
 **LogQL 常用查询语法（Loki）：**
 

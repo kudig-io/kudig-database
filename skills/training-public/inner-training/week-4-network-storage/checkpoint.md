@@ -262,7 +262,7 @@ metadata:
   namespace: default
   annotations:
     kubernetes.io/ingress.class: nginx
-    [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]].io/cluster-issuer: letsencrypt-prod
+    [[cert-manager|cert-manager]].io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "10"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "60"

@@ -1430,7 +1430,7 @@ $ echo "+memory" > /sys/fs/cgroup/cgroup.subtree_control
     fd.name startswith /var/run/secrets/
 
 - macro: trusted_programs
-  condition: proc.name in (kubelet, kube-proxy, [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|fluentd]])
+  condition: proc.name in (kubelet, kube-proxy, [[fluentd|fluentd]])
 ```
 
 ### 2.3.6 与传统审计框架的对比

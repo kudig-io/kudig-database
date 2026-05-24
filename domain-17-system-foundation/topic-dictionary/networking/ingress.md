@@ -187,7 +187,7 @@ spec:
 
 - [ ] 所有 Ingress 显式指定 `ingressClassName`
 - [ ] TLS Secret 已创建且证书未过期
-- [ ] 使用 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 自动续签证书
+- [ ] 使用 [[cert-manager|cert-manager]] 自动续签证书
 - [ ] 配置了合理的 rate-limit 注解
 - [ ] 默认后端返回友好的 404 页面
 - [ ] PathType 使用 `Exact` 或 `Prefix`（避免 `ImplementationSpecific`）

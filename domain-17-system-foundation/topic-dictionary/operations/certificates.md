@@ -145,7 +145,7 @@ etcd 集群内部节点之间以及对客户端（主要是 API Server）都采�
 - **正确配置 SANs**：为服务端证书添加所有可能的访问入口（主机名、IP、`kubernetes.default.svc.cluster.local` 等），否则客户端 TLS 校验会失败。
 - **不要复制 CA 私钥**：如果可能，采用“外部 CA”模式，仅将 CA 公钥分发到节点，私钥保存在离线安全介质中。
 - **定期轮换证书**：TLS 证书应设置合理的过期时间（如 1 年），并建立自动轮换机制。
-- **使用标准工具**：官方文档推荐使用 `easyrsa`、`openssl` 或 `cfssl` 生成证书；生产环境可结合 `[[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]` 或 `certificates.k8s.io` API 实现自动化管理。
+- **使用标准工具**：官方文档推荐使用 `easyrsa`、`openssl` 或 `cfssl` 生成证书；生产环境可结合 `[[cert-manager|cert-manager]]` 或 `certificates.k8s.io` API 实现自动化管理。
 - **备份 `sa.key`**：服务账户私钥一旦丢失，所有由它签发的 ServiceAccount Token 都将失效，务必做好备份。
 
 ## 故障排查

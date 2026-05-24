@@ -102,7 +102,7 @@ FEBM 方法论依赖于完善的可观测性基础设施。我们提出五层架
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    Layer 2: Collection & Aggregation                │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐             │
-│  │  Prometheus  │  │  [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]/    │  │  OpenTelemetry│            │
+│  │  Prometheus  │  │  [[fluentd|Fluentd]]/    │  │  OpenTelemetry│            │
 │  │  Exporters   │  │  Fluent Bit  │  │  Collector    │            │
 │  └──────────────┘  └──────────────┘  └──────────────┘             │
 │  ┌──────────────┐  ┌──────────────┐                               │

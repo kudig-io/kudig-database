@@ -85,7 +85,7 @@ prerequisites:
 │   │                Custom Resource Definitions                  │    │
 │   │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │    │
 │   │  │ certificates │  │ certificates │  │    your      │     │    │
-│   │  │ .[[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]│  │ .k8s.io     │  │   custom     │     │    │
+│   │  │ .[[cert-manager|cert-manager]]│  │ .k8s.io     │  │   custom     │     │    │
 │   │  │    .io       │  │             │  │   resource   │     │    │
 │   │  └──────────────┘  └──────────────┘  └──────────────┘     │    │
 │   └────────────────────────────────────────────────────────────┘    │

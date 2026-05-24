@@ -115,7 +115,7 @@ curl -sfL https://get.k3s.io | sh -
 在边缘设备上运行 AI 模型需要特别的优化：
 - **模型压缩**：量化、剪枝、蒸馏，将大模型压缩到边缘可运行的大小
 - **专用 NPU/GPU**：NVIDIA Jetson、Intel Movidius、ARM Ethos 等边缘 AI 加速器
-- **[[domain-19-landscape-references/01-cncf-landscape/sandbox/wasmedge/wasmedge|WasmEdge]]**：支持在边缘运行轻量级 AI 推理模块
+- **[[wasmedge|WasmEdge]]**：支持在边缘运行轻量级 AI 推理模块
 
 ## 使用场景
 

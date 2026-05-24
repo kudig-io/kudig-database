@@ -341,3 +341,8 @@ s  - s
 - decision-tree-mermaid
 - 02-pod-basics
 - 03-deployment-basics
+
+
+## 参见
+
+- [[skills/training-public/fundamentals/01-what-is-kubernetes|公开版]]

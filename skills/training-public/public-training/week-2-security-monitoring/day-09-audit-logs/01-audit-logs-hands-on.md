@@ -237,7 +237,7 @@ cat alice-rbac.yaml
 ### 4.1 高危操作告警规则
 
 ```yaml
-# 使用 [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]/Prometheus 规则
+# 使用 [[fluentd|Fluentd]]/Prometheus 规则
 groups:
   - name: audit-alerts
     rules:

@@ -112,7 +112,7 @@ cluster = container.Cluster("my-cluster",
 - 通过 Kubernetes CRD 定义云资源（如 AWS RDS、GCP CloudSQL、Azure Blob Storage）
 - 利用 Kubernetes 控制循环自动协调云资源状态
 - 实现"用 Kubernetes 管理一切"的统一控制平面
-- 与 GitOps 天然集成，云资源的变更也通过 Argo CD / [[domain-19-landscape-references/01-cncf-landscape/graduated/flux/flux|Flux]] 管理
+- 与 GitOps 天然集成，云资源的变更也通过 Argo CD / [[flux|Flux]] 管理
 
 ```yaml
 # Crossplane 创建 AWS RDS 示例

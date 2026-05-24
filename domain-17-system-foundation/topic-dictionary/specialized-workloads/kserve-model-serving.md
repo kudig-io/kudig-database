@@ -49,7 +49,7 @@ KServe 将模型服务抽象为 `InferenceService` 自定义资源（CRD），�
 
 ### 2. 自动扩缩容与 Scale-to-Zero
 
-KServe 深度集成 **[[domain-19-landscape-references/01-cncf-landscape/graduated/knative/knative|[[Knative|Knative]]]]** 和 **[[Istio|Istio]]**，支持：
+KServe 深度集成 **[[knative|[[Knative]]]]** 和 **[[Istio|Istio]]**，支持：
 - **HPA 基于自定义指标扩缩容**：如 GPU 利用率、请求队列长度、推理延迟
 - **Scale-to-Zero**：当请求量为零时自动缩容至 0 Pod，显著降低空闲 GPU/CPU 成本
 - **冷启动优化**：通过模型预加载、镜像缓存、容器启动加速减少从 0 到 1 的延迟

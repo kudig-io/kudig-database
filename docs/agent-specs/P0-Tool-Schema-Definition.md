@@ -1248,7 +1248,7 @@ tool:
 ```yaml
 tool:
   name: kubectl_get_certificate
-  description: 获取 Certificate 状态（[[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]）
+  description: 获取 Certificate 状态（[[cert-manager|cert-manager]]）
   category: CONFIGURATION
   
   parameters:

@@ -424,3 +424,8 @@ kubectl logs <pod-name> --previous
 - 01-what-is-kubernetes
 - 03-deployment-basics
 - 04-service-basics
+
+
+## 参见
+
+- [[skills/training-public/fundamentals/02-pod-basics|公开版]]

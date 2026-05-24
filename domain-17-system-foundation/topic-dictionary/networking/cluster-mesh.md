@@ -141,7 +141,7 @@ Cluster Mesh 通过 **Cluster ID** 区分不同集群中的同名服务：
 - **控制集群规模**：单个 Cluster Mesh 中建议每个集群不超过 500 节点，总节点数不超过 10000（具体取决于 CNI 实现）
 - **跨集群带宽成本**：云厂商通常对跨 Region/跨云流量收费，应使用 Topology-aware LB 减少不必要的远程调用
 - **DNS 解析一致性**：确保各集群的 CoreDNS 配置支持跨集群服务发现，或部署全局 DNS（如 CoreDNS + etcd）
-- **证书管理复杂化**：多集群 mTLS 需要统一的 CA 或互信的 CA 链，建议使用 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] + Vault 集中管理
+- **证书管理复杂化**：多集群 mTLS 需要统一的 CA 或互信的 CA 链，建议使用 [[cert-manager|cert-manager]] + Vault 集中管理
 - **监控全局视图**：使用 Thanos / Cortex / VictoriaMetrics 聚合多个集群的 Prometheus 数据，形成全局 SLO 监控
 - **分阶段互联**：不要一次性将所有集群互联，先连接 2–3 个核心集群，验证稳定性后再逐步扩展
 - **故障隔离**：当某个集群出现网络风暴或控制平面问题时，应具备快速将其从 Cluster Mesh 中断开的能力

@@ -76,7 +76,7 @@ Kubernetes 集群涉及以下几类证书，每类的有效期、管理方式和
 4. **Front-Proxy Certificate** — apiserver 聚合层（aggregation layer）使用的前端代理证书
 5. **ServiceAccount Signing Key** — 用于签发 ServiceAccount token 的密钥对
 6. **Webhook TLS Certificates** — ValidatingWebhookConfiguration / MutatingWebhookConfiguration 使用的 TLS 证书
-7. **Ingress TLS Certificates** — 面向用户的 Ingress 入口 TLS 证书（通常由 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 管理）
+7. **Ingress TLS Certificates** — 面向用户的 Ingress 入口 TLS 证书（通常由 [[cert-manager|cert-manager]] 管理）
 8. **CA Certificates** — 上述各类证书的签发 CA（默认 10 年有效期，但确实会过期）
 
 ### 本 Skill 覆盖范围

@@ -350,7 +350,7 @@ created: "2026-05-23"
 **标题**: 覆盖 218 个 CNCF 项目
 **核心内容**:
 - CNCF 项目云图 / 关系图
-- 核心项目高亮: Kubernetes, etcd, Prometheus, [[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|Envoy]], Istio, ArgoCD, ...
+- 核心项目高亮: Kubernetes, etcd, Prometheus, [[envoy|Envoy]], Istio, ArgoCD, ...
 - 数据: 218 个项目 · 40 个知识域 · 97 个行业场景
 - 底部: "从核心项目到生态工具, 全面覆盖"
 

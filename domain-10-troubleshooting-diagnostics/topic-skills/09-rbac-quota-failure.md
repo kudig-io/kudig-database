@@ -169,7 +169,7 @@ kubectl get sa -A | grep -E "(cicd|jenkins|argocd|flux|crossplane)"
 ```
 > **判断规则**:
 > - 受影响主体为 CI/CD 系统 ServiceAccount → **P0**（阻断部署流水线）
-> - 受影响主体为关键控制器（如 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]、external-dns）→ **P1**
+> - 受影响主体为关键控制器（如 [[cert-manager|cert-manager]]、external-dns）→ **P1**
 > - 受影响主体为普通用户 → **P2**
 
 **Step T2**: 检查 ResourceQuota 使用情况（30s）

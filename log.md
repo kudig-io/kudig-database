@@ -585,3 +585,11 @@ Tier 4: 部署生态域 (5) / Tier 5: 基础参考域 (4)
 - P2: 创建 5 个高价值 synthesis 页面
 - P2: 模糊匹配链接规范化（4 files, 6 links）
 - 总计: 74 files changed, 143+ new wikilinks, 5 new pages
+
+## [2026-05-24] dedup | wiki-dedup 审计与合并
+- mode=merge pages_scanned=4762 pairs_found=795 merged=325 kept_separate=470 needs_review=0
+- 删除 domain-20 旧目录 01-reference-architectures（96 文件，与 topic-application-architecture 完全相同）
+- 删除 CNCF landscape 实体重复（229 文件，与 entities/ 近似相同）
+- 修复 327 个指向已删除文件的 wikilinks
+- 添加 12 个 training 讲师/公开版交叉引用
+- 0 内容损失（所有删除的文件都有更完整的对应版本）

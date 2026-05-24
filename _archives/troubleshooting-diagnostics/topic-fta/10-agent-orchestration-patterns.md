@@ -65,7 +65,7 @@ FTA 路径:
   TE: 证书过期导致服务不可用
   └── BE: TLS 证书过期
       → 检查: openssl x509 -enddate -noout -in /path/to/cert
-      → 修复: [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 手动触发续期
+      → 修复: [[cert-manager|cert-manager]] 手动触发续期
 
 Agent 行为:
   1. 接收告警: "TLS handshake error"

@@ -872,7 +872,7 @@ openssl s_client -connect <ingress-ip>:443 -servername <hostname>
 2. 证书更新会立即生效
 3. 证书域名必须匹配 Ingress host
 4. 定期检查证书有效期
-5. 考虑使用 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 自动管理
+5. 考虑使用 [[cert-manager|cert-manager]] 自动管理
 ```
 
 ---

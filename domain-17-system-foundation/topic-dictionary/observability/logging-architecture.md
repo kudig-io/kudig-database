@@ -87,7 +87,7 @@ kubelet 通过以下配置控制日志轮转：
 
 #### 1. 节点级日志代理（Node-level logging agent）
 
-在每个节点上运行日志代理（如 Fluent Bit、[[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]，通常以 DaemonSet 部署），收集节点上所有容器的日志并转发到集中式日志存储。这是最常见的方式，无需修改应用。
+在每个节点上运行日志代理（如 Fluent Bit、[[fluentd|Fluentd]]，通常以 DaemonSet 部署），收集节点上所有容器的日志并转发到集中式日志存储。这是最常见的方式，无需修改应用。
 
 #### 2. Sidecar 容器
 

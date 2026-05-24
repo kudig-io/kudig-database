@@ -192,7 +192,7 @@ spec:
 ### 3.2 Rancher
 
 - 多集群统一管理平台
-- 集成监控 (Prometheus/Grafana)、日志 ([[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]])、CI/CD (Fleet)
+- 集成监控 (Prometheus/Grafana)、日志 ([[fluentd|Fluentd]])、CI/CD (Fleet)
 - 支持导入任意 K8s 发行版
 - v2.10 增强安全与边缘支持
 

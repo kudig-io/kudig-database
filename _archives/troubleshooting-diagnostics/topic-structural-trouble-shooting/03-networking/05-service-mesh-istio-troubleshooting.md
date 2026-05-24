@@ -58,7 +58,7 @@ prerequisites:
 | 角色 | 目标 | 核心收获 |
 | :--- | :--- | :--- |
 | **初学者** | 解决 Sidecar 注入、404/503 报错等基础问题 | 掌握 Istio 流量模型（VS/DR/GW）与 `istioctl` 基础诊断。 |
-| **中级运维** | 优化证书管理、实施精细化流量控制 | 理解 mTLS 原理、掌握 xDS 配置同步状态分析、[[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|Envoy]] 日志解读。 |
+| **中级运维** | 优化证书管理、实施精细化流量控制 | 理解 mTLS 原理、掌握 xDS 配置同步状态分析、[[envoy|Envoy]] 日志解读。 |
 | **资深专家** | 解决大规模集群瓶颈与 Ambient Mesh 落地 | 深入 xDS 底层报文（LDS/RDS/CDS/EDS）、Ambient Mesh 架构问题、硬件加速（TLS Offload）与性能调优。 |
 
 ---

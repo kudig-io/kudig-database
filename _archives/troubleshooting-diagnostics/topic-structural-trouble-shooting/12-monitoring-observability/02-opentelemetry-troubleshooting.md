@@ -728,7 +728,7 @@ groups:
 2. **采样策略**：开发环境 100% 采样，生产环境使用尾部采样保留错误和慢请求
 3. **标签管控**：在 Collector 中统一添加 `cluster`、`namespace`、`environment` 等标签，禁止客户端随意添加高基数标签
 4. **队列持久化**：对关键链路启用 `persistent_queue`，使用 `file_storage` extension 防止数据丢失
-5. **证书管理**：使用 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 自动轮转 Collector 与后端之间的 mTLS 证书
+5. **证书管理**：使用 [[cert-manager|cert-manager]] 自动轮转 Collector 与后端之间的 mTLS 证书
 6. **配置验证**：使用 `otelcol validate --config=...` 在 CI 中验证配置变更
 7. **降级策略**：Exporter 配置多个后端，主后端失败时自动切换到备用 `debug` 或 `file` exporter
 

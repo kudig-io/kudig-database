@@ -64,7 +64,7 @@ DaemonSet 确保所有（或部分）节点上都运行一个 Pod 副本。当�
 ## 使用场景
 - 集群网络插件（如 Calico、Flannel、[[Cilium|Cilium]]）。
 - 节点监控代理（如 [[Prometheus|Prometheus]] Node Exporter）。
-- 日志收集代理（如 [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|[[Fluentd|Fluentd]]]]、Fluent Bit）。
+- 日志收集代理（如 [[fluentd|[[Fluentd]]]]、Fluent Bit）。
 - 存储驱动或设备插件（如 CSI 节点插件）。
 
 ## 最佳实践/注意事项

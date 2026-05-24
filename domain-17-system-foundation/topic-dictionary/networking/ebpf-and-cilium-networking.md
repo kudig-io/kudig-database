@@ -63,7 +63,7 @@ Cilium 作为 Kubernetes CNI，完全基于 eBPF 构建：
 - **Cilium Agent**：运行在每个节点上，负责 eBPF 程序加载、策略计算和状态同步
 - **Cilium Operator**：集群级控制器，管理 IPAM（IP 地址管理）、Endpoint 同步
 - **Hubble**：基于 eBPF 的可观测性组件，提供网络流量可视化和安全审计
-- **[[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|[[Envoy|Envoy]]]] 扩展**：用于 Layer 7 应用层协议解析（HTTP、gRPC、Kafka 等）
+- **[[envoy|[[Envoy]]]] 扩展**：用于 Layer 7 应用层协议解析（HTTP、gRPC、Kafka 等）
 
 ### 3. eBPF 替代传统网络栈
 

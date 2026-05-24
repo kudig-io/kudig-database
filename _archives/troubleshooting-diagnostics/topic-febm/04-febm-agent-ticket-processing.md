@@ -1181,7 +1181,7 @@ adaptation_scenarios:
   # 场景 2: 系统架构变更
   - trigger: "Service mesh introduced"
     adaptation:
-      - action: "Add [[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|Envoy]] sidecar logs to evidence sources"
+      - action: "Add [[envoy|Envoy]] sidecar logs to evidence sources"
       - action: "Update trace parsing logic"
       - action: "Adjust latency attribution algorithm"
       

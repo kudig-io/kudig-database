@@ -55,7 +55,7 @@ created: "2026-05-23"
 
 ### 2. Sidecar 模式
 
-每个应用 Pod 中注入一个轻量级代理容器（如 [[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|[[Envoy|Envoy]]]]），拦截所有入站和出站流量：
+每个应用 Pod 中注入一个轻量级代理容器（如 [[envoy|[[Envoy]]]]），拦截所有入站和出站流量：
 - **Istio**：基于 Envoy，功能最全面，企业采用最广
 - **Linkerd**：自研 Rust 代理，极致轻量，资源开销最低
 

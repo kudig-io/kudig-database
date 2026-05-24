@@ -940,7 +940,7 @@ roleRef:
 **最佳实践**:
 - **默认拒绝 + 白名单模式**: 先部署 `default-deny-all` NetworkPolicy，再逐个开放需要的通信路径
 - **使用 Pod Security Standards**: K8s 1.25+ 使用 Pod Security Admission 替代已弃用的 PSP
-- **定期轮转证书和密钥**: 建议 90 天轮转一次 TLS 证书，使用 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 自动化
+- **定期轮转证书和密钥**: 建议 90 天轮转一次 TLS 证书，使用 [[cert-manager|cert-manager]] 自动化
 - **启用审计日志**: 记录所有 API Server 请求，便于安全事件溯源
 
 **故障排查**:

@@ -425,3 +425,8 @@ kubectl delete deployment my-app
 - 02-pod-basics
 - 04-service-basics
 - 05-ingress-basics
+
+
+## 参见
+
+- [[skills/training-lecturer/02-getting-started/03-deployment-basics|讲师版]]

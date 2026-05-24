@@ -226,7 +226,7 @@ flowchart TD
 ## 生产级观测与证据
 - **事件**：`503/502/504`、证书错误、访问超时、`Connection refused`。
 - **关键指标**：Ingress Controller 响应延迟、`4xx/5xx` 比例、LB 健康状态、upstream_response_time、request_time。
-- **关键日志**：Ingress Controller 日志（nginx-ingress/traefik/等）、LB 日志、[[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 日志。
+- **关键日志**：Ingress Controller 日志（nginx-ingress/traefik/等）、LB 日志、[[cert-manager|cert-manager]] 日志。
 - **配置核对**：Ingress 规则、TLS Secret、Service 端口、DNS 记录、IngressClass、Annotations。
 
 ---

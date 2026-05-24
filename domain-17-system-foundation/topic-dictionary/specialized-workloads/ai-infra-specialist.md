@@ -282,7 +282,7 @@ created: "2026-05-23"
 | **TGI** | Transformer优化、多模型支持 | Deployment | 通用性强、易集成 | ⭐⭐ |
 | **TensorRT-LLM** | NVIDIA优化、高性能推理 | DaemonSet | 极致性能、硬件绑定 | ⭐⭐⭐⭐ |
 | **Seldon Core** | 多框架支持、AB测试 | Operator | 灵活性高、功能丰富 | ⭐⭐⭐⭐ |
-| **KServe** | Kubernetes原生、Serverless | [[domain-19-landscape-references/01-cncf-landscape/graduated/knative/knative|Knative]] | 自动扩缩、成本优化 | ⭐⭐⭐ |
+| **KServe** | Kubernetes原生、Serverless | [[knative|Knative]] | 自动扩缩、成本优化 | ⭐⭐⭐ |
 
 > **🔰 初学者理解**: GPU集群运维是管理数百张GPU卡组成的计算资源池。类比：像管理一个数据中心的GPU农场,需要监控每张卡的健康状态、优化散热、处理硬件问题、调度任务到最合适的GPU。
 >
