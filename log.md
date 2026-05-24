@@ -645,3 +645,15 @@ Tier 4: 部署生态域 (5) / Tier 5: 基础参考域 (4)
 - [2026-05-24] WIKI_RESEARCH topic="Kubernetes 专项技术" rounds=3 sources_fetched=8 pages_created=2
   - 创建 concepts/specialized-k8s-technologies.md（2.7KB，eBPF/WASM/边缘/Serverless）
   - 创建 synthesis/Research: Kubernetes Specialized Technologies 2025-2026.md（6KB）
+
+- [2026-05-24] WIKI_RESEARCH topic="Kubernetes 云厂商集成" rounds=3 sources_fetched=8 pages_created=2
+  - 创建 concepts/cloud-provider-k8s-integration.md（9KB，EKS/GKE/AKS/ACK/多云抽象）
+  - 创建 synthesis/Research: Kubernetes Cloud Providers 2025-2026.md（4KB）
+
+- [2026-05-24] WIKI_RESEARCH topic="Kubernetes 应用模式" rounds=3 sources_fetched=10 pages_created=2
+  - 创建 concepts/application-patterns-k8s.md（10.2KB，Ambient Mesh/Kueue/vCluster/Dapr）
+  - 创建 synthesis/Research: Kubernetes Application Patterns 2025-2026.md（4.3KB）
+
+- [2026-05-24] WIKI_RESEARCH topic="Kubernetes 系统基础" rounds=3 sources_fetched=11 pages_created=2
+  - 创建 concepts/system-foundation-hardware-kernel.md（7KB，DPU/GPU/ARM64/cgroup v2/eBPF/PSI）
+  - 创建 synthesis/Research: Kubernetes System Foundation 2025-2026.md（4.6KB）
