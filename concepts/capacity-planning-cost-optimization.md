@@ -25,10 +25,10 @@ updated: 2026-05-24
 
 | 模型 | 适用场景 | 特点 |
 |------|----------|------|
-| [[prophet\|Facebook Prophet]] | 季节性/趋势明显的业务指标 | 自动处理节假日效应，可解释性强 |
+| Facebook Prophet | 季节性/趋势明显的业务指标 | 自动处理节假日效应，可解释性强 |
 | LSTM / DeepAR | 高频、多维指标预测 | 捕获非线性依赖，适合复杂模式 |
-| [[victoria-metrics\|VictoriaMetrics]] Anomaly Detection | 实时异常检测与预测 | 内置 ML 引擎，与 Prometheus 兼容 |
-| [[kubecost\|Kubecost]] Forecast | 成本趋势预测 | 基于历史使用量推算未来开支 |
+| VictoriaMetrics Anomaly Detection | 实时异常检测与预测 | 内置 ML 引擎，与 Prometheus 兼容 |
+| Kubecost Forecast | 成本趋势预测 | 基于历史使用量推算未来开支 |
 
 **预测驱动扩容流程：**
 
@@ -70,7 +70,7 @@ spec:
 
 ### Karpenter 预测式节点供应
 
-[[karpenter|Karpenter]] 结合预测实现集群级资源预供应：
+Karpenter 结合预测实现集群级资源预供应：
 
 ```yaml
 apiVersion: karpenter.sh/v1beta1
@@ -108,11 +108,11 @@ spec:
 
 | 工具 | 类型 | 核心能力 | 最新动态 |
 |------|------|----------|----------|
-| [[kubecost\|Kubecost]] | 商业 | 实时成本分配、告警、优化建议 | 2026 被 [[finout\|Finout]] 整合，成为其 K8s 成本引擎 |
-| [[opencost\|OpenCost]] 2.0 | CNCF Sandbox | 开源成本核算标准实现 | 2026 v2.0 GA，支持多云统一视图、FOCUS 兼容 |
-| [[cast-ai\|Cast AI]] | 商业 | 自主优化（Autopilot）| 声称 50-65% 降本，自动选择最优实例类型/定价模型 |
-| [[finout\|Finout]] | 商业 | 全栈 FinOps 平台 | 整合 Kubecost 后成为 K8s + 云成本统一平台 |
-| [[kube-green\|kube-green]] | 开源 | 非工作时间自动休眠资源 | 适合 dev/staging 环境，节省 60-70% 非生产成本 |
+| Kubecost | 商业 | 实时成本分配、告警、优化建议 | 2026 被 Finout 整合，成为其 K8s 成本引擎 |
+| OpenCost 2.0 | CNCF Sandbox | 开源成本核算标准实现 | 2026 v2.0 GA，支持多云统一视图、FOCUS 兼容 |
+| Cast AI | 商业 | 自主优化（Autopilot）| 声称 50-65% 降本，自动选择最优实例类型/定价模型 |
+| Finout | 商业 | 全栈 FinOps 平台 | 整合 Kubecost 后成为 K8s + 云成本统一平台 |
+| kube-green | 开源 | 非工作时间自动休眠资源 | 适合 dev/staging 环境，节省 60-70% 非生产成本 |
 
 ### 成本优化层次
 
@@ -143,9 +143,9 @@ spec:
 
 | 工具 | 方法 | 推荐粒度 | 特点 |
 |------|------|----------|------|
-| [[goldilocks\|Goldilocks]] | VPA 历史数据统计 | Deployment 级 | Dashboard 直观，使用 VPA recommendation |
-| [[vpa\|VPA]] (Vertical Pod Autoscaler) | 实时监控 + 推荐/自动调整 | Pod 级 | 三种模式：Off/Recommendation/Auto |
-| [[stormforge\|StormForge]] (原 StormForge Optimize) | ML 驱动 + 实验 | 应用级 | 多目标优化（性能+成本），支持 K6 负载测试 |
+| Goldilocks | VPA 历史数据统计 | Deployment 级 | Dashboard 直观，使用 VPA recommendation |
+| VPA (Vertical Pod Autoscaler) | 实时监控 + 推荐/自动调整 | Pod 级 | 三种模式：Off/Recommendation/Auto |
+| StormForge (原 StormForge Optimize) | ML 驱动 + 实验 | 应用级 | 多目标优化（性能+成本），支持 K6 负载测试 |
 
 ### Right-sizing 最佳实践
 
@@ -175,7 +175,7 @@ spec:
 
 ### FOCUS 规范
 
-[[fOCUS|FinOps Open Cost and Usage Specification]] 是 Linux Foundation 发布的云成本数据标准：
+FOCUS（FinOps Open Cost and Usage Specification）是 Linux Foundation 发布的云成本数据标准：
 
 - **统一成本格式**：跨云厂商标准化列名、单位、计费周期
 - **Kubernetes 成本融合**：与 OpenCost 输出对齐
@@ -251,11 +251,11 @@ criticality: high                           # 业务关键度
 ## 相关概念
 
 - [[horizontal-pod-autoscaler|HPA 水平自动扩缩]]
-- [[cluster-autoscaler|集群自动扩缩]]
-- [[karpenter|Karpenter 节点自动供应]]
+- 集群自动扩缩
+- Karpenter 节点自动供应
 - [[keda|KEDA 事件驱动自动扩缩]]
 - [[multi-cluster-dr-automation|多集群灾备与自动化]]
-- [[platform-engineering|平台工程]]
+- 平台工程
 
 ## Related
 

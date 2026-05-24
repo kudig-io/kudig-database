@@ -48,10 +48,10 @@ Tetragon 在 2025 年提供了内核级的实时策略执行能力：进程生�
 ## 核心概念
 
 - [[concepts/specialized-k8s-technologies]] — K8s 专项技术栈的整体架构与技术选型框架
-- [[concepts/ebpf-infra-layer]] — eBPF 作为基础设施层的技术原理与应用场景
-- [[concepts/wasm-k8s-integration]] — WASM 与 Kubernetes 集成的技术路径（runwasi/SpinKube）
-- [[concepts/edge-k8s-architecture]] — 边缘 Kubernetes 架构模式（KubeEdge/Akri/K3s）
-- [[concepts/serverless-event-driven]] — K8s 上 Serverless 与事件驱动架构设计
+- eBPF 基础设施层 — eBPF 作为基础设施层的技术原理与应用场景
+- WASM K8S 集成 — WASM 与 Kubernetes 集成的技术路径（runwasi/SpinKube）
+- 边缘 K8S 架构 — 边缘 Kubernetes 架构模式（KubeEdge/Akri/K3s）
+- Serverless 与事件驱动 — K8s 上 Serverless 与事件驱动架构设计
 
 ## 矛盾与张力
 

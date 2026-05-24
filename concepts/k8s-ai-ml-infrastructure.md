@@ -197,7 +197,7 @@ spec:
 
 ### KubeRay
 
-[[KubeRay]] 已成为 K8S 上运行 [[Ray]] 的标准方式：
+KubeRay 已成为 K8S 上运行 Ray 的标准方式：
 
 - **RayCluster** — 自动扩缩 Ray 集群
 - **RayJob** — 一次性 Ray 任务
@@ -236,7 +236,7 @@ spec:
 
 ### MLflow 2.x GenAI
 
-[[MLflow]] 2.x 引入 GenAI 支持：
+MLflow 2.x 引入 GenAI 支持：
 
 - **AI Gateway** — LLM API 统一代理（OpenAI 兼容接口）
 - **Prompt Engineering UI** — 可视化 Prompt 调试
@@ -292,9 +292,9 @@ spec:
 - [[KServe]] — 推理服务平台
 - [[Kubeflow]] — ML 平台
 - [[KubeRay]] — Ray on K8S
-- [[vLLM]] — LLM 推理引擎
-- [[MLflow]] — ML 实验管理
-- [[K8S 调度器]] — 调度系统
+- vLLM — LLM 推理引擎
+- MLflow — ML 实验管理
+- K8S 调度器 — 调度系统
 
 ## Related
 

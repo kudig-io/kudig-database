@@ -224,9 +224,9 @@ sloth/v1/promeetheusservicelevel:
 
 - [[opentelemetry]] - OpenTelemetry 框架
 - [[prometheus]] - Prometheus 监控系统
-- [[grafana]] - Grafana 可视化平台
+- Grafana 可视化平台
 - [[jaeger]] - Jaeger 分布式追踪
-- [[ebpf]] - eBPF 技术
+- eBPF 技术
 - [[k8s-networking-evolution]] - K8S 网络演进
 
 ## Related

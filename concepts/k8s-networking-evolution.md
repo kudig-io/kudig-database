@@ -194,9 +194,9 @@ spec:
 
 - [[cilium]] - Cilium CNI 插件
 - [[istio]] - Istio 服务网格
-- [[gateway-api]] - Kubernetes Gateway API
-- [[ebpf]] - eBPF 技术
-- [[k8s-service-mesh]] - K8S 服务网格对比
+- Gateway API - Kubernetes 网络路由标准
+- eBPF 技术 - 内核可编程框架
+- K8S 服务网格对比
 
 ## Related
 

@@ -87,12 +87,12 @@ eBPF 正在革新可观测性数据采集：
 ## 核心概念
 
 - [[concepts/k8s-observability-stack]] — K8s 可观测性技术栈全景
-- [[concepts/opentelemetry-architecture]] — OTel 架构与 Collector 设计
-- [[concepts/prometheus-ecosystem]] — Prometheus 生态与长期存储方案
-- [[concepts/grafana-lgtm-stack]] — Grafana LGTM 全栈部署模式
-- [[concepts/distributed-tracing]] — 分布式追踪原理与采样策略
-- [[concepts/ebpf-observability]] — eBPF 在可观测性中的应用
-- [[concepts/continuous-profiling]] — 持续性能分析方法论
+- OpenTelemetry 架构 — OTel 架构与 Collector 设计
+- Prometheus 生态 — Prometheus 生态与长期存储方案
+- Grafana LGTM 全栈 — Grafana LGTM 全栈部署模式
+- 分布式追踪 — 分布式追踪原理与采样策略
+- eBPF 可观测性 — eBPF 在可观测性中的应用
+- 持续性能分析 — 持续性能分析方法论
 
 ## 矛盾与张力
 

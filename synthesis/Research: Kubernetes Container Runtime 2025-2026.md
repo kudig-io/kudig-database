@@ -47,10 +47,10 @@ OCI 镜像规范和运行时规范在 2025 年进行了重大扩展，正式支�
 ## 核心概念
 
 - [[concepts/container-runtime-evolution]] — 容器运行时从 Docker daemon 到多运行时编排的演进路径
-- [[concepts/containerd-architecture]] — containerd 2.x 插件化架构与沙箱 API 设计
-- [[concepts/user-namespaces-security]] — User Namespaces 的安全模型与 UID 映射机制
-- [[concepts/wasm-runtime-integration]] — WASM/WASI 与 OCI 规范的集成路径
-- [[concepts/confidential-containers]] — 机密容器的 TEE 集成与信任模型
+- containerd 架构 — containerd 2.x 插件化架构与沙箱 API 设计
+- User Namespaces 安全 — User Namespaces 的安全模型与 UID 映射机制
+- WASM 运行时集成 — WASM/WASI 与 OCI 规范的集成路径
+- 机密容器 — 机密容器的 TEE 集成与信任模型
 
 ## 矛盾与张力
 

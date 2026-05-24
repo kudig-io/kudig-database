@@ -30,7 +30,7 @@ WASM 正在成为 K8S 的第二运行时：
 
 - **[[SpinKube]]**：CNCF Sandbox，将 Spin 应用编排为 K8S 工作负载，支持 CRD、Helm 部署
 - **[[wasmCloud]]**：CNCF Sandbox，分布式 WASM 应用平台，actor 模型 + 可组合能力
-- **[[runwasi]]**：containerd 官方 WASM shim，使 kubelet 透明调度 WASM 工作负载
+- **runwasi**：containerd 官方 WASM shim，使 kubelet 透明调度 WASM 工作负载
 
 WASM 工作负载特点：亚毫秒启动、极小内存占用、跨平台字节码。参见 [[container-runtime-evolution]]。
 
@@ -38,7 +38,7 @@ WASM 工作负载特点：亚毫秒启动、极小内存占用、跨平台字节
 
 - **[[KubeEdge]]**：CNCF 毕业项目（v1.22+），将 K8S 能力延伸至边缘节点，支持离线自治
 - **[[K3s]]**：轻量级 K8S 发行版（<100MB 二进制），适用于 IoT/ARM/边缘场景
-- **[[MicroK8s]]**：Canonical 维护的单节点 K8S，snap 包分发，适合开发与边缘
+- **MicroK8s**：Canonical 维护的单节点 K8S，snap 包分发，适合开发与边缘
 - **[[Akri]]**：CNCF 沙箱，自动发现边缘设备（摄像头、传感器等）并暴露为 K8S 资源
 
 ## Serverless / FaaS

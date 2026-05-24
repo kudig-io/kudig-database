@@ -22,7 +22,7 @@ Kubernetes 安全涵盖供应链、准入控制、运行时、网络、密钥管
 
 ### Sigstore / Cosign — 无钥签名
 
-[[Sigstore]] 是 CNCF 毕业项目，提供无钥签名基础设施：
+Sigstore 是 CNCF 毕业项目，提供无钥签名基础设施：
 
 | 组件 | 功能 |
 |------|------|
@@ -206,7 +206,7 @@ spec:
 
 ### External Secrets Operator (ESO)
 
-[[ESO]] 是 CNCF Incubating 项目，将外部密钥管理系统与 K8S 同步：
+ESO 是 CNCF Incubating 项目，将外部密钥管理系统与 K8S 同步：
 
 ```yaml
 apiVersion: external-secrets.io/v1beta1
@@ -328,7 +328,7 @@ metadata:
 
 ### kube-bench — 自动化安全扫描
 
-[[kube-bench]] 实现 CIS Kubernetes Benchmark 自动检测：
+kube-bench 实现 CIS Kubernetes Benchmark 自动检测：
 
 ```bash
 # 运行 CIS 基准扫描
@@ -366,9 +366,9 @@ CIS Benchmark 主要检查项：
 - [[Cilium]] — eBPF 网络与安全
 - [[Kyverno]] — YAML 原生策略引擎
 - [[Falco]] — 运行时威胁检测
-- [[Sigstore]] — 无钥签名体系
-- [[Pod Security Standards]] — Pod 安全标准
-- [[RBAC]] — 基于角色的访问控制
+- Sigstore — 无钥签名体系
+- Pod Security Standards — Pod 安全标准
+- RBAC — 基于角色的访问控制
 
 ## Related
 

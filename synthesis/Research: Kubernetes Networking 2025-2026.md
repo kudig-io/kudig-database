@@ -77,11 +77,11 @@ Submariner、Cilium ClusterMesh、Skupper 等方案在 2025 年趋于稳定：
 ## 核心概念
 
 - [[concepts/k8s-networking-evolution]] — Kubernetes 网络模型的演进路径
-- [[concepts/ebpf-networking]] — eBPF 在网络领域的应用原理
-- [[concepts/service-mesh-ambient]] — Ambient Mesh 架构与设计哲学
-- [[concepts/gateway-api]] — Gateway API 规范与实现
-- [[concepts/multi-cluster-networking]] — 多集群网络互联方案
-- [[concepts/zero-trust-networking]] — 零信任网络在 K8s 中的落地
+- eBPF 网络 — eBPF 在网络领域的应用原理
+- Ambient Mesh — Ambient Mesh 架构与设计哲学
+- Gateway API — Gateway API 规范与实现
+- 多集群网络 — 多集群网络互联方案
+- 零信任网络 — 零信任网络在 K8s 中的落地
 
 ## 矛盾与张力
 

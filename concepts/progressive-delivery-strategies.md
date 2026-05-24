@@ -53,7 +53,7 @@ updated: 2026-05-24
 - 支持按用户/租户/百分比灰度
 - A/B 测试能力
 
-相关：[[openfeature-standard]] 下文详述
+相关：OpenFeature 下文详述
 
 ## Argo Rollouts v1.9
 
@@ -151,7 +151,7 @@ Rollouts Controller / Flagger
 - **自动化**：人工干预仅在策略设计阶段
 - **可审计**：Git 历史即发布记录
 
-相关：[[gitops-foundations]]
+相关：GitOps
 
 ## OpenFeature CNCF 标准 + flagd
 
@@ -217,14 +217,14 @@ overlays/
       └── kustomization.yaml    # 副本数 5，高资源，Canary 策略
 ```
 
-相关：[[container-orchestration-k8s]]
+相关：container orchestration
 
 ## 相关概念
 
-- [[gitops-foundations]]：GitOps 基础设施管理
-- [[container-orchestration-k8s]]：Kubernetes 编排
+- GitOps：GitOps 基础设施管理
+- container orchestration：Kubernetes 编排
 - [[platform-engineering-idp]]：平台工程与 IDP
-- [[cloud-native-security-zero-trust]]：零信任安全
+- cloud native security：零信任安全
 
 ## Related
 

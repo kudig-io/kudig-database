@@ -39,7 +39,7 @@ updated: 2026-05-24
 - **AI-Native 能力**：内置 AI 助手插件，支持自然语言查询目录、生成文档
 - **MCP（Model Context Protocol）支持**：AI Agent 可通过 MCP 协议直接消费 Backstage 目录和模板
 
-相关：[[developer-experience-tooling]]
+相关：developer experience tooling
 
 ## Crossplane v2
 
@@ -52,7 +52,7 @@ v2 关键演进：
 - **AI Agent 消费**：Crossplane 的声明式 API 天然适合 AI Agent 发现和消费，Agent 可通过 kubectl/REST 创建资源声明
 - **环境晋升（Environment Promotion）**：原生支持跨环境（dev → staging → prod）的资源配置晋升
 
-与 [[gitops-foundations]] 深度集成：Crossplane Claims 存储在 Git 中，由 ArgoCD/Flux 同步。
+与 GitOps 深度集成：Crossplane Claims 存储在 Git 中，由 ArgoCD/Flux 同步。
 
 ## Humanitec Platform Orchestrator
 
@@ -87,7 +87,7 @@ resources:
 
 - **Promises 抽象**：将平台能力封装为 Promise，开发者请求后自动编排
 - **工作流编排**：Promise 内定义多阶段工作流（创建、更新、删除）
-- **GitOps 原生**：状态存储在 Git 中，与 [[gitops-foundations]] 对齐
+- **GitOps 原生**：状态存储在 Git 中，与 GitOps 实践对齐
 - **渐进式采用**：可逐步添加 Promises，无需一次性重构
 
 ## 平台工程团队结构
@@ -134,10 +134,10 @@ GitOps (ArgoCD / Flux)
 
 ## 相关概念
 
-- [[developer-experience-tooling]]：开发者体验工具链
-- [[gitops-foundations]]：GitOps 基础设施管理
+- developer experience tooling：开发者体验工具链
+- GitOps：GitOps 基础设施管理
 - [[progressive-delivery-strategies]]：渐进式交付策略
-- [[cloud-native-security-zero-trust]]：零信任安全模型
+- cloud native security：零信任安全模型
 
 ## Related
 

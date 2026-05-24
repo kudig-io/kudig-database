@@ -48,10 +48,10 @@ RTO ↑
 
 | 工具 | 特点 |
 |------|------|
-| [[velero\|Velero]] | K8s 原生备份，支持 PV 快照、资源对象导出，多云兼容 |
-| [[kasten\|Kasten K10]] | Veeam 旗下，企业级数据保护，应用感知备份 |
-| [[trilio\|TrilioVault]] | 多集群统一备份管理，支持增量快照 |
-| [[backube\|Backube]] | 开源 Operator，支持 CSI VolumeSnapshot + rsync |
+| Velero | K8s 原生备份，支持 PV 快照、资源对象导出，多云兼容 |
+| Kasten K10 | Veeam 旗下，企业级数据保护，应用感知备份 |
+| TrilioVault | 多集群统一备份管理，支持增量快照 |
+| Backube | 开源 Operator，支持 CSI VolumeSnapshot + rsync |
 
 ---
 
@@ -102,7 +102,7 @@ spec:
 
 ### Redis Enterprise CRDT
 
-[[redis-enterprise|Redis Enterprise]] 使用 CRDT（Conflict-free Replicated Data Types）实现多主复制：
+Redis Enterprise 使用 CRDT（Conflict-free Replicated Data Types）实现多主复制：
 
 - **Active-Active**：多个区域同时接受写入，CRDT 自动解决冲突
 - **支持的数据结构**：String（Last-Writer-Wins）、Set/Hash/Sorted Set（并集合并）
@@ -165,7 +165,7 @@ spec:
 
 ### Cluster API (CAPI)
 
-[[cluster-api|Cluster API]] 实现集群生命周期自动化：
+Cluster API 实现集群生命周期自动化：
 
 ```yaml
 # 灾难场景：快速重建 DR 集群
@@ -359,11 +359,11 @@ spec:
 ## 相关概念
 
 - [[capacity-planning-cost-optimization|容量规划与成本优化]]
-- [[multi-cluster-management|多集群管理]]
-- [[service-mesh|服务网格]]
-- [[gitops|GitOps]]
-- [[platform-engineering|平台工程]]
-- [[chaos-engineering|混沌工程]]
+- 多集群管理
+- 服务网格
+- GitOps
+- 平台工程
+- 混沌工程
 
 ## Related
 

@@ -35,12 +35,12 @@ updated: 2026-05-24
 
 相关核心概念详见 [[concepts/k8s-ai-ml-infrastructure]]，涵盖：
 
-- [[concepts/dra-gpu-scheduling]] — Dynamic Resource Allocation与GPU资源管理
-- [[concepts/vllm-inference]] — vLLM架构与K8S集成模式
-- [[concepts/kubeflow-v2]] — Kubeflow Pipelines v2架构演进
-- [[concepts/ray-on-k8s]] — Ray分布式计算在K8S上的部署模型
-- [[concepts/model-serving-standards]] — Open Inference Protocol与模型服务标准
-- [[concepts/ai-gateway]] — AI Gateway与推理流量管理
+- DRA GPU 调度 — Dynamic Resource Allocation与GPU资源管理
+- vLLM 推理 — vLLM架构与K8S集成模式
+- Kubeflow — Kubeflow Pipelines v2架构演进
+- Ray on K8S — Ray分布式计算在K8S上的部署模型
+- 模型服务标准 — Open Inference Protocol与模型服务标准
+- AI Gateway — AI Gateway与推理流量管理
 
 ## 矛盾与争议
 

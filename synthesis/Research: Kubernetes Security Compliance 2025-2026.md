@@ -34,11 +34,11 @@ updated: 2026-05-24
 相关核心概念详见 [[concepts/k8s-security-compliance]]，涵盖：
 
 - [[concepts/supply-chain-security]] — Sigstore、SLSA与镜像签名验证
-- [[concepts/ebpf-runtime-security]] — eBPF运行时监控与Tetragon
-- [[concepts/cel-native-policies]] — CEL策略引擎与Admission Policy GA
-- [[concepts/zero-trust-mtls]] — mTLS、SPIFFE与零信任微分段
-- [[concepts/secret-management]] — External Secrets Operator与CSI Driver
-- [[concepts/compliance-as-code]] — 持续合规验证与CIS/NIST映射
+- eBPF 运行时安全 — eBPF运行时监控与Tetragon
+- CEL 原生策略 — CEL策略引擎与Admission Policy GA
+- 零信任 mTLS — mTLS、SPIFFE与零信任微分段
+- [[concepts/secrets-management]] — External Secrets Operator与CSI Driver
+- Compliance-as-Code — 持续合规验证与CIS/NIST映射
 
 ## 矛盾与争议
 
