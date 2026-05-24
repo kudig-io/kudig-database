@@ -49,3 +49,6 @@ updated: 2026-05-21
 ## 相关 Domain
 - [[domain-07-platform-engineering/98-merged-indexes/index|Domain 07 平台工程 索引]]
 - [[domain-09-reliability-engineering/98-merged-indexes/index|Domain 09 可靠性工程 索引]]
+
+## 生产运行手册
+- [[domain-11-production-operations/05-production-runbook-generator|Production Runbook Generator]]

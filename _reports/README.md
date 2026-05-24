@@ -116,6 +116,9 @@ reports/
 - [[_reports/execution-plan|Execution Plan]]
 - [[_reports/domain-migration-EXECUTED-2026-05-21|Domain Migration Executed]]
 
+### RAG 报告
+- [[_reports/rag-chunking-report|RAG Chunking Report]]
+
 ### 质量报告
 - [[_reports/QUALITY_REPORT_v2.0|Quality Report v2.0]]
 - [[_reports/QUALITY_REPORT_v3.0|Quality Report v3.0]]

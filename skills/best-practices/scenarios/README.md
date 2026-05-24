@@ -99,3 +99,7 @@ created: "2026-05-23"
 - [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+
+## 场景案例
+- [[skills/best-practices/scenarios/cluster-deployment|Cluster Deployment]]
+- [[skills/best-practices/scenarios/upgrade-migration|Upgrade Migration]]
