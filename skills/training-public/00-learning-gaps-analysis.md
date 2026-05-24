@@ -260,4 +260,4 @@ Phase 3（持续）:
 **关联文档**:
 - [[00-beginner-learning-roadmap]] — 多路径小白学习路线图（本文档的后续行动）
 - [[README]] — topic-learn 总入口
-- [[fundamentals/01-what-is-kubernetes]] — 现有入门第一课
+- [[skills/training-lecturer/01-introduction/01-what-is-kubernetes]] — 现有入门第一课

@@ -159,8 +159,8 @@ created: "2026-05-23"
 
 | 专题 | 说明 |
 |:---|:---|
-| [topic-febm](../domain-10-troubleshooting-diagnostics/[[topic-febm/README]].md) | FEBM 法医鉴定循证方法论（归纳法视角，与FTA互补） |
-| [topic-structural-trouble-shooting](../domain-10-troubleshooting-diagnostics/[[topic-structural-trouble-shooting/README]].md) | 结构化故障排查知识库 |
+| [topic-febm](../domain-10-troubleshooting-diagnostics/[[domain-10-troubleshooting-diagnostics/topic-febm/README]].md) | FEBM 法医鉴定循证方法论（归纳法视角，与FTA互补） |
+| [topic-structural-trouble-shooting](../domain-10-troubleshooting-diagnostics/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README]].md) | 结构化故障排查知识库 |
 | [domain-10-troubleshooting-diagnostics](../domain-10-troubleshooting-diagnostics/) | 传统故障排查文档 |
 | [domain-06-observability](../domain-06-observability/) | 可观测性体系 |
 

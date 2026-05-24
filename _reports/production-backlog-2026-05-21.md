@@ -36,7 +36,7 @@ updated: 2026-05-24
 
 **问题**: 本次新增的 16 个文件全部包含指向不存在页面的 wikilink。
 
-**影响**: 远程顾问模式的核心机制是「概念 → 诊断 → 修复」的知识链路。当加载 `concepts/ingress-controller.md` 并尝试跳转到 `[[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/README|ingress-gateway-troubleshooting]]` 时，文件不存在，链路断裂。
+**影响**: 远程顾问模式的核心机制是「概念 → 诊断 → 修复」的知识链路。当加载 `concepts/ingress-controller.md` 并尝试跳转到 `[[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/SKILL|ingress-gateway-troubleshooting]]` 时，文件不存在，链路断裂。
 
 **涉及文件和 broken link 分布**:
 
@@ -52,7 +52,7 @@ updated: 2026-05-24
 **修复策略**:
 - **方案 A**（推荐）: 将不存在的 wikilink 替换为纯文本描述，或创建对应的 stub 页面
 - **方案 B**: 创建缺失的 troubleshooting/skill 页面（工作量大，但最完整）
-- **方案 C**: 修改 wikilink 指向到现有最接近的页面（如 `[[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/README|ingress-gateway-troubleshooting]]` → `[[domain-10-troubleshooting-diagnostics/98-merged-indexes/index|domain-10-troubleshooting-diagnostics]]`）
+- **方案 C**: 修改 wikilink 指向到现有最接近的页面（如 `[[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/SKILL|ingress-gateway-troubleshooting]]` → `[[domain-10-troubleshooting-diagnostics/98-merged-indexes/index|domain-10-troubleshooting-diagnostics]]`）
 
 **建议**: 先执行方案 A（纯文本化）确保生产可用，后续再按需创建 stub。
 

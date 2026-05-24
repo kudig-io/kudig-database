@@ -160,7 +160,7 @@ data:
 
 ## 相关链接
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-image-pull/README|image-pull-troubleshooting]] — 镜像拉取问题排查
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-image-pull/README|k8s-image-pull]] — K8s 镜像拉取机制
+- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-image-pull/SKILL|image-pull-troubleshooting]] — 镜像拉取问题排查
+- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-image-pull/SKILL|k8s-image-pull]] — K8s 镜像拉取机制
 - [[domain-13-container-runtime/01-containerd-deep-guide|container-runtime-security]] — 容器运行时安全
 - [[domain-13-container-runtime/01-containerd-deep-guide|docker-migration-containerd]] — Docker 迁移至 containerd 指南

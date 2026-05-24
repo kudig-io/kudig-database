@@ -109,247 +109,247 @@ updated: 2026-05-21
 
 #### 配置管理
 
-- [[topic-dictionary/configuration/configmaps|configmaps]] — Configmaps
-- [[topic-dictionary/configuration/liveness-readiness-and-startup-probes|liveness-readiness-and-startup-probes]] — Liveness readiness and startup probes
-- [[topic-dictionary/configuration/organizing-cluster-access-using-kubeconfig-files|organizing-cluster-access-using-kubeconfig-files]] — Organizing cluster access using kubeconfig files
-- [[topic-dictionary/configuration/resource-management-for-pods-and-containers|resource-management-for-pods-and-containers]] — Resource management for pods and containers
-- [[topic-dictionary/configuration/resource-management-for-windows-nodes|resource-management-for-windows-nodes]] — Resource management for windows nodes
-- [[topic-dictionary/configuration/secrets|secrets]] — Secrets
+- [[domain-17-system-foundation/topic-dictionary/configuration/configmaps|configmaps]] — Configmaps
+- [[domain-17-system-foundation/topic-dictionary/configuration/liveness-readiness-and-startup-probes|liveness-readiness-and-startup-probes]] — Liveness readiness and startup probes
+- [[domain-17-system-foundation/topic-dictionary/configuration/organizing-cluster-access-using-kubeconfig-files|organizing-cluster-access-using-kubeconfig-files]] — Organizing cluster access using kubeconfig files
+- [[domain-17-system-foundation/topic-dictionary/configuration/resource-management-for-pods-and-containers|resource-management-for-pods-and-containers]] — Resource management for pods and containers
+- [[domain-17-system-foundation/topic-dictionary/configuration/resource-management-for-windows-nodes|resource-management-for-windows-nodes]] — Resource management for windows nodes
+- [[domain-17-system-foundation/topic-dictionary/configuration/secrets|secrets]] — Secrets
 
 #### 基础概念
 
-- [[topic-dictionary/fundamentals/about-cgroup-v2|about-cgroup-v2]] — About cgroup v2
-- [[topic-dictionary/fundamentals/annotations|annotations]] — Annotations
-- [[topic-dictionary/fundamentals/cloud-controller-manager|cloud-controller-manager]] — Cloud controller manager
-- [[topic-dictionary/fundamentals/communication-between-nodes-and-the-control-plane|communication-between-nodes-and-the-control-plane]] — Communication between nodes and the control plane
-- [[topic-dictionary/fundamentals/controllers|controllers]] — Controllers
-- [[topic-dictionary/fundamentals/field-selectors|field-selectors]] — Field selectors
-- [[topic-dictionary/fundamentals/finalizers|finalizers]] — Finalizers
-- [[topic-dictionary/fundamentals/garbage-collection|garbage-collection]] — Garbage collection
-- [[topic-dictionary/fundamentals/kubernetes-components|kubernetes-components]] — Kubernetes components
-- [[topic-dictionary/fundamentals/kubernetes-concepts-reference|kubernetes-concepts-reference]] — Kubernetes concepts reference
-- [[topic-dictionary/fundamentals/kubernetes-object-management|kubernetes-object-management]] — Kubernetes object management
-- [[topic-dictionary/fundamentals/kubernetes-self-healing|kubernetes-self-healing]] — Kubernetes self healing
-- [[topic-dictionary/fundamentals/labels-and-selectors|labels-and-selectors]] — Labels and selectors
-- [[topic-dictionary/fundamentals/leases|leases]] — Leases
-- [[topic-dictionary/fundamentals/mixed-version-proxy|mixed-version-proxy]] — Mixed version proxy
-- [[topic-dictionary/fundamentals/namespaces|namespaces]] — Namespaces
-- [[topic-dictionary/fundamentals/nodes|nodes]] — Nodes
-- [[topic-dictionary/fundamentals/object-names-and-ids|object-names-and-ids]] — Object names and ids
-- [[topic-dictionary/fundamentals/objects-in-kubernetes|objects-in-kubernetes]] — Objects in kubernetes
-- [[topic-dictionary/fundamentals/owners-and-dependents|owners-and-dependents]] — Owners and dependents
-- [[topic-dictionary/fundamentals/recommended-labels|recommended-labels]] — Recommended labels
-- [[topic-dictionary/fundamentals/storage-versions|storage-versions]] — Storage versions
-- [[topic-dictionary/fundamentals/the-kubectl-command-line-tool|the-kubectl-command-line-tool]] — The kubectl command line tool
-- [[topic-dictionary/fundamentals/the-kubernetes-api|the-kubernetes-api]] — The kubernetes api
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/about-cgroup-v2|about-cgroup-v2]] — About cgroup v2
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/annotations|annotations]] — Annotations
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/cloud-controller-manager|cloud-controller-manager]] — Cloud controller manager
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/communication-between-nodes-and-the-control-plane|communication-between-nodes-and-the-control-plane]] — Communication between nodes and the control plane
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/controllers|controllers]] — Controllers
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/field-selectors|field-selectors]] — Field selectors
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/finalizers|finalizers]] — Finalizers
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/garbage-collection|garbage-collection]] — Garbage collection
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes-components|kubernetes-components]] — Kubernetes components
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes-concepts-reference|kubernetes-concepts-reference]] — Kubernetes concepts reference
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes-object-management|kubernetes-object-management]] — Kubernetes object management
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes-self-healing|kubernetes-self-healing]] — Kubernetes self healing
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/labels-and-selectors|labels-and-selectors]] — Labels and selectors
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/leases|leases]] — Leases
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/mixed-version-proxy|mixed-version-proxy]] — Mixed version proxy
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces|namespaces]] — Namespaces
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes|nodes]] — Nodes
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/object-names-and-ids|object-names-and-ids]] — Object names and ids
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/objects-in-kubernetes|objects-in-kubernetes]] — Objects in kubernetes
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/owners-and-dependents|owners-and-dependents]] — Owners and dependents
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/recommended-labels|recommended-labels]] — Recommended labels
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/storage-versions|storage-versions]] — Storage versions
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubectl-command-line-tool|the-kubectl-command-line-tool]] — The kubectl command line tool
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|the-kubernetes-api]] — The kubernetes api
 
 #### 多云与边缘
 
-- [[topic-dictionary/multi-cloud/edge-computing-and-k3s|edge-computing-and-k3s]] — Edge computing and k3s
-- [[topic-dictionary/multi-cloud/multi-cloud-operations|multi-cloud-operations]] — Multi cloud operations
-- [[topic-dictionary/multi-cloud/spaceborne-computing|spaceborne-computing]] — Spaceborne computing
+- [[domain-17-system-foundation/topic-dictionary/multi-cloud/edge-computing-and-k3s|edge-computing-and-k3s]] — Edge computing and k3s
+- [[domain-17-system-foundation/topic-dictionary/multi-cloud/multi-cloud-operations|multi-cloud-operations]] — Multi cloud operations
+- [[domain-17-system-foundation/topic-dictionary/multi-cloud/spaceborne-computing|spaceborne-computing]] — Spaceborne computing
 
 #### 网络
 
-- [[topic-dictionary/networking/cluster-mesh|cluster-mesh]] — Cluster mesh
-- [[topic-dictionary/networking/cluster-networking|cluster-networking]] — Cluster networking
-- [[topic-dictionary/networking/dns-for-services-and-pods|dns-for-services-and-pods]] — Dns for services and pods
-- [[topic-dictionary/networking/ebpf-and-cilium-networking|ebpf-and-cilium-networking]] — Ebpf and cilium networking
-- [[topic-dictionary/networking/endpointslices|endpointslices]] — Endpointslices
-- [[topic-dictionary/networking/gateway-api|gateway-api]] — Gateway api
-- [[topic-dictionary/networking/ingress|ingress]] — Ingress
-- [[topic-dictionary/networking/ingress-controllers|ingress-controllers]] — Ingress controllers
-- [[topic-dictionary/networking/ipv4-ipv6-dual-stack|ipv4-ipv6-dual-stack]] — Ipv4 ipv6 dual stack
-- [[topic-dictionary/networking/network-policies|network-policies]] — Network policies
-- [[topic-dictionary/networking/networking-on-windows|networking-on-windows]] — Networking on windows
-- [[topic-dictionary/networking/service|service]] — Service
-- [[topic-dictionary/networking/service-clusterip-allocation|service-clusterip-allocation]] — Service clusterip allocation
-- [[topic-dictionary/networking/service-internal-traffic-policy|service-internal-traffic-policy]] — Service internal traffic policy
-- [[topic-dictionary/networking/service-mesh|service-mesh]] — Service mesh
-- [[topic-dictionary/networking/telco-cloud-and-5g-mec|telco-cloud-and-5g-mec]] — Telco cloud and 5g mec
-- [[topic-dictionary/networking/topology-aware-routing|topology-aware-routing]] — Topology aware routing
+- [[domain-17-system-foundation/topic-dictionary/networking/cluster-mesh|cluster-mesh]] — Cluster mesh
+- [[domain-17-system-foundation/topic-dictionary/networking/cluster-networking|cluster-networking]] — Cluster networking
+- [[domain-17-system-foundation/topic-dictionary/networking/dns-for-services-and-pods|dns-for-services-and-pods]] — Dns for services and pods
+- [[domain-17-system-foundation/topic-dictionary/networking/ebpf-and-cilium-networking|ebpf-and-cilium-networking]] — Ebpf and cilium networking
+- [[domain-17-system-foundation/topic-dictionary/networking/endpointslices|endpointslices]] — Endpointslices
+- [[domain-17-system-foundation/topic-dictionary/networking/gateway-api|gateway-api]] — Gateway api
+- [[domain-17-system-foundation/topic-dictionary/networking/ingress|ingress]] — Ingress
+- [[domain-17-system-foundation/topic-dictionary/networking/ingress-controllers|ingress-controllers]] — Ingress controllers
+- [[domain-17-system-foundation/topic-dictionary/networking/ipv4-ipv6-dual-stack|ipv4-ipv6-dual-stack]] — Ipv4 ipv6 dual stack
+- [[domain-17-system-foundation/topic-dictionary/networking/network-policies|network-policies]] — Network policies
+- [[domain-17-system-foundation/topic-dictionary/networking/networking-on-windows|networking-on-windows]] — Networking on windows
+- [[domain-17-system-foundation/topic-dictionary/networking/service|service]] — Service
+- [[domain-17-system-foundation/topic-dictionary/networking/service-clusterip-allocation|service-clusterip-allocation]] — Service clusterip allocation
+- [[domain-17-system-foundation/topic-dictionary/networking/service-internal-traffic-policy|service-internal-traffic-policy]] — Service internal traffic policy
+- [[domain-17-system-foundation/topic-dictionary/networking/service-mesh|service-mesh]] — Service mesh
+- [[domain-17-system-foundation/topic-dictionary/networking/telco-cloud-and-5g-mec|telco-cloud-and-5g-mec]] — Telco cloud and 5g mec
+- [[domain-17-system-foundation/topic-dictionary/networking/topology-aware-routing|topology-aware-routing]] — Topology aware routing
 
 #### 可观测性
 
-- [[topic-dictionary/observability/alerting-and-slo-monitoring|alerting-and-slo-monitoring]] — Alerting and slo monitoring
-- [[topic-dictionary/observability/llm-observability|llm-observability]] — Llm observability
-- [[topic-dictionary/observability/log-aggregation-with-loki|log-aggregation-with-loki]] — Log aggregation with loki
-- [[topic-dictionary/observability/logging-architecture|logging-architecture]] — Logging architecture
-- [[topic-dictionary/observability/metrics-for-kubernetes-object-states|metrics-for-kubernetes-object-states]] — Metrics for kubernetes object states
-- [[topic-dictionary/observability/metrics-for-kubernetes-system-components|metrics-for-kubernetes-system-components]] — Metrics for kubernetes system components
-- [[topic-dictionary/observability/observability|observability]] — Observability
-- [[topic-dictionary/observability/opentelemetry-and-distributed-tracing|opentelemetry-and-distributed-tracing]] — Opentelemetry and distributed tracing
-- [[topic-dictionary/observability/system-logs|system-logs]] — System logs
-- [[topic-dictionary/observability/traces-for-kubernetes-system-components|traces-for-kubernetes-system-components]] — Traces for kubernetes system components
+- [[domain-17-system-foundation/topic-dictionary/observability/alerting-and-slo-monitoring|alerting-and-slo-monitoring]] — Alerting and slo monitoring
+- [[domain-17-system-foundation/topic-dictionary/observability/llm-observability|llm-observability]] — Llm observability
+- [[domain-17-system-foundation/topic-dictionary/observability/log-aggregation-with-loki|log-aggregation-with-loki]] — Log aggregation with loki
+- [[domain-17-system-foundation/topic-dictionary/observability/logging-architecture|logging-architecture]] — Logging architecture
+- [[domain-17-system-foundation/topic-dictionary/observability/metrics-for-kubernetes-object-states|metrics-for-kubernetes-object-states]] — Metrics for kubernetes object states
+- [[domain-17-system-foundation/topic-dictionary/observability/metrics-for-kubernetes-system-components|metrics-for-kubernetes-system-components]] — Metrics for kubernetes system components
+- [[domain-17-system-foundation/topic-dictionary/observability/observability|observability]] — Observability
+- [[domain-17-system-foundation/topic-dictionary/observability/opentelemetry-and-distributed-tracing|opentelemetry-and-distributed-tracing]] — Opentelemetry and distributed tracing
+- [[domain-17-system-foundation/topic-dictionary/observability/system-logs|system-logs]] — System logs
+- [[domain-17-system-foundation/topic-dictionary/observability/traces-for-kubernetes-system-components|traces-for-kubernetes-system-components]] — Traces for kubernetes system components
 
 #### 运维实践
 
-- [[topic-dictionary/operations/backup-disaster-recovery|backup-disaster-recovery]] — Backup disaster recovery
-- [[topic-dictionary/operations/capacity-planning-forecasting|capacity-planning-forecasting]] — Capacity planning forecasting
-- [[topic-dictionary/operations/certificates|certificates]] — Certificates
-- [[topic-dictionary/operations/change-management-release|change-management-release]] — Change management release
-- [[topic-dictionary/operations/chaos-engineering|chaos-engineering]] — Chaos engineering
-- [[topic-dictionary/operations/enterprise-ops-practices|enterprise-ops-practices]] — Enterprise ops practices
-- [[topic-dictionary/operations/failure-patterns-analysis|failure-patterns-analysis]] — Failure patterns analysis
-- [[topic-dictionary/operations/finops-and-cost-optimization|finops-and-cost-optimization]] — Finops and cost optimization
-- [[topic-dictionary/operations/greenops-and-carbon-aware-computing|greenops-and-carbon-aware-computing]] — Greenops and carbon aware computing
-- [[topic-dictionary/operations/incident-management-runbooks|incident-management-runbooks]] — Incident management runbooks
-- [[topic-dictionary/operations/installing-addons|installing-addons]] — Installing addons
-- [[topic-dictionary/operations/node-autoscaling|node-autoscaling]] — Node autoscaling
-- [[topic-dictionary/operations/node-shutdowns|node-shutdowns]] — Node shutdowns
-- [[topic-dictionary/operations/operations-best-practices|operations-best-practices]] — Operations best practices
-- [[topic-dictionary/operations/performance-tuning-expert|performance-tuning-expert]] — Performance tuning expert
-- [[topic-dictionary/operations/production-troubleshooting-playbook|production-troubleshooting-playbook]] — Production troubleshooting playbook
-- [[topic-dictionary/operations/sli-slo-sla-engineering|sli-slo-sla-engineering]] — Sli slo sla engineering
-- [[topic-dictionary/operations/sre-maturity-model|sre-maturity-model]] — Sre maturity model
-- [[topic-dictionary/operations/stateful-services-operations|stateful-services-operations]] — Stateful services operations
-- [[topic-dictionary/operations/swap-memory-management|swap-memory-management]] — Swap memory management
+- [[domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery|backup-disaster-recovery]] — Backup disaster recovery
+- [[domain-17-system-foundation/topic-dictionary/operations/capacity-planning-forecasting|capacity-planning-forecasting]] — Capacity planning forecasting
+- [[domain-17-system-foundation/topic-dictionary/operations/certificates|certificates]] — Certificates
+- [[domain-17-system-foundation/topic-dictionary/operations/change-management-release|change-management-release]] — Change management release
+- [[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering|chaos-engineering]] — Chaos engineering
+- [[domain-17-system-foundation/topic-dictionary/operations/enterprise-ops-practices|enterprise-ops-practices]] — Enterprise ops practices
+- [[domain-17-system-foundation/topic-dictionary/operations/failure-patterns-analysis|failure-patterns-analysis]] — Failure patterns analysis
+- [[domain-17-system-foundation/topic-dictionary/operations/finops-and-cost-optimization|finops-and-cost-optimization]] — Finops and cost optimization
+- [[domain-17-system-foundation/topic-dictionary/operations/greenops-and-carbon-aware-computing|greenops-and-carbon-aware-computing]] — Greenops and carbon aware computing
+- [[domain-17-system-foundation/topic-dictionary/operations/incident-management-runbooks|incident-management-runbooks]] — Incident management runbooks
+- [[domain-17-system-foundation/topic-dictionary/operations/installing-addons|installing-addons]] — Installing addons
+- [[domain-17-system-foundation/topic-dictionary/operations/node-autoscaling|node-autoscaling]] — Node autoscaling
+- [[domain-17-system-foundation/topic-dictionary/operations/node-shutdowns|node-shutdowns]] — Node shutdowns
+- [[domain-17-system-foundation/topic-dictionary/operations/operations-best-practices|operations-best-practices]] — Operations best practices
+- [[domain-17-system-foundation/topic-dictionary/operations/performance-tuning-expert|performance-tuning-expert]] — Performance tuning expert
+- [[domain-17-system-foundation/topic-dictionary/operations/production-troubleshooting-playbook|production-troubleshooting-playbook]] — Production troubleshooting playbook
+- [[domain-17-system-foundation/topic-dictionary/operations/sli-slo-sla-engineering|sli-slo-sla-engineering]] — Sli slo sla engineering
+- [[domain-17-system-foundation/topic-dictionary/operations/sre-maturity-model|sre-maturity-model]] — Sre maturity model
+- [[domain-17-system-foundation/topic-dictionary/operations/stateful-services-operations|stateful-services-operations]] — Stateful services operations
+- [[domain-17-system-foundation/topic-dictionary/operations/swap-memory-management|swap-memory-management]] — Swap memory management
 
 #### 平台工程
 
-- [[topic-dictionary/platform-engineering/admission-webhook-good-practices|admission-webhook-good-practices]] — Admission webhook good practices
-- [[topic-dictionary/platform-engineering/api-priority-and-fairness|api-priority-and-fairness]] — Api priority and fairness
-- [[topic-dictionary/platform-engineering/cluster-api-and-fleet-management|cluster-api-and-fleet-management]] — Cluster api and fleet management
-- [[topic-dictionary/platform-engineering/compatibility-version-for-control-plane|compatibility-version-for-control-plane]] — Compatibility version for control plane
-- [[topic-dictionary/platform-engineering/compute-storage-and-networking-extensions|compute-storage-and-networking-extensions]] — Compute storage and networking extensions
-- [[topic-dictionary/platform-engineering/coordinated-leader-election|coordinated-leader-election]] — Coordinated leader election
-- [[topic-dictionary/platform-engineering/custom-resources|custom-resources]] — Custom resources
-- [[topic-dictionary/platform-engineering/developer-portal-and-platform-metrics|developer-portal-and-platform-metrics]] — Developer portal and platform metrics
-- [[topic-dictionary/platform-engineering/device-plugins|device-plugins]] — Device plugins
-- [[topic-dictionary/platform-engineering/dynamic-resource-allocation-good-practices|dynamic-resource-allocation-good-practices]] — Dynamic resource allocation good practices
-- [[topic-dictionary/platform-engineering/extending-the-kubernetes-api|extending-the-kubernetes-api]] — Extending the kubernetes api
-- [[topic-dictionary/platform-engineering/gitops-and-continuous-delivery|gitops-and-continuous-delivery]] — Gitops and continuous delivery
-- [[topic-dictionary/platform-engineering/infrastructure-as-code-for-kubernetes|infrastructure-as-code-for-kubernetes]] — Infrastructure as code for kubernetes
-- [[topic-dictionary/platform-engineering/kubernetes-api-aggregation-layer|kubernetes-api-aggregation-layer]] — Kubernetes api aggregation layer
-- [[topic-dictionary/platform-engineering/kubevirt-virtual-machines|kubevirt-virtual-machines]] — Kubevirt virtual machines
-- [[topic-dictionary/platform-engineering/network-plugins|network-plugins]] — Network plugins
-- [[topic-dictionary/platform-engineering/operator-pattern|operator-pattern]] — Operator pattern
-- [[topic-dictionary/platform-engineering/proxies-in-kubernetes|proxies-in-kubernetes]] — Proxies in kubernetes
-- [[topic-dictionary/platform-engineering/webassembly-wasm-workloads|webassembly-wasm-workloads]] — Webassembly wasm workloads
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/admission-webhook-good-practices|admission-webhook-good-practices]] — Admission webhook good practices
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-priority-and-fairness|api-priority-and-fairness]] — Api priority and fairness
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/cluster-api-and-fleet-management|cluster-api-and-fleet-management]] — Cluster api and fleet management
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/compatibility-version-for-control-plane|compatibility-version-for-control-plane]] — Compatibility version for control plane
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/compute-storage-and-networking-extensions|compute-storage-and-networking-extensions]] — Compute storage and networking extensions
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/coordinated-leader-election|coordinated-leader-election]] — Coordinated leader election
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/custom-resources|custom-resources]] — Custom resources
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/developer-portal-and-platform-metrics|developer-portal-and-platform-metrics]] — Developer portal and platform metrics
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/device-plugins|device-plugins]] — Device plugins
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/dynamic-resource-allocation-good-practices|dynamic-resource-allocation-good-practices]] — Dynamic resource allocation good practices
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/extending-the-kubernetes-api|extending-the-kubernetes-api]] — Extending the kubernetes api
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/gitops-and-continuous-delivery|gitops-and-continuous-delivery]] — Gitops and continuous delivery
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/infrastructure-as-code-for-kubernetes|infrastructure-as-code-for-kubernetes]] — Infrastructure as code for kubernetes
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/kubernetes-api-aggregation-layer|kubernetes-api-aggregation-layer]] — Kubernetes api aggregation layer
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/kubevirt-virtual-machines|kubevirt-virtual-machines]] — Kubevirt virtual machines
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/network-plugins|network-plugins]] — Network plugins
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern|operator-pattern]] — Operator pattern
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/proxies-in-kubernetes|proxies-in-kubernetes]] — Proxies in kubernetes
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/webassembly-wasm-workloads|webassembly-wasm-workloads]] — Webassembly wasm workloads
 
 #### 调度
 
-- [[topic-dictionary/scheduling/api-initiated-eviction|api-initiated-eviction]] — Api initiated eviction
-- [[topic-dictionary/scheduling/assigning-pods-to-nodes|assigning-pods-to-nodes]] — Assigning pods to nodes
-- [[topic-dictionary/scheduling/dynamic-resource-allocation|dynamic-resource-allocation]] — Dynamic resource allocation
-- [[topic-dictionary/scheduling/gang-scheduling|gang-scheduling]] — Gang scheduling
-- [[topic-dictionary/scheduling/karpenter-autoscaling|karpenter-autoscaling]] — Karpenter autoscaling
-- [[topic-dictionary/scheduling/kubernetes-scheduler|kubernetes-scheduler]] — Kubernetes scheduler
-- [[topic-dictionary/scheduling/node-declared-features|node-declared-features]] — Node declared features
-- [[topic-dictionary/scheduling/node-pressure-eviction|node-pressure-eviction]] — Node pressure eviction
-- [[topic-dictionary/scheduling/pod-overhead|pod-overhead]] — Pod overhead
-- [[topic-dictionary/scheduling/pod-priority-and-preemption|pod-priority-and-preemption]] — Pod priority and preemption
-- [[topic-dictionary/scheduling/pod-scheduling-readiness|pod-scheduling-readiness]] — Pod scheduling readiness
-- [[topic-dictionary/scheduling/pod-topology-spread-constraints|pod-topology-spread-constraints]] — Pod topology spread constraints
-- [[topic-dictionary/scheduling/resource-bin-packing|resource-bin-packing]] — Resource bin packing
-- [[topic-dictionary/scheduling/scheduler-performance-tuning|scheduler-performance-tuning]] — Scheduler performance tuning
-- [[topic-dictionary/scheduling/scheduling-framework|scheduling-framework]] — Scheduling framework
-- [[topic-dictionary/scheduling/taints-and-tolerations|taints-and-tolerations]] — Taints and tolerations
+- [[domain-17-system-foundation/topic-dictionary/scheduling/api-initiated-eviction|api-initiated-eviction]] — Api initiated eviction
+- [[domain-17-system-foundation/topic-dictionary/scheduling/assigning-pods-to-nodes|assigning-pods-to-nodes]] — Assigning pods to nodes
+- [[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation|dynamic-resource-allocation]] — Dynamic resource allocation
+- [[domain-17-system-foundation/topic-dictionary/scheduling/gang-scheduling|gang-scheduling]] — Gang scheduling
+- [[domain-17-system-foundation/topic-dictionary/scheduling/karpenter-autoscaling|karpenter-autoscaling]] — Karpenter autoscaling
+- [[domain-17-system-foundation/topic-dictionary/scheduling/kubernetes-scheduler|kubernetes-scheduler]] — Kubernetes scheduler
+- [[domain-17-system-foundation/topic-dictionary/scheduling/node-declared-features|node-declared-features]] — Node declared features
+- [[domain-17-system-foundation/topic-dictionary/scheduling/node-pressure-eviction|node-pressure-eviction]] — Node pressure eviction
+- [[domain-17-system-foundation/topic-dictionary/scheduling/pod-overhead|pod-overhead]] — Pod overhead
+- [[domain-17-system-foundation/topic-dictionary/scheduling/pod-priority-and-preemption|pod-priority-and-preemption]] — Pod priority and preemption
+- [[domain-17-system-foundation/topic-dictionary/scheduling/pod-scheduling-readiness|pod-scheduling-readiness]] — Pod scheduling readiness
+- [[domain-17-system-foundation/topic-dictionary/scheduling/pod-topology-spread-constraints|pod-topology-spread-constraints]] — Pod topology spread constraints
+- [[domain-17-system-foundation/topic-dictionary/scheduling/resource-bin-packing|resource-bin-packing]] — Resource bin packing
+- [[domain-17-system-foundation/topic-dictionary/scheduling/scheduler-performance-tuning|scheduler-performance-tuning]] — Scheduler performance tuning
+- [[domain-17-system-foundation/topic-dictionary/scheduling/scheduling-framework|scheduling-framework]] — Scheduling framework
+- [[domain-17-system-foundation/topic-dictionary/scheduling/taints-and-tolerations|taints-and-tolerations]] — Taints and tolerations
 
 #### 安全
 
-- [[topic-dictionary/security/application-security-checklist|application-security-checklist]] — Application security checklist
-- [[topic-dictionary/security/cloud-native-security|cloud-native-security]] — Cloud native security
-- [[topic-dictionary/security/cloud-native-security-practices|cloud-native-security-practices]] — Cloud native security practices
-- [[topic-dictionary/security/controlling-access-to-the-kubernetes-api|controlling-access-to-the-kubernetes-api]] — Controlling access to the kubernetes api
-- [[topic-dictionary/security/good-practices-for-kubernetes-secrets|good-practices-for-kubernetes-secrets]] — Good practices for kubernetes secrets
-- [[topic-dictionary/security/hardening-guide---authentication-mechanisms|hardening-guide---authentication-mechanisms]] — Hardening guide   authentication mechanisms
-- [[topic-dictionary/security/hardening-guide---scheduler-configuration|hardening-guide---scheduler-configuration]] — Hardening guide   scheduler configuration
-- [[topic-dictionary/security/kubernetes-api-server-bypass-risks|kubernetes-api-server-bypass-risks]] — Kubernetes api server bypass risks
-- [[topic-dictionary/security/limit-ranges|limit-ranges]] — Limit ranges
-- [[topic-dictionary/security/linux-kernel-security-constraints-for-pods-and-containers|linux-kernel-security-constraints-for-pods-and-containers]] — Linux kernel security constraints for pods and containers
-- [[topic-dictionary/security/multi-tenancy|multi-tenancy]] — Multi tenancy
-- [[topic-dictionary/security/node-resource-managers|node-resource-managers]] — Node resource managers
-- [[topic-dictionary/security/pod-security-admission|pod-security-admission]] — Pod security admission
-- [[topic-dictionary/security/pod-security-policies|pod-security-policies]] — Pod security policies
-- [[topic-dictionary/security/pod-security-standards|pod-security-standards]] — Pod security standards
-- [[topic-dictionary/security/policy-as-code|policy-as-code]] — Policy as code
-- [[topic-dictionary/security/process-id-limits-and-reservations|process-id-limits-and-reservations]] — Process id limits and reservations
-- [[topic-dictionary/security/resource-quotas|resource-quotas]] — Resource quotas
-- [[topic-dictionary/security/role-based-access-control-good-practices|role-based-access-control-good-practices]] — Role based access control good practices
-- [[topic-dictionary/security/runtime-security|runtime-security]] — Runtime security
-- [[topic-dictionary/security/secrets-management-deep-dive|secrets-management-deep-dive]] — Secrets management deep dive
-- [[topic-dictionary/security/security-checklist|security-checklist]] — Security checklist
-- [[topic-dictionary/security/security-for-linux-nodes|security-for-linux-nodes]] — Security for linux nodes
-- [[topic-dictionary/security/security-for-windows-nodes|security-for-windows-nodes]] — Security for windows nodes
-- [[topic-dictionary/security/service-accounts|service-accounts]] — Service accounts
-- [[topic-dictionary/security/spiffe-spire-identity|spiffe-spire-identity]] — Spiffe spire identity
-- [[topic-dictionary/security/supply-chain-security|supply-chain-security]] — Supply chain security
+- [[domain-17-system-foundation/topic-dictionary/security/application-security-checklist|application-security-checklist]] — Application security checklist
+- [[domain-17-system-foundation/topic-dictionary/security/cloud-native-security|cloud-native-security]] — Cloud native security
+- [[domain-17-system-foundation/topic-dictionary/security/cloud-native-security-practices|cloud-native-security-practices]] — Cloud native security practices
+- [[domain-17-system-foundation/topic-dictionary/security/controlling-access-to-the-kubernetes-api|controlling-access-to-the-kubernetes-api]] — Controlling access to the kubernetes api
+- [[domain-17-system-foundation/topic-dictionary/security/good-practices-for-kubernetes-secrets|good-practices-for-kubernetes-secrets]] — Good practices for kubernetes secrets
+- [[domain-17-system-foundation/topic-dictionary/security/hardening-guide---authentication-mechanisms|hardening-guide---authentication-mechanisms]] — Hardening guide   authentication mechanisms
+- [[domain-17-system-foundation/topic-dictionary/security/hardening-guide---scheduler-configuration|hardening-guide---scheduler-configuration]] — Hardening guide   scheduler configuration
+- [[domain-17-system-foundation/topic-dictionary/security/kubernetes-api-server-bypass-risks|kubernetes-api-server-bypass-risks]] — Kubernetes api server bypass risks
+- [[domain-17-system-foundation/topic-dictionary/security/limit-ranges|limit-ranges]] — Limit ranges
+- [[domain-17-system-foundation/topic-dictionary/security/linux-kernel-security-constraints-for-pods-and-containers|linux-kernel-security-constraints-for-pods-and-containers]] — Linux kernel security constraints for pods and containers
+- [[domain-17-system-foundation/topic-dictionary/security/multi-tenancy|multi-tenancy]] — Multi tenancy
+- [[domain-17-system-foundation/topic-dictionary/security/node-resource-managers|node-resource-managers]] — Node resource managers
+- [[domain-17-system-foundation/topic-dictionary/security/pod-security-admission|pod-security-admission]] — Pod security admission
+- [[domain-17-system-foundation/topic-dictionary/security/pod-security-policies|pod-security-policies]] — Pod security policies
+- [[domain-17-system-foundation/topic-dictionary/security/pod-security-standards|pod-security-standards]] — Pod security standards
+- [[domain-17-system-foundation/topic-dictionary/security/policy-as-code|policy-as-code]] — Policy as code
+- [[domain-17-system-foundation/topic-dictionary/security/process-id-limits-and-reservations|process-id-limits-and-reservations]] — Process id limits and reservations
+- [[domain-17-system-foundation/topic-dictionary/security/resource-quotas|resource-quotas]] — Resource quotas
+- [[domain-17-system-foundation/topic-dictionary/security/role-based-access-control-good-practices|role-based-access-control-good-practices]] — Role based access control good practices
+- [[domain-17-system-foundation/topic-dictionary/security/runtime-security|runtime-security]] — Runtime security
+- [[domain-17-system-foundation/topic-dictionary/security/secrets-management-deep-dive|secrets-management-deep-dive]] — Secrets management deep dive
+- [[domain-17-system-foundation/topic-dictionary/security/security-checklist|security-checklist]] — Security checklist
+- [[domain-17-system-foundation/topic-dictionary/security/security-for-linux-nodes|security-for-linux-nodes]] — Security for linux nodes
+- [[domain-17-system-foundation/topic-dictionary/security/security-for-windows-nodes|security-for-windows-nodes]] — Security for windows nodes
+- [[domain-17-system-foundation/topic-dictionary/security/service-accounts|service-accounts]] — Service accounts
+- [[domain-17-system-foundation/topic-dictionary/security/spiffe-spire-identity|spiffe-spire-identity]] — Spiffe spire identity
+- [[domain-17-system-foundation/topic-dictionary/security/supply-chain-security|supply-chain-security]] — Supply chain security
 
 #### 专项工作负载
 
-- [[topic-dictionary/specialized-workloads/ai-infra-specialist|ai-infra-specialist]] — Ai infra specialist
-- [[topic-dictionary/specialized-workloads/gpu-resource-management-and-partitioning|gpu-resource-management-and-partitioning]] — Gpu resource management and partitioning
-- [[topic-dictionary/specialized-workloads/guide-for-running-windows-containers-in-kubernetes|guide-for-running-windows-containers-in-kubernetes]] — Guide for running windows containers in kubernetes
-- [[topic-dictionary/specialized-workloads/hpc-and-bioinformatics|hpc-and-bioinformatics]] — Hpc and bioinformatics
-- [[topic-dictionary/specialized-workloads/kserve-model-serving|kserve-model-serving]] — Kserve model serving
-- [[topic-dictionary/specialized-workloads/kueue-job-queue-management|kueue-job-queue-management]] — Kueue job queue management
-- [[topic-dictionary/specialized-workloads/llm-inference-optimization|llm-inference-optimization]] — Llm inference optimization
-- [[topic-dictionary/specialized-workloads/mlops-pipelines-and-model-registry|mlops-pipelines-and-model-registry]] — Mlops pipelines and model registry
-- [[topic-dictionary/specialized-workloads/vector-databases-and-rag-infrastructure|vector-databases-and-rag-infrastructure]] — Vector databases and rag infrastructure
-- [[topic-dictionary/specialized-workloads/windows-containers-in-kubernetes|windows-containers-in-kubernetes]] — Windows containers in kubernetes
+- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/ai-infra-specialist|ai-infra-specialist]] — Ai infra specialist
+- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/gpu-resource-management-and-partitioning|gpu-resource-management-and-partitioning]] — Gpu resource management and partitioning
+- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/guide-for-running-windows-containers-in-kubernetes|guide-for-running-windows-containers-in-kubernetes]] — Guide for running windows containers in kubernetes
+- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/hpc-and-bioinformatics|hpc-and-bioinformatics]] — Hpc and bioinformatics
+- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kserve-model-serving|kserve-model-serving]] — Kserve model serving
+- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kueue-job-queue-management|kueue-job-queue-management]] — Kueue job queue management
+- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/llm-inference-optimization|llm-inference-optimization]] — Llm inference optimization
+- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/mlops-pipelines-and-model-registry|mlops-pipelines-and-model-registry]] — Mlops pipelines and model registry
+- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/vector-databases-and-rag-infrastructure|vector-databases-and-rag-infrastructure]] — Vector databases and rag infrastructure
+- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/windows-containers-in-kubernetes|windows-containers-in-kubernetes]] — Windows containers in kubernetes
 
 #### 存储
 
-- [[topic-dictionary/storage/csi-volume-cloning|csi-volume-cloning]] — Csi volume cloning
-- [[topic-dictionary/storage/dynamic-volume-provisioning|dynamic-volume-provisioning]] — Dynamic volume provisioning
-- [[topic-dictionary/storage/ephemeral-volumes|ephemeral-volumes]] — Ephemeral volumes
-- [[topic-dictionary/storage/high-performance-storage-networks|high-performance-storage-networks]] — High performance storage networks
-- [[topic-dictionary/storage/local-ephemeral-storage|local-ephemeral-storage]] — Local ephemeral storage
-- [[topic-dictionary/storage/node-specific-volume-limits|node-specific-volume-limits]] — Node specific volume limits
-- [[topic-dictionary/storage/object-storage-and-data-pipelines|object-storage-and-data-pipelines]] — Object storage and data pipelines
-- [[topic-dictionary/storage/persistent-volumes|persistent-volumes]] — Persistent volumes
-- [[topic-dictionary/storage/projected-volumes|projected-volumes]] — Projected volumes
-- [[topic-dictionary/storage/storage-capacity|storage-capacity]] — Storage capacity
-- [[topic-dictionary/storage/storage-classes|storage-classes]] — Storage classes
-- [[topic-dictionary/storage/volume-attributes-classes|volume-attributes-classes]] — Volume attributes classes
-- [[topic-dictionary/storage/volume-health-monitoring|volume-health-monitoring]] — Volume health monitoring
-- [[topic-dictionary/storage/volume-snapshot-classes|volume-snapshot-classes]] — Volume snapshot classes
-- [[topic-dictionary/storage/volume-snapshots|volume-snapshots]] — Volume snapshots
-- [[topic-dictionary/storage/volumes|volumes]] — Volumes
-- [[topic-dictionary/storage/windows-storage|windows-storage]] — Windows storage
+- [[domain-17-system-foundation/topic-dictionary/storage/csi-volume-cloning|csi-volume-cloning]] — Csi volume cloning
+- [[domain-17-system-foundation/topic-dictionary/storage/dynamic-volume-provisioning|dynamic-volume-provisioning]] — Dynamic volume provisioning
+- [[domain-17-system-foundation/topic-dictionary/storage/ephemeral-volumes|ephemeral-volumes]] — Ephemeral volumes
+- [[domain-17-system-foundation/topic-dictionary/storage/high-performance-storage-networks|high-performance-storage-networks]] — High performance storage networks
+- [[domain-17-system-foundation/topic-dictionary/storage/local-ephemeral-storage|local-ephemeral-storage]] — Local ephemeral storage
+- [[domain-17-system-foundation/topic-dictionary/storage/node-specific-volume-limits|node-specific-volume-limits]] — Node specific volume limits
+- [[domain-17-system-foundation/topic-dictionary/storage/object-storage-and-data-pipelines|object-storage-and-data-pipelines]] — Object storage and data pipelines
+- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes|persistent-volumes]] — Persistent volumes
+- [[domain-17-system-foundation/topic-dictionary/storage/projected-volumes|projected-volumes]] — Projected volumes
+- [[domain-17-system-foundation/topic-dictionary/storage/storage-capacity|storage-capacity]] — Storage capacity
+- [[domain-17-system-foundation/topic-dictionary/storage/storage-classes|storage-classes]] — Storage classes
+- [[domain-17-system-foundation/topic-dictionary/storage/volume-attributes-classes|volume-attributes-classes]] — Volume attributes classes
+- [[domain-17-system-foundation/topic-dictionary/storage/volume-health-monitoring|volume-health-monitoring]] — Volume health monitoring
+- [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshot-classes|volume-snapshot-classes]] — Volume snapshot classes
+- [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshots|volume-snapshots]] — Volume snapshots
+- [[domain-17-system-foundation/topic-dictionary/storage/volumes|volumes]] — Volumes
+- [[domain-17-system-foundation/topic-dictionary/storage/windows-storage|windows-storage]] — Windows storage
 
 #### 工具链
 
-- [[topic-dictionary/tooling/cli-commands|cli-commands]] — Cli commands
-- [[topic-dictionary/tooling/container-image-optimization|container-image-optimization]] — Container image optimization
-- [[topic-dictionary/tooling/tool-ecosystem|tool-ecosystem]] — Tool ecosystem
+- [[domain-17-system-foundation/topic-dictionary/tooling/cli-commands|cli-commands]] — Cli commands
+- [[domain-17-system-foundation/topic-dictionary/tooling/container-image-optimization|container-image-optimization]] — Container image optimization
+- [[domain-17-system-foundation/topic-dictionary/tooling/tool-ecosystem|tool-ecosystem]] — Tool ecosystem
 
 #### 工作负载
 
-- [[topic-dictionary/workloads/advanced-pod-configuration|advanced-pod-configuration]] — Advanced pod configuration
-- [[topic-dictionary/workloads/automatic-cleanup-for-finished-jobs|automatic-cleanup-for-finished-jobs]] — Automatic cleanup for finished jobs
-- [[topic-dictionary/workloads/autoscaling-workloads|autoscaling-workloads]] — Autoscaling workloads
-- [[topic-dictionary/workloads/container-environment|container-environment]] — Container environment
-- [[topic-dictionary/workloads/container-lifecycle-hooks|container-lifecycle-hooks]] — Container lifecycle hooks
-- [[topic-dictionary/workloads/container-runtime-interface-cri|container-runtime-interface-cri]] — Container runtime interface cri
-- [[topic-dictionary/workloads/cronjob|cronjob]] — Cronjob
-- [[topic-dictionary/workloads/daemonset|daemonset]] — Daemonset
-- [[topic-dictionary/workloads/deployments|deployments]] — Deployments
-- [[topic-dictionary/workloads/disruptions|disruptions]] — Disruptions
-- [[topic-dictionary/workloads/downward-api|downward-api]] — Downward api
-- [[topic-dictionary/workloads/ephemeral-containers|ephemeral-containers]] — Ephemeral containers
-- [[topic-dictionary/workloads/horizontal-pod-autoscaling|horizontal-pod-autoscaling]] — Horizontal pod autoscaling
-- [[topic-dictionary/workloads/images|images]] — Images
-- [[topic-dictionary/workloads/init-containers|init-containers]] — Init containers
-- [[topic-dictionary/workloads/jobs|jobs]] — Jobs
-- [[topic-dictionary/workloads/managing-workloads|managing-workloads]] — Managing workloads
-- [[topic-dictionary/workloads/pod-group-policies|pod-group-policies]] — Pod group policies
-- [[topic-dictionary/workloads/pod-hostname|pod-hostname]] — Pod hostname
-- [[topic-dictionary/workloads/pod-lifecycle|pod-lifecycle]] — Pod lifecycle
-- [[topic-dictionary/workloads/pod-quality-of-service-classes|pod-quality-of-service-classes]] — Pod quality of service classes
-- [[topic-dictionary/workloads/pods|pods]] — Pods
-- [[topic-dictionary/workloads/replicaset|replicaset]] — Replicaset
-- [[topic-dictionary/workloads/replicationcontroller|replicationcontroller]] — Replicationcontroller
-- [[topic-dictionary/workloads/runtime-class|runtime-class]] — Runtime class
-- [[topic-dictionary/workloads/sidecar-containers|sidecar-containers]] — Sidecar containers
-- [[topic-dictionary/workloads/spot-and-preemptible-workloads|spot-and-preemptible-workloads]] — Spot and preemptible workloads
-- [[topic-dictionary/workloads/statefulsets|statefulsets]] — Statefulsets
-- [[topic-dictionary/workloads/user-namespaces|user-namespaces]] — User namespaces
-- [[topic-dictionary/workloads/vertical-pod-autoscaling|vertical-pod-autoscaling]] — Vertical pod autoscaling
-- [[topic-dictionary/workloads/workload-api|workload-api]] — Workload api
-- [[topic-dictionary/workloads/workload-management|workload-management]] — Workload management
-- [[topic-dictionary/workloads/workload-reference|workload-reference]] — Workload reference
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration|advanced-pod-configuration]] — Advanced pod configuration
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs|automatic-cleanup-for-finished-jobs]] — Automatic cleanup for finished jobs
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads|autoscaling-workloads]] — Autoscaling workloads
+- [[domain-17-system-foundation/topic-dictionary/workloads/container-environment|container-environment]] — Container environment
+- [[domain-17-system-foundation/topic-dictionary/workloads/container-lifecycle-hooks|container-lifecycle-hooks]] — Container lifecycle hooks
+- [[domain-17-system-foundation/topic-dictionary/workloads/container-runtime-interface-cri|container-runtime-interface-cri]] — Container runtime interface cri
+- [[domain-17-system-foundation/topic-dictionary/workloads/cronjob|cronjob]] — Cronjob
+- [[domain-17-system-foundation/topic-dictionary/workloads/daemonset|daemonset]] — Daemonset
+- [[domain-17-system-foundation/topic-dictionary/workloads/deployments|deployments]] — Deployments
+- [[domain-17-system-foundation/topic-dictionary/workloads/disruptions|disruptions]] — Disruptions
+- [[domain-17-system-foundation/topic-dictionary/workloads/downward-api|downward-api]] — Downward api
+- [[domain-17-system-foundation/topic-dictionary/workloads/ephemeral-containers|ephemeral-containers]] — Ephemeral containers
+- [[domain-17-system-foundation/topic-dictionary/workloads/horizontal-pod-autoscaling|horizontal-pod-autoscaling]] — Horizontal pod autoscaling
+- [[domain-17-system-foundation/topic-dictionary/workloads/images|images]] — Images
+- [[domain-17-system-foundation/topic-dictionary/workloads/init-containers|init-containers]] — Init containers
+- [[domain-17-system-foundation/topic-dictionary/workloads/jobs|jobs]] — Jobs
+- [[domain-17-system-foundation/topic-dictionary/workloads/managing-workloads|managing-workloads]] — Managing workloads
+- [[domain-17-system-foundation/topic-dictionary/workloads/pod-group-policies|pod-group-policies]] — Pod group policies
+- [[domain-17-system-foundation/topic-dictionary/workloads/pod-hostname|pod-hostname]] — Pod hostname
+- [[domain-17-system-foundation/topic-dictionary/workloads/pod-lifecycle|pod-lifecycle]] — Pod lifecycle
+- [[domain-17-system-foundation/topic-dictionary/workloads/pod-quality-of-service-classes|pod-quality-of-service-classes]] — Pod quality of service classes
+- [[domain-17-system-foundation/topic-dictionary/workloads/pods|pods]] — Pods
+- [[domain-17-system-foundation/topic-dictionary/workloads/replicaset|replicaset]] — Replicaset
+- [[domain-17-system-foundation/topic-dictionary/workloads/replicationcontroller|replicationcontroller]] — Replicationcontroller
+- [[domain-17-system-foundation/topic-dictionary/workloads/runtime-class|runtime-class]] — Runtime class
+- [[domain-17-system-foundation/topic-dictionary/workloads/sidecar-containers|sidecar-containers]] — Sidecar containers
+- [[domain-17-system-foundation/topic-dictionary/workloads/spot-and-preemptible-workloads|spot-and-preemptible-workloads]] — Spot and preemptible workloads
+- [[domain-17-system-foundation/topic-dictionary/workloads/statefulsets|statefulsets]] — Statefulsets
+- [[domain-17-system-foundation/topic-dictionary/workloads/user-namespaces|user-namespaces]] — User namespaces
+- [[domain-17-system-foundation/topic-dictionary/workloads/vertical-pod-autoscaling|vertical-pod-autoscaling]] — Vertical pod autoscaling
+- [[domain-17-system-foundation/topic-dictionary/workloads/workload-api|workload-api]] — Workload api
+- [[domain-17-system-foundation/topic-dictionary/workloads/workload-management|workload-management]] — Workload management
+- [[domain-17-system-foundation/topic-dictionary/workloads/workload-reference|workload-reference]] — Workload reference
 
 ## 相关 Domain
 - [[domain-01-cluster-fundamentals/98-merged-indexes/index|Domain 01 集群基础 索引]]

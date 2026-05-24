@@ -18,7 +18,7 @@ status: reviewed
 
 | 维度 | 修复前 | 修复后 | 改善幅度 |
 |---|---|---|---|
-| **Broken links** | 18,584 个 | **0** | -100% |
+| **Broken links** | 18,584 个 | **0**（严格路径） / 220（模糊匹配） | -100%（严格路径） |
 | **缺失 frontmatter** | 大量 | **0** | -100% |
 | **不完整 frontmatter** | 大量 | **0** | -100% |
 | **空文件** | 有 | **0** | -100% |
@@ -197,7 +197,39 @@ af4cec65  feat: KUDIG知识缺口全面修复（17 files）
 
 ---
 
-## 八、远程顾问诊断要点
+## 八、路径前缀修复（第二轮）
+
+### 修复背景
+独立验证发现 632 个 wikilink 使用了旧的目录结构路径（迁移前的 `01-cncf-landscape/`、`topic-dictionary/` 等），在非 Obsidian 环境中无法解析。
+
+### 修复详情
+
+| 旧路径前缀 | 新路径 | 修复数量 |
+|-----------|--------|---------|
+| `01-cncf-landscape/` | `domain-19-landscape-references/01-cncf-landscape/` | 229 |
+| `topic-dictionary/` | `domain-17-system-foundation/topic-dictionary/` | 205 |
+| `topic-code-analysis/` | `domain-07-platform-engineering/topic-code-analysis/` | 87 |
+| `topic-functions/` | `domain-02-workloads-applications/topic-functions/` | 80 |
+| `02-ai-agents/` | `domain-14-ai-ml-infra/02-ai-agents/` | 7 |
+| `topic-ai-agent/` | `domain-14-ai-ml-infra/topic-ai-agent/` | 7 |
+| `beginner-guides/` | `skills/training-public/beginner-guides/` | 4 |
+| `_reports/QUALITY_REPORT_*` | `_reports/quality/QUALITY_REPORT_*` | 4 |
+| `topic-skills/.../README` | `topic-skills/.../SKILL` | 7 |
+| 其他 | — | 2 |
+
+### 修复后状态
+- 严格路径匹配 broken links: **0**
+- 模糊匹配链接（Obsidian 可解析）: 220（空格↔连字符等）
+- 链接健康率: **99.36%**
+
+### _insights.md 修正
+- Hubs 分析改为按 basename 去重（原 Top 20 中 README 占 17 席，修正后为真实枢纽页面）
+- 文件总数修正为 5,616（原报告 4,951，差异来自后续新增文件）
+- 新增链接修复记录章节
+
+---
+
+## 九、远程顾问诊断要点
 
 - 仓库当前状态健康，所有核心指标达标
 - 如需进一步优化，可考虑：标签体系规范化、重复内容合并、语义搜索索引构建
@@ -206,4 +238,5 @@ af4cec65  feat: KUDIG知识缺口全面修复（17 files）
 ---
 
 > 报告生成时间: 2026-05-24
+> 最后更新: 2026-05-24（路径前缀修复 + insights 修正）
 > 生成方式: 自动化统计 + 人工确认

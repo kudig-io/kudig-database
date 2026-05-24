@@ -120,10 +120,10 @@ reports/
 - [[_reports/rag-chunking-report|RAG Chunking Report]]
 
 ### 质量报告
-- [[_reports/QUALITY_REPORT_v2.0|Quality Report v2.0]]
-- [[_reports/QUALITY_REPORT_v3.0|Quality Report v3.0]]
-- [[_reports/QUALITY_REPORT_v4.0|Quality Report v4.0]]
-- [[_reports/ENTERPRISE_BEST_PRACTICES|Enterprise Best Practices]]
+- [[_reports/quality/QUALITY_REPORT_v2.0|Quality Report v2.0]]
+- [[_reports/quality/QUALITY_REPORT_v3.0|Quality Report v3.0]]
+- [[_reports/quality/QUALITY_REPORT_v4.0|Quality Report v4.0]]
+- [[_reports/quality/ENTERPRISE_BEST_PRACTICES|Enterprise Best Practices]]
 - [[_reports/DOMAIN-18-TOPIC-RESTRUCTURE-PLAN|Domain 18 Topic Restructure Plan]]
 
 ## Related

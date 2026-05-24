@@ -125,10 +125,10 @@ FTA vs FEBM:
 
 | 专题 | 说明 |
 |:---|:---|
-| [topic-fta](../domain-10-troubleshooting-diagnostics/[[topic-fta/README]].md) | FTA 故障树分析方法论（演绎法视角，与FEBM互补） |
+| [topic-fta](../domain-10-troubleshooting-diagnostics/[[domain-10-troubleshooting-diagnostics/topic-fta/README]].md) | FTA 故障树分析方法论（演绎法视角，与FEBM互补） |
 | [domain-05-security-compliance](../domain-05-security-compliance/) | 安全合规知识域 |
 | [domain-06-observability](../domain-06-observability/) | 可观测性体系 |
-| [topic-structural-trouble-shooting](../domain-10-troubleshooting-diagnostics/[[topic-structural-trouble-shooting/README]].md) | 结构化故障排查知识库 |
+| [topic-structural-trouble-shooting](../domain-10-troubleshooting-diagnostics/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README]].md) | 结构化故障排查知识库 |
 
 ---
 

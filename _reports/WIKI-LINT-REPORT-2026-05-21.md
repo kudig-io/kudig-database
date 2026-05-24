@@ -197,7 +197,7 @@ updated: 2026-05-21T16:30:00Z
 
 ### 修复 4：MOC.md 嵌套 wikilink（1 个）
 
-`domain-07-platform-engineering/[[topic-code-analysis/MOC|MOC]]` → `[[domain-07-platform-engineering/topic-code-analysis/MOC|MOC]]`
+`domain-07-platform-engineering/[[domain-07-platform-engineering/topic-code-analysis/MOC|MOC]]` → `[[domain-07-platform-engineering/topic-code-analysis/MOC|MOC]]`
 
 ### 修复 5：domain-07-platform-engineering/topic-code-analysis/README.md 分组链接（5 个）
 
