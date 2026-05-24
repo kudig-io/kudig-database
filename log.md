@@ -657,3 +657,14 @@ Tier 4: 部署生态域 (5) / Tier 5: 基础参考域 (4)
 - [2026-05-24] WIKI_RESEARCH topic="Kubernetes 系统基础" rounds=3 sources_fetched=11 pages_created=2
   - 创建 concepts/system-foundation-hardware-kernel.md（7KB，DPU/GPU/ARM64/cgroup v2/eBPF/PSI）
   - 创建 synthesis/Research: Kubernetes System Foundation 2025-2026.md（4.6KB）
+
+- [2026-05-24] LINT 修复 broken wikilinks
+  - 概念页：63 个 broken links 修复（10 个文件）
+  - 合成页：30 个 broken links 修复（6 个文件）
+  - 全部新概念页 orphan 检查通过（0 orphan）
+  - 提交：3615d3b8
+
+- [2026-05-24] CROSS_LINK 增强新页面交叉链接
+  - 19 概念页添加 Related 段落（每页 2-3 个跨概念链接）
+  - 11 合成页添加跨域关联段落（每页 4 个跨域链接）
+  - 总计新增 ~100 个 wikilinks
