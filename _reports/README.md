@@ -121,7 +121,7 @@ reports/
 - [[_reports/QUALITY_REPORT_v3.0|Quality Report v3.0]]
 - [[_reports/QUALITY_REPORT_v4.0|Quality Report v4.0]]
 - [[_reports/ENTERPRISE_BEST_PRACTICES|Enterprise Best Practices]]
-- [[_reports/DOM1AIN-18-TOPIC-RESTRUCTURE-PLAN|Domain 18 Topic Restructure Plan]]
+- [[_reports/DOMAIN-18-TOPIC-RESTRUCTURE-PLAN|Domain 18 Topic Restructure Plan]]
 
 ## Related
 

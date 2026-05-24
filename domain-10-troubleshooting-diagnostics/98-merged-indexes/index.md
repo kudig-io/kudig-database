@@ -162,3 +162,7 @@ status: reviewed
 - [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-RBAC-001|RBAC 对话脚本]]
 - [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-SCHEDULER-001|Scheduler 对话脚本]]
 
+## 跨域引用
+
+- [[domain-10-troubleshooting-diagnostics/MOC-from-domain-12|MOC from Domain 12]]
+- [[domain-10-troubleshooting-diagnostics/README-from-domain-12|README from Domain 12]]

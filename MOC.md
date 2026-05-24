@@ -177,3 +177,4 @@ created: "2026-05-23"
 - [[journal/digest-2026-05-23|Digest 2026-05-23]] — Cross-reference
 - [[templates/moc-template|MOC Template]] — Cross-reference
 - [[metadata/knowledge-map|Knowledge Map]] — Cross-reference
+- [[references/release-notes-reading-guide|Release Notes Reading Guide]] — Cross-reference
