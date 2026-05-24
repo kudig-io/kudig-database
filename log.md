@@ -560,3 +560,19 @@ Tier 4: 部署生态域 (5) / Tier 5: 基础参考域 (4)
 - [2026-05-23 18:15:19] FINAL frontmatter_fixed=4488 broken_links_final=0 lifecycle_promoted=31 tags_normalized=16 cross_links=587 embedding_updated=true
 - [2026-05-23 18:37:33] TAG_COHESION cluster=0.183 workloads=0.117 cross-domain=0.152 storage=0.643 networking=0.464 security=0.464 synthesis=0.257 links_added=298
 - [2026-05-23 19:52:14] TAG_TAXONOMY tags_normalized=16 pages_modified=17 new_tags_added=15
+
+## [2026-05-24] lint | wiki-lint 全面健康审计
+- 扫描页面: 4,999（排除 node_modules、.comate）
+- broken_links=222 (0.64%, Obsidian 可解析)
+- missing_frontmatter=46
+- missing_summary=4,984 (soft warning)
+- stale=0
+- contradictions=0
+- orphans=1,624 (1,235 release notes + 144 培训 + 245 其他)
+- fragmented_clusters=24
+- unknown_tags=232
+- large_pages=2,322
+- pii_without_visibility=555
+- synthesis_gaps=22
+- lifecycle_pages=1
+- 报告: reports/wiki-lint-2026-05-24.md
