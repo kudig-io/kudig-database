@@ -593,3 +593,55 @@ Tier 4: 部署生态域 (5) / Tier 5: 基础参考域 (4)
 - 修复 327 个指向已删除文件的 wikilinks
 - 添加 12 个 training 讲师/公开版交叉引用
 - 0 内容损失（所有删除的文件都有更完整的对应版本）
+
+- [2026-05-24] WIKI_RESEARCH topic="Kubernetes 存储深度研究" rounds=3 sources_fetched=8 pages_created=5
+  - 创建 concepts/csi-drivers.md（从 stub 更新为完整内容，14.9KB）
+  - 创建 concepts/cloud-native-storage-systems.md（19.8KB，Longhorn/Rook-Ceph/OpenEBS/JuiceFS 对比）
+  - 创建 concepts/storage-performance-optimization.md（8.8KB，基准测试/NVMe 调优/QoS）
+  - 创建 concepts/storage-data-protection.md（12.1KB，Velero/不可变备份/DR 策略）
+  - 创建 synthesis/Research: Kubernetes Storage 2025-2026.md（4.9KB，主合成页）
+
+- [2026-05-24] WIKI_RESEARCH topic="Kubernetes 可靠性工程深度研究" rounds=3 sources_fetched=10 pages_created=7
+  - 创建 concepts/slo-error-budget-framework.md（22KB，SLO/Error Budget 框架）
+  - 创建 concepts/chaos-engineering-platforms.md（14.5KB，混沌工程平台对比）
+  - 创建 concepts/incident-management-patterns.md（15.8KB，事件管理与复盘模式）
+  - 创建 concepts/capacity-planning-cost-optimization.md（7.3KB，容量规划与成本优化）
+  - 创建 concepts/multi-cluster-dr-automation.md（10.6KB，多集群灾备与自动化）
+  - 创建 synthesis/Research: Kubernetes Reliability Engineering 2025-2026.md（4.8KB，合成页）
+
+- [2026-05-24] WIKI_RESEARCH topic="Kubernetes 生产运营深度研究" rounds=3 sources_fetched=8 pages_created=3
+  - 创建 concepts/gitops-production-operations.md（15.6KB，GitOps/ArgoCD/Flux/CAPI/Fleet）
+  - 创建 concepts/finops-greenops-practices.md（19KB，FinOps/GreenOps/GPU/Spot）
+  - 创建 synthesis/Research: Kubernetes Production Operations 2025-2026.md（3.7KB，合成页）
+
+- [2026-05-24] WIKI_RESEARCH topic="Kubernetes AI/ML 基础设施" rounds=3 sources_fetched=10 pages_created=2
+  - 创建 concepts/k8s-ai-ml-infrastructure.md（8.2KB，GPU/DRA/LLM/Kubeflow/Ray）
+  - 创建 synthesis/Research: Kubernetes AI-ML Infrastructure 2025-2026.md（3.9KB）
+
+- [2026-05-24] WIKI_RESEARCH topic="Kubernetes 安全合规" rounds=3 sources_fetched=8 pages_created=2
+  - 创建 concepts/k8s-security-compliance.md（9.7KB，供应链/策略引擎/运行时/密钥/网络/PSS/CIS）
+  - 创建 synthesis/Research: Kubernetes Security Compliance 2025-2026.md（4.4KB）
+
+- [2026-05-24] WIKI_RESEARCH topic="Kubernetes 网络演进" rounds=3 sources_fetched=12 pages_created=2
+  - 创建 concepts/k8s-networking-evolution.md（6KB，CNI/Service Mesh/Gateway API/eBPF/DNS）
+  - 创建 synthesis/Research: Kubernetes Networking 2025-2026.md（4.8KB）
+
+- [2026-05-24] WIKI_RESEARCH topic="Kubernetes 可观测性" rounds=3 sources_fetched=8 pages_created=2
+  - 创建 concepts/k8s-observability-stack.md（6.3KB，OTel/Prometheus 3.0/Grafana LGTM/eBPF）
+  - 创建 synthesis/Research: Kubernetes Observability 2025-2026.md（5.4KB）
+
+- [2026-05-24] WIKI_RESEARCH topic="Kubernetes 平台工程" rounds=3 sources_fetched=8 pages_created=2
+  - 创建 concepts/platform-engineering-idp.md（5.6KB，IDP/Backstage/Crossplane/Humanitec/Kratix）
+  - 创建 synthesis/Research: Kubernetes Platform Engineering 2025-2026.md（5.6KB）
+
+- [2026-05-24] WIKI_RESEARCH topic="Kubernetes 发布变更管理" rounds=3 sources_fetched=10 pages_created=2
+  - 创建 concepts/progressive-delivery-strategies.md（6.6KB，Argo Rollouts/Canary/Blue-Green/K8S 版本）
+  - 创建 synthesis/Research: Kubernetes Release Change Management 2025-2026.md（6.2KB）
+
+- [2026-05-24] WIKI_RESEARCH topic="Kubernetes 容器运行时" rounds=3 sources_fetched=10 pages_created=2
+  - 创建 concepts/container-runtime-evolution.md（2.8KB，containerd 2.x/WASM/CoCo/懒加载）
+  - 创建 synthesis/Research: Kubernetes Container Runtime 2025-2026.md（5.2KB）
+
+- [2026-05-24] WIKI_RESEARCH topic="Kubernetes 专项技术" rounds=3 sources_fetched=8 pages_created=2
+  - 创建 concepts/specialized-k8s-technologies.md（2.7KB，eBPF/WASM/边缘/Serverless）
+  - 创建 synthesis/Research: Kubernetes Specialized Technologies 2025-2026.md（6KB）
