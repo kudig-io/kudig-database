@@ -1,22 +1,11 @@
-# mdBook 构建输出
-gitbook/book/
-gitbook/dist/
-gitbook/*.zip
-
-# mdBook generated HTML in domain directories
-domain-*/**/*.html
-domain-*/*.html
-
-# gitbook/src 中的符号链接（由 start.sh/refresh.sh 动态生成，指向项目根目录）
-gitbook/src/domain-*
-gitbook/src/topic-*
-gitbook/src/tables
+# Astro 构建产物（Astro outDir 配置为 ../site）
+site/
 
 # Web 服务运行时文件
 .web-server.pid
 .web-server.log
 
-# 根目录跳转页（由 start-web.sh 自动生成）
+# 根目录跳转页（由本地脚本自动生成）
 index.html
 
 # macOS
@@ -28,12 +17,14 @@ __pycache__/
 .ruff_cache/
 .venv/
 
-# MkDocs 生成产物
-site/
-
 # 视频生成产物
 video-output/
 
 # RAG 向量化 Pipeline 本地缓存（由 scripts/embedding-pipeline.py 生成，含 >100MB 大文件）
 corpus-config/profiles/.vector-cache/
 
+# Node.js（web/ Astro 项目）
+web/node_modules/
+web/package-lock.json
+web/.astro/
+web/dist/
