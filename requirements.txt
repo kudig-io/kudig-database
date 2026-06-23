@@ -4,6 +4,3 @@
 pyyaml>=6.0
 matplotlib>=3.8
 numpy>=1.26
-mkdocs>=1.5
-mkdocs-material>=9.5
-pymdown-extensions>=10.0
