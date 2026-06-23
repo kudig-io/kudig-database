@@ -25,6 +25,5 @@ corpus-config/profiles/.vector-cache/
 
 # Node.js（web/ Astro 项目）
 web/node_modules/
-web/package-lock.json
 web/.astro/
 web/dist/
