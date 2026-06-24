@@ -1,74 +1,88 @@
----
-title: Storage & Data
-description: 整合原 domain-04-storage-data/16 的存储知识，涵盖 K8s 存储体系、PV/PVC/CSI 和存储基础原理。
-category: domain
-tags:
-- storage
-- pv
-- pvc
-- csi
-- distributed-storage
-- rag
-- daemonset
-- gpu
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 5min
-intent_queries:
-- Storage & Data 是什么
-- 如何 Storage & Data
-- Kubernetes 04 storage data 最佳实践
-trigger_keywords:
-- Storage
-- Data
-- storage
-- data
-prerequisites:
-- kubectl-basics
-- storage-basics
-- gpu-scheduling-basics
-created: "2026-05-23"
----
+# KUDIG Database
 
-# Storage & Data
+> 面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库。
+> 既是人类可读的运维手册，也是 AI Agent 的 RAG 语料来源。
 
-整合原 domain-04-storage-data/16 的存储知识，涵盖 K8s 存储体系、PV/PVC/CSI 和存储基础原理。
+[![Deploy to GitHub Pages](https://github.com/kudig-io/kudig-database/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/kudig-io/kudig-database/actions/workflows/deploy-pages.yml)
+
+## 这是什么
+
+KUDIG Database 是一个**双层结构**的云原生运维知识库：
+
+- **提炼知识层**（`concepts/` `entities/` `skills/` `references/` `synthesis/`）—— Agent 优先读取，Token 效率高，frontmatter 元数据丰富
+- **源文档层**（`domain-*/` `topic-*/` `docs/`）—— 原始深度技术文档，供深度查询兜底
+
+覆盖 **20 个核心知识域**：集群基础、工作负载、网络、存储、安全、可观测性、平台工程、发布变更、可靠性工程、故障诊断、生产运维、云厂商（13+ 家）、容器运行时、AI/ML 基础设施、专项技术、数据库中间件、系统基础、清单模式、生态参考、应用模式。
+
+## 快速开始
+
+### 浏览在线站点
+
+访问 GitHub Pages 自动部署的站点：<https://kudig-io.github.io/kudig-database/>
+
+### 本地开发
+
+本项目使用 [Astro](https://astro.build/) 构建静态站点。
+
+```bash
+# 进入 web 目录
+cd web
+
+# 安装依赖
+npm install
+
+# 启动开发服务器（热重载，默认 http://localhost:4321）
+npm run dev
+
+# 构建生产静态产物（输出到 ../site）
+npm run build
+
+# 本地预览构建产物
+npm run preview
+```
+
+或使用项目封装的脚本：
+
+```bash
+bash scripts/start-web.sh            # Astro dev @ :4321（默认）
+bash scripts/start-web.sh --preview  # 先构建再预览
+bash scripts/start-web.sh --static   # 伺服 visualizations/ 等独立 HTML 工具 @ :8767
+bash scripts/start-web.sh --stop     # 停止服务
+```
+
+### 仅阅读 Markdown 源文件
+
+知识内容全部是纯 Markdown，可直接在任何编辑器（推荐 [Obsidian](https://obsidian.md/)）中阅读，wikilink `[[...]]` 可被 Obsidian 原生解析。
 
 ## 目录结构
 
-| 子目录 | 内容 |
-|---|---|
-| 01-k8s-storage/ | PV、PVC、StorageClass、CSI、快照 |
-| 02-storage-fundamentals/ | 块/文件/对象存储、RAID、分布式存储 |
-| 03-distributed-storage/ | 分布式存储系统 |
+```
+.
+├── concepts/        # 提炼知识：核心概念、架构模式
+├── entities/        # 提炼知识：组件实体、CNCF 工具、云产品
+├── skills/          # 提炼知识：诊断排障、最佳实践、FTA 方法
+├── references/      # 提炼知识：术语词典、命令速查、规范
+├── synthesis/       # 提炼知识：跨领域综合分析
+├── domain-01..20/   # 源文档：20 个技术域深度文档
+├── docs/            # 映射与规范文档
+├── _meta/           # 元数据定义（taxonomy、schema）
+├── _reports/        # 质量报告与评估
+├── corpus-config/   # AI 语料配置（RAG profile、分块策略）
+├── web/             # Astro 站点项目
+├── scripts/         # 自动化脚本
+└── STRUCTURE.md     # 完整目录结构规范
+```
 
-## 与其他 Domain 的关系
+详见 [`STRUCTURE.md`](STRUCTURE.md)。
 
-- [[domain-01-cluster-fundamentals/README|domain-01-cluster-fundamentals]] — 集群架构
-- [[domain-10-troubleshooting-diagnostics/README|domain-10-troubleshooting-diagnostics]] — 存储排障
+## 部署
 
-## Related
+推送到 `main` 分支会自动触发 GitHub Actions（`.github/workflows/deploy-pages.yml`）：执行 `npm ci && npm run build` 后部署到 GitHub Pages。
 
-- Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- networking|发布说明索引 — 网络]] — Cross-reference
-- domain-03-networking-traffic KUDIG Database — Global MOC — Cross-reference
-- Topic 应用层架构设计最佳实践 — Cross-reference
-- topic-application-architecture MOC — Cross-reference
-- [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- domain-08-release-change-management MOC — Cross-reference
-- [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
-- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+## 贡献
+
+欢迎提交 Issue 和 PR。贡献前请阅读 [`STRUCTURE.md`](STRUCTURE.md) 了解目录约定与 frontmatter 规范。
+
+## License
+
+详见 [`LICENSE`](LICENSE)。

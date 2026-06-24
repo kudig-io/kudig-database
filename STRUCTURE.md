@@ -67,7 +67,7 @@ created: "2026-05-23"
 
 | 目录类型 | 数量 | 说明 |
 |:---|:---:|:---|
-| `domain-1*/` ~ `domain-43*/` | 43 个 | 按技术域分类的深度文档（架构、网络、存储、安全、AI Infra 等） |
+| `domain-1*/` ~ `domain-20*/` | 20 个 | 按技术域分类的深度文档（架构、网络、存储、安全、AI Infra 等） |
 | `topic-*/` | 10 个 | 按主题分类的文档（FTA、Skills、Learn、Cheat Sheet、Dictionary 等） |
 | `docs/` | 1 个 | 映射与规范文档（API-DOC-MAP、COMMAND-DOC-MAP、FRONTMATTER-SPEC 等） |
 
@@ -97,11 +97,11 @@ Agent 语料配置显式排除。修改前请检查脚本硬编码路径。
 
 | 目录 | 用途 |
 |:---|:---|
-| `gitbook/` | mdBook 构建配置与输出 |
+| `web/` | Astro 静态站点项目（站点源码，`npm run build` 输出到 `site/`） |
 | `scripts/` | 自动化脚本（export-corpus.sh 等） |
 | `templates/` | 文档模板 |
 | `prompts/` | Agent 提示词 |
-| `site/` | 站点构建输出 |
+| `site/` | Astro 构建输出（由 `web/` 生成，已 gitignore） |
 | `man/` | 手册页 |
 
 ---
@@ -115,7 +115,8 @@ Agent 语料配置显式排除。修改前请检查脚本硬编码路径。
 | `hot.md` | 热缓存（最近活动的语义快照） |
 | `.manifest.json` | 摄入追踪清单（3,523 条源记录） |
 | `AGENTS.md` | Agent 上下文与技能路由 |
-| `[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md` | 项目介绍（人类阅读） |
+| `README.md` | 项目介绍（人类阅读） |
+| `mkdocs.yml` | ~~已移除~~（站点构建已迁移至 `web/` Astro） |
 | `STRUCTURE.md` | 本文件（目录结构规范） |
 
 ---
@@ -146,7 +147,7 @@ exclude:
   - "_reports/"
   - "corpus-config/"
   - "assets/"
-  - "gitbook/"
+  - "web/"
   - "scripts/"
   - "templates/"
   - "prompts/"
@@ -166,3 +167,4 @@ exclude:
 | 日期 | 变更 |
 |:---|:---|
 | 2026-05-21 | 创建本文档；`metadata/` 移入 `_meta/metadata/`；`reports/` 改名为 `_reports/`；所有 profile 添加工具目录排除 |
+| 2026-06-24 | 站点构建从 mdBook/mkDocs 迁移至 Astro（`web/`）；移除 `gitbook/`、`mkdocs.yml`；域结构确认为 20 个 Domain；工程工具层用 `web/` 取代 `gitbook/` |

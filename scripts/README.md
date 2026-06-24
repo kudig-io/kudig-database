@@ -47,11 +47,9 @@ created: "2026-05-23"
 | 9 | `check-broken-links.sh` | Bash | 验证 cross_refs 路径有效性 | 防止断链导致 AI 检索失败 |
 | 10 | `batch-enrich.sh` | Bash | 批量补充缺失字段 | 自动添加 reading_level、audience、estimated_read_time |
 | 11 | `export-corpus.sh` | Bash | 导出 AI 智能体语料 | 支持 full/agent/lite 三种格式，自动生成元数据、QA 模板 |
-| 12 | `diagnose-extract.sh` | Bash | 提取诊断步骤 | 从 FTA/FEBM 文档生成 Agent 可直接使用的结构化流程 |
-| 13 | `extract-gitbook.sh` | Bash | GitBook 内容提取转换 | 从 GitBook 导出内容转换为 KUDIG 格式 |
-| 14 | `start-web.sh` | Bash | 启动本地 Web 服务 | MkDocs + 可视化 HTML 同时访问 |
-| 15 | `video-content-generator.py` | Python | 数字人播报脚本生成 | 基于 FTA/FEBM/Skills 生成视频文案 |
-| 16 | `video-generator.py` | Python | 视频生成 API 调用 | 调用腾讯智影/HeyGen/剪映生成视频 |
+| 12 | `start-web.sh` | Bash | 启动本地预览服务 | Astro 开发服务器（默认）/ 构建预览 / 可视化 HTML 静态伺服 |
+| 13 | `video-content-generator.py` | Python | 数字人播报脚本生成 | 基于 FTA/FEBM/Skills 生成视频文案 |
+| 14 | `video-generator.py` | Python | 视频生成 API 调用 | 调用腾讯智影/HeyGen/剪映生成视频 |
 
 每个脚本都配有完整的 Unix manpage，可通过以下方式查看：
 
