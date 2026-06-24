@@ -20,18 +20,26 @@ export function scanDocs() {
       const relativePath = basePath ? `${basePath}/${entry.name}` : entry.name;
       const fullPath = path.join(dir, entry.name);
       
-      // Skip hidden dirs, web/, site/, node_modules, etc.
+      // Skip non-content directories (aligned with STRUCTURE.md corpus-exclusion rules).
       if (entry.isDirectory()) {
-        if (entry.name.startsWith('.') || 
-            entry.name === 'node_modules' || 
+        if (entry.name.startsWith('.') ||
+            entry.name === 'node_modules' ||
             entry.name === 'site' ||
             entry.name === 'web' ||
-            entry.name === '.git' ||
+            entry.name === 'assets' ||
+            entry.name === 'corpus-config' ||
             entry.name === '_reports' ||
+            entry.name === '_archives' ||
+            entry.name === '_meta' ||
             entry.name === '_raw' ||
             entry.name === '_staging' ||
-            entry.name === 'assets' ||
-            entry.name === 'corpus-config') {
+            entry.name === 'man' ||
+            entry.name === 'scripts' ||
+            entry.name === 'templates' ||
+            entry.name === 'prompts' ||
+            entry.name === 'video-scripts' ||
+            entry.name === 'release-notes' ||
+            entry.name === 'reports') {
           continue;
         }
         scanDir(fullPath, relativePath);
@@ -171,23 +179,32 @@ export function transformWikilinks(content) {
 export function buildNavTree(docs, domain) {
   const domainDocs = docs.filter(d => d.slug.startsWith(domain + '/'));
   const tree = {};
-  
+
   for (const doc of domainDocs) {
     const parts = doc.slug.replace(domain + '/', '').split('/');
     let current = tree;
-    
+
     for (let i = 0; i < parts.length; i++) {
       const part = parts[i];
-      if (i === parts.length - 1) {
-        current[part] = { ...doc, isFile: true };
+      const isLeaf = i === parts.length - 1;
+
+      // 若该段不存在，或存在但缺少 children（例如先作为文件节点被创建），
+      // 则补一个目录容器 children，避免后续 .children 访问 undefined。
+      if (!current[part]) {
+        current[part] = { children: {}, isDir: true, name: part };
+      } else if (!current[part].children) {
+        current[part].children = {};
+        current[part].isDir = true;
+      }
+
+      if (isLeaf) {
+        // 叶子节点：标记为文件并写入文档元数据，保留已有 children（若有更深层路径）。
+        current[part] = { ...current[part], ...doc, isFile: true };
       } else {
-        if (!current[part]) {
-          current[part] = { children: {}, isDir: true, name: part };
-        }
         current = current[part].children;
       }
     }
   }
-  
+
   return tree;
 }
