@@ -1,6 +1,8 @@
 ---
 title: Agent Harness 多 Agent 编排 (domain-14-ai-ml-infra)
-description: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Multi-Agent,'
+description: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**:
+  Multi-Agent,'
+summary: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Multi-Agent,'
 category: general
 tags:
 - ai
@@ -10,6 +12,8 @@ tags:
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +37,9 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Agent Harness 多 Agent 编排
 description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Multi-Agent,

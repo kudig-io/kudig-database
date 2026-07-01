@@ -1,13 +1,22 @@
 ---
-title: "Skill: Pod Pending/调度失败的诊断和修复"
+title: 'Skill: Pod Pending/调度失败的诊断和修复'
+summary: 'Skill: Pod Pending/调度失败的诊断和修复：Pod 长时间处于 Pending 状态，无法被调度到任何节点运行。远程顾问模式下需通过
+  kubectl describe pod 的 Events 来定位资源、约束或污点层面的根因。'
 category: skill
-tags: ["skill", "domain-10", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- skill
+- domain-10
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # Skill: Pod Pending/调度失败的诊断和修复
 
@@ -63,3 +72,7 @@ kubectl get node <node-name> -o jsonpath='{.spec.taints}{.metadata.labels}'
 - [[concepts/kube-scheduler.md|Kube Scheduler]] — Kubernetes 调度器原理、算法与扩展机制
 - [[concepts/node-lifecycle-management.md|节点生命周期管理]] — 节点注册、状态维护与驱逐机制
 - [[concepts/resource-management.md|资源管理]] — Kubernetes 资源请求、限制与配额管理
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

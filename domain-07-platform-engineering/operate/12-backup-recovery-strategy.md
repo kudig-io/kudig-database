@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 备份与恢复概述 (Backup & Recovery Overview)
 description: 'title: Kubernetes 备份与恢复概述 (Backup & Recovery Overview)'
+summary: 'title: Kubernetes 备份与恢复概述 (Backup & Recovery Overview)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - helm
 - argocd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -42,8 +45,9 @@ prerequisites:
 - mysql-basics
 - policy-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] 备份与恢复概述 (Backup & Recovery Overview)
 description: '# Kubernetes 备份与恢复概述 (Backup & Recovery Overview)'

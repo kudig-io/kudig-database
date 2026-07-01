@@ -1,6 +1,9 @@
 ---
 title: Manage Persistent Storage
-description: '- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-storage]] — 发布说明索引 — 存储'
+description: '- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-storage]]
+  — 发布说明索引 — 存储'
+summary: '- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-storage]]
+  — 发布说明索引 — 存储'
 category: skills
 tags:
 - k8s
@@ -12,6 +15,8 @@ tags:
 - volume
 - statefulset
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +32,9 @@ trigger_keywords:
 - Storage
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Manage Persistent Storage
 

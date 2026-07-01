@@ -1,49 +1,53 @@
 ---
 title: Kaniko 与 ko 构建指南
 description: 在阿里云专有云 Kubernetes 中使用 Kaniko 实现无特权容器镜像构建，以及使用 ko 高效构建 Go 应用镜像并推送至 ACR。
+summary: 在阿里云专有云 Kubernetes 中使用 Kaniko 实现无特权容器镜像构建，以及使用 ko 高效构建 Go 应用镜像并推送至 ACR。
 category: container-runtime
 tags:
-  - kaniko
-  - ko
-  - build
-  - go
-  - non-root
-  - security
-  - cicd
-  - alibaba-cloud
+- kaniko
+- ko
+- build
+- go
+- non-root
+- security
+- cicd
+- alibaba-cloud
+tier: supporting
 created: '2026-06-29'
 updated: '2026-06-29'
 last_updated: 2026-06-29
 difficulty: advanced
 audience:
-  - DevOps 工程师
-  - Go 开发者
-  - 平台安全工程师
+- DevOps 工程师
+- Go 开发者
+- 平台安全工程师
 estimated_read_time: 19min
 intent_queries:
-  - Kaniko 无特权构建配置
-  - ko 构建 Go 镜像推送 ACR
-  - Kubernetes 内构建镜像方案
+- Kaniko 无特权构建配置
+- ko 构建 Go 镜像推送 ACR
+- Kubernetes 内构建镜像方案
 trigger_keywords:
-  - kaniko
-  - ko
-  - non-privileged build
-  - image build in cluster
-  - go container image
+- kaniko
+- ko
+- non-privileged build
+- image build in cluster
+- go container image
 prerequisites:
-  - domain-13-container-runtime/04-image-build/01-buildkit-production-guide.md
-  - domain-13-container-runtime/02-image-management/01-harbor-enterprise-image-registry.md
-  - domain-08-release-change-management/01-gitops/05-tekton-cloud-native-cicd.md
+- domain-13-container-runtime/04-image-build/01-buildkit-production-guide.md
+- domain-13-container-runtime/02-image-management/01-harbor-enterprise-image-registry.md
+- domain-08-release-change-management/01-gitops/05-tekton-cloud-native-cicd.md
 k8s_versions:
-  - '1.28'
-  - '1.29'
-  - '1.30'
-  - '1.31'
-  - '1.32'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: KUDIG Team
-    role: contributor
+- name: KUDIG Team
+  role: contributor
 ---
+
+
 
 # Kaniko 与 ko 构建指南
 

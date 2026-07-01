@@ -1,6 +1,7 @@
 ---
 title: Gateway API
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - gateway
 - rbac
 - crd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,8 +33,9 @@ prerequisites:
 - cloud-provider-basics
 - service-mesh-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 # Gateway API
 

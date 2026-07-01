@@ -1,7 +1,9 @@
 ---
 title: Agent Skill 与自定义命令
-description: '**文档类型**: 扩展开发专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Skill, SKILL.md, Custom Command, Template, Arguments,
-  Shell Output, File Reference'
+description: '**文档类型**: 扩展开发专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Skill, SKILL.md,
+  Custom Command, Template, Arguments, Shell Output, File Reference'
+summary: '**文档类型**: 扩展开发专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Skill, SKILL.md,
+  Custom Command, Template, Arguments, Shell Output, File Reference'
 category: ai-coding
 tags:
 - ai
@@ -10,6 +12,8 @@ tags:
 - code-generation
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +32,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Agent [[SKILL|Skill]] 与自定义命令
 

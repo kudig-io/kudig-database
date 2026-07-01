@@ -1,6 +1,7 @@
 ---
 title: SLI 实现指南：可用性、延迟、吞吐量
 description: 面向阿里云/专有云 K8s 的 SLI 实现指南，讲解可用性、延迟、吞吐量三类核心 SLI 的采集、计算与告警实现。
+summary: 面向阿里云/专有云 K8s 的 SLI 实现指南，讲解可用性、延迟、吞吐量三类核心 SLI 的采集、计算与告警实现。
 category: observability
 tags:
 - k8s
@@ -11,6 +12,9 @@ tags:
 - prometheus
 - observability
 - sre
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -45,9 +49,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # SLI 实现指南：可用性、延迟、吞吐量
 

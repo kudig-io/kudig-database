@@ -1,6 +1,7 @@
 ---
 title: 130 - Kubernetes 运维基础技能：日志管理、备份恢复、安全加固与性能调优
 description: '# 130 - Kubernetes 运维基础技能：日志管理、备份恢复、安全加固与性能调优'
+summary: '# 130 - Kubernetes 运维基础技能：日志管理、备份恢复、安全加固与性能调优'
 category: extensions
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - prometheus
 - cilium
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -54,8 +57,9 @@ cross_refs:
 - type: domain
   path: ../domain-07-platform-engineering/
   label: '相关知识域: domain-07-platform-engineering'
-created: "2026-05-23"
 ---
+
+
 
 # 130 - [[Kubernetes|Kubernetes]] 运维基础技能：日志管理、备份恢复、安全加固与性能调优
 
@@ -680,7 +684,7 @@ kubectl top pods --all-namespaces --sort-by=memory
 
 # 调度问题检查
 kubectl get events --sort-by='.lastTimestamp'
-kubectl describe nodes | grep -A 5 -B 5 "Taints\|Conditions"
+kubectl describe nodes | grep -A 5 -B 5 "Taints|Conditions"
 
 # 网络性能测试
 kubectl run netperf --image=busybox --rm -it -- wget -qO- --timeout=3 <service-url>

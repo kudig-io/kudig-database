@@ -1,7 +1,9 @@
 ---
 title: KUDIG 命令 → 文档映射
-description: '| `kubectl logs` | 查看容器日志 | [[domain-10-troubleshooting-diagnostics/README.md|README]] | [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod fta]]
-  |'
+description: '| `kubectl logs` | 查看容器日志 | [[domain-10-troubleshooting-diagnostics/README.md|README]]
+  | [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod fta]] |'
+summary: '| `kubectl logs` | 查看容器日志 | [[domain-10-troubleshooting-diagnostics/README.md|README]]
+  | [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod fta]] |'
 category: general
 tags:
 - k8s
@@ -13,6 +15,8 @@ tags:
 - rbac
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +35,9 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: KUDIG 命令 → 文档映射

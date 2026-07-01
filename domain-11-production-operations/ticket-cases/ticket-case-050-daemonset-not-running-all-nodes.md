@@ -1,6 +1,7 @@
 ---
 title: DaemonSet 未在所有节点运行：日志采集 Agent 缺失
 description: 专有云 ACK 集群 Logtail DaemonSet 在部分节点未调度，导致业务日志采集中断，根因涉及节点 Taint、资源不足与镜像拉取异常的工单闭环样本。
+summary: 专有云 ACK 集群 Logtail DaemonSet 在部分节点未调度，导致业务日志采集中断，根因涉及节点 Taint、资源不足与镜像拉取异常的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -10,6 +11,9 @@ tags:
 - observability
 - taint
 - p1
+tier: supporting
+created: '2026-06-26T14:00:00+08:00'
+updated: '2026-06-26T17:45:00+08:00'
 incident_id: INC-2026-ACK-050
 priority: P1
 severity: high
@@ -24,9 +28,7 @@ skill_ref:
   Skill]]'
 fta_ref:
 - 'FTA: DaemonSet 未覆盖全部节点'
-created: '2026-06-26T14:00:00+08:00'
-updated: '2026-06-26T17:45:00+08:00'
-last_updated: 2026-06-26T17:45:00+08:00
+last_updated: 2026-06-26 17:45:00+08:00
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -50,13 +52,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[concepts/daemonset.md]]"
+- target: '[[concepts/daemonset.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 

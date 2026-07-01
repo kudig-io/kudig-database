@@ -1,7 +1,9 @@
 ---
 title: 插件体系与 Web Search
-description: '**文档类型**: 功能详解 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Plugins, Web Search, Exa, Firecrawl, Parallel, File
-  Parser, Context Compression, Domain Filtering'
+description: '**文档类型**: 功能详解 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Plugins, Web
+  Search, Exa, Firecrawl, Parallel, File Parser, Context Compression, Domain Filtering'
+summary: '**文档类型**: 功能详解 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Plugins, Web Search,
+  Exa, Firecrawl, Parallel, File Parser, Context Compression, Domain Filtering'
 category: ai-coding
 tags:
 - ai
@@ -9,6 +11,8 @@ tags:
 - copilot
 - code-generation
 - llm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +31,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 插件体系与 Web Search
 

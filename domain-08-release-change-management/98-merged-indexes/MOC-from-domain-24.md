@@ -1,11 +1,14 @@
 ---
 title: domain-24-infrastructure-as-code MOC
 description: domain-24-infrastructure-as-code 知识域导航页，覆盖 7 篇文档
+summary: domain-24-infrastructure-as-code 知识域导航页，覆盖 7 篇文档
 category: moc
 tags:
 - k8s
 - moc
 - iac
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - iac-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-24-infrastructure-as-code MOC
 

@@ -1,6 +1,7 @@
 ---
 title: Cilium eBPF 网络与安全实践指南
 description: '# Cilium eBPF 网络与安全实践指南'
+summary: '# Cilium eBPF 网络与安全实践指南'
 category: network-fundamentals
 tags:
 - network
@@ -13,6 +14,8 @@ tags:
 - cilium
 - helm
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -55,8 +58,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # [[Cilium|Cilium]] eBPF 网络与安全实践指南
 

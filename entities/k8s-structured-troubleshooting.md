@@ -1,6 +1,7 @@
 ---
 title: 结构化排障方法论：配置优先、全组件排障指南
 description: '## 配置优先原则'
+summary: '## 配置优先原则'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - coredns
 - containerd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 结构化排障方法论
 

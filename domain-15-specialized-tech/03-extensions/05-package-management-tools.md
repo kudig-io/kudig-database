@@ -1,6 +1,9 @@
 ---
 title: 包管理与应用分发工具
-description: 深入解析 K8s 包管理工具生态：Helm v3、Kustomize、Carvel (kapp-controller)、Helmfile、ChartMuseum 与企业级应用交付最佳实践
+description: 深入解析 K8s 包管理工具生态：Helm v3、Kustomize、Carvel (kapp-controller)、Helmfile、ChartMuseum
+  与企业级应用交付最佳实践
+summary: 深入解析 K8s 包管理工具生态：Helm v3、Kustomize、Carvel (kapp-controller)、Helmfile、ChartMuseum
+  与企业级应用交付最佳实践
 category: domain-15-specialized-tech
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - prometheus
 - grafana
 - argocd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -63,8 +68,9 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta.md
   type: fta
   desc: Helm 故障树
-created: "2026-05-23"
 ---
+
+
 
 # 101 - 包管理与应用分发工具 (Package Management & [[Distribution|Distribution]])
 

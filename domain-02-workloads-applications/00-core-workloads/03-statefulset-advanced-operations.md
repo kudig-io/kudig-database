@@ -1,6 +1,7 @@
 ---
 title: 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)
 description: '# 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)'
+summary: '# 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)'
 category: workloads
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - opa
 - redis
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -61,8 +64,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
-created: "2026-05-23"
 ---
+
+
 
 # 03 - [[StatefulSet|StatefulSet]] 高级运维指南 (StatefulSet Advanced Operations)
 

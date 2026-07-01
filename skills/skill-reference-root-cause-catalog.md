@@ -1,7 +1,9 @@
 ---
 title: Root Cause Catalog
-description: '| RC-006 | **节点与 apiserver 网络不通** | 中 | D2.7, D2.2, D1.2 | `evt_api_unreachable`, `evt_policy_block`, `evt_route_fail`
-  |'
+description: '| RC-006 | **节点与 apiserver 网络不通** | 中 | D2.7, D2.2, D1.2 | `evt_api_unreachable`,
+  `evt_policy_block`, `evt_route_fail` |'
+summary: '| RC-006 | **节点与 apiserver 网络不通** | 中 | D2.7, D2.2, D1.2 | `evt_api_unreachable`,
+  `evt_policy_block`, `evt_route_fail` |'
 category: skills
 tags:
 - k8s
@@ -10,6 +12,8 @@ tags:
 - apiserver
 - kubelet
 - containerd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +29,9 @@ trigger_keywords:
 - Catalog
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Root Cause Catalog
 

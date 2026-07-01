@@ -1,6 +1,7 @@
 ---
 title: NetworkPolicy 深度排查与零信任安全治理指南 [topic-structural-trouble-shooting]
 description: 'title: NetworkPolicy 深度排查与零信任安全治理指南'
+summary: 'title: NetworkPolicy 深度排查与零信任安全治理指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - grafana
 - istio
 - cilium
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -46,8 +49,9 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[NetworkPolicy|NetworkPolicy]] 深度排查与零信任安全治理指南
 description: '# NetworkPolicy 深度排查与零信任安全治理指南'
@@ -188,7 +192,7 @@ NetworkPolicy 只是“意图声明”（Desired State），其执行依赖于 C
 | 现象分类 | 深度根因分析 | 关键观测工具/指令 |
 | :--- | :--- | :--- |
 | **策略失效 (Policy Ignored)** | CNI 不支持（如纯 Flannel）、CNI Agent 未正常启动、API 资源版本不兼容。 | `kubectl logs -n kube-system <cni-pod>` |
-| **大规模集群性能抖动** | iptables 规则爆炸（数万条），导致网络延迟增加或 CPU 负载过高。 | `iptables -t filter -L -n \| wc -l` |
+| **大规模集群性能抖动** | iptables 规则爆炸（数万条），导致网络延迟增加或 CPU 负载过高。 | `iptables -t filter -L -n | wc -l` |
 | **跨 NS 通信失败** | 目标 Namespace 缺少对应的 Label，导致 `namespaceSelector` 匹配为空。 | `kubectl get ns --show-labels` |
 | **HostNetwork Pod 逃逸** | NetworkPolicy 无法限制 hostNetwork Pod，因为它们不经过 CNI 的虚拟网卡。 | `kubectl get pod -o jsonpath='{.spec.hostNetwork}'` |
 
@@ -550,13 +554,13 @@ table=1, priority=0, actions=drop
 | NetworkPolicy 创建失败 | API Server Webhook 拒绝 | `kubectl describe netpol` 查看 Events | 策略语法错误、冲突标签 |
 | CNI Agent 未处理策略 | CNI 不支持或 Agent 异常 | `kubectl logs -n kube-system <cni-pod>` | Flannel 不支持策略 |
 | 策略编译超时 | eBPF 程序编译失败 | `cilium bpf policy get <endpoint-id>` | Cilium 内核版本过低 |
-| ipset 创建失败 | 内核 ipset 模块未加载 | `lsmod \| grep ip_set` | 精简内核缺少模块 |
+| ipset 创建失败 | 内核 ipset 模块未加载 | `lsmod | grep ip_set` | 精简内核缺少模块 |
 
 **阶段 2: 规则下发与生效 (5-30s)**
 
 | 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
-| iptables 规则未生成 | Felix Agent 问题或策略不匹配 | `iptables-save \| grep cali` | Calico Felix 重启 |
+| iptables 规则未生成 | Felix Agent 问题或策略不匹配 | `iptables-save | grep cali` | Calico Felix 重启 |
 | eBPF 程序未加载 | BPF 编译错误或权限不足 | `bpftool prog list` | SELinux 阻止 |
 | 规则下发延迟 > 30s | 控制面负载过高 | 检查 Cilium Operator CPU 使用率 | 10000+ Pod 集群 |
 | Pod 重启后策略失效 | Endpoint 未重新注册 | `cilium endpoint list` | Identity 回收延迟 |
@@ -574,9 +578,9 @@ table=1, priority=0, actions=drop
 
 | 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
-| iptables 性能下降 | 规则数 > 10000 导致 O(n) 延迟 | `iptables -t filter -L \| wc -l` | 1000+ NetworkPolicy |
+| iptables 性能下降 | 规则数 > 10000 导致 O(n) 延迟 | `iptables -t filter -L | wc -l` | 1000+ NetworkPolicy |
 | ipset 更新风暴 | Pod 频繁创建/删除触发重算 | 监控 Felix CPU 使用率 | 批量滚动更新 |
-| Cilium Identity 耗尽 | Identity 回收不及时 | `cilium identity list \| wc -l` | 短生命周期 Job |
+| Cilium Identity 耗尽 | Identity 回收不及时 | `cilium identity list | wc -l` | 短生命周期 Job |
 | eBPF Map 容量不足 | 默认 Map 大小不够 | `cilium bpf config list` | 100000+ Endpoint |
 
 ### 2.3.2 复合问题场景

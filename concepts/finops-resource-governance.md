@@ -1,5 +1,7 @@
 ---
 title: FinOps 资源治理
+summary: FinOps 资源治理：entities/kubernetes.md 的多租户架构让资源分配变得复杂：平台团队提供集群，业务团队部署工作负载，但"谁用了多少资源、花了多少钱"往往是一笔糊涂账。FinOps
+  提供成本可见性与优化方法，平台治理提供资源配额与策略执行。本页连接 domain-07-platform-engineering 的治理框架与 domain-11-production-o...
 category: synthesis
 tags:
 - k8s
@@ -12,6 +14,7 @@ tags:
 - allocation
 - showback
 - chargeback
+tier: supporting
 sources:
 - domain-07-platform-engineering/03-governance
 - domain-07-platform-engineering/governance
@@ -20,9 +23,11 @@ created: 2026-05-21 14:00:00+00:00
 updated: 2026-05-21 14:00:00+00:00
 last_updated: 2026-05-21 14:00:00+00:00
 relationships:
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
 ---
+
+
 
 # FinOps 资源治理
 

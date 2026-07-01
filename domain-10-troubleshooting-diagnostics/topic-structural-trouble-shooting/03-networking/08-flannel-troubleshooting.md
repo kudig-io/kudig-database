@@ -1,6 +1,7 @@
 ---
 title: Flannel 网络故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Flannel 网络故障排查指南'
+summary: 'title: Flannel 网络故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - calico
 - docker
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -42,8 +45,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Flannel 网络故障排查指南
 description: '# Flannel 网络故障排查指南'
@@ -226,7 +230,7 @@ kubectl get nodes -o json | jq -r '.items[] |
   "\(.metadata.name): \(.spec.podCIDR // "未分配")"'
 
 # 查看 flannel 子网分配记录
-kubectl logs -n kube-system -l app=flannel | grep -i "subnet\|lease"
+kubectl logs -n kube-system -l app=flannel | grep -i "subnet|lease"
 
 # 检查节点上的子网环境文件
 cat /run/flannel/subnet.env

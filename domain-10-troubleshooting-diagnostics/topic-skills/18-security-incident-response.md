@@ -1,6 +1,7 @@
 ---
 title: 安全事件应急响应 / Security Incident Response
 description: '# 安全事件应急响应 / Security Incident Response'
+summary: '# 安全事件应急响应 / Security Incident Response'
 category: security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - istio
 - cilium
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -73,8 +76,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L1-advisory
-created: "2026-05-23"
 ---
+
+
 
 <!-- condition: kubectl get events -A --sort-by='.lastTimestamp' | grep -E 'Warning|Forbidden|Denied' | tail -20 显示异常安全事件 -->
 
@@ -131,8 +135,8 @@ created: "2026-05-23"
 | SP-04 | 容器文件系统出现异常二进制文件 / Anomalous binary files in container filesystem | `kubectl exec POD -- find / -type f -executable -newer /proc/1/exe -not -path "/proc/*" -not -path "/sys/*" 2>/dev/null` | 0.85 | 应用正常的文件生成；构建时产生的临时文件 |
 | SP-05 | 镜像安全扫描发现 CRITICAL/HIGH CVE / Image scan reveals CRITICAL/HIGH CVE | `trivy image IMAGE` 输出 CRITICAL/HIGH 漏洞；Harbor/ACR 安全扫描报告 | 0.80 | 漏洞已有缓解措施且不可利用；仅在非暴露组件中存在 |
 | SP-06 | Secret 内容出现在日志/Git 仓库中 / Secret content exposed in logs or Git repository | `kubectl logs POD` 中出现 base64 解码后的敏感信息；GitHub/GitLab 安全扫描告警 | 0.95 | 测试环境的虚假凭据；已过期/已轮换的凭据 |
-| SP-07 | 审计日志中异常 API 调用模式（大量 exec/attach/secrets 访问）/ Abnormal API call patterns in audit logs | 审计日志分析 `grep -E "exec\|attach\|secrets" /var/log/kubernetes/audit/audit.log` | 0.80 | 正常的批量运维操作；CI/CD 部署过程 |
-| SP-08 | Pod Security Admission 拒绝事件增多 / Increased Pod Security Admission rejection events | `kubectl get events -A --field-selector reason=FailedCreate \| grep -i security` | 0.75 | 新部署的应用配置不当；PSA 策略刚启用导致的过渡期问题 |
+| SP-07 | 审计日志中异常 API 调用模式（大量 exec/attach/secrets 访问）/ Abnormal API call patterns in audit logs | 审计日志分析 `grep -E "exec|attach|secrets" /var/log/kubernetes/audit/audit.log` | 0.80 | 正常的批量运维操作；CI/CD 部署过程 |
+| SP-08 | Pod Security Admission 拒绝事件增多 / Increased Pod Security Admission rejection events | `kubectl get events -A --field-selector reason=FailedCreate | grep -i security` | 0.75 | 新部署的应用配置不当；PSA 策略刚启用导致的过渡期问题 |
 | SP-09 | NetworkPolicy 之外的异常网络流量 / Anomalous network traffic outside NetworkPolicy rules | Cilium Hubble flows 显示被 drop 的流量；Calico flow logs 异常连接 | 0.85 | NetworkPolicy 配置不完整；新服务尚未添加到策略 |
 | SP-10 | ServiceAccount Token 被非预期 Pod 使用 / ServiceAccount Token used by unexpected Pod | 审计日志中 ServiceAccount 的 user.username 与预期 Pod 不匹配 | 0.90 | Token 在多个 Pod 间合法共享（不推荐但合法） |
 | SP-11 | DNS 查询异常模式（高频、异常域名、tunneling 特征）/ Abnormal DNS query patterns (high frequency, suspicious domains, tunneling characteristics) | CoreDNS 日志分析；DNS 流量监控显示长子域名、高频查询、TXT 记录异常 | 0.85 | 合法的高频 DNS 服务发现；CDN/动态域名解析 |
@@ -1012,7 +1016,7 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
   kubectl auth can-i --list --as=system:serviceaccount:NAMESPACE:SA_NAME
   
   # 监控应用日志确认无权限错误
-  kubectl logs -l app=AFFECTED_APP -n NAMESPACE | grep -i "forbidden\|unauthorized"
+  kubectl logs -l app=AFFECTED_APP -n NAMESPACE | grep -i "forbidden|unauthorized"
   ```
 - **回滚命令**:
 
@@ -1529,7 +1533,7 @@ kubectl get events -A --field-selector reason=FailedValidation | grep -c securit
 |-------|----------|---------|---------|
 | Falco 告警数量 | `falco_events_total` | 下降或稳定 | 新增相同类型告警 |
 | 异常网络连接 | Cilium Hubble flows / Calico flow logs | 无新增异常外连 | 发现到恶意 IP 的连接 |
-| Secret 访问审计 | `kubectl get --raw /metrics \| grep audit` | 正常访问模式 | 异常来源的 Secret 访问 |
+| Secret 访问审计 | `kubectl get --raw /metrics | grep audit` | 正常访问模式 | 异常来源的 Secret 访问 |
 | Pod 安全违规 | `kubectl get events -A --field-selector reason=FailedCreate` | 无新增安全违规 | 新的 PSA 拒绝事件 |
 | 镜像拉取策略 | `kube_pod_container_status_waiting_reason{reason="ImagePullBackOff"}` | 无异常 | 未签名镜像被拒绝（预期）或签名验证失败 |
 | ServiceAccount 使用 | 审计日志中 SA 的使用模式 | 正常使用 | 异常 SA 使用或被弃用 SA 的活动 |

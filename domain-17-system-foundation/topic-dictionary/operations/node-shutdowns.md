@@ -1,6 +1,7 @@
 ---
 title: 节点关闭（Node Shutdowns）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - pdb
 - statefulset
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # 节点关闭（Node Shutdowns）
 
@@ -92,7 +96,7 @@ FEATURE STATE: `Kubernetes v1.28 [stable]`（默认启用）
 |------|----------|----------|----------|
 | Pod 长时间 Terminating（节点关机后） | 非优雅关闭，kubelet 未检测到 shutdown | `kubectl get pods -o wide --field-selector=status.phase=Running` | 添加 `node.kubernetes.io/out-of-service` 污点 |
 | StatefulSet Pod 无法在新节点重建 | 卷未分离，仍绑定到旧节点 | `kubectl describe pv <pv-name>` | 使用 out-of-service 污点触发强制卷分离 |
-| 优雅关闭期间 Pod 被强杀 | shutdownGracePeriod 设置过短 | `journalctl -u kubelet \| grep shutdown` | 增大 `shutdownGracePeriod` 和 `shutdownGracePeriodCriticalPods` |
+| 优雅关闭期间 Pod 被强杀 | shutdownGracePeriod 设置过短 | `journalctl -u kubelet | grep shutdown` | 增大 `shutdownGracePeriod` 和 `shutdownGracePeriodCriticalPods` |
 | 节点关机后 kubelet 未正确终止 Pod | systemd 抑制锁未生效 | `systemd-inhibit --list` | 确认 kubelet 注册了 shutdown inhibitor lock |
 | 关键 Pod 优先级关闭策略未生效 | `GracefulNodeShutdownBasedOnPodPriority` 未启用 | `kubelet --feature-gates` | 确认特性门控已启用并配置 `shutdownGracePeriodByPodPriority` |
 

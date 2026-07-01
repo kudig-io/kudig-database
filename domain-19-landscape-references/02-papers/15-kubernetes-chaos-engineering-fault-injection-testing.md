@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 混沌工程与故障注入测试 (Chaos Engineering and Fault Injection Testing)
 description: 本文档深入探讨了Kubernetes环境下的混沌工程实践和故障注入测试方法，基于大型互联网公司的混沌工程实践经验，提供从理论基础到实践操作的完整技术指南，帮助企业构建高韧性、高可靠性的云原生系统。
+summary: 本文档深入探讨了Kubernetes环境下的混沌工程实践和故障注入测试方法，基于大型互联网公司的混沌工程实践经验，提供从理论基础到实践操作的完整技术指南，帮助企业构建高韧性、高可靠性的云原生系统。
 category: papers
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - mysql
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -52,8 +55,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 混沌工程与故障注入测试 ([[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]] and Fault Injection Testing)
 
@@ -999,5 +1003,9 @@ spec:
 - 17-kubernetes-aiml-gpu-scheduling-llm-inference
 
 ## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

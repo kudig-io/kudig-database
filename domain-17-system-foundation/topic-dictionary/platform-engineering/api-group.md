@@ -1,12 +1,16 @@
 ---
 title: API 组
-description: 'API Group 是 Kubernetes 中将相关 API 资源组织在一起的逻辑分组机制。不同的功能模块通过不同的 API Group 暴露，便于管理和版本...'
+description: API Group 是 Kubernetes 中将相关 API 资源组织在一起的逻辑分组机制。不同的功能模块通过不同的 API Group
+  暴露，便于管理和版本...
+summary: API Group 是 Kubernetes 中将相关 API 资源组织在一起的逻辑分组机制。不同的功能模块通过不同的 API Group 暴露，便于管理和版本...
 category: dictionary
 tags:
 - k8s
 - glossary
 - api
 - platform
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # API 组
 

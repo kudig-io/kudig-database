@@ -1,16 +1,23 @@
 ---
-title: "apiserver × Prometheus"
-category: "synthesis"
-tags: ["cross-domain", "cluster", "observability"]
-created: "2026-05-23"
-updated: "2026-05-23"
+title: apiserver × Prometheus
+summary: apiserver × Prometheus：apiserver与Prometheus是Kubernetes生产环境中的两个关键维度。理解它们之间的交互关系对于构建稳定、可观测的集群至关重要。
+category: synthesis
+tags:
+- cross-domain
+- cluster
+- observability
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
 relationships:
-  - target: "[[entities/helm.md]]"
-    type: uses
-  - target: "[[entities/argocd.md]]"
-    type: related_to
+- target: '[[entities/helm.md]]'
+  type: uses
+- target: '[[entities/argocd.md]]'
+  type: related_to
 ---
+
+
 
 # apiserver × Prometheus
 

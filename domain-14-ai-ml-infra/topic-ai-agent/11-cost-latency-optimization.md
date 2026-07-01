@@ -1,6 +1,7 @@
 ---
 title: 成本与延迟优化策略 (domain-14-ai-ml-infra)
 description: 'title: 成本与延迟优化策略'
+summary: 'title: 成本与延迟优化策略'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - grafana
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - etcd-basics
 - redis-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 成本与延迟优化策略
 description: '# 成本与延迟优化策略'

@@ -1,6 +1,7 @@
 ---
 title: Playwright Enterprise Automation Testing 深度实践
 description: '# Playwright Enterprise Automation Testing 深度实践'
+summary: '# Playwright Enterprise Automation Testing 深度实践'
 category: automated-testing-quality
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - job
 - webhook
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Playwright Enterprise Automation Testing 深度实践
 

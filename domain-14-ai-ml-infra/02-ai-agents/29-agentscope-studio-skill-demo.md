@@ -1,6 +1,7 @@
 ---
 title: AgentScope Studio 与 Agent Skill 实战指南 (domain-14-ai-ml-infra)
 description: 'title: AgentScope Studio 与 Agent Skill 实战指南'
+summary: 'title: AgentScope Studio 与 Agent Skill 实战指南'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - ingress
 - networkpolicy
 - llm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: AgentScope Studio 与 Agent [[SKILL|Skill]] 实战指南
 description: '# AgentScope Studio 与 Agent Skill 实战指南'

@@ -1,13 +1,21 @@
 ---
-title: "Domain Index — 故障排查与诊断"
+title: Domain Index — 故障排查与诊断
+summary: Domain Index — 故障排查与诊断
 category: index
-tags: ["index", "10", "visibility/public"]
-sources: ["domain-10-troubleshooting-diagnostics/"]
+tags:
+- index
+- '10'
+- visibility/public
+tier: supporting
+sources:
+- domain-10-troubleshooting-diagnostics/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: reviewed
 ---
+
+
 
 # 故障排查与诊断 索引
 
@@ -167,3 +175,7 @@ status: reviewed
 
 - [[domain-10-troubleshooting-diagnostics/98-merged-indexes/MOC-from-domain-12.md|MOC from Domain 12]]
 - [[domain-10-troubleshooting-diagnostics/98-merged-indexes/README-from-domain-12.md|README from Domain 12]]
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

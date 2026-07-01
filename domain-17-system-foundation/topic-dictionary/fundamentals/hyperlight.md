@@ -1,6 +1,9 @@
 ---
 title: Hyperlight 微虚拟机
-description: 'Hyperlight 是微软开源的项目，提供超轻量的安全微虚拟机（microVM），专为 Wasm 和容器工作负载设计，在 Windows/Linux Hype...'
+description: Hyperlight 是微软开源的项目，提供超轻量的安全微虚拟机（microVM），专为 Wasm 和容器工作负载设计，在 Windows/Linux
+  Hype...
+summary: Hyperlight 是微软开源的项目，提供超轻量的安全微虚拟机（microVM），专为 Wasm 和容器工作负载设计，在 Windows/Linux
+  Hype...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - fundamentals
 - microvm
 - security
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Hyperlight 微虚拟机（Hyperlight）
 

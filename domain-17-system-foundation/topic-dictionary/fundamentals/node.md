@@ -1,12 +1,15 @@
 ---
 title: 节点
-description: 'Node（节点）是 Kubernetes 集群中的工作机器，可以是物理机或虚拟机。节点上运行 kubelet 和容器运行时，负责执行用户的工作负载（Pod）。...'
+description: Node（节点）是 Kubernetes 集群中的工作机器，可以是物理机或虚拟机。节点上运行 kubelet 和容器运行时，负责执行用户的工作负载（Pod）。...
+summary: Node（节点）是 Kubernetes 集群中的工作机器，可以是物理机或虚拟机。节点上运行 kubelet 和容器运行时，负责执行用户的工作负载（Pod）。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - node
 - kubelet
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 节点
 

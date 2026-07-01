@@ -1,6 +1,7 @@
 ---
 title: Amazon ECR (Elastic Container Registry) Enterprise 深度实践
 description: '# Amazon ECR (Elastic Container Registry) Enterprise 深度实践'
+summary: '# Amazon ECR (Elastic Container Registry) Enterprise 深度实践'
 category: container-image-management
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - job
 - gateway
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -45,8 +48,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Amazon ECR (Elastic Container Registry) Enterprise 深度实践
 

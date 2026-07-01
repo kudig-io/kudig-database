@@ -1,6 +1,7 @@
 ---
 title: kudig-database 内容深度评估报告 (reports)
 description: '# kudig-database 内容深度评估报告'
+summary: '# kudig-database 内容深度评估报告'
 category: general
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - ebpf
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - helm-basics
 - ebpf-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # kudig-database 内容深度评估报告
 

@@ -1,16 +1,22 @@
 ---
-title: "Research: Kubernetes Container Runtime 2025-2026"
+title: 'Research: Kubernetes Container Runtime 2025-2026'
+summary: 'Research: Kubernetes Container Runtime 2025-2026：2025-2026 年，Kubernetes
+  容器运行时生态经历了根本性变革。containerd 2.x 作为长期支持版本发布，正式确立为行业标准容器运行时；User Namespaces 在 Kubernetes
+  1.32 中达到 GA 状态，消除了容器安全领域长达十年的技术债；WebAss...'
 category: synthesis
 tags:
-  - runtime
-  - containerd
-  - wasm
-  - k8s
-  - research
+- runtime
+- containerd
+- wasm
+- k8s
+- research
+tier: supporting
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # Kubernetes 容器运行时研究综合 2025-2026
 
@@ -81,3 +87,7 @@ OCI 镜像规范和运行时规范在 2025 年进行了重大扩展，正式支�
 - [[concepts/specialized-k8s-technologies.md|specialized k8s technologies]] — WebAssembly 运行时（SpinKube、runwasi）拓展了 Kubernetes 在边缘与 IoT 场景的应用边界
 - [[concepts/k8s-ai-ml-infrastructure.md|k8s ai ml infrastructure]] — GPU 直通运行时与 MIG 支持是 AI/ML 工作负载高效执行的底层保障
 - [[concepts/k8s-networking-evolution.md|k8s networking evolution]] — 运行时与 CNI 的深度集成（eBPF、容器网络命名空间）影响网络性能与安全隔离
+
+## Related
+
+- [[research|#research Hub]] — tag hub

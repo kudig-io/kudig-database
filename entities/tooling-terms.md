@@ -1,6 +1,7 @@
 ---
 title: K8s 工具链术语参考
 description: 'description: ''**运维效率提升宝典**: 300+实用命令集合，涵盖日常运维、故障排查、性能调... |'
+summary: 'description: ''**运维效率提升宝典**: 300+实用命令集合，涵盖日常运维、故障排查、性能调... |'
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - jaeger
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8s 工具链术语参考
 
@@ -52,7 +56,7 @@ created: "2026-05-23"
 description: '**运维效率提升宝典**: 300+实用命令集合，涵盖日常运维、故障排查、性能调... |
 | **容器镜像优化** | Container Image Optimization | 容器镜像是 Kubernetes 应用部署的基础单元 |
 | **Kusheet 工具与开源项目 URL 汇总** | Tool Ecosystem | title: Kusheet 工具与开源项目 URL 汇总
-description: '\| **适合读者** \| 初学者(了解工具选择) → 中级(对比方... |
+description: '| **适合读者** | 初学者(了解工具选择) → 中级(对比方... |
 
 ---
 

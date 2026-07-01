@@ -1,6 +1,7 @@
 ---
 title: OpenTelemetry 与分布式链路追踪
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - opa
 - daemonset
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -37,9 +40,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # [[OpenTelemetry|OpenTelemetry]] 与分布式链路追踪
 

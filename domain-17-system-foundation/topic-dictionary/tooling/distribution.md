@@ -1,6 +1,9 @@
 ---
 title: CNCF Distribution 镜像仓库
-description: 'Distribution 是 CNCF 毕业项目，提供 OCI 兼容的容器镜像仓库实现（即 Docker Registry v2），是大多数私有 Registr...'
+description: Distribution 是 CNCF 毕业项目，提供 OCI 兼容的容器镜像仓库实现（即 Docker Registry v2），是大多数私有
+  Registr...
+summary: Distribution 是 CNCF 毕业项目，提供 OCI 兼容的容器镜像仓库实现（即 Docker Registry v2），是大多数私有
+  Registr...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - tooling
 - registry
 - container
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # CNCF Distribution 镜像仓库（Distribution）
 

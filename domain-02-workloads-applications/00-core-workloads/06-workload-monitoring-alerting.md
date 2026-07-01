@@ -1,6 +1,7 @@
 ---
 title: 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)
 description: 'title: 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)'
+summary: 'title: 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - jaeger
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 - etcd-basics
 - logging-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)
 description: '# 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)'

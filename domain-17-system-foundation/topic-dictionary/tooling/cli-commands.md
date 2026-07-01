@@ -1,6 +1,7 @@
 ---
 title: 查看所有 Pod 及其详细信息
 description: '**运维效率提升宝典**: 300+实用命令集合，涵盖日常运维、故障排查、性能调优等全方位操作'
+summary: '**运维效率提升宝典**: 300+实用命令集合，涵盖日常运维、故障排查、性能调优等全方位操作'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - cilium
 - flannel
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -41,9 +44,9 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 ﻿# [[Kubernetes|Kubernetes]] & AI/ML 命令行清单 (Complete CLI Commands Reference)
 
@@ -2263,7 +2266,7 @@ kubectl logs -n kube-system -l app=csi-node -c csi-driver
 kubectl logs -n kube-system -l app=csi-node -c node-driver-registrar
 
 # 检查 kubelet 存储日志
-journalctl -u kubelet | grep -i "volume\|csi\|mount"
+journalctl -u kubelet | grep -i "volume|csi|mount"
 
 # 检查节点上的挂载
 kubectl debug node/<node-name> -it --image=busybox -- mount | grep csi
@@ -2625,10 +2628,10 @@ kubectl get --raw /apis/metrics.k8s.io/v1beta1/nodes
 kubectl get --raw /apis/metrics.k8s.io/v1beta1/pods
 
 # 资源容量分析
-kubectl describe node <node-name> | grep -A 10 "Capacity\|Allocatable"
+kubectl describe node <node-name> | grep -A 10 "Capacity|Allocatable"
 
 # Pod资源限制检查
-kubectl describe pod <pod-name> | grep -A 5 "Limits\|Requests"
+kubectl describe pod <pod-name> | grep -A 5 "Limits|Requests"
 
 # 执行方式: 通过API Server获取性能指标
 # 用途: 分析资源使用情况

@@ -1,12 +1,15 @@
 ---
 title: etcd 证书体系源码分析 (topic-code-analysis)
 description: 'description: ''| 用户自定义 | `listen-client-urls` 中解析的地址 |'''
+summary: 'description: ''| 用户自定义 | `listen-client-urls` 中解析的地址 |'''
 category: general
 tags:
 - reference
 - etcd
 - apiserver
 - kubelet
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: etcd 证书体系源码分析
 description: '| 用户自定义 | `listen-client-urls` 中解析的地址 |'
@@ -498,6 +502,8 @@ systemctl restart kubelet
 - [`CreateLocalEtcdStaticPodManifest`](07-etcd.md) — etcd 静态 Pod 生成
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

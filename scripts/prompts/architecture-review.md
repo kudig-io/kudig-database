@@ -1,10 +1,13 @@
 ---
 title: KUDIG 架构咨询 Prompt 模板
 description: '# KUDIG 架构咨询 Prompt 模板'
+summary: '# KUDIG 架构咨询 Prompt 模板'
 category: general
 tags:
 - k8s
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 - 模板
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG 架构咨询 Prompt 模板
 

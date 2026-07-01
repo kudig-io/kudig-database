@@ -1,6 +1,8 @@
 ---
 title: Tokenetes 令牌管理
-description: 'Tokenetes 是开源的 Kubernetes Token 管理服务，为 K8s 提供安全的短期令牌签发和验证能力，支持服务间认证、API 访问令牌和身份联...'
+description: Tokenetes 是开源的 Kubernetes Token 管理服务，为 K8s 提供安全的短期令牌签发和验证能力，支持服务间认证、API
+  访问令牌和身份联...
+summary: Tokenetes 是开源的 Kubernetes Token 管理服务，为 K8s 提供安全的短期令牌签发和验证能力，支持服务间认证、API 访问令牌和身份联...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - security
 - identity
 - k8s
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Tokenetes 令牌管理（Tokenetes）
 

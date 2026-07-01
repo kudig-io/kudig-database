@@ -1,6 +1,7 @@
 ---
 title: Traefik Mesh Enterprise Service Mesh 深度实践
 description: '# Traefik Mesh Enterprise Service Mesh 深度实践'
+summary: '# Traefik Mesh Enterprise Service Mesh 深度实践'
 category: service-mesh-microservices
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - coredns
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -61,8 +64,9 @@ cross_refs:
 - type: domain
   path: ../domain-05-security-compliance/
   label: '相关知识域: domain-05-security-compliance'
-created: "2026-05-23"
 ---
+
+
 
 # Traefik Mesh Enterprise [[Service|Service]]Service Mesh）|Service Mesh]] 深度实践
 
@@ -1019,7 +1023,7 @@ kubectl get endpoints -n production
 |:---|:---|:---|
 | 503 Service Unavailable | 后端 Pod 不健康 | 检查 Pod readiness/liveness 探针 |
 | 路由不生效 | IngressRoute hosts 不匹配 | 检查 match 规则和 Host 头 |
-| TLS 握手失败 | 证书 Secret 不存在 | `kubectl get secret -A \| grep tls` |
+| TLS 握手失败 | 证书 Secret 不存在 | `kubectl get secret -A | grep tls` |
 | Middleware 不生效 | 引用顺序或命名空间错误 | Middleware 必须与 IngressRoute 同命名空间 |
 | 流量分割不生效 | TraefikService weight 错误 | 检查 weight 总和，确保后端服务存在 |
 | 限流不生效 | sourceCriterion 配置错误 | 检查请求头名称或 IP 来源 |

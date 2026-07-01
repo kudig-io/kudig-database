@@ -1,6 +1,8 @@
 ---
 title: Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps Practice)
-description: '# Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps Practice)'
+description: '# Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps
+  Practice)'
+summary: '# Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps Practice)'
 category: papers
 tags:
 - k8s
@@ -13,6 +15,8 @@ tags:
 - vpa
 - gpu
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -51,8 +55,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps Practice)
 
@@ -1176,3 +1181,9 @@ if __name__ == "__main__":
 - 05-kubernetes-gitops-complete-practice-guide
 - 07-kubernetes-csi-storage-deep-practice
 - 08-kubernetes-network-policies-security-micro-segmentation
+
+## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub

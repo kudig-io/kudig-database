@@ -1,7 +1,9 @@
 ---
 title: Recreate 策略源码分析
-description: 深入分析 Kubernetes Deployment Recreate 策略的源码实现，涵盖 rolloutRecreate 入口逻辑、旧 ReplicaSet 缩容流程、新 ReplicaSet 扩容时机以及与 RollingUpdate
-  的策略选择对比。
+description: 深入分析 Kubernetes Deployment Recreate 策略的源码实现，涵盖 rolloutRecreate 入口逻辑、旧
+  ReplicaSet 缩容流程、新 ReplicaSet 扩容时机以及与 RollingUpdate 的策略选择对比。
+summary: 深入分析 Kubernetes Deployment Recreate 策略的源码实现，涵盖 rolloutRecreate 入口逻辑、旧 ReplicaSet
+  缩容流程、新 ReplicaSet 扩容时机以及与 RollingUpdate 的策略选择对比。
 category: deployment
 tags:
 - recreate
@@ -11,6 +13,8 @@ tags:
 - downtime
 - kubelet
 - pdb
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: advanced
 reading_level: advanced
@@ -50,8 +54,9 @@ related_topics:
 - deployment-controller
 - rolling-update
 - deployment-status
-created: "2026-05-23"
 ---
+
+
 
 # Recreate 策略源码分析
 

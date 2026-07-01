@@ -1,7 +1,7 @@
 ---
-summary: "kubelet runs on every worker node and is responsible for:"
 title: kubelet
 description: kubelet — Kubernetes 生产运维知识库
+summary: 'kubelet runs on every worker node and is responsible for:'
 category: entities
 tags:
 - k8s
@@ -13,6 +13,8 @@ tags:
 - containerd
 - cri-o
 - statefulset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +28,8 @@ trigger_keywords:
 - kubelet
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
 
 # kubelet
 

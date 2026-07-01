@@ -1,6 +1,7 @@
 ---
 title: 微服务治理与 Service Mesh Kubernetes 生产架构设计
 description: 'title: 微服务治理与Service Mesh架构设计'
+summary: 'title: 微服务治理与Service Mesh架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - mysql
 - statefulset
 - ingress
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -40,8 +43,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 微服务治理与Service Mesh架构设计
 description: '# 微服务治理与 [[Service|Service]]Service Mesh）|Service Mesh]] [[Kubernetes|Kubernetes]] 生产架构设计'

@@ -1,11 +1,14 @@
 ---
 title: Consolidation Report 2026-05-21
 description: Consolidation Report 2026-05-21 — Kubernetes 生产运维知识库
+summary: Consolidation Report 2026-05-21 — Kubernetes 生产运维知识库
 category: synthesis
 tags:
 - maintenance
 - consolidation
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,11 +24,12 @@ trigger_keywords:
 - '2026-05-21'
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[skills/best-practices/scenarios/troubleshooting.md]]"
-    type: related_to
+- target: '[[skills/best-practices/scenarios/troubleshooting.md]]'
+  type: related_to
 ---
+
+
 
 # Consolidation Report — 2026-05-21
 

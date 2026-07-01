@@ -1,28 +1,30 @@
 ---
 title: Terway CNI网络
 description: 阿里云Terway网络模式详解、与Flannel对比、常见问题排查与诊断命令
+summary: ACK Terway网络模式详解、IPAM管理及常见网络问题排查。
 category: cloud-provider
 tags:
-  - alibaba-cloud
-  - ack
-  - terway
-  - cni
-  - networking
-  - eni
-  - ipvlan
-  - troubleshooting
-  - ipam
+- alibaba-cloud
+- ack
+- terway
+- cni
+- networking
+- eni
+- ipvlan
+- troubleshooting
+- ipam
+tier: core
 sources:
-  - 阿里云Terway官方文档
-  - ACK网络最佳实践
+- 阿里云Terway官方文档
+- ACK网络最佳实践
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
-summary: "ACK Terway网络模式详解、IPAM管理及常见网络问题排查。"
 relationships:
-  - target: "[[entities/cni.md]]"
-    type: related_to
+- target: '[[entities/cni.md]]'
+  type: related_to
 ---
+
 
 # Terway CNI网络
 

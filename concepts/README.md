@@ -1,13 +1,22 @@
 ---
-title: "Synthesis 目录索引"
+title: Synthesis 目录索引
+summary: Synthesis 目录索引
 category: index
-tags: ["index", "synthesis", "cross-cutting", "visibility/public"]
-sources: ["synthesis/"]
+tags:
+- index
+- synthesis
+- cross-cutting
+- visibility/public
+tier: supporting
+sources:
+- synthesis/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: reviewed
 ---
+
+
 
 # Synthesis 目录索引
 
@@ -160,3 +169,7 @@ status: reviewed
 
 - [[MOC]] — 主索引
 - [[_insights]] — 仓库洞察
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

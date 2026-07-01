@@ -1,6 +1,7 @@
 ---
 title: K8s Security Incident Response 诊断与响应
 description: Kubernetes 安全事件响应（高风险，L1-advisory）
+summary: Kubernetes 安全事件响应（高风险，L1-advisory）
 category: Kubernetes-Incident-Response
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - breach
 - audit
 - compliance
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L1-advisory
-created: "2026-05-23"
 ---
+
+
 
 # K8s Security Incident Response 诊断与响应
 
@@ -299,7 +303,7 @@ flowchart TD
 | 工具 | 用途 | 典型命令 |
 |:---|:---|:---|
 | kubectl | Kubernetes CLI | `kubectl get/describe/logs/exec` |
-| jq | JSON处理 | `kubectl get ... -o json \| jq ...` |
+| jq | JSON处理 | `kubectl get ... -o json | jq ...` |
 | openssl | 证书检查 | `openssl x509 -in <cert> -noout -dates` |
 | tcpdump | 网络抓包 | `tcpdump -i any port <port> -n` |
 | strace | 系统调用追踪 | `strace -p <pid> -f` |

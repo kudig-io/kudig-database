@@ -1,6 +1,7 @@
 ---
 title: Production Operations
 description: 原 domain-11-production-operations 精简后的生产运维知识，聚焦 FinOps、治理、事件响应和绿色计算。
+summary: 原 domain-11-production-operations 精简后的生产运维知识，聚焦 FinOps、治理、事件响应和绿色计算。
 category: domain
 tags:
 - finops
@@ -10,6 +11,8 @@ tags:
 - green-computing
 - daemonset
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Production Operations
 

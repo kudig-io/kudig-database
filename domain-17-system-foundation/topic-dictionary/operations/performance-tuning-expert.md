@@ -1,6 +1,7 @@
 ---
 title: 03 - Kubernetes 性能调优专家指南
 description: '# 03 - Kubernetes 性能调优专家指南'
+summary: '# 03 - Kubernetes 性能调优专家指南'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - istio
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -40,9 +43,9 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 03 - [[Kubernetes|Kubernetes]] 性能调优专家指南
 

@@ -1,6 +1,8 @@
 ---
 title: K8S 运维诊断技能库
-description: Kubernetes 运维诊断全栈技能库，涵盖 Pod/Node/Network/Storage/Performance 五大故障域的结构化 SOP
+description: Kubernetes 运维诊断全栈技能库，涵盖 Pod/Node/Network/Storage/Performance 五大故障域的结构化
+  SOP
+summary: Kubernetes 运维诊断全栈技能库，涵盖 Pod/Node/Network/Storage/Performance 五大故障域的结构化 SOP
 category: ai-agent
 tags:
 - ai
@@ -13,6 +15,8 @@ tags:
 - kubelet
 - prometheus
 - coredns
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-04
 difficulty: advanced
 reading_level: advanced
@@ -33,8 +37,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8S 运维诊断技能库
 

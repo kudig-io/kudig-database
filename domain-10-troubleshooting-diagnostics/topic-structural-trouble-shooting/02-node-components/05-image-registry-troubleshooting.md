@@ -1,6 +1,7 @@
 ---
 title: 镜像与镜像仓库故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 镜像与镜像仓库故障排查指南'
+summary: 'title: 镜像与镜像仓库故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - gpu
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -38,8 +41,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 镜像与镜像仓库故障排查指南
 description: '# 镜像与镜像仓库故障排查指南'

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes API Versions Reference
 description: Kubernetes API Versions Reference — Kubernetes 生产运维知识库
+summary: Kubernetes API Versions Reference — Kubernetes 生产运维知识库
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ingress
 - rbac
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ trigger_keywords:
 - Reference
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes API Versions Reference
 
@@ -131,6 +135,8 @@ kubectl api-versions | grep networking.k8s.io/v1
 ```
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[entities/statefulset.md|statefulset]] — StatefulSet
 - [[deployment]] — Deployment

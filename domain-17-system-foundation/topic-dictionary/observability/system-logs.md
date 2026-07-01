@@ -1,6 +1,7 @@
 ---
 title: 系统日志（System Logs）
 description: '# 系统日志（System Logs）'
+summary: '# 系统日志（System Logs）'
 category: dictionary
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - kubelet
 - scheduler
 - controller-manager
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # 系统日志（System Logs）
 

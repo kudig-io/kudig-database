@@ -1,6 +1,7 @@
 ---
 title: K8s 开发者体验工具链指南
 description: '# K8s 开发者体验工具链指南'
+summary: '# K8s 开发者体验工具链指南'
 category: edge-computing
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - helm
 - job
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -42,8 +45,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # K8s 开发者体验工具链指南
 

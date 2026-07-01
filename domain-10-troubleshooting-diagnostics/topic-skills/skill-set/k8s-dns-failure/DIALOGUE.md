@@ -1,28 +1,32 @@
 ---
-title: "DNS解析问题 — 远程顾问对话脚本"
-category: "troubleshooting"
-tags: ["networking", "remote-consultant"]
-created: "2026-05-23"
-updated: "2026-05-23"
+title: DNS解析问题 — 远程顾问对话脚本
+summary: DNS解析问题的远程顾问对话脚本，覆盖CoreDNS、Service DNS、NodeLocal DNSCache排查。
+category: troubleshooting
+tags:
+- networking
+- remote-consultant
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
-dialogue_id: "DIALOGUE-SKILL-NET-001"
-skill_id: "SKILL-NET-001"
-version: "1.0.0"
-role: "remote-consultant"
-language: "zh"
-summary: "DNS解析问题的远程顾问对话脚本，覆盖CoreDNS、Service DNS、NodeLocal DNSCache排查。"
+dialogue_id: DIALOGUE-SKILL-NET-001
+skill_id: SKILL-NET-001
+version: 1.0.0
+role: remote-consultant
+language: zh
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
-    type: uses
-  - target: "[[entities/coredns.md]]"
-    type: uses
-  - target: "[[entities/deployment.md]]"
-    type: uses
-  - target: "[[entities/kubelet.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service.md]]"
-    type: uses
+- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+  type: uses
+- target: '[[entities/coredns.md]]'
+  type: uses
+- target: '[[entities/deployment.md]]'
+  type: uses
+- target: '[[entities/kubelet.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/service.md]]'
+  type: uses
 ---
+
 
 # DNS 解析问题诊断 — 远程顾问对话脚本
 
@@ -168,7 +172,7 @@ relationships:
 > **步骤 2：检查阿里云 PrivateZone 关联**
 > ```bash
 > # 查看 CoreDNS 配置中是否有 PrivateZone forward 规则
-> kubectl get configmap coredns -n kube-system -o yaml | grep -A 5 "privatezone\|alidns"
+> kubectl get configmap coredns -n kube-system -o yaml | grep -A 5 "privatezone|alidns"
 > ```
 > **如果无法执行** → 请确认：该集群是否在 ACK 控制台 **运维管理 > DNS** 中绑定了 **PrivateZone**？
 >
@@ -331,9 +335,9 @@ relationships:
 > CoreDNS 因内存不足被杀死，常见于高并发查询场景。
 >
 > 1. 检查当前资源限制：`kubectl get deployment coredns -n kube-system -o yaml | grep -A 10 resources`
->    **如果无法执行** → `kubectl describe deployment coredns -n kube-system | grep -A 10 "Limits\|Requests"`
+>    **如果无法执行** → `kubectl describe deployment coredns -n kube-system | grep -A 10 "Limits|Requests"`
 > 2. 检查资源使用量：`kubectl top pod -n kube-system -l k8s-app=kube-dns`
->    **如果 metrics-server 不可用** → `kubectl logs <coredns-pod-name> -n kube-system --previous | grep -i "out of memory\|oom"`
+>    **如果 metrics-server 不可用** → `kubectl logs <coredns-pod-name> -n kube-system --previous | grep -i "out of memory|oom"`
 > 3. 临时扩大资源限制：`kubectl patch deployment coredns -n kube-system --type merge -p '{"spec":{"template":{"spec":{"containers":[{"name":"coredns","resources":{"limits":{"memory":"512Mi","cpu":"500m"},"requests":{"memory":"128Mi","cpu":"100m"}}}]}}}}'`
 >    **如果无法 patch** → `kubectl edit deployment coredns -n kube-system`（手动修改）
 >    **如果没有交互式终端** → `kubectl set resources deployment coredns -n kube-system --limits=memory=512Mi,cpu=500m --requests=memory=128Mi,cpu=100m`
@@ -438,7 +442,7 @@ relationships:
 >
 > 1. 检查健康状态：`kubectl exec -it <coredns-pod-name> -n kube-system -- wget -qO- http://localhost:8080/health`
 >    **如果没有 wget** → `kubectl exec -it <coredns-pod-name> -n kube-system -- curl -s http://localhost:8080/health`
->    **如果也没有 curl** → `kubectl logs <coredns-pod-name> -n kube-system --tail=20 | grep -i "health\|ready"`
+>    **如果也没有 curl** → `kubectl logs <coredns-pod-name> -n kube-system --tail=20 | grep -i "health|ready"`
 > 2. 检查指标：`kubectl port-forward <coredns-pod-name> 9153:9153 -n kube-system & && curl -s http://localhost:9153/metrics | grep "coredns_dns_requests_total"`
 >    **如果无法 port-forward** → `kubectl exec -it <coredns-pod-name> -n kube-system -- wget -qO- http://localhost:9153/metrics | grep "coredns_dns_requests_total"`
 > 3. 重启 CoreDNS：`kubectl rollout restart deployment coredns -n kube-system`

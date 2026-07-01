@@ -1,6 +1,7 @@
 ---
 title: Fluentd (entities)
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - containerd
 - crd
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ prerequisites:
 - kubectl-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Fluentd
 

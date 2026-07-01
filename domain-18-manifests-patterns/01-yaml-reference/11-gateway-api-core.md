@@ -1,6 +1,7 @@
 ---
 title: 11 - Gateway API 核心资源 YAML 配置参考
 description: '# 11 - Gateway API 核心资源 YAML 配置参考'
+summary: '# 11 - Gateway API 核心资源 YAML 配置参考'
 category: yaml-manifests
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ingress
 - gateway
 - crd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -52,8 +55,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/gateway-api-fta.md
   label: '故障树: gateway-api'
-created: "2026-05-23"
 ---
+
+
 
 # 11 - Gateway API 核心资源 YAML 配置参考
 

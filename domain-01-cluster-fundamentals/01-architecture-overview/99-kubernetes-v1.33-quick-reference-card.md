@@ -1,6 +1,9 @@
 ---
 title: Kubernetes v1.33 速查卡
-description: '| **Scheduler Queueing Hints** | **Beta** | 调度器队列提示，性能提升 10-30% | ✅ 默认启用 |'
+description: '| **Scheduler Queueing Hints** | **Beta** | 调度器队列提示，性能提升 10-30% | ✅
+  默认启用 |'
+summary: '| **Scheduler Queueing Hints** | **Beta** | 调度器队列提示，性能提升 10-30% | ✅ 默认启用
+  |'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - istio
 - containerd
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -60,8 +65,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] v1.33 速查卡
 

@@ -1,12 +1,15 @@
 ---
 title: 抑制门
-description: '抑制门（Inhibit Gate）是带条件约束的 AND 门。输出事件仅在输入事件和条件事件同时发生时才发生。...'
+description: 抑制门（Inhibit Gate）是带条件约束的 AND 门。输出事件仅在输入事件和条件事件同时发生时才发生。...
+summary: 抑制门（Inhibit Gate）是带条件约束的 AND 门。输出事件仅在输入事件和条件事件同时发生时才发生。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - inhibitgate
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 抑制门
 

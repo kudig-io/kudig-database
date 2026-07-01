@@ -1,6 +1,7 @@
 ---
 title: 08 - 多租户架构设计 (Multi-Tenancy Architecture)
 description: '# 08 - 多租户架构设计 (Multi-Tenancy Architecture)'
+summary: '# 08 - 多租户架构设计 (Multi-Tenancy Architecture)'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - job
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -61,8 +64,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 08 - 多租户架构设计 (Multi-Tenancy Architecture)
 

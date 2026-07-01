@@ -1,6 +1,7 @@
 ---
 title: 'Domain-4: Kubernetes工作负载管理'
 description: '# Domain-4: Kubernetes工作负载管理'
+summary: '# Domain-4: Kubernetes工作负载管理'
 category: workloads
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-4: Kubernetes工作负载管理
 

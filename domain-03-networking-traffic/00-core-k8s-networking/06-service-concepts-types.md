@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Service 核心概念与类型深度解析 (Service Concepts & Types Deep Dive)
 description: 'title: Kubernetes Service 核心概念与类型深度解析'
+summary: 'title: Kubernetes Service 核心概念与类型深度解析'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flannel
 - calico
 - coredns
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ prerequisites:
 - mysql-basics
 - policy-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: [[Kubernetes|Kubernetes]] [[Service|Service]] 核心概念与类型深度解析
@@ -2455,7 +2459,7 @@ echo "[7/8] 检查性能指标..."
     head -3 | while read node; do
       echo "--- Node: $node ---"
       kubectl debug node/$node -it --image=nicolaka/netshoot -- \
-        ss -tuln | grep -c ":80\|:443" || echo "0"
+        ss -tuln | grep -c ":80|:443" || echo "0"
     done
 } > /tmp/service-performance.log
 
@@ -2473,7 +2477,7 @@ echo "[8/8] 生成诊断报告..."
   echo "=== 关键指标 ==="
   TOTAL_SVCS=$(kubectl get svc -n $NAMESPACE --no-headers | wc -l)
   NO_ENDPOINTS=$(grep -c "无Endpoints" /tmp/service-endpoints.log 2>/dev/null || echo 0)
-  UNHEALTHY_PODS=$(grep -c "CrashLoopBackOff\|Error\|Pending" /tmp/service-backend-pods.log 2>/dev/null || echo 0)
+  UNHEALTHY_PODS=$(grep -c "CrashLoopBackOff|Error|Pending" /tmp/service-backend-pods.log 2>/dev/null || echo 0)
   
   echo "Service总数: $TOTAL_SVCS"
   echo "无Endpoints的Service: $NO_ENDPOINTS"
@@ -2489,7 +2493,7 @@ echo "[8/8] 生成诊断报告..."
     echo "⚠️  存在后端Pod异常"
   fi
   
-  if grep -q "error\|Error\|failed\|Failed" /tmp/kube-proxy-status.log; then
+  if grep -q "error|Error|failed|Failed" /tmp/kube-proxy-status.log; then
     echo "⚠️  kube-proxy存在错误日志"
   fi
   

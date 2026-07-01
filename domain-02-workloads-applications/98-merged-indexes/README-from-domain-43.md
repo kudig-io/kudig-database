@@ -1,6 +1,7 @@
 ---
 title: Java on Kubernetes 综合实践指南 (domain-02-workloads-applications)
 description: '# Java on Kubernetes 综合实践指南'
+summary: '# Java on Kubernetes 综合实践指南'
 category: java-kubernetes
 tags:
 - java
@@ -13,6 +14,8 @@ tags:
 - docker
 - hpa
 - vpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -38,8 +41,9 @@ prerequisites:
 - monitoring-basics
 - gitops-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Java on Kubernetes 综合实践指南
 
@@ -461,7 +465,7 @@ kubectl exec -n production $POD -- \
   curl -s http://localhost:8081/actuator/metrics/hikaricp.connections.active
 
 # ===== 获取 GC 日志（需要在 JAVA_OPTS 中配置 -Xlog:gc*） =====
-kubectl logs -n production $POD --tail=500 | grep -i "gc\|pause\|oom"
+kubectl logs -n production $POD --tail=500 | grep -i "gc|pause|oom"
 
 # ===== 查看 Pod 退出原因 =====
 kubectl get pod $POD -n production -o jsonpath='{.status.containerStatuses[0].lastState}'

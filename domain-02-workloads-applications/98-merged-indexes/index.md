@@ -1,12 +1,20 @@
 ---
-title: "Domain 02 内容索引"
+title: Domain 02 内容索引
+summary: Domain 02 内容索引
 category: domain-02-workloads-applications
-tags: ["index", "domain-02-workloads-applications", "navigation"]
-sources: ["auto-generated"]
+tags:
+- index
+- domain-02-workloads-applications
+- navigation
+tier: core
+sources:
+- auto-generated
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 ---
+
+
 
 # Domain 02 内容索引
 

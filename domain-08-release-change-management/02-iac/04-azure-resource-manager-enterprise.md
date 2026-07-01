@@ -1,6 +1,7 @@
 ---
 title: Azure Resource Manager (ARM) Enterprise 深度实践
 description: '# Azure Resource Manager (ARM) Enterprise 深度实践'
+summary: '# Azure Resource Manager (ARM) Enterprise 深度实践'
 category: infrastructure-as-code
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - job
 - rbac
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Azure Resource Manager (ARM) Enterprise 深度实践
 

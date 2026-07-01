@@ -1,6 +1,7 @@
 ---
 title: 14 - 多集群管理与联邦 (Multi-Cluster Management & Federation)
 description: '# 14 - 多集群管理与联邦 (Multi-Cluster Management & Federation)'
+summary: '# 14 - 多集群管理与联邦 (Multi-Cluster Management & Federation)'
 category: extensions
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - prometheus
 - istio
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -53,8 +56,9 @@ cross_refs:
 - type: domain
   path: ../domain-07-platform-engineering/
   label: '相关知识域: domain-07-platform-engineering'
-created: "2026-05-23"
 ---
+
+
 
 # 14 - 多集群管理与联邦 (Multi-Cluster Management & Federation)
 

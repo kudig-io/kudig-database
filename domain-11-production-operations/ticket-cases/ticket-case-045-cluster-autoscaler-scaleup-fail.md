@@ -1,6 +1,7 @@
 ---
 title: 集群自动扩缩容（Cluster Autoscaler）扩容失败
 description: 专有云 ACK 集群因 Cluster Autoscaler 权限不足导致 HPA 触发后节点池无法自动扩容的工单闭环样本。
+summary: 专有云 ACK 集群因 Cluster Autoscaler 权限不足导致 HPA 触发后节点池无法自动扩容的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -10,6 +11,9 @@ tags:
 - scaling
 - hpa
 - p1
+tier: peripheral
+created: '2026-06-26T14:00:00+08:00'
+updated: '2026-06-26T16:00:00+08:00'
 incident_id: INC-2026-ACK-045
 priority: P1
 severity: high
@@ -23,9 +27,7 @@ skill_ref:
 fta_ref:
 - '[[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-autoscaler-fta.md|FTA:
   Cluster Autoscaler 异常]]'
-created: '2026-06-26T14:00:00+08:00'
-updated: '2026-06-26T16:00:00+08:00'
-last_updated: 2026-06-26T16:00:00+08:00
+last_updated: 2026-06-26 16:00:00+08:00
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -49,15 +51,17 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-17-system-foundation/topic-dictionary/scheduling/cluster-autoscaler.md]]"
+- target: '[[domain-17-system-foundation/topic-dictionary/scheduling/cluster-autoscaler.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-020-cluster-autoscaler-scale-failure.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-020-cluster-autoscaler-scale-failure.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: "[[concepts/autoscaling-strategies.md]]"
+- target: '[[concepts/autoscaling-strategies.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 

@@ -1,6 +1,7 @@
 ---
 title: Kured 节点重启
-description: 'Kured（KUbernetes REboot Daemon）是开源的 K8s 节点重启守护进程，在节点需要重启时（如内核更新）安全地逐节点重启，确保工作负载的...'
+description: Kured（KUbernetes REboot Daemon）是开源的 K8s 节点重启守护进程，在节点需要重启时（如内核更新）安全地逐节点重启，确保工作负载的...
+summary: Kured（KUbernetes REboot Daemon）是开源的 K8s 节点重启守护进程，在节点需要重启时（如内核更新）安全地逐节点重启，确保工作负载的...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - operations
 - node
 - reboot
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Kured 节点重启（Kured）
 

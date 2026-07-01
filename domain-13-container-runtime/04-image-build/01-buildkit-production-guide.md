@@ -1,50 +1,54 @@
 ---
 title: BuildKit 生产指南
 description: 在阿里云专有云 CI/CD 与 ACK 集群中使用 BuildKit 实现多阶段构建、多级缓存、并行构建与安全扫描集成的完整实践。
+summary: 在阿里云专有云 CI/CD 与 ACK 集群中使用 BuildKit 实现多阶段构建、多级缓存、并行构建与安全扫描集成的完整实践。
 category: container-runtime
 tags:
-  - buildkit
-  - buildx
-  - dockerfile
-  - multi-stage-build
-  - image-cache
-  - security-scan
-  - cicd
-  - alibaba-cloud
+- buildkit
+- buildx
+- dockerfile
+- multi-stage-build
+- image-cache
+- security-scan
+- cicd
+- alibaba-cloud
+tier: supporting
 created: '2026-06-29'
 updated: '2026-06-29'
 last_updated: 2026-06-29
 difficulty: advanced
 audience:
-  - DevOps 工程师
-  - SRE
-  - 平台架构师
+- DevOps 工程师
+- SRE
+- 平台架构师
 estimated_read_time: 20min
 intent_queries:
-  - BuildKit 生产环境怎么用
-  - Dockerfile 多阶段构建缓存配置
-  - 阿里云 ACR 镜像安全扫描集成
+- BuildKit 生产环境怎么用
+- Dockerfile 多阶段构建缓存配置
+- 阿里云 ACR 镜像安全扫描集成
 trigger_keywords:
-  - BuildKit
-  - buildx
-  - multi-stage
-  - registry cache
-  - image scan
-  - ACR
+- BuildKit
+- buildx
+- multi-stage
+- registry cache
+- image scan
+- ACR
 prerequisites:
-  - domain-13-container-runtime/01-docker/01-docker-architecture-overview.md
-  - domain-13-container-runtime/02-image-management/01-harbor-enterprise-image-registry.md
-  - domain-08-release-change-management/01-gitops/05-tekton-cloud-native-cicd.md
+- domain-13-container-runtime/01-docker/01-docker-architecture-overview.md
+- domain-13-container-runtime/02-image-management/01-harbor-enterprise-image-registry.md
+- domain-08-release-change-management/01-gitops/05-tekton-cloud-native-cicd.md
 k8s_versions:
-  - '1.28'
-  - '1.29'
-  - '1.30'
-  - '1.31'
-  - '1.32'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: KUDIG Team
-    role: contributor
+- name: KUDIG Team
+  role: contributor
 ---
+
+
 
 # BuildKit 生产指南
 

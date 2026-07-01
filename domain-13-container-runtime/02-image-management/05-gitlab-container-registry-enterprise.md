@@ -1,6 +1,7 @@
 ---
 title: GitLab Container Registry Enterprise 深度实践
 description: '# GitLab Container Registry Enterprise 深度实践'
+summary: '# GitLab Container Registry Enterprise 深度实践'
 category: container-image-management
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - docker
 - redis
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # GitLab Container Registry Enterprise 深度实践
 

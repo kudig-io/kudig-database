@@ -1,6 +1,7 @@
 ---
 title: 06 - Kong API 网关企业级实践
 description: '# 06 - Kong API 网关企业级实践'
+summary: '# 06 - Kong API 网关企业级实践'
 category: cloud-native-api-gateway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - redis
 - postgresql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +54,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 06 - Kong API 网关企业级实践
 

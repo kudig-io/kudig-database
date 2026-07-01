@@ -1,12 +1,15 @@
 ---
 title: 任务
-description: 'Job 是 Kubernetes 中用于运行一次性任务的工作负载控制器。它创建一个或多个 Pod 并确保指定数量的 Pod 成功完成后终止。...'
+description: Job 是 Kubernetes 中用于运行一次性任务的工作负载控制器。它创建一个或多个 Pod 并确保指定数量的 Pod 成功完成后终止。...
+summary: Job 是 Kubernetes 中用于运行一次性任务的工作负载控制器。它创建一个或多个 Pod 并确保指定数量的 Pod 成功完成后终止。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - job
 - workload
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 任务
 

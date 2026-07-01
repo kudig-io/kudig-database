@@ -1,6 +1,9 @@
 ---
 title: K8s 集群联邦
-description: 'Kubernetes Federation（Federation v2/KubeFed）是多集群管理的标准和实现，通过联邦控制平面统一管理跨多个 K8s 集群的...'
+description: Kubernetes Federation（Federation v2/KubeFed）是多集群管理的标准和实现，通过联邦控制平面统一管理跨多个
+  K8s 集群的...
+summary: Kubernetes Federation（Federation v2/KubeFed）是多集群管理的标准和实现，通过联邦控制平面统一管理跨多个
+  K8s 集群的...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - multi-cloud
 - federation
 - multi-cluster
+tier: peripheral
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # K8s 集群联邦（Federation）
 

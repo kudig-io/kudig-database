@@ -1,7 +1,7 @@
 ---
-summary: "description: '## 项目概述'"
 title: Helm (entities)
 description: '## 概述'
+summary: 'description: ''## 项目概述'''
 category: entities
 tags:
 - k8s
@@ -14,6 +14,8 @@ tags:
 - crd
 - operator
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +33,8 @@ prerequisites:
 - gitops-basics
 - ebpf-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
 
 # Helm
 

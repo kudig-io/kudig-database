@@ -1,6 +1,9 @@
 ---
 title: 'Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers and Best Practices)'
-description: '# Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers and Best Practices)'
+description: '# Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers and Best
+  Practices)'
+summary: '# Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers and Best
+  Practices)'
 category: papers
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - cilium
 - helm
 - argocd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -22,7 +27,8 @@ audience:
 - 研究员
 estimated_read_time: 5min
 intent_queries:
-- 'Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers and Best Practices) 是什么'
+- 'Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers and Best Practices)
+  是什么'
 - '如何 Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers and Best Practices)'
 - Kubernetes 19 papers 最佳实践
 trigger_keywords:
@@ -48,8 +54,9 @@ prerequisites:
 - policy-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers and Best Practices)
 
@@ -278,6 +285,10 @@ Crossplane (基础设施抽象)
 *本文档由Kubernetes高级技术专家团队维护，内容基于真实企业级生产环境实践经验。2026-03-03更新：新增10篇2026技术热点文档，全面更新16篇现有文档至最新状态。*
 
 ## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub
 
 - [[README]]
 - [[README]]

@@ -1,12 +1,16 @@
 ---
 title: 平均修复时间
-description: 'MTTR（Mean Time To Repair，平均修复时间）是衡量系统恢复能力的核心指标，表示从故障发生到系统恢复正常的平均时间。MTTR 越短，系统恢复能...'
+description: MTTR（Mean Time To Repair，平均修复时间）是衡量系统恢复能力的核心指标，表示从故障发生到系统恢复正常的平均时间。MTTR
+  越短，系统恢复能...
+summary: MTTR（Mean Time To Repair，平均修复时间）是衡量系统恢复能力的核心指标，表示从故障发生到系统恢复正常的平均时间。MTTR 越短，系统恢复能...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - mttr
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +27,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 平均修复时间
 

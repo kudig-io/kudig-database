@@ -1,6 +1,7 @@
 ---
 title: Harbor
-description: 'Harbor 是 CNCF 毕业项目，提供企业级容器镜像和 Helm Chart 的托管、扫描和分发服务。它内置漏洞扫描（Trivy）、镜像签名（Notary）...'
+description: Harbor 是 CNCF 毕业项目，提供企业级容器镜像和 Helm Chart 的托管、扫描和分发服务。它内置漏洞扫描（Trivy）、镜像签名（Notary）...
+summary: Harbor 是 CNCF 毕业项目，提供企业级容器镜像和 Helm Chart 的托管、扫描和分发服务。它内置漏洞扫描（Trivy）、镜像签名（Notary）...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - container-registry
 - security
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Harbor
 

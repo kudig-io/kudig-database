@@ -1,15 +1,25 @@
 ---
-title: "[2026-05-15] [P2] ConfigMap 更新未触发滚动更新"
+title: '[2026-05-15] [P2] ConfigMap 更新未触发滚动更新'
+summary: '[2026-05-15] [P2] ConfigMap 更新未触发滚动更新：16:00，DBA 团队完成数据库主从切换，新主库 IP 为 10.0.20.50。运维人员更新了
+  payment-db-config ConfigMap 中的 DB_HOST。'
 category: case-study
-tags: [production, incident, workloads, configmap, deployment]
-date: "2026-05-15"
+tags:
+- production
+- incident
+- workloads
+- configmap
+- deployment
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-05-15'
 severity: P2
-mttr: "55min"
+mttr: 55min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-05-15] ConfigMap 更新后应用仍使用旧配置，数据库连接指向已下线实例
 

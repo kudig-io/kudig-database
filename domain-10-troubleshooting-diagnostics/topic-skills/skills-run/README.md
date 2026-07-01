@@ -1,6 +1,7 @@
 ---
 title: Skills Demo — 本地运行工单诊断技能
 description: '| 04 | DNS 解析问题 | SKILL-NET-001 | CoreDNS 缩容 | LOW |'
+summary: '| 04 | DNS 解析问题 | SKILL-NET-001 | CoreDNS 缩容 | LOW |'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - rbac
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -36,8 +39,9 @@ prerequisites:
 skill_id: SKILL-README-001
 skill_name: Skills Demo — 本地运行工单诊断技能
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 # Skills Demo — 本地运行工单诊断技能
 

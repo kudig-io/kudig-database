@@ -1,17 +1,26 @@
 ---
-dialogue_id: "DIALOGUE-NETWORKPOLICY-001"
-skill_id: "SKILL-NETWORKPOLICY-001"
-role: "remote-consultant"
-language: "zh"
-severity: "medium"
-status: "reviewed"
+title: Pod 间网络不通，怀疑 NetworkPolicy 阻断 — 远程顾问对话脚本
+summary: Pod 间网络不通，怀疑 NetworkPolicy 阻断 — 远程顾问对话脚本：kubectl get pods -n kube-system
+  | grep -E 'calico|cilium|weave'
+category: dialogue
+tags:
+- dialogue
+- remote-consultant
+- troubleshooting
+- visibility/public
+tier: supporting
 created: 2026-05-21
 updated: 2026-05-21
+dialogue_id: DIALOGUE-NETWORKPOLICY-001
+skill_id: SKILL-NETWORKPOLICY-001
+role: remote-consultant
+language: zh
+severity: medium
+status: reviewed
 last_updated: 2026-05-21
-title: "Pod 间网络不通，怀疑 NetworkPolicy 阻断 — 远程顾问对话脚本"
-category: dialogue
-tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
+
+
 
 # Pod 间网络不通，怀疑 NetworkPolicy 阻断 — 远程顾问对话脚本
 
@@ -211,3 +220,7 @@ kubectl exec <source-pod> -n <namespace> -- ping -c 4 <target-ip>
 - [[concepts/network-policy.md|NetworkPolicy]]
 - [[entities/cni.md|CNI 插件]]
 - [[skills/best-practices/best-practices/security/pod-security.md|Pod 安全策略]]
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

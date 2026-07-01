@@ -1,6 +1,7 @@
 ---
 title: 11 - 密钥与敏感信息管理工具
 description: '# 11 - 密钥与敏感信息管理工具'
+summary: '# 11 - 密钥与敏感信息管理工具'
 category: security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - helm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -57,8 +60,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # 11 - 密钥与敏感信息管理工具
 

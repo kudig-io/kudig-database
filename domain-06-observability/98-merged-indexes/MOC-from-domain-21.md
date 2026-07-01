@@ -1,11 +1,14 @@
 ---
 title: domain-21-logging-management-analytics MOC
 description: domain-21-logging-management-analytics 知识域导航页，覆盖 10 篇文档
+summary: domain-21-logging-management-analytics 知识域导航页，覆盖 10 篇文档
 category: moc
 tags:
 - k8s
 - moc
 - observability
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ prerequisites:
 - kubectl-basics
 - observability-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-21-logging-management-analytics MOC
 

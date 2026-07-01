@@ -1,6 +1,9 @@
 ---
 title: 网络策略
-description: 'NetworkPolicy 是 Kubernetes 中控制 Pod 之间以及 Pod 与外部网络之间流量的资源对象。它采用默认允许（default allow...'
+description: NetworkPolicy 是 Kubernetes 中控制 Pod 之间以及 Pod 与外部网络之间流量的资源对象。它采用默认允许（default
+  allow...
+summary: NetworkPolicy 是 Kubernetes 中控制 Pod 之间以及 Pod 与外部网络之间流量的资源对象。它采用默认允许（default
+  allow...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - networkpolicy
 - security
 - cni
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 网络策略
 

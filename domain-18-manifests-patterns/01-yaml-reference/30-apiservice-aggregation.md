@@ -1,6 +1,7 @@
 ---
 title: 30 - APIService YAML 配置参考
 description: '# 30 - APIService YAML 配置参考'
+summary: '# 30 - APIService YAML 配置参考'
 category: yaml-manifests
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - crd
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -47,8 +50,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
-created: "2026-05-23"
 ---
+
+
 
 # 30 - APIService YAML 配置参考
 

@@ -1,6 +1,7 @@
 ---
 title: Reliability Engineering
 description: '| 05-chaos-engineering/ | 混沌工程原则、Chaos Mesh、Litmus、实验设计 |'
+summary: '| 05-chaos-engineering/ | 混沌工程原则、Chaos Mesh、Litmus、实验设计 |'
 category: domain
 tags:
 - sre
@@ -13,6 +14,8 @@ tags:
 - performance-testing
 - daemonset
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - sre-practices
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Reliability Engineering
 

@@ -2,6 +2,8 @@
 title: Job/CronJob 执行失败：退避重试耗尽与镜像拉取异常
 description: 专有云 ACK 集群每日对账 CronJob 连续失败，Pod 状态为 Error/ImagePullBackOff，根因涉及 Job 退避策略、ACR
   镜像拉取超时与 RBAC 权限不足的工单闭环样本。
+summary: 专有云 ACK 集群每日对账 CronJob 连续失败，Pod 状态为 Error/ImagePullBackOff，根因涉及 Job 退避策略、ACR
+  镜像拉取超时与 RBAC 权限不足的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -12,6 +14,9 @@ tags:
 - rbac
 - backoff
 - p1
+tier: supporting
+created: '2026-06-26T14:00:00+08:00'
+updated: '2026-06-26T17:30:00+08:00'
 incident_id: INC-2026-ACK-049
 priority: P1
 severity: high
@@ -26,9 +31,7 @@ skill_ref:
 - RBAC 排障
 fta_ref:
 - 'FTA: Job/CronJob 执行失败'
-created: '2026-06-26T14:00:00+08:00'
-updated: '2026-06-26T17:30:00+08:00'
-last_updated: 2026-06-26T17:30:00+08:00
+last_updated: 2026-06-26 17:30:00+08:00
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -52,13 +55,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[concepts/cronjob.md]]"
+- target: '[[concepts/cronjob.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-039-rbac-api-access-denied.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-039-rbac-api-access-denied.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 

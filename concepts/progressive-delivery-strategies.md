@@ -1,16 +1,20 @@
 ---
 title: 渐进式交付策略
+summary: 渐进式交付策略：渐进式交付（Progressive Delivery）是持续交付的演进，通过逐步将流量导向新版本并自动验证指标来降低发布风险。核心思想：小步快跑、自动回滚、指标驱动。
 category: concepts
 tags:
-  - progressive-delivery
-  - argo-rollouts
-  - canary
-  - gitops
-  - k8s
+- progressive-delivery
+- argo-rollouts
+- canary
+- gitops
+- k8s
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # 渐进式交付策略
 

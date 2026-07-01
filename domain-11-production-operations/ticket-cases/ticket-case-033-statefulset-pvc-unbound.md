@@ -2,6 +2,7 @@
 title: StatefulSet Pod 启动失败：PVC 未绑定
 description: 专有云 ACK 有状态 MySQL 集群因 StorageClass 可用区拓扑限制导致 PVC 无法动态供给，Pod 长期 Pending
   的工单闭环样本。
+summary: 专有云 ACK 有状态 MySQL 集群因 StorageClass 可用区拓扑限制导致 PVC 无法动态供给，Pod 长期 Pending 的工单闭环样本。
 category: production-operations
 tags:
 - ack
@@ -12,6 +13,9 @@ tags:
 - csi
 - storageclass
 - p1
+tier: peripheral
+created: '2026-06-26T14:00:00+08:00'
+updated: '2026-06-26T16:30:00+08:00'
 incident_id: TC-2026-033
 priority: P1
 severity: high
@@ -23,12 +27,10 @@ skill_ref:
 - '[[domain-02-workloads-applications/00-core-workloads/03-statefulset-advanced-operations.md|StatefulSet
   进阶运维]]'
 fta_ref:
-- '[[domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta.md|FTA: StatefulSet
-  启动失败]]'
+- '[[domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta.md|FTA:
+  StatefulSet 启动失败]]'
 - '[[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md|FTA: CSI 存储异常]]'
-created: '2026-06-26T14:00:00+08:00'
-updated: '2026-06-26T16:30:00+08:00'
-last_updated: 2026-06-26T16:30:00+08:00
+last_updated: 2026-06-26 16:30:00+08:00
 duplicate_of: INC-2026-ACK-048
 status: duplicate
 duplication_reason: 与 "INC-2026-ACK-048" 主题重复，内容角度相似，降低 RAG 权重
@@ -60,15 +62,17 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-043-statefulset-pvc-unbound.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-043-statefulset-pvc-unbound.md]]'
   type: related_to
-- target: "[[concepts/statefulset.md]]"
+- target: '[[concepts/statefulset.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -106,7 +110,7 @@ kubectl describe pvc data-mysql-0 -n middleware | tail -50
 kubectl get storageclass alicloud-disk-ssd -o yaml
 
 # 4. 采集 CSI 插件日志
-kubectl logs -n kube-system -l app=csi-plugin -c csi-plugin --tail=200 | grep -i 'provision\|error\|zone'
+kubectl logs -n kube-system -l app=csi-plugin -c csi-plugin --tail=200 | grep -i 'provision|error|zone'
 kubectl logs -n kube-system -l app=csi-provisioner -c csi-provisioner --tail=200 | grep mysql
 
 # 5. 查询节点可用区标签

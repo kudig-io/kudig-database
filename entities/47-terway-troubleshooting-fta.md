@@ -1,6 +1,7 @@
 ---
 title: Terway 故障排查
 description: '# Terway 故障排查'
+summary: '# Terway 故障排查'
 category: entities
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - networkpolicy
 - crd
 - ebpf
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 fta_id: FTA-47_TERWAY_TROUBLESHOOTING-001
 component: 47 Terway Troubleshooting
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 # Terway 故障排查
 

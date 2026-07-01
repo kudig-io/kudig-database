@@ -1,6 +1,7 @@
 ---
 title: 命令输出解读语料 — Agent 诊断推理核心数据 [domain-10-troubleshooting-diagnostics]
 description: kubectl/系统命令输出→诊断结论的结构化映射, 供 Agent 直接用于问题推理
+summary: kubectl/系统命令输出→诊断结论的结构化映射, 供 Agent 直接用于问题推理
 category: agent-corpus
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - apiserver
 - kubelet
 - scheduler
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-19'
 difficulty: advanced
 reading_level: advanced
@@ -37,8 +40,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 命令输出解读语料 — Agent 诊断推理核心数据
 

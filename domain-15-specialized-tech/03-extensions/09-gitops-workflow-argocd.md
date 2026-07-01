@@ -1,6 +1,7 @@
 ---
 title: 48 - GitOps工作流
 description: '| 原则 | 说明 | 实践方式 |'
+summary: '| 原则 | 说明 | 实践方式 |'
 category: extensions
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - flux
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -47,8 +50,9 @@ cross_refs:
 - type: domain
   path: ../domain-07-platform-engineering/
   label: '相关知识域: domain-07-platform-engineering'
-created: "2026-05-23"
 ---
+
+
 
 # 48 - GitOps工作流
 

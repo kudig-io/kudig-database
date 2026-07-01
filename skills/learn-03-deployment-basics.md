@@ -1,12 +1,15 @@
 ---
 title: 第三课：Deployment - 应用部署管理器
 description: '# 第三课：Deployment - 应用部署管理器'
+summary: '# 第三课：Deployment - 应用部署管理器'
 category: skills
 tags:
 - k8s
 - learn
 - fundamentals
 - hpa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 - 应用部署管理器
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第三课：Deployment - 应用部署管理器
 

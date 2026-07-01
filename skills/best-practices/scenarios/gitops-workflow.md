@@ -1,6 +1,7 @@
 ---
 title: '场景: GitOps 工作流'
 description: 基于 ArgoCD/Flux 的 GitOps 工作流搭建和运维
+summary: 基于 ArgoCD/Flux 的 GitOps 工作流搭建和运维
 category: scenario
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - gitops
 - helm
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-20'
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 # 场景: GitOps 工作流
 

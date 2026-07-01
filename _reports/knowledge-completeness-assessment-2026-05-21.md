@@ -1,6 +1,7 @@
 ---
 title: KUDIG 知识点完整性评估报告
 description: '**评估视角**: 生产环境运维就绪度（SRE / Platform Ops / 云原生架构师）'
+summary: '**评估视角**: 生产环境运维就绪度（SRE / Platform Ops / 云原生架构师）'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - envoy
 - cilium
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -43,8 +46,9 @@ prerequisites:
 - backup-basics
 - logging-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG 知识点完整性评估报告
 

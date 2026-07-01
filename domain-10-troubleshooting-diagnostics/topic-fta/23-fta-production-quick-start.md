@@ -1,6 +1,7 @@
 ---
 title: 第23章：FTA 生产环境快速启动与 SRE 集成指南 (domain-10-troubleshooting-diagnostics)
 description: 'title: 第23章：FTA 生产环境快速启动与 SRE 集成指南'
+summary: 'title: 第23章：FTA 生产环境快速启动与 SRE 集成指南'
 category: fta
 tags:
 - fta
@@ -13,6 +14,8 @@ tags:
 - docker
 - hpa
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -45,8 +48,9 @@ prerequisites:
 fta_id: FTA-23_PRODUCTION_QUICK_START-001
 component: 23 Production Quick Start
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: 第23章：FTA 生产环境快速启动与 SRE 集成指南
 description: '# 第23章：FTA 生产环境快速启动与 SRE 集成指南'
@@ -308,7 +312,7 @@ E8: Node NotReady
 | E1 | Ingress 无后端 | kubectl describe | `kubectl describe ingress <name>` 查看 Backend | 人工检查 |
 | E2 | Label 不匹配 | kubectl get svc | `kubectl get svc <name> -o yaml` 对比 selector | 人工检查 |
 | E3 | Pod Evicted | Kube Event | `kubectl get events --field-selector reason=Evicted` | count > 0 |
-| E4 | ImagePullBackOff | Pod Status | `kubectl get pods -o json \| jq '.items[] \| select(.status.containerStatuses[].state.waiting.reason=="ImagePullBackOff")'` | count > 0 |
+| E4 | ImagePullBackOff | Pod Status | `kubectl get pods -o json | jq '.items[] | select(.status.containerStatuses[].state.waiting.reason=="ImagePullBackOff")'` | count > 0 |
 | E5 | CrashLoopBackOff | Pod Status | `kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"} > 0` | Prometheus |
 | E6 | OOMKilled | Container Status | `kube_pod_container_status_terminated_reason{reason="OOMKilled"} > 0` | Prometheus |
 | E7 | 资源不足 | Scheduler Event | `kube_pod_status_phase{phase="Pending"}` + Event reason=FailedScheduling | Pending > 5min |

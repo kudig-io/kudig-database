@@ -1,6 +1,7 @@
 ---
 title: MPI Operator 与分布式训练故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: MPI Operator 与分布式训练故障排查指南'
+summary: 'title: MPI Operator 与分布式训练故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - opa
 - daemonset
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -43,8 +46,9 @@ prerequisites:
 - prometheus-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: MPI Operator 与分布式训练故障排查指南
 description: '# MPI Operator 与分布式训练故障排查指南'

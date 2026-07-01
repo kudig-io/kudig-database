@@ -1,6 +1,7 @@
 ---
 title: helm v4.1 Release Notes
 description: helm v4.1 Release Notes — Kubernetes 生产运维知识库
+summary: helm v4.1 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - flux
 - crd
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - cncf-ecosystem
 - helm-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Helm|helm]] v4.1 Release Notes
 

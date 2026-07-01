@@ -1,12 +1,15 @@
 ---
 title: 机械硬盘技术
 description: '- 存储是什么？'
+summary: '- 存储是什么？'
 category: general
 tags:
 - k8s
 - opa
 - gpu
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ prerequisites:
 - cloud-provider-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

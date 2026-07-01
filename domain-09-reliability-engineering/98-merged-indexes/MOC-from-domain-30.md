@@ -1,11 +1,14 @@
 ---
 title: domain-30-disaster-recovery-business-continuity MOC
 description: domain-30-disaster-recovery-business-continuity 知识域导航页，覆盖 10 篇文档
+summary: domain-30-disaster-recovery-business-continuity 知识域导航页，覆盖 10 篇文档
 category: moc
 tags:
 - k8s
 - moc
 - disaster-recovery
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ prerequisites:
 - kubectl-basics
 - sre-practices
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-30-disaster-recovery-business-continuity MOC
 

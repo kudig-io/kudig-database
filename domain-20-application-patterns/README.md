@@ -1,6 +1,7 @@
 ---
 title: Application Patterns
 description: 原 domain-20-application-patterns 的业务应用架构参考库，涵盖电商、小程序、IM、教育等场景架构。
+summary: 原 domain-20-application-patterns 的业务应用架构参考库，涵盖电商、小程序、IM、教育等场景架构。
 category: domain
 tags:
 - application-architecture
@@ -9,6 +10,8 @@ tags:
 - patterns
 - daemonset
 - gpu
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Application Patterns
 

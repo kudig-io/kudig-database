@@ -1,14 +1,19 @@
 ---
-category: "synthesis"
-tags: ["synthesis"]
-date: "2026-06-01"
-title: "Helm release历史过多导致ConfigMap超限"
-skill: "26-helm-chart-failure"
-severity: "P2"
-created: "2026-05-23"
-updated: "2026-05-23"
+title: Helm release历史过多导致ConfigMap超限
+summary: Helm release历史过多导致ConfigMap超限：Helm升级命令超时失败，错误提示ConfigMap请求体过大。检查发现Helm release历史积累了超过200个版本。
+category: synthesis
+tags:
+- synthesis
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-06-01'
+skill: 26-helm-chart-failure
+severity: P2
 last_updated: 2026-05-23
 ---
+
+
 
 # Helm release历史过多导致ConfigMap超限
 

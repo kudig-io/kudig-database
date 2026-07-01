@@ -1,6 +1,7 @@
 ---
 title: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation
 description: '## 1. 概述'
+summary: '## 1. 概述'
 category: network
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - ingress
 - gateway
+tier: core
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -22,7 +25,8 @@ audience:
 - 技术支持
 estimated_read_time: 20min
 intent_queries:
-- Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation 是什么
+- Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation
+  是什么
 - 如何 Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation
 trigger_keywords:
 - ingress 404
@@ -51,7 +55,8 @@ prerequisites:
 - prometheus-basics
 - tls-basics
 skill_id: SKILL-13_INGRESS_GATEWAY_FAILURE-001
-skill_name: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation
+skill_name: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
+  & Remediation
 version: 1.0.0
 k8s_versions:
 - 1.28.x
@@ -60,8 +65,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 <!-- condition: kubectl get [[Pods|pods]] -n ingress-nginx -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{"\n"}{end}' 显示 [[Ingress|Ingress]] Controller 异常 -->
 
@@ -615,7 +621,7 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   kubectl get configmap -n ingress-nginx ingress-nginx-controller -o jsonpath='{.data.enable-modsecurity}'
 
   # 检查 Nginx 日志中的限流信息
-  kubectl logs -n ingress-nginx deploy/ingress-nginx-controller --tail=500 | grep -i "limiting\|rejected\|blocked"
+  kubectl logs -n ingress-nginx deploy/ingress-nginx-controller --tail=500 | grep -i "limiting|rejected|blocked"
   ```
 - **超时**: 10s
 - **风险级别**: 🟢 低

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Service ACK 实战指南
 description: 'title: Kubernetes Service ACK 实战指南'
+summary: 'title: Kubernetes Service ACK 实战指南'
 category: general
 tags:
 - cloud
@@ -13,6 +14,8 @@ tags:
 - ingress
 - networkpolicy
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] [[Service|Service]] ACK 实战指南
 description: '# Kubernetes Service ACK 实战指南'

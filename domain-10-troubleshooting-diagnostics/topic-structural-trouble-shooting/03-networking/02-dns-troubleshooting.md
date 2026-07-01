@@ -1,6 +1,7 @@
 ---
 title: CoreDNS/DNS 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: CoreDNS/DNS 故障排查指南'
+summary: 'title: CoreDNS/DNS 故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - ingress
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -41,8 +44,9 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[CoreDNS|CoreDNS]]/DNS 故障排查指南
 description: '# CoreDNS/DNS 故障排查指南'

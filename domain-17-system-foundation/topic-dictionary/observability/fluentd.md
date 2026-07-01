@@ -1,6 +1,7 @@
 ---
 title: Fluentd 日志收集
-description: 'Fluentd 是 CNCF 毕业项目，统一日志收集层，支持 500+ 插件连接各种数据源和目标，是 Kubernetes 环境中日志收集的事实标准之一。...'
+description: Fluentd 是 CNCF 毕业项目，统一日志收集层，支持 500+ 插件连接各种数据源和目标，是 Kubernetes 环境中日志收集的事实标准之一。...
+summary: Fluentd 是 CNCF 毕业项目，统一日志收集层，支持 500+ 插件连接各种数据源和目标，是 Kubernetes 环境中日志收集的事实标准之一。...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - observability
 - logging
 - cnCF
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Fluentd 日志收集（Fluentd）
 

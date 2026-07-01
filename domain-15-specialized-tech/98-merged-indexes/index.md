@@ -1,12 +1,20 @@
 ---
-title: "Domain 15 内容索引"
+title: Domain 15 内容索引
+summary: Domain 15 内容索引
 category: domain-15-specialized-tech
-tags: ["index", "domain-15-specialized-tech", "navigation"]
-sources: ["auto-generated"]
+tags:
+- index
+- domain-15-specialized-tech
+- navigation
+tier: supporting
+sources:
+- auto-generated
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 ---
+
+
 
 # Domain 15 内容索引
 

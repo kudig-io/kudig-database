@@ -1,6 +1,7 @@
 ---
 title: 14 - Secret 全类型 YAML 配置参考
 description: '# 14 - Secret 全类型 YAML 配置参考'
+summary: '# 14 - Secret 全类型 YAML 配置参考'
 category: yaml-manifests
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -49,8 +52,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 14 - Secret 全类型 YAML 配置参考
 

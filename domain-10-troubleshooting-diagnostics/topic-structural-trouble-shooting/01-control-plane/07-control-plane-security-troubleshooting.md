@@ -1,6 +1,7 @@
 ---
 title: 控制平面安全加固故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 控制平面安全加固故障排查指南'
+summary: 'title: 控制平面安全加固故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - docker
 - statefulset
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -39,8 +42,9 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 控制平面安全加固故障排查指南
 description: '# 控制平面安全加固故障排查指南'

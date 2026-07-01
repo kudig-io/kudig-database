@@ -1,6 +1,7 @@
 ---
 title: AI/ML Infrastructure
 description: 整合原 domain-14-ai-ml-infra/41 的 AI 基础设施知识，涵盖 GPU 调度、分布式训练、AI Agent 和 MLOps。
+summary: 整合原 domain-14-ai-ml-infra/41 的 AI 基础设施知识，涵盖 GPU 调度、分布式训练、AI Agent 和 MLOps。
 category: domain
 tags:
 - ai
@@ -11,6 +12,8 @@ tags:
 - agent
 - rag
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # AI/ML Infrastructure
 

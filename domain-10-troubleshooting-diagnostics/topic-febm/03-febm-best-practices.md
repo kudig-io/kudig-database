@@ -1,6 +1,7 @@
 ---
 title: 第三章：FEBM 最佳实践 [domain-10-troubleshooting-diagnostics]
 description: 'title: 第三章：FEBM 最佳实践'
+summary: 'title: 第三章：FEBM 最佳实践'
 category: febm
 tags:
 - febm
@@ -13,6 +14,8 @@ tags:
 - containerd
 - cri-o
 - docker
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -42,8 +45,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 第三章：FEBM 最佳实践
 description: '# 第三章：FEBM 最佳实践'

@@ -1,6 +1,7 @@
 ---
 title: AI Agent 工程专题
 description: '# AI Agent 工程专题'
+summary: '# AI Agent 工程专题'
 category: concepts
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - llm
 - rag
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - prometheus-basics
 - gpu-scheduling-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # AI Agent 工程专题
 

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes v1.33 生态系统兼容性矩阵
 description: '- [三、CNI 网络插件](#三cni-网络插件)'
+summary: '- [三、CNI 网络插件](#三cni-网络插件)'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - envoy
 - cilium
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -69,8 +72,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] v1.33 生态系统兼容性矩阵
 

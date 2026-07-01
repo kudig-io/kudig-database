@@ -1,6 +1,7 @@
 ---
 title: 71 - Gateway API配置
 description: '# 71 - Gateway API配置'
+summary: '# 71 - Gateway API配置'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - gateway
 - crd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -59,8 +62,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 71 - Gateway API配置
 

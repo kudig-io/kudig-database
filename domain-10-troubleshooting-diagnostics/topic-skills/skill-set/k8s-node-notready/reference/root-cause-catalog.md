@@ -1,6 +1,7 @@
 ---
 title: 根因分类 / Root Cause Catalog
 description: '- [RC-006 节点与 apiserver 网络不通](#rc-006-节点与-apiserver-网络不通)'
+summary: '- [RC-006 节点与 apiserver 网络不通](#rc-006-节点与-apiserver-网络不通)'
 category: skills
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - containerd
 - cri-o
 - daemonset
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -35,8 +38,9 @@ prerequisites:
 skill_id: SKILL-ROOT_CAUSE_CATALOG-001
 skill_name: 根因分类 / Root Cause Catalog
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 # 根因分类 / Root Cause Catalog
 

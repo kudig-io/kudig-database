@@ -1,6 +1,7 @@
 ---
-title: "第二章:FEBM 技术实现体系 (topic-febm)"
+title: 第二章:FEBM 技术实现体系 (topic-febm)
 description: 'description: ''**所属系列**: FEBM 法医鉴定循证方法论深度解析'''
+summary: 'description: ''**所属系列**: FEBM 法医鉴定循证方法论深度解析'''
 category: febm
 tags:
 - febm
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - istio
 - envoy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -47,8 +50,9 @@ prerequisites:
 - policy-basics
 - logging-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 第二章:FEBM 技术实现体系
 description: '**所属系列**: FEBM 法医鉴定循证方法论深度解析'
@@ -1651,7 +1655,7 @@ $ vol3 -f checkpoint/ linux.dump_map --pid 7 --vma 0x00007f9a14000000
 
 Dumped: /tmp/.evil.so.dump
 
-$ strings /tmp/.evil.so.dump | grep -i "password\|key\|credential"
+$ strings /tmp/.evil.so.dump | grep -i "password|key|credential"
   mysql_password=secretpass123
   api_key=AKIAIOSFODNN7EXAMPLE
   [发现明文凭据泄露]

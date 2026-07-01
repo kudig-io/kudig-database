@@ -1,6 +1,7 @@
 ---
 title: 19 - 零信任安全架构实施指南
 description: 'title: 19 - 零信任安全架构实施指南'
+summary: 'title: 19 - 零信任安全架构实施指南'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - containerd
 - docker
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - rbac-basics
 - service-mesh-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 19 - 零信任安全架构实施指南
 description: '# 19 - 零信任安全架构实施指南'
@@ -827,7 +831,7 @@ kubectl get networkpolicies --all-namespaces | wc -l
 
 # 4. 异常行为检测
 echo "4. Checking for anomalous behavior..."
-kubectl logs -n security -l app=security-agent --tail=100 | grep -i "alert\|warning\|critical"
+kubectl logs -n security -l app=security-agent --tail=100 | grep -i "alert|warning|critical"
 
 # 5. 证书有效性检查
 echo "5. Checking certificate validity..."

@@ -1,6 +1,7 @@
 ---
 title: domain-15-specialized-tech MOC
 description: domain-15-specialized-tech 知识域导航页，覆盖 20 篇文档
+summary: domain-15-specialized-tech 知识域导航页，覆盖 20 篇文档
 category: moc
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - operator
 - webhook
 - serverless
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - troubleshooting-methodology
 - helm-basics
 - gitops-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-15-specialized-tech MOC
 

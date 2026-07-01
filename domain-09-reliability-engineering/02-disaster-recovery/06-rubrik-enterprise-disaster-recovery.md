@@ -1,6 +1,7 @@
 ---
 title: Rubrik 企业级灾备与业务连续性深度实践
 description: '# Rubrik 企业级灾备与业务连续性深度实践'
+summary: '# Rubrik 企业级灾备与业务连续性深度实践'
 category: disaster-recovery
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - operator
 - webhook
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Rubrik 企业级灾备与业务连续性深度实践
 

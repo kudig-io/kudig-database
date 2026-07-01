@@ -1,6 +1,7 @@
 ---
 title: KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)
 description: '# KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)'
+summary: '# KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)'
 category: edge-computing
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - job
 - cronjob
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -47,8 +50,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[KubeEdge|KubeEdge]] 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)
 

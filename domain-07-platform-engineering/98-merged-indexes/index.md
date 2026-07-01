@@ -1,12 +1,20 @@
 ---
-title: "Domain 07 内容索引"
+title: Domain 07 内容索引
+summary: Domain 07 内容索引
 category: domain-07-platform-engineering
-tags: ["index", "domain-07-platform-engineering", "navigation"]
-sources: ["auto-generated"]
+tags:
+- index
+- domain-07-platform-engineering
+- navigation
+tier: supporting
+sources:
+- auto-generated
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 ---
+
+
 
 # Domain 07 内容索引
 

@@ -1,6 +1,7 @@
 ---
 title: opentelemetry-collector v0.131 Release Notes
 description: opentelemetry-collector v0.131 Release Notes — Kubernetes 生产运维知识库
+summary: opentelemetry-collector v0.131 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - changelog
 - prometheus
 - opa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - prometheus-basics
 - policy-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # opentelemetry-collector v0.131 Release Notes
 

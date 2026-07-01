@@ -1,12 +1,15 @@
 ---
 title: Kubernetes 控制平面组件的兼容版本
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
 - glossary
 - terminology
 - apiserver
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 控制平面组件的兼容版本
 

@@ -1,12 +1,21 @@
 ---
-title: "Performance Bottleneck Remediation Playbook"
+title: Performance Bottleneck Remediation Playbook
+summary: Performance Bottleneck Remediation Playbook：kubectl top pod <pod> -n <namespace>
+  kubectl get pod <pod> -n <namespace> -o jsonpath='{.spec.containers[0].resources}'
 category: remediation
-skill_set: "k8s-performance"
-created: "2026-05-22"
-updated: "2026-05-22"
+tags:
+- reference
+- remediation
+- playbook
+- visibility/public
+tier: supporting
+created: '2026-05-22'
+updated: '2026-05-22'
+skill_set: k8s-performance
 last_updated: 2026-05-22
-tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
+
+
 
 # 修复操作手册 / Remediation Playbook
 
@@ -269,3 +278,9 @@ kubectl get nodes -o json | jq '.items[].status.conditions[] | select(.type | te
 - Skill 版本: SKILL-PERF-001 v1.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

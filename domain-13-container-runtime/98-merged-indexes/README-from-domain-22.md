@@ -1,6 +1,7 @@
 ---
 title: 'Domain 22: 容器镜像管理 (Container Image Management)'
 description: '# Domain 22: 容器镜像管理 (Container Image Management)'
+summary: '# Domain 22: 容器镜像管理 (Container Image Management)'
 category: container-image-management
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - harbor
 - docker
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ trigger_keywords:
 - image
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Domain 22: 容器镜像管理 (Container Image Management)
 

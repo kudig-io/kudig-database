@@ -1,6 +1,7 @@
 ---
 title: KuDig Doctor — 身份标识 (02-ai-agents)
 description: '- 架构师'
+summary: '- 架构师'
 category: general
 tags:
 - ai
@@ -9,6 +10,8 @@ tags:
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: KuDig Doctor — 身份标识
 description: KuDig Doctor Agent 的外观标识、交互风格与品牌定义

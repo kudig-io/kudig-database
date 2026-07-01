@@ -1,6 +1,7 @@
 ---
 title: GitOps 速查卡
 description: Argo CD / Flux GitOps 工作流快速参考, 覆盖应用部署、多环境管理、回滚、安全加固
+summary: Argo CD / Flux GitOps 工作流快速参考, 覆盖应用部署、多环境管理、回滚、安全加固
 category: cheatsheet
 tags:
 - gitops
@@ -13,6 +14,8 @@ tags:
 - opa
 - rbac
 - crd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -39,8 +42,9 @@ prerequisites:
 - gitops-basics
 - policy-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # GitOps 生产环境速查卡
 

@@ -1,6 +1,7 @@
 ---
 title: Burn Rate 告警与预算消耗监控
 description: '# Burn Rate 告警与预算消耗监控'
+summary: '# Burn Rate 告警与预算消耗监控'
 category: domain
 tags:
 - sre
@@ -8,6 +9,8 @@ tags:
 - burn-rate
 - alerting
 - monitoring
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - sre-practices
 - prometheus-basics
 - alertmanager-basics
-created: "2026-05-23"
 ---
+
+
 
 # Burn Rate 告警与预算消耗监控
 

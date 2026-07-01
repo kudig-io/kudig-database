@@ -1,6 +1,9 @@
 ---
 title: MinIO
-description: 'MinIO 是高性能的 S3 兼容对象存储系统，可在任何基础设施上部署。在 Kubernetes 中常用作 Thanos、Loki、Velero 等工具的对象存...'
+description: MinIO 是高性能的 S3 兼容对象存储系统，可在任何基础设施上部署。在 Kubernetes 中常用作 Thanos、Loki、Velero
+  等工具的对象存...
+summary: MinIO 是高性能的 S3 兼容对象存储系统，可在任何基础设施上部署。在 Kubernetes 中常用作 Thanos、Loki、Velero
+  等工具的对象存...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +12,8 @@ tags:
 - storage
 - s3
 - object-storage
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # MinIO
 

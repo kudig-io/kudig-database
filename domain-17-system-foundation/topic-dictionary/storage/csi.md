@@ -1,12 +1,17 @@
 ---
 title: 容器存储接口
-description: 'CSI（Container Storage Interface）是存储插件的标准接口规范。它定义了存储系统如何与容器编排系统集成的标准化方式，取代了 Kuber...'
+description: CSI（Container Storage Interface）是存储插件的标准接口规范。它定义了存储系统如何与容器编排系统集成的标准化方式，取代了
+  Kuber...
+summary: CSI（Container Storage Interface）是存储插件的标准接口规范。它定义了存储系统如何与容器编排系统集成的标准化方式，取代了
+  Kuber...
 category: dictionary
 tags:
 - k8s
 - glossary
 - storage
 - csi
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 容器存储接口
 

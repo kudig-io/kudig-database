@@ -1,6 +1,9 @@
 ---
 title: Contour Ingress 控制器
-description: 'Contour 是 VMware 开源的 Kubernetes Ingress 控制器，基于 Envoy Proxy 构建，支持 Ingress 和 Gatew...'
+description: Contour 是 VMware 开源的 Kubernetes Ingress 控制器，基于 Envoy Proxy 构建，支持 Ingress
+  和 Gatew...
+summary: Contour 是 VMware 开源的 Kubernetes Ingress 控制器，基于 Envoy Proxy 构建，支持 Ingress
+  和 Gatew...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - networking
 - ingress
 - envoy
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Contour Ingress 控制器（Contour）
 

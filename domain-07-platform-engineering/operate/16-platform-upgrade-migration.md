@@ -1,6 +1,7 @@
 ---
 title: 平台升级与迁移策略 (Platform Upgrade & Migration Strategy)
 description: '## 概述'
+summary: '## 概述'
 category: platform-ops
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - daemonset
 - rbac
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -56,8 +59,9 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
-created: "2026-05-23"
 ---
+
+
 
 # 平台升级与迁移策略 (Platform Upgrade & Migration Strategy)
 

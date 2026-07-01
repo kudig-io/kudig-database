@@ -1,6 +1,7 @@
 ---
 title: 'Week 2: 安全认证与监控运维 (Days 8-14)'
 description: '# Week 2: 安全认证与监控运维 (Days 8-14)'
+summary: '# Week 2: 安全认证与监控运维 (Days 8-14)'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - networkpolicy
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -37,8 +40,9 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # Week 2: 安全认证与监控运维 (Days 8-14)
 

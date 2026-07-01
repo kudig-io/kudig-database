@@ -1,6 +1,7 @@
 ---
 title: 症状向量匹配引擎 (Symptom Vector Matching Engine) [topic-fta]
 description: 'description: ''<!-- chunk: 一、设计目标'' -->## 一、设计目标'''
+summary: 'description: ''<!-- chunk: 一、设计目标'' -->## 一、设计目标'''
 category: fta
 tags:
 - fta
@@ -12,6 +13,8 @@ tags:
 - gpu
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -43,8 +46,9 @@ prerequisites:
 fta_id: FTA-SYMPTOM_VECTOR_MATCHER-001
 component: Symptom Vector Matcher
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: 症状向量匹配引擎 ([[skills/Symptom Vector Matching Engine.md|[[Symptom Vector Matching Engine|Symptom Vector Matching Engine]]]])
 description: '<!-- chunk: 一、设计目标' -->## 一、设计目标'

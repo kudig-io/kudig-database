@@ -1,6 +1,7 @@
 ---
 title: 数据中台 Kubernetes 生产架构设计
 description: 'title: 数据中台架构设计'
+summary: 'title: 数据中台架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - gateway
 - rbac
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 数据中台架构设计
 description: '# 数据中台 [[Kubernetes|Kubernetes]] 生产架构设计'

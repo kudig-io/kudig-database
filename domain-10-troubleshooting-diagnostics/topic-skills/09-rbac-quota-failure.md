@@ -1,6 +1,7 @@
 ---
 title: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 description: '## 1. 概述'
+summary: '## 1. 概述'
 category: security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - istio
 - argocd
+tier: core
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -56,8 +59,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 ---
 
@@ -195,7 +199,7 @@ kubectl get rolebinding,clusterrolebinding -A -o wide | grep -E "${SA_NAME}|${NS
 ```bash
 # 查看 ValidatingWebhookConfiguration 是否存在拦截
 kubectl get validatingwebhookconfiguration -o name | wc -l
-kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|rejected\|forbidden" | head -10
+kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied|rejected|forbidden" | head -10
 ```
 > **判断规则**:
 > - 存在多个 ValidatingWebhook 且 Event 中有 denied 记录 → 可能为 RC-007（策略拦截）
@@ -388,7 +392,7 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
 - **命令**:
   ```bash
   # 检查是否有基于 PriorityClass 的配额作用域
-  kubectl get resourcequota -n NS -o yaml | grep -A10 "scopeSelector\|scopes"
+  kubectl get resourcequota -n NS -o yaml | grep -A10 "scopeSelector|scopes"
   # 查看 PriorityClass 定义
   kubectl get priorityclass
   ```
@@ -412,7 +416,7 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   ```bash
   kubectl get validatingwebhookconfiguration -o wide
   # 查看具体配置
-  kubectl get validatingwebhookconfiguration -o yaml | grep -A20 "name:\|rules:\|failurePolicy:"
+  kubectl get validatingwebhookconfiguration -o yaml | grep -A20 "name:|rules:|failurePolicy:"
   ```
 - **超时**: 10s
 - **预期输出模式**: Webhook 配置列表
@@ -461,7 +465,7 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   # 查看策略违规报告
   kubectl get policyreport,clusterpolicyreport -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"/"}{.metadata.name}{": "}{.summary}{"\n"}{end}'
   # 查看具体策略规则
-  kubectl get clusterpolicy -o yaml | grep -A20 "name:\|validate:\|match:"
+  kubectl get clusterpolicy -o yaml | grep -A20 "name:|validate:|match:"
   ```
 - **超时**: 15s
 - **预期输出模式**: Policy 列表和违规报告
@@ -476,9 +480,9 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
 - **命令**:
   ```bash
   # Gatekeeper audit 控制器日志
-  kubectl logs -n gatekeeper-system -l control-plane=audit-controller --tail=50 | grep -i "denied\|violation"
+  kubectl logs -n gatekeeper-system -l control-plane=audit-controller --tail=50 | grep -i "denied|violation"
   # Kyverno admission 控制器日志
-  kubectl logs -n kyverno -l app=kyverno --tail=50 | grep -i "denied\|blocked\|failed"
+  kubectl logs -n kyverno -l app=kyverno --tail=50 | grep -i "denied|blocked|failed"
   # 通用 webhook Pod 日志
   kubectl get pods -A -l app.kubernetes.io/component=webhook -o name | head -1 | xargs kubectl logs --tail=30
   ```

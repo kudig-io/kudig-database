@@ -1,6 +1,9 @@
 ---
 title: Windows 节点接入与管理
-description: 系统介绍 Kubernetes Windows 节点的接入流程、containerd 配置要求、Windows 与 Linux 节点的调度隔离策略，以及 Windows 容器特有限制与常见问题排查。
+description: 系统介绍 Kubernetes Windows 节点的接入流程、containerd 配置要求、Windows 与 Linux 节点的调度隔离策略，以及
+  Windows 容器特有限制与常见问题排查。
+summary: 系统介绍 Kubernetes Windows 节点的接入流程、containerd 配置要求、Windows 与 Linux 节点的调度隔离策略，以及
+  Windows 容器特有限制与常见问题排查。
 category: node-create
 tags:
 - windows-node
@@ -13,6 +16,8 @@ tags:
 - apiserver
 - kubelet
 - scheduler
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: advanced
 reading_level: advanced
@@ -55,8 +60,9 @@ related_topics:
 - node-create
 - registration
 - cni-node
-created: "2026-05-23"
 ---
+
+
 
 # Windows 节点接入与管理
 

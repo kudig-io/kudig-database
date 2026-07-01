@@ -1,6 +1,7 @@
 ---
 title: JUnit 5 企业级单元测试框架深度实践
 description: '# JUnit 5 企业级单元测试框架深度实践'
+summary: '# JUnit 5 企业级单元测试框架深度实践'
 category: automated-testing-quality
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - hpa
 - job
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -43,8 +46,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # JUnit 5 企业级单元测试框架深度实践
 
@@ -1032,7 +1036,7 @@ diagnose_test_execution() {
     # 分析失败原因
     if [ ${PIPESTATUS[0]} -ne 0 ]; then
         echo "Test execution failed. Analyzing logs..."
-        grep -A 10 -B 10 "ERROR\|FAIL\|Exception" /tmp/test-debug.log
+        grep -A 10 -B 10 "ERROR|FAIL|Exception" /tmp/test-debug.log
     fi
 }
 

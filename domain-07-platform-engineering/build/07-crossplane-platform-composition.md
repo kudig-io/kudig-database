@@ -1,6 +1,7 @@
 ---
 title: Crossplane 平台组合 (Crossplane Platform Composition)
 description: 'description: ''<!-- chunk: 概述 (Overview)'' -->## 概述 (Overview)'''
+summary: 'description: ''<!-- chunk: 概述 (Overview)'' -->## 概述 (Overview)'''
 category: general
 tags:
 - platform
@@ -13,6 +14,8 @@ tags:
 - postgresql
 - kafka
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -40,8 +43,9 @@ prerequisites:
 - iac-basics
 - etcd-basics
 - kafka-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Crossplane|Crossplane]] 平台组合 (Crossplane Platform Composition)
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'

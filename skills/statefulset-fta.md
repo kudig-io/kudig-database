@@ -1,6 +1,7 @@
 ---
 title: StatefulSet 异常故障树分析 (skills)
 description: '- **范围**：有序部署、PVC 绑定、存储与网络、镜像与探针、控制器状态。'
+summary: '- **范围**：有序部署、PVC 绑定、存储与网络、镜像与探针、控制器状态。'
 category: general
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - statefulset
 - rbac
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 fta_id: FTA-STATEFULSET-001
 component: Statefulset
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "StatefulSet 异常故障树分析"

@@ -1,12 +1,15 @@
 ---
 title: Kubernetes 版本生命周期与支持策略
 description: '**用途**: 版本选择、升级规划、EOL 管理'
+summary: '**用途**: 版本选择、升级规划、EOL 管理'
 category: architecture-fundamentals
 tags:
 - k8s
 - architecture
 - kubernetes
 - etcd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -50,8 +53,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 版本生命周期与支持策略
 

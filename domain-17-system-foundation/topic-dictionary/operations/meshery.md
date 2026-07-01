@@ -1,6 +1,7 @@
 ---
 title: Meshery 服务网格管理
-description: 'Meshery 是 CNCF Sandbox 项目，提供服务网格和云原生基础设施的统一管理平台，支持 10+ 种服务网格的生命周期管理、性能基准测试和配置管理。...'
+description: Meshery 是 CNCF Sandbox 项目，提供服务网格和云原生基础设施的统一管理平台，支持 10+ 种服务网格的生命周期管理、性能基准测试和配置管理。...
+summary: Meshery 是 CNCF Sandbox 项目，提供服务网格和云原生基础设施的统一管理平台，支持 10+ 种服务网格的生命周期管理、性能基准测试和配置管理。...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - operations
 - service-mesh
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Meshery 服务网格管理（Meshery）
 

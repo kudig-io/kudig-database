@@ -1,6 +1,9 @@
 ---
 title: containerd
-description: 'containerd 是一个工业级容器运行时，最初从 Docker 中拆分出来，现为 CNCF 毕业项目。它是 Kubernetes 默认的容器运行时（通过 C...'
+description: containerd 是一个工业级容器运行时，最初从 Docker 中拆分出来，现为 CNCF 毕业项目。它是 Kubernetes 默认的容器运行时（通过
+  C...
+summary: containerd 是一个工业级容器运行时，最初从 Docker 中拆分出来，现为 CNCF 毕业项目。它是 Kubernetes 默认的容器运行时（通过
+  C...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - containerd
 - cri
 - container-runtime
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # containerd
 

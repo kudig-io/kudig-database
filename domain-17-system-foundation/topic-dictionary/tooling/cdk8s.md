@@ -1,6 +1,7 @@
 ---
 title: cdk8s 声明式 K8s CDK
-description: 'cdk8s（Cloud Development Kit for Kubernetes）是 CNCF Sandbox 项目，允许使用 TypeScript/Pyt...'
+description: cdk8s（Cloud Development Kit for Kubernetes）是 CNCF Sandbox 项目，允许使用 TypeScript/Pyt...
+summary: cdk8s（Cloud Development Kit for Kubernetes）是 CNCF Sandbox 项目，允许使用 TypeScript/Pyt...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - tooling
 - cdk
 - configuration
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # cdk8s 声明式 K8s CDK（cdk8s）
 

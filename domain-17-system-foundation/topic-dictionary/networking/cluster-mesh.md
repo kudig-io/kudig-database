@@ -1,6 +1,7 @@
 ---
 title: 多集群网络互联（Cluster Mesh）
 description: '# 多集群网络互联（Cluster Mesh）'
+summary: '# 多集群网络互联（Cluster Mesh）'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - coredns
 - gateway
+tier: core
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -36,9 +39,9 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 - tls-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 多集群网络互联（Cluster Mesh）
 

@@ -1,6 +1,7 @@
 ---
 title: 企业级监控告警体系
 description: '# 39 - 企业级监控告警体系 (Enterprise Monitoring and Alerting System)'
+summary: '# 39 - 企业级监控告警体系 (Enterprise Monitoring and Alerting System)'
 category: troubleshooting
 tags:
 - prometheus
@@ -13,6 +14,8 @@ tags:
 - etcd
 - apiserver
 - jaeger
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: advanced
 reading_level: advanced
@@ -67,8 +70,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/monitoring-fta.md
   label: '故障树: monitoring'
-created: "2026-05-23"
 ---
+
+
 
 # 39 - 企业级监控告警体系 (Enterprise Monitoring and Alerting System)
 

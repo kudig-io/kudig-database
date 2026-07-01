@@ -1,6 +1,9 @@
 ---
 title: LoxiLB eBPF 负载均衡
-description: 'LoxiLB 是基于 eBPF 的高性能外部负载均衡器，专为 Kubernetes 设计，提供 L4/L7 负载均衡和 NAT，可替代 MetalLB + ku...'
+description: LoxiLB 是基于 eBPF 的高性能外部负载均衡器，专为 Kubernetes 设计，提供 L4/L7 负载均衡和 NAT，可替代 MetalLB
+  + ku...
+summary: LoxiLB 是基于 eBPF 的高性能外部负载均衡器，专为 Kubernetes 设计，提供 L4/L7 负载均衡和 NAT，可替代 MetalLB
+  + ku...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - networking
 - load-balancer
 - ebpf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # LoxiLB eBPF 负载均衡（LoxiLB）
 

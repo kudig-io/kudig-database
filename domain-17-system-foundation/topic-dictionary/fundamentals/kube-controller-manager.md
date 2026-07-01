@@ -1,12 +1,15 @@
 ---
 title: 控制器管理器
-description: 'kube-controller-manager 是 Kubernetes 控制平面中运行各种控制器的组件。每个控制器都是一个独立的控制循环，持续比较集群的当前状...'
+description: kube-controller-manager 是 Kubernetes 控制平面中运行各种控制器的组件。每个控制器都是一个独立的控制循环，持续比较集群的当前状...
+summary: kube-controller-manager 是 Kubernetes 控制平面中运行各种控制器的组件。每个控制器都是一个独立的控制循环，持续比较集群的当前状...
 category: dictionary
 tags:
 - k8s
 - glossary
 - controller-manager
 - control-plane
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 控制器管理器
 

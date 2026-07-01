@@ -1,7 +1,9 @@
 ---
 title: K8s 基础概念术语参考
-description: '| **Cloud Controller Manager（云控制器管理器）** | Cloud Controller Manager | Cloud Controller Manager 是 Kubernetes 控制平面的一个组件，它将云厂商特定的控制逻辑嵌入到
-  Kubernetes 中 |'
+description: '| **Cloud Controller Manager（云控制器管理器）** | Cloud Controller Manager |
+  Cloud Controller Manager 是 Kubernetes 控制平面的一个组件，它将云厂商特定的控制逻辑嵌入到 Kubernetes 中 |'
+summary: '| **Cloud Controller Manager（云控制器管理器）** | Cloud Controller Manager | Cloud
+  Controller Manager 是 Kubernetes 控制平面的一个组件，它将云厂商特定的控制逻辑嵌入到 Kubernetes 中 |'
 category: references
 tags:
 - k8s
@@ -14,6 +16,8 @@ tags:
 - controller-manager
 - prometheus
 - grafana
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +35,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8s 基础概念术语参考
 
@@ -56,7 +61,7 @@ created: "2026-05-23"
 | **Garbage Collection（垃圾回收）** | Garbage Collection | 垃圾回收（Garbage Collection）是 Kubernetes 用于清理集群资源的各种机制的统称 |
 | **Kubernetes 组件** | Kubernetes Components | Kubernetes 集群由控制平面（Control Plane）和一组工作节点（Worker Nodes）组成 |
 | **** | Kubernetes Concepts Reference | title: Kubernetes Concepts Reference
-description: '\| **适合读者** \| 初学者（查概念）→ 中级（... |
+description: '| **适合读者** | 初学者（查概念）→ 中级（... |
 | **Kubernetes 对象管理** | Kubernetes Object Management | `kubectl` 命令行工具支持多种方式来创建和管理 Kubernetes 对象 |
 | **Kubernetes Self-Healing（Kubernetes 自愈能力）** | Kubernetes Self Healing | Kubernetes 从设计之初就具备自愈能力，以帮助维护工作负载的健康和可用性 |
 | **标签和选择器** | Labels And Selectors | 标签（Labels）是附加到对象（如 Pod）上的键/值对，用于指定对用户有意义的相关标识属性 |

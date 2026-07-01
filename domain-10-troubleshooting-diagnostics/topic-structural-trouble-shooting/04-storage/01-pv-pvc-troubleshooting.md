@@ -1,6 +1,7 @@
 ---
 title: PV/PVC 存储深度排查与持久化治理指南 [topic-structural-trouble-shooting]
 description: 'title: PV/PVC 存储深度排查与持久化治理指南'
+summary: 'title: PV/PVC 存储深度排查与持久化治理指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - ceph
 - mysql
 - statefulset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -42,8 +45,9 @@ prerequisites:
 - prometheus-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: PV/PVC 存储深度排查与持久化治理指南
 description: '# PV/PVC 存储深度排查与持久化治理指南'
@@ -616,7 +620,7 @@ kubectl exec app-pod -- mount | grep /data
 # /dev/vdb on /data type xfs (rw,relatime)
 
 # 2. 查看 kubelet 日志
-journalctl -u kubelet | grep -i "expand\|resize"
+journalctl -u kubelet | grep -i "expand|resize"
 # Jan 01 10:05:00 kubelet[1234]: NodeExpandVolume failed for volume "pv-12345": 
 #   xfs_growfs command not found
 # ❌ 节点缺少 xfsprogs 工具
@@ -1123,7 +1127,7 @@ kubectl describe pvc log-data
 
 # 9. 查看 kubelet 日志
 ssh worker-1
-journalctl -u kubelet | grep -i "expand\|resize" | tail -20
+journalctl -u kubelet | grep -i "expand|resize" | tail -20
 # Jan 01 09:00:05 kubelet[1234]: E0101 09:00:05.123456 volume_manager.go:456] 
 #   NodeExpandVolume failed for volume "pvc-log-data": 
 #   rpc error: code = Internal desc = Could not resize volume: filesystem busy

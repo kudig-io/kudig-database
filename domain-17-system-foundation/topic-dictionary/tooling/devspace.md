@@ -1,6 +1,9 @@
 ---
 title: DevSpace 云开发环境
-description: 'DevSpace 是 Loft Labs 开源的云原生开发工具，为 Kubernetes 提供一键式开发环境搭建、实时同步和热重载，简化 K8s 上的开发工作流...'
+description: DevSpace 是 Loft Labs 开源的云原生开发工具，为 Kubernetes 提供一键式开发环境搭建、实时同步和热重载，简化
+  K8s 上的开发工作流...
+summary: DevSpace 是 Loft Labs 开源的云原生开发工具，为 Kubernetes 提供一键式开发环境搭建、实时同步和热重载，简化 K8s
+  上的开发工作流...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - tooling
 - development
 - k8s
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # DevSpace 云开发环境（DevSpace）
 

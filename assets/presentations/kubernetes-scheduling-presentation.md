@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 调度与编排策略全栈培训 (assets)
 description: '# Kubernetes 调度与编排策略全栈培训'
+summary: '# Kubernetes 调度与编排策略全栈培训'
 category: presentations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - pdb
 - statefulset
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - monitoring-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 调度与编排策略全栈培训
 

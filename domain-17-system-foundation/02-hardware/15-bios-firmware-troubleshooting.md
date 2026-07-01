@@ -1,6 +1,7 @@
 ---
 title: BIOS与固件故障排查
 description: '# BIOS与固件故障排查'
+summary: '# BIOS与固件故障排查'
 category: hardware
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - apiserver
 - calico
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # BIOS与固件故障排查
 

@@ -1,10 +1,13 @@
 ---
 title: topic-best-practices MOC
 description: '**专题**: topic-best-practices'
+summary: '**专题**: topic-best-practices'
 category: general
 tags:
 - k8s
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -19,8 +22,9 @@ trigger_keywords:
 - MOC
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "topic-best-practices MOC"

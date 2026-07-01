@@ -1,6 +1,7 @@
 ---
 title: 03 - 研发环境部署 (Development Environment Deployment) [deployment]
 description: 'title: 03 - 研发环境部署 (Development Environment Deployment)'
+summary: 'title: 03 - 研发环境部署 (Development Environment Deployment)'
 category: general
 tags:
 - deployment
@@ -13,6 +14,8 @@ tags:
 - cilium
 - flannel
 - calico
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ prerequisites:
 - redis-basics
 - policy-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 03 - 研发环境部署 (Development Environment Deployment)
 description: '# 03 - 研发环境部署 (Development Environment Deployment)'

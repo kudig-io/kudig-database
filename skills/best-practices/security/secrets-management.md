@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 密钥管理最佳实践
 description: 'title: Kubernetes 密钥管理最佳实践'
+summary: 'title: Kubernetes 密钥管理最佳实践'
 category: general
 tags:
 - general
@@ -13,6 +14,8 @@ tags:
 - rbac
 - crd
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - gpu-ml-basics
 - helm-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] 密钥管理最佳实践
 description: 生产环境 Kubernetes 密钥管理配置的最佳实践指南

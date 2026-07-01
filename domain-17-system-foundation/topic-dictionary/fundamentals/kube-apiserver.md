@@ -1,12 +1,15 @@
 ---
 title: API Server
-description: 'kube-apiserver 是 Kubernetes 控制平面的核心组件，提供 RESTful API 作为集群所有交互的统一入口。用户、集群内部组件和外部工...'
+description: kube-apiserver 是 Kubernetes 控制平面的核心组件，提供 RESTful API 作为集群所有交互的统一入口。用户、集群内部组件和外部工...
+summary: kube-apiserver 是 Kubernetes 控制平面的核心组件，提供 RESTful API 作为集群所有交互的统一入口。用户、集群内部组件和外部工...
 category: dictionary
 tags:
 - k8s
 - glossary
 - apiserver
 - control-plane
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # API Server
 

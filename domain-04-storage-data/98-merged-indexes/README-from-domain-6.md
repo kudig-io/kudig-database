@@ -1,6 +1,7 @@
 ---
 title: Storage Domain 存储领域知识库
 description: 'title: Storage Domain 存储领域知识库'
+summary: 'title: Storage Domain 存储领域知识库'
 category: general
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - rook
 - ceph
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - storage-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Storage Domain 存储领域知识库

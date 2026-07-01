@@ -1,6 +1,7 @@
 ---
 title: 'Day 6: K8S 集群升级'
 description: '## 概述'
+summary: '## 概述'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - operator
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 6: K8S 集群升级
@@ -373,7 +377,7 @@ kubectl get pods -n kube-system | grep -v Running
 kubectl get cs 2>/dev/null || echo "cs 命令在 1.29+ 可能已弃用"
 
 echo "--- 4. 验证业务 Pod 状态 ---"
-kubectl get pods -A | grep -v 'Running\|Completed'
+kubectl get pods -A | grep -v 'Running|Completed'
 
 echo "--- 5. 验证 Service 可用性 ---"
 kubectl get svc -A | grep LoadBalancer

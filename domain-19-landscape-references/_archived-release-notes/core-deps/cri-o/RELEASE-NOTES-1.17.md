@@ -1,6 +1,7 @@
 ---
 title: cri-o v1.17 Release Notes
 description: cri-o v1.17 Release Notes — Kubernetes 生产运维知识库
+summary: cri-o v1.17 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - changelog
 - cri-o
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cncf-ecosystem
-created: "2026-05-23"
 ---
+
+
 
 # cri-o v1.17 Release Notes
 

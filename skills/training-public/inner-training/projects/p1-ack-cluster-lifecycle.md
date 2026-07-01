@@ -1,6 +1,7 @@
 ---
 title: 'P1: ACK 集群生命周期管理'
 description: 'title: P1: ACK 集群生命周期管理'
+summary: 'title: P1: ACK 集群生命周期管理'
 category: learning
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - statefulset
 - daemonset
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: P1: ACK 集群生命周期管理

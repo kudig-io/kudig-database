@@ -1,6 +1,9 @@
 ---
 title: KitOps ML 打包
-description: 'KitOps 是 Jozu 开源的 CNCF Sandbox 项目，为 AI/ML 模型和数据集提供 OCI 打包和分发能力，将 ML 模型管理纳入标准的 De...'
+description: KitOps 是 Jozu 开源的 CNCF Sandbox 项目，为 AI/ML 模型和数据集提供 OCI 打包和分发能力，将 ML 模型管理纳入标准的
+  De...
+summary: KitOps 是 Jozu 开源的 CNCF Sandbox 项目，为 AI/ML 模型和数据集提供 OCI 打包和分发能力，将 ML 模型管理纳入标准的
+  De...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - specialized-workloads
 - ai-ml
 - oci
+tier: supporting
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # KitOps ML 打包（KitOps）
 

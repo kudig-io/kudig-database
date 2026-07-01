@@ -1,6 +1,7 @@
 ---
 title: 14 - 服务网格与微服务架构设计
 description: 'title: 14 - 服务网格与微服务架构设计'
+summary: 'title: 14 - 服务网格与微服务架构设计'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - envoy
 - cilium
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 14 - 服务网格与微服务架构设计
 description: '# 14 - 服务网格与微服务架构设计'

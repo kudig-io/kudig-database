@@ -1,6 +1,7 @@
 ---
 title: '场景: 监控告警'
 description: Prometheus + Grafana 监控体系搭建和告警策略配置
+summary: Prometheus + Grafana 监控体系搭建和告警策略配置
 category: scenario
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - monitoring
 - prometheus
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-20'
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 # 场景: 监控告警
 

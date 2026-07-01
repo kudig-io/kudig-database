@@ -1,6 +1,7 @@
 ---
 title: 31 - FlowSchema / PriorityLevelConfiguration YAML 配置参考
 description: '# 31 - FlowSchema / PriorityLevelConfiguration YAML 配置参考'
+summary: '# 31 - FlowSchema / PriorityLevelConfiguration YAML 配置参考'
 category: yaml-manifests
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 31 - FlowSchema / PriorityLevelConfiguration YAML 配置参考
 

@@ -1,6 +1,7 @@
 ---
 title: Backstage 内部开发者平台 (IDP) 构建指南
 description: '# Backstage 内部开发者平台 (IDP) 构建指南'
+summary: '# Backstage 内部开发者平台 (IDP) 构建指南'
 category: platform-engineering
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - opa
 - redis
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -50,8 +53,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Backstage|Backstage]] 内部开发者平台 (IDP) 构建指南
 

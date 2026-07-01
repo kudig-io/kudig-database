@@ -1,6 +1,7 @@
 ---
 title: 'Day 3: Linux 核心基础'
 description: '**学习时间**: 4-5 小时 | **主题**: Linux 系统架构与进程管理'
+summary: '**学习时间**: 4-5 小时 | **主题**: Linux 系统架构与进程管理'
 category: learning
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - docker
 - job
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,8 +33,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 3: Linux 核心基础
 

@@ -1,12 +1,20 @@
 ---
-title: "Domain 14 内容索引"
+title: Domain 14 内容索引
+summary: Domain 14 内容索引
 category: domain-14-ai-ml-infra
-tags: ["index", "domain-14-ai-ml-infra", "navigation"]
-sources: ["auto-generated"]
+tags:
+- index
+- domain-14-ai-ml-infra
+- navigation
+tier: supporting
+sources:
+- auto-generated
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 ---
+
+
 
 # Domain 14 内容索引
 

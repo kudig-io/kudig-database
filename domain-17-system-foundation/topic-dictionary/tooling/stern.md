@@ -1,12 +1,15 @@
 ---
 title: stern
-description: 'stern 是一个多 Pod 日志聚合跟踪工具。它可以同时跟踪多个 Pod 的日志输出，并以不同颜色区分，非常适合调试微服务架构。...'
+description: stern 是一个多 Pod 日志聚合跟踪工具。它可以同时跟踪多个 Pod 的日志输出，并以不同颜色区分，非常适合调试微服务架构。...
+summary: stern 是一个多 Pod 日志聚合跟踪工具。它可以同时跟踪多个 Pod 的日志输出，并以不同颜色区分，非常适合调试微服务架构。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - tooling
 - logging
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -21,8 +24,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # stern
 

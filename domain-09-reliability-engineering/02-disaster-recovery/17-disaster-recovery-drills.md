@@ -1,6 +1,7 @@
 ---
 title: 17-灾难恢复演练
 description: '- disaster-recovery-drills的最佳实践'
+summary: '- disaster-recovery-drills的最佳实践'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - crd
 - operator
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - sre-practices
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

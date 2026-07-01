@@ -1,6 +1,7 @@
 ---
 title: Production Operations Best Practices
 description: Production Operations Best Practices — Kubernetes 生产运维知识库
+summary: Production Operations Best Practices — Kubernetes 生产运维知识库
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - falco
 - rag
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[entities/k8s-production-operations.md|Production Operations]]ernetes 生产环境运维最佳实践字典|Operations Best Practices]]
 

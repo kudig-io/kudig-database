@@ -1,6 +1,7 @@
 ---
 title: 容器运行时深度解析 (Container Runtime Interface Deep Dive)
 description: '# 容器运行时深度解析 (Container Runtime Interface Deep Dive)'
+summary: '# 容器运行时深度解析 (Container Runtime Interface Deep Dive)'
 category: control-plane
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - helm
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -72,8 +75,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 容器运行时深度解析 ([[concepts/container-runtime.md|Container Runtime]] Interface Deep Dive)
 

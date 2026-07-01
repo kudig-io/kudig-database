@@ -1,6 +1,7 @@
 ---
 title: 变更窗口与审批流程
 description: 面向阿里云/专有云 K8s 的变更窗口与审批流程设计，涵盖变更分级、时间窗口、审批链、ASO 集成与风险控制。
+summary: 面向阿里云/专有云 K8s 的变更窗口与审批流程设计，涵盖变更分级、时间窗口、审批链、ASO 集成与风险控制。
 category: release-management
 tags:
 - k8s
@@ -11,6 +12,9 @@ tags:
 - governance
 - alicloud
 - apsara-stack
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: intermediate
 reading_level: intermediate
@@ -42,9 +46,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # 变更窗口与审批流程
 

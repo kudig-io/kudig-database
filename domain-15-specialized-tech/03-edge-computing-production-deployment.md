@@ -1,6 +1,7 @@
 ---
 title: 03-边缘计算生产部署
 description: 'title: 03-边缘计算生产部署'
+summary: 'title: 03-边缘计算生产部署'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - falco
 - redis
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - cilium-basics
 - redis-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 03-边缘计算生产部署
 description: '# 03-边缘计算生产部署'

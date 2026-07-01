@@ -1,11 +1,20 @@
 ---
 title: 远程顾问模式改进执行计划
+summary: 远程顾问模式改进执行计划：1. k8s-node-notready（最高频） 2. k8s-pod-crashloop（最高频） 3. k8s-dns-failure（高影响）
+  4. k8s-deployment-rollout（高频） 5. k8s-certificate-expiry（高影响）
 category: execution-plan
-tags: [execution, remote-advisor, dialogue, skill]
-created: "2026-05-23"
-updated: "2026-05-23"
+tags:
+- execution
+- remote-advisor
+- dialogue
+- skill
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
 ---
+
+
 
 # 远程顾问模式改进执行计划
 

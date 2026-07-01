@@ -2,6 +2,8 @@
 title: StatefulSet Pod 启动失败：PVC 未绑定
 description: 专有云 ACK 集群 MySQL 主从 StatefulSet 新副本启动失败，根因为 StorageClass 未正确配置 allowVolumeExpansion
   且后端 NAS 挂载点已满，含诊断、修复与验证。
+summary: 专有云 ACK 集群 MySQL 主从 StatefulSet 新副本启动失败，根因为 StorageClass 未正确配置 allowVolumeExpansion
+  且后端 NAS 挂载点已满，含诊断、修复与验证。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -12,6 +14,9 @@ tags:
 - nas
 - mysql
 - p1
+tier: peripheral
+created: '2026-06-26T13:00:00+08:00'
+updated: '2026-06-26T15:30:00+08:00'
 incident_id: TC-2026-038
 priority: P1
 severity: high
@@ -23,9 +28,7 @@ skill_ref:
 - StatefulSet 存储
 fta_ref:
 - 'FTA: StatefulSet PVC 未绑定'
-created: '2026-06-26T13:00:00+08:00'
-updated: '2026-06-26T15:30:00+08:00'
-last_updated: 2026-06-26T15:30:00+08:00
+last_updated: 2026-06-26 15:30:00+08:00
 duplicate_of: INC-2026-ACK-048
 status: duplicate
 duplication_reason: 与 "INC-2026-ACK-048" 主题重复，内容角度相似，降低 RAG 权重
@@ -57,15 +60,17 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-043-statefulset-pvc-unbound.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-043-statefulset-pvc-unbound.md]]'
   type: related_to
-- target: "[[concepts/statefulset.md]]"
+- target: '[[concepts/statefulset.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -106,7 +111,7 @@ kubectl get storageclass alicloud-nas-subpath -o yaml
 
 # 4. 检查 CSI 插件 Pod 状态
 kubectl get pod -n kube-system | grep -E "csi|nas"
-kubectl logs -n kube-system -l app=csi-plugin-nas --tail=200 | grep -i "mysql-slave-2\|error\|fail" | tail -30
+kubectl logs -n kube-system -l app=csi-plugin-nas --tail=200 | grep -i "mysql-slave-2|error|fail" | tail -30
 
 # 5. 检查 NAS 挂载点与文件系统容量
 aliyun nas DescribeFileSystems --RegionId cn-zhangjiakou --PageSize 50 --output cols=FileSystemId,Capacity,Status rows=FileSystems.FileSystem[]
@@ -214,7 +219,7 @@ kubectl exec -n middleware mysql-slave-2 -- mysql -uroot -p$MYSQL_ROOT_PASSWORD 
 aliyun nas DescribeFileSystems --FileSystemId fs-zyy-mysql-xxx --RegionId cn-zhangjiakou --output cols=FileSystemId,Capacity,MeteredSize rows=FileSystems.FileSystem[]
 
 # 6. CSI 日志无新的 provision 失败
-kubectl logs -n kube-system -l app=csi-plugin-nas --tail=100 | grep -i "mysql-slave-2\|error" || echo "无新错误"
+kubectl logs -n kube-system -l app=csi-plugin-nas --tail=100 | grep -i "mysql-slave-2|error" || echo "无新错误"
 ```
 
 ## 回复客户话术

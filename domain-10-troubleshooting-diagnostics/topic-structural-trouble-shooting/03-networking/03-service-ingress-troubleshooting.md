@@ -1,6 +1,7 @@
 ---
 title: Service 与 Ingress 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Service 与 Ingress 故障排查指南'
+summary: 'title: Service 与 Ingress 故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - hpa
 - daemonset
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -42,8 +45,9 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Service|Service]] 与 [[Ingress|Ingress]] 故障排查指南
 description: '# Service 与 Ingress 故障排查指南'

@@ -1,6 +1,9 @@
 ---
 title: 域名服务
-description: 'Kubernetes DNS 是集群内部的域名解析服务，为 Service 和 Pod 提供自动的 DNS 记录。CoreDNS 是 Kubernetes 的默...'
+description: Kubernetes DNS 是集群内部的域名解析服务，为 Service 和 Pod 提供自动的 DNS 记录。CoreDNS 是 Kubernetes
+  的默...
+summary: Kubernetes DNS 是集群内部的域名解析服务，为 Service 和 Pod 提供自动的 DNS 记录。CoreDNS 是 Kubernetes
+  的默...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - dns
 - coredns
 - networking
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 域名服务
 

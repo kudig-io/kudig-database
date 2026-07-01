@@ -1,12 +1,16 @@
 ---
 title: 资源请求
-description: 'Resource Request 是容器声明需要的最小资源量。调度器根据 Request 值决定 Pod 应该调度到哪个节点，kubelet 保证容器至少能获得...'
+description: Resource Request 是容器声明需要的最小资源量。调度器根据 Request 值决定 Pod 应该调度到哪个节点，kubelet
+  保证容器至少能获得...
+summary: Resource Request 是容器声明需要的最小资源量。调度器根据 Request 值决定 Pod 应该调度到哪个节点，kubelet 保证容器至少能获得...
 category: dictionary
 tags:
 - k8s
 - glossary
 - scheduling
 - resource
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 资源请求
 

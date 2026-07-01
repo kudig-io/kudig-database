@@ -1,6 +1,7 @@
 ---
 title: 49 - 服务网格进阶配置
 description: '# 49 - 服务网格进阶配置'
+summary: '# 49 - 服务网格进阶配置'
 category: extensions
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - envoy
 - cilium
 - kafka
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -53,8 +56,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
-created: "2026-05-23"
 ---
+
+
 
 # 49 - 服务网格进阶配置
 

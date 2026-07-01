@@ -1,6 +1,7 @@
 ---
 title: 应用安全清单
 description: '# 应用安全清单'
+summary: '# 应用安全清单'
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - terminology
 - rbac
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # 应用安全清单
 

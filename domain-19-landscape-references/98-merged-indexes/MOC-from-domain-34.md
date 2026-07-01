@@ -1,11 +1,14 @@
 ---
 title: domain-19-landscape-references MOC
 description: domain-19-landscape-references 知识域导航页，覆盖 5 篇文档
+summary: domain-19-landscape-references 知识域导航页，覆盖 5 篇文档
 category: moc
 tags:
 - k8s
 - moc
 - cncf
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cncf-ecosystem
-created: "2026-05-23"
 ---
+
+
 
 # domain-19-landscape-references MOC
 

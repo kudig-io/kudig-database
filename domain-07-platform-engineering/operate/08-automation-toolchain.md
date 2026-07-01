@@ -1,6 +1,7 @@
 ---
 title: 运维自动化工具链 (Operations Automation Toolchain)
 description: '# 运维自动化工具链 (Operations Automation Toolchain)'
+summary: '# 运维自动化工具链 (Operations Automation Toolchain)'
 category: platform-ops
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - containerd
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -62,8 +65,9 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
-created: "2026-05-23"
 ---
+
+
 
 # 运维自动化工具链 (Operations Automation Toolchain)
 

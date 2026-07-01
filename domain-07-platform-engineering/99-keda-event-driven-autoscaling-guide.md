@@ -1,6 +1,7 @@
 ---
 title: KEDA 事件驱动自动缩放实践指南
 description: '# KEDA 事件驱动自动缩放实践指南'
+summary: '# KEDA 事件驱动自动缩放实践指南'
 category: production-operations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - mysql
 - postgresql
 - kafka
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -47,8 +50,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[KEDA|KEDA]] 事件驱动自动缩放实践指南
 

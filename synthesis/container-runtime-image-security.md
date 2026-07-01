@@ -1,5 +1,6 @@
 ---
 title: 容器运行时 × 镜像安全
+summary: 容器运行时与镜像安全的交叉：从镜像构建、分发到执行的端到端供应链防护。
 category: synthesis
 tags:
 - container-runtime
@@ -7,23 +8,24 @@ tags:
 - image-security
 - supply-chain
 - security
+tier: supporting
 sources:
 - domain-13-container-runtime/03-containerd-cri-o/01-containerd-production-operations.md
 - domain-13-container-runtime/03-containerd-cri-o/02-cri-o-production-guide.md
 - domain-13-container-runtime/04-image-build/01-buildkit-production-guide.md
 - domain-05-security-compliance/05-supply-chain/README.md
-created: "2026-06-26"
-updated: "2026-06-26"
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06-26
-summary: "容器运行时与镜像安全的交叉：从镜像构建、分发到执行的端到端供应链防护。"
 provenance:
   extracted: 0.25
   inferred: 0.65
   ambiguous: 0.1
 base_confidence: 0.74
 lifecycle: draft
-lifecycle_changed: "2026-06-26"
+lifecycle_changed: '2026-06-26'
 ---
+
 
 # 容器运行时 × 镜像安全
 

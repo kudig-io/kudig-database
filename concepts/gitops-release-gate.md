@@ -1,6 +1,7 @@
 ---
 title: GitOps 与发布门控的协同
 description: 代码提交 → CI 构建 → 安全扫描 → 单元测试 → 集成测试
+summary: 代码提交 → CI 构建 → 安全扫描 → 单元测试 → 集成测试
 category: synthesis
 tags:
 - gitops
@@ -8,6 +9,8 @@ tags:
 - argocd
 - sre
 - ci-cd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,11 +25,12 @@ trigger_keywords:
 - 与发布门控的协同
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/gitops.md]]"
-    type: related_to
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/gitops.md]]'
+  type: related_to
 ---
+
+
 
 # [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|GitOps]] 与发布门控的协同
 

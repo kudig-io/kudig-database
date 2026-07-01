@@ -1,6 +1,7 @@
 ---
 title: Flagger
-description: 'Flagger 是 Weaveworks 开源的渐进式发布工具，自动化金丝雀发布、A/B 测试和蓝绿部署。它集成 Prometheus、Istio、Linker...'
+description: Flagger 是 Weaveworks 开源的渐进式发布工具，自动化金丝雀发布、A/B 测试和蓝绿部署。它集成 Prometheus、Istio、Linker...
+summary: Flagger 是 Weaveworks 开源的渐进式发布工具，自动化金丝雀发布、A/B 测试和蓝绿部署。它集成 Prometheus、Istio、Linker...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - flagger
 - canary
 - progressive-delivery
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Flagger
 

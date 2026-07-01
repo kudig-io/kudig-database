@@ -1,6 +1,7 @@
 ---
 title: 07 - 监控和指标表
 description: 'title: 07 - 监控和指标表'
+summary: 'title: 07 - 监控和指标表'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - coredns
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - observability-basics
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 07 - 监控和指标表
 description: '# 07 - 监控和指标表'

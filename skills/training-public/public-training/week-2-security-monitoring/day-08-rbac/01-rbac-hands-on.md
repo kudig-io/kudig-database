@@ -1,6 +1,7 @@
 ---
 title: 'Day 8: K8s RBAC 权限配置实操'
 description: '# Day 8: K8s RBAC 权限配置实操'
+summary: '# Day 8: K8s RBAC 权限配置实操'
 category: learning
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - kubelet
 - rbac
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 8: K8s RBAC 权限配置实操
 

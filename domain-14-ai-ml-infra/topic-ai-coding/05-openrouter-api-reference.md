@@ -1,6 +1,7 @@
 ---
 title: API 参考与请求/响应规范
 description: '## 概述'
+summary: '## 概述'
 category: ai-coding
 tags:
 - ai
@@ -8,6 +9,8 @@ tags:
 - copilot
 - code-generation
 - gateway
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # API 参考与请求/响应规范
 

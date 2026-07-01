@@ -1,6 +1,7 @@
 ---
 title: GPU 与设备插件故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: GPU 与设备插件故障排查指南'
+summary: 'title: GPU 与设备插件故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - gpu
 - cuda
 - nvidia
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -39,8 +42,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: GPU 与设备插件故障排查指南
 description: '# GPU 与设备插件故障排查指南'
@@ -375,7 +379,7 @@ kubectl get pods -n gpu-operator -o wide
 kubectl get nodes -o json | jq '.items[] | {name: .metadata.name, capacity: .status.capacity, allocatable: .status.allocatable}' | grep -A5 -B1 gpu
 
 # 详细查看单个节点
-kubectl describe node <node-name> | grep -A10 "Capacity\|Allocatable\|Allocated"
+kubectl describe node <node-name> | grep -A10 "Capacity|Allocatable|Allocated"
 
 # 查看 GPU 资源分配情况
 kubectl get pods -A -o json | jq '.items[] | select(.spec.containers[].resources.limits."nvidia.com/gpu" != null) | {namespace: .metadata.namespace, name: .metadata.name, node: .spec.nodeName, gpu: .spec.containers[].resources.limits."nvidia.com/gpu"}'
@@ -419,7 +423,7 @@ cat /etc/docker/daemon.json | jq '.runtimes'
 
 ```bash
 # kubelet 设备插件相关日志
-journalctl -u kubelet | grep -i "device\|plugin\|gpu\|nvidia" | tail -50
+journalctl -u kubelet | grep -i "device|plugin|gpu|nvidia" | tail -50
 
 # 设备分配日志
 journalctl -u kubelet | grep -i "allocate" | tail -20
@@ -563,13 +567,13 @@ spec:
 
 ```bash
 # 步骤 1: 查看 kubelet 日志定位具体错误
-journalctl -u kubelet | grep -i "allocate\|device" | tail -50
+journalctl -u kubelet | grep -i "allocate|device" | tail -50
 
 # 步骤 2: 检查设备插件健康状态
-kubectl logs -n kube-system -l app=nvidia-device-plugin-daemonset | grep -i "health\|error\|fail"
+kubectl logs -n kube-system -l app=nvidia-device-plugin-daemonset | grep -i "health|error|fail"
 
 # 步骤 3: 在节点上检查 GPU 设备状态
-nvidia-smi -q | grep -A5 "GPU Current Temp\|Power Draw\|ECC"
+nvidia-smi -q | grep -A5 "GPU Current Temp|Power Draw|ECC"
 
 # 步骤 4: 检查设备文件权限
 ls -la /dev/nvidia*
@@ -579,7 +583,7 @@ ls -la /dev/nvidia*
 nvidia-smi --gpu-reset -i 0  # 危险操作，会影响使用该 GPU 的所有进程
 
 # b. 检查硬件问题
-nvidia-smi -q | grep -i "retired\|error"
+nvidia-smi -q | grep -i "retired|error"
 
 # 步骤 6: 重启设备插件刷新设备列表
 kubectl delete pods -n kube-system -l app=nvidia-device-plugin-daemonset

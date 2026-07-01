@@ -1,6 +1,7 @@
 ---
 title: 13-Kubernetes成本治理
 description: '- Kubernetes的最佳实践是什么？'
+summary: '- Kubernetes的最佳实践是什么？'
 category: general
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - pdb
 - operator
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

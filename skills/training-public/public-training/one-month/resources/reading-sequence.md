@@ -1,6 +1,7 @@
 ---
 title: 阅读顺序指南
 description: '# 阅读顺序指南'
+summary: '# 阅读顺序指南'
 category: learning
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - ingress
 - rbac
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-18
 difficulty: beginner
 reading_level: beginner
@@ -44,8 +47,9 @@ related_domains:
 related_topics:
 - knowledge-map
 - commands-cheatsheet
-created: "2026-05-23"
 ---
+
+
 
 # 阅读顺序指南
 

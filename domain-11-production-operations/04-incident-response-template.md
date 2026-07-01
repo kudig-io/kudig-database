@@ -1,13 +1,25 @@
 ---
-title: "事故响应模板与流程规范"
+title: 事故响应模板与流程规范
+summary: 事故响应模板与流程规范：生产事故不可避免，但事故响应的质量决定了业务恢复速度和客户信任度。本文档提供标准化的事故响应流程、角色定义和沟通模板，帮助远程顾问指导客户建立高效的事故响应机制。
 category: domain-11
-tags: ["domain-11", "事故响应", "incident", "MTTR", "复盘", "Commander", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- domain-11
+- 事故响应
+- incident
+- MTTR
+- 复盘
+- Commander
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # 事故响应模板与流程规范
 
@@ -126,3 +138,7 @@ timeline:
 - [[domain-11-production-operations/02-change-management-guide.md|change-management-guide]] — 变更管理指南
 - [[domain-11-production-operations/01-production-sre-daily-ops.md|production-sre-daily-ops]] — 日常巡检与值班手册
 - [[node-notready]] — 节点异常排查
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

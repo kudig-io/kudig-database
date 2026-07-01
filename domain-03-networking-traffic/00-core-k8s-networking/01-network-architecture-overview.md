@@ -1,6 +1,7 @@
 ---
 title: 网络核心组件
 description: 'title: 网络核心组件'
+summary: 'title: 网络核心组件'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - istio
 - envoy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -40,8 +43,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 网络核心组件
 description: '# 网络核心组件'
@@ -1433,11 +1437,11 @@ echo "[8/8] 生成诊断报告..."
   echo
   
   echo "=== 关键发现 ==="
-  if [ "$(grep -c "SERVFAIL\|NXDOMAIN" ${LOG_DIR}/dns-check.log 2>/dev/null || echo 0)" -gt 0 ]; then
+  if [ "$(grep -c "SERVFAIL|NXDOMAIN" ${LOG_DIR}/dns-check.log 2>/dev/null || echo 0)" -gt 0 ]; then
     echo "⚠️  DNS解析存在问题"
   fi
   
-  if [ "$(grep -c "CrashLoopBackOff\|Error" ${LOG_DIR}/basic-check.log 2>/dev/null || echo 0)" -gt 5 ]; then
+  if [ "$(grep -c "CrashLoopBackOff|Error" ${LOG_DIR}/basic-check.log 2>/dev/null || echo 0)" -gt 5 ]; then
     echo "⚠️  大量Pod处于异常状态"
   fi
   
@@ -1558,5 +1562,7 @@ echo "3. Service问题: 检查Endpoints和后端Pod状态"
 - 03-cni-plugins-comparison
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]

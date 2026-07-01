@@ -1,6 +1,7 @@
 ---
 title: kudig-database 内容深度评估 + 修复进展 (reports)
 description: '# kudig-database 内容深度评估 + 修复进展'
+summary: '# kudig-database 内容深度评估 + 修复进展'
 category: general
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - flux
 - gateway
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 # kudig-database 内容深度评估 + 修复进展
 

@@ -1,6 +1,7 @@
 ---
 title: 第一课：Kubernetes 入门 [fundamentals]
 description: 'description: • 如果你有 100 台服务器，容器该部署到哪台？'
+summary: 'description: • 如果你有 100 台服务器，容器该部署到哪台？'
 category: learning
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - docker
 - mysql
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 第一课：[[Kubernetes|Kubernetes]] 入门

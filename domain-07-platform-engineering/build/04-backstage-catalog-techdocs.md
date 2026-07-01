@@ -1,6 +1,7 @@
 ---
 title: Backstage 软件目录与 TechDocs
 description: 'description: 2. [catalog-info.yaml 完整指南](#2-catalog-infoyaml-完整指南)'
+summary: 'description: 2. [catalog-info.yaml 完整指南](#2-catalog-infoyaml-完整指南)'
 category: general
 tags:
 - platform
@@ -13,6 +14,8 @@ tags:
 - harbor
 - redis
 - postgresql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - gitops-basics
 - kafka-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Backstage|Backstage]] 软件目录与 TechDocs
 description: 2. [catalog-info.yaml 完整指南](#2-catalog-infoyaml-完整指南)

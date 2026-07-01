@@ -1,24 +1,28 @@
 ---
-title: "监控告警问题 — 远程顾问对话脚本"
-category: "troubleshooting"
-tags: ["observability", "remote-consultant"]
-created: "2026-05-23"
-updated: "2026-05-23"
+title: 监控告警问题 — 远程顾问对话脚本
+summary: 监控告警问题的远程顾问对话脚本，覆盖Prometheus、Grafana、Alertmanager排查。
+category: troubleshooting
+tags:
+- observability
+- remote-consultant
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
-dialogue_id: "DIALOGUE-SKILL-MON-001"
-skill_id: "SKILL-MON-001"
-version: "1.0.0"
-role: "remote-consultant"
-language: "zh"
-summary: "监控告警问题的远程顾问对话脚本，覆盖Prometheus、Grafana、Alertmanager排查。"
+dialogue_id: DIALOGUE-SKILL-MON-001
+skill_id: SKILL-MON-001
+version: 1.0.0
+role: remote-consultant
+language: zh
 relationships:
-  - target: "[[entities/deployment.md]]"
-    type: uses
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md]]"
-    type: uses
+- target: '[[entities/deployment.md]]'
+  type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md]]'
+  type: uses
 ---
+
 
 # K8s Monitoring & Alerting Failure 诊断 — 远程顾问对话脚本
 
@@ -185,7 +189,7 @@ relationships:
 >    **如果是 Deployment 部署** → `kubectl get deployment <prometheus-deploy> -n monitoring -o yaml | grep -A 10 resources`
 > 3. 检查 TSDB 状态（如果 Pod 能启动）：`kubectl port-forward -n monitoring svc/prometheus-k8s 9090:9090 &`
 >    **如果无法 port-forward** → `kubectl exec <prometheus-pod> -n monitoring -- wget -qO- http://localhost:9090/api/v1/status/tsdb`
->    **如果 wget 也没有** → `kubectl logs <prometheus-pod> -n monitoring --tail=30 | grep -i "tsdb\|compaction\|retention"`
+>    **如果 wget 也没有** → `kubectl logs <prometheus-pod> -n monitoring --tail=30 | grep -i "tsdb|compaction|retention"`
 > 请告诉我存储使用百分比、资源限制值、TSDB 是否有异常。
 
 **修复方案**：
@@ -207,7 +211,7 @@ relationships:
 **顾问指令**：
 > Prometheus 因配置错误无法启动。需要修复 scrape 配置或规则配置。
 >
-> 1. 查看具体错误：`kubectl logs <prometheus-pod> -n monitoring --previous --tail=50 | grep -i "error\|failed\|invalid"
+> 1. 查看具体错误：`kubectl logs <prometheus-pod> -n monitoring --previous --tail=50 | grep -i "error|failed|invalid"
 >    **如果无法执行** → `kubectl get events -n monitoring --field-selector reason=Failed | tail -20`
 > 2. 检查 Prometheus 配置 ConfigMap/Secret：`kubectl get configmap -n monitoring | grep prom`
 >    **如果无 configmap** → `kubectl get secret -n monitoring | grep prom`
@@ -426,7 +430,7 @@ relationships:
 > Prometheus 扩容后仍内存过高，可能存在高基数指标（high cardinality）。
 >
 > 1. 检查 TSDB  head series：`kubectl exec <prometheus-pod> -n monitoring -- wget -qO- http://localhost:9090/api/v1/status/tsdb | jq '.data.headStats'`
->    **如果无法执行** → `kubectl logs <prometheus-pod> -n monitoring --tail=50 | grep -i "head\|series\|memory"`
+>    **如果无法执行** → `kubectl logs <prometheus-pod> -n monitoring --tail=50 | grep -i "head|series|memory"`
 > 2. 查看高基数指标：`kubectl port-forward -n monitoring svc/prometheus-k8s 9090:9090 &`
 >    访问 http://localhost:9090/tsdb-status
 >    **如果无法 port-forward** → `kubectl exec <prometheus-pod> -n monitoring -- wget -qO- http://localhost:9090/api/v1/label/__name__/values | jq '.data[]' | wc -l`
@@ -537,7 +541,7 @@ relationships:
 >
 > 1. 检查目标是否启用了认证：`kubectl get pod <target-pod> -n <target-namespace> -o yaml | grep -A 5 args`
 >    **如果无法执行** → `kubectl describe pod <target-pod> -n <target-namespace> | grep -A 10 "Containers:"`
-> 2. 检查 Prometheus scrape 配置中的认证：`kubectl get configmap <prometheus-config> -n monitoring -o yaml | grep -A 10 "bearer_token\|basic_auth\|tls_config"`
+> 2. 检查 Prometheus scrape 配置中的认证：`kubectl get configmap <prometheus-config> -n monitoring -o yaml | grep -A 10 "bearer_token|basic_auth|tls_config"`
 > 3. 检查 RBAC：目标是否有 ServiceAccount 和权限
 > 请把目标 Pod 的启动参数、Prometheus 的认证配置贴给我。
 

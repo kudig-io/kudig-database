@@ -1,6 +1,7 @@
 ---
 title: Koordinator 增强调度
-description: 'Koordinator 是阿里巴巴开源的 CNCF Sandbox 项目，提供 Kubernetes 增强调度和资源编排能力，专注于混部（Colocation）...'
+description: Koordinator 是阿里巴巴开源的 CNCF Sandbox 项目，提供 Kubernetes 增强调度和资源编排能力，专注于混部（Colocation）...
+summary: Koordinator 是阿里巴巴开源的 CNCF Sandbox 项目，提供 Kubernetes 增强调度和资源编排能力，专注于混部（Colocation）...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - scheduling
 - qos
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Koordinator 增强调度（Koordinator）
 

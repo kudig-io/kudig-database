@@ -1,6 +1,7 @@
 ---
 title: 工单回复话术：确认收到
 description: 面向阿里云专有云 K8s 运维工单智能体的确认收到话术库，提供 5-8 个不同场景的变体模板。
+summary: 面向阿里云专有云 K8s 运维工单智能体的确认收到话术库，提供 5-8 个不同场景的变体模板。
 category: domain-11-production-operations
 tags:
 - reply-templates
@@ -11,6 +12,9 @@ tags:
 - alicloud
 - apsara-stack
 - communication
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -41,9 +45,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # 工单回复话术：确认收到
 

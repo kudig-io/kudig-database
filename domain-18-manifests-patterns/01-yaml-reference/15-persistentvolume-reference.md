@@ -1,6 +1,7 @@
 ---
 title: 15 - PersistentVolume YAML 配置参考
 description: 'title: 15 - PersistentVolume YAML 配置参考'
+summary: 'title: 15 - PersistentVolume YAML 配置参考'
 category: general
 tags:
 - yaml
@@ -13,6 +14,8 @@ tags:
 - postgresql
 - statefulset
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 15 - PersistentVolume YAML 配置参考
 description: '# 15 - PersistentVolume YAML 配置参考'
@@ -1822,6 +1826,8 @@ spec:
 - 17-storageclass-volumesnapshot
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]

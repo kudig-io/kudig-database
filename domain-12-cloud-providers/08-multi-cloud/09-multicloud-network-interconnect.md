@@ -1,6 +1,7 @@
 ---
 title: 多云网络互联深度实践
 description: '# 多云网络互联深度实践'
+summary: '# 多云网络互联深度实践'
 category: multi-cloud-hybrid
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - redis
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -48,8 +51,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 多云网络互联深度实践
 

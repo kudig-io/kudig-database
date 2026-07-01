@@ -1,6 +1,7 @@
 ---
 title: DNS for Services and Pods
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - redis
 - statefulset
 - webhook
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,9 +36,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - redis-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # DNS for Services and [[Pods|Pods]]
 

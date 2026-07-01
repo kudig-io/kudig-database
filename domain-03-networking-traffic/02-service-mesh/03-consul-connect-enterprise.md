@@ -1,6 +1,7 @@
 ---
 title: Consul Connect 企业级服务网格管理
 description: '# Consul Connect 企业级服务网格管理'
+summary: '# Consul Connect 企业级服务网格管理'
 category: service-mesh-microservices
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - coredns
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -57,8 +60,9 @@ cross_refs:
 - type: domain
   path: ../domain-05-security-compliance/
   label: '相关知识域: domain-05-security-compliance'
-created: "2026-05-23"
 ---
+
+
 
 # Consul Connect 企业级服务网格管理
 

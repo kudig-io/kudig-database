@@ -1,6 +1,9 @@
 ---
 title: Istio (entities)
-description: '- [[skills/k8s-network-security-guide.md|k8s-network-security-guide]] — Kubernetes 网络安全最佳实践'
+description: '- [[skills/k8s-network-security-guide.md|k8s-network-security-guide]]
+  — Kubernetes 网络安全最佳实践'
+summary: '- [[skills/k8s-network-security-guide.md|k8s-network-security-guide]] —
+  Kubernetes 网络安全最佳实践'
 category: entities
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - gateway
 - helm
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 # Istio
 

@@ -1,6 +1,7 @@
 ---
 title: Pod 知识图谱索引
 description: '## 知识图谱'
+summary: '## 知识图谱'
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - hpa
 - vpa
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Pod 知识图谱索引
 

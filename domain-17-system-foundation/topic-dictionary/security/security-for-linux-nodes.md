@@ -1,11 +1,14 @@
 ---
 title: Linux 节点安全
 description: '# Linux 节点安全'
+summary: '# Linux 节点安全'
 category: dictionary
 tags:
 - k8s
 - glossary
 - terminology
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # Linux 节点安全
 

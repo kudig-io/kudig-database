@@ -1,12 +1,15 @@
 ---
 title: 投票门
-description: '投票门（Voting Gate）是故障树中的逻辑门，表示 n 个输入事件中至少 k 个发生时输出事件才发生。它是 AND 门和 OR 门的泛化形式。...'
+description: 投票门（Voting Gate）是故障树中的逻辑门，表示 n 个输入事件中至少 k 个发生时输出事件才发生。它是 AND 门和 OR 门的泛化形式。...
+summary: 投票门（Voting Gate）是故障树中的逻辑门，表示 n 个输入事件中至少 k 个发生时输出事件才发生。它是 AND 门和 OR 门的泛化形式。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - votinggate
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 投票门
 

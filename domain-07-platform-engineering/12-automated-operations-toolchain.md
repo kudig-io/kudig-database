@@ -1,6 +1,7 @@
 ---
 title: 12-自动化运维工具链
 description: 'title: 12-自动化运维工具链'
+summary: 'title: 12-自动化运维工具链'
 category: general
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - containerd
 - docker
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - iac-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 12-自动化运维工具链
 description: '# 12-自动化运维工具链'

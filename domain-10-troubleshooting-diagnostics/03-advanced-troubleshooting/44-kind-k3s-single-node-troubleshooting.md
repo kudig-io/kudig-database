@@ -1,6 +1,7 @@
 ---
 title: Kind / K3s 单机集群故障排查
 description: '# Kind / K3s 单机集群故障排查'
+summary: '# Kind / K3s 单机集群故障排查'
 category: troubleshooting
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - flannel
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -60,8 +63,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md
   label: '故障树: node'
-created: "2026-05-23"
 ---
+
+
 
 # Kind / [[k3s|K3s]] 单机集群故障排查
 

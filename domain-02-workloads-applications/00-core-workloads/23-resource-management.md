@@ -1,6 +1,7 @@
 ---
 title: 16 - 资源管理表
 description: 'title: 16 - 资源管理表'
+summary: 'title: 16 - 资源管理表'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - pdb
 - statefulset
 - daemonset
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - pod-lifecycle
 - prometheus-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 16 - 资源管理表
 description: '# 16 - 资源管理表'

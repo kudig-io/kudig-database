@@ -1,6 +1,7 @@
 ---
 title: 01 - 本机单机 Demo 部署 [best-practices]
 description: 'title: 01 - 本机单机 Demo 部署'
+summary: 'title: 01 - 本机单机 Demo 部署'
 category: general
 tags:
 - deployment
@@ -13,6 +14,8 @@ tags:
 - containerd
 - docker
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 01 - 本机单机 Demo 部署
 description: '# 01 - 本机单机 Demo 部署'

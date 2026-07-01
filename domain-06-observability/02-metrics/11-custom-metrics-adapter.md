@@ -1,6 +1,7 @@
 ---
 title: 07 - 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension)
 description: 本文档从生产环境运维专家视角，深入解析 Kubernetes 自定义指标适配器体系，涵盖 Prometheus Adapter、外部指标集成、HPA高级配置、指标管道优化等核心内容，结合大规模集群实践经验，为企业构建灵活、高效的自动扩缩容系统提供完整指导。
+summary: 本文档从生产环境运维专家视角，深入解析 Kubernetes 自定义指标适配器体系，涵盖 Prometheus Adapter、外部指标集成、HPA高级配置、指标管道优化等核心内容，结合大规模集群实践经验，为企业构建灵活、高效的自动扩缩容系统提供完整指导。
 category: observability
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - hpa
 - job
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -63,8 +66,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # 07 - 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension)
 

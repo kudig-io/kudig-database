@@ -1,6 +1,7 @@
 ---
 title: Pulumi Enterprise Infrastructure as Code Platform
 description: '- pulumi-enterprise-iac的最佳实践'
+summary: '- pulumi-enterprise-iac的最佳实践'
 category: general
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - operator
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - iac-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

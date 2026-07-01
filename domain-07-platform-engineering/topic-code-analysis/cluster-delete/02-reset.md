@@ -1,6 +1,9 @@
 ---
 title: kubeadm reset 源码分析 (topic-code-analysis)
-description: '| 配置加载 | `cmd/kubeadm/app/util/config/initconfiguration.go` | ResetConfiguration 加载 |'
+description: '| 配置加载 | `cmd/kubeadm/app/util/config/initconfiguration.go` | ResetConfiguration
+  加载 |'
+summary: '| 配置加载 | `cmd/kubeadm/app/util/config/initconfiguration.go` | ResetConfiguration
+  加载 |'
 category: general
 tags:
 - reference
@@ -9,6 +12,8 @@ tags:
 - scheduler
 - controller-manager
 - containerd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: kubeadm reset 源码分析
 category: cluster-delete
@@ -554,6 +560,8 @@ systemctl daemon-reload
 - [`InteractivelyConfirmAction`](01-overview.md) — 交互式确认
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[scripts/man/INSTALL.md|INSTALL]]

@@ -1,6 +1,7 @@
 ---
 title: 密钥管理深度指南
 description: '# 密钥管理深度指南'
+summary: '# 密钥管理深度指南'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - networkpolicy
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,8 +33,9 @@ prerequisites:
 - cloud-provider-basics
 - etcd-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 # 密钥管理深度指南
 

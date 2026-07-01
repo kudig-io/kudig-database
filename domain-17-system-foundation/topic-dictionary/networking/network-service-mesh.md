@@ -1,6 +1,7 @@
 ---
 title: Network Service Mesh
-description: 'Network Service Mesh（NSM）是 CNCF Sandbox 项目，使用服务网格的概念来管理网络服务（L2/L3 VPN、防火墙、负载均衡等）...'
+description: Network Service Mesh（NSM）是 CNCF Sandbox 项目，使用服务网格的概念来管理网络服务（L2/L3 VPN、防火墙、负载均衡等）...
+summary: Network Service Mesh（NSM）是 CNCF Sandbox 项目，使用服务网格的概念来管理网络服务（L2/L3 VPN、防火墙、负载均衡等）...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - networking
 - multi-cluster
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Network Service Mesh（NSM）
 

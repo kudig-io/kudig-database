@@ -1,6 +1,7 @@
 ---
 title: 04 - 审计日志与合规性管理
 description: '# 04 - 审计日志与合规性管理'
+summary: '# 04 - 审计日志与合规性管理'
 category: security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - elasticsearch
 - job
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -53,8 +56,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # 04 - 审计日志与合规性管理
 

@@ -1,5 +1,7 @@
 ---
 title: GPU 调度与 AI 工作负载
+summary: GPU 调度与 AI 工作负载：AI/ML 工作负载对 entities/kubernetes.md 调度提出了独特挑战：GPU 是昂贵的异构资源，推理和训练的工作负载特征截然不同，而传统的
+  CPU 调度策略（如基于 request/limit 的 Bin Packing）无法有效处理 GPU 的"不可分性"和"时间共享"需求。本页连接 domain-02-workloads-applica...
 category: synthesis
 tags:
 - k8s
@@ -14,6 +16,7 @@ tags:
 - training
 - kserve
 - time-slicing
+tier: supporting
 sources:
 - domain-02-workloads-applications/00-core-workloads
 - domain-14-ai-ml-infra/01-ai-infra
@@ -22,13 +25,15 @@ created: 2026-05-21 14:00:00+00:00
 updated: 2026-05-21 14:00:00+00:00
 last_updated: 2026-05-21 14:00:00+00:00
 relationships:
-  - target: "[[skills/training-public/inner-training/week-3-node-workload/checkpoint.md]]"
-    type: related_to
-  - target: "[[entities/kubelet.md]]"
-    type: uses
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
+- target: '[[skills/training-public/inner-training/week-3-node-workload/checkpoint.md]]'
+  type: related_to
+- target: '[[entities/kubelet.md]]'
+  type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
 ---
+
+
 
 # GPU 调度与 AI 工作负载
 

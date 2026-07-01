@@ -1,6 +1,7 @@
 ---
 title: K8s 专用工作负载术语参考
-description: 'description: ''\| **适合读者** \| ML工程师入门K8s → 平台工程师管理AI工作... |'
+description: 'description: ''| **适合读者** | ML工程师入门K8s → 平台工程师管理AI工作... |'
+summary: 'description: ''| **适合读者** | ML工程师入门K8s → 平台工程师管理AI工作... |'
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - opa
 - ceph
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8s 专用工作负载术语参考
 
@@ -50,7 +54,7 @@ created: "2026-05-23"
 | 术语 | 英文名 | 说明 |
 |------|--------|------|
 | **08 - AI/ML基础设施专业词典** | Ai Infra Specialist | title: 08 - AI/ML基础设施专业词典
-description: '\| **适合读者** \| ML工程师入门K8s → 平台工程师管理AI工作... |
+description: '| **适合读者** | ML工程师入门K8s → 平台工程师管理AI工作... |
 | **GPU 资源管理与分区技术** | Gpu Resource Management And Partitioning | 在 Kubernetes 上运行 AI/ML 工作负载时，GPU 是最昂贵且最稀缺的资源 |
 | **在 Kubernetes 中运行 Windows 容器指南** | Guide For Running Windows Containers In Kubernetes | 本指南提供了在 Kubernetes 集群中运行 Windows 容器的实操步骤和注意事项 |
 | **高性能计算与生物信息学（HPC & Bioinformatics）** | Hpc And Bioinformatics | **高性能计算（HPC, High-Performance Computing）** 和 **生物信息学（Bioinformatics）** 是计算密集型... |

@@ -1,6 +1,7 @@
 ---
 title: 网络安全策略与零信任架构
 description: 深入解析 K8s NetworkPolicy 的配置与最佳实践、Cilium Network Policy、零信任架构、入侵检测与微分段安全策略
+summary: 深入解析 K8s NetworkPolicy 的配置与最佳实践、Cilium Network Policy、零信任架构、入侵检测与微分段安全策略
 category: domain-05-security-compliance
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - istio
 - flannel
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -70,8 +73,9 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta.md
   type: fta
   desc: 网络策略故障树
-created: "2026-05-23"
 ---
+
+
 
 # 02 - 网络安全策略与零信任架构
 

@@ -1,6 +1,7 @@
 ---
 title: 5 分钟快速上手指南
 description: '# 5 分钟快速上手指南'
+summary: '# 5 分钟快速上手指南'
 category: general
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 - 分钟快速上手指南
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 5 分钟快速上手指南
 

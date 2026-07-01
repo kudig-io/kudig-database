@@ -1,6 +1,7 @@
 ---
 title: Multi-Tenancy Isolation
 description: '- [[concepts/服务网格 x 零信任安全.md|服务网格 x 零信任安全]] — synthesis'
+summary: '- [[concepts/服务网格 x 零信任安全.md|服务网格 x 零信任安全]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - networkpolicy
 - rag
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # Multi-Tenancy Isolation
 

@@ -1,6 +1,7 @@
 ---
 title: AI/ML 工作负载的可观测性
 description: '## GPU 监控'
+summary: '## GPU 监控'
 category: synthesis
 tags:
 - ai-ml
@@ -9,6 +10,8 @@ tags:
 - mLOps
 - metrics
 - gpu
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,13 +28,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[skills/best-practices/best-practices/observability/monitoring.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-dictionary/observability/observability.md]]"
-    type: related_to
+- target: '[[skills/best-practices/best-practices/observability/monitoring.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-dictionary/observability/observability.md]]'
+  type: related_to
 ---
+
+
 
 # AI/ML 工作负载的可观测性
 

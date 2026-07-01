@@ -1,6 +1,7 @@
 ---
 title: HA 集群删除注意事项 (topic-code-analysis)
 description: '## 概述'
+summary: '## 概述'
 category: general
 tags:
 - reference
@@ -10,6 +11,8 @@ tags:
 - scheduler
 - controller-manager
 - daemonset
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: HA 集群删除注意事项
 category: cluster-delete
@@ -481,6 +485,8 @@ kubectl delete configmap -n kube-system kubeadm-config
 - [kubeadm reset 源码](https://github.com/kubernetes/kubernetes/blob/master/cmd/kubeadm/app/cmd/reset.go)
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[scripts/man/INSTALL.md|INSTALL]]

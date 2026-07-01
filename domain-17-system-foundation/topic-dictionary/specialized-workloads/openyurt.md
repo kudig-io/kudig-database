@@ -1,6 +1,7 @@
 ---
 title: OpenYurt 边缘计算
-description: 'OpenYurt 是阿里巴巴开源的 CNCF Sandbox 项目，将 Kubernetes 能力扩展到边缘计算场景，解决云边网络不可靠、边缘自治和大规模边缘节...'
+description: OpenYurt 是阿里巴巴开源的 CNCF Sandbox 项目，将 Kubernetes 能力扩展到边缘计算场景，解决云边网络不可靠、边缘自治和大规模边缘节...
+summary: OpenYurt 是阿里巴巴开源的 CNCF Sandbox 项目，将 Kubernetes 能力扩展到边缘计算场景，解决云边网络不可靠、边缘自治和大规模边缘节...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - specialized-workloads
 - edge
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # OpenYurt 边缘计算（OpenYurt）
 

@@ -1,6 +1,7 @@
 ---
 title: Sysdig企业级容器安全深度实践
 description: '# Sysdig企业级容器安全深度实践'
+summary: '# Sysdig企业级容器安全深度实践'
 category: cloud-native-security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - calico
 - containerd
 - docker
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +54,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # Sysdig企业级容器安全深度实践
 

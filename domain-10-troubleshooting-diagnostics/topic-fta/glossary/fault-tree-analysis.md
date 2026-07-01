@@ -1,12 +1,15 @@
 ---
 title: 故障树分析
-description: '故障树分析（FTA）是一种自顶向下的演绎式系统安全分析方法。它通过逻辑门将系统级故障（顶事件）分解为底层基本事件的组合，用于识别导致系统故障的根本原因和传播路径...'
+description: 故障树分析（FTA）是一种自顶向下的演绎式系统安全分析方法。它通过逻辑门将系统级故障（顶事件）分解为底层基本事件的组合，用于识别导致系统故障的根本原因和传播路径...
+summary: 故障树分析（FTA）是一种自顶向下的演绎式系统安全分析方法。它通过逻辑门将系统级故障（顶事件）分解为底层基本事件的组合，用于识别导致系统故障的根本原因和传播路径...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - faulttreeanalysis
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 故障树分析
 

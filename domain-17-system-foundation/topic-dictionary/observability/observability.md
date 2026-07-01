@@ -1,6 +1,7 @@
 ---
 title: 可观测性（Observability）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - jaeger
+tier: core
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,9 +37,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 可观测性（Observability）
 

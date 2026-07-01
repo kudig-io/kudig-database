@@ -1,6 +1,7 @@
 ---
 title: KUDIG 错误码 → FTA 映射
 description: '| 错误状态 | 含义 | FTA | 快速排查 |'
+summary: '| 错误状态 | 含义 | FTA | 快速排查 |'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - ingress
 - gateway
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: KUDIG 错误码 → FTA 映射

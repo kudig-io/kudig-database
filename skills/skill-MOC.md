@@ -1,6 +1,7 @@
 ---
 title: topic-skills MOC (skills)
 description: '### 专题定位'
+summary: '### 专题定位'
 category: skills
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - argocd
 - rbac
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # topic-skills MOC
 

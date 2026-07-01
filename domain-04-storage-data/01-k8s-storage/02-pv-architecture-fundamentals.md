@@ -1,6 +1,7 @@
 ---
 title: PV/PVC 核心概念与企业级实践
 description: 深入解析 PV/PVC 的核心概念、绑定机制、回收策略、扩缩容、跨命名空间共享、以及企业级生产环境配置与故障排查
+summary: 深入解析 PV/PVC 的核心概念、绑定机制、回收策略、扩缩容、跨命名空间共享、以及企业级生产环境配置与故障排查
 category: domain-04-storage-data
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - prometheus
 - opa
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -65,8 +68,9 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md
   type: fta
   desc: 持久化存储故障树
-created: "2026-05-23"
 ---
+
+
 
 # 02 - PV/PVC核心概念与企业级实践
 

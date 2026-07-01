@@ -1,6 +1,7 @@
 ---
 title: DRA（动态资源分配）故障排查指南 [domain-10-troubleshooting-diagnostics]
 description: 'title: DRA（动态资源分配）故障排查指南'
+summary: 'title: DRA（动态资源分配）故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - cilium
 - calico
 - containerd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: DRA（动态资源分配）故障排查指南
 description: '# DRA（动态资源分配）故障排查指南'

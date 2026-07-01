@@ -1,6 +1,7 @@
 ---
 title: bcc 与 bpftrace 工具链 (bcc and bpftrace Tools)
 description: 1. [bcc 项目概述与安装](#1-bcc-项目概述与安装)
+summary: 1. [bcc 项目概述与安装](#1-bcc-项目概述与安装)
 category: ebpf-technology
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - containerd
 - docker
 - mysql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -52,8 +55,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # bcc 与 bpftrace 工具链 (bcc and bpftrace Tools)
 

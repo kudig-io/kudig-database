@@ -1,6 +1,7 @@
 ---
 title: k3s 轻量级 Kubernetes
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - flannel
 - coredns
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[k3s|k3s]] 轻量级 Kubernetes
 

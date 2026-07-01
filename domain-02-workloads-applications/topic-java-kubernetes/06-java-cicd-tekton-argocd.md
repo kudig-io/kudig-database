@@ -1,6 +1,7 @@
 ---
-title: "Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南 [topic-java-kubernetes]"
+title: 'Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南 [topic-java-kubernetes]'
 description: '# Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南'
+summary: '# Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南'
 category: java-kubernetes
 tags:
 - java
@@ -13,6 +14,8 @@ tags:
 - argocd
 - docker
 - opa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -40,8 +43,9 @@ prerequisites:
 - prometheus-basics
 - gitops-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # Java CI/CD on [[Kubernetes|Kubernetes]]: Tekton + [[ArgoCD|ArgoCD]] 实践指南
 

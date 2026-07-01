@@ -1,17 +1,25 @@
 ---
-dialogue_id: "DIALOGUE-HPA-001"
-skill_id: "SKILL-HPA-001"
-role: "remote-consultant"
-language: "zh"
-severity: "medium"
-status: "reviewed"
+title: HPA 不扩容，流量高峰期服务响应慢 — 远程顾问对话脚本
+summary: HPA 不扩容，流量高峰期服务响应慢 — 远程顾问对话脚本：kubectl get hpa -n <namespace>
+category: dialogue
+tags:
+- dialogue
+- remote-consultant
+- troubleshooting
+- visibility/public
+tier: supporting
 created: 2026-05-21
 updated: 2026-05-21
+dialogue_id: DIALOGUE-HPA-001
+skill_id: SKILL-HPA-001
+role: remote-consultant
+language: zh
+severity: medium
+status: reviewed
 last_updated: 2026-05-21
-title: "HPA 不扩容，流量高峰期服务响应慢 — 远程顾问对话脚本"
-category: dialogue
-tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
+
+
 
 # HPA 不扩容，流量高峰期服务响应慢 — 远程顾问对话脚本
 
@@ -254,3 +262,7 @@ kubectl get hpa <hpa-name> -n <namespace> -w
 - [[concepts/horizontal-pod-autoscaler.md|HPA]]
 - [[concepts/metrics-server.md|Metrics Server]]
 - [[concepts/horizontal-pod-autoscaler.md|自动扩缩容策略]]
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

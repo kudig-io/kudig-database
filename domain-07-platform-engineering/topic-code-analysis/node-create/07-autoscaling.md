@@ -1,6 +1,7 @@
 ---
 title: 节点弹性伸缩 — Cluster Autoscaler 源码分析
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - reference
@@ -10,6 +11,8 @@ tags:
 - daemonset
 - job
 - gpu
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - platform-engineering-basics
 - prometheus-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 节点弹性伸缩 Cluster Autoscaler 源码分析
 description: '## 概述'
@@ -445,6 +449,8 @@ cluster_autoscaler_last_activity                          # 最后一次活动�
 | `nodeGarbageCollector` | `pkg/controller/nodelifecycle/` | 节点 GC |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

@@ -1,6 +1,7 @@
 ---
 title: 证书轮换机制源码分析 (topic-code-analysis)
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - reference
@@ -10,6 +11,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 证书轮换机制源码分析
 description: '## 概述'
@@ -505,6 +509,8 @@ kubectl get nodes
 | 证书存储 | `pkg/kubelet/certificate/store.go` |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

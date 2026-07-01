@@ -1,6 +1,7 @@
 ---
 title: GPU 资源管理与分区技术
 description: '# GPU 资源管理与分区技术'
+summary: '# GPU 资源管理与分区技术'
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - gpu
 - cuda
 - nvidia
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -27,8 +30,9 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # GPU 资源管理与分区技术
 

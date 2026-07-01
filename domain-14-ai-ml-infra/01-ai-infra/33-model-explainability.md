@@ -1,6 +1,7 @@
 ---
 title: 33 - 模型可解释性与透明度
 description: '### 1.1 可解释性全景架构'
+summary: '### 1.1 可解释性全景架构'
 category: ai-infra
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - job
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -52,8 +55,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
-created: "2026-05-23"
 ---
+
+
 
 # 33 - 模型可解释性与透明度
 

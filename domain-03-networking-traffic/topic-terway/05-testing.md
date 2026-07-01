@@ -1,6 +1,7 @@
 ---
 title: 05 - Terway 测试验证 (Testing & Validation)
 description: '## 1. Pod 网络基础验证'
+summary: '## 1. Pod 网络基础验证'
 category: terway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ingress
 - gateway
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - networking-basics
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 # 05 - Terway 测试验证 (Testing & Validation)
 
@@ -126,7 +130,7 @@ kubectl exec terway-test-1 -- ip link show
 
 ```bash
 # 若 Pod 内无 eth0 或 IP 异常，检查 Terway 日志
-kubectl logs -n kube-system -l app=terway --tail=200 | grep -i "error\|fail"
+kubectl logs -n kube-system -l app=terway --tail=200 | grep -i "error|fail"
 
 # 检查 ENI 分配状态
 kubectl exec -n kube-system $(kubectl get pods -n kube-system -l app=terway -o jsonpath='{.items[0].metadata.name}') -- terway-cli show

@@ -1,6 +1,7 @@
 ---
 title: Deployment Status 计算逻辑 (topic-code-analysis)
 description: '## 概述'
+summary: '## 概述'
 category: general
 tags:
 - reference
@@ -8,6 +9,8 @@ tags:
 - controller-manager
 - argocd
 - hpa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - gitops-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Deployment Status 计算逻辑
 category: deployment
@@ -728,6 +732,8 @@ kubectl get deployment nginx -o json | jq '.status.conditions[] | {type, lastTra
 | `checkProgressDeadline` | `pkg/controller/deployment/progress.go` | 超时检测 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

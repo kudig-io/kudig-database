@@ -1,12 +1,15 @@
 ---
 title: 发布会社交媒体文案
 description: '**kudig-database v1.0 发布: 3,346 篇 K8s 生产运维知识, 让智能体拥有专家级大脑**'
+summary: '**kudig-database v1.0 发布: 3,346 篇 K8s 生产运维知识, 让智能体拥有专家级大脑**'
 category: general
 tags:
 - k8s
 - etcd
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 发布会社交媒体文案
 

@@ -1,6 +1,7 @@
 ---
 title: Flannel Windows 节点支持
 description: Flannel 在 Windows 节点上的配置与使用，涵盖 Windows 网络模型、HDC 后端、已知限制和故障排查
+summary: Flannel 在 Windows 节点上的配置与使用，涵盖 Windows 网络模型、HDC 后端、已知限制和故障排查
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - controller-manager
 - prometheus
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -60,8 +63,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # Flannel Windows 节点支持
 

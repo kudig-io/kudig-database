@@ -1,6 +1,7 @@
 ---
 title: etcd 知识图谱索引
 description: '## 知识图谱'
+summary: '## 知识图谱'
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - istio
 - envoy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -38,8 +41,9 @@ prerequisites:
 - tls-basics
 - policy-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[etcd|etcd]] 知识图谱索引
 

@@ -1,6 +1,7 @@
 ---
 title: Domain-9 平台运维 — 开源项目索引
 description: '# Domain-9 平台运维 — 开源项目索引'
+summary: '# Domain-9 平台运维 — 开源项目索引'
 category: platform-ops
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - devops
 - etcd
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -52,8 +55,9 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-9 平台运维 — 开源项目索引
 

@@ -1,6 +1,7 @@
 ---
 title: linkerd v0.4 Release Notes
 description: linkerd v0.4 Release Notes — Kubernetes 生产运维知识库
+summary: linkerd v0.4 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - prometheus
 - docker
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Linkerd|linkerd]] v0.4 Release Notes
 

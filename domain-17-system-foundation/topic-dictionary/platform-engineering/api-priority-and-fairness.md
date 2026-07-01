@@ -1,6 +1,7 @@
 ---
 title: API 优先级与公平性（API Priority and Fairness）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - prometheus
 - argocd
 - webhook
+tier: core
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,9 +36,9 @@ prerequisites:
 - prometheus-basics
 - gitops-basics
 - tls-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # API 优先级与公平性（API Priority and Fairness）
 
@@ -171,10 +174,10 @@ APF 暴露了大量 [[Prometheus|Prometheus]] 指标，包括：
 
 | 症状 | 可能原因 | 排查命令/方法 |
 |------|---------|-------------|
-| 客户端收到 HTTP 429 Too Many Requests | 请求被 APF 限流 | `kubectl get --raw /metrics \| grep apiserver_flowcontrol_rejected_requests_total` |
+| 客户端收到 HTTP 429 Too Many Requests | 请求被 APF 限流 | `kubectl get --raw /metrics | grep apiserver_flowcontrol_rejected_requests_total` |
 | 特定控制器请求延迟高 | 该 flow 排队拥挤 | 检查 `apiserver_flowcontrol_request_wait_duration_seconds` 按 priority_level 分组 |
 | 关键操作（leader election）被限流 | FlowSchema 匹配优先级不正确 | `kubectl get flowschema --sort-by='.spec.matchingPrecedence'` 检查匹配顺序 |
-| 自定义 FlowSchema 被覆盖 | `apf.kubernetes.io/autoupdate-spec` 注解未设为 false | `kubectl get flowschema <name> -o yaml \| grep autoupdate` |
+| 自定义 FlowSchema 被覆盖 | `apf.kubernetes.io/autoupdate-spec` 注解未设为 false | `kubectl get flowschema <name> -o yaml | grep autoupdate` |
 | apiserver 整体响应变慢 | 总并发限制不足 | 检查 `--max-requests-inflight` 和 `--max-mutating-requests-inflight` 参数 |
 | Webhook 递归调用死锁 | 优先级反转，附属请求被限流 | 为 webhook 回调创建 exempt FlowSchema 或独立高优先级 |
 | 建议配置被删除后自动重建 | 这是预期行为 | 如需修改，覆盖 spec 而非删除；设置 `autoupdate-spec: false` |

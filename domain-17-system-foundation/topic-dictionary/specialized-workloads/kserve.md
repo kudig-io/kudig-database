@@ -1,6 +1,7 @@
 ---
 title: KServe
-description: 'KServe（原 KFServing）是 CNCF 孵化项目，为 Kubernetes 提供标准化的机器学习模型推理（Inference）服务。它支持自动扩缩容...'
+description: KServe（原 KFServing）是 CNCF 孵化项目，为 Kubernetes 提供标准化的机器学习模型推理（Inference）服务。它支持自动扩缩容...
+summary: KServe（原 KFServing）是 CNCF 孵化项目，为 Kubernetes 提供标准化的机器学习模型推理（Inference）服务。它支持自动扩缩容...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - ml
 - inference
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # KServe
 

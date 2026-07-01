@@ -1,6 +1,9 @@
 ---
 title: Knative
-description: 'Knative 是 CNCF 孵化项目，为 Kubernetes 提供 Serverless 能力。它包含 Serving（自动扩缩容 + 缩到零）和 Even...'
+description: Knative 是 CNCF 孵化项目，为 Kubernetes 提供 Serverless 能力。它包含 Serving（自动扩缩容 +
+  缩到零）和 Even...
+summary: Knative 是 CNCF 孵化项目，为 Kubernetes 提供 Serverless 能力。它包含 Serving（自动扩缩容 + 缩到零）和
+  Even...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - knative
 - serverless
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Knative
 

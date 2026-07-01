@@ -1,6 +1,7 @@
 ---
 title: domain-19-papers MOC
 description: domain-19-papers 知识域导航页，覆盖 27 篇文档
+summary: domain-19-papers 知识域导航页，覆盖 27 篇文档
 category: moc
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - gpu
 - ebpf
 - wasm
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - cilium-basics
 - gpu-scheduling-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-19-papers MOC
 

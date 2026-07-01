@@ -1,6 +1,9 @@
 ---
 title: 存储架构概览与核心组件
-description: 深入解析 Kubernetes 存储架构：CSI 驱动、StorageClass、PV/PVC 机制、快照与克隆、存储QoS、以及 Ceph/Longhorn/NFS 等主流存储后端
+description: 深入解析 Kubernetes 存储架构：CSI 驱动、StorageClass、PV/PVC 机制、快照与克隆、存储QoS、以及 Ceph/Longhorn/NFS
+  等主流存储后端
+summary: 深入解析 Kubernetes 存储架构：CSI 驱动、StorageClass、PV/PVC 机制、快照与克隆、存储QoS、以及 Ceph/Longhorn/NFS
+  等主流存储后端
 category: domain-04-storage-data
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - ceph
 - longhorn
 - kubelet
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -64,8 +69,9 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md
   type: fta
   desc: 持久化存储故障树
-created: "2026-05-23"
 ---
+
+
 
 # 01 - 存储架构概览与核心组件
 

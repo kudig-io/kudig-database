@@ -1,6 +1,7 @@
 ---
 title: 05 - Linux 存储管理与RAID配置：生产环境存储架构专家指南
 description: '# 05 - Linux 存储管理与RAID配置：生产环境存储架构专家指南'
+summary: '# 05 - Linux 存储管理与RAID配置：生产环境存储架构专家指南'
 category: linux
 tags:
 - linux
@@ -13,6 +14,8 @@ tags:
 - docker
 - ceph
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -47,8 +50,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   label: '速查卡: linux'
-created: "2026-05-23"
 ---
+
+
 
 # 05 - Linux 存储管理与RAID配置：生产环境存储架构专家指南
 

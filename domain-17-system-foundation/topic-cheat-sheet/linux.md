@@ -1,6 +1,7 @@
 ---
 title: Linux 生产环境速查卡
 description: 涵盖 Linux 生产环境 90% 以上常用命令，支持系统运维和故障排查
+summary: 涵盖 Linux 生产环境 90% 以上常用命令，支持系统运维和故障排查
 category: cheatsheet
 tags:
 - linux
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - containerd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -45,8 +48,9 @@ related_docs:
   desc: 网络诊断速查卡
 - path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   desc: TLS/PKI 证书速查卡
-created: "2026-05-23"
 ---
+
+
 
 # Linux 生产环境速查卡
 

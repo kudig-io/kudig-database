@@ -1,15 +1,19 @@
 ---
 title: 全库 Broken Wikilinks 修复报告（2026-06-26）
 description: 扫描全库并自动修复 broken wikilinks
+summary: 扫描全库并自动修复 broken wikilinks
 category: reports
 tags:
 - wiki-lint
 - broken-links
 - maintenance
-created: "2026-06-26"
-updated: "2026-06-26"
+tier: supporting
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06-26
 ---
+
+
 
 # 全库 Broken Wikilinks 修复报告
 

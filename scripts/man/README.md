@@ -1,6 +1,7 @@
 ---
 title: KUDIG-DATABASE Manpages
 description: '├── man8/           # 系统管理命令 (System Administration)'
+summary: '├── man8/           # 系统管理命令 (System Administration)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - containerd
 - ebpf
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - gpu-scheduling-basics
 - tls-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG-DATABASE Manpages
 

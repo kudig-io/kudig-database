@@ -1,42 +1,50 @@
 ---
-skill_id: "SKILL-NET-001"
-skill_name: "DNS 解析问题诊断与修复"
-version: "1.0.0"
-category: "network"
-severity_range: "P1-P2"
+title: DNS 解析问题诊断与修复
+summary: DNS 解析问题诊断与修复：CoreDNS 是 Kubernetes 集群 DNS 的核心组件。DNS 问题会导致服务发现失败、外部依赖不可访问等连锁问题。
+category: network
+tags:
+- skills
+- dns-failure
+- troubleshooting
+- visibility/public
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+skill_id: SKILL-NET-001
+skill_name: DNS 解析问题诊断与修复
+version: 1.0.0
+severity_range: P1-P2
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
-estimated_resolution_time: "5-20min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+estimated_resolution_time: 5-20min
+risk_level: medium
+agent_execution_mode: L2-semi-auto
 trigger_keywords:
-  - "DNS"
-  - "nslookup"
-  - "resolve"
-  - "CoreDNS"
-  - "nameserver"
+- DNS
+- nslookup
+- resolve
+- CoreDNS
+- nameserver
 trigger_events:
-  - "FailedToCreateEndpoint"
-  - "FailedToUpdateEndpoint"
+- FailedToCreateEndpoint
+- FailedToUpdateEndpoint
 trigger_metrics:
-  - 'coredns_dns_requests_total'
-  - 'coredns_dns_responses_total'
+- coredns_dns_requests_total
+- coredns_dns_responses_total
 prerequisites:
-  - "kubectl-basics"
-  - "networking-basics"
+- kubectl-basics
+- networking-basics
 related_skills:
-  - "SKILL-NET-002"
-  - "SKILL-SEC-003"
-created: "2026-05-23"
-updated: "2026-05-23"
+- SKILL-NET-002
+- SKILL-SEC-003
 last_updated: 2026-05-23
-title: "DNS 解析问题诊断与修复"
-tags: ["skills", "dns-failure", "troubleshooting", "visibility/public"]
 ---
+
+
 
 # DNS 解析问题诊断与修复
 
@@ -228,7 +236,7 @@ flowchart TD
 | 工具 | 用途 | 典型命令 |
 |:---|:---|:---|
 | kubectl | Kubernetes CLI | `kubectl get/describe/logs/exec` |
-| jq | JSON处理 | `kubectl get ... -o json \| jq ...` |
+| jq | JSON处理 | `kubectl get ... -o json | jq ...` |
 | openssl | 证书检查 | `openssl x509 -in <cert> -noout -dates` |
 | tcpdump | 网络抓包 | `tcpdump -i any port <port> -n` |
 | strace | 系统调用追踪 | `strace -p <pid> -f` |
@@ -253,3 +261,7 @@ flowchart TD
 ## 相关概念
 
 - [[concepts/cni-networking-model.md|CNI 网络模型]] — Kubernetes 容器网络接口与 DNS 解析原理
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

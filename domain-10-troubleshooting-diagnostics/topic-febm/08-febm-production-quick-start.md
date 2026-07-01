@@ -1,6 +1,7 @@
 ---
 title: 第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册 (topic-febm)
 description: 'description: ''**目标读者**：需要在现有 Kubernetes 集群中快速落地 FEBM 方法论的 SRE 和安全团队'''
+summary: 'description: ''**目标读者**：需要在现有 Kubernetes 集群中快速落地 FEBM 方法论的 SRE 和安全团队'''
 category: febm
 tags:
 - febm
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - grafana
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -50,8 +53,9 @@ prerequisites:
 - policy-basics
 - logging-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 第八章：FEBM 生产环境快速启动与 [[Kubernetes|Kubernetes]] 问题取证手册
 description: '**目标读者**：需要在现有 Kubernetes 集群中快速落地 FEBM 方法论的 SRE 和安全团队'
@@ -1449,7 +1453,7 @@ Pod 启动后反复崩溃，Kubernetes 以指数退避方式重启容器，状�
 
 ```bash
 # 1. 容器状态和退出码
-kubectl describe pod <POD_NAME> -n <NAMESPACE> | grep -A 10 "State:\|Last State:"
+kubectl describe pod <POD_NAME> -n <NAMESPACE> | grep -A 10 "State:|Last State:"
 
 # 关键字段:
 # - exitCode: 退出码（0=正常，非0=异常）
@@ -1544,7 +1548,7 @@ CrashLoopBackOff 常见原因及证据映射:
    退出码: 137 (OOMKilled) 或 143 (SIGTERM)
    日志特征: 可能无日志（被强制终止）
    验证: 
-     - kubectl describe pod <POD> | grep -i "OOMKilled\|Evicted"
+     - kubectl describe pod <POD> | grep -i "OOMKilled|Evicted"
      - kubectl top pod <POD>
 
 8. 启动超时 (Startup Timeout):
@@ -1669,11 +1673,11 @@ echo "---"
 # 检查日志中的常见错误模式
 PREV_LOG=$(kubectl logs $POD_NAME -n $NAMESPACE --previous --tail=100 2>&1)
 
-if echo "$PREV_LOG" | grep -qi "connection refused\|dial tcp"; then
+if echo "$PREV_LOG" | grep -qi "connection refused|dial tcp"; then
     echo "⚠️  发现连接失败日志 → 可能是依赖服务不可用"
 fi
 
-if echo "$PREV_LOG" | grep -qi "panic\|fatal\|exception"; then
+if echo "$PREV_LOG" | grep -qi "panic|fatal|exception"; then
     echo "⚠️  发现应用异常日志 → 可能是代码 bug"
 fi
 
@@ -1681,7 +1685,7 @@ if echo "$PREV_LOG" | grep -qi "permission denied"; then
     echo "⚠️  发现权限错误 → 检查 securityContext 和 volume 权限"
 fi
 
-if echo "$PREV_LOG" | grep -qi "not found\|no such file"; then
+if echo "$PREV_LOG" | grep -qi "not found|no such file"; then
     echo "⚠️  发现文件未找到 → 检查 configmap/secret 挂载或镜像内容"
 fi
 
@@ -1804,7 +1808,7 @@ kubectl get events --all-namespaces --field-selector source=kubelet \
 
 # 8. Falco 异常检测
 logcli query '{app="falco",k8s_node_name="<NODE_NAME>"}' --since=1h \
-  | grep -i "error\|critical"
+  | grep -i "error|critical"
 ```
 
 ## 时间线重建模板
@@ -2127,7 +2131,7 @@ kubectl debug node/<NODE> -it --image=quay.io/iovisor/bcc -- \
 
 # 4. 应用日志模式匹配
 logcli query '{namespace="<NAMESPACE>",app="<APP>"}' --since=30m \
-  | grep -i "timeout\|connection\|refused"
+  | grep -i "timeout|connection|refused"
 
 # 统计超时错误频率
 logcli query '{namespace="<NAMESPACE>",app="<APP>"}' --since=1h \
@@ -2223,7 +2227,7 @@ rate(http_requests_total{status="503"}[5m])
 **取证路径**:
 1. 确认连接池配置
    ```bash
-   kubectl get cm <APP_CONFIG> -o yaml | grep -i "pool\|connection"
+   kubectl get cm <APP_CONFIG> -o yaml | grep -i "pool|connection"
    ```
 
 2. 查看活跃连接数历史
@@ -2307,7 +2311,7 @@ spec:
 
 2. 查看 CoreDNS 错误日志
    ```bash
-   kubectl logs -n kube-system -l k8s-app=kube-dns | grep -i "error\|timeout"
+   kubectl logs -n kube-system -l k8s-app=kube-dns | grep -i "error|timeout"
    ```
 
 3. 分析 DNS 查询 QPS
@@ -2350,7 +2354,7 @@ spec:
 
 3. 检查应用线程池配置
    ```bash
-   kubectl exec <POD> -- jstack <PID> | grep -i "waiting\|blocked"
+   kubectl exec <POD> -- jstack <PID> | grep -i "waiting|blocked"
    ```
 
 **根因**: CPU limits 过低导致应用被频繁节流
@@ -2397,17 +2401,17 @@ done
 
 # 3. API Server 日志（证书错误）
 kubectl logs -n kube-system kube-apiserver-<NODE> | \
-  grep -i "certificate\|tls\|x509"
+  grep -i "certificate|tls|x509"
 
 # 4. Kubelet 日志
-journalctl -u kubelet | grep -i "certificate\|tls\|x509" | tail -50
+journalctl -u kubelet | grep -i "certificate|tls|x509" | tail -50
 
 # 5. K8s 审计日志（认证失败）
 sudo grep "Unauthorized" /var/log/kubernetes/audit.log | \
   jq 'select(.responseStatus.code == 401)'
 
 # 6. Falco 告警（TLS 错误）
-logcli query '{app="falco"}' --since=24h | grep -i "certificate\|tls"
+logcli query '{app="falco"}' --since=24h | grep -i "certificate|tls"
 
 # 7. Prometheus 告警
 curl -s http://localhost:9090/api/v1/alerts | \
@@ -2654,7 +2658,7 @@ kubectl get cm <CONFIG_NAME> -n <NAMESPACE> -o jsonpath='{.metadata.annotations}
 
 # 5. 查看应用行为异常的时间点
 logcli query '{namespace="<NAMESPACE>",app="<APP>"}' \
-  --since=24h | grep -i "error\|warning\|unexpected"
+  --since=24h | grep -i "error|warning|unexpected"
 
 # 6. 关联配置修改时间和应用异常时间
 # 从审计日志获取修改时间
@@ -2675,7 +2679,7 @@ kubectl exec <POD> -- env | grep <KEY_NAME>
 
 # 8. 检查配置热重载机制是否生效
 # 查看应用是否检测到配置变更
-kubectl logs <POD> | grep -i "config\|reload"
+kubectl logs <POD> | grep -i "config|reload"
 ```
 
 ## 配置漂移检测脚本
@@ -2741,7 +2745,7 @@ done
 # 3. 查询最近的配置修改操作
 echo "<!-- chunk: 3. 最近的配置修改操作（审计日志）" -->## 3. 最近的配置修改操作（审计日志）"
 echo "---"
-sudo grep "configmaps\|secrets" /var/log/kubernetes/audit.log | \
+sudo grep "configmaps|secrets" /var/log/kubernetes/audit.log | \
   jq -c 'select(.objectRef.namespace=="'$NAMESPACE'" and (.verb=="update" or .verb=="patch")) | 
          {time: .requestReceivedTimestamp, user: .user.username, resource: .objectRef.name, verb: .verb}' | \
   tail -10
@@ -2934,7 +2938,7 @@ spec:
 
 ```bash
 # 步骤 1: 收集基础症状
-kubectl get pods -n production | grep -v "Running\|Completed"
+kubectl get pods -n production | grep -v "Running|Completed"
 
 # 输出:
 # order-service-abc   0/1     CrashLoopBackOff   5  3m
@@ -2982,7 +2986,7 @@ curl -G 'http://localhost:9090/api/v1/query' \
 
 # 证据 3: 应用日志
 logcli query '{namespace="production",app="order-service"}' \
-  --since=30m | grep -i "cache\|memory"
+  --since=30m | grep -i "cache|memory"
 
 # 发现: 大量 "cache miss, fetching from database" 日志
 
@@ -3807,7 +3811,7 @@ sum(evidence_correlation_attempts_total)
        - 规则: Terminal shell in container, Suspicious network tool
      验证命令:
        kubectl logs -n falco -l app.kubernetes.io/name=falco | \
-         grep -i "suspicious\|malicious"
+         grep -i "suspicious|malicious"
    
    要求 8.1.4.3 - 可信验证:
      描述: 应能够检测到对重要程序的修改
@@ -3917,7 +3921,7 @@ SOC 2 Trust Service Criteria - FEBM 控制映射:
      - 定期权限审查记录
    审计师验证方法:
      kubectl get clusterrolebindings -o yaml
-     logcli query '{job="audit"}' | grep "rolebindings\|clusterrolebindings"
+     logcli query '{job="audit"}' | grep "rolebindings|clusterrolebindings"
 
 5. CC8.1 - 变更管理 (Change Management):
    

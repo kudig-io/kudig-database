@@ -1,6 +1,7 @@
 ---
 title: eBPF 诊断工具实战指南
 description: 面向阿里云/专有云 K8s 的 eBPF 诊断工具指南，涵盖 bcc、bpftrace、Pixie、Inspektor Gadget 的安装、使用与性能排查场景。
+summary: 面向阿里云/专有云 K8s 的 eBPF 诊断工具指南，涵盖 bcc、bpftrace、Pixie、Inspektor Gadget 的安装、使用与性能排查场景。
 category: troubleshooting
 tags:
 - k8s
@@ -11,6 +12,9 @@ tags:
 - inspektor-gadget
 - performance
 - diagnostics
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -44,9 +48,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # eBPF 诊断工具实战指南
 

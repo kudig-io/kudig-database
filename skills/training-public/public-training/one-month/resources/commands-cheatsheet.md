@@ -1,6 +1,7 @@
 ---
 title: ACK/ACR/K8S 命令速查表
 description: '**适用场景**: 日常运维快速参考 | **更新日期**: 2024'
+summary: '**适用场景**: 日常运维快速参考 | **更新日期**: 2024'
 category: learning
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - ingress
 - rbac
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-18
 difficulty: beginner
 reading_level: beginner
@@ -45,8 +48,9 @@ related_domains:
 related_topics:
 - knowledge-map
 - reading-sequence
-created: "2026-05-23"
 ---
+
+
 
 # ACK/ACR/K8S 命令速查表
 

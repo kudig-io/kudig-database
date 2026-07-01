@@ -1,6 +1,7 @@
 ---
 title: Defense-in-Depth Security
 description: '- [[concepts/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis'
+summary: '- [[concepts/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - istio
 - falco
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - service-mesh-basics
 - ebpf-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Defense-in-Depth Security
 

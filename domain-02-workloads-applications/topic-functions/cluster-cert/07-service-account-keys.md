@@ -1,12 +1,15 @@
 ---
 title: ServiceAccount 密钥对源码分析 (topic-code-analysis)
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - reference
 - apiserver
 - kubelet
 - controller-manager
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
-created: "2026-05-23"
 ---
+
+
 
 title: ServiceAccount 密钥对源码分析
 description: '## 概述'
@@ -553,6 +557,8 @@ echo "$TOKEN" | cut -d. -f2 | base64 -d | jq .
 ```
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

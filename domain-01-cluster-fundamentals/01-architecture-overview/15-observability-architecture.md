@@ -1,6 +1,7 @@
 ---
 title: 15 - Kubernetes 可观测性架构体系
 description: '# 15 - Kubernetes 可观测性架构体系'
+summary: '# 15 - Kubernetes 可观测性架构体系'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - redis
 - elasticsearch
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -60,8 +63,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 15 - [[Kubernetes|Kubernetes]]es 可观测性架构体系|Kubernetes 可观测性架构体系]]
 

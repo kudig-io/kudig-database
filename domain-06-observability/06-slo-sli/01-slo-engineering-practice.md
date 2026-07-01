@@ -1,6 +1,7 @@
 ---
 title: SLO 工程实践：定义、衡量与报告
 description: 面向阿里云/专有云 K8s 的 SLO 工程实践，讲解 SLO 的定义方法、SLI 选择、错误预算、报告机制与持续改进。
+summary: 面向阿里云/专有云 K8s 的 SLO 工程实践，讲解 SLO 的定义方法、SLI 选择、错误预算、报告机制与持续改进。
 category: observability
 tags:
 - k8s
@@ -10,6 +11,9 @@ tags:
 - reliability
 - observability
 - sre
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -42,9 +46,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # SLO 工程实践：定义、衡量与报告
 

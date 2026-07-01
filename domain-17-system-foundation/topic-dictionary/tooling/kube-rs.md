@@ -1,6 +1,9 @@
 ---
 title: kube-rs Rust Operator SDK
-description: 'kube-rs 是 Rust 生态的 Kubernetes 客户端和 Operator 开发框架，提供类型安全的 K8s API 交互和 Controller ...'
+description: kube-rs 是 Rust 生态的 Kubernetes 客户端和 Operator 开发框架，提供类型安全的 K8s API 交互和
+  Controller ...
+summary: kube-rs 是 Rust 生态的 Kubernetes 客户端和 Operator 开发框架，提供类型安全的 K8s API 交互和 Controller
+  ...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - tooling
 - operator
 - rust
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # kube-rs Rust Operator SDK（kube-rs）
 

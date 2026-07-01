@@ -1,6 +1,8 @@
 ---
 title: SOPS（Secrets OPerationS）
-description: 'SOPS 是 Mozilla 开发的加密文件编辑器，支持 YAML/JSON/ENV 等格式，使用 KMS、GCP KMS、Azure Key Vault、ag...'
+description: SOPS 是 Mozilla 开发的加密文件编辑器，支持 YAML/JSON/ENV 等格式，使用 KMS、GCP KMS、Azure Key
+  Vault、ag...
+summary: SOPS 是 Mozilla 开发的加密文件编辑器，支持 YAML/JSON/ENV 等格式，使用 KMS、GCP KMS、Azure Key Vault、ag...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - security
 - secrets
 - encryption
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # SOPS（Secrets OPerationS）（SOPS）
 

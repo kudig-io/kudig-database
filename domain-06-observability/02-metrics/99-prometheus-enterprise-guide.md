@@ -1,6 +1,7 @@
 ---
 title: Prometheus 企业级监控部署指南
 description: '# Prometheus 企业级监控部署指南'
+summary: '# Prometheus 企业级监控部署指南'
 category: enterprise-monitoring-alerting
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - daemonset
 - job
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -51,8 +54,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # [[Prometheus|Prometheus]] 企业级监控部署指南
 

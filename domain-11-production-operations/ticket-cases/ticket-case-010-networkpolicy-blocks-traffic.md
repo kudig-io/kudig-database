@@ -1,6 +1,8 @@
 ---
 title: 阿里云专有云 NetworkPolicy 误拦截导致服务间调用 503
-description: 新上线 NetworkPolicy 后微服务间调用出现 503，根因是策略缺少 namespaceSelector 与 podSelector 放行规则，含诊断、修复与验证。
+description: 新上线 NetworkPolicy 后微服务间调用出现 503，根因是策略缺少 namespaceSelector 与 podSelector
+  放行规则，含诊断、修复与验证。
+summary: 新上线 NetworkPolicy 后微服务间调用出现 503，根因是策略缺少 namespaceSelector 与 podSelector 放行规则，含诊断、修复与验证。
 category: production-operations
 tags:
 - aliyun
@@ -13,16 +15,17 @@ tags:
 - 503
 - service-mesh
 - ticket-case
+tier: supporting
+created: 2026-06-26
+updated: 2026-06-26
 incident_id: TC-2026-010
 priority: P1
 severity: high
 affected_cluster: ack-prod-vpc02
 affected_namespace: risk-engine
 ticket_type: 网络安全策略故障
-skill_ref: "NetworkPolicy 拦截诊断"
-fta_ref: "FTA: 服务间调用 503"
-created: 2026-06-26
-updated: 2026-06-26
+skill_ref: NetworkPolicy 拦截诊断
+fta_ref: 'FTA: 服务间调用 503'
 last_updated: 2026-06-26
 difficulty: intermediate
 reading_level: intermediate
@@ -50,8 +53,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-
 ---
+
+
 
 # 工单 010：NetworkPolicy 误拦截导致服务间调用 503
 
@@ -118,7 +122,7 @@ kubectl get pod -n risk-engine -l app=config-service --show-labels
 tcpdump -i any -nn host <rule-engine-pod-ip> and port 8080
 
 # 查看 Calico Felix 日志
-kubectl logs -n kube-system -l k8s-app=calico-node --tail=200 | grep -i "policy\|deny\|drop"
+kubectl logs -n kube-system -l k8s-app=calico-node --tail=200 | grep -i "policy|deny|drop"
 ```
 
 ### 3.6 诊断过程补充说明
@@ -291,7 +295,7 @@ kubectl run api-gateway-test --rm -it --restart=Never -n api-gateway --image=reg
   wget -qO- --timeout=5 http://score-service.risk-engine.svc.cluster.local:8080/health
 
 # 5. 确认 Calico Felix 日志无新 drop
-kubectl logs -n kube-system -l k8s-app=calico-node --tail=100 | grep -i "drop\|deny" || echo "无拦截日志"
+kubectl logs -n kube-system -l k8s-app=calico-node --tail=100 | grep -i "drop|deny" || echo "无拦截日志"
 ```
 
 ## 7. 回复客户话术

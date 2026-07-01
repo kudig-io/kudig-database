@@ -1,13 +1,22 @@
 ---
-title: "Ingress Controller"
+title: Ingress Controller
+summary: Ingress Controller 是 Kubernetes 集群中负责将集群外部流量路由到内部 Service 的关键组件。它与 Ingress
+  资源协同工作，但二者职责截然不同：Ingress 资源声明路由规则（WHAT），Ingress Controller 负责执行这些规则（HOW）。
 category: concepts
-tags: ["core-concept", "domain-03", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- core-concept
+- domain-03
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # Ingress Controller
 
@@ -76,7 +85,7 @@ spec:
 在无法直连集群的远程顾问模式下，排查 Ingress 相关问题的核心思路是分层验证，从规则声明到 Controller 运行再到后端可达性逐层排查：
 
 1. **Ingress Class 匹配问题**：确认 Ingress 资源的 `spec.ingressClassName` 与集群中运行的 Controller 注册的 class 名称一致。若 class 不匹配，Controller 将完全忽略该 Ingress。多个 Controller 共存时尤其容易出错。
-2. **控制器未运行**：询问用户执行 `kubectl get pods -n kube-system \| grep ingress`（或对应命名空间）查看 Controller Pod 状态。若 Pod 处于 CrashLoopBackOff 或 Pending，需进一步排查镜像拉取、资源配额或节点亲和性。
+2. **控制器未运行**：询问用户执行 `kubectl get pods -n kube-system | grep ingress`（或对应命名空间）查看 Controller Pod 状态。若 Pod 处于 CrashLoopBackOff 或 Pending，需进一步排查镜像拉取、资源配额或节点亲和性。
 3. **Backend Service 不存在或端口不匹配**：验证 `spec.rules.http.paths.backend.service.name` 和 `port.number` 指向的 Service 是否存在，且 Service 的 `targetPort` 与后端 Pod 的容器端口一致。若 Service 没有匹配的 Endpoints，Controller 会将该路径标记为不可用。
 4. **DNS 与外部可达性**：确认域名解析是否指向 Ingress 的外部端点（如 SLB IP 或 ALB DNS），排除客户端到入口层的网络问题。同时检查安全组或防火墙是否放行了 80/443 端口。
 5. **SSL 证书过期或配置错误**：TLS Secret 中证书过期、私钥不匹配或 Secret 名称错误都会导致 HTTPS 访问失败。指导用户检查 Secret 内容以及 Ingress 中 `tls.secretName` 的引用。
@@ -88,3 +97,7 @@ spec:
 - [[service-networking]] — Kubernetes Service 网络模型
 - [[cni-networking-model]] — CNI 网络模型与插件对比
 - [[service-mesh-architecture]] — 服务网格架构
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

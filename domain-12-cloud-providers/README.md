@@ -1,6 +1,7 @@
 ---
 title: Cloud Providers
 description: 整合原 domain-12-cloud-providers/27 的云厂商知识，涵盖主流云服务商和多云混合部署。
+summary: 整合原 domain-12-cloud-providers/27 的云厂商知识，涵盖主流云服务商和多云混合部署。
 category: domain
 tags:
 - cloud
@@ -12,6 +13,8 @@ tags:
 - hybrid
 - daemonset
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Cloud Providers
 

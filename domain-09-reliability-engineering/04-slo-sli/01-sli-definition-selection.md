@@ -1,6 +1,7 @@
 ---
 title: SLI 定义与选择方法论
 description: '| 网络 | 带宽使用率 | 连接队列溢出 |'
+summary: '| 网络 | 带宽使用率 | 连接队列溢出 |'
 category: domain
 tags:
 - sre
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - scheduler
 - statefulset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - sre-practices
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # SLI 定义与选择方法论
 

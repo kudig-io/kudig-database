@@ -1,12 +1,15 @@
 ---
 title: 调度器
-description: 'kube-scheduler 是 Kubernetes 控制平面的默认调度器，负责将新创建的 Pod 分配到最合适的节点上运行。调度决策基于资源需求、亲和性约束...'
+description: kube-scheduler 是 Kubernetes 控制平面的默认调度器，负责将新创建的 Pod 分配到最合适的节点上运行。调度决策基于资源需求、亲和性约束...
+summary: kube-scheduler 是 Kubernetes 控制平面的默认调度器，负责将新创建的 Pod 分配到最合适的节点上运行。调度决策基于资源需求、亲和性约束...
 category: dictionary
 tags:
 - k8s
 - glossary
 - scheduler
 - control-plane
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 调度器
 

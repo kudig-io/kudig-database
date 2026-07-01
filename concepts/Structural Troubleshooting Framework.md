@@ -1,6 +1,7 @@
 ---
 title: Structural Troubleshooting Framework
 description: Structural Troubleshooting Framework — Kubernetes 生产运维知识库
+summary: Structural Troubleshooting Framework — Kubernetes 生产运维知识库
 category: synthesis
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - rbac
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,19 +33,20 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[domain-17-system-foundation/topic-dictionary/workloads/deployments.md]]"
-    type: uses
-  - target: "[[skills/Kubernetes Diagnostic Skills Overview.md]]"
-    type: uses
-  - target: "[[skills/FTA Methodology and Core Principles.md]]"
-    type: related_to
-  - target: "[[scripts/man/INSTALL.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]"
-    type: related_to
+- target: '[[domain-17-system-foundation/topic-dictionary/workloads/deployments.md]]'
+  type: uses
+- target: '[[skills/Kubernetes Diagnostic Skills Overview.md]]'
+  type: uses
+- target: '[[skills/FTA Methodology and Core Principles.md]]'
+  type: related_to
+- target: '[[scripts/man/INSTALL.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+  type: related_to
 ---
+
+
 
 # Structural Troubleshooting Framework
 

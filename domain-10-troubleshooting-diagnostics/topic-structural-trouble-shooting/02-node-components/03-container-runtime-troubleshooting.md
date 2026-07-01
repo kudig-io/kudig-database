@@ -1,6 +1,7 @@
 ---
 title: 容器运行时故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 容器运行时故障排查指南'
+summary: 'title: 容器运行时故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -10,6 +11,8 @@ tags:
 - cri-o
 - docker
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -34,8 +37,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
-created: "2026-05-23"
 ---
+
+
 
 title: 容器运行时故障排查指南
 description: '# 容器运行时故障排查指南'

@@ -1,6 +1,9 @@
 ---
 title: Score 工作负载规范
-description: 'Score 是 CNCF Sandbox 项目，定义了一个平台无关的工作负载描述规范（score.yaml），开发者只需编写一次工作负载描述，即可通过 Scor...'
+description: Score 是 CNCF Sandbox 项目，定义了一个平台无关的工作负载描述规范（score.yaml），开发者只需编写一次工作负载描述，即可通过
+  Scor...
+summary: Score 是 CNCF Sandbox 项目，定义了一个平台无关的工作负载描述规范（score.yaml），开发者只需编写一次工作负载描述，即可通过
+  Scor...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - platform-engineering
 - workload
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Score 工作负载规范（Score）
 

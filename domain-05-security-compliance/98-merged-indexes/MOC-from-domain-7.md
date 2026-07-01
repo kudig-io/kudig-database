@@ -1,6 +1,7 @@
 ---
 title: domain-05-security-compliance MOC
 description: domain-05-security-compliance 知识域导航页，覆盖 22 篇文档
+summary: domain-05-security-compliance 知识域导航页，覆盖 22 篇文档
 category: moc
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - opa
 - rbac
 - networkpolicy
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - rbac-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-05-security-compliance MOC
 

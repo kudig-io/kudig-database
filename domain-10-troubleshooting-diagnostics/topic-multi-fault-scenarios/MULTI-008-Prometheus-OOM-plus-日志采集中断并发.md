@@ -1,14 +1,22 @@
 ---
-scenario_id: "MULTI-008"
-type: "multi-fault"
-skills: ['15-monitoring-alerting-failure', '16-logging-pipeline-failure']
-created: "2026-05-23"
-updated: "2026-05-23"
-last_updated: 2026-05-23
-title: "Prometheus OOM + 日志采集中断并发"
+title: Prometheus OOM + 日志采集中断并发
+summary: Prometheus OOM + 日志采集中断并发：监控系统Prometheus因高基数指标OOM，同时日志采集代理Fluentd缓冲溢出导致日志丢失。
 category: uncategorized
-tags: ["uncategorized", "visibility/public"]
+tags:
+- uncategorized
+- visibility/public
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+scenario_id: MULTI-008
+type: multi-fault
+skills:
+- 15-monitoring-alerting-failure
+- 16-logging-pipeline-failure
+last_updated: 2026-05-23
 ---
+
+
 
 # Prometheus OOM + 日志采集中断并发
 
@@ -46,3 +54,7 @@ tags: ["uncategorized", "visibility/public"]
 2. 配置级联告警（当多个关联指标同时异常时触发）
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

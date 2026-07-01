@@ -1,6 +1,7 @@
 ---
 title: 平台运维概述 (Platform Operations Overview)
 description: 'title: 平台运维概述'
+summary: 'title: 平台运维概述'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - cilium
 - calico
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -45,8 +48,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 平台运维概述

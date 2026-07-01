@@ -1,6 +1,7 @@
 ---
 title: Kubernetes v1.25 - v1.33 特性对比总表
 description: '## 二、网络 (Networking)'
+summary: '## 二、网络 (Networking)'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - containerd
 - hpa
 - pdb
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -60,8 +63,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] v1.25 - v1.33 特性对比总表
 

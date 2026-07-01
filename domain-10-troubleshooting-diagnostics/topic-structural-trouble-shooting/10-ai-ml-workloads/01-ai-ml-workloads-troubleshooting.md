@@ -1,6 +1,7 @@
 ---
 title: AI/ML 工作负载故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: AI/ML 工作负载故障排查指南'
+summary: 'title: AI/ML 工作负载故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - job
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -42,8 +45,9 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: AI/ML 工作负载故障排查指南
 description: '# AI/ML 工作负载故障排查指南'
@@ -302,7 +306,7 @@ kubectl top pods -l app=model-serving --all-namespaces
 echo "5. 模型加载时间检查:"
 for pod in $(kubectl get pods -l app=model-serving --all-namespaces -o name); do
   echo "检查 $pod 模型加载时间:"
-  kubectl logs $pod --tail=200 2>/dev/null | grep -i "model loaded\|loading model\|loaded in" | tail -3
+  kubectl logs $pod --tail=200 2>/dev/null | grep -i "model loaded|loading model|loaded in" | tail -3
 done
 
 # 6. 批处理配置检查
@@ -1596,7 +1600,7 @@ root_cause: |
   使用 Spot 实例但未配置检查点或中断处理。
   AWS/GCP/Azure 会随时回收 Spot 实例。
 diagnosis:
-  - "检查 Pod 事件: kubectl describe pod | grep -i 'spot\|preempted'"
+  - "检查 Pod 事件: kubectl describe pod | grep -i 'spot|preempted'"
   - "查看云厂商中断通知"
 solution: |
   1. 配置训练框架检查点 (every 5 min)

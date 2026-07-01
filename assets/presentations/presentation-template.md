@@ -1,6 +1,7 @@
 ---
 title: Kubernetes [组件/技术名称] 全栈进阶培训 (从入门到专家) [presentations]
 description: '**适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南'
+summary: '**适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南'
 category: presentations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - jaeger
 - coredns
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -40,8 +43,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes [组件/技术名称] 全栈进阶培训 (从入门到专家)
 

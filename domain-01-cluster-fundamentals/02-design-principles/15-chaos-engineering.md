@@ -1,6 +1,7 @@
 ---
 title: 15 - 混沌工程与故障注入设计
 description: '# 15 - 混沌工程与故障注入设计'
+summary: '# 15 - 混沌工程与故障注入设计'
 category: design-principles
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - job
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -53,8 +56,9 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
-created: "2026-05-23"
 ---
+
+
 
 # 15 - 混沌工程与故障注入设计
 

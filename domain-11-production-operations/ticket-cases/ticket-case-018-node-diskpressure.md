@@ -1,6 +1,7 @@
 ---
 title: 节点 DiskPressure：容器日志与镜像占满系统盘
 description: 专有云 ACK 集群因节点系统盘被容器日志与镜像层占满，触发 DiskPressure 导致 Pod 被驱逐的工单闭环样本。
+summary: 专有云 ACK 集群因节点系统盘被容器日志与镜像层占满，触发 DiskPressure 导致 Pod 被驱逐的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -10,6 +11,9 @@ tags:
 - eviction
 - logs
 - p1
+tier: peripheral
+created: '2026-06-26T15:00:00+08:00'
+updated: '2026-06-26T17:30:00+08:00'
 incident_id: INC-2026-ACK-018
 priority: P1
 severity: high
@@ -21,9 +25,7 @@ skill_ref:
 - 日志轮转最佳实践
 fta_ref:
 - 'FTA: 节点 DiskPressure 导致 Pod 驱逐'
-created: '2026-06-26T15:00:00+08:00'
-updated: '2026-06-26T17:30:00+08:00'
-last_updated: 2026-06-26T17:30:00+08:00
+last_updated: 2026-06-26 17:30:00+08:00
 duplicate_of: TC-2026-040
 status: duplicate
 duplication_reason: 与 "TC-2026-040" 主题重复，内容角度相似，降低 RAG 权重
@@ -50,13 +52,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-014-node-disk-pressure.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-014-node-disk-pressure.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 

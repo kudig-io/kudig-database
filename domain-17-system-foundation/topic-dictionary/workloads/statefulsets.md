@@ -1,6 +1,7 @@
 ---
 title: StatefulSets
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - kafka
 - statefulset
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -31,8 +34,9 @@ prerequisites:
 - etcd-basics
 - kafka-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # StatefulSets
 

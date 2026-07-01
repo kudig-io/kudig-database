@@ -1,6 +1,7 @@
 ---
 title: 节点网络：CNI 配置详解
 description: 'title: 节点网络 CNI 配置详解'
+summary: 'title: 节点网络 CNI 配置详解'
 category: general
 tags:
 - reference
@@ -13,6 +14,8 @@ tags:
 - containerd
 - docker
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 节点网络 CNI 配置详解
 description: '# 节点网络：CNI 配置详解'
@@ -529,6 +533,8 @@ cat /var/lib/cni/*            # IPAM 记录
 | `IPAM` | CNI IPAM 插件 | IP 地址分配 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]

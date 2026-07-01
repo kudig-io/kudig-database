@@ -1,12 +1,15 @@
 ---
 title: Volume Snapshot Classes（卷快照类）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
 - glossary
 - terminology
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -25,8 +28,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # Volume Snapshot Classes（卷快照类）
 

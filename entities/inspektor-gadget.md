@@ -1,6 +1,7 @@
 ---
 title: Inspektor Gadget [entities]
 description: '## 概述'
+summary: '## 概述'
 category: general
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - crd
 - operator
 - ebpf
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - monitoring-basics
 - ebpf-basics
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "Inspektor Gadget"

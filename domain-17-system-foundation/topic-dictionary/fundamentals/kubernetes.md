@@ -1,6 +1,7 @@
 ---
 title: Kubernetes
-description: 'Kubernetes（简称 K8s）是 Google 开源的容器编排平台，现已成为容器编排的事实标准。它自动化了容器的部署、扩缩容、负载均衡和自愈，是云原生技术...'
+description: Kubernetes（简称 K8s）是 Google 开源的容器编排平台，现已成为容器编排的事实标准。它自动化了容器的部署、扩缩容、负载均衡和自愈，是云原生技术...
+summary: Kubernetes（简称 K8s）是 Google 开源的容器编排平台，现已成为容器编排的事实标准。它自动化了容器的部署、扩缩容、负载均衡和自愈，是云原生技术...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - kubernetes
 - k8s
 - container-orchestration
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Kubernetes
 

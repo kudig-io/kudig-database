@@ -1,6 +1,7 @@
 ---
 title: Deployment 异常故障树分析 (skills)
 description: OR0 --> SEC[安全与准入异常]
+summary: OR0 --> SEC[安全与准入异常]
 category: general
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - pdb
 - rbac
 - webhook
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ prerequisites:
 fta_id: FTA-DEPLOYMENT-001
 component: Deployment
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "Deployment 异常故障树分析"

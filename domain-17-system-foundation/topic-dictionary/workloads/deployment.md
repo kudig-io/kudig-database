@@ -1,12 +1,16 @@
 ---
 title: Deployment
-description: 'Deployment 是 Kubernetes 中管理无状态应用的核心工作负载控制器。它通过管理 ReplicaSet 来维护期望的 Pod 副本数和版本，支持...'
+description: Deployment 是 Kubernetes 中管理无状态应用的核心工作负载控制器。它通过管理 ReplicaSet 来维护期望的 Pod
+  副本数和版本，支持...
+summary: Deployment 是 Kubernetes 中管理无状态应用的核心工作负载控制器。它通过管理 ReplicaSet 来维护期望的 Pod 副本数和版本，支持...
 category: dictionary
 tags:
 - k8s
 - glossary
 - deployment
 - workload
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -21,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Deployment
 

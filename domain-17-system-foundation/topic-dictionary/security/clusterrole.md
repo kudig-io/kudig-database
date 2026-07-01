@@ -1,6 +1,7 @@
 ---
 title: 集群角色
-description: 'ClusterRole 是 Kubernetes RBAC 中集群级别的权限定义资源。与 Role 不同，ClusterRole 不受命名空间限制，可以授予集群...'
+description: ClusterRole 是 Kubernetes RBAC 中集群级别的权限定义资源。与 Role 不同，ClusterRole 不受命名空间限制，可以授予集群...
+summary: ClusterRole 是 Kubernetes RBAC 中集群级别的权限定义资源。与 Role 不同，ClusterRole 不受命名空间限制，可以授予集群...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - clusterrole
 - rbac
 - security
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 集群角色
 

@@ -1,6 +1,7 @@
 ---
 title: 第14课：StatefulSet - 有状态应用管理
 description: '# 第14课：StatefulSet - 有状态应用管理'
+summary: '# 第14课：StatefulSet - 有状态应用管理'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - pdb
 - statefulset
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第14课：[[StatefulSet|StatefulSet]] - 有状态应用管理
 

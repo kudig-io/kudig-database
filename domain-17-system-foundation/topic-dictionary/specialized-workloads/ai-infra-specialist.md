@@ -1,6 +1,7 @@
 ---
 title: 08 - AI/ML基础设施专业词典
 description: '| **适合读者** | ML工程师入门K8s → 平台工程师管理AI工作负载 → SRE优化AI基础设施 |'
+summary: '| **适合读者** | ML工程师入门K8s → 平台工程师管理AI工作负载 → SRE优化AI基础设施 |'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - opa
 - ceph
+tier: core
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -36,9 +39,9 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 08 - AI/ML基础设施专业词典
 

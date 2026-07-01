@@ -1,6 +1,7 @@
 ---
 title: '[[deployment]] × Secret 管理'
 description: 'title: Deployment × Secret 管理'
+summary: 'title: Deployment × Secret 管理'
 category: general
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - rbac
 - operator
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,19 +29,20 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/etcd.md]]"
-    type: uses
-  - target: "[[entities/external-secrets.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]"
-    type: uses
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
-  - target: "[[skills/best-practices/best-practices/security/pod-security.md]]"
-    type: uses
+- target: '[[entities/etcd.md]]'
+  type: uses
+- target: '[[entities/external-secrets.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]'
+  type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
+- target: '[[skills/best-practices/best-practices/security/pod-security.md]]'
+  type: uses
 ---
+
+
 
 ---
 title: Deployment × Secret 管理

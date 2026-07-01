@@ -1,6 +1,7 @@
 ---
 title: 13 - 容量规划与资源预测
 description: '**生产环境实战经验总结**: 基于万级节点集群容量管理经验，涵盖从资源预测到成本优化的全方位最佳实践'
+summary: '**生产环境实战经验总结**: 基于万级节点集群容量管理经验，涵盖从资源预测到成本优化的全方位最佳实践'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - job
 - operator
+tier: core
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,9 +35,9 @@ prerequisites:
 - monitoring-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 13 - 容量规划与资源预测
 

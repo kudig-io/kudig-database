@@ -1,6 +1,7 @@
 ---
 title: 可观测性故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 可观测性故障排查指南'
+summary: 'title: 可观测性故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - docker
 - redis
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 可观测性故障排查指南
 description: '# 可观测性故障排查指南'

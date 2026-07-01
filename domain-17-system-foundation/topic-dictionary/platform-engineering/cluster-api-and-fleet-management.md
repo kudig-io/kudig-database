@@ -1,6 +1,7 @@
 ---
 title: Cluster API 与集群舰队管理
 description: '# Cluster API 与集群舰队管理'
+summary: '# Cluster API 与集群舰队管理'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flux
 - pdb
 - rbac
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,9 +37,9 @@ prerequisites:
 - iac-basics
 - cilium-basics
 - etcd-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # Cluster API 与集群舰队管理
 

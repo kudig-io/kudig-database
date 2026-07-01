@@ -1,6 +1,7 @@
 ---
 title: 02-多云混合部署策略
 description: 'title: 02-多云混合部署策略'
+summary: 'title: 02-多云混合部署策略'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - argocd
 - docker
 - harbor
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - gitops-basics
 - policy-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 02-多云混合部署策略
 description: '# 02-多云混合部署策略'

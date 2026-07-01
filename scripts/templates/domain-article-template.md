@@ -1,15 +1,16 @@
 ---
+title: Domain Article Template
+summary: 'title: "{{主题名称}}" description: "{{一句话摘要：描述本文核心主题、技术定位和生产价值}}" category:
+  "{{domain-NAME}}"              # 对应 domain-N-xxx 目录 tags: [k8s, {{component}}, {{tag1}},
+  {{tag2}}] k8s_versions:'
+category: general
+tags:
+- domain-article-template
+tier: supporting
+created: '2026-07-01'
+---
 
-## YAML Front Matter
-
-```yaml
-created: "2026-05-23"
-updated: "2026-05-23"
-last_updated: 2026-05-23
-title: "{{主题名称}}"
-category: uncategorized
-tags: ["uncategorized", "visibility/public"]
----# {{主题名称}}
+# {{主题名称}}
 
 > **模板版本**: 2.0
 > **最后更新**: 2026-05

@@ -1,6 +1,7 @@
 ---
 title: 'Day 5: Kubernetes 架构全貌'
 description: '# Day 5: Kubernetes 架构全貌'
+summary: '# Day 5: Kubernetes 架构全貌'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - coredns
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 5: [[Kubernetes|Kubernetes]] 架构全貌
 

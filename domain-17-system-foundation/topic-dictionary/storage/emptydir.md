@@ -1,12 +1,15 @@
 ---
 title: 空目录卷
-description: 'emptyDir 是一种临时存储卷，在 Pod 被分配到节点时创建，Pod 从节点移除时数据永久丢失。适用于 Pod 内容器间的临时数据共享。...'
+description: emptyDir 是一种临时存储卷，在 Pod 被分配到节点时创建，Pod 从节点移除时数据永久丢失。适用于 Pod 内容器间的临时数据共享。...
+summary: emptyDir 是一种临时存储卷，在 Pod 被分配到节点时创建，Pod 从节点移除时数据永久丢失。适用于 Pod 内容器间的临时数据共享。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - storage
 - emptydir
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 空目录卷
 

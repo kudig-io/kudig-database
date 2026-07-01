@@ -1,6 +1,7 @@
 ---
 title: Litmus 混沌工程实践
 description: '# Litmus 混沌工程实践'
+summary: '# Litmus 混沌工程实践'
 category: domain
 tags:
 - litmus
@@ -8,6 +9,8 @@ tags:
 - kubernetes
 - ci-cd
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - sre-practices
-created: "2026-05-23"
 ---
+
+
 
 # [[Litmus|Litmus]] 混沌工程实践
 

@@ -1,13 +1,26 @@
 ---
-title: "生产 Runbook 编写规范与高频操作清单"
+title: 生产 Runbook 编写规范与高频操作清单
+summary: 生产 Runbook 编写规范与高频操作清单：Runbook（操作手册）是值班工程师在高压环境下的「救命稻草」。一份好的 Runbook 能够显著降低
+  MTTR，避免人为失误。本文档提供编写规范和高频操作清单，帮助远程顾问指导客户建立可执行、可维护的操作文档。
 category: domain-11
-tags: ["domain-11", "runbook", "操作手册", "SRE", "运维", "ACK", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- domain-11
+- runbook
+- 操作手册
+- SRE
+- 运维
+- ACK
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # 生产 Runbook 编写规范与高频操作清单
 
@@ -162,3 +175,7 @@ kubectl get nodes -l alibabacloud.com/nodepool-id=$NP_ID
 - [[domain-11-production-operations/03-on-call-playbook.md|on-call-playbook]] — 值班手册与告警响应规范
 - [[domain-11-production-operations/04-incident-response-template.md|incident-response-template]] — 事故响应模板
 - [[concepts/cluster-upgrade-paths.md|cluster-upgrade-paths]] — 集群升级路径与版本兼容性
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

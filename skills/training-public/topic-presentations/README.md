@@ -1,6 +1,7 @@
 ---
-title: "Topic: Presentations（技术演示文稿） [topic-presentations]"
+title: 'Topic: Presentations（技术演示文稿） [topic-presentations]'
 description: 'description: ''**11 篇 Presentation** | 面向内部培训与技术分享的 Kubernetes 专题演示文稿'''
+summary: 'description: ''**11 篇 Presentation** | 面向内部培训与技术分享的 Kubernetes 专题演示文稿'''
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - jaeger
 - coredns
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -47,8 +50,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Topic: Presentations（技术演示文稿）'

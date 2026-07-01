@@ -1,14 +1,22 @@
 ---
-scenario_id: "MULTI-003"
-type: "multi-fault"
-skills: ['06-certificate-expiry', '11-control-plane-failure']
-created: "2026-05-23"
-updated: "2026-05-23"
-last_updated: 2026-05-23
-title: "证书过期 + 控制平面组件崩溃并发"
+title: 证书过期 + 控制平面组件崩溃并发
+summary: 证书过期 + 控制平面组件崩溃并发：集群证书过期导致apiserver拒绝所有连接，同时etcd因磁盘压力 unhealthy，控制平面完全不可用。
 category: uncategorized
-tags: ["uncategorized", "visibility/public"]
+tags:
+- uncategorized
+- visibility/public
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+scenario_id: MULTI-003
+type: multi-fault
+skills:
+- 06-certificate-expiry
+- 11-control-plane-failure
+last_updated: 2026-05-23
 ---
+
+
 
 # 证书过期 + 控制平面组件崩溃并发
 
@@ -47,3 +55,7 @@ tags: ["uncategorized", "visibility/public"]
 2. 配置级联告警（当多个关联指标同时异常时触发）
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

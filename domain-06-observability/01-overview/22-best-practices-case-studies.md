@@ -1,6 +1,9 @@
 ---
 title: 25 - 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case Studies)
-description: 'title: 25 - 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case Studies)'
+description: 'title: 25 - 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case
+  Studies)'
+summary: 'title: 25 - 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case
+  Studies)'
 category: general
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - jaeger
 - istio
 - cilium
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -42,8 +47,9 @@ prerequisites:
 - cilium-basics
 - logging-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 25 - 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case Studies)
 description: '# 25 - 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case Studies)'

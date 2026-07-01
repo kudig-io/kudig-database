@@ -1,6 +1,7 @@
 ---
 title: KUDIG 开源生态指南与深度研究指南
 description: '# KUDIG 开源生态指南'
+summary: '# KUDIG 开源生态指南'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - istio
 - cilium
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - policy-basics
 - logging-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG 开源生态指南
 

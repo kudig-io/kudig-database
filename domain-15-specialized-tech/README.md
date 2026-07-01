@@ -1,6 +1,7 @@
 ---
 title: Specialized Technologies
 description: Specialized Technologies — Kubernetes 生产运维知识库
+summary: Specialized Technologies — Kubernetes 生产运维知识库
 category: domain
 tags:
 - edge-computing
@@ -13,6 +14,8 @@ tags:
 - containerd
 - webhook
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Specialized Technologies
 

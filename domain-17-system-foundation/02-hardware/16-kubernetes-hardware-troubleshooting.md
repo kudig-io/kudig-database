@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 运维硬件故障排查专题
 description: '# Kubernetes 运维硬件故障排查专题'
+summary: '# Kubernetes 运维硬件故障排查专题'
 category: hardware
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - containerd
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 运维硬件故障排查专题
 
@@ -157,7 +161,7 @@ echo "=== PLEG 硬件关联诊断 ==="
 # 检查kubelet PLEG状态
 check_pleg_status() {
     echo "--- Kubelet PLEG 状态 ---"
-    journalctl -u kubelet --since "1 hour ago" | grep -i "pleg\|relist"
+    journalctl -u kubelet --since "1 hour ago" | grep -i "pleg|relist"
     
     # PLEG not healthy 通常与以下硬件问题相关:
     # - 磁盘延迟 > 100ms
@@ -842,7 +846,7 @@ data:
 | 节点隔离 | `kubectl cordon <node>` |
 | 驱逐工作负载 | `kubectl drain <node> --ignore-daemonsets --delete-emptydir-data` |
 | 恢复节点 | `kubectl uncordon <node>` |
-| 查看节点事件 | `kubectl describe node <node> \| grep -A 20 Events` |
+| 查看节点事件 | `kubectl describe node <node> | grep -A 20 Events` |
 | 查看节点硬件条件 | `kubectl get node <node> -o jsonpath='{.status.conditions}'` |
 | 检查 kubelet 日志 | `journalctl -u kubelet --since "30 min ago"` |
 | 检查 containerd 日志 | `journalctl -u containerd --since "30 min ago"` |

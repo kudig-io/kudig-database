@@ -1,6 +1,7 @@
 ---
 title: K8s 调度术语参考
 description: '# K8s 调度术语参考'
+summary: '# K8s 调度术语参考'
 category: references
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - kubelet
 - scheduler
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 - 调度术语参考
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8s 调度术语参考
 

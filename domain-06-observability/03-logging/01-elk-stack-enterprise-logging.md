@@ -1,6 +1,7 @@
 ---
 title: ELK Stack企业级日志管理系统深度实践
 description: 'title: ELK Stack企业级日志管理系统深度实践'
+summary: 'title: ELK Stack企业级日志管理系统深度实践'
 category: general
 tags:
 - observability
@@ -13,6 +14,8 @@ tags:
 - webhook
 - serverless
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - monitoring-basics
 - kafka-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: ELK Stack企业级日志管理系统深度实践
 description: '# ELK Stack企业级日志管理系统深度实践'

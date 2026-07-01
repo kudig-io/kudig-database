@@ -1,6 +1,7 @@
 ---
 title: v1.20.15
 description: v1.20.15 — Kubernetes 生产运维知识库
+summary: v1.20.15 — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - cilium
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 备份与恢复深度实践
 description: '# Kubernetes 备份与恢复深度实践'
+summary: '# Kubernetes 备份与恢复深度实践'
 category: disaster-recovery
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - argocd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -54,8 +57,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md
   label: '故障树: backup-restore'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 备份与恢复深度实践
 

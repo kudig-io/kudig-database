@@ -1,12 +1,15 @@
 ---
 title: 滚动更新
-description: 'Rolling Update（滚动更新）是 Kubernetes 中逐步替换旧版本 Pod 为新版本 Pod 的部署策略。它确保在更新过程中始终保持应用可用，实...'
+description: Rolling Update（滚动更新）是 Kubernetes 中逐步替换旧版本 Pod 为新版本 Pod 的部署策略。它确保在更新过程中始终保持应用可用，实...
+summary: Rolling Update（滚动更新）是 Kubernetes 中逐步替换旧版本 Pod 为新版本 Pod 的部署策略。它确保在更新过程中始终保持应用可用，实...
 category: dictionary
 tags:
 - k8s
 - glossary
 - operations
 - deployment
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 滚动更新
 

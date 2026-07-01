@@ -1,6 +1,8 @@
 ---
 title: Agent Harness 验证与质量门禁 (domain-14-ai-ml-infra)
-description: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Verification,'
+description: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**:
+  Verification,'
+summary: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Verification,'
 category: general
 tags:
 - ai
@@ -11,6 +13,8 @@ tags:
 - llm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Agent Harness 验证与质量门禁
 description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Verification,

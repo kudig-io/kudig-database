@@ -1,19 +1,30 @@
 ---
 title: K8s Performance Bottleneck 远程顾问对话脚本
+summary: 性能瓶颈的远程顾问对话脚本，覆盖CPU、内存、磁盘、网络性能分析。
 category: dialogue
-tags: [dialogue, remote-advisor, k8s-performance, skill, performance, cpu, memory, io, latency]
-created: "2026-05-23"
-updated: "2026-05-23"
+tags:
+- dialogue
+- remote-advisor
+- k8s-performance
+- skill
+- performance
+- cpu
+- memory
+- io
+- latency
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
-summary: "性能瓶颈的远程顾问对话脚本，覆盖CPU、内存、磁盘、网络性能分析。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
-    type: uses
-  - target: "[[entities/etcd.md]]"
-    type: uses
-  - target: "[[entities/istio.md]]"
-    type: uses
+- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+  type: uses
+- target: '[[entities/etcd.md]]'
+  type: uses
+- target: '[[entities/istio.md]]'
+  type: uses
 ---
+
 
 # K8s Performance Bottleneck 远程顾问对话脚本
 
@@ -80,7 +91,7 @@ kubectl top pods --all-namespaces --sort-by=cpu | head -20
 顾问："单个 Pod 资源使用高，当前为 P2 优先级（2 小时内修复）。下一步请执行：
 
 ```bash
-kubectl describe pod <pod-name> -n <namespace> | grep -A 10 "Limits\|Requests"
+kubectl describe pod <pod-name> -n <namespace> | grep -A 10 "Limits|Requests"
 kubectl get pod <pod-name> -n <namespace> -o yaml | grep -A 5 "resources:"
 ```
 

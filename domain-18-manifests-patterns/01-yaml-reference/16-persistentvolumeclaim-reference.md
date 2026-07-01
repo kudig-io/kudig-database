@@ -1,6 +1,7 @@
 ---
 title: 16 - PersistentVolumeClaim YAML 配置参考
 description: 'title: 16 - PersistentVolumeClaim YAML 配置参考'
+summary: 'title: 16 - PersistentVolumeClaim YAML 配置参考'
 category: general
 tags:
 - yaml
@@ -13,6 +14,8 @@ tags:
 - mysql
 - postgresql
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 16 - PersistentVolumeClaim YAML 配置参考
 description: '# 16 - PersistentVolumeClaim YAML 配置参考'
@@ -1863,6 +1867,8 @@ groups:
 - 18-csi-driver-resources
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]

@@ -1,6 +1,7 @@
 ---
 title: 141 - AI成本分析与FinOps实践 (AI Cost Analysis & FinOps)
 description: '# 141 - AI成本分析与FinOps实践 (AI Cost Analysis & FinOps)'
+summary: '# 141 - AI成本分析与FinOps实践 (AI Cost Analysis & FinOps)'
 category: ai-infra
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - helm
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -58,8 +61,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
-created: "2026-05-23"
 ---
+
+
 
 # 141 - AI成本分析与FinOps实践 (AI Cost Analysis & FinOps)
 

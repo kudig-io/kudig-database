@@ -1,6 +1,7 @@
 ---
 title: CNCF 可观测性项目全景
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - jaeger
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # CNCF 可观测性项目全景
 

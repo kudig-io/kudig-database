@@ -1,12 +1,15 @@
 ---
 title: Front Proxy 聚合层证书工作流 (topic-code-analysis)
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - reference
 - apiserver
 - kubelet
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Front Proxy 聚合层证书工作流
 description: '## 概述'
@@ -450,6 +454,8 @@ openssl x509 -req \
 ```
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[log|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

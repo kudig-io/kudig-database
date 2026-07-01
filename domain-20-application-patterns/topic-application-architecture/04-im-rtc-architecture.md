@@ -1,6 +1,7 @@
 ---
 title: 实时通信 (IM / RTC) Kubernetes 生产架构设计
 description: 'title: 实时通信 IM/RTC 架构设计'
+summary: 'title: 实时通信 IM/RTC 架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - gateway
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 实时通信 IM/RTC 架构设计
 description: '# 实时通信 (IM / RTC) [[Kubernetes|Kubernetes]] 生产架构设计'

@@ -1,6 +1,7 @@
 ---
 title: 在线教育平台 Kubernetes 生产架构设计 (domain-20-application-patterns)
 description: 'title: 在线教育平台 Kubernetes 生产架构设计'
+summary: 'title: 在线教育平台 Kubernetes 生产架构设计'
 category: general
 tags:
 - architecture
@@ -11,6 +12,8 @@ tags:
 - crd
 - operator
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - prometheus-basics
 - kafka-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 在线教育平台 [[Kubernetes|Kubernetes]] 生产架构设计
 description: '# 在线教育平台 Kubernetes 生产架构设计'

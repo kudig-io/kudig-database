@@ -1,6 +1,9 @@
 ---
 title: 证书颁发机构
-description: 'Certificate Authority（CA，证书颁发机构）是负责签发和管理数字证书的受信任实体。在 Kubernetes 中，CA 是集群 PKI（Pub...'
+description: Certificate Authority（CA，证书颁发机构）是负责签发和管理数字证书的受信任实体。在 Kubernetes 中，CA
+  是集群 PKI（Pub...
+summary: Certificate Authority（CA，证书颁发机构）是负责签发和管理数字证书的受信任实体。在 Kubernetes 中，CA 是集群
+  PKI（Pub...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - security
 - certificate
 - tls
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 证书颁发机构
 

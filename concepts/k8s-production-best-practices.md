@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 生产环境最佳实践
 description: '# Kubernetes 生产环境最佳实践'
+summary: '# Kubernetes 生产环境最佳实践'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - vpa
 - rbac
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 生产环境最佳实践
 

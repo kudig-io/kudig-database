@@ -1,6 +1,7 @@
 ---
 title: 调度器配置与优化
 description: 深入解析 Kubernetes 调度器的工作原理、调度策略与插件、亲和性/反亲和、污点容忍、拓扑分布约束、抢占机制与生产级调优
+summary: 深入解析 Kubernetes 调度器的工作原理、调度策略与插件、亲和性/反亲和、污点容忍、拓扑分布约束、抢占机制与生产级调优
 category: domain-02-workloads-applications
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduling
 - prometheus
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -68,8 +71,9 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/scheduler-fta.md
   type: fta
   desc: Scheduler 故障树
-created: "2026-05-23"
 ---
+
+
 
 # 28 - 调度器配置与优化
 

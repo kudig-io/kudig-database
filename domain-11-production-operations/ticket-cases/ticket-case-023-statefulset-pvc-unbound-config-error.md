@@ -2,6 +2,8 @@
 title: 阿里云专有云 StatefulSet Pod 启动失败（PVC 未绑定 / 配置错误）
 description: 有状态 MySQL 集群通过 StatefulSet 扩容时新 Pod 无法启动，根因为 StorageClass 未启用扩容且 VolumeBindingMode
   为 Immediate 导致多可用区绑定失败，含诊断、修复与验证。
+summary: 有状态 MySQL 集群通过 StatefulSet 扩容时新 Pod 无法启动，根因为 StorageClass 未启用扩容且 VolumeBindingMode
+  为 Immediate 导致多可用区绑定失败，含诊断、修复与验证。
 category: production-operations
 tags:
 - aliyun
@@ -13,6 +15,9 @@ tags:
 - mysql
 - disk
 - ticket-case
+tier: supporting
+created: 2026-06-26
+updated: 2026-06-26
 incident_id: TC-2026-023
 priority: P1
 severity: high
@@ -21,8 +26,6 @@ affected_namespace: database
 ticket_type: 存储与有状态应用故障
 skill_ref: StatefulSet 诊断
 fta_ref: 'FTA: StatefulSet Pod 启动失败'
-created: 2026-06-26
-updated: 2026-06-26
 last_updated: 2026-06-26
 duplicate_of: INC-2026-ACK-048
 status: duplicate
@@ -55,13 +58,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[concepts/statefulset.md]]"
+- target: '[[concepts/statefulset.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-004-csi-plugin-missing-after-scale.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-004-csi-plugin-missing-after-scale.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-043-statefulset-pvc-unbound.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-043-statefulset-pvc-unbound.md]]'
   type: related_to
 ---
+
+
 
 # 工单 023：StatefulSet Pod 启动失败（PVC 未绑定 / 配置错误）
 
@@ -143,7 +148,7 @@ aliyun ecs DescribeDisks --RegionId cn-shanghai --InstanceId i-2zeXXXXXXXXXXXXXX
 kubectl logs -n kube-system -l app=csi-provisioner --tail=200
 
 # 查看 CSI plugin 日志
-kubectl logs -n kube-system -l app=csi-plugin --tail=200 | grep -i "mysql\|provision\|failed"
+kubectl logs -n kube-system -l app=csi-plugin --tail=200 | grep -i "mysql|provision|failed"
 ```
 
 ### 3.6 诊断过程补充说明

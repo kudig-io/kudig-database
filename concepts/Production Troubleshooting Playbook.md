@@ -1,6 +1,7 @@
 ---
 title: Production Troubleshooting Playbook
 description: Production Troubleshooting Playbook — Kubernetes 生产运维知识库
+summary: Production Troubleshooting Playbook — Kubernetes 生产运维知识库
 category: synthesis
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ingress
 - networkpolicy
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,17 +32,18 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]"
-    type: uses
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
-  - target: "[[skills/Kubernetes Diagnostic Skills Overview.md]]"
-    type: uses
-  - target: "[[skills/Kubernetes FTA Top Events Index.md]]"
-    type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]'
+  type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
+- target: '[[skills/Kubernetes Diagnostic Skills Overview.md]]'
+  type: uses
+- target: '[[skills/Kubernetes FTA Top Events Index.md]]'
+  type: uses
 ---
+
+
 
 # Production Troubleshooting Playbook
 
@@ -68,9 +72,9 @@ This playbook synthesizes information from the [[entities/kubernetes.md|Kubernet
 |---------|----------|---------------|-------------------|
 | Pod Pending | TE-3 -> IE-3.1 | `kubectl describe pod` | Resource insufficient, taint, quota |
 | CrashLoopBackOff | TE-2 -> IE-2.1 -> BE-2.1 | `kubectl logs --previous` | App crash, config error, dependency down |
-| OOMKilled | TE-2 -> IE-2.1 -> BE-2.3 | `kubectl describe pod \| grep 'Last State'` | Memory leak, limits too low |
-| ImagePullBackOff | TE-3 -> IE-3.2 | `kubectl describe pod \| grep ImagePull` | Auth error, image missing, network |
-| Evicted | TE-2 -> IE-2.1 -> BE-2.4 | `kubectl describe pod \| grep Evicted` | Node disk/memory pressure |
+| OOMKilled | TE-2 -> IE-2.1 -> BE-2.3 | `kubectl describe pod | grep 'Last State'` | Memory leak, limits too low |
+| ImagePullBackOff | TE-3 -> IE-3.2 | `kubectl describe pod | grep ImagePull` | Auth error, image missing, network |
+| Evicted | TE-2 -> IE-2.1 -> BE-2.4 | `kubectl describe pod | grep Evicted` | Node disk/memory pressure |
 
 ### Tier 3: Network Diagnosis (15-30 Minutes)
 
@@ -86,7 +90,7 @@ This playbook synthesizes information from the [[entities/kubernetes.md|Kubernet
 | Symptom | FTA Path | First Command | Common Root Cause |
 |---------|----------|---------------|-------------------|
 | PVC Pending | TE-5 -> IE-5.1 | `kubectl describe pvc` | No matching PV, StorageClass issue |
-| Mount failure | TE-5 -> IE-5.2 | `kubectl describe pod \| grep MountVolume` | CSI driver down, volume not ready |
+| Mount failure | TE-5 -> IE-5.2 | `kubectl describe pod | grep MountVolume` | CSI driver down, volume not ready |
 | I/O performance | TE-5 -> IE-5.3 | `iostat -x 1` on node | Storage backend degradation |
 
 ## Escalation Matrix

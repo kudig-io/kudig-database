@@ -1,13 +1,22 @@
 ---
-title: "kube-scheduler"
+title: kube-scheduler
+summary: kube-scheduler 是 Kubernetes 控制面中负责 Pod 调度的核心组件。它监听未分配节点的 Pod（.spec.nodeName
+  为空），通过一系列过滤与打分算法，为其选择最合适的运行节点。调度决策的质量直接影响集群资源利用率、应用性能与节点负载均衡。
 category: concepts
-tags: ["core-concept", "domain-01", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- core-concept
+- domain-01
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # kube-scheduler
 
@@ -82,3 +91,7 @@ Pod 长期处于 Pending 状态是远程顾问模式下的经典问题。排查�
 - [[scheduling-algorithm]] — 调度算法详解
 - [[node-lifecycle-management]] — 节点生命周期管理
 - [[resource-management]] — Pod 资源管理机制
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

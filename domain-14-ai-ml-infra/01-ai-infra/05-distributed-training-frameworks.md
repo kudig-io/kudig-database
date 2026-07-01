@@ -1,7 +1,9 @@
 ---
 title: 分布式训练框架
-description: 深入解析 AI 分布式训练框架在 K8s 上的部署：PyTorch DDP/FSDP、TensorFlow MultiWorkerMirroredStrategy、DeepSpeed、Horovod、MPI 作业调度与
-  NCCL 调优
+description: 深入解析 AI 分布式训练框架在 K8s 上的部署：PyTorch DDP/FSDP、TensorFlow MultiWorkerMirroredStrategy、DeepSpeed、Horovod、MPI
+  作业调度与 NCCL 调优
+summary: 深入解析 AI 分布式训练框架在 K8s 上的部署：PyTorch DDP/FSDP、TensorFlow MultiWorkerMirroredStrategy、DeepSpeed、Horovod、MPI
+  作业调度与 NCCL 调优
 category: domain-11-ai-infra
 tags:
 - k8s
@@ -14,6 +16,8 @@ tags:
 - nccl
 - mpi
 - scheduler
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -66,8 +70,9 @@ related_docs:
 - path: ../domain-14-ai-ml-infra/topic-ai-agent/
   type: ai-agent
   desc: AI Agent 工程
-created: "2026-05-23"
 ---
+
+
 
 # 分布式训练框架
 

@@ -1,12 +1,15 @@
 ---
 title: 'Domain 21: 日志管理与分析 (Logging Management & Analytics)'
 description: 'title: ''Domain 21: 日志管理与分析 (Logging Management & Analytics)'''
+summary: 'title: ''Domain 21: 日志管理与分析 (Logging Management & Analytics)'''
 category: general
 tags:
 - k8s
 - grafana
 - kafka
 - elasticsearch
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - monitoring-basics
 - kafka-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain 21: 日志管理与分析 (Logging Management & Analytics)'

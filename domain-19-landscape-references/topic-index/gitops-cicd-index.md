@@ -1,6 +1,7 @@
 ---
 title: GitOps / CI-CD 全局索引
 description: '## 架构基础'
+summary: '## 架构基础'
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - jaeger
 - istio
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -42,8 +45,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # GitOps / CI-CD 全局索引
 

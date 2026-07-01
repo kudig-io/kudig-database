@@ -1,6 +1,7 @@
 ---
 title: kube-proxy 深度解析 (kube-proxy Deep Dive)
 description: '# kube-proxy 深度解析 (kube-proxy Deep Dive)'
+summary: '# kube-proxy 深度解析 (kube-proxy Deep Dive)'
 category: control-plane
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - helm
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -71,8 +74,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # kube-proxy 深度解析 (kube-proxy Deep Dive)
 

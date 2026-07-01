@@ -1,11 +1,14 @@
 ---
 title: Terway 异常故障树分析 (skills)
 description: Terway 异常故障树分析 — Kubernetes 生产运维知识库
+summary: Terway 异常故障树分析 — Kubernetes 生产运维知识库
 category: general
 tags:
 - k8s
 - statefulset
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ prerequisites:
 fta_id: FTA-TERWAY-001
 component: Terway
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "Terway 异常故障树分析"
@@ -52,19 +56,19 @@ base_confidence: 0.7
 
 | 节点 ID | 名称 | 诊断命令 | 预期输出模式 | 判定 |
 |---------|------|---------|------------|------|
-| `cat_eni` | ENI 异常分类 | `kubectl get events -n ${NAMESPACE} --field-selector reason=FailedCreatePodSandBox -o json \| jq '[.items[] \| select(.message \| test("ENI\|bindquota\|AttachNetworkInterface"))] \| length'` | `> 0` | → 进入 ENI 子树 |
-| `evt_eni_quota` | ENI 配额不足 | `aliyun ecs DescribeInstances --InstanceIds '["${INSTANCE_ID}"]' \| jq '.Instances.Instance[0].NetworkInterfaces.NetworkInterface \| length'` | 达到实例类型上限 | **确认根因** |
-| | | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "bindquota exceeded\|no available ENI slot"` | 包含配额超限 | **确认根因** |
-| `evt_eni_bind_fail` | ENI 绑定失败 | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "AttachNetworkInterface failed\|bindENI failed"` | 包含绑定失败 | **确认根因** |
-| | | `aliyun ecs DescribeNetworkInterfaces --InstanceId ${INSTANCE_ID} \| jq '.NetworkInterfaceSets.NetworkInterfaceSet[] \| {id: .NetworkInterfaceId, status: .Status}'` | ENI 状态非 InUse | 进一步检查 |
+| `cat_eni` | ENI 异常分类 | `kubectl get events -n ${NAMESPACE} --field-selector reason=FailedCreatePodSandBox -o json | jq '[.items[] | select(.message | test("ENI|bindquota|AttachNetworkInterface"))] | length'` | `> 0` | → 进入 ENI 子树 |
+| `evt_eni_quota` | ENI 配额不足 | `aliyun ecs DescribeInstances --InstanceIds '["${INSTANCE_ID}"]' | jq '.Instances.Instance[0].NetworkInterfaces.NetworkInterface | length'` | 达到实例类型上限 | **确认根因** |
+| | | `kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "bindquota exceeded|no available ENI slot"` | 包含配额超限 | **确认根因** |
+| `evt_eni_bind_fail` | ENI 绑定失败 | `kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "AttachNetworkInterface failed|bindENI failed"` | 包含绑定失败 | **确认根因** |
+| | | `aliyun ecs DescribeNetworkInterfaces --InstanceId ${INSTANCE_ID} | jq '.NetworkInterfaceSets.NetworkInterfaceSet[] | {id: .NetworkInterfaceId, status: .Status}'` | ENI 状态非 InUse | 进一步检查 |
 | `evt_eni_drift` | ENI 状态漂移 | `kubectl exec -n kube-system $(kubectl get pods -n kube-system -l app=terway -o jsonpath='{.items[0].metadata.name}') -- terway-cli show` | 与云平台 ENI 列表不匹配 | **确认根因** |
-| | | `aliyun ecs DescribeNetworkInterfaces --InstanceId ${INSTANCE_ID} --Status Detaching \| jq '.NetworkInterfaceSets.NetworkInterfaceSet \| length'` | 有 Detaching 状态 ENI | **确认根因** |
+| | | `aliyun ecs DescribeNetworkInterfaces --InstanceId ${INSTANCE_ID} --Status Detaching | jq '.NetworkInterfaceSets.NetworkInterfaceSet | length'` | 有 Detaching 状态 ENI | **确认根因** |
 
 ### 2. IP 地址池异常
 
 | 节点 ID | 名称 | 诊断命令 | 预期输出模式 | 判定 |
 |---------|------|---------|------------|------|
-| `cat_ip` | IP 异常分类 | `kubectl get events -n ${NAMESPACE} --field-selector reason=FailedCreatePodSandBox -o json \| jq '[.items[] \| select(.message \| test("IP\|pool\|address"))] \| length'` | `> 0` | → 进入 IP 子树 |
+| `cat_ip` | IP 异常分类 | `kubectl get events -n ${NAMESPACE} --field-selector reason=FailedCreatePodSandBox -o json | jq '[.items[] | select(.message | test("IP|pool|address"))] | length'` | `> 0` | → 进入 IP 子树 |
 
 ...(截断)
 

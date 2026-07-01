@@ -1,20 +1,28 @@
 ---
 title: Synthesis 跨域合成索引
+summary: Synthesis 跨域合成索引
 category: synthesis
-tags: [synthesis, cross-domain, moc, index]
-created: "2026-05-23"
-updated: "2026-05-23"
+tags:
+- synthesis
+- cross-domain
+- moc
+- index
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
 relationships:
-  - target: "[[domain-07-platform-engineering/operate/13-multi-cluster-management.md]]"
-    type: uses
-  - target: "[[concepts/Deployment × Secret 管理.md]]"
-    type: uses
-  - target: "[[entities/etcd.md]]"
-    type: uses
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
+- target: '[[domain-07-platform-engineering/operate/13-multi-cluster-management.md]]'
+  type: uses
+- target: '[[concepts/Deployment × Secret 管理.md]]'
+  type: uses
+- target: '[[entities/etcd.md]]'
+  type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
 ---
+
+
 
 # Synthesis 跨域合成索引
 

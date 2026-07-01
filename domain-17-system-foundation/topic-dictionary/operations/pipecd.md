@@ -1,6 +1,9 @@
 ---
 title: PipeCD 持续交付
-description: 'PipeCD 是 Cybozu 开源的 CNCF Sandbox 持续交付平台，支持 Kubernetes、ECS、Lambda、Terraform 等多种部署...'
+description: PipeCD 是 Cybozu 开源的 CNCF Sandbox 持续交付平台，支持 Kubernetes、ECS、Lambda、Terraform
+  等多种部署...
+summary: PipeCD 是 Cybozu 开源的 CNCF Sandbox 持续交付平台，支持 Kubernetes、ECS、Lambda、Terraform
+  等多种部署...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - operations
 - ci-cd
 - gitops
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # PipeCD 持续交付（PipeCD）
 

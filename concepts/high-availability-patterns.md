@@ -1,6 +1,7 @@
 ---
 title: High Availability Patterns
 description: High Availability Patterns — Kubernetes 生产运维知识库
+summary: High Availability Patterns — Kubernetes 生产运维知识库
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - pdb
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # High Availability Patterns
 

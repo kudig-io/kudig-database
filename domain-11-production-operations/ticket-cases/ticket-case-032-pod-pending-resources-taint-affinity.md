@@ -2,6 +2,8 @@
 title: Pod Pending：资源请求过大 + 节点 taint/反亲和性冲突
 description: 专有云 ACK 大数据命名空间 Spark 驱动 Pod 因内存请求超出节点容量、未容忍 NoSchedule taint 且 podAntiAffinity
   冲突导致长期 Pending 的工单闭环样本。
+summary: 专有云 ACK 大数据命名空间 Spark 驱动 Pod 因内存请求超出节点容量、未容忍 NoSchedule taint 且 podAntiAffinity
+  冲突导致长期 Pending 的工单闭环样本。
 category: production-operations
 tags:
 - ack
@@ -12,6 +14,9 @@ tags:
 - taint
 - affinity
 - p1
+tier: peripheral
+created: '2026-06-26T14:00:00+08:00'
+updated: '2026-06-26T16:30:00+08:00'
 incident_id: TC-2026-032
 priority: P1
 severity: high
@@ -25,9 +30,7 @@ skill_ref:
 fta_ref:
 - '[[domain-10-troubleshooting-diagnostics/topic-fta/list/scheduler-fta.md|FTA: 调度失败]]'
 - '[[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|FTA: Pod 异常]]'
-created: '2026-06-26T14:00:00+08:00'
-updated: '2026-06-26T16:30:00+08:00'
-last_updated: 2026-06-26T16:30:00+08:00
+last_updated: 2026-06-26 16:30:00+08:00
 duplicate_of: INC-2026-ACK-047
 status: duplicate
 duplication_reason: 与 "INC-2026-ACK-047" 主题重复，内容角度相似，降低 RAG 权重
@@ -58,13 +61,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -95,7 +100,7 @@ kubectl get pod -n data-platform -l spark-role=driver
 kubectl describe pod spark-driver-etl-7d9c4f8b5-xk2z9 -n data-platform | tail -60
 
 # 2. 查看 Pod 资源请求与调度约束
-kubectl get pod spark-driver-etl-7d9c4f8b5-xk2z9 -n data-platform -o yaml | grep -A 30 'resources:\|nodeSelector:\|tolerations:\|affinity:'
+kubectl get pod spark-driver-etl-7d9c4f8b5-xk2z9 -n data-platform -o yaml | grep -A 30 'resources:|nodeSelector:|tolerations:|affinity:'
 
 # 3. 检查节点资源与标签
 kubectl top node

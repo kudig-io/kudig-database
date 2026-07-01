@@ -1,16 +1,23 @@
 ---
-title: "apiserver × PVC"
-category: "synthesis"
-tags: ["cross-domain", "cluster", "storage"]
-created: "2026-05-23"
-updated: "2026-05-23"
+title: apiserver × PVC
+summary: apiserver × PVC：apiserver与PVC是Kubernetes生产环境中的两个关键维度。理解它们之间的交互关系对于构建稳定、可观测的集群至关重要。
+category: synthesis
+tags:
+- cross-domain
+- cluster
+- storage
+tier: core
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
 relationships:
-  - target: "[[entities/helm.md]]"
-    type: uses
-  - target: "[[entities/prometheus.md]]"
-    type: uses
+- target: '[[entities/helm.md]]'
+  type: uses
+- target: '[[entities/prometheus.md]]'
+  type: uses
 ---
+
+
 
 # apiserver × PVC
 

@@ -1,12 +1,20 @@
 ---
-title: "Domain 18 内容索引"
+title: Domain 18 内容索引
+summary: Domain 18 内容索引
 category: domain-18-manifests-patterns
-tags: ["index", "domain-18-manifests-patterns", "navigation"]
-sources: ["auto-generated"]
+tags:
+- index
+- domain-18-manifests-patterns
+- navigation
+tier: supporting
+sources:
+- auto-generated
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 ---
+
+
 
 # Domain 18 内容索引
 

@@ -1,6 +1,7 @@
 ---
 title: 企业级容灾架构与混沌工程深度实践
 description: '# 企业级容灾架构与混沌工程深度实践'
+summary: '# 企业级容灾架构与混沌工程深度实践'
 category: disaster-recovery
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - redis
 - mysql
 - kafka
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 企业级容灾架构与混沌工程深度实践
 

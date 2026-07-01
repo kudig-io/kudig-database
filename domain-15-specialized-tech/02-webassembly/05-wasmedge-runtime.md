@@ -1,6 +1,7 @@
 ---
 title: WasmEdge 运行时
 description: 1. [WasmEdge 概述](#1-wasmedge-概述)
+summary: 1. [WasmEdge 概述](#1-wasmedge-概述)
 category: webassembly-cloud-native
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - job
 - operator
 - gpu
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[WasmEdge|WasmEdge]] 运行时
 # WasmEdge Runtime

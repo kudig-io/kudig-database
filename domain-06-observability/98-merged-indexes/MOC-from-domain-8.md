@@ -1,6 +1,7 @@
 ---
 title: domain-06-observability MOC
 description: domain-06-observability 知识域导航页，覆盖 33 篇文档
+summary: domain-06-observability 知识域导航页，覆盖 33 篇文档
 category: moc
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - prometheus
 - grafana
 - hpa
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - observability-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-06-observability MOC
 

@@ -1,6 +1,7 @@
 ---
 title: 04-企业级监控体系
 description: '# 04-企业级监控体系'
+summary: '# 04-企业级监控体系'
 category: production-operations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - daemonset
 - job
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -47,8 +50,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/monitoring-fta.md
   label: '故障树: monitoring'
-created: "2026-05-23"
 ---
+
+
 
 # 04-企业级监控体系
 

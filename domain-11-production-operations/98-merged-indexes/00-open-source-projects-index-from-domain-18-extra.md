@@ -1,6 +1,7 @@
 ---
 title: Domain-18 生产运维 — 开源项目索引
 description: '# Domain-18 生产运维 — 开源项目索引'
+summary: '# Domain-18 生产运维 — 开源项目索引'
 category: production-operations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - opa
 - kafka
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -40,8 +43,9 @@ prerequisites:
 - kafka-basics
 - policy-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # Domain-18 生产运维 — 开源项目索引
 

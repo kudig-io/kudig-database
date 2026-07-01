@@ -1,6 +1,7 @@
 ---
 title: API 网关与服务网格集成深度实践
 description: '# API 网关与服务网格集成深度实践'
+summary: '# API 网关与服务网格集成深度实践'
 category: service-mesh-microservices
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - opa
 - redis
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -61,8 +64,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
-created: "2026-05-23"
 ---
+
+
 
 # API 网关与服务网格集成深度实践
 

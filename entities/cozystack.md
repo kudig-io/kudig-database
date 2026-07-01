@@ -1,6 +1,7 @@
 ---
 title: Cozystack (entities)
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - flux
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - etcd-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # Cozystack
 

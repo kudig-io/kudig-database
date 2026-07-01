@@ -1,17 +1,23 @@
 ---
-title: "Research: Kubernetes Specialized Technologies 2025-2026"
+title: 'Research: Kubernetes Specialized Technologies 2025-2026'
+summary: 'Research: Kubernetes Specialized Technologies 2025-2026：2025-2026 年，Kubernetes
+  生态中的专项技术栈经历了一次质的飞跃。eBPF 从内核可观测性工具演化为全栈基础设施层，覆盖网络（Cilium）、安全（Tetragon）、可观测性（OpenTelemetry
+  eBPF exporter）三大领域；WebAssembl...'
 category: synthesis
 tags:
-  - ebpf
-  - wasm
-  - edge
-  - serverless
-  - k8s
-  - research
+- ebpf
+- wasm
+- edge
+- serverless
+- k8s
+- research
+tier: supporting
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # Kubernetes 专项技术研究综合 2025-2026
 
@@ -86,3 +92,7 @@ Tetragon 在 2025 年提供了内核级的实时策略执行能力：进程生�
 - [[concepts/k8s-networking-evolution.md|k8s networking evolution]] — 边缘网络架构（低延迟、多集群互联）与服务网格扩展是专项技术的网络基础
 - [[concepts/k8s-security-compliance.md|k8s security compliance]] — IoT 与边缘场景的安全挑战（设备认证、远程证明）需要定制化安全策略
 - [[concepts/k8s-ai-ml-infrastructure.md|k8s ai ml infrastructure]] — 边缘 AI 推理（KServe 边缘模式）与 Serverless ML 函数是专项技术的重要应用场景
+
+## Related
+
+- [[research|#research Hub]] — tag hub

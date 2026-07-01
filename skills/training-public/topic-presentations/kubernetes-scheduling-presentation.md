@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 调度与编排策略全栈培训 (training-public)
 description: '# Kubernetes 调度与编排策略全栈培训'
+summary: '# Kubernetes 调度与编排策略全栈培训'
 category: presentations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - pdb
 - statefulset
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -42,8 +45,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 调度与编排策略全栈培训
 

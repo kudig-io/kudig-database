@@ -1,6 +1,7 @@
 ---
 title: NATS 深度解析
 description: '# NATS 深度解析'
+summary: '# NATS 深度解析'
 category: domain
 tags:
 - nats
@@ -9,6 +10,8 @@ tags:
 - cloud-native
 - statefulset
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 - middleware
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[NATS|NATS]] 深度解析
 

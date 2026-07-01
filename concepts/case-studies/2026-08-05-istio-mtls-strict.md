@@ -1,15 +1,26 @@
 ---
-title: "[2026-08-05] [P0] Istio mTLS 严格模式导致服务连通性中断"
+title: '[2026-08-05] [P0] Istio mTLS 严格模式导致服务连通性中断'
+summary: '[2026-08-05] [P0] Istio mTLS 严格模式导致服务连通性中断：14:05，监控大盘全红，所有服务间调用返回 connection
+  reset by peer 或 upstream connect error。用户反馈：'
 category: case-study
-tags: [production, incident, networking, service-mesh, istio, security]
-date: "2026-08-05"
+tags:
+- production
+- incident
+- networking
+- service-mesh
+- istio
+- security
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-08-05'
 severity: P0
-mttr: "27min"
+mttr: 27min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-08-05] Istio mTLS STRICT 模式误配导致全集群服务间调用失败
 

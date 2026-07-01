@@ -1,6 +1,7 @@
 ---
 title: Service 无法访问 深度解析
 description: 对 Service 不可达的五类典型场景进行 prose 决策树拆解，覆盖阿里云 SLB/NLB/ALB 集成、Terway 网络注意事项与特殊边界条件
+summary: 对 Service 不可达的五类典型场景进行 prose 决策树拆解，覆盖阿里云 SLB/NLB/ALB 集成、Terway 网络注意事项与特殊边界条件
 category: Kubernetes-Incident-Response
 tags:
 - k8s
@@ -15,6 +16,8 @@ tags:
 - aliyun
 - deep-dive
 - skills
+tier: peripheral
+created: '2026-06-26'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -45,12 +48,12 @@ k8s_versions:
 skill_id: SKILL-SVC-001-DEEP
 skill_name: Service 无法访问 深度解析
 version: 1.0.0
-created: "2026-06-26"
 authors:
 - name: KUDIG Team
   role: contributor
-
 ---
+
+
 
 # Service 无法访问 深度解析
 
@@ -271,3 +274,7 @@ kubectl logs -n kube-system -l component=cloud-controller-manager --tail=100
 - [[domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复 Skill]]
 - Terway 网络专题
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+
+## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub

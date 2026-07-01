@@ -1,6 +1,7 @@
 ---
 title: Docker 架构概述与核心概念
 description: 'title: Docker 架构概述与核心概念'
+summary: 'title: Docker 架构概述与核心概念'
 category: general
 tags:
 - docker
@@ -13,6 +14,8 @@ tags:
 - containerd
 - cri-o
 - mysql
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Docker 架构概述与核心概念
 description: '# Docker 架构概述与核心概念'
@@ -617,6 +621,8 @@ Image Index (多架构索引)
 - [165-cri-container-runtime-deep-dive](./165-cri-container-runtime-deep-dive.md) - CRI 详解
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - 45-smart-port-shipping
 - 65-autonomous-driving-sim

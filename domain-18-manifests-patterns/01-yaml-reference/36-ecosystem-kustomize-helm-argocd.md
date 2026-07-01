@@ -1,6 +1,7 @@
 ---
 title: 36 - 生态工具 (Kustomize / Helm / ArgoCD) YAML 配置参考
 description: '# 36 - 生态工具 (Kustomize / Helm / ArgoCD) YAML 配置参考'
+summary: '# 36 - 生态工具 (Kustomize / Helm / ArgoCD) YAML 配置参考'
 category: yaml-manifests
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -56,8 +59,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta.md
   label: '故障树: helm'
-created: "2026-05-23"
 ---
+
+
 
 # 36 - 生态工具 (Kustomize / [[Helm|Helm]] / [[ArgoCD|ArgoCD]]) YAML 配置参考
 

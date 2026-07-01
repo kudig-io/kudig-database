@@ -1,12 +1,15 @@
 ---
 title: 重要度
-description: '重要度（Importance Measure）衡量基本事件对顶事件的影响程度。它是 FTA 定量分析的关键指标，用于确定哪些基本事件最值得改进。...'
+description: 重要度（Importance Measure）衡量基本事件对顶事件的影响程度。它是 FTA 定量分析的关键指标，用于确定哪些基本事件最值得改进。...
+summary: 重要度（Importance Measure）衡量基本事件对顶事件的影响程度。它是 FTA 定量分析的关键指标，用于确定哪些基本事件最值得改进。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - importancemeasure
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 重要度
 

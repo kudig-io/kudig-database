@@ -1,6 +1,7 @@
 ---
 title: prometheus v2.23 Release Notes
 description: prometheus v2.23 Release Notes — Kubernetes 生产运维知识库
+summary: prometheus v2.23 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - docker
 - opa
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - cncf-ecosystem
 - prometheus-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Prometheus|prometheus]] v2.23 Release Notes
 

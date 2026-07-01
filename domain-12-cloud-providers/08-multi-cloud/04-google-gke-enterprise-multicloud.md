@@ -1,6 +1,7 @@
 ---
 title: Google GKE 企业级多云管理深度实践
 description: 'title: Google GKE 企业级多云管理深度实践'
+summary: 'title: Google GKE 企业级多云管理深度实践'
 category: general
 tags:
 - cloud
@@ -13,6 +14,8 @@ tags:
 - containerd
 - redis
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 - etcd-basics
 - redis-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Google GKE 企业级多云管理深度实践
 description: '# Google GKE 企业级多云管理深度实践'

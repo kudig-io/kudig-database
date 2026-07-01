@@ -1,6 +1,7 @@
 ---
 title: 工单回复话术索引
 description: 阿里云专有云 K8s 运维工单智能体的标准回复话术索引，分类链接到确认收到、请求信息、给出方案、升级通知、闭环确认五类模板。
+summary: 阿里云专有云 K8s 运维工单智能体的标准回复话术索引，分类链接到确认收到、请求信息、给出方案、升级通知、闭环确认五类模板。
 category: domain-11-production-operations
 tags:
 - reply-templates
@@ -11,8 +12,9 @@ tags:
 - apsara-stack
 - communication
 - sre
-created: "2026-06-29"
-updated: "2026-06-29"
+tier: core
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06-29
 difficulty: beginner
 reading_level: beginner
@@ -42,6 +44,8 @@ authors:
 - name: KUDIG Team
   role: contributor
 ---
+
+
 
 # 工单回复话术索引
 

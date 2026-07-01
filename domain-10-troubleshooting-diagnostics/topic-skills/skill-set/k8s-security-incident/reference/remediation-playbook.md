@@ -1,12 +1,20 @@
 ---
-title: "Security Incident Response Playbook"
+title: Security Incident Response Playbook
+summary: Security Incident Response Playbook：识别 → 遏制 → 根除 → 恢复 → 总结
 category: remediation
-skill_set: "k8s-security-incident"
-created: "2026-05-22"
-updated: "2026-05-22"
+tags:
+- reference
+- remediation
+- playbook
+- visibility/public
+tier: supporting
+created: '2026-05-22'
+updated: '2026-05-22'
+skill_set: k8s-security-incident
 last_updated: 2026-05-22
-tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
+
+
 
 # 修复操作手册 / Remediation Playbook
 
@@ -84,7 +92,7 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
 - **前置检查**:
   ```bash
   # 查看可疑的 ServiceAccount 令牌使用
-  kubectl get events --all-namespaces | grep -i "serviceaccount\|token"
+  kubectl get events --all-namespaces | grep -i "serviceaccount|token"
   ```
 - **执行命令**:
 
@@ -191,7 +199,7 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
 - **前置检查**:
   ```bash
   # 查看最近的配置变更
-  kubectl get events --all-namespaces | grep -i "patch\|update\|delete"
+  kubectl get events --all-namespaces | grep -i "patch|update|delete"
   ```
 - **执行命令**:
 
@@ -296,3 +304,9 @@ kubectl get pods --all-namespaces -o jsonpath='{range .items[*].spec.containers[
 4. **网络流量**: 如有抓包，保存 pcap 文件
 5. **内存转储**: 如进行，保存到安全存储
 6. **时间线**: 详细的事件时间线记录
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

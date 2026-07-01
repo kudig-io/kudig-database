@@ -1,6 +1,9 @@
 ---
 title: 02 - Pod 与容器生命周期事件
-description: '**本文档全面覆盖 kubelet 产生的 Pod 和容器生命周期事件，包括容器创建、启动、终止、重启、沙箱管理等全流程事件，是生产环境排查 Pod 启动失败、CrashLoopBackOff、驱逐等问题的核心参考。**'
+description: '**本文档全面覆盖 kubelet 产生的 Pod 和容器生命周期事件，包括容器创建、启动、终止、重启、沙箱管理等全流程事件，是生产环境排查
+  Pod 启动失败、CrashLoopBackOff、驱逐等问题的核心参考。**'
+summary: '**本文档全面覆盖 kubelet 产生的 Pod 和容器生命周期事件，包括容器创建、启动、终止、重启、沙箱管理等全流程事件，是生产环境排查 Pod
+  启动失败、CrashLoopBackOff、驱逐等问题的核心参考。**'
 category: kubernetes-events
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - cilium
 - flannel
 - calico
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +56,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md
   label: '故障树: pod'
-created: "2026-05-23"
 ---
+
+
 
 # 02 - Pod 与容器生命周期事件
 
@@ -936,7 +942,7 @@ kubectl get pod my-app -o jsonpath='{.spec.terminationGracePeriodSeconds}'
 kubectl get pod my-app -o jsonpath='{.spec.containers[?(@.name=="app")].lifecycle.preStop}'
 
 # 3. 检查容器日志，查看应用是否收到 SIGTERM
-kubectl logs my-app -c app --previous | grep -i "sigterm\|shutdown\|graceful"
+kubectl logs my-app -c app --previous | grep -i "sigterm|shutdown|graceful"
 
 # 4. 查看容器退出码（应为 137 = SIGKILL）
 kubectl get pod my-app -o jsonpath='{.status.containerStatuses[?(@.name=="app")].lastState.terminated.exitCode}'
@@ -1194,7 +1200,7 @@ sudo journalctl -u calico-node -n 50
 sudo systemctl status containerd
 
 # 查看 containerd 日志
-sudo journalctl -u containerd -n 100 | grep -i "sandbox\|error"
+sudo journalctl -u containerd -n 100 | grep -i "sandbox|error"
 
 # 检查 CRI 接口是否正常
 sudo crictl version
@@ -1254,14 +1260,14 @@ sudo modprobe br_netfilter
 
 | 错误消息关键词 | 根本原因 | 排查命令 | 解决方案 |
 |:---|:---|:---|:---|
-| **failed to setup network** | CNI 插件错误 | `kubectl get pods -n kube-system \| grep cni` | 重启 CNI 插件 Pod |
+| **failed to setup network** | CNI 插件错误 | `kubectl get pods -n kube-system | grep cni` | 重启 CNI 插件 Pod |
 | | CNI 配置错误 | `cat /etc/cni/net.d/*.conf` | 修正 CNI 配置文件 |
 | | CNI 无法连接 API Server | `kubectl get --raw /healthz` | 检查 API Server 可达性 |
-| **failed to reserve sandbox name** | 沙箱名称冲突 | `sudo crictl sandboxes \| grep my-app` | 手动删除旧沙箱: `crictl rmsandbox <id>` |
+| **failed to reserve sandbox name** | 沙箱名称冲突 | `sudo crictl sandboxes | grep my-app` | 手动删除旧沙箱: `crictl rmsandbox <id>` |
 | **too many open files** | 文件描述符耗尽 | `cat /proc/sys/fs/file-nr` | 增加 `fs.file-max`: `sysctl -w fs.file-max=2097152` |
 | **no space left on device** | 磁盘空间不足 | `df -h /var/lib` | 清理容器镜像/日志，或扩容磁盘 |
 | **cannot allocate memory** | 内存不足 | `free -h` | 驱逐低优先级 Pod 或添加节点 |
-| **failed to start sandbox container** | pause 镜像不存在 | `sudo crictl images \| grep pause` | 手动拉取 pause 镜像 |
+| **failed to start sandbox container** | pause 镜像不存在 | `sudo crictl images | grep pause` | 手动拉取 pause 镜像 |
 
 **典型案例解决方案**:
 
@@ -1941,7 +1947,7 @@ ssh <node> "sudo journalctl -u kubelet -n 200 | grep -i evict"
 | **磁盘压力** | 容器日志过多 | `du -h /var/log/pods` | 配置日志轮转 | 使用日志收集系统（如 EFK） |
 | | 镜像占用过多 | `crictl images` | 清理未使用镜像 | 配置镜像自动清理策略 |
 | | 临时文件积累 | `du -h /var/lib/kubelet` | 手动清理 | 配置 emptyDir 限制 |
-| **PID 不足** | 进程泄漏 | `ps aux \| wc -l` | 重启泄漏的容器 | 修复应用进程泄漏 |
+| **PID 不足** | 进程泄漏 | `ps aux | wc -l` | 重启泄漏的容器 | 修复应用进程泄漏 |
 | | PID 限制过低 | 检查 `pid_max` | 增加 PID 限制 | 调整 kubelet `--pod-max-pids` |
 | **临时存储超限** | emptyDir 使用过多 | `kubectl exec -- df -h` | 清理临时文件 | 使用 PV 或对象存储 |
 | | 容器写层过大 | 检查容器写入量 | 重启容器 | 优化应用 I/O 模式 |

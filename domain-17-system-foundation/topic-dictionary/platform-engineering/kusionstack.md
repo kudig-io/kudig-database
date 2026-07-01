@@ -1,6 +1,7 @@
 ---
 title: Kusion 配置管理
-description: 'KusionStack 是蚂蚁集团开源的 CNCF Sandbox 项目，面向应用的配置管理平台，使用 KCL 语言定义应用配置，整合 Kubernetes/T...'
+description: KusionStack 是蚂蚁集团开源的 CNCF Sandbox 项目，面向应用的配置管理平台，使用 KCL 语言定义应用配置，整合 Kubernetes/T...
+summary: KusionStack 是蚂蚁集团开源的 CNCF Sandbox 项目，面向应用的配置管理平台，使用 KCL 语言定义应用配置，整合 Kubernetes/T...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - platform-engineering
 - configuration
 - iac
+tier: supporting
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Kusion 配置管理（KusionStack）
 

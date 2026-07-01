@@ -1,6 +1,7 @@
 ---
 title: 节点生命周期管理
 description: '# 节点生命周期管理'
+summary: '# 节点生命周期管理'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - containerd
 - cri-o
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # 节点生命周期管理
 

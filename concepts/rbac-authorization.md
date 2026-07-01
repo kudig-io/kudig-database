@@ -1,13 +1,22 @@
 ---
-title: "RBAC 授权模型"
+title: RBAC 授权模型
+summary: RBAC 授权模型：Role-Based Access Control（RBAC）是 Kubernetes 的核心授权机制。它通过将权限（Rule）打包成角色（Role/ClusterRole），再将角色绑定到主体（Subject），实现对集群资源的精细化访问控制。RBAC
+  是 Kubernetes 多租户与安全隔离的基石。
 category: concepts
-tags: ["core-concept", "domain-05", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- core-concept
+- domain-05
+- visibility/public
+tier: core
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # RBAC 授权模型
 
@@ -84,3 +93,7 @@ Kubernetes 预定义了四个高频使用的 ClusterRole，平台团队可直接
 - [[kubernetes-pki-certificate-system]] — Kubernetes PKI 与证书体系
 - [[multi-tenancy-isolation]] — 多租户隔离机制
 - [[secrets-management]] — Secret 管理机制
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)
 description: '# Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)'
+summary: '# Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)'
 category: papers
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - flannel
 - calico
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -52,8 +55,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)
 
@@ -843,5 +847,9 @@ dra_pending_resource_claims > 50  # 告警：待分配ResourceClaim积压
 - 04-kubernetes-multi-cloud-hybrid-deployment
 
 ## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

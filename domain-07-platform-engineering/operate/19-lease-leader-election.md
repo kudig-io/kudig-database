@@ -1,6 +1,7 @@
 ---
 title: 69 - Lease 与 Leader 选举机制 (Lease & Leader Election)
 description: '## Lease 机制架构概览'
+summary: '## Lease 机制架构概览'
 category: platform-ops
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -58,8 +61,9 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
-created: "2026-05-23"
 ---
+
+
 
 # 69 - Lease 与 Leader 选举机制 (Lease & Leader Election)
 

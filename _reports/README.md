@@ -1,6 +1,7 @@
 ---
 title: 项目报告 (Reports)
 description: KUDIG-DATABASE 质量评估、统计数据和改进进展报告索引
+summary: KUDIG-DATABASE 质量评估、统计数据和改进进展报告索引
 category: general
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - gpu
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # 项目报告 (Reports)
 

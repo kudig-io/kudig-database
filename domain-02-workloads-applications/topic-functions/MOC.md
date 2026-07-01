@@ -1,6 +1,7 @@
 ---
 title: topic-functions MOC
 description: topic-functions 专题导航页，覆盖 82 篇文档
+summary: topic-functions 专题导航页，覆盖 82 篇文档
 category: moc
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - webhook
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - platform-engineering-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # topic-functions [[MOC|MOC]]
 
@@ -131,6 +135,8 @@ created: "2026-05-23"
 *本文档由 scripts/generate-[[MOC]]s.py 自动生成，最后更新 2026-05-21。*
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[concepts/resource-management.md|resource-management]]
 - [[entities/kubernetes.md|kubernetes]]

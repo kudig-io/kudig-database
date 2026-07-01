@@ -1,12 +1,19 @@
 ---
-title: "模板标题"
+title: 模板标题
+summary: 模板标题：本目录收录项目所有标准化文档模板。新建文档时应从对应模板创建，并严格遵循模板结构。
 category: templates
-tags: ["templates", "visibility/public"]
-sources: ["auto-generated"]
+tags:
+- templates
+- visibility/public
+tier: supporting
+sources:
+- auto-generated
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # KUDIG 文档模板体系
 
@@ -92,6 +99,8 @@ cp templates/fta-template.md domain-10-troubleshooting-diagnostics/topic-fta/lis
 | 2.0 | 2026-05 | 合并 skill-schema + skill-template 为完整 Skill 模板；融合 appendix-d-templates 到 FTA 模板；新增 FEBM 模板；presentation-template 纳入体系 |
 
 ## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference

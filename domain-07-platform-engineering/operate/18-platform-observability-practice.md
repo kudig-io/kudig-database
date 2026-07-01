@@ -1,6 +1,7 @@
 ---
 title: 平台可观测性深度实践 (Platform Observability Deep Practice)
 description: '# 平台可观测性深度实践 (Platform Observability Deep Practice)'
+summary: '# 平台可观测性深度实践 (Platform Observability Deep Practice)'
 category: platform-ops
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - coredns
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -59,8 +62,9 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
-created: "2026-05-23"
 ---
+
+
 
 # 平台可观测性深度实践 (Platform Observability Deep Practice)
 

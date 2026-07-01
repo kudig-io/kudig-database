@@ -1,6 +1,7 @@
 ---
 title: 31 - CRD与Operator开发
 description: 'storage: false  # 不是存储版本'
+summary: 'storage: false  # 不是存储版本'
 category: platform-ops
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - crd
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -56,8 +59,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/crd-operator-fta.md
   label: '故障树: crd-operator'
-created: "2026-05-23"
 ---
+
+
 
 # 31 - CRD与Operator开发
 

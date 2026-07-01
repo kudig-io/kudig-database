@@ -1,6 +1,7 @@
 ---
 title: 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rate Limiting
 description: '# 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rate Limiting'
+summary: '# 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rate Limiting'
 category: service-mesh-microservices
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - redis
 - gateway
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -58,8 +61,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
-created: "2026-05-23"
 ---
+
+
 
 # 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rate Limiting
 

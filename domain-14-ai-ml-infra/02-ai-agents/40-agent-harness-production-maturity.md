@@ -1,6 +1,7 @@
 ---
 title: Agent Harness 生产运维与成熟度模型 (domain-14-ai-ml-infra)
 description: 'title: Agent Harness 生产运维与成熟度模型'
+summary: 'title: Agent Harness 生产运维与成熟度模型'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - postgresql
 - gateway
 - llm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - monitoring-basics
 - redis-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Agent Harness 生产运维与成熟度模型
 description: '# Agent Harness 生产运维与成熟度模型'

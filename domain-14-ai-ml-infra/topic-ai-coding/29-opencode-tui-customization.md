@@ -1,7 +1,9 @@
 ---
 title: TUI 定制：快捷键、主题与界面
-description: '**文档类型**: 定制指南 | **最后更新**: 2026-03 | **关键词**: OpenCode, TUI, Keybinds, Themes, Leader Key, Bubble Tea, tui.json,
-  Custom Theme'
+description: '**文档类型**: 定制指南 | **最后更新**: 2026-03 | **关键词**: OpenCode, TUI, Keybinds,
+  Themes, Leader Key, Bubble Tea, tui.json, Custom Theme'
+summary: '**文档类型**: 定制指南 | **最后更新**: 2026-03 | **关键词**: OpenCode, TUI, Keybinds, Themes,
+  Leader Key, Bubble Tea, tui.json, Custom Theme'
 category: ai-coding
 tags:
 - ai
@@ -9,6 +11,8 @@ tags:
 - copilot
 - code-generation
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +31,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # TUI 定制：快捷键、主题与界面
 

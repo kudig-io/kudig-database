@@ -1,19 +1,24 @@
 ---
-title: "K8S AI/ML 基础设施"
+title: K8S AI/ML 基础设施
+summary: K8S AI/ML 基础设施：Kubernetes 已成为 AI/ML 工作负载的标准编排平台。从 GPU 调度到 LLM 推理、从分布式训练到端到端
+  ML 平台，K8S 生态正在快速演进以满足大模型时代的需求。
 category: concepts
 tags:
-  - ai
-  - ml
-  - gpu
-  - dra
-  - llm
-  - kubeflow
-  - ray
-  - k8s
+- ai
+- ml
+- gpu
+- dra
+- llm
+- kubeflow
+- ray
+- k8s
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # K8S AI/ML 基础设施
 

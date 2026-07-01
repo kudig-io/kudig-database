@@ -1,6 +1,7 @@
 ---
 title: Network Policies
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - ingress
 - networkpolicy
 - ebpf
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -31,8 +34,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # Network Policies
 

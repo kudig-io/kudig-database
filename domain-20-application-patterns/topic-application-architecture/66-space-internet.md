@@ -1,6 +1,7 @@
 ---
 title: 太空互联网架构设计 — 阿里云视角
 description: 'title: 太空互联网架构设计'
+summary: 'title: 太空互联网架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - kafka
 - job
 - cronjob
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - gpu-scheduling-basics
 - policy-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 太空互联网架构设计
 description: '# 太空互联网架构设计 — 阿里云视角'

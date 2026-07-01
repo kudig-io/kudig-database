@@ -1,15 +1,26 @@
 ---
-title: "[2026-05-01] [P1] ImagePullBackOff 由于镜像仓库认证失败"
+title: '[2026-05-01] [P1] ImagePullBackOff 由于镜像仓库认证失败'
+summary: '[2026-05-01] [P1] ImagePullBackOff 由于镜像仓库认证失败：09:00，CI/CD 流水线大量失败，ArgoCD
+  显示大量 Pod 状态为 ImagePullBackOff：'
 category: case-study
-tags: [production, incident, workloads, image, registry, secret]
-date: "2026-05-01"
+tags:
+- production
+- incident
+- workloads
+- image
+- registry
+- secret
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-05-01'
 severity: P1
-mttr: "15min"
+mttr: 15min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-05-01] 镜像仓库认证 Secret 过期导致全量 Pod ImagePullBackOff
 

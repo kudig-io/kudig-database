@@ -1,6 +1,9 @@
 ---
 title: CloudEvents 事件标准
-description: 'CloudEvents 是 CNCF 毕业项目，定义了事件数据的通用格式规范，使不同系统和平台之间的事件交换标准化，是事件驱动架构和 Serverless 的基...'
+description: CloudEvents 是 CNCF 毕业项目，定义了事件数据的通用格式规范，使不同系统和平台之间的事件交换标准化，是事件驱动架构和 Serverless
+  的基...
+summary: CloudEvents 是 CNCF 毕业项目，定义了事件数据的通用格式规范，使不同系统和平台之间的事件交换标准化，是事件驱动架构和 Serverless
+  的基...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - platform-engineering
 - events
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # CloudEvents 事件标准（CloudEvents）
 

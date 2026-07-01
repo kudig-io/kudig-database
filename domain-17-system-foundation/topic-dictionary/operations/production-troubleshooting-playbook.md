@@ -1,6 +1,7 @@
 ---
 title: 16 - 生产环境故障排查剧本
 description: '# 16 - 生产环境故障排查剧本'
+summary: '# 16 - 生产环境故障排查剧本'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - cilium
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -38,9 +41,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - logging-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 16 - 生产环境故障排查剧本
 
@@ -2030,7 +2033,7 @@ kubectl get nodes -o json | jq -r '.items[] | select(.spec.unschedulable != true
 
 # 5. 检查资源约束
 echo "5. 资源约束检查:"
-kubectl describe pod $POD_NAME -n $NAMESPACE | grep -A 10 "Limits\|Requests"
+kubectl describe pod $POD_NAME -n $NAMESPACE | grep -A 10 "Limits|Requests"
 
 # 6. 检查节点资源
 echo "6. 节点资源检查:"
@@ -2570,7 +2573,7 @@ $ kubectl top pods -n production -l app=order-service --use-protocol-buffers
 # 结果: QPS从1000增加到5000 ✅ 证实
 
 # 验证H2: 内存泄漏
-$ kubectl logs order-service-7d5b7c9f8c-abc12 -n production | grep -i "memory\|heap"
+$ kubectl logs order-service-7d5b7c9f8c-abc12 -n production | grep -i "memory|heap"
 # 结果: 看到大量 "GC overhead limit exceeded" ✅ 证实内存问题
 
 # 验证H3: 数据库瓶颈

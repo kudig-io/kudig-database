@@ -1,6 +1,7 @@
 ---
 title: MySQL PostgreSQL Redis Operator 对比
 description: '| **监控** | MySQL Exporter | PostgreSQL Exporter | Redis Exporter |'
+summary: '| **监控** | MySQL Exporter | PostgreSQL Exporter | Redis Exporter |'
 category: domain
 tags:
 - kubernetes
@@ -9,6 +10,8 @@ tags:
 - postgresql
 - redis
 - comparison
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # MySQL PostgreSQL Redis Operator 对比
 

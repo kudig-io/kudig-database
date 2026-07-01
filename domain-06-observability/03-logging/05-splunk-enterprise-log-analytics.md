@@ -1,6 +1,7 @@
 ---
 title: Splunk Enterprise Log Analytics Platform 深度实践
 description: '# Splunk Enterprise Log Analytics Platform 深度实践'
+summary: '# Splunk Enterprise Log Analytics Platform 深度实践'
 category: logging-management-analytics
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - webhook
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -48,8 +51,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Splunk Enterprise Log Analytics Platform 深度实践
 

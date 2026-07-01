@@ -1,6 +1,7 @@
 ---
 title: Flannel 网络异常故障树分析 (skills)
 description: '# Flannel 网络异常故障树分析'
+summary: '# Flannel 网络异常故障树分析'
 category: skills
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - etcd
 - flannel
 - daemonset
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 fta_id: FTA-FLANNEL-001
 component: Flannel
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 # Flannel 网络异常故障树分析
 

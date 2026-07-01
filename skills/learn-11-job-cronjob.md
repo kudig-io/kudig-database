@@ -1,6 +1,7 @@
 ---
 title: 第九课：Job 和 CronJob - 任务调度
 description: '# 第九课：Job 和 CronJob - 任务调度'
+summary: '# 第九课：Job 和 CronJob - 任务调度'
 category: skills
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - job
 - cronjob
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第九课：Job 和 [[CronJob|CronJob]] - 任务调度
 

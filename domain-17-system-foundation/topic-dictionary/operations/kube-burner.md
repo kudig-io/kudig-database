@@ -1,6 +1,9 @@
 ---
 title: kube-burner 性能测试
-description: 'kube-burner 是 Cloud-Bulldozer 开源的 Kubernetes 性能测试和压力测试工具，通过声明式配置定义测试场景，用于评估 K8s ...'
+description: kube-burner 是 Cloud-Bulldozer 开源的 Kubernetes 性能测试和压力测试工具，通过声明式配置定义测试场景，用于评估
+  K8s ...
+summary: kube-burner 是 Cloud-Bulldozer 开源的 Kubernetes 性能测试和压力测试工具，通过声明式配置定义测试场景，用于评估
+  K8s ...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - operations
 - performance
 - testing
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # kube-burner 性能测试（kube-burner）
 

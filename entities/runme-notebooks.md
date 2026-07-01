@@ -1,6 +1,7 @@
 ---
 title: Runme (entities)
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - runme-notebooks
 - crd
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,8 +25,9 @@ trigger_keywords:
 - Runme
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Runme
 

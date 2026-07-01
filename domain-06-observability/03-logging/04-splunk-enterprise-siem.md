@@ -1,6 +1,7 @@
 ---
 title: Splunk企业级日志分析与安全智能平台深度实践
 description: 'title: Splunk企业级日志分析与安全智能平台深度实践'
+summary: 'title: Splunk企业级日志分析与安全智能平台深度实践'
 category: general
 tags:
 - observability
@@ -11,6 +12,8 @@ tags:
 - networkpolicy
 - operator
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - observability-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Splunk企业级日志分析与安全智能平台深度实践
 description: '# Splunk企业级日志分析与安全智能平台深度实践'

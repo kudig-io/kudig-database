@@ -1,6 +1,7 @@
 ---
 title: 01 - Kubernetes认证授权体系详解
 description: 'title: Kubernetes 认证授权体系详解'
+summary: 'title: Kubernetes 认证授权体系详解'
 category: general
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - rbac
 - networkpolicy
 - webhook
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - rbac-basics
 - prometheus-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: [[Kubernetes|Kubernetes]] 认证授权体系详解

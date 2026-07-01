@@ -1,6 +1,7 @@
 ---
 title: 10 - Ingress / IngressClass YAML 配置参考
 description: '# 10 - Ingress / IngressClass YAML 配置参考'
+summary: '# 10 - Ingress / IngressClass YAML 配置参考'
 category: yaml-manifests
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - envoy
 - redis
 - mysql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -53,8 +56,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md
   label: '故障树: ingress'
-created: "2026-05-23"
 ---
+
+
 
 # 10 - [[Ingress|Ingress]] / IngressClass YAML 配置参考
 

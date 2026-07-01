@@ -1,6 +1,7 @@
 ---
 title: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 description: '## 1. 概述'
+summary: '## 1. 概述'
 category: scaling
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - kafka
 - hpa
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -22,7 +25,8 @@ audience:
 - 技术支持
 estimated_read_time: 20min
 intent_queries:
-- HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation 是什么
+- HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
+  是什么
 - 如何 HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 trigger_keywords:
 - HPA not scaling
@@ -49,7 +53,8 @@ prerequisites:
 - kafka-basics
 - gpu-scheduling-basics
 skill_id: SKILL-12_AUTOSCALING_FAILURE-001
-skill_name: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
+skill_name: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis &
+  Remediation
 version: 1.0.0
 k8s_versions:
 - 1.28.x
@@ -58,8 +63,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 <!-- condition: kubectl get hpa -A -o jsonpath='{range .items[?(@.status.currentReplicas != @.status.desiredReplicas)]} {.metadata.namespace}/{.metadata.name}{"\n"}{end}' 显示副本数不匹配 -->
 
@@ -104,9 +110,9 @@ created: "2026-05-23"
 | S3 | HPA 频繁扩缩（flapping），Replicas 在两个值之间震荡 / HPA flapping | `kubectl describe hpa <name>` 查看 Events，短时间内交替出现 ScaleUp/ScaleDown | 0.90 | 业务流量确实高频波动（如促销秒杀场景） |
 | S4 | VPA recommendation 为空或所有值为 0 / VPA recommendation empty | `kubectl describe vpa <name>` 查看 Recommendation 字段为空或 CPU/Memory 为 0 | 0.85 | VPA 刚创建尚未完成首次推荐（需等待 5-10 分钟） |
 | S5 | VPA UpdateMode=Auto 但 Pod 不重启，资源未更新 / VPA not applying recommendations | `kubectl get vpa <name> -o yaml` 显示 UpdateMode=Auto，但 Pod resources 与推荐值不一致 | 0.80 | VPA admission controller 正常但推荐变化幅度小于阈值 |
-| S6 | Cluster Autoscaler 日志 "could not scale up" / CA scale up failed | `kubectl logs -n kube-system deploy/cluster-autoscaler --tail=100 \| grep -i "could not"` | 0.90 | 节点池已达最大容量（预期行为） |
+| S6 | Cluster Autoscaler 日志 "could not scale up" / CA scale up failed | `kubectl logs -n kube-system deploy/cluster-autoscaler --tail=100 | grep -i "could not"` | 0.90 | 节点池已达最大容量（预期行为） |
 | S7 | 节点池扩容成功但 Pod 仍 Pending / Node added but [[Pods|pods]] still pending | `kubectl get nodes` 显示新节点 Ready，但 `kubectl get pods` 仍有 Pending | 0.85 | 新节点未满足 Pod 的 nodeSelector/affinity/tolerations |
-| S8 | 节点缩容被阻止，CA 日志显示 "cannot be removed" / Scale down blocked | `kubectl logs -n kube-system deploy/cluster-autoscaler --tail=200 \| grep "cannot be removed"` | 0.90 | 节点上有 PDB 保护的 Pod 且剩余节点无法承载（预期行为） |
+| S8 | 节点缩容被阻止，CA 日志显示 "cannot be removed" / Scale down blocked | `kubectl logs -n kube-system deploy/cluster-autoscaler --tail=200 | grep "cannot be removed"` | 0.90 | 节点上有 PDB 保护的 Pod 且剩余节点无法承载（预期行为） |
 | S9 | KEDA ScaledObject 状态为 Unknown 或 Error / KEDA ScaledObject unhealthy | `kubectl get scaledobject -A` 查看 READY 列显示 False 或 Unknown | 0.85 | KEDA operator 刚部署或重启中 |
 | S10 | Metrics Server Pod CrashLoopBackOff 或 Pending / Metrics Server unhealthy | `kubectl get pods -n kube-system -l k8s-app=metrics-server` 状态异常 | 0.95 | 集群未安装 Metrics Server（需要确认是否需要 HPA） |
 | S11 | 自定义指标 API 返回错误 / Custom metrics API error | `kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1/` 返回 404 或错误 | 0.85 | 集群未配置 Prometheus Adapter 或 KEDA（如仅使用内置指标则正常） |
@@ -178,7 +184,7 @@ kubectl get hpa -A -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metadat
 kubectl get pods -A --field-selector=status.phase=Pending --no-headers | wc -l
 
 # 检查 CA 状态（如果部署了 CA）
-kubectl get configmap -n kube-system cluster-autoscaler-status -o yaml 2>/dev/null | grep -A5 "ScaleUp\|ScaleDown"
+kubectl get configmap -n kube-system cluster-autoscaler-status -o yaml 2>/dev/null | grep -A5 "ScaleUp|ScaleDown"
 ```
 > **判断规则**:
 > - Pending Pod > 10 且 CA 日志显示扩容失败 → **P1**（严重影响服务可用性）
@@ -1314,7 +1320,7 @@ kubectl get scaledobject -A
 |-------|----------|---------|---------|
 | HPA 副本数变化 | `kube_horizontalpodautoscaler_status_current_replicas` | 根据负载平滑变化 | 30 分钟内无变化但负载明显变化 |
 | HPA 目标指标 | `kube_horizontalpodautoscaler_status_target_metric` | 与实际指标一致 | 持续显示 0 或 unknown |
-| Pending Pod 数量 | `kubectl get pods -A --field-selector=status.phase=Pending \| wc -l` | 快速降为 0 | 10 分钟后仍有大量 Pending |
+| Pending Pod 数量 | `kubectl get pods -A --field-selector=status.phase=Pending | wc -l` | 快速降为 0 | 10 分钟后仍有大量 Pending |
 | CA 扩容事件 | CA 日志中 "Successfully added node" | 有 Pending Pod 时触发扩容 | 扩容请求失败 |
 | VPA 推荐更新 | `kubectl get vpa -o jsonpath='{.items[*].status.recommendation}'` | 推荐值定期更新 | 超过 24 小时无更新 |
 | Metrics Server 响应时间 | `kubectl top nodes --v=6` (观察延迟) | < 1s | > 5s |
@@ -1337,7 +1343,7 @@ kubectl get scaledobject -A
 
 | 关注项 | 检查方法 | 频率 | 异常行动 |
 |-------|---------|------|---------|
-| HPA targets 状态 | `kubectl get hpa -A \| grep unknown` | 每小时 | 重新进入诊断流程 |
+| HPA targets 状态 | `kubectl get hpa -A | grep unknown` | 每小时 | 重新进入诊断流程 |
 | Metrics Server 健康 | `kubectl get --raw /apis/metrics.k8s.io/v1beta1/nodes` | 每小时 | 检查 Pod 状态和日志 |
 | HPA 扩缩容行为 | Prometheus 指标 `kube_horizontalpodautoscaler_status_current_replicas` 趋势 | 持续 | 与预期负载模式对比 |
 | CA 扩容成功率 | CA 日志 `Successfully added` vs `failed to` | 每 4 小时 | 检查云厂商 API 状态 |

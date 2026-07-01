@@ -1,6 +1,7 @@
 ---
 title: 安全认证故障排查
 description: '# 安全认证故障排查'
+summary: '# 安全认证故障排查'
 category: skills
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - apiserver
 - rbac
 - webhook
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 # 安全认证故障排查
 

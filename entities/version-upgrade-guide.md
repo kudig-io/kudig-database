@@ -1,6 +1,7 @@
 ---
 title: 版本升级指南
 description: '# 版本升级指南'
+summary: '# 版本升级指南'
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - scheduler
 - controller-manager
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # 版本升级指南
 

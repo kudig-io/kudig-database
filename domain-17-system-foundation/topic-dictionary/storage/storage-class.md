@@ -1,12 +1,15 @@
 ---
 title: 存储类
-description: 'StorageClass 是 Kubernetes 中定义存储类别的资源。它使管理员能够描述不同质量级别的存储（如 SSD/HDD、性能等级），并实现存储的动态...'
+description: StorageClass 是 Kubernetes 中定义存储类别的资源。它使管理员能够描述不同质量级别的存储（如 SSD/HDD、性能等级），并实现存储的动态...
+summary: StorageClass 是 Kubernetes 中定义存储类别的资源。它使管理员能够描述不同质量级别的存储（如 SSD/HDD、性能等级），并实现存储的动态...
 category: dictionary
 tags:
 - k8s
 - glossary
 - storage
 - storageclass
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 存储类
 

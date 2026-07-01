@@ -1,15 +1,26 @@
 ---
-title: "[2026-05-28] [P2] DaemonSet 节点亲和性导致部分节点未部署"
+title: '[2026-05-28] [P2] DaemonSet 节点亲和性导致部分节点未部署'
+summary: '[2026-05-28] [P2] DaemonSet 节点亲和性导致部分节点未部署：02:00，值班工程师在处理一起业务告警时，发现 Kibana
+  中搜索不到部分 Pod 的日志。进一步排查发现，新扩容的 3 个节点上的所有 Pod 均无日志输出到 ES。'
 category: case-study
-tags: [production, incident, workloads, daemonset, node-affinity, observability]
-date: "2026-05-28"
+tags:
+- production
+- incident
+- workloads
+- daemonset
+- node-affinity
+- observability
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-05-28'
 severity: P2
-mttr: "30min"
+mttr: 30min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-05-28] Fluent Bit DaemonSet 未在新节点部署导致日志丢失
 

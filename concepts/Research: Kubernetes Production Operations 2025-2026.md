@@ -1,27 +1,35 @@
 ---
-title: "Research: Kubernetes 生产运营深度研究 2025-2026"
+title: 'Research: Kubernetes 生产运营深度研究 2025-2026'
+summary: 3 轮深度研究覆盖 K8S 生产运营全栈：GitOps 演进（ArgoCD/Flux）、Cluster API、 Fleet 管理、FinOps/GreenOps
+  实践、GPU 成本优化、Spot 策略。
 category: synthesis
-tags: [production-ops, gitops, finops, greenops, fleet, k8s, research]
+tags:
+- production-ops
+- gitops
+- finops
+- greenops
+- fleet
+- k8s
+- research
+tier: supporting
 sources:
-  - "https://argo-cd.readthedocs.io/"
-  - "https://fluxcd.io/docs/"
-  - "https://cluster-api.sigs.k8s.io/"
-  - "https://focus.finops.org/"
-  - "https://kube-green.dev/"
+- https://argo-cd.readthedocs.io/
+- https://fluxcd.io/docs/
+- https://cluster-api.sigs.k8s.io/
+- https://focus.finops.org/
+- https://kube-green.dev/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
-summary: >-
-  3 轮深度研究覆盖 K8S 生产运营全栈：GitOps 演进（ArgoCD/Flux）、Cluster API、
-  Fleet 管理、FinOps/GreenOps 实践、GPU 成本优化、Spot 策略。
 provenance:
   extracted: 0.65
-  inferred: 0.30
+  inferred: 0.3
   ambiguous: 0.05
-base_confidence: 0.80
+base_confidence: 0.8
 lifecycle: draft
 lifecycle_changed: 2026-05-24
 ---
+
 
 # Research: Kubernetes 生产运营深度研究 2025-2026
 
@@ -91,3 +99,7 @@ lifecycle_changed: 2026-05-24
 - [[concepts/slo-error-budget-framework.md|slo error budget framework]] — SLO/Error Budget 框架指导生产环境的变更节奏与风险决策
 - [[concepts/k8s-ai-ml-infrastructure.md|k8s ai ml infrastructure]] — AI/ML 工作负载的运维特殊性（GPU 调度、弹性扩缩）对生产运维提出新挑战
 - [[concepts/progressive-delivery-strategies.md|progressive delivery strategies]] — 渐进式交付（金丝雀、蓝绿部署）是生产变更管理的最佳实践
+
+## Related
+
+- [[research|#research Hub]] — tag hub

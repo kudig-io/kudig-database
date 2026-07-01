@@ -1,6 +1,9 @@
 ---
 title: Logging Operator 日志路由
-description: 'Logging Operator 是 Kube Logging（原 Banzai Cloud）开源的 CNCF Sandbox 项目，通过 Operator 模...'
+description: Logging Operator 是 Kube Logging（原 Banzai Cloud）开源的 CNCF Sandbox 项目，通过
+  Operator 模...
+summary: Logging Operator 是 Kube Logging（原 Banzai Cloud）开源的 CNCF Sandbox 项目，通过 Operator
+  模...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - observability
 - logging
 - operator
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Logging Operator 日志路由（Logging Operator）
 

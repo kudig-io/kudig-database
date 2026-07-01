@@ -1,6 +1,7 @@
 ---
 title: 变更回滚操作手册
 description: 面向阿里云/专有云 K8s 的变更回滚操作手册，涵盖 Deployment、StatefulSet、ConfigMap、CRD、数据库变更的回滚步骤与验证。
+summary: 面向阿里云/专有云 K8s 的变更回滚操作手册，涵盖 Deployment、StatefulSet、ConfigMap、CRD、数据库变更的回滚步骤与验证。
 category: release-management
 tags:
 - k8s
@@ -11,6 +12,9 @@ tags:
 - database
 - alicloud
 - apsara-stack
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -43,9 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # 变更回滚操作手册
 

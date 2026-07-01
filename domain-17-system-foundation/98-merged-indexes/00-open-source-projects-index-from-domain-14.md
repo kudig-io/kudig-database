@@ -1,6 +1,7 @@
 ---
 title: Domain-14 Linux — 开源项目索引
 description: '- open-source-projects-index的最佳实践'
+summary: '- open-source-projects-index的最佳实践'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - falco
 - mysql
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

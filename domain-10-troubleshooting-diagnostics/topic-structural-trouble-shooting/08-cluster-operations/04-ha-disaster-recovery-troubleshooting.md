@@ -1,6 +1,7 @@
 ---
 title: 集群高可用与灾备故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 集群高可用与灾备故障排查指南'
+summary: 'title: 集群高可用与灾备故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - helm
 - docker
 - pdb
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -40,8 +43,9 @@ prerequisites:
 - helm-basics
 - etcd-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 集群高可用与灾备故障排查指南
 description: '# 集群高可用与灾备故障排查指南'

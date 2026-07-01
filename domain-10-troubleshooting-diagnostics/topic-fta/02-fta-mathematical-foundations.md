@@ -1,6 +1,7 @@
 ---
 title: 第二章：FTA 数学基础与理论模型 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
+summary: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
 category: fta
 tags:
 - fta
@@ -10,6 +11,8 @@ tags:
 - pdb
 - ingress
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -38,8 +41,9 @@ prerequisites:
 fta_id: FTA-02_MATHEMATICAL_FOUNDATIONS-001
 component: 02 Mathematical Foundations
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: 第二章：FTA 数学基础与理论模型
 description: '**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'

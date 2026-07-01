@@ -1,6 +1,7 @@
 ---
 title: 'P5: 毕业综合项目'
 description: 综合运用 4 周所学，独立完成一套完整的 ACK 集群运维方案：从集群规划、创建、安全加固、应用部署到监控告警，模拟真实生产环境的运维场景。
+summary: 综合运用 4 周所学，独立完成一套完整的 ACK 集群运维方案：从集群规划、创建、安全加固、应用部署到监控告警，模拟真实生产环境的运维场景。
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - mysql
 - pdb
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - prometheus-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: P5: 毕业综合项目

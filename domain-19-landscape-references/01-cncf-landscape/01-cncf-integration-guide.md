@@ -1,6 +1,7 @@
 ---
 title: CNCF 集成实践指南
 description: CNCF 项目组合使用指南，涵盖监控、安全、网络、存储等场景的最佳实践集成方案
+summary: CNCF 项目组合使用指南，涵盖监控、安全、网络、存储等场景的最佳实践集成方案
 category: cncf-landscape
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - apiserver
 - prometheus
 - grafana
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -55,8 +58,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # CNCF 集成实践指南
 

@@ -1,13 +1,25 @@
 ---
-title: "值班手册与告警响应规范"
+title: 值班手册与告警响应规范
+summary: 值班手册与告警响应规范：值班（On-Call）是生产运维的第一道防线。一个结构化的值班手册能够确保告警被及时响应、问题被正确分级、升级路径清晰可控。本文档为远程顾问提供标准化值班框架，以便指导客户建立可执行的值班体系。
 category: domain-11
-tags: ["domain-11", "on-call", "告警", "值班", "SRE", "升级", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- domain-11
+- on-call
+- 告警
+- 值班
+- SRE
+- 升级
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # 值班手册与告警响应规范
 
@@ -106,3 +118,7 @@ status: reviewed
 - [[domain-11-production-operations/04-incident-response-template.md|incident-response-template]] — 事故响应模板
 - [[domain-11-production-operations/02-change-management-guide.md|change-management-guide]] — 变更管理指南
 - [[node-notready]] — 节点异常排查
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

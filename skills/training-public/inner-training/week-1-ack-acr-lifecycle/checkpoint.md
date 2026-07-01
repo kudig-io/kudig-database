@@ -1,6 +1,7 @@
 ---
-title: "Week 1 Checkpoint: 自测检验 [week-1-ack-acr-lifecycle]"
+title: 'Week 1 Checkpoint: 自测检验 [week-1-ack-acr-lifecycle]'
 description: '## 概述'
+summary: '## 概述'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - helm
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,8 +35,9 @@ prerequisites:
 - gpu-ml-basics
 - helm-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Week 1 Checkpoint: 自测检验

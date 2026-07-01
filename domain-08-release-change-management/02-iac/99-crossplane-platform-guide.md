@@ -1,6 +1,7 @@
 ---
 title: Crossplane 平台工程实践指南
 description: '# Crossplane 平台工程实践指南'
+summary: '# Crossplane 平台工程实践指南'
 category: infrastructure-as-code
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - opa
 - postgresql
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Crossplane|Crossplane]] 平台工程实践指南
 

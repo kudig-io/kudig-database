@@ -1,12 +1,21 @@
 ---
-title: "模板标题"
+title: 模板标题
+summary: '模板标题：title: "{{主题名称}}速查卡" description: "{{一句话说明本文档用途}}" category: cheatsheet
+  tags: [k8s, {{component}}, cheatsheet, quick-reference] k8s_versions: ["1.28", "1.29",
+  "1.30", "1.31", "1.32"] last_upda...'
 category: templates
-tags: ["templates", "visibility/public"]
-sources: ["auto-generated"]
+tags:
+- templates
+- visibility/public
+tier: core
+sources:
+- auto-generated
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # {{主题名称}} 速查卡
 
@@ -244,6 +253,8 @@ fi
 ```
 
 ## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub
 
 - Wiki Lint Report — 2026-05-21 — Cross-reference
 

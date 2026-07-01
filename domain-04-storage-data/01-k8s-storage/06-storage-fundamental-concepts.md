@@ -1,6 +1,7 @@
 ---
 title: 06 - 存储基础概念详解
 description: '# 06 - 存储基础概念详解'
+summary: '# 06 - 存储基础概念详解'
 category: storage
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - storageclass
 - ceph
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ cross_refs:
 - type: domain
   path: ../domain-04-storage-data/
   label: '相关知识域: domain-04-storage-data'
-created: "2026-05-23"
 ---
+
+
 
 # 06 - 存储基础概念详解
 

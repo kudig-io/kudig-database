@@ -1,12 +1,15 @@
 ---
 title: 平台工程与 SRE 的协作模式
 description: '| **工具链** | 选择、集成、维护 | 监控、告警、On-call |'
+summary: '| **工具链** | 选择、集成、维护 | 监控、告警、On-call |'
 category: synthesis
 tags:
 - platform-engineering
 - sre
 - devops
 - internal-developer-platform
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,11 +25,12 @@ trigger_keywords:
 - 的协作模式
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]"
-    type: related_to
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+  type: related_to
 ---
+
+
 
 # 平台工程与 SRE 的协作模式
 

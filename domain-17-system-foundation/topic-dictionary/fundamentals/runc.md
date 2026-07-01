@@ -1,6 +1,9 @@
 ---
 title: runc
-description: 'runc 是 OCI（Open Container Initiative）标准的容器运行时参考实现，负责将 OCI 镜像和配置转换为 Linux 容器进程。它是...'
+description: runc 是 OCI（Open Container Initiative）标准的容器运行时参考实现，负责将 OCI 镜像和配置转换为 Linux
+  容器进程。它是...
+summary: runc 是 OCI（Open Container Initiative）标准的容器运行时参考实现，负责将 OCI 镜像和配置转换为 Linux
+  容器进程。它是...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - runc
 - oci
 - container-runtime
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # runc
 

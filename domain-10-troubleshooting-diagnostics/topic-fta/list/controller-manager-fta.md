@@ -1,6 +1,7 @@
 ---
 title: Controller Manager 异常故障树分析 (skills)
 description: OR0 --> DEP[依赖与存储异常]
+summary: OR0 --> DEP[依赖与存储异常]
 category: general
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - rbac
 - crd
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 fta_id: FTA-CONTROLLER_MANAGER-001
 component: Controller Manager
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "Controller Manager 异常故障树分析"

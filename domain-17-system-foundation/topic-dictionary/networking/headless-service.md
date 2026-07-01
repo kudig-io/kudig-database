@@ -1,6 +1,9 @@
 ---
 title: Headless Service 无头服务
-description: 'Headless Service 是 clusterIP 设为 None 的特殊 Service，不分配虚拟 IP，而是通过 DNS 直接返回后端 Pod 的 ...'
+description: Headless Service 是 clusterIP 设为 None 的特殊 Service，不分配虚拟 IP，而是通过 DNS 直接返回后端
+  Pod 的 ...
+summary: Headless Service 是 clusterIP 设为 None 的特殊 Service，不分配虚拟 IP，而是通过 DNS 直接返回后端
+  Pod 的 ...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - networking
 - service
 - dns
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Headless Service 无头服务（Headless Service）
 

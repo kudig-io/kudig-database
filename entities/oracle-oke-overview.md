@@ -1,6 +1,7 @@
 ---
 title: Oracle OKE (Oracle Container Engine for Kubernetes) 企业级深度解析
 description: 'title: Oracle OKE (Oracle Container Engine for Kubernetes) 企业级深度解析'
+summary: 'title: Oracle OKE (Oracle Container Engine for Kubernetes) 企业级深度解析'
 category: general
 tags:
 - cloud
@@ -13,6 +14,8 @@ tags:
 - cronjob
 - ingress
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Oracle OKE (Oracle Container Engine for [[Kubernetes|Kubernetes]]) 企业级深度解析
 description: '# Oracle OKE (Oracle Container Engine for Kubernetes) 企业级深度解析'
@@ -768,7 +772,7 @@ echo
 echo "=== 企业级成本优化建议 ==="
 
 # 检查闲置资源
-IDLE_PODS=$(kubectl get pods --all-namespaces --no-headers | grep -c "Evicted\|Completed")
+IDLE_PODS=$(kubectl get pods --all-namespaces --no-headers | grep -c "Evicted|Completed")
 if [ $IDLE_PODS -gt 0 ]; then
     echo "⚠️  发现 $IDLE_PODS 个闲置Pod，建议清理"
 fi
@@ -1028,6 +1032,8 @@ echo "诊断报告已保存到: $REPORT_FILE"
 Oracle OKE凭借其企业级架构设计、金融级安全特性和卓越的性能表现，成为大型企业和关键业务应用的理想选择。通过深度集成Oracle云生态系统的各项服务，以及完善的合规性保障，为金融、电信、制造等行业提供了可靠的容器化解决方案。
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

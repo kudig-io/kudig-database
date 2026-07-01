@@ -1,6 +1,7 @@
 ---
 title: 云厂商集群删除方案对比 (topic-code-analysis)
 description: 'title: 云厂商集群删除方案对比'
+summary: 'title: 云厂商集群删除方案对比'
 category: general
 tags:
 - reference
@@ -8,6 +9,8 @@ tags:
 - ingress
 - gateway
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 云厂商集群删除方案对比
 category: cluster-delete
@@ -463,6 +467,8 @@ tencentcloud cli cvm DeleteCluster --cluster-id cls-xxx
 | 账单未结清 | 仍有未结清账单 | 结清账单后重试 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[log|log]]

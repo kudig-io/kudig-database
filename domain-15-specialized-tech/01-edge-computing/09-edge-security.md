@@ -1,6 +1,7 @@
 ---
 title: 边缘安全架构 (Edge Security Architecture)
 description: '# 边缘安全架构 (Edge Security Architecture)'
+summary: '# 边缘安全架构 (Edge Security Architecture)'
 category: edge-computing
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - istio
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 边缘安全架构 (Edge Security Architecture)
 

@@ -1,6 +1,7 @@
 ---
 title: 'Week 2: 核心技术构建期 (Days 8-14)'
 description: '- "K8s 网络栈包括什么"'
+summary: '- "K8s 网络栈包括什么"'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flannel
 - calico
 - coredns
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -39,8 +42,9 @@ prerequisites:
 - kafka-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Week 2: 核心技术构建期 (Days 8-14)
 

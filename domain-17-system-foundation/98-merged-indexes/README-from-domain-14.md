@@ -1,6 +1,7 @@
 ---
 title: 'Domain-14: Linux 基础知识体系'
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - redis
 - elasticsearch
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain-14: Linux 基础知识体系'

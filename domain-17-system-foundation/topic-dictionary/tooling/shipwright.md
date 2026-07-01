@@ -1,6 +1,9 @@
 ---
 title: Shipwright 容器构建
-description: 'Shipwright 是 Red Hat 开源的 CNCF Sandbox 项目，在 Kubernetes 上提供声明式的容器镜像构建框架，支持 Buildpa...'
+description: Shipwright 是 Red Hat 开源的 CNCF Sandbox 项目，在 Kubernetes 上提供声明式的容器镜像构建框架，支持
+  Buildpa...
+summary: Shipwright 是 Red Hat 开源的 CNCF Sandbox 项目，在 Kubernetes 上提供声明式的容器镜像构建框架，支持
+  Buildpa...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - tooling
 - container
 - build
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Shipwright 容器构建（Shipwright）
 

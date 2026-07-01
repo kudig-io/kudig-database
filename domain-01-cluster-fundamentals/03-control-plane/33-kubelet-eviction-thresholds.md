@@ -1,6 +1,7 @@
 ---
 title: Kubelet 驱逐阈值量化完整文档
 description: '**文档类型**: 运维参考手册 | **适用版本**: K8s 1.28-1.33 | **最后更新**: 2026-05'
+summary: '**文档类型**: 运维参考手册 | **适用版本**: K8s 1.28-1.33 | **最后更新**: 2026-05'
 category: control-plane
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -65,8 +68,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # [[kubelet|Kubelet]] 驱逐阈值量化完整文档
 

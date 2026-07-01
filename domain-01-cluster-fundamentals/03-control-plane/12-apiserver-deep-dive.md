@@ -1,6 +1,7 @@
 ---
 title: kube-apiserver 深度解析
 description: 深入解析 kube-apiserver 的架构设计、请求处理流程、认证授权机制、Admission Control、APF 限流、审计日志与高可用部署
+summary: 深入解析 kube-apiserver 的架构设计、请求处理流程、认证授权机制、Admission Control、APF 限流、审计日志与高可用部署
 category: domain-01-cluster-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - high-availability
 - etcd
 - kubelet
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -85,8 +88,9 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md
   type: fta
   desc: API Server 故障树
-created: "2026-05-23"
 ---
+
+
 
 # kube-apiserver 深度解析 (kube-apiserver Deep Dive)
 
@@ -779,10 +783,10 @@ spec:
 
 ```bash
 # 检查是否还在使用已弃用的插件
-kubectl logs -n kube-system kube-apiserver-<node> | grep -i "deprecated\|removed\|unrecognized"
+kubectl logs -n kube-system kube-apiserver-<node> | grep -i "deprecated|removed|unrecognized"
 
 # kubeadm 集群检查启动参数
-grep "enable-admission-plugins\|disable-admission-plugins" /etc/kubernetes/manifests/kube-apiserver.yaml
+grep "enable-admission-plugins|disable-admission-plugins" /etc/kubernetes/manifests/kube-apiserver.yaml
 ```
 
 ---

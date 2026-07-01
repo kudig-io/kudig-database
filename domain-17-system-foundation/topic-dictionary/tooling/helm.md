@@ -1,6 +1,7 @@
 ---
 title: Helm
-description: 'Helm 是 Kubernetes 的包管理器，被称为「K8s 的 apt/yum」。它通过 Chart（模板化的 YAML 集合）简化应用的打包、分发和部署，...'
+description: Helm 是 Kubernetes 的包管理器，被称为「K8s 的 apt/yum」。它通过 Chart（模板化的 YAML 集合）简化应用的打包、分发和部署，...
+summary: Helm 是 Kubernetes 的包管理器，被称为「K8s 的 apt/yum」。它通过 Chart（模板化的 YAML 集合）简化应用的打包、分发和部署，...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - helm
 - package-manager
 - gitops
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Helm
 

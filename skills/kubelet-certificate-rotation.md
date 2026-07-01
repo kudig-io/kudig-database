@@ -1,6 +1,7 @@
 ---
 title: kubelet 证书轮换机制
 description: '## 概述'
+summary: '## 概述'
 category: skills
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - tls-bootstrap
 - auto-renew
 - apiserver
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 - 证书轮换机制
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[kubelet|kubelet]] 证书轮换机制
 
@@ -157,7 +161,7 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -subject
 # subject=O = system:nodes, CN = system:node:node-1
 
 # 查看证书轮换日志
-journalctl -u kubelet | grep -i "certificate\|csr\|rotation"
+journalctl -u kubelet | grep -i "certificate|csr|rotation"
 ```
 
 ## 常见错误

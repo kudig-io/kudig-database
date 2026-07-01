@@ -1,6 +1,9 @@
 ---
 title: 企业级实战案例 (domain-14-ai-ml-infra)
-description: 'description: ''**文档类型**: 实战案例专题 | **最后更新**: 2026-03 | **关键词**: K8s 运维 Agent, AIOps,'
+description: 'description: ''**文档类型**: 实战案例专题 | **最后更新**: 2026-03 | **关键词**: K8s 运维
+  Agent, AIOps,'
+summary: 'description: ''**文档类型**: 实战案例专题 | **最后更新**: 2026-03 | **关键词**: K8s 运维 Agent,
+  AIOps,'
 category: general
 tags:
 - ai
@@ -13,6 +16,8 @@ tags:
 - networkpolicy
 - operator
 - llm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +38,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 企业级实战案例
 description: '**文档类型**: 实战案例专题 | **最后更新**: 2026-03 | **关键词**: K8s 运维 Agent, AIOps,

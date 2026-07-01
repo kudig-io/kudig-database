@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Workloads Domain Guide
 description: '- [[concepts/Deployment × Secret 管理.md|Deployment × Secret 管理]]'
+summary: '- [[concepts/Deployment × Secret 管理.md|Deployment × Secret 管理]]'
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - job
 - cronjob
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - pod-lifecycle
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes Workloads Domain Guide
 
@@ -68,6 +72,8 @@ Conditions: PodScheduled, Initialized, ContainersReady, Ready.
 v1.28+ native sidecar containers: init containers with `restartPolicy: Always` run alongside main containers, enabling service mesh proxies, log shippers, and config watchers without external injection.
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[entities/statefulset.md|statefulset]] — StatefulSet
 - [[deployment]] — Deployment

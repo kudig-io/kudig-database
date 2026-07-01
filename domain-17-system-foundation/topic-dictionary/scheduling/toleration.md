@@ -1,12 +1,17 @@
 ---
 title: 容忍
-description: 'Toleration（容忍）是应用在 Pod 上的属性，允许 Pod 被调度到具有匹配污点（Taint）的节点上。它与污点配合工作，控制 Pod 的调度行为。...'
+description: Toleration（容忍）是应用在 Pod 上的属性，允许 Pod 被调度到具有匹配污点（Taint）的节点上。它与污点配合工作，控制
+  Pod 的调度行为。...
+summary: Toleration（容忍）是应用在 Pod 上的属性，允许 Pod 被调度到具有匹配污点（Taint）的节点上。它与污点配合工作，控制 Pod
+  的调度行为。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - scheduling
 - toleration
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 容忍
 

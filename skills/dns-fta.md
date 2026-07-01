@@ -1,10 +1,13 @@
 ---
 title: DNS 异常故障树分析 (skills)
 description: '### 2. 上游解析诊断'
+summary: '### 2. 上游解析诊断'
 category: general
 tags:
 - k8s
 - coredns
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,8 +25,9 @@ prerequisites:
 fta_id: FTA-DNS-001
 component: Dns
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "DNS 异常故障树分析"
@@ -50,18 +54,18 @@ base_confidence: 0.7
 | CORE1A | OOMKilled | `kubectl get pods -n kube-system -l k8s-app=kube-dns -o jsonpath='{range .items[*]}{.status.containerStatuses[*].lastState.terminated.reason}{"\n"}{end}'` | `OOMKilled` | 确认 CoreDNS 内存溢出 |
 | CORE1B | CrashLoopBackOff | `kubectl get pods -n kube-system -l k8s-app=kube-dns -o jsonpath='{range .items[*]}{.status.containerStatuses[*].state.waiting.reason}{"\n"}{end}'` | `CrashLoopBackOff` | 确认容器反复崩溃 |
 | CORE1C | 被节点驱逐 | `kubectl get pods -n kube-system -l k8s-app=kube-dns -o jsonpath='{range .items[*]}{.status.reason}{"\n"}{end}'` | `Evicted` | 确认被驱逐 |
-| CORE2A | kube-dns Service 不存在 | `kubectl get svc kube-dns -n kube-system -o name 2>/dev/null \|\| echo "NOT_FOUND"` | `NOT_FOUND` | 确认 Service 缺失 |
-| CORE2B | ClusterIP 不可达 | `kubectl run dns-test --rm -i --restart=Never --image=busybox -- nslookup kubernetes.default 2>&1` | `connection timed out\|no servers` | 确认 DNS 服务不可达 |
-| CORE2C | DNS 端口被占用 | `kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100 \| grep -i "address already in use"` | `address already in use` | 确认端口冲突 |
-| CORE3 | 插件加载失败 | `kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100 \| grep -iE "plugin.*failed\|failed to load"` | `plugin.*failed\|failed to load` | 确认插件加载问题 |
+| CORE2A | kube-dns Service 不存在 | `kubectl get svc kube-dns -n kube-system -o name 2>/dev/null || echo "NOT_FOUND"` | `NOT_FOUND` | 确认 Service 缺失 |
+| CORE2B | ClusterIP 不可达 | `kubectl run dns-test --rm -i --restart=Never --image=busybox -- nslookup kubernetes.default 2>&1` | `connection timed out|no servers` | 确认 DNS 服务不可达 |
+| CORE2C | DNS 端口被占用 | `kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100 | grep -i "address already in use"` | `address already in use` | 确认端口冲突 |
+| CORE3 | 插件加载失败 | `kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100 | grep -iE "plugin.*failed|failed to load"` | `plugin.*failed|failed to load` | 确认插件加载问题 |
 
 ### 2. 上游解析诊断
 
 | 节点 ID | 名称 | 诊断命令 | 预期输出模式 | 判定 |
 |---------|------|----------|--------------|------|
 | UP1A | 上游 DNS 服务异常 | `kubectl exec -n kube-system -it $(kubectl get pods -n kube-system -l k8s-app=kube-dns -o jsonpath='{.items[0].metadata.name}') -- cat /etc/resolv.conf` | 查看上游 DNS 配置 | 获取上游 DNS 地址 |
-| UP1B | 防火墙拦截 | `kubectl run dns-test --rm -i --restart=Never --image=busybox -- nc -zv -w 3 ${UPSTREAM_DNS} 53 2>&1` | `Connection timed out\|no route` | 确认防火墙阻断 |
-| UP1C | forward 配置地址错误 | `kubectl get cm coredns -n kube-system -o jsonpath='{.data.Corefile}' \| grep -A2 "forward"` | forward 配置内容 | 检查上游配置 |
+| UP1B | 防火墙拦截 | `kubectl run dns-test --rm -i --restart=Never --image=busybox -- nc -zv -w 3 ${UPSTREAM_DNS} 53 2>&1` | `Connection timed out|no route` | 确认防火墙阻断 |
+| UP1C | forward 配置地址错误 | `kubectl get cm coredns -n kube-system -o jsonpath='{.data.Corefile}' | grep -A2 "forward"` | forward 配置内容 | 检查上游配置 |
 | UP2 | 上游超时/丢包 | `kubectl logs
 ...(截断)
 

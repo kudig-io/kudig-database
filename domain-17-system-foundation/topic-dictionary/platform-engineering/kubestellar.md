@@ -1,6 +1,9 @@
 ---
 title: KubeStellar 多集群分发
-description: 'KubeStellar 是 IBM 开源的 CNCF Sandbox 项目，提供基于 Kubernetes 原生的多集群工作负载分发和同步，利用 KCP（Kub...'
+description: KubeStellar 是 IBM 开源的 CNCF Sandbox 项目，提供基于 Kubernetes 原生的多集群工作负载分发和同步，利用
+  KCP（Kub...
+summary: KubeStellar 是 IBM 开源的 CNCF Sandbox 项目，提供基于 Kubernetes 原生的多集群工作负载分发和同步，利用
+  KCP（Kub...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - platform-engineering
 - multi-cluster
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # KubeStellar 多集群分发（KubeStellar）
 

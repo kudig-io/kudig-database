@@ -1,15 +1,25 @@
 ---
-title: "[2026-04-10] [P1] Ingress 配置错误导致 502 Bad Gateway"
+title: '[2026-04-10] [P1] Ingress 配置错误导致 502 Bad Gateway'
+summary: '[2026-04-10] [P1] Ingress 配置错误导致 502 Bad Gateway：10:15，监控告警 Ingress5xxRate
+  > 5%，随后迅速升至 100%。用户反馈：'
 category: case-study
-tags: [production, incident, networking, ingress, gateway]
-date: "2026-04-10"
+tags:
+- production
+- incident
+- networking
+- ingress
+- gateway
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-04-10'
 severity: P1
-mttr: "20min"
+mttr: 20min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-04-10] Nginx Ingress 配置错误导致全站 502 Bad Gateway
 

@@ -1,6 +1,8 @@
 ---
 title: Kata Containers
-description: 'Kata Containers 是 OpenInfra Foundation 的开源项目，通过轻量级虚拟机提供容器级别的隔离。它兼容 OCI 运行时规范，可作为...'
+description: Kata Containers 是 OpenInfra Foundation 的开源项目，通过轻量级虚拟机提供容器级别的隔离。它兼容 OCI
+  运行时规范，可作为...
+summary: Kata Containers 是 OpenInfra Foundation 的开源项目，通过轻量级虚拟机提供容器级别的隔离。它兼容 OCI 运行时规范，可作为...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +11,8 @@ tags:
 - sandbox
 - security
 - oci
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Kata Containers
 

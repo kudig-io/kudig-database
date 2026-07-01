@@ -1,6 +1,7 @@
 ---
 title: ResourceQuota 异常故障树分析 (skills)
 description: OR0 --> CONF[配置错误]
+summary: OR0 --> CONF[配置错误]
 category: skills
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - job
 - webhook
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 fta_id: FTA-RESOURCE_QUOTA-001
 component: Resource Quota
 severity: medium
-created: "2026-05-23"
 ---
+
+
 
 # ResourceQuota 异常故障树分析
 

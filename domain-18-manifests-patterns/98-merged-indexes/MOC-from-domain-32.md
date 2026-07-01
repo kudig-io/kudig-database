@@ -1,6 +1,7 @@
 ---
 title: domain-32-yaml-manifests MOC
 description: domain-32-yaml-manifests 知识域导航页，覆盖 37 篇文档
+summary: domain-32-yaml-manifests 知识域导航页，覆盖 37 篇文档
 category: moc
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - job
 - cronjob
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - gitops-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-32-yaml-manifests MOC
 

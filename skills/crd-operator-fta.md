@@ -1,7 +1,9 @@
 ---
 title: CRD/Operator 异常故障树分析 (skills)
-description: '- **范围**：CRD 定义/注册、Operator 控制器生命周期、Reconcile 循环、转换/验证 Webhook、RBAC/SA 认证、依赖组件（API Server / etcd / informer
-  cache）。'
+description: '- **范围**：CRD 定义/注册、Operator 控制器生命周期、Reconcile 循环、转换/验证 Webhook、RBAC/SA
+  认证、依赖组件（API Server / etcd / informer cache）。'
+summary: '- **范围**：CRD 定义/注册、Operator 控制器生命周期、Reconcile 循环、转换/验证 Webhook、RBAC/SA 认证、依赖组件（API
+  Server / etcd / informer cache）。'
 category: general
 tags:
 - k8s
@@ -10,6 +12,8 @@ tags:
 - crd
 - operator
 - webhook
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +33,9 @@ prerequisites:
 fta_id: FTA-CRD_OPERATOR-001
 component: Crd Operator
 severity: medium
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "CRD/Operator 异常故障树分析"

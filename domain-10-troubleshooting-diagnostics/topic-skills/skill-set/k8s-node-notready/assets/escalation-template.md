@@ -1,6 +1,7 @@
 ---
 title: 升级消息模板 / Escalation Message Template
 description: '- 问题概述: 节点 {node_name} ({node_ip}) 状态为 NotReady，持续 {duration}'
+summary: '- 问题概述: 节点 {node_name} ({node_ip}) 状态为 NotReady，持续 {duration}'
 category: skills
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - apiserver
 - kubelet
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -35,8 +38,9 @@ prerequisites:
 skill_id: SKILL-ESCALATION_TEMPLATE-001
 skill_name: 升级消息模板 / Escalation Message Template
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 # 升级消息模板 / Escalation Message Template
 

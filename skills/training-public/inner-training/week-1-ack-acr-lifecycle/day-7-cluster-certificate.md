@@ -1,6 +1,7 @@
 ---
 title: 'Day 7: K8S 集群证书'
 description: '**学习时间**: 4-5 小时 | **主题**: 理解集群证书管理与更新机制'
+summary: '**学习时间**: 4-5 小时 | **主题**: 理解集群证书管理与更新机制'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - opa
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,8 +38,9 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 7: K8S 集群证书

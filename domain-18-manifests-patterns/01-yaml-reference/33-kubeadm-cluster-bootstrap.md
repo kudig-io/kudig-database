@@ -1,6 +1,7 @@
 ---
 title: 33 - kubeadm 集群引导配置 YAML 参考
 description: '# 33 - kubeadm 集群引导配置 YAML 参考'
+summary: '# 33 - kubeadm 集群引导配置 YAML 参考'
 category: yaml-manifests
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -50,8 +53,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/kubeadm-fta.md
   label: '故障树: kubeadm'
-created: "2026-05-23"
 ---
+
+
 
 # 33 - kubeadm 集群引导配置 YAML 参考
 

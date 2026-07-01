@@ -1,6 +1,7 @@
 ---
 title: K8s 基础知识考核 - 答案解析
 description: '# K8s 基础知识考核 - 答案解析'
+summary: '# K8s 基础知识考核 - 答案解析'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - envoy
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -39,8 +42,9 @@ prerequisites:
 skill_id: SKILL-K8S_FUNDAMENTALS_QUIZ_ANSWERS-001
 skill_name: K8s 基础知识考核 - 答案解析
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 # K8s8s 基础知识考核|K8s 基础知识考核]] - 答案解析
 

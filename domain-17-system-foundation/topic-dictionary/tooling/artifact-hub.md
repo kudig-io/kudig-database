@@ -1,6 +1,7 @@
 ---
 title: Artifact Hub 制品市场
-description: 'Artifact Hub 是 CNCF 孵化项目，云原生制品的集中发现和分发平台，支持 Helm Chart、OPA 策略、OOCI 镜像、Kustomize、...'
+description: Artifact Hub 是 CNCF 孵化项目，云原生制品的集中发现和分发平台，支持 Helm Chart、OPA 策略、OOCI 镜像、Kustomize、...
+summary: Artifact Hub 是 CNCF 孵化项目，云原生制品的集中发现和分发平台，支持 Helm Chart、OPA 策略、OOCI 镜像、Kustomize、...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - tooling
 - registry
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Artifact Hub 制品市场（Artifact Hub）
 

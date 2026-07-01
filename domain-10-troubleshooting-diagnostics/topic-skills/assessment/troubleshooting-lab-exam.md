@@ -1,6 +1,7 @@
 ---
 title: 故障排查实验考核
 description: '# 故障排查实验考核'
+summary: '# 故障排查实验考核'
 category: skills
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - ingress
 - gateway
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -35,8 +38,9 @@ prerequisites:
 skill_id: SKILL-TROUBLESHOOTING_LAB_EXAM-001
 skill_name: 故障排查实验考核
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 # 故障排查实验考核
 

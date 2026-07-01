@@ -1,6 +1,7 @@
 ---
 title: AI/ML 工作负载排查
 description: '# AI/ML 工作负载排查'
+summary: '# AI/ML 工作负载排查'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - mysql
 - daemonset
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 # AI/ML 工作负载排查
 

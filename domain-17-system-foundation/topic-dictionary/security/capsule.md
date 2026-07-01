@@ -1,6 +1,7 @@
 ---
 title: Capsule 多租户管理
-description: 'Capsule 是 CNCF Sandbox 项目，为 Kubernetes 提供轻量级多租户管理，通过 Tenant CRD 实现命名空间级别的资源隔离和策略...'
+description: Capsule 是 CNCF Sandbox 项目，为 Kubernetes 提供轻量级多租户管理，通过 Tenant CRD 实现命名空间级别的资源隔离和策略...
+summary: Capsule 是 CNCF Sandbox 项目，为 Kubernetes 提供轻量级多租户管理，通过 Tenant CRD 实现命名空间级别的资源隔离和策略...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - security
 - multi-tenancy
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Capsule 多租户管理（Capsule）
 

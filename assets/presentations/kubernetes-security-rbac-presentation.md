@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 安全与 RBAC 权限管理全栈培训 [assets]
 description: '# Kubernetes 安全与 RBAC 权限管理全栈培训'
+summary: '# Kubernetes 安全与 RBAC 权限管理全栈培训'
 category: presentations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - ingress
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - gpu-ml-basics
 - etcd-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 安全与 RBAC 权限管理全栈培训
 

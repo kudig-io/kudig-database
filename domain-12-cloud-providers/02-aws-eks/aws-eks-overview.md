@@ -1,6 +1,7 @@
 ---
 title: AWS EKS (Elastic Kubernetes Service) 概述
 description: 'title: AWS EKS (Elastic Kubernetes Service) 概述'
+summary: 'title: AWS EKS (Elastic Kubernetes Service) 概述'
 category: general
 tags:
 - cloud
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - grafana
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -43,8 +46,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: AWS EKS (Elastic [[Kubernetes|Kubernetes]] [[Service|Service]]) 概述
 description: '# AWS EKS (Elastic Kubernetes Service) 概述'
@@ -960,6 +964,8 @@ phases:
 - 应用程序零停机升级
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[log|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

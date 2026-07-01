@@ -1,12 +1,15 @@
 ---
 title: 深度研究能力评估报告
 description: '# 深度研究能力评估报告'
+summary: '# 深度研究能力评估报告'
 category: general
 tags:
 - k8s
 - apiserver
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -20,8 +23,9 @@ trigger_keywords:
 - 深度研究能力评估报告
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 深度研究能力评估报告
 

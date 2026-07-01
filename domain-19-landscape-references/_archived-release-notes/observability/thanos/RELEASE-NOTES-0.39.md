@@ -1,11 +1,14 @@
 ---
 title: thanos v0.39 Release Notes
 description: thanos v0.39 Release Notes — Kubernetes 生产运维知识库
+summary: thanos v0.39 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
 - release-notes
 - changelog
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cncf-ecosystem
-created: "2026-05-23"
 ---
+
+
 
 # [[Thanos|thanos]] v0.39 Release Notes
 

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Gateway API 与现代流量管理实践
 description: 'title: Kubernetes Gateway API 与现代流量管理实践'
+summary: 'title: Kubernetes Gateway API 与现代流量管理实践'
 category: general
 tags:
 - paper
@@ -13,6 +14,8 @@ tags:
 - flux
 - redis
 - postgresql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -42,8 +45,9 @@ prerequisites:
 - gpu-scheduling-basics
 - tls-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] Gateway API 与现代流量管理实践
 description: '# Kubernetes Gateway API 与现代流量管理实践'
@@ -1893,5 +1897,7 @@ v1.4 引入的 `infrastructure` 字段正在扩展，计划在未来版本中标
 - 21-kubernetes-platform-engineering-internal-developer-platform
 
 ## Related
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

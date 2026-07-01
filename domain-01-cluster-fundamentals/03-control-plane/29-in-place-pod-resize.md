@@ -1,6 +1,7 @@
 ---
 title: 29 - 原地 Pod 资源调整 (In-Place Pod Resize)
 description: 1. [特性概述](#1-特性概述)
+summary: 1. [特性概述](#1-特性概述)
 category: control-plane
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - containerd
 - cri-o
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -73,8 +76,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 29 - 原地 Pod 资源调整 (In-Place Pod Resize)
 

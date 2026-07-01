@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Deployment 创建操作指南
 description: '# Kubernetes Deployment 创建操作指南'
+summary: '# Kubernetes Deployment 创建操作指南'
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - statefulset
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - gitops-basics
 - etcd-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes Deployment 创建操作指南
 

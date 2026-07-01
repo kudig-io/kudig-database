@@ -1,6 +1,8 @@
 ---
 title: Traefik
-description: 'Traefik 是现代化的 HTTP 反向代理和负载均衡器，原生支持 Docker、Kubernetes、Consul 等多种后端。它作为 Kubernetes...'
+description: Traefik 是现代化的 HTTP 反向代理和负载均衡器，原生支持 Docker、Kubernetes、Consul 等多种后端。它作为
+  Kubernetes...
+summary: Traefik 是现代化的 HTTP 反向代理和负载均衡器，原生支持 Docker、Kubernetes、Consul 等多种后端。它作为 Kubernetes...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +11,8 @@ tags:
 - ingress
 - reverse-proxy
 - gateway-api
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Traefik
 

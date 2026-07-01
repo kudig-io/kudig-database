@@ -1,6 +1,7 @@
 ---
 title: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 description: '## 1. 概述'
+summary: '## 1. 概述'
 category: control-plane
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: core
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -55,8 +58,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 <!-- condition: kubectl get --raw /healthz 返回非 200 或 kubectl get [[Pods|pods]] -n kube-system -l component=[[etcd|etcd]] 显示非 Running -->
 

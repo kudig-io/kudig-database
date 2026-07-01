@@ -1,6 +1,7 @@
 ---
 title: domain-35-ebpf-technology MOC
 description: domain-35-ebpf-technology 知识域导航页，覆盖 11 篇文档
+summary: domain-35-ebpf-technology 知识域导航页，覆盖 11 篇文档
 category: moc
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - ebpf
 - cilium
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - networking-basics
 - ebpf-basics
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-35-ebpf-technology MOC
 

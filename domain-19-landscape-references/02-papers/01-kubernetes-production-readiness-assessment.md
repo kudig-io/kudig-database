@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framework)
 description: 本文档提供了一套完整的Kubernetes生产就绪性评估框架，基于Google SRE理念和企业级运维实践经验，涵盖架构设计、安全性、可观测性、可靠性等12个核心维度，帮助组织系统性评估Kubernetes集群的生产就绪程度。
+summary: 本文档提供了一套完整的Kubernetes生产就绪性评估框架，基于Google SRE理念和企业级运维实践经验，涵盖架构设计、安全性、可观测性、可靠性等12个核心维度，帮助组织系统性评估Kubernetes集群的生产就绪程度。
 category: papers
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - flannel
 - calico
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -59,8 +62,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 生产就绪性评估框架 (Production Readiness Assessment Framework)
 
@@ -565,3 +569,9 @@ trivy               # 镜像安全扫描
 - 26-kubernetes-vcluster-virtual-cluster-multi-tenancy
 - 02-kubernetes-large-scale-performance-optimization
 - 03-kubernetes-zero-trust-security-architecture
+
+## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub

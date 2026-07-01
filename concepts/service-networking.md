@@ -1,6 +1,7 @@
 ---
 title: Service Networking
 description: '- [[concepts/cni-networking-model.md|cni-networking-model]] — CNI 网络模型与插件对比'
+summary: '- [[concepts/cni-networking-model.md|cni-networking-model]] — CNI 网络模型与插件对比'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - ingress
 - gateway
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Service|Service]] Networking
 

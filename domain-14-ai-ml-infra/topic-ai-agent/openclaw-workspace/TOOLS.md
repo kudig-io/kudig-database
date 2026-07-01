@@ -1,6 +1,7 @@
 ---
 title: 工具授权注册表 (02-ai-agents)
 description: 'title: 工具授权注册表'
+summary: 'title: 工具授权注册表'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - istio
 - helm
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 工具授权注册表
 description: K8S 运维诊断 Agent 的工具授权注册表、调用参数规范与安全约束

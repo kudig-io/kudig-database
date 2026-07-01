@@ -1,15 +1,25 @@
 ---
-title: "[2026-01-22] [P0] CoreDNS 问题导致服务发现中断"
+title: '[2026-01-22] [P0] CoreDNS 问题导致服务发现中断'
+summary: '[2026-01-22] [P0] CoreDNS 问题导致服务发现中断：14:15，监控大盘全红，大量 connection refused、no
+  such host 错误。用户反馈：'
 category: case-study
-tags: [production, incident, networking, dns, service-discovery]
-date: "2026-01-22"
+tags:
+- production
+- incident
+- networking
+- dns
+- service-discovery
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-01-22'
 severity: P0
-mttr: "22min"
+mttr: 22min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-01-22] CoreDNS CrashLoopBackOff 导致全集群服务发现中断
 

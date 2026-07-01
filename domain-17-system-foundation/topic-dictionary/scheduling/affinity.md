@@ -1,12 +1,16 @@
 ---
 title: 亲和性
-description: 'Affinity（亲和性）是 Kubernetes 中表达 Pod 对节点或其他 Pod 调度偏好的机制。它比 nodeSelector 更灵活，支持多种操作符...'
+description: Affinity（亲和性）是 Kubernetes 中表达 Pod 对节点或其他 Pod 调度偏好的机制。它比 nodeSelector
+  更灵活，支持多种操作符...
+summary: Affinity（亲和性）是 Kubernetes 中表达 Pod 对节点或其他 Pod 调度偏好的机制。它比 nodeSelector 更灵活，支持多种操作符...
 category: dictionary
 tags:
 - k8s
 - glossary
 - scheduling
 - affinity
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 亲和性
 

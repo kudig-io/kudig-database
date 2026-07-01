@@ -1,6 +1,7 @@
 ---
 title: Node Create 模块函数索引 (topic-code-analysis)
 description: '# Node Create — Kubernetes 节点生命周期管理'
+summary: '# Node Create — Kubernetes 节点生命周期管理'
 category: functions
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - rbac
 - webhook
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-18
 difficulty: beginner
 reading_level: beginner
@@ -47,8 +50,9 @@ related_topics:
 - node-create/01-overview
 - cluster-create/01-overview
 - cluster-create/06-join
-created: "2026-05-23"
 ---
+
+
 
 # Node Create — Kubernetes [[concepts/node-lifecycle-management.md|node-lifecycle-management]]
 

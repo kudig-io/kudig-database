@@ -1,6 +1,7 @@
 ---
 title: 13 - 集群健康检查指南 (Cluster Health Check Guide)
 description: '# 13 - 集群健康检查指南 (Cluster Health Check Guide)'
+summary: '# 13 - 集群健康检查指南 (Cluster Health Check Guide)'
 category: observability
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - scheduler
 - controller-manager
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -64,8 +67,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # 13 - 集群健康检查指南 (Cluster Health Check Guide)
 
@@ -272,7 +276,7 @@ etcdctl $ETCD_OPTS check perf --load="s" 2>/dev/null || echo "性能检查不可
 | **Ready** | 节点健康可调度 | 节点不健康 | kubelet停止上报 | kubelet状态 |
 | **MemoryPressure** | 内存低于阈值 | 内存充足 | - | free -h |
 | **DiskPressure** | 磁盘空间不足 | 磁盘充足 | - | df -h |
-| **PIDPressure** | PID接近限制 | PID充足 | - | ps aux \| wc -l |
+| **PIDPressure** | PID接近限制 | PID充足 | - | ps aux | wc -l |
 | **NetworkUnavailable** | 网络未配置 | 网络正常 | - | CNI状态 |
 
 ### 节点健康检查命令

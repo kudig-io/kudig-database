@@ -1,6 +1,7 @@
 ---
 title: 04 - Deployment / ReplicaSet YAML 配置参考
 description: 'title: 04 - Deployment / ReplicaSet YAML 配置参考'
+summary: 'title: 04 - Deployment / ReplicaSet YAML 配置参考'
 category: general
 tags:
 - yaml
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - istio
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -42,8 +45,9 @@ prerequisites:
 - mysql-basics
 - logging-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 04 - Deployment / [[ReplicaSet|ReplicaSet]] YAML 配置参考
 description: '# 04 - Deployment / ReplicaSet YAML 配置参考'
@@ -2900,3 +2904,7 @@ kubectl drain node-1 --ignore-daemonsets --delete-emptydir-data
 - 03-pod-specification-complete
 - 05-statefulset-reference
 - 06-daemonset-reference
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub

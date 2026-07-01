@@ -1,16 +1,20 @@
 ---
 title: 容量规划与成本优化
+summary: 容量规划与成本优化是 Kubernetes 运营的核心挑战。随着云原生生态的成熟，AI/ML 驱动的预测式容量规划与 FinOps 实践相结合，正在从被动式"超配-浪费"模式转向主动式"精准供给-持续优化"模式。本文系统梳理从预测、供给到成本归因的全链路方法论与工具生态。
 category: concepts
 tags:
-  - capacity
-  - cost
-  - finops
-  - karpenter
-  - k8s
+- capacity
+- cost
+- finops
+- karpenter
+- k8s
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # 容量规划与成本优化
 

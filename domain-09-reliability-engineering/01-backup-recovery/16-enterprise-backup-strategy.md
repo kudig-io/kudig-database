@@ -1,6 +1,7 @@
 ---
 title: 16-企业级备份策略
 description: 'description: ''<!-- chunk: 📋 概述'' -->## 📋 概述'''
+summary: 'description: ''<!-- chunk: 📋 概述'' -->## 📋 概述'''
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - job
 - cronjob
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - etcd-basics
 - mysql-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 16-企业级备份策略
 description: '<!-- chunk: 📋 概述' -->## 📋 概述'

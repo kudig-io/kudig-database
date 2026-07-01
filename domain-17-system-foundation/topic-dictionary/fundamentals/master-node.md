@@ -1,12 +1,17 @@
 ---
 title: 主节点
-description: 'Master Node（主节点）是运行 Kubernetes 控制平面组件的节点。在现代 Kubernetes 术语中，更推荐使用 Control Plane ...'
+description: Master Node（主节点）是运行 Kubernetes 控制平面组件的节点。在现代 Kubernetes 术语中，更推荐使用 Control
+  Plane ...
+summary: Master Node（主节点）是运行 Kubernetes 控制平面组件的节点。在现代 Kubernetes 术语中，更推荐使用 Control
+  Plane ...
 category: dictionary
 tags:
 - k8s
 - glossary
 - control-plane
 - node
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 主节点
 

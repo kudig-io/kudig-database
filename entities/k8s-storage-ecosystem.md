@@ -1,6 +1,7 @@
 ---
 title: 存储体系：PV、PVC、StorageClass、CSI 驱动与灾备恢复
 description: '# 存储体系'
+summary: '# 存储体系'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - etcd
 - scheduler
 - ceph
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # 存储体系
 

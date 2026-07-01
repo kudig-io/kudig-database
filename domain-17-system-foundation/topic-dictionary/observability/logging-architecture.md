@@ -1,6 +1,7 @@
 ---
 title: 日志架构（Logging Architecture）
 description: '# 日志架构（Logging Architecture）'
+summary: '# 日志架构（Logging Architecture）'
 category: dictionary
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - scheduler
 - daemonset
 - agent
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -28,9 +31,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - logging-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 日志架构（Logging Architecture）
 

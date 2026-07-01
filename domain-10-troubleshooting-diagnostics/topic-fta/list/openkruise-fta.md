@@ -1,6 +1,7 @@
 ---
 title: OpenKruise 工作负载异常故障树分析 (skills)
 description: '### 故障排查命令速查'
+summary: '### 故障排查命令速查'
 category: skills
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - troubleshooting
 - job
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ prerequisites:
 fta_id: FTA-OPENKRUISE-001
 component: Openkruise
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 # OpenKruise 工作负载异常故障树分析
 

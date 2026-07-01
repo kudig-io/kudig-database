@@ -1,6 +1,7 @@
 ---
 title: 生产运维：GitOps、FinOps、灾备恢复与变更管理
 description: '# 生产运维'
+summary: '# 生产运维'
 category: reference
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - etcd
 - flux
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # 生产运维
 

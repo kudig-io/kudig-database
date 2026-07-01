@@ -1,6 +1,7 @@
 ---
 title: 第四课：Service - 让应用可以被访问
 description: 【解决方案】
+summary: 【解决方案】
 category: skills
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - coredns
 - ingress
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 - 让应用可以被访问
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第四课：[[Service|Service]] - 让应用可以被访问
 

@@ -1,6 +1,7 @@
 ---
 title: 第十课：常见问题排查
 description: '# 第十课：常见问题排查'
+summary: '# 第十课：常见问题排查'
 category: skills
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - job
 - ingress
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 - 第十课：常见问题排查
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第十课：常见问题排查
 

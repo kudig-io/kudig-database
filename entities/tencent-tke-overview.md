@@ -1,6 +1,7 @@
 ---
 title: 腾讯云 TKE (Tencent Kubernetes Engine) 概述
 description: 'title: 腾讯云 TKE (Tencent Kubernetes Engine) 概述'
+summary: 'title: 腾讯云 TKE (Tencent Kubernetes Engine) 概述'
 category: general
 tags:
 - cloud
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - istio
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -43,8 +46,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 腾讯云 TKE (Tencent [[Kubernetes|Kubernetes]] Engine) 概述
 description: '# 腾讯云 TKE (Tencent Kubernetes Engine) 概述'
@@ -1897,6 +1901,8 @@ spec:
 腾讯云TKE作为承载腾讯内部核心业务的容器平台，不仅具备处理亿级用户并发的强大能力，还通过腾讯自研的Gaia网络虚拟化技术、大规模集群优化、AI原生集成等高级特性，为企业提供了业界领先的容器化解决方案。通过深度集成腾讯云生态服务和微信等特色应用，TKE成为企业数字化转型和云原生演进的理想选择。
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
 - [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]

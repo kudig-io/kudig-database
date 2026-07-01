@@ -1,6 +1,7 @@
 ---
 title: 04 - Terway 运维手册 (Operations Manual)
 description: '# 04 - Terway 运维手册 (Operations Manual)'
+summary: '# 04 - Terway 运维手册 (Operations Manual)'
 category: terway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - calico
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -37,8 +40,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # 04 - Terway 运维手册 (Operations Manual)
 

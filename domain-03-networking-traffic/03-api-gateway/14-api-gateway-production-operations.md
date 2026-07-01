@@ -1,6 +1,7 @@
 ---
 title: 14 - API 网关生产运维最佳实践
 description: 'title: 14 - API 网关生产运维最佳实践'
+summary: 'title: 14 - API 网关生产运维最佳实践'
 category: general
 tags:
 - gateway
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - redis
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 - redis-basics
 - tls-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 14 - API 网关生产运维最佳实践
 description: '# 14 - API 网关生产运维最佳实践'

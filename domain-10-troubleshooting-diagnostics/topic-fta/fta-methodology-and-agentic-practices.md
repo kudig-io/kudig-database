@@ -1,6 +1,7 @@
 ---
 title: FTA 故障树分析方法论与 AI Agent 智能运维实践 (domain-10-troubleshooting-diagnostics)
 description: 'title: FTA 故障树分析方法论与 AI Agent 智能运维实践'
+summary: 'title: FTA 故障树分析方法论与 AI Agent 智能运维实践'
 category: fta
 tags:
 - fta
@@ -13,6 +14,8 @@ tags:
 - grafana
 - jaeger
 - istio
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -58,8 +61,9 @@ prerequisites:
 fta_id: FTA-FTA_METHODOLOGY_AND_AGENTIC_PRACTICES-001
 component: Fta Methodology And Agentic Practices
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: FTA 故障树分析方法论与 AI Agent 智能运维实践
 description: '# FTA 故障树分析方法论与 AI Agent 智能运维实践'

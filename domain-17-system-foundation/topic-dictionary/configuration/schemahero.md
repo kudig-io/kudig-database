@@ -1,6 +1,9 @@
 ---
 title: SchemaHero 数据库 Schema 管理
-description: 'SchemaHero 是 Replicated 开源的 CNCF Sandbox 项目，以 GitOps 方式管理数据库 Schema 变更，通过声明式 YAM...'
+description: SchemaHero 是 Replicated 开源的 CNCF Sandbox 项目，以 GitOps 方式管理数据库 Schema 变更，通过声明式
+  YAM...
+summary: SchemaHero 是 Replicated 开源的 CNCF Sandbox 项目，以 GitOps 方式管理数据库 Schema 变更，通过声明式
+  YAM...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - configuration
 - database
 - gitops
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # SchemaHero 数据库 Schema 管理（SchemaHero）
 

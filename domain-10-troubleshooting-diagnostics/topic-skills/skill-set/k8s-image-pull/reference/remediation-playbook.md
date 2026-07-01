@@ -1,12 +1,21 @@
 ---
-title: "Image Pull Failure Remediation Playbook"
+title: Image Pull Failure Remediation Playbook
+summary: Image Pull Failure Remediation Playbook：kubectl get pod <pod> -n <ns> -o
+  jsonpath='{.spec.containers[*].image}'
 category: remediation
-skill_set: "k8s-image-pull"
-created: "2026-05-22"
-updated: "2026-05-22"
+tags:
+- reference
+- remediation
+- playbook
+- visibility/public
+tier: supporting
+created: '2026-05-22'
+updated: '2026-05-22'
+skill_set: k8s-image-pull
 last_updated: 2026-05-22
-tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
+
+
 
 # 修复操作手册 / Remediation Playbook
 
@@ -249,3 +258,9 @@ kubectl get pod <pod> -n <namespace> -o jsonpath='{.status.containerStatuses[0].
 - Skill 版本: SKILL-IMG-001 v1.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

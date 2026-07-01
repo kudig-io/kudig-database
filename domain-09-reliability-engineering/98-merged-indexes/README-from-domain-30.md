@@ -1,6 +1,7 @@
 ---
 title: 'Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)'
 description: '**领域定位**: 企业级灾备架构与业务连续性管理实践 | **文档数量**: 10 篇 | **更新时间**: 2026-05-18'
+summary: '**领域定位**: 企业级灾备架构与业务连续性管理实践 | **文档数量**: 10 篇 | **更新时间**: 2026-05-18'
 category: disaster-recovery
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - argocd
 - flux
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -47,8 +50,9 @@ prerequisites:
 - mysql-basics
 - backup-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)
 

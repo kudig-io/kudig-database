@@ -1,11 +1,17 @@
 ---
 title: Ingress 异常故障树分析 (skills)
-description: '| CTRL3 | 配置重载失败 | `kubectl logs -n ${INGRESS_NS} -l app.kubernetes.io/name=ingress-nginx --tail=100 \| grep
-  -iE "reload.*fail\|error.*config"` | `reload.*fail\|error` | 确认配置重载问题 |'
+description: '| CTRL3 | 配置重载失败 | `kubectl logs -n ${INGRESS_NS} -l app.kubernetes.io/name=ingress-nginx
+  --tail=100 | grep -iE "reload.*fail|error.*config"` | `reload.*fail|error` |
+  确认配置重载问题 |'
+summary: '| CTRL3 | 配置重载失败 | `kubectl logs -n ${INGRESS_NS} -l app.kubernetes.io/name=ingress-nginx
+  --tail=100 | grep -iE "reload.*fail|error.*config"` | `reload.*fail|error` |
+  确认配置重载问题 |'
 category: general
 tags:
 - k8s
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +29,9 @@ prerequisites:
 fta_id: FTA-INGRESS-001
 component: Ingress
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "[[Ingress|Ingress]] 异常故障树分析"
@@ -50,8 +57,8 @@ base_confidence: 0.7
 |---------|------|----------|--------------|------|
 | CTRL1A | OOMKilled | `kubectl get pods -n ${INGRESS_NS} -l app.kubernetes.io/name=ingress-nginx -o jsonpath='{range .items[*]}{.status.containerStatuses[*].lastState.terminated.reason}{"\n"}{end}'` | `OOMKilled` | 确认内存溢出 |
 | CTRL1B | CrashLoopBackOff | `kubectl get pods -n ${INGRESS_NS} -l app.kubernetes.io/name=ingress-nginx -o wide` | `CrashLoopBackOff` | 确认容器崩溃 |
-| CTRL1C | 镜像拉取失败 | `kubectl get pods -n ${INGRESS_NS} -l app.kubernetes.io/name=ingress-nginx -o jsonpath='{.items[*].status.containerStatuses[*].state.waiting.reason}'` | `ImagePullBackOff\|ErrImagePull` | 确认镜像问题 |
-| CTRL3 | 配置重载失败 | `kubectl logs -n ${INGRESS_NS} -l app.kubernetes.io/name=ingress-nginx --tail=100 \| grep -iE "reload.*fail\|error.*config"` | `reload.*fail\|error` | 确认配置重载问题 |
+| CTRL1C | 镜像拉取失败 | `kubectl get pods -n ${INGRESS_NS} -l app.kubernetes.io/name=ingress-nginx -o jsonpath='{.items[*].status.containerStatuses[*].state.waiting.reason}'` | `ImagePullBackOff|ErrImagePull` | 确认镜像问题 |
+| CTRL3 | 配置重载失败 | `kubectl logs -n ${INGRESS_NS} -l app.kubernetes.io/name=ingress-nginx --tail=100 | grep -iE "reload.*fail|error.*config"` | `reload.*fail|error` | 确认配置重载问题 |
 | CTRL4 | 资源压力 | `kubectl top pods -n ${INGRESS_NS} -l app.kubernetes.io/name=ingress-nginx` | CPU/内存使用 | 检查资源消耗 |
 
 ### 2. 规则/路由诊断

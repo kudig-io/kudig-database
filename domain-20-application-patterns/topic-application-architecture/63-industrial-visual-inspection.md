@@ -1,12 +1,15 @@
 ---
 title: 工业视觉检测架构设计 — 阿里云视角
 description: 'title: 工业视觉检测架构设计'
+summary: 'title: 工业视觉检测架构设计'
 category: general
 tags:
 - architecture
 - best-practice
 - gpu
 - nvidia
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 工业视觉检测架构设计
 description: '# 工业视觉检测架构设计 — 阿里云视角'

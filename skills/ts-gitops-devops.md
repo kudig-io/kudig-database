@@ -1,6 +1,7 @@
 ---
 title: GitOps/DevOps 排查
 description: '# GitOps/DevOps 排查'
+summary: '# GitOps/DevOps 排查'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flux
 - docker
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - gitops-basics
 - etcd-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # GitOps/DevOps 排查
 

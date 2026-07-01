@@ -1,7 +1,10 @@
 ---
 title: Cilium eBPF × 可观测性
-description: '[[concepts/cilium-ebpf-networking.md|cilium ebpf networking]] 描述 eBPF 在网络中的应用，[[entities/prometheus-grafana.md|prometheus grafana]] 是监控栈。两者的交汇点是 **Hubble**：Cilium
+description: '[[concepts/cilium-ebpf-networking.md|cilium ebpf networking]] 描述 eBPF
+  在网络中的应用，[[entities/prometheus-grafana.md|prometheus grafana]] 是监控栈。两者的交汇点是 **Hubble**：Cilium
   的可观测性子系统，它使用与网络策略相同的 eBPF 挂载点来收集流数据，无需额外的 sidecar 或代理。wiki 分别讨论了 eBPF 网络和 Prometheus '
+summary: '[[concepts/cilium-ebpf-networking.md|cilium ebpf networking]] 描述 eBPF 在网络中的应用，[[entities/prometheus-grafana.md|prometheus
+  grafana]] 是监控栈。两者的交汇点是 **Hubble**：Cilium 的可观测性子系统，它使用与网络策略相同的 eBPF 挂载点来收集流数...'
 category: synthesis
 tags:
 - k8s
@@ -14,6 +17,8 @@ tags:
 - grafana
 - istio
 - envoy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,17 +41,18 @@ prerequisites:
 - cilium-basics
 - kafka-basics
 - observability-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/deployment.md]]"
-    type: uses
-  - target: "[[entities/istio.md]]"
-    type: uses
-  - target: "[[entities/prometheus.md]]"
-    type: uses
-  - target: "[[entities/cni.md]]"
-    type: related_to
+- target: '[[entities/deployment.md]]'
+  type: uses
+- target: '[[entities/istio.md]]'
+  type: uses
+- target: '[[entities/prometheus.md]]'
+  type: uses
+- target: '[[entities/cni.md]]'
+  type: related_to
 ---
+
+
 
 # Cilium eBPF × 可观测性
 

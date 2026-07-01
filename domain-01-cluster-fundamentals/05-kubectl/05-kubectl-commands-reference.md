@@ -1,6 +1,7 @@
 ---
 title: kubectl 命令完整参考
 description: Kubernetes kubectl 命令完整参考，覆盖日常操作、故障排查、资源管理、集群运维等场景
+summary: Kubernetes kubectl 命令完整参考，覆盖日常操作、故障排查、资源管理、集群运维等场景
 category: domain-1-architecture
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - apiserver
 - scheduler
 - prometheus
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -73,8 +76,9 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/
   type: troubleshooting
   desc: 故障排查专题
-created: "2026-05-23"
 ---
+
+
 
 # kubectl 命令完整参考 (kubectl Commands Complete Reference)
 
@@ -2436,6 +2440,8 @@ kubectl get --raw='/healthz/etcd'
 - 10 - Windows 容器支持与集成指南
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[MOC]]
 

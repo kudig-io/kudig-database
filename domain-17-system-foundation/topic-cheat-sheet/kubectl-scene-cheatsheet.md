@@ -1,6 +1,9 @@
 ---
 title: kubectl 场景速查卡
-description: 'ssh <node-ip> "sudo journalctl -u kubelet --since 30m | tail -50"  # Step 3: 查看 kubelet 日志'
+description: 'ssh <node-ip> "sudo journalctl -u kubelet --since 30m | tail -50"  #
+  Step 3: 查看 kubelet 日志'
+summary: 'ssh <node-ip> "sudo journalctl -u kubelet --since 30m | tail -50"  # Step
+  3: 查看 kubelet 日志'
 category: cheatsheet
 tags:
 - cheatsheet
@@ -13,6 +16,8 @@ tags:
 - flannel
 - coredns
 - docker
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +37,9 @@ prerequisites:
 - cloud-provider-basics
 - cilium-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # kubectl 场景速查卡
 
@@ -556,7 +562,7 @@ kubectl top nodes                                  # 节点资源使用
 
 # === Pod 状态 ===
 kubectl get pods -A | grep -v Running | grep -v Completed  # 异常 Pod
-kubectl get events -A --sort-by='.lastTimestamp' | tail -20 | grep -i "error\|failed"  # 最近错误事件
+kubectl get events -A --sort-by='.lastTimestamp' | tail -20 | grep -i "error|failed"  # 最近错误事件
 
 # === 快速修复 ===
 kubectl rollout restart deployment <name> -n <ns>  # 重启 Deployment（低风险）

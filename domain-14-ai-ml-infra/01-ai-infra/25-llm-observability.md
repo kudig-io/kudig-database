@@ -1,6 +1,7 @@
 ---
 title: 25 - LLM可观测性与监控体系
 description: '# 25 - LLM可观测性与监控体系'
+summary: '# 25 - LLM可观测性与监控体系'
 category: ai-infra
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - elasticsearch
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -55,8 +58,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
-created: "2026-05-23"
 ---
+
+
 
 # 25 - LLM可观测性与监控体系
 

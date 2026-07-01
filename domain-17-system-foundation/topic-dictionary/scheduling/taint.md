@@ -1,12 +1,15 @@
 ---
 title: 污点
-description: 'Taint（污点）是应用在节点上的标记，表示该节点不应接受没有对应容忍度（Toleration）的 Pod。污点与容忍度配合工作，实现节点的调度控制。...'
+description: Taint（污点）是应用在节点上的标记，表示该节点不应接受没有对应容忍度（Toleration）的 Pod。污点与容忍度配合工作，实现节点的调度控制。...
+summary: Taint（污点）是应用在节点上的标记，表示该节点不应接受没有对应容忍度（Toleration）的 Pod。污点与容忍度配合工作，实现节点的调度控制。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - scheduling
 - taint
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 污点
 

@@ -1,6 +1,7 @@
 ---
 title: 证书故障排查
 description: '# 13 - 证书故障排查 (Certificate Troubleshooting)'
+summary: '# 13 - 证书故障排查 (Certificate Troubleshooting)'
 category: troubleshooting
 tags:
 - certificate
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - scheduler
 - controller-manager
+tier: core
+created: '2026-05-23'
 last_updated: 2026-01
 difficulty: advanced
 reading_level: advanced
@@ -64,8 +67,9 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry.md
   label: '运维技能: 06-certificate-expiry'
-created: "2026-05-23"
 ---
+
+
 
 # 13 - 证书故障排查 (Certificate Troubleshooting)
 
@@ -212,7 +216,7 @@ ls -la /var/lib/kubelet/pki/
 openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -text | head -30
 
 # === 检查kubelet日志 ===
-journalctl -u kubelet | grep -i "certificate\|tls\|x509"
+journalctl -u kubelet | grep -i "certificate|tls|x509"
 
 # === 常见错误 ===
 # "certificate has expired"
@@ -452,7 +456,7 @@ echo -e "\n=== 待处理CSR ==="
 kubectl get csr 2>/dev/null | grep -v "Approved"
 
 echo -e "\n=== 证书相关错误日志 ==="
-journalctl -u kubelet --since "1 hour ago" | grep -i "certificate\|x509\|tls" | tail -10
+journalctl -u kubelet --since "1 hour ago" | grep -i "certificate|x509|tls" | tail -10
 ```
 
 ### 7.2 常见问题解决方案

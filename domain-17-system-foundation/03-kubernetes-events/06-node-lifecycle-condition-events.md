@@ -1,6 +1,7 @@
 ---
 title: 06 - 节点生命周期与状态事件
 description: '- [概述](#概述)'
+summary: '- [概述](#概述)'
 category: kubernetes-events
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - containerd
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -47,8 +50,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md
   label: '故障树: node'
-created: "2026-05-23"
 ---
+
+
 
 # 06 - 节点生命周期与状态事件
 
@@ -629,14 +633,14 @@ Conditions:
 kubectl get node <node-name> -o jsonpath='{.status.conditions[?(@.type=="DiskPressure")]}'
 
 # 查看节点磁盘使用情况
-kubectl describe node <node-name> | grep -A 10 "Capacity\|Allocatable"
+kubectl describe node <node-name> | grep -A 10 "Capacity|Allocatable"
 
 # 登录节点查看磁盘
 df -h
 df -i  # 检查 inode 使用率
 
 # 查看 kubelet 日志中的磁盘相关信息
-journalctl -u kubelet | grep -i "disk\|eviction"
+journalctl -u kubelet | grep -i "disk|eviction"
 
 # 查看容器镜像占用
 crictl images
@@ -773,7 +777,7 @@ Conditions:
 
 ```bash
 # 查看节点内存状态
-kubectl describe node <node-name> | grep -A 5 "Conditions\|Allocated resources"
+kubectl describe node <node-name> | grep -A 5 "Conditions|Allocated resources"
 
 # 查看节点内存详细信息
 kubectl get node <node-name> -o json | jq '.status.conditions[] | select(.type=="MemoryPressure")'
@@ -866,7 +870,7 @@ Conditions:
 
 ```bash
 # 查看节点磁盘状态
-kubectl describe node <node-name> | grep -A 5 "Conditions\|Capacity\|Allocatable"
+kubectl describe node <node-name> | grep -A 5 "Conditions|Capacity|Allocatable"
 
 # 查看 DiskPressure 详细信息
 kubectl get node <node-name> -o json | jq '.status.conditions[] | select(.type=="DiskPressure")'
@@ -1085,8 +1089,8 @@ who -b
 last reboot | head
 
 # 查看系统日志，找出重启原因
-journalctl --since "2 hours ago" | grep -i "reboot\|shutdown\|panic"
-dmesg | grep -i "reboot\|panic"
+journalctl --since "2 hours ago" | grep -i "reboot|shutdown|panic"
+dmesg | grep -i "reboot|panic"
 
 # 查看内核日志
 journalctl -k --since "2 hours ago"
@@ -1176,7 +1180,7 @@ Source:  kubelet, node1.example.com
 
 ```bash
 # 查看节点的 Capacity 和 Allocatable
-kubectl describe node <node-name> | grep -A 10 "Capacity\|Allocatable"
+kubectl describe node <node-name> | grep -A 10 "Capacity|Allocatable"
 
 # 查看详细的资源信息
 kubectl get node <node-name> -o json | jq '.status.capacity, .status.allocatable'
@@ -1297,7 +1301,7 @@ ls -la /var/lib/kubelet
 ls -la /var/lib/containerd
 
 # 查看 kubelet 日志
-journalctl -u kubelet -n 200 --no-pager | grep -i "disk\|filesystem\|capacity"
+journalctl -u kubelet -n 200 --no-pager | grep -i "disk|filesystem|capacity"
 
 # 检查 cadvisor 是否正常工作
 curl http://localhost:4194/api/v1.3/machine
@@ -1307,7 +1311,7 @@ stat -f /var/lib/kubelet
 stat -f /var/lib/containerd
 
 # 检查磁盘错误
-dmesg | grep -i "disk\|error\|fail"
+dmesg | grep -i "disk|error|fail"
 smartctl -a /dev/sda  # 需要安装 smartmontools
 
 ```
@@ -1402,7 +1406,7 @@ crictl ps -a | grep Exited | wc -l
 du -sh /var/log/pods/* | sort -rh | head -20
 
 # 查看 kubelet GC 日志
-journalctl -u kubelet | grep -i "garbage collect\|image gc\|container gc"
+journalctl -u kubelet | grep -i "garbage collect|image gc|container gc"
 
 # 查看 GC 配置
 kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig | {imageGCHighThresholdPercent, imageGCLowThresholdPercent, imageMinimumGCAge}'
@@ -1527,7 +1531,7 @@ df -h
 cat /proc/meminfo | grep -i available
 
 # 查看 kubelet 驱逐日志
-journalctl -u kubelet | grep -i "evict\|threshold"
+journalctl -u kubelet | grep -i "evict|threshold"
 
 # 查看哪些 Pod 被驱逐了
 kubectl get pods --all-namespaces -o json | jq '.items[] | select(.status.reason=="Evicted") | {name: .metadata.name, namespace: .metadata.namespace, reason: .status.reason, message: .status.message}'
@@ -1649,10 +1653,10 @@ mount | grep kubelet
 mount | grep overlay
 
 # 查看 kubelet 日志
-journalctl -u kubelet | grep -i "container gc\|garbage collect"
+journalctl -u kubelet | grep -i "container gc|garbage collect"
 
 # 查看容器运行时日志
-journalctl -u containerd | grep -i "remove\|delete\|error"
+journalctl -u containerd | grep -i "remove|delete|error"
 
 # 检查磁盘 I/O
 iostat -x 1 5
@@ -1764,10 +1768,10 @@ du -sh /var/lib/containerd/io.containerd.content.v1.content
 kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig | {imageGCHighThresholdPercent, imageGCLowThresholdPercent, imageMinimumGCAge}'
 
 # 查看 kubelet 日志
-journalctl -u kubelet | grep -i "image gc\|garbage collect"
+journalctl -u kubelet | grep -i "image gc|garbage collect"
 
 # 查看容器运行时日志
-journalctl -u containerd | grep -i "image\|remove\|delete"
+journalctl -u containerd | grep -i "image|remove|delete"
 
 # 尝试手动删除未使用的镜像
 crictl rmi --prune
@@ -1865,7 +1869,7 @@ kubectl get node <node-name> -o jsonpath='{.metadata.creationTimestamp}'
 kubectl get node <node-name> -o json | jq '.metadata.labels, .metadata.annotations'
 
 # 查看 node-controller 日志（需要访问控制平面）
-kubectl logs -n kube-system <controller-manager-pod> | grep -i "register\|node"
+kubectl logs -n kube-system <controller-manager-pod> | grep -i "register|node"
 
 ```
 
@@ -1920,7 +1924,7 @@ kubectl get events --field-selector reason=RemovingNode --all-namespaces
 kubectl get nodes
 
 # 查看 node-controller 日志
-kubectl logs -n kube-system <controller-manager-pod> | grep -i "remove\|delete"
+kubectl logs -n kube-system <controller-manager-pod> | grep -i "remove|delete"
 ```
 
 ## 解决建议
@@ -2059,7 +2063,7 @@ kubectl get pods --all-namespaces -o wide | grep -v <node-name>
 kubectl describe cm kube-controller-manager -n kube-system | grep pod-eviction-timeout
 
 # 查看 node-controller 日志
-kubectl logs -n kube-system <controller-manager-pod> | grep -i "deleting.*pod\|evict"
+kubectl logs -n kube-system <controller-manager-pod> | grep -i "deleting.*pod|evict"
 
 # 检查存储卷的挂载状态
 kubectl get volumeattachments | grep <node-name>

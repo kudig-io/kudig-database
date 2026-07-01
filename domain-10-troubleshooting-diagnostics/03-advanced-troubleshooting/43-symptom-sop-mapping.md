@@ -1,6 +1,7 @@
 ---
 title: 症状 → SOP 映射手册
 description: '- [C. 网络异常类](#c-网络异常类)'
+summary: '- [C. 网络异常类](#c-网络异常类)'
 category: troubleshooting
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -60,8 +63,9 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
-created: "2026-05-23"
 ---
+
+
 
 # 症状 → SOP 映射手册
 

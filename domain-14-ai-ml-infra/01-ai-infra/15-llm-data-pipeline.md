@@ -1,6 +1,7 @@
 ---
 title: 142 - LLM训练数据Pipeline与管理 (LLM Data Pipeline & Management)
 description: '# 142 - LLM训练数据Pipeline与管理 (LLM Data Pipeline & Management)'
+summary: '# 142 - LLM训练数据Pipeline与管理 (LLM Data Pipeline & Management)'
 category: ai-infra
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - redis
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -58,8 +61,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
-created: "2026-05-23"
 ---
+
+
 
 # 142 - LLM训练数据Pipeline与管理 (LLM Data Pipeline & Management)
 

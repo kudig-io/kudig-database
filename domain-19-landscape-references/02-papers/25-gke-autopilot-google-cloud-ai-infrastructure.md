@@ -1,6 +1,7 @@
 ---
 title: GKE Autopilot 与 Google Cloud AI 基础设施 (GKE Autopilot and Google Cloud AI Infrastructure)
 description: 'description: ''作者: Google Cloud架构专家 | 版本: v1.0 | 更新时间: 2026-03-03'''
+summary: 'description: ''作者: Google Cloud架构专家 | 版本: v1.0 | 更新时间: 2026-03-03'''
 category: general
 tags:
 - paper
@@ -13,6 +14,8 @@ tags:
 - docker
 - redis
 - hpa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ prerequisites:
 - redis-basics
 - gpu-scheduling-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: GKE Autopilot 与 Google Cloud AI 基础设施 (GKE Autopilot and Google Cloud AI Infrastructure)
 description: '作者: Google Cloud架构专家 | 版本: v1.0 | 更新时间: 2026-03-03'
@@ -1449,5 +1453,7 @@ spec:
 - 01-kubernetes-production-readiness-assessment
 
 ## Related
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

@@ -1,6 +1,7 @@
 ---
 title: CronJob 故障排查
 description: '# 18 - CronJob 故障排查 (CronJob Troubleshooting)'
+summary: '# 18 - CronJob 故障排查 (CronJob Troubleshooting)'
 category: troubleshooting
 tags:
 - cronjob
@@ -13,6 +14,8 @@ tags:
 - rbac
 - rag
 - etcd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: intermediate
 reading_level: intermediate
@@ -62,8 +65,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/job-cronjob-fta.md
   label: '故障树: job-cronjob'
-created: "2026-05-23"
 ---
+
+
 
 # 18 - [[CronJob|CronJob]] 故障排查 (CronJob Troubleshooting)
 

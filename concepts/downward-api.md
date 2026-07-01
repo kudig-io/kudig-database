@@ -1,13 +1,22 @@
 ---
-title: "Downward API"
+title: Downward API
+summary: Downward API 允许容器获取自身 Pod 和节点的元数据信息，如标签、注解、资源限制等。
 category: concepts
-tags: ['pod', 'metadata', 'api', 'visibility/public']
-sources: ["conceptss/"]
+tags:
+- pod
+- metadata
+- api
+- visibility/public
+tier: supporting
+sources:
+- conceptss/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: stub
 ---
+
+
 # Downward API
 
 ## 概述
@@ -22,3 +31,7 @@ Downward API 允许容器获取自身 Pod 和节点的元数据信息，如标�
 ## 相关链接
 
 - [[concepts/kubernetes.md|Kubernetes]] — 核心概念
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

@@ -1,6 +1,8 @@
 ---
 title: CRI-O
-description: 'CRI-O 是专为 Kubernetes 设计的轻量级容器运行时，实现了 Kubernetes CRI（Container Runtime Interface）...'
+description: CRI-O 是专为 Kubernetes 设计的轻量级容器运行时，实现了 Kubernetes CRI（Container Runtime
+  Interface）...
+summary: CRI-O 是专为 Kubernetes 设计的轻量级容器运行时，实现了 Kubernetes CRI（Container Runtime Interface）...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +11,8 @@ tags:
 - cri
 - container-runtime
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # CRI-O
 

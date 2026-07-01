@@ -1,6 +1,7 @@
 ---
 title: Aeraki Mesh [entities]
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - envoy
 - redis
 - kafka
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - monitoring-basics
 - kafka-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 # Aeraki Mesh
 

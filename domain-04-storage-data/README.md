@@ -1,6 +1,7 @@
 ---
 title: Storage & Data
 description: 整合原 domain-04-storage-data/16 的存储知识，涵盖 K8s 存储体系、PV/PVC/CSI 和存储基础原理。
+summary: 整合原 domain-04-storage-data/16 的存储知识，涵盖 K8s 存储体系、PV/PVC/CSI 和存储基础原理。
 category: domain
 tags:
 - storage
@@ -11,6 +12,8 @@ tags:
 - rag
 - daemonset
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - storage-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Storage & Data
 

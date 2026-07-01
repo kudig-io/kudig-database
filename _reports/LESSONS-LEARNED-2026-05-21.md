@@ -1,6 +1,7 @@
 ---
 title: 操作教训记录
 description: 2026-05-21 重组操作中发生的错误与教训，永久记录以避免重复
+summary: 2026-05-21 重组操作中发生的错误与教训，永久记录以避免重复
 category: report
 tags:
 - lessons-learned
@@ -8,6 +9,8 @@ tags:
 - git
 - safety
 - llm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 - 操作教训记录
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 操作教训记录 — 2026-05-21
 

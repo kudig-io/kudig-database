@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 开源项目全景生态图谱
 description: '| **Kubernetes** | 编排调度 | 2016.03 | v1.33.0 | 115k+ |'
+summary: '| **Kubernetes** | 编排调度 | 2016.03 | v1.33.0 | 115k+ |'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - envoy
 - cilium
 - flannel
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 开源项目全景生态图谱
 

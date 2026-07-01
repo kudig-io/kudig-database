@@ -1,6 +1,7 @@
 ---
 title: 性能瓶颈故障排查
 description: '# 33 - 性能瓶颈故障排查 (Performance Bottleneck Troubleshooting)'
+summary: '# 33 - 性能瓶颈故障排查 (Performance Bottleneck Troubleshooting)'
 category: troubleshooting
 tags:
 - performance
@@ -13,6 +14,8 @@ tags:
 - apiserver
 - kubelet
 - scheduler
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: advanced
 reading_level: advanced
@@ -62,8 +65,9 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/17-performance-bottleneck.md
   label: '运维技能: 17-performance-bottleneck'
-created: "2026-05-23"
 ---
+
+
 
 # 33 - 性能瓶颈故障排查 (Performance Bottleneck Troubleshooting)
 

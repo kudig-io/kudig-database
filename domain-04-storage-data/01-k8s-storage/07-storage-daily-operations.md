@@ -1,6 +1,7 @@
 ---
 title: 07 - 存储日常运维操作手册
 description: '# 07 - 存储日常运维操作手册'
+summary: '# 07 - 存储日常运维操作手册'
 category: storage
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - daemonset
 - job
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -47,8 +50,9 @@ cross_refs:
 - type: domain
   path: ../domain-04-storage-data/
   label: '相关知识域: domain-04-storage-data'
-created: "2026-05-23"
 ---
+
+
 
 # 07 - 存储日常运维操作手册
 

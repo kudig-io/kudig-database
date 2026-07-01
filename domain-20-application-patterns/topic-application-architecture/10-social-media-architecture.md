@@ -1,6 +1,7 @@
 ---
 title: 社交媒体平台 Kubernetes 生产架构设计
 description: 'title: 社交媒体平台Kubernetes生产架构设计'
+summary: 'title: 社交媒体平台Kubernetes生产架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - nvidia
 - llm
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 社交媒体平台Kubernetes生产架构设计
 description: '# 社交媒体平台 [[Kubernetes|Kubernetes]] 生产架构设计'

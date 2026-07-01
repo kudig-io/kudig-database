@@ -1,6 +1,7 @@
 ---
 title: Kusheet 工具与开源项目 URL 汇总
 description: '| **适合读者** | 初学者(了解工具选择) → 中级(对比方案) → 专家(深度集成) |'
+summary: '| **适合读者** | 初学者(了解工具选择) → 中级(对比方案) → 专家(深度集成) |'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - istio
 - envoy
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -50,9 +53,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # Kusheet 工具与开源项目 URL 汇总
 

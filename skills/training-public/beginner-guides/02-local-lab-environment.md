@@ -1,6 +1,9 @@
 ---
 title: 本地零成本 K8s 实验环境搭建手册
-description: 面向小白的本地 K8s 实验环境完整指南，覆盖 kind、minikube、k3d 三种方案，支持 Windows/macOS/Linux。零云厂商依赖、零费用，笔记本上跑通全部 K8s 核心概念
+description: 面向小白的本地 K8s 实验环境完整指南，覆盖 kind、minikube、k3d 三种方案，支持 Windows/macOS/Linux。零云厂商依赖、零费用，笔记本上跑通全部
+  K8s 核心概念
+summary: 面向小白的本地 K8s 实验环境完整指南，覆盖 kind、minikube、k3d 三种方案，支持 Windows/macOS/Linux。零云厂商依赖、零费用，笔记本上跑通全部
+  K8s 核心概念
 category: learning
 tags:
 - tutorial
@@ -13,6 +16,8 @@ tags:
 - apiserver
 - kubelet
 - scheduler
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: beginner
 reading_level: beginner
@@ -39,8 +44,9 @@ prerequisites:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 本地零成本 K8s 实验环境搭建手册
 

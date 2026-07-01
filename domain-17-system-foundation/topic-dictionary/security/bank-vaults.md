@@ -1,6 +1,9 @@
 ---
 title: Bank Vaults Vault 集成
-description: 'Bank Vaults（vault-secrets-webhook + vault-operator）是 Banzai Cloud 开源的 HashiCorp ...'
+description: Bank Vaults（vault-secrets-webhook + vault-operator）是 Banzai Cloud 开源的
+  HashiCorp ...
+summary: Bank Vaults（vault-secrets-webhook + vault-operator）是 Banzai Cloud 开源的 HashiCorp
+  ...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - security
 - vault
 - secrets
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Bank Vaults Vault 集成（Bank Vaults）
 

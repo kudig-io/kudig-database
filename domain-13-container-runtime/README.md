@@ -1,6 +1,7 @@
 ---
 title: Container Runtime
 description: 整合原 domain-13-container-runtime/22 的容器运行时知识，涵盖 Docker、镜像管理和镜像仓库。
+summary: 整合原 domain-13-container-runtime/22 的容器运行时知识，涵盖 Docker、镜像管理和镜像仓库。
 category: domain
 tags:
 - docker
@@ -11,6 +12,8 @@ tags:
 - supply-chain
 - daemonset
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Container Runtime
 

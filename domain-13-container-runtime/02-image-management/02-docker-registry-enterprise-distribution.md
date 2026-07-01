@@ -1,6 +1,7 @@
 ---
 title: Docker Registry企业级镜像分发深度实践
 description: '# Docker Registry企业级镜像分发深度实践'
+summary: '# Docker Registry企业级镜像分发深度实践'
 category: container-image-management
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - redis
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Docker Registry企业级镜像分发深度实践
 

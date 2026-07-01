@@ -1,6 +1,7 @@
 ---
 title: 控制平面监控与可观测性 (Control Plane Monitoring & Observability)
 description: 'title: 控制平面监控与可观测性 (Control Plane Monitoring & Observability)'
+summary: 'title: 控制平面监控与可观测性 (Control Plane Monitoring & Observability)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - scheduler
 - controller-manager
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -40,8 +43,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 控制平面监控与可观测性 (Control Plane Monitoring & Observability)
 description: '# 控制平面监控与可观测性 (Control Plane Monitoring & Observability)'
@@ -1787,7 +1791,7 @@ Cluster Status Summary:
 $(grep -E "(Ready|NotReady)" $DIAG_DIR/nodes-status.txt | head -10)
 
 Critical Issues Found:
-$(grep -i "error\|fail\|warning" $DIAG_DIR/*.txt | head -20)
+$(grep -i "error|fail|warning" $DIAG_DIR/*.txt | head -20)
 
 Recommendations:
 1. Check the detailed logs in individual files
@@ -2059,6 +2063,8 @@ Level 5 - 自主运维 (Autonomous Operations)
 - 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-02-workloads-applications/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

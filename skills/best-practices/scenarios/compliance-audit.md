@@ -1,6 +1,7 @@
 ---
 title: '场景: 合规审计'
 description: Kubernetes 安全合规审计和策略管理
+summary: Kubernetes 安全合规审计和策略管理
 category: scenario
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - compliance
 - rbac
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-20'
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # 场景: 合规审计
 

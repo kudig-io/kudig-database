@@ -1,6 +1,7 @@
 ---
 title: AgentScope 概述与安装入门 (domain-14-ai-ml-infra)
 description: 'title: AgentScope 概述与安装入门'
+summary: 'title: AgentScope 概述与安装入门'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - serverless
 - llm
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - redis-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: AgentScope 概述与安装入门
 description: '# AgentScope 概述与安装入门'
@@ -418,7 +422,7 @@ docker run -p 3000:3000 agentscope/studio:latest
 
 | 排查层 | 检查命令 / 操作 | 说明 |
 |--------|----------------|------|
-| **① 服务绑定地址** | `ss -tlnp \| grep 3000` | 如果显示 `127.0.0.1:3000`，需改为 `as_studio --host 0.0.0.0` 或 `HOST=0.0.0.0 as_studio` |
+| **① 服务绑定地址** | `ss -tlnp | grep 3000` | 如果显示 `127.0.0.1:3000`，需改为 `as_studio --host 0.0.0.0` 或 `HOST=0.0.0.0 as_studio` |
 | **② 阿里云安全组** | ECS 控制台 → 安全组 → 入方向添加 TCP/3000 | 这是云平台级别防火墙，**必须在控制台配置** |
 | **③ OS 防火墙** | `firewall-cmd --add-port=3000/tcp --permanent && firewall-cmd --reload` | 操作系统级别防火墙 |
 
@@ -739,3 +743,7 @@ python -c "import agentscope; print(agentscope.__version__)"
 - 15-agent-corpus-gap-analysis
 - 17-agentscope-core-concepts
 - 18-agentscope-tool-system
+
+## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub

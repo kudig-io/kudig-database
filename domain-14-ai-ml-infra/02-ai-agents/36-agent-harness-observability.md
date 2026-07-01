@@ -1,6 +1,8 @@
 ---
 title: Agent Harness 可观测性体系 (domain-14-ai-ml-infra)
-description: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Observability,'
+description: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**:
+  Observability,'
+summary: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Observability,'
 category: general
 tags:
 - ai
@@ -11,6 +13,8 @@ tags:
 - llm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +37,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Agent Harness 可观测性体系
 description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Observability,

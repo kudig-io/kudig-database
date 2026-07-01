@@ -1,6 +1,7 @@
 ---
 title: Agent Harness 工程：从模型包装到生产级 Agent 系统设计 (domain-14-ai-ml-infra)
 description: 'title: Agent Harness 工程：从模型包装到生产级 Agent 系统设计'
+summary: 'title: Agent Harness 工程：从模型包装到生产级 Agent 系统设计'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - redis
 - job
 - llm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 - redis-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Agent Harness 工程：从模型包装到生产级 Agent 系统设计
 description: '# Agent Harness 工程：从模型包装到生产级 Agent 系统设计'

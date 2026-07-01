@@ -1,6 +1,7 @@
 ---
 title: 'Day 15: 安全体系 - RBAC + 认证授权'
 description: 'title: Day 15: 安全体系 - RBAC + 认证授权'
+summary: 'title: Day 15: 安全体系 - RBAC + 认证授权'
 category: learning
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - kubelet
 - rbac
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -31,8 +34,9 @@ prerequisites:
 - gpu-ml-basics
 - etcd-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 15: 安全体系 - RBAC + 认证授权

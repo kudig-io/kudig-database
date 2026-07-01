@@ -1,6 +1,7 @@
 ---
 title: 存储与卷管理 (topic-code-analysis)
 description: 'title: 存储与卷管理'
+summary: 'title: 存储与卷管理'
 category: general
 tags:
 - reference
@@ -11,6 +12,8 @@ tags:
 - statefulset
 - operator
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 存储与卷管理
 description: '# 存储与卷管理'
@@ -373,6 +377,8 @@ kubectl get node <node> -o jsonpath='{.status.capacity}'
 | CSI driver not found | Driver 未部署 | `kubectl get csidriver` 检查 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[log|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

@@ -1,6 +1,7 @@
 ---
 title: 限制范围
-description: 'LimitRange 是 Kubernetes 命名空间级别的资源默认值和约束机制，为 Pod/Container 自动设置资源的 requests/limit...'
+description: LimitRange 是 Kubernetes 命名空间级别的资源默认值和约束机制，为 Pod/Container 自动设置资源的 requests/limit...
+summary: LimitRange 是 Kubernetes 命名空间级别的资源默认值和约束机制，为 Pod/Container 自动设置资源的 requests/limit...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - configuration
 - resource-management
 - defaults
+tier: peripheral
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # 限制范围（LimitRange）
 

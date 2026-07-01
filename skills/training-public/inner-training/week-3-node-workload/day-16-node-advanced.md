@@ -1,6 +1,7 @@
 ---
 title: 'Day 16: Node 节点进阶'
 description: '**学习时间**: 4-5 小时 | **主题**: 节点维护、标签与调度约束'
+summary: '**学习时间**: 4-5 小时 | **主题**: 节点维护、标签与调度约束'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - operator
 - gpu
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 16: Node 节点进阶

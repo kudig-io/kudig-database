@@ -1,6 +1,7 @@
 ---
 title: 云平台硬件基础架构
 description: '# 云平台硬件基础架构'
+summary: '# 云平台硬件基础架构'
 category: hardware
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cri-o
 - docker
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 云平台硬件基础架构
 

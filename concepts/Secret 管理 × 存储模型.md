@@ -1,6 +1,7 @@
 ---
 title: Secret 管理 × 存储模型
 description: '# Secret 管理 × 存储模型'
+summary: '# Secret 管理 × 存储模型'
 category: synthesis
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - csi
 - kubelet
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,19 +30,20 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/etcd.md]]"
-    type: uses
-  - target: "[[entities/kubelet.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/configuration/secrets.md]]"
-    type: uses
-  - target: "[[entities/deployment.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]"
-    type: related_to
+- target: '[[entities/etcd.md]]'
+  type: uses
+- target: '[[entities/kubelet.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/configuration/secrets.md]]'
+  type: uses
+- target: '[[entities/deployment.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+  type: related_to
 ---
+
+
 
 # Secret 管理 × 存储模型
 

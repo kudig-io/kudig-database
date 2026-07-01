@@ -1,6 +1,7 @@
 ---
 title: 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)
 description: '# 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)'
+summary: '# 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)'
 category: observability
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - gateway
 - rbac
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -64,8 +67,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)
 

@@ -1,6 +1,7 @@
 ---
 title: 存储 I/O 性能故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 存储 I/O 性能故障排查指南'
+summary: 'title: 存储 I/O 性能故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - docker
 - mysql
 - postgresql
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -41,8 +44,9 @@ prerequisites:
 - prometheus-basics
 - mysql-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 存储 I/O 性能故障排查指南
 description: '# 存储 I/O 性能故障排查指南'
@@ -281,7 +285,7 @@ echo ""
 echo "5. I/O 调度器配置:"
 for disk in $(lsblk -d -n -o NAME | grep -E "^sd|^nvme|^vd"); do
   if [ -f /sys/block/$disk/queue/scheduler ]; then
-    SCHEDULER=$(cat /sys/block/$disk/queue/scheduler | grep -oP '\[\K[^\]]+')
+    SCHEDULER=$(cat /sys/block/$disk/queue/scheduler | grep -oP '\[\K[^]]+')
     READ_AHEAD=$(cat /sys/block/$disk/queue/read_ahead_kb)
     NR_REQUESTS=$(cat /sys/block/$disk/queue/nr_requests)
     echo "  $disk: scheduler=$SCHEDULER, read_ahead=${READ_AHEAD}KB, nr_requests=$NR_REQUESTS"
@@ -559,7 +563,7 @@ echo "  ✓ dirty_ratio=5%, dirty_background_ratio=2%"
 # 5. 验证调优结果
 echo ""
 echo "5. 调优结果验证:"
-echo "  调度器: $(cat /sys/block/$DISK/queue/scheduler | grep -oP '\[\K[^\]]+')"
+echo "  调度器: $(cat /sys/block/$DISK/queue/scheduler | grep -oP '\[\K[^]]+')"
 echo "  read_ahead: $(cat /sys/block/$DISK/queue/read_ahead_kb) KB"
 echo "  dirty_ratio: $(cat /proc/sys/vm/dirty_ratio)"
 ```

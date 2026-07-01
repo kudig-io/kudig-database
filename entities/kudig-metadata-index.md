@@ -1,6 +1,7 @@
 ---
 title: KUDIG 元数据索引：知识图谱、难度指数与标签索引
 description: '- **高级**：需要深入理解架构和原理'
+summary: '- **高级**：需要深入理解架构和原理'
 category: reference
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - knowledge-map
 - difficulty-index
 - tags-index
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 - 难度指数与标签索引
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG 元数据索引
 

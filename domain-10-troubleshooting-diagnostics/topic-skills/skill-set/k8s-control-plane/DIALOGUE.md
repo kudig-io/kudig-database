@@ -1,26 +1,30 @@
 ---
-title: "控制平面问题 — 远程顾问对话脚本"
-category: "troubleshooting"
-tags: ["cluster", "remote-consultant"]
-created: "2026-05-23"
-updated: "2026-05-23"
+title: 控制平面问题 — 远程顾问对话脚本
+summary: 控制平面问题的远程顾问对话脚本，覆盖API Server、etcd、Scheduler排查。
+category: troubleshooting
+tags:
+- cluster
+- remote-consultant
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
-dialogue_id: "DIALOGUE-K8S_CONTROL_PLANE"
-skill_id: "k8s-control-plane"
-version: "1.0.0"
-role: "remote-consultant"
-language: "zh"
-summary: "控制平面问题的远程顾问对话脚本，覆盖API Server、etcd、Scheduler排查。"
+dialogue_id: DIALOGUE-K8S_CONTROL_PLANE
+skill_id: k8s-control-plane
+version: 1.0.0
+role: remote-consultant
+language: zh
 relationships:
-  - target: "[[entities/etcd.md]]"
-    type: uses
-  - target: "[[entities/helm.md]]"
-    type: uses
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service.md]]"
-    type: uses
+- target: '[[entities/etcd.md]]'
+  type: uses
+- target: '[[entities/helm.md]]'
+  type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/service.md]]'
+  type: uses
 ---
+
 
 # 控制平面组件问题 — 远程顾问对话脚本
 

@@ -1,6 +1,9 @@
 ---
 title: Seldon
-description: 'Seldon 是 ML 模型部署和推理管理平台，提供 Seldon Core（K8s 原生推理引擎）和 Seldon Deploy（企业级 ML 部署管理）。它...'
+description: Seldon 是 ML 模型部署和推理管理平台，提供 Seldon Core（K8s 原生推理引擎）和 Seldon Deploy（企业级
+  ML 部署管理）。它...
+summary: Seldon 是 ML 模型部署和推理管理平台，提供 Seldon Core（K8s 原生推理引擎）和 Seldon Deploy（企业级 ML
+  部署管理）。它...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +12,8 @@ tags:
 - ml
 - inference
 - mlops
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Seldon
 

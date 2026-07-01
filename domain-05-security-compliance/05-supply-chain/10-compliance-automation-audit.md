@@ -1,6 +1,7 @@
 ---
 title: 合规自动化与审计 (Compliance Automation and Audit)
 description: '- compliance-automation-audit的最佳实践'
+summary: '- compliance-automation-audit的最佳实践'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - opa
 - falco
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ prerequisites:
 - iac-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

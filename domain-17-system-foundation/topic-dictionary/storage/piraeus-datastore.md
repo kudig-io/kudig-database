@@ -1,6 +1,9 @@
 ---
 title: Piraeus 分布式存储
-description: 'Piraeus Datastore 是 LINBIT 开源的 CNCF Sandbox 项目，基于 DRBD/LINSTOR 为 Kubernetes 提供高性...'
+description: Piraeus Datastore 是 LINBIT 开源的 CNCF Sandbox 项目，基于 DRBD/LINSTOR 为 Kubernetes
+  提供高性...
+summary: Piraeus Datastore 是 LINBIT 开源的 CNCF Sandbox 项目，基于 DRBD/LINSTOR 为 Kubernetes
+  提供高性...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - storage
 - replication
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Piraeus 分布式存储（Piraeus）
 

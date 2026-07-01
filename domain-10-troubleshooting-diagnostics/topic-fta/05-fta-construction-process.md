@@ -1,6 +1,7 @@
 ---
 title: 第五章：FTA 构建完整流程 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**所属部分**: 第二部分 - FTA 构建实践指南'''
+summary: 'description: ''**所属部分**: 第二部分 - FTA 构建实践指南'''
 category: fta
 tags:
 - fta
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - job
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -41,8 +44,9 @@ prerequisites:
 fta_id: FTA-05_CONSTRUCTION_PROCESS-001
 component: 05 Construction Process
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: 第五章：FTA 构建完整流程
 description: '**所属部分**: 第二部分 - FTA 构建实践指南'

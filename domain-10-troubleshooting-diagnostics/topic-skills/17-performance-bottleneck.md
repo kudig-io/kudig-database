@@ -1,6 +1,7 @@
 ---
 title: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
 description: '## 1. 概述'
+summary: '## 1. 概述'
 category: performance
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - prometheus
 - grafana
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -63,8 +66,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 <!-- condition: kubectl top nodes -o jsonpath='{range .items[?(@.usage.cpu!="<none>" && @.usage.memory!="<none>")]} {.metadata.name}{"\n"}{end}' 显示节点资源使用率超过 80% -->
 
@@ -121,7 +125,7 @@ created: "2026-05-23"
 | SP-02 | CPU throttling 严重 / High CPU throttling | `container_cpu_cfs_throttled_periods_total` 持续增长；`kubectl top pods` 显示 CPU 接近 limit | 0.95 | 突发流量导致的短暂 throttling；limit 配置过低属于配置问题而非性能瓶颈 |
 | SP-03 | 节点内存压力告警（MemoryPressure）/ Node memory pressure | `kubectl describe node <node>` 的 Conditions 中 MemoryPressure=True | 0.85 | 预期内的缓存占用；cgroup v2 memory.high 触发但未影响应用 |
 | SP-04 | 磁盘 I/O wait 持续偏高（iowait > 20%）/ High disk I/O wait | `vmstat` 或 `iostat` 显示 iowait > 20%；`node_cpu_seconds_total{mode="iowait"}` 持续高位 | 0.80 | 批量任务（如备份、数据导入）的预期 I/O；SSD 设备的短暂写入尖峰 |
-| SP-05 | 网络丢包率上升 / Network packet loss | `netstat -s \| grep -i retransmit` 或 `ss -ti` 显示重传增加；`node_network_receive_drop_total` 增长 | 0.75 | 网络拥塞期间的轻微丢包；UDP 应用的预期丢包 |
+| SP-05 | 网络丢包率上升 / Network packet loss | `netstat -s | grep -i retransmit` 或 `ss -ti` 显示重传增加；`node_network_receive_drop_total` 增长 | 0.75 | 网络拥塞期间的轻微丢包；UDP 应用的预期丢包 |
 | SP-06 | Pod 启动耗时异常（> 30s）/ Slow pod startup | `kubectl describe pod` 显示从 Pending 到 Running 耗时 > 30s；`kubelet_pod_start_duration_seconds` P99 高 | 0.85 | 首次拉取大镜像的预期耗时；Init Container 执行慢属于应用问题 |
 | SP-07 | API Server 请求 P99 延迟 > 1s / API Server high latency | `apiserver_request_duration_seconds_bucket` P99 > 1s（verb != WATCH） | 0.90 | 大规模 LIST 请求的预期延迟；Webhook 链路延迟（非 API Server 本身） |
 | SP-08 | etcd 慢查询告警 / etcd slow queries | `etcd_disk_wal_fsync_duration_seconds` P99 > 100ms；`etcd_disk_backend_commit_duration_seconds` > 250ms | 0.95 | etcd compact 期间的短暂延迟；defrag 操作期间 |
@@ -439,7 +443,7 @@ ssh <node-ip> "iostat -x 1 5"
   ssh <node-ip> "cat /proc/vmstat | grep -E 'pgmajfault|pgpgin|pgpgout|pswpin|pswpout'"
 
   # 检查 OOM Killer 历史
-  ssh <node-ip> "dmesg -T | grep -i 'oom\|killed process'"
+  ssh <node-ip> "dmesg -T | grep -i 'oom|killed process'"
 
   # 检查 swap 使用（如果启用）
   ssh <node-ip> "free -h"
@@ -622,7 +626,7 @@ ssh <node-ip> "iostat -x 1 5"
   # etcd_disk_backend_commit_duration_seconds
 
   # 检查 etcd 日志中的慢操作
-  kubectl logs -n kube-system etcd-<control-plane-node> --tail=200 | grep -i "slow\|took too long"
+  kubectl logs -n kube-system etcd-<control-plane-node> --tail=200 | grep -i "slow|took too long"
 
   # etcd 性能指标
   kubectl exec -n kube-system etcd-<node> -- etcdctl endpoint status --write-out=table 2>/dev/null
@@ -644,7 +648,7 @@ ssh <node-ip> "iostat -x 1 5"
   # scheduler_pending_pods
 
   # 检查 Scheduler 日志
-  kubectl logs -n kube-system kube-scheduler-<node> --tail=100 | grep -i "slow\|took"
+  kubectl logs -n kube-system kube-scheduler-<node> --tail=100 | grep -i "slow|took"
 
   # 检查 Pending Pod 数量
   kubectl get pods -A --field-selector=status.phase=Pending | wc -l
@@ -2041,7 +2045,7 @@ fi
 
 # --- V5: 验证所有 Pod 运行正常 ---
 info "[V5] 验证 Pod 状态..."
-NOT_RUNNING=$(kubectl get pods -n "$NAMESPACE" --no-headers 2>/dev/null | grep -v "Running\|Completed" || true)
+NOT_RUNNING=$(kubectl get pods -n "$NAMESPACE" --no-headers 2>/dev/null | grep -v "Running|Completed" || true)
 if -z "$NOT_RUNNING"; then
     success "所有 Pod 运行正常"
 else

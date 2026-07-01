@@ -1,12 +1,15 @@
 ---
 title: domain-11-production-operations MOC
 description: domain-11-production-operations 知识域导航页，覆盖 32 篇文档，按 6 个 topic 子目录组织
+summary: domain-11-production-operations 知识域导航页，覆盖 32 篇文档，按 6 个 topic 子目录组织
 category: moc
 tags:
 - k8s
 - moc
 - production
 - operations
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-11-production-operations MOC
 

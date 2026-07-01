@@ -1,7 +1,11 @@
 ---
 title: etcd × 高可用模式
-description: etcd 是 Kubernetes 控制平面高可用的基石。K8s 的 HA 架构——无论是 API Server 的多实例负载均衡、Scheduler 的 leader election，还是工作负载的 PodAntiAffinity——最终都依赖
-  etcd 提供的**分布式一致性写入**能力。没有 etcd 的 Raft 共识，控制平面的"高可用"只是一个幻觉。
+description: etcd 是 Kubernetes 控制平面高可用的基石。K8s 的 HA 架构——无论是 API Server 的多实例负载均衡、Scheduler
+  的 leader election，还是工作负载的 PodAntiAffinity——最终都依赖 etcd 提供的**分布式一致性写入**能力。没有 etcd
+  的 Raft 共识，控制平面的"高可用"只是一个幻觉。
+summary: etcd 是 Kubernetes 控制平面高可用的基石。K8s 的 HA 架构——无论是 API Server 的多实例负载均衡、Scheduler
+  的 leader election，还是工作负载的 PodAntiAffinity——最终都依赖 etcd 提供的**分布式一致性写入**能力。没有 etcd
+  的 Raft 共识，控制平面的"高可用"只是一个幻觉。
 category: synthesis
 tags:
 - k8s
@@ -12,6 +16,8 @@ tags:
 - control-plane
 - reliability
 - scheduler
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,15 +33,16 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]"
-    type: related_to
-  - target: "[[concepts/Kubernetes Fault Distribution and MTTR.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/workloads/pods.md]]"
-    type: uses
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+  type: related_to
+- target: '[[concepts/Kubernetes Fault Distribution and MTTR.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/workloads/pods.md]]'
+  type: uses
 ---
+
+
 
 # etcd × 高可用模式
 

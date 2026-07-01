@@ -1,7 +1,7 @@
 ---
-summary: "本 Domain 整合了原三个分散的安全相关 Domain："
 title: Security & Compliance
 description: '# Domain 05 — Security & Compliance（安全与合规）'
+summary: 本 Domain 整合了原三个分散的安全相关 Domain：
 category: domain
 tags:
 - security
@@ -14,6 +14,8 @@ tags:
 - production
 - opa
 - falco
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +37,8 @@ prerequisites:
 - gpu-scheduling-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
 
 # Domain 05 — Security & Compliance（安全与合规）
 

@@ -1,6 +1,7 @@
 ---
 title: Admission Webhook 证书体系 (topic-code-analysis)
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - reference
@@ -11,6 +12,8 @@ tags:
 - operator
 - webhook
 - kserve
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - service-mesh-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Admission Webhook 证书体系
 description: '## 概述'
@@ -384,7 +388,7 @@ curl -v --cacert <(kubectl get validatingwebhookconfiguration my-webhook -o json
   https://webhook-service.webhook-ns.svc:443/validate
 
 # 5. 查看 API Server 日志中的 Webhook 错误
-kubectl logs -n kube-system kube-apiserver-<node> | grep -i "webhook\|x509"
+kubectl logs -n kube-system kube-apiserver-<node> | grep -i "webhook|x509"
 
 # 6. 临时将 failurePolicy 改为 Ignore 绕过
 kubectl patch validatingwebhookconfiguration my-webhook \
@@ -433,6 +437,8 @@ Kubernetes v1.30+ 引入 **ValidatingAdmissionPolicy**（内置 CEL 表达式验
 4. **自定义 CA 与集群 CA 的关系** — 强烈建议 Webhook 使用独立的 CA，不要用 kubernetes-ca 签发 Webhook 证书（避免 CA 轮换影响 Webhook）
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

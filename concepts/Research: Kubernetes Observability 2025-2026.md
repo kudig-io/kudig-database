@@ -1,17 +1,22 @@
 ---
-title: "Research: Kubernetes Observability 2025-2026"
+title: 'Research: Kubernetes Observability 2025-2026'
+summary: 'Research: Kubernetes Observability 2025-2026：Kubernetes 可观测性生态在 2025-2026
+  年迎来三大里程碑：'
 category: synthesis
 tags:
-  - observability
-  - opentelemetry
-  - prometheus
-  - grafana
-  - k8s
-  - research
+- observability
+- opentelemetry
+- prometheus
+- grafana
+- k8s
+- research
+tier: supporting
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # Research: Kubernetes Observability 2025-2026
 
@@ -130,3 +135,7 @@ eBPF 正在革新可观测性数据采集：
 - [[concepts/k8s-networking-evolution.md|k8s networking evolution]] — 网络可观测性（eBPF、Hubble）与服务网格遥测数据是统一可观测平台的关键信号源
 - [[concepts/k8s-ai-ml-infrastructure.md|k8s ai ml infrastructure]] — AI/ML 辅助根因分析（AIOps）正在重塑可观测性平台的告警与诊断能力
 - [[concepts/incident-management-patterns.md|incident management patterns]] — 可观测性与事件管理流程（告警路由、On-Call、事后复盘）紧密集成
+
+## Related
+
+- [[research|#research Hub]] — tag hub

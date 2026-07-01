@@ -1,12 +1,15 @@
 ---
 title: 或门
-description: '或门（OR Gate）是故障树中的逻辑门，表示任一输入事件发生时输出事件就会发生。它代表了多种独立故障路径的汇聚。...'
+description: 或门（OR Gate）是故障树中的逻辑门，表示任一输入事件发生时输出事件就会发生。它代表了多种独立故障路径的汇聚。...
+summary: 或门（OR Gate）是故障树中的逻辑门，表示任一输入事件发生时输出事件就会发生。它代表了多种独立故障路径的汇聚。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - orgate
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 或门
 

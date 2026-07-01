@@ -1,12 +1,15 @@
 ---
 title: 主机路径卷
-description: 'hostPath 卷将节点文件系统的文件或目录挂载到 Pod 中。它提供了对节点文件系统的直接访问，但存在安全和可移植性风险。...'
+description: hostPath 卷将节点文件系统的文件或目录挂载到 Pod 中。它提供了对节点文件系统的直接访问，但存在安全和可移植性风险。...
+summary: hostPath 卷将节点文件系统的文件或目录挂载到 Pod 中。它提供了对节点文件系统的直接访问，但存在安全和可移植性风险。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - storage
 - hostpath
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 主机路径卷
 

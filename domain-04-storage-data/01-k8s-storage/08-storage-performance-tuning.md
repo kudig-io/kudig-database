@@ -1,6 +1,7 @@
 ---
 title: 08 - 存储性能调优与优化策略
 description: 'title: 08 - 存储性能调优与优化策略'
+summary: 'title: 08 - 存储性能调优与优化策略'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - mysql
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 08 - 存储性能调优与优化策略
 description: '# 08 - 存储性能调优与优化策略'

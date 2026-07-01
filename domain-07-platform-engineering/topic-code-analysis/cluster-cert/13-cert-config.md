@@ -1,6 +1,7 @@
 ---
 title: kubeadm 配置对证书生成的影响 (topic-code-analysis)
 description: 'title: kubeadm 配置对证书生成的影响'
+summary: 'title: kubeadm 配置对证书生成的影响'
 category: general
 tags:
 - reference
@@ -9,6 +10,8 @@ tags:
 - apiserver
 - kubelet
 - containerd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: kubeadm 配置对证书生成的影响
 description: '# kubeadm 配置对证书生成的影响'
@@ -487,6 +491,8 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 - [`kubeadm config validate`](17-init-phases.md) — 配置验证
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

@@ -1,6 +1,7 @@
 ---
 title: KUDIG 同义词与别名词典
 description: '| `controller-manager` | kube-controller-manager, KCM, 控制器管理器 |'
+summary: '| `controller-manager` | kube-controller-manager, KCM, 控制器管理器 |'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - istio
 - envoy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: KUDIG 同义词与别名词典

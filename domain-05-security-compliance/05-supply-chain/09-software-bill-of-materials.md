@@ -1,6 +1,7 @@
 ---
 title: 09-软件物料清单
 description: '- software-bill-of-materials的最佳实践'
+summary: '- software-bill-of-materials的最佳实践'
 category: general
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - opa
 - job
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

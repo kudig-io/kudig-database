@@ -1,6 +1,7 @@
 ---
 title: CronJob 执行失败：历史任务挂起导致新调度被跳过
 description: 专有云 ACK 定时 ETL 任务因 concurrencyPolicy=Forbid 且旧 Job 长时间未结束，后续调度被跳过，造成数据缺失的工单闭环样本。
+summary: 专有云 ACK 定时 ETL 任务因 concurrencyPolicy=Forbid 且旧 Job 长时间未结束，后续调度被跳过，造成数据缺失的工单闭环样本。
 category: production-operations
 tags:
 - ack
@@ -10,6 +11,9 @@ tags:
 - etl
 - concurrency
 - p1
+tier: peripheral
+created: '2026-06-26T14:00:00+08:00'
+updated: '2026-06-26T16:30:00+08:00'
 incident_id: TC-2026-034
 priority: P1
 severity: high
@@ -22,12 +26,10 @@ skill_ref:
 - '[[domain-08-release-change-management/01-gitops/99-argo-cd-gitops-guide.md|GitOps
   变更管理]]'
 fta_ref:
-- '[[domain-10-troubleshooting-diagnostics/topic-fta/list/job-cronjob-fta.md|FTA: CronJob
-  执行失败]]'
+- '[[domain-10-troubleshooting-diagnostics/topic-fta/list/job-cronjob-fta.md|FTA:
+  CronJob 执行失败]]'
 - '[[domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md|FTA: 工作负载发布失败]]'
-created: '2026-06-26T14:00:00+08:00'
-updated: '2026-06-26T16:30:00+08:00'
-last_updated: 2026-06-26T16:30:00+08:00
+last_updated: 2026-06-26 16:30:00+08:00
 duplicate_of: INC-2026-ACK-049
 status: duplicate
 duplication_reason: 与 "INC-2026-ACK-049" 主题重复，内容角度相似，降低 RAG 权重
@@ -58,13 +60,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[concepts/cronjob.md]]"
+- target: '[[concepts/cronjob.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-049-job-cronjob-execution-failure.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-049-job-cronjob-execution-failure.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -108,7 +112,7 @@ kubectl logs -n etl job/daily-report-xxx --tail=100
 kubectl get events -n etl --sort-by='.lastTimestamp' | grep daily-report | tail -30
 
 # 5. 查看 kube-controller-manager 日志中的 CronJob 调度记录
-kubectl logs -n kube-system -l component=kube-controller-manager --tail=300 | grep -i 'cronjob\|daily-report' | tail -50
+kubectl logs -n kube-system -l component=kube-controller-manager --tail=300 | grep -i 'cronjob|daily-report' | tail -50
 
 # 6. 手动触发一次用于对比
 kubectl create job daily-report-manual -n etl --from=cronjob/daily-report

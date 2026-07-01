@@ -1,6 +1,8 @@
 ---
 title: Skaffold 开发工具
-description: 'Skaffold 是 Google 开源的 K8s 开发工具，自动化构建/推送/部署的完整循环，支持文件监控、端口转发和调试模式，是 K8s 开发者的标准效率工...'
+description: Skaffold 是 Google 开源的 K8s 开发工具，自动化构建/推送/部署的完整循环，支持文件监控、端口转发和调试模式，是 K8s
+  开发者的标准效率工...
+summary: Skaffold 是 Google 开源的 K8s 开发工具，自动化构建/推送/部署的完整循环，支持文件监控、端口转发和调试模式，是 K8s 开发者的标准效率工...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - tooling
 - development
 - google
+tier: supporting
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Skaffold 开发工具（Skaffold）
 

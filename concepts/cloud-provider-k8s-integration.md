@@ -1,11 +1,22 @@
 ---
 title: 云厂商 K8S 集成
+summary: 云厂商 K8S 集成：各主流云厂商对 Kubernetes 的深度集成能力，以及多云抽象层的统一管理方案。
 category: concepts
-tags: [cloud, eks, gke, aks, ack, multi-cloud, k8s]
+tags:
+- cloud
+- eks
+- gke
+- aks
+- ack
+- multi-cloud
+- k8s
+tier: supporting
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # 云厂商 K8S 集成
 

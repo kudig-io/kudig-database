@@ -1,6 +1,7 @@
 ---
 title: kube-scheduler 调度详解 (topic-code-analysis)
 description: 'title: kube-scheduler 调度详解'
+summary: 'title: kube-scheduler 调度详解'
 category: general
 tags:
 - reference
@@ -10,6 +11,8 @@ tags:
 - hpa
 - gpu
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - platform-engineering-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: kube-scheduler 调度详解
 description: '# kube-scheduler 调度详解'
@@ -654,6 +658,8 @@ kubectl get pods -o wide -l app=web-app
 - [`Pod 拓扑分布`](README.md) — PodTopologySpread 策略
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[log|log]]

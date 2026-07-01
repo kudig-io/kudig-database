@@ -1,10 +1,13 @@
 ---
 title: 知识图谱 RDF 模型定义
 description: '## 1. RDF 模型概述'
+summary: '## 1. RDF 模型概述'
 category: general
 tags:
 - k8s
 - kubelet
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -20,8 +23,9 @@ trigger_keywords:
 - 模型定义
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 知识图谱 RDF 模型定义
 

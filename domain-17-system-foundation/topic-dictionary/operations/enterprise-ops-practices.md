@@ -1,6 +1,7 @@
 ---
 title: 企业级运维最佳实践
 description: '# 企业级运维最佳实践'
+summary: '# 企业级运维最佳实践'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - jaeger
 - istio
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,9 +38,9 @@ prerequisites:
 - etcd-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 企业级运维最佳实践
 

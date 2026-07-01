@@ -1,6 +1,9 @@
 ---
 title: Microcks API 模拟测试
-description: 'Microcks 是 CNCF Sandbox 项目，提供 API 的模拟和测试能力，支持 OpenAPI/AsyncAPI/gRPC/GraphQL 等多种 ...'
+description: Microcks 是 CNCF Sandbox 项目，提供 API 的模拟和测试能力，支持 OpenAPI/AsyncAPI/gRPC/GraphQL
+  等多种 ...
+summary: Microcks 是 CNCF Sandbox 项目，提供 API 的模拟和测试能力，支持 OpenAPI/AsyncAPI/gRPC/GraphQL
+  等多种 ...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - tooling
 - testing
 - api
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Microcks API 模拟测试（Microcks）
 

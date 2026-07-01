@@ -1,6 +1,7 @@
 ---
 title: 13 - 存储安全与合规管理
 description: '# 13 - 存储安全与合规管理'
+summary: '# 13 - 存储安全与合规管理'
 category: storage
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - job
 - cronjob
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -47,8 +50,9 @@ cross_refs:
 - type: domain
   path: ../domain-04-storage-data/
   label: '相关知识域: domain-04-storage-data'
-created: "2026-05-23"
 ---
+
+
 
 # 13 - 存储安全与合规管理
 
@@ -399,7 +403,7 @@ audit_storage_access() {
   echo "$SUMMARY"
   
   # 发送告警（如果发现异常）
-  if echo "$SUMMARY" | grep -q "异常\|大容量"; then
+  if echo "$SUMMARY" | grep -q "异常|大容量"; then
     echo "🚨 发现存储访问异常，发送告警..."
     # 集成到告警系统
   fi

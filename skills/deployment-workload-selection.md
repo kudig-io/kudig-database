@@ -1,6 +1,7 @@
 ---
 title: 工作负载控制器选型
 description: '## 概述'
+summary: '## 概述'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - mysql
 - kafka
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # 工作负载控制器选型
 

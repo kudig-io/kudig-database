@@ -1,6 +1,7 @@
 ---
 title: 'Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)'
 description: 'title: ''Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)'''
+summary: 'title: ''Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)'''
 category: general
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - falco
 - elasticsearch
 - webhook
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - monitoring-basics
 - logging-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)'

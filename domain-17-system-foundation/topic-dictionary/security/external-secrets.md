@@ -1,6 +1,9 @@
 ---
 title: External Secrets Operator
-description: 'External Secrets Operator（ESO）是 Kubernetes 原生的密钥同步工具，从外部密钥管理系统（Vault、AWS Secrets...'
+description: External Secrets Operator（ESO）是 Kubernetes 原生的密钥同步工具，从外部密钥管理系统（Vault、AWS
+  Secrets...
+summary: External Secrets Operator（ESO）是 Kubernetes 原生的密钥同步工具，从外部密钥管理系统（Vault、AWS
+  Secrets...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - external-secrets
 - secrets-management
 - security
+tier: core
+created: 2026-05
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,9 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
-created: 2026-05
 ---
+
+
 
 # External Secrets Operator
 

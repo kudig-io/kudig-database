@@ -1,6 +1,7 @@
 ---
 title: topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
 description: '│  Layer 2: topic-structural-     (怎么查 — 深度排查参考层)         │'
+summary: '│  Layer 2: topic-structural-     (怎么查 — 深度排查参考层)         │'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - coredns
 - hpa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -40,8 +43,9 @@ prerequisites:
 skill_id: SKILL-README-001
 skill_name: topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 # topic-skills — 工单智能体 [[Kubernetes|Kubernetes]] 诊断 [[SKILL|Skill]] 库
 

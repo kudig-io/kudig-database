@@ -1,6 +1,7 @@
 ---
 title: 第六课：ConfigMap 和 Secret - 配置管理 [fundamentals]
 description: 'title: 第六课：ConfigMap 和 Secret - 配置管理'
+summary: 'title: 第六课：ConfigMap 和 Secret - 配置管理'
 category: learning
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - opa
 - mysql
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,8 +35,9 @@ prerequisites:
 - gpu-ml-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 第六课：ConfigMap 和 Secret - 配置管理

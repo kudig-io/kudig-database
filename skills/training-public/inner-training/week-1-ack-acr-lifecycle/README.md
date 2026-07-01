@@ -1,6 +1,7 @@
 ---
 title: 'Week 1: ACK/ACR 基础与集群生命周期 (Days 1-7)'
 description: '## 概述'
+summary: '## 概述'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - flannel
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -37,8 +40,9 @@ prerequisites:
 - helm-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Week 1: ACK/ACR 基础与集群生命周期

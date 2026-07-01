@@ -1,12 +1,15 @@
 ---
 title: 转移符号
-description: '转移符号（Transfer Symbol）是故障树中的跨页连接标记。当故障树过大无法在一页内展示时，使用转移符号将子树连接到其他页面或模块。...'
+description: 转移符号（Transfer Symbol）是故障树中的跨页连接标记。当故障树过大无法在一页内展示时，使用转移符号将子树连接到其他页面或模块。...
+summary: 转移符号（Transfer Symbol）是故障树中的跨页连接标记。当故障树过大无法在一页内展示时，使用转移符号将子树连接到其他页面或模块。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - transfersymbol
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 转移符号
 

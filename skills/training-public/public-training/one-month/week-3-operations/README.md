@@ -1,6 +1,7 @@
 ---
 title: 'Week 3: 运维作战能力期 (Days 15-21)'
 description: 'title: Week 3: 运维作战能力期 (Days 15-21)'
+summary: 'title: Week 3: 运维作战能力期 (Days 15-21)'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - elasticsearch
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -39,8 +42,9 @@ prerequisites:
 - gpu-scheduling-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Week 3: 运维作战能力期 (Days 15-21)

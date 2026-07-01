@@ -1,6 +1,7 @@
 ---
 title: 'Day 12: K8S 集群审计'
 description: '- "Kubernetes审计日志"'
+summary: '- "Kubernetes审计日志"'
 category: learning
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - coredns
 - rbac
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 12: K8S 集群审计
 
@@ -387,7 +391,7 @@ rules:
 | `AND` | 逻辑与 | `verb: delete AND objectRef.resource: pods` |
 | `OR` | 逻辑或 | `objectRef.resource: roles OR objectRef.resource: clusterroles` |
 | `*` | 查询所有 | `* | select count(*) from log` |
-| `\| select` | SQL 分析 | `* | select verb, count(*) from log group by verb` |
+| `| select` | SQL 分析 | `* | select verb, count(*) from log group by verb` |
 | `order by` | 排序 | `order by requestReceivedTimestamp desc` |
 | `limit N` | 限制条数 | `limit 50` |
 

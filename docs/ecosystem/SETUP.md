@@ -1,3 +1,15 @@
+---
+title: Setup
+summary: A skill-based framework for AI coding agents — Claude Code, Cursor, Windsurf,
+  Pi, Gemini CLI, Google Antigravity, Codex, Hermes, OpenClaw, OpenCode, Aider, Factory
+  Droid, Trae / Trae CN, Kiro, GitH...
+category: docs
+tags:
+- setup
+tier: supporting
+created: '2026-07-01'
+---
+
 # Setup
 
 A skill-based framework for AI coding agents — Claude Code, Cursor, Windsurf, Pi, Gemini CLI, Google Antigravity, Codex, Hermes, OpenClaw, OpenCode, Aider, Factory Droid, Trae / Trae CN, Kiro, GitHub Copilot (CLI + VS Code Chat) — to build and maintain an Obsidian wiki using Karpathy's LLM Wiki pattern. No scripts, no API keys — the agent **is** the LLM.

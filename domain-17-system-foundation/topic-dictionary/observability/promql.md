@@ -1,6 +1,7 @@
 ---
 title: PromQL
-description: 'PromQL（Prometheus Query Language）是 Prometheus 监控系统内置的查询语言，用于实时查询和分析时间序列数据。它是云原生可...'
+description: PromQL（Prometheus Query Language）是 Prometheus 监控系统内置的查询语言，用于实时查询和分析时间序列数据。它是云原生可...
+summary: PromQL（Prometheus Query Language）是 Prometheus 监控系统内置的查询语言，用于实时查询和分析时间序列数据。它是云原生可...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - prometheus
 - observability
 - query-language
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # PromQL
 

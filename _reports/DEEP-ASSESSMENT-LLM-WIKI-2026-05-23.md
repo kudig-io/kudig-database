@@ -1,11 +1,23 @@
 ---
 title: KUDIG 语料库深度评估报告 — LLM-Wiki × 专家阅读双维度
+summary: KUDIG 语料库深度评估报告 — LLM-Wiki × 专家阅读双维度：1. Prose 密度仅 31.1% — 代码块占 57.9%，自然语言推理知识密度不足，LLM
+  学到的「理解」少于「记忆」 2. Skill 平均 122 行 — 作为专家 runbook 太薄，作为微调语料难以让 LLM 建立完整诊断-修复模式 3. 命令多样性
+  8.2% — LLM 容易过拟合到常见命令模板，场景...
 category: assessment
-tags: [assessment, llm-wiki, expert-reading, pretraining, finetuning, quality]
-created: "2026-05-23"
-updated: "2026-05-23"
+tags:
+- assessment
+- llm-wiki
+- expert-reading
+- pretraining
+- finetuning
+- quality
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
 ---
+
+
 
 # KUDIG 语料库深度评估报告
 

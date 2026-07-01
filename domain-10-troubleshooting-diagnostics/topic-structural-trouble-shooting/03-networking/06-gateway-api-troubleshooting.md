@@ -1,6 +1,7 @@
 ---
 title: Gateway API 深度排查与下一代流量治理指南 [topic-structural-trouble-shooting]
 description: 'title: Gateway API 深度排查与下一代流量治理指南'
+summary: 'title: Gateway API 深度排查与下一代流量治理指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - gateway
 - networkpolicy
 - crd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -40,8 +43,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Gateway API 深度排查与下一代流量治理指南
 description: '# Gateway API 深度排查与下一代流量治理指南'

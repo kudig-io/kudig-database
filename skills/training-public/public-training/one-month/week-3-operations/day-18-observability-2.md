@@ -1,6 +1,7 @@
 ---
 title: 'Day 18: 可观测性 - 日志 + 分布式追踪'
 description: 'title: Day 18: 可观测性 - 日志 + 分布式追踪'
+summary: 'title: Day 18: 可观测性 - 日志 + 分布式追踪'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - containerd
 - docker
 - opa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -37,8 +40,9 @@ prerequisites:
 - monitoring-basics
 - policy-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 18: 可观测性 - 日志 + 分布式追踪
@@ -584,7 +588,7 @@ scrape_configs:
       - selector="{app=~"nginx.+"}"
       - stages=""
       - - regex=""
-      - expression="^(?P<remote_addr>[\w\.]+) - (?P<remote_user>\S+) \[(?P<time>[^\]]+)\] "(?P<method>\w+) (?P<path>\S+) (?P<protocol>\S+)" (?P<status>\d+) (?P<body_bytes_sent>\d+)"
+      - expression="^(?P<remote_addr>[\w\.]+) - (?P<remote_user>\S+) \[(?P<time>[^]]+)\] "(?P<method>\w+) (?P<path>\S+) (?P<protocol>\S+)" (?P<status>\d+) (?P<body_bytes_sent>\d+)"
       - - labels=""
       - method=""
       - status=""

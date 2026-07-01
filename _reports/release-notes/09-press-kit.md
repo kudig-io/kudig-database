@@ -1,12 +1,15 @@
 ---
 title: kudig-database 媒体资料包 (Press Kit)
 description: 本文档供媒体、博主、KOL 报道使用, 包含产品介绍、核心数据、截图素材等。
+summary: 本文档供媒体、博主、KOL 报道使用, 包含产品介绍、核心数据、截图素材等。
 category: general
 tags:
 - k8s
 - etcd
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # kudig-database 媒体资料包 (Press Kit)
 

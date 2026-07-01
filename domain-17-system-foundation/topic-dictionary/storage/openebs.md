@@ -1,6 +1,7 @@
 ---
 title: OpenEBS 容器存储
-description: 'OpenEBS 是 Maya Data 开源的 CNCF Sandbox 项目，为 Kubernetes 提供容器附加存储（CAS），支持多种存储引擎（Loca...'
+description: OpenEBS 是 Maya Data 开源的 CNCF Sandbox 项目，为 Kubernetes 提供容器附加存储（CAS），支持多种存储引擎（Loca...
+summary: OpenEBS 是 Maya Data 开源的 CNCF Sandbox 项目，为 Kubernetes 提供容器附加存储（CAS），支持多种存储引擎（Loca...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - storage
 - csi
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # OpenEBS 容器存储（OpenEBS）
 

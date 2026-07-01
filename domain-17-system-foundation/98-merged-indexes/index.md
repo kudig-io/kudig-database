@@ -1,12 +1,20 @@
 ---
-title: "Domain 17 内容索引"
+title: Domain 17 内容索引
+summary: Domain 17 内容索引
 category: domain-17-system-foundation
-tags: ["index", "domain-17-system-foundation", "navigation"]
-sources: ["auto-generated"]
+tags:
+- index
+- domain-17-system-foundation
+- navigation
+tier: supporting
+sources:
+- auto-generated
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 ---
+
+
 
 # Domain 17 内容索引
 

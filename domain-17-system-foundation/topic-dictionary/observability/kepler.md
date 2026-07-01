@@ -1,6 +1,9 @@
 ---
 title: Kepler 能耗监控
-description: 'Kepler（Kubernetes Efficient Power Level Exporter）是 CNCF Sandbox 项目，通过 eBPF 和 CPU...'
+description: Kepler（Kubernetes Efficient Power Level Exporter）是 CNCF Sandbox 项目，通过
+  eBPF 和 CPU...
+summary: Kepler（Kubernetes Efficient Power Level Exporter）是 CNCF Sandbox 项目，通过 eBPF
+  和 CPU...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - observability
 - energy
 - sustainability
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Kepler 能耗监控（Kepler）
 

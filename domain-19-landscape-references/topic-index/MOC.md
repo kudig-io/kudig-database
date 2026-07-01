@@ -1,6 +1,7 @@
 ---
 title: topic-index MOC
 description: topic-index 专题导航页，覆盖 23 篇文档
+summary: topic-index 专题导航页，覆盖 23 篇文档
 category: moc
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ingress
 - gpu
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: beginner
 reading_level: beginner
@@ -35,8 +38,9 @@ prerequisites:
 - helm-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # topic-index MOC]]
 

@@ -1,6 +1,7 @@
 ---
 title: SLSA 软件供应链安全实践指南
 description: '# SLSA 软件供应链安全实践指南'
+summary: '# SLSA 软件供应链安全实践指南'
 category: supply-chain-security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - falco
 - crd
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # SLSA 软件供应链安全实践指南
 

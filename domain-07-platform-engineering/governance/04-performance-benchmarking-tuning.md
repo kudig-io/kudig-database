@@ -1,6 +1,7 @@
 ---
 title: 性能基准测试与调优 (Performance Benchmarking & Tuning)
 description: 'description: ''**目标读者**: 性能工程师、SRE团队、平台架构师'''
+summary: 'description: ''**目标读者**: 性能工程师、SRE团队、平台架构师'''
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - prometheus
 - cilium
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 性能基准测试与调优 (Performance Benchmarking & Tuning)
 description: '**目标读者**: 性能工程师、SRE团队、平台架构师'

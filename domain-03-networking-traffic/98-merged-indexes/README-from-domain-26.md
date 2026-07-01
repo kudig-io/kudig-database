@@ -1,6 +1,7 @@
 ---
 title: 'Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microservices Governance)'
 description: '**领域定位**: 企业级服务网格架构与微服务治理实践 | **文档数量**: 15篇 | **更新时间**: 2026-04-24'
+summary: '**领域定位**: 企业级服务网格架构与微服务治理实践 | **文档数量**: 15篇 | **更新时间**: 2026-04-24'
 category: service-mesh-microservices
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - jaeger
 - cilium
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -58,8 +61,9 @@ cross_refs:
 - type: domain
   path: ../domain-05-security-compliance/
   label: '相关知识域: domain-05-security-compliance'
-created: "2026-05-23"
 ---
+
+
 
 # Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microservices Governance)
 
@@ -618,7 +622,7 @@ API 网关处理"南北向"流量（从外部客户端到集群内部），负�
 
 | 告警名称 | 条件 | 严重度 | 说明 |
 |:---|:---|:---|:---|
-| MeshComponentDown | up{job="istiod\|ztunnel\|linkerd-controller"} == 0 | Critical | 网格组件不可达超过 2 分钟 |
+| MeshComponentDown | up{job="istiod|ztunnel|linkerd-controller"} == 0 | Critical | 网格组件不可达超过 2 分钟 |
 | HighRequestLatency | P99 latency > 1s for 5m | Warning | 请求延迟超过 1 秒持续 5 分钟 |
 | HighErrorRate | 5xx rate > 5% for 2m | Warning | 服务端错误率超过 5% 持续 2 分钟 |
 | CertificateExpiringSoon | cert expiry < 7 days | Warning | TLS 证书将在 7 天内过期 |

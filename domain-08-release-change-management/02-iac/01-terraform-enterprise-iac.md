@@ -1,6 +1,7 @@
 ---
 title: Terraform企业级基础设施即代码实践
 description: '# Terraform企业级基础设施即代码实践'
+summary: '# Terraform企业级基础设施即代码实践'
 category: infrastructure-as-code
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - gateway
 - operator
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Terraform企业级基础设施即代码实践
 

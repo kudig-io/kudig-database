@@ -1,12 +1,16 @@
 ---
 title: Domain-36 平台工程 — 开源项目索引
-description: '| **WingetUI / UniGetUI** | Windows 包管理 UI | 社区 | v3.1.0 | 15k+ | MIT |'
+description: '| **WingetUI / UniGetUI** | Windows 包管理 UI | 社区 | v3.1.0 | 15k+ | MIT
+  |'
+summary: '| **WingetUI / UniGetUI** | Windows 包管理 UI | 社区 | v3.1.0 | 15k+ | MIT |'
 category: platform-engineering
 tags:
 - k8s
 - platform-engineering
 - developer-experience
 - idp
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -37,8 +41,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Domain-36 平台工程 — 开源项目索引
 

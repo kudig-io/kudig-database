@@ -1,6 +1,7 @@
 ---
 title: 华为云 CCE (Cloud Container Engine) 企业级深度实战指南
 description: 'title: 华为云 CCE (Cloud Container Engine) 企业级深度实战指南'
+summary: 'title: 华为云 CCE (Cloud Container Engine) 企业级深度实战指南'
 category: general
 tags:
 - cloud
@@ -13,6 +14,8 @@ tags:
 - rbac
 - networkpolicy
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - troubleshooting-methodology
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 华为云 CCE (Cloud Container Engine) 企业级深度实战指南
 description: '# 华为云 CCE (Cloud Container Engine) 企业级深度实战指南'
@@ -576,6 +580,8 @@ echo "诊断报告已保存到: $REPORT_FILE"
 华为云CCE凭借其在信创领域的深厚技术积累和完整生态体系，为政府、金融、电信等关键行业提供了安全可靠的容器化解决方案。通过鲲鹏ARM架构优化、昇腾AI芯片支持、国密算法集成等特色能力，成为信创改造和数字化转型的重要基础设施平台。
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

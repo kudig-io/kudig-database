@@ -1,6 +1,7 @@
 ---
 title: 'Day 11: 风险点识别与防范'
 description: '**学习时间**: 4-5 小时 | **主题**: 安全风险评估与最佳实践'
+summary: '**学习时间**: 4-5 小时 | **主题**: 安全风险评估与最佳实践'
 category: learning
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - rbac
 - networkpolicy
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 11: 风险点识别与防范

@@ -1,6 +1,7 @@
 ---
 title: Obsidian Wiki 模式 — AI Agent 语料全面改进计划
 description: Obsidian Wiki 模式 — AI Agent 语料全面改进计划
+summary: Obsidian Wiki 模式 — AI Agent 语料全面改进计划
 category: reports
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - istio
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Obsidian Wiki 模式 — AI Agent 语料全面改进计划
 

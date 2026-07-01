@@ -1,6 +1,9 @@
 ---
 title: SlimToolkit 容器优化
-description: 'SlimToolkit（原 DockerSlim）是 CNCF Sandbox 项目，通过静态和动态分析自动缩小容器镜像体积（通常减少 10-30 倍），同时保...'
+description: SlimToolkit（原 DockerSlim）是 CNCF Sandbox 项目，通过静态和动态分析自动缩小容器镜像体积（通常减少 10-30
+  倍），同时保...
+summary: SlimToolkit（原 DockerSlim）是 CNCF Sandbox 项目，通过静态和动态分析自动缩小容器镜像体积（通常减少 10-30
+  倍），同时保...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - tooling
 - container
 - optimization
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # SlimToolkit 容器优化（SlimToolkit）
 

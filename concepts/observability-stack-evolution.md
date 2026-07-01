@@ -1,6 +1,7 @@
 ---
 title: 可观测性栈演进
 description: '| Loki | 29 个版本 | 日志聚合 |'
+summary: '| Loki | 29 个版本 | 日志聚合 |'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - observability
 - jaeger
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # 可观测性栈演进
 

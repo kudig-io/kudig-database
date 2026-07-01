@@ -1,14 +1,19 @@
 ---
-category: "synthesis"
-tags: ["synthesis"]
-date: "2026-01-08"
-title: "kubelet证书过期导致全节点NotReady"
-skill: "01-node-notready"
-severity: "P0"
-created: "2026-05-23"
-updated: "2026-05-23"
+title: kubelet证书过期导致全节点NotReady
+summary: kubelet证书过期导致全节点NotReady：凌晨2:30，监控告警所有工作节点同时进入NotReady状态。kubectl get nodes显示所有worker节点NotReady，但master节点正常。
+category: synthesis
+tags:
+- synthesis
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-01-08'
+skill: 01-node-notready
+severity: P0
 last_updated: 2026-05-23
 ---
+
+
 
 # kubelet证书过期导致全节点NotReady
 

@@ -1,6 +1,7 @@
 ---
 title: Docker Compose 编排
 description: '> **生产环境运维专家注**: 包含多环境配置管理、服务依赖控制、资源编排优化、健康检查集成、自动化部署流水线等企业级编排最佳实践。'
+summary: '> **生产环境运维专家注**: 包含多环境配置管理、服务依赖控制、资源编排优化、健康检查集成、自动化部署流水线等企业级编排最佳实践。'
 category: docker
 tags:
 - docker
@@ -13,6 +14,8 @@ tags:
 - gateway
 - gpu
 - nvidia
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -49,8 +52,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
-created: "2026-05-23"
 ---
+
+
 
 # Docker Compose 编排
 

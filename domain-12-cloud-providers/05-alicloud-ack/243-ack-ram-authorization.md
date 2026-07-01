@@ -1,6 +1,7 @@
 ---
 title: ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)
 description: 'title: ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)'
+summary: 'title: ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)'
 category: general
 tags:
 - cloud
@@ -9,6 +10,8 @@ tags:
 - rbac
 - webhook
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
-created: "2026-05-23"
 ---
+
+
 
 title: ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)
 description: '# ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)'

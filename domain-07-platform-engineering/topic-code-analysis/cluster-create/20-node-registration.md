@@ -1,6 +1,7 @@
 ---
 title: Node 注册与 kubeadm token 详解 (topic-code-analysis)
 description: 'title: Node 注册与 kubeadm token 详解'
+summary: 'title: Node 注册与 kubeadm token 详解'
 category: general
 tags:
 - reference
@@ -11,6 +12,8 @@ tags:
 - containerd
 - rbac
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Node 注册与 kubeadm token 详解
 description: '# Node 注册与 kubeadm token 详解'
@@ -529,6 +533,8 @@ kubectl get node worker-1 -o yaml
 - [`kubeadm init phase bootstrap-token`](17-init-phases.md) — init 时创建 Bootstrap Token
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

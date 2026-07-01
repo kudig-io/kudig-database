@@ -1,6 +1,7 @@
 ---
 title: Apache Pulsar 架构解析
 description: '# Apache Pulsar 架构解析'
+summary: '# Apache Pulsar 架构解析'
 category: domain
 tags:
 - pulsar
@@ -8,6 +9,8 @@ tags:
 - streaming
 - tiered-storage
 - kafka
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - kafka-basics
-created: "2026-05-23"
 ---
+
+
 
 # Apache Pulsar 架构解析
 

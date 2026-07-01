@@ -1,6 +1,7 @@
 ---
 title: 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践
 description: '# 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践'
+summary: '# 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践'
 category: extensions
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - job
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -54,8 +57,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta.md
   label: '故障树: helm'
-created: "2026-05-23"
 ---
+
+
 
 # 129 - [[Helm|Helm]] 高级运维：复杂部署、CI/CD 集成与安全最佳实践
 

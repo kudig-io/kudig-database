@@ -1,6 +1,7 @@
 ---
 title: SLO 与监控系统的深度集成
 description: '# SLO 与监控系统的深度集成'
+summary: '# SLO 与监控系统的深度集成'
 category: synthesis
 tags:
 - slo
@@ -11,6 +12,8 @@ tags:
 - prometheus
 - grafana
 - ingress
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,15 +30,16 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[skills/best-practices/best-practices/observability/monitoring.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-dictionary/observability/observability.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/gitops.md]]"
-    type: related_to
+- target: '[[skills/best-practices/best-practices/observability/monitoring.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-dictionary/observability/observability.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/gitops.md]]'
+  type: related_to
 ---
+
+
 
 # SLO 与监控系统的深度集成
 

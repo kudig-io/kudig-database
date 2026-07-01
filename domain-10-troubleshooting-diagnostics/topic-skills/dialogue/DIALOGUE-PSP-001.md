@@ -1,17 +1,25 @@
 ---
-dialogue_id: "DIALOGUE-PSP-001"
-skill_id: "SKILL-PSP-001"
-role: "remote-consultant"
-language: "zh"
-severity: "medium"
-status: "reviewed"
+title: Pod Security Policy 咨询与迁移 — 远程顾问对话脚本
+summary: Pod Security Policy 咨询与迁移 — 远程顾问对话脚本：kubectl version --short
+category: dialogue
+tags:
+- dialogue
+- remote-consultant
+- troubleshooting
+- visibility/public
+tier: supporting
 created: 2026-05-21
 updated: 2026-05-21
+dialogue_id: DIALOGUE-PSP-001
+skill_id: SKILL-PSP-001
+role: remote-consultant
+language: zh
+severity: medium
+status: reviewed
 last_updated: 2026-05-21
-title: "Pod Security Policy 咨询与迁移 — 远程顾问对话脚本"
-category: dialogue
-tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
+
+
 
 # Pod Security Policy 咨询与迁移 — 远程顾问对话脚本
 
@@ -227,3 +235,7 @@ spec:
 - [[domain-05-security-compliance/98-merged-indexes/index.md|安全合规索引]]
 
 ```
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

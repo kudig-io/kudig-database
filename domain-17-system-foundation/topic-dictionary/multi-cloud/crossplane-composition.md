@@ -1,6 +1,7 @@
 ---
 title: Crossplane 资源组合
-description: 'Crossplane Composition 是 Crossplane 的组合式基础设施管理特性，通过 CompositeResourceDefinition（...'
+description: Crossplane Composition 是 Crossplane 的组合式基础设施管理特性，通过 CompositeResourceDefinition（...
+summary: Crossplane Composition 是 Crossplane 的组合式基础设施管理特性，通过 CompositeResourceDefinition（...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - multi-cloud
 - crossplane
 - iac
+tier: peripheral
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Crossplane 资源组合（Crossplane Composition）
 

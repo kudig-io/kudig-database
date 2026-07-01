@@ -1,6 +1,7 @@
 ---
 title: 'Day 19: 故障排查方法论 (关键日)'
 description: 'title: Day 19: 故障排查方法论 (关键日)'
+summary: 'title: Day 19: 故障排查方法论 (关键日)'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - containerd
 - networkpolicy
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,8 +37,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 19: 故障排查方法论 (关键日)

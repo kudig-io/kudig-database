@@ -1,12 +1,15 @@
 ---
 title: 控制平面节点
-description: 'Control Plane Node（控制平面节点）是运行 Kubernetes 控制平面组件（kube-apiserver、kube-scheduler、ku...'
+description: Control Plane Node（控制平面节点）是运行 Kubernetes 控制平面组件（kube-apiserver、kube-scheduler、ku...
+summary: Control Plane Node（控制平面节点）是运行 Kubernetes 控制平面组件（kube-apiserver、kube-scheduler、ku...
 category: dictionary
 tags:
 - k8s
 - glossary
 - control-plane
 - node
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 控制平面节点
 

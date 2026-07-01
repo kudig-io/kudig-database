@@ -1,6 +1,9 @@
 ---
 title: 有状态副本集
-description: 'StatefulSet 是 Kubernetes 中管理有状态应用的工作负载控制器。与 Deployment 不同，StatefulSet 为每个 Pod 提供...'
+description: StatefulSet 是 Kubernetes 中管理有状态应用的工作负载控制器。与 Deployment 不同，StatefulSet
+  为每个 Pod 提供...
+summary: StatefulSet 是 Kubernetes 中管理有状态应用的工作负载控制器。与 Deployment 不同，StatefulSet 为每个
+  Pod 提供...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - statefulset
 - workload
 - storage
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 有状态副本集
 

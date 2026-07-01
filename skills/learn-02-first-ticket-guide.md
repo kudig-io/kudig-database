@@ -1,6 +1,7 @@
 ---
 title: 'Day 2: 第一个工单处理指南'
 description: '- 第一个工单处理指南'
+summary: '- 第一个工单处理指南'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - hpa
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 trigger_keywords:
 - Day

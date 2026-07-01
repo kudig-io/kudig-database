@@ -1,6 +1,9 @@
 ---
 title: 07 - RBAC权限矩阵表
-description: '| **cluster-admin** | 全部资源，全部操作 | 超级管理员 | 集群管理 | 极高 | 节点删除/etcd访问/RBAC修改 |'
+description: '| **cluster-admin** | 全部资源，全部操作 | 超级管理员 | 集群管理 | 极高 | 节点删除/etcd访问/RBAC修改
+  |'
+summary: '| **cluster-admin** | 全部资源，全部操作 | 超级管理员 | 集群管理 | 极高 | 节点删除/etcd访问/RBAC修改
+  |'
 category: security
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - kubelet
 - prometheus
 - hpa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -55,8 +60,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # 07 - RBAC权限矩阵表
 

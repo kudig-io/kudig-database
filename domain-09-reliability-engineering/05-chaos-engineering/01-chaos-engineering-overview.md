@@ -1,6 +1,7 @@
 ---
 title: 混沌工程概述与原则
 description: '# 混沌工程概述与原则'
+summary: '# 混沌工程概述与原则'
 category: domain
 tags:
 - chaos-engineering
@@ -8,6 +9,8 @@ tags:
 - sre
 - testing
 - scheduler
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - sre-practices
-created: "2026-05-23"
 ---
+
+
 
 # 混沌工程概述与原则
 

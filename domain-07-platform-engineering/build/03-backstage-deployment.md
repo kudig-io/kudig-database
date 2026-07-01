@@ -1,6 +1,7 @@
 ---
 title: Backstage 部署与配置
 description: '# Backstage 部署与配置'
+summary: '# Backstage 部署与配置'
 category: platform-engineering
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - redis
 - postgresql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +54,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md
   label: '故障树: deployment'
-created: "2026-05-23"
 ---
+
+
 
 # [[Backstage|Backstage]] 部署与配置
 # Backstage Deployment and Configuration
@@ -2648,7 +2652,7 @@ kubectl logs backstage-xxx -n backstage --tail=100
 
 <!-- chunk: 2. 目录实体未加载 -->## 2. 目录实体未加载
 # 检查目录处理日志
-kubectl logs backstage-xxx -n backstage | grep -i "catalog\|error\|warn"
+kubectl logs backstage-xxx -n backstage | grep -i "catalog|error|warn"
 
 # 检查 GitHub Token 是否有效
 kubectl exec -it backstage-xxx -n backstage -- \
@@ -2665,7 +2669,7 @@ kubectl exec -it backstage-postgres-1 -n backstage -- \
 
 <!-- chunk: 4. 认证问题 -->## 4. 认证问题
 # 检查 OIDC/OAuth 配置
-kubectl logs backstage-xxx -n backstage | grep -i "auth\|token\|oauth"
+kubectl logs backstage-xxx -n backstage | grep -i "auth|token|oauth"
 
 <!-- chunk: 5. 性能问题 -->## 5. 性能问题
 # 检查 Pod 资源使用

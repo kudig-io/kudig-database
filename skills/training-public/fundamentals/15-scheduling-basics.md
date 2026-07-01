@@ -1,6 +1,7 @@
 ---
 title: 第15课：调度与亲和性 [fundamentals]
 description: 'title: 第15课：调度与亲和性'
+summary: 'title: 第15课：调度与亲和性'
 category: learning
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - daemonset
 - operator
 - gpu
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,8 +35,9 @@ prerequisites:
 - gpu-ml-basics
 - redis-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 第15课：调度与亲和性

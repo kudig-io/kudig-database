@@ -1,7 +1,7 @@
 ---
-summary: "description: '## 项目概述'"
 title: Kubernetes (CNCF Graduated)
 description: '## 概述'
+summary: 'description: ''## 项目概述'''
 category: entities
 tags:
 - k8s
@@ -14,6 +14,8 @@ tags:
 - grafana
 - istio
 - cilium
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -40,8 +42,8 @@ prerequisites:
 - redis-basics
 - gpu-scheduling-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
 
 # [[Kubernetes|Kubernetes]] (CNCF Graduated)
 

@@ -1,6 +1,7 @@
 ---
 title: Helm Chart 故障排查
 description: '# 36 - Helm Chart 故障排查 (Helm Chart Troubleshooting)'
+summary: '# 36 - Helm Chart 故障排查 (Helm Chart Troubleshooting)'
 category: troubleshooting
 tags:
 - helm
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - daemonset
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: intermediate
 reading_level: intermediate
@@ -65,8 +68,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta.md
   label: '故障树: helm'
-created: "2026-05-23"
 ---
+
+
 
 # 36 - [[Helm|Helm]] Chart 故障排查 (Helm Chart Troubleshooting)
 
@@ -634,7 +638,7 @@ chmod +x compatibility-tester.sh
 
 # ========== API废弃警告检查 ==========
 # 检查废弃API使用
-helm template <release-name> <chart-path> --debug |& grep -i "deprecated\|deprecation"
+helm template <release-name> <chart-path> --debug |& grep -i "deprecated|deprecation"
 
 # 使用kubeval验证
 kubeval --kubernetes-version $(kubectl version --short | grep Server | awk '{print $3}' | tr -d 'v') <chart-path>/templates/*.yaml

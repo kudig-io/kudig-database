@@ -1,6 +1,9 @@
 ---
 title: Podman
-description: 'Podman 是 Red Hat 开发的无守护进程（daemonless）容器引擎，兼容 Docker CLI 但无需 Docker daemon。它支持 ro...'
+description: Podman 是 Red Hat 开发的无守护进程（daemonless）容器引擎，兼容 Docker CLI 但无需 Docker daemon。它支持
+  ro...
+summary: Podman 是 Red Hat 开发的无守护进程（daemonless）容器引擎，兼容 Docker CLI 但无需 Docker daemon。它支持
+  ro...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - podman
 - container
 - docker-alternative
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Podman
 

@@ -1,6 +1,7 @@
 ---
 title: 硬件问题实战案例库
 description: '- hardware-failure-case-studies的最佳实践'
+summary: '- hardware-failure-case-studies的最佳实践'
 category: general
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - daemonset
 - gpu
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

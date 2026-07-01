@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 培训：Root
 description: '**专题**: topic-learn'
+summary: '**专题**: topic-learn'
 category: skills
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - statefulset
 - ingress
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 - 培训：Root
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 ### topic-learn MOC
 

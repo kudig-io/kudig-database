@@ -1,6 +1,7 @@
 ---
 title: in-toto 供应链安全
-description: 'in-toto 是 CNCF 孵化项目，为软件供应链提供端到端的完整性验证框架，通过记录供应链中每个步骤的元数据（layout + link），确保软件制品在构...'
+description: in-toto 是 CNCF 孵化项目，为软件供应链提供端到端的完整性验证框架，通过记录供应链中每个步骤的元数据（layout + link），确保软件制品在构...
+summary: in-toto 是 CNCF 孵化项目，为软件供应链提供端到端的完整性验证框架，通过记录供应链中每个步骤的元数据（layout + link），确保软件制品在构...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - security
 - supply-chain
 - verification
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # in-toto 供应链安全（in-toto）
 

@@ -1,6 +1,7 @@
 ---
 title: kudig-database v1.0 — 一页纸概览
 description: ║  🔍 深度研究    "我要深度研究 etcd 的生产运维"                   ║
+summary: ║  🔍 深度研究    "我要深度研究 etcd 的生产运维"                   ║
 category: general
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - ebpf
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # kudig-database v1.0 — 一页纸概览
 

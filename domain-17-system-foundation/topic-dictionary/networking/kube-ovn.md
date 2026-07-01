@@ -1,6 +1,9 @@
 ---
 title: Kube-OVN CNI
-description: 'Kube-OVN 是阿里云灵骏开源的 CNCF Sandbox 项目，基于 OVN/OVS 的 Kubernetes CNI 实现，提供企业级的网络功能（静态 ...'
+description: Kube-OVN 是阿里云灵骏开源的 CNCF Sandbox 项目，基于 OVN/OVS 的 Kubernetes CNI 实现，提供企业级的网络功能（静态
+  ...
+summary: Kube-OVN 是阿里云灵骏开源的 CNCF Sandbox 项目，基于 OVN/OVS 的 Kubernetes CNI 实现，提供企业级的网络功能（静态
+  ...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - networking
 - cni
 - ovn
+tier: supporting
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Kube-OVN CNI（Kube-OVN）
 

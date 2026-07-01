@@ -1,6 +1,7 @@
 ---
 title: 集群生命周期管理 (Cluster Lifecycle Management)
 description: 'title: 集群生命周期管理'
+summary: 'title: 集群生命周期管理'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - calico
 - argocd
 - flux
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -40,8 +43,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 集群生命周期管理

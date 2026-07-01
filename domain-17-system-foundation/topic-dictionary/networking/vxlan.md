@@ -1,12 +1,15 @@
 ---
 title: VXLAN
-description: 'VXLAN（Virtual Extensible LAN）是一种网络虚拟化技术，通过在 UDP 报文中封装二层以太网帧，实现跨三层的虚拟网络。Kubernete...'
+description: VXLAN（Virtual Extensible LAN）是一种网络虚拟化技术，通过在 UDP 报文中封装二层以太网帧，实现跨三层的虚拟网络。Kubernete...
+summary: VXLAN（Virtual Extensible LAN）是一种网络虚拟化技术，通过在 UDP 报文中封装二层以太网帧，实现跨三层的虚拟网络。Kubernete...
 category: dictionary
 tags:
 - k8s
 - glossary
 - networking
 - vxlan
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -21,8 +24,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # VXLAN
 

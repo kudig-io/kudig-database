@@ -1,12 +1,15 @@
 ---
 title: ACK 关联产品 - ROS 资源编排 (IaC)
 description: 'description: ''- [IaC 方案对比 (ROS vs Terraform)](#iac-方案对比-ros-vs-terraform)'''
+summary: 'description: ''- [IaC 方案对比 (ROS vs Terraform)](#iac-方案对比-ros-vs-terraform)'''
 category: general
 tags:
 - cloud
 - multi-cloud
 - containerd
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - iac-basics
-created: "2026-05-23"
 ---
+
+
 
 title: ACK 关联产品 - ROS 资源编排 (IaC)
 description: '- [IaC 方案对比 (ROS vs Terraform)](#iac-方案对比-ros-vs-terraform)'

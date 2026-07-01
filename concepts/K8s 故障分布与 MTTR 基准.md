@@ -1,6 +1,7 @@
 ---
 title: K8s 问题分布与 MTTR 基准
 description: '| **应用配置错误** | 35% | 45 分钟 | 中 | 高 — 最常见 |'
+summary: '| **应用配置错误** | 35% | 45 分钟 | 中 | 高 — 最常见 |'
 category: synthesis
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - etcd
 - scheduler
 - prometheus
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,17 +32,18 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[concepts/etcd Operational Reference.md]]"
-    type: uses
-  - target: "[[skills/Kubernetes FTA Top Events Index.md]]"
-    type: uses
-  - target: "[[skills/FTA Methodology and Core Principles.md]]"
-    type: related_to
-  - target: "[[docs/indexes/INDEX.md]]"
-    type: related_to
+- target: '[[concepts/etcd Operational Reference.md]]'
+  type: uses
+- target: '[[skills/Kubernetes FTA Top Events Index.md]]'
+  type: uses
+- target: '[[skills/FTA Methodology and Core Principles.md]]'
+  type: related_to
+- target: '[[docs/indexes/INDEX.md]]'
+  type: related_to
 ---
+
+
 
 # K8s 问题分布与 MTTR 基准
 

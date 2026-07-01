@@ -1,6 +1,7 @@
 ---
 title: RAG 分块策略指南与 Manpage 安装指南
 description: '## RAG 分块策略指南'
+summary: '## RAG 分块策略指南'
 category: reference
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - coredns
 - helm
 - containerd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # RAG 分块策略与 Manpage 安装
 

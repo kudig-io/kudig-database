@@ -1,21 +1,29 @@
 ---
-title: "Research: Kubernetes 存储深度研究 2025-2026"
+title: 'Research: Kubernetes 存储深度研究 2025-2026'
+summary: 3 轮深度研究覆盖 K8S 存储全栈：云原生存储系统对比（Longhorn/Rook-Ceph/OpenEBS/JuiceFS）、 CSI 高级模式与最新进展、存储性能优化、数据保护与灾难恢复。
 category: synthesis
-tags: [storage, k8s, research, csi, longhorn, rook, ceph, velero, backup]
+tags:
+- storage
+- k8s
+- research
+- csi
+- longhorn
+- rook
+- ceph
+- velero
+- backup
+tier: supporting
 sources:
-  - "https://kubernetes.io/docs/concepts/storage/persistent-volumes/"
-  - "https://kubernetes.io/docs/concepts/storage/volume-snapshots/"
-  - "https://kubernetes-csi.github.io/docs/"
-  - "https://longhorn.io/docs/"
-  - "https://rook.io/docs/"
-  - "https://velero.io/docs/"
-  - "https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/3751-volume-attributes-class"
+- https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+- https://kubernetes.io/docs/concepts/storage/volume-snapshots/
+- https://kubernetes-csi.github.io/docs/
+- https://longhorn.io/docs/
+- https://rook.io/docs/
+- https://velero.io/docs/
+- https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/3751-volume-attributes-class
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
-summary: >-
-  3 轮深度研究覆盖 K8S 存储全栈：云原生存储系统对比（Longhorn/Rook-Ceph/OpenEBS/JuiceFS）、
-  CSI 高级模式与最新进展、存储性能优化、数据保护与灾难恢复。
 provenance:
   extracted: 0.7
   inferred: 0.25
@@ -24,6 +32,7 @@ base_confidence: 0.85
 lifecycle: draft
 lifecycle_changed: 2026-05-24
 ---
+
 
 # Research: Kubernetes 存储深度研究 2025-2026
 
@@ -115,3 +124,7 @@ VolumeAttributesClass 等新特性正在补齐存储 QoS 短板。
 - [[concepts/k8s-ai-ml-infrastructure.md|k8s ai ml infrastructure]] — AI/ML 工作负载对高性能存储（GPUDirect Storage、NVMe-oF）的需求驱动存储架构变革
 - [[concepts/finops-greenops-practices.md|finops greenops practices]] — 存储成本优化（分层存储、数据生命周期管理）是 FinOps 实践的关键组成部分
 - [[concepts/multi-cluster-dr-automation.md|multi cluster dr automation]] — 跨集群存储复制与灾难恢复策略（Velero、Kasten）保障业务连续性
+
+## Related
+
+- [[research|#research Hub]] — tag hub

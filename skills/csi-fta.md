@@ -1,6 +1,7 @@
 ---
 title: CSI 存储异常故障树分析 (skills)
 description: '# CSI 存储异常故障树分析'
+summary: '# CSI 存储异常故障树分析'
 category: skills
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - ceph
 - daemonset
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 fta_id: FTA-CSI-001
 component: Csi
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 # CSI 存储异常故障树分析
 

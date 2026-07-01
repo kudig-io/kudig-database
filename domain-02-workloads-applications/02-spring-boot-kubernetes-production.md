@@ -1,6 +1,7 @@
 ---
 title: Spring Boot on Kubernetes 生产实践指南 (domain-02-workloads-applications) [topic-java-kubernetes]
 description: '# Spring Boot on Kubernetes 生产实践指南'
+summary: '# Spring Boot on Kubernetes 生产实践指南'
 category: java-kubernetes
 tags:
 - java
@@ -13,6 +14,8 @@ tags:
 - redis
 - postgresql
 - kafka
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -39,8 +42,9 @@ prerequisites:
 - redis-basics
 - policy-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Spring Boot on [[Kubernetes|Kubernetes]] 生产实践指南
 
@@ -1115,7 +1119,7 @@ automountServiceAccountToken: false
 | 流量中断 | preStop 时间不足 | `kubectl describe endpoints <svc>` | 增大 preStop sleep 时间 |
 | 连接池耗尽 | HikariCP 配置过小 | 查看 Actuator `/actuator/metrics/hikaricp.connections.active` | 增大 maximum-pool-size |
 | ConfigMap 不更新 | Volume 挂载需重启 | `kubectl rollout restart deployment <deploy>` | 使用 spring-cloud-kubernetes 动态刷新 |
-| 读到旧配置 | 环境变量缓存 | `kubectl exec <pod> -- env \| grep KEY` | 确保 ConfigMap 在 Pod 启动前更新 |
+| 读到旧配置 | 环境变量缓存 | `kubectl exec <pod> -- env | grep KEY` | 确保 ConfigMap 在 Pod 启动前更新 |
 | HPA 不触发 | metrics-server 未安装 | `kubectl get deployment metrics-server -n kube-system` | 安装 metrics-server |
 | 滚动更新卡住 | PDB 限制过严 | `kubectl get pdb` | 调整 minAvailable 或 maxUnavailable |
 | GC 暂停过长 | 内存不足/GC 选择不当 | 查看 Prometheus GC 指标 | 切换 ZGC 或增大内存 |
@@ -1146,7 +1150,7 @@ echo -e "\n=== 资源使用 ==="
 kubectl top pod "$POD_NAME" -n "$NAMESPACE" 2>/dev/null || echo "metrics-server 未就绪"
 
 echo -e "\n=== 探针状态 ==="
-kubectl describe pod "$POD_NAME" -n "$NAMESPACE" | grep -A5 "Liveness\|Readiness\|Startup"
+kubectl describe pod "$POD_NAME" -n "$NAMESPACE" | grep -A5 "Liveness|Readiness|Startup"
 
 echo -e "\n=== 健康检查 ==="
 kubectl exec "$POD_NAME" -n "$NAMESPACE" -- curl -s http://localhost:8081/actuator/health 2>/dev/null || echo "健康检查失败"

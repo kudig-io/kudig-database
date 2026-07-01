@@ -1,6 +1,7 @@
 ---
 title: 机密容器
-description: 'Confidential Containers（CoCo）是 CNCF Sandbox 项目，将机密计算（TEE）能力引入 Kubernetes，通过硬件隔离保...'
+description: Confidential Containers（CoCo）是 CNCF Sandbox 项目，将机密计算（TEE）能力引入 Kubernetes，通过硬件隔离保...
+summary: Confidential Containers（CoCo）是 CNCF Sandbox 项目，将机密计算（TEE）能力引入 Kubernetes，通过硬件隔离保...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - security
 - tee
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # 机密容器（Confidential Containers）
 

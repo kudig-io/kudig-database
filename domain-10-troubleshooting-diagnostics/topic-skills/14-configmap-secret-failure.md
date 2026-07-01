@@ -1,6 +1,7 @@
 ---
 title: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 description: '# ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting'
+summary: '# ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting'
 category: configuration
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - flux
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -22,7 +25,8 @@ audience:
 - 技术支持
 estimated_read_time: 20min
 intent_queries:
-- ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting 是什么
+- ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
+  是什么
 - 如何 ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 trigger_keywords:
 - configmap not found
@@ -57,8 +61,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 <!-- condition: kubectl describe pod <pod> -n <ns> | grep -E 'ConfigMap.*not found|Secret.*not found|mount failed' 显示配置挂载错误 -->
 
@@ -95,7 +100,7 @@ ConfigMap 和 Secret 是 [[Kubernetes|Kubernetes]] 中管理应用配置和敏�
 |---|---------|---------|--------|---------|
 | SP-01 | Pod 启动失败，Events 显示 `configmap "xxx" not found` 或 `secret "xxx" not found` / Pod fails with configmap/secret not found | `kubectl describe pod POD -n NS` Events 部分出现 MountVolume.SetUp failed | 0.95 | ConfigMap/Secret 刚创建尚未同步到 kubelet 缓存（等待几秒重试） |
 | SP-02 | Pod 启动失败，状态为 `CreateContainerConfigError` / Pod stuck in CreateContainerConfigError | `kubectl get pods -n NS` STATUS 列显示 CreateContainerConfigError | 0.90 | 容器镜像拉取问题（先排除 ImagePullBackOff） |
-| SP-03 | 环境变量注入值为空，应用因缺少配置无法正常运行 / Environment variables from ConfigMap/Secret are empty | `kubectl exec POD -n NS -- env \| grep KEY` 返回空或变量不存在 | 0.85 | 应用自身覆盖了环境变量；ConfigMap/Secret 中该 Key 值本身为空 |
+| SP-03 | 环境变量注入值为空，应用因缺少配置无法正常运行 / Environment variables from ConfigMap/Secret are empty | `kubectl exec POD -n NS -- env | grep KEY` 返回空或变量不存在 | 0.85 | 应用自身覆盖了环境变量；ConfigMap/Secret 中该 Key 值本身为空 |
 | SP-04 | Volume 挂载的配置文件内容为空或仍是旧版本 / Mounted config file is empty or stale | `kubectl exec POD -n NS -- cat /path/to/config` 内容与 ConfigMap 不符 | 0.85 | 容器启动脚本修改了配置文件；应用自身生成了同名文件覆盖挂载 |
 | SP-05 | SubPath 挂载的配置文件更新 ConfigMap 后未自动刷新 / SubPath mounted file not auto-updating | 更新 ConfigMap 后，`kubectl exec POD -- cat /path/subpath-file` 仍显示旧内容 | 0.95 | 这是 SubPath 的预期行为，非 bug，需使用其他方案实现热更新 |
 | SP-06 | 尝试修改 Immutable ConfigMap/Secret 时报错 `field is immutable` / Cannot modify immutable ConfigMap/Secret | `kubectl apply/edit` 操作返回 `Invalid value: true: field is immutable` | 0.98 | 非问题，需删除重建或使用新名称 |
@@ -232,7 +237,7 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
 **Step D1.2**: 检查 Pod 对 ConfigMap/Secret 的引用方式
 - **命令**:
   ```bash
-  kubectl get pod <pod-name> -n <namespace> -o yaml | grep -A30 "volumes:\|env:\|envFrom:"
+  kubectl get pod <pod-name> -n <namespace> -o yaml | grep -A30 "volumes:|env:|envFrom:"
   ```
 - **超时**: 10s
 - **预期输出模式**: Pod spec 中的 volumes、env、envFrom 配置
@@ -657,7 +662,7 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl get configmap <cm-name> -n <namespace> -o jsonpath='{.data}' | jq 'keys'
   
   # 确认 Pod 引用的错误 Key
-  kubectl get deployment <deploy-name> -n <namespace> -o yaml | grep -A5 "configMapKeyRef\|secretKeyRef"
+  kubectl get deployment <deploy-name> -n <namespace> -o yaml | grep -A5 "configMapKeyRef|secretKeyRef"
   ```
 - **执行命令**:
 
@@ -1241,7 +1246,7 @@ kubectl logs <pod-name> -n <namespace> --tail=20 | grep -i config
 | 配置漂移 | GitOps 工具（ArgoCD/Flux）同步状态 | 持续 | OutOfSync → 确认变更来源 |
 | Secret 过期 | 证书/Token 过期时间监控 | 每日 | 即将过期 → 提前轮换 |
 | Vault Token 续期 | Vault Agent 日志监控 | 每小时 | 续期失败 → 检查 Vault auth |
-| ConfigMap 大小 | `kubectl get cm -A -o json \| jq '.items[].data \| length'` | 每日 | 接近限制 → 提前拆分 |
+| ConfigMap 大小 | `kubectl get cm -A -o json | jq '.items[].data | length'` | 每日 | 接近限制 → 提前拆分 |
 
 ---
 

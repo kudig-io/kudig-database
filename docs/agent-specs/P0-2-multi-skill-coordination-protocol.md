@@ -1,6 +1,7 @@
 ---
 title: 多技能协同协议 (Multi-Skill Coordination Protocol)
 description: '## 1. 协议概述'
+summary: '## 1. 协议概述'
 category: general
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - ingress
 - networkpolicy
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 多技能协同协议 (Multi-Skill Coordination Protocol)
 

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)
 description: '# Kubernetes 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)'
+summary: '# Kubernetes 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)'
 category: papers
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - vpa
 - job
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -54,8 +57,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/scheduler-fta.md
   label: '故障树: scheduler'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)
 
@@ -1506,6 +1510,10 @@ spec:
 - 14-kubernetes-event-driven-architecture-asynchronous-processing
 
 ## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]

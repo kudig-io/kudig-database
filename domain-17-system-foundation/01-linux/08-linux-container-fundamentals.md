@@ -1,6 +1,7 @@
 ---
 title: 08 - Linux 容器技术深度解析：生产环境容器运维专家指南
 description: '# 08 - Linux 容器技术深度解析：生产环境容器运维专家指南'
+summary: '# 08 - Linux 容器技术深度解析：生产环境容器运维专家指南'
 category: linux
 tags:
 - linux
@@ -13,6 +14,8 @@ tags:
 - docker
 - falco
 - ebpf
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -47,8 +50,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   label: '速查卡: linux'
-created: "2026-05-23"
 ---
+
+
 
 # 08 - Linux 容器技术深度解析：生产环境容器运维专家指南
 

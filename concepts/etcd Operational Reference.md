@@ -1,6 +1,7 @@
 ---
 title: etcd Operational Reference
 description: etcd Operational Reference — Kubernetes 生产运维知识库
+summary: etcd Operational Reference — Kubernetes 生产运维知识库
 category: concept
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - control-plane
 - distributed-systems
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # etcd Operational Reference
 

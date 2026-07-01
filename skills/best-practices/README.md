@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 最佳实践指南 (skills)
 description: 'title: Kubernetes 最佳实践指南'
+summary: 'title: Kubernetes 最佳实践指南'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - elasticsearch
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -43,8 +46,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: [[Kubernetes|Kubernetes]] 最佳实践指南

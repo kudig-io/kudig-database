@@ -1,6 +1,7 @@
 ---
 title: 强制删除与异常场景处理 (topic-code-analysis)
 description: reset 的容错机制（best-effort 策略）以及手动处理方案，涵盖 --force 标志、错误处理、跳过阶段、异常场景与处理方案。
+summary: reset 的容错机制（best-effort 策略）以及手动处理方案，涵盖 --force 标志、错误处理、跳过阶段、异常场景与处理方案。
 category: general
 tags:
 - reference
@@ -9,6 +10,8 @@ tags:
 - flannel
 - containerd
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 强制删除与异常场景处理
 category: cluster-delete
@@ -498,6 +502,8 @@ echo "=== Node ${NODE_NAME} has been fully reset ==="
 - [官方文档: kubeadm reset](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-reset/)
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[scripts/man/INSTALL.md|INSTALL]]

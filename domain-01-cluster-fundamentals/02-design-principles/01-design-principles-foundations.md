@@ -1,6 +1,7 @@
 ---
 title: 01 - Kubernetes 设计原则与哲学 (Foundations)
 description: 'title: Kubernetes 设计原则与哲学'
+summary: 'title: Kubernetes 设计原则与哲学'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - calico
 - coredns
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ prerequisites:
 - etcd-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: [[Kubernetes|Kubernetes]] 设计原则与哲学

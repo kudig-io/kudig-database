@@ -1,6 +1,7 @@
 ---
 title: v1.2.7
 description: v1.2.7 — Kubernetes 生产运维知识库
+summary: v1.2.7 — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - flux
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - cncf-ecosystem
 - etcd-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 - [v1.2.7](#v127)

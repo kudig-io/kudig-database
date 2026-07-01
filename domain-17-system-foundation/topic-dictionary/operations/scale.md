@@ -1,12 +1,15 @@
 ---
 title: 扩缩容
-description: 'Scale（扩缩容）是调整 Kubernetes 工作负载副本数量的操作。包括手动扩缩容和基于指标的自动扩缩容。...'
+description: Scale（扩缩容）是调整 Kubernetes 工作负载副本数量的操作。包括手动扩缩容和基于指标的自动扩缩容。...
+summary: Scale（扩缩容）是调整 Kubernetes 工作负载副本数量的操作。包括手动扩缩容和基于指标的自动扩缩容。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - operations
 - autoscaling
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 扩缩容
 

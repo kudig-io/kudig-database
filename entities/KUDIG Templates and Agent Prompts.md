@@ -1,6 +1,7 @@
 ---
 title: KUDIG Templates and Agent Prompts
 description: KUDIG Templates and Agent Prompts — Kubernetes 生产运维知识库
+summary: KUDIG Templates and Agent Prompts — Kubernetes 生产运维知识库
 category: reference
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - prompts
 - agents
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 - Prompts
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG Templates and Agent Prompts
 

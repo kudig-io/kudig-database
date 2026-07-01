@@ -1,6 +1,7 @@
 ---
 title: AI Agent 基础与核心架构 (domain-14-ai-ml-infra)
 description: 'title: AI Agent 基础与核心架构'
+summary: 'title: AI Agent 基础与核心架构'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - networkpolicy
 - operator
 - llm
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ trigger_keywords:
 - infra
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 title: AI Agent 基础与核心架构
 description: '# AI Agent 基础与核心架构'

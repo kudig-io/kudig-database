@@ -1,6 +1,7 @@
 ---
 title: 安全合规管理 (Security & Compliance Management)
 description: '# 安全合规管理 (Security & Compliance Management)'
+summary: '# 安全合规管理 (Security & Compliance Management)'
 category: platform-ops
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - harbor
 - falco
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -56,8 +59,9 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
-created: "2026-05-23"
 ---
+
+
 
 # 安全合规管理 ([[domain-07-platform-engineering/governance/10-security-compliance.md|Security & Compliance]] Management)
 

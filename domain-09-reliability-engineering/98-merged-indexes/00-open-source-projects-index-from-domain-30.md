@@ -1,6 +1,7 @@
 ---
 title: Domain-30 灾备与业务连续性 — 开源项目索引
 description: '- open-source-projects-index的最佳实践'
+summary: '- open-source-projects-index的最佳实践'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - argocd
 - flux
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -42,8 +45,9 @@ prerequisites:
 - tls-basics
 - backup-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

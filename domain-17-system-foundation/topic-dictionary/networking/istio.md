@@ -1,6 +1,7 @@
 ---
 title: Istio
-description: 'Istio 是最广泛使用的开源服务网格平台，为微服务通信提供流量管理、安全（mTLS）、可观测性和策略执行能力。它使用 Envoy 作为数据平面代理，通过控制平...'
+description: Istio 是最广泛使用的开源服务网格平台，为微服务通信提供流量管理、安全（mTLS）、可观测性和策略执行能力。它使用 Envoy 作为数据平面代理，通过控制平...
+summary: Istio 是最广泛使用的开源服务网格平台，为微服务通信提供流量管理、安全（mTLS）、可观测性和策略执行能力。它使用 Envoy 作为数据平面代理，通过控制平...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - istio
 - service-mesh
 - envoy
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Istio
 

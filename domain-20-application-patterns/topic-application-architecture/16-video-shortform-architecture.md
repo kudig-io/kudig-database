@@ -1,6 +1,7 @@
 ---
 title: 音视频与短视频平台 Kubernetes 生产架构设计
 description: 'title: 音视频与短视频平台架构设计'
+summary: 'title: 音视频与短视频平台架构设计'
 category: general
 tags:
 - architecture
@@ -10,6 +11,8 @@ tags:
 - hpa
 - operator
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 音视频与短视频平台架构设计
 description: '# 音视频与短视频平台 [[Kubernetes|Kubernetes]] 生产架构设计'

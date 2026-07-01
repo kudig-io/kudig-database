@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 全量故障树分析(FTA)排查手册 (domain-10-troubleshooting-diagnostics)
 description: 'title: Kubernetes 全量故障树分析(FTA)排查手册'
+summary: 'title: Kubernetes 全量故障树分析(FTA)排查手册'
 category: fta
 tags:
 - fta
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - cilium
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -48,8 +51,9 @@ prerequisites:
 fta_id: FTA-KUBERNETES_FULL_ANALYSIS-001
 component: Kubernetes Full Analysis
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] 全量故障树分析(FTA)排查手册
 description: '# Kubernetes 全量故障树分析(FTA)排查手册'
@@ -1068,7 +1072,7 @@ kubectl get pods -l <selector-key>=<selector-value>
 kubectl get pods --all-namespaces -o wide
 
 # 检查Pod健康检查
-kubectl describe pod <pod-name> | grep -A 5 "Liveness\|Readiness"
+kubectl describe pod <pod-name> | grep -A 5 "Liveness|Readiness"
 ```
 
 **解决方案**:

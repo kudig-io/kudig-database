@@ -1,12 +1,22 @@
 ---
-title: "Autoscaling Failure Remediation Playbook"
+title: Autoscaling Failure Remediation Playbook
+summary: Autoscaling Failure Remediation Playbook：kubectl get pods -n kube-system
+  -l k8s-app=metrics-server kubectl logs -n kube-system -l k8s-app=metrics-server
+  --tail=50
 category: remediation
-skill_set: "k8s-autoscaling"
-created: "2026-05-22"
-updated: "2026-05-22"
+tags:
+- reference
+- remediation
+- playbook
+- visibility/public
+tier: supporting
+created: '2026-05-22'
+updated: '2026-05-22'
+skill_set: k8s-autoscaling
 last_updated: 2026-05-22
-tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
+
+
 
 # 修复操作手册 / Remediation Playbook
 
@@ -250,3 +260,9 @@ kubectl get hpa <name> -n <namespace> -w
 ## 参见
 
 - [[remediation-playbook]] — reference 领域核心页面
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Port Reference
 description: Kubernetes Port Reference — Kubernetes 生产运维知识库
+summary: Kubernetes Port Reference — Kubernetes 生产运维知识库
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes Port Reference
 
@@ -90,6 +94,8 @@ created: "2026-05-23"
 - Consider using NetworkPolicy to restrict inter-pod traffic
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[entities/argocd.md|argocd]] — ArgoCD

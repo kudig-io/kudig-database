@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 故障排查方法论全栈培训 (assets)
 description: '# Kubernetes 故障排查方法论全栈培训'
+summary: '# Kubernetes 故障排查方法论全栈培训'
 category: presentations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - containerd
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 故障排查方法论全栈培训
 

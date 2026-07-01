@@ -1,17 +1,22 @@
 ---
-title: "Research: Kubernetes AI-ML Infrastructure 2025-2026"
+title: 'Research: Kubernetes AI-ML Infrastructure 2025-2026'
+summary: 'Research: Kubernetes AI-ML Infrastructure 2025-2026：2025-2026年间，Kubernetes作为AI/ML工作负载的基础设施平台经历了根本性转变。Dynamic
+  Resource Allocation (DRA) 正式GA标志着GPU调度从"黑魔法"走向声明式API；vLLM成为事实上的LLM推理引擎标准，其PagedAttention...'
 category: synthesis
 tags:
-  - ai
-  - ml
-  - gpu
-  - llm
-  - k8s
-  - research
+- ai
+- ml
+- gpu
+- llm
+- k8s
+- research
+tier: supporting
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # Research: Kubernetes AI-ML Infrastructure 2025-2026
 
@@ -71,3 +76,7 @@ last_updated: 2026-05-24
 - [[concepts/k8s-networking-evolution.md|k8s networking evolution]] — 高性能网络（RDMA、GPUDirect RDMA）是分布式 AI 训练集群的关键基础设施
 - [[concepts/storage-performance-optimization.md|storage performance optimization]] — 存储性能优化（并行文件系统、本地 NVMe 缓存）直接影响模型训练 I/O 吞吐
 - [[concepts/finops-greenops-practices.md|finops greenops practices]] — GPU 资源成本管理与绿色计算是 AI/ML 基础设施可持续运营的核心议题
+
+## Related
+
+- [[research|#research Hub]] — tag hub

@@ -1,6 +1,7 @@
 ---
 title: kube-proxy 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: kube-proxy 故障排查指南'
+summary: 'title: kube-proxy 故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -12,6 +13,8 @@ tags:
 - daemonset
 - networkpolicy
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -39,8 +42,9 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: kube-proxy 故障排查指南
 description: '# kube-proxy 故障排查指南'

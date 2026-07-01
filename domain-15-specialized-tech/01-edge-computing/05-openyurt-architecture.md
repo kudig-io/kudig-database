@@ -1,6 +1,7 @@
 ---
 title: OpenYurt 边缘方案 (OpenYurt Edge Solution)
 description: 'title: OpenYurt 边缘方案 (OpenYurt Edge Solution)'
+summary: 'title: OpenYurt 边缘方案 (OpenYurt Edge Solution)'
 category: general
 tags:
 - edge
@@ -13,6 +14,8 @@ tags:
 - flannel
 - coredns
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - helm-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[OpenYurt|OpenYurt]] 边缘方案 (OpenYurt Edge Solution)
 description: '# OpenYurt 边缘方案 (OpenYurt Edge Solution)'

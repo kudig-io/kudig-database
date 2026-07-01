@@ -1,6 +1,7 @@
 ---
 title: Crossplane
-description: 'Crossplane 是 CNCF 孵化项目，将 Kubernetes 的控制循环扩展到基础设施管理领域。它使用 K8s CRD 声明式管理云资源（AWS/Az...'
+description: Crossplane 是 CNCF 孵化项目，将 Kubernetes 的控制循环扩展到基础设施管理领域。它使用 K8s CRD 声明式管理云资源（AWS/Az...
+summary: Crossplane 是 CNCF 孵化项目，将 Kubernetes 的控制循环扩展到基础设施管理领域。它使用 K8s CRD 声明式管理云资源（AWS/Az...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - iac
 - platform-engineering
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Crossplane
 

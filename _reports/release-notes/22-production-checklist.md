@@ -1,9 +1,12 @@
 ---
 title: 发布会制作 — 立即执行清单
 description: '| D+2 | 主视频段落 1-2 录制 | 开场 + 产品介绍 | 数字人平台 |'
+summary: '| D+2 | 主视频段落 1-2 录制 | 开场 + 产品介绍 | 数字人平台 |'
 category: general
 tags:
 - k8s
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -18,8 +21,9 @@ trigger_keywords:
 - 立即执行清单
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 发布会制作 — 立即执行清单
 

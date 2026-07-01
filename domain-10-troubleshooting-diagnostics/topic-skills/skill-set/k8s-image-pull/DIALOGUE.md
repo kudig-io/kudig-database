@@ -1,28 +1,32 @@
 ---
-title: "镜像拉取问题 — 远程顾问对话脚本"
-category: "troubleshooting"
-tags: ["workloads", "remote-consultant"]
-created: "2026-05-23"
-updated: "2026-05-23"
+title: 镜像拉取问题 — 远程顾问对话脚本
+summary: 镜像拉取问题的远程顾问对话脚本，覆盖镜像不存在、认证失败、仓库不可达排查。
+category: troubleshooting
+tags:
+- workloads
+- remote-consultant
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
-dialogue_id: "DIALOGUE-SKILL-IMG-001"
-skill_id: "SKILL-IMG-001"
-version: "1.0.0"
-role: "remote-consultant"
-language: "zh"
-summary: "镜像拉取问题的远程顾问对话脚本，覆盖镜像不存在、认证失败、仓库不可达排查。"
+dialogue_id: DIALOGUE-SKILL-IMG-001
+skill_id: SKILL-IMG-001
+version: 1.0.0
+role: remote-consultant
+language: zh
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
-    type: uses
-  - target: "[[entities/deployment.md]]"
-    type: uses
-  - target: "[[entities/kubelet.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service.md]]"
-    type: uses
+- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+  type: uses
+- target: '[[entities/deployment.md]]'
+  type: uses
+- target: '[[entities/kubelet.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/service.md]]'
+  type: uses
 ---
+
 
 # K8s Image Pull Failure — 远程顾问对话脚本
 
@@ -66,9 +70,9 @@ relationships:
 **顾问回应**：
 > 这类告警通常指向私有仓库认证、镜像标签错误或仓库网络问题。请先执行：
 > ```bash
-> kubectl get events --all-namespaces --field-selector reason=Failed | grep -i "pull\|image\|registry" | tail -20
+> kubectl get events --all-namespaces --field-selector reason=Failed | grep -i "pull|image|registry" | tail -20
 > ```
-> **如果无法执行** → `kubectl get events -n <namespace> | grep -i "pull\|image\|registry" | tail -20`
+> **如果无法执行** → `kubectl get events -n <namespace> | grep -i "pull|image|registry" | tail -20`
 > **如果 events 也查不了** → `kubectl describe pod <pod-name> -n <namespace> | grep -A 20 Events`
 > 请把相关事件贴给我。
 
@@ -223,7 +227,7 @@ relationships:
 > **如果无法执行** → `kubectl get node <node-name> -o yaml | grep -A 20 "ephemeral-storage"`
 > 3. 直接检查节点磁盘（如可 SSH）：`ssh <node-ip> "df -h /var/lib/containerd"`
 > **如果无法 SSH** → `kubectl debug node/<node-name> -it --image=busybox -- df -h`
-> 4. 检查 Pod 事件中的磁盘相关错误：`kubectl describe pod <pod-name> -n <namespace> | grep -i "space\|disk\|full"`
+> 4. 检查 Pod 事件中的磁盘相关错误：`kubectl describe pod <pod-name> -n <namespace> | grep -i "space|disk|full"`
 
 **分支决策**：
 - **D1**：节点磁盘使用率 >85%，有空间压力 → Round 3 — 分支 O（节点磁盘清理）
@@ -240,7 +244,7 @@ relationships:
 > **如果无法 curl** → 请确认镜像仓库是否有维护公告
 > 2. 检查仓库认证服务：`curl -u <username>:<password> https://<registry-host>/v2/_catalog`
 > **如果无法提供凭据** → 请确认仓库管理员是否修改了认证策略
-> 3. 检查镜像仓库的 Rate Limit：`curl -v https://<registry-host>/v2/<repo>/manifests/<tag> 2>&1 | grep -i "rate\|limit\|429"`
+> 3. 检查镜像仓库的 Rate Limit：`curl -v https://<registry-host>/v2/<repo>/manifests/<tag> 2>&1 | grep -i "rate|limit|429"`
 > **如果无法执行** → 查看 Pod 事件中是否有 `TOOMANYREQUESTS` 或 `429`
 
 **分支决策**：
@@ -299,7 +303,7 @@ relationships:
 
 **顾问指令**：
 > 镜像标签存在但拉取失败，可能是缓存或平台架构不兼容。
-> 1. 检查镜像平台架构：`skopeo inspect --raw docker://<full-image-address> | grep -i "architecture\|platform"`
+> 1. 检查镜像平台架构：`skopeo inspect --raw docker://<full-image-address> | grep -i "architecture|platform"`
 > **如果没有 skopeo** → 请确认镜像是否为多架构镜像
 > 2. 检查节点架构：`kubectl get node <node-name> -o jsonpath='{.status.nodeInfo.architecture}'`
 > **如果无法执行 jsonpath** → `kubectl describe node <node-name> | grep "Architecture:"`

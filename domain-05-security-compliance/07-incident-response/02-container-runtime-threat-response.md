@@ -1,6 +1,7 @@
 ---
 title: 容器运行时威胁响应：Falco 与 Tetragon
 description: 面向阿里云/专有云 K8s 的容器运行时威胁响应方案，讲解 Falco、Tetragon 的部署、规则编写与异常行为处置。
+summary: 面向阿里云/专有云 K8s 的容器运行时威胁响应方案，讲解 Falco、Tetragon 的部署、规则编写与异常行为处置。
 category: security
 tags:
 - k8s
@@ -10,6 +11,9 @@ tags:
 - runtime-security
 - ebpf
 - threat-detection
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -42,9 +46,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # 容器运行时威胁响应：Falco 与 Tetragon
 

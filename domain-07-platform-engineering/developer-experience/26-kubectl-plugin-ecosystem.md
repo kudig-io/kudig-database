@@ -1,6 +1,7 @@
 ---
 title: kubectl 插件生态知识手册
 description: '## 1. 插件概述'
+summary: '## 1. 插件概述'
 category: platform-ops
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cronjob
 - rbac
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -52,8 +55,9 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
-created: "2026-05-23"
 ---
+
+
 
 # kubectl 插件生态知识手册
 

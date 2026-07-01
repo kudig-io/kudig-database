@@ -1,6 +1,7 @@
 ---
 title: Pod 全面故障排查
 description: '# 08 - Pod 全面故障排查 (Pod Comprehensive Troubleshooting)'
+summary: '# 08 - Pod 全面故障排查 (Pod Comprehensive Troubleshooting)'
 category: troubleshooting
 tags:
 - pod
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - flannel
 - calico
+tier: core
+created: '2026-05-23'
 last_updated: 2026-01
 difficulty: beginner
 reading_level: beginner
@@ -63,8 +66,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md
   label: '故障树: pod'
-created: "2026-05-23"
 ---
+
+
 
 # 08 - Pod 全面故障排查 (Pod Comprehensive Troubleshooting)
 
@@ -162,9 +166,9 @@ created: "2026-05-23"
 
 | 原因类型 | 事件关键字 | 排查命令 | 解决方案 |
 |:---|:---|:---|:---|
-| **资源不足** | Insufficient cpu/memory | `kubectl describe nodes \| grep -A5 Allocated` | 扩容/调整requests |
+| **资源不足** | Insufficient cpu/memory | `kubectl describe nodes | grep -A5 Allocated` | 扩容/调整requests |
 | **节点选择** | didn't match node selector | `kubectl get nodes --show-labels` | 修改selector/添加标签 |
-| **污点容忍** | had taint...didn't tolerate | `kubectl describe nodes \| grep Taints` | 添加tolerations |
+| **污点容忍** | had taint...didn't tolerate | `kubectl describe nodes | grep Taints` | 添加tolerations |
 | **亲和性** | didn't match pod affinity | `kubectl get [[Pods|pods]] -o wide` | 调整affinity规则 |
 | **PVC绑定** | unbound PersistentVolumeClaims | `kubectl get pvc` | 创建PV/检查StorageClass |
 | **配额限制** | exceeded quota | `kubectl describe quota -n <ns>` | 调整quota/清理资源 |

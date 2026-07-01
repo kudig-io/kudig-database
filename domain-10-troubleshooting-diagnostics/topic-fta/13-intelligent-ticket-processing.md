@@ -1,6 +1,7 @@
 ---
 title: 第十三章：智能工单处理的 AI Agent 架构 [domain-10-troubleshooting-diagnostics]
 description: 'title: 第十三章：智能工单处理的 AI Agent 架构'
+summary: 'title: 第十三章：智能工单处理的 AI Agent 架构'
 category: fta
 tags:
 - fta
@@ -12,6 +13,8 @@ tags:
 - ingress
 - networkpolicy
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -46,8 +49,9 @@ prerequisites:
 fta_id: FTA-13_INTELLIGENT_TICKET_PROCESSING-001
 component: 13 Intelligent Ticket Processing
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: 第十三章：智能工单处理的 AI Agent 架构
 description: '# 第十三章：智能工单处理的 AI Agent 架构'

@@ -1,6 +1,7 @@
 ---
 title: KEDA
-description: 'KEDA（Kubernetes Event-Driven Autoscaling）是 CNCF 毕业项目，为 Kubernetes 工作负载提供基于事件驱动的自...'
+description: KEDA（Kubernetes Event-Driven Autoscaling）是 CNCF 毕业项目，为 Kubernetes 工作负载提供基于事件驱动的自...
+summary: KEDA（Kubernetes Event-Driven Autoscaling）是 CNCF 毕业项目，为 Kubernetes 工作负载提供基于事件驱动的自...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - keda
 - autoscaling
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # KEDA
 

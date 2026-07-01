@@ -1,6 +1,7 @@
 ---
 title: 55 - CoreDNS 插件完整参考 (Plugins Reference)
 description: '| **监控** | 4 | 日志/指标/追踪 | log, prometheus, trace, debug |'
+summary: '| **监控** | 4 | 日志/指标/追踪 | log, prometheus, trace, debug |'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - opa
 - flannel
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -63,8 +66,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 55 - [[CoreDNS|CoreDNS]] 插件完整参考 (Plugins Reference)
 

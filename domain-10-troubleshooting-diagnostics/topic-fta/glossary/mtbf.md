@@ -1,12 +1,17 @@
 ---
 title: 平均问题间隔
-description: 'MTBF（Mean Time Between Failures，平均故障间隔时间）是衡量系统可靠性的核心指标，表示系统两次故障之间的平均运行时间。MTBF 越长...'
+description: MTBF（Mean Time Between Failures，平均故障间隔时间）是衡量系统可靠性的核心指标，表示系统两次故障之间的平均运行时间。MTBF
+  越长...
+summary: MTBF（Mean Time Between Failures，平均故障间隔时间）是衡量系统可靠性的核心指标，表示系统两次故障之间的平均运行时间。MTBF
+  越长...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - mtbf
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +28,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 平均问题间隔
 

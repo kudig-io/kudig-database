@@ -1,6 +1,7 @@
 ---
 title: Kubectl Quick Reference
 description: Kubectl Quick Reference — Kubernetes 生产运维知识库
+summary: Kubectl Quick Reference — Kubernetes 生产运维知识库
 category: references
 tags:
 - kubectl
@@ -9,6 +10,8 @@ tags:
 - troubleshooting
 - etcd
 - apiserver
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubectl Quick Reference
 
@@ -136,6 +140,8 @@ ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-snapshot.db --endpoints=https:/
 ```
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[skills/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — Troubleshoot Pod Issues
 - [[deployment]] — Deployment

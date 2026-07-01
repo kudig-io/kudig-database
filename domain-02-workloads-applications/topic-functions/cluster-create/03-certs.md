@@ -1,6 +1,7 @@
 ---
 title: 证书管理 (PKI Infrastructure)
 description: 'title: 证书管理 PKI Infrastructure'
+summary: 'title: 证书管理 PKI Infrastructure'
 category: general
 tags:
 - reference
@@ -10,6 +11,8 @@ tags:
 - scheduler
 - controller-manager
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 证书管理 PKI Infrastructure
 description: '# 证书管理 (PKI Infrastructure)'
@@ -833,6 +837,8 @@ done
 - [高可用进阶](14-ha-advanced.md) — upload-certs 分发证书
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

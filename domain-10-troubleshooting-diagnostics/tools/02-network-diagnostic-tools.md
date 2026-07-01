@@ -1,6 +1,7 @@
 ---
 title: 网络诊断工具实战指南
 description: 面向阿里云/专有云 K8s 的网络诊断工具指南，涵盖 ping、netshoot、ksniff、cilium-cli 的使用与典型网络故障排查场景。
+summary: 面向阿里云/专有云 K8s 的网络诊断工具指南，涵盖 ping、netshoot、ksniff、cilium-cli 的使用与典型网络故障排查场景。
 category: troubleshooting
 tags:
 - k8s
@@ -11,6 +12,9 @@ tags:
 - cilium-cli
 - ping
 - dns
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: intermediate
 reading_level: intermediate
@@ -43,9 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # 网络诊断工具实战指南
 

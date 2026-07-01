@@ -1,6 +1,7 @@
 ---
 title: 38 - Ingress和API Gateway对比表
 description: '| **Traefik** | Traefik | 动态配置，中间件 | v1.25+ | 中-高 | 低 | - |'
+summary: '| **Traefik** | Traefik | 动态配置，中间件 | v1.25+ | 中-高 | 低 | - |'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - daemonset
 - gateway
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -55,8 +58,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 38 - Ingress和API Gateway对比表
 

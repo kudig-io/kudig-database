@@ -1,6 +1,7 @@
 ---
 title: Kubernetes PKI 证书体系
 description: '## 概述'
+summary: '## 概述'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - csr
 - etcd
 - apiserver
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes PKI 证书体系
 

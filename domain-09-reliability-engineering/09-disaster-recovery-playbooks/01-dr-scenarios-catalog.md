@@ -1,6 +1,7 @@
 ---
 title: 灾备场景目录
 description: '| 区域级网络中断 | 整个 Region | 30 分钟 | 0 |'
+summary: '| 区域级网络中断 | 整个 Region | 30 分钟 | 0 |'
 category: domain
 tags:
 - disaster-recovery
@@ -8,6 +9,8 @@ tags:
 - scenarios
 - sre
 - etcd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ prerequisites:
 - kubectl-basics
 - sre-practices
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 灾备场景目录
 

@@ -1,6 +1,7 @@
 ---
 title: 18 - 网络安全纵深防御体系
 description: 'title: 18 - 网络安全纵深防御体系'
+summary: 'title: 18 - 网络安全纵深防御体系'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - envoy
 - cilium
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 18 - 网络安全纵深防御体系
 description: '# 18 - 网络安全纵深防御体系'

@@ -1,6 +1,7 @@
 ---
 title: Domain-34 CNCF Landscape — 开源项目索引
 description: 本域已包含 **222 篇深度文档**（1 README + 218 个 CNCF 项目 + 4 篇指南），按成熟度分目录组织：
+summary: 本域已包含 **222 篇深度文档**（1 README + 218 个 CNCF 项目 + 4 篇指南），按成熟度分目录组织：
 category: cncf-landscape
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - ecosystem
 - kserve
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -40,8 +43,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Domain-34 CNCF Landscape — 开源项目索引
 

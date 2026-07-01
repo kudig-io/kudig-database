@@ -1,7 +1,9 @@
 ---
 title: Deployment 金丝雀与蓝绿发布模式
-description: 系统分析基于 Kubernetes Deployment 原生能力实现金丝雀发布（Canary Release）和蓝绿发布（Blue-Green Deployment）的工程实践，涵盖 pause/resume 机制源码、流量权重控制、以及
-  Argo Rollouts/Flagger 扩展方案对比。
+description: 系统分析基于 Kubernetes Deployment 原生能力实现金丝雀发布（Canary Release）和蓝绿发布（Blue-Green
+  Deployment）的工程实践，涵盖 pause/resume 机制源码、流量权重控制、以及 Argo Rollouts/Flagger 扩展方案对比。
+summary: 系统分析基于 Kubernetes Deployment 原生能力实现金丝雀发布（Canary Release）和蓝绿发布（Blue-Green
+  Deployment）的工程实践，涵盖 pause/resume 机制源码、流量权重控制、以及 Argo Rollouts/Flagger 扩展方案对比。
 category: deployment
 tags:
 - canary
@@ -14,6 +16,8 @@ tags:
 - istio
 - ingress
 - gateway
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: advanced
 reading_level: advanced
@@ -57,8 +61,9 @@ related_topics:
 - deployment-controller
 - rolling-update
 - revision-history
-created: "2026-05-23"
 ---
+
+
 
 # Deployment [[skills/deployment-canary-and-bluegreen.md|deployment-canary-and-bluegreen]]模式
 

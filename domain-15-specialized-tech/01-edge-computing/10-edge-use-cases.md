@@ -1,6 +1,7 @@
 ---
 title: 边缘场景案例 (Edge Computing Use Cases)
 description: '- edge-use-cases的最佳实践'
+summary: '- edge-use-cases的最佳实践'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - gateway
 - rbac
 - crd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - redis-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

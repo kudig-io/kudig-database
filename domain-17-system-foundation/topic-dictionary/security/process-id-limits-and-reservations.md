@@ -1,12 +1,15 @@
 ---
 title: Process ID Limits And Reservations（进程 ID 限制与预留）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
 - glossary
 - terminology
 - kubelet
+tier: peripheral
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -27,9 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # Process ID Limits And Reservations（进程 ID 限制与预留）
 

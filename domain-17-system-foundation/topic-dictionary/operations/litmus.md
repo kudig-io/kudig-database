@@ -1,6 +1,8 @@
 ---
 title: Litmus 混沌工程
-description: 'LitmusChaos 是 CNCF 孵化项目，提供 Kubernetes 原生的混沌工程平台，内置 300+ 预定义混沌实验，支持通过 ChaosCenter...'
+description: LitmusChaos 是 CNCF 孵化项目，提供 Kubernetes 原生的混沌工程平台，内置 300+ 预定义混沌实验，支持通过
+  ChaosCenter...
+summary: LitmusChaos 是 CNCF 孵化项目，提供 Kubernetes 原生的混沌工程平台，内置 300+ 预定义混沌实验，支持通过 ChaosCenter...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - operations
 - chaos-engineering
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Litmus 混沌工程（Litmus）
 

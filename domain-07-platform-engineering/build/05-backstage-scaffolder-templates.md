@@ -1,6 +1,7 @@
 ---
 title: Backstage 脚手架与模板系统
 description: 'description: 1. [Scaffolder 架构深度解析](#1-scaffolder-架构深度解析)'
+summary: 'description: 1. [Scaffolder 架构深度解析](#1-scaffolder-架构深度解析)'
 category: general
 tags:
 - platform
@@ -13,6 +14,8 @@ tags:
 - mysql
 - postgresql
 - kafka
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 - mysql-basics
 - policy-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Backstage|Backstage]] 脚手架与模板系统
 description: 1. [Scaffolder 架构深度解析](#1-scaffolder-架构深度解析)

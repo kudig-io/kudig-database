@@ -1,6 +1,7 @@
 ---
 title: kube-proxy 异常导致 Service 不通
 description: 专有云 ACK 集群因 kube-proxy 配置损坏导致 Pod 无法通过 ClusterIP 访问后端服务的工单闭环样本。
+summary: 专有云 ACK 集群因 kube-proxy 配置损坏导致 Pod 无法通过 ClusterIP 访问后端服务的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -10,6 +11,9 @@ tags:
 - iptables
 - clusterip
 - p0
+tier: supporting
+created: '2026-06-26T14:00:00+08:00'
+updated: '2026-06-26T15:30:00+08:00'
 incident_id: INC-2026-ACK-044
 priority: P0
 severity: critical
@@ -23,9 +27,7 @@ skill_ref:
 fta_ref:
 - '[[domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md|FTA: Service
   异常]]'
-created: '2026-06-26T14:00:00+08:00'
-updated: '2026-06-26T15:30:00+08:00'
-last_updated: 2026-06-26T15:30:00+08:00
+last_updated: 2026-06-26 15:30:00+08:00
 duplicate_of: INC-2026-ACK-019
 status: duplicate
 duplication_reason: 与 "INC-2026-ACK-019" 主题重复，内容角度相似，降低 RAG 权重
@@ -53,15 +55,17 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-17-system-foundation/topic-dictionary/fundamentals/kube-proxy.md]]"
+- target: '[[domain-17-system-foundation/topic-dictionary/fundamentals/kube-proxy.md]]'
   type: related_to
-- target: "[[concepts/service.md]]"
+- target: '[[concepts/service.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-046-ingress-controller-404-502.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-046-ingress-controller-404-502.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 

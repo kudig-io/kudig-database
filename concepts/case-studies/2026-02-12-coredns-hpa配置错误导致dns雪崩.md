@@ -1,14 +1,19 @@
 ---
-category: "synthesis"
-tags: ["synthesis"]
-date: "2026-02-12"
-title: "CoreDNS HPA配置错误导致DNS雪崩"
-skill: "04-dns-resolution-failure"
-severity: "P1"
-created: "2026-05-23"
-updated: "2026-05-23"
+title: CoreDNS HPA配置错误导致DNS雪崩
+summary: CoreDNS HPA配置错误导致DNS雪崩：业务团队报告服务间调用间歇性失败，错误日志显示DNS解析超时。问题呈现波浪式：正常5分钟后异常2分钟循环。
+category: synthesis
+tags:
+- synthesis
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-02-12'
+skill: 04-dns-resolution-failure
+severity: P1
 last_updated: 2026-05-23
 ---
+
+
 
 # CoreDNS HPA配置错误导致DNS雪崩
 

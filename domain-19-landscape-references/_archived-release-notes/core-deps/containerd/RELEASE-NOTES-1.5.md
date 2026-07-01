@@ -1,6 +1,7 @@
 ---
 title: containerd v1.5 Release Notes
 description: containerd v1.5 Release Notes — Kubernetes 生产运维知识库
+summary: containerd v1.5 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - changelog
 - containerd
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cncf-ecosystem
-created: "2026-05-23"
 ---
+
+
 
 # [[containerd|containerd]] v1.5 Release Notes
 

@@ -1,6 +1,7 @@
 ---
 title: Agent CLI 开发工作流与最佳实践 (domain-14-ai-ml-infra)
 description: 'title: Agent CLI 开发工作流与最佳实践'
+summary: 'title: Agent CLI 开发工作流与最佳实践'
 category: general
 tags:
 - ai
@@ -12,6 +13,8 @@ tags:
 - llm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - iac-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Agent CLI 开发工作流与最佳实践
 description: '# Agent CLI 开发工作流与最佳实践'

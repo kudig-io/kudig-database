@@ -1,6 +1,7 @@
 ---
 title: Wiki 全量知识库摘要 — 2026-05-21
 description: 3,653 篇文档 · 175.5 万行 · 68MB · 40 领域 + 21 专题
+summary: 3,653 篇文档 · 175.5 万行 · 68MB · 40 领域 + 21 专题
 category: journal
 tags:
 - digest
@@ -13,6 +14,8 @@ tags:
 - apiserver
 - kubelet
 - scheduler
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -40,8 +43,9 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # Wiki 全量知识库摘要 — 2026-05-21
 

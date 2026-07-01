@@ -2,6 +2,7 @@
 title: Agent QA 对语料库
 description: |
   命令输出→诊断 I-O 对语料 + 结构化 QA pairs，供 SRE Agent 推理使用
+summary: 命令输出→诊断 I-O 对语料 + 结构化 QA pairs，供 SRE Agent 推理使用
 category: general
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - qa
 - corpus
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
-created: "2026-05-23"
 ---
+
+
 
 # Agent QA 对语料库
 

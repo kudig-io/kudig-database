@@ -1,6 +1,7 @@
 ---
 title: Dragonfly P2P 分发
-description: 'Dragonfly 是阿里巴巴开源的 CNCF 孵化项目，基于 P2P（点对点）技术加速容器镜像和文件的分发，解决大规模集群中镜像拉取的性能瓶颈问题。...'
+description: Dragonfly 是阿里巴巴开源的 CNCF 孵化项目，基于 P2P（点对点）技术加速容器镜像和文件的分发，解决大规模集群中镜像拉取的性能瓶颈问题。...
+summary: Dragonfly 是阿里巴巴开源的 CNCF 孵化项目，基于 P2P（点对点）技术加速容器镜像和文件的分发，解决大规模集群中镜像拉取的性能瓶颈问题。...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - tooling
 - distribution
 - p2p
+tier: supporting
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Dragonfly P2P 分发（Dragonfly）
 

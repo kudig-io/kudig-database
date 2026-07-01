@@ -1,6 +1,7 @@
 ---
 title: ModelPack 模型打包
-description: 'ModelPack 是将 AI/ML 模型打包为 OCI 镜像的工具和规范，利用容器 Registry 分发和版本管理 AI 模型，实现模型的标准化管理和部署。...'
+description: ModelPack 是将 AI/ML 模型打包为 OCI 镜像的工具和规范，利用容器 Registry 分发和版本管理 AI 模型，实现模型的标准化管理和部署。...
+summary: ModelPack 是将 AI/ML 模型打包为 OCI 镜像的工具和规范，利用容器 Registry 分发和版本管理 AI 模型，实现模型的标准化管理和部署。...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - specialized-workloads
 - ai-ml
 - oci
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # ModelPack 模型打包（ModelPack）
 

@@ -1,6 +1,7 @@
 ---
 title: 80 - 多集群网络互联
 description: '# 80 - 多集群网络互联'
+summary: '# 80 - 多集群网络互联'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - helm
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -57,8 +60,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 80 - 多集群网络互联
 

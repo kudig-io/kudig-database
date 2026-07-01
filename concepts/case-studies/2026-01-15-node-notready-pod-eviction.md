@@ -1,15 +1,25 @@
 ---
-title: "[2026-01-15] [P0] Node NotReady 导致大规模 Pod 驱逐"
+title: '[2026-01-15] [P0] Node NotReady 导致大规模 Pod 驱逐'
+summary: '[2026-01-15] [P0] Node NotReady 导致大规模 Pod 驱逐：09:23，PagerDuty 连续触发 3 条高优告警：'
 category: case-study
-tags: [production, incident, cluster-fundamentals, node, pod, eviction]
-date: "2026-01-15"
+tags:
+- production
+- incident
+- cluster-fundamentals
+- node
+- pod
+- eviction
+tier: core
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-01-15'
 severity: P0
-mttr: "18min"
+mttr: 18min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-01-15] Node NotReady 导致 47 个 Pod 被驱逐
 

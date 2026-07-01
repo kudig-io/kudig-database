@@ -1,6 +1,7 @@
 ---
 title: 大规模集群运维
 description: '# 40 - 大规模集群运维 (Large Scale Cluster Operations)'
+summary: '# 40 - 大规模集群运维 (Large Scale Cluster Operations)'
 category: troubleshooting
 tags:
 - large-scale
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - scheduler
 - prometheus
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: advanced
 reading_level: advanced
@@ -66,8 +69,9 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
-created: "2026-05-23"
 ---
+
+
 
 # 40 - 大规模集群运维 (Large Scale Cluster Operations)
 

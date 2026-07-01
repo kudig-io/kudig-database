@@ -1,6 +1,9 @@
 ---
 title: K8up 备份 Operator
-description: 'K8up 是 VSHN 开源的 Kubernetes 备份 Operator，基于 restic 实现增量备份，通过 CRD 声明式管理 PVC 数据的自动备份...'
+description: K8up 是 VSHN 开源的 Kubernetes 备份 Operator，基于 restic 实现增量备份，通过 CRD 声明式管理
+  PVC 数据的自动备份...
+summary: K8up 是 VSHN 开源的 Kubernetes 备份 Operator，基于 restic 实现增量备份，通过 CRD 声明式管理 PVC
+  数据的自动备份...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - operations
 - backup
 - operator
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # K8up 备份 Operator（K8up）
 

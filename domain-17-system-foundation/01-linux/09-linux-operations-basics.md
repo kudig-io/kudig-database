@@ -1,6 +1,7 @@
 ---
 title: 09 - Linux 运维基础与应急响应：生产环境运维专家实践指南
 description: '# 09 - Linux 运维基础与应急响应：生产环境运维专家实践指南'
+summary: '# 09 - Linux 运维基础与应急响应：生产环境运维专家实践指南'
 category: linux
 tags:
 - linux
@@ -13,6 +14,8 @@ tags:
 - docker
 - opa
 - redis
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -50,8 +53,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   label: '速查卡: linux'
-created: "2026-05-23"
 ---
+
+
 
 # 09 - Linux 运维基础与应急响应：生产环境运维专家实践指南
 
@@ -846,7 +850,7 @@ docker system prune -a --volumes  # ⚠️ 强制清理，可能杀运行中容�
 free -h
 cat /proc/meminfo | grep -E "MemAvailable|MemTotal|SwapTotal"
 # 查看 OOM 事件
-dmesg | grep -i "oom-killer\|out of memory"
+dmesg | grep -i "oom-killer|out of memory"
 
 # 容器运行时问题
 systemctl status containerd        # 或 docker

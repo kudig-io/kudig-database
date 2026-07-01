@@ -1,13 +1,22 @@
 ---
-title: "Dynamic Resource Allocation"
+title: Dynamic Resource Allocation
+summary: Dynamic Resource Allocation (DRA) 是 Kubernetes 中用于动态分配硬件资源的机制。
 category: concepts
-tags: ['dra', 'scheduling', 'resource-management', 'visibility/public']
-sources: ["conceptss/"]
+tags:
+- dra
+- scheduling
+- resource-management
+- visibility/public
+tier: supporting
+sources:
+- conceptss/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: stub
 ---
+
+
 # Dynamic Resource Allocation
 
 ## 概述
@@ -22,3 +31,7 @@ Dynamic Resource Allocation (DRA) 是 Kubernetes 中用于动态分配硬件资�
 ## 相关链接
 
 - [[concepts/kubernetes.md|Kubernetes]] — 核心概念
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 金牌讲师 - 工单数字人场景
 description: '**用途**: 工单数字人 (Ticket Digital Human) 的台词设计与知识库'
+summary: '**用途**: 工单数字人 (Ticket Digital Human) 的台词设计与知识库'
 category: k8s-lecturer
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - pdb
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -34,8 +37,9 @@ prerequisites:
 - gpu-ml-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 金牌讲师 - 工单数字人场景
 

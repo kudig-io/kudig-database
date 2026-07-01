@@ -1,6 +1,7 @@
 ---
 title: CNI 网络模型与插件对比
 description: '# CNI 网络模型与插件对比'
+summary: '# CNI 网络模型与插件对比'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - dns
 - apiserver
 - kubelet
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # CNI 网络模型与插件对比
 

@@ -1,6 +1,9 @@
 ---
 title: 网络地址转换
-description: 'NAT（Network Address Translation，网络地址转换）是将一个 IP 地址和端口映射到另一个的过程。在 Kubernetes 中，NAT...'
+description: NAT（Network Address Translation，网络地址转换）是将一个 IP 地址和端口映射到另一个的过程。在 Kubernetes
+  中，NAT...
+summary: NAT（Network Address Translation，网络地址转换）是将一个 IP 地址和端口映射到另一个的过程。在 Kubernetes
+  中，NAT...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - nat
 - networking
 - kube-proxy
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 网络地址转换
 

@@ -1,11 +1,14 @@
 ---
 title: 碳资产管理与 ESG 架构设计 — 阿里云视角
 description: 'title: 碳资产管理与 ESG 架构设计'
+summary: 'title: 碳资产管理与 ESG 架构设计'
 category: general
 tags:
 - architecture
 - best-practice
 - postgresql
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 碳资产管理与 ESG 架构设计
 description: '# 碳资产管理与 ESG 架构设计 — 阿里云视角'

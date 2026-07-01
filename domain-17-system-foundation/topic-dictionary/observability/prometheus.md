@@ -1,6 +1,9 @@
 ---
 title: Prometheus
-description: 'Prometheus 是 CNCF 毕业项目，是 Kubernetes 生态中最主流的监控系统。它采用 Pull 模型采集指标数据，支持强大的 PromQL 查...'
+description: Prometheus 是 CNCF 毕业项目，是 Kubernetes 生态中最主流的监控系统。它采用 Pull 模型采集指标数据，支持强大的
+  PromQL 查...
+summary: Prometheus 是 CNCF 毕业项目，是 Kubernetes 生态中最主流的监控系统。它采用 Pull 模型采集指标数据，支持强大的 PromQL
+  查...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - observability
 - prometheus
 - monitoring
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Prometheus
 

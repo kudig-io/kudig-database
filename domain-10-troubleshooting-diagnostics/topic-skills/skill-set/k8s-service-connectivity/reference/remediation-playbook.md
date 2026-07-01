@@ -1,12 +1,20 @@
 ---
-title: "service connectivity Remediation Playbook"
+title: service connectivity Remediation Playbook
+summary: service connectivity Remediation Playbook：kubectl get svc <svc> -o jsonpath='{.spec.selector}'
 category: remediation
-skill_set: "k8s-service-connectivity"
-created: "2026-05-22"
-updated: "2026-05-22"
+tags:
+- reference
+- remediation
+- playbook
+- visibility/public
+tier: supporting
+created: '2026-05-22'
+updated: '2026-05-22'
+skill_set: k8s-service-connectivity
 last_updated: 2026-05-22
-tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
+
+
 
 # [[Service|Service]] 连通性问题修复手册
 
@@ -48,3 +56,9 @@ kubectl get svc <svc> -o yaml > svc-backup.yaml
 kubectl delete svc <svc>
 kubectl apply -f svc-backup.yaml
 ```
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

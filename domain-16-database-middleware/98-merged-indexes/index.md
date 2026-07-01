@@ -1,12 +1,20 @@
 ---
-title: "Domain 16 内容索引"
+title: Domain 16 内容索引
+summary: Domain 16 内容索引
 category: domain-16-database-middleware
-tags: ["index", "domain-16-database-middleware", "navigation"]
-sources: ["auto-generated"]
+tags:
+- index
+- domain-16-database-middleware
+- navigation
+tier: supporting
+sources:
+- auto-generated
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 ---
+
+
 
 # Domain 16 内容索引
 

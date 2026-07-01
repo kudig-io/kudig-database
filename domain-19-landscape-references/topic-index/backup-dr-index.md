@@ -1,6 +1,7 @@
 ---
 title: Backup & DR 备份与灾备知识图谱索引
 description: '## 知识图谱'
+summary: '## 知识图谱'
 category: index
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - velero
 - etcd
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,8 +35,9 @@ prerequisites:
 - cncf-ecosystem
 - etcd-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # Backup & DR 备份与灾备知识图谱索引
 

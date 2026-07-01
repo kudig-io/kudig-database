@@ -1,6 +1,7 @@
 ---
 title: 问题排查体系架构文档 [domain-10-troubleshooting-diagnostics]
 description: 'title: 问题排查体系架构文档'
+summary: 'title: 问题排查体系架构文档'
 category: fta
 tags:
 - fta
@@ -11,6 +12,8 @@ tags:
 - gpu
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -40,8 +43,9 @@ prerequisites:
 fta_id: FTA-PROBLEM_SOLVING_ARCHITECTURE-001
 component: Problem Solving Architecture
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: 问题排查体系架构文档
 description: '# 问题排查体系架构文档'

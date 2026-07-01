@@ -1,6 +1,7 @@
 ---
 title: Tekton CI/CD 流水线故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Tekton CI/CD 流水线故障排查指南'
+summary: 'title: Tekton CI/CD 流水线故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - job
 - cronjob
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -42,8 +45,9 @@ prerequisites:
 - prometheus-basics
 - policy-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Tekton CI/CD 流水线故障排查指南
 description: '# Tekton CI/CD 流水线故障排查指南'

@@ -1,6 +1,7 @@
 ---
 title: 版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution
 description: '- [深度知识引用](#102-深度知识引用)'
+summary: '- [深度知识引用](#102-深度知识引用)'
 category: skills
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - cri-o
 - gpu
 - nvidia
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -37,8 +40,9 @@ prerequisites:
 skill_id: SKILL-VERSION_MATRIX-001
 skill_name: 版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 # 版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution
 

@@ -1,12 +1,17 @@
 ---
 title: API 版本
-description: 'API Version（API 版本）是 Kubernetes API 的版本标识，表示资源的 API 演进阶段。Kubernetes 使用版本化来管理 API...'
+description: API Version（API 版本）是 Kubernetes API 的版本标识，表示资源的 API 演进阶段。Kubernetes 使用版本化来管理
+  API...
+summary: API Version（API 版本）是 Kubernetes API 的版本标识，表示资源的 API 演进阶段。Kubernetes 使用版本化来管理
+  API...
 category: dictionary
 tags:
 - k8s
 - glossary
 - api
 - platform
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # API 版本
 

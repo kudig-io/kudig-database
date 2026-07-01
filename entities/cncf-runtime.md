@@ -1,6 +1,7 @@
 ---
 title: CNCF 容器运行时与工具链项目全景
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - wasm
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 - 容器运行时与工具链项目全景
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # CNCF 容器运行时与工具链项目全景
 

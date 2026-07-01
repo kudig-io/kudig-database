@@ -1,6 +1,7 @@
 ---
 title: CNI 网络插件故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: CNI 网络插件故障排查指南'
+summary: 'title: CNI 网络插件故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - flannel
 - calico
 - coredns
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -45,8 +48,9 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - kafka-basics
-created: "2026-05-23"
 ---
+
+
 
 title: CNI 网络插件故障排查指南
 description: '# CNI 网络插件故障排查指南'

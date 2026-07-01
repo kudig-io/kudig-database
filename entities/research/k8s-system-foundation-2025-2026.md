@@ -1,3 +1,13 @@
+---
+title: K8S System Foundation 2025 2026
+summary: 'Generated: 2025-05-24 Status: Research findings from web sources + K8s documentation'
+category: entities
+tags:
+- k8s-system-foundation-2025-2026
+tier: supporting
+created: '2026-07-01'
+---
+
 # Kubernetes System Foundation Research 2025-2026
 # Hardware Trends, Linux Kernel for K8S, K8S Events & Audit
 

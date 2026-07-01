@@ -1,11 +1,17 @@
 ---
 title: Session Hot Cache
+summary: Session Hot Cache：最近一次活动（2026-06-26）：
 category: journal
-tags: [session-cache, recent-activity]
-created: "2026-05-23"
-updated: "2026-06-26"
+tags:
+- session-cache
+- recent-activity
+tier: supporting
+created: '2026-05-23'
+updated: '2026-06-26'
 last_updated: 2026-06-26
 ---
+
+
 
 # 会话热缓存
 
@@ -15,6 +21,9 @@ last_updated: 2026-06-26
 - 创建 5 个 synthesis 页面：StatefulSet×云原生存储、Helm×GitOps、SLO×可观测性、容器运行时×镜像安全、工单智能体×RAG
 - 完成 wiki-status insights 结构洞察
 - 完成全库 broken links 修复：核心内容 broken links = 0，typed relationship issues = 0
+- 完成 summary/frontmatter 批量补充：4,937 个页面新增 summary，41 个页面补齐 frontmatter
+- 完成 tier 批量分配：core=1102, supporting=1372, peripheral=2511
+- 完成 5 个 fragmented tag hub 创建并添加 434 个交叉链接，orphans 从 1788 降至 1717
 
 上一次活动（2026-05-24）：完成 kudig-database 全域深度研究（14 域全覆盖）
 

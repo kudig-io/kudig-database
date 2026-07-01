@@ -1,6 +1,7 @@
 ---
 title: cilium v0.9 Release Notes
 description: cilium v0.9 Release Notes — Kubernetes 生产运维知识库
+summary: cilium v0.9 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ingress
 - rbac
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Cilium|cilium]] v0.9 Release Notes
 

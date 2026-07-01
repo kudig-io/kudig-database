@@ -1,50 +1,55 @@
 ---
 title: CRI-O 生产指南
-description: 面向阿里云专有云及 RHEL/CentOS 节点的 CRI-O 安装、配置、Pod 生命周期管理、镜像签名验证及与 containerd 的选型对比。
+description: 面向阿里云专有云及 RHEL/CentOS 节点的 CRI-O 安装、配置、Pod 生命周期管理、镜像签名验证及与 containerd
+  的选型对比。
+summary: 面向阿里云专有云及 RHEL/CentOS 节点的 CRI-O 安装、配置、Pod 生命周期管理、镜像签名验证及与 containerd 的选型对比。
 category: container-runtime
 tags:
-  - cri-o
-  - cri
-  - podman
-  - redhat
-  - container-runtime
-  - kubernetes
-  - dedicated-cloud
-  - runtime-handler
+- cri-o
+- cri
+- podman
+- redhat
+- container-runtime
+- kubernetes
+- dedicated-cloud
+- runtime-handler
+tier: supporting
 created: '2026-06-29'
 updated: '2026-06-29'
 last_updated: 2026-06-29
 difficulty: advanced
 audience:
-  - SRE
-  - 容器平台工程师
-  - Red Hat 系专有云运维
+- SRE
+- 容器平台工程师
+- Red Hat 系专有云运维
 estimated_read_time: 19min
 intent_queries:
-  - CRI-O 生产环境安装配置
-  - CRI-O 与 containerd 区别
-  - CRI-O 镜像签名验证怎么配
+- CRI-O 生产环境安装配置
+- CRI-O 与 containerd 区别
+- CRI-O 镜像签名验证怎么配
 trigger_keywords:
-  - cri-o
-  - crio
-  - podman
-  - registries.conf
-  - runtime handler
-  - skopeo
+- cri-o
+- crio
+- podman
+- registries.conf
+- runtime handler
+- skopeo
 prerequisites:
-  - domain-13-container-runtime/03-containerd-cri-o/01-containerd-production-operations.md
-  - domain-13-container-runtime/01-containerd-deep-guide.md
-  - domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md
+- domain-13-container-runtime/03-containerd-cri-o/01-containerd-production-operations.md
+- domain-13-container-runtime/01-containerd-deep-guide.md
+- domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md
 k8s_versions:
-  - '1.28'
-  - '1.29'
-  - '1.30'
-  - '1.31'
-  - '1.32'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: KUDIG Team
-    role: contributor
+- name: KUDIG Team
+  role: contributor
 ---
+
+
 
 # CRI-O 生产指南
 

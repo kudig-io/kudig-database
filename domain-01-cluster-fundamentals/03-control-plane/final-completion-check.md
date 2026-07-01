@@ -1,6 +1,7 @@
 ---
 title: Domain-3 控制平面最终完整性检查清单
 description: '- [x] 控制平面核心架构 (01-03)'
+summary: '- [x] 控制平面核心架构 (01-03)'
 category: control-plane
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - kubelet
 - crd
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -64,8 +67,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-3 控制平面最终完整性检查清单
 

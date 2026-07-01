@@ -1,6 +1,7 @@
 ---
 title: kubelet 进阶配置 — cgroup / 资源管理 / 日志
 description: 'title: kubelet 进阶配置'
+summary: 'title: kubelet 进阶配置'
 category: general
 tags:
 - reference
@@ -10,6 +11,8 @@ tags:
 - containerd
 - webhook
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
-created: "2026-05-23"
 ---
+
+
 
 title: kubelet 进阶配置
 description: '# kubelet 进阶配置 — cgroup / 资源管理 / 日志'
@@ -379,8 +383,8 @@ journalctl -u kubelet -f --no-pager
 journalctl -u kubelet --since "2024-01-01 00:00:00" --until "2024-01-01 01:00:00"
 
 # 搜索特定关键词
-journalctl -u kubelet | grep -i "error\|failed\|panic"
-journalctl -u kubelet | grep -i "certificate\|csr"
+journalctl -u kubelet | grep -i "error|failed|panic"
+journalctl -u kubelet | grep -i "certificate|csr"
 journalctl -u kubelet | grep "syncPod"
 ```
 
@@ -427,10 +431,10 @@ cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 
 | 错误 | 原因 | 排查命令 | 解决方案 |
 |------|------|---------|---------|
-| cgroup driver 不匹配 | kubelet 和 containerd driver 不同 | `containerd config dump \| grep systemd` | 统一为 `systemd` |
+| cgroup driver 不匹配 | kubelet 和 containerd driver 不同 | `containerd config dump | grep systemd` | 统一为 `systemd` |
 | Pod 数量不足 | maxPods 限制 | `kubectl get node <node> -o jsonpath='{.status.capacity.pods}'` | 增加 `maxPods` |
 | 日志过大 | 日志级别太高 | `journalctl --disk-usage` | 调整 `--v` 级别，配置日志轮转 |
-| 内存不足 | 资源预留不足 | `kubectl describe node <node> \| grep -A 5 Allocatable` | 增加 `--kube-reserved` |
+| 内存不足 | 资源预留不足 | `kubectl describe node <node> | grep -A 5 Allocatable` | 增加 `--kube-reserved` |
 | kubelet 启动失败 | 配置文件语法错误 | `kubelet --validate --config=/var/lib/kubelet/config.yaml` | 修复配置语法 |
 | 容器运行时连接失败 | containerd 未运行 | `systemctl status containerd` | 启动 containerd |
 | 证书验证失败 | 证书过期或路径错误 | `openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates` | 续期证书 |
@@ -449,6 +453,8 @@ cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 | `podManager` | `pkg/kubelet/pod/` | Pod 管理 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[log|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

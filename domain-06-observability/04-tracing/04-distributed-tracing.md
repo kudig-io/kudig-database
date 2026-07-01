@@ -1,6 +1,9 @@
 ---
 title: 分布式追踪体系
-description: 深入解析分布式追踪：OpenTelemetry 架构、Jaeger/Knative 追踪、Span/Trace 模型、Baggage、采样策略与在 K8s 中的集成实践
+description: 深入解析分布式追踪：OpenTelemetry 架构、Jaeger/Knative 追踪、Span/Trace 模型、Baggage、采样策略与在
+  K8s 中的集成实践
+summary: 深入解析分布式追踪：OpenTelemetry 架构、Jaeger/Knative 追踪、Span/Trace 模型、Baggage、采样策略与在
+  K8s 中的集成实践
 category: domain-06-observability
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - prometheus
 - grafana
 - helm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -77,8 +82,9 @@ related_docs:
 - path: ../domain-26-service-mesh/
   type: depth
   desc: 服务网格
-created: "2026-05-23"
 ---
+
+
 
 # 04 - 分布式追踪体系 (Distributed Tracing)
 

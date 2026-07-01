@@ -1,12 +1,15 @@
 ---
 title: 专有云 (Apsara Stack) - POP 平台运维 (ASOP)
 description: 'title: 专有云 (Apsara Stack) - POP 平台运维 (ASOP)'
+summary: 'title: 专有云 (Apsara Stack) - POP 平台运维 (ASOP)'
 category: general
 tags:
 - cloud
 - multi-cloud
 - gateway
 - webhook
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
-created: "2026-05-23"
 ---
+
+
 
 title: 专有云 (Apsara Stack) - POP 平台运维 (ASOP)
 description: '# 专有云 (Apsara Stack) - POP 平台运维 (ASOP)'

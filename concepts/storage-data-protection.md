@@ -1,16 +1,21 @@
 ---
 title: 存储数据保护与灾难恢复
+summary: 存储数据保护与灾难恢复：数据保护是 Kubernetes 存储体系中最后一道防线。本文涵盖 Velero 最佳实践、不可变备份、勒索软件防护、多层灾难恢复策略以及
+  RTO/RPO 目标设定。
 category: concepts
 tags:
-  - storage
-  - backup
-  - disaster-recovery
-  - velero
-  - k8s
+- storage
+- backup
+- disaster-recovery
+- velero
+- k8s
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # 存储数据保护与灾难恢复
 

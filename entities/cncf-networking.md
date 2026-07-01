@@ -1,6 +1,7 @@
 ---
 title: CNCF 网络与服务网格项目全景
 description: '# CNCF 网络与服务网格项目全景'
+summary: '# CNCF 网络与服务网格项目全景'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - envoy
 - cilium
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - service-mesh-basics
 - ebpf-basics
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 # CNCF 网络与服务网格项目全景
 

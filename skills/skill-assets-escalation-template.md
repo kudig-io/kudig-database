@@ -1,6 +1,7 @@
 ---
 title: Escalation Template
 description: '| **安全事件** | 结合其他安全告警，怀疑节点被入侵导致的异常 |'
+summary: '| **安全事件** | 结合其他安全告警，怀疑节点被入侵导致的异常 |'
 category: skills
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - skill
 - etcd
 - apiserver
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Escalation Template
 

@@ -1,6 +1,7 @@
 ---
 title: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 description: '- 运维工程师'
+summary: '- 运维工程师'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - containerd
 - docker
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -45,8 +48,9 @@ prerequisites:
 skill_id: SKILL-19_NODE_RESOURCE_PRESSURE-001
 skill_name: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 ---
 skill_id: "SKILL-NODE-002"
@@ -471,7 +475,7 @@ echo 'query: predict_linear(node_filesystem_avail_bytes[1h], 3600) < 0'
 **Step D2.7**: 检查内核 OOM Killer 日志
 - **命令**:
   ```bash
-  ssh <node-ip> "dmesg -T | grep -i 'killed process\|oom-killer\|out of memory' | tail -20"
+  ssh <node-ip> "dmesg -T | grep -i 'killed process|oom-killer|out of memory' | tail -20"
   ```
 - **超时**: 10s
 - **预期输出模式**: OOM Killer 触发的进程列表
@@ -484,7 +488,7 @@ echo 'query: predict_linear(node_filesystem_avail_bytes[1h], 3600) < 0'
 **Step D2.8**: 检查 kubelet 配置中的驱逐阈值
 - **命令**:
   ```bash
-  ssh <node-ip> "cat /var/lib/kubelet/config.yaml | grep -A 20 'evictionHard\|evictionSoft'"
+  ssh <node-ip> "cat /var/lib/kubelet/config.yaml | grep -A 20 'evictionHard|evictionSoft'"
   ```
 - **超时**: 10s
 - **预期输出模式**: kubelet 驱逐阈值配置

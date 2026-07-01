@@ -1,6 +1,7 @@
 ---
 title: 03 - Terway 使用指南 (Usage Guide)
 description: '# 03 - Terway 使用指南 (Usage Guide)'
+summary: '# 03 - Terway 使用指南 (Usage Guide)'
 category: terway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flannel
 - calico
 - coredns
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -39,8 +42,9 @@ prerequisites:
 - cni-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # 03 - Terway 使用指南 (Usage Guide)
 

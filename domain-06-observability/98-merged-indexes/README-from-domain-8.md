@@ -1,12 +1,15 @@
 ---
 title: Observability Domain (可观测性领域)
 description: 'description: ''- **01** - 可观测性架构体系概述 ⭐增强版⭐'''
+summary: 'description: ''- **01** - 可观测性架构体系概述 ⭐增强版⭐'''
 category: general
 tags:
 - k8s
 - kubelet
 - prometheus
 - ebpf
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - observability-basics
 - prometheus-basics
 - ebpf-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Observability Domain (可观测性领域)

@@ -1,6 +1,7 @@
 ---
 title: OPCo 策略容器
-description: 'Open Policy Containers（OPCo）将安全策略打包为 OCI 镜像，通过标准容器 Registry 分发和管理策略，实现策略的版本控制和跨平...'
+description: Open Policy Containers（OPCo）将安全策略打包为 OCI 镜像，通过标准容器 Registry 分发和管理策略，实现策略的版本控制和跨平...
+summary: Open Policy Containers（OPCo）将安全策略打包为 OCI 镜像，通过标准容器 Registry 分发和管理策略，实现策略的版本控制和跨平...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - security
 - policy
 - oci
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # OPCo 策略容器（Open Policy Containers）
 

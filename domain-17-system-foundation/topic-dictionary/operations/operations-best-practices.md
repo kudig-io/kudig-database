@@ -1,6 +1,7 @@
 ---
 title: 01 - Kubernetes 生产环境运维最佳实践字典
 description: '# 01 - Kubernetes 生产环境运维最佳实践字典'
+summary: '# 01 - Kubernetes 生产环境运维最佳实践字典'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - istio
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -42,9 +45,9 @@ prerequisites:
 - policy-basics
 - backup-basics
 - logging-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 01 - [[Kubernetes|Kubernetes]] 生产环境运维最佳实践字典
 

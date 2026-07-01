@@ -1,6 +1,7 @@
 ---
 title: Microcks (entities)
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - kafka
 - crd
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - kafka-basics
-created: "2026-05-23"
 ---
+
+
 
 # Microcks
 

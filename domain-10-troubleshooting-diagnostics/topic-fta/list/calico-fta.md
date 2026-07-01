@@ -1,6 +1,7 @@
 ---
 title: Calico Fta
 description: 'description: ''TE["顶事件: Calico 网络异常<br/>Pod 无法通信 / 网络策略不生效 / BGP 会话断开"]'''
+summary: 'description: ''TE["顶事件: Calico 网络异常<br/>Pod 无法通信 / 网络策略不生效 / BGP 会话断开"]'''
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - networkpolicy
 - webhook
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 fta_id: FTA-CALICO-001
 component: Calico
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 # Calico Fta
 

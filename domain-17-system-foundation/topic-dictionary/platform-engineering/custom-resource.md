@@ -1,6 +1,7 @@
 ---
 title: 自定义资源 CRD
-description: 'Custom Resource（CR）是 Kubernetes 的核心扩展机制，通过 CRD（CustomResourceDefinition）注册自定义资源类...'
+description: Custom Resource（CR）是 Kubernetes 的核心扩展机制，通过 CRD（CustomResourceDefinition）注册自定义资源类...
+summary: Custom Resource（CR）是 Kubernetes 的核心扩展机制，通过 CRD（CustomResourceDefinition）注册自定义资源类...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - platform-engineering
 - crd
 - extension
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # 自定义资源 CRD（Custom Resource）
 

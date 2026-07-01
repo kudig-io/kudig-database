@@ -1,6 +1,7 @@
 ---
 title: 54 - CoreDNS Corefile 配置详解 (Corefile Configuration)
 description: '# 54 - CoreDNS Corefile 配置详解 (Corefile Configuration)'
+summary: '# 54 - CoreDNS Corefile 配置详解 (Corefile Configuration)'
 category: networking
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - coredns
 - flannel
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -60,8 +63,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 54 - [[CoreDNS|CoreDNS]] Corefile 配置详解 (Corefile Configuration)
 

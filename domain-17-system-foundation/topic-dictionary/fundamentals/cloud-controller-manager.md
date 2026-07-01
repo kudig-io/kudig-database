@@ -1,6 +1,7 @@
 ---
 title: Cloud Controller Manager（云控制器管理器）
 description: '# Cloud Controller Manager（云控制器管理器）'
+summary: '# Cloud Controller Manager（云控制器管理器）'
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - terminology
 - controller-manager
 - rbac
+tier: core
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -26,9 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # Cloud Controller Manager（云控制器管理器）
 

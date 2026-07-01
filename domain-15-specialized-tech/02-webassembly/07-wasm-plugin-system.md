@@ -1,6 +1,7 @@
 ---
 title: Wasm 插件系统 (Wasm Plugin System)
 description: 基于 WebAssembly 的插件系统通过沙箱安全隔离与高性能执行，实现网络代理、API 网关和服务网格的可编程扩展。
+summary: 基于 WebAssembly 的插件系统通过沙箱安全隔离与高性能执行，实现网络代理、API 网关和服务网格的可编程扩展。
 category: webassembly-cloud-native
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - opa
 - redis
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Wasm 插件系统 (Wasm Plugin System)
 

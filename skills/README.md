@@ -1,6 +1,7 @@
 ---
 title: FTA 故障树清单索引 (skills)
 description: '## 概述'
+summary: '## 概述'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - coredns
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 # FTA 故障树清单索引
 

@@ -1,6 +1,7 @@
 ---
 title: 纳米材料架构设计 — 阿里云视角
 description: 'title: 纳米材料架构设计'
+summary: 'title: 纳米材料架构设计'
 category: general
 tags:
 - architecture
@@ -10,6 +11,8 @@ tags:
 - job
 - gpu
 - nvidia
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - prometheus-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 纳米材料架构设计
 description: '# 纳米材料架构设计 — 阿里云视角'

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Networking Domain Guide
 description: Kubernetes Networking Domain Guide — Kubernetes 生产运维知识库
+summary: Kubernetes Networking Domain Guide — Kubernetes 生产运维知识库
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - reference
 - cilium
 - flannel
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes Networking Domain Guide
 
@@ -80,6 +84,8 @@ Distilled from domain-03-networking-traffic (39 documents, Kubernetes v1.28-v1.3
 - **Gateway API**: Next-generation, multi-protocol (HTTP, TCP, UDP, gRPC), multi-tenant, role-separated
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[cilium]] — Cilium
 - [[grpc]] — gRPC

@@ -1,6 +1,7 @@
 ---
 title: Docker 容器生命周期管理
 description: '# Docker 容器生命周期管理'
+summary: '# Docker 容器生命周期管理'
 category: docker
 tags:
 - docker
@@ -10,6 +11,8 @@ tags:
 - gpu
 - nvidia
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
-created: "2026-05-23"
 ---
+
+
 
 # Docker 容器生命周期管理
 

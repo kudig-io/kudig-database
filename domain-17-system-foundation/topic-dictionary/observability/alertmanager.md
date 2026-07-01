@@ -1,12 +1,15 @@
 ---
 title: 告警管理器
-description: 'Alertmanager 是 Prometheus 生态中的告警处理组件。它接收来自 Prometheus 的告警，执行分组、抑制、静默和路由逻辑，最终通过多种...'
+description: Alertmanager 是 Prometheus 生态中的告警处理组件。它接收来自 Prometheus 的告警，执行分组、抑制、静默和路由逻辑，最终通过多种...
+summary: Alertmanager 是 Prometheus 生态中的告警处理组件。它接收来自 Prometheus 的告警，执行分组、抑制、静默和路由逻辑，最终通过多种...
 category: dictionary
 tags:
 - k8s
 - glossary
 - observability
 - alertmanager
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 告警管理器
 

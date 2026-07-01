@@ -1,22 +1,26 @@
 ---
-title: "ConfigMap与Secret问题 — 远程顾问对话脚本"
-category: "troubleshooting"
-tags: ["security", "remote-consultant"]
-created: "2026-05-23"
-updated: "2026-05-23"
+title: ConfigMap与Secret问题 — 远程顾问对话脚本
+summary: ConfigMap与Secret问题的远程顾问对话脚本，覆盖配置加载失败、Secret解码、热更新。
+category: troubleshooting
+tags:
+- security
+- remote-consultant
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
-dialogue_id: "DIALOGUE-K8S_CONFIG_SECRET"
-skill_id: "k8s-config-secret"
-version: "1.0.0"
-role: "remote-consultant"
-language: "zh"
-summary: "ConfigMap与Secret问题的远程顾问对话脚本，覆盖配置加载失败、Secret解码、热更新。"
+dialogue_id: DIALOGUE-K8S_CONFIG_SECRET
+skill_id: k8s-config-secret
+version: 1.0.0
+role: remote-consultant
+language: zh
 relationships:
-  - target: "[[entities/deployment.md]]"
-    type: uses
-  - target: "[[entities/helm.md]]"
-    type: uses
+- target: '[[entities/deployment.md]]'
+  type: uses
+- target: '[[entities/helm.md]]'
+  type: uses
 ---
+
 
 # ConfigMap/Secret配置错误问题 — 远程顾问对话脚本
 

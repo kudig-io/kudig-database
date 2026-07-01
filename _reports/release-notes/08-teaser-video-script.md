@@ -1,6 +1,7 @@
 ---
 title: kudig-database 60 秒预告片脚本
 description: '| 画面 | 分屏画面: 左侧是凌晨亮着的电脑屏幕 (运维工位), 右侧是密密麻麻的浏览器标签页 (搜索 K8s 文档) |'
+summary: '| 画面 | 分屏画面: 左侧是凌晨亮着的电脑屏幕 (运维工位), 右侧是密密麻麻的浏览器标签页 (搜索 K8s 文档) |'
 category: general
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - istio
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # kudig-database 60 秒预告片脚本
 

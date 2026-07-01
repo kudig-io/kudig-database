@@ -1,6 +1,7 @@
 ---
 title: gVisor 容器沙箱深度解析
 description: gVisor 用户态内核架构、K8s 集成、安全模型、性能分析与生产部署指南
+summary: gVisor 用户态内核架构、K8s 集成、安全模型、性能分析与生产部署指南
 category: cloud-native-security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kata
 - containerd
 - opa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -55,8 +58,9 @@ cross_refs:
 - type: domain
   path: ../domain-13-container-runtime/
   label: 容器运行时
-created: "2026-05-23"
 ---
+
+
 
 # gVisor 容器沙箱深度解析
 

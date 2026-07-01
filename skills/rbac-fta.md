@@ -1,6 +1,7 @@
 ---
 title: RBAC 异常故障树分析 (skills)
 description: ROLE_OR --> ROLE3[Role 配置错误]
+summary: ROLE_OR --> ROLE3[Role 配置错误]
 category: skills
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - webhook
 - job
 - cronjob
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 fta_id: FTA-RBAC-001
 component: Rbac
 severity: medium
-created: "2026-05-23"
 ---
+
+
 
 # RBAC 异常故障树分析
 

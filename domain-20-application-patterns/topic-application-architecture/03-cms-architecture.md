@@ -1,6 +1,7 @@
 ---
 title: 内容管理系统 (CMS) Kubernetes 生产架构设计
 description: 'title: 内容管理系统 CMS 架构设计'
+summary: 'title: 内容管理系统 CMS 架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - job
 - cronjob
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 内容管理系统 CMS 架构设计
 description: '# 内容管理系统 (CMS) [[Kubernetes|Kubernetes]] 生产架构设计'

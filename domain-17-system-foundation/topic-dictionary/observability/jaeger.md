@@ -1,6 +1,9 @@
 ---
 title: Jaeger
-description: 'Jaeger 是 CNCF 毕业项目，提供分布式追踪（Distributed Tracing）功能，用于监控和排查微服务架构中的请求链路。它兼容 OpenTel...'
+description: Jaeger 是 CNCF 毕业项目，提供分布式追踪（Distributed Tracing）功能，用于监控和排查微服务架构中的请求链路。它兼容
+  OpenTel...
+summary: Jaeger 是 CNCF 毕业项目，提供分布式追踪（Distributed Tracing）功能，用于监控和排查微服务架构中的请求链路。它兼容
+  OpenTel...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +12,8 @@ tags:
 - tracing
 - observability
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Jaeger
 

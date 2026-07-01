@@ -1,6 +1,7 @@
 ---
 title: 控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI
 description: '# 控制平面深度剖析'
+summary: '# 控制平面深度剖析'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cni
 - etcd
 - controller-manager
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 控制平面深度剖析
 

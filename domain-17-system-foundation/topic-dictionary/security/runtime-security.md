@@ -1,6 +1,7 @@
 ---
 title: 运行时安全
 description: '# 运行时安全'
+summary: '# 运行时安全'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - webhook
 - ebpf
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - ebpf-basics
-created: "2026-05-23"
 ---
+
+
 
 # 运行时安全
 

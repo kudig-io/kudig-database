@@ -1,6 +1,9 @@
 ---
 title: Spiderpool IP 池管理
-description: 'Spiderpool 是 DaoCloud 开源的 CNCF Sandbox 项目，为 Kubernetes 提供 Underlay 网络的 IP 地址管理（I...'
+description: Spiderpool 是 DaoCloud 开源的 CNCF Sandbox 项目，为 Kubernetes 提供 Underlay 网络的
+  IP 地址管理（I...
+summary: Spiderpool 是 DaoCloud 开源的 CNCF Sandbox 项目，为 Kubernetes 提供 Underlay 网络的 IP
+  地址管理（I...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - networking
 - ipam
 - cni
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Spiderpool IP 池管理（Spiderpool）
 

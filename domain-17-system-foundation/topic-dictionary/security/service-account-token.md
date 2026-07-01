@@ -1,12 +1,17 @@
 ---
 title: 服务账号令牌
-description: 'ServiceAccount Token 是 Kubernetes 为 Pod 自动颁发的认证令牌，允许 Pod 向 API Server 证明身份。从 K8s...'
+description: ServiceAccount Token 是 Kubernetes 为 Pod 自动颁发的认证令牌，允许 Pod 向 API Server
+  证明身份。从 K8s...
+summary: ServiceAccount Token 是 Kubernetes 为 Pod 自动颁发的认证令牌，允许 Pod 向 API Server 证明身份。从
+  K8s...
 category: dictionary
 tags:
 - k8s
 - glossary
 - security
 - service-account
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 服务账号令牌
 

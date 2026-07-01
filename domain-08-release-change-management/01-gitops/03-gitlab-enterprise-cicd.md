@@ -1,6 +1,7 @@
 ---
 title: GitLab CI/CD 企业级流水线自动化平台
 description: 'description: ''- [一、概述](#一概述)'''
+summary: 'description: ''- [一、概述](#一概述)'''
 category: general
 tags:
 - gitops
@@ -13,6 +14,8 @@ tags:
 - argocd
 - flux
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: GitLab CI/CD 企业级流水线自动化平台
 description: '- [一、概述](#一概述)'

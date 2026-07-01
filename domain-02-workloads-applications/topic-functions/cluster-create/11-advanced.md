@@ -1,6 +1,7 @@
 ---
 title: '集群新建进阶: 关键机制详解'
 description: 'title: 集群新建进阶关键机制详解'
+summary: 'title: 集群新建进阶关键机制详解'
 category: general
 tags:
 - reference
@@ -13,6 +14,8 @@ tags:
 - calico
 - coredns
 - containerd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 集群新建进阶关键机制详解
 description: '# 集群新建进阶: 关键机制详解'
@@ -332,6 +336,8 @@ spec:
 ```
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

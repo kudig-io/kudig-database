@@ -1,17 +1,25 @@
 ---
-dialogue_id: "DIALOGUE-HEADLESS-001"
-skill_id: "SKILL-HEADLESS-001"
-role: "remote-consultant"
-language: "zh"
-severity: "medium"
-status: "reviewed"
+title: StatefulSet Pod 域名解析失败 — 远程顾问对话脚本
+summary: StatefulSet Pod 域名解析失败 — 远程顾问对话脚本：kubectl get svc -n <namespace>
+category: dialogue
+tags:
+- dialogue
+- remote-consultant
+- troubleshooting
+- visibility/public
+tier: supporting
 created: 2026-05-21
 updated: 2026-05-21
+dialogue_id: DIALOGUE-HEADLESS-001
+skill_id: SKILL-HEADLESS-001
+role: remote-consultant
+language: zh
+severity: medium
+status: reviewed
 last_updated: 2026-05-21
-title: "StatefulSet Pod 域名解析失败 — 远程顾问对话脚本"
-category: dialogue
-tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
+
+
 
 # StatefulSet Pod 域名解析失败 — 远程顾问对话脚本
 
@@ -231,3 +239,7 @@ kubectl exec <pod-name> -n <namespace> -- nslookup <pod-name>.<svc-name>.<namesp
 
 - [[concepts/headless-service.md|Headless Service]]
 - [[concepts/statefulset.md|StatefulSet]]
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

@@ -1,6 +1,7 @@
 ---
 title: Chaos Mesh 企业级部署
 description: '# Chaos Mesh 企业级部署'
+summary: '# Chaos Mesh 企业级部署'
 category: domain
 tags:
 - chaos-mesh
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - rbac
 - crd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - sre-practices
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 # Chaos Mesh 企业级部署
 

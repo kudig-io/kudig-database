@@ -1,6 +1,7 @@
 ---
 title: Agent 作为技术赋能新方式：设计思路与落地路径 (domain-14-ai-ml-infra)
 description: 'title: Agent 作为技术赋能新方式：设计思路与落地路径'
+summary: 'title: Agent 作为技术赋能新方式：设计思路与落地路径'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - networkpolicy
 - ebpf
 - llm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - iac-basics
 - ebpf-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Agent 作为技术赋能新方式：设计思路与落地路径
 description: '# Agent 作为技术赋能新方式：设计思路与落地路径'

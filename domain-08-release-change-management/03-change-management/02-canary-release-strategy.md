@@ -1,6 +1,7 @@
 ---
 title: 金丝雀发布策略与回滚
 description: 面向阿里云/专有云 K8s 的金丝雀发布方案，涵盖 Argo Rollouts、Istio 流量分割、指标分析、自动回滚与生产最佳实践。
+summary: 面向阿里云/专有云 K8s 的金丝雀发布方案，涵盖 Argo Rollouts、Istio 流量分割、指标分析、自动回滚与生产最佳实践。
 category: release-management
 tags:
 - k8s
@@ -11,6 +12,9 @@ tags:
 - gitops
 - alicloud
 - apsara-stack
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -44,9 +48,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # 金丝雀发布策略与回滚
 

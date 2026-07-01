@@ -1,12 +1,15 @@
 ---
 title: domain-37-edge-computing MOC
 description: domain-37-edge-computing 知识域导航页，覆盖 12 篇文档
+summary: domain-37-edge-computing 知识域导航页，覆盖 12 篇文档
 category: moc
 tags:
 - k8s
 - moc
 - edge
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 - tech
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-37-edge-computing MOC
 

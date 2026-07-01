@@ -1,6 +1,7 @@
 ---
 title: Security & Compliance Open Source Projects Index
 description: '# 安全合规开源项目索引'
+summary: '# 安全合规开源项目索引'
 category: reference
 tags:
 - security
@@ -9,6 +10,8 @@ tags:
 - index
 - opa
 - falco
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - rbac-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # 安全合规开源项目索引
 

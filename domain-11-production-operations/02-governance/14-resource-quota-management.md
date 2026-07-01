@@ -1,6 +1,7 @@
 ---
 title: 14-资源配额管理
 description: '# 14-资源配额管理'
+summary: '# 14-资源配额管理'
 category: production-operations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - job
 - cronjob
 - crd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -46,8 +49,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/resource-quota-fta.md
   label: '故障树: resource-quota'
-created: "2026-05-23"
 ---
+
+
 
 # 14-资源配额管理
 

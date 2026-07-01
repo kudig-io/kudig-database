@@ -1,6 +1,7 @@
 ---
 title: 04 - Higress 云原生 API 网关企业级实践
 description: '# 04 - Higress 云原生 API 网关企业级实践'
+summary: '# 04 - Higress 云原生 API 网关企业级实践'
 category: cloud-native-api-gateway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - istio
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -55,8 +58,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/higress-fta.md
   label: '故障树: higress'
-created: "2026-05-23"
 ---
+
+
 
 # 04 - Higress 云原生 API 网关企业级实践
 

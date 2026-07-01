@@ -1,6 +1,7 @@
 ---
 title: topic-fta MOC
 description: topic-fta 专题导航页，覆盖 79 篇文档
+summary: topic-fta 专题导航页，覆盖 79 篇文档
 category: moc
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flannel
 - calico
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: advanced
 reading_level: advanced
@@ -45,8 +48,9 @@ prerequisites:
 fta_id: FTA-MOC-001
 component: Moc
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 # topic-fta MOC
 

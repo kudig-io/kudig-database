@@ -1,6 +1,8 @@
 ---
 title: K8s 术语表索引
-description: '| 配置管理 | 6 | [[entities/configuration-terms.md|configuration-terms]] |'
+description: '| 配置管理 | 6 | [[entities/configuration-terms.md|configuration-terms]]
+  |'
+summary: '| 配置管理 | 6 | [[entities/configuration-terms.md|configuration-terms]] |'
 category: references
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - glossary
 - index
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,8 +26,9 @@ trigger_keywords:
 - 术语表索引
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8s 术语表索引（Glossary Index）
 

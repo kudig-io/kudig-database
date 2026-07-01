@@ -1,6 +1,7 @@
 ---
 title: 08-CIS基准合规检查
 description: 'description: ''<!-- chunk: 📋 概述'' -->## 📋 概述'''
+summary: 'description: ''<!-- chunk: 📋 概述'' -->## 📋 概述'''
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - prometheus
 - opa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 08-CIS基准合规检查
 description: '<!-- chunk: 📋 概述' -->## 📋 概述'

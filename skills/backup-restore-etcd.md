@@ -1,6 +1,9 @@
 ---
 title: Backup and Restore etcd
-description: '- [[entities/k8s-storage-ecosystem.md|k8s-storage-ecosystem]] — 存储体系：PV、PVC、StorageClass、CSI 驱动与灾备恢复'
+description: '- [[entities/k8s-storage-ecosystem.md|k8s-storage-ecosystem]] — 存储体系：PV、PVC、StorageClass、CSI
+  驱动与灾备恢复'
+summary: '- [[entities/k8s-storage-ecosystem.md|k8s-storage-ecosystem]] — 存储体系：PV、PVC、StorageClass、CSI
+  驱动与灾备恢复'
 category: skills
 tags:
 - k8s
@@ -10,6 +13,8 @@ tags:
 - snapshot
 - disaster-recovery
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # Backup and Restore etcd
 

@@ -1,12 +1,20 @@
 ---
-title: "etcd 与 containerd 存储架构"
+title: etcd 与 containerd 存储架构
+summary: 'etcd 与 containerd 存储架构：Kubernetes 集群有两个关键的存储层:'
 category: synthesis
-tags: [synthesis, etcd, containerd, storage]
+tags:
+- synthesis
+- etcd
+- containerd
+- storage
+tier: supporting
 sources: []
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # etcd 与 containerd 存储架构
 

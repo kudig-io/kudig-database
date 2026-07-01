@@ -1,11 +1,14 @@
 ---
 title: domain-05-security-compliance MOC [98-merged-indexes]
 description: domain-05-security-compliance 知识域导航页，覆盖 12 篇文档
+summary: domain-05-security-compliance 知识域导航页，覆盖 12 篇文档
 category: moc
 tags:
 - k8s
 - moc
 - security
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - rbac-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-05-security-compliance MOC
 

@@ -1,6 +1,7 @@
 ---
 title: 04 - 探针与健康检查事件
 description: '- probe-health-check-events的最佳实践'
+summary: '- probe-health-check-events的最佳实践'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - postgresql
 - hpa
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - prometheus-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:
@@ -542,7 +546,7 @@ kubectl get pod java-app-5d8c9f-kl3mp -o yaml | yq '.spec.containers[0] | {start
 **4. 检查资源限制**
 ```bash
 # 资源不足会延长启动时间
-kubectl describe pod java-app-5d8c9f-kl3mp | grep -A 5 "Limits\|Requests"
+kubectl describe pod java-app-5d8c9f-kl3mp | grep -A 5 "Limits|Requests"
 
 # 查看实际资源使用
 kubectl top pod java-app-5d8c9f-kl3mp

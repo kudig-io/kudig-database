@@ -1,6 +1,7 @@
 ---
 title: 'Day 14: 存储体系 + 综合实践'
 description: '# Day 14: 存储体系 + 综合实践'
+summary: '# Day 14: 存储体系 + 综合实践'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ingress
 - networkpolicy
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 14: 存储体系 + 综合实践
 

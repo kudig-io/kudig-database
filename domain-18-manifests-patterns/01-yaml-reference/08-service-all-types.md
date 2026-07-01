@@ -1,6 +1,7 @@
 ---
 title: 08 - Service 全类型 YAML 配置参考
 description: 'title: 08 - Service 全类型 YAML 配置参考'
+summary: 'title: 08 - Service 全类型 YAML 配置参考'
 category: general
 tags:
 - yaml
@@ -13,6 +14,8 @@ tags:
 - coredns
 - helm
 - opa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 08 - [[Service|Service]] 全类型 YAML 配置参考
 description: '# 08 - Service 全类型 YAML 配置参考'
@@ -2018,5 +2022,7 @@ aws s3 ls s3://my-lb-logs/prod/secure-web/
 - 10-ingress-ingressclass
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]

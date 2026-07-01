@@ -1,6 +1,7 @@
 ---
 title: '场景: Service Mesh 运维'
 description: Istio/Envoy Service Mesh 的部署、运维和故障排查
+summary: Istio/Envoy Service Mesh 的部署、运维和故障排查
 category: scenario
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - ingress
 - gateway
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-20'
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # 场景: [[Service|Service]]Service Mesh）|Service Mesh]] 运维
 

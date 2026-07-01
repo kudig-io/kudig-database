@@ -1,11 +1,14 @@
 ---
 title: topic-application-architecture MOC
 description: topic-application-architecture 专题导航页，覆盖 96 篇文档
+summary: topic-application-architecture 专题导航页，覆盖 96 篇文档
 category: moc
 tags:
 - k8s
 - moc
 - architecture
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 # topic-application-architecture [[MOC|MOC]]
 

@@ -1,6 +1,7 @@
 ---
 title: containerd 灾难恢复
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - crd
 - operator
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 - 灾难恢复
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # containerd 灾难恢复
 

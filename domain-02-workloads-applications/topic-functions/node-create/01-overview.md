@@ -1,6 +1,8 @@
 ---
 title: Kubernetes 集群删除逻辑 — 基于官方代码分析 (topic-code-analysis)
-description: '| 配置加载 | `cmd/kubeadm/app/util/config/initconfiguration.go` | 配置解析与默认值 |'
+description: '| 配置加载 | `cmd/kubeadm/app/util/config/initconfiguration.go` | 配置解析与默认值
+  |'
+summary: '| 配置加载 | `cmd/kubeadm/app/util/config/initconfiguration.go` | 配置解析与默认值 |'
 category: general
 tags:
 - reference
@@ -11,6 +13,8 @@ tags:
 - controller-manager
 - containerd
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +37,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Kubernetes 集群删除逻辑 — 基于官方代码分析
 category: cluster-delete
@@ -553,6 +558,10 @@ kubeadm reset --dry-run  # ⚠️ 清理节点所有 K8s 配置
 - [`InteractivelyConfirmAction`](02-reset.md) — 交互式确认操作
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[README|README]]
 - [[scripts/man/INSTALL.md|INSTALL]]

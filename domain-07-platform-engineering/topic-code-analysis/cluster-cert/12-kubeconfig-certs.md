@@ -1,6 +1,9 @@
 ---
 title: kubeconfig 中的证书嵌入逻辑 (topic-code-analysis)
-description: 'description: ''| client-go 配置 | `staging/src/k8s.io/client-go/tools/clientcmd/` | kubeconfig'
+description: 'description: ''| client-go 配置 | `staging/src/k8s.io/client-go/tools/clientcmd/`
+  | kubeconfig'
+summary: 'description: ''| client-go 配置 | `staging/src/k8s.io/client-go/tools/clientcmd/`
+  | kubeconfig'
 category: general
 tags:
 - reference
@@ -10,6 +13,8 @@ tags:
 - scheduler
 - controller-manager
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +35,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
-created: "2026-05-23"
 ---
+
+
 
 title: kubeconfig 中的证书嵌入逻辑
 description: '| client-go 配置 | `staging/src/k8s.io/client-go/tools/clientcmd/` | kubeconfig
@@ -441,6 +447,8 @@ kubeadm init phase kubeconfig admin --config kubeadm-config.yaml
 - [`X509 Authenticator`](08-rbac-mapping.md) — 证书身份提取
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

@@ -1,14 +1,22 @@
 ---
-scenario_id: "MULTI-006"
-type: "multi-fault"
-skills: ['09-rbac-quota-failure', '10-image-pull-failure']
-created: "2026-05-23"
-updated: "2026-05-23"
-last_updated: 2026-05-23
-title: "RBAC权限不足 + 镜像拉取失败并发"
+title: RBAC权限不足 + 镜像拉取失败并发
+summary: RBAC权限不足 + 镜像拉取失败并发：CI/CD流水线部署失败，Pod报告ImagePullBackOff，同时服务账户无权限创建ConfigMap。
 category: uncategorized
-tags: ["uncategorized", "visibility/public"]
+tags:
+- uncategorized
+- visibility/public
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+scenario_id: MULTI-006
+type: multi-fault
+skills:
+- 09-rbac-quota-failure
+- 10-image-pull-failure
+last_updated: 2026-05-23
 ---
+
+
 
 # RBAC权限不足 + 镜像拉取失败并发
 
@@ -45,3 +53,7 @@ ServiceAccount缺少imagePullSecret导致镜像拉取失败，同时缺少create
 2. 配置级联告警（当多个关联指标同时异常时触发）
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

@@ -1,7 +1,11 @@
 ---
 title: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
-description: Kubernetes 集群升级是运维中最具风险的操作之一，涉及控制平面组件（API Server、etcd、Scheduler、Controller Manager）、节点组件（kubelet、kube-proxy、容器运行时）、插件（CNI、CSI、Ingress
-  Controller）以及工作负载 API 版本的多层兼容性。升级过程中的版本偏移（Version Skew）、废弃 API、证书过
+description: Kubernetes 集群升级是运维中最具风险的操作之一，涉及控制平面组件（API Server、etcd、Scheduler、Controller
+  Manager）、节点组件（kubelet、kube-proxy、容器运行时）、插件（CNI、CSI、Ingress Controller）以及工作负载 API
+  版本的多层兼容性。升级过程中的版本偏移（Version Skew）、废弃 API、证书过
+summary: Kubernetes 集群升级是运维中最具风险的操作之一，涉及控制平面组件（API Server、etcd、Scheduler、Controller
+  Manager）、节点组件（kubelet、kube-proxy、容器运行时）、插件（CNI、CSI、Ingress Controller）以及工作负载 API
+  版本的多层兼容性。升级过程中的版本偏移（Version Skew）、废弃 API、证书过
 category: control-plane
 tags:
 - k8s
@@ -14,6 +18,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -68,8 +74,9 @@ cross_refs:
   path: ./11-control-plane-failure.md
   label: etcd 与控制平面故障诊断
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 # 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 
@@ -242,7 +249,7 @@ etcdctl endpoint health --cluster
 kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=NodeNotReady --sort-by='.lastTimestamp' | tail -20
 
 # 查看 kubeadm 日志（如在控制平面节点上）
-# journalctl -u kubelet -n 200 | grep -i "upgrade\|version\|deprecated"
+# journalctl -u kubelet -n 200 | grep -i "upgrade|version|deprecated"
 ```
 
 ### 3.2 严重性分级

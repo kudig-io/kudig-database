@@ -1,6 +1,7 @@
 ---
 title: SchemaHero (entities)
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - postgresql
 - crd
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # SchemaHero
 

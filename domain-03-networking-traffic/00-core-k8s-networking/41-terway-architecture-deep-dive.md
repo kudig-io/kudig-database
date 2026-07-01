@@ -1,6 +1,7 @@
 ---
 title: Terway 架构深度解析
 description: '# Terway 架构深度解析'
+summary: '# Terway 架构深度解析'
 category: entities
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - networkpolicy
 - crd
 - ebpf
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 # Terway 架构深度解析
 

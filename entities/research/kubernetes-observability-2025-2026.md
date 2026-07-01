@@ -1,3 +1,13 @@
+---
+title: Kubernetes Observability 2025 2026
+summary: 'First major release in 7 years. Key features:'
+category: entities
+tags:
+- kubernetes-observability-2025-2026
+tier: supporting
+created: '2026-07-01'
+---
+
 # Kubernetes Observability 2025-2026: Research Findings
 
 ## 1. OpenTelemetry (OTel) Evolution

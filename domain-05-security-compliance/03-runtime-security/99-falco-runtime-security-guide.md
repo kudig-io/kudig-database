@@ -1,6 +1,7 @@
 ---
 title: Falco 运行时安全监控深度实践
 description: '# Falco 运行时安全监控深度实践'
+summary: '# Falco 运行时安全监控深度实践'
 category: cloud-native-security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - helm
 - containerd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -56,8 +59,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # [[Falco|Falco]] 运行时安全监控深度实践
 
@@ -989,7 +993,7 @@ for pod in $(kubectl get pods -n falco -l app.kubernetes.io/name=falco -o name);
 done
 
 echo "=== Recent Alerts ==="
-kubectl logs -n falco -l app.kubernetes.io/name=falco --tail=30 | grep -i "alert\|warning\|critical"
+kubectl logs -n falco -l app.kubernetes.io/name=falco --tail=30 | grep -i "alert|warning|critical"
 echo ""
 
 echo "=== Event Drop Statistics ==="

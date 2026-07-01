@@ -1,6 +1,7 @@
 ---
 title: 'Domain 18: 生产环境运维最佳实践 (Production Operations Best Practices)'
 description: '# Domain 18: 生产环境运维最佳实践 (Production Operations Best Practices)'
+summary: '# Domain 18: 生产环境运维最佳实践 (Production Operations Best Practices)'
 category: production-operations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - flux
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ prerequisites:
 - iac-basics
 - etcd-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # Domain 18: 生产环境运维最佳实践 (Production Operations Best Practices)
 

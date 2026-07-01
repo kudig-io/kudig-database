@@ -1,6 +1,7 @@
 ---
 title: 阿里云专有云 DNS 解析异常：CoreDNS 配置被 ConfigMap 误改 + VPC DNS 转发
 description: 跨命名空间服务调用出现间歇性 503，根因是 CoreDNS Corefile 被误改 forward 到专有云中继 DNS，含诊断、修复、验证与话术。
+summary: 跨命名空间服务调用出现间歇性 503，根因是 CoreDNS Corefile 被误改 forward 到专有云中继 DNS，含诊断、修复、验证与话术。
 category: production-operations
 tags:
 - aliyun
@@ -13,6 +14,9 @@ tags:
 - service-discovery
 - network
 - ticket-case
+tier: supporting
+created: 2026-06-26
+updated: 2026-06-26
 incident_id: TC-2026-008
 priority: P1
 severity: high
@@ -21,8 +25,6 @@ affected_namespace: logistics-platform
 ticket_type: 网络解析故障
 skill_ref: K8s DNS 解析异常诊断
 fta_ref: 'FTA: DNS 解析失败'
-created: 2026-06-26
-updated: 2026-06-26
 last_updated: 2026-06-26
 difficulty: intermediate
 reading_level: intermediate
@@ -52,19 +54,21 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-17-system-foundation/topic-dictionary/networking/dns-resolution.md]]"
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/dns-resolution.md]]'
   type: related_to
-- target: "[[entities/coredns.md]]"
+- target: '[[entities/coredns.md]]'
   type: related_to
-- target: "[[domain-17-system-foundation/topic-dictionary/networking/dns.md]]"
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/dns.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-013-configmap-secret-update-not-effective.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-013-configmap-secret-update-not-effective.md]]'
   type: related_to
-- target: "[[domain-17-system-foundation/topic-dictionary/configuration/configmap.md]]"
+- target: '[[domain-17-system-foundation/topic-dictionary/configuration/configmap.md]]'
   type: related_to
-- target: "[[concepts/service-networking.md]]"
+- target: '[[concepts/service-networking.md]]'
   type: related_to
 ---
+
+
 
 # 工单 008：DNS 解析异常（CoreDNS 配置被 ConfigMap 误改 + VPC DNS 转发）
 
@@ -111,7 +115,7 @@ kubectl get cm coredns-custom -n kube-system -o yaml
 
 ```bash
 kubectl logs -n kube-system -l k8s-app=kube-dns --tail=300
-kubectl logs -n kube-system -l k8s-app=kube-dns --tail=300 | grep -i "SERVFAIL\|NXDOMAIN\|timeout"
+kubectl logs -n kube-system -l k8s-app=kube-dns --tail=300 | grep -i "SERVFAIL|NXDOMAIN|timeout"
 ```
 
 ### 3.4 检查 VPC DNS 与节点 /etc/resolv.conf
@@ -296,7 +300,7 @@ echo "OK: $ok, FAIL: $fail"
 kubectl exec -it deploy/route-service -n logistics-platform -- nslookup aliyun.com
 
 # 确认 CoreDNS 日志无大量 NXDOMAIN/SERVFAIL
-kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100 | grep -c "NXDOMAIN\|SERVFAIL" || true
+kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100 | grep -c "NXDOMAIN|SERVFAIL" || true
 
 # 业务接口调用验证
 kubectl exec -it deploy/route-service -n logistics-platform -- \

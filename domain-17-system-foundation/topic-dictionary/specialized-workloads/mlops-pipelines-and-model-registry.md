@@ -1,6 +1,7 @@
 ---
 title: MLOps 流水线与模型仓库
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - operator
 - gpu
 - kubeflow
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,9 +36,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # MLOps 流水线与模型仓库
 

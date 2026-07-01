@@ -1,6 +1,7 @@
 ---
 title: 'Day 4: 调试工具全家桶安装'
 description: '### 1.1 kubectl 基础配置'
+summary: '### 1.1 kubectl 基础配置'
 category: skills
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - cilium
 - helm
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 trigger_keywords:
 - Day

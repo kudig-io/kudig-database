@@ -1,6 +1,7 @@
 ---
 title: 发布说明阅读指南
 description: '# 发布说明阅读指南'
+summary: '# 发布说明阅读指南'
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - calico
 - opa
 - falco
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - etcd-basics
 - policy-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # 发布说明阅读指南
 
@@ -155,6 +159,8 @@ kubectl api-resources --verbs=list --namespaced -o name \
 domain-19-landscape-references/_archived-release-notes/ 目录下全部 1321 个发布说明文件。
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[longhorn]] — Longhorn
 - [[falco]] — Falco

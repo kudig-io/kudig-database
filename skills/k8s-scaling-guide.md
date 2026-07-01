@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 扩缩容最佳实践
 description: '# Kubernetes 扩缩容最佳实践'
+summary: '# Kubernetes 扩缩容最佳实践'
 category: skills
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - vpa
 - cluster-autoscaler
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 - 扩缩容最佳实践
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 扩缩容最佳实践
 

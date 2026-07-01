@@ -1,13 +1,25 @@
 ---
-title: "变更管理指南"
+title: 变更管理指南
+summary: 变更管理指南：变更是生产环境不稳定的首要诱因。据统计，70% 以上的生产问题由变更引入。建立严格的变更管理流程，是保障系统稳定性的核心措施。
 category: domain-11
-tags: ["domain-11", "变更管理", "SRE", "运维", "灰度发布", "回滚", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- domain-11
+- 变更管理
+- SRE
+- 运维
+- 灰度发布
+- 回滚
+- visibility/public
+tier: core
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # 变更管理指南
 
@@ -121,3 +133,7 @@ kubectl apply -f configmap-backup.yaml
 - [[concepts/cluster-upgrade-paths.md|cluster-upgrade-paths]] — 集群升级路径
 - [[domain-08-release-change-management/98-merged-indexes/index.md|gitops-deployment-patterns]] — GitOps 部署模式
 - [[domain-11-production-operations/04-incident-response-template.md|incident-response-playbook]] — 事件响应操作手册
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

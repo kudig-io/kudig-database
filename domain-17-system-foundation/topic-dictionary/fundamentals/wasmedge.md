@@ -1,6 +1,9 @@
 ---
 title: WasmEdge WASM 运行时
-description: 'WasmEdge 是 Second State 开源的 CNCF Sandbox 项目，高性能 WebAssembly 运行时，专为云原生和边缘计算优化，支持 ...'
+description: WasmEdge 是 Second State 开源的 CNCF Sandbox 项目，高性能 WebAssembly 运行时，专为云原生和边缘计算优化，支持
+  ...
+summary: WasmEdge 是 Second State 开源的 CNCF Sandbox 项目，高性能 WebAssembly 运行时，专为云原生和边缘计算优化，支持
+  ...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - fundamentals
 - wasm
 - runtime
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # WasmEdge WASM 运行时（WasmEdge）
 

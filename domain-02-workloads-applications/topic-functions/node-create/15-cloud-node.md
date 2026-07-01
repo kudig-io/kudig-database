@@ -1,6 +1,7 @@
 ---
 title: 云厂商节点集成 — AWS / GCP / Azure
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - reference
@@ -9,6 +10,8 @@ tags:
 - operator
 - gpu
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 云厂商节点集成
 description: '## 概述'
@@ -484,6 +488,8 @@ curl -s -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-versio
 | `InstanceMetadata` | `pkg/cloudprovider/instances.go` | 实例元数据接口 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[log|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

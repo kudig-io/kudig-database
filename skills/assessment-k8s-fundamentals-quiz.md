@@ -1,6 +1,7 @@
 ---
 title: K8S Fundamentals Quiz
 description: '### 7. 当容器探针配置错误导致应用无法启动时，应如何修复？'
+summary: '### 7. 当容器探针配置错误导致应用无法启动时，应如何修复？'
 category: skills
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - skill
 - kubelet
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 - Quiz
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8S Fundamentals Quiz
 

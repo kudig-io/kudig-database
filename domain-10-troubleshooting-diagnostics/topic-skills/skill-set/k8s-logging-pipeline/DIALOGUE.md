@@ -1,26 +1,30 @@
 ---
-title: "日志流水线问题 — 远程顾问对话脚本"
-category: "troubleshooting"
-tags: ["observability", "remote-consultant"]
-created: "2026-05-23"
-updated: "2026-05-23"
+title: 日志流水线问题 — 远程顾问对话脚本
+summary: 日志流水线问题的远程顾问对话脚本，覆盖Fluentd/Fluent-bit、日志丢失、解析错误。
+category: troubleshooting
+tags:
+- observability
+- remote-consultant
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
-dialogue_id: "DIALOGUE-SKILL-LOG-001"
-skill_id: "SKILL-LOG-001"
-version: "1.0.0"
-role: "remote-consultant"
-language: "zh"
-summary: "日志流水线问题的远程顾问对话脚本，覆盖Fluentd/Fluent-bit、日志丢失、解析错误。"
+dialogue_id: DIALOGUE-SKILL-LOG-001
+skill_id: SKILL-LOG-001
+version: 1.0.0
+role: remote-consultant
+language: zh
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
-    type: uses
-  - target: "[[entities/deployment.md]]"
-    type: uses
-  - target: "[[entities/kubelet.md]]"
-    type: uses
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
+- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+  type: uses
+- target: '[[entities/deployment.md]]'
+  type: uses
+- target: '[[entities/kubelet.md]]'
+  type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
 ---
+
 
 # K8s Logging Pipeline Failure 诊断 — 远程顾问对话脚本
 
@@ -136,7 +140,7 @@ relationships:
 >    **如果无法 exec** → `kubectl port-forward -n logging svc/elasticsearch 9200:9200 & && curl -s http://localhost:9200/_cluster/health`
 >    **如果 ES 有认证** → `kubectl exec <es-pod> -n logging -- curl -s -u user:pass http://localhost:9200/_cluster/health`
 > 2. 检查 Loki 状态（如使用 Loki）：`kubectl exec <loki-pod> -n logging -- wget -qO- http://localhost:3100/ready`
->    **如果无法 exec** → `kubectl logs <loki-pod> -n logging --tail=30 | grep -i "ready\|healthy\|memberlist"`
+>    **如果无法 exec** → `kubectl logs <loki-pod> -n logging --tail=30 | grep -i "ready|healthy|memberlist"`
 > 3. 检查存储 PVC：`kubectl get pvc -n logging | grep -E "elastic|loki|es-"
 >    **如果无法执行** → `kubectl get pv | grep -E "elastic|loki"`
 > 请把集群健康状态、PVC 使用情况贴给我。
@@ -155,13 +159,13 @@ relationships:
 **顾问指令**：
 > 组件都正常但延迟增大，通常是缓冲区满、网络拥塞或后端写入性能下降。
 >
-> 1. 检查代理日志中的缓冲状态：`kubectl logs <fluent-pod> -n logging --tail=100 | grep -i "buffer\|drop\|retry\|backpressure"`
+> 1. 检查代理日志中的缓冲状态：`kubectl logs <fluent-pod> -n logging --tail=100 | grep -i "buffer|drop|retry|backpressure"`
 >    **如果无法执行** → `kubectl logs <fluent-pod> -n logging --tail=50`
 > 2. 检查代理资源使用：`kubectl top pod <fluent-pod> -n logging`
 >    **如果 metrics-server 不可用** → `kubectl describe node <node-name> | grep -A 10 "Allocated resources"`
 >    **如果无法 describe node** → `kubectl get pod <fluent-pod> -n logging -o yaml | grep -A 5 resources`
-> 3. 检查后端写入性能（ES）：`kubectl exec <es-pod> -n logging -- curl -s http://localhost:9200/_nodes/stats/thread_pool/write | grep -A 5 "rejected\|queue"`
->    **如果无法执行** → `kubectl logs <es-pod> -n logging --tail=30 | grep -i "rejected\|too_many_requests"`
+> 3. 检查后端写入性能（ES）：`kubectl exec <es-pod> -n logging -- curl -s http://localhost:9200/_nodes/stats/thread_pool/write | grep -A 5 "rejected|queue"`
+>    **如果无法执行** → `kubectl logs <es-pod> -n logging --tail=30 | grep -i "rejected|too_many_requests"`
 > 请把日志中的 buffer/drop 信息、资源使用情况、后端写入状态贴给我。
 
 **分支决策**：
@@ -183,10 +187,10 @@ relationships:
 > 日志代理因内存不足或 CPU 限制被杀死。需要扩容。
 >
 > 1. 检查当前资源限制：`kubectl get daemonset fluent-bit -n logging -o yaml | grep -A 10 resources`
->    **如果无法执行** → `kubectl describe ds fluent-bit -n logging | grep -A 10 "Limits\|Requests"`
+>    **如果无法执行** → `kubectl describe ds fluent-bit -n logging | grep -A 10 "Limits|Requests"`
 >    **如果是 Deployment** → `kubectl get deployment <fluent-deploy> -n logging -o yaml | grep -A 10 resources`
 > 2. 检查资源使用量：`kubectl top pod -n logging -l app=fluent-bit`
->    **如果 metrics-server 不可用** → `kubectl logs <fluent-pod> -n logging --previous | grep -i "out of memory\|oom"`
+>    **如果 metrics-server 不可用** → `kubectl logs <fluent-pod> -n logging --previous | grep -i "out of memory|oom"`
 > 3. 检查节点资源压力：`kubectl describe node <node-name> | grep -A 10 "Allocated resources"`
 >    **如果无法执行** → `kubectl get node <node-name> -o yaml | grep -A 10 allocated`
 > 请告诉我当前资源限制、实际使用量、节点是否资源紧张。
@@ -209,11 +213,11 @@ relationships:
 **顾问指令**：
 > 日志代理因配置错误无法启动。需要修复 parser/filter/output 配置。
 >
-> 1. 查看具体错误：`kubectl logs <fluent-pod> -n logging --previous --tail=50 | grep -i "error\|failed\|invalid\|parser"`
+> 1. 查看具体错误：`kubectl logs <fluent-pod> -n logging --previous --tail=50 | grep -i "error|failed|invalid|parser"`
 >    **如果无法执行** → `kubectl get events -n logging --field-selector reason=Failed | tail -20`
 > 2. 检查 ConfigMap：`kubectl get configmap -n logging | grep fluent`
 >    **如果无结果** → `kubectl get configmap --all-namespaces | grep -E "fluent|parser"`
-> 3. 查看配置内容：`kubectl get configmap <fluent-config> -n logging -o yaml | grep -A 20 "fluent-bit.conf\|parsers.conf"`
+> 3. 查看配置内容：`kubectl get configmap <fluent-config> -n logging -o yaml | grep -A 20 "fluent-bit.conf|parsers.conf"`
 >    **如果无法执行** → `kubectl get configmap <fluent-config> -n logging -o yaml`
 > 请把错误日志和配置内容贴给我。
 
@@ -263,8 +267,8 @@ relationships:
 > 后端存储集群不可用，需要恢复存储服务。
 >
 > 1. 查看 ES 具体错误：`kubectl exec <es-pod> -n logging -- curl -s http://localhost:9200/_cluster/health?level=indices | jq '.indices | with_entries(select(.value.status == "red"))'`
->    **如果无法执行** → `kubectl logs <es-pod> -n logging --tail=50 | grep -i "error\|failed\|shard"`
-> 2. 查看 Loki 错误：`kubectl logs <loki-pod> -n logging --tail=50 | grep -i "error\|failed\|wal"`
+>    **如果无法执行** → `kubectl logs <es-pod> -n logging --tail=50 | grep -i "error|failed|shard"`
+> 2. 查看 Loki 错误：`kubectl logs <loki-pod> -n logging --tail=50 | grep -i "error|failed|wal"`
 >    **如果无错误** → `kubectl describe pod <loki-pod> -n logging | grep -A 20 Events`
 > 3. 检查存储 PVC 状态：`kubectl get pvc -n logging`
 >    **如果无法执行** → `kubectl get pv`
@@ -340,11 +344,11 @@ relationships:
 **顾问指令**：
 > 日志代理缓冲区满导致日志丢弃。需要调优缓冲和重试策略。
 >
-> 1. 查看当前缓冲配置：`kubectl get configmap <fluent-config> -n logging -o yaml | grep -A 10 "buffer\|flush\|retry"`
+> 1. 查看当前缓冲配置：`kubectl get configmap <fluent-config> -n logging -o yaml | grep -A 10 "buffer|flush|retry"`
 >    **如果无法执行** → `kubectl get configmap <fluent-config> -n logging -o yaml`
-> 2. 查看丢弃统计：`kubectl logs <fluent-pod> -n logging --tail=100 | grep -c "drop\|overflow"`
+> 2. 查看丢弃统计：`kubectl logs <fluent-pod> -n logging --tail=100 | grep -c "drop|overflow"`
 >    **如果无法执行** → `kubectl logs <fluent-pod> -n logging --tail=50`
-> 3. 检查后端响应时间：`kubectl logs <fluent-pod> -n logging --tail=50 | grep -i "response\|timeout\|connect"`
+> 3. 检查后端响应时间：`kubectl logs <fluent-pod> -n logging --tail=50 | grep -i "response|timeout|connect"`
 > 请把缓冲配置、丢弃数量、后端响应状态贴给我。
 
 **修复方案**：
@@ -371,7 +375,7 @@ relationships:
 > 1. 检查 ES 线程池：`kubectl exec <es-pod> -n logging -- curl -s http://localhost:9200/_nodes/stats/thread_pool/write | jq '.nodes[] | {name: .name, rejected: .thread_pool.write.rejected, queue: .thread_pool.write.queue}'`
 >    **如果无法执行** → `kubectl exec <es-pod> -n logging -- curl -s http://localhost:9200/_nodes/stats/thread_pool/write`
 > 2. 检查 Loki 摄取速率：`kubectl exec <loki-pod> -n logging -- wget -qO- http://localhost:3100/metrics | grep loki_ingester`
->    **如果无法执行** → `kubectl logs <loki-pod> -n logging --tail=30 | grep -i "ingest\|push"`
+>    **如果无法执行** → `kubectl logs <loki-pod> -n logging --tail=30 | grep -i "ingest|push"`
 > 3. 检查索引/分片数量：`kubectl exec <es-pod> -n logging -- curl -s http://localhost:9200/_cat/indices?v | wc -l`
 > 请告诉我写入 reject 数量、摄取速率、索引数量。
 
@@ -447,7 +451,7 @@ relationships:
 >    **如果无法执行** → `kubectl logs <fluent-pod> -n logging --tail=50 | wc -l`
 > 2. 检查是否有日志风暴：`kubectl logs <fluent-pod> -n logging --tail=50 | awk '{print $4}' | sort | uniq -c | sort -rn | head -10`
 >    **如果无法执行 awk** → `kubectl logs <fluent-pod> -n logging --tail=100`，把日志贴给我分析
-> 3. 检查是否有循环日志：`kubectl logs <fluent-pod> -n logging --tail=50 | grep -i "fluent\|log" | wc -l`
+> 3. 检查是否有循环日志：`kubectl logs <fluent-pod> -n logging --tail=50 | grep -i "fluent|log" | wc -l`
 > 请告诉我日志量估算、高频来源、是否有循环日志。
 
 **修复方案**：
@@ -563,7 +567,7 @@ relationships:
 >    **如果无法执行** → `kubectl get daemonset -n logging`
 > 4. 验证新日志出现：在 Kibana/Grafana 中查询最近 5 分钟的日志
 >    **如果无 UI** → `kubectl exec <fluent-pod> -n logging -- tail -5 /var/log/containers/<test-pod>*.log`
-> 5. 验证无解析错误：`kubectl logs <fluent-pod> -n logging --tail=20 | grep -i "parser\|error"
+> 5. 验证无解析错误：`kubectl logs <fluent-pod> -n logging --tail=20 | grep -i "parser|error"
 >    **如果无错误** → 解析正常
 > 6. 验证日志量恢复：对比修复前后日志量趋势
 > 请告诉我以上验证结果。如果全部通过，问题已修复。

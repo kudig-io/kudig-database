@@ -1,6 +1,7 @@
 ---
 title: 发布说明索引 — CI/CD 与 GitOps
 description: '- **升级要点**: v2.x 全面重构为组件化架构（Source/Kustomize/Helm/Notification 控制器）'
+summary: '- **升级要点**: v2.x 全面重构为组件化架构（Source/Kustomize/Helm/Notification 控制器）'
 category: references
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - flux
 - tekton
 - helm
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 # 发布说明索引 — CI/CD 与 GitOps
 

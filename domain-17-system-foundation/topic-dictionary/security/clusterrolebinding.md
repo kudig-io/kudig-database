@@ -1,6 +1,7 @@
 ---
 title: 集群角色绑定
-description: 'ClusterRoleBinding 将 ClusterRole 的权限授予集群范围的主体。与 RoleBinding 不同，ClusterRoleBindin...'
+description: ClusterRoleBinding 将 ClusterRole 的权限授予集群范围的主体。与 RoleBinding 不同，ClusterRoleBindin...
+summary: ClusterRoleBinding 将 ClusterRole 的权限授予集群范围的主体。与 RoleBinding 不同，ClusterRoleBindin...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - clusterrolebinding
 - rbac
 - security
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 集群角色绑定
 

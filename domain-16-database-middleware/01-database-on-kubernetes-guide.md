@@ -1,13 +1,26 @@
 ---
-title: "数据库在 Kubernetes 上的运行指南"
+title: 数据库在 Kubernetes 上的运行指南
+summary: 数据库在 Kubernetes 上的运行指南：在 Kubernetes 上运行有状态数据库服务，既有云原生弹性优势，也面临存储性能、网络延迟和状态管理等技术挑战。本文涵盖
+  MySQL、Redis、PostgreSQL 在 K8s 上的部署模式与运维要点。
 category: domain-16
-tags: ["domain-16", "数据库", "StatefulSet", "MySQL", "Redis", "PostgreSQL", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- domain-16
+- 数据库
+- StatefulSet
+- MySQL
+- Redis
+- PostgreSQL
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # 数据库在 Kubernetes 上的运行指南
 
@@ -158,3 +171,7 @@ spec:
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/14-pvc-storage-troubleshooting.md|pvc-storage-troubleshooting]] — PVC 与存储问题排查
 - [[persistent-volume-claim]] — PVC 原理与配置
 - [[domain-16-database-middleware/01-database-on-kubernetes-guide.md|mysql-operator-guide]] — MySQL Operator 详细配置
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

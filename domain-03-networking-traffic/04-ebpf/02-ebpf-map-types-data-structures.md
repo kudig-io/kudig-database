@@ -1,6 +1,7 @@
 ---
 title: eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)
 description: 1. [eBPF Map 概述与作用](#1-ebpf-map-概述与作用)
+summary: 1. [eBPF Map 概述与作用](#1-ebpf-map-概述与作用)
 category: ebpf-technology
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - observability
 - daemonset
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -45,8 +48,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)
 

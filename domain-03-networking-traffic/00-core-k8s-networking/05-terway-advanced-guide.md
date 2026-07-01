@@ -1,6 +1,7 @@
 ---
 title: 143 - Terway 高级指南 (Terway Advanced Guide)
 description: '# 143 - Terway 高级指南 (Terway Advanced Guide)'
+summary: '# 143 - Terway 高级指南 (Terway Advanced Guide)'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - networkpolicy
 - ebpf
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -63,8 +66,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 143 - Terway 高级指南 (Terway Advanced Guide)
 

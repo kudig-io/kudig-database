@@ -1,7 +1,9 @@
 ---
 title: ORAS (OCI Registry As Storage)
-description: 'summary: "ORAS (OCI Registry As Storage) 是一个用于将 OCI 工件推送到和拉取自 OCI 兼容仓库的工具和库。它允许使用容器镜像仓库存储任意类型的工件，如 Helm Chart、WASM
-  模块、策略文件、签名等，实现 "anything as OCI artifacts" 的理念。"'
+description: 'summary: "ORAS (OCI Registry As Storage) 是一个用于将 OCI 工件推送到和拉取自 OCI 兼容仓库的工具和库。它允许使用容器镜像仓库存储任意类型的工件，如
+  Helm Chart、WASM 模块、策略文件、签名等，实现 "anything as OCI artifacts" 的理念。"'
+summary: 'summary: "ORAS (OCI Registry As Storage) 是一个用于将 OCI 工件推送到和拉取自 OCI 兼容仓库的工具和库。它允许使用容器镜像仓库存储任意类型的工件，如
+  Helm Chart、WASM 模块、策略文件、签名等，实现 "anything as OCI artifacts" 的理念。"'
 category: general
 tags:
 - k8s
@@ -10,6 +12,8 @@ tags:
 - operator
 - wasm
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "[[ORAS|ORAS]] (OCI Registry As Storage)"

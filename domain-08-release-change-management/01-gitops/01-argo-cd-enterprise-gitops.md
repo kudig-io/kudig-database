@@ -1,6 +1,7 @@
 ---
 title: Argo CD企业级GitOps实践指南
 description: '# Argo CD企业级GitOps实践指南'
+summary: '# Argo CD企业级GitOps实践指南'
 category: gitops-ci-cd
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - helm
 - opa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -60,8 +63,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/git.md
   label: '速查卡: git'
-created: "2026-05-23"
 ---
+
+
 
 # [[Argo|Argo]] CD企业级GitOps实践指南
 

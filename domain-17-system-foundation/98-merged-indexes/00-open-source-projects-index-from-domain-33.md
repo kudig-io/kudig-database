@@ -1,6 +1,9 @@
 ---
 title: Domain-33 K8s 事件 — 开源项目索引
-description: '| **EventRouter** | 事件路由到日志系统 | Heptio/VMware | v1.0.0 | 1k+ | Apache-2.0 |'
+description: '| **EventRouter** | 事件路由到日志系统 | Heptio/VMware | v1.0.0 | 1k+ | Apache-2.0
+  |'
+summary: '| **EventRouter** | 事件路由到日志系统 | Heptio/VMware | v1.0.0 | 1k+ | Apache-2.0
+  |'
 category: kubernetes-events
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - daemonset
 - job
 - cronjob
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -46,8 +51,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Domain-33 K8s 事件 — 开源项目索引
 

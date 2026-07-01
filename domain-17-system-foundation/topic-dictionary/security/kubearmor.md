@@ -1,6 +1,9 @@
 ---
 title: KubeArmor 运行时安全
-description: 'KubeArmor 是 Accuknox 开源的 CNCF Sandbox 项目，基于 eBPF 和 LSM（Linux Security Modules）为 ...'
+description: KubeArmor 是 Accuknox 开源的 CNCF Sandbox 项目，基于 eBPF 和 LSM（Linux Security
+  Modules）为 ...
+summary: KubeArmor 是 Accuknox 开源的 CNCF Sandbox 项目，基于 eBPF 和 LSM（Linux Security Modules）为
+  ...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - security
 - runtime
 - ebpf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # KubeArmor 运行时安全（KubeArmor）
 

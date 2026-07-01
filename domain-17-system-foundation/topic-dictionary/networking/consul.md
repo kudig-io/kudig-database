@@ -1,6 +1,8 @@
 ---
 title: Consul
-description: 'Consul 是 HashiCorp 开源的服务网格和服务发现解决方案。它提供服务发现、健康检查、KV 存储和服务网格（通过 Envoy sidecar）等功能...'
+description: Consul 是 HashiCorp 开源的服务网格和服务发现解决方案。它提供服务发现、健康检查、KV 存储和服务网格（通过 Envoy
+  sidecar）等功能...
+summary: Consul 是 HashiCorp 开源的服务网格和服务发现解决方案。它提供服务发现、健康检查、KV 存储和服务网格（通过 Envoy sidecar）等功能...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - consul
 - service-mesh
 - service-discovery
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Consul
 

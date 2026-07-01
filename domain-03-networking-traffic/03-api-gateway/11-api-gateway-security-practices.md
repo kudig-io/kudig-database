@@ -1,6 +1,7 @@
 ---
 title: 11 - API 网关安全体系：认证、鉴权与 WAF
 description: '# 11 - API 网关安全体系：认证、鉴权与 WAF'
+summary: '# 11 - API 网关安全体系：认证、鉴权与 WAF'
 category: cloud-native-api-gateway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - redis
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +54,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 11 - API 网关安全体系：认证、鉴权与 WAF
 

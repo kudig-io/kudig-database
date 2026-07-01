@@ -1,6 +1,7 @@
 ---
 title: Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)
 description: '# Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)'
+summary: '# Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)'
 category: papers
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flux
 - docker
 - redis
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -52,8 +55,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] GitOps 完整实践指南 (GitOps Complete Practice Guide)
 
@@ -1006,6 +1010,10 @@ GitOps发展趋势:
 - 07-kubernetes-csi-storage-deep-practice
 
 ## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

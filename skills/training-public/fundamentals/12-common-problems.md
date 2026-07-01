@@ -1,6 +1,7 @@
 ---
 title: 第十课：常见问题排查 [fundamentals]
 description: 'title: 第十课：常见问题排查'
+summary: 'title: 第十课：常见问题排查'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - job
 - cronjob
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -31,8 +34,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 第十课：常见问题排查

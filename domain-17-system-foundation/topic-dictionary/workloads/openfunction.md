@@ -1,6 +1,9 @@
 ---
 title: OpenFunction Serverless
-description: 'OpenFunction 是青云科技开源的 CNCF Sandbox 项目，云原生 FaaS 平台，支持同步/异步函数、多种运行时和事件源，集成 Knative...'
+description: OpenFunction 是青云科技开源的 CNCF Sandbox 项目，云原生 FaaS 平台，支持同步/异步函数、多种运行时和事件源，集成
+  Knative...
+summary: OpenFunction 是青云科技开源的 CNCF Sandbox 项目，云原生 FaaS 平台，支持同步/异步函数、多种运行时和事件源，集成
+  Knative...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - workloads
 - serverless
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # OpenFunction Serverless（OpenFunction）
 

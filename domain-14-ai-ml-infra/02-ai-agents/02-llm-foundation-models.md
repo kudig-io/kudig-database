@@ -1,6 +1,9 @@
 ---
 title: LLM 基座模型选型与评估 (domain-14-ai-ml-infra)
-description: 'description: ''**文档类型**: 技术选型指南 | **最后更新**: 2026-03 | **关键词**: LLM 选型, GPT-4o, Claude'
+description: 'description: ''**文档类型**: 技术选型指南 | **最后更新**: 2026-03 | **关键词**: LLM 选型,
+  GPT-4o, Claude'
+summary: 'description: ''**文档类型**: 技术选型指南 | **最后更新**: 2026-03 | **关键词**: LLM 选型, GPT-4o,
+  Claude'
 category: general
 tags:
 - ai
@@ -13,6 +16,8 @@ tags:
 - vllm
 - llm
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +37,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: LLM 基座模型选型与评估
 description: '**文档类型**: 技术选型指南 | **最后更新**: 2026-03 | **关键词**: LLM 选型, GPT-4o, Claude

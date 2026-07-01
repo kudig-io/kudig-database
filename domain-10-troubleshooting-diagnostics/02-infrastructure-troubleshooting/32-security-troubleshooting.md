@@ -1,6 +1,7 @@
 ---
 title: 安全相关故障排查
 description: '# 32 - 安全相关故障排查 (Security Troubleshooting)'
+summary: '# 32 - 安全相关故障排查 (Security Troubleshooting)'
 category: troubleshooting
 tags:
 - security
@@ -13,6 +14,8 @@ tags:
 - cilium
 - calico
 - docker
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: advanced
 reading_level: advanced
@@ -60,8 +63,9 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response.md
   label: '运维技能: 18-security-incident-response'
-created: "2026-05-23"
 ---
+
+
 
 # 32 - 安全相关故障排查 (Security Troubleshooting)
 

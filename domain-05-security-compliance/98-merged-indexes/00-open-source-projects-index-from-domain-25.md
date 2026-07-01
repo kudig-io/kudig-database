@@ -1,6 +1,7 @@
 ---
 title: Domain-25 云原生安全 — 开源项目索引
 description: '# Domain-25 云原生安全 — 开源项目索引'
+summary: '# Domain-25 云原生安全 — 开源项目索引'
 category: cloud-native-security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - istio
 - envoy
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -62,8 +65,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-25 云原生安全 — 开源项目索引
 
@@ -710,7 +714,7 @@ cert-manager 是 K8s 原生的 TLS 证书管理器：
 | Falco 事件丢失 | 检查 `syscall_event_drops` 指标，调大缓冲区 |
 | Kyverno 策略被绕过 | `kubectl get clusterpolicy -o wide` 检查 `validationFailureAction` |
 | Kyverno webhook 延迟 | `kubectl get validatingwebhookconfiguration -o yaml` 检查超时 |
-| OPA 违规查看 | `kubectl get constraints -o json \| jq '.items[].status.violations'` |
+| OPA 违规查看 | `kubectl get constraints -o json | jq '.items[].status.violations'` |
 | OPA 审计不运行 | `kubectl logs -n gatekeeper-system deployment/gatekeeper-audit` |
 | cert-manager 证书失败 | `kubectl describe certificate -n cert-manager` 查看 events |
 | cert-manager ACME challenge 失败 | `kubectl describe order -n cert-manager` |

@@ -1,6 +1,7 @@
 ---
 title: Wiki Tag Taxonomy
 description: 生产环境维度整合后的 20 个核心 Domain，按运维职能分层。
+summary: 生产环境维度整合后的 20 个核心 Domain，按运维职能分层。
 category: references
 tags:
 - taxonomy
@@ -12,6 +13,8 @@ tags:
 - llm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - ebpf-basics
-created: "2026-05-23"
 ---
+
+
 
 # Tag Taxonomy
 

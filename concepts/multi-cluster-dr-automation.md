@@ -1,15 +1,20 @@
 ---
 title: 多集群灾备与自动化
+summary: 多集群灾备与自动化：随着 Kubernetes 部署从单集群走向多集群、多区域架构，灾备（Disaster Recovery, DR）从传统的"备份-恢复"演进为涵盖应用编排、数据同步、流量切换、自动验证的端到端自动化体系。本文系统梳理跨区域
+  DR 策略、数据库级灾备、多集群故障切换自动化及 DR 成熟度模型。
 category: concepts
 tags:
-  - disaster-recovery
-  - multi-cluster
-  - automation
-  - k8s
+- disaster-recovery
+- multi-cluster
+- automation
+- k8s
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # 多集群灾备与自动化
 

@@ -1,6 +1,7 @@
 ---
 title: 资源管理与配额控制 (Resource Management) [cluster-create]
 description: 'title: 资源管理与配额控制 (Resource Management)'
+summary: 'title: 资源管理与配额控制 (Resource Management)'
 category: general
 tags:
 - reference
@@ -12,6 +13,8 @@ tags:
 - rbac
 - operator
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 资源管理与配额控制 (Resource Management)
 description: '# 资源管理与配额控制 (Resource Management)'
@@ -800,6 +804,8 @@ kubectl get priorityclasses
 - [初始化阶段](17-init-phases.md) — API Server 启用准入插件
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

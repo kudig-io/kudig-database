@@ -1,6 +1,7 @@
 ---
 title: 混沌工程和故障注入测试
 description: '### 🔗 关联故障排查文档'
+summary: '### 🔗 关联故障排查文档'
 category: troubleshooting
 tags:
 - chaos-mesh
@@ -13,6 +14,8 @@ tags:
 - grafana
 - helm
 - containerd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: advanced
 reading_level: advanced
@@ -59,8 +62,9 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
-created: "2026-05-23"
 ---
+
+
 
 # 42 - 混沌工程和故障注入测试 ([[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]] and Fault Injection Testing)
 

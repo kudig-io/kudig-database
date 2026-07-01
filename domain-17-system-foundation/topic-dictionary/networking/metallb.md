@@ -1,6 +1,9 @@
 ---
 title: MetalLB
-description: 'MetalLB 是裸金属（Bare Metal）Kubernetes 集群的负载均衡器实现。它为不支持云厂商 LoadBalancer 的环境（如 on-pre...'
+description: MetalLB 是裸金属（Bare Metal）Kubernetes 集群的负载均衡器实现。它为不支持云厂商 LoadBalancer 的环境（如
+  on-pre...
+summary: MetalLB 是裸金属（Bare Metal）Kubernetes 集群的负载均衡器实现。它为不支持云厂商 LoadBalancer 的环境（如
+  on-pre...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +12,8 @@ tags:
 - loadbalancer
 - networking
 - bare-metal
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # MetalLB
 

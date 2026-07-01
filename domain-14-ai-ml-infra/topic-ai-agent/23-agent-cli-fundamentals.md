@@ -1,6 +1,7 @@
 ---
 title: Agent CLI 基础概念与架构模式 (domain-14-ai-ml-infra)
 description: 'title: Agent CLI 基础概念与架构模式'
+summary: 'title: Agent CLI 基础概念与架构模式'
 category: general
 tags:
 - ai
@@ -9,6 +10,8 @@ tags:
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 - infra
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Agent CLI 基础概念与架构模式
 description: '# Agent CLI 基础概念与架构模式'

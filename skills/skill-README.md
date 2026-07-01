@@ -1,6 +1,9 @@
 ---
 title: topic-skills — 工单智能体 Kubernetes 诊断 Skill 库 (skills)
-description: '- 网络问题: [04-dns](./04-dns-resolution-failure.md) | [05-service](./05-service-connectivity.md) | [13-ingress](./13-ingress-gateway-failure.md)'
+description: '- 网络问题: [04-dns](./04-dns-resolution-failure.md) | [05-service](./05-service-connectivity.md)
+  | [13-ingress](./13-ingress-gateway-failure.md)'
+summary: '- 网络问题: [04-dns](./04-dns-resolution-failure.md) | [05-service](./05-service-connectivity.md)
+  | [13-ingress](./13-ingress-gateway-failure.md)'
 category: skills
 tags:
 - k8s
@@ -11,6 +14,8 @@ tags:
 - ingress
 - gateway
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +33,9 @@ trigger_keywords:
 - Skill
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # topic-skills — 工单智能体 Kubernetes 诊断 [[SKILL|Skill]] 库
 

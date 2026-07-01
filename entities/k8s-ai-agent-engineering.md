@@ -1,6 +1,7 @@
 ---
 title: AI Agent 工程：RAG、多 Agent 编排、安全护栏与生产部署
 description: 关键优化点：
+summary: 关键优化点：
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - llm
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ trigger_keywords:
 - 安全护栏与生产部署
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # AI Agent 工程
 

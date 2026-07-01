@@ -1,6 +1,7 @@
 ---
 title: 阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述
 description: 'title: 阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述'
+summary: 'title: 阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述'
 category: general
 tags:
 - cloud
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - flannel
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 阿里云 ACK (Alibaba Cloud Container [[Service|Service]] for [[Kubernetes|Kubernetes]]) 概述
 description: '# 阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述'
@@ -607,6 +611,8 @@ echo "Logs collected to: $LOG_DIR"
 > - 技术媒体和分析师评测
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]

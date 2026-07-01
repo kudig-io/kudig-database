@@ -1,6 +1,7 @@
 ---
 title: TUF 更新框架
-description: 'The Update Framework（TUF）是 CNCF 毕业项目，为软件更新提供密码学安全框架，防止更新过程中的篡改、回滚攻击和密钥泄露，是软件供应链安...'
+description: The Update Framework（TUF）是 CNCF 毕业项目，为软件更新提供密码学安全框架，防止更新过程中的篡改、回滚攻击和密钥泄露，是软件供应链安...
+summary: The Update Framework（TUF）是 CNCF 毕业项目，为软件更新提供密码学安全框架，防止更新过程中的篡改、回滚攻击和密钥泄露，是软件供应链安...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - security
 - supply-chain
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # TUF 更新框架（TUF）
 

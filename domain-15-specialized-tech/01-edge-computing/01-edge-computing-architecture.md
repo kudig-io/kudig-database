@@ -1,6 +1,7 @@
 ---
 title: 边缘计算架构概述 (Edge Computing Architecture Overview)
 description: 'title: 边缘计算架构概述 (Edge Computing Architecture Overview)'
+summary: 'title: 边缘计算架构概述 (Edge Computing Architecture Overview)'
 category: general
 tags:
 - edge
@@ -13,6 +14,8 @@ tags:
 - argocd
 - flux
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - kafka-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 边缘计算架构概述 (Edge Computing Architecture Overview)
 description: '# 边缘计算架构概述 (Edge Computing Architecture Overview)'

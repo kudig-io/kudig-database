@@ -1,6 +1,7 @@
 ---
-title: "etcd 进阶: HA 集群管理与性能调优 [cluster-create]"
+title: 'etcd 进阶: HA 集群管理与性能调优 [cluster-create]'
 description: 'title: ''etcd 进阶: HA 集群管理与性能调优'''
+summary: 'title: ''etcd 进阶: HA 集群管理与性能调优'''
 category: general
 tags:
 - reference
@@ -13,6 +14,8 @@ tags:
 - containerd
 - job
 - cronjob
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - platform-engineering-basics
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 'etcd 进阶: HA 集群管理与性能调优'
 description: '# etcd 进阶: HA 集群管理与性能调优'
@@ -796,6 +800,8 @@ ETCDCTL_API=3 etcdctl member list -w table \
 ```
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[hot|hot]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

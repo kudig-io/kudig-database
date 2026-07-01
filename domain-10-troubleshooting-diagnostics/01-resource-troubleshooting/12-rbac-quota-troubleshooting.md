@@ -1,6 +1,7 @@
 ---
 title: RBAC 与 ResourceQuota 故障排查
 description: '# 12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)'
+summary: '# 12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)'
 category: troubleshooting
 tags:
 - rbac
@@ -13,6 +14,8 @@ tags:
 - job
 - ingress
 - crd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-01
 difficulty: intermediate
 reading_level: intermediate
@@ -67,8 +70,9 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/09-rbac-quota-failure.md
   label: '运维技能: 09-rbac-quota-failure'
-created: "2026-05-23"
 ---
+
+
 
 # 12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)
 

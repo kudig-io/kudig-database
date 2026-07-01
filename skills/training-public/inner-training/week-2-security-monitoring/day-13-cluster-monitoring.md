@@ -1,6 +1,7 @@
 ---
 title: 'Day 13: K8S 集群监控'
 description: 'title: Day 13: K8S 集群监控'
+summary: 'title: Day 13: K8S 集群监控'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - operator
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - gpu-ml-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 13: K8S 集群监控

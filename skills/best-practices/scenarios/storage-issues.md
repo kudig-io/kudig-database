@@ -1,12 +1,15 @@
 ---
 title: '场景: 存储问题排查'
 description: PV/PVC/StorageClass 相关问题的排查和解决
+summary: PV/PVC/StorageClass 相关问题的排查和解决
 category: scenario
 tags:
 - k8s
 - scenario
 - storage
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-20'
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # 场景: 存储问题排查
 

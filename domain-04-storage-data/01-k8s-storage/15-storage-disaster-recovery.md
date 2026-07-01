@@ -1,6 +1,7 @@
 ---
 title: 15 - 存储灾备与迁移策略
 description: '# 15 - 存储灾备与迁移策略'
+summary: '# 15 - 存储灾备与迁移策略'
 category: storage
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - postgresql
 - statefulset
 - job
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -50,8 +53,9 @@ cross_refs:
 - type: domain
   path: ../domain-04-storage-data/
   label: '相关知识域: domain-04-storage-data'
-created: "2026-05-23"
 ---
+
+
 
 # 15 - 存储灾备与迁移策略
 

@@ -1,6 +1,7 @@
 ---
 title: DaemonSet 异常故障树分析 (skills)
 description: NODE_OR --> NODE2[污点/容忍配置问题]
+summary: NODE_OR --> NODE2[污点/容忍配置问题]
 category: general
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - rbac
 - crd
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ prerequisites:
 fta_id: FTA-DAEMONSET-001
 component: Daemonset
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "[[DaemonSet|DaemonSet]] 异常故障树分析"

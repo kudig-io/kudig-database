@@ -1,6 +1,7 @@
 ---
 title: domain-01-cluster-fundamentals MOC
 description: domain-01-cluster-fundamentals 知识域导航页，覆盖 37 篇文档
+summary: domain-01-cluster-fundamentals 知识域导航页，覆盖 37 篇文档
 category: moc
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - scheduler
 - controller-manager
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - kubernetes-concepts
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-01-cluster-fundamentals MOC
 

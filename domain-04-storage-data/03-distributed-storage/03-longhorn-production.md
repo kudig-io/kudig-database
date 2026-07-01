@@ -1,6 +1,8 @@
 ---
 title: Longhorn Kubernetes 生产部署与运维
-description: 在阿里云与专有云 Kubernetes 上部署 Longhorn 分布式块存储，覆盖架构、安装、卷管理、快照/备份、节点故障恢复、CSI 集成、升级流程与生产注意事项
+description: 在阿里云与专有云 Kubernetes 上部署 Longhorn 分布式块存储，覆盖架构、安装、卷管理、快照/备份、节点故障恢复、CSI
+  集成、升级流程与生产注意事项
+summary: 在阿里云与专有云 Kubernetes 上部署 Longhorn 分布式块存储，覆盖架构、安装、卷管理、快照/备份、节点故障恢复、CSI 集成、升级流程与生产注意事项
 category: storage
 tags:
 - k8s
@@ -12,6 +14,9 @@ tags:
 - disaster-recovery
 - alicloud
 - apsara-stack
+tier: supporting
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -44,9 +49,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-26"
-updated: "2026-06-26"
 ---
+
+
 
 # Longhorn Kubernetes 生产部署与运维
 

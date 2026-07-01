@@ -1,6 +1,7 @@
 ---
 title: 03 - 运行时安全防护与威胁检测
 description: 'title: 运行时安全防护与威胁检测'
+summary: 'title: 运行时安全防护与威胁检测'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - daemonset
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - rbac-basics
 - prometheus-basics
 - ebpf-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 运行时安全防护与威胁检测

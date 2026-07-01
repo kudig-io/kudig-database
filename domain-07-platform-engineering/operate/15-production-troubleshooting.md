@@ -1,6 +1,7 @@
 ---
 title: 生产环境故障诊断 (Production Troubleshooting)
 description: 'description: ''**目标读者**: SRE团队、故障处理工程师、运维人员'''
+summary: 'description: ''**目标读者**: SRE团队、故障处理工程师、运维人员'''
 category: general
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - scheduler
 - calico
 - ingress
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 生产环境故障诊断 (Production Troubleshooting)
 description: '**目标读者**: SRE团队、故障处理工程师、运维人员'

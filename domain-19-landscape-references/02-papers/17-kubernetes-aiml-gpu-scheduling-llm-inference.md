@@ -1,6 +1,9 @@
 ---
 title: Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference Serving)
-description: '# Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference Serving)'
+description: '# Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference
+  Serving)'
+summary: '# Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference
+  Serving)'
 category: papers
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - grafana
 - envoy
 - helm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -22,7 +27,8 @@ audience:
 - 研究员
 estimated_read_time: 5min
 intent_queries:
-- Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference Serving) 是什么
+- Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference Serving)
+  是什么
 - 如何 Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference Serving)
 - Kubernetes 19 papers 最佳实践
 trigger_keywords:
@@ -58,8 +64,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/gpu-fta.md
   label: '故障树: gpu'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference Serving)
 
@@ -1480,5 +1487,9 @@ AI基础设施演进趋势(2026-2027):
 - 19-kubernetes-gateway-api-modern-traffic-management
 
 ## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]

@@ -1,12 +1,15 @@
 ---
 title: 混沌工程与灾备演练的结合
 description: → 管理层参与
+summary: → 管理层参与
 category: synthesis
 tags:
 - chaos-engineering
 - disaster-recovery
 - game-day
 - reliability
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -20,8 +23,9 @@ trigger_keywords:
 - 混沌工程与灾备演练的结合
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 混沌工程与灾备演练的结合
 

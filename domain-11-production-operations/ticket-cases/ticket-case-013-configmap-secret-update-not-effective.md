@@ -1,6 +1,7 @@
 ---
 title: ConfigMap/Secret 更新后应用未生效
 description: 专有云 ACK 集群客户修改 ConfigMap 与 Secret 后，业务 Pod 仍使用旧配置的工单闭环样本。
+summary: 专有云 ACK 集群客户修改 ConfigMap 与 Secret 后，业务 Pod 仍使用旧配置的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -10,6 +11,9 @@ tags:
 - configuration
 - p2
 - application-behavior
+tier: supporting
+created: '2026-06-26T13:30:00+08:00'
+updated: '2026-06-26T15:10:00+08:00'
 incident_id: INC-2026-ACK-013
 priority: P2
 severity: medium
@@ -21,9 +25,7 @@ skill_ref:
 - 配置变更 SOP
 fta_ref:
 - 'FTA: 配置更新未生效'
-created: '2026-06-26T13:30:00+08:00'
-updated: '2026-06-26T15:10:00+08:00'
-last_updated: 2026-06-26T15:10:00+08:00
+last_updated: 2026-06-26 15:10:00+08:00
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -47,15 +49,17 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-17-system-foundation/topic-dictionary/configuration/configmap.md]]"
+- target: '[[domain-17-system-foundation/topic-dictionary/configuration/configmap.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: "[[domain-17-system-foundation/topic-dictionary/security/secret.md]]"
+- target: '[[domain-17-system-foundation/topic-dictionary/security/secret.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-008-coredns-vpc-dns-forward.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-008-coredns-vpc-dns-forward.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 

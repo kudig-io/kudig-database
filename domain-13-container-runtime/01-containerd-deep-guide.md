@@ -1,13 +1,25 @@
 ---
-title: "containerd 深度指南"
+title: containerd 深度指南
+summary: containerd 深度指南：containerd 是 Kubernetes 1.24+ 的标准容器运行时。理解其架构和工作原理，对于排查镜像拉取失败、容器启动异常等问题至关重要。
 category: domain-13
-tags: ["domain-13", "containerd", "容器运行时", "CRI", "镜像管理", "RuntimeClass", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- domain-13
+- containerd
+- 容器运行时
+- CRI
+- 镜像管理
+- RuntimeClass
+- visibility/public
+tier: core
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # containerd 深度指南
 
@@ -165,3 +177,7 @@ data:
 - [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-image-pull/SKILL.md|k8s-image-pull]] — K8s 镜像拉取机制
 - [[domain-13-container-runtime/01-containerd-deep-guide.md|container-runtime-security]] — 容器运行时安全
 - [[domain-13-container-runtime/01-containerd-deep-guide.md|docker-migration-containerd]] — Docker 迁移至 containerd 指南
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

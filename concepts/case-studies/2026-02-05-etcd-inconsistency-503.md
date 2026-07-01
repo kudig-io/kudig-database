@@ -1,15 +1,25 @@
 ---
-title: "[2026-02-05] [P0] etcd 数据不一致导致 API Server 间歇性 503"
+title: '[2026-02-05] [P0] etcd 数据不一致导致 API Server 间歇性 503'
+summary: '[2026-02-05] [P0] etcd 数据不一致导致 API Server 间歇性 503：03:12，监控系统告警 K8sAPIServerErrorRate
+  飙升至 35%。症状：'
 category: case-study
-tags: [production, incident, control-plane, etcd, apiserver]
-date: "2026-02-05"
+tags:
+- production
+- incident
+- control-plane
+- etcd
+- apiserver
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-02-05'
 severity: P0
-mttr: "45min"
+mttr: 45min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-02-05] etcd 数据不一致导致 API Server 503 ServiceUnavailable
 

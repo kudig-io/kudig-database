@@ -1,6 +1,7 @@
 ---
 title: 云原生安全事件响应手册
 description: 面向阿里云/专有云 K8s 的安全事件响应手册，涵盖事件分类、检测、遏制、根除、恢复与事后复盘全流程。
+summary: 面向阿里云/专有云 K8s 的安全事件响应手册，涵盖事件分类、检测、遏制、根除、恢复与事后复盘全流程。
 category: security
 tags:
 - k8s
@@ -10,6 +11,9 @@ tags:
 - forensics
 - alicloud
 - apsara-stack
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -42,9 +46,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # 云原生安全事件响应手册
 
@@ -160,7 +164,7 @@ spec:
 kubectl audit-log search --verb=delete --user=system:anonymous --since=1h
 
 # 分析高危操作
-grep '"level":"Metadata"\|"level":"RequestResponse"' /var/log/kubernetes/audit.log | \
+grep '"level":"Metadata"|"level":"RequestResponse"' /var/log/kubernetes/audit.log | \
   jq 'select(.verb | in({"create":1,"delete":1,"patch":1})) | {user:.user.username, verb, resource:.objectRef.resource, name:.objectRef.name, namespace:.objectRef.namespace, time:.requestReceivedTimestamp}'
 ```
 

@@ -1,5 +1,6 @@
 ---
 title: StatefulSet × 云原生存储
+summary: StatefulSet 与云原生存储的交叉合成：有状态应用在 K8s 上的持久化、扩容与灾备模式。
 category: synthesis
 tags:
 - statefulset
@@ -7,24 +8,25 @@ tags:
 - csi
 - kubernetes
 - database
+tier: supporting
 sources:
 - domain-04-storage-data/04-stateful-app-storage/01-stateful-app-storage-patterns.md
 - domain-04-storage-data/04-stateful-app-storage/02-mysql-statefulset-production.md
 - domain-04-storage-data/04-stateful-app-storage/03-postgresql-statefulset-production.md
 - domain-04-storage-data/04-stateful-app-storage/04-kafka-statefulset-production.md
 - domain-04-storage-data/04-stateful-app-storage/05-redis-cluster-statefulset.md
-created: "2026-06-26"
-updated: "2026-06-26"
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06-26
-summary: "StatefulSet 与云原生存储的交叉合成：有状态应用在 K8s 上的持久化、扩容与灾备模式。"
 provenance:
   extracted: 0.3
   inferred: 0.6
   ambiguous: 0.1
 base_confidence: 0.75
 lifecycle: draft
-lifecycle_changed: "2026-06-26"
+lifecycle_changed: '2026-06-26'
 ---
+
 
 # StatefulSet × 云原生存储
 

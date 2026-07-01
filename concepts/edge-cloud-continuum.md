@@ -1,6 +1,7 @@
 ---
 title: 边缘-云连续体的运维架构
 description: '# 边缘-云连续体的运维架构'
+summary: '# 边缘-云连续体的运维架构'
 category: synthesis
 tags:
 - edge-computing
@@ -9,6 +10,8 @@ tags:
 - multi-cluster
 - iot
 - prometheus
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,13 +26,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/kubeedge.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/networking.md]]"
-    type: related_to
+- target: '[[entities/kubeedge.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/networking.md]]'
+  type: related_to
 ---
+
+
 
 # 边缘-云连续体的运维架构
 

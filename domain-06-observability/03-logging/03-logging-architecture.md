@@ -1,6 +1,7 @@
 ---
 title: 03 - 日志收集架构详解 (Logging Architecture)
 description: 'title: 03 - 日志收集架构详解 (Logging Architecture)'
+summary: 'title: 03 - 日志收集架构详解 (Logging Architecture)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - containerd
 - docker
 - elasticsearch
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 03 - 日志收集架构详解 (LoggingLogging Architecture）|Logging Architecture]])
 description: '# 03 - 日志收集架构详解 (Logging Architecture)'
@@ -307,7 +311,7 @@ recommended_logging_stack:
 [PARSER]
     Name        nginx
     Format      regex
-    Regex       ^(?<remote>[^ ]*) - (?<host>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*?)(?: +\S*)?)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)"(?:\s+(?<http_x_forwarded_for>[^ ]+))?)?$
+    Regex       ^(?<remote>[^ ]*) - (?<host>[^ ]*) \[(?<time>[^]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*?)(?: +\S*)?)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)"(?:\s+(?<http_x_forwarded_for>[^ ]+))?)?$
     Time_Key    time
     Time_Format %d/%b/%Y:%H:%M:%S %z
     Time_Keep   On

@@ -1,6 +1,7 @@
 ---
 title: 证书身份到 RBAC 的映射关系 (topic-code-analysis)
 description: 'description: ''| X509 认证插件 | `staging/src/k8s.io/apiserver/pkg/authentication/request/x509/x509.go`'
+summary: 'description: ''| X509 认证插件 | `staging/src/k8s.io/apiserver/pkg/authentication/request/x509/x509.go`'
 category: general
 tags:
 - reference
@@ -10,6 +11,8 @@ tags:
 - kubelet
 - scheduler
 - controller-manager
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 证书身份到 RBAC 的映射关系
 description: '| X509 认证插件 | `staging/src/k8s.io/apiserver/pkg/authentication/request/x509/x509.go`
@@ -614,6 +618,8 @@ subjects:
 ```
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

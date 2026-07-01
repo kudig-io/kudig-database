@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 培训：Inner Training
 description: '- "集群管理"'
+summary: '- "集群管理"'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - prometheus
 - grafana
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ### ACK/ACR/K8S 内部培训 1 个月学习计划
 

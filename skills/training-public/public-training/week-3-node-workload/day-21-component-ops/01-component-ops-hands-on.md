@@ -1,6 +1,7 @@
 ---
 title: 'Day 21: K8s 组件运维实操'
 description: 'title: Day 21: K8s 组件运维实操'
+summary: 'title: Day 21: K8s 组件运维实操'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - gpu-ml-basics
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 21: K8s 组件运维实操
@@ -380,7 +384,7 @@ echo "[4] 检查节点状态"
 kubectl get nodes -o wide
 
 echo "[5] 检查事件"
-kubectl get events -A --sort-by='.lastTimestamp' | tail -50 | grep -i "error\|failed"
+kubectl get events -A --sort-by='.lastTimestamp' | tail -50 | grep -i "error|failed"
 
 echo "[6] 查看组件日志"
 kubectl logs -n kube-system -l component=kube-apiserver --tail=20

@@ -1,12 +1,15 @@
 ---
 title: kubelet
-description: 'kubelet 是运行在每个 Kubernetes 节点上的代理程序。它确保容器按照 PodSpec 中描述的规格运行，是节点上最重要的组件。...'
+description: kubelet 是运行在每个 Kubernetes 节点上的代理程序。它确保容器按照 PodSpec 中描述的规格运行，是节点上最重要的组件。...
+summary: kubelet 是运行在每个 Kubernetes 节点上的代理程序。它确保容器按照 PodSpec 中描述的规格运行，是节点上最重要的组件。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - kubelet
 - node
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -21,8 +24,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # kubelet
 

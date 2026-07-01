@@ -1,6 +1,8 @@
 ---
-title: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+title: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis
+  & Remediation
 description: '- 运维工程师'
+summary: '- 运维工程师'
 category: skills
 tags:
 - k8s
@@ -13,6 +15,8 @@ tags:
 - daemonset
 - job
 - cronjob
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -22,11 +26,15 @@ audience:
 - 技术支持
 estimated_read_time: 35min
 intent_queries:
-- Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation 是什么
-- 如何 Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+- Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis
+  & Remediation 是什么
+- 如何 Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis
+  & Remediation
 - Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation 故障排查
-- Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation 排障步骤
+- Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis
+  & Remediation 故障排查
+- Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis
+  & Remediation 排障步骤
 trigger_keywords:
 - Namespace
 - Quota
@@ -41,10 +49,12 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 skill_id: SKILL-24_NAMESPACE_QUOTA_LIMITRANGE-001
-skill_name: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+skill_name: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
+  Diagnosis & Remediation
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 ---
 skill_id: "SKILL-CONFIG-002"
@@ -246,7 +256,7 @@ kubectl get namespaces --field-selector status.phase=Terminating
 # 统计受影响的 Pod 创建事件
 kubectl get events --all-namespaces --field-selector reason=FailedCreate -o jsonpath='{
   range .items[*]
-}{.metadata.namespace}{"\t"}{.message}{"\n"}{end}' | grep -i "quota\|limit"
+}{.metadata.namespace}{"\t"}{.message}{"\n"}{end}' | grep -i "quota|limit"
 ```
 > **判断规则**: 
 > - 如果存在 Terminating Namespace 超过 10 分钟 → 影响范围为 Namespace 生命周期管理

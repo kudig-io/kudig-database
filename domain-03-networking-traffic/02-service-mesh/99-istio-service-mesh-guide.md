@@ -1,6 +1,7 @@
 ---
 title: Istio 企业级服务网格入门指南
 description: '# Istio 企业级服务网格入门指南'
+summary: '# Istio 企业级服务网格入门指南'
 category: service-mesh-microservices
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - helm
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -60,8 +63,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
-created: "2026-05-23"
 ---
+
+
 
 # [[Istio|Istio]] 企业级服务网格入门指南
 

@@ -1,6 +1,7 @@
 ---
 title: Kubeadm Fta
 description: 'description: B_OR --> B4["B4. 网络插件初始化失败<br/>CNI 配置冲突 / calico 节点状态"]'
+summary: 'description: B_OR --> B4["B4. 网络插件初始化失败<br/>CNI 配置冲突 / calico 节点状态"]'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - calico
 - containerd
 - ingress
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 fta_id: FTA-KUBEADM-001
 component: Kubeadm
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 # Kubeadm Fta
 

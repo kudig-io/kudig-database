@@ -1,6 +1,7 @@
 ---
 title: Vitess (entities)
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - argocd
 - mysql
 - crd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - gitops-basics
 - etcd-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # Vitess
 

@@ -1,6 +1,7 @@
 ---
 title: 华为云 CCE 企业级容器平台深度实践
 description: '# 华为云 CCE 企业级容器平台深度实践'
+summary: '# 华为云 CCE 企业级容器平台深度实践'
 category: multi-cloud-hybrid
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - mysql
 - postgresql
 - kafka
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -50,8 +53,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 华为云 CCE 企业级容器平台深度实践
 

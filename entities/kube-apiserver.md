@@ -1,6 +1,7 @@
 ---
 title: kube-apiserver
 description: kube-apiserver — Kubernetes 生产运维知识库
+summary: kube-apiserver — Kubernetes 生产运维知识库
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - scheduler
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # kube-apiserver
 

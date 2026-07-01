@@ -1,11 +1,14 @@
 ---
 title: 最佳实践模板
 description: 用于标准化知识库中最佳实践内容的模板
+summary: 用于标准化知识库中最佳实践内容的模板
 category: template
 tags:
 - best-practice
 - template
 - standard
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -19,8 +22,9 @@ trigger_keywords:
 - 最佳实践
 - 模板
 - 标准
-created: "2026-05-23"
 ---
+
+
 
 # 最佳实践模板
 

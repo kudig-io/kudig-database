@@ -1,6 +1,7 @@
 ---
 title: 02 - 块存储、文件存储、对象存储
 description: '# 02 - 块存储、文件存储、对象存储'
+summary: '# 02 - 块存储、文件存储、对象存储'
 category: storage-fundamentals
 tags:
 - storage
@@ -11,6 +12,8 @@ tags:
 - ceph
 - minio
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -42,8 +45,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 02 - 块存储、文件存储、对象存储
 

@@ -1,6 +1,7 @@
 ---
 title: TCP/UDP 协议深度解析
 description: '# TCP/UDP 协议深度解析'
+summary: '# TCP/UDP 协议深度解析'
 category: network-fundamentals
 tags:
 - network
@@ -11,6 +12,8 @@ tags:
 - rag
 - cilium
 - ebpf
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -48,8 +51,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # TCP/UDP 协议深度解析
 
@@ -722,7 +726,7 @@ tcp_state_monitor() {
     
     # 3. SYN队列状态
     echo -e "\n3. SYN队列状态:"
-    netstat -s | grep -i "listen\|syn"
+    netstat -s | grep -i "listen|syn"
     
     # 4. 重传统计
     echo -e "\n4. TCP重传统计:"

@@ -1,6 +1,7 @@
 ---
 title: eBPF 安全应用案例 (eBPF Security Applications and Use Cases)
 description: '# eBPF 安全应用案例 (eBPF Security Applications and Use Cases)'
+summary: '# eBPF 安全应用案例 (eBPF Security Applications and Use Cases)'
 category: ebpf-technology
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - helm
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -55,8 +58,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # eBPF 安全应用案例 (eBPF Security Applications and Use Cases)
 
@@ -4061,7 +4065,7 @@ fi
 echo -e "\n[7] Cilium 状态"
 if cilium status 2>/dev/null | grep -q "OK"; then
     echo -e "    ${GREEN}✓ Cilium 运行正常${NC}"
-    POLICY_COUNT=$(cilium policy get 2>/dev/null | grep -c "IngressRule\|EgressRule" || echo "0")
+    POLICY_COUNT=$(cilium policy get 2>/dev/null | grep -c "IngressRule|EgressRule" || echo "0")
     echo "    已应用策略规则: $POLICY_COUNT 条"
 else
     echo -e "    ${RED}✗ Cilium 状态异常${NC}"

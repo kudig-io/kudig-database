@@ -1,15 +1,16 @@
 ---
+title: Febm Template
+summary: 'febm_id: "FEBM-{SEQ}" title: {{主题名称}} [templates] component: "{{组件名称}}"
+  severity: "P{0-3}" k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"] evidence_collector:
+  "{{采集工具，如 falco/container-explo...'
+category: general
+tags:
+- febm-template
+tier: supporting
+created: '2026-07-01'
+---
 
-## YAML Front Matter
-
-```yaml
-created: "2026-05-23"
-updated: "2026-05-23"
-last_updated: 2026-05-23
-title: "{{主题名称}} FEBM 法医取证分析"
-category: uncategorized
-tags: ["uncategorized", "visibility/public"]
----# {{主题名称}} FEBM 法医取证分析
+# {{主题名称}} FEBM 法医取证分析
 
 > **文档类型**: FEBM 取证分析
 > **适用版本**: Kubernetes v1.28 - v1.32

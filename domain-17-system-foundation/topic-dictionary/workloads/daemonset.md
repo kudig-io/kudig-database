@@ -1,6 +1,7 @@
 ---
 title: DaemonSet
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - opa
 - pdb
+tier: core
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,9 +37,9 @@ prerequisites:
 - cni-basics
 - policy-basics
 - logging-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # DaemonSet
 

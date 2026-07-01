@@ -1,6 +1,7 @@
 ---
 title: 安装部署与快速入门
 description: '# 安装部署与快速入门'
+summary: '# 安装部署与快速入门'
 category: ai-coding
 tags:
 - ai
@@ -10,6 +11,8 @@ tags:
 - docker
 - llm
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 安装部署与快速入门
 

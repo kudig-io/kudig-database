@@ -1,6 +1,7 @@
 ---
 title: 游戏后端 Kubernetes 生产架构设计 (domain-20-application-patterns)
 description: 'title: 游戏后端 Kubernetes 生产架构设计'
+summary: 'title: 游戏后端 Kubernetes 生产架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - gateway
 - operator
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 游戏后端 [[Kubernetes|Kubernetes]] 生产架构设计
 description: '# 游戏后端 Kubernetes 生产架构设计'

@@ -1,6 +1,7 @@
 ---
 title: HPA 与 VPA 自动扩缩容故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: HPA 与 VPA 自动扩缩容故障排查指南'
+summary: 'title: HPA 与 VPA 自动扩缩容故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - vpa
 - pdb
 - statefulset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -40,8 +43,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 title: HPA 与 VPA 自动扩缩容故障排查指南
 description: '# HPA 与 VPA 自动扩缩容故障排查指南'

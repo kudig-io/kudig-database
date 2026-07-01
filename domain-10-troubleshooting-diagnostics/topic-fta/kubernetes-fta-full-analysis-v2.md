@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 全量故障树分析(FTA)排查手册 - 增强版 (domain-10-troubleshooting-diagnostics)
 description: 'title: Kubernetes 全量故障树分析(FTA)排查手册 - 增强版'
+summary: 'title: Kubernetes 全量故障树分析(FTA)排查手册 - 增强版'
 category: fta
 tags:
 - fta
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - istio
 - envoy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -55,8 +58,9 @@ prerequisites:
 fta_id: FTA-KUBERNETES_FULL_ANALYSIS_V2-001
 component: Kubernetes Full Analysis V2
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]]es 全量故障树分析(FTA)排查手册|Kubernetes 全量故障树分析(FTA)排查手册]] - 增强版
 description: '# Kubernetes 全量故障树分析(FTA)排查手册 - 增强版'

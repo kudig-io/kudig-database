@@ -1,6 +1,7 @@
 ---
 title: API Server 故障排查
 description: '# 01 - API Server 故障排查 (API Server Troubleshooting)'
+summary: '# 01 - API Server 故障排查 (API Server Troubleshooting)'
 category: troubleshooting
 tags:
 - apiserver
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - prometheus
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -64,8 +67,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md
   label: '故障树: apiserver'
-created: "2026-05-23"
 ---
+
+
 
 # 01 - API Server 故障排查 (API Server Troubleshooting)
 difficulty: "advanced"
@@ -489,7 +493,7 @@ echo ""
 
 # 4. 检查最近错误日志
 echo "4. 最近错误日志:"
-journalctl -u kube-apiserver --since "10 minutes ago" | grep -i "error\|fatal\|panic" | tail -10
+journalctl -u kube-apiserver --since "10 minutes ago" | grep -i "error|fatal|panic" | tail -10
 echo ""
 
 # 5. 检查资源使用

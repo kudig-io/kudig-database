@@ -1,6 +1,8 @@
 ---
 title: Operator 生命周期管理：OLM、升级与 Day-2 运维
-description: 面向阿里云 ACK / 专有云 ASO 的 Kubernetes Operator 生命周期管理，涵盖 OLM 安装、订阅升级、Day-2 运维与故障排查
+description: 面向阿里云 ACK / 专有云 ASO 的 Kubernetes Operator 生命周期管理，涵盖 OLM 安装、订阅升级、Day-2
+  运维与故障排查
+summary: 面向阿里云 ACK / 专有云 ASO 的 Kubernetes Operator 生命周期管理，涵盖 OLM 安装、订阅升级、Day-2 运维与故障排查
 category: domain
 tags:
 - kubernetes
@@ -14,8 +16,9 @@ tags:
 - aso
 - lifecycle
 - management
-created: "2026-06-29"
-updated: "2026-06-29"
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06-29
 difficulty: advanced
 reading_level: advanced
@@ -50,6 +53,8 @@ authors:
 - name: KUDIG Team
   role: contributor
 ---
+
+
 
 # Operator 生命周期管理：OLM、升级与 Day-2 运维
 

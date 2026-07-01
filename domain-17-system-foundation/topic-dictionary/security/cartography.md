@@ -1,6 +1,7 @@
 ---
 title: Cartography 资产图谱
-description: 'Cartography 是 Lyft 开源的安全资产图谱工具，自动收集和关联云基础设施的资产信息，以图数据库（Neo4j）可视化展示资产关系和安全态势。...'
+description: Cartography 是 Lyft 开源的安全资产图谱工具，自动收集和关联云基础设施的资产信息，以图数据库（Neo4j）可视化展示资产关系和安全态势。...
+summary: Cartography 是 Lyft 开源的安全资产图谱工具，自动收集和关联云基础设施的资产信息，以图数据库（Neo4j）可视化展示资产关系和安全态势。...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - security
 - asset-management
 - graph
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Cartography 资产图谱（Cartography）
 

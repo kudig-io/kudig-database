@@ -1,6 +1,7 @@
 ---
 title: 节点状态与健康检查 — Node Conditions 源码分析
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - reference
@@ -13,6 +14,8 @@ tags:
 - containerd
 - daemonset
 - gpu
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 节点状态与健康检查 Node Conditions 源码分析
 description: '## 概述'
@@ -485,7 +489,7 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.a
 | Ready=Unknown | kubelet 超时 | `curl -k https://localhost:10250/healthz` | 检查网络，重启 kubelet |
 | MemoryPressure=True | 内存不足 | `free -h; kubectl top node` | 扩容/驱逐 Pod/增加内存 |
 | DiskPressure=True | 磁盘不足 | `df -h; du -sh /var/lib/*` | 清理镜像/日志/增加磁盘 |
-| PIDPressure=True | PID 不足 | `cat /proc/sys/kernel/pid_max; ps -eLf \| wc -l` | 增加 pid_max，设置 podPidsLimit |
+| PIDPressure=True | PID 不足 | `cat /proc/sys/kernel/pid_max; ps -eLf | wc -l` | 增加 pid_max，设置 podPidsLimit |
 | NetworkUnavailable=True | CNI 未配置 | `ls /etc/cni/net.d/; ip link` | 安装 CNI 插件 |
 
 ---
@@ -502,6 +506,8 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.a
 | `CheckNodeReady` | `pkg/scheduler/framework/plugins/` | 调度器就绪检查 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

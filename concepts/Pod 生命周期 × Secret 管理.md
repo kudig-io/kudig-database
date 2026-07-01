@@ -1,6 +1,7 @@
 ---
 title: Pod 生命周期 × Secret 管理
 description: '# Pod 生命周期 × Secret 管理'
+summary: '# Pod 生命周期 × Secret 管理'
 category: synthesis
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - lifecycle
 - kubelet
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,19 +29,20 @@ trigger_keywords:
 - 管理
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/kubelet.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/configuration/secrets.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]"
-    type: related_to
-  - target: "[[concepts/Operator 模式 × Pod 生命周期.md]]"
-    type: uses
-  - target: "[[concepts/Pod 生命周期 × 存储模型.md]]"
-    type: uses
+- target: '[[entities/kubelet.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/configuration/secrets.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+  type: related_to
+- target: '[[concepts/Operator 模式 × Pod 生命周期.md]]'
+  type: uses
+- target: '[[concepts/Pod 生命周期 × 存储模型.md]]'
+  type: uses
 ---
+
+
 
 # Pod 生命周期 × Secret 管理
 

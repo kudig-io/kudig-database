@@ -1,6 +1,7 @@
 ---
 title: AI 语料库配置 (Corpus Config)
 description: '# AI 语料库配置 (Corpus Config)'
+summary: '# AI 语料库配置 (Corpus Config)'
 category: general
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - agent
 - daemonset
 - gpu
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # AI 语料库配置 (Corpus Config)
 

@@ -1,6 +1,7 @@
 ---
 title: Security Domain
 description: 'description: ''### 🔰 基础安全概念 (01-04)'''
+summary: 'description: ''### 🔰 基础安全概念 (01-04)'''
 category: general
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - rbac
 - networkpolicy
 - webhook
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - rbac-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Security Domain

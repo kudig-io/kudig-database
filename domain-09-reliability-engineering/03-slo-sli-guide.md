@@ -1,13 +1,27 @@
 ---
-title: "SLO、SLI 与错误预算实践指南"
+title: SLO、SLI 与错误预算实践指南
+summary: SLO、SLI 与错误预算实践指南：SLO（服务等级目标）是可靠性工程的核心工具，它将抽象的"系统稳定"转化为可量化、可追踪的指标。通过 SLO
+  和错误预算，团队可以在可靠性与创新速度之间找到平衡。
 category: domain-09
-tags: ["domain-09", "SLO", "SLI", "SLA", "可靠性", "错误预算", "监控", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- domain-09
+- SLO
+- SLI
+- SLA
+- 可靠性
+- 错误预算
+- 监控
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # SLO、SLI 与错误预算实践指南
 
@@ -149,3 +163,7 @@ Burn Rate 表示错误预算的消耗速度：
 - [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/30-monitoring-alerting-troubleshooting.md|monitoring-alerting-troubleshooting]] — 监控告警问题排查
 - [[domain-09-reliability-engineering/98-merged-indexes/index.md|chaos-engineering-guide]] — 混沌工程实践
 - [[domain-09-reliability-engineering/98-merged-indexes/index.md|capacity-planning-guide]] — 容量规划指南
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

@@ -1,6 +1,7 @@
 ---
 title: 删除时的安全清理 (topic-code-analysis)
 description: 'title: 删除时的安全清理'
+summary: 'title: 删除时的安全清理'
 category: general
 tags:
 - reference
@@ -11,6 +12,8 @@ tags:
 - scheduler
 - controller-manager
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 删除时的安全清理
 category: cluster-delete
@@ -480,6 +484,8 @@ echo "=== 安全清理完成 ==="
 - [`证书生成`](../cluster-cert/02-ca-generation.md) — 理解证书文件结构
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[scripts/man/INSTALL.md|INSTALL]]

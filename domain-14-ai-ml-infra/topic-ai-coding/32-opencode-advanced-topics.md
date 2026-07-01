@@ -1,6 +1,7 @@
 ---
 title: 进阶话题与生产最佳实践
 description: '# 进阶话题与生产最佳实践'
+summary: '# 进阶话题与生产最佳实践'
 category: ai-coding
 tags:
 - ai
@@ -8,6 +9,8 @@ tags:
 - copilot
 - code-generation
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 进阶话题与生产最佳实践
 

@@ -1,6 +1,7 @@
 ---
 title: KUDIG 项目整体重组行动计划 v2
 description: 基于 LLM-Wiki 三层架构，将 topic 融入 domain，同时保留知识图谱层
+summary: 基于 LLM-Wiki 三层架构，将 topic 融入 domain，同时保留知识图谱层
 category: report
 tags:
 - restructure
@@ -13,6 +14,8 @@ tags:
 - falco
 - llm
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - gitops-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG 项目整体重组行动计划 v2
 

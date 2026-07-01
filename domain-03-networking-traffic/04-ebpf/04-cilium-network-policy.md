@@ -1,6 +1,7 @@
 ---
 title: Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)
 description: 'title: Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)'
+summary: 'title: Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)'
 category: general
 tags:
 - ebpf
@@ -13,6 +14,8 @@ tags:
 - envoy
 - helm
 - redis
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -42,8 +45,9 @@ prerequisites:
 - etcd-basics
 - kafka-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Cilium|Cilium]] 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)
 description: '# Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)'

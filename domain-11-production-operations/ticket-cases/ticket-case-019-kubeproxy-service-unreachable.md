@@ -2,6 +2,7 @@
 title: Service 访问异常：kube-proxy 未同步 Endpoint 导致 ClusterIP 不通
 description: 专有云 ACK 集群因 kube-proxy 异常停止同步 Endpoint，导致 Service ClusterIP 与 NodePort
   均无法访问后端的工单闭环样本。
+summary: 专有云 ACK 集群因 kube-proxy 异常停止同步 Endpoint，导致 Service ClusterIP 与 NodePort 均无法访问后端的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -12,6 +13,9 @@ tags:
 - nodeport
 - p0
 - network
+tier: peripheral
+created: '2026-06-26T15:30:00+08:00'
+updated: '2026-06-26T18:00:00+08:00'
 incident_id: INC-2026-ACK-019
 priority: P0
 severity: critical
@@ -23,9 +27,7 @@ skill_ref:
 - kube-proxy 原理
 fta_ref:
 - 'FTA: Service 访问不通'
-created: '2026-06-26T15:30:00+08:00'
-updated: '2026-06-26T18:00:00+08:00'
-last_updated: 2026-06-26T18:00:00+08:00
+last_updated: 2026-06-26 18:00:00+08:00
 difficulty: advanced
 reading_level: advanced
 audience:
@@ -50,15 +52,17 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-17-system-foundation/topic-dictionary/fundamentals/kube-proxy.md]]"
+- target: '[[domain-17-system-foundation/topic-dictionary/fundamentals/kube-proxy.md]]'
   type: related_to
-- target: "[[concepts/service.md]]"
+- target: '[[concepts/service.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-044-kubeproxy-service-unreachable.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-044-kubeproxy-service-unreachable.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 

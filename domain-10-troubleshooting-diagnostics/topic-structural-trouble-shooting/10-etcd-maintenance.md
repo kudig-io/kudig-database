@@ -1,6 +1,8 @@
 ---
 title: etcd 维护专项文档 [domain-10-troubleshooting-diagnostics]
-description: 'description: ''**文档类型**: 运维维护手册 | **适用版本**: K8s 1.28-1.33 | **最后更新**: 2026-05'''
+description: 'description: ''**文档类型**: 运维维护手册 | **适用版本**: K8s 1.28-1.33 | **最后更新**:
+  2026-05'''
+summary: 'description: ''**文档类型**: 运维维护手册 | **适用版本**: K8s 1.28-1.33 | **最后更新**: 2026-05'''
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -11,6 +13,8 @@ tags:
 - job
 - rag
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -38,8 +42,9 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[etcd|etcd]] 维护专项文档
 description: '**文档类型**: 运维维护手册 | **适用版本**: K8s 1.28-1.33 | **最后更新**: 2026-05'

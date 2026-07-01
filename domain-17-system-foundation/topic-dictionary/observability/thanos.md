@@ -1,6 +1,8 @@
 ---
 title: Thanos
-description: 'Thanos 是 CNCF 孵化项目，为 Prometheus 提供高可用、长期存储和多集群全局视图能力。它解决了单实例 Prometheus 的存储和扩展瓶颈...'
+description: Thanos 是 CNCF 孵化项目，为 Prometheus 提供高可用、长期存储和多集群全局视图能力。它解决了单实例 Prometheus
+  的存储和扩展瓶颈...
+summary: Thanos 是 CNCF 孵化项目，为 Prometheus 提供高可用、长期存储和多集群全局视图能力。它解决了单实例 Prometheus 的存储和扩展瓶颈...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +11,8 @@ tags:
 - prometheus
 - observability
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Thanos
 

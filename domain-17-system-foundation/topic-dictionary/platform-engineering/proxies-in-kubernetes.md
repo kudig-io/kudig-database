@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 中的代理
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - apiserver
 - ingress
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -25,8 +28,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 中的代理
 
@@ -126,10 +130,10 @@ Kubernetes 中有五种主要的代理类型：
 |------|---------|-------------|
 | `kubectl proxy` 启动后无法连接 | 端口被占用或 kubeconfig 错误 | `lsof -i :8001` 检查端口；`kubectl cluster-info` 验证连接 |
 | apiserver proxy 返回 502/503 | 目标 Pod/Service 不可达 | `kubectl get endpoints <svc>` 检查后端；`kubectl logs` 查看目标 Pod |
-| Service 无法访问（kube-proxy） | kube-proxy 未运行或 iptables 规则异常 | `kubectl -n kube-system get [[Pods|pods]] -l [[entities/kubernetes.md|[[Kubernetes 生产环境速查卡|k8s]]]]-app=kube-proxy`；`iptables-save \| grep <svc-name>` |
+| Service 无法访问（kube-proxy） | kube-proxy 未运行或 iptables 规则异常 | `kubectl -n kube-system get [[Pods|pods]] -l [[entities/kubernetes.md|[[Kubernetes 生产环境速查卡|k8s]]]]-app=kube-proxy`；`iptables-save | grep <svc-name>` |
 | 外部无法访问 LoadBalancer Service | 云 LB 未就绪或安全组限制 | `kubectl get svc <name>` 检查 EXTERNAL-IP；云控制台检查 LB 状态和安全组 |
 | apiserver 间歇性不可达 | 前端 LB 健康检查失败 | 检查 LB 目标组健康状态；`kubectl get componentstatuses` |
-| kube-proxy 模式不匹配 | 期望 IPVS 但回退到 iptables | `kubectl -n kube-system logs <kube-proxy-pod> \| grep "Using"` |
+| kube-proxy 模式不匹配 | 期望 IPVS 但回退到 iptables | `kubectl -n kube-system logs <kube-proxy-pod> | grep "Using"` |
 
 ## 生产检查清单
 

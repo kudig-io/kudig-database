@@ -1,12 +1,15 @@
 ---
 title: kudig-database 预热倒计时文案
 description: 做了一件可能改变 K8s 运维方式的事。
+summary: 做了一件可能改变 K8s 运维方式的事。
 category: general
 tags:
 - k8s
 - etcd
 - prometheus
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # kudig-database 预热倒计时文案
 

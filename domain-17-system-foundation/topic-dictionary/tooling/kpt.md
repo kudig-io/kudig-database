@@ -1,6 +1,8 @@
 ---
 title: kpt 包管理工具
-description: 'kpt 是 Google 开源的 Kubernetes 包管理工具，基于 Git 仓库管理 K8s 配置包，支持包的获取、定制和自动更新，是 Helm/Kust...'
+description: kpt 是 Google 开源的 Kubernetes 包管理工具，基于 Git 仓库管理 K8s 配置包，支持包的获取、定制和自动更新，是
+  Helm/Kust...
+summary: kpt 是 Google 开源的 Kubernetes 包管理工具，基于 Git 仓库管理 K8s 配置包，支持包的获取、定制和自动更新，是 Helm/Kust...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - tooling
 - package
 - configuration
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # kpt 包管理工具（kpt）
 

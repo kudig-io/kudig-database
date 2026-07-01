@@ -1,6 +1,7 @@
 ---
 title: K8S 概念类比词典 [resources]
 description: '| ConfigMap | 公告板 | 公开的配置信息 |'
+summary: '| ConfigMap | 公告板 | 公开的配置信息 |'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - daemonset
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,8 +35,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: K8S 概念类比词典

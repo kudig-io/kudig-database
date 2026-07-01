@@ -1,6 +1,7 @@
 ---
 title: 'Domain 23: GitOps与CI/CD (GitOps & CI/CD)'
 description: '**领域定位**: 企业级持续交付平台架构与实践 | **文档数量**: 14篇 | **更新时间**: 2026-04-24'
+summary: '**领域定位**: 企业级持续交付平台架构与实践 | **文档数量**: 14篇 | **更新时间**: 2026-04-24'
 category: gitops-ci-cd
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - helm
 - harbor
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -55,8 +58,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/git.md
   label: '速查卡: git'
-created: "2026-05-23"
 ---
+
+
 
 # Domain 23: GitOps与CI/CD (GitOps & CI/CD)
 

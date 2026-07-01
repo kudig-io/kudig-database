@@ -1,6 +1,8 @@
 ---
 title: Kuma 服务网格
-description: 'Kuma 是 Kong 开源的 CNCF Sandbox 服务网格，基于 Envoy Proxy，支持 Kubernetes 和通用 VM 环境，以易用性和多网...'
+description: Kuma 是 Kong 开源的 CNCF Sandbox 服务网格，基于 Envoy Proxy，支持 Kubernetes 和通用 VM
+  环境，以易用性和多网...
+summary: Kuma 是 Kong 开源的 CNCF Sandbox 服务网格，基于 Envoy Proxy，支持 Kubernetes 和通用 VM 环境，以易用性和多网...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - networking
 - service-mesh
 - envoy
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Kuma 服务网格（Kuma）
 

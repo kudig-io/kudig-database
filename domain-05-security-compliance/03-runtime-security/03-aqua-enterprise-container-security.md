@@ -1,6 +1,7 @@
 ---
 title: Aqua Security 企业级容器安全平台深度实践
 description: '# Aqua Security 企业级容器安全平台深度实践'
+summary: '# Aqua Security 企业级容器安全平台深度实践'
 category: cloud-native-security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - containerd
 - docker
 - redis
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -55,8 +58,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # Aqua Security 企业级容器安全平台深度实践
 
@@ -1119,7 +1123,7 @@ echo ""
 
 echo "=== Recent Security Events ==="
 kubectl logs -n aqua-system -l app=aqua-console --since=1h | \
-  grep -i "security\|vulnerability\|attack\|drift" | tail -20
+  grep -i "security|vulnerability|attack|drift" | tail -20
 echo ""
 
 echo "=== Scan Queue Status ==="

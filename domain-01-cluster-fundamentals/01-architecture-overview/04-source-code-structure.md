@@ -1,6 +1,7 @@
 ---
 title: 04 - Kubernetes 源码结构深度解析
 description: '# 04 - Kubernetes 源码结构深度解析'
+summary: '# 04 - Kubernetes 源码结构深度解析'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - containerd
 - cri-o
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -57,8 +60,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 04 - [[Kubernetes|Kubernetes]] 源码结构深度解析
 

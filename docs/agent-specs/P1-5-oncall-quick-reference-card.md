@@ -1,6 +1,9 @@
 ---
 title: On-Call 快速参考卡
-description: '| Pod 重启循环 | `kubectl get pods -o wide --field-selector status.phase=Running` | 查日志定位根因 |'
+description: '| Pod 重启循环 | `kubectl get pods -o wide --field-selector status.phase=Running`
+  | 查日志定位根因 |'
+summary: '| Pod 重启循环 | `kubectl get pods -o wide --field-selector status.phase=Running`
+  | 查日志定位根因 |'
 category: general
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - hpa
 - vpa
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +35,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # On-Call 快速参考卡
 
@@ -58,7 +64,7 @@ created: "2026-05-23"
 | 告警现象 | 诊断命令 | 修复命令 |
 |---------|---------|---------|
 | 节点 NotReady | `kubectl get nodes -o wide` | `kubectl uncordon <node>` (低风险) |
-| kubelet 连接失败 | `journalctl -u kubelet --since "10m" \| grep -i "connection refused"` | `systemctl restart kubelet` (需审批) |
+| kubelet 连接失败 | `journalctl -u kubelet --since "10m" | grep -i "connection refused"` | `systemctl restart kubelet` (需审批) |
 | 证书过期 | `openssl x509 -in /var/lib/kubelet/pki/kubelet.crt -noout -dates` | `kubeadm alpha certs renew kubelet.conf` (需审批) |
 | 磁盘压力 | `df -h /` | `kubectl cordon <node> && kubectl drain <node> --ignore-daemonsets` (高风险) |
 
@@ -71,9 +77,9 @@ created: "2026-05-23"
 | 告警现象 | 诊断命令 | 修复命令 |
 |---------|---------|---------|
 | Pod 重启循环 | `kubectl get pods -o wide --field-selector status.phase=Running` | 查日志定位根因 |
-| OOMKilled (137) | `kubectl describe pod <pod> \| grep -A5 "Last State"` | 增加 memory limit: `kubectl patch resource limit` (低风险) |
+| OOMKilled (137) | `kubectl describe pod <pod> | grep -A5 "Last State"` | 增加 memory limit: `kubectl patch resource limit` (低风险) |
 | 退出码 1 | `kubectl logs <pod> --previous` | 修正应用配置 |
-| 探针失败 | `kubectl describe pod <pod> \| grep -A10 "Liveness\|Readiness"` | 修正探针配置 |
+| 探针失败 | `kubectl describe pod <pod> | grep -A10 "Liveness|Readiness"` | 修正探针配置 |
 
 > **升级条件**: 核心业务 Pod CrashLoop、应用无法启动
 
@@ -85,7 +91,7 @@ created: "2026-05-23"
 |---------|---------|---------|
 | FailedScheduling | `kubectl get events -A --field-selector reason=FailedScheduling` | 见具体错误：资源不足/污点/亲和性 |
 | Insufficient cpu/memory | `kubectl describe node` 查资源 | 增加资源或迁移工作负载 |
-| node(s) had taint | `kubectl describe node <node> \| grep Taints` | `kubectl patch pod` 添加 toleration (低风险) |
+| node(s) had taint | `kubectl describe node <node> | grep Taints` | `kubectl patch pod` 添加 toleration (低风险) |
 | PVC pending | `kubectl describe pvc` | 检查 StorageClass 是否存在 |
 
 > **升级条件**: 30分钟未解决、核心服务 Pending
@@ -125,8 +131,8 @@ created: "2026-05-23"
 | 告警现象 | 诊断命令 | 修复命令 |
 |---------|---------|---------|
 | PVC Pending | `kubectl describe pvc` 查原因 | 创建缺失的 StorageClass |
-| 挂载失败 | `kubectl describe pod \| grep -A5 "Volumes"` | 检查 PVC 绑定状态 |
-| 云盘存储异常 | `kubectl get pods -n kube-system \| grep csi` | 重启云盘 CSI driver (需审批) |
+| 挂载失败 | `kubectl describe pod | grep -A5 "Volumes"` | 检查 PVC 绑定状态 |
+| 云盘存储异常 | `kubectl get pods -n kube-system | grep csi` | 重启云盘 CSI driver (需审批) |
 | StorageClass 缺失 | `kubectl get storageclass` | 创建 StorageClass 或指定默认 |
 
 > **升级条件**: 有状态应用 PVC 问题、数据不可用
@@ -140,7 +146,7 @@ created: "2026-05-23"
 | 告警现象 | 诊断命令 | 修复命令 |
 |---------|---------|---------|
 | x509 has expired | `openssl s_client -connect <host>:443 -check_ss_exp` | `kubeadm certs renew all` (需审批) |
-| kubelet 证书过期 | `journalctl -u kubelet \| grep -i certificate` | 重启 kubelet 触发自动轮换 (需审批) |
+| kubelet 证书过期 | `journalctl -u kubelet | grep -i certificate` | 重启 kubelet 触发自动轮换 (需审批) |
 | kubeconfig 过期 | `kubectl config view` | `kubeadm kubeconfig user` 重新生成 |
 
 > **升级条件**: 多个组件证书同时过期、控制平面证书问题
@@ -216,7 +222,7 @@ created: "2026-05-23"
 
 | 告警现象 | 诊断命令 | 修复命令 |
 |---------|---------|---------|
-| 异常 Pod 创建 | `kubectl get events --sort-by=.lastTimestamp \| tail -50` | `kubectl get pod -A -o yaml \| grep "image:"` |
+| 异常 Pod 创建 | `kubectl get events --sort-by=.lastTimestamp | tail -50` | `kubectl get pod -A -o yaml | grep "image:"` |
 | 可疑网络连接 | `kubectl exec -it <pod> -- netstat -tlnp` | 隔离 Pod: `kubectl delete pod <pod>` (需审批) |
 | 审计日志异常 | `kubectl logs -n kube-system kube-apiserver-* --audit` | 标记并升级安全团队 |
 
@@ -266,7 +272,7 @@ kubectl get nodes -o wide | grep -v Ready
 kubectl get pods -A | grep -v Running | grep -v Completed
 
 # 事件速查 (最近错误)
-kubectl get events -A --sort-by=.lastTimestamp | tail -100 | grep -i "error\|failed\|warning"
+kubectl get events -A --sort-by=.lastTimestamp | tail -100 | grep -i "error|failed|warning"
 
 # 资源使用速查
 kubectl top nodes && kubectl top pods -A | sort -k3 -rn | head -20

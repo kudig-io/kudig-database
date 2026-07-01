@@ -1,6 +1,7 @@
 ---
 title: KubeFleet 多集群调度
-description: 'KubeFleet 是微软开源的 CNCF Sandbox 项目，提供 Kubernetes 多集群的应用编排和调度，通过 Fleet 概念统一管理大量集群的应...'
+description: KubeFleet 是微软开源的 CNCF Sandbox 项目，提供 Kubernetes 多集群的应用编排和调度，通过 Fleet 概念统一管理大量集群的应...
+summary: KubeFleet 是微软开源的 CNCF Sandbox 项目，提供 Kubernetes 多集群的应用编排和调度，通过 Fleet 概念统一管理大量集群的应...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - scheduling
 - multi-cluster
 - fleet
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # KubeFleet 多集群调度（KubeFleet）
 

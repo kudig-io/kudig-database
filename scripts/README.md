@@ -1,13 +1,17 @@
 ---
 title: scripts/ - 项目工具脚本索引
-description: '| 3 | `code-example-validation.sh` | Bash | 文档中 YAML/Bash 代码块语法校验 | 自动提取所有 Markdown 中的 `yaml` 和 `bash` 代码块，分别用
-  Python yaml 解析和 `bash -n` 做语法校验 |'
+description: '| 3 | `code-example-validation.sh` | Bash | 文档中 YAML/Bash 代码块语法校验 |
+  自动提取所有 Markdown 中的 `yaml` 和 `bash` 代码块，分别用 Python yaml 解析和 `bash -n` 做语法校验 |'
+summary: '| 3 | `code-example-validation.sh` | Bash | 文档中 YAML/Bash 代码块语法校验 | 自动提取所有
+  Markdown 中的 `yaml` 和 `bash` 代码块，分别用 Python yaml 解析和 `bash -n` 做语法校验 |'
 category: general
 tags:
 - k8s
 - agent
 - daemonset
 - gpu
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # scripts/ - 项目工具脚本索引
 

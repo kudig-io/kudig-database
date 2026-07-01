@@ -1,6 +1,7 @@
 ---
 title: FTA 故障树完整索引 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''| TE-4 | 网络通信异常 | 🟠 P1 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#五te-4-网络通信异常-p1)'
+summary: 'description: ''| TE-4 | 网络通信异常 | 🟠 P1 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#五te-4-网络通信异常-p1)'
 category: fta
 tags:
 - fta
@@ -13,6 +14,8 @@ tags:
 - ingress
 - rbac
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -43,8 +46,9 @@ prerequisites:
 fta_id: FTA-FTA_INDEX-001
 component: Fta Index
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: FTA 故障树完整索引
 description: '| TE-4 | 网络通信异常 | 🟠 P1 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#五te-4-网络通信异常-p1)

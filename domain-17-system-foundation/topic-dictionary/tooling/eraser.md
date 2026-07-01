@@ -1,6 +1,7 @@
 ---
 title: Eraser 镜像清理
-description: 'Eraser 是微软开源的 CNCF Sandbox 项目，自动清理 Kubernetes 节点上未使用的容器镜像，释放磁盘空间，支持基于漏洞扫描结果的自动镜像...'
+description: Eraser 是微软开源的 CNCF Sandbox 项目，自动清理 Kubernetes 节点上未使用的容器镜像，释放磁盘空间，支持基于漏洞扫描结果的自动镜像...
+summary: Eraser 是微软开源的 CNCF Sandbox 项目，自动清理 Kubernetes 节点上未使用的容器镜像，释放磁盘空间，支持基于漏洞扫描结果的自动镜像...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - tooling
 - operations
 - cleanup
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Eraser 镜像清理（Eraser）
 

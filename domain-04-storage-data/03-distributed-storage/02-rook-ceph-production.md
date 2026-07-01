@@ -1,6 +1,9 @@
 ---
 title: Rook-Ceph Kubernetes 生产部署与运维
-description: 在阿里云与专有云 Kubernetes 上部署 Rook-Ceph 分布式存储，覆盖架构、部署、Pool与 StorageClass 配置、OSD 故障排查、扩容、性能调优及与阿里云/专有云场景的集成
+description: 在阿里云与专有云 Kubernetes 上部署 Rook-Ceph 分布式存储，覆盖架构、部署、Pool与 StorageClass 配置、OSD
+  故障排查、扩容、性能调优及与阿里云/专有云场景的集成
+summary: 在阿里云与专有云 Kubernetes 上部署 Rook-Ceph 分布式存储，覆盖架构、部署、Pool与 StorageClass 配置、OSD
+  故障排查、扩容、性能调优及与阿里云/专有云场景的集成
 category: storage
 tags:
 - k8s
@@ -13,6 +16,9 @@ tags:
 - alicloud
 - apsara-stack
 - performance-tuning
+tier: supporting
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -45,9 +51,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-26"
-updated: "2026-06-26"
 ---
+
+
 
 # Rook-Ceph Kubernetes 生产部署与运维
 
@@ -554,7 +560,7 @@ aliyun ecs DescribeDisks --RegionId cn-hangzhou \
 | OSD 独占数据盘 | 无系统盘混用 | `lsblk` |
 | Pool 副本数 ≥ 3 | 生产 3 副本 | `ceph osd pool get replicapool size` |
 | StorageClass 允许扩容 | allowVolumeExpansion: true | `kubectl get sc` |
-| 内核模块加载 | rbd/nbd 已加载 | `lsmod \| grep rbd` |
+| 内核模块加载 | rbd/nbd 已加载 | `lsmod | grep rbd` |
 | 镜像仓库可访问 | 专有云 Harbor 正常 | `crictl pull` |
 | 定期备份 Ceph 配置 | 导出 ceph.conf 与 keyring | 备份脚本 |
 | 容量告警阈值 | OSD 80% 告警 | PrometheusRule |

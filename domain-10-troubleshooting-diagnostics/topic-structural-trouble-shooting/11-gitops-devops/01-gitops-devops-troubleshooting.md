@@ -1,6 +1,7 @@
 ---
 title: GitOps/DevOps 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: GitOps/DevOps 故障排查指南'
+summary: 'title: GitOps/DevOps 故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - docker
 - opa
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -43,8 +46,9 @@ prerequisites:
 - prometheus-basics
 - gitops-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: GitOps/DevOps 故障排查指南
 description: '# GitOps/DevOps 故障排查指南'

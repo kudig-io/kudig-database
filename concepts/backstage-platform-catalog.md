@@ -1,12 +1,15 @@
 ---
 title: Backstage 与平台目录的整合
 description: '- 日志和事件聚合'
+summary: '- 日志和事件聚合'
 category: synthesis
 tags:
 - backstage
 - platform-engineering
 - developer-experience
 - service-catalog
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,15 +24,16 @@ trigger_keywords:
 - 与平台目录的整合
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service.md]]"
-    type: uses
-  - target: "[[entities/backstage.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]"
-    type: related_to
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/service.md]]'
+  type: uses
+- target: '[[entities/backstage.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+  type: related_to
 ---
+
+
 
 # [[entities/backstage.md|Backstage]] 与平台目录的整合
 

@@ -1,6 +1,7 @@
 ---
 title: Falco 云原生安全监控深度实践
 description: '# Falco 云原生安全监控深度实践'
+summary: '# Falco 云原生安全监控深度实践'
 category: cloud-native-security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - controller-manager
 - prometheus
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -58,8 +61,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # [[Falco|Falco]] 云原生安全监控深度实践
 

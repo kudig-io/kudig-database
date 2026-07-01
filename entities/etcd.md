@@ -1,7 +1,9 @@
 ---
-summary: "etcd is the backing datastore for Kubernetes. All cluster state ([[Pods|Pods]], Services, [[ConfigMaps|ConfigMaps]], [[Secrets|Secrets]], etc.) is persisted to etcd. It uses Raft consensus for faul..."
 title: etcd (entities)
 description: '- etcd 深度解析'
+summary: etcd is the backing datastore for Kubernetes. All cluster state ([[Pods|Pods]],
+  Services, [[ConfigMaps|ConfigMaps]], [[Secrets|Secrets]], etc.) is persisted to
+  etcd. It uses Raft consensus for faul...
 category: entities
 tags:
 - k8s
@@ -14,6 +16,8 @@ tags:
 - operator
 - rag
 - scheduler
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +33,8 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
 
 # etcd
 

@@ -1,6 +1,7 @@
 ---
 title: 核心依赖变更日志索引
 description: '# 核心依赖变更日志索引'
+summary: '# 核心依赖变更日志索引'
 category: entities
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - cri-o
 - coredns
 - runc
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 核心依赖变更日志索引
 

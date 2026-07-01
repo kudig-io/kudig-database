@@ -1,6 +1,7 @@
 ---
 title: AI Agent 运维模式
 description: '# AI Agent 运维模式'
+summary: '# AI Agent 运维模式'
 category: synthesis
 tags:
 - ai-agent
@@ -12,6 +13,8 @@ tags:
 - serverless
 - kserve
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # AI Agent 运维模式
 

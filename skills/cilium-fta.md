@@ -1,6 +1,7 @@
 ---
 title: Cilium Fta
 description: 'description: ''TE["顶事件: Cilium/EBPF 网络异常<br/>Pod 无法通信 / 访问延迟高"]'''
+summary: 'description: ''TE["顶事件: Cilium/EBPF 网络异常<br/>Pod 无法通信 / 访问延迟高"]'''
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - gateway
 - ebpf
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 fta_id: FTA-CILIUM-001
 component: Cilium
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 # [[Cilium|Cilium]] Fta
 

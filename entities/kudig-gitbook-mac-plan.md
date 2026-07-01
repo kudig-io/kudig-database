@@ -1,6 +1,8 @@
 ---
 title: Gitbook macOS 导出计划
-description: '- [[entities/kudig-gitbook-system.md|kudig-gitbook-system]] — Gitbook 本地文档浏览系统与构建指南'
+description: '- [[entities/kudig-gitbook-system.md|kudig-gitbook-system]] — Gitbook
+  本地文档浏览系统与构建指南'
+summary: '- [[entities/kudig-gitbook-system.md|kudig-gitbook-system]] — Gitbook 本地文档浏览系统与构建指南'
 category: reference
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - macos
 - export
 - plan
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +27,9 @@ trigger_keywords:
 - 导出计划
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Gitbook macOS 导出计划
 

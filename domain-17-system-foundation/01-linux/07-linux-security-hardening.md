@@ -1,6 +1,7 @@
 ---
 title: 07 - Linux 安全加固与合规管理：生产环境安全运维专家指南
 description: '# 07 - Linux 安全加固与合规管理：生产环境安全运维专家指南'
+summary: '# 07 - Linux 安全加固与合规管理：生产环境安全运维专家指南'
 category: linux
 tags:
 - linux
@@ -13,6 +14,8 @@ tags:
 - hpa
 - networkpolicy
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   label: '速查卡: linux'
-created: "2026-05-23"
 ---
+
+
 
 # 07 - Linux 安全加固与合规管理：生产环境安全运维专家指南
 
@@ -507,10 +511,10 @@ awk -F: '$3==0' /etc/passwd
 awk -F: '$2==""' /etc/shadow
 
 # 检查可登录账户
-grep -v "nologin\|false\|sync\|halt\|shutdown" /etc/passwd
+grep -v "nologin|false|sync|halt|shutdown" /etc/passwd
 
 # 检查 sudo 权限
-cat /etc/sudoers /etc/sudoers.d/* 2>/dev/null | grep -v "^#\|^$"
+cat /etc/sudoers /etc/sudoers.d/* 2>/dev/null | grep -v "^#|^$"
 
 # 检查 SSH 配置
 sshd -T                              # 查看生效的 SSH 配置

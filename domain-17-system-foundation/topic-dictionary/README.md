@@ -1,6 +1,7 @@
 ---
 title: Topic Dictionary 知识字典
 description: 基于 Kubernetes 官方文档概念与生产环境最佳实践构建的系统性知识库。
+summary: 基于 Kubernetes 官方文档概念与生产环境最佳实践构建的系统性知识库。
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - argocd
 - flux
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -39,8 +42,9 @@ prerequisites:
 - policy-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Topic Dictionary 知识字典
 

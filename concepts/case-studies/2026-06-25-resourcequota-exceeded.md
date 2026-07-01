@@ -1,15 +1,25 @@
 ---
-title: "[2026-06-25] [P1] ResourceQuota 超限导致新 Pod 无法创建"
+title: '[2026-06-25] [P1] ResourceQuota 超限导致新 Pod 无法创建'
+summary: '[2026-06-25] [P1] ResourceQuota 超限导致新 Pod 无法创建：13:10，开发团队在 Slack 报告所有 CI/CD
+  Pipeline 失败：'
 category: case-study
-tags: [production, incident, cluster-fundamentals, resource-quota, scheduling]
-date: "2026-06-25"
+tags:
+- production
+- incident
+- cluster-fundamentals
+- resource-quota
+- scheduling
+tier: core
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-06-25'
 severity: P1
-mttr: "18min"
+mttr: 18min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-06-25] ResourceQuota CPU 超限导致 CI/CD 部署全部失败
 

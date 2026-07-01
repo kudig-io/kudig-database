@@ -1,6 +1,7 @@
 ---
 title: Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing)
 description: '- sigstore-cosign-signing的最佳实践'
+summary: '- sigstore-cosign-signing的最佳实践'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - gateway
 - webhook
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 - prometheus-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:
@@ -1617,7 +1621,7 @@ cosign login ghcr.io -u USERNAME -p TOKEN
 cosign verify \
   --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
   --certificate-identity-regexp ".*" \
-  your-image:tag 2>&1 | grep -i "Subject\|Issuer"
+  your-image:tag 2>&1 | grep -i "Subject|Issuer"
 # 使用实际值更新验证命令
 
 # 错误 6: "error getting signature manifest"  

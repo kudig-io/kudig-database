@@ -1,6 +1,7 @@
 ---
 title: Domain-10 扩展生态质量报告 (reports)
 description: '- **配置模板**: 200+ 个'
+summary: '- **配置模板**: 200+ 个'
 category: general
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - rbac
 - crd
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,15 +32,16 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - monitoring-basics
-created: '2026-05-23'
 relationships:
-- target: "_reports/execution-plan.md"
+- target: _reports/execution-plan.md
   type: related_to
-- target: "_reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md"
+- target: _reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md
   type: related_to
-- target: "_reports/CONTENT-DEEP-EVALUATION-2026-05-19.md"
+- target: _reports/CONTENT-DEEP-EVALUATION-2026-05-19.md
   type: related_to
 ---
+
+
 
 # Domain-10 扩展生态质量报告
 

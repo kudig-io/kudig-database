@@ -1,6 +1,7 @@
 ---
 title: Pod 安全策略
 description: '# Pod 安全策略'
+summary: '# Pod 安全策略'
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - terminology
 - opa
 - webhook
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -25,8 +28,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # Pod 安全策略
 

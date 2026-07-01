@@ -1,6 +1,9 @@
 ---
 title: Podman Desktop 图形界面
-description: 'Podman Desktop 是 Red Hat 开源的容器管理图形界面工具，提供容器、镜像、Pod 和 Kubernetes 的可视化管理，是 Docker ...'
+description: Podman Desktop 是 Red Hat 开源的容器管理图形界面工具，提供容器、镜像、Pod 和 Kubernetes 的可视化管理，是
+  Docker ...
+summary: Podman Desktop 是 Red Hat 开源的容器管理图形界面工具，提供容器、镜像、Pod 和 Kubernetes 的可视化管理，是
+  Docker ...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - tooling
 - gui
 - container
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Podman Desktop 图形界面（Podman Desktop）
 

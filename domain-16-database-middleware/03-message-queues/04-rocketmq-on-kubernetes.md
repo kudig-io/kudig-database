@@ -1,51 +1,55 @@
 ---
 title: RocketMQ on Kubernetes 生产指南
 description: 在阿里云专有云 ACK 集群中部署与运维 Apache RocketMQ：NameServer/Broker 架构、持久化存储、扩缩容、监控告警与常见问题排查。
+summary: 在阿里云专有云 ACK 集群中部署与运维 Apache RocketMQ：NameServer/Broker 架构、持久化存储、扩缩容、监控告警与常见问题排查。
 category: database-middleware
 tags:
-  - rocketmq
-  - message-queue
-  - name-server
-  - broker
-  - statefulset
-  - storage
-  - kubernetes
-  - alibaba-cloud
+- rocketmq
+- message-queue
+- name-server
+- broker
+- statefulset
+- storage
+- kubernetes
+- alibaba-cloud
+tier: supporting
 created: '2026-06-29'
 updated: '2026-06-29'
 last_updated: 2026-06-29
 difficulty: advanced
 reading_level: advanced
 audience:
-  - 中间件工程师
-  - SRE
-  - 专有云运维
+- 中间件工程师
+- SRE
+- 专有云运维
 estimated_read_time: 18min
 intent_queries:
-  - RocketMQ Kubernetes 部署
-  - RocketMQ NameServer Broker 扩缩容
-  - RocketMQ on K8s 监控告警
+- RocketMQ Kubernetes 部署
+- RocketMQ NameServer Broker 扩缩容
+- RocketMQ on K8s 监控告警
 trigger_keywords:
-  - rocketmq
-  - name-server
-  - broker
-  - controller
-  - message-queue
-  - aliyun mq
+- rocketmq
+- name-server
+- broker
+- controller
+- message-queue
+- aliyun mq
 prerequisites:
-  - domain-16-database-middleware/03-message-queues/03-message-queue-comparison.md
-  - domain-16-database-middleware/01-databases/08-kafka-kubernetes-strimzi.md
-  - domain-04-storage-data/01-k8s-storage/README.md
+- domain-16-database-middleware/03-message-queues/03-message-queue-comparison.md
+- domain-16-database-middleware/01-databases/08-kafka-kubernetes-strimzi.md
+- domain-04-storage-data/01-k8s-storage/README.md
 k8s_versions:
-  - '1.28'
-  - '1.29'
-  - '1.30'
-  - '1.31'
-  - '1.32'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: KUDIG Team
-    role: contributor
+- name: KUDIG Team
+  role: contributor
 ---
+
+
 
 # RocketMQ on Kubernetes 生产指南
 

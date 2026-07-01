@@ -1,6 +1,7 @@
 ---
 title: Service 全面故障排查
 description: '# 10 - Service 全面故障排查 (Service Comprehensive Troubleshooting)'
+summary: '# 10 - Service 全面故障排查 (Service Comprehensive Troubleshooting)'
 category: troubleshooting
 tags:
 - service
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - ingress
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: intermediate
 reading_level: intermediate
@@ -61,8 +64,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
-created: "2026-05-23"
 ---
+
+
 
 # 10 - [[Service|Service]] 全面故障排查 (Service Comprehensive Troubleshooting)
 
@@ -375,7 +379,7 @@ netstat -tlnp | grep <node-port>
 |:---|:---|:---|
 | **防火墙阻断** | `iptables -L INPUT` | 开放端口 |
 | **云安全组** | 云控制台检查 | 添加规则 |
-| **端口冲突** | `ss -tlnp \| grep <port>` | 更换端口 |
+| **端口冲突** | `ss -tlnp | grep <port>` | 更换端口 |
 | **kube-proxy问题** | `kubectl get pods -n kube-system` | 重启kube-proxy |
 | **节点网络问题** | `ping <node-ip>` | 检查网络 |
 

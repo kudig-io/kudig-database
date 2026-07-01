@@ -1,6 +1,7 @@
 ---
 title: Redis 企业级缓存运维深度实践
 description: '# Redis 企业级缓存运维深度实践'
+summary: '# Redis 企业级缓存运维深度实践'
 category: enterprise-database-middleware
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kafka
 - operator
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +54,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/sql.md
   label: '速查卡: sql'
-created: "2026-05-23"
 ---
+
+
 
 # Redis 企业级缓存运维深度实践
 

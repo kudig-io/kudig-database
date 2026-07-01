@@ -1,6 +1,7 @@
 ---
 title: topic-release-notes MOC
 description: topic-release-notes 专题导航页，覆盖 1321 篇文档
+summary: topic-release-notes 专题导航页，覆盖 1321 篇文档
 category: moc
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - flux
 - gpu
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # topic-release-notes MOC
 

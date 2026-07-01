@@ -1,7 +1,11 @@
 ---
 title: 服务网格演进
-description: 本文档综合了 `domain-19-landscape-references/_archived-release-notes/networking/` 目录下 [[istio|Istio]]、[[envoy|Envoy]]、[[cilium|Cilium]]、[[linkerd|Linkerd]]
-  和 Calico 五大网络/服务网格组件的 157 个版本发布说明 ^[inferred]
+description: 本文档综合了 `domain-19-landscape-references/_archived-release-notes/networking/`
+  目录下 [[istio|Istio]]、[[envoy|Envoy]]、[[cilium|Cilium]]、[[linkerd|Linkerd]] 和 Calico
+  五大网络/服务网格组件的 157 个版本发布说明 ^[inferred]
+summary: 本文档综合了 `domain-19-landscape-references/_archived-release-notes/networking/`
+  目录下 [[istio|Istio]]、[[envoy|Envoy]]、[[cilium|Cilium]]、[[linkerd|Linkerd]] 和 Calico
+  五大网络/服务网格组件的 157 个版本发布说明 ^[inferred]
 category: concepts
 tags:
 - k8s
@@ -14,6 +18,8 @@ tags:
 - calico
 - ingress
 - ebpf
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +37,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # 服务网格演进
 

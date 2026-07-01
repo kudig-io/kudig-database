@@ -1,6 +1,7 @@
 ---
 title: Java 应用 Kubernetes 可观测性整合指南
 description: 'title: Java 应用 Kubernetes 可观测性整合指南'
+summary: 'title: Java 应用 Kubernetes 可观测性整合指南'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - job
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - policy-basics
 - logging-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Java 应用 [[Kubernetes|Kubernetes]] 可观测性整合指南
 description: '# Java 应用 Kubernetes 可观测性整合指南'

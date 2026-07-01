@@ -1,12 +1,15 @@
 ---
 title: 可用性
-description: '可用性（Availability）是系统正常运行时间占总时间的比例，通常以百分比表示。它是系统可靠性和恢复能力的综合指标。...'
+description: 可用性（Availability）是系统正常运行时间占总时间的比例，通常以百分比表示。它是系统可靠性和恢复能力的综合指标。...
+summary: 可用性（Availability）是系统正常运行时间占总时间的比例，通常以百分比表示。它是系统可靠性和恢复能力的综合指标。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - availability
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 可用性
 

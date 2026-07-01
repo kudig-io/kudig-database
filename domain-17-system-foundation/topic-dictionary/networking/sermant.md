@@ -1,6 +1,7 @@
 ---
 title: Sermant 服务治理
-description: 'Sermant 是华为开源的 CNCF Sandbox 项目，基于 Java Agent 的无代理服务治理框架，无需 Sidecar 即可实现流量管理、灰度发布...'
+description: Sermant 是华为开源的 CNCF Sandbox 项目，基于 Java Agent 的无代理服务治理框架，无需 Sidecar 即可实现流量管理、灰度发布...
+summary: Sermant 是华为开源的 CNCF Sandbox 项目，基于 Java Agent 的无代理服务治理框架，无需 Sidecar 即可实现流量管理、灰度发布...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - networking
 - service-mesh
 - java
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Sermant 服务治理（Sermant）
 

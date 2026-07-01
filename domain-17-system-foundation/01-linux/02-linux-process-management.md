@@ -1,6 +1,7 @@
 ---
 title: 02 - Linux 进程管理与系统监控：生产环境运维专家实践
 description: '# 02 - Linux 进程管理与系统监控：生产环境运维专家实践'
+summary: '# 02 - Linux 进程管理与系统监控：生产环境运维专家实践'
 category: linux
 tags:
 - linux
@@ -9,6 +10,8 @@ tags:
 - kubelet
 - scheduler
 - docker
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   label: '速查卡: linux'
-created: "2026-05-23"
 ---
+
+
 
 # 02 - Linux 进程管理与系统监控：生产环境运维专家实践
 
@@ -575,7 +579,7 @@ cat /proc/<pid>/oom_score
 cat /proc/<pid>/oom_score_adj
 
 # 查看系统 OOM 日志
-dmesg | grep -i "out of memory\|oom-killer\|killed process"
+dmesg | grep -i "out of memory|oom-killer|killed process"
 journalctl -k | grep -i "oom"
 ```
 

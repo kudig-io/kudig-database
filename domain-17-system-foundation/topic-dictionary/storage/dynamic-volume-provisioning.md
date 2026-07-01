@@ -1,6 +1,7 @@
 ---
 title: Dynamic Volume Provisioning（动态卷供给）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - apiserver
 - statefulset
 - rag
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -27,9 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # Dynamic Volume Provisioning（动态卷供给）
 

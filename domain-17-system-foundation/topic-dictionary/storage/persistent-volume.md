@@ -1,12 +1,16 @@
 ---
 title: 持久化卷
-description: 'PersistentVolume（PV）是 Kubernetes 中集群级别的存储资源，由管理员预先创建或通过 StorageClass 动态供给。它代表集群中...'
+description: PersistentVolume（PV）是 Kubernetes 中集群级别的存储资源，由管理员预先创建或通过 StorageClass
+  动态供给。它代表集群中...
+summary: PersistentVolume（PV）是 Kubernetes 中集群级别的存储资源，由管理员预先创建或通过 StorageClass 动态供给。它代表集群中...
 category: dictionary
 tags:
 - k8s
 - glossary
 - storage
 - pv
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 持久化卷
 

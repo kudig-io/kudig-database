@@ -1,6 +1,7 @@
 ---
 title: kubelet 深度解析 (kubelet Deep Dive)
 description: 'title: kubelet 深度解析 (kubelet Deep Dive)'
+summary: 'title: kubelet 深度解析 (kubelet Deep Dive)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - containerd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[kubelet|kubelet]] 深度解析 (kubelet Deep Dive)
 description: '# kubelet 深度解析 (kubelet Deep Dive)'
@@ -1338,6 +1342,8 @@ cat /sys/fs/cgroup/kubepods.slice/kubepods-pod<uid>.slice/memory.min
 - 17-apiserver-tuning
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
 

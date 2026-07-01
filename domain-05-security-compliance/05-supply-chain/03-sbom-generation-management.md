@@ -1,6 +1,7 @@
 ---
 title: SBOM 生成与管理 (SBOM Generation and Management)
 description: '# SBOM 生成与管理 (SBOM Generation and Management)'
+summary: '# SBOM 生成与管理 (SBOM Generation and Management)'
 category: supply-chain-security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - harbor
 - postgresql
 - job
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -46,8 +49,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # SBOM 生成与管理 (SBOM Generation and Management)
 

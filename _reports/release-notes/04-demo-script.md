@@ -1,6 +1,7 @@
 ---
 title: 发布会演示脚本 (完整版)
 description: '"今天我们要发布的是 kudig-database, 一个专门为 AI 智能体打造的 Kubernetes 生产运维知识库。'
+summary: '"今天我们要发布的是 kudig-database, 一个专门为 AI 智能体打造的 Kubernetes 生产运维知识库。'
 category: general
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - networkpolicy
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 发布会演示脚本 (完整版)
 

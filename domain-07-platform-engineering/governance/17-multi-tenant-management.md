@@ -1,6 +1,7 @@
 ---
 title: 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation)
 description: '# 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation)'
+summary: '# 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation)'
 category: platform-ops
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - job
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -56,8 +59,9 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
-created: "2026-05-23"
 ---
+
+
 
 # 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation)
 

@@ -1,6 +1,7 @@
 ---
 title: 企业级高级实践
 description: '# 企业级高级实践'
+summary: '# 企业级高级实践'
 category: ai-coding
 tags:
 - ai
@@ -10,6 +11,8 @@ tags:
 - gateway
 - llm
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 企业级高级实践
 

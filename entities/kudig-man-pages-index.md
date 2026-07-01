@@ -1,6 +1,7 @@
 ---
 title: KUDIG Man Pages Index (references)
 description: '| `kubernetes(8)` | Kubernetes 核心组件与架构参考 |'
+summary: '| `kubernetes(8)` | Kubernetes 核心组件与架构参考 |'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - helm
 - argocd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG Man Pages Index
 

@@ -1,6 +1,7 @@
 ---
 title: Domain-6 存储知识库查漏补缺完成报告
 description: '# Domain-6 存储知识库查漏补缺完成报告'
+summary: '# Domain-6 存储知识库查漏补缺完成报告'
 category: storage
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - pvc
 - storageclass
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ cross_refs:
 - type: domain
   path: ../domain-04-storage-data/
   label: '相关知识域: domain-04-storage-data'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-6 存储知识库查漏补缺完成报告
 

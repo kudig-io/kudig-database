@@ -1,6 +1,7 @@
 ---
 title: KUDIG Knowledge Base Architecture
 description: KUDIG Knowledge Base Architecture — Kubernetes 生产运维知识库
+summary: KUDIG Knowledge Base Architecture — Kubernetes 生产运维知识库
 category: concept
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - docker
 - statefulset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - prometheus-basics
 - ebpf-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG Knowledge Base Architecture
 

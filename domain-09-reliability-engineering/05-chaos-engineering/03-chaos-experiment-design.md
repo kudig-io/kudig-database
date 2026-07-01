@@ -1,6 +1,7 @@
 ---
 title: 混沌实验设计与执行
 description: '# 混沌实验设计与执行'
+summary: '# 混沌实验设计与执行'
 category: domain
 tags:
 - chaos-engineering
@@ -10,6 +11,8 @@ tags:
 - mysql
 - postgresql
 - gateway
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - sre-practices
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # 混沌实验设计与执行
 

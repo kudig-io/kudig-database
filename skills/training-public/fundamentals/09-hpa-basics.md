@@ -1,6 +1,7 @@
 ---
 title: 第九课：HPA - 自动伸缩 [fundamentals]
 description: 'description: 2. 掌握 HPA 的配置方法'
+summary: 'description: 2. 掌握 HPA 的配置方法'
 category: learning
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - job
 - cronjob
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 第九课：HPA - 自动伸缩

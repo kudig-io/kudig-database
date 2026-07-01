@@ -1,16 +1,22 @@
 ---
-title: "Research: Kubernetes Application Patterns 2025-2026"
+title: 'Research: Kubernetes Application Patterns 2025-2026'
+summary: 'Research: Kubernetes Application Patterns 2025-2026：2025-2026 年，Kubernetes
+  应用架构发生三场范式转移：Sidecar 容器模式被原生 in-Proxy 替代（Ambient Mesh、eBPF 网络策略），AI 训练工作负载催生专用调度器（Kueue
+  成为 GPU 队列管理标准），vCluster 虚拟集群成熟化让多租...'
 category: synthesis
 tags:
-  - patterns
-  - microservices
-  - event-driven
-  - k8s
-  - research
+- patterns
+- microservices
+- event-driven
+- k8s
+- research
+tier: supporting
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # Research: Kubernetes Application Patterns 2025-2026
 
@@ -64,3 +70,7 @@ Kubernetes Gateway API 在 2025 年进入 GA，支持 HTTP/gRPC/TCP 路由、流
 - Dapr v1.14 CloudEvents 集成文档 (2025)
 - Kubernetes Gateway API GA 提案 (KEP-713)
 - CNCF Survey 2025: Application Architecture Trends
+
+## Related
+
+- [[research|#research Hub]] — tag hub

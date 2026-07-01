@@ -1,6 +1,7 @@
 ---
 title: K8GB 全球负载均衡
-description: 'K8GB（Kubernetes Global Balancer）是 CNCF Sandbox 项目，实现跨多个 Kubernetes 集群的全球流量负载均衡，基...'
+description: K8GB（Kubernetes Global Balancer）是 CNCF Sandbox 项目，实现跨多个 Kubernetes 集群的全球流量负载均衡，基...
+summary: K8GB（Kubernetes Global Balancer）是 CNCF Sandbox 项目，实现跨多个 Kubernetes 集群的全球流量负载均衡，基...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - networking
 - dns
 - multi-cluster
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # K8GB 全球负载均衡（K8GB）
 

@@ -1,6 +1,7 @@
 ---
 title: Cluster Autoscaler
-description: 'Cluster Autoscaler（CA）是 Kubernetes 官方的节点级自动扩缩容组件。当 Pod 因资源不足无法调度时自动扩容节点，当节点资源长期空...'
+description: Cluster Autoscaler（CA）是 Kubernetes 官方的节点级自动扩缩容组件。当 Pod 因资源不足无法调度时自动扩容节点，当节点资源长期空...
+summary: Cluster Autoscaler（CA）是 Kubernetes 官方的节点级自动扩缩容组件。当 Pod 因资源不足无法调度时自动扩容节点，当节点资源长期空...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - cluster-autoscaler
 - autoscaling
 - node
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Cluster Autoscaler
 

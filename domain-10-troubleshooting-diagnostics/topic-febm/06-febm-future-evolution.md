@@ -1,6 +1,7 @@
 ---
 title: 第六章：未来演进方向 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**所属系列**: FEBM 法医鉴定循证方法论深度解析'''
+summary: 'description: ''**所属系列**: FEBM 法医鉴定循证方法论深度解析'''
 category: febm
 tags:
 - febm
@@ -13,6 +14,8 @@ tags:
 - istio
 - cilium
 - helm
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -46,8 +49,9 @@ prerequisites:
 - policy-basics
 - logging-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 第六章：未来演进方向
 description: '**所属系列**: FEBM 法医鉴定循证方法论深度解析'

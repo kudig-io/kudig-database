@@ -1,6 +1,7 @@
 ---
 title: Docker 网络深度解析
 description: '# Docker 网络深度解析'
+summary: '# Docker 网络深度解析'
 category: docker
 tags:
 - docker
@@ -9,6 +10,8 @@ tags:
 - mysql
 - gateway
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
-created: "2026-05-23"
 ---
+
+
 
 # Docker 网络深度解析
 

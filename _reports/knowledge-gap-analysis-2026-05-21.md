@@ -1,12 +1,19 @@
 ---
-title: "报告标题"
+title: 报告标题
+summary: 报告标题：本次分析从三个维度识别缺口：
 category: reports
-tags: ["reports", "visibility/public"]
-sources: ["auto-generated"]
+tags:
+- reports
+- visibility/public
+tier: supporting
+sources:
+- auto-generated
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # KUDIG 语料库知识缺口分析报告
 
@@ -130,3 +137,7 @@ last_updated: 2026-05-24
 ---
 
 *报告生成: 2026-05-21 | 下次评估: 建议修复完成后*
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

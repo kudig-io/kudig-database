@@ -1,6 +1,9 @@
 ---
 title: Deployment 与 HPA 集成源码分析
-description: 深入分析 Kubernetes Deployment 与 HorizontalPodAutoscaler 的集成机制，涵盖 Scale 子资源接口、HPA 控制器工作原理、Deployment 副本数协调以及多指标扩缩容策略。
+description: 深入分析 Kubernetes Deployment 与 HorizontalPodAutoscaler 的集成机制，涵盖 Scale 子资源接口、HPA
+  控制器工作原理、Deployment 副本数协调以及多指标扩缩容策略。
+summary: 深入分析 Kubernetes Deployment 与 HorizontalPodAutoscaler 的集成机制，涵盖 Scale 子资源接口、HPA
+  控制器工作原理、Deployment 副本数协调以及多指标扩缩容策略。
 category: deployment
 tags:
 - hpa
@@ -12,6 +15,8 @@ tags:
 - prometheus
 - ingress
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: advanced
 reading_level: advanced
@@ -54,8 +59,9 @@ related_topics:
 - deployment-controller
 - replicaset-controller
 - deployment-status
-created: "2026-05-23"
 ---
+
+
 
 # Deployment 与 HPA 集成源码分析
 

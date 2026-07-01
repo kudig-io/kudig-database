@@ -1,6 +1,7 @@
 ---
 title: 'Day 27: 扩展生态 + 高级主题'
 description: '- Helm Charts 管理'
+summary: '- Helm Charts 管理'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - redis
 - mysql
 - postgresql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -39,8 +42,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 27: 扩展生态 + 高级主题

@@ -1,6 +1,7 @@
 ---
 title: 01-生产架构设计原则
 description: 'title: 01-生产架构设计原则'
+summary: 'title: 01-生产架构设计原则'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ingress
 - rbac
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - helm-basics
 - iac-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 01-生产架构设计原则
 description: '# 01-生产架构设计原则'

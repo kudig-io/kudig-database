@@ -1,6 +1,7 @@
 ---
 title: 12 - 生产事故管理与应急手册
 description: '# 12 - 生产事故管理与应急手册'
+summary: '# 12 - 生产事故管理与应急手册'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - helm
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,9 +35,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 12 - 生产事故管理与应急手册
 

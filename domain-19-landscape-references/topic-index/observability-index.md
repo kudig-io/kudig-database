@@ -1,6 +1,7 @@
 ---
 title: Observability 可观测性知识图谱索引
 description: 可观测性知识图谱索引，聚合监控、日志、追踪、告警、可观测性架构等所有相关内容
+summary: 可观测性知识图谱索引，聚合监控、日志、追踪、告警、可观测性架构等所有相关内容
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - alerting
 - prometheus
 - grafana
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -40,8 +43,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Observability 可观测性知识图谱索引
 

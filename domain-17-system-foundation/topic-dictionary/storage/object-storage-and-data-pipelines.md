@@ -1,6 +1,7 @@
 ---
 title: 对象存储与数据流水线
 description: '# 对象存储与数据流水线'
+summary: '# 对象存储与数据流水线'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - job
 - cronjob
 - operator
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,9 +35,9 @@ prerequisites:
 - kafka-basics
 - gpu-scheduling-basics
 - backup-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 对象存储与数据流水线
 

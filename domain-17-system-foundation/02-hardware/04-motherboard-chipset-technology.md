@@ -1,11 +1,14 @@
 ---
 title: 主板与芯片组技术
 description: '- motherboard-chipset-technology的最佳实践'
+summary: '- motherboard-chipset-technology的最佳实践'
 category: general
 tags:
 - k8s
 - gpu
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

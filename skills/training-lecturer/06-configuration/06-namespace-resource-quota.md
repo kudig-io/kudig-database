@@ -1,6 +1,7 @@
 ---
 title: 第七课：Namespace 与资源隔离 [06-configuration]
 description: 2. 掌握 Namespace 的创建和管理
+summary: 2. 掌握 Namespace 的创建和管理
 category: k8s-lecturer
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - lecturer
 - rbac
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第七课：Namespace 与资源隔离
 

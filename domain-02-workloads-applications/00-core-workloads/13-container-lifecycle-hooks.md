@@ -1,6 +1,7 @@
 ---
 title: 74 - 容器生命周期钩子 (Container Lifecycle Hooks)
 description: '## 容器生命周期架构'
+summary: '## 容器生命周期架构'
 category: workloads
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - agent
 - daemonset
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -54,8 +57,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
-created: "2026-05-23"
 ---
+
+
 
 # 74 - 容器生命周期钩子 (Container Lifecycle Hooks)
 

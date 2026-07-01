@@ -1,6 +1,9 @@
 ---
 title: Domain-13 Docker — 开源项目索引
-description: '| **Docker Engine** | 容器运行时与管理 | Docker/Mirantis | v28.0.0 | - | Apache-2.0 |'
+description: '| **Docker Engine** | 容器运行时与管理 | Docker/Mirantis | v28.0.0 | - | Apache-2.0
+  |'
+summary: '| **Docker Engine** | 容器运行时与管理 | Docker/Mirantis | v28.0.0 | - | Apache-2.0
+  |'
 category: docker
 tags:
 - docker
@@ -9,6 +12,8 @@ tags:
 - containerd
 - cri-o
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +46,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-13 Docker — 开源项目索引
 

@@ -1,11 +1,14 @@
 ---
 title: 'Domain-17: 云厂商Kubernetes服务企业级深度指南'
 description: 'title: ''Domain-17: 云厂商Kubernetes服务企业级深度指南'''
+summary: 'title: ''Domain-17: 云厂商Kubernetes服务企业级深度指南'''
 category: general
 tags:
 - k8s
 - rbac
 - serverless
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain-17: 云厂商Kubernetes服务企业级深度指南'

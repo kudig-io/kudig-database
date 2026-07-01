@@ -1,6 +1,9 @@
 ---
 title: 优先级类
-description: 'PriorityClass 是 Kubernetes 的 Pod 优先级定义资源，通过 priorityClassName 关联到 Pod，实现高优先级 Pod...'
+description: PriorityClass 是 Kubernetes 的 Pod 优先级定义资源，通过 priorityClassName 关联到 Pod，实现高优先级
+  Pod...
+summary: PriorityClass 是 Kubernetes 的 Pod 优先级定义资源，通过 priorityClassName 关联到 Pod，实现高优先级
+  Pod...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - configuration
 - scheduling
 - preemption
+tier: peripheral
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # 优先级类（PriorityClass）
 

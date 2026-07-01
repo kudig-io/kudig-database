@@ -1,6 +1,7 @@
 ---
 title: ACK-FTA 生成器增强版提示词 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''<!-- chunk: 0. 核心设计理念'' -->## 0. 核心设计理念'''
+summary: 'description: ''<!-- chunk: 0. 核心设计理念'' -->## 0. 核心设计理念'''
 category: fta
 tags:
 - fta
@@ -13,6 +14,8 @@ tags:
 - envoy
 - crd
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -46,8 +49,9 @@ prerequisites:
 fta_id: FTA-ACK_GENERATOR_V2-001
 component: Ack Generator V2
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: ACK-FTA 生成器增强版提示词
 description: '<!-- chunk: 0. 核心设计理念' -->## 0. 核心设计理念'

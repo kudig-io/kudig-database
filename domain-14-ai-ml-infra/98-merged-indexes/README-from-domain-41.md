@@ -1,6 +1,7 @@
 ---
 title: AI Agent 工程专题 (domain-14-ai-ml-infra) [98-merged-indexes]
 description: '# AI Agent 工程专题'
+summary: '# AI Agent 工程专题'
 category: ai-agent
 tags:
 - ai
@@ -12,6 +13,8 @@ tags:
 - hpa
 - gpu
 - vllm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -34,8 +37,9 @@ prerequisites:
 - prometheus-basics
 - gpu-scheduling-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # AI Agent 工程专题
 

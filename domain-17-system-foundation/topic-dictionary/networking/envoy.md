@@ -1,6 +1,8 @@
 ---
 title: Envoy
-description: 'Envoy 是高性能的 L7 代理和通信总线，最初由 Lyft 开发，现为 CNCF 毕业项目。它是 Istio、Contour、Gloo 等云原生项目的数据平...'
+description: Envoy 是高性能的 L7 代理和通信总线，最初由 Lyft 开发，现为 CNCF 毕业项目。它是 Istio、Contour、Gloo
+  等云原生项目的数据平...
+summary: Envoy 是高性能的 L7 代理和通信总线，最初由 Lyft 开发，现为 CNCF 毕业项目。它是 Istio、Contour、Gloo 等云原生项目的数据平...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +11,8 @@ tags:
 - service-mesh
 - proxy
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -24,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Envoy
 

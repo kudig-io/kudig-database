@@ -1,6 +1,7 @@
 ---
 title: Flux v2 GitOps 持续交付深度实践
 description: '# Flux v2 GitOps 持续交付深度实践'
+summary: '# Flux v2 GitOps 持续交付深度实践'
 category: gitops-ci-cd
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - redis
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -62,8 +65,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/git.md
   label: '速查卡: git'
-created: "2026-05-23"
 ---
+
+
 
 # [[Flux|Flux]] v2 GitOps 持续交付深度实践
 

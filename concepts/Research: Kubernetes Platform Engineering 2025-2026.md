@@ -1,16 +1,21 @@
 ---
-title: "Research: Kubernetes Platform Engineering 2025-2026"
+title: 'Research: Kubernetes Platform Engineering 2025-2026'
+summary: 'Research: Kubernetes Platform Engineering 2025-2026：Kubernetes 平台工程在 2025-2026
+  年从"最佳实践讨论"进入"规模化落地"阶段，四大趋势重塑了内部开发者平台（IDP）的构建方式：'
 category: synthesis
 tags:
-  - platform-engineering
-  - idp
-  - backstage
-  - k8s
-  - research
+- platform-engineering
+- idp
+- backstage
+- k8s
+- research
+tier: supporting
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # Research: Kubernetes Platform Engineering 2025-2026
 
@@ -100,3 +105,7 @@ Model Context Protocol（MCP）为平台工程带来的变革：
 - [[concepts/k8s-security-compliance.md|k8s security compliance]] — 平台工程将安全策略（准入控制、合规扫描）内化为平台默认能力（paved road）
 - [[concepts/finops-greenops-practices.md|finops greenops practices]] — 平台团队通过成本分配（showback/chargeback）与资源标准化推动 FinOps 实践落地
 - [[concepts/progressive-delivery-strategies.md|progressive delivery strategies]] — 平台工程将渐进式交付能力封装为标准化工作流，降低开发者认知负担
+
+## Related
+
+- [[research|#research Hub]] — tag hub

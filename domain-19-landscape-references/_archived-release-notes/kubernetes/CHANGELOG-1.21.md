@@ -1,6 +1,7 @@
 ---
 title: v1.21.14
 description: v1.21.14 — Kubernetes 生产运维知识库
+summary: v1.21.14 — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - cilium
 - coredns
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 

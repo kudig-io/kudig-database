@@ -1,6 +1,7 @@
 ---
 title: kubectl watch 输出解析语料 [topic-structural-trouble-shooting]
 description: 'title: kubectl watch 输出解析语料'
+summary: 'title: kubectl watch 输出解析语料'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - ingress
 - rbac
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -39,8 +42,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
-created: "2026-05-23"
 ---
+
+
 
 title: kubectl watch 输出解析语料
 description: '# kubectl watch 输出解析语料'

@@ -1,6 +1,7 @@
 ---
 title: 06 - Terway 性能调优 (Performance Tuning)
 description: '## 1. 网络模式性能对比'
+summary: '## 1. 网络模式性能对比'
 category: terway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - networkpolicy
 - crd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -35,8 +38,9 @@ prerequisites:
 - prometheus-basics
 - ebpf-basics
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 # 06 - Terway 性能调优 (Performance Tuning)
 
@@ -535,7 +539,7 @@ data:
 ### 7.3 监控预热状态
 
 ```bash
-kubectl logs -n kube-system <terway-pod> | grep "pool\|pre-allocate\|eni.*attach"
+kubectl logs -n kube-system <terway-pod> | grep "pool|pre-allocate|eni.*attach"
 ```
 
 ---
@@ -558,7 +562,7 @@ kubectl logs -n kube-system <terway-pod> | grep "pool\|pre-allocate\|eni.*attach
 ```bash
 kubectl logs -n kube-system <terway-pod> | grep "allocate.*cost"
 kubectl logs -n kube-system <terway-pod> | grep "api.*latency"
-kubectl logs -n kube-system <terway-pod> | grep "error\|fail\|timeout"
+kubectl logs -n kube-system <terway-pod> | grep "error|fail|timeout"
 ```
 
 ### 8.3 iperf3 基准测试

@@ -1,6 +1,7 @@
 ---
 title: API Server 性能调优
 description: 'description: ''## API Server架构'''
+summary: 'description: ''## API Server架构'''
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: API Server 性能调优
 description: '## API Server架构'
@@ -1118,6 +1122,8 @@ kubectl get events -n kube-system --field-selector source=kube-apiserver
 - 控制平面扩缩容指南 (Control Plane Scalability Guide)
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

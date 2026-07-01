@@ -1,6 +1,7 @@
 ---
 title: Pod 生命周期 × 存储模型
 description: '# Pod 生命周期 × 存储模型'
+summary: '# Pod 生命周期 × 存储模型'
 category: synthesis
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - statefulset
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,19 +31,20 @@ trigger_keywords:
 - 存储模型
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/deployment.md]]"
-    type: uses
-  - target: "[[entities/kubelet.md]]"
-    type: uses
-  - target: "[[skills/training-public/inner-training/week-3-node-workload/checkpoint.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]"
-    type: related_to
-  - target: "[[concepts/Pod 生命周期 × Secret 管理.md]]"
-    type: uses
+- target: '[[entities/deployment.md]]'
+  type: uses
+- target: '[[entities/kubelet.md]]'
+  type: uses
+- target: '[[skills/training-public/inner-training/week-3-node-workload/checkpoint.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+  type: related_to
+- target: '[[concepts/Pod 生命周期 × Secret 管理.md]]'
+  type: uses
 ---
+
+
 
 # Pod 生命周期 × 存储模型
 

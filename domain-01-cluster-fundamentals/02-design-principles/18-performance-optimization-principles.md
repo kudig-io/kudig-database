@@ -1,6 +1,7 @@
 ---
 title: 18 - 性能优化原理
 description: '# 18 - 性能优化原理'
+summary: '# 18 - 性能优化原理'
 category: design-principles
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flannel
 - calico
 - coredns
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -55,8 +58,9 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
-created: "2026-05-23"
 ---
+
+
 
 # 18 - 性能优化原理
 

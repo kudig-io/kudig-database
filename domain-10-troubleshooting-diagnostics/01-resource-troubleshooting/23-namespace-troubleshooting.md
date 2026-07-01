@@ -1,6 +1,7 @@
 ---
 title: Namespace 故障排查
 description: '# 23 - Namespace 故障排查 (Namespace Troubleshooting)'
+summary: '# 23 - Namespace 故障排查 (Namespace Troubleshooting)'
 category: troubleshooting
 tags:
 - namespace
@@ -13,6 +14,8 @@ tags:
 - grafana
 - statefulset
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: intermediate
 reading_level: intermediate
@@ -59,8 +62,9 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
-created: "2026-05-23"
 ---
+
+
 
 # 23 - Namespace 故障排查 (Namespace Troubleshooting)
 

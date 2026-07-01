@@ -1,6 +1,7 @@
 ---
 title: K8S 运维诊断技能库 (02-ai-agents)
 description: 'title: K8S 运维诊断技能库'
+summary: 'title: K8S 运维诊断技能库'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - coredns
 - containerd
 - docker
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: K8S 运维诊断技能库
 description: [[Kubernetes|Kubernetes]] 运维诊断全栈技能库，涵盖 Pod/Node/Network/Storage/Performance 五大故障域的结构化

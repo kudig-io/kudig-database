@@ -1,6 +1,9 @@
 ---
 title: 污点和容忍
-description: 'Taints（污点）和 Tolerations（容忍）是 Kubernetes 的调度约束机制，节点通过 Taint 排斥不匹配的 Pod，Pod 通过 Tol...'
+description: Taints（污点）和 Tolerations（容忍）是 Kubernetes 的调度约束机制，节点通过 Taint 排斥不匹配的 Pod，Pod
+  通过 Tol...
+summary: Taints（污点）和 Tolerations（容忍）是 Kubernetes 的调度约束机制，节点通过 Taint 排斥不匹配的 Pod，Pod
+  通过 Tol...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - configuration
 - scheduling
 - node
+tier: peripheral
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # 污点和容忍（Taints and Tolerations）
 

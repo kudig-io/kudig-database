@@ -1,6 +1,7 @@
 ---
 title: FTA-Driven Runbook Automation
 description: FTA-Driven Runbook Automation — Kubernetes 生产运维知识库
+summary: FTA-Driven Runbook Automation — Kubernetes 生产运维知识库
 category: skill
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - mysql
 - daemonset
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # FTA-Driven Runbook Automation
 

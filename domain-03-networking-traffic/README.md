@@ -1,6 +1,9 @@
 ---
 title: Networking & Traffic
-description: 整合原 domain-03-networking-traffic/15/26/35/40 的网络知识，涵盖 K8s 网络、CNI、Service Mesh、API Gateway 和 eBPF。
+description: 整合原 domain-03-networking-traffic/15/26/35/40 的网络知识，涵盖 K8s 网络、CNI、Service
+  Mesh、API Gateway 和 eBPF。
+summary: 整合原 domain-03-networking-traffic/15/26/35/40 的网络知识，涵盖 K8s 网络、CNI、Service
+  Mesh、API Gateway 和 eBPF。
 category: domain
 tags:
 - networking
@@ -13,6 +16,8 @@ tags:
 - envoy
 - ingress
 - gateway
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +40,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Networking & Traffic
 

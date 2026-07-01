@@ -1,6 +1,11 @@
 ---
-title: "Automated DR Patterns & Multi-Cluster Failover 2025-2026"
-description: "Deep-dive research into automated disaster recovery drills, multi-cluster failover automation, backup verification pipelines, and cross-region DR patterns for Kubernetes."
+title: Automated DR Patterns & Multi-Cluster Failover 2025-2026
+description: Deep-dive research into automated disaster recovery drills, multi-cluster
+  failover automation, backup verification pipelines, and cross-region DR patterns
+  for Kubernetes.
+summary: Deep-dive research into automated disaster recovery drills, multi-cluster
+  failover automation, backup verification pipelines, and cross-region DR patterns
+  for Kubernetes.
 category: research
 tags:
 - k8s
@@ -13,6 +18,8 @@ tags:
 - velero
 - litmuschaos
 - cilium
+tier: peripheral
+created: '2026-07-01'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -33,6 +40,8 @@ authors:
 - name: KUDIG Research
   role: research
 ---
+
+
 
 # Automated DR Patterns & Multi-Cluster Failover (2025-2026)
 

@@ -1,6 +1,7 @@
 ---
 title: 'Day 10: K8s 集群监控体系搭建实操'
 description: '# Day 10: K8s 集群监控体系搭建实操'
+summary: '# Day 10: K8s 集群监控体系搭建实操'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,8 +38,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 10: K8s 集群监控体系搭建实操
 

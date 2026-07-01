@@ -1,6 +1,7 @@
 ---
 title: etcd 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: etcd 故障排查指南'
+summary: 'title: etcd 故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - docker
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -40,8 +43,9 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[etcd|etcd]] 故障排查指南
 description: '# etcd 故障排查指南'

@@ -1,6 +1,7 @@
 ---
 title: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 description: '- 运维工程师'
+summary: '- 运维工程师'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - calico
 - daemonset
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -45,8 +48,9 @@ prerequisites:
 skill_id: SKILL-22_DAEMONSET_FAILURE-001
 skill_name: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 ---
 skill_id: "SKILL-WORK-003"

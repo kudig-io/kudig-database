@@ -1,6 +1,7 @@
 ---
 title: 发布说明索引 — 可观测性
 description: '| Prometheus | 87 | v3.11 | v3.7 | 监控与告警引擎 |'
+summary: '| Prometheus | 87 | v3.11 | v3.7 | 监控与告警引擎 |'
 category: references
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - thanos
 - opentelemetry
 - gateway
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - monitoring-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # 发布说明索引 — 可观测性
 

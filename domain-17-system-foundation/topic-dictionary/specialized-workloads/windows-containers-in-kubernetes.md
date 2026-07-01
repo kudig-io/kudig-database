@@ -1,6 +1,7 @@
 ---
 title: Windows 容器在 Kubernetes 中的支持
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - docker
 - opa
 - hpa
+tier: peripheral
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -31,9 +34,9 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 - policy-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # Windows 容器在 [[Kubernetes|Kubernetes]] 中的支持
 

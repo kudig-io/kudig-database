@@ -1,7 +1,9 @@
 ---
 title: K8s 工作负载术语参考
-description: '| **Advanced Pod Configuration** | Advanced Pod Configuration | 本页涵盖 Pod 的高级配置主题，包括 PriorityClass、RuntimeClass、安全上下文（security
-  context）以及影响 Po... |'
+description: '| **Advanced Pod Configuration** | Advanced Pod Configuration | 本页涵盖
+  Pod 的高级配置主题，包括 PriorityClass、RuntimeClass、安全上下文（security context）以及影响 Po... |'
+summary: '| **Advanced Pod Configuration** | Advanced Pod Configuration | 本页涵盖 Pod
+  的高级配置主题，包括 PriorityClass、RuntimeClass、安全上下文（security context）以及影响 Po... |'
 category: references
 tags:
 - k8s
@@ -14,6 +16,8 @@ tags:
 - pdb
 - statefulset
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8s 工作负载术语参考
 

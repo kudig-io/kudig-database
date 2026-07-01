@@ -1,6 +1,7 @@
 ---
 title: CKA 认证备考完全指南
 description: 面向小白和在职人员的 CKA（Certified Kubernetes Administrator）备考指南，包含考纲映射、4 周冲刺计划、高频考点、模拟题、考试技巧与注意事项
+summary: 面向小白和在职人员的 CKA（Certified Kubernetes Administrator）备考指南，包含考纲映射、4 周冲刺计划、高频考点、模拟题、考试技巧与注意事项
 category: learning
 tags:
 - CKA
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - scheduler
 - flannel
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # CKA 认证备考完全指南
 

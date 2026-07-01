@@ -1,13 +1,21 @@
 ---
-title: "Domain Index — 可观测性"
+title: Domain Index — 可观测性
+summary: Domain Index — 可观测性
 category: index
-tags: ["index", "06", "visibility/public"]
-sources: ["domain-06-observability/"]
+tags:
+- index
+- '06'
+- visibility/public
+tier: supporting
+sources:
+- domain-06-observability/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: reviewed
 ---
+
+
 
 # 可观测性 索引
 
@@ -97,3 +105,6 @@ status: reviewed
 
 - [[domain-06-observability/00-open-source-projects-index.md|00-open-source-projects-index]]
 
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

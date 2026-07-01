@@ -1,6 +1,7 @@
 ---
 title: SLSA 级别与实施 (SLSA Levels and Implementation)
 description: 1. [SLSA 框架概述](#1-slsa-框架概述)
+summary: 1. [SLSA 框架概述](#1-slsa-框架概述)
 category: supply-chain-security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - job
 - networkpolicy
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -48,8 +51,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # SLSA 级别与实施 (SLSA Levels and Implementation)
 

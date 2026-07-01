@@ -1,6 +1,7 @@
 ---
 title: velero v1.18 Release Notes
 description: velero v1.18 Release Notes — Kubernetes 生产运维知识库
+summary: velero v1.18 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - prometheus
 - job
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - cncf-ecosystem
 - prometheus-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # velero v1.18 Release Notes
 

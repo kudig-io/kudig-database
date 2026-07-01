@@ -1,6 +1,7 @@
 ---
 title: 开发者门户与平台工程度量
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - pdb
 - networkpolicy
 - crd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,8 +33,9 @@ prerequisites:
 - cloud-provider-basics
 - prometheus-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 # 开发者门户与平台工程度量
 

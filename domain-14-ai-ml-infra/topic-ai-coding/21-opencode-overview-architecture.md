@@ -1,6 +1,7 @@
 ---
 title: OpenCode 概述与核心架构
 description: '# OpenCode 概述与核心架构'
+summary: '# OpenCode 概述与核心架构'
 category: ai-coding
 tags:
 - ai
@@ -10,6 +11,8 @@ tags:
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # OpenCode 概述与核心架构
 

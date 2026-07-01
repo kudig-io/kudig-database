@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 边缘计算与KubeEdge实践 (Edge Computing and KubeEdge Practice)
 description: '# Kubernetes 边缘计算与KubeEdge实践 (Edge Computing and KubeEdge Practice)'
+summary: '# Kubernetes 边缘计算与KubeEdge实践 (Edge Computing and KubeEdge Practice)'
 category: papers
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - elasticsearch
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -52,8 +55,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 边缘计算与KubeEdge实践 (Edge Computing and [[KubeEdge|KubeEdge]] Practice)
 
@@ -1594,5 +1598,9 @@ if __name__ == "__main__":
 - 18-kubernetes-ebpf-cilium-deep-practice
 
 ## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

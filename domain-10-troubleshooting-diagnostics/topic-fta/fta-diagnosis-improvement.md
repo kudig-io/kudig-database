@@ -1,6 +1,7 @@
 ---
 title: FTA 排查逻辑改进建议 (domain-10-troubleshooting-diagnostics)
 description: 'title: FTA 排查逻辑改进建议'
+summary: 'title: FTA 排查逻辑改进建议'
 category: fta
 tags:
 - fta
@@ -8,6 +9,8 @@ tags:
 - etcd
 - ingress
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -36,8 +39,9 @@ prerequisites:
 fta_id: FTA-FTA_DIAGNOSIS_IMPROVEMENT-001
 component: Fta Diagnosis Improvement
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: FTA 排查逻辑改进建议
 description: '# FTA 排查逻辑改进建议'

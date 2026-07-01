@@ -2,6 +2,7 @@
 title: 阿里云专有云 Deployment 滚动更新失败：ACR 镜像拉取超时
 description: 业务发布时新 Pod 卡在 ImagePullBackOff，根因是专线到 ACR 专有镜像仓库网络抖动及 imagePullSecret
   配置不当，包含完整诊断、修复、验证与客诉话术。
+summary: 业务发布时新 Pod 卡在 ImagePullBackOff，根因是专线到 ACR 专有镜像仓库网络抖动及 imagePullSecret 配置不当，包含完整诊断、修复、验证与客诉话术。
 category: production-operations
 tags:
 - aliyun
@@ -14,6 +15,9 @@ tags:
 - rollout
 - network-timeout
 - ticket-case
+tier: supporting
+created: 2026-06-26
+updated: 2026-06-26
 incident_id: TC-2026-006
 priority: P1
 severity: high
@@ -22,8 +26,6 @@ affected_namespace: trade-core
 ticket_type: 发布变更故障
 skill_ref: 镜像拉取异常诊断
 fta_ref: 'FTA: Pod ImagePullBackOff'
-created: 2026-06-26
-updated: 2026-06-26
 last_updated: 2026-06-26
 difficulty: intermediate
 reading_level: intermediate
@@ -52,15 +54,17 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[entities/deployment.md]]"
+- target: '[[entities/deployment.md]]'
   type: related_to
-- target: "[[domain-17-system-foundation/topic-dictionary/operations/rolling-update.md]]"
+- target: '[[domain-17-system-foundation/topic-dictionary/operations/rolling-update.md]]'
   type: related_to
-- target: "[[skills/deployment-rolling-update.md]]"
+- target: '[[skills/deployment-rolling-update.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-009-etcd-disk-full-apiserver-slow.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-009-etcd-disk-full-apiserver-slow.md]]'
   type: related_to
 ---
+
+
 
 # 工单 006：Deployment 滚动更新失败（ACR 镜像拉取超时）
 

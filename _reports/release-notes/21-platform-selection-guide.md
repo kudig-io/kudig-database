@@ -1,9 +1,12 @@
 ---
 title: 数字人视频制作 — 平台选型与立即开工指南
 description: '# 数字人视频制作 — 平台选型与立即开工指南'
+summary: '# 数字人视频制作 — 平台选型与立即开工指南'
 category: general
 tags:
 - k8s
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -18,8 +21,9 @@ trigger_keywords:
 - 平台选型与立即开工指南
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 数字人视频制作 — 平台选型与立即开工指南
 

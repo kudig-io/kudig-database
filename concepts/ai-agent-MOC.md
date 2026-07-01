@@ -1,12 +1,15 @@
 ---
 title: topic-ai-agent MOC
 description: 'summary: "AI Agent — AI 智能体架构、工具调用、Agent 工作流"topic-ai-agent MOC""'
+summary: 'summary: "AI Agent — AI 智能体架构、工具调用、Agent 工作流"topic-ai-agent MOC""'
 category: general
 tags:
 - k8s
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 - MOC
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "topic-ai-agent MOC"

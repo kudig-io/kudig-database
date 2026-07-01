@@ -1,5 +1,6 @@
 ---
 title: SLO × 可观测性
+summary: SLO 工程与可观测性体系的交叉：如何从原始指标推导服务等级目标并驱动错误预算决策。
 category: synthesis
 tags:
 - slo
@@ -7,23 +8,24 @@ tags:
 - observability
 - prometheus
 - metrics
+tier: supporting
 sources:
 - domain-06-observability/06-slo-sli/01-slo-engineering-practice.md
 - domain-06-observability/06-slo-sli/02-error-budget-policy.md
 - domain-06-observability/06-slo-sli/03-sli-implementation-guide.md
 - domain-06-observability/02-metrics/README.md
-created: "2026-06-26"
-updated: "2026-06-26"
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06-26
-summary: "SLO 工程与可观测性体系的交叉：如何从原始指标推导服务等级目标并驱动错误预算决策。"
 provenance:
   extracted: 0.3
   inferred: 0.6
   ambiguous: 0.1
 base_confidence: 0.78
 lifecycle: draft
-lifecycle_changed: "2026-06-26"
+lifecycle_changed: '2026-06-26'
 ---
+
 
 # SLO × 可观测性
 

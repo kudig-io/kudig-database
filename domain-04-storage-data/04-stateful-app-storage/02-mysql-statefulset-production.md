@@ -1,6 +1,7 @@
 ---
 title: MySQL StatefulSet 生产部署指南
 description: 面向阿里云/专有云 K8s 的 MySQL StatefulSet 生产部署方案，覆盖主从架构、半同步复制、定时备份、故障切换与恢复演练。
+summary: 面向阿里云/专有云 K8s 的 MySQL StatefulSet 生产部署方案，覆盖主从架构、半同步复制、定时备份、故障切换与恢复演练。
 category: storage
 tags:
 - k8s
@@ -11,6 +12,9 @@ tags:
 - alicloud
 - apsara-stack
 - production
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -44,9 +48,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # MySQL StatefulSet 生产部署指南
 

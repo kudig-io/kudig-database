@@ -1,6 +1,7 @@
 ---
 title: 28 - PodDisruptionBudget YAML 配置参考
 description: 'title: 28 - PodDisruptionBudget YAML 配置参考'
+summary: 'title: 28 - PodDisruptionBudget YAML 配置参考'
 category: general
 tags:
 - yaml
@@ -13,6 +14,8 @@ tags:
 - elasticsearch
 - hpa
 - pdb
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - prometheus-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 28 - PodDisruptionBudget YAML 配置参考
 description: '# 28 - PodDisruptionBudget YAML 配置参考'
@@ -1544,3 +1548,7 @@ spec:
 - 27-hpa-autoscaling-v2
 - 29-customresourcedefinition
 - 30-apiservice-aggregation
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub

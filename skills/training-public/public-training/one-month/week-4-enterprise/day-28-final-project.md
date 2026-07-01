@@ -1,6 +1,7 @@
 ---
 title: 'Day 28: 综合复习 + 毕业项目'
 description: '- K8s 综合实践'
+summary: '- K8s 综合实践'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - helm
 - argocd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -38,8 +41,9 @@ prerequisites:
 - etcd-basics
 - policy-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 28: 综合复习 + 毕业项目

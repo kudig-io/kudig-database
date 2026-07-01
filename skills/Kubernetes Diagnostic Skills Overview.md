@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Diagnostic Skills Overview
 description: Kubernetes Diagnostic Skills Overview — Kubernetes 生产运维知识库
+summary: Kubernetes Diagnostic Skills Overview — Kubernetes 生产运维知识库
 category: skill
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - istio
 - coredns
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes Diagnostic Skills Overview
 

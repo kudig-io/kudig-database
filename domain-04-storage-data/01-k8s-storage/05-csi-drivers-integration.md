@@ -1,6 +1,7 @@
 ---
 title: 05 - CSI驱动集成与运维管理
 description: '# 05 - CSI驱动集成与运维管理'
+summary: '# 05 - CSI驱动集成与运维管理'
 category: storage
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - opa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -54,8 +57,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md
   label: '故障树: csi'
-created: "2026-05-23"
 ---
+
+
 
 # 05 - CSI驱动集成与运维管理
 

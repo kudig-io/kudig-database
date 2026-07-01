@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 对象状态指标（kube-state-metrics）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - prometheus
 - grafana
 - statefulset
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -29,9 +32,9 @@ prerequisites:
 - cloud-provider-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 对象状态指标（kube-state-metrics）
 

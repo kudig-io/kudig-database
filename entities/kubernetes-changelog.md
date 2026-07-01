@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 变更日志索引
 description: '# Kubernetes 变更日志索引'
+summary: '# Kubernetes 变更日志索引'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - job
 - cronjob
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 - 变更日志索引
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 变更日志索引
 

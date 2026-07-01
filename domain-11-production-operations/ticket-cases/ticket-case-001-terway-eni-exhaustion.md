@@ -1,6 +1,7 @@
 ---
 title: 节点 NotReady：Terway ENI IP 耗尽
 description: 专有云 ACK 集群因 Terway ENI 辅助 IP 耗尽导致节点 NotReady、Pod 无法分配沙箱网络的工单闭环样本。
+summary: 专有云 ACK 集群因 Terway ENI 辅助 IP 耗尽导致节点 NotReady、Pod 无法分配沙箱网络的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -10,6 +11,9 @@ tags:
 - node-notready
 - network
 - p0
+tier: peripheral
+created: '2026-06-26T14:00:00+08:00'
+updated: '2026-06-26T16:30:00+08:00'
 incident_id: INC-2026-ACK-001
 priority: P0
 severity: critical
@@ -21,9 +25,7 @@ skill_ref:
 - Terway 网络诊断
 fta_ref:
 - 'FTA: Terway ENI 耗尽导致 NotReady'
-created: '2026-06-26T14:00:00+08:00'
-updated: '2026-06-26T16:30:00+08:00'
-last_updated: 2026-06-26T16:30:00+08:00
+last_updated: 2026-06-26 16:30:00+08:00
 difficulty: advanced
 reading_level: advanced
 audience:
@@ -48,13 +50,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-039-rbac-api-access-denied.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-039-rbac-api-access-denied.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-010-networkpolicy-blocks-traffic.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-010-networkpolicy-blocks-traffic.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -91,7 +95,7 @@ kubectl get events --field-selector involvedObject.name=cn-zhangjiakou.172.16.1.
 kubectl get events --field-selector reason=FailedCreatePodSandBox --all-namespaces | head -50
 
 # 4. 采集 Terway 日志，寻找 IP 分配异常
-kubectl logs -n kube-system -l app=terway -c terway --tail=300 --all-containers | grep -i "assignPodIPv4\|no available IP\|eni"
+kubectl logs -n kube-system -l app=terway -c terway --tail=300 --all-containers | grep -i "assignPodIPv4|no available IP|eni"
 
 # 5. 查询该节点 ECS ENI 与辅助 IP 使用情况
 aliyun ecs DescribeNetworkInterfaces \

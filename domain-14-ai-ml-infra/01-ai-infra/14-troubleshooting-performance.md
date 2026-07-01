@@ -1,6 +1,7 @@
 ---
 title: AI平台故障排查与性能优化
 description: '# AI平台故障排查与性能优化'
+summary: '# AI平台故障排查与性能优化'
 category: ai-infra
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - jaeger
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -59,8 +62,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
-created: "2026-05-23"
 ---
+
+
 
 # AI平台故障排查与性能优化
 
@@ -335,7 +339,7 @@ echo
 
 # 3. 服务日志分析
 echo "3. 最近错误日志:"
-kubectl logs -n $NAMESPACE -l app=$SERVICE_NAME --tail=100 | grep -i "error\|exception\|failed" | tail -20
+kubectl logs -n $NAMESPACE -l app=$SERVICE_NAME --tail=100 | grep -i "error|exception|failed" | tail -20
 echo
 
 # 4. 资源使用情况

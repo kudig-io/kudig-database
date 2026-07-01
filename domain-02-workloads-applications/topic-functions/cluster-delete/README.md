@@ -1,6 +1,9 @@
 ---
 title: Cluster Delete — Kubernetes 集群删除源码分析
-description: Kubernetes 集群删除涉及多个层面：节点级重置（kubeadm reset）、API 对象删除（kubectl delete node）、etcd 成员移除以及系统级清理（容器、网络、证书、数据目录）。本文档基于源码全面分析集群删除的完整逻辑和最佳实践。
+description: Kubernetes 集群删除涉及多个层面：节点级重置（kubeadm reset）、API 对象删除（kubectl delete node）、etcd
+  成员移除以及系统级清理（容器、网络、证书、数据目录）。本文档基于源码全面分析集群删除的完整逻辑和最佳实践。
+summary: Kubernetes 集群删除涉及多个层面：节点级重置（kubeadm reset）、API 对象删除（kubectl delete node）、etcd
+  成员移除以及系统级清理（容器、网络、证书、数据目录）。本文档基于源码全面分析集群删除的完整逻辑和最佳实践。
 category: cluster-delete
 tags:
 - cluster-delete
@@ -13,6 +16,8 @@ tags:
 - etcd
 - node
 - kubelet
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-18
 difficulty: advanced
 reading_level: advanced
@@ -57,8 +62,9 @@ related_topics:
 - ha-delete
 - cloud-delete
 - troubleshooting
-created: "2026-05-23"
 ---
+
+
 
 # Cluster Delete — [[Kubernetes|Kubernetes]] 集群删除源码分析
 

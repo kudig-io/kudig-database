@@ -1,13 +1,22 @@
 ---
-title: "Container Runtime"
+title: Container Runtime
+summary: Container Runtime 是负责运行容器的底层组件，包括 containerd、CRI-O 等实现。
 category: concepts
-tags: ['container-runtime', 'cri', 'core', 'visibility/public']
-sources: ["conceptss/"]
+tags:
+- container-runtime
+- cri
+- core
+- visibility/public
+tier: core
+sources:
+- conceptss/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: stub
 ---
+
+
 # Container Runtime
 
 ## 概述
@@ -22,3 +31,7 @@ Container Runtime 是负责运行容器的底层组件，包括 containerd、CRI
 ## 相关链接
 
 - [[concepts/kubernetes.md|Kubernetes]] — 核心概念
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

@@ -1,6 +1,9 @@
 ---
 title: AI 基础设施架构
-description: 全面介绍 AI Infrastructure 在 K8s 上的架构设计：GPU 调度、分布式训练（PyTorch DDP/FSDP/TensorRT）、LLM 推理（vLLM/TGI/KServe）、向量数据库与 RAG
+description: 全面介绍 AI Infrastructure 在 K8s 上的架构设计：GPU 调度、分布式训练（PyTorch DDP/FSDP/TensorRT）、LLM
+  推理（vLLM/TGI/KServe）、向量数据库与 RAG
+summary: 全面介绍 AI Infrastructure 在 K8s 上的架构设计：GPU 调度、分布式训练（PyTorch DDP/FSDP/TensorRT）、LLM
+  推理（vLLM/TGI/KServe）、向量数据库与 RAG
 category: domain-11-ai-infra
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - vector-database
 - kubeflow
 - etcd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -68,8 +73,9 @@ related_docs:
 - path: ../domain-14-ai-ml-infra/topic-ai-agent/
   type: ai-agent
   desc: AI Agent 工程
-created: "2026-05-23"
 ---
+
+
 
 # AI基础设施架构
 

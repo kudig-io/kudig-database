@@ -1,6 +1,9 @@
 ---
 title: OpenFGA 授权引擎
-description: "OpenFGA 是 CNCF Sandbox 项目，高性能的关系型授权引擎，基于 Google Zanzibar 论文实现，为应用提供细粒度的权限检查（如 'u..."
+description: OpenFGA 是 CNCF Sandbox 项目，高性能的关系型授权引擎，基于 Google Zanzibar 论文实现，为应用提供细粒度的权限检查（如
+  'u...
+summary: OpenFGA 是 CNCF Sandbox 项目，高性能的关系型授权引擎，基于 Google Zanzibar 论文实现，为应用提供细粒度的权限检查（如
+  'u...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - security
 - authorization
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # OpenFGA 授权引擎（OpenFGA）
 

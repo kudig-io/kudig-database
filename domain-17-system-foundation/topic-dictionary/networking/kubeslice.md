@@ -1,6 +1,9 @@
 ---
 title: KubeSlice 多集群网络
-description: 'KubeSlice 是 Avesha 开源的 CNCF Sandbox 项目，通过创建跨集群的网络切片（Slice）实现多集群安全隔离的网络互通，无需修改底层 ...'
+description: KubeSlice 是 Avesha 开源的 CNCF Sandbox 项目，通过创建跨集群的网络切片（Slice）实现多集群安全隔离的网络互通，无需修改底层
+  ...
+summary: KubeSlice 是 Avesha 开源的 CNCF Sandbox 项目，通过创建跨集群的网络切片（Slice）实现多集群安全隔离的网络互通，无需修改底层
+  ...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - networking
 - multi-cluster
 - slice
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # KubeSlice 多集群网络（KubeSlice）
 

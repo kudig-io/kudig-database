@@ -1,6 +1,7 @@
 ---
 title: 云原生 DevOps 平台 Kubernetes 生产架构设计
 description: 'title: 云原生 DevOps 平台架构设计'
+summary: 'title: 云原生 DevOps 平台架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - flux
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -43,8 +46,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 云原生 DevOps 平台架构设计
 description: '# 云原生 DevOps 平台 [[Kubernetes|Kubernetes]] 生产架构设计'

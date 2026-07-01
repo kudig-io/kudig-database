@@ -1,6 +1,7 @@
 ---
 title: 第十课：常见问题排查 [09-troubleshooting]
 description: '# 第十课：常见问题排查'
+summary: '# 第十课：常见问题排查'
 category: k8s-lecturer
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - job
 - ingress
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -31,8 +34,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第十课：常见问题排查
 

@@ -1,6 +1,7 @@
 ---
 title: Node 全面故障排查
 description: '# 09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)'
+summary: '# 09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)'
 category: troubleshooting
 tags:
 - node
@@ -13,6 +14,8 @@ tags:
 - etcd
 - apiserver
 - kubelet
+tier: core
+created: '2026-05-23'
 last_updated: 2026-01
 difficulty: beginner
 reading_level: beginner
@@ -61,8 +64,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md
   label: '故障树: node'
-created: "2026-05-23"
 ---
+
+
 
 # 09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)
 

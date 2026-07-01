@@ -1,7 +1,11 @@
 ---
 title: NetworkPolicy 异常故障树分析 (skills)
-description: 'summary: "<!-- condition: kubectl get networkpolicy -A -o jsonpath=''{range .items[?(@.spec.policyTypes!=null)]}
-  {.metadata.namespace}/{.metadata.name}{\''\n\''}{end}'' 显示有策略但存在网络不通问题 --> - *..."'
+description: 'summary: "<!-- condition: kubectl get networkpolicy -A -o jsonpath=''{range
+  .items[?(@.spec.policyTypes!=null)]} {.metadata.namespace}/{.metadata.name}{\''\n\''}{end}''
+  显示有策略但存在网络不通问题 --> - *..."'
+summary: 'summary: "<!-- condition: kubectl get networkpolicy -A -o jsonpath=''{range
+  .items[?(@.spec.policyTypes!=null)]} {.metadata.namespace}/{.metadata.name}{\''\n\''}{end}''
+  显示有策略但存在网络不通问题 --> - *..."'
 category: general
 tags:
 - k8s
@@ -9,6 +13,8 @@ tags:
 - calico
 - ingress
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +34,9 @@ prerequisites:
 fta_id: FTA-NETWORKPOLICY-001
 component: Networkpolicy
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "NetworkPolicy 异常故障树分析"
@@ -66,8 +73,8 @@ base_confidence: 0.7
 
 | 节点 ID | 名称 | 诊断命令 | 预期输出模式 | 判定 |
 |---------|------|----------|--------------|------|
-| evt_cni_not_support | CNI 不支持 NetworkPolicy | `kubectl get pods -n kube-system -l k8s-app=calico-node -o name \|\| kubectl get pods -n kube-system -l k8s-app=cilium -o name` | 返回 CNI Pod 名称 | 无输出表示可能使用不支持策略的 CNI |
-| evt_policy_mode_disabled | 策略模式未启用 | `kubectl get configmap -n kube-system calico-config -o jsonpath='{.data.cni_network_config}' 2>/dev/null \|\| kubectl get configmap -n kube-system cilium-config -o yaml` | 返回 CNI 配置 | 检查 policy 相关配置是否启用 |
+| evt_cni_not_support | CNI 不支持 NetworkPolicy | `kubectl get pods -n kube-system -l k8s-app=calico-node -o name || kubectl get pods -n kube-system -l k8s-app=cilium -o name` | 返回 CNI Pod 名称 | 无输出表示可能使用不支持策略的 CNI |
+| evt_policy_mode_disabled | 策略模式未启用 | `kubectl get configmap -n kube-system calico-config -o jsonpath='{.data.cni_network_config}' 2>/dev/null || kubectl get configmap -n kube-system cilium-config -o yaml` | 返回 CNI 配置 | 检查 policy 相关配置是否启用 |
 | evt_sync_delay | 策略同步延迟 | `kubectl get networkpolicy ${NP_NAME} -n ${NAMESPACE} -o jsonpa
 ...(截断)
 

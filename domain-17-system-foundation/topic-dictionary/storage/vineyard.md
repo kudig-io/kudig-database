@@ -1,6 +1,7 @@
 ---
 title: Vineyard 分布式数据共享
-description: 'Vineyard（v6d）是 CNCF Sandbox 项目，为 Kubernetes 上的 AI/ML 和大数据工作负载提供高效的分布式内存数据共享，通过零拷...'
+description: Vineyard（v6d）是 CNCF Sandbox 项目，为 Kubernetes 上的 AI/ML 和大数据工作负载提供高效的分布式内存数据共享，通过零拷...
+summary: Vineyard（v6d）是 CNCF Sandbox 项目，为 Kubernetes 上的 AI/ML 和大数据工作负载提供高效的分布式内存数据共享，通过零拷...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - storage
 - ai-ml
 - data-sharing
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Vineyard 分布式数据共享（Vineyard）
 

@@ -1,6 +1,7 @@
 ---
 title: kudig-database 发布会 PPT 大纲 (20 页)
 description: '**设计风格**: 深蓝 (#0A1628) + 青色 (#00E5FF) 科技风'
+summary: '**设计风格**: 深蓝 (#0A1628) + 青色 (#00E5FF) 科技风'
 category: general
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - argocd
 - ebpf
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - gitops-basics
 - ebpf-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # kudig-database 发布会 PPT 大纲 (20 页)
 

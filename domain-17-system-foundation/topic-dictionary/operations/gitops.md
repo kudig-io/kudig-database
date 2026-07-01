@@ -1,6 +1,7 @@
 ---
 title: GitOps
-description: 'GitOps 是一种以 Git 仓库作为基础设施和应用配置的唯一真实来源（Single Source of Truth）的运维方法论。通过声明式配置和自动化拉取...'
+description: GitOps 是一种以 Git 仓库作为基础设施和应用配置的唯一真实来源（Single Source of Truth）的运维方法论。通过声明式配置和自动化拉取...
+summary: GitOps 是一种以 Git 仓库作为基础设施和应用配置的唯一真实来源（Single Source of Truth）的运维方法论。通过声明式配置和自动化拉取...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - gitops
 - cicd
 - methodology
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # GitOps
 

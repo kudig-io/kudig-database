@@ -2,6 +2,8 @@
 title: Ingress 控制器 Pod 异常导致 404/502
 description: 专有云 ACK 集群 Nginx Ingress Controller 因内存限制过低触发 OOMKilled，导致七层入口流量返回 502/404
   的工单闭环样本。
+summary: 专有云 ACK 集群 Nginx Ingress Controller 因内存限制过低触发 OOMKilled，导致七层入口流量返回 502/404
+  的工单闭环样本。
 category: production-operations
 tags:
 - ack
@@ -12,6 +14,9 @@ tags:
 - '404'
 - ingress
 - p1
+tier: peripheral
+created: '2026-06-26T14:00:00+08:00'
+updated: '2026-06-26T16:30:00+08:00'
 incident_id: TC-2026-031
 priority: P1
 severity: high
@@ -24,13 +29,11 @@ skill_ref:
 - '[[domain-03-networking-traffic/00-core-k8s-networking/25-ingress-monitoring-troubleshooting.md|Ingress
   监控与排障]]'
 fta_ref:
-- '[[domain-10-troubleshooting-diagnostics/topic-fta/list/nginx-ingress-fta.md|FTA: Nginx
-  Ingress 故障]]'
+- '[[domain-10-troubleshooting-diagnostics/topic-fta/list/nginx-ingress-fta.md|FTA:
+  Nginx Ingress 故障]]'
 - '[[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|FTA: Ingress
   访问异常]]'
-created: '2026-06-26T14:00:00+08:00'
-updated: '2026-06-26T16:30:00+08:00'
-last_updated: 2026-06-26T16:30:00+08:00
+last_updated: 2026-06-26 16:30:00+08:00
 duplicate_of: TC-2026-021
 status: duplicate
 duplication_reason: 与 TC-2026-021 主题重复，内容角度相似，降低 RAG 权重
@@ -62,15 +65,17 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
-- target: "[[concepts/ingress.md]]"
+- target: '[[concepts/ingress.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 

@@ -1,6 +1,7 @@
 ---
 title: kube-proxy 与 Service 负载均衡 (topic-code-analysis)
 description: 'description: ''## kube-proxy 部署'''
+summary: 'description: ''## kube-proxy 部署'''
 category: general
 tags:
 - reference
@@ -9,6 +10,8 @@ tags:
 - coredns
 - daemonset
 - ingress
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
-created: "2026-05-23"
 ---
+
+
 
 title: kube-proxy 与 Service 负载均衡
 description: '## kube-proxy 部署'
@@ -337,6 +341,8 @@ cat /proc/sys/net/netfilter/nf_conntrack_count
 | 连接超时 | conntrack 表满 | 增加 nf_conntrack_max |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]

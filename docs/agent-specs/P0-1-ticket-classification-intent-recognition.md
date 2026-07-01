@@ -1,6 +1,7 @@
 ---
 title: 工单分类体系与意图识别语料库
 description: '**关联**: P0-2 多技能协同协议, P0-3 会话上下文管理'
+summary: '**关联**: P0-2 多技能协同协议, P0-3 会话上下文管理'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - redis
 - mysql
 - postgresql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # 工单分类体系与意图识别语料库
 

@@ -1,10 +1,13 @@
 ---
 title: 'Domain 36: 平台工程 (Platform Engineering)'
 description: (IDP) 的设计与实施，涵盖 Backstage、Kratix、Golden Paths 等核心技术栈。
+summary: (IDP) 的设计与实施，涵盖 Backstage、Kratix、Golden Paths 等核心技术栈。
 category: general
 tags:
 - k8s
 - serverless
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - iac-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain 36: 平台工程 (Platform Engineering)'

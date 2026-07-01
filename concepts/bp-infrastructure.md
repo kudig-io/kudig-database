@@ -1,6 +1,7 @@
 ---
 title: 最佳实践：Infrastructure
 description: 本页汇总了 **Infrastructure** 领域的 Kubernetes 最佳实践。
+summary: 本页汇总了 **Infrastructure** 领域的 Kubernetes 最佳实践。
 category: concepts
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - calico
 - ingress
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ prerequisites:
 - kubectl-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 本页汇总了 **Infrastructure** 领域的 Kubernetes 最佳实践。
 

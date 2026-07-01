@@ -1,6 +1,7 @@
 ---
 title: Open Policy Agent
-description: 'Open Policy Agent（OPA）是 CNCF 毕业项目，提供通用的策略引擎，可在 Kubernetes 准入控制、API 网关、SSH、Terraf...'
+description: Open Policy Agent（OPA）是 CNCF 毕业项目，提供通用的策略引擎，可在 Kubernetes 准入控制、API 网关、SSH、Terraf...
+summary: Open Policy Agent（OPA）是 CNCF 毕业项目，提供通用的策略引擎，可在 Kubernetes 准入控制、API 网关、SSH、Terraf...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - policy
 - security
 - cncf
+tier: core
+created: 2026-05
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -24,9 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
-created: 2026-05
 ---
+
+
 
 # Open Policy Agent
 

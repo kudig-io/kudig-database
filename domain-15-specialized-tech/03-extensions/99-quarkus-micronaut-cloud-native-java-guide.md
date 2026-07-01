@@ -1,6 +1,7 @@
 ---
 title: Quarkus / Micronaut 云原生 Java 框架实践指南
 description: '# Quarkus / Micronaut 云原生 Java 框架实践指南'
+summary: '# Quarkus / Micronaut 云原生 Java 框架实践指南'
 category: extensions
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - postgresql
 - kafka
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +54,9 @@ cross_refs:
 - type: domain
   path: ../domain-07-platform-engineering/
   label: '相关知识域: domain-07-platform-engineering'
-created: "2026-05-23"
 ---
+
+
 
 # Quarkus / Micronaut 云原生 Java 框架实践指南
 

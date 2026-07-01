@@ -1,6 +1,7 @@
 ---
 title: 数据库中间件问题排查指南
 description: '# 数据库中间件问题排查指南'
+summary: '# 数据库中间件问题排查指南'
 category: general
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - mysql
 - postgresql
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - etcd-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # 数据库中间件问题排查指南
 
@@ -48,7 +52,7 @@ created: "2026-05-23"
 | 连接超时 | `mysqladmin ping -h <host>` | 网络/防火墙 | 检查安全组/防火墙规则 |
 | 访问拒绝 | `mysql -u <user> -p` | 密码错误/权限不足 | 检查用户权限 |
 | max_connections 满 | `show global status like 'Max_used_connections'` | 连接池泄漏 | 重启连接或增加 max_connections |
-| 无法连接 | `netstat -tlnp \| grep 3306` | MySQL 未运行 | `systemctl start mysql` 或检查 Pod 状态 |
+| 无法连接 | `netstat -tlnp | grep 3306` | MySQL 未运行 | `systemctl start mysql` 或检查 Pod 状态 |
 
 ### 1.2 主从复制问题
 

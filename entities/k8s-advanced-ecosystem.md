@@ -1,6 +1,7 @@
 ---
 title: 硬件知识体系、CNCF 全景生态与 eBPF 平台工程
 description: '## 硬件故障排查'
+summary: '## 硬件故障排查'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - etcd
 - prometheus
 - istio
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 硬件知识、CNCF 生态与 eBPF 平台工程
 

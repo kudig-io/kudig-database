@@ -1,6 +1,7 @@
 ---
 title: containerd 生产运维指南
 description: 面向阿里云 ACK / 专有云 ASO 的 containerd 生产运维实践，涵盖安装配置、镜像加速、dockerd 迁移与故障排查
+summary: 面向阿里云 ACK / 专有云 ASO 的 containerd 生产运维实践，涵盖安装配置、镜像加速、dockerd 迁移与故障排查
 category: domain-13
 tags:
 - containerd
@@ -13,6 +14,7 @@ tags:
 - ack
 - aso
 - production-operations
+tier: supporting
 created: '2026-06-29'
 updated: '2026-06-29'
 last_updated: 2026-06-29
@@ -47,6 +49,8 @@ authors:
 - name: KUDIG Team
   role: contributor
 ---
+
+
 
 # containerd 生产运维指南
 

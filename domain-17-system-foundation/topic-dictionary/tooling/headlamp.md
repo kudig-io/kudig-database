@@ -1,6 +1,9 @@
 ---
 title: Headlamp K8s 仪表盘
-description: 'Headlamp 是 Kinvolk（现微软）开源的 Kubernetes 管理仪表盘，提供集群资源可视化、日志查看和终端操作，是 K8s Dashboard ...'
+description: Headlamp 是 Kinvolk（现微软）开源的 Kubernetes 管理仪表盘，提供集群资源可视化、日志查看和终端操作，是 K8s
+  Dashboard ...
+summary: Headlamp 是 Kinvolk（现微软）开源的 Kubernetes 管理仪表盘，提供集群资源可视化、日志查看和终端操作，是 K8s Dashboard
+  ...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - tooling
 - dashboard
 - ui
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Headlamp K8s 仪表盘（Headlamp）
 

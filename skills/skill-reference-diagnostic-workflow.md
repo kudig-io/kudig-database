@@ -1,6 +1,7 @@
 ---
 title: Diagnostic Workflow
 description: '- 出现 `InvalidDiskCapacity` → 磁盘配置异常（RC-003 变种）'
+summary: '- 出现 `InvalidDiskCapacity` → 磁盘配置异常（RC-003 变种）'
 category: skills
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - apiserver
 - kubelet
 - containerd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 - Workflow
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Diagnostic Workflow
 

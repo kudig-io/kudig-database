@@ -1,6 +1,8 @@
 ---
 title: DNS 解析
-description: 'DNS Resolution（DNS 解析）在 Kubernetes 中指将 Service 名称或 Pod 的 DNS 记录转换为 IP 地址的过程。集群内部...'
+description: DNS Resolution（DNS 解析）在 Kubernetes 中指将 Service 名称或 Pod 的 DNS 记录转换为 IP
+  地址的过程。集群内部...
+summary: DNS Resolution（DNS 解析）在 Kubernetes 中指将 Service 名称或 Pod 的 DNS 记录转换为 IP 地址的过程。集群内部...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - dns
 - coredns
 - networking
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # DNS 解析
 

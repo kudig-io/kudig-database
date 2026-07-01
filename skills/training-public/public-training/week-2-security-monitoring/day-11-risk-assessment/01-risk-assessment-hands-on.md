@@ -1,6 +1,7 @@
 ---
 title: 'Day 11: K8s 安全风险识别与防护实操'
 description: '# Day 11: K8s 安全风险识别与防护实操'
+summary: '# Day 11: K8s 安全风险识别与防护实操'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - docker
 - falco
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,8 +37,9 @@ prerequisites:
 - helm-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 11: K8s 安全风险识别与防护实操
 

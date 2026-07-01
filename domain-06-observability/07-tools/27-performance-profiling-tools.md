@@ -1,6 +1,7 @@
 ---
 title: 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools)
 description: 'description: 本文档从资深性能工程师视角，深入解析Kubernetes环境下各类性能分析工具的技术原理、部署实践和调优策略，涵盖应用层剖析、内核级探测、持续性能监控等核心技术，结合大规模生产环境优化经验，为企业构建全方位性能洞察和智能调优能力提供专业指导。'
+summary: 'description: 本文档从资深性能工程师视角，深入解析Kubernetes环境下各类性能分析工具的技术原理、部署实践和调优策略，涵盖应用层剖析、内核级探测、持续性能监控等核心技术，结合大规模生产环境优化经验，为企业构建全方位性能洞察和智能调优能力提供专业指导。'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - grafana
 - jaeger
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools)
 description: 本文档从资深性能工程师视角，深入解析Kubernetes环境下各类性能分析工具的技术原理、部署实践和调优策略，涵盖应用层剖析、内核级探测、持续性能监控等核心技术，结合大规模生产环境优化经验，为企业构建全方位性能洞察和智能调优能力提供专业指导。

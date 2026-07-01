@@ -1,17 +1,22 @@
 ---
-title: "SLO/Error Budget 框架"
+title: SLO/Error Budget 框架
+summary: SLO/Error Budget 框架：相关索引：domain-19-landscape-references/98-merged-indexes/index.md
+  · concepts/incident-management-patterns.md
 category: concepts
 tags:
-  - sre
-  - slo
-  - sli
-  - error-budget
-  - reliability
-  - k8s
+- sre
+- slo
+- sli
+- error-budget
+- reliability
+- k8s
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # SLO/Error Budget 框架
 

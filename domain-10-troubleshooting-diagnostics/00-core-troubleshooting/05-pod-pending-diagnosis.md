@@ -1,6 +1,7 @@
 ---
 title: Pod Pending 状态深度诊断
 description: '# 05 - Pod Pending 状态深度诊断 (Pod Pending Diagnosis)'
+summary: '# 05 - Pod Pending 状态深度诊断 (Pod Pending Diagnosis)'
 category: troubleshooting
 tags:
 - pod
@@ -13,6 +14,8 @@ tags:
 - pvc
 - quota
 - topology
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: intermediate
 reading_level: intermediate
@@ -71,8 +74,9 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/03-pod-pending.md
   label: '运维技能: 03-pod-pending'
-created: "2026-05-23"
 ---
+
+
 
 # 05 - Pod Pending 状态深度诊断 (Pod Pending Diagnosis)
 
@@ -291,17 +295,17 @@ Pod 处于 Pending 状态表示 Pod 已被 [[Kubernetes|Kubernetes]]es API|Kuber
 
 | 错误消息 | 原因类别 | 快速诊断 | 解决方案 |
 |---------|---------|---------|---------|
-| `Insufficient cpu` | 资源不足 | `kubectl describe nodes \| grep -A5 Allocated` | 扩容节点/调整requests |
+| `Insufficient cpu` | 资源不足 | `kubectl describe nodes | grep -A5 Allocated` | 扩容节点/调整requests |
 | `Insufficient memory` | 资源不足 | `kubectl top nodes` | 扩容节点/调整requests |
 | `Insufficient nvidia.com/gpu` | GPU不足 | `kubectl get nodes -l gpu=true` | 添加GPU节点 |
 | `node(s) didn't match Pod's node selector` | 节点选择 | `kubectl get nodes --show-labels` | 修正标签/选择器 |
 | `node(s) didn't match Pod's node affinity/selector` | 亲和性 | 检查 `spec.affinity` | 调整亲和性规则 |
-| `node(s) had taint {key} that the pod didn't tolerate` | 污点容忍 | `kubectl describe node \| grep Taint` | 添加tolerations |
+| `node(s) had taint {key} that the pod didn't tolerate` | 污点容忍 | `kubectl describe node | grep Taint` | 添加tolerations |
 | `node(s) had untolerated taint {node.kubernetes.io/not-ready}` | 节点异常 | `kubectl get nodes` | 修复节点状态 |
 | `pod has unbound immediate PersistentVolumeClaims` | PVC未绑定 | `kubectl get pvc` | 创建PV/修复SC |
 | `volume node affinity conflict` | 卷拓扑冲突 | 检查PV nodeAffinity | 调整卷配置 |
 | `pod topology spread constraints not satisfied` | 拓扑分布 | 检查topologySpreadConstraints | 调整maxSkew |
-| `Too many pods` | Pod数量限制 | `kubectl describe node \| grep -i pods` | 扩容节点 |
+| `Too many pods` | Pod数量限制 | `kubectl describe node | grep -i pods` | 扩容节点 |
 | `exceeded quota` | 配额超限 | `kubectl describe quota` | 调整配额 |
 | `no preemption victims found` | 抢占失败 | 检查PriorityClass | 调整优先级 |
 
@@ -318,13 +322,13 @@ Pod 处于 Pending 状态表示 Pod 已被 [[Kubernetes|Kubernetes]]es API|Kuber
 
 | 资源类型 | 检查命令 | 版本变化 | ACK特殊处理 |
 |---------|---------|---------|------------|
-| **CPU** | `kubectl describe node \| grep -A5 "Allocated"` | 稳定 | 支持弹性调度 |
+| **CPU** | `kubectl describe node | grep -A5 "Allocated"` | 稳定 | 支持弹性调度 |
 | **Memory** | `kubectl top nodes` | 稳定 | 内存超售配置 |
-| **Ephemeral Storage** | `kubectl describe node \| grep ephemeral` | v1.25+增强 | 云盘自动扩容 |
-| **GPU** | `kubectl describe node \| grep nvidia.com/gpu` | 稳定 | GPU共享(cGPU) |
-| **Extended Resources** | `kubectl get node -o json \| jq '.status.capacity'` | 稳定 | 自定义资源 |
-| **Hugepages** | `kubectl describe node \| grep hugepages` | v1.27+稳定 | 大页内存配置 |
-| **Pods** | `kubectl describe node \| grep "Pods:"` | 稳定 | maxPods配置 |
+| **Ephemeral Storage** | `kubectl describe node | grep ephemeral` | v1.25+增强 | 云盘自动扩容 |
+| **GPU** | `kubectl describe node | grep nvidia.com/gpu` | 稳定 | GPU共享(cGPU) |
+| **Extended Resources** | `kubectl get node -o json | jq '.status.capacity'` | 稳定 | 自定义资源 |
+| **Hugepages** | `kubectl describe node | grep hugepages` | v1.27+稳定 | 大页内存配置 |
+| **Pods** | `kubectl describe node | grep "Pods:"` | 稳定 | maxPods配置 |
 
 ### 3.2 集群资源分析
 

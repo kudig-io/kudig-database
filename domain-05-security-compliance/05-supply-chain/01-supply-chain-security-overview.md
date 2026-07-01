@@ -1,6 +1,7 @@
 ---
 title: 供应链安全概述 (Supply Chain Security Overview)
 description: '# 供应链安全概述 (Supply Chain Security Overview)'
+summary: '# 供应链安全概述 (Supply Chain Security Overview)'
 category: supply-chain-security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - kafka
 - elasticsearch
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 供应链安全概述 (Supply Chain Security Overview)
 

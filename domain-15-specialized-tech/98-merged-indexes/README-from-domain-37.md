@@ -1,11 +1,16 @@
 ---
 title: 'Domain 37: 边缘计算 (Edge Computing)'
-description: 'description: 边缘计算 (Edge Computing) 将计算和数据存储带到更接近数据生成源的位置，以提高响应速度并节省带宽。本领域深入探讨 Kubernetes 在边缘场景的应用，涵盖 KubeEdge、OpenYurt、SuperEdge'
+description: 'description: 边缘计算 (Edge Computing) 将计算和数据存储带到更接近数据生成源的位置，以提高响应速度并节省带宽。本领域深入探讨
+  Kubernetes 在边缘场景的应用，涵盖 KubeEdge、OpenYurt、SuperEdge'
+summary: 'description: 边缘计算 (Edge Computing) 将计算和数据存储带到更接近数据生成源的位置，以提高响应速度并节省带宽。本领域深入探讨
+  Kubernetes 在边缘场景的应用，涵盖 KubeEdge、OpenYurt、SuperEdge'
 category: general
 tags:
 - k8s
 - minio
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +31,9 @@ trigger_keywords:
 - tech
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain 37: 边缘计算 (Edge Computing)'

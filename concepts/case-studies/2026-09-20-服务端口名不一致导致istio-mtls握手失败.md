@@ -1,14 +1,19 @@
 ---
-category: "synthesis"
-tags: ["synthesis"]
-date: "2026-09-20"
-title: "服务端口名不一致导致Istio mTLS握手失败"
-skill: "13-ingress-gateway-failure"
-severity: "P1"
-created: "2026-05-23"
-updated: "2026-05-23"
+title: 服务端口名不一致导致Istio mTLS握手失败
+summary: 服务端口名不一致导致Istio mTLS握手失败：启用Istio严格mTLS后，部分服务间调用返回503。检查发现Service端口名与DestinationRule端口名不一致。
+category: synthesis
+tags:
+- synthesis
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-09-20'
+skill: 13-ingress-gateway-failure
+severity: P1
 last_updated: 2026-05-23
 ---
+
+
 
 # 服务端口名不一致导致Istio mTLS握手失败
 

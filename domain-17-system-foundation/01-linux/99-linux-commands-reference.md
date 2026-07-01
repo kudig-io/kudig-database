@@ -1,6 +1,7 @@
 ---
 title: Linux 命令大全参考
 description: 'description: ''<!-- chunk: 概述'' -->## 概述'''
+summary: 'description: ''<!-- chunk: 概述'' -->## 概述'''
 category: general
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - job
 - rbac
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - iac-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

@@ -1,6 +1,7 @@
 ---
 title: Scheduling Algorithm
 description: '- [[entities/scheduling-terms.md|scheduling-terms]] — K8s 调度术语参考'
+summary: '- [[entities/scheduling-terms.md|scheduling-terms]] — K8s 调度术语参考'
 category: concepts
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - preemption
 - scheduler
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Scheduling Algorithm
 

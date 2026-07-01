@@ -1,12 +1,15 @@
 ---
 title: 附录 C：参考文献 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
+summary: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
 category: fta
 tags:
 - fta
 - troubleshooting
 - reference
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -34,8 +37,9 @@ prerequisites:
 fta_id: FTA-APPENDIX_C_REFERENCES-001
 component: Appendix C References
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 title: 附录 C：参考文献
 description: '**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'
@@ -135,3 +139,7 @@ k8s_versions:
 - [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-b-tools-and-resources.md|appendix-b-tools-and-resources]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-d-templates.md|appendix-d-templates]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/fta-diagnosis-improvement.md|fta-diagnosis-improvement]]
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub

@@ -1,6 +1,7 @@
 ---
 title: 难度分级索引 (Difficulty Index) [metadata]
 description: '| **中级** | intermediate | 原理理解、日常运维 | 1-2 年经验 |'
+summary: '| **中级** | intermediate | 原理理解、日常运维 | 1-2 年经验 |'
 category: general
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - ebpf
 - llm
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - ebpf-basics
-created: "2026-05-23"
 ---
+
+
 
 # 难度分级索引 (Difficulty Index)
 

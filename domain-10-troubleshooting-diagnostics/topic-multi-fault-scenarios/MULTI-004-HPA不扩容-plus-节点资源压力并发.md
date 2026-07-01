@@ -1,14 +1,22 @@
 ---
-scenario_id: "MULTI-004"
-type: "multi-fault"
-skills: ['12-autoscaling-failure', '19-node-resource-pressure']
-created: "2026-05-23"
-updated: "2026-05-23"
-last_updated: 2026-05-23
-title: "HPA不扩容 + 节点资源压力并发"
+title: HPA不扩容 + 节点资源压力并发
+summary: HPA不扩容 + 节点资源压力并发：业务高峰期HPA未触发扩容，同时多个节点因磁盘压力进入DiskPressure状态，Pod被驱逐。
 category: uncategorized
-tags: ["uncategorized", "visibility/public"]
+tags:
+- uncategorized
+- visibility/public
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+scenario_id: MULTI-004
+type: multi-fault
+skills:
+- 12-autoscaling-failure
+- 19-node-resource-pressure
+last_updated: 2026-05-23
 ---
+
+
 
 # HPA不扩容 + 节点资源压力并发
 
@@ -46,3 +54,7 @@ metrics-server问题导致HPA无法获取CPU指标，同时节点日志堆积导
 2. 配置级联告警（当多个关联指标同时异常时触发）
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

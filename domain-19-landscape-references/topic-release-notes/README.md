@@ -1,6 +1,7 @@
 ---
 title: Cloud Native Release Notes Archive
 description: Cloud Native Release Notes Archive — Kubernetes 生产运维知识库
+summary: Cloud Native Release Notes Archive — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - envoy
 - cilium
 - calico
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ prerequisites:
 - backup-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Cloud Native Release Notes Archive
 

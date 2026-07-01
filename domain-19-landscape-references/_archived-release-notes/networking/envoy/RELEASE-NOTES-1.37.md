@@ -1,6 +1,7 @@
 ---
 title: minikube v1.37 Release Notes
 description: minikube v1.37 Release Notes — Kubernetes 生产运维知识库
+summary: minikube v1.37 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - docker
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # minikube v1.37 Release Notes
 

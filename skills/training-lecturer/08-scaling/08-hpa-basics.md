@@ -1,6 +1,7 @@
 ---
 title: 第九课：HPA - 自动伸缩 [08-scaling]
 description: 2. 掌握 HPA 的配置方法
+summary: 2. 掌握 HPA 的配置方法
 category: k8s-lecturer
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - lecturer
 - hpa
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第九课：HPA - 自动伸缩
 

@@ -1,12 +1,15 @@
 ---
 title: 第八章：AI Agent 时代的运维范式革命 [domain-10-troubleshooting-diagnostics]
 description: 'title: 第八章：AI Agent 时代的运维范式革命'
+summary: 'title: 第八章：AI Agent 时代的运维范式革命'
 category: fta
 tags:
 - fta
 - troubleshooting
 - daily-ops
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -35,8 +38,9 @@ prerequisites:
 fta_id: FTA-08_AI_AGENT_OPS_REVOLUTION-001
 component: 08 Ai Agent Ops Revolution
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: 第八章：AI Agent 时代的运维范式革命
 description: '# 第八章：AI Agent 时代的运维范式革命'

@@ -1,6 +1,7 @@
 ---
 title: 用户画像 — ACK 运维工程师 (02-ai-agents)
 description: 'title: 用户画像 — ACK 运维工程师'
+summary: 'title: 用户画像 — ACK 运维工程师'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - coredns
 - helm
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - iac-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 用户画像 — ACK 运维工程师
 description: ACK 运维工程师用户画像，定义 Agent 的服务对象和交互偏好

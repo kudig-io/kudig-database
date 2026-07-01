@@ -1,6 +1,7 @@
 ---
 title: Thanos Enterprise Metrics Federation and Long-term Storage
 description: '- thanos-enterprise-metrics-federation的最佳实践'
+summary: '- thanos-enterprise-metrics-federation的最佳实践'
 category: general
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - cronjob
 - rbac
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - observability-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

@@ -1,10 +1,13 @@
 ---
 title: KUDIG 学习路径 Prompt 模板
 description: KUDIG 学习路径 Prompt 模板 — Kubernetes 生产运维知识库
+summary: KUDIG 学习路径 Prompt 模板 — Kubernetes 生产运维知识库
 category: general
 tags:
 - k8s
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 - 模板
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG 学习路径 Prompt 模板
 

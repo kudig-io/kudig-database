@@ -1,6 +1,7 @@
 ---
 title: QA Action 扩展执行摘要（2026-06-26）
 description: 将 QA action 字段扩展至全部命令输出诊断语料文件的执行摘要
+summary: 将 QA action 字段扩展至全部命令输出诊断语料文件的执行摘要
 category: reports
 tags:
 - ticket-agent
@@ -8,18 +9,21 @@ tags:
 - qa-action
 - command-output-diagnosis
 - quality
+tier: supporting
 created: '2026-06-26'
 updated: '2026-06-26'
 last_updated: 2026-06-26
 status: completed
 relationships:
-- target: "_reports/ticket-agent-corpus-comprehensive-supplement-summary-2026-06-26.md"
+- target: _reports/ticket-agent-corpus-comprehensive-supplement-summary-2026-06-26.md
   type: related_to
-- target: "_reports/ticket-agent-corpus-execution-summary-2026-06-26.md"
+- target: _reports/ticket-agent-corpus-execution-summary-2026-06-26.md
   type: related_to
-- target: "_reports/ticket-agent-corpus-round2-summary-2026-06-26.md"
+- target: _reports/ticket-agent-corpus-round2-summary-2026-06-26.md
   type: related_to
 ---
+
+
 
 # QA Action 扩展执行摘要（2026-06-26）
 

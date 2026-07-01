@@ -1,6 +1,9 @@
 ---
 title: Kubernetes 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous Processing)
-description: 'title: Kubernetes 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous Processing)'
+description: 'title: Kubernetes 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous
+  Processing)'
+summary: 'title: Kubernetes 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous
+  Processing)'
 category: general
 tags:
 - paper
@@ -13,6 +16,8 @@ tags:
 - kafka
 - statefulset
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -40,8 +45,9 @@ prerequisites:
 - kafka-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous Processing)
 description: '# Kubernetes 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous
@@ -1492,6 +1498,8 @@ data:
 - Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and ...
 
 ## Related
+
+- [[research|#research Hub]] — tag hub
 
 - 79-polar-research
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

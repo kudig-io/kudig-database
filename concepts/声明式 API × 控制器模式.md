@@ -1,6 +1,7 @@
 ---
 title: 声明式 API × 控制器模式
 description: 这个合成的关键在于理解：**最终一致性不是架构缺陷，而是声明式 API + 控制器模式的必然数学结果**。
+summary: 这个合成的关键在于理解：**最终一致性不是架构缺陷，而是声明式 API + 控制器模式的必然数学结果**。
 category: synthesis
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - crd
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,17 +32,18 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/gitops.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-dictionary/workloads/replicaset.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service.md]]"
-    type: uses
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/gitops.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-dictionary/workloads/replicaset.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/service.md]]'
+  type: uses
 ---
+
+
 
 # 声明式 API × 控制器模式
 

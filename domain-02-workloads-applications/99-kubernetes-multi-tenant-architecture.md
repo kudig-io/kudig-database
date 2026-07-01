@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 多租户与资源隔离生产架构
 description: 'title: Kubernetes 多租户与资源隔离生产架构'
+summary: 'title: Kubernetes 多租户与资源隔离生产架构'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - cilium
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -42,8 +45,9 @@ prerequisites:
 - tls-basics
 - policy-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] 多租户与资源隔离生产架构
 description: '# Kubernetes 多租户与资源隔离生产架构'

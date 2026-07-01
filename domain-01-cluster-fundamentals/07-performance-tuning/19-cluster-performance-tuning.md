@@ -1,6 +1,7 @@
 ---
 title: 19-集群性能调优
 description: '- 性能优化'
+summary: '- 性能优化'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - containerd
 - docker
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubernetes-concepts
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

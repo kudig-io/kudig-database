@@ -1,6 +1,7 @@
 ---
-title: "高可用进阶: 负载均衡与证书分发 [cluster-create]"
+title: '高可用进阶: 负载均衡与证书分发 [cluster-create]'
 description: 'description: // 1. CA 公钥/私钥 (加密存储)'
+summary: 'description: // 1. CA 公钥/私钥 (加密存储)'
 category: general
 tags:
 - reference
@@ -10,6 +11,8 @@ tags:
 - scheduler
 - controller-manager
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: '高可用进阶: 负载均衡与证书分发'
 description: // 1. CA 公钥/私钥 (加密存储)
@@ -337,6 +341,8 @@ Controller Manager 和 Scheduler 使用 Kubernetes 内置的 leader election:
 | etcd 成员数不对 | 成员添加失败 | 检查 etcd 日志，手动 `member add` |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[log|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

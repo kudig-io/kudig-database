@@ -1,6 +1,7 @@
 ---
 title: 'Day 16: 安全体系 - Pod 安全 + 密钥管理'
 description: 'title: Day 16: 安全体系 - Pod 安全 + 密钥管理'
+summary: 'title: Day 16: 安全体系 - Pod 安全 + 密钥管理'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - operator
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,8 +38,9 @@ prerequisites:
 - gpu-ml-basics
 - etcd-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 16: 安全体系 - Pod 安全 + 密钥管理

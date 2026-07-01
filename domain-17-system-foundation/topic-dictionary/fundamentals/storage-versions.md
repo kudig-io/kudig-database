@@ -1,6 +1,7 @@
 ---
 title: 存储版本
 description: '# 存储版本'
+summary: '# 存储版本'
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - etcd
 - crd
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -25,8 +28,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 存储版本
 

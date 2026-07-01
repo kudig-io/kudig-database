@@ -1,6 +1,7 @@
 ---
 title: 'Day 17: 节点池基础实操'
 description: '- 工作负载调度到节点池'
+summary: '- 工作负载调度到节点池'
 category: learning
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - operator
 - gpu
 - nvidia
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 17: 节点池基础实操

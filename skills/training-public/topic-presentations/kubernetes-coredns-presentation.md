@@ -1,6 +1,7 @@
 ---
 title: Kubernetes CoreDNS 全栈进阶培训 (从入门到专家) [topic-presentations]
 description: '**适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南'
+summary: '**适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南'
 category: presentations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - daemonset
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] [[CoreDNS|CoreDNS]] 全栈进阶培训 (从入门到专家)
 
@@ -817,7 +821,7 @@ CoreDNS
 
 | 现象 | 可能原因 | 排查命令 | 解决方案 |
 |------|---------|---------|---------|
-| 5 秒超时 | conntrack 竞态 | `dmesg \| grep conntrack` | 部署 NodeLocal DNSCache |
+| 5 秒超时 | conntrack 竞态 | `dmesg | grep conntrack` | 部署 NodeLocal DNSCache |
 | SERVFAIL | Corefile 配置错误 | `kubectl logs -n kube-system -l k8s-app=kube-dns` | 修复 Corefile |
 | 延迟高 | CoreDNS CPU 不足 | `kubectl top pods -n kube-system` | 扩容/调大资源 |
 | 无法解析集群内域名 | CoreDNS Pod 异常 | `kubectl get pods -n kube-system` | 重启 CoreDNS |

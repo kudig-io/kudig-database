@@ -1,5 +1,6 @@
 ---
 title: 工单智能体 × RAG
+summary: 工单智能体与 RAG 检索增强生成的交叉：如何为阿里云专有云 K8s 运维构建可信赖的 Agent 语料体系。
 category: synthesis
 tags:
 - ticket-agent
@@ -7,24 +8,25 @@ tags:
 - ai-agent
 - llm
 - knowledge-graph
+tier: supporting
 sources:
 - _meta/projects/kudig-ticket-agent-corpus-improvement-plan.md
 - _meta/corpus-config/profiles/rag-ticket-agent-profile.yaml
 - domain-11-production-operations/ticket-routing-rules.md
 - domain-11-production-operations/escalation-playbook.md
 - domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md
-created: "2026-06-26"
-updated: "2026-06-26"
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06-26
-summary: "工单智能体与 RAG 检索增强生成的交叉：如何为阿里云专有云 K8s 运维构建可信赖的 Agent 语料体系。"
 provenance:
   extracted: 0.35
   inferred: 0.55
   ambiguous: 0.1
-base_confidence: 0.70
+base_confidence: 0.7
 lifecycle: draft
-lifecycle_changed: "2026-06-26"
+lifecycle_changed: '2026-06-26'
 ---
+
 
 # 工单智能体 × RAG
 

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 可观测性全栈培训 (监控、日志、追踪) [presentations]
 description: '# Kubernetes 可观测性全栈培训 (监控、日志、追踪)'
+summary: '# Kubernetes 可观测性全栈培训 (监控、日志、追踪)'
 category: presentations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - jaeger
 - coredns
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 可观测性全栈培训 (监控、日志、追踪)
 

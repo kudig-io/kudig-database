@@ -1,12 +1,15 @@
 ---
 title: kubectx
-description: 'kubectx 是一个用于快速切换 Kubernetes 集群上下文的命令行工具。当需要管理多个集群时，kubectx 可以显著简化集群切换操作。...'
+description: kubectx 是一个用于快速切换 Kubernetes 集群上下文的命令行工具。当需要管理多个集群时，kubectx 可以显著简化集群切换操作。...
+summary: kubectx 是一个用于快速切换 Kubernetes 集群上下文的命令行工具。当需要管理多个集群时，kubectx 可以显著简化集群切换操作。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - tooling
 - kubectl
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -21,8 +24,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # kubectx
 

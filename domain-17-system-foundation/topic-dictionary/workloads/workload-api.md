@@ -1,6 +1,7 @@
 ---
 title: Workload API
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - gpu
 - nvidia
 - llm
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,8 +33,9 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Workload API
 
@@ -179,7 +183,7 @@ kubectl get workload llm-training-job -n ml-platform -o yaml
 kubectl get pods -n ml-platform -o custom-columns='NAME:.metadata.name,WORKLOAD:.spec.workloadRef.name,GROUP:.spec.workloadRef.podGroupName'
 
 # 检查调度器对 gang 组的处理
-kubectl logs -n kube-system -l component=kube-scheduler | grep -i "workload\|gang"
+kubectl logs -n kube-system -l component=kube-scheduler | grep -i "workload|gang"
 ```
 
 ## 交叉引用

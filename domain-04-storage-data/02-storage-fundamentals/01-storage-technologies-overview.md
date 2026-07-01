@@ -1,6 +1,7 @@
 ---
 title: 01 - 存储技术概述
 description: '# 01 - 存储技术概述'
+summary: '# 01 - 存储技术概述'
 category: storage-fundamentals
 tags:
 - storage
@@ -12,6 +13,8 @@ tags:
 - minio
 - job
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 01 - 存储技术概述
 

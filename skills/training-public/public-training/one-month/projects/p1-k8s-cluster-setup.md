@@ -1,6 +1,7 @@
 ---
 title: '项目 P1: 从零搭建 K8s 集群'
 description: '- k8s 故障排查入门练习'
+summary: '- k8s 故障排查入门练习'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - ingress
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,8 +35,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 项目 P1: 从零搭建 K8s 集群

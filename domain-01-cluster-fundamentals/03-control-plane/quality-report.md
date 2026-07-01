@@ -1,6 +1,7 @@
 ---
 title: Domain-3 控制平面质量检查报告
 description: '### 核心架构层 (01-03)'
+summary: '### 核心架构层 (01-03)'
 category: control-plane
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - vpa
 - rbac
 - crd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -66,8 +69,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-3 控制平面质量检查报告
 

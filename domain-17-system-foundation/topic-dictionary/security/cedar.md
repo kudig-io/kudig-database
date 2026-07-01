@@ -1,6 +1,9 @@
 ---
 title: Cedar 策略语言
-description: 'Cedar 是 AWS 开源的策略语言，用于定义和执行细粒度授权策略，语法简洁直观，专为应用级权限管理设计，已被 Amazon Verified Permiss...'
+description: Cedar 是 AWS 开源的策略语言，用于定义和执行细粒度授权策略，语法简洁直观，专为应用级权限管理设计，已被 Amazon Verified
+  Permiss...
+summary: Cedar 是 AWS 开源的策略语言，用于定义和执行细粒度授权策略，语法简洁直观，专为应用级权限管理设计，已被 Amazon Verified
+  Permiss...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - security
 - policy
 - authorization
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Cedar 策略语言（Cedar）
 

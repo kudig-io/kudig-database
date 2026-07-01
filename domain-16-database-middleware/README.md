@@ -1,6 +1,7 @@
 ---
 title: Database & Middleware
 description: '| 05-operator-management/ | 数据库 Operator 设计模式与对比 |'
+summary: '| 05-operator-management/ | 数据库 Operator 设计模式与对比 |'
 category: domain
 tags:
 - database
@@ -13,6 +14,8 @@ tags:
 - flux
 - rag
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Database & Middleware
 

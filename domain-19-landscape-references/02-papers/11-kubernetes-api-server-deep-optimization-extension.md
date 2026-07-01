@@ -1,6 +1,7 @@
 ---
 title: Kubernetes API Server 深度优化与扩展 (API Server Deep Optimization and Extension)
 description: '# Kubernetes API Server 深度优化与扩展 (API Server Deep Optimization and Extension)'
+summary: '# Kubernetes API Server 深度优化与扩展 (API Server Deep Optimization and Extension)'
 category: papers
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - daemonset
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -50,8 +53,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]]es API|Kubernetes API]] Server 深度优化与扩展 (API Server Deep Optimization and Extension)
 
@@ -1045,5 +1049,9 @@ rules:
 - 13-kubernetes-multi-tenancy-security-isolation-resource-quota
 
 ## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

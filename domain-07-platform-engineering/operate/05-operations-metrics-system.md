@@ -1,6 +1,7 @@
 ---
 title: 运维指标体系建设 (Operations Metrics System)
 description: '# 运维指标体系建设 (Operations Metrics System)'
+summary: '# 运维指标体系建设 (Operations Metrics System)'
 category: platform-ops
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - prometheus
 - grafana
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -54,8 +57,9 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
-created: "2026-05-23"
 ---
+
+
 
 # 运维指标体系建设 (Operations Metrics System)
 

@@ -1,6 +1,7 @@
 ---
 title: Terway（阿里云 CNI）网络故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Terway（阿里云 CNI）网络故障排查指南'
+summary: 'title: Terway（阿里云 CNI）网络故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - coredns
 - docker
 - statefulset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -43,8 +46,9 @@ prerequisites:
 - prometheus-basics
 - ebpf-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Terway（阿里云 CNI）网络故障排查指南
 description: '# Terway（阿里云 CNI）网络故障排查指南'
@@ -398,10 +402,10 @@ kubectl logs -n kube-system <calico-node-pod> -c calico-node | grep -i "policy"
 kubectl get events --field-selector reason=Scheduled,reason=Created
 
 # 查看 terway 分配 IP 的耗时
-kubectl logs -n kube-system <terway-pod> | grep -i "allocate.*cost\|duration"
+kubectl logs -n kube-system <terway-pod> | grep -i "allocate.*cost|duration"
 
 # 检查阿里云 OpenAPI 延迟
-kubectl logs -n kube-system <terway-pod> | grep -i "api.*latency\|api.*duration"
+kubectl logs -n kube-system <terway-pod> | grep -i "api.*latency|api.*duration"
 ```
 
 **优化方向**：

@@ -1,6 +1,7 @@
 ---
 title: 节点资源压力与 Eviction — 源码分析
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - reference
@@ -8,6 +9,8 @@ tags:
 - prometheus
 - containerd
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 节点资源压力与 Eviction 源码分析
 description: '## 概述'
@@ -457,13 +461,13 @@ groups:
 
 | 错误 | 原因 | 排查命令 | 解决方案 |
 |------|------|---------|---------|
-| Pod 被 OOMKilled | 容器内存超过 limit | `kubectl describe pod <pod> \| grep OOMKilled` | 增加 memory limit 或优化内存使用 |
-| Pod 被 Evicted | 节点资源不足 | `kubectl describe pod <pod> \| grep -A 5 Status` | 扩容节点或调整驱逐阈值 |
+| Pod 被 OOMKilled | 容器内存超过 limit | `kubectl describe pod <pod> | grep OOMKilled` | 增加 memory limit 或优化内存使用 |
+| Pod 被 Evicted | 节点资源不足 | `kubectl describe pod <pod> | grep -A 5 Status` | 扩容节点或调整驱逐阈值 |
 | 磁盘满导致节点不可用 | 镜像/日志占满磁盘 | `df -h; du -sh /var/lib/containerd/*` | 清理镜像/日志，增加磁盘容量 |
-| BestEffort Pod 频繁被驱逐 | 节点资源长期紧张 | `kubectl get events \| grep Evicted` | 为 Pod 设置 requests/limits |
-| 软驱逐不触发 | 宽限期配置错误 | `cat /var/lib/kubelet/config.yaml \| grep evictionSoft` | 检查 evictionSoftGracePeriod 配置 |
-| Guaranteed Pod 被驱逐 | 系统级内存耗尽 | `dmesg \| grep oom` | 增加 --kube-reserved 和 --system-reserved |
-| 驱逐后状态不恢复 | evictionPressureTransitionPeriod 太长 | `kubectl describe node <node> \| grep Conditions` | 减少延迟时间 |
+| BestEffort Pod 频繁被驱逐 | 节点资源长期紧张 | `kubectl get events | grep Evicted` | 为 Pod 设置 requests/limits |
+| 软驱逐不触发 | 宽限期配置错误 | `cat /var/lib/kubelet/config.yaml | grep evictionSoft` | 检查 evictionSoftGracePeriod 配置 |
+| Guaranteed Pod 被驱逐 | 系统级内存耗尽 | `dmesg | grep oom` | 增加 --kube-reserved 和 --system-reserved |
+| 驱逐后状态不恢复 | evictionPressureTransitionPeriod 太长 | `kubectl describe node <node> | grep Conditions` | 减少延迟时间 |
 
 ### 调试命令
 
@@ -499,6 +503,8 @@ kubectl top pods --all-namespaces --sort-by=memory
 | `diskThreshold` | `pkg/kubelet/eviction/threshold.go` | 磁盘阈值判断 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]

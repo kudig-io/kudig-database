@@ -1,15 +1,27 @@
 ---
-title: "[2026-08-18] [P1] Cluster Autoscaler 缩容导致节点驱逐延迟"
+title: '[2026-08-18] [P1] Cluster Autoscaler 缩容导致节点驱逐延迟'
+summary: '[2026-08-18] [P1] Cluster Autoscaler 缩容导致节点驱逐延迟：03:20，夜间低峰期，Cluster Autoscaler
+  决定缩容节点 ip-10-0-9-15.ec2.internal。节点被标记为 ToBeDeletedByClusterAutoscaler，但节点上的 Pod
+  迟迟未被驱逐。'
 category: case-study
-tags: [production, incident, cluster-fundamentals, autoscaling, node, eviction]
-date: "2026-08-18"
+tags:
+- production
+- incident
+- cluster-fundamentals
+- autoscaling
+- node
+- eviction
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-08-18'
 severity: P1
-mttr: "33min"
+mttr: 33min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-08-18] Cluster Autoscaler 缩容导致节点上 Pod 驱逐延迟 8 分钟
 

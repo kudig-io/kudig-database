@@ -1,11 +1,14 @@
 ---
 title: 非 Kubernetes 基础设施问题排查
 description: '# 非 Kubernetes 基础设施问题排查'
+summary: '# 非 Kubernetes 基础设施问题排查'
 category: general
 tags:
 - k8s
 - coredns
 - gateway
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,8 +25,9 @@ trigger_keywords:
 - 基础设施问题排查
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 非 Kubernetes 基础设施问题排查
 
@@ -167,7 +171,7 @@ gcloud compute forwarding-rules list
 |------|---------|------|------|
 | Nginx upstream 全部失败 | `nginx -t && nginx -s reload` | upstream 配置错误 | 检查 upstream 定义 |
 | 502 Bad Gateway | `curl -v http://localhost/<path>` | 后端服务未运行 | 检查后端服务 |
-| 连接数满 | `netstat -an \| grep :80 \| wc -l` | worker_connections 不足 | 增加 worker_connections |
+| 连接数满 | `netstat -an | grep :80 | wc -l` | worker_connections 不足 | 增加 worker_connections |
 
 ```bash
 # Nginx 健康检查
@@ -366,7 +370,7 @@ openssl s_client -connect <lb-vip>:443 -servername <domain> 2>/dev/null | openss
 # VPN 隧道状态
 wg show
 ipsec status
-netstat -an \| grep :500 \| grep ESTABLISHED
+netstat -an | grep :500 | grep ESTABLISHED
 
 # SSL 证书检查
 echo | openssl s_client -connect <host>:443 2>/dev/null | openssl x509 -noout -dates

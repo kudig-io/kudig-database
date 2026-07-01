@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 存储配置最佳实践 [infrastructure]
 description: 生产环境 Kubernetes 存储配置的最佳实践指南
+summary: 生产环境 Kubernetes 存储配置的最佳实践指南
 category: best-practices/infrastructure
 tags:
 - kubernetes
@@ -10,6 +11,8 @@ tags:
 - backup
 - helm
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -38,8 +41,9 @@ cross_refs:
 - type: best-practice
   path: ./kubernetes-cluster.md
   label: 集群配置最佳实践
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 存储配置最佳实践
 

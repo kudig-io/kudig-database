@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 集群删除操作指南
 description: '# Kubernetes 集群删除操作指南'
+summary: '# Kubernetes 集群删除操作指南'
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flannel
 - calico
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 集群删除操作指南
 

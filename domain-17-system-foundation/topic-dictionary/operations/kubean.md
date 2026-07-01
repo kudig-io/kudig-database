@@ -1,6 +1,7 @@
 ---
 title: Kubean 集群部署
-description: 'Kubean 是 DaoCloud 开源的 CNCF Sandbox 项目，基于 Kubespray 提供 Kubernetes 集群的声明式部署和生命周期管理...'
+description: Kubean 是 DaoCloud 开源的 CNCF Sandbox 项目，基于 Kubespray 提供 Kubernetes 集群的声明式部署和生命周期管理...
+summary: Kubean 是 DaoCloud 开源的 CNCF Sandbox 项目，基于 Kubespray 提供 Kubernetes 集群的声明式部署和生命周期管理...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - operations
 - deployment
 - cluster
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Kubean 集群部署（Kubean）
 

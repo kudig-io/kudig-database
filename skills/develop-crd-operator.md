@@ -1,6 +1,7 @@
 ---
 title: Develop CRD Operator
 description: Develop CRD Operator — Kubernetes 生产运维知识库
+summary: Develop CRD Operator — Kubernetes 生产运维知识库
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - apiserver
 - helm
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Develop CRD Operator
 

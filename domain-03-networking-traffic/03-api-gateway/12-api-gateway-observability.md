@@ -1,6 +1,7 @@
 ---
 title: 12 - API 网关可观测性：指标、日志与链路追踪
 description: '# 12 - API 网关可观测性：指标、日志与链路追踪'
+summary: '# 12 - API 网关可观测性：指标、日志与链路追踪'
 category: cloud-native-api-gateway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - elasticsearch
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -50,8 +53,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 12 - API 网关可观测性：指标、日志与链路追踪
 

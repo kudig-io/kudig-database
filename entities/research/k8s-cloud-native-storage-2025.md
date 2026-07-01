@@ -1,3 +1,14 @@
+---
+title: K8S Cloud Native Storage 2025
+summary: 'Date: 2026-05-24 Sources: Official docs, GitHub releases, CNCF landscape,
+  community benchmarks'
+category: entities
+tags:
+- k8s-cloud-native-storage-2025
+tier: supporting
+created: '2026-07-01'
+---
+
 # Kubernetes Cloud-Native Storage Systems — Research (2025-2026)
 
 Date: 2026-05-24

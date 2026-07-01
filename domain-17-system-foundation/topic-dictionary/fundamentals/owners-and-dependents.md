@@ -1,6 +1,7 @@
 ---
 title: 所有者和依赖者
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - daemonset
 - job
 - cronjob
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # 所有者和依赖者
 

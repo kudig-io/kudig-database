@@ -1,6 +1,7 @@
 ---
 title: Carvel K8s 工具集
-description: 'Carvel（原 K14s）是 VMware 开源的 Kubernetes 工具集，包含 ytt（YAML 模板）、kapp（应用部署）、kbld（镜像构建）、...'
+description: Carvel（原 K14s）是 VMware 开源的 Kubernetes 工具集，包含 ytt（YAML 模板）、kapp（应用部署）、kbld（镜像构建）、...
+summary: Carvel（原 K14s）是 VMware 开源的 Kubernetes 工具集，包含 ytt（YAML 模板）、kapp（应用部署）、kbld（镜像构建）、...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - tooling
 - configuration
 - vmware
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Carvel K8s 工具集（Carvel）
 

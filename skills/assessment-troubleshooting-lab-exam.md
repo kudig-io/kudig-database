@@ -1,11 +1,14 @@
 ---
 title: Troubleshooting Lab Exam
 description: '- 需要完整记录排查步骤、命令、修复和验证过程'
+summary: '- 需要完整记录排查步骤、命令、修复和验证过程'
 category: skills
 tags:
 - k8s
 - troubleshooting
 - skill
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 - Exam
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Troubleshooting Lab Exam
 

@@ -1,6 +1,7 @@
 ---
 title: StorageClass 配置与动态供给故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: StorageClass 配置与动态供给故障排查指南'
+summary: 'title: StorageClass 配置与动态供给故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - ceph
 - statefulset
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -39,8 +42,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 title: StorageClass 配置与动态供给故障排查指南
 description: '# StorageClass 配置与动态供给故障排查指南'
@@ -119,7 +123,7 @@ k8s_versions:
 | Provisioner 未找到 | `storageclass "xxx" not found` | PVC controller | `kubectl get sc` |
 | 参数错误 | `InvalidParameterValue` / `Bad Request` | CSI 驱动 / 云 API | CSI controller 日志 |
 | 后端配额耗尽 | `QuotaExceeded` / `LimitExceeded` | 云厂商 API | 云控制台 / CCM 日志 |
-| Provisioner 未运行 | `waiting for a volume to be created` | PVC Events | `kubectl get pods -n kube-system \| grep csi` |
+| Provisioner 未运行 | `waiting for a volume to be created` | PVC Events | `kubectl get pods -n kube-system | grep csi` |
 
 #### 1.1.2 绑定模式与拓扑问题
 
@@ -181,7 +185,7 @@ k8s_versions:
 kubectl get pvc <name> -o yaml | grep -A 5 volumeBindingMode
 
 # 查看 PVC 事件，确认是否等待调度
-kubectl describe pvc <name> | grep -i "wait\|first\|consumer\|schedul"
+kubectl describe pvc <name> | grep -i "wait|first|consumer|schedul"
 
 # 检查 Pod 调度状态
 kubectl get pods --all-namespaces -o wide | grep <claim-name>
@@ -354,10 +358,10 @@ kubectl get storageclass <name> -o yaml | grep -A 20 "allowedTopologies"
 # 结果：Pod 因卷在错误可用区而无法调度
 
 # 查看 PV 的可用区
-kubectl get pv <pv-name> -o yaml | grep -i "zone\|topology"
+kubectl get pv <pv-name> -o yaml | grep -i "zone|topology"
 
 # 查看 Pod 的调度失败原因
-kubectl describe pod <pod-name> | grep -i "volume\|zone\|affinity"
+kubectl describe pod <pod-name> | grep -i "volume|zone|affinity"
 
 # 修复：删除 PVC 重新创建（数据会丢失），或修改为 WaitForFirstConsumer
 ```
@@ -396,7 +400,7 @@ kubectl get pvc <name> -o jsonpath='{.spec.resources.requests.storage}'
 kubectl logs -n kube-system <csi-controller> -c csi-resizer --tail=200
 
 # 4. 检查 PVC 事件
-kubectl describe pvc <name> | grep -i "resize\|expand"
+kubectl describe pvc <name> | grep -i "resize|expand"
 
 # 5. 检查文件系统是否已扩展（进入 Pod 验证）
 kubectl exec -it <pod-name> -- df -h

@@ -1,6 +1,9 @@
 ---
 title: Tempo
-description: 'Grafana Tempo 是 Grafana Labs 开源的大规模分布式追踪后端，专为对象存储设计。它以低成本存储追踪数据，与 Grafana 和 Loki...'
+description: Grafana Tempo 是 Grafana Labs 开源的大规模分布式追踪后端，专为对象存储设计。它以低成本存储追踪数据，与 Grafana
+  和 Loki...
+summary: Grafana Tempo 是 Grafana Labs 开源的大规模分布式追踪后端，专为对象存储设计。它以低成本存储追踪数据，与 Grafana
+  和 Loki...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +12,8 @@ tags:
 - tracing
 - observability
 - grafana
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Tempo
 

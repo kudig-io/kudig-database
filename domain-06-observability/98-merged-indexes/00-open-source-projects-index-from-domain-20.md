@@ -1,6 +1,7 @@
 ---
 title: Domain-20 企业监控与告警 — 开源项目索引
 description: '# Domain-20 企业监控与告警 — 开源项目索引'
+summary: '# Domain-20 企业监控与告警 — 开源项目索引'
 category: enterprise-monitoring-alerting
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - statefulset
 - daemonset
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -51,8 +54,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-20 企业监控与告警 — 开源项目索引
 

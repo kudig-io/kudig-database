@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Ingress 基础概念与核心原理 (Ingress Fundamentals)
 description: '**文档版本**: v3.0 | 生产级 Ingress 配置参考'
+summary: '**文档版本**: v3.0 | 生产级 Ingress 配置参考'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - istio
 - envoy
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -67,8 +70,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] [[Ingress|Ingress]] 基础概念与核心原理 (Ingress Fundamentals)
 
@@ -1496,7 +1500,7 @@ spec:
 | `nginx.ingress.kubernetes.io/canary-weight` | 权重分流 (0-100) | `"10"` |
 | `nginx.ingress.kubernetes.io/canary-by-header` | Header 分流键 | `"X-Canary"` |
 | `nginx.ingress.kubernetes.io/canary-by-header-value` | Header 分流值 | `"true"` |
-| `nginx.ingress.kubernetes.io/canary-by-header-pattern` | Header 正则匹配 | `"^(true\|yes)$"` |
+| `nginx.ingress.kubernetes.io/canary-by-header-pattern` | Header 正则匹配 | `"^(true|yes)$"` |
 | `nginx.ingress.kubernetes.io/canary-by-cookie` | Cookie 分流 | `"canary"` |
 
 ---

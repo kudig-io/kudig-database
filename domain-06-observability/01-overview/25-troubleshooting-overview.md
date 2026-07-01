@@ -1,6 +1,7 @@
 ---
 title: 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)
 description: 'title: 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)'
+summary: 'title: 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - apiserver
 - kubelet
 - scheduler
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 10 - [[Kubernetes|Kubernetes]] 生产环境故障排查全攻略 (Production Troubleshooting Guide)
 description: '# 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)'
@@ -195,7 +199,7 @@ Pod状态流转:
 | **Pending - 资源不足** | CPU/Memory不足 | `kubectl describe pod`, `kubectl describe node` | - | 检查ResourceQuota，扩容节点池 | 配置Cluster Autoscaler，设置合理的resource requests |
 | **Pending - 调度约束** | nodeSelector/affinity无法满足 | `kubectl describe pod` 查看Events | v1.25+拓扑约束增强 | 检查节点标签，调整调度约束 | 使用preferredDuringScheduling替代required |
 | **Pending - PVC未绑定** | StorageClass无provisioner | `kubectl get pvc`, `kubectl describe pvc` | v1.27+存储容量跟踪 | 检查StorageClass，确认provisioner可用 | 配置默认StorageClass，监控存储配额 |
-| **Pending - Taint未容忍** | 节点有Taint无对应Toleration | `kubectl describe node \| grep Taint` | - | 添加Toleration或移除Taint | 文档化Taint策略，CI/CD校验 |
+| **Pending - Taint未容忍** | 节点有Taint无对应Toleration | `kubectl describe node | grep Taint` | - | 添加Toleration或移除Taint | 文档化Taint策略，CI/CD校验 |
 | **Pending - Pod亲和性** | requiredDuringScheduling无法满足 | `kubectl describe pod`，检查其他Pod分布 | v1.26拓扑感知增强 | 调整亲和性规则或增加匹配Pod | 使用软亲和性，设置合理的topologyKey |
 | **Pending - 节点selector** | 标签不匹配 | `kubectl get nodes --show-labels` | - | 检查节点标签，修正selector | 使用nodeAffinity替代nodeSelector |
 | **Pending - ResourceQuota** | 命名空间配额用尽 | `kubectl describe quota -n <ns>` | - | 申请更多配额或优化资源使用 | 监控配额使用率，设置告警 |
@@ -315,7 +319,7 @@ kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{range .spec.containers[*]}
 | 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **容器OOMKilled** | 内存超过limits | `kubectl describe pod`, 查看lastState.terminated.reason | v1.27就地Pod调整 | 增加memory limits，优化内存使用 | 压测确定内存需求，监控内存使用 |
-| **系统OOM** | 节点内存不足 | `dmesg \| grep -i oom`, `journalctl -k \| grep -i oom` | v1.26驱逐增强 | 驱逐Pod，扩容节点 | 配置系统预留资源，eviction-hard |
+| **系统OOM** | 节点内存不足 | `dmesg | grep -i oom`, `journalctl -k | grep -i oom` | v1.26驱逐增强 | 驱逐Pod，扩容节点 | 配置系统预留资源，eviction-hard |
 | **内存泄漏** | 应用内存持续增长 | Prometheus内存指标，profiling | - | 修复应用内存泄漏 | 定期profiling，内存限制告警 |
 | **JVM堆配置** | Java堆超过limits | JVM日志，`-XX:+HeapDumpOnOutOfMemoryError` | - | 配置-Xmx小于limits | 容器感知JVM参数(-XX:+UseContainerSupport) |
 | **缓存无限增长** | 应用缓存未设上限 | 应用指标，heap分析 | - | 配置缓存eviction策略 | 监控缓存大小，设置合理TTL |
@@ -382,7 +386,7 @@ fi
 
 # 3. 事件
 echo -e "\n=== Pod Events ==="
-kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$POD_NAME | grep -i "pull\|image"
+kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$POD_NAME | grep -i "pull|image"
 
 # 4. 节点上的镜像
 NODE=$(kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{.spec.nodeName}')
@@ -428,7 +432,7 @@ NetworkUnavailable: # 节点网络配置不正确
 | **容器运行时问题** | containerd/CRI-O问题 | `systemctl status containerd`, `crictl info` | v1.26 containerd 1.6+ | 重启容器运行时，检查磁盘空间 | 运行时健康监控 |
 | **证书过期** | kubelet证书过期 | `openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates` | v1.27证书轮换GA | 重新生成证书或配置自动轮换 | 证书过期告警，自动轮换 |
 | **磁盘满** | 根分区/数据分区满 | `df -h`, `du -sh /var/lib/kubelet/*` | v1.26驱逐增强 | 清理日志/镜像，扩容磁盘 | 磁盘使用监控告警 |
-| **内存耗尽** | 节点OOM | `dmesg \| grep -i oom`, `free -h` | - | 重启节点，驱逐Pod | 配置system-reserved |
+| **内存耗尽** | 节点OOM | `dmesg | grep -i oom`, `free -h` | - | 重启节点，驱逐Pod | 配置system-reserved |
 | **API Server不可达** | 控制平面问题 | 节点上`curl -k https://api-server:6443/healthz` | - | 检查API Server状态，网络 | API Server HA部署 |
 | **时钟不同步** | NTP问题 | `timedatectl`, `chronyc tracking` | - | 同步时间，配置NTP | NTP监控告警 |
 | **内核panic** | 内核bug/硬件问题 | `/var/log/kern.log`, `dmesg` | - | 分析crash dump，更新内核 | 内核版本管理，硬件监控 |
@@ -491,7 +495,7 @@ EOF
 |:---|:---|:---|:---|:---|:---|
 | **MemoryPressure** | memory.available < eviction-hard | `free -h`, `cat /proc/meminfo` | v1.26驱逐增强 | 驱逐Pod，增加内存 | 配置memory.available驱逐阈值 |
 | **DiskPressure** | nodefs.available < 10% | `df -h`, `du -sh /var/lib/*` | - | 清理日志/镜像/容器 | 配置imagefs.available阈值 |
-| **PIDPressure** | pid.available < 100 | `ps aux \| wc -l`, `/proc/sys/kernel/pid_max` | v1.25+ PID限制 | 清理僵尸进程，重启服务 | 配置--pod-max-pids |
+| **PIDPressure** | pid.available < 100 | `ps aux | wc -l`, `/proc/sys/kernel/pid_max` | v1.25+ PID限制 | 清理僵尸进程，重启服务 | 配置--pod-max-pids |
 
 #### 资源压力缓解脚本
 
@@ -553,7 +557,7 @@ EOF
 |:---|:---|:---|:---|:---|:---|
 | **ClusterIP无响应** | Endpoints为空 | `kubectl get endpoints <svc>` | - | 检查selector与Pod labels匹配 | Service监控，自动化测试 |
 | **Endpoints不健康** | Pod就绪探针失败 | `kubectl describe endpoints <svc>` | - | 修复Pod就绪探针 | 探针配置验证 |
-| **kube-proxy规则缺失** | kube-proxy问题 | `iptables-save \| grep <svc-ip>` 或 `ipvsadm -ln` | v1.29 IPVS改进 | 重启kube-proxy，检查日志 | kube-proxy监控 |
+| **kube-proxy规则缺失** | kube-proxy问题 | `iptables-save | grep <svc-ip>` 或 `ipvsadm -ln` | v1.29 IPVS改进 | 重启kube-proxy，检查日志 | kube-proxy监控 |
 | **NodePort不通** | 节点防火墙 | `curl <node-ip>:<nodeport>` | - | 检查安全组/防火墙规则 | 安全组自动化配置 |
 | **LoadBalancer Pending** | 云控制器问题 | `kubectl describe svc` | - | 检查CCM日志，云API权限 | 云API配额监控 |
 | **ExternalName解析失败** | DNS问题 | `nslookup <external-name>` | - | 检查外部DNS配置 | 外部依赖监控 |
@@ -751,7 +755,7 @@ fi
 | **provisioner Pod异常** | 资源不足/配置错误 | `kubectl logs <csi-provisioner>` | v1.29 CSI增强 | 检查provisioner日志 | provisioner监控 |
 | **attacher超时** | 云API问题 | `kubectl logs <csi-attacher>` | - | 检查云API权限/配额 | 云API监控 |
 | **node驱动问题** | 节点上CSI驱动异常 | `kubectl logs <csi-node> -c <driver>` | - | 重启CSI驱动Pod | DaemonSet健康监控 |
-| **挂载点泄漏** | 未正常卸载 | 节点上`mount \| grep <pv>` | - | 手动umount，清理 | 正确处理Pod删除 |
+| **挂载点泄漏** | 未正常卸载 | 节点上`mount | grep <pv>` | - | 手动umount，清理 | 正确处理Pod删除 |
 
 ---
 
@@ -1021,7 +1025,7 @@ kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$DEPLOY_NA
 | 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
 |:---|:---|:---|:---|:---|:---|
 | **Forbidden错误** | 权限不足 | `kubectl auth can-i <verb> <resource> --as <user>` | - | 添加适当的RBAC规则 | 最小权限原则 |
-| **ServiceAccount无权限** | SA未绑定角色 | `kubectl get rolebinding,clusterrolebinding -A \| grep <sa>` | - | 创建RoleBinding | SA权限审计 |
+| **ServiceAccount无权限** | SA未绑定角色 | `kubectl get rolebinding,clusterrolebinding -A | grep <sa>` | - | 创建RoleBinding | SA权限审计 |
 | **跨namespace访问失败** | 需要ClusterRole | 检查Role vs ClusterRole | - | 使用ClusterRole | 理解Role范围 |
 | **API group错误** | 资源apiGroups配置错误 | `kubectl api-resources` 检查apiGroup | - | 修正apiGroups配置 | 使用正确的apiGroups |
 
@@ -1760,6 +1764,8 @@ kubectl uncordon <node>
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[kudig-prompts-catalog]]
 

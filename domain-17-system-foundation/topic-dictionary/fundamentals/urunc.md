@@ -1,6 +1,9 @@
 ---
 title: urunc 微库运行时
-description: 'urunc 是 Nubificus 开源的 CNCF Sandbox 项目，在 Kubernetes 上运行 Unikernel 和轻量虚拟机，利用 Unike...'
+description: urunc 是 Nubificus 开源的 CNCF Sandbox 项目，在 Kubernetes 上运行 Unikernel 和轻量虚拟机，利用
+  Unike...
+summary: urunc 是 Nubificus 开源的 CNCF Sandbox 项目，在 Kubernetes 上运行 Unikernel 和轻量虚拟机，利用
+  Unike...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - fundamentals
 - container-runtime
 - unikernel
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # urunc 微库运行时（urunc）
 

@@ -1,12 +1,15 @@
 ---
 title: kubeadm
-description: 'kubeadm 是 Kubernetes 官方提供的集群初始化和升级工具。它简化了集群的引导过程，是快速搭建 Kubernetes 集群的推荐方式。...'
+description: kubeadm 是 Kubernetes 官方提供的集群初始化和升级工具。它简化了集群的引导过程，是快速搭建 Kubernetes 集群的推荐方式。...
+summary: kubeadm 是 Kubernetes 官方提供的集群初始化和升级工具。它简化了集群的引导过程，是快速搭建 Kubernetes 集群的推荐方式。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - kubeadm
 - tooling
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -21,8 +24,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # kubeadm
 

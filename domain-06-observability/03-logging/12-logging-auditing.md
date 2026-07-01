@@ -1,6 +1,7 @@
 ---
 title: 17 - 日志和审计表
 description: '# 17 - 日志和审计表'
+summary: '# 17 - 日志和审计表'
 category: observability
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -60,8 +63,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # 17 - 日志和审计表
 

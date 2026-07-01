@@ -1,6 +1,7 @@
 ---
 title: 计算、存储与网络扩展
 description: '# 计算、存储与网络扩展'
+summary: '# 计算、存储与网络扩展'
 category: dictionary
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - operator
 - gpu
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # 计算、存储与网络扩展
 

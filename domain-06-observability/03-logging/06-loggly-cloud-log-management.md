@@ -1,6 +1,7 @@
 ---
 title: Loggly Cloud Log Management Platform 深度实践
 description: 'title: Loggly Cloud Log Management Platform 深度实践'
+summary: 'title: Loggly Cloud Log Management Platform 深度实践'
 category: general
 tags:
 - observability
@@ -13,6 +14,8 @@ tags:
 - operator
 - webhook
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - iac-basics
 - policy-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Loggly Cloud Log Management Platform 深度实践
 description: '# Loggly Cloud Log Management Platform 深度实践'
@@ -296,7 +300,7 @@ logger "Test message sent to Loggly at $(date)"
   path /var/log/nginx/access.log
   pos_file /var/log/td-agent/nginx-access.log.pos
   tag nginx.access
-  format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*?)(?: +\S*)?)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)"(?:\s+(?<http_x_forwarded_for>[^ ]+))?)?$/
+  format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*?)(?: +\S*)?)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)"(?:\s+(?<http_x_forwarded_for>[^ ]+))?)?$/
   time_format %d/%b/%Y:%H:%M:%S %z
 </source>
 

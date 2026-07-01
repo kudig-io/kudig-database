@@ -1,6 +1,7 @@
 ---
 title: Quarkus Native 编译与 Kubernetes 部署指南 (domain-02-workloads-applications)
 description: '# Quarkus Native 编译与 Kubernetes 部署指南'
+summary: '# Quarkus Native 编译与 Kubernetes 部署指南'
 category: java-kubernetes
 tags:
 - java
@@ -13,6 +14,8 @@ tags:
 - kafka
 - hpa
 - serverless
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -36,8 +39,9 @@ prerequisites:
 - pod-lifecycle
 - prometheus-basics
 - kafka-basics
-created: "2026-05-23"
 ---
+
+
 
 # Quarkus Native 编译与 [[Kubernetes|Kubernetes]] 部署指南
 

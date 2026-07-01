@@ -1,6 +1,9 @@
 ---
 title: OpenTofu IaC 工具
-description: 'OpenTofu 是 Terraform 的开源分支（Linux Foundation 托管），在 HashiCorp 更改许可证后由社区发起，保持 MPL 2...'
+description: OpenTofu 是 Terraform 的开源分支（Linux Foundation 托管），在 HashiCorp 更改许可证后由社区发起，保持
+  MPL 2...
+summary: OpenTofu 是 Terraform 的开源分支（Linux Foundation 托管），在 HashiCorp 更改许可证后由社区发起，保持
+  MPL 2...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - tooling
 - iac
 - open-source
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # OpenTofu IaC 工具（OpenTofu）
 

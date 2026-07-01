@@ -1,13 +1,18 @@
 ---
+title: Readme
+summary: 本目录用于存放专题研究（Topic Research）材料，每个文件对应一个独立的研究课题。
 category: research
 tags:
-  - research
-  - topic-study
-  - deep-dive
+- research
+- topic-study
+- deep-dive
+tier: supporting
 created: 2026-06-25
 updated: 2026-06-25
 last_updated: 2026-06-25
 ---
+
+
 
 # Research — 专题研究
 
@@ -77,3 +82,9 @@ status: draft | in-progress | done
 ---
 
 *本目录为专题研究区，欢迎随时新建课题文件。*
+
+## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub

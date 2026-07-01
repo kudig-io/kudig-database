@@ -1,6 +1,7 @@
 ---
 title: 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
 description: '# 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)'
+summary: '# 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)'
 category: edge-computing
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - cilium
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -53,8 +56,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
 

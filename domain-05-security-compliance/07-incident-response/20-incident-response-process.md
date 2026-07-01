@@ -1,6 +1,7 @@
 ---
 title: 20 - 安全事件响应与应急处理流程
 description: '# 20 - 安全事件响应与应急处理流程'
+summary: '# 20 - 安全事件响应与应急处理流程'
 category: security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -52,8 +55,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # 20 - 安全事件响应与应急处理流程
 

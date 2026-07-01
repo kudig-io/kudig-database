@@ -1,6 +1,7 @@
 ---
 title: 09 - 迁移工具链参考 [migration]
 description: 'description: 2. [Velero 完整指南](#2-velero-完整指南)'
+summary: 'description: 2. [Velero 完整指南](#2-velero-完整指南)'
 category: general
 tags:
 - migration
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - daemonset
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 09 - 迁移工具链参考
 description: 2. [Velero 完整指南](#2-velero-完整指南)

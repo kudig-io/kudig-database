@@ -1,6 +1,7 @@
 ---
 title: Azure AKS 企业级多云管理平台
 description: '# Azure AKS 企业级多云管理平台'
+summary: '# Azure AKS 企业级多云管理平台'
 category: multi-cloud-hybrid
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - calico
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -52,8 +55,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Azure AKS 企业级多云管理平台
 

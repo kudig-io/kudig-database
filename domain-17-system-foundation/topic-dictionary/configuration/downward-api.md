@@ -1,6 +1,7 @@
 ---
 title: Downward API 元数据注入
-description: 'Downward API 是 Kubernetes 将 Pod/Container 元数据（名称、命名空间、标签、资源限制等）注入到容器内部的机制，支持环境变量...'
+description: Downward API 是 Kubernetes 将 Pod/Container 元数据（名称、命名空间、标签、资源限制等）注入到容器内部的机制，支持环境变量...
+summary: Downward API 是 Kubernetes 将 Pod/Container 元数据（名称、命名空间、标签、资源限制等）注入到容器内部的机制，支持环境变量...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - configuration
 - env
 - volume
+tier: peripheral
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Downward API 元数据注入（Downward API）
 

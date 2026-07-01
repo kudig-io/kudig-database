@@ -1,6 +1,7 @@
 ---
 title: 自定义资源
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - crd
 - operator
 - webhook
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -29,8 +32,9 @@ prerequisites:
 - cloud-provider-basics
 - etcd-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # 自定义资源
 

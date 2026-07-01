@@ -1,6 +1,9 @@
 ---
 title: Keycloak 身份管理
-description: 'Keycloak 是 Red Hat 赞助的开源身份和访问管理（IAM）平台，提供 SSO、OIDC、SAML、LDAP 集成等企业级身份管理能力，是 Kube...'
+description: Keycloak 是 Red Hat 赞助的开源身份和访问管理（IAM）平台，提供 SSO、OIDC、SAML、LDAP 集成等企业级身份管理能力，是
+  Kube...
+summary: Keycloak 是 Red Hat 赞助的开源身份和访问管理（IAM）平台，提供 SSO、OIDC、SAML、LDAP 集成等企业级身份管理能力，是
+  Kube...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - security
 - identity
 - sso
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Keycloak 身份管理（Keycloak）
 

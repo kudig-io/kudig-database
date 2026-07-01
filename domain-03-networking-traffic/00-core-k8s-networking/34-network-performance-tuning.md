@@ -1,6 +1,7 @@
 ---
 title: 84 - 网络性能调优
 description: '# 84 - 网络性能调优'
+summary: '# 84 - 网络性能调优'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - helm
 - flannel
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -55,8 +58,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 84 - 网络性能调优
 

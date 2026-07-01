@@ -1,6 +1,7 @@
 ---
 title: 07 - Deployment 与 ReplicaSet 控制器事件
 description: '- 应用部署'
+summary: '- 应用部署'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - argocd
 - flux
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - gitops-basics
 - etcd-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

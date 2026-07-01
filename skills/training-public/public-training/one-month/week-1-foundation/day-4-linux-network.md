@@ -1,12 +1,15 @@
 ---
 title: 'Day 4: Linux 网络 + 性能调优'
 description: '# Day 4: Linux 网络 + 性能调优'
+summary: '# Day 4: Linux 网络 + 性能调优'
 category: learning
 tags:
 - k8s
 - training
 - hands-on
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 4: Linux 网络 + 性能调优
 

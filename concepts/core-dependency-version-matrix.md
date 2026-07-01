@@ -1,6 +1,7 @@
 ---
 title: 核心依赖版本矩阵
 description: etcd 是 Kubernetes 的唯一状态存储，版本选择直接影响集群的稳定性和性能。
+summary: etcd 是 Kubernetes 的唯一状态存储，版本选择直接影响集群的稳定性和性能。
 category: concepts
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - runc
 - docker
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 核心依赖版本矩阵
 

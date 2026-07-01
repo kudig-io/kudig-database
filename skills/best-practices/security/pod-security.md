@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Pod安全最佳实践 [security]
 description: 生产环境 Kubernetes Pod安全配置的最佳实践指南
+summary: 生产环境 Kubernetes Pod安全配置的最佳实践指南
 category: best-practices/security
 tags:
 - kubernetes
@@ -13,6 +14,8 @@ tags:
 - docker
 - falco
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -39,8 +42,9 @@ cross_refs:
 - type: domain
   path: ../../domain-05-security-compliance/
   label: 云原生安全知识域
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes Pod安全最佳实践
 

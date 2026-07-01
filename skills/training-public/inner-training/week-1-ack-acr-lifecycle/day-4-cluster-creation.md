@@ -1,6 +1,7 @@
 ---
 title: 'Day 4: K8S 新建集群'
 description: '**学习时间**: 4-5 小时 | **主题**: 掌握集群创建流程与配置选项'
+summary: '**学习时间**: 4-5 小时 | **主题**: 掌握集群创建流程与配置选项'
 category: learning
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - prometheus
 - flannel
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 4: K8S 新建集群

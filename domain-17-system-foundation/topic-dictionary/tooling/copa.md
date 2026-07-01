@@ -1,6 +1,9 @@
 ---
 title: Copa 容器补丁工具
-description: 'Copa（Container Patching）是微软开源的 CNCF Sandbox 项目，无需访问源代码或 Dockerfile 即可直接修补容器镜像中的 ...'
+description: Copa（Container Patching）是微软开源的 CNCF Sandbox 项目，无需访问源代码或 Dockerfile 即可直接修补容器镜像中的
+  ...
+summary: Copa（Container Patching）是微软开源的 CNCF Sandbox 项目，无需访问源代码或 Dockerfile 即可直接修补容器镜像中的
+  ...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - tooling
 - security
 - container
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Copa 容器补丁工具（Copa）
 

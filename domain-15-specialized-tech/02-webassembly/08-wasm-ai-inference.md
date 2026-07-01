@@ -1,6 +1,7 @@
 ---
 title: Wasm AI 推理 (Wasm AI Inference)
 description: 通过 WebAssembly 在边缘节点和云原生环境中运行 AI/ML 推理，实现安全、高效、可移植的模型部署。
+summary: 通过 WebAssembly 在边缘节点和云原生环境中运行 AI/ML 推理，实现安全、高效、可移植的模型部署。
 category: webassembly-cloud-native
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - gpu
 - cuda
 - serverless
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -47,8 +50,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Wasm AI 推理 (Wasm AI Inference)
 

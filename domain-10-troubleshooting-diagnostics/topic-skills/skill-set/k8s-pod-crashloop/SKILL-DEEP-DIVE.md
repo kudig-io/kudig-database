@@ -1,6 +1,7 @@
 ---
 title: Pod CrashLoopBackOff / OOMKilled 深度解析
 description: 对 Exit Code 根因链、多语言应用 Crash 模式、OOMKilled 内存诊断、阿里云/专有云场景进行 prose 拆解
+summary: 对 Exit Code 根因链、多语言应用 Crash 模式、OOMKilled 内存诊断、阿里云/专有云场景进行 prose 拆解
 category: Kubernetes-Incident-Response
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - ack
 - deep-dive
 - skills
+tier: peripheral
+created: '2026-06-26'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -38,8 +41,9 @@ k8s_versions:
 skill_id: SKILL-POD-001-DEEP
 skill_name: Pod CrashLoopBackOff / OOMKilled 深度解析
 version: 1.0.0
-created: "2026-06-26"
 ---
+
+
 
 # Pod CrashLoopBackOff / OOMKilled 深度解析
 
@@ -254,3 +258,7 @@ kubectl get events -n <ns> --field-selector involvedObject.name=<pod>,reason=Fai
 - [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-pod-crashloop/SKILL.md|Pod CrashLoopBackOff / OOMKilled 诊断与修复 Skill]]
 - [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md|Node NotReady 深度解析]]
 - [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+
+## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub

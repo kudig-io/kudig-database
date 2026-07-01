@@ -1,6 +1,7 @@
 ---
 title: RAG Chunking Report
 description: '# RAG Chunking 优化报告'
+summary: '# RAG Chunking 优化报告'
 category: references
 tags:
 - rag
@@ -13,6 +14,8 @@ tags:
 - wasm
 - serverless
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - helm-basics
 - gitops-basics
 - ebpf-basics
-created: "2026-05-23"
 ---
+
+
 
 # RAG Chunking 优化报告
 

@@ -1,6 +1,7 @@
 ---
 title: AI 基础设施：GPU 调度、分布式训练、LLM 推理与成本优化
 description: '## GPU 调度'
+summary: '## GPU 调度'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - operator
 - nvidia
 - kubeflow
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # AI 基础设施
 

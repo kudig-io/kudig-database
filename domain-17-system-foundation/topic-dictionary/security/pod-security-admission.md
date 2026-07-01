@@ -1,6 +1,7 @@
 ---
 title: Pod 安全准入
 description: '# Pod 安全准入'
+summary: '# Pod 安全准入'
 category: dictionary
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - prometheus
 - job
 - webhook
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 # Pod 安全准入
 

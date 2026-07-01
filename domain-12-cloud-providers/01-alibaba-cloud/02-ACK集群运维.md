@@ -1,31 +1,33 @@
 ---
 title: ACK集群运维
 description: 阿里云ACK专有版集群管理、节点池运维、日志监控与安全配置完整指南
+summary: ACK专有版与托管版集群的运维管理、日志监控及安全配置指南。
 category: cloud-provider
 tags:
-  - alibaba-cloud
-  - ack
-  - kubernetes
-  - cluster-management
-  - node-pool
-  - monitoring
-  - security
-  - autoscaling
+- alibaba-cloud
+- ack
+- kubernetes
+- cluster-management
+- node-pool
+- monitoring
+- security
+- autoscaling
+tier: core
 sources:
-  - 阿里云ACK运维手册
-  - ASCM 控制台操作指南
+- 阿里云ACK运维手册
+- ASCM 控制台操作指南
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
-summary: "ACK专有版与托管版集群的运维管理、日志监控及安全配置指南。"
 relationships:
-  - target: "[[entities/etcd.md]]"
-    type: uses
-  - target: "[[entities/kubelet.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/security/pod-security-policies.md]]"
-    type: uses
+- target: '[[entities/etcd.md]]'
+  type: uses
+- target: '[[entities/kubelet.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/security/pod-security-policies.md]]'
+  type: uses
 ---
+
 
 # ACK集群运维
 

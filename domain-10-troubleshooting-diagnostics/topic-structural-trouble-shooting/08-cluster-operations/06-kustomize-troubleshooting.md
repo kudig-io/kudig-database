@@ -1,6 +1,7 @@
 ---
 title: Kustomize 部署故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Kustomize 部署故障排查指南'
+summary: 'title: Kustomize 部署故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -12,6 +13,8 @@ tags:
 - rbac
 - crd
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -40,8 +43,9 @@ prerequisites:
 - helm-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Kustomize 部署故障排查指南
 description: '# Kustomize 部署故障排查指南'

@@ -1,6 +1,7 @@
 ---
 title: kudig-database 发布前终局评估
 description: 对外发布前的全面质量与完整度评估，含 P0-P2 差距分析
+summary: 对外发布前的全面质量与完整度评估，含 P0-P2 差距分析
 category: general
 tags:
 - evaluation
@@ -12,6 +13,8 @@ tags:
 - wasm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-19
 difficulty: advanced
 reading_level: advanced
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - ebpf-basics
-created: "2026-05-23"
 ---
+
+
 
 # kudig-database 发布前终局评估
 

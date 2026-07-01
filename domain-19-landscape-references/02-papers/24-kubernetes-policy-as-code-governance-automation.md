@@ -1,6 +1,9 @@
 ---
 title: Kubernetes 策略即代码与治理自动化 (Policy-as-Code and Governance Automation)
-description: 'description: ''**作者:** 云原生治理架构专家 | **版本:** v1.0 | **更新时间:** 2026-03-03 | **适用场景:**'
+description: 'description: ''**作者:** 云原生治理架构专家 | **版本:** v1.0 | **更新时间:** 2026-03-03
+  | **适用场景:**'
+summary: 'description: ''**作者:** 云原生治理架构专家 | **版本:** v1.0 | **更新时间:** 2026-03-03 |
+  **适用场景:**'
 category: general
 tags:
 - paper
@@ -13,6 +16,8 @@ tags:
 - envoy
 - cilium
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -45,8 +50,9 @@ prerequisites:
 - cilium-basics
 - policy-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] 策略即代码与治理自动化 (Policy-as-Code and Governance Automation)
 description: '**作者:** 云原生治理架构专家 | **版本:** v1.0 | **更新时间:** 2026-03-03 | **适用场景:**
@@ -1982,5 +1988,7 @@ Level 5：持续优化（AI 辅助 + 多集群统一 + 运行时策略）
 - 26-kubernetes-vcluster-virtual-cluster-multi-tenancy
 
 ## Related
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

@@ -1,6 +1,7 @@
 ---
 title: Linux Security Modules for Containers
 description: Linux Security Modules for Containers — Kubernetes 生产运维知识库
+summary: Linux Security Modules for Containers — Kubernetes 生产运维知识库
 category: concepts
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - seccomp
 - capabilities
 - kubelet
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 - Containers
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Linux Security Modules for Containers
 

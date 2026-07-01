@@ -1,6 +1,7 @@
 ---
 title: 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns)
 description: '# 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns)'
+summary: '# 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns)'
 category: workloads
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - daemonset
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -60,8 +63,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
-created: "2026-05-23"
 ---
+
+
 
 # 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns)
 

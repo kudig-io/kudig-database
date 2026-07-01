@@ -1,18 +1,24 @@
 ---
-title: "Research: Kubernetes Cloud Providers 2025-2026"
+title: 'Research: Kubernetes Cloud Providers 2025-2026'
+summary: 'Research: Kubernetes Cloud Providers 2025-2026：2025-2026 年，三大云厂商的 Kubernetes
+  托管服务全面走向"无节点"抽象：EKS Auto Mode 自动管理计算/存储/网络全栈，GKE Autopilot 按 Pod 计费取代节点管理，AKS Automatic
+  以最低门槛提供生产级集群。与此同时，Karpenter 从 AW...'
 category: synthesis
 tags:
-  - cloud
-  - eks
-  - gke
-  - aks
-  - multi-cloud
-  - k8s
-  - research
+- cloud
+- eks
+- gke
+- aks
+- multi-cloud
+- k8s
+- research
+tier: supporting
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # Research: Kubernetes Cloud Providers 2025-2026
 
@@ -65,3 +71,7 @@ Karpenter 2025 年正式支持 Azure（预览），GCP 兼容层由社区维护�
 - Microsoft AKS Automatic 发布公告 (2025)
 - Karpenter 项目 RFC: Cross-Cloud Support (2025)
 - CNCF Kubernetes 沙箱报告: Multi-Cloud Trends (2025)
+
+## Related
+
+- [[research|#research Hub]] — tag hub

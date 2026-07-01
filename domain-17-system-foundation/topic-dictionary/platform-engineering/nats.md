@@ -1,6 +1,9 @@
 ---
 title: NATS 消息系统
-description: 'NATS 是 CNCF 孵化项目，高性能的轻量级消息系统，支持 Core Pub/Sub、JetStream 持久化和 Request/Reply 模式，在 I...'
+description: NATS 是 CNCF 孵化项目，高性能的轻量级消息系统，支持 Core Pub/Sub、JetStream 持久化和 Request/Reply
+  模式，在 I...
+summary: NATS 是 CNCF 孵化项目，高性能的轻量级消息系统，支持 Core Pub/Sub、JetStream 持久化和 Request/Reply
+  模式，在 I...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - platform-engineering
 - messaging
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # NATS 消息系统（NATS）
 

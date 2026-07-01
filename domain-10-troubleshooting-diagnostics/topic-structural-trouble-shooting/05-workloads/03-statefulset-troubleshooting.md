@@ -1,6 +1,7 @@
 ---
 title: StatefulSet 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: StatefulSet 故障排查指南'
+summary: 'title: StatefulSet 故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - redis
 - mysql
 - statefulset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -41,8 +44,9 @@ prerequisites:
 - troubleshooting-methodology
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[StatefulSet|StatefulSet]] 故障排查指南
 description: '# StatefulSet 故障排查指南'

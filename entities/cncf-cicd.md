@@ -1,6 +1,7 @@
 ---
 title: CNCF CI/CD 与发布管理项目全景
 description: '# CNCF CI/CD 与发布管理项目全景'
+summary: '# CNCF CI/CD 与发布管理项目全景'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - helm
 - flux
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - iac-basics
-created: "2026-05-23"
 ---
+
+
 
 # CNCF CI/CD 与发布管理项目全景
 

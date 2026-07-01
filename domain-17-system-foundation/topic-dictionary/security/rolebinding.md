@@ -1,6 +1,9 @@
 ---
 title: 角色绑定
-description: 'RoleBinding 将 Role 或 ClusterRole 的权限授予命名空间内的用户、组或 ServiceAccount。它是 RBAC 中连接权限定义...'
+description: RoleBinding 将 Role 或 ClusterRole 的权限授予命名空间内的用户、组或 ServiceAccount。它是 RBAC
+  中连接权限定义...
+summary: RoleBinding 将 Role 或 ClusterRole 的权限授予命名空间内的用户、组或 ServiceAccount。它是 RBAC
+  中连接权限定义...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - rolebinding
 - rbac
 - security
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 角色绑定
 

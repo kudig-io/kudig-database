@@ -1,6 +1,7 @@
 ---
 title: FinOps 成本优化与云费用故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: FinOps 成本优化与云费用故障排查指南'
+summary: 'title: FinOps 成本优化与云费用故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - vpa
 - job
 - cronjob
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -43,8 +46,9 @@ prerequisites:
 - ebpf-basics
 - gpu-scheduling-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: FinOps 成本优化与云费用故障排查指南
 description: '# FinOps 成本优化与云费用故障排查指南'

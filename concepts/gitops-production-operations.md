@@ -1,17 +1,22 @@
 ---
-title: "GitOps 与生产运维"
+title: GitOps 与生产运维
+summary: 'GitOps 与生产运维：apiVersion: argoproj.io/v1alpha1 kind: ApplicationSet metadata:
+  name: multi-cluster-app spec: generators:'
 category: concepts
 tags:
-  - gitops
-  - argocd
-  - flux
-  - cluster-api
-  - fleet
-  - k8s
+- gitops
+- argocd
+- flux
+- cluster-api
+- fleet
+- k8s
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # GitOps 与生产运维
 
@@ -382,7 +387,7 @@ spec:
 | **kubectl-who-can** | 查询谁有权限执行某操作 | `kubectl who-can create pods -n production` |
 | **kubectl-images** | 列出集群中所有镜像及版本 | `kubectl images -n default` |
 | **kubectl-resource-capacity** | 集群资源使用 vs 总量概览 | `kubectl resource-capacity --util --sort cpu.util` |
-| **kubectl-neat** | 清理 `kubectl get` 输出中的系统字段 | `kubectl get pod x -o yaml \| kubectl neat` |
+| **kubectl-neat** | 清理 `kubectl get` 输出中的系统字段 | `kubectl get pod x -o yaml | kubectl neat` |
 | **kubectl-ktop** | 节点/Pod 实时资源 Top 视图 | `kubectl ktop` |
 
 ### 6.2 安装与管理

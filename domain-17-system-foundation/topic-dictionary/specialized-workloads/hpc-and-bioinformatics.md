@@ -1,6 +1,7 @@
 ---
 title: 高性能计算与生物信息学（HPC & Bioinformatics）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - operator
 - gpu
 - nvidia
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,9 +35,9 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 高性能计算与生物信息学（HPC & Bioinformatics）
 

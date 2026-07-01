@@ -1,12 +1,15 @@
 ---
 title: Kubernetes 事件
-description: 'Kubernetes Events（事件）是集群中发生的操作和状态变更的记录。事件由各个控制器和 kubelet 生成，提供了集群运行的实时视图，是排查问题的重...'
+description: Kubernetes Events（事件）是集群中发生的操作和状态变更的记录。事件由各个控制器和 kubelet 生成，提供了集群运行的实时视图，是排查问题的重...
+summary: Kubernetes Events（事件）是集群中发生的操作和状态变更的记录。事件由各个控制器和 kubelet 生成，提供了集群运行的实时视图，是排查问题的重...
 category: dictionary
 tags:
 - k8s
 - glossary
 - observability
 - events
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Kubernetes 事件
 

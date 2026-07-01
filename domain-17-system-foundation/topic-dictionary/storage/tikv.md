@@ -1,6 +1,7 @@
 ---
 title: TiKV 分布式 KV 存储
-description: 'TiKV 是 PingCAP 开源的 CNCF 毕业项目，分布式事务键值存储引擎，为 TiDB 提供底层存储，同时也可独立使用，支持强一致性和水平扩展。...'
+description: TiKV 是 PingCAP 开源的 CNCF 毕业项目，分布式事务键值存储引擎，为 TiDB 提供底层存储，同时也可独立使用，支持强一致性和水平扩展。...
+summary: TiKV 是 PingCAP 开源的 CNCF 毕业项目，分布式事务键值存储引擎，为 TiDB 提供底层存储，同时也可独立使用，支持强一致性和水平扩展。...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - storage
 - database
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # TiKV 分布式 KV 存储（TiKV）
 

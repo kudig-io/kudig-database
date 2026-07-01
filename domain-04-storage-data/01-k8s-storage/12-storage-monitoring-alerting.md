@@ -1,6 +1,7 @@
 ---
 title: 12 - 存储监控告警与性能调优
 description: '# 12 - 存储监控告警与性能调优'
+summary: '# 12 - 存储监控告警与性能调优'
 category: storage
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - redis
 - mysql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -54,8 +57,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/monitoring-fta.md
   label: '故障树: monitoring'
-created: "2026-05-23"
 ---
+
+
 
 # 12 - 存储监控告警与性能调优
 

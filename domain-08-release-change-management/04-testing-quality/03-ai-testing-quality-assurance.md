@@ -1,6 +1,7 @@
 ---
 title: 企业级AI测试与质量保障深度实践
 description: '# 企业级AI测试与质量保障深度实践'
+summary: '# 企业级AI测试与质量保障深度实践'
 category: automated-testing-quality
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - quality
 - automation
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 企业级AI测试与质量保障深度实践
 

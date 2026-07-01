@@ -1,6 +1,7 @@
 ---
 title: CNCF 基础设施与混沌工程项目全景
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - infrastructure
 - kafka
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - kafka-basics
-created: "2026-05-23"
 ---
+
+
 
 # CNCF 基础设施与混沌工程项目全景
 

@@ -1,6 +1,7 @@
 ---
 title: Domain-17 云厂商 — 开源项目索引
 description: '| **EKS Anywhere** | 本地部署 EKS | 部分开源 | 基于 Cluster API |'
+summary: '| **EKS Anywhere** | 本地部署 EKS | 部分开源 | 基于 Cluster API |'
 category: cloud-provider
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ingress
 - operator
 - serverless
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -45,8 +48,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Domain-17 云厂商 — 开源项目索引
 

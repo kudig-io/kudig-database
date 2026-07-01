@@ -1,13 +1,22 @@
 ---
-title: "Skill: NetworkPolicy 不生效的诊断和修复"
+title: 'Skill: NetworkPolicy 不生效的诊断和修复'
+summary: 'Skill: NetworkPolicy 不生效的诊断和修复：NetworkPolicy 已创建但流量未被正确拦截或放行，表现为应用间通信异常、跨命名空间访问失败，或策略存在但无实际效果。远程顾问模式下需通过用户提供的输出来定位
+  CNI 支持性、规则语义及标签匹配问题。'
 category: skill
-tags: ["skill", "domain-10", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- skill
+- domain-10
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # Skill: NetworkPolicy 不生效的诊断和修复
 
@@ -61,3 +70,7 @@ kubectl describe networkpolicy <policy-name> -n <namespace>
 - [[concepts/network-policy.md|Network Policy]] — NetworkPolicy 规则语义、CNI 实现与标签匹配原理
 - [[concepts/cni-networking-model.md|CNI 网络模型]] — Kubernetes 容器网络接口与网络策略支持矩阵
 - [[concepts/security-defense-depth.md|纵深防御]] — 网络安全分层防御策略与零信任实践
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

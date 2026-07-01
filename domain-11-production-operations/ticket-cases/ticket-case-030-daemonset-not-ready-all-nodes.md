@@ -1,6 +1,7 @@
 ---
 title: DaemonSet 未在所有节点运行：Logtail 多架构与污点容忍缺失
 description: 专有云 ACK 集群 Logtail DaemonSet 因镜像不支持 ARM 架构且未容忍主节点污点，导致部分节点日志采集中断的工单闭环样本。
+summary: 专有云 ACK 集群 Logtail DaemonSet 因镜像不支持 ARM 架构且未容忍主节点污点，导致部分节点日志采集中断的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -11,6 +12,9 @@ tags:
 - taint
 - p1
 - observability
+tier: peripheral
+created: '2026-06-26T06:30:00+08:00'
+updated: '2026-06-26T09:45:00+08:00'
 incident_id: INC-2026-ACK-030
 priority: P1
 severity: high
@@ -22,9 +26,7 @@ skill_ref:
 - Logtail Kubernetes 采集
 fta_ref:
 - 'FTA: DaemonSet 未覆盖全部节点'
-created: '2026-06-26T06:30:00+08:00'
-updated: '2026-06-26T09:45:00+08:00'
-last_updated: 2026-06-26T09:45:00+08:00
+last_updated: 2026-06-26 09:45:00+08:00
 duplicate_of: INC-2026-ACK-050
 status: duplicate
 duplication_reason: 与 "INC-2026-ACK-050" 主题重复，内容角度相似，降低 RAG 权重
@@ -51,13 +53,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[concepts/daemonset.md]]"
+- target: '[[concepts/daemonset.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-050-daemonset-not-running-all-nodes.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-050-daemonset-not-running-all-nodes.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -103,7 +107,7 @@ kubectl get nodes -o custom-columns=\
 'NAME:.metadata.name,ARCH:.status.nodeInfo.architecture,TAINTS:.spec.taints[*].key'
 
 # 6. 查看 DaemonSet 的 nodeSelector 与 tolerations
-kubectl get daemonset logtail-ds -n monitoring -o yaml | grep -A 30 "nodeSelector:\|tolerations:"
+kubectl get daemonset logtail-ds -n monitoring -o yaml | grep -A 30 "nodeSelector:|tolerations:"
 
 # 7. 检查镜像 manifest 支持的平台
 docker manifest inspect registry-vpc.cn-hangzhou.aliyuncs.com/log-service/logtail:latest 2>/dev/null | jq '.manifests[].platform'

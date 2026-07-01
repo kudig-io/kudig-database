@@ -1,26 +1,30 @@
 ---
-dialogue_id: "DIALOGUE-SEC-001"
-category: "troubleshooting"
-tags: ["security", "remote-consultant"]
-skill_ref: "SKILL-SEC-001"
-title: "证书过期问题诊断与修复 — 对话脚本"
-version: "1.0.0"
-agent_role: "远程顾问"
-execution_mode: "L1-advisory"
-created: "2026-05-23"
-updated: "2026-05-23"
+title: 证书过期问题诊断与修复 — 对话脚本
+summary: 证书过期问题的远程顾问对话脚本，覆盖TLS、CA、kubelet证书续期操作。
+category: troubleshooting
+tags:
+- security
+- remote-consultant
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+dialogue_id: DIALOGUE-SEC-001
+skill_ref: SKILL-SEC-001
+version: 1.0.0
+agent_role: 远程顾问
+execution_mode: L1-advisory
 last_updated: 2026-05-23
-summary: "证书过期问题的远程顾问对话脚本，覆盖TLS、CA、kubelet证书续期操作。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
-    type: uses
-  - target: "[[entities/etcd.md]]"
-    type: uses
-  - target: "[[entities/kubelet.md]]"
-    type: uses
-  - target: "[[skills/kubelet-certificate-rotation.md]]"
-    type: uses
+- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+  type: uses
+- target: '[[entities/etcd.md]]'
+  type: uses
+- target: '[[entities/kubelet.md]]'
+  type: uses
+- target: '[[skills/kubelet-certificate-rotation.md]]'
+  type: uses
 ---
+
 
 # 证书过期问题诊断与修复 — 对话脚本
 
@@ -174,7 +178,7 @@ relationships:
 **顾问**：证书未过期，问题可能不是证书引起。请执行：
 > ```bash
 > kubectl get events --sort-by='.lastTimestamp' -A | tail -30
-> journalctl -u kubelet -n 100 --no-pager | grep -i "error\|fail\|cert\|x509"
+> journalctl -u kubelet -n 100 --no-pager | grep -i "error|fail|cert|x509"
 > ```
 > **如果无法查看 journalctl**：
 > - **替代方案 A**：`kubectl logs -n kube-system <kubelet-pod>`
@@ -213,7 +217,7 @@ relationships:
 **顾问**：请获取关键日志：
 > **步骤 1**：kube-system 事件
 > ```bash
-> kubectl get events -n kube-system --sort-by='.lastTimestamp' | grep -i "cert\|x509\|unauthorized\|fail" | tail -20
+> kubectl get events -n kube-system --sort-by='.lastTimestamp' | grep -i "cert|x509|unauthorized|fail" | tail -20
 > ```
 > **如果无法执行 kubectl**：
 > - **替代方案 A**：请有权限的同事执行并转发
@@ -222,7 +226,7 @@ relationships:
 >
 > **步骤 2**：API Server 日志
 > ```bash
-> kubectl logs -n kube-system kube-apiserver-<节点名> --tail=50 2>&1 | grep -i "cert\|x509"
+> kubectl logs -n kube-system kube-apiserver-<节点名> --tail=50 2>&1 | grep -i "cert|x509"
 > ```
 > **如果无法指定 Pod 名称**：
 > - **替代方案 A**：`kubectl get pods -n kube-system | grep apiserver` 获取正确名称
@@ -231,7 +235,7 @@ relationships:
 >
 > **步骤 3**：kubelet 日志
 > ```bash
-> kubectl logs -n kube-system <kubelet-pod> --tail=50 2>&1 | grep -i "cert\|x509"
+> kubectl logs -n kube-system <kubelet-pod> --tail=50 2>&1 | grep -i "cert|x509"
 > ```
 > **如果 kubelet 不以 Pod 运行**：
 > - **替代方案 A**：SSH 到节点执行 `journalctl -u kubelet -n 50 --no-pager`

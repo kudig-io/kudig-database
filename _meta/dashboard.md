@@ -1,10 +1,13 @@
 ---
 title: KUDIG Wiki Dashboard
 description: '- 可通过解析 frontmatter 的脚本在 CI/CD 或静态站点中复现相同逻辑'
+summary: '- 可通过解析 frontmatter 的脚本在 CI/CD 或静态站点中复现相同逻辑'
 category: reference
 tags:
 - dashboard
 - meta
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -20,8 +23,9 @@ trigger_keywords:
 - Dashboard
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG Wiki Dashboard
 

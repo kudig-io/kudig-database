@@ -1,14 +1,18 @@
 ---
 title: 第三轮 Broken Wikilinks 修复报告（2026-06-26）
 description: 修复剩余 147 个 broken wikilinks
+summary: 修复剩余 147 个 broken wikilinks
 category: reports
 tags:
 - wiki-lint
 - broken-links
-created: "2026-06-26"
-updated: "2026-06-26"
+tier: supporting
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06-26
 ---
+
+
 
 # 第三轮 Broken Wikilinks 修复报告
 

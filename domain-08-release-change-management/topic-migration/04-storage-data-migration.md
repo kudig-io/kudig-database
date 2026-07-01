@@ -1,6 +1,7 @@
 ---
 title: 04 - 存储与数据迁移 [migration]
 description: 'title: 04 - 存储与数据迁移'
+summary: 'title: 04 - 存储与数据迁移'
 category: general
 tags:
 - migration
@@ -12,6 +13,8 @@ tags:
 - ingress
 - rag
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - gpu-ml-basics
 - mysql-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 04 - 存储与数据迁移
 description: '# 04 - 存储与数据迁移'

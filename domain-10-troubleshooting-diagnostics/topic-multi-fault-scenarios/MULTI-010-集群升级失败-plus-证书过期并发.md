@@ -1,14 +1,22 @@
 ---
-scenario_id: "MULTI-010"
-type: "multi-fault"
-skills: ['25-cluster-upgrade-migration', '06-certificate-expiry']
-created: "2026-05-23"
-updated: "2026-05-23"
-last_updated: 2026-05-23
-title: "集群升级失败 + 证书过期并发"
+title: 集群升级失败 + 证书过期并发
+summary: 集群升级失败 + 证书过期并发：执行集群版本升级时，升级过程因kubelet证书过期中断，部分节点版本不一致导致API兼容性错误。
 category: uncategorized
-tags: ["uncategorized", "visibility/public"]
+tags:
+- uncategorized
+- visibility/public
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+scenario_id: MULTI-010
+type: multi-fault
+skills:
+- 25-cluster-upgrade-migration
+- 06-certificate-expiry
+last_updated: 2026-05-23
 ---
+
+
 
 # 集群升级失败 + 证书过期并发
 
@@ -46,3 +54,7 @@ tags: ["uncategorized", "visibility/public"]
 2. 配置级联告警（当多个关联指标同时异常时触发）
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

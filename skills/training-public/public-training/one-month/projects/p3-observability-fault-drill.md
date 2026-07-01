@@ -1,6 +1,7 @@
 ---
 title: '项目 P3: 可观测性体系搭建 + 故障演练'
 description: '- prometheus grafana loki alertmanager 完整部署'
+summary: '- prometheus grafana loki alertmanager 完整部署'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - coredns
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,8 +38,9 @@ prerequisites:
 - monitoring-basics
 - logging-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 项目 P3: 可观测性体系搭建 + 故障演练

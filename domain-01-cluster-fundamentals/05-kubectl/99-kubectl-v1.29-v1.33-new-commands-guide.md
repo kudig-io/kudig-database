@@ -1,12 +1,15 @@
 ---
 title: Kubectl v1.29 - v1.33 新命令与用法速查
 description: '# 查询节点日志 (需 NodeLogQuery Feature Gate)'
+summary: '# 查询节点日志 (需 NodeLogQuery Feature Gate)'
 category: architecture-fundamentals
 tags:
 - k8s
 - architecture
 - kubernetes
 - kubelet
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -52,8 +55,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # Kubectl v1.29 - v1.33 新命令与用法速查
 

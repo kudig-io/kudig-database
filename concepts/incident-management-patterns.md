@@ -1,20 +1,24 @@
 ---
 title: 事件管理与复盘模式
+summary: 事件管理与复盘模式：Incident Command System 源自应急管理体系，在云原生事件管理中的角色映射：
 category: concepts
 tags:
-  - incident
-  - postmortem
-  - on-call
-  - reliability
-  - k8s
-  - sre
+- incident
+- postmortem
+- on-call
+- reliability
+- k8s
+- sre
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 related:
-  - "[[domain-19-landscape-references/98-merged-indexes/index.md|index]]"
-  - "[[concepts/slo-error-budget-framework.md|slo error budget framework]]"
+- '[[domain-19-landscape-references/98-merged-indexes/index.md|index]]'
+- '[[concepts/slo-error-budget-framework.md|slo error budget framework]]'
 ---
+
+
 
 # 事件管理与复盘模式
 

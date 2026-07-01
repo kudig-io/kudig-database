@@ -1,6 +1,7 @@
 ---
 title: loki v3.2 Release Notes
 description: loki v3.2 Release Notes — Kubernetes 生产运维知识库
+summary: loki v3.2 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - grafana
 - docker
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - cncf-ecosystem
 - monitoring-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # loki v3.2 Release Notes
 

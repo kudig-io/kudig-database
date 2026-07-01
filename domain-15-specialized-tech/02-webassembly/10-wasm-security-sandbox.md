@@ -1,6 +1,7 @@
 ---
 title: Wasm 安全与沙箱 (Wasm Security and Sandbox)
 description: '# Wasm 安全与沙箱 (Wasm Security and Sandbox)'
+summary: '# Wasm 安全与沙箱 (Wasm Security and Sandbox)'
 category: webassembly-cloud-native
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - ingress
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -48,8 +51,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Wasm 安全与沙箱 (Wasm Security and Sandbox)
 

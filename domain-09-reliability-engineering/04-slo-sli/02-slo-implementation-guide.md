@@ -1,6 +1,7 @@
 ---
 title: SLO 设定与实施指南
 description: '# SLO 设定与实施指南'
+summary: '# SLO 设定与实施指南'
 category: domain
 tags:
 - sre
@@ -10,6 +11,8 @@ tags:
 - implementation
 - prometheus
 - grafana
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - sre-practices
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # SLO 设定与实施指南
 

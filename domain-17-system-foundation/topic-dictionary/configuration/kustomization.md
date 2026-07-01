@@ -1,6 +1,7 @@
 ---
 title: Kustomization 配置清单
-description: 'Kustomization 是 Kustomize 的核心配置文件，通过 kustomization.yaml 定义基础资源（bases）和叠加层（overla...'
+description: Kustomization 是 Kustomize 的核心配置文件，通过 kustomization.yaml 定义基础资源（bases）和叠加层（overla...
+summary: Kustomization 是 Kustomize 的核心配置文件，通过 kustomization.yaml 定义基础资源（bases）和叠加层（overla...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - configuration
 - kustomize
 - overlay
+tier: peripheral
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Kustomization 配置清单（Kustomization）
 

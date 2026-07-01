@@ -1,6 +1,7 @@
 ---
 title: 控制平面高可用部署模式 (Control Plane High Availability Deployment Patterns)
 description: 'title: 控制平面高可用部署模式 (Control Plane High Availability Deployment Patterns)'
+summary: 'title: 控制平面高可用部署模式 (Control Plane High Availability Deployment Patterns)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 控制平面高可用部署模式 (Control Plane High Availability Deployment Patterns)
 description: '# 控制平面高可用部署模式 (Control Plane High Availability Deployment Patterns)'
@@ -1092,3 +1096,7 @@ echo "✓ All tests completed successfully"
 - 02-plane-components-interaction
 - 04-plane-security-hardening
 - 05-plane-monitoring-observability
+
+## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub

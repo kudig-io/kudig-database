@@ -1,6 +1,7 @@
 ---
 title: K8s Node NotReady 诊断与修复
 description: Kubernetes 节点 NotReady 状态的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes 节点 NotReady 状态的完整诊断-修复-验证工单处理 Skill
 category: Kubernetes-Incident-Response
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - prometheus
 - containerd
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -45,8 +48,9 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
-created: "2026-05-23"
 ---
+
+
 
 # K8s Node NotReady 诊断与修复
 
@@ -58,7 +62,7 @@ Node NotReady 是 [[Kubernetes|Kubernetes]] 集群中**爆炸半径最大**的�
 
 | 症状 | 检测方法 | 置信度 |
 |------|---------|--------|
-| `kubectl get nodes` 显示 NotReady | `kubectl get nodes \| grep NotReady` | 0.95 |
+| `kubectl get nodes` 显示 NotReady | `kubectl get nodes | grep NotReady` | 0.95 |
 | 节点状态在 Ready/NotReady 间频繁切换 | Events 中交替出现 NodeReady/NodeNotReady | 0.85 |
 | Prometheus 告警 `KubeNodeNotReady` 触发 | `kube_node_status_condition{condition="Ready",status="false"}` | 0.95 |
 | 节点上 Pod 被大量驱逐 | `kubectl get events --field-selector reason=Evicted` | 0.80 |
@@ -365,7 +369,7 @@ flowchart TD
 | 工具 | 用途 | 典型命令 |
 |:---|:---|:---|
 | kubectl | Kubernetes CLI | `kubectl get/describe/logs/exec` |
-| jq | JSON处理 | `kubectl get ... -o json \| jq ...` |
+| jq | JSON处理 | `kubectl get ... -o json | jq ...` |
 | openssl | 证书检查 | `openssl x509 -in <cert> -noout -dates` |
 | tcpdump | 网络抓包 | `tcpdump -i any port <port> -n` |
 | strace | 系统调用追踪 | `strace -p <pid> -f` |

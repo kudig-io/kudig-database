@@ -1,3 +1,14 @@
+---
+title: Finops Greenops 2025 2026
+summary: The FinOps Framework has evolved significantly from the original "Crawl/Walk/Run"
+  maturity model.
+category: entities
+tags:
+- finops-greenops-2025-2026
+tier: supporting
+created: '2026-07-01'
+---
+
 # Kubernetes FinOps, Cost Governance & GreenOps Research 2025-2026
 
 ## 1. FINOPS MATURITY MODEL EVOLUTION

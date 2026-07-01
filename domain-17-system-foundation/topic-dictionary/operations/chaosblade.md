@@ -1,6 +1,7 @@
 ---
 title: ChaosBlade 混沌工程
-description: 'ChaosBlade 是阿里巴巴开源的混沌工程工具，支持对 Java/C++/Node.js 应用和 Kubernetes/Docker/物理机环境的故障注入，...'
+description: ChaosBlade 是阿里巴巴开源的混沌工程工具，支持对 Java/C++/Node.js 应用和 Kubernetes/Docker/物理机环境的故障注入，...
+summary: ChaosBlade 是阿里巴巴开源的混沌工程工具，支持对 Java/C++/Node.js 应用和 Kubernetes/Docker/物理机环境的故障注入，...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - operations
 - chaos-engineering
 - alibaba
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # ChaosBlade 混沌工程（ChaosBlade）
 

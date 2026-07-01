@@ -1,6 +1,7 @@
 ---
 title: 集群容量规划
 description: '## 概述'
+summary: '## 概述'
 category: workloads
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - prometheus
 - grafana
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -57,8 +60,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
-created: "2026-05-23"
 ---
+
+
 
 # 集群容量规划
 

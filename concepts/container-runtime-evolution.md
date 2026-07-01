@@ -1,16 +1,20 @@
 ---
 title: 容器运行时演进
+summary: 容器运行时演进：containerd 是 CNCF 毕业项目，Kubernetes 最广泛采用的容器运行时。
 category: concepts
 tags:
-  - runtime
-  - containerd
-  - wasm
-  - confidential-containers
-  - k8s
+- runtime
+- containerd
+- wasm
+- confidential-containers
+- k8s
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # 容器运行时演进
 

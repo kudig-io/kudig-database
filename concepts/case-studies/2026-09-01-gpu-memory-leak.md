@@ -1,15 +1,26 @@
 ---
-title: "[2026-09-01] [P1] GPU 显存泄漏导致训练任务失败"
+title: '[2026-09-01] [P1] GPU 显存泄漏导致训练任务失败'
+summary: '[2026-09-01] [P1] GPU 显存泄漏导致训练任务失败：02:00，ML 平台告警 GPU 训练任务失败率 > 80%。训练 Pod
+  状态显示 Error 或 OOMKilled：'
 category: case-study
-tags: [production, incident, ai-ml, gpu, cuda, memory-leak]
-date: "2026-09-01"
+tags:
+- production
+- incident
+- ai-ml
+- gpu
+- cuda
+- memory-leak
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-09-01'
 severity: P1
-mttr: "42min"
+mttr: 42min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-09-01] PyTorch 显存泄漏导致 GPU 训练节点全部 OOM，任务队列积压
 

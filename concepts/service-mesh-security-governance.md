@@ -1,6 +1,7 @@
 ---
 title: 服务网格与安全治理的融合
 description: '# 服务网格与安全治理的融合'
+summary: '# 服务网格与安全治理的融合'
 category: synthesis
 tags:
 - service-mesh
@@ -9,6 +10,8 @@ tags:
 - policy
 - zero-trust
 - opa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,11 +27,12 @@ prerequisites:
 - kubectl-basics
 - service-mesh-basics
 - policy-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/opa.md]]"
-    type: related_to
+- target: '[[entities/opa.md]]'
+  type: related_to
 ---
+
+
 
 # 服务网格与安全治理的融合
 

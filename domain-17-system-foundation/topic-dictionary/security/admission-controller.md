@@ -1,12 +1,16 @@
 ---
 title: 准入控制器
-description: 'Admission Controller 是 Kubernetes API Server 中的插件机制，在对象持久化之前拦截和处理 API 请求。它可以验证和修...'
+description: Admission Controller 是 Kubernetes API Server 中的插件机制，在对象持久化之前拦截和处理 API
+  请求。它可以验证和修...
+summary: Admission Controller 是 Kubernetes API Server 中的插件机制，在对象持久化之前拦截和处理 API 请求。它可以验证和修...
 category: dictionary
 tags:
 - k8s
 - glossary
 - security
 - admission
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 准入控制器
 

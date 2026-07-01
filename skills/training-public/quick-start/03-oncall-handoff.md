@@ -1,6 +1,7 @@
 ---
-title: "Day 3: 值班交接 SOP [quick-start]"
+title: 'Day 3: 值班交接 SOP [quick-start]'
 description: '## 概述'
+summary: '## 概述'
 category: learning
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - prometheus
 - grafana
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -29,8 +32,9 @@ prerequisites:
 - gpu-ml-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 3: 值班交接 SOP
 

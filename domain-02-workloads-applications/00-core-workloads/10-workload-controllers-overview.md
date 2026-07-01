@@ -1,6 +1,8 @@
 ---
 title: 工作负载控制器详解
-description: 全面解析 Kubernetes 工作负载控制器：Deployment、StatefulSet、DaemonSet、Job、CronJob 的架构设计、核心机制与生产级配置
+description: 全面解析 Kubernetes 工作负载控制器：Deployment、StatefulSet、DaemonSet、Job、CronJob
+  的架构设计、核心机制与生产级配置
+summary: 全面解析 Kubernetes 工作负载控制器：Deployment、StatefulSet、DaemonSet、Job、CronJob 的架构设计、核心机制与生产级配置
 category: domain-02-workloads-applications
 tags:
 - k8s
@@ -13,6 +15,8 @@ tags:
 - controllers
 - mysql
 - hpa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -64,8 +68,9 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md
   type: fta
   desc: Pod 故障树
-created: "2026-05-23"
 ---
+
+
 
 # 35 - 工作负载控制器详解 (Workload Controllers)
 

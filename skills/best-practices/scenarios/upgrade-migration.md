@@ -1,12 +1,15 @@
 ---
 title: '场景: 升级迁移'
 description: Kubernetes 版本升级、集群迁移、数据迁移
+summary: Kubernetes 版本升级、集群迁移、数据迁移
 category: scenario
 tags:
 - k8s
 - scenario
 - migration
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-20'
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # 场景: 升级迁移
 

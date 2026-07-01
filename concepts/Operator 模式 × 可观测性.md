@@ -1,7 +1,11 @@
 ---
 title: Operator 模式 × 可观测性
-description: '[[operator-pattern]] 描述 CRD + 自定义控制器的扩展模式，[[entities/prometheus-grafana.md|prometheus-grafana]] 描述 K8s 监控栈。wiki
-  将两者视为独立主题，但它们是深度耦合的：Prometheus Operator 不仅是 Operator 最成功的生产案例，更直接塑造了现代 K8s 可观测性的架构范式——Se'
+description: '[[operator-pattern]] 描述 CRD + 自定义控制器的扩展模式，[[entities/prometheus-grafana.md|prometheus-grafana]]
+  描述 K8s 监控栈。wiki 将两者视为独立主题，但它们是深度耦合的：Prometheus Operator 不仅是 Operator 最成功的生产案例，更直接塑造了现代
+  K8s 可观测性的架构范式——Se'
+summary: '[[operator-pattern]] 描述 CRD + 自定义控制器的扩展模式，[[entities/prometheus-grafana.md|prometheus-grafana]]
+  描述 K8s 监控栈。wiki 将两者视为独立主题，但它们是深度耦合的：Prometheus Operator 不仅是 Operator 最成功的生产案例，更直接塑造了现代
+  K8s 可观测性的架构范式——Se'
 category: synthesis
 tags:
 - k8s
@@ -13,6 +17,8 @@ tags:
 - grafana
 - postgresql
 - statefulset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,19 +37,20 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - observability-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
-  - target: "[[entities/prometheus.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service.md]]"
-    type: uses
-  - target: "[[entities/cloudnativepg.md]]"
-    type: related_to
-  - target: "[[entities/distribution.md]]"
-    type: related_to
+- target: '[[entities/kubernetes.md]]'
+  type: uses
+- target: '[[entities/prometheus.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/service.md]]'
+  type: uses
+- target: '[[entities/cloudnativepg.md]]'
+  type: related_to
+- target: '[[entities/distribution.md]]'
+  type: related_to
 ---
+
+
 
 # Operator 模式 × 可观测性
 

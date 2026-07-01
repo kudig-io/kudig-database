@@ -1,6 +1,8 @@
 ---
 title: Telepresence 远程开发
-description: 'Telepresence 是 Ambassadeur Labs 开源的 Kubernetes 远程开发工具，将本地开发环境与远程 K8s 集群网络打通，开发者可...'
+description: Telepresence 是 Ambassadeur Labs 开源的 Kubernetes 远程开发工具，将本地开发环境与远程 K8s
+  集群网络打通，开发者可...
+summary: Telepresence 是 Ambassadeur Labs 开源的 Kubernetes 远程开发工具，将本地开发环境与远程 K8s 集群网络打通，开发者可...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - tooling
 - development
 - debugging
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Telepresence 远程开发（Telepresence）
 

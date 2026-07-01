@@ -1,6 +1,7 @@
 ---
 title: Linkerd 轻量级服务网格实践指南
 description: '# Linkerd 轻量级服务网格实践指南'
+summary: '# Linkerd 轻量级服务网格实践指南'
 category: service-mesh-microservices
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - helm
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -58,8 +61,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
-created: "2026-05-23"
 ---
+
+
 
 # [[Linkerd|Linkerd]] 轻量级服务网格实践指南
 
@@ -1071,7 +1075,7 @@ kubectl logs -n linkerd deploy/linkerd-proxy-injector --tail=50
 | Pod 无法启动 | init 容器失败 (NET_ADMIN) | 检查 proxy-init 权限，设置 `runAsRoot=true` |
 | mTLS 未生效 | 注入未启用 | 确认 namespace/pod annotation `linkerd.io/inject: enabled` |
 | 延迟增加 | 代理资源不足 | 增加 proxy CPU/memory limit |
-| 流量不统计 | viz 扩展未安装 | `linkerd viz install \| kubectl apply -f -` |
+| 流量不统计 | viz 扩展未安装 | `linkerd viz install | kubectl apply -f -` |
 | 证书过期 | identity 异常 | 重启 identity / 检查 cert-manager / 重新签发 |
 | 金丝雀不生效 | TrafficSplit 配置错误 | 检查 service 名称和 weight 总和 |
 | 授权拒绝 | Server/Authorization 缺失 | 创建对应 Server 和 Authorization 资源 |

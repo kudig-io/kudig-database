@@ -1,6 +1,9 @@
 ---
 title: Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro-Segmentation Practice)
-description: '# Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro-Segmentation Practice)'
+description: '# Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro-Segmentation
+  Practice)'
+summary: '# Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro-Segmentation
+  Practice)'
 category: papers
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - gateway
 - rbac
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -22,7 +27,8 @@ audience:
 - 研究员
 estimated_read_time: 5min
 intent_queries:
-- Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro-Segmentation Practice) 是什么
+- Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro-Segmentation Practice)
+  是什么
 - 如何 Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro-Segmentation Practice)
 - Kubernetes 19 papers 最佳实践
 trigger_keywords:
@@ -51,8 +57,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 网络策略与安全微隔离实践 ([[domain-17-system-foundation/topic-dictionary/networking/network-policies.md|Network Policies]] and Security Micro-Segmentation Practice)
 
@@ -1267,3 +1274,9 @@ eBPF vs iptables策略执行对比:
 - 07-kubernetes-csi-storage-deep-practice
 - 09-kubernetes-service-mesh-istio-integration
 - 10-kubernetes-automation-sre-practices
+
+## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub

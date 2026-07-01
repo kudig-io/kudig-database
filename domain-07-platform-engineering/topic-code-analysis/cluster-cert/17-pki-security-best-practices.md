@@ -1,6 +1,7 @@
 ---
 title: Kubernetes PKI 安全最佳实践 (topic-code-analysis)
 description: 'title: Kubernetes PKI 安全最佳实践'
+summary: 'title: Kubernetes PKI 安全最佳实践'
 category: general
 tags:
 - reference
@@ -13,6 +14,8 @@ tags:
 - job
 - rbac
 - webhook
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Kubernetes PKI 安全最佳实践
 description: '# Kubernetes PKI 安全最佳实践'
@@ -477,6 +481,8 @@ echo "Inventory saved to $OUTPUT"
 ```
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

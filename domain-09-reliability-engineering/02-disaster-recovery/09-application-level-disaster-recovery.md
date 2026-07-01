@@ -1,6 +1,7 @@
 ---
 title: 应用级灾备架构：多区域部署与故障转移
 description: '# 应用级灾备架构：多区域部署与故障转移'
+summary: '# 应用级灾备架构：多区域部署与故障转移'
 category: disaster-recovery
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - mysql
 - postgresql
 - kafka
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 应用级灾备架构：多区域部署与故障转移
 

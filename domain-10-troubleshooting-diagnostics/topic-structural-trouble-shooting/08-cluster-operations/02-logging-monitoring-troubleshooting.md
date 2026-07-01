@@ -1,6 +1,7 @@
 ---
 title: 日志与监控故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 日志与监控故障排查指南'
+summary: 'title: 日志与监控故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - docker
 - redis
 - elasticsearch
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -43,8 +46,9 @@ prerequisites:
 - redis-basics
 - logging-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 日志与监控故障排查指南
 description: '# 日志与监控故障排查指南'
@@ -428,7 +432,7 @@ kubectl exec -n logging <fluent-bit-pod> -- cat /var/log/containers/<log-file> |
 kubectl get configmap -n logging fluent-bit-config -o yaml | grep -A10 "\[FILTER\]"
 
 # 6. 检查后端写入是否成功
-kubectl logs -n logging <fluent-bit-pod> | grep -i "error\|retry\|failed"
+kubectl logs -n logging <fluent-bit-pod> | grep -i "error|retry|failed"
 
 # 7. 如果是 ES 写入问题，检查索引状态
 kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cat/indices?v | grep red
@@ -443,10 +447,10 @@ kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cat/indices?v | grep
 
 ```bash
 # 1. 检查采集器队列状态
-kubectl logs -n logging <fluent-bit-pod> | grep -i "buffer\|queue\|backpressure"
+kubectl logs -n logging <fluent-bit-pod> | grep -i "buffer|queue|backpressure"
 
 # 2. 检查后端写入延迟
-kubectl logs -n logging <fluent-bit-pod> | grep -i "retry\|timeout"
+kubectl logs -n logging <fluent-bit-pod> | grep -i "retry|timeout"
 
 # 3. 优化 Fluent Bit 配置
 # 增加 buffer 和 flush 间隔
@@ -558,7 +562,7 @@ kubectl edit configmap loki-config -n logging
 # 调整 query_timeout, max_concurrent 等参数
 
 # 4. 检查存储后端 (如 S3/GCS)
-kubectl logs -n logging -l app=loki | grep -i "storage\|s3\|gcs"
+kubectl logs -n logging -l app=loki | grep -i "storage|s3|gcs"
 
 # 5. 考虑部署 Loki 分布式模式
 ```
@@ -671,7 +675,7 @@ kubectl get secret -n monitoring alertmanager-<name> -o jsonpath='{.data.alertma
 # 检查 Slack/Email/PagerDuty 等配置
 
 # 5. 检查 AlertManager 日志
-kubectl logs -n monitoring -l app.kubernetes.io/name=alertmanager | grep -i "error\|failed"
+kubectl logs -n monitoring -l app.kubernetes.io/name=alertmanager | grep -i "error|failed"
 
 # 6. 测试告警发送
 # 创建测试告警

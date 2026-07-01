@@ -1,6 +1,7 @@
 ---
 title: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
 description: '# 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation'
+summary: '# 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation'
 category: observability
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - helm
 - kafka
+tier: core
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -65,8 +68,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 <!-- condition: kubectl get [[Pods|pods]] -n logging -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{"\n"}{end}' 显示日志组件异常 -->
 
@@ -447,10 +451,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   kubectl exec -n logging $(kubectl get pod -n logging -l app=fluent-bit -o jsonpath='{.items[0].metadata.name}') -- curl -s localhost:2020/api/v1/metrics 2>/dev/null | grep -E 'paused|backpressure'
   
   # 检查 Fluent Bit 日志中的背压信息
-  kubectl logs -n logging -l app=fluent-bit --tail=50 2>/dev/null | grep -iE 'paused\|backpressure\|chunk'
+  kubectl logs -n logging -l app=fluent-bit --tail=50 2>/dev/null | grep -iE 'paused|backpressure|chunk'
   
   # Vector 背压状态
-  kubectl logs -n logging -l app=vector --tail=50 2>/dev/null | grep -iE 'backpressure\|blocked'
+  kubectl logs -n logging -l app=vector --tail=50 2>/dev/null | grep -iE 'backpressure|blocked'
   ```
 - **超时**: 10s
 - **预期输出模式**: 背压相关日志和指标
@@ -471,7 +475,7 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   kubectl exec -n logging $(kubectl get pod -n logging -l app=fluentd -o jsonpath='{.items[0].metadata.name}') -- curl -s localhost:24231/metrics 2>/dev/null | grep -E 'fluentd_output_status_emit_records|fluentd_output_status_emit_count|fluentd_output_status_num_errors'
   
   # 检查 Fluentd 日志中的输出错误
-  kubectl logs -n logging -l app=fluentd --tail=100 2>/dev/null | grep -iE 'output\|emit\|chunk\|retry'
+  kubectl logs -n logging -l app=fluentd --tail=100 2>/dev/null | grep -iE 'output|emit|chunk|retry'
   
   # Vector sink 错误
   kubectl exec -n logging $(kubectl get pod -n logging -l app=vector -o jsonpath='{.items[0].metadata.name}') -- curl -s localhost:8686/metrics 2>/dev/null | grep -E 'component_errors_total|component_sent'
@@ -807,7 +811,7 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
 - **前置检查**:
   ```bash
   # 确认日志中存在多行格式（如 Java stacktrace）
-  kubectl logs <java-pod> --tail=50 | grep -A 5 'Exception\|at '
+  kubectl logs <java-pod> --tail=50 | grep -A 5 'Exception|at '
   ```
 - **执行命令**:
 

@@ -1,11 +1,14 @@
 ---
 title: 备用 Demo 录屏脚本
 description: '**用途**: 发布会现场演示的备用录像, 以防现场演示出现网络/环境问题'
+summary: '**用途**: 发布会现场演示的备用录像, 以防现场演示出现网络/环境问题'
 category: general
 tags:
 - k8s
 - etcd
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,8 +25,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 备用 Demo 录屏脚本
 

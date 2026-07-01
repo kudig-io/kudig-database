@@ -1,6 +1,7 @@
 ---
 title: 企业级日志治理与合规审计深度实践
 description: '# 企业级日志治理与合规审计深度实践'
+summary: '# 企业级日志治理与合规审计深度实践'
 category: logging-management-analytics
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - job
 - operator
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -42,8 +45,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 企业级日志治理与合规审计深度实践
 

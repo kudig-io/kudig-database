@@ -1,12 +1,15 @@
 ---
 title: 未展开事件
-description: '未展开事件（Undeveloped Event）是故障树中暂未分解到底的事件。它表示该分支的分析尚未完成，需要在后续分析中继续展开。...'
+description: 未展开事件（Undeveloped Event）是故障树中暂未分解到底的事件。它表示该分支的分析尚未完成，需要在后续分析中继续展开。...
+summary: 未展开事件（Undeveloped Event）是故障树中暂未分解到底的事件。它表示该分支的分析尚未完成，需要在后续分析中继续展开。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - undevelopedevent
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 未展开事件
 

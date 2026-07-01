@@ -1,6 +1,7 @@
 ---
 title: kudig-database 发布会 — 核心材料
 description: '**定位**: 企业级 Kubernetes 生产运维知识库 + AI 智能体语料'
+summary: '**定位**: 企业级 Kubernetes 生产运维知识库 + AI 智能体语料'
 category: general
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - gateway
 - gpu
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - service-mesh-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # kudig-database 发布会 — 核心材料
 

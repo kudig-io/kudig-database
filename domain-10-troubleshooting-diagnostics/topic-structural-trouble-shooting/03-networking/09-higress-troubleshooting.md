@@ -1,6 +1,7 @@
 ---
 title: Higress 网关故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Higress 网关故障排查指南'
+summary: 'title: Higress 网关故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - gateway
 - crd
 - wasm
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -39,8 +42,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Higress 网关故障排查指南
 description: Higress 云原生 API 网关故障排查指南，覆盖路由配置、xDS 推送、服务发现、Wasm 插件、AI 网关等问题场景
@@ -370,7 +374,7 @@ kubectl get globalrateLimit -A
 kubectl get semanticcache -A
 
 # Step 4: 查看 LLM Provider 日志
-kubectl logs -n higress-system <pod> | grep -i "openai\|llm"
+kubectl logs -n higress-system <pod> | grep -i "openai|llm"
 
 # Step 5: 检查 AI 路由规则
 kubectl get aiportal -A

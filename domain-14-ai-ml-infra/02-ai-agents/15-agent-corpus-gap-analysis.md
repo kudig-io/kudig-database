@@ -1,6 +1,7 @@
 ---
 title: Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？ [02-ai-agents]
 description: 'title: Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？'
+summary: 'title: Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - cilium
 - flannel
 - calico
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -43,8 +46,9 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？
 description: '# Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？'
@@ -420,7 +424,7 @@ symptom_cause_map:
           commands:
             - "kubectl get nodes --show-labels"
             - "kubectl describe nodes | grep Taints"
-            - "kubectl get pod <pod> -o yaml | grep -A10 'nodeSelector\|affinity\|tolerations'"
+            - "kubectl get pod <pod> -o yaml | grep -A10 'nodeSelector|affinity|tolerations'"
           indicators: ["didn't match Pod's node affinity", "had taint", "node(s) didn't match"]
         knowledge_ref: "domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md#4"
       - cause: "PVC 未绑定"

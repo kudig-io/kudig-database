@@ -1,10 +1,13 @@
 ---
 title: Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本 (video-scripts)
 description: '**内容类型**: Skills 运维技能'
+summary: '**内容类型**: Skills 运维技能'
 category: general
 tags:
 - k8s
 - statefulset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,8 +25,9 @@ trigger_keywords:
 - 数字人播报脚本
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本
 

@@ -1,6 +1,7 @@
 ---
 title: Monitor Kubernetes Metrics
 description: Monitor Kubernetes Metrics — Kubernetes 生产运维知识库
+summary: Monitor Kubernetes Metrics — Kubernetes 生产运维知识库
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - apiserver
 - kubelet
 - scheduler
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Monitor Kubernetes Metrics
 

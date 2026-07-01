@@ -1,12 +1,15 @@
 ---
 title: 事后复盘文化建立指南
 description: '# 事后复盘文化建立指南'
+summary: '# 事后复盘文化建立指南'
 category: domain
 tags:
 - postmortem
 - sre
 - culture
 - incident-management
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - sre-practices
-created: "2026-05-23"
 ---
+
+
 
 # 事后复盘文化建立指南
 

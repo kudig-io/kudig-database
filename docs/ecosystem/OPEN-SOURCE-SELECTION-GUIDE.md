@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 开源项目快速选型指南
 description: '# Kubernetes 开源项目快速选型指南'
+summary: '# Kubernetes 开源项目快速选型指南'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flannel
 - calico
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 开源项目快速选型指南
 

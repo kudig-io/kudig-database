@@ -1,6 +1,8 @@
 ---
 title: Kustomize
-description: 'Kustomize 是 Kubernetes 原生的配置管理工具，通过 overlay 模式对 YAML 资源进行无模板的定制。它已内置到 kubectl（`k...'
+description: Kustomize 是 Kubernetes 原生的配置管理工具，通过 overlay 模式对 YAML 资源进行无模板的定制。它已内置到
+  kubectl（`k...
+summary: Kustomize 是 Kubernetes 原生的配置管理工具，通过 overlay 模式对 YAML 资源进行无模板的定制。它已内置到 kubectl（`k...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - kustomize
 - configuration
 - gitops
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Kustomize
 

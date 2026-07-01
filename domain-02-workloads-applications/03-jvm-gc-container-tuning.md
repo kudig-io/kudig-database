@@ -1,6 +1,7 @@
 ---
 title: JVM GC 容器调优深度指南 (domain-02-workloads-applications) [topic-java-kubernetes]
 description: '# JVM GC 容器调优深度指南'
+summary: '# JVM GC 容器调优深度指南'
 category: java-kubernetes
 tags:
 - java
@@ -11,6 +12,8 @@ tags:
 - grafana
 - rag
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -33,8 +36,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # JVM GC 容器调优深度指南
 
@@ -131,7 +135,7 @@ java -XshowSettings:system -version
 #     Memory Swap Limit: 2147483648 (2 GiB)
 
 # 验证 JVM 看到的 CPU 核心数
-java -XX:+PrintFlagsFinal -version | grep -i 'ActiveProcessor\|UseContainer'
+java -XX:+PrintFlagsFinal -version | grep -i 'ActiveProcessor|UseContainer'
 ```
 
 ---
@@ -600,7 +604,7 @@ JAVA_OPTS="-XX:+UseContainerSupport \
    → 确认 OOMKilled 和退出码 137
 
 2. 检查当前 JVM 内存配置
-   kubectl exec <pod> -- jcmd 1 VM.flags | grep -i 'RAM\|Heap\|Meta'
+   kubectl exec <pod> -- jcmd 1 VM.flags | grep -i 'RAM|Heap|Meta'
 
 3. 计算: Heap × MaxRAMPercentage 是否合理
    例: limits=1Gi, MaxRAMPercentage=75.0
@@ -671,8 +675,8 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 | 内存持续增长 | 内存泄漏 | `jcmd 1 GC.heap_dump` 后用 MAT 分析 | 修复泄漏代码 |
 | CPU 100% | GC 线程占用 | `top -H -p <pid>` | 检查 GC 日志是否频繁 Full GC |
 | Prometheus 指标缺失 | JMX Exporter 未配置 | `curl pod:9404/metrics` | 检查 agent 配置 |
-| GC 日志为空 | 日志配置错误 | `kubectl logs <pod> \| grep GC` | 检查 -Xlog 参数 |
-| 容器被 SIGKILL | 超过 memory limit | `dmesg \| grep oom` | 增大 limit 或降低 MaxRAMPercentage |
+| GC 日志为空 | 日志配置错误 | `kubectl logs <pod> | grep GC` | 检查 -Xlog 参数 |
+| 容器被 SIGKILL | 超过 memory limit | `dmesg | grep oom` | 增大 limit 或降低 MaxRAMPercentage |
 
 ### 5.3 GC 日志分析实战
 

@@ -1,6 +1,7 @@
 ---
 title: 数字人视频快速参考 (video-scripts)
 description: '| `07-pvc-storage-failure` | PVC 存储 | 12min |'
+summary: '| `07-pvc-storage-failure` | PVC 存储 | 12min |'
 category: general
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - gateway
 - rbac
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 - 数字人视频快速参考
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 数字人视频快速参考
 

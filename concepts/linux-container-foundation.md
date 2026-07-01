@@ -1,6 +1,7 @@
 ---
 title: Linux Container Foundation
 description: Linux Container Foundation — Kubernetes 生产运维知识库
+summary: Linux Container Foundation — Kubernetes 生产运维知识库
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - containerd
 - docker
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 - Foundation
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Linux Container Foundation
 

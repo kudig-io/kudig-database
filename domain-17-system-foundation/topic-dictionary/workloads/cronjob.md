@@ -1,6 +1,7 @@
 ---
 title: CronJob
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - job
 - cronjob
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -26,8 +29,9 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # CronJob
 

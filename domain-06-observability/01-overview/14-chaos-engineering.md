@@ -1,6 +1,7 @@
 ---
 title: 52 - 混沌工程实践
 description: 'title: 52 - 混沌工程实践'
+summary: 'title: 52 - 混沌工程实践'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - containerd
 - docker
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - monitoring-basics
 - ebpf-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 52 - 混沌工程实践
 description: '# 52 - 混沌工程实践'

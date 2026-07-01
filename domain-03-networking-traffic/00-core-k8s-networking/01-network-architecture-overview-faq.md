@@ -1,6 +1,7 @@
 ---
 title: FAQ 文档
 description: '## 问题1：Kubernetes 网络从外部到 Pod 的完整链路是什么？'
+summary: '## 问题1：Kubernetes 网络从外部到 Pod 的完整链路是什么？'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - flannel
 - calico
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -61,8 +64,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # FAQ 文档
 本文档适用于：产品手册、官网页面、课程测验、现场 Q&A。

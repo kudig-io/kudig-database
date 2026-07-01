@@ -1,6 +1,7 @@
 ---
 title: wasmCloud WASM 平台
-description: 'wasmCloud 是 CNCF Sandbox 项目，提供基于 WebAssembly 的分布式应用运行时，通过 Actor 模型和能力接口（Capabili...'
+description: wasmCloud 是 CNCF Sandbox 项目，提供基于 WebAssembly 的分布式应用运行时，通过 Actor 模型和能力接口（Capabili...
+summary: wasmCloud 是 CNCF Sandbox 项目，提供基于 WebAssembly 的分布式应用运行时，通过 Actor 模型和能力接口（Capabili...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - specialized-workloads
 - wasm
 - distributed
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # wasmCloud WASM 平台（wasmCloud）
 

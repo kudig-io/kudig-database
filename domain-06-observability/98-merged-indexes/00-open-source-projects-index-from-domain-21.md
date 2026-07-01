@@ -1,6 +1,7 @@
 ---
 title: Domain-21 日志管理与分析 — 开源项目索引
 description: '# Domain-21 日志管理与分析 — 开源项目索引'
+summary: '# Domain-21 日志管理与分析 — 开源项目索引'
 category: logging-management-analytics
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - falco
 - elasticsearch
 - statefulset
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -47,8 +50,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Domain-21 日志管理与分析 — 开源项目索引
 

@@ -1,3 +1,13 @@
+---
+title: Chaos Engineering K8S 2025 2026
+summary: 'Generated: 2026-05-24'
+category: entities
+tags:
+- chaos-engineering-k8s-2025-2026
+tier: supporting
+created: '2026-07-01'
+---
+
 # Kubernetes Chaos Engineering & Reliability Testing 2025-2026
 ## Research Findings
 

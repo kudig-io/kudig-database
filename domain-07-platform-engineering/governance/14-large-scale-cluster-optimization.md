@@ -1,6 +1,7 @@
 ---
 title: 大规模集群性能优化 (Large Scale Cluster Optimization)
 description: '# 大规模集群性能优化 (Large Scale Cluster Optimization)'
+summary: '# 大规模集群性能优化 (Large Scale Cluster Optimization)'
 category: platform-ops
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - prometheus
 - calico
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -58,8 +61,9 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
-created: "2026-05-23"
 ---
+
+
 
 # 大规模集群性能优化 (Large Scale Cluster Optimization)
 

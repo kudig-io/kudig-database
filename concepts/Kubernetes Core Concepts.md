@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Core Concepts
 description: Kubernetes Core Concepts — Kubernetes 生产运维知识库
+summary: Kubernetes Core Concepts — Kubernetes 生产运维知识库
 category: concept
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - apiserver
 - scheduler
 - controller-manager
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] Core Concepts
 

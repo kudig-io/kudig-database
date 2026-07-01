@@ -1,6 +1,7 @@
 ---
 title: Rook
-description: 'Rook 是 CNCF 毕业项目，为 Kubernetes 提供云原生存储编排平台。它通过 Operator 模式自动化部署和管理分布式存储系统（Ceph、Ed...'
+description: Rook 是 CNCF 毕业项目，为 Kubernetes 提供云原生存储编排平台。它通过 Operator 模式自动化部署和管理分布式存储系统（Ceph、Ed...
+summary: Rook 是 CNCF 毕业项目，为 Kubernetes 提供云原生存储编排平台。它通过 Operator 模式自动化部署和管理分布式存储系统（Ceph、Ed...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - storage
 - operator
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Rook
 

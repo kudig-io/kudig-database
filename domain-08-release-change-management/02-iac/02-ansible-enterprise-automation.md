@@ -1,6 +1,7 @@
 ---
 title: Ansible企业级自动化运维深度实践
 description: '# Ansible企业级自动化运维深度实践'
+summary: '# Ansible企业级自动化运维深度实践'
 category: infrastructure-as-code
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - redis
 - postgresql
 - elasticsearch
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -46,8 +49,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Ansible企业级自动化运维深度实践
 

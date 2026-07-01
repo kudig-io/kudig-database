@@ -1,6 +1,7 @@
 ---
 title: Quota/LimitRange 故障排查
 description: '# 24 - Quota/LimitRange 故障排查 (Quota/LimitRange Troubleshooting)'
+summary: '# 24 - Quota/LimitRange 故障排查 (Quota/LimitRange Troubleshooting)'
 category: troubleshooting
 tags:
 - quota
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: intermediate
 reading_level: intermediate
@@ -60,8 +63,9 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
-created: "2026-05-23"
 ---
+
+
 
 # 24 - Quota/LimitRange 故障排查 (Quota/LimitRange Troubleshooting)
 

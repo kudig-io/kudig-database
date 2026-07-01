@@ -1,41 +1,50 @@
 ---
-skill_id: "SKILL-POD-001"
-skill_name: "Pod CrashLoopBackOff / OOMKilled 诊断与修复"
-version: "1.0.0"
-category: "pod"
-severity_range: "P0-P2"
+title: Pod CrashLoopBackOff / OOMKilled 诊断与修复
+summary: Pod CrashLoopBackOff / OOMKilled 诊断与修复：Pod CrashLoopBackOff 和 OOMKilled 是
+  Kubernetes 工作负载中最常见的问题类型。本 Skill 覆盖从症状识别到修复验证的完整闭环。
+category: pod
+tags:
+- skills
+- pod-crashloop
+- troubleshooting
+- visibility/public
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+skill_id: SKILL-POD-001
+skill_name: Pod CrashLoopBackOff / OOMKilled 诊断与修复
+version: 1.0.0
+severity_range: P0-P2
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
-estimated_resolution_time: "5-30min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+estimated_resolution_time: 5-30min
+risk_level: medium
+agent_execution_mode: L2-semi-auto
 trigger_keywords:
-  - "CrashLoopBackOff"
-  - "OOMKilled"
-  - "容器反复重启"
-  - "pod 崩溃"
+- CrashLoopBackOff
+- OOMKilled
+- 容器反复重启
+- pod 崩溃
 trigger_events:
-  - "BackOff"
-  - "Failed"
+- BackOff
+- Failed
 trigger_metrics:
-  - 'kube_pod_container_status_restarts_total'
-  - 'kube_pod_container_status_terminated_reason{reason="OOMKilled"}'
+- kube_pod_container_status_restarts_total
+- kube_pod_container_status_terminated_reason{reason="OOMKilled"}
 prerequisites:
-  - "kubectl-basics"
-  - "pod-lifecycle"
+- kubectl-basics
+- pod-lifecycle
 related_skills:
-  - "SKILL-IMAGE-001"
-  - "SKILL-NODE-001"
-created: "2026-05-23"
-updated: "2026-05-23"
+- SKILL-IMAGE-001
+- SKILL-NODE-001
 last_updated: 2026-05-23
-title: "Pod CrashLoopBackOff / OOMKilled 诊断与修复"
-tags: ["skills", "pod-crashloop", "troubleshooting", "visibility/public"]
 ---
+
+
 
 # Pod CrashLoopBackOff / OOMKilled 诊断与修复
 
@@ -285,7 +294,7 @@ flowchart TD
 | 工具 | 用途 | 典型命令 |
 |:---|:---|:---|
 | kubectl | Kubernetes CLI | `kubectl get/describe/logs/exec` |
-| jq | JSON处理 | `kubectl get ... -o json \| jq ...` |
+| jq | JSON处理 | `kubectl get ... -o json | jq ...` |
 | openssl | 证书检查 | `openssl x509 -in <cert> -noout -dates` |
 | tcpdump | 网络抓包 | `tcpdump -i any port <port> -n` |
 | strace | 系统调用追踪 | `strace -p <pid> -f` |
@@ -310,3 +319,7 @@ flowchart TD
 ## 相关概念
 
 - [[concepts/pod-lifecycle.md|Pod 生命周期]] — Pod 创建、运行、终止的完整生命周期
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

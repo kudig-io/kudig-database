@@ -1,6 +1,7 @@
 ---
 title: OpenClaw 工作空间配置
 description: → 确认安全红线已激活
+summary: → 确认安全红线已激活
 category: concepts
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - docker
 - ingress
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - monitoring-basics
 - iac-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ### 行为规范与工作流authors:
 - name: KUDIG Team

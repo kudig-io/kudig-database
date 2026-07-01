@@ -1,12 +1,15 @@
 ---
 title: 问题率
-description: '问题率（Failure Rate，λ）是单位时间内系统或组件发生故障的概率。它是可靠性工程的基础参数。...'
+description: 问题率（Failure Rate，λ）是单位时间内系统或组件发生故障的概率。它是可靠性工程的基础参数。...
+summary: 问题率（Failure Rate，λ）是单位时间内系统或组件发生故障的概率。它是可靠性工程的基础参数。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - failurerate
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 问题率
 

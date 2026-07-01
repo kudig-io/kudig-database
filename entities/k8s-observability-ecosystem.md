@@ -1,6 +1,7 @@
 ---
 title: 可观测性体系：指标、日志、链路追踪与混沌工程
 description: '- 存储：本地 TSDB / Thanos / VictoriaMetrics / Mimir'
+summary: '- 存储：本地 TSDB / Thanos / VictoriaMetrics / Mimir'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opentelemetry
 - grafana
 - jaeger
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # 可观测性体系
 

@@ -1,6 +1,9 @@
 ---
 title: Volcano 批处理调度
-description: 'Volcano 是 CNCF 孵化项目，专为 Kubernetes 上的批处理、AI/ML、HPC 等高性能计算工作负载设计的批量调度系统，弥补原生调度器在 g...'
+description: Volcano 是 CNCF 孵化项目，专为 Kubernetes 上的批处理、AI/ML、HPC 等高性能计算工作负载设计的批量调度系统，弥补原生调度器在
+  g...
+summary: Volcano 是 CNCF 孵化项目，专为 Kubernetes 上的批处理、AI/ML、HPC 等高性能计算工作负载设计的批量调度系统，弥补原生调度器在
+  g...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - scheduling
 - batch
 - ai-ml
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Volcano 批处理调度（Volcano）
 

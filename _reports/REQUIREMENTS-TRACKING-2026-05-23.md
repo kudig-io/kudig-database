@@ -1,11 +1,19 @@
 ---
 title: 全量需求跟踪与执行清单
+summary: 全量需求跟踪与执行清单
 category: tracking
-tags: [requirements, tracking, execution, backlog]
-created: "2026-05-23"
-updated: "2026-05-23"
+tags:
+- requirements
+- tracking
+- execution
+- backlog
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
 ---
+
+
 
 # 全量需求跟踪与执行清单
 

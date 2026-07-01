@@ -1,6 +1,7 @@
 ---
 title: K8s FinOps 成本优化实践指南
 description: 'title: K8s FinOps 成本优化实践指南'
+summary: 'title: K8s FinOps 成本优化实践指南'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - opa
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - prometheus-basics
 - iac-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: K8s FinOps 成本优化实践指南
 description: '# K8s FinOps 成本优化实践指南'

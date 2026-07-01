@@ -1,6 +1,7 @@
 ---
 title: 'Day 6: K8s 架构深化 + 集群配置'
 description: '# Day 6: K8s 架构深化 + 集群配置'
+summary: '# Day 6: K8s 架构深化 + 集群配置'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - job
 - cronjob
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 6: K8s 架构深化 + 集群配置
 

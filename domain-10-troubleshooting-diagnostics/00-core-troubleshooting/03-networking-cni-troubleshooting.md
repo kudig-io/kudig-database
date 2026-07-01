@@ -1,6 +1,7 @@
 ---
 title: CNI 网络插件故障排查
 description: '# 03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)'
+summary: '# 03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)'
 category: troubleshooting
 tags:
 - cni
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - prometheus
 - istio
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -63,8 +66,9 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
-created: "2026-05-23"
 ---
+
+
 
 # 03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)
 difficulty: "advanced"

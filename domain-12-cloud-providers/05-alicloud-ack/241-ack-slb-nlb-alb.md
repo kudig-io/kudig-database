@@ -1,12 +1,15 @@
 ---
 title: ACK 关联产品 - 负载均衡 (SLB/NLB/ALB)
 description: 'description: ''- [负载均衡选型指南](#负载均衡选型指南)'''
+summary: 'description: ''- [负载均衡选型指南](#负载均衡选型指南)'''
 category: general
 tags:
 - cloud
 - multi-cloud
 - scheduler
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
-created: "2026-05-23"
 ---
+
+
 
 title: ACK 关联产品 - 负载均衡 (SLB/NLB/ALB)
 description: '- [负载均衡选型指南](#负载均衡选型指南)'

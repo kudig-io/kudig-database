@@ -1,11 +1,14 @@
 ---
 title: KUDIG-DATABASE 首页
 description: '# Kubernetes 生产运维全域知识库'
+summary: '# Kubernetes 生产运维全域知识库'
 category: general
 tags:
 - k8s
 - docker
 - agent
+tier: peripheral
+created: '2026-07-01'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,6 +24,8 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 ---
+
+
 
 # Kubernetes 生产运维全域知识库
 

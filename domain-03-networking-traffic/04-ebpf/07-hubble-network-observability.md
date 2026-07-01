@@ -1,6 +1,7 @@
 ---
 title: Hubble 网络可观测性 (Hubble Network Observability)
 description: '# Hubble 网络可观测性 (Hubble Network Observability)'
+summary: '# Hubble 网络可观测性 (Hubble Network Observability)'
 category: ebpf-technology
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - jaeger
 - envoy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -56,8 +59,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Hubble 网络可观测性 (Hubble Network Observability)
 
@@ -1987,9 +1991,9 @@ echo "=== 诊断完成 ==="
 | 错误现象 | Hubble 观测命令 | 可能原因 | 解决方案 |
 |---------|--------------|---------|---------|
 | Pod 间无法通信 | `hubble observe --to-pod X --verdict DROPPED` | 网络策略拒绝 | 检查并修正 NetworkPolicy |
-| HTTP 间歇 503 | `hubble observe --protocol http -o json \| jq 'select(.flow.l7.http.code==503)'` | 上游服务不可用 | 检查目标服务健康状态 |
-| DNS 解析慢 | `hubble observe --protocol dns -o json \| jq '.flow.l7.latency_ns'` | CoreDNS 过载 | 增加 CoreDNS 副本数 |
-| 大量 TCP RST | `hubble observe --protocol tcp -o json \| jq 'select(.flow.l4.TCP.flags.RST)'` | 连接超时/内核参数 | 调整连接超时配置 |
+| HTTP 间歇 503 | `hubble observe --protocol http -o json | jq 'select(.flow.l7.http.code==503)'` | 上游服务不可用 | 检查目标服务健康状态 |
+| DNS 解析慢 | `hubble observe --protocol dns -o json | jq '.flow.l7.latency_ns'` | CoreDNS 过载 | 增加 CoreDNS 副本数 |
+| 大量 TCP RST | `hubble observe --protocol tcp -o json | jq 'select(.flow.l4.TCP.flags.RST)'` | 连接超时/内核参数 | 调整连接超时配置 |
 | Egress 被拒 | `hubble observe --verdict DROPPED --traffic-direction EGRESS` | Egress 策略过严 | 添加必要 Egress 规则 |
 
 ---

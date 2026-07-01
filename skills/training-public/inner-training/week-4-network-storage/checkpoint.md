@@ -1,6 +1,7 @@
 ---
 title: 'Week 4 自测: 网络与存储'
 description: '# Week 4 自测: 网络与存储'
+summary: '# Week 4 自测: 网络与存储'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rag
 - cilium
 - calico
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,8 +37,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 # Week 4 自测: 网络与存储
 
@@ -481,7 +485,7 @@ aliyun ecs DescribeInstanceTypes --InstanceTypeFamily <family> | jq '.InstanceTy
 # 节点的 ENI 数量有上限
 
 # Step 4: 查看 Terway Pod 日志
-kubectl logs -n kube-system -l app=terway --tail=100 | grep -i "error\|fail"
+kubectl logs -n kube-system -l app=terway --tail=100 | grep -i "error|fail"
 
 # Step 5: 检查安全组规则
 aliyun ecs DescribeSecurityGroupAttribute --SecurityGroupId <sg-id>

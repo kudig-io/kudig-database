@@ -1,6 +1,9 @@
 ---
 title: 节点加入流程 (kubeadm join) [cluster-create]
-description: 'description: ''| `cmd/kubeadm/app/phases/kubelet/config.go` | L40-L200 | kubelet 配置写入'
+description: 'description: ''| `cmd/kubeadm/app/phases/kubelet/config.go` | L40-L200
+  | kubelet 配置写入'
+summary: 'description: ''| `cmd/kubeadm/app/phases/kubelet/config.go` | L40-L200 |
+  kubelet 配置写入'
 category: general
 tags:
 - reference
@@ -11,6 +14,8 @@ tags:
 - containerd
 - daemonset
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +38,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 节点加入流程 (kubeadm join)
 description: '| `cmd/kubeadm/app/phases/kubelet/config.go` | L40-L200 | kubelet 配置写入
@@ -711,6 +717,8 @@ current-context: default
 ```
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

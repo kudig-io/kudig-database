@@ -1,6 +1,7 @@
 ---
 title: etcd 静态 Pod 管理 (topic-code-analysis)
 description: 'title: etcd 静态 Pod 管理'
+summary: 'title: etcd 静态 Pod 管理'
 category: general
 tags:
 - reference
@@ -10,6 +11,8 @@ tags:
 - scheduler
 - controller-manager
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: etcd 静态 Pod 管理
 description: '# etcd 静态 Pod 管理'
@@ -792,6 +796,8 @@ curl -s http://127.0.0.1:2381/metrics | grep -E 'etcd_server_has_leader|etcd_ser
 - [高可用进阶](14-ha-advanced.md) — 多节点 etcd 集群
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[hot|hot]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

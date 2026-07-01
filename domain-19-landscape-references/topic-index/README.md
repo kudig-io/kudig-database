@@ -1,6 +1,7 @@
 ---
 title: topic-index 深度研究入口使用指南
 description: '# topic-index 深度研究入口使用指南'
+summary: '# topic-index 深度研究入口使用指南'
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - envoy
 - coredns
 - flux
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # topic-index 深度研究入口使用指南
 

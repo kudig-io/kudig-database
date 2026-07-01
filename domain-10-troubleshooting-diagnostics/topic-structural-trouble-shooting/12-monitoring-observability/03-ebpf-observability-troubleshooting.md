@@ -1,6 +1,7 @@
 ---
 title: eBPF 可观测性故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: eBPF 可观测性故障排查指南'
+summary: 'title: eBPF 可观测性故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - containerd
 - docker
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -42,8 +45,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: eBPF 可观测性故障排查指南
 description: '# eBPF 可观测性故障排查指南'

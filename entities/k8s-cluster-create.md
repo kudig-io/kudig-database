@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 集群创建操作指南
 description: '# Kubernetes 集群创建操作指南'
+summary: '# Kubernetes 集群创建操作指南'
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - helm
 - docker
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 集群创建操作指南
 

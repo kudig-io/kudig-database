@@ -1,6 +1,7 @@
 ---
 title: 'Domain 25: 云原生安全 (Cloud Native Security)'
 description: 'title: ''Domain 25: 云原生安全 (Cloud Native Security)'''
+summary: 'title: ''Domain 25: 云原生安全 (Cloud Native Security)'''
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - calico
 - helm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain 25: 云原生安全 (Cloud Native Security)'

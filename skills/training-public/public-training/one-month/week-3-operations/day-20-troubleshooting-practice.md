@@ -1,6 +1,7 @@
 ---
 title: 'Day 20: 故障排查实战'
 description: 'title: Day 20: 故障排查实战'
+summary: 'title: Day 20: 故障排查实战'
 category: learning
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - hands-on
 - docker
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 20: 故障排查实战

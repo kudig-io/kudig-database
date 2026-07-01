@@ -1,12 +1,15 @@
 ---
 title: 驱逐
-description: 'Drain 是安全地将节点上的 Pod 迁移到其他节点的操作。它会先 Cordon 节点，然后逐个驱逐节点上的 Pod（尊重 PDB），确保应用的可用性。...'
+description: Drain 是安全地将节点上的 Pod 迁移到其他节点的操作。它会先 Cordon 节点，然后逐个驱逐节点上的 Pod（尊重 PDB），确保应用的可用性。...
+summary: Drain 是安全地将节点上的 Pod 迁移到其他节点的操作。它会先 Cordon 节点，然后逐个驱逐节点上的 Pod（尊重 PDB），确保应用的可用性。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - operations
 - node
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 驱逐
 

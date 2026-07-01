@@ -1,6 +1,7 @@
 ---
 title: 运维 Skill 库：AI Agent 可执行的工单诊断-修复闭环
 description: '# 运维 Skill 库'
+summary: '# 运维 Skill 库'
 category: reference
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - rbac
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ trigger_keywords:
 - 可执行的工单诊断-修复闭环
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 运维 Skill 库
 

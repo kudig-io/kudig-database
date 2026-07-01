@@ -1,6 +1,7 @@
 ---
 title: 会话上下文管理机制 (Session Context Management)
 description: '# 会话上下文管理机制 (Session Context Management)'
+summary: '# 会话上下文管理机制 (Session Context Management)'
 category: general
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - coredns
 - containerd
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # 会话上下文管理机制 (Session Context Management)
 

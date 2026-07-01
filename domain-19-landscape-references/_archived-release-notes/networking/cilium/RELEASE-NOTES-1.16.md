@@ -1,6 +1,7 @@
 ---
 title: cilium v1.16 Release Notes
 description: cilium v1.16 Release Notes — Kubernetes 生产运维知识库
+summary: cilium v1.16 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - job
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - cncf-ecosystem
 - helm-basics
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Cilium|cilium]] v1.16 Release Notes
 

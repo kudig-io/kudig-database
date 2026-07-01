@@ -1,11 +1,17 @@
 ---
 title: Session Hot Cache
+summary: Session Hot Cache：最近一次活动（2026-05-24）：完成 kudig-database 全域深度研究（14 域全覆盖）
 category: journal
-tags: [session-cache, recent-activity]
-created: "2026-05-23"
-updated: "2026-05-24"
+tags:
+- session-cache
+- recent-activity
+tier: core
+created: '2026-05-23'
+updated: '2026-05-24'
 last_updated: 2026-05-24
 ---
+
+
 
 # 会话热缓存
 

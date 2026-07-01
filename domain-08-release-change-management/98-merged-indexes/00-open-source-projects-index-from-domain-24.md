@@ -1,6 +1,7 @@
 ---
 title: Domain-24 基础设施即代码 — 开源项目索引
 description: '- [五、Ansible 与配置管理](#五ansible-与配置管理)'
+summary: '- [五、Ansible 与配置管理](#五ansible-与配置管理)'
 category: infrastructure-as-code
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - mysql
 - crd
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -46,8 +49,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Domain-24 基础设施即代码 — 开源项目索引
 

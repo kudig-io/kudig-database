@@ -1,6 +1,7 @@
 ---
-title: "Day 4: 调试工具全家桶安装 [quick-start]"
+title: 'Day 4: 调试工具全家桶安装 [quick-start]'
 description: '### 1.1 kubectl 基础配置'
+summary: '### 1.1 kubectl 基础配置'
 category: learning
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - cilium
 - helm
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -28,8 +31,9 @@ prerequisites:
 - gpu-ml-basics
 - helm-basics
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 4: 调试工具全家桶安装
 

@@ -1,6 +1,7 @@
 ---
 title: OpenTelemetry Collector 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: OpenTelemetry Collector 故障排查指南'
+summary: 'title: OpenTelemetry Collector 故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - hpa
 - job
 - gateway
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -45,8 +48,9 @@ prerequisites:
 - tls-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[OpenTelemetry|OpenTelemetry]] Collector 故障排查指南
 description: '# OpenTelemetry Collector 故障排查指南'

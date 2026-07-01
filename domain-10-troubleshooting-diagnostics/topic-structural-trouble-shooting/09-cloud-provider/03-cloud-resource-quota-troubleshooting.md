@@ -1,6 +1,7 @@
 ---
 title: 云资源配额与 API 限流故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 云资源配额与 API 限流故障排查指南'
+summary: 'title: 云资源配额与 API 限流故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - job
 - cronjob
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -43,8 +46,9 @@ prerequisites:
 - monitoring-basics
 - gpu-scheduling-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 云资源配额与 API 限流故障排查指南
 description: '# 云资源配额与 API 限流故障排查指南'

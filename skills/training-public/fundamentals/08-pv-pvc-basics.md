@@ -1,6 +1,7 @@
 ---
 title: 第八课：存储 - PV 和 PVC [fundamentals]
 description: 'title: 第八课：存储 - PV 和 PVC'
+summary: 'title: 第八课：存储 - PV 和 PVC'
 category: learning
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - mysql
 - hpa
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 第八课：存储 - PV 和 PVC

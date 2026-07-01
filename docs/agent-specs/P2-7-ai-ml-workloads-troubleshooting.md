@@ -1,6 +1,7 @@
 ---
 title: AI/ML 工作负载问题排查指南 [docs]
 description: '# AI/ML 工作负载问题排查指南'
+summary: '# AI/ML 工作负载问题排查指南'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubeflow
 - kserve
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # AI/ML 工作负载问题排查指南
 
@@ -53,7 +57,7 @@ created: "2026-05-23"
 | MPIJob 一直 Pending | `kubectl describe mpijob <name>` | GPU 资源不足 | `kubectl patch mpijob -p '{"spec": {"slotsPerWorker": "1"}}'` |
 | Worker 无法创建 | `kubectl get pods -n <ns>` | 工作节点打污点 | 添加 toleration |
 | 启动脚本失败 | `kubectl logs -f mpi-worker-0` | 镜像拉取失败 | 检查镜像配置 |
-| Rendezvous 失败 | `kubectl logs mpi-worker-0 \| grep -i " rendezvous"` | 网络不通 | 检查 Pod 网络策略 |
+| Rendezvous 失败 | `kubectl logs mpi-worker-0 | grep -i " rendezvous"` | 网络不通 | 检查 Pod 网络策略 |
 
 ### 1.2 NCCL 通信问题
 
@@ -94,7 +98,7 @@ kubectl exec -it mpi-worker-0 -- bash -c "NCCL_DEBUG=INFO NCCL_TOPO_DUMP=1 ./ncc
 
 ```bash
 # DeepSpeed 日志检查
-kubectl logs -f deployment/<name> | grep -i "deepspeed\|ZeRO"
+kubectl logs -f deployment/<name> | grep -i "deepspeed|ZeRO"
 
 # 常见问题
 # RuntimeError: Cannot find deepspeed ops
@@ -272,7 +276,7 @@ docker run --rm --gpus all nvidia/cuda:12.0-base nvidia-smi dmon -s u
 | 症状 | 诊断命令 | 根因 |
 |------|---------|------|
 | Run 一直 Pending | `kubectl describe run <name> -n kubeflow` | 控制器未就绪 |
-| Step 失败 | `kubectl get pods -n kubeflow \| grep <step>` | 镜像拉取/资源不足 |
+| Step 失败 | `kubectl get pods -n kubeflow | grep <step>` | 镜像拉取/资源不足 |
 | PVC 挂载失败 | `kubectl describe pvc -n kubeflow` | StorageClass 问题 |
 | Tekton PipelineRun 失败 | `kubectl get pr -n kubeflow` | Pipeline 定义错误 |
 
@@ -319,7 +323,7 @@ kubectl get isvc -A
 kubectl describe isvc <name>
 
 # 7. 检查模型加载日志
-kubectl logs -f <inference-pod> -c kserve-container | grep -i "model loaded\|error"
+kubectl logs -f <inference-pod> -c kserve-container | grep -i "model loaded|error"
 ```
 
 ---

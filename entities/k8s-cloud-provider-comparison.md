@@ -1,6 +1,7 @@
 ---
 title: 云厂商托管 Kubernetes 服务全景对比（13 家）
 description: '| 厂商 | 产品 | K8s 版本支持 | 网络模型 | 亮点 |'
+summary: '| 厂商 | 产品 | K8s 版本支持 | 网络模型 | 亮点 |'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - huawei
 - tencent
 - flannel
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ trigger_keywords:
 - '13'
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 云厂商托管 K8s 服务全景对比
 

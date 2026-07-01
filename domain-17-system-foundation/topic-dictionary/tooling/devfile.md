@@ -1,6 +1,7 @@
 ---
 title: Devfile 开发环境规范
-description: 'Devfile 是 CNCF Sandbox 项目，定义了云开发环境的声明式规范，用 YAML 描述开发环境的组件、命令和依赖，实现开发环境的可移植和可复现。...'
+description: Devfile 是 CNCF Sandbox 项目，定义了云开发环境的声明式规范，用 YAML 描述开发环境的组件、命令和依赖，实现开发环境的可移植和可复现。...
+summary: Devfile 是 CNCF Sandbox 项目，定义了云开发环境的声明式规范，用 YAML 描述开发环境的组件、命令和依赖，实现开发环境的可移植和可复现。...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - tooling
 - development
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Devfile 开发环境规范（Devfile）
 

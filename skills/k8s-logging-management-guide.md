@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 日志管理最佳实践
 description: '# Kubernetes 日志管理最佳实践'
+summary: '# Kubernetes 日志管理最佳实践'
 category: skills
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - grafana
 - daemonset
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - monitoring-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 日志管理最佳实践
 

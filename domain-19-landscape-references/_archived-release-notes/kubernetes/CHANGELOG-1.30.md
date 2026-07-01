@@ -1,6 +1,7 @@
 ---
 title: v1.30.14
 description: v1.30.14 — Kubernetes 生产运维知识库
+summary: v1.30.14 — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - coredns
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 

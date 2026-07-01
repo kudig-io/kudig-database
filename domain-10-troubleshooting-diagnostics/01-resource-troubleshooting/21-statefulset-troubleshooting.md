@@ -1,6 +1,7 @@
 ---
 title: StatefulSet 故障排查
 description: '# 21 - StatefulSet 故障排查 (StatefulSet Troubleshooting)'
+summary: '# 21 - StatefulSet 故障排查 (StatefulSet Troubleshooting)'
 category: troubleshooting
 tags:
 - statefulset
@@ -13,6 +14,8 @@ tags:
 - coredns
 - mysql
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: advanced
 reading_level: advanced
@@ -61,8 +64,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta.md
   label: '故障树: statefulset'
-created: "2026-05-23"
 ---
+
+
 
 # 21 - [[StatefulSet|StatefulSet]] 故障排查 (StatefulSet Troubleshooting)
 

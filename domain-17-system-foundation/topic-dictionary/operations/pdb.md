@@ -1,6 +1,7 @@
 ---
 title: Pod 中断预算
-description: 'Pod Disruption Budget（PDB，Pod 中断预算）是 Kubernetes 中用于限制同时被自愿中断的 Pod 数量的策略资源。它确保在节点...'
+description: Pod Disruption Budget（PDB，Pod 中断预算）是 Kubernetes 中用于限制同时被自愿中断的 Pod 数量的策略资源。它确保在节点...
+summary: Pod Disruption Budget（PDB，Pod 中断预算）是 Kubernetes 中用于限制同时被自愿中断的 Pod 数量的策略资源。它确保在节点...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - operations
 - pdb
 - reliability
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Pod 中断预算
 

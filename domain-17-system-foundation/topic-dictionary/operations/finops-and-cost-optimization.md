@@ -1,6 +1,7 @@
 ---
 title: FinOps 与成本优化
 description: '# FinOps 与成本优化'
+summary: '# FinOps 与成本优化'
 category: dictionary
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - job
 - cronjob
 - gpu
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,8 +33,9 @@ prerequisites:
 - cloud-provider-basics
 - prometheus-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # FinOps 与成本优化
 

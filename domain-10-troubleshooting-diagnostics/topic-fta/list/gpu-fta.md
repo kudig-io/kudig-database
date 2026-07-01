@@ -1,7 +1,9 @@
 ---
 title: GPU 异常故障树分析 (skills)
-description: '<!-- condition: kubectl get nodes -o jsonpath=''{.items[*].status.capacity.nvidia.com/gpu}'' 返回 0 或 Pod 日志显示
-  CUDA_ERROR -->'
+description: '<!-- condition: kubectl get nodes -o jsonpath=''{.items[*].status.capacity.nvidia.com/gpu}''
+  返回 0 或 Pod 日志显示 CUDA_ERROR -->'
+summary: '<!-- condition: kubectl get nodes -o jsonpath=''{.items[*].status.capacity.nvidia.com/gpu}''
+  返回 0 或 Pod 日志显示 CUDA_ERROR -->'
 category: skills
 tags:
 - k8s
@@ -13,6 +15,8 @@ tags:
 - gpu
 - cuda
 - nvidia
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +35,9 @@ prerequisites:
 fta_id: FTA-GPU-001
 component: Gpu
 severity: medium
-created: "2026-05-23"
 ---
+
+
 
 # GPU 异常故障树分析
 

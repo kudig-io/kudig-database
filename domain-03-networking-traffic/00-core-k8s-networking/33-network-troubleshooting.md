@@ -1,6 +1,7 @@
 ---
 title: 33 - 网络故障诊断与链路排查 (Network Troubleshooting & Data Path Diagnosis)
 description: '# 33 - 网络故障诊断与链路排查 (Network Troubleshooting & Data Path Diagnosis)'
+summary: '# 33 - 网络故障诊断与链路排查 (Network Troubleshooting & Data Path Diagnosis)'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - calico
 - coredns
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -66,8 +69,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 33 - 网络故障诊断与链路排查 (Network Troubleshooting & Data Path Diagnosis)
 
@@ -445,7 +449,7 @@ kubectl exec -it netshoot -- ab -n 1000 -c 100 http://<service>/
 | HTTPS 握手卡 | `ping -M do -s` | MTU 不匹配 | 统一 Pod MTU |
 | Pod→Node 不通 | `sysctl rp_filter` | 反向路径过滤 | rp_filter=0 或 2 |
 | 新节点不通 | `ip neigh show` | ARP 表满 | 调大 gc_thresh |
-| 间歇性重连 | `dmesg \| grep conntrack` | conntrack 竞争 | 升级 eBPF CNI |
+| 间歇性重连 | `dmesg | grep conntrack` | conntrack 竞争 | 升级 eBPF CNI |
 
 ---
 

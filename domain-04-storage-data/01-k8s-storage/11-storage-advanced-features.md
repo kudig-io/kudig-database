@@ -1,6 +1,7 @@
 ---
 title: 11 - 存储高级特性与优化策略
 description: 'title: 11 - 存储高级特性与优化策略'
+summary: 'title: 11 - 存储高级特性与优化策略'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - mysql
 - elasticsearch
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 11 - 存储高级特性与优化策略
 description: '# 11 - 存储高级特性与优化策略'

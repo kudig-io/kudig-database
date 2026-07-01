@@ -1,6 +1,7 @@
 ---
 title: 10 - 存储备份与灾难恢复
 description: 'title: 10 - 存储备份与灾难恢复'
+summary: 'title: 10 - 存储备份与灾难恢复'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - job
 - cronjob
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - storage-basics
 - mysql-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 10 - 存储备份与灾难恢复
 description: '# 10 - 存储备份与灾难恢复'

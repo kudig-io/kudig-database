@@ -1,6 +1,7 @@
 ---
 title: 02 - Terway 架构原理 (Architecture Deep Dive)
 description: '# 02 - Terway 架构原理 (Architecture Deep Dive)'
+summary: '# 02 - Terway 架构原理 (Architecture Deep Dive)'
 category: terway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - ingress
 - gateway
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -35,8 +38,9 @@ prerequisites:
 - networking-basics
 - ebpf-basics
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 # 02 - Terway 架构原理 (Architecture Deep Dive)
 

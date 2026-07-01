@@ -1,6 +1,7 @@
 ---
 title: 10 - 多云混合云运维手册
 description: '# 10 - 多云混合云运维手册'
+summary: '# 10 - 多云混合云运维手册'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - istio
 - calico
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -40,9 +43,9 @@ prerequisites:
 - backup-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 10 - 多云混合云运维手册
 

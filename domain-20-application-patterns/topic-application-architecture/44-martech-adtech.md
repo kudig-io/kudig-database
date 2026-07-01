@@ -1,11 +1,14 @@
 ---
 title: 数字营销与广告科技架构设计 — 阿里云视角
 description: 'title: 数字营销与广告科技架构设计'
+summary: 'title: 数字营销与广告科技架构设计'
 category: general
 tags:
 - architecture
 - best-practice
 - redis
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 数字营销与广告科技架构设计
 description: '# 数字营销与广告科技架构设计 — 阿里云视角'

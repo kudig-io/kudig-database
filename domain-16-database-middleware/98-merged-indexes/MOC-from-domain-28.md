@@ -1,6 +1,7 @@
 ---
 title: domain-28-enterprise-database-middleware MOC
 description: domain-28-enterprise-database-middleware 知识域导航页，覆盖 10 篇文档
+summary: domain-28-enterprise-database-middleware 知识域导航页，覆盖 10 篇文档
 category: moc
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - postgresql
 - kafka
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-28-enterprise-database-middleware MOC
 

@@ -1,15 +1,24 @@
 ---
-title: "[2026-03-28] [P1] NetworkPolicy 误配导致服务间通信中断"
+title: '[2026-03-28] [P1] NetworkPolicy 误配导致服务间通信中断'
+summary: '[2026-03-28] [P1] NetworkPolicy 误配导致服务间通信中断：15:20，客服收到大量投诉："已支付但显示未付款"。'
 category: case-study
-tags: [production, incident, networking, networkpolicy, security]
-date: "2026-03-28"
+tags:
+- production
+- incident
+- networking
+- networkpolicy
+- security
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-03-28'
 severity: P1
-mttr: "28min"
+mttr: 28min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-03-28] NetworkPolicy 默认拒绝规则误拦截支付回调流量
 

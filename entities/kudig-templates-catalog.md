@@ -1,6 +1,7 @@
 ---
 title: KUDIG Templates Catalog
 description: '| Skill 运维技能模板 | 故障排查技能文档 | skills/ 目录下所有 Skill |'
+summary: '| Skill 运维技能模板 | 故障排查技能文档 | skills/ 目录下所有 Skill |'
 category: reference
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - authoring-guide
 - webhook
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 - Catalog
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG Templates Catalog
 

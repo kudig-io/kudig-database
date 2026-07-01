@@ -1,6 +1,7 @@
 ---
 title: 08 - 安全最佳实践表
 description: '# 08 - 安全最佳实践表'
+summary: '# 08 - 安全最佳实践表'
 category: security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - cilium
 - calico
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -54,8 +57,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # 08 - 安全最佳实践表
 
@@ -169,7 +173,7 @@ rules:
 | 检查项 | 命令/方法 | 期望结果 | 优先级 |
 |-------|---------|---------|-------|
 | 匿名认证禁用 | 检查apiserver `--anonymous-auth=false` | false | P0 |
-| RBAC启用 | `kubectl api-versions \| grep rbac` | 存在 | P0 |
+| RBAC启用 | `kubectl api-versions | grep rbac` | 存在 | P0 |
 | etcd加密 | 检查EncryptionConfiguration | 已配置 | P0 |
 | Pod Security启用 | 检查NS标签 | 已配置 | P1 |
 | 审计日志启用 | 检查apiserver `--audit-log-path` | 已配置 | P1 |

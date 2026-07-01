@@ -1,6 +1,7 @@
 ---
 title: 05 - Apache APISIX 企业级 API 网关实践
 description: '# 05 - Apache APISIX 企业级 API 网关实践'
+summary: '# 05 - Apache APISIX 企业级 API 网关实践'
 category: cloud-native-api-gateway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - docker
 - redis
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -52,8 +55,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 05 - Apache APISIX 企业级 API 网关实践
 

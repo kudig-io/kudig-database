@@ -1,12 +1,15 @@
 ---
 title: 观众互动设计
 description: '# 观众互动设计'
+summary: '# 观众互动设计'
 category: general
 tags:
 - k8s
 - etcd
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 观众互动设计
 

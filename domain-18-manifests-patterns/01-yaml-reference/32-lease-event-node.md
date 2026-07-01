@@ -1,6 +1,7 @@
 ---
 title: 32 - Lease / Event / Node YAML 配置参考
 description: '# 32 - Lease / Event / Node YAML 配置参考'
+summary: '# 32 - Lease / Event / Node YAML 配置参考'
 category: yaml-manifests
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - prometheus
 - calico
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -52,8 +55,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md
   label: '故障树: node'
-created: "2026-05-23"
 ---
+
+
 
 # 32 - Lease / Event / Node YAML 配置参考
 
@@ -1106,7 +1110,7 @@ kubectl get pods -n default -l app=my-controller
 # 检查 RESTARTS 列
 
 # 2. 网络问题导致续约失败
-kubectl logs -n default -l app=my-controller | grep -i "lost leadership\|network"
+kubectl logs -n default -l app=my-controller | grep -i "lost leadership|network"
 
 # 3. Lease 配置不合理(续约间隔过短)
 kubectl get lease my-controller -n default -o jsonpath='{.spec.leaseDurationSeconds}'

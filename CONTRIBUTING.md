@@ -1,12 +1,20 @@
 ---
 title: 贡献指南
+summary: 贡献指南：感谢你对 KUDIG 云原生运维知识库的兴趣！本指南说明如何为语料库贡献内容与工程改进。
 category: meta
-tags: ["meta", "visibility/public", "contributing"]
-sources: ["manual"]
+tags:
+- meta
+- visibility/public
+- contributing
+tier: core
+sources:
+- manual
 created: 2026-01-16
 updated: 2026-07-01
 last_updated: 2026-07-01
 ---
+
+
 
 # 贡献指南
 
@@ -117,3 +125,7 @@ sources: ["kubernetes.io/..."] # 推荐，权威来源链接
 ---
 
 感谢你帮助提升云原生运维知识的质量与覆盖度！
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

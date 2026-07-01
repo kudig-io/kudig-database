@@ -1,6 +1,9 @@
 ---
 title: 入口控制器
-description: 'Ingress Controller 是实现 Ingress 规则的实际组件。Kubernetes 本身不包含 Ingress Controller 实现，需要...'
+description: Ingress Controller 是实现 Ingress 规则的实际组件。Kubernetes 本身不包含 Ingress Controller
+  实现，需要...
+summary: Ingress Controller 是实现 Ingress 规则的实际组件。Kubernetes 本身不包含 Ingress Controller
+  实现，需要...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - ingress
 - networking
 - nginx
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 入口控制器
 

@@ -1,6 +1,7 @@
 ---
 title: 问题排查决策树 Mermaid 可视化集
 description: '# 问题排查决策树 Mermaid 可视化集'
+summary: '# 问题排查决策树 Mermaid 可视化集'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - elasticsearch
 - hpa
 - vpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # 问题排查决策树 Mermaid 可视化集
 

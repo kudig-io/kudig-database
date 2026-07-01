@@ -1,6 +1,7 @@
 ---
 title: Agent CLI 安全治理与权限模型 (domain-14-ai-ml-infra)
 description: 'title: Agent CLI 安全治理与权限模型'
+summary: 'title: Agent CLI 安全治理与权限模型'
 category: general
 tags:
 - ai
@@ -10,6 +11,8 @@ tags:
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Agent CLI 安全治理与权限模型
 description: '# Agent CLI 安全治理与权限模型'

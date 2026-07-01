@@ -1,6 +1,7 @@
 ---
 title: kudig-database 双维度评估报告 (reports)
 description: '| 专题 | 19 个 topic-\* 目录 |'
+summary: '| 专题 | 19 个 topic-\* 目录 |'
 category: general
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - scheduler
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # kudig-database 双维度评估报告
 

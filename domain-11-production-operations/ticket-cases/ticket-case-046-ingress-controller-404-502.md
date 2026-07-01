@@ -2,6 +2,8 @@
 title: Ingress 控制器 Pod 异常导致业务访问 404/502
 description: 专有云 ACK 集群 Nginx Ingress Controller Pod 异常重启、配置重载失败，导致外部流量访问业务域名时出现 404
   与 502 的工单闭环样本。
+summary: 专有云 ACK 集群 Nginx Ingress Controller Pod 异常重启、配置重载失败，导致外部流量访问业务域名时出现 404 与
+  502 的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -12,6 +14,9 @@ tags:
 - '502'
 - p0
 - network
+tier: supporting
+created: '2026-06-26T14:00:00+08:00'
+updated: '2026-06-26T16:45:00+08:00'
 incident_id: INC-2026-ACK-046
 priority: P0
 severity: critical
@@ -27,9 +32,7 @@ skill_ref:
   生命周期事件]]'
 fta_ref:
 - 'FTA: Ingress 返回 404/502'
-created: '2026-06-26T14:00:00+08:00'
-updated: '2026-06-26T16:45:00+08:00'
-last_updated: 2026-06-26T16:45:00+08:00
+last_updated: 2026-06-26 16:45:00+08:00
 duplicate_of: TC-2026-021
 status: duplicate
 duplication_reason: 与 TC-2026-021 主题重复，内容角度相似，降低 RAG 权重
@@ -57,13 +60,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[concepts/ingress.md]]"
+- target: '[[concepts/ingress.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -104,7 +109,7 @@ kubectl get events -n kube-system --field-selector reason=Unhealthy --sort-by='.
 kubectl logs -n kube-system -l app.kubernetes.io/name=ingress-nginx --tail=500 | grep -E "404|502|error|upstream|reload" | tail -50
 
 # 4. 检查 Nginx 配置重载是否失败
-kubectl logs -n kube-system -l app.kubernetes.io/name=ingress-nginx --tail=200 | grep -i "reload\|template\|fail\|warn"
+kubectl logs -n kube-system -l app.kubernetes.io/name=ingress-nginx --tail=200 | grep -i "reload|template|fail|warn"
 
 # 5. 核对 Ingress 资源与后端 Service/Endpoint 映射
 kubectl get ingress -A

@@ -1,12 +1,15 @@
 ---
 title: Domain 31 - 硬件基础设施
 description: 'description: ''## 领域概述'''
+summary: 'description: ''## 领域概述'''
 category: general
 tags:
 - k8s
 - etcd
 - gpu
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - cloud-provider-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Domain 31 - 硬件基础设施

@@ -1,6 +1,7 @@
 ---
 title: 最佳实践：Operations
 description: 本页汇总了 **Operations** 领域的 Kubernetes 最佳实践。
+summary: 本页汇总了 **Operations** 领域的 Kubernetes 最佳实践。
 category: concepts
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - hpa
 - vpa
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 本页汇总了 **Operations** 领域的 Kubernetes 最佳实践。
 

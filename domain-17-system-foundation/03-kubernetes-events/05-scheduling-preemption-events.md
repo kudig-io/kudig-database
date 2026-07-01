@@ -1,6 +1,7 @@
 ---
 title: 05 - 调度与抢占事件
 description: '# 05 - 调度与抢占事件'
+summary: '# 05 - 调度与抢占事件'
 category: kubernetes-events
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - docker
 - vpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -42,8 +45,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 05 - 调度与抢占事件
 
@@ -180,7 +184,7 @@ Source:  default-scheduler
 3. **检查调度约束是否生效**
    ```bash
    # 查看 Pod 的 nodeSelector/affinity/tolerations
-   kubectl get pod <pod-name> -o yaml | grep -A20 "nodeSelector\|affinity\|tolerations"
+   kubectl get pod <pod-name> -o yaml | grep -A20 "nodeSelector|affinity|tolerations"
    ```
 
 ## 解决建议
@@ -781,7 +785,7 @@ spec:
 5. **检查 node-controller 配置**
    ```bash
    # 查看 kube-controller-manager 配置
-   kubectl get pods -n kube-system kube-controller-manager-<node> -o yaml | grep -A5 "pod-eviction-timeout\|node-monitor-grace-period"
+   kubectl get pods -n kube-system kube-controller-manager-<node> -o yaml | grep -A5 "pod-eviction-timeout|node-monitor-grace-period"
    
    # 默认配置:
    # --pod-eviction-timeout=5m0s (v1.13+ 已废弃,由 taint 容忍时间控制)
@@ -856,7 +860,7 @@ Message: Failed to bind pod: node "worker-node-99" not found
 2. **检查调度器状态**
    ```bash
    # 查看调度器日志
-   kubectl logs -n kube-system -l component=kube-scheduler --tail=100 | grep -i "binding\|error"
+   kubectl logs -n kube-system -l component=kube-scheduler --tail=100 | grep -i "binding|error"
    
    # 检查调度器运行状态
    kubectl get pods -n kube-system -l component=kube-scheduler
@@ -872,7 +876,7 @@ Message: Failed to bind pod: node "worker-node-99" not found
    kubectl get --raw /healthz
    
    # 查看 API Server 日志
-   kubectl logs -n kube-system kube-apiserver-<node> --tail=100 | grep -i "error\|binding"
+   kubectl logs -n kube-system kube-apiserver-<node> --tail=100 | grep -i "error|binding"
    ```
 
 4. **检查节点状态**
@@ -881,7 +885,7 @@ Message: Failed to bind pod: node "worker-node-99" not found
    kubectl get node <node-name>
    
    # 查看节点是否可调度
-   kubectl describe node <node-name> | grep "Unschedulable\|Taints"
+   kubectl describe node <node-name> | grep "Unschedulable|Taints"
    ```
 
 5. **检查并发调度器**

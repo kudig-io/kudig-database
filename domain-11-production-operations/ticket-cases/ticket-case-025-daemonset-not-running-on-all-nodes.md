@@ -1,6 +1,7 @@
 ---
 title: 阿里云专有云 DaemonSet 未在所有节点运行（日志采集 Agent 缺失）
 description: Logtail 日志采集 DaemonSet 在新扩容节点与部分存量节点上未运行，导致业务日志漏采，根因为节点污点、镜像拉取失败与资源不足叠加，含诊断、修复与验证。
+summary: Logtail 日志采集 DaemonSet 在新扩容节点与部分存量节点上未运行，导致业务日志漏采，根因为节点污点、镜像拉取失败与资源不足叠加，含诊断、修复与验证。
 category: production-operations
 tags:
 - aliyun
@@ -12,6 +13,9 @@ tags:
 - taint
 - image-pull
 - ticket-case
+tier: supporting
+created: 2026-06-26
+updated: 2026-06-26
 incident_id: TC-2026-025
 priority: P1
 severity: high
@@ -20,8 +24,6 @@ affected_namespace: kube-system
 ticket_type: 可观测性组件故障
 skill_ref: DaemonSet 诊断
 fta_ref: 'FTA: DaemonSet 未全节点运行'
-created: 2026-06-26
-updated: 2026-06-26
 last_updated: 2026-06-26
 duplicate_of: INC-2026-ACK-050
 status: duplicate
@@ -53,13 +55,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[concepts/daemonset.md]]"
+- target: '[[concepts/daemonset.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-050-daemonset-not-running-all-nodes.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-050-daemonset-not-running-all-nodes.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-030-daemonset-not-ready-all-nodes.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-030-daemonset-not-ready-all-nodes.md]]'
   type: related_to
 ---
+
+
 
 # 工单 025：DaemonSet 未在所有节点运行（日志采集 Agent 缺失）
 

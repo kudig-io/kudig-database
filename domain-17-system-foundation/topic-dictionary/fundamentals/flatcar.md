@@ -1,6 +1,9 @@
 ---
 title: Flatcar 容器操作系统
-description: 'Flatcar Container Linux 是 Kinvolk（现微软）维护的不可变容器操作系统，是 CoreOS Container Linux 的社区分...'
+description: Flatcar Container Linux 是 Kinvolk（现微软）维护的不可变容器操作系统，是 CoreOS Container
+  Linux 的社区分...
+summary: Flatcar Container Linux 是 Kinvolk（现微软）维护的不可变容器操作系统，是 CoreOS Container Linux
+  的社区分...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - fundamentals
 - os
 - container
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Flatcar 容器操作系统（Flatcar）
 

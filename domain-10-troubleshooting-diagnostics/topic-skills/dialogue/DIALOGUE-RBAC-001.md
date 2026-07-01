@@ -1,17 +1,26 @@
 ---
-dialogue_id: "DIALOGUE-RBAC-001"
-skill_id: "SKILL-RBAC-001"
-role: "remote-consultant"
-language: "zh"
-severity: "medium"
-status: "reviewed"
+title: ServiceAccount 权限不足，无法创建 Pod — 远程顾问对话脚本
+summary: ServiceAccount 权限不足，无法创建 Pod — 远程顾问对话脚本：kubectl auth can-i create pods --as=system:serviceaccount:<ns>:<sa>
+  -n <ns>
+category: dialogue
+tags:
+- dialogue
+- remote-consultant
+- troubleshooting
+- visibility/public
+tier: supporting
 created: 2026-05-21
 updated: 2026-05-21
+dialogue_id: DIALOGUE-RBAC-001
+skill_id: SKILL-RBAC-001
+role: remote-consultant
+language: zh
+severity: medium
+status: reviewed
 last_updated: 2026-05-21
-title: "ServiceAccount 权限不足，无法创建 Pod — 远程顾问对话脚本"
-category: dialogue
-tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
+
+
 
 # ServiceAccount 权限不足，无法创建 Pod — 远程顾问对话脚本
 
@@ -218,3 +227,7 @@ kubectl auth can-i create pods --as=system:serviceaccount:<ns>:<sa> -n <ns>
 - [[concepts/rbac-authorization.md|RBAC 权限模型]]
 - [[concepts/rbac-authorization.md|ServiceAccount]]
 - [[concepts/rbac-authorization.md|RoleBinding 与 ClusterRoleBinding]]
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

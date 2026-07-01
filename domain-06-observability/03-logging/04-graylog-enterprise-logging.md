@@ -1,6 +1,7 @@
 ---
 title: Graylog 企业级日志管理平台深度实践
 description: '# Graylog 企业级日志管理平台深度实践'
+summary: '# Graylog 企业级日志管理平台深度实践'
 category: logging-management-analytics
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - webhook
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Graylog 企业级日志管理平台深度实践
 
@@ -292,7 +296,7 @@ field_extractors:
     condition_type: "string"
     condition_value: "apache"
     configuration:
-      regex_value: '^(?<remote_addr>\S+) (?<remote_user>\S+) (?<auth_user>\S+) \[(?<time_local>[^\]]+)\] "(?<method>\S+) (?<request>\S+) (?<protocol>\S+)" (?<status>\d+) (?<bytes_sent>\d+) "(?<referer>[^"]*)" "(?<user_agent>[^"]*)"'
+      regex_value: '^(?<remote_addr>\S+) (?<remote_user>\S+) (?<auth_user>\S+) \[(?<time_local>[^]]+)\] "(?<method>\S+) (?<request>\S+) (?<protocol>\S+)" (?<status>\d+) (?<bytes_sent>\d+) "(?<referer>[^"]*)" "(?<user_agent>[^"]*)"'
       regex_group_names:
         - "remote_addr"
         - "remote_user"

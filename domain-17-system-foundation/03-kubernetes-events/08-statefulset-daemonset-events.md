@@ -1,6 +1,7 @@
 ---
 title: 08 - StatefulSet 与 DaemonSet 控制器事件
 description: '- [最佳实践](#最佳实践)'
+summary: '- [最佳实践](#最佳实践)'
 category: kubernetes-events
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - mysql
 - pdb
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -50,8 +53,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta.md
   label: '故障树: statefulset'
-created: "2026-05-23"
 ---
+
+
 
 # 08 - [[StatefulSet|StatefulSet]] 与 [[DaemonSet|DaemonSet]] 控制器事件
 

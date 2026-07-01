@@ -1,6 +1,7 @@
 ---
 title: 03 - 控制器模式与调谐循环 (Controller Pattern)
 description: 'description: 深入解析 Kubernetes 控制器模式的核心机制：Reconcile 循环、最终一致性、水平触发与边缘触发的对比、以及控制器开发最佳实践'
+summary: 'description: 深入解析 Kubernetes 控制器模式的核心机制：Reconcile 循环、最终一致性、水平触发与边缘触发的对比、以及控制器开发最佳实践'
 category: general
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - job
 - cronjob
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 控制器模式与调谐循环

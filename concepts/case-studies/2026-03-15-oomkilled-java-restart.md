@@ -1,15 +1,26 @@
 ---
-title: "[2026-03-15] [P1] OOMKilled 导致 Java 应用反复重启"
+title: '[2026-03-15] [P1] OOMKilled 导致 Java 应用反复重启'
+summary: '[2026-03-15] [P1] OOMKilled 导致 Java 应用反复重启：08:00，促销活动开始，用户流量激增。order-api
+  Pod 开始反复重启：'
 category: case-study
-tags: [production, incident, workloads, java, memory, oom]
-date: "2026-03-15"
+tags:
+- production
+- incident
+- workloads
+- java
+- memory
+- oom
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-03-15'
 severity: P1
-mttr: "35min"
+mttr: 35min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-03-15] Java 应用 OOMKilled 循环重启，促销期间订单服务崩溃
 

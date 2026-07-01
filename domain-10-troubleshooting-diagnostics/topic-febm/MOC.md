@@ -1,6 +1,7 @@
 ---
 title: topic-febm MOC
 description: topic-febm 专题导航页，覆盖 10 篇文档
+summary: topic-febm 专题导航页，覆盖 10 篇文档
 category: moc
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - agent
 - gpu
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: expert
 reading_level: expert
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # topic-febm MOC.md|MOC]]
 

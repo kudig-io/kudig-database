@@ -1,12 +1,15 @@
 ---
 title: calico v3.1 Release Notes
 description: calico v3.1 Release Notes — Kubernetes 生产运维知识库
+summary: calico v3.1 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
 - release-notes
 - changelog
 - calico
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # calico v3.1 Release Notes
 

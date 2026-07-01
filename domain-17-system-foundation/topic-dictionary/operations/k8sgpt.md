@@ -1,6 +1,9 @@
 ---
 title: K8sGPT AI 诊断助手
-description: 'K8sGPT 是 CNCF Sandbox 项目，利用 AI/LLM 技术自动扫描 Kubernetes 集群中的问题并提供诊断建议，将复杂的 K8s 故障排查...'
+description: K8sGPT 是 CNCF Sandbox 项目，利用 AI/LLM 技术自动扫描 Kubernetes 集群中的问题并提供诊断建议，将复杂的
+  K8s 故障排查...
+summary: K8sGPT 是 CNCF Sandbox 项目，利用 AI/LLM 技术自动扫描 Kubernetes 集群中的问题并提供诊断建议，将复杂的 K8s
+  故障排查...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - operations
 - ai
 - diagnostics
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # K8sGPT AI 诊断助手（K8sGPT）
 

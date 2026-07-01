@@ -1,12 +1,15 @@
 ---
 title: Wiki Lint Report — 2026-05-21
 description: '- `AGENTS` — Agent 配置文件，不需要入链'
+summary: '- `AGENTS` — Agent 配置文件，不需要入链'
 category: general
 tags:
 - k8s
 - prometheus
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Wiki Lint Report 2026-05-21

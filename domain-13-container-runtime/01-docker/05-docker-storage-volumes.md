@@ -1,6 +1,7 @@
 ---
 title: Docker 存储与数据卷
 description: '# Docker 存储与数据卷'
+summary: '# Docker 存储与数据卷'
 category: docker
 tags:
 - docker
@@ -8,6 +9,8 @@ tags:
 - image
 - opa
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -40,8 +43,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
-created: "2026-05-23"
 ---
+
+
 
 # Docker 存储与数据卷
 

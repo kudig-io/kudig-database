@@ -1,7 +1,10 @@
 ---
 title: KUDIG API → 文档映射
-description: '| `Pod` | v1 | 最小部署单元 | [[domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md|11 pod lifecycle events]] |
-  [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod fta]] |'
+description: '| `Pod` | v1 | 最小部署单元 | [[domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md|11
+  pod lifecycle events]] | [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod
+  fta]] |'
+summary: '| `Pod` | v1 | 最小部署单元 | [[domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md|11
+  pod lifecycle events]] | [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md...'
 category: general
 tags:
 - k8s
@@ -14,6 +17,8 @@ tags:
 - ingress
 - gateway
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: KUDIG API → 文档映射

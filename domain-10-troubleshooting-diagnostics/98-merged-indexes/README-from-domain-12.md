@@ -1,6 +1,7 @@
 ---
 title: Domain-12 故障排查 (Troubleshooting)
 description: 'title: Domain-12 故障排查 (Troubleshooting)'
+summary: 'title: Domain-12 故障排查 (Troubleshooting)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - kafka
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ prerequisites:
 - etcd-basics
 - kafka-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Domain-12 故障排查 (Troubleshooting)

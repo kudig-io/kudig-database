@@ -1,6 +1,7 @@
 ---
 title: 03 - Pod 完整规格说明书
 description: 'description: ''- [Pod 概述](#pod-概述)'''
+summary: 'description: ''- [Pod 概述](#pod-概述)'''
 category: general
 tags:
 - yaml
@@ -13,6 +14,8 @@ tags:
 - coredns
 - containerd
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 03 - Pod 完整规格说明书
 description: '- [Pod 概述](#pod-概述)'
@@ -3128,6 +3132,8 @@ Pod 是 Kubernetes 中最核心的资源对象,理解其完整规格对于构建
 - 05-statefulset-reference
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
 

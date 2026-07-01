@@ -1,6 +1,7 @@
 ---
 title: HPA 异常故障树分析 (skills)
 description: ALG_OR --> ALG1[阈值配置不当]
+summary: ALG_OR --> ALG1[阈值配置不当]
 category: general
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - hpa
 - pdb
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 fta_id: FTA-HPA-001
 component: Hpa
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "HPA 异常故障树分析"

@@ -1,6 +1,9 @@
 ---
 title: Paralus 访问控制
-description: 'Paralus 是 CNCF Sandbox 项目，为 Kubernetes 提供集中式的访问控制和审计平台，支持 SSO、RBAC 和 kubectl 访问代...'
+description: Paralus 是 CNCF Sandbox 项目，为 Kubernetes 提供集中式的访问控制和审计平台，支持 SSO、RBAC 和
+  kubectl 访问代...
+summary: Paralus 是 CNCF Sandbox 项目，为 Kubernetes 提供集中式的访问控制和审计平台，支持 SSO、RBAC 和 kubectl
+  访问代...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - security
 - access-control
 - multi-cluster
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Paralus 访问控制（Paralus）
 

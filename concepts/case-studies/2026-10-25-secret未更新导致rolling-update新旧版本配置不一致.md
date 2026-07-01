@@ -1,14 +1,19 @@
 ---
-category: "synthesis"
-tags: ["synthesis"]
-date: "2026-10-25"
-title: "Secret未更新导致Rolling Update新旧版本配置不一致"
-skill: "14-configmap-secret-failure"
-severity: "P1"
-created: "2026-05-23"
-updated: "2026-05-23"
+title: Secret未更新导致Rolling Update新旧版本配置不一致
+summary: Secret未更新导致Rolling Update新旧版本配置不一致：Secret更新后，Deployment执行Rolling Update，但旧版本Pod仍使用旧Secret，导致新旧Pod行为不一致，用户请求出现随机认证失败。
+category: synthesis
+tags:
+- synthesis
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-10-25'
+skill: 14-configmap-secret-failure
+severity: P1
 last_updated: 2026-05-23
 ---
+
+
 
 # Secret未更新导致Rolling Update新旧版本配置不一致
 

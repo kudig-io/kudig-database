@@ -1,6 +1,7 @@
 ---
 title: P1-4 决策树 Mermaid 可视化规范与实例
 description: '## 1. 可视化标准概述'
+summary: '## 1. 可视化标准概述'
 category: general
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - daemonset
 - ingress
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # P1-4 决策树 Mermaid 可视化规范与实例
 

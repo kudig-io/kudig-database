@@ -1,6 +1,7 @@
 ---
 title: Certificate / TLS 证书知识图谱索引
 description: '## 知识图谱'
+summary: '## 知识图谱'
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - etcd
 - apiserver
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - cncf-ecosystem
 - etcd-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 # Certificate / TLS 证书知识图谱索引
 

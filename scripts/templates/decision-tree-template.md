@@ -1,13 +1,18 @@
 ---
-title: "{{组件名称}} 决策树模板"
-description: "决策树模板，用于故障排查和操作决策"
+title: '{{组件名称}} 决策树模板'
+description: 决策树模板，用于故障排查和操作决策
+summary: 决策树模板，用于故障排查和操作决策
 category: template
-tags: [template, decision-tree, troubleshooting]
-last_updated: "2026-05"
-
-tier: peripheral
-created: "2026-05-23"
+tags:
+- template
+- decision-tree
+- troubleshooting
+tier: supporting
+created: '2026-05-23'
+last_updated: 2026-05
 ---
+
+
 
 # {{组件名称}} 决策树
 

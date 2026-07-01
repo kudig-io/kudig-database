@@ -1,6 +1,7 @@
 ---
 title: 日志聚合与 Loki
 description: '# 日志聚合与 Loki'
+summary: '# 日志聚合与 Loki'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kafka
 - elasticsearch
 - daemonset
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,9 +37,9 @@ prerequisites:
 - kafka-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 日志聚合与 Loki
 

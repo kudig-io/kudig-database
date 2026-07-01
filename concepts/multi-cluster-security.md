@@ -1,6 +1,7 @@
 ---
 title: 多集群环境下的安全架构
 description: '# 多集群环境下的安全架构'
+summary: '# 多集群环境下的安全架构'
 category: synthesis
 tags:
 - multi-cluster
@@ -13,6 +14,8 @@ tags:
 - opa
 - falco
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,15 +32,16 @@ prerequisites:
 - service-mesh-basics
 - cilium-basics
 - policy-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/cilium.md]]"
-    type: uses
-  - target: "[[entities/external-secrets.md]]"
-    type: uses
-  - target: "[[entities/falco.md]]"
-    type: related_to
+- target: '[[entities/cilium.md]]'
+  type: uses
+- target: '[[entities/external-secrets.md]]'
+  type: uses
+- target: '[[entities/falco.md]]'
+  type: related_to
 ---
+
+
 
 # 多集群环境下的安全架构
 

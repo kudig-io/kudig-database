@@ -1,6 +1,7 @@
 ---
 title: 'Day 22: Service 基础实操'
 description: '**日期**: Week 4 Day 1 | **主题**: Service 类型与配置实践 | **版本**: K8s 1.28-1.33'
+summary: '**日期**: Week 4 Day 1 | **主题**: Service 类型与配置实践 | **版本**: K8s 1.28-1.33'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rag
 - cilium
 - flannel
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,8 +38,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 22: [[Service|Service]] 基础实操
 

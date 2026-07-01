@@ -1,6 +1,7 @@
 ---
 title: WebAssembly 云原生基础
 description: 1. [WebAssembly 概述](#1-webassembly-概述)
+summary: 1. [WebAssembly 概述](#1-webassembly-概述)
 category: webassembly-cloud-native
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - redis
 - hpa
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # WebAssembly 云原生基础
 # WebAssembly Cloud Native Fundamentals

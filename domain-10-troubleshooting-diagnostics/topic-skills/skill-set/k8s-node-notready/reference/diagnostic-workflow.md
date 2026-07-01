@@ -1,6 +1,7 @@
 ---
 title: 诊断工作流 / Diagnostic Workflow
 description: '- [Phase 2: 深度检查（只读，零风险，需 SSH）](#phase-2-深度检查只读零风险需-ssh)'
+summary: '- [Phase 2: 深度检查（只读，零风险，需 SSH）](#phase-2-深度检查只读零风险需-ssh)'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - calico
 - containerd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -38,8 +41,9 @@ prerequisites:
 skill_id: SKILL-DIAGNOSTIC_WORKFLOW-001
 skill_name: 诊断工作流 / Diagnostic Workflow
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 # 诊断工作流 / Diagnostic Workflow
 
@@ -304,7 +308,7 @@ created: "2026-05-23"
 - **命令**:
   ```bash
   # 检查 kubelet 日志中的 PLEG 相关信息
-  ssh <node-ip> "journalctl -u kubelet --since '30 minutes ago' --no-pager | grep -i 'PLEG\|pleg'"
+  ssh <node-ip> "journalctl -u kubelet --since '30 minutes ago' --no-pager | grep -i 'PLEG|pleg'"
 
   # 检查 kubelet 的 healthz 端点（如果 kubelet 仍在运行）
   ssh <node-ip> "curl -sk https://localhost:10250/healthz"

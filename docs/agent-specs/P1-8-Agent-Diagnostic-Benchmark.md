@@ -1,6 +1,7 @@
 ---
 title: Agent 诊断能力评估基准 (Agent Diagnostic Benchmark)
 description: '**用途**: 建立量化指标，评估 Agent 在问题排查中的准确率、覆盖率与效率'
+summary: '**用途**: 建立量化指标，评估 Agent 在问题排查中的准确率、覆盖率与效率'
 category: general
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - rbac
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Agent 诊断能力评估基准 (Agent Diagnostic Benchmark)
 

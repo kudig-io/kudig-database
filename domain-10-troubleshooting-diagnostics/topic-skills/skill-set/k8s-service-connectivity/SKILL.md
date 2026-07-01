@@ -1,41 +1,50 @@
 ---
-skill_id: "SKILL-NET-002"
-skill_name: "Service 连通性问题诊断与修复"
-version: "1.0.0"
-category: "network"
-severity_range: "P1-P2"
+title: '[[Service|Service]] 连通性问题诊断与修复'
+summary: '[[Service|Service]] 连通性问题诊断与修复：Service 连通性问题通常由 Endpoints 缺失、Selector 不匹配、NetworkPolicy
+  阻断或 kube-proxy 异常引起。'
+category: network
+tags:
+- skills
+- service-connectivity
+- troubleshooting
+- visibility/public
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+skill_id: SKILL-NET-002
+skill_name: Service 连通性问题诊断与修复
+version: 1.0.0
+severity_range: P1-P2
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
-estimated_resolution_time: "5-20min"
-risk_level: "low"
-agent_execution_mode: "L2-semi-auto"
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+estimated_resolution_time: 5-20min
+risk_level: low
+agent_execution_mode: L2-semi-auto
 trigger_keywords:
-  - "Connection refused"
-  - "Timeout"
-  - "No route to host"
-  - "Service unreachable"
+- Connection refused
+- Timeout
+- No route to host
+- Service unreachable
 trigger_events:
-  - "FailedToUpdateEndpoint"
-  - "FailedToCreateEndpoint"
+- FailedToUpdateEndpoint
+- FailedToCreateEndpoint
 trigger_metrics:
-  - 'kube_endpoint_address_available'
-  - 'kube_service_info'
+- kube_endpoint_address_available
+- kube_service_info
 prerequisites:
-  - "kubectl-basics"
-  - "service-networking"
+- kubectl-basics
+- service-networking
 related_skills:
-  - "SKILL-NET-001"
-  - "SKILL-NET-003"
-created: "2026-05-23"
-updated: "2026-05-23"
+- SKILL-NET-001
+- SKILL-NET-003
 last_updated: 2026-05-23
-title: "[[Service|Service]] 连通性问题诊断与修复"
-tags: ["skills", "service-connectivity", "troubleshooting", "visibility/public"]
 ---
+
+
 
 # [[Service|Service]] 连通性问题诊断与修复
 
@@ -220,7 +229,7 @@ flowchart TD
 | 工具 | 用途 | 典型命令 |
 |:---|:---|:---|
 | kubectl | Kubernetes CLI | `kubectl get/describe/logs/exec` |
-| jq | JSON处理 | `kubectl get ... -o json \| jq ...` |
+| jq | JSON处理 | `kubectl get ... -o json | jq ...` |
 | openssl | 证书检查 | `openssl x509 -in <cert> -noout -dates` |
 | tcpdump | 网络抓包 | `tcpdump -i any port <port> -n` |
 | strace | 系统调用追踪 | `strace -p <pid> -f` |
@@ -278,7 +287,7 @@ flowchart TD
 **诊断过程**：
 1. 同节点 Pod → Service ClusterIP 正常，跨节点超时
 2. 检查 Calico Pod 状态：`kubectl get pods -n calico-system` 全部 Running
-3. 检查 Calico 日志发现 eBPF datapath 加载失败：`kubectl logs -n calico-system -l k8s-app=calico-node | grep -i "bpf\|fail"`
+3. 检查 Calico 日志发现 eBPF datapath 加载失败：`kubectl logs -n calico-system -l k8s-app=calico-node | grep -i "bpf|fail"`
 4. 查看节点内核版本：`uname -r` 发现部分节点内核为 4.18，低于 eBPF 模式要求的 5.3+
 5. 检查 FelixConfiguration：`kubectl get felixconfiguration default -o yaml | grep bpfEnabled`
 
@@ -547,3 +556,7 @@ arping -I <iface> <lb-ip>
 - [[concepts/cni-networking-model.md|CNI 网络模型]] — Kubernetes 容器网络接口与 Service 网络原理
 
 ```
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

@@ -1,6 +1,7 @@
 ---
 title: OpenClaw File-First 架构与 Agent Harness 集成指南 (domain-14-ai-ml-infra)
 description: 'title: OpenClaw File-First 架构与 Agent Harness 集成指南'
+summary: 'title: OpenClaw File-First 架构与 Agent Harness 集成指南'
 category: general
 tags:
 - ai
@@ -9,6 +10,8 @@ tags:
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: OpenClaw File-First 架构与 Agent Harness 集成指南
 description: '# OpenClaw File-First 架构与 Agent Harness 集成指南'

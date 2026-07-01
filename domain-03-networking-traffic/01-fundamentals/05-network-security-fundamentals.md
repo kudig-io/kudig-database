@@ -1,6 +1,7 @@
 ---
 title: 网络安全基础
 description: '# 网络安全基础'
+summary: '# 网络安全基础'
 category: network-fundamentals
 tags:
 - network
@@ -12,6 +13,8 @@ tags:
 - opa
 - elasticsearch
 - ebpf
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -48,8 +51,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 网络安全基础
 

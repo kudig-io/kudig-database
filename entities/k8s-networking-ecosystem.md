@@ -1,6 +1,7 @@
 ---
 title: 网络体系：CNI、Service、Ingress、Gateway API 与多集群网络
 description: '# 网络体系'
+summary: '# 网络体系'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - flannel
 - calico
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # 网络体系
 

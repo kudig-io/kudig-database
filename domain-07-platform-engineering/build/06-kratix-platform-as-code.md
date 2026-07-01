@@ -1,6 +1,7 @@
 ---
 title: Kratix 平台即代码 (Kratix Platform as Code)
 description: 'description: ''<!-- chunk: 概述 (Overview)'' -->## 概述 (Overview)'''
+summary: 'description: ''<!-- chunk: 概述 (Overview)'' -->## 概述 (Overview)'''
 category: general
 tags:
 - platform
@@ -13,6 +14,8 @@ tags:
 - flux
 - docker
 - opa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Kratix 平台即代码 (Kratix Platform as Code)
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'

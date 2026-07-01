@@ -1,12 +1,15 @@
 ---
 title: K8S 讲师角色设定与场景规范 [resources]
 description: '- 课程设计者'
+summary: '- 课程设计者'
 category: learning
 tags:
 - k8s
 - training
 - hands-on
 - coredns
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: K8S 讲师角色设定与场景规范

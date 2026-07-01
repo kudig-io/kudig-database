@@ -1,6 +1,7 @@
 ---
 title: 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns)
 description: '# 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns)'
+summary: '# 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns)'
 category: workloads
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - daemonset
 - job
 - cronjob
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -57,8 +60,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
-created: "2026-05-23"
 ---
+
+
 
 # 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns)
 

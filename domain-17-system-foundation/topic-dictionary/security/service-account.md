@@ -1,6 +1,9 @@
 ---
 title: 服务账号
-description: 'ServiceAccount 是 Kubernetes 中为 Pod 提供身份标识的资源。Pod 通过关联的 ServiceAccount 向 API Serv...'
+description: ServiceAccount 是 Kubernetes 中为 Pod 提供身份标识的资源。Pod 通过关联的 ServiceAccount
+  向 API Serv...
+summary: ServiceAccount 是 Kubernetes 中为 Pod 提供身份标识的资源。Pod 通过关联的 ServiceAccount 向 API
+  Serv...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - service-account
 - rbac
 - security
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 服务账号
 

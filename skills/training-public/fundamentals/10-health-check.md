@@ -1,6 +1,7 @@
 ---
 title: 第八课：健康检查 - Probe 详解 [fundamentals]
 description: 'title: 第八课：健康检查 - Probe 详解'
+summary: 'title: 第八课：健康检查 - Probe 详解'
 category: learning
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - hpa
 - job
 - cronjob
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - gpu-ml-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 第八课：健康检查 - Probe 详解

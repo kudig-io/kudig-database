@@ -1,6 +1,7 @@
 ---
 title: Java Kubernetes Client 与 Operator SDK 开发指南
 description: 'title: Java Kubernetes Client 与 Operator SDK 开发指南'
+summary: 'title: Java Kubernetes Client 与 Operator SDK 开发指南'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - crd
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Java [[Kubernetes|Kubernetes]] Client 与 Operator SDK 开发指南
 description: '# Java Kubernetes Client 与 Operator SDK 开发指南'

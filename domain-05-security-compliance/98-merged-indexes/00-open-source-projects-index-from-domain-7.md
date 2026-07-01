@@ -1,6 +1,7 @@
 ---
 title: Domain-7 安全 — 开源项目索引
 description: '# Domain-7 安全 — 开源项目索引'
+summary: '# Domain-7 安全 — 开源项目索引'
 category: security
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - prometheus
 - opa
 - falco
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -53,8 +56,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-7 安全 — 开源项目索引
 

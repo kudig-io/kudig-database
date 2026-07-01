@@ -1,6 +1,7 @@
 ---
 title: Volcano [entities]
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - harbor
 - crd
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 - Volcano
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Volcano
 

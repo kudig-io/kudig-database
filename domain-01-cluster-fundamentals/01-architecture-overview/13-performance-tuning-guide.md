@@ -1,6 +1,7 @@
 ---
 title: 13 - Kubernetes 性能调优专项指南
 description: '# 13 - Kubernetes 性能调优专项指南'
+summary: '# 13 - Kubernetes 性能调优专项指南'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - cilium
 - calico
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -62,8 +65,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 13 - [[Kubernetes|Kubernetes]] 性能调优专项指南
 

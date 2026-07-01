@@ -1,6 +1,7 @@
 ---
 title: 第九章：FTA 作为 AI Agent 的知识骨架 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用'''
+summary: 'description: ''**所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用'''
 category: fta
 tags:
 - fta
@@ -10,6 +11,8 @@ tags:
 - istio
 - ingress
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -43,8 +46,9 @@ prerequisites:
 fta_id: FTA-09_AS_AGENT_KNOWLEDGE_SKELETON-001
 component: 09 As Agent Knowledge Skeleton
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: 第九章：FTA 作为 AI Agent 的知识骨架
 description: '**所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用'

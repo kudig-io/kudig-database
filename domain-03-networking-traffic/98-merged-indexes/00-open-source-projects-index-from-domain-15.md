@@ -1,6 +1,7 @@
 ---
 title: Domain-15 网络基础 — 开源项目索引
 description: '# Domain-15 网络基础 — 开源项目索引'
+summary: '# Domain-15 网络基础 — 开源项目索引'
 category: network-fundamentals
 tags:
 - network
@@ -13,6 +14,8 @@ tags:
 - flannel
 - calico
 - coredns
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -51,8 +54,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-15 网络基础 — 开源项目索引
 

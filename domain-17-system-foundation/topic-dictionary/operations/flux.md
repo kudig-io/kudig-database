@@ -1,6 +1,7 @@
 ---
 title: Flux
-description: 'Flux 是 CNCF 毕业项目，提供 Kubernetes 原生的 GitOps 持续交付能力。它通过自动化从 Git 仓库拉取配置并同步到集群，支持多租户、...'
+description: Flux 是 CNCF 毕业项目，提供 Kubernetes 原生的 GitOps 持续交付能力。它通过自动化从 Git 仓库拉取配置并同步到集群，支持多租户、...
+summary: Flux 是 CNCF 毕业项目，提供 Kubernetes 原生的 GitOps 持续交付能力。它通过自动化从 Git 仓库拉取配置并同步到集群，支持多租户、...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - flux
 - gitops
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Flux
 

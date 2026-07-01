@@ -1,6 +1,7 @@
 ---
 title: Athenz 身份认证与授权
-description: 'Athenz 是 Yahoo 开源并捐赠给 CNCF 的服务平台，提供基于 X.509 证书的服务身份认证和细粒度角色授权（RBAC），专为大规模微服务和云原生...'
+description: Athenz 是 Yahoo 开源并捐赠给 CNCF 的服务平台，提供基于 X.509 证书的服务身份认证和细粒度角色授权（RBAC），专为大规模微服务和云原生...
+summary: Athenz 是 Yahoo 开源并捐赠给 CNCF 的服务平台，提供基于 X.509 证书的服务身份认证和细粒度角色授权（RBAC），专为大规模微服务和云原生...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - security
 - identity
 - authorization
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Athenz 身份认证与授权（Athenz）
 

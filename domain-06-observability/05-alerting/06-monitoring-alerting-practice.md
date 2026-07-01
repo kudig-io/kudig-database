@@ -1,6 +1,7 @@
 ---
 title: 06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)
 description: '# 06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)'
+summary: '# 06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)'
 category: observability
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - etcd
 - prometheus
 - job
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -62,8 +65,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # 06 - 监控告警实战与最佳实践 (Monitoring|Monitoring Alerting]] Practice)
 

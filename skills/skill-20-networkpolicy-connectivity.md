@@ -1,6 +1,9 @@
 ---
 title: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting (skills)
-description: '| S1 | 新部署 Pod 无法访问已有服务 | `kubectl exec` 测试连通性 | 0.85 | 应用启动失败 → SKILL-POD-001 |'
+description: '| S1 | 新部署 Pod 无法访问已有服务 | `kubectl exec` 测试连通性 | 0.85 | 应用启动失败 → SKILL-POD-001
+  |'
+summary: '| S1 | 新部署 Pod 无法访问已有服务 | `kubectl exec` 测试连通性 | 0.85 | 应用启动失败 → SKILL-POD-001
+  |'
 category: skills
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - 连接被拒绝
 - prometheus
 - cilium
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +38,9 @@ prerequisites:
 - prometheus-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[NetworkPolicy|NetworkPolicy]] 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 

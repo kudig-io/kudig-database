@@ -1,7 +1,9 @@
 ---
 title: Server 模式与 HTTP API
-description: '**文档类型**: 平台集成专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Server, HTTP API, OpenAPI 3.1, SDK, SSE, Headless,
-  Stainless, Hono'
+description: '**文档类型**: 平台集成专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Server, HTTP
+  API, OpenAPI 3.1, SDK, SSE, Headless, Stainless, Hono'
+summary: '**文档类型**: 平台集成专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Server, HTTP API,
+  OpenAPI 3.1, SDK, SSE, Headless, Stainless, Hono'
 category: ai-coding
 tags:
 - ai
@@ -10,6 +12,8 @@ tags:
 - code-generation
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +33,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Server 模式与 HTTP API
 

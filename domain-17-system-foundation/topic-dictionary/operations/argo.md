@@ -1,6 +1,9 @@
 ---
 title: Argo
-description: 'Argo 是 CNCF 毕业项目集合，包含 Argo CD（GitOps 持续部署）、Argo Workflows（容器原生工作流引擎）、Argo Rollou...'
+description: Argo 是 CNCF 毕业项目集合，包含 Argo CD（GitOps 持续部署）、Argo Workflows（容器原生工作流引擎）、Argo
+  Rollou...
+summary: Argo 是 CNCF 毕业项目集合，包含 Argo CD（GitOps 持续部署）、Argo Workflows（容器原生工作流引擎）、Argo
+  Rollou...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +12,8 @@ tags:
 - gitops
 - cicd
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Argo
 

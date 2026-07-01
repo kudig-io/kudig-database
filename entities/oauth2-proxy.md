@@ -1,6 +1,7 @@
 ---
 title: OAuth2 Proxy [entities]
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - redis
 - crd
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 # OAuth2 Proxy
 

@@ -1,6 +1,7 @@
 ---
 title: 证书管理与 TLS 配置
 description: '# 证书管理与 TLS 配置'
+summary: '# 证书管理与 TLS 配置'
 category: security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - scheduler
 - controller-manager
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -62,8 +65,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # 证书管理与 TLS 配置
 

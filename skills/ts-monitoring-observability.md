@@ -1,6 +1,7 @@
 ---
 title: 监控可观测性排查
 description: '# 监控可观测性排查'
+summary: '# 监控可观测性排查'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - kafka
 - elasticsearch
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # 监控可观测性排查
 

@@ -1,6 +1,9 @@
 ---
 title: 30 - 动态资源分配 (Dynamic Resource Allocation)
-description: '**适用版本**: Kubernetes v1.30+ (Alpha/Beta 演进中) | **最后更新**: 2026-04 | **文档类型**: 特性设计文档'
+description: '**适用版本**: Kubernetes v1.30+ (Alpha/Beta 演进中) | **最后更新**: 2026-04 | **文档类型**:
+  特性设计文档'
+summary: '**适用版本**: Kubernetes v1.30+ (Alpha/Beta 演进中) | **最后更新**: 2026-04 | **文档类型**:
+  特性设计文档'
 category: control-plane
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - prometheus
 - containerd
 - cri-o
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -68,8 +73,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 30 - 动态资源分配 ([[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]])
 

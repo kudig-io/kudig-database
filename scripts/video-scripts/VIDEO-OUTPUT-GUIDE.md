@@ -1,6 +1,7 @@
 ---
 title: 数字人视频输出建议 (video-scripts)
 description: 本文档提供数字人视频生成的配置建议，包括平台选择、参数设置、内容优化等。
+summary: 本文档提供数字人视频生成的配置建议，包括平台选择、参数设置、内容优化等。
 category: general
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - ingress
 - rbac
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 数字人视频输出建议
 

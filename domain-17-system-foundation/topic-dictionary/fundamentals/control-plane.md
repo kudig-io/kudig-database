@@ -1,12 +1,15 @@
 ---
 title: 控制平面
-description: '控制平面（Control Plane）是 Kubernetes 集群的管理层，负责维护集群状态、处理 API 请求、执行调度和协调所有组件的工作。控制平面由一组...'
+description: 控制平面（Control Plane）是 Kubernetes 集群的管理层，负责维护集群状态、处理 API 请求、执行调度和协调所有组件的工作。控制平面由一组...
+summary: 控制平面（Control Plane）是 Kubernetes 集群的管理层，负责维护集群状态、处理 API 请求、执行调度和协调所有组件的工作。控制平面由一组...
 category: dictionary
 tags:
 - k8s
 - glossary
 - control-plane
 - architecture
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 控制平面
 

@@ -1,6 +1,7 @@
 ---
 title: 11-基础设施即代码
 description: 'description: ''<!-- chunk: 📋 概述'' -->## 📋 概述'''
+summary: 'description: ''<!-- chunk: 📋 概述'' -->## 📋 概述'''
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cronjob
 - ingress
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - iac-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 11-基础设施即代码
 description: '<!-- chunk: 📋 概述' -->## 📋 概述'

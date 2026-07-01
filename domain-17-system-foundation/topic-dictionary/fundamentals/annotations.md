@@ -1,6 +1,7 @@
 ---
 title: 注解
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - terminology
 - helm
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -24,8 +27,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 # 注解
 

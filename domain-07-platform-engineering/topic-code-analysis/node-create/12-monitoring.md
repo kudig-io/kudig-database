@@ -1,6 +1,7 @@
 ---
 title: 节点监控 — metrics-server / node-exporter / kubelet metrics
 description: 'title: 节点监控 metrics-server node-exporter kubelet metrics'
+summary: 'title: 节点监控 metrics-server node-exporter kubelet metrics'
 category: general
 tags:
 - reference
@@ -13,6 +14,8 @@ tags:
 - coredns
 - docker
 - opa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 - monitoring-basics
 - etcd-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 节点监控 metrics-server node-exporter kubelet metrics
 description: '# 节点监控 — metrics-server / node-exporter / kubelet metrics'
@@ -624,6 +628,8 @@ curl -k https://localhost:10250/stats/summary
 | `node-exporter` | `prometheus/node_exporter` | 主机指标采集 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]

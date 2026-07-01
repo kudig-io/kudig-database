@@ -1,6 +1,7 @@
 ---
 title: Communication between Nodes and the Control Plane（节点与控制平面之间的通信）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - terminology
 - kubelet
 - agent
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -29,9 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # Communication between Nodes and the Control Plane（节点与控制平面之间的通信）
 

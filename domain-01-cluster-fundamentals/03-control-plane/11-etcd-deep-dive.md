@@ -1,6 +1,7 @@
 ---
 title: etcd 深度解析
 description: 深入解析 etcd 分布式键值存储的架构原理、Raft 共识协议、MVCC 数据模型、Watch 机制、Lease 生命周期、备份恢复与性能调优
+summary: 深入解析 etcd 分布式键值存储的架构原理、Raft 共识协议、MVCC 数据模型、Watch 机制、Lease 生命周期、备份恢复与性能调优
 category: domain-01-cluster-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - disaster-recovery
 - apiserver
 - scheduler
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -83,8 +86,9 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md
   type: fta
   desc: 备份恢复故障树
-created: "2026-05-23"
 ---
+
+
 
 # [[etcd]] 深度解析 (etcd Deep Dive)
 

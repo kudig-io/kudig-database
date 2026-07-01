@@ -1,12 +1,19 @@
 ---
-title: "报告标题"
+title: 报告标题
+summary: 报告标题：远程顾问模式的核心交付流程是：概念理解 → 诊断推理 → 对话指导 → 修复确认。这四个环节必须形成闭环。
 category: reports
-tags: ["reports", "visibility/public"]
-sources: ["auto-generated"]
+tags:
+- reports
+- visibility/public
+tier: supporting
+sources:
+- auto-generated
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # KUDIG 生产环境 llm-wiki 后续待办评估 V2
 
@@ -215,3 +222,7 @@ Domain-19（landscape-references）有 1,614 个文件，占全库的 29%。抽�
 ---
 
 *评估完成: 2026-05-21 | 评估标准: 生产级 AI 消费 + 人类专家阅读 | 下次评估: P0 修复完成后*
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

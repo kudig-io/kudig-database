@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 命令输出 → 根因解析语料库 [topic-structural-trouble-shooting]
 description: 'title: Kubernetes 命令输出 → 根因解析语料库'
+summary: 'title: Kubernetes 命令输出 → 根因解析语料库'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - calico
 - coredns
 - containerd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -43,8 +46,9 @@ prerequisites:
 - cni-basics
 - redis-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] 命令输出 → 根因解析语料库
 description: '# Kubernetes 命令输出 → 根因解析语料库'

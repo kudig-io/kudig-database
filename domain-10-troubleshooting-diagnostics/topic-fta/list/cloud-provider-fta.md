@@ -1,6 +1,7 @@
 ---
 title: 云平台集成异常故障树分析 (skills)
 description: '- **目标**：覆盖云平台 API 失败、负载均衡操作失败、云盘/存储集成异常、网络资源耗尽与配额限制的关键成因与路径。'
+summary: '- **目标**：覆盖云平台 API 失败、负载均衡操作失败、云盘/存储集成异常、网络资源耗尽与配额限制的关键成因与路径。'
 category: skills
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - ingress
 - rag
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 fta_id: FTA-CLOUD_PROVIDER-001
 component: Cloud Provider
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 # 云平台集成异常故障树分析
 

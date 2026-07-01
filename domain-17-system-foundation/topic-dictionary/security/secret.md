@@ -1,12 +1,16 @@
 ---
 title: 密钥
-description: 'Secret 是 Kubernetes 中用于存储敏感数据的 API 资源，如密码、Token、TLS 证书等。它提供了比 ConfigMap 更强的安全控制机...'
+description: Secret 是 Kubernetes 中用于存储敏感数据的 API 资源，如密码、Token、TLS 证书等。它提供了比 ConfigMap
+  更强的安全控制机...
+summary: Secret 是 Kubernetes 中用于存储敏感数据的 API 资源，如密码、Token、TLS 证书等。它提供了比 ConfigMap 更强的安全控制机...
 category: dictionary
 tags:
 - k8s
 - glossary
 - secret
 - security
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 密钥
 

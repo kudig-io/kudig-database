@@ -1,6 +1,7 @@
 ---
 title: etcd 异常故障树分析 (skills)
 description: '- **范围**：成员可用性、读写性能、磁盘与 IO、网络与时钟、证书与访问控制、碎片与压缩。'
+summary: '- **范围**：成员可用性、读写性能、磁盘与 IO、网络与时钟、证书与访问控制、碎片与压缩。'
 category: skills
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - job
 - cronjob
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 fta_id: FTA-ETCD-001
 component: Etcd
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 # etcd 异常故障树分析
 

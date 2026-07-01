@@ -1,6 +1,7 @@
 ---
 title: 可用区故障恢复手册
 description: '□ 监控告警: AZ 级别不可用'
+summary: '□ 监控告警: AZ 级别不可用'
 category: domain
 tags:
 - disaster-recovery
@@ -9,6 +10,8 @@ tags:
 - sre
 - istio
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - sre-practices
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 # 可用区故障恢复手册
 

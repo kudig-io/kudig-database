@@ -1,6 +1,7 @@
 ---
 title: 13 - 准入控制与 Webhook 机制深度解析
 description: 'title: 13 - 准入控制与 Webhook 机制深度解析'
+summary: 'title: 13 - 准入控制与 Webhook 机制深度解析'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - daemonset
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 13 - 准入控制与 Webhook 机制深度解析
 description: '# 13 - 准入控制与 Webhook 机制深度解析'

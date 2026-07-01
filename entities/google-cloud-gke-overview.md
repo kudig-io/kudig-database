@@ -1,6 +1,7 @@
 ---
 title: Google Cloud GKE (Google Kubernetes Engine) 概述
 description: 'title: Google Cloud GKE (Google Kubernetes Engine) 概述'
+summary: 'title: Google Cloud GKE (Google Kubernetes Engine) 概述'
 category: general
 tags:
 - cloud
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - istio
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ prerequisites:
 - gpu-scheduling-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Google Cloud GKE (Google [[Kubernetes|Kubernetes]] Engine) 概述
 description: '# Google Cloud GKE (Google Kubernetes Engine) 概述'
@@ -1045,6 +1049,8 @@ options:
 - 定期成本审查
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[hot|hot]]
 - [[log|log]]

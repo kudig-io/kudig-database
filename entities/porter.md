@@ -1,13 +1,17 @@
 ---
 title: Porter (entities)
-description: 'summary: "Porter 是一个 CNAB (Cloud Native Application Bundle) 包管理器，用于将复杂的云原生应用及其所有依赖（Helm Charts、Terraform 模块、Kubernetes
-  manifests、脚本等）打包为可分发、可安装的 Bundle。它解决了"我的应用需要先部署数据库，再配置网络，最后部署应用"这类多步骤安装流程的自动化问题，支'
+description: 'summary: "Porter 是一个 CNAB (Cloud Native Application Bundle) 包管理器，用于将复杂的云原生应用及其所有依赖（Helm
+  Charts、Terraform 模块、Kubernetes manifests、脚本等）打包为可分发、可安装的 Bundle。它解决了"我的应用需要先部署数据库，再配置网络，最后部署应用"这类多步骤安装流程的自动化问题，支'
+summary: 'summary: "Porter 是一个 CNAB (Cloud Native Application Bundle) 包管理器，用于将复杂的云原生应用及其所有依赖（Helm
+  Charts、Terraform 模块、Kubernetes manifests、脚本等）打包为可分发、可安装的 Bundle。它解决了"我的应用需要先部署数据库，再配置网络，最后部署应用"这类多步骤安装流程的自动化问题，支'
 category: general
 tags:
 - k8s
 - helm
 - crd
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +27,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - iac-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "Porter"

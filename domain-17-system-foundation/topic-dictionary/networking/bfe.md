@@ -1,6 +1,7 @@
 ---
 title: BFE 负载均衡引擎
-description: 'BFE（Baidu Front End）是百度开源的七层负载均衡引擎，已在百度内部大规模使用，支持多租户、高级流量管理和丰富的扩展插件，适用于超大规模互联网架构...'
+description: BFE（Baidu Front End）是百度开源的七层负载均衡引擎，已在百度内部大规模使用，支持多租户、高级流量管理和丰富的扩展插件，适用于超大规模互联网架构...
+summary: BFE（Baidu Front End）是百度开源的七层负载均衡引擎，已在百度内部大规模使用，支持多租户、高级流量管理和丰富的扩展插件，适用于超大规模互联网架构...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - networking
 - load-balancer
 - proxy
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # BFE 负载均衡引擎（BFE）
 

@@ -1,6 +1,9 @@
 ---
 title: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation (skills)
-description: '| S5 | 新节点未自动部署 DaemonSet Pod | 新节点加入后检查 | 0.90 | 节点 NotReady → SKILL-NODE-001 |'
+description: '| S5 | 新节点未自动部署 DaemonSet Pod | 新节点加入后检查 | 0.90 | 节点 NotReady → SKILL-NODE-001
+  |'
+summary: '| S5 | 新节点未自动部署 DaemonSet Pod | 新节点加入后检查 | 0.90 | 节点 NotReady → SKILL-NODE-001
+  |'
 category: skills
 tags:
 - k8s
@@ -11,6 +14,8 @@ tags:
 - 节点缺少 pod
 - node missing pod
 - flannel
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +34,9 @@ trigger_keywords:
 - Remediation
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[DaemonSet|DaemonSet]] 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 

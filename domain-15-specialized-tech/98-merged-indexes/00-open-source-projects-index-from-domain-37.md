@@ -1,6 +1,8 @@
 ---
 title: Domain-37 边缘计算 — 开源项目索引
-description: '| **KubeEdge** | 边缘 K8s 方案 | Graduated | v1.20.0 | 7k+ | Apache-2.0 |'
+description: '| **KubeEdge** | 边缘 K8s 方案 | Graduated | v1.20.0 | 7k+ | Apache-2.0
+  |'
+summary: '| **KubeEdge** | 边缘 K8s 方案 | Graduated | v1.20.0 | 7k+ | Apache-2.0 |'
 category: edge-computing
 tags:
 - k8s
@@ -9,6 +11,8 @@ tags:
 - kubeedge
 - wasm
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -38,8 +42,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Domain-37 边缘计算 — 开源项目索引
 

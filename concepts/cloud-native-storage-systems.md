@@ -1,23 +1,27 @@
 ---
 title: 云原生存储系统对比
+summary: 云原生存储系统对比：以及运维团队通过 CLI/GUI 逐卷管理。扩展需要采购新设备，故障域大。
 category: concepts
 tags:
-  - storage
-  - longhorn
-  - rook
-  - ceph
-  - openebs
-  - juicefs
-  - k8s
+- storage
+- longhorn
+- rook
+- ceph
+- openebs
+- juicefs
+- k8s
+tier: supporting
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 related:
-  - "[[concepts/csi-drivers.md|csi drivers]]"
-  - "[[concepts/storageclass.md|storageclass]]"
-  - "[[concepts/pv.md|pv]]"
-  - "[[domain-19-landscape-references/98-merged-indexes/index.md|index]]"
+- '[[concepts/csi-drivers.md|csi drivers]]'
+- '[[concepts/storageclass.md|storageclass]]'
+- '[[concepts/pv.md|pv]]'
+- '[[domain-19-landscape-references/98-merged-indexes/index.md|index]]'
 ---
+
+
 
 # 云原生存储系统对比
 

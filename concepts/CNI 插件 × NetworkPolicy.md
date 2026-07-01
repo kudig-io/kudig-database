@@ -1,7 +1,11 @@
 ---
 title: CNI 插件 × NetworkPolicy
-description: '[[entities/cni-plugins.md|cni plugins]] 实现 Pod 的网络连接，[[entities/networkpolicy.md|networkpolicy]] 定义 Pod 级别的网络安全策略。wiki 将两者分属网络实现层和安全策略层，但它们是**
-  inseparable 的共生关系**：NetworkPolicy 只是 K8s API 中的一个资源定义——它描述了"哪些 Pod 可以通信"的意图，但完全没有定义"如何实现这'
+description: '[[entities/cni-plugins.md|cni plugins]] 实现 Pod 的网络连接，[[entities/networkpolicy.md|networkpolicy]]
+  定义 Pod 级别的网络安全策略。wiki 将两者分属网络实现层和安全策略层，但它们是** inseparable 的共生关系**：NetworkPolicy
+  只是 K8s API 中的一个资源定义——它描述了"哪些 Pod 可以通信"的意图，但完全没有定义"如何实现这'
+summary: '[[entities/cni-plugins.md|cni plugins]] 实现 Pod 的网络连接，[[entities/networkpolicy.md|networkpolicy]]
+  定义 Pod 级别的网络安全策略。wiki 将两者分属网络实现层和安全策略层，但它们是** inseparable 的共生关系**：NetworkPolicy
+  只是 K8s API 中的一个资源定义—...'
 category: synthesis
 tags:
 - k8s
@@ -14,6 +18,8 @@ tags:
 - kubelet
 - istio
 - cilium
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,17 +39,18 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/cilium.md]]"
-    type: uses
-  - target: "[[entities/istio.md]]"
-    type: uses
-  - target: "[[entities/kubelet.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md]]"
-    type: uses
+- target: '[[entities/cilium.md]]'
+  type: uses
+- target: '[[entities/istio.md]]'
+  type: uses
+- target: '[[entities/kubelet.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md]]'
+  type: uses
 ---
+
+
 
 # CNI 插件 × NetworkPolicy
 

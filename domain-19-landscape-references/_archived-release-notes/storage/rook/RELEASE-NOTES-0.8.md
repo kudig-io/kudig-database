@@ -1,12 +1,15 @@
 ---
 title: rook v0.8 Release Notes
 description: rook v0.8 Release Notes — Kubernetes 生产运维知识库
+summary: rook v0.8 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
 - release-notes
 - changelog
 - rook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cncf-ecosystem
-created: "2026-05-23"
 ---
+
+
 
 # [[Rook|rook]] v0.8 Release Notes
 

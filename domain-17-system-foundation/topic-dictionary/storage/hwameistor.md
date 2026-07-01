@@ -1,6 +1,7 @@
 ---
 title: HwameiStor 本地存储
-description: 'HwameiStor 是 DaoCloud 开源的 CNCF Sandbox 项目，为 Kubernetes 提供高可用本地存储管理，自动管理本地磁盘并通过数据...'
+description: HwameiStor 是 DaoCloud 开源的 CNCF Sandbox 项目，为 Kubernetes 提供高可用本地存储管理，自动管理本地磁盘并通过数据...
+summary: HwameiStor 是 DaoCloud 开源的 CNCF Sandbox 项目，为 Kubernetes 提供高可用本地存储管理，自动管理本地磁盘并通过数据...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - storage
 - local-storage
 - ha
+tier: supporting
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # HwameiStor 本地存储（HwameiStor）
 

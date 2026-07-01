@@ -1,6 +1,8 @@
 ---
 title: Dapr 分布式应用运行时
-description: 'Dapr（Distributed Application Runtime）是 CNCF 孵化项目，为微服务提供标准化的构建块（Building Blocks），...'
+description: Dapr（Distributed Application Runtime）是 CNCF 孵化项目，为微服务提供标准化的构建块（Building
+  Blocks），...
+summary: Dapr（Distributed Application Runtime）是 CNCF 孵化项目，为微服务提供标准化的构建块（Building Blocks），...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - platform-engineering
 - microservices
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Dapr 分布式应用运行时（Dapr）
 

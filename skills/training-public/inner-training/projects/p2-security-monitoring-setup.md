@@ -1,6 +1,7 @@
 ---
 title: 'P2: 安全与监控体系搭建'
 description: 'title: P2: 安全与监控体系搭建'
+summary: 'title: P2: 安全与监控体系搭建'
 category: learning
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - prometheus
 - rbac
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -26,8 +29,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: P2: 安全与监控体系搭建

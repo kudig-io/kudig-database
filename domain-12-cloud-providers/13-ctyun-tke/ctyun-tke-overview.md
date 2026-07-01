@@ -1,6 +1,7 @@
 ---
 title: 天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述
 description: 'title: 天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述'
+summary: 'title: 天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述'
 category: general
 tags:
 - cloud
@@ -13,6 +14,8 @@ tags:
 - ingress
 - rbac
 - networkpolicy
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - troubleshooting-methodology
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 天翼云 TKE (Tianyi Cloud [[Kubernetes|Kubernetes]] Engine) 概述
 description: '# 天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述'
@@ -767,7 +771,7 @@ echo
 echo "=== 成本优化建议 ==="
 
 # 检查闲置资源
-IDLE_RESOURCES=$(kubectl get pods --all-namespaces --no-headers | grep -c "Evicted\|Completed")
+IDLE_RESOURCES=$(kubectl get pods --all-namespaces --no-headers | grep -c "Evicted|Completed")
 if [ $IDLE_RESOURCES -gt 0 ]; then
     echo "⚠️  发现 $IDLE_RESOURCES 个闲置资源，建议清理"
 fi
@@ -1148,7 +1152,7 @@ fi
 
 # 5. 安全合规检查
 echo "5. 安全合规检查..."
-SECURITY_EVENTS=$(kubectl get events --all-namespaces | grep -c "SecurityViolation\|ComplianceIssue" || echo "0")
+SECURITY_EVENTS=$(kubectl get events --all-namespaces | grep -c "SecurityViolation|ComplianceIssue" || echo "0")
 echo "安全合规事件: $SECURITY_EVENTS"
 
 if [ $SECURITY_EVENTS -eq 0 ]; then
@@ -1479,6 +1483,8 @@ echo "风险评估报告已生成: telecom-upgrade-risk-assessment.md"
 天翼云TKE凭借中国电信的网络基础设施优势和深厚的电信级运维经验，为政企客户提供了高性能、高安全、高可靠的容器化解决方案。通过深度融合5G网络、边缘计算等电信特色能力，以及完善的合规性保障，成为政府、金融、运营商等行业客户的理想选择。
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

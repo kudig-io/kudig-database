@@ -1,6 +1,7 @@
 ---
 title: 节点注册流程 — TLS Bootstrap 源码分析
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - reference
@@ -10,6 +11,8 @@ tags:
 - containerd
 - webhook
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 节点注册流程 TLS Bootstrap 源码分析
 description: '## 概述'
@@ -542,7 +546,7 @@ hostname
 | Token 过期 | Token TTL 到期 (默认 24h) | `kubeadm token list` | `kubeadm token create` 新建 |
 | Node 已存在 | 重复 join | `kubectl get nodes` | `kubectl delete node <node>` 后重新 join |
 | PodCIDR 未分配 | node-cidr-manager 问题 | `kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.podCIDR}{"\n"}{end}'` | 检查 kube-controller-manager 日志 |
-| `discovery-token-ca-cert-hash` 不匹配 | CA 证书变更 | 重新获取 CA hash | `openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt \| openssl rsa -pubin -outform der \| openssl dgst -sha256 -hex` |
+| `discovery-token-ca-cert-hash` 不匹配 | CA 证书变更 | 重新获取 CA hash | `openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der | openssl dgst -sha256 -hex` |
 | `cannot join: node already registered` | 节点已注册但 kubelet 重启 | `kubectl get node <name>` | 删除旧 Node 对象或使用已有 kubeconfig |
 | CSR 被拒绝 | csrapproving controller 安全策略 | `kubectl describe csr <name>` | 检查 CSR 内容，确认节点身份 |
 
@@ -562,6 +566,8 @@ hostname
 | `AllocatePodCIDR` | `pkg/controller/node/ipam/` | PodCIDR 分配 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

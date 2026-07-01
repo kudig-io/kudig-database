@@ -1,6 +1,7 @@
 ---
 title: 'Day 2: ACK SDK & API'
 description: '## 概述'
+summary: '## 概述'
 category: learning
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - flannel
 - coredns
 - ingress
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 2: ACK SDK & API

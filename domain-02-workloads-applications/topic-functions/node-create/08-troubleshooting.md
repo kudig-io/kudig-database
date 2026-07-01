@@ -1,6 +1,7 @@
 ---
 title: 节点故障排查手册 (topic-code-analysis)
 description: 'title: 节点故障排查手册'
+summary: 'title: 节点故障排查手册'
 category: general
 tags:
 - reference
@@ -12,6 +13,8 @@ tags:
 - coredns
 - containerd
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - platform-engineering-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 节点故障排查手册
 description: '# 节点故障排查手册'
@@ -558,7 +562,7 @@ openssl verify -CAfile /etc/kubernetes/pki/ca.crt /var/lib/kubelet/pki/kubelet-c
 | 容器无法启动 | `crictl logs <id>` | 镜像/配置/资源问题 | 检查镜像和配置 |
 | 网络不通 | `ip link/route` | CNI 问题 | 重启 CNI DaemonSet |
 | 磁盘满 | `df -h` | 镜像/日志堆积 | 清理磁盘 |
-| OOM | `dmesg \| grep kill` | 内存不足 | 减少资源/扩容 |
+| OOM | `dmesg | grep kill` | 内存不足 | 减少资源/扩容 |
 | 证书过期 | `openssl x509 -noout -dates` | 证书过期 | 续期证书 |
 | DNS 不通 | `nslookup kubernetes.default` | CoreDNS 异常 | 重启 CoreDNS |
 | Pod 一直 Pending | `kubectl describe pod` | 资源不足/调度约束 | 扩容/调整约束 |
@@ -579,6 +583,8 @@ openssl verify -CAfile /etc/kubernetes/pki/ca.crt /var/lib/kubelet/pki/kubelet-c
 | `probeManager` | `pkg/kubelet/prober/` | 健康检查探针 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]

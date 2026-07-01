@@ -1,6 +1,7 @@
 ---
 title: 'Day 26: FTA/FEBM 专题深化'
 description: 'title: Day 26: FTA/FEBM 专题深化'
+summary: 'title: Day 26: FTA/FEBM 专题深化'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - coredns
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,8 +38,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 26: FTA/FEBM 专题深化
@@ -255,7 +259,7 @@ curl -s 'http://prometheus:9090/api/v1/query?query=histogram_quantile(0.99,sum(r
 
 # 证据 E2: Pod 日志 - 连接超时错误
 echo "E2: Pod 日志中的错误"
-kubectl logs -l app=my-app --tail=100 | grep -i "timeout\|connection refused"
+kubectl logs -l app=my-app --tail=100 | grep -i "timeout|connection refused"
 # 预期输出:
 # 2026-05-18 10:25:30 ERROR Failed to connect to db-service:3306 - Connection timed out
 # 2026-05-18 10:26:15 ERROR Failed to connect to db-service:3306 - Connection timed out
@@ -303,7 +307,7 @@ kubectl get pods -n kube-system -l app=terway
 
 # 证据 E8: CNI 日志
 echo "E8: CNI 日志中的错误"
-kubectl logs -n kube-system terway-xxx --tail=200 | grep -i "error\|warn"
+kubectl logs -n kube-system terway-xxx --tail=200 | grep -i "error|warn"
 # 预期输出:
 # 2026-05-18 10:25:28 WARN IP allocation retry for pod 10.0.1.100
 # 2026-05-18 10:26:10 ERROR Failed to setup network for sandbox abc123: timeout

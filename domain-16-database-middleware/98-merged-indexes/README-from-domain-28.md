@@ -1,6 +1,7 @@
 ---
 title: 'Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Operations)'
 description: 'title: ''Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Operations)'''
+summary: 'title: ''Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Operations)'''
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - mysql
 - postgresql
 - kafka
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -42,8 +45,9 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Operations)'

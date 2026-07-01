@@ -1,11 +1,14 @@
 ---
 title: Understand-Anything 知识图谱质量评估与改造计划
 description: Understand-Anything 知识图谱质量评估与改造计划
+summary: Understand-Anything 知识图谱质量评估与改造计划
 category: reports
 tags:
 - k8s
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Understand-Anything 知识图谱质量评估与改造计划
 

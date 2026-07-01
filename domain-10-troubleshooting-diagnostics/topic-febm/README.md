@@ -1,6 +1,7 @@
 ---
-title: "topic-febm: FEBM 法医鉴定循证方法论深度解析 [topic-febm]"
+title: 'topic-febm: FEBM 法医鉴定循证方法论深度解析 [topic-febm]'
 description: '# topic-febm: FEBM 法医鉴定循证方法论深度解析'
+summary: '# topic-febm: FEBM 法医鉴定循证方法论深度解析'
 category: febm
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - agent
 - daemonset
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -33,8 +36,9 @@ prerequisites:
 - troubleshooting-methodology
 - ebpf-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # topic-febm: FEBM 法医鉴定循证方法论深度解析
 

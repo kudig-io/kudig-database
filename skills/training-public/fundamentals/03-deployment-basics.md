@@ -1,6 +1,7 @@
 ---
 title: 第三课：Deployment - 应用部署管理器 [fundamentals]
 description: 'title: 第三课：Deployment - 应用部署管理器'
+summary: 'title: 第三课：Deployment - 应用部署管理器'
 category: learning
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - hands-on
 - hpa
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 第三课：Deployment - 应用部署管理器

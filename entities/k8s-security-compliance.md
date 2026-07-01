@@ -1,6 +1,7 @@
 ---
 title: 安全合规：RBAC、网络安全策略、运行时安全与零信任架构
 description: '# 安全合规'
+summary: '# 安全合规'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - falco
 - ebpf
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - service-mesh-basics
 - ebpf-basics
-created: "2026-05-23"
 ---
+
+
 
 # 安全合规
 

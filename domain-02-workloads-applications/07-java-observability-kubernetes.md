@@ -1,6 +1,7 @@
 ---
 title: Java 可观测性 on Kubernetes 实践指南 (domain-02-workloads-applications)
 description: '# Java 可观测性 on Kubernetes 实践指南'
+summary: '# Java 可观测性 on Kubernetes 实践指南'
 category: java-kubernetes
 tags:
 - java
@@ -13,6 +14,8 @@ tags:
 - opa
 - redis
 - kafka
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -42,8 +45,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Java 可观测性 on [[Kubernetes|Kubernetes]] 实践指南
 

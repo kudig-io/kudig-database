@@ -1,15 +1,26 @@
 ---
-title: "[2026-06-10] [P1] CronJob 并发策略导致任务堆积"
+title: '[2026-06-10] [P1] CronJob 并发策略导致任务堆积'
+summary: '[2026-06-10] [P1] CronJob 并发策略导致任务堆积：04:30，数据库监控告警 postgres_active_connections
+  达到 800/800（max_connections=800）。在线服务 order-api、payment-api 的 P99 延迟从 150ms 飙升至 4s。'
 category: case-study
-tags: [production, incident, workloads, cronjob, job, batch]
-date: "2026-06-10"
+tags:
+- production
+- incident
+- workloads
+- cronjob
+- job
+- batch
+tier: core
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-06-10'
 severity: P1
-mttr: "22min"
+mttr: 22min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-06-10] CronJob 并发策略 Forbid 导致对账任务堆积，数据库连接池耗尽
 

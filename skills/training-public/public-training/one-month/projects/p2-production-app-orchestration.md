@@ -1,6 +1,7 @@
 ---
 title: '项目 P2: 生产级应用全栈编排'
 description: '- kubernetes statefulset deployment hpa 完整部署示例'
+summary: '- kubernetes statefulset deployment hpa 完整部署示例'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - statefulset
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,8 +35,9 @@ prerequisites:
 - gpu-ml-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 项目 P2: 生产级应用全栈编排

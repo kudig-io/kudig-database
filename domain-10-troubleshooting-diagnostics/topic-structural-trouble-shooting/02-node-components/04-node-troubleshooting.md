@@ -1,6 +1,7 @@
 ---
 title: 节点问题专项排查指南 [topic-structural-trouble-shooting]
 description: 'title: 节点问题专项排查指南'
+summary: 'title: 节点问题专项排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - containerd
 - docker
 - pdb
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -39,8 +42,9 @@ prerequisites:
 - troubleshooting-methodology
 - cni-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 节点问题专项排查指南
 description: '# 节点问题专项排查指南'
@@ -307,11 +311,11 @@ ps aux | wc -l
 cat /proc/sys/kernel/pid_max
 
 # 检查 OOM 事件
-dmesg | grep -i "oom\|out of memory"
+dmesg | grep -i "oom|out of memory"
 journalctl -k | grep -i oom
 
 # kubelet 资源预留配置
-cat /var/lib/kubelet/config.yaml | grep -A10 "eviction\|system"
+cat /var/lib/kubelet/config.yaml | grep -A10 "eviction|system"
 ```
 
 #### 2.2.3 调度相关检查
@@ -327,7 +331,7 @@ kubectl describe node <node-name> | grep -A10 Taints
 kubectl get node <node-name> -o jsonpath='{.metadata.labels}' | jq
 
 # 检查节点资源容量和可分配
-kubectl describe node <node-name> | grep -A15 "Capacity:\|Allocatable:"
+kubectl describe node <node-name> | grep -A15 "Capacity:|Allocatable:"
 
 # 检查 Pod 的 nodeSelector
 kubectl get pod <pod-name> -o jsonpath='{.spec.nodeSelector}'

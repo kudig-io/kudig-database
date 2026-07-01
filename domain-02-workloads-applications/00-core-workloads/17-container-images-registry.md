@@ -1,6 +1,7 @@
 ---
 title: 51 - 容器镜像管理与仓库 (Container Images & Registry)
 description: '# 51 - 容器镜像管理与仓库 (Container Images & Registry)'
+summary: '# 51 - 容器镜像管理与仓库 (Container Images & Registry)'
 category: workloads
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - helm
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -56,8 +59,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
-created: "2026-05-23"
 ---
+
+
 
 # 51 - 容器镜像管理与仓库 (Container Images & Registry)
 

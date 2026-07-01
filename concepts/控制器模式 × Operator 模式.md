@@ -1,7 +1,9 @@
 ---
 title: 控制器模式 × Operator 模式
-description: 控制器模式是 K8s 的核心自动化机制，Operator 模式是控制器模式的**领域专业化**。两者的关系如同"通用编程语言"与"领域特定语言"——控制器模式提供了协调循环、Informer、Workqueue 等通用框架，Operator
-  则在这个框架中编码了特定有状态应用（如数据库、消息队列、AI 训练集群）的运维知识。
+description: 控制器模式是 K8s 的核心自动化机制，Operator 模式是控制器模式的**领域专业化**。两者的关系如同"通用编程语言"与"领域特定语言"——控制器模式提供了协调循环、Informer、Workqueue
+  等通用框架，Operator 则在这个框架中编码了特定有状态应用（如数据库、消息队列、AI 训练集群）的运维知识。
+summary: 控制器模式是 K8s 的核心自动化机制，Operator 模式是控制器模式的**领域专业化**。两者的关系如同"通用编程语言"与"领域特定语言"——控制器模式提供了协调循环、Informer、Workqueue
+  等通用框架，Operator 则在这个框架中编码了特定有状态应用（如数据库、消息队列、AI 训练集群）的运维知识。
 category: synthesis
 tags:
 - k8s
@@ -14,6 +16,8 @@ tags:
 - prometheus
 - grafana
 - helm
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,17 +40,18 @@ prerequisites:
 - redis-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/deployment.md]]"
-    type: uses
-  - target: "[[entities/cloudnativepg.md]]"
-    type: related_to
-  - target: "[[entities/kubeflow.md]]"
-    type: related_to
-  - target: "[[entities/strimzi.md]]"
-    type: related_to
+- target: '[[entities/deployment.md]]'
+  type: uses
+- target: '[[entities/cloudnativepg.md]]'
+  type: related_to
+- target: '[[entities/kubeflow.md]]'
+  type: related_to
+- target: '[[entities/strimzi.md]]'
+  type: related_to
 ---
+
+
 
 # 控制器模式 × Operator 模式
 

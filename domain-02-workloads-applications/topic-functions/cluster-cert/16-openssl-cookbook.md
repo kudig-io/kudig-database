@@ -1,11 +1,14 @@
 ---
 title: OpenSSL 证书操作速查手册 (topic-code-analysis)
 description: 'description: 本文档汇总 Kubernetes 集群证书运维中最常用的 OpenSSL 命令，覆盖查看、验证、生成、转换、调试全场景。'
+summary: 'description: 本文档汇总 Kubernetes 集群证书运维中最常用的 OpenSSL 命令，覆盖查看、验证、生成、转换、调试全场景。'
 category: general
 tags:
 - reference
 - etcd
 - apiserver
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: OpenSSL 证书操作速查手册
 description: 本文档汇总 Kubernetes 集群证书运维中最常用的 OpenSSL 命令，覆盖查看、验证、生成、转换、调试全场景。
@@ -416,6 +420,8 @@ done
 | `PEM routines:get_name:no start line` | 检查文件格式 | 文件是 DER 而非 PEM |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

@@ -1,6 +1,7 @@
 ---
 title: 'Day 9: RAM 账号管理'
 description: 'title: Day 9: RAM 账号管理'
+summary: 'title: Day 9: RAM 账号管理'
 category: learning
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - hands-on
 - rbac
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 9: RAM 账号管理

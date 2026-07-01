@@ -1,6 +1,7 @@
 ---
 title: 第一章：FEBM 方法论原理与理论基础 (topic-febm)
 description: 'description: ''**所属系列**: FEBM 法医鉴定循证方法论深度解析'''
+summary: 'description: ''**所属系列**: FEBM 法医鉴定循证方法论深度解析'''
 category: febm
 tags:
 - febm
@@ -13,6 +14,8 @@ tags:
 - containerd
 - cri-o
 - docker
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -41,8 +44,9 @@ prerequisites:
 - ebpf-basics
 - etcd-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 第一章：FEBM 方法论原理与理论基础
 description: '**所属系列**: FEBM 法医鉴定循证方法论深度解析'

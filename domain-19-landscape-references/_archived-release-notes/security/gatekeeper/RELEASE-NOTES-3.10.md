@@ -1,6 +1,7 @@
 ---
 title: gatekeeper v3.10 Release Notes
 description: gatekeeper v3.10 Release Notes — Kubernetes 生产运维知识库
+summary: gatekeeper v3.10 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - job
 - webhook
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - cncf-ecosystem
 - helm-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 # gatekeeper v3.10 Release Notes
 

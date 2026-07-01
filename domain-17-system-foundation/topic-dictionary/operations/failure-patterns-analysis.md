@@ -1,6 +1,7 @@
 ---
 title: 02 - Kubernetes 故障模式与根因分析字典
 description: '**本文定位**: 这是一份 Kubernetes 故障分析的完整指南，涵盖问题分类、根因分析方法论、FMEA 分析、MTTR 优化、复盘流程和预防体系，帮助团队系统性地处理和预防问题。'
+summary: '**本文定位**: 这是一份 Kubernetes 故障分析的完整指南，涵盖问题分类、根因分析方法论、FMEA 分析、MTTR 优化、复盘流程和预防体系，帮助团队系统性地处理和预防问题。'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - jaeger
 - coredns
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,9 +37,9 @@ prerequisites:
 - etcd-basics
 - redis-basics
 - tracing-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 02 - [[Kubernetes|Kubernetes]] 故障模式与根因分析字典
 

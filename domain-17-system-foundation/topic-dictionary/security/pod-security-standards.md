@@ -1,6 +1,7 @@
 ---
 title: Pod 安全标准
 description: '# Pod 安全标准'
+summary: '# Pod 安全标准'
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - terminology
 - kubelet
 - opa
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -25,8 +28,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # Pod 安全标准
 

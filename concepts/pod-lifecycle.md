@@ -1,6 +1,7 @@
 ---
 title: Pod Lifecycle (concepts)
 description: '- [[concepts/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
+summary: '- [[concepts/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
 category: concepts
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - kubelet
 - statefulset
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 - Lifecycle
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Pod Lifecycle
 

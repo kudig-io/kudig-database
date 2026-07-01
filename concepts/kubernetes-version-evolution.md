@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 版本演进
 description: '| 标准化 | v1.14 - v1.17 | kubectl 成熟、kubeadm GA、拓扑感知调度 |'
+summary: '| 标准化 | v1.14 - v1.17 | kubectl 成熟、kubeadm GA、拓扑感知调度 |'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - docker
 - hpa
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 版本演进
 

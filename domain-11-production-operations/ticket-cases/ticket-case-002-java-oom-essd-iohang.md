@@ -2,6 +2,8 @@
 title: Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 description: 专有云 ACK 集群 Java 应用因堆内存不足触发 OOM，叠加 ESSD 磁盘 IO hang 导致 Pod 反复 CrashLoopBackOff
   的工单闭环样本。
+summary: 专有云 ACK 集群 Java 应用因堆内存不足触发 OOM，叠加 ESSD 磁盘 IO hang 导致 Pod 反复 CrashLoopBackOff
+  的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -12,6 +14,9 @@ tags:
 - crashloopbackoff
 - storage
 - p0
+tier: core
+created: '2026-06-26T09:15:00+08:00'
+updated: '2026-06-26T12:45:00+08:00'
 incident_id: INC-2026-ACK-002
 priority: P0
 severity: critical
@@ -23,9 +28,7 @@ skill_ref:
 - JVM 容器调优
 fta_ref:
 - 'FTA: Java OOM 与 ESSD IO hang'
-created: '2026-06-26T09:15:00+08:00'
-updated: '2026-06-26T12:45:00+08:00'
-last_updated: 2026-06-26T12:45:00+08:00
+last_updated: 2026-06-26 12:45:00+08:00
 difficulty: advanced
 reading_level: advanced
 audience:
@@ -49,13 +52,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -91,7 +96,7 @@ kubectl describe pod -n app-order order-api-7d9c4f8b5-xk2z9 | grep -A 10 -i reso
 kubectl top pod -n app-order -l app=order-api
 
 # 4. 进入节点查看 ESSD IO 与 dmesg
-kubectl debug node/cn-zhangjiakou.172.16.2.14 -it --image=registry.aliyuncs.com/acs/busybox -- nsenter -t 1 -m -u -i -n -- dmesg -T | grep -i "I/O error\|blocked\|hang"
+kubectl debug node/cn-zhangjiakou.172.16.2.14 -it --image=registry.aliyuncs.com/acs/busybox -- nsenter -t 1 -m -u -i -n -- dmesg -T | grep -i "I/O error|blocked|hang"
 
 # 5. 查询 ESSD 磁盘监控
 aliyun ecs DescribeDiskMonitorData \
@@ -206,7 +211,7 @@ kubectl get endpoints order-api -n app-order
 curl -s http://order-api.app-order.svc.cluster.local/health | head
 
 # 5. 查看是否再次 OOM
-kubectl logs -n app-order -l app=order-api --tail=100 | grep -i "OutOfMemoryError\|OOMKilled"
+kubectl logs -n app-order -l app=order-api --tail=100 | grep -i "OutOfMemoryError|OOMKilled"
 ```
 
 ## 回复客户话术

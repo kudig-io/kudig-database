@@ -1,6 +1,7 @@
 ---
 title: 知识图谱模板
 description: 使用此模板记录你的学习成果，构建个人知识图谱。每完成一个模块的学习，在对应区域用自己的语言总结核心概念、记录仍需加强的领域，并画出你理解的架构图。
+summary: 使用此模板记录你的学习成果，构建个人知识图谱。每完成一个模块的学习，在对应区域用自己的语言总结核心概念、记录仍需加强的领域，并画出你理解的架构图。
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - flannel
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-18
 difficulty: beginner
 reading_level: beginner
@@ -53,8 +56,9 @@ related_domains:
 related_topics:
 - domain-11-production-operations/topic-learn/public-training/one-month/resources/reading-sequence
 - domain-11-production-operations/topic-learn/public-training/one-month/resources/commands-cheatsheet
-created: "2026-05-23"
 ---
+
+
 
 # 知识图谱模板
 

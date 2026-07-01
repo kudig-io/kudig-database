@@ -1,6 +1,7 @@
 ---
 title: 疑难问题系统性排查方法论：配置优先（Configuration-First） [topic-structural-trouble-shooting]
 description: 'title: 疑难问题系统性排查方法论：配置优先（Configuration-First）'
+summary: 'title: 疑难问题系统性排查方法论：配置优先（Configuration-First）'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - ingress
 - gateway
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -40,8 +43,9 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 疑难问题系统性排查方法论：配置优先（Configuration-First）
 description: '# 疑难问题系统性排查方法论：配置优先（Configuration-First）'
@@ -309,7 +313,7 @@ kubectl get svc kube-dns -n kube-system -o jsonpath='{.spec.clusterIP}'
 
 ```bash
 # 检查 CoreDNS Deployment 配置
-kubectl get deployment coredns -n kube-system -o yaml | grep -A 5 'args\|configMap\|resources\|replicas'
+kubectl get deployment coredns -n kube-system -o yaml | grep -A 5 'args|configMap|resources|replicas'
 
 # 检查 CoreDNS Service selector 与 Pod label 是否匹配
 kubectl get svc kube-dns -n kube-system -o jsonpath='{.spec.selector}'

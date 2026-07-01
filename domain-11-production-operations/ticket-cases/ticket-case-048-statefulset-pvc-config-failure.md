@@ -2,6 +2,8 @@
 title: StatefulSet Pod 启动失败：PVC 未绑定与配置错误
 description: 专有云 ACK 集群 MySQL 主从 StatefulSet 发布时 Pod 持续 ContainerCreating，根因涉及 PVC
   未绑定、StorageClass 参数错误与 volumeClaimTemplates 配置冲突的工单闭环样本。
+summary: 专有云 ACK 集群 MySQL 主从 StatefulSet 发布时 Pod 持续 ContainerCreating，根因涉及 PVC 未绑定、StorageClass
+  参数错误与 volumeClaimTemplates 配置冲突的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -12,6 +14,9 @@ tags:
 - mysql
 - containercreating
 - p1
+tier: peripheral
+created: '2026-06-26T14:00:00+08:00'
+updated: '2026-06-26T17:15:00+08:00'
 incident_id: INC-2026-ACK-048
 priority: P1
 severity: high
@@ -25,9 +30,7 @@ skill_ref:
 - '[[domain-04-storage-data/04-stateful-app-storage/01-stateful-app-storage-patterns.md|有状态应用存储模式]]'
 fta_ref:
 - 'FTA: StatefulSet PVC 启动失败'
-created: '2026-06-26T14:00:00+08:00'
-updated: '2026-06-26T17:15:00+08:00'
-last_updated: 2026-06-26T17:15:00+08:00
+last_updated: 2026-06-26 17:15:00+08:00
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -52,15 +55,17 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-043-statefulset-pvc-unbound.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-043-statefulset-pvc-unbound.md]]'
   type: related_to
-- target: "[[concepts/statefulset.md]]"
+- target: '[[concepts/statefulset.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -101,7 +106,7 @@ kubectl get storageclass alicloud-disk-essd -o yaml
 # 4. 查看 CSI 插件 Pod 状态
 kubectl get pod -n kube-system -l app=csi-plugin
 kubectl get pod -n kube-system -l app=csi-provisioner
-kubectl logs -n kube-system -l app=csi-provisioner -c csi-provisioner --tail=200 | grep -i "mysql-prod\|fail\|error" | tail -30
+kubectl logs -n kube-system -l app=csi-provisioner -c csi-provisioner --tail=200 | grep -i "mysql-prod|fail|error" | tail -30
 
 # 5. 查看 Pod 创建事件
 kubectl describe pod mysql-prod-0 -n db-mysql | grep -A 30 Events
@@ -116,7 +121,7 @@ aliyun ecs DescribeDisks \
   --output cols=DiskId,Status,Size,Category rows=Disks.Disk[]
 
 # 7. 检查节点上 CSI 插件日志
-kubectl logs -n kube-system $(kubectl get pod -n kube-system -l app=csi-plugin -o jsonpath='{.items[0].metadata.name}') -c csi-plugin --tail=100 | grep -i "mysql\|fail\|error" | tail -20
+kubectl logs -n kube-system $(kubectl get pod -n kube-system -l app=csi-plugin -o jsonpath='{.items[0].metadata.name}') -c csi-plugin --tail=100 | grep -i "mysql|fail|error" | tail -20
 
 # 8. 通过 ASO 检查存储相关 CRD 状态
 kubectl get disk.csi.alibabacloud.com -n kube-system | head -10

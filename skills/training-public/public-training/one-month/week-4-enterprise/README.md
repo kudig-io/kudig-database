@@ -1,6 +1,7 @@
 ---
 title: 'Week 4: 企业级进阶期 (Days 22-28)'
 description: '- Kubernetes 企业级运维'
+summary: '- Kubernetes 企业级运维'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - gateway
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -38,8 +41,9 @@ prerequisites:
 - gitops-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Week 4: 企业级进阶期 (Days 22-28)

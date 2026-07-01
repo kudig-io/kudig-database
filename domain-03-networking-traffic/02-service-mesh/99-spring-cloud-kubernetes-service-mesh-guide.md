@@ -1,6 +1,7 @@
 ---
 title: Spring Cloud Kubernetes 与服务网格集成指南
 description: '# Spring Cloud Kubernetes 与服务网格集成指南'
+summary: '# Spring Cloud Kubernetes 与服务网格集成指南'
 category: service-mesh-microservices
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - opa
 - redis
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -63,8 +66,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
-created: "2026-05-23"
 ---
+
+
 
 # Spring Cloud [[Kubernetes|Kubernetes]] 与服务网格集成指南
 

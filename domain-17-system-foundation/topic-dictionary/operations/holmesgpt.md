@@ -1,6 +1,9 @@
 ---
 title: HolmesGPT AI 排障
-description: 'HolmesGPT 是 Robusta 开源的 AI 辅助 Kubernetes 排障工具，利用 LLM 分析告警和日志，自动生成故障诊断报告和修复建议，是 K...'
+description: HolmesGPT 是 Robusta 开源的 AI 辅助 Kubernetes 排障工具，利用 LLM 分析告警和日志，自动生成故障诊断报告和修复建议，是
+  K...
+summary: HolmesGPT 是 Robusta 开源的 AI 辅助 Kubernetes 排障工具，利用 LLM 分析告警和日志，自动生成故障诊断报告和修复建议，是
+  K...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - operations
 - ai
 - diagnostics
+tier: supporting
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # HolmesGPT AI 排障（HolmesGPT）
 

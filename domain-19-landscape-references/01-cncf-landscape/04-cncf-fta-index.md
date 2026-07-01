@@ -1,6 +1,7 @@
 ---
 title: CNCF 项目 FTA 索引
 description: CNCF 云原生项目故障树分析索引，聚合各主要 CNCF 项目的 FTA 文档、故障排查指南和最佳实践
+summary: CNCF 云原生项目故障树分析索引，聚合各主要 CNCF 项目的 FTA 文档、故障排查指南和最佳实践
 category: fta
 tags:
 - fta
@@ -13,6 +14,8 @@ tags:
 - etcd
 - apiserver
 - kubelet
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -54,8 +57,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # CNCF 项目 FTA 索引
 

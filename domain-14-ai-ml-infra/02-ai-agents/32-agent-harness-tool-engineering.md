@@ -1,6 +1,7 @@
 ---
 title: Agent Harness 工具工程：从设计到精简的完整实践 (domain-14-ai-ml-infra)
 description: 'title: Agent Harness 工具工程：从设计到精简的完整实践'
+summary: 'title: Agent Harness 工具工程：从设计到精简的完整实践'
 category: general
 tags:
 - ai
@@ -11,6 +12,8 @@ tags:
 - llm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Agent Harness 工具工程：从设计到精简的完整实践
 description: '# Agent Harness 工具工程：从设计到精简的完整实践'
@@ -818,7 +822,7 @@ K8S_SANDBOX_CONFIG = {
         r"kubectl\s+exec.*--\s*(rm|dd|mkfs|shutdown|reboot)",
         r"helm\s+(uninstall|delete|rollback)",
         r";\s*rm\s+",                    # 命令注入
-        r"\|\s*rm\s+",                   # 管道注入
+        r"|\s*rm\s+",                   # 管道注入
         r"\$\(",                         # 命令替换注入
         r"`",                            # 反引号注入
     ],

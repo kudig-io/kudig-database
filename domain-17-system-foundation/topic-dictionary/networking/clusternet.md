@@ -1,6 +1,8 @@
 ---
 title: Clusternet 多集群网络
-description: 'Clusternet 是 CNCF Sandbox 项目，提供 Kubernetes 多集群的管理和连接能力，通过代理模式实现跨集群 API 访问和资源分发，无...'
+description: Clusternet 是 CNCF Sandbox 项目，提供 Kubernetes 多集群的管理和连接能力，通过代理模式实现跨集群 API
+  访问和资源分发，无...
+summary: Clusternet 是 CNCF Sandbox 项目，提供 Kubernetes 多集群的管理和连接能力，通过代理模式实现跨集群 API 访问和资源分发，无...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - networking
 - multi-cluster
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Clusternet 多集群网络（Clusternet）
 

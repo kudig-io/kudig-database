@@ -1,11 +1,21 @@
 ---
 title: 远程顾问模式改进执行完成报告
+summary: 远程顾问模式改进执行完成报告：每个对话脚本包含：
 category: execution-report
-tags: [execution, remote-advisor, dialogue, skill, qa, completion]
-created: "2026-05-23"
-updated: "2026-05-23"
+tags:
+- execution
+- remote-advisor
+- dialogue
+- skill
+- qa
+- completion
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
 ---
+
+
 
 # 远程顾问模式改进执行完成报告
 

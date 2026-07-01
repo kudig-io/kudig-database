@@ -1,6 +1,7 @@
 ---
 title: 控制平面升级迁移问题处理指南 [topic-structural-trouble-shooting]
 description: 'title: 控制平面升级迁移问题处理指南'
+summary: 'title: 控制平面升级迁移问题处理指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - helm
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -40,8 +43,9 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 控制平面升级迁移问题处理指南
 description: '# 控制平面升级迁移问题处理指南'

@@ -1,6 +1,7 @@
 ---
 title: 06 - 存储性能与 IOPS
 description: '# 06 - 存储性能与 IOPS'
+summary: '# 06 - 存储性能与 IOPS'
 category: storage-fundamentals
 tags:
 - storage
@@ -12,6 +13,8 @@ tags:
 - mysql
 - job
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 06 - 存储性能与 IOPS
 
@@ -260,7 +264,7 @@ STORAGE_BENCHMARK() {
 测试设备: $device
 测试时间: $(date)
 测试结果摘要:
-$(grep -A 5 "read.*IOPS\|write.*IOPS" $result_dir/fio_randrw_4k.json)
+$(grep -A 5 "read.*IOPS|write.*IOPS" $result_dir/fio_randrw_4k.json)
 REPORT_END
 
     echo "测试完成，结果保存在: $result_dir"

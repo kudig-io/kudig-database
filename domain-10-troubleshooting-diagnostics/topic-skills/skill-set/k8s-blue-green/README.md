@@ -1,13 +1,22 @@
 ---
-title: "Skill: 蓝绿部署切换失败的诊断和修复"
+title: 'Skill: 蓝绿部署切换失败的诊断和修复'
+summary: 'Skill: 蓝绿部署切换失败的诊断和修复：蓝绿部署切换后流量未正确路由到新版本（绿环境），或切换后业务指标异常需要回滚。远程顾问模式下需验证
+  Service selector 变更、Pod 就绪状态及负载均衡器健康检查。'
 category: skill
-tags: ["skill", "domain-10", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- skill
+- domain-10
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # Skill: 蓝绿部署切换失败的诊断和修复
 
@@ -63,3 +72,7 @@ curl -H "Host: <domain>" http://<lb-ip>/version
 - [[concepts/blue-green-deployment.md|蓝绿部署]] — 蓝绿发布切换机制、流量路由与回滚策略
 - [[concepts/deployment-controller-architecture.md|Deployment 控制器架构]] — Deployment 滚动更新与副本管理原理
 - [[concepts/canary-deployment.md|金丝雀部署]] — 渐进式发布策略与流量权重控制
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

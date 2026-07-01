@@ -1,6 +1,7 @@
 ---
 title: 告警与 SLO 监控工程
 description: '# 告警与 SLO 监控工程'
+summary: '# 告警与 SLO 监控工程'
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - prometheus
 - grafana
 - hpa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -28,8 +31,9 @@ prerequisites:
 - cloud-provider-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # 告警与 SLO 监控工程
 

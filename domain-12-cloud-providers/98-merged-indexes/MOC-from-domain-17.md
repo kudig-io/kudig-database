@@ -1,11 +1,14 @@
 ---
 title: domain-12-cloud-providers MOC
 description: domain-12-cloud-providers 知识域导航页，覆盖 1 篇文档
+summary: domain-12-cloud-providers 知识域导航页，覆盖 1 篇文档
 category: moc
 tags:
 - k8s
 - moc
 - cloud
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-12-cloud-providers MOC
 

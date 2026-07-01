@@ -1,20 +1,24 @@
 ---
-title: "Ingress网关问题 — 远程顾问对话脚本"
-category: "troubleshooting"
-tags: ["networking", "remote-consultant"]
-created: "2026-05-23"
-updated: "2026-05-23"
+title: Ingress网关问题 — 远程顾问对话脚本
+summary: Ingress网关问题的远程顾问对话脚本，覆盖Nginx、Traefik、证书配置排查。
+category: troubleshooting
+tags:
+- networking
+- remote-consultant
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
-dialogue_id: "DIALOGUE-K8S_INGRESS_GATEWAY"
-skill_id: "k8s-ingress-gateway"
-version: "1.0.0"
-role: "remote-consultant"
-language: "zh"
-summary: "Ingress网关问题的远程顾问对话脚本，覆盖Nginx、Traefik、证书配置排查。"
+dialogue_id: DIALOGUE-K8S_INGRESS_GATEWAY
+skill_id: k8s-ingress-gateway
+version: 1.0.0
+role: remote-consultant
+language: zh
 relationships:
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]"
-    type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]'
+  type: uses
 ---
+
 
 # [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]/网关问题 — 远程顾问对话脚本
 

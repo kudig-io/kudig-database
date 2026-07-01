@@ -1,6 +1,7 @@
 ---
 title: 工作负载故障排查
 description: '# 工作负载故障排查'
+summary: '# 工作负载故障排查'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - daemonset
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - pod-lifecycle
-created: "2026-05-23"
 ---
+
+
 
 # 工作负载故障排查
 
@@ -58,17 +62,17 @@ created: "2026-05-23"
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
-| **Pending: 资源不足** | CPU/Memory 碎片化（节点剩余资源分散），ResourceQuota 耗尽，PriorityClass 优先级不足 | `kubectl describe pod \| grep "FailedScheduling"`；`kubectl describe node \| grep -A5 "Allocated resources"` | 扩容节点；调整 requests；使用 Cluster Autoscaler |
-| **Pending: 污点/亲和性** | 节点打了 `NoSchedule` 污点，Pod 未配置容忍；`requiredDuringScheduling` 亲和性无法满足 | `kubectl describe node \| grep Taints`；`kubectl get pod -o yaml \| grep -A10 affinity` | 添加 `tolerations`；放宽亲和性为 `preferred` |
-| **Pending: PVC 未绑定** | StorageClass 不存在、后端存储配额不足、`volumeBindingMode: WaitForFirstConsumer` 延迟绑定 | `kubectl get pvc \| grep Pending`；`kubectl describe pvc` | 检查 StorageClass；扩容后端；手动创建 PV |
-| **Pending: 拓扑约束** | `topologySpreadConstraints` 约束无法满足（如强制均匀分布但节点不足） | `kubectl get pod -o yaml \| grep -A5 topologySpreadConstraints` | 放宽 `whenUnsatisfiable: DoNotSchedule` 为 `ScheduleAnyway` |
+| **Pending: 资源不足** | CPU/Memory 碎片化（节点剩余资源分散），ResourceQuota 耗尽，PriorityClass 优先级不足 | `kubectl describe pod | grep "FailedScheduling"`；`kubectl describe node | grep -A5 "Allocated resources"` | 扩容节点；调整 requests；使用 Cluster Autoscaler |
+| **Pending: 污点/亲和性** | 节点打了 `NoSchedule` 污点，Pod 未配置容忍；`requiredDuringScheduling` 亲和性无法满足 | `kubectl describe node | grep Taints`；`kubectl get pod -o yaml | grep -A10 affinity` | 添加 `tolerations`；放宽亲和性为 `preferred` |
+| **Pending: PVC 未绑定** | StorageClass 不存在、后端存储配额不足、`volumeBindingMode: WaitForFirstConsumer` 延迟绑定 | `kubectl get pvc | grep Pending`；`kubectl describe pvc` | 检查 StorageClass；扩容后端；手动创建 PV |
+| **Pending: 拓扑约束** | `topologySpreadConstraints` 约束无法满足（如强制均匀分布但节点不足） | `kubectl get pod -o yaml | grep -A5 topologySpreadConstraints` | 放宽 `whenUnsatisfiable: DoNotSchedule` 为 `ScheduleAnyway` |
 
 #### 2.1.2 容器创建阶段问题
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
-| **ImagePullBackOff** | 镜像不存在、Registry 凭证过期、镜像层损坏、Registry 速率限制（Docker Hub 100次/6h） | `kubectl describe pod \| grep -A5 "Failed to pull image"`；`crictl pull <image>` 测试拉取 | 检查镜像 tag；重新创建 `imagePullSecrets`；使用镜像缓存代理 |
-| **CreateContainerError** | Volume 挂载失败（PVC 不存在、CSI 驱动问题）、SecurityContext 冲突（如 `runAsUser: 0` 被 PSP 拒绝） | `kubectl describe pod \| grep "CreateContainerError"`；`crictl ps -a \| grep Error` | 检查 Volume 状态；调整 SecurityC
+| **ImagePullBackOff** | 镜像不存在、Registry 凭证过期、镜像层损坏、Registry 速率限制（Docker Hub 100次/6h） | `kubectl describe pod | grep -A5 "Failed to pull image"`；`crictl pull <image>` 测试拉取 | 检查镜像 tag；重新创建 `imagePullSecrets`；使用镜像缓存代理 |
+| **CreateContainerError** | Volume 挂载失败（PVC 不存在、CSI 驱动问题）、SecurityContext 冲突（如 `runAsUser: 0` 被 PSP 拒绝） | `kubectl describe pod | grep "CreateContainerError"`；`crictl ps -a | grep Error` | 检查 Volume 状态；调整 SecurityC
 ...(截断)
 
 ---

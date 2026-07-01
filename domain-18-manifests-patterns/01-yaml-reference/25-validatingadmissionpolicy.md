@@ -1,6 +1,7 @@
 ---
 title: 25 - ValidatingAdmissionPolicy YAML 配置参考
 description: 'title: 25 - ValidatingAdmissionPolicy YAML 配置参考'
+summary: 'title: 25 - ValidatingAdmissionPolicy YAML 配置参考'
 category: general
 tags:
 - yaml
@@ -13,6 +14,8 @@ tags:
 - redis
 - hpa
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - prometheus-basics
 - redis-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 25 - ValidatingAdmissionPolicy YAML 配置参考
 description: '# 25 - ValidatingAdmissionPolicy YAML 配置参考'
@@ -2876,3 +2880,7 @@ kubectl describe validatingadmissionpolicy <name>
 - 24-admission-webhook-configuration
 - 26-priorityclass-runtimeclass
 - 27-hpa-autoscaling-v2
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub

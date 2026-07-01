@@ -1,6 +1,7 @@
 ---
 title: HPA/VPA/Cluster Autoscaler/Karpenter 联合容量管理
 description: 面向阿里云/专有云 K8s 的弹性容量管理方案，讲解 HPA、VPA、Cluster Autoscaler、Karpenter 的协同使用与最佳实践。
+summary: 面向阿里云/专有云 K8s 的弹性容量管理方案，讲解 HPA、VPA、Cluster Autoscaler、Karpenter 的协同使用与最佳实践。
 category: reliability
 tags:
 - k8s
@@ -11,6 +12,9 @@ tags:
 - autoscaling
 - alicloud
 - apsara-stack
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -44,9 +48,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # HPA/VPA/Cluster Autoscaler/Karpenter 联合容量管理
 

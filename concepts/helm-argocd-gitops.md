@@ -1,12 +1,21 @@
 ---
-title: "Helm 与 ArgoCD GitOps 工作流"
+title: Helm 与 ArgoCD GitOps 工作流
+summary: Helm 与 ArgoCD GitOps 工作流：Helm 负责模板化和打包，ArgoCD 负责声明式同步和漂移检测。两者结合形成完整的 GitOps
+  工作流。
 category: synthesis
-tags: [synthesis, helm, argocd, gitops]
+tags:
+- synthesis
+- helm
+- argocd
+- gitops
+tier: supporting
 sources: []
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # Helm 与 ArgoCD GitOps 工作流
 

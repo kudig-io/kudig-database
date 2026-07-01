@@ -1,6 +1,7 @@
 ---
 title: 14 - 策略引擎与合规
 description: '| 引擎 | 语言 | 架构 | 适用场景 | 学习曲线 | 社区活跃度 |'
+summary: '| 引擎 | 语言 | 架构 | 适用场景 | 学习曲线 | 社区活跃度 |'
 category: security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - statefulset
 - ingress
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -52,8 +55,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # 14 - 策略引擎与合规
 

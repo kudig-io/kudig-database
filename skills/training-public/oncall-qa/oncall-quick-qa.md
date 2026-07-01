@@ -1,6 +1,7 @@
 ---
 title: 工单数字人快速问答 - On-Call 速查 [oncall-qa]
 description: 'description: 用户来提问时，直接给出快速答案+排查命令+下一步指引。'
+summary: 'description: 用户来提问时，直接给出快速答案+排查命令+下一步指引。'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - docker
 - opa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -37,8 +40,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 工单数字人快速问答 - On-Call 速查

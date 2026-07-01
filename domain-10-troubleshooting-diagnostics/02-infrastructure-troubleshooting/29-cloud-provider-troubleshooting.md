@@ -1,6 +1,7 @@
 ---
 title: 云提供商集成故障排查
 description: '# 29 - 云提供商集成故障排查 (Cloud Provider Integration Troubleshooting)'
+summary: '# 29 - 云提供商集成故障排查 (Cloud Provider Integration Troubleshooting)'
 category: troubleshooting
 tags:
 - cloud-provider
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - coredns
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: intermediate
 reading_level: intermediate
@@ -60,8 +63,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/cloud-provider-fta.md
   label: '故障树: cloud-provider'
-created: "2026-05-23"
 ---
+
+
 
 # 29 - 云提供商集成故障排查 (Cloud Provider Integration Troubleshooting)
 

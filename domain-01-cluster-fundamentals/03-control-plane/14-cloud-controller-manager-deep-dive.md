@@ -1,6 +1,7 @@
 ---
 title: cloud-controller-manager 深度解析 (CCM Deep Dive)
 description: '# cloud-controller-manager 深度解析 (CCM Deep Dive)'
+summary: '# cloud-controller-manager 深度解析 (CCM Deep Dive)'
 category: control-plane
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - flannel
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -73,8 +76,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # cloud-controller-manager 深度解析 (CCM Deep Dive)
 
@@ -1934,7 +1938,7 @@ kubectl get pods -n kube-system -l k8s-app=cloud-controller-manager -o wide
 kubectl logs -n kube-system -l k8s-app=cloud-controller-manager -f --tail=100
 
 # 检查 CCM 日志 (过滤错误)
-kubectl logs -n kube-system -l k8s-app=cloud-controller-manager | grep -i "error\|failed\|warning"
+kubectl logs -n kube-system -l k8s-app=cloud-controller-manager | grep -i "error|failed|warning"
 
 # 检查 Leader 状态
 kubectl get lease -n kube-system cloud-controller-manager -o yaml
@@ -2064,7 +2068,7 @@ grep -E "node|Node|service|Service|loadbalancer|LoadBalancer|route|Route" <ccm-l
 │        └─ 是 → 继续步骤 3                                                   │
 │                                                                              │
 │  3. 检查 CCM 日志                                                           │
-│     kubectl logs -n kube-system <ccm-pod> | grep -i "error\|fail"           │
+│     kubectl logs -n kube-system <ccm-pod> | grep -i "error|fail"           │
 │     │                                                                        │
 │     └─ 常见错误:                                                             │
 │        ├─ "InvalidAccessKeyId" → 检查云凭证                                 │

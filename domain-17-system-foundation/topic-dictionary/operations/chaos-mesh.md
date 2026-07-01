@@ -1,6 +1,7 @@
 ---
 title: Chaos Mesh 混沌工程平台
-description: 'Chaos Mesh 是 PingCAP 开源并捐赠给 CNCF 的混沌工程平台，提供 Web UI 和声明式 API，支持对 Kubernetes、物理机和云...'
+description: Chaos Mesh 是 PingCAP 开源并捐赠给 CNCF 的混沌工程平台，提供 Web UI 和声明式 API，支持对 Kubernetes、物理机和云...
+summary: Chaos Mesh 是 PingCAP 开源并捐赠给 CNCF 的混沌工程平台，提供 Web UI 和声明式 API，支持对 Kubernetes、物理机和云...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - operations
 - chaos-engineering
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Chaos Mesh 混沌工程平台（Chaos Mesh）
 

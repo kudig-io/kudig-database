@@ -1,6 +1,7 @@
 ---
 title: cilium v0.8 Release Notes
 description: cilium v0.8 Release Notes — Kubernetes 生产运维知识库
+summary: cilium v0.8 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - changelog
 - cilium
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Cilium|cilium]] v0.8 Release Notes
 

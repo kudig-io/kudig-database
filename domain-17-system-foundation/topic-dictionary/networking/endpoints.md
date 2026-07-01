@@ -1,12 +1,17 @@
 ---
 title: 端点
-description: 'Endpoints 是 Service 后端 Pod 的 IP 地址和端口组合。当 Service 使用 selector 时，Kubernetes 自动创建对...'
+description: Endpoints 是 Service 后端 Pod 的 IP 地址和端口组合。当 Service 使用 selector 时，Kubernetes
+  自动创建对...
+summary: Endpoints 是 Service 后端 Pod 的 IP 地址和端口组合。当 Service 使用 selector 时，Kubernetes
+  自动创建对...
 category: dictionary
 tags:
 - k8s
 - glossary
 - endpoints
 - networking
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 端点
 

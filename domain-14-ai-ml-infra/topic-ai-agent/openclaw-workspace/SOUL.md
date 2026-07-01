@@ -1,6 +1,7 @@
 ---
 title: KuDig Doctor — 角色人格与绝对红线 (02-ai-agents)
 description: 'description: Kubernetes 运维诊断专家 Agent 的核心人格定义与行为红线'
+summary: 'description: Kubernetes 运维诊断专家 Agent 的核心人格定义与行为红线'
 category: general
 tags:
 - ai
@@ -12,6 +13,8 @@ tags:
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: KuDig Doctor — 角色人格与绝对红线
 description: [[Kubernetes|Kubernetes]] 运维诊断专家 Agent 的核心人格定义与行为红线

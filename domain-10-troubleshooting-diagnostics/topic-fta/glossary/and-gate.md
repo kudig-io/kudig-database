@@ -1,12 +1,15 @@
 ---
 title: 与门
-description: '与门（AND Gate）是故障树中的逻辑门，表示所有输入事件同时发生时输出事件才会发生。它代表了冗余系统中的保护机制。...'
+description: 与门（AND Gate）是故障树中的逻辑门，表示所有输入事件同时发生时输出事件才会发生。它代表了冗余系统中的保护机制。...
+summary: 与门（AND Gate）是故障树中的逻辑门，表示所有输入事件同时发生时输出事件才会发生。它代表了冗余系统中的保护机制。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - andgate
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 与门
 

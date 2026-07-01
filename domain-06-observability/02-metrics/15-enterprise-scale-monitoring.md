@@ -1,6 +1,7 @@
 ---
 title: 16 - 大规模集群监控最佳实践 (Enterprise Scale Monitoring Best Practices)
 description: '# 16 - 大规模集群监控最佳实践 (Enterprise Scale Monitoring Best Practices)'
+summary: '# 16 - 大规模集群监控最佳实践 (Enterprise Scale Monitoring Best Practices)'
 category: observability
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - istio
 - helm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -71,8 +74,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # 16 - 大规模集群监控最佳实践 (Enterprise Scale Monitoring Best Practices)
 

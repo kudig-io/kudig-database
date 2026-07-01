@@ -1,6 +1,7 @@
 ---
 title: SPIFFE / SPIRE 与工作负载身份
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - mysql
 - postgresql
 - daemonset
+tier: core
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,9 +37,9 @@ prerequisites:
 - cilium-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # [[SPIFFE|SPIFFE]] / [[SPIRE|SPIRE]] 与工作负载身份
 

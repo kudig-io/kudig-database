@@ -1,6 +1,7 @@
 ---
 title: topic-presentations MOC
 description: topic-presentations 专题导航页，覆盖 12 篇文档
+summary: topic-presentations 专题导航页，覆盖 12 篇文档
 category: moc
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - rbac
 - rag
 - gpu
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: beginner
 reading_level: beginner
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # topic-presentations MOC
 

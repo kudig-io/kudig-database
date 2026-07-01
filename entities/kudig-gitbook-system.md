@@ -1,6 +1,7 @@
 ---
 title: Gitbook 本地文档浏览系统与构建指南
 description: '## 概述'
+summary: '## 概述'
 category: reference
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - documentation
 - build
 - export
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 - 本地文档浏览系统与构建指南
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Gitbook 本地文档浏览系统
 

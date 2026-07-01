@@ -1,6 +1,7 @@
 ---
 title: 工单分类与路由规则（阿里云/专有云版）
 description: 工单优先级分类、关键词/意图到 Domain/Skill/FTA 的映射规则，以及阿里云专有云高频工单类型的路由示例。
+summary: 工单优先级分类、关键词/意图到 Domain/Skill/FTA 的映射规则，以及阿里云专有云高频工单类型的路由示例。
 category: production-operations
 tags:
 - ai-agent
@@ -13,8 +14,9 @@ tags:
 - skill
 - fta
 - priority
-created: "2026-06-26"
-updated: "2026-06-26"
+tier: core
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06-26
 difficulty: intermediate
 reading_level: intermediate
@@ -52,6 +54,8 @@ authors:
 - name: KUDIG Team
   role: contributor
 ---
+
+
 
 # 工单分类与路由规则（阿里云/专有云版）
 

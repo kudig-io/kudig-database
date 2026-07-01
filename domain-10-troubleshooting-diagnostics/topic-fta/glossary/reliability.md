@@ -1,11 +1,14 @@
 ---
 title: 可靠度
-description: '可靠度（Reliability，R(t)）是系统在时间 t 内无故障运行的概率。它是时间相关的可靠性指标。...'
+description: 可靠度（Reliability，R(t)）是系统在时间 t 内无故障运行的概率。它是时间相关的可靠性指标。...
+summary: 可靠度（Reliability，R(t)）是系统在时间 t 内无故障运行的概率。它是时间相关的可靠性指标。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -22,8 +25,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 可靠度
 

@@ -1,6 +1,9 @@
 ---
 title: 控制平面性能基准测试 (Control Plane Performance Benchmarking)
-description: 'description: ''**适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 性能测试指南'''
+description: 'description: ''**适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02
+  | **文档类型**: 性能测试指南'''
+summary: 'description: ''**适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 |
+  **文档类型**: 性能测试指南'''
 category: general
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - controller-manager
 - prometheus
 - grafana
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +42,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 控制平面性能基准测试 (Control Plane Performance Benchmarking)
 description: '**适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 性能测试指南'
@@ -1882,6 +1888,8 @@ performance_test_checklist:
 - 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
 

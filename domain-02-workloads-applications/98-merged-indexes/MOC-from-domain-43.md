@@ -1,6 +1,7 @@
 ---
 title: domain-java-kubernetes MOC
 description: domain-java-kubernetes 专题导航页，覆盖 6 篇文档
+summary: domain-java-kubernetes 专题导航页，覆盖 6 篇文档
 category: moc
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - java
 - argocd
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - gitops-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-java-kubernetes [[MOC|MOC]]
 

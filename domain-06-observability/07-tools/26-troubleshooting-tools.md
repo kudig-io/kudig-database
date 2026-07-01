@@ -1,6 +1,7 @@
 ---
 title: 100 - 故障排查增强工具
 description: 'title: 100 - 故障排查增强工具'
+summary: 'title: 100 - 故障排查增强工具'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - cilium
 - calico
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - cni-basics
 - tls-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 100 - 故障排查增强工具
 description: '# 100 - 故障排查增强工具'

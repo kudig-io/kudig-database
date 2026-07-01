@@ -1,51 +1,57 @@
 ---
 title: RabbitMQ on Kubernetes 生产指南
-description: 在阿里云专有云 ACK 集群中使用 RabbitMQ Cluster Operator 部署高可用 RabbitMQ：集群组建、镜像队列、Quorum Queue、持久化、监控告警与故障恢复。
+description: 在阿里云专有云 ACK 集群中使用 RabbitMQ Cluster Operator 部署高可用 RabbitMQ：集群组建、镜像队列、Quorum
+  Queue、持久化、监控告警与故障恢复。
+summary: 在阿里云专有云 ACK 集群中使用 RabbitMQ Cluster Operator 部署高可用 RabbitMQ：集群组建、镜像队列、Quorum
+  Queue、持久化、监控告警与故障恢复。
 category: database-middleware
 tags:
-  - rabbitmq
-  - message-queue
-  - operator
-  - quorum-queue
-  - mirrored-queue
-  - ha
-  - kubernetes
-  - alibaba-cloud
+- rabbitmq
+- message-queue
+- operator
+- quorum-queue
+- mirrored-queue
+- ha
+- kubernetes
+- alibaba-cloud
+tier: supporting
 created: '2026-06-29'
 updated: '2026-06-29'
 last_updated: 2026-06-29
 difficulty: advanced
 reading_level: advanced
 audience:
-  - 中间件工程师
-  - SRE
-  - 专有云运维
+- 中间件工程师
+- SRE
+- 专有云运维
 estimated_read_time: 17min
 intent_queries:
-  - RabbitMQ Kubernetes Operator 部署
-  - RabbitMQ 镜像队列与 Quorum Queue
-  - RabbitMQ on K8s 高可用配置
+- RabbitMQ Kubernetes Operator 部署
+- RabbitMQ 镜像队列与 Quorum Queue
+- RabbitMQ on K8s 高可用配置
 trigger_keywords:
-  - rabbitmq
-  - rabbitmq-cluster-operator
-  - quorum queue
-  - mirrored queue
-  - federation
-  - shovel
+- rabbitmq
+- rabbitmq-cluster-operator
+- quorum queue
+- mirrored queue
+- federation
+- shovel
 prerequisites:
-  - domain-16-database-middleware/03-message-queues/03-message-queue-comparison.md
-  - domain-16-database-middleware/03-message-queues/04-rocketmq-on-kubernetes.md
-  - domain-05-security-compliance/01-identity-access/README.md
+- domain-16-database-middleware/03-message-queues/03-message-queue-comparison.md
+- domain-16-database-middleware/03-message-queues/04-rocketmq-on-kubernetes.md
+- domain-05-security-compliance/01-identity-access/README.md
 k8s_versions:
-  - '1.28'
-  - '1.29'
-  - '1.30'
-  - '1.31'
-  - '1.32'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: KUDIG Team
-    role: contributor
+- name: KUDIG Team
+  role: contributor
 ---
+
+
 
 # RabbitMQ on Kubernetes 生产指南
 

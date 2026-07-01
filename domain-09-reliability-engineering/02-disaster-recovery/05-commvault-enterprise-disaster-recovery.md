@@ -1,6 +1,7 @@
 ---
 title: Commvault 企业级灾备与业务连续性深度实践
 description: 'title: Commvault 企业级灾备与业务连续性深度实践'
+summary: 'title: Commvault 企业级灾备与业务连续性深度实践'
 category: general
 tags:
 - disaster-recovery
@@ -13,6 +14,8 @@ tags:
 - rbac
 - operator
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Commvault 企业级灾备与业务连续性深度实践
 description: '# Commvault 企业级灾备与业务连续性深度实践'

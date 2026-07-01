@@ -1,18 +1,22 @@
 ---
 title: K8S 专项技术
+summary: K8S 专项技术：eBPF 已成为云原生基础设施的核心技术：
 category: concepts
 tags:
-  - ebpf
-  - wasm
-  - edge
-  - serverless
-  - knative
-  - dapr
-  - k8s
+- ebpf
+- wasm
+- edge
+- serverless
+- knative
+- dapr
+- k8s
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # K8S 专项技术
 

@@ -1,6 +1,7 @@
 ---
 title: KUDIG Prompt 模板集：故障排查、架构评审、配置生成与学习路径
 description: '## 故障排查 Prompt'
+summary: '## 故障排查 Prompt'
 category: reference
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - etcd
 - apiserver
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG Prompt 模板集
 

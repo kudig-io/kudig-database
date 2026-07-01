@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 生产环境部署模式架构详解
 description: 'title: Kubernetes 生产环境部署模式架构详解'
+summary: 'title: Kubernetes 生产环境部署模式架构详解'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - pdb
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] 生产环境部署模式架构详解
 description: '# Kubernetes 生产环境部署模式架构详解'

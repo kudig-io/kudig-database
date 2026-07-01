@@ -1,6 +1,7 @@
 ---
 title: 10 - Windows 容器支持与集成指南
 description: '# 10 - Windows 容器支持与集成指南'
+summary: '# 10 - Windows 容器支持与集成指南'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - statefulset
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -56,8 +59,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 10 - Windows 容器支持与集成指南
 

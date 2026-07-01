@@ -1,6 +1,7 @@
 ---
 title: 16 - 安全合规管理 (Security & Compliance Management)
 description: '# 16 - 安全合规管理 (Security & Compliance Management)'
+summary: '# 16 - 安全合规管理 (Security & Compliance Management)'
 category: extensions
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - docker
 - opa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +54,9 @@ cross_refs:
 - type: domain
   path: ../domain-07-platform-engineering/
   label: '相关知识域: domain-07-platform-engineering'
-created: "2026-05-23"
 ---
+
+
 
 # 16 - 安全合规管理 (Security & Compliance Management)& Compliance]] Management)
 

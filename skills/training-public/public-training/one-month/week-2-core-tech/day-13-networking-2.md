@@ -1,6 +1,7 @@
 ---
 title: 'Day 13: 网络栈 - Ingress + NetworkPolicy'
 description: '# Day 13: 网络栈 - Ingress + NetworkPolicy'
+summary: '# Day 13: 网络栈 - Ingress + NetworkPolicy'
 category: learning
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - ingress
 - networkpolicy
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 13: 网络栈 - [[Ingress|Ingress]] + [[NetworkPolicy|NetworkPolicy]]
 

@@ -1,6 +1,7 @@
 ---
 title: Policy Controller 镜像验证 (Policy Controller Image Verification)
 description: '- policy-controller-verification的最佳实践'
+summary: '- policy-controller-verification的最佳实践'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - falco
 - job
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -40,8 +43,9 @@ prerequisites:
 - monitoring-basics
 - gitops-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

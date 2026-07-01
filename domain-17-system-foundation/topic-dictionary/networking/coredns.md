@@ -1,6 +1,9 @@
 ---
 title: CoreDNS
-description: 'CoreDNS 是 Kubernetes 集群内置的 DNS 服务器，作为 kube-dns 的替代方案。它是 CNCF 毕业项目，以插件化架构提供灵活的 DN...'
+description: CoreDNS 是 Kubernetes 集群内置的 DNS 服务器，作为 kube-dns 的替代方案。它是 CNCF 毕业项目，以插件化架构提供灵活的
+  DN...
+summary: CoreDNS 是 Kubernetes 集群内置的 DNS 服务器，作为 kube-dns 的替代方案。它是 CNCF 毕业项目，以插件化架构提供灵活的
+  DN...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - coredns
 - dns
 - networking
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # CoreDNS
 

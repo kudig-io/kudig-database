@@ -1,6 +1,7 @@
 ---
 title: Domain-18 生产运维 Topic 重组计划
 description: 从生产环境维度对 domain-18-production-operations 进行 topic 整合与结构调整的完整方案
+summary: 从生产环境维度对 domain-18-production-operations 进行 topic 整合与结构调整的完整方案
 category: report
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - grafana
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # Domain-18 生产运维 Topic 重组计划
 

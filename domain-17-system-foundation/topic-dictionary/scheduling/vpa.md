@@ -1,6 +1,7 @@
 ---
 title: 垂直 Pod 自动扩缩容
-description: 'VPA（Vertical Pod Autoscaler，垂直 Pod 自动扩缩容）是 Kubernetes 中自动调整 Pod 的资源 Request/Limi...'
+description: VPA（Vertical Pod Autoscaler，垂直 Pod 自动扩缩容）是 Kubernetes 中自动调整 Pod 的资源 Request/Limi...
+summary: VPA（Vertical Pod Autoscaler，垂直 Pod 自动扩缩容）是 Kubernetes 中自动调整 Pod 的资源 Request/Limi...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - scheduling
 - autoscaling
 - vpa
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 垂直 Pod 自动扩缩容
 

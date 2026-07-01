@@ -1,6 +1,8 @@
 ---
 title: KubeVirt 虚拟化
-description: 'KubeVirt 是 Red Hat 开源的 CNCF 孵化项目，在 Kubernetes 上提供虚拟机管理能力，通过 CRD 定义和运行 VM，实现容器和虚拟...'
+description: KubeVirt 是 Red Hat 开源的 CNCF 孵化项目，在 Kubernetes 上提供虚拟机管理能力，通过 CRD 定义和运行
+  VM，实现容器和虚拟...
+summary: KubeVirt 是 Red Hat 开源的 CNCF 孵化项目，在 Kubernetes 上提供虚拟机管理能力，通过 CRD 定义和运行 VM，实现容器和虚拟...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - specialized-workloads
 - virtualization
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # KubeVirt 虚拟化（KubeVirt）
 

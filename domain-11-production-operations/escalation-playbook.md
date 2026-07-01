@@ -1,6 +1,7 @@
 ---
 title: 升级与交接协议（阿里云/专有云版）
 description: 工单升级标准、交接信息模板、升级话术及阿里云专有云底座/ASO/天基相关问题的升级路径。
+summary: 工单升级标准、交接信息模板、升级话术及阿里云专有云底座/ASO/天基相关问题的升级路径。
 category: production-operations
 tags:
 - ai-agent
@@ -13,8 +14,9 @@ tags:
 - aso
 - tianji
 - incident-response
-created: "2026-06-26"
-updated: "2026-06-26"
+tier: core
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06-26
 difficulty: advanced
 reading_level: advanced
@@ -51,6 +53,8 @@ authors:
 - name: KUDIG Team
   role: contributor
 ---
+
+
 
 # 升级与交接协议（阿里云/专有云版）
 

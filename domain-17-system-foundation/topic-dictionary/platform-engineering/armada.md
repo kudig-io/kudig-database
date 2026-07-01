@@ -1,6 +1,8 @@
 ---
 title: Armada 批量调度
-description: 'Armada 是 G-Research 开源的 CNCF Sandbox 项目，专为大规模批量工作负载设计的多集群调度系统，管理跨多个 K8s 集群的队列和作业...'
+description: Armada 是 G-Research 开源的 CNCF Sandbox 项目，专为大规模批量工作负载设计的多集群调度系统，管理跨多个 K8s
+  集群的队列和作业...
+summary: Armada 是 G-Research 开源的 CNCF Sandbox 项目，专为大规模批量工作负载设计的多集群调度系统，管理跨多个 K8s 集群的队列和作业...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - platform-engineering
 - batch
 - multi-cluster
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Armada 批量调度（Armada）
 

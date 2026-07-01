@@ -1,6 +1,8 @@
 ---
 title: Mimir
-description: 'Grafana Mimir 是 Grafana Labs 开源的大规模 Prometheus 兼容指标存储和查询系统。它是 Cortex 的下一代替代品，提供水...'
+description: Grafana Mimir 是 Grafana Labs 开源的大规模 Prometheus 兼容指标存储和查询系统。它是 Cortex
+  的下一代替代品，提供水...
+summary: Grafana Mimir 是 Grafana Labs 开源的大规模 Prometheus 兼容指标存储和查询系统。它是 Cortex 的下一代替代品，提供水...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +11,8 @@ tags:
 - prometheus
 - observability
 - grafana
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Mimir
 

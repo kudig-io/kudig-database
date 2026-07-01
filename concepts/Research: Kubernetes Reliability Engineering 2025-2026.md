@@ -1,29 +1,37 @@
 ---
-title: "Research: Kubernetes 可靠性工程深度研究 2025-2026"
+title: 'Research: Kubernetes 可靠性工程深度研究 2025-2026'
+summary: 3 轮深度研究覆盖 K8S 可靠性工程全栈：SLO/Error Budget 框架、混沌工程平台对比、 事件管理与复盘、容量规划与成本优化、多集群灾备自动化。
 category: synthesis
-tags: [reliability, sre, chaos-engineering, slo, incident, capacity, k8s, research]
+tags:
+- reliability
+- sre
+- chaos-engineering
+- slo
+- incident
+- capacity
+- k8s
+- research
+tier: supporting
 sources:
-  - "https://sre.google/workbook/error-budget-policy/"
-  - "https://backendbytes.com/articles/sre-slos-slis-error-budgets/"
-  - "https://chaos-mesh.org/docs/"
-  - "https://litmuschaos.io/docs/"
-  - "https://www.gremlin.com/docs/"
-  - "https://kubecost.com/"
-  - "https://opencost.io/"
+- https://sre.google/workbook/error-budget-policy/
+- https://backendbytes.com/articles/sre-slos-slis-error-budgets/
+- https://chaos-mesh.org/docs/
+- https://litmuschaos.io/docs/
+- https://www.gremlin.com/docs/
+- https://kubecost.com/
+- https://opencost.io/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
-summary: >-
-  3 轮深度研究覆盖 K8S 可靠性工程全栈：SLO/Error Budget 框架、混沌工程平台对比、
-  事件管理与复盘、容量规划与成本优化、多集群灾备自动化。
 provenance:
   extracted: 0.65
-  inferred: 0.30
+  inferred: 0.3
   ambiguous: 0.05
 base_confidence: 0.82
 lifecycle: draft
 lifecycle_changed: 2026-05-24
 ---
+
 
 # Research: Kubernetes 可靠性工程深度研究 2025-2026
 
@@ -113,3 +121,7 @@ SLO/Error Budget 框架、混沌工程平台、事件管理与复盘、容量规
 - [[concepts/gitops-production-operations.md|gitops production operations]] — GitOps 声明式运维保障集群状态一致性，减少配置漂移导致的可靠性风险
 - [[concepts/k8s-security-compliance.md|k8s security compliance]] — 安全合规（准入控制、网络策略）直接影响系统可靠性与故障隔离能力
 - [[concepts/storage-data-protection.md|storage data protection]] — 存储持久化与数据保护策略（备份、快照）是可靠性工程的核心保障层
+
+## Related
+
+- [[research|#research Hub]] — tag hub

@@ -1,12 +1,15 @@
 ---
 title: Docker 命令大全参考
 description: 'description: ''<!-- chunk: 概述'' -->## 概述'''
+summary: 'description: ''<!-- chunk: 概述'' -->## 概述'''
 category: general
 tags:
 - k8s
 - docker
 - falco
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 - runtime
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

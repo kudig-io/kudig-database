@@ -1,6 +1,7 @@
 ---
 title: 负载均衡技术
 description: '- [负载均衡概述](#负载均衡概述)'
+summary: '- [负载均衡概述](#负载均衡概述)'
 category: network-fundamentals
 tags:
 - network
@@ -13,6 +14,8 @@ tags:
 - docker
 - redis
 - mysql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -48,8 +51,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 负载均衡技术
 

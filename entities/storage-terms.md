@@ -1,6 +1,7 @@
 ---
 title: K8s 存储术语参考
 description: '# K8s 存储术语参考'
+summary: '# K8s 存储术语参考'
 category: references
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - cronjob
 - gpu
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8s 存储术语参考
 

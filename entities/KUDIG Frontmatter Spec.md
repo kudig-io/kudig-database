@@ -1,6 +1,7 @@
 ---
 title: KUDIG Frontmatter Specification
 description: '| `audience` | array | Target audience | `[SRE, DevOps, 运维工程师]` |'
+summary: '| `audience` | array | Target audience | `[SRE, DevOps, 运维工程师]` |'
 category: reference
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - kubelet
 - rag
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG Frontmatter Specification
 

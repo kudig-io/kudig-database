@@ -1,6 +1,7 @@
 ---
 title: 'Day 17: 可观测性 - 监控 + Prometheus'
 description: 'title: Day 17: 可观测性 - 监控 + Prometheus'
+summary: 'title: Day 17: 可观测性 - 监控 + Prometheus'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - crd
 - operator
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -37,8 +40,9 @@ prerequisites:
 - monitoring-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 17: 可观测性 - 监控 + [[Prometheus|Prometheus]]

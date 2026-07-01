@@ -1,6 +1,7 @@
 ---
 title: 发布说明索引 — 网络
 description: '# 发布说明索引 — 网络'
+summary: '# 发布说明索引 — 网络'
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - linkerd
 - gateway
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # 发布说明索引 — 网络
 

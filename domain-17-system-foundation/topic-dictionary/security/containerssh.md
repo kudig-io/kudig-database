@@ -1,6 +1,7 @@
 ---
 title: ContainerSSH SSH 代理
-description: 'ContainerSSH 是开源的 SSH 服务器，将 SSH 连接代理到 Kubernetes Pod 或 Docker 容器中运行，为运维人员提供安全的容器...'
+description: ContainerSSH 是开源的 SSH 服务器，将 SSH 连接代理到 Kubernetes Pod 或 Docker 容器中运行，为运维人员提供安全的容器...
+summary: ContainerSSH 是开源的 SSH 服务器，将 SSH 连接代理到 Kubernetes Pod 或 Docker 容器中运行，为运维人员提供安全的容器...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - security
 - ssh
 - container
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # ContainerSSH SSH 代理（ContainerSSH）
 

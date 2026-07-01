@@ -1,6 +1,7 @@
 ---
 title: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 description: '- "网络策略"'
+summary: '- "网络策略"'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - calico
 - coredns
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -45,8 +48,9 @@ prerequisites:
 skill_id: SKILL-20_NETWORKPOLICY_CONNECTIVITY-001
 skill_name: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 ---
 skill_id: "SKILL-NET-004"

@@ -1,6 +1,7 @@
 ---
 title: Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)
 description: '# Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)'
+summary: '# Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - daemonset
 - job
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -59,8 +62,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)
 

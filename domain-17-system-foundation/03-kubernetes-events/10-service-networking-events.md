@@ -1,6 +1,7 @@
 ---
 title: 10 - Service 与网络事件
 description: '# 10 - Service 与网络事件'
+summary: '# 10 - Service 与网络事件'
 category: kubernetes-events
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - flannel
 - calico
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
-created: "2026-05-23"
 ---
+
+
 
 # 10 - [[Service|Service]] 与网络事件
 
@@ -1273,7 +1277,7 @@ kubectl get endpoints my-svc -o json | wc -c
 # 如果超过 1MB,说明 Endpoints 过大
 
 # 4. 检查 endpoint-controller 日志
-kubectl logs -n kube-system kube-controller-manager-<pod> | grep "endpoint-controller\|my-svc"
+kubectl logs -n kube-system kube-controller-manager-<pod> | grep "endpoint-controller|my-svc"
 
 # 5. 检查是否有并发修改
 kubectl get endpoints my-svc -o jsonpath='{.metadata.resourceVersion}'
@@ -1635,7 +1639,7 @@ cat /etc/resolv.conf
 
 # 6. 验证 kubelet 配置
 ssh <node>
-ps aux | grep kubelet | grep "cluster-dns\|cluster-domain"
+ps aux | grep kubelet | grep "cluster-dns|cluster-domain"
 # 应包含: --cluster-dns=10.96.0.10 --cluster-domain=cluster.local
 ```
 

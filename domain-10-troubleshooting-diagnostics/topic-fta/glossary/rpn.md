@@ -1,12 +1,15 @@
 ---
 title: 风险优先级数
-description: 'RPN（Risk Priority Number，风险优先级数）是 FMEA 中用于量化风险的指标。它由严重度、发生频率和可检测性三个维度的乘积组成。...'
+description: RPN（Risk Priority Number，风险优先级数）是 FMEA 中用于量化风险的指标。它由严重度、发生频率和可检测性三个维度的乘积组成。...
+summary: RPN（Risk Priority Number，风险优先级数）是 FMEA 中用于量化风险的指标。它由严重度、发生频率和可检测性三个维度的乘积组成。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - rpn
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 风险优先级数
 

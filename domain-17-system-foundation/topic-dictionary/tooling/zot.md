@@ -1,6 +1,9 @@
 ---
 title: zot OCI 注册表
-description: 'zot 是 Cisco 开源的 CNCF Sandbox 项目，轻量级 OCI 原生容器注册表，专为边缘和嵌入式场景优化，资源占用极低，支持 OCI 1.1 规...'
+description: zot 是 Cisco 开源的 CNCF Sandbox 项目，轻量级 OCI 原生容器注册表，专为边缘和嵌入式场景优化，资源占用极低，支持
+  OCI 1.1 规...
+summary: zot 是 Cisco 开源的 CNCF Sandbox 项目，轻量级 OCI 原生容器注册表，专为边缘和嵌入式场景优化，资源占用极低，支持 OCI
+  1.1 规...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - tooling
 - registry
 - oci
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # zot OCI 注册表（zot）
 

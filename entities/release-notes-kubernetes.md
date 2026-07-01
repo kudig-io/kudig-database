@@ -1,6 +1,7 @@
 ---
 title: 发布说明索引 — Kubernetes
 description: '| v1.2 → v1.36 | CHANGELOG | 35 | 正式变更日志 |'
+summary: '| v1.2 → v1.36 | CHANGELOG | 35 | 正式变更日志 |'
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - crd
 - webhook
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 - Kubernetes
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 发布说明索引 — Kubernetes
 

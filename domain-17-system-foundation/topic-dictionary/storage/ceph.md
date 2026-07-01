@@ -1,6 +1,8 @@
 ---
 title: Ceph
-description: 'Ceph 是最广泛使用的开源分布式存储系统，提供块存储（RBD）、对象存储（RGW）和文件存储（CephFS）三种接口。通过 Rook 集成到 Kubernet...'
+description: Ceph 是最广泛使用的开源分布式存储系统，提供块存储（RBD）、对象存储（RGW）和文件存储（CephFS）三种接口。通过 Rook 集成到
+  Kubernet...
+summary: Ceph 是最广泛使用的开源分布式存储系统，提供块存储（RBD）、对象存储（RGW）和文件存储（CephFS）三种接口。通过 Rook 集成到 Kubernet...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - ceph
 - storage
 - distributed-storage
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Ceph
 

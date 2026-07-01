@@ -1,6 +1,7 @@
 ---
 title: 协调领导者选举（Coordinated Leader Election）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - scheduler
 - controller-manager
 - operator
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,9 +33,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - etcd-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 协调领导者选举（Coordinated Leader Election）
 

@@ -1,6 +1,7 @@
 ---
 title: 工作负载管理：Pod 生命周期、调度策略与弹性伸缩
 description: '# 工作负载管理'
+summary: '# 工作负载管理'
 category: reference
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - hpa
 - vpa
 - autoscaling
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 - 调度策略与弹性伸缩
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 工作负载管理
 

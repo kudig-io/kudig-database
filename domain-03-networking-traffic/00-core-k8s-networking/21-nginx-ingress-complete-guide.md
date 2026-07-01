@@ -1,6 +1,7 @@
 ---
 title: 129 - NGINX Ingress 完整配置指南
 description: '# 129 - NGINX Ingress 完整配置指南'
+summary: '# 129 - NGINX Ingress 完整配置指南'
 category: networking
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - opa
 - agent
 - flannel
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -57,8 +60,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 129 - NGINX [[Ingress|Ingress]] 完整配置指南
 

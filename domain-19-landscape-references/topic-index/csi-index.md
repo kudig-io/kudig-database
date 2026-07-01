@@ -1,6 +1,7 @@
 ---
 title: CSI (Container Storage Interface) 知识图谱索引
 description: CSI 容器存储接口知识图谱索引，聚合 CSI 架构、存储驱动、Snapshot、故障排查等所有相关内容
+summary: CSI 容器存储接口知识图谱索引，聚合 CSI 架构、存储驱动、Snapshot、故障排查等所有相关内容
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rag
 - rook
 - redis
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 # CSI (Container Storage Interface) 知识图谱索引
 

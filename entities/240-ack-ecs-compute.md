@@ -1,6 +1,7 @@
 ---
 title: ACK 关联产品 - ECS 计算资源
 description: 'description: ''- [节点池配置最佳实践](#节点池配置最佳实践)'''
+summary: 'description: ''- [节点池配置最佳实践](#节点池配置最佳实践)'''
 category: general
 tags:
 - cloud
@@ -12,6 +13,8 @@ tags:
 - gpu
 - nvidia
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: ACK 关联产品 - ECS 计算资源
 description: '- [节点池配置最佳实践](#节点池配置最佳实践)'

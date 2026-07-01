@@ -1,6 +1,7 @@
 ---
 title: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation (domain-10-troubleshooting-diagnostics)
 description: '# PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation'
+summary: '# PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation'
 category: storage
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - postgresql
 - statefulset
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -55,8 +58,9 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
-created: "2026-05-23"
 ---
+
+
 
 ---
 
@@ -98,13 +102,13 @@ PVC/PV/CSI 存储问题是 [[Kubernetes|Kubernetes]] 集群中**影响数据持�
 
 | # | 症状描述 | 检测方法 | 置信度 | 排除条件 |
 |---|---------|---------|--------|---------|
-| SP-01 | PVC 状态长期 Pending / PVC status stuck in Pending | `kubectl get pvc -A \| grep -v Bound` 持续显示 Pending 超过 5 分钟 | 0.95 | PVC 使用 WaitForFirstConsumer 模式且尚未有 Pod 引用；新创建的 PVC 正在 Provisioning 过程中（<2 分钟） |
-| SP-02 | Pod 事件出现 FailedMount / Pod events show FailedMount | `kubectl describe pod <pod> \| grep -i "FailedMount\|MountVolume"` 显示挂载失败事件 | 0.90 | Volume 首次挂载需要拉取远程数据（如 gitRepo 类型）；临时网络抖动导致的瞬时失败（已自动重试成功） |
+| SP-01 | PVC 状态长期 Pending / PVC status stuck in Pending | `kubectl get pvc -A | grep -v Bound` 持续显示 Pending 超过 5 分钟 | 0.95 | PVC 使用 WaitForFirstConsumer 模式且尚未有 Pod 引用；新创建的 PVC 正在 Provisioning 过程中（<2 分钟） |
+| SP-02 | Pod 事件出现 FailedMount / Pod events show FailedMount | `kubectl describe pod <pod> | grep -i "FailedMount|MountVolume"` 显示挂载失败事件 | 0.90 | Volume 首次挂载需要拉取远程数据（如 gitRepo 类型）；临时网络抖动导致的瞬时失败（已自动重试成功） |
 | SP-03 | Volume Attach 超时 / Volume attach timeout | Pod 事件显示 `AttachVolume.Attach failed` 或 `timed out waiting for the condition` | 0.85 | 云厂商 API 正在执行中但延迟较高；节点正在启动中，kubelet 尚未就绪 |
 | SP-04 | 文件系统挂载失败 / Filesystem mount failed | Pod 事件显示 `MountVolume.SetUp failed` 或 `mount: wrong fs type` | 0.90 | Volume 首次使用需要格式化（正常的 mkfs 过程）；手动指定了错误的 fsType 配置 |
 | SP-05 | CSI Driver Pod CrashLoopBackOff | `kubectl get pods -n kube-system -l app.kubernetes.io/component=csi-driver` 显示 CrashLoopBackOff | 0.95 | CSI Driver 正在升级中的短暂重启；集群初始化期间的正常启动抖动 |
 | SP-06 | Volume 扩容失败 / Volume expansion failed | PVC 事件显示 `VolumeResizeFailed` 或 `resize of volume failed` | 0.90 | StorageClass 不支持扩容（allowVolumeExpansion: false）；文件系统扩容需要 Pod 重启（离线扩容场景） |
-| SP-07 | PV 状态 Released 无法回收 / PV stuck in Released status | `kubectl get pv \| grep Released` 持续显示 Released 状态 | 0.80 | ReclaimPolicy 为 Retain 且管理员有意保留数据；正在执行数据备份后的清理操作 |
+| SP-07 | PV 状态 Released 无法回收 / PV stuck in Released status | `kubectl get pv | grep Released` 持续显示 Released 状态 | 0.80 | ReclaimPolicy 为 Retain 且管理员有意保留数据；正在执行数据备份后的清理操作 |
 | SP-08 | 多节点同时挂载 RWO Volume 失败 / Multi-attach error for RWO volume | Pod 事件显示 `Multi-Attach error` 或调度失败原因包含 `volume node affinity conflict` | 0.95 | 使用了 RWX Volume 但配置错误；正在执行 Pod 迁移期间的短暂重叠 |
 | SP-09 | 存储空间不足 / Storage disk full | Pod 日志显示 `No space left on device` 或节点 DiskPressure | 0.90 | 容器 ephemeral storage 耗尽（非 PVC 问题）；临时文件导致的短暂满盘已自动清理 |
 | SP-10 | Volume detach 卡住 / Volume detach timeout | `kubectl get volumeattachment` 显示 Volume 长时间未释放；节点删除后 Volume 仍处于 Attached 状态 | 0.85 | 节点问题导致的正常 force-detach 流程（需等待 6 分钟超时）；CSI Driver 正在处理中 |
@@ -335,7 +339,7 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
   kubectl get volumeattachment -o custom-columns=NAME:.metadata.name,PV:.spec.source.persistentVolumeName,NODE:.spec.nodeName,ATTACHED:.status.attached
   
   # 检查特定 VolumeAttachment 详情
-  kubectl get volumeattachment -o yaml | grep -A5 "attachError\|detachError"
+  kubectl get volumeattachment -o yaml | grep -A5 "attachError|detachError"
   ```
 - **超时**: 10s
 - **预期输出模式**: VolumeAttachment 列表
@@ -651,7 +655,7 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
 | RC-004 | **Volume Access Mode 不匹配** — 尝试将 RWO Volume 挂载到多个节点，或 Access Mode 配置与实际使用不符 | ~10% | D1.4 事件显示 `Multi-Attach error`；D1.6 同一 PV 多个 VolumeAttachment；D2.2 日志 `already exclusively attached` | `kubectl get volumeattachment -o custom-columns=NAME:.metadata.name,PV:.spec.source.persistentVolumeName,NODE:.spec.nodeName` | 🟢 | storage-fta: BE-access-mode |
 | RC-005 | **节点 Volume Attach 达到上限** — 节点上已 Attach 的 Volume 数量达到云厂商或 CSI Driver 限制（如 AWS 最多 39 EBS volumes） | ~8% | D2.8 CSINode 的 allocatable 达到上限；D1.4 事件显示调度失败 with max volume limit | `kubectl get csinodes <node> -o jsonpath='{.spec.drivers[*].allocatable}'`; 计算节点当前 Volume 数量 | 🟡 | storage-fta: BE-attach-limit |
 | RC-006 | **网络不可达导致存储后端连接失败** — 防火墙、安全组、网络分区导致节点无法连接到存储后端（NFS server、iSCSI target、云 API） | ~7% | D2.4 连通性测试失败；D2.1/D2.2 日志包含 `connection refused` 或 `timeout` | `ssh <node> "nc -zv <storage-endpoint> <port>"`; `ssh <node> "showmount -e <nfs-server>"` | 🔴 | storage-fta: BE-network-storage |
-| RC-007 | **文件系统损坏** — Volume 上的文件系统损坏，无法正常挂载；可能由异常断电、强制 detach 等原因导致 | ~5% | D2.5 fsck 报告错误；D2.2 日志包含 `wrong fs type` 或 `bad superblock`；Mount 失败 | `ssh <node> "fsck -n /dev/<device>"`; `ssh <node> "dmesg | grep -i ext4\|xfs"` | 🔴 | storage-fta: BE-fs-corrupt |
+| RC-007 | **文件系统损坏** — Volume 上的文件系统损坏，无法正常挂载；可能由异常断电、强制 detach 等原因导致 | ~5% | D2.5 fsck 报告错误；D2.2 日志包含 `wrong fs type` 或 `bad superblock`；Mount 失败 | `ssh <node> "fsck -n /dev/<device>"`; `ssh <node> "dmesg | grep -i ext4|xfs"` | 🔴 | storage-fta: BE-fs-corrupt |
 | RC-008 | **云厂商 API 限流/配额耗尽** — 云厂商 API 调用频率超限或存储配额用完，无法创建新 Volume 或执行 Attach 操作 | ~5% | D2.1 日志包含 `throttled`、`quota exceeded`、`limit`；D2.6 API 返回错误 | 云厂商配额页面检查；API 返回的错误码分析 | 🟡 | storage-fta: BE-cloud-quota |
 | RC-009 | **ReclaimPolicy 误配导致数据残留/丢失** — PV 的 ReclaimPolicy 配置不当，Delete 导致数据丢失，Retain 导致 PV 无法重用 | ~4% | D1.1 PV 状态为 Released 且 ReclaimPolicy 为 Retain；PVC 删除后数据意外删除 | `kubectl get pv -o custom-columns=NAME:.metadata.name,RECLAIM:.spec.persistentVolumeReclaimPolicy,STATUS:.status.phase` | ⚫ | storage-fta: BE-reclaim-policy |
 | RC-010 | **Volume 扩容不支持或文件系统扩容失败** — StorageClass 未开启 allowVolumeExpansion，或文件系统在线扩容失败 | ~4% | D1.4 事件显示 VolumeResizeFailed；SC 配置 allowVolumeExpansion: false；D2.2 日志 resize 错误 | `kubectl get sc <name> -o jsonpath='{.allowVolumeExpansion}'`; `kubectl describe pvc <name>` 查看扩容事件 | 🟡 | storage-fta: BE-expansion-failed |

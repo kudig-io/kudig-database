@@ -1,6 +1,7 @@
 ---
 title: Antrea 网络方案
-description: 'Antrea 是 VMware 开源的 Kubernetes 网络方案（CNI），基于 Open vSwitch（OVS）构建，提供 NetworkPolicy...'
+description: Antrea 是 VMware 开源的 Kubernetes 网络方案（CNI），基于 Open vSwitch（OVS）构建，提供 NetworkPolicy...
+summary: Antrea 是 VMware 开源的 Kubernetes 网络方案（CNI），基于 Open vSwitch（OVS）构建，提供 NetworkPolicy...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - networking
 - cni
 - ebpf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Antrea 网络方案（Antrea）
 

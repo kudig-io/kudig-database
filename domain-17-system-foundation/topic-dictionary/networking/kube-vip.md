@@ -1,6 +1,9 @@
 ---
 title: kube-vip 虚拟 IP
-description: 'kube-vip 为 Kubernetes 集群提供虚拟 IP（VIP）和负载均衡能力，用于控制面高可用（API Server VIP）和 Service 的 ...'
+description: kube-vip 为 Kubernetes 集群提供虚拟 IP（VIP）和负载均衡能力，用于控制面高可用（API Server VIP）和
+  Service 的 ...
+summary: kube-vip 为 Kubernetes 集群提供虚拟 IP（VIP）和负载均衡能力，用于控制面高可用（API Server VIP）和 Service
+  的 ...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - networking
 - ha
 - vip
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # kube-vip 虚拟 IP（kube-vip）
 

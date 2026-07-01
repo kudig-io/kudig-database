@@ -1,6 +1,7 @@
 ---
 title: CNCF 边缘计算与 AI/ML 项目全景
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - crd
 - operator
 - kubeflow
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # CNCF 边缘计算与 AI/ML 项目全景
 

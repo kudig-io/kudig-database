@@ -1,6 +1,7 @@
 ---
 title: 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)
 description: 'title: 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)'
+summary: 'title: 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - calico
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - prometheus-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)
 description: '# 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)'
@@ -320,7 +324,7 @@ curl -k https://localhost:6443/metrics | head -20
 kubectl logs -n kube-system -l component=kube-apiserver -f
 
 # 2. 错误日志筛选
-kubectl logs -n kube-system -l component=kube-apiserver | grep -i "error\|fatal\|panic"
+kubectl logs -n kube-system -l component=kube-apiserver | grep -i "error|fatal|panic"
 
 # 3. 特定时间段日志
 kubectl logs -n kube-system -l component=kube-apiserver --since=1h
@@ -726,7 +730,7 @@ kubectl describe deployment <deployment-name>
 
 # 2. 查看控制器日志中的相关错误
 kubectl logs -n kube-system -l component=kube-controller-manager | \
-  grep -i "deployment\|replicaset"
+  grep -i "deployment|replicaset"
 
 # 3. 检查工作队列状态
 kubectl get --raw="/metrics" | grep "workqueue_depth.*deployment"
@@ -757,7 +761,7 @@ kubectl describe node <node-name> | grep -A 10 Taints
 
 # 4. 查看驱逐相关日志
 kubectl logs -n kube-system -l component=kube-controller-manager | \
-  grep -i "evict\|taint\|notready"
+  grep -i "evict|taint|notready"
 
 # 解决方案:
 # - 调整节点监控参数
@@ -974,6 +978,8 @@ kubectl get networkpolicies -n <namespace>
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[kudig-prompts-catalog]]
 

@@ -1,6 +1,7 @@
 ---
 title: Datadog企业级APM深度实践
 description: 'title: Datadog企业级APM深度实践'
+summary: 'title: Datadog企业级APM深度实践'
 category: general
 tags:
 - observability
@@ -13,6 +14,8 @@ tags:
 - opa
 - elasticsearch
 - ingress
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Datadog企业级APM深度实践
 description: '# Datadog企业级APM深度实践'

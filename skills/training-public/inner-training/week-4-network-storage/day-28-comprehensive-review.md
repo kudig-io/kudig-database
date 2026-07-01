@@ -1,6 +1,7 @@
 ---
-title: "Day 28: 综合复习与实践 [week-4-network-storage]"
+title: 'Day 28: 综合复习与实践 [week-4-network-storage]'
 description: '# Day 28: 综合复习与实践'
+summary: '# Day 28: 综合复习与实践'
 category: learning
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - rbac
 - operator
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 28: 综合复习与实践
 

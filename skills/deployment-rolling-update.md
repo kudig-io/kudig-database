@@ -1,6 +1,7 @@
 ---
 title: Deployment 滚动更新策略
 description: '## 概述'
+summary: '## 概述'
 category: skills
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - maxUnavailable
 - rollout
 - pause-resume
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 - 滚动更新策略
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Deployment 滚动更新策略
 

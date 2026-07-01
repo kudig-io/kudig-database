@@ -1,12 +1,15 @@
 ---
 title: 最佳实践内容质量评估与改进项目总结
 description: '# 最佳实践内容质量评估与改进项目总结'
+summary: '# 最佳实践内容质量评估与改进项目总结'
 category: general
 tags:
 - k8s
 - ebpf
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - ebpf-basics
-created: "2026-05-23"
 ---
+
+
 
 # 最佳实践内容质量评估与改进项目总结
 

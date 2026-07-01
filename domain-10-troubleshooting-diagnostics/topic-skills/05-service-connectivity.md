@@ -1,6 +1,7 @@
 ---
 title: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 description: '## 1. 概述'
+summary: '## 1. 概述'
 category: network
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - envoy
 - cilium
+tier: core
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -56,8 +59,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 <!-- condition: kubectl get endpoints <service-name> -n <ns> -o jsonpath='{.subsets}' | jq 'length == 0 or . == null' 显示 Endpoint 为空 -->
 
@@ -397,7 +401,7 @@ D1.2: Endpoints 是否为空？
   kubectl describe pod <pod> -n <namespace> | grep -A 15 "Readiness"
 
   # 查看 Pod 事件中的 readiness 失败记录
-  kubectl get events -n <namespace> --field-selector involvedObject.name=<pod> --sort-by=.lastTimestamp | grep -i "unhealthy\|probe"
+  kubectl get events -n <namespace> --field-selector involvedObject.name=<pod> --sort-by=.lastTimestamp | grep -i "unhealthy|probe"
 
   # 查看 Pod 最近日志（排查应用启动失败）
   kubectl logs <pod> -n <namespace> --tail=50
@@ -752,7 +756,7 @@ D1.2: Endpoints 是否为空？
   istioctl proxy-config route <pod-name> -n <namespace> | grep <target-service>
   
   # 查看 sidecar 日志
-  kubectl logs <pod-name> -n <namespace> -c istio-proxy --tail=100 | grep -i "error\|upstream\|timeout"
+  kubectl logs <pod-name> -n <namespace> -c istio-proxy --tail=100 | grep -i "error|upstream|timeout"
   ```
 - **超时**: 15s
 - **预期输出模式**: Envoy 配置和日志
@@ -1745,9 +1749,9 @@ kubectl get events -n <namespace> --field-selector involvedObject.name=<service>
 |----------|-------|-------|-------|-------|-------|
 | `kubectl get endpointslices` | 支持 | 支持 | 支持 | 支持 | 支持 |
 | `kubectl get endpoints` (legacy) | 支持 | 支持 | 支持 | 支持 | 支持 |
-| `iptables-save \| grep <clusterip>` | 有效 | 有效 | 有效 | 有效（非 nftables 模式） | 仅 iptables 模式 |
-| `ipvsadm -ln \| grep <clusterip>` | 有效（IPVS 模式） | 同左 | 同左 | 同左 | 同左 |
-| `nft list ruleset \| grep <clusterip>` | N/A | alpha 模式可用 | alpha 模式可用 | beta 模式可用 | GA，nftables 模式下必用 |
+| `iptables-save | grep <clusterip>` | 有效 | 有效 | 有效 | 有效（非 nftables 模式） | 仅 iptables 模式 |
+| `ipvsadm -ln | grep <clusterip>` | 有效（IPVS 模式） | 同左 | 同左 | 同左 | 同左 |
+| `nft list ruleset | grep <clusterip>` | N/A | alpha 模式可用 | alpha 模式可用 | beta 模式可用 | GA，nftables 模式下必用 |
 | `kubectl debug node/` 检查 conntrack | 支持 | 支持 | 支持 | 支持 | 支持 |
 
 ### 9.3 关键 API 版本

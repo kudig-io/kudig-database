@@ -1,6 +1,7 @@
 ---
 title: 'Week 4: 网络与存储 (Day 22-28)'
 description: '# Week 4: 网络与存储 (Day 22-28)'
+summary: '# Week 4: 网络与存储 (Day 22-28)'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - networkpolicy
 - crd
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -37,8 +40,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Week 4: 网络与存储 (Day 22-28)
 

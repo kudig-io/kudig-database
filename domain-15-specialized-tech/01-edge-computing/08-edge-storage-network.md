@@ -1,6 +1,7 @@
 ---
 title: 边缘存储与网络 (Edge Storage and Network)
 description: '# 边缘存储与网络 (Edge Storage and Network)'
+summary: '# 边缘存储与网络 (Edge Storage and Network)'
 category: edge-computing
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - helm
 - flux
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -50,8 +53,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 边缘存储与网络 (Edge Storage and Network)
 

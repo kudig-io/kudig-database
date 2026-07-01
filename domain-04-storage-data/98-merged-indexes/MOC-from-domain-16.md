@@ -1,12 +1,15 @@
 ---
 title: domain-04-storage-data MOC [98-merged-indexes]
 description: domain-04-storage-data 知识域导航页，覆盖 7 篇文档
+summary: domain-04-storage-data 知识域导航页，覆盖 7 篇文档
 category: moc
 tags:
 - k8s
 - moc
 - storage
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - storage-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-04-storage-data MOC
 

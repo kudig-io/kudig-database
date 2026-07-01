@@ -1,6 +1,9 @@
 ---
 title: Agent CLI 企业级自动化与 CI/CD 集成 (domain-14-ai-ml-infra)
-description: 'description: ''**文档类型**: 工程实践专题 | **最后更新**: 2026-03 | **关键词**: Agent CLI Automation,'
+description: 'description: ''**文档类型**: 工程实践专题 | **最后更新**: 2026-03 | **关键词**: Agent
+  CLI Automation,'
+summary: 'description: ''**文档类型**: 工程实践专题 | **最后更新**: 2026-03 | **关键词**: Agent CLI
+  Automation,'
 category: general
 tags:
 - ai
@@ -12,6 +15,8 @@ tags:
 - llm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +40,9 @@ prerequisites:
 - kubectl-basics
 - monitoring-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Agent CLI 企业级自动化与 CI/CD 集成
 description: '**文档类型**: 工程实践专题 | **最后更新**: 2026-03 | **关键词**: Agent CLI Automation,
@@ -106,7 +112,7 @@ Agent CLI 的**无头模式（Headless Mode）** 使其能够脱离交互式终�
 | **Claude Code** | `claude -p "<prompt>"` | `-p` 参数 / stdin | Text / JSON stream | `--allowedTools` |
 | **Codex CLI** | `codex --quiet "<prompt>"` | 参数 / stdin | JSON | `--approval-mode full-auto` |
 | **Gemini CLI** | `gemini -p "<prompt>"` | `-p` 参数 | Text / JSON | `--sandbox` |
-| **Aider** | `echo "<prompt>" \| aider --yes` | stdin / `--message` | Text / Git diff | `--yes` 自动确认 |
+| **Aider** | `echo "<prompt>" | aider --yes` | stdin / `--message` | Text / Git diff | `--yes` 自动确认 |
 
 ## 1.2 Claude Code 无头模式深度配置
 

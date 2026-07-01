@@ -1,6 +1,9 @@
 ---
 title: Kubernetes 平台工程与内部开发者平台 (Platform Engineering and Internal Developer Platform)
-description: 'description: ''**作者:** 平台工程架构专家 | **版本:** v1.0 | **更新时间:** 2026-03-03 | **适用场景:** 开发者平台建设、DevEx优化、自助服务'
+description: 'description: ''**作者:** 平台工程架构专家 | **版本:** v1.0 | **更新时间:** 2026-03-03
+  | **适用场景:** 开发者平台建设、DevEx优化、自助服务'
+summary: 'description: ''**作者:** 平台工程架构专家 | **版本:** v1.0 | **更新时间:** 2026-03-03 |
+  **适用场景:** 开发者平台建设、DevEx优化、自助服务'
 category: general
 tags:
 - paper
@@ -13,6 +16,8 @@ tags:
 - helm
 - argocd
 - flux
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -49,8 +54,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] 平台工程与内部开发者平台 ([[concepts/platform-engineering-sre.md|Platform Engineering]] and Internal Developer Platform)
 description: '**作者:** 平台工程架构专家 | **版本:** v1.0 | **更新时间:** 2026-03-03 | **适用场景:** 开发者平台建设、DevEx优化、自助服务
@@ -2213,5 +2219,7 @@ gantt
 - 23-kubernetes-opentelemetry-native-observability
 
 ## Related
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

@@ -1,6 +1,7 @@
 ---
 title: Domain-38 WebAssembly 云原生 — 开源项目索引
 description: Domain-38 WebAssembly 云原生 — 开源项目索引 — Kubernetes 生产运维知识库
+summary: Domain-38 WebAssembly 云原生 — 开源项目索引 — Kubernetes 生产运维知识库
 category: webassembly-cloud-native
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - gateway
 - operator
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Domain-38 WebAssembly 云原生 — 开源项目索引
 

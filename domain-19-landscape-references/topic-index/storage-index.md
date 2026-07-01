@@ -1,6 +1,7 @@
 ---
 title: Storage 存储知识图谱索引
 description: '## Storage 知识图谱'
+summary: '## Storage 知识图谱'
 category: index
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - pv
 - rook
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cncf-ecosystem
-created: "2026-05-23"
 ---
+
+
 
 # Storage 存储知识图谱索引
 

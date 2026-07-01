@@ -1,6 +1,7 @@
 ---
 title: UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南
 description: 'title: UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南'
+summary: 'title: UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南'
 category: general
 tags:
 - cloud
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - job
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: UCloud UK8S (UCloud [[Kubernetes|Kubernetes]] [[Service|Service]]) 高性价比企业级实战指南
 description: '# UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南'
@@ -1052,6 +1056,8 @@ echo "诊断报告已保存到: $REPORT_FILE"
 联通云UK8S凭借中国联通深厚的电信网络底蕴和5G技术创新能力，为电信运营商、工业企业、智慧城市等领域提供了专业的容器化解决方案。通过深度整合5G网络切片、边缘计算等电信级特性，以及完善的安全合规保障，成为数字化转型时代的重要基础设施平台。
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[log|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

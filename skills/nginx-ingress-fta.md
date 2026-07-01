@@ -1,6 +1,7 @@
 ---
 title: nginx-ingress-controller 异常故障树分析 (skills)
 description: '### 故障排查命令速查'
+summary: '### 故障排查命令速查'
 category: skills
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - scheduler
 - prometheus
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 fta_id: FTA-NGINX_INGRESS-001
 component: Nginx Ingress
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 # [[nginx-ingress-fta|nginx-ingress-controller 异常故障树分析]]
 

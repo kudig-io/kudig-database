@@ -1,6 +1,7 @@
 ---
 title: 03 - RAID 与存储冗余
 description: '# 03 - RAID 与存储冗余'
+summary: '# 03 - RAID 与存储冗余'
 category: storage-fundamentals
 tags:
 - storage
@@ -8,6 +9,8 @@ tags:
 - block
 - prometheus
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 03 - RAID 与存储冗余
 

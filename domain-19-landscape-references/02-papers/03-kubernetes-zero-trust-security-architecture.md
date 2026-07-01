@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Implementation)
 description: 'title: Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Implementation)'
+summary: 'title: Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Implementation)'
 category: general
 tags:
 - paper
@@ -13,6 +14,8 @@ tags:
 - istio
 - cilium
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] 安全零信任架构实施指南 (Zero Trust Security Architecture Implementation)
 description: '# Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Implementation)'
@@ -1039,6 +1043,8 @@ K8s 1.33/1.34安全增强:
 - Kubernetes 自动化运维与SRE实践 (Automation and SRE Practices)
 
 ## Related
+
+- [[research|#research Hub]] — tag hub
 
 - 79-polar-research
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 生产运维实战训练营
 description: 'title: Kubernetes 生产运维实战训练营'
+summary: 'title: Kubernetes 生产运维实战训练营'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,8 +38,9 @@ prerequisites:
 - gitops-basics
 - etcd-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 <div align="center">
 

@@ -1,13 +1,21 @@
 ---
-title: "Skill: 金丝雀发布异常的诊断和修复"
+title: 'Skill: 金丝雀发布异常的诊断和修复'
+summary: 'Skill: 金丝雀发布异常的诊断和修复：金丝雀发布过程中新版本（金丝雀）表现异常，如错误率升高、延迟增大或业务指标下降，需要快速判断是继续观察、暂停推广还是立即回滚。远程顾问模式下需基于用户提供的监控数据和日志给出决策建议。'
 category: skill
-tags: ["skill", "domain-10", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- skill
+- domain-10
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # Skill: 金丝雀发布异常的诊断和修复
 
@@ -60,3 +68,7 @@ kubectl get deployment <canary-deployment> -n <namespace> -o yaml | grep -A10 en
 - [[concepts/canary-deployment.md|金丝雀部署]] — 渐进式发布策略、流量权重与指标驱动的自动推进
 - [[concepts/blue-green-deployment.md|蓝绿部署]] — 零停机发布切换机制与回滚策略
 - [[concepts/autoscaling-strategies.md|自动扩缩容策略]] — HPA、VPA 与发布过程中的弹性保障
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

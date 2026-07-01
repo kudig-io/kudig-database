@@ -1,6 +1,7 @@
 ---
 title: 服务器架构原理
 description: '# 服务器架构原理'
+summary: '# 服务器架构原理'
 category: hardware
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - gpu
 - network
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 服务器架构原理
 

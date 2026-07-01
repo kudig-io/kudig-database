@@ -1,6 +1,7 @@
 ---
 title: 24. 容量规划与预测 (Capacity Planning & Forecasting)
 description: 本章节深入探讨Kubernetes环境下的容量规划方法论，包括资源需求预测、扩容策略制定、容量优化和成本效益分析等核心内容。
+summary: 本章节深入探讨Kubernetes环境下的容量规划方法论，包括资源需求预测、扩容策略制定、容量优化和成本效益分析等核心内容。
 category: production-operations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - job
 - gpu
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -48,8 +51,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 24. 容量规划与预测 (Capacity Planning & Forecasting)
 

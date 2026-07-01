@@ -1,6 +1,7 @@
 ---
-title: "第七章:附录 [domain-10-troubleshooting-diagnostics]"
+title: 第七章:附录 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**所属系列**: FEBM 法医鉴定循证方法论深度解析'''
+summary: 'description: ''**所属系列**: FEBM 法医鉴定循证方法论深度解析'''
 category: febm
 tags:
 - febm
@@ -13,6 +14,8 @@ tags:
 - cilium
 - docker
 - opa
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -44,8 +47,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 第七章:附录
 description: '**所属系列**: FEBM 法医鉴定循证方法论深度解析'

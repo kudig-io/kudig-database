@@ -1,13 +1,17 @@
 ---
 title: 流式传输与多模态输入
-description: '**文档类型**: 功能详解 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Streaming, SSE, Stream Cancellation, Multimodal, Image,
-  PDF, Audio, Vision, Base64'
+description: '**文档类型**: 功能详解 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Streaming,
+  SSE, Stream Cancellation, Multimodal, Image, PDF, Audio, Vision, Base64'
+summary: '**文档类型**: 功能详解 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Streaming, SSE,
+  Stream Cancellation, Multimodal, Image, PDF, Audio, Vision, Base64'
 category: ai-coding
 tags:
 - ai
 - coding
 - copilot
 - code-generation
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +28,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 流式传输与多模态输入
 

@@ -1,6 +1,9 @@
 ---
 title: '集群升级进阶: 滚动升级与回滚策略'
-description: 'description: ''| `cmd/kubeadm/app/phases/upgrade/computehash.go` | L30-L120 | 计算配置哈希'
+description: 'description: ''| `cmd/kubeadm/app/phases/upgrade/computehash.go` | L30-L120
+  | 计算配置哈希'
+summary: 'description: ''| `cmd/kubeadm/app/phases/upgrade/computehash.go` | L30-L120
+  | 计算配置哈希'
 category: general
 tags:
 - reference
@@ -13,6 +16,8 @@ tags:
 - cilium
 - calico
 - coredns
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +41,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 集群升级进阶滚动升级与回滚策略
 description: '| `cmd/kubeadm/app/phases/upgrade/computehash.go` | L30-L120 | 计算配置哈希
@@ -995,6 +1001,8 @@ kubeadm upgrade diff v1.29.0
 - [初始化阶段](17-init-phases.md) — init phase 与 upgrade phase 对比
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[hot|hot]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

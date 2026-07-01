@@ -1,6 +1,8 @@
 ---
 title: Kubernetes WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes)
-description: 'title: Kubernetes WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes)'
+description: 'title: Kubernetes WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on
+  Kubernetes)'
+summary: 'title: Kubernetes WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes)'
 category: general
 tags:
 - paper
@@ -13,6 +15,8 @@ tags:
 - helm
 - containerd
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +50,9 @@ prerequisites:
 - gpu-scheduling-basics
 - tls-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes)
 description: '# Kubernetes WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes)'
@@ -1592,5 +1597,7 @@ WebAssembly 不会取代容器，而是成为 Kubernetes 生态的重要补充�
 - 24-kubernetes-policy-as-code-governance-automation
 
 ## Related
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

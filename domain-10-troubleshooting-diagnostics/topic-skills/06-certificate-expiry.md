@@ -1,6 +1,7 @@
 ---
 title: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
 description: '## 1. 概述'
+summary: '## 1. 概述'
 category: security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: core
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -53,8 +56,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 <!-- condition: kubeadm certs check-expiration 2>/dev/null | grep -E 'EXPIRES|expired' 显示证书即将过期或已过期 -->
 
@@ -118,7 +122,7 @@ Kubernetes 集群涉及以下几类证书，每类的有效期、管理方式和
 | S4 | etcd 集群成员间通信失败，apiserver 无法连接 etcd / etcd cluster members cannot communicate, apiserver cannot reach etcd | apiserver 日志出现 `connection error: desc = "transport: authentication handshake failed"`；etcd 日志出现 `rejected connection from ... (error "tls: failed to verify certificate")` | 0.85 | etcd 进程未运行；etcd 磁盘 I/O 超时；etcd 数据损坏 |
 | S5 | TLS handshake 失败出现在应用日志或 Ingress Controller 日志中 / TLS handshake failure in application or ingress controller logs | Ingress Controller（如 nginx-ingress）日志出现 `SSL_do_handshake() failed`；应用日志出现 `tls: handshake failure` | 0.80 | 客户端不支持服务端的 TLS 版本/密码套件（非过期问题）；SNI 配置错误 |
 | S6 | Webhook 调用失败，返回证书错误 / Webhook calls failing with certificate errors | `kubectl` 创建/更新资源时返回 `Internal error occurred: failed calling webhook ... x509: certificate has expired`；或 apiserver 日志中出现 webhook TLS 错误 | 0.80 | Webhook Service 不可达（网络问题）；Webhook caBundle 配置为空 |
-| S7 | Ingress TLS 证书过期，浏览器显示安全警告 / Ingress TLS certificate expired, browser shows security warning | 浏览器访问 HTTPS 站点显示 `NET::ERR_CERT_DATE_INVALID`；`echo \| openssl s_client -connect <host>:443 -servername <host> 2>/dev/null \| openssl x509 -noout -dates` 显示 notAfter 已过 | 0.90 | 证书有效但域名不匹配（SAN 问题）；证书链不完整（缺少中间 CA） |
+| S7 | Ingress TLS 证书过期，浏览器显示安全警告 / Ingress TLS certificate expired, browser shows security warning | 浏览器访问 HTTPS 站点显示 `NET::ERR_CERT_DATE_INVALID`；`echo | openssl s_client -connect <host>:443 -servername <host> 2>/dev/null | openssl x509 -noout -dates` 显示 notAfter 已过 | 0.90 | 证书有效但域名不匹配（SAN 问题）；证书链不完整（缺少中间 CA） |
 | S8 | cert-manager Certificate 资源显示 Ready=False / cert-manager Certificate shows Ready=False status | `kubectl get certificates -A` 显示 READY 列为 `False`；`kubectl describe certificate <name> -n <ns>` 的 Events 中有错误信息 | 0.85 | cert-manager 控制器未运行（非证书过期问题）；ACME DNS challenge 的 DNS 传播延迟（需等待） |
 | S9 | `certificate signed by unknown authority` 错误 / Certificate signed by unknown authority error | kubectl 或组件日志中出现 `x509: certificate signed by unknown authority` | 0.75 | CA 证书被轮换但组件未更新 CA bundle（是 CA 不匹配，不一定是过期）；自签名证书环境中缺少 CA 信任配置 |
 
@@ -428,7 +432,7 @@ kubectl 不可用?
   ssh <node-ip> "cat /var/lib/kubelet/config.yaml | grep -A 2 -i rotate"
 
   # 检查 kubelet 证书轮换相关日志
-  ssh <node-ip> "journalctl -u kubelet --since '1 hour ago' --no-pager | grep -i 'certificate\|rotate\|csr\|x509'"
+  ssh <node-ip> "journalctl -u kubelet --since '1 hour ago' --no-pager | grep -i 'certificate|rotate|csr|x509'"
 
   # 检查证书文件的符号链接（auto-rotation 使用 current 链接）
   ssh <node-ip> "ls -la /var/lib/kubelet/pki/"
@@ -492,7 +496,7 @@ kubectl 不可用?
   kubectl get issuer -A -o wide
   kubectl describe certificate <cert-name> -n <namespace>
   kubectl describe certificaterequest <cr-name> -n <namespace>
-  kubectl logs -n cert-manager deployment/cert-manager --tail=100 | grep -i "error\|fail\|expire"
+  kubectl logs -n cert-manager deployment/cert-manager --tail=100 | grep -i "error|fail|expire"
   # 检查 ACME Order 和 Challenge（如果使用 Let's Encrypt）
   kubectl get orders -A
   kubectl get challenges -A
@@ -1979,7 +1983,7 @@ kubectl delete namespace test-webhook-verify 2>/dev/null  # ⚠️ 不可逆：�
 |---------|---------|---------|---------|
 | **时间偏移误判为证书过期** | 组件日志出现 `x509: certificate has expired or is not yet valid`，看似证书过期 | 节点 NTP 未同步，时钟偏移导致有效证书被判定为过期或未生效。证书实际 notAfter 仍在未来 | 在诊断证书过期时（D1.2/D1.3），同步执行 D2.6 检查时间同步。如果 `openssl x509 -dates` 显示证书有效期覆盖当前 UTC 时间，但组件报错，优先检查节点时间 |
 | **CA bundle 不匹配误判为证书过期** | Webhook 或应用报 `x509: certificate signed by unknown authority`，误以为证书过期 | Webhook 的 caBundle 与实际 webhook 服务的 CA 不一致（如 cert-manager 轮换了 CA 但 caBundle 未更新） | 区分 `certificate has expired` 和 `signed by unknown authority` 两种错误。后者通常不是过期问题，而是 CA 信任链断裂。检查 D2.8 中 caBundle 与实际 CA 的一致性 |
-| **kubeconfig 过期误判为 apiserver 证书过期** | `kubectl` 命令失败返回 x509 错误，误判 apiserver 证书过期 | 实际上 apiserver 证书有效，但用户 kubeconfig 中的客户端证书（client-certificate-data）过期 | 在 D1.2 中通过 `openssl s_client` 直接检查 apiserver serving cert。如果 serving cert 有效，检查用户 kubeconfig 中的客户端证书：`kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}' \| base64 -d \| openssl x509 -noout -dates` |
+| **kubeconfig 过期误判为 apiserver 证书过期** | `kubectl` 命令失败返回 x509 错误，误判 apiserver 证书过期 | 实际上 apiserver 证书有效，但用户 kubeconfig 中的客户端证书（client-certificate-data）过期 | 在 D1.2 中通过 `openssl s_client` 直接检查 apiserver serving cert。如果 serving cert 有效，检查用户 kubeconfig 中的客户端证书：`kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}' | base64 -d | openssl x509 -noout -dates` |
 | **中间 CA 过期误判为叶证书过期** | Ingress TLS 验证失败，检查叶证书有效期发现仍有效 | 证书链中的中间 CA 过期，导致完整链验证失败，但叶证书本身未过期 | 在 D2.9 中使用 `openssl s_client -showcerts` 检查完整证书链，逐级验证每个证书的有效期 |
 | **cert-manager 限流误判为配置错误** | cert-manager Certificate 持续 Ready=False，Issuer 看似正常 | Let's Encrypt 对该域名/账号触发了速率限制（rate limit），cert-manager 无法完成 ACME challenge | 在 D2.5 中检查 cert-manager 日志和 CertificateRequest Events 中是否包含 `rateLimited` 或 `too many certificates already issued`。等待限流窗口过期或使用 staging 环境 |
 | **证书格式错误误判为过期** | TLS 握手失败，查看证书有效期发现未过期 | TLS Secret 中的证书格式错误（如 PEM 编码损坏、证书链顺序错误、包含多余空格/换行） | 使用 `openssl x509 -in <cert> -text` 验证证书可以被正确解析。检查 Secret 中 `tls.crt` 和 `tls.key` 的 base64 编码是否正确 |

@@ -1,28 +1,32 @@
 ---
-title: "服务连通性问题 — 远程顾问对话脚本"
-category: "troubleshooting"
-tags: ["networking", "remote-consultant"]
-created: "2026-05-23"
-updated: "2026-05-23"
+title: 服务连通性问题 — 远程顾问对话脚本
+summary: 服务连通性问题的远程顾问对话脚本，覆盖Service、Endpoint、kube-proxy排查。
+category: troubleshooting
+tags:
+- networking
+- remote-consultant
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
-dialogue_id: "DIALOGUE-SKILL-NET-002"
-skill_id: "SKILL-NET-002"
-version: "1.0.0"
-role: "remote-consultant"
-language: "zh"
-summary: "服务连通性问题的远程顾问对话脚本，覆盖Service、Endpoint、kube-proxy排查。"
+dialogue_id: DIALOGUE-SKILL-NET-002
+skill_id: SKILL-NET-002
+version: 1.0.0
+role: remote-consultant
+language: zh
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
-    type: uses
-  - target: "[[entities/cilium.md]]"
-    type: uses
-  - target: "[[entities/coredns.md]]"
-    type: uses
-  - target: "[[entities/deployment.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]"
-    type: uses
+- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+  type: uses
+- target: '[[entities/cilium.md]]'
+  type: uses
+- target: '[[entities/coredns.md]]'
+  type: uses
+- target: '[[entities/deployment.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]'
+  type: uses
 ---
+
 
 # Service 连通性问题诊断 — 远程顾问对话脚本
 
@@ -189,7 +193,7 @@ relationships:
 > **步骤 3：Terway网络模式排查**
 > ```bash
 > # 确认集群使用的网络插件模式（Terway/Flannel）
-> kubectl get configmap terway-config -n kube-system -o yaml | grep -i "network_policy\|eni"
+> kubectl get configmap terway-config -n kube-system -o yaml | grep -i "network_policy|eni"
 > # 查看 Terway Pod 状态
 > kubectl get pods -n kube-system -l app=terway-eniip -o wide
 > # 检查Pod的ENI辅助IP分配情况
@@ -205,7 +209,7 @@ relationships:
 > ssh <node-ip> "ip addr show | grep eni"
 > ssh <node-ip> "ip route | grep <pod-ip>"
 > # 检查Terway分配的VSwitch和安全组
-> kubectl logs -n kube-system <terway-pod-name> --tail=50 | grep -i "error\|fail\|timeout"
+> kubectl logs -n kube-system <terway-pod-name> --tail=50 | grep -i "error|fail|timeout"
 > ```
 > **如果无法 SSH** → `kubectl debug node/<node-name> -it --image=nicolaka/netshoot -- ip addr show`
 
@@ -309,7 +313,7 @@ relationships:
 > kube-proxy 异常会导致 Service 转发规则无法维护。请按以下步骤排查和修复。
 > 1. 确认 kube-proxy 运行模式：`kubectl get configmap kube-proxy -n kube-system -o yaml | grep -i mode`
 > **如果无法执行** → 检查 kube-proxy DaemonSet 参数：`kubectl get daemonset kube-proxy -n kube-system -o yaml | grep -i mode`
-> 2. 检查 kube-proxy 日志中的错误：`kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=100 | grep -i "error\|fail\|warn"`
+> 2. 检查 kube-proxy 日志中的错误：`kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=100 | grep -i "error|fail|warn"`
 > **如果无法执行** → 逐个查看 kube-proxy Pod：`kubectl logs <kube-proxy-pod> -n kube-system --tail=100`
 > 3. 检查 kube-proxy 配置是否冲突：`kubectl get configmap kube-proxy -n kube-system -o yaml > /tmp/kube-proxy-config.yaml`
 > **如果无法备份** → 直接查看：`kubectl get configmap kube-proxy -n kube-system -o yaml | head -50`
@@ -414,7 +418,7 @@ relationships:
 > 2. 检查 kube-controller-manager 状态：`kubectl get pods -n kube-system | grep -i controller`
 > **如果无法执行** → `kubectl get pods -n kube-system`
 > 3. 检查 EndpointSlice Controller 日志：`kubectl logs -n kube-system -l component=kube-controller-manager --tail=50 | grep -i endpoint`
-> **如果无法执行** → `kubectl logs <kube-controller-manager-pod> -n kube-system --tail=100 | grep -i "endpoint\|error"`
+> **如果无法执行** → `kubectl logs <kube-controller-manager-pod> -n kube-system --tail=100 | grep -i "endpoint|error"`
 
 **分支决策**：
 - **I1**：EndpointSlice 存在但地址为空 → 删除重建 Service
@@ -650,7 +654,7 @@ kubectl get endpointslices -n <namespace>
 > **如果 describe 无信息** → `kubectl get svc <service-name> -n <namespace> -o yaml | grep -A 10 loadBalancer`
 > 2. 检查 MetalLB speaker 日志（如果使用 MetalLB）：`kubectl logs -n metallb-system -l app=metallb -c speaker --tail=50`
 > **如果无法执行** → `kubectl get pods -n metallb-system`，查看 speaker 状态
-> **如果无 metallb-system** → 检查云控制器日志：`kubectl logs -n kube-system | grep -i "loadbalancer\|cloud"`
+> **如果无 metallb-system** → 检查云控制器日志：`kubectl logs -n kube-system | grep -i "loadbalancer|cloud"`
 > 3. 验证 LB IP 可达性：`ping <lb-ip>` 或 `arping -I <interface> <lb-ip>`（L2 模式）
 > **如果无法从本地测试** → `kubectl run net-test --image=nicolaka/netshoot --rm -it --restart=Never --overrides='{"spec":{"hostNetwork":true}}' -- ping -c 3 <lb-ip>`
 

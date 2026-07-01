@@ -1,6 +1,7 @@
 ---
 title: 成本优化与FinOps实践 (Cost Optimization & FinOps)
 description: '# 成本优化与FinOps实践 (Cost Optimization & FinOps)'
+summary: '# 成本优化与FinOps实践 (Cost Optimization & FinOps)'
 category: platform-ops
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - vpa
 - daemonset
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -57,8 +60,9 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
-created: "2026-05-23"
 ---
+
+
 
 # 成本优化与FinOps实践 (Cost Optimization & FinOps)
 

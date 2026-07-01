@@ -1,6 +1,7 @@
 ---
 title: kubelet 资源驱逐机制
 description: '## 概述'
+summary: '## 概述'
 category: skills
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - resource-pressure
 - memory-pressure
 - prometheus
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[kubelet|kubelet]] 资源驱逐机制
 

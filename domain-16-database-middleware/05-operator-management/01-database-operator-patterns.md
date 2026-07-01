@@ -1,6 +1,7 @@
 ---
 title: 数据库 Operator 设计模式
 description: '# 数据库 Operator 设计模式'
+summary: '# 数据库 Operator 设计模式'
 category: domain
 tags:
 - kubernetes
@@ -13,6 +14,8 @@ tags:
 - postgresql
 - kafka
 - statefulset
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # 数据库 Operator 设计模式
 

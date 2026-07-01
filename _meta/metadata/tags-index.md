@@ -1,6 +1,7 @@
 ---
 title: 标签索引 (Tags Index) [metadata]
 description: '- domain-1: 架构概览、核心组件、性能调优'
+summary: '- domain-1: 架构概览、核心组件、性能调优'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - networkpolicy
 - gpu
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # 标签索引 (Tags Index)
 

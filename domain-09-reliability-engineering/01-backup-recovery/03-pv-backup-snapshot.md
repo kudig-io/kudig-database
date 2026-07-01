@@ -1,6 +1,7 @@
 ---
 title: PV 快照：云盘快照、CSI 快照、恢复演练
 description: 面向阿里云专有云 K8s 运维工单智能体的 PV 快照实战手册，覆盖阿里云云盘快照、CSI VolumeSnapshot、快照类配置、恢复演练及常见问题排查。
+summary: 面向阿里云专有云 K8s 运维工单智能体的 PV 快照实战手册，覆盖阿里云云盘快照、CSI VolumeSnapshot、快照类配置、恢复演练及常见问题排查。
 category: reliability-engineering
 tags:
 - pv
@@ -13,8 +14,9 @@ tags:
 - ack
 - aso
 - storage
-created: "2026-06-29"
-updated: "2026-06-29"
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06-29
 difficulty: advanced
 audience:
@@ -50,6 +52,8 @@ authors:
 - name: KUDIG Team
   role: contributor
 ---
+
+
 
 # PV 快照：云盘快照、CSI 快照、恢复演练
 

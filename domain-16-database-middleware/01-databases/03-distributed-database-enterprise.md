@@ -1,6 +1,7 @@
 ---
 title: 分布式数据库企业级实践深度指南
 description: '# 分布式数据库企业级实践深度指南'
+summary: '# 分布式数据库企业级实践深度指南'
 category: enterprise-database-middleware
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - postgresql
 - job
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -50,8 +53,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/sql.md
   label: '速查卡: sql'
-created: "2026-05-23"
 ---
+
+
 
 # 分布式数据库企业级实践深度指南
 

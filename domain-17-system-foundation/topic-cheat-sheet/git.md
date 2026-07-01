@@ -1,6 +1,7 @@
 ---
 title: Git 速查卡
 description: 版本控制日常操作快速参考，覆盖 Git 2.30+ 常用命令
+summary: 版本控制日常操作快速参考，覆盖 Git 2.30+ 常用命令
 category: cheatsheet
 tags:
 - git
@@ -8,6 +9,8 @@ tags:
 - cheatsheet
 - quick-reference
 - devops
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ related_docs:
   desc: GitOps 平台运维文档
 - path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   desc: Linux 速查卡
-created: "2026-05-23"
 ---
+
+
 
 # Git 速查表
 

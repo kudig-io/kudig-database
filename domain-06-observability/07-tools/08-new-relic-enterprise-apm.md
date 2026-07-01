@@ -1,6 +1,7 @@
 ---
 title: New Relic Enterprise APM Platform 深度实践
 description: '# New Relic Enterprise APM Platform 深度实践'
+summary: '# New Relic Enterprise APM Platform 深度实践'
 category: enterprise-monitoring-alerting
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - operator
 - webhook
 - serverless
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -53,8 +56,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # New Relic Enterprise APM Platform 深度实践
 

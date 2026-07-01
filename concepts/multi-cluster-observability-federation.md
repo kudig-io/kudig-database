@@ -1,5 +1,8 @@
 ---
 title: 多集群可观测性联邦架构
+summary: 多集群可观测性联邦架构：现代 entities/kubernetes.md 平台通常由多个集群组成——按环境划分（开发/测试/生产）、按地域划分（Region
+  A/B/C）、按团队划分（平台/业务/AI）。每个集群独立运行 entities/prometheus.md，但运维团队需要一个统一的"全局视图"来回答跨集群问题："所有生产集群的
+  API Server 延迟趋势如何？""跨地域的服务...
 category: synthesis
 tags:
 - k8s
@@ -12,6 +15,7 @@ tags:
 - metrics
 - global-view
 - cross-cluster
+tier: supporting
 sources:
 - domain-03-networking-traffic/00-core-k8s-networking
 - domain-03-networking-traffic/01-fundamentals
@@ -21,17 +25,19 @@ created: 2026-05-21 14:00:00+00:00
 updated: 2026-05-21 14:00:00+00:00
 last_updated: 2026-05-21 14:00:00+00:00
 relationships:
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/cluster-mesh.md]]"
-    type: uses
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
-  - target: "[[entities/prometheus.md]]"
-    type: uses
-  - target: "[[entities/cilium.md]]"
-    type: uses
-  - target: "[[concepts/Cilium eBPF × 可观测性.md]]"
-    type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/cluster-mesh.md]]'
+  type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
+- target: '[[entities/prometheus.md]]'
+  type: uses
+- target: '[[entities/cilium.md]]'
+  type: uses
+- target: '[[concepts/Cilium eBPF × 可观测性.md]]'
+  type: uses
 ---
+
+
 
 # 多集群可观测性联邦架构
 

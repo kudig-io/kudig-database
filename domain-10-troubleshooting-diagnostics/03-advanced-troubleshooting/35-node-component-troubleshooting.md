@@ -1,6 +1,7 @@
 ---
 title: 节点组件故障排查
 description: '# 35 - 节点组件故障排查 (Node Component Troubleshooting)'
+summary: '# 35 - 节点组件故障排查 (Node Component Troubleshooting)'
 category: troubleshooting
 tags:
 - kubelet
@@ -13,6 +14,8 @@ tags:
 - docker
 - job
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: advanced
 reading_level: advanced
@@ -61,8 +64,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md
   label: '故障树: node'
-created: "2026-05-23"
 ---
+
+
 
 # 35 - 节点组件故障排查 (Node Component Troubleshooting)
 
@@ -201,23 +205,23 @@ journalctl -u kubelet --since "1 hour ago"
 journalctl -u kubelet -f
 
 # 过滤错误日志
-journalctl -u kubelet --since "1 hour ago" | grep -i "error\|failed\|warning"
+journalctl -u kubelet --since "1 hour ago" | grep -i "error|failed|warning"
 
 # 分析特定时间段日志
 journalctl -u kubelet --since "2026-02-04 10:00:00" --until "2026-02-04 11:00:00"
 
 # ========== 常见错误模式识别 ==========
 # 证书相关错误
-journalctl -u kubelet | grep -i "certificate\|tls\|x509"
+journalctl -u kubelet | grep -i "certificate|tls|x509"
 
 # 资源相关错误
-journalctl -u kubelet | grep -i "eviction\|pressure\|resource"
+journalctl -u kubelet | grep -i "eviction|pressure|resource"
 
 # 网络相关错误
-journalctl -u kubelet | grep -i "network\|connection\|timeout"
+journalctl -u kubelet | grep -i "network|connection|timeout"
 
 # 容器运行时错误
-journalctl -u kubelet | grep -i "cri\|container\|docker\|containerd"
+journalctl -u kubelet | grep -i "cri|container|docker|containerd"
 ```
 
 ### 2.3 kubelet性能监控
@@ -402,7 +406,7 @@ sleep 30
 iptables -t nat -L KUBE-SERVICES -n | head -10
 
 # 检查规则同步日志
-kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=100 | grep -i "sync\|update"
+kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=100 | grep -i "sync|update"
 ```
 
 ---
@@ -454,7 +458,7 @@ kubectl get events --all-namespaces --field-selector reason=Evicted --sort-by='.
 ```bash
 # ========== 资源预留配置 ==========
 # 检查系统预留配置
-cat /var/lib/kubelet/config.yaml | grep -A 5 "systemReserved\|kubeReserved"
+cat /var/lib/kubelet/config.yaml | grep -A 5 "systemReserved|kubeReserved"
 
 # 验证资源预留效果
 kubectl describe node <node-name> | grep -A 5 "Allocated resources"

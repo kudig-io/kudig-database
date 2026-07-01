@@ -1,6 +1,7 @@
 ---
 title: 09 - 云原生安全专家指南
 description: '# 09 - 云原生安全专家指南'
+summary: '# 09 - 云原生安全专家指南'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - istio
 - cilium
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -41,9 +44,9 @@ prerequisites:
 - policy-basics
 - backup-basics
 - logging-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 09 - 云原生安全专家指南
 
@@ -2718,7 +2721,7 @@ spec:
               $(date)
               
               ## 主要发现
-              $(grep -i "critical\|high" /tmp/vulnerability-report.txt | head -10)
+              $(grep -i "critical|high" /tmp/vulnerability-report.txt | head -10)
               
               ## 建议措施
               1. 修复高危漏洞

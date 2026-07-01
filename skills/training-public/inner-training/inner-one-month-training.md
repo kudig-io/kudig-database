@@ -1,6 +1,7 @@
 ---
 title: ACK/ACR/K8S 内部培训大纲
 description: '- "K8s运维培训"'
+summary: '- "K8s运维培训"'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flannel
 - coredns
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,8 +38,9 @@ prerequisites:
 - monitoring-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # ACK/ACR/K8S 内部培训大纲
 

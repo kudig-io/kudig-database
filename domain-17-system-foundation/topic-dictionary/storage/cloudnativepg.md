@@ -1,6 +1,8 @@
 ---
 title: CloudNativePG 云原生 PostgreSQL
-description: 'CloudNativePG 是 EDB 开源的 Kubernetes PostgreSQL Operator，以 GitOps 友好的方式管理 PostgreS...'
+description: CloudNativePG 是 EDB 开源的 Kubernetes PostgreSQL Operator，以 GitOps 友好的方式管理
+  PostgreS...
+summary: CloudNativePG 是 EDB 开源的 Kubernetes PostgreSQL Operator，以 GitOps 友好的方式管理 PostgreS...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - storage
 - database
 - operator
+tier: core
+created: 2026-05
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,9 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
-created: 2026-05
 ---
+
+
 
 # CloudNativePG 云原生 PostgreSQL（CloudNativePG）
 

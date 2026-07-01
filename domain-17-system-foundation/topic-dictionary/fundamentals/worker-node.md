@@ -1,12 +1,15 @@
 ---
 title: 工作节点
-description: 'Worker Node（工作节点）是 Kubernetes 集群中运行用户工作负载的机器。它是集群中实际执行 Pod 的节点，通常数量远多于控制平面节点。...'
+description: Worker Node（工作节点）是 Kubernetes 集群中运行用户工作负载的机器。它是集群中实际执行 Pod 的节点，通常数量远多于控制平面节点。...
+summary: Worker Node（工作节点）是 Kubernetes 集群中运行用户工作负载的机器。它是集群中实际执行 Pod 的节点，通常数量远多于控制平面节点。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - node
 - worker
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 工作节点
 

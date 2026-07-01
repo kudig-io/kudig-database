@@ -1,6 +1,7 @@
 ---
 title: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 description: '## 1. 概述'
+summary: '## 1. 概述'
 category: workload
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - istio
 - helm
+tier: core
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -61,8 +64,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 ---
 
@@ -560,7 +564,7 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   kubectl get mutatingwebhookconfigurations -o wide
   
   # 检查是否有针对 Deployment/Pod 的 Webhook
-  kubectl get validatingwebhookconfigurations -o jsonpath='{range .items[*]}{.metadata.name}: {range .webhooks[*]}{.rules[*].resources}{"\n"}{end}{end}' | grep -i "pods\|deployments"
+  kubectl get validatingwebhookconfigurations -o jsonpath='{range .items[*]}{.metadata.name}: {range .webhooks[*]}{.rules[*].resources}{"\n"}{end}{end}' | grep -i "pods|deployments"
   
   # 检查 Webhook 的 failurePolicy
   kubectl get validatingwebhookconfigurations -o jsonpath='{range .items[*]}{.metadata.name}: failurePolicy={.webhooks[*].failurePolicy}{"\n"}{end}'
@@ -594,7 +598,7 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
 - **命令**:
   ```bash
   # 获取 kube-controller-manager 日志（需要控制平面访问权限）
-  kubectl logs -n kube-system -l component=kube-controller-manager --tail=200 | grep -i "deployment\|replicaset\|NAME"
+  kubectl logs -n kube-system -l component=kube-controller-manager --tail=200 | grep -i "deployment|replicaset|NAME"
   
   # 或通过 API 获取（如果有权限）
   kubectl get --raw /logs/kube-controller-manager.log 2>/dev/null | tail -200 | grep -i "NAME"

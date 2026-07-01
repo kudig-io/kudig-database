@@ -1,6 +1,7 @@
 ---
 title: Higress 网关异常故障树分析 (skills)
 description: '### 故障排查命令速查'
+summary: '### 故障排查命令速查'
 category: skills
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - gateway
 - wasm
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 fta_id: FTA-HIGRESS-001
 component: Higress
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 # Higress 网关异常故障树分析
 

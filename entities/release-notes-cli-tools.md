@@ -1,6 +1,7 @@
 ---
 title: 发布说明索引 — CLI 工具
 description: '| [[helm]] | 42 | v4.1 | v4.1 | Kubernetes 包管理器 |'
+summary: '| [[helm]] | 42 | v4.1 | v4.1 | Kubernetes 包管理器 |'
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - minikube
 - rbac
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 # 发布说明索引 — CLI 工具
 

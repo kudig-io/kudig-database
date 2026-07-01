@@ -1,6 +1,7 @@
 ---
 title: cert-manager
-description: "cert-manager 是 Kubernetes 原生的证书管理工具，自动化 TLS 证书的签发、续期和吊销。它支持 Let's Encrypt、Vault、..."
+description: cert-manager 是 Kubernetes 原生的证书管理工具，自动化 TLS 证书的签发、续期和吊销。它支持 Let's Encrypt、Vault、...
+summary: cert-manager 是 Kubernetes 原生的证书管理工具，自动化 TLS 证书的签发、续期和吊销。它支持 Let's Encrypt、Vault、...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - certificate
 - tls
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # cert-manager
 

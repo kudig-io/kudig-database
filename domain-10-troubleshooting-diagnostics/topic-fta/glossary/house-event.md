@@ -1,12 +1,15 @@
 ---
 title: 外部事件
-description: '外部事件（House Event）是故障树中表示正常预期会发生的事件。它不是故障，而是作为条件或触发器存在于故障树中。...'
+description: 外部事件（House Event）是故障树中表示正常预期会发生的事件。它不是故障，而是作为条件或触发器存在于故障树中。...
+summary: 外部事件（House Event）是故障树中表示正常预期会发生的事件。它不是故障，而是作为条件或触发器存在于故障树中。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - houseevent
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 外部事件
 

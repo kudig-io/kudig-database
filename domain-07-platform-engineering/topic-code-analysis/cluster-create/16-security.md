@@ -1,6 +1,7 @@
 ---
-title: "安全机制: ServiceAccount Token 与 Audit [cluster-create]"
+title: '安全机制: ServiceAccount Token 与 Audit [cluster-create]'
 description: 'title: ''安全机制: ServiceAccount Token 与 Audit'''
+summary: 'title: ''安全机制: ServiceAccount Token 与 Audit'''
 category: general
 tags:
 - reference
@@ -10,6 +11,8 @@ tags:
 - kubelet
 - scheduler
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: '安全机制: ServiceAccount Token 与 Audit'
 description: '# 安全机制: ServiceAccount Token 与 Audit'
@@ -351,6 +355,8 @@ NodeRestriction 限制 kubelet 的操作:
 | `audit log permission denied` | 审计日志目录无权限 | 确保 /var/log/kubernetes 可写 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[log|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

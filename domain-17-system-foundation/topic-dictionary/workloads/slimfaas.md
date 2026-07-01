@@ -1,6 +1,7 @@
 ---
 title: SlimFaas 轻量 FaaS
-description: 'SlimFaas 是 Axa France 开源的超轻量级 Kubernetes FaaS（Function as a Service）平台，以极低的复杂度和资...'
+description: SlimFaas 是 Axa France 开源的超轻量级 Kubernetes FaaS（Function as a Service）平台，以极低的复杂度和资...
+summary: SlimFaas 是 Axa France 开源的超轻量级 Kubernetes FaaS（Function as a Service）平台，以极低的复杂度和资...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - workloads
 - serverless
 - faas
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # SlimFaas 轻量 FaaS（SlimFaas）
 

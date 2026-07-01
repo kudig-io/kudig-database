@@ -1,6 +1,7 @@
 ---
 title: Pod Quality of Service Classes
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - terminology
 - kubelet
 - vpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # Pod Quality of [[Service|Service]] Classes
 

@@ -1,10 +1,13 @@
 ---
 title: 专有云 (Apsara Stack) - ESS 弹性伸缩
 description: 'description: ''- [专有云 ESS 架构差异](#专有云-ess-架构差异)'''
+summary: 'description: ''- [专有云 ESS 架构差异](#专有云-ess-架构差异)'''
 category: general
 tags:
 - cloud
 - multi-cloud
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
-created: "2026-05-23"
 ---
+
+
 
 title: 专有云 (Apsara Stack) - ESS 弹性伸缩
 description: '- [专有云 ESS 架构差异](#专有云-ess-架构差异)'

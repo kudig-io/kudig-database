@@ -1,6 +1,7 @@
 ---
 title: Platform Engineering
 description: 整合原 domain-07-platform-engineering/36 的平台知识，涵盖平台构建(IDP/Backstage)、平台运维执行和平台治理。
+summary: 整合原 domain-07-platform-engineering/36 的平台知识，涵盖平台构建(IDP/Backstage)、平台运维执行和平台治理。
 category: domain
 tags:
 - platform-engineering
@@ -10,6 +11,8 @@ tags:
 - platform-ops
 - daemonset
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Platform Engineering
 

@@ -1,28 +1,36 @@
 ---
-skill_id: "SKILL-CONT-001"
-skill_name: "Control Plane Failure"
-version: "1.0.0"
-category: "control-plane"
-severity_range: "P1-P2"
+title: Control Plane Failure
+summary: Control Plane Failure：API entities/etcd.md/Scheduler 问题的诊断与修复 Skill。
+category: control-plane
+tags:
+- skills
+- control-plane
+- troubleshooting
+- visibility/public
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+skill_id: SKILL-CONT-001
+skill_name: Control Plane Failure
+version: 1.0.0
+severity_range: P1-P2
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
-estimated_resolution_time: "10-30min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+estimated_resolution_time: 10-30min
+risk_level: medium
+agent_execution_mode: L2-semi-auto
 trigger_keywords:
-  - "control plane failure"
+- control plane failure
 prerequisites:
-  - "kubectl-basics"
-created: "2026-05-23"
-updated: "2026-05-23"
+- kubectl-basics
 last_updated: 2026-05-23
-title: "Control Plane Failure"
-tags: ["skills", "control-plane", "troubleshooting", "visibility/public"]
 ---
+
+
 
 # Control Plane Failure
 
@@ -242,7 +250,7 @@ flowchart TD
 | 工具 | 用途 | 典型命令 |
 |:---|:---|:---|
 | kubectl | Kubernetes CLI | `kubectl get/describe/logs/exec` |
-| jq | JSON处理 | `kubectl get ... -o json \| jq ...` |
+| jq | JSON处理 | `kubectl get ... -o json | jq ...` |
 | openssl | 证书检查 | `openssl x509 -in <cert> -noout -dates` |
 | tcpdump | 网络抓包 | `tcpdump -i any port <port> -n` |
 | strace | 系统调用追踪 | `strace -p <pid> -f` |
@@ -524,3 +532,7 @@ kubectl get pods -n kube-system -l k8s-app=calico-node  # 或其他 CNI
 - [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构概览]] — Kubernetes 控制平面与工作节点架构设计
 
 ```
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

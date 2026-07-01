@@ -1,6 +1,8 @@
 ---
 title: oauth2-proxy 认证代理
-description: 'oauth2-proxy 是一个反向代理，为后端应用提供 OAuth2/OIDC 认证层。常用于为没有内置认证功能的 Kubernetes Dashboard、...'
+description: oauth2-proxy 是一个反向代理，为后端应用提供 OAuth2/OIDC 认证层。常用于为没有内置认证功能的 Kubernetes
+  Dashboard、...
+summary: oauth2-proxy 是一个反向代理，为后端应用提供 OAuth2/OIDC 认证层。常用于为没有内置认证功能的 Kubernetes Dashboard、...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - security
 - authentication
 - proxy
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # oauth2-proxy 认证代理（oauth2-proxy）
 

@@ -1,6 +1,7 @@
 ---
 title: 每日一题
 description: '- 强化故障排查思维'
+summary: '- 强化故障排查思维'
 category: skills
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - apiserver
 - kubelet
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -32,8 +35,9 @@ prerequisites:
 skill_id: SKILL-DAILY_CHECK_QUIZ-001
 skill_name: 每日一题
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 # 每日一题
 

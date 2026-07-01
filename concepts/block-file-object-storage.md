@@ -1,6 +1,7 @@
 ---
 title: Block, File, and Object Storage
 description: '- [[concepts/storage-tool-evolution.md|storage-tool-evolution]] — 存储工具演进'
+summary: '- [[concepts/storage-tool-evolution.md|storage-tool-evolution]] — 存储工具演进'
 category: concepts
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - ceph
 - minio
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ trigger_keywords:
 - Storage
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Block, File, and Object Storage
 

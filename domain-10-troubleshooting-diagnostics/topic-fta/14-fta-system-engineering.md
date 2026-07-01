@@ -1,6 +1,7 @@
 ---
 title: 第十四章：构建 FTA 系统的工程化方法 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**所属部分**: 第四部分 - FTA 系统工程实践'''
+summary: 'description: ''**所属部分**: 第四部分 - FTA 系统工程实践'''
 category: fta
 tags:
 - fta
@@ -13,6 +14,8 @@ tags:
 - redis
 - kafka
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -48,8 +51,9 @@ prerequisites:
 fta_id: FTA-14_SYSTEM_ENGINEERING-001
 component: 14 System Engineering
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: 第十四章：构建 FTA 系统的工程化方法
 description: '**所属部分**: 第四部分 - FTA 系统工程实践'

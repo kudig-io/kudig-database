@@ -1,6 +1,7 @@
 ---
 title: 07-零信任安全架构
 description: 'title: 07-零信任安全架构'
+summary: 'title: 07-零信任安全架构'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - opa
 - falco
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - service-mesh-basics
 - etcd-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 07-零信任安全架构
 description: '# 07-零信任安全架构'

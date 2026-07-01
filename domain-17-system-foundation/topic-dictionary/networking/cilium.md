@@ -1,6 +1,7 @@
 ---
 title: Cilium
-description: 'Cilium 是基于 eBPF 技术的 Kubernetes CNI 插件和网络安全解决方案。它替代了传统的 iptables 规则，提供高性能的网络数据平面、...'
+description: Cilium 是基于 eBPF 技术的 Kubernetes CNI 插件和网络安全解决方案。它替代了传统的 iptables 规则，提供高性能的网络数据平面、...
+summary: Cilium 是基于 eBPF 技术的 Kubernetes CNI 插件和网络安全解决方案。它替代了传统的 iptables 规则，提供高性能的网络数据平面、...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - cni
 - ebpf
 - networkpolicy
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Cilium
 

@@ -1,6 +1,7 @@
 ---
 title: Kuasar 多沙箱运行时
-description: 'Kuasar 是华为开源的 CNCF Sandbox 项目，提供多沙箱容器运行时管理，统一 containerd 与多种沙箱运行时（Kata/microVM/W...'
+description: Kuasar 是华为开源的 CNCF Sandbox 项目，提供多沙箱容器运行时管理，统一 containerd 与多种沙箱运行时（Kata/microVM/W...
+summary: Kuasar 是华为开源的 CNCF Sandbox 项目，提供多沙箱容器运行时管理，统一 containerd 与多种沙箱运行时（Kata/microVM/W...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - fundamentals
 - container-runtime
 - sandbox
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Kuasar 多沙箱运行时（Kuasar）
 

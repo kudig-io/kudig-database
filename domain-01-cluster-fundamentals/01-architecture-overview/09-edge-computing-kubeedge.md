@@ -1,6 +1,7 @@
 ---
 title: 09 - 边缘计算集成架构 (KubeEdge/OpenYurt)
 description: '# 09 - 边缘计算集成架构 (KubeEdge/OpenYurt)'
+summary: '# 09 - 边缘计算集成架构 (KubeEdge/OpenYurt)'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - minio
 - daemonset
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -57,8 +60,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 09 - 边缘计算集成架构 ([[KubeEdge|KubeEdge]]/OpenYurt)
 

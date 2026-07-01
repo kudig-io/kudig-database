@@ -1,6 +1,7 @@
 ---
 title: 第13课：DaemonSet 与节点守护 [10-advanced-workloads]
 description: 2. 掌握 DaemonSet 的创建和配置方法
+summary: 2. 掌握 DaemonSet 的创建和配置方法
 category: k8s-lecturer
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - pdb
 - statefulset
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -34,8 +37,9 @@ prerequisites:
 - gpu-ml-basics
 - cni-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第13课：[[DaemonSet|DaemonSet]] 与节点守护
 

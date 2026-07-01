@@ -1,6 +1,7 @@
 ---
 title: Infrastructure as Code
 description: '- [[concepts/IaC x 多集群管理.md|IaC x 多集群管理]] — synthesis'
+summary: '- [[concepts/IaC x 多集群管理.md|IaC x 多集群管理]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - flux
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - iac-basics
 - etcd-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # Infrastructure as Code
 

@@ -1,6 +1,7 @@
 ---
 title: Notary Project 容器签名
-description: 'Notary Project（原 Docker Notary v2）是 CNCF 孵化项目，提供容器镜像和其他 OCI 制品的数字签名和验证能力，是软件供应链安...'
+description: Notary Project（原 Docker Notary v2）是 CNCF 孵化项目，提供容器镜像和其他 OCI 制品的数字签名和验证能力，是软件供应链安...
+summary: Notary Project（原 Docker Notary v2）是 CNCF 孵化项目，提供容器镜像和其他 OCI 制品的数字签名和验证能力，是软件供应链安...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - security
 - supply-chain
 - signing
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Notary Project 容器签名（Notary Project）
 

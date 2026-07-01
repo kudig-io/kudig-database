@@ -1,6 +1,7 @@
 ---
 title: 服务网格 x 零信任安全
 description: 'title: 服务网格 x 零信任安全'
+summary: 'title: 服务网格 x 零信任安全'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - gateway
 - rbac
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,19 +35,20 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - etcd-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/networking.md]]"
-    type: related_to
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/service.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/networking.md]]'
+  type: related_to
 ---
+
+
 
 ---
 title: 服务网格 x 零信任安全

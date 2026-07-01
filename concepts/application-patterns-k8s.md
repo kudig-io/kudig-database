@@ -1,11 +1,20 @@
 ---
 title: K8S 应用模式
+summary: K8S 应用模式：Kubernetes 上的现代应用架构模式，涵盖服务网格、网关、事件驱动、批处理、有状态应用、多租户与分布式运行时。
 category: concepts
-tags: [patterns, microservices, event-driven, multi-tenancy, k8s]
+tags:
+- patterns
+- microservices
+- event-driven
+- multi-tenancy
+- k8s
+tier: supporting
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # K8S 应用模式
 

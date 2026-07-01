@@ -1,6 +1,7 @@
 ---
 title: 美妆电商架构设计 — 阿里云视角
 description: 'title: 美妆电商架构设计'
+summary: 'title: 美妆电商架构设计'
 category: general
 tags:
 - architecture
@@ -10,6 +11,8 @@ tags:
 - hpa
 - operator
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - prometheus-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 美妆电商架构设计
 description: '# 美妆电商架构设计 — 阿里云视角'

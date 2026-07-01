@@ -1,13 +1,22 @@
 ---
-title: "Release Notes 发布说明"
+title: Release Notes 发布说明
+summary: Release Notes 发布说明
 category: index
-tags: ["index", "release-notes", "marketing", "visibility/public"]
-sources: ["release-notes/"]
+tags:
+- index
+- release-notes
+- marketing
+- visibility/public
+tier: supporting
+sources:
+- release-notes/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: reviewed
 ---
+
+
 
 # Release Notes 发布说明
 
@@ -35,3 +44,7 @@ status: reviewed
 - _reports/release-notes/20-complete-script-book.md
 - _reports/release-notes/21-platform-selection-guide.md
 - _reports/release-notes/22-production-checklist.md
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

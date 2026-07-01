@@ -1,12 +1,15 @@
 ---
 title: 探针
-description: 'Probe（探针）是 Kubernetes 中容器健康检查机制的统称。kubelet 通过定期执行探针来检测容器的运行状态，决定容器是否需要重启、是否可以接收流...'
+description: Probe（探针）是 Kubernetes 中容器健康检查机制的统称。kubelet 通过定期执行探针来检测容器的运行状态，决定容器是否需要重启、是否可以接收流...
+summary: Probe（探针）是 Kubernetes 中容器健康检查机制的统称。kubelet 通过定期执行探针来检测容器的运行状态，决定容器是否需要重启、是否可以接收流...
 category: dictionary
 tags:
 - k8s
 - glossary
 - probe
 - health-check
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 探针
 

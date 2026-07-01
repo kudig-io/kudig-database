@@ -1,6 +1,7 @@
 ---
 title: Webhook 与准入控制故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Webhook 与准入控制故障排查指南'
+summary: 'title: Webhook 与准入控制故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - docker
 - opa
 - hpa
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -42,8 +45,9 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Webhook 与准入控制故障排查指南
 description: '# Webhook 与准入控制故障排查指南'

@@ -1,6 +1,7 @@
 ---
 title: 'Day 11: 工作负载 - Pod 生命周期 + 资源管理 + HPA'
 description: '# Day 11: 工作负载 - Pod 生命周期 + 资源管理 + HPA'
+summary: '# Day 11: 工作负载 - Pod 生命周期 + 资源管理 + HPA'
 category: learning
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - hpa
 - vpa
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 11: 工作负载 - Pod 生命周期 + 资源管理 + HPA
 
@@ -168,7 +172,7 @@ EOF
 kubectl apply -f probe-demo.yaml
 
 # 观察探针状态
-kubectl describe pod probe-demo | grep -A10 "Liveness\|Readiness\|Startup"
+kubectl describe pod probe-demo | grep -A10 "Liveness|Readiness|Startup"
 
 # 模拟探针失败
 kubectl exec probe-demo -- rm /usr/share/nginx/html/index.html

@@ -1,6 +1,7 @@
 ---
 title: Dex 身份认证
-description: 'Dex 是 CNCF 托管的 OIDC（OpenID Connect）身份认证服务，作为联邦身份提供者（IdP）连接多种后端认证源（LDAP、SAML、GitH...'
+description: Dex 是 CNCF 托管的 OIDC（OpenID Connect）身份认证服务，作为联邦身份提供者（IdP）连接多种后端认证源（LDAP、SAML、GitH...
+summary: Dex 是 CNCF 托管的 OIDC（OpenID Connect）身份认证服务，作为联邦身份提供者（IdP）连接多种后端认证源（LDAP、SAML、GitH...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - security
 - identity
 - oidc
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Dex 身份认证（Dex）
 

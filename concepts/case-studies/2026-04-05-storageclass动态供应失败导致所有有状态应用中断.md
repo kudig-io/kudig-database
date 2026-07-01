@@ -1,14 +1,19 @@
 ---
-category: "synthesis"
-tags: ["synthesis"]
-date: "2026-04-05"
-title: "StorageClass动态供应失败导致所有有状态应用中断"
-skill: "07-pvc-storage-failure"
-severity: "P0"
-created: "2026-05-23"
-updated: "2026-05-23"
+title: StorageClass动态供应失败导致所有有状态应用中断
+summary: StorageClass动态供应失败导致所有有状态应用中断：数据库集群全部Pod处于Pending状态，事件显示PVC未绑定。问题发生在所有使用动态供应的命名空间。
+category: synthesis
+tags:
+- synthesis
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-04-05'
+skill: 07-pvc-storage-failure
+severity: P0
 last_updated: 2026-05-23
 ---
+
+
 
 # StorageClass动态供应失败导致所有有状态应用中断
 

@@ -1,6 +1,7 @@
 ---
 title: 142 - Flannel 完整指南 (Flannel Complete Guide)
 description: '# 142 - Flannel 完整指南 (Flannel Complete Guide)'
+summary: '# 142 - Flannel 完整指南 (Flannel Complete Guide)'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - calico
 - docker
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -74,8 +77,9 @@ cross_refs:
 - type: doc
   path: ./04e-flannel-command-reference.md
   label: flanneld 参数详解
-created: "2026-05-23"
 ---
+
+
 
 # 142 - Flannel 完整指南 (Flannel Complete Guide)
 

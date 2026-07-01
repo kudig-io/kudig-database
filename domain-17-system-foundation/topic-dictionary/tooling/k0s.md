@@ -1,6 +1,8 @@
 ---
 title: K0s 轻量级 Kubernetes
-description: 'K0s 是 Mirantis 开源的轻量级 Kubernetes 发行版，单二进制部署，资源占用极低，适用于边缘计算、IoT 和嵌入式设备的 Kubernete...'
+description: K0s 是 Mirantis 开源的轻量级 Kubernetes 发行版，单二进制部署，资源占用极低，适用于边缘计算、IoT 和嵌入式设备的
+  Kubernete...
+summary: K0s 是 Mirantis 开源的轻量级 Kubernetes 发行版，单二进制部署，资源占用极低，适用于边缘计算、IoT 和嵌入式设备的 Kubernete...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - tooling
 - distribution
 - edge
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # K0s 轻量级 Kubernetes（K0s）
 

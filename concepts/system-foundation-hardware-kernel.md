@@ -1,11 +1,24 @@
 ---
-title: "系统基础：硬件与内核"
+title: 系统基础：硬件与内核
+summary: 系统基础：硬件与内核：本文档梳理 2025-2026 年间 Kubernetes 生态在硬件层面与 Linux 内核层面的关键演进，涵盖 DPU/GPU/ARM64
+  硬件趋势、内核基础设施变革及 K8S 事件审计机制。
 category: concepts
-tags: [hardware, dpu, gpu, arm64, linux-kernel, ebpf, cgroup, k8s]
+tags:
+- hardware
+- dpu
+- gpu
+- arm64
+- linux-kernel
+- ebpf
+- cgroup
+- k8s
+tier: supporting
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # 系统基础：硬件与内核
 

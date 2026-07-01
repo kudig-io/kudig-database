@@ -1,6 +1,9 @@
 ---
 title: 预检流程 (kubeadm preflight) [cluster-create]
-description: 'description: ''| `cmd/kubeadm/app/preflight/checks.go` | L501-L800 | 网络和端口检查 |'''
+description: 'description: ''| `cmd/kubeadm/app/preflight/checks.go` | L501-L800 |
+  网络和端口检查 |'''
+summary: 'description: ''| `cmd/kubeadm/app/preflight/checks.go` | L501-L800 | 网络和端口检查
+  |'''
 category: general
 tags:
 - reference
@@ -11,6 +14,8 @@ tags:
 - controller-manager
 - containerd
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +38,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 预检流程 (kubeadm preflight)
 description: '| `cmd/kubeadm/app/preflight/checks.go` | L501-L800 | 网络和端口检查 |'
@@ -667,6 +673,8 @@ func (c DirAvailableCheck) Check() error {
 ```
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

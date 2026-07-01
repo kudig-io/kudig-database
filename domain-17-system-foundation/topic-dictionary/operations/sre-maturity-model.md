@@ -1,6 +1,7 @@
 ---
 title: 04 - SRE运维成熟度模型
 description: '# 04 - SRE运维成熟度模型'
+summary: '# 04 - SRE运维成熟度模型'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - jaeger
 - helm
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -38,9 +41,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 04 - SRE运维成熟度模型
 
@@ -1963,7 +1966,7 @@ assess_automation() {
     echo "评估自动化能力..."
     
     # CI/CD覆盖率
-    CD_PIPELINES=$(find . -name "*.yaml" -o -name "*.yml" | xargs grep -l "pipeline\|workflow" | wc -l)
+    CD_PIPELINES=$(find . -name "*.yaml" -o -name "*.yml" | xargs grep -l "pipeline|workflow" | wc -l)
     TOTAL_SERVICES=$(kubectl get deployments -A | wc -l)
     
     if [ ${TOTAL_SERVICES} -gt 0 ]; then

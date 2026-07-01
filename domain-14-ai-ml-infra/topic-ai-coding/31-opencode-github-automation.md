@@ -1,7 +1,9 @@
 ---
 title: GitHub 集成与 CI/CD 自动化
-description: '**文档类型**: 自动化集成专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, GitHub, GitHub Actions, CI/CD, Issue Triage, PR Review,
-  Automation, Headless'
+description: '**文档类型**: 自动化集成专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, GitHub, GitHub
+  Actions, CI/CD, Issue Triage, PR Review, Automation, Headless'
+summary: '**文档类型**: 自动化集成专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, GitHub, GitHub
+  Actions, CI/CD, Issue Triage, PR Review, Automation, Headless'
 category: ai-coding
 tags:
 - ai
@@ -11,6 +13,8 @@ tags:
 - job
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +35,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # GitHub 集成与 CI/CD 自动化
 

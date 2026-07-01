@@ -1,10 +1,13 @@
 ---
 title: 'Domain-16: 存储基础'
 description: 'title: ''Domain-16: 存储基础'''
+summary: 'title: ''Domain-16: 存储基础'''
 category: general
 tags:
 - k8s
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - storage-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain-16: 存储基础'

@@ -1,10 +1,13 @@
 ---
 title: 可视化中心
 description: 雷达图自我评估工具，支持本地存储。
+summary: 雷达图自我评估工具，支持本地存储。
 category: general
 tags:
 - k8s
 - agent
+tier: peripheral
+created: '2026-07-01'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -19,6 +22,8 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 ---
+
+
 
 # 可视化中心
 

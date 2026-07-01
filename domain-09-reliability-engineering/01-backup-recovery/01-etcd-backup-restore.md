@@ -1,6 +1,9 @@
 ---
 title: etcd 备份恢复：snapshot、恢复、定时任务
-description: 面向阿里云专有云 K8s 运维工单智能体的 etcd 备份与恢复实战手册，覆盖 etcdctl snapshot、定时 CronJob 备份、灾难恢复演练及 ASO 控制台操作。
+description: 面向阿里云专有云 K8s 运维工单智能体的 etcd 备份与恢复实战手册，覆盖 etcdctl snapshot、定时 CronJob 备份、灾难恢复演练及
+  ASO 控制台操作。
+summary: 面向阿里云专有云 K8s 运维工单智能体的 etcd 备份与恢复实战手册，覆盖 etcdctl snapshot、定时 CronJob 备份、灾难恢复演练及
+  ASO 控制台操作。
 category: reliability-engineering
 tags:
 - etcd
@@ -13,8 +16,9 @@ tags:
 - disaster-recovery
 - sre
 - operations
-created: "2026-06-29"
-updated: "2026-06-29"
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06-29
 difficulty: advanced
 audience:
@@ -50,6 +54,8 @@ authors:
 - name: KUDIG Team
   role: contributor
 ---
+
+
 
 # etcd 备份恢复：snapshot、恢复、定时任务
 

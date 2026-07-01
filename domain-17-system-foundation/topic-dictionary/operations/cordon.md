@@ -1,12 +1,15 @@
 ---
 title: 封锁节点
-description: 'Cordon 是将节点标记为不可调度的操作。被封锁的节点不会接受新的 Pod 调度，但已运行的 Pod 不受影响。...'
+description: Cordon 是将节点标记为不可调度的操作。被封锁的节点不会接受新的 Pod 调度，但已运行的 Pod 不受影响。...
+summary: Cordon 是将节点标记为不可调度的操作。被封锁的节点不会接受新的 Pod 调度，但已运行的 Pod 不受影响。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - operations
 - node
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 封锁节点
 

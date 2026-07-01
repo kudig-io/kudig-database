@@ -1,3 +1,13 @@
+---
+title: Readme
+summary: '![Deploy to GitHub Pages](https://github.com/kudig-io/kudig-database/actions/workflows/deploy-pages.yml)'
+category: general
+tags:
+- readme
+tier: supporting
+created: '2026-07-01'
+---
+
 # KUDIG Database
 
 > 面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库。

@@ -1,6 +1,7 @@
 ---
 title: Velero 企业级备份恢复实践指南
 description: '# Velero 企业级备份恢复实践指南'
+summary: '# Velero 企业级备份恢复实践指南'
 category: disaster-recovery
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +54,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Velero 企业级备份恢复实践指南
 

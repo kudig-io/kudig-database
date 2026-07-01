@@ -1,6 +1,9 @@
 ---
 title: KubeEdge
-description: 'KubeEdge 是 CNCF 孵化项目，将 Kubernetes 的能力扩展到边缘计算场景。它在云边之间建立安全通信通道，让边缘节点可以离线自治运行，适合 I...'
+description: KubeEdge 是 CNCF 孵化项目，将 Kubernetes 的能力扩展到边缘计算场景。它在云边之间建立安全通信通道，让边缘节点可以离线自治运行，适合
+  I...
+summary: KubeEdge 是 CNCF 孵化项目，将 Kubernetes 的能力扩展到边缘计算场景。它在云边之间建立安全通信通道，让边缘节点可以离线自治运行，适合
+  I...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +12,8 @@ tags:
 - edge-computing
 - cncf
 - iot
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # KubeEdge
 

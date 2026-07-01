@@ -1,6 +1,7 @@
 ---
 title: Agent Tool Schema 定义文档
 description: '**用途**: 定义 Agent 可执行的 Kubernetes 运维工具 Schema，供 Agent 调用'
+summary: '**用途**: 定义 Agent 可执行的 Kubernetes 运维工具 Schema，供 Agent 调用'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - pdb
 - statefulset
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # Agent Tool Schema 定义文档
 

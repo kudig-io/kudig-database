@@ -1,6 +1,7 @@
 ---
 title: SuperEdge 架构实践 (SuperEdge Architecture Practice)
 description: '# SuperEdge 架构实践 (SuperEdge Architecture Practice)'
+summary: '# SuperEdge 架构实践 (SuperEdge Architecture Practice)'
 category: edge-computing
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -45,8 +48,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # SuperEdge 架构实践 (SuperEdge Architecture Practice)
 

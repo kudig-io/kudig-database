@@ -1,6 +1,7 @@
 ---
 title: Domain-10 扩展与自定义 — 开源项目索引
 description: '| **Helm** | K8s 包管理器 | Graduated | v3.17.0 | 27k+ | Apache-2.0 |'
+summary: '| **Helm** | K8s 包管理器 | Graduated | v3.17.0 | 27k+ | Apache-2.0 |'
 category: extensions
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - harbor
 - statefulset
 - gpu
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ cross_refs:
 - type: domain
   path: ../domain-07-platform-engineering/
   label: '相关知识域: domain-07-platform-engineering'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-10 扩展与自定义 — 开源项目索引
 

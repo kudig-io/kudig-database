@@ -1,6 +1,7 @@
 ---
 title: 沉浸式 XR 架构设计 — 阿里云视角
 description: 'title: 沉浸式XR架构设计'
+summary: 'title: 沉浸式XR架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - crd
 - operator
 - gpu
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 沉浸式XR架构设计
 description: '# 沉浸式 XR 架构设计 — 阿里云视角'

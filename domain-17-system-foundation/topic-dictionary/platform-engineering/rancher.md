@@ -1,6 +1,9 @@
 ---
 title: Rancher
-description: 'Rancher 是 SUSE 的企业级 Kubernetes 管理平台，提供多集群管理、安全策略、应用目录和运维工具的统一界面。它降低了管理多个 K8s 集群的...'
+description: Rancher 是 SUSE 的企业级 Kubernetes 管理平台，提供多集群管理、安全策略、应用目录和运维工具的统一界面。它降低了管理多个
+  K8s 集群的...
+summary: Rancher 是 SUSE 的企业级 Kubernetes 管理平台，提供多集群管理、安全策略、应用目录和运维工具的统一界面。它降低了管理多个
+  K8s 集群的...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - rancher
 - multi-cluster
 - management
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Rancher
 

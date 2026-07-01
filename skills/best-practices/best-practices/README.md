@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 最佳实践指南 (best-practices)
 description: 系统化的 Kubernetes 生产环境最佳实践集合
+summary: 系统化的 Kubernetes 生产环境最佳实践集合
 category: best-practices
 tags:
 - kubernetes
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - helm
 - argocd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -53,8 +56,9 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: 可观测性知识域
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 最佳实践指南
 

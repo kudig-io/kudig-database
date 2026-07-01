@@ -1,6 +1,7 @@
 ---
 title: 144 - LLM推理服务部署
 description: 'title: 144 - LLM推理服务部署'
+summary: 'title: 144 - LLM推理服务部署'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - istio
 - opa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - tls-basics
 - policy-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 144 - LLM推理服务部署
 description: '# 144 - LLM推理服务部署'
@@ -2303,5 +2307,7 @@ response = client.chat.completions.create(
 - 19-llm-quantization
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]

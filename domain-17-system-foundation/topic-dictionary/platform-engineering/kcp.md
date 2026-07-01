@@ -1,6 +1,9 @@
 ---
 title: KCP 多租户控制面
-description: 'KCP（Kubernetes-like Control Plane）是 Red Hat 开源的 CNCF Sandbox 项目，提供 Kubernetes 兼容...'
+description: KCP（Kubernetes-like Control Plane）是 Red Hat 开源的 CNCF Sandbox 项目，提供 Kubernetes
+  兼容...
+summary: KCP（Kubernetes-like Control Plane）是 Red Hat 开源的 CNCF Sandbox 项目，提供 Kubernetes
+  兼容...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - platform-engineering
 - multi-tenancy
 - api
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # KCP 多租户控制面（KCP）
 

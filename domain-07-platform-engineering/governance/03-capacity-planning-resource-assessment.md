@@ -1,6 +1,7 @@
 ---
 title: 容量规划与资源评估 (Capacity Planning & Resource Assessment)
 description: 'description: ''**目标读者**: 平台运维工程师、架构师、SRE团队'''
+summary: 'description: ''**目标读者**: 平台运维工程师、架构师、SRE团队'''
 category: general
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - hpa
 - gpu
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 容量规划与资源评估 (Capacity Planning & Resource Assessment)
 description: '**目标读者**: 平台运维工程师、架构师、SRE团队'

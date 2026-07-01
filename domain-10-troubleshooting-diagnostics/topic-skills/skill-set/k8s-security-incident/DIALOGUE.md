@@ -1,21 +1,31 @@
 ---
 title: K8s Security Incident Response 远程顾问对话脚本
+summary: 安全事件的远程顾问对话脚本，覆盖容器逃逸、异常网络、权限提升检测。
 category: dialogue
-tags: [dialogue, remote-advisor, k8s-security-incident, skill, security, incident-response, forensics, breach]
-created: "2026-05-23"
-updated: "2026-05-23"
+tags:
+- dialogue
+- remote-advisor
+- k8s-security-incident
+- skill
+- security
+- incident-response
+- forensics
+- breach
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
-summary: "安全事件的远程顾问对话脚本，覆盖容器逃逸、异常网络、权限提升检测。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
-    type: uses
-  - target: "[[entities/cilium.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/configuration/configmaps.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md]]"
-    type: uses
+- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+  type: uses
+- target: '[[entities/cilium.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/configuration/configmaps.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md]]'
+  type: uses
 ---
+
 
 # K8s Security Incident Response 远程顾问对话脚本
 
@@ -252,7 +262,7 @@ kubectl logs -n kube-system <audit-pod> | grep '<sa-name>' | tail -30
 > **如果无法查看审计日志**：请通过以下方式评估：
 > **替代方案 A**：检查该 ServiceAccount 关联的 Pod 列表：`kubectl get pods --all-namespaces -o json | jq '.items[] | select(.spec.serviceAccountName=="<sa-name>") | {name: .metadata.name, namespace: .metadata.namespace}'`
 > **替代方案 B**：检查最近是否有新的 ClusterRoleBinding 创建：`kubectl get clusterrolebinding --sort-by='.metadata.creationTimestamp' | tail -20`
-> **替代方案 C**：检查是否有异常用户通过该 SA 的 Token 访问 API：`kubectl get events --all-namespaces | grep -i 'unauthorized\|forbidden' | tail -20`
+> **替代方案 C**：检查是否有异常用户通过该 SA 的 Token 访问 API：`kubectl get events --all-namespaces | grep -i 'unauthorized|forbidden' | tail -20`
 
 风险评估：
 1. **如果 cluster-admin 绑定是最近创建的且非预期** → 可能是攻击者提权 → **P0**

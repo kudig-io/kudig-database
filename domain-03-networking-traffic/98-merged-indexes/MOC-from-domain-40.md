@@ -1,6 +1,7 @@
 ---
 title: domain-40-cloud-native-api-gateway MOC
 description: domain-40-cloud-native-api-gateway 知识域导航页，覆盖 16 篇文档
+summary: domain-40-cloud-native-api-gateway 知识域导航页，覆盖 16 篇文档
 category: moc
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - envoy
 - ingress
 - wasm
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - networking-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-40-cloud-native-api-gateway MOC
 

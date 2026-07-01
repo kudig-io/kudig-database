@@ -1,6 +1,9 @@
 ---
 title: 容器运行时
-description: '容器运行时（Container Runtime）是负责在节点上运行和管理容器的软件。它实现了 Kubernetes 的 CRI（Container Runtim...'
+description: 容器运行时（Container Runtime）是负责在节点上运行和管理容器的软件。它实现了 Kubernetes 的 CRI（Container
+  Runtim...
+summary: 容器运行时（Container Runtime）是负责在节点上运行和管理容器的软件。它实现了 Kubernetes 的 CRI（Container
+  Runtim...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - container-runtime
 - containerd
 - cri
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 容器运行时
 

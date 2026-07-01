@@ -1,6 +1,9 @@
 ---
 title: Flink on Kubernetes：部署、Checkpoint、Savepoint 与自动扩缩容
-description: 面向阿里云 ACK / 专有云 ASO 的 Apache Flink on Kubernetes 生产指南，涵盖部署模式、Checkpoint/Savepoint 管理、自动扩缩容与故障排查
+description: 面向阿里云 ACK / 专有云 ASO 的 Apache Flink on Kubernetes 生产指南，涵盖部署模式、Checkpoint/Savepoint
+  管理、自动扩缩容与故障排查
+summary: 面向阿里云 ACK / 专有云 ASO 的 Apache Flink on Kubernetes 生产指南，涵盖部署模式、Checkpoint/Savepoint
+  管理、自动扩缩容与故障排查
 category: domain
 tags:
 - flink
@@ -14,8 +17,9 @@ tags:
 - stateful
 - jobmanager
 - taskmanager
-created: "2026-06-29"
-updated: "2026-06-29"
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06-29
 difficulty: advanced
 reading_level: advanced
@@ -51,6 +55,8 @@ authors:
 - name: KUDIG Team
   role: contributor
 ---
+
+
 
 # Flink on Kubernetes：部署、Checkpoint、Savepoint 与自动扩缩容
 

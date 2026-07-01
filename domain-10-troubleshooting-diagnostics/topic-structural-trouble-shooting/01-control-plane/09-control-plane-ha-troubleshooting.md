@@ -1,6 +1,7 @@
 ---
 title: 控制平面高可用故障处理指南 [topic-structural-trouble-shooting]
 description: 'title: 控制平面高可用故障处理指南'
+summary: 'title: 控制平面高可用故障处理指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - docker
 - redis
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -40,8 +43,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 控制平面高可用故障处理指南
 description: '# 控制平面高可用故障处理指南'
@@ -269,7 +273,7 @@ kubectl get leases -n kube-system -o yaml
 
 # 4. Leader 选举日志分析
 echo "4. Controller Manager Leader 选举日志:"
-kubectl logs -n kube-system -l component=kube-controller-manager --tail=100 | grep -i "leader\|election"
+kubectl logs -n kube-system -l component=kube-controller-manager --tail=100 | grep -i "leader|election"
 
 # 5. 频繁切换检测
 echo "5. 近期 Leader 切换统计:"

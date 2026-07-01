@@ -1,6 +1,9 @@
 ---
 title: Cluster Fundamentals
-description: 整合原 domain-01-cluster-fundamentals/2/3 的集群架构基础知识，涵盖架构概述、设计原则、控制平面、API 版本、kubectl 和性能调优。
+description: 整合原 domain-01-cluster-fundamentals/2/3 的集群架构基础知识，涵盖架构概述、设计原则、控制平面、API
+  版本、kubectl 和性能调优。
+summary: 整合原 domain-01-cluster-fundamentals/2/3 的集群架构基础知识，涵盖架构概述、设计原则、控制平面、API 版本、kubectl
+  和性能调优。
 category: domain
 tags:
 - k8s
@@ -12,6 +15,8 @@ tags:
 - scheduler
 - daemonset
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +37,9 @@ prerequisites:
 - kubernetes-concepts
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Cluster Fundamentals
 

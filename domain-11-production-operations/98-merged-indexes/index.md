@@ -1,12 +1,20 @@
 ---
-title: "Domain 11 内容索引"
+title: Domain 11 内容索引
+summary: Domain 11 内容索引
 category: domain-11-production-operations
-tags: ["index", "domain-11-production-operations", "navigation"]
-sources: ["auto-generated"]
+tags:
+- index
+- domain-11-production-operations
+- navigation
+tier: supporting
+sources:
+- auto-generated
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 ---
+
+
 
 # Domain 11 内容索引
 

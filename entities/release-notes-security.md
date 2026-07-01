@@ -1,6 +1,7 @@
 ---
 title: 发布说明索引 — 安全
 description: '# 发布说明索引 — 安全'
+summary: '# 发布说明索引 — 安全'
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - trivy
 - crd
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # 发布说明索引 — 安全
 

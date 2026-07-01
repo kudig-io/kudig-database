@@ -1,6 +1,7 @@
 ---
 title: argo-cd v2.10 Release Notes
 description: argo-cd v2.10 Release Notes — Kubernetes 生产运维知识库
+summary: argo-cd v2.10 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - changelog
 - argocd
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - gitops-basics
-created: "2026-05-23"
 ---
+
+
 
 # argo-cd v2.10 Release Notes
 

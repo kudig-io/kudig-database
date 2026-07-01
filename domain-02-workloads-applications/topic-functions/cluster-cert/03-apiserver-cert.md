@@ -1,6 +1,7 @@
 ---
 title: API Server 证书生成源码分析 (topic-code-analysis)
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - reference
@@ -9,6 +10,8 @@ tags:
 - kubelet
 - containerd
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: API Server 证书生成源码分析
 description: '## 概述'
@@ -298,7 +302,7 @@ func NewSignedCert(cfg Config, key crypto.Signer, caCert *x509.Certificate, caKe
 | 属性 | 值 | 说明 |
 |-----|---|------|
 | `SerialNumber` | 随机生成 | 防止证书指纹冲突 |
-| `KeyUsage` | `KeyEncipherment \| DigitalSignature` | 非 CA 证书不需要 CertSign |
+| `KeyUsage` | `KeyEncipherment | DigitalSignature` | 非 CA 证书不需要 CertSign |
 | `ExtKeyUsage` | `ServerAuth` | 仅用于服务端 TLS 认证 |
 | `NotBefore` | 当前时间 - 5 分钟 | 允许轻微的时钟偏差 |
 | `NotAfter` | 当前时间 + 1 年 | 默认有效期 |
@@ -535,6 +539,8 @@ done
 | `GetIndexedIP` | `staging/src/k8s.io/utils/net/parse.go` | 从 CIDR 获取指定索引 IP |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]

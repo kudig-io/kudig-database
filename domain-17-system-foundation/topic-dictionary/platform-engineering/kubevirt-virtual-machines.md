@@ -1,6 +1,7 @@
 ---
 title: KubeVirt：在 Kubernetes 上运行虚拟机
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - postgresql
 - daemonset
 - job
+tier: peripheral
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,9 +37,9 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - backup-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # [[KubeVirt|KubeVirt]]：在 [[Kubernetes|Kubernetes]] 上运行虚拟机
 
@@ -146,7 +149,7 @@ KubeVirt 支持在不影响业务的情况下将运行中的 VM 从一个节点�
 | Live Migration 失败 | 存储非共享或节点资源不足 | `kubectl get vmim <name> -o yaml`；确保 PVC 使用 RWX 存储 |
 | VM 磁盘 I/O 极慢 | 存储后端性能不足或未使用 virtio 驱动 | 检查 disk bus 配置（应为 `virtio`）；检查 StorageClass IOPS 限制 |
 | DataVolume Import 卡住 | 源镜像不可达或 CDI 控制器异常 | `kubectl get dv <name>`；`kubectl -n cdi logs -l app=cdi-deployment` |
-| GPU 透传不生效 | IOMMU 未启用或设备未绑定 vfio-pci | 节点检查 `dmesg \| grep -i iommu`；`ls /dev/vfio/` |
+| GPU 透传不生效 | IOMMU 未启用或设备未绑定 vfio-pci | 节点检查 `dmesg | grep -i iommu`；`ls /dev/vfio/` |
 | VM 内存被杀 | 宿主机 memory overcommit 导致 OOM | 确保 VM requests 与 limits 一致；检查节点 memory pressure |
 | Guest Agent 无数据 | VM 内未安装 qemu-guest-agent | 进入 VM 检查 `systemctl status qemu-guest-agent` |
 

@@ -1,12 +1,15 @@
 ---
 title: Remediation Playbook
 description: '- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]'
+summary: '- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]'
 category: skills
 tags:
 - k8s
 - troubleshooting
 - skill
 - pdb
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 - Playbook
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Remediation Playbook
 

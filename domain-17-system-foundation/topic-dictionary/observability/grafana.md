@@ -1,6 +1,9 @@
 ---
 title: Grafana
-description: 'Grafana 是开源的数据可视化平台，支持丰富的图表类型和数据源集成。在 Kubernetes 生态中，Grafana 通常与 Prometheus 搭配使用...'
+description: Grafana 是开源的数据可视化平台，支持丰富的图表类型和数据源集成。在 Kubernetes 生态中，Grafana 通常与 Prometheus
+  搭配使用...
+summary: Grafana 是开源的数据可视化平台，支持丰富的图表类型和数据源集成。在 Kubernetes 生态中，Grafana 通常与 Prometheus
+  搭配使用...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - observability
 - grafana
 - monitoring
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Grafana
 

@@ -1,6 +1,7 @@
 ---
 title: 多集群服务 MCS
-description: 'Multi-Cluster Service（MCS）是 Google/Anthos 推动的多集群服务发现标准，通过 ServiceImport/ServiceE...'
+description: Multi-Cluster Service（MCS）是 Google/Anthos 推动的多集群服务发现标准，通过 ServiceImport/ServiceE...
+summary: Multi-Cluster Service（MCS）是 Google/Anthos 推动的多集群服务发现标准，通过 ServiceImport/ServiceE...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - multi-cloud
 - service-discovery
 - networking
+tier: peripheral
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # 多集群服务 MCS（Multi-Cluster Service）
 

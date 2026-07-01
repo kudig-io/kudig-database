@@ -1,6 +1,7 @@
 ---
 title: JFrog Artifactory Enterprise Container Registry Platform
 description: '- jfrog-artifactory-enterprise的最佳实践'
+summary: '- jfrog-artifactory-enterprise的最佳实践'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - job
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - gitops-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:
@@ -967,7 +971,7 @@ log_analysis() {
     
     # 检查错误日志
     kubectl logs -n artifactory-system sts/artifactory -c artifactory --since=1h | \
-    grep -i "error\|exception\|warn" | \
+    grep -i "error|exception|warn" | \
     tail -20
     echo ""
     

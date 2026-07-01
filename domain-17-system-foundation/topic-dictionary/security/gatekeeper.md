@@ -1,6 +1,9 @@
 ---
 title: Gatekeeper
-description: 'Gatekeeper 是 OPA（Open Policy Agent）的 Kubernetes 原生实现，通过 CRD 在集群中执行准入策略和审计。它将 Reg...'
+description: Gatekeeper 是 OPA（Open Policy Agent）的 Kubernetes 原生实现，通过 CRD 在集群中执行准入策略和审计。它将
+  Reg...
+summary: Gatekeeper 是 OPA（Open Policy Agent）的 Kubernetes 原生实现，通过 CRD 在集群中执行准入策略和审计。它将
+  Reg...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +12,8 @@ tags:
 - opa
 - policy
 - security
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -24,8 +29,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Gatekeeper
 

@@ -1,6 +1,7 @@
 ---
 title: Agent Orchestration Patterns for FTA
 description: Agent Orchestration Patterns for FTA — Kubernetes 生产运维知识库
+summary: Agent Orchestration Patterns for FTA — Kubernetes 生产运维知识库
 category: skill
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - argocd
 - webhook
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - iac-basics
 - cni-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 # Agent Orchestration Patterns for FTA
 

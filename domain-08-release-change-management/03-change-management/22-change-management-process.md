@@ -1,6 +1,7 @@
 ---
 title: 22-变更管理流程
 description: '# 22-变更管理流程'
+summary: '# 22-变更管理流程'
 category: production-operations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - job
 - cronjob
 - gateway
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 22-变更管理流程
 

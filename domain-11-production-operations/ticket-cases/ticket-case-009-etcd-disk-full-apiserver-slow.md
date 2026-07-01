@@ -1,6 +1,7 @@
 ---
 title: 阿里云专有云 etcd 数据目录磁盘满导致 apiserver 响应慢
 description: 控制面 apiserver 延迟飙升、kubectl 操作卡顿，根因是 etcd 数据盘使用率 100%。包含只读诊断、安全修复、升级标准与交接信息。
+summary: 控制面 apiserver 延迟飙升、kubectl 操作卡顿，根因是 etcd 数据盘使用率 100%。包含只读诊断、安全修复、升级标准与交接信息。
 category: production-operations
 tags:
 - aliyun
@@ -14,6 +15,9 @@ tags:
 - defrag
 - p0
 - ticket-case
+tier: supporting
+created: 2026-06-26
+updated: 2026-06-26
 incident_id: TC-2026-009
 priority: P0
 severity: critical
@@ -22,8 +26,6 @@ affected_namespace: kube-system
 ticket_type: 控制面故障
 skill_ref: 控制面异常诊断
 fta_ref: 'FTA: apiserver 响应慢'
-created: 2026-06-26
-updated: 2026-06-26
 last_updated: 2026-06-26
 difficulty: advanced
 reading_level: advanced
@@ -53,15 +55,17 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[entities/etcd.md]]"
+- target: '[[entities/etcd.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-005-kubelet-cert-expired.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-005-kubelet-cert-expired.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: "[[concepts/etcd × 可观测性.md]]"
+- target: '[[concepts/etcd × 可观测性.md]]'
   type: related_to
 ---
+
+
 
 # 工单 009：etcd 数据目录磁盘满导致 apiserver 响应慢（升级标准）
 
@@ -89,7 +93,7 @@ kubectl get --raw /metrics | grep apiserver_request_duration_seconds_bucket | he
 
 # 查看 apiserver Pod 状态
 kubectl get pod -n kube-system -l component=kube-apiserver
-kubectl logs -n kube-system -l component=kube-apiserver --tail=200 | grep -i "timeout\|etcd\|slow"
+kubectl logs -n kube-system -l component=kube-apiserver --tail=200 | grep -i "timeout|etcd|slow"
 ```
 
 ### 3.2 检查 etcd 集群健康与磁盘使用
@@ -128,7 +132,7 @@ ls -lh /var/lib/etcd
 ### 3.4 检查 etcd 日志
 
 ```bash
-kubectl logs -n kube-system -l component=etcd --tail=300 | grep -i "space\|full\|slow\|wal\|snapshot"
+kubectl logs -n kube-system -l component=etcd --tail=300 | grep -i "space|full|slow|wal|snapshot"
 ```
 
 ### 3.5 检查事件与资源规模

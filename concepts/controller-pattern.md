@@ -1,6 +1,7 @@
 ---
 title: Controller Pattern (Reconciliation Loop)
 description: Controller Pattern (Reconciliation Loop) — Kubernetes 生产运维知识库
+summary: Controller Pattern (Reconciliation Loop) — Kubernetes 生产运维知识库
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - job
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Controller Pattern (Reconciliation Loop)
 

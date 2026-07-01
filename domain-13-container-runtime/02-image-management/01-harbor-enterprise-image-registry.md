@@ -1,6 +1,7 @@
 ---
 title: Harbor企业级容器镜像仓库深度实践
 description: '# Harbor企业级容器镜像仓库深度实践'
+summary: '# Harbor企业级容器镜像仓库深度实践'
 category: container-image-management
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - redis
 - postgresql
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Harbor企业级容器镜像仓库深度实践
 

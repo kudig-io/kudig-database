@@ -1,6 +1,7 @@
 ---
 title: 05 - 网络迁移与流量切换 [migration]
 description: 'title: 05 - 网络迁移与流量切换'
+summary: 'title: 05 - 网络迁移与流量切换'
 category: general
 tags:
 - migration
@@ -13,6 +14,8 @@ tags:
 - helm
 - ingress
 - gateway
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 05 - 网络迁移与流量切换
 description: '# 05 - 网络迁移与流量切换'

@@ -1,6 +1,7 @@
 ---
 title: Domain 整合迁移执行报告
 description: '## 新 Domain 架构（20 个）'
+summary: '## 新 Domain 架构（20 个）'
 category: general
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - wasm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - ebpf-basics
-created: "2026-05-23"
 ---
+
+
 
 # Domain 整合迁移执行报告
 

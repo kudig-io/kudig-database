@@ -1,6 +1,7 @@
 ---
 title: 供应链安全事件响应：镜像篡改与 CVE
 description: 面向阿里云/专有云 K8s 的供应链安全事件响应方案，涵盖镜像篡改检测、CVE 应急响应、SBOM 溯源与修复流程。
+summary: 面向阿里云/专有云 K8s 的供应链安全事件响应方案，涵盖镜像篡改检测、CVE 应急响应、SBOM 溯源与修复流程。
 category: security
 tags:
 - k8s
@@ -11,6 +12,9 @@ tags:
 - sbom
 - cosign
 - sigstore
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -44,9 +48,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # 供应链安全事件响应：镜像篡改与 CVE
 
@@ -168,7 +172,7 @@ spec:
 for img in $(kubectl get pods --all-namespaces -o jsonpath='{.items[*].spec.containers[*].image}' | tr ' ' '\n' | sort -u); do
   echo "Scanning: $img"
   kubectl run trivy-$RANDOM --rm -i --restart=Never --image=aquasec/trivy -- \
-    image --severity CRITICAL "$img" 2>/dev/null | grep -E "^\|" || true
+    image --severity CRITICAL "$img" 2>/dev/null | grep -E "^|" || true
 done
 ```
 

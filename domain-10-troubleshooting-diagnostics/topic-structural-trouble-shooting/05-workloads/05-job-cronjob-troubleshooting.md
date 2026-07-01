@@ -1,6 +1,7 @@
 ---
 title: Job 与 CronJob 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Job 与 CronJob 故障排查指南'
+summary: 'title: Job 与 CronJob 故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - job
 - cronjob
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -41,8 +44,9 @@ prerequisites:
 - pod-lifecycle
 - troubleshooting-methodology
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Job 与 [[CronJob|CronJob]] 故障排查指南
 description: '# Job 与 CronJob 故障排查指南'
@@ -311,7 +315,7 @@ kubectl get job <name> -o jsonpath='{.spec.backoffLimit}'
 
 ```bash
 # 查看 Job 控制器日志
-kubectl logs -n kube-system -l component=kube-controller-manager --tail=100 | grep -i "job\|cronjob"
+kubectl logs -n kube-system -l component=kube-controller-manager --tail=100 | grep -i "job|cronjob"
 
 # 查看特定 Job 相关日志
 kubectl logs -n kube-system -l component=kube-controller-manager | grep <job-name>

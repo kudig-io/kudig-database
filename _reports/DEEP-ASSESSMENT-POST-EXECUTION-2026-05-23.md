@@ -1,11 +1,21 @@
 ---
 title: KUDIG 语料库改进后深度评估 — 使用角度 × 运维工单角度
+summary: KUDIG 语料库改进后深度评估 — 使用角度 × 运维工单角度：工程师："节点 NotReady 了" 顾问："收到。请告诉我三个信息：1）影响范围
+  2）发生时间 3）最近变更"
 category: assessment
-tags: [assessment, post-execution, remote-advisor, dialogue, quality]
-created: "2026-05-23"
-updated: "2026-05-23"
+tags:
+- assessment
+- post-execution
+- remote-advisor
+- dialogue
+- quality
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
 ---
+
+
 
 # KUDIG 语料库改进后深度评估报告
 

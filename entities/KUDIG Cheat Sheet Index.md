@@ -1,6 +1,7 @@
 ---
 title: KUDIG Cheat Sheet Index
 description: KUDIG Cheat Sheet Index — Kubernetes 生产运维知识库
+summary: KUDIG Cheat Sheet Index — Kubernetes 生产运维知识库
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - helm
 - argocd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - prometheus-basics
 - gitops-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG Cheat Sheet Index
 
@@ -64,10 +68,10 @@ The scenario-based cheatsheet is organized by **fault scenario** rather than res
 | Scenario | First Command | Key Indicator |
 |----------|--------------|---------------|
 | Node NotReady | `kubectl get nodes -o wide` | Conditions column, kubelet logs |
-| Pod Pending | `kubectl describe pod \| grep Events` | FailedScheduling events |
+| Pod Pending | `kubectl describe pod | grep Events` | FailedScheduling events |
 | CrashLoopBackOff | `kubectl logs --previous` | Last container exit reason |
-| OOMKilled | `kubectl describe pod \| grep 'Last State'` | Exit code 137, reason: OOMKilled |
-| ImagePullBackOff | `kubectl describe pod \| grep ImagePull` | Auth error, image not found |
+| OOMKilled | `kubectl describe pod | grep 'Last State'` | Exit code 137, reason: OOMKilled |
+| ImagePullBackOff | `kubectl describe pod | grep ImagePull` | Auth error, image not found |
 | DNS Failure | `kubectl get ep kube-dns -n kube-system` | Endpoint presence, CoreDNS pods |
 | Storage Failure | `kubectl get pvc` | Pending/Binding status |
 

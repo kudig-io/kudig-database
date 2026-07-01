@@ -1,7 +1,9 @@
 ---
 title: 工具体系与权限模型
-description: '**文档类型**: 核心能力专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Tools, Permissions, Custom Tools, bash, edit, read,
-  grep, Security, TypeScript'
+description: '**文档类型**: 核心能力专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Tools, Permissions,
+  Custom Tools, bash, edit, read, grep, Security, TypeScript'
+summary: '**文档类型**: 核心能力专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Tools, Permissions,
+  Custom Tools, bash, edit, read, grep, Security, TypeScript'
 category: ai-coding
 tags:
 - ai
@@ -9,6 +11,8 @@ tags:
 - copilot
 - code-generation
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +29,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 工具体系与权限模型
 

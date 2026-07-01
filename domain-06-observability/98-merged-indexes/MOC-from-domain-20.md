@@ -1,6 +1,7 @@
 ---
 title: domain-20-enterprise-monitoring-alerting MOC
 description: domain-20-enterprise-monitoring-alerting 知识域导航页，覆盖 13 篇文档
+summary: domain-20-enterprise-monitoring-alerting 知识域导航页，覆盖 13 篇文档
 category: moc
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - grafana
 - jaeger
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-20-enterprise-monitoring-alerting MOC
 

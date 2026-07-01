@@ -1,6 +1,7 @@
 ---
 title: 05 - 告警管理策略 (Alerting Management)
 description: '# 05 - 告警管理策略 (Alerting Management)'
+summary: '# 05 - 告警管理策略 (Alerting Management)'
 category: observability
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - scheduler
 - prometheus
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -60,8 +63,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # 05 - 告警管理策略 (Alerting Management)
 

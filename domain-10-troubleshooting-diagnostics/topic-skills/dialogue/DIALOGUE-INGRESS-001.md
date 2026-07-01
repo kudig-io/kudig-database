@@ -1,17 +1,25 @@
 ---
-dialogue_id: "DIALOGUE-INGRESS-001"
-skill_id: "SKILL-INGRESS-001"
-role: "remote-consultant"
-language: "zh"
-severity: "medium"
-status: "reviewed"
+title: Ingress 规则不生效 — 远程顾问对话脚本
+summary: Ingress 规则不生效 — 远程顾问对话脚本：kubectl get ingress -n <namespace>
+category: dialogue
+tags:
+- dialogue
+- remote-consultant
+- troubleshooting
+- visibility/public
+tier: supporting
 created: 2026-05-21
 updated: 2026-05-21
+dialogue_id: DIALOGUE-INGRESS-001
+skill_id: SKILL-INGRESS-001
+role: remote-consultant
+language: zh
+severity: medium
+status: reviewed
 last_updated: 2026-05-21
-title: "Ingress 规则不生效 — 远程顾问对话脚本"
-category: dialogue
-tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
+
+
 
 # Ingress 规则不生效 — 远程顾问对话脚本
 
@@ -214,3 +222,7 @@ curl -H "Host:<your-domain>" http://<ingress-ip>/path -I
 
 - [[concepts/ingress-controller.md|Ingress Controller]]
 - [[concepts/service-networking.md|Service 网络模型]]
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

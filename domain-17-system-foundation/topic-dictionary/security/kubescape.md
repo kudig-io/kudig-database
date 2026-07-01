@@ -1,6 +1,9 @@
 ---
 title: Kubescape 安全扫描
-description: 'Kubescape 是 ARMO 开源的 CNCF Sandbox 项目，提供 Kubernetes 集群的全方位安全扫描，包括配置审计、漏洞检测、RBAC 分...'
+description: Kubescape 是 ARMO 开源的 CNCF Sandbox 项目，提供 Kubernetes 集群的全方位安全扫描，包括配置审计、漏洞检测、RBAC
+  分...
+summary: Kubescape 是 ARMO 开源的 CNCF Sandbox 项目，提供 Kubernetes 集群的全方位安全扫描，包括配置审计、漏洞检测、RBAC
+  分...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - security
 - scanning
 - compliance
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Kubescape 安全扫描（Kubescape）
 

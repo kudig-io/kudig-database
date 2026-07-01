@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 生产运维 1 个月学习计划
 description: '# Kubernetes 生产运维 1 个月学习计划'
+summary: '# Kubernetes 生产运维 1 个月学习计划'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -38,8 +41,9 @@ prerequisites:
 - policy-basics
 - logging-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 生产运维 1 个月学习计划
 

@@ -1,6 +1,7 @@
 ---
 title: 负载测试方法论
 description: '├── 监控: Prometheus + Grafana'
+summary: '├── 监控: Prometheus + Grafana'
 category: domain
 tags:
 - performance-testing
@@ -11,6 +12,8 @@ tags:
 - grafana
 - helm
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # 负载测试方法论
 

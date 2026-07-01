@@ -1,6 +1,7 @@
 ---
 title: 策略即代码（Policy as Code）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - networkpolicy
 - webhook
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # 策略即代码（Policy as Code）
 

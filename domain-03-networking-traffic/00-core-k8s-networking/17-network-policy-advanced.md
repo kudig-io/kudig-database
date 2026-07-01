@@ -1,6 +1,7 @@
 ---
 title: 78 - NetworkPolicy高级配置
 description: 'title: 78 - NetworkPolicy高级配置'
+summary: 'title: 78 - NetworkPolicy高级配置'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - calico
 - coredns
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - prometheus-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 78 - NetworkPolicy高级配置
 description: '# 78 - NetworkPolicy高级配置'

@@ -1,6 +1,7 @@
 ---
 title: 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 description: '# 供应链安全成熟度模型 (Supply Chain Security Maturity Model)'
+summary: '# 供应链安全成熟度模型 (Supply Chain Security Maturity Model)'
 category: supply-chain-security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - helm
 - docker
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -50,8 +53,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 

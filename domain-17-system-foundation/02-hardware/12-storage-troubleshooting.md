@@ -1,6 +1,7 @@
 ---
 title: 存储设备故障排查
 description: '# 存储设备故障排查'
+summary: '# 存储设备故障排查'
 category: hardware
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - apiserver
 - calico
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/07-pvc-storage-failure.md
   label: '运维技能: 07-pvc-storage-failure'
-created: "2026-05-23"
 ---
+
+
 
 # 存储设备故障排查
 
@@ -437,7 +441,7 @@ detect_and_check() {
     fi
     
     # 硬件RAID
-    if lspci | grep -qi "RAID\|MegaRAID\|Smart Array"; then
+    if lspci | grep -qi "RAID|MegaRAID|Smart Array"; then
         check_storcli 2>/dev/null || check_megacli 2>/dev/null || check_ssacli 2>/dev/null
     fi
 }
@@ -455,7 +459,7 @@ detect_and_check
 │  RAID降级 (Degraded)                                                        │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
 │  │  Step 1: 确认问题盘                                                  │   │
-│  │    storcli64 /c0/eall/sall show | grep -i "failed\|offline"         │   │
+│  │    storcli64 /c0/eall/sall show | grep -i "failed|offline"         │   │
 │  │                                                                       │   │
 │  │  Step 2: 记录问题盘位置                                              │   │
 │  │    - Enclosure ID                                                    │   │

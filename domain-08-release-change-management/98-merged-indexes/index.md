@@ -1,12 +1,20 @@
 ---
-title: "Domain 08 内容索引"
+title: Domain 08 内容索引
+summary: Domain 08 内容索引
 category: domain-08-release-change-management
-tags: ["index", "domain-08-release-change-management", "navigation"]
-sources: ["auto-generated"]
+tags:
+- index
+- domain-08-release-change-management
+- navigation
+tier: supporting
+sources:
+- auto-generated
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 ---
+
+
 
 # Domain 08 内容索引
 

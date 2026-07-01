@@ -1,6 +1,7 @@
 ---
 title: 金融科技 (FinTech) Kubernetes 生产架构设计
 description: 'title: 金融科技FinTech Kubernetes生产架构设计'
+summary: 'title: 金融科技FinTech Kubernetes生产架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - harbor
 - opa
 - falco
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -42,8 +45,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 金融科技FinTech Kubernetes生产架构设计
 description: '# 金融科技 (FinTech) [[Kubernetes|Kubernetes]] 生产架构设计'

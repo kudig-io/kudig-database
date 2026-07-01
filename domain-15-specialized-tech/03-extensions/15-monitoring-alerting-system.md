@@ -1,6 +1,7 @@
 ---
 title: 15 - 监控告警体系 (Monitoring & Alerting System)
 description: 'title: 15 - 监控告警体系 (Monitoring & Alerting System)'
+summary: 'title: 15 - 监控告警体系 (Monitoring & Alerting System)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - prometheus
 - grafana
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 - etcd-basics
 - logging-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 15 - 监控告警体系 (Monitoring & Alerting System)
 description: '# 15 - 监控告警体系 (Monitoring & Alerting System)'

@@ -1,15 +1,25 @@
 ---
-title: "[2026-07-20] [P1] Velero 备份失败导致无法恢复"
+title: '[2026-07-20] [P1] Velero 备份失败导致无法恢复'
+summary: '[2026-07-20] [P1] Velero 备份失败导致无法恢复：09:10，运维人员在清理旧配置时误执行：'
 category: case-study
-tags: [production, incident, reliability, velero, backup, disaster-recovery]
-date: "2026-07-20"
+tags:
+- production
+- incident
+- reliability
+- velero
+- backup
+- disaster-recovery
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-07-20'
 severity: P1
-mttr: "50min"
+mttr: 50min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-07-20] Velero 备份 Job 因内存不足失败，删除操作后无法恢复关键 ConfigMap
 

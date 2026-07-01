@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 架构全景图 (Architecture Overview)
 description: 'title: Kubernetes 架构全景图'
+summary: 'title: Kubernetes 架构全景图'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - jaeger
 - istio
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -49,8 +52,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: [[Kubernetes|Kubernetes]] 架构全景图

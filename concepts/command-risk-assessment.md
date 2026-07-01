@@ -1,12 +1,26 @@
 ---
 title: 命令风险分级与安全生产规范
 description: 云原生运维命令的五级风险评估标准、危险命令清单与生产操作红线
+summary: 云原生运维命令的五级风险评估标准、危险命令清单与生产操作红线
 category: concepts
-tags: ["concepts", "security", "production", "risk-assessment", "command-safety", "visibility/public"]
+tags:
+- concepts
+- security
+- production
+- risk-assessment
+- command-safety
+- visibility/public
+tier: supporting
+sources:
+- kubernetes.io
+- etcd.io
+- internal-production-runbooks
+created: '2026-07-01'
 last_updated: 2026-07-01
 difficulty: intermediate
-sources: ["kubernetes.io", "etcd.io", "internal-production-runbooks"]
 ---
+
+
 
 # 命令风险分级与安全生产规范
 
@@ -62,7 +76,7 @@ kubectl delete namespace prod-app
 | `kubectl cordon <node>` | 标记节点不可调度（不驱逐现有 Pod） | 确认集群有其他可调度节点 |
 | `kubectl taint nodes ...` | 添加/移除污点，影响后续 Pod 调度 | 确认 tolerations 匹配；影响范围评估 |
 | `kubectl scale ... --replicas=0` | 工作负载缩容到 0，**立即停服** | 确认非生产或计划内停服；通知下游 |
-| `sysctl -w <key>=<val>` | 实时修改内核参数，**全局**生效，错误值可致内核不稳定/网络异常 | 先 `sysctl -a \| grep` 确认可选值；记录原值用于回滚；避免在流量高峰改 |
+| `sysctl -w <key>=<val>` | 实时修改内核参数，**全局**生效，错误值可致内核不稳定/网络异常 | 先 `sysctl -a | grep` 确认可选值；记录原值用于回滚；避免在流量高峰改 |
 | `systemctl stop/restart/disable <svc>` | 停止/重启系统服务（kubelet/containerd/docker/etcd），影响节点上所有容器 | 确认服务依赖；评估容器重启连锁；低峰期 |
 | `chmod -R` `chown -R`（系统目录） | 递归改权限/属主，误操作**破坏系统文件访问**导致服务无法启动 | 二次确认路径；避免对 `/etc /var/lib /usr` 操作 |
 | `iptables -F` `iptables -P INPUT DROP` | 清空/改防火墙规则，**可能立即断网（含 SSH）** | 确认控制台/带外通道可用；先保存规则 `iptables-save` |
@@ -98,3 +112,7 @@ kubectl delete namespace prod-app
 - [[domain-11-production-operations/README|生产运维]]
 
 ```
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

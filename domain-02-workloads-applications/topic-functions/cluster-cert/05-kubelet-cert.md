@@ -1,12 +1,15 @@
 ---
 title: kubelet 证书与 CSR 机制源码分析 (topic-code-analysis)
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - reference
 - apiserver
 - kubelet
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
-created: "2026-05-23"
 ---
+
+
 
 title: kubelet 证书与 CSR 机制源码分析
 description: '## 概述'
@@ -490,13 +494,15 @@ kubectl get csr
 kubectl describe csr <csr-name>
 
 # 查看 kubelet 证书管理日志
-journalctl -u kubelet | grep -i "certificate\|csr\|rotation"
+journalctl -u kubelet | grep -i "certificate|csr|rotation"
 
 # 检查 kubelet 轮换配置
 ps aux | grep kubelet | grep -E "rotate-certificates|rotate-server-certificates"
 ```
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[log|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

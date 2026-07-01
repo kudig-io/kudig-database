@@ -1,6 +1,7 @@
 ---
 title: 可信智能体体系 — 运维智能体财年规划 (domain-14-ai-ml-infra)
 description: 'title: 可信智能体体系 — 运维智能体财年规划'
+summary: 'title: 可信智能体体系 — 运维智能体财年规划'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - mysql
 - postgresql
 - kafka
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 可信智能体体系 — 运维智能体财年规划
 description: '# 可信智能体体系 — 运维智能体财年规划'

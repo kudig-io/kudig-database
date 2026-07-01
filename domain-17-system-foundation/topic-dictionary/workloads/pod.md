@@ -1,12 +1,15 @@
 ---
 title: Pod
-description: 'Pod 是 Kubernetes 的最小调度单元和计算单元。一个 Pod 封装了一个或多个紧密相关的容器，共享网络和存储资源，并作为一个整体被调度和管理。...'
+description: Pod 是 Kubernetes 的最小调度单元和计算单元。一个 Pod 封装了一个或多个紧密相关的容器，共享网络和存储资源，并作为一个整体被调度和管理。...
+summary: Pod 是 Kubernetes 的最小调度单元和计算单元。一个 Pod 封装了一个或多个紧密相关的容器，共享网络和存储资源，并作为一个整体被调度和管理。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - pod
 - workload
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -21,8 +24,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Pod
 

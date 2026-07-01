@@ -1,6 +1,7 @@
 ---
 title: Provider 与模型管理
 description: '# Provider 与模型管理'
+summary: '# Provider 与模型管理'
 category: ai-coding
 tags:
 - ai
@@ -11,6 +12,8 @@ tags:
 - vllm
 - llm
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Provider 与模型管理
 

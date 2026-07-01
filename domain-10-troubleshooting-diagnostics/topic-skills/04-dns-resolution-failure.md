@@ -1,6 +1,7 @@
 ---
 title: DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
 description: '# DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation'
+summary: '# DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation'
 category: network
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - istio
 - coredns
+tier: core
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -52,8 +55,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 <!-- condition: kubectl exec -it <pod> -n <ns> -- nslookup [[Kubernetes|kubernetes]].default 2>&1 | grep -E 'server can\'t find|NXDOMAIN' 显示 DNS 解析失败 -->
 
@@ -214,7 +218,7 @@ kubectl run dns-test-ext --image=busybox:1.36 --rm -it --restart=Never -- sh -c 
 **Step T4**: 评估业务影响
 ```bash
 # 检查最近的 DNS 相关告警和事件
-kubectl get events -A --sort-by=.lastTimestamp | grep -i "dns\|resolve\|coredns" | tail -20
+kubectl get events -A --sort-by=.lastTimestamp | grep -i "dns|resolve|coredns" | tail -20
 # 检查是否有大量 Pod 报错
 kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeeded | head -20
 ```
@@ -345,9 +349,9 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 - **命令**:
   ```bash
   # 检查 kube-system namespace 中与 CoreDNS 相关的事件
-  kubectl get events -n kube-system --sort-by=.lastTimestamp | grep -i "coredns\|dns\|kube-dns" | tail -20
+  kubectl get events -n kube-system --sort-by=.lastTimestamp | grep -i "coredns|dns|kube-dns" | tail -20
   # 检查受影响 Pod 所在 namespace 的网络相关事件
-  kubectl get events -n <namespace> --sort-by=.lastTimestamp | grep -i "dns\|network\|resolve" | tail -20
+  kubectl get events -n <namespace> --sort-by=.lastTimestamp | grep -i "dns|network|resolve" | tail -20
   ```
 - **超时**: 10s
 - **预期输出模式**: Event 列表
@@ -524,7 +528,7 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 - **命令**:
   ```bash
   # 检查是否部署了 NodeLocal DNSCache DaemonSet
-  kubectl get ds -n kube-system | grep -i "node-local\|nodelocaldns"
+  kubectl get ds -n kube-system | grep -i "node-local|nodelocaldns"
 
   # 检查 NodeLocal DNS Pod 状态
   kubectl get pods -n kube-system -l k8s-app=node-local-dns -o wide
@@ -600,7 +604,7 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 
   ```bash
   # 检查 Headless Service 配置
-  kubectl get svc <service-name> -n <namespace> -o yaml | grep -A5 "clusterIP\|selector"
+  kubectl get svc <service-name> -n <namespace> -o yaml | grep -A5 "clusterIP|selector"
 
   # 测试 Headless Service DNS 解析
   kubectl exec <pod> -- nslookup <service>.<namespace>.svc.cluster.local
@@ -812,7 +816,7 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   kubectl -n kube-system get cm node-local-dns -o yaml | grep -A 20 "Corefile"
   
   # 查看 NodeLocal DNS Pod 日志，关注 upstream 连接错误
-  kubectl -n kube-system logs -l k8s-app=node-local-dns --tail=100 | grep -i "upstream\|forward\|error\|timeout"
+  kubectl -n kube-system logs -l k8s-app=node-local-dns --tail=100 | grep -i "upstream|forward|error|timeout"
   
   # 从 NodeLocal DNS Pod 中测试到 CoreDNS 的连通性
   NODE_LOCAL_POD=$(kubectl -n kube-system get pods -l k8s-app=node-local-dns -o jsonpath='{.items[0].metadata.name}')
@@ -1805,7 +1809,7 @@ kubectl run dns-v6 --image=busybox:1.36 --rm -it --restart=Never -- sh -c "time 
 | CoreDNS CPU 使用率 | `kubectl top pods -n kube-system -l k8s-app=kube-dns` | CPU 使用率低于 limits 的 80% | CPU 使用率接近 100% limits |
 | CoreDNS 内存使用率 | `kubectl top pods -n kube-system -l k8s-app=kube-dns` | 内存使用率低于 limits 的 80% | 内存持续增长且接近 limits |
 | CoreDNS Pod 重启次数 | `kubectl get pods -n kube-system -l k8s-app=kube-dns` RESTARTS 列 | 不再增加 | 修复后仍有新的重启 |
-| 应用 DNS 错误日志 | `kubectl logs <app-pod> \| grep -c "resolve\|NXDOMAIN\|no such host"` | 不再出现新的 DNS 错误 | 持续出现 DNS 相关错误 |
+| 应用 DNS 错误日志 | `kubectl logs <app-pod> | grep -c "resolve|NXDOMAIN|no such host"` | 不再出现新的 DNS 错误 | 持续出现 DNS 相关错误 |
 
 ### 7.3 解决确认标准
 

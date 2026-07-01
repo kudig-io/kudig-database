@@ -1,7 +1,11 @@
 ---
 title: Operator 模式 × Pod 生命周期
-description: '[[concepts/operator-pattern.md|operator pattern]] 描述 CRD + 自定义控制器的扩展模式，[[concepts/pod-lifecycle.md|pod lifecycle]] 描述 Pod 的标准状态机（Pending→Running→Terminating）。两者的交叉点是**有状态应用**：StatefulSet
+description: '[[concepts/operator-pattern.md|operator pattern]] 描述 CRD + 自定义控制器的扩展模式，[[concepts/pod-lifecycle.md|pod
+  lifecycle]] 描述 Pod 的标准状态机（Pending→Running→Terminating）。两者的交叉点是**有状态应用**：StatefulSet
   管理了 Pod 的有序创建和稳定身份，但数据库的备份、恢复、版本升级、故障转移等业务逻辑完全超出了标'
+summary: '[[concepts/operator-pattern.md|operator pattern]] 描述 CRD + 自定义控制器的扩展模式，[[concepts/pod-lifecycle.md|pod
+  lifecycle]] 描述 Pod 的标准状态机（Pending→Running→Terminating）。两者的交叉点是**有状态应用**：StatefulSet
+  管理了 Pod 的有...'
 category: synthesis
 tags:
 - k8s
@@ -14,6 +18,8 @@ tags:
 - postgresql
 - statefulset
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,19 +38,20 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - redis-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/etcd.md]]"
-    type: uses
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
-  - target: "[[entities/cloudnativepg.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-dictionary/workloads/cronjob.md]]"
-    type: related_to
-  - target: "[[entities/distribution.md]]"
-    type: related_to
+- target: '[[entities/etcd.md]]'
+  type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
+- target: '[[entities/cloudnativepg.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-dictionary/workloads/cronjob.md]]'
+  type: related_to
+- target: '[[entities/distribution.md]]'
+  type: related_to
 ---
+
+
 
 # Operator 模式 × Pod 生命周期
 

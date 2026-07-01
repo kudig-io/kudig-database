@@ -1,6 +1,9 @@
 ---
 title: 准入校验 Webhook
-description: 'ValidatingAdmissionWebhook 是 Kubernetes 准入控制器的扩展机制，允许外部服务拦截 API 请求进行自定义校验，在资源写入 ...'
+description: ValidatingAdmissionWebhook 是 Kubernetes 准入控制器的扩展机制，允许外部服务拦截 API 请求进行自定义校验，在资源写入
+  ...
+summary: ValidatingAdmissionWebhook 是 Kubernetes 准入控制器的扩展机制，允许外部服务拦截 API 请求进行自定义校验，在资源写入
+  ...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - configuration
 - admission
 - webhook
+tier: peripheral
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # 准入校验 Webhook（ValidatingAdmissionWebhook）
 

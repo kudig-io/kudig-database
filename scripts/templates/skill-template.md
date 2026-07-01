@@ -1,15 +1,14 @@
 ---
+title: Skill Template
+summary: 每个 Skill 文档以 YAML front matter 开头，用 --- 包围。所有字段均为必填。
+category: general
+tags:
+- skill-template
+tier: supporting
+created: '2026-07-01'
+---
 
-## YAML Front Matter 规范
-
-每个 Skill 文档以 YAML front matter 开头，用 `
-created: "2026-05-23"
-updated: "2026-05-23"
-last_updated: 2026-05-23
-title: "Skill 运维技能文档模板"
-category: uncategorized
-tags: ["uncategorized", "visibility/public"]
----# Skill 运维技能文档模板
+# Skill 运维技能文档模板
 
 > **模板版本**: 2.0
 > **最后更新**: 2026-05

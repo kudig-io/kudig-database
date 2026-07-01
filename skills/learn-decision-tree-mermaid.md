@@ -1,6 +1,7 @@
 ---
 title: 故障排查决策树 - Mermaid 可视化版
 description: '# 故障排查决策树 - Mermaid 可视化版'
+summary: '# 故障排查决策树 - Mermaid 可视化版'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - calico
 - coredns
 - docker
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # 故障排查决策树 - Mermaid 可视化版
 

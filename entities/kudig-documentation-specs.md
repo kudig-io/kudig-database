@@ -1,6 +1,7 @@
 ---
 title: KUDIG 文档规范体系：标签字典、Frontmatter、场景分类、同义词典
 description: '| 错误状态 | FTA 入口 | 快速排查 |'
+summary: '| 错误状态 | FTA 入口 | 快速排查 |'
 category: reference
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - scenario-taxonomy
 - synonym-dictionary
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 - 同义词典
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG 文档规范体系
 

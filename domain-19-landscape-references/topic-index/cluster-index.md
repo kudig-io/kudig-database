@@ -1,6 +1,7 @@
 ---
 title: Cluster 集群知识图谱索引
 description: '## Cluster 知识图谱'
+summary: '## Cluster 知识图谱'
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - apiserver
 - kubelet
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Cluster 集群知识图谱索引
 

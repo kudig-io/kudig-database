@@ -1,6 +1,8 @@
 ---
 title: Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and Istio Integration)
-description: '# Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and Istio Integration)'
+description: '# Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and Istio
+  Integration)'
+summary: '# Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and Istio Integration)'
 category: papers
 tags:
 - k8s
@@ -13,6 +15,8 @@ tags:
 - envoy
 - cilium
 - coredns
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -57,8 +61,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-mesh-istio-fta.md
   label: '故障树: service-mesh-istio'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 服务网格深度实践与Istio集成 ([[Service|Service]]Service Mesh）|Service Mesh]] Deep Practice and [[Istio|Istio]] Integration)
 
@@ -1497,5 +1502,9 @@ Istio性能基准测试(2025年发布):
 - 11-kubernetes-api-server-deep-optimization-extension
 
 ## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]

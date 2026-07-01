@@ -1,6 +1,7 @@
 ---
 title: Topic 应用层架构设计最佳实践
 description: '# Topic: 应用层架构设计最佳实践'
+summary: '# Topic: 应用层架构设计最佳实践'
 category: application-architecture
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - falco
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-18
 difficulty: beginner
 reading_level: beginner
@@ -60,8 +63,9 @@ related_topics:
 - domain-01-cluster-fundamentals
 - domain-11-production-operations
 - domain-11-ai-infra
-created: "2026-05-23"
 ---
+
+
 
 # Topic: 应用层架构设计最佳实践
 

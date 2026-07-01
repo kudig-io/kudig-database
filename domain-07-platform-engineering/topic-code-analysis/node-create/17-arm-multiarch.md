@@ -1,6 +1,7 @@
 ---
 title: ARM 节点与多架构混合集群
 description: 系统介绍 Kubernetes ARM64 节点接入流程、多架构镜像构建策略、混合架构集群的调度配置，以及常见的 ARM 兼容性问题排查方法。
+summary: 系统介绍 Kubernetes ARM64 节点接入流程、多架构镜像构建策略、混合架构集群的调度配置，以及常见的 ARM 兼容性问题排查方法。
 category: node-create
 tags:
 - arm64
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - containerd
 - docker
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: advanced
 reading_level: advanced
@@ -55,8 +58,9 @@ related_topics:
 - node-create
 - registration
 - cloud-node
-created: "2026-05-23"
 ---
+
+
 
 # ARM 节点与多架构混合集群
 

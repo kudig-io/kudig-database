@@ -1,6 +1,7 @@
 ---
 title: opa v1.11 Release Notes
 description: opa v1.11 Release Notes — Kubernetes 生产运维知识库
+summary: opa v1.11 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - prometheus
 - opa
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - cncf-ecosystem
 - prometheus-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # opa v1.11 Release Notes
 

@@ -1,6 +1,7 @@
 ---
 title: CRD 与 Operator 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: CRD 与 Operator 故障排查指南'
+summary: 'title: CRD 与 Operator 故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - operator
 - webhook
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -41,8 +44,9 @@ prerequisites:
 - troubleshooting-methodology
 - helm-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 title: CRD 与 Operator 故障排查指南
 description: '# CRD 与 Operator 故障排查指南'
@@ -544,7 +548,7 @@ kubectl delete validatingwebhookconfiguration <name>
 
 ```bash
 # 步骤 1: 查看 Operator 日志定位错误
-kubectl logs -n <operator-ns> <operator-pod> -f | grep -i "error\|reconcile"
+kubectl logs -n <operator-ns> <operator-pod> -f | grep -i "error|reconcile"
 
 # 步骤 2: 常见 Reconcile 错误分析
 
@@ -581,7 +585,7 @@ kubectl rollout restart deployment <operator-deployment> -n <operator-namespace>
 
 ```bash
 # 步骤 1: 识别缺失的权限
-kubectl logs -n <operator-ns> <operator-pod> | grep -i "forbidden\|cannot"
+kubectl logs -n <operator-ns> <operator-pod> | grep -i "forbidden|cannot"
 # 示例输出: cannot create deployments.apps in namespace "xxx"
 
 # 步骤 2: 检查当前 ClusterRole
@@ -645,7 +649,7 @@ kubectl get <resource-type> <name> -n <namespace> -o jsonpath='{.metadata.finali
 kubectl get <resource-type> <name> -n <namespace> -o jsonpath='{.metadata.deletionTimestamp}'
 
 # 步骤 3: 检查 Operator 是否在处理 Finalizer
-kubectl logs -n <operator-ns> <operator-pod> | grep -i "finalizer\|cleanup"
+kubectl logs -n <operator-ns> <operator-pod> | grep -i "finalizer|cleanup"
 
 # 步骤 4: 如果 Operator 正常但清理失败，检查日志找出原因
 # 常见原因:

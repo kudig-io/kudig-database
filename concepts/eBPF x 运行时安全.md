@@ -1,6 +1,7 @@
 ---
 title: eBPF x 运行时安全
 description: 'title: eBPF x 运行时安全'
+summary: 'title: eBPF x 运行时安全'
 category: general
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - ebpf
 - rag
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,19 +31,20 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - kafka-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/security/multi-tenancy.md]]"
-    type: related_to
-  - target: "[[entities/networkpolicy.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-dictionary/security/runtime-security.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service.md]]"
-    type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/security/multi-tenancy.md]]'
+  type: related_to
+- target: '[[entities/networkpolicy.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-dictionary/security/runtime-security.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/service.md]]'
+  type: uses
 ---
+
+
 
 ---
 title: eBPF x [[domain-17-system-foundation/topic-dictionary/security/runtime-security.md|运行时安全]]

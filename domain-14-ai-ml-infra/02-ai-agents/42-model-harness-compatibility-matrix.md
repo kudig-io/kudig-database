@@ -1,6 +1,8 @@
 ---
 title: 模型 × Harness 兼容性矩阵（2025-2026） [02-ai-agents]
-description: 'description: ''**文档类型**: 实践参考指南 | **最后更新**: 2026-04 | **关键词**: Model Compatibility,'
+description: 'description: ''**文档类型**: 实践参考指南 | **最后更新**: 2026-04 | **关键词**: Model
+  Compatibility,'
+summary: 'description: ''**文档类型**: 实践参考指南 | **最后更新**: 2026-04 | **关键词**: Model Compatibility,'
 category: general
 tags:
 - ai
@@ -10,6 +12,8 @@ tags:
 - llm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +35,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 模型 × Harness 兼容性矩阵（2025-2026）
 description: '**文档类型**: 实践参考指南 | **最后更新**: 2026-04 | **关键词**: Model Compatibility,

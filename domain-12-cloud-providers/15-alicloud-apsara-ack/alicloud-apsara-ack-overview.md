@@ -1,6 +1,7 @@
 ---
 title: 阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析
 description: 'title: 阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析'
+summary: 'title: 阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析'
 category: general
 tags:
 - cloud
@@ -13,6 +14,8 @@ tags:
 - job
 - ingress
 - gateway
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - etcd-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析
 description: '# 阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析'
@@ -701,6 +705,8 @@ echo "诊断报告已保存到: $REPORT_FILE"
 阿里云专有版ACK凭借其金融级的安全特性、政企定制化能力以及完全自主可控的技术架构，为政府、金融、电信等关键行业提供了安全可靠的容器化解决方案。通过深度适配政企客户需求、严格的合规性保障和完善的服务支持体系，成为数字化转型时代的重要基础设施平台。
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]

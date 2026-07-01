@@ -1,5 +1,7 @@
 ---
 title: 混沌工程与可观测性融合
+summary: 混沌工程与可观测性融合：混沌工程通过在生产环境注入问题来验证系统韧性，可观测性通过采集和分析系统信号来理解系统行为。两者的交汇点在于：混沌实验的可信度依赖于可观测性——你无法验证"系统在问题中是否表现正确"，除非你能够看到系统在问题中的真实行为。
+  本页连接 domain-09-reliability-engineering 的混沌工程方法论与 domain-06-observability ...
 category: synthesis
 tags:
 - k8s
@@ -12,6 +14,7 @@ tags:
 - monitoring
 - gameday
 - resilience
+tier: supporting
 sources:
 - domain-09-reliability-engineering/04-chaos-engineering
 - domain-09-reliability-engineering/05-sre-practices
@@ -22,11 +25,13 @@ created: 2026-05-21 14:00:00+00:00
 updated: 2026-05-21 14:00:00+00:00
 last_updated: 2026-05-21 14:00:00+00:00
 relationships:
-  - target: "[[entities/argo.md]]"
-    type: related_to
-  - target: "[[entities/jaeger.md]]"
-    type: related_to
+- target: '[[entities/argo.md]]'
+  type: related_to
+- target: '[[entities/jaeger.md]]'
+  type: related_to
 ---
+
+
 
 # 混沌工程与可观测性融合
 

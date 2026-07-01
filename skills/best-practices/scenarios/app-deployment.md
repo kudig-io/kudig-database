@@ -1,6 +1,7 @@
 ---
 title: '场景: 应用部署'
 description: 在 Kubernetes 上部署和运维应用的完整流程
+summary: 在 Kubernetes 上部署和运维应用的完整流程
 category: scenario
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - statefulset
 - daemonset
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-20'
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # 场景: 应用部署
 

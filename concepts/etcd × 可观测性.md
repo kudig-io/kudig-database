@@ -1,7 +1,11 @@
 ---
 title: etcd × 可观测性
-description: '[[entities/etcd.md|etcd]] 是 K8s 控制平面的状态存储，[[entities/prometheus-grafana.md|prometheus grafana]] 是监控栈。wiki 将 etcd 作为架构组件、将监控作为运维工具分别介绍，但两者的关系是生死相依：etcd
-  是 Kubernetes 的心脏——所有资源定义、状态更新、事件流都通过 etcd 持久化。但 etcd 在问题前往往是静默的：它不会主动告警磁盘空间不足、不'
+description: '[[entities/etcd.md|etcd]] 是 K8s 控制平面的状态存储，[[entities/prometheus-grafana.md|prometheus
+  grafana]] 是监控栈。wiki 将 etcd 作为架构组件、将监控作为运维工具分别介绍，但两者的关系是生死相依：etcd 是 Kubernetes 的心脏——所有资源定义、状态更新、事件流都通过
+  etcd 持久化。但 etcd 在问题前往往是静默的：它不会主动告警磁盘空间不足、不'
+summary: '[[entities/etcd.md|etcd]] 是 K8s 控制平面的状态存储，[[entities/prometheus-grafana.md|prometheus
+  grafana]] 是监控栈。wiki 将 etcd 作为架构组件、将监控作为运维工具分别介绍，但两者的关系是生死相依：etcd 是 Kubernetes 的心脏——所有资源定义、状态更新、事件流都通过
+  etcd 持久化。...'
 category: synthesis
 tags:
 - k8s
@@ -14,6 +18,8 @@ tags:
 - kubelet
 - grafana
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,19 +37,20 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/etcd.md]]"
-    type: uses
-  - target: "[[entities/kubelet.md]]"
-    type: uses
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
-  - target: "[[entities/prometheus.md]]"
-    type: uses
-  - target: "[[entities/cortex.md]]"
-    type: related_to
+- target: '[[entities/etcd.md]]'
+  type: uses
+- target: '[[entities/kubelet.md]]'
+  type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
+- target: '[[entities/prometheus.md]]'
+  type: uses
+- target: '[[entities/cortex.md]]'
+  type: related_to
 ---
+
+
 
 # [[entities/etcd.md|etcd]] × 可观测性
 

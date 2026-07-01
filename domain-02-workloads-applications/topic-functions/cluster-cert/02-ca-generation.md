@@ -1,6 +1,9 @@
 ---
 title: CA 证书生成源码分析 (topic-code-analysis)
-description: 'description: ''| 配置定义 | `cmd/kubeadm/app/phases/certs/certs.go` | KubeadmCert 结构体 |'''
+description: 'description: ''| 配置定义 | `cmd/kubeadm/app/phases/certs/certs.go` | KubeadmCert
+  结构体 |'''
+summary: 'description: ''| 配置定义 | `cmd/kubeadm/app/phases/certs/certs.go` | KubeadmCert
+  结构体 |'''
 category: general
 tags:
 - reference
@@ -10,6 +13,8 @@ tags:
 - scheduler
 - controller-manager
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: CA 证书生成源码分析
 description: '| 配置定义 | `cmd/kubeadm/app/phases/certs/certs.go` | KubeadmCert 结构体 |'
@@ -147,7 +153,7 @@ func UsingExternalCA(cfg *kubeadmapi.InitConfiguration) (bool, error)
 |------|--------|-------------|
 | `SerialNumber` | `0` (固定) | 随机 `big.Int` |
 | `IsCA` | `true` | `false` |
-| `KeyUsage` | `CertSign \| KeyEncipherment \| DigitalSignature` | `KeyEncipherment \| DigitalSignature` |
+| `KeyUsage` | `CertSign | KeyEncipherment | DigitalSignature` | `KeyEncipherment | DigitalSignature` |
 | `BasicConstraintsValid` | `true` | `true` |
 | `ValidityPeriod` | 10 年 | 1 年 |
 | 密钥算法 | RSA 2048 | RSA 2048 |
@@ -462,6 +468,8 @@ systemctl restart kubelet
 - [`kubeadm certs renew`](README.md) — 证书续期命令
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

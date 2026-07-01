@@ -1,6 +1,7 @@
 ---
 title: 第十九章：避坑指南与常见误区 (domain-10-troubleshooting-diagnostics)
 description: 'title: 第十九章：避坑指南与常见误区'
+summary: 'title: 第十九章：避坑指南与常见误区'
 category: fta
 tags:
 - fta
@@ -10,6 +11,8 @@ tags:
 - prometheus
 - llm
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -37,8 +40,9 @@ prerequisites:
 fta_id: FTA-19_PITFALLS_AND_BEST_PRACTICES-001
 component: 19 Pitfalls And Best Practices
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: 第十九章：避坑指南与常见误区
 description: '# 第十九章：避坑指南与常见误区'

@@ -1,11 +1,14 @@
 ---
 title: 发布会视觉素材 — AI 图片生成提示词
 description: 科技感深蓝色背景, 中央悬浮一个发光的六边形知识网络结构,
+summary: 科技感深蓝色背景, 中央悬浮一个发光的六边形知识网络结构,
 category: general
 tags:
 - k8s
 - etcd
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,8 +25,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 发布会视觉素材 — AI 图片生成提示词
 

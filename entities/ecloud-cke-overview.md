@@ -1,6 +1,7 @@
 ---
 title: 移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南
 description: 'title: 移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南'
+summary: 'title: 移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南'
 category: general
 tags:
 - cloud
@@ -13,6 +14,8 @@ tags:
 - ingress
 - rbac
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - troubleshooting-methodology
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 移动云 CKE (China Mobile Cloud [[Kubernetes|Kubernetes]] Engine) 企业级深度实战指南
 description: '# 移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南'
@@ -1331,7 +1335,7 @@ echo
 echo "=== 成本优化建议 ==="
 
 # 检查闲置资源
-IDLE_RESOURCES=$(kubectl get pods --all-namespaces --no-headers | grep -c "Evicted\|Completed")
+IDLE_RESOURCES=$(kubectl get pods --all-namespaces --no-headers | grep -c "Evicted|Completed")
 if [ $IDLE_RESOURCES -gt 0 ]; then
     echo "⚠️  发现 $IDLE_RESOURCES 个闲置资源，建议清理"
 fi
@@ -1601,6 +1605,8 @@ echo "诊断报告已保存到: $REPORT_FILE"
 移动云CKE凭借中国移动强大的网络基础设施和丰富的运营商经验，为客户提供了高性能、高可靠的容器化解决方案。通过深度融合CDN网络、边缘计算等运营商特色能力，以及完善的合规性保障，成为电商、媒体、政企等行业的理想选择。
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

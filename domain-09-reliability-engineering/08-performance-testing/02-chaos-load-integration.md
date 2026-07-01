@@ -1,6 +1,7 @@
 ---
 title: 混沌测试与负载测试集成
 description: → 准备回滚方案
+summary: → 准备回滚方案
 category: domain
 tags:
 - chaos-engineering
@@ -9,6 +10,8 @@ tags:
 - reliability
 - prometheus
 - grafana
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - sre-practices
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # 混沌测试与负载测试集成
 

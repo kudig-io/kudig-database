@@ -1,6 +1,7 @@
 ---
 title: 05 - 企业级存储管理与运维实践
 description: '# 05 - 企业级存储管理与运维实践'
+summary: '# 05 - 企业级存储管理与运维实践'
 category: storage-fundamentals
 tags:
 - storage
@@ -13,6 +14,8 @@ tags:
 - minio
 - mysql
 - postgresql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 05 - 企业级存储管理与运维实践
 
@@ -173,7 +177,7 @@ DAILY_STORAGE_CHECK() {
     
     # 检查系统日志中的存储相关错误
     echo "最近24小时存储相关错误:"
-    journalctl -u multipathd -u iscsid --since "24 hours ago" | grep -i "error\|fail\|warning" | tail -10
+    journalctl -u multipathd -u iscsid --since "24 hours ago" | grep -i "error|fail|warning" | tail -10
     
     # 5. 安全检查
     echo -e "\n\n5. 安全状态检查"
@@ -234,7 +238,7 @@ WEEKLY_STORAGE_MAINTENANCE() {
     echo "------------------------"
     
     # 检查备份任务执行情况
-    find /var/log/backup -name "*.log" -mtime -7 -exec grep -l "SUCCESS\|FAILED" {} \;
+    find /var/log/backup -name "*.log" -mtime -7 -exec grep -l "SUCCESS|FAILED" {} \;
     
     # 4. 安全合规检查
     echo -e "\n\n4. 安全合规检查"

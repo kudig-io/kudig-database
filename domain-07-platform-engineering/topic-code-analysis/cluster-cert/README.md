@@ -1,6 +1,7 @@
 ---
 title: Cluster Cert — Kubernetes 集群证书体系源码分析 (topic-code-analysis)
 description: '## 概述'
+summary: '## 概述'
 category: functions
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-18'
 difficulty: expert
 reading_level: expert
@@ -55,8 +58,9 @@ related_topics:
 - cluster-cert/etcd-cert
 - cluster-cert/kubelet-cert
 - cluster-cert/cert-rotation
-created: "2026-05-23"
 ---
+
+
 
 # Cluster Cert — Kubernetes 集群证书体系源码分析
 

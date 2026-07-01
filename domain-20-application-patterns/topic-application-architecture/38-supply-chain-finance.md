@@ -1,6 +1,7 @@
 ---
 title: 供应链金融架构设计 — 阿里云视角
 description: 'title: 供应链金融架构设计'
+summary: 'title: 供应链金融架构设计'
 category: general
 tags:
 - architecture
@@ -10,6 +11,8 @@ tags:
 - redis
 - mysql
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 供应链金融架构设计
 description: '# 供应链金融架构设计 — 阿里云视角'

@@ -1,6 +1,7 @@
 ---
 title: Loki Enterprise Log Aggregation and Analytics Platform
 description: '- loki-enterprise-log-aggregation的最佳实践'
+summary: '- loki-enterprise-log-aggregation的最佳实践'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - gateway
 - rbac
 - networkpolicy
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - service-mesh-basics
 - monitoring-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:
@@ -498,7 +502,7 @@ pipeline_stages:
     - expression="^4\\d{2}$"
   # 正则表达式解析
   - regex:
-      expression: '^(?P<ip>\d+\.\d+\.\d+\.\d+) - (?P<user>\S+) \[(?P<timestamp>[^\]]+)\] "(?P<method>\S+) (?P<path>\S+) (?P<protocol>\S+)" (?P<status>\d+) (?P<size>\d+)'
+      expression: '^(?P<ip>\d+\.\d+\.\d+\.\d+) - (?P<user>\S+) \[(?P<timestamp>[^]]+)\] "(?P<method>\S+) (?P<path>\S+) (?P<protocol>\S+)" (?P<status>\d+) (?P<size>\d+)'
   
   # 数值转换
   - unpack:

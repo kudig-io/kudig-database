@@ -1,6 +1,7 @@
 ---
 title: Deployment 全面故障排查
 description: '# 11 - Deployment 全面故障排查 (Deployment Comprehensive Troubleshooting)'
+summary: '# 11 - Deployment 全面故障排查 (Deployment Comprehensive Troubleshooting)'
 category: troubleshooting
 tags:
 - deployment
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - docker
 - hpa
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: intermediate
 reading_level: intermediate
@@ -61,8 +64,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md
   label: '故障树: deployment'
-created: "2026-05-23"
 ---
+
+
 
 # 11 - Deployment 全面故障排查 (Deployment Comprehensive Troubleshooting)
 

@@ -1,6 +1,7 @@
 ---
 title: kube-controller-manager 深度解析
 description: 深入解析 kube-controller-manager 的架构设计、40+ 内置控制器、Leader 选举机制、控制器协同工作原理与生产级运维
+summary: 深入解析 kube-controller-manager 的架构设计、40+ 内置控制器、Leader 选举机制、控制器协同工作原理与生产级运维
 category: domain-01-cluster-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - apiserver
 - kubelet
 - prometheus
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -82,8 +85,9 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta.md
   type: fta
   desc: Controller Manager 故障树
-created: "2026-05-23"
 ---
+
+
 
 # kube-controller-manager 深度解析 (KCM Deep Dive)
 
@@ -862,7 +866,7 @@ curl -sk https://localhost:10257/healthz
 | **资源删除后残留** | GarbageCollector | `kubectl get <resource> --show-labels` | GC被禁用/ownerReference缺失 |
 | **定时任务不触发** | CronJob | `kubectl get cronjob`, `kubectl get job` | 时区设置/schedule语法/并发策略 |
 | **HPA不生效** | HPA | `kubectl describe hpa`, `kubectl top pod` | metrics-server不可用/指标类型错误 |
-| **新节点无Pod CIDR** | NodeIPAM | `kubectl get node -o yaml \| grep podCIDR` | IPAM未启用/CIDR耗尽/参数错误 |
+| **新节点无Pod CIDR** | NodeIPAM | `kubectl get node -o yaml | grep podCIDR` | IPAM未启用/CIDR耗尽/参数错误 |
 | **新Namespace无default SA** | ServiceAccount | `kubectl get sa -n <ns>` | SA控制器未运行/权限问题 |
 | **证书申请未处理** | CertificateSigning | `kubectl get csr` | 自动审批条件不满足/签名证书配置错误 |
 | **PDB状态异常** | Disruption | `kubectl get pdb -o yaml` | selector不匹配/目标控制器不存在 |

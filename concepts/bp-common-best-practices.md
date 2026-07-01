@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 通用最佳实践参考
 description: '- 通用最佳实践'
+summary: '- 通用最佳实践'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - vpa
 - ingress
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 trigger_keywords:
 - Kubernetes

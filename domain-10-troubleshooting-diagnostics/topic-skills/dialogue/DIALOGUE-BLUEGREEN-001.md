@@ -1,17 +1,25 @@
 ---
-dialogue_id: "DIALOGUE-BLUEGREEN-001"
-skill_id: "SKILL-BLUEGREEN-001"
-role: "remote-consultant"
-language: "zh"
-severity: "high"
-status: "reviewed"
+title: 蓝绿部署切换后服务不可用 — 远程顾问对话脚本
+summary: 蓝绿部署切换后服务不可用 — 远程顾问对话脚本：kubectl get deployment -n <namespace>
+category: dialogue
+tags:
+- dialogue
+- remote-consultant
+- troubleshooting
+- visibility/public
+tier: supporting
 created: 2026-05-21
 updated: 2026-05-21
+dialogue_id: DIALOGUE-BLUEGREEN-001
+skill_id: SKILL-BLUEGREEN-001
+role: remote-consultant
+language: zh
+severity: high
+status: reviewed
 last_updated: 2026-05-21
-title: "蓝绿部署切换后服务不可用 — 远程顾问对话脚本"
-category: dialogue
-tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
+
+
 
 # 蓝绿部署切换后服务不可用 — 远程顾问对话脚本
 
@@ -207,3 +215,7 @@ curl -s http://<svc-ip>/health
 
 - [[concepts/blue-green-deployment.md|蓝绿部署]]
 - [[concepts/deployment-controller-architecture.md|Deployment 控制器]]
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

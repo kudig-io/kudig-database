@@ -1,6 +1,7 @@
 ---
 title: Deployment 控制器架构
 description: '# Deployment 控制器架构'
+summary: '# Deployment 控制器架构'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - etcd
 - kubelet
 - crd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Deployment 控制器架构
 

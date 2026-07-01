@@ -1,6 +1,7 @@
 ---
 title: StatefulSet Pod 启动失败：PVC 未绑定
 description: 专有云 ACK 集群因 StorageClass 扩容失败导致 StatefulSet Pod 的 PVC 未绑定、Pod 无法启动的工单闭环样本。
+summary: 专有云 ACK 集群因 StorageClass 扩容失败导致 StatefulSet Pod 的 PVC 未绑定、Pod 无法启动的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -10,6 +11,9 @@ tags:
 - storage
 - disk
 - p1
+tier: core
+created: '2026-06-26T14:00:00+08:00'
+updated: '2026-06-26T16:00:00+08:00'
 incident_id: INC-2026-ACK-043
 priority: P1
 severity: high
@@ -21,9 +25,7 @@ skill_ref:
 - '[[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md|CSI 异常故障树分析]]'
 fta_ref:
 - '[[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md|FTA: CSI 存储异常]]'
-created: '2026-06-26T14:00:00+08:00'
-updated: '2026-06-26T16:00:00+08:00'
-last_updated: 2026-06-26T16:00:00+08:00
+last_updated: 2026-06-26 16:00:00+08:00
 duplicate_of: INC-2026-ACK-048
 status: duplicate
 duplication_reason: 与 "INC-2026-ACK-048" 主题重复，内容角度相似，降低 RAG 权重
@@ -51,13 +53,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[concepts/statefulset.md]]"
+- target: '[[concepts/statefulset.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 

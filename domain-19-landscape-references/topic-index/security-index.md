@@ -1,6 +1,7 @@
 ---
 title: Security 安全知识图谱索引
 description: '## Security 知识图谱'
+summary: '## Security 知识图谱'
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - falco
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,8 +35,9 @@ prerequisites:
 - cncf-ecosystem
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # Security 安全知识图谱索引
 

@@ -1,6 +1,7 @@
 ---
 title: 节点组件故障排查 (skills)
 description: '# 节点组件故障排查'
+summary: '# 节点组件故障排查'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - containerd
 - cri-o
 - docker
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # 节点组件故障排查
 

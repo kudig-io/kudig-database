@@ -1,6 +1,7 @@
 ---
 title: domain-07-platform-engineering MOC
 description: domain-07-platform-engineering 知识域导航页，覆盖 29 篇文档
+summary: domain-07-platform-engineering 知识域导航页，覆盖 29 篇文档
 category: moc
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - k8s
 - crd
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-07-platform-engineering MOC
 

@@ -1,6 +1,7 @@
 ---
 title: 升级迁移故障排查
 description: '# 34 - 升级迁移故障排查 (Upgrade and Migration Troubleshooting)'
+summary: '# 34 - 升级迁移故障排查 (Upgrade and Migration Troubleshooting)'
 category: troubleshooting
 tags:
 - upgrade
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - scheduler
 - prometheus
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: advanced
 reading_level: advanced
@@ -60,8 +63,9 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
-created: "2026-05-23"
 ---
+
+
 
 # 34 - 升级迁移故障排查 (Upgrade and Migration Troubleshooting)
 

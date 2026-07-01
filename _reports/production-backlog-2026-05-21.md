@@ -1,12 +1,20 @@
 ---
-title: "报告标题"
+title: 报告标题
+summary: '报告标题：1. QA Corpus 文件（3个 .md）: 这些是 topic-qa-corpus/generated/ 下的生成文件，原始数据在
+  .json 中。建议：'
 category: reports
-tags: ["reports", "visibility/public"]
-sources: ["auto-generated"]
+tags:
+- reports
+- visibility/public
+tier: supporting
+sources:
+- auto-generated
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # KUDIG 生产环境 llm-wiki 后续待办评估
 
@@ -186,3 +194,7 @@ last_updated: 2026-05-24
 ---
 
 *评估完成: 2026-05-21 | 下次评估: 建议 P0 修复完成后*
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

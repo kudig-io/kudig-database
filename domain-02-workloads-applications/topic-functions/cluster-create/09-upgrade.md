@@ -1,6 +1,7 @@
 ---
 title: 集群升级流程 (kubeadm upgrade)
 description: 'description: ''Apply->>Upload: 上传新配置到 ConfigMap'''
+summary: 'description: ''Apply->>Upload: 上传新配置到 ConfigMap'''
 category: general
 tags:
 - reference
@@ -11,6 +12,8 @@ tags:
 - scheduler
 - controller-manager
 - daemonset
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 集群升级流程 kubeadm upgrade
 description: 'Apply->>Upload: 上传新配置到 ConfigMap'
@@ -685,6 +689,8 @@ kubectl set image daemonset/kube-proxy kube-proxy=registry.k8s.io/kube-proxy:v1.
 ```
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

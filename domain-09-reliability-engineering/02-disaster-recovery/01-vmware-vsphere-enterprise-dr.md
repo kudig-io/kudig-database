@@ -1,6 +1,7 @@
 ---
 title: VMware vSphere 企业级灾备与业务连续性
 description: '**作者**: 企业级灾备架构师 | **版本**: v2.0 | **更新时间**: 2026-05-18'
+summary: '**作者**: 企业级灾备架构师 | **版本**: v2.0 | **更新时间**: 2026-05-18'
 category: disaster-recovery
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - postgresql
 - job
 - gateway
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # VMware vSphere 企业级灾备与业务连续性
 

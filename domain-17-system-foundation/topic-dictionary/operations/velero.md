@@ -1,6 +1,7 @@
 ---
 title: Velero
-description: 'Velero 是 CNCF 孵化项目，提供 Kubernetes 集群资源和持久卷的备份、恢复和迁移能力。它是 Kubernetes 灾备方案的标准工具，支持将...'
+description: Velero 是 CNCF 孵化项目，提供 Kubernetes 集群资源和持久卷的备份、恢复和迁移能力。它是 Kubernetes 灾备方案的标准工具，支持将...
+summary: Velero 是 CNCF 孵化项目，提供 Kubernetes 集群资源和持久卷的备份、恢复和迁移能力。它是 Kubernetes 灾备方案的标准工具，支持将...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - backup
 - disaster-recovery
 - cncf
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Velero
 

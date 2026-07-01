@@ -1,6 +1,7 @@
 ---
 title: 电信云与 5G 多接入边缘计算（MEC）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - networkpolicy
 - nvidia
 - ebpf
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,9 +36,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - etcd-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 电信云与 5G 多接入边缘计算（MEC）
 
@@ -198,8 +201,8 @@ spec:
 | 症状 | 可能原因 | 排查步骤 |
 |------|----------|----------|
 | UPF 吞吐量低于预期 | CPU 未绑定或跨 NUMA 访问 | `lstopo` 检查 NUMA 拓扑；确认 Topology Manager 策略 |
-| SR-IOV VF 分配失败 | SR-IOV Device Plugin 未安装 | `kubectl get node -o json \| jq '.status.allocatable'` 检查 VF 资源 |
-| HugePages 分配不足 | 节点 HugePages 未预留 | `cat /proc/meminfo \| grep HugePages` |
+| SR-IOV VF 分配失败 | SR-IOV Device Plugin 未安装 | `kubectl get node -o json | jq '.status.allocatable'` 检查 VF 资源 |
+| HugePages 分配不足 | 节点 HugePages 未预留 | `cat /proc/meminfo | grep HugePages` |
 | PTP 时间同步偏差大 | PTP Grandmaster 不可达 | `pmc -u -b 0 'GET TIME_STATUS_NP'` 检查同步状态 |
 | 网络切片 QoS 不满足 SLA | 缺少 TC 或 eBPF QoS 策略 | 检查流量整形配置和队列调度 |
 

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 存储配置最佳实践
 description: '# Kubernetes 存储配置最佳实践'
+summary: '# Kubernetes 存储配置最佳实践'
 category: skills
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - storage-class
 - backup
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 存储配置最佳实践
 

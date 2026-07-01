@@ -1,6 +1,9 @@
 ---
 title: 证书
-description: 'Certificate（证书）是 Kubernetes 中用于 TLS 加密通信的数字凭证。集群内部组件之间的通信、API Server 的 HTTPS 端点和...'
+description: Certificate（证书）是 Kubernetes 中用于 TLS 加密通信的数字凭证。集群内部组件之间的通信、API Server
+  的 HTTPS 端点和...
+summary: Certificate（证书）是 Kubernetes 中用于 TLS 加密通信的数字凭证。集群内部组件之间的通信、API Server 的 HTTPS
+  端点和...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - security
 - certificate
 - tls
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 证书
 

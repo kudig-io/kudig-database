@@ -1,6 +1,9 @@
 ---
 title: Deployment 控制器架构总览
-description: 深入分析 Kubernetes Deployment 控制器的整体架构，涵盖 Informer 注册、事件处理、Worker 处理循环、OwnerReference 机制以及与 ReplicaSet 的分层管理关系。
+description: 深入分析 Kubernetes Deployment 控制器的整体架构，涵盖 Informer 注册、事件处理、Worker 处理循环、OwnerReference
+  机制以及与 ReplicaSet 的分层管理关系。
+summary: 深入分析 Kubernetes Deployment 控制器的整体架构，涵盖 Informer 注册、事件处理、Worker 处理循环、OwnerReference
+  机制以及与 ReplicaSet 的分层管理关系。
 category: deployment
 tags:
 - deployment
@@ -13,6 +16,8 @@ tags:
 - etcd
 - kubelet
 - controller-manager
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-18
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +54,9 @@ related_topics:
 - deployment-controller
 - replicaset-controller
 - rolling-update
-created: "2026-05-23"
 ---
+
+
 
 # Deployment 控制器架构总览
 

@@ -1,6 +1,7 @@
 ---
 title: TLS/SSL 与 PKI 速查卡
 description: 证书管理、TLS 配置和 PKI 运维的快速参考
+summary: 证书管理、TLS 配置和 PKI 运维的快速参考
 category: cheatsheet
 tags:
 - tls
@@ -13,6 +14,8 @@ tags:
 - etcd
 - apiserver
 - kubelet
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -45,8 +48,9 @@ related_docs:
   desc: 认证授权系统
 - path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   desc: 网络诊断速查卡
-created: "2026-05-23"
 ---
+
+
 
 # TLS/SSL 与 PKI 速查表
 

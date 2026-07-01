@@ -1,12 +1,16 @@
 ---
 title: 容器网络接口
-description: 'CNI（Container Network Interface）是容器网络插件的标准接口规范。它定义了容器网络配置、创建和删除的标准化流程，使 Kubernet...'
+description: CNI（Container Network Interface）是容器网络插件的标准接口规范。它定义了容器网络配置、创建和删除的标准化流程，使
+  Kubernet...
+summary: CNI（Container Network Interface）是容器网络插件的标准接口规范。它定义了容器网络配置、创建和删除的标准化流程，使 Kubernet...
 category: dictionary
 tags:
 - k8s
 - glossary
 - cni
 - networking
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 容器网络接口
 

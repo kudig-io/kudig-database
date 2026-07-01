@@ -1,6 +1,7 @@
 ---
 title: 命令输出根因解析
 description: '# 命令输出根因解析'
+summary: '# 命令输出根因解析'
 category: skills
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - daemonset
 - rbac
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 # 命令输出根因解析
 

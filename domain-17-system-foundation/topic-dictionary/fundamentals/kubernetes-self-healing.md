@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Self-Healing（Kubernetes 自愈能力）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - kubelet
 - statefulset
 - daemonset
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -26,9 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] Self-Healing（Kubernetes 自愈能力）
 

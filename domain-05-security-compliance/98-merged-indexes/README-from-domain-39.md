@@ -1,10 +1,13 @@
 ---
 title: 'Domain 39: 供应链安全 (Supply Chain Security)'
 description: 'title: ''Domain 39: 供应链安全 (Supply Chain Security)'''
+summary: 'title: ''Domain 39: 供应链安全 (Supply Chain Security)'''
 category: general
 tags:
 - k8s
 - opa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - rbac-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain 39: 供应链安全 (Supply Chain Security)'

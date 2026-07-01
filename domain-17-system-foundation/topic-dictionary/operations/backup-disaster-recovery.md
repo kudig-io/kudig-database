@@ -1,6 +1,7 @@
 ---
 title: 备份与灾难恢复（Backup & Disaster Recovery）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - mysql
 - postgresql
 - job
+tier: core
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,9 +38,9 @@ prerequisites:
 - etcd-basics
 - mysql-basics
 - backup-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 备份与灾难恢复（Backup & Disaster Recovery）
 
@@ -160,7 +163,7 @@ spec:
 |------|----------|----------|----------|
 | Velero 备份失败 | 对象存储凭证过期或桶不存在 | `velero backup describe <name> --details` | 更新 BSL 凭证并验证桶存在 |
 | etcd 快照恢复后集群异常 | 快照版本与当前集群不兼容 | `etcdctl snapshot status <file>` | 确认快照来自相同 K8s 版本的集群 |
-| PVC 数据恢复为空 | 快照未正确创建或 CSI 驱动不支持 | `velero backup describe <name> \| grep VolumeSnapshot` | 确认 CSI 驱动支持 VolumeSnapshot |
+| PVC 数据恢复为空 | 快照未正确创建或 CSI 驱动不支持 | `velero backup describe <name> | grep VolumeSnapshot` | 确认 CSI 驱动支持 VolumeSnapshot |
 | 恢复后 Secret 无法解密 | 加密密钥不匹配 | `kubectl get secret <name> -o yaml` | 使用原集群的 encryption config 解密 |
 | 备份存储空间持续增长 | TTL 过长或过期备份未清理 | `velero backup get` | 设置合理的 `ttl` 并验证 GC 策略 |
 | 跨集群恢复 Service IP 冲突 | 目标集群 Service CIDR 不同 | `kubectl get svc -A` | 恢复前调整目标集群 Service CIDR 或使用 restore mapping |

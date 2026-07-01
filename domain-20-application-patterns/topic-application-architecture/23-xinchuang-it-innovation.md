@@ -1,6 +1,7 @@
 ---
 title: 信创替代架构设计 — 阿里云视角
 description: 'title: 信创替代架构设计'
+summary: 'title: 信创替代架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - docker
 - ceph
 - mysql
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - etcd-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 信创替代架构设计
 description: '# 信创替代架构设计 — 阿里云视角'

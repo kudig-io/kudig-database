@@ -1,6 +1,7 @@
 ---
 title: 04 - 生产环境部署 (Production Environment Deployment) [deployment]
 description: 'title: 04 - 生产环境部署 (Production Environment Deployment)'
+summary: 'title: 04 - 生产环境部署 (Production Environment Deployment)'
 category: general
 tags:
 - deployment
@@ -13,6 +14,8 @@ tags:
 - grafana
 - calico
 - helm
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -43,8 +46,9 @@ prerequisites:
 - tls-basics
 - backup-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 04 - 生产环境部署 (Production Environment Deployment)
 description: '# 04 - 生产环境部署 (Production Environment Deployment)'

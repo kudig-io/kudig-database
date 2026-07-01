@@ -1,5 +1,8 @@
 ---
 title: Velero 灾难恢复策略
+summary: Velero 灾难恢复策略：Velero 是 entities/kubernetes.md 生态中事实标准的备份与灾难恢复工具。它将集群状态的持久化（entities/etcd.md
+  快照 + PV 快照）与灾难恢复流程（跨区域恢复、命名空间级恢复）结合，填补了"有备份"和"能恢复"之间的关键鸿沟。本页连接 domain-04-storage-data
+  的存储备份技术与 domain-09-...
 category: synthesis
 tags:
 - k8s
@@ -12,6 +15,7 @@ tags:
 - etcd
 - restore
 - reliability
+tier: supporting
 sources:
 - domain-04-storage-data/01-k8s-storage
 - domain-04-storage-data/03-distributed-storage
@@ -22,13 +26,15 @@ created: 2026-05-21 14:00:00+00:00
 updated: 2026-05-21 14:00:00+00:00
 last_updated: 2026-05-21 14:00:00+00:00
 relationships:
-  - target: "[[entities/etcd.md]]"
-    type: uses
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
-  - target: "[[entities/longhorn.md]]"
-    type: related_to
+- target: '[[entities/etcd.md]]'
+  type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
+- target: '[[entities/longhorn.md]]'
+  type: related_to
 ---
+
+
 
 # Velero 灾难恢复策略
 

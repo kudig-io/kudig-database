@@ -1,3 +1,15 @@
+---
+title: P3 11 Security Incident Sop Compliance Checklist
+summary: flowchart TD START["安全告警/异常检测"] --> T1{确认事件} T1 -->|误报| CLOSE["标记为误报，关闭"]
+  T1 -->|确认| T2{评估影响} T2 -->|P0| IMMEDIATE["立即升级 + 隔离"] T2 -->|P1| CONTAIN["控制影响范围"]
+  T2 -->|P2/P3| INVESTIGATE["调查根因"]
+category: domain-05-security-compliance
+tags:
+- p3-11-security-incident-sop-compliance-checklist
+tier: supporting
+created: '2026-07-01'
+---
+
 # 安全事件 SOP 与合规检查清单
 
 > **版本**: v1.0
@@ -51,7 +63,7 @@ flowchart TD
 | 异常进程 | `kubectl exec -it <pod> -- ps aux` | 检查非预期进程 |
 | 可疑文件 | `kubectl exec -it <pod> -- ls -la /host` | 逃逸到宿主机 |
 | 异常网络 | `kubectl exec -it <pod> -- cat /proc/net/tcp` | 检查网络连接 |
-| 特权容器 | `kubectl get pod -o yaml \| grep privileged: true` | 特权容器风险 |
+| 特权容器 | `kubectl get pod -o yaml | grep privileged: true` | 特权容器风险 |
 
 #### 阶段 2: 隔离
 
@@ -85,7 +97,7 @@ kubectl logs <pod> --previous > pod-log-<date>.txt
 kubectl describe pod <pod> > pod-describe-<date>.txt
 
 # 收集审计日志
-kubectl get events --sort-by=.lastTimestamp | grep -i "create\|delete\|patch"
+kubectl get events --sort-by=.lastTimestamp | grep -i "create|delete|patch"
 
 # 节点取证 (需要 SSH)
 journalctl -u kubelet --since "1d" > kubelet-log-<date>.txt
@@ -298,8 +310,8 @@ compliance_audit_report:
 | 异常进程 | /bin/bash 被替换 | `kubectl exec pod -- md5sum /bin/bash` |
 | 异常网络 | 外部 IP 连接 | `kubectl exec pod -- cat /proc/net/tcp` |
 | 异常计划任务 | 未知 cronjob | `kubectl get cronjob -A` |
-| 异常容器 | 特权容器 | `kubectl get pods -A -o yaml \| grep privileged` |
-| 异常 ServiceAccount | cluster-admin 绑定 | `kubectl get clusterrolebindings \| grep cluster-admin` |
+| 异常容器 | 特权容器 | `kubectl get pods -A -o yaml | grep privileged` |
+| 异常 ServiceAccount | cluster-admin 绑定 | `kubectl get clusterrolebindings | grep cluster-admin` |
 
 ### 4.2 快速响应命令
 
@@ -319,7 +331,7 @@ kubectl cordon <node>
 kubectl drain <node> --ignore-daemonsets --force
 
 # 检查异常访问源
-kubectl get events --sort-by=.lastTimestamp | grep -i "create\|delete\|exec"
+kubectl get events --sort-by=.lastTimestamp | grep -i "create|delete|exec"
 
 # 检查 ServiceAccount 异常绑定
 kubectl get clusterrolebindings -o json | jq -r '.items[] | select(.subjects[].name == "<sa>")'

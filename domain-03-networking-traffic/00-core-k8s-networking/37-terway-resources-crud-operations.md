@@ -1,6 +1,7 @@
 ---
 title: 37 - Terway 实例 CRUD 操作指南 (Terway Resources CRUD Operations)
 description: 'title: 37 - Terway 实例 CRUD 操作指南 (Terway Resources CRUD Operations)'
+summary: 'title: 37 - Terway 实例 CRUD 操作指南 (Terway Resources CRUD Operations)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - job
 - gateway
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 37 - Terway 实例 CRUD 操作指南 (Terway Resources CRUD Operations)
 description: '# 37 - Terway 实例 CRUD 操作指南 (Terway Resources CRUD Operations)'
@@ -1517,7 +1521,7 @@ echo ""
 # 5. 最近的 Terway 错误日志
 echo "=== [5] Recent Terway Errors (last 10) ==="
 kubectl logs -n kube-system -l app=terway-eniip -c terway --tail=500 2>/dev/null | \
-  grep -i "error\|warn\|fail" | tail -10
+  grep -i "error|warn|fail" | tail -10
 echo ""
 
 # 6. 网络策略检查

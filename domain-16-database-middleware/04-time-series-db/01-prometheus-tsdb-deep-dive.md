@@ -1,6 +1,7 @@
 ---
 title: Prometheus TSDB 深度解析
 description: '# Prometheus TSDB 深度解析'
+summary: '# Prometheus TSDB 深度解析'
 category: domain
 tags:
 - prometheus
@@ -9,6 +10,8 @@ tags:
 - storage
 - observability
 - flux
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Prometheus|Prometheus]] TSDB 深度解析
 

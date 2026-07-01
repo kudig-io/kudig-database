@@ -1,18 +1,25 @@
 ---
-title: "StatefulSet × NetworkPolicy"
-category: "synthesis"
-tags: ["cross-domain", "workloads", "security"]
-created: "2026-05-23"
-updated: "2026-05-23"
+title: StatefulSet × NetworkPolicy
+summary: StatefulSet × NetworkPolicy：StatefulSet与NetworkPolicy是Kubernetes生产环境中的两个关键维度。理解它们之间的交互关系对于构建稳定、可观测的集群至关重要。
+category: synthesis
+tags:
+- cross-domain
+- workloads
+- security
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
 relationships:
-  - target: "[[entities/helm.md]]"
-    type: uses
-  - target: "[[entities/prometheus.md]]"
-    type: uses
-  - target: "[[entities/argocd.md]]"
-    type: related_to
+- target: '[[entities/helm.md]]'
+  type: uses
+- target: '[[entities/prometheus.md]]'
+  type: uses
+- target: '[[entities/argocd.md]]'
+  type: related_to
 ---
+
+
 
 # StatefulSet × NetworkPolicy
 

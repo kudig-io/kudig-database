@@ -1,6 +1,9 @@
 ---
 title: KAITO AI 推理调度
-description: 'KAITO（Kubernetes AI Toolchain Operator）是微软开源的 CNCF Sandbox 项目，通过 Operator 简化 AI/...'
+description: KAITO（Kubernetes AI Toolchain Operator）是微软开源的 CNCF Sandbox 项目，通过 Operator
+  简化 AI/...
+summary: KAITO（Kubernetes AI Toolchain Operator）是微软开源的 CNCF Sandbox 项目，通过 Operator
+  简化 AI/...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - scheduling
 - ai-ml
 - inference
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # KAITO AI 推理调度（KAITO）
 

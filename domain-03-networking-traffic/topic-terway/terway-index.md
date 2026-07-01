@@ -1,6 +1,9 @@
 ---
 title: Terway 全项目资源索引
-description: '| 1 | topic-terway | [01-product.md](./01-product.md) | 332 | 专题 | 产品定位、版本历史、5 种模式总览、CNI 对比、ECS 规格速查 |'
+description: '| 1 | topic-terway | [01-product.md](./01-product.md) | 332 | 专题 | 产品定位、版本历史、5
+  种模式总览、CNI 对比、ECS 规格速查 |'
+summary: '| 1 | topic-terway | [01-product.md](./01-product.md) | 332 | 专题 | 产品定位、版本历史、5
+  种模式总览、CNI 对比、ECS 规格速查 |'
 category: terway
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - calico
 - coredns
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -34,8 +39,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # Terway 全项目资源索引
 

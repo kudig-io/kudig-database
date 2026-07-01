@@ -1,12 +1,17 @@
 ---
 title: 端点
-description: 'Endpoints 是 Kubernetes 中 Service 后端 Pod 的 IP 地址和端口的集合。当 Service 没有指定 selector 时，...'
+description: Endpoints 是 Kubernetes 中 Service 后端 Pod 的 IP 地址和端口的集合。当 Service 没有指定
+  selector 时，...
+summary: Endpoints 是 Kubernetes 中 Service 后端 Pod 的 IP 地址和端口的集合。当 Service 没有指定 selector
+  时，...
 category: dictionary
 tags:
 - k8s
 - glossary
 - endpoint
 - service
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 端点
 

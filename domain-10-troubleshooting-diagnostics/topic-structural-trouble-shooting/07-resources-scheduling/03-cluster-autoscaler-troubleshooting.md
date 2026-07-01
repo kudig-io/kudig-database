@@ -1,6 +1,7 @@
 ---
 title: Cluster Autoscaler 节点自动扩缩容故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Cluster Autoscaler 节点自动扩缩容故障排查指南'
+summary: 'title: Cluster Autoscaler 节点自动扩缩容故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -10,6 +11,8 @@ tags:
 - operator
 - gpu
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -37,8 +40,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Cluster Autoscaler 节点自动扩缩容故障排查指南
 description: '# Cluster Autoscaler 节点自动扩缩容故障排查指南'
@@ -430,14 +434,14 @@ kubectl describe pod <pending-pod>
 # 如果原因是 Insufficient cpu/memory，CA 应该扩容
 
 # 步骤 4: 检查 CA 日志
-kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "scale up\|unschedulable"
+kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "scale up|unschedulable"
 
 # 步骤 5: 检查节点组配置
 # 确认节点组最大值未达到上限
-kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "max size\|target size"
+kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "max size|target size"
 
 # 步骤 6: 验证云 API 权限
-kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "error\|failed\|unauthorized"
+kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "error|failed|unauthorized"
 ```
 
 **常见原因与解决**：
@@ -499,7 +503,7 @@ data:
 
 ```bash
 # 步骤 3: 使用 nodeSelector 或 nodeAffinity 精确控制
-kubectl get pod <pod> -o yaml | grep -A10 "nodeSelector\|affinity"
+kubectl get pod <pod> -o yaml | grep -A10 "nodeSelector|affinity"
 ```
 
 **Pod 节点亲和性示例**：
@@ -534,7 +538,7 @@ kubectl top nodes
 # 默认缩容阈值是 50%
 
 # 步骤 2: 检查是否有阻止缩容的原因
-kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "scale down\|cannot\|blocking"
+kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "scale down|cannot|blocking"
 
 # 步骤 3: 检查节点上的 Pod
 kubectl get pods -A -o wide --field-selector spec.nodeName=<node>
@@ -578,7 +582,7 @@ metadata:
 
 ```bash
 # 步骤 1: 检查 CA 日志中的错误
-kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "error\|forbidden\|unauthorized"
+kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "error|forbidden|unauthorized"
 
 # 步骤 2: 根据云平台检查权限
 ```
@@ -819,7 +823,7 @@ echo -e "\n=== 节点组信息 ==="
 kubectl get nodes -o custom-columns=NAME:.metadata.name,INSTANCE-TYPE:.metadata.labels."node\.kubernetes\.io/instance-type"
 
 echo -e "\n=== CA 最近日志 ==="
-kubectl logs -n kube-system -l app=cluster-autoscaler --tail=20 2>/dev/null | grep -i "scale\|error" | tail -10
+kubectl logs -n kube-system -l app=cluster-autoscaler --tail=20 2>/dev/null | grep -i "scale|error" | tail -10
 
 echo -e "\n=== 阻止缩容的节点 ==="
 kubectl get nodes -o json | jq -r '.items[] | select(.metadata.annotations["cluster-autoscaler.kubernetes.io/scale-down-disabled"] == "true") | .metadata.name'

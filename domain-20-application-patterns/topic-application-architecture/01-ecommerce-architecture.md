@@ -1,6 +1,7 @@
 ---
 title: 电商系统 Kubernetes 生产架构设计 (domain-20-application-patterns)
 description: 'title: 电商系统 Kubernetes 生产架构设计'
+summary: 'title: 电商系统 Kubernetes 生产架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - coredns
 - harbor
 - minio
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -40,8 +43,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 电商系统 [[Kubernetes|Kubernetes]] 生产架构设计
 description: '# 电商系统 Kubernetes 生产架构设计'

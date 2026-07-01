@@ -1,6 +1,7 @@
 ---
 title: API Server 证书相关启动参数汇总 (topic-code-analysis)
 description: 'description: ''| TLS 配置 | `staging/src/k8s.io/apiserver/pkg/server/options/serving.go`'
+summary: 'description: ''| TLS 配置 | `staging/src/k8s.io/apiserver/pkg/server/options/serving.go`'
 category: general
 tags:
 - reference
@@ -10,6 +11,8 @@ tags:
 - rbac
 - webhook
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: API Server 证书相关启动参数汇总
 description: '| TLS 配置 | `staging/src/k8s.io/apiserver/pkg/server/options/serving.go`
@@ -462,6 +466,8 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -ext subjectAltName
 - [`kubeadm init phase certs apiserver`](02-ca-generation.md) — API Server 证书生成
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

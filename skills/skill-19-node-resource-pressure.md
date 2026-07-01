@@ -1,6 +1,9 @@
 ---
 title: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation (skills)
-description: '| S7 | 调度失败且目标节点有 Pressure | `FailedScheduling` + 节点 Pressure | 0.85 | 资源不足 → SKILL-POD-002 |'
+description: '| S7 | 调度失败且目标节点有 Pressure | `FailedScheduling` + 节点 Pressure | 0.85
+  | 资源不足 → SKILL-POD-002 |'
+summary: '| S7 | 调度失败且目标节点有 Pressure | `FailedScheduling` + 节点 Pressure | 0.85 | 资源不足
+  → SKILL-POD-002 |'
 category: skills
 tags:
 - k8s
@@ -12,6 +15,8 @@ tags:
 - evicted
 - 节点资源压力
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +35,9 @@ trigger_keywords:
 - Remediation
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 

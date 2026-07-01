@@ -1,12 +1,15 @@
 ---
 title: 节点选择器
-description: 'nodeSelector 是 Kubernetes 中最简单的 Pod 调度约束方式。它通过键值对标签匹配，将 Pod 限制在具有特定标签的节点上运行。...'
+description: nodeSelector 是 Kubernetes 中最简单的 Pod 调度约束方式。它通过键值对标签匹配，将 Pod 限制在具有特定标签的节点上运行。...
+summary: nodeSelector 是 Kubernetes 中最简单的 Pod 调度约束方式。它通过键值对标签匹配，将 Pod 限制在具有特定标签的节点上运行。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - scheduling
 - node-selector
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 节点选择器
 

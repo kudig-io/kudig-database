@@ -1,12 +1,15 @@
 ---
 title: 安全、隐私与数据治理
 description: '# 安全、隐私与数据治理'
+summary: '# 安全、隐私与数据治理'
 category: ai-coding
 tags:
 - ai
 - coding
 - copilot
 - code-generation
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 安全、隐私与数据治理
 

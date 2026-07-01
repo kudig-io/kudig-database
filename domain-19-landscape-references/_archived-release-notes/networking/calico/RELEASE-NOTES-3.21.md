@@ -1,6 +1,7 @@
 ---
 title: calico v3.21 Release Notes
 description: calico v3.21 Release Notes — Kubernetes 生产运维知识库
+summary: calico v3.21 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - calico
 - helm
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - cncf-ecosystem
 - helm-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # calico v3.21 Release Notes
 

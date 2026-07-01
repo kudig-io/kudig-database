@@ -1,6 +1,7 @@
 ---
 title: 'Domain 27: 多云与混合云架构管理'
 description: 'title: ''Domain 27: 多云与混合云架构管理'''
+summary: 'title: ''Domain 27: 多云与混合云架构管理'''
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - cilium
 - calico
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ prerequisites:
 - backup-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain 27: 多云与混合云架构管理'
@@ -876,7 +880,7 @@ document_version_specification:
 | 跨集群 DNS 解析失败 | CoreDNS 联邦配置缺失 | `kubectl exec -it coredns -- dig svc.cluster.local` | 配置 ClusterEndpoint 和 ServiceImport |
 | Argo CD 多集群同步失败 | 集群凭证过期 | `argocd cluster list` | 重新添加集群凭证 |
 | 跨云数据复制延迟过高 | 网络带宽不足 | `curl -s prometheus:9090/api/v1/query?query=cdc_replication_lag` | 扩展带宽或优化 CDC 配置 |
-| 成本异常增长 | 未配置资源请求/限制 | `kubectl describe nodes \| grep -A5 Allocatable` | 实施 Kyverno 策略强制资源配额 |
+| 成本异常增长 | 未配置资源请求/限制 | `kubectl describe nodes | grep -A5 Allocatable` | 实施 Kyverno 策略强制资源配额 |
 
 ### 多云健康检查脚本
 

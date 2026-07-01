@@ -1,6 +1,7 @@
 ---
 title: 'Day 19: Pod 容器组基础'
 description: '## 概述'
+summary: '## 概述'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - mysql
 - job
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,8 +37,9 @@ prerequisites:
 - service-mesh-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 19: Pod 容器组基础

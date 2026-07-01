@@ -1,6 +1,9 @@
 ---
 title: 环境变量配置
-description: '环境变量（Env）是 Kubernetes Pod/Container 级别的配置注入机制，通过 env/envFrom 字段将配置值、ConfigMap 和 ...'
+description: 环境变量（Env）是 Kubernetes Pod/Container 级别的配置注入机制，通过 env/envFrom 字段将配置值、ConfigMap
+  和 ...
+summary: 环境变量（Env）是 Kubernetes Pod/Container 级别的配置注入机制，通过 env/envFrom 字段将配置值、ConfigMap
+  和 ...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +12,8 @@ tags:
 - env
 - configmap
 - secret
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -24,8 +29,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # 环境变量配置（Environment Variables）
 

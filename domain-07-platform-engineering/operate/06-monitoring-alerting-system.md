@@ -1,6 +1,9 @@
 ---
 title: 监控告警体系
-description: 深入解析企业级监控告警体系：Prometheus/Grafana 深度集成、SLO/SLI/SLA 工程实践、告警收敛与静默、On-Call 值班流程与 MTTR 优化
+description: 深入解析企业级监控告警体系：Prometheus/Grafana 深度集成、SLO/SLI/SLA 工程实践、告警收敛与静默、On-Call
+  值班流程与 MTTR 优化
+summary: 深入解析企业级监控告警体系：Prometheus/Grafana 深度集成、SLO/SLI/SLA 工程实践、告警收敛与静默、On-Call 值班流程与
+  MTTR 优化
 category: domain-07-platform-engineering
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - sla
 - oncall
 - mttr
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -71,8 +76,9 @@ related_docs:
 - path: ../domain-06-observability/02-monitoring-metrics-system.md
   type: depth
   desc: 指标监控体系
-created: "2026-05-23"
 ---
+
+
 
 # 监控告警体系 (Monitoring & Alerting System)
 

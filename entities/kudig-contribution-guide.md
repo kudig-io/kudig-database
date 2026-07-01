@@ -1,6 +1,7 @@
 ---
 title: 贡献指南、项目概览与版本发布说明
 description: '# 贡献指南、项目概览与版本发布说明'
+summary: '# 贡献指南、项目概览与版本发布说明'
 category: reference
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - project-overview
 - release-notes
 - docker
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,8 +25,9 @@ trigger_keywords:
 - 项目概览与版本发布说明
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 贡献指南、项目概览与版本发布说明
 

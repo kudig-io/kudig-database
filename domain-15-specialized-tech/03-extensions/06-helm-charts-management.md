@@ -1,6 +1,7 @@
 ---
 title: 47 - Helm Chart开发与管理
 description: '# 47 - Helm Chart开发与管理'
+summary: '# 47 - Helm Chart开发与管理'
 category: extensions
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flux
 - redis
 - postgresql
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -50,8 +53,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta.md
   label: '故障树: helm'
-created: "2026-05-23"
 ---
+
+
 
 # 47 - [[Helm|Helm]] Chart开发与管理
 
@@ -171,13 +175,13 @@ dependencies:
 
 | 函数类别 | 常用函数 | 示例 |
 |---------|---------|------|
-| 字符串 | `upper`, `lower`, `title`, `trim` | `{{ .Values.name \| upper }}` |
-| 默认值 | `default`, `coalesce` | `{{ .Values.port \| default 8080 }}` |
+| 字符串 | `upper`, `lower`, `title`, `trim` | `{{ .Values.name | upper }}` |
+| 默认值 | `default`, `coalesce` | `{{ .Values.port | default 8080 }}` |
 | 条件 | `ternary`, `empty` | `{{ ternary "yes" "no" .Values.enabled }}` |
 | 列表 | `list`, `first`, `rest`, `join` | `{{ join "," .Values.hosts }}` |
 | 字典 | `dict`, `get`, `set`, `merge` | `{{ get .Values "key" }}` |
-| 编码 | `b64enc`, `b64dec`, `toJson` | `{{ .Values.secret \| b64enc }}` |
-| 资源 | `toYaml`, `fromYaml` | `{{ toYaml .Values.resources \| nindent 12 }}` |
+| 编码 | `b64enc`, `b64dec`, `toJson` | `{{ .Values.secret | b64enc }}` |
+| 资源 | `toYaml`, `fromYaml` | `{{ toYaml .Values.resources | nindent 12 }}` |
 | 流程 | `include`, `tpl` | `{{ include "mychart.name" . }}` |
 
 <!-- chunk: 模板示例 -->

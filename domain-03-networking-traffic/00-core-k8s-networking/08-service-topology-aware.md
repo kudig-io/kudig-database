@@ -1,6 +1,7 @@
 ---
 title: 72 - 服务拓扑与端点切片
 description: '| 注解/配置 | 值 | 说明 |'
+summary: '| 注解/配置 | 值 | 说明 |'
 category: networking
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - cni
 - controller-manager
 - flannel
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -53,8 +56,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 72 - 服务拓扑与端点切片
 

@@ -1,6 +1,7 @@
 ---
 title: 第九课：Job 和 CronJob - 任务调度 [10-workloads]
 description: '# 第九课：Job 和 CronJob - 任务调度'
+summary: '# 第九课：Job 和 CronJob - 任务调度'
 category: k8s-lecturer
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - job
 - cronjob
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -31,8 +34,9 @@ prerequisites:
 - pod-lifecycle
 - gpu-ml-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第九课：Job 和 [[CronJob|CronJob]] - 任务调度
 

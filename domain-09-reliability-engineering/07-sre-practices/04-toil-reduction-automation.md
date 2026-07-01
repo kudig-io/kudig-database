@@ -1,6 +1,7 @@
 ---
 title: Toil 削减与自动化
 description: '**Toil** = 重复性、可自动化的手工运维工作，与工程创新工作相对。'
+summary: '**Toil** = 重复性、可自动化的手工运维工作，与工程创新工作相对。'
 category: domain
 tags:
 - sre
@@ -9,6 +10,8 @@ tags:
 - platform-engineering
 - hpa
 - vpa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - sre-practices
-created: "2026-05-23"
 ---
+
+
 
 # Toil 削减与自动化
 

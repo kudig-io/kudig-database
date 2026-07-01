@@ -1,12 +1,21 @@
 ---
-title: "Kubernetes 与 containerd 集成深度分析"
+title: Kubernetes 与 containerd 集成深度分析
+summary: Kubernetes 与 containerd 集成深度分析：Kubernetes 通过 CRI（Container Runtime Interface）与
+  containerd 通信。kubelet 作为节点代理，调用 containerd 的 CRI 插件来管理容器生命周期。
 category: synthesis
-tags: [synthesis, k8s, containerd, cluster]
+tags:
+- synthesis
+- k8s
+- containerd
+- cluster
+tier: supporting
 sources: []
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # Kubernetes 与 containerd 集成深度分析
 

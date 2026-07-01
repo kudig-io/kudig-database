@@ -1,6 +1,7 @@
 ---
 title: Linux Sysctl Reference for Kubernetes
 description: Linux Sysctl Reference for Kubernetes — Kubernetes 生产运维知识库
+summary: Linux Sysctl Reference for Kubernetes — Kubernetes 生产运维知识库
 category: references
 tags:
 - linux
@@ -10,6 +11,8 @@ tags:
 - k8s
 - kubelet
 - elasticsearch
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 - Kubernetes
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Linux Sysctl Reference for Kubernetes
 

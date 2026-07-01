@@ -1,6 +1,7 @@
 ---
 title: Domain-8 可观测性领域最终质量报告 (2026年2月更新版)
 description: '- ✅ **故障排查指南**: 10-15 (6篇) - 全方位生产环境诊断'
+summary: '- ✅ **故障排查指南**: 10-15 (6篇) - 全方位生产环境诊断'
 category: observability
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - monitoring
 - logging
 - tracing
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -53,8 +56,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-8 可观测性领域最终质量报告 (2026年2月更新版)
 

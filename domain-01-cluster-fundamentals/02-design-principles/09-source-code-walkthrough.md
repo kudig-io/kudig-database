@@ -1,6 +1,7 @@
 ---
 title: 09 - Kubernetes 源码结构与阅读指南 (Source Code)
 description: '# 09 - Kubernetes 源码结构与阅读指南 (Source Code)'
+summary: '# 09 - Kubernetes 源码结构与阅读指南 (Source Code)'
 category: design-principles
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - statefulset
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +54,9 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
-created: "2026-05-23"
 ---
+
+
 
 # 09 - [[Kubernetes|Kubernetes]] 源码结构与阅读指南 (Source Code)
 

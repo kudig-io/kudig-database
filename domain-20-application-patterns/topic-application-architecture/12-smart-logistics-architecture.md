@@ -1,12 +1,15 @@
 ---
 title: 智慧物流与供应链 Kubernetes 生产架构设计
 description: 'title: 智慧物流与供应链Kubernetes生产架构设计'
+summary: 'title: 智慧物流与供应链Kubernetes生产架构设计'
 category: general
 tags:
 - architecture
 - best-practice
 - redis
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 智慧物流与供应链Kubernetes生产架构设计
 description: '# 智慧物流与供应链 [[Kubernetes|Kubernetes]] 生产架构设计'

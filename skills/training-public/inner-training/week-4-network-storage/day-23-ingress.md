@@ -1,6 +1,7 @@
 ---
 title: 'Day 23: Ingress'
 description: '- "Kubernetes Ingress配置"'
+summary: '- "Kubernetes Ingress配置"'
 category: learning
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - hands-on
 - ingress
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -25,8 +28,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 23: [[Ingress|Ingress]]
 

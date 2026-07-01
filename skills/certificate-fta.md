@@ -1,6 +1,7 @@
 ---
 title: 证书异常故障树分析 (skills)
 description: ROT_AUTO_OR --> ROT_AUTO2[轮换触发阈值配置错误]
+summary: ROT_AUTO_OR --> ROT_AUTO2[轮换触发阈值配置错误]
 category: skills
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - scheduler
 - webhook
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 fta_id: FTA-CERTIFICATE-001
 component: Certificate
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 # 证书异常故障树分析
 

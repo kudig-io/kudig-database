@@ -1,17 +1,23 @@
 ---
-title: "K8S 可观测性栈"
+title: K8S 可观测性栈
+summary: 'K8S 可观测性栈：apiVersion: pyrra.dev/v1alpha1 kind: ServiceLevelObjective metadata:
+  name: api-availability namespace: production spec: target: "99.9" window: 30d indicator:
+  ratio: errors: metric: http_r...'
 category: concepts
 tags:
-  - observability
-  - opentelemetry
-  - prometheus
-  - grafana
-  - ebpf
-  - k8s
+- observability
+- opentelemetry
+- prometheus
+- grafana
+- ebpf
+- k8s
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # K8S 可观测性栈
 

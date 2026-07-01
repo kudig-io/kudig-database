@@ -1,6 +1,9 @@
 ---
 title: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation (skills)
-description: '| S4 | Headless Service 无 Endpoints | `kubectl get endpoints <svc>` | 0.85 | Service 配置错误 |'
+description: '| S4 | Headless Service 无 Endpoints | `kubectl get endpoints <svc>`
+  | 0.85 | Service 配置错误 |'
+summary: '| S4 | Headless Service 无 Endpoints | `kubectl get endpoints <svc>` | 0.85
+  | Service 配置错误 |'
 category: skills
 tags:
 - k8s
@@ -12,6 +15,8 @@ tags:
 - pod not starting
 - coredns
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +35,9 @@ trigger_keywords:
 - Remediation
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[StatefulSet|StatefulSet]] 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 

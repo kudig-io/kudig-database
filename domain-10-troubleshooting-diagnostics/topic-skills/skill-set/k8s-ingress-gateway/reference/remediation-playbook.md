@@ -1,12 +1,21 @@
 ---
-title: "Ingress Gateway Failure Remediation Playbook"
+title: Ingress Gateway Failure Remediation Playbook
+summary: Ingress Gateway Failure Remediation Playbook：kubectl get ingress <name> -n
+  <namespace> -o yaml
 category: remediation
-skill_set: "k8s-ingress-gateway"
-created: "2026-05-22"
-updated: "2026-05-22"
+tags:
+- reference
+- remediation
+- playbook
+- visibility/public
+tier: supporting
+created: '2026-05-22'
+updated: '2026-05-22'
+skill_set: k8s-ingress-gateway
 last_updated: 2026-05-22
-tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
+
+
 
 # 修复操作手册 / Remediation Playbook
 
@@ -255,3 +264,9 @@ curl -k https://<ingress-host>/
 - Skill 版本: SKILL-ING-001 v1.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

@@ -1,6 +1,7 @@
 ---
 title: Namespace 级别备份恢复：Velero
 description: 面向阿里云专有云 K8s 运维工单智能体的 Velero 实战手册，覆盖 Namespace 级备份、跨集群迁移、状态应用备份钩子及恢复演练。
+summary: 面向阿里云专有云 K8s 运维工单智能体的 Velero 实战手册，覆盖 Namespace 级备份、跨集群迁移、状态应用备份钩子及恢复演练。
 category: reliability-engineering
 tags:
 - velero
@@ -13,8 +14,9 @@ tags:
 - aso
 - statefulset
 - hooks
-created: "2026-06-29"
-updated: "2026-06-29"
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06-29
 difficulty: advanced
 audience:
@@ -50,6 +52,8 @@ authors:
 - name: KUDIG Team
   role: contributor
 ---
+
+
 
 # Namespace 级别备份恢复：Velero
 

@@ -1,6 +1,7 @@
 ---
 title: 阿里云专有云 CronJob 调度失败与 Job 反复重跑导致数据重复
 description: 数据仓库 ETL CronJob 因时区与并发策略配置错误导致 Job 重复调度和执行失败，含诊断、修复与验证。
+summary: 数据仓库 ETL CronJob 因时区与并发策略配置错误导致 Job 重复调度和执行失败，含诊断、修复与验证。
 category: production-operations
 tags:
 - aliyun
@@ -12,6 +13,9 @@ tags:
 - concurrency
 - etl
 - ticket-case
+tier: supporting
+created: 2026-06-26
+updated: 2026-06-26
 incident_id: TC-2026-024
 priority: P1
 severity: high
@@ -20,8 +24,6 @@ affected_namespace: data-warehouse
 ticket_type: 定时任务故障
 skill_ref: CronJob 诊断
 fta_ref: 'FTA: CronJob 执行失败'
-created: 2026-06-26
-updated: 2026-06-26
 last_updated: 2026-06-26
 duplicate_of: INC-2026-ACK-049
 status: duplicate
@@ -53,13 +55,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[concepts/cronjob.md]]"
+- target: '[[concepts/cronjob.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-049-job-cronjob-execution-failure.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-049-job-cronjob-execution-failure.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-029-cronjob-fail.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-029-cronjob-fail.md]]'
   type: related_to
 ---
+
+
 
 # 工单 024：CronJob 调度失败与 Job 反复重跑导致数据重复
 
@@ -134,7 +138,7 @@ date
 
 ```bash
 # 查看 kube-controller-manager 日志中 CronJob 相关事件
-kubectl logs -n kube-system -l component=kube-controller-manager --tail=500 | grep -i "cronjob\|etl-order"
+kubectl logs -n kube-system -l component=kube-controller-manager --tail=500 | grep -i "cronjob|etl-order"
 
 # 查看 data-warehouse namespace 事件
 kubectl get events -n data-warehouse --sort-by='.lastTimestamp' | tail -50

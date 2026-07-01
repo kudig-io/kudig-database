@@ -1,12 +1,15 @@
 ---
 title: FTA 诊断执行引擎 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**定位**: 将 FTA 理论转化为可执行代码的工程化指南'''
+summary: 'description: ''**定位**: 将 FTA 理论转化为可执行代码的工程化指南'''
 category: fta
 tags:
 - fta
 - troubleshooting
 - helm
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -35,8 +38,9 @@ prerequisites:
 fta_id: FTA-FTA_EXECUTION_ENGINE-001
 component: Fta Execution Engine
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: FTA 诊断执行引擎
 description: '**定位**: 将 FTA 理论转化为可执行代码的工程化指南'

@@ -1,12 +1,21 @@
 ---
-title: "模板标题"
+title: 模板标题
+summary: '模板标题：fta_id: "FTA-{COMPONENT}-{SEQ}" title: "{{组件名称}} 故障树分析" component:
+  "{{组件名称}}" severity: "P{0-3}" k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+  top_event_id: "TE-{序号}" last_updated: "{...'
 category: templates
-tags: ["templates", "visibility/public"]
-sources: ["auto-generated"]
+tags:
+- templates
+- visibility/public
+tier: core
+sources:
+- auto-generated
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # {{组件名称}} 故障树分析 (FTA)
 
@@ -358,5 +367,7 @@ pie title 底事件频率分布
 > **关联文档**: [domain-10-troubleshooting-diagnostics/topic-fta/fta-methodology-and-agentic-practices.md](../domain-10-troubleshooting-diagnostics/topic-fta/fta-methodology-and-agentic-practices.md)（FTA 方法论与 AI Agent 智能运维实践）
 
 ## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub
 
 - Wiki Lint Report — 2026-05-21 — Cross-reference

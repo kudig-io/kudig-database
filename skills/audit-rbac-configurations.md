@@ -1,6 +1,9 @@
 ---
 title: Audit RBAC Configurations
-description: '- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-security]] — 发布说明索引 — 安全'
+description: '- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-security]]
+  — 发布说明索引 — 安全'
+summary: '- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-security]]
+  — 发布说明索引 — 安全'
 category: skills
 tags:
 - k8s
@@ -9,6 +12,8 @@ tags:
 - audit
 - access-control
 - least-privilege
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +29,9 @@ trigger_keywords:
 - Configurations
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Audit RBAC Configurations
 

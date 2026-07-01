@@ -1,6 +1,9 @@
 ---
 title: AgentScope 工具系统与 MCP 集成 (domain-14-ai-ml-infra)
-description: 'description: ''**文档类型**: 工具开发专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Toolkit,'
+description: 'description: ''**文档类型**: 工具开发专题 | **最后更新**: 2026-03 | **关键词**: AgentScope,
+  Toolkit,'
+summary: 'description: ''**文档类型**: 工具开发专题 | **最后更新**: 2026-03 | **关键词**: AgentScope,
+  Toolkit,'
 category: general
 tags:
 - ai
@@ -10,6 +13,8 @@ tags:
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +36,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 title: AgentScope 工具系统与 MCP 集成
 description: '**文档类型**: 工具开发专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Toolkit,

@@ -1,6 +1,7 @@
 ---
 title: Cloud Native Buildpacks
-description: 'Cloud Native Buildpacks（CNB）是 CNCF 孵化项目，将应用源代码自动转化为容器镜像，无需编写 Dockerfile，支持多语言和多框...'
+description: Cloud Native Buildpacks（CNB）是 CNCF 孵化项目，将应用源代码自动转化为容器镜像，无需编写 Dockerfile，支持多语言和多框...
+summary: Cloud Native Buildpacks（CNB）是 CNCF 孵化项目，将应用源代码自动转化为容器镜像，无需编写 Dockerfile，支持多语言和多框...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - tooling
 - ci-cd
 - container
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Cloud Native Buildpacks（CNB）
 

@@ -1,6 +1,7 @@
 ---
 title: 错误预算政策与 Burn Rate Alert
 description: 面向阿里云/专有云 K8s 的错误预算政策与 burn rate alert 设计，讲解多窗口告警、消耗速率、快速与慢速燃烧策略。
+summary: 面向阿里云/专有云 K8s 的错误预算政策与 burn rate alert 设计，讲解多窗口告警、消耗速率、快速与慢速燃烧策略。
 category: observability
 tags:
 - k8s
@@ -10,6 +11,9 @@ tags:
 - alerting
 - observability
 - sre
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -42,9 +46,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # 错误预算政策与 Burn Rate Alert
 

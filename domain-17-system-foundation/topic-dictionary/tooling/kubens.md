@@ -1,12 +1,15 @@
 ---
 title: kubens
-description: 'kubens 是一个用于快速切换 Kubernetes 命名空间的命令行工具。它简化了在多个命名空间之间切换的操作。...'
+description: kubens 是一个用于快速切换 Kubernetes 命名空间的命令行工具。它简化了在多个命名空间之间切换的操作。...
+summary: kubens 是一个用于快速切换 Kubernetes 命名空间的命令行工具。它简化了在多个命名空间之间切换的操作。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - tooling
 - kubectl
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -21,8 +24,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # kubens
 

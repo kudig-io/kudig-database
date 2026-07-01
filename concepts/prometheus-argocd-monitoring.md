@@ -1,12 +1,21 @@
 ---
-title: "Prometheus 与 ArgoCD 监控集成"
+title: Prometheus 与 ArgoCD 监控集成
+summary: 'Prometheus 与 ArgoCD 监控集成：1. 监控 ArgoCD 本身: ArgoCD 暴露 Prometheus metrics 端点
+  2. 通过 ArgoCD 部署 Prometheus: 使用 GitOps 管理监控栈 3. 应用级监控: ArgoCD 同步后自动发现 ServiceMonitor'
 category: synthesis
-tags: [synthesis, prometheus, argocd, monitoring]
+tags:
+- synthesis
+- prometheus
+- argocd
+- monitoring
+tier: supporting
 sources: []
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # Prometheus 与 ArgoCD 监控集成
 

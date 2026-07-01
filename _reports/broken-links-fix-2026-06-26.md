@@ -1,15 +1,19 @@
 ---
 title: Broken Wikilinks 修复报告（2026-06-26）
 description: 根据 wiki-lint 审计自动修复 broken wikilinks
+summary: 根据 wiki-lint 审计自动修复 broken wikilinks
 category: reports
 tags:
 - wiki-lint
 - broken-links
 - maintenance
-created: "2026-06-26"
-updated: "2026-06-26"
+tier: supporting
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06-26
 ---
+
+
 
 # Broken Wikilinks 修复报告
 

@@ -1,6 +1,7 @@
 ---
 title: 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 description: 专有云 ACK 集群节点因容器日志与镜像层占满磁盘触发 DiskPressure，kubelet 大量驱逐业务 Pod，含诊断、修复与验证。
+summary: 专有云 ACK 集群节点因容器日志与镜像层占满磁盘触发 DiskPressure，kubelet 大量驱逐业务 Pod，含诊断、修复与验证。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -11,6 +12,9 @@ tags:
 - kubelet
 - log-rotation
 - p0
+tier: core
+created: '2026-06-26T15:00:00+08:00'
+updated: '2026-06-26T17:45:00+08:00'
 incident_id: TC-2026-040
 priority: P0
 severity: critical
@@ -22,9 +26,7 @@ skill_ref:
 - 日志成本优化
 fta_ref:
 - 'FTA: 节点磁盘压力'
-created: '2026-06-26T15:00:00+08:00'
-updated: '2026-06-26T17:45:00+08:00'
-last_updated: 2026-06-26T17:45:00+08:00
+last_updated: 2026-06-26 17:45:00+08:00
 difficulty: advanced
 reading_level: advanced
 audience:
@@ -52,13 +54,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -206,7 +210,7 @@ kubectl get pod disk-test -n default
 kubectl get pod -n log-service -o wide | grep -v Running
 
 # 6. kubelet 日志无新的驱逐记录
-ack-cli node exec cn-zhangjiakou.172.16.7.31 -- journalctl -u kubelet --since "30 minutes ago" | grep -i "eviction\|diskpressure" | tail -20
+ack-cli node exec cn-zhangjiakou.172.16.7.31 -- journalctl -u kubelet --since "30 minutes ago" | grep -i "eviction|diskpressure" | tail -20
 ```
 
 ## 回复客户话术

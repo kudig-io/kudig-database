@@ -1,7 +1,11 @@
 ---
 title: 01 - Terway 产品概览 (Product Overview)
-description: Terway 是阿里云容器服务 ACK (Alibaba Cloud Kubernetes) 自研的 Container Network Interface (CNI) 插件，深度集成阿里云 VPC/ENI 网络基础设施，将
-  Pod 直接接入 VPC 网络平面。作为 ACK 集群的默认 CNI 方案，Terway 替代了早期基于 Flannel 的网络方案，提供更高性能和更丰富的云原生网络能力。
+description: Terway 是阿里云容器服务 ACK (Alibaba Cloud Kubernetes) 自研的 Container Network
+  Interface (CNI) 插件，深度集成阿里云 VPC/ENI 网络基础设施，将 Pod 直接接入 VPC 网络平面。作为 ACK 集群的默认 CNI 方案，Terway
+  替代了早期基于 Flannel 的网络方案，提供更高性能和更丰富的云原生网络能力。
+summary: Terway 是阿里云容器服务 ACK (Alibaba Cloud Kubernetes) 自研的 Container Network Interface
+  (CNI) 插件，深度集成阿里云 VPC/ENI 网络基础设施，将 Pod 直接接入 VPC 网络平面。作为 ACK 集群的默认 CNI 方案，Terway 替代了早期基于
+  Flannel 的网络方案，提供更高性能和更丰富的云原生网络能力。
 category: terway
 tags:
 - k8s
@@ -14,6 +18,8 @@ tags:
 - redis
 - mysql
 - kafka
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -39,8 +45,9 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # 01 - Terway 产品概览 (Product Overview)
 

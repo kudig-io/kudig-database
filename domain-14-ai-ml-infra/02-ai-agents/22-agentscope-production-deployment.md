@@ -1,6 +1,7 @@
 ---
 title: AgentScope 生产部署与可观测性 (domain-14-ai-ml-infra)
 description: 'title: AgentScope 生产部署与可观测性'
+summary: 'title: AgentScope 生产部署与可观测性'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - docker
 - opa
 - redis
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - policy-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: AgentScope 生产部署与可观测性
 description: '# AgentScope 生产部署与可观测性'

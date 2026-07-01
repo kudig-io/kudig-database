@@ -1,3 +1,13 @@
+---
+title: Kubernetes Cloud Providers 2025 2026
+summary: 待补充摘要
+category: entities
+tags:
+- kubernetes-cloud-providers-2025-2026
+tier: supporting
+created: '2026-07-01'
+---
+
 # Kubernetes Cloud Provider Specifics 2025-2026
 
 ## 1. AWS EKS (Elastic Kubernetes Service)

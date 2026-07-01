@@ -1,12 +1,15 @@
 ---
 title: 基本事件
-description: '基本事件（Basic Event）是故障树中不可再分解的最底层事件。它代表了导致上层事件发生的根本原因，是故障分析的终点。...'
+description: 基本事件（Basic Event）是故障树中不可再分解的最底层事件。它代表了导致上层事件发生的根本原因，是故障分析的终点。...
+summary: 基本事件（Basic Event）是故障树中不可再分解的最底层事件。它代表了导致上层事件发生的根本原因，是故障分析的终点。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - basicevent
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 基本事件
 

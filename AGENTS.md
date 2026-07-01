@@ -1,6 +1,7 @@
 ---
 title: 行为规范与工作流 (02-ai-agents)
 description: 'description: K8S 运维诊断 Agent 的行为规范、唤醒协议和任务处理工作流'
+summary: 'description: K8S 运维诊断 Agent 的行为规范、唤醒协议和任务处理工作流'
 category: general
 tags:
 - ai
@@ -9,6 +10,8 @@ tags:
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-07-01'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,6 +30,8 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 ---
+
+
 
 title: 行为规范与工作流
 description: K8S 运维诊断 Agent 的行为规范、唤醒协议和任务处理工作流

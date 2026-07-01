@@ -2,6 +2,7 @@
 title: Ingress 控制器 Pod 异常导致业务访问 404/502
 description: 专有云 ACK 集群 Nginx Ingress Controller Pod 重启后进入 CrashLoopBackOff，导致外部流量
   404/502，含诊断、修复与验证。
+summary: 专有云 ACK 集群 Nginx Ingress Controller Pod 重启后进入 CrashLoopBackOff，导致外部流量 404/502，含诊断、修复与验证。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -12,6 +13,9 @@ tags:
 - 502
 - crashloopbackoff
 - p0
+tier: peripheral
+created: '2026-06-26T09:15:00+08:00'
+updated: '2026-06-26T11:40:00+08:00'
 incident_id: TC-2026-036
 priority: P0
 severity: critical
@@ -23,9 +27,7 @@ skill_ref:
 - Pod CrashLoopBackOff 排查
 fta_ref:
 - 'FTA: Ingress 404/502'
-created: '2026-06-26T09:15:00+08:00'
-updated: '2026-06-26T11:40:00+08:00'
-last_updated: 2026-06-26T11:40:00+08:00
+last_updated: 2026-06-26 11:40:00+08:00
 duplicate_of: TC-2026-021
 status: duplicate
 duplication_reason: 与 TC-2026-021 主题重复，内容角度相似，降低 RAG 权重
@@ -57,15 +59,17 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-046-ingress-controller-404-502.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-046-ingress-controller-404-502.md]]'
   type: related_to
-- target: "[[concepts/ingress.md]]"
+- target: '[[concepts/ingress.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -207,7 +211,7 @@ curl -I -H "Host: promo.example.com" http://<ingress-slb-ip>/api/health
 aliyun slb DescribeHealthStatus --LoadBalancerId lb-zyy-ingress-xxx --output cols=ListenerPort,BackendServers rows=BackendServers.BackendServer[]
 
 # 5. 查看 Controller 日志无 emerg 错误
-kubectl logs -n kube-system -l app.kubernetes.io/name=ingress-nginx --tail=100 | grep -i "emerg\|error" || echo "无 emerg 错误"
+kubectl logs -n kube-system -l app.kubernetes.io/name=ingress-nginx --tail=100 | grep -i "emerg|error" || echo "无 emerg 错误"
 ```
 
 ## 回复客户话术

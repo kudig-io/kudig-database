@@ -1,6 +1,9 @@
 ---
 title: Akri 边缘设备发现
-description: 'Akri 是微软开源的 CNCF Sandbox 项目，在 Kubernetes 上自动发现和暴露边缘设备（摄像头/GPU/USB 等），将异构硬件资源抽象为 ...'
+description: Akri 是微软开源的 CNCF Sandbox 项目，在 Kubernetes 上自动发现和暴露边缘设备（摄像头/GPU/USB 等），将异构硬件资源抽象为
+  ...
+summary: Akri 是微软开源的 CNCF Sandbox 项目，在 Kubernetes 上自动发现和暴露边缘设备（摄像头/GPU/USB 等），将异构硬件资源抽象为
+  ...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - networking
 - edge
 - iot
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Akri 边缘设备发现（Akri）
 

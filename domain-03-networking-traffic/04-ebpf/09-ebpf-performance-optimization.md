@@ -1,6 +1,7 @@
 ---
 title: eBPF 性能优化实践 (eBPF Performance Optimization Practice)
 description: '# eBPF 性能优化实践 (eBPF Performance Optimization Practice)'
+summary: '# eBPF 性能优化实践 (eBPF Performance Optimization Practice)'
 category: ebpf-technology
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - daemonset
 - ingress
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -48,8 +51,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # eBPF 性能优化实践 (eBPF Performance Optimization Practice)
 

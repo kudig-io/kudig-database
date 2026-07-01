@@ -1,12 +1,16 @@
 ---
 title: kubectl
-description: 'kubectl 是 Kubernetes 的官方命令行工具，通过与 API Server 通信来管理集群资源。它是 Kubernetes 用户和运维人员最常用的...'
+description: kubectl 是 Kubernetes 的官方命令行工具，通过与 API Server 通信来管理集群资源。它是 Kubernetes
+  用户和运维人员最常用的...
+summary: kubectl 是 Kubernetes 的官方命令行工具，通过与 API Server 通信来管理集群资源。它是 Kubernetes 用户和运维人员最常用的...
 category: dictionary
 tags:
 - k8s
 - glossary
 - kubectl
 - tooling
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -21,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # kubectl
 

@@ -1,6 +1,7 @@
 ---
 title: Cloud Native Defense in Depth
 description: '- [[concepts/Deployment × Secret 管理.md|Deployment × Secret 管理]]'
+summary: '- [[concepts/Deployment × Secret 管理.md|Deployment × Secret 管理]]'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - cilium
 - calico
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # Cloud Native Defense in Depth
 

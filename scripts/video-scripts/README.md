@@ -1,13 +1,22 @@
 ---
-title: "视频脚本索引"
+title: 视频脚本索引
+summary: 视频脚本索引
 category: index
-tags: ["index", "video", "scripts", "visibility/public"]
-sources: ["video-scripts/"]
+tags:
+- index
+- video
+- scripts
+- visibility/public
+tier: supporting
+sources:
+- video-scripts/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: reviewed
 ---
+
+
 
 # 视频脚本索引
 
@@ -18,3 +27,7 @@ status: reviewed
 - [[scripts/video-scripts/VIDEO-OUTPUT-GUIDE.md|VIDEO-OUTPUT-GUIDE]]
 - [[scripts/video-scripts/node-notready.md|node-notready]]
 - [[scripts/video-scripts/pod-crashloop.md|pod-crashloop]]
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

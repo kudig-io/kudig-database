@@ -1,6 +1,7 @@
 ---
 title: flanneld 启动参数详解
 description: flanneld 完整启动参数参考，涵盖网络配置、后端选择、认证、安全等所有命令行选项
+summary: flanneld 完整启动参数参考，涵盖网络配置、后端选择、认证、安全等所有命令行选项
 category: networking
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - etcd
 - apiserver
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -56,8 +59,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # flanneld 启动参数详解
 
@@ -474,5 +478,7 @@ flanneld --kube-subnet-mgr --kubeconfig=/path/to/kubeconfig --v=2
 - 06-service-concepts-types
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]

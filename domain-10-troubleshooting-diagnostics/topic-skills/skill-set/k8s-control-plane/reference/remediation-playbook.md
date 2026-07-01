@@ -1,12 +1,21 @@
 ---
-title: "Control Plane Failure Remediation Playbook"
+title: Control Plane Failure Remediation Playbook
+summary: Control Plane Failure Remediation Playbook：openssl x509 -in /etc/kubernetes/pki/apiserver.crt
+  -noout -enddate kubeadm certs check-expiration
 category: remediation
-skill_set: "k8s-control-plane"
-created: "2026-05-22"
-updated: "2026-05-22"
+tags:
+- reference
+- remediation
+- playbook
+- visibility/public
+tier: supporting
+created: '2026-05-22'
+updated: '2026-05-22'
+skill_set: k8s-control-plane
 last_updated: 2026-05-22
-tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
+
+
 
 # 修复操作手册 / Remediation Playbook
 
@@ -336,3 +345,9 @@ kubectl run test-cp --image=nginx --rm -i --restart=Never -- /bin/true
 ## 参见
 
 - [[remediation-playbook]] — remediation 领域核心页面
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

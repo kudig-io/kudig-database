@@ -1,6 +1,8 @@
 ---
 title: 07 - 分布式共识与 etcd 原理 (etcd & Raft)
-description: 作为 K8s 的唯一数据存储，etcd 的性能直接决定了集群的上限。在生产运维中，仅仅知道 Raft 协议是不够的，必须掌握 **MVCC 存储的维护逻辑**。
+description: 作为 K8s 的唯一数据存储，etcd 的性能直接决定了集群的上限。在生产运维中，仅仅知道 Raft 协议是不够的，必须掌握 **MVCC
+  存储的维护逻辑**。
+summary: 作为 K8s 的唯一数据存储，etcd 的性能直接决定了集群的上限。在生产运维中，仅仅知道 Raft 协议是不够的，必须掌握 **MVCC 存储的维护逻辑**。
 category: design-principles
 tags:
 - k8s
@@ -13,6 +15,8 @@ tags:
 - coredns
 - job
 - cronjob
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -56,8 +60,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md
   label: '故障树: etcd'
-created: "2026-05-23"
 ---
+
+
 
 # 07 - 分布式共识与 [[etcd|etcd]] 原理 (etcd & Raft)
 

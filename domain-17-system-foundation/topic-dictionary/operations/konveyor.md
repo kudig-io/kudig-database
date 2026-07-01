@@ -1,6 +1,7 @@
 ---
 title: Konveyor 应用现代化
-description: 'Konveyor 是 Red Hat 开源的 CNCF Sandbox 项目，为应用现代化和迁移提供工具链，包括应用评估、代码分析和迁移规划，帮助企业将传统应用...'
+description: Konveyor 是 Red Hat 开源的 CNCF Sandbox 项目，为应用现代化和迁移提供工具链，包括应用评估、代码分析和迁移规划，帮助企业将传统应用...
+summary: Konveyor 是 Red Hat 开源的 CNCF Sandbox 项目，为应用现代化和迁移提供工具链，包括应用评估、代码分析和迁移规划，帮助企业将传统应用...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - operations
 - migration
 - modernization
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Konveyor 应用现代化（Konveyor）
 

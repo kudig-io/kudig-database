@@ -1,6 +1,7 @@
 ---
 title: 安全事件与可观测性的关联分析
 description: '# 安全事件与可观测性的关联分析'
+summary: '# 安全事件与可观测性的关联分析'
 category: synthesis
 tags:
 - security
@@ -9,6 +10,8 @@ tags:
 - falco
 - eBPF
 - prometheus
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,11 +27,12 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - logging-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/deployment.md]]"
-    type: uses
+- target: '[[entities/deployment.md]]'
+  type: uses
 ---
+
+
 
 # 安全事件与可观测性的关联分析
 

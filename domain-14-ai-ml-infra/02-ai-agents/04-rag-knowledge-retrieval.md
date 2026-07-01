@@ -1,6 +1,7 @@
 ---
 title: RAG 检索增强生成深度指南 (domain-14-ai-ml-infra)
 description: 'title: RAG 检索增强生成深度指南'
+summary: 'title: RAG 检索增强生成深度指南'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - operator
 - cuda
 - llm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: RAG 检索增强生成深度指南
 description: '# RAG 检索增强生成深度指南'

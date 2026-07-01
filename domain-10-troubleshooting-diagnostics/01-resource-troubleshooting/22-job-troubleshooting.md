@@ -1,6 +1,7 @@
 ---
 title: Job 故障排查
 description: '# 22 - Job 故障排查 (Job Troubleshooting)'
+summary: '# 22 - Job 故障排查 (Job Troubleshooting)'
 category: troubleshooting
 tags:
 - job
@@ -13,6 +14,8 @@ tags:
 - rag
 - etcd
 - apiserver
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: intermediate
 reading_level: intermediate
@@ -60,8 +63,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/job-cronjob-fta.md
   label: '故障树: job-cronjob'
-created: "2026-05-23"
 ---
+
+
 
 # 22 - Job 故障排查 (Job Troubleshooting)
 

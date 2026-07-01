@@ -1,12 +1,15 @@
 ---
 title: 顶事件
-description: '顶事件（Top Event）是故障树最顶层的不期望事件，是整个故障树分析的起点。它代表了需要分析的系统级故障或异常状态。...'
+description: 顶事件（Top Event）是故障树最顶层的不期望事件，是整个故障树分析的起点。它代表了需要分析的系统级故障或异常状态。...
+summary: 顶事件（Top Event）是故障树最顶层的不期望事件，是整个故障树分析的起点。它代表了需要分析的系统级故障或异常状态。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - topevent
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 顶事件
 

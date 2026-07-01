@@ -1,12 +1,21 @@
 ---
-title: "CSI 驱动"
+title: CSI 驱动
+summary: CSI 驱动：CSI（Container Storage Interface）是 Kubernetes 存储子系统的标准插件接口，定义了一套 gRPC
+  协议规范，使存储厂商无需修改 Kubernetes 核心代码即可提供存储能力。
 category: concepts
-tags: ['csi', 'storage', 'drivers', 'k8s']
+tags:
+- csi
+- storage
+- drivers
+- k8s
+tier: core
 created: 2026-05-23
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: active
 ---
+
+
 
 # CSI 驱动
 

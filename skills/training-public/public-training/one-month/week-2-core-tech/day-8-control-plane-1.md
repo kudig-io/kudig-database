@@ -1,6 +1,7 @@
 ---
 title: 'Day 8: 控制平面 - etcd + API Server'
 description: '- "认证授权准入控制怎么配"'
+summary: '- "认证授权准入控制怎么配"'
 category: learning
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - coredns
 - rbac
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 8: 控制平面 - [[etcd|etcd]] + API Server
 

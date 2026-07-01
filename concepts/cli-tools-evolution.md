@@ -1,6 +1,7 @@
 ---
 title: CLI 工具演进
 description: '| Helm | 42 个版本 | Kubernetes 包管理器 |'
+summary: '| Helm | 42 个版本 | Kubernetes 包管理器 |'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cli
 - docker
 - crd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 # CLI 工具演进
 

@@ -1,6 +1,9 @@
 ---
 title: Falco
-description: 'Falco 是 CNCF 毕业项目，提供云原生运行时安全检测能力。它通过系统调用（syscall）监控容器和主机的异常行为，是 Kubernetes 运行时安全...'
+description: Falco 是 CNCF 毕业项目，提供云原生运行时安全检测能力。它通过系统调用（syscall）监控容器和主机的异常行为，是 Kubernetes
+  运行时安全...
+summary: Falco 是 CNCF 毕业项目，提供云原生运行时安全检测能力。它通过系统调用（syscall）监控容器和主机的异常行为，是 Kubernetes
+  运行时安全...
 category: dictionary
 tags:
 - k8s
@@ -10,6 +13,8 @@ tags:
 - runtime-security
 - cncf
 - ebpf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -24,8 +29,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Falco
 

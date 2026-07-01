@@ -1,6 +1,7 @@
 ---
 title: 命令输出诊断语料 — P2 优先级
 description: 从 Skills 和 FTA 自动提取的命令输出→诊断 I-O 对，P2 优先级
+summary: 从 Skills 和 FTA 自动提取的命令输出→诊断 I-O 对，P2 优先级
 category: agent-corpus
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - agent
 - corpus
 - priority-p2
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: advanced
 reading_level: advanced
@@ -17,8 +20,9 @@ audience:
 - AI Agent
 - SRE
 - 运维工程师
-created: "2026-05-23"
 ---
+
+
 
 # 命令输出诊断语料 — P2 优先级
 
@@ -221,14 +225,14 @@ skill_ref: 06-certificate-expiry
 scenario: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
 severity: medium
 command: kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}'
-  \| base64 -d \| openssl x509 -noout -dates
+  | base64 -d | openssl x509 -noout -dates
 output_pattern: '# 执行: kubectl config view --raw -o jsonpath=''{.users[0].user.client-certificate-data}''
-  \| base64 -d \| openssl x509 -noout -dates
+  | base64 -d | openssl x509 -noout -dates
 
   <typical output lines...>'
 diagnosis:
 - 执行 kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}'
-  \| base64 -d \| openssl x509 -noout -dates 检查相关状态
+  | base64 -d | openssl x509 -noout -dates 检查相关状态
 confidence: 0.8
 tags:
 - 06-certificate-expiry
@@ -328,12 +332,12 @@ io_pair_id: IODIAG-CONFIG-0003
 skill_ref: 14-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
-command: kubectl exec POD -n NS -- env \| grep KEY
-output_pattern: '# 执行: kubectl exec POD -n NS -- env \| grep KEY
+command: kubectl exec POD -n NS -- env | grep KEY
+output_pattern: '# 执行: kubectl exec POD -n NS -- env | grep KEY
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl exec POD -n NS -- env \| grep KEY 检查相关状态
+- 执行 kubectl exec POD -n NS -- env | grep KEY 检查相关状态
 confidence: 0.8
 tags:
 - 14-configmap-secret-failure
@@ -638,12 +642,12 @@ io_pair_id: IODIAG-CONFIG-0015
 skill_ref: 14-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
-command: kubectl get cm -A -o json \| jq '.items[].data \| length'
-output_pattern: '# 执行: kubectl get cm -A -o json \| jq ''.items[].data \| length''
+command: kubectl get cm -A -o json | jq '.items[].data | length'
+output_pattern: '# 执行: kubectl get cm -A -o json | jq ''.items[].data | length''
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get cm -A -o json \| jq '.items[].data \| length' 检查相关状态
+- 执行 kubectl get cm -A -o json | jq '.items[].data | length' 检查相关状态
 confidence: 0.8
 tags:
 - 14-configmap-secret-failure
@@ -1341,12 +1345,12 @@ io_pair_id: IODIAG-DNS-0014
 skill_ref: 04-dns-resolution-failure
 scenario: DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
 severity: medium
-command: kubectl logs <app-pod> \| grep -c "resolve\|NXDOMAIN\|no such host"
+command: kubectl logs <app-pod> | grep -c "resolve|NXDOMAIN|no such host"
 output_pattern: '<timestamp>  <level>  <message>
 
   ...'
 diagnosis:
-- 执行 kubectl logs <app-pod> \| grep -c "resolve\|NXDOMAIN\|no such host" 检查相关状态
+- 执行 kubectl logs <app-pod> | grep -c "resolve|NXDOMAIN|no such host" 检查相关状态
 confidence: 0.8
 tags:
 - 04-dns-resolution-failure
@@ -1413,8 +1417,8 @@ io_pair_id: IODIAG-DNS-0017
 fta_ref: dns-fta
 scenario: DNS 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100 \| grep -iE "parse
-  error\|syntax error"
+command: kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100 | grep -iE "parse
+  error|syntax error"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: DNS 异常故障树分析'
@@ -1432,7 +1436,7 @@ io_pair_id: IODIAG-DNS-0018
 fta_ref: dns-fta
 scenario: DNS 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100 \| grep -i "plugin/forward"
+command: kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100 | grep -i "plugin/forward"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: DNS 异常故障树分析'
@@ -1450,7 +1454,7 @@ io_pair_id: IODIAG-DNS-0019
 fta_ref: dns-fta
 scenario: DNS 异常故障树分析
 severity: high
-command: kubectl get cm coredns -n kube-system -o jsonpath='{.data.Corefile}' \| grep
+command: kubectl get cm coredns -n kube-system -o jsonpath='{.data.Corefile}' | grep
   -B2 -A5 "stub"
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -1471,7 +1475,7 @@ scenario: DNS 异常故障树分析
 severity: high
 command: kubectl exec -n kube-system -it $(kubectl get pods -n kube-system -l k8s-app=kube-dns
   -o jsonpath='{.items[0].metadata.name}') -- wget -qO- http://localhost:9153/metrics
-  \| grep coredns_cache
+  | grep coredns_cache
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: DNS 异常故障树分析'
@@ -1489,7 +1493,7 @@ io_pair_id: IODIAG-DNS-0021
 fta_ref: dns-fta
 scenario: DNS 异常故障树分析
 severity: high
-command: kubectl get cm coredns -n kube-system -o jsonpath='{.data.Corefile}' \| grep
+command: kubectl get cm coredns -n kube-system -o jsonpath='{.data.Corefile}' | grep
   -A10 "hosts"
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -1550,7 +1554,7 @@ scenario: DNS 异常故障树分析
 severity: high
 command: kubectl exec -n kube-system -it $(kubectl get pods -n kube-system -l k8s-app=kube-dns
   -o jsonpath='{.items[0].metadata.name}') -- wget -qO- http://localhost:9153/metrics
-  \| grep coredns_dns_request_count_total
+  | grep coredns_dns_request_count_total
 output_pattern: "flowchart TD\n  TE[顶事件: DNS 解析异常]\n  OR0{{OR}}\n  TE --> OR0\n\n\
   \  OR0 --> CORE[CoreDNS 异常]\n  OR0 --> UP[上游解析异常]\n  OR0 --> NET[网络策略/连通性异常]\n \
   \ OR0 --> CFG[配置与缓存异常]\n  OR0 --> RES[资源与容量异常]\n\n  CORE_OR{{OR}}\n  CORE --> CORE_OR\n\
@@ -1592,7 +1596,7 @@ scenario: DNS 异常故障树分析
 severity: high
 command: kubectl exec -n kube-system -it $(kubectl get pods -n kube-system -l k8s-app=kube-dns
   -o jsonpath='{.items[0].metadata.name}') -- wget -qO- http://localhost:9153/metrics
-  \| grep coredns_dns_request_duration_seconds
+  | grep coredns_dns_request_duration_seconds
 output_pattern: "flowchart TD\n  TE[顶事件: DNS 解析异常]\n  OR0{{OR}}\n  TE --> OR0\n\n\
   \  OR0 --> CORE[CoreDNS 异常]\n  OR0 --> UP[上游解析异常]\n  OR0 --> NET[网络策略/连通性异常]\n \
   \ OR0 --> CFG[配置与缓存异常]\n  OR0 --> RES[资源与容量异常]\n\n  CORE_OR{{OR}}\n  CORE --> CORE_OR\n\
@@ -3141,8 +3145,8 @@ io_pair_id: IODIAG-INGRESS-0017
 fta_ref: gateway-api-fta
 scenario: Gateway API 异常故障树分析
 severity: high
-command: kubectl get secret ${TLS_SECRET} -n ${GW_NS} -o jsonpath='{.data}' \| grep
-  -E '(tls.crt\|tls.key)'
+command: kubectl get secret ${TLS_SECRET} -n ${GW_NS} -o jsonpath='{.data}' | grep
+  -E '(tls.crt|tls.key)'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Gateway API 异常故障树分析'
@@ -3161,7 +3165,7 @@ fta_ref: gateway-api-fta
 scenario: Gateway API 异常故障树分析
 severity: high
 command: kubectl get secret ${TLS_SECRET} -n ${GW_NS} -o jsonpath='{.data.tls\\.crt}'
-  \| base64 -d \| openssl x509 -noout -subject -ext subjectAltName
+  | base64 -d | openssl x509 -noout -subject -ext subjectAltName
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Gateway API 异常故障树分析'
@@ -3180,7 +3184,7 @@ fta_ref: gateway-api-fta
 scenario: Gateway API 异常故障树分析
 severity: high
 command: kubectl get secret ${TLS_SECRET} -n ${GW_NS} -o jsonpath='{.data.tls\\.crt}'
-  \| base64 -d \| openssl x509 -noout -dates
+  | base64 -d | openssl x509 -noout -dates
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Gateway API 异常故障树分析'
@@ -3199,7 +3203,7 @@ fta_ref: gateway-api-fta
 scenario: Gateway API 异常故障树分析
 severity: high
 command: kubectl get secret ${TLS_SECRET} -n ${GW_NS} -o jsonpath='{.data.tls\\.crt}'
-  \| base64 -d \| openssl verify -CAfile /etc/ssl/certs/ca-certificates.crt
+  | base64 -d | openssl verify -CAfile /etc/ssl/certs/ca-certificates.crt
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Gateway API 异常故障树分析'
@@ -3450,7 +3454,7 @@ io_pair_id: IODIAG-INGRESS-0030
 fta_ref: gateway-api-fta
 scenario: Gateway API 异常故障树分析
 severity: high
-command: kubectl get httproute ${ROUTE_NAME} -n ${NAMESPACE} -o yaml \| grep -A5 'timeouts:'
+command: kubectl get httproute ${ROUTE_NAME} -n ${NAMESPACE} -o yaml | grep -A5 'timeouts:'
 output_pattern: "flowchart TD\n  TE[顶事件: Gateway API 访问异常]\n  OR0{{OR}}\n  TE -->\
   \ OR0\n\n  OR0 --> CTRL[Gateway Controller 异常]\n  OR0 --> ROUTE[路由配置错误]\n  OR0 -->\
   \ TLS[TLS 证书异常]\n  OR0 --> SVC[后端 Service 异常]\n  OR0 --> POLICY[策略冲突]\n\n  %% Gateway\
@@ -3502,7 +3506,7 @@ io_pair_id: IODIAG-INGRESS-0031
 fta_ref: gateway-api-fta
 scenario: Gateway API 异常故障树分析
 severity: high
-command: kubectl get httproute ${ROUTE_NAME} -n ${NAMESPACE} -o yaml \| grep -A10
+command: kubectl get httproute ${ROUTE_NAME} -n ${NAMESPACE} -o yaml | grep -A10
   'retry:'
 output_pattern: "flowchart TD\n  TE[顶事件: Gateway API 访问异常]\n  OR0{{OR}}\n  TE -->\
   \ OR0\n\n  OR0 --> CTRL[Gateway Controller 异常]\n  OR0 --> ROUTE[路由配置错误]\n  OR0 -->\
@@ -3555,8 +3559,8 @@ io_pair_id: IODIAG-INGRESS-0032
 fta_ref: gateway-api-fta
 scenario: Gateway API 异常故障树分析
 severity: high
-command: kubectl logs -n ${GW_NS} -l app=${CONTROLLER_LABEL} --tail=100 \| grep -i
-  'access\|audit'
+command: kubectl logs -n ${GW_NS} -l app=${CONTROLLER_LABEL} --tail=100 | grep -i
+  'access|audit'
 output_pattern: "flowchart TD\n  TE[顶事件: Gateway API 访问异常]\n  OR0{{OR}}\n  TE -->\
   \ OR0\n\n  OR0 --> CTRL[Gateway Controller 异常]\n  OR0 --> ROUTE[路由配置错误]\n  OR0 -->\
   \ TLS[TLS 证书异常]\n  OR0 --> SVC[后端 Service 异常]\n  OR0 --> POLICY[策略冲突]\n\n  %% Gateway\
@@ -3718,7 +3722,7 @@ fta_ref: ingress-fta
 scenario: Ingress 异常故障树分析
 severity: high
 command: kubectl logs -n ${INGRESS_NS} -l app.kubernetes.io/name=ingress-nginx --tail=100
-  \| grep -iE "reload.*fail\|error.*config"
+  | grep -iE "reload.*fail|error.*config"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Ingress 异常故障树分析'
@@ -3845,7 +3849,7 @@ fta_ref: ingress-fta
 scenario: Ingress 异常故障树分析
 severity: high
 command: kubectl get secret ${TLS_SECRET} -n ${NAMESPACE} -o jsonpath='{.data.tls\.crt}'
-  \| base64 -d \| openssl x509 -noout -dates
+  | base64 -d | openssl x509 -noout -dates
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Ingress 异常故障树分析'
@@ -3864,7 +3868,7 @@ fta_ref: ingress-fta
 scenario: Ingress 异常故障树分析
 severity: high
 command: kubectl get secret ${TLS_SECRET} -n ${NAMESPACE} -o jsonpath='{.data.tls\.crt}'
-  \| base64 -d \| openssl x509 -noout -issuer
+  | base64 -d | openssl x509 -noout -issuer
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Ingress 异常故障树分析'
@@ -3883,7 +3887,7 @@ fta_ref: ingress-fta
 scenario: Ingress 异常故障树分析
 severity: high
 command: kubectl get secret ${TLS_SECRET} -n ${NAMESPACE} -o jsonpath='{.data.tls\.crt}'
-  \| base64 -d \| openssl x509 -noout -text \| grep DNS
+  | base64 -d | openssl x509 -noout -text | grep DNS
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Ingress 异常故障树分析'
@@ -3901,7 +3905,7 @@ io_pair_id: IODIAG-INGRESS-0047
 fta_ref: ingress-fta
 scenario: Ingress 异常故障树分析
 severity: high
-command: kubectl get secret ${TLS_SECRET} -n ${NAMESPACE} -o name 2>/dev/null \|\|
+command: kubectl get secret ${TLS_SECRET} -n ${NAMESPACE} -o name 2>/dev/null ||
   echo "NOT_FOUND"
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -3994,7 +3998,7 @@ fta_ref: ingress-fta
 scenario: Ingress 异常故障树分析
 severity: high
 command: kubectl logs -n ${INGRESS_NS} -l app.kubernetes.io/name=ingress-nginx --tail=100
-  \| grep "${SERVICE_NAME}" \| grep -oE "upstream_response_time=[0-9.]+"
+  | grep "${SERVICE_NAME}" | grep -oE "upstream_response_time=[0-9.]+"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Ingress 异常故障树分析'
@@ -4968,7 +4972,7 @@ io_pair_id: IODIAG-NET-0033
 fta_ref: networkpolicy-fta
 scenario: NetworkPolicy 异常故障树分析
 severity: high
-command: kubectl get pods -n kube-system -l k8s-app=calico-node -o name \|\| kubectl
+command: kubectl get pods -n kube-system -l k8s-app=calico-node -o name || kubectl
   get pods -n kube-system -l k8s-app=cilium -o name
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -4988,7 +4992,7 @@ fta_ref: networkpolicy-fta
 scenario: NetworkPolicy 异常故障树分析
 severity: high
 command: kubectl get configmap -n kube-system calico-config -o jsonpath='{.data.cni_network_config}'
-  2>/dev/null \|\| kubectl get configmap -n kube-system cilium-config -o yaml
+  2>/dev/null || kubectl get configmap -n kube-system cilium-config -o yaml
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: NetworkPolicy 异常故障树分析'
@@ -5024,8 +5028,8 @@ io_pair_id: IODIAG-NET-0036
 fta_ref: networkpolicy-fta
 scenario: NetworkPolicy 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l k8s-app=calico-node --tail=100 \| grep -i
-  'policy\|error'
+command: kubectl logs -n kube-system -l k8s-app=calico-node --tail=100 | grep -i
+  'policy|error'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: NetworkPolicy 异常故障树分析'
@@ -5043,7 +5047,7 @@ io_pair_id: IODIAG-NET-0037
 fta_ref: networkpolicy-fta
 scenario: NetworkPolicy 异常故障树分析
 severity: high
-command: kubectl get networkpolicy -A --no-headers \| wc -l
+command: kubectl get networkpolicy -A --no-headers | wc -l
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: NetworkPolicy 异常故障树分析'
@@ -5061,7 +5065,7 @@ io_pair_id: IODIAG-NET-0038
 fta_ref: networkpolicy-fta
 scenario: NetworkPolicy 异常故障树分析
 severity: high
-command: kubectl get networkpolicy -n ${NAMESPACE} -o name \| wc -l
+command: kubectl get networkpolicy -n ${NAMESPACE} -o name | wc -l
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: NetworkPolicy 异常故障树分析'
@@ -5098,7 +5102,7 @@ io_pair_id: IODIAG-NET-0040
 fta_ref: networkpolicy-fta
 scenario: NetworkPolicy 异常故障树分析
 severity: high
-command: kubectl get networkpolicy -n ${NAMESPACE} -o yaml \| grep -A5 'ingress:\|egress:'
+command: kubectl get networkpolicy -n ${NAMESPACE} -o yaml | grep -A5 'ingress:|egress:'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: NetworkPolicy 异常故障树分析'
@@ -5265,7 +5269,7 @@ fta_ref: networkpolicy-fta
 scenario: NetworkPolicy 异常故障树分析
 severity: high
 command: kubectl get pods -n kube-system -l component=kube-apiserver -o jsonpath='{.items[*].spec.containers[*].command}'
-  \| grep -o 'audit-log-path=[^ ]*'
+  | grep -o 'audit-log-path=[^ ]*'
 output_pattern: "flowchart TD\n  TE[顶事件: NetworkPolicy 异常]\n  OR0{{OR}}\n  TE -->\
   \ OR0\n\n  OR0 --> CFG[策略配置错误]\n  OR0 --> CNI[CNI 实现异常]\n  OR0 --> NS[命名空间隔离异常]\n\
   \  OR0 --> DNS[DNS 访问被阻断]\n  OR0 --> AUDIT[审计/回滚缺失]\n\n  %% 策略配置错误分支 - 扩展到3-4层\n\
@@ -5403,7 +5407,7 @@ io_pair_id: IODIAG-NET-0052
 fta_ref: networkpolicy-fta
 scenario: NetworkPolicy 异常故障树分析
 severity: high
-command: kubectl rollout history -n ${NAMESPACE} 2>/dev/null \|\| echo "NetworkPolicy
+command: kubectl rollout history -n ${NAMESPACE} 2>/dev/null || echo "NetworkPolicy
   不支持原生 rollout"
 output_pattern: "flowchart TD\n  TE[顶事件: NetworkPolicy 异常]\n  OR0{{OR}}\n  TE -->\
   \ OR0\n\n  OR0 --> CFG[策略配置错误]\n  OR0 --> CNI[CNI 实现异常]\n  OR0 --> NS[命名空间隔离异常]\n\
@@ -5451,8 +5455,8 @@ fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
 command: kubectl get events -n ${NAMESPACE} --field-selector reason=FailedCreatePodSandBox
-  -o json \| jq '[.items[] \| select(.message \| test("ENI\|bindquota\|AttachNetworkInterface"))]
-  \| length'
+  -o json | jq '[.items[] | select(.message | test("ENI|bindquota|AttachNetworkInterface"))]
+  | length'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5470,8 +5474,8 @@ io_pair_id: IODIAG-NET-0054
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "bindquota
-  exceeded\|no available ENI slot"
+command: kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "bindquota
+  exceeded|no available ENI slot"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5489,8 +5493,8 @@ io_pair_id: IODIAG-NET-0055
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "AttachNetworkInterface
-  failed\|bindENI failed"
+command: kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "AttachNetworkInterface
+  failed|bindENI failed"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5528,7 +5532,7 @@ fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
 command: kubectl get events -n ${NAMESPACE} --field-selector reason=FailedCreatePodSandBox
-  -o json \| jq '[.items[] \| select(.message \| test("IP\|pool\|address"))] \| length'
+  -o json | jq '[.items[] | select(.message | test("IP|pool|address"))] | length'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5546,8 +5550,8 @@ io_pair_id: IODIAG-NET-0058
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "no available
-  IP\|IP pool exhausted"
+command: kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "no available
+  IP|IP pool exhausted"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5566,7 +5570,7 @@ fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
 command: kubectl exec -n kube-system $(kubectl get pods -n kube-system -l app=terway
-  -o jsonpath='{.items[0].metadata.name}') -- terway-cli show \| grep -c "allocated"
+  -o jsonpath='{.items[0].metadata.name}') -- terway-cli show | grep -c "allocated"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5584,7 +5588,7 @@ io_pair_id: IODIAG-NET-0060
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=100 \| grep -E "IP not released\|stale
+command: kubectl logs -n kube-system -l app=terway --tail=100 | grep -E "IP not released|stale
   IP"
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -5603,7 +5607,7 @@ io_pair_id: IODIAG-NET-0061
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "IP conflict\|duplicate
+command: kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "IP conflict|duplicate
   IP"
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -5622,8 +5626,8 @@ io_pair_id: IODIAG-NET-0062
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E "FailedCreatePodSandBox\|cni
-  plugin\|terway"
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E "FailedCreatePodSandBox|cni
+  plugin|terway"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5641,7 +5645,7 @@ io_pair_id: IODIAG-NET-0063
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "invalid CNI\|error
+command: kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "invalid CNI|error
   loading CNI"
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -5660,7 +5664,7 @@ io_pair_id: IODIAG-NET-0064
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: 'kubectl get pods -n kube-system -l app=terway -o json \| jq ''.items[] \|
+command: 'kubectl get pods -n kube-system -l app=terway -o json | jq ''.items[] |
   {name: .metadata.name, ready: .status.containerStatuses[0].ready, restarts: .status.containerStatuses[0].restartCount}'''
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -5679,8 +5683,8 @@ io_pair_id: IODIAG-NET-0065
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "failed to
-  add route\|iptables error"
+command: kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "failed to
+  add route|iptables error"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5698,8 +5702,8 @@ io_pair_id: IODIAG-NET-0066
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl get node ${NODE_NAME} -o json \| jq '.status.conditions[] \| select(.type=="NetworkUnavailable")
-  \| .status'
+command: kubectl get node ${NODE_NAME} -o json | jq '.status.conditions[] | select(.type=="NetworkUnavailable")
+  | .status'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5735,8 +5739,8 @@ io_pair_id: IODIAG-NET-0068
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=30 2>&1 \| grep -E "connection
-  refused\|connection timed out\|no route"
+command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=30 2>&1 | grep -E "connection
+  refused|connection timed out|no route"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5754,7 +5758,7 @@ io_pair_id: IODIAG-NET-0069
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "Throttling\|ServiceUnavailable\|connection
+command: kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "Throttling|ServiceUnavailable|connection
   refused"
 output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\": \"start\"\
   , \"step\": \"start_terway_fta\", \"next_step\": \"event_terway_abnormal\" },\n\
@@ -6433,8 +6437,8 @@ io_pair_id: IODIAG-NET-0070
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=100 \| grep -E "Throttling\|rate
-  limit\|429"
+command: kubectl logs -n kube-system -l app=terway --tail=100 | grep -E "Throttling|rate
+  limit|429"
 output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\": \"start\"\
   , \"step\": \"start_terway_fta\", \"next_step\": \"event_terway_abnormal\" },\n\
   \    { \"name\": \"顶事件: Terway异常\", \"action\": \"event\", \"step\": \"event_terway_abnormal\"\
@@ -7790,7 +7794,7 @@ io_pair_id: IODIAG-NET-0072
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=50 \| grep "connection refused"
+command: kubectl logs -n kube-system -l app=terway --tail=50 | grep "connection refused"
 output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\": \"start\"\
   , \"step\": \"start_terway_fta\", \"next_step\": \"event_terway_abnormal\" },\n\
   \    { \"name\": \"顶事件: Terway异常\", \"action\": \"event\", \"step\": \"event_terway_abnormal\"\
@@ -10151,7 +10155,7 @@ io_pair_id: IODIAG-POD-0031
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get pod ${POD_NAME} -n ${NAMESPACE} -o json \| jq '.spec.containers[0].livenessProbe
+command: kubectl get pod ${POD_NAME} -n ${NAMESPACE} -o json | jq '.spec.containers[0].livenessProbe
   // .spec.containers[0].readinessProbe'
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -10170,8 +10174,8 @@ io_pair_id: IODIAG-POD-0032
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'Liveness probe
-  failed\|Readiness probe failed'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'Liveness probe
+  failed|Readiness probe failed'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10189,7 +10193,7 @@ io_pair_id: IODIAG-POD-0033
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep 'Startup probe failed'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep 'Startup probe failed'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10243,7 +10247,7 @@ io_pair_id: IODIAG-POD-0036
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'FailedCreatePodSandBox\|NetworkNotReady'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'FailedCreatePodSandBox|NetworkNotReady'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10279,7 +10283,7 @@ io_pair_id: IODIAG-POD-0038
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'cni plugin\|failed
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'cni plugin|failed
   to set up sandbox'
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -10298,7 +10302,7 @@ io_pair_id: IODIAG-POD-0039
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get networkpolicy -n ${NAMESPACE} -o json \| jq '.items[].spec'
+command: kubectl get networkpolicy -n ${NAMESPACE} -o json | jq '.items[].spec'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10389,7 +10393,7 @@ io_pair_id: IODIAG-POD-0044
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'FailedMount\|FailedAttachVolume'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'FailedMount|FailedAttachVolume'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10407,8 +10411,8 @@ io_pair_id: IODIAG-POD-0045
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get pvc -n ${NAMESPACE} -o json \| jq '.items[] \| select(.status.phase!="Bound")
-  \| .metadata.name'
+command: kubectl get pvc -n ${NAMESPACE} -o json | jq '.items[] | select(.status.phase!="Bound")
+  | .metadata.name'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10444,7 +10448,7 @@ io_pair_id: IODIAG-POD-0047
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'mount failed\|permission
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'mount failed|permission
   denied'
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -10463,8 +10467,8 @@ io_pair_id: IODIAG-POD-0048
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 \| grep -E 'slow
-  disk\|I/O timeout'
+command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 | grep -E 'slow
+  disk|I/O timeout'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10482,8 +10486,8 @@ io_pair_id: IODIAG-POD-0049
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 \| grep -E 'read-only
-  file system\|filesystem corruption'
+command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 | grep -E 'read-only
+  file system|filesystem corruption'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10501,7 +10505,7 @@ io_pair_id: IODIAG-POD-0050
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep 'Multi-Attach error'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep 'Multi-Attach error'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10519,7 +10523,7 @@ io_pair_id: IODIAG-POD-0051
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'Evicted\|OOMKilling'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'Evicted|OOMKilling'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10537,7 +10541,7 @@ io_pair_id: IODIAG-POD-0052
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get pod ${POD_NAME} -n ${NAMESPACE} -o json \| jq '.spec.containers[0].resources'
+command: kubectl get pod ${POD_NAME} -n ${NAMESPACE} -o json | jq '.spec.containers[0].resources'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10573,7 +10577,7 @@ io_pair_id: IODIAG-POD-0054
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get pod ${POD_NAME} -n ${NAMESPACE} -o json \| jq '.status.reason'
+command: kubectl get pod ${POD_NAME} -n ${NAMESPACE} -o json | jq '.status.reason'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10609,7 +10613,7 @@ io_pair_id: IODIAG-POD-0056
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'forbidden\|denied\|violates'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'forbidden|denied|violates'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10646,7 +10650,7 @@ io_pair_id: IODIAG-POD-0058
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'violates PodSecurity\|admission
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'violates PodSecurity|admission
   webhook denied'
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -10665,7 +10669,7 @@ io_pair_id: IODIAG-POD-0059
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep 'image policy denied'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep 'image policy denied'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10683,7 +10687,7 @@ io_pair_id: IODIAG-POD-0060
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'webhook timeout\|webhook
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'webhook timeout|webhook
   connection refused'
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -10702,8 +10706,8 @@ io_pair_id: IODIAG-POD-0061
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get node ${NODE_NAME} -o json \| jq '.status.conditions[] \| select(.type=="Ready")
-  \| .status'
+command: kubectl get node ${NODE_NAME} -o json | jq '.status.conditions[] | select(.type=="Ready")
+  | .status'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10721,7 +10725,7 @@ io_pair_id: IODIAG-POD-0062
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get nodes \| grep NotReady
+command: kubectl get nodes | grep NotReady
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10848,7 +10852,7 @@ fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
 command: kubectl get events -n ${NAMESPACE} --field-selector involvedObject.name=${POD_NAME},reason=Killing
-  -o json \| jq '.items \| length'
+  -o json | jq '.items | length'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10866,7 +10870,7 @@ io_pair_id: IODIAG-POD-0070
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep 'Container killed
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep 'Container killed
   with signal SIGKILL'
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -10886,7 +10890,7 @@ fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
 command: kubectl get events -n ${NAMESPACE} --field-selector involvedObject.name=${POD_NAME},reason=Killing
-  -o json \| jq -r '.items[].message'
+  -o json | jq -r '.items[].message'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10904,7 +10908,7 @@ io_pair_id: IODIAG-POD-0072
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get deployment <deployment-name> -n ${NAMESPACE} -o json \| jq '.spec.strategy'
+command: kubectl get deployment <deployment-name> -n ${NAMESPACE} -o json | jq '.spec.strategy'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10922,7 +10926,7 @@ io_pair_id: IODIAG-POD-0073
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep 'FailedPreStopHook'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep 'FailedPreStopHook'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10940,7 +10944,7 @@ io_pair_id: IODIAG-POD-0074
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'CreateContainerConfigError\|FailedMount.*configmap\|FailedMount.*secret'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'CreateContainerConfigError|FailedMount.*configmap|FailedMount.*secret'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10958,7 +10962,7 @@ io_pair_id: IODIAG-POD-0075
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep 'configmap.*not
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep 'configmap.*not
   found'
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -10977,7 +10981,7 @@ io_pair_id: IODIAG-POD-0076
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep 'secret.*not found'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep 'secret.*not found'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10995,7 +10999,7 @@ io_pair_id: IODIAG-POD-0077
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep "couldn't find key"
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep "couldn't find key"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -11013,7 +11017,7 @@ io_pair_id: IODIAG-POD-0078
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep 'serviceaccount.*not
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep 'serviceaccount.*not
   found'
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -11032,8 +11036,8 @@ io_pair_id: IODIAG-POD-0079
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 \| grep -E 'connection
-  refused\|TLS handshake error\|no route to host'
+command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 | grep -E 'connection
+  refused|TLS handshake error|no route to host'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -11051,7 +11055,7 @@ io_pair_id: IODIAG-POD-0080
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 \| grep -E 'x509:\|certificate\|clock
+command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 | grep -E 'x509:|certificate|clock
   skew'
 output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\": \"start\"\
   , \"step\": \"start_pod_fta\", \"next_step\": \"event_pod_abnormal\" },\n    { \"\
@@ -12500,7 +12504,7 @@ output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\":
   '${SA_NAME:-default}'\\\" and .namespace==\\\"'${NAMESPACE}'\\\") | {name: .metadata.name,\
   \ roleRef: .roleRef}'\", \"timeout\": \"15s\" },\n          { \"id\": \"check_forbidden_logs\"\
   , \"description\": \"检查 forbidden 日志\", \"exec\": \"kubectl logs ${POD_NAME} -n\
-  \ ${NAMESPACE} --tail=30 2>&1 | grep -i 'forbidden\\\\|cannot\\\\|denied' || echo\
+  \ ${NAMESPACE} --tail=30 2>&1 | grep -i 'forbidden\\\|cannot\\\|denied' || echo\
   \ 'NO_FORBIDDEN_LOGS'\", \"timeout\": \"15s\" }\n        ]\n      },\n      \"match\"\
   : {\n        \"rules\": [\n          { \"if\": { \"source\": \"check_forbidden_logs.stdout\"\
   , \"type\": \"regex\", \"pattern\": \"forbidden|User cannot|is forbidden\" }, \"\
@@ -13296,7 +13300,7 @@ io_pair_id: IODIAG-POD-0081
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 \| grep 'certificate
+command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 | grep 'certificate
   signed by unknown authority'
 output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\": \"start\"\
   , \"step\": \"start_pod_fta\", \"next_step\": \"event_pod_abnormal\" },\n    { \"\
@@ -14745,7 +14749,7 @@ output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\":
   '${SA_NAME:-default}'\\\" and .namespace==\\\"'${NAMESPACE}'\\\") | {name: .metadata.name,\
   \ roleRef: .roleRef}'\", \"timeout\": \"15s\" },\n          { \"id\": \"check_forbidden_logs\"\
   , \"description\": \"检查 forbidden 日志\", \"exec\": \"kubectl logs ${POD_NAME} -n\
-  \ ${NAMESPACE} --tail=30 2>&1 | grep -i 'forbidden\\\\|cannot\\\\|denied' || echo\
+  \ ${NAMESPACE} --tail=30 2>&1 | grep -i 'forbidden\\\|cannot\\\|denied' || echo\
   \ 'NO_FORBIDDEN_LOGS'\", \"timeout\": \"15s\" }\n        ]\n      },\n      \"match\"\
   : {\n        \"rules\": [\n          { \"if\": { \"source\": \"check_forbidden_logs.stdout\"\
   , \"type\": \"regex\", \"pattern\": \"forbidden|User cannot|is forbidden\" }, \"\
@@ -15673,13 +15677,13 @@ io_pair_id: IODIAG-SCALE-0006
 skill_ref: 12-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
-command: kubectl logs -n kube-system deploy/cluster-autoscaler --tail=100 \| grep
+command: kubectl logs -n kube-system deploy/cluster-autoscaler --tail=100 | grep
   -i "could not"
 output_pattern: '<timestamp>  <level>  <message>
 
   ...'
 diagnosis:
-- 执行 kubectl logs -n kube-system deploy/cluster-autoscaler --tail=100 \| grep -i "could
+- 执行 kubectl logs -n kube-system deploy/cluster-autoscaler --tail=100 | grep -i "could
   not" 检查相关状态
 confidence: 0.8
 tags:
@@ -15755,13 +15759,13 @@ io_pair_id: IODIAG-SCALE-0009
 skill_ref: 12-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
-command: kubectl logs -n kube-system deploy/cluster-autoscaler --tail=200 \| grep
+command: kubectl logs -n kube-system deploy/cluster-autoscaler --tail=200 | grep
   "cannot be removed"
 output_pattern: '<timestamp>  <level>  <message>
 
   ...'
 diagnosis:
-- 执行 kubectl logs -n kube-system deploy/cluster-autoscaler --tail=200 \| grep "cannot
+- 执行 kubectl logs -n kube-system deploy/cluster-autoscaler --tail=200 | grep "cannot
   be removed" 检查相关状态
 confidence: 0.8
 tags:
@@ -15888,12 +15892,12 @@ io_pair_id: IODIAG-SCALE-0014
 skill_ref: 12-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
-command: kubectl get pods -A --field-selector=status.phase=Pending \| wc -l
+command: kubectl get pods -A --field-selector=status.phase=Pending | wc -l
 output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
 
   <pod-name>         0/1     <status>           <restarts>    <age>'
 diagnosis:
-- 执行 kubectl get pods -A --field-selector=status.phase=Pending \| wc -l 检查相关状态
+- 执行 kubectl get pods -A --field-selector=status.phase=Pending | wc -l 检查相关状态
 confidence: 0.8
 tags:
 - 12-autoscaling-failure
@@ -16380,13 +16384,13 @@ io_pair_id: IODIAG-SEC-0018
 skill_ref: 18-security-incident-response
 scenario: 安全事件应急响应 / Security Incident Response
 severity: medium
-command: kubectl get events -A --field-selector reason=FailedCreate \| grep -i security
+command: kubectl get events -A --field-selector reason=FailedCreate | grep -i security
 output_pattern: '# 执行: kubectl get events -A --field-selector reason=FailedCreate
-  \| grep -i security
+  | grep -i security
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get events -A --field-selector reason=FailedCreate \| grep -i security
+- 执行 kubectl get events -A --field-selector reason=FailedCreate | grep -i security
   检查相关状态
 confidence: 0.8
 tags:
@@ -16408,12 +16412,12 @@ io_pair_id: IODIAG-SEC-0019
 skill_ref: 18-security-incident-response
 scenario: 安全事件应急响应 / Security Incident Response
 severity: medium
-command: kubectl get --raw /metrics \| grep audit
-output_pattern: '# 执行: kubectl get --raw /metrics \| grep audit
+command: kubectl get --raw /metrics | grep audit
+output_pattern: '# 执行: kubectl get --raw /metrics | grep audit
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get --raw /metrics \| grep audit 检查相关状态
+- 执行 kubectl get --raw /metrics | grep audit 检查相关状态
 confidence: 0.8
 tags:
 - 18-security-incident-response
@@ -16966,12 +16970,12 @@ io_pair_id: IODIAG-STORAGE-0002
 skill_ref: 07-pvc-storage-failure 2
 scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 severity: medium
-command: kubectl get pvc -A \| grep -v Bound
-output_pattern: '# 执行: kubectl get pvc -A \| grep -v Bound
+command: kubectl get pvc -A | grep -v Bound
+output_pattern: '# 执行: kubectl get pvc -A | grep -v Bound
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get pvc -A \| grep -v Bound 检查相关状态
+- 执行 kubectl get pvc -A | grep -v Bound 检查相关状态
 confidence: 0.8
 tags:
 - 07-pvc-storage-failure 2
@@ -16992,11 +16996,11 @@ io_pair_id: IODIAG-STORAGE-0003
 skill_ref: 07-pvc-storage-failure 2
 scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 severity: medium
-command: kubectl describe pod <pod> \| grep -i "FailedMount\|MountVolume"
+command: kubectl describe pod <pod> | grep -i "FailedMount|MountVolume"
 output_pattern: "Events:\n  Type     Reason        Age   From     Message\n  Warning\
   \  <reason>      <age>  <from>   <message>"
 diagnosis:
-- 执行 kubectl describe pod <pod> \| grep -i "FailedMount\|MountVolume" 检查相关状态
+- 执行 kubectl describe pod <pod> | grep -i "FailedMount|MountVolume" 检查相关状态
 confidence: 0.8
 tags:
 - 07-pvc-storage-failure 2
@@ -17045,12 +17049,12 @@ io_pair_id: IODIAG-STORAGE-0005
 skill_ref: 07-pvc-storage-failure 2
 scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 severity: medium
-command: kubectl get pv \| grep Released
-output_pattern: '# 执行: kubectl get pv \| grep Released
+command: kubectl get pv | grep Released
+output_pattern: '# 执行: kubectl get pv | grep Released
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get pv \| grep Released 检查相关状态
+- 执行 kubectl get pv | grep Released 检查相关状态
 confidence: 0.8
 tags:
 - 07-pvc-storage-failure 2
@@ -17360,12 +17364,12 @@ io_pair_id: IODIAG-STORAGE-0017
 skill_ref: 07-pvc-storage-failure
 scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 severity: medium
-command: kubectl get pvc -A \| grep -v Bound
-output_pattern: '# 执行: kubectl get pvc -A \| grep -v Bound
+command: kubectl get pvc -A | grep -v Bound
+output_pattern: '# 执行: kubectl get pvc -A | grep -v Bound
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get pvc -A \| grep -v Bound 检查相关状态
+- 执行 kubectl get pvc -A | grep -v Bound 检查相关状态
 confidence: 0.8
 tags:
 - 07-pvc-storage-failure
@@ -17386,11 +17390,11 @@ io_pair_id: IODIAG-STORAGE-0018
 skill_ref: 07-pvc-storage-failure
 scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 severity: medium
-command: kubectl describe pod <pod> \| grep -i "FailedMount\|MountVolume"
+command: kubectl describe pod <pod> | grep -i "FailedMount|MountVolume"
 output_pattern: "Events:\n  Type     Reason        Age   From     Message\n  Warning\
   \  <reason>      <age>  <from>   <message>"
 diagnosis:
-- 执行 kubectl describe pod <pod> \| grep -i "FailedMount\|MountVolume" 检查相关状态
+- 执行 kubectl describe pod <pod> | grep -i "FailedMount|MountVolume" 检查相关状态
 confidence: 0.8
 tags:
 - 07-pvc-storage-failure
@@ -17439,12 +17443,12 @@ io_pair_id: IODIAG-STORAGE-0020
 skill_ref: 07-pvc-storage-failure
 scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 severity: medium
-command: kubectl get pv \| grep Released
-output_pattern: '# 执行: kubectl get pv \| grep Released
+command: kubectl get pv | grep Released
+output_pattern: '# 执行: kubectl get pv | grep Released
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get pv \| grep Released 检查相关状态
+- 执行 kubectl get pv | grep Released 检查相关状态
 confidence: 0.8
 tags:
 - 07-pvc-storage-failure

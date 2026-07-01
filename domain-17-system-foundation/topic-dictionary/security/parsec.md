@@ -1,6 +1,9 @@
 ---
 title: PARSEC 机密计算
-description: 'PARSEC（Platform AbstRaction for SECurity）是 CNCF Sandbox 项目，为应用提供统一的加密和安全服务 API，屏...'
+description: PARSEC（Platform AbstRaction for SECurity）是 CNCF Sandbox 项目，为应用提供统一的加密和安全服务
+  API，屏...
+summary: PARSEC（Platform AbstRaction for SECurity）是 CNCF Sandbox 项目，为应用提供统一的加密和安全服务
+  API，屏...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - security
 - tee
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # PARSEC 机密计算（PARSEC）
 

@@ -1,6 +1,7 @@
 ---
 title: 'Day 3: ACK/ACR 控制台 & 功能'
 description: '## 概述'
+summary: '## 概述'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - job
 - cronjob
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,8 +38,9 @@ prerequisites:
 - gpu-ml-basics
 - helm-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 3: ACK/ACR 控制台 & 功能

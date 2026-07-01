@@ -1,6 +1,9 @@
 ---
 title: Submariner 多集群网络
-description: 'Submariner 是 Red Hat 主导的 CNCF Sandbox 项目，专注于解决 Kubernetes 多集群间的网络互联问题，实现跨集群 Serv...'
+description: Submariner 是 Red Hat 主导的 CNCF Sandbox 项目，专注于解决 Kubernetes 多集群间的网络互联问题，实现跨集群
+  Serv...
+summary: Submariner 是 Red Hat 主导的 CNCF Sandbox 项目，专注于解决 Kubernetes 多集群间的网络互联问题，实现跨集群
+  Serv...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - networking
 - multi-cluster
 - cni
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Submariner 多集群网络（Submariner）
 

@@ -1,6 +1,7 @@
 ---
 title: 33 - 服务发现与 DNS 配置 (Service Discovery & DNS)
 description: '# 33 - 服务发现与 DNS 配置 (Service Discovery & DNS)'
+summary: '# 33 - 服务发现与 DNS 配置 (Service Discovery & DNS)'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - opa
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -63,8 +66,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 33 - 服务发现与 DNS 配置 ([[Service|Service]] Discovery & DNS)
 

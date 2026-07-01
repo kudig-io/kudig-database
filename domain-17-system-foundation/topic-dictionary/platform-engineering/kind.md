@@ -1,12 +1,15 @@
 ---
 title: 类型
-description: 'Kind（类型）是 Kubernetes 资源对象的类型标识。每个 Manifest 的 `kind` 字段指定了要创建的资源类型，如 Pod、Deployme...'
+description: Kind（类型）是 Kubernetes 资源对象的类型标识。每个 Manifest 的 `kind` 字段指定了要创建的资源类型，如 Pod、Deployme...
+summary: Kind（类型）是 Kubernetes 资源对象的类型标识。每个 Manifest 的 `kind` 字段指定了要创建的资源类型，如 Pod、Deployme...
 category: dictionary
 tags:
 - k8s
 - glossary
 - api
 - platform
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 类型
 

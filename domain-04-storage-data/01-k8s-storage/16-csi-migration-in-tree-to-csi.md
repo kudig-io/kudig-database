@@ -1,6 +1,7 @@
 ---
 title: 16 - CSI 迁移：从 In-Tree 存储插件到 CSI
 description: '# 16 - CSI 迁移：从 In-Tree 存储插件到 CSI'
+summary: '# 16 - CSI 迁移：从 In-Tree 存储插件到 CSI'
 category: storage
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -56,8 +59,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md
   label: '故障树: csi'
-created: "2026-05-23"
 ---
+
+
 
 # 16 - CSI 迁移：从 In-Tree 存储插件到 CSI
 

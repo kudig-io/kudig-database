@@ -1,6 +1,9 @@
 ---
 title: Linkerd
-description: 'Linkerd 是最早的服务网格项目之一，现为 CNCF 毕业项目。以极简设计和高性能著称，相比 Istio 更轻量、更易运维，适合不需要复杂 Istio 功能...'
+description: Linkerd 是最早的服务网格项目之一，现为 CNCF 毕业项目。以极简设计和高性能著称，相比 Istio 更轻量、更易运维，适合不需要复杂
+  Istio 功能...
+summary: Linkerd 是最早的服务网格项目之一，现为 CNCF 毕业项目。以极简设计和高性能著称，相比 Istio 更轻量、更易运维，适合不需要复杂 Istio
+  功能...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - linkerd
 - service-mesh
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Linkerd
 

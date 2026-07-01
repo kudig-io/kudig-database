@@ -1,6 +1,7 @@
 ---
 title: 23 - Pod Security Standards (PSS/PSA) YAML 配置参考
 description: '# 23 - Pod Security Standards (PSS/PSA) YAML 配置参考'
+summary: '# 23 - Pod Security Standards (PSS/PSA) YAML 配置参考'
 category: yaml-manifests
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - docker
 - opa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -56,8 +59,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md
   label: '故障树: pod'
-created: "2026-05-23"
 ---
+
+
 
 # 23 - Pod Securityod Security Standards]] (PSS/PSA) YAML 配置参考
 

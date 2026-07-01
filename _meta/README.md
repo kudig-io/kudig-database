@@ -1,13 +1,22 @@
 ---
-title: "Meta 元数据索引"
+title: Meta 元数据索引
+summary: Meta 元数据索引
 category: index
-tags: ["index", "meta", "schema", "visibility/public"]
-sources: ["_meta/"]
+tags:
+- index
+- meta
+- schema
+- visibility/public
+tier: supporting
+sources:
+- _meta/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: reviewed
 ---
+
+
 
 # Meta 元数据索引
 
@@ -23,3 +32,7 @@ status: reviewed
 - _meta/metadata/knowledge-map.md
 - _meta/metadata/tags-index.md
 - _meta/metadata/difficulty-index.md
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

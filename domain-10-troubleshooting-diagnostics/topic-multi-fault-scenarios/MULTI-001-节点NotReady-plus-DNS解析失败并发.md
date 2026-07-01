@@ -1,14 +1,22 @@
 ---
-scenario_id: "MULTI-001"
-type: "multi-fault"
-skills: ['01-node-notready', '04-dns-resolution-failure']
-created: "2026-05-23"
-updated: "2026-05-23"
-last_updated: 2026-05-23
-title: "节点NotReady + DNS解析失败并发"
+title: 节点NotReady + DNS解析失败并发
+summary: 节点NotReady + DNS解析失败并发：多个节点同时进入NotReady状态，同时工程师报告Pod间DNS解析间歇性失败。
 category: uncategorized
-tags: ["uncategorized", "visibility/public"]
+tags:
+- uncategorized
+- visibility/public
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+scenario_id: MULTI-001
+type: multi-fault
+skills:
+- 01-node-notready
+- 04-dns-resolution-failure
+last_updated: 2026-05-23
 ---
+
+
 
 # 节点NotReady + DNS解析失败并发
 
@@ -46,3 +54,7 @@ tags: ["uncategorized", "visibility/public"]
 2. 配置级联告警（当多个关联指标同时异常时触发）
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

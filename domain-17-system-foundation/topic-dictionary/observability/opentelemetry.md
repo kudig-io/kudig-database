@@ -1,6 +1,9 @@
 ---
 title: OpenTelemetry
-description: 'OpenTelemetry（简称 OTel）是 CNCF 孵化项目，提供统一的分布式系统可观测性标准。它将 Traces、Metrics、Logs 三大支柱统一...'
+description: OpenTelemetry（简称 OTel）是 CNCF 孵化项目，提供统一的分布式系统可观测性标准。它将 Traces、Metrics、Logs
+  三大支柱统一...
+summary: OpenTelemetry（简称 OTel）是 CNCF 孵化项目，提供统一的分布式系统可观测性标准。它将 Traces、Metrics、Logs
+  三大支柱统一...
 category: dictionary
 tags:
 - k8s
@@ -10,6 +13,8 @@ tags:
 - tracing
 - metrics
 - logging
+tier: core
+created: 2026-05
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -25,9 +30,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
-created: 2026-05
 ---
+
+
 
 # OpenTelemetry
 

@@ -1,6 +1,7 @@
 ---
 title: StatefulSet
 description: StatefulSet — Kubernetes 生产运维知识库
+summary: StatefulSet — Kubernetes 生产运维知识库
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - postgresql
 - kafka
 - elasticsearch
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - kafka-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # StatefulSet
 

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Secrets 最佳实践
 description: '# Kubernetes Secrets 最佳实践'
+summary: '# Kubernetes Secrets 最佳实践'
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - terminology
 - etcd
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -26,8 +29,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] [[Secrets|Secrets]] 最佳实践
 

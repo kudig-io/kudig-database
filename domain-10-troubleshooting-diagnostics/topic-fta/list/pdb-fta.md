@@ -1,6 +1,7 @@
 ---
 title: PDB 异常故障树分析 (skills)
 description: '- **目标**：覆盖 PDB 阻塞驱逐、配置错误与升级失败的关键成因与路径。'
+summary: '- **目标**：覆盖 PDB 阻塞驱逐、配置错误与升级失败的关键成因与路径。'
 category: skills
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - pdb
 - statefulset
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 fta_id: FTA-PDB-001
 component: Pdb
 severity: medium
-created: "2026-05-23"
 ---
+
+
 
 # PDB 异常故障树分析
 

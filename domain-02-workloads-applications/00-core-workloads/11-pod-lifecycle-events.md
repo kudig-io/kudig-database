@@ -1,6 +1,7 @@
 ---
 title: Pod 生命周期事件表
 description: 深入解析 Pod 生命周期状态转换、Phase 与 Condition 机制、Init Container、Sidecar、容器重启策略与事件体系
+summary: 深入解析 Pod 生命周期状态转换、Phase 与 Condition 机制、Init Container、Sidecar、容器重启策略与事件体系
 category: domain-02-workloads-applications
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - container
 - pdb
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -67,8 +70,9 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md
   type: fta
   desc: Pod 故障树
-created: "2026-05-23"
 ---
+
+
 
 # 37 - Pod生命周期事件表
 

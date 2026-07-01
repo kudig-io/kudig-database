@@ -1,17 +1,25 @@
 ---
-dialogue_id: "DIALOGUE-PVC-001"
-skill_id: "SKILL-PVC-001"
-role: "remote-consultant"
-language: "zh"
-severity: "high"
-status: "reviewed"
+title: PVC 一直 Pending，Pod 无法启动 — 远程顾问对话脚本
+summary: PVC 一直 Pending，Pod 无法启动 — 远程顾问对话脚本：kubectl get pvc -n <namespace>
+category: dialogue
+tags:
+- dialogue
+- remote-consultant
+- troubleshooting
+- visibility/public
+tier: supporting
 created: 2026-05-21
 updated: 2026-05-21
+dialogue_id: DIALOGUE-PVC-001
+skill_id: SKILL-PVC-001
+role: remote-consultant
+language: zh
+severity: high
+status: reviewed
 last_updated: 2026-05-21
-title: "PVC 一直 Pending，Pod 无法启动 — 远程顾问对话脚本"
-category: dialogue
-tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
+
+
 
 # PVC 一直 Pending，Pod 无法启动 — 远程顾问对话脚本
 
@@ -247,3 +255,7 @@ kubectl get pvc <pvc-name> -n <namespace> -w
 - [[concepts/persistent-volume-claim.md|PVC]]
 - [[concepts/pv.md|PersistentVolume]]
 - [[concepts/storageclass.md|StorageClass]]
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

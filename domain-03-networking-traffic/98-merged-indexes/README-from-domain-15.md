@@ -1,11 +1,14 @@
 ---
 title: 'Domain-15: 网络基础'
 description: 'title: ''Domain-15: 网络基础'''
+summary: 'title: ''Domain-15: 网络基础'''
 category: general
 tags:
 - k8s
 - coredns
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - networking-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain-15: 网络基础'

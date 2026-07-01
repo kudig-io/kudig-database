@@ -1,6 +1,7 @@
 ---
 title: 角色
-description: 'Role 是 Kubernetes RBAC 中命名空间级别的权限定义资源。它定义了一组允许的操作（verbs）和可操作的资源（resources）。...'
+description: Role 是 Kubernetes RBAC 中命名空间级别的权限定义资源。它定义了一组允许的操作（verbs）和可操作的资源（resources）。...
+summary: Role 是 Kubernetes RBAC 中命名空间级别的权限定义资源。它定义了一组允许的操作（verbs）和可操作的资源（resources）。...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - role
 - rbac
 - security
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 角色
 

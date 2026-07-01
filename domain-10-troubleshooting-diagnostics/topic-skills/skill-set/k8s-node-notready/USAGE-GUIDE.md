@@ -1,6 +1,7 @@
 ---
 title: Skills + FTA 使用指南 — k8s-node-notready & node-fta
 description: '# Skills + FTA 使用指南 — k8s-node-notready & node-fta'
+summary: '# Skills + FTA 使用指南 — k8s-node-notready & node-fta'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - containerd
 - docker
 - daemonset
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -38,8 +41,9 @@ prerequisites:
 skill_id: SKILL-USAGE_GUIDE-001
 skill_name: Skills + FTA 使用指南 — k8s-node-notready & node-fta
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 # Skills + FTA 使用指南 — k8s-node-notready & node-fta
 

@@ -1,6 +1,7 @@
 ---
 title: K8s Monitoring & Alerting Failure 诊断与修复
 description: Kubernetes Prometheus/Grafana 异常、告警不触发的完整诊断-修复-验证 Skill
+summary: Kubernetes Prometheus/Grafana 异常、告警不触发的完整诊断-修复-验证 Skill
 category: Kubernetes-Incident-Response
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - alerting
 - alertmanager
 - metrics
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -48,8 +51,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 # K8s Monitoring & Alerting Failure 诊断与修复
 
@@ -276,7 +280,7 @@ flowchart TD
 | 工具 | 用途 | 典型命令 |
 |:---|:---|:---|
 | kubectl | Kubernetes CLI | `kubectl get/describe/logs/exec` |
-| jq | JSON处理 | `kubectl get ... -o json \| jq ...` |
+| jq | JSON处理 | `kubectl get ... -o json | jq ...` |
 | openssl | 证书检查 | `openssl x509 -in <cert> -noout -dates` |
 | tcpdump | 网络抓包 | `tcpdump -i any port <port> -n` |
 | strace | 系统调用追踪 | `strace -p <pid> -f` |

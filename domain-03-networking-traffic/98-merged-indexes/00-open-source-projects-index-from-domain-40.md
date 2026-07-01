@@ -1,6 +1,8 @@
 ---
 title: Domain-40 云原生 API 网关 — 开源项目索引
-description: '| **Gateway API** | K8s 流量管理新标准 | K8s SIG | v1.2.0 | - | Apache-2.0 |'
+description: '| **Gateway API** | K8s 流量管理新标准 | K8s SIG | v1.2.0 | - | Apache-2.0
+  |'
+summary: '| **Gateway API** | K8s 流量管理新标准 | K8s SIG | v1.2.0 | - | Apache-2.0 |'
 category: cloud-native-api-gateway
 tags:
 - k8s
@@ -13,6 +15,8 @@ tags:
 - ingress
 - gateway
 - ebpf
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +53,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Domain-40 云原生 API 网关 — 开源项目索引
 

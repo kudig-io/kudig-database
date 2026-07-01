@@ -1,6 +1,7 @@
 ---
 title: 节点证书轮换 — kubelet 证书自动续期源码分析
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - reference
@@ -8,6 +9,8 @@ tags:
 - kubelet
 - controller-manager
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 节点证书轮换源码分析
 description: '## 概述'
@@ -357,7 +361,7 @@ ls -la /var/lib/kubelet/pki/
 
 ```bash
 # 查看 kubelet 证书轮换日志
-journalctl -u kubelet | grep -i "certificate\|csr\|rotation"
+journalctl -u kubelet | grep -i "certificate|csr|rotation"
 
 # 常见日志:
 # "Rotating certificates: preparing CSR"
@@ -451,6 +455,8 @@ kubeadm join ...
 | `Sign` | `pkg/controller/certificates/signer/signer.go` | 证书签发 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

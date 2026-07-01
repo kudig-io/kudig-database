@@ -1,6 +1,9 @@
 ---
 title: kubectl 插件实战指南
-description: 面向阿里云/专有云 K8s 运维的 kubectl 插件指南，涵盖 Krew 管理、ktop、kubectl-trace、kubectl-node-shell 等常用插件。
+description: 面向阿里云/专有云 K8s 运维的 kubectl 插件指南，涵盖 Krew 管理、ktop、kubectl-trace、kubectl-node-shell
+  等常用插件。
+summary: 面向阿里云/专有云 K8s 运维的 kubectl 插件指南，涵盖 Krew 管理、ktop、kubectl-trace、kubectl-node-shell
+  等常用插件。
 category: troubleshooting
 tags:
 - k8s
@@ -10,6 +13,9 @@ tags:
 - ktop
 - kubectl-trace
 - diagnostics
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: intermediate
 reading_level: intermediate
@@ -41,9 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # kubectl 插件实战指南
 

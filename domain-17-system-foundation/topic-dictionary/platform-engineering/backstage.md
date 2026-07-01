@@ -1,6 +1,7 @@
 ---
 title: Backstage
-description: 'Backstage 是 Spotify 开源的开发者门户框架，现为 CNCF 孵化项目。它通过统一的界面集成服务目录、文档、模板和插件，帮助平台工程团队构建内部...'
+description: Backstage 是 Spotify 开源的开发者门户框架，现为 CNCF 孵化项目。它通过统一的界面集成服务目录、文档、模板和插件，帮助平台工程团队构建内部...
+summary: Backstage 是 Spotify 开源的开发者门户框架，现为 CNCF 孵化项目。它通过统一的界面集成服务目录、文档、模板和插件，帮助平台工程团队构建内部...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - developer-portal
 - platform-engineering
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Backstage
 

@@ -1,6 +1,9 @@
 ---
 title: Kuberhealthy 合成监控
-description: 'Kuberhealthy 是 CNCF Sandbox 项目，在 Kubernetes 上运行合成监控检查（Synthetic Checks），以 Pod 方式...'
+description: Kuberhealthy 是 CNCF Sandbox 项目，在 Kubernetes 上运行合成监控检查（Synthetic Checks），以
+  Pod 方式...
+summary: Kuberhealthy 是 CNCF Sandbox 项目，在 Kubernetes 上运行合成监控检查（Synthetic Checks），以
+  Pod 方式...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - operations
 - monitoring
 - synthetic
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Kuberhealthy 合成监控（Kuberhealthy）
 

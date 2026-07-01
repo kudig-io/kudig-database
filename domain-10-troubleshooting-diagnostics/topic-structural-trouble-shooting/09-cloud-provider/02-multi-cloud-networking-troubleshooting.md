@@ -1,6 +1,7 @@
 ---
 title: 多云/混合云网络故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 多云/混合云[[skills/ts-networking.md|ts-networking]]指南'
+summary: 'title: 多云/混合云[[skills/ts-networking.md|ts-networking]]指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - coredns
 - docker
 - opa
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -43,8 +46,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 多云/混合云networking.md|ts-networking]]指南
 description: '# 多云/混合云网络故障排查指南'

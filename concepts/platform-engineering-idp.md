@@ -1,16 +1,20 @@
 ---
 title: 平台工程与 IDP
+summary: 平台工程与 IDP：平台工程已从基础设施运维演进为产品化思维驱动的内部开发者平台建设。核心理念：
 category: concepts
 tags:
-  - platform-engineering
-  - idp
-  - backstage
-  - crossplane
-  - k8s
+- platform-engineering
+- idp
+- backstage
+- crossplane
+- k8s
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # 平台工程与内部开发者平台（IDP）
 

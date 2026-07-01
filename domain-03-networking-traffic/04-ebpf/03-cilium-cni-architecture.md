@@ -1,6 +1,7 @@
 ---
 title: Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)
 description: '# Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)'
+summary: '# Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)'
 category: ebpf-technology
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - envoy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -59,8 +62,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md
   label: '故障树: cilium'
-created: "2026-05-23"
 ---
+
+
 
 # [[Cilium|Cilium]] CNI 架构与部署 (Cilium CNI Architecture and Deployment)
 

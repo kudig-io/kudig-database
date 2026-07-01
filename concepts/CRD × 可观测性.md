@@ -1,7 +1,10 @@
 ---
 title: CRD × 可观测性
-description: '[[entities/crd-custom-resources.md|crd custom resources]] 扩展 K8s API，[[entities/prometheus-grafana.md|prometheus grafana]] 是监控栈。两者的交汇点是 **Prometheus Operator**：它通过
-  CRD（ServiceMonitor、PodMonitor、PrometheusRule）将监控配置从手动脚本维护转变为声明式 GitOps 工作流。但 wiki '
+description: '[[entities/crd-custom-resources.md|crd custom resources]] 扩展 K8s API，[[entities/prometheus-grafana.md|prometheus
+  grafana]] 是监控栈。两者的交汇点是 **Prometheus Operator**：它通过 CRD（ServiceMonitor、PodMonitor、PrometheusRule）将监控配置从手动脚本维护转变为声明式
+  GitOps 工作流。但 wiki '
+summary: '[[entities/crd-custom-resources.md|crd custom resources]] 扩展 K8s API，[[entities/prometheus-grafana.md|prometheus
+  grafana]] 是监控栈。两者的交汇点是 **Prometheus Operator**：它通过 CRD（ServiceMonitor、PodMonitor、Pro...'
 category: synthesis
 tags:
 - k8s
@@ -14,6 +17,8 @@ tags:
 - hpa
 - networkpolicy
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,17 +38,18 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - observability-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/cilium.md]]"
-    type: uses
-  - target: "[[concepts/Deployment × Secret 管理.md]]"
-    type: uses
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
-  - target: "[[entities/prometheus.md]]"
-    type: uses
+- target: '[[entities/cilium.md]]'
+  type: uses
+- target: '[[concepts/Deployment × Secret 管理.md]]'
+  type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
+- target: '[[entities/prometheus.md]]'
+  type: uses
 ---
+
+
 
 # CRD × 可观测性
 

@@ -1,6 +1,7 @@
 ---
 title: K8s Autoscaling Failure 诊断与修复
 description: Kubernetes HPA/VPA/ClusterAutoscaler 不工作的完整诊断-修复-验证 Skill
+summary: Kubernetes HPA/VPA/ClusterAutoscaler 不工作的完整诊断-修复-验证 Skill
 category: Kubernetes-Incident-Response
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - autoscaling
 - metrics-server
 - prometheus-adapter
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -48,8 +51,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 # K8s Autoscaling Failure 诊断与修复
 
@@ -63,7 +67,7 @@ HPA、VPA 和 Cluster Autoscaler 是 [[Kubernetes|Kubernetes]] 弹性能力的�
 |------|---------|--------|
 | HPA TARGET 显示 `<unknown>` | `kubectl get hpa` | 0.95 |
 | HPA 不随负载变化扩缩容 | 压测时观察 `kubectl get hpa` | 0.90 |
-| ClusterAutoscaler Pod 异常 | `kubectl get [[Pods|pods]] -n kube-system \| grep autoscaler` | 0.90 |
+| ClusterAutoscaler Pod 异常 | `kubectl get [[Pods|pods]] -n kube-system | grep autoscaler` | 0.90 |
 | VPA recommendation 为空 | `kubectl get vpa` | 0.85 |
 | `unable to get metrics` 事件 | `kubectl describe hpa` | 0.95 |
 
@@ -268,7 +272,7 @@ flowchart TD
 | 工具 | 用途 | 典型命令 |
 |:---|:---|:---|
 | kubectl | Kubernetes CLI | `kubectl get/describe/logs/exec` |
-| jq | JSON处理 | `kubectl get ... -o json \| jq ...` |
+| jq | JSON处理 | `kubectl get ... -o json | jq ...` |
 | openssl | 证书检查 | `openssl x509 -in <cert> -noout -dates` |
 | tcpdump | 网络抓包 | `tcpdump -i any port <port> -n` |
 | strace | 系统调用追踪 | `strace -p <pid> -f` |

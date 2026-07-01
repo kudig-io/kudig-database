@@ -1,6 +1,7 @@
 ---
 title: FTA Diagnostic Execution Engine
 description: '- [[skills/ts-resources-scheduling.md|ts-resources-scheduling]] — 资源调度故障排查'
+summary: '- [[skills/ts-resources-scheduling.md|ts-resources-scheduling]] — 资源调度故障排查'
 category: skill
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - controller-manager
 - istio
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 # FTA Diagnostic Execution Engine
 

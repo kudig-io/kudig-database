@@ -1,11 +1,14 @@
 ---
 title: Topology Aware Routing
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
 - glossary
 - terminology
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # Topology Aware Routing
 
@@ -129,7 +133,7 @@ spec:
 | 症状 | 可能原因 | 排查步骤 |
 |------|----------|----------|
 | EndpointSlice 无 hints | Safeguard 触发回退 | `kubectl get endpointslice -l kubernetes.io/service-name=<svc> -o yaml` 检查 hints 字段 |
-| 流量仍跨可用区 | 端点数 < zone 数或节点缺少 zone 标签 | `kubectl get nodes --show-labels \| grep zone` |
+| 流量仍跨可用区 | 端点数 < zone 数或节点缺少 zone 标签 | `kubectl get nodes --show-labels | grep zone` |
 | 局部端点过载 | 流量集中在某个 zone | 评估使用 `trafficDistribution` 替代 |
 | 与 internalTrafficPolicy 冲突 | 同一 Service 同时配置了两者 | 移除其中一个配置 |
 

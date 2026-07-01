@@ -1,6 +1,7 @@
 ---
 title: 自建 Kubernetes 迁移至阿里云 ACK 生产实践指南 [migration]
 description: '# 自建 Kubernetes 迁移至阿里云 ACK 生产实践指南'
+summary: '# 自建 Kubernetes 迁移至阿里云 ACK 生产实践指南'
 category: migration
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - mysql
 - kafka
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -41,8 +44,9 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # 自建 [[Kubernetes|Kubernetes]] 迁移至阿里云 ACK 生产实践指南
 

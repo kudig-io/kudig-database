@@ -1,6 +1,7 @@
 ---
 title: 基于 SLO 的发布门控
 description: 50-75%         正常发布 + 加强监控
+summary: 50-75%         正常发布 + 加强监控
 category: domain
 tags:
 - sre
@@ -8,6 +9,8 @@ tags:
 - release-management
 - ci-cd
 - gate
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - sre-practices
-created: "2026-05-23"
 ---
+
+
 
 # 基于 SLO 的发布门控
 

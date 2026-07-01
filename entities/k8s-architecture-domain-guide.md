@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Architecture Domain Guide
 description: Kubernetes Architecture Domain Guide — Kubernetes 生产运维知识库
+summary: Kubernetes Architecture Domain Guide — Kubernetes 生产运维知识库
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - containerd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes Architecture Domain Guide
 
@@ -76,6 +80,8 @@ Distilled from domain-01-cluster-fundamentals (25 documents, Kubernetes v1.29-v1
 | XLarge | >1000 | >30000 | 16C32G | 5-node, 16C32G, NVMe |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[concepts/observability-pillars.md|observability-pillars]] — 01-observability-architecture-overview Pillars
 - [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview

@@ -1,6 +1,7 @@
 ---
 title: OSCAL Compass (entities)
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - oscal-compass
 - crd
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # OSCAL Compass
 

@@ -1,6 +1,7 @@
 ---
 title: Kubeflow
-description: 'Kubeflow 是 CNCF 孵化项目，为 Kubernetes 上的机器学习工作负载提供完整的工具链。它涵盖 ML Pipeline、Notebook、超参...'
+description: Kubeflow 是 CNCF 孵化项目，为 Kubernetes 上的机器学习工作负载提供完整的工具链。它涵盖 ML Pipeline、Notebook、超参...
+summary: Kubeflow 是 CNCF 孵化项目，为 Kubernetes 上的机器学习工作负载提供完整的工具链。它涵盖 ML Pipeline、Notebook、超参...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - ml
 - ai
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Kubeflow
 

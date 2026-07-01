@@ -1,12 +1,17 @@
 ---
 title: 服务质量
-description: 'QoS（Quality of Service）是 Kubernetes 对 Pod 的优先级分类机制。当节点资源不足时，kubelet 根据 QoS 类别决定驱...'
+description: QoS（Quality of Service）是 Kubernetes 对 Pod 的优先级分类机制。当节点资源不足时，kubelet 根据
+  QoS 类别决定驱...
+summary: QoS（Quality of Service）是 Kubernetes 对 Pod 的优先级分类机制。当节点资源不足时，kubelet 根据 QoS
+  类别决定驱...
 category: dictionary
 tags:
 - k8s
 - glossary
 - scheduling
 - qos
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 服务质量
 

@@ -1,6 +1,7 @@
 ---
-title: "topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践 [topic-fta]"
+title: 'topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践 [topic-fta]'
 description: '# topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践'
+summary: '# topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践'
 category: fta
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - agent
 - daemonset
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -43,8 +46,9 @@ prerequisites:
 fta_id: FTA-README-001
 component: Readme
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 # topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践
 

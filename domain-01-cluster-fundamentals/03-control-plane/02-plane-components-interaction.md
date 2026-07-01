@@ -1,6 +1,7 @@
 ---
 title: 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
 description: '# 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)'
+summary: '# 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)'
 category: control-plane
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - webhook
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -69,8 +72,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
 

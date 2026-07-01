@@ -1,6 +1,7 @@
 ---
 title: Declarative API
 description: '- 声明式 API 与面向终态设计'
+summary: '- 声明式 API 与面向终态设计'
 category: concepts
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - design-principle
 - etcd
 - apiserver
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Declarative API
 

@@ -1,6 +1,7 @@
 ---
 title: API Server 异常故障树分析 (skills)
 description: '- **范围**：APIServer 进程与配置、认证鉴权、请求排队与限流、依赖组件、证书与时间、网络与基础设施。'
+summary: '- **范围**：APIServer 进程与配置、认证鉴权、请求排队与限流、依赖组件、证书与时间、网络与基础设施。'
 category: skills
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - ingress
 - rbac
 - webhook
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 fta_id: FTA-APISERVER-001
 component: Apiserver
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 # API Server 异常故障树分析
 

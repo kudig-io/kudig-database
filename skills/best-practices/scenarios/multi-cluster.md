@@ -1,12 +1,15 @@
 ---
 title: '场景: 多集群管理'
 description: 多 Kubernetes 集群的管理、服务发现和统一治理
+summary: 多 Kubernetes 集群的管理、服务发现和统一治理
 category: scenario
 tags:
 - k8s
 - scenario
 - cloud
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-20'
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # 场景: 多集群管理
 

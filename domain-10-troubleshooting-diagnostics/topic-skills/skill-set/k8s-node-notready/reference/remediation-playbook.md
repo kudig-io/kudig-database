@@ -1,12 +1,21 @@
 ---
-title: "node notready Remediation Playbook"
+title: node notready Remediation Playbook
+summary: 'node notready Remediation Playbook：title: 修复操作手册 / Remediation Playbook
+  description: ''- REM-002 清理磁盘空间（容器镜像和日志）'' category: skills tags:'
 category: remediation
-skill_set: "k8s-node-notready"
-created: "2026-05-22"
-updated: "2026-05-22"
+tags:
+- reference
+- remediation
+- playbook
+- visibility/public
+tier: supporting
+created: '2026-05-22'
+updated: '2026-05-22'
+skill_set: k8s-node-notready
 last_updated: 2026-05-22
-tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
+
+
 
 ---
 title: 修复操作手册 / Remediation Playbook
@@ -497,7 +506,7 @@ version: 1.0.0
   2. **评估内核问题**:
      ```bash
      ssh <node-ip> "uname -r"
-     ssh <node-ip> "dmesg -T | grep -i 'bug\|error\|panic\|oops'"
+     ssh <node-ip> "dmesg -T | grep -i 'bug|error|panic|oops'"
      ```
   3. **应用内核补丁**（具体取决于 OS 发行版）:
      ```bash
@@ -696,5 +705,9 @@ kubectl get node <node-name> -o jsonpath='kubelet={.status.nodeInfo.kubeletVersi
    - `HH:MM:SS` - 决定升级
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[visibility-public|#visibility/public Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

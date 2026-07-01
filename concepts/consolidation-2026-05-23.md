@@ -1,25 +1,28 @@
 ---
 title: Consolidation Report 2026-05-23
-category: synthesis
-tags: [maintenance, consolidation]
-sources: []
 summary: Auto-generated consolidation report from wiki-lint --consolidate run on 2026-05-23.
+category: synthesis
+tags:
+- maintenance
+- consolidation
+tier: supporting
+sources: []
+created: '2026-05-23'
+updated: '2026-05-23'
 lifecycle: draft
 lifecycle_changed: 2026-05-23
-tier: peripheral
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 relationships:
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]"
-    type: uses
-  - target: "[[entities/istio.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service.md]]"
-    type: uses
-  - target: "[[entities/argo.md]]"
-    type: related_to
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]'
+  type: uses
+- target: '[[entities/istio.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/service.md]]'
+  type: uses
+- target: '[[entities/argo.md]]'
+  type: related_to
 ---
+
 
 # Consolidation Report — 2026-05-23
 

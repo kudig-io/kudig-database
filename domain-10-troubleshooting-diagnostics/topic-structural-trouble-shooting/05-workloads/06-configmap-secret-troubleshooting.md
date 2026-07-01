@@ -1,6 +1,7 @@
 ---
 title: ConfigMap 与 Secret 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: ConfigMap 与 Secret 故障排查指南'
+summary: 'title: ConfigMap 与 Secret 故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - opa
 - mysql
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ prerequisites:
 - etcd-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: ConfigMap 与 Secret 故障排查指南
 description: '# ConfigMap 与 Secret 故障排查指南'

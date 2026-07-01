@@ -1,6 +1,7 @@
 ---
 title: Harbor企业级镜像安全扫描深度实践
 description: '# Harbor企业级镜像安全扫描深度实践'
+summary: '# Harbor企业级镜像安全扫描深度实践'
 category: container-image-management
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - falco
 - redis
 - postgresql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -43,8 +46,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Harbor企业级镜像安全扫描深度实践
 

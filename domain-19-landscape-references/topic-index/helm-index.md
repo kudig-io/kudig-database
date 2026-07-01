@@ -1,6 +1,7 @@
 ---
 title: Helm 全局索引
 description: Helm Kubernetes 包管理器全局索引，聚合 Helm Chart、模板渲染、版本管理、插件等所有相关内容
+summary: Helm Kubernetes 包管理器全局索引，聚合 Helm Chart、模板渲染、版本管理、插件等所有相关内容
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rag
 - argocd
 - flux
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - cncf-ecosystem
 - helm-basics
 - gitops-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Helm|Helm]] 全局索引
 

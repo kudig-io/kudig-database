@@ -1,6 +1,7 @@
 ---
 title: 容器运行时接口（Container Runtime Interface, CRI）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - containerd
 - cri-o
 - docker
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,9 +33,9 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 容器运行时接口（[[concepts/container-runtime.md|Container Runtime]] Interface, CRI）
 

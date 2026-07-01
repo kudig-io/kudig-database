@@ -1,6 +1,7 @@
 ---
 title: 平台团队拓扑与运营 (Platform Team Topology and Operations)
 description: 'description: ''<!-- chunk: 概述 (Overview)'' -->## 概述 (Overview)'''
+summary: 'description: ''<!-- chunk: 概述 (Overview)'' -->## 概述 (Overview)'''
 category: general
 tags:
 - platform
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - flux
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -47,8 +50,9 @@ prerequisites:
 - tls-basics
 - policy-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 平台团队拓扑与运营 (Platform Team Topology and Operations)
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'

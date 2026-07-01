@@ -1,6 +1,7 @@
 ---
 title: OpenRouter 概述与核心架构
 description: '# OpenRouter 概述与核心架构'
+summary: '# OpenRouter 概述与核心架构'
 category: ai-coding
 tags:
 - ai
@@ -10,6 +11,8 @@ tags:
 - gateway
 - llm
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # OpenRouter 概述与核心架构
 

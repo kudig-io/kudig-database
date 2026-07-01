@@ -1,6 +1,7 @@
 ---
 title: 05 - Informer 架构与工作队列 (Informer & Workqueue)
 description: '# 05 - Informer 架构与工作队列 (Informer & Workqueue)'
+summary: '# 05 - Informer 架构与工作队列 (Informer & Workqueue)'
 category: design-principles
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - prometheus
 - operator
 - etcd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
-created: "2026-05-23"
 ---
+
+
 
 # 05 - Informer 架构与工作队列 (Informer & Workqueue)
 

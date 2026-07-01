@@ -1,6 +1,7 @@
 ---
 title: Skill 本地运行 Demo 指南
 description: '# Skill 本地运行 Demo 指南'
+summary: '# Skill 本地运行 Demo 指南'
 category: demo
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - docker
 - ingress
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -41,8 +44,9 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
-created: "2026-05-23"
 ---
+
+
 
 # [[SKILL|Skill]] 本地运行 Demo 指南
 

@@ -1,6 +1,7 @@
 ---
 title: OPA Gatekeeper 策略即代码深度实践
 description: '# OPA Gatekeeper 策略即代码深度实践'
+summary: '# OPA Gatekeeper 策略即代码深度实践'
 category: cloud-native-security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - cilium
 - calico
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -57,8 +60,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # OPA Gatekeeper 策略即代码深度实践
 

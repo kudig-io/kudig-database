@@ -1,11 +1,22 @@
 ---
 title: KUDIG 语料库深度评估报告 — 使用角度 × 运维工单角度
+summary: KUDIG 语料库深度评估报告 — 使用角度 × 运维工单角度：1. QA 命令多样性仅 8.2%（目标 90%）— 工单 Agent 诊断命令同质化严重
+  2. Critical severity 仅占 0.4% — 高危场景覆盖不足 3. Mock embedding 未接入真实语义模型 — RAG 检索质量受限
 category: assessment
-tags: [assessment, quality, sre, ops, rag, evaluation]
-created: "2026-05-23"
-updated: "2026-05-23"
+tags:
+- assessment
+- quality
+- sre
+- ops
+- rag
+- evaluation
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
 ---
+
+
 
 # KUDIG 语料库深度评估报告
 

@@ -1,6 +1,9 @@
 ---
 title: OpenFaaS
-description: 'OpenFaaS（Functions as a Service）是开源的 Serverless 框架，支持在 Kubernetes 和 Docker 上运行函数...'
+description: OpenFaaS（Functions as a Service）是开源的 Serverless 框架，支持在 Kubernetes 和 Docker
+  上运行函数...
+summary: OpenFaaS（Functions as a Service）是开源的 Serverless 框架，支持在 Kubernetes 和 Docker
+  上运行函数...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - openfaas
 - serverless
 - faas
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # OpenFaaS
 

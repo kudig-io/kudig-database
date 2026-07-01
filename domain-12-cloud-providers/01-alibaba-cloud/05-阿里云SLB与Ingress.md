@@ -1,28 +1,30 @@
 ---
 title: 阿里云SLB与Ingress
 description: 阿里云SLB类型、ACK Ingress Controller配置、健康检查与多可用区高可用
+summary: SLB/ALB/NLB负载均衡与ACK Ingress Controller的配置与故障处理。
 category: cloud-provider
 tags:
-  - alibaba-cloud
-  - ack
-  - slb
-  - ingress
-  - load-balancer
-  - alb
-  - nlb
-  - high-availability
-  - multi-az
+- alibaba-cloud
+- ack
+- slb
+- ingress
+- load-balancer
+- alb
+- nlb
+- high-availability
+- multi-az
+tier: core
 sources:
-  - 阿里云SLB产品文档
-  - ACK Ingress最佳实践
+- 阿里云SLB产品文档
+- ACK Ingress最佳实践
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
-summary: "SLB/ALB/NLB负载均衡与ACK Ingress Controller的配置与故障处理。"
 relationships:
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]"
-    type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]'
+  type: uses
 ---
+
 
 # 阿里云SLB与Ingress
 

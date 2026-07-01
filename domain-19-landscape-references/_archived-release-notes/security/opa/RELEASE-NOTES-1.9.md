@@ -1,6 +1,7 @@
 ---
 title: opa v1.9 Release Notes
 description: opa v1.9 Release Notes — Kubernetes 生产运维知识库
+summary: opa v1.9 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - wasm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - prometheus-basics
 - policy-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # opa v1.9 Release Notes
 

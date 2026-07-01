@@ -1,6 +1,7 @@
 ---
 title: '场景: 备份恢复'
 description: etcd 备份恢复、PV 数据备份、集群灾备方案
+summary: etcd 备份恢复、PV 数据备份、集群灾备方案
 category: scenario
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - backup-restore
 - etcd
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-20'
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 场景: 备份恢复
 

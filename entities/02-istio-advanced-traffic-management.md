@@ -1,6 +1,7 @@
 ---
 title: Istio 高级流量管理 (entities)
 description: '# Istio 高级流量管理'
+summary: '# Istio 高级流量管理'
 category: entities
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - istio
 - crd
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 # Istio 高级流量管理
 

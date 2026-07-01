@@ -1,6 +1,7 @@
 ---
 title: KUDIG 工单智能体语料改进规划（阿里云专有云版）
 description: 面向阿里云专有云工单智能体的 KUDIG Database 语料改进路线图与执行计划
+summary: 面向阿里云专有云工单智能体的 KUDIG Database 语料改进路线图与执行计划
 category: project
 tags:
 - ai-agent
@@ -11,8 +12,9 @@ tags:
 - k8s
 - sre
 - improvement-plan
-created: "2026-06-26"
-updated: "2026-06-26"
+tier: supporting
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06-26
 status: active
 audience:
@@ -20,6 +22,8 @@ audience:
 - SRE
 - 知识库维护者
 ---
+
+
 
 # KUDIG 工单智能体语料改进规划（阿里云专有云版）
 

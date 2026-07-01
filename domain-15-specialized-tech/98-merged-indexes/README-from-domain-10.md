@@ -1,6 +1,7 @@
 ---
 title: 'Domain-10: Kubernetes 扩展生态'
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - crd
 - operator
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gitops-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain-10: Kubernetes 扩展生态'

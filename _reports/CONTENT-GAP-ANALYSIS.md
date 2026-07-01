@@ -1,6 +1,9 @@
 ---
 title: 内容缺口分析报告 (reports)
-description: '| domain-03-networking-traffic | 1,291 | 需翻 3-4 倍 | Istio/Linkerd/Envoy 实操深度不足 |'
+description: '| domain-03-networking-traffic | 1,291 | 需翻 3-4 倍 | Istio/Linkerd/Envoy
+  实操深度不足 |'
+summary: '| domain-03-networking-traffic | 1,291 | 需翻 3-4 倍 | Istio/Linkerd/Envoy
+  实操深度不足 |'
 category: general
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - mysql
 - gateway
 - ebpf
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +36,9 @@ prerequisites:
 - ebpf-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # 内容缺口分析报告
 

@@ -1,6 +1,7 @@
 ---
 title: Trickster [entities]
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - flux
 - crd
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # Trickster
 

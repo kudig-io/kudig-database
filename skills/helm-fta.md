@@ -1,6 +1,7 @@
 ---
 title: Helm 发布异常故障树分析 (skills)
 description: '- **范围**：Chart 仓库与渲染、Hook、K8s API 兼容、权限与审计、状态管理。'
+summary: '- **范围**：Chart 仓库与渲染、Hook、K8s API 兼容、权限与审计、状态管理。'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - job
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 fta_id: FTA-HELM-001
 component: Helm
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 # Helm 发布异常故障树分析
 

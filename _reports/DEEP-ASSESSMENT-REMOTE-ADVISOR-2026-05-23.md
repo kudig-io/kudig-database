@@ -1,11 +1,20 @@
 ---
 title: KUDIG 语料库深度评估报告 — 远程顾问模式（非连接现场）
+summary: KUDIG 语料库深度评估报告 — 远程顾问模式（非连接现场）：当前 QA 语料的格式：
 category: assessment
-tags: [assessment, remote-advisor, chatbot, sre, expert-system]
-created: "2026-05-23"
-updated: "2026-05-23"
+tags:
+- assessment
+- remote-advisor
+- chatbot
+- sre
+- expert-system
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
 ---
+
+
 
 # KUDIG 语料库深度评估报告
 

@@ -1,6 +1,7 @@
 ---
 title: 网络协议栈详解
 description: '# 网络协议栈详解'
+summary: '# 网络协议栈详解'
 category: network-fundamentals
 tags:
 - network
@@ -13,6 +14,8 @@ tags:
 - mysql
 - networkpolicy
 - crd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -49,8 +52,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 网络协议栈详解
 
@@ -802,7 +806,7 @@ advanced_network_diagnostics() {
     
     # 4. 网络统计信息
     echo "4. 网络统计:"
-    cat /proc/net/dev | grep -v "lo\|face"
+    cat /proc/net/dev | grep -v "lo|face"
     echo ""
     
     # 5. TCP连接状态分析

@@ -1,11 +1,14 @@
 ---
 title: 硬件错误码速查大全
 description: 'description: ''<!-- chunk: 概述'' -->## 概述'''
+summary: 'description: ''<!-- chunk: 概述'' -->## 概述'''
 category: general
 tags:
 - k8s
 - gpu
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:
@@ -921,19 +925,19 @@ analyze_sel() {
     
     # 按传感器类型分类
     echo -e "\n--- CPU相关事件 ---"
-    ipmitool sel elist | grep -i "cpu\|processor"
+    ipmitool sel elist | grep -i "cpu|processor"
     
     echo -e "\n--- 内存相关事件 ---"
-    ipmitool sel elist | grep -i "memory\|dimm"
+    ipmitool sel elist | grep -i "memory|dimm"
     
     echo -e "\n--- 磁盘相关事件 ---"
-    ipmitool sel elist | grep -i "disk\|drive\|hdd\|ssd"
+    ipmitool sel elist | grep -i "disk|drive|hdd|ssd"
     
     echo -e "\n--- 电源相关事件 ---"
-    ipmitool sel elist | grep -i "power\|psu\|volt"
+    ipmitool sel elist | grep -i "power|psu|volt"
     
     echo -e "\n--- 温度相关事件 ---"
-    ipmitool sel elist | grep -i "temp\|thermal"
+    ipmitool sel elist | grep -i "temp|thermal"
     
     echo -e "\n--- 风扇相关事件 ---"
     ipmitool sel elist | grep -i "fan"

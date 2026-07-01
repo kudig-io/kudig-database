@@ -1,12 +1,15 @@
 ---
 title: 容器环境（Container Environment）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
 - glossary
 - terminology
 - kubelet
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -25,8 +28,9 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # 容器环境（Container Environment）
 

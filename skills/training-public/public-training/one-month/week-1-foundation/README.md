@@ -1,6 +1,7 @@
 ---
 title: 'Week 1: 地基建设期 (Days 1-7)'
 description: '- "K8s Master/Node 架构"'
+summary: '- "K8s Master/Node 架构"'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - containerd
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,8 +37,9 @@ prerequisites:
 - gpu-ml-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Week 1: 地基建设期 (Days 1-7)
 

@@ -1,6 +1,7 @@
 ---
 title: 多集群/联邦场景问题排查
 description: '# 多集群/联邦场景问题排查'
+summary: '# 多集群/联邦场景问题排查'
 category: general
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - networkpolicy
 - crd
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 # 多集群/联邦场景问题排查
 

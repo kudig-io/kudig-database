@@ -1,6 +1,7 @@
 ---
 title: Ingress Controllers
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - ingress
 - gateway
+tier: core
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,9 +38,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - tls-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # [[Ingress|Ingress]] Controllers
 

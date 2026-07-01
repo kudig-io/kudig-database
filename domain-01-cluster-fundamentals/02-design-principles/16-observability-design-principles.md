@@ -1,6 +1,7 @@
 ---
 title: 16 - 可观测性设计原则
 description: '# 16 - 可观测性设计原则'
+summary: '# 16 - 可观测性设计原则'
 category: design-principles
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - gateway
 - ebpf
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -54,8 +57,9 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
-created: "2026-05-23"
 ---
+
+
 
 # 16 - 可观测性设计原则
 

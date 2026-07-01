@@ -1,12 +1,21 @@
 ---
-title: "RBAC & Quota Remediation Playbook"
+title: RBAC & Quota Remediation Playbook
+summary: RBAC & Quota Remediation Playbook：kubectl auth can-i <verb> <resource> --as=system:serviceaccount:<ns>:<sa>
+  -n <ns>
 category: remediation
-skill_set: "k8s-rbac-quota"
-created: "2026-05-22"
-updated: "2026-05-22"
+tags:
+- reference
+- remediation
+- playbook
+- visibility/public
+tier: supporting
+created: '2026-05-22'
+updated: '2026-05-22'
+skill_set: k8s-rbac-quota
 last_updated: 2026-05-22
-tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
+
+
 
 # 修复操作手册 / Remediation Playbook
 
@@ -248,7 +257,7 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
 - **操作步骤**:
   1. **确认拒绝原因**:
      ```bash
-     kubectl get events -n <namespace> | grep -i "violated\|admission\|denied"
+     kubectl get events -n <namespace> | grep -i "violated|admission|denied"
      ```
   2. **评估安全影响后调整**:
 
@@ -323,3 +332,9 @@ kubectl get pods -n <namespace> -l app=<label>
 - Skill 版本: SKILL-RBAC-001 v1.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

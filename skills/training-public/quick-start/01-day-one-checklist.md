@@ -1,6 +1,7 @@
 ---
-title: "Day 1: 新人首日检查清单 [quick-start]"
+title: 'Day 1: 新人首日检查清单 [quick-start]'
 description: '# stern - 日志实时跟踪'
+summary: '# stern - 日志实时跟踪'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 1: 新人首日检查清单
 

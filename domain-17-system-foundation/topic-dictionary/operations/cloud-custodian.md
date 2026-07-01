@@ -1,6 +1,7 @@
 ---
 title: Cloud Custodian 云治理
-description: 'Cloud Custodian（c7n）是 CNCF Sandbox 项目，多云环境的统一治理引擎，通过声明式 YAML 策略管理云资源的合规性、安全和成本优化...'
+description: Cloud Custodian（c7n）是 CNCF Sandbox 项目，多云环境的统一治理引擎，通过声明式 YAML 策略管理云资源的合规性、安全和成本优化...
+summary: Cloud Custodian（c7n）是 CNCF Sandbox 项目，多云环境的统一治理引擎，通过声明式 YAML 策略管理云资源的合规性、安全和成本优化...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - operations
 - cloud
 - governance
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Cloud Custodian 云治理（Cloud Custodian）
 

@@ -1,6 +1,7 @@
 ---
 title: 存储工具演进
 description: '# 存储工具演进'
+summary: '# 存储工具演进'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - backup
 - prometheus
 - ceph
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # 存储工具演进
 

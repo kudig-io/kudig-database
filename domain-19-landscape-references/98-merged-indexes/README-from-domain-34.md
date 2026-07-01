@@ -1,6 +1,7 @@
 ---
 title: 'Domain-34: CNCF Landscape 开源项目'
 description: '## 概述'
+summary: '## 概述'
 category: cncf-landscape
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - istio
 - envoy
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -50,8 +53,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Domain-34: CNCF Landscape 开源项目
 

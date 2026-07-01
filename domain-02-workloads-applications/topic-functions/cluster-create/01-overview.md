@@ -1,6 +1,7 @@
 ---
 title: kubeadm init 集群初始化概览
 description: '| `cmd/kubeadm/app/cmd/init.go` | L351-L500 | 配置验证和默认值填充 |'
+summary: '| `cmd/kubeadm/app/cmd/init.go` | L351-L500 | 配置验证和默认值填充 |'
 category: functions
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - calico
 - coredns
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-18'
 difficulty: beginner
 reading_level: beginner
@@ -53,8 +56,9 @@ related_topics:
 - cluster setup
 - certificate
 - node join
-created: "2026-05-23"
 ---
+
+
 
 # kubeadm init 集群初始化概览
 

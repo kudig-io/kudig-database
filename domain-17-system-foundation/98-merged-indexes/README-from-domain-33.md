@@ -1,6 +1,7 @@
 ---
 title: 'Domain-33: Kubernetes Events 全域事件大全'
 description: '## 领域概述'
+summary: '## 领域概述'
 category: kubernetes-events
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - argocd
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -40,8 +43,9 @@ prerequisites:
 - gitops-basics
 - tls-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # Domain-33: Kubernetes Events 全域事件大全
 

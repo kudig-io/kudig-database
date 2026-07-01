@@ -1,6 +1,7 @@
 ---
 title: 第二十章：FTA + 大语言模型的新机遇 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
+summary: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
 category: fta
 tags:
 - fta
@@ -9,6 +10,8 @@ tags:
 - gateway
 - llm
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -36,8 +39,9 @@ prerequisites:
 fta_id: FTA-20_LLM_OPPORTUNITIES-001
 component: 20 Llm Opportunities
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 title: 第二十章：FTA + 大语言模型的新机遇
 description: '**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'

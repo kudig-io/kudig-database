@@ -1,6 +1,7 @@
 ---
 title: Elastic Stack企业级日志分析深度实践
 description: '# Elastic Stack企业级日志分析深度实践'
+summary: '# Elastic Stack企业级日志分析深度实践'
 category: enterprise-monitoring-alerting
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - elasticsearch
 - daemonset
 - job
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -51,8 +54,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # Elastic Stack企业级日志分析深度实践
 

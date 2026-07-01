@@ -1,6 +1,7 @@
 ---
 title: 容器镜像优化
 description: '# 容器镜像优化'
+summary: '# 容器镜像优化'
 category: dictionary
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - docker
 - harbor
 - wasm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -26,8 +29,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 # 容器镜像优化
 

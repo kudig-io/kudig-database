@@ -1,6 +1,7 @@
 ---
 title: Pod 长期 Pending：节点 CPU/内存资源不足
 description: 专有云 ACK 集群业务扩容后大量 Pod 处于 Pending 状态，根因为节点资源不足的工单闭环样本。
+summary: 专有云 ACK 集群业务扩容后大量 Pod 处于 Pending 状态，根因为节点资源不足的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -10,6 +11,9 @@ tags:
 - capacity
 - p1
 - scheduling
+tier: peripheral
+created: '2026-06-26T10:00:00+08:00'
+updated: '2026-06-26T12:20:00+08:00'
 incident_id: INC-2026-ACK-012
 priority: P1
 severity: high
@@ -21,9 +25,7 @@ skill_ref:
 - Pod 调度排障
 fta_ref:
 - 'FTA: 资源不足导致 Pod Pending'
-created: '2026-06-26T10:00:00+08:00'
-updated: '2026-06-26T12:20:00+08:00'
-last_updated: 2026-06-26T12:20:00+08:00
+last_updated: 2026-06-26 12:20:00+08:00
 duplicate_of: INC-2026-ACK-047
 status: duplicate
 duplication_reason: 与 "INC-2026-ACK-047" 主题重复，内容角度相似，降低 RAG 权重
@@ -50,13 +52,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 

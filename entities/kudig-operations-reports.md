@@ -1,6 +1,7 @@
 ---
 title: KUDIG 项目运维报告：Comate 操作记录与计划
 description: '# KUDIG 项目运维报告'
+summary: '# KUDIG 项目运维报告'
 category: reference
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - enhancement
 - code-review
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 - 操作记录与计划
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG 项目运维报告
 

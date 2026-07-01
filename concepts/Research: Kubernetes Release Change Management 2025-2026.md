@@ -1,16 +1,21 @@
 ---
-title: "Research: Kubernetes Release Change Management 2025-2026"
+title: 'Research: Kubernetes Release Change Management 2025-2026'
+summary: 'Research: Kubernetes Release Change Management 2025-2026：Kubernetes 发布与变更管理在
+  2025-2026 年进入"渐进式交付标准化"时代，三大趋势共同推动了变更管理从"大爆炸部署"到"可观测、可控、可回滚"的范式转变：'
 category: synthesis
 tags:
-  - release
-  - change-management
-  - progressive-delivery
-  - k8s
-  - research
+- release
+- change-management
+- progressive-delivery
+- k8s
+- research
+tier: supporting
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # Research: Kubernetes Release Change Management 2025-2026
 
@@ -117,3 +122,7 @@ GitOps 在变更管理中的核心作用：
 - [[concepts/platform-engineering-idp.md|platform engineering idp]] — 内部开发者平台（IDP）将发布流程标准化为自助式工作流，提升交付效率
 - [[concepts/slo-error-budget-framework.md|slo error budget framework]] — Error Budget 决策框架指导发布频率与变更风险容忍度的平衡
 - [[concepts/k8s-observability-stack.md|k8s observability stack]] — 发布可观测性（金丝雀分析、自动化回滚）依赖实时指标采集与评估引擎
+
+## Related
+
+- [[research|#research Hub]] — tag hub

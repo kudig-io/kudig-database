@@ -1,6 +1,7 @@
 ---
 title: 网络连通性故障排查
 description: '# 25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)'
+summary: '# 25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)'
 category: troubleshooting
 tags:
 - network
@@ -13,6 +14,8 @@ tags:
 - cilium
 - flannel
 - calico
+tier: core
+created: '2026-05-23'
 last_updated: 2026-03
 difficulty: intermediate
 reading_level: intermediate
@@ -59,8 +62,9 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
-created: "2026-05-23"
 ---
+
+
 
 # 25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)
 
@@ -456,7 +460,7 @@ ipvsadm -Ln | grep -A5 <service-cluster-ip>
 
 # ========== 3. kube-proxy状态检查 ==========
 kubectl get pods -n kube-system -l k8s-app=kube-proxy
-kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=50 | grep -i "error\|warn"
+kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=50 | grep -i "error|warn"
 ```
 
 ### 4.2 NodePort / LoadBalancer 问题

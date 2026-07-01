@@ -1,11 +1,14 @@
 ---
 title: Web3 GameFi 架构设计 — 阿里云视角
 description: 'title: Web3 GameFi架构设计'
+summary: 'title: Web3 GameFi架构设计'
 category: general
 tags:
 - architecture
 - best-practice
 - redis
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Web3 GameFi架构设计
 description: '# Web3 GameFi 架构设计 — 阿里云视角'

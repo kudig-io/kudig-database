@@ -1,6 +1,7 @@
 ---
 title: Downward API
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - terminology
 - kubelet
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -25,8 +28,9 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # Downward API
 
@@ -244,7 +248,7 @@ spec:
   kubectl exec <pod-name> -n prod -- env | grep -E "POD_|NODE_|CPU_|MEM_"
   
   # 查看 Pod spec 确认 Downward API 配置
-  kubectl get pod <pod-name> -n prod -o yaml | grep -A 5 "fieldRef\|resourceFieldRef"
+  kubectl get pod <pod-name> -n prod -o yaml | grep -A 5 "fieldRef|resourceFieldRef"
   ```
 
 ### downwardAPI 卷文件未更新

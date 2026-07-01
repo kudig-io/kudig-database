@@ -2,6 +2,8 @@
 title: StatefulSet Pod 启动失败：PVC 未绑定
 description: 专有云 ACK 集群 Kafka StatefulSet 因 volumeClaimTemplate 指定了不存在的 StorageClass
   导致 PVC 长时间 Pending 的工单闭环样本。
+summary: 专有云 ACK 集群 Kafka StatefulSet 因 volumeClaimTemplate 指定了不存在的 StorageClass 导致
+  PVC 长时间 Pending 的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -12,6 +14,9 @@ tags:
 - kafka
 - p1
 - storage
+tier: peripheral
+created: '2026-06-26T10:00:00+08:00'
+updated: '2026-06-26T13:15:00+08:00'
 incident_id: INC-2026-ACK-028
 priority: P1
 severity: high
@@ -23,9 +28,7 @@ skill_ref:
 - StatefulSet 存储管理
 fta_ref:
 - 'FTA: StatefulSet PVC 未绑定'
-created: '2026-06-26T10:00:00+08:00'
-updated: '2026-06-26T13:15:00+08:00'
-last_updated: 2026-06-26T13:15:00+08:00
+last_updated: 2026-06-26 13:15:00+08:00
 duplicate_of: INC-2026-ACK-048
 status: duplicate
 duplication_reason: 与 "INC-2026-ACK-048" 主题重复，内容角度相似，降低 RAG 权重
@@ -53,15 +56,17 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-043-statefulset-pvc-unbound.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-043-statefulset-pvc-unbound.md]]'
   type: related_to
-- target: "[[concepts/statefulset.md]]"
+- target: '[[concepts/statefulset.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -250,7 +255,7 @@ kubectl get pvc -n middleware | grep kafka-broker-2
 
 # 2. Pod 已 Running 并挂载云盘
 kubectl get pod -n middleware kafka-broker-2 -o wide
-kubectl describe pod -n middleware kafka-broker-2 | grep -A 10 "Volumes\|Mounts"
+kubectl describe pod -n middleware kafka-broker-2 | grep -A 10 "Volumes|Mounts"
 
 # 3. Kafka broker 已加入集群
 kubectl logs -n middleware kafka-broker-2 --tail=100 | grep -iE "started|broker"

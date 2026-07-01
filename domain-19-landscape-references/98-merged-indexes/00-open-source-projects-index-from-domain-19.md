@@ -1,6 +1,7 @@
 ---
 title: Domain-19 论文与参考 — 开源项目索引
 description: 本域为学术与最佳实践文档，主要关联的开源项目分布在其他 Domain。
+summary: 本域为学术与最佳实践文档，主要关联的开源项目分布在其他 Domain。
 category: papers
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - falco
 - ebpf
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -48,8 +51,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Domain-19 论文与参考 — 开源项目索引
 
@@ -103,3 +107,9 @@ created: "2026-05-23"
 - Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro...
 - Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and ...
 - Kubernetes 自动化运维与SRE实践 (Automation and SRE Practices)
+
+## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub

@@ -1,6 +1,9 @@
 ---
 title: 06 - 有状态服务迁移 [migration]
-description: 'description: ''#<!-- chunk: 2.1 方案 A: 迁移到阿里云 RDS（推荐）'' -->## 2.1 方案 A: 迁移到阿里云 RDS（推荐）'''
+description: 'description: ''#<!-- chunk: 2.1 方案 A: 迁移到阿里云 RDS（推荐）'' -->## 2.1 方案
+  A: 迁移到阿里云 RDS（推荐）'''
+summary: 'description: ''#<!-- chunk: 2.1 方案 A: 迁移到阿里云 RDS（推荐）'' -->## 2.1 方案 A: 迁移到阿里云
+  RDS（推荐）'''
 category: general
 tags:
 - migration
@@ -13,6 +16,8 @@ tags:
 - elasticsearch
 - statefulset
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +41,9 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 06 - 有状态服务迁移
 description: '#<!-- chunk: 2.1 方案 A: 迁移到阿里云 RDS（推荐）' -->## 2.1 方案 A: 迁移到阿里云 RDS（推荐）'

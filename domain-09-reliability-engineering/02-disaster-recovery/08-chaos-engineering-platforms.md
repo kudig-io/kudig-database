@@ -1,6 +1,7 @@
 ---
 title: 混沌工程平台实践：LitmusChaos 与 Chaos Mesh
 description: '# 混沌工程平台实践：LitmusChaos 与 Chaos Mesh'
+summary: '# 混沌工程平台实践：LitmusChaos 与 Chaos Mesh'
 category: disaster-recovery
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -53,8 +56,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 混沌工程平台实践：LitmusChaos 与 Chaos Mesh
 

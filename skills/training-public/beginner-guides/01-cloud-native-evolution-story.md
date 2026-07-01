@@ -1,6 +1,7 @@
 ---
 title: 云原生演进故事——从物理机到 Kubernetes
 description: 用故事线串联云原生技术演进史：物理机 → 虚拟机 → 容器 → 编排。让小白理解每个技术出现的痛点与解决思路，建立 K8s 学习的认知框架
+summary: 用故事线串联云原生技术演进史：物理机 → 虚拟机 → 容器 → 编排。让小白理解每个技术出现的痛点与解决思路，建立 K8s 学习的认知框架
 category: learning
 tags:
 - tutorial
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - istio
 - containerd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: beginner
 reading_level: beginner
@@ -42,8 +45,9 @@ prerequisites:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 云原生演进故事——从物理机到 [[Kubernetes|Kubernetes]]
 

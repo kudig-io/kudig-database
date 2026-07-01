@@ -1,6 +1,7 @@
 ---
 title: KUDIG 质量评估与索引体系
 description: '### 最佳实践质量评估'
+summary: '### 最佳实践质量评估'
 category: reference
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - index
 - storage-index
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,8 +25,9 @@ trigger_keywords:
 - 质量评估与索引体系
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG 质量评估与索引体系
 

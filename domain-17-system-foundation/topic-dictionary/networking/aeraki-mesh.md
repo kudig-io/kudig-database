@@ -1,6 +1,7 @@
 ---
 title: Aeraki Mesh 七层网格
-description: 'Aeraki Mesh 是腾讯开源的服务网格方案，专注于解决 Istio 只支持 HTTP/gRPC 协议的局限性，通过 Aeraki 协议框架将服务网格能力扩...'
+description: Aeraki Mesh 是腾讯开源的服务网格方案，专注于解决 Istio 只支持 HTTP/gRPC 协议的局限性，通过 Aeraki 协议框架将服务网格能力扩...
+summary: Aeraki Mesh 是腾讯开源的服务网格方案，专注于解决 Istio 只支持 HTTP/gRPC 协议的局限性，通过 Aeraki 协议框架将服务网格能力扩...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - networking
 - service-mesh
 - l7
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Aeraki Mesh 七层网格（Aeraki Mesh）
 

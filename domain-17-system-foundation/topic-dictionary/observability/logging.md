@@ -1,6 +1,7 @@
 ---
 title: 日志体系
-description: 'Kubernetes 日志体系涵盖容器标准输出、节点级日志采集和集中式日志平台的完整链路，是可观测性三大支柱之一，为故障诊断和安全审计提供基础数据。...'
+description: Kubernetes 日志体系涵盖容器标准输出、节点级日志采集和集中式日志平台的完整链路，是可观测性三大支柱之一，为故障诊断和安全审计提供基础数据。...
+summary: Kubernetes 日志体系涵盖容器标准输出、节点级日志采集和集中式日志平台的完整链路，是可观测性三大支柱之一，为故障诊断和安全审计提供基础数据。...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - logging
 - fluentd
 - loki
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -24,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # 日志体系（Logging）
 

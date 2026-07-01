@@ -1,6 +1,7 @@
 ---
 title: 'Topic: Terway 专题 — 阿里云容器网络 (CNI) 全栈知识体系'
 description: '# Topic: Terway 专题 — 阿里云容器网络 (CNI) 全栈知识体系'
+summary: '# Topic: Terway 专题 — 阿里云容器网络 (CNI) 全栈知识体系'
 category: terway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - networkpolicy
 - crd
 - ebpf
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -38,8 +41,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Topic: Terway 专题 — 阿里云容器网络 (CNI) 全栈知识体系
 

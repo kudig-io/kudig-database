@@ -1,6 +1,7 @@
 ---
 title: Local ephemeral storage（本地临时存储）
 description: '# Local ephemeral storage（本地临时存储）'
+summary: '# Local ephemeral storage（本地临时存储）'
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - kubelet
 - rag
 - agent
+tier: peripheral
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -27,9 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # Local ephemeral storage（本地临时存储）
 

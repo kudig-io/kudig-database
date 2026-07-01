@@ -1,6 +1,7 @@
 ---
 title: Helm 部署故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Helm 部署故障排查指南'
+summary: 'title: Helm 部署故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - rbac
 - crd
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -40,8 +43,9 @@ prerequisites:
 - troubleshooting-methodology
 - helm-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Helm|Helm]] 部署故障排查指南
 description: '# Helm 部署故障排查指南'

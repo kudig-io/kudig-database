@@ -1,14 +1,22 @@
 ---
-scenario_id: "MULTI-002"
-type: "multi-fault"
-skills: ['02-pod-crashloop-oomkilled', '10-image-pull-failure']
-created: "2026-05-23"
-updated: "2026-05-23"
-last_updated: 2026-05-23
-title: "Pod CrashLoop + 镜像拉取失败并发"
+title: Pod CrashLoop + 镜像拉取失败并发
+summary: Pod CrashLoop + 镜像拉取失败并发：新部署的服务所有Pod处于ImagePullBackOff，部分已存在的Pod反复CrashLoopBackOff。
 category: uncategorized
-tags: ["uncategorized", "visibility/public"]
+tags:
+- uncategorized
+- visibility/public
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+scenario_id: MULTI-002
+type: multi-fault
+skills:
+- 02-pod-crashloop-oomkilled
+- 10-image-pull-failure
+last_updated: 2026-05-23
 ---
+
+
 
 # Pod CrashLoop + 镜像拉取失败并发
 
@@ -46,3 +54,7 @@ tags: ["uncategorized", "visibility/public"]
 2. 配置级联告警（当多个关联指标同时异常时触发）
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

@@ -1,6 +1,7 @@
 ---
 title: API-initiated Eviction
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - pdb
 - daemonset
 - gateway
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # API-initiated Eviction
 

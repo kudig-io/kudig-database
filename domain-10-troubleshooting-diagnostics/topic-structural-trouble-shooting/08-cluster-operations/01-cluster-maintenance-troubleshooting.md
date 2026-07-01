@@ -1,6 +1,7 @@
 ---
 title: 集群运维与升级故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 集群运维与升级故障排查指南'
+summary: 'title: 集群运维与升级故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - helm
 - containerd
 - docker
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -39,8 +42,9 @@ prerequisites:
 - troubleshooting-methodology
 - helm-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 集群运维与升级故障排查指南
 description: '# 集群运维与升级故障排查指南'

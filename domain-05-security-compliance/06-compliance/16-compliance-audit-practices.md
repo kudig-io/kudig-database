@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 合规与审计
 description: '| CIS Kubernetes Benchmark | 容器平台 | 配置安全基线 |'
+summary: '| CIS Kubernetes Benchmark | 容器平台 | 配置安全基线 |'
 category: security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - elasticsearch
 - statefulset
 - daemonset
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -54,8 +57,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 合规与审计
 

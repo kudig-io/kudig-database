@@ -1,6 +1,7 @@
 ---
 title: topic-ai-agent MOC (domain-14-ai-ml-infra)
 description: topic-ai-agent 专题导航页，覆盖 57 篇文档
+summary: topic-ai-agent 专题导航页，覆盖 57 篇文档
 category: moc
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - llm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 - infra
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # topic-ai-agent [[MOC|MOC]]
 

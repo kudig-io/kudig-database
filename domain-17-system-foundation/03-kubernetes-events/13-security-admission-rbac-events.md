@@ -1,6 +1,7 @@
 ---
 title: 13 - 安全、准入控制与 RBAC 事件
 description: 'title: 13 - 安全、准入控制与 RBAC 事件'
+summary: 'title: 13 - 安全、准入控制与 RBAC 事件'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - istio
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 13 - 安全、准入控制与 RBAC 事件
 description: '# 13 - 安全、准入控制与 RBAC 事件'

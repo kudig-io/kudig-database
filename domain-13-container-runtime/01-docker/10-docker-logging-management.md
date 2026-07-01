@@ -1,6 +1,7 @@
 ---
 title: Docker 日志管理与分析
 description: '# Docker 日志管理与分析'
+summary: '# Docker 日志管理与分析'
 category: docker
 tags:
 - docker
@@ -13,6 +14,8 @@ tags:
 - job
 - rbac
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -48,8 +51,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
-created: "2026-05-23"
 ---
+
+
 
 # Docker 日志管理与分析
 

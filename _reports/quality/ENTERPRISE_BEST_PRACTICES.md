@@ -1,6 +1,7 @@
 ---
 title: Kubernetes扩展生态企业级最佳实践 (reports)
 description: '# Kubernetes扩展生态企业级最佳实践'
+summary: '# Kubernetes扩展生态企业级最佳实践'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - mysql
 - statefulset
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - monitoring-basics
 - gitops-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes扩展生态企业级最佳实践
 

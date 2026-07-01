@@ -1,6 +1,7 @@
 ---
 title: AI安全与模型保护
 description: 'title: AI安全与模型保护'
+summary: 'title: AI安全与模型保护'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - redis
 - ingress
 - gateway
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - redis-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: AI安全与模型保护
 description: '# AI安全与模型保护'
@@ -378,8 +382,8 @@ class PromptInjectionDefense:
             r"forget\s+(all\s+)?(previous|above)",
             r"new\s+instructions?:",
             r"system\s*:",
-            r"<\|im_start\|>",  # ChatML标记
-            r"<\|im_end\|>",
+            r"<|im_start|>",  # ChatML标记
+            r"<|im_end|>",
             r"###\s*Instruction",
             r"You\s+are\s+now",
             r"Pretend\s+(you\s+are|to\s+be)",
@@ -403,7 +407,7 @@ class PromptInjectionDefense:
     def sanitize_input(self, user_input: str) -> str:
         """清洗用户输入"""
         # 移除特殊标记
-        sanitized = re.sub(r'<\|.*?\|>', '', user_input)
+        sanitized = re.sub(r'<|.*?|>', '', user_input)
         
         # 移除多余空白
         sanitized = re.sub(r'\s+', ' ', sanitized).strip()
@@ -1377,5 +1381,7 @@ recommendations:
 - 13-ai-platform-observability
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]

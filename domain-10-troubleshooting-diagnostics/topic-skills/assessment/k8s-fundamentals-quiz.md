@@ -1,6 +1,7 @@
 ---
 title: K8s 基础知识考核
 description: A. 调度器无法找到合适的节点
+summary: A. 调度器无法找到合适的节点
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - docker
 - mysql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -37,8 +40,9 @@ prerequisites:
 skill_id: SKILL-K8S_FUNDAMENTALS_QUIZ-001
 skill_name: K8s 基础知识考核
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 # K8s 基础知识考核
 

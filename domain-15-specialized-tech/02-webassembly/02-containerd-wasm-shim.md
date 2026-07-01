@@ -1,6 +1,7 @@
 ---
 title: containerd Wasm 运行时
 description: 1. [containerd 架构回顾](#1-containerd-架构回顾)
+summary: 1. [containerd 架构回顾](#1-containerd-架构回顾)
 category: webassembly-cloud-native
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[containerd|containerd]] Wasm 运行时
 # containerd Wasm Runtime

@@ -1,17 +1,25 @@
 ---
-dialogue_id: "DIALOGUE-SCHEDULER-001"
-skill_id: "SKILL-SCHEDULER-001"
-role: "remote-consultant"
-language: "zh"
-severity: "high"
-status: "reviewed"
+title: Pod 一直 Pending，无法调度 — 远程顾问对话脚本
+summary: Pod 一直 Pending，无法调度 — 远程顾问对话脚本：kubectl describe pod <pod-name> -n <namespace>
+category: dialogue
+tags:
+- dialogue
+- remote-consultant
+- troubleshooting
+- visibility/public
+tier: supporting
 created: 2026-05-21
 updated: 2026-05-21
+dialogue_id: DIALOGUE-SCHEDULER-001
+skill_id: SKILL-SCHEDULER-001
+role: remote-consultant
+language: zh
+severity: high
+status: reviewed
 last_updated: 2026-05-21
-title: "Pod 一直 Pending，无法调度 — 远程顾问对话脚本"
-category: dialogue
-tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
+
+
 
 # Pod 一直 Pending，无法调度 — 远程顾问对话脚本
 
@@ -223,3 +231,7 @@ kubectl get pod <pod-name> -n <namespace> -w
 - [[concepts/kube-scheduler.md|Kubernetes Scheduler]]
 - [[concepts/node-taint.md|节点 Taint 与 Toleration]]
 - [[concepts/pod-affinity.md|Pod 亲和性与反亲和性]]
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

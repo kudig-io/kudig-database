@@ -1,6 +1,7 @@
 ---
 title: 13 - API 网关性能基准测试与调优
 description: '│ L2: 单插件        │ 仅 JWT 认证 / 仅限流，隔离单插件开销          │'
+summary: '│ L2: 单插件        │ 仅 JWT 认证 / 仅限流，隔离单插件开销          │'
 category: cloud-native-api-gateway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - cilium
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 13 - API 网关性能基准测试与调优
 

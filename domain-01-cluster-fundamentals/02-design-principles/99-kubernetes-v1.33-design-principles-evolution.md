@@ -1,6 +1,7 @@
 ---
 title: Kubernetes v1.29-v1.33 设计原理演进与影响分析
 description: '# Kubernetes v1.29-v1.33 设计原理演进与影响分析'
+summary: '# Kubernetes v1.29-v1.33 设计原理演进与影响分析'
 category: design-principles
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - job
 - crd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -54,8 +57,9 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] v1.29-v1.33 设计原理演进与影响分析
 

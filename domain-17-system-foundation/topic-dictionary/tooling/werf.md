@@ -1,6 +1,9 @@
 ---
 title: werf CI/CD 工具
-description: 'werf 是 Flant 开源的 CNCF Sandbox 项目，一站式 CI/CD 工具，集成构建、部署和运维功能，支持 GitOps 工作流，将 Docke...'
+description: werf 是 Flant 开源的 CNCF Sandbox 项目，一站式 CI/CD 工具，集成构建、部署和运维功能，支持 GitOps
+  工作流，将 Docke...
+summary: werf 是 Flant 开源的 CNCF Sandbox 项目，一站式 CI/CD 工具，集成构建、部署和运维功能，支持 GitOps 工作流，将
+  Docke...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - tooling
 - ci-cd
 - gitops
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # werf CI/CD 工具（werf）
 

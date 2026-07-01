@@ -1,6 +1,7 @@
 ---
 title: AI 语料库配置：RAG 分块策略、场景化 Profile 与向量库构建
 description: '# AI 语料库配置'
+summary: '# AI 语料库配置'
 category: reference
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - profile
 - corpus
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 - 与向量库构建
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # AI 语料库配置
 

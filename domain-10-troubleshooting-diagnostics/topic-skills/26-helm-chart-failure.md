@@ -1,6 +1,7 @@
 ---
 title: Helm Chart 部署与回滚故障诊断
 description: Skill — Helm Chart 部署与回滚故障诊断
+summary: Skill — Helm Chart 部署与回滚故障诊断
 category: skills
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - chart
 - deployment
 - rollback
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: advanced
 reading_level: advanced
@@ -41,8 +44,9 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
-created: "2026-05-23"
 ---
+
+
 
 # [[Helm|Helm]] Chart 部署与回滚故障诊断
 

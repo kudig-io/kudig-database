@@ -1,6 +1,7 @@
 ---
 title: AI Agent 工程专题 (domain-14-ai-ml-infra)
 description: '# AI Agent 工程专题'
+summary: '# AI Agent 工程专题'
 category: ai-agent
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - gpu
 - vllm
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -35,8 +38,9 @@ prerequisites:
 - prometheus-basics
 - gpu-scheduling-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # AI Agent 工程专题
 

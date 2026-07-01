@@ -1,6 +1,7 @@
 ---
 title: 01 - 迁移评估与规划 [migration]
 description: 'description: echo "=== 3. 存储资源 ==="'
+summary: 'description: echo "=== 3. 存储资源 ==="'
 category: general
 tags:
 - migration
@@ -13,6 +14,8 @@ tags:
 - flannel
 - calico
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 01 - 迁移评估与规划
 description: echo "=== 3. 存储资源 ==="

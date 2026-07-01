@@ -1,51 +1,56 @@
 ---
 title: OCI 运行时对比与生产实践
-description: 对比 runc、crun、Kata Containers、gVisor 四类 OCI runtime 在阿里云专有云 Kubernetes 中的性能、安全、适用场景与选型建议。
+description: 对比 runc、crun、Kata Containers、gVisor 四类 OCI runtime 在阿里云专有云 Kubernetes
+  中的性能、安全、适用场景与选型建议。
+summary: 对比 runc、crun、Kata Containers、gVisor 四类 OCI runtime 在阿里云专有云 Kubernetes 中的性能、安全、适用场景与选型建议。
 category: container-runtime
 tags:
-  - oci
-  - runc
-  - crun
-  - kata-containers
-  - gvisor
-  - sandboxed-container
-  - security
-  - alibaba-cloud
+- oci
+- runc
+- crun
+- kata-containers
+- gvisor
+- sandboxed-container
+- security
+- alibaba-cloud
+tier: supporting
 created: '2026-06-29'
 updated: '2026-06-29'
 last_updated: 2026-06-29
 difficulty: advanced
 audience:
-  - 架构师
-  - SRE
-  - 安全工程师
+- 架构师
+- SRE
+- 安全工程师
 estimated_read_time: 18min
 intent_queries:
-  - runc crun Kata gVisor 选型
-  - 阿里云专有云安全容器怎么用
-  - Kubernetes RuntimeClass 配置
+- runc crun Kata gVisor 选型
+- 阿里云专有云安全容器怎么用
+- Kubernetes RuntimeClass 配置
 trigger_keywords:
-  - OCI runtime
-  - runc
-  - crun
-  - kata
-  - gvisor
-  - RuntimeClass
-  - sandboxed container
+- OCI runtime
+- runc
+- crun
+- kata
+- gvisor
+- RuntimeClass
+- sandboxed container
 prerequisites:
-  - domain-13-container-runtime/03-containerd-cri-o/01-containerd-production-operations.md
-  - domain-13-container-runtime/03-containerd-cri-o/02-cri-o-production-guide.md
-  - domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md
+- domain-13-container-runtime/03-containerd-cri-o/01-containerd-production-operations.md
+- domain-13-container-runtime/03-containerd-cri-o/02-cri-o-production-guide.md
+- domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md
 k8s_versions:
-  - '1.28'
-  - '1.29'
-  - '1.30'
-  - '1.31'
-  - '1.32'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: KUDIG Team
-    role: contributor
+- name: KUDIG Team
+  role: contributor
 ---
+
+
 
 # OCI 运行时对比与生产实践
 

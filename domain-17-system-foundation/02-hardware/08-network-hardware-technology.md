@@ -1,6 +1,7 @@
 ---
 title: 网络硬件技术
 description: '# 网络硬件技术'
+summary: '# 网络硬件技术'
 category: hardware
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - ceph
 - nvidia
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 网络硬件技术
 

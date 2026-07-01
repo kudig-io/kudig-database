@@ -1,13 +1,17 @@
 ---
 title: 智能路由与 Provider 选择
-description: '**文档类型**: 架构深度 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Provider Routing, Load Balancing, Fallback, Auto Router,
-  Throughput, Latency, Performance Threshold'
+description: '**文档类型**: 架构深度 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Provider Routing,
+  Load Balancing, Fallback, Auto Router, Throughput, Latency, Performance Threshold'
+summary: '**文档类型**: 架构深度 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Provider Routing,
+  Load Balancing, Fallback, Auto Router, Throughput, Latency, Performance Threshold'
 category: ai-coding
 tags:
 - ai
 - coding
 - copilot
 - code-generation
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +30,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 智能路由与 Provider 选择
 

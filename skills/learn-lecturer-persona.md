@@ -1,11 +1,14 @@
 ---
 title: K8S 讲师角色设定与场景规范
 description: '**用途**: 工单数字人 (Ticket Digital Human) 的台词设计与知识库'
+summary: '**用途**: 工单数字人 (Ticket Digital Human) 的台词设计与知识库'
 category: skills
 tags:
 - k8s
 - learn
 - resources
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -20,8 +23,9 @@ trigger_keywords:
 - 讲师角色设定与场景规范
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8S 讲师角色设定与场景规范
 

@@ -1,6 +1,7 @@
 ---
 title: API 优先级与公平性 (APF) 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: API 优先级与公平性 (APF) 故障排查指南'
+summary: 'title: API 优先级与公平性 (APF) 故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -11,6 +12,8 @@ tags:
 - prometheus
 - docker
 - webhook
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -38,8 +41,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 title: API 优先级与公平性 (APF) 故障排查指南
 description: '# API 优先级与公平性 (APF) 故障排查指南'
@@ -469,7 +473,7 @@ kubectl get flowschema system-nodes -o yaml
 
 # 步骤 3: 如果系统 FlowSchema 被意外修改，恢复默认配置
 # 删除自定义的 FlowSchema (系统会自动重建默认的)
-kubectl get flowschema -o name | grep -v "system\|exempt\|catch-all" | xargs kubectl delete
+kubectl get flowschema -o name | grep -v "system|exempt|catch-all" | xargs kubectl delete
 
 # 步骤 4: 确保系统优先级配置正确
 kubectl get prioritylevelconfiguration

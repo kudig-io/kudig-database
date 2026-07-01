@@ -1,6 +1,7 @@
 ---
 title: 03 - Linux 文件系统深度解析：生产环境存储管理专家指南
 description: '# 03 - Linux 文件系统深度解析：生产环境存储管理专家指南'
+summary: '# 03 - Linux 文件系统深度解析：生产环境存储管理专家指南'
 category: linux
 tags:
 - linux
@@ -12,6 +13,8 @@ tags:
 - ceph
 - mysql
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -45,8 +48,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   label: '速查卡: linux'
-created: "2026-05-23"
 ---
+
+
 
 # 03 - Linux 文件系统深度解析：生产环境存储管理专家指南
 
@@ -439,7 +443,7 @@ check_filesystem_health() {
     mount | grep "ro," >> $LOG_DIR/fs_health_$DATE.log
     
     # 检查文件系统错误
-    dmesg | grep -i "filesystem\|error\|corruption" >> $LOG_DIR/fs_health_$DATE.log
+    dmesg | grep -i "filesystem|error|corruption" >> $LOG_DIR/fs_health_$DATE.log
     
     # 检查磁盘空间预警
     df -h | awk '$5+0 > 85 {print "警告: "$6" 使用率超过85%: "$5}' >> $LOG_DIR/fs_health_$DATE.log
@@ -914,7 +918,7 @@ mount /dev/mapper/encrypted /secure
 ```bash
 # 文件系统变为只读
 # 原因: 磁盘问题、文件系统损坏
-dmesg | grep -i "remounting\|read-only\|error"
+dmesg | grep -i "remounting|read-only|error"
 # 修复: fsck (ext4) 或 xfs_repair
 umount /data
 fsck -y /dev/sdb1

@@ -1,6 +1,7 @@
 ---
 title: 安全护栏、提示注入防护与合规 (domain-14-ai-ml-infra)
 description: 'title: 安全护栏、提示注入防护与合规'
+summary: 'title: 安全护栏、提示注入防护与合规'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - operator
 - cuda
 - nvidia
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 安全护栏、提示注入防护与合规
 description: '# 安全护栏、提示注入防护与合规'
@@ -165,7 +169,7 @@ class PromptInjectionDetector:
         # 工具滥用
         r'kubectl\s+delete\s+(all|namespace|deployment)',
         r'rm\s+-rf',
-        r'curl.*\|\s*sh',
+        r'curl.*|\s*sh',
         r'drop\s+table',
     ]
     

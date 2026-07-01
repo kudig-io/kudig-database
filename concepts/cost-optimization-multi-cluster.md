@@ -1,6 +1,7 @@
 ---
 title: 多集群成本优化策略
 description: '# 多集群成本优化策略'
+summary: '# 多集群成本优化策略'
 category: synthesis
 tags:
 - finops
@@ -8,6 +9,8 @@ tags:
 - cost-optimization
 - autoscaling
 - spot-instances
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,11 +24,12 @@ trigger_keywords:
 - 多集群成本优化策略
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/opencost.md]]"
-    type: related_to
+- target: '[[entities/opencost.md]]'
+  type: related_to
 ---
+
+
 
 # 多集群成本优化策略
 

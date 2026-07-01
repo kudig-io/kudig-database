@@ -1,15 +1,25 @@
 ---
-title: "[2026-09-15] [P0] 多集群联邦网络分区导致服务漂移"
+title: '[2026-09-15] [P0] 多集群联邦网络分区导致服务漂移'
+summary: '[2026-09-15] [P0] 多集群联邦网络分区导致服务漂移：12:10，客服收到大量投诉："同一订单扣了两次款"。'
 category: case-study
-tags: [production, incident, multi-cluster, federation, networking, split-brain]
-date: "2026-09-15"
+tags:
+- production
+- incident
+- multi-cluster
+- federation
+- networking
+- split-brain
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-09-15'
 severity: P0
-mttr: "60min"
+mttr: 60min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-09-15] 多集群联邦网络分区导致 DNS 服务漂移，订单重复扣款
 

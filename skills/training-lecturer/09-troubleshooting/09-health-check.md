@@ -1,6 +1,7 @@
 ---
 title: 第八课：健康检查 - Probe 详解 [09-troubleshooting]
 description: '# 第八课：健康检查 - Probe 详解'
+summary: '# 第八课：健康检查 - Probe 详解'
 category: k8s-lecturer
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - mysql
 - job
 - cronjob
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -33,8 +36,9 @@ prerequisites:
 - gpu-ml-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第八课：健康检查 - Probe 详解
 

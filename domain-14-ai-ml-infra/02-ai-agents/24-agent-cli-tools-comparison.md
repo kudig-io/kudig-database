@@ -1,6 +1,9 @@
 ---
 title: 主流 Agent CLI 工具全景对比 (domain-14-ai-ml-infra)
-description: 'description: ''**文档类型**: 选型对比专题 | **最后更新**: 2026-03 | **关键词**: Claude Code, Codex CLI,'
+description: 'description: ''**文档类型**: 选型对比专题 | **最后更新**: 2026-03 | **关键词**: Claude
+  Code, Codex CLI,'
+summary: 'description: ''**文档类型**: 选型对比专题 | **最后更新**: 2026-03 | **关键词**: Claude Code,
+  Codex CLI,'
 category: general
 tags:
 - ai
@@ -8,6 +11,8 @@ tags:
 - llm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +33,9 @@ trigger_keywords:
 - infra
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 主流 Agent CLI 工具全景对比
 description: '**文档类型**: 选型对比专题 | **最后更新**: 2026-03 | **关键词**: Claude Code, Codex CLI,

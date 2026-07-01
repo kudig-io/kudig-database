@@ -1,11 +1,14 @@
 ---
 title: etcd 数据清理与成员移除 — 源码分析 (topic-code-analysis)
 description: '## 概述'
+summary: '## 概述'
 category: general
 tags:
 - reference
 - etcd
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: etcd 数据清理与成员移除 — 源码分析
 category: cluster-delete
@@ -456,6 +460,8 @@ rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
 - [etcd util](https://github.com/kubernetes/kubernetes/tree/master/cmd/kubeadm/app/util/etcd/)
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[scripts/man/INSTALL.md|INSTALL]]

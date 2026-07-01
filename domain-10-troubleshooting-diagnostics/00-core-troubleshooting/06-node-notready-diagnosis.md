@@ -1,6 +1,7 @@
 ---
 title: Node NotReady 状态深度诊断
 description: '# 06 - Node NotReady 状态深度诊断 (Node NotReady Diagnosis)'
+summary: '# 06 - Node NotReady 状态深度诊断 (Node NotReady Diagnosis)'
 category: troubleshooting
 tags:
 - node
@@ -13,6 +14,8 @@ tags:
 - eviction
 - etcd
 - apiserver
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: intermediate
 reading_level: intermediate
@@ -70,8 +73,9 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md
   label: '运维技能: 01-node-notready'
-created: "2026-05-23"
 ---
+
+
 
 # 06 - Node NotReady 状态深度诊断 (Node NotReady Diagnosis)
 
@@ -738,8 +742,8 @@ time (crictl info > /dev/null 2>&1)
 | 问题 | 症状 | 诊断命令 | 解决方案 |
 |------|------|---------|---------|
 | **进程崩溃** | kubelet 日志显示 CRI 不可用 | `systemctl status containerd` | 重启 containerd |
-| **OOM** | containerd 进程被 kill | `dmesg \| grep containerd` | 增加系统内存/限制容器 |
-| **shim 泄漏** | shim 进程过多 | `ps aux \| grep shim \| wc -l` | 清理并重启 |
+| **OOM** | containerd 进程被 kill | `dmesg | grep containerd` | 增加系统内存/限制容器 |
+| **shim 泄漏** | shim 进程过多 | `ps aux | grep shim | wc -l` | 清理并重启 |
 | **存储满** | 镜像拉取失败 | `df -h /var/lib/containerd` | 清理镜像/扩容 |
 | **Socket 异常** | CRI 调用超时 | `crictl info` | 重启 containerd |
 | **快照损坏** | 容器启动失败 | `ctr snapshots list` | 清理损坏的快照 |
@@ -895,7 +899,7 @@ fi
 # 6. OOM 历史
 echo ""
 echo "=== 6. 最近 OOM 事件 ==="
-dmesg | grep -i "oom\|killed process" | tail -10
+dmesg | grep -i "oom|killed process" | tail -10
 
 # 7. 内存分配失败
 echo ""

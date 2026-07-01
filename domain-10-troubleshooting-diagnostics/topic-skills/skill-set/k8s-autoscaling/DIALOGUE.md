@@ -1,19 +1,27 @@
 ---
 title: K8s Autoscaling Failure 远程顾问对话脚本
+summary: 自动伸缩问题的远程顾问对话脚本，覆盖HPA、VPA、Cluster Autoscaler排查。
 category: dialogue
-tags: [dialogue, remote-advisor, autoscaling, hpa, vpa, cluster-autoscaler]
-created: "2026-05-23"
-updated: "2026-05-23"
+tags:
+- dialogue
+- remote-advisor
+- autoscaling
+- hpa
+- vpa
+- cluster-autoscaler
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
-summary: "自动伸缩问题的远程顾问对话脚本，覆盖HPA、VPA、Cluster Autoscaler排查。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
-    type: uses
-  - target: "[[entities/helm.md]]"
-    type: uses
-  - target: "[[entities/kubelet.md]]"
-    type: uses
+- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+  type: uses
+- target: '[[entities/helm.md]]'
+  type: uses
+- target: '[[entities/kubelet.md]]'
+  type: uses
 ---
+
 
 # K8s Autoscaling Failure 远程顾问对话脚本
 
@@ -280,7 +288,7 @@ kubectl get events --field-selector reason=ScaleGroupActivity --sort-by='.lastTi
 kubectl get pods -n kube-system | grep -E 'cluster-autoscaler|autoscaler'
 
 # 查看CA日志中的伸缩决策
-kubectl logs -n kube-system deployment/cluster-autoscaler --tail=100 | grep -i "scale up\|scale down\|node pool\|nodepool"
+kubectl logs -n kube-system deployment/cluster-autoscaler --tail=100 | grep -i "scale up|scale down|node pool|nodepool"
 ```
 > **如果无法执行**：请登录 **ACK 控制台 > 集群 > 组件管理**，确认：
 > 1. **cluster-autoscaler** 组件（如可见）是否正常运行？
@@ -307,7 +315,7 @@ aliyun ess DescribeScalingActivities --RegionId <region-id> --ScalingGroupId <sc
 kubectl get nodepool -n kube-system 2>/dev/null || echo "ACK NodePool CRD未安装"
 
 # 查看Pod的节点亲和性/反亲和性是否与节点池匹配
-kubectl get pod <pending-pod> -n <ns> -o yaml | grep -A 10 "nodeAffinity\|nodeSelector"
+kubectl get pod <pending-pod> -n <ns> -o yaml | grep -A 10 "nodeAffinity|nodeSelector"
 ```
 > **如果无法执行**：请登录 **ACK 控制台 > 集群 > 节点管理 > 节点池**，确认：
 > 1. 节点池的 **节点标签（Labels）** 是否与 Pending Pod 的 nodeSelector/亲和性匹配？
@@ -564,7 +572,7 @@ kubectl get pods -n <namespace> -w
 
 ```bash
 # 4. 确认 Cluster Autoscaler 正常（如涉及）
-kubectl logs -n kube-system deployment/cluster-autoscaler --tail=50 | grep -i 'scale up\|scale down\|failed'
+kubectl logs -n kube-system deployment/cluster-autoscaler --tail=50 | grep -i 'scale up|scale down|failed'
 ```
 
 > **如果无法查看 CA 日志**：请观察节点数量是否在负载增加后增长，在负载降低后减少。

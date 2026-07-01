@@ -1,12 +1,15 @@
 ---
 title: 割集阶数
-description: '割集阶数（Cut Set Order）是最小割集中包含的基本事件数量。阶数越低，系统越脆弱。...'
+description: 割集阶数（Cut Set Order）是最小割集中包含的基本事件数量。阶数越低，系统越脆弱。...
+summary: 割集阶数（Cut Set Order）是最小割集中包含的基本事件数量。阶数越低，系统越脆弱。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - cutsetorder
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 割集阶数
 

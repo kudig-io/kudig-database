@@ -1,6 +1,7 @@
 ---
 title: OpenClaw SOUL.md 机制深度解析 (domain-14-ai-ml-infra)
 description: 'title: OpenClaw SOUL.md 机制深度解析'
+summary: 'title: OpenClaw SOUL.md 机制深度解析'
 category: general
 tags:
 - ai
@@ -10,6 +11,8 @@ tags:
 - llm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: OpenClaw SOUL.md 机制深度解析
 description: '# OpenClaw SOUL.md 机制深度解析'
@@ -130,7 +134,7 @@ Layer 3: 红线层（Never）
 | 模糊约束 | "要注意安全" | 几乎无效，Agent 自行解释"安全"含义 |
 | 一般约束 | "不要执行危险命令" | 部分有效，但"危险"定义模糊 |
 | 精确约束 | "禁止执行包含 `delete`/`drain`/`cordon` 的 kubectl 命令" | 高效，可编程验证 |
-| 正则约束 | `kubectl\s+(delete\|drain\|cordon\|taint)` | 最高，可机器执行拦截 |
+| 正则约束 | `kubectl\s+(delete|drain|cordon|taint)` | 最高，可机器执行拦截 |
 
 **核心原则：约束越具体，Agent 行为越可预测。**
 

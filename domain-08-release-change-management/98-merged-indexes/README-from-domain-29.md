@@ -1,9 +1,12 @@
 ---
 title: 'Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance)'
 description: 'description: ''## 📚 领域概述'''
+summary: 'description: ''## 📚 领域概述'''
 category: general
 tags:
 - k8s
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gitops-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance)'

@@ -1,6 +1,7 @@
 ---
 title: 'Day 17: 节点池基础'
 description: '- 自管理节点池'
+summary: '- 自管理节点池'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - ingress
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - prometheus-basics
 - iac-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 17: 节点池基础

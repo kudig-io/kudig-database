@@ -1,6 +1,7 @@
 ---
 title: 'Day 23: 企业日志 + GitOps'
 description: 'title: Day 23: 企业日志 + GitOps'
+summary: 'title: Day 23: 企业日志 + GitOps'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kafka
 - elasticsearch
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -37,8 +40,9 @@ prerequisites:
 - redis-basics
 - policy-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 23: 企业日志 + GitOps

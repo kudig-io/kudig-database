@@ -1,6 +1,9 @@
 ---
 title: Deployment Create — Kubernetes Deployment 控制器源码分析 (topic-code-analysis)
-description: Kubernetes Deployment 控制器是管理无状态工作负载的核心组件，通过 ReplicaSet 间接管理 Pod，实现声明式更新、滚动发布、版本回滚等能力。本文档系统分析 Deployment 控制器的完整源码架构。
+description: Kubernetes Deployment 控制器是管理无状态工作负载的核心组件，通过 ReplicaSet 间接管理 Pod，实现声明式更新、滚动发布、版本回滚等能力。本文档系统分析
+  Deployment 控制器的完整源码架构。
+summary: Kubernetes Deployment 控制器是管理无状态工作负载的核心组件，通过 ReplicaSet 间接管理 Pod，实现声明式更新、滚动发布、版本回滚等能力。本文档系统分析
+  Deployment 控制器的完整源码架构。
 category: deployment
 tags:
 - deployment
@@ -13,6 +16,8 @@ tags:
 - etcd
 - controller-manager
 - hpa
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05-18
 difficulty: advanced
 reading_level: advanced
@@ -52,8 +57,9 @@ related_topics:
 - rolling-update
 - deployment-status
 - revision-history
-created: "2026-05-23"
 ---
+
+
 
 # Deployment Create — Kubernetes Deployment 控制器源码分析
 

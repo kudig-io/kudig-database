@@ -1,6 +1,7 @@
 ---
 title: Configure Health Probes
 description: Configure Health Probes — Kubernetes 生产运维知识库
+summary: Configure Health Probes — Kubernetes 生产运维知识库
 category: skills
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - readiness
 - startup
 - health-check
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 - Probes
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Configure Health Probes
 

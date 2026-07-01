@@ -1,6 +1,7 @@
 ---
 title: 第十七章：行业标杆案例分析 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**所属部分**: 第五部分 - 实战案例与最佳实践'''
+summary: 'description: ''**所属部分**: 第五部分 - 实战案例与最佳实践'''
 category: fta
 tags:
 - fta
@@ -8,6 +9,8 @@ tags:
 - performance
 - prometheus
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -35,8 +38,9 @@ prerequisites:
 fta_id: FTA-17_INDUSTRY_BENCHMARKS-001
 component: 17 Industry Benchmarks
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: 第十七章：行业标杆案例分析
 description: '**所属部分**: 第五部分 - 实战案例与最佳实践'

@@ -1,6 +1,7 @@
 ---
 title: Job/CronJob 异常故障树分析 (skills)
 description: '- **范围**：调度触发、并发与重试策略、镜像与探针、资源与配额、控制器依赖。'
+summary: '- **范围**：调度触发、并发与重试策略、镜像与探针、资源与配额、控制器依赖。'
 category: skills
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - cronjob
 - webhook
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 fta_id: FTA-JOB_CRONJOB-001
 component: Job Cronjob
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 # Job/CronJob 异常故障树分析
 

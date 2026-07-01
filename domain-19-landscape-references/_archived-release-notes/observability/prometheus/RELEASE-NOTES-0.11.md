@@ -1,12 +1,15 @@
 ---
 title: prometheus v0.11 Release Notes
 description: prometheus v0.11 Release Notes — Kubernetes 生产运维知识库
+summary: prometheus v0.11 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
 - release-notes
 - changelog
 - prometheus
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Prometheus|prometheus]] v0.11 Release Notes
 

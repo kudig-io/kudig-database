@@ -1,6 +1,9 @@
 ---
 title: OVN-Kubernetes 网络方案
-description: 'OVN-Kubernetes 是基于 OVN（Open Virtual Network）的 Kubernetes CNI 实现，由 Red Hat 主导开发，是...'
+description: OVN-Kubernetes 是基于 OVN（Open Virtual Network）的 Kubernetes CNI 实现，由 Red
+  Hat 主导开发，是...
+summary: OVN-Kubernetes 是基于 OVN（Open Virtual Network）的 Kubernetes CNI 实现，由 Red Hat
+  主导开发，是...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - networking
 - cni
 - ovn
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # OVN-Kubernetes 网络方案（OVN-Kubernetes）
 

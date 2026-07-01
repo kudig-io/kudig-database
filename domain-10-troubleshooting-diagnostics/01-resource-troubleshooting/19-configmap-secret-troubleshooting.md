@@ -1,6 +1,7 @@
 ---
 title: ConfigMap/Secret 故障排查
 description: '# 19 - ConfigMap/Secret 故障排查 (ConfigMap/Secret Troubleshooting)'
+summary: '# 19 - ConfigMap/Secret 故障排查 (ConfigMap/Secret Troubleshooting)'
 category: troubleshooting
 tags:
 - configmap
@@ -13,6 +14,8 @@ tags:
 - apiserver
 - kubelet
 - prometheus
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: intermediate
 reading_level: intermediate
@@ -65,8 +68,9 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure.md
   label: '运维技能: 14-configmap-secret-failure'
-created: "2026-05-23"
 ---
+
+
 
 # 19 - ConfigMap/Secret 故障排查 (ConfigMap/Secret Troubleshooting)
 

@@ -1,6 +1,9 @@
 ---
 title: 端到端项目实战——从代码到生产完整流水线
-description: 面向小白的完整项目案例：从零开发一个待办事项应用，经历代码编写、Docker 镜像构建、K8s 部署、Helm 打包、GitOps 交付、Prometheus 监控、故障排查的完整生产流水线
+description: 面向小白的完整项目案例：从零开发一个待办事项应用，经历代码编写、Docker 镜像构建、K8s 部署、Helm 打包、GitOps 交付、Prometheus
+  监控、故障排查的完整生产流水线
+summary: 面向小白的完整项目案例：从零开发一个待办事项应用，经历代码编写、Docker 镜像构建、K8s 部署、Helm 打包、GitOps 交付、Prometheus
+  监控、故障排查的完整生产流水线
 category: learning
 tags:
 - tutorial
@@ -13,6 +16,8 @@ tags:
 - prometheus
 - grafana
 - argocd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +49,9 @@ prerequisites:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 端到端项目实战——从代码到生产完整流水线
 

@@ -1,6 +1,7 @@
 ---
 title: kudig-database Demo 环境搭建指南
 description: '# kudig-database Demo 环境搭建指南'
+summary: '# kudig-database Demo 环境搭建指南'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ingress
 - llm
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # kudig-database Demo 环境搭建指南
 

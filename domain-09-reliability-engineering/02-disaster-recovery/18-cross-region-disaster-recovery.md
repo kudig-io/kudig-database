@@ -1,6 +1,7 @@
 ---
 title: 18-跨区域容灾部署
 description: 'title: 18-跨区域容灾部署'
+summary: 'title: 18-跨区域容灾部署'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - ingress
 - gateway
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 18-跨区域容灾部署
 description: '# 18-跨区域容灾部署'

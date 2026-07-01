@@ -1,55 +1,14 @@
 ---
+title: Presentation Template
+summary: 1.  为什么需要 [组件名称]？ (10min)
+category: general
+tags:
+- presentation-template
+tier: supporting
+created: '2026-07-01'
+---
 
-## 📚 培训大纲与路径 (Learning Path)
-
-### 🔰 第一阶段：快速入门与核心概念 (Beginner - 45min)
-1.  **为什么需要 [组件名称]？** (10min)
-    *   解决什么痛点？(简单场景示例)
-    *   在 K8S 整体架构中的位置
-2.  **核心资源对象初识** (20min)
-    *   最小配置示例 (Hello World)
-    *   关键字段及其含义解析
-3.  **常用操作与简单实验** (15min)
-    *   基础命令行操作 (CRUD)
-    *   查看状态与基本排障
-
-### 📘 第二阶段：核心架构与深度原理 (Deep Dive - 60min)
-4.  **架构演进与设计哲学** (20min)
-    *   原生设计理念分析 (Why it was built)
-    *   核心组件交互模型 (Informer/Control Loop)
-    *   数据结构与存储模型解析
-5.  **核心工作机制详解** (25min)
-    *   全生命周期流量/状态追踪
-    *   底层内核/网络交互逻辑
-    *   并发冲突处理与一致性保障
-6.  **版本特性差异与演进** (15min)
-
-### ⚡ 第三阶段：生产部署与高可用架构 (Architecture - 90min)
-7.  **企业级高可用与配置规范** (30min)
-    *   高可用拓扑、容灾逻辑、故障域定义
-    *   生产环境基准配置 (Baseline) 与优化参数
-8.  **监控、告警与可观测性** (25min)
-    *   黄金指标 (Latency, Errors, Saturation) 体系
-    *   Prometheus/Grafana 深度集成
-9.  **极致性能优化实践** (35min)
-    *   性能瓶颈压测分析、内核级调优、横向扩展策略
-
-### 🛠️ 第四阶段：故障诊断与 SRE 运维 (SRE Ops - 60min)
-10. **故障排查方法论与实战** (30min)
-    *   分层诊断模型、工具箱实战、典型案例复盘
-11. **应急响应与预防性维护** (30min)
-    *   止损/降级 SOP、自动化健康检查、巡检清单
-
-### 🛡️ 第五阶段：高级进阶与安全加固 (Advanced - 30min)
-12. **安全加固、扩展功能与未来演进**
-    *   RBAC/安全策略、自定义开发、第三方集成
-created: "2026-05-23"
-updated: "2026-05-23"
-last_updated: 2026-05-23
-title: "[[entities/kubernetes.md|kubernetes]] [组件/技术名称] 全栈进阶培训 (从入门到专家)"
-category: uncategorized
-tags: ["uncategorized", "visibility/public"]
----# [[entities/kubernetes.md|kubernetes]] [组件/技术名称] 全栈进阶培训 (从入门到专家)
+# [[entities/kubernetes.md|kubernetes]] [组件/技术名称] 全栈进阶培训 (从入门到专家)
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南  
 > **目标受众**: 初级运维/开发、资深 SRE、架构师  

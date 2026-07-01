@@ -1,6 +1,7 @@
 ---
 title: 节点升级 — kubeadm upgrade node 源码分析
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - reference
@@ -12,6 +13,8 @@ tags:
 - coredns
 - daemonset
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - platform-engineering-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 节点升级 kubeadm upgrade node 源码分析
 description: '## 概述'
@@ -522,6 +526,8 @@ sudo apt-get install kubeadm=1.28.0-*
 | `UpdateKubeletConfig` | `cmd/kubeadm/app/phases/kubelet/` | 更新 kubelet 配置 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

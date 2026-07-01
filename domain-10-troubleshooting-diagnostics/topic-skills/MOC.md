@@ -1,6 +1,7 @@
 ---
 title: topic-skills MOC
 description: topic-skills 专题导航页，覆盖 32 篇文档
+summary: topic-skills 专题导航页，覆盖 32 篇文档
 category: moc
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - gateway
 - rbac
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: advanced
 reading_level: advanced
@@ -41,8 +44,9 @@ prerequisites:
 skill_id: SKILL-MOC-001
 skill_name: topic-skills MOC
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 # topic-skills MOC
 

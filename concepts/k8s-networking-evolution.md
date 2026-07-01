@@ -1,17 +1,22 @@
 ---
-title: "K8S 网络演进"
+title: K8S 网络演进
+summary: 'K8S 网络演进：应用层 → Socket → eBPF sockops → 网卡 ↓ 传统路径: sk_buff → netfilter →
+  iptables → 路由 eBPF 路径: XDP → eBPF program → 直接转发'
 category: concepts
 tags:
-  - networking
-  - cilium
-  - istio
-  - gateway-api
-  - ebpf
-  - k8s
+- networking
+- cilium
+- istio
+- gateway-api
+- ebpf
+- k8s
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # K8S 网络演进
 

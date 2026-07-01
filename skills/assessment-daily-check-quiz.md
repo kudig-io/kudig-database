@@ -1,6 +1,7 @@
 ---
 title: Daily Check Quiz
 description: A. 容器配置错误
+summary: A. 容器配置错误
 category: skills
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - skill
 - pdb
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Daily Check Quiz
 

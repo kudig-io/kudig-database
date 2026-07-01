@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 存储体系全栈进阶培训 (从入门到专家) [topic-presentations]
 description: '# Kubernetes 存储体系全栈进阶培训 (从入门到专家)'
+summary: '# Kubernetes 存储体系全栈进阶培训 (从入门到专家)'
 category: presentations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ceph
 - redis
 - mysql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 存储体系全栈进阶培训 (从入门到专家)
 

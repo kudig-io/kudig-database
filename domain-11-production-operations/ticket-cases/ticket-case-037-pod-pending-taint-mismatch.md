@@ -1,6 +1,7 @@
 ---
 title: Pod Pending：节点 taint 与 toleration 不匹配
 description: 专有云 ACK 集群新上线 AI 推理服务 Pod 长期处于 Pending，根因为节点 taint 未配置对应 toleration，含诊断、修复与验证。
+summary: 专有云 ACK 集群新上线 AI 推理服务 Pod 长期处于 Pending，根因为节点 taint 未配置对应 toleration，含诊断、修复与验证。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -11,6 +12,9 @@ tags:
 - gpu
 - scheduling
 - p1
+tier: peripheral
+created: '2026-06-26T10:00:00+08:00'
+updated: '2026-06-26T12:20:00+08:00'
 incident_id: TC-2026-037
 priority: P1
 severity: high
@@ -22,9 +26,7 @@ skill_ref:
 - 资源调度治理
 fta_ref:
 - 'FTA: Pod Pending'
-created: '2026-06-26T10:00:00+08:00'
-updated: '2026-06-26T12:20:00+08:00'
-last_updated: 2026-06-26T12:20:00+08:00
+last_updated: 2026-06-26 12:20:00+08:00
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -52,17 +54,19 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-17-system-foundation/topic-dictionary/scheduling/toleration.md]]"
+- target: '[[domain-17-system-foundation/topic-dictionary/scheduling/toleration.md]]'
   type: related_to
-- target: "[[domain-17-system-foundation/topic-dictionary/scheduling/taint.md]]"
+- target: '[[domain-17-system-foundation/topic-dictionary/scheduling/taint.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -107,7 +111,7 @@ kubectl get node --show-labels | grep gpu
 kubectl get deployment llm-inference -n ai-inference -o jsonpath='{.spec.template.spec.affinity}' | python3 -m json.tool
 
 # 6. 查看调度器日志（可选，用于排除 scheduler 异常）
-kubectl logs -n kube-system -l component=kube-scheduler --tail=100 | grep -i "llm-inference\|FailedScheduling" | tail -30
+kubectl logs -n kube-system -l component=kube-scheduler --tail=100 | grep -i "llm-inference|FailedScheduling" | tail -30
 
 # 7. 检查 ResourceQuota 与 LimitRange 是否拦截
 kubectl get resourcequota -n ai-inference

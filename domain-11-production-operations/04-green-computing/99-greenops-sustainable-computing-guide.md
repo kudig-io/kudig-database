@@ -1,6 +1,7 @@
 ---
 title: GreenOps 可持续计算与碳足迹优化指南
 description: 'title: GreenOps 可持续计算与碳足迹优化指南'
+summary: 'title: GreenOps 可持续计算与碳足迹优化指南'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - helm
 - vpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - ebpf-basics
-created: "2026-05-23"
 ---
+
+
 
 title: GreenOps 可持续计算与碳足迹优化指南
 description: '# GreenOps 可持续计算与碳足迹优化指南'

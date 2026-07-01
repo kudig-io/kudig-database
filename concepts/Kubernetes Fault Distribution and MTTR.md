@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Fault Distribution and MTTR Benchmarks
 description: Kubernetes Fault Distribution and MTTR Benchmarks — Kubernetes 生产运维知识库
+summary: Kubernetes Fault Distribution and MTTR Benchmarks — Kubernetes 生产运维知识库
 category: synthesis
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - scheduler
 - prometheus
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,17 +35,18 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[concepts/etcd Operational Reference.md]]"
-    type: uses
-  - target: "[[skills/Kubernetes FTA Top Events Index.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/workloads/pods.md]]"
-    type: uses
-  - target: "[[skills/best-practices/scenarios/capacity-planning.md]]"
-    type: related_to
+- target: '[[concepts/etcd Operational Reference.md]]'
+  type: uses
+- target: '[[skills/Kubernetes FTA Top Events Index.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/workloads/pods.md]]'
+  type: uses
+- target: '[[skills/best-practices/scenarios/capacity-planning.md]]'
+  type: related_to
 ---
+
+
 
 # Kubernetes Fault Distribution and MTTR Benchmarks
 

@@ -1,6 +1,7 @@
 ---
 title: GitOps自动化运维实践 (GitOps Automation Operations Practice)
 description: '# GitOps自动化运维实践 (GitOps Automation Operations Practice)'
+summary: '# GitOps自动化运维实践 (GitOps Automation Operations Practice)'
 category: control-plane
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - flux
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -72,8 +75,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # GitOps自动化运维实践 (GitOps Automation Operations Practice)
 

@@ -1,6 +1,7 @@
 ---
 title: nginx-ingress-controller 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: nginx-ingress-controller 故障排查指南'
+summary: 'title: nginx-ingress-controller 故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - rbac
 - networkpolicy
 - wasm
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -39,8 +42,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 title: nginx-ingress-controller 故障排查指南
 description: nginx-ingress-controller 故障排查指南，覆盖 [[Ingress|Ingress]] 配置、502/503 错误、TLS 证书、upstream

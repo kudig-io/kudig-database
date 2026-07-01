@@ -1,6 +1,7 @@
 ---
 title: 消息队列选型对比
 description: '| **分层存储** | 有限 | ✅ | ❌ | ❌ |'
+summary: '| **分层存储** | 有限 | ✅ | ❌ | ❌ |'
 category: domain
 tags:
 - message-queue
@@ -11,6 +12,8 @@ tags:
 - comparison
 - helm
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - kafka-basics
-created: "2026-05-23"
 ---
+
+
 
 # 消息队列选型对比
 

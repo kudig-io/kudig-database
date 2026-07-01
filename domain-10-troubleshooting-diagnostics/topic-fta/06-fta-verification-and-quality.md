@@ -1,6 +1,7 @@
 ---
 title: 第六章：FTA 验证与质量保证 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**所属部分**: 第二部分 - FTA 构建实践指南'''
+summary: 'description: ''**所属部分**: 第二部分 - FTA 构建实践指南'''
 category: fta
 tags:
 - fta
@@ -9,6 +10,8 @@ tags:
 - apiserver
 - job
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -37,8 +40,9 @@ prerequisites:
 fta_id: FTA-06_VERIFICATION_AND_QUALITY-001
 component: 06 Verification And Quality
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: 第六章：FTA 验证与质量保证
 description: '**所属部分**: 第二部分 - FTA 构建实践指南'

@@ -1,6 +1,7 @@
 ---
 title: 第二十一章：自进化的智能运维系统 (domain-10-troubleshooting-diagnostics)
 description: 'title: 第二十一章：自进化的智能运维系统'
+summary: 'title: 第二十一章：自进化的智能运维系统'
 category: fta
 tags:
 - fta
@@ -8,6 +9,8 @@ tags:
 - daily-ops
 - llm
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -34,8 +37,9 @@ prerequisites:
 fta_id: FTA-21_SELF_EVOLVING_OPS_SYSTEM-001
 component: 21 Self Evolving Ops System
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 title: 第二十一章：自进化的智能运维系统
 description: '# 第二十一章：自进化的智能运维系统'

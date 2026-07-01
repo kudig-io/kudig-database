@@ -1,14 +1,18 @@
 ---
 title: 报告/日志链接转换记录（2026-06-26）
 description: 将核心页面中指向 _reports/ 和 _meta/journal/ 的 wikilink 转为纯文本
+summary: 将核心页面中指向 _reports/ 和 _meta/journal/ 的 wikilink 转为纯文本
 category: reports
 tags:
 - wiki-lint
 - maintenance
-created: "2026-06-26"
-updated: "2026-06-26"
+tier: supporting
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06-26
 ---
+
+
 
 # 报告/日志链接转换记录
 

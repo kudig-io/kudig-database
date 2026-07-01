@@ -1,6 +1,7 @@
 ---
 title: GitOps配置管理 (GitOps Configuration Management)
 description: '# GitOps配置管理 (GitOps Configuration Management)'
+summary: '# GitOps配置管理 (GitOps Configuration Management)'
 category: platform-ops
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - flux
 - ingress
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -55,8 +58,9 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
-created: "2026-05-23"
 ---
+
+
 
 # GitOps配置管理 (GitOps Configuration Management)
 

@@ -1,11 +1,14 @@
 ---
 title: KUDIG Frontmatter 规范
 description: '| `title` | string | 文档标题（中文） | "Kubernetes 架构全景图" |'
+summary: '| `title` | string | 文档标题（中文） | "Kubernetes 架构全景图" |'
 category: general
 tags:
 - k8s
 - rag
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 - 规范
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: KUDIG Frontmatter 规范

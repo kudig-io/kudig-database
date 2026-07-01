@@ -1,6 +1,7 @@
 ---
 title: grafana v9.1 Release Notes
 description: grafana v9.1 Release Notes — Kubernetes 生产运维知识库
+summary: grafana v9.1 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - changelog
 - prometheus
 - grafana
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - cncf-ecosystem
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # grafana v9.1 Release Notes
 

@@ -1,6 +1,8 @@
 ---
 title: Karmada 多集群管理
-description: 'Karmada 是 CNCF 孵化项目，提供 Kubernetes 多集群的统一管理和应用分发能力，支持跨集群调度、故障迁移和资源聚合，是 Federation...'
+description: Karmada 是 CNCF 孵化项目，提供 Kubernetes 多集群的统一管理和应用分发能力，支持跨集群调度、故障迁移和资源聚合，是
+  Federation...
+summary: Karmada 是 CNCF 孵化项目，提供 Kubernetes 多集群的统一管理和应用分发能力，支持跨集群调度、故障迁移和资源聚合，是 Federation...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - platform-engineering
 - multi-cluster
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Karmada 多集群管理（Karmada）
 

@@ -1,6 +1,7 @@
 ---
 title: Datadog
-description: 'Datadog 是企业级全栈可观测性 SaaS 平台，提供 Metrics、Logs、Traces、APM、Security 等一站式功能。在云原生环境中，Da...'
+description: Datadog 是企业级全栈可观测性 SaaS 平台，提供 Metrics、Logs、Traces、APM、Security 等一站式功能。在云原生环境中，Da...
+summary: Datadog 是企业级全栈可观测性 SaaS 平台，提供 Metrics、Logs、Traces、APM、Security 等一站式功能。在云原生环境中，Da...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - datadog
 - observability
 - saas
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Datadog
 

@@ -1,13 +1,21 @@
 ---
-title: "Domain Index — 安全与合规"
+title: Domain Index — 安全与合规
+summary: Domain Index — 安全与合规
 category: index
-tags: ["index", "05", "visibility/public"]
-sources: ["domain-05-security-compliance/"]
+tags:
+- index
+- '05'
+- visibility/public
+tier: supporting
+sources:
+- domain-05-security-compliance/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: reviewed
 ---
+
+
 
 # 安全与合规 索引
 
@@ -94,3 +102,6 @@ status: reviewed
 
 - [[domain-05-security-compliance/00-open-source-projects-index.md|00-open-source-projects-index]]
 
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

@@ -1,6 +1,8 @@
 ---
 title: container2wasm 容器转换
-description: 'container2wasm 是 containerd 作者之一 Kazuyoshi Kato 开源的工具，将 Linux 容器镜像转换为 WebAssembl...'
+description: container2wasm 是 containerd 作者之一 Kazuyoshi Kato 开源的工具，将 Linux 容器镜像转换为
+  WebAssembl...
+summary: container2wasm 是 containerd 作者之一 Kazuyoshi Kato 开源的工具，将 Linux 容器镜像转换为 WebAssembl...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - fundamentals
 - wasm
 - container
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # container2wasm 容器转换（container2wasm）
 

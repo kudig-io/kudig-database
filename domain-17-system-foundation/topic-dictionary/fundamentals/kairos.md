@@ -1,6 +1,7 @@
 ---
 title: Kairos 不可变 OS
-description: 'Kairos（原 c3os）是 Spectro Cloud 开源的 CNCF Sandbox 项目，将任意 Linux 发行版转换为不可变的容器操作系统，支持用...'
+description: Kairos（原 c3os）是 Spectro Cloud 开源的 CNCF Sandbox 项目，将任意 Linux 发行版转换为不可变的容器操作系统，支持用...
+summary: Kairos（原 c3os）是 Spectro Cloud 开源的 CNCF Sandbox 项目，将任意 Linux 发行版转换为不可变的容器操作系统，支持用...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - fundamentals
 - os
 - edge
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Kairos 不可变 OS（Kairos）
 

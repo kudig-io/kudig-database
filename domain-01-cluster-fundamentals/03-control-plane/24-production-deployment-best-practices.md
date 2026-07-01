@@ -1,6 +1,7 @@
 ---
 title: 生产环境部署最佳实践 (Production Deployment Best Practices)
 description: 'title: 生产环境部署最佳实践 (Production Deployment Best Practices)'
+summary: 'title: 生产环境部署最佳实践 (Production Deployment Best Practices)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - apiserver
 - kubelet
 - scheduler
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ prerequisites:
 - policy-basics
 - backup-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 生产环境部署最佳实践 (Production Deployment Best Practices)
 description: '# 生产环境部署最佳实践 (Production Deployment Best Practices)'
@@ -1846,6 +1850,8 @@ spec:
 - 控制平面扩缩容指南 (Control Plane Scalability Guide)
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - 22-production-checklist
 - [[domain-02-workloads-applications/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]

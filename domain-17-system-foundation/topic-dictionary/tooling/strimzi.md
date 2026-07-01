@@ -1,6 +1,9 @@
 ---
 title: Strimzi
-description: 'Strimzi 是 CNCF 孵化项目，在 Kubernetes 上提供 Apache Kafka 的原生部署和管理能力。它通过 Operator 模式自动化 ...'
+description: Strimzi 是 CNCF 孵化项目，在 Kubernetes 上提供 Apache Kafka 的原生部署和管理能力。它通过 Operator
+  模式自动化 ...
+summary: Strimzi 是 CNCF 孵化项目，在 Kubernetes 上提供 Apache Kafka 的原生部署和管理能力。它通过 Operator
+  模式自动化 ...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +12,8 @@ tags:
 - kafka
 - streaming
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Strimzi
 

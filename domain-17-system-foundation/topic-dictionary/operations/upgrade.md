@@ -1,12 +1,15 @@
 ---
 title: 升级
-description: 'Upgrade（升级）是指将 Kubernetes 集群或组件从旧版本升级到新版本的过程。Kubernetes 支持滚动升级策略，确保升级过程中集群持续可用。...'
+description: Upgrade（升级）是指将 Kubernetes 集群或组件从旧版本升级到新版本的过程。Kubernetes 支持滚动升级策略，确保升级过程中集群持续可用。...
+summary: Upgrade（升级）是指将 Kubernetes 集群或组件从旧版本升级到新版本的过程。Kubernetes 支持滚动升级策略，确保升级过程中集群持续可用。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - operations
 - upgrade
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 升级
 

@@ -1,6 +1,7 @@
 ---
 title: 工单智能体语料改进执行摘要（2026-06-26）
 description: 面向阿里云专有云工单智能体的 KUDIG Database 语料改进第一阶段执行摘要
+summary: 面向阿里云专有云工单智能体的 KUDIG Database 语料改进第一阶段执行摘要
 category: reports
 tags:
 - ticket-agent
@@ -10,18 +11,21 @@ tags:
 - execution-summary
 - sre
 - k8s
+tier: supporting
 created: '2026-06-26'
 updated: '2026-06-26'
 last_updated: 2026-06-26
 status: completed
 relationships:
-- target: "_reports/ticket-agent-corpus-comprehensive-supplement-summary-2026-06-26.md"
+- target: _reports/ticket-agent-corpus-comprehensive-supplement-summary-2026-06-26.md
   type: related_to
-- target: "_reports/ticket-agent-corpus-qa-action-extension-summary-2026-06-26.md"
+- target: _reports/ticket-agent-corpus-qa-action-extension-summary-2026-06-26.md
   type: related_to
-- target: "_reports/ticket-agent-corpus-round2-summary-2026-06-26.md"
+- target: _reports/ticket-agent-corpus-round2-summary-2026-06-26.md
   type: related_to
 ---
+
+
 
 # 工单智能体语料改进执行摘要（2026-06-26）
 

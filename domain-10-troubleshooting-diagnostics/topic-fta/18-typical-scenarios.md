@@ -1,6 +1,7 @@
 ---
 title: 第十八章：典型场景完整方案 (domain-10-troubleshooting-diagnostics)
 description: 'title: 第十八章：典型场景完整方案'
+summary: 'title: 第十八章：典型场景完整方案'
 category: fta
 tags:
 - fta
@@ -9,6 +10,8 @@ tags:
 - mysql
 - llm
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -37,8 +40,9 @@ prerequisites:
 fta_id: FTA-18_TYPICAL_SCENARIOS-001
 component: 18 Typical Scenarios
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 title: 第十八章：典型场景完整方案
 description: '# 第十八章：典型场景完整方案'

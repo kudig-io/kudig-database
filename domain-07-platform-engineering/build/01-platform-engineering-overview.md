@@ -1,6 +1,7 @@
 ---
 title: 平台工程概述与成熟度模型
 description: '# 平台工程概述与成熟度模型'
+summary: '# 平台工程概述与成熟度模型'
 category: platform-engineering
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - helm
 - argocd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +54,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 平台工程概述与成熟度模型
 # [[concepts/platform-engineering-sre.md|Platform Engineering]] Overview and Maturity Model

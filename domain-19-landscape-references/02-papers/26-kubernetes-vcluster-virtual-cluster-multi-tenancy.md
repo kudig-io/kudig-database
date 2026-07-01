@@ -1,6 +1,7 @@
 ---
 title: Kubernetes vCluster 与虚拟集群多租户 (vCluster and Virtual Cluster Multi-Tenancy)
 description: '作者: 多租户架构专家 | 版本: v1.0 | 更新时间: 2026-03-03'
+summary: '作者: 多租户架构专家 | 版本: v1.0 | 更新时间: 2026-03-03'
 category: papers
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - istio
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -54,8 +57,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] vCluster 与虚拟集群多租户 (vCluster and Virtual Cluster Multi-Tenancy)
 
@@ -1521,5 +1525,9 @@ Cluster API   ★★★★★   ★★★★★    ★★★☆☆  ★★★★
 - 02-kubernetes-large-scale-performance-optimization
 
 ## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

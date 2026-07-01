@@ -1,6 +1,7 @@
 ---
 title: Serverless Workflow 编排
-description: 'Serverless Workflow 是 CNCF Sandbox 项目，定义了事件驱动工作流的声明式规范，使用 YAML/JSON 描述工作流逻辑，支持多种...'
+description: Serverless Workflow 是 CNCF Sandbox 项目，定义了事件驱动工作流的声明式规范，使用 YAML/JSON 描述工作流逻辑，支持多种...
+summary: Serverless Workflow 是 CNCF Sandbox 项目，定义了事件驱动工作流的声明式规范，使用 YAML/JSON 描述工作流逻辑，支持多种...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - workloads
 - serverless
 - orchestration
+tier: core
+created: 2026-05
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,9 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
-created: 2026-05
 ---
+
+
 
 # Serverless Workflow 编排（Serverless Workflow）
 

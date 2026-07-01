@@ -1,12 +1,15 @@
 ---
-title: "阿里云专有云与ACK"
-category: "cloud-provider"
-tags: ["cloud-providers"]
-created: "2026-05-23"
-updated: "2026-05-23"
+title: 阿里云专有云与ACK
+summary: 阿里云专有云与ACK文档索引及快速入口。
+category: cloud-provider
+tags:
+- cloud-providers
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
-summary: "阿里云专有云与ACK文档索引及快速入口。"
 ---
+
 
 # 阿里云专有云与ACK
 

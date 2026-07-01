@@ -1,6 +1,9 @@
 ---
 title: KMesh 内核级服务网格
-description: 'KMesh 是华为开源的 CNCF Sandbox 项目，基于 eBPF 和可编程硬件在内核态实现服务网格数据面，将 L4 流量管理下沉到内核，显著降低 Sid...'
+description: KMesh 是华为开源的 CNCF Sandbox 项目，基于 eBPF 和可编程硬件在内核态实现服务网格数据面，将 L4 流量管理下沉到内核，显著降低
+  Sid...
+summary: KMesh 是华为开源的 CNCF Sandbox 项目，基于 eBPF 和可编程硬件在内核态实现服务网格数据面，将 L4 流量管理下沉到内核，显著降低
+  Sid...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - networking
 - service-mesh
 - ebpf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # KMesh 内核级服务网格（KMesh）
 

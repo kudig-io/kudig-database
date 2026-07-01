@@ -1,6 +1,7 @@
 ---
 title: 能源电力 Kubernetes 生产架构设计 (domain-20-application-patterns)
 description: 'title: 能源电力 Kubernetes 生产架构设计'
+summary: 'title: 能源电力 Kubernetes 生产架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - gateway
 - operator
 - gpu
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 能源电力 [[Kubernetes|Kubernetes]] 生产架构设计
 description: '# 能源电力 Kubernetes 生产架构设计'

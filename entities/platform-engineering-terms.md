@@ -1,7 +1,9 @@
 ---
 title: K8s 平台工程术语参考
-description: '| **Admission Webhook 最佳实践** | Admission Webhook Good Practices | Admission Webhook 是扩展 Kubernetes API 的强大机制，但在设计和部署时需要格外谨慎
-  |'
+description: '| **Admission Webhook 最佳实践** | Admission Webhook Good Practices | Admission
+  Webhook 是扩展 Kubernetes API 的强大机制，但在设计和部署时需要格外谨慎 |'
+summary: '| **Admission Webhook 最佳实践** | Admission Webhook Good Practices | Admission
+  Webhook 是扩展 Kubernetes API 的强大机制，但在设计和部署时需要格外谨慎 |'
 category: references
 tags:
 - k8s
@@ -14,6 +16,8 @@ tags:
 - operator
 - webhook
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +35,9 @@ prerequisites:
 - helm-basics
 - iac-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8s 平台工程术语参考
 

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 自动化运维与SRE实践 (Automation and SRE Practices)
 description: '# Kubernetes 自动化运维与SRE实践 (Automation and SRE Practices)'
+summary: '# Kubernetes 自动化运维与SRE实践 (Automation and SRE Practices)'
 category: papers
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - webhook
 - llm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -48,8 +51,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 自动化运维与SRE实践 (Automation and SRE Practices)
 
@@ -1434,5 +1438,9 @@ SRE智能化趋势:
 - 12-kubernetes-scheduler-deep-optimization-custom-scheduling
 
 ## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

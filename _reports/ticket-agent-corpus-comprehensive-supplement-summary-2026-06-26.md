@@ -1,6 +1,7 @@
 ---
 title: 工单智能体语料全面补充执行摘要（2026-06-26）
 description: 按建议补齐 8 个关键二级目录 + 4 个偏薄 Domain 核心内容的执行摘要
+summary: 按建议补齐 8 个关键二级目录 + 4 个偏薄 Domain 核心内容的执行摘要
 category: reports
 tags:
 - ticket-agent
@@ -9,18 +10,21 @@ tags:
 - quality
 - audit
 - alicloud
+tier: supporting
 created: '2026-06-26'
 updated: '2026-06-26'
 last_updated: 2026-06-26
 status: completed
 relationships:
-- target: "_reports/ticket-agent-corpus-qa-action-extension-summary-2026-06-26.md"
+- target: _reports/ticket-agent-corpus-qa-action-extension-summary-2026-06-26.md
   type: related_to
-- target: "_reports/ticket-agent-corpus-execution-summary-2026-06-26.md"
+- target: _reports/ticket-agent-corpus-execution-summary-2026-06-26.md
   type: related_to
-- target: "_reports/ticket-agent-corpus-round2-summary-2026-06-26.md"
+- target: _reports/ticket-agent-corpus-round2-summary-2026-06-26.md
   type: related_to
 ---
+
+
 
 # 工单智能体语料全面补充执行摘要（2026-06-26）
 

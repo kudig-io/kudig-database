@@ -1,12 +1,15 @@
 ---
 title: 云原生计算基金会
-description: 'CNCF（Cloud Native Computing Foundation，云原生计算基金会）是 Linux Foundation 旗下的开源基金会，致力于推...'
+description: CNCF（Cloud Native Computing Foundation，云原生计算基金会）是 Linux Foundation 旗下的开源基金会，致力于推...
+summary: CNCF（Cloud Native Computing Foundation，云原生计算基金会）是 Linux Foundation 旗下的开源基金会，致力于推...
 category: dictionary
 tags:
 - k8s
 - glossary
 - cncf
 - cloud-native
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 云原生计算基金会
 

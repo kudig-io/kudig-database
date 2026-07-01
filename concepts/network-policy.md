@@ -1,13 +1,22 @@
 ---
-title: "NetworkPolicy"
+title: NetworkPolicy
+summary: NetworkPolicy 是 Kubernetes 中用于控制 Pod 级别网络流量的安全资源。它通过标签选择器（Label Selector）定义一组
+  Pod，并显式声明哪些流量可以进入（ingress）或离开（egress）这组 Pod。NetworkPolicy 是构建零信任网络的基础构件。
 category: concepts
-tags: ["core-concept", "domain-03", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- core-concept
+- domain-03
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # NetworkPolicy
 
@@ -80,3 +89,7 @@ NetworkPolicy 的生效完全依赖 CNI 插件的实现。若 CNI 不支持，�
 - [[security-defense-depth]] — 云原生纵深防御体系
 - [[cloud-native-defense-in-depth]] — 云原生安全纵深防御
 - [[multi-tenancy-isolation]] — 多租户隔离机制
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

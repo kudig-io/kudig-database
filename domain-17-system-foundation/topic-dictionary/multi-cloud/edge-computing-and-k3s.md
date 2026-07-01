@@ -1,6 +1,7 @@
 ---
 title: 边缘计算与轻量级 Kubernetes
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flannel
 - coredns
 - flux
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,9 +38,9 @@ prerequisites:
 - etcd-basics
 - redis-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 边缘计算与轻量级 [[Kubernetes|Kubernetes]]
 

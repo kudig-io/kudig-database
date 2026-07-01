@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 集群
-description: 'Kubernetes 集群是由一组节点（Node）组成的计算资源池，包含控制平面（Control Plane）和工作节点（Worker Node），提供容器编排...'
+description: Kubernetes 集群是由一组节点（Node）组成的计算资源池，包含控制平面（Control Plane）和工作节点（Worker Node），提供容器编排...
+summary: Kubernetes 集群是由一组节点（Node）组成的计算资源池，包含控制平面（Control Plane）和工作节点（Worker Node），提供容器编排...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - fundamentals
 - cluster
 - architecture
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Kubernetes 集群（Cluster）
 

@@ -1,6 +1,7 @@
 ---
 title: nginx-ingress-controller 知识图谱索引
 description: nginx-ingress-controller 知识图谱索引，聚合 nginx-ingress 架构、Ingress 配置、TLS 终止、故障排查等所有相关内容
+summary: nginx-ingress-controller 知识图谱索引，聚合 nginx-ingress 架构、Ingress 配置、TLS 终止、故障排查等所有相关内容
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - tls
 - rag
 - istio
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 # nginx-ingress-controller 知识图谱索引
 

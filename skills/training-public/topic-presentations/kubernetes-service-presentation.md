@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Service 全栈进阶培训 (从入门到专家) [topic-presentations]
 description: '**适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南'
+summary: '**适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南'
 category: presentations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - ingress
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -42,8 +45,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] [[Service|Service]] 全栈进阶培训 (从入门到专家)
 

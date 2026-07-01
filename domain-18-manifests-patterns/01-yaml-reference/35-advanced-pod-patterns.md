@@ -1,6 +1,7 @@
 ---
 title: 35 - 高级 Pod 模式与调度策略 YAML 配置参考
 description: 'title: 35 - 高级 Pod 模式与调度策略 YAML 配置参考'
+summary: 'title: 35 - 高级 Pod 模式与调度策略 YAML 配置参考'
 category: general
 tags:
 - yaml
@@ -13,6 +14,8 @@ tags:
 - argocd
 - redis
 - postgresql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ prerequisites:
 - redis-basics
 - gpu-scheduling-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 35 - 高级 Pod 模式与调度策略 YAML 配置参考
 description: '# 35 - 高级 Pod 模式与调度策略 YAML 配置参考'
@@ -3465,5 +3469,7 @@ spec:
 - 01-yaml-syntax-resource-conventions
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]

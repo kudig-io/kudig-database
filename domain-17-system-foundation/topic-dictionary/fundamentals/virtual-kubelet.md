@@ -1,6 +1,8 @@
 ---
 title: Virtual Kubelet 虚拟节点
-description: 'Virtual Kubelet 是 CNCF Sandbox 项目，通过 Kubelet 接口将外部服务（如 Serverless 平台/云 API/VM）伪装...'
+description: Virtual Kubelet 是 CNCF Sandbox 项目，通过 Kubelet 接口将外部服务（如 Serverless 平台/云
+  API/VM）伪装...
+summary: Virtual Kubelet 是 CNCF Sandbox 项目，通过 Kubelet 接口将外部服务（如 Serverless 平台/云 API/VM）伪装...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - fundamentals
 - node
 - serverless
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Virtual Kubelet 虚拟节点（Virtual Kubelet）
 

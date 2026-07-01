@@ -1,6 +1,7 @@
 ---
 title: ArgoCD
 description: '- [[concepts/CI-CD 流水线 × Secret 管理.md|CI-CD 流水线 × Secret 管理]] — 综合'
+summary: '- [[concepts/CI-CD 流水线 × Secret 管理.md|CI-CD 流水线 × Secret 管理]] — 综合'
 category: entities
 tags:
 - argocd
@@ -12,6 +13,8 @@ tags:
 - flux
 - redis
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - gitops-basics
 - redis-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # ArgoCD
 

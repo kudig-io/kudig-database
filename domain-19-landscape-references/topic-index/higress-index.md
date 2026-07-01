@@ -1,6 +1,7 @@
 ---
 title: Higress 知识图谱索引
 description: Higress 云原生 API 网关知识图谱索引，聚合 Higress 架构、路由配置、服务发现、Wasm 插件、AI 网关等所有相关内容
+summary: Higress 云原生 API 网关知识图谱索引，聚合 Higress 架构、路由配置、服务发现、Wasm 插件、AI 网关等所有相关内容
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - gateway
 - api-gateway
 - wasm
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 # Higress 知识图谱索引
 

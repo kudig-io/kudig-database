@@ -1,6 +1,8 @@
 ---
 title: Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sidecar-less Architecture)
-description: '# Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sidecar-less Architecture)'
+description: '# Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sidecar-less
+  Architecture)'
+summary: '# Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sidecar-less Architecture)'
 category: ebpf-technology
 tags:
 - k8s
@@ -13,6 +15,8 @@ tags:
 - envoy
 - flannel
 - calico
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -22,7 +26,8 @@ audience:
 - 内核工程师
 estimated_read_time: 5min
 intent_queries:
-- Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sidecar-less Architecture) 是什么
+- Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sidecar-less Architecture)
+  是什么
 - 如何 Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sidecar-less Architecture)
 - Kubernetes 35 ebpf technology 最佳实践
 trigger_keywords:
@@ -57,8 +62,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md
   label: '故障树: cilium'
-created: "2026-05-23"
 ---
+
+
 
 # [[Cilium|Cilium]] [[Service|Service]]Service Mesh）|Service Mesh]] 无 Sidecar 架构 (Cilium Service Mesh Sidecar-less Architecture)
 

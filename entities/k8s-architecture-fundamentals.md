@@ -1,6 +1,7 @@
 ---
 title: K8s 架构基础与核心组件原理
 description: '# K8s 架构基础与核心组件原理'
+summary: '# K8s 架构基础与核心组件原理'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - docker
 - gateway
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8s 架构基础与核心组件原理
 

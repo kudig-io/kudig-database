@@ -1,6 +1,7 @@
 ---
 title: xRegistry 增强型注册表
-description: 'xRegistry 是 CNCF 社区的增强型 OCI 注册表实现，在标准 Distribution 基础上扩展了搜索、标签管理、配额控制和多仓库同步等企业级功...'
+description: xRegistry 是 CNCF 社区的增强型 OCI 注册表实现，在标准 Distribution 基础上扩展了搜索、标签管理、配额控制和多仓库同步等企业级功...
+summary: xRegistry 是 CNCF 社区的增强型 OCI 注册表实现，在标准 Distribution 基础上扩展了搜索、标签管理、配额控制和多仓库同步等企业级功...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - tooling
 - registry
 - oci
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # xRegistry 增强型注册表（xRegistry）
 

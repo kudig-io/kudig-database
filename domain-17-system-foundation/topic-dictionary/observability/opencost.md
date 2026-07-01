@@ -1,6 +1,7 @@
 ---
 title: OpenCost 成本监控
-description: 'OpenCost 是 CNCF Sandbox 项目，为 Kubernetes 提供开源的成本分配和监控能力，精确计算每个 Pod/Namespace/Clus...'
+description: OpenCost 是 CNCF Sandbox 项目，为 Kubernetes 提供开源的成本分配和监控能力，精确计算每个 Pod/Namespace/Clus...
+summary: OpenCost 是 CNCF Sandbox 项目，为 Kubernetes 提供开源的成本分配和监控能力，精确计算每个 Pod/Namespace/Clus...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - observability
 - cost
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # OpenCost 成本监控（OpenCost）
 

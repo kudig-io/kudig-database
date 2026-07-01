@@ -1,6 +1,7 @@
 ---
 title: 30 - etcd运维操作
 description: '# 30 - etcd运维操作'
+summary: '# 30 - etcd运维操作'
 category: control-plane
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - job
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -69,8 +72,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 30 - etcd运维操作
 
@@ -557,7 +561,7 @@ etcdctl endpoint status --cluster -w table | awk '{print $1, $6}'
 | **Leader 选举频繁** | 集群不稳定 | `etcdctl endpoint status --cluster` | 检查网络延迟、磁盘IO |
 | **空间不足** | `mvcc: database space exceeded` | `etcdctl alarm list` | 压缩+碎片整理+扩容 |
 | **成员不一致** | 数据不同步 | `etcdctl endpoint status` | 移除并重新添加成员 |
-| **连接拒绝** | `connection refused` | `netstat -tlnp \| grep 2379` | 检查证书、防火墙、服务状态 |
+| **连接拒绝** | `connection refused` | `netstat -tlnp | grep 2379` | 检查证书、防火墙、服务状态 |
 | **慢查询** | API Server 响应慢 | `etcdctl check perf` | 优化磁盘、调整 heartbeat-interval |
 
 ### 性能测试

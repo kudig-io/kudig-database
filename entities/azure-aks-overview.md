@@ -1,6 +1,7 @@
 ---
 title: Azure AKS (Azure Kubernetes Service) 概述
 description: 'title: Azure AKS (Azure Kubernetes Service) 概述'
+summary: 'title: Azure AKS (Azure Kubernetes Service) 概述'
 category: general
 tags:
 - cloud
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - istio
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Azure AKS (Azure [[Kubernetes|Kubernetes]] [[Service|Service]]) 概述
 description: '# Azure AKS (Azure Kubernetes Service) 概述'
@@ -1096,6 +1100,8 @@ steps:
 - 业务影响评估
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[log|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

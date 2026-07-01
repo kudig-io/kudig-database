@@ -1,6 +1,7 @@
 ---
 title: Wiki 维护周期执行摘要（2026-06-26）
 description: 完成 cross-linker、wiki-lint、wiki-synthesize、wiki-status insights 四轮维护任务的执行摘要
+summary: 完成 cross-linker、wiki-lint、wiki-synthesize、wiki-status insights 四轮维护任务的执行摘要
 category: reports
 tags:
 - wiki-maintenance
@@ -9,16 +10,19 @@ tags:
 - wiki-synthesize
 - wiki-status
 - insights
-created: "2026-06-26"
-updated: "2026-06-26"
+tier: supporting
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06-26
 ---
+
+
 
 # Wiki 维护周期执行摘要（2026-06-26）
 
 > **执行目标**：按 wiki-status 建议全面执行 wiki 维护任务  
-> **执行范围**：cross-linker、wiki-lint、wiki-synthesize、wiki-status insights、broken links 修复  
-> **执行结果**：完成全部维护任务，核心内容 broken links = 0，typed relationship issues = 0
+> **执行范围**：cross-linker、wiki-lint、wiki-synthesize、wiki-status insights、broken links 修复、summary/frontmatter 补充、tier 分配、fragmented tags cross-link  
+> **执行结果**：完成全部维护任务，核心内容 broken links = 0，typed relationship issues = 0，missing frontmatter = 0
 
 ---
 
@@ -31,9 +35,12 @@ last_updated: 2026-06-26
 | Wiki-Synthesize | 创建 5 个 synthesis 页面 |
 | Wiki-Status Insights | 生成全库结构洞察报告 `_meta/_insights.md` |
 | Broken Links 修复 | 核心内容 broken links 从 255 → 0，relationship issues 从 15 → 0 |
+| Summary/Frontmatter | 4,937 个 summary，41 个 frontmatter |
+| Tier 分配 | core=1102, supporting=1372, peripheral=2511 |
+| Fragmented Tags | 5 个 tag hubs，434 个页面新增交叉链接 |
 | 日志更新 | 更新 `log.md`、`hot.md` |
-| 新增脚本 | 13 个自动化脚本 |
-| 新增报告 | 10+ 份 |
+| 新增脚本 | 15 个自动化脚本 |
+| 新增报告 | 12+ 份 |
 
 ---
 
@@ -60,7 +67,7 @@ last_updated: 2026-06-26
 
 ### 主要修复类型
 
-1. **概念链接规范化**：`[[Container Runtime]]` → `[[concepts/container-runtime.md\|Container Runtime]]`
+1. **概念链接规范化**：`[[Container Runtime]]` → `[[concepts/container-runtime.md|Container Runtime]]`
 2. **_meta/_reports 链接转文本**：报告和日志引用转为纯文本
 3. **YAML/TOML 伪链接清理**：`[[kind: Deployment]]` → `` `kind: Deployment` ``
 4. **relationships 字段修复**：清理 display text、无效 type、不存在目标
@@ -77,7 +84,97 @@ last_updated: 2026-06-26
 
 ---
 
-## 3. Cross-Linker
+## 3. Summary 与 Frontmatter 补充
+
+### 执行范围
+
+扫描所有核心内容页面（4,987 页），为缺少 `summary` 和基础 frontmatter 的页面自动补充。
+
+### 生成规则
+
+1. **summary 优先级**：
+   - 优先使用 frontmatter 中的 `description` 字段
+   - 无 description 时提取正文第一段前 200 字符
+   - 兜底使用页面标题
+
+2. **frontmatter 默认值**：
+   - `title`：从文件名推断（首字母大写）
+   - `category`：从路径推断（concepts/entities/skills/domain-XX/docs）
+   - `tags`：从文件名推断一个默认 tag
+   - `created`：当前日期
+
+### 成果
+
+| 指标 | 修复前 | 修复后 |
+|---|---|---|
+| Missing summary | 4,827 | **2** |
+| Missing frontmatter | 74 | **0** ✅ |
+| Summary added | - | **4,937** |
+| Frontmatter added/fixed | - | **41** |
+
+### 例外说明
+
+- 2 个文件因 macOS `com.apple.provenance` 扩展属性保护无法写入：
+  - `domain-04-storage-data/03-distributed-storage/01-velero-backup-recovery.md`
+  - `domain-04-storage-data/04-stateful-app-storage/01-stateful-app-storage-patterns.md`
+- 需用户手动在 Finder 中解除保护或运行 `xattr -c <file>` 后补充 summary
+
+### 输出报告
+
+- `_reports/summary-frontmatter-fill-2026-06-26.md`
+
+---
+
+## 4. Tier 分配
+
+### 分配规则
+
+- **core**: 入链 >= 5
+- **peripheral**: 入链 <= 1 且 90+ 天未更新
+- **supporting**: 其他情况
+
+### 成果
+
+| Tier | 页面数 |
+|---|---|
+| core | 1,102 |
+| supporting | 1,372 |
+| peripheral | 2,511 |
+| 权限错误 | 2 |
+
+### 输出
+
+- `_reports/tier-assignment-2026-06-26.md`
+
+---
+
+## 5. Fragmented Tags Cross-Link
+
+### 处理策略
+
+为 5 个 medium-sized fragmented tags 创建 hub 页面，并从每个 tag 页面的 Related 部分链接到 hub。
+
+| Tag | 页面数 | Hub 页面 |
+|---|---|---|
+| research | 43 | `tags/research.md` |
+| deep-dive | 55 | `tags/deep-dive.md` |
+| papers | 21 | `tags/papers.md` |
+| reference | 194 | `tags/reference.md` |
+| visibility/public | 121 | `tags/visibility-public.md` |
+
+### 成果
+
+- 创建 hub 数：5
+- 修改页面数：434
+- Orphans 从 1,788 降至 1,717（减少 71）
+
+### 输出
+
+- `_reports/fragmented-tags-cross-link-2026-06-26.md`
+
+---
+
+## 6. Cross-Linker
 
 ### 执行范围
 
@@ -102,7 +199,7 @@ last_updated: 2026-06-26
 
 ---
 
-## 4. Wiki-Lint
+## 7. Wiki-Lint
 
 ### 扫描范围
 
@@ -133,7 +230,7 @@ last_updated: 2026-06-26
 
 ---
 
-## 5. Wiki-Synthesize
+## 8. Wiki-Synthesize
 
 ### 创建的 Synthesis 页面
 
@@ -159,7 +256,7 @@ last_updated: 2026-06-26
 
 ---
 
-## 6. Wiki-Status Insights
+## 9. Wiki-Status Insights
 
 ### 更新 `_meta/_insights.md`
 
@@ -196,7 +293,7 @@ last_updated: 2026-06-26
 
 ---
 
-## 7. 日志与热缓存更新
+## 10. 日志与热缓存更新
 
 ### log.md
 
@@ -213,7 +310,7 @@ last_updated: 2026-06-26
 
 ---
 
-## 8. 新增脚本
+## 11. 新增脚本
 
 | 脚本 | 用途 |
 |---|---|
@@ -233,31 +330,38 @@ last_updated: 2026-06-26
 | `scripts/fix_relationships_targets.py` | relationships display text 清理 |
 | `scripts/final_cleanup.py` / `final_cleanup_v2.py` | 最终清理 |
 | `scripts/fix_broken_relationships_yaml.py` | relationships YAML 格式修复 |
+| `scripts/bulk_fill_summary_and_frontmatter.py` | 批量补充 summary/frontmatter |
+| `scripts/bulk_assign_tiers.py` | 批量分配 tier |
+| `scripts/cross_link_fragmented_tags.py` | 为 fragmented tags 创建 hub 并交叉链接 |
+| `scripts/fix_escaped_wikilinks.py` | 修复错误转义的 wikilink |
 
 ---
 
-## 9. 关键报告索引
+## 12. 关键报告索引
 
-- `_reports/wiki-lint-audit-2026-06-26.md` — lint 审计（broken links = 0）
+- `_reports/wiki-lint-audit-2026-06-26.md` — lint 审计（broken links = 0, missing frontmatter = 0, relationship issues = 0）
 - `_meta/_insights.md` — 全库结构洞察
+- `_reports/tier-assignment-2026-06-26.md` — tier 分配报告
+- `_reports/fragmented-tags-cross-link-2026-06-26.md` — fragmented tags cross-link 报告
+- `_reports/summary-frontmatter-fill-2026-06-26.md` — summary/frontmatter 补充报告
 - `_reports/broken-links-final-fix-2026-06-26.md` — broken links 最终修复报告
 - `_reports/cross-linker-targeted-2026-06-26.md` — cross-link 报告
 - `_reports/wiki-maintenance-cycle-summary-2026-06-26.md` — 本摘要
 
 ---
 
-## 10. 后续建议
+## 13. 后续建议
 
 ### 高优先级
 
-1. **为关键页面添加 summary 字段** — 优先为 Top 100 hub 页面和新增核心文档添加（当前 4,827 个页面缺失）
-2. **批量修复 tier 分配** — 为 4,800+ 个未设置 tier 的页面分配 core/supporting/peripheral
-3. **补充缺失 frontmatter** — 74 个核心页面缺少完整 frontmatter
+1. **处理 2 个受 macOS 保护的页面** — 手动为 Velero 和 StatefulSet 存储模式页面补充 summary
+2. **Review 自动生成的 summary 质量** — 4,937 个 summary 中可能存在低质量或截断的条目
+3. **继续 cross-link 更多 fragmented tags** — 当前仅处理了 5 个，还有 271 个标签簇
 
 ### 中优先级
 
-4. **继续 cross-link fragmented tags** — 针对 #incident-response、#capacity、#load-balancer 等标签运行 cross-linker
-5. **处理 release notes 归档 orphan** — 大量 domain-19 发布说明天然为 orphan，可接受
+4. **处理 release notes 归档 orphan** — 大量 domain-19 发布说明天然为 orphan，可接受
+5. **Review tier 分配** — 检查是否有核心页面被误分配为 peripheral
 
 ### 低优先级
 

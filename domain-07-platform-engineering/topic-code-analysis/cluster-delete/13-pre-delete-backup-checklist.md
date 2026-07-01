@@ -1,6 +1,7 @@
 ---
 title: 集群删除前的数据备份与迁移检查清单
 description: 系统梳理 Kubernetes 集群删除前必须完成的数据备份、资源迁移、配置导出和清理验证工作，提供可操作的检查清单和 etcd 快照备份命令，防止因误操作导致数据永久丢失。
+summary: 系统梳理 Kubernetes 集群删除前必须完成的数据备份、资源迁移、配置导出和清理验证工作，提供可操作的检查清单和 etcd 快照备份命令，防止因误操作导致数据永久丢失。
 category: cluster-delete
 tags:
 - backup
@@ -13,6 +14,8 @@ tags:
 - apiserver
 - hpa
 - statefulset
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: intermediate
 reading_level: intermediate
@@ -57,8 +60,9 @@ related_topics:
 - reset
 - etcd-cleanup
 - ha-delete
-created: "2026-05-23"
 ---
+
+
 
 # 集群删除前的数据备份与迁移检查清单
 

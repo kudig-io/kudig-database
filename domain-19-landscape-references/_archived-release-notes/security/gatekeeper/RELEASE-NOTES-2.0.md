@@ -1,6 +1,7 @@
 ---
 title: etcd v2.0 Release Notes
 description: etcd v2.0 Release Notes — Kubernetes 生产运维知识库
+summary: etcd v2.0 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - changelog
 - etcd
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[etcd|etcd]] v2.0 Release Notes
 

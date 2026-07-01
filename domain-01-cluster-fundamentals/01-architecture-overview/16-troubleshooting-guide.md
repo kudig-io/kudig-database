@@ -1,6 +1,7 @@
 ---
 title: 16 - Kubernetes 故障排查专家级指南
 description: '# 16 - Kubernetes 故障排查专家级指南'
+summary: '# 16 - Kubernetes 故障排查专家级指南'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - operator
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -65,8 +68,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 16 - [[Kubernetes|Kubernetes]] 故障排查专家级指南
 

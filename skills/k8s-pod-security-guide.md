@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Pod 安全最佳实践
 description: '# Kubernetes Pod 安全最佳实践'
+summary: '# Kubernetes Pod 安全最佳实践'
 category: skills
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - pod-security
 - pss
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 - 安全最佳实践
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes Pod 安全最佳实践
 

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes v1.33 实战案例集
 description: '- [案例六：跨命名空间存储引用](#案例六跨命名空间存储引用)'
+summary: '- [案例六：跨命名空间存储引用](#案例六跨命名空间存储引用)'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - envoy
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -59,8 +62,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] v1.33 实战案例集
 

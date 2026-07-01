@@ -1,6 +1,7 @@
 ---
 title: RBAC 与认证故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: RBAC 与认证故障排查指南'
+summary: 'title: RBAC 与认证故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -10,6 +11,8 @@ tags:
 - docker
 - crd
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -35,8 +38,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
-created: "2026-05-23"
 ---
+
+
 
 title: RBAC 与认证故障排查指南
 description: '# RBAC 与认证故障排查指南'
@@ -161,7 +165,7 @@ kubectl config view
 kubectl config current-context
 
 # 查看 API Server 审计日志
-cat /var/log/kubernetes/audit/audit.log | grep "403\|401"
+cat /var/log/kubernetes/audit/audit.log | grep "403|401"
 ```
 
 ### 1.3 影响面分析

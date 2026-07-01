@@ -1,6 +1,7 @@
 ---
 title: Deployment vs StatefulSet vs DaemonSet 选型指南
 description: 系统对比 Kubernetes 三大核心工作负载控制器 Deployment、StatefulSet、DaemonSet 的架构差异、适用场景与选型决策树，帮助工程师准确匹配业务需求。
+summary: 系统对比 Kubernetes 三大核心工作负载控制器 Deployment、StatefulSet、DaemonSet 的架构差异、适用场景与选型决策树，帮助工程师准确匹配业务需求。
 category: deployment
 tags:
 - deployment
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - docker
 - redis
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: advanced
 reading_level: advanced
@@ -59,8 +62,9 @@ related_topics:
 - deployment-controller
 - replicaset-controller
 - rolling-update
-created: "2026-05-23"
 ---
+
+
 
 # Deployment vs StatefulSet vs DaemonSet 选型指南
 

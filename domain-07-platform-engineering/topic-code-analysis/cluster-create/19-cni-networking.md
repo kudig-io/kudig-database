@@ -1,6 +1,7 @@
 ---
 title: CNI 网络插件与集群网络 (topic-code-analysis)
 description: 'title: CNI 网络插件与集群网络'
+summary: 'title: CNI 网络插件与集群网络'
 category: general
 tags:
 - reference
@@ -13,6 +14,8 @@ tags:
 - flannel
 - calico
 - coredns
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: CNI 网络插件与集群网络
 description: '# CNI 网络插件与集群网络'
@@ -550,6 +554,8 @@ kubectl exec -it <pod> -- cat /etc/resolv.conf
 - [`Pod 网络命名空间`](../node-create/09-cni-node.md) — veth pair 和 bridge
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]

@@ -1,6 +1,7 @@
 ---
 title: 14 - 变更管理与发布策略
 description: '# 14 - 变更管理与发布策略'
+summary: '# 14 - 变更管理与发布策略'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - docker
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,9 +38,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 14 - 变更管理与发布策略
 

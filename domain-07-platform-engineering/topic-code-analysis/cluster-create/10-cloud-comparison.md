@@ -1,6 +1,7 @@
 ---
 title: 云厂商方案与 kubeadm 对比 (topic-code-analysis)
 description: 'title: 云厂商方案与 kubeadm 对比'
+summary: 'title: 云厂商方案与 kubeadm 对比'
 category: general
 tags:
 - reference
@@ -13,6 +14,8 @@ tags:
 - gpu
 - serverless
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 云厂商方案与 kubeadm 对比
 description: '# 云厂商方案与 kubeadm 对比'
@@ -378,6 +382,8 @@ kubeadm token create --print-join-command
 - **混合**: 利用各自优势，托管 control-plane + 自管理特殊节点
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[log|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

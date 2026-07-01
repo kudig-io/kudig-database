@@ -1,12 +1,15 @@
 ---
 title: 第十五章：FTA 质量评估与优化 (domain-10-troubleshooting-diagnostics)
 description: 'title: 第十五章：FTA 质量评估与优化'
+summary: 'title: 第十五章：FTA 质量评估与优化'
 category: fta
 tags:
 - fta
 - troubleshooting
 - grafana
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -35,8 +38,9 @@ prerequisites:
 fta_id: FTA-15_QUALITY_ASSESSMENT-001
 component: 15 Quality Assessment
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: 第十五章：FTA 质量评估与优化
 description: '# 第十五章：FTA 质量评估与优化'

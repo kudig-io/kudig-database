@@ -1,6 +1,9 @@
 ---
 title: GitOps x 平台工程
-description: 'summary: "GitOps 原理与平台工程的融合——GitOps 提供了使自助式黄金路径可靠的协调引擎，平台工程则提供了使 GitOps 采用自然发生的开发者体验。两者结合构成三层平台架构。"'
+description: 'summary: "GitOps 原理与平台工程的融合——GitOps 提供了使自助式黄金路径可靠的协调引擎，平台工程则提供了使 GitOps
+  采用自然发生的开发者体验。两者结合构成三层平台架构。"'
+summary: 'summary: "GitOps 原理与平台工程的融合——GitOps 提供了使自助式黄金路径可靠的协调引擎，平台工程则提供了使 GitOps
+  采用自然发生的开发者体验。两者结合构成三层平台架构。"'
 category: general
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - argocd
 - flux
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,15 +29,16 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - gitops-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/argocd.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/gitops.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-dictionary/configuration/secrets.md]]"
-    type: uses
+- target: '[[entities/argocd.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/gitops.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-dictionary/configuration/secrets.md]]'
+  type: uses
 ---
+
+
 
 ---
 title: [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|GitOps]] x 平台工程

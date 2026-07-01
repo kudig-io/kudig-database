@@ -1,6 +1,7 @@
 ---
 title: kops v1.17 Release Notes
 description: kops v1.17 Release Notes — Kubernetes 生产运维知识库
+summary: kops v1.17 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - docker
 - daemonset
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - cncf-ecosystem
 - iac-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # kops v1.17 Release Notes
 

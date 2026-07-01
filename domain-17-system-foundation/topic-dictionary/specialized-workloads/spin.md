@@ -1,6 +1,9 @@
 ---
 title: Spin WASM 框架
-description: 'Spin 是 Fermyon 开源的 WebAssembly 应用开发框架，支持用 Rust/Go/Python/JavaScript/TypeScript 编...'
+description: Spin 是 Fermyon 开源的 WebAssembly 应用开发框架，支持用 Rust/Go/Python/JavaScript/TypeScript
+  编...
+summary: Spin 是 Fermyon 开源的 WebAssembly 应用开发框架，支持用 Rust/Go/Python/JavaScript/TypeScript
+  编...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - specialized-workloads
 - wasm
 - serverless
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Spin WASM 框架（Spin）
 

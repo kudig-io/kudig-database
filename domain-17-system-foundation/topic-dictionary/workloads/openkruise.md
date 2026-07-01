@@ -1,6 +1,8 @@
 ---
 title: OpenKruise 增强工作负载
-description: 'OpenKruise 是阿里巴巴开源的 CNCF 孵化项目，为 Kubernetes 提供增强型工作负载管理能力，包括原地升级、Sidecar 管理、镜像预热等...'
+description: OpenKruise 是阿里巴巴开源的 CNCF 孵化项目，为 Kubernetes 提供增强型工作负载管理能力，包括原地升级、Sidecar
+  管理、镜像预热等...
+summary: OpenKruise 是阿里巴巴开源的 CNCF 孵化项目，为 Kubernetes 提供增强型工作负载管理能力，包括原地升级、Sidecar 管理、镜像预热等...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - workloads
 - operator
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # OpenKruise 增强工作负载（OpenKruise）
 

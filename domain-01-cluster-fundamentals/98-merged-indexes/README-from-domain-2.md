@@ -1,6 +1,7 @@
 ---
 title: 'Domain-2: Kubernetes 设计原则与核心机制'
 description: 'title: ''Domain-2: Kubernetes 设计原则与核心机制'''
+summary: 'title: ''Domain-2: Kubernetes 设计原则与核心机制'''
 category: general
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - operator
 - webhook
 - ebpf
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - ebpf-basics
 - etcd-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain-2: Kubernetes 设计原则与核心机制'

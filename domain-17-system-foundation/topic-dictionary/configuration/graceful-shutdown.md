@@ -1,12 +1,15 @@
 ---
 title: 优雅关闭
-description: 'Graceful Shutdown（优雅关闭）是 Kubernetes 在终止 Pod 时允许容器执行清理操作的机制。它确保应用在退出前有机会完成进行中的请求、...'
+description: Graceful Shutdown（优雅关闭）是 Kubernetes 在终止 Pod 时允许容器执行清理操作的机制。它确保应用在退出前有机会完成进行中的请求、...
+summary: Graceful Shutdown（优雅关闭）是 Kubernetes 在终止 Pod 时允许容器执行清理操作的机制。它确保应用在退出前有机会完成进行中的请求、...
 category: dictionary
 tags:
 - k8s
 - glossary
 - configuration
 - graceful-shutdown
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 优雅关闭
 

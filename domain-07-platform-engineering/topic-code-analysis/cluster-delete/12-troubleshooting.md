@@ -1,6 +1,7 @@
 ---
 title: 集群删除故障排查手册 (topic-code-analysis)
 description: 'title: 集群删除故障排查手册'
+summary: 'title: 集群删除故障排查手册'
 category: general
 tags:
 - reference
@@ -12,6 +13,8 @@ tags:
 - docker
 - pdb
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 集群删除故障排查手册
 category: cluster-delete
@@ -543,6 +547,8 @@ strace -f -e trace=umount kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配�
 - [etcd 故障恢复](https://etcd.io/docs/latest/op-guide/recovery/)
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[scripts/man/INSTALL.md|INSTALL]]

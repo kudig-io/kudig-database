@@ -1,6 +1,7 @@
 ---
 title: 14 - 云原生存储与多云策略
 description: 'title: 14 - 云原生存储与多云策略'
+summary: 'title: 14 - 云原生存储与多云策略'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - job
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - iac-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 14 - 云原生存储与多云策略
 description: '# 14 - 云原生存储与多云策略'

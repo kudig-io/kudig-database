@@ -1,7 +1,9 @@
 ---
 title: 指标监控体系详解
-description: 深入解析 Prometheus 监控体系：指标类型（Counter/Gauge/Histogram/Summary）、PromQL 查询、ServiceMonitor、Prometheus Operator、Alertmanager
-  与告警规则配置
+description: 深入解析 Prometheus 监控体系：指标类型（Counter/Gauge/Histogram/Summary）、PromQL 查询、ServiceMonitor、Prometheus
+  Operator、Alertmanager 与告警规则配置
+summary: 深入解析 Prometheus 监控体系：指标类型（Counter/Gauge/Histogram/Summary）、PromQL 查询、ServiceMonitor、Prometheus
+  Operator、Alertmanager 与告警规则配置
 category: domain-06-observability
 tags:
 - k8s
@@ -14,6 +16,8 @@ tags:
 - etcd
 - apiserver
 - scheduler
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -76,8 +80,9 @@ related_docs:
 - path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   type: cheatsheet
   desc: PromQL 速查卡
-created: "2026-05-23"
 ---
+
+
 
 # 02 - 指标监控体系详解 (Monitoring Metrics System)
 

@@ -1,6 +1,7 @@
 ---
 title: 02 - ACK 目标集群设计与搭建 [migration]
 description: 'title: 02 - ACK 目标集群设计与搭建'
+summary: 'title: 02 - ACK 目标集群设计与搭建'
 category: general
 tags:
 - migration
@@ -13,6 +14,8 @@ tags:
 - calico
 - coredns
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 02 - ACK 目标集群设计与搭建
 description: '# 02 - ACK 目标集群设计与搭建'

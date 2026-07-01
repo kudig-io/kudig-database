@@ -1,6 +1,7 @@
 ---
 title: 15 - 生态系统与插件事件
 description: '- [四、cert-manager 证书管理事件](#四cert-manager-证书管理事件)'
+summary: '- [四、cert-manager 证书管理事件](#四cert-manager-证书管理事件)'
 category: kubernetes-events
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - argocd
 - containerd
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -46,8 +49,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 15 - 生态系统与插件事件
 
@@ -180,7 +184,7 @@ created: "2026-05-23"
 内核检测到严重错误(Oops),通常由内核模块 bug、硬件问题或内核版本不兼容导致。Oops 不会导致立即崩溃,但系统不稳定。
 ## 排查建议
 ```bash
-dmesg -T | grep -i 'oops\|bug'
+dmesg -T | grep -i 'oops|bug'
 kubectl describe node <node-name> | grep -A 10 KernelOops
 ```
 ## 解决建议
@@ -220,7 +224,7 @@ crictl ps  # 测试是否挂起
 ## 排查建议
 ```bash
 mount | grep 'ro,'
-dmesg | grep -i 'readonly\|i/o error'
+dmesg | grep -i 'readonly|i/o error'
 smartctl -a /dev/sda
 ```
 ## 解决建议
@@ -333,7 +337,7 @@ free -h
 文件系统元数据损坏,可能导致文件丢失或读写失败。
 ## 排查建议
 ```bash
-dmesg | grep -i 'ext4-fs error\|corruption'
+dmesg | grep -i 'ext4-fs error|corruption'
 ```
 ## 解决建议
 运行 `fsck -y /dev/sda1` (需卸载或单用户模式),备份数据,更换硬盘。

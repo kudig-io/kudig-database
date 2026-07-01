@@ -1,12 +1,15 @@
 ---
 title: 宠物经济架构设计 — 阿里云视角
 description: 'title: 宠物经济架构设计'
+summary: 'title: 宠物经济架构设计'
 category: general
 tags:
 - architecture
 - best-practice
 - redis
 - mysql
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - prometheus-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 宠物经济架构设计
 description: '# 宠物经济架构设计 — 阿里云视角'

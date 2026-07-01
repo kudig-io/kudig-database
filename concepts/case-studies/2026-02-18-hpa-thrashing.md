@@ -1,15 +1,25 @@
 ---
-title: "[2026-02-18] [P1] HPA 配置错误导致无限扩缩容 Thrashing"
+title: '[2026-02-18] [P1] HPA 配置错误导致无限扩缩容 Thrashing'
+summary: '[2026-02-18] [P1] HPA 配置错误导致无限扩缩容 Thrashing：11:05，监控显示 order-api Deployment
+  的 Pod 数量在 5 分钟内从 3 个飙升到 15 个，又迅速降至 3 个，如此反复。Grafana 扩缩容事件图呈现"锯齿"状。'
 category: case-study
-tags: [production, incident, workloads, autoscaling, hpa]
-date: "2026-02-18"
+tags:
+- production
+- incident
+- workloads
+- autoscaling
+- hpa
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-02-18'
 severity: P1
-mttr: "32min"
+mttr: 32min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-02-18] HPA Thrashing 导致订单服务 Pod 在 5min 内扩缩 12 次
 

@@ -1,6 +1,7 @@
 ---
 title: 多云混合部署架构 (Multi-Cloud Hybrid Deployment Architecture)
 description: 'title: 多云混合部署架构 (Multi-Cloud Hybrid Deployment Architecture)'
+summary: 'title: 多云混合部署架构 (Multi-Cloud Hybrid Deployment Architecture)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - istio
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ prerequisites:
 - kafka-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 多云混合部署架构 (Multi-Cloud Hybrid Deployment Architecture)
 description: '# 多云混合部署架构 (Multi-Cloud Hybrid Deployment Architecture)'
@@ -956,3 +960,7 @@ esac
 - 24-production-deployment-best-practices
 - 26-gitops-automation-operations
 - 27-authz-authn-deep-dive
+
+## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub

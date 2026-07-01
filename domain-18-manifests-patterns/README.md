@@ -1,6 +1,7 @@
 ---
 title: Manifests & Patterns
 description: 原 domain-18-manifests-patterns 的 YAML 清单与资源配置参考手册。
+summary: 原 domain-18-manifests-patterns 的 YAML 清单与资源配置参考手册。
 category: domain
 tags:
 - yaml
@@ -9,6 +10,8 @@ tags:
 - configuration
 - daemonset
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Manifests & Patterns
 

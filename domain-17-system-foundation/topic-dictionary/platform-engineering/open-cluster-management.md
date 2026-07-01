@@ -1,6 +1,8 @@
 ---
 title: Open Cluster Management
-description: 'Open Cluster Management（OCM）是 Red Hat 主导的 CNCF Sandbox 项目，提供 Kubernetes 多集群的管理框架...'
+description: Open Cluster Management（OCM）是 Red Hat 主导的 CNCF Sandbox 项目，提供 Kubernetes
+  多集群的管理框架...
+summary: Open Cluster Management（OCM）是 Red Hat 主导的 CNCF Sandbox 项目，提供 Kubernetes 多集群的管理框架...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - platform-engineering
 - multi-cluster
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Open Cluster Management（OCM）
 

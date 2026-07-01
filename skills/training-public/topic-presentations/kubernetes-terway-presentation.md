@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家) [topic-presentations]
 description: '**核心原则**: 理解云原生网络架构、掌握高性能 ENI 策略'
+summary: '**核心原则**: 理解云原生网络架构、掌握高性能 ENI 策略'
 category: presentations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - statefulset
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -45,8 +48,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] Terway (Aliyun) 全栈进阶培训 (从入门到专家)
 

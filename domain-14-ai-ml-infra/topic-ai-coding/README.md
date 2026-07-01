@@ -1,6 +1,7 @@
 ---
 title: AI 编程与 LLM 网关专题 — OpenRouter & OpenCode 全量指南
 description: '# AI 编程与 LLM 网关专题 — OpenRouter & OpenCode 全量指南'
+summary: '# AI 编程与 LLM 网关专题 — OpenRouter & OpenCode 全量指南'
 category: ai-coding
 tags:
 - ai
@@ -12,6 +13,8 @@ tags:
 - agent
 - daemonset
 - gpu
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # AI 编程与 LLM 网关专题 — OpenRouter & OpenCode 全量指南
 

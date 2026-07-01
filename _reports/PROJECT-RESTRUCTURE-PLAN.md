@@ -1,6 +1,7 @@
 ---
 title: KUDIG 项目整体重组行动计划
 description: 将所有 topic-* 目录融入 domain-*，建立单一 domain 分类体系
+summary: 将所有 topic-* 目录融入 domain-*，建立单一 domain 分类体系
 category: report
 tags:
 - restructure
@@ -9,6 +10,8 @@ tags:
 - architecture
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 - 项目整体重组行动计划
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG 项目整体重组行动计划
 

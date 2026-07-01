@@ -1,6 +1,9 @@
 ---
 title: bpfman eBPF 管理器
-description: 'bpfman 是 Red Hat 开源的 CNCF Sandbox 项目，作为系统级守护进程管理 eBPF 程序的加载和生命周期，解决多个应用争用 eBPF 挂...'
+description: bpfman 是 Red Hat 开源的 CNCF Sandbox 项目，作为系统级守护进程管理 eBPF 程序的加载和生命周期，解决多个应用争用
+  eBPF 挂...
+summary: bpfman 是 Red Hat 开源的 CNCF Sandbox 项目，作为系统级守护进程管理 eBPF 程序的加载和生命周期，解决多个应用争用
+  eBPF 挂...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - fundamentals
 - ebpf
 - daemon
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # bpfman eBPF 管理器（bpfman）
 

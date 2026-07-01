@@ -1,6 +1,7 @@
 ---
 title: Tetragon
 description: Tetragon — Kubernetes 生产运维知识库
+summary: Tetragon — Kubernetes 生产运维知识库
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - falco
 - networkpolicy
 - crd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 # Tetragon
 

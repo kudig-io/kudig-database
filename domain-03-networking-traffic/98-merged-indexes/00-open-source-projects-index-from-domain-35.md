@@ -1,6 +1,9 @@
 ---
 title: Domain-35 eBPF 技术 — 开源项目索引
-description: '| **Cilium** | eBPF 网络、安全、可观测性 | CNCF Graduated | v1.17.0 | 21k+ | Apache-2.0 |'
+description: '| **Cilium** | eBPF 网络、安全、可观测性 | CNCF Graduated | v1.17.0 | 21k+ | Apache-2.0
+  |'
+summary: '| **Cilium** | eBPF 网络、安全、可观测性 | CNCF Graduated | v1.17.0 | 21k+ | Apache-2.0
+  |'
 category: ebpf-technology
 tags:
 - k8s
@@ -12,6 +15,8 @@ tags:
 - grafana
 - falco
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -47,8 +52,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Domain-35 eBPF 技术 — 开源项目索引
 

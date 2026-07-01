@@ -1,6 +1,7 @@
 ---
 title: Pod 持续 Pending：资源不足、Taint 不匹配与亲和性冲突
 description: 专有云 ACK 集群业务发布时大量 Pod 处于 Pending 状态，根因涉及节点资源耗尽、Toleration 缺失与 Pod 亲和性冲突的工单闭环样本。
+summary: 专有云 ACK 集群业务发布时大量 Pod 处于 Pending 状态，根因涉及节点资源耗尽、Toleration 缺失与 Pod 亲和性冲突的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -11,6 +12,9 @@ tags:
 - affinity
 - resource
 - p1
+tier: peripheral
+created: '2026-06-26T14:00:00+08:00'
+updated: '2026-06-26T17:00:00+08:00'
 incident_id: INC-2026-ACK-047
 priority: P1
 severity: high
@@ -24,9 +28,7 @@ skill_ref:
   滚动发布诊断 Skill]]'
 fta_ref:
 - 'FTA: Pod Pending 排障'
-created: '2026-06-26T14:00:00+08:00'
-updated: '2026-06-26T17:00:00+08:00'
-last_updated: 2026-06-26T17:00:00+08:00
+last_updated: 2026-06-26 17:00:00+08:00
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -50,13 +52,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -92,7 +96,7 @@ kubectl describe pod -n risk-engine $(kubectl get pod -n risk-engine -l app=risk
 # 3. 批量查看所有 Pending Pod 的调度提示
 for p in $(kubectl get pod -n risk-engine -l app=risk-engine | grep Pending | awk '{print $1}'); do
   echo "=== $p ==="
-  kubectl describe pod -n risk-engine $p | grep -A 5 "FailedScheduling\|0/.* nodes are available"
+  kubectl describe pod -n risk-engine $p | grep -A 5 "FailedScheduling|0/.* nodes are available"
 done
 
 # 4. 检查节点资源分配与可分配余量

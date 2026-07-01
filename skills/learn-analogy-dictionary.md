@@ -1,6 +1,7 @@
 ---
 title: K8S 概念类比词典
 description: '| ConfigMap | 公告板 | 公开的配置信息 |'
+summary: '| ConfigMap | 公告板 | 公开的配置信息 |'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - daemonset
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 - 概念类比词典
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8S 概念类比词典
 

@@ -1,6 +1,7 @@
 ---
 title: FTA 故障树清单索引 (topic-fta)
 description: '## 概述'
+summary: '## 概述'
 category: fta
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/README.md
   label: '运维技能: README'
-created: "2026-05-23"
 ---
+
+
 
 # FTA 故障树清单索引
 

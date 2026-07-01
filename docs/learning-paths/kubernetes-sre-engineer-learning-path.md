@@ -1,11 +1,19 @@
 ---
-title: "K8s运维工程师学习路线"
-category: "learning-path"
-tags: ["reliability", "cluster"]
-created: "2026-05-23"
-updated: "2026-05-23"
+title: K8s运维工程师学习路线
+summary: K8s运维工程师学习路线：kubectl get pods --all-namespaces kubectl describe node <node-name>
+  kubectl logs <pod> --previous kubectl exec -it <pod> -- /bin/sh kubectl top pod
+  -n <namespace>
+category: learning-path
+tags:
+- reliability
+- cluster
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
 ---
+
+
 
 # K8s运维工程师学习路线
 

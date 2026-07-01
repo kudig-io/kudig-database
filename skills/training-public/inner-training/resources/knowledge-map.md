@@ -1,6 +1,7 @@
 ---
 title: ACK/ACR/K8S 内部培训知识图谱
 description: '├── Week 2: 安全认证与监控运维'
+summary: '├── Week 2: 安全认证与监控运维'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ingress
 - rbac
 - networkpolicy
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-18
 difficulty: beginner
 reading_level: beginner
@@ -48,8 +51,9 @@ related_domains:
 related_topics:
 - reading-sequence
 - commands-cheatsheet
-created: "2026-05-23"
 ---
+
+
 
 # ACK/ACR/K8S 内部培训知识图谱
 

@@ -1,6 +1,7 @@
 ---
 title: LLM 隐私与安全
 description: '# LLM 隐私与安全'
+summary: '# LLM 隐私与安全'
 category: ai-infra
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - redis
 - mysql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -56,8 +59,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
-created: "2026-05-23"
 ---
+
+
 
 # LLM 隐私与安全
 
@@ -278,8 +282,8 @@ class PromptInjectionDefense:
             r"&#x?[0-9a-fA-F]+;",
         ],
         "delimiter_injection": [
-            r"<\|im_start\|>",
-            r"<\|im_end\|>",
+            r"<|im_start|>",
+            r"<|im_end|>",
             r"\[INST\]",
             r"\[/INST\]",
             r"<<SYS>>",
@@ -347,7 +351,7 @@ class PromptInjectionDefense:
         sanitized = user_input
         
         # 移除特殊分隔符
-        sanitized = re.sub(r'<\|.*?\|>', '', sanitized)
+        sanitized = re.sub(r'<|.*?|>', '', sanitized)
         sanitized = re.sub(r'\[/?INST\]', '', sanitized)
         sanitized = re.sub(r'<</?SYS>>', '', sanitized)
         

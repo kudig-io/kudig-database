@@ -1,6 +1,7 @@
 ---
 title: 内部开发者平台设计原则
 description: 'title: 内部开发者平台设计原则'
+summary: 'title: 内部开发者平台设计原则'
 category: general
 tags:
 - platform
@@ -13,6 +14,8 @@ tags:
 - calico
 - helm
 - flux
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 内部开发者平台设计原则
 description: '# 内部开发者平台设计原则'

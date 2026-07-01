@@ -1,6 +1,7 @@
 ---
 title: KUDIG-DATABASE 知识库全局索引
 description: 按逻辑分组的完整知识体系导航 | 1300+ 文档 | 41 知识域 + 1 专题
+summary: 按逻辑分组的完整知识体系导航 | 1300+ 文档 | 41 知识域 + 1 专题
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - envoy
 - cilium
 - coredns
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG-DATABASE 知识库全局索引
 

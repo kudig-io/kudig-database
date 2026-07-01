@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 证书故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Kubernetes 证书故障排查指南'
+summary: 'title: Kubernetes 证书故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - docker
 - gateway
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -40,8 +43,9 @@ prerequisites:
 - troubleshooting-methodology
 - etcd-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] 证书故障排查指南
 description: '# Kubernetes 证书故障排查指南'
@@ -529,7 +533,7 @@ node-1   NotReady   <none>   180d   v1.25.0
 openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -enddate
 
 # 2. 检查 kubelet 日志
-journalctl -u kubelet | grep -i "certificate\|x509"
+journalctl -u kubelet | grep -i "certificate|x509"
 
 # 3. 如果启用了证书轮换，重启 kubelet 应该自动申请新证书
 systemctl restart kubelet

@@ -1,6 +1,7 @@
 ---
 title: 06-APM应用性能监控
 description: '# 06-APM应用性能监控'
+summary: '# 06-APM应用性能监控'
 category: production-operations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - redis
 - elasticsearch
 - job
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/monitoring-fta.md
   label: '故障树: monitoring'
-created: "2026-05-23"
 ---
+
+
 
 # 06-APM应用性能监控
 

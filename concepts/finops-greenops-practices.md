@@ -1,17 +1,21 @@
 ---
-title: "FinOps 与 GreenOps 实践"
+title: FinOps 与 GreenOps 实践
+summary: FinOps 与 GreenOps 实践：FinOps 基金会定义的成熟度模型将组织的云财务管理能力划分为三个阶段：
 category: concepts
 tags:
-  - finops
-  - greenops
-  - cost
-  - sustainability
-  - gpu
-  - k8s
+- finops
+- greenops
+- cost
+- sustainability
+- gpu
+- k8s
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # FinOps 与 GreenOps 实践
 

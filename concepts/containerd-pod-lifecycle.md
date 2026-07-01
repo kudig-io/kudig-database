@@ -1,12 +1,21 @@
 ---
-title: "containerd 容器生命周期与 Pod 管理"
+title: containerd 容器生命周期与 Pod 管理
+summary: containerd 容器生命周期与 Pod 管理：Created → Running → (Succeeded|Failed|Unknown)
+  ↓ Paused → Running
 category: synthesis
-tags: [synthesis, containerd, pod, k8s]
+tags:
+- synthesis
+- containerd
+- pod
+- k8s
+tier: supporting
 sources: []
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # containerd 容器生命周期与 Pod 管理
 

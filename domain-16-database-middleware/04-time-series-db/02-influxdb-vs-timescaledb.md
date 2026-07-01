@@ -1,6 +1,7 @@
 ---
 title: InfluxDB vs TimescaleDB 对比
 description: '## 架构差异'
+summary: '## 架构差异'
 category: domain
 tags:
 - influxdb
@@ -10,6 +11,8 @@ tags:
 - comparison
 - prometheus
 - flux
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 # InfluxDB vs TimescaleDB 对比
 

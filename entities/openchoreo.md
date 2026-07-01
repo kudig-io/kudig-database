@@ -1,6 +1,7 @@
 ---
 title: OpenChoreo (entities)
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flux
 - opa
 - crd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - monitoring-basics
 - gitops-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # OpenChoreo
 

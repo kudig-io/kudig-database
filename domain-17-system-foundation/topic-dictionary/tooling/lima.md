@@ -1,6 +1,7 @@
 ---
 title: Lima Linux 虚拟机
-description: 'Lima（Linux on Mac）是一个轻量级工具，在 macOS 上自动创建和管理 Linux 虚拟机，主要用于容器运行时（如 containerd/Doc...'
+description: Lima（Linux on Mac）是一个轻量级工具，在 macOS 上自动创建和管理 Linux 虚拟机，主要用于容器运行时（如 containerd/Doc...
+summary: Lima（Linux on Mac）是一个轻量级工具，在 macOS 上自动创建和管理 Linux 虚拟机，主要用于容器运行时（如 containerd/Doc...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - tooling
 - development
 - linux
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Lima Linux 虚拟机（Lima）
 

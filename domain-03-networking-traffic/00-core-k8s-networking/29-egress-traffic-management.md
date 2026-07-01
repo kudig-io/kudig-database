@@ -1,6 +1,7 @@
 ---
 title: 59 - Egress流量管理
 description: 'title: 59 - Egress流量管理'
+summary: 'title: 59 - Egress流量管理'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - envoy
 - cilium
 - flannel
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ prerequisites:
 - redis-basics
 - policy-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 59 - Egress流量管理
 description: '# 59 - Egress流量管理'

@@ -1,6 +1,7 @@
 ---
 title: domain-11-ai-infra MOC
 description: domain-11-ai-infra 知识域导航页，覆盖 39 篇文档
+summary: domain-11-ai-infra 知识域导航页，覆盖 39 篇文档
 category: moc
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - llm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-11-ai-infra MOC
 

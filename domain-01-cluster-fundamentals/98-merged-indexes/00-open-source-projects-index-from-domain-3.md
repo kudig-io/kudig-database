@@ -1,6 +1,7 @@
 ---
 title: Domain-3 控制平面 — 开源项目索引
 description: '| **etcd** | 控制平面数据存储 | Graduated | v3.5.21 | 48k+ | Apache-2.0 |'
+summary: '| **etcd** | 控制平面数据存储 | Graduated | v3.5.21 | 48k+ | Apache-2.0 |'
 category: control-plane
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - scheduler
 - controller-manager
 - coredns
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -63,8 +66,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-3 控制平面 — 开源项目索引
 

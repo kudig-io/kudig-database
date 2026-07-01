@@ -1,6 +1,7 @@
 ---
 title: 12 - 合规与认证表
 description: '# 12 - 合规与认证表'
+summary: '# 12 - 合规与认证表'
 category: security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - docker
 - opa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -53,8 +56,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # 12 - 合规与认证表
 
@@ -218,7 +222,7 @@ rules:
 
 | 检查项 | 命令/方法 | 合规标准 | 优先级 |
 |-------|---------|---------|-------|
-| RBAC启用 | `kubectl api-versions \| grep rbac` | 全部 | P0 |
+| RBAC启用 | `kubectl api-versions | grep rbac` | 全部 | P0 |
 | 审计日志 | 检查API Server参数 | 全部 | P0 |
 | etcd加密 | 检查EncryptionConfiguration | PCI/等保 | P0 |
 | NetworkPolicy | `kubectl get networkpolicy -A` | PCI/CIS | P1 |

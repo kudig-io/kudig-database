@@ -1,6 +1,7 @@
 ---
 title: 'Week 4 Checkpoint: 终极自测'
 description: '- 企业级运维能力评估'
+summary: '- 企业级运维能力评估'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - cilium
 - argocd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -44,8 +47,9 @@ prerequisites:
 - backup-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Week 4 Checkpoint: 终极自测

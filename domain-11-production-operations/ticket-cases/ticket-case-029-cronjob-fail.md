@@ -1,6 +1,7 @@
 ---
 title: CronJob 任务执行失败：ETL 作业 OOM 与历史堆积
 description: 专有云 ACK 集群数据管道 CronJob 因内存限制不足反复 OOMKilled，导致大量失败 Job 堆积、后续调度被阻塞的工单闭环样本。
+summary: 专有云 ACK 集群数据管道 CronJob 因内存限制不足反复 OOMKilled，导致大量失败 Job 堆积、后续调度被阻塞的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -11,6 +12,9 @@ tags:
 - etl
 - p1
 - batch
+tier: peripheral
+created: '2026-06-26T07:00:00+08:00'
+updated: '2026-06-26T10:30:00+08:00'
 incident_id: INC-2026-ACK-029
 priority: P1
 severity: high
@@ -22,9 +26,7 @@ skill_ref:
 - CronJob 最佳实践
 fta_ref:
 - 'FTA: CronJob OOM 与调度失败'
-created: '2026-06-26T07:00:00+08:00'
-updated: '2026-06-26T10:30:00+08:00'
-last_updated: 2026-06-26T10:30:00+08:00
+last_updated: 2026-06-26 10:30:00+08:00
 duplicate_of: INC-2026-ACK-049
 status: duplicate
 duplication_reason: 与 "INC-2026-ACK-049" 主题重复，内容角度相似，降低 RAG 权重
@@ -51,13 +53,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[concepts/cronjob.md]]"
+- target: '[[concepts/cronjob.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-049-job-cronjob-execution-failure.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-049-job-cronjob-execution-failure.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -101,7 +105,7 @@ kubectl get events -n data-pipeline --field-selector reason=OOMKilled --sort-by=
 kubectl logs -n data-pipeline -l job-name=etl-daily-28734521 --tail=300
 
 # 6. 检查 CronJob 资源限制与调度时间
-kubectl get cronjob etl-daily -n data-pipeline -o yaml | grep -A 30 "resources:\|schedule:\|concurrencyPolicy:\|startingDeadlineSeconds:\|successfulJobHistoryLimit:\|failedJobHistoryLimit:"
+kubectl get cronjob etl-daily -n data-pipeline -o yaml | grep -A 30 "resources:|schedule:|concurrencyPolicy:|startingDeadlineSeconds:|successfulJobHistoryLimit:|failedJobHistoryLimit:"
 
 # 7. 检查命名空间 ResourceQuota 与 LimitRange
 kubectl get resourcequota -n data-pipeline

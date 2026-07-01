@@ -1,6 +1,7 @@
 ---
 title: CNCF 学习路径
 description: CNCF 云原生技术学习路径，按角色（DevOps/SRE/架构师）和技能水平规划学习顺序
+summary: CNCF 云原生技术学习路径，按角色（DevOps/SRE/架构师）和技能水平规划学习顺序
 category: cncf-landscape
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - jaeger
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -58,8 +61,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # CNCF 学习路径
 

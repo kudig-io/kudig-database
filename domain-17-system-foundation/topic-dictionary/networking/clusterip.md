@@ -1,12 +1,17 @@
 ---
 title: 集群 IP
-description: 'ClusterIP 是 Kubernetes Service 的默认类型，为 Service 分配一个集群内部的虚拟 IP 地址。只有集群内部的 Pod 可以通...'
+description: ClusterIP 是 Kubernetes Service 的默认类型，为 Service 分配一个集群内部的虚拟 IP 地址。只有集群内部的
+  Pod 可以通...
+summary: ClusterIP 是 Kubernetes Service 的默认类型，为 Service 分配一个集群内部的虚拟 IP 地址。只有集群内部的
+  Pod 可以通...
 category: dictionary
 tags:
 - k8s
 - glossary
 - networking
 - service
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 集群 IP
 

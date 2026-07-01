@@ -1,6 +1,7 @@
 ---
 title: Agent 系统深度指南
 description: '# Agent 系统深度指南'
+summary: '# Agent 系统深度指南'
 category: ai-coding
 tags:
 - ai
@@ -9,6 +10,8 @@ tags:
 - code-generation
 - helm
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 # Agent 系统深度指南
 

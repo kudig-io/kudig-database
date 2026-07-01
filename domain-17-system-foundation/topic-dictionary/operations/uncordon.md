@@ -1,12 +1,15 @@
 ---
 title: 解封节点
-description: 'Uncordon 是恢复节点可调度状态的操作。解封后，节点可以重新接受 Pod 调度。...'
+description: Uncordon 是恢复节点可调度状态的操作。解封后，节点可以重新接受 Pod 调度。...
+summary: Uncordon 是恢复节点可调度状态的操作。解封后，节点可以重新接受 Pod 调度。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - operations
 - node
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 解封节点
 

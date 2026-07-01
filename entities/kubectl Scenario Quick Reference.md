@@ -1,6 +1,7 @@
 ---
 title: kubectl Scenario Quick Reference
 description: kubectl Scenario Quick Reference — Kubernetes 生产运维知识库
+summary: kubectl Scenario Quick Reference — Kubernetes 生产运维知识库
 category: reference
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - troubleshooting
 - kubelet
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 - Reference
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # kubectl Scenario Quick Reference
 

@@ -1,6 +1,9 @@
 ---
 title: Operator Framework 框架
-description: 'Operator Framework 是 Red Hat 开源的 Kubernetes Operator 开发和管理框架，包含 Operator SDK、OLM...'
+description: Operator Framework 是 Red Hat 开源的 Kubernetes Operator 开发和管理框架，包含 Operator
+  SDK、OLM...
+summary: Operator Framework 是 Red Hat 开源的 Kubernetes Operator 开发和管理框架，包含 Operator
+  SDK、OLM...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - platform-engineering
 - operator
 - sdk
+tier: core
+created: 2026-05
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,9 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
-created: 2026-05
 ---
+
+
 
 # Operator Framework 框架（Operator Framework）
 

@@ -1,6 +1,7 @@
 ---
 title: Dapr (Distributed Application Runtime) Enterprise 深度实践
 description: '# Dapr (Distributed Application Runtime) Enterprise 深度实践'
+summary: '# Dapr (Distributed Application Runtime) Enterprise 深度实践'
 category: service-mesh-microservices
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - helm
 - redis
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -61,8 +64,9 @@ cross_refs:
 - type: domain
   path: ../domain-05-security-compliance/
   label: '相关知识域: domain-05-security-compliance'
-created: "2026-05-23"
 ---
+
+
 
 # [[Dapr|Dapr]] (Distributed Application Runtime) Enterprise 深度实践
 

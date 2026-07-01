@@ -1,6 +1,9 @@
 ---
 title: K8s 可观测性术语参考
-description: '| **告警与 SLO 监控工程** | Alerting And Slo Monitoring | 有效的告警系统不仅仅是"出问题时通知人"，而是要在**用户受到影响之前**准确捕捉异常信号，同时避免告警疲劳 |'
+description: '| **告警与 SLO 监控工程** | Alerting And Slo Monitoring | 有效的告警系统不仅仅是"出问题时通知人"，而是要在**用户受到影响之前**准确捕捉异常信号，同时避免告警疲劳
+  |'
+summary: '| **告警与 SLO 监控工程** | Alerting And Slo Monitoring | 有效的告警系统不仅仅是"出问题时通知人"，而是要在**用户受到影响之前**准确捕捉异常信号，同时避免告警疲劳
+  |'
 category: references
 tags:
 - k8s
@@ -11,6 +14,8 @@ tags:
 - jaeger
 - elasticsearch
 - llm
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +35,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8s 可观测性术语参考
 

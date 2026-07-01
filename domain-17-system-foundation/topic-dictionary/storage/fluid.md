@@ -1,6 +1,9 @@
 ---
 title: Fluid 数据编排
-description: 'Fluid 是 CNCF Sandbox 项目，为 Kubernetes 上的 AI/ML 和大数据工作负载提供数据编排和加速能力，通过 Dataset + R...'
+description: Fluid 是 CNCF Sandbox 项目，为 Kubernetes 上的 AI/ML 和大数据工作负载提供数据编排和加速能力，通过
+  Dataset + R...
+summary: Fluid 是 CNCF Sandbox 项目，为 Kubernetes 上的 AI/ML 和大数据工作负载提供数据编排和加速能力，通过 Dataset
+  + R...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - storage
 - ai-ml
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Fluid 数据编排（Fluid）
 

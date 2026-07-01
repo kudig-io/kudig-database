@@ -1,6 +1,7 @@
 ---
 title: Flannel 知识图谱索引
 description: Flannel CNI 网络插件知识图谱，聚合 Flannel 架构、VXLAN/host-gw 模式、故障排查等所有相关内容
+summary: Flannel CNI 网络插件知识图谱，聚合 Flannel 架构、VXLAN/host-gw 模式、故障排查等所有相关内容
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - calico
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,8 +38,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # Flannel 知识图谱索引
 

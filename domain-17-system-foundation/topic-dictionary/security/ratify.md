@@ -1,6 +1,9 @@
 ---
 title: Ratify 准入验证
-description: 'Ratify 是微软开源的 Kubernetes 准入验证框架，与 OPA Gatekeeper 配合，在 Pod 部署时验证容器镜像的签名、SBOM 和漏洞扫...'
+description: Ratify 是微软开源的 Kubernetes 准入验证框架，与 OPA Gatekeeper 配合，在 Pod 部署时验证容器镜像的签名、SBOM
+  和漏洞扫...
+summary: Ratify 是微软开源的 Kubernetes 准入验证框架，与 OPA Gatekeeper 配合，在 Pod 部署时验证容器镜像的签名、SBOM
+  和漏洞扫...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - security
 - admission
 - supply-chain
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Ratify 准入验证（Ratify）
 

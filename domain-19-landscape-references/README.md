@@ -1,6 +1,7 @@
 ---
 title: Landscape & References
 description: Landscape & References — Kubernetes 生产运维知识库
+summary: Landscape & References — Kubernetes 生产运维知识库
 category: domain
 tags:
 - cncf
@@ -10,6 +11,8 @@ tags:
 - ecosystem
 - daemonset
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Landscape & References
 
@@ -48,6 +52,10 @@ created: "2026-05-23"
 - 所有 Tier 1-4 Domain — 生态参考
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[papers|#papers Hub]] — tag hub
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - networking|发布说明索引 — 网络]] — Cross-reference

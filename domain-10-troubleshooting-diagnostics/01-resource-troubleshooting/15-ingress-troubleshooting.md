@@ -1,6 +1,7 @@
 ---
 title: 15 - Ingress 故障排查 (Ingress Troubleshooting)
 description: 'title: Ingress 故障排查'
+summary: 'title: Ingress 故障排查'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - vpa
 - statefulset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Ingress|Ingress]] 故障排查
 description: '# 15 - Ingress 故障排查 (Ingress Troubleshooting)'

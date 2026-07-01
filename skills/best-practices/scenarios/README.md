@@ -1,12 +1,15 @@
 ---
 title: 生产场景导航
 description: '## 概述'
+summary: '## 概述'
 category: general
 tags:
 - k8s
 - rag
 - daemonset
 - gpu
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # 生产场景导航
 

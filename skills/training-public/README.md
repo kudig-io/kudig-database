@@ -1,6 +1,7 @@
 ---
 title: K8s 学习与培训体系
 description: Kubernetes 全链路学习平台，涵盖基础概念讲解、系统培训路径、实操练习、On-Call 场景与故障排查决策树
+summary: Kubernetes 全链路学习平台，涵盖基础概念讲解、系统培训路径、实操练习、On-Call 场景与故障排查决策树
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - statefulset
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -38,8 +41,9 @@ prerequisites:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # K8s 学习与培训体系
 

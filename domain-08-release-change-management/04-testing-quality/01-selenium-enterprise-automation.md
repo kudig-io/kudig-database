@@ -1,6 +1,7 @@
 ---
 title: Selenium 企业级自动化测试平台
 description: '- selenium-enterprise-automation的最佳实践'
+summary: '- selenium-enterprise-automation的最佳实践'
 category: general
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - operator
 - gpu
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:
@@ -765,13 +769,13 @@ log_analysis() {
     echo "=== Log Analysis ==="
     
     # 分析测试失败日志
-    grep -i "fail\|error\|exception" target/surefire-reports/*.txt | tail -20
+    grep -i "fail|error|exception" target/surefire-reports/*.txt | tail -20
     
     # 分析浏览器控制台错误
-    grep -i "console.error\|javascript error" target/logs/*.log
+    grep -i "console.error|javascript error" target/logs/*.log
     
     # 分析网络错误
-    grep -i "timeout\|connection refused\|50." target/logs/*.log
+    grep -i "timeout|connection refused|50." target/logs/*.log
 }
 ```
 

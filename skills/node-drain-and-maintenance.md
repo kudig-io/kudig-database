@@ -1,6 +1,7 @@
 ---
 title: 节点驱逐与维护
 description: '## 概述'
+summary: '## 概述'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - etcd
 - kubelet
 - redis
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 # 节点驱逐与维护
 

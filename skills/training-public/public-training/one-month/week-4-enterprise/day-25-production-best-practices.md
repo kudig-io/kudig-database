@@ -1,6 +1,7 @@
 ---
 title: 'Day 25: 生产运维最佳实践'
 description: 'title: Day 25: 生产运维最佳实践'
+summary: 'title: Day 25: 生产运维最佳实践'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - ingress
 - gateway
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 25: 生产运维最佳实践

@@ -1,50 +1,56 @@
 ---
 title: Cloud Native Buildpacks 生产指南
-description: 面向阿里云专有云 Java/Go/Node.js 应用的 Cloud Native Buildpacks 实战：pack CLI、builder、分层镜像、可复现构建与 CI/CD 集成。
+description: 面向阿里云专有云 Java/Go/Node.js 应用的 Cloud Native Buildpacks 实战：pack CLI、builder、分层镜像、可复现构建与
+  CI/CD 集成。
+summary: 面向阿里云专有云 Java/Go/Node.js 应用的 Cloud Native Buildpacks 实战：pack CLI、builder、分层镜像、可复现构建与
+  CI/CD 集成。
 category: container-runtime
 tags:
-  - buildpacks
-  - pack
-  - builder
-  - layered-image
-  - reproducible-build
-  - java
-  - go
-  - cicd
+- buildpacks
+- pack
+- builder
+- layered-image
+- reproducible-build
+- java
+- go
+- cicd
+tier: supporting
 created: '2026-06-29'
 updated: '2026-06-29'
 last_updated: 2026-06-29
 difficulty: intermediate
 audience:
-  - 平台工程师
-  - 应用开发者
-  - DevOps 工程师
+- 平台工程师
+- 应用开发者
+- DevOps 工程师
 estimated_read_time: 19min
 intent_queries:
-  - Cloud Native Buildpacks 怎么用
-  - pack builder 分层镜像原理
-  - Buildpacks 与 Dockerfile 区别
+- Cloud Native Buildpacks 怎么用
+- pack builder 分层镜像原理
+- Buildpacks 与 Dockerfile 区别
 trigger_keywords:
-  - buildpacks
-  - pack
-  - builder
-  - lifecycle
-  - layered image
-  - reproducible build
+- buildpacks
+- pack
+- builder
+- lifecycle
+- layered image
+- reproducible build
 prerequisites:
-  - domain-13-container-runtime/04-image-build/01-buildkit-production-guide.md
-  - domain-13-container-runtime/02-image-management/01-harbor-enterprise-image-registry.md
-  - domain-08-release-change-management/01-gitops/08-cicd-pipeline-patterns.md
+- domain-13-container-runtime/04-image-build/01-buildkit-production-guide.md
+- domain-13-container-runtime/02-image-management/01-harbor-enterprise-image-registry.md
+- domain-08-release-change-management/01-gitops/08-cicd-pipeline-patterns.md
 k8s_versions:
-  - '1.28'
-  - '1.29'
-  - '1.30'
-  - '1.31'
-  - '1.32'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: KUDIG Team
-    role: contributor
+- name: KUDIG Team
+  role: contributor
 ---
+
+
 
 # Cloud Native Buildpacks 生产指南
 

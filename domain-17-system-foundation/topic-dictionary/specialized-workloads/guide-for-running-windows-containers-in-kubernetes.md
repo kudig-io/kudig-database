@@ -1,12 +1,15 @@
 ---
 title: 在 Kubernetes 中运行 Windows 容器指南
 description: '# 在 Kubernetes 中运行 Windows 容器指南'
+summary: '# 在 Kubernetes 中运行 Windows 容器指南'
 category: dictionary
 tags:
 - k8s
 - glossary
 - terminology
 - operator
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -26,9 +29,9 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 在 [[Kubernetes|Kubernetes]] 中运行 Windows 容器指南
 

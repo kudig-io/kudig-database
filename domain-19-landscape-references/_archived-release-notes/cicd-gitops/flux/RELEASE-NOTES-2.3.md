@@ -1,6 +1,7 @@
 ---
 title: flux v2.3 Release Notes
 description: flux v2.3 Release Notes — Kubernetes 生产运维知识库
+summary: flux v2.3 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - helm
 - flux
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - cncf-ecosystem
 - helm-basics
 - iac-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Flux|flux]] v2.3 Release Notes
 

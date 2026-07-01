@@ -1,6 +1,7 @@
 ---
 title: Istio Ambient Mesh 与 L7 策略深度实践
 description: '# Istio Ambient Mesh 与 L7 策略深度实践'
+summary: '# Istio Ambient Mesh 与 L7 策略深度实践'
 category: service-mesh-microservices
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - elasticsearch
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -56,8 +59,9 @@ cross_refs:
 - type: domain
   path: ../domain-05-security-compliance/
   label: '相关知识域: domain-05-security-compliance'
-created: "2026-05-23"
 ---
+
+
 
 # [[Istio|Istio]] Ambient Mesh 与 L7 策略深度实践
 

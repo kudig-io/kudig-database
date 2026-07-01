@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 生产环境完整架构蓝图
 description: 'title: Kubernetes 生产环境完整架构蓝图'
+summary: 'title: Kubernetes 生产环境完整架构蓝图'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -48,8 +51,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] 生产环境完整架构蓝图
 description: '# Kubernetes 生产环境完整架构蓝图'

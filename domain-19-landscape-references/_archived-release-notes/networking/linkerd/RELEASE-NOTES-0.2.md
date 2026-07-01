@@ -1,12 +1,15 @@
 ---
 title: linkerd v0.2 Release Notes
 description: linkerd v0.2 Release Notes — Kubernetes 生产运维知识库
+summary: linkerd v0.2 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
 - release-notes
 - changelog
 - mysql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Linkerd|linkerd]] v0.2 Release Notes
 

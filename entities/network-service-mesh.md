@@ -1,6 +1,7 @@
 ---
 title: Network Service Mesh (NSM)
 description: '## 概述'
+summary: '## 概述'
 category: entities
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - istio
 - crd
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[entities/network-service-mesh.md|Network Service Mesh]]rvice]]Service Mesh）|Service Mesh]] (NSM)
 

@@ -1,6 +1,7 @@
 ---
 title: 安全事件 SOP 与合规检查清单
 description: '# 安全事件 SOP 与合规检查清单'
+summary: '# 安全事件 SOP 与合规检查清单'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ingress
 - rbac
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - policy-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # 安全事件 SOP 与合规检查清单
 
@@ -86,7 +90,7 @@ flowchart TD
 | 异常进程 | `kubectl exec -it <pod> -- ps aux` | 检查非预期进程 |
 | 可疑文件 | `kubectl exec -it <pod> -- ls -la /host` | 逃逸到宿主机 |
 | 异常网络 | `kubectl exec -it <pod> -- cat /proc/net/tcp` | 检查网络连接 |
-| 特权容器 | `kubectl get pod -o yaml \| grep privileged: true` | 特权容器风险 |
+| 特权容器 | `kubectl get pod -o yaml | grep privileged: true` | 特权容器风险 |
 
 #### 阶段 2: 隔离
 
@@ -333,8 +337,8 @@ compliance_audit_report:
 | 异常进程 | /bin/bash 被替换 | `kubectl exec pod -- md5sum /bin/bash` |
 | 异常网络 | 外部 IP 连接 | `kubectl exec pod -- cat /proc/net/tcp` |
 | 异常计划任务 | 未知 cronjob | `kubectl get cronjob -A` |
-| 异常容器 | 特权容器 | `kubectl get pods -A -o yaml \| grep privileged` |
-| 异常 ServiceAccount | cluster-admin 绑定 | `kubectl get clusterrolebindings \| grep cluster-admin` |
+| 异常容器 | 特权容器 | `kubectl get pods -A -o yaml | grep privileged` |
+| 异常 ServiceAccount | cluster-admin 绑定 | `kubectl get clusterrolebindings | grep cluster-admin` |
 
 ### 4.2 快速响应命令
 

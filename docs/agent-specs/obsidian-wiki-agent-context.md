@@ -1,3 +1,15 @@
+---
+title: Obsidian Wiki Agent Context
+summary: A skill-based framework for building and maintaining an Obsidian knowledge
+  base. No scripts or dependencies — everything is markdown instructions that you
+  execute directly.
+category: docs
+tags:
+- obsidian-wiki-agent-context
+tier: supporting
+created: '2026-07-01'
+---
+
 # Obsidian Wiki — Agent Context
 
 A **skill-based framework** for building and maintaining an Obsidian knowledge base. No scripts or dependencies — everything is markdown instructions that you execute directly.

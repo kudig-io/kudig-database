@@ -1,6 +1,7 @@
 ---
 title: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
 description: '## 1. 概述'
+summary: '## 1. 概述'
 category: node
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - cilium
+tier: core
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +54,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 <!-- condition: kubectl get nodes -o jsonpath='{range .items[?(@.status.conditions[?(@.type=="Ready" && @.status!="True")].nodeName)]}' 显示有 NotReady 节点 -->
 
@@ -106,7 +110,7 @@ Node NotReady 是 [[Kubernetes|Kubernetes]] 集群中**爆炸半径最大**的�
 | S4 | 节点 Condition 中 DiskPressure 为 True / Node DiskPressure condition is True | `kubectl describe node <node>` 的 Conditions 表中 DiskPressure=True | 0.90 | 临时性大文件写入已完成，磁盘压力即将自行恢复 |
 | S5 | 节点 Condition 中 MemoryPressure 为 True / Node MemoryPressure condition is True | `kubectl describe node <node>` 的 Conditions 表中 MemoryPressure=True | 0.90 | 应用内存突增后已被 OOM Killer 回收，压力可能短暂出现后恢复 |
 | S6 | 节点 Condition 中 PIDPressure 为 True / Node PIDPressure condition is True | `kubectl describe node <node>` 的 Conditions 表中 PIDPressure=True | 0.85 | 批处理任务（Job/CronJob）短期内创建大量进程但即将完成 |
-| S7 | kubelet 日志中出现 apiserver 连接拒绝 / kubelet logs show connection refused to apiserver | SSH 到节点后 `journalctl -u kubelet --since "10 minutes ago" \| grep -i "connection refused\|dial tcp\|TLS handshake"` | 0.75 | apiserver 正在重启或升级中（计划内变更），短暂连接失败 |
+| S7 | kubelet 日志中出现 apiserver 连接拒绝 / kubelet logs show connection refused to apiserver | SSH 到节点后 `journalctl -u kubelet --since "10 minutes ago" | grep -i "connection refused|dial tcp|TLS handshake"` | 0.75 | apiserver 正在重启或升级中（计划内变更），短暂连接失败 |
 | S8 | 容器运行时 socket 无响应 / Container runtime socket not responding | SSH 到节点后检查 containerd socket: `crictl --runtime-endpoint unix:///run/containerd/containerd.sock info` 超时或报错 | 0.70 | containerd 正在执行 garbage collection，临时无响应（通常 <30s） |
 | S9 | Prometheus 告警 `KubeNodeNotReady` 已触发 / Prometheus KubeNodeNotReady alert fired | 检查 Alertmanager 或 Prometheus 中 `kube_node_status_condition{condition="Ready",status="false"} == 1` | 0.95 | 告警系统延迟导致已恢复节点仍有未 resolve 的告警 |
 | S10 | 节点上报的 Lease 对象长时间未更新 / Node Lease object not renewed | `kubectl get lease -n kube-node-lease <node-name> -o jsonpath='{.spec.renewTime}'` 超过 `node-monitor-grace-period`（默认 40s） | 0.90 | 时钟偏差导致 renewTime 显示异常但节点实际运行正常 |
@@ -424,7 +428,7 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 - **命令**:
   ```bash
   # 检查 kubelet 日志中的 PLEG 相关信息
-  ssh <node-ip> "journalctl -u kubelet --since '30 minutes ago' --no-pager | grep -i 'PLEG\|pleg'"
+  ssh <node-ip> "journalctl -u kubelet --since '30 minutes ago' --no-pager | grep -i 'PLEG|pleg'"
 
   # 检查 kubelet 的 healthz 端点（如果 kubelet 仍在运行）
   ssh <node-ip> "curl -sk https://localhost:10250/healthz"
@@ -1183,7 +1187,7 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   2. **评估内核问题**:
      ```bash
      ssh <node-ip> "uname -r"
-     ssh <node-ip> "dmesg -T | grep -i 'bug\|error\|panic\|oops'"
+     ssh <node-ip> "dmesg -T | grep -i 'bug|error|panic|oops'"
      ```
   3. **应用内核补丁**（具体取决于 OS 发行版）:
      ```bash
@@ -1296,7 +1300,7 @@ kubectl get node <node-name> -o jsonpath='kubelet={.status.nodeInfo.kubeletVersi
 | 磁盘使用趋势 | `node_filesystem_avail_bytes` 趋势图 | 每小时 | 使用率线性增长 → 排查磁盘空间消耗源头（日志、镜像缓存） |
 | 内存使用趋势 | `node_memory_MemAvailable_bytes` 趋势图 | 每小时 | 可用内存线性下降 → 排查内存泄漏 Pod |
 | kubelet 重启次数 | `kubelet` systemd service 重启计数 | 每 4 小时 | 24h 内重启 >2 次 → 深度排查 kubelet 崩溃原因 |
-| OOM 事件 | `dmesg \| grep -i oom` | 每 4 小时 | 新的 OOM 事件 → 检查内存限制配置 |
+| OOM 事件 | `dmesg | grep -i oom` | 每 4 小时 | 新的 OOM 事件 → 检查内存限制配置 |
 | 证书有效期 | `openssl x509 ... -noout -enddate` | 每日 | 有效期 <7 天 → 预防性轮转或检查自动轮转机制 |
 | 节点上 Pod 调度 | `kubectl get pods --field-selector spec.nodeName=<node-name>` | 每 4 小时 | 新 Pod 无法调度到该节点 → 检查 taints 和 node conditions |
 
@@ -1445,8 +1449,8 @@ kubectl get node <node-name> -o jsonpath='kubelet={.status.nodeInfo.kubeletVersi
 | 误诊场景 | 表面现象 | 实际根因 | 避免方法 |
 |---------|---------|---------|---------|
 | **网络抖动误判为 kubelet 崩溃** | Node Condition 中 Ready=Unknown，看似 kubelet 停止发送心跳 | 网络链路不稳定（交换机端口 flapping、MTU 问题、云网络限流），kubelet 实际在运行但心跳包被丢弃 | 先 SSH 到节点确认 kubelet 进程状态（D2.1），再测试网络连通性（D2.7）。如果 kubelet 运行正常且本地 healthz 正常，优先排查网络 |
-| **DiskPressure 归因于镜像过多，实则是日志轮转失败** | DiskPressure=True，磁盘使用率高 | 容器日志（stdout/stderr）未正确配置轮转（logMaxSize/logMaxFiles），单个 Pod 的日志占用几十 GB | 在 D2.5 中不仅检查整体磁盘使用率，还要检查 `/var/log/pods/` 或 `/var/log/containers/` 下的大文件：`du -sh /var/log/pods/* \| sort -rh \| head -10` |
-| **PLEG 不健康误判为容器运行时问题** | kubelet 日志出现 `PLEG is not healthy`，初步判断为 containerd 异常 | 实际是某个 Pod 的 container 处于 D 状态（不可中断的 I/O 等待），阻塞了 CRI 调用，containerd 本身正常 | 在 D2.6 之后检查是否有 D 状态进程：`ps aux \| awk '$8=="D"'`。如果有，定位到具体容器和 Pod，问题在应用层而非运行时 |
+| **DiskPressure 归因于镜像过多，实则是日志轮转失败** | DiskPressure=True，磁盘使用率高 | 容器日志（stdout/stderr）未正确配置轮转（logMaxSize/logMaxFiles），单个 Pod 的日志占用几十 GB | 在 D2.5 中不仅检查整体磁盘使用率，还要检查 `/var/log/pods/` 或 `/var/log/containers/` 下的大文件：`du -sh /var/log/pods/* | sort -rh | head -10` |
+| **PLEG 不健康误判为容器运行时问题** | kubelet 日志出现 `PLEG is not healthy`，初步判断为 containerd 异常 | 实际是某个 Pod 的 container 处于 D 状态（不可中断的 I/O 等待），阻塞了 CRI 调用，containerd 本身正常 | 在 D2.6 之后检查是否有 D 状态进程：`ps aux | awk '$8=="D"'`。如果有，定位到具体容器和 Pod，问题在应用层而非运行时 |
 | **证书过期误判为网络问题** | kubelet 日志出现 "connection refused" 或 TLS 错误 | kubelet 客户端证书已过期，TLS 握手失败被解读为网络问题 | 在排查网络问题（D2.7）前先检查证书有效期（D2.8）。TLS 握手失败和 TCP 连接失败有本质区别 |
 | **cordon 操作误判为节点问题** | 用户报告 Pod 无法调度到某节点，误认为节点 NotReady | 运维人员之前执行了 `kubectl cordon` 但未记录，节点状态为 `Ready,SchedulingDisabled` | D1.1 中仔细区分 `NotReady` 和 `Ready,SchedulingDisabled`；D1.4 检查 taints 中的 `unschedulable` 标记 |
 | **时间偏差导致的间歇性问题** | 节点状态不稳定，时好时坏，难以找到明确根因 | 节点 NTP 未同步，时钟偏差导致 TLS 证书间歇性验证失败和 Lease 续租异常 | 在诊断早期（D2.10）就检查时间同步。时间偏差是最容易被忽视但影响广泛的根因 |

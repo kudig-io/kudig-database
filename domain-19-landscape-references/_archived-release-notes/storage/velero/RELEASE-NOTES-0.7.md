@@ -1,11 +1,14 @@
 ---
 title: velero v0.7 Release Notes
 description: velero v0.7 Release Notes — Kubernetes 生产运维知识库
+summary: velero v0.7 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
 - release-notes
 - changelog
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # velero v0.7 Release Notes
 

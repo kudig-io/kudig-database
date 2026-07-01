@@ -1,6 +1,7 @@
 ---
 title: CSI 存储驱动故障排查
 description: '# 04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)'
+summary: '# 04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)'
 category: troubleshooting
 tags:
 - csi
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - ceph
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: advanced
 reading_level: advanced
@@ -61,8 +64,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md
   label: '故障树: csi'
-created: "2026-05-23"
 ---
+
+
 
 # 04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)
 
@@ -311,7 +315,7 @@ kubectl get limitrange -n <namespace>
 │           ▼                                                                  │
 │   ┌──────────────────────────────────────────────────────┐                 │
 │   │ Step 3: 检查节点挂载点                                │                 │
-│   │ ssh <node> && mount \| grep <volume-id>              │                 │
+│   │ ssh <node> && mount | grep <volume-id>              │                 │
 │   └──────────────────────────────────────────────────────┘                 │
 │           │                                                                  │
 │           ├─── 挂载点不存在 ──▶ 检查挂载过程                                │
@@ -337,7 +341,7 @@ kubectl get pods -A --field-selector=status.phase=Pending
 kubectl describe pod <pod-name> -n <namespace>
 
 # 查看挂载相关事件
-kubectl get events -n <namespace> | grep -i "attach\|mount\|volume"
+kubectl get events -n <namespace> | grep -i "attach|mount|volume"
 
 # ========== 2. 节点级别检查 ==========
 
@@ -522,7 +526,7 @@ kubectl describe nodes | grep -A 5 "VolumesInUse"
 
 # 5. 最近存储相关事件
 echo -e "\n5. 最近存储事件:"
-kubectl get events --all-namespaces --sort-by='.lastTimestamp' | grep -i "volume\|storage" | tail -10
+kubectl get events --all-namespaces --sort-by='.lastTimestamp' | grep -i "volume|storage" | tail -10
 
 echo -e "\n=== 诊断完成 ==="
 ```

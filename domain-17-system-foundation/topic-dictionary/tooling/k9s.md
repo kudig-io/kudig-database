@@ -1,12 +1,17 @@
 ---
 title: k9s
-description: 'k9s 是一个基于终端的 Kubernetes 集群管理 UI 工具。它提供了实时的资源浏览、日志查看、Shell 进入和交互式操作能力，是 kubectl 的...'
+description: k9s 是一个基于终端的 Kubernetes 集群管理 UI 工具。它提供了实时的资源浏览、日志查看、Shell 进入和交互式操作能力，是
+  kubectl 的...
+summary: k9s 是一个基于终端的 Kubernetes 集群管理 UI 工具。它提供了实时的资源浏览、日志查看、Shell 进入和交互式操作能力，是 kubectl
+  的...
 category: dictionary
 tags:
 - k8s
 - glossary
 - tooling
 - ui
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -21,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # k9s
 

@@ -1,6 +1,7 @@
 ---
 title: K8s 多云架构术语参考
 description: '# K8s 多云架构术语参考'
+summary: '# K8s 多云架构术语参考'
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - istio
 - calico
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - monitoring-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8s 多云架构术语参考
 

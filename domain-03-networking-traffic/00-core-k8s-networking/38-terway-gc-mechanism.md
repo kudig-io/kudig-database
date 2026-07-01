@@ -1,6 +1,7 @@
 ---
 title: 38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism)
 description: '# 38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism)'
+summary: '# 38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism)'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - daemonset
 - crd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -63,8 +66,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 38 - Terway GC (垃圾回收) 机制详解 (Terway [[domain-17-system-foundation/topic-dictionary/fundamentals/garbage-collection.md|Garbage Collection]] Mechanism)
 

@@ -1,6 +1,7 @@
 ---
 title: topic-structural-trouble-shooting MOC
 description: topic-structural-trouble-shooting 专题导航页，覆盖 71 篇文档
+summary: topic-structural-trouble-shooting 专题导航页，覆盖 71 篇文档
 category: moc
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - istio
 - flannel
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: advanced
 reading_level: advanced
@@ -42,8 +45,9 @@ prerequisites:
 - service-mesh-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # topic-structural-trouble-shooting MOC.md|MOC]]
 

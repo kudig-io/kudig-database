@@ -1,6 +1,7 @@
 ---
 title: Java 应用容器化最佳实践指南
 description: '# Java 应用容器化最佳实践指南'
+summary: '# Java 应用容器化最佳实践指南'
 category: docker
 tags:
 - docker
@@ -10,6 +11,8 @@ tags:
 - serverless
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
-created: "2026-05-23"
 ---
+
+
 
 # Java 应用容器化最佳实践指南
 

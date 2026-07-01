@@ -1,6 +1,7 @@
 ---
 title: DaemonSet 故障排查
 description: '# 20 - DaemonSet 故障排查 (DaemonSet Troubleshooting)'
+summary: '# 20 - DaemonSet 故障排查 (DaemonSet Troubleshooting)'
 category: troubleshooting
 tags:
 - daemonset
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - rbac
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: intermediate
 reading_level: intermediate
@@ -61,8 +64,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/daemonset-fta.md
   label: '故障树: daemonset'
-created: "2026-05-23"
 ---
+
+
 
 # 20 - [[DaemonSet|DaemonSet]] 故障排查 (DaemonSet Troubleshooting)
 

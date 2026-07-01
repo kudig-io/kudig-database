@@ -1,12 +1,18 @@
 ---
 title: Cluster Autoscaler 异常故障树分析 (skills)
-description: '<!-- condition: kubectl get pods -A --field-selector=status.phase=Pending -o jsonpath=''{range .items[?(@.spec.nodeName==null)]}
-  {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}'' 显示有未调度的 Pending Pod'
+description: '<!-- condition: kubectl get pods -A --field-selector=status.phase=Pending
+  -o jsonpath=''{range .items[?(@.spec.nodeName==null)]} {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}''
+  显示有未调度的 Pending Pod'
+summary: '<!-- condition: kubectl get pods -A --field-selector=status.phase=Pending
+  -o jsonpath=''{range .items[?(@.spec.nodeName==null)]} {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}''
+  显示有未调度的 Pending Pod'
 category: general
 tags:
 - k8s
 - kubelet
 - cilium
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +32,9 @@ prerequisites:
 fta_id: FTA-CLUSTER_AUTOSCALER-001
 component: Cluster Autoscaler
 severity: medium
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "Cluster Autoscaler 异常故障树分析"

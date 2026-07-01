@@ -1,6 +1,7 @@
 ---
 title: GitOps 和 ArgoCD 故障排查
 description: '# 38 - GitOps和ArgoCD故障排查 (GitOps and ArgoCD Troubleshooting)'
+summary: '# 38 - GitOps和ArgoCD故障排查 (GitOps and ArgoCD Troubleshooting)'
 category: troubleshooting
 tags:
 - argocd
@@ -13,6 +14,8 @@ tags:
 - grafana
 - redis
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: intermediate
 reading_level: intermediate
@@ -66,8 +69,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/gitops-argocd-fta.md
   label: '故障树: gitops-argocd'
-created: "2026-05-23"
 ---
+
+
 
 # 38 - GitOps和ArgoCD故障排查 (GitOps and [[ArgoCD|ArgoCD]] Troubleshooting)
 
@@ -345,7 +349,7 @@ if echo $REPO_URL | grep -q "^git@"; then
         echo "  ✗ SSH authentication failed"
 elif echo $REPO_URL | grep -q "^https://"; then
     # HTTPS测试
-    curl -s -o /dev/null -w "%{http_code}" $REPO_URL | grep -q "200\|301\|302" && \
+    curl -s -o /dev/null -w "%{http_code}" $REPO_URL | grep -q "200|301|302" && \
         echo "  ✓ HTTPS connection successful" || \
         echo "  ✗ HTTPS connection failed"
 fi
@@ -433,7 +437,7 @@ argocd admin settings validate --redis-secret <secret-name>
 curl -s -u "<username>:<token>" https://api.github.com/user/repos | jq '.[].permissions'
 
 # 审计凭据使用历史
-kubectl logs -n argocd -l app.kubernetes.io/name=argocd-repo-server --since=24h | grep -i "auth\|credential"
+kubectl logs -n argocd -l app.kubernetes.io/name=argocd-repo-server --since=24h | grep -i "auth|credential"
 ```
 
 ---

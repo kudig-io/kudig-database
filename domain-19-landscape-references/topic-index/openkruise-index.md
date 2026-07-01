@@ -1,6 +1,7 @@
 ---
 title: OpenKruise 全局索引
 description: OpenKruise Kubernetes 增强工作负载套件全局索引，聚合 CloneSet、原地升级、Sidecar 管理等所有相关内容
+summary: OpenKruise Kubernetes 增强工作负载套件全局索引，聚合 CloneSet、原地升级、Sidecar 管理等所有相关内容
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - sidecar
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[OpenKruise|OpenKruise]] 全局索引
 

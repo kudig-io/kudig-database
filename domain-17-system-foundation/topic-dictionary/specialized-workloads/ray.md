@@ -1,6 +1,9 @@
 ---
 title: Ray
-description: 'Ray 是一个通用的分布式计算框架，擅长大规模 AI/ML 工作负载。通过 KubeRay Operator 部署到 Kubernetes 中，提供弹性 GPU...'
+description: Ray 是一个通用的分布式计算框架，擅长大规模 AI/ML 工作负载。通过 KubeRay Operator 部署到 Kubernetes
+  中，提供弹性 GPU...
+summary: Ray 是一个通用的分布式计算框架，擅长大规模 AI/ML 工作负载。通过 KubeRay Operator 部署到 Kubernetes 中，提供弹性
+  GPU...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +12,8 @@ tags:
 - distributed-computing
 - ai
 - ml
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Ray
 

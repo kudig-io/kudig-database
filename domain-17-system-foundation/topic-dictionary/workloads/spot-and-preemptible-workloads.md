@@ -1,6 +1,7 @@
 ---
 title: Spot 与可抢占工作负载
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - operator
 - gpu
 - nvidia
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,8 +35,9 @@ prerequisites:
 - cloud-provider-basics
 - kafka-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Spot 与可抢占工作负载
 

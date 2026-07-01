@@ -1,6 +1,7 @@
 ---
 title: kubeadm 高可用集群搭建
 description: '## 概述'
+summary: '## 概述'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - load-balancer
 - etcd
 - apiserver
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # kubeadm 高可用集群搭建
 

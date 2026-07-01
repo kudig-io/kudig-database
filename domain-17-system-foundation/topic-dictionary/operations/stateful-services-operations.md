@@ -1,6 +1,7 @@
 ---
 title: 有状态服务运维
 description: '# 有状态服务运维'
+summary: '# 有状态服务运维'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - postgresql
 - kafka
 - elasticsearch
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,9 +36,9 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 有状态服务运维
 

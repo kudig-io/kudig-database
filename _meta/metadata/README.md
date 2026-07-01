@@ -1,12 +1,15 @@
 ---
 title: 元数据索引 (Metadata)
 description: 元数据索引 (Metadata) — Kubernetes 生产运维知识库
+summary: 元数据索引 (Metadata) — Kubernetes 生产运维知识库
 category: general
 tags:
 - k8s
 - rag
 - daemonset
 - gpu
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,8 +25,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # 元数据索引 (Metadata)
 

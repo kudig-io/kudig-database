@@ -1,11 +1,15 @@
 ---
 title: 'Domain 24: 基础设施即代码 (Infrastructure as Code)'
-description: 'description: ''**领域定位**: 企业级基础设施自动化架构与实践 | **文档数量**: 5篇 | **更新时间**: 2026-02-07'''
+description: 'description: ''**领域定位**: 企业级基础设施自动化架构与实践 | **文档数量**: 5篇 | **更新时间**:
+  2026-02-07'''
+summary: 'description: ''**领域定位**: 企业级基础设施自动化架构与实践 | **文档数量**: 5篇 | **更新时间**: 2026-02-07'''
 category: general
 tags:
 - k8s
 - opa
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +34,9 @@ prerequisites:
 - gitops-basics
 - iac-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain 24: 基础设施即代码 (Infrastructure as Code)'

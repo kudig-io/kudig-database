@@ -1,6 +1,7 @@
 ---
 title: '场景: 容量规划'
 description: Kubernetes 集群容量评估、资源规划和扩容策略
+summary: Kubernetes 集群容量评估、资源规划和扩容策略
 category: scenario
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - hpa
 - vpa
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-20'
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # 场景: 容量规划
 

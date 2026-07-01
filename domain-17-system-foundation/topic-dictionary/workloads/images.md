@@ -1,6 +1,7 @@
 ---
 title: 容器镜像（Images）
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - docker
 - opa
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -28,8 +31,9 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # 容器镜像（Images）
 
@@ -202,7 +206,7 @@ ENTRYPOINT ["/server"]
 |------|----------|----------|
 | ImagePullBackOff | 镜像不存在、认证失败或网络问题 | `kubectl describe pod` 查看 Events；`crictl pull` 手动测试 |
 | 同一标签运行了不同版本 | 仓库端标签被覆盖写入新镜像 | 改用 digest 锁定；`kubectl get pod -o jsonpath='{.status.containerStatuses[0].imageID}'` |
-| 私有镜像拉取 401 | imagePullSecret 不存在或凭证过期 | `kubectl get secret regcred -o jsonpath='{.data.\.dockerconfigjson}' \| base64 -d` |
+| 私有镜像拉取 401 | imagePullSecret 不存在或凭证过期 | `kubectl get secret regcred -o jsonpath='{.data.\.dockerconfigjson}' | base64 -d` |
 | 预拉取镜像仍触发拉取 | `imagePullPolicy: Always` 或使用了 `:latest` | 明确设置 `imagePullPolicy: IfNotPresent` 并使用具体标签 |
 | 镜像拉取缓慢 | 镜像体积过大或未配置 mirror | 使用多阶段构建减小镜像；配置仓库 mirror/proxy |
 | 节点磁盘空间不足 | 旧镜像未被 GC | 检查 kubelet 的 `imageGCHighThresholdPercent` 配置 |

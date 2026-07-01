@@ -1,12 +1,21 @@
 ---
-title: "Monitoring & Alerting Failure Remediation Playbook"
+title: Monitoring & Alerting Failure Remediation Playbook
+summary: Monitoring & Alerting Failure Remediation Playbook：kubectl get servicemonitor
+  <name> -n <namespace> -o yaml
 category: remediation
-skill_set: "k8s-monitoring-alerting"
-created: "2026-05-22"
-updated: "2026-05-22"
+tags:
+- reference
+- remediation
+- playbook
+- visibility/public
+tier: supporting
+created: '2026-05-22'
+updated: '2026-05-22'
+skill_set: k8s-monitoring-alerting
 last_updated: 2026-05-22
-tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
+
+
 
 # 修复操作手册 / Remediation Playbook
 
@@ -307,3 +316,9 @@ kubectl logs <prometheus-pod> -n monitoring --tail=20 | grep -i "rule evaluation
 - Skill 版本: SKILL-MON-001 v1.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

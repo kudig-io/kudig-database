@@ -1,11 +1,14 @@
 ---
 title: 深度研究最佳实践指南
 description: '# 深度研究最佳实践指南'
+summary: '# 深度研究最佳实践指南'
 category: general
 tags:
 - k8s
 - kubelet
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -19,8 +22,9 @@ trigger_keywords:
 - 深度研究最佳实践指南
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 深度研究最佳实践指南
 

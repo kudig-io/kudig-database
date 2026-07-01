@@ -1,6 +1,9 @@
 ---
 title: IPIP
-description: 'IPIP（IP-in-IP）是一种网络隧道协议，将一个 IP 数据包封装在另一个 IP 数据包中传输。在 Kubernetes 网络中，IPIP 常用于跨节点 ...'
+description: IPIP（IP-in-IP）是一种网络隧道协议，将一个 IP 数据包封装在另一个 IP 数据包中传输。在 Kubernetes 网络中，IPIP
+  常用于跨节点 ...
+summary: IPIP（IP-in-IP）是一种网络隧道协议，将一个 IP 数据包封装在另一个 IP 数据包中传输。在 Kubernetes 网络中，IPIP
+  常用于跨节点 ...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +12,8 @@ tags:
 - tunnel
 - networking
 - cni
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # IPIP
 

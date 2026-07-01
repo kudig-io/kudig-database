@@ -1,6 +1,7 @@
 ---
 title: Loki
-description: 'Loki 是 Grafana Labs 开源的日志聚合系统，被称为「日志界的 Prometheus」。它采用标签索引（而非全文索引）存储日志，大幅降低存储成本，...'
+description: Loki 是 Grafana Labs 开源的日志聚合系统，被称为「日志界的 Prometheus」。它采用标签索引（而非全文索引）存储日志，大幅降低存储成本，...
+summary: Loki 是 Grafana Labs 开源的日志聚合系统，被称为「日志界的 Prometheus」。它采用标签索引（而非全文索引）存储日志，大幅降低存储成本，...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - logging
 - observability
 - grafana
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Loki
 

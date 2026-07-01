@@ -1,6 +1,7 @@
 ---
 title: 'Day 9: 控制平面 - Scheduler + Controller Manager'
 description: '- "Scheduler 调度算法是什么"'
+summary: '- "Scheduler 调度算法是什么"'
 category: learning
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - daemonset
 - operator
 - gpu
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 9: 控制平面 - Scheduler + Controller Manager
 

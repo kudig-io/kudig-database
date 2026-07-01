@@ -1,6 +1,7 @@
 ---
 title: 12 - 自动扩缩容事件 (HPA / VPA / Cluster Autoscaler)
 description: '- [HPA 事件详解](#hpa-事件详解)'
+summary: '- [HPA 事件详解](#hpa-事件详解)'
 category: kubernetes-events
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - vpa
 - pdb
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -47,8 +50,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 12 - 自动扩缩容事件 (HPA / VPA / Cluster Autoscaler)
 

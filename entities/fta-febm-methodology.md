@@ -1,6 +1,7 @@
 ---
 title: 故障树分析（FTA）与取证循证方法论（FEBM）
 description: 1. **证据收集**：日志、指标、事件、命令输出
+summary: 1. **证据收集**：日志、指标、事件、命令输出
 category: reference
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - root-cause-analysis
 - ingress
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 - FEBM
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 故障树分析（FTA）与取证循证方法论（FEBM）
 

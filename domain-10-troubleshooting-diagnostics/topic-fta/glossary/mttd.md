@@ -1,12 +1,15 @@
 ---
 title: 平均检测时间
-description: 'MTTD（Mean Time To Detect，平均检测时间）是从故障发生到被检测到的平均时间。缩短 MTTD 是提升系统可用性的关键。...'
+description: MTTD（Mean Time To Detect，平均检测时间）是从故障发生到被检测到的平均时间。缩短 MTTD 是提升系统可用性的关键。...
+summary: MTTD（Mean Time To Detect，平均检测时间）是从故障发生到被检测到的平均时间。缩短 MTTD 是提升系统可用性的关键。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - mttd
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 平均检测时间
 

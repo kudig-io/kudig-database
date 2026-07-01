@@ -1,6 +1,7 @@
 ---
 title: 04 - 分布式存储系统
 description: '# 04 - 分布式存储系统'
+summary: '# 04 - 分布式存储系统'
 category: storage-fundamentals
 tags:
 - storage
@@ -12,6 +13,8 @@ tags:
 - ceph
 - minio
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 04 - 分布式存储系统
 

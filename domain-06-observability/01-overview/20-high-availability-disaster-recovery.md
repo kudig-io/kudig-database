@@ -1,6 +1,8 @@
 ---
 title: 24 - 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster Recovery)
-description: '# 24 - 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster Recovery)'
+description: '# 24 - 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster
+  Recovery)'
+summary: '# 24 - 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster Recovery)'
 category: observability
 tags:
 - k8s
@@ -13,6 +15,8 @@ tags:
 - jaeger
 - argocd
 - postgresql
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -67,8 +71,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # 24 - 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster Recovery)
 

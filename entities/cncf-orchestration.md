@@ -1,6 +1,7 @@
 ---
 title: CNCF 编排与应用管理项目全景
 description: '# CNCF 编排与应用管理项目全景'
+summary: '# CNCF 编排与应用管理项目全景'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - helm
 - kafka
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - iac-basics
 - kafka-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # CNCF 编排与应用管理项目全景
 

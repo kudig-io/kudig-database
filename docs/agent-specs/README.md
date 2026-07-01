@@ -1,13 +1,22 @@
 ---
-title: "Agent Specs 目录索引"
+title: Agent Specs 目录索引
+summary: Agent Specs 目录索引
 category: index
-tags: ["index", "agent-specs", "docs", "visibility/public"]
-sources: ["docs/agent-specs/"]
+tags:
+- index
+- agent-specs
+- docs
+- visibility/public
+tier: supporting
+sources:
+- docs/agent-specs/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: reviewed
 ---
+
+
 
 # Agent Specs 目录索引
 
@@ -42,3 +51,7 @@ status: reviewed
 ## 相关链接
 
 - [[MOC]] — 主索引
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

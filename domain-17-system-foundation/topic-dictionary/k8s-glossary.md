@@ -1,6 +1,7 @@
 ---
 title: K8s 中英术语表（Glossary）
 description: '## 1. 架构与组件（Architecture & Components）'
+summary: '## 1. 架构与组件（Architecture & Components）'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - grafana
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,8 +37,9 @@ prerequisites:
 - monitoring-basics
 - etcd-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8s 中英术语表（Glossary）
 

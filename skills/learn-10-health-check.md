@@ -1,6 +1,7 @@
 ---
 title: 第八课：健康检查 - Probe 详解
 description: '# 第八课：健康检查 - Probe 详解'
+summary: '# 第八课：健康检查 - Probe 详解'
 category: skills
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - mysql
 - job
 - cronjob
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第八课：健康检查 - Probe 详解
 

@@ -1,12 +1,15 @@
 ---
 title: 故障模式与影响分析
-description: 'FMEA（Failure Mode and Effects Analysis，故障模式与影响分析）是一种自底向上的归纳式分析方法。它系统地识别系统中每个组件的潜...'
+description: FMEA（Failure Mode and Effects Analysis，故障模式与影响分析）是一种自底向上的归纳式分析方法。它系统地识别系统中每个组件的潜...
+summary: FMEA（Failure Mode and Effects Analysis，故障模式与影响分析）是一种自底向上的归纳式分析方法。它系统地识别系统中每个组件的潜...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - fmea
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 故障模式与影响分析
 

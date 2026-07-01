@@ -1,6 +1,7 @@
 ---
 title: eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program Types)
 description: '# eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program Types)'
+summary: '# eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program Types)'
 category: ebpf-technology
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - docker
 - ingress
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -46,8 +49,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program Types)
 

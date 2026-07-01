@@ -1,37 +1,38 @@
 ---
 title: 阿里云专有云（Apsara Stack）组件与 K8s 运维关联索引
 description: 面向 SRE 的 Apsara Stack 底座与 ACK 专有云版组件映射、排障入口与升级路径速查
+summary: 阿里云专有云（Apsara Stack）飞天底座、ASO、天基、盘古、女娲、洛神、伏羲等组件与 Kubernetes 的集成点、常见工单场景、排障入口及升级路径索引。
 category: cloud-provider
 tags:
-  - alibaba-cloud
-  - apsara-stack
-  - private-cloud
-  - ack
-  - kubernetes
-  - aso
-  - tianji
-  - apsara
+- alibaba-cloud
+- apsara-stack
+- private-cloud
+- ack
+- kubernetes
+- aso
+- tianji
+- apsara
+tier: supporting
 sources:
-  - 阿里云专有云产品文档
-  - ACK 专有云运维手册
-  - ASO 运维控制台用户指南
+- 阿里云专有云产品文档
+- ACK 专有云运维手册
+- ASO 运维控制台用户指南
 created: 2026-06-26
 updated: 2026-06-26
 last_updated: 2026-06-26
-summary: 阿里云专有云（Apsara Stack）飞天底座、ASO、天基、盘古、女娲、洛神、伏羲等组件与 Kubernetes 的集成点、常见工单场景、排障入口及升级路径索引。
 relationships:
-  - target: "[[domain-12-cloud-providers/01-alibaba-cloud/01-专有云架构概述.md]]"
-    type: related_to
-  - target: "[[domain-12-cloud-providers/01-alibaba-cloud/02-ACK集群运维.md]]"
-    type: related_to
-  - target: "[[domain-12-cloud-providers/01-alibaba-cloud/03-Terway-CNI网络.md]]"
-    type: related_to
-  - target: "[[domain-12-cloud-providers/01-alibaba-cloud/04-阿里云存储集成.md]]"
-    type: related_to
-  - target: "[[domain-12-cloud-providers/01-alibaba-cloud/05-阿里云SLB与Ingress.md]]"
-    type: related_to
-  - target: "[[domain-12-cloud-providers/01-alibaba-cloud/06-阿里云专有云远程顾问指南.md]]"
-    type: related_to
+- target: '[[domain-12-cloud-providers/01-alibaba-cloud/01-专有云架构概述.md]]'
+  type: related_to
+- target: '[[domain-12-cloud-providers/01-alibaba-cloud/02-ACK集群运维.md]]'
+  type: related_to
+- target: '[[domain-12-cloud-providers/01-alibaba-cloud/03-Terway-CNI网络.md]]'
+  type: related_to
+- target: '[[domain-12-cloud-providers/01-alibaba-cloud/04-阿里云存储集成.md]]'
+  type: related_to
+- target: '[[domain-12-cloud-providers/01-alibaba-cloud/05-阿里云SLB与Ingress.md]]'
+  type: related_to
+- target: '[[domain-12-cloud-providers/01-alibaba-cloud/06-阿里云专有云远程顾问指南.md]]'
+  type: related_to
 difficulty: advanced
 audience:
 - AI Agent
@@ -59,8 +60,8 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-
 ---
+
 
 # 阿里云专有云（Apsara Stack）组件与 K8s 运维关联索引
 
@@ -134,7 +135,7 @@ ACK 专有云版由三部分组成：
 | **VPC / VSwitch** | 隔离二层网络与子网 | 集群创建于 VPC；Pod/Service CIDR 不能与 VPC CIDR 冲突 | 节点无法加入集群；跨 VSwitch 通信异常；IP 耗尽 | ASO `产品运维 > 网络 > VPC`；`aliyun vpc DescribeVSwitchAttributes`；`kubectl get nodes -o wide` | 路由表/ACL 变更走变更流程；核心网络设备升级 → 驻场 |
 | **SLB / NLB / ALB** | 四/七层负载均衡 | CCM 监听 `type: LoadBalancer` Service 与 Ingress，维护后端服务器组 | `LoadBalancer` Service 长期 Pending；Ingress 502/504；健康检查失败 | ASO `产品运维 > 网络 > SLB`；`aliyun slb DescribeLoadBalancerAttribute`；`kubectl get svc -o yaml` | 规格升配/证书更新可自助；底层调度异常 → TAM |
 | **EIP** | 弹性公网 IP | 公网 Ingress/Service 可能绑定 EIP | 公网 Ingress 无法访问；带宽打满；绑定关系丢失 | ASO `产品运维 > 网络 > EIP`；`aliyun vpc DescribeEipAddresses`；`kubectl get svc -o wide` | 带宽升配可自助；EIP 网关异常 → 阿里云网络团队 |
-| **Terway / CNI** | 阿里云自研容器网络插件 | 分配 VPC 原生 IP 或 Overlay 地址；NetworkPolicy | `ContainerCreating` 且 `allocate eni failed`；跨节点丢包；NetworkPolicy 不生效 | ASO `产品运维 > 容器服务 > ACK 集群 > 网络插件`；`kubectl -n kube-system logs -l app=terway-daemon`；节点 `/var/log/messages \| grep terway` | ASO 集群运维页面触发；评估对业务 Pod 影响 |
+| **Terway / CNI** | 阿里云自研容器网络插件 | 分配 VPC 原生 IP 或 Overlay 地址；NetworkPolicy | `ContainerCreating` 且 `allocate eni failed`；跨节点丢包；NetworkPolicy 不生效 | ASO `产品运维 > 容器服务 > ACK 集群 > 网络插件`；`kubectl -n kube-system logs -l app=terway-daemon`；节点 `/var/log/messages | grep terway` | ASO 集群运维页面触发；评估对业务 Pod 影响 |
 
 ### 2.3 存储组件
 

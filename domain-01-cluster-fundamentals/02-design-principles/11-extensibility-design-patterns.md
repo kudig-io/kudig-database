@@ -1,6 +1,7 @@
 ---
 title: 11 - 扩展性设计模式 (Extensibility)
 description: '# 11 - 扩展性设计模式 (Extensibility)'
+summary: '# 11 - 扩展性设计模式 (Extensibility)'
 category: design-principles
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - calico
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -56,8 +59,9 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
-created: "2026-05-23"
 ---
+
+
 
 # 11 - 扩展性设计模式 (Extensibility)
 

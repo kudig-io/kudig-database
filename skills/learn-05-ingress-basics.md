@@ -1,6 +1,7 @@
 ---
 title: 第五课：Ingress - 外部 HTTP/HTTPS 访问
 description: 2. 掌握 Ingress 的配置方法
+summary: 2. 掌握 Ingress 的配置方法
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - ingress
 - gateway
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第五课：[[Ingress|Ingress]] - 外部 HTTP/HTTPS 访问
 

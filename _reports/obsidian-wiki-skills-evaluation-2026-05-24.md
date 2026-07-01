@@ -1,5 +1,7 @@
 ---
 title: obsidian-wiki Skills 安装 + 报告评估 — 2026-05-24
+summary: obsidian-wiki Skills 安装 + 报告评估 — 2026-05-24：报告声称 0 broken links，实际扫描发现 858
+  个未解析的 wikilink 目标。分三类：
 category: reports
 tags:
 - reports
@@ -8,6 +10,7 @@ tags:
 - skills
 - broken-links
 - quality
+tier: supporting
 sources:
 - Vault Scan 2026-05-24
 - Ar9av/obsidian-wiki
@@ -16,13 +19,15 @@ updated: 2026-05-24
 last_updated: 2026-05-24
 status: reviewed
 relationships:
-- target: "_reports/KUDIG-COMPREHENSIVE-FIX-REPORT-2026-05-24.md"
+- target: _reports/KUDIG-COMPREHENSIVE-FIX-REPORT-2026-05-24.md
   type: related_to
-- target: "_reports/wiki-lint-2026-05-24.md"
+- target: _reports/wiki-lint-2026-05-24.md
   type: related_to
-- target: "_reports/wiki-dedup-audit-2026-05-24.md"
+- target: _reports/wiki-dedup-audit-2026-05-24.md
   type: related_to
 ---
+
+
 
 # obsidian-wiki Skills 安装 + 报告评估 — 2026-05-24
 

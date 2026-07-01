@@ -1,6 +1,7 @@
 ---
 title: 21 - 监控成本优化与治理 (Monitoring Cost Optimization & Governance)
 description: '# 21 - 监控成本优化与治理 (Monitoring Cost Optimization & Governance)'
+summary: '# 21 - 监控成本优化与治理 (Monitoring Cost Optimization & Governance)'
 category: observability
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - prometheus
 - grafana
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -66,8 +69,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # 21 - 监控成本优化与治理 (Monitoring Cost Optimization & Governance)
 

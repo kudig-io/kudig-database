@@ -1,6 +1,7 @@
 ---
 title: 命名空间
-description: 'Namespace 是 Kubernetes 的逻辑隔离机制，将集群资源划分为虚拟的子集群，实现多团队/多环境/多租户的资源隔离和访问控制。...'
+description: Namespace 是 Kubernetes 的逻辑隔离机制，将集群资源划分为虚拟的子集群，实现多团队/多环境/多租户的资源隔离和访问控制。...
+summary: Namespace 是 Kubernetes 的逻辑隔离机制，将集群资源划分为虚拟的子集群，实现多团队/多环境/多租户的资源隔离和访问控制。...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - fundamentals
 - multi-tenancy
 - isolation
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # 命名空间（Namespace）
 

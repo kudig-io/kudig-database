@@ -1,6 +1,7 @@
 ---
 title: 第七课：Namespace 与资源隔离
 description: 2. 掌握 Namespace 的创建和管理
+summary: 2. 掌握 Namespace 的创建和管理
 category: skills
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - cronjob
 - rbac
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 - 与资源隔离
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第七课：Namespace 与资源隔离
 

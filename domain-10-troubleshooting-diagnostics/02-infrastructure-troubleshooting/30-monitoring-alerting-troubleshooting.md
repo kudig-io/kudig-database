@@ -1,6 +1,7 @@
 ---
 title: 监控告警故障排查
 description: '# 30 - 监控告警故障排查 (Monitoring and Alerting Troubleshooting)'
+summary: '# 30 - 监控告警故障排查 (Monitoring and Alerting Troubleshooting)'
 category: troubleshooting
 tags:
 - prometheus
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - job
 - cronjob
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: advanced
 reading_level: advanced
@@ -66,8 +69,9 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/15-monitoring-alerting-failure.md
   label: '运维技能: 15-monitoring-alerting-failure'
-created: "2026-05-23"
 ---
+
+
 
 # 30 - 监控告警故障排查 (Monitoring and Alerting Troubleshooting)
 

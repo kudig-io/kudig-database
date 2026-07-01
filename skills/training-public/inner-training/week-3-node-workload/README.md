@@ -1,6 +1,7 @@
 ---
 title: 'Week 3: 节点与工作负载管理 (Days 15-21)'
 description: 'title: Week 3: 节点与工作负载管理'
+summary: 'title: Week 3: 节点与工作负载管理'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - coredns
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,8 +37,9 @@ prerequisites:
 - gpu-ml-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Week 3: 节点与工作负载管理

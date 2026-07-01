@@ -1,6 +1,7 @@
 ---
 title: 21-存储性能优化
 description: '# 21-存储性能优化'
+summary: '# 21-存储性能优化'
 category: production-operations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - daemonset
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -43,8 +46,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 21-存储性能优化
 

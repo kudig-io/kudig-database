@@ -1,6 +1,7 @@
 ---
 title: 18 - CSI 驱动资源 YAML 配置参考
 description: '# 18 - CSI 驱动资源 YAML 配置参考'
+summary: '# 18 - CSI 驱动资源 YAML 配置参考'
 category: yaml-manifests
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - helm
 - opa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -52,8 +55,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md
   label: '故障树: csi'
-created: "2026-05-23"
 ---
+
+
 
 # 18 - CSI 驱动资源 YAML 配置参考
 

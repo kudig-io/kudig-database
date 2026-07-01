@@ -1,6 +1,7 @@
 ---
 title: System Foundation
 description: '| 01-linux/ | Linux 架构、进程管理、文件系统、网络配置 |'
+summary: '| 01-linux/ | Linux 架构、进程管理、文件系统、网络配置 |'
 category: domain
 tags:
 - linux
@@ -10,6 +11,8 @@ tags:
 - kubernetes-events
 - daemonset
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # System Foundation
 

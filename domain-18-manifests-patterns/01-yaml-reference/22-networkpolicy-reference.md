@@ -1,6 +1,7 @@
 ---
 title: 22 - NetworkPolicy YAML 配置参考
 description: 'title: 22 - NetworkPolicy YAML 配置参考'
+summary: 'title: 22 - NetworkPolicy YAML 配置参考'
 category: general
 tags:
 - yaml
@@ -13,6 +14,8 @@ tags:
 - calico
 - coredns
 - mysql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 - kafka-basics
 - mysql-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 22 - [[NetworkPolicy|NetworkPolicy]] YAML 配置参考
 description: '# 22 - NetworkPolicy YAML 配置参考'
@@ -2260,6 +2264,8 @@ kubectl exec -it frontend-pod -n production -- tcpdump -i any port 8080
 - [[domain-07-platform-engineering/topic-code-analysis/cluster-create/19-cni-networking.md|19-cni-networking]]
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]

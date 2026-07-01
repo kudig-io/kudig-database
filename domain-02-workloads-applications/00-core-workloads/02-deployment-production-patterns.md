@@ -1,6 +1,7 @@
 ---
 title: 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
 description: 'title: 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)'
+summary: 'title: 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - redis
 - postgresql
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
 description: '# 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)'

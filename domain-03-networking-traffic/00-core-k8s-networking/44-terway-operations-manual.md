@@ -1,6 +1,7 @@
 ---
 title: Terway 运维手册
 description: '# Terway 运维手册'
+summary: '# Terway 运维手册'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - networkpolicy
 - crd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - monitoring-basics
 - ebpf-basics
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 # Terway 运维手册
 

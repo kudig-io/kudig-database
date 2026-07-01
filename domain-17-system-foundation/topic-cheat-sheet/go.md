@@ -1,6 +1,7 @@
 ---
 title: Go 生产环境速查卡
 description: 涵盖 Go 1.20-1.22 生产环境 90% 以上常用语法和工具，支持快速开发和故障排查
+summary: 涵盖 Go 1.20-1.22 生产环境 90% 以上常用语法和工具，支持快速开发和故障排查
 category: cheatsheet
 tags:
 - go
@@ -13,6 +14,8 @@ tags:
 - redis
 - mysql
 - postgresql
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ related_docs:
   desc: AI 基础设施文档
 - path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   desc: Linux 速查卡
-created: "2026-05-23"
 ---
+
+
 
 # Go 生产环境速查卡
 

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 灾难恢复最佳实践
 description: '# Kubernetes 灾难恢复最佳实践'
+summary: '# Kubernetes 灾难恢复最佳实践'
 category: skills
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - business-continuity
 - etcd
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 灾难恢复最佳实践
 

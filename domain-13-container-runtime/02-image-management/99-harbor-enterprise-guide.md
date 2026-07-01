@@ -1,6 +1,7 @@
 ---
 title: Harbor 企业级镜像仓库部署指南
 description: '# Harbor 企业级镜像仓库部署指南'
+summary: '# Harbor 企业级镜像仓库部署指南'
 category: container-image-management
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - redis
 - postgresql
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -45,8 +48,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Harbor|Harbor]] 企业级镜像仓库部署指南
 

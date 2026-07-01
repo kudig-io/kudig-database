@@ -1,9 +1,12 @@
 ---
 title: 滚动更新源码分析 (topic-code-analysis)
 description: '## 概述'
+summary: '## 概述'
 category: general
 tags:
 - reference
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 滚动更新源码分析
 category: deployment
@@ -428,6 +432,8 @@ func (dc *DeploymentController) syncRolloutStatus(ctx context.Context, allRSs []
 - 触发 `ReplicaSetCreateReplicaTimeout` 事件
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

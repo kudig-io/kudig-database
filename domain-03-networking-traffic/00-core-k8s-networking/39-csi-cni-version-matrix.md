@@ -1,6 +1,7 @@
 ---
 title: CSI / CNI 版本兼容矩阵
 description: '| **Ceph CSI (RBD)** v3.6+ | 1.22 | 1.26-1.33 | 1.33 | Rook 部署 |'
+summary: '| **Ceph CSI (RBD)** v3.6+ | 1.22 | 1.26-1.33 | 1.33 | Rook 部署 |'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flannel
 - calico
 - rook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -63,8 +66,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # CSI / CNI 版本兼容矩阵
 

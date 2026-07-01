@@ -1,6 +1,7 @@
 ---
 title: 03 - 应用工作负载迁移 [migration]
 description: 'description: ③ 配置适配 ──────────┘    ⑤ 验证'
+summary: 'description: ③ 配置适配 ──────────┘    ⑤ 验证'
 category: general
 tags:
 - migration
@@ -13,6 +14,8 @@ tags:
 - job
 - cronjob
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - gpu-ml-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 03 - 应用工作负载迁移
 description: ③ 配置适配 ──────────┘    ⑤ 验证

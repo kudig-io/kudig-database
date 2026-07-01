@@ -1,6 +1,7 @@
 ---
 title: Cluster API 集群生命周期
-description: 'Cluster API（CAPI）是 CNCF 孵化项目，使用 Kubernetes 声明式 API 管理集群的生命周期（创建/升级/扩缩/删除），是声明式集群...'
+description: Cluster API（CAPI）是 CNCF 孵化项目，使用 Kubernetes 声明式 API 管理集群的生命周期（创建/升级/扩缩/删除），是声明式集群...
+summary: Cluster API（CAPI）是 CNCF 孵化项目，使用 Kubernetes 声明式 API 管理集群的生命周期（创建/升级/扩缩/删除），是声明式集群...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - multi-cloud
 - lifecycle
 - cncf
+tier: supporting
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Cluster API 集群生命周期（Cluster API）
 

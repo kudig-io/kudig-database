@@ -1,6 +1,9 @@
 ---
 title: Vitess MySQL 分片
-description: 'Vitess 是 PlanetScale 开源的 CNCF 毕业项目，为 MySQL 提供水平扩展和分片能力，通过透明分片让应用无需修改即可扩展到多个 MySQ...'
+description: Vitess 是 PlanetScale 开源的 CNCF 毕业项目，为 MySQL 提供水平扩展和分片能力，通过透明分片让应用无需修改即可扩展到多个
+  MySQ...
+summary: Vitess 是 PlanetScale 开源的 CNCF 毕业项目，为 MySQL 提供水平扩展和分片能力，通过透明分片让应用无需修改即可扩展到多个
+  MySQ...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - storage
 - database
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Vitess MySQL 分片（Vitess）
 

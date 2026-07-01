@@ -1,6 +1,9 @@
 ---
 title: youki 容器运行时
-description: 'youki 是用 Rust 编写的 OCI 容器运行时，兼容 runc 接口，旨在提供更高安全性和性能的低开销容器运行时实现，是 runc 的 Rust 替代方...'
+description: youki 是用 Rust 编写的 OCI 容器运行时，兼容 runc 接口，旨在提供更高安全性和性能的低开销容器运行时实现，是 runc
+  的 Rust 替代方...
+summary: youki 是用 Rust 编写的 OCI 容器运行时，兼容 runc 接口，旨在提供更高安全性和性能的低开销容器运行时实现，是 runc 的 Rust
+  替代方...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - fundamentals
 - container-runtime
 - rust
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # youki 容器运行时（youki）
 

@@ -1,12 +1,15 @@
 ---
 title: 快速接入与环境配置
 description: '# 快速接入与环境配置'
+summary: '# 快速接入与环境配置'
 category: ai-coding
 tags:
 - ai
 - coding
 - copilot
 - code-generation
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 快速接入与环境配置
 

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 架构与基础概念全栈培训 (assets)
 description: '# Kubernetes 架构与基础概念全栈培训'
+summary: '# Kubernetes 架构与基础概念全栈培训'
 category: presentations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - coredns
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 架构与基础概念全栈培训
 

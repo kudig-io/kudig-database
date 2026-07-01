@@ -1,6 +1,7 @@
 ---
 title: 安全清单
 description: '# 安全清单'
+summary: '# 安全清单'
 category: dictionary
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - controller-manager
 - rbac
 - webhook
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 安全清单
 

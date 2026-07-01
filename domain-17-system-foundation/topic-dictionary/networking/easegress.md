@@ -1,6 +1,7 @@
 ---
 title: Easegress 流量编排
-description: 'Easegress 是 MegaEase 开源的 CNCF Sandbox 项目，提供全场景的流量编排能力，集 API 网关、服务网格 Sidecar、Serv...'
+description: Easegress 是 MegaEase 开源的 CNCF Sandbox 项目，提供全场景的流量编排能力，集 API 网关、服务网格 Sidecar、Serv...
+summary: Easegress 是 MegaEase 开源的 CNCF Sandbox 项目，提供全场景的流量编排能力，集 API 网关、服务网格 Sidecar、Serv...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - networking
 - gateway
 - service-mesh
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Easegress 流量编排（Easegress）
 

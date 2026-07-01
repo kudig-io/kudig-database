@@ -1,12 +1,16 @@
 ---
 title: 负载均衡器
-description: 'LoadBalancer 是 Service 的一种类型，通过云厂商的负载均衡器将服务暴露到集群外部。它自动创建云平台的 LB 资源并配置外部 IP。...'
+description: LoadBalancer 是 Service 的一种类型，通过云厂商的负载均衡器将服务暴露到集群外部。它自动创建云平台的 LB 资源并配置外部
+  IP。...
+summary: LoadBalancer 是 Service 的一种类型，通过云厂商的负载均衡器将服务暴露到集群外部。它自动创建云平台的 LB 资源并配置外部 IP。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - networking
 - service
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 负载均衡器
 

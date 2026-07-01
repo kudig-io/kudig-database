@@ -1,6 +1,7 @@
 ---
 title: Tetragon 运行时安全 (Tetragon Runtime Security)
 description: 'title: Tetragon 运行时安全 (Tetragon Runtime Security)'
+summary: 'title: Tetragon 运行时安全 (Tetragon Runtime Security)'
 category: general
 tags:
 - ebpf
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - flux
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -45,8 +48,9 @@ prerequisites:
 - policy-basics
 - logging-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Tetragon|Tetragon]] 运行时安全 (Tetragon Runtime Security)
 description: '# Tetragon 运行时安全 (Tetragon Runtime Security)'
@@ -2777,7 +2781,7 @@ tetra getevents --follow | \
 ```bash
 # 检查策略加载状态
 kubectl describe tracingpolicy <policy-name>
-kubectl logs -n kube-system daemonset/tetragon | grep -i "error\|failed"
+kubectl logs -n kube-system daemonset/tetragon | grep -i "error|failed"
 
 # 检查内核 BTF 支持
 ls /sys/kernel/btf/vmlinux

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 故障排查方法论全栈培训 (training-public)
 description: '# Kubernetes 故障排查方法论全栈培训'
+summary: '# Kubernetes 故障排查方法论全栈培训'
 category: presentations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - containerd
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -43,8 +46,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 故障排查方法论全栈培训
 

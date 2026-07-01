@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Concepts Reference
 description: '| **适合读者** | 初学者（查概念）→ 中级（理解原理）→ 专家（深度参考） |'
+summary: '| **适合读者** | 初学者（查概念）→ 中级（理解原理）→ 专家（深度参考） |'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - grafana
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -49,9 +52,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 ﻿# [[Kubernetes|Kubernetes]] 与 AI/ML 概念参考手册（完整恢复版）
 

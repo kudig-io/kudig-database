@@ -1,6 +1,7 @@
 ---
 title: Prometheus 高可用部署 (entities)
 description: '# Prometheus 高可用部署'
+summary: '# Prometheus 高可用部署'
 category: entities
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - crd
 - operator
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # Prometheus 高可用部署
 

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 分布式追踪最佳实践 [observability]
 description: 生产环境 Kubernetes 分布式追踪配置的最佳实践指南
+summary: 生产环境 Kubernetes 分布式追踪配置的最佳实践指南
 category: best-practices/observability
 tags:
 - kubernetes
@@ -13,6 +14,8 @@ tags:
 - elasticsearch
 - rbac
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -46,8 +49,9 @@ cross_refs:
 - type: best-practice
   path: ./logging.md
   label: 日志管理最佳实践
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 分布式追踪最佳实践
 

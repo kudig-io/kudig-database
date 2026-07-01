@@ -1,6 +1,7 @@
 ---
 title: 21 - ClusterRole / ClusterRoleBinding YAML 配置参考
 description: '# 21 - ClusterRole / ClusterRoleBinding YAML 配置参考'
+summary: '# 21 - ClusterRole / ClusterRoleBinding YAML 配置参考'
 category: yaml-manifests
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -48,8 +51,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/rbac-fta.md
   label: '故障树: rbac'
-created: "2026-05-23"
 ---
+
+
 
 # 21 - ClusterRole / ClusterRoleBinding YAML 配置参考
 

@@ -1,6 +1,7 @@
 ---
 title: CloudNativePG 企业级 PostgreSQL 运维指南
 description: '# CloudNativePG 企业级 PostgreSQL 运维指南'
+summary: '# CloudNativePG 企业级 PostgreSQL 运维指南'
 category: enterprise-database-middleware
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - minio
 - postgresql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -55,8 +58,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/sql.md
   label: '速查卡: sql'
-created: "2026-05-23"
 ---
+
+
 
 # [[CloudNativePG|CloudNativePG]] 企业级 PostgreSQL 运维指南
 

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 核心组件深度剖析
 description: 深入剖析 Kubernetes 各核心组件（API Server、etcd、Controller Manager、Scheduler、Kubelet、Kube-proxy、CNI）的架构设计与工作原理
+summary: 深入剖析 Kubernetes 各核心组件（API Server、etcd、Controller Manager、Scheduler、Kubelet、Kube-proxy、CNI）的架构设计与工作原理
 category: domain-1-architecture
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cni
 - apiserver
 - controller-manager
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -73,8 +76,9 @@ related_docs:
 - path: ../domain-01-cluster-fundamentals/11-etcd-deep-dive.md
   type: depth
   desc: etcd 深度解析
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 核心组件深度剖析 (Core Components Deep Dive)
 
@@ -1393,7 +1397,7 @@ data:
 
 | 组件 | 问题现象 | 根因 | 诊断步骤 | 恢复方案 | 预防措施 |
 |------|---------|------|---------|---------|---------|
-| **kubelet** | PLEG不健康 | CRI超时 | `journalctl -u kubelet \| grep PLEG` | 重启containerd/kubelet | SSD存储 |
+| **kubelet** | PLEG不健康 | CRI超时 | `journalctl -u kubelet | grep PLEG` | 重启containerd/kubelet | SSD存储 |
 | **kubelet** | Node NotReady | 心跳失败 | `kubectl describe node` | 重启kubelet/检查网络 | 监控节点状态 |
 | **kubelet** | 磁盘压力驱逐 | 空间不足 | 检查`nodefs.available` | 清理镜像/日志 | 配置镜像GC |
 | **kube-proxy** | Service不通 | 规则未生成 | `ipvsadm -Ln` | 重启kube-proxy | 监控规则同步 |

@@ -1,6 +1,7 @@
 ---
 title: 新人上手快速路径（Quick Start） [quick-start]
 description: '## 概述'
+summary: '## 概述'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - rbac
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # 新人上手快速路径（Quick Start）
 

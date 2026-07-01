@@ -1,6 +1,7 @@
 ---
 title: NetworkPolicy 故障排查
 description: '# 16 - NetworkPolicy 故障排查 (NetworkPolicy Troubleshooting)'
+summary: '# 16 - NetworkPolicy 故障排查 (NetworkPolicy Troubleshooting)'
 category: troubleshooting
 tags:
 - networkpolicy
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - flannel
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: advanced
 reading_level: advanced
@@ -63,8 +66,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta.md
   label: '故障树: networkpolicy'
-created: "2026-05-23"
 ---
+
+
 
 # 16 - [[NetworkPolicy|NetworkPolicy]] 故障排查 (NetworkPolicy Troubleshooting)
 

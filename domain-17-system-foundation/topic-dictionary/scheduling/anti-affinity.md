@@ -1,12 +1,15 @@
 ---
 title: 反亲和性
-description: 'Anti-Affinity（反亲和性）表达 Pod 不希望与某些 Pod 调度到同一拓扑域的约束。它是实现高可用和故障隔离的关键调度策略。...'
+description: Anti-Affinity（反亲和性）表达 Pod 不希望与某些 Pod 调度到同一拓扑域的约束。它是实现高可用和故障隔离的关键调度策略。...
+summary: Anti-Affinity（反亲和性）表达 Pod 不希望与某些 Pod 调度到同一拓扑域的约束。它是实现高可用和故障隔离的关键调度策略。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - scheduling
 - anti-affinity
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 反亲和性
 

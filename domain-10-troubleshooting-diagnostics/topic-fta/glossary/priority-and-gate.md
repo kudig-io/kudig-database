@@ -1,12 +1,15 @@
 ---
 title: 优先与门
-description: '优先与门（PAND）是按时序发生的 AND 门。输出事件仅在输入事件按指定顺序发生时才发生。...'
+description: 优先与门（PAND）是按时序发生的 AND 门。输出事件仅在输入事件按指定顺序发生时才发生。...
+summary: 优先与门（PAND）是按时序发生的 AND 门。输出事件仅在输入事件按指定顺序发生时才发生。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - priorityandgate
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 优先与门
 

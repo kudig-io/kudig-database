@@ -1,6 +1,7 @@
 ---
 title: 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
 description: '# 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考'
+summary: '# 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考'
 category: yaml-manifests
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - job
 - cronjob
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -49,8 +52,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
 

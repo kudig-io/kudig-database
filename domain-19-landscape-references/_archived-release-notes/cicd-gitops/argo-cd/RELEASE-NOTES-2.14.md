@@ -1,6 +1,7 @@
 ---
 title: argo-cd v2.14 Release Notes
 description: argo-cd v2.14 Release Notes — Kubernetes 生产运维知识库
+summary: argo-cd v2.14 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - redis
 - operator
 - webhook
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - cncf-ecosystem
 - gitops-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 # argo-cd v2.14 Release Notes
 

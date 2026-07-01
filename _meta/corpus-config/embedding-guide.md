@@ -1,11 +1,19 @@
 ---
 title: Embedding Pipeline 使用指南
+summary: Embedding Pipeline 使用指南：python3 scripts/embedding-pipeline.py \
 category: corpus-config
-tags: [rag, embedding, vector-search, pipeline]
-created: "2026-05-23"
-updated: "2026-05-23"
+tags:
+- rag
+- embedding
+- vector-search
+- pipeline
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
 ---
+
+
 
 # Embedding Pipeline 使用指南
 

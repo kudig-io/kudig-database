@@ -1,6 +1,7 @@
 ---
 title: 发布会 FAQ
 description: '**A**: K8s 官方文档是 API 参考和功能说明。kudig-database 是**生产运维实战知识**, 包含:'
+summary: '**A**: K8s 官方文档是 API 参考和功能说明。kudig-database 是**生产运维实战知识**, 包含:'
 category: general
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - ingress
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 发布会 FAQ
 

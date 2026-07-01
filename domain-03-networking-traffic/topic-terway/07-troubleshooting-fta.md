@@ -1,6 +1,7 @@
 ---
 title: 07 - Terway 故障树速查 (FTA Troubleshooting Quick Reference)
 description: OR0 --> NET[节点网络异常]
+summary: OR0 --> NET[节点网络异常]
 category: terway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ingress
 - networkpolicy
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -40,8 +43,9 @@ prerequisites:
 fta_id: FTA-07_TROUBLESHOOTING-001
 component: 07 Troubleshooting
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 # 07 - Terway 故障树速查 (FTA Troubleshooting Quick Reference)
 
@@ -131,8 +135,8 @@ flowchart TD
 | 步骤 | 操作 | 命令 | 判定 |
 |------|------|------|------|
 | 1 | Terway Pod 状态 | `kubectl get [[Pods|pods]] -n kube-system -l app=terway` | 全部 Running 为正常 |
-| 2 | 节点 ENI 信息 | `kubectl describe node <node> \| grep aliyun.com` | 查看 allocated/eni-max/ip-max |
-| 3 | Pod IP 归属 | `kubectl get pod <pod> -o yaml \| grep k8s.aliyun.com` | 确认 ENI 模式或 Veth 模式 |
+| 2 | 节点 ENI 信息 | `kubectl describe node <node> | grep aliyun.com` | 查看 allocated/eni-max/ip-max |
+| 3 | Pod IP 归属 | `kubectl get pod <pod> -o yaml | grep k8s.aliyun.com` | 确认 ENI 模式或 Veth 模式 |
 | 4 | VPC 路由 | 阿里云控制台 -> VPC 路由表 | Pod CIDR 指向各节点 ECS |
 | 5 | 安全组 | 节点安全组是否放通 Pod 间通信端口 | 入站放通 Pod CIDR |
 | 6a | 快速缓解: IP 分配失败 | 检查 ENI 配额 / IP 池 / 升级实例规格 | |
@@ -169,14 +173,14 @@ Pod ContainerCreating, 事件含 ENI/bindquota/AttachNetworkInterface
 
 | 节点 ID | 名称 | 诊断命令 | 预期输出 | 判定 |
 |---------|------|---------|----------|------|
-| `cat_eni` | ENI 异常分类 | `kubectl get events -n ${NAMESPACE} --field-selector reason=FailedCreatePodSandBox -o json \| jq '[.items[] \| select(.message \| test("ENI\|bindquota\|AttachNetworkInterface"))] \| length'` | `> 0` | 进入 ENI 子树 |
-| `evt_eni_quota` | ENI 配额不足 | `aliyun ecs DescribeInstances --InstanceIds '["${INSTANCE_ID}"]' \| jq '.Instances.Instance[0].NetworkInterfaces.NetworkInterface \| length'` | 达到实例类型上限 | 确认根因 |
-| | | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "bindquota exceeded\|no available ENI slot"` | 含配额超限 | 确认根因 |
-| | | `kubectl describe node ${NODE_NAME} \| grep -E "aliyun.com/allocated-eni\|aliyun.com/eni-max"` | allocated >= max | 确认根因 |
-| `evt_eni_bind_fail` | ENI 绑定失败 | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "AttachNetworkInterface failed\|bindENI failed"` | 含绑定失败 | 确认根因 |
-| | | `aliyun ecs DescribeNetworkInterfaces --InstanceId ${INSTANCE_ID} \| jq '.NetworkInterfaceSets.NetworkInterfaceSet[] \| {id: .NetworkInterfaceId, status: .Status}'` | 状态非 InUse | 进一步检查 |
+| `cat_eni` | ENI 异常分类 | `kubectl get events -n ${NAMESPACE} --field-selector reason=FailedCreatePodSandBox -o json | jq '[.items[] | select(.message | test("ENI|bindquota|AttachNetworkInterface"))] | length'` | `> 0` | 进入 ENI 子树 |
+| `evt_eni_quota` | ENI 配额不足 | `aliyun ecs DescribeInstances --InstanceIds '["${INSTANCE_ID}"]' | jq '.Instances.Instance[0].NetworkInterfaces.NetworkInterface | length'` | 达到实例类型上限 | 确认根因 |
+| | | `kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "bindquota exceeded|no available ENI slot"` | 含配额超限 | 确认根因 |
+| | | `kubectl describe node ${NODE_NAME} | grep -E "aliyun.com/allocated-eni|aliyun.com/eni-max"` | allocated >= max | 确认根因 |
+| `evt_eni_bind_fail` | ENI 绑定失败 | `kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "AttachNetworkInterface failed|bindENI failed"` | 含绑定失败 | 确认根因 |
+| | | `aliyun ecs DescribeNetworkInterfaces --InstanceId ${INSTANCE_ID} | jq '.NetworkInterfaceSets.NetworkInterfaceSet[] | {id: .NetworkInterfaceId, status: .Status}'` | 状态非 InUse | 进一步检查 |
 | `evt_eni_drift` | ENI 状态漂移 | `kubectl exec -n kube-system $(kubectl get pods -n kube-system -l app=terway -o jsonpath='{.items[0].metadata.name}') -- terway-cli show` | 与云平台 ENI 列表不匹配 | 确认根因 |
-| | | `aliyun ecs DescribeNetworkInterfaces --InstanceId ${INSTANCE_ID} --Status Detaching \| jq '.NetworkInterfaceSets.NetworkInterfaceSet \| length'` | 有 Detaching 状态 | 确认根因 |
+| | | `aliyun ecs DescribeNetworkInterfaces --InstanceId ${INSTANCE_ID} --Status Detaching | jq '.NetworkInterfaceSets.NetworkInterfaceSet | length'` | 有 Detaching 状态 | 确认根因 |
 
 ### 4.3 解决方案
 
@@ -215,12 +219,12 @@ Pod ContainerCreating, 事件含 IP/pool/address
 
 | 节点 ID | 名称 | 诊断命令 | 预期输出 | 判定 |
 |---------|------|---------|----------|------|
-| `cat_ip` | IP 异常分类 | `kubectl get events -n ${NAMESPACE} --field-selector reason=FailedCreatePodSandBox -o json \| jq '[.items[] \| select(.message \| test("IP\|pool\|address"))] \| length'` | `> 0` | 进入 IP 子树 |
-| `evt_ip_exhaust` | IP 池耗尽 | `aliyun vpc DescribeVSwitchAttributes --VSwitchId ${VSWITCH_ID} \| jq '.AvailableIpAddressCount'` | `< 10` | 确认根因 |
-| | | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "no available IP\|IP pool exhausted"` | 含 IP 耗尽 | 确认根因 |
-| `evt_ip_leak` | IP 泄漏 | `kubectl exec -n kube-system $(kubectl get pods -n kube-system -l app=terway -o jsonpath='{.items[0].metadata.name}') -- terway-cli show \| grep -c "allocated"` | 分配数 >> 运行 Pod 数 | 确认根因 |
-| | | `kubectl logs -n kube-system -l app=terway --tail=100 \| grep -E "IP not released\|stale IP"` | 含 IP 泄漏日志 | 确认根因 |
-| `evt_ip_conflict` | IP 冲突 | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "IP conflict\|duplicate IP"` | 含 IP 冲突 | 确认根因 |
+| `cat_ip` | IP 异常分类 | `kubectl get events -n ${NAMESPACE} --field-selector reason=FailedCreatePodSandBox -o json | jq '[.items[] | select(.message | test("IP|pool|address"))] | length'` | `> 0` | 进入 IP 子树 |
+| `evt_ip_exhaust` | IP 池耗尽 | `aliyun vpc DescribeVSwitchAttributes --VSwitchId ${VSWITCH_ID} | jq '.AvailableIpAddressCount'` | `< 10` | 确认根因 |
+| | | `kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "no available IP|IP pool exhausted"` | 含 IP 耗尽 | 确认根因 |
+| `evt_ip_leak` | IP 泄漏 | `kubectl exec -n kube-system $(kubectl get pods -n kube-system -l app=terway -o jsonpath='{.items[0].metadata.name}') -- terway-cli show | grep -c "allocated"` | 分配数 >> 运行 Pod 数 | 确认根因 |
+| | | `kubectl logs -n kube-system -l app=terway --tail=100 | grep -E "IP not released|stale IP"` | 含 IP 泄漏日志 | 确认根因 |
+| `evt_ip_conflict` | IP 冲突 | `kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "IP conflict|duplicate IP"` | 含 IP 冲突 | 确认根因 |
 | | | `arping -I eth0 -c 3 ${CONFLICT_IP} 2>&1` | 多个 MAC 响应 | 确认根因 |
 
 ### 5.3 IP 泄漏检测脚本
@@ -281,14 +285,14 @@ Pod 事件含 FailedCreatePodSandBox / cni plugin / terway
 
 | 节点 ID | 名称 | 诊断命令 | 预期输出 | 判定 |
 |---------|------|---------|----------|------|
-| `cat_cni` | CNI 异常分类 | `kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E "FailedCreatePodSandBox\|cni plugin\|terway"` | 含 CNI 错误 | 进入 CNI 子树 |
-| `evt_cni_config` | CNI 配置错误 | `ssh ${NODE_NAME} 'cat /etc/cni/net.d/*.conf \| head -20'` | JSON 格式错误或缺失 | 确认根因 |
-| | | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "invalid CNI\|error loading CNI"` | 含配置错误 | 确认根因 |
+| `cat_cni` | CNI 异常分类 | `kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E "FailedCreatePodSandBox|cni plugin|terway"` | 含 CNI 错误 | 进入 CNI 子树 |
+| `evt_cni_config` | CNI 配置错误 | `ssh ${NODE_NAME} 'cat /etc/cni/net.d/*.conf | head -20'` | JSON 格式错误或缺失 | 确认根因 |
+| | | `kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "invalid CNI|error loading CNI"` | 含配置错误 | 确认根因 |
 | | | `kubectl get configmap -n kube-system eni-config -o yaml` | 配置项异常 | 确认根因 |
-| `evt_cni_daemon` | CNI 守护进程异常 | `kubectl get pods -n kube-system -l app=terway -o json \| jq '.items[] \| {name: .metadata.name, ready: .status.containerStatuses[0].ready, restarts: .status.containerStatuses[0].restartCount}'` | ready=false 或重启多 | 确认根因 |
+| `evt_cni_daemon` | CNI 守护进程异常 | `kubectl get pods -n kube-system -l app=terway -o json | jq '.items[] | {name: .metadata.name, ready: .status.containerStatuses[0].ready, restarts: .status.containerStatuses[0].restartCount}'` | ready=false 或重启多 | 确认根因 |
 | | | `ssh ${NODE_NAME} 'ls -la /opt/cni/bin/terway 2>&1'` | 文件不存在或权限异常 | 确认根因 |
-| `evt_route_fail` | 路由配置失败 | `ssh ${NODE_NAME} 'ip route show \| grep -E "via\|dev eth"'` | 缺少必要路由 | 确认根因 |
-| | | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "failed to add route\|iptables error"` | 含路由错误 | 确认根因 |
+| `evt_route_fail` | 路由配置失败 | `ssh ${NODE_NAME} 'ip route show | grep -E "via|dev eth"'` | 缺少必要路由 | 确认根因 |
+| | | `kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "failed to add route|iptables error"` | 含路由错误 | 确认根因 |
 
 ### 6.3 解决方案
 
@@ -329,14 +333,14 @@ Pod 事件含 FailedCreatePodSandBox / cni plugin / terway
 
 | 节点 ID | 名称 | 诊断命令 | 预期输出 | 判定 |
 |---------|------|---------|----------|------|
-| `cat_network` | 网络异常分类 | `kubectl get node ${NODE_NAME} -o json \| jq '.status.conditions[] \| select(.type=="NetworkUnavailable") \| .status'` | `True` | 进入网络子树 |
+| `cat_network` | 网络异常分类 | `kubectl get node ${NODE_NAME} -o json | jq '.status.conditions[] | select(.type=="NetworkUnavailable") | .status'` | `True` | 进入网络子树 |
 | `evt_vpc_unreachable` | 节点与 VPC 不通 | `ssh ${NODE_NAME} 'ping -c 3 100.100.100.200 2>&1'` | 超时或不可达 | 确认根因 |
 | | | `ssh ${NODE_NAME} 'ip link show eth0 && ip addr show eth0'` | 接口 DOWN 或无 IP | 确认根因 |
-| | | `kubectl get events --field-selector involvedObject.name=${NODE_NAME},reason=NodeNotReady -o json \| jq '.items[-1].message'` | NodeNotReady 事件 | 确认根因 |
+| | | `kubectl get events --field-selector involvedObject.name=${NODE_NAME},reason=NodeNotReady -o json | jq '.items[-1].message'` | NodeNotReady 事件 | 确认根因 |
 | `evt_crossnode_fail` | 跨节点网络不通 | `kubectl exec ${POD_NAME} -n ${NAMESPACE} -- ping -c 3 <other-pod-ip> 2>&1` | 超时或不可达 | 确认根因 |
-| | | `aliyun vpc DescribeRouteTableList --VpcId ${VPC_ID} \| jq '.RouterTableList.RouterTableListType[].RouteTableId'` | 路由表配置异常 | 进一步检查 |
+| | | `aliyun vpc DescribeRouteTableList --VpcId ${VPC_ID} | jq '.RouterTableList.RouterTableListType[].RouteTableId'` | 路由表配置异常 | 进一步检查 |
 | | | `ip route get <pod-b-ip>` | 无路由 | 确认根因 |
-| `evt_mtu_issue` | MTU/分片异常 | `ssh ${NODE_NAME} 'ip link show \| grep mtu'` | MTU 不一致 | 确认根因 |
+| `evt_mtu_issue` | MTU/分片异常 | `ssh ${NODE_NAME} 'ip link show | grep mtu'` | MTU 不一致 | 确认根因 |
 | | | `ssh ${NODE_NAME} 'ping -s 1400 -M do <target-ip> 2>&1'` | "message too long" | 确认根因 |
 
 ### 7.3 解决方案
@@ -367,11 +371,11 @@ Pod 事件含 FailedCreatePodSandBox / cni plugin / terway
 
 | 节点 ID | 名称 | 诊断命令 | 预期输出 | 判定 |
 |---------|------|---------|----------|------|
-| `cat_security` | 安全异常分类 | `kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=30 2>&1 \| grep -E "connection refused\|connection timed out\|no route"` | 含连接失败 | 进入安全子树 |
-| `evt_sg_block` | 安全组阻断 | `aliyun ecs DescribeSecurityGroupAttribute --SecurityGroupId ${SG_ID} --Direction ingress \| jq '.Permissions.Permission[] \| select(.IpProtocol=="ALL" or .IpProtocol=="TCP")'` | 缺少必要规则 | 确认根因 |
-| | | `aliyun vpc DescribeFlowLogs --FlowLogId ${FLOW_LOG_ID} \| jq '.FlowLogs.FlowLog[]'` | 有 REJECT 记录 | 确认根因 |
-| | | `kubectl describe node ${NODE_NAME} \| grep "SecurityGroup"` | 安全组 ID | 基础信息 |
-| `evt_acl_misconfig` | 策略不一致 | `aliyun ecs DescribeNetworkInterfaces --InstanceId ${INSTANCE_ID} \| jq '.NetworkInterfaceSets.NetworkInterfaceSet[] \| {id: .NetworkInterfaceId, sg: .SecurityGroupIds.SecurityGroupId}'` | 不同 ENI 关联不同安全组 | 确认根因 |
+| `cat_security` | 安全异常分类 | `kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=30 2>&1 | grep -E "connection refused|connection timed out|no route"` | 含连接失败 | 进入安全子树 |
+| `evt_sg_block` | 安全组阻断 | `aliyun ecs DescribeSecurityGroupAttribute --SecurityGroupId ${SG_ID} --Direction ingress | jq '.Permissions.Permission[] | select(.IpProtocol=="ALL" or .IpProtocol=="TCP")'` | 缺少必要规则 | 确认根因 |
+| | | `aliyun vpc DescribeFlowLogs --FlowLogId ${FLOW_LOG_ID} | jq '.FlowLogs.FlowLog[]'` | 有 REJECT 记录 | 确认根因 |
+| | | `kubectl describe node ${NODE_NAME} | grep "SecurityGroup"` | 安全组 ID | 基础信息 |
+| `evt_acl_misconfig` | 策略不一致 | `aliyun ecs DescribeNetworkInterfaces --InstanceId ${INSTANCE_ID} | jq '.NetworkInterfaceSets.NetworkInterfaceSet[] | {id: .NetworkInterfaceId, sg: .SecurityGroupIds.SecurityGroupId}'` | 不同 ENI 关联不同安全组 | 确认根因 |
 | | Calico 检查 | `kubectl get pods -n kube-system -l k8s-app=calico-node` | 非 Running | 策略引擎异常 |
 
 ### 8.3 解决方案
@@ -409,11 +413,11 @@ terway 日志含 Throttling / ServiceUnavailable / connection refused
 
 | 节点 ID | 名称 | 诊断命令 | 预期输出 | 判定 |
 |---------|------|---------|----------|------|
-| `cat_cp` | 控制面异常分类 | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "Throttling\|ServiceUnavailable\|connection refused"` | 含 API 错误 | 进入控制面子树 |
-| `evt_cloud_api_fail` | 云 API 限流 | `kubectl logs -n kube-system -l app=terway --tail=100 \| grep -E "Throttling\|rate limit\|429"` | 含限流信息 | 确认根因 |
-| | | `aliyun ecs DescribeInstances 2>&1 \| grep -E "Throttling\|ServiceUnavailable"` | API 返回限流 | 确认根因 |
+| `cat_cp` | 控制面异常分类 | `kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "Throttling|ServiceUnavailable|connection refused"` | 含 API 错误 | 进入控制面子树 |
+| `evt_cloud_api_fail` | 云 API 限流 | `kubectl logs -n kube-system -l app=terway --tail=100 | grep -E "Throttling|rate limit|429"` | 含限流信息 | 确认根因 |
+| | | `aliyun ecs DescribeInstances 2>&1 | grep -E "Throttling|ServiceUnavailable"` | API 返回限流 | 确认根因 |
 | `evt_cp_down` | 控制面不可用 | `kubectl get --raw /healthz 2>&1` | 非 ok 或超时 | 确认根因 |
-| | | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep "connection refused"` | 含连接拒绝 | 确认根因 |
+| | | `kubectl logs -n kube-system -l app=terway --tail=50 | grep "connection refused"` | 含连接拒绝 | 确认根因 |
 
 ### 9.3 解决方案
 
@@ -438,8 +442,8 @@ terway 日志含 Throttling / ServiceUnavailable / connection refused
 
 | 条件 | 检测命令 | 确认标志 |
 |------|---------|---------|
-| A: vSwitch IP 池空 | `aliyun vpc DescribeVSwitchAttributes --VSwitchId ${VSWITCH_ID} \| jq '.AvailableIpAddressCount'` | `== 0` |
-| B: IP 未回收 | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "IP not released\|stale IP"` | 有泄漏日志 |
+| A: vSwitch IP 池空 | `aliyun vpc DescribeVSwitchAttributes --VSwitchId ${VSWITCH_ID} | jq '.AvailableIpAddressCount'` | `== 0` |
+| B: IP 未回收 | `kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "IP not released|stale IP"` | 有泄漏日志 |
 
 **紧急恢复**:
 1. 立即扩展 vSwitch CIDR 或添加新 vSwitch
@@ -459,8 +463,8 @@ terway 日志含 Throttling / ServiceUnavailable / connection refused
 
 | 条件 | 检测命令 | 确认标志 |
 |------|---------|---------|
-| A: ENI 配额满 | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "bindquota exceeded\|no available ENI"` | 有配额超限日志 |
-| B: API 限流 | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "Throttling\|rate limit\|429"` | 有限流日志 |
+| A: ENI 配额满 | `kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "bindquota exceeded|no available ENI"` | 有配额超限日志 |
+| B: API 限流 | `kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "Throttling|rate limit|429"` | 有限流日志 |
 
 **紧急恢复**:
 1. 提交工单紧急申请 API 限流放宽
@@ -536,8 +540,8 @@ terway 日志含 Throttling / ServiceUnavailable / connection refused
 |------|------|---------|
 | Terway Daemon 日志 | terway DaemonSet Pod | `kubectl logs -n kube-system -l app=terway --tail=200` |
 | CNI 插件日志 | 节点 `/var/log/terway.log` | `ssh <node> 'cat /var/log/terway.log'` |
-| kubelet 网络事件 | 节点 journalctl | `journalctl -u kubelet \| grep -E "network\|cni"` |
-| 阿里云 API 调用日志 | terway Pod | `kubectl logs -n kube-system -l app=terway \| grep -E "Throttling\|API"` |
+| kubelet 网络事件 | 节点 journalctl | `journalctl -u kubelet | grep -E "network|cni"` |
+| 阿里云 API 调用日志 | terway Pod | `kubectl logs -n kube-system -l app=terway | grep -E "Throttling|API"` |
 
 ### 12.4 配置核对清单
 
@@ -548,7 +552,7 @@ terway 日志含 Throttling / ServiceUnavailable / connection refused
 | vSwitch CIDR | `aliyun vpc DescribeVSwitchAttributes --VSwitchId ${VSWITCH_ID}` | AvailableIpAddressCount |
 | Terway 运行模式 | `kubectl get ds -n kube-system terway-eniip -o yaml` | ENI / ENIIP / VPC 模式 |
 | NetworkPolicy 配置 | `kubectl get networkpolicy --all-namespaces` | 是否与安全组冲突 |
-| 节点 Annotation | `kubectl describe node <node> \| grep aliyun.com` | allocated-eni / eni-max / ip-max |
+| 节点 Annotation | `kubectl describe node <node> | grep aliyun.com` | allocated-eni / eni-max / ip-max |
 | Calico 状态 | `kubectl get pods -n kube-system -l k8s-app=calico-node` | 是否 Running |
 
 ---
@@ -581,9 +585,9 @@ Pod 网络不可用，且 Terway 运行在 IPVLAN 模式下
 | `cat_ipvlan` | IPVLAN 异常分类 | `kubectl get pod <pod> -o jsonpath='{.metadata.annotations.aliyun.com/network-mode}'` | 显示 "ipvlan" | 进入 IPVLAN 子树 |
 | `evt_ipvlan_policy` | IPVLAN 网络策略不生效 | `uname -r` | 内核版本 < 5.10 | 确认根因（内核不兼容） |
 | | | `cat /sys/module/ipvlan/parameters/mtu` | MTU 值异常 | 进一步检查 |
-| `evt_ipvlan_leak` | IPVLAN 连接泄漏 | `ss -tlnp \| grep -c ipvlan` | 连接数远超预期 | 确认根因（资源耗尽） |
-| | | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "netlink\|socket"` | 含 netlink 错误 | 确认根因 |
-| `evt_ipvlan_mtu` | IPVLAN MTU 问题 | `ip link show \| grep mtu` | MTU 不一致（1500 vs 9000） | 确认根因 |
+| `evt_ipvlan_leak` | IPVLAN 连接泄漏 | `ss -tlnp | grep -c ipvlan` | 连接数远超预期 | 确认根因（资源耗尽） |
+| | | `kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "netlink|socket"` | 含 netlink 错误 | 确认根因 |
+| `evt_ipvlan_mtu` | IPVLAN MTU 问题 | `ip link show | grep mtu` | MTU 不一致（1500 vs 9000） | 确认根因 |
 | | | `ping -s 1400 -M do <target-ip>` | "message too long" | 确认根因 |
 
 ### 13.3 解决方案
@@ -622,12 +626,12 @@ Terway BGP 会话中断或路由黑洞
 
 | 节点 ID | 名称 | 诊断命令 | 预期输出 | 判定 |
 |---------|------|---------|----------|------|
-| `cat_bgp` | BGP 异常分类 | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "bgp\|bird"` | 含 BGP 错误 | 进入 BGP 子树 |
+| `cat_bgp` | BGP 异常分类 | `kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "bgp|bird"` | 含 BGP 错误 | 进入 BGP 子树 |
 | `evt_bgp_session_down` | BGP 会话中断 | `kubectl exec -n kube-system <terway-pod> -- ip bgp show` | 无 BGP 邻居或状态 down | 确认根因 |
-| | | `ps aux \| grep bird \| grep -v grep` | Bird 进程不存在 | 确认根因 |
-| `evt_bgp_route_blackhole` | BGP 路由黑洞 | `ip route show \| grep -E "bird\|bgp"` | 无 BGP 路由 | 确认根因 |
+| | | `ps aux | grep bird | grep -v grep` | Bird 进程不存在 | 确认根因 |
+| `evt_bgp_route_blackhole` | BGP 路由黑洞 | `ip route show | grep -E "bird|bgp"` | 无 BGP 路由 | 确认根因 |
 | | | `ip route get <target-ip>` | 路由指向错误 | 进一步检查 |
-| `evt_bgp_as_conflict` | BGP AS 号冲突 | `kubectl logs -n kube-system -l app=terway --tail=100 \| grep -E "AS.*conflict\|asn"` | 含 AS 号冲突日志 | 确认根因 |
+| `evt_bgp_as_conflict` | BGP AS 号冲突 | `kubectl logs -n kube-system -l app=terway --tail=100 | grep -E "AS.*conflict|asn"` | 含 AS 号冲突日志 | 确认根因 |
 | | | `ip bgp peers` | 多个节点使用相同 AS | 确认根因 |
 
 ### 14.3 解决方案
@@ -665,20 +669,20 @@ Service/Ingress 流量异常（Terway 模式下）
 
 | 节点 ID | 名称 | 诊断命令 | 预期输出 | 判定 |
 |---------|------|---------|----------|------|
-| `cat_service` | Service 异常分类 | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "kube-proxy\|iptables\|nodeport"` | 含冲突日志 | 进入 Service 子树 |
-| `evt_kube_proxy_conflict` | kube-proxy 与 Terway 冲突 | `iptables -L -n -t nat \| grep -c "TERWAY"` | 规则数异常多 | 确认根因 |
-| | | `iptables -L -n -t nat \| grep -E "KUBE\|TERWAY" \| wc -l` | 两套规则并存 | 确认根因 |
-| `evt_nodeport_conflict` | NodePort 端口冲突 | `ss -tlnp \| grep :<nodeport>` | 多个进程监听同一端口 | 确认根因 |
-| | | `netstat -tlnp \| grep <nodeport>` | 显示冲突进程 | 确认根因 |
-| `evt_clb_annot_error` | CLB 注解配置错误 | `kubectl describe svc <name> \| grep -E "annotations\|alb"` | 注解格式错误 | 确认根因 |
-| | | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "clb\|loadbalancer\|annotation"` | 含注解错误 | 确认根因 |
+| `cat_service` | Service 异常分类 | `kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "kube-proxy|iptables|nodeport"` | 含冲突日志 | 进入 Service 子树 |
+| `evt_kube_proxy_conflict` | kube-proxy 与 Terway 冲突 | `iptables -L -n -t nat | grep -c "TERWAY"` | 规则数异常多 | 确认根因 |
+| | | `iptables -L -n -t nat | grep -E "KUBE|TERWAY" | wc -l` | 两套规则并存 | 确认根因 |
+| `evt_nodeport_conflict` | NodePort 端口冲突 | `ss -tlnp | grep :<nodeport>` | 多个进程监听同一端口 | 确认根因 |
+| | | `netstat -tlnp | grep <nodeport>` | 显示冲突进程 | 确认根因 |
+| `evt_clb_annot_error` | CLB 注解配置错误 | `kubectl describe svc <name> | grep -E "annotations|alb"` | 注解格式错误 | 确认根因 |
+| | | `kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "clb|loadbalancer|annotation"` | 含注解错误 | 确认根因 |
 
 ### 15.3 解决方案
 
 | 子事件 | 处置 |
 |--------|------|
 | kube-proxy 与 Terway 冲突 | 1) 禁用 kube-proxy（Terway 已接管网络）2) 检查 iptables 规则清理 3) 确认 `--cleanup-iptables` 启动参数 |
-| NodePort 端口冲突 | 1) 检查占用端口的进程 `ss -tlnp \| grep :<port>` 2) 修改 Terway NodePort 范围 3) 协调多组件端口分配 |
+| NodePort 端口冲突 | 1) 检查占用端口的进程 `ss -tlnp | grep :<port>` 2) 修改 Terway NodePort 范围 3) 协调多组件端口分配 |
 | CLB 注解配置错误 | 1) 检查 Service 注解格式 2) 确认使用 Terway 预期的注解 key 3) 参考 Terway 文档的注解示例 |
 
 ---
@@ -736,7 +740,7 @@ TE-9: Terway 网络问题 [OR门] 🟠 P1
 | BE 编号 | 问题现象 | 诊断命令 | 快速修复 |
 |:---|:---|:---|:---|
 | BE-9.1.1.1 | VSwitch 带宽饱和 | `aliyun vpc DescribeVSwitches` | 扩展 vSwitch 或增加节点 |
-| BE-9.1.2.1 | ENI 绑定数超限 | `kubectl describe node \| grep aliyun.com/eni-max` | 升级实例规格 |
+| BE-9.1.2.1 | ENI 绑定数超限 | `kubectl describe node | grep aliyun.com/eni-max` | 升级实例规格 |
 | BE-9.2.1.1 | VPC CIDR 耗尽 | `aliyun vpc DescribeVpcs` | 扩展 VPC CIDR |
 | BE-9.4.1 | 内核版本不兼容 | `uname -r` | 升级内核到 5.10+ |
 | BE-9.5.1 | netlink 资源耗尽 | `ss -s` | 重启 Terway Daemon |

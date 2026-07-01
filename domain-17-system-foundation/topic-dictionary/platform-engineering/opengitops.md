@@ -1,6 +1,9 @@
 ---
 title: OpenGitOps 标准
-description: 'OpenGitOps 是 CNCF Sandbox 项目，定义了 GitOps 的原则和标准，提供 GitOps 最佳实践的参考实现和合规认证，推动 GitOp...'
+description: OpenGitOps 是 CNCF Sandbox 项目，定义了 GitOps 的原则和标准，提供 GitOps 最佳实践的参考实现和合规认证，推动
+  GitOp...
+summary: OpenGitOps 是 CNCF Sandbox 项目，定义了 GitOps 的原则和标准，提供 GitOps 最佳实践的参考实现和合规认证，推动
+  GitOp...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - platform-engineering
 - gitops
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # OpenGitOps 标准（OpenGitOps）
 

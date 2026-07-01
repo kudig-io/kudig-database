@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 集群 PKI 架构总览 (topic-code-analysis)
 description: 'title: Kubernetes 集群 PKI 架构总览'
+summary: 'title: Kubernetes 集群 PKI 架构总览'
 category: general
 tags:
 - reference
@@ -12,6 +13,8 @@ tags:
 - controller-manager
 - containerd
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Kubernetes 集群 PKI 架构总览
 description: '# Kubernetes 集群 PKI 架构总览'
@@ -618,7 +622,7 @@ ls -la /etc/kubernetes/pki/etcd/
 
 ```bash
 openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -text | \
-  grep -A5 "Subject Alternative Name\|Extended Key Usage\|Key Usage"
+  grep -A5 "Subject Alternative Name|Extended Key Usage|Key Usage"
 ```
 
 ### 示例 5：统计证书文件数量
@@ -656,6 +660,8 @@ find /etc/kubernetes/pki/ -name "*.key" | wc -l
 | `CreateServiceAccountKeyPair` | `cmd/kubeadm/app/phases/certs/certs.go` | SA 密钥对生成 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

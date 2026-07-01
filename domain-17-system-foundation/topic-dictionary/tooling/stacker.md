@@ -1,6 +1,9 @@
 ---
 title: Stacker 容器构建
-description: 'Stacker 是 Project Atomic（Red Hat）开源的容器镜像构建工具，使用声明式 YAML 定义构建步骤，支持层缓存和 OCI 格式输出，是...'
+description: Stacker 是 Project Atomic（Red Hat）开源的容器镜像构建工具，使用声明式 YAML 定义构建步骤，支持层缓存和
+  OCI 格式输出，是...
+summary: Stacker 是 Project Atomic（Red Hat）开源的容器镜像构建工具，使用声明式 YAML 定义构建步骤，支持层缓存和 OCI
+  格式输出，是...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - tooling
 - container
 - build
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Stacker 容器构建（Stacker）
 

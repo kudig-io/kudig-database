@@ -1,6 +1,7 @@
 ---
 title: Service Mesh Architecture
 description: '- [[concepts/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis'
+summary: '- [[concepts/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - jaeger
 - cilium
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Service|Service]]Service Mesh）|Service Mesh]] Architecture
 

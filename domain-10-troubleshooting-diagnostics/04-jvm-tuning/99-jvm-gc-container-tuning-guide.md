@@ -1,6 +1,7 @@
 ---
 title: JVM GC 容器调优深度指南
 description: '# JVM GC 容器调优深度指南'
+summary: '# JVM GC 容器调优深度指南'
 category: troubleshooting
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - job
 - agent
 - etcd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -57,8 +60,9 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
-created: "2026-05-23"
 ---
+
+
 
 # JVM GC 容器调优深度指南
 

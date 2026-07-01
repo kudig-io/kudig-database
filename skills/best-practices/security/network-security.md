@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 网络安全最佳实践 [security]
 description: 生产环境 Kubernetes 网络安全配置的最佳实践指南
+summary: 生产环境 Kubernetes 网络安全配置的最佳实践指南
 category: best-practices/security
 tags:
 - kubernetes
@@ -13,6 +14,8 @@ tags:
 - calico
 - ingress
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -46,8 +49,9 @@ cross_refs:
 - type: best-practice
   path: ./pod-security.md
   label: Pod安全最佳实践
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 网络安全最佳实践
 

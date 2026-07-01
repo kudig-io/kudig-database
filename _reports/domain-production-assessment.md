@@ -1,6 +1,7 @@
 ---
 title: Domain Production Assessment
 description: '**评估视角**: 生产环境运维（SRE / Platform Ops / 运维工程师）'
+summary: '**评估视角**: 生产环境运维（SRE / Platform Ops / 运维工程师）'
 category: references
 tags:
 - assessment
@@ -13,6 +14,8 @@ tags:
 - docker
 - opa
 - falco
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 - policy-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Domain 结构生产环境维度评估报告
 

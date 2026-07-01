@@ -1,6 +1,9 @@
 ---
 title: Docker
-description: 'Docker 是最广泛使用的容器平台，包含 Docker Engine（运行时）、Docker CLI 和 Docker Buildx（构建工具）。虽然 Kub...'
+description: Docker 是最广泛使用的容器平台，包含 Docker Engine（运行时）、Docker CLI 和 Docker Buildx（构建工具）。虽然
+  Kub...
+summary: Docker 是最广泛使用的容器平台，包含 Docker Engine（运行时）、Docker CLI 和 Docker Buildx（构建工具）。虽然
+  Kub...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - docker
 - container
 - oci
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Docker
 

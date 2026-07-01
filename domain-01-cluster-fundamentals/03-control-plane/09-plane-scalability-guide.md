@@ -1,6 +1,7 @@
 ---
 title: 控制平面扩缩容指南 (Control Plane Scalability Guide)
 description: 'title: 控制平面扩缩容指南 (Control Plane Scalability Guide)'
+summary: 'title: 控制平面扩缩容指南 (Control Plane Scalability Guide)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - kubernetes-concepts
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 控制平面扩缩容指南 (Control Plane Scalability Guide)
 description: '# 控制平面扩缩容指南 (Control Plane Scalability Guide)'
@@ -1565,6 +1569,8 @@ spec:
 - 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - 12-demo-env-guide
 - 21-platform-selection-guide

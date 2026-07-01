@@ -1,11 +1,14 @@
 ---
 title: KUDIG 配置生成 Prompt 模板
 description: '# KUDIG 配置生成 Prompt 模板'
+summary: '# KUDIG 配置生成 Prompt 模板'
 category: general
 tags:
 - k8s
 - rbac
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,8 +25,9 @@ trigger_keywords:
 - 模板
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG 配置生成 Prompt 模板
 

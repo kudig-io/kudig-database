@@ -1,6 +1,9 @@
 ---
 title: Minikube
-description: 'Minikube 是本地运行单节点 Kubernetes 集群的工具，支持 Docker、HyperKit、VirtualBox 等多种驱动。它是 K8s 学习...'
+description: Minikube 是本地运行单节点 Kubernetes 集群的工具，支持 Docker、HyperKit、VirtualBox 等多种驱动。它是
+  K8s 学习...
+summary: Minikube 是本地运行单节点 Kubernetes 集群的工具，支持 Docker、HyperKit、VirtualBox 等多种驱动。它是
+  K8s 学习...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - minikube
 - local-development
 - tooling
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Minikube
 

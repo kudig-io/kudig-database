@@ -1,5 +1,8 @@
 ---
 title: Service Mesh 零信任安全架构
+summary: Service Mesh 零信任安全架构：零信任（Zero Trust）的核心原则是"从不信任、始终验证"——无论流量来自集群外部还是内部，都必须经过认证和授权。Service
+  Mesh（以 entities/istio.md 为代表）是零信任理念在 entities/kubernetes.md 服务间通信层的具体技术实现：通过自动 mTLS、L7
+  授权策略和统一身份框架，将安全从"网络边界...
 category: synthesis
 tags:
 - k8s
@@ -13,6 +16,7 @@ tags:
 - security
 - networkpolicy
 - identity
+tier: supporting
 sources:
 - domain-03-networking-traffic/02-service-mesh
 - domain-03-networking-traffic/05-service-mesh
@@ -22,17 +26,19 @@ created: 2026-05-21 14:00:00+00:00
 updated: 2026-05-21 14:00:00+00:00
 last_updated: 2026-05-21 14:00:00+00:00
 relationships:
-  - target: "[[entities/cilium.md]]"
-    type: uses
-  - target: "[[entities/istio.md]]"
-    type: uses
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md]]"
-    type: uses
-  - target: "[[concepts/Cilium eBPF × 可观测性.md]]"
-    type: uses
+- target: '[[entities/cilium.md]]'
+  type: uses
+- target: '[[entities/istio.md]]'
+  type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md]]'
+  type: uses
+- target: '[[concepts/Cilium eBPF × 可观测性.md]]'
+  type: uses
 ---
+
+
 
 # [[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md|Service Mesh]] 零信任安全架构
 

@@ -1,6 +1,7 @@
 ---
 title: 开发者体验度量 (Developer Experience Metrics)
 description: '- developer-experience-metrics的最佳实践'
+summary: '- developer-experience-metrics的最佳实践'
 category: general
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - job
 - gateway
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - platform-engineering-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

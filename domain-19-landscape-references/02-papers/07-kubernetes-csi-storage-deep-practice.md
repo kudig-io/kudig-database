@@ -1,6 +1,9 @@
 ---
 title: Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice Guide)
-description: '# Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice Guide)'
+description: '# Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice
+  Guide)'
+summary: '# Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice
+  Guide)'
 category: papers
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - job
 - rbac
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -22,7 +27,8 @@ audience:
 - 研究员
 estimated_read_time: 5min
 intent_queries:
-- Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice Guide) 是什么
+- Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice Guide)
+  是什么
 - 如何 Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice Guide)
 - Kubernetes 19 papers 最佳实践
 trigger_keywords:
@@ -52,8 +58,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md
   label: '故障树: csi'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice Guide)
 
@@ -788,6 +795,10 @@ spec:
 - 09-kubernetes-service-mesh-istio-integration
 
 ## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]

@@ -1,13 +1,22 @@
 ---
-title: "Gang Scheduling"
+title: Gang Scheduling
+summary: Gang Scheduling 是一种调度策略，确保一组关联的 Pod 能够同时被调度到节点上。
 category: concepts
-tags: ['scheduling', 'batch', 'hpc', 'visibility/public']
-sources: ["conceptss/"]
+tags:
+- scheduling
+- batch
+- hpc
+- visibility/public
+tier: supporting
+sources:
+- conceptss/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: stub
 ---
+
+
 # Gang Scheduling
 
 ## 概述
@@ -22,3 +31,7 @@ Gang Scheduling 是一种调度策略，确保一组关联的 Pod 能够同时�
 ## 相关链接
 
 - [[concepts/kubernetes.md|Kubernetes]] — 核心概念
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

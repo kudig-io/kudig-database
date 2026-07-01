@@ -1,6 +1,7 @@
 ---
 title: 'Day 22: 企业监控 - Prometheus 企业级 + Grafana'
 description: 'title: Day 22: 企业监控 - Prometheus 企业级 + Grafana'
+summary: 'title: Day 22: 企业监控 - Prometheus 企业级 + Grafana'
 category: learning
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - operator
 - webhook
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,8 +37,9 @@ prerequisites:
 - gpu-ml-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 22: 企业监控 - [[Prometheus|Prometheus]] 企业级 + Grafana

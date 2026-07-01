@@ -1,12 +1,15 @@
 ---
 title: etcdctl
-description: 'etcdctl 是 etcd 的官方命令行客户端工具，用于直接与 etcd 集群交互。在 Kubernetes 运维中，etcdctl 常用于集群健康检查、数据...'
+description: etcdctl 是 etcd 的官方命令行客户端工具，用于直接与 etcd 集群交互。在 Kubernetes 运维中，etcdctl 常用于集群健康检查、数据...
+summary: etcdctl 是 etcd 的官方命令行客户端工具，用于直接与 etcd 集群交互。在 Kubernetes 运维中，etcdctl 常用于集群健康检查、数据...
 category: dictionary
 tags:
 - k8s
 - glossary
 - tooling
 - etcd
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -21,8 +24,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # etcdctl
 

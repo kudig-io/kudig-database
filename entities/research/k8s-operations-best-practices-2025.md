@@ -1,3 +1,13 @@
+---
+title: K8S Operations Best Practices 2025
+summary: 'Source: https://github.com/argoproj/argo-cd/releases'
+category: entities
+tags:
+- k8s-operations-best-practices-2025
+tier: supporting
+created: '2026-07-01'
+---
+
 # Kubernetes Production Operations Best Practices 2025-2026
 
 ## 1. GitOps Evolution

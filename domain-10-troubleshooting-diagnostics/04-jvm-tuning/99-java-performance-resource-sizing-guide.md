@@ -1,6 +1,7 @@
 ---
 title: Java 应用性能调优与资源 Sizing 指南
 description: '# Java 应用性能调优与资源 Sizing 指南'
+summary: '# Java 应用性能调优与资源 Sizing 指南'
 category: troubleshooting
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - postgresql
 - hpa
 - job
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -59,8 +62,9 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
-created: "2026-05-23"
 ---
+
+
 
 # Java 应用性能调优与资源 Sizing 指南
 

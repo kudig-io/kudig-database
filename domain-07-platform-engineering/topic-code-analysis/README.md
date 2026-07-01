@@ -1,11 +1,14 @@
 ---
 title: 集群操作函数库
 description: '## 概述'
+summary: '## 概述'
 category: general
 tags:
 - k8s
 - daemonset
 - gpu
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # 集群操作函数库
 

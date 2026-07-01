@@ -1,6 +1,7 @@
 ---
 title: 'Day 25: Flannel 网络'
 description: '# Day 25: Flannel 网络'
+summary: '# Day 25: Flannel 网络'
 category: learning
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - ingress
 - networkpolicy
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 25: Flannel 网络
 

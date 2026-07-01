@@ -1,6 +1,7 @@
 ---
 title: 镜像仓库故障排查
 description: '# 27 - 镜像仓库故障排查 (Image Registry Troubleshooting)'
+summary: '# 27 - 镜像仓库故障排查 (Image Registry Troubleshooting)'
 category: troubleshooting
 tags:
 - image
@@ -13,6 +14,8 @@ tags:
 - containerd
 - cri-o
 - docker
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: beginner
 reading_level: beginner
@@ -58,8 +61,9 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
-created: "2026-05-23"
 ---
+
+
 
 # 27 - 镜像仓库故障排查 (Image Registry Troubleshooting)
 
@@ -970,7 +974,7 @@ while true; do
         echo "$TIMESTAMP - Registry connectivity: ✓"
         
         # 测试认证端点
-        if curl -s -o /dev/null -w "%{http_code}" $REGISTRY_URL/v2/token 2>/dev/null | grep -q "401\|200"; then
+        if curl -s -o /dev/null -w "%{http_code}" $REGISTRY_URL/v2/token 2>/dev/null | grep -q "401|200"; then
             echo "$TIMESTAMP - Authentication endpoint: ✓"
         else
             echo "$TIMESTAMP - Authentication endpoint: ✗"
@@ -981,7 +985,7 @@ while true; do
         TEST_TAG="latest"
         if curl -s -H "Accept: application/vnd.docker.distribution.manifest.v2+json" \
            -o /dev/null -w "%{http_code}" \
-           $REGISTRY_URL/v2/$TEST_IMAGE/manifests/$TEST_TAG 2>/dev/null | grep -q "401\|200"; then
+           $REGISTRY_URL/v2/$TEST_IMAGE/manifests/$TEST_TAG 2>/dev/null | grep -q "401|200"; then
             echo "$TIMESTAMP - Manifest API: ✓"
         else
             echo "$TIMESTAMP - Manifest API: ✗"

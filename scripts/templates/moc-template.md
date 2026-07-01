@@ -4,6 +4,8 @@ description: '{'
 category: templates
 tags:
 - k8s
+created: '2026-05-23'
+summary: '{'
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -20,10 +22,9 @@ k8s_versions:
 - '1.30'
 - '1.31'
 - '1.32'
-
 tier: peripheral
-created: "2026-05-23"
 ---
+
 
 ---
 title: "{{DOMAIN_NAME}} MOC - {{TITLE}}"

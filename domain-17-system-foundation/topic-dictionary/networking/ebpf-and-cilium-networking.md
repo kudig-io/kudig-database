@@ -1,6 +1,7 @@
 ---
 title: eBPF 与 Cilium 网络
 description: '# eBPF 与 Cilium 网络'
+summary: '# eBPF 与 Cilium 网络'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - calico
 - helm
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -38,9 +41,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - kafka-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # eBPF 与 [[Cilium|Cilium]] 网络
 
@@ -196,7 +199,7 @@ spec:
 | Cilium Agent CrashLoop | 内核版本过低或 eBPF Map 溢出 | `uname -r` 确认 ≥ 5.10；检查 Agent 日志 |
 | Pod 间通信中断 | Agent 崩溃导致 eBPF 规则丢失 | `cilium status`；`cilium connectivity test` |
 | L7 策略不生效 | Envoy per-node 未部署 | `kubectl get pods -n kube-system -l k8s-app=cilium-envoy` |
-| XDP 加速未启用 | 网卡驱动不支持 XDP native | `cilium status \| grep XDP`；回退到 generic 模式 |
+| XDP 加速未启用 | 网卡驱动不支持 XDP native | `cilium status | grep XDP`；回退到 generic 模式 |
 | Hubble 无流量数据 | Hubble Relay 未部署 | `kubectl get pods -n kube-system -l k8s-app=hubble-relay` |
 
 ## 生产检查清单

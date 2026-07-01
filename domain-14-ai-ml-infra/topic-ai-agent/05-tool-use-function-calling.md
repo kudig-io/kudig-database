@@ -1,6 +1,7 @@
 ---
 title: Tool Use & Function Calling 设计规范 (domain-14-ai-ml-infra)
 description: 'title: Tool Use & Function Calling 设计规范'
+summary: 'title: Tool Use & Function Calling 设计规范'
 category: general
 tags:
 - ai
@@ -10,6 +11,8 @@ tags:
 - llm
 - rag
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ trigger_keywords:
 - infra
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Tool Use & Function Calling 设计规范
 description: '# Tool Use & Function Calling 设计规范'
@@ -770,10 +774,10 @@ class ToolInputValidator:
     DANGEROUS_PATTERNS = [
         r';\s*rm\s',
         r'&&\s*rm\s',
-        r'\|\s*sh\s',
+        r'|\s*sh\s',
         r'>\s*/etc/',
-        r'curl\s+.*\s*\|\s*sh',
-        r'wget\s+.*\s*-O\s*-\s*\|\s*sh',
+        r'curl\s+.*\s*|\s*sh',
+        r'wget\s+.*\s*-O\s*-\s*|\s*sh',
         r'\$\(',      # 命令替换
         r'`.*`',      # 反引号命令替换
     ]

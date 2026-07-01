@@ -1,6 +1,7 @@
 ---
 title: 'Day 12: 网络栈 - CNI + Service + DNS'
 description: '# Day 12: 网络栈 - CNI + Service + DNS'
+summary: '# Day 12: 网络栈 - CNI + Service + DNS'
 category: learning
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - coredns
 - ingress
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 12: 网络栈 - CNI + [[Service|Service]] + DNS
 

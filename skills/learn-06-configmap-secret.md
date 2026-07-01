@@ -1,6 +1,7 @@
 ---
 title: 第六课：ConfigMap 和 Secret - 配置管理
 description: '# 第六课：ConfigMap 和 Secret - 配置管理'
+summary: '# 第六课：ConfigMap 和 Secret - 配置管理'
 category: skills
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - docker
 - opa
 - mysql
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ prerequisites:
 - kubectl-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第六课：ConfigMap 和 Secret - 配置管理
 

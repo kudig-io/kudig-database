@@ -1,6 +1,7 @@
 ---
 title: 'P4: 网络与存储综合实践'
 description: 'title: P4: 网络与存储综合实践'
+summary: 'title: P4: 网络与存储综合实践'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ingress
 - networkpolicy
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -31,8 +34,9 @@ prerequisites:
 - gpu-ml-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: P4: 网络与存储综合实践

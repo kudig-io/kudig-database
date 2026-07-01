@@ -1,6 +1,7 @@
 ---
 title: 第十一章：FTA 驱动的 Runbook 自动化 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用'''
+summary: 'description: ''**所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用'''
 category: fta
 tags:
 - fta
@@ -8,6 +9,8 @@ tags:
 - etcd
 - rag
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -38,8 +41,9 @@ prerequisites:
 fta_id: FTA-11_DRIVEN_RUNBOOK_AUTOMATION-001
 component: 11 Driven Runbook Automation
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 title: 第十一章：FTA 驱动的 Runbook 自动化
 description: '**所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用'

@@ -1,12 +1,21 @@
 ---
-title: "dns failure Remediation Playbook"
+title: dns failure Remediation Playbook
+summary: dns failure Remediation Playbook：kubectl rollout restart deployment coredns
+  -n kube-system kubectl rollout status deployment coredns -n kube-system
 category: remediation
-skill_set: "k8s-dns-failure"
-created: "2026-05-22"
-updated: "2026-05-22"
+tags:
+- reference
+- remediation
+- playbook
+- visibility/public
+tier: supporting
+created: '2026-05-22'
+updated: '2026-05-22'
+skill_set: k8s-dns-failure
 last_updated: 2026-05-22
-tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
+
+
 
 # DNS 解析问题修复手册
 
@@ -57,3 +66,9 @@ kubectl patch pod <pod> --type merge -p '{"spec":{"dnsPolicy":"ClusterFirst","dn
 ## 参见
 
 - [[remediation-playbook]] — remediation 领域核心页面
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

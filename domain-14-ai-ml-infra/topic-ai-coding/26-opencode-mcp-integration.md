@@ -1,6 +1,7 @@
 ---
 title: MCP 协议集成指南
 description: '# MCP 协议集成指南'
+summary: '# MCP 协议集成指南'
 category: ai-coding
 tags:
 - ai
@@ -9,6 +10,8 @@ tags:
 - code-generation
 - postgresql
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # MCP 协议集成指南
 

@@ -1,6 +1,7 @@
 ---
 title: 告警→工单→解决 完整闭环文档
 description: '**关联**: P0-1 工单分类体系, P0-3 会话上下文管理'
+summary: '**关联**: P0-1 工单分类体系, P0-3 会话上下文管理'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - webhook
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # 告警→工单→解决 完整闭环文档
 

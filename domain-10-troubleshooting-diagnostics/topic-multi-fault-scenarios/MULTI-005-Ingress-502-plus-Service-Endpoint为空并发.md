@@ -1,14 +1,22 @@
 ---
-scenario_id: "MULTI-005"
-type: "multi-fault"
-skills: ['13-ingress-gateway-failure', '05-service-connectivity']
-created: "2026-05-23"
-updated: "2026-05-23"
-last_updated: 2026-05-23
-title: "Ingress 502 + Service Endpoint为空并发"
+title: Ingress 502 + Service Endpoint为空并发
+summary: Ingress 502 + Service Endpoint为空并发：外部用户报告服务返回502，同时Ingress后端Service的Endpoint列表为空，Pod处于Pending状态。
 category: uncategorized
-tags: ["uncategorized", "visibility/public"]
+tags:
+- uncategorized
+- visibility/public
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+scenario_id: MULTI-005
+type: multi-fault
+skills:
+- 13-ingress-gateway-failure
+- 05-service-connectivity
+last_updated: 2026-05-23
 ---
+
+
 
 # Ingress 502 + Service Endpoint为空并发
 
@@ -46,3 +54,7 @@ tags: ["uncategorized", "visibility/public"]
 2. 配置级联告警（当多个关联指标同时异常时触发）
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

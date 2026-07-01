@@ -1,7 +1,7 @@
 ---
-summary: "kubectl version --short"
 title: Kubernetes 生产环境速查卡
 description: 涵盖 Kubernetes 生产环境 90% 以上常用命令，支持快速查阅和故障排查
+summary: kubectl version --short
 category: cheatsheet
 tags:
 - k8s
@@ -14,6 +14,8 @@ tags:
 - apiserver
 - kubelet
 - istio
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -58,8 +60,8 @@ related_docs:
   desc: Service 概念与类型
 - path: ../domain-10-troubleshooting-diagnostics/
   desc: 故障排查专题
-created: "2026-05-23"
 ---
+
 
 # [[Kubernetes|Kubernetes]] 生产环境速查卡
 

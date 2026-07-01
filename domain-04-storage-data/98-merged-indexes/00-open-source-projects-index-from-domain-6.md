@@ -1,6 +1,7 @@
 ---
 title: Domain-6 存储 — 开源项目索引
 description: '# Domain-6 存储 — 开源项目索引'
+summary: '# Domain-6 存储 — 开源项目索引'
 category: storage
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - minio
 - mysql
 - crd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -50,8 +53,9 @@ cross_refs:
 - type: domain
   path: ../domain-04-storage-data/
   label: '相关知识域: domain-04-storage-data'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-6 存储 — 开源项目索引
 

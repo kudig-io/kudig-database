@@ -1,6 +1,7 @@
 ---
 title: Admission Webhook 异常 FTA 树 (skills)
 description: 'description: ''- **范围**：Webhook 服务可用性、规则配置、证书与 TLS、回退策略、审计。'''
+summary: 'description: ''- **范围**：Webhook 服务可用性、规则配置、证书与 TLS、回退策略、审计。'''
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - argocd
 - webhook
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 fta_id: FTA-WEBHOOK_ADMISSION-001
 component: Webhook Admission
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 # Admission Webhook 异常 FTA 树
 
@@ -93,7 +97,7 @@ fta_metadata:
   bottom_events_count: 16
   gate_types: [OR, AND]
   entry_conditions:
-    - "kubectl get events -A | grep -E 'Webhook\|MutatingWebhook\|ValidatingWebhook' 显示拒绝"
+    - "kubectl get events -A | grep -E 'Webhook|MutatingWebhook|ValidatingWebhook' 显示拒绝"
     - "kubectl describe pod <name> -n <ns> | grep -E 'admission webhook|denied' 显示 webhook 拒绝"
     - "kubectl run 测试 --image=nginx 失败显示 webhook 错误"
 agent_notes:

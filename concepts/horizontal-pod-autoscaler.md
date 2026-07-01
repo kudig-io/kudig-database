@@ -1,13 +1,22 @@
 ---
-title: "Horizontal Pod Autoscaler"
+title: Horizontal Pod Autoscaler
+summary: Horizontal Pod Autoscaler（HPA）是 Kubernetes 中实现 Pod 水平自动扩缩容的核心控制器。它根据观测到的负载指标自动调整
+  Deployment、StatefulSet 或 ReplicaSet 的副本数量，以匹配应用的实际流量需求，从而在性能与成本之间取得动态平衡。
 category: concepts
-tags: ["core-concept", "domain-02", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- core-concept
+- domain-02
+- visibility/public
+tier: core
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # Horizontal Pod Autoscaler
 
@@ -83,3 +92,7 @@ behavior:
 - [[autoscaling-strategies]] — Kubernetes 自动伸缩策略总览
 - [[resource-management]] — Pod 资源管理机制
 - [[deployment-controller-architecture]] — Deployment 控制器架构
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

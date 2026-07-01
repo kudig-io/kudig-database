@@ -1,7 +1,11 @@
 ---
 title: etcd × Operator 模式
-description: '[[entities/etcd.md|etcd]] 是 K8s 的心脏，[[concepts/operator-pattern.md|operator pattern]] 描述自定义控制器管理有状态应用。两者的交叉点是 **etcd Operator**：将 etcd 集群的生命周期管理（部署、扩容、备份、恢复、升级）自动化。但
+description: '[[entities/etcd.md|etcd]] 是 K8s 的心脏，[[concepts/operator-pattern.md|operator
+  pattern]] 描述自定义控制器管理有状态应用。两者的交叉点是 **etcd Operator**：将 etcd 集群的生命周期管理（部署、扩容、备份、恢复、升级）自动化。但
   wiki 没有指出一个关键矛盾：**etcd 是 Operator 想要管理的最危险的目标**——因为 etcd 问题直接导'
+summary: '[[entities/etcd.md|etcd]] 是 K8s 的心脏，[[concepts/operator-pattern.md|operator
+  pattern]] 描述自定义控制器管理有状态应用。两者的交叉点是 **etcd Operator**：将 etcd 集群的生命周期管理（部署、扩容、备份、恢复、升级）自动化。但
+  wiki 没有指出一个关键矛盾：**etcd 是 Operat...'
 category: synthesis
 tags:
 - k8s
@@ -13,6 +17,8 @@ tags:
 - prometheus
 - statefulset
 - ebpf
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,19 +37,20 @@ prerequisites:
 - prometheus-basics
 - ebpf-basics
 - etcd-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/prometheus.md]]"
-    type: uses
-  - target: "[[concepts/eBPF x 运行时安全.md]]"
-    type: related_to
-  - target: "[[concepts/etcd x 高可用模式.md]]"
-    type: uses
-  - target: "[[concepts/etcd × 可观测性.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]"
-    type: related_to
+- target: '[[entities/prometheus.md]]'
+  type: uses
+- target: '[[concepts/eBPF x 运行时安全.md]]'
+  type: related_to
+- target: '[[concepts/etcd x 高可用模式.md]]'
+  type: uses
+- target: '[[concepts/etcd × 可观测性.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+  type: related_to
 ---
+
+
 
 # etcd × Operator 模式
 

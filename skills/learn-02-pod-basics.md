@@ -1,6 +1,7 @@
 ---
 title: 第二课：Pod - K8s 的最小调度单元
 description: '# 第二课：Pod - K8s 的最小调度单元'
+summary: '# 第二课：Pod - K8s 的最小调度单元'
 category: skills
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - fundamentals
 - docker
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 - 的最小调度单元
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第二课：Pod - K8s 的最小调度单元
 

@@ -1,6 +1,9 @@
 ---
 title: Domain-31 硬件 — 开源项目索引
-description: '| **Cluster API Provider Metal3** | 裸金属 K8s 管理 | CNCF Incubating | v1.9.0 | 300+ | Apache-2.0 |'
+description: '| **Cluster API Provider Metal3** | 裸金属 K8s 管理 | CNCF Incubating | v1.9.0
+  | 300+ | Apache-2.0 |'
+summary: '| **Cluster API Provider Metal3** | 裸金属 K8s 管理 | CNCF Incubating | v1.9.0
+  | 300+ | Apache-2.0 |'
 category: hardware
 tags:
 - k8s
@@ -11,6 +14,8 @@ tags:
 - operator
 - nvidia
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +46,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Domain-31 硬件 — 开源项目索引
 

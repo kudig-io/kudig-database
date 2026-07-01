@@ -1,6 +1,7 @@
 ---
 title: AI Agent 沙箱安全架构
 description: AI Agent 代码执行沙箱、工具调用安全、数据隔离、K8s 上的 Agent 安全部署方案
+summary: AI Agent 代码执行沙箱、工具调用安全、数据隔离、K8s 上的 Agent 安全部署方案
 category: ai-infra
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - wasm
 - rbac
 - prometheus
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -53,8 +56,9 @@ cross_refs:
 - type: domain
   path: ../domain-14-ai-ml-infra/
   label: AI 基础设施
-created: "2026-05-23"
 ---
+
+
 
 # AI Agent 沙箱安全架构
 

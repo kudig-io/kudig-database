@@ -1,6 +1,7 @@
 ---
 title: containerd 安全加固
 description: '# containerd 安全加固'
+summary: '# containerd 安全加固'
 category: entities
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - networkpolicy
 - crd
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 - 安全加固
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # containerd 安全加固
 

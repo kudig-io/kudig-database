@@ -1,6 +1,7 @@
 ---
 title: 证书过期导致 kubelet 无法连接 apiserver
 description: 专有云 ACK 集群节点 kubelet 客户端证书过期，导致节点 NotReady、Pod 无法被调度的工单闭环样本。
+summary: 专有云 ACK 集群节点 kubelet 客户端证书过期，导致节点 NotReady、Pod 无法被调度的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -11,6 +12,9 @@ tags:
 - notready
 - control-plane
 - p0
+tier: supporting
+created: '2026-06-26T07:00:00+08:00'
+updated: '2026-06-26T09:45:00+08:00'
 incident_id: INC-2026-ACK-005
 priority: P0
 severity: critical
@@ -22,9 +26,7 @@ skill_ref:
 - K8s 证书管理
 fta_ref:
 - 'FTA: kubelet 证书过期'
-created: '2026-06-26T07:00:00+08:00'
-updated: '2026-06-26T09:45:00+08:00'
-last_updated: 2026-06-26T09:45:00+08:00
+last_updated: 2026-06-26 09:45:00+08:00
 difficulty: advanced
 reading_level: advanced
 audience:
@@ -48,15 +50,17 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[entities/kubelet.md]]"
+- target: '[[entities/kubelet.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-001-terway-eni-exhaustion.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-001-terway-eni-exhaustion.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: "[[skills/kubelet-certificate-rotation.md]]"
+- target: '[[skills/kubelet-certificate-rotation.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -84,7 +88,7 @@ relationships:
 kubectl get nodes -l kubernetes.io/hostname~cn-zhangjiakou.172.16.5.3 -o wide
 
 # 2. 查看 kubelet 日志关键报错
-kubectl debug node/cn-zhangjiakou.172.16.5.31 -it --image=registry.aliyuncs.com/acs/busybox -- chroot /host journalctl -u kubelet -n 100 --no-pager | grep -i "x509\|certificate\|expire"
+kubectl debug node/cn-zhangjiakou.172.16.5.31 -it --image=registry.aliyuncs.com/acs/busybox -- chroot /host journalctl -u kubelet -n 100 --no-pager | grep -i "x509|certificate|expire"
 
 # 3. 检查 kubelet 客户端证书有效期
 kubectl debug node/cn-zhangjiakou.172.16.5.31 -it --image=registry.aliyuncs.com/acs/busybox -- chroot /host openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates -subject
@@ -176,7 +180,7 @@ kubectl run cert-test --image=registry.aliyuncs.com/acs/busybox --restart=Never 
 kubectl get pod cert-test -n default -o wide
 
 # 4. kubelet 日志无证书报错
-kubectl debug node/cn-zhangjiakou.172.16.5.31 -it --image=registry.aliyuncs.com/acs/busybox -- chroot /host journalctl -u kubelet -n 50 --no-pager | grep -i "x509\|certificate" || echo "no cert error"
+kubectl debug node/cn-zhangjiakou.172.16.5.31 -it --image=registry.aliyuncs.com/acs/busybox -- chroot /host journalctl -u kubelet -n 50 --no-pager | grep -i "x509|certificate" || echo "no cert error"
 
 # 5. 证书有效期大于 300 天
 kubectl debug node/cn-zhangjiakou.172.16.5.31 -it --image=registry.aliyuncs.com/acs/busybox -- chroot /host openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -text | grep "Not After"

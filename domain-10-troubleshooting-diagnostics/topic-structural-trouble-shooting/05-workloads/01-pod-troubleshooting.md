@@ -1,6 +1,7 @@
 ---
 title: Pod 故障排查与运行机制深度指南 [topic-structural-trouble-shooting]
 description: 'title: Pod 故障排查与运行机制深度指南'
+summary: 'title: Pod 故障排查与运行机制深度指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - coredns
 - containerd
 - cri-o
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -46,8 +49,9 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Pod 故障排查与运行机制深度指南
 description: '# Pod 故障排查与运行机制深度指南'
@@ -367,7 +371,7 @@ process.wait()  # 阻塞直到子进程退出
 
 | 状态 | 含义 | 常见原因 | 观测方法 |
 |:----|:-----|:---------|:---------|
-| **Pending** | Pod 已接受但未运行 | 资源不足、污点/亲和性不匹配、PVC 未绑定 | `kubectl describe pod \| grep Events` |
+| **Pending** | Pod 已接受但未运行 | 资源不足、污点/亲和性不匹配、PVC 未绑定 | `kubectl describe pod | grep Events` |
 | **ContainerCreating** | 容器正在创建 | 镜像拉取慢、Volume 挂载慢、CNI 网络配置慢 | `kubectl get events --field-selector involvedObject.name=<pod>` |
 | **Running** | 至少一个容器运行 | - | `kubectl get pod -o wide` 查看 READY 列 |
 | **CrashLoopBackOff** | 容器启动失败，等待重试 | 应用程序 bug、配置错误、依赖服务不可用 | `kubectl logs <pod> --previous` |
@@ -472,7 +476,7 @@ cat /etc/containerd/config.toml
 crictl stats
 
 # 查看 CRI 调用延迟
-journalctl -u containerd | grep "RunPodSandbox\|CreateContainer" | tail -20
+journalctl -u containerd | grep "RunPodSandbox|CreateContainer" | tail -20
 
 ```
 
@@ -486,17 +490,17 @@ journalctl -u containerd | grep "RunPodSandbox\|CreateContainer" | tail -20
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
-| **Pending: 资源不足** | CPU/Memory 碎片化（节点剩余资源分散），ResourceQuota 耗尽，PriorityClass 优先级不足 | `kubectl describe pod \| grep "FailedScheduling"`；`kubectl describe node \| grep -A5 "Allocated resources"` | 扩容节点；调整 requests；使用 Cluster Autoscaler |
-| **Pending: 污点/亲和性** | 节点打了 `NoSchedule` 污点，Pod 未配置容忍；`requiredDuringScheduling` 亲和性无法满足 | `kubectl describe node \| grep Taints`；`kubectl get pod -o yaml \| grep -A10 affinity` | 添加 `tolerations`；放宽亲和性为 `preferred` |
-| **Pending: PVC 未绑定** | StorageClass 不存在、后端存储配额不足、`volumeBindingMode: WaitForFirstConsumer` 延迟绑定 | `kubectl get pvc \| grep Pending`；`kubectl describe pvc` | 检查 StorageClass；扩容后端；手动创建 PV |
-| **Pending: 拓扑约束** | `topologySpreadConstraints` 约束无法满足（如强制均匀分布但节点不足） | `kubectl get pod -o yaml \| grep -A5 topologySpreadConstraints` | 放宽 `whenUnsatisfiable: DoNotSchedule` 为 `ScheduleAnyway` |
+| **Pending: 资源不足** | CPU/Memory 碎片化（节点剩余资源分散），ResourceQuota 耗尽，PriorityClass 优先级不足 | `kubectl describe pod | grep "FailedScheduling"`；`kubectl describe node | grep -A5 "Allocated resources"` | 扩容节点；调整 requests；使用 Cluster Autoscaler |
+| **Pending: 污点/亲和性** | 节点打了 `NoSchedule` 污点，Pod 未配置容忍；`requiredDuringScheduling` 亲和性无法满足 | `kubectl describe node | grep Taints`；`kubectl get pod -o yaml | grep -A10 affinity` | 添加 `tolerations`；放宽亲和性为 `preferred` |
+| **Pending: PVC 未绑定** | StorageClass 不存在、后端存储配额不足、`volumeBindingMode: WaitForFirstConsumer` 延迟绑定 | `kubectl get pvc | grep Pending`；`kubectl describe pvc` | 检查 StorageClass；扩容后端；手动创建 PV |
+| **Pending: 拓扑约束** | `topologySpreadConstraints` 约束无法满足（如强制均匀分布但节点不足） | `kubectl get pod -o yaml | grep -A5 topologySpreadConstraints` | 放宽 `whenUnsatisfiable: DoNotSchedule` 为 `ScheduleAnyway` |
 
 #### 2.1.2 容器创建阶段问题
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
-| **ImagePullBackOff** | 镜像不存在、Registry 凭证过期、镜像层损坏、Registry 速率限制（Docker Hub 100次/6h） | `kubectl describe pod \| grep -A5 "Failed to pull image"`；`crictl pull <image>` 测试拉取 | 检查镜像 tag；重新创建 `imagePullSecrets`；使用镜像缓存代理 |
-| **CreateContainerError** | Volume 挂载失败（PVC 不存在、CSI 驱动问题）、SecurityContext 冲突（如 `runAsUser: 0` 被 PSP 拒绝） | `kubectl describe pod \| grep "CreateContainerError"`；`crictl ps -a \| grep Error` | 检查 Volume 状态；调整 SecurityContext；查看 PSP/PSA 策略 |
+| **ImagePullBackOff** | 镜像不存在、Registry 凭证过期、镜像层损坏、Registry 速率限制（Docker Hub 100次/6h） | `kubectl describe pod | grep -A5 "Failed to pull image"`；`crictl pull <image>` 测试拉取 | 检查镜像 tag；重新创建 `imagePullSecrets`；使用镜像缓存代理 |
+| **CreateContainerError** | Volume 挂载失败（PVC 不存在、CSI 驱动问题）、SecurityContext 冲突（如 `runAsUser: 0` 被 PSP 拒绝） | `kubectl describe pod | grep "CreateContainerError"`；`crictl ps -a | grep Error` | 检查 Volume 状态；调整 SecurityContext；查看 PSP/PSA 策略 |
 | **Init:CrashLoopBackOff** | InitContainer 失败（如数据库迁移脚本错误） | `kubectl logs <pod> -c <init-container>`；`kubectl get pod -o jsonpath='{.status.initContainerStatuses}'` | 修复 InitContainer 逻辑；临时跳过（删除 initContainers） |
 
 #### 2.1.3 运行阶段问题
@@ -504,17 +508,17 @@ journalctl -u containerd | grep "RunPodSandbox\|CreateContainer" | tail -20
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
 | **CrashLoopBackOff: PID 1** | 应用程序退出（缺少环境变量、配置错误）、PID 1 未处理信号（shell 脚本陷阱）、依赖服务不可用 | `kubectl logs <pod> --previous`；`kubectl get pod -o jsonpath='{.status.containerStatuses[0].lastState.terminated}'` | 检查应用日志；使用 `tini` 作为 init；添加健康检查重试 |
-| **OOMKilled (137)** | 内存使用超过 `limits`、Java 堆外内存（DirectByteBuffer）、内存泄漏（Python/Node.js） | `kubectl describe pod \| grep "OOMKilled"`；`kubectl top pod --containers`；节点上 `dmesg \| grep oom` | 增加 `limits`；优化应用内存；启用内存分析（heapdump） |
-| **Liveness 探针失败** | 探针超时时间过短、应用启动慢（大型 Java 应用）、探针依赖外部服务（数据库抖动导致全部重启） | `kubectl describe pod \| grep "Liveness probe failed"`；`kubectl get pod -o yaml \| grep -A10 livenessProbe` | 增加 `initialDelaySeconds` 和 `timeoutSeconds`；使用 `startupProbe`；探针改为本地检查 |
-| **Readiness 探针失败** | 应用未就绪（依赖服务连接中）、探针路径错误（/health vs /healthz） | `kubectl describe pod \| grep "Readiness probe failed"`；`kubectl get endpoints <service>` 确认 Pod 未加入 | 等待应用就绪；修正探针配置；临时禁用探针 |
+| **OOMKilled (137)** | 内存使用超过 `limits`、Java 堆外内存（DirectByteBuffer）、内存泄漏（Python/Node.js） | `kubectl describe pod | grep "OOMKilled"`；`kubectl top pod --containers`；节点上 `dmesg | grep oom` | 增加 `limits`；优化应用内存；启用内存分析（heapdump） |
+| **Liveness 探针失败** | 探针超时时间过短、应用启动慢（大型 Java 应用）、探针依赖外部服务（数据库抖动导致全部重启） | `kubectl describe pod | grep "Liveness probe failed"`；`kubectl get pod -o yaml | grep -A10 livenessProbe` | 增加 `initialDelaySeconds` 和 `timeoutSeconds`；使用 `startupProbe`；探针改为本地检查 |
+| **Readiness 探针失败** | 应用未就绪（依赖服务连接中）、探针路径错误（/health vs /healthz） | `kubectl describe pod | grep "Readiness probe failed"`；`kubectl get endpoints <service>` 确认 Pod 未加入 | 等待应用就绪；修正探针配置；临时禁用探针 |
 
 #### 2.1.4 停止阶段问题
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
-| **Terminating 卡住** | Finalizers 未清理（如 PVC 保护）、PreStop Hook 超时、Volume 卸载失败（NFS 挂死）、容器进程忽略 SIGTERM | `kubectl get pod -o yaml \| grep finalizers`；`kubectl describe pod \| grep "PreStop"`；节点上 `ps aux \| grep <pod-uid>` | 强制删除 Finalizers：`kubectl patch pod <pod> -p '{"metadata":{"finalizers":null}}'`；强制删除：`kubectl delete pod --force --grace-period=0` |
-| **DiskPressure 驱逐** | 节点磁盘空间不足（`/var/lib/containerd` 或 `/var/log` 满）、ImageGC 未及时清理 | `kubectl describe node \| grep "DiskPressure"`；节点上 `df -h`；`du -sh /var/lib/containerd/*` | 清理无用镜像：`crictl rmi --prune`；清理日志：`journalctl --vacuum-time=7d` |
-| **MemoryPressure 驱逐** | 节点内存不足，kubelet 主动驱逐低优先级 Pod（BestEffort → Burstable → Guaranteed） | `kubectl describe node \| grep "MemoryPressure"`；`kubectl top node` | 扩容节点内存；调整 Pod QoS（设置 requests=limits） |
+| **Terminating 卡住** | Finalizers 未清理（如 PVC 保护）、PreStop Hook 超时、Volume 卸载失败（NFS 挂死）、容器进程忽略 SIGTERM | `kubectl get pod -o yaml | grep finalizers`；`kubectl describe pod | grep "PreStop"`；节点上 `ps aux | grep <pod-uid>` | 强制删除 Finalizers：`kubectl patch pod <pod> -p '{"metadata":{"finalizers":null}}'`；强制删除：`kubectl delete pod --force --grace-period=0` |
+| **DiskPressure 驱逐** | 节点磁盘空间不足（`/var/lib/containerd` 或 `/var/log` 满）、ImageGC 未及时清理 | `kubectl describe node | grep "DiskPressure"`；节点上 `df -h`；`du -sh /var/lib/containerd/*` | 清理无用镜像：`crictl rmi --prune`；清理日志：`journalctl --vacuum-time=7d` |
+| **MemoryPressure 驱逐** | 节点内存不足，kubelet 主动驱逐低优先级 Pod（BestEffort → Burstable → Guaranteed） | `kubectl describe node | grep "MemoryPressure"`；`kubectl top node` | 扩容节点内存；调整 Pod QoS（设置 requests=limits） |
 
 ---
 

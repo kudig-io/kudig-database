@@ -1,6 +1,7 @@
 ---
 title: kubeadm 不安装的组件 (What kubeadm Does Not Install) [cluster-create]
 description: 'description: ''// 以下组件需要用户自行安装和管理:'''
+summary: 'description: ''// 以下组件需要用户自行安装和管理:'''
 category: general
 tags:
 - reference
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - cilium
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: kubeadm 不安装的组件 (What kubeadm Does Not Install)
 description: '// 以下组件需要用户自行安装和管理:'
@@ -732,6 +736,8 @@ kubectl get pods -A -o wide
 - [安全机制](16-security.md) — Ingress TLS 和 cert-manager
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[log|log]]
 - [[scripts/man/INSTALL.md|INSTALL]]

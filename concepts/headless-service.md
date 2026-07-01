@@ -1,13 +1,22 @@
 ---
-title: "Headless Service"
+title: Headless Service
+summary: Headless Service 是 Kubernetes 中一种特殊的 Service 类型，其核心特征是将 spec.clusterIP 显式设置为
+  "None"，从而不分配虚拟 ClusterIP。
 category: concepts
-tags: ["core-concept", "domain-03-networking-traffic", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- core-concept
+- domain-03-networking-traffic
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # Headless Service
 
@@ -86,3 +95,7 @@ StatefulSet Pod 域名解析失败时，应按以下顺序排查：
 - **检查网络策略**：确认没有 NetworkPolicy 阻止 DNS 查询或 Pod 间通信
 
 更多有状态应用排错方法请参考 [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|statefulset-troubleshooting]]，服务发现相关内容参见 [[concepts/service.md|service-discovery]]。
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

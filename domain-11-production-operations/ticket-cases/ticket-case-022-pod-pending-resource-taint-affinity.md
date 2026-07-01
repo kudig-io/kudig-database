@@ -1,6 +1,7 @@
 ---
 title: 阿里云专有云 Pod Pending（资源不足 / taint 不匹配 / 亲和性冲突）
 description: 大数据 Spark 任务提交后 Driver Pod 长时间 Pending，根因为节点资源不足、污点容忍缺失与 Pod 反亲和性冲突叠加，含诊断、修复与验证。
+summary: 大数据 Spark 任务提交后 Driver Pod 长时间 Pending，根因为节点资源不足、污点容忍缺失与 Pod 反亲和性冲突叠加，含诊断、修复与验证。
 category: production-operations
 tags:
 - aliyun
@@ -13,6 +14,9 @@ tags:
 - affinity
 - spark
 - ticket-case
+tier: supporting
+created: 2026-06-26
+updated: 2026-06-26
 incident_id: TC-2026-022
 priority: P1
 severity: high
@@ -21,8 +25,6 @@ affected_namespace: data-platform
 ticket_type: 调度失败
 skill_ref: Pod Pending 诊断
 fta_ref: 'FTA: Pod Pending'
-created: 2026-06-26
-updated: 2026-06-26
 last_updated: 2026-06-26
 duplicate_of: INC-2026-ACK-047
 status: duplicate
@@ -54,17 +56,19 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-17-system-foundation/topic-dictionary/scheduling/taint.md]]"
+- target: '[[domain-17-system-foundation/topic-dictionary/scheduling/taint.md]]'
   type: related_to
-- target: "[[domain-17-system-foundation/topic-dictionary/scheduling/affinity.md]]"
+- target: '[[domain-17-system-foundation/topic-dictionary/scheduling/affinity.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-027-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-027-pod-pending-resource-taint.md]]'
   type: related_to
 ---
+
+
 
 # 工单 022：Pod Pending（资源不足 / taint 不匹配 / 亲和性冲突）
 

@@ -1,6 +1,7 @@
 ---
 title: Swap 内存管理
 description: '# Swap 内存管理'
+summary: '# Swap 内存管理'
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - terminology
 - kubelet
 - prometheus
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -25,8 +28,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 # Swap 内存管理
 
@@ -95,7 +99,7 @@ kubelet 通过 CRI 指示容器运行时在 cgroup 层面（如 cgroup v2 的 `m
 
 | 症状 | 可能原因 | 排查命令 | 解决方案 |
 |------|----------|----------|----------|
-| kubelet 启动失败 | swap 已启用但 `failSwapOn` 未设为 false | `journalctl -u kubelet \| grep swap` | 在 KubeletConfiguration 中设置 `failSwapOn: false` |
+| kubelet 启动失败 | swap 已启用但 `failSwapOn` 未设为 false | `journalctl -u kubelet | grep swap` | 在 KubeletConfiguration 中设置 `failSwapOn: false` |
 | Pod 性能下降，响应变慢 | 容器内存被换出到 swap | `kubectl top pods --show-swap` | 检查 `swapBehavior` 设置，考虑使用 `NoSwap` |
 | Guaranteed QoS Pod 使用了 swap | 配置错误，应仅 Burstable 可用 | `kubectl get pod <pod> -o jsonpath='{.status.qosClass}'` | 确认 `LimitedSwap` 模式下 Guaranteed Pod 不使用 swap |
 | 节点 I/O 延迟飙升 | swap 分区与系统盘共享磁盘 | `iostat -x 1` | 为 swap 使用专用 SSD/NVMe |

@@ -1,6 +1,7 @@
 ---
 title: 安全工具演进
 description: '# 安全工具演进'
+summary: '# 安全工具演进'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - security
 - ingress
 - crd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - ebpf-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # 安全工具演进
 

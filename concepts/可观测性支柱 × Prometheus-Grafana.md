@@ -1,7 +1,11 @@
 ---
 title: 可观测性支柱 × Prometheus-Grafana
-description: '[[concepts/observability-pillars.md|observability pillars]] 描述 Metrics/Logs/Traces 三大支柱，[[entities/prometheus-grafana.md|prometheus grafana]] 是 Metrics 工具。wiki
-  将 Prometheus 归类为 Metrics 工具，但 Prometheus 生态实际上已经**超越了 Metrics 范畴**——通过 Loki（日志）和 Tempo（'
+description: '[[concepts/observability-pillars.md|observability pillars]] 描述 Metrics/Logs/Traces
+  三大支柱，[[entities/prometheus-grafana.md|prometheus grafana]] 是 Metrics 工具。wiki 将 Prometheus
+  归类为 Metrics 工具，但 Prometheus 生态实际上已经**超越了 Metrics 范畴**——通过 Loki（日志）和 Tempo（'
+summary: '[[concepts/observability-pillars.md|observability pillars]] 描述 Metrics/Logs/Traces
+  三大支柱，[[entities/prometheus-grafana.md|prometheus grafana]] 是 Metrics 工具。wiki 将 Prometheus
+  归类为 Metrics 工具，但 Prometh...'
 category: synthesis
 tags:
 - k8s
@@ -13,6 +17,8 @@ tags:
 - etcd
 - grafana
 - jaeger
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,15 +39,16 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/deployment.md]]"
-    type: uses
-  - target: "[[entities/etcd.md]]"
-    type: uses
-  - target: "[[entities/prometheus.md]]"
-    type: uses
+- target: '[[entities/deployment.md]]'
+  type: uses
+- target: '[[entities/etcd.md]]'
+  type: uses
+- target: '[[entities/prometheus.md]]'
+  type: uses
 ---
+
+
 
 # 可观测性支柱 × [[entities/prometheus.md|Prometheus]]-Grafana
 

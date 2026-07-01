@@ -1,6 +1,7 @@
 ---
-title: "Week 2 Checkpoint: 自测检验 [week-2-security-monitoring]"
+title: 'Week 2 Checkpoint: 自测检验 [week-2-security-monitoring]'
 description: 'title: Week 2 自测: 安全认证与监控运维'
+summary: 'title: Week 2 自测: 安全认证与监控运维'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - networkpolicy
 - operator
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 # Week 2 Checkpoint: 自测检验
 

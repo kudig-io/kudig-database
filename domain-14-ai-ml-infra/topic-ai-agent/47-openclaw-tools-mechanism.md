@@ -1,6 +1,7 @@
 ---
 title: OpenClaw TOOLS.md 机制深度解析 (domain-14-ai-ml-infra)
 description: 'title: OpenClaw TOOLS.md 机制深度解析'
+summary: 'title: OpenClaw TOOLS.md 机制深度解析'
 category: general
 tags:
 - ai
@@ -11,6 +12,8 @@ tags:
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: OpenClaw TOOLS.md 机制深度解析
 description: '# OpenClaw TOOLS.md 机制深度解析'

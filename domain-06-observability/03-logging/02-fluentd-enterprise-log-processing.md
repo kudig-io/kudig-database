@@ -1,6 +1,7 @@
 ---
 title: Fluentd企业级日志收集与处理深度实践
 description: '# Fluentd企业级日志收集与处理深度实践'
+summary: '# Fluentd企业级日志收集与处理深度实践'
 category: logging-management-analytics
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kafka
 - elasticsearch
 - daemonset
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -45,8 +48,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Fluentd企业级日志收集与处理深度实践
 

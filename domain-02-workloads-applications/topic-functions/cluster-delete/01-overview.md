@@ -1,7 +1,9 @@
 ---
 title: Kubernetes 集群删除逻辑 — 基于官方代码分析
-description: 深入分析 Kubernetes 集群删除的完整逻辑，涵盖 kubeadm reset 命令的 resetData 构建、Phase 执行框架、API Client 创建、DryRun 模式以及各删除方式的对比（kubeadm
-  reset vs kubectl delete node vs 手动清理）。
+description: 深入分析 Kubernetes 集群删除的完整逻辑，涵盖 kubeadm reset 命令的 resetData 构建、Phase 执行框架、API
+  Client 创建、DryRun 模式以及各删除方式的对比（kubeadm reset vs kubectl delete node vs 手动清理）。
+summary: 深入分析 Kubernetes 集群删除的完整逻辑，涵盖 kubeadm reset 命令的 resetData 构建、Phase 执行框架、API
+  Client 创建、DryRun 模式以及各删除方式的对比（kubeadm reset vs kubectl delete node vs 手动清理）。
 category: cluster-delete
 tags:
 - cluster-delete
@@ -14,6 +16,8 @@ tags:
 - phases
 - etcd
 - kubelet
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-18
 difficulty: advanced
 reading_level: advanced
@@ -57,8 +61,9 @@ related_topics:
 - ha-delete
 - cloud-delete
 - troubleshooting
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 集群删除逻辑 — 基于官方代码分析
 

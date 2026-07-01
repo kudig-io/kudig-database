@@ -1,6 +1,7 @@
 ---
 title: domain-02-workloads-applications MOC
 description: domain-02-workloads-applications 知识域导航页，覆盖 28 篇文档
+summary: domain-02-workloads-applications 知识域导航页，覆盖 28 篇文档
 category: moc
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - daemonset
 - job
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - pod-lifecycle
-created: "2026-05-23"
 ---
+
+
 
 # domain-02-workloads-applications MOC
 

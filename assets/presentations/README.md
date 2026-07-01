@@ -1,13 +1,22 @@
 ---
-title: "演示文稿索引"
+title: 演示文稿索引
+summary: 演示文稿索引
 category: index
-tags: ["index", "presentations", "assets", "visibility/public"]
-sources: ["assets/presentations/"]
+tags:
+- index
+- presentations
+- assets
+- visibility/public
+tier: supporting
+sources:
+- assets/presentations/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: reviewed
 ---
+
+
 
 # 演示文稿索引
 
@@ -26,3 +35,7 @@ status: reviewed
 - [[assets/presentations/kubernetes-troubleshooting-methodology-presentation.md|kubernetes-troubleshooting-methodology-presentation]]
 - [[assets/presentations/kubernetes-workload-presentation.md|kubernetes-workload-presentation]]
 - [[assets/presentations/presentation-template.md|presentation-template]]
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

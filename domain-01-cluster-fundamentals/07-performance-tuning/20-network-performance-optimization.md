@@ -1,6 +1,7 @@
 ---
 title: 20-网络性能优化
 description: 'title: 20-网络性能优化'
+summary: 'title: 20-网络性能优化'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - envoy
 - cilium
 - calico
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 20-网络性能优化
 description: '# 20-网络性能优化'

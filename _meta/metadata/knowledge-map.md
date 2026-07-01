@@ -1,11 +1,16 @@
 ---
 title: 知识图谱 (Knowledge Map) [metadata]
-description: NET_FUND[domain-03-networking-traffic 网络基础] --> K8S_NET[domain-03-networking-traffic K8s 网络]
+description: NET_FUND[domain-03-networking-traffic 网络基础] --> K8S_NET[domain-03-networking-traffic
+  K8s 网络]
+summary: NET_FUND[domain-03-networking-traffic 网络基础] --> K8S_NET[domain-03-networking-traffic
+  K8s 网络]
 category: general
 tags:
 - k8s
 - docker
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +26,9 @@ trigger_keywords:
 - Map
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 知识图谱 (Knowledge Map)
 

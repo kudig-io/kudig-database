@@ -1,7 +1,9 @@
 ---
 title: CRD 自定义资源定义开发指南
-description: 深入解析 K8s CRD 开发：CustomResourceDefinition 规范、Validation/Webhook、Subresources、Conversion、Webhook Debug、企业级 CRD
-  开发最佳实践
+description: 深入解析 K8s CRD 开发：CustomResourceDefinition 规范、Validation/Webhook、Subresources、Conversion、Webhook
+  Debug、企业级 CRD 开发最佳实践
+summary: 深入解析 K8s CRD 开发：CustomResourceDefinition 规范、Validation/Webhook、Subresources、Conversion、Webhook
+  Debug、企业级 CRD 开发最佳实践
 category: domain-15-specialized-tech
 tags:
 - k8s
@@ -14,6 +16,8 @@ tags:
 - controller-manager
 - prometheus
 - mysql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -63,8 +67,9 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/crd-operator-fta.md
   type: fta
   desc: CRD/Operator 故障树
-created: "2026-05-23"
 ---
+
+
 
 # 01 - CRD自定义资源定义开发指南
 

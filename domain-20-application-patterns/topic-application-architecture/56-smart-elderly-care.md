@@ -1,6 +1,7 @@
 ---
 title: 智慧养老架构设计 — 阿里云视角
 description: 'title: 智慧养老架构设计'
+summary: 'title: 智慧养老架构设计'
 category: general
 tags:
 - architecture
@@ -11,6 +12,8 @@ tags:
 - mysql
 - operator
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 智慧养老架构设计
 description: '# 智慧养老架构设计 — 阿里云视角'

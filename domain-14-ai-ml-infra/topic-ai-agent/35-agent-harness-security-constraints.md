@@ -1,6 +1,7 @@
 ---
 title: Agent Harness 安全与约束工程 (domain-14-ai-ml-infra)
 description: 'title: Agent Harness 安全与约束工程'
+summary: 'title: Agent Harness 安全与约束工程'
 category: general
 tags:
 - ai
@@ -12,6 +13,8 @@ tags:
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Agent Harness 安全与约束工程
 description: '# Agent Harness 安全与约束工程'

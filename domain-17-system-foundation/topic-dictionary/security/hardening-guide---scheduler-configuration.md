@@ -1,6 +1,7 @@
 ---
 title: 加固指南 - 调度器配置
 description: '# 加固指南 - 调度器配置'
+summary: '# 加固指南 - 调度器配置'
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - terminology
 - apiserver
 - scheduler
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # 加固指南 - 调度器配置
 

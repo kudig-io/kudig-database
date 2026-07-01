@@ -1,6 +1,7 @@
 ---
 title: 'Day 5: K8S 集群删除'
 description: '## 概述'
+summary: '## 概述'
 category: learning
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - cronjob
 - ingress
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,8 +33,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 5: K8S 集群删除
@@ -226,7 +230,7 @@ kubectl delete configmap --all -n default  # ⚠️ 批量删除，波及面大
 kubectl delete secret --all -n default  # ⚠️ 批量删除，波及面大
 
 # 等待所有 Pod 终止
-kubectl get pods -A | grep -v 'kube-system\|Running\|Completed'
+kubectl get pods -A | grep -v 'kube-system|Running|Completed'
 
 # 确认 LoadBalancer 类型 Service 已清理
 kubectl get svc -A | grep LoadBalancer

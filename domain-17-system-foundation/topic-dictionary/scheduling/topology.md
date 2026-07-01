@@ -1,12 +1,15 @@
 ---
 title: 拓扑
-description: 'Topology（拓扑）在 Kubernetes 中表示节点在物理或逻辑上的位置关系，如区域（Region）、可用区（Zone）、机架（Rack）等。拓扑信息用...'
+description: Topology（拓扑）在 Kubernetes 中表示节点在物理或逻辑上的位置关系，如区域（Region）、可用区（Zone）、机架（Rack）等。拓扑信息用...
+summary: Topology（拓扑）在 Kubernetes 中表示节点在物理或逻辑上的位置关系，如区域（Region）、可用区（Zone）、机架（Rack）等。拓扑信息用...
 category: dictionary
 tags:
 - k8s
 - glossary
 - scheduling
 - topology
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 拓扑
 

@@ -1,13 +1,25 @@
 ---
-title: "生产环境日常巡检与值班手册"
+title: 生产环境日常巡检与值班手册
+summary: 生产环境日常巡检与值班手册：生产环境的稳定性直接决定业务的可用性。作为远程顾问，我们需要建立标准化的巡检清单和值班响应机制，帮助客户在生产环境中主动发现问题、快速响应异常。
 category: domain-11
-tags: ["domain-11", "SRE", "运维", "巡检", "值班", "变更管理", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- domain-11
+- SRE
+- 运维
+- 巡检
+- 值班
+- 变更管理
+- visibility/public
+tier: core
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # 生产环境日常巡检与值班手册
 
@@ -117,3 +129,7 @@ status: reviewed
 - [[concepts/cluster-upgrade-paths.md|cluster-upgrade-paths]] — 集群升级路径与版本兼容性
 - [[domain-11-production-operations/02-change-management-guide.md|change-management-guide]] — 变更管理的详细流程
 - [[domain-11-production-operations/04-incident-response-template.md|incident-response-playbook]] — 事件响应操作手册
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

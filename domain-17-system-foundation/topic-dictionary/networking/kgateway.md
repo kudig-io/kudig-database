@@ -1,6 +1,9 @@
 ---
 title: KGateway API 网关
-description: 'KGateway（原 Gloo Edge/Gloo Gateway）是 Solo.io 开源的 Kubernetes API 网关，基于 Envoy Proxy...'
+description: KGateway（原 Gloo Edge/Gloo Gateway）是 Solo.io 开源的 Kubernetes API 网关，基于
+  Envoy Proxy...
+summary: KGateway（原 Gloo Edge/Gloo Gateway）是 Solo.io 开源的 Kubernetes API 网关，基于 Envoy
+  Proxy...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - networking
 - gateway
 - envoy
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # KGateway API 网关（KGateway）
 

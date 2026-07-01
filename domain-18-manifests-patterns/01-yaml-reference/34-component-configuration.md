@@ -1,6 +1,7 @@
 ---
 title: 34. Kubernetes 组件配置（Component Configuration）
 description: '# 34. Kubernetes 组件配置（Component Configuration）'
+summary: '# 34. Kubernetes 组件配置（Component Configuration）'
 category: yaml-manifests
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - cilium
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -56,8 +59,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 34. [[Kubernetes|Kubernetes]] 组件配置（Component Configuration）
 

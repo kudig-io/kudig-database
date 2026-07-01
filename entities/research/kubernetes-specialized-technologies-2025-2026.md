@@ -1,3 +1,15 @@
+---
+title: Kubernetes Specialized Technologies 2025 2026
+summary: '1. eBPF Maturity: eBPF is the de facto standard for K8s networking and security.
+  Cilium dominates networking, Tetragon leads runtime security. Falco eBPF and Calico
+  eBPF provide alternatives.'
+category: entities
+tags:
+- kubernetes-specialized-technologies-2025-2026
+tier: supporting
+created: '2026-07-01'
+---
+
 # Kubernetes Specialized Technologies 2025-2026
 
 ## Research Date: 2026-05-24

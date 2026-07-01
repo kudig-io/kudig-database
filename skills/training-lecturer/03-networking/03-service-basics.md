@@ -1,6 +1,7 @@
 ---
 title: 第四课：Service - 让应用可以被访问 [03-networking]
 description: 【解决方案】
+summary: 【解决方案】
 category: k8s-lecturer
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - coredns
 - ingress
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第四课：[[Service|Service]] - 让应用可以被访问
 

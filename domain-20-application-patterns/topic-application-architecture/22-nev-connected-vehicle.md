@@ -1,6 +1,7 @@
 ---
 title: 新能源车联网架构设计 — 阿里云视角
 description: 'title: 新能源车联网架构设计'
+summary: 'title: 新能源车联网架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - mysql
 - kafka
 - daemonset
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 新能源车联网架构设计
 description: '# 新能源车联网架构设计 — 阿里云视角'

@@ -1,6 +1,7 @@
 ---
 title: AI Infrastructure on Kubernetes Domain Guide
 description: AI Infrastructure on Kubernetes Domain Guide — Kubernetes 生产运维知识库
+summary: AI Infrastructure on Kubernetes Domain Guide — Kubernetes 生产运维知识库
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - job
 - gateway
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # AI Infrastructure on Kubernetes Domain Guide
 
@@ -80,6 +84,8 @@ Distilled from domain-11-ai-infra (37 documents, Kubernetes v1.28-v1.32).
 - Cost monitoring with Kubecost
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[argo]] — Argo Workflows

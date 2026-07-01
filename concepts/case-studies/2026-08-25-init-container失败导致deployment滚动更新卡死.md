@@ -1,14 +1,20 @@
 ---
-category: "synthesis"
-tags: ["synthesis"]
-date: "2026-08-25"
-title: "Init Container失败导致Deployment滚动更新卡死"
-skill: "08-deployment-rollout-failure"
-severity: "P1"
-created: "2026-05-23"
-updated: "2026-05-23"
+title: Init Container失败导致Deployment滚动更新卡死
+summary: Init Container失败导致Deployment滚动更新卡死：Deployment滚动更新进度卡在50%，新Pod无法就绪。检查发现Init
+  Container在验证数据库连接时失败。
+category: synthesis
+tags:
+- synthesis
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-08-25'
+skill: 08-deployment-rollout-failure
+severity: P1
 last_updated: 2026-05-23
 ---
+
+
 
 # Init Container失败导致Deployment滚动更新卡死
 

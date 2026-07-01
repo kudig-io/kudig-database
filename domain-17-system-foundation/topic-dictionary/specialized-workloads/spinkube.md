@@ -1,6 +1,9 @@
 ---
 title: SpinKube WASM 运行时
-description: 'SpinKube 是 Fermyon 开源的 CNCF Sandbox 项目，在 Kubernetes 上运行 Spin WebAssembly 应用，通过 R...'
+description: SpinKube 是 Fermyon 开源的 CNCF Sandbox 项目，在 Kubernetes 上运行 Spin WebAssembly
+  应用，通过 R...
+summary: SpinKube 是 Fermyon 开源的 CNCF Sandbox 项目，在 Kubernetes 上运行 Spin WebAssembly
+  应用，通过 R...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - specialized-workloads
 - wasm
 - serverless
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # SpinKube WASM 运行时（SpinKube）
 

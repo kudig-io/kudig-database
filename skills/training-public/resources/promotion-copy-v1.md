@@ -1,6 +1,7 @@
 ---
 title: 推广文案 V1 — 朋友圈/即刻/技术社区版
 description: 面向社交媒体传播的短平快推广文案，突出 AI 智能体作为 K8s 学习私教的核心价值
+summary: 面向社交媒体传播的短平快推广文案，突出 AI 智能体作为 K8s 学习私教的核心价值
 category: learning
 tags:
 - promotion
@@ -8,6 +9,8 @@ tags:
 - copywriting
 - social-media
 - helm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: beginner
 reading_level: beginner
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 # 推广文案 V1 — 朋友圈/即刻/技术社区版
 

@@ -1,12 +1,15 @@
 ---
 title: K8s 配置管理术语参考
 description: '# K8s 配置管理术语参考'
+summary: '# K8s 配置管理术语参考'
 category: references
 tags:
 - k8s
 - dictionary
 - configuration
 - kubelet
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 - 配置管理术语参考
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8s 配置管理术语参考
 

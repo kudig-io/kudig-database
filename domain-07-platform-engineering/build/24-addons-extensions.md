@@ -1,6 +1,7 @@
 ---
 title: 14 - 附加组件和扩展表
 description: '| 组件 | 用途 | 部署方式 | 版本兼容 | 生产必需 | ACK集成 |'
+summary: '| 组件 | 用途 | 部署方式 | 版本兼容 | 生产必需 | ACK集成 |'
 category: platform-ops
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - envoy
 - cilium
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -66,8 +69,9 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
-created: "2026-05-23"
 ---
+
+
 
 # 14 - 附加组件和扩展表
 

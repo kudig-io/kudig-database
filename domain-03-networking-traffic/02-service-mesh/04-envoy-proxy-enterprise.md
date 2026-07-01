@@ -1,6 +1,7 @@
 ---
 title: Envoy Proxy 企业级服务网格数据平面深度实践
 description: '# Envoy Proxy 企业级服务网格数据平面深度实践'
+summary: '# Envoy Proxy 企业级服务网格数据平面深度实践'
 category: service-mesh-microservices
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - ingress
 - gateway
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -56,8 +59,9 @@ cross_refs:
 - type: domain
   path: ../domain-05-security-compliance/
   label: '相关知识域: domain-05-security-compliance'
-created: "2026-05-23"
 ---
+
+
 
 # [[Envoy|Envoy]] Proxy 企业级服务网格数据平面深度实践
 

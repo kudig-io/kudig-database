@@ -1,12 +1,15 @@
 ---
 title: 安全上下文
-description: 'SecurityContext 是 Kubernetes 中为 Pod 或容器定义安全配置的字段集合。它控制容器的权限、身份和安全行为，是实现容器安全加固的核心...'
+description: SecurityContext 是 Kubernetes 中为 Pod 或容器定义安全配置的字段集合。它控制容器的权限、身份和安全行为，是实现容器安全加固的核心...
+summary: SecurityContext 是 Kubernetes 中为 Pod 或容器定义安全配置的字段集合。它控制容器的权限、身份和安全行为，是实现容器安全加固的核心...
 category: dictionary
 tags:
 - k8s
 - glossary
 - security
 - security-context
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 安全上下文
 

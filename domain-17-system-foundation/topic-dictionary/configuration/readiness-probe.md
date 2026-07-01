@@ -1,12 +1,16 @@
 ---
 title: 就绪探针
-description: 'Readiness Probe（就绪探针）用于检测容器是否准备好接受流量。如果探测失败，Pod 会被从 Service 的 Endpoints 中移除，不再接收...'
+description: Readiness Probe（就绪探针）用于检测容器是否准备好接受流量。如果探测失败，Pod 会被从 Service 的 Endpoints
+  中移除，不再接收...
+summary: Readiness Probe（就绪探针）用于检测容器是否准备好接受流量。如果探测失败，Pod 会被从 Service 的 Endpoints 中移除，不再接收...
 category: dictionary
 tags:
 - k8s
 - glossary
 - probe
 - health-check
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 就绪探针
 

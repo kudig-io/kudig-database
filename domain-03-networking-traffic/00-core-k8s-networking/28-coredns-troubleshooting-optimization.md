@@ -1,6 +1,7 @@
 ---
 title: 56 - CoreDNS 故障排查与性能优化 (Troubleshooting & Optimization)
 description: '# 56 - CoreDNS 故障排查与性能优化 (Troubleshooting & Optimization)'
+summary: '# 56 - CoreDNS 故障排查与性能优化 (Troubleshooting & Optimization)'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - opa
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -64,8 +67,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 56 - [[CoreDNS|CoreDNS]] 故障排查与性能优化 (Troubleshooting & Optimization)
 
@@ -188,7 +192,7 @@ kubectl exec -n kube-system deploy/coredns -- wget -qO- http://localhost:9153/me
 | 1 | CoreDNS Pod运行状态 | `kubectl get pods -n kube-system -l k8s-app=kube-dns` | Pod未运行 |
 | 2 | kube-dns Service | `kubectl get svc,ep kube-dns -n kube-system` | Service无Endpoints |
 | 3 | 网络连通性 | `kubectl exec <pod> -- nc -zv 10.96.0.10 53` | 网络策略阻断 |
-| 4 | kube-proxy规则 | `iptables -t nat -L KUBE-SERVICES \| grep dns` | iptables规则缺失 |
+| 4 | kube-proxy规则 | `iptables -t nat -L KUBE-SERVICES | grep dns` | iptables规则缺失 |
 | 5 | CNI状态 | `kubectl get pods -n kube-system -l k8s-app=<cni>` | CNI问题 |
 
 **解决方案**:

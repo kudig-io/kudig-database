@@ -2,6 +2,8 @@
 title: RBAC 权限不足导致应用无法访问 K8s API
 description: 专有云 ACK 集群中 Operator 应用升级后无法 List/Watch CRD，根因为 ServiceAccount 绑定 Role
   缺少 verbs，含诊断、修复与验证。
+summary: 专有云 ACK 集群中 Operator 应用升级后无法 List/Watch CRD，根因为 ServiceAccount 绑定 Role 缺少
+  verbs，含诊断、修复与验证。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -12,6 +14,9 @@ tags:
 - rolebinding
 - operator
 - p1
+tier: supporting
+created: '2026-06-26T14:00:00+08:00'
+updated: '2026-06-26T16:10:00+08:00'
 incident_id: TC-2026-039
 priority: P1
 severity: high
@@ -23,9 +28,7 @@ skill_ref:
 - 最小权限原则
 fta_ref:
 - 'FTA: RBAC 访问拒绝'
-created: '2026-06-26T14:00:00+08:00'
-updated: '2026-06-26T16:10:00+08:00'
-last_updated: 2026-06-26T16:10:00+08:00
+last_updated: 2026-06-26 16:10:00+08:00
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -54,13 +57,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-005-kubelet-cert-expired.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-005-kubelet-cert-expired.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: "[[domain-17-system-foundation/topic-dictionary/security/rbac.md]]"
+- target: '[[domain-17-system-foundation/topic-dictionary/security/rbac.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -88,7 +93,7 @@ relationships:
 ```bash
 # 1. 查看 Operator Pod 状态与日志
 kubectl get pod -n platform-tools -l app=backup-operator
-kubectl logs -n platform-tools -l app=backup-operator --tail=200 | grep -i "forbidden\|denied\|RBAC" | tail -30
+kubectl logs -n platform-tools -l app=backup-operator --tail=200 | grep -i "forbidden|denied|RBAC" | tail -30
 
 # 2. 查看 ServiceAccount
 kubectl get sa backup-operator -n platform-tools -o yaml
@@ -213,7 +218,7 @@ kubectl auth can-i list backups.backup.example.io \
 kubectl get pod -n platform-tools -l app=backup-operator -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.phase}{"\t"}{.status.containerStatuses[0].restartCount}{"\n"}{end}'
 
 # 2. Operator 日志无 forbidden 错误
-kubectl logs -n platform-tools -l app=backup-operator --tail=100 | grep -i "forbidden\|denied" || echo "无权限拒绝日志"
+kubectl logs -n platform-tools -l app=backup-operator --tail=100 | grep -i "forbidden|denied" || echo "无权限拒绝日志"
 
 # 3. 验证各新增 CRD 的权限
 for resource in backups restores backuppolicies; do

@@ -1,5 +1,6 @@
 ---
 title: Helm × GitOps
+summary: Helm 作为 K8s 包管理器与 GitOps 声明式交付范式的交叉：如何实现可审计、可回滚的发布流水线。
 category: synthesis
 tags:
 - helm
@@ -7,22 +8,23 @@ tags:
 - argocd
 - flux
 - continuous-delivery
+tier: supporting
 sources:
 - domain-08-release-change-management/01-gitops/99-helm-production-guide.md
 - domain-08-release-change-management/01-gitops/README.md
 - domain-08-release-change-management/03-change-management/02-canary-release-strategy.md
-created: "2026-06-26"
-updated: "2026-06-26"
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06-26
-summary: "Helm 作为 K8s 包管理器与 GitOps 声明式交付范式的交叉：如何实现可审计、可回滚的发布流水线。"
 provenance:
   extracted: 0.25
   inferred: 0.65
   ambiguous: 0.1
 base_confidence: 0.72
 lifecycle: draft
-lifecycle_changed: "2026-06-26"
+lifecycle_changed: '2026-06-26'
 ---
+
 
 # Helm × GitOps
 

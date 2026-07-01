@@ -1,14 +1,18 @@
 ---
 title: 最终轮 Broken Wikilinks 修复报告（2026-06-26）
 description: 迭代修复核心内容中的 broken wikilinks
+summary: 迭代修复核心内容中的 broken wikilinks
 category: reports
 tags:
 - wiki-lint
 - broken-links
-created: "2026-06-26"
-updated: "2026-06-26"
+tier: supporting
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06-26
 ---
+
+
 
 # 最终轮 Broken Wikilinks 修复报告
 

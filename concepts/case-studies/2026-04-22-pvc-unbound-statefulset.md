@@ -1,15 +1,26 @@
 ---
-title: "[2026-04-22] [P1] PVC 未绑定导致 StatefulSet 无法启动"
+title: '[2026-04-22] [P1] PVC 未绑定导致 StatefulSet 无法启动'
+summary: '[2026-04-22] [P1] PVC 未绑定导致 StatefulSet 无法启动：07:30，mysql-primary-0 Pod 状态为
+  Pending，已持续 25 分钟：'
 category: case-study
-tags: [production, incident, storage, pvc, statefulset, csi]
-date: "2026-04-22"
+tags:
+- production
+- incident
+- storage
+- pvc
+- statefulset
+- csi
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-04-22'
 severity: P1
-mttr: "40min"
+mttr: 40min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-04-22] StorageClass 删除后 PVC 无法绑定，MySQL StatefulSet 启动失败
 

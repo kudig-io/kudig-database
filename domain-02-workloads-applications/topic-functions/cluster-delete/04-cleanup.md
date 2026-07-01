@@ -1,6 +1,7 @@
 ---
 title: 节点清理机制 — cleanup-node 源码分析 (topic-code-analysis)
 description: 'description: 深入分析 kubeadm reset cleanup-node 阶段的源码实现，涵盖停止 kubelet 服务、卸载挂载点、移除容器、清理配置目录（pki/manifests/kubelet）、删除'
+summary: 'description: 深入分析 kubeadm reset cleanup-node 阶段的源码实现，涵盖停止 kubelet 服务、卸载挂载点、移除容器、清理配置目录（pki/manifests/kubelet）、删除'
 category: general
 tags:
 - reference
@@ -11,6 +12,8 @@ tags:
 - containerd
 - cri-o
 - docker
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 节点清理机制 — cleanup-node 源码分析
 category: cluster-delete
@@ -498,6 +502,8 @@ rm -rf $HOME/.kube/config  # ⚠️ 删除系统/数据文件
 - [container runtime util](https://github.com/kubernetes/kubernetes/tree/master/cmd/kubeadm/app/util/runtime/)
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[scripts/man/INSTALL.md|INSTALL]]

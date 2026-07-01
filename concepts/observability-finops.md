@@ -1,6 +1,7 @@
 ---
 title: 可观测性与 FinOps 的融合
 description: 可观测性数据 → 资源利用率洞察 → 成本优化决策
+summary: 可观测性数据 → 资源利用率洞察 → 成本优化决策
 category: synthesis
 tags:
 - observability
@@ -9,6 +10,8 @@ tags:
 - monitoring
 - sre
 - prometheus
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,13 +28,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[skills/best-practices/best-practices/observability/monitoring.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-dictionary/observability/observability.md]]"
-    type: related_to
+- target: '[[skills/best-practices/best-practices/observability/monitoring.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-dictionary/observability/observability.md]]'
+  type: related_to
 ---
+
+
 
 # 可观测性与 FinOps 的融合
 

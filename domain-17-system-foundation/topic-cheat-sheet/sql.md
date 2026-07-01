@@ -1,6 +1,7 @@
 ---
 title: SQL 速查卡
 description: 关系型数据库查询与运维快速参考，覆盖 MySQL 8.0 / PostgreSQL 14 / SQLite 3
+summary: 关系型数据库查询与运维快速参考，覆盖 MySQL 8.0 / PostgreSQL 14 / SQLite 3
 category: cheatsheet
 tags:
 - sql
@@ -9,6 +10,8 @@ tags:
 - database
 - cheatsheet
 - quick-reference
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ related_docs:
   desc: 数据库与中间件专题
 - path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   desc: Linux 速查卡
-created: "2026-05-23"
 ---
+
+
 
 # SQL 速查表
 

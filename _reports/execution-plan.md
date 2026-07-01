@@ -1,6 +1,7 @@
 ---
 title: KUDIG 内容补齐执行计划 (reports)
 description: 'desc: "深度文档"'
+summary: 'desc: "深度文档"'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - docker
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG 内容补齐执行计划
 

@@ -1,6 +1,7 @@
 ---
 title: 01 - Kubernetes 事件系统架构与 API 参考
 description: '# 01 - Kubernetes 事件系统架构与 API 参考'
+summary: '# 01 - Kubernetes 事件系统架构与 API 参考'
 category: kubernetes-events
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - falco
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -48,8 +51,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 01 - [[Kubernetes|Kubernetes]] 事件系统架构与 API 参考
 

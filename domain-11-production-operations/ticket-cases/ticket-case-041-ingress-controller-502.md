@@ -1,6 +1,7 @@
 ---
 title: Ingress 控制器 Pod 异常导致 404/502
 description: 专有云 ACK 集群因 ingress-nginx 控制器配置重载失败导致部分域名返回 502/404 的工单闭环样本。
+summary: 专有云 ACK 集群因 ingress-nginx 控制器配置重载失败导致部分域名返回 502/404 的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -10,6 +11,9 @@ tags:
 - '502'
 - '404'
 - p0
+tier: core
+created: '2026-06-26T14:00:00+08:00'
+updated: '2026-06-26T16:15:00+08:00'
 incident_id: INC-2026-ACK-041
 priority: P0
 severity: critical
@@ -21,11 +25,9 @@ skill_ref:
   网关生产运维]]'
 - '[[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|Ingress 异常故障树分析]]'
 fta_ref:
-- '[[domain-10-troubleshooting-diagnostics/topic-fta/list/nginx-ingress-fta.md|FTA: Nginx
-  Ingress 异常]]'
-created: '2026-06-26T14:00:00+08:00'
-updated: '2026-06-26T16:15:00+08:00'
-last_updated: 2026-06-26T16:15:00+08:00
+- '[[domain-10-troubleshooting-diagnostics/topic-fta/list/nginx-ingress-fta.md|FTA:
+  Nginx Ingress 异常]]'
+last_updated: 2026-06-26 16:15:00+08:00
 duplicate_of: TC-2026-021
 status: duplicate
 duplication_reason: 与 TC-2026-021 主题重复，内容角度相似，降低 RAG 权重
@@ -53,13 +55,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[concepts/ingress.md]]"
+- target: '[[concepts/ingress.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 

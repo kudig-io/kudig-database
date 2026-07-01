@@ -1,6 +1,7 @@
 ---
 title: 节点生命周期总览 (topic-code-analysis)
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - reference
@@ -13,6 +14,8 @@ tags:
 - pdb
 - networkpolicy
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 节点生命周期总览
 description: '## 概述'
@@ -491,6 +495,10 @@ kubectl debug node/<node> -it --image=busybox
 | `TryUpdateNodeStatus` | `pkg/kubelet/nodestatus/` | 状态更新 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

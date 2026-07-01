@@ -1,6 +1,7 @@
 ---
 title: Domain-22 容器镜像管理 — 开源项目索引
 description: '# Domain-22 容器镜像管理 — 开源项目索引'
+summary: '# Domain-22 容器镜像管理 — 开源项目索引'
 category: container-image-management
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - opa
 - falco
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Domain-22 容器镜像管理 — 开源项目索引
 

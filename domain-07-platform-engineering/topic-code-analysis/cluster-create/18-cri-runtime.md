@@ -1,6 +1,7 @@
 ---
 title: CRI 运行时管理 (Container Runtime Interface) [cluster-create]
 description: 'title: CRI 运行时管理 (Container Runtime Interface)'
+summary: 'title: CRI 运行时管理 (Container Runtime Interface)'
 category: general
 tags:
 - reference
@@ -13,6 +14,8 @@ tags:
 - flannel
 - calico
 - coredns
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: CRI 运行时管理 (Container Runtime Interface)
 description: '# CRI 运行时管理 (Container Runtime Interface)'
@@ -982,6 +986,8 @@ kubectl run gvisor-nginx --image=nginx --overrides='{"spec":{"runtimeClassName":
 ```
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]

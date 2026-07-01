@@ -1,6 +1,7 @@
 ---
 title: DNS 知识图谱索引
 description: '## DNS 知识图谱'
+summary: '## DNS 知识图谱'
 category: index
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - istio
 - ingress
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 # DNS 知识图谱索引
 

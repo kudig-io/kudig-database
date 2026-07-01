@@ -1,12 +1,15 @@
 ---
 title: 事故指挥系统
 description: '| **Operations Lead** | 技术执行，故障排查和修复 |'
+summary: '| **Operations Lead** | 技术执行，故障排查和修复 |'
 category: domain
 tags:
 - sre
 - incident-management
 - on-call
 - response
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - sre-practices
-created: "2026-05-23"
 ---
+
+
 
 # 事故指挥系统
 

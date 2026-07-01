@@ -1,12 +1,15 @@
 ---
 title: KUDIG-DATABASE 目录结构规范
 description: '## 设计原则'
+summary: '## 设计原则'
 category: general
 tags:
 - k8s
 - llm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 - 目录结构规范
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG-DATABASE 目录结构规范
 

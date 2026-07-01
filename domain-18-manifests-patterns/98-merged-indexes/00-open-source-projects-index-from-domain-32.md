@@ -1,6 +1,8 @@
 ---
 title: Domain-32 YAML 清单 — 开源项目索引
-description: '| **kustomize** | K8s 原生配置定制 | K8s SIG | v5.6.0 | 11k+ | Apache-2.0 |'
+description: '| **kustomize** | K8s 原生配置定制 | K8s SIG | v5.6.0 | 11k+ | Apache-2.0
+  |'
+summary: '| **kustomize** | K8s 原生配置定制 | K8s SIG | v5.6.0 | 11k+ | Apache-2.0 |'
 category: yaml-manifests
 tags:
 - k8s
@@ -13,6 +15,8 @@ tags:
 - statefulset
 - daemonset
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +50,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Domain-32 YAML 清单 — 开源项目索引
 

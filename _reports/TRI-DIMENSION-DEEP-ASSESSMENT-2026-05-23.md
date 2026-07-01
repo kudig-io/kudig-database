@@ -1,12 +1,19 @@
 ---
-title: "报告标题"
+title: 报告标题
+summary: '报告标题：命令动词分布: kubectl: 462/469 (98.5%) etcdctl: 7/469 (1.5%)'
 category: reports
-tags: ["reports", "visibility/public"]
-sources: ["auto-generated"]
+tags:
+- reports
+- visibility/public
+tier: supporting
+sources:
+- auto-generated
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # KUDIG 远程顾问模式 — 三维度深度评估报告
 
@@ -335,3 +342,7 @@ helm-chart-failure:    1条    ← 几乎缺失
 ## 参见
 
 - [[kubernetes]] — visibility/public 领域核心页面
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

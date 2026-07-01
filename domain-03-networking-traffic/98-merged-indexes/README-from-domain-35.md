@@ -1,6 +1,9 @@
 ---
 title: 'Domain 35: eBPF 技术体系 (eBPF Technology Stack)'
-description: '**适用范围**: 云原生网络、安全、可观测性 | **维护状态**: 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐ | **更新时间**: 2026-03-03'
+description: '**适用范围**: 云原生网络、安全、可观测性 | **维护状态**: 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐ | **更新时间**:
+  2026-03-03'
+summary: '**适用范围**: 云原生网络、安全、可观测性 | **维护状态**: 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐ | **更新时间**:
+  2026-03-03'
 category: ebpf-technology
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - operator
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -40,8 +45,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - kafka-basics
-created: "2026-05-23"
 ---
+
+
 
 # Domain 35: eBPF 技术体系 (eBPF Technology Stack)
 

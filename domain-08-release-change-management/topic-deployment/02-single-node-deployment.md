@@ -1,6 +1,7 @@
 ---
 title: 02 - 单节点部署 (Single Node All-in-One) [deployment]
 description: 'title: 02 - 单节点部署 (Single Node All-in-One)'
+summary: 'title: 02 - 单节点部署 (Single Node All-in-One)'
 category: general
 tags:
 - deployment
@@ -13,6 +14,8 @@ tags:
 - calico
 - coredns
 - helm
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -40,8 +43,9 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 02 - 单节点部署 (Single Node All-in-One)
 description: '# 02 - 单节点部署 (Single Node All-in-One)'

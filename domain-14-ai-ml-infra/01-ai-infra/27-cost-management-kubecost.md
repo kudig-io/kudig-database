@@ -1,6 +1,7 @@
 ---
 title: 成本管理与 FinOps
 description: 'title: 成本管理与 FinOps'
+summary: 'title: 成本管理与 FinOps'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - vpa
 - daemonset
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - iac-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 成本管理与 FinOps
 description: '# 成本管理与 FinOps'
@@ -1193,3 +1197,7 @@ echo "=== 检查完成 ==="
 - 29-alibaba-cloud-integration
 
 ```
+
+## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub

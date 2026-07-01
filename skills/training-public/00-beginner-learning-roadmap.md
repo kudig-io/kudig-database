@@ -1,6 +1,7 @@
 ---
 title: 小白 K8s 学习路线图（多路径版）
 description: 面向完全零基础学习者的多路径学习路线图，包含周末自学版、在职速成版、开发转运维版、运维转 SRE 版，以及 CKA 考证路线
+summary: 面向完全零基础学习者的多路径学习路线图，包含周末自学版、在职速成版、开发转运维版、运维转 SRE 版，以及 CKA 考证路线
 category: learning
 tags:
 - roadmap
@@ -13,6 +14,8 @@ tags:
 - grafana
 - helm
 - argocd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: beginner
 reading_level: beginner
@@ -45,8 +48,9 @@ prerequisites:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 小白 K8s 学习路线图（多路径版）
 

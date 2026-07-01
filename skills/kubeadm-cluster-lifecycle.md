@@ -1,6 +1,7 @@
 ---
 title: kubeadm 集群创建生命周期
 description: '## 概述'
+summary: '## 概述'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - control-plane
 - etcd
 - apiserver
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # kubeadm 集群创建生命周期
 

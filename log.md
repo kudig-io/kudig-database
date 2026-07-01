@@ -1,11 +1,7 @@
 ---
 title: Wiki Log
-description: '- [2026-06-26] BROKEN_LINKS_FIX pages_scanned=4875 broken_links=0 relationship_issues=0 total_fixed=~17000+ converted_meta_report_links=~500+
-- [2026-06-26] WIKI_SYNTHESIZE pages_scanned=5506 synthesis_created=5 candidates_skipped=0 topics=[statefulset-storage,helm-gitops,slo-observability,container-runtime-image-security,ticket-agent-rag]
-- [2026-06-26] LINT pages_scanned=4875 orphans=1787 broken_links=0 missing_frontmatter=74 missing_summary=4827 stale=0 fragmented_tags=276 relationship_issues=0
-- [2026-06-26] CROSS_LINK pages_scanned=5659 target_orphans=30 links_added=100 pages_modified=28 orphans_remaining=~3300 (targeted _reports + ticket-cases only)
-- [2026-05-21] RELEASE-NOTES-INDEX-INGEST domain-19-landscape-references/_archived-release-notes/: 创建 8 个类别索引页 —
-  references/release-notes-observability.md (可观测性, 374 篇)、release-notes-security.md (安全, 218 '
+description: KUDIG Database 全库维护与变更日志
+summary: 记录 KUDIG Database 的维护活动、ingest 事件与结构变更。
 category: general
 tags:
 - k8s
@@ -18,7 +14,10 @@ tags:
 - envoy
 - cilium
 - calico
-last_updated: 2026-05-21
+tier: supporting
+created: '2026-05-21'
+updated: '2026-06-26'
+last_updated: 2026-06-26
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -48,7 +47,16 @@ prerequisites:
 - observability-basics
 ---
 
+
+- [2026-06-26] TIER_ASSIGN pages_scanned=4876 core=1102 supporting=1372 peripheral=2511 permission_errors=2
+- [2026-06-26] FRAGMENTED_TAGS_CROSS_LINK tags=[research,deep-dive,papers,reference,visibility/public] hubs_created=5 pages_modified=434 broken_links_resolved=855->0
+
 - [2026-06-26T12:00:00+08:00] STATUS_INSIGHTS anchors=20 cohesion_checked=324 tier_suggestions=3578 delta="+20 nodes +440 edges"
+- [2026-06-26] SUMMARY_FRONTMATTER_FILL pages_scanned=4987 summary_added=4937 frontmatter_added=41 blocked=2
+- [2026-06-26] BROKEN_LINKS_FIX pages_scanned=4875 broken_links=0 relationship_issues=0 total_fixed=~17000+ converted_meta_report_links=~500+
+- [2026-06-26] WIKI_SYNTHESIZE pages_scanned=5506 synthesis_created=5 candidates_skipped=0 topics=[statefulset-storage,helm-gitops,slo-observability,container-runtime-image-security,ticket-agent-rag]
+- [2026-06-26] LINT pages_scanned=4876 orphans=1788 broken_links=0 missing_frontmatter=0 missing_summary=2 stale=0 fragmented_tags=276 relationship_issues=0
+- [2026-06-26] CROSS_LINK pages_scanned=5659 target_orphans=30 links_added=100 pages_modified=28 orphans_remaining=~3300 (targeted _reports + ticket-cases only)
 
 # Wiki Log
 

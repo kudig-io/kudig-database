@@ -1,6 +1,7 @@
 ---
 title: 55 - 虚拟集群与多租户
 description: '| 模式 | 隔离级别 | 资源效率 | 管理复杂度 | 适用场景 |'
+summary: '| 模式 | 隔离级别 | 资源效率 | 管理复杂度 | 适用场景 |'
 category: platform-ops
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - helm
 - opa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -54,8 +57,9 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
-created: "2026-05-23"
 ---
+
+
 
 # 55 - 虚拟集群与多租户
 

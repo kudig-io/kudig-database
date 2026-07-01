@@ -1,6 +1,7 @@
 ---
 title: 'Day 10: 工作负载 - Deployment + StatefulSet + DaemonSet'
 description: '- "Deployment 滚动更新怎么配置"'
+summary: '- "Deployment 滚动更新怎么配置"'
 category: learning
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - statefulset
 - daemonset
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - pod-lifecycle
 - gpu-ml-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 10: 工作负载 - Deployment + [[StatefulSet|StatefulSet]] + [[DaemonSet|DaemonSet]]
 

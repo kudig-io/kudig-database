@@ -1,6 +1,7 @@
 ---
 title: Pod Pending 调度失败诊断与修复
 description: '# Pod Pending 调度失败诊断与修复'
+summary: '# Pod Pending 调度失败诊断与修复'
 category: pod
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - pdb
 - statefulset
+tier: core
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +54,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 <!-- condition: kubectl get [[Pods|pods]] -A --field-selector=status.phase=Pending -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示有 Pending Pod -->
 
@@ -1347,7 +1351,7 @@ kubectl rollout status deployment/<deployment-name> -n <namespace> --timeout=120
 | HPA 触发的 Pod 能否正常调度 | 观察 HPA 扩容行为和新 Pod 状态 | 每 1 小时 | 可能需要进一步扩容或调整 request |
 | 集群 Autoscaler 行为 | `kubectl get events -n kube-system --field-selector reason=ScaledUpGroup` | 每 1 小时 | 如果 autoscaler 频繁触发，评估基线资源是否充足 |
 | ResourceQuota 再次接近上限 | `kubectl describe resourcequota -n <ns>` | 每 4 小时 | 提前扩容配额或优化资源使用 |
-| 被调整的 Taint / Affinity 是否被外部系统恢复 | `kubectl get nodes -o json \| jq '.items[].spec.taints'` | 每 2 小时 | 如果有自动化工具重新添加 taint，需从源头修复 |
+| 被调整的 Taint / Affinity 是否被外部系统恢复 | `kubectl get nodes -o json | jq '.items[].spec.taints'` | 每 2 小时 | 如果有自动化工具重新添加 taint，需从源头修复 |
 
 ---
 
@@ -1543,7 +1547,7 @@ Events:
 |-----|------|---------|----------|
 | ResourceClaim 未被 driver 处理 | `.status.allocation` 持续为空 | `kubectl describe resourceclaim <name>` | 检查 DRA driver Pod 日志 |
 | DeviceClass 配置错误 | Event: `DeviceClass not found` | `kubectl get deviceclasses` | 确认 DeviceClass 已创建且名称匹配 |
-| ResourceSlice 容量不足 | 所有节点均无可用设备 | `kubectl get resourceslices -o yaml \| grep -A5 devices` | 扩容 GPU 节点或检查设备分配状态 |
+| ResourceSlice 容量不足 | 所有节点均无可用设备 | `kubectl get resourceslices -o yaml | grep -A5 devices` | 扩容 GPU 节点或检查设备分配状态 |
 | structured parameters 语法错误 | ResourceClaim 创建失败 | `kubectl get resourceclaimtemplates -o yaml` | 校验 selector/request 语法 |
 | driver 与 DRA API 版本不兼容 | driver CrashLoop 或 API error | 检查 driver 镜像版本与集群版本兼容性 | 升级 DRA driver 至兼容版本 |
 

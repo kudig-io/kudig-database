@@ -1,6 +1,7 @@
 ---
 title: 主流 Agent 框架深度对比 (domain-14-ai-ml-infra)
 description: 'title: 主流 Agent 框架深度对比'
+summary: 'title: 主流 Agent 框架深度对比'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - networkpolicy
 - operator
 - llm
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 主流 Agent 框架深度对比
 description: '# 主流 Agent 框架深度对比'

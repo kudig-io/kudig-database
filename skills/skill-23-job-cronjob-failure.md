@@ -1,6 +1,7 @@
 ---
 title: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation (skills)
 description: '| S2 | CronJob 未创建新 Job | `kubectl get jobs` 按时间检查 | 0.90 | 未到调度时间 |'
+summary: '| S2 | CronJob 未创建新 Job | `kubectl get jobs` 按时间检查 | 0.90 | 未到调度时间 |'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - 定时任务
 - statefulset
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ trigger_keywords:
 - Remediation
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Job/CronJob 故障诊断与修复 / Job & [[CronJob|CronJob]] Failure Diagnosis & Remediation
 

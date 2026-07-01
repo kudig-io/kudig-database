@@ -1,6 +1,7 @@
 ---
 title: K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry)
 description: '# K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry)'
+summary: '# K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry)'
 category: enterprise-monitoring-alerting
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - mysql
 - elasticsearch
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -56,8 +59,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # K8s 分布式追踪实践指南 ([[Jaeger|Jaeger]] / Tempo / [[OpenTelemetry|OpenTelemetry]])
 

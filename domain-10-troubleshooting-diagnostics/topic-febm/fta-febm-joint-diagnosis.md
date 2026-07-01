@@ -1,6 +1,7 @@
 ---
 title: FTA-FEBM 联合诊断最佳实践 (topic-febm)
 description: 'title: FTA-FEBM 联合诊断最佳实践'
+summary: 'title: FTA-FEBM 联合诊断最佳实践'
 category: febm
 tags:
 - febm
@@ -10,6 +11,8 @@ tags:
 - envoy
 - hpa
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -34,8 +37,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 title: FTA-FEBM 联合诊断最佳实践
 description: '# FTA-FEBM 联合诊断最佳实践'

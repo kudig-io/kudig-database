@@ -1,6 +1,7 @@
 ---
 title: Agent CLI 与 MCP 协议深度集成 (domain-14-ai-ml-infra)
 description: 'title: Agent CLI 与 MCP 协议深度集成'
+summary: 'title: Agent CLI 与 MCP 协议深度集成'
 category: general
 tags:
 - ai
@@ -11,6 +12,8 @@ tags:
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ trigger_keywords:
 - infra
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Agent CLI 与 MCP 协议深度集成
 description: '# Agent CLI 与 MCP 协议深度集成'

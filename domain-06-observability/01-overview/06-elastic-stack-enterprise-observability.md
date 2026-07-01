@@ -1,6 +1,7 @@
 ---
 title: Elastic Stack企业级可观测性平台深度实践
 description: 'title: Elastic Stack企业级可观测性平台深度实践'
+summary: 'title: Elastic Stack企业级可观测性平台深度实践'
 category: general
 tags:
 - observability
@@ -13,6 +14,8 @@ tags:
 - mysql
 - kafka
 - elasticsearch
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Elastic Stack企业级可观测性平台深度实践
 description: '# Elastic Stack企业级可观测性平台深度实践'
@@ -522,7 +526,7 @@ spec:
                 - |
                   curl -s --cacert /usr/share/elasticsearch/config/certs/ca.crt \
                   -u ${ELASTIC_USERNAME}:${ELASTIC_PASSWORD} \
-                  https://127.0.0.1:9200/_cluster/health?local=true | grep -q '"status":"green"\|"status":"yellow"'
+                  https://127.0.0.1:9200/_cluster/health?local=true | grep -q '"status":"green"|"status":"yellow"'
             initialDelaySeconds: 60
             periodSeconds: 10
             

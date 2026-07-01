@@ -1,6 +1,7 @@
 ---
 title: 跨境电商架构设计 — 阿里云视角
 description: 'title: 跨境电商架构设计'
+summary: 'title: 跨境电商架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - mysql
 - kafka
 - hpa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 跨境电商架构设计
 description: '# 跨境电商架构设计 — 阿里云视角'

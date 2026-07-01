@@ -1,12 +1,15 @@
 ---
 title: '场景: 故障排查'
 description: 系统化故障排查方法论，覆盖所有知识域和组件
+summary: 系统化故障排查方法论，覆盖所有知识域和组件
 category: scenario
 tags:
 - k8s
 - scenario
 - troubleshooting
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-20'
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # 场景: 故障排查
 

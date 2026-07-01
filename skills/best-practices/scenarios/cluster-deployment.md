@@ -1,6 +1,7 @@
 ---
 title: '场景: 集群部署'
 description: Kubernetes 集群从 0 到 1 的部署指南，涵盖裸机、云托管、和混合部署模式
+summary: Kubernetes 集群从 0 到 1 的部署指南，涵盖裸机、云托管、和混合部署模式
 category: scenario
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - etcd
 - apiserver
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-20'
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 场景: 集群部署
 

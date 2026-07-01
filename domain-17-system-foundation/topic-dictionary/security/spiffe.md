@@ -1,6 +1,7 @@
 ---
 title: SPIFFE 身份标准
-description: 'SPIFFE（Secure Production Identity Framework for Everyone）是 CNCF 毕业项目，定义了工作负载身份的标...'
+description: SPIFFE（Secure Production Identity Framework for Everyone）是 CNCF 毕业项目，定义了工作负载身份的标...
+summary: SPIFFE（Secure Production Identity Framework for Everyone）是 CNCF 毕业项目，定义了工作负载身份的标...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - security
 - identity
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # SPIFFE 身份标准（SPIFFE）
 

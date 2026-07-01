@@ -1,6 +1,9 @@
 ---
 title: Kubernetes 可观测性架构体系
-description: 深入解析 K8s 可观测性三大支柱：指标（Metrics）、日志（Logging）、追踪（Tracing），介绍 Prometheus、Loki、Jaeger、OpenTelemetry 的架构设计与集成
+description: 深入解析 K8s 可观测性三大支柱：指标（Metrics）、日志（Logging）、追踪（Tracing），介绍 Prometheus、Loki、Jaeger、OpenTelemetry
+  的架构设计与集成
+summary: 深入解析 K8s 可观测性三大支柱：指标（Metrics）、日志（Logging）、追踪（Tracing），介绍 Prometheus、Loki、Jaeger、OpenTelemetry
+  的架构设计与集成
 category: domain-06-observability
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - jaeger
 - opentelemetry
 - etcd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -75,8 +80,9 @@ related_docs:
 - path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   type: cheatsheet
   desc: PromQL 速查卡
-created: "2026-05-23"
 ---
+
+
 
 # 01 - [[Kubernetes|Kubernetes]] 可观测性架构体系 (Observability Architecture)
 

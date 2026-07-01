@@ -1,6 +1,7 @@
 ---
 title: KCL 配置语言
-description: 'KCL（Kusion Configuration Language）是蚂蚁集团开源并捐赠给 CNCF 的配置语言，专为云原生场景设计，提供类型系统、模块化和策略...'
+description: KCL（Kusion Configuration Language）是蚂蚁集团开源并捐赠给 CNCF 的配置语言，专为云原生场景设计，提供类型系统、模块化和策略...
+summary: KCL（Kusion Configuration Language）是蚂蚁集团开源并捐赠给 CNCF 的配置语言，专为云原生场景设计，提供类型系统、模块化和策略...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - configuration
 - language
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # KCL 配置语言（KCL）
 

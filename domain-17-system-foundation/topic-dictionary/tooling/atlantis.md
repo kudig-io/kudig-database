@@ -1,6 +1,7 @@
 ---
 title: Atlantis Terraform 自动化
-description: 'Atlantis 是开源的 Terraform Pull Request 自动化工具，在 PR 中自动执行 terraform plan/apply，为基础设施...'
+description: Atlantis 是开源的 Terraform Pull Request 自动化工具，在 PR 中自动执行 terraform plan/apply，为基础设施...
+summary: Atlantis 是开源的 Terraform Pull Request 自动化工具，在 PR 中自动执行 terraform plan/apply，为基础设施...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - tooling
 - terraform
 - ci-cd
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Atlantis Terraform 自动化（Atlantis）
 

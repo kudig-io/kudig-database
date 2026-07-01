@@ -1,6 +1,7 @@
 ---
 title: falco v0.16 Release Notes
 description: falco v0.16 Release Notes — Kubernetes 生产运维知识库
+summary: falco v0.16 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - falco
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Falco|falco]] v0.16 Release Notes
 

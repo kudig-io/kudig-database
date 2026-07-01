@@ -1,6 +1,7 @@
 ---
 title: Admission Webhook 最佳实践
 description: '# Admission Webhook 最佳实践'
+summary: '# Admission Webhook 最佳实践'
 category: dictionary
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - crd
 - operator
 - webhook
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 # Admission Webhook 最佳实践
 

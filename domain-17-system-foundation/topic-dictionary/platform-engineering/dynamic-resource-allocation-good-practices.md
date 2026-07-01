@@ -1,6 +1,7 @@
 ---
 title: 动态资源分配（DRA）集群管理员最佳实践
 description: '# 动态资源分配（DRA）集群管理员最佳实践'
+summary: '# 动态资源分配（DRA）集群管理员最佳实践'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - job
 - rbac
+tier: peripheral
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -31,9 +34,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 动态资源分配（DRA）集群管理员最佳实践
 

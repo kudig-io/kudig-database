@@ -1,6 +1,7 @@
 ---
 title: 'Day 24: Terway 网络实操'
 description: '# Day 24: Terway 网络实操'
+summary: '# Day 24: Terway 网络实操'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ingress
 - networkpolicy
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,8 +38,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 24: Terway 网络实操
 

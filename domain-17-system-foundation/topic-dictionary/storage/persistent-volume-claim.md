@@ -1,12 +1,17 @@
 ---
 title: 持久化卷声明
-description: 'PersistentVolumeClaim（PVC）是用户对存储资源的请求。类似于 Pod 消耗节点资源，PVC 消耗 PV 资源。用户通过 PVC 指定所需的...'
+description: PersistentVolumeClaim（PVC）是用户对存储资源的请求。类似于 Pod 消耗节点资源，PVC 消耗 PV 资源。用户通过
+  PVC 指定所需的...
+summary: PersistentVolumeClaim（PVC）是用户对存储资源的请求。类似于 Pod 消耗节点资源，PVC 消耗 PV 资源。用户通过 PVC
+  指定所需的...
 category: dictionary
 tags:
 - k8s
 - glossary
 - storage
 - pvc
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 持久化卷声明
 

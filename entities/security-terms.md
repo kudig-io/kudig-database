@@ -1,6 +1,7 @@
 ---
 title: K8s 安全术语参考
 description: '# K8s 安全术语参考'
+summary: '# K8s 安全术语参考'
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - istio
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8s 安全术语参考
 

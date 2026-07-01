@@ -1,3 +1,14 @@
+---
+title: Sre Practices 2025 2026
+summary: 'Source: BackendBytes, "SRE Guide to SLOs, SLIs, and Error Budgets" (2026-02-05)
+  URL: https://backendbytes.com/articles/sre-slos-slis-error-budgets/'
+category: entities
+tags:
+- sre-practices-2025-2026
+tier: supporting
+created: '2026-07-01'
+---
+
 # Kubernetes SRE Practices Evolution 2025-2026
 ## Research Findings — Compiled 2026-05-24
 

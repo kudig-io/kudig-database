@@ -1,6 +1,9 @@
 ---
 title: Agent 评测体系与可观测性 (domain-14-ai-ml-infra)
-description: 'description: ''**文档类型**: 工程质量专题 | **最后更新**: 2026-03 | **关键词**: Agent 评测, LLM-as-Judge,'
+description: 'description: ''**文档类型**: 工程质量专题 | **最后更新**: 2026-03 | **关键词**: Agent
+  评测, LLM-as-Judge,'
+summary: 'description: ''**文档类型**: 工程质量专题 | **最后更新**: 2026-03 | **关键词**: Agent 评测,
+  LLM-as-Judge,'
 category: general
 tags:
 - ai
@@ -13,6 +16,8 @@ tags:
 - job
 - ingress
 - llm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +40,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Agent 评测体系与可观测性
 description: '**文档类型**: 工程质量专题 | **最后更新**: 2026-03 | **关键词**: Agent 评测, LLM-as-Judge,

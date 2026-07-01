@@ -1,6 +1,7 @@
 ---
 title: 数字人发布会视频 — 制作方案与提示词
 description: '# 数字人发布会视频 — 制作方案与提示词'
+summary: '# 数字人发布会视频 — 制作方案与提示词'
 category: general
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - job
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 数字人发布会视频 — 制作方案与提示词
 

@@ -1,12 +1,15 @@
 ---
 title: 卷
-description: 'Volume 是 Kubernetes 中为 Pod 容器提供文件系统访问的存储抽象。容器内的文件默认是临时的，Volume 解决了数据持久化和容器间共享存储的...'
+description: Volume 是 Kubernetes 中为 Pod 容器提供文件系统访问的存储抽象。容器内的文件默认是临时的，Volume 解决了数据持久化和容器间共享存储的...
+summary: Volume 是 Kubernetes 中为 Pod 容器提供文件系统访问的存储抽象。容器内的文件默认是临时的，Volume 解决了数据持久化和容器间共享存储的...
 category: dictionary
 tags:
 - k8s
 - glossary
 - storage
 - volume
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 卷
 

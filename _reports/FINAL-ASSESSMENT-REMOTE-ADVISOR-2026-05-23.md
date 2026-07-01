@@ -1,12 +1,19 @@
 ---
-title: "报告标题"
+title: 报告标题
+summary: 报告标题：每个对话脚本包含：
 category: reports
-tags: ["reports", "visibility/public"]
-sources: ["auto-generated"]
+tags:
+- reports
+- visibility/public
+tier: supporting
+sources:
+- auto-generated
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # KUDIG 远程顾问模式 — 满分评估报告
 
@@ -181,3 +188,7 @@ kubectl get, kubectl describe, kubectl logs, kubectl exec, kubectl rollout, ssh,
 - [[kubernetes]] — visibility/public 领域核心页面
 
 ```
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

@@ -1,6 +1,7 @@
 ---
 title: 控制面组件部署 (Static Pod Manifests) [cluster-create]
 description: 'title: 控制面组件部署 (Static Pod Manifests)'
+summary: 'title: 控制面组件部署 (Static Pod Manifests)'
 category: general
 tags:
 - reference
@@ -10,6 +11,8 @@ tags:
 - scheduler
 - controller-manager
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 控制面组件部署 (Static Pod Manifests)
 description: '# 控制面组件部署 (Static Pod Manifests)'
@@ -784,6 +788,8 @@ ls -la /etc/kubernetes/manifests/
 - [高级配置](11-advanced.md) — 自定义 static Pod 参数
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[log|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

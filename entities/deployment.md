@@ -1,7 +1,8 @@
 ---
-summary: "Deployment is the primary workload controller for stateless applications. It manages ReplicaSets, which in turn manage [[Pods|Pods]]."
 title: Deployment
 description: '- [[concepts/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
+summary: Deployment is the primary workload controller for stateless applications.
+  It manages ReplicaSets, which in turn manage [[Pods|Pods]].
 category: entities
 tags:
 - k8s
@@ -14,6 +15,8 @@ tags:
 - hpa
 - statefulset
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,8 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
 
 # Deployment
 

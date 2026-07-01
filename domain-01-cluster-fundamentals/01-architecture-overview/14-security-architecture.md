@@ -1,6 +1,7 @@
 ---
 title: 14 - Kubernetes 安全架构深度分析
 description: '# 14 - Kubernetes 安全架构深度分析'
+summary: '# 14 - Kubernetes 安全架构深度分析'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - istio
 - flux
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -59,8 +62,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 14 - [[Kubernetes|Kubernetes]] 安全架构深度分析
 
@@ -877,7 +881,7 @@ fi
 
 # 检查项 3: 网络策略默认拒绝
 echo -e "\n--- 检查项 3: 网络策略 ---"
-default_deny_count=$(kubectl get networkpolicies --all-namespaces -o jsonpath='{.items[*].spec.policyTypes}' | grep -c "Ingress\|Egress" || echo "0")
+default_deny_count=$(kubectl get networkpolicies --all-namespaces -o jsonpath='{.items[*].spec.policyTypes}' | grep -c "Ingress|Egress" || echo "0")
 if [ "$default_deny_count" -gt 0 ]; then
     echo "✅ 检测到默认拒绝策略"
 else
@@ -888,7 +892,7 @@ fi
 echo -e "\n--- 检查项 4: 容器安全配置 ---"
 insecure_pods=$(kubectl get pods --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metadata.name}{"\n"}{end}' | \
     xargs -I {} kubectl get pod {} -o jsonpath='{.spec.containers[*].securityContext.runAsNonRoot}' | \
-    grep -c "false\|<no value>" || echo "0")
+    grep -c "false|<no value>" || echo "0")
 
 if [ "$insecure_pods" -eq 0 ]; then
     echo "✅ 所有容器以非 root 运行"

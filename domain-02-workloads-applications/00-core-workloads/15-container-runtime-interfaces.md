@@ -1,6 +1,7 @@
 ---
 title: 39 - 容器运行时对比表
 description: '| **gVisor** | 沙箱 | 安全隔离 | 性能开销 | v1.25+ | 支持 |'
+summary: '| **gVisor** | 沙箱 | 安全隔离 | 性能开销 | v1.25+ | 支持 |'
 category: workloads
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cri-o
 - docker
 - daemonset
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -50,8 +53,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
-created: "2026-05-23"
 ---
+
+
 
 # 39 - 容器运行时对比表
 

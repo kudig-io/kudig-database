@@ -1,6 +1,7 @@
 ---
 title: 'Day 9: K8s 审计日志配置与分析实操'
 description: '# Day 9: K8s 审计日志配置与分析实操'
+summary: '# Day 9: K8s 审计日志配置与分析实操'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - crd
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - gpu-ml-basics
 - prometheus-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 9: K8s 审计日志配置与分析实操
 

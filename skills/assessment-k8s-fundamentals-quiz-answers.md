@@ -1,6 +1,7 @@
 ---
 title: K8S Fundamentals Quiz Answers
 description: '### 2. CrashLoopBackOff 排查（10 分）'
+summary: '### 2. CrashLoopBackOff 排查（10 分）'
 category: skills
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - apiserver
 - scheduler
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 - Answers
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8S8s 基础知识考核|K8S Fundamentals Quiz]] Answers
 

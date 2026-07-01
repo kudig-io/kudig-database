@@ -1,6 +1,7 @@
 ---
 title: Istio 安全加固 (entities)
 description: '# Istio 安全加固'
+summary: '# Istio 安全加固'
 category: entities
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - istio
 - crd
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # Istio 安全加固
 

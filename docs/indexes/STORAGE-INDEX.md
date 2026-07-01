@@ -1,6 +1,7 @@
 ---
 title: 存储知识全项目索引 (Storage Knowledge Base Index)
 description: '# 存储知识全项目索引 (Storage Knowledge Base Index)'
+summary: '# 存储知识全项目索引 (Storage Knowledge Base Index)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - mysql
 - postgresql
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - monitoring-basics
 - mysql-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # 存储知识全项目索引 (Storage Knowledge Base Index)
 

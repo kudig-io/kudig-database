@@ -1,11 +1,16 @@
 ---
 title: 产品对比表
-description: '| **结构化程度** | ⭐⭐⭐⭐⭐ 40 知识域, 标准化分类, 元数据标注 | ⭐⭐⭐⭐ 官方结构化, 但格式不统一 | ⭐⭐⭐⭐ 企业级文档管理 | ⭐ 无统一结构 |'
+description: '| **结构化程度** | ⭐⭐⭐⭐⭐ 40 知识域, 标准化分类, 元数据标注 | ⭐⭐⭐⭐ 官方结构化, 但格式不统一 | ⭐⭐⭐⭐
+  企业级文档管理 | ⭐ 无统一结构 |'
+summary: '| **结构化程度** | ⭐⭐⭐⭐⭐ 40 知识域, 标准化分类, 元数据标注 | ⭐⭐⭐⭐ 官方结构化, 但格式不统一 | ⭐⭐⭐⭐ 企业级文档管理
+  | ⭐ 无统一结构 |'
 category: general
 tags:
 - k8s
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -19,8 +24,9 @@ trigger_keywords:
 - 产品对比表
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 产品对比表
 

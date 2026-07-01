@@ -1,6 +1,7 @@
 ---
 title: 'Day 1: 新人首日检查清单'
 description: '# stern - 日志实时跟踪'
+summary: '# stern - 日志实时跟踪'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 trigger_keywords:
 - Day

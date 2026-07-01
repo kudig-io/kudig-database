@@ -1,6 +1,7 @@
 ---
 title: 加固指南 - 认证机制
 description: '# 加固指南 - 认证机制'
+summary: '# 加固指南 - 认证机制'
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - kubelet
 - rbac
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -25,8 +28,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # 加固指南 - 认证机制
 

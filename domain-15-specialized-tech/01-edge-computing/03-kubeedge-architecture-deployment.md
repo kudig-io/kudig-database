@@ -1,6 +1,7 @@
 ---
 title: KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)
 description: '# KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)'
+summary: '# KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)'
 category: edge-computing
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - flannel
 - calico
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -53,8 +56,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md
   label: '故障树: deployment'
-created: "2026-05-23"
 ---
+
+
 
 # [[KubeEdge|KubeEdge]] 架构与部署 (KubeEdge Architecture and Deployment)
 

@@ -1,12 +1,15 @@
 ---
 title: 限制范围
-description: 'LimitRange 是 Kubernetes 中用于限制命名空间内每个容器/Pod 资源使用范围的策略资源。它为命名空间中的资源使用设定上下限。...'
+description: LimitRange 是 Kubernetes 中用于限制命名空间内每个容器/Pod 资源使用范围的策略资源。它为命名空间中的资源使用设定上下限。...
+summary: LimitRange 是 Kubernetes 中用于限制命名空间内每个容器/Pod 资源使用范围的策略资源。它为命名空间中的资源使用设定上下限。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - scheduling
 - limitrange
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 限制范围
 

@@ -1,6 +1,7 @@
 ---
 title: 31 - 备份恢复故障排查 (Backup and Restore Troubleshooting)
 description: 'title: 备份恢复故障排查'
+summary: 'title: 备份恢复故障排查'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - minio
 - daemonset
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 备份恢复故障排查
 description: '# 31 - 备份恢复故障排查 (Backup and Restore Troubleshooting)'

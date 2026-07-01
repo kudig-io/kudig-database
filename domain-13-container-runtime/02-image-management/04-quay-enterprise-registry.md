@@ -1,6 +1,7 @@
 ---
 title: Quay Container Registry 企业级镜像管理深度实践
 description: '# Quay Container Registry 企业级镜像管理深度实践'
+summary: '# Quay Container Registry 企业级镜像管理深度实践'
 category: container-image-management
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ceph
 - redis
 - postgresql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Quay Container Registry 企业级镜像管理深度实践
 

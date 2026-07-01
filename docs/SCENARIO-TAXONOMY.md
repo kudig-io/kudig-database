@@ -1,12 +1,17 @@
 ---
 title: KUDIG 场景分类体系
-description: '| SC-01 | 集群部署 | `topic-scenarios/cluster-deployment.md` | domain-1, domain-4, domain-07-platform-engineering | ~20 |'
+description: '| SC-01 | 集群部署 | `topic-scenarios/cluster-deployment.md` | domain-1,
+  domain-4, domain-07-platform-engineering | ~20 |'
+summary: '| SC-01 | 集群部署 | `topic-scenarios/cluster-deployment.md` | domain-1, domain-4,
+  domain-07-platform-engineering | ~20 |'
 category: general
 tags:
 - k8s
 - etcd
 - rag
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: KUDIG 场景分类体系

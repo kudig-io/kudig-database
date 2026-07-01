@@ -1,6 +1,7 @@
 ---
 title: 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 description: 'title: 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)'
+summary: 'title: 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - hpa
 - vpa
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 01 - [[Kubernetes|Kubernetes]] 工作负载架构概览 (Workload Architecture Overview)
 description: '# 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)'
@@ -608,3 +612,7 @@ groups:
 - README-old
 - 02-deployment-production-patterns
 - 03-statefulset-advanced-operations
+
+## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub

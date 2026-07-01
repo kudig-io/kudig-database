@@ -1,6 +1,7 @@
 ---
 title: domain-05-security-compliance MOC [98-merged-indexes]
 description: domain-05-security-compliance 知识域导航页，覆盖 16 篇文档
+summary: domain-05-security-compliance 知识域导航页，覆盖 16 篇文档
 category: moc
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - security
 - opa
 - falco
+tier: core
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - security-fundamentals
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-05-security-compliance MOC
 

@@ -1,6 +1,8 @@
 ---
 title: 云凭证管理 CCO
-description: 'Cloud Credential Operator（CCO）是 Red Hat 开源的 K8s Operator，自动管理云提供商凭证（IAM Roles/Se...'
+description: Cloud Credential Operator（CCO）是 Red Hat 开源的 K8s Operator，自动管理云提供商凭证（IAM
+  Roles/Se...
+summary: Cloud Credential Operator（CCO）是 Red Hat 开源的 K8s Operator，自动管理云提供商凭证（IAM Roles/Se...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - multi-cloud
 - credentials
 - openshift
+tier: peripheral
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # 云凭证管理 CCO（Cloud Credential Operator）
 

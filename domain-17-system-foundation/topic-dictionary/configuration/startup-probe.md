@@ -1,12 +1,17 @@
 ---
 title: 启动探针
-description: 'Startup Probe（启动探针）用于检测容器是否已完成启动。在 Startup Probe 成功之前，Liveness 和 Readiness Probe...'
+description: Startup Probe（启动探针）用于检测容器是否已完成启动。在 Startup Probe 成功之前，Liveness 和 Readiness
+  Probe...
+summary: Startup Probe（启动探针）用于检测容器是否已完成启动。在 Startup Probe 成功之前，Liveness 和 Readiness
+  Probe...
 category: dictionary
 tags:
 - k8s
 - glossary
 - probe
 - health-check
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 启动探针
 

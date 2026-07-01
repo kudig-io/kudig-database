@@ -1,6 +1,7 @@
 ---
 title: 'P3: 节点与工作负载管理实践'
 description: 'title: P3: 节点与工作负载管理实践'
+summary: 'title: P3: 节点与工作负载管理实践'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - job
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: P3: 节点与工作负载管理实践

@@ -1,6 +1,9 @@
 ---
 title: 21 - CI/CD管道表
-description: 'description: 深入解析 K8s CI/CD 工具链：ArgoCD/Flux GitOps、Tekton JenkinsX、GitHub Actions、CI/CD'
+description: 'description: 深入解析 K8s CI/CD 工具链：ArgoCD/Flux GitOps、Tekton JenkinsX、GitHub
+  Actions、CI/CD'
+summary: 'description: 深入解析 K8s CI/CD 工具链：ArgoCD/Flux GitOps、Tekton JenkinsX、GitHub
+  Actions、CI/CD'
 category: general
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - docker
 - opa
 - redis
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +44,9 @@ prerequisites:
 - redis-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: CI/CD 管道

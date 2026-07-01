@@ -1,12 +1,22 @@
 ---
-title: "ConfigMap & Secret Failure Remediation Playbook"
+title: ConfigMap & Secret Failure Remediation Playbook
+summary: ConfigMap & Secret Failure Remediation Playbook：kubectl get configmap <name>
+  -n <namespace> -o jsonpath='{.data}' kubectl get secret <name> -n <namespace> -o
+  jsonpath='{.data}'
 category: remediation
-skill_set: "k8s-config-secret"
-created: "2026-05-22"
-updated: "2026-05-22"
+tags:
+- reference
+- remediation
+- playbook
+- visibility/public
+tier: supporting
+created: '2026-05-22'
+updated: '2026-05-22'
+skill_set: k8s-config-secret
 last_updated: 2026-05-22
-tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
+
+
 
 # 修复操作手册 / Remediation Playbook
 
@@ -264,3 +274,9 @@ kubectl exec <pod> -n <namespace> -- env | grep <ENV_NAME>
 ## 参见
 
 - [[remediation-playbook]] — reference 领域核心页面
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

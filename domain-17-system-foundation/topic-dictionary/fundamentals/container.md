@@ -1,6 +1,7 @@
 ---
 title: 容器
-description: '容器是一种轻量级的操作系统级虚拟化技术，通过 Linux 内核的 namespace 和 cgroup 实现进程隔离和资源限制，是 Docker/Contain...'
+description: 容器是一种轻量级的操作系统级虚拟化技术，通过 Linux 内核的 namespace 和 cgroup 实现进程隔离和资源限制，是 Docker/Contain...
+summary: 容器是一种轻量级的操作系统级虚拟化技术，通过 Linux 内核的 namespace 和 cgroup 实现进程隔离和资源限制，是 Docker/Contain...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - fundamentals
 - runtime
 - oci
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # 容器（Container）
 

@@ -1,12 +1,17 @@
 ---
 title: 服务器端应用
-description: 'Server-Side Apply（SSA，服务器端应用）是 Kubernetes 中管理资源对象的声明式方式。与 Client-Side Apply 不同，S...'
+description: Server-Side Apply（SSA，服务器端应用）是 Kubernetes 中管理资源对象的声明式方式。与 Client-Side
+  Apply 不同，S...
+summary: Server-Side Apply（SSA，服务器端应用）是 Kubernetes 中管理资源对象的声明式方式。与 Client-Side Apply
+  不同，S...
 category: dictionary
 tags:
 - k8s
 - glossary
 - platform
 - ssa
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 服务器端应用
 

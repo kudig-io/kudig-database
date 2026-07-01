@@ -1,6 +1,7 @@
 ---
 title: kudig-database 发布会主题演讲逐字稿
 description: 让我们具体看看, K8s 运维工程师每天面对的是什么。
+summary: 让我们具体看看, K8s 运维工程师每天面对的是什么。
 category: general
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - argocd
 - networkpolicy
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - prometheus-basics
 - gitops-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # kudig-database 发布会主题演讲逐字稿
 

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 部署方案指南 (Deployment Guide)
 description: '# Kubernetes 部署方案指南 (Deployment Guide)'
+summary: '# Kubernetes 部署方案指南 (Deployment Guide)'
 category: deployment
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - argocd
 - docker
 - harbor
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 部署方案指南 (Deployment Guide)
 

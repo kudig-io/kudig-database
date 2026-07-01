@@ -1,6 +1,7 @@
 ---
 title: 审计日志故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 审计日志故障排查指南'
+summary: 'title: 审计日志故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - docker
 - elasticsearch
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -37,8 +40,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
-created: "2026-05-23"
 ---
+
+
 
 title: 审计日志故障排查指南
 description: '# 审计日志故障排查指南'
@@ -683,7 +687,7 @@ rules:
 
 ```bash
 # 步骤 1: 检查 API Server 日志
-journalctl -u kube-apiserver | grep -i "audit\|webhook"
+journalctl -u kube-apiserver | grep -i "audit|webhook"
 
 # 常见错误:
 # - "context deadline exceeded" - 超时

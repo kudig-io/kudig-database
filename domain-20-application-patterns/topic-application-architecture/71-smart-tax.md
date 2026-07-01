@@ -1,6 +1,7 @@
 ---
 title: 智慧税务架构设计 — 阿里云视角
 description: 'title: 智慧税务架构设计'
+summary: 'title: 智慧税务架构设计'
 category: general
 tags:
 - architecture
@@ -9,6 +10,8 @@ tags:
 - operator
 - gpu
 - nvidia
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - prometheus-basics
 - redis-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 智慧税务架构设计
 description: '# 智慧税务架构设计 — 阿里云视角'

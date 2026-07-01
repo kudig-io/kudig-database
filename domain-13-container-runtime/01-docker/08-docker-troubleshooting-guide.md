@@ -1,12 +1,15 @@
 ---
 title: Docker 故障排查指南
 description: '# Docker 故障排查指南'
+summary: '# Docker 故障排查指南'
 category: docker
 tags:
 - docker
 - container
 - image
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -40,8 +43,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
-created: "2026-05-23"
 ---
+
+
 
 # Docker 故障排查指南
 
@@ -112,7 +116,7 @@ docker stats --no-stream
 
 ```bash
 # 检查 OOM 事件
-dmesg | grep -i "oom\|killed"
+dmesg | grep -i "oom|killed"
 
 # 检查容器内存
 docker stats --no-stream <container>

@@ -1,12 +1,15 @@
 ---
 title: '场景: 边缘计算运维'
 description: KubeEdge 等边缘 Kubernetes 集群的部署和运维
+summary: KubeEdge 等边缘 Kubernetes 集群的部署和运维
 category: scenario
 tags:
 - k8s
 - scenario
 - edge
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-20'
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # 场景: 边缘计算运维
 

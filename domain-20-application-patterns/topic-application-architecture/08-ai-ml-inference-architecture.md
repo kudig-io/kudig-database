@@ -1,6 +1,7 @@
 ---
 title: AI/ML 推理服务 Kubernetes 生产架构设计 (domain-20-application-patterns)
 description: 'title: AI/ML 推理服务 Kubernetes 生产架构设计'
+summary: 'title: AI/ML 推理服务 Kubernetes 生产架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - job
 - gateway
 - crd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - monitoring-basics
 - gpu-scheduling-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: AI/ML 推理服务 [[Kubernetes|Kubernetes]] 生产架构设计
 description: '# AI/ML 推理服务 Kubernetes 生产架构设计'

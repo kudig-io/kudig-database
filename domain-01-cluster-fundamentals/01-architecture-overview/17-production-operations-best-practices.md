@@ -1,6 +1,7 @@
 ---
 title: 17 - 生产环境运维最佳实践 (Production Operations Best Practices)
 description: '# 17 - 生产环境运维最佳实践 (Production Operations Best Practices)'
+summary: '# 17 - 生产环境运维最佳实践 (Production Operations Best Practices)'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - grafana
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -64,8 +67,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 17 - 生产环境运维最佳实践 ([[entities/k8s-production-operations.md|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])
 
@@ -1828,7 +1832,7 @@ kubectl get lease -n ${OPERATOR_NS}
 # 3. 最近错误日志
 echo -e "\n3. 最近10条错误日志:"
 kubectl logs -n ${OPERATOR_NS} deploy/${OPERATOR_DEPLOY} -c manager --tail=100 | \
-  grep -i 'error\|fail\|panic' | tail -10 || echo "✓ 未发现错误日志"
+  grep -i 'error|fail|panic' | tail -10 || echo "✓ 未发现错误日志"
 
 # 4. Terminating卡住的资源
 echo -e "\n4. 卡在Terminating的资源:"

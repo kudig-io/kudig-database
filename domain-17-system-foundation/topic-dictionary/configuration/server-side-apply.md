@@ -1,6 +1,7 @@
 ---
 title: 服务端 Apply SSA
-description: 'Server-Side Apply（SSA）是 Kubernetes 1.22+ GA 的配置管理特性，在 API Server 端执行声明式合并，支持多管理者...'
+description: Server-Side Apply（SSA）是 Kubernetes 1.22+ GA 的配置管理特性，在 API Server 端执行声明式合并，支持多管理者...
+summary: Server-Side Apply（SSA）是 Kubernetes 1.22+ GA 的配置管理特性，在 API Server 端执行声明式合并，支持多管理者...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - configuration
 - api
 - field-management
+tier: peripheral
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # 服务端 Apply SSA（Server-Side Apply）
 

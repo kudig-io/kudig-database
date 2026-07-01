@@ -1,6 +1,7 @@
 ---
 title: GitOps Principles and Practice
 description: GitOps Principles and Practice — Kubernetes 生产运维知识库
+summary: GitOps Principles and Practice — Kubernetes 生产运维知识库
 category: concepts
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - grafana
 - helm
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - monitoring-basics
 - gitops-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # GitOps Principles and Practice
 

@@ -1,6 +1,7 @@
 ---
 title: 集群自动扩缩容故障排查
 description: '# 28 - 集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)'
+summary: '# 28 - 集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)'
 category: troubleshooting
 tags:
 - cluster-autoscaler
@@ -13,6 +14,8 @@ tags:
 - pdb
 - daemonset
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: advanced
 reading_level: advanced
@@ -60,8 +63,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-autoscaler-fta.md
   label: '故障树: cluster-autoscaler'
-created: "2026-05-23"
 ---
+
+
 
 # 28 - 集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)
 
@@ -323,11 +327,11 @@ for ng in $NODE_GROUPS; do
 done
 
 # 验证Autoscaler节点组配置
-kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "nodegroup\|max\|min"
+kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "nodegroup|max|min"
 
 # ========== 3. 资源评估问题 ==========
 # 检查Autoscaler资源评估
-kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "calculating.*resources\|insufficient.*resources"
+kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "calculating.*resources|insufficient.*resources"
 
 # 分析节点资源碎片化
 kubectl describe nodes | grep -E "(CPU Requests|Memory Requests)" -A3
@@ -454,7 +458,7 @@ kubectl get pdb --all-namespaces -o jsonpath='{
 kubectl logs -n kube-system -l app=cluster-autoscaler --since=24h | grep -E "(scale up|scale down|removing node|adding node)"
 
 # 统计扩缩容频率
-kubectl logs -n kube-system -l app=cluster-autoscaler --since=1h | grep -c "scale up\|scale down"
+kubectl logs -n kube-system -l app=cluster-autoscaler --since=1h | grep -c "scale up|scale down"
 
 # 分析节点生命周期
 kubectl get nodes -o jsonpath='{
@@ -478,7 +482,7 @@ kubectl get deployment cluster-autoscaler -n kube-system -o jsonpath='{
 }' | grep -E "(scale-down-delay|scale-up-delay|expander)"
 
 # 验证稳定窗口设置
-kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "stabilization\|delay"
+kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "stabilization|delay"
 
 # 检查扩缩容阈值配置
 kubectl get deployment cluster-autoscaler -n kube-system -o jsonpath='{
@@ -647,7 +651,7 @@ kubectl get pdb --all-namespaces -o jsonpath='{
 }'
 
 # 分析驱逐失败原因
-kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "evict\|drain\|failed" --color=never
+kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "evict|drain|failed" --color=never
 
 # ========== 2. 手动驱逐测试 ==========
 # 测试节点驱逐
@@ -814,10 +818,10 @@ az vmss show --name <vmss-name> --resource-group <rg-name>
 
 # ========== 3. API调用监控 ==========
 # 监控云API调用成功率
-kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "cloud.*api\|failed.*request" --color=never
+kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "cloud.*api|failed.*request" --color=never
 
 # 检查API速率限制
-kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "rate.*limit\|throttle" --color=never
+kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "rate.*limit|throttle" --color=never
 ```
 
 ### 6.2 成本优化配置

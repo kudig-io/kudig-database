@@ -1,12 +1,15 @@
 ---
 title: 最小割集
-description: '最小割集（MCS）是使顶事件发生的最小基本事件集合。移除集合中任何一个事件，顶事件就不再由该割集导致。MCS 是 FTA 定性分析的核心结果。...'
+description: 最小割集（MCS）是使顶事件发生的最小基本事件集合。移除集合中任何一个事件，顶事件就不再由该割集导致。MCS 是 FTA 定性分析的核心结果。...
+summary: 最小割集（MCS）是使顶事件发生的最小基本事件集合。移除集合中任何一个事件，顶事件就不再由该割集导致。MCS 是 FTA 定性分析的核心结果。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - minimalcutset
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 最小割集
 

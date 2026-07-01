@@ -1,6 +1,7 @@
 ---
 title: Trivy
-description: 'Trivy 是 Aqua Security 开源的全方位安全扫描工具，现为 CNCF 孵化项目。它可以扫描容器镜像、文件系统、Git 仓库中的漏洞、错误配置和敏...'
+description: Trivy 是 Aqua Security 开源的全方位安全扫描工具，现为 CNCF 孵化项目。它可以扫描容器镜像、文件系统、Git 仓库中的漏洞、错误配置和敏...
+summary: Trivy 是 Aqua Security 开源的全方位安全扫描工具，现为 CNCF 孵化项目。它可以扫描容器镜像、文件系统、Git 仓库中的漏洞、错误配置和敏...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - security
 - scanning
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Trivy
 

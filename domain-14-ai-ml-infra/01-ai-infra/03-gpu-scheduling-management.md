@@ -1,6 +1,9 @@
 ---
 title: GPU 调度与管理
-description: 深入解析 K8s GPU 调度：NVIDIA Device Plugin、MIG 调度、GPU 资源配额、时间切片、多实例 GPU (MIG)、AMD GPU 调度与 GPU 健康监控
+description: 深入解析 K8s GPU 调度：NVIDIA Device Plugin、MIG 调度、GPU 资源配额、时间切片、多实例 GPU (MIG)、AMD
+  GPU 调度与 GPU 健康监控
+summary: 深入解析 K8s GPU 调度：NVIDIA Device Plugin、MIG 调度、GPU 资源配额、时间切片、多实例 GPU (MIG)、AMD
+  GPU 调度与 GPU 健康监控
 category: domain-11-ai-infra
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - time-slicing
 - scheduler
 - prometheus
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -70,8 +75,9 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/gpu-fta.md
   type: fta
   desc: GPU 故障树
-created: "2026-05-23"
 ---
+
+
 
 # 133 - GPU调度与管理 (GPU Scheduling & Management)
 
@@ -868,7 +874,7 @@ nvidia-smi -q -d POWER
 # ========== 故障诊断 ==========
 
 # XID错误
-dmesg | grep -i "nvrm\|xid"
+dmesg | grep -i "nvrm|xid"
 
 # ECC错误
 nvidia-smi -q -d ECC

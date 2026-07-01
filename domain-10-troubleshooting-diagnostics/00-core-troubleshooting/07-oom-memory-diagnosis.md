@@ -1,6 +1,7 @@
 ---
 title: OOM 和内存问题诊断
 description: '## Kubernetes内存管理架构'
+summary: '## Kubernetes内存管理架构'
 category: troubleshooting
 tags:
 - oom
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - scheduler
 - prometheus
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: intermediate
 reading_level: intermediate
@@ -61,8 +64,9 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
-created: "2026-05-23"
 ---
+
+
 
 # 07 - OOM和内存问题诊断
 
@@ -367,7 +371,7 @@ done 2>/dev/null
 
 # 7. OOM历史
 echo -e "\n=== 7. 最近OOM事件 ==="
-dmesg | grep -i "oom\|killed process\|out of memory" | tail -20
+dmesg | grep -i "oom|killed process|out of memory" | tail -20
 
 # 8. 内存压力指标
 echo -e "\n=== 8. 内存压力指标 ==="
@@ -493,7 +497,7 @@ echo "====== 系统级OOM分析 ======"
 
 # 1. 检查dmesg中的OOM事件
 echo "=== 1. dmesg OOM事件 ==="
-dmesg | grep -i "oom\|killed process\|out of memory" | tail -30
+dmesg | grep -i "oom|killed process|out of memory" | tail -30
 
 # 2. 解析OOM kill详情
 echo -e "\n=== 2. OOM Kill详情解析 ==="
@@ -501,7 +505,7 @@ dmesg | grep -A 20 "invoked oom-killer" | tail -30
 
 # 3. 检查journalctl
 echo -e "\n=== 3. journalctl OOM记录 ==="
-journalctl -k | grep -i "oom\|killed" | tail -20
+journalctl -k | grep -i "oom|killed" | tail -20
 
 # 4. 检查哪些进程被OOM kill
 echo -e "\n=== 4. 被kill的进程 ==="
@@ -1163,7 +1167,7 @@ spec:
 | 节点内存使用 | `kubectl top nodes` | 低于85% | 扩容或驱逐Pod |
 | OOMKilled事件 | `kubectl get events --field-selector=reason=OOMKilled` | 无结果 | 调整内存配置 |
 | 容器重启次数 | `kubectl get pods -o jsonpath='{.items[*].status.containerStatuses[*].restartCount}'` | 0或低 | 检查OOM原因 |
-| 节点MemoryPressure | `kubectl describe node \| grep MemoryPressure` | False | 检查节点资源 |
+| 节点MemoryPressure | `kubectl describe node | grep MemoryPressure` | False | 检查节点资源 |
 | 被驱逐Pod | `kubectl get pods --field-selector=status.phase=Failed` | 无Evicted | 检查驱逐原因 |
 | QoS配置 | `kubectl get pod -o jsonpath='{.status.qosClass}'` | 符合预期 | 调整resource配置 |
 

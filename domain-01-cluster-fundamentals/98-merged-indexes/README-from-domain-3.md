@@ -1,6 +1,7 @@
 ---
 title: 'Domain-3: Kubernetes控制平面'
 description: '**专家审查状态**: ✅ 已完成全域深度技术审计 (2026-04)'
+summary: '**专家审查状态**: ✅ 已完成全域深度技术审计 (2026-04)'
 category: control-plane
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - containerd
 - docker
 - vpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -57,8 +60,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-3: Kubernetes控制平面
 

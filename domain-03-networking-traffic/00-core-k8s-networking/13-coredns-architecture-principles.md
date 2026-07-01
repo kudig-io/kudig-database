@@ -1,6 +1,7 @@
 ---
 title: 53 - CoreDNS 架构与核心原理 (Architecture & Principles)
 description: '# 53 - CoreDNS 架构与核心原理 (Architecture & Principles)'
+summary: '# 53 - CoreDNS 架构与核心原理 (Architecture & Principles)'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - coredns
 - mysql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -63,8 +66,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 53 - [[CoreDNS|CoreDNS]] 架构与核心原理 (Architecture & Principles)
 
@@ -699,7 +703,7 @@ groups:
 | 面板名称 | 查询 | 用途 |
 |:---|:---|:---|
 | **QPS** | `sum(rate(coredns_dns_requests_total[1m]))` | 总请求速率 |
-| **Error Rate** | `sum(rate(coredns_dns_responses_total{rcode=~"SERVFAIL\|REFUSED"}[1m]))/sum(rate(coredns_dns_responses_total[1m]))` | 错误率 |
+| **Error Rate** | `sum(rate(coredns_dns_responses_total{rcode=~"SERVFAIL|REFUSED"}[1m]))/sum(rate(coredns_dns_responses_total[1m]))` | 错误率 |
 | **Latency P50/P99** | `histogram_quantile(0.99, sum(rate(coredns_dns_request_duration_seconds_bucket[1m])) by (le))` | 延迟分布 |
 | **Cache Hit Rate** | `sum(rate(coredns_cache_hits_total[1m]))/(sum(rate(coredns_cache_hits_total[1m]))+sum(rate(coredns_cache_misses_total[1m])))` | 缓存效率 |
 | **Forward Latency** | `histogram_quantile(0.99, sum(rate(coredns_forward_request_duration_seconds_bucket[1m])) by (le))` | 上游延迟 |

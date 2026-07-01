@@ -1,6 +1,7 @@
 ---
 title: 生产部署指南：K8s 上运行 Agent 服务 (domain-14-ai-ml-infra)
 description: 'title: 生产部署指南：K8s 上运行 Agent 服务'
+summary: 'title: 生产部署指南：K8s 上运行 Agent 服务'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - redis
 - postgresql
 - hpa
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - prometheus-basics
 - redis-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 生产部署指南：K8s 上运行 Agent 服务
 description: '# 生产部署指南：K8s 上运行 Agent 服务'

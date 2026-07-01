@@ -1,13 +1,21 @@
 ---
-title: "蓝绿部署"
+title: 蓝绿部署
+summary: 蓝绿部署（Blue-Green Deployment）是一种发布策略，通过维护两套完全相同的生产环境（蓝环境和绿环境），实现应用的瞬时切换与零停机发布。
 category: concepts
-tags: ["core-concept", "domain-08-release-change-management", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- core-concept
+- domain-08-release-change-management
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # 蓝绿部署
 
@@ -95,3 +103,7 @@ Service 的 selector 变更会立即生效，所有新请求将被路由到绿�
 ## 参见
 
 - [[kubernetes]] — core-concept 领域核心页面
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

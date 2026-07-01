@@ -1,6 +1,7 @@
 ---
 title: 'Week 3 Checkpoint: 自测检验'
 description: '- K8s 运维能力自测'
+summary: '- K8s 运维能力自测'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - containerd
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Week 3 Checkpoint: 自测检验

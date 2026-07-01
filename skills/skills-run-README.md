@@ -1,11 +1,14 @@
 ---
 title: Skills Demo — 本地运行工单诊断技能 (skills)
 description: '### 故障排查'
+summary: '### 故障排查'
 category: skills
 tags:
 - k8s
 - troubleshooting
 - skill
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 - 本地运行工单诊断技能
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Skills Demo — 本地运行工单诊断技能
 

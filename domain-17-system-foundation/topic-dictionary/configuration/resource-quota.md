@@ -1,6 +1,7 @@
 ---
 title: 资源配额
-description: 'ResourceQuota 是 Kubernetes 命名空间级别的资源配额机制，限制命名空间可使用的计算资源（CPU/Memory）和对象数量（Pod/PVC...'
+description: ResourceQuota 是 Kubernetes 命名空间级别的资源配额机制，限制命名空间可使用的计算资源（CPU/Memory）和对象数量（Pod/PVC...
+summary: ResourceQuota 是 Kubernetes 命名空间级别的资源配额机制，限制命名空间可使用的计算资源（CPU/Memory）和对象数量（Pod/PVC...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - configuration
 - multi-tenancy
 - resource-management
+tier: supporting
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # 资源配额（ResourceQuota）
 

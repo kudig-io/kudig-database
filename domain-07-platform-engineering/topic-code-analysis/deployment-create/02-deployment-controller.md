@@ -1,12 +1,17 @@
 ---
 title: Deployment 控制器入口源码分析 (topic-code-analysis)
-description: '| `getReplicaSetsForDeployment` | `([]*apps.ReplicaSet, error)` | 返回 Deployment 管理的所有 RS 列表 |'
+description: '| `getReplicaSetsForDeployment` | `([]*apps.ReplicaSet, error)` | 返回
+  Deployment 管理的所有 RS 列表 |'
+summary: '| `getReplicaSetsForDeployment` | `([]*apps.ReplicaSet, error)` | 返回 Deployment
+  管理的所有 RS 列表 |'
 category: general
 tags:
 - reference
 - deployment
 - controller-manager
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Deployment 控制器入口源码分析
 category: deployment
@@ -599,6 +605,8 @@ kubectl get rs -l app=web-app
 - [`cleanupOldReplicaSets`](README.md) — 清理超出 historyLimit 的旧 RS
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

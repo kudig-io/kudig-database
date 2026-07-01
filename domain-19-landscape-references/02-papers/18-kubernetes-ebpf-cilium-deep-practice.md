@@ -1,6 +1,7 @@
 ---
 title: Kubernetes eBPF与Cilium深度实践 (eBPF and Cilium Deep Practice)
 description: '# Kubernetes eBPF与Cilium深度实践 (eBPF and Cilium Deep Practice)'
+summary: '# Kubernetes eBPF与Cilium深度实践 (eBPF and Cilium Deep Practice)'
 category: papers
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flannel
 - calico
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -60,8 +63,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md
   label: '故障树: cilium'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] eBPF与Cilium深度实践 (eBPF and [[Cilium|Cilium]] Deep Practice)
 
@@ -1098,3 +1102,9 @@ eBPF生态发展趋势(2026-2027):
 - 17-kubernetes-aiml-gpu-scheduling-llm-inference
 - 19-kubernetes-gateway-api-modern-traffic-management
 - 20-kubernetes-supply-chain-security-sbom-slsa-sigstore
+
+## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub

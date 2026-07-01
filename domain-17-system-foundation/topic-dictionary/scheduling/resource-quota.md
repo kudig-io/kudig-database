@@ -1,12 +1,15 @@
 ---
 title: 资源配额
-description: 'ResourceQuota 是 Kubernetes 中限制命名空间总资源使用的策略资源。它控制一个命名空间中所有对象消耗的计算资源、存储资源和对象数量的总和。...'
+description: ResourceQuota 是 Kubernetes 中限制命名空间总资源使用的策略资源。它控制一个命名空间中所有对象消耗的计算资源、存储资源和对象数量的总和。...
+summary: ResourceQuota 是 Kubernetes 中限制命名空间总资源使用的策略资源。它控制一个命名空间中所有对象消耗的计算资源、存储资源和对象数量的总和。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - scheduling
 - resource-quota
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 资源配额
 

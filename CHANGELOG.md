@@ -1,12 +1,20 @@
 ---
 title: 变更日志
+summary: 变更日志：本文件记录 KUDIG 云原生运维知识库的 notable 变更。遵循 Keep a Changelog 风格，按 git 历史归类。
 category: meta
-tags: ["meta", "visibility/public", "changelog"]
-sources: ["git-log"]
+tags:
+- meta
+- visibility/public
+- changelog
+tier: supporting
+sources:
+- git-log
 created: 2026-01-16
 updated: 2026-07-01
 last_updated: 2026-07-01
 ---
+
+
 
 # 变更日志
 
@@ -73,3 +81,7 @@ last_updated: 2026-07-01
 ---
 
 > 本变更日志基于 git 提交历史人工整理。详细的逐提交记录请运行 `git log --oneline`。
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

@@ -1,6 +1,7 @@
 ---
 title: CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive)
 description: '# CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive)'
+summary: '# CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive)'
 category: control-plane
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - helm
 - docker
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -72,8 +75,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive)
 
@@ -2228,7 +2232,7 @@ kubectl logs -n kube-system -l app=csi-node -c csi-driver
 kubectl logs -n kube-system -l app=csi-node -c node-driver-registrar
 
 # 检查 kubelet 存储日志
-journalctl -u kubelet | grep -i "volume\|csi\|mount"
+journalctl -u kubelet | grep -i "volume|csi|mount"
 
 # 检查节点上的挂载
 kubectl debug node/<node-name> -it --image=busybox -- mount | grep csi

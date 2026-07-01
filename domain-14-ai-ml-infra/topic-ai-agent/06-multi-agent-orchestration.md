@@ -1,6 +1,7 @@
 ---
 title: 多 Agent 编排与协作架构 (domain-14-ai-ml-infra)
 description: 'title: 多 Agent 编排与协作架构'
+summary: 'title: 多 Agent 编排与协作架构'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - kafka
 - hpa
 - gateway
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - monitoring-basics
 - kafka-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 多 Agent 编排与协作架构
 description: '# 多 Agent 编排与协作架构'

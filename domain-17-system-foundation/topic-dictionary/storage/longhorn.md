@@ -1,6 +1,7 @@
 ---
 title: Longhorn
-description: 'Longhorn 是 SUSE（原 Rancher）开源的 Kubernetes 原生分布式块存储系统，现为 CNCF 孵化项目。它以轻量、易用和自动化著称，特...'
+description: Longhorn 是 SUSE（原 Rancher）开源的 Kubernetes 原生分布式块存储系统，现为 CNCF 孵化项目。它以轻量、易用和自动化著称，特...
+summary: Longhorn 是 SUSE（原 Rancher）开源的 Kubernetes 原生分布式块存储系统，现为 CNCF 孵化项目。它以轻量、易用和自动化著称，特...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - longhorn
 - storage
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Longhorn
 

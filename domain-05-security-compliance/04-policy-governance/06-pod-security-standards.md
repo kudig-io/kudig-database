@@ -1,6 +1,7 @@
 ---
 title: 06 - Pod安全标准详解
 description: '# 06 - Pod安全标准详解'
+summary: '# 06 - Pod安全标准详解'
 category: security
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - apiserver
 - istio
 - networkpolicy
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -52,8 +55,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # 06 - Pod安全标准详解
 

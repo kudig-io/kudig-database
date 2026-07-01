@@ -1,6 +1,7 @@
 ---
 title: 高性能存储网络（RDMA / NVMe-oF）
 description: '# 高性能存储网络（RDMA / NVMe-oF）'
+summary: '# 高性能存储网络（RDMA / NVMe-oF）'
 category: dictionary
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - nvidia
 - llm
 - rag
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,9 +33,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 高性能存储网络（RDMA / NVMe-oF）
 

@@ -1,6 +1,7 @@
 ---
 title: Prompt Caching 与成本优化
 description: '# Prompt Caching 与成本优化'
+summary: '# Prompt Caching 与成本优化'
 category: ai-coding
 tags:
 - ai
@@ -9,6 +10,8 @@ tags:
 - code-generation
 - llm
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Prompt Caching 与成本优化
 

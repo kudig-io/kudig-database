@@ -1,6 +1,7 @@
 ---
 title: 网络插件
 description: '# 网络插件'
+summary: '# 网络插件'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - containerd
 - cri-o
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,8 +33,9 @@ prerequisites:
 - cloud-provider-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # 网络插件
 

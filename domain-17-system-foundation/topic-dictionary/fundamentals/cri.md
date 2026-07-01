@@ -1,12 +1,17 @@
 ---
 title: 容器运行时接口
-description: 'CRI（Container Runtime Interface，容器运行时接口）是 Kubernetes 定义的一组 gRPC 接口标准，用于 kubelet ...'
+description: CRI（Container Runtime Interface，容器运行时接口）是 Kubernetes 定义的一组 gRPC 接口标准，用于
+  kubelet ...
+summary: CRI（Container Runtime Interface，容器运行时接口）是 Kubernetes 定义的一组 gRPC 接口标准，用于 kubelet
+  ...
 category: dictionary
 tags:
 - k8s
 - glossary
 - cri
 - container-runtime
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 容器运行时接口
 

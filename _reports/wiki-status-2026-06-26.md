@@ -1,3 +1,14 @@
+---
+title: Wiki Status 2026 06 26
+summary: No .manifest.json exists at the vault root. From the wiki-status perspective,
+  this vault has not been ingested yet.
+category: general
+tags:
+- wiki-status-2026-06-26
+tier: supporting
+created: '2026-07-01'
+---
+
 # Wiki Status — 2026-06-26
 
 ## Overview

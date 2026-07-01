@@ -1,11 +1,14 @@
 ---
 title: Service ClusterIP allocation
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
 - glossary
 - terminology
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Service|Service]] ClusterIP allocation
 
@@ -136,7 +140,7 @@ CIDR 大小        可用 IP    Offset  静态带范围              动态带�
 
 | 症状 | 可能原因 | 排查步骤 |
 |------|----------|----------|
-| Service 创建失败：ClusterIP 冲突 | 指定的 IP 已被占用 | `kubectl get svc -A -o jsonpath='{.items[*].spec.clusterIP}' \| tr ' ' '\n' \| sort` 查看已分配 IP |
+| Service 创建失败：ClusterIP 冲突 | 指定的 IP 已被占用 | `kubectl get svc -A -o jsonpath='{.items[*].spec.clusterIP}' | tr ' ' '\n' | sort` 查看已分配 IP |
 | 动态带 IP 耗尽 | Service 数量过多或 CIDR 范围过小 | 评估扩大 `--service-cluster-ip-range` |
 | 手动 IP 在 upper band 被占用 | 静态分配使用了动态带地址 | 静态分配应使用 lower band 地址 |
 | ClusterIP 需要修改 | ClusterIP 创建后不可变 | 删除 Service 重建（注意 DNS 缓存） |

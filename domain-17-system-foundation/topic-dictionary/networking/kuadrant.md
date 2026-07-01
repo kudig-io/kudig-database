@@ -1,6 +1,9 @@
 ---
 title: Kuadrant API 管理
-description: 'Kuadrant 是 Red Hat 开源的 CNCF Sandbox 项目，基于 Gateway API 提供 API 管理能力（认证/授权/限流），为 Ku...'
+description: Kuadrant 是 Red Hat 开源的 CNCF Sandbox 项目，基于 Gateway API 提供 API 管理能力（认证/授权/限流），为
+  Ku...
+summary: Kuadrant 是 Red Hat 开源的 CNCF Sandbox 项目，基于 Gateway API 提供 API 管理能力（认证/授权/限流），为
+  Ku...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - networking
 - api-management
 - gateway
+tier: supporting
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Kuadrant API 管理（Kuadrant）
 

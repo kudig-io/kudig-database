@@ -1,12 +1,15 @@
 ---
 title: 专有云 (Apsara Stack) - SLS 日志服务
 description: 'title: 专有云 (Apsara Stack) - SLS 日志服务'
+summary: 'title: 专有云 (Apsara Stack) - SLS 日志服务'
 category: general
 tags:
 - cloud
 - multi-cloud
 - docker
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
-created: "2026-05-23"
 ---
+
+
 
 title: 专有云 (Apsara Stack) - SLS 日志服务
 description: '# 专有云 (Apsara Stack) - SLS 日志服务'

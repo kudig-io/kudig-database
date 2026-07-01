@@ -1,12 +1,17 @@
 ---
 title: kube-proxy
-description: 'kube-proxy 是运行在每个节点上的网络代理，负责维护节点上的网络规则以实现 Service 的负载均衡功能。它是 Kubernetes Service ...'
+description: kube-proxy 是运行在每个节点上的网络代理，负责维护节点上的网络规则以实现 Service 的负载均衡功能。它是 Kubernetes
+  Service ...
+summary: kube-proxy 是运行在每个节点上的网络代理，负责维护节点上的网络规则以实现 Service 的负载均衡功能。它是 Kubernetes Service
+  ...
 category: dictionary
 tags:
 - k8s
 - glossary
 - kube-proxy
 - networking
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -21,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # kube-proxy
 

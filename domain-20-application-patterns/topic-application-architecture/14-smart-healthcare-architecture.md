@@ -1,6 +1,7 @@
 ---
 title: 智慧医疗 Kubernetes 生产架构设计
 description: 'title: 智慧医疗Kubernetes生产架构设计'
+summary: 'title: 智慧医疗Kubernetes生产架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - falco
 - minio
 - postgresql
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - cilium-basics
 - logging-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 智慧医疗Kubernetes生产架构设计
 description: '# 智慧医疗 [[Kubernetes|Kubernetes]] 生产架构设计'

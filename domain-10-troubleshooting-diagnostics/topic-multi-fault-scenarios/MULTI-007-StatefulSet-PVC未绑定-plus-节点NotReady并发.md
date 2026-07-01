@@ -1,14 +1,23 @@
 ---
-scenario_id: "MULTI-007"
-type: "multi-fault"
-skills: ['21-statefulset-failure', '01-node-notready', '07-pvc-storage-failure']
-created: "2026-05-23"
-updated: "2026-05-23"
-last_updated: 2026-05-23
-title: "StatefulSet PVC未绑定 + 节点NotReady并发"
+title: StatefulSet PVC未绑定 + 节点NotReady并发
+summary: StatefulSet PVC未绑定 + 节点NotReady并发：数据库StatefulSet无法启动，PVC未绑定，同时承载PV的存储节点进入NotReady状态。
 category: uncategorized
-tags: ["uncategorized", "visibility/public"]
+tags:
+- uncategorized
+- visibility/public
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+scenario_id: MULTI-007
+type: multi-fault
+skills:
+- 21-statefulset-failure
+- 01-node-notready
+- 07-pvc-storage-failure
+last_updated: 2026-05-23
 ---
+
+
 
 # StatefulSet PVC未绑定 + 节点NotReady并发
 
@@ -47,3 +56,7 @@ tags: ["uncategorized", "visibility/public"]
 2. 配置级联告警（当多个关联指标同时异常时触发）
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

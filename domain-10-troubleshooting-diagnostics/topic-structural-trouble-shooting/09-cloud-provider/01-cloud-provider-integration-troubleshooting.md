@@ -1,6 +1,7 @@
 ---
 title: 云厂商集成故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 云厂商集成故障排查指南'
+summary: 'title: 云厂商集成故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - job
 - ingress
 - gateway
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -39,8 +42,9 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 云厂商集成故障排查指南
 description: '# 云厂商集成故障排查指南'
@@ -1179,7 +1183,7 @@ SECURITY_REPORT="/var/log/kubernetes/cloud-security-report-$(date +%Y%m%d).log"
   echo "1. 凭证安全检查:"
   
   # 检查硬编码凭证
-  if grep -r "access_key\|secret_key" /etc/kubernetes/ 2>/dev/null; then
+  if grep -r "access_key|secret_key" /etc/kubernetes/ 2>/dev/null; then
     echo "⚠ 发现可能的硬编码凭证"
   else
     echo "✓ 未发现硬编码凭证"

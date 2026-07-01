@@ -1,6 +1,7 @@
 ---
 title: Domain-2 设计原则 — 开源项目索引
 description: '# Domain-2 设计原则 — 开源项目索引'
+summary: '# Domain-2 设计原则 — 开源项目索引'
 category: design-principles
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - etcd
 - crd
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -46,8 +49,9 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-2 设计原则 — 开源项目索引
 

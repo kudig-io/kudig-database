@@ -1,12 +1,20 @@
 ---
-title: "Domain 20 内容索引"
+title: Domain 20 内容索引
+summary: Domain 20 内容索引
 category: domain-20-application-patterns
-tags: ["index", "domain-20-application-patterns", "navigation"]
-sources: ["auto-generated"]
+tags:
+- index
+- domain-20-application-patterns
+- navigation
+tier: supporting
+sources:
+- auto-generated
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 ---
+
+
 
 # Domain 20 内容索引
 

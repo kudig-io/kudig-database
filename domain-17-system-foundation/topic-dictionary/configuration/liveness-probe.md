@@ -1,12 +1,17 @@
 ---
 title: 存活探针
-description: 'Liveness Probe（存活探针）用于检测容器是否处于运行状态。如果探测失败，kubelet 会终止容器并根据 restartPolicy 决定是否重启。...'
+description: Liveness Probe（存活探针）用于检测容器是否处于运行状态。如果探测失败，kubelet 会终止容器并根据 restartPolicy
+  决定是否重启。...
+summary: Liveness Probe（存活探针）用于检测容器是否处于运行状态。如果探测失败，kubelet 会终止容器并根据 restartPolicy
+  决定是否重启。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - probe
 - health-check
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 存活探针
 

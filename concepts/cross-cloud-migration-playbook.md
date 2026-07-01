@@ -1,6 +1,7 @@
 ---
 title: 跨云迁移手册
 description: '策略 1: 重新部署 (Rehost)'
+summary: '策略 1: 重新部署 (Rehost)'
 category: synthesis
 tags:
 - multi-cloud
@@ -10,6 +11,8 @@ tags:
 - strategy
 - helm
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,11 +28,12 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - backup-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/helm.md]]"
-    type: uses
+- target: '[[entities/helm.md]]'
+  type: uses
 ---
+
+
 
 # 跨云迁移手册
 

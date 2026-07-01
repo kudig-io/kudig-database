@@ -1,3 +1,13 @@
+---
+title: Obsidian Wiki Framework
+summary: '![Ask DeepWiki](https://deepwiki.com/Ar9av/obsidian-wiki)'
+category: docs
+tags:
+- obsidian-wiki-framework
+tier: supporting
+created: '2026-07-01'
+---
+
 # obsidian-wiki
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Ar9av/obsidian-wiki)

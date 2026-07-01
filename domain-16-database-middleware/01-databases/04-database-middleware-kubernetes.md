@@ -1,6 +1,7 @@
 ---
 title: 数据库中间件 Kubernetes 企业级实践
 description: '# 数据库中间件 Kubernetes 企业级实践'
+summary: '# 数据库中间件 Kubernetes 企业级实践'
 category: enterprise-database-middleware
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - helm
 - postgresql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -53,8 +56,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/sql.md
   label: '速查卡: sql'
-created: "2026-05-23"
 ---
+
+
 
 # 数据库中间件 [[Kubernetes|Kubernetes]] 企业级实践
 

@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 监控最佳实践
 description: '# Kubernetes 监控最佳实践'
+summary: '# Kubernetes 监控最佳实践'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - ingress
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 监控最佳实践
 

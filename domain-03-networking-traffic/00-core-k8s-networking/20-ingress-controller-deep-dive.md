@@ -1,6 +1,7 @@
 ---
 title: 128 - Ingress Controller 深入剖析
 description: '## 一、Ingress Controller 架构总览'
+summary: '## 一、Ingress Controller 架构总览'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - envoy
 - helm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -62,8 +65,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 128 - [[Ingress|Ingress]] Controller 深入剖析
 

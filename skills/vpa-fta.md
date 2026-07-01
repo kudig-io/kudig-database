@@ -1,6 +1,7 @@
 ---
 title: VPA 异常故障树分析 (skills)
 description: COMP_UPD_OR --> COMP_UPD2[Updater 配置错误]
+summary: COMP_UPD_OR --> COMP_UPD2[Updater 配置错误]
 category: general
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - webhook
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 fta_id: FTA-VPA-001
 component: Vpa
 severity: medium
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "VPA 异常故障树分析"

@@ -1,6 +1,7 @@
 ---
 title: etcd
-description: 'etcd 是一个高可用的分布式键值存储系统，是 Kubernetes 集群的核心数据存储。集群的所有状态信息（包括 Pod、Service、ConfigMap、...'
+description: etcd 是一个高可用的分布式键值存储系统，是 Kubernetes 集群的核心数据存储。集群的所有状态信息（包括 Pod、Service、ConfigMap、...
+summary: etcd 是一个高可用的分布式键值存储系统，是 Kubernetes 集群的核心数据存储。集群的所有状态信息（包括 Pod、Service、ConfigMap、...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - etcd
 - control-plane
 - storage
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # etcd
 

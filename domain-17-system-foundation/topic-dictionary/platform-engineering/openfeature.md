@@ -1,6 +1,9 @@
 ---
 title: OpenFeature 特性标志
-description: 'OpenFeature 是 CNCF 孵化项目，定义了特性标志（Feature Flags）的通用 API 标准，使应用代码与特性标志提供商解耦，支持 Laun...'
+description: OpenFeature 是 CNCF 孵化项目，定义了特性标志（Feature Flags）的通用 API 标准，使应用代码与特性标志提供商解耦，支持
+  Laun...
+summary: OpenFeature 是 CNCF 孵化项目，定义了特性标志（Feature Flags）的通用 API 标准，使应用代码与特性标志提供商解耦，支持
+  Laun...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - platform-engineering
 - feature-flags
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # OpenFeature 特性标志（OpenFeature）
 

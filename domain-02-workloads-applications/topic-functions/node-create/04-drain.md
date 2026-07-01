@@ -1,6 +1,7 @@
 ---
 title: 节点驱逐与维护 (kubectl drain/cordon/uncordon)
 description: 'description: ''| `force` | `bool` | 继续即使 Pod 管理器不存在 | 默认 false |'''
+summary: 'description: ''| `force` | `bool` | 继续即使 Pod 管理器不存在 | 默认 false |'''
 category: general
 tags:
 - reference
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - job
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - cni-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 节点驱逐与维护 kubectl drain
 description: '| `force` | `bool` | 继续即使 Pod 管理器不存在 | 默认 false |'
@@ -849,6 +853,8 @@ kubectl get events --field-selector reason=Evicted -A
 - [安全机制](../cluster-create/16-security.md) — PodDisruptionBudget 安全策略
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]

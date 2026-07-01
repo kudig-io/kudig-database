@@ -1,6 +1,7 @@
 ---
 title: 流处理技术概述
 description: '# 流处理技术概述'
+summary: '# 流处理技术概述'
 category: domain
 tags:
 - stream-processing
@@ -10,6 +11,8 @@ tags:
 - data-engineering
 - kafka
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - kafka-basics
-created: "2026-05-23"
 ---
+
+
 
 # 流处理技术概述
 

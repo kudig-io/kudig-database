@@ -1,6 +1,7 @@
 ---
 title: 火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南
 description: 'title: 火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南'
+summary: 'title: 火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南'
 category: general
 tags:
 - cloud
@@ -13,6 +14,8 @@ tags:
 - kafka
 - statefulset
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 火山引擎 VEK (Volcengine [[Kubernetes|Kubernetes]]) 字节级深度实战指南
 description: '# 火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南'
@@ -794,6 +798,8 @@ EOF
 火山引擎VEK凭借字节跳动在超大规模容器平台方面的深厚积累，为AI/ML、大数据、内容推荐等场景提供了极致性能的容器化解决方案。通过字节级的调度优化、AI原生支持和大规模集群管理能力，成为高并发、高性能应用的理想选择。特别是在推荐系统、短视频处理、实时搜索等字节跳动擅长的业务领域，VEK展现出显著的技术优势和业务价值。
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

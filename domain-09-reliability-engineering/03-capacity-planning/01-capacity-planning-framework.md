@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 容量规划框架
 description: 面向阿里云/专有云 K8s 的容量规划框架，涵盖指标体系、趋势预测、容量决策流程与成本优化。
+summary: 面向阿里云/专有云 K8s 的容量规划框架，涵盖指标体系、趋势预测、容量决策流程与成本优化。
 category: reliability
 tags:
 - k8s
@@ -11,6 +12,9 @@ tags:
 - metrics
 - alicloud
 - apsara-stack
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -43,9 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # Kubernetes 容量规划框架
 

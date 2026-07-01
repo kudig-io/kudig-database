@@ -1,6 +1,7 @@
 ---
 title: 集群升级异常故障树分析 (skills)
 description: NODE_KUBELET_OR --> NODE_KUBELET3[kubelet 配置不兼容]
+summary: NODE_KUBELET_OR --> NODE_KUBELET3[kubelet 配置不兼容]
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - daemonset
 - crd
 - webhook
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 fta_id: FTA-CLUSTER_UPGRADE-001
 component: Cluster Upgrade
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 # 集群升级异常故障树分析
 

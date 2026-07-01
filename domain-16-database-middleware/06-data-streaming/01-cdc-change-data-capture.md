@@ -1,6 +1,7 @@
 ---
 title: CDC 变更数据捕获
 description: │   → 数据库触发器写变更日志表
+summary: │   → 数据库触发器写变更日志表
 category: domain
 tags:
 - cdc
@@ -11,6 +12,8 @@ tags:
 - mysql
 - kafka
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - kafka-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # CDC 变更数据捕获
 

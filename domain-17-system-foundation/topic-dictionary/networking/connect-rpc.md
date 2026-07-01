@@ -1,6 +1,8 @@
 ---
 title: Connect RPC 协议
-description: 'Connect 是 Buf 开发的开源 RPC 协议，兼容 gRPC 和 Protobuf，但使用标准 HTTP 语义（HTTP/1.1 和 HTTP/2），简...'
+description: Connect 是 Buf 开发的开源 RPC 协议，兼容 gRPC 和 Protobuf，但使用标准 HTTP 语义（HTTP/1.1
+  和 HTTP/2），简...
+summary: Connect 是 Buf 开发的开源 RPC 协议，兼容 gRPC 和 Protobuf，但使用标准 HTTP 语义（HTTP/1.1 和 HTTP/2），简...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - networking
 - rpc
 - protocol
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Connect RPC 协议（Connect RPC）
 

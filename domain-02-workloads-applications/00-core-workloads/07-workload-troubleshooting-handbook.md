@@ -1,6 +1,8 @@
 ---
 title: 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook)
-description: '# 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook)'
+description: '# 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response
+  Handbook)'
+summary: '# 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook)'
 category: workloads
 tags:
 - k8s
@@ -13,6 +15,8 @@ tags:
 - scheduler
 - hpa
 - vpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -59,8 +63,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
-created: "2026-05-23"
 ---
+
+
 
 # 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook)
 

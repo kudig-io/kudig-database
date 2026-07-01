@@ -1,6 +1,9 @@
 ---
 title: AgentScope 核心概念与基础操作 (domain-14-ai-ml-infra)
-description: 'description: ''**文档类型**: 核心概念专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, 核心概念, State,'
+description: 'description: ''**文档类型**: 核心概念专题 | **最后更新**: 2026-03 | **关键词**: AgentScope,
+  核心概念, State,'
+summary: 'description: ''**文档类型**: 核心概念专题 | **最后更新**: 2026-03 | **关键词**: AgentScope,
+  核心概念, State,'
 category: general
 tags:
 - ai
@@ -12,6 +15,8 @@ tags:
 - llm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +37,9 @@ prerequisites:
 - kubectl-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: AgentScope 核心概念与基础操作
 description: '**文档类型**: 核心概念专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, 核心概念, State,

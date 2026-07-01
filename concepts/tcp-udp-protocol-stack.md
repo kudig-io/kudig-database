@@ -1,6 +1,7 @@
 ---
 title: TCP/UDP Protocol Stack
 description: TCP/UDP Protocol Stack — Kubernetes 生产运维知识库
+summary: TCP/UDP Protocol Stack — Kubernetes 生产运维知识库
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - coredns
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # TCP/UDP Protocol Stack
 

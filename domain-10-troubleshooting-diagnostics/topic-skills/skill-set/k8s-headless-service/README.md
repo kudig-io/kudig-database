@@ -1,13 +1,22 @@
 ---
-title: "Skill: Headless Service DNS 解析失败的诊断和修复"
+title: 'Skill: Headless Service DNS 解析失败的诊断和修复'
+summary: 'Skill: Headless Service DNS 解析失败的诊断和修复：Headless Service 的 DNS 解析返回异常结果，导致
+  StatefulSet Pod 无法通过稳定网络标识互相发现，或客户端无法获取后端 Pod IP 列表。远程顾问模式下需从 Service 定义、DNS 配置和网络策略三个层面排查。'
 category: skill
-tags: ["skill", "domain-10", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- skill
+- domain-10
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # Skill: Headless Service DNS 解析失败的诊断和修复
 
@@ -67,3 +76,7 @@ kubectl get networkpolicy -n <namespace>
 - [[concepts/headless-service.md|Headless Service]] — Headless Service DNS 解析与 StatefulSet 网络标识
 - [[concepts/cni-networking-model.md|CNI 网络模型]] — Kubernetes 容器网络接口与 Pod 间通信原理
 - [[concepts/service-networking.md|Service 网络模型]] — Kubernetes Service 核心概念与流量转发机制
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

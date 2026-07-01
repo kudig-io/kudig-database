@@ -1,6 +1,7 @@
 ---
 title: Oxia 元数据协调
-description: 'Oxia 是 DataStax 开源的分布式元数据协调服务，设计为 Apache Pulsar 的 ZooKeeper 替代品，提供高性能的分布式锁、序列号和元...'
+description: Oxia 是 DataStax 开源的分布式元数据协调服务，设计为 Apache Pulsar 的 ZooKeeper 替代品，提供高性能的分布式锁、序列号和元...
+summary: Oxia 是 DataStax 开源的分布式元数据协调服务，设计为 Apache Pulsar 的 ZooKeeper 替代品，提供高性能的分布式锁、序列号和元...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - storage
 - metadata
 - coordination
+tier: supporting
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Oxia 元数据协调（Oxia）
 

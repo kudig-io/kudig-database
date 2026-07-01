@@ -1,6 +1,7 @@
 ---
 title: ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)
 description: 'title: ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)'
+summary: 'title: ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)'
 category: general
 tags:
 - cloud
@@ -9,6 +10,8 @@ tags:
 - redis
 - mysql
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)
 description: '# ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)'

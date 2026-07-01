@@ -1,6 +1,7 @@
 ---
 title: 生态组件变更日志索引
 description: '# 生态组件变更日志索引'
+summary: '# 生态组件变更日志索引'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - trivy
 - rook
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - backup-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # 生态组件变更日志索引
 

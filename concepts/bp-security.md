@@ -1,6 +1,7 @@
 ---
 title: 最佳实践：Security
 description: 本页汇总了 **Security** 领域的 Kubernetes 最佳实践。
+summary: 本页汇总了 **Security** 领域的 Kubernetes 最佳实践。
 category: concepts
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - security
 - istio
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,8 +25,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 本页汇总了 **Security** 领域的 Kubernetes 最佳实践。
 

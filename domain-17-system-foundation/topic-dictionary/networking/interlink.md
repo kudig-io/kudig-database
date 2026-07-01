@@ -1,6 +1,8 @@
 ---
 title: InterLink HPC 互联
-description: 'InterLink 是 INFN（意大利国家核物理研究所）开源的 CNCF Sandbox 项目，基于 Virtual Kubelet 将 HPC（高性能计算）...'
+description: InterLink 是 INFN（意大利国家核物理研究所）开源的 CNCF Sandbox 项目，基于 Virtual Kubelet 将
+  HPC（高性能计算）...
+summary: InterLink 是 INFN（意大利国家核物理研究所）开源的 CNCF Sandbox 项目，基于 Virtual Kubelet 将 HPC（高性能计算）...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - networking
 - hpc
 - virtual-kubelet
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # InterLink HPC 互联（InterLink）
 

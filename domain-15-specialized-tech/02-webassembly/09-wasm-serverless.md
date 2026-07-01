@@ -1,6 +1,7 @@
 ---
 title: Wasm Serverless (Wasm Serverless)
 description: WebAssembly 为 Serverless 计算带来毫秒级冷启动、安全沙箱隔离和超轻量部署，重新定义边缘与云端 FaaS 架构。
+summary: WebAssembly 为 Serverless 计算带来毫秒级冷启动、安全沙箱隔离和超轻量部署，重新定义边缘与云端 FaaS 架构。
 category: webassembly-cloud-native
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - redis
 - postgresql
 - kafka
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -50,8 +53,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Wasm Serverless (Wasm Serverless)
 

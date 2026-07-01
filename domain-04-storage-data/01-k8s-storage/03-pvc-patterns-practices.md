@@ -1,6 +1,7 @@
 ---
 title: 03 - PVC使用模式与最佳实践
 description: 'title: 03 - PVC使用模式与最佳实践'
+summary: 'title: 03 - PVC使用模式与最佳实践'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - elasticsearch
 - statefulset
 - job
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - storage-basics
 - redis-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 03 - PVC使用模式与最佳实践
 description: '# 03 - PVC使用模式与最佳实践'

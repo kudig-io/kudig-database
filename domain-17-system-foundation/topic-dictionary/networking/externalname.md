@@ -1,12 +1,17 @@
 ---
 title: 外部名称
-description: 'ExternalName 是 Service 的一种特殊类型，它将集群内部的 DNS 名称映射到外部的 DNS 名称（CNAME 记录），而不是将流量转发到 P...'
+description: ExternalName 是 Service 的一种特殊类型，它将集群内部的 DNS 名称映射到外部的 DNS 名称（CNAME 记录），而不是将流量转发到
+  P...
+summary: ExternalName 是 Service 的一种特殊类型，它将集群内部的 DNS 名称映射到外部的 DNS 名称（CNAME 记录），而不是将流量转发到
+  P...
 category: dictionary
 tags:
 - k8s
 - glossary
 - networking
 - service
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 外部名称
 

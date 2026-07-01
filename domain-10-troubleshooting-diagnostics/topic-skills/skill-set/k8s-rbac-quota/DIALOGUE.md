@@ -1,22 +1,26 @@
 ---
-title: "RBAC与配额问题 — 远程顾问对话脚本"
-category: "troubleshooting"
-tags: ["security", "remote-consultant"]
-created: "2026-05-23"
-updated: "2026-05-23"
+title: RBAC与配额问题 — 远程顾问对话脚本
+summary: RBAC与配额问题的远程顾问对话脚本，覆盖权限不足、ResourceQuota、LimitRange排查。
+category: troubleshooting
+tags:
+- security
+- remote-consultant
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
-dialogue_id: "DIALOGUE-K8S_RBAC_QUOTA"
-skill_id: "k8s-rbac-quota"
-version: "1.0.0"
-role: "remote-consultant"
-language: "zh"
-summary: "RBAC与配额问题的远程顾问对话脚本，覆盖权限不足、ResourceQuota、LimitRange排查。"
+dialogue_id: DIALOGUE-K8S_RBAC_QUOTA
+skill_id: k8s-rbac-quota
+version: 1.0.0
+role: remote-consultant
+language: zh
 relationships:
-  - target: "[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/workloads/pods.md]]"
-    type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/workloads/pods.md]]'
+  type: uses
 ---
+
 
 # RBAC/Quota权限与配额问题 — 远程顾问对话脚本
 

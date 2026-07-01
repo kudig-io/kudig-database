@@ -1,6 +1,7 @@
 ---
 title: Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)
 description: '# Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)'
+summary: '# Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)'
 category: supply-chain-security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - redis
 - mysql
 - job
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +54,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)
 

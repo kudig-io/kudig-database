@@ -1,12 +1,15 @@
 ---
 title: Webhook
-description: 'Webhook 是 Kubernetes 中允许外部服务介入 API 请求处理流程的回调机制。通过 Webhook，可以将认证、授权和准入控制逻辑委托给外部服务...'
+description: Webhook 是 Kubernetes 中允许外部服务介入 API 请求处理流程的回调机制。通过 Webhook，可以将认证、授权和准入控制逻辑委托给外部服务...
+summary: Webhook 是 Kubernetes 中允许外部服务介入 API 请求处理流程的回调机制。通过 Webhook，可以将认证、授权和准入控制逻辑委托给外部服务...
 category: dictionary
 tags:
 - k8s
 - glossary
 - security
 - webhook
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -21,8 +24,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Webhook
 

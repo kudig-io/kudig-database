@@ -1,6 +1,7 @@
 ---
 title: Symptom-SOP-RootCause Mapping
 description: Symptom-SOP-RootCause Mapping — Kubernetes 生产运维知识库
+summary: Symptom-SOP-RootCause Mapping — Kubernetes 生产运维知识库
 category: concept
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - networkpolicy
 - operator
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 - Mapping
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Symptom-SOP-RootCause Mapping
 

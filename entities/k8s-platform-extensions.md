@@ -1,6 +1,7 @@
 ---
 title: 平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格
 description: '# 平台运维与扩展生态'
+summary: '# 平台运维与扩展生态'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - envoy
 - crd
 - webhook
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 # 平台运维与扩展生态
 

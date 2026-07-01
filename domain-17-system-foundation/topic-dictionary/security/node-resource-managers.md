@@ -1,6 +1,7 @@
 ---
 title: Node Resource Managers（节点资源管理器）
 description: '# Node Resource Managers（节点资源管理器）'
+summary: '# Node Resource Managers（节点资源管理器）'
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - terminology
 - kubelet
 - gpu
+tier: peripheral
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -27,9 +30,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # Node Resource Managers（节点资源管理器）
 

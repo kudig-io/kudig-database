@@ -1,6 +1,7 @@
 ---
 title: 07 - Envoy Gateway 企业级实践
 description: '# 07 - Envoy Gateway 企业级实践'
+summary: '# 07 - Envoy Gateway 企业级实践'
 category: cloud-native-api-gateway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - jaeger
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -52,8 +55,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 07 - [[Envoy|Envoy]] Gateway 企业级实践
 

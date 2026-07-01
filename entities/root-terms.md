@@ -1,6 +1,7 @@
 ---
 title: K8s Root术语参考
 description: '### Topic Dictionary 内容缺口分析（2026 行业最佳实践视角）'
+summary: '### Topic Dictionary 内容缺口分析（2026 行业最佳实践视角）'
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - gpu
 - wasm
 - kserve
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 本页汇总了 **Root** 领域的 4 个 Kubernetes 术语定义与概念说明。
 

@@ -1,6 +1,7 @@
 ---
 title: 'Day 1: ACK/ACR 管控 SR'
 description: '- 服务架构'
+summary: '- 服务架构'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flannel
 - coredns
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,8 +37,9 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 1: ACK/ACR 管控 SR

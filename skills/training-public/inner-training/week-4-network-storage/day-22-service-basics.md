@@ -1,6 +1,7 @@
 ---
 title: 'Day 22: Service 基础'
 description: '- "kube-proxy配置"'
+summary: '- "kube-proxy配置"'
 category: learning
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - statefulset
 - ingress
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 22: [[Service|Service]] 基础
 

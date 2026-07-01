@@ -1,12 +1,15 @@
 ---
 title: 第十六章：团队能力建设 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**所属部分**: 第四部分 - FTA 系统工程实践'''
+summary: 'description: ''**所属部分**: 第四部分 - FTA 系统工程实践'''
 category: fta
 tags:
 - fta
 - troubleshooting
 - llm
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -33,8 +36,9 @@ prerequisites:
 fta_id: FTA-16_TEAM_CAPABILITY_BUILDING-001
 component: 16 Team Capability Building
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 title: 第十六章：团队能力建设
 description: '**所属部分**: 第四部分 - FTA 系统工程实践'

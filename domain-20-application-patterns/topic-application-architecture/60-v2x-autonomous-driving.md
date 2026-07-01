@@ -1,6 +1,7 @@
 ---
 title: 车路协同自动驾驶架构设计 — 阿里云视角
 description: 'title: 车路协同自动驾驶V2X架构设计'
+summary: 'title: 车路协同自动驾驶V2X架构设计'
 category: general
 tags:
 - architecture
@@ -8,6 +9,8 @@ tags:
 - daemonset
 - gpu
 - nvidia
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 车路协同自动驾驶V2X架构设计
 description: '# 车路协同自动驾驶架构设计 — 阿里云视角'

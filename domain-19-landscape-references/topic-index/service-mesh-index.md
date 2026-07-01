@@ -1,6 +1,7 @@
 ---
 title: Service Mesh 服务网格知识图谱索引
 description: '## 知识图谱'
+summary: '## 知识图谱'
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - microservice
 - cilium
 - coredns
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -36,8 +39,9 @@ prerequisites:
 - service-mesh-basics
 - cilium-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Service|Service]]Service Mesh）|Service Mesh]] 服务网格知识图谱索引
 

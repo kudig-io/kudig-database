@@ -1,12 +1,17 @@
 ---
 title: 指标服务器
-description: 'Metrics Server 是 Kubernetes 集群的资源指标聚合器，收集节点和 Pod 的 CPU/内存使用数据。它是 HPA、VPA 和 `kube...'
+description: Metrics Server 是 Kubernetes 集群的资源指标聚合器，收集节点和 Pod 的 CPU/内存使用数据。它是 HPA、VPA
+  和 `kube...
+summary: Metrics Server 是 Kubernetes 集群的资源指标聚合器，收集节点和 Pod 的 CPU/内存使用数据。它是 HPA、VPA
+  和 `kube...
 category: dictionary
 tags:
 - k8s
 - glossary
 - observability
 - metrics
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 指标服务器
 

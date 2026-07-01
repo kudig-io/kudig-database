@@ -1,6 +1,7 @@
 ---
 title: K8s 小白学习体系缺口分析
 description: 基于全库 3849 篇文档扫描，识别从小白（零基础）视角的内容缺口与补齐建议
+summary: 基于全库 3849 篇文档扫描，识别从小白（零基础）视角的内容缺口与补齐建议
 category: learning
 tags:
 - analysis
@@ -13,6 +14,8 @@ tags:
 - docker
 - redis
 - mysql
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: beginner
 reading_level: beginner
@@ -42,8 +45,9 @@ prerequisites:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # K8s 小白学习体系缺口分析
 

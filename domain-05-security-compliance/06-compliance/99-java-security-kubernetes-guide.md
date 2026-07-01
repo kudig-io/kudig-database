@@ -1,6 +1,7 @@
 ---
 title: Java 应用 Kubernetes 安全加固深度实践
 description: '# Java 应用 Kubernetes 安全加固深度实践'
+summary: '# Java 应用 Kubernetes 安全加固深度实践'
 category: cloud-native-security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - redis
 - ingress
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -54,8 +57,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # Java 应用 [[Kubernetes|Kubernetes]]es 安全加固深度实践|Kubernetes 安全加固深度实践]]
 
@@ -598,7 +602,7 @@ syft spring-app:scan -o cyclonedx-json > sbom-container.json
 grype sbom:./sbom-container.json --fail-on high
 
 # 6. Log4Shell 检测
-trivy image --scanners vuln spring-app:scan | grep -i "log4j\|CVE-2021-44228"
+trivy image --scanners vuln spring-app:scan | grep -i "log4j|CVE-2021-44228"
 
 # 7. 检查依赖版本锁定
 if [ ! -f "mvnw" ]; then

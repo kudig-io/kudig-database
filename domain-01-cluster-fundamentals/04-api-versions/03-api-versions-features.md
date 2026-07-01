@@ -1,6 +1,9 @@
 ---
 title: 03 - 功能和API表
-description: '| **Pod** | core/v1 | Pod | Stable | v1.0 | v1.0 | - | - | 不直接创建，使用控制器管理；设置资源requests/limits |'
+description: '| **Pod** | core/v1 | Pod | Stable | v1.0 | v1.0 | - | - | 不直接创建，使用控制器管理；设置资源requests/limits
+  |'
+summary: '| **Pod** | core/v1 | Pod | Stable | v1.0 | v1.0 | - | - | 不直接创建，使用控制器管理；设置资源requests/limits
+  |'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - prometheus
 - cilium
 - calico
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -60,8 +65,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 03 - 功能和API表
 

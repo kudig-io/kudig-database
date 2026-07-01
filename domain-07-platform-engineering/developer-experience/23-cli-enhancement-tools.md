@@ -1,6 +1,7 @@
 ---
 title: 110 - CLI 增强与效率工具 (CLI Enhancement)
 description: '| **Stern** | 多 Pod 日志聚合 | 85% | brew/apt |'
+summary: '| **Stern** | 多 Pod 日志聚合 | 85% | brew/apt |'
 category: platform-ops
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - devops
 - mysql
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -51,8 +54,9 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
-created: "2026-05-23"
 ---
+
+
 
 # 110 - CLI 增强与效率工具 (CLI Enhancement)
 

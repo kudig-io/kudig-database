@@ -1,6 +1,7 @@
 ---
 title: 'Day 15: Node 节点基础'
 description: '## 概述'
+summary: '## 概述'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - calico
 - coredns
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,8 +38,9 @@ prerequisites:
 - monitoring-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 15: Node 节点基础

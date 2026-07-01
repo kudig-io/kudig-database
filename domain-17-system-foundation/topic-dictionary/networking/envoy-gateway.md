@@ -1,6 +1,8 @@
 ---
 title: Envoy Gateway
-description: 'Envoy Gateway 是 CNCF 项目，提供基于 Envoy 的 Kubernetes Gateway API 实现。它是 Envoy 官方的网关方案，...'
+description: Envoy Gateway 是 CNCF 项目，提供基于 Envoy 的 Kubernetes Gateway API 实现。它是 Envoy
+  官方的网关方案，...
+summary: Envoy Gateway 是 CNCF 项目，提供基于 Envoy 的 Kubernetes Gateway API 实现。它是 Envoy 官方的网关方案，...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +11,8 @@ tags:
 - gateway-api
 - ingress
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Envoy Gateway
 

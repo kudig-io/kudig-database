@@ -1,6 +1,7 @@
 ---
 title: 23. 事件响应处理 (Incident Response Handling)
 description: 本章节详细介绍Kubernetes生产环境中事件响应和处理的最佳实践，涵盖SRE理念、故障处理流程、根因分析和持续改进机制。
+summary: 本章节详细介绍Kubernetes生产环境中事件响应和处理的最佳实践，涵盖SRE理念、故障处理流程、根因分析和持续改进机制。
 category: production-operations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -47,8 +50,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 23. 事件响应处理 (Incident Response Handling)
 

@@ -1,6 +1,7 @@
 ---
 title: Cilium eBPF Networking
 description: '- [[concepts/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis'
+summary: '- [[concepts/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - envoy
 - kafka
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - kafka-basics
-created: "2026-05-23"
 ---
+
+
 
 # Cilium eBPF Networking
 

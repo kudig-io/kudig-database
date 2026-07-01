@@ -1,6 +1,7 @@
 ---
 title: Operator Pattern (CRD + Controller)
 description: Operator Pattern (CRD + Controller) — Kubernetes 生产运维知识库
+summary: Operator Pattern (CRD + Controller) — Kubernetes 生产运维知识库
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - apiserver
 - prometheus
 - istio
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - etcd-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # Operator Pattern (CRD + Controller)
 

@@ -1,6 +1,7 @@
 ---
 title: 02 - Operator开发模式与控制器实现
 description: '## Operator核心架构模式'
+summary: '## Operator核心架构模式'
 category: extensions
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - opa
 - mysql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ cross_refs:
 - type: domain
   path: ../domain-07-platform-engineering/
   label: '相关知识域: domain-07-platform-engineering'
-created: "2026-05-23"
 ---
+
+
 
 # 02 - Operator开发模式与控制器实现
 

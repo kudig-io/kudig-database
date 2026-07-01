@@ -1,6 +1,7 @@
 ---
 title: 纵深防御 x 供应链安全
 description: '# 纵深防御 x 供应链安全'
+summary: '# 纵深防御 x 供应链安全'
 category: synthesis
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - networkpolicy
 - kyverno
 - opa
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,17 +32,18 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - policy-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[domain-17-system-foundation/topic-dictionary/security/pod-security-standards.md]]"
-    type: uses
-  - target: "[[entities/networkpolicy.md]]"
-    type: related_to
-  - target: "[[entities/tetragon.md]]"
-    type: related_to
-  - target: "[[entities/trivy.md]]"
-    type: related_to
+- target: '[[domain-17-system-foundation/topic-dictionary/security/pod-security-standards.md]]'
+  type: uses
+- target: '[[entities/networkpolicy.md]]'
+  type: related_to
+- target: '[[entities/tetragon.md]]'
+  type: related_to
+- target: '[[entities/trivy.md]]'
+  type: related_to
 ---
+
+
 
 # 纵深防御 x 供应链安全
 

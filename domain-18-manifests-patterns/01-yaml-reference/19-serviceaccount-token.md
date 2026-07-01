@@ -1,6 +1,7 @@
 ---
 title: 19 - ServiceAccount / Token 管理 YAML 配置参考
 description: 'title: 19 - ServiceAccount / Token 管理 YAML 配置参考'
+summary: 'title: 19 - ServiceAccount / Token 管理 YAML 配置参考'
 category: general
 tags:
 - yaml
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - daemonset
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ trigger_keywords:
 - patterns
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 19 - ServiceAccount / Token 管理 YAML 配置参考
 description: '# 19 - ServiceAccount / Token 管理 YAML 配置参考'
@@ -1448,7 +1452,7 @@ kubectl get pods --all-namespaces
 
    ```bash
    # 清理未使用的 ServiceAccount
-   kubectl get sa --all-namespaces | grep -v "default\|system:"
+   kubectl get sa --all-namespaces | grep -v "default|system:"
    
    # 清理旧的 CSR
    kubectl delete csr $(kubectl get csr -o jsonpath='{.items[?(@.status.conditions[0].type=="Approved")].metadata.name}')
@@ -1604,3 +1608,7 @@ kubectl auth can-i approve certificatesigningrequests --as=system:serviceaccount
 - 21-rbac-clusterrole-clusterrolebinding
 
 ```
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub

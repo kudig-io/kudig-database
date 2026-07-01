@@ -1,6 +1,7 @@
 ---
 title: PodDisruptionBudget (PDB) 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: PodDisruptionBudget (PDB) 故障排查指南'
+summary: 'title: PodDisruptionBudget (PDB) 故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -9,6 +10,8 @@ tags:
 - pdb
 - statefulset
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -35,8 +38,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
-created: "2026-05-23"
 ---
+
+
 
 title: PodDisruptionBudget (PDB) 故障排查指南
 description: '# PodDisruptionBudget (PDB) 故障排查指南'
@@ -345,7 +349,7 @@ kubectl get pods -n <namespace> --show-labels
 kubectl get pods -n <namespace> -o wide
 
 # 查看不健康的 Pod
-kubectl get pods -n <namespace> | grep -v "Running\|Completed"
+kubectl get pods -n <namespace> | grep -v "Running|Completed"
 ```
 
 #### 驱逐检查
@@ -739,7 +743,7 @@ HEALTHY:.status.currentHealthy,\
 EXPECTED:.status.expectedPods
 
 echo -e "\n=== 不健康的 Pod (可能影响 PDB) ==="
-kubectl get pods -A | grep -v "Running\|Completed" | head -20
+kubectl get pods -A | grep -v "Running|Completed" | head -20
 
 echo -e "\n=== 驱逐事件 ==="
 kubectl get events -A --field-selector reason=Evicted --sort-by='.lastTimestamp' | tail -10

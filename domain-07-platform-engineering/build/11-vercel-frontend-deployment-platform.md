@@ -1,6 +1,7 @@
 ---
 title: Vercel 前端部署平台深度指南
 description: '# Vercel 前端部署平台深度指南'
+summary: '# Vercel 前端部署平台深度指南'
 category: platform-engineering
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - gpu
 - serverless
 - llm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -47,8 +50,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md
   label: '故障树: deployment'
-created: "2026-05-23"
 ---
+
+
 
 # Vercel 前端部署平台深度指南
 # Vercel Frontend Deployment Platform In-Depth Guide

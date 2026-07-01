@@ -1,12 +1,15 @@
 ---
 title: 回滚
-description: 'Rollback（回滚）是将 Deployment 恢复到之前版本的操作。当新版本出现问题时，可以快速回退到已知的工作版本。...'
+description: Rollback（回滚）是将 Deployment 恢复到之前版本的操作。当新版本出现问题时，可以快速回退到已知的工作版本。...
+summary: Rollback（回滚）是将 Deployment 恢复到之前版本的操作。当新版本出现问题时，可以快速回退到已知的工作版本。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - operations
 - deployment
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 回滚
 

@@ -1,7 +1,11 @@
 ---
 title: Scheduler 异常故障树分析 (skills)
-description: '<!-- condition: kubectl get pods -A --field-selector=status.phase=Pending 显示大量 Pending Pod 或 kubectl get events
-  -A --field-selector reason=FailedScheduling 显示调度失败 -->'
+description: '<!-- condition: kubectl get pods -A --field-selector=status.phase=Pending
+  显示大量 Pending Pod 或 kubectl get events -A --field-selector reason=FailedScheduling
+  显示调度失败 -->'
+summary: '<!-- condition: kubectl get pods -A --field-selector=status.phase=Pending
+  显示大量 Pending Pod 或 kubectl get events -A --field-selector reason=FailedScheduling
+  显示调度失败 -->'
 category: skills
 tags:
 - k8s
@@ -11,6 +15,8 @@ tags:
 - scheduler
 - ingress
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +34,9 @@ prerequisites:
 fta_id: FTA-SCHEDULER-001
 component: Scheduler
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 # Scheduler 异常故障树分析
 

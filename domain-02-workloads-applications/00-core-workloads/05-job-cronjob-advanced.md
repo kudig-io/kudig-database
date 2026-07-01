@@ -1,6 +1,7 @@
 ---
 title: 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
 description: '## Job 类型详解与使用场景'
+summary: '## Job 类型详解与使用场景'
 category: workloads
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cronjob
 - gpu
 - nvidia
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -61,8 +64,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
-created: "2026-05-23"
 ---
+
+
 
 # 05 - Job 与 [[CronJob|CronJob]] 高级用法 (Job & CronJob Advanced Usage)
 

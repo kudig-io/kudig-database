@@ -1,12 +1,15 @@
 ---
 title: domain-17-system-foundation MOC
 description: domain-17-system-foundation 知识域导航页，覆盖 11 篇文档
+summary: domain-17-system-foundation 知识域导航页，覆盖 11 篇文档
 category: moc
 tags:
 - k8s
 - moc
 - linux
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-17-system-foundation MOC
 

@@ -1,6 +1,7 @@
 ---
 title: 'Week 1 Checkpoint: 自测检验'
 description: '- "K8s 架构组件题"'
+summary: '- "K8s 架构组件题"'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - containerd
 - cri-o
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,8 +35,9 @@ prerequisites:
 - gpu-ml-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Week 1 Checkpoint: 自测检验
 

@@ -1,13 +1,22 @@
 ---
-title: "Init Containers"
+title: Init Containers
+summary: Init Containers 在应用容器启动前运行，用于执行初始化任务如配置生成、依赖检查等。
 category: concepts
-tags: ['pod', 'init', 'startup', 'visibility/public']
-sources: ["conceptss/"]
+tags:
+- pod
+- init
+- startup
+- visibility/public
+tier: supporting
+sources:
+- conceptss/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: stub
 ---
+
+
 # Init Containers
 
 ## 概述
@@ -22,3 +31,7 @@ Init Containers 在应用容器启动前运行，用于执行初始化任务如�
 ## 相关链接
 
 - [[concepts/kubernetes.md|Kubernetes]] — 核心概念
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

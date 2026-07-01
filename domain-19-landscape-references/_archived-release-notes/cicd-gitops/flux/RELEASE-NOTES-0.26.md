@@ -1,6 +1,7 @@
 ---
 title: flux v0.26 Release Notes
 description: flux v0.26 Release Notes — Kubernetes 生产运维知识库
+summary: flux v0.26 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - flux
 - crd
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cncf-ecosystem
-created: "2026-05-23"
 ---
+
+
 
 # [[Flux|flux]] v0.26 Release Notes
 

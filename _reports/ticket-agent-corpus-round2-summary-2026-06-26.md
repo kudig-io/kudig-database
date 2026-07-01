@@ -1,6 +1,7 @@
 ---
 title: 工单智能体语料改进第二轮执行摘要（2026-06-26）
 description: QA action 全量填充、broken wikilink 修复、工单样本去重审查的执行摘要
+summary: QA action 全量填充、broken wikilink 修复、工单样本去重审查的执行摘要
 category: reports
 tags:
 - ticket-agent
@@ -9,18 +10,21 @@ tags:
 - audit
 - qa-action
 - wikilink
+tier: supporting
 created: '2026-06-26'
 updated: '2026-06-26'
 last_updated: 2026-06-26
 status: completed
 relationships:
-- target: "_reports/ticket-agent-corpus-comprehensive-supplement-summary-2026-06-26.md"
+- target: _reports/ticket-agent-corpus-comprehensive-supplement-summary-2026-06-26.md
   type: related_to
-- target: "_reports/ticket-agent-corpus-qa-action-extension-summary-2026-06-26.md"
+- target: _reports/ticket-agent-corpus-qa-action-extension-summary-2026-06-26.md
   type: related_to
-- target: "_reports/ticket-agent-corpus-execution-summary-2026-06-26.md"
+- target: _reports/ticket-agent-corpus-execution-summary-2026-06-26.md
   type: related_to
 ---
+
+
 
 # 工单智能体语料改进第二轮执行摘要（2026-06-26）
 

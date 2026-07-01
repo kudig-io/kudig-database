@@ -1,6 +1,7 @@
 ---
 title: Cadence 工作流引擎
-description: 'Cadence 是 Uber 开源的分布式工作流引擎（后由 Uber 团队成立独立公司维护），为长时间运行的有状态应用提供持久化执行、重试和可见性能力。...'
+description: Cadence 是 Uber 开源的分布式工作流引擎（后由 Uber 团队成立独立公司维护），为长时间运行的有状态应用提供持久化执行、重试和可见性能力。...
+summary: Cadence 是 Uber 开源的分布式工作流引擎（后由 Uber 团队成立独立公司维护），为长时间运行的有状态应用提供持久化执行、重试和可见性能力。...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - platform-engineering
 - workflow
 - uber
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Cadence 工作流引擎（Cadence）
 

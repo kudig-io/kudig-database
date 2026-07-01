@@ -1,6 +1,7 @@
 ---
 title: Kudig-DB 故障排查体系完整性评估报告
 description: '# Kudig-DB 故障排查体系完整性评估报告'
+summary: '# Kudig-DB 故障排查体系完整性评估报告'
 category: general
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - envoy
 - hpa
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kudig-DB 故障排查体系完整性评估报告
 

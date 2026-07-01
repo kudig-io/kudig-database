@@ -1,12 +1,20 @@
 ---
-title: "Domain 01 内容索引"
+title: Domain 01 内容索引
+summary: Domain 01 内容索引
 category: domain-01-cluster-fundamentals
-tags: ["index", "domain-01-cluster-fundamentals", "navigation"]
-sources: ["auto-generated"]
+tags:
+- index
+- domain-01-cluster-fundamentals
+- navigation
+tier: core
+sources:
+- auto-generated
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 ---
+
+
 
 # Domain 01 内容索引
 

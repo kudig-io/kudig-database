@@ -1,6 +1,7 @@
 ---
 title: 低空经济（eVTOL/UAM）架构设计 — 阿里云视角
 description: 'title: 低空经济 UAM 架构设计'
+summary: 'title: 低空经济 UAM 架构设计'
 category: general
 tags:
 - architecture
@@ -12,6 +13,8 @@ tags:
 - postgresql
 - job
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - monitoring-basics
 - redis-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 低空经济 UAM 架构设计
 description: '# 低空经济（eVTOL/UAM）架构设计 — 阿里云视角'

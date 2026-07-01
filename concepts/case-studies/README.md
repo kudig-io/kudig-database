@@ -1,11 +1,19 @@
 ---
 title: 生产工单 Case Study 索引
+summary: 生产工单 Case Study 索引：每个 Case Study 包含完整的诊断时间线和修复命令，可直接用于：
 category: case-study
-tags: [production, incident, troubleshooting, sre]
-created: "2026-05-23"
-updated: "2026-05-23"
+tags:
+- production
+- incident
+- troubleshooting
+- sre
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
 ---
+
+
 
 # 生产工单 Case Study 索引
 

@@ -1,6 +1,7 @@
 ---
 title: 第15课：调度与亲和性
 description: '# 第15课：调度与亲和性'
+summary: '# 第15课：调度与亲和性'
 category: skills
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - daemonset
 - operator
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - redis-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第15课：调度与亲和性
 

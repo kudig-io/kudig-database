@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 通用最佳实践参考 (best-practices)
 description: Kubernetes 生产环境通用最佳实践参考文档
+summary: Kubernetes 生产环境通用最佳实践参考文档
 category: best-practices/common
 tags:
 - kubernetes
@@ -13,6 +14,8 @@ tags:
 - docker
 - hpa
 - vpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ cross_refs:
 - type: best-practice
   path: ./observability/monitoring.md
   label: 监控最佳实践
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 通用最佳实践参考
 
@@ -776,3 +780,7 @@ echo "=== 验证完成 ==="
 ---
 
 **文档维护**：定期审查和更新，确保与Kubernetes版本和最佳实践演进保持同步
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub

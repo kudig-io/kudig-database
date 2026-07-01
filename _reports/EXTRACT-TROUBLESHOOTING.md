@@ -1,9 +1,12 @@
 ---
 title: KUDIG Gitbook ZIP 解压问题诊断与解决方案
 description: '# KUDIG Gitbook ZIP 解压问题诊断与解决方案'
+summary: '# KUDIG Gitbook ZIP 解压问题诊断与解决方案'
 category: general
 tags:
 - k8s
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -20,8 +23,9 @@ trigger_keywords:
 - 解压问题诊断与解决方案
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG Gitbook ZIP 解压问题诊断与解决方案
 

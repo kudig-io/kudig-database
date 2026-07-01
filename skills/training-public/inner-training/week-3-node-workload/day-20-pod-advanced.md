@@ -1,12 +1,15 @@
 ---
 title: 'Day 20: Pod 容器组进阶'
 description: '**学习时间**: 4-5 小时 | **主题**: Pod 调度、探针与资源配置'
+summary: '**学习时间**: 4-5 小时 | **主题**: Pod 调度、探针与资源配置'
 category: learning
 tags:
 - k8s
 - training
 - hands-on
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -25,8 +28,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 20: Pod 容器组进阶
@@ -248,7 +252,7 @@ spec:
 EOF
 
 # 观察探针检测结果
-kubectl describe pod probe-demo | grep -A 5 "Liveness\|Readiness\|Startup"
+kubectl describe pod probe-demo | grep -A 5 "Liveness|Readiness|Startup"
 
 # 模拟探针失败: 删掉 index.html 触发 readiness 失败
 kubectl exec probe-demo -- rm /usr/share/nginx/html/index.html
@@ -283,7 +287,7 @@ spec:
 EOF
 
 # 查看 Pod 资源分配
-kubectl describe pod resource-demo | grep -A 5 "Requests\|Limits"
+kubectl describe pod resource-demo | grep -A 5 "Requests|Limits"
 
 # 查看节点资源占用情况
 kubectl describe node <node-name> | grep -A 10 "Allocated resources"

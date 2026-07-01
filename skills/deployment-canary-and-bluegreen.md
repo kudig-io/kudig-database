@@ -1,6 +1,7 @@
 ---
 title: 金丝雀与蓝绿发布
 description: '## 概述'
+summary: '## 概述'
 category: skills
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - traffic-split
 - istio
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 # 金丝雀与蓝绿发布
 

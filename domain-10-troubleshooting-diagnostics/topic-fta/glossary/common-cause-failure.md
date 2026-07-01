@@ -1,12 +1,15 @@
 ---
 title: 共因故障
-description: '共因故障（CCF）是由同一个根因导致的多个组件同时故障。共因故障会破坏冗余设计的有效性，是系统可靠性分析中需要特别关注的风险。...'
+description: 共因故障（CCF）是由同一个根因导致的多个组件同时故障。共因故障会破坏冗余设计的有效性，是系统可靠性分析中需要特别关注的风险。...
+summary: 共因故障（CCF）是由同一个根因导致的多个组件同时故障。共因故障会破坏冗余设计的有效性，是系统可靠性分析中需要特别关注的风险。...
 category: fta
 tags:
 - fta
 - troubleshooting
 - reliability
 - commoncausefailure
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -23,8 +26,9 @@ trigger_keywords:
 - fta
 prerequisites:
 - troubleshooting-methodology
-created: "2026-06-24"
 ---
+
+
 
 # 共因故障
 

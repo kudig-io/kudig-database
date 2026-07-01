@@ -1,6 +1,7 @@
 ---
 title: CI-CD 流水线 × Secret 管理
 description: '# CI-CD 流水线 × Secret 管理'
+summary: '# CI-CD 流水线 × Secret 管理'
 category: synthesis
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flux
 - networkpolicy
 - crd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,17 +33,18 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gitops-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/external-secrets.md]]"
-    type: uses
-  - target: "[[entities/argocd.md]]"
-    type: related_to
-  - target: "[[entities/cni.md]]"
-    type: related_to
-  - target: "[[entities/deployment.md]]"
-    type: uses
+- target: '[[entities/external-secrets.md]]'
+  type: uses
+- target: '[[entities/argocd.md]]'
+  type: related_to
+- target: '[[entities/cni.md]]'
+  type: related_to
+- target: '[[entities/deployment.md]]'
+  type: uses
 ---
+
+
 
 # CI-CD 流水线 × Secret 管理
 

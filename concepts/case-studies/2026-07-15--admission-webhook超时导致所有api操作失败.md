@@ -1,14 +1,20 @@
 ---
-category: "synthesis"
-tags: ["synthesis"]
-date: "2026-07-15"
-title: " admission webhook超时导致所有API操作失败"
-skill: "11-control-plane-failure"
-severity: "P0"
-created: "2026-05-23"
-updated: "2026-05-23"
+title: ' admission webhook超时导致所有API操作失败'
+summary: ' admission webhook超时导致所有API操作失败：所有kubectl命令返回Internal error occurred: failed
+  calling webhook，无法创建、更新或删除任何资源。'
+category: synthesis
+tags:
+- synthesis
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-07-15'
+skill: 11-control-plane-failure
+severity: P0
 last_updated: 2026-05-23
 ---
+
+
 
 #  admission webhook超时导致所有API操作失败
 

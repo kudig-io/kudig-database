@@ -1,6 +1,7 @@
 ---
 title: Domain-29 自动化测试与质量 — 开源项目索引
 description: '| **Snyk** | 安全扫描平台 | Snyk | - | - | 商业 |'
+summary: '| **Snyk** | 安全扫描平台 | Snyk | - | - | 商业 |'
 category: automated-testing-quality
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - automation
 - grafana
 - helm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -43,8 +46,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Domain-29 自动化测试与质量 — 开源项目索引
 

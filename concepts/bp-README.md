@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 最佳实践指南
 description: '# Kubernetes 最佳实践指南'
+summary: '# Kubernetes 最佳实践指南'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - argocd
 - docker
 - elasticsearch
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 最佳实践指南
 

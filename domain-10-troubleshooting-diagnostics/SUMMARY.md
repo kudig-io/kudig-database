@@ -1,6 +1,7 @@
 ---
 title: Summary
 description: '- [Domain-1: Kubernetes架构基础](domain-01-cluster-fundamentals/README.md)'
+summary: '- [Domain-1: Kubernetes架构基础](domain-01-cluster-fundamentals/README.md)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - istio
 - envoy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ prerequisites:
 - policy-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Summary
 

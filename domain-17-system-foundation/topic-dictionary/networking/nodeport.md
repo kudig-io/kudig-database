@@ -1,12 +1,15 @@
 ---
 title: 节点端口
-description: 'NodePort 是 Service 的一种类型，在每个节点上暴露一个固定端口（默认 30000-32767），外部流量可以通过 `NodeIP:NodePor...'
+description: NodePort 是 Service 的一种类型，在每个节点上暴露一个固定端口（默认 30000-32767），外部流量可以通过 `NodeIP:NodePor...
+summary: NodePort 是 Service 的一种类型，在每个节点上暴露一个固定端口（默认 30000-32767），外部流量可以通过 `NodeIP:NodePor...
 category: dictionary
 tags:
 - k8s
 - glossary
 - networking
 - service
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 节点端口
 

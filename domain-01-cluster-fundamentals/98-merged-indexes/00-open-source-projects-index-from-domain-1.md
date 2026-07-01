@@ -1,12 +1,15 @@
 ---
 title: Domain-1 架构基础 — 开源项目索引
 description: '# Domain-1 架构基础 — 开源项目索引'
+summary: '# Domain-1 架构基础 — 开源项目索引'
 category: architecture-fundamentals
 tags:
 - k8s
 - architecture
 - kubernetes
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -50,8 +53,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-1 架构基础 — 开源项目索引
 

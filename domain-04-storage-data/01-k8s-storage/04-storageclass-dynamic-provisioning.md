@@ -1,6 +1,7 @@
 ---
 title: StorageClass 动态供给与多租户管理
 description: 深入解析 StorageClass 的动态供给机制、Provisioner 插件、多租户存储配额、存储类选择策略、成本优化与备份恢复
+summary: 深入解析 StorageClass 的动态供给机制、Provisioner 插件、多租户存储配额、存储类选择策略、成本优化与备份恢复
 category: domain-04-storage-data
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - rbac
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -63,8 +66,9 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md
   type: fta
   desc: StorageClass 故障树
-created: "2026-05-23"
 ---
+
+
 
 # 04 - StorageClass动态供给与多租户管理
 

@@ -1,6 +1,7 @@
 ---
-title: "Day 2: 第一个工单处理指南 [quick-start]"
+title: 'Day 2: 第一个工单处理指南 [quick-start]'
 description: '# Day 2: 第一个工单处理指南'
+summary: '# Day 2: 第一个工单处理指南'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - hpa
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 2: 第一个工单处理指南
 

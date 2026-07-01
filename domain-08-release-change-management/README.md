@@ -1,6 +1,9 @@
 ---
 title: Release & Change Management
-description: 整合原 domain-08-release-change-management/24/29 和 domain-11-production-operations 部分内容的发布与变更管理知识。
+description: 整合原 domain-08-release-change-management/24/29 和 domain-11-production-operations
+  部分内容的发布与变更管理知识。
+summary: 整合原 domain-08-release-change-management/24/29 和 domain-11-production-operations
+  部分内容的发布与变更管理知识。
 category: domain
 tags:
 - gitops
@@ -13,6 +16,8 @@ tags:
 - flux
 - daemonset
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +40,9 @@ prerequisites:
 - gitops-basics
 - iac-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Release & Change Management
 

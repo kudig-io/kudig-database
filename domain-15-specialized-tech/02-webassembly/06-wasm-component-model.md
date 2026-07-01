@@ -1,6 +1,7 @@
 ---
 title: Wasm 组件模型 (Wasm Component Model)
 description: 1. [组件模型概述](#1-组件模型概述)
+summary: 1. [组件模型概述](#1-组件模型概述)
 category: webassembly-cloud-native
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - rag
 - containerd
 - serverless
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -42,8 +45,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Wasm 组件模型 (Wasm Component Model)
 

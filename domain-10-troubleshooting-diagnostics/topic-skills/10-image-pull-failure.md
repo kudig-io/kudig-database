@@ -1,6 +1,7 @@
 ---
 title: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 description: '## 1. 概述'
+summary: '## 1. 概述'
 category: pod
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - containerd
 - cri-o
 - docker
+tier: core
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -57,8 +60,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 ---
 
@@ -530,13 +534,13 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
 - **命令**:
   ```bash
   # containerd 日志
-  ssh <node-ip> "journalctl -u containerd --since '30 minutes ago' --no-pager | grep -i 'pull\|auth\|image\|registry' | tail -50"
+  ssh <node-ip> "journalctl -u containerd --since '30 minutes ago' --no-pager | grep -i 'pull|auth|image|registry' | tail -50"
   
   # CRI-O 日志
-  ssh <node-ip> "journalctl -u crio --since '30 minutes ago' --no-pager | grep -i 'pull\|auth\|image\|registry' | tail -50"
+  ssh <node-ip> "journalctl -u crio --since '30 minutes ago' --no-pager | grep -i 'pull|auth|image|registry' | tail -50"
   
   # kubelet 镜像相关日志
-  ssh <node-ip> "journalctl -u kubelet --since '30 minutes ago' --no-pager | grep -i 'pull\|image' | tail -50"
+  ssh <node-ip> "journalctl -u kubelet --since '30 minutes ago' --no-pager | grep -i 'pull|image' | tail -50"
   ```
 - **超时**: 15s
 - **预期输出模式**: 日志条目

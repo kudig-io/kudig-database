@@ -1,6 +1,7 @@
 ---
 title: CNCF 存储与数据库项目全景
 description: '# CNCF 存储与数据库项目全景'
+summary: '# CNCF 存储与数据库项目全景'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - harbor
 - rook
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # CNCF 存储与数据库项目全景
 

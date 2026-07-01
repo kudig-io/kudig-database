@@ -1,6 +1,7 @@
 ---
 title: Krkn 混沌工程
-description: 'Krkn（原 Kraken）是 Red Hat 开源的混沌工程工具，专注于 Kubernetes/OpenShift 的故障注入，支持 Pod/Node/Net...'
+description: Krkn（原 Kraken）是 Red Hat 开源的混沌工程工具，专注于 Kubernetes/OpenShift 的故障注入，支持 Pod/Node/Net...
+summary: Krkn（原 Kraken）是 Red Hat 开源的混沌工程工具，专注于 Kubernetes/OpenShift 的故障注入，支持 Pod/Node/Net...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - operations
 - chaos-engineering
 - openshift
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Krkn 混沌工程（Krkn）
 

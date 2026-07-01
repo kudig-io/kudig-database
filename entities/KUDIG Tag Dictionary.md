@@ -1,6 +1,7 @@
 ---
 title: KUDIG Tag Dictionary
 description: KUDIG Tag Dictionary — Kubernetes 生产运维知识库
+summary: KUDIG Tag Dictionary — Kubernetes 生产运维知识库
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG Tag Dictionary
 

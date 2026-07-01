@@ -1,6 +1,7 @@
 ---
 title: VictoriaMetrics 集群版 on Kubernetes
 description: 在阿里云 ACK / 专有云 ASO 环境中部署 VictoriaMetrics 集群版，覆盖架构设计、存储规划、扩缩容、监控告警与故障排查
+summary: 在阿里云 ACK / 专有云 ASO 环境中部署 VictoriaMetrics 集群版，覆盖架构设计、存储规划、扩缩容、监控告警与故障排查
 category: domain
 tags:
 - victoriametrics
@@ -13,8 +14,9 @@ tags:
 - storage
 - scaling
 - monitoring
-created: "2026-06-29"
-updated: "2026-06-29"
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06-29
 difficulty: advanced
 reading_level: advanced
@@ -50,6 +52,8 @@ authors:
 - name: KUDIG Team
   role: contributor
 ---
+
+
 
 # VictoriaMetrics 集群版 on Kubernetes
 

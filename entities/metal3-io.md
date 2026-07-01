@@ -1,11 +1,16 @@
 ---
 title: Metal3
-description: 'summary: "Metal3（Metal Kubed）提供裸金属基础设施的 Kubernetes 原生管理能力。它基于 Cluster API 实现裸金属服务器的自动发现、配置和生命周期管理，实现"裸金属即服务"。"'
+description: 'summary: "Metal3（Metal Kubed）提供裸金属基础设施的 Kubernetes 原生管理能力。它基于 Cluster
+  API 实现裸金属服务器的自动发现、配置和生命周期管理，实现"裸金属即服务"。"'
+summary: 'summary: "Metal3（Metal Kubed）提供裸金属基础设施的 Kubernetes 原生管理能力。它基于 Cluster API
+  实现裸金属服务器的自动发现、配置和生命周期管理，实现"裸金属即服务"。"'
 category: general
 tags:
 - k8s
 - crd
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -19,8 +24,9 @@ trigger_keywords:
 - Metal3
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "Metal3"

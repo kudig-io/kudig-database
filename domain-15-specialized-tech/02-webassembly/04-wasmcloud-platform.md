@@ -1,6 +1,7 @@
 ---
 title: wasmCloud 平台
 description: 'description: 1. [wasmCloud 概述](#1-wasmcloud-概述)'
+summary: 'description: 1. [wasmCloud 概述](#1-wasmcloud-概述)'
 category: general
 tags:
 - wasm
@@ -13,6 +14,8 @@ tags:
 - docker
 - opa
 - redis
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - policy-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[wasmCloud|wasmCloud]] 平台
 description: 1. [wasmCloud 概述](#1-wasmcloud-概述)

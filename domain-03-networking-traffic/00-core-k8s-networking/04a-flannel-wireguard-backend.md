@@ -1,6 +1,7 @@
 ---
 title: Flannel WireGuard 加密后端配置
 description: Flannel WireGuard 后端配置指南，涵盖 WireGuard 加密隧道原理、配置步骤、性能对比和故障排查
+summary: Flannel WireGuard 后端配置指南，涵盖 WireGuard 加密隧道原理、配置步骤、性能对比和故障排查
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - daemonset
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -59,8 +62,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # Flannel WireGuard 加密后端配置
 

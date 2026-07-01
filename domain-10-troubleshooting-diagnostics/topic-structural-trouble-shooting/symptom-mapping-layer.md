@@ -1,6 +1,7 @@
 ---
 title: 症状快速映射层 (Symptom-SOP-RootCause Mapping) [topic-structural-trouble-shooting]
 description: 'description: ''**适用场景**: AI Agent + 人工运维快速定位排查路径'''
+summary: 'description: ''**适用场景**: AI Agent + 人工运维快速定位排查路径'''
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - istio
 - envoy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ prerequisites:
 - mysql-basics
 - backup-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 症状快速映射层 (Symptom-SOP-RootCause Mapping)
 description: '**适用场景**: AI Agent + 人工运维快速定位排查路径'

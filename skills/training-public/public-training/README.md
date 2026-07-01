@@ -1,6 +1,7 @@
 ---
 title: K8s 运维实战培训（四周体系）
 description: '# K8s 运维实战培训（四周体系）'
+summary: '# K8s 运维实战培训（四周体系）'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - flannel
 - statefulset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -34,8 +37,9 @@ prerequisites:
 - monitoring-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # K8s 运维实战培训（四周体系）
 

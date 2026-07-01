@@ -1,17 +1,21 @@
 ---
-title: "Research: Kubernetes Networking 2025-2026"
+title: 'Research: Kubernetes Networking 2025-2026'
+summary: 'Research: Kubernetes Networking 2025-2026：Kubernetes 网络生态在 2025-2026 年经历了三重范式转移：'
 category: synthesis
 tags:
-  - networking
-  - cilium
-  - istio
-  - ebpf
-  - k8s
-  - research
+- networking
+- cilium
+- istio
+- ebpf
+- k8s
+- research
+tier: supporting
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # Research: Kubernetes Networking 2025-2026
 
@@ -119,3 +123,7 @@ Submariner、Cilium ClusterMesh、Skupper 等方案在 2025 年趋于稳定：
 - [[concepts/k8s-observability-stack.md|k8s observability stack]] — 网络可观测性（Hubble、eBPF 流量分析）为故障排查与性能优化提供实时数据
 - [[concepts/specialized-k8s-technologies.md|specialized k8s technologies]] — 边缘计算与 IoT 场景对网络架构（低延迟、多集群互联）提出特殊需求
 - [[concepts/platform-engineering-idp.md|platform engineering idp]] — 平台工程将网络能力（Gateway API、服务网格）封装为开发者自助服务
+
+## Related
+
+- [[research|#research Hub]] — tag hub

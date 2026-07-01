@@ -1,6 +1,7 @@
 ---
 title: GitHub Actions SLSA 构建 (GitHub Actions SLSA Build)
 description: '- github-actions-slsa-build的最佳实践'
+summary: '- github-actions-slsa-build的最佳实践'
 category: general
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - docker
 - job
 - webhook
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - rbac-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

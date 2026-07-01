@@ -1,13 +1,22 @@
 ---
-title: "Prompts 索引"
+title: Prompts 索引
+summary: Prompts 索引
 category: index
-tags: ["index", "prompts", "ai", "visibility/public"]
-sources: ["prompts/"]
+tags:
+- index
+- prompts
+- ai
+- visibility/public
+tier: supporting
+sources:
+- prompts/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: reviewed
 ---
+
+
 
 # Prompts 索引
 
@@ -17,3 +26,7 @@ status: reviewed
 - [[scripts/prompts/config-generator.md|config-generator]]
 - [[scripts/prompts/learning-path.md|learning-path]]
 - [[scripts/prompts/troubleshooting.md|troubleshooting]]
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

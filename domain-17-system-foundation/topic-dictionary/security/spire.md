@@ -1,6 +1,7 @@
 ---
 title: SPIRE 身份框架
-description: 'SPIRE（SPIFFE Runtime Environment）是 CNCF 毕业项目，实现 SPIFFE 规范的生产级参考实现，为工作负载提供通用的加密身份...'
+description: SPIRE（SPIFFE Runtime Environment）是 CNCF 毕业项目，实现 SPIFFE 规范的生产级参考实现，为工作负载提供通用的加密身份...
+summary: SPIRE（SPIFFE Runtime Environment）是 CNCF 毕业项目，实现 SPIFFE 规范的生产级参考实现，为工作负载提供通用的加密身份...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - security
 - identity
 - spiffe
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # SPIRE 身份框架（SPIRE）
 

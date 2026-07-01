@@ -1,6 +1,7 @@
 ---
 title: loki v2.4 Release Notes
 description: loki v2.4 Release Notes — Kubernetes 生产运维知识库
+summary: loki v2.4 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - grafana
 - docker
 - redis
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - monitoring-basics
 - redis-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # loki v2.4 Release Notes
 

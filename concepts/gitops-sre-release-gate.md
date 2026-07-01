@@ -1,5 +1,8 @@
 ---
 title: GitOps SRE 发布门控
+summary: GitOps SRE 发布门控：GitOps 将基础设施和应用的期望状态声明在 Git 中，由 entities/argocd.md/entities/flux.md
+  自动同步到集群。但"自动同步"不等于"安全发布"——一次错误的提交可能直接破坏生产环境。SRE 的 SLO 驱动方法论为 GitOps 提供了"发布门控"（Release
+  Gate）机制：在变更真正影响用户之前，用可观测性数据...
 category: synthesis
 tags:
 - k8s
@@ -12,6 +15,7 @@ tags:
 - canary
 - progressive-delivery
 - reliability
+tier: supporting
 sources:
 - domain-08-release-change-management/01-gitops
 - domain-08-release-change-management/03-change-management
@@ -21,17 +25,19 @@ created: 2026-05-21 14:00:00+00:00
 updated: 2026-05-21 14:00:00+00:00
 last_updated: 2026-05-21 14:00:00+00:00
 relationships:
-  - target: "[[entities/argo.md]]"
-    type: related_to
-  - target: "[[entities/argocd.md]]"
-    type: related_to
-  - target: "[[entities/flux.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/gitops.md]]"
-    type: related_to
-  - target: "[[concepts/GitOps x 平台工程.md]]"
-    type: related_to
+- target: '[[entities/argo.md]]'
+  type: related_to
+- target: '[[entities/argocd.md]]'
+  type: related_to
+- target: '[[entities/flux.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/gitops.md]]'
+  type: related_to
+- target: '[[concepts/GitOps x 平台工程.md]]'
+  type: related_to
 ---
+
+
 
 # [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|GitOps]] SRE 发布门控
 

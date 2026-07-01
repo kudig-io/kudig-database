@@ -1,6 +1,7 @@
 ---
 title: Docker
 description: '- [[domain-13-container-runtime/README.md|Docker 容器技术深度解析]]'
+summary: '- [[domain-13-container-runtime/README.md|Docker 容器技术深度解析]]'
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rag
 - etcd
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Docker
 

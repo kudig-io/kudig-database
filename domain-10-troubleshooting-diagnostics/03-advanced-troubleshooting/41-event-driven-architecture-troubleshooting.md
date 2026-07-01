@@ -1,6 +1,7 @@
 ---
 title: 事件驱动架构故障排查
 description: '# 41 - 事件驱动架构故障排查 (Event-Driven Architecture Troubleshooting)'
+summary: '# 41 - 事件驱动架构故障排查 (Event-Driven Architecture Troubleshooting)'
 category: troubleshooting
 tags:
 - kafka
@@ -13,6 +14,8 @@ tags:
 - grafana
 - istio
 - helm
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: advanced
 reading_level: advanced
@@ -62,8 +65,9 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
-created: "2026-05-23"
 ---
+
+
 
 # 41 - 事件驱动架构故障排查 (Event-Driven Architecture Troubleshooting)
 
@@ -349,7 +353,7 @@ kubectl get pods -n $NAMESPACE | grep producer
 PRODUCER_POD=$(kubectl get pods -n $NAMESPACE -l app=event-producer -o jsonpath='{.items[0].metadata.name}' 2>/dev/null)
 if [ ! -z "$PRODUCER_POD" ]; then
     echo "Producer Pod: $PRODUCER_POD"
-    kubectl logs $PRODUCER_POD -n $NAMESPACE --tail=50 | grep -i "error\|exception\|failed"
+    kubectl logs $PRODUCER_POD -n $NAMESPACE --tail=50 | grep -i "error|exception|failed"
 else
     echo "No producer pods found"
 fi
@@ -367,7 +371,7 @@ kubectl get pods -n $NAMESPACE | grep consumer
 CONSUMER_POD=$(kubectl get pods -n $NAMESPACE -l app=event-consumer -o jsonpath='{.items[0].metadata.name}' 2>/dev/null)
 if [ ! -z "$CONSUMER_POD" ]; then
     echo "Consumer Pod: $CONSUMER_POD"
-    kubectl logs $CONSUMER_POD -n $NAMESPACE --tail=50 | grep -i "error\|exception\|offset"
+    kubectl logs $CONSUMER_POD -n $NAMESPACE --tail=50 | grep -i "error|exception|offset"
 else
     echo "No consumer pods found"
 fi

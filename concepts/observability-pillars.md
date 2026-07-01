@@ -1,6 +1,7 @@
 ---
 title: Observability Pillars
 description: Observability Pillars — Kubernetes 生产运维知识库
+summary: Observability Pillars — Kubernetes 生产运维知识库
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - etcd
 - apiserver
 - kubelet
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Observability Pillars
 

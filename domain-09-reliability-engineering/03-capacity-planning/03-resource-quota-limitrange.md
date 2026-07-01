@@ -1,6 +1,7 @@
 ---
 title: ResourceQuota 与 LimitRange 设计与治理
 description: 面向阿里云/专有云 K8s 的 ResourceQuota 与 LimitRange 治理方案，涵盖命名空间配额设计、默认限制、多租户治理与审计。
+summary: 面向阿里云/专有云 K8s 的 ResourceQuota 与 LimitRange 治理方案，涵盖命名空间配额设计、默认限制、多租户治理与审计。
 category: reliability
 tags:
 - k8s
@@ -11,6 +12,9 @@ tags:
 - cost-management
 - alicloud
 - apsara-stack
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: intermediate
 reading_level: intermediate
@@ -42,9 +46,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # ResourceQuota 与 LimitRange 设计与治理
 

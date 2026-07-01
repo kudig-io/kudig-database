@@ -1,6 +1,8 @@
 ---
 title: Kubewarden 策略引擎
-description: 'Kubewarden 是 SUSE 开源的 CNCF Sandbox 项目，使用 WebAssembly（Wasm）作为策略执行引擎，支持用 Rust/Go/T...'
+description: Kubewarden 是 SUSE 开源的 CNCF Sandbox 项目，使用 WebAssembly（Wasm）作为策略执行引擎，支持用
+  Rust/Go/T...
+summary: Kubewarden 是 SUSE 开源的 CNCF Sandbox 项目，使用 WebAssembly（Wasm）作为策略执行引擎，支持用 Rust/Go/T...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - security
 - policy
 - wasm
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Kubewarden 策略引擎（Kubewarden）
 

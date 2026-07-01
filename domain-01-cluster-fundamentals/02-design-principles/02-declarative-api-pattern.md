@@ -1,6 +1,7 @@
 ---
 title: 02 - 声明式 API 与面向终态设计 (Declarative API)
 description: 'title: 声明式 API 与面向终态设计'
+summary: 'title: 声明式 API 与面向终态设计'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - job
 - cronjob
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - kubernetes-concepts
 - etcd-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 声明式 API 与面向终态设计

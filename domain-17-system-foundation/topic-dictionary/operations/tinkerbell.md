@@ -1,6 +1,9 @@
 ---
 title: Tinkerbell 裸金属部署
-description: 'Tinkerbell 是 Equinix Metal 开源的 CNCF Sandbox 项目，提供裸金属服务器的声明式操作系统部署和生命周期管理，是 PXE/K...'
+description: Tinkerbell 是 Equinix Metal 开源的 CNCF Sandbox 项目，提供裸金属服务器的声明式操作系统部署和生命周期管理，是
+  PXE/K...
+summary: Tinkerbell 是 Equinix Metal 开源的 CNCF Sandbox 项目，提供裸金属服务器的声明式操作系统部署和生命周期管理，是
+  PXE/K...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - operations
 - provisioning
 - bare-metal
+tier: supporting
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Tinkerbell 裸金属部署（Tinkerbell）
 

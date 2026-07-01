@@ -1,6 +1,7 @@
 ---
 title: Version Matrix
 description: '- 检查 `shutdownGracePeriod` 和 `shutdownGracePeriodCriticalPods` 配置'
+summary: '- 检查 `shutdownGracePeriod` 和 `shutdownGracePeriodCriticalPods` 配置'
 category: skills
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - kubelet
 - job
 - cronjob
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 - Matrix
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Version Matrix
 

@@ -1,17 +1,25 @@
 ---
-dialogue_id: "DIALOGUE-CANARY-001"
-skill_id: "SKILL-CANARY-001"
-role: "remote-consultant"
-language: "zh"
-severity: "high"
-status: "reviewed"
+title: 金丝雀发布后部分用户报告错误 — 远程顾问对话脚本
+summary: 金丝雀发布后部分用户报告错误 — 远程顾问对话脚本：kubectl get deployment -n <namespace>
+category: dialogue
+tags:
+- dialogue
+- remote-consultant
+- troubleshooting
+- visibility/public
+tier: supporting
 created: 2026-05-21
 updated: 2026-05-21
+dialogue_id: DIALOGUE-CANARY-001
+skill_id: SKILL-CANARY-001
+role: remote-consultant
+language: zh
+severity: high
+status: reviewed
 last_updated: 2026-05-21
-title: "金丝雀发布后部分用户报告错误 — 远程顾问对话脚本"
-category: dialogue
-tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
+
+
 
 # 金丝雀发布后部分用户报告错误 — 远程顾问对话脚本
 
@@ -224,3 +232,7 @@ kubectl logs -n <namespace> -l version=canary --tail=20 | grep -i error
 
 - [[concepts/canary-deployment.md|金丝雀部署]]
 - [[concepts/ingress-controller.md|Ingress Controller]]
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

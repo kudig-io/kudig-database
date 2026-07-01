@@ -1,6 +1,7 @@
 ---
 title: CubeFS 分布式文件系统
-description: 'CubeFS（原 CFS）是京东开源的 CNCF 孵化项目，云原生分布式文件系统，支持 POSIX/SDK/S3 多协议访问，为 AI 训练和大数据提供高吞吐的...'
+description: CubeFS（原 CFS）是京东开源的 CNCF 孵化项目，云原生分布式文件系统，支持 POSIX/SDK/S3 多协议访问，为 AI 训练和大数据提供高吞吐的...
+summary: CubeFS（原 CFS）是京东开源的 CNCF 孵化项目，云原生分布式文件系统，支持 POSIX/SDK/S3 多协议访问，为 AI 训练和大数据提供高吞吐的...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - storage
 - filesystem
 - cncf
+tier: supporting
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # CubeFS 分布式文件系统（CubeFS）
 

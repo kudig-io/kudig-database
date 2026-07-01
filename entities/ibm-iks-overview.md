@@ -1,6 +1,7 @@
 ---
 title: IBM IKS (IBM Cloud Kubernetes Service) 概述
 description: 'title: IBM IKS (IBM Cloud Kubernetes Service) 概述'
+summary: 'title: IBM IKS (IBM Cloud Kubernetes Service) 概述'
 category: general
 tags:
 - cloud
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - job
 - ingress
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - prometheus-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: IBM IKS (IBM Cloud Kubernetes Servicenetes]] [[Service|Service]]) 概述
 description: '# IBM IKS (IBM Cloud Kubernetes Service) 概述'
@@ -971,6 +975,8 @@ echo "诊断报告已保存到: $REPORT_FILE"
 IBM Cloud Kubernetes Service凭借IBM在企业IT领域的深厚积累，为企业客户提供了安全、可靠、合规的容器化解决方案。通过完善的生产环境最佳实践、企业级安全加固、监控告警体系和成本优化策略，帮助大型企业在数字化转型过程中实现业务价值最大化，特别适合对安全性、合规性有严格要求的金融、医疗、政府等行业客户。
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]

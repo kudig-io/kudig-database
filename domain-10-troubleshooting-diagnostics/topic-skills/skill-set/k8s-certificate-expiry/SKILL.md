@@ -1,41 +1,50 @@
 ---
-skill_id: "SKILL-SEC-001"
-skill_name: "证书过期问题诊断与修复"
-version: "1.0.0"
-category: "security"
-severity_range: "P0-P1"
+title: 证书过期问题诊断与修复
+summary: 证书过期问题诊断与修复：Kubernetes 证书体系包含 API Server、etcd、kubelet、frontend-proxy 等多组证书。证书过期会导致组件间通信失败、节点
+  NotReady 等严重后果。
+category: security
+tags:
+- skills
+- certificate-expiry
+- troubleshooting
+- visibility/public
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+skill_id: SKILL-SEC-001
+skill_name: 证书过期问题诊断与修复
+version: 1.0.0
+severity_range: P0-P1
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
-estimated_resolution_time: "10-30min"
-risk_level: "high"
-agent_execution_mode: "L1-advisory"
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+estimated_resolution_time: 10-30min
+risk_level: high
+agent_execution_mode: L1-advisory
 trigger_keywords:
-  - "certificate"
-  - "x509"
-  - "expired"
-  - "cert"
-  - "TLS"
+- certificate
+- x509
+- expired
+- cert
+- TLS
 trigger_events:
-  - "FailedToUpdateNodeStatus"
-  - "NodeNotReady"
+- FailedToUpdateNodeStatus
+- NodeNotReady
 trigger_metrics:
-  - 'apiserver_client_certificate_expiration_seconds_count'
+- apiserver_client_certificate_expiration_seconds_count
 prerequisites:
-  - "kubectl-basics"
-  - "kubernetes-pki"
+- kubectl-basics
+- kubernetes-pki
 related_skills:
-  - "SKILL-CP-001"
-  - "SKILL-NODE-001"
-created: "2026-05-23"
-updated: "2026-05-23"
+- SKILL-CP-001
+- SKILL-NODE-001
 last_updated: 2026-05-23
-title: "证书过期问题诊断与修复"
-tags: ["skills", "certificate-expiry", "troubleshooting", "visibility/public"]
 ---
+
+
 
 # 证书过期问题诊断与修复
 
@@ -248,7 +257,7 @@ flowchart TD
 | 工具 | 用途 | 典型命令 |
 |:---|:---|:---|
 | kubectl | Kubernetes CLI | `kubectl get/describe/logs/exec` |
-| jq | JSON处理 | `kubectl get ... -o json \| jq ...` |
+| jq | JSON处理 | `kubectl get ... -o json | jq ...` |
 | openssl | 证书检查 | `openssl x509 -in <cert> -noout -dates` |
 | tcpdump | 网络抓包 | `tcpdump -i any port <port> -n` |
 | strace | 系统调用追踪 | `strace -p <pid> -f` |
@@ -275,3 +284,7 @@ flowchart TD
 - [[concepts/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]] — Kubernetes 组件证书签发、轮转与过期管理
 
 ```
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

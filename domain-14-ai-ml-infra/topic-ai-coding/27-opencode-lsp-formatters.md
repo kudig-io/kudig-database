@@ -1,7 +1,9 @@
 ---
 title: LSP 代码智能与 Formatter
-description: '**文档类型**: 技术深度专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, LSP, Language Server Protocol, Formatter, Code Intelligence,
-  Diagnostics, ripgrep'
+description: '**文档类型**: 技术深度专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, LSP, Language
+  Server Protocol, Formatter, Code Intelligence, Diagnostics, ripgrep'
+summary: '**文档类型**: 技术深度专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, LSP, Language
+  Server Protocol, Formatter, Code Intelligence, Diagnostics, ripgrep'
 category: ai-coding
 tags:
 - ai
@@ -10,6 +12,8 @@ tags:
 - code-generation
 - llm
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +33,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - iac-basics
-created: "2026-05-23"
 ---
+
+
 
 # LSP 代码智能与 Formatter
 

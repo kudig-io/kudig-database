@@ -1,6 +1,7 @@
 ---
 title: '场景: 网络诊断'
 description: Kubernetes 网络问题系统化诊断
+summary: Kubernetes 网络问题系统化诊断
 category: scenario
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - ingress
 - networkpolicy
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-20'
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # 场景: 网络诊断
 

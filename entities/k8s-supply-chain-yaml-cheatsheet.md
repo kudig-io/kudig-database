@@ -1,6 +1,7 @@
 ---
 title: 供应链安全、YAML 配置清单与速查表
 description: '# 供应链安全、YAML 配置清单与速查表'
+summary: '# 供应链安全、YAML 配置清单与速查表'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - ingress
 - rbac
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 - 配置清单与速查表
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 供应链安全、YAML 配置清单与速查表
 

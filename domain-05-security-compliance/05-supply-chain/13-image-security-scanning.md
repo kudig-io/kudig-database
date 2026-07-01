@@ -1,6 +1,7 @@
 ---
 title: 13 - 镜像安全扫描与漏洞管理
 description: '# 13 - 镜像安全扫描与漏洞管理'
+summary: '# 13 - 镜像安全扫描与漏洞管理'
 category: security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - harbor
 - opa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -52,8 +55,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # 13 - 镜像安全扫描与漏洞管理
 

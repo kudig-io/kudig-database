@@ -1,6 +1,7 @@
 ---
 title: CNI Plugins
 description: CNI Plugins — Kubernetes 生产运维知识库
+summary: CNI Plugins — Kubernetes 生产运维知识库
 category: entities
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - networkpolicy
 - ebpf
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # CNI Plugins
 

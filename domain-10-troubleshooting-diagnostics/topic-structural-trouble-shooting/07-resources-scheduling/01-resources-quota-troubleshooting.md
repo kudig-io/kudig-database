@@ -1,6 +1,7 @@
 ---
 title: 资源与调度故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 资源与调度故障排查指南'
+summary: 'title: 资源与调度故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - pdb
 - job
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -38,8 +41,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 资源与调度故障排查指南
 description: '# 资源与调度故障排查指南'
@@ -159,7 +163,7 @@ kubectl get pod <pod-name> -o yaml | grep -A15 resources
 
 # 查看 OOM 日志
 kubectl describe pod <pod-name> | grep -i oom
-dmesg | grep -i "oom\|killed"
+dmesg | grep -i "oom|killed"
 
 # 查看调度失败原因
 kubectl describe pod <pod-name> | grep -A10 Events
@@ -213,7 +217,7 @@ kubectl get pods -n <namespace> -o json | \
 
 ```bash
 # 步骤 1：确认 OOM 事件
-kubectl describe pod <pod-name> | grep -i "oom\|killed"
+kubectl describe pod <pod-name> | grep -i "oom|killed"
 
 # 步骤 2：查看容器退出状态
 kubectl get pod <pod-name> -o yaml | grep -A10 "lastState:"
@@ -230,7 +234,7 @@ kubectl describe node <node-name> | grep -A5 "Allocated resources"
 free -h  # 在节点上执行
 
 # 步骤 6：查看系统 OOM 日志
-dmesg | grep -i "oom\|killed" | tail -20
+dmesg | grep -i "oom|killed" | tail -20
 
 # 步骤 7：分析内存使用趋势
 # 使用 Prometheus 查询

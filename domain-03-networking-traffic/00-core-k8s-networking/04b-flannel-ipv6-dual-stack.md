@@ -1,6 +1,7 @@
 ---
 title: Flannel IPv6 Dual Stack 支持
 description: Flannel IPv6 Dual Stack 配置指南，涵盖双栈网络架构、配置步骤、验证方法和已知限制
+summary: Flannel IPv6 Dual Stack 配置指南，涵盖双栈网络架构、配置步骤、验证方法和已知限制
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - calico
 - networkpolicy
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -60,8 +63,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # Flannel IPv6 Dual Stack 支持
 

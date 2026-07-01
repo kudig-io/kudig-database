@@ -1,6 +1,7 @@
 ---
 title: 03 - 多集群网络联邦与跨集群通信
 description: 'title: 03 - 多集群网络联邦与跨集群通信'
+summary: 'title: 03 - 多集群网络联邦与跨集群通信'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - envoy
 - cilium
 - flannel
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - cilium-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 03 - 多集群网络联邦与跨集群通信
 description: '# 03 - 多集群网络联邦与跨集群通信'

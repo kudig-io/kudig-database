@@ -1,7 +1,10 @@
 ---
 title: 控制器模式 × Deployment
-description: '[[concepts/controller-pattern.md|controller pattern]] 描述协调循环的通用框架，[[entities/deployment.md|deployment]] 是最常用的工作负载控制器。wiki 将前者视为抽象模式、后者视为具体资源，但 Deployment
-  不仅是控制器模式的一个实例——它是控制器模式的**最小完备实现**。Deployment 的每一特性（声明式 replica 管理、滚动更新策略、版本回滚、进度追踪'
+description: '[[concepts/controller-pattern.md|controller pattern]] 描述协调循环的通用框架，[[entities/deployment.md|deployment]]
+  是最常用的工作负载控制器。wiki 将前者视为抽象模式、后者视为具体资源，但 Deployment 不仅是控制器模式的一个实例——它是控制器模式的**最小完备实现**。Deployment
+  的每一特性（声明式 replica 管理、滚动更新策略、版本回滚、进度追踪'
+summary: '[[concepts/controller-pattern.md|controller pattern]] 描述协调循环的通用框架，[[entities/deployment.md|deployment]]
+  是最常用的工作负载控制器。wiki 将前者视为抽象模式、后者视为具体资源，但 Deployment 不仅是控制器模式的一个实例——它是控制器模式的**最小完备实现**。Deploymen...'
 category: synthesis
 tags:
 - k8s
@@ -14,6 +17,8 @@ tags:
 - grafana
 - statefulset
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,19 +36,20 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/etcd.md]]"
-    type: uses
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
-  - target: "[[entities/prometheus.md]]"
-    type: uses
-  - target: "[[entities/argo.md]]"
-    type: related_to
-  - target: "[[domain-17-system-foundation/topic-dictionary/workloads/daemonset.md]]"
-    type: related_to
+- target: '[[entities/etcd.md]]'
+  type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
+- target: '[[entities/prometheus.md]]'
+  type: uses
+- target: '[[entities/argo.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-dictionary/workloads/daemonset.md]]'
+  type: related_to
 ---
+
+
 
 # 控制器模式 × Deployment
 

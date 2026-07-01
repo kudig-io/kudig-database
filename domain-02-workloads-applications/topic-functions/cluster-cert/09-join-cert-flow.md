@@ -1,6 +1,7 @@
 ---
 title: kubeadm join 证书分发流程 (topic-code-analysis)
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - reference
@@ -9,6 +10,8 @@ tags:
 - kubelet
 - scheduler
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: kubeadm join 证书分发流程
 description: '## 概述'
@@ -495,7 +499,7 @@ func DownloadCerts(...) error {
 │     │   kubelet 未成功从 CSR 下载证书                            │
 │     │   检查 API Server 日志                                      │
 │     │   kubectl logs -n kube-system kube-apiserver-<node>        │
-│     │       | grep -i "csr\|certificate"                        │
+│     │       | grep -i "csr|certificate"                        │
 │     │                                                             │
 │  ┌──▼─────────────┐                                             │
 │  │ Step 5: 网络连通性 │                                           │
@@ -543,6 +547,8 @@ kubeadm token create --print-join-command
 ```
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

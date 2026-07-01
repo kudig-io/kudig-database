@@ -1,6 +1,7 @@
 ---
 title: 集群运维故障排查
 description: '# 集群运维故障排查'
+summary: '# 集群运维故障排查'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - helm
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - monitoring-basics
 - etcd-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # 集群运维故障排查
 

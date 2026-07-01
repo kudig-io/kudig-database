@@ -1,13 +1,24 @@
 ---
-title: "PersistentVolume (PV)"
+title: PersistentVolume (PV)
+summary: PersistentVolume (PV)：PersistentVolume（PV）是 Kubernetes 集群中的一块存储资源，由管理员预先配置或通过
+  StorageClass 动态供给。PV 独立于使用它的 Pod 生命周期，用于为应用提供持久化存储能力。
 category: concepts
-tags: ["storage", "pv", "persistent-volume", "core", "visibility/public"]
-sources: ["concepts/"]
+tags:
+- storage
+- pv
+- persistent-volume
+- core
+- visibility/public
+tier: core
+sources:
+- concepts/
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 status: stub
 ---
+
+
 # PersistentVolume (PV)
 
 ## 概述
@@ -25,3 +36,7 @@ PersistentVolume（PV）是 Kubernetes 集群中的一块存储资源，由管�
 - [[concepts/persistent-volume-claim.md|PersistentVolumeClaim]] — PVC 声明与绑定
 - [[concepts/storageclass.md|StorageClass]] — 存储类动态供给
 - [[concepts/kubernetes.md|Kubernetes]] — 核心概念
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

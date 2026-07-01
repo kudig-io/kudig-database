@@ -1,14 +1,18 @@
 ---
 title: 目标目录 Orphan 页面 Cross-Link 报告（2026-06-26）
 description: 为 _reports 和 ticket-cases 中的 orphan 页面添加交叉链接
+summary: 为 _reports 和 ticket-cases 中的 orphan 页面添加交叉链接
 category: reports
 tags:
 - cross-linker
 - wiki-maintenance
-created: "2026-06-26"
-updated: "2026-06-26"
+tier: supporting
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06-26
 ---
+
+
 
 # 目标目录 Orphan 页面 Cross-Link 报告
 

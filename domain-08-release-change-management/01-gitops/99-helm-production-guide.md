@@ -1,6 +1,9 @@
 ---
 title: Helm 生产实践指南（阿里云专有云版）
-description: Helm chart 开发规范、values 分层管理、helm-secrets/SOPS 加密、chart 测试、依赖管理、与 ArgoCD/Flux 集成、回滚策略，面向阿里云与专有云 K8s 发布变更场景
+description: Helm chart 开发规范、values 分层管理、helm-secrets/SOPS 加密、chart 测试、依赖管理、与 ArgoCD/Flux
+  集成、回滚策略，面向阿里云与专有云 K8s 发布变更场景
+summary: Helm chart 开发规范、values 分层管理、helm-secrets/SOPS 加密、chart 测试、依赖管理、与 ArgoCD/Flux
+  集成、回滚策略，面向阿里云与专有云 K8s 发布变更场景
 category: gitops
 tags:
 - k8s
@@ -14,6 +17,9 @@ tags:
 - values
 - alicloud
 - apsara-stack
+tier: supporting
+created: '2026-06-26'
+updated: '2026-06-26'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -47,9 +53,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-26"
-updated: "2026-06-26"
 ---
+
+
 
 # Helm 生产实践指南（阿里云专有云版）
 

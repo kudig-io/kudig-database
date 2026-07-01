@@ -1,12 +1,15 @@
 ---
 title: 无责事后复盘模板
 description: '| 14:35 | On-call 响应并开始排查 | 通过 PagerDuty |'
+summary: '| 14:35 | On-call 响应并开始排查 | 通过 PagerDuty |'
 category: domain
 tags:
 - postmortem
 - sre
 - incident-management
 - reliability
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - sre-practices
-created: "2026-05-23"
 ---
+
+
 
 # 无责事后复盘模板
 

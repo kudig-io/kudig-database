@@ -1,7 +1,11 @@
 ---
 title: Wiki Log
-description: '- [2026-05-21] RELEASE-NOTES-INDEX-INGEST domain-19-landscape-references/_archived-release-notes/: 创建 8 个类别索引页 —
-  references/release-notes-observability.md (可观测性, 374 篇)、release-notes-security.md (安全, 218 '
+description: '- [2026-05-21] RELEASE-NOTES-INDEX-INGEST domain-19-landscape-references/_archived-release-notes/:
+  创建 8 个类别索引页 — references/release-notes-observability.md (可观测性, 374 篇)、release-notes-security.md
+  (安全, 218 '
+summary: '- [2026-05-21] RELEASE-NOTES-INDEX-INGEST domain-19-landscape-references/_archived-release-notes/:
+  创建 8 个类别索引页 — references/release-notes-observability.md (可观测性, 374 篇)、release-notes-security.md
+  (安...'
 category: general
 tags:
 - k8s
@@ -14,6 +18,8 @@ tags:
 - envoy
 - cilium
 - calico
+tier: core
+created: '2026-07-01'
 last_updated: 2026-05-21
 difficulty: intermediate
 reading_level: intermediate
@@ -43,6 +49,8 @@ prerequisites:
 - tracing-basics
 - observability-basics
 ---
+
+
 
 # Wiki Log
 

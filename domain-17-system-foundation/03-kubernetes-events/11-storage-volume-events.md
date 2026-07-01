@@ -1,6 +1,7 @@
 ---
 title: 11 - 存储与卷事件
 description: '# 11 - 存储与卷事件'
+summary: '# 11 - 存储与卷事件'
 category: kubernetes-events
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ceph
 - redis
 - postgresql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 11 - 存储与卷事件
 

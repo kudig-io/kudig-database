@@ -1,12 +1,17 @@
 ---
 title: 资源限制
-description: 'Resource Limit 是容器允许使用的最大资源量。当容器使用量超过 Limit 时，CPU 会被节流（throttle），内存超出则容器会被 OOM K...'
+description: Resource Limit 是容器允许使用的最大资源量。当容器使用量超过 Limit 时，CPU 会被节流（throttle），内存超出则容器会被
+  OOM K...
+summary: Resource Limit 是容器允许使用的最大资源量。当容器使用量超过 Limit 时，CPU 会被节流（throttle），内存超出则容器会被
+  OOM K...
 category: dictionary
 tags:
 - k8s
 - glossary
 - scheduling
 - resource
+tier: peripheral
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 资源限制
 

@@ -1,6 +1,7 @@
 ---
 title: 'Domain-32: Kubernetes YAML 配置完整参考手册'
 description: '# Domain-32: Kubernetes YAML 配置完整参考手册'
+summary: '# Domain-32: Kubernetes YAML 配置完整参考手册'
 category: yaml-manifests
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - argocd
 - hpa
 - pdb
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - gitops-basics
-created: "2026-05-23"
 ---
+
+
 
 # Domain-32: Kubernetes YAML 配置完整参考手册
 

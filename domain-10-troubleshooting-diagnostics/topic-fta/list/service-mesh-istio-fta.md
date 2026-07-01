@@ -1,6 +1,7 @@
 ---
 title: Service Mesh(Istio) 异常故障树分析 (skills)
 description: '- **目标**：覆盖 Istio 控制面不可用、Sidecar 注入失败、xDS 配置推送异常、mTLS 证书问题、数据面流量异常与多集群联邦问题的关键成因与路径。'
+summary: '- **目标**：覆盖 Istio 控制面不可用、Sidecar 注入失败、xDS 配置推送异常、mTLS 证书问题、数据面流量异常与多集群联邦问题的关键成因与路径。'
 category: general
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - envoy
 - gateway
 - webhook
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 fta_id: FTA-SERVICE_MESH_ISTIO-001
 component: Service Mesh Istio
 severity: medium
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "[[Service|Service]]Service Mesh）|Service Mesh]](Istio) 异常故障树分析"

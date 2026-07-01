@@ -1,3 +1,13 @@
+---
+title: K8S Networking 2025 2026
+summary: 'Key features in Cilium 1.16:'
+category: entities
+tags:
+- k8s-networking-2025-2026
+tier: supporting
+created: '2026-07-01'
+---
+
 # Kubernetes Networking Research 2025-2026
 
 > Research compiled: 2026-05-24

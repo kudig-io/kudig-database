@@ -1,6 +1,8 @@
 ---
 title: Domain-8 可观测性 — 开源项目索引
-description: '| **Prometheus** | 时序监控与告警 | Graduated | v3.3.0 | 56k+ | Apache-2.0 |'
+description: '| **Prometheus** | 时序监控与告警 | Graduated | v3.3.0 | 56k+ | Apache-2.0
+  |'
+summary: '| **Prometheus** | 时序监控与告警 | Graduated | v3.3.0 | 56k+ | Apache-2.0 |'
 category: observability
 tags:
 - k8s
@@ -11,6 +13,8 @@ tags:
 - prometheus
 - grafana
 - jaeger
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -60,8 +64,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-8 可观测性 — 开源项目索引
 

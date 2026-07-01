@@ -1,6 +1,7 @@
 ---
 title: 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)
 description: '# 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)'
+summary: '# 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)'
 category: control-plane
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cilium
 - flannel
 - calico
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -77,8 +80,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)
 

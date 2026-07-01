@@ -1,7 +1,7 @@
 ---
-summary: "description: '## 项目概述'"
 title: Prometheus (entities)
 description: '## 概述'
+summary: 'description: ''## 项目概述'''
 category: entities
 tags:
 - k8s
@@ -14,6 +14,8 @@ tags:
 - rag
 - kubelet
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +32,8 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - ebpf-basics
-created: "2026-05-23"
 ---
+
 
 # Prometheus
 

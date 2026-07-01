@@ -1,6 +1,7 @@
 ---
 title: PVC 知识图谱索引
 description: '## PVC 知识图谱'
+summary: '## PVC 知识图谱'
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - rook
 - statefulset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,8 +33,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cncf-ecosystem
-created: "2026-05-23"
 ---
+
+
 
 # PVC 知识图谱索引
 

@@ -1,6 +1,7 @@
 ---
-title: "节点加入进阶: Discovery 与 TLS Bootstrap 详解 [cluster-create]"
+title: '节点加入进阶: Discovery 与 TLS Bootstrap 详解 [cluster-create]'
 description: 'title: ''节点加入进阶: Discovery 与 TLS Bootstrap 详解'''
+summary: 'title: ''节点加入进阶: Discovery 与 TLS Bootstrap 详解'''
 category: general
 tags:
 - reference
@@ -11,6 +12,8 @@ tags:
 - controller-manager
 - containerd
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: '节点加入进阶: Discovery 与 TLS Bootstrap 详解'
 description: '# 节点加入进阶: Discovery 与 TLS Bootstrap 详解'
@@ -849,6 +853,8 @@ kubeadm token create --print-join-command | grep -o 'sha256:[a-f0-9]*'
 - [CRI 运行时](18-cri-runtime.md) — join 时 CRI 检查
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

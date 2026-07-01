@@ -1,6 +1,9 @@
 ---
 title: kubeadm init 集群初始化概览 (topic-code-analysis)
-description: 'description: ''| `cmd/kubeadm/app/cmd/init.go` | L351-L500 | 配置验证和默认值填充 |'''
+description: 'description: ''| `cmd/kubeadm/app/cmd/init.go` | L351-L500 | 配置验证和默认值填充
+  |'''
+summary: 'description: ''| `cmd/kubeadm/app/cmd/init.go` | L351-L500 | 配置验证和默认值填充
+  |'''
 category: general
 tags:
 - reference
@@ -13,6 +16,8 @@ tags:
 - calico
 - coredns
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +41,9 @@ prerequisites:
 - platform-engineering-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: kubeadm init 集群初始化概览
 description: '| `cmd/kubeadm/app/cmd/init.go` | L351-L500 | 配置验证和默认值填充 |'
@@ -810,6 +816,10 @@ kubeadm init phase addon all --config=kubeadm-config.yaml
 - [高级配置](11-advanced.md) — InitConfiguration 详解
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

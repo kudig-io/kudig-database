@@ -1,6 +1,7 @@
 ---
 title: 云服务商集成排查
 description: '# 云服务商集成排查'
+summary: '# 云服务商集成排查'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - gateway
 - networkpolicy
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - service-mesh-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # 云服务商集成排查
 

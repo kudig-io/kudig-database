@@ -1,6 +1,7 @@
 ---
 title: Resource Management for Pods and Containers
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - vpa
 - gpu
 - rag
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,9 +35,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # Resource Management for [[Pods|Pods]] and Containers
 

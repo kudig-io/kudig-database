@@ -1,6 +1,7 @@
 ---
 title: Golden Paths 黄金路径设计 (Golden Paths Design Patterns)
 description: 'title: Golden Paths 黄金路径设计 (Golden Paths Design Patterns)'
+summary: 'title: Golden Paths 黄金路径设计 (Golden Paths Design Patterns)'
 category: general
 tags:
 - platform
@@ -13,6 +14,8 @@ tags:
 - docker
 - opa
 - kafka
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -44,8 +47,9 @@ prerequisites:
 - policy-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Golden Paths 黄金路径设计 (Golden Paths Design Patterns)
 description: '# Golden Paths 黄金路径设计 (Golden Paths Design Patterns)'

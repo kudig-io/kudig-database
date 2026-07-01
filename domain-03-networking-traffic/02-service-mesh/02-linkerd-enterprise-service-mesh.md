@@ -1,6 +1,7 @@
 ---
 title: Linkerd 企业级服务网格深度实践
 description: '# Linkerd 企业级服务网格深度实践'
+summary: '# Linkerd 企业级服务网格深度实践'
 category: service-mesh-microservices
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - coredns
 - helm
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -59,8 +62,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
-created: "2026-05-23"
 ---
+
+
 
 # [[Linkerd|Linkerd]] 企业级服务网格深度实践
 

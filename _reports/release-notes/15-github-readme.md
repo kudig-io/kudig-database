@@ -1,11 +1,14 @@
 ---
 title: GitHub README 重写方案
 description: '# GitHub README 重写方案'
+summary: '# GitHub README 重写方案'
 category: general
 tags:
 - k8s
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 - 重写方案
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # GitHub README 重写方案
 

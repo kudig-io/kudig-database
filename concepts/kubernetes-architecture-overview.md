@@ -1,7 +1,7 @@
 ---
-summary: "Kubernetes follows a layered architecture with seven distinct layers:"
 title: Kubernetes Architecture Overview
 description: '- Kubernetes 架构全景图'
+summary: 'Kubernetes follows a layered architecture with seven distinct layers:'
 category: concepts
 tags:
 - k8s
@@ -14,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - containerd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +33,8 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
 
 # [[Kubernetes|Kubernetes]] Architecture Overview
 

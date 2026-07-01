@@ -1,6 +1,7 @@
 ---
 title: PromQL 速查卡
 description: Prometheus Query Language 快速参考，覆盖 Prometheus v2.40+ 常用查询
+summary: Prometheus Query Language 快速参考，覆盖 Prometheus v2.40+ 常用查询
 category: cheatsheet
 tags:
 - prometheus
@@ -11,6 +12,8 @@ tags:
 - observability
 - statefulset
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ related_docs:
   desc: Kubernetes 速查卡
 - path: ../domain-06-observability/
   desc: 监控告警专题
-created: "2026-05-23"
 ---
+
+
 
 # PromQL 速查表
 

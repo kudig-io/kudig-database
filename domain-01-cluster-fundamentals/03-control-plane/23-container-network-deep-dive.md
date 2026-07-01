@@ -1,6 +1,7 @@
 ---
 title: CNI 容器网络接口深度解析 (Container Network Interface Deep Dive)
 description: '# CNI 容器网络接口深度解析 (Container Network Interface Deep Dive)'
+summary: '# CNI 容器网络接口深度解析 (Container Network Interface Deep Dive)'
 category: control-plane
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - istio
 - envoy
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -75,8 +78,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # CNI 容器网络接口深度解析 (Container Network Interface Deep Dive)
 

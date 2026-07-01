@@ -1,6 +1,7 @@
 ---
 title: Kubeflow 平台故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Kubeflow 平台故障排查指南'
+summary: 'title: Kubeflow 平台故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - opa
 - minio
 - mysql
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -45,8 +48,9 @@ prerequisites:
 - gpu-scheduling-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubeflow|Kubeflow]] 平台故障排查指南
 description: '# Kubeflow 平台故障排查指南'

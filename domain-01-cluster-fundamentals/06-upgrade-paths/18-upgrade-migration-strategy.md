@@ -1,6 +1,7 @@
 ---
 title: 18 - Kubernetes 升级和迁移策略指南
 description: '# 18 - Kubernetes 升级和迁移策略指南'
+summary: '# 18 - Kubernetes 升级和迁移策略指南'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - helm
 - daemonset
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -58,8 +61,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 18 - [[Kubernetes|Kubernetes]] 升级和迁移策略指南
 
@@ -724,7 +728,7 @@ for ns in $NAMESPACES; do
     
     # 导出命名空间配置
     kubectl get namespace $ns --context=$SOURCE_CLUSTER -o yaml | \
-        grep -v "uid\|resourceVersion\|creationTimestamp" | \
+        grep -v "uid|resourceVersion|creationTimestamp" | \
         kubectl apply --context=$TARGET_CLUSTER -f -
     
     # 迁移该命名空间中的资源

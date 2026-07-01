@@ -1,6 +1,9 @@
 ---
 title: PSP/SCC 异常故障树分析 (skills)
-description: '<!-- condition: kubectl get events -A | grep -E ''Forbidden|violates PodSecurity'' 显示安全策略拒绝 -->'
+description: '<!-- condition: kubectl get events -A | grep -E ''Forbidden|violates
+  PodSecurity'' 显示安全策略拒绝 -->'
+summary: '<!-- condition: kubectl get events -A | grep -E ''Forbidden|violates PodSecurity''
+  显示安全策略拒绝 -->'
 category: skills
 tags:
 - k8s
@@ -11,6 +14,8 @@ tags:
 - webhook
 - gpu
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +36,9 @@ prerequisites:
 fta_id: FTA-PSP_SCC-001
 component: Psp Scc
 severity: medium
-created: "2026-05-23"
 ---
+
+
 
 # PSP/SCC 异常故障树分析
 

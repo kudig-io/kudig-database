@@ -1,21 +1,29 @@
 ---
 title: Node NotReady 远程顾问对话脚本
+summary: 节点NotReady问题的远程顾问对话脚本，覆盖kubelet、CNI、资源耗尽排查。
 category: dialogue
-tags: [dialogue, remote-advisor, node-notready, skill, k8s, troubleshooting]
-created: "2026-05-23"
-updated: "2026-05-23"
+tags:
+- dialogue
+- remote-advisor
+- node-notready
+- skill
+- k8s
+- troubleshooting
+tier: core
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
-summary: "节点NotReady问题的远程顾问对话脚本，覆盖kubelet、CNI、资源耗尽排查。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
-    type: uses
-  - target: "[[entities/cilium.md]]"
-    type: uses
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
-  - target: "[[scripts/video-scripts/node-notready.md]]"
-    type: uses
+- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+  type: uses
+- target: '[[entities/cilium.md]]'
+  type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
+- target: '[[scripts/video-scripts/node-notready.md]]'
+  type: uses
 ---
+
 
 # [[scripts/video-scripts/node-notready.md|Node NotReady]] 远程顾问对话脚本
 

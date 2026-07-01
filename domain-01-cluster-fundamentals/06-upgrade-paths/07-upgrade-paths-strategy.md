@@ -1,6 +1,7 @@
 ---
 title: 07 - 升级路径与策略指南
 description: '# 07 - 升级路径与策略指南'
+summary: '# 07 - 升级路径与策略指南'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - grafana
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -57,8 +60,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 07 - 升级路径与策略指南
 
@@ -120,7 +124,7 @@ created: "2026-05-23"
 
 | 检查项 | 命令/方法 | 通过标准 | 阻塞级别 |
 |-------|---------|---------|---------|
-| **API弃用检查** | `kubectl get --raw /metrics \| grep apiserver_requested_deprecated_apis` | 无弃用API使用 | P0 |
+| **API弃用检查** | `kubectl get --raw /metrics | grep apiserver_requested_deprecated_apis` | 无弃用API使用 | P0 |
 | **etcd健康** | `etcdctl endpoint health` | 所有节点healthy | P0 |
 | **etcd备份** | `etcdctl snapshot save` | 备份成功 | P0 |
 | **控制平面健康** | `kubectl get cs` 或 `/readyz` | 所有组件健康 | P0 |

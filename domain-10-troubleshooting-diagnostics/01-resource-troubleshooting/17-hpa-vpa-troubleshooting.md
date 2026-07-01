@@ -1,6 +1,7 @@
 ---
 title: HPA/VPA 故障排查
 description: '# 17 - HPA/VPA 故障排查 (HPA/VPA Troubleshooting)'
+summary: '# 17 - HPA/VPA 故障排查 (HPA/VPA Troubleshooting)'
 category: troubleshooting
 tags:
 - hpa
@@ -13,6 +14,8 @@ tags:
 - istio
 - pdb
 - statefulset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: intermediate
 reading_level: intermediate
@@ -63,8 +66,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/hpa-fta.md
   label: '故障树: hpa'
-created: "2026-05-23"
 ---
+
+
 
 # 17 - HPA/VPA 故障排查 (HPA/VPA Troubleshooting)
 

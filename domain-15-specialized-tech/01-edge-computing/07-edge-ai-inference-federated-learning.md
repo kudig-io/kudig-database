@@ -1,6 +1,7 @@
 ---
 title: 边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)
 description: '- edge-ai-inference-federated-learning的最佳实践'
+summary: '- edge-ai-inference-federated-learning的最佳实践'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - cuda
 - nvidia
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - redis-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

@@ -1,11 +1,14 @@
 ---
 title: kudig-database 质量盲区深度扫描报告 (reports)
 description: '# kudig-database 质量盲区深度扫描报告'
+summary: '# kudig-database 质量盲区深度扫描报告'
 category: general
 tags:
 - k8s
 - apiserver
 - llm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -20,8 +23,9 @@ trigger_keywords:
 - 质量盲区深度扫描报告
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # kudig-database 质量盲区深度扫描报告
 

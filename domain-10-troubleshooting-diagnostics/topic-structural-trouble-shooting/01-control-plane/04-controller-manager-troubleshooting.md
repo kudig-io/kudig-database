@@ -1,6 +1,7 @@
 ---
 title: Controller Manager 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Controller Manager 故障排查指南'
+summary: 'title: Controller Manager 故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - docker
 - pdb
 - statefulset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -41,8 +44,9 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Controller Manager 故障排查指南
 description: '# Controller Manager 故障排查指南'
@@ -696,7 +700,7 @@ kubectl get rs -A -o wide
 kubectl describe deployment <name> -n <namespace>
 
 # 步骤 3：查看 CM 日志中的相关错误
-journalctl -u kube-controller-manager | grep -i "deployment\|replicaset" | tail -50
+journalctl -u kube-controller-manager | grep -i "deployment|replicaset" | tail -50
 
 # 步骤 4：检查 API 请求是否被限流
 curl -k https://127.0.0.1:10257/metrics | grep rest_client_requests_total

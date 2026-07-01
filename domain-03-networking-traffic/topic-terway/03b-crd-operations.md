@@ -1,6 +1,7 @@
 ---
 title: 03b - Terway CRD 深度操作指南 (CRD Operations Deep Dive)
 description: '# 03b - Terway CRD 深度操作指南 (CRD Operations Deep Dive)'
+summary: '# 03b - Terway CRD 深度操作指南 (CRD Operations Deep Dive)'
 category: terway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - job
 - networkpolicy
 - crd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -38,8 +41,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - mysql-basics
-created: "2026-05-23"
 ---
+
+
 
 # 03b - Terway CRD 深度操作指南 (CRD Operations Deep Dive)
 
@@ -1195,7 +1199,7 @@ echo ""
 
 echo "=== [5] Recent Terway Errors (last 10) ==="
 kubectl logs -n kube-system -l app=terway-eniip -c terway --tail=500 2>/dev/null | \
-  grep -i "error\|warn\|fail" | tail -10
+  grep -i "error|warn|fail" | tail -10
 echo ""
 
 echo "=== [6] NetworkPolicy Status ==="

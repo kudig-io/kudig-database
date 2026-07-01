@@ -1,6 +1,7 @@
 ---
 title: 09 - Job 与 CronJob 批处理事件
 description: '- [深度分析](#深度分析)'
+summary: '- [深度分析](#深度分析)'
 category: kubernetes-events
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - daemonset
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -48,8 +51,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/job-cronjob-fta.md
   label: '故障树: job-cronjob'
-created: "2026-05-23"
 ---
+
+
 
 # 09 - Job 与 [[CronJob|CronJob]] 批处理事件
 
@@ -1880,7 +1884,7 @@ spec:
 kubectl get events --watch | grep -E 'Suspended|Resumed'
 
 # 查看 Job 暂停历史
-kubectl describe job db-migration | grep -A 5 "Suspended\|Resumed"
+kubectl describe job db-migration | grep -A 5 "Suspended|Resumed"
 
 # 统计暂停时长
 # 使用自定义脚本或 Prometheus 查询

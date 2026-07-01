@@ -1,6 +1,7 @@
 ---
 title: 速查卡 (Cheat Sheet)
 description: 覆盖 Kubernetes 生产运维全场景的快速参考卡片集
+summary: 覆盖 Kubernetes 生产运维全场景的快速参考卡片集
 category: cheatsheet
 tags:
 - cheatsheet
@@ -13,6 +14,8 @@ tags:
 - postgresql
 - rbac
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - prometheus-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # 速查卡 (Cheat Sheet)
 

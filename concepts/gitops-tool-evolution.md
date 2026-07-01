@@ -1,6 +1,7 @@
 ---
 title: GitOps 工具演进
 description: '- 集群注册安全改进（修复 client-cert 凭证持久化问题 #1742）'
+summary: '- 集群注册安全改进（修复 client-cert 凭证持久化问题 #1742）'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - rbac
 - crd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - gitops-basics
-created: "2026-05-23"
 ---
+
+
 
 # GitOps 工具演进
 

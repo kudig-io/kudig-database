@@ -1,6 +1,7 @@
 ---
 title: 05-日志收集分析平台
 description: '# 05-日志收集分析平台'
+summary: '# 05-日志收集分析平台'
 category: production-operations
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - redis
 - kafka
 - elasticsearch
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -46,8 +49,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 05-日志收集分析平台
 

@@ -1,6 +1,7 @@
 ---
 title: Wiki Frontmatter Schema
 description: Wiki Frontmatter Schema — Kubernetes 生产运维知识库
+summary: Wiki Frontmatter Schema — Kubernetes 生产运维知识库
 category: references
 tags:
 - schema
@@ -9,6 +10,8 @@ tags:
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 - Schema
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Wiki Schema
 

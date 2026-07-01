@@ -1,6 +1,7 @@
 ---
 title: 硬件故障排查方法论
 description: '# 硬件故障排查方法论'
+summary: '# 硬件故障排查方法论'
 category: hardware
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - rag
 - apiserver
 - calico
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 硬件故障排查方法论
 

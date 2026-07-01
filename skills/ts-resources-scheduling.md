@@ -1,6 +1,7 @@
 ---
 title: 资源调度故障排查
 description: '# 资源调度故障排查'
+summary: '# 资源调度故障排查'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - vpa
 - pdb
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 # 资源调度故障排查
 

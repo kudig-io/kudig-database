@@ -1,6 +1,7 @@
 ---
 title: 02 - Kubernetes Gateway API 标准深度解析
 description: '# 02 - Kubernetes Gateway API 标准深度解析'
+summary: '# 02 - Kubernetes Gateway API 标准深度解析'
 category: cloud-native-api-gateway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - crd
 - rag
 - wasm
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -50,8 +53,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/gateway-api-fta.md
   label: '故障树: gateway-api'
-created: "2026-05-23"
 ---
+
+
 
 # 02 - [[Kubernetes|Kubernetes]] Gateway API 标准深度解析
 

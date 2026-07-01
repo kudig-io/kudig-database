@@ -1,6 +1,7 @@
 ---
 title: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
 description: '# 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation'
+summary: '# 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation'
 category: observability
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - statefulset
 - job
+tier: core
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -61,8 +64,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 <!-- condition: kubectl get [[Pods|pods]] -n monitoring -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{"\n"}{end}' 显示监控组件异常 -->
 

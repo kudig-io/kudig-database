@@ -1,6 +1,7 @@
 ---
 title: API Server 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: API Server 故障排查指南'
+summary: 'title: API Server 故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - coredns
 - containerd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -42,8 +45,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 title: API Server 故障排查指南
 description: '# API Server 故障排查指南'
@@ -522,7 +526,7 @@ journalctl -u kube-apiserver | grep -iE "(certificate|x509|tls)" | tail -50
 # 🔍 高级日志分析技巧
 # 提取错误模式和频率统计
 journalctl -u kube-apiserver --since "1 hour ago" | \
-  grep -i "error\|failed\|warning" | \
+  grep -i "error|failed|warning" | \
   awk '{print $NF}' | \
   sort | uniq -c | sort -nr | head -10
 

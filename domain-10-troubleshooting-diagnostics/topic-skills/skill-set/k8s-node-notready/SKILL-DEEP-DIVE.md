@@ -1,6 +1,7 @@
 ---
 title: K8s Node NotReady 深度解析
 description: 对 Node NotReady 各根因的「为什么」进行 prose 拆解，覆盖阿里云/专有云场景、边界条件、版本差异与禁忌操作
+summary: 对 Node NotReady 各根因的「为什么」进行 prose 拆解，覆盖阿里云/专有云场景、边界条件、版本差异与禁忌操作
 category: Kubernetes-Incident-Response
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - ack
 - deep-dive
 - skills
+tier: supporting
+created: '2026-06-26'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -38,12 +41,12 @@ k8s_versions:
 skill_id: SKILL-SKILL-001-DEEP
 skill_name: K8s Node NotReady 深度解析
 version: 1.0.0
-created: "2026-06-26"
 authors:
 - name: KUDIG Team
   role: contributor
-
 ---
+
+
 
 # K8s Node NotReady 深度解析
 
@@ -229,3 +232,7 @@ ssh <node> 'openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -no
 - [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/reference/root-cause-catalog.md|根因分类目录]]
 - [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
 - Terway 网络专题
+
+## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub

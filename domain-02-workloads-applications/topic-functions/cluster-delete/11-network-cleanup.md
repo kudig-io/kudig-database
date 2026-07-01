@@ -1,6 +1,7 @@
 ---
 title: 网络清理详解 — CNI / iptables / ipvs / 路由 (topic-code-analysis)
 description: 'title: 网络清理详解 — CNI / iptables / ipvs / 路由'
+summary: 'title: 网络清理详解 — CNI / iptables / ipvs / 路由'
 category: general
 tags:
 - reference
@@ -12,6 +13,8 @@ tags:
 - networkpolicy
 - ebpf
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 网络清理详解 — CNI / iptables / ipvs / 路由
 category: cluster-delete
@@ -541,6 +545,8 @@ echo "=== 网络清理完成 ==="
 - [CNI 规范](https://github.com/containernetworking/cni/blob/master/SPEC.md)
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - 22-networkpolicy-reference
 - [[README|README]]

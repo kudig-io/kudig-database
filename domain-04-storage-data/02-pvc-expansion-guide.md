@@ -1,13 +1,26 @@
 ---
-title: "PVC 扩容指南"
+title: PVC 扩容指南
+summary: PVC 扩容指南：随着业务增长，存储空间不足是生产环境常见问题。Kubernetes 支持 PVC（Persistent Volume Claim）的动态扩容，但需满足特定前提条件，且不同存储类型的扩容特性差异显著。
 category: domain-04
-tags: ["domain-04", "存储", "PVC", "扩容", "云盘", "NAS", "CSI", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- domain-04
+- 存储
+- PVC
+- 扩容
+- 云盘
+- NAS
+- CSI
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # PVC 扩容指南
 
@@ -168,3 +181,7 @@ kubectl apply -f new-larger-pvc.yaml
 - [[persistent-volume-claim]] — PVC 原理与配置
 - [[domain-16-database-middleware/01-database-on-kubernetes-guide.md|database-on-kubernetes-guide]] — K8s 上的数据库运行指南
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|statefulset-troubleshooting]] — StatefulSet 问题排查
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

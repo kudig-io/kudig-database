@@ -1,6 +1,7 @@
 ---
 title: Keylime 远程证明
-description: 'Keylime 是 MITRE 开源的 CNCF Sandbox 项目，基于 TPM（可信平台模块）提供远程证明（Remote Attestation）能力，验...'
+description: Keylime 是 MITRE 开源的 CNCF Sandbox 项目，基于 TPM（可信平台模块）提供远程证明（Remote Attestation）能力，验...
+summary: Keylime 是 MITRE 开源的 CNCF Sandbox 项目，基于 TPM（可信平台模块）提供远程证明（Remote Attestation）能力，验...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - security
 - attestation
 - tpm
+tier: supporting
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Keylime 远程证明（Keylime）
 

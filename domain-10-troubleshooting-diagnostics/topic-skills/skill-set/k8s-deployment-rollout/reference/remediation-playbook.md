@@ -1,12 +1,21 @@
 ---
-title: "Deployment Rollout Remediation Playbook"
+title: Deployment Rollout Remediation Playbook
+summary: Deployment Rollout Remediation Playbook：kubectl top nodes kubectl describe
+  pod <pending-pod> -n <namespace> | grep -A 5 "Events"
 category: remediation
-skill_set: "k8s-deployment-rollout"
-created: "2026-05-22"
-updated: "2026-05-22"
+tags:
+- reference
+- remediation
+- playbook
+- visibility/public
+tier: supporting
+created: '2026-05-22'
+updated: '2026-05-22'
+skill_set: k8s-deployment-rollout
 last_updated: 2026-05-22
-tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
+
+
 
 # 修复操作手册 / Remediation Playbook
 
@@ -165,7 +174,7 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
 - **适用根因**: RC-003
 - **前置检查**:
   ```bash
-  kubectl describe pod <pod> -n <namespace> | grep -A 20 "Liveness\|Readiness"
+  kubectl describe pod <pod> -n <namespace> | grep -A 20 "Liveness|Readiness"
   kubectl logs <pod> -n <namespace> --previous 2>/dev/null | tail -50
   ```
 - **执行命令**:
@@ -360,3 +369,9 @@ kubectl rollout status deployment/<name> -n <namespace>
 ## 参见
 
 - [[remediation-playbook]] — remediation 领域核心页面
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

@@ -1,5 +1,8 @@
 ---
 title: KUDIG 全面修复报告 — 2026-05-24
+summary: 'KUDIG 全面修复报告 — 2026-05-24：7c24b3b2  docs: 更新 _insights.md 反映 orphans 修复成果
+  73c5a335  fix: 修复最后 4 个 orphans（domain-11、skills scenarios、rag-chunking-report）
+  f5cabc66  fix: 修复剩余 8 个 orphans（拼写错误、跨域引用、M...'
 category: reports
 tags:
 - reports
@@ -9,6 +12,7 @@ tags:
 - orphans
 - frontmatter
 - visibility/public
+tier: supporting
 sources:
 - _reports/
 created: 2026-05-24
@@ -16,13 +20,15 @@ updated: 2026-05-24
 last_updated: 2026-05-24
 status: reviewed
 relationships:
-- target: "_reports/obsidian-wiki-skills-evaluation-2026-05-24.md"
+- target: _reports/obsidian-wiki-skills-evaluation-2026-05-24.md
   type: related_to
-- target: "_reports/wiki-lint-2026-05-24.md"
+- target: _reports/wiki-lint-2026-05-24.md
   type: related_to
-- target: "_reports/wiki-dedup-audit-2026-05-24.md"
+- target: _reports/wiki-dedup-audit-2026-05-24.md
   type: related_to
 ---
+
+
 
 # KUDIG 全面修复报告 — 2026-05-24
 
@@ -263,6 +269,8 @@ af4cec65  feat: KUDIG知识缺口全面修复（17 files）
 - [[kubernetes]] — visibility/public 领域核心页面
 
 ## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub
 
 - _reports/obsidian-wiki-skills-evaluation-2026-05-24.md
 - _reports/wiki-lint-2026-05-24.md

@@ -1,6 +1,7 @@
 ---
 title: 103 - 容器镜像构建工具 (Container Image Build)
 description: '## 容器镜像构建生态架构'
+summary: '## 容器镜像构建生态架构'
 category: extensions
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - docker
 - harbor
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -48,8 +51,9 @@ cross_refs:
 - type: domain
   path: ../domain-07-platform-engineering/
   label: '相关知识域: domain-07-platform-engineering'
-created: "2026-05-23"
 ---
+
+
 
 # 103 - 容器镜像构建工具 (Container Image Build)
 

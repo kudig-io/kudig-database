@@ -1,6 +1,9 @@
 ---
 title: 03 - 镜像拉取事件
-description: '**本文档系统性覆盖 Kubernetes 容器镜像拉取全流程的所有事件类型,详细解析 imagePullPolicy、镜像拉取失败排查、私有仓库认证和 Docker Hub 限流等生产环境高频问题。**'
+description: '**本文档系统性覆盖 Kubernetes 容器镜像拉取全流程的所有事件类型,详细解析 imagePullPolicy、镜像拉取失败排查、私有仓库认证和
+  Docker Hub 限流等生产环境高频问题。**'
+summary: '**本文档系统性覆盖 Kubernetes 容器镜像拉取全流程的所有事件类型,详细解析 imagePullPolicy、镜像拉取失败排查、私有仓库认证和
+  Docker Hub 限流等生产环境高频问题。**'
 category: kubernetes-events
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - coredns
 - helm
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -47,8 +52,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 03 - 镜像拉取事件
 

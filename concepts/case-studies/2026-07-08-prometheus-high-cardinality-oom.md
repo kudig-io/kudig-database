@@ -1,15 +1,25 @@
 ---
-title: "[2026-07-08] [P1] Prometheus 高基数导致 OOM"
+title: '[2026-07-08] [P1] Prometheus 高基数导致 OOM'
+summary: '[2026-07-08] [P1] Prometheus 高基数导致 OOM：11:20，Prometheus Pod 反复 OOMKilled：'
 category: case-study
-tags: [production, incident, observability, prometheus, metrics, oom]
-date: "2026-07-08"
+tags:
+- production
+- incident
+- observability
+- prometheus
+- metrics
+- oom
+tier: core
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-07-08'
 severity: P1
-mttr: "38min"
+mttr: 38min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-07-08] 用户 ID 标签导致 Prometheus 高基数，TSDB 内存 OOM
 

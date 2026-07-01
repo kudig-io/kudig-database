@@ -1,6 +1,7 @@
 ---
 title: 01 - YAML 语法基础与 Kubernetes 资源通用规范
 description: 'description: 1. [概述](#1-概述)'
+summary: 'description: 1. [概述](#1-概述)'
 category: general
 tags:
 - yaml
@@ -13,6 +14,8 @@ tags:
 - envoy
 - helm
 - argocd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 - etcd-basics
 - mysql-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 01 - YAML 语法基础与 [[Kubernetes|Kubernetes]] 资源通用规范
 description: 1. [概述](#1-概述)
@@ -2390,3 +2394,7 @@ pluto detect-helm -owide --helm-version=3
 - 03-pod-specification-complete
 
 ```
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub

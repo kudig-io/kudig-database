@@ -1,6 +1,7 @@
 ---
 title: 06 - 集群配置参数完全参考
 description: '# 06 - 集群配置参数完全参考'
+summary: '# 06 - 集群配置参数完全参考'
 category: architecture-fundamentals
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - flannel
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -59,8 +62,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 06 - 集群配置参数完全参考
 
@@ -1773,11 +1777,11 @@ kubectl get componentstatuses  # 已弃用但仍可用
 | 检查项 | 命令 | 期望结果 |
 |:---|:---|:---|
 | API Server认证 | `kubectl auth can-i --list` | 返回权限列表 |
-| RBAC启用 | `kubectl api-versions \| grep rbac` | 包含rbac.authorization.k8s.io/v1 |
+| RBAC启用 | `kubectl api-versions | grep rbac` | 包含rbac.authorization.k8s.io/v1 |
 | 审计日志 | `ls -la /var/log/kubernetes/audit.log` | 文件存在且有内容 |
 | etcd加密 | `etcdctl get /registry/secrets/... --print-value-only` | 输出加密内容 |
 | kubelet证书轮换 | `openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates` | 有效期内 |
-| kube-proxy模式 | `kubectl get cm kube-proxy -n kube-system -o yaml \| grep mode` | ipvs |
+| kube-proxy模式 | `kubectl get cm kube-proxy -n kube-system -o yaml | grep mode` | ipvs |
 
 ---
 

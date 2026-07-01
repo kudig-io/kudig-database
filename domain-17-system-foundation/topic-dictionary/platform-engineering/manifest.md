@@ -1,12 +1,17 @@
 ---
 title: 清单
-description: 'Manifest 是 Kubernetes 资源的声明式定义文件，通常使用 YAML 或 JSON 格式。它描述了资源的期望状态，Kubernetes 会持续将...'
+description: Manifest 是 Kubernetes 资源的声明式定义文件，通常使用 YAML 或 JSON 格式。它描述了资源的期望状态，Kubernetes
+  会持续将...
+summary: Manifest 是 Kubernetes 资源的声明式定义文件，通常使用 YAML 或 JSON 格式。它描述了资源的期望状态，Kubernetes
+  会持续将...
 category: dictionary
 tags:
 - k8s
 - glossary
 - manifest
 - yaml
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 清单
 

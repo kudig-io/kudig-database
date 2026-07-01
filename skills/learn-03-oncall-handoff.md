@@ -1,6 +1,7 @@
 ---
 title: 'Day 3: 值班交接 SOP'
 description: '## 概述'
+summary: '## 概述'
 category: skills
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - prometheus
 - grafana
 - ingress
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 trigger_keywords:
 - Day

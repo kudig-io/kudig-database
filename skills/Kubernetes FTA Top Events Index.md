@@ -1,6 +1,7 @@
 ---
 title: Kubernetes FTA Top Events Index
 description: Kubernetes FTA Top Events Index — Kubernetes 生产运维知识库
+summary: Kubernetes FTA Top Events Index — Kubernetes 生产运维知识库
 category: skill
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - flannel
 - containerd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes FTA Top Events Index
 

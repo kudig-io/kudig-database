@@ -1,6 +1,7 @@
 ---
 title: 容器技术、Linux 系统与网络存储基础
 description: '# 容器技术、Linux 系统与网络存储基础'
+summary: '# 容器技术、Linux 系统与网络存储基础'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - calico
 - ceph
 - minio
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # 容器技术、Linux 系统与网络存储基础
 

@@ -1,6 +1,7 @@
 ---
 title: Pod CrashLoopBackOff & OOMKilled 诊断与修复
 description: '## 1. 概述'
+summary: '## 1. 概述'
 category: pod
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - envoy
 - coredns
+tier: core
+created: '2026-05-23'
 last_updated: '2026-04-26'
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +54,9 @@ k8s_versions:
 - 1.31.x
 - 1.32.x
 agent_execution_mode: L2-semi-auto
-created: "2026-05-23"
 ---
+
+
 
 <!-- condition: kubectl get [[Pods|pods]] -A -o jsonpath='{range .items[?(@.status.containerStatuses[?(@.restartCount>3)])]} {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示频繁重启的 Pod -->
 
@@ -412,7 +416,7 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   - **经验法则**: Container memory limit 应为 Java Heap 的 1.5-2 倍
   - 检查 JVM 参数:
     ```bash
-    kubectl logs <pod> -n <namespace> --previous | grep -i "MaxHeapSize\|Xmx\|Xms\|HeapSize"
+    kubectl logs <pod> -n <namespace> --previous | grep -i "MaxHeapSize|Xmx|Xms|HeapSize"
     ```
   - 如果 `-Xmx=512m` 但 `limits.memory=512Mi` → 几乎必然 OOMKilled
   - **[v1.29+]** 如果使用了 In-Place Pod Resource Resize（alpha → beta），可能动态调整过 limits
@@ -422,7 +426,7 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   - 如果未设置 `GOMEMLIMIT`，Go runtime 默认使用 `GOGC=100`（堆翻倍时触发 GC），可能导致内存飙升
   - 检查环境变量:
     ```bash
-    kubectl get pod <pod> -n <namespace> -o jsonpath='{range .spec.containers[*].env[*]}{.name}={.value}{"\n"}{end}' | grep -i "GOMEMLIMIT\|GOGC"
+    kubectl get pod <pod> -n <namespace> -o jsonpath='{range .spec.containers[*].env[*]}{.name}={.value}{"\n"}{end}' | grep -i "GOMEMLIMIT|GOGC"
     ```
 
 **Step D2.4**: 检查环境变量、ConfigMap、Secret
@@ -853,7 +857,7 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
 - **前置检查**:
   ```bash
   # 确认缺失的 ConfigMap/Secret 名称
-  kubectl get events -n <namespace> --field-selector involvedObject.name=<pod> | grep -i "mount\|configmap\|secret"
+  kubectl get events -n <namespace> --field-selector involvedObject.name=<pod> | grep -i "mount|configmap|secret"
   
   # 列出 namespace 中现有的 ConfigMap
   kubectl get configmap -n <namespace>

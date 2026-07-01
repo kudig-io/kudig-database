@@ -1,6 +1,7 @@
 ---
 title: Service 无法访问：专有云 SLB 后端服务器组配置异常
 description: 专有云 ACK 集群 LoadBalancer 类型 Service 因 SLB 后端服务器组配置异常导致外部无法访问的工单闭环样本。
+summary: 专有云 ACK 集群 LoadBalancer 类型 Service 因 SLB 后端服务器组配置异常导致外部无法访问的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -10,6 +11,9 @@ tags:
 - service
 - network
 - p1
+tier: peripheral
+created: '2026-06-26T10:00:00+08:00'
+updated: '2026-06-26T11:20:00+08:00'
 incident_id: INC-2026-ACK-003
 priority: P1
 severity: high
@@ -21,9 +25,7 @@ skill_ref:
 - K8s LoadBalancer Service
 fta_ref:
 - 'FTA: Service 无法访问-SLB 后端异常'
-created: '2026-06-26T10:00:00+08:00'
-updated: '2026-06-26T11:20:00+08:00'
-last_updated: 2026-06-26T11:20:00+08:00
+last_updated: 2026-06-26 11:20:00+08:00
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -49,13 +51,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[concepts/service.md]]"
+- target: '[[concepts/service.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-044-kubeproxy-service-unreachable.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-044-kubeproxy-service-unreachable.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -88,7 +92,7 @@ kubectl get endpoints api-gateway -n default
 kubectl get pod -n default -l app=api-gateway -o wide
 
 # 3. 检查 Cloud Controller Manager 日志中 SLB 相关事件
-kubectl logs -n kube-system -l app=cloud-controller-manager --tail=200 | grep -i "api-gateway\|backend\|VServerGroup"
+kubectl logs -n kube-system -l app=cloud-controller-manager --tail=200 | grep -i "api-gateway|backend|VServerGroup"
 
 # 4. 查询 SLB 监听与后端服务器组
 aliyun slb DescribeLoadBalancerAttribute --LoadBalancerId lb-8vbdummy03 --RegionId cn-zhangjiakou

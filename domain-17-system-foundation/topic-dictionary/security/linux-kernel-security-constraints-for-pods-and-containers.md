@@ -1,12 +1,15 @@
 ---
 title: 针对 Pod 和容器的 Linux 内核安全约束
 description: '# 针对 Pod 和容器的 Linux 内核安全约束'
+summary: '# 针对 Pod 和容器的 Linux 内核安全约束'
 category: dictionary
 tags:
 - k8s
 - glossary
 - terminology
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # 针对 Pod 和容器的 Linux 内核安全约束
 

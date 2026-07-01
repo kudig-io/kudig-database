@@ -1,6 +1,7 @@
 ---
 title: 硬件厂商生态
 description: '## 概述'
+summary: '## 概述'
 category: hardware
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - network
 - nvidia
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 硬件厂商生态
 

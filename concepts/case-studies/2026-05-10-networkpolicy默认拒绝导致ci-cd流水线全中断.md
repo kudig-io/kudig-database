@@ -1,14 +1,19 @@
 ---
-category: "synthesis"
-tags: ["synthesis"]
-date: "2026-05-10"
-title: "NetworkPolicy默认拒绝导致CI/CD流水线全中断"
-skill: "20-networkpolicy-connectivity"
-severity: "P1"
-created: "2026-05-23"
-updated: "2026-05-23"
+title: NetworkPolicy默认拒绝导致CI/CD流水线全中断
+summary: NetworkPolicy默认拒绝导致CI/CD流水线全中断：安全团队部署了默认拒绝的NetworkPolicy后，CI/CD流水线全部失败，无法从镜像仓库拉取镜像和推送构建产物。
+category: synthesis
+tags:
+- synthesis
+tier: core
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-05-10'
+skill: 20-networkpolicy-connectivity
+severity: P1
 last_updated: 2026-05-23
 ---
+
+
 
 # NetworkPolicy默认拒绝导致CI/CD流水线全中断
 

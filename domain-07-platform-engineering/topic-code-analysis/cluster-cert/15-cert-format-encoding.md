@@ -1,6 +1,7 @@
 ---
 title: 证书格式与编码详解 (topic-code-analysis)
 description: 'title: 证书格式与编码详解'
+summary: 'title: 证书格式与编码详解'
 category: general
 tags:
 - reference
@@ -9,6 +10,8 @@ tags:
 - kubelet
 - controller-manager
 - ingress
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 证书格式与编码详解
 description: '# 证书格式与编码详解'
@@ -664,6 +668,8 @@ kubectl get secret my-tls-secret -o jsonpath='{.data.tls\.crt}' | \
 | `WriteCert` | `cmd/kubeadm/app/util/pkiutil/pki_helpers.go` | 证书写入磁盘 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

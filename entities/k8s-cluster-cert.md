@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 集群证书管理操作指南
 description: '# Kubernetes 集群证书管理操作指南'
+summary: '# Kubernetes 集群证书管理操作指南'
 category: references
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - rbac
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 集群证书管理操作指南
 

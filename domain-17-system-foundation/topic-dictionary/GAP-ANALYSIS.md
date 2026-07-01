@@ -1,6 +1,7 @@
 ---
 title: Topic Dictionary 内容缺口分析（2026 行业最佳实践视角）
 description: '# Topic Dictionary 内容缺口分析（2026 行业最佳实践视角）'
+summary: '# Topic Dictionary 内容缺口分析（2026 行业最佳实践视角）'
 category: dictionary
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - argocd
 - flux
 - opa
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -47,8 +50,9 @@ prerequisites:
 - backup-basics
 - logging-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # Topic Dictionary 内容缺口分析（2026 行业最佳实践视角）
 

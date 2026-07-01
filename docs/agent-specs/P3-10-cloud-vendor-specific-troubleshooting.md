@@ -1,6 +1,7 @@
 ---
 title: 云厂商差异化问题场景
 description: '# "Flannel plugin not ready" → 使用 terway 网络插件'
+summary: '# "Flannel plugin not ready" → 使用 terway 网络插件'
 category: general
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - networkpolicy
 - gpu
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # 云厂商差异化问题场景
 
@@ -72,7 +76,7 @@ aliyun cs InstallClusterAddons --clusterId <id> --addon-name csi-plugin
 
 | 症状 | 诊断命令 | 根因 | 修复 |
 |------|---------|------|------|
-| Pod 无 IP (ENI 模式) | `kubectl describe pod <pod> \| grep -A5 Events` | ENI 资源不足 | 增加 ENI 配额或减少 Pod |
+| Pod 无 IP (ENI 模式) | `kubectl describe pod <pod> | grep -A5 Events` | ENI 资源不足 | 增加 ENI 配额或减少 Pod |
 | 跨节点网络不通 | `aliyun vpc DescribeVpcAttribute --VpcId <vpc_id>` | VPC 路由问题 | 检查路由表和安全组 |
 | Terway Pod 异常 | `kubectl get pods -n kube-system -l k8s-app=terway` | Terway DaemonSet 问题 | 重启 Terway Pod |
 

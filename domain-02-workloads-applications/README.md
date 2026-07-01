@@ -1,6 +1,9 @@
 ---
 title: Workloads & Applications
-description: 整合原 domain-02-workloads-applications 和 domain-02-workloads-applications 的工作负载与应用知识，涵盖 K8s 原生工作负载、Java on K8s 和应用架构模式。
+description: 整合原 domain-02-workloads-applications 和 domain-02-workloads-applications
+  的工作负载与应用知识，涵盖 K8s 原生工作负载、Java on K8s 和应用架构模式。
+summary: 整合原 domain-02-workloads-applications 和 domain-02-workloads-applications 的工作负载与应用知识，涵盖
+  K8s 原生工作负载、Java on K8s 和应用架构模式。
 category: domain
 tags:
 - workloads
@@ -11,6 +14,8 @@ tags:
 - applications
 - job
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Workloads & Applications
 

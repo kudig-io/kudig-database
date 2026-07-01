@@ -1,6 +1,7 @@
 ---
 title: 15 - 阿里云特定集成表
 description: '| **ACK专有版** | 用户管理 | 完全控制需求 | 按ECS计费 | 99.5% | 自行维护控制平面 |'
+summary: '| **ACK专有版** | 用户管理 | 完全控制需求 | 按ECS计费 | 99.5% | 自行维护控制平面 |'
 category: ai-infra
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - scheduler
 - prometheus
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -59,8 +62,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
-created: "2026-05-23"
 ---
+
+
 
 # 15 - 阿里云特定集成表
 

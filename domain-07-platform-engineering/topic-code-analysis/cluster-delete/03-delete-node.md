@@ -1,6 +1,7 @@
 ---
 title: 节点删除流程 — kubectl delete node 源码分析 (topic-code-analysis)
 description: '## 概述'
+summary: '## 概述'
 category: general
 tags:
 - reference
@@ -13,6 +14,8 @@ tags:
 - statefulset
 - daemonset
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 节点删除流程 — kubectl delete node 源码分析
 category: cluster-delete
@@ -634,6 +638,8 @@ ip link delete flannel.1
 | `cleanupNode` | `cmd/kubeadm/app/phases/reset/cleanup.go` | 节点清理 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

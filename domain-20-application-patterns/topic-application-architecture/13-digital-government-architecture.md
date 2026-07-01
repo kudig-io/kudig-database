@@ -1,6 +1,7 @@
 ---
 title: 数字政务 Kubernetes 生产架构设计
 description: 'title: 数字政务Kubernetes生产架构设计'
+summary: 'title: 数字政务Kubernetes生产架构设计'
 category: general
 tags:
 - architecture
@@ -11,6 +12,8 @@ tags:
 - networkpolicy
 - operator
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 数字政务Kubernetes生产架构设计
 description: '# 数字政务 [[Kubernetes|Kubernetes]] 生产架构设计'

@@ -1,6 +1,7 @@
 ---
 title: tekton v0.45 Release Notes
 description: tekton v0.45 Release Notes — Kubernetes 生产运维知识库
+summary: tekton v0.45 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - docker
 - opa
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - policy-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # tekton v0.45 Release Notes
 

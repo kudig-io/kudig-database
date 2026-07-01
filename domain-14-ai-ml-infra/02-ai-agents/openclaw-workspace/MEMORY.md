@@ -1,6 +1,7 @@
 ---
 title: 记忆系统 (02-ai-agents)
 description: 'description: KuDig Doctor Agent 的长期记忆系统，存储跨会话的经验、模式和确定性规则'
+summary: 'description: KuDig Doctor Agent 的长期记忆系统，存储跨会话的经验、模式和确定性规则'
 category: general
 tags:
 - ai
@@ -13,6 +14,8 @@ tags:
 - pdb
 - ingress
 - gateway
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -35,8 +38,9 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 记忆系统
 description: KuDig Doctor Agent 的长期记忆系统，存储跨会话的经验、模式和确定性规则

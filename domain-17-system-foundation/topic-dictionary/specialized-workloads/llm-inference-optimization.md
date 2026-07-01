@@ -1,6 +1,7 @@
 ---
 title: 大语言模型（LLM）推理优化
 description: '# 大语言模型（LLM）推理优化'
+summary: '# 大语言模型（LLM）推理优化'
 category: dictionary
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - nvidia
 - vllm
 - llm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -29,8 +32,9 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # 大语言模型（LLM）推理优化
 

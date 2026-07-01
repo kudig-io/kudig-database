@@ -1,6 +1,7 @@
 ---
 title: 发布说明索引 — 存储
 description: '# 发布说明索引 — 存储'
+summary: '# 发布说明索引 — 存储'
 category: references
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - ceph
 - crd
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # 发布说明索引 — 存储
 

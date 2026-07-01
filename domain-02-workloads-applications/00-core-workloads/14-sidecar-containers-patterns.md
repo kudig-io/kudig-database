@@ -1,6 +1,7 @@
 ---
 title: Sidecar 容器模式
 description: '## 概述'
+summary: '## 概述'
 category: workloads
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - envoy
 - docker
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -54,8 +57,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
-created: "2026-05-23"
 ---
+
+
 
 # Sidecar 容器模式
 
@@ -1006,7 +1010,7 @@ done
 
 # 检查就绪探针
 echo "--- 探针状态 ---"
-kubectl describe pod $POD_NAME -n $NAMESPACE | grep -A 5 "Readiness\|Liveness"
+kubectl describe pod $POD_NAME -n $NAMESPACE | grep -A 5 "Readiness|Liveness"
 ```
 
 ### Prometheus 监控规则

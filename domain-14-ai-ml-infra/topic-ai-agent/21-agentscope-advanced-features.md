@@ -1,6 +1,9 @@
 ---
 title: AgentScope 高级特性与扩展开发 (domain-14-ai-ml-infra)
-description: 'description: ''**文档类型**: 高级特性专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Hooks, Middleware,'
+description: 'description: ''**文档类型**: 高级特性专题 | **最后更新**: 2026-03 | **关键词**: AgentScope,
+  Hooks, Middleware,'
+summary: 'description: ''**文档类型**: 高级特性专题 | **最后更新**: 2026-03 | **关键词**: AgentScope,
+  Hooks, Middleware,'
 category: general
 tags:
 - ai
@@ -10,6 +13,8 @@ tags:
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +34,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: AgentScope 高级特性与扩展开发
 description: '**文档类型**: 高级特性专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Hooks, Middleware,

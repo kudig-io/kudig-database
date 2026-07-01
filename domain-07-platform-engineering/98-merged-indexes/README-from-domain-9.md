@@ -1,11 +1,14 @@
 ---
 title: Platform Ops Domain (平台运维领域)
 description: 'title: Platform Ops Domain (平台运维领域)'
+summary: 'title: Platform Ops Domain (平台运维领域)'
 category: general
 tags:
 - k8s
 - crd
 - operator
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Platform Ops Domain (平台运维领域)

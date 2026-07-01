@@ -1,6 +1,7 @@
 ---
 title: 控制平面故障排查
 description: '# 控制平面故障排查'
+summary: '# 控制平面故障排查'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 # 控制平面故障排查
 

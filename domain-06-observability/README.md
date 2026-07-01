@@ -1,6 +1,7 @@
 ---
 title: Observability
 description: '**生产环境故障排查的第一入口。**'
+summary: '**生产环境故障排查的第一入口。**'
 category: domain
 tags:
 - observability
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - daemonset
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - monitoring-basics
 - gpu-scheduling-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 # Domain 06 — Observability（可观测性）
 

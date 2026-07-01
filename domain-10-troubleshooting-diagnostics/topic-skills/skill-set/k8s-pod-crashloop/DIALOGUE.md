@@ -1,19 +1,24 @@
 ---
 title: Pod CrashLoopBackOff 远程顾问对话脚本
+summary: Pod反复重启问题的远程顾问对话脚本，覆盖OOMKilled、启动失败、探针配置排查。
 category: dialogue
-tags: [dialogue, remote-advisor, pod-crashloop]
-created: "2026-05-23"
-updated: "2026-05-23"
+tags:
+- dialogue
+- remote-advisor
+- pod-crashloop
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
-summary: "Pod反复重启问题的远程顾问对话脚本，覆盖OOMKilled、启动失败、探针配置排查。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
-    type: uses
-  - target: "[[entities/cilium.md]]"
-    type: uses
-  - target: "[[entities/deployment.md]]"
-    type: uses
+- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+  type: uses
+- target: '[[entities/cilium.md]]'
+  type: uses
+- target: '[[entities/deployment.md]]'
+  type: uses
 ---
+
 
 # Pod CrashLoopBackOff 远程顾问对话脚本
 
@@ -133,7 +138,7 @@ kubectl top pod <pod-name> -n <namespace>
 **顾问**：镜像拉取失败通常与镜像地址、凭证或网络有关。请执行：
 
 ```bash
-kubectl describe pod <pod-name> -n <namespace> | grep -i "Failed to pull image\|pulling\|Back-off"
+kubectl describe pod <pod-name> -n <namespace> | grep -i "Failed to pull image|pulling|Back-off"
 ```
 
 > **如果无法执行**：请告诉我 Deployment/StatefulSet 中 `image` 字段的完整值（包含 registry 地址、tag）。同时确认：你们使用的镜像仓库是公网还是私网？是否需要 imagePullSecret？
@@ -155,7 +160,7 @@ kubectl get pods -n kube-system | grep acr
 kubectl get secret -n <namespace> | grep acr
 
 # 查看 Pod 事件中的 ACR 特有错误
-kubectl describe pod <pod-name> -n <namespace> | grep -i "acr\|aliyun\|registry"
+kubectl describe pod <pod-name> -n <namespace> | grep -i "acr|aliyun|registry"
 ```
 
 > **如果无法执行 kubectl**：请通过以下方式排查：
@@ -472,7 +477,7 @@ kubectl logs <pod-name> -n <namespace> --tail=50
 **顾问**：修复后出现新的错误，这可能是修复操作带来的副作用。请执行：
 
 ```bash
-kubectl describe pod <pod-name> -n <namespace> | grep -i "warning\|error\|fail"
+kubectl describe pod <pod-name> -n <namespace> | grep -i "warning|error|fail"
 kubectl logs <pod-name> -n <namespace> --tail=100
 ```
 

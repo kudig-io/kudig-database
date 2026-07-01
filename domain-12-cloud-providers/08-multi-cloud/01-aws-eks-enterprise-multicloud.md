@@ -1,6 +1,7 @@
 ---
 title: AWS EKS 企业级多云管理平台
 description: '# AWS EKS 企业级多云管理平台'
+summary: '# AWS EKS 企业级多云管理平台'
 category: multi-cloud-hybrid
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - coredns
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +54,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # AWS EKS 企业级多云管理平台
 

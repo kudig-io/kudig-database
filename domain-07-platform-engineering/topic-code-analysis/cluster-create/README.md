@@ -1,6 +1,7 @@
 ---
 title: Cluster Create — Kubernetes 集群新建源码分析 (topic-code-analysis)
 description: '| API 类型 | `cmd/kubeadm/app/apis/kubeadm/` | 配置类型定义 |'
+summary: '| API 类型 | `cmd/kubeadm/app/apis/kubeadm/` | 配置类型定义 |'
 category: functions
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - cilium
 - calico
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -37,8 +40,9 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Cluster Create — Kubernetes 集群新建源码分析
 

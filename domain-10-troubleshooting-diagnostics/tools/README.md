@@ -1,6 +1,7 @@
 ---
 title: Domain-12 故障排查工具套件使用说明
 description: '# Domain-12 故障排查工具套件使用说明'
+summary: '# Domain-12 故障排查工具套件使用说明'
 category: troubleshooting
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rbac
 - networkpolicy
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -46,8 +49,9 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-12 故障排查工具套件使用说明
 

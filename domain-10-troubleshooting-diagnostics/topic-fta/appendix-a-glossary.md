@@ -1,11 +1,14 @@
 ---
 title: 附录 A：FTA 术语表 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
+summary: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
 category: fta
 tags:
 - fta
 - troubleshooting
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -34,8 +37,9 @@ prerequisites:
 fta_id: FTA-APPENDIX_A_GLOSSARY-001
 component: Appendix A Glossary
 severity: high
-created: "2026-05-23"
 ---
+
+
 
 title: 附录 A：FTA 术语表
 description: '**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'

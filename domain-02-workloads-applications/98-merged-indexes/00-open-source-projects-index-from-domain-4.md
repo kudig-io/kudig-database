@@ -1,6 +1,8 @@
 ---
 title: Domain-4 工作负载 — 开源项目索引
-description: '| **Descheduler** | Pod 重调度优化 | K8s SIG | v0.32.0 | 4k+ | Apache-2.0 |'
+description: '| **Descheduler** | Pod 重调度优化 | K8s SIG | v0.32.0 | 4k+ | Apache-2.0
+  |'
+summary: '| **Descheduler** | Pod 重调度优化 | K8s SIG | v0.32.0 | 4k+ | Apache-2.0 |'
 category: workloads
 tags:
 - k8s
@@ -13,6 +15,8 @@ tags:
 - daemonset
 - job
 - cronjob
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -52,8 +56,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-4 工作负载 — 开源项目索引
 

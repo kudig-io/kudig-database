@@ -1,6 +1,7 @@
 ---
 title: Network 网络知识图谱索引
 description: '## Network 知识图谱'
+summary: '## Network 知识图谱'
 category: index
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - envoy
 - cilium
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -33,8 +36,9 @@ prerequisites:
 - service-mesh-basics
 - ebpf-basics
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 # Network 网络知识图谱索引
 

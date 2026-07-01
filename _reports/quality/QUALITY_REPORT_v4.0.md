@@ -1,6 +1,7 @@
 ---
 title: Domain-10 扩展生态质量报告 (v4.0) [quality]
 description: '- **配置模板**: 350+ 个 (新增50个)'
+summary: '- **配置模板**: 350+ 个 (新增50个)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - crd
 - operator
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # Domain-10 扩展生态质量报告 (v4.0)
 

@@ -1,6 +1,7 @@
 ---
 title: Assigning Pods to Nodes
 description: '## 概述'
+summary: '## 概述'
 category: dictionary
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - scheduler
 - redis
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 # Assigning [[Pods|Pods]] to Nodes
 

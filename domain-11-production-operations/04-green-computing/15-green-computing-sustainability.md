@@ -1,6 +1,7 @@
 ---
 title: 15-绿色计算可持续发展
 description: '- green-computing-sustainability的最佳实践'
+summary: '- green-computing-sustainability的最佳实践'
 category: general
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - statefulset
 - daemonset
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

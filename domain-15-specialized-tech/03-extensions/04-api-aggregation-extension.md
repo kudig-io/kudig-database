@@ -1,6 +1,7 @@
 ---
 title: Kubernetes API 聚合扩展机制详解
 description: '# Kubernetes API 聚合扩展机制详解'
+summary: '# Kubernetes API 聚合扩展机制详解'
 category: extensions
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ingress
 - rbac
 - networkpolicy
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -48,8 +51,9 @@ cross_refs:
 - type: domain
   path: ../domain-07-platform-engineering/
   label: '相关知识域: domain-07-platform-engineering'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]]es API|Kubernetes API]] 聚合扩展机制详解
 

@@ -1,6 +1,7 @@
 ---
 title: kubeconfig 阶段 — Kubeconfig Generation 源码分析
 description: 'description: ''## 概述'''
+summary: 'description: ''## 概述'''
 category: general
 tags:
 - reference
@@ -11,6 +12,8 @@ tags:
 - controller-manager
 - helm
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - helm-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Kubeconfig Generation 源码分析
 description: '## 概述'
@@ -478,8 +482,8 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 
 | 错误 | 原因 | 排查命令 | 解决方案 |
 |------|------|---------|---------|
-| `Unable to connect to the server` | kubeconfig server 地址错误 | `kubectl config view \| grep server` | 修正 server 地址 |
-| `x509: certificate signed by unknown authority` | CA 证书不匹配 | `openssl x509 -in <ca> -noout -text \| grep Issuer` | 更新 CA 证书 |
+| `Unable to connect to the server` | kubeconfig server 地址错误 | `kubectl config view | grep server` | 修正 server 地址 |
+| `x509: certificate signed by unknown authority` | CA 证书不匹配 | `openssl x509 -in <ca> -noout -text | grep Issuer` | 更新 CA 证书 |
 | `Unauthorized` | 客户端证书过期 | `openssl x509 -in <cert> -noout -dates` | 续期证书 |
 | `You must be logged in to the server` | kubeconfig 中无有效凭证 | `kubectl config view` | 检查 client-certificate-data |
 | `connection refused` | API Server 未运行 | `curl -k https://<server>:6443/healthz` | 检查 API Server 状态 |
@@ -499,6 +503,8 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 | `CertOrKeyExist` | `cmd/kubeadm/app/util/pkiutil/` | 检查证书是否存在 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]

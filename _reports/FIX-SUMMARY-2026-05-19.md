@@ -1,10 +1,13 @@
 ---
 title: kudig-database 全面质量修复完成报告 (reports)
 description: '- 覆盖: 15 个核心 domain + FTA + Skills + 应用架构'
+summary: '- 覆盖: 15 个核心 domain + FTA + Skills + 应用架构'
 category: general
 tags:
 - k8s
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -19,8 +22,9 @@ trigger_keywords:
 - 全面质量修复完成报告
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # kudig-database 全面质量修复完成报告
 

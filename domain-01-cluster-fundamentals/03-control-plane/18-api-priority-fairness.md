@@ -1,6 +1,7 @@
 ---
 title: 68 - API 优先级与公平性 (API Priority and Fairness)
 description: '## APF 架构概览'
+summary: '## APF 架构概览'
 category: control-plane
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - grafana
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -71,8 +74,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 # 68 - API 优先级与公平性 (API Priority and Fairness)
 

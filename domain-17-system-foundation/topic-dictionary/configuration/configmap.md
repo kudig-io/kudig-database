@@ -1,12 +1,15 @@
 ---
 title: 配置映射
-description: 'ConfigMap 是 Kubernetes 中用于存储非敏感配置数据的 API 资源。它将配置与容器镜像解耦，使应用配置可以被集中管理和动态更新。...'
+description: ConfigMap 是 Kubernetes 中用于存储非敏感配置数据的 API 资源。它将配置与容器镜像解耦，使应用配置可以被集中管理和动态更新。...
+summary: ConfigMap 是 Kubernetes 中用于存储非敏感配置数据的 API 资源。它将配置与容器镜像解耦，使应用配置可以被集中管理和动态更新。...
 category: dictionary
 tags:
 - k8s
 - glossary
 - configmap
 - configuration
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 配置映射
 

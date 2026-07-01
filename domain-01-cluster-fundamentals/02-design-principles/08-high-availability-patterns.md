@@ -1,6 +1,7 @@
 ---
 title: 08 - 高可用架构模式 (HA Patterns)
 description: '# 08 - 高可用架构模式 (HA Patterns)'
+summary: '# 08 - 高可用架构模式 (HA Patterns)'
 category: design-principles
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - minio
 - redis
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -53,8 +56,9 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
-created: "2026-05-23"
 ---
+
+
 
 # 08 - 高可用架构模式 (HA Patterns)
 

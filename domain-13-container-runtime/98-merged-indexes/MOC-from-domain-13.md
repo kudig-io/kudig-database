@@ -1,12 +1,15 @@
 ---
 title: domain-13-container-runtime MOC
 description: domain-13-container-runtime 知识域导航页，覆盖 14 篇文档
+summary: domain-13-container-runtime 知识域导航页，覆盖 14 篇文档
 category: moc
 tags:
 - k8s
 - moc
 - docker
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: '2026-05-21'
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +27,9 @@ trigger_keywords:
 - runtime
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # domain-13-[[docker]] MOC
 

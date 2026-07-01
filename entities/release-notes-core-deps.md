@@ -1,6 +1,7 @@
 ---
 title: 发布说明索引 — 核心依赖
 description: '| etcd | 15 | v3.6 | v3.6 | 分布式键值存储 |'
+summary: '| etcd | 15 | v3.6 | v3.6 | 分布式键值存储 |'
 category: references
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - cri-o
 - etcd
 - runc
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -26,8 +29,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 发布说明索引 — 核心依赖
 

@@ -1,6 +1,7 @@
 ---
 title: 基于角色的访问控制（RBAC）最佳实践
 description: '# 基于角色的访问控制（RBAC）最佳实践'
+summary: '# 基于角色的访问控制（RBAC）最佳实践'
 category: dictionary
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - rbac
 - networkpolicy
 - webhook
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -30,9 +33,9 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - etcd-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 基于角色的访问控制（RBAC）最佳实践
 

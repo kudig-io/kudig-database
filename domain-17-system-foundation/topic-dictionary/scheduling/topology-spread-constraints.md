@@ -1,12 +1,15 @@
 ---
 title: 拓扑分布约束
-description: 'Pod Topology Spread Constraints（拓扑分布约束）用于控制 Pod 在集群中的分布方式，使其跨故障域（如可用区、节点）均匀分布。这是...'
+description: Pod Topology Spread Constraints（拓扑分布约束）用于控制 Pod 在集群中的分布方式，使其跨故障域（如可用区、节点）均匀分布。这是...
+summary: Pod Topology Spread Constraints（拓扑分布约束）用于控制 Pod 在集群中的分布方式，使其跨故障域（如可用区、节点）均匀分布。这是...
 category: dictionary
 tags:
 - k8s
 - glossary
 - scheduling
 - topology
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -22,8 +25,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # 拓扑分布约束
 

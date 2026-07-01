@@ -1,6 +1,7 @@
 ---
-title: "init 阶段详解: mark-control-plane 与 upload-config [cluster-create]"
+title: 'init 阶段详解: mark-control-plane 与 upload-config [cluster-create]'
 description: 'title: ''init 阶段详解: mark-control-plane 与 upload-config'''
+summary: 'title: ''init 阶段详解: mark-control-plane 与 upload-config'''
 category: general
 tags:
 - reference
@@ -8,6 +9,8 @@ tags:
 - apiserver
 - kubelet
 - containerd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 'init 阶段详解: mark-control-plane 与 upload-config'
 description: '# init 阶段详解: mark-control-plane 与 upload-config'
@@ -337,6 +341,8 @@ kubeadm certs list
 ```
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

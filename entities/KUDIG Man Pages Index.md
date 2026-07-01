@@ -1,6 +1,7 @@
 ---
 title: KUDIG Man Pages Index
 description: KUDIG Man Pages Index — Kubernetes 生产运维知识库
+summary: KUDIG Man Pages Index — Kubernetes 生产运维知识库
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -38,8 +41,9 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[entities/kudig-man-pages-index.md|kudig-man-pages-index]]
 
@@ -102,6 +106,8 @@ created: "2026-05-23"
 | Troubleshooting | domain-10-troubleshooting-diagnostics/ | Full component troubleshooting |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[entities/argocd.md|argocd]] — ArgoCD

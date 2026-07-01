@@ -1,6 +1,7 @@
 ---
 title: 第十二章：FTA 与 AIOps 平台集成架构 [domain-10-troubleshooting-diagnostics]
 description: 'title: 第十二章：FTA 与 AIOps 平台集成架构'
+summary: 'title: 第十二章：FTA 与 AIOps 平台集成架构'
 category: fta
 tags:
 - fta
@@ -13,6 +14,8 @@ tags:
 - coredns
 - kafka
 - job
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -47,8 +50,9 @@ prerequisites:
 fta_id: FTA-12_AIOPS_INTEGRATION-001
 component: 12 Aiops Integration
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: 第十二章：FTA 与 AIOps 平台集成架构
 description: '# 第十二章：FTA 与 AIOps 平台集成架构'

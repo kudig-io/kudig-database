@@ -1,13 +1,21 @@
 ---
-title: "Skill: HPA 不扩容的诊断和修复"
+title: 'Skill: HPA 不扩容的诊断和修复'
+summary: 'Skill: HPA 不扩容的诊断和修复：HPA（Horizontal Pod Autoscaler）在负载上升时未按预期扩容，导致服务响应延迟增加或请求失败。远程顾问模式下需从指标源、阈值配置、资源限制三个层面逐层排查。'
 category: skill
-tags: ["skill", "domain-10", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- skill
+- domain-10
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # Skill: HPA 不扩容的诊断和修复
 
@@ -62,3 +70,7 @@ kubectl get nodes -o jsonpath='{.items[*].status.allocatable}'
 - [[concepts/horizontal-pod-autoscaler.md|Horizontal Pod Autoscaler]] — HPA 指标采集、扩缩容算法与配置
 - [[concepts/autoscaling-strategies.md|自动扩缩容策略]] — HPA、VPA、Cluster Autoscaler 选型与协同
 - [[concepts/resource-management.md|资源管理]] — Kubernetes 资源请求、限制与配额管理
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

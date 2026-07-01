@@ -1,6 +1,7 @@
 ---
 title: LLM 成本监控与 FinOps
 description: '# LLM 成本监控与 FinOps'
+summary: '# LLM 成本监控与 FinOps'
 category: ai-infra
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - helm
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -60,8 +63,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
-created: "2026-05-23"
 ---
+
+
 
 # LLM 成本监控与 FinOps
 

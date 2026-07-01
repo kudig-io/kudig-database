@@ -1,6 +1,9 @@
 ---
 title: bootc 容器启动系统
-description: 'bootc 是 Red Hat 开源的项目，将 OCI 容器镜像作为操作系统的基础，实现以容器方式管理和更新整个操作系统，是 Fedora/CentOS 的下一...'
+description: bootc 是 Red Hat 开源的项目，将 OCI 容器镜像作为操作系统的基础，实现以容器方式管理和更新整个操作系统，是 Fedora/CentOS
+  的下一...
+summary: bootc 是 Red Hat 开源的项目，将 OCI 容器镜像作为操作系统的基础，实现以容器方式管理和更新整个操作系统，是 Fedora/CentOS
+  的下一...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - tooling
 - container
 - os
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # bootc 容器启动系统（bootc）
 

@@ -1,6 +1,7 @@
 ---
 title: KUDIG Agent 规范集：工单分类、知识图谱、会话管理与诊断基准
 description: '### 会话上下文管理'
+summary: '### 会话上下文管理'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - redis
 - mysql
 - postgresql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG Agent 规范集
 

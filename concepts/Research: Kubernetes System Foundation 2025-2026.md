@@ -1,11 +1,21 @@
 ---
-title: "Research: Kubernetes System Foundation 2025-2026"
+title: 'Research: Kubernetes System Foundation 2025-2026'
+summary: 'Research: Kubernetes System Foundation 2025-2026：2025-2026 年间，Kubernetes
+  生态在系统基础层面经历了三大变革浪潮：'
 category: synthesis
-tags: [hardware, linux-kernel, system, k8s, research]
+tags:
+- hardware
+- linux-kernel
+- system
+- k8s
+- research
+tier: supporting
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # Research: Kubernetes System Foundation 2025-2026
 
@@ -81,3 +91,7 @@ Intel TDX 与 AMD SEV-SNP 已在主流云平台提供 GA 支持。Confidential C
 - CNCF Confidential Containers Project
 - Ampere / AWS / Microsoft ARM64 processor announcements
 - OpenTelemetry Kubernetes audit integration docs
+
+## Related
+
+- [[research|#research Hub]] — tag hub

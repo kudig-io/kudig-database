@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)
 description: '# Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)'
+summary: '# Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)'
 category: papers
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - elasticsearch
 - ingress
 - gateway
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -54,8 +57,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md
   label: '故障树: deployment'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)
 
@@ -1003,3 +1007,9 @@ vCluster作为跨云统一租户层，在不同云的Host集群上创建虚拟�
 - 03-kubernetes-zero-trust-security-architecture
 - 05-kubernetes-gitops-complete-practice-guide
 - 06-kubernetes-cost-governance-finops-practice
+
+## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub

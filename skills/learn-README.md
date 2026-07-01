@@ -1,6 +1,7 @@
 ---
 title: 新人上手快速路径（Quick Start）
 description: '## 概述'
+summary: '## 概述'
 category: skills
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - coredns
 - docker
 - rbac
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # 新人上手快速路径（Quick Start）
 

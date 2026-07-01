@@ -1,6 +1,9 @@
 ---
 title: Kubernetes Knowledge Map
-description: NET_FUND[domain-03-networking-traffic 网络基础] --> K8S_NET[domain-03-networking-traffic K8s 网络]
+description: NET_FUND[domain-03-networking-traffic 网络基础] --> K8S_NET[domain-03-networking-traffic
+  K8s 网络]
+summary: NET_FUND[domain-03-networking-traffic 网络基础] --> K8S_NET[domain-03-networking-traffic
+  K8s 网络]
 category: reference
 tags:
 - k8s
@@ -9,6 +12,8 @@ tags:
 - dependency-matrix
 - docker
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: intermediate
 reading_level: intermediate
@@ -24,8 +29,9 @@ trigger_keywords:
 - Map
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes Knowledge Map
 

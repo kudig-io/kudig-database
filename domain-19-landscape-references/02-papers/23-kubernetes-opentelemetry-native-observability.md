@@ -1,6 +1,7 @@
 ---
 title: Kubernetes OpenTelemetry 原生可观测性 (OpenTelemetry Native Observability)
 description: '作者: 可观测性架构专家 | 版本: v1.0 | 更新时间: 2026-03-03'
+summary: '作者: 可观测性架构专家 | 版本: v1.0 | 更新时间: 2026-03-03'
 category: papers
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - containerd
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -58,8 +61,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] [[OpenTelemetry|OpenTelemetry]] 原生可观测性 (OpenTelemetry Native Observability)
 
@@ -1558,5 +1562,9 @@ OTel Profiles 数据模型：
 - 25-gke-autopilot-google-cloud-ai-infrastructure
 
 ## Related
+
+- [[papers|#papers Hub]] — tag hub
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

@@ -1,6 +1,9 @@
 ---
 title: Perses 云原生仪表盘
-description: 'Perses 是 CNCF Sandbox 项目，云原生可观测性仪表盘工具，旨在提供 GitOps 友好的仪表盘管理方式，支持声明式定义仪表盘并通过 Git 进...'
+description: Perses 是 CNCF Sandbox 项目，云原生可观测性仪表盘工具，旨在提供 GitOps 友好的仪表盘管理方式，支持声明式定义仪表盘并通过
+  Git 进...
+summary: Perses 是 CNCF Sandbox 项目，云原生可观测性仪表盘工具，旨在提供 GitOps 友好的仪表盘管理方式，支持声明式定义仪表盘并通过
+  Git 进...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - observability
 - dashboard
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Perses 云原生仪表盘（Perses）
 

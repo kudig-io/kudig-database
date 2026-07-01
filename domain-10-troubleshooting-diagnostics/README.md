@@ -1,6 +1,7 @@
 ---
 title: Troubleshooting & Diagnostics
 description: '- [[domain-06-observability/README.md|domain-06-observability]] — 监控与告警'
+summary: '- [[domain-06-observability/README.md|domain-06-observability]] — 监控与告警'
 category: domain
 tags:
 - troubleshooting
@@ -10,6 +11,8 @@ tags:
 - incident-response
 - daemonset
 - gpu
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 # Troubleshooting & Diagnostics
 

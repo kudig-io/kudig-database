@@ -1,6 +1,7 @@
 ---
 title: 131 - Ingress 高级路由与流量管理
 description: '# 131 - Ingress 高级路由与流量管理'
+summary: '# 131 - Ingress 高级路由与流量管理'
 category: networking
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - rag
 - agent
 - flannel
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -58,8 +61,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
-created: "2026-05-23"
 ---
+
+
 
 # 131 - [[Ingress|Ingress]] 高级路由与流量管理
 

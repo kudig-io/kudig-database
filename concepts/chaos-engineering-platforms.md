@@ -1,20 +1,24 @@
 ---
 title: 混沌工程平台对比
+summary: 混沌工程平台对比：Chaos Mesh 是一个云原生混沌工程平台，运行在 Kubernetes 集群内，采用 CRD + Controller 模式：
 category: concepts
 tags:
-  - chaos-engineering
-  - reliability
-  - k8s
-  - chaos-mesh
-  - litmus
-  - gremlin
+- chaos-engineering
+- reliability
+- k8s
+- chaos-mesh
+- litmus
+- gremlin
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 related:
-  - "[[domain-19-landscape-references/98-merged-indexes/index.md|index]]"
-  - "[[concepts/slo-error-budget-framework.md|slo error budget framework]]"
+- '[[domain-19-landscape-references/98-merged-indexes/index.md|index]]'
+- '[[concepts/slo-error-budget-framework.md|slo error budget framework]]'
 ---
+
+
 
 # 混沌工程平台对比
 

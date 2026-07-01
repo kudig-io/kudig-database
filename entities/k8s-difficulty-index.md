@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Difficulty Index
 description: '| **中级** | intermediate | 原理理解、日常运维 | 1-2 年经验 |'
+summary: '| **中级** | intermediate | 原理理解、日常运维 | 1-2 年经验 |'
 category: reference
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - gateway
 - crd
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05-21
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - cilium-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes Difficulty Index
 

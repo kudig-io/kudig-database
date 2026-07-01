@@ -1,6 +1,7 @@
 ---
 title: 存储故障排查
 description: '# 存储故障排查'
+summary: '# 存储故障排查'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - daemonset
 - crd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 # 存储故障排查
 

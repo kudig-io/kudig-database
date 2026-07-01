@@ -1,6 +1,7 @@
 ---
 title: Skill
 description: '| RC-006 | 节点与 apiserver 网络不通 | 中 | 网络修复(手动) | HIGH |'
+summary: '| RC-006 | 节点与 apiserver 网络不通 | 中 | 网络修复(手动) | HIGH |'
 category: skills
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - kubelet
 - containerd
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -23,8 +26,9 @@ trigger_keywords:
 - Skill
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Skill
 

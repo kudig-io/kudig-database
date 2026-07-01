@@ -1,13 +1,21 @@
 ---
-title: "PersistentVolumeClaim"
+title: PersistentVolumeClaim
+summary: PersistentVolumeClaim（PVC）是 Kubernetes 中用户对持久化存储的声明式请求。Pod 通过挂载 PVC 来使用存储，而无需关心底层存储的具体实现。
 category: concepts
-tags: ["core-concept", "domain-04-storage-data", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- core-concept
+- domain-04-storage-data
+- visibility/public
+tier: core
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # PersistentVolumeClaim
 
@@ -78,3 +86,7 @@ PVC 一直停留在 `Pending` 状态是存储类问题的典型表现，诊断�
 - **查看事件**：`kubectl describe pvc <name>` 中的 Events 通常会给出具体失败原因
 
 更多存储排错方法请参考 [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/14-pvc-storage-troubleshooting.md|pvc-storage-troubleshooting]]。
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

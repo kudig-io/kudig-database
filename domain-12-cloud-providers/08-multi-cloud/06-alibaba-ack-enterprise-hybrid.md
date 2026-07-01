@@ -1,6 +1,7 @@
 ---
 title: Alibaba Cloud ACK 企业级混合云深度实践
 description: '# Alibaba Cloud ACK 企业级混合云深度实践'
+summary: '# Alibaba Cloud ACK 企业级混合云深度实践'
 category: multi-cloud-hybrid
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - mysql
 - hpa
 - job
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -51,8 +54,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Alibaba Cloud ACK 企业级混合云深度实践
 

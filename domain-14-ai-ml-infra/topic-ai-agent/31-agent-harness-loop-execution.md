@@ -1,6 +1,7 @@
 ---
 title: Agent Harness Loop 与执行引擎深度设计 (domain-14-ai-ml-infra)
 description: 'title: Agent Harness Loop 与执行引擎深度设计'
+summary: 'title: Agent Harness Loop 与执行引擎深度设计'
 category: general
 tags:
 - ai
@@ -9,6 +10,8 @@ tags:
 - llm
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Agent Harness Loop 与执行引擎深度设计
 description: '# Agent Harness Loop 与执行引擎深度设计'

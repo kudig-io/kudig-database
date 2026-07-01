@@ -1,6 +1,7 @@
 ---
 title: Domain-8 可观测性领域查漏补缺质量报告
 description: 1. **22-monitoring-playbooks.md** - 监控运维手册与应急响应 (775行)
+summary: 1. **22-monitoring-playbooks.md** - 监控运维手册与应急响应 (775行)
 category: observability
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - logging
 - tracing
 - ebpf
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -54,8 +57,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
-created: "2026-05-23"
 ---
+
+
 
 # Domain-8 可观测性领域查漏补缺质量报告
 

@@ -1,6 +1,7 @@
 ---
 title: 06 - Linux 性能调优与瓶颈分析：生产环境性能优化专家指南
 description: '# 06 - Linux 性能调优与瓶颈分析：生产环境性能优化专家指南'
+summary: '# 06 - Linux 性能调优与瓶颈分析：生产环境性能优化专家指南'
 category: linux
 tags:
 - linux
@@ -13,6 +14,8 @@ tags:
 - containerd
 - docker
 - falco
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -49,8 +52,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   label: '速查卡: linux'
-created: "2026-05-23"
 ---
+
+
 
 # 06 - Linux 性能调优与瓶颈分析：生产环境性能优化专家指南
 
@@ -213,7 +217,7 @@ pidstat -p <pid> 1                  # 指定进程
 
 # CPU 频率信息
 cpupower frequency-info
-cat /proc/cpuinfo | grep -i "model name\|cpu MHz"
+cat /proc/cpuinfo | grep -i "model name|cpu MHz"
 ```
 
 ## perf 深度分析
@@ -461,7 +465,7 @@ cat /sys/block/sda/queue/nr_requests # 请求队列深度
 cat /sys/block/sda/queue/read_ahead_kb  # 预读大小
 
 # I/O 错误检查
-dmesg | grep -i "i/o error\|buffer i/o error"
+dmesg | grep -i "i/o error|buffer i/o error"
 cat /sys/block/sda/stat              # 块设备统计
 ```
 

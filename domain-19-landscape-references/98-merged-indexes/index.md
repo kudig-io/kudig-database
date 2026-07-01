@@ -1,12 +1,20 @@
 ---
-title: "Domain 19 内容索引"
+title: Domain 19 内容索引
+summary: Domain 19 内容索引
 category: domain-19-landscape-references
-tags: ["index", "domain-19-landscape-references", "navigation"]
-sources: ["auto-generated"]
+tags:
+- index
+- domain-19-landscape-references
+- navigation
+tier: core
+sources:
+- auto-generated
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 ---
+
+
 
 # Domain 19 内容索引
 

@@ -1,6 +1,7 @@
 ---
 title: 监控与告警异常故障树分析 (skills)
 description: 'title: "监控与告警异常故障树分析"'
+summary: 'title: "监控与告警异常故障树分析"'
 category: general
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - rbac
 - operator
 - webhook
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ prerequisites:
 fta_id: FTA-MONITORING-001
 component: Monitoring
 severity: medium
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "监控与告警异常故障树分析"

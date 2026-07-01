@@ -1,6 +1,7 @@
 ---
 title: 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)
 description: 'title: 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)'
+summary: 'title: 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - kubernetes-concepts
 - prometheus-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)
 description: '# 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)'
@@ -2166,6 +2170,8 @@ done
 - 控制平面扩缩容指南 (Control Plane Scalability Guide)
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - 13-backup-demo-video
 - [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]

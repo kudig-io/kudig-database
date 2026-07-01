@@ -1,6 +1,7 @@
 ---
 title: openGemini 时序数据库
-description: 'openGemini 是华为开源的 CNCF Sandbox 时序数据库，兼容 InfluxDB 协议，专为 IoT 和可观测性场景优化，提供高写入吞吐和低存储...'
+description: openGemini 是华为开源的 CNCF Sandbox 时序数据库，兼容 InfluxDB 协议，专为 IoT 和可观测性场景优化，提供高写入吞吐和低存储...
+summary: openGemini 是华为开源的 CNCF Sandbox 时序数据库，兼容 InfluxDB 协议，专为 IoT 和可观测性场景优化，提供高写入吞吐和低存储...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - observability
 - database
 - tsdb
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # openGemini 时序数据库（openGemini）
 

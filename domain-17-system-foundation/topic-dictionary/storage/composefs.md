@@ -1,6 +1,7 @@
 ---
 title: ComposeFS 只读文件系统
-description: 'ComposeFS 是 Linux 内核的只读文件系统，基于内容寻址（content-addressed）存储，为容器镜像和不可变系统提供安全、高效的文件访问，...'
+description: ComposeFS 是 Linux 内核的只读文件系统，基于内容寻址（content-addressed）存储，为容器镜像和不可变系统提供安全、高效的文件访问，...
+summary: ComposeFS 是 Linux 内核的只读文件系统，基于内容寻址（content-addressed）存储，为容器镜像和不可变系统提供安全、高效的文件访问，...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - storage
 - filesystem
 - security
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # ComposeFS 只读文件系统（ComposeFS）
 

@@ -1,6 +1,7 @@
 ---
 title: 二手交易与循环经济架构设计 — 阿里云视角
 description: 'title: 二手交易与循环经济架构设计'
+summary: 'title: 二手交易与循环经济架构设计'
 category: general
 tags:
 - architecture
@@ -13,6 +14,8 @@ tags:
 - ingress
 - networkpolicy
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 二手交易与循环经济架构设计
 description: '# 二手交易与循环经济架构设计 — 阿里云视角'

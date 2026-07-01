@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 description: '# Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)'
+summary: '# Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)'
 category: control-plane
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - cilium
 - calico
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -75,8 +78,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
-created: "2026-05-23"
 ---
+
+
 
 <!-- condition: kubectl get nodes -o jsonpath='{range .items[?(@.status.conditions[?(@.type=="Ready" && @.status!="True")].nodeName)]}' 显示有 NotReady 节点 -->
 

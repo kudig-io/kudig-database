@@ -1,10 +1,13 @@
 ---
 title: 开源项目索引模板
 description: '- [五、选型指南](#五选型指南)'
+summary: '- [五、选型指南](#五选型指南)'
 category: general
 tags:
 - k8s
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -16,8 +19,9 @@ intent_queries:
 - 如何 开源项目索引模板
 trigger_keywords:
 - 开源项目索引模板
-created: "2026-05-23"
 ---
+
+
 
 # 开源项目索引模板
 

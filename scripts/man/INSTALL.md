@@ -1,6 +1,7 @@
 ---
 title: Manpage 安装指南
 description: '# Manpage 安装指南'
+summary: '# Manpage 安装指南'
 category: general
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - helm
 - argocd
 - containerd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 # Manpage 安装指南
 

@@ -1,6 +1,7 @@
 ---
 title: Domain-16 存储基础 — 开源项目索引
 description: '# Domain-16 存储基础 — 开源项目索引'
+summary: '# Domain-16 存储基础 — 开源项目索引'
 category: storage-fundamentals
 tags:
 - storage
@@ -13,6 +14,8 @@ tags:
 - mysql
 - postgresql
 - crd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -45,8 +48,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # Domain-16 存储基础 — 开源项目索引
 

@@ -1,12 +1,18 @@
 ---
 title: Radius (entities)
-description: 'summary: "Radius 是由 Microsoft 开发的云原生应用平台，提供了一种以应用为中心的方式来定义和部署云原生应用及其依赖的基础设施。它引入了 "Application Graph" 的概念，让开发者定义应用需要什么（如数据库、消息队列），而由平台工程师定义如何提供这些资源（Azure
-  CosmosDB 还是本地 MongoDB），实现关注点分离。"'
+description: 'summary: "Radius 是由 Microsoft 开发的云原生应用平台，提供了一种以应用为中心的方式来定义和部署云原生应用及其依赖的基础设施。它引入了
+  "Application Graph" 的概念，让开发者定义应用需要什么（如数据库、消息队列），而由平台工程师定义如何提供这些资源（Azure CosmosDB
+  还是本地 MongoDB），实现关注点分离。"'
+summary: 'summary: "Radius 是由 Microsoft 开发的云原生应用平台，提供了一种以应用为中心的方式来定义和部署云原生应用及其依赖的基础设施。它引入了
+  "Application Graph" 的概念，让开发者定义应用需要什么（如数据库、消息队列），而由平台工程师定义如何提供这些资源（Azure CosmosDB
+  还是本地 MongoDB），实现关注点分离。"'
 category: general
 tags:
 - k8s
 - crd
 - operator
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -20,8 +26,9 @@ trigger_keywords:
 - Radius
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "Radius"

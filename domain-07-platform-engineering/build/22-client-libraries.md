@@ -1,6 +1,7 @@
 ---
 title: 46 - Kubernetes客户端库
 description: '## 客户端库架构'
+summary: '## 客户端库架构'
 category: platform-ops
 tags:
 - k8s
@@ -10,6 +11,8 @@ tags:
 - crd
 - operator
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -48,8 +51,9 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
-created: "2026-05-23"
 ---
+
+
 
 # 46 - Kubernetes客户端库
 

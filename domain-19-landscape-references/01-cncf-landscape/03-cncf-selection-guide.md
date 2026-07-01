@@ -1,6 +1,7 @@
 ---
 title: CNCF 项目选型指南
 description: CNCF 云原生项目选型对比矩阵，涵盖 CNI、Service Mesh、存储、监控、安全等类目的选型决策树
+summary: CNCF 云原生项目选型对比矩阵，涵盖 CNI、Service Mesh、存储、监控、安全等类目的选型决策树
 category: cncf-landscape
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - jaeger
 - istio
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -53,8 +56,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # CNCF 项目选型指南
 

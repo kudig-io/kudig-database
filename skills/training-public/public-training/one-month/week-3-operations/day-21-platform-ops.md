@@ -1,6 +1,7 @@
 ---
 title: 'Day 21: 平台运维 + 综合实践'
 description: 'title: Day 21: 平台运维 + 综合实践'
+summary: 'title: Day 21: 平台运维 + 综合实践'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flannel
 - coredns
 - hpa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -36,8 +39,9 @@ prerequisites:
 - etcd-basics
 - backup-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 21: 平台运维 + 综合实践

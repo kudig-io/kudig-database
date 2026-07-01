@@ -1,6 +1,7 @@
 ---
 title: 备份/恢复异常故障树分析 (skills)
 description: '- **范围**：etcd 快照、Velero/自定义备份工具、存储后端（S3/OSS/NFS）、加密与校验、恢复流程与顺序、依赖组件。'
+summary: '- **范围**：etcd 快照、Velero/自定义备份工具、存储后端（S3/OSS/NFS）、加密与校验、恢复流程与顺序、依赖组件。'
 category: skills
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - cronjob
 - rbac
 - crd
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 fta_id: FTA-BACKUP_RESTORE-001
 component: Backup Restore
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 # 备份/恢复异常故障树分析
 

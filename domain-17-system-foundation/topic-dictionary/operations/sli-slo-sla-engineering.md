@@ -1,6 +1,7 @@
 ---
 title: 15 - SLI/SLO/SLA工程实践
 description: '# 15 - SLI/SLO/SLA工程实践'
+summary: '# 15 - SLI/SLO/SLA工程实践'
 category: dictionary
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - postgresql
 - job
 - webhook
+tier: supporting
+created: 2026-05
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -32,9 +35,9 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - redis-basics
-created: "2026-05-23"
-created: 2026-05
 ---
+
+
 
 # 15 - SLI/SLO/SLA工程实践
 

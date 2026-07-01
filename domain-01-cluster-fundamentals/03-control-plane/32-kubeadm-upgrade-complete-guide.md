@@ -1,6 +1,7 @@
 ---
 title: kubeadm 升级完整路径指南（含 rollback）
 description: 'title: kubeadm 升级完整路径指南（含 rollback）'
+summary: 'title: kubeadm 升级完整路径指南（含 rollback）'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - scheduler
 - controller-manager
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - tls-basics
-created: "2026-05-23"
 ---
+
+
 
 title: kubeadm 升级完整路径指南（含 rollback）
 description: '# kubeadm 升级完整路径指南（含 rollback）'
@@ -712,6 +716,8 @@ related:
 - 控制平面扩缩容指南 (Control Plane Scalability Guide)
 
 ## Related
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - 12-demo-env-guide
 - 21-platform-selection-guide

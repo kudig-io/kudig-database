@@ -1,7 +1,7 @@
 ---
-summary: "brew install helm"
 title: Helm 速查卡
 description: Helm 3.x 包管理器快速参考, 覆盖 Chart 开发、仓库管理、发布回滚、安全审计
+summary: brew install helm
 category: cheatsheet
 tags:
 - helm
@@ -14,6 +14,8 @@ tags:
 - argocd
 - postgresql
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -42,8 +44,8 @@ prerequisites:
 - prometheus-basics
 - gitops-basics
 - ebpf-basics
-created: "2026-05-23"
 ---
+
 
 # [[Helm|Helm]] 生产环境速查卡
 

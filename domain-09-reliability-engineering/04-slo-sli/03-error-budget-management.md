@@ -1,6 +1,7 @@
 ---
 title: 错误预算管理
 description: '# 错误预算管理'
+summary: '# 错误预算管理'
 category: domain
 tags:
 - sre
@@ -9,6 +10,8 @@ tags:
 - reliability
 - risk-management
 - grafana
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - sre-practices
 - monitoring-basics
-created: "2026-05-23"
 ---
+
+
 
 # 错误预算管理
 

@@ -1,6 +1,7 @@
 ---
 title: KubeVela 应用交付
-description: 'KubeVela 是阿里巴巴开源的 CNCF 孵化项目，基于 OAM（Open Application Model）的现代应用交付平台，提供声明式、可扩展、面向...'
+description: KubeVela 是阿里巴巴开源的 CNCF 孵化项目，基于 OAM（Open Application Model）的现代应用交付平台，提供声明式、可扩展、面向...
+summary: KubeVela 是阿里巴巴开源的 CNCF 孵化项目，基于 OAM（Open Application Model）的现代应用交付平台，提供声明式、可扩展、面向...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - platform-engineering
 - oam
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # KubeVela 应用交付（KubeVela）
 

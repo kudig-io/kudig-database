@@ -1,6 +1,7 @@
 ---
 title: 'Day 21: K8S 组件运维'
 description: 'title: Day 21: K8S 组件运维'
+summary: 'title: Day 21: K8S 组件运维'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - cilium
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -35,8 +38,9 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: Day 21: K8S 组件运维

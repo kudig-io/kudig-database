@@ -1,6 +1,7 @@
 ---
 title: 07 - 可观测性与安全迁移 [migration]
 description: 'title: 07 - 可观测性与安全迁移'
+summary: 'title: 07 - 可观测性与安全迁移'
 category: general
 tags:
 - migration
@@ -13,6 +14,8 @@ tags:
 - jaeger
 - helm
 - docker
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +42,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 07 - 可观测性与安全迁移
 description: '# 07 - 可观测性与安全迁移'

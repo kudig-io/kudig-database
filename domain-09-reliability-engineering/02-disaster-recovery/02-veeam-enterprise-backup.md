@@ -1,6 +1,7 @@
 ---
 title: Veeam Backup & Replication 企业级备份恢复解决方案
 description: 'title: Veeam Backup & Replication 企业级备份恢复解决方案'
+summary: 'title: Veeam Backup & Replication 企业级备份恢复解决方案'
 category: general
 tags:
 - disaster-recovery
@@ -12,6 +13,8 @@ tags:
 - operator
 - webhook
 - rag
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - sre-practices
 - prometheus-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Veeam Backup & Replication 企业级备份恢复解决方案
 description: '# Veeam Backup & Replication 企业级备份恢复解决方案'

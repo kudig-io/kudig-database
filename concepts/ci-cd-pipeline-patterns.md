@@ -1,6 +1,7 @@
 ---
 title: CI/CD Pipeline Patterns
 description: '- [[concepts/CI-CD 流水线 × Secret 管理.md|CI-CD 流水线 × Secret 管理]] — 综合'
+summary: '- [[concepts/CI-CD 流水线 × Secret 管理.md|CI-CD 流水线 × Secret 管理]] — 综合'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - flux
 - docker
 - harbor
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # CI/CD Pipeline Patterns
 

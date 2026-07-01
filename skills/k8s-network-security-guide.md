@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 网络安全最佳实践
 description: '# Kubernetes 网络安全最佳实践'
+summary: '# Kubernetes 网络安全最佳实践'
 category: skills
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - calico
 - ingress
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,8 +33,9 @@ prerequisites:
 - service-mesh-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 # Kubernetes 网络安全最佳实践
 

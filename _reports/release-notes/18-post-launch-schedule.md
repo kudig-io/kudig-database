@@ -1,12 +1,15 @@
 ---
 title: 发布后传播节奏表
 description: '**主文**: 《kudig-database: 为 AI Agent 打造的 K8s 生产运维知识库正式开源》'
+summary: '**主文**: 《kudig-database: 为 AI Agent 打造的 K8s 生产运维知识库正式开源》'
 category: general
 tags:
 - k8s
 - ebpf
 - rag
 - agent
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +24,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - ebpf-basics
-created: "2026-05-23"
 ---
+
+
 
 # 发布后传播节奏表
 

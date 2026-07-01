@@ -1,6 +1,7 @@
 ---
 title: Cozystack 云操作系统
-description: 'Cozystack 是开源的 Kubernetes 云操作系统，在 K8s 之上提供完整的 PaaS 能力（VM/数据库/存储/K8s-as-a-Service...'
+description: Cozystack 是开源的 Kubernetes 云操作系统，在 K8s 之上提供完整的 PaaS 能力（VM/数据库/存储/K8s-as-a-Service...
+summary: Cozystack 是开源的 Kubernetes 云操作系统，在 K8s 之上提供完整的 PaaS 能力（VM/数据库/存储/K8s-as-a-Service...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - platform-engineering
 - cloud
 - paas
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Cozystack 云操作系统（Cozystack）
 

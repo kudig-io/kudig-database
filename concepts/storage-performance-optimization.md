@@ -1,16 +1,21 @@
 ---
 title: 存储性能优化
+summary: 存储性能优化是 Kubernetes 数据密集型工作负载（数据库、AI/ML 训练、日志分析）的关键环节。本文涵盖基准测试方法论、硬件级优化、云厂商特化配置以及存储
+  QoS 策略。
 category: concepts
 tags:
-  - storage
-  - performance
-  - nvme
-  - benchmark
-  - k8s
+- storage
+- performance
+- nvme
+- benchmark
+- k8s
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # 存储性能优化
 

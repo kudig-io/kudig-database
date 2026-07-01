@@ -1,6 +1,7 @@
 ---
 title: DNS 故障排查
 description: '# 26 - DNS 故障排查 (DNS Troubleshooting)'
+summary: '# 26 - DNS 故障排查 (DNS Troubleshooting)'
 category: troubleshooting
 tags:
 - dns
@@ -13,6 +14,8 @@ tags:
 - prometheus
 - job
 - networkpolicy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-02
 difficulty: intermediate
 reading_level: intermediate
@@ -64,8 +67,9 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/04-dns-resolution-failure.md
   label: '运维技能: 04-dns-resolution-failure'
-created: "2026-05-23"
 ---
+
+
 
 # 26 - DNS 故障排查 (DNS Troubleshooting)
 

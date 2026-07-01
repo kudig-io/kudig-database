@@ -1,6 +1,9 @@
 ---
 title: HAMi 异构资源调度
-description: 'HAMi（Heterogeneous AI Computing Middleware）是 CNCF Sandbox 项目，为 Kubernetes 提供 GPU...'
+description: HAMi（Heterogeneous AI Computing Middleware）是 CNCF Sandbox 项目，为 Kubernetes
+  提供 GPU...
+summary: HAMi（Heterogeneous AI Computing Middleware）是 CNCF Sandbox 项目，为 Kubernetes
+  提供 GPU...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - scheduling
 - gpu
 - heterogeneous
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # HAMi 异构资源调度（HAMi）
 

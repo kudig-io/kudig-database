@@ -1,6 +1,7 @@
 ---
 title: 基因编辑 CRISPR 架构设计 — 阿里云视角
 description: 'title: 基因编辑CRISPR架构设计'
+summary: 'title: 基因编辑CRISPR架构设计'
 category: general
 tags:
 - architecture
@@ -11,6 +12,8 @@ tags:
 - rbac
 - networkpolicy
 - gpu
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - prometheus-basics
 - mysql-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 基因编辑CRISPR架构设计
 description: '# 基因编辑 CRISPR 架构设计 — 阿里云视角'

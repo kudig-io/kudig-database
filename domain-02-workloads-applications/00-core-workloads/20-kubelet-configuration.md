@@ -1,6 +1,7 @@
 ---
 title: Kubelet 配置与调优
 description: '# Kubelet 配置与调优'
+summary: '# Kubelet 配置与调优'
 category: workloads
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - scheduler
 - prometheus
 - grafana
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -58,8 +61,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
-created: "2026-05-23"
 ---
+
+
 
 # [[kubelet|Kubelet]] 配置与调优
 
@@ -1080,11 +1084,11 @@ echo "=========================================="
 |---------|---------|---------|---------|
 | **Kubelet 无法启动** | 配置文件语法错误 | `kubelet --config=/var/lib/kubelet/config.yaml` | 检查 YAML 语法 |
 | | 证书问题 | `openssl x509 -in /var/lib/kubelet/pki/kubelet.crt -noout -text` | 更新证书 |
-| | 端口被占用 | `ss -tlnp \| grep 10250` | 释放端口或修改配置 |
+| | 端口被占用 | `ss -tlnp | grep 10250` | 释放端口或修改配置 |
 | **节点 NotReady** | 运行时不可用 | `crictl info` | 重启 containerd/crio |
 | | CNI 配置问题 | `ls /etc/cni/net.d/` | 检查 CNI 配置 |
 | | 内存压力 | `kubectl describe node` | 清理或扩容内存 |
-| **Pod 无法调度** | 资源不足 | `kubectl describe node \| grep Allocatable -A 10` | 调整资源预留 |
+| **Pod 无法调度** | 资源不足 | `kubectl describe node | grep Allocatable -A 10` | 调整资源预留 |
 | | Taint 问题 | `kubectl get node -o jsonpath='{.spec.taints}'` | 移除/添加 Toleration |
 | **Pod 频繁被驱逐** | 驱逐阈值过高 | 检查 `evictionHard` 配置 | 调整驱逐阈值 |
 | | 资源泄漏 | `crictl stats` | 定位泄漏容器 |

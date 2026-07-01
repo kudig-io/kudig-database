@@ -1,6 +1,7 @@
 ---
 title: Drasi 变更检测
-description: 'Drasi 是微软开源的 CNCF Sandbox 项目，实时检测基础设施和应用状态的变化，通过连续查询（Continuous Query）监控数据变化并触发反...'
+description: Drasi 是微软开源的 CNCF Sandbox 项目，实时检测基础设施和应用状态的变化，通过连续查询（Continuous Query）监控数据变化并触发反...
+summary: Drasi 是微软开源的 CNCF Sandbox 项目，实时检测基础设施和应用状态的变化，通过连续查询（Continuous Query）监控数据变化并触发反...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - observability
 - change-detection
 - microsoft
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Drasi 变更检测（Drasi）
 

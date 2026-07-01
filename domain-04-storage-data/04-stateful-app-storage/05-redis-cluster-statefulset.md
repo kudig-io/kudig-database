@@ -1,6 +1,7 @@
 ---
 title: Redis Cluster on K8s 生产部署指南
 description: 面向阿里云/专有云 K8s 的 Redis Cluster 生产部署方案，涵盖槽位分配、故障转移、数据迁移、持久化与监控告警。
+summary: 面向阿里云/专有云 K8s 的 Redis Cluster 生产部署方案，涵盖槽位分配、故障转移、数据迁移、持久化与监控告警。
 category: storage
 tags:
 - k8s
@@ -11,6 +12,9 @@ tags:
 - failover
 - alicloud
 - apsara-stack
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -44,9 +48,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # Redis Cluster on K8s 生产部署指南
 

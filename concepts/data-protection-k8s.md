@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 数据保护策略
 description: → 配置备份 (GitOps)
+summary: → 配置备份 (GitOps)
 category: synthesis
 tags:
 - data-protection
@@ -11,6 +12,8 @@ tags:
 - csi
 - etcd
 - rag
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,15 +30,16 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - backup-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]"
-    type: related_to
-  - target: "[[skills/best-practices/best-practices/infrastructure/storage.md]]"
-    type: related_to
+- target: '[[entities/kubernetes.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+  type: related_to
+- target: '[[skills/best-practices/best-practices/infrastructure/storage.md]]'
+  type: related_to
 ---
+
+
 
 # [[entities/kubernetes.md|Kubernetes]] 数据保护策略
 

@@ -1,12 +1,21 @@
 ---
-title: "Logging Pipeline Failure Remediation Playbook"
+title: Logging Pipeline Failure Remediation Playbook
+summary: Logging Pipeline Failure Remediation Playbook：kubectl get configmap -n <logging-namespace>
+  | grep fluent
 category: remediation
-skill_set: "k8s-logging-pipeline"
-created: "2026-05-22"
-updated: "2026-05-22"
+tags:
+- reference
+- remediation
+- playbook
+- visibility/public
+tier: supporting
+created: '2026-05-22'
+updated: '2026-05-22'
+skill_set: k8s-logging-pipeline
 last_updated: 2026-05-22
-tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
+
+
 
 # 修复操作手册 / Remediation Playbook
 
@@ -73,7 +82,7 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
 - **适用根因**: RC-005
 - **前置检查**:
   ```bash
-  kubectl logs -n <namespace> <fluent-pod> --tail=50 | grep -i "buffer\|drop\|retry"
+  kubectl logs -n <namespace> <fluent-pod> --tail=50 | grep -i "buffer|drop|retry"
   ```
 - **执行命令**:
 
@@ -241,3 +250,9 @@ kubectl get ds -n <namespace>
 - Skill 版本: SKILL-LOG-001 v1.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

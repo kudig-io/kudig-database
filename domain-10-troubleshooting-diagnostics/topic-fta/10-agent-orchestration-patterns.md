@@ -1,6 +1,7 @@
 ---
 title: 第十章：Agent 编排模式与 FTA 逻辑门映射 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用'''
+summary: 'description: ''**所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用'''
 category: fta
 tags:
 - fta
@@ -9,6 +10,8 @@ tags:
 - ingress
 - rag
 - agent
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -41,8 +44,9 @@ prerequisites:
 fta_id: FTA-10_AGENT_ORCHESTRATION_PATTERNS-001
 component: 10 Agent Orchestration Patterns
 severity: critical
-created: "2026-05-23"
 ---
+
+
 
 title: 第十章：Agent 编排模式与 FTA 逻辑门映射
 description: '**所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用'

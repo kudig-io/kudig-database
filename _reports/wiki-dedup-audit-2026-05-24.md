@@ -1,24 +1,29 @@
 ---
 title: Wiki Dedup 审计报告 — 2026-05-24
+summary: Wiki Dedup 审计报告 — 2026-05-24：01-reference-architectures/ 与 topic-application-architecture/
+  完全重复。
 category: reports
 tags:
 - reports
 - dedup
 - quality
 - visibility/public
+tier: supporting
 sources:
 - Vault Scan 2026-05-24
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 relationships:
-- target: "_reports/KUDIG-COMPREHENSIVE-FIX-REPORT-2026-05-24.md"
+- target: _reports/KUDIG-COMPREHENSIVE-FIX-REPORT-2026-05-24.md
   type: related_to
-- target: "_reports/obsidian-wiki-skills-evaluation-2026-05-24.md"
+- target: _reports/obsidian-wiki-skills-evaluation-2026-05-24.md
   type: related_to
-- target: "_reports/wiki-lint-2026-05-24.md"
+- target: _reports/wiki-lint-2026-05-24.md
   type: related_to
 ---
+
+
 
 # Wiki Dedup 审计报告 — 2026-05-24
 
@@ -91,6 +96,8 @@ relationships:
 > 工具: wiki-dedup skill
 
 ## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub
 
 - _reports/KUDIG-COMPREHENSIVE-FIX-REPORT-2026-05-24.md
 - _reports/obsidian-wiki-skills-evaluation-2026-05-24.md

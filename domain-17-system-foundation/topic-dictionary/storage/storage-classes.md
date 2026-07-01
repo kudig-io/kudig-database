@@ -1,12 +1,15 @@
 ---
 title: Storage Classes（存储类）
 description: '# Storage Classes（存储类）'
+summary: '# Storage Classes（存储类）'
 category: dictionary
 tags:
 - k8s
 - glossary
 - terminology
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -24,8 +27,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
-created: "2026-05-23"
 ---
+
+
 
 # Storage Classes（存储类）
 

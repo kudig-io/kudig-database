@@ -1,7 +1,9 @@
 ---
 title: 框架集成与生态系统
-description: '**文档类型**: 集成指南 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Frameworks, OpenAI SDK, LangChain, Vercel AI, LlamaIndex,
-  Mastra, PydanticAI, Aider, Cline'
+description: '**文档类型**: 集成指南 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Frameworks,
+  OpenAI SDK, LangChain, Vercel AI, LlamaIndex, Mastra, PydanticAI, Aider, Cline'
+summary: '**文档类型**: 集成指南 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Frameworks, OpenAI
+  SDK, LangChain, Vercel AI, LlamaIndex, Mastra, PydanticAI, Aider, Cline'
 category: ai-coding
 tags:
 - ai
@@ -11,6 +13,8 @@ tags:
 - llm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +31,9 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # 框架集成与生态系统
 

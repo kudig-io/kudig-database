@@ -1,6 +1,11 @@
 ---
-title: "AI-Driven Capacity Planning, Cost Optimization & DR Automation 2025-2026"
-description: "Research findings on Kubernetes capacity planning with AI/ML, cost optimization tools (Kubecost, OpenCost, Cast AI), toil reduction with AIOps, automated DR drills, cross-region DR patterns, and multi-cluster failover automation."
+title: AI-Driven Capacity Planning, Cost Optimization & DR Automation 2025-2026
+description: Research findings on Kubernetes capacity planning with AI/ML, cost optimization
+  tools (Kubecost, OpenCost, Cast AI), toil reduction with AIOps, automated DR drills,
+  cross-region DR patterns, and multi-cluster failover automation.
+summary: Research findings on Kubernetes capacity planning with AI/ML, cost optimization
+  tools (Kubecost, OpenCost, Cast AI), toil reduction with AIOps, automated DR drills,
+  cross-region DR patterns, and mu...
 category: research
 tags:
 - k8s
@@ -13,6 +18,8 @@ tags:
 - opencost
 - cast-ai
 - velero
+tier: peripheral
+created: '2026-07-01'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -35,6 +42,8 @@ authors:
 - name: KUDIG Research
   role: research
 ---
+
+
 
 # AI-Driven Capacity Planning, Cost Optimization & DR Automation (2025-2026)
 

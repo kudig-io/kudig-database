@@ -1,6 +1,7 @@
 ---
 title: 节点安全 — Node Authorization / NodeRestriction / Pod Security
 description: 'title: 节点安全机制'
+summary: 'title: 节点安全机制'
 category: general
 tags:
 - reference
@@ -10,6 +11,8 @@ tags:
 - kubelet
 - rbac
 - webhook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +36,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 节点安全机制
 description: '# 节点安全 — Node Authorization / NodeRestriction / Pod Security'
@@ -465,6 +469,8 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem \
 | `csrapproving controller` | `pkg/controller/certificates/approval/sarapproval.go` | CSR 自动审批 |
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

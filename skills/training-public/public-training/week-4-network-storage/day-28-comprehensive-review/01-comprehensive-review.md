@@ -1,6 +1,7 @@
 ---
 title: 'Day 28: 综合复习与实践'
 description: '# Day 28: 综合复习与实践'
+summary: '# Day 28: 综合复习与实践'
 category: learning
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - opa
 - redis
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -39,8 +42,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 28: 综合复习与实践
 

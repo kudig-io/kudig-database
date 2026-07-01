@@ -1,6 +1,7 @@
 ---
 title: 'Day 8: K8S 集群 RBAC'
 description: '- "权限配置"'
+summary: '- "权限配置"'
 category: learning
 tags:
 - k8s
@@ -12,6 +13,8 @@ tags:
 - cronjob
 - ingress
 - rbac
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -31,8 +34,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
-created: "2026-05-23"
 ---
+
+
 
 # Day 8: K8S 集群 RBAC
 

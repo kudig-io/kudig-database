@@ -1,6 +1,7 @@
 ---
 title: Deployment 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Deployment 故障排查指南'
+summary: 'title: Deployment 故障排查指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - helm
 - containerd
 - docker
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ prerequisites:
 - redis-basics
 - gpu-scheduling-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Deployment 故障排查指南
 description: '# Deployment 故障排查指南'
@@ -1171,7 +1175,7 @@ kubectl describe deployment <name> | grep -A10 Conditions
 | Pod Pending | 资源不足/节点不匹配 | `kubectl describe pod` 查看调度失败原因 | CPU/内存不足、污点阻止 |
 | PVC 未绑定 | 存储类/PV 不可用 | `kubectl get pvc` 检查 PVC 状态 | 动态供应失败 |
 | 节点亲和性不满足 | NodeSelector/Affinity 配置错误 | 检查节点标签与 Pod 要求 | 标签拼写错误 |
-| 污点阻止调度 | Node Taint 未容忍 | `kubectl get nodes -o json \| jq '.items[].spec.taints'` | GPU 节点需要 toleration |
+| 污点阻止调度 | Node Taint 未容忍 | `kubectl get nodes -o json | jq '.items[].spec.taints'` | GPU 节点需要 toleration |
 
 **阶段 4: 容器启动 (1-5min)**
 

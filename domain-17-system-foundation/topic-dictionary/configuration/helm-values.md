@@ -1,6 +1,8 @@
 ---
 title: Helm Values 配置值
-description: 'Helm Values 是 Helm Chart 的参数化配置机制，通过 values.yaml 文件定义模板变量，实现同一 Chart 在不同环境下的差异化部...'
+description: Helm Values 是 Helm Chart 的参数化配置机制，通过 values.yaml 文件定义模板变量，实现同一 Chart
+  在不同环境下的差异化部...
+summary: Helm Values 是 Helm Chart 的参数化配置机制，通过 values.yaml 文件定义模板变量，实现同一 Chart 在不同环境下的差异化部...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - configuration
 - helm
 - templating
+tier: peripheral
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Helm Values 配置值（Helm Values）
 

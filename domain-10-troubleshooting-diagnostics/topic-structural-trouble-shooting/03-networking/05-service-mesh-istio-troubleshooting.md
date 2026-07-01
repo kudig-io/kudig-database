@@ -1,6 +1,7 @@
 ---
 title: Service Mesh (Istio) 深度排查与性能调优指南 [topic-structural-trouble-shooting]
 description: 'title: Service Mesh (Istio) 深度排查与性能调优指南'
+summary: 'title: Service Mesh (Istio) 深度排查与性能调优指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -13,6 +14,8 @@ tags:
 - envoy
 - helm
 - docker
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -48,8 +51,9 @@ prerequisites:
 - policy-basics
 - backup-basics
 - tracing-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Service|Service]]Service Mesh）|Service Mesh]] ([[Istio|Istio]]) 深度排查与性能调优指南
 description: '# Service Mesh (Istio) 深度排查与性能调优指南'
@@ -886,7 +890,7 @@ def connect_database():
 
 | 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
-| Proxy Status: STALE | xDS 推送阻塞或超时 | `kubectl logs -n istio-system istiod-xxx \| grep "push error"` | 大规模集群 (5000+ Pod) |
+| Proxy Status: STALE | xDS 推送阻塞或超时 | `kubectl logs -n istio-system istiod-xxx | grep "push error"` | 大规模集群 (5000+ Pod) |
 | Config 推送延迟 > 30s | Istiod CPU/内存不足 | `kubectl top pod -n istio-system` | EDS 推送风暴 |
 | VirtualService 不生效 | 配置语法错误 | `istioctl analyze -n <ns>` | 正则表达式错误 |
 | Certificate 签发失败 | CA Secret 丢失 | `kubectl get secret istio-ca-secret -n istio-system` | 误删除 Secret |
@@ -896,11 +900,11 @@ def connect_database():
 | 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
 | 503 UH (Upstream Unhealthy) | Endpoint 未就绪 | `istioctl pc endpoint <pod> --address <ip>` | Pod 健康检查失败 |
-| 503 UC (Upstream Connection Failure) | mTLS 握手失败 | `kubectl logs <pod> -c istio-proxy \| grep "TLS error"` | 证书过期/时钟偏移 |
+| 503 UC (Upstream Connection Failure) | mTLS 握手失败 | `kubectl logs <pod> -c istio-proxy | grep "TLS error"` | 证书过期/时钟偏移 |
 | 503 UF (Upstream Failure) | 上游应用返回错误 | 查看应用日志 | 应用 Bug |
 | 404 NR (No Route) | VirtualService 未匹配 | `istioctl pc route <pod>` | 路径拼写错误 |
 | 429 RL (Rate Limited) | 触发限流 | 检查 EnvoyFilter 限流配置 | QPS 超限 |
-| 503 UO (Upstream Overflow) | 连接池耗尽 | `istioctl pc cluster <pod> \| grep circuit_breakers` | 并发过高 |
+| 503 UO (Upstream Overflow) | 连接池耗尽 | `istioctl pc cluster <pod> | grep circuit_breakers` | 并发过高 |
 
 ### 2.3.3 Gateway 问题 (Ingress/Egress)
 
@@ -917,7 +921,7 @@ def connect_database():
 |----------|----------|----------|----------|
 | Envoy CPU 100% | 路由规则过多/正则复杂 | `kubectl top pod --containers` | VirtualService 使用复杂正则 |
 | 内存持续增长 | xDS 配置过大 | `kubectl exec -c istio-proxy -- curl localhost:15000/memory` | 未使用 Sidecar 资源限制作用域 |
-| 请求延迟增加 | Envoy 过载 | `kubectl exec -c istio-proxy -- curl localhost:15000/stats \| grep overload` | QPS 超过 Envoy 容量 |
+| 请求延迟增加 | Envoy 过载 | `kubectl exec -c istio-proxy -- curl localhost:15000/stats | grep overload` | QPS 超过 Envoy 容量 |
 | 证书轮换风暴 | 大量 Pod 同时续签 | 监控 Istiod CA 负载 | 证书有效期过短 |
 
 ---
@@ -1666,7 +1670,7 @@ aliyun slb describeloadbalancer --region {region} --loadbalancer-id {lb-id}
 aliyun vpc describeRouteEntries --VpcId {vpc-id} --RouteTableId {rt-id}
 
 # Step 4: 查看 Ingress Gateway 日志
-kubectl logs -n istio-system -l app=istio-ingressgateway --tail=50 | grep -i "eip\|eni"
+kubectl logs -n istio-system -l app=istio-ingressgateway --tail=50 | grep -i "eip|eni"
 ```
 
 #### 解决方案

@@ -1,6 +1,7 @@
 ---
 title: 06 - DaemonSet YAML 配置参考
 description: 'title: 06 - DaemonSet YAML 配置参考'
+summary: 'title: 06 - DaemonSet YAML 配置参考'
 category: general
 tags:
 - yaml
@@ -13,6 +14,8 @@ tags:
 - calico
 - coredns
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - gpu-scheduling-basics
 - policy-basics
 - logging-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 06 - [[DaemonSet|DaemonSet]] YAML 配置参考
 description: '# 06 - DaemonSet YAML 配置参考'
@@ -1490,3 +1494,7 @@ spec:
 - 05-statefulset-reference
 - 07-job-cronjob-reference
 - 08-service-all-types
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub

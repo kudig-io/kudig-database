@@ -1,6 +1,7 @@
 ---
 title: Persistent Storage Model (PV/PVC/StorageClass)
 description: '- [[concepts/Secret 管理 × 存储模型.md|Secret 管理 × 存储模型]] — 综合'
+summary: '- [[concepts/Secret 管理 × 存储模型.md|Secret 管理 × 存储模型]] — 综合'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ceph
 - statefulset
 - rag
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ trigger_keywords:
 - StorageClass
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # Persistent Storage Model (PV/PVC/StorageClass)
 

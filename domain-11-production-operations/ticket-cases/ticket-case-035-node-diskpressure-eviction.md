@@ -1,6 +1,7 @@
 ---
 title: 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 description: 专有云 ACK 工作节点因 /var/log/pods 与容器日志膨胀触发 DiskPressure，kubelet 驱逐业务 Pod，造成服务降级的工单闭环样本。
+summary: 专有云 ACK 工作节点因 /var/log/pods 与容器日志膨胀触发 DiskPressure，kubelet 驱逐业务 Pod，造成服务降级的工单闭环样本。
 category: production-operations
 tags:
 - ack
@@ -10,6 +11,9 @@ tags:
 - kubelet
 - node-pressure
 - p1
+tier: peripheral
+created: '2026-06-26T14:00:00+08:00'
+updated: '2026-06-26T16:30:00+08:00'
 incident_id: TC-2026-035
 priority: P1
 severity: high
@@ -23,9 +27,7 @@ skill_ref:
 fta_ref:
 - '[[domain-10-troubleshooting-diagnostics/topic-fta/list/nodepool-fta.md|FTA: 节点池异常]]'
 - '[[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|FTA: Pod 异常]]'
-created: '2026-06-26T14:00:00+08:00'
-updated: '2026-06-26T16:30:00+08:00'
-last_updated: 2026-06-26T16:30:00+08:00
+last_updated: 2026-06-26 16:30:00+08:00
 duplicate_of: TC-2026-040
 status: duplicate
 duplication_reason: 与 "TC-2026-040" 主题重复，内容角度相似，降低 RAG 权重
@@ -56,15 +58,17 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -110,7 +114,7 @@ crictl system df
 docker system df 2>/dev/null || true
 
 # 5. 查看 kubelet 日志中的驱逐决策
-journalctl -u kubelet -n 500 --no-pager | grep -i 'eviction\|DiskPressure\|threshold' | tail -30
+journalctl -u kubelet -n 500 --no-pager | grep -i 'eviction|DiskPressure|threshold' | tail -30
 
 # 6. 查看 Pod 日志是否异常暴增
 kubectl logs -n rec-service deploy/recommend-v2 --tail=200 | wc -c

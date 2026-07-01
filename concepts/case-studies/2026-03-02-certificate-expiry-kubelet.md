@@ -1,15 +1,25 @@
 ---
-title: "[2026-03-02] [P0] 证书过期导致 kubelet 无法上报心跳"
+title: '[2026-03-02] [P0] 证书过期导致 kubelet 无法上报心跳'
+summary: '[2026-03-02] [P0] 证书过期导致 kubelet 无法上报心跳：06:45，运维人员发现 prod-logistics namespace
+  大量 Pod 进入 Terminating 状态，新 Pod 卡在 Pending。Grafana 显示 4 个节点同时变为 NotReady。'
 category: case-study
-tags: [production, incident, security, certificate, kubelet]
-date: "2026-03-02"
+tags:
+- production
+- incident
+- security
+- certificate
+- kubelet
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
+date: '2026-03-02'
 severity: P0
-mttr: "25min"
+mttr: 25min
 status: resolved
-created: "2026-05-23"
-updated: "2026-05-23"
 last_updated: 2026-05-23
 ---
+
+
 
 # [2026-03-02] Kubelet 客户端证书过期导致 120+ Pod 被驱逐
 

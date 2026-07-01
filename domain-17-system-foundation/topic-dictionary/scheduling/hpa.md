@@ -1,6 +1,9 @@
 ---
 title: 水平 Pod 自动扩缩容
-description: 'HPA（Horizontal Pod Autoscaler，水平 Pod 自动扩缩容）是 Kubernetes 中根据观测到的指标自动调整 Pod 副本数量的控...'
+description: HPA（Horizontal Pod Autoscaler，水平 Pod 自动扩缩容）是 Kubernetes 中根据观测到的指标自动调整
+  Pod 副本数量的控...
+summary: HPA（Horizontal Pod Autoscaler，水平 Pod 自动扩缩容）是 Kubernetes 中根据观测到的指标自动调整 Pod
+  副本数量的控...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - scheduling
 - autoscaling
 - hpa
+tier: core
+created: 2026-05
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,9 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
-created: 2026-05
 ---
+
+
 
 # 水平 Pod 自动扩缩容
 

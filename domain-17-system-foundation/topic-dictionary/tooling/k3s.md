@@ -1,6 +1,7 @@
 ---
 title: K3s
-description: 'K3s 是 Rancher（现 SUSE）开发的轻量级 Kubernetes 发行版，现为 CNCF 沙箱项目。它将整个 K8s 控制平面打包为单个二进制文件（...'
+description: K3s 是 Rancher（现 SUSE）开发的轻量级 Kubernetes 发行版，现为 CNCF 沙箱项目。它将整个 K8s 控制平面打包为单个二进制文件（...
+summary: K3s 是 Rancher（现 SUSE）开发的轻量级 Kubernetes 发行版，现为 CNCF 沙箱项目。它将整个 K8s 控制平面打包为单个二进制文件（...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - lightweight-k8s
 - edge
 - cncf
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # K3s
 

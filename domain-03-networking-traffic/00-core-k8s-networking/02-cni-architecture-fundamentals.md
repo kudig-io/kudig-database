@@ -1,6 +1,9 @@
 ---
 title: CNI 架构与核心原理
-description: 深入解析 Container Network Interface (CNI) 的架构设计、规范接口、主流插件对比（Flannel/Calico/Cilium/Weave）、IPAM 与网络策略
+description: 深入解析 Container Network Interface (CNI) 的架构设计、规范接口、主流插件对比（Flannel/Calico/Cilium/Weave）、IPAM
+  与网络策略
+summary: 深入解析 Container Network Interface (CNI) 的架构设计、规范接口、主流插件对比（Flannel/Calico/Cilium/Weave）、IPAM
+  与网络策略
 category: domain-03-networking-traffic
 tags:
 - k8s
@@ -13,6 +16,8 @@ tags:
 - ipam
 - network-policy
 - kubelet
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -73,8 +78,9 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md
   type: fta
   desc: CSI 故障树
-created: "2026-05-23"
 ---
+
+
 
 # 141 - CNI 架构与核心原理 (CNI Architecture & Fundamentals)
 
@@ -777,7 +783,7 @@ echo "[7/7] 生成诊断报告..."
   
   echo
   echo "=== 发现的问题 ==="
-  if grep -q "error\|Error\|failed\|Failed" /tmp/cni-logs-analysis.log; then
+  if grep -q "error|Error|failed|Failed" /tmp/cni-logs-analysis.log; then
     echo "⚠️  发现CNI错误日志"
   fi
   

@@ -1,12 +1,15 @@
 ---
 title: Skill Schema (历史参考)
 description: Skill Schema (历史参考) — Kubernetes 生产运维知识库
+summary: Skill Schema (历史参考) — Kubernetes 生产运维知识库
 category: skills
 tags:
 - k8s
 - skills
 - sop
 - runbook
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -29,8 +32,9 @@ prerequisites:
 skill_id: SKILL-SKILL_SCHEMA-001
 skill_name: Skill Schema (历史参考)
 version: 1.0.0
-created: "2026-05-23"
 ---
+
+
 
 # [[SKILL|Skill]] Schema (历史参考)
 

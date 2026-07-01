@@ -1,27 +1,31 @@
 ---
 title: K8s Deployment Rollout Failure - 远程顾问对话脚本
-category: "troubleshooting"
-tags: ["workloads", "remote-consultant"]
+summary: Deployment发布问题的远程顾问对话脚本，覆盖滚动更新、金丝雀发布、回滚操作。
+category: troubleshooting
+tags:
+- workloads
+- remote-consultant
+tier: supporting
+created: 2026-05-21
+updated: '2026-05-23'
 skill_id: SKILL-DEPLOY-001
 version: 1.0.0
 agent_role: remote-advisor
 dialogue_type: guided-troubleshooting
 rounds: 3
 branches_per_round: 3+
-created: 2026-05-21
-updated: "2026-05-23"
 last_updated: 2026-05-23
-summary: "Deployment发布问题的远程顾问对话脚本，覆盖滚动更新、金丝雀发布、回滚操作。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
-    type: uses
-  - target: "[[concepts/case-studies/2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点.md]]"
-    type: uses
-  - target: "[[entities/deployment.md]]"
-    type: uses
-  - target: "[[entities/kubernetes.md]]"
-    type: uses
+- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+  type: uses
+- target: '[[concepts/case-studies/2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点.md]]'
+  type: uses
+- target: '[[entities/deployment.md]]'
+  type: uses
+- target: '[[entities/kubernetes.md]]'
+  type: uses
 ---
+
 
 # [[entities/deployment.md|Deployment]] Rollout Failure — 远程顾问对话脚本
 
@@ -109,13 +113,13 @@ kubectl get events -n <ns> --field-selector reason=FailedScheduling
 **顾问**: 执行以下检查：
 ```bash
 # 确认具体错误
-kubectl describe pod <pod> -n <ns> | grep -A 5 "Failed to pull image\|Back-off pulling image"
+kubectl describe pod <pod> -n <ns> | grep -A 5 "Failed to pull image|Back-off pulling image"
 # 检查镜像配置
 kubectl get deployment <name> -n <ns> -o jsonpath='{.spec.template.spec.containers[*].image}'
 # 检查 imagePullSecrets
 kubectl get sa default -n <ns> -o yaml | grep -A 10 imagePullSecrets
 ```
-> 【如果无法 describe】改为 `kubectl get events -n <ns> | grep -i "image\|pull"`
+> 【如果无法 describe】改为 `kubectl get events -n <ns> | grep -i "image|pull"`
 > 【如果无法 jsonpath】改为 `kubectl get deployment <name> -n <ns> -o yaml | grep "image:"`
 > 【如果无法获取 sa】从镜像仓库后台确认：标签是否存在、是否需要认证、最近是否更换仓库地址
 
@@ -129,12 +133,12 @@ kubectl logs <pod> -n <ns> --previous 2>/dev/null | tail -50
 # 检查探针配置
 kubectl get deployment <name> -n <ns> -o jsonpath='{"Liveness: "}{.spec.template.spec.containers[0].livenessProbe}{"\nReadiness: "}{.spec.template.spec.containers[0].readinessProbe}{"\n"}'
 # 查看重启详情
-kubectl describe pod <pod> -n <ns> | grep -A 10 "Last State\|Restart Count"
+kubectl describe pod <pod> -n <ns> | grep -A 10 "Last State|Restart Count"
 ```
 > 【如果 --previous 不可用】改为 `kubectl logs <pod> -n <ns> | tail -50`
 > 【如果无法 logs】请检查日志平台（ELK/Loki/Splunk）搜索该 Pod 错误日志
-> 【如果无法 jsonpath】改为 `kubectl get deployment <name> -n <ns> -o yaml | grep -A 15 "livenessProbe\|readinessProbe"`
-> 【如果 describe 不可用】改为 `kubectl get pod <pod> -n <ns> -o yaml | grep -A 5 "restartCount\|lastState"`
+> 【如果无法 jsonpath】改为 `kubectl get deployment <name> -n <ns> -o yaml | grep -A 15 "livenessProbe|readinessProbe"`
+> 【如果 describe 不可用】改为 `kubectl get pod <pod> -n <ns> -o yaml | grep -A 5 "restartCount|lastState"`
 
 **根因判断**：应用启动报错 → RC-003；正常启动但被 kill → 探针 initialDelay 太短；Init Container 报错 → RC-007；日志为空且 restartCount 高 → OOMKilled。
 

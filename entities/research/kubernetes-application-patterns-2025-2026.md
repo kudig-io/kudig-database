@@ -1,3 +1,15 @@
+---
+title: Kubernetes Application Patterns 2025 2026
+summary: 1. AI Cloud & GPU Platforms — dedicated tenant clusters over GPU infrastructure
+  2. Enterprise Platform Teams — central management, access control, lifecycle ops
+  3. Developers & CI — isolated enviro...
+category: entities
+tags:
+- kubernetes-application-patterns-2025-2026
+tier: supporting
+created: '2026-07-01'
+---
+
 # Kubernetes Application Patterns 2025-2026: Structured Research Findings
 
 ## 1. MICROSERVICES PATTERNS

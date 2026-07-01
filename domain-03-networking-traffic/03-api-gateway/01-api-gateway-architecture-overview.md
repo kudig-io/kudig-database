@@ -1,6 +1,7 @@
 ---
 title: 01 - 云原生 API 网关架构总览
 description: '# 01 - 云原生 API 网关架构总览'
+summary: '# 01 - 云原生 API 网关架构总览'
 category: cloud-native-api-gateway
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - istio
 - opa
 - postgresql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-05-23"
 ---
+
+
 
 # 01 - 云原生 API 网关架构总览
 

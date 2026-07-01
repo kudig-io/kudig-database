@@ -1,6 +1,10 @@
 ---
-title: Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota Management)
-description: 'title: Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota'
+title: Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota
+  Management)
+description: 'title: Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and
+  Resource Quota'
+summary: 'title: Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource
+  Quota'
 category: general
 tags:
 - paper
@@ -13,6 +17,8 @@ tags:
 - istio
 - cilium
 - opa
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -39,8 +45,9 @@ prerequisites:
 - prometheus-basics
 - cilium-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota
   Management)
@@ -1116,5 +1123,7 @@ data:
 - 15-kubernetes-chaos-engineering-fault-injection-testing
 
 ## Related
+
+- [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

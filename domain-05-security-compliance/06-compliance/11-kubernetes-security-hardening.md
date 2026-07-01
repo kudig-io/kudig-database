@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 安全加固深度实践
 description: 'title: Kubernetes 安全加固深度实践'
+summary: 'title: Kubernetes 安全加固深度实践'
 category: general
 tags:
 - security
@@ -13,6 +14,8 @@ tags:
 - opa
 - falco
 - redis
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - redis-basics
 - tls-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 title: [[Kubernetes|Kubernetes]] 安全加固深度实践
 description: '# Kubernetes 安全加固深度实践'

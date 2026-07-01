@@ -1,6 +1,7 @@
 ---
 title: 可用性计算模型
 description: 可用性计算模型 — Kubernetes 生产运维知识库
+summary: 可用性计算模型 — Kubernetes 生产运维知识库
 category: domain
 tags:
 - sre
@@ -8,6 +9,8 @@ tags:
 - reliability
 - sla
 - calculation
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -25,8 +28,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - sre-practices
-created: "2026-05-23"
 ---
+
+
 
 # 可用性计算模型
 

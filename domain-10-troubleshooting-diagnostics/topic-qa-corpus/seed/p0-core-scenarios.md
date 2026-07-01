@@ -1,6 +1,7 @@
 ---
 title: P0 核心场景手工种子 I-O 对
 description: 从核心 Skill 手工提取的高质量命令输出→诊断 I-O 对
+summary: 从核心 Skill 手工提取的高质量命令输出→诊断 I-O 对
 category: agent-corpus
 tags:
 - k8s
@@ -9,10 +10,13 @@ tags:
 - diagnosis
 - seed
 - p0
-created: "2026-05-23"
-updated: "2026-05-23"
+tier: supporting
+created: '2026-05-23'
+updated: '2026-05-23'
 last_updated: 2026-05-23
 ---
+
+
 
 # P0 核心场景手工种子 I-O 对
 

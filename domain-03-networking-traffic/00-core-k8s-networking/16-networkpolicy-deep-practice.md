@@ -1,6 +1,7 @@
 ---
 title: 01 - NetworkPolicy 深度实践指南
 description: 'title: 01 - NetworkPolicy 深度实践指南'
+summary: 'title: 01 - NetworkPolicy 深度实践指南'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - calico
 - coredns
 - postgresql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -34,8 +37,9 @@ prerequisites:
 - prometheus-basics
 - cilium-basics
 - cni-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 01 - [[NetworkPolicy|NetworkPolicy]] 深度实践指南
 description: '# 01 - NetworkPolicy 深度实践指南'

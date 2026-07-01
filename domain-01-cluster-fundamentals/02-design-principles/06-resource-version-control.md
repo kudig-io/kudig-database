@@ -1,12 +1,15 @@
 ---
 title: 06 - 资源版本与并发控制 (Concurrency Control)
 description: '## 专家解析：410 Gone 的终极治理'
+summary: '## 专家解析：410 Gone 的终极治理'
 category: design-principles
 tags:
 - k8s
 - design
 - principles
 - etcd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -44,8 +47,9 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
-created: "2026-05-23"
 ---
+
+
 
 # 06 - 资源版本与并发控制 (Concurrency Control)
 

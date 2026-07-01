@@ -1,6 +1,7 @@
 ---
 title: Deployment 控制器架构总览 (topic-code-analysis)
 description: 'title: Deployment 控制器架构总览'
+summary: 'title: Deployment 控制器架构总览'
 category: general
 tags:
 - reference
@@ -8,6 +9,8 @@ tags:
 - etcd
 - kubelet
 - controller-manager
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,8 +32,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: Deployment 控制器架构总览
 category: deployment
@@ -605,6 +609,10 @@ kubectl get pods -l app=web-frontend -w
 - [`rollbackToRevision`](06-revision-history.md) — 版本回滚
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[README|README]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

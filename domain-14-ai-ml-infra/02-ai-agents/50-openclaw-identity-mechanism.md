@@ -1,6 +1,7 @@
 ---
 title: OpenClaw IDENTITY.md 机制深度解析 (domain-14-ai-ml-infra)
 description: 'title: OpenClaw IDENTITY.md 机制深度解析'
+summary: 'title: OpenClaw IDENTITY.md 机制深度解析'
 category: general
 tags:
 - ai
@@ -9,6 +10,8 @@ tags:
 - llm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -28,8 +31,9 @@ trigger_keywords:
 - infra
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 title: OpenClaw IDENTITY.md 机制深度解析
 description: '# OpenClaw IDENTITY.md 机制深度解析'

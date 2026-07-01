@@ -1,6 +1,9 @@
 ---
 title: Tekton
-description: 'Tekton 是 CNCF 孵化项目，提供 Kubernetes 原生的 CI/CD 流水线框架。它将 CI/CD 的每一步建模为 Kubernetes CRD...'
+description: Tekton 是 CNCF 孵化项目，提供 Kubernetes 原生的 CI/CD 流水线框架。它将 CI/CD 的每一步建模为 Kubernetes
+  CRD...
+summary: Tekton 是 CNCF 孵化项目，提供 Kubernetes 原生的 CI/CD 流水线框架。它将 CI/CD 的每一步建模为 Kubernetes
+  CRD...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +12,8 @@ tags:
 - cicd
 - pipeline
 - cncf
+tier: supporting
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # Tekton
 

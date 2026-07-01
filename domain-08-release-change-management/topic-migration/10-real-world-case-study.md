@@ -1,6 +1,7 @@
 ---
 title: 10 - 生产迁移实战案例 [migration]
 description: 'description: ''| **团队规模** | 后端 15 人、运维 3 人、DBA 1 人 |'''
+summary: 'description: ''| **团队规模** | 后端 15 人、运维 3 人、DBA 1 人 |'''
 category: general
 tags:
 - migration
@@ -13,6 +14,8 @@ tags:
 - argocd
 - docker
 - harbor
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -41,8 +44,9 @@ prerequisites:
 - mysql-basics
 - tls-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 10 - 生产迁移实战案例
 description: '| **团队规模** | 后端 15 人、运维 3 人、DBA 1 人 |'

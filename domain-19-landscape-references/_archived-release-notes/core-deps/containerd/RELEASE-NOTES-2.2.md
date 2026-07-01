@@ -1,12 +1,15 @@
 ---
 title: containerd v2.2 Release Notes
 description: containerd v2.2 Release Notes — Kubernetes 生产运维知识库
+summary: containerd v2.2 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
 - release-notes
 - changelog
 - containerd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -27,8 +30,9 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[containerd|containerd]] v2.2 Release Notes
 

@@ -1,6 +1,7 @@
 ---
 title: 第六课：ConfigMap 和 Secret - 配置管理 [05-configuration]
 description: '# 第六课：ConfigMap 和 Secret - 配置管理'
+summary: '# 第六课：ConfigMap 和 Secret - 配置管理'
 category: k8s-lecturer
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - docker
 - opa
 - mysql
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -30,8 +33,9 @@ prerequisites:
 - gpu-ml-basics
 - mysql-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # 第六课：ConfigMap 和 Secret - 配置管理
 

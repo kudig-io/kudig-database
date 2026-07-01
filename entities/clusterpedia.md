@@ -1,6 +1,9 @@
 ---
 title: Clusterpedia [entities]
-description: 'summary: "Clusterpedia 是一个多集群资源的统一搜索和查询引擎，类似于 Kubernetes 资源的 "百科全书"。它将多个集群的资源同步到统一的存储中，提供与 kubectl 兼容的 API 进行跨集群的资源搜索、过滤和分页查询。"'
+description: 'summary: "Clusterpedia 是一个多集群资源的统一搜索和查询引擎，类似于 Kubernetes 资源的 "百科全书"。它将多个集群的资源同步到统一的存储中，提供与
+  kubectl 兼容的 API 进行跨集群的资源搜索、过滤和分页查询。"'
+summary: 'summary: "Clusterpedia 是一个多集群资源的统一搜索和查询引擎，类似于 Kubernetes 资源的 "百科全书"。它将多个集群的资源同步到统一的存储中，提供与
+  kubectl 兼容的 API 进行跨集群的资源搜索、过滤和分页查询。"'
 category: general
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - rbac
 - crd
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,8 +26,9 @@ trigger_keywords:
 - Clusterpedia
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: "Clusterpedia"

@@ -1,6 +1,7 @@
 ---
 title: ReAct Agent 与 Harness 识别指南 (domain-14-ai-ml-infra)
 description: 'title: ReAct Agent 与 Harness 识别指南'
+summary: 'title: ReAct Agent 与 Harness 识别指南'
 category: general
 tags:
 - ai
@@ -11,6 +12,8 @@ tags:
 - llm
 - rag
 - agent
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
-created: "2026-05-23"
 ---
+
+
 
 title: ReAct Agent 与 Harness 识别指南
 description: '# ReAct Agent 与 Harness 识别指南'

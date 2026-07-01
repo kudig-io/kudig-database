@@ -1,6 +1,7 @@
 ---
 title: reset 子命令与 Phase 操作速查 (topic-code-analysis)
 description: '| `--config` | 配置文件路径 | |'
+summary: '| `--config` | 配置文件路径 | |'
 category: general
 tags:
 - reference
@@ -9,6 +10,8 @@ tags:
 - scheduler
 - controller-manager
 - containerd
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -32,8 +35,9 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
-created: "2026-05-23"
 ---
+
+
 
 title: reset 子命令与 Phase 操作速查
 category: cluster-delete
@@ -535,6 +539,8 @@ kubeadm reset phase cleanup-node --help  # ⚠️ 清理节点所有 K8s 配置
 - [`InteractivelyConfirmAction`](02-reset.md) — 交互式确认工具
 
 ## Related
+
+- [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
 - [[scripts/man/INSTALL.md|INSTALL]]

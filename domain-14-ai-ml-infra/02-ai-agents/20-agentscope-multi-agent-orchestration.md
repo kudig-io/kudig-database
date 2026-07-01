@@ -1,6 +1,9 @@
 ---
 title: AgentScope 多 Agent 编排与工作流 (domain-14-ai-ml-infra)
-description: 'description: ''**文档类型**: 多 Agent 编排专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, MsgHub,'
+description: 'description: ''**文档类型**: 多 Agent 编排专题 | **最后更新**: 2026-03 | **关键词**:
+  AgentScope, MsgHub,'
+summary: 'description: ''**文档类型**: 多 Agent 编排专题 | **最后更新**: 2026-03 | **关键词**: AgentScope,
+  MsgHub,'
 category: general
 tags:
 - ai
@@ -13,6 +16,8 @@ tags:
 - rbac
 - networkpolicy
 - llm
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +38,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - redis-basics
-created: "2026-05-23"
 ---
+
+
 
 title: AgentScope 多 Agent 编排与工作流
 description: '**文档类型**: 多 Agent 编排专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, MsgHub,

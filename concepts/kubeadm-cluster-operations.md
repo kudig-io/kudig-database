@@ -1,6 +1,7 @@
 ---
 title: kubeadm 集群运维全景
 description: '# kubeadm 集群运维全景'
+summary: '# kubeadm 集群运维全景'
 category: synthesis
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - deletion
 - etcd
 - kubelet
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -30,17 +33,18 @@ prerequisites:
 - prometheus-basics
 - ebpf-basics
 - etcd-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[entities/kubelet.md]]"
-    type: uses
-  - target: "[[concepts/kubernetes-pki-certificate-system.md]]"
-    type: uses
-  - target: "[[entities/deployment.md]]"
-    type: uses
-  - target: "[[concepts/etcd x 高可用模式.md]]"
-    type: uses
+- target: '[[entities/kubelet.md]]'
+  type: uses
+- target: '[[concepts/kubernetes-pki-certificate-system.md]]'
+  type: uses
+- target: '[[entities/deployment.md]]'
+  type: uses
+- target: '[[concepts/etcd x 高可用模式.md]]'
+  type: uses
 ---
+
+
 
 # kubeadm 集群运维全景
 

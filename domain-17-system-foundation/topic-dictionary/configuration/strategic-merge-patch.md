@@ -1,6 +1,9 @@
 ---
 title: 策略合并补丁
-description: 'Strategic Merge Patch 是 Kubernetes 特有的 JSON 合并策略，针对列表类型提供智能合并（按 key 合并而非替换），是 ku...'
+description: Strategic Merge Patch 是 Kubernetes 特有的 JSON 合并策略，针对列表类型提供智能合并（按 key 合并而非替换），是
+  ku...
+summary: Strategic Merge Patch 是 Kubernetes 特有的 JSON 合并策略，针对列表类型提供智能合并（按 key 合并而非替换），是
+  ku...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - configuration
 - patch
 - api
+tier: peripheral
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # 策略合并补丁（Strategic Merge Patch）
 

@@ -1,6 +1,7 @@
 ---
 title: PostgreSQL StatefulSet + Patroni 高可用生产部署
 description: 面向阿里云/专有云 K8s 的 PostgreSQL 高可用方案，使用 StatefulSet + Patroni + etcd 实现自动故障切换、流复制与备份恢复。
+summary: 面向阿里云/专有云 K8s 的 PostgreSQL 高可用方案，使用 StatefulSet + Patroni + etcd 实现自动故障切换、流复制与备份恢复。
 category: storage
 tags:
 - k8s
@@ -11,6 +12,9 @@ tags:
 - ha
 - alicloud
 - apsara-stack
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
 last_updated: 2026-06
 difficulty: advanced
 reading_level: advanced
@@ -44,9 +48,9 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
-created: "2026-06-29"
-updated: "2026-06-29"
 ---
+
+
 
 # PostgreSQL StatefulSet + Patroni 高可用生产部署
 

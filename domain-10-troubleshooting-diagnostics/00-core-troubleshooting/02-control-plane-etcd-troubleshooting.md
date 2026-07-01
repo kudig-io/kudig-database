@@ -1,6 +1,7 @@
 ---
 title: etcd 故障排查
 description: '# 02 - etcd 故障排查 (etcd Troubleshooting)'
+summary: '# 02 - etcd 故障排查 (etcd Troubleshooting)'
 category: troubleshooting
 tags:
 - etcd
@@ -13,6 +14,8 @@ tags:
 - apiserver
 - kubelet
 - scheduler
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -62,8 +65,9 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md
   label: '故障树: etcd'
-created: "2026-05-23"
 ---
+
+
 
 # 02 - [[etcd|etcd]] 故障排查 (etcd Troubleshooting)
 difficulty: "advanced"
@@ -285,7 +289,7 @@ iotop -ao
 journalctl -u etcd -f --no-pager
 
 # 查看最近错误日志
-journalctl -u etcd --since "1 hour ago" | grep -i "error\|warn\|panic"
+journalctl -u etcd --since "1 hour ago" | grep -i "error|warn|panic"
 
 # 检查wal日志损坏
 etcdctl check perf --load="s"
@@ -569,7 +573,7 @@ etcdctl endpoint status --cluster -w json 2>/dev/null | jq -r '.[].dbSize' | num
 
 # 5. 最近错误日志
 echo -e "\n6. 最近错误日志:"
-journalctl -u etcd --since "10 minutes ago" | grep -i "error\|warn" | tail -5
+journalctl -u etcd --since "10 minutes ago" | grep -i "error|warn" | tail -5
 
 echo -e "\n=== 诊断完成 ==="
 ```

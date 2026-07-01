@@ -1,3 +1,15 @@
+---
+title: K8S Release Change Management 2025 2026
+summary: 1. Developer merges code -> CI builds image 2. CI updates Git repo (image
+  tag in Helm values or Kustomize overlay) 3. Argo CD/Flux detects change, syncs to
+  cluster 4. Argo Rollouts/Flagger manages ...
+category: entities
+tags:
+- k8s-release-change-management-2025-2026
+tier: supporting
+created: '2026-07-01'
+---
+
 # Kubernetes Release & Change Management 2025-2026
 ## Research Findings — Compiled 2026-05-24
 

@@ -1,17 +1,21 @@
 ---
-title: "K8S 安全与合规"
+title: K8S 安全与合规
+summary: K8S 安全与合规：Kubernetes 安全涵盖供应链、准入控制、运行时、网络、密钥管理等多个层面。本文梳理 K8S 安全生态的核心工具链与最佳实践。
 category: concepts
 tags:
-  - security
-  - sigstore
-  - kyverno
-  - falco
-  - cilium
-  - k8s
+- security
+- sigstore
+- kyverno
+- falco
+- cilium
+- k8s
+tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 ---
+
+
 
 # K8S 安全与合规
 

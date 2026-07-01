@@ -1,6 +1,9 @@
 ---
 title: ko Go 容器构建
-description: 'ko 是 Google 开源的工具，无需 Dockerfile 即可将 Go 程序构建为容器镜像，直接编译 Go 二进制并打包为 OCI 镜像，是 Go 生态的...'
+description: ko 是 Google 开源的工具，无需 Dockerfile 即可将 Go 程序构建为容器镜像，直接编译 Go 二进制并打包为 OCI
+  镜像，是 Go 生态的...
+summary: ko 是 Google 开源的工具，无需 Dockerfile 即可将 Go 程序构建为容器镜像，直接编译 Go 二进制并打包为 OCI 镜像，是
+  Go 生态的...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - tooling
 - go
 - container
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # ko Go 容器构建（ko）
 

@@ -1,6 +1,7 @@
 ---
 title: gRPC
-description: 'gRPC 是 Google 开源的高性能远程过程调用（RPC）框架，使用 Protocol Buffers 作为接口定义语言和数据序列化格式。它是微服务间通信的...'
+description: gRPC 是 Google 开源的高性能远程过程调用（RPC）框架，使用 Protocol Buffers 作为接口定义语言和数据序列化格式。它是微服务间通信的...
+summary: gRPC 是 Google 开源的高性能远程过程调用（RPC）框架，使用 Protocol Buffers 作为接口定义语言和数据序列化格式。它是微服务间通信的...
 category: dictionary
 tags:
 - k8s
@@ -9,6 +10,8 @@ tags:
 - rpc
 - protobuf
 - networking
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # gRPC
 

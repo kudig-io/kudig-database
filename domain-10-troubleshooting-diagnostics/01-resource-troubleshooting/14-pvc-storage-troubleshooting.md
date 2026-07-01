@@ -1,6 +1,7 @@
 ---
 title: PVC 与存储全面故障排查
 description: '# 14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)'
+summary: '# 14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)'
 category: troubleshooting
 tags:
 - pvc
@@ -13,6 +14,8 @@ tags:
 - kubelet
 - prometheus
 - ceph
+tier: core
+created: '2026-05-23'
 last_updated: 2026-01
 difficulty: intermediate
 reading_level: intermediate
@@ -62,8 +65,9 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/07-pvc-storage-failure.md
   label: '运维技能: 07-pvc-storage-failure'
-created: "2026-05-23"
 ---
+
+
 
 # 14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)
 
@@ -135,7 +139,7 @@ created: "2026-05-23"
 | **无匹配PV** | `no [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes.md|persistent volumes]]es（卷）|volumes]] available` | `kubectl get pv` | 创建匹配的PV |
 | **PV容量不足** | `no persistent volumes available` | 检查PV/PVC容量 | 创建更大容量PV |
 | **访问模式不匹配** | `no persistent volumes available` | 检查accessModes | 调整访问模式 |
-| **CSI驱动问题** | `waiting for a volume to be created` | `kubectl get pods -n kube-system \| grep csi` | 修复CSI驱动 |
+| **CSI驱动问题** | `waiting for a volume to be created` | `kubectl get pods -n kube-system | grep csi` | 修复CSI驱动 |
 | **配额限制** | `exceeded quota` | `kubectl get resourcequota` | 调整配额 |
 | **节点亲和性** | `volume node affinity conflict` | 检查allowedTopologies | 调整拓扑约束 |
 | **Provisioner问题** | `failed to provision volume` | 检查provisioner日志 | 修复provisioner |
@@ -207,9 +211,9 @@ kubectl get clusterrolebinding | grep -E 'csi|provisioner'
 
 | 问题 | 症状 | 检查方法 | 解决方案 |
 |-----|------|---------|---------|
-| provisioner拼写错误 | PVC一直Pending | `kubectl get sc -o yaml \| grep provisioner` | 修正provisioner名称 |
+| provisioner拼写错误 | PVC一直Pending | `kubectl get sc -o yaml | grep provisioner` | 修正provisioner名称 |
 | parameters配置错误 | provision失败 | 检查云厂商文档 | 修正parameters |
-| 默认SC未设置 | PVC无SC时Pending | `kubectl get sc \| grep default` | 设置默认SC |
+| 默认SC未设置 | PVC无SC时Pending | `kubectl get sc | grep default` | 设置默认SC |
 | volumeBindingMode错误 | 调度前无法绑定 | 检查SC配置 | 调整为WaitForFirstConsumer |
 
 #### 设置默认StorageClass
@@ -355,7 +359,7 @@ findmnt | grep kubelet
 ls -la /var/lib/kubelet/pods/<pod-uid>/volumes/
 
 # 检查kubelet日志
-journalctl -u kubelet | grep -i "mount\|volume\|attach" | tail -100
+journalctl -u kubelet | grep -i "mount|volume|attach" | tail -100
 ```
 
 ### 4.2 常见挂载错误与解决

@@ -1,6 +1,7 @@
 ---
 title: 08 - 验收、切换与旧集群退役 [migration]
 description: 'description: 5. [旧集群安全退役](#5-旧集群安全退役)'
+summary: 'description: 5. [旧集群安全退役](#5-旧集群安全退役)'
 category: general
 tags:
 - migration
@@ -13,6 +14,8 @@ tags:
 - job
 - cronjob
 - ingress
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -37,8 +40,9 @@ prerequisites:
 - monitoring-basics
 - tls-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 08 - 验收、切换与旧集群退役
 description: 5. [旧集群安全退役](#5-旧集群安全退役)

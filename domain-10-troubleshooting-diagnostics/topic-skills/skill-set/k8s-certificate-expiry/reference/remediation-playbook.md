@@ -1,12 +1,21 @@
 ---
-title: "certificate expiry Remediation Playbook"
+title: certificate expiry Remediation Playbook
+summary: certificate expiry Remediation Playbook：所有证书操作均为高风险。执行前请： 1. 确认处于维护窗口 2.
+  备份 /entities/kubernetes.md/pki 3. 通知相关团队
 category: remediation
-skill_set: "k8s-certificate-expiry"
-created: "2026-05-22"
-updated: "2026-05-22"
+tags:
+- reference
+- remediation
+- playbook
+- visibility/public
+tier: supporting
+created: '2026-05-22'
+updated: '2026-05-22'
+skill_set: k8s-certificate-expiry
 last_updated: 2026-05-22
-tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
+
+
 
 # 证书过期问题修复手册
 
@@ -89,3 +98,9 @@ systemctl restart kubelet
 ## 参见
 
 - [[remediation-playbook]] — reference 领域核心页面
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

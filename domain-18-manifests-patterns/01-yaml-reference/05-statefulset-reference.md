@@ -1,6 +1,7 @@
 ---
 title: 05 - StatefulSet YAML 配置参考
 description: 'title: 05 - StatefulSet YAML 配置参考'
+summary: 'title: 05 - StatefulSet YAML 配置参考'
 category: general
 tags:
 - yaml
@@ -13,6 +14,8 @@ tags:
 - postgresql
 - kafka
 - elasticsearch
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - backup-basics
-created: "2026-05-23"
 ---
+
+
 
 title: 05 - [[StatefulSet|StatefulSet]] YAML 配置参考
 description: '# 05 - StatefulSet YAML 配置参考'
@@ -1441,3 +1445,7 @@ kubectl exec es-master-0 -- curl -X PUT "localhost:9200/_cluster/settings" \
 - 04-deployment-replicaset
 - 06-daemonset-reference
 - 07-job-cronjob-reference
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub

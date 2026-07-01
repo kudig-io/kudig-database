@@ -1,6 +1,9 @@
 ---
 title: OpenChoreo 开发者平台
-description: 'OpenChoreo 是 WSO2 开源的内部开发者平台（IDP），基于 Kubernetes 构建，提供应用全生命周期管理、CI/CD、可观测性和 API 管...'
+description: OpenChoreo 是 WSO2 开源的内部开发者平台（IDP），基于 Kubernetes 构建，提供应用全生命周期管理、CI/CD、可观测性和
+  API 管...
+summary: OpenChoreo 是 WSO2 开源的内部开发者平台（IDP），基于 Kubernetes 构建，提供应用全生命周期管理、CI/CD、可观测性和
+  API 管...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +11,8 @@ tags:
 - platform-engineering
 - idp
 - developer
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +28,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # OpenChoreo 开发者平台（OpenChoreo）
 

@@ -1,6 +1,7 @@
 ---
 title: KUDIG 全局标签字典
 description: '| `networking` | 网络技术 | domain-5, domain-15, 相关 |'
+summary: '| `networking` | 网络技术 | domain-5, domain-15, 相关 |'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - istio
 - envoy
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -36,8 +39,9 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 - gpu-scheduling-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: KUDIG 全局标签字典

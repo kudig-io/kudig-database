@@ -1,9 +1,12 @@
 ---
 title: KUDIG-DATABASE 项目统计报告 (reports)
 description: KUDIG-DATABASE 项目统计报告 — Kubernetes 生产运维知识库
+summary: KUDIG-DATABASE 项目统计报告 — Kubernetes 生产运维知识库
 category: general
 tags:
 - k8s
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -18,8 +21,9 @@ trigger_keywords:
 - 项目统计报告
 prerequisites:
 - kubectl-basics
-created: "2026-05-23"
 ---
+
+
 
 # KUDIG-DATABASE 项目统计报告
 

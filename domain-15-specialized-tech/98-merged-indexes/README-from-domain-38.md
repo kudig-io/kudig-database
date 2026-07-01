@@ -1,6 +1,9 @@
 ---
 title: 'Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)'
-description: 'description: ''- **[02-containerd Wasm运行时](./02-containerd-wasm-shim.md)** - containerd shim、RuntimeClass、部署配置'''
+description: 'description: ''- **[02-containerd Wasm运行时](./02-containerd-wasm-shim.md)**
+  - containerd shim、RuntimeClass、部署配置'''
+summary: 'description: ''- **[02-containerd Wasm运行时](./02-containerd-wasm-shim.md)**
+  - containerd shim、RuntimeClass、部署配置'''
 category: general
 tags:
 - k8s
@@ -11,6 +14,8 @@ tags:
 - operator
 - wasm
 - serverless
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -33,8 +38,9 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - service-mesh-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 title: 'Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)'

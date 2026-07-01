@@ -1,6 +1,7 @@
 ---
 title: Domain-27 多云与混合云 — 开源项目索引
 description: '- open-source-projects-index的最佳实践'
+summary: '- open-source-projects-index的最佳实践'
 category: general
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - grafana
 - jaeger
 - istio
+tier: peripheral
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -46,8 +49,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 ---
 tags:

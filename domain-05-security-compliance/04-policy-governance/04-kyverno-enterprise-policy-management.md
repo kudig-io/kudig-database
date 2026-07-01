@@ -1,6 +1,7 @@
 ---
 title: Kyverno 企业级策略管理深度实践
 description: '# Kyverno 企业级策略管理深度实践'
+summary: '# Kyverno 企业级策略管理深度实践'
 category: cloud-native-security
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - helm
 - argocd
 - flux
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -53,8 +56,9 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
-created: "2026-05-23"
 ---
+
+
 
 # [[Kyverno|Kyverno]] 企业级策略管理深度实践
 
@@ -1252,7 +1256,7 @@ kubectl get policyexception -A -o wide
 echo ""
 
 echo "=== Webhook Configuration ==="
-kubectl get validatingwebhookconfiguration -l app.kubernetes.io/name=kyverno -o yaml | grep -A10 "failurePolicy\|timeoutSeconds\|namespaceSelector"
+kubectl get validatingwebhookconfiguration -l app.kubernetes.io/name=kyverno -o yaml | grep -A10 "failurePolicy|timeoutSeconds|namespaceSelector"
 echo ""
 
 echo "=== Controller Logs (last 30 lines) ==="

@@ -1,12 +1,22 @@
 ---
-title: "pod crashloop Remediation Playbook"
+title: pod crashloop Remediation Playbook
+summary: pod crashloop Remediation Playbook：诊断结果 ├── 退出码 137 (OOMKilled) │   ├── 内存
+  limit 过低 → 增加 limit │   ├── 内存泄漏 → 修复应用代码 │   └── 节点内存不足 → 节点扩容/驱逐 ├── 退出码 1 (应用错误)
+  │   ├── 配置错误 → 修正 ConfigMap/Secret │  ...
 category: remediation
-skill_set: "k8s-pod-crashloop"
-created: "2026-05-22"
-updated: "2026-05-22"
+tags:
+- reference
+- remediation
+- playbook
+- visibility/public
+tier: supporting
+created: '2026-05-22'
+updated: '2026-05-22'
+skill_set: k8s-pod-crashloop
 last_updated: 2026-05-22
-tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
+
+
 
 # Pod CrashLoopBackOff / OOMKilled 修复手册
 
@@ -91,3 +101,9 @@ startupProbe:
 - [ ] Restart Count 为 0 或不再增长
 - [ ] 应用日志无 ERROR/FATAL
 - [ ] 服务响应正常
+
+## Related
+
+- [[reference|#reference Hub]] — tag hub
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

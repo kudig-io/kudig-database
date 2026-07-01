@@ -1,6 +1,7 @@
 ---
 title: Pixie 自动可观测性
-description: 'Pixie 是 New Relic 开源的 CNCF Sandbox 项目，利用 eBPF 技术实现 Kubernetes 应用的零插桩自动可观测性，无需修改应...'
+description: Pixie 是 New Relic 开源的 CNCF Sandbox 项目，利用 eBPF 技术实现 Kubernetes 应用的零插桩自动可观测性，无需修改应...
+summary: Pixie 是 New Relic 开源的 CNCF Sandbox 项目，利用 eBPF 技术实现 Kubernetes 应用的零插桩自动可观测性，无需修改应...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +9,8 @@ tags:
 - observability
 - ebpf
 - cncf
+tier: core
+created: 2026-06
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +26,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubernetes
-created: 2026-06
 ---
+
+
 
 # Pixie 自动可观测性（Pixie）
 

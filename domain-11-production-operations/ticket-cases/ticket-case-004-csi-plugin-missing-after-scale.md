@@ -1,6 +1,7 @@
 ---
 title: PVC 挂载失败：云盘 CSI 插件缺失
 description: 专有云 ACK 集群节点池扩容后，新节点未安装云盘 CSI 插件，导致 Pod PVC 挂载失败的工单闭环样本。
+summary: 专有云 ACK 集群节点池扩容后，新节点未安装云盘 CSI 插件，导致 Pod PVC 挂载失败的工单闭环样本。
 category: domain-11-production-operations/ticket-case
 tags:
 - ack
@@ -11,6 +12,9 @@ tags:
 - storage
 - nodepool
 - p1
+tier: peripheral
+created: '2026-06-26T08:30:00+08:00'
+updated: '2026-06-26T10:10:00+08:00'
 incident_id: INC-2026-ACK-004
 priority: P1
 severity: high
@@ -22,9 +26,7 @@ skill_ref:
 - PVC 挂载失败排查
 fta_ref:
 - 'FTA: PVC 挂载失败-CSI 插件缺失'
-created: '2026-06-26T08:30:00+08:00'
-updated: '2026-06-26T10:10:00+08:00'
-last_updated: 2026-06-26T10:10:00+08:00
+last_updated: 2026-06-26 10:10:00+08:00
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -49,15 +51,17 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: "[[domain-17-system-foundation/topic-dictionary/storage/csi.md]]"
+- target: '[[domain-17-system-foundation/topic-dictionary/storage/csi.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-043-statefulset-pvc-unbound.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-043-statefulset-pvc-unbound.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: "[[domain-11-production-operations/ticket-cases/ticket-case-028-statefulset-pvc-unbound.md]]"
+- target: '[[domain-11-production-operations/ticket-cases/ticket-case-028-statefulset-pvc-unbound.md]]'
   type: related_to
 ---
+
+
 
 # 工单描述
 
@@ -178,7 +182,7 @@ aliyun cs POST /clusters/ack-zyy-prod-04/nodepools/np-data-ssd/operation/install
 kubectl get pod -n kube-system -l app=csi-plugin -o wide | grep -E "4.21|4.22"
 
 # 2. Pod 事件中的挂载失败消失
-kubectl describe pod -n app-data mysql-slave-0 | grep -i "mounted\|attached"
+kubectl describe pod -n app-data mysql-slave-0 | grep -i "mounted|attached"
 
 # 3. MySQL Pod 恢复 Running
 kubectl get pod -n app-data -l app=mysql

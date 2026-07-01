@@ -1,6 +1,7 @@
 ---
 title: Kubernetes 结构化故障排查知识库 [domain-10-troubleshooting-diagnostics]
 description: '# Kubernetes 结构化故障排查知识库'
+summary: '# Kubernetes 结构化故障排查知识库'
 category: structural-troubleshooting
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - controller-manager
 - prometheus
 - grafana
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -49,8 +52,9 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
-created: "2026-05-23"
 ---
+
+
 
 # [[Kubernetes|Kubernetes]] 结构化故障排查知识库
 

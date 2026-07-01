@@ -1,6 +1,7 @@
 ---
 title: Software Supply Chain Security
 description: '- [[concepts/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis'
+summary: '- [[concepts/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - opa
 - agent
 - argocd
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -31,8 +34,9 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - policy-basics
-created: "2026-05-23"
 ---
+
+
 
 # Software Supply Chain Security
 

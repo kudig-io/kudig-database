@@ -1,6 +1,7 @@
 ---
 title: 基础设施即代码 x 多集群管理
 description: 'title: 基础设施即代码 x 多集群管理'
+summary: 'title: 基础设施即代码 x 多集群管理'
 category: general
 tags:
 - k8s
@@ -11,6 +12,8 @@ tags:
 - rbac
 - crd
 - operator
+tier: core
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -29,15 +32,16 @@ prerequisites:
 - gitops-basics
 - iac-basics
 - policy-basics
-created: "2026-05-23"
 relationships:
-  - target: "[[domain-07-platform-engineering/operate/13-multi-cluster-management.md]]"
-    type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/configuration/secrets.md]]"
-    type: uses
-  - target: "[[entities/argocd.md]]"
-    type: related_to
+- target: '[[domain-07-platform-engineering/operate/13-multi-cluster-management.md]]'
+  type: uses
+- target: '[[domain-17-system-foundation/topic-dictionary/configuration/secrets.md]]'
+  type: uses
+- target: '[[entities/argocd.md]]'
+  type: related_to
 ---
+
+
 
 ---
 title: 基础设施即代码 x [[domain-07-platform-engineering/operate/13-multi-cluster-management.md|多集群管理]]

@@ -1,6 +1,8 @@
 ---
 title: HashiCorp Vault
-description: 'HashiCorp Vault 是业界领先的密钥管理系统，提供密钥存储、动态凭证生成、加密服务和 PKI 证书管理。在 Kubernetes 环境中，Vault...'
+description: HashiCorp Vault 是业界领先的密钥管理系统，提供密钥存储、动态凭证生成、加密服务和 PKI 证书管理。在 Kubernetes
+  环境中，Vault...
+summary: HashiCorp Vault 是业界领先的密钥管理系统，提供密钥存储、动态凭证生成、加密服务和 PKI 证书管理。在 Kubernetes 环境中，Vault...
 category: dictionary
 tags:
 - k8s
@@ -8,6 +10,8 @@ tags:
 - vault
 - secrets-management
 - security
+tier: core
+created: '2026-06-24'
 last_updated: 2026-06
 difficulty: beginner
 reading_level: beginner
@@ -23,8 +27,9 @@ trigger_keywords:
 - dictionary
 prerequisites:
 - kubectl-basics
-created: "2026-06-24"
 ---
+
+
 
 # HashiCorp Vault
 

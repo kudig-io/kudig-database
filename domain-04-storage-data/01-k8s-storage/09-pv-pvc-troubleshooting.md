@@ -1,6 +1,7 @@
 ---
 title: 09 - PV/PVC故障排查与解决方案
 description: '# 09 - PV/PVC故障排查与解决方案'
+summary: '# 09 - PV/PVC故障排查与解决方案'
 category: storage
 tags:
 - k8s
@@ -13,6 +14,8 @@ tags:
 - ceph
 - redis
 - mysql
+tier: supporting
+created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -54,8 +57,9 @@ cross_refs:
 - type: domain
   path: ../domain-04-storage-data/
   label: '相关知识域: domain-04-storage-data'
-created: "2026-05-23"
 ---
+
+
 
 # 09 - PV/PVC故障排查与解决方案
 
@@ -627,7 +631,7 @@ fi
 
 echo ""
 echo "--- Kubelet 日志 (需要节点访问权限) ---"
-echo "请在节点上运行: journalctl -u kubelet | grep -i 'volume\\|mount\\|attach' | tail -50"
+echo "请在节点上运行: journalctl -u kubelet | grep -i 'volume\|mount\|attach' | tail -50"
 ```
 
 ### 存储扩容故障排查

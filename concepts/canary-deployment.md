@@ -1,13 +1,21 @@
 ---
-title: "金丝雀发布"
+title: 金丝雀发布
+summary: 金丝雀发布（Canary Deployment）是一种渐进式发布策略，通过将少量生产流量导入新版本，在真实环境中验证新版本的稳定性，再逐步扩大流量比例直至全量发布。
 category: concepts
-tags: ["core-concept", "domain-08-release-change-management", "visibility/public"]
-sources: ["KUDIG Gap Analysis 2026-05-21"]
+tags:
+- core-concept
+- domain-08-release-change-management
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 status: reviewed
 ---
+
+
 
 # 金丝雀发布
 
@@ -96,3 +104,7 @@ Service Mesh 支持基于 HTTP 头、Cookie、用户身份等维度的路由，�
 ## 参见
 
 - [[kubernetes]] — core-concept 领域核心页面
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub
