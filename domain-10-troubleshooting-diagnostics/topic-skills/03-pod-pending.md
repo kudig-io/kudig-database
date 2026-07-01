@@ -510,8 +510,6 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
 
 ### Phase 3: 主动探测（低风险，可能需审批）
 
-> ⚠️ 以下步骤涉及模拟操作或更深入的集群探测，L1 模式下需人工确认
-
 **Step D3.1**: 模拟 Pod 调度（dry-run）
 - **风险级别**: 🟢 低（只读操作）
 - **命令**:
@@ -697,6 +695,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.tolerations}' | jq .
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 修改 Deployment / StatefulSet 的 Pod template 添加 toleration
   # 以 Deployment 为例
@@ -721,6 +723,11 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   kubectl get pods -n <namespace> -l <selector> -o wide
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 撤销 patch（通过移除 toleration）
   kubectl patch deployment <deployment-name> -n <namespace> --type=json -p='[
@@ -742,6 +749,11 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   kubectl get nodes --show-labels | grep -i "<expected-label-key>"
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   # 方案 A: 为节点添加匹配的标签（如果节点确实应该匹配）
   kubectl label node <node-name> <key>=<value>
@@ -760,6 +772,11 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   # 确认 Pod 已调度到节点上
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 方案 A 回滚: 移除标签
   kubectl label node <node-name> <key>-
@@ -778,6 +795,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   ```
   > **安全检查**: 只有在 Pod 实际使用量远低于 request 时才建议降低。如果 Pod 确实需要这些资源，应该考虑 REM-006 扩容节点
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch deployment <deployment-name> -n <namespace> --type=json -p='[
     {
@@ -798,6 +819,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   kubectl get pods -n <namespace> -l <selector> -o wide
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deployment/<deployment-name> -n <namespace>
   ```
@@ -813,6 +838,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   # 如果控制器存在但未工作，应先修复控制器
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 直接移除所有 schedulingGates（适用于门控控制器问题的紧急场景）
   kubectl patch pod <pod-name> -n <namespace> --type=json -p='[
@@ -829,6 +858,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   # 确认 Pod 已离开 Pending 状态
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 无法直接回滚（Pod 一旦被调度无法再添加 gate）
   # 如需回滚，需删除 Pod 让控制器重新创建
@@ -847,6 +880,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   kubectl get nodes -o custom-columns=NAME:.metadata.name,ZONE:.metadata.labels.topology\\.kubernetes\\.io/zone
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 将 whenUnsatisfiable 从 DoNotSchedule 改为 ScheduleAnyway
   kubectl patch deployment <deployment-name> -n <namespace> --type=json -p='[
@@ -872,6 +909,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   kubectl get pods -n <namespace> -l <selector> -o custom-columns=NAME:.metadata.name,NODE:.spec.nodeName,STATUS:.status.phase
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deployment/<deployment-name> -n <namespace>
   ```
@@ -893,6 +934,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   kubectl top nodes --no-headers
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch resourcequota <quota-name> -n <namespace> --type=merge -p '{
     "spec": {
@@ -910,6 +955,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   kubectl get pods -n <namespace> --field-selector status.phase=Pending
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch resourcequota <quota-name> -n <namespace> --type=merge -p '{
     "spec": {
@@ -973,6 +1022,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   kubectl get pods -n <namespace> -l <pdb-selector> -o wide
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch pdb <pdb-name> -n <namespace> --type=merge -p '{
     "spec": {
@@ -986,6 +1039,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   kubectl get pods -n <namespace> --field-selector status.phase=Pending
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch pdb <pdb-name> -n <namespace> --type=merge -p '{
     "spec": {
@@ -1010,6 +1067,11 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   kubectl describe pvc <pvc-name> -n <namespace>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 如果是 StorageClass 名称拼写错误，删除 PVC 重建（注意数据丢失风险）
   # 1. 导出 PVC 定义
@@ -1036,6 +1098,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   kubectl get pods -n <namespace> --field-selector status.phase=Pending
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 根据具体方案进行回滚
   # 方案 C 回滚: 移除 PV 的 claimRef
@@ -1060,6 +1126,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
      kubectl get pods --all-namespaces -o json | jq '[.items[] | select(.spec.tolerations == null or (.spec.tolerations | map(.key) | contains(["<taint-key>"]) | not))] | length'
      ```
   3. 移除特定 taint:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+
      ```bash
      kubectl taint nodes <node-name> <taint-key>=<taint-value>:<effect>-
      ```
@@ -1068,6 +1138,11 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   - ❌ 绝不要移除 `node.kubernetes.io/not-ready:NoSchedule`（这是系统自动添加的，表示节点不健康）
   - ⚠️ 移除自定义 taint 前，确认该 taint 的业务含义
 - **回滚方案**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+
   ```bash
   # 重新添加 taint
   kubectl taint nodes <node-name> <taint-key>=<taint-value>:<effect>
@@ -1088,6 +1163,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
      kubectl get pods --all-namespaces -l app=descheduler
      ```
   2. 如果未部署，使用 Helm 安装:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
      ```bash
      helm repo add descheduler https://kubernetes-sigs.github.io/descheduler/
      helm install descheduler descheduler/descheduler -n kube-system \
@@ -1095,6 +1174,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
        --set deschedulerPolicy.strategies.LowNodeUtilization.enabled=true
      ```
   3. 如果已部署，触发一次性运行:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
      ```bash
      kubectl create job --from=cronjob/descheduler descheduler-manual -n kube-system
      ```
@@ -1103,6 +1186,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   - 确认 Deployment 的 `maxUnavailable` 设置合理
   - 在非高峰期执行
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 删除 descheduler job 停止驱逐
   kubectl delete job descheduler-manual -n kube-system
@@ -1145,6 +1232,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
      ```
   4. 后续: 评估是否需要永久扩容或优化资源使用
 - **回滚方案**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
   ```bash
   # 缩容回原始大小（需在 Pending 问题另行解决后）
   # 缩容前确认 PDB 和工作负载安全
@@ -1177,6 +1268,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
      kubectl get configmap -n kube-system kube-scheduler-configuration -o yaml 2>/dev/null
      ```
   4. 紧急措施 — 重启调度器:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
      ```bash
      # 对于 static pod，在控制面节点上:
      # mv /etc/kubernetes/manifests/kube-scheduler.yaml /tmp/ && sleep 5 && mv /tmp/kube-scheduler.yaml /etc/kubernetes/manifests/
@@ -1185,6 +1280,10 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
      kubectl rollout restart deployment <scheduler-deployment> -n kube-system
      ```
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 使用备份的配置恢复
   kubectl apply -f /tmp/scheduler-backup.yaml
@@ -1499,6 +1598,8 @@ Events:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+```

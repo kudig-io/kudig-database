@@ -42,7 +42,7 @@ created: "2026-05-23"
 
 ## Custom Resource Definition (CRD)
 
-CRDs extend [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|the Kubernetes API]] with custom resource types without modifying API Server code:
+CRDs extend [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|the Kubernetes API]] with custom resource types without modifying API Server code:
 
 ```yaml
 apiVersion: apiextensions.k8s.io/v1
@@ -94,30 +94,30 @@ Webhooks run as external HTTPS services registered with API Server. They must re
 The API aggregation layer allows running independent API Servers alongside the main kube-apiserver. Examples include metrics-server and custom metrics adapter. Requests are proxied through the main API Server.
 
 ## Related
-- [[synthesis/etcd × Operator 模式|etcd × Operator 模式]] — 综合
-- [[synthesis/Operator 模式 × Pod 生命周期|Operator 模式 × Pod 生命周期]] — 综合
-- [[synthesis/CRD × 可观测性|CRD × 可观测性]] — 综合
+- [[concepts/etcd × Operator 模式.md|etcd × Operator 模式]] — 综合
+- [[concepts/Operator 模式 × Pod 生命周期.md|Operator 模式 × Pod 生命周期]] — 综合
+- [[concepts/CRD × 可观测性.md|CRD × 可观测性]] — 综合
 
-- [[synthesis/Operator 模式 × 可观测性]]
+- [[concepts/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[entities/argocd|argocd]] — ArgoCD
-- [[skills/develop-crd-operator|develop-crd-operator]] — Develop CRD Operator
-- [[entities/crd-custom-resources|crd-custom-resources]] — CRD (Custom Resource Definition)
-- [[concepts/controller-pattern|controller-pattern]] — Controller Pattern (Reconciliation Loop)
-- [[concepts/controller-pattern|Controller Pattern]]
-- [[concepts/declarative-api|Declarative API]]
-- [[entities/crd-custom-resources|CRD Custom Resources]]
+- [[entities/argocd.md|argocd]] — ArgoCD
+- [[skills/develop-crd-operator.md|develop-crd-operator]] — Develop CRD Operator
+- [[entities/crd-custom-resources.md|crd-custom-resources]] — CRD (Custom Resource Definition)
+- [[concepts/controller-pattern.md|controller-pattern]] — Controller Pattern (Reconciliation Loop)
+- [[concepts/controller-pattern.md|Controller Pattern]]
+- [[concepts/declarative-api.md|Declarative API]]
+- [[entities/crd-custom-resources.md|CRD Custom Resources]]
 - Admission Webhooks
-- [[skills/develop-crd-operator|Develop CRD Operator]]
-- [[journal/digest-2026-05-21|Wiki Digest — Daily (2026-05-21)]] — Cross-reference
-- [[references/KUDIG Tag Dictionary|KUDIG Tag Dictionary]] — Cross-reference
-- [[references/platform-engineering-terms|K8s 平台工程术语参考]] — Cross-reference
-- [[synthesis/控制器模式 × Operator 模式|控制器模式 × Operator 模式]] — Cross-reference
-- [[synthesis/声明式 API × 控制器模式|声明式 API × 控制器模式]] — Cross-reference
-- [[concepts/deployment-controller-architecture|Deployment 控制器架构]] — Cross-reference
-- [[entities/kube-apiserver|kube-apiserver]] — Cross-reference
-- [[entities/metal3-io|Metal3]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/helm-index|Helm 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[skills/develop-crd-operator.md|Develop CRD Operator]]
+- Wiki Digest — Daily (2026-05-21) — Cross-reference
+- [[entities/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]] — Cross-reference
+- [[entities/platform-engineering-terms.md|K8s 平台工程术语参考]] — Cross-reference
+- [[concepts/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]] — Cross-reference
+- [[concepts/声明式 API × 控制器模式.md|声明式 API × 控制器模式]] — Cross-reference
+- [[concepts/deployment-controller-architecture.md|Deployment 控制器架构]] — Cross-reference
+- [[entities/kube-apiserver.md|kube-apiserver]] — Cross-reference
+- [[entities/metal3-io.md|Metal3]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/helm-index.md|Helm 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

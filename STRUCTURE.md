@@ -28,16 +28,16 @@ created: "2026-05-23"
 
 > 本文档定义 KUDIG-DATABASE 的目录层级与用途，供贡献者和 AI Agent 参考。
 >
-> 最后更新：2026-05-21
+> 最后更新：2026-06-24
 
 ---
 
 ## 设计原则
 
-1. **双层结构**：提炼知识（concepts/ entities/ skills/ ...）与源文档（domain-*/ topic-*/ docs/）共存
+1. **精简三层**：提炼知识（concepts/ entities/ skills/）+ 源文档（domain-*/ docs/）+ 工程/元数据
 2. **Agent 优先**：目录命名与层级设计以 AI Agent 语料加载为首要目标
-3. **最小侵入**：不移动已有目录（避免破坏 manifest 与 wikilink），通过 `_` 前缀区分元数据/工具目录
-4. **显式排除**：Agent 语料配置（corpus-config/profiles/）显式声明排除非语料目录
+3. **最小根目录**：非 domain 目录精简至 10 个，通过 `_` 前缀区分元数据/工具目录
+4. **显式排除**：Agent 语料配置（_meta/corpus-config/profiles/）显式声明排除非语料目录
 
 ---
 
@@ -47,15 +47,11 @@ created: "2026-05-23"
 
 这些目录存放经 `wiki-ingest` 提炼后的知识页面，**所有页面均含 frontmatter**（title, category, tags, tier, sources, summary 等）。
 
-| 目录 | 页数 | 内容 | chunking 策略 |
-|:---|:---:|:---|:---|
-| `concepts/` | ~62 | 核心概念、架构模式、设计原理、运维知识 | 按 H2 分块 |
-| `entities/` | ~265 | 组件实体、CNCF 工具、云产品、运行时 | 按 H2 分块 |
-| `skills/` | ~140 | 诊断排障、最佳实践、培训体系、FTA 方法 | 按 Section 分块 |
-| `references/` | ~101 | 术语词典、命令速查、云厂商对比、规范 | 按 H2 或条目分块 |
-| `synthesis/` | ~13 | 跨领域综合分析、问题全景、决策框架 | 整文档 |
-| `journal/` | ~2 | 日志与变更记录 | — |
-| `projects/` | ~1 | 项目知识 | — |
+| 目录 | 内容 | chunking 策略 |
+|:---|:---|:---|
+| `concepts/` | 核心概念、架构模式、设计原理、综合分析（含原 synthesis/） | 按 H2 分块 |
+| `entities/` | 组件实体、CNCF 工具、云产品、术语词典（含原 references/、research/） | 按 H2 分块 |
+| `skills/` | 诊断排障、最佳实践、培训体系、FTA 方法（含原 best-practices/） | 按 Section 分块 |
 
 **Agent 加载策略**：优先索引此层，Token 效率高，元数据丰富。
 
@@ -75,18 +71,15 @@ created: "2026-05-23"
 
 ---
 
-### 第三层：元数据与工具（Agent 不读取）
+### 第三层：元数据与归档（Agent 不读取）
 
 以 `_` 前缀标识，Agent 语料配置默认排除。
 
 | 目录 | 用途 |
 |:---|:---|
 | `_archives/` | Wiki 归档快照（重建/恢复用） |
-| `_meta/` | 元数据定义（taxonomy.md、schema.md、metadata/*.md） |
-| `_raw/` | 草稿暂存区（未处理的零散笔记，wiki-ingest 会自动消化） |
-| `_staging/` | 审核队列（WIKI_STAGED_WRITES=true 时 LLM 写入的待审页面） |
-| `_reports/` | 质量报告与统计数据（QUALITY_REPORT、STATS、评估报告等） |
-| `corpus-config/` | AI 语料配置（RAG profile、分块策略、Embedding 指南） |
+| `_meta/` | 元数据、语料配置、日志摘要（taxonomy、schema、corpus-config、journal、projects） |
+| `_reports/` | 质量报告、评估报告、发布素材（含原 release-notes/） |
 | `assets/` | 图片、图表、附件 |
 
 ---
@@ -97,12 +90,8 @@ Agent 语料配置显式排除。修改前请检查脚本硬编码路径。
 
 | 目录 | 用途 |
 |:---|:---|
-| `web/` | Astro 静态站点项目（站点源码，`npm run build` 输出到 `site/`） |
-| `scripts/` | 自动化脚本（export-corpus.sh 等） |
-| `templates/` | 文档模板 |
-| `prompts/` | Agent 提示词 |
-| `site/` | Astro 构建输出（由 `web/` 生成，已 gitignore） |
-| `man/` | 手册页 |
+| `web/` | Astro 静态站点项目（含可视化页面，`npm run build`） |
+| `scripts/` | 自动化脚本、模板、提示词、手册页（含原 templates/、prompts/、man/、video-scripts/） |
 
 ---
 
@@ -110,14 +99,11 @@ Agent 语料配置显式排除。修改前请检查脚本硬编码路径。
 
 | 文件 | 用途 |
 |:---|:---|
-| `index.md` | Wiki 主索引（自动维护） |
-| `log.md` | 活动日志（摄入、更新、lint 记录） |
-| `hot.md` | 热缓存（最近活动的语义快照） |
-| `.manifest.json` | 摄入追踪清单（3,523 条源记录） |
 | `AGENTS.md` | Agent 上下文与技能路由 |
 | `README.md` | 项目介绍（人类阅读） |
-| `mkdocs.yml` | ~~已移除~~（站点构建已迁移至 `web/` Astro） |
 | `STRUCTURE.md` | 本文件（目录结构规范） |
+| `hot.md` | 热缓存（最近活动的语义快照） |
+| `log.md` | 活动日志（摄入、更新、lint 记录） |
 
 ---
 
@@ -129,36 +115,26 @@ include:
   - concepts/
   - entities/
   - skills/
-  - references/
-  - synthesis/
 
 # 源文档层（深度兜底）
 include:
   - domain-*/
-  - topic-*/
   - docs/
 
 # 显式排除（非语料）
 exclude:
   - "_archives/"
   - "_meta/"
-  - "_raw/"
-  - "_staging/"
   - "_reports/"
-  - "corpus-config/"
   - "assets/"
   - "web/"
   - "scripts/"
-  - "templates/"
-  - "prompts/"
-  - "site/"
-  - "man/"
   - ".git/"
   - ".ruff_cache/"
   - ".venv/"
 ```
 
-详见 `corpus-config/profiles/` 下的场景化配置。
+详见 `_meta/corpus-config/profiles/` 下的场景化配置。
 
 ---
 
@@ -168,3 +144,4 @@ exclude:
 |:---|:---|
 | 2026-05-21 | 创建本文档；`metadata/` 移入 `_meta/metadata/`；`reports/` 改名为 `_reports/`；所有 profile 添加工具目录排除 |
 | 2026-06-24 | 站点构建从 mdBook/mkDocs 迁移至 Astro（`web/`）；移除 `gitbook/`、`mkdocs.yml`；域结构确认为 20 个 Domain；工程工具层用 `web/` 取代 `gitbook/` |
+| 2026-06-24 | **目录精简收编**: 24 个非 domain 目录精简至 10 个。`references/`→`entities/`、`synthesis/`→`concepts/`、`best-practices/`→`skills/`、`research/`→`entities/research/`；`corpus-config/`+`journal/`+`projects/`→`_meta/`；`templates/`+`prompts/`+`man/`+`video-scripts/`→`scripts/`；`visualizations/`→`web/`；`release-notes/`→`_reports/`；根目录散落文件归位；~1547 条 wikilink 批量重写 |

@@ -100,7 +100,7 @@ k8s_versions:
 
 <!-- chunk: 前置条件 -->## 前置条件
 
-#<!-- chunk: 硬件要求 -->## 硬件要求
+## 硬件要求
 
 | 资源 | 最低要求 | 推荐配置 | 说明 |
 |------|---------|---------|------|
@@ -108,7 +108,7 @@ k8s_versions:
 | 内存 | 4GB | 8GB | Docker + K8s 组件占用约 2GB |
 | 磁盘 | 10GB | 20GB | 镜像存储需要空间 |
 
-#<!-- chunk: Docker Desktop 安装与配置 -->## Docker Desktop 安装与配置
+## Docker Desktop 安装与配置
 
 > **关键**: kind 和 minikube (Docker 驱动) 都依赖 Docker，这是第一步。
 
@@ -158,7 +158,7 @@ winget install Docker.DockerDesktop
   - 点击 "Apply & Restart"
 ```
 
-#<!-- chunk: 验证 Docker 可用 -->## 验证 Docker 可用
+## 验证 Docker 可用
 
 ```bash
 # 检查 Docker 版本和运行状态
@@ -182,7 +182,7 @@ docker run --rm hello-world
 > macOS/Windows: 确保 Docker Desktop 已启动 (状态栏有鲸鱼图标)  
 > Linux: 运行 `sudo systemctl start docker && sudo systemctl enable docker`
 
-#<!-- chunk: 安装 kubectl -->## 安装 kubectl
+## 安装 kubectl
 
 ```bash
 # macOS
@@ -209,7 +209,7 @@ kubectl version --client
 > **kind (Kubernetes in Docker)** 使用 Docker 容器作为节点运行 Kubernetes 集群。  
 > **优势**: 启动速度快 (~30s)、资源占用少、原生支持多节点、非常适合 CI/CD 和快速测试。
 
-#<!-- chunk: A1. 安装 kind -->## A1. 安装 kind
+## A1. 安装 kind
 
 ```bash
 # macOS
@@ -234,7 +234,7 @@ kind version
 # 预期输出: kind v0.20.0 go1.21.1 darwin/arm64 (版本号和平台可能不同)
 ```
 
-#<!-- chunk: A2. 创建单节点集群 (最快体验) -->## A2. 创建单节点集群 (最快体验)
+## A2. 创建单节点集群 (最快体验)
 
 ```bash
 # 一键创建集群 (默认名称 "kind"，单节点)
@@ -264,7 +264,7 @@ kubectl get nodes
 # learn-k8s-control-plane  Ready    control-plane   1m    v1.27.3
 ```
 
-#<!-- chunk: A3. 创建多节点集群 (1 Master + 2 Worker) -->## A3. 创建多节点集群 (1 Master + 2 Worker)
+## A3. 创建多节点集群 (1 Master + 2 Worker)
 
 > **备注**: 多节点集群可以体验 Pod 在不同节点间的调度，更接近真实场景。
 
@@ -297,9 +297,12 @@ docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
 # 预期输出: 3 个 kindest/node 容器正在运行
 ```
 
-#<!-- chunk: A4. 创建带 Ingress 支持的集群 -->## A4. 创建带 Ingress 支持的集群
+## A4. 创建带 Ingress 支持的集群
 
 > **备注**: 如果你后续要测试 Ingress（HTTP 路由），需要在创建集群时映射端口。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > kind-config-ingress.yaml << 'EOF'
@@ -337,7 +340,7 @@ kubectl wait --namespace ingress-nginx \
 # 预期输出: pod/ingress-nginx-controller-xxxxx condition met
 ```
 
-#<!-- chunk: A5. 加载本地镜像到 kind 集群 -->## A5. 加载本地镜像到 kind 集群
+## A5. 加载本地镜像到 kind 集群
 
 > **实用技巧**: kind 集群运行在 Docker 内，默认无法访问本地构建的镜像。需要手动加载。
 
@@ -363,7 +366,7 @@ docker exec -it learn-k8s-control-plane crictl images | grep my-app
 > **minikube** 提供更丰富的插件生态和多驱动支持 (Docker/VirtualBox/HyperKit 等)。  
 > **优势**: 内置 Dashboard、LoadBalancer tunnel、多插件一键启用。
 
-#<!-- chunk: B1. 安装 minikube -->## B1. 安装 minikube
+## B1. 安装 minikube
 
 ```bash
 # macOS
@@ -382,7 +385,7 @@ minikube version
 # 预期输出: minikube version: v1.32.0 (版本号可能不同)
 ```
 
-#<!-- chunk: B2. 启动集群 -->## B2. 启动集群
+## B2. 启动集群
 
 ```bash
 # 基础启动 (使用 Docker 驱动)
@@ -409,7 +412,7 @@ kubectl get nodes
 # minikube   Ready    control-plane   1m    v1.28.0
 ```
 
-#<!-- chunk: B3. minikube 常用操作 -->## B3. minikube 常用操作
+## B3. minikube 常用操作
 
 ```bash
 # 查看集群状态
@@ -453,9 +456,12 @@ minikube delete     # 彻底删除集群 (清除所有数据)
 
 > **目标**: 从零开始部署一个 nginx Web 服务器，理解 Namespace → Deployment → Service 的完整流程。
 
-#<!-- chunk: Step 1: 创建 Namespace -->## Step 1: 创建 Namespace
+## Step 1: 创建 Namespace
 
 > **为什么要创建 Namespace？** Namespace 是 K8s 的"虚拟集群"，用于隔离不同项目/环境的资源，避免命名冲突。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 namespace
@@ -478,9 +484,12 @@ kubectl config view --minify | grep namespace
 # 预期输出: namespace: web-app
 ```
 
-#<!-- chunk: Step 2: 部署 Deployment -->## Step 2: 部署 Deployment
+## Step 2: 部署 Deployment
 
 > **Deployment 是什么？** 它管理一组相同的 Pod 副本，负责自动创建、扩缩容、滚动更新和回滚。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > deployment.yaml << 'EOF'
@@ -539,9 +548,12 @@ kubectl get pods -o wide
 # 预期输出: 多了 IP、NODE、NOMINATED NODE 等列
 ```
 
-#<!-- chunk: Step 3: 创建 Service -->## Step 3: 创建 Service
+## Step 3: 创建 Service
 
 > **Service 是什么？** Pod IP 是临时的（Pod 重启就变），Service 提供稳定的访问入口（固定 ClusterIP 或 NodePort），并自动负载均衡到后端 Pod。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > service.yaml << 'EOF'
@@ -579,7 +591,10 @@ kubectl get endpoints nginx-service
 # 备注: 3 个 Endpoint 对应 3 个 Pod (副本数=3)
 ```
 
-#<!-- chunk: Step 4: 测试和调试 -->## Step 4: 测试和调试
+## Step 4: 测试和调试
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # ===== 方式 1: 集群内访问 (推荐，最可靠) =====
@@ -620,7 +635,7 @@ kubectl get events --sort-by='.lastTimestamp'
 # 预期输出: 显示 Pod 创建、调度、拉取镜像等事件
 ```
 
-#<!-- chunk: Step 5: 扩缩容实战 -->## Step 5: 扩缩容实战
+## Step 5: 扩缩容实战
 
 ```bash
 # 扩容到 5 个副本
@@ -637,7 +652,10 @@ kubectl get pods -w   # 观察多余 Pod 被终止
 kubectl scale deployment nginx-web --replicas=3
 ```
 
-#<!-- chunk: Step 6: 滚动更新和回滚 -->## Step 6: 滚动更新和回滚
+## Step 6: 滚动更新和回滚
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # ===== 滚动更新: 将 nginx:alpine 升级到 nginx:latest =====
@@ -722,6 +740,7 @@ kubectl api-resources --sort-by=name | head -30
 
 # 查看所有 API 版本
 kubectl api-versions
+
 ```
 
 ---
@@ -747,9 +766,12 @@ kubectl api-versions
 
 <!-- chunk: 清理资源 -->## 清理资源
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```bash
 # ===== 清理应用资源 =====
-kubectl delete namespace web-app
+kubectl delete namespace web-app  # ⚠️ 不可逆：永久删除命名空间及全部资源
 # 备注: 删除 Namespace 会自动删除其下所有资源 (Deployment、Service、Pod 等)
 
 # ===== 删除集群 =====
@@ -790,7 +812,7 @@ kubectl config get-contexts  # 查看是否还有残留的 context
 - 用于 **CI/CD 流水线** → kind (启动快，易自动化)
 - 用于 **日常开发调试** → minikube (Dashboard、tunnel 更方便)
 
-#<!-- chunk: macOS 用户推荐：kind -->## macOS 用户推荐：kind
+## macOS 用户推荐：kind
 
 **对于 macOS 用户，kind 是最干净、最易维护的本地 K8s 方案**，理由如下：
 
@@ -810,7 +832,7 @@ kubectl config get-contexts  # 查看是否还有残留的 context
 
 <!-- chunk: 常见问题 (FAQ) -->## 常见问题 (FAQ)
 
-#<!-- chunk: Q1: kind 创建集群失败，提示 "Docker not running" -->## Q1: kind 创建集群失败，提示 "Docker not running"
+## Q1: kind 创建集群失败，提示 "Docker not running"
 
 ```bash
 # 检查 Docker 状态
@@ -821,7 +843,7 @@ docker info
 # Linux: sudo systemctl start docker
 ```
 
-#<!-- chunk: Q2: minikube start 卡住或超时 -->## Q2: minikube start 卡住或超时
+## Q2: minikube start 卡住或超时
 
 ```bash
 # 1. 删除旧集群重试
@@ -834,7 +856,7 @@ minikube start --driver=docker --image-mirror-country=cn
 minikube start --driver=docker --alsologtostderr -v=7
 ```
 
-#<!-- chunk: Q3: kubectl 无法连接集群 -->## Q3: kubectl 无法连接集群
+## Q3: kubectl 无法连接集群
 
 ```bash
 # 检查当前 context 是否正确
@@ -850,7 +872,7 @@ kubectl config use-context kind-learn-k8s
 kubectl config use-context minikube
 ```
 
-#<!-- chunk: Q4: Pod 一直处于 Pending 状态 -->## Q4: Pod 一直处于 Pending 状态
+## Q4: Pod 一直处于 Pending 状态
 
 ```bash
 # 查看 Pod 事件，了解为什么没被调度
@@ -860,7 +882,7 @@ kubectl describe pod <pod-name>
 # - 0/1 nodes are available: 没有可用节点 → 检查节点状态 kubectl get nodes
 ```
 
-#<!-- chunk: Q5: 国内拉取镜像慢或失败 -->## Q5: 国内拉取镜像慢或失败
+## Q5: 国内拉取镜像慢或失败
 
 ```bash
 # kind: 使用预下载的节点镜像
@@ -875,7 +897,7 @@ minikube start --image-mirror-country=cn --registry-mirror=https://docker.mirror
 # }
 ```
 
-#<!-- chunk: Q6: kind 集群重启后 kubectl 无法连接 -->## Q6: kind 集群重启后 kubectl 无法连接
+## Q6: kind 集群重启后 kubectl 无法连接
 
 ```bash
 # kind 集群在 Docker 重启后会自动恢复，但可能需要等待
@@ -892,7 +914,7 @@ kind export kubeconfig --name learn-k8s
 
 > 以下记录了在 macOS 上选择本地 K8s 部署方案的完整决策过程。
 
-#<!-- chunk: 问题 1：Mac 上最干净好维护的部署方式是 kind 吗？ -->## 问题 1：Mac 上最干净好维护的部署方式是 kind 吗？
+## 问题 1：Mac 上最干净好维护的部署方式是 kind 吗？
 
 **结论：是的。** kind 是 Mac 上最干净、最易维护的本地 K8s 方案。
 
@@ -904,7 +926,7 @@ kind export kubeconfig --name learn-k8s
 
 minikube 的优势在于开箱即用的 Dashboard、`minikube tunnel`（LoadBalancer 模拟）、`minikube addons enable ingress` 等功能，但这些都需要更多系统开销和隐藏状态。
 
-#<!-- chunk: 问题 2：如果需要完整的官方 K8s 发行版，用 kind 还是 minikube？ -->## 问题 2：如果需要完整的官方 K8s 发行版，用 kind 还是 minikube？
+## 问题 2：如果需要完整的官方 K8s 发行版，用 kind 还是 minikube？
 
 **结论：用 kind。**
 
@@ -919,7 +941,7 @@ minikube 做了更多定制：内置驱动层、addon 系统、修改部分默�
 
 > **例外**：如果需要体验 **kubeadm 手动部署流程**（模拟真实生产环境），应使用 Lima + Ubuntu VM + kubeadm，而非 kind 或 minikube。kind 和 minikube 都跳过了 kubeadm 的手动流程。
 
-#<!-- chunk: 问题 3：我需要 1 Master + 1 Worker，怎么部署？ -->## 问题 3：我需要 1 Master + 1 Worker，怎么部署？
+## 问题 3：我需要 1 Master + 1 Worker，怎么部署？
 
 **方案**：创建 `kind-config.yaml` 指定多节点拓扑，通过 `--config` 参数传入。
 
@@ -937,7 +959,7 @@ kind create cluster --name my-k8s --image kindest/node:v1.32.0 --config kind-con
 
 需要更多 Worker 只需在 `nodes` 列表中追加 `- role: worker` 即可。
 
-#<!-- chunk: 最终选型决策 -->## 最终选型决策
+## 最终选型决策
 
 | 决策项 | 选择 | 理由 |
 |--------|------|------|
@@ -954,14 +976,14 @@ kind create cluster --name my-k8s --image kindest/node:v1.32.0 --config kind-con
 > **日期**: 2026-03  
 > **目标**: 使用 kind 部署 1 Master + 1 Worker 的官方 K8s v1.32.0 集群
 
-#<!-- chunk: 环境确认 -->## 环境确认
+## 环境确认
 
 ```bash
 $ docker -v
 Docker version 29.2.1, build a5c7197
 ```
 
-#<!-- chunk: 安装 kind 和 kubectl -->## 安装 kind 和 kubectl
+## 安装 kind 和 kubectl
 
 ```bash
 $ brew install kind kubectl
@@ -978,7 +1000,7 @@ Client Version: v1.34.1
 Kustomize Version: v5.7.1
 ```
 
-#<!-- chunk: 创建多节点集群配置 -->## 创建多节点集群配置
+## 创建多节点集群配置
 
 ```bash
 $ cat > kind-config.yaml << 'EOF'
@@ -990,7 +1012,7 @@ nodes:
 EOF
 ```
 
-#<!-- chunk: 创建集群 -->## 创建集群
+## 创建集群
 
 ```bash
 $ kind create cluster \
@@ -1012,7 +1034,7 @@ kubectl cluster-info --context kind-my-k8s
 Have a nice day! 👋
 ```
 
-#<!-- chunk: 验证集群状态 -->## 验证集群状态
+## 验证集群状态
 
 ```bash
 $ kubectl get nodes
@@ -1036,15 +1058,17 @@ my-k8s-worker          Ready    <none>          25s   v1.32.0
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-deployment MOC
-- [[domain-08-release-change-management/topic-deployment/README|Kubernetes 部署方案指南 (Deployment Guide)]]
-- [[domain-08-release-change-management/topic-deployment/02-single-node-deployment|02 - 单节点部署 (Single Node All-in-One)]]
-- [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment|03 - 研发环境部署 (Development Environment Deployment)]]
-- [[domain-08-release-change-management/topic-deployment/04-production-environment-deployment|04 - 生产环境部署 (Production Environment Deployment)]]
+- [[domain-08-release-change-management/topic-deployment/README.md|Kubernetes 部署方案指南 (Deployment Guide)]]
+- [[domain-08-release-change-management/topic-deployment/02-single-node-deployment.md|02 - 单节点部署 (Single Node All-in-One)]]
+- [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment)]]
+- [[domain-08-release-change-management/topic-deployment/04-production-environment-deployment.md|04 - 生产环境部署 (Production Environment Deployment)]]
 
 ## Related
 
 - [[README|README]]
 - [[MOC|MOC]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux|linux]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+
+```

@@ -43,7 +43,7 @@ urunc 是一个符合 OCI 标准的容器运行时，专门用于在 Kubernetes 
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -60,7 +60,7 @@ urunc 是一个符合 OCI 标准的容器运行时，专门用于在 Kubernetes 
 ## 参考链接
 
 - [[containerd]]
-- [[concepts/container-runtime-comparison|container-runtime-comparison]]
+- [[concepts/container-runtime-comparison.md|container-runtime-comparison]]
 - [[pod-lifecycle]]
 
 ## Related
@@ -79,18 +79,18 @@ urunc 是一个符合 OCI 标准的容器运行时，专门用于在 Kubernetes 
 - RELEASE-NOTES-1.0
 - RELEASE-NOTES-0.1
 - RELEASE-NOTES-1.4
-- [[entities/flatcar|[[Flatcar Container Linux|Flatcar Container Linux]]ux 生产环境速查卡|Linux]]]]
-- [[entities/composefs|composefs]]
-- [[entities/04-containerd-upgrade-migration|containerd 升级迁移]]
-- [[entities/wasmedge|WasmEdge]]
-- [[entities/spinkube|SpinKube]]
-- [[entities/05-containerd-windows-support|containerd Windows 支持]]
-- [[entities/02-containerd-v2-features|containerd 2.0 新特性]]
-- [[entities/08-containerd-multi-tenant|containerd 多租户]]
-- [[entities/k0s|K0s]]
-- [[entities/03-containerd-security-hardening|containerd 安全加固]]
-- [[entities/bootc|bootc]]
-- [[entities/container2wasm|container2wasm]]
-- [[entities/kubean|Kubean]]
-- [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[entities/flatcar.md|[[Flatcar Container Linux|Flatcar Container Linux]]ux 生产环境速查卡|Linux]]]]
+- [[entities/composefs.md|composefs]]
+- [[entities/04-containerd-upgrade-migration.md|containerd 升级迁移]]
+- [[entities/wasmedge.md|WasmEdge]]
+- [[entities/spinkube.md|SpinKube]]
+- [[entities/05-containerd-windows-support.md|containerd Windows 支持]]
+- [[entities/02-containerd-v2-features.md|containerd 2.0 新特性]]
+- [[entities/08-containerd-multi-tenant.md|containerd 多租户]]
+- [[entities/k0s.md|K0s]]
+- [[entities/03-containerd-security-hardening.md|containerd 安全加固]]
+- [[entities/bootc.md|bootc]]
+- [[entities/container2wasm.md|container2wasm]]
+- [[entities/kubean.md|Kubean]]
+- [[entities/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

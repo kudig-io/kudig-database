@@ -4,6 +4,7 @@ type: "multi-fault"
 skills: ['13-ingress-gateway-failure', '05-service-connectivity']
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 title: "Ingress 502 + Service Endpoint为空并发"
 category: uncategorized
 tags: ["uncategorized", "visibility/public"]

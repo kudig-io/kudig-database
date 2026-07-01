@@ -49,7 +49,7 @@ Projected Volume 是一种将多个现有的卷源（如 Secret、ConfigMap、do
 | `secret` | 将 Secret 的键值对作为文件投射到目录中。 |
 | `configMap` | 将 ConfigMap 的键值对作为文件投射到目录中。 |
 | `downwardAPI` | 将 Pod 的元数据或资源信息以文件形式投射。 |
-| `serviceAccountToken` | 将当前 ServiceAccount 的 Token 注入到指定路径，用于访问 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] API。 |
+| `serviceAccountToken` | 将当前 ServiceAccount 的 Token 注入到指定路径，用于访问 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] API。 |
 | `clusterTrustBundle` | 将 ClusterTrustBundle 对象的内容作为自动更新的 PEM 文件注入（v1.33 beta）。 |
 | `podCertificate` | 为 Pod 安全地提供私钥和 X.509 证书链，并自动轮换（v1.35 beta）。 |
 
@@ -72,7 +72,7 @@ Projected Volume 是一种将多个现有的卷源（如 Secret、ConfigMap、do
 
 - **统一凭证与配置目录**：将 API Token、CA 证书和应用配置集中投射到一个目录，方便应用统一读取。
 - **安全注入 ServiceAccount Token**：避免将 Token 直接嵌入镜像，通过投射卷动态注入并自动管理过期时间。
-- **Pod 身份认证**：为工作负载提供访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 或其他服务所需的证书和信任链。
+- **Pod 身份认证**：为工作负载提供访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 或其他服务所需的证书和信任链。
 
 ## 最佳实践/注意事项
 
@@ -152,6 +152,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看投射卷中的文件
 kubectl exec <pod-name> -- ls -la /var/run/secrets/app/
@@ -171,3 +174,9 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.volumes[?(@.projected)]}' | jq .
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/projected-volumes/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/storage/ceph.md|Ceph]]
+- [[domain-17-system-foundation/topic-dictionary/storage/cloudnativepg.md|CloudNativePG 云原生 PostgreSQL]]
+- [[domain-17-system-foundation/topic-dictionary/storage/composefs.md|ComposeFS 只读文件系统]]

@@ -17,15 +17,16 @@ sources:
   - ACK Ingress最佳实践
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 summary: "SLB/ALB/NLB负载均衡与ACK Ingress Controller的配置与故障处理。"
 relationships:
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/ingress]]"
+  - target: "[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]"
     type: uses
 ---
 
 # 阿里云SLB与Ingress
 
-本文档覆盖阿里云专有云 ACK 集群的负载均衡与 [[domain-17-system-foundation/topic-dictionary/networking/ingress|Ingress]] 体系：SLB 类型选择、ACK Ingress Controller 配置、后端健康检查机制以及多可用区高可用架构。面向远程顾问场景，所有配置均可通过工单指导客户完成。
+本文档覆盖阿里云专有云 ACK 集群的负载均衡与 [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]] 体系：SLB 类型选择、ACK Ingress Controller 配置、后端健康检查机制以及多可用区高可用架构。面向远程顾问场景，所有配置均可通过工单指导客户完成。
 
 ---
 
@@ -478,16 +479,16 @@ kubectl run -it --rm test --image=busybox:1.36 --restart=Never -- \
 
 ## 相关文档
 
-- [[01-专有云架构概述|专有云架构概述]]
-- [[02-ACK集群运维|ACK集群运维]]
-- [[03-Terway-CNI网络|Terway-CNI网络]]
-- [[04-阿里云存储集成|阿里云存储集成]]
-- [[06-阿里云专有云远程顾问指南|阿里云专有云远程顾问指南]]
+- [[domain-12-cloud-providers/01-alibaba-cloud/01-专有云架构概述.md|专有云架构概述]]
+- [[domain-12-cloud-providers/01-alibaba-cloud/02-ACK集群运维.md|ACK集群运维]]
+- [[domain-12-cloud-providers/01-alibaba-cloud/03-Terway-CNI网络.md|Terway-CNI网络]]
+- [[domain-12-cloud-providers/01-alibaba-cloud/04-阿里云存储集成.md|阿里云存储集成]]
+- [[domain-12-cloud-providers/01-alibaba-cloud/06-阿里云专有云远程顾问指南.md|阿里云专有云远程顾问指南]]
 - [[241-ack-slb-nlb-alb|ACK SLB/NLB/ALB]]
 - [[alicloud-ack-overview|阿里云ACK概述]]
 ## Related
 
-- [[entities/coredns|CoreDNS (entities)]]
-- [[entities/deployment|Deployment]]
-- [[entities/kubernetes|Kubernetes (CNCF Graduated)]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes|Nodes（节点）]]
+- [[entities/coredns.md|CoreDNS (entities)]]
+- [[entities/deployment.md|Deployment]]
+- [[entities/kubernetes.md|Kubernetes (CNCF Graduated)]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|Nodes（节点）]]

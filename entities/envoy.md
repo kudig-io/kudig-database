@@ -53,7 +53,7 @@ description: '## 项目概述'
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -70,9 +70,9 @@ description: '## 项目概述'
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[istio]]
-- [[concepts/service-mesh-architecture|service-mesh-architecture]]
+- [[concepts/service-mesh-architecture.md|service-mesh-architecture]]
 
 ## Related
 
@@ -124,19 +124,19 @@ description: '## 项目概述'
 - RELEASE-NOTES-1.25
 - RELEASE-NOTES-1.11
 - RELEASE-NOTES-1.35
-- [[journal/digest-2026-05-21-full|Wiki 全量知识库摘要 — 2026-05-21]] — Cross-reference
-- [[references/networking-terms|[[K8s 网络术语参考|K8s 网络术语参考]]]] — Cross-reference
-- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[references/k8s-advanced-ecosystem|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
-- [[references/tooling-terms|K8s 工具链术语参考]] — Cross-reference
-- [[references/k8s-platform-extensions|平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格]] — Cross-reference
-- [[concepts/service-mesh-evolution|服务网格演进]] — Cross-reference
-- [[concepts/microservice-resilience-patterns|Microservice Resilience Patterns]] — Cross-reference
-- [[skills/service-mesh-istio-fta|Service Mesh(Istio) 异常故障树分析]] — Cross-reference
-- [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- Wiki 全量知识库摘要 — 2026-05-21 — Cross-reference
+- [[entities/networking-terms.md|[[K8s 网络术语参考|K8s 网络术语参考]]]] — Cross-reference
+- [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[entities/k8s-advanced-ecosystem.md|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
+- [[entities/tooling-terms.md|K8s 工具链术语参考]] — Cross-reference
+- [[entities/k8s-platform-extensions.md|平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格]] — Cross-reference
+- [[concepts/service-mesh-evolution.md|服务网格演进]] — Cross-reference
+- [[concepts/microservice-resilience-patterns.md|Microservice Resilience Patterns]] — Cross-reference
+- [[skills/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]] — Cross-reference
+- [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
+- [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]

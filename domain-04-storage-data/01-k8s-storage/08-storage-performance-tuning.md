@@ -606,6 +606,9 @@ spec:
 
 ### 基准测试脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # storage-performance-benchmark.sh
@@ -910,7 +913,7 @@ big_data_platform_optimization:
 ## Obsidian 相关文档
 
 - domain-04-storage-data MOC
-- [[domain-04-storage-data/README|Storage Domain 存储领域知识库]]
+- [[domain-04-storage-data/README.md|Storage Domain 存储领域知识库]]
 - Domain-6 存储 — 开源项目索引
 - 存储架构概览与核心组件
 - PV/PVC 核心概念与企业级实践
@@ -931,5 +934,5 @@ big_data_platform_optimization:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]

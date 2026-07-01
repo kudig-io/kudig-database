@@ -378,23 +378,23 @@ AI Agent、AI Coding 工具相关知识体系。
 
 ## Related
 
-- [[references/k8s-glossary-index|K8s 术语表索引]] — Cross-reference
-- [[references/k8s-knowledge-map|Kubernetes Knowledge Map]] — Cross-reference
-- [[references/KUDIG Templates and Agent Prompts|KUDIG Templates and Agent Prompts]] — Cross-reference
-- [[references/KUDIG Scenario Taxonomy|KUDIG Scenario Taxonomy]] — Cross-reference
-- [[skills/Symptom Vector Matching Engine|Symptom Vector Matching Engine]] — Cross-reference
+- [[entities/k8s-glossary-index.md|K8s 术语表索引]] — Cross-reference
+- [[entities/k8s-knowledge-map.md|Kubernetes Knowledge Map]] — Cross-reference
+- [[entities/KUDIG Templates and Agent Prompts.md|KUDIG Templates and Agent Prompts]] — Cross-reference
+- [[entities/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]] — Cross-reference
+- [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
 
 
 ## Assessments
 
-- [[docs/assessments/BEST_PRACTICES_FINAL_SUMMARY|Best Practices Final Summary]]
-- [[docs/assessments/BEST_PRACTICES_IMPROVEMENT_PLAN|Best Practices Improvement Plan]]
-- [[docs/assessments/BEST_PRACTICES_PROJECT_SUMMARY|Best Practices Project Summary]]
-- [[docs/assessments/BEST_PRACTICES_QUALITY_ASSESSMENT|Best Practices Quality Assessment]]
+- [[docs/assessments/BEST_PRACTICES_FINAL_SUMMARY.md|Best Practices Final Summary]]
+- [[docs/assessments/BEST_PRACTICES_IMPROVEMENT_PLAN.md|Best Practices Improvement Plan]]
+- [[docs/assessments/BEST_PRACTICES_PROJECT_SUMMARY.md|Best Practices Project Summary]]
+- [[docs/assessments/BEST_PRACTICES_QUALITY_ASSESSMENT.md|Best Practices Quality Assessment]]
 
 ## Ecosystem
 
-- [[docs/ecosystem/OPEN-SOURCE-ECOSYSTEM|Open Source Ecosystem]]
-- [[docs/ecosystem/OPEN-SOURCE-SELECTION-GUIDE|Open Source Selection Guide]]
-- [[docs/ecosystem/README-DEEP-RESEARCH-GUIDE|Deep Research Guide]]
+- [[docs/ecosystem/OPEN-SOURCE-ECOSYSTEM.md|Open Source Ecosystem]]
+- [[docs/ecosystem/OPEN-SOURCE-SELECTION-GUIDE.md|Open Source Selection Guide]]
+- [[docs/ecosystem/README-DEEP-RESEARCH-GUIDE.md|Deep Research Guide]]
 

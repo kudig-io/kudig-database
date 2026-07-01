@@ -542,6 +542,9 @@ spec:
 
 ### 观察控制器处理新 Deployment
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建
 kubectl apply -f deployment.yaml
@@ -598,6 +601,6 @@ kubectl get rs -l app=web-app
 ## Related
 
 - [[README|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

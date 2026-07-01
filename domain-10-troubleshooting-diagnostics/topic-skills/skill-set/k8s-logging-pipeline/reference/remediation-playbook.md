@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-logging-pipeline"
 created: "2026-05-22"
 updated: "2026-05-22"
+last_updated: 2026-05-22
 tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
@@ -47,6 +48,11 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 检查 parser/filter 配置
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # Fluent Bit: 修正 parser 配置
   kubectl patch configmap fluent-bit-config -n <namespace> --type='json' -p='
@@ -70,6 +76,11 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl logs -n <namespace> <fluent-pod> --tail=50 | grep -i "buffer\|drop\|retry"
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # Fluent Bit: 增加缓冲和重试
   kubectl patch configmap fluent-bit-config -n <namespace> --type='json' -p='
@@ -95,6 +106,11 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl describe pod <fluent-pod> -n <namespace>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 方案 A: 重启 DaemonSet
   kubectl rollout restart daemonset fluent-bit -n <namespace>
@@ -121,6 +137,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   ls -la /var/log/pods/
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 修复符号链接（如果 containerd log 链接断裂）
   # 重启 containerd/kubelet 通常可以恢复
@@ -152,6 +172,11 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
      curl -X DELETE http://elasticsearch:9200/<corrupted-index>
      ```
   2. **Loki ingester 问题**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
      ```bash
      # 检查 ingester 内存和 WAL
      kubectl exec <loki-ingester> -n <namespace> -- wget -qO- http://localhost:3100/metrics | grep loki_ingester

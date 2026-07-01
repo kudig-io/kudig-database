@@ -49,8 +49,8 @@ created: "2026-05-23"
 
 ### 进阶专题
 
-- [[domain-03-networking-traffic/00-core-k8s-networking/04a-flannel-wireguard-backend|Flannel WireGuard 加密后端配置]]]]
-- [[domain-03-networking-traffic/00-core-k8s-networking/04b-flannel-ipv6-dual-stack|Flannel IPv6 Dual Stack 支持]]]]
+- [[domain-03-networking-traffic/00-core-k8s-networking/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]]]
+- [[domain-03-networking-traffic/00-core-k8s-networking/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]]]
 - Flannel Windows 节点支持
 - Flannel 多集群场景与子网冲突处理
 - flanneld 启动参数详解
@@ -64,19 +64,19 @@ created: "2026-05-23"
 
 ### 故障排查
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting|CNI 网络插件故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting|Service 与 Ingress 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting|DNS 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|DNS 故障排查]]
 
 ### FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/flannel-fta|Flannel FTA 故障树]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/flannel-fta.md|Flannel FTA 故障树]]
 
 ## 扩展参考
 
 ### CNI 生态
 
-- [[domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces]]
+- [[domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md|15 container runtime interfaces]]
 - Calico 网络
 - Cilium eBPF 网络与安全实践指南
 

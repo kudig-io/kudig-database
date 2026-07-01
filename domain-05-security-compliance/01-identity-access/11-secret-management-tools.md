@@ -479,10 +479,10 @@ spec:
       name: local-generated-secret
   
   data:
-  - match:
-      secretKey: api-key
-      remoteRef:
-        remoteKey: prod/generated/api-key
+  - matchers:
+    - secretKey="api-key"
+    - remoteRef=""
+    - remoteKey="prod/generated/api-key"
 ```
 
 ### 2.4 ESO监控与告警
@@ -1087,6 +1087,9 @@ spec:
 
 ### 4.2 Sealed Secrets工作流
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # sealed-secrets-workflow.sh - Sealed Secrets工作流
@@ -1199,6 +1202,9 @@ spec:
 
 ### 4.4 密钥轮换
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # sealed-secrets-key-rotation.sh - 密钥轮换
@@ -1257,6 +1263,9 @@ creation_rules:
     pgp: FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4
     encrypted_regex: ^(data|stringData)$
 ```
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash
@@ -1609,6 +1618,9 @@ spec:
 
 ### 9.2 常用命令速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # External Secrets
 kubectl get externalsecrets -A
@@ -1661,8 +1673,8 @@ kubectl get secrets -A -o json | jq '.items[] | select(.type=="Opaque") | .metad
 ## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Security Domain]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-7 安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Security Domain]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
 - Kubernetes 认证授权体系详解
 - 网络安全策略与零信任架构
 - 运行时安全防护与威胁检测
@@ -1680,8 +1692,8 @@ kubectl get secrets -A -o json | jq '.items[] | select(.type=="Opaque") | .metad
 - 12-compliance-certification
 - 13-image-security-scanning
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

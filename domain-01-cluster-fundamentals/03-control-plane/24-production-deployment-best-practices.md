@@ -618,6 +618,9 @@ network_planes:
 
 ### 4.2 存储性能基准测试
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
 #!/bin/bash
 # 存储性能基准测试脚本
@@ -699,7 +702,7 @@ run_filesystem_tests() {
     time cp $STORAGE_PATH/test-file $STORAGE_PATH/test-file-copy
     
     # 清理测试文件
-    rm -rf $STORAGE_PATH/*
+    rm -rf $STORAGE_PATH/*  # ⚠️ 删除系统/数据文件
 }
 
 # 3. 数据库性能测试
@@ -1543,6 +1546,9 @@ backup_strategies:
 
 ### 7.3 灾难恢复演练
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # 灾难恢复演练脚本
@@ -1827,7 +1833,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -1841,8 +1847,8 @@ spec:
 
 ## Related
 
-- [[release-notes/22-production-checklist|22-production-checklist]]
-- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production|02-spring-boot-kubernetes-production]]
+- 22-production-checklist
+- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
 
 ## See Also
 

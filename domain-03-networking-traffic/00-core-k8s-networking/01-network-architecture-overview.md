@@ -897,6 +897,9 @@ data:
 
 #### 安装部署
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # Helm安装
 helm repo add cilium https://helm.cilium.io/
@@ -1257,6 +1260,9 @@ data:
 
 ### 网络问题应急响应预案
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # network-emergency-response.sh - 生产环境网络问题应急脚本
@@ -1532,7 +1538,7 @@ echo "3. Service问题: 检查Endpoints和后端Pod状态"
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -1553,4 +1559,4 @@ echo "3. Service问题: 检查Endpoints和后端Pod状态"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]

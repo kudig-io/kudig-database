@@ -107,6 +107,7 @@ func CleanupTmpDir(tmpDir string) error
 // 安全擦除（外部工具）
 // shred -vfz -n 3 <file>
 // dd if=/dev/urandom of=/dev/sdX bs=1M
+
 ```
 
 ## 源码位置
@@ -211,6 +212,7 @@ graph TD
     K --> O[rm -rf $HOME/.kube]
     K --> P[清理 systemd unit]
     K --> Q[清理 CI/CD kubeconfig]
+
 ```
 
 ## 源码分析
@@ -285,14 +287,17 @@ etcd 中包含的敏感信息：
 
 ### 安全删除 etcd 数据
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
 # 普通删除（数据可能被恢复）
-rm -rf /var/lib/etcd
+rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
 
 # 安全擦除（推荐处理敏感数据）
 shred -vfz -n 3 /var/lib/etcd/member/snap/*
 shred -vfz -n 3 /var/lib/etcd/member/wal/*
-rm -rf /var/lib/etcd
+rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
 
 # 或使用 dd 覆写整个分区
 dd if=/dev/urandom of=/dev/sdX bs=1M
@@ -343,11 +348,15 @@ aliyun ecs DeleteDisk --DiskId <disk-id>
 
 ### systemd 清理
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 systemctl stop kubelet 2>/dev/null || true
 systemctl disable kubelet 2>/dev/null || true
 rm -f /etc/systemd/system/kubelet.service
-rm -rf /etc/systemd/system/kubelet.service.d/
+rm -rf /etc/systemd/system/kubelet.service.d/  # ⚠️ 删除系统/数据文件
 systemctl daemon-reload
 ```
 
@@ -402,21 +411,27 @@ skipPhases: []
 
 ### 完整安全清理脚本
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 set -euo pipefail
 
-echo "=== Step 1: kubeadm reset ==="
-kubeadm reset --force --cleanup-tmp-dir
+echo "=== Step 1: kubeadm reset ==="  # ⚠️ 清理节点所有 K8s 配置
+kubeadm reset --force --cleanup-tmp-dir  # ⚠️ 清理节点所有 K8s 配置
 
 echo "=== Step 2: 安全擦除 etcd ==="
 if [ -d /var/lib/etcd ]; then
     find /var/lib/etcd -type f -exec shred -vfz -n 3 {} \;
-    rm -rf /var/lib/etcd
+    rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
 fi
 
 echo "=== Step 3: 清理 CNI ==="
-rm -rf /etc/cni/net.d
+rm -rf /etc/cni/net.d  # ⚠️ 删除系统/数据文件
 
 echo "=== Step 4: 清理 iptables ==="
 iptables -F
@@ -426,13 +441,13 @@ iptables -X
 ipvsadm -C 2>/dev/null || true
 
 echo "=== Step 5: 清理 kubeconfig ==="
-rm -rf $HOME/.kube
+rm -rf $HOME/.kube  # ⚠️ 删除系统/数据文件
 
 echo "=== Step 6: 清理 systemd ==="
 systemctl stop kubelet 2>/dev/null || true
 systemctl disable kubelet 2>/dev/null || true
 rm -f /etc/systemd/system/kubelet.service
-rm -rf /etc/systemd/system/kubelet.service.d/
+rm -rf /etc/systemd/system/kubelet.service.d/  # ⚠️ 删除系统/数据文件
 systemctl daemon-reload
 
 echo "=== Step 7: 清理 etcd 快照 ==="
@@ -442,6 +457,7 @@ find / -name "snapshot*.db" -o -name "etcd-snapshot*" 2>/dev/null | while read f
 done
 
 echo "=== 安全清理完成 ==="
+
 ```
 
 ## 常见错误
@@ -466,7 +482,9 @@ echo "=== 安全清理完成 ==="
 ## Related
 
 - [[README|README]]
-- [[man/INSTALL|INSTALL]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git|git]]
+- [[scripts/man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
+
+```

@@ -55,7 +55,7 @@ authors:
 created: "2026-05-23"
 ---
 
-# [[Kubernetes|Kubernetes]] 混沌工程与故障注入测试 ([[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering|Chaos Engineering]] and Fault Injection Testing)
+# [[Kubernetes|Kubernetes]] 混沌工程与故障注入测试 ([[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]] and Fault Injection Testing)
 
 > **作者**: 混沌工程专家 | **版本**: v1.5 | **更新时间**: 2026-03-03
 > **适用场景**: 系统韧性测试与可靠性验证 | **复杂度**: ⭐⭐⭐⭐⭐
@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 混沌工程基础理论 -->## 1. 混沌工程基础理论
 
-#<!-- chunk: 1.1 混沌工程核心原则 -->## 1.1 混沌工程核心原则
+## 1.1 混沌工程核心原则
 
 ```yaml
 混沌工程四大原则:
@@ -91,7 +91,7 @@ created: "2026-05-23"
      - 组织文化演进
 ```
 
-#<!-- chunk: 1.2 故障注入类型分类 -->## 1.2 故障注入类型分类
+## 1.2 故障注入类型分类
 
 ```yaml
 故障注入类型体系:
@@ -111,9 +111,9 @@ created: "2026-05-23"
     - 依赖问题: 数据库连接失败、第三方服务不可用
 ```
 
-<!-- chunk: 2. [[Chaos Mesh|Chaos Mesh]] 实践指南 -->## 2. Chaos Mesh 实践指南
+<!-- chunk: 2. Chaos Mesh 实践指南 -->## 2. Chaos Mesh 实践指南
 
-#<!-- chunk: 2.1 Chaos Mesh 部署配置 -->## 2.1 Chaos Mesh 部署配置
+## 2.1 Chaos Mesh 部署配置
 
 ```yaml
 # Chaos Mesh完整部署
@@ -256,7 +256,7 @@ subjects:
   namespace: chaos-testing
 ```
 
-#<!-- chunk: 2.2 网络故障注入实验 -->## 2.2 网络故障注入实验
+## 2.2 网络故障注入实验
 
 ```yaml
 # 网络延迟注入实验
@@ -331,7 +331,7 @@ spec:
 
 <!-- chunk: 3. Pod 和节点故障注入 -->## 3. Pod 和节点故障注入
 
-#<!-- chunk: 3.1 Pod 问题实验 -->## 3.1 Pod 问题实验
+## 3.1 Pod 问题实验
 
 ```yaml
 # Pod Kill 实验
@@ -393,7 +393,7 @@ spec:
     cron: "@every 60m"
 ```
 
-#<!-- chunk: 3.2 节点问题实验 -->## 3.2 节点问题实验
+## 3.2 节点问题实验
 
 ```yaml
 # 节点重启实验
@@ -458,7 +458,7 @@ spec:
 
 <!-- chunk: 4. 时间和 IO 故障注入 -->## 4. 时间和 IO 故障注入
 
-#<!-- chunk: 4.1 时间问题实验 -->## 4.1 时间问题实验
+## 4.1 时间问题实验
 
 ```yaml
 # 时间偏移实验
@@ -502,7 +502,7 @@ spec:
     cron: "@every 4h"
 ```
 
-#<!-- chunk: 4.2 IO 问题实验 -->## 4.2 IO 问题实验
+## 4.2 IO 问题实验
 
 ```yaml
 # IO 延迟实验
@@ -551,7 +551,7 @@ spec:
 
 <!-- chunk: 5. 自动化混沌实验平台 -->## 5. 自动化混沌实验平台
 
-#<!-- chunk: 5.1 实验编排系统 -->## 5.1 实验编排系统
+## 5.1 实验编排系统
 
 ```python
 #!/usr/bin/env python3
@@ -780,7 +780,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-#<!-- chunk: 5.2 实验监控与告警 -->## 5.2 实验监控与告警
+## 5.2 实验监控与告警
 
 ```yaml
 # 混沌实验监控配置
@@ -850,33 +850,33 @@ spec:
 
 <!-- chunk: 6. 混沌实验最佳实践 -->## 6. 混沌实验最佳实践
 
-#<!-- chunk: 6.1 实验设计原则 -->## 6.1 实验设计原则
+## 6.1 实验设计原则
 
 ```markdown
 <!-- chunk: 🔬 混沌实验设计原则 -->## 🔬 混沌实验设计原则
 
-#<!-- chunk: 1. 渐进式破坏 -->## 1. 渐进式破坏
+## 1. 渐进式破坏
 - 从小规模开始，逐步扩大影响范围
 - 从简单问题开始，逐步增加复杂度
 - 控制实验强度，避免过度破坏
 
-#<!-- chunk: 2. 真实环境验证 -->## 2. 真实环境验证
+## 2. 真实环境验证
 - 在生产环境的影子流量上测试
 - 使用真实的用户数据和负载
 - 模拟真实的问题场景
 
-#<!-- chunk: 3. 自动化恢复机制 -->## 3. 自动化恢复机制
+## 3. 自动化恢复机制
 - 实现实验自动回滚
 - 建立快速恢复预案
 - 验证恢复流程有效性
 
-#<!-- chunk: 4. 持续学习改进 -->## 4. 持续学习改进
+## 4. 持续学习改进
 - 建立实验知识库
 - 定期回顾实验结果
 - 持续优化系统韧性
 ```
 
-#<!-- chunk: 6.2 实施检查清单 -->## 6.2 实施检查清单
+## 6.2 实施检查清单
 
 ```yaml
 混沌工程实施检查清单:
@@ -907,7 +907,7 @@ spec:
 
 <!-- chunk: 7. 混沌工程成熟度模型 -->## 7. 混沌工程成熟度模型
 
-#<!-- chunk: 7.1 成熟度等级划分 -->## 7.1 成熟度等级划分
+## 7.1 成熟度等级划分
 
 ```yaml
 混沌工程成熟度模型:
@@ -938,19 +938,19 @@ spec:
 
 <!-- chunk: N. 混沌工程 2026更新 -->## N. 混沌工程 2026更新
 
-#<!-- chunk: N.1 GKE Autopilot混沌工程 -->## N.1 GKE Autopilot混沌工程
+## N.1 GKE Autopilot混沌工程
 - Autopilot约束下可执行的混沌实验类型
 - 托管节点环境的限制和边界
 - Harness Chaos Engineering原生支持GKE Autopilot
 
-#<!-- chunk: N.2 eBPF故障注入 -->## N.2 eBPF故障注入
+## N.2 eBPF故障注入
 - eBPF tc/xdp层的网络延迟/丢包注入
 - 内核态故障注入 vs 应用层注入对比
 - 更精准的故障域控制（进程级、系统调用级）
 
 <!-- chunk: 8. 未来发展趋势 -->## 8. 未来发展趋势
 
-#<!-- chunk: 8.1 智能混沌工程 -->## 8.1 智能混沌工程
+## 8.1 智能混沌工程
 
 ```yaml
 混沌工程发展趋势:
@@ -979,7 +979,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers KUDIG Database — Global MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - index.md|Domain-19 论文与参考 — 开源项目索引]]
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -1000,4 +1000,4 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

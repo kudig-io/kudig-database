@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-control-plane"
 created: "2026-05-22"
 updated: "2026-05-22"
+last_updated: 2026-05-22
 tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
@@ -88,6 +89,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
 
 - **适用根因**: RC-002
 - **前置检查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查 etcd 数据目录大小
   du -sh /var/lib/etcd
@@ -96,6 +101,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl exec <etcd-pod> -n kube-system -- etcdctl alarm list
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 方案 A: 清理 etcd 告警（NOSPACE）
   kubectl exec <etcd-pod> -n kube-system -- etcdctl alarm disarm
@@ -105,6 +114,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 在云环境中扩展挂载盘，然后扩展文件系统
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   kubectl exec <etcd-pod> -n kube-system -- etcdctl endpoint status
   kubectl exec <etcd-pod> -n kube-system -- etcdctl alarm list
@@ -119,6 +132,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl logs <scheduler-pod> -n kube-system --tail=50
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 如果是 static pod
   mv /etc/kubernetes/manifests/kube-scheduler.yaml /tmp/
@@ -129,6 +146,11 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   systemctl restart kube-scheduler
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl get pods -n kube-system | grep scheduler
   kubectl create deployment test-scheduler --image=nginx --dry-run=client -o yaml | kubectl apply -f -
@@ -193,23 +215,36 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
 - **影响说明**: etcd 成员操作可能导致数据丢失或集群分裂。必须在理解 Raft 协议的基础上操作。
 - **操作步骤**:
   1. **检查成员状态**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
      ```bash
      kubectl exec <etcd-pod> -n kube-system -- etcdctl member list
      kubectl exec <etcd-pod> -n kube-system -- etcdctl endpoint status --cluster
      ```
   2. **如果成员失联**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+
      ```bash
      # 从集群移除失联成员
-     kubectl exec <etcd-pod> -n kube-system -- etcdctl member remove <member-id>
+     kubectl exec <etcd-pod> -n kube-system -- etcdctl member remove <member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
      # 在新节点上重新加入
      kubeadm join phase control-plane-join etcd --config <config>
      ```
   3. **如果 etcd 数据损坏**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
      ```bash
      # 从其他健康成员恢复快照
      kubectl exec <healthy-etcd-pod> -n kube-system -- etcdctl snapshot save /tmp/snapshot.db
      # 在问题节点恢复
-     etcdctl snapshot restore /tmp/snapshot.db --data-dir=/var/lib/etcd-restored
+     etcdctl snapshot restore /tmp/snapshot.db --data-dir=/var/lib/etcd-restored  # ⚠️ 覆盖 etcd 数据，集群状态回退
      ```
 - **安全检查**:
   - 确保集群仍有 majority 可用
@@ -241,6 +276,9 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
 ## 验证确认
 
 ### 即时验证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # V1: API Server 可达

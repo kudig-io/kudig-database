@@ -57,13 +57,13 @@ created: "2026-05-23"
 
 <!-- chunk: 演讲概述 -->## 演讲概述
 
-#<!-- chunk: 目标受众 -->## 目标受众
+## 目标受众
 
 - 阿里云开发者：理解 Terway 的核心架构和模式选择
 - 网络架构师：深入 ENI/IPAM 机制和性能调优
 - SRE 工程师：Terway 故障排查与运维最佳实践
 
-#<!-- chunk: 预计时长 -->## 预计时长
+## 预计时长
 
 | 阶段 | 内容 | 时长 |
 |------|------|------|
@@ -74,7 +74,7 @@ created: "2026-05-23"
 | Q&A | 互动问答 | 15 分钟 |
 | **合计** | | **约 3 小时** |
 
-#<!-- chunk: 核心要点 -->## 核心要点
+## 核心要点
 
 1. Terway 是阿里云 ACK 自研的 CNI 插件，Pod IP 直通 VPC
 2. 三种核心模式：VPC 路由、ENI 独占、ENIIP（推荐默认）
@@ -86,7 +86,7 @@ created: "2026-05-23"
 
 <!-- chunk: 核心概念讲解 -->## 核心概念讲解
 
-#<!-- chunk: 什么是 Terway？ -->## 什么是 Terway？
+## 什么是 Terway？
 
 Terway 是阿里云 ACK 自研的 Container Network Interface (CNI) 插件，深度集成阿里云 VPC/ENI 网络基础设施。核心特性：**Pod IP 即 VPC 内网 IP**，无需 NAT 即可被 VPC 内其他资源直接访问。
 
@@ -104,7 +104,7 @@ Flannel 是 ACK 早期默认 CNI，采用 Overlay (VXLAN) 方案。Terway 在 Po
 | SLB/ALB 联动 | 深度集成 | 需额外配置 |
 | 安全组联动 | 节点级 + Pod 级 | 仅节点级 |
 
-#<!-- chunk: 三种核心模式对比 -->## 三种核心模式对比
+## 三种核心模式对比
 
 **推荐默认使用 ENIIP 模式。**
 
@@ -134,7 +134,7 @@ Flannel 是 ACK 早期默认 CNI，采用 Overlay (VXLAN) 方案。Terway 在 Po
       |-- 极致性能 + 高密度 --> IPVlan (内核 4.19+)
 ```
 
-#<!-- chunk: Pod 直通 VPC 的意义 -->## Pod 直通 VPC 的意义
+## Pod 直通 VPC 的意义
 
 **网络拓扑简化：**
 - Pod IP = VPC IP，VPC 内所有资源 (ECS、RDS、SLB) 可直接访问 Pod
@@ -150,7 +150,7 @@ Flannel 是 ACK 早期默认 CNI，采用 Overlay (VXLAN) 方案。Terway 在 Po
 - SLB 后端直接挂载 Pod IP (ENIIP 模式)，无需经过 NodePort 转发
 - 流量路径：Client → SLB → Pod IP (直通)，减少一跳
 
-#<!-- chunk: Terway 整体架构 -->## Terway 整体架构
+## Terway 整体架构
 
 **控制面组件：**
 
@@ -168,7 +168,7 @@ Flannel 是 ACK 早期默认 CNI，采用 Overlay (VXLAN) 方案。Terway 在 Po
 | **ENIIP (辅助 IP)** | ENI Secondary IP | ENIIP 模式下 Pod 使用的 VPC IP 地址 |
 | **veth pair** | Linux 网络设备 | 连接 Pod 网络命名空间与 ENI 的虚拟网线 |
 
-#<!-- chunk: IPAM 机制 -->## IPAM 机制
+## IPAM 机制
 
 IP 地址管理 (IPAM) 是 Terway 的核心功能之一：
 
@@ -207,7 +207,7 @@ Pod 删除请求 (kubelet)
 
 **预热池设计**：提前分配好 IP 放入池中，Pod 创建时直接命中，减少 OpenAPI 调用。预热池命中时延迟 < 5ms，OpenAPI 调用延迟 50-200ms。
 
-#<!-- chunk: CRD 资源模型 -->## CRD 资源模型
+## CRD 资源模型
 
 Terway 定义的 CRD 资源用于声明式管理网络状态：
 
@@ -219,7 +219,7 @@ Terway 定义的 CRD 资源用于声明式管理网络状态：
 | **ReservedIP** | 保留固定 IP (StatefulSet) | `spec.ipAddress` |
 | **IPInstance** | IP 实例生命周期状态 | `status.pod`, `status.phase` |
 
-#<!-- chunk: 安全模型四层体系 -->## 安全模型四层体系
+## 安全模型四层体系
 
 | 层级 | 机制 | 粒度 |
 |:---|:---|:---|
@@ -228,7 +228,7 @@ Terway 定义的 CRD 资源用于声明式管理网络状态：
 | 第三层 | NetworkPolicy (iptables/eBPF) | Pod 级 (细) |
 | 第四层 | RAM 权限控制 | API 级 (最细) |
 
-#<!-- chunk: 容量规划 -->## 容量规划
+## 容量规划
 
 **单节点最大 Pod 数计算公式：**
 
@@ -258,7 +258,7 @@ ENIIP 模式单节点最大 Pod 数 = (最大 ENI 数 - 1) × 单 ENI 最大辅�
 
 <!-- chunk: 架构图 -->## 架构图
 
-#<!-- chunk: Terway ENIIP 模式数据流 -->## Terway ENIIP 模式数据流
+## Terway ENIIP 模式数据流
 
 ```mermaid
 graph TB
@@ -282,7 +282,7 @@ graph TB
     style VPC fill:#e8f5e9,stroke:#2e7d32
 ```
 
-#<!-- chunk: IPAM 分配流程 -->## IPAM 分配流程
+## IPAM 分配流程
 
 ```mermaid
 graph TB
@@ -301,7 +301,7 @@ graph TB
     style API fill:#fff3e0,stroke:#ef6c00
 ```
 
-#<!-- chunk: CRD 关联关系 -->## CRD 关联关系
+## CRD 关联关系
 
 ```mermaid
 graph TB
@@ -323,7 +323,7 @@ graph TB
     style RP fill:#fce4ec,stroke:#c62828
 ```
 
-#<!-- chunk: GC 机制工作流程 -->## GC 机制工作流程
+## GC 机制工作流程
 
 ```mermaid
 graph TB
@@ -344,7 +344,7 @@ graph TB
 
 <!-- chunk: 实战演示步骤 -->## 实战演示步骤
 
-#<!-- chunk: 演示 1：验证 Terway 状态 -->## 演示 1：验证 Terway 状态
+## 演示 1：验证 Terway 状态
 
 ```bash
 # 步骤 1: 确认 Terway DaemonSet 运行状态
@@ -364,7 +364,10 @@ kubectl get podeni -A
 kubectl get nodenetworking -A
 ```
 
-#<!-- chunk: 演示 2：Pod 安全组配置 -->## 演示 2：Pod 安全组配置
+## 演示 2：Pod 安全组配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 创建 PodNetworking (指定安全组和 vSwitch)
@@ -399,7 +402,10 @@ EOF
 kubectl get podeni -A | grep db-pod
 ```
 
-#<!-- chunk: 演示 3：NetworkPolicy 实战 -->## 演示 3：NetworkPolicy 实战
+## 演示 3：NetworkPolicy 实战
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 部署默认拒绝策略
@@ -459,7 +465,11 @@ EOF
 kubectl get networkpolicy -A
 ```
 
-#<!-- chunk: 演示 4：StatefulSet 固定 IP -->## 演示 4：StatefulSet 固定 IP
+## 演示 4：StatefulSet 固定 IP
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 步骤 1: 创建 PodNetworking
@@ -514,7 +524,10 @@ kubectl get pod postgres-0 -o wide
 kubectl get reservedip -A
 ```
 
-#<!-- chunk: 演示 5：故障排查 -->## 演示 5：故障排查
+## 演示 5：故障排查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 场景: Pod 卡在 ContainerCreating
@@ -538,49 +551,50 @@ kubectl get nodenetworking <node> -o yaml
 # 紧急处理: 手动清理泄漏 IP
 kubectl get ipinstance -A | grep -v Running
 kubectl delete ipinstance <leaked-ip-instance> -n <ns>
+
 ```
 
 ---
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
 
-#<!-- chunk: Q1: Terway 和 Flannel 应该怎么选？ -->## Q1: Terway 和 Flannel 应该怎么选？
+## Q1: Terway 和 Flannel 应该怎么选？
 
 **回答**: 新建集群推荐 Terway，除非是 Windows 节点或不支持 ENI 的场景。Terway 的 Pod 直通 VPC、NetworkPolicy 支持、SLB 联动是 Flannel 无法提供的。存量 Flannel 集群可以按需迁移，但迁移过程需要规划（涉及 Pod 重建）。
 
-#<!-- chunk: Q2: 为什么 ENIIP 模式需要策略路由？ -->## Q2: 为什么 ENIIP 模式需要策略路由？
+## Q2: 为什么 ENIIP 模式需要策略路由？
 
 **回答**: 一个节点可能有多张辅助 ENI，每个 Pod 绑定在不同 ENI 的辅助 IP 上。策略路由 (policy routing) 确保不同 Pod 的流量走正确的 ENI 出去。例如 Pod A 绑定在 ENI-1 的辅助 IP，Pod B 绑定在 ENI-2 的辅助 IP，策略路由根据源 IP 选择对应的 ENI 发送数据。
 
-#<!-- chunk: Q3: IP 预热池大小应该设置多少？ -->## Q3: IP 预热池大小应该设置多少？
+## Q3: IP 预热池大小应该设置多少？
 
 **回答**: 默认 `max_pool_size=5`，适合大多数场景。建议设置：突发扩容场景设为 5-10，超大规模集群设为 10-20。预热池越大，Pod 创建越快，但占用更多 vSwitch IP。注意 OpenAPI 速率限制约 100 QPS，大规模扩容时预热池是关键缓冲。
 
-#<!-- chunk: Q4: 如何排查 IP 耗尽问题？ -->## Q4: 如何排查 IP 耗尽问题？
+## Q4: 如何排查 IP 耗尽问题？
 
 **回答**: (1) 检查 vSwitch IP 使用率（阿里云控制台）；(2) `kubectl get ipinstance -A` 查看所有 IP 状态；(3) 检查是否有泄漏 IP（Pod 已不存在但 IP 未释放）；(4) 手动清理：`kubectl delete ipinstance <leaked-ip>`；(5) 长期解决：扩大 vSwitch CIDR 或新增 vSwitch。
 
-#<!-- chunk: Q5: NetworkPolicy 的 iptables 和 eBPF 实现有什么区别？ -->## Q5: NetworkPolicy 的 iptables 和 eBPF 实现有什么区别？
+## Q5: NetworkPolicy 的 iptables 和 eBPF 实现有什么区别？
 
 **回答**: iptables 是 Terway 默认实现，成熟稳定但大规模策略（1000+ 规则）性能下降。eBPF 是 v1.5+ 可选实现，规则更新毫秒级，规模无关 (O(1) 查找)。如果集群 NetworkPolicy 数量超过 500，建议评估 eBPF 模式。eBPF 需要内核 4.19+（推荐 5.10+）。
 
-#<!-- chunk: Q6: 跨 VPC 场景 Pod 如何通信？ -->## Q6: 跨 VPC 场景 Pod 如何通信？
+## Q6: 跨 VPC 场景 Pod 如何通信？
 
 **回答**: Pod IP 仅在本 VPC 内可路由。跨 VPC 访问必须通过 CEN（云企业网）或 VPN 网关打通 VPC 网络。禁止依赖公网 NAT，因为：(1) 延迟高；(2) 带宽有限；(3) 安全风险。配置 CEN 后，不同 VPC 的 Pod 可以直接通过 IP 互通。
 
-#<!-- chunk: Q7: eni-config 修改后为什么不生效？ -->## Q7: eni-config 修改后为什么不生效？
+## Q7: eni-config 修改后为什么不生效？
 
 **回答**: eni-config 修改后必须执行 `kubectl rollout restart ds terway-eniip -n kube-system` 滚动重启 DaemonSet，否则旧的 terway-eniip Pod 仍然使用旧配置。这是最常见的"配了不生效"问题。
 
-#<!-- chunk: Q8: 如何监控 Terway 的健康状态？ -->## Q8: 如何监控 Terway 的健康状态？
+## Q8: 如何监控 Terway 的健康状态？
 
 **回答**: 关键指标：`terway_alloc_ip_duration_ms`（IP 分配延迟）、`terway_ip_pool_size`（预热池 IP 数）、`terway_eni_count`（ENI 数量）、`terway_gc_total/errors`（GC 运行状态）、`terway_openapi_errors_total`（OpenAPI 错误率）。建议配置：IP 分配 P95 > 500ms 警告，预热池耗尽严重，OpenAPI 错误率 > 10% 警告。
 
-#<!-- chunk: Q9: 固定 IP 有什么限制？ -->## Q9: 固定 IP 有什么限制？
+## Q9: 固定 IP 有什么限制？
 
 **回答**: (1) 仅支持 StatefulSet，Deployment 的 Pod 重建后 IP 会变化；(2) 固定 IP 占用 vSwitch IP 池，需纳入容量规划；(3) 节点下线时固定 IP 的 Pod 迁移到新节点后 IP 保持不变（跨节点固定）；(4) 删除 StatefulSet 时固定 IP 不会自动释放，需要手动清理 ReservedIP。
 
-#<!-- chunk: Q10: 如何处理 OpenAPI 限流？ -->## Q10: 如何处理 OpenAPI 限流？
+## Q10: 如何处理 OpenAPI 限流？
 
 **回答**: (1) 增大预热池 (`max_pool_size`) 减少实时调用；(2) 申请提升 API 配额；(3) 避免在短时间内大规模扩缩 Pod（使用分批扩缩）；(4) 检查是否有异常组件频繁调用 API（如不断创建删除 Pod 的 CronJob）。Terway 日志中 `Throttling` 关键字表示触发限流。
 
@@ -588,7 +602,7 @@ kubectl delete ipinstance <leaked-ip-instance> -n <ns>
 
 <!-- chunk: 要点总结 -->## 要点总结
 
-#<!-- chunk: Terway 知识图谱 -->## Terway 知识图谱
+## Terway 知识图谱
 
 ```
 Terway
@@ -618,7 +632,7 @@ Terway
     └── SLB 直通挂载
 ```
 
-#<!-- chunk: SRE 运维红线 -->## SRE 运维红线
+## SRE 运维红线
 
 | 红线 | 说明 | 违反后果 |
 |------|------|---------|
@@ -634,7 +648,7 @@ Terway
 
 <!-- chunk: 延伸阅读 -->## 延伸阅读
 
-#<!-- chunk: 推荐阅读 -->## 推荐阅读
+## 推荐阅读
 
 | 序号 | 文件路径 | 内容说明 |
 |:---|:---|:---|
@@ -647,7 +661,7 @@ Terway
 | 7 | `domain-03-networking-traffic/46-terway-performance-tuning.md` | 性能调优: 模式对比、内核调优 |
 | 8 | `domain-03-networking-traffic/47-terway-troubleshooting-fta.md` | 故障树分析: 结构化排障方法 |
 
-#<!-- chunk: 通用网络知识 -->## 通用网络知识
+## 通用网络知识
 
 | 序号 | 文件路径 | 内容说明 |
 |:---|:---|:---|
@@ -655,7 +669,7 @@ Terway
 | 2 | `domain-03-networking-traffic/37-terway-resources-crud-operations.md` | CRD CRUD 操作 |
 | 3 | `domain-03-networking-traffic/38-terway-gc-mechanism.md` | GC 垃圾回收机制 |
 
-#<!-- chunk: 关联培训专题 -->## 关联培训专题
+## 关联培训专题
 
 - `kubernetes-service-presentation.md` — Service 与 Terway 网络的协作
 - `kubernetes-coredns-presentation.md` — DNS 解析与 Terway 的关系
@@ -692,4 +706,6 @@ Terway
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+```

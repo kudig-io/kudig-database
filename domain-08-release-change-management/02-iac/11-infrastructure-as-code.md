@@ -88,9 +88,9 @@ k8s_versions:
 
 <!-- chunk: 🏗️ Terraform核心实践 -->## 🏗️ Terraform核心实践
 
-#<!-- chunk: 模块化架构设计 -->## 模块化架构设计
+## 模块化架构设计
 
-##<!-- chunk: 1. 核心模块结构 -->## 1. 核心模块结构
+## 1. 核心模块结构
 ```
 terraform-modules/
 ├── kubernetes-cluster/
@@ -110,7 +110,7 @@ terraform-modules/
     └── variables.tf
 ```
 
-##<!-- chunk: 2. Kubernetes集群模块 -->## 2. Kubernetes集群模块
+## 2. Kubernetes集群模块
 ```hcl
 # modules/kubernetes-cluster/main.tf
 terraform {
@@ -195,9 +195,9 @@ variable "ingress_replicas" {
 }
 ```
 
-#<!-- chunk: 环境分离管理 -->## 环境分离管理
+## 环境分离管理
 
-##<!-- chunk: 1. 多环境配置 -->## 1. 多环境配置
+## 1. 多环境配置
 ```hcl
 # environments/production/main.tf
 module "production_cluster" {
@@ -246,7 +246,7 @@ terraform {
 }
 ```
 
-##<!-- chunk: 2. 变量文件管理 -->## 2. 变量文件管理
+## 2. 变量文件管理
 ```hcl
 # terraform.tfvars
 # Production环境变量
@@ -271,9 +271,9 @@ monitoring_version = "44.3.0"
 
 <!-- chunk: 🛠️ Crossplane实践 -->## 🛠️ Crossplane实践
 
-#<!-- chunk: Crossplane基础配置 -->## Crossplane基础配置
+## Crossplane基础配置
 
-##<!-- chunk: 1. Crossplane安装 -->## 1. Crossplane安装
+## 1. Crossplane安装
 ```yaml
 # Crossplane安装配置
 apiVersion: v1
@@ -302,7 +302,7 @@ spec:
       iam.amazonaws.com/role: crossplane-role
 ```
 
-##<!-- chunk: 2. 云资源声明 -->## 2. 云资源声明
+## 2. 云资源声明
 ```yaml
 # S3存储桶配置
 apiVersion: s3.aws.upbound.io/v1beta1
@@ -351,9 +351,9 @@ spec:
     name: aws-provider-config
 ```
 
-#<!-- chunk: Composition组合模式 -->## Composition组合模式
+## Composition组合模式
 
-##<!-- chunk: 1. 基础设施组合 -->## 1. 基础设施组合
+## 1. 基础设施组合
 ```yaml
 # Kubernetes集群组合
 apiVersion: apiextensions.crossplane.io/v1
@@ -425,7 +425,7 @@ spec:
       toFieldPath: spec.forProvider.version
 ```
 
-##<!-- chunk: 2. 应用环境组合 -->## 2. 应用环境组合
+## 2. 应用环境组合
 ```yaml
 # 应用环境Composition
 apiVersion: apiextensions.crossplane.io/v1
@@ -497,9 +497,9 @@ spec:
 
 <!-- chunk: 🔧 自动化流水线 -->## 🔧 自动化流水线
 
-#<!-- chunk: CI/CD集成 -->## CI/CD集成
+## CI/CD集成
 
-##<!-- chunk: 1. GitHub Actions配置 -->## 1. GitHub Actions配置
+## 1. GitHub Actions配置
 ```yaml
 # .github/workflows/terraform-plan.yml
 name: Terraform Plan
@@ -537,7 +537,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 ```
 
-##<!-- chunk: 2. Atlantis自动化 -->## 2. Atlantis自动化
+## 2. Atlantis自动化
 ```yaml
 # atlantis.yaml
 version: 3
@@ -572,9 +572,9 @@ workflows:
       - run: terragrunt apply -no-color $PLANFILE
 ```
 
-#<!-- chunk: 状态管理策略 -->## 状态管理策略
+## 状态管理策略
 
-##<!-- chunk: 1. 远程状态配置 -->## 1. 远程状态配置
+## 1. 远程状态配置
 ```hcl
 # backend.tf
 terraform {
@@ -611,7 +611,7 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
 }
 ```
 
-##<!-- chunk: 2. 状态分割策略 -->## 2. 状态分割策略
+## 2. 状态分割策略
 ```hcl
 # foundation/main.tf - 基础设施层
 terraform {
@@ -660,9 +660,9 @@ module "kubernetes_apps" {
 
 <!-- chunk: 📊 监控与合规 -->## 📊 监控与合规
 
-#<!-- chunk: 基础设施监控 -->## 基础设施监控
+## 基础设施监控
 
-##<!-- chunk: 1. Terraform监控指标 -->## 1. Terraform监控指标
+## 1. Terraform监控指标
 ```yaml
 # Prometheus指标收集
 apiVersion: monitoring.coreos.com/v1
@@ -715,7 +715,7 @@ spec:
             memory: 256Mi
 ```
 
-##<!-- chunk: 2. 合规性检查 -->## 2. 合规性检查
+## 2. 合规性检查
 ```yaml
 # Terrascan配置
 apiVersion: batch/v1
@@ -758,9 +758,9 @@ spec:
           restartPolicy: Never
 ```
 
-#<!-- chunk: 成本优化监控 -->## 成本优化监控
+## 成本优化监控
 
-##<!-- chunk: 1. 资源利用率分析 -->## 1. 资源利用率分析
+## 1. 资源利用率分析
 ```python
 #!/usr/bin/env python3
 # 资源利用率分析脚本
@@ -833,9 +833,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 🔐 安全最佳实践 -->## 🔐 安全最佳实践
 
-#<!-- chunk: 权限管理 -->## 权限管理
+## 权限管理
 
-##<!-- chunk: 1. 最小权限原则 -->## 1. 最小权限原则
+## 1. 最小权限原则
 ```hcl
 # IAM策略配置
 resource "aws_iam_policy" "terraform_deployer" {
@@ -886,7 +886,7 @@ resource "aws_iam_role" "terraform_executor" {
 }
 ```
 
-##<!-- chunk: 2. 敏感信息管理 -->## 2. 敏感信息管理
+## 2. 敏感信息管理
 ```hcl
 # Vault集成配置
 provider "vault" {
@@ -914,7 +914,7 @@ creation_rules:
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 基础设施代码化 -->## 基础设施代码化
+## 基础设施代码化
 - [ ] 设计模块化Terraform架构
 - [ ] 建立多环境配置管理
 - [ ] 配置远程状态存储和锁定
@@ -922,7 +922,7 @@ creation_rules:
 - [ ] 建立基础设施组合模式
 - [ ] 配置自动化部署流水线
 
-#<!-- chunk: 安全与合规 -->## 安全与合规
+## 安全与合规
 - [ ] 实施最小权限访问控制
 - [ ] 配置敏感信息加密存储
 - [ ] 建立安全合规检查机制
@@ -930,7 +930,7 @@ creation_rules:
 - [ ] 配置资源访问策略
 - [ ] 建立安全基线检查
 
-#<!-- chunk: 监控与优化 -->## 监控与优化
+## 监控与优化
 - [ ] 部署基础设施监控系统
 - [ ] 建立成本优化分析机制
 - [ ] 配置资源利用率监控
@@ -938,7 +938,7 @@ creation_rules:
 - [ ] 建立变更影响评估
 - [ ] 维护基础设施文档
 
-#<!-- chunk: 运营维护 -->## 运营维护
+## 运营维护
 - [ ] 建立版本控制和变更管理
 - [ ] 配置自动化测试和验证
 - [ ] 实施故障恢复和回滚机制
@@ -955,9 +955,9 @@ creation_rules:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -969,10 +969,10 @@ creation_rules:
 
 ## Related
 
-- [[release-notes/22-production-checklist|22-production-checklist]]
-- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production|02-spring-boot-kubernetes-production]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/helm-index|Helm 全局索引]]
+- 22-production-checklist
+- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/helm-index.md|Helm 全局索引]]
 
 ## See Also
 

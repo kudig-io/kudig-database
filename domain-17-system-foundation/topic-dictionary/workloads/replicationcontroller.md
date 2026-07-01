@@ -134,6 +134,7 @@ spec:
           limits:
             cpu: "500m"
             memory: "512Mi"
+
 ```
 
 ## ReplicationController vs Deployment 对比
@@ -149,6 +150,10 @@ spec:
 | 状态 | 已废弃 | 推荐使用 |
 
 ## 迁移指南
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 步骤 1：导出现有 RC 配置
@@ -191,6 +196,9 @@ kubectl rollout status deployment/web-app -n legacy
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 查看 ReplicationController 列表
 kubectl get rc -n <namespace>
@@ -220,4 +228,6 @@ kubectl delete rc legacy-web-app -n legacy
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

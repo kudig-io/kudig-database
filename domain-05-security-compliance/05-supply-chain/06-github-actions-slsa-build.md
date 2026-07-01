@@ -104,7 +104,7 @@ SLSA（Supply-chain Levels for Software Artifacts）是由 Google 提出、OpenS
 
 <!-- chunk: 1. SLSA 框架基础 (SLSA Framework Fundamentals) -->## 1. SLSA 框架基础 (SLSA Framework Fundamentals)
 
-#<!-- chunk: 1.1 SLSA 级别定义 (SLSA Level Definitions) -->## 1.1 SLSA 级别定义 (SLSA Level Definitions)
+## 1.1 SLSA 级别定义 (SLSA Level Definitions)
 
 ```mermaid
 graph TD
@@ -126,7 +126,7 @@ graph TD
 | Level 2 | 使用托管构建服务，来源签名 | GitHub Actions + SLSA Generator |
 | Level 3 | 防篡改构建环境，强制来源验证 | SLSA GitHub Generator 可复用工作流 |
 
-#<!-- chunk: 1.2 SLSA 威胁模型 (SLSA Threat Model) -->## 1.2 SLSA 威胁模型 (SLSA Threat Model)
+## 1.2 SLSA 威胁模型 (SLSA Threat Model)
 
 ```mermaid
 graph LR
@@ -153,7 +153,7 @@ graph LR
     E --> J
 ```
 
-#<!-- chunk: 1.3 SLSA 来源证明格式 (SLSA Provenance Format) -->## 1.3 SLSA 来源证明格式 (SLSA Provenance Format)
+## 1.3 SLSA 来源证明格式 (SLSA Provenance Format)
 
 SLSA 来源证明遵循 [in-toto Attestation Framework](https://github.com/in-toto/attestation) 格式：
 
@@ -229,7 +229,7 @@ SLSA 来源证明遵循 [in-toto Attestation Framework](https://github.com/in-to
 
 <!-- chunk: 2. SLSA GitHub Generator 项目 (SLSA GitHub Generator Project) -->## 2. SLSA GitHub Generator 项目 (SLSA GitHub Generator Project)
 
-#<!-- chunk: 2.1 项目架构 (Project Architecture) -->## 2.1 项目架构 (Project Architecture)
+## 2.1 项目架构 (Project Architecture)
 
 ```mermaid
 graph TB
@@ -262,7 +262,7 @@ graph TB
     GR -->|"提供 OIDC 令牌"| FC
 ```
 
-#<!-- chunk: 2.2 可复用工作流类型 (Reusable Workflow Types) -->## 2.2 可复用工作流类型 (Reusable Workflow Types)
+## 2.2 可复用工作流类型 (Reusable Workflow Types)
 
 SLSA GitHub Generator 提供多种预构建工作流：
 
@@ -279,7 +279,7 @@ SLSA GitHub Generator 提供多种预构建工作流：
 
 <!-- chunk: 3. 通用制品 SLSA Level 3 构建 (Generic Artifact SLSA Level 3 Build) -->## 3. 通用制品 SLSA Level 3 构建 (Generic Artifact SLSA Level 3 Build)
 
-#<!-- chunk: 3.1 基础工作流配置 (Basic Workflow Configuration) -->## 3.1 基础工作流配置 (Basic Workflow Configuration)
+## 3.1 基础工作流配置 (Basic Workflow Configuration)
 
 ```yaml
 # .github/workflows/release.yml
@@ -396,7 +396,7 @@ jobs:
           prerelease: ${{ contains(github.ref_name, '-rc') || contains(github.ref_name, '-beta') }}
 ```
 
-#<!-- chunk: 3.2 多架构构建与 SLSA (Multi-Architecture Build with SLSA) -->## 3.2 多架构构建与 SLSA (Multi-Architecture Build with SLSA)
+## 3.2 多架构构建与 SLSA (Multi-Architecture Build with SLSA)
 
 ```yaml
 # .github/workflows/multi-arch-release.yml
@@ -508,7 +508,7 @@ jobs:
 
 <!-- chunk: 4. 容器镜像 SLSA Level 3 构建 (Container Image SLSA Level 3 Build) -->## 4. 容器镜像 SLSA Level 3 构建 (Container Image SLSA Level 3 Build)
 
-#<!-- chunk: 4.1 容器镜像工作流配置 (Container Image Workflow Configuration) -->## 4.1 容器镜像工作流配置 (Container Image Workflow Configuration)
+## 4.1 容器镜像工作流配置 (Container Image Workflow Configuration)
 
 ```yaml
 # .github/workflows/container-release.yml
@@ -621,7 +621,7 @@ jobs:
       registry-password: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-#<!-- chunk: 4.2 多阶段 Dockerfile 最佳实践 (Multi-stage Dockerfile Best Practices) -->## 4.2 多阶段 Dockerfile 最佳实践 (Multi-stage Dockerfile Best Practices)
+## 4.2 多阶段 Dockerfile 最佳实践 (Multi-stage Dockerfile Best Practices)
 
 ```dockerfile
 # Dockerfile - 针对 SLSA 优化的多阶段构建
@@ -685,7 +685,7 @@ ENTRYPOINT ["/server"]
 
 <!-- chunk: 5. Go 语言专用 SLSA 构建器 (Go Language SLSA Builder) -->## 5. Go 语言专用 SLSA 构建器 (Go Language SLSA Builder)
 
-#<!-- chunk: 5.1 Go Builder 工作流 (Go Builder Workflow) -->## 5.1 Go Builder 工作流 (Go Builder Workflow)
+## 5.1 Go Builder 工作流 (Go Builder Workflow)
 
 ```yaml
 # .github/workflows/go-release.yml
@@ -716,7 +716,7 @@ jobs:
       evaluate-runner-security: true
 ```
 
-#<!-- chunk: 5.2 Go 构建配置文件 (Go Build Configuration File) -->## 5.2 Go 构建配置文件 (Go Build Configuration File)
+## 5.2 Go 构建配置文件 (Go Build Configuration File)
 
 ```yaml
 # .slsa-goreleaser.yml - Go SLSA 构建器配置
@@ -783,7 +783,7 @@ archives:
 
 <!-- chunk: 6. 来源证明签名机制 (Provenance Attestation Signing Mechanism) -->## 6. 来源证明签名机制 (Provenance Attestation Signing Mechanism)
 
-#<!-- chunk: 6.1 Sigstore 无密钥签名流程 (Sigstore Keyless Signing Flow) -->## 6.1 Sigstore 无密钥签名流程 (Sigstore Keyless Signing Flow)
+## 6.1 Sigstore 无密钥签名流程 (Sigstore Keyless Signing Flow)
 
 ```mermaid
 sequenceDiagram
@@ -813,7 +813,7 @@ sequenceDiagram
     V->>V: 检查证书中的工作流标识
 ```
 
-#<!-- chunk: 6.2 OIDC 令牌内容分析 (OIDC Token Content Analysis) -->## 6.2 OIDC 令牌内容分析 (OIDC Token Content Analysis)
+## 6.2 OIDC 令牌内容分析 (OIDC Token Content Analysis)
 
 GitHub Actions OIDC 令牌包含以下关键声明（Claims）：
 
@@ -858,7 +858,7 @@ GitHub Actions OIDC 令牌包含以下关键声明（Claims）：
 
 <!-- chunk: 7. 来源证明验证 (Provenance Attestation Verification) -->## 7. 来源证明验证 (Provenance Attestation Verification)
 
-#<!-- chunk: 7.1 使用 slsa-verifier 验证 (Verification with slsa-verifier) -->## 7.1 使用 slsa-verifier 验证 (Verification with slsa-verifier)
+## 7.1 使用 slsa-verifier 验证 (Verification with slsa-verifier)
 
 ```bash
 # 安装 slsa-verifier
@@ -902,7 +902,7 @@ slsa-verifier verify-artifact \
   --source-uri github.com/your-org/your-repo
 ```
 
-#<!-- chunk: 7.2 验证结果解析 (Verification Result Parsing) -->## 7.2 验证结果解析 (Verification Result Parsing)
+## 7.2 验证结果解析 (Verification Result Parsing)
 
 ```bash
 # 成功验证的输出示例
@@ -921,7 +921,7 @@ FAILED: SLSA verification failed: expected source repo
   "github.com/attacker/malicious-repo"
 ```
 
-#<!-- chunk: 7.3 在 CI 中集成验证 (Integrating Verification in CI) -->## 7.3 在 CI 中集成验证 (Integrating Verification in CI)
+## 7.3 在 CI 中集成验证 (Integrating Verification in CI)
 
 ```yaml
 # .github/workflows/verify-dependency.yml
@@ -983,7 +983,7 @@ jobs:
 
 <!-- chunk: 8. 可复用工作流安全设计 (Reusable Workflow Security Design) -->## 8. 可复用工作流安全设计 (Reusable Workflow Security Design)
 
-#<!-- chunk: 8.1 可复用工作流结构 (Reusable Workflow Structure) -->## 8.1 可复用工作流结构 (Reusable Workflow Structure)
+## 8.1 可复用工作流结构 (Reusable Workflow Structure)
 
 ```mermaid
 graph TB
@@ -1018,7 +1018,7 @@ graph TB
     P -->|"uses: slsa-framework/.../generator_generic_slsa3.yml@v1.10.0"| GG
 ```
 
-#<!-- chunk: 8.2 组织级可复用构建工作流 (Organization-Level Reusable Build Workflow) -->## 8.2 组织级可复用构建工作流 (Organization-Level Reusable Build Workflow)
+## 8.2 组织级可复用构建工作流 (Organization-Level Reusable Build Workflow)
 
 ```yaml
 # central-workflows/.github/workflows/slsa-build.yml
@@ -1164,7 +1164,7 @@ jobs:
           if-no-files-found: error
 ```
 
-#<!-- chunk: 8.3 调用组织工作流 (Calling Organization Workflow) -->## 8.3 调用组织工作流 (Calling Organization Workflow)
+## 8.3 调用组织工作流 (Calling Organization Workflow)
 
 ```yaml
 # your-app/.github/workflows/release.yml
@@ -1227,7 +1227,7 @@ jobs:
 
 <!-- chunk: 9. SLSA 合规性检查与监控 (SLSA Compliance Checking and Monitoring) -->## 9. SLSA 合规性检查与监控 (SLSA Compliance Checking and Monitoring)
 
-#<!-- chunk: 9.1 自动化合规检查工作流 (Automated Compliance Check Workflow) -->## 9.1 自动化合规检查工作流 (Automated Compliance Check Workflow)
+## 9.1 自动化合规检查工作流 (Automated Compliance Check Workflow)
 
 ```yaml
 # .github/workflows/slsa-compliance-check.yml
@@ -1346,7 +1346,7 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 ```
 
-#<!-- chunk: 9.2 SLSA 合规性仪表板配置 (SLSA Compliance Dashboard Configuration) -->## 9.2 SLSA 合规性仪表板配置 (SLSA Compliance Dashboard Configuration)
+## 9.2 SLSA 合规性仪表板配置 (SLSA Compliance Dashboard Configuration)
 
 ```yaml
 # prometheus-slsa-metrics.yml
@@ -1379,7 +1379,7 @@ scrape_configs:
 
 <!-- chunk: 10. 高级场景与故障排查 (Advanced Scenarios and Troubleshooting) -->## 10. 高级场景与故障排查 (Advanced Scenarios and Troubleshooting)
 
-#<!-- chunk: 10.1 私有仓库 SLSA 配置 (Private Repository SLSA Configuration) -->## 10.1 私有仓库 SLSA 配置 (Private Repository SLSA Configuration)
+## 10.1 私有仓库 SLSA 配置 (Private Repository SLSA Configuration)
 
 ```yaml
 # 私有仓库需要额外配置
@@ -1402,7 +1402,7 @@ jobs:
       upload-asset-token: ${{ secrets.ARTIFACT_STORE_TOKEN }}
 ```
 
-#<!-- chunk: 10.2 自定义来源预测谓词 (Custom Provenance Predicate) -->## 10.2 自定义来源预测谓词 (Custom Provenance Predicate)
+## 10.2 自定义来源预测谓词 (Custom Provenance Predicate)
 
 ```yaml
 # 在来源中添加自定义材料信息
@@ -1427,7 +1427,7 @@ jobs:
     EOF
 ```
 
-#<!-- chunk: 10.3 常见问题排查 (Common Issues Troubleshooting) -->## 10.3 常见问题排查 (Common Issues Troubleshooting)
+## 10.3 常见问题排查 (Common Issues Troubleshooting)
 
 ```bash
 # 问题 1: OIDC 令牌权限不足
@@ -1469,37 +1469,37 @@ on:
         required: true
 ```
 
-#<!-- chunk: 10.4 SLSA 安全加固清单 (SLSA Security Hardening Checklist) -->## 10.4 SLSA 安全加固清单 (SLSA Security Hardening Checklist)
+## 10.4 SLSA 安全加固清单 (SLSA Security Hardening Checklist)
 
 ```markdown
 <!-- chunk: SLSA Level 3 实现检查清单 -->## SLSA Level 3 实现检查清单
 
-#<!-- chunk: 构建环境 -->## 构建环境
+## 构建环境
 - [ ] 使用 GitHub Actions 托管运行器（不使用自托管）
 - [ ] 工作流权限遵循最小权限原则
 - [ ] 所有 actions 使用固定 SHA 哈希引用
 - [ ] 使用 SLSA GitHub Generator 可复用工作流
 - [ ] 构建步骤与来源生成步骤隔离
 
-#<!-- chunk: 权限配置 -->## 权限配置
+## 权限配置
 - [ ] 顶层权限设置为 `contents: read`
 - [ ] `id-token: write` 只在需要的 job 中申请
 - [ ] `contents: write` 只在发布 job 中申请
 - [ ] 禁用 `write-all` 默认权限
 
-#<!-- chunk: 工作流安全 -->## 工作流安全
+## 工作流安全
 - [ ] 不使用 `pull_request_target` 触发器（除非必要）
 - [ ] 用户输入（来自 issue/PR 标题等）不直接注入到 shell 命令
 - [ ] 使用 `${{ env.VAR }}` 而非直接使用 `${{ github.event.xxx }}`
 - [ ] 工作流文件受到分支保护规则保护
 
-#<!-- chunk: 制品完整性 -->## 制品完整性
+## 制品完整性
 - [ ] 所有发布制品都有对应的来源证明
 - [ ] 来源证明已上传到 GitHub Release
 - [ ] 定期运行自动化验证检查
 - [ ] SBOM 随制品一起发布
 
-#<!-- chunk: 依赖管理 -->## 依赖管理
+## 依赖管理
 - [ ] 所有外部 actions 使用固定版本（SHA 或标签）
 - [ ] 定期更新 SLSA Generator 版本
 - [ ] 使用 Dependabot 自动更新 actions 依赖
@@ -1509,7 +1509,7 @@ on:
 
 <!-- chunk: 11. 企业级 SLSA 实施策略 (Enterprise SLSA Implementation Strategy) -->## 11. 企业级 SLSA 实施策略 (Enterprise SLSA Implementation Strategy)
 
-#<!-- chunk: 11.1 渐进式 SLSA 采用路径 (Progressive SLSA Adoption Path) -->## 11.1 渐进式 SLSA 采用路径 (Progressive SLSA Adoption Path)
+## 11.1 渐进式 SLSA 采用路径 (Progressive SLSA Adoption Path)
 
 ```mermaid
 gantt
@@ -1535,7 +1535,7 @@ gantt
     供应商要求传导         :2025-03, 3M
 ```
 
-#<!-- chunk: 11.2 组织策略配置 (Organization Policy Configuration) -->## 11.2 组织策略配置 (Organization Policy Configuration)
+## 11.2 组织策略配置 (Organization Policy Configuration)
 
 ```yaml
 # .github/SLSA-POLICY.yml
@@ -1588,7 +1588,7 @@ policy:
 
 <!-- chunk: 12. 参考资料与延伸阅读 (References and Further Reading) -->## 12. 参考资料与延伸阅读 (References and Further Reading)
 
-#<!-- chunk: 12.1 官方文档 -->## 12.1 官方文档
+## 12.1 官方文档
 
 | 资源 | URL |
 |------|-----|
@@ -1598,7 +1598,7 @@ policy:
 | in-toto Attestation Framework | https://github.com/in-toto/attestation |
 | OpenSSF Supply Chain Security | https://openssf.org/projects/ |
 
-#<!-- chunk: 12.2 相关标准 -->## 12.2 相关标准
+## 12.2 相关标准
 
 - **NIST SP 800-218**: Secure Software Development Framework (SSDF)
 - **CISA Software Supply Chain Security Guidance**
@@ -1606,7 +1606,7 @@ policy:
 - **SPDX**: Software Package Data Exchange（SBOM 标准）
 - **CycloneDX**: 另一种 SBOM 格式标准
 
-#<!-- chunk: 12.3 工具生态 -->## 12.3 工具生态
+## 12.3 工具生态
 
 ```bash
 # 安装关键工具
@@ -1654,8 +1654,8 @@ go install sigs.k8s.io/release-utils/cmd/scorecard@latest
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 39: 供应链安全 (Supply Chain Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-39 供应链安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 供应链安全 (Supply Chain Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
 - 供应链安全概述 (Supply Chain Security Overview)
 - 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 - SBOM 生成与管理 (SBOM Generation and Management)
@@ -1673,4 +1673,4 @@ go install sigs.k8s.io/release-utils/cmd/scorecard@latest
 - 07-sigstore-cosign-signing
 - 08-fulcio-rekor-transparency
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

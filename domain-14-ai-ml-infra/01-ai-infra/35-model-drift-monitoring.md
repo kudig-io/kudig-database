@@ -1199,17 +1199,15 @@ data:
       receiver: 'ml-team'
       
       routes:
-      - match:
-          team: 'ml-team'
-        receiver: 'ml-team-pager'
-        routes:
-        - match:
-            severity: 'critical'
-          receiver: 'ml-team-critical'
-        - match:
-            severity: 'warning'
-          receiver: 'ml-team-warning'
-    
+      - matchers:
+        - team="ml-team"
+        receiver: ml-team-pager
+      - matchers:
+        - severity="critical"
+        receiver: ml-team-critical
+      - matchers:
+        - severity="warning"
+        receiver: ml-team-warning
     receivers:
     - name: 'ml-team'
       slack_configs:
@@ -1226,7 +1224,7 @@ data:
     
     - name: 'ml-team-critical'
       pagerduty_configs:
-      - service_key: 'YOUR_PAGERDUTY_SERVICE_KEY'
+      - routing_key: 'YOUR_PAGERDUTY_SERVICE_KEY'
         description: '{{ .CommonAnnotations.summary }}'
     
     - name: 'ml-team-warning'
@@ -1340,7 +1338,7 @@ data:
 ## Obsidian 相关文档
 
 - domain-11-ai-infra KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
 - Domain-11 AI 基础设施 — 开源项目索引
 - AI 基础设施架构
 - 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)

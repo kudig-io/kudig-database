@@ -58,12 +58,12 @@ Java on Kubernetes — Java 应用部署与调优
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-02-workloads-applications/02-spring-boot-kubernetes-production|Spring Boot on Kubernetes 生产实践指南]] |  | java, k8s, production |  |
-| 2 | [[domain-02-workloads-applications/03-jvm-gc-container-tuning|JVM GC 容器调优深度指南]] |  | java, k8s, performance |  |
-| 3 | [[domain-02-workloads-applications/04-java-operator-sdk-development|Java Operator SDK 开发指南]] |  | java, k8s |  |
-| 4 | [[domain-02-workloads-applications/05-quarkus-native-kubernetes|Quarkus Native 编译与 Kubernetes 部署指南]] |  | java, k8s |  |
-| 5 | [[domain-02-workloads-applications/06-java-cicd-tekton-argocd|Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南]] |  | java, k8s |  |
-| 6 | [[domain-02-workloads-applications/07-java-observability-kubernetes|Java 可观测性 on Kubernetes 实践指南]] |  | java, k8s, observability |  |
+| 1 | [[domain-02-workloads-applications/02-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]] |  | java, k8s, production |  |
+| 2 | [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|JVM GC 容器调优深度指南]] |  | java, k8s, performance |  |
+| 3 | [[domain-02-workloads-applications/04-java-operator-sdk-development.md|Java Operator SDK 开发指南]] |  | java, k8s |  |
+| 4 | [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|Quarkus Native 编译与 Kubernetes 部署指南]] |  | java, k8s |  |
+| 5 | [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南]] |  | java, k8s |  |
+| 6 | [[domain-02-workloads-applications/07-java-observability-kubernetes.md|Java 可观测性 on Kubernetes 实践指南]] |  | java, k8s, observability |  |
 
 ---
 
@@ -79,5 +79,5 @@ Java on Kubernetes — Java 应用部署与调优
 
 ## Related
 
-- [[domain-02-workloads-applications/05-quarkus-native-kubernetes|05-quarkus-native-kubernetes]]
-- [[domain-02-workloads-applications/04-java-operator-sdk-development|04-java-operator-sdk-development]]
+- [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
+- [[domain-02-workloads-applications/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]

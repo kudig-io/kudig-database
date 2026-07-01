@@ -48,7 +48,7 @@ created: "2026-05-23"
 
 ## 一、选择题（每题 2 分，共 40 分）
 
-### 1. 以下哪个不是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 的核心组件？
+### 1. 以下哪个不是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 的核心组件？
 
 A. kube-apiserver
 B. [[etcd|etcd]]

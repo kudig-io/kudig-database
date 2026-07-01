@@ -375,6 +375,9 @@ myapp     Deployment/myapp     `<unknown>`/50%   1         10        1          
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 检查 metrics-server 状态
 kubectl get pods -n kube-system -l k8s-app=metrics-server
@@ -408,6 +411,11 @@ kubectl get hpa -w
 #### 场景 2：修复 metrics-server
 
 **常见问题及解决：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 问题 1: metrics-server 无法启动 (证书问题)
@@ -444,6 +452,9 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 CPU 使用率超过目标但副本数不增加
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 查看 HPA 状态和条件
@@ -487,6 +498,9 @@ kubectl top pods -l <selector>
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 检查缩容稳定窗口
 kubectl get hpa <name> -o jsonpath='{.spec.behavior.scaleDown.stabilizationWindowSeconds}'
@@ -521,6 +535,9 @@ kubectl top pods -l <selector>
 副本数频繁增加减少
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 检查事件历史
@@ -574,6 +591,9 @@ Status:
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 检查 VPA Recommender 状态
 kubectl get pods -n kube-system -l app=vpa-recommender
@@ -602,6 +622,10 @@ kubectl rollout restart deployment vpa-recommender -n kube-system
 VPA 有推荐值但 Pod 资源未更新
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 检查 updateMode
@@ -632,6 +656,10 @@ kubectl get pod <new-pod-name> -o jsonpath='{.spec.containers[*].resources}'
 #### 场景 3：VPA 与 HPA 冲突
 
 **解决方案：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 方案 1: HPA 使用 CPU，VPA 只管理内存
@@ -842,21 +870,23 @@ kubectl scale deployment <name> --replicas=<n>
 ### 相关文档
 
 - [资源配额故障排查](./01-resources-quota-troubleshooting.md)
-- [Controller Manager 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting|04-controller-manager-troubleshooting]].md)
-- [Deployment 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|02-deployment-troubleshooting]].md)
+- [Controller Manager 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md|04-controller-manager-troubleshooting]].md)
+- [Deployment 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/04-pdb-troubleshooting|04-pdb-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/01-resources-quota-troubleshooting|01-resources-quota-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/03-cluster-autoscaler-troubleshooting|03-cluster-autoscaler-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/04-pdb-troubleshooting|04-pdb-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/04-pdb-troubleshooting.md|04-pdb-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/01-resources-quota-troubleshooting.md|01-resources-quota-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|03-cluster-autoscaler-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/04-pdb-troubleshooting.md|04-pdb-troubleshooting]]
+
+```

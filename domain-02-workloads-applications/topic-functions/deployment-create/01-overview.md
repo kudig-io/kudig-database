@@ -155,6 +155,9 @@ Kubernetes Deployment 是最核心的工作负载控制器之一，它通过管�
 
 ### 控制器链架构
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    Deployment 控制器链                                │
@@ -498,6 +501,9 @@ spec:
 
 ### 创建 Deployment 并观察 Informer 事件
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建
 kubectl apply -f deployment.yaml
@@ -557,6 +563,6 @@ kubectl get pods -l app=web-frontend -w
 
 - [`syncDeployment`](02-deployment-controller.md) — 主协调函数
 - [`rolloutRolling`](04-rolling-update.md) — RollingUpdate 策略
-- [`rolloutRecreate`]([[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|[[KUDIG Database|README]]]].md) — Recreate 策略
+- [`rolloutRecreate`]([[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|[[KUDIG Database|README]]]].md) — Recreate 策略
 - [`calculateStatus`](05-deployment-status.md) — Status 计算
 - [`rollbackToRevision`](06-revision-history.md) — 版本回滚

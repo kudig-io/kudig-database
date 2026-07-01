@@ -57,7 +57,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 企业级安全扫描架构 -->## 1. 企业级安全扫描架构
 
-#<!-- chunk: 1.1 安全扫描体系设计 -->## 1.1 安全扫描体系设计
+## 1.1 安全扫描体系设计
 
 ```mermaid
 graph TB
@@ -98,9 +98,9 @@ graph TB
     end
 ```
 
-#<!-- chunk: 1.2 多层防御体系 -->## 1.2 多层防御体系
+## 1.2 多层防御体系
 
-##<!-- chunk: 1.2.1 安全扫描层级 -->## 1.2.1 安全扫描层级
+## 1.2.1 安全扫描层级
 
 ```yaml
 # security-scanning-layers.yaml
@@ -209,9 +209,9 @@ scanning_pipeline:
 
 <!-- chunk: 2. Harbor安全扫描深度集成 -->## 2. Harbor安全扫描深度集成
 
-#<!-- chunk: 2.1 企业级Harbor部署 -->## 2.1 企业级Harbor部署
+## 2.1 企业级Harbor部署
 
-##<!-- chunk: 2.1.1 高可用Harbor集群 -->## 2.1.1 高可用Harbor集群
+## 2.1.1 高可用Harbor集群
 
 ```yaml
 # harbor-ha-deployment.yaml
@@ -375,7 +375,7 @@ spec:
           periodSeconds: 10
 ```
 
-##<!-- chunk: 2.1.2 安全扫描器集成配置 -->## 2.1.2 安全扫描器集成配置
+## 2.1.2 安全扫描器集成配置
 
 ```yaml
 # harbor-security-scanner.yaml
@@ -441,9 +441,9 @@ data:
         - "policy_violation"
 ```
 
-#<!-- chunk: 2.2 漏洞管理与修复 -->## 2.2 漏洞管理与修复
+## 2.2 漏洞管理与修复
 
-##<!-- chunk: 2.2.1 自动化漏洞修复流程 -->## 2.2.1 自动化漏洞修复流程
+## 2.2.1 自动化漏洞修复流程
 
 ```python
 # vulnerability-auto-remediation.py
@@ -747,9 +747,9 @@ if new_tag:
 
 <!-- chunk: 3. 企业级安全策略 -->## 3. 企业级安全策略
 
-#<!-- chunk: 3.1 镜像准入控制策略 -->## 3.1 镜像准入控制策略
+## 3.1 镜像准入控制策略
 
-##<!-- chunk: 3.1.1 动态准入策略引擎 -->## 3.1.1 动态准入策略引擎
+## 3.1.1 动态准入策略引擎
 
 ```yaml
 # admission-control-policies.yaml
@@ -842,9 +842,9 @@ data:
     }
 ```
 
-#<!-- chunk: 3.2 供应链安全治理 -->## 3.2 供应链安全治理
+## 3.2 供应链安全治理
 
-##<!-- chunk: 3.2.1 软件物料清单(SBOM)管理 -->## 3.2.1 软件物料清单(SBOM)管理
+## 3.2.1 软件物料清单(SBOM)管理
 
 ```python
 # sbom-supply-chain-security.py
@@ -1165,7 +1165,7 @@ print(json.dumps(report, indent=2, ensure_ascii=False))
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-22-container-image-management KUDIG Database — Global MOC
-- [[domain-13-container-runtime/README|[[Domain 22: 容器镜像管理 (Container Image Management)|Domain 22: 容器镜像管理 (Container Image Management)]]]]
+- [[domain-13-container-runtime/README.md|[[Domain 22: 容器镜像管理 (Container Image Management)|Domain 22: 容器镜像管理 (Container Image Management)]]]]
 - index.md|Domain-22 容器镜像管理 — 开源项目索引]]
 - Harbor企业级容器镜像仓库深度实践
 - distribution.md|Docker Registry企业级镜像分发深度实践]]

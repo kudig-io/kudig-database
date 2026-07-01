@@ -105,7 +105,7 @@ k8s_versions:
 
 <!-- chunk: 概述 -->## 概述
 
-#<!-- chunk: PodDisruptionBudget (PDB) -->## PodDisruptionBudget (PDB)
+## PodDisruptionBudget (PDB)
 
 PDB 用于限制主动驱逐 Pod 的数量，保证应用在集群维护（节点升级、节点排空）期间的高可用性。
 
@@ -132,7 +132,7 @@ PDB 用于限制主动驱逐 Pod 的数量，保证应用在集群维护（节�
 
 <!-- chunk: 完整字段说明 -->## 完整字段说明
 
-#<!-- chunk: 基础结构 -->## 基础结构
+## 基础结构
 
 ```yaml
 apiVersion: policy/v1
@@ -189,9 +189,9 @@ status:
     lastTransitionTime: "2026-02-10T10:00:00Z"
 ```
 
-#<!-- chunk: 字段详解 -->## 字段详解
+## 字段详解
 
-##<!-- chunk: selector -->## selector
+## selector
 
 ```yaml
 # 标签选择器 (与 Service/Deployment 选择器相同语法)
@@ -209,7 +209,7 @@ selector:
 - 与 Deployment/StatefulSet 的 selector 保持一致
 - 避免选择器过于宽泛（可能误保护其他应用）
 
-##<!-- chunk: minAvailable -->## minAvailable
+## minAvailable
 
 **整数模式**:
 ```yaml
@@ -223,7 +223,7 @@ minAvailable: "80%"  # 至少 80% Pod 可用
 # 例如: 5 个 Pod → ceil(5 * 0.8) = 4 个必须可用
 ```
 
-##<!-- chunk: maxUnavailable -->## maxUnavailable
+## maxUnavailable
 
 **整数模式**:
 ```yaml
@@ -241,7 +241,7 @@ maxUnavailable: "25%"  # 最多 25% Pod 不可用
 
 <!-- chunk: minAvailable vs maxUnavailable -->## minAvailable vs maxUnavailable
 
-#<!-- chunk: 选择策略 -->## 选择策略
+## 选择策略
 
 | 维度               | minAvailable                  | maxUnavailable                |
 |--------------------|-------------------------------|-------------------------------|
@@ -250,9 +250,9 @@ maxUnavailable: "25%"  # 最多 25% Pod 不可用
 | **副本数变化影响** | 固定值时: 扩容降低保护力度      | 固定值时: 扩容不影响保护力度    |
 | **百分比推荐**     | 业务系统常用 (80%)             | 离线任务常用 (30%)             |
 
-#<!-- chunk: 对比示例 -->## 对比示例
+## 对比示例
 
-##<!-- chunk: 场景1: 固定整数值 -->## 场景1: 固定整数值
+## 场景1: 固定整数值
 
 ```yaml
 # 配置A: minAvailable
@@ -291,7 +291,7 @@ spec:
 - `minAvailable` 固定值在副本数增加时保护力度减弱
 - `maxUnavailable` 固定值保持一致的保护力度（**推荐用于生产**）
 
-##<!-- chunk: 场景2: 百分比值 -->## 场景2: 百分比值
+## 场景2: 百分比值
 
 ```yaml
 # 配置A: minAvailable 百分比
@@ -330,7 +330,7 @@ spec:
 - `minAvailable: "75%"` 使用 `ceil` 向上取整（更保守）
 - `maxUnavailable: "25%"` 使用 `floor` 向下取整（更激进）
 
-##<!-- chunk: 场景3: 极端情况 -->## 场景3: 极端情况
+## 场景3: 极端情况
 
 **单副本应用**:
 ```yaml
@@ -363,7 +363,7 @@ spec:
 > **Feature Gate**: `PDBUnhealthyPodEvictionPolicy`  
 > **版本**: v1.26 Alpha → v1.27 Beta → v1.31 GA
 
-#<!-- chunk: 问题背景 -->## 问题背景
+## 问题背景
 
 **旧行为 (v1.25 及之前)**:
 - 不健康 Pod (Not Ready) 不计入 PDB 的 `disruptionsAllowed`
@@ -383,9 +383,9 @@ spec:
 # 结果: 只剩 2 个健康 Pod, 违反 minAvailable: 3!
 ```
 
-#<!-- chunk: 新策略详解 -->## 新策略详解
+## 新策略详解
 
-##<!-- chunk: IfHealthyPodCount (默认, 推荐) -->## IfHealthyPodCount (默认, 推荐)
+## IfHealthyPodCount (默认, 推荐)
 
 ```yaml
 apiVersion: policy/v1
@@ -407,7 +407,7 @@ spec:
 - **优点**: 真正保证可用性
 - **缺点**: 可能导致死锁（见下文）
 
-##<!-- chunk: AlwaysAllow (旧行为) -->## AlwaysAllow (旧行为)
+## AlwaysAllow (旧行为)
 
 ```yaml
 apiVersion: policy/v1
@@ -428,9 +428,9 @@ spec:
 - **适用场景**: 需要快速清理问题 Pod
 - **风险**: 滚动更新失败时可能导致服务中断
 
-#<!-- chunk: 死锁场景与解决方案 -->## 死锁场景与解决方案
+## 死锁场景与解决方案
 
-##<!-- chunk: 死锁案例 -->## 死锁案例
+## 死锁案例
 
 ```yaml
 # Deployment: 3 个副本
@@ -508,9 +508,12 @@ spec:
 
 <!-- chunk: 内部原理 -->## 内部原理
 
-#<!-- chunk: Eviction API 与 PDB 检查 -->## Eviction API 与 PDB 检查
+## Eviction API 与 PDB 检查
 
-##<!-- chunk: 驱逐流程 -->## 驱逐流程
+## 驱逐流程
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -537,7 +540,7 @@ spec:
    └─> 删除 Pod  └─> 返回 429  └─> drain 等待
 ```
 
-##<!-- chunk: disruptionsAllowed 计算 -->## disruptionsAllowed 计算
+## disruptionsAllowed 计算
 
 **算法**:
 ```go
@@ -587,9 +590,9 @@ disruptionsAllowed = 3 - 3 = 0
 # 结论: 不允许驱逐任何 Pod (包括不健康 Pod, 如果 policy=IfHealthyPodCount)
 ```
 
-#<!-- chunk: Voluntary vs Involuntary Disruption -->## Voluntary vs Involuntary Disruption
+## Voluntary vs Involuntary Disruption
 
-##<!-- chunk: Voluntary Disruption (主动中断) -->## Voluntary Disruption (主动中断)
+## Voluntary Disruption (主动中断)
 
 **PDB 生效的场景**:
 ```yaml
@@ -621,7 +624,7 @@ curl -X POST \
 # PDB 检查在此拦截
 ```
 
-##<!-- chunk: Involuntary Disruption (非主动中断) -->## Involuntary Disruption (非主动中断)
+## Involuntary Disruption (非主动中断)
 
 **PDB 不生效的场景**:
 ```yaml
@@ -643,9 +646,9 @@ kubectl delete node node-01
 
 **API 特征**: 直接调用 **DELETE API** (不经过 PDB 检查)
 
-#<!-- chunk: PDB Controller 工作机制 -->## PDB Controller 工作机制
+## PDB Controller 工作机制
 
-##<!-- chunk: Controller 循环 -->## Controller 循环
+## Controller 循环
 
 ```go
 // PDB Controller 主循环 (简化版)
@@ -667,7 +670,7 @@ func (c *DisruptionController) Run() {
 }
 ```
 
-##<!-- chunk: 状态更新示例 -->## 状态更新示例
+## 状态更新示例
 
 ```yaml
 # PDB 对象
@@ -701,7 +704,7 @@ status:
 
 <!-- chunk: 版本兼容性 -->## 版本兼容性
 
-#<!-- chunk: Feature Timeline -->## Feature Timeline
+## Feature Timeline
 
 | 版本  | 变化                                              |
 |-------|---------------------------------------------------|
@@ -712,7 +715,7 @@ status:
 | v1.31 | `unhealthyPodEvictionPolicy` GA                   |
 | v1.32 | 所有特性稳定                                       |
 
-#<!-- chunk: API 版本迁移 -->## API 版本迁移
+## API 版本迁移
 
 **v1.25 之前**:
 ```yaml
@@ -727,6 +730,10 @@ kind: PodDisruptionBudget
 ```
 
 **迁移命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 批量转换 PDB
 kubectl get pdb -o yaml | \
@@ -734,7 +741,7 @@ kubectl get pdb -o yaml | \
   kubectl apply -f -
 ```
 
-#<!-- chunk: unhealthyPodEvictionPolicy 兼容性 -->## unhealthyPodEvictionPolicy 兼容性
+## unhealthyPodEvictionPolicy 兼容性
 
 **v1.26 启用 Alpha 特性**:
 ```bash
@@ -760,7 +767,7 @@ spec:
 
 <!-- chunk: 生产案例 -->## 生产案例
 
-#<!-- chunk: 案例1: 集群升级保护 -->## 案例1: 集群升级保护
+## 案例1: 集群升级保护
 
 **场景**: Kubernetes 集群升级，需逐个排空节点。
 
@@ -809,6 +816,11 @@ spec:
 
 **升级流程**:
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 逐个节点排空
 for node in $(kubectl get nodes -o name); do
@@ -855,7 +867,7 @@ DESIRED:.status.desiredHealthy'
 # production   mysql-pdb        2    -    0        2        2  ← 阻止驱逐
 ```
 
-#<!-- chunk: 案例2: 节点排空最佳实践 -->## 案例2: 节点排空最佳实践
+## 案例2: 节点排空最佳实践
 
 **场景**: 节点维护前安全排空 Pod。
 
@@ -902,6 +914,9 @@ spec:
 
 **安全排空流程**:
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 #!/bin/bash
 # safe-drain.sh
@@ -937,6 +952,10 @@ fi
 
 **Drain 被阻止时的处理**:
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 查看阻止原因
 kubectl get events --sort-by='.lastTimestamp' | grep -i evict
@@ -958,10 +977,10 @@ kubectl describe pdb es-pdb -n logging
 kubectl patch pdb es-pdb -n logging -p '{"spec":{"minAvailable":3}}'
 
 # 3. 强制删除 (绕过 PDB, 危险!)
-kubectl delete pod es-2 -n logging --force --grace-period=0
+kubectl delete pod es-2 -n logging --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
-#<!-- chunk: 案例3: 高可用保障体系 -->## 案例3: 高可用保障体系
+## 案例3: 高可用保障体系
 
 **场景**: 多层级应用的完整 PDB 配置。
 
@@ -1063,7 +1082,7 @@ spec:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 1. 选择合适的策略 -->## 1. 选择合适的策略
+## 1. 选择合适的策略
 
 **推荐配置表**:
 
@@ -1076,7 +1095,7 @@ spec:
 | 缓存层           | `minAvailable: 1`         | 至少 1 个副本保证服务          |
 | 核心系统         | `minAvailable: "90%"`     | 极高可用性要求                |
 
-#<!-- chunk: 2. 避免过度保护 -->## 2. 避免过度保护
+## 2. 避免过度保护
 
 **错误示例**:
 ```yaml
@@ -1108,7 +1127,7 @@ spec:
       app: myapp
 ```
 
-#<!-- chunk: 3. 配合 Deployment 策略 -->## 3. 配合 Deployment 策略
+## 3. 配合 Deployment 策略
 
 **协同配置**:
 
@@ -1148,7 +1167,7 @@ Deployment.maxUnavailable ≤ PDB.maxUnavailable
 Deployment.maxUnavailable ≤ (totalReplicas - PDB.minAvailable)
 ```
 
-#<!-- chunk: 4. 监控与告警 -->## 4. 监控与告警
+## 4. 监控与告警
 
 **Prometheus 告警规则**:
 
@@ -1194,7 +1213,7 @@ groups:
       summary: "PDB 可能配置过于严格"
 ```
 
-#<!-- chunk: 5. 文档和标注 -->## 5. 文档和标注
+## 5. 文档和标注
 
 **推荐在 PDB 中添加注释**:
 
@@ -1221,9 +1240,13 @@ spec:
 
 <!-- chunk: 常见问题 -->## 常见问题
 
-#<!-- chunk: Q1: drain 一直卡住不动? -->## Q1: drain 一直卡住不动?
+## Q1: drain 一直卡住不动?
 
 **症状**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 kubectl drain node-01 --ignore-daemonsets
 # 卡住,无输出
@@ -1259,6 +1282,11 @@ READY:.status.conditions[?(@.type==\"Ready\")].status
 
 **解决方案**:
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方案1: 等待 Pod 恢复健康 (推荐)
 kubectl get pods -l app=myapp --watch
@@ -1271,10 +1299,10 @@ kubectl delete pdb myapp-pdb
 # 维护完成后重新创建
 
 # 方案4: 强制删除 Pod (危险!)
-kubectl delete pod myapp-abc123 --force --grace-period=0
+kubectl delete pod myapp-abc123 --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
-#<!-- chunk: Q2: PDB 与单副本服务的矛盾? -->## Q2: PDB 与单副本服务的矛盾?
+## Q2: PDB 与单副本服务的矛盾?
 
 **问题配置**:
 ```yaml
@@ -1319,7 +1347,7 @@ spec:
 # 接受维护期间的短暂服务中断
 ```
 
-#<!-- chunk: Q3: 滚动更新时 PDB 报错? -->## Q3: 滚动更新时 PDB 报错?
+## Q3: 滚动更新时 PDB 报错?
 
 **症状**:
 ```bash
@@ -1370,9 +1398,13 @@ spec:
   unhealthyPodEvictionPolicy: AlwaysAllow
 ```
 
-#<!-- chunk: Q4: 如何测试 PDB 是否生效? -->## Q4: 如何测试 PDB 是否生效?
+## Q4: 如何测试 PDB 是否生效?
 
 **测试脚本**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 #!/bin/bash
@@ -1444,7 +1476,7 @@ kubectl delete deployment $APP -n $NAMESPACE
 kubectl delete pdb $APP-pdb -n $NAMESPACE
 ```
 
-#<!-- chunk: Q5: unhealthyPodEvictionPolicy 何时使用 AlwaysAllow? -->## Q5: unhealthyPodEvictionPolicy 何时使用 AlwaysAllow?
+## Q5: unhealthyPodEvictionPolicy 何时使用 AlwaysAllow?
 
 **使用场景**:
 
@@ -1494,7 +1526,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考

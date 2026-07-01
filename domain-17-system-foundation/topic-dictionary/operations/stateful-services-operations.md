@@ -34,6 +34,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 有状态服务运维
@@ -183,6 +184,10 @@ kubectl get sc -o custom-columns=NAME:.metadata.name,EXPAND:.allowVolumeExpansio
 - [Kubernetes StatefulSet Basics](https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/)
 - 相关主题：[StatefulSets](../workloads/statefulsets.md) · [Persistent Volumes](../storage/persistent-volumes.md) · [备份与灾难恢复](backup-disaster-recovery.md) · [Operator Pattern](../platform-engineering/operator-pattern.md)
 
+## 参考链接
+
+- [Stateful Services Operations]()
+
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

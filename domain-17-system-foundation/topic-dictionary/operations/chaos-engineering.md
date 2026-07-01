@@ -32,13 +32,14 @@ prerequisites:
 - etcd-basics
 - kafka-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 混沌工程（Chaos Engineering）
 
 ## 概述
 
-**混沌工程**是一种通过在生产环境中有控制地注入问题，来验证系统韧性和发现潜在弱点的工程实践。其核心理念是"**主动制造问题，以避免被动承受问题**"。2026 年的 [[Kubernetes|Kubernetes]] 生产环境中，混沌工程已成为 SRE 成熟度模型中的关键能力，主流工具包括 **[[Litmus|Litmus]]、[[Chaos Mesh|Chaos Mesh]]、Gremlin** 和 Netflix 开源的 **Chaos Monkey**。
+**混沌工程**是一种通过在生产环境中有控制地注入问题，来验证系统韧性和发现潜在弱点的工程实践。其核心理念是"**主动制造问题，以避免被动承受问题**"。2026 年的 [[Kubernetes|Kubernetes]] 生产环境中，混沌工程已成为 SRE 成熟度模型中的关键能力，主流工具包括 **[[Litmus|Litmus]]、Chaos Mesh、Gremlin** 和 Netflix 开源的 **Chaos Monkey**。
 
 ## 核心概念/原理
 
@@ -161,6 +162,10 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # Litmus: 查看混沌实验状态
 kubectl get chaosengine -A
@@ -189,6 +194,10 @@ kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333
 - [Chaos Mesh Documentation](https://chaos-mesh.org/docs/)
 - 相关主题：[Disruptions](../workloads/disruptions.md) · [Pod Lifecycle](../workloads/pod-lifecycle.md) · [Horizontal Pod Autoscaling](../workloads/horizontal-pod-autoscaling.md)
 
+## 参考链接
+
+- [Chaos Engineering]()
+
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

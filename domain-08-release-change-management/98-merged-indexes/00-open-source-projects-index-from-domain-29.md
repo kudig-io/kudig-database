@@ -95,7 +95,7 @@ created: "2026-05-23"
 ## Obsidian 相关文档
 
 - domain-29-automated-testing-quality MOC
-- [[domain-08-release-change-management/README|Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
+- [[domain-08-release-change-management/README.md|Domain 08: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
 - Selenium 企业级自动化测试平台
 - JUnit 5 企业级单元测试框架深度实践
 - 企业级AI测试与质量保障深度实践

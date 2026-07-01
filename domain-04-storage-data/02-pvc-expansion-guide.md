@@ -5,6 +5,7 @@ tags: ["domain-04", "存储", "PVC", "扩容", "云盘", "NAS", "CSI", "visibili
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 status: reviewed
 ---
 
@@ -46,6 +47,10 @@ allowVolumeExpansion: true   # 必须设置为 true
 
 Pod 无需重启，存储层直接扩展容量：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 修改 PVC 的 spec.resources.requests.storage
 kubectl patch pvc my-pvc -p '{"spec":{"resources":{"requests":{"storage":"100Gi"}}}}'
@@ -65,6 +70,10 @@ kubectl exec -it my-pod -- resize2fs /dev/sda
 ### 离线扩容
 
 需要停止 Pod，解除挂载后扩容：
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 缩容 StatefulSet 至 0
@@ -103,6 +112,9 @@ kubectl scale sts my-app --replicas=1
 
 NAS 扩容本质是修改文件系统配额：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # NAS PVC 扩容后无需 resize 文件系统
 kubectl patch pvc nas-pvc -p '{"spec":{"resources":{"requests":{"storage":"500Gi"}}}}'
@@ -123,6 +135,9 @@ NAS 扩容通常即时生效，但受限于 NAS 实例的总容量规格。
 ## 替代方案：新建 PVC + 数据迁移
 
 当扩容不可行时（如本地盘、不支持扩容的存储），采用替代方案：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 创建新 PVC（更大容量）
@@ -151,5 +166,5 @@ kubectl apply -f new-larger-pvc.yaml
 
 - [[storage-tool-evolution]] — 存储工具的演进
 - [[persistent-volume-claim]] — PVC 原理与配置
-- [[domain-16-database-middleware/01-database-on-kubernetes-guide|database-on-kubernetes-guide]] — K8s 上的数据库运行指南
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting|statefulset-troubleshooting]] — StatefulSet 问题排查
+- [[domain-16-database-middleware/01-database-on-kubernetes-guide.md|database-on-kubernetes-guide]] — K8s 上的数据库运行指南
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|statefulset-troubleshooting]] — StatefulSet 问题排查

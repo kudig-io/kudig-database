@@ -4,6 +4,7 @@ category: concepts
 tags: [hardware, dpu, gpu, arm64, linux-kernel, ebpf, cgroup, k8s]
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # 系统基础：硬件与内核
@@ -125,9 +126,9 @@ Kubernetes Audit Logging 提供四个级别：
 
 ## 四、与其他概念的关联
 
-- **容器运行时演进** → [[concepts/container-runtime-evolution]]：机密容器（CoCo）依赖 Kata Containers 运行时；cgroup v2 影响所有运行时的资源限制实现。
-- **AI/ML 基础设施** → [[concepts/k8s-ai-ml-infrastructure]]：GPU 虚拟化、KSM 内存去重、NUMA 拓扑管理直接支撑 AI 训练/推理调度。
-- **安全合规** → [[concepts/k8s-security-compliance]]：User Namespaces GA、机密计算、审计日志是合规基线的核心组件。
+- **容器运行时演进** → [[concepts/container-runtime-evolution.md|container runtime evolution]]：机密容器（CoCo）依赖 Kata Containers 运行时；cgroup v2 影响所有运行时的资源限制实现。
+- **AI/ML 基础设施** → [[concepts/k8s-ai-ml-infrastructure.md|k8s ai ml infrastructure]]：GPU 虚拟化、KSM 内存去重、NUMA 拓扑管理直接支撑 AI 训练/推理调度。
+- **安全合规** → [[concepts/k8s-security-compliance.md|k8s security compliance]]：User Namespaces GA、机密计算、审计日志是合规基线的核心组件。
 
 ---
 

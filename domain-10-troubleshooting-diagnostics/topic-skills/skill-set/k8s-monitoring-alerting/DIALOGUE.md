@@ -4,6 +4,7 @@ category: "troubleshooting"
 tags: ["observability", "remote-consultant"]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 dialogue_id: "DIALOGUE-SKILL-MON-001"
 skill_id: "SKILL-MON-001"
 version: "1.0.0"
@@ -11,11 +12,11 @@ role: "remote-consultant"
 language: "zh"
 summary: "监控告警问题的远程顾问对话脚本，覆盖Prometheus、Grafana、Alertmanager排查。"
 relationships:
-  - target: "[[entities/deployment]]"
+  - target: "[[entities/deployment.md]]"
     type: uses
-  - target: "[[entities/kubernetes]]"
+  - target: "[[entities/kubernetes.md]]"
     type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces]]"
+  - target: "[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md]]"
     type: uses
 ---
 
@@ -53,7 +54,7 @@ relationships:
 > ```bash
 > kubectl get pods -n monitoring -l app=alertmanager
 > ```
-> **如果无法执行**（不知道 monitoring namespace）→ `kubectl get pods --all-[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces|namespaces]] | grep -i alertmanager`
+> **如果无法执行**（不知道 monitoring namespace）→ `kubectl get pods --all-[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md|namespaces]] | grep -i alertmanager`
 > **如果 grep 无结果** → `kubectl get pods --all-namespaces | grep -E "alert|prometheus|grafana"`
 > 请把 Pod 状态、重启次数贴给我。
 
@@ -180,7 +181,7 @@ relationships:
 >    **如果 Pod 已崩溃无法 exec** → `kubectl get pvc <prometheus-pvc-name> -n monitoring -o yaml | grep -A 5 resources`
 >    **如果不知道 PVC 名** → `kubectl get pvc -n monitoring`
 > 2. 检查 Prometheus 资源限制：`kubectl get prometheus -n monitoring -o yaml | grep -A 10 resources`
->    **如果无 prometheus CRD** → `kubectl get [[entities/deployment|deployment]] -n monitoring | grep prometheus`
+>    **如果无 prometheus CRD** → `kubectl get [[entities/deployment.md|deployment]] -n monitoring | grep prometheus`
 >    **如果是 Deployment 部署** → `kubectl get deployment <prometheus-deploy> -n monitoring -o yaml | grep -A 10 resources`
 > 3. 检查 TSDB 状态（如果 Pod 能启动）：`kubectl port-forward -n monitoring svc/prometheus-k8s 9090:9090 &`
 >    **如果无法 port-forward** → `kubectl exec <prometheus-pod> -n monitoring -- wget -qO- http://localhost:9090/api/v1/status/tsdb`
@@ -378,7 +379,7 @@ relationships:
 > 请告诉我规则列表中是否有错误标记、PromQL 在 Prometheus 中是否能正常查询。
 
 **修复方案**：
-> 修正规则中的 PromQL：`kubectl patch prometheusrules <rule-name> -n monitoring --type='json' -p='[{"op": "replace", "path": "/spec/groups/0/rules/0/expr", "value": "up{job=\"[[entities/kubernetes|kubernetes]]-pods\"} == 0"}]'`
+> 修正规则中的 PromQL：`kubectl patch prometheusrules <rule-name> -n monitoring --type='json' -p='[{"op": "replace", "path": "/spec/groups/0/rules/0/expr", "value": "up{job=\"[[entities/kubernetes.md|kubernetes]]-pods\"} == 0"}]'`
 > **如果 patch 复杂** → `kubectl edit prometheusrules <rule-name> -n monitoring`
 
 **分支决策**：
@@ -619,6 +620,10 @@ kubectl top nodes
 **步骤 4：阿里云特定修复**
 
 如ARMS探针异常：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 重启ARMS探针
 kubectl delete pod -n kube-system -l app=arms-pilot
@@ -666,6 +671,11 @@ aliyun armsx QueryAppMetadata --AppName <app>
 
 ## 附录：常用命令速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # Prometheus 状态
 kubectl get pods -n monitoring -l app=prometheus
@@ -697,5 +707,5 @@ kubectl patch prometheusrules <name> -n <namespace> --type='json' -p='[{"op": "r
 *对话脚本版本: 1.0.0 | 技能: K8s Monitoring & Alerting Failure 诊断与修复 | 模式: L2-semi-auto*
 ## Related
 
-- [[entities/cilium|Cilium (entities)]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/pods|Pods]]
+- [[entities/cilium.md|Cilium (entities)]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/pods.md|Pods]]

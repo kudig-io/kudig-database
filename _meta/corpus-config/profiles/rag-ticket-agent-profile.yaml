@@ -1,0 +1,155 @@
+# 工单智能体语料配置（阿里云专有云版）
+# 用途：构建面向阿里云专有云 K8s 运维工单的智能 Agent
+# 核心原则：
+#   1. 优先摄入工单闭环样本（ticket-cases）
+#   2. 优先摄入阿里云/专有云相关内容
+#   3. 核心 Skill 和 FTA 作为诊断骨架
+#   4. 排除培训、讲师、演示等低信噪比内容
+
+name: ticket-agent-apsara-stack
+description: "面向阿里云专有云 K8s 运维工单智能体的语料配置"
+use_case: "工单分类、诊断推理、修复建议、客户回复、升级判断"
+
+# 第一层：工单闭环样本（最高优先级）
+ticket_cases:
+  - path: domain-11-production-operations/ticket-cases/
+    priority: critical
+    chunking: by_section
+    note: "工单描述 → 分类 → 诊断 → 修复 → 验证 → 回复，最贴近工单场景"
+
+# 第二层：工单处理专属知识
+workflow:
+  - path: domain-11-production-operations/ticket-routing-rules.md
+    priority: critical
+    chunking: by_h2
+  - path: domain-11-production-operations/escalation-playbook.md
+    priority: critical
+    chunking: by_h2
+  - path: domain-11-production-operations/reply-templates/
+    priority: high
+    chunking: by_section
+
+# 第三层：核心诊断骨架
+core:
+  - path: domain-10-troubleshooting-diagnostics/topic-fta/list/
+    priority: critical
+    chunking: by_h3
+    note: "44 个组件故障树，推理骨架"
+  - path: domain-10-troubleshooting-diagnostics/topic-skills/skill-set/
+    priority: critical
+    chunking: by_section
+    note: "17 个诊断-修复 Skill"
+  - path: domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/
+    priority: high
+    chunking: by_h2
+
+# 第四层：阿里云 / 专有云知识（优先于其他云厂商）
+alibaba_cloud:
+  - path: domain-12-cloud-providers/01-alibaba-cloud/
+    priority: high
+    chunking: by_h2
+  - path: domain-03-networking-traffic/topic-terway/
+    priority: high
+    chunking: by_h2
+  - path: domain-04-storage-data/01-k8s-storage/
+    priority: high
+    chunking: by_h2
+    note: "云盘 CSI、NAS、OSS 与专有云存储对接"
+
+# 第五层：提炼知识层（concepts/entities/skills）
+distilled:
+  - path: concepts/
+    priority: high
+    chunking: by_h2
+  - path: skills/
+    priority: high
+    chunking: by_h2
+  - path: entities/
+    priority: medium
+    chunking: by_h2
+
+# 第六层：源文档层（深度兜底）
+source_docs:
+  - path: domain-01-cluster-fundamentals/
+    priority: medium
+    chunking: by_h2
+  - path: domain-02-workloads-applications/
+    priority: medium
+    chunking: by_h2
+  - path: domain-03-networking-traffic/
+    priority: medium
+    chunking: by_h2
+  - path: domain-04-storage-data/
+    priority: medium
+    chunking: by_h2
+  - path: domain-05-security-compliance/
+    priority: medium
+    chunking: by_h2
+  - path: domain-06-observability/
+    priority: medium
+    chunking: by_h2
+  - path: domain-07-platform-engineering/
+    priority: medium
+    chunking: by_h2
+  - path: domain-08-release-change-management/
+    priority: medium
+    chunking: by_h2
+  - path: domain-09-reliability-engineering/
+    priority: medium
+    chunking: by_h2
+  - path: domain-11-production-operations/
+    priority: medium
+    chunking: by_h2
+  - path: domain-13-container-runtime/
+    priority: low
+    chunking: by_h2
+
+# 显式排除
+exclude:
+  # 构建产物与缓存
+  - "*.pdf"
+  - "*.png"
+  - "*.xlsx"
+  - ".git/"
+  - ".ruff_cache/"
+  - ".venv/"
+
+  # 元数据与报告（规划文档自身也不导入语料）
+  - "_reports/"
+  - "_meta/"
+  - "_staging/"
+  - "_raw/"
+  - "CHANGELOG.md"
+  - "ENHANCEMENT-RECORD.md"
+  - "QUALITY_REPORT*"
+  - "*.base"
+  - ".obsidian/"
+
+  # 非阿里云云厂商（降低优先级，必要时只保留 overview）
+  - "domain-12-cloud-providers/02-aws-eks/"
+  - "domain-12-cloud-providers/03-google-cloud-gke/"
+  - "domain-12-cloud-providers/04-azure-aks/"
+  - "domain-12-cloud-providers/06-tencent-tke/"
+  - "domain-12-cloud-providers/07-huawei-cce/"
+  - "domain-12-cloud-providers/08-multi-cloud/"
+  - "domain-12-cloud-providers/09-ucloud-uk8s/"
+  - "domain-12-cloud-providers/10-ibm-iks/"
+
+  # 低信噪比内容
+  - "**/*-archive/"
+  - "**/archive/"
+  - "domain-11-production-operations/topic-best-practices/"
+  - "domain-11-production-operations/topic-k8s-lecturer/"
+  - "domain-11-production-operations/topic-learn/"
+  - "domain-11-production-operations/topic-presentations/"
+  - "domain-11-production-operations/topic-publish/"
+  - "domain-11-production-operations/journal/"
+  - "domain-11-production-operations/projects/"
+  - "domain-19-landscape-references/topic-release-notes/"
+  - "domain-19-landscape-references/topic-index/"
+  - "domain-19-landscape-references/01-cncf-landscape/sandbox/"
+  - "domain-17-system-foundation/topic-dictionary/"
+  - ".zread/"
+  - ".wiki-meta/"
+  - "_archives/"
+  - "_meta/corpus-config/profiles/*.yaml"

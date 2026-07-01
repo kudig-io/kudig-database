@@ -114,14 +114,20 @@ k8s_versions:
 
 ## kubeadm 删除流程（对比基准）
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 ┌──────────────────────────────────────────────────────────────────┐
 │  kubeadm 集群删除（全手动）                                       │
 ├──────────────────────────────────────────────────────────────────┤
 │  1. kubectl drain <node>         ← 手动驱逐                      │
 │  2. kubectl delete node <node>   ← 手动删除 Node 对象             │
-│  3. kubeadm reset -f             ← 手动在每台节点执行             │
-│  4. etcdctl member remove        ← 手动移除 etcd 成员             │
+│  3. kubeadm reset -f             ← 手动在每台节点执行             │  # ⚠️ 清理节点所有 K8s 配置
+│  4. etcdctl member remove        ← 手动移除 etcd 成员             │  # ⚠️ 移除 etcd 成员，可能丢数据
 │  5. iptables/ipvs 清理           ← 手动清理网络规则               │
 │  6. CNI/数据目录清理             ← 手动清理                       │
 │  7. LB/DNS 清理                  ← 手动清理                       │
@@ -368,6 +374,12 @@ tencentcloud cli cvm DeleteCluster --cluster-id cls-xxx
 
 ## 混合场景：云托管 + kubeadm Worker 节点
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │  混合集群删除流程                                              │
@@ -376,8 +388,8 @@ tencentcloud cli cvm DeleteCluster --cluster-id cls-xxx
 │  Step 1: 删除 kubeadm 管理的 Worker 节点                      │
 │    kubectl drain <self-managed-node>                           │
 │    kubectl delete node <self-managed-node>                     │
-│    ssh <node> "kubeadm reset -f"                              │
-│    ssh <node> "iptables -F && rm -rf /etc/cni/net.d"         │
+│    ssh <node> "kubeadm reset -f"                              │  # ⚠️ 清理节点所有 K8s 配置
+│    ssh <node> "iptables -F && rm -rf /etc/cni/net.d"         │  # ⚠️ 删除系统/数据文件
 │                                                                │
 │  Step 2: 删除云托管集群                                       │
 │    eksctl delete cluster / az aks delete / ...                │
@@ -454,6 +466,6 @@ tencentcloud cli cvm DeleteCluster --cluster-id cls-xxx
 
 - [[README|README]]
 - [[log|log]]
-- [[man/INSTALL|INSTALL]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[scripts/man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

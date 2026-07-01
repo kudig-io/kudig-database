@@ -399,6 +399,9 @@ ls -la /etc/kubernetes/pki/apiserver-etcd-client.*
 
 #### 问题3: 认证授权失败
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 诊断步骤:
 # 1. 测试匿名访问
@@ -534,6 +537,10 @@ rm /var/lib/etcd/test
 
 #### 问题1: Leader丢失
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 症状识别:
 # - etcdctl endpoint status 显示没有leader
@@ -606,6 +613,9 @@ ETCDCTL_API=3 etcdctl --endpoints=$ENDPOINTS $CERTS alarm disarm
 ```
 
 #### 问题3: 网络分区
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 症状:
@@ -948,7 +958,7 @@ kubectl get networkpolicies -n <namespace>
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -959,9 +969,9 @@ kubectl get networkpolicies -n <namespace>
 - 控制平面性能基准测试 (Control Plane Performance Benchmarking)
 - 控制平面扩缩容指南 (Control Plane Scalability Guide)
 - 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## Related
 

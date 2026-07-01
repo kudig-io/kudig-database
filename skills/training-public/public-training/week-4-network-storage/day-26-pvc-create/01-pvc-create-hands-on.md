@@ -122,6 +122,9 @@ spec:
       storage: 5Gi
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 应用配置
 kubectl apply -f pv-static.yaml
@@ -151,7 +154,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: standard
-provisioner: [[entities/kubernetes|kubernetes]].io/gce-pd  # 或 aws-ebs / kubernetes.io/azure-disk
+provisioner: [[entities/kubernetes.md|kubernetes]].io/gce-pd  # 或 aws-ebs / kubernetes.io/azure-disk
 parameters:
   type: pd-standard  # SSD: pd-ssd
   fstype: ext4
@@ -173,6 +176,9 @@ spec:
     requests:
       storage: 20Gi
 ```
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 应用配置
@@ -218,6 +224,11 @@ spec:
       persistentVolumeClaim:
         claimName: dynamic-pvc
 ```
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 kubectl apply -f pod-pvc.yaml
@@ -361,6 +372,11 @@ spec:
 
 ### 4.1 安全删除流程
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 确认没有 Pod 使用 PVC
 kubectl get pods -A -o json | jq -r '.items[] |
@@ -502,6 +518,10 @@ aws iam get-role-policy --role-name <node-role> --policy-name <policy-name>
 ## 6. 存储扩容
 
 ### 6.1 PVC 在线扩容
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # StorageClass 需支持 allowVolumeExpansion: true

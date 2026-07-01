@@ -36,13 +36,14 @@ prerequisites:
 - mysql-basics
 - backup-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 备份与灾难恢复（Backup & Disaster Recovery）
 
 ## 概述
 
-在 [[Kubernetes|Kubernetes]] 生产环境中，**备份与灾难恢复（BDR）** 是保障业务连续性的最后防线。2026 年的最佳实践要求企业不仅备份应用数据，还要备份**[[etcd|etcd]] 集群状态、Kubernetes 资源定义、[[Secrets|Secrets]] 以及容器镜像**。一套完整的 BDR 策略应涵盖 **恢复时间目标（RTO）** 和 **恢复点目标（RPO）**，并通过定期的灾难恢复演练验证其有效性。
+在 [[Kubernetes|Kubernetes]] 生产环境中，**备份与灾难恢复（BDR）** 是保障业务连续性的最后防线。2026 年的最佳实践要求企业不仅备份应用数据，还要备份**[[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]] 集群状态、Kubernetes 资源定义、[[Secrets|Secrets]] 以及容器镜像**。一套完整的 BDR 策略应涵盖 **恢复时间目标（RTO）** 和 **恢复点目标（RPO）**，并通过定期的灾难恢复演练验证其有效性。
 
 ## 核心概念/原理
 
@@ -178,6 +179,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+
 ```bash
 # etcd 备份
 ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d%H%M).db \
@@ -187,7 +191,7 @@ ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d%H%M).db \
   --key=/etc/kubernetes/pki/etcd/server.key
 
 # etcd 恢复
-ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-snapshot.db --data-dir=/var/lib/etcd-restored
+ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-snapshot.db --data-dir=/var/lib/etcd-restored  # ⚠️ 覆盖 etcd 数据，集群状态回退
 
 # Velero: 创建备份
 velero backup create prod-backup --include-namespaces production --snapshot-volumes
@@ -209,7 +213,11 @@ velero backup get && velero restore get
 - [Kasten K10 Documentation](https://docs.kasten.io/)
 - 相关主题：[有状态服务运维](stateful-services-operations.md) · [Persistent Volumes](../storage/persistent-volumes.md) · [Volume Snapshots](../storage/volume-snapshots.md)
 
+## 参考链接
+
+- [Backup Disaster Recovery]()
+
 ## Related
 
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

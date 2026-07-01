@@ -135,6 +135,9 @@ echo -e "\n=== 检查完成 ==="
 
 ### 1.2 备份
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 备份 etcd
 ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}')
@@ -157,6 +160,9 @@ kubectl get crd -o yaml > /backup/k8s-$(date +%Y%m%d)/crds.yaml
 ## 二、控制平面升级
 
 ### 2.1 kubeadm 升级
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 升级 kubeadm
@@ -200,6 +206,10 @@ kubeadm upgrade node
 ## 三、工作节点升级
 
 ### 3.1 驱逐和升级
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -264,6 +274,9 @@ done
 
 ### 4.1 版本验证
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 echo "=== 升级后验证 ==="
 
@@ -291,6 +304,9 @@ kubectl exec -n kube-system etcd-$(hostname) -- etcdctl \
 ```
 
 ### 4.2 功能验证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. Sidecar 容器 (v1.33 GA)
@@ -349,7 +365,10 @@ spec:
     image: myapp:v1.0
 ```
 
-### 5.2 [[Dynamic Resource Allocation|Dynamic Resource Allocation]] (需显式启用)
+### 5.2 [[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]] (需显式启用)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 修改 kube-apiserver 和 kube-scheduler 的 Feature Gate
@@ -374,6 +393,11 @@ systemctl restart kubelet
 ```
 
 ### 5.4 In-Place Pod Vertical Scaling (Alpha, 实验性)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 启用 Feature Gate
@@ -422,6 +446,10 @@ kubectl patch pod resize-test --patch '
 
 ### 5.5 nftables kube-proxy (Beta, 实验性)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 修改 kube-proxy ConfigMap
 kubectl edit cm kube-proxy -n kube-system
@@ -440,6 +468,9 @@ kubectl rollout restart ds kube-proxy -n kube-system
 
 ### 6.1 控制平面回滚
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 如果升级失败，回滚到 v1.32
 kubeadm upgrade apply v1.32.x --yes
@@ -452,6 +483,9 @@ systemctl restart kubelet
 ```
 
 ### 6.2 etcd 回滚
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 使用升级前快照恢复
@@ -495,7 +529,7 @@ kubectl exec -n kube-system etcd-$(hostname) -- etcdctl \
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析
@@ -513,3 +547,5 @@ kubectl exec -n kube-system etcd-$(hostname) -- etcdctl \
 - 99-kubernetes-v1.33-quick-reference-card
 - 99-kubernetes-version-lifecycle-support-policy
 - 01-kubernetes-architecture-overview
+
+```

@@ -101,7 +101,7 @@ k8s_versions:
 
 <!-- chunk: 1. 零信任安全架构概述 -->## 1. 零信任安全架构概述
 
-#<!-- chunk: 1.1 零信任核心原则 -->## 1.1 零信任核心原则
+## 1.1 零信任核心原则
 
 ```yaml
 零信任基本原则:
@@ -113,27 +113,27 @@ k8s_versions:
   6. 自动化响应 (Automated Response)
 ```
 
-#<!-- chunk: 1.2 Kubernetes安全挑战 -->## 1.2 Kubernetes安全挑战
+## 1.2 Kubernetes安全挑战
 
 ```markdown
 <!-- chunk: 🚨 主要安全风险 -->## 🚨 主要安全风险
 
-#<!-- chunk: 控制平面风险 -->## 控制平面风险
+## 控制平面风险
 - API Server未授权访问
 - etcd数据泄露
 - 控制平面组件漏洞
 
-#<!-- chunk: 工作负载风险 -->## 工作负载风险
+## 工作负载风险
 - 容器逃逸攻击
 - 恶意镜像部署
 - 特权容器滥用
 
-#<!-- chunk: 网络风险 -->## 网络风险
+## 网络风险
 - 横向移动攻击
 - 服务间未授权访问
 - 网络嗅探和中间人攻击
 
-#<!-- chunk: 数据风险 -->## 数据风险
+## 数据风险
 - 敏感配置泄露
 - 存储卷数据暴露
 - 日志信息泄露
@@ -141,9 +141,9 @@ k8s_versions:
 
 <!-- chunk: 2. 身份认证与授权体系 -->## 2. 身份认证与授权体系
 
-#<!-- chunk: 2.1 多因素身份认证 (MFA) -->## 2.1 多因素身份认证 (MFA)
+## 2.1 多因素身份认证 (MFA)
 
-##<!-- chunk: OIDC集成配置 -->## OIDC集成配置
+## OIDC集成配置
 ```yaml
 # Dex OIDC Provider配置
 apiVersion: v1
@@ -185,7 +185,7 @@ data:
       secret: $KUBERNETES_CLIENT_SECRET
 ```
 
-##<!-- chunk: Kubernetes API Server配置 -->## Kubernetes API Server配置
+## Kubernetes API Server配置
 ```yaml
 # API Server OIDC配置
 apiVersion: v1
@@ -206,9 +206,9 @@ spec:
     - --authentication-token-webhook-config-file=/etc/kubernetes/webhook-config.yaml
 ```
 
-#<!-- chunk: 2.2 细粒度RBAC策略 -->## 2.2 细粒度RBAC策略
+## 2.2 细粒度RBAC策略
 
-##<!-- chunk: 分层权限模型 -->## 分层权限模型
+## 分层权限模型
 ```yaml
 # 企业级RBAC权限体系
 apiVersion: rbac.authorization.k8s.io/v1
@@ -242,7 +242,12 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-##<!-- chunk: 动态权限管理 -->## 动态权限管理
+## 动态权限管理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 基于时间的权限控制脚本
 #!/bin/bash
@@ -278,9 +283,9 @@ echo "0 */${HOURS_VALID} * * * kubectl delete rolebinding temp-access-${USER} -n
 
 <!-- chunk: 3. 网络微隔离与流量控制 -->## 3. 网络微隔离与流量控制
 
-#<!-- chunk: 3.1 网络策略实施 -->## 3.1 网络策略实施
+## 3.1 网络策略实施
 
-##<!-- chunk: 默认拒绝策略 -->## 默认拒绝策略
+## 默认拒绝策略
 ```yaml
 # 默认网络策略 - 默认拒绝所有流量
 apiVersion: networking.k8s.io/v1
@@ -295,7 +300,7 @@ spec:
   - Egress
 ```
 
-##<!-- chunk: 应用级网络策略 -->## 应用级网络策略
+## 应用级网络策略
 ```yaml
 # 微服务间通信策略
 apiVersion: networking.k8s.io/v1
@@ -338,9 +343,9 @@ spec:
       port: 53  # DNS
 ```
 
-#<!-- chunk: 3.2 服务网格安全 -->## 3.2 服务网格安全
+## 3.2 服务网格安全
 
-##<!-- chunk: Istio安全配置 -->## Istio安全配置
+## Istio安全配置
 ```yaml
 # Istio安全策略配置
 apiVersion: security.istio.io/v1beta1
@@ -365,7 +370,7 @@ spec:
       values: ["developers"]
 ```
 
-##<!-- chunk: mTLS配置 -->## mTLS配置
+## mTLS配置
 ```yaml
 # 启用服务间mTLS
 apiVersion: security.istio.io/v1beta1
@@ -391,9 +396,9 @@ spec:
 
 <!-- chunk: 4. 镜像安全与供应链保护 -->## 4. 镜像安全与供应链保护
 
-#<!-- chunk: 4.1 镜像安全扫描 -->## 4.1 镜像安全扫描
+## 4.1 镜像安全扫描
 
-##<!-- chunk: Trivy集成配置 -->## Trivy集成配置
+## Trivy集成配置
 ```yaml
 # Trivy Operator部署
 apiVersion: v1
@@ -437,7 +442,7 @@ spec:
           value: "true"
 ```
 
-##<!-- chunk: 镜像签名验证 -->## 镜像签名验证
+## 镜像签名验证
 ```yaml
 # Cosign签名验证策略
 apiVersion: policy.sigstore.dev/v1beta1
@@ -455,7 +460,7 @@ spec:
       url: https://rekor.sigstore.dev
 ```
 
-#<!-- chunk: 4.2 私有镜像仓库安全 -->## 4.2 私有镜像仓库安全
+## 4.2 私有镜像仓库安全
 
 ```yaml
 # Harbor镜像仓库安全配置
@@ -491,9 +496,9 @@ spec:
 
 <!-- chunk: 5. 运行时安全防护 -->## 5. 运行时安全防护
 
-#<!-- chunk: 5.1 Pod安全策略 -->## 5.1 Pod安全策略
+## 5.1 Pod安全策略
 
-##<!-- chunk: Pod安全标准实施 -->## Pod安全标准实施
+## Pod安全标准实施
 ```yaml
 # Pod安全准入配置
 apiVersion: admissionregistration.k8s.io/v1
@@ -517,7 +522,7 @@ webhooks:
   timeoutSeconds: 5
 ```
 
-##<!-- chunk: 安全上下文配置 -->## 安全上下文配置
+## 安全上下文配置
 ```yaml
 # 安全的Pod配置示例
 apiVersion: v1
@@ -555,9 +560,9 @@ spec:
         cpu: "500m"
 ```
 
-#<!-- chunk: 5.2 运行时异常检测 -->## 5.2 运行时异常检测
+## 5.2 运行时异常检测
 
-##<!-- chunk: Falco规则配置 -->## Falco规则配置
+## Falco规则配置
 ```yaml
 # Falco安全规则
 - rule: Detect crypto miners
@@ -584,9 +589,9 @@ spec:
 
 <!-- chunk: 6. 数据保护与加密 -->## 6. 数据保护与加密
 
-#<!-- chunk: 6.1 敏感数据保护 -->## 6.1 敏感数据保护
+## 6.1 敏感数据保护
 
-##<!-- chunk: Secret加密存储 -->## Secret加密存储
+## Secret加密存储
 ```yaml
 # 加密的Secret配置
 apiVersion: v1
@@ -617,7 +622,11 @@ spec:
           readOnlyRootFilesystem: true
 ```
 
-##<!-- chunk: 配置加密 -->## 配置加密
+## 配置加密
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 使用KMS加密敏感配置
 #!/bin/bash
@@ -636,7 +645,7 @@ kubectl create secret generic app-config \
   --from-file=encrypted-config.b64
 ```
 
-#<!-- chunk: 6.2 存储加密 -->## 6.2 存储加密
+## 6.2 存储加密
 
 ```yaml
 # 加密存储类配置
@@ -658,9 +667,9 @@ mountOptions:
 
 <!-- chunk: 7. 安全监控与响应 -->## 7. 安全监控与响应
 
-#<!-- chunk: 7.1 安全事件监控 -->## 7.1 安全事件监控
+## 7.1 安全事件监控
 
-##<!-- chunk: Prometheus安全指标 -->## Prometheus安全指标
+## Prometheus安全指标
 ```yaml
 # 安全相关监控指标配置
 apiVersion: monitoring.coreos.com/v1
@@ -682,7 +691,7 @@ spec:
       targetLabel: __name__
 ```
 
-##<!-- chunk: 关键安全指标 -->## 关键安全指标
+## 关键安全指标
 ```prometheus
 # 重要安全监控指标
 # 异常认证尝试
@@ -698,9 +707,9 @@ increase(network_policy_violations_total[10m]) > 5
 container_security_violations > 0
 ```
 
-#<!-- chunk: 7.2 自动化响应机制 -->## 7.2 自动化响应机制
+## 7.2 自动化响应机制
 
-##<!-- chunk: 安全事件响应脚本 -->## 安全事件响应脚本
+## 安全事件响应脚本
 ```python
 #!/usr/bin/env python3
 # security-response.py - 自动化安全响应
@@ -767,7 +776,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 8. 合规性与审计 -->## 8. 合规性与审计
 
-#<!-- chunk: 8.1 CIS基准合规检查 -->## 8.1 CIS基准合规检查
+## 8.1 CIS基准合规检查
 
 ```bash
 # 自动化CIS合规检查
@@ -794,7 +803,7 @@ for check in failed_checks:
 "
 ```
 
-#<!-- chunk: 8.2 审计日志配置 -->## 8.2 审计日志配置
+## 8.2 审计日志配置
 
 ```yaml
 # 高级审计配置
@@ -837,7 +846,7 @@ spec:
 
 <!-- chunk: 9. 实施路线图 -->## 9. 实施路线图
 
-#<!-- chunk: 9.1 分阶段实施计划 -->## 9.1 分阶段实施计划
+## 9.1 分阶段实施计划
 
 ```mermaid
 graph TD
@@ -852,7 +861,7 @@ graph TD
     D --> |持续| E
 ```
 
-#<!-- chunk: 9.2 成熟度评估模型 -->## 9.2 成熟度评估模型
+## 9.2 成熟度评估模型
 
 ```yaml
 安全成熟度等级:
@@ -879,7 +888,7 @@ graph TD
 
 <!-- chunk: 8. 2026安全特性更新 -->## 8. 2026安全特性更新
 
-#<!-- chunk: 8.1 eBPF运行时安全 (Tetragon) -->## 8.1 eBPF运行时安全 (Tetragon)
+## 8.1 eBPF运行时安全 (Tetragon)
 
 Tetragon是Cilium子项目，提供eBPF驱动的运行时安全强制执行能力，是零信任架构运行时层的关键组件。
 
@@ -900,7 +909,7 @@ Tetragon在零信任体系中的位置:
   详见: "[18-eBPF与Cilium深度实践](./18-kubernetes-ebpf-cilium-deep-practice.md)"
 ```
 
-#<!-- chunk: 8.2 供应链安全集成 -->## 8.2 供应链安全集成
+## 8.2 供应链安全集成
 
 将供应链安全纳入零信任策略体系，确保从构建到运行的全链路可信。
 
@@ -924,7 +933,7 @@ Tetragon在零信任体系中的位置:
   详见: "[20-供应链安全实践](./20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md)"
 ```
 
-#<!-- chunk: 8.3 Kubernetes 1.33/1.34 原生安全特性 -->## 8.3 Kubernetes 1.33/1.34 原生安全特性
+## 8.3 Kubernetes 1.33/1.34 原生安全特性
 
 ```yaml
 K8s 1.33/1.34安全增强:
@@ -953,7 +962,7 @@ K8s 1.33/1.34安全增强:
 
 <!-- chunk: 10. 最佳实践总结 -->## 10. 最佳实践总结
 
-#<!-- chunk: 10.1 安全实施原则 -->## 10.1 安全实施原则
+## 10.1 安全实施原则
 
 ```markdown
 <!-- chunk: 🔐 核心安全原则 -->## 🔐 核心安全原则
@@ -966,7 +975,7 @@ K8s 1.33/1.34安全增强:
 6. **合规驱动** - 标准规范遵循
 ```
 
-#<!-- chunk: 10.2 安全检查清单 -->## 10.2 安全检查清单
+## 10.2 安全检查清单
 
 ```yaml
 零信任安全检查清单:
@@ -1017,7 +1026,7 @@ K8s 1.33/1.34安全增强:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -1032,7 +1041,7 @@ K8s 1.33/1.34安全增强:
 ## Related
 
 - 79-polar-research
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 

@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Dynamic Volume Provisioning（动态卷供给）
@@ -153,6 +154,8 @@ kubectl get pods -n kube-system -l app.kubernetes.io/name=aws-ebs-csi-driver
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume.md|Persistent Volume]]
+- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume-claim.md|Persistent Volume Claim]]
+- [[domain-17-system-foundation/topic-dictionary/storage/storage-class.md|Storage Class]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volume.md|Volume]]
+- [[domain-17-system-foundation/topic-dictionary/storage/emptydir.md|Emptydir]]

@@ -39,7 +39,7 @@ title: Day 18: 节点池进阶实操
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 节点池弹性伸缩
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 节点池弹性伸缩
   - Cluster Autoscaler 配置
   - 节点池生命周期管理
   - PDB Pod 中断预算
@@ -143,6 +143,11 @@ kubectl logs -n kube-system cluster-autoscaler-xxx --tail=20 -f
 
 ### 2.1 节点池升级
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 查看当前节点池版本
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.nodeInfo.kubeletVersion}{"\n"}'
@@ -178,6 +183,11 @@ kubectl scale nodegroup --cluster=my-cluster --name=gpu-pool --nodes=3
 ```
 
 ### 2.3 节点池销毁
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 安全销毁节点池步骤
@@ -345,6 +355,9 @@ kubectl get pods -o wide -A | awk '{print $NF}' | sort | uniq -c
 ```
 
 ### 5.2 多节点池容灾
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 主节点池问题时切换到备用

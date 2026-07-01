@@ -32,7 +32,7 @@ created: "2026-05-23"
 
 ## 概述
 
-[[Kubernetes|Kubernetes]]es API|Kubernetes API]] 服务器将对象存储在 [[etcd|etcd]]（或兼容的键值存储）中。每个对象使用特定版本的 API 类型进行序列化。Kubernetes 使用"存储版本"（storage version）这一术语来描述对象在集群中的实际存储方式。
+[[Kubernetes|Kubernetes]]es API|Kubernetes API]] 服务器将对象存储在 [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]]（或兼容的键值存储）中。每个对象使用特定版本的 API 类型进行序列化。Kubernetes 使用"存储版本"（storage version）这一术语来描述对象在集群中的实际存储方式。
 
 ## 核心概念/原理
 
@@ -89,5 +89,8 @@ Kubernetes 提供"存储版本迁移"机制，可以在无需手动干预的情�
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/pod.md|Pod]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/container.md|Container]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/node.md|Node]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/namespace.md|Namespace]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/cluster.md|Cluster]]

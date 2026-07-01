@@ -33,6 +33,7 @@ prerequisites:
 - gpu-scheduling-basics
 - backup-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 对象存储与数据流水线
@@ -216,4 +217,4 @@ kubectl get workflows -n data-pipeline
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

@@ -11,11 +11,12 @@ tags:
   - k8s
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 related:
-  - "[[concepts/csi-drivers]]"
-  - "[[concepts/storageclass]]"
-  - "[[concepts/pv]]"
-  - "[[domain-04-storage-data/index]]"
+  - "[[concepts/csi-drivers.md|csi drivers]]"
+  - "[[concepts/storageclass.md|storageclass]]"
+  - "[[concepts/pv.md|pv]]"
+  - "[[domain-19-landscape-references/98-merged-indexes/index.md|index]]"
 ---
 
 # 云原生存储系统对比
@@ -36,10 +37,10 @@ related:
 | API | SNMP / CLI / GUI | Kubernetes CRD + Operator |
 | 升级 | 停机窗口 | 滚动升级、零停机 |
 
-云原生存储通过 [[concepts/csi-drivers]] 标准化接口暴露能力，配合 [[concepts/storageclass]]
-实现声明式供给，最终以 [[concepts/pv]] 绑定到工作负载。
+云原生存储通过 [[concepts/csi-drivers.md|csi drivers]] 标准化接口暴露能力，配合 [[concepts/storageclass.md|storageclass]]
+实现声明式供给，最终以 [[concepts/pv.md|pv]] 绑定到工作负载。
 
-> 相关领域索引：[[domain-04-storage-data/index]]
+> 相关领域索引：[[domain-19-landscape-references/98-merged-indexes/index.md|index]]
 
 ---
 
@@ -95,6 +96,9 @@ related:
 - 支持 `dataLocality: strict-local`（单副本本地卷，适合临时数据）
 
 ### 2.5 升级策略
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
 kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.7.x/deploy/longhorn.yaml
@@ -417,13 +421,15 @@ volumeBindingMode: WaitForFirstConsumer   # 拓扑感知
 - [Rook Ceph 文档](https://rook.io/docs/rook/latest/)
 - [OpenEBS Mayastor](https://openebs.io/docs/)
 - [JuiceFS 文档](https://juicefs.com/docs/)
-- [[concepts/csi-drivers]] — CSI 驱动规范与实现
-- [[concepts/storageclass]] — StorageClass 配置详解
-- [[concepts/pv]] — 持久卷生命周期
-- [[domain-04-storage-data/index]] — 存储与数据领域索引
+- [[concepts/csi-drivers.md|csi drivers]] — CSI 驱动规范与实现
+- [[concepts/storageclass.md|storageclass]] — StorageClass 配置详解
+- [[concepts/pv.md|pv]] — 持久卷生命周期
+- [[domain-19-landscape-references/98-merged-indexes/index.md|index]] — 存储与数据领域索引
 
 ## Related
 
-- [[concepts/csi-drivers]] — CSI 驱动规范与实现
-- [[concepts/storage-performance-optimization]] — 存储性能优化策略
-- [[concepts/storage-data-protection]] — 存储数据保护与灾备
+- [[concepts/csi-drivers.md|csi drivers]] — CSI 驱动规范与实现
+- [[concepts/storage-performance-optimization.md|storage performance optimization]] — 存储性能优化策略
+- [[concepts/storage-data-protection.md|storage data protection]] — 存储数据保护与灾备
+
+```

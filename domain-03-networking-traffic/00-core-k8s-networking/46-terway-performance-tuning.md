@@ -59,16 +59,16 @@ Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod �
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[cilium]]
-- [[entities/cni-plugins|cni-plugins]]
-- [[entities/networkpolicy|networkpolicy]]
+- [[entities/cni-plugins.md|cni-plugins]]
+- [[entities/networkpolicy.md|networkpolicy]]
 
 ## Related
 
 - [[45-terway-testing-validation]] — Terway 测试验证
 - [[telepresence]] — Telepresence
-- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

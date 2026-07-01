@@ -37,7 +37,7 @@ created: "2026-05-23"
 
 ## 概述
 
-[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 允许使用 Container Network Interface（CNI）插件来实现集群网络。CNI 插件是实现 Kubernetes 网络模型的必要组件，负责为 Pod 分配 IP、建立网络连通性，并支持网络策略、端口映射等高级功能。
+[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 允许使用 Container Network Interface（CNI）插件来实现集群网络。CNI 插件是实现 Kubernetes 网络模型的必要组件，负责为 Pod 分配 IP、建立网络连通性，并支持网络策略、端口映射等高级功能。
 
 ## 核心概念/原理
 
@@ -100,3 +100,9 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}: {.spec.podCIDR
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-group.md|API 组]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]

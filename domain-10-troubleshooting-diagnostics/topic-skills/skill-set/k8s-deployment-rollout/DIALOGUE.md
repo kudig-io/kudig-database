@@ -10,21 +10,22 @@ rounds: 3
 branches_per_round: 3+
 created: 2026-05-21
 updated: "2026-05-23"
+last_updated: 2026-05-23
 summary: "Deployment发布问题的远程顾问对话脚本，覆盖滚动更新、金丝雀发布、回滚操作。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL]]"
+  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
     type: uses
-  - target: "[[synthesis/case-studies/2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点]]"
+  - target: "[[concepts/case-studies/2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点.md]]"
     type: uses
-  - target: "[[entities/deployment]]"
+  - target: "[[entities/deployment.md]]"
     type: uses
-  - target: "[[entities/kubernetes]]"
+  - target: "[[entities/kubernetes.md]]"
     type: uses
 ---
 
-# [[entities/deployment|Deployment]] Rollout Failure — 远程顾问对话脚本
+# [[entities/deployment.md|Deployment]] Rollout Failure — 远程顾问对话脚本
 
-> 顾问身份：远程 [[entities/kubernetes|Kubernetes]] SRE 顾问（无法直接连接集群），通过对话指导现场工程师。
+> 顾问身份：远程 [[entities/kubernetes.md|Kubernetes]] SRE 顾问（无法直接连接集群），通过对话指导现场工程师。
 
 ---
 
@@ -82,7 +83,7 @@ kubectl get events --all-namespaces --field-selector type=Warning | tail -30
 > 【如果无法获取全集群事件】改为 `kubectl get events -n <ns> --field-selector type=Warning | tail -20`
 > 【如果 kubectl get nodes 不可用】请从监控平台确认：是否有节点离线、集群总节点数是否减少、是否有网络告警。
 
-**升级决策点**：若确认多节点或控制平面异常，立即：1) 通知值班主管；2) 启动集群问题排查（[[skills/skill-k8s-node-notready-SKILL|SKILL]]-NODE-001）；3) 评估是否启动灾难恢复。
+**升级决策点**：若确认多节点或控制平面异常，立即：1) 通知值班主管；2) 启动集群问题排查（[[skills/skill-k8s-node-notready-SKILL.md|SKILL]]-NODE-001）；3) 评估是否启动灾难恢复。
 
 ---
 
@@ -171,6 +172,10 @@ kubectl get deployment <name> -n <ns> -o jsonpath='{"maxUnavailable: "}{.spec.st
 **方案 1（推荐）**：扩容节点。如有 Cluster Autoscaler：`kubectl get nodes -l node-group=<节点组>` 后配置扩容；如无，手动添加节点或释放非关键 Pod。
 
 **方案 2**：降低资源请求：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch deployment/<name> -n <ns> -p '{"spec":{"template":{"spec":{"containers":[{"name":"app","resources":{"requests":{"cpu":"100m","memory":"128Mi"}}}]}}}}'
 ```
@@ -197,12 +202,20 @@ kubectl set image deployment/<name> app=<正确镜像>:<正确标签> -n <ns>
 > 【如果无法确定正确标签】从镜像仓库确认最新可用标签，或回退到上一个已知标签。
 
 **方案 2（认证失败）**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch sa default -n <ns> -p '{"imagePullSecrets":[{"name":"registry-secret"}]}'
 ```
 > 【如果无法确定 secret】执行 `kubectl get secrets -n <ns> | grep registry`，或联系仓库管理员。
 
 **方案 3（仓库不可用）**：回滚到上一个版本：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 kubectl rollout history deployment/<name> -n <ns>
 kubectl rollout undo deployment/<name> -n <ns>
@@ -218,18 +231,30 @@ kubectl rollout undo deployment/<name> -n <ns>
 **顾问**: 选择修复方案：
 
 **方案 1（启动慢）**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch deployment/<name> -n <ns> --type='json' -p='[{"op":"replace","path":"/spec/template/spec/containers/0/livenessProbe/initialDelaySeconds","value":60},{"op":"replace","path":"/spec/template/spec/containers/0/readinessProbe/initialDelaySeconds","value":30}]'
 ```
 > 【如果容器不是第一个】先执行 `kubectl get deployment <name> -n <ns> -o jsonpath='{.spec.template.spec.containers[*].name}'`，将 /0 替换为对应索引。
 
 **方案 2（超时/重试）**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch deployment/<name> -n <ns> --type='json' -p='[{"op":"replace","path":"/spec/template/spec/containers/0/livenessProbe/timeoutSeconds","value":10},{"op":"replace","path":"/spec/template/spec/containers/0/livenessProbe/failureThreshold","value":5}]'
 ```
 > 【如果 patch 返回 NotFound】该字段不存在，先查看当前探针：`kubectl get deployment <name> -n <ns> -o yaml | grep -A 20 "livenessProbe"`
 
 **方案 3（紧急移除 livenessProbe）**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch deployment/<name> -n <ns> --type='json' -p='[{"op":"remove","path":"/spec/template/spec/containers/0/livenessProbe"}]'
 ```
@@ -243,6 +268,10 @@ kubectl patch deployment/<name> -n <ns> --type='json' -p='[{"op":"remove","path"
 
 ### 分支 3-D：RC-004 策略配置不当
 **顾问**: 执行修复：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch deployment/<name> -n <ns> -p '{"spec":{"strategy":{"type":"RollingUpdate","rollingUpdate":{"maxUnavailable":1,"maxSurge":1}}}}'
 ```
@@ -253,6 +282,10 @@ kubectl patch deployment/<name> -n <ns> -p '{"spec":{"strategy":{"type":"Rolling
 > 【如果仍卡住】策略只是表象，新版本 Pod 有其他问题，转入对应根因。
 
 验证通过后恢复原始策略：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch deployment/<name> -n <ns> -p '{"spec":{"strategy":{"type":"RollingUpdate","rollingUpdate":{"maxUnavailable":"25%","maxSurge":"25%"}}}}'
 ```
@@ -268,6 +301,10 @@ kubectl patch deployment/<name> -n <ns> -p '{"spec":{"strategy":{"type":"Rolling
 > 【如果有 schema 变更】不要回滚！联系 DBA 和开发团队评估兼容性，错误回滚可能导致数据损坏。
 
 **执行**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 kubectl rollout history deployment/<name> -n <ns>
 kubectl rollout undo deployment/<name> -n <ns>
@@ -373,6 +410,11 @@ aliyun ess DescribeScalingGroups --RegionId <region>
 **步骤 4：阿里云特定修复**
 
 如ACR镜像拉取失败：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 创建ACR拉取Secret
 kubectl create secret docker-registry acr-secret   --docker-server=<acr-domain>   --docker-username=<username>   --docker-password=<password>
@@ -388,10 +430,10 @@ kubectl patch deployment <deploy> -p '{"spec":{"template":{"spec":{"imagePullSec
 
 ## 相关案例
 
-- [[synthesis/case-studies/2026-05-28-daemonset-affinity-miss|2026-05-28-daemonset-affinity-miss]]
-- [[synthesis/case-studies/2026-06-20-节点时区不一致导致cronjob调度错乱|2026-06-20-节点时区不一致导致cronjob调度错乱]]
-- [[synthesis/case-studies/2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点|污点容忍度配置错误导致pod无法调度到专用节点]].md|2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点]]
-- [[synthesis/case-studies/2026-10-15-pod-disruption-budget阻止节点维护排空|2026-10-15-pod-disruption-budget阻止节点维护排空]]
+- [[concepts/case-studies/2026-05-28-daemonset-affinity-miss.md|2026-05-28-daemonset-affinity-miss]]
+- [[concepts/case-studies/2026-06-20-节点时区不一致导致cronjob调度错乱.md|2026-06-20-节点时区不一致导致cronjob调度错乱]]
+- [[concepts/case-studies/2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点.md|污点容忍度配置错误导致pod无法调度到专用节点]].md|2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点]]
+- [[concepts/case-studies/2026-10-15-pod-disruption-budget阻止节点维护排空.md|2026-10-15-pod-disruption-budget阻止节点维护排空]]
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes|Nodes（节点）]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|Nodes（节点）]]

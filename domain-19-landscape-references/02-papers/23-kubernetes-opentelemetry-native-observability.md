@@ -92,7 +92,7 @@ OpenTelemetry（OTel）在 2026 年已成为云原生可观测性领域无可争
 
 <!-- chunk: 1. OTel 地位与价值 -->## 1. OTel 地位与价值
 
-#<!-- chunk: 1.1 可观测性三大支柱统一 -->## 1.1 可观测性三大支柱统一
+## 1.1 可观测性三大支柱统一
 
 在 OpenTelemetry 出现之前，可观测性领域呈现碎片化态势：[[Prometheus|Prometheus]] 负责指标、[[Jaeger|Jaeger]]/Zipkin 负责追踪、ELK/EFK 负责日志，三套系统各自为政，数据无法关联。
 
@@ -122,7 +122,7 @@ OpenTelemetry 统一可观测性架构：
           (追踪后端)       (指标后端)      (日志后端)
 ```
 
-#<!-- chunk: 1.2 CNCF 毕业项目地位 -->## 1.2 CNCF 毕业项目地位
+## 1.2 CNCF 毕业项目地位
 
 **OpenTelemetry 关键里程碑：**
 
@@ -136,7 +136,7 @@ OpenTelemetry 统一可观测性架构：
 | 2025-06 | Profiles (持续剖析) 规范 Beta |
 | 2026-01 | Profiles GA，OTel 成为完整可观测性平台 |
 
-#<!-- chunk: 1.3 与传统工具对比 -->## 1.3 与传统工具对比
+## 1.3 与传统工具对比
 
 | 对比维度 | Prometheus + Zipkin + ELK | OpenTelemetry 统一方案 |
 |---------|--------------------------|----------------------|
@@ -151,7 +151,7 @@ OpenTelemetry 统一可观测性架构：
 | **Kubernetes 集成** | 各自独立 | OTel Operator 统一管理 |
 | **成本** | 高（多套基础设施）| 低（统一 Pipeline）|
 
-#<!-- chunk: 1.4 OTel 在 K8s 生态的采用情况 -->## 1.4 OTel 在 K8s 生态的采用情况
+## 1.4 OTel 在 K8s 生态的采用情况
 
 ```
 2026 年 OTel 采用率调查（CNCF Annual Survey）：
@@ -169,7 +169,7 @@ OpenTelemetry 统一可观测性架构：
 
 <!-- chunk: 2. OTel Collector on Kubernetes -->## 2. OTel Collector on Kubernetes
 
-#<!-- chunk: 2.1 Collector 拓扑架构 -->## 2.1 Collector 拓扑架构
+## 2.1 Collector 拓扑架构
 
 ```mermaid
 graph TB
@@ -229,7 +229,7 @@ graph TB
     style SIDE fill:#654FF0,color:#fff
 ```
 
-#<!-- chunk: 2.2 OpenTelemetryCollector CR 完整配置 -->## 2.2 OpenTelemetryCollector CR 完整配置
+## 2.2 OpenTelemetryCollector CR 完整配置
 
 ```yaml
 # otel-collector-daemonset.yaml - 节点级数据收集
@@ -473,7 +473,7 @@ spec:
 
 <!-- chunk: 3. Kubernetes Attributes Processor -->## 3. Kubernetes Attributes Processor
 
-#<!-- chunk: 3.1 k8sattributes 工作原理 -->## 3.1 k8sattributes 工作原理
+## 3.1 k8sattributes 工作原理
 
 k8sattributes Processor 通过 Kubernetes API 自动为遥测数据注入 Pod 元数据，是 Kubernetes 可观测性的核心组件：
 
@@ -494,7 +494,7 @@ k8sattributes Processor 通过 Kubernetes API 自动为遥测数据注入 Pod �
   app.label.component = "api"
 ```
 
-#<!-- chunk: 3.2 Collector RBAC 配置 -->## 3.2 Collector RBAC 配置
+## 3.2 Collector RBAC 配置
 
 ```yaml
 # otel-collector-rbac.yaml
@@ -547,7 +547,7 @@ subjects:
   namespace: observability
 ```
 
-#<!-- chunk: 3.3 元数据注入效果示例 -->## 3.3 元数据注入效果示例
+## 3.3 元数据注入效果示例
 
 ```json
 // 注入前 (应用发送的原始 Span)
@@ -597,7 +597,7 @@ subjects:
 
 <!-- chunk: 4. Auto-Instrumentation 自动埋点 -->## 4. Auto-Instrumentation 自动埋点
 
-#<!-- chunk: 4.1 Instrumentation CR 配置 -->## 4.1 Instrumentation CR 配置
+## 4.1 Instrumentation CR 配置
 
 OTel Operator 通过 `Instrumentation` CR 实现零代码侵入的自动埋点，支持 Java、Python、Node.js、.NET、Go 等语言：
 
@@ -697,7 +697,7 @@ spec:
       value: "true"
 ```
 
-#<!-- chunk: 4.2 注解触发自动埋点 -->## 4.2 注解触发自动埋点
+## 4.2 注解触发自动埋点
 
 ```yaml
 # 为 Deployment 添加自动埋点注解
@@ -759,7 +759,7 @@ spec:
         instrumentation.opentelemetry.io/otel-go-auto-target-exe: "/app/notification-service"
 ```
 
-#<!-- chunk: 4.3 Operator 注入原理 -->## 4.3 Operator 注入原理
+## 4.3 Operator 注入原理
 
 OTel Operator 通过 Mutating Webhook 在 Pod 创建时自动注入：
 
@@ -787,7 +787,7 @@ OTel Operator 通过 Mutating Webhook 在 Pod 创建时自动注入：
 
 <!-- chunk: 5. 统一追踪/指标/日志 -->## 5. 统一追踪/指标/日志
 
-#<!-- chunk: 5.1 Exemplar：指标到追踪的桥梁 -->## 5.1 Exemplar：指标到追踪的桥梁
+## 5.1 Exemplar：指标到追踪的桥梁
 
 Exemplar 是 Prometheus 指标中嵌入的追踪上下文引用，实现从 P99 延迟指标直接跳转到具体慢请求追踪：
 
@@ -838,7 +838,7 @@ def handle_request(method, path):
             # OTel SDK 自动将当前 SpanContext 附加为 Exemplar
 ```
 
-#<!-- chunk: 5.2 日志与追踪关联 -->## 5.2 日志与追踪关联
+## 5.2 日志与追踪关联
 
 通过将 TraceID/SpanID 注入日志，实现从日志直接跳转到对应追踪：
 
@@ -891,7 +891,7 @@ public class OrderController {
 </configuration>
 ```
 
-#<!-- chunk: 5.3 请求拓扑可视化 -->## 5.3 请求拓扑可视化
+## 5.3 请求拓扑可视化
 
 ```
 微服务请求追踪示例：
@@ -923,7 +923,7 @@ Span 1: frontend → order-service         [0ms - 245ms]
 
 <!-- chunk: 6. eBPF 增强可观测性 -->## 6. eBPF 增强可观测性
 
-#<!-- chunk: 6.1 无代码插桩原理 -->## 6.1 无代码插桩原理
+## 6.1 无代码插桩原理
 
 eBPF 通过内核层面的探针实现真正的无侵入可观测性，无需修改应用代码或注入 Agent：
 
@@ -977,7 +977,7 @@ graph LR
     style APP fill:#326CE5,color:#fff
 ```
 
-#<!-- chunk: 6.2 Coroot 部署配置 -->## 6.2 Coroot 部署配置
+## 6.2 Coroot 部署配置
 
 ```yaml
 # coroot 安装 (eBPF 可观测性平台)
@@ -1039,7 +1039,7 @@ spec:
           path: /proc
 ```
 
-#<!-- chunk: 6.3 eBPF 观测能力对比 -->## 6.3 eBPF 观测能力对比
+## 6.3 eBPF 观测能力对比
 
 | 观测能力 | 传统 Agent 方式 | eBPF 方式 |
 |---------|---------------|---------|
@@ -1057,7 +1057,7 @@ spec:
 
 <!-- chunk: 7. 多命名空间配置管理 -->## 7. 多命名空间配置管理
 
-#<!-- chunk: 7.1 企业级多命名空间 OTel 拓扑 -->## 7.1 企业级多命名空间 OTel 拓扑
+## 7.1 企业级多命名空间 OTel 拓扑
 
 ```mermaid
 graph TB
@@ -1092,7 +1092,7 @@ graph TB
     style TEMPO fill:#F46800,color:#fff
 ```
 
-#<!-- chunk: 7.2 业务域 Collector 配置 -->## 7.2 业务域 Collector 配置
+## 7.2 业务域 Collector 配置
 
 ```yaml
 # team-backend namespace 的独立 Collector
@@ -1160,7 +1160,7 @@ spec:
           exporters: [otlp/gateway]
 ```
 
-#<!-- chunk: 7.3 OpAMP 热重载配置 -->## 7.3 OpAMP 热重载配置
+## 7.3 OpAMP 热重载配置
 
 OpAMP（Open Agent Management Protocol）支持 Collector 配置热更新，无需重启：
 
@@ -1198,7 +1198,7 @@ spec:
 
 <!-- chunk: 8. Trace Gateway 负载均衡 -->## 8. Trace Gateway 负载均衡
 
-#<!-- chunk: 8.1 为什么需要 LoadBalancing Exporter -->## 8.1 为什么需要 LoadBalancing Exporter
+## 8.1 为什么需要 LoadBalancing Exporter
 
 在使用 Tail Sampling（尾部采样）时，同一 Trace 的所有 Span 必须到达同一个 Collector 实例，否则无法正确评估采样条件：
 
@@ -1218,7 +1218,7 @@ LoadBalancing Exporter 解决方案：
   → 所有 Span 到达同一 Pod，尾部采样正确执行！
 ```
 
-#<!-- chunk: 8.2 Gateway Collector 完整配置 -->## 8.2 Gateway Collector 完整配置
+## 8.2 Gateway Collector 完整配置
 
 ```yaml
 # otel-gateway-collector.yaml - 尾部采样 + 负载均衡
@@ -1408,7 +1408,7 @@ spec:
               endpoint: otel-gateway:4317
 ```
 
-#<!-- chunk: 8.3 OTel 可观测性生产就绪检查清单 -->## 8.3 OTel 可观测性生产就绪检查清单
+## 8.3 OTel 可观测性生产就绪检查清单
 
 ```
 📦 Operator 与 CRD 配置
@@ -1458,7 +1458,7 @@ spec:
 
 <!-- chunk: 9. 未来趋势 -->## 9. 未来趋势
 
-#<!-- chunk: 9.1 OTel Profiles - 持续剖析 (2026 GA) -->## 9.1 OTel Profiles - 持续剖析 (2026 GA)
+## 9.1 OTel Profiles - 持续剖析 (2026 GA)
 
 OTel Profiles 信号将持续剖析（Continuous Profiling）纳入 OTel 统一规范：
 
@@ -1485,7 +1485,7 @@ OTel Profiles 数据模型：
 └─────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 9.2 跨领域关联 -->## 9.2 跨领域关联
+## 9.2 跨领域关联
 
 | 相关技术 | 关联点 | 参考文档 |
 |---------|-------|---------|
@@ -1495,7 +1495,7 @@ OTel Profiles 数据模型：
 | 多租户 | 多租户环境下的 OTel 数据隔离 | 文档 13: 多租户安全 |
 | Platform Engineering | OTel 是内部开发者平台的可观测性基础 | 文档 21: 平台工程 |
 
-#<!-- chunk: 9.3 2026-2028 OTel 技术路线图 -->## 9.3 2026-2028 OTel 技术路线图
+## 9.3 2026-2028 OTel 技术路线图
 
 ```
 2026 GA:
@@ -1538,7 +1538,7 @@ OTel Profiles 数据模型：
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -1559,4 +1559,4 @@ OTel Profiles 数据模型：
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

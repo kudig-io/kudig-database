@@ -80,18 +80,18 @@ graph TD
 ## 相关文档
 
 - domain-02-workloads-applications/02-deployment-production-patterns.md
-- [[domain-02-workloads-applications/00-core-workloads/03-statefulset-advanced-operations]]
-- [[domain-02-workloads-applications/00-core-workloads/04-daemonset-management]]
-- [[domain-18-manifests-patterns/README]]
+- [[domain-02-workloads-applications/00-core-workloads/03-statefulset-advanced-operations.md|03 statefulset advanced operations]]
+- [[domain-02-workloads-applications/00-core-workloads/04-daemonset-management.md|04 daemonset management]]
+- [[domain-18-manifests-patterns/README.md|README]]
 
 
 ---
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md|deployment fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta.md|statefulset fta]]
 
 
 ---
@@ -110,7 +110,7 @@ graph TD
 
 ## Related
 
-- [[references/kudig-metadata-index|README]].md|README]]
+- [[entities/kudig-metadata-index.md|README]].md|README]]
 - 24-production-deployment-best-practices
 - 99-kubernetes-deployment-patterns-architecture
-- [[entities/kubernetes|kubernetes]]
+- [[entities/kubernetes.md|kubernetes]]

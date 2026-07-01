@@ -65,7 +65,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. Elastic Stack架构深度解析 -->## 1. Elastic Stack架构深度解析
 
-#<!-- chunk: 1.1 核心组件架构 -->## 1.1 核心组件架构
+## 1.1 核心组件架构
 
 ```mermaid
 graph TB
@@ -109,15 +109,15 @@ graph TB
     end
 ```
 
-#<!-- chunk: 1.2 企业级架构优势 -->## 1.2 企业级架构优势
+## 1.2 企业级架构优势
 
-##<!-- chunk: 1.2.1 高可用性保障 -->## 1.2.1 高可用性保障
+## 1.2.1 高可用性保障
 - **集群高可用**: 多节点集群部署确保服务连续性
 - **数据冗余**: 副本分片机制保证数据安全性
 - **问题自动恢复**: 自动故障检测和节点替换机制
 - **跨区域复制**: 地理位置分散的数据备份策略
 
-##<!-- chunk: 1.2.2 性能优化能力 -->## 1.2.2 性能优化能力
+## 1.2.2 性能优化能力
 - **水平扩展**: 支持动态增加节点处理更大数据量
 - **智能分片**: 自动优化分片分布和大小
 - **缓存机制**: 多层次缓存提升查询性能
@@ -125,9 +125,9 @@ graph TB
 
 <!-- chunk: 2. 企业级部署架构 -->## 2. 企业级部署架构
 
-#<!-- chunk: 2.1 多层高可用部署 -->## 2.1 多层高可用部署
+## 2.1 多层高可用部署
 
-##<!-- chunk: 2.1.1 Elasticsearch集群部署 -->## 2.1.1 Elasticsearch集群部署
+## 2.1.1 Elasticsearch集群部署
 
 ```yaml
 # elasticsearch-cluster.yaml
@@ -241,7 +241,7 @@ spec:
             value: "-Xms8g -Xmx8g"
 ```
 
-##<!-- chunk: 2.1.2 Filebeat分布式采集 -->## 2.1.2 Filebeat分布式采集
+## 2.1.2 Filebeat分布式采集
 
 ```yaml
 # filebeat-deployment.yaml
@@ -336,7 +336,7 @@ spec:
           type: DirectoryOrCreate
 ```
 
-##<!-- chunk: 2.1.3 Filebeat配置优化 -->## 2.1.3 Filebeat配置优化
+## 2.1.3 Filebeat配置优化
 
 ```yaml
 # filebeat-config.yaml
@@ -448,9 +448,9 @@ data:
     http.port: 5066
 ```
 
-#<!-- chunk: 2.2 安全加固配置 -->## 2.2 安全加固配置
+## 2.2 安全加固配置
 
-##<!-- chunk: 2.2.1 网络安全策略 -->## 2.2.1 网络安全策略
+## 2.2.1 网络安全策略
 
 ```yaml
 # elastic-network-policy.yaml
@@ -511,7 +511,7 @@ spec:
       port: 9300
 ```
 
-##<!-- chunk: 2.2.2 认证授权配置 -->## 2.2.2 认证授权配置
+## 2.2.2 认证授权配置
 
 ```yaml
 # elastic-security-config.yaml
@@ -556,9 +556,9 @@ spec:
 
 <!-- chunk: 3. 企业级日志治理策略 -->## 3. 企业级日志治理策略
 
-#<!-- chunk: 3.1 统一日志格式标准化 -->## 3.1 统一日志格式标准化
+## 3.1 统一日志格式标准化
 
-##<!-- chunk: 3.1.1 ECS(Elastic Common Schema)实施 -->## 3.1.1 ECS(Elastic Common Schema)实施
+## 3.1.1 ECS(Elastic Common Schema)实施
 
 ```yaml
 # ecs-mapping-template.yaml
@@ -716,7 +716,7 @@ data:
     }
 ```
 
-##<!-- chunk: 3.1.2 日志字段标准化处理器 -->## 3.1.2 日志字段标准化处理器
+## 3.1.2 日志字段标准化处理器
 
 ```yaml
 # log-processing-pipeline.yaml
@@ -806,9 +806,9 @@ data:
     }
 ```
 
-#<!-- chunk: 3.2 生命周期管理策略 -->## 3.2 生命周期管理策略
+## 3.2 生命周期管理策略
 
-##<!-- chunk: 3.2.1 ILM(Index Lifecycle Management)策略 -->## 3.2.1 ILM(Index Lifecycle Management)策略
+## 3.2.1 ILM(Index Lifecycle Management)策略
 
 ```yaml
 # ilm-policies.yaml
@@ -952,9 +952,9 @@ data:
 
 <!-- chunk: 4. 智能分析与告警 -->## 4. 智能分析与告警
 
-#<!-- chunk: 4.1 机器学习异常检测 -->## 4.1 机器学习异常检测
+## 4.1 机器学习异常检测
 
-##<!-- chunk: 4.1.1 异常检测作业配置 -->## 4.1.1 异常检测作业配置
+## 4.1.1 异常检测作业配置
 
 ```yaml
 # ml-anomaly-detection.yaml
@@ -1065,7 +1065,7 @@ data:
     }
 ```
 
-##<!-- chunk: 4.1.2 实时告警配置 -->## 4.1.2 实时告警配置
+## 4.1.2 实时告警配置
 
 ```yaml
 # alerting-rules.yaml
@@ -1160,9 +1160,9 @@ data:
     }
 ```
 
-#<!-- chunk: 4.2 自定义分析仪表板 -->## 4.2 自定义分析仪表板
+## 4.2 自定义分析仪表板
 
-##<!-- chunk: 4.2.1 核心业务指标看板 -->## 4.2.1 核心业务指标看板
+## 4.2.1 核心业务指标看板
 
 ```json
 {
@@ -1270,9 +1270,9 @@ data:
 
 <!-- chunk: 5. 企业级最佳实践 -->## 5. 企业级最佳实践
 
-#<!-- chunk: 5.1 性能优化策略 -->## 5.1 性能优化策略
+## 5.1 性能优化策略
 
-##<!-- chunk: 5.1.1 索引优化配置 -->## 5.1.1 索引优化配置
+## 5.1.1 索引优化配置
 
 ```yaml
 # index-optimization.yaml
@@ -1313,7 +1313,7 @@ data:
     }
 ```
 
-##<!-- chunk: 5.1.2 查询性能优化 -->## 5.1.2 查询性能优化
+## 5.1.2 查询性能优化
 
 ```yaml
 # query-optimization.yaml
@@ -1336,9 +1336,9 @@ data:
     }
 ```
 
-#<!-- chunk: 5.2 成本控制策略 -->## 5.2 成本控制策略
+## 5.2 成本控制策略
 
-##<!-- chunk: 5.2.1 存储成本优化 -->## 5.2.1 存储成本优化
+## 5.2.1 存储成本优化
 
 ```bash
 #!/bin/bash
@@ -1376,7 +1376,7 @@ echo "   - 实施更积极的ILM策略"
 echo "   - 考虑冷热数据分离"
 ```
 
-##<!-- chunk: 5.2.2 资源使用监控 -->## 5.2.2 资源使用监控
+## 5.2.2 资源使用监控
 
 ```yaml
 # resource-monitoring.yaml
@@ -1430,7 +1430,7 @@ spec:
 
 <!-- chunk: 6. 故障排查与维护 -->## 6. 故障排查与维护
 
-#<!-- chunk: 6.1 常见问题诊断脚本 -->## 6.1 常见问题诊断脚本
+## 6.1 常见问题诊断脚本
 
 ```bash
 #!/bin/bash
@@ -1493,7 +1493,7 @@ curl -s ${AUTH} "${CLUSTER_URL}/_nodes/stats/jvm?pretty" | \
   jq '.nodes[].jvm.gc.collectors.old.collection_count'
 ```
 
-#<!-- chunk: 6.2 维护操作自动化 -->## 6.2 维护操作自动化
+## 6.2 维护操作自动化
 
 ```python
 # maintenance-automation.py
@@ -1626,9 +1626,9 @@ maintenance.run_daily_maintenance()
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - observability/MOC.md|domain-20-enterprise-monitoring-alerting MOC]]
-- [[domain-06-observability/README|[[Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-20 企业监控与告警 — 开源项目索引]]
-- [[entities/prometheus]]
+- [[domain-06-observability/README.md|[[Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]]
+- [[entities/prometheus.md|prometheus]]
 - Grafana Enterprise Observability Platform 深度实践
 - OpenTelemetry分布式追踪与可观测性深度实践
 - Thanos Enterprise Metrics Federation and Long-term Storage
@@ -1645,4 +1645,4 @@ maintenance.run_daily_maintenance()
 - 06-elastic-stack-enterprise-observability
 - 07-zabbix-enterprise-monitoring
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]

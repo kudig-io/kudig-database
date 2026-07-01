@@ -145,6 +145,9 @@ Pod 可以挂载多个 Volume（存储卷）。
 
 ### 2.1 YAML 方式创建
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 【YAML 示例】
 
@@ -294,6 +297,9 @@ kubectl logs -f my-pod
 
 ### 5.1 基本删除
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 【删除 Pod】
 
@@ -303,6 +309,10 @@ kubectl delete pod <pod-name>
 ```bash
 # ⚠️ 危险！这会删除 namespace 下所有 Pod
 kubectl delete pods --all
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 ⚠️ 风险：会导致所有 Pod 重建，服务中断。
 
@@ -354,6 +364,9 @@ kubectl logs <pod-name> --previous
 
 ### 6.3 Pod 处于 ImagePullBackOff
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 【原因】
 
@@ -383,6 +396,10 @@ kubectl logs <pod-name> --previous
 ---
 
 ## 7. 总结
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
 【要点回顾】
@@ -428,4 +445,4 @@ kubectl logs <pod-name> --previous
 
 ## 参见
 
-- [[skills/training-public/fundamentals/02-pod-basics|公开版]]
+- [[skills/training-public/fundamentals/02-pod-basics.md|公开版]]

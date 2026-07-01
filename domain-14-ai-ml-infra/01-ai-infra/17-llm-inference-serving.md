@@ -525,19 +525,19 @@ spec:
   gateways:
   - istio-system/main-gateway
   http:
-  - match:
-    - uri:
-        prefix: /v1
-    route:
-    - destination:
-        host: vllm-service
-        port:
-          number: 8000
-    timeout: 600s
-    retries:
-      attempts: 3
-      perTryTimeout: 200s
-      retryOn: "5xx,reset,connect-failure"
+  - matchers:
+    - - uri=""
+    - prefix="/v1"
+    - route=""
+    - - destination=""
+    - host="vllm-service"
+    - port=""
+    - number="8000"
+    - timeout="600s"
+    - retries=""
+    - attempts="3"
+    - perTryTimeout="200s"
+    - retryOn="5xx,reset,connect-failure"
 ```
 
 ### 2.3 自动扩缩容配置
@@ -1551,40 +1551,37 @@ spec:
   - llm-gateway
   http:
   # 长上下文请求路由到专用实例
-  - match:
-    - headers:
-        x-max-tokens:
-          regex: "^([89][0-9]{3}|[1-9][0-9]{4,})$"  # >8000 tokens
-    route:
-    - destination:
-        host: vllm-long-context
-        port:
-          number: 8000
-    timeout: 600s
-  
+  - matchers:
+    - - headers=""
+    - x-max-tokens=""
+    - regex="^([89][0-9]{3}|[1-9][0-9]{4,})$"  # >8000 tokens"
+    - route=""
+    - - destination=""
+    - host="vllm-long-context"
+    - port=""
+    - number="8000"
+    - timeout="600s"
   # 流式请求启用WebSocket
-  - match:
-    - headers:
-        x-stream:
-          exact: "true"
-    route:
-    - destination:
-        host: vllm-service
-        port:
-          number: 8000
-    timeout: 300s
-  
+  - matchers:
+    - - headers=""
+    - x-stream=""
+    - exact="true"
+    - route=""
+    - - destination=""
+    - host="vllm-service"
+    - port=""
+    - number="8000"
+    - timeout="300s"
   # 特定模型路由
-  - match:
-    - headers:
-        x-model:
-          exact: "llama3-70b-code"
-    route:
-    - destination:
-        host: vllm-code-model
-        port:
-          number: 8000
-  
+  - matchers:
+    - - headers=""
+    - x-model=""
+    - exact="llama3-70b-code"
+    - route=""
+    - - destination=""
+    - host="vllm-code-model"
+    - port=""
+    - number="8000"
   # 默认路由 - 加权负载均衡
   - route:
     - destination:
@@ -2116,6 +2113,9 @@ performance_tuning:
 
 ### 11.2 诊断命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # llm-diagnosis.sh - LLM推理服务诊断脚本
@@ -2283,7 +2283,7 @@ response = client.chat.completions.create(
 ## Obsidian 相关文档
 
 - domain-11-ai-infra MOC
-- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
 - Domain-11 AI 基础设施 — 开源项目索引
 - AI 基础设施架构
 - 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
@@ -2304,4 +2304,4 @@ response = client.chat.completions.create(
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]

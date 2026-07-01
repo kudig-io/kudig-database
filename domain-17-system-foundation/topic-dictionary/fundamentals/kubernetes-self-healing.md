@@ -21,13 +21,13 @@ intent_queries:
 trigger_keywords:
 - Kubernetes
 - Self-Healing
-- Kubernetes
 - 自愈能力
 - dictionary
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # [[Kubernetes|Kubernetes]] Self-Healing（Kubernetes 自愈能力）
@@ -43,7 +43,7 @@ Kubernetes 从设计之初就具备自愈能力，以帮助维护工作负载的
 ## 关键机制或特性
 
 ### 容器级重启
-- 若 [[concepts/pod-lifecycle|pod]] 中的容器失败，[[kubelet|kubelet]] 会根据 Pod 的 `restartPolicy`（如 `Always`、`OnFailure`）自动重启该容器。
+- 若 [[concepts/pod-lifecycle.md|pod]] 中的容器失败，[[kubelet|kubelet]] 会根据 Pod 的 `restartPolicy`（如 `Always`、`OnFailure`）自动重启该容器。
 
 ### 副本替换
 - **Deployment / [[ReplicaSet|ReplicaSet]]**：若某个 Pod 失败，控制器会创建新的 Pod 以维持指定的副本数。
@@ -78,3 +78,9 @@ Kubernetes 从设计之初就具备自愈能力，以帮助维护工作负载的
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/architecture/self-healing/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/annotations.md|注解]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/bpfman.md|bpfman eBPF 管理器]]

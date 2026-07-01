@@ -84,7 +84,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. Service Mesh 演进：Sidecar → Sidecar-less -->## 1. Service Mesh 演进：Sidecar → Sidecar-less
 
-#<!-- chunk: 1.1 Service Mesh 发展历程 (Evolution History) -->## 1.1 Service Mesh 发展历程 (Evolution History)
+## 1.1 Service Mesh 发展历程 (Evolution History)
 
 Service Mesh 技术自 2016 年 Linkerd 发布以来经历了深刻演变，从最初的库集成模式，到 Sidecar 代理模式，再到如今的 Sidecar-less（无边车）模式，每一次演进都是对前代架构痛点的回应。
 
@@ -109,7 +109,7 @@ timeline
          : 生产级 Sidecar-less 普及
 ```
 
-#<!-- chunk: 1.2 Sidecar 模式的固有问题 (Sidecar Mode Pain Points) -->## 1.2 Sidecar 模式的固有问题 (Sidecar Mode Pain Points)
+## 1.2 Sidecar 模式的固有问题 (Sidecar Mode Pain Points)
 
 传统 Sidecar 模式在大规模生产环境中暴露出以下核心问题：
 
@@ -138,7 +138,7 @@ mindmap
       就绪探针竞争
 ```
 
-##<!-- chunk: 资源消耗量化对比 -->## 资源消耗量化对比
+## 资源消耗量化对比
 
 | 规模 | Sidecar 模式内存消耗 | Sidecar-less 内存消耗 | 节省比例 |
 |------|---------------------|----------------------|---------|
@@ -148,7 +148,7 @@ mindmap
 
 > **注意**: 上述数据基于 Envoy 默认配置，实际消耗因负载和配置不同而有所差异。
 
-#<!-- chunk: 1.3 Sidecar-less 架构的核心思想 (Core Philosophy) -->## 1.3 Sidecar-less 架构的核心思想 (Core Philosophy)
+## 1.3 Sidecar-less 架构的核心思想 (Core Philosophy)
 
 Sidecar-less 架构通过将网络代理功能下沉至内核层（eBPF）或节点层（Node-level Proxy），彻底消除每 Pod 的代理开销：
 
@@ -183,7 +183,7 @@ graph TB
 
 <!-- chunk: 2. Cilium Service Mesh 架构概述 -->## 2. Cilium Service Mesh 架构概述
 
-#<!-- chunk: 2.1 整体架构图 (Overall Architecture) -->## 2.1 整体架构图 (Overall Architecture)
+## 2.1 整体架构图 (Overall Architecture)
 
 ```mermaid
 graph TB
@@ -245,7 +245,7 @@ graph TB
     style eBPF 数据平面 2 fill:#e8f5e9
 ```
 
-#<!-- chunk: 2.2 Cilium Agent 核心组件 (Core Components) -->## 2.2 Cilium Agent 核心组件 (Core Components)
+## 2.2 Cilium Agent 核心组件 (Core Components)
 
 ```mermaid
 graph LR
@@ -281,7 +281,7 @@ graph LR
     BM -->|写入| LB
 ```
 
-#<!-- chunk: 2.3 部署模式对比 (Deployment Modes) -->## 2.3 部署模式对比 (Deployment Modes)
+## 2.3 部署模式对比 (Deployment Modes)
 
 Cilium Service Mesh 支持三种部署模式，适应不同场景需求：
 
@@ -291,7 +291,7 @@ Cilium Service Mesh 支持三种部署模式，适应不同场景需求：
 | **Per-node Proxy 模式** | 每节点一个 Envoy | 完整 mTLS | 完整 | 中等 | 需要完整 L7 |
 | **混合模式** | eBPF + 按需 Sidecar | 完整 mTLS | 完整 | 动态 | 迁移期过渡 |
 
-#<!-- chunk: 2.4 快速部署 (Quick Installation) -->## 2.4 快速部署 (Quick Installation)
+## 2.4 快速部署 (Quick Installation)
 
 ```yaml
 # cilium-values.yaml - Cilium Service Mesh 启用配置
@@ -357,6 +357,9 @@ bandwidthManager:
   bbr: true
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 使用 Helm 部署 Cilium Service Mesh
 helm repo add cilium https://helm.cilium.io/
@@ -381,7 +384,7 @@ hubble observe --follow
 
 <!-- chunk: 3. eBPF 如何替代 Sidecar Proxy -->## 3. eBPF 如何替代 Sidecar Proxy
 
-#<!-- chunk: 3.1 eBPF Hook 点与网络处理流程 (eBPF Hook Points) -->## 3.1 eBPF Hook 点与网络处理流程 (eBPF Hook Points)
+## 3.1 eBPF Hook 点与网络处理流程 (eBPF Hook Points)
 
 ```mermaid
 graph TB
@@ -423,7 +426,7 @@ graph TB
     style SOCKET_FILTER fill:#9c27b0
 ```
 
-#<!-- chunk: 3.2 eBPF 实现 L4 负载均衡 (L4 Load Balancing via eBPF) -->## 3.2 eBPF 实现 L4 负载均衡 (L4 Load Balancing via eBPF)
+## 3.2 eBPF 实现 L4 负载均衡 (L4 Load Balancing via eBPF)
 
 Cilium 通过 eBPF Socket 级别的重定向实现零开销的服务负载均衡，完全绕过 iptables：
 
@@ -450,7 +453,7 @@ sequenceDiagram
     Note over Client,Backend2: 后续请求自动进行负载均衡
 ```
 
-#<!-- chunk: 3.3 eBPF 实现 L7 流量感知 (L7 Traffic Awareness) -->## 3.3 eBPF 实现 L7 流量感知 (L7 Traffic Awareness)
+## 3.3 eBPF 实现 L7 流量感知 (L7 Traffic Awareness)
 
 对于需要 L7 感知的场景，Cilium 使用 Per-node Envoy 而非 Per-pod Sidecar：
 
@@ -479,7 +482,7 @@ graph LR
     style eBPF_REDIR fill:#ccffcc
 ```
 
-#<!-- chunk: 3.4 Cilium Network Policy 与 eBPF 映射关系 -->## 3.4 Cilium Network Policy 与 eBPF 映射关系
+## 3.4 Cilium Network Policy 与 eBPF 映射关系
 
 ```yaml
 # CiliumNetworkPolicy - L7 HTTP 策略示例
@@ -517,7 +520,7 @@ spec:
         protocol: TCP
 ```
 
-#<!-- chunk: 3.5 eBPF Map 数据结构 (eBPF Map Data Structures) -->## 3.5 eBPF Map 数据结构 (eBPF Map Data Structures)
+## 3.5 eBPF Map 数据结构 (eBPF Map Data Structures)
 
 eBPF 程序通过高效的内核数据结构实现网络策略：
 
@@ -559,7 +562,7 @@ graph TB
 
 <!-- chunk: 4. mTLS 与身份验证 (SPIFFE/SPIRE) -->## 4. mTLS 与身份验证 (SPIFFE/SPIRE)
 
-#<!-- chunk: 4.1 Cilium 身份模型 (Identity Model) -->## 4.1 Cilium 身份模型 (Identity Model)
+## 4.1 Cilium 身份模型 (Identity Model)
 
 Cilium 使用基于标签的安全身份（Security Identity），而非传统的 IP 地址来识别工作负载：
 
@@ -603,7 +606,7 @@ graph TB
     APP_A <-->|"mTLS (SVID 双向认证)"| APP_B
 ```
 
-#<!-- chunk: 4.2 SPIFFE ID 与 Kubernetes 身份映射 -->## 4.2 SPIFFE ID 与 Kubernetes 身份映射
+## 4.2 SPIFFE ID 与 Kubernetes 身份映射
 
 ```yaml
 # SPIRE Server 注册条目配置
@@ -647,7 +650,7 @@ data:
   certificates-directory: "/var/lib/cilium/certs"
 ```
 
-#<!-- chunk: 4.3 mTLS 握手流程 (mTLS Handshake Flow) -->## 4.3 mTLS 握手流程 (mTLS Handshake Flow)
+## 4.3 mTLS 握手流程 (mTLS Handshake Flow)
 
 ```mermaid
 sequenceDiagram
@@ -678,7 +681,7 @@ sequenceDiagram
     Note over PodA,PodB: 应用程序无感知 mTLS 全程加密
 ```
 
-#<!-- chunk: 4.4 MutualAuthentication CRD 配置 -->## 4.4 MutualAuthentication CRD 配置
+## 4.4 MutualAuthentication CRD 配置
 
 ```yaml
 # 启用命名空间级别的 mTLS
@@ -738,7 +741,7 @@ spec:
 
 <!-- chunk: 5. L7 流量管理 -->## 5. L7 流量管理
 
-#<!-- chunk: 5.1 L7 流量管理架构 (L7 Traffic Management Architecture) -->## 5.1 L7 流量管理架构 (L7 Traffic Management Architecture)
+## 5.1 L7 流量管理架构 (L7 Traffic Management Architecture)
 
 ```mermaid
 graph TB
@@ -765,9 +768,9 @@ graph TB
     end
 ```
 
-#<!-- chunk: 5.2 负载均衡策略 (Load Balancing Strategies) -->## 5.2 负载均衡策略 (Load Balancing Strategies)
+## 5.2 负载均衡策略 (Load Balancing Strategies)
 
-##<!-- chunk: 5.2.1 Maglev 一致性哈希 -->## 5.2.1 Maglev 一致性哈希
+## 5.2.1 Maglev 一致性哈希
 
 Cilium 默认使用 Maglev 算法实现高效的一致性哈希负载均衡：
 
@@ -814,7 +817,7 @@ spec:
       timeoutSeconds: 3600
 ```
 
-##<!-- chunk: 5.2.2 DSR（Direct Server Return）模式 -->## 5.2.2 DSR（Direct Server Return）模式
+## 5.2.2 DSR（Direct Server Return）模式
 
 ```yaml
 # 启用 DSR 减少返回流量经过 LB 节点
@@ -841,7 +844,7 @@ graph LR
     style BACKEND fill:#4caf50
 ```
 
-#<!-- chunk: 5.3 金丝雀发布与流量分割 (Canary Release & Traffic Splitting) -->## 5.3 金丝雀发布与流量分割 (Canary Release & Traffic Splitting)
+## 5.3 金丝雀发布与流量分割 (Canary Release & Traffic Splitting)
 
 ```yaml
 # HTTPRoute 金丝雀发布 - 基于权重的流量分割
@@ -927,27 +930,27 @@ spec:
       domains:
       - product-service.production.svc.cluster.local
       routes:
-      - match:
-          prefix: "/"
-          headers:
-          - name: "content-type"
-            string_match:
-              exact: "application/json"
-        route:
-          weighted_clusters:
-            clusters:
-            - name: product-stable
-              weight: 95
-            - name: product-canary
-              weight: 5
-          retry_policy:
-            retry_on: "5xx,connect-failure"
-            num_retries: 3
+      - matchers:
+        - prefix="/"
+        - headers=""
+        - - name="content-type"
+        - string_match=""
+        - exact="application/json"
+        - route=""
+        - weighted_clusters=""
+        - clusters=""
+        - - name="product-stable"
+        - weight="95"
+        - - name="product-canary"
+        - weight="5"
+        - retry_policy=""
+        - retry_on="5xx,connect-failure"
+        - num_retries="3"
 ```
 
-#<!-- chunk: 5.4 重试、超时与熔断 (Retry, Timeout & Circuit Breaking) -->## 5.4 重试、超时与熔断 (Retry, Timeout & Circuit Breaking)
+## 5.4 重试、超时与熔断 (Retry, Timeout & Circuit Breaking)
 
-##<!-- chunk: 5.4.1 重试策略 -->## 5.4.1 重试策略
+## 5.4.1 重试策略
 
 ```yaml
 # HTTPRoute 重试配置
@@ -996,7 +999,7 @@ spec:
   - 504
 ```
 
-##<!-- chunk: 5.4.2 超时配置 -->## 5.4.2 超时配置
+## 5.4.2 超时配置
 
 ```yaml
 # HTTPRoute 超时配置
@@ -1023,7 +1026,7 @@ spec:
       backendRequest: "10s"
 ```
 
-##<!-- chunk: 5.4.3 熔断器配置 -->## 5.4.3 熔断器配置
+## 5.4.3 熔断器配置
 
 ```yaml
 # CiliumEnvoyConfig - Envoy 熔断器配置
@@ -1080,7 +1083,7 @@ stateDiagram-v2
 
 <!-- chunk: 6. Gateway API 集成 -->## 6. Gateway API 集成
 
-#<!-- chunk: 6.1 Cilium Gateway API 架构 (Gateway API Architecture) -->## 6.1 Cilium Gateway API 架构 (Gateway API Architecture)
+## 6.1 Cilium Gateway API 架构 (Gateway API Architecture)
 
 ```mermaid
 graph TB
@@ -1112,7 +1115,7 @@ graph TB
     LB_SVC -->|"流量入口"| ENVOY_POD
 ```
 
-#<!-- chunk: 6.2 GatewayClass 与 Gateway 配置 -->## 6.2 GatewayClass 与 Gateway 配置
+## 6.2 GatewayClass 与 Gateway 配置
 
 ```yaml
 # GatewayClass - 定义 Cilium 作为 Gateway 控制器
@@ -1177,7 +1180,7 @@ spec:
       - name: grpc-tls-secret
 ```
 
-#<!-- chunk: 6.3 高级 HTTPRoute 配置 -->## 6.3 高级 HTTPRoute 配置
+## 6.3 高级 HTTPRoute 配置
 
 ```yaml
 # HTTPRoute - 完整功能示例
@@ -1256,7 +1259,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: 6.4 TLSRoute 与 TCPRoute -->## 6.4 TLSRoute 与 TCPRoute
+## 6.4 TLSRoute 与 TCPRoute
 
 ```yaml
 # TLSRoute - TLS 透传（SNI 路由）
@@ -1296,7 +1299,7 @@ spec:
 
 <!-- chunk: 7. Ingress Controller 功能 -->## 7. Ingress Controller 功能
 
-#<!-- chunk: 7.1 Cilium Ingress 架构 (Ingress Architecture) -->## 7.1 Cilium Ingress 架构 (Ingress Architecture)
+## 7.1 Cilium Ingress 架构 (Ingress Architecture)
 
 ```mermaid
 graph TB
@@ -1326,7 +1329,7 @@ graph TB
     INTERNET --> LB_B
 ```
 
-#<!-- chunk: 7.2 Ingress 资源配置 -->## 7.2 Ingress 资源配置
+## 7.2 Ingress 资源配置
 
 ```yaml
 # Ingress - 基础 HTTP/HTTPS 路由
@@ -1426,7 +1429,7 @@ spec:
 
 <!-- chunk: 8. 与 Istio Ambient Mesh 对比 -->## 8. 与 Istio Ambient Mesh 对比
 
-#<!-- chunk: 8.1 架构对比图 (Architecture Comparison) -->## 8.1 架构对比图 (Architecture Comparison)
+## 8.1 架构对比图 (Architecture Comparison)
 
 ```mermaid
 graph TB
@@ -1463,7 +1466,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 8.2 详细特性对比矩阵 -->## 8.2 详细特性对比矩阵
+## 8.2 详细特性对比矩阵
 
 | 特性 | Cilium Service Mesh | Istio Ambient Mesh | Istio Sidecar |
 |------|--------------------|--------------------|---------------|
@@ -1482,7 +1485,7 @@ graph TB
 | **学习曲线** | 中（需要 eBPF 知识） | 中 | 高（复杂配置） |
 | **社区活跃度** | 非常活跃 | 非常活跃 | 非常活跃 |
 
-#<!-- chunk: 8.3 性能对比场景分析 -->## 8.3 性能对比场景分析
+## 8.3 性能对比场景分析
 
 ```mermaid
 graph LR
@@ -1503,7 +1506,7 @@ graph LR
 
 <!-- chunk: 9. 性能基准测试 (vs Envoy Sidecar) -->## 9. 性能基准测试 (vs Envoy Sidecar)
 
-#<!-- chunk: 9.1 测试环境与方法论 (Test Environment & Methodology) -->## 9.1 测试环境与方法论 (Test Environment & Methodology)
+## 9.1 测试环境与方法论 (Test Environment & Methodology)
 
 ```
 测试集群配置:
@@ -1515,7 +1518,7 @@ graph LR
 - 测试场景: Pod-to-Pod (同节点/跨节点), Pod-to-Service
 ```
 
-#<!-- chunk: 9.2 吞吐量对比 (Throughput Comparison) -->## 9.2 吞吐量对比 (Throughput Comparison)
+## 9.2 吞吐量对比 (Throughput Comparison)
 
 ```mermaid
 xychart-beta
@@ -1535,7 +1538,7 @@ xychart-beta
 | 100 | 105,000 RPS | 98,000 RPS | 65,000 RPS | **+62%** |
 | 500 | 110,000 RPS | 102,000 RPS | 68,000 RPS | **+62%** |
 
-#<!-- chunk: 9.3 延迟对比 (Latency Comparison) -->## 9.3 延迟对比 (Latency Comparison)
+## 9.3 延迟对比 (Latency Comparison)
 
 | 百分位 | 无 Mesh (基线) | Cilium eBPF | Cilium Per-node | Istio Sidecar |
 |--------|--------------|-------------|----------------|---------------|
@@ -1563,7 +1566,7 @@ graph TB
     style ISTIO_SD fill:#f44336
 ```
 
-#<!-- chunk: 9.4 资源消耗对比 (Resource Consumption) -->## 9.4 资源消耗对比 (Resource Consumption)
+## 9.4 资源消耗对比 (Resource Consumption)
 
 | 指标 | Cilium eBPF | Cilium Per-node Envoy | Istio Sidecar (每 Pod) |
 |------|------------|----------------------|----------------------|
@@ -1573,7 +1576,10 @@ graph TB
 | **启动延迟** | 无 (随 cilium-agent) | 无 | ~3-5 秒/Pod |
 | **1000 Pod 集群总开销** | ~10 CPU, ~1 GB | ~20 CPU, ~2 GB | ~200 CPU, ~100 GB |
 
-#<!-- chunk: 9.5 网络带宽测试 (Network Bandwidth) -->## 9.5 网络带宽测试 (Network Bandwidth)
+## 9.5 网络带宽测试 (Network Bandwidth)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # iperf3 跨节点 TCP 带宽测试脚本
@@ -1609,7 +1615,7 @@ kubectl run iperf-client-wg --image=networkstatic/iperf3 \
 
 <!-- chunk: 10. 迁移策略与最佳实践 -->## 10. 迁移策略与最佳实践
 
-#<!-- chunk: 10.1 迁移路径规划 (Migration Path Planning) -->## 10.1 迁移路径规划 (Migration Path Planning)
+## 10.1 迁移路径规划 (Migration Path Planning)
 
 ```mermaid
 flowchart TD
@@ -1644,7 +1650,13 @@ flowchart TD
     end
 ```
 
-#<!-- chunk: 10.2 从 Istio 迁移的操作步骤 (Migration from Istio) -->## 10.2 从 Istio 迁移的操作步骤 (Migration from Istio)
+## 10.2 从 Istio 迁移的操作步骤 (Migration from Istio)
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 #!/bin/bash
@@ -1690,10 +1702,10 @@ done
 
 echo "=== 阶段5: 卸载 Istio ==="
 istioctl uninstall --purge -y
-kubectl delete namespace istio-system
+kubectl delete namespace istio-system  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
-#<!-- chunk: 10.3 迁移期间的策略兼容性配置 -->## 10.3 迁移期间的策略兼容性配置
+## 10.3 迁移期间的策略兼容性配置
 
 ```yaml
 # 迁移期间同时支持 Istio 和 Cilium 策略
@@ -1727,9 +1739,9 @@ spec:
         protocol: TCP
 ```
 
-#<!-- chunk: 10.4 生产环境最佳实践 (Production Best Practices) -->## 10.4 生产环境最佳实践 (Production Best Practices)
+## 10.4 生产环境最佳实践 (Production Best Practices)
 
-##<!-- chunk: 10.4.1 资源配置建议 -->## 10.4.1 资源配置建议
+## 10.4.1 资源配置建议
 
 ```yaml
 # cilium-agent DaemonSet 资源配置
@@ -1770,7 +1782,10 @@ data:
   monitor-aggregation-flags: "all"
 ```
 
-##<!-- chunk: 10.4.2 节点内核参数调优 -->## 10.4.2 节点内核参数调优
+## 10.4.2 节点内核参数调优
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
 
 ```bash
 #!/bin/bash
@@ -1801,7 +1816,7 @@ sysctl -w net.core.bpf_jit_harden=1
 echo "内核参数配置完成"
 ```
 
-##<!-- chunk: 10.4.3 监控与告警配置 -->## 10.4.3 监控与告警配置
+## 10.4.3 监控与告警配置
 
 ```yaml
 # Cilium ServiceMonitor - Prometheus 监控配置
@@ -1867,7 +1882,10 @@ spec:
         summary: "Cilium Envoy 错误率超过 5%"
 ```
 
-#<!-- chunk: 10.5 故障排查指南 (Troubleshooting Guide) -->## 10.5 故障排查指南 (Troubleshooting Guide)
+## 10.5 故障排查指南 (Troubleshooting Guide)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1915,7 +1933,7 @@ echo "=== 10. 收集诊断信息 ==="
 cilium sysdump --output-filename cilium-sysdump-$(date +%Y%m%d)
 ```
 
-#<!-- chunk: 10.6 总结：选型决策树 (Decision Tree) -->## 10.6 总结：选型决策树 (Decision Tree)
+## 10.6 总结：选型决策树 (Decision Tree)
 
 ```mermaid
 flowchart TD
@@ -2109,7 +2127,7 @@ cilium debuginfo                     # 调试信息
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-35-ebpf-technology MOC
-- [[domain-03-networking-traffic/README|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
+- [[domain-03-networking-traffic/README.md|Domain 03: eBPF 技术体系 (eBPF Technology Stack)]]
 - Domain-35 eBPF 技术 — 开源项目索引
 - eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...
 - eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)

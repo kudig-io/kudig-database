@@ -212,6 +212,9 @@ startupProbe:
 
 ### 2.4 探针故障诊断
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 测试探针端点
 kubectl exec -it <pod-name> -- curl -s http://localhost:8080/healthz
@@ -471,6 +474,9 @@ spec:
 
 ### 8.1 调度异常
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 查看调度决策详情
 kubectl describe pod <pod-name> | grep -A30 "Events:"
@@ -483,6 +489,9 @@ kubectl logs -n kube-system kube-scheduler-xxx --tail=50 | grep <pod-name>
 ```
 
 ### 8.2 网络异常
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 测试 Pod 间连通性

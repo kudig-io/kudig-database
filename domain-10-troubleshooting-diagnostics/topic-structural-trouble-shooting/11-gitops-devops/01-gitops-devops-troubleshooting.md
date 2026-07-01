@@ -327,6 +327,9 @@ kubectl get kustomizations -A -o json | jq -r '
 
 #### CI/CD 流水线诊断
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # CI/CD 流水线诊断脚本
@@ -844,6 +847,9 @@ spec:
 
 #### 方案二：Sealed Secrets 配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # Sealed Secrets 配置脚本
@@ -1192,15 +1198,17 @@ echo "最佳实践检查报告已生成: $BEST_PRACTICES_REPORT"
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm|helm]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-19-landscape-references/topic-index/helm-index|Helm 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-19-landscape-references/topic-index/helm-index.md|Helm 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/03-flux-image-automation-troubleshooting|03-flux-image-automation-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/04-backup-restore-troubleshooting|04-backup-restore-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting|02-tekton-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/03-flux-image-automation-troubleshooting|03-flux-image-automation-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/04-backup-restore-troubleshooting.md|04-backup-restore-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting.md|02-tekton-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
+
+```

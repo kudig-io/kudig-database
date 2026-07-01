@@ -63,7 +63,7 @@ created: "2026-05-23"
 
 基础设施级灾备（如存储复制、虚拟机故障切换）解决的是"数据不丢"的问题，但现代云原生应用的灾备远不止于此。应用级灾备关注的是在应用架构层面实现多区域部署、数据复制、自动故障检测和无缝流量切换，确保在区域性灾难发生时，业务能够在秒级到分钟级内切换到备用区域，用户几乎无感知。本文档深入探讨应用级灾备的核心技术：多区域部署架构、数据复制策略、DNS 故障转移、流量渐进式切换以及完整的问题响应编排。
 
-#<!-- chunk: RPO 与 RTO 定义 -->## RPO 与 RTO 定义
+## RPO 与 RTO 定义
 
 - **RPO（Recovery Point Objective）**：在应用级灾备中，RPO 由数据复制策略决定。同步复制可实现 RPO ≈ 0（零数据丢失）；异步复制根据复制间隔可实现秒级到分钟级 RPO；最终一致性方案则接受更大范围的数据不一致。
 - **RTO（Recovery Time Objective）**：应用级灾备通过多活部署可将 RTO 缩短至秒级（自动 DNS 故障转移）到分钟级（流量渐进式切换）。与基础设施级灾备不同，应用级灾备强调的是"服务不中断"而非"数据恢复后启动"。
@@ -95,7 +95,7 @@ application_dr_rpo_rto:
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 多区域应用灾备架构 -->## 多区域应用灾备架构
+## 多区域应用灾备架构
 
 ```mermaid
 graph TB
@@ -174,7 +174,7 @@ graph TB
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: 多区域 [[Kubernetes|Kubernetes]] 部署 -->## 多区域 Kubernetes 部署
+## 多区域 Kubernetes 部署
 
 ```yaml
 # 主区域部署 - production-us-east
@@ -243,7 +243,7 @@ spec:
 # (同上，修改 region 和 DB_HOST)
 ```
 
-#<!-- chunk: 数据库跨区域复制 -->## 数据库跨区域复制
+## 数据库跨区域复制
 
 ```yaml
 # MySQL 跨区域复制配置
@@ -312,7 +312,7 @@ SHOW SLAVE STATUS FOR CHANNEL 'dr_replication'\G
 -- Retrieved_Gtid_Set: 连续无间隔
 ```
 
-#<!-- chunk: Redis 跨区域复制 -->## Redis 跨区域复制
+## Redis 跨区域复制
 
 ```yaml
 # Redis Cluster 跨区域配置
@@ -364,7 +364,7 @@ data:
     cluster-migration-barrier 1
 ```
 
-#<!-- chunk: DNS 故障转移配置 -->## DNS 故障转移配置
+## DNS 故障转移配置
 
 ```yaml
 # external-dns 配置 - 自动管理 DNS 记录
@@ -443,7 +443,7 @@ data:
         slack: "#dr-alerts"
 ```
 
-#<!-- chunk: 流量渐进式切换 -->## 流量渐进式切换
+## 流量渐进式切换
 
 ```yaml
 # Istio 多集群流量管理 - 渐进式故障转移
@@ -503,7 +503,7 @@ spec:
           weight: 100       # 流量切换到备区域
 ```
 
-#<!-- chunk: 自动化故障切换脚本 -->## 自动化故障切换脚本
+## 自动化故障切换脚本
 
 ```python
 #!/usr/bin/env python3
@@ -709,7 +709,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 备份策略 -->## 备份策略
 
-#<!-- chunk: 应用层数据保护策略 -->## 应用层数据保护策略
+## 应用层数据保护策略
 
 ```yaml
 application_data_protection:
@@ -754,7 +754,7 @@ application_data_protection:
 
 <!-- chunk: 恢复流程 -->## 恢复流程
 
-#<!-- chunk: 分级问题响应 -->## 分级问题响应
+## 分级问题响应
 
 ```yaml
 failover_response:
@@ -883,7 +883,10 @@ application_dr_monitoring:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题诊断 -->## 常见问题诊断
+## 常见问题诊断
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -920,7 +923,7 @@ curl -s https://api.us-east-1.company.com/health | jq .
 curl -s https://api.us-west-2.company.com/health | jq .
 ```
 
-#<!-- chunk: 故障排查手册 -->## 故障排查手册
+## 故障排查手册
 
 | 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
 |:---|:---|:---|:---|
@@ -941,7 +944,7 @@ curl -s https://api.us-west-2.company.com/health | jq .
 
 <!-- chunk: 数据复制策略深度对比 -->## 数据复制策略深度对比
 
-#<!-- chunk: 复制模式选型 -->## 复制模式选型
+## 复制模式选型
 
 数据复制是应用级灾备的核心技术。不同的复制模式在一致性、延迟、成本和复杂性之间存在权衡。企业应根据业务需求和预算选择合适的复制策略。
 
@@ -953,7 +956,7 @@ curl -s https://api.us-west-2.company.com/health | jq .
 | 逻辑复制 | 最终一致 | 低 | 有可能 | 低 | 跨数据库类型 |
 | CDC（变更数据捕获） | 最终一致 | 极低 | 有可能 | 中 | 实时数据同步 |
 
-#<!-- chunk: MySQL 数据库复制方案 -->## MySQL 数据库复制方案
+## MySQL 数据库复制方案
 
 ```yaml
 # MySQL 高可用跨区域配置
@@ -1008,7 +1011,7 @@ mysql_ha_cross_region:
         notification: "DBA 团队 + SRE 团队"
 ```
 
-#<!-- chunk: Kafka 跨区域复制 -->## Kafka 跨区域复制
+## Kafka 跨区域复制
 
 消息队列的跨区域复制是微服务架构灾备的关键环节。Kafka 通过 MirrorMaker 2 实现跨集群消息复制，支持主动-主动和主动-被动两种模式。
 
@@ -1058,7 +1061,7 @@ kafka_mm2:
 
 <!-- chunk: SaaS 应用灾备 -->## SaaS 应用灾备
 
-#<!-- chunk: SaaS 多租户灾备架构 -->## SaaS 多租户灾备架构
+## SaaS 多租户灾备架构
 
 对于 SaaS 应用，灾备方案需要考虑多租户隔离。通常有两种模式：共享灾备（所有租户共享同一灾备环境）和独立灾备（每个租户有独立的灾备资源）。共享灾备成本较低但隔离性差，独立灾备成本高但满足合规要求。
 
@@ -1091,7 +1094,7 @@ saas_dr:
 
 <!-- chunk: 成本优化策略 -->## 成本优化策略
 
-#<!-- chunk: 灾备成本模型 -->## 灾备成本模型
+## 灾备成本模型
 
 应用级灾备的成本主要包括：备区域基础设施成本、数据复制带宽成本、运维人力成本和监控工具成本。不同灾备架构的成本差异巨大——多活架构的成本是主备热备的 2-3 倍，而主备温备的成本仅为多活的 1/3。
 
@@ -1133,7 +1136,7 @@ cost_optimization:
 
 <!-- chunk: 故障转移测试自动化 -->## 故障转移测试自动化
 
-#<!-- chunk: 自动化故障转移验证 -->## 自动化故障转移验证
+## 自动化故障转移验证
 
 故障转移方案的有效性取决于持续的自动化验证。以下框架定期测试故障转移流程的每个环节，确保在真实灾难发生时一切按预期工作。
 
@@ -1183,7 +1186,7 @@ automated_failover_test:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-30-disaster-recovery-business-continuity KUDIG Database — Global MOC
-- [[domain-09-reliability-engineering/README|Domain 30: 企业级灾备与业务连续性 (Enterprise [[Kubernetes 灾难恢复最佳实践|Disaster Recovery]] & Busin...]]
+- [[domain-09-reliability-engineering/README.md|Domain 09: 企业级灾备与业务连续性 (Enterprise [[Kubernetes 灾难恢复最佳实践|Disaster Recovery]] & Busin...]]
 - index.md|Domain-30 灾备与业务连续性 — 开源项目索引]]
 - VMware vSphere 企业级灾备与业务连续性
 - Veeam Backup & Replication 企业级备份恢复解决方案

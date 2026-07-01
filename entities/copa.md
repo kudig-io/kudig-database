@@ -44,7 +44,7 @@ Copa (Copacetic) 是一个容器镜像漏洞修补工具，能够直接在现有
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -60,16 +60,16 @@ Copa (Copacetic) 是一个容器镜像漏洞修补工具，能够直接在现有
 
 ## 参考链接
 
-- [[entities/trivy|trivy]]
-- [[concepts/security-defense-depth|security-defense-depth]]
-- [[concepts/ci-cd-pipeline-patterns|ci-cd-pipeline-patterns]]
+- [[entities/trivy.md|trivy]]
+- [[concepts/security-defense-depth.md|security-defense-depth]]
+- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
 
 ## Related
 
 - [[vineyard]] — Vineyard
 - [[distribution]] — Distribution
 - [[03-istio-security-hardening]] — Istio 安全加固
-- [[entities/trivy|trivy]] — Trivy
+- [[entities/trivy.md|trivy]] — Trivy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - copa
@@ -159,6 +159,6 @@ Copa (Copacetic) 是一个容器镜像漏洞修补工具，能够直接在现有
 - RELEASE-NOTES-0.54
 - RELEASE-NOTES-0.60
 - RELEASE-NOTES-0.31
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

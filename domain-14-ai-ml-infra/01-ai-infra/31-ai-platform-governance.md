@@ -59,7 +59,7 @@ created: "2026-05-23"
 
 # 31 - AI平台治理框架
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [[entities/kubeflow|Kubeflow]] Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | CNCF TAG App Delivery
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [[entities/kubeflow.md|Kubeflow]] Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | CNCF TAG App Delivery
 
 <!-- chunk: 一、AI平台治理全景架构 -->
 ## 一、AI平台治理全景架构
@@ -365,6 +365,9 @@ spec:
 ```
 
 ### 2.2 治理策略实施
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 部署治理策略
@@ -686,7 +689,7 @@ A: 建立治理委员会，定期review和协调各团队需求
 ## Obsidian 相关文档
 
 - domain-11-ai-infra KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
 - Domain-11 AI 基础设施 — 开源项目索引
 - AI 基础设施架构
 - 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)

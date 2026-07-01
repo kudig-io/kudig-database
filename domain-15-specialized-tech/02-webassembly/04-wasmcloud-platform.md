@@ -106,7 +106,7 @@ k8s_versions:
 
 <!-- chunk: 1. wasmCloud 概述 -->## 1. wasmCloud 概述
 
-#<!-- chunk: 1.1 什么是 wasmCloud / What is wasmCloud -->## 1.1 什么是 wasmCloud / What is wasmCloud
+## 1.1 什么是 wasmCloud / What is wasmCloud
 
 wasmCloud 是一个 CNCF 孵化项目，构建在 WebAssembly 和 NATS 之上的分布式应用平台。它采用 Actor 模型，使开发者可以构建跨云、跨边缘的分布式 Wasm 应用：
 
@@ -131,7 +131,7 @@ Write once, run anywhere — securely
    - OpenTelemetry 原生支持
 ```
 
-#<!-- chunk: 1.2 wasmCloud vs 传统微服务 / Comparison -->## 1.2 wasmCloud vs 传统微服务 / Comparison
+## 1.2 wasmCloud vs 传统微服务 / Comparison
 
 ```mermaid
 graph TD
@@ -150,7 +150,7 @@ graph TD
     end
 ```
 
-#<!-- chunk: 1.3 核心概念速览 / Key Concepts -->## 1.3 核心概念速览 / Key Concepts
+## 1.3 核心概念速览 / Key Concepts
 
 | 概念 | 说明 |
 |------|------|
@@ -166,7 +166,7 @@ graph TD
 
 <!-- chunk: 2. Actor 模型与组件 -->## 2. Actor 模型与组件
 
-#<!-- chunk: 2.1 Actor/Component 概述 / Overview -->## 2.1 Actor/Component 概述 / Overview
+## 2.1 Actor/Component 概述 / Overview
 
 在 wasmCloud 中，Actor（新版本称为 Component）是最小的可部署单元：
 
@@ -191,7 +191,7 @@ wasmCloud Actor 特性
   - 清晰的依赖关系
 ```
 
-#<!-- chunk: 2.2 Actor 开发（Rust）/ Actor Development in Rust -->## 2.2 Actor 开发（Rust）/ Actor Development in Rust
+## 2.2 Actor 开发（Rust）/ Actor Development in Rust
 
 ```toml
 # Cargo.toml - wasmCloud Actor
@@ -455,7 +455,7 @@ fn generate_id() -> String {
 }
 ```
 
-#<!-- chunk: 2.3 Go Actor 开发 / Go Actor Development -->## 2.3 Go Actor 开发 / Go Actor Development
+## 2.3 Go Actor 开发 / Go Actor Development
 
 ```go
 // main.go - Go wasmCloud Actor
@@ -667,7 +667,7 @@ func main() {}
 
 <!-- chunk: 3. Capability Providers -->## 3. Capability Providers
 
-#<!-- chunk: 3.1 内置 Capability Providers / Built-in Providers -->## 3.1 内置 Capability Providers / Built-in Providers
+## 3.1 内置 Capability Providers / Built-in Providers
 
 ```
 wasmCloud 内置 Capability Providers
@@ -709,7 +709,7 @@ Blob 存储
   wasmcloud:secrets:vault     - Vault 集成
 ```
 
-#<!-- chunk: 3.2 自定义 Capability Provider / Custom Provider -->## 3.2 自定义 Capability Provider / Custom Provider
+## 3.2 自定义 Capability Provider / Custom Provider
 
 ```rust
 // 自定义 Capability Provider - 支付处理
@@ -833,7 +833,7 @@ async fn main() {
 }
 ```
 
-#<!-- chunk: 3.3 Provider 配置 / Provider Configuration -->## 3.3 Provider 配置 / Provider Configuration
+## 3.3 Provider 配置 / Provider Configuration
 
 ```yaml
 # wasmCloud Provider 部署配置
@@ -884,7 +884,7 @@ spec:
 
 <!-- chunk: 4. Lattice 网络 -->## 4. Lattice 网络
 
-#<!-- chunk: 4.1 Lattice 架构 / Lattice Architecture -->## 4.1 Lattice 架构 / Lattice Architecture
+## 4.1 Lattice 架构 / Lattice Architecture
 
 ```mermaid
 graph TD
@@ -921,7 +921,7 @@ graph TD
     H <--> L
 ```
 
-#<!-- chunk: 4.2 Lattice 通信模式 / Communication Patterns -->## 4.2 Lattice 通信模式 / Communication Patterns
+## 4.2 Lattice 通信模式 / Communication Patterns
 
 ```
 wasmCloud Lattice 消息主题命名规范
@@ -949,7 +949,7 @@ Host 健康检查：
   wasmbus.ctl.<lattice-id>.config.del
 ```
 
-#<!-- chunk: 4.3 Lattice 配置 / Lattice Configuration -->## 4.3 Lattice 配置 / Lattice Configuration
+## 4.3 Lattice 配置 / Lattice Configuration
 
 ```toml
 # wasmCloud Host 配置 (wasmcloud.toml)
@@ -987,7 +987,7 @@ exporter_otlp_endpoint = "http://otel-collector.monitoring.svc:4317"
 
 <!-- chunk: 5. NATS 消息系统 -->## 5. NATS 消息系统
 
-#<!-- chunk: 5.1 NATS 在 wasmCloud 中的角色 / NATS Role -->## 5.1 NATS 在 wasmCloud 中的角色 / NATS Role
+## 5.1 NATS 在 wasmCloud 中的角色 / NATS Role
 
 ```mermaid
 graph LR
@@ -1008,7 +1008,7 @@ graph LR
     end
 ```
 
-#<!-- chunk: 5.2 部署 NATS 集群 / Deploy NATS Cluster -->## 5.2 部署 NATS 集群 / Deploy NATS Cluster
+## 5.2 部署 NATS 集群 / Deploy NATS Cluster
 
 ```yaml
 # NATS Helm 安装配置
@@ -1060,6 +1060,9 @@ statefulSet:
                 topologyKey: kubernetes.io/hostname
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 安装 NATS
 helm repo add nats https://nats-io.github.io/k8s/helm/charts/
@@ -1078,7 +1081,7 @@ kubectl -n wasmcloud exec -it nats-box -- nats server list
 kubectl -n wasmcloud exec -it nats-box -- nats account add wasmcloud
 ```
 
-#<!-- chunk: 5.3 Actor 消息通信 / Actor Messaging -->## 5.3 Actor 消息通信 / Actor Messaging
+## 5.3 Actor 消息通信 / Actor Messaging
 
 ```rust
 // Actor 使用 NATS Provider 进行消息通信
@@ -1145,7 +1148,7 @@ fn validate_user(user_id: u64) -> Result<bool, String> {
 
 <!-- chunk: 6. wadm 应用模型 -->## 6. wadm 应用模型
 
-#<!-- chunk: 6.1 wadm 概述 / wadm Overview -->## 6.1 wadm 概述 / wadm Overview
+## 6.1 wadm 概述 / wadm Overview
 
 wadm (wasmCloud Application Deployment Manager) 使用 OAM (Open Application Model) 规范管理 wasmCloud 应用的期望状态：
 
@@ -1164,7 +1167,7 @@ graph TD
     I --> F
 ```
 
-#<!-- chunk: 6.2 完整 OAM Application 示例 / Full OAM Application -->## 6.2 完整 OAM Application 示例 / Full OAM Application
+## 6.2 完整 OAM Application 示例 / Full OAM Application
 
 ```yaml
 # ecommerce-app.yaml - 完整电商应用
@@ -1352,7 +1355,7 @@ spec:
         replicas: 2
 ```
 
-#<!-- chunk: 6.3 wadm 操作命令 / wadm Operations -->## 6.3 wadm 操作命令 / wadm Operations
+## 6.3 wadm 操作命令 / wadm Operations
 
 ```bash
 # 安装 wash (wasmCloud Shell)
@@ -1406,7 +1409,10 @@ wash app delete ecommerce-platform
 
 <!-- chunk: 7. Kubernetes 集成 -->## 7. Kubernetes 集成
 
-#<!-- chunk: 7.1 wasmCloud Operator / Kubernetes Operator -->## 7.1 wasmCloud Operator / Kubernetes Operator
+## 7.1 wasmCloud Operator / Kubernetes Operator
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 安装 wasmCloud Operator
@@ -1476,7 +1482,7 @@ spec:
   secretName: wasmcloud-nats-creds
 ```
 
-#<!-- chunk: 7.2 wasmCloud + Kubernetes 混合部署 / Hybrid Deployment -->## 7.2 wasmCloud + Kubernetes 混合部署 / Hybrid Deployment
+## 7.2 wasmCloud + Kubernetes 混合部署 / Hybrid Deployment
 
 ```mermaid
 graph TD
@@ -1511,7 +1517,7 @@ graph TD
     A --> C & D & E
 ```
 
-#<!-- chunk: 7.3 与 Kubernetes 服务集成 / K8s Service Integration -->## 7.3 与 Kubernetes 服务集成 / K8s Service Integration
+## 7.3 与 Kubernetes 服务集成 / K8s Service Integration
 
 ```yaml
 # 暴露 wasmCloud HTTP Server 为 K8s Service
@@ -1571,7 +1577,7 @@ spec:
 
 <!-- chunk: 8. 分布式部署 -->## 8. 分布式部署
 
-#<!-- chunk: 8.1 多集群 Lattice / Multi-cluster Lattice -->## 8.1 多集群 Lattice / Multi-cluster Lattice
+## 8.1 多集群 Lattice / Multi-cluster Lattice
 
 ```
 wasmCloud 多集群分布式部署架构
@@ -1600,7 +1606,7 @@ AWS EKS                 Azure AKS                 阿里云 ACK
                            └── sensor-collector
 ```
 
-#<!-- chunk: 8.2 NATS Leaf Node 配置 / Leaf Node Configuration -->## 8.2 NATS Leaf Node 配置 / Leaf Node Configuration
+## 8.2 NATS Leaf Node 配置 / Leaf Node Configuration
 
 ```yaml
 # 边缘节点 NATS Leaf Node 配置
@@ -1655,7 +1661,7 @@ spec:
     value: "true"
 ```
 
-#<!-- chunk: 8.3 跨 Lattice 路由 / Cross-lattice Routing -->## 8.3 跨 Lattice 路由 / Cross-lattice Routing
+## 8.3 跨 Lattice 路由 / Cross-lattice Routing
 
 ```rust
 // Actor 调用跨 Lattice 的 Actor（通过 NATS）
@@ -1704,7 +1710,7 @@ fn create_order_with_user_validation(
 
 <!-- chunk: 9. 开发实践 -->## 9. 开发实践
 
-#<!-- chunk: 9.1 WIT 接口定义 / WIT Interface Definition -->## 9.1 WIT 接口定义 / WIT Interface Definition
+## 9.1 WIT 接口定义 / WIT Interface Definition
 
 ```wit
 // wit/world.wit - 订单服务 WIT 接口
@@ -1790,7 +1796,7 @@ world orders-actor {
 }
 ```
 
-#<!-- chunk: 9.2 测试策略 / Testing Strategy -->## 9.2 测试策略 / Testing Strategy
+## 9.2 测试策略 / Testing Strategy
 
 ```rust
 // Actor 单元测试
@@ -1880,7 +1886,7 @@ mod tests {
 }
 ```
 
-#<!-- chunk: 9.3 本地开发环境 / Local Development -->## 9.3 本地开发环境 / Local Development
+## 9.3 本地开发环境 / Local Development
 
 ```bash
 # 启动本地 wasmCloud 开发环境
@@ -1941,7 +1947,7 @@ wash logs --follow
 
 <!-- chunk: 10. 安全模型 -->## 10. 安全模型
 
-#<!-- chunk: 10.1 Actor 权限声明 / Actor Permissions Declaration -->## 10.1 Actor 权限声明 / Actor Permissions Declaration
+## 10.1 Actor 权限声明 / Actor Permissions Declaration
 
 ```
 wasmCloud 零信任安全模型
@@ -1996,7 +2002,7 @@ allowed_operations := {
 }
 ```
 
-#<!-- chunk: 10.2 密钥管理 / Secret Management -->## 10.2 密钥管理 / Secret Management
+## 10.2 密钥管理 / Secret Management
 
 ```yaml
 # wasmCloud Secrets Provider 配置（HashiCorp Vault）
@@ -2055,7 +2061,7 @@ fn get_api_key() -> Result<String, String> {
 
 <!-- chunk: 11. 监控与可观测性 -->## 11. 监控与可观测性
 
-#<!-- chunk: 11.1 OpenTelemetry 集成 / OpenTelemetry Integration -->## 11.1 OpenTelemetry 集成 / OpenTelemetry Integration
+## 11.1 OpenTelemetry 集成 / OpenTelemetry Integration
 
 ```yaml
 # wasmCloud OpenTelemetry 配置
@@ -2135,7 +2141,7 @@ data:
           exporters: [prometheus]
 ```
 
-#<!-- chunk: 11.2 Grafana Dashboard / Dashboards -->## 11.2 Grafana Dashboard / Dashboards
+## 11.2 Grafana Dashboard / Dashboards
 
 ```json
 {
@@ -2207,7 +2213,7 @@ data:
 
 <!-- chunk: 12. 生产运维 -->## 12. 生产运维
 
-#<!-- chunk: 12.1 生产部署清单 / Production Checklist -->## 12.1 生产部署清单 / Production Checklist
+## 12.1 生产部署清单 / Production Checklist
 
 ```bash
 # wasmCloud 生产部署检查清单
@@ -2244,7 +2250,7 @@ kubectl -n monitoring get pods -l app=otel-collector
 echo "=== 生产部署检查完成 ==="
 ```
 
-#<!-- chunk: 12.2 滚动更新 / Rolling Updates -->## 12.2 滚动更新 / Rolling Updates
+## 12.2 滚动更新 / Rolling Updates
 
 ```bash
 # 更新 Actor 版本（零停机）
@@ -2276,7 +2282,7 @@ watch -n 2 'wash get actors | grep orders'
 wash app status orders-update
 ```
 
-#<!-- chunk: 12.3 故障恢复 / Disaster Recovery -->## 12.3 故障恢复 / Disaster Recovery
+## 12.3 故障恢复 / Disaster Recovery
 
 ```bash
 # 场景：Host 问题后自动恢复
@@ -2304,17 +2310,17 @@ kubectl -n wasmcloud exec -it nats-box -- \
 
 <!-- chunk: 参考资料 / References -->## 参考资料 / References
 
-#<!-- chunk: 官方文档 / Official Documentation -->## 官方文档 / Official Documentation
+## 官方文档 / Official Documentation
 - [wasmCloud 官方文档](https://wasmcloud.com/docs/)
 - [wasmCloud GitHub](https://github.com/wasmcloud/wasmcloud)
 - [wadm GitHub](https://github.com/wasmcloud/wadm)
 - [wash CLI 文档](https://github.com/wasmcloud/wash)
 
-#<!-- chunk: CNCF 相关 / CNCF Related -->## CNCF 相关 / CNCF Related
+## CNCF 相关 / CNCF Related
 - [wasmCloud CNCF 孵化项目](https://www.cncf.io/projects/wasmcloud/)
 - [OAM 规范](https://oam.dev/)
 
-#<!-- chunk: 标准 / Standards -->## 标准 / Standards
+## 标准 / Standards
 - [WASI 0.2 规范](https://github.com/WebAssembly/WASI)
 - [WebAssembly 组件模型](https://github.com/WebAssembly/component-model)
 - [WIT 格式规范](https://github.com/WebAssembly/component-model/blob/main/design/mvp/WIT.md)
@@ -2329,7 +2335,7 @@ kubectl -n wasmcloud exec -it nats-box -- \
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native MOC
-- [[domain-15-specialized-tech/README|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: WebAssembly 云原生 (WebAssembly Cloud Native)]]
 - Domain-38 WebAssembly 云原生 — 开源项目索引
 - WebAssembly 云原生基础
 - containerd Wasm 运行时

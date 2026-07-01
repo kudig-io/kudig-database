@@ -215,7 +215,7 @@ created: "2026-05-23"
     - [Client Binaries](#client-binaries-16)
     - [Server Binaries](#server-binaries-16)
     - [Node Binaries](#node-binaries-16)
-- [[entities/kubernetes|Kubernetes]] v1.16.0 Release Notes](#kubernetes-v1160-release-notes)
+- [[entities/kubernetes.md|Kubernetes]] v1.16.0 Release Notes](#kubernetes-v1160-release-notes)
   - [What’s New (Major Themes)](#what’s-new-major-themes)
     - [Additional Notable Feature Updates](#additional-notable-feature-updates)
   - [Known Issues](#known-issues)

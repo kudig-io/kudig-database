@@ -57,15 +57,15 @@ Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod �
 ## 参考链接
 
 - [[cilium]]
-- [[concepts/cilium-ebpf-networking|cilium-ebpf-networking]]
-- [[entities/cni-plugins|cni-plugins]]
-- [[entities/networkpolicy|networkpolicy]]
+- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
+- [[entities/cni-plugins.md|cni-plugins]]
+- [[entities/networkpolicy.md|networkpolicy]]
 
 ## Related
 
 - [[43-terway-crd-operations]] — Terway CRD 资源操作
 - [[ovn-kubernetes]] — OVN-Kubernetes
-- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[cni]] — CNI (Container Network Interface)
 
@@ -76,4 +76,4 @@ Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod �
 - [[45-terway-testing-validation]]
 - [[47-terway-troubleshooting-fta]]
 - 41-terway-architecture-deep-dive
-- [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
+- [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference

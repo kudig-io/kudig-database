@@ -90,7 +90,7 @@ Tekton 在 Java CI/CD 中的优势在于完全容器化的构建环境——每�
 
 <!-- chunk: 二、架构设计 -->## 二、架构设计
 
-#<!-- chunk: 2.1 Java CI/CD 流水线架构 -->## 2.1 Java CI/CD 流水线架构
+## 2.1 Java CI/CD 流水线架构
 
 ```mermaid
 graph LR
@@ -108,7 +108,7 @@ graph LR
     style I fill:#22c55e,stroke:#166534,color:#fff
 ```
 
-#<!-- chunk: 2.2 Workspace 与缓存架构 -->## 2.2 Workspace 与缓存架构
+## 2.2 Workspace 与缓存架构
 
 ```mermaid
 graph TB
@@ -138,7 +138,7 @@ graph TB
 
 <!-- chunk: 三、核心配置 -->## 三、核心配置
 
-#<!-- chunk: 3.1 Maven Task 定义 -->## 3.1 Maven Task 定义
+## 3.1 Maven Task 定义
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -205,7 +205,7 @@ spec:
         fi
 ```
 
-#<!-- chunk: 3.2 Jib Maven Task (无 Dockerfile 镜像构建) -->## 3.2 Jib Maven Task (无 Dockerfile 镜像构建)
+## 3.2 Jib Maven Task (无 Dockerfile 镜像构建)
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -266,7 +266,7 @@ spec:
             path: password
 ```
 
-#<!-- chunk: 3.3 Buildpacks Task -->## 3.3 Buildpacks Task
+## 3.3 Buildpacks Task
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -306,7 +306,7 @@ spec:
       - $(results.IMAGE_DIGEST.path)
 ```
 
-#<!-- chunk: 3.4 完整 Spring Boot Pipeline -->## 3.4 完整 Spring Boot Pipeline
+## 3.4 完整 Spring Boot Pipeline
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -408,7 +408,7 @@ spec:
           value: "HIGH,CRITICAL"
 ```
 
-#<!-- chunk: 3.5 生产 PipelineRun -->## 3.5 生产 PipelineRun
+## 3.5 生产 PipelineRun
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -458,7 +458,7 @@ spec:
 
 <!-- chunk: 四、安全与合规 -->## 四、安全与合规
 
-#<!-- chunk: 4.1 安全扫描 Task -->## 4.1 安全扫描 Task
+## 4.1 安全扫描 Task
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -493,7 +493,7 @@ spec:
           .
 ```
 
-#<!-- chunk: 4.2 Maven settings.xml -->## 4.2 Maven settings.xml
+## 4.2 Maven settings.xml
 
 ```yaml
 apiVersion: v1
@@ -530,7 +530,7 @@ data:
 
 <!-- chunk: 五、多环境管理策略 -->## 五、多环境管理策略
 
-#<!-- chunk: 5.1 Maven 缓存 PVC -->## 5.1 Maven 缓存 PVC
+## 5.1 Maven 缓存 PVC
 
 ```yaml
 apiVersion: v1
@@ -546,7 +546,7 @@ spec:
   storageClassName: standard
 ```
 
-#<!-- chunk: 5.2 GitOps 集成 (更新 Kustomize 镜像) -->## 5.2 GitOps 集成 (更新 Kustomize 镜像)
+## 5.2 GitOps 集成 (更新 Kustomize 镜像)
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -585,7 +585,7 @@ spec:
 
 <!-- chunk: 六、监控与回滚 -->## 六、监控与回滚
 
-#<!-- chunk: 6.1 关键指标 -->## 6.1 关键指标
+## 6.1 关键指标
 
 ```yaml
 - alert: JavaPipelineBuildFailed
@@ -597,7 +597,7 @@ spec:
     summary: "Java 构建流水线失败"
 ```
 
-#<!-- chunk: 6.2 回滚 -->## 6.2 回滚
+## 6.2 回滚
 
 ```bash
 # Tekton 不负责部署回滚
@@ -664,7 +664,7 @@ PipelineRun 超时:
 
 <!-- chunk: 九、Gradle Task 定义与多语言支持 -->## 九、Gradle Task 定义与多语言支持
 
-#<!-- chunk: 9.1 Gradle 构建Task -->## 9.1 Gradle 构建Task
+## 9.1 Gradle 构建Task
 
 对于使用 Gradle 作为构建工具的 Java 项目（如 Android 应用、Kotlin 服务），Tekton 同样提供了良好的支持。Gradle Task 与 Maven Task 的主要区别在于缓存路径和构建命令。
 
@@ -705,7 +705,7 @@ spec:
           value: $(params.GRADLE_OPTS)
 ```
 
-#<!-- chunk: 9.2 Spring Boot + Gradle Pipeline -->## 9.2 Spring Boot + Gradle Pipeline
+## 9.2 Spring Boot + Gradle Pipeline
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -768,7 +768,7 @@ spec:
           workspace: dockerconfig
 ```
 
-#<!-- chunk: 9.3 Jib Gradle Task -->## 9.3 Jib Gradle Task
+## 9.3 Jib Gradle Task
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -806,7 +806,7 @@ spec:
 
 <!-- chunk: 十、Micronaut 与 Quarkus 构建支持 -->## 十、Micronaut 与 Quarkus 构建支持
 
-#<!-- chunk: 10.1 Quarkus Fast Jar 模式 -->## 10.1 Quarkus Fast Jar 模式
+## 10.1 Quarkus Fast Jar 模式
 
 Quarkus 是红帽推出的云原生 Java 框架，其 Fast Jar 模式可以显著减少启动时间和内存占用。Tekton Pipeline 可以直接调用 Quarkus 的 Gradle/Maven 插件构建 Fast Jar，然后通过 Dockerfile 或 S2I 构建容器镜像。对于追求极致启动速度的场景，可以使用 Quarkus 的 Native Image 模式（基于 GraalVM），将启动时间降低到毫秒级。
 
@@ -846,7 +846,7 @@ spec:
           add: ["SYS_CHROOT"]
 ```
 
-#<!-- chunk: 10.2 Micronaut GraalVM 支持 -->## 10.2 Micronaut GraalVM 支持
+## 10.2 Micronaut GraalVM 支持
 
 Micronaut 是另一个支持编译时依赖注入的云原生 Java 框架。与 Spring Boot 的运行时反射不同，Micronaut 在编译时完成依赖注入，天然适合 GraalVM Native Image。Tekton 可以通过 Micronaut 的 Gradle/Maven 插件生成 Native Image。
 
@@ -908,7 +908,7 @@ spec:
 
 <!-- chunk: 十一、Java 项目测试策略 -->## 十一、Java 项目测试策略
 
-#<!-- chunk: 11.1 分层测试架构 -->## 11.1 分层测试架构
+## 11.1 分层测试架构
 
 Java 项目的测试策略遵循测试金字塔原则：单元测试数量最多、执行最快；集成测试数量适中、执行较慢；端到端测试数量最少、执行最慢。在 Tekton Pipeline 中，应该将不同层次的测试组织为不同的 Task，通过 Pipeline 的 `runAfter` 和 `when` 表达式控制执行顺序和条件。
 
@@ -981,7 +981,7 @@ spec:
           workspace: source
 ```
 
-#<!-- chunk: 11.2 测试报告与质量门禁 -->## 11.2 测试报告与质量门禁
+## 11.2 测试报告与质量门禁
 
 在 CI 流水线中集成测试报告和质量门禁可以及早发现代码质量问题。SonarQube 是 Java 生态中最流行的代码质量平台，可以与 Maven/Gradle 深度集成。Tekton Pipeline 可以在测试阶段后添加 SonarQube 扫描步骤，并根据质量门禁结果决定是否继续后续的构建和部署。
 
@@ -1025,7 +1025,7 @@ spec:
 
 <!-- chunk: 十二、Java 容器镜像优化 -->## 十二、Java 容器镜像优化
 
-#<!-- chunk: 12.1 Docker 多阶段构建 -->## 12.1 Docker 多阶段构建
+## 12.1 Docker 多阶段构建
 
 Java 应用的容器镜像优化是提高构建效率和减小镜像体积的关键技术。多阶段构建将编译和运行分离：第一阶段使用完整的 JDK 镜像编译代码，第二阶段仅使用精简的 JRE 镜像运行应用。这样可以显著减小最终镜像体积，从使用 JDK 的五百兆字节以上降低到使用 JRE-Alpine 的一百五十兆字节左右。更小的镜像意味着更快的推送和拉取速度、更低的存储成本和更小的攻击面。
 
@@ -1048,7 +1048,7 @@ EXPOSE 8080
 ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-jar", "app.jar"]
 ```
 
-#<!-- chunk: 12.2 Jib 无 Dockerfile 构建 -->## 12.2 Jib 无 Dockerfile 构建
+## 12.2 Jib 无 Dockerfile 构建
 
 Google Jib 是一个 Java 容器镜像构建工具，无需编写 Dockerfile 即可构建优化的容器镜像。Jib 直接将 Java 应用分层打包为容器镜像，支持 Docker 和 OCI 格式。Jib 的分层策略（依赖层、资源层、类文件层）最大化利用了容器镜像的缓存机制，只推送变更的层，大幅提升构建速度。Jib 可以与 Maven 和 Gradle 深度集成，也支持 Tekton Pipeline 调用。
 
@@ -1080,7 +1080,7 @@ jib {
 
 <!-- chunk: 十三、Java 项目 Tekton 最佳实践总结 -->## 十三、Java 项目 Tekton 最佳实践总结
 
-#<!-- chunk: 13.1 构建优化策略 -->## 13.1 构建优化策略
+## 13.1 构建优化策略
 
 Java 项目的构建优化是提高 CI/CD 效率的关键。主要的优化手段包括：Maven/Gradle 依赖缓存（通过 Workspace PVC 跨 PipelineRun 复用）、增量编译（只编译变更的模块）、并行构建（多模块项目使用并行构建）和构建缓存（Gradle Build Cache 或 Maven Build Cache Extension）。对于多模块项目，推荐使用增量构建策略，只构建变更的模块及其依赖模块。
 
@@ -1111,7 +1111,7 @@ Java 构建优化清单:
     - 跳过非关键测试 (PR 场景)
 ```
 
-#<!-- chunk: 13.2 常见构建问题 -->## 13.2 常见构建问题
+## 13.2 常见构建问题
 
 ```yaml
 常见问题:
@@ -1140,7 +1140,7 @@ Java 构建优化清单:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-08-release-change-management MOC
-- [[domain-08-release-change-management/README|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
+- [[domain-08-release-change-management/README.md|Domain 08: GitOps与CI/CD (GitOps & CI/CD)]]
 - Domain-23 GitOps & CI/CD — 开源项目索引
 - Argo CD企业级GitOps实践指南
 - Jenkins企业级CI/CD流水线深度实践
@@ -1161,4 +1161,4 @@ Java 构建优化清单:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

@@ -202,6 +202,9 @@ curl -s http://$alertmanager_url/api/v2/status && echo " ✓ AlertManager 正常
 
 #### Prometheus 故障诊断
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # Prometheus 故障诊断脚本
@@ -265,6 +268,9 @@ echo "$PERFORMANCE_METRICS"
 ```
 
 #### Grafana 故障诊断
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -332,6 +338,9 @@ kubectl top pod -n monitoring $GRAFANA_POD
 ```
 
 #### Loki 故障诊断
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -402,6 +411,9 @@ echo "$STREAMS" | jq -r '.data | length'
 ```
 
 #### Jaeger 故障诊断
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1361,7 +1373,7 @@ observabilityArchitecture:
         receivers:
           - name: "pagerduty"
             pagerduty_configs:
-            - service_key: "<pagerduty-key>"
+            - routing_key: "<pagerduty-key>"
           - name: "slack"
             slack_configs:
             - channel: "#alerts"
@@ -1432,6 +1444,9 @@ observabilityArchitecture:
 ```
 
 ### 可观测性数据质量管理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1538,12 +1553,14 @@ echo "可观测性数据质量报告已生成: $QUALITY_REPORT"
 - 01-observability-architecture-overview
 - 02-grafana-enterprise-observability
 - 08-docker-troubleshooting-guide
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/03-ebpf-observability-troubleshooting|03-ebpf-observability-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/04-finops-cost-optimization-troubleshooting|04-finops-cost-optimization-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/02-opentelemetry-troubleshooting|02-opentelemetry-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/03-ebpf-observability-troubleshooting|03-ebpf-observability-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/03-ebpf-observability-troubleshooting.md|03-ebpf-observability-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|04-finops-cost-optimization-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/02-opentelemetry-troubleshooting.md|02-opentelemetry-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/03-ebpf-observability-troubleshooting.md|03-ebpf-observability-troubleshooting]]
+
+```

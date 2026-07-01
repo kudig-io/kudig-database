@@ -650,6 +650,9 @@ spec:
 
 ### 3.6 一键部署
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 加载镜像到 kind 集群（如果用 kind）
 kind load docker-image todo-app:v1.0.0 --name k8s-lab
@@ -815,6 +818,10 @@ spec:
 
 ### 4.5 部署 Helm Chart
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 语法检查
 helm lint helm/todo-app
@@ -838,7 +845,7 @@ helm upgrade todo-app helm/todo-app --set image.tag=v1.1.0
 helm rollback todo-app 1
 
 # 卸载
-helm uninstall todo-app -n todo-app
+helm uninstall todo-app -n todo-app  # ⚠️ 删除 release 及关联资源
 ```
 
 ---
@@ -855,6 +862,9 @@ git push -u origin main
 ```
 
 ### 5.2 安装 [[ArgoCD|ArgoCD]]
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 ArgoCD 命名空间
@@ -900,6 +910,9 @@ spec:
       - CreateNamespace=true
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply -f argocd-application.yaml
 
@@ -921,6 +934,9 @@ kubectl apply -f argocd-application.yaml
 ## 阶段六：可观测性（30 分钟）
 
 ### 6.1 部署 Prometheus + Grafana
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 使用 kube-prometheus-stack Helm Chart
@@ -1003,6 +1019,9 @@ spec:
 
 ### 场景 1：Pod 崩溃自动恢复
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 手动删除一个 Pod
 kubectl delete pod -n todo-app -l app=todo-web --grace-period=0
@@ -1012,6 +1031,9 @@ kubectl get pods -n todo-app -w
 ```
 
 ### 场景 2：数据库连接断开
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 删除 PostgreSQL Pod
@@ -1034,6 +1056,10 @@ kubectl get hpa -n todo-app -w
 ```
 
 ### 场景 4：配置变更（不重建镜像）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 修改 ConfigMap（如改页面标题）
@@ -1075,13 +1101,17 @@ kubectl rollout restart deployment/todo-web -n todo-app
 
 ## 清理资源
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```bash
 # 卸载 Helm releases
-helm uninstall todo-app -n todo-app
-helm uninstall prometheus -n monitoring
+helm uninstall todo-app -n todo-app  # ⚠️ 删除 release 及关联资源
+helm uninstall prometheus -n monitoring  # ⚠️ 删除 release 及关联资源
 
 # 删除命名空间（级联删除所有资源）
-kubectl delete ns todo-app monitoring argocd
+kubectl delete ns todo-app monitoring argocd  # ⚠️ 不可逆：永久删除命名空间及全部资源
 
 # 删除 kind 集群（如需）
 kind delete cluster --name k8s-lab

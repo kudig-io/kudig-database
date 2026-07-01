@@ -122,7 +122,7 @@ k8s_versions:
 
 <!-- chunk: 1. 行业背景 -->## 1. 行业背景
 
-#<!-- chunk: 1.1 信创产业背景 -->## 1.1 信创产业背景
+## 1.1 信创产业背景
 
 信创（信息技术应用创新）是国家战略，目标实现核心技术自主可控：
 
@@ -135,7 +135,7 @@ k8s_versions:
 | 应用软件 | Office/ERP 国外厂商 | WPS/用友/金蝶/泛微 | 基本完成 |
 | 云平台 | VMware/OpenStack | 阿里云飞天/华为云 Stack | 加速推进 |
 
-#<!-- chunk: 1.2 核心场景 -->## 1.2 核心场景
+## 1.2 核心场景
 
 - **党政办公系统替代**: OA/邮件/公文系统全面国产化
 - **金融核心系统下移**: 银行核心交易去 IOE
@@ -147,7 +147,7 @@ k8s_versions:
 
 <!-- chunk: 2. 业务架构 -->## 2. 业务架构
 
-#<!-- chunk: 2.1 信创云整体架构 -->## 2.1 信创云整体架构
+## 2.1 信创云整体架构
 
 ```mermaid
 graph TB
@@ -200,7 +200,7 @@ graph TB
     DB1 & DB2 --> APP1 & APP2 & APP3 & APP4
 ```
 
-#<!-- chunk: 2.2 金融核心系统去 IOE 迁移流程 -->## 2.2 金融核心系统去 IOE 迁移流程
+## 2.2 金融核心系统去 IOE 迁移流程
 
 ```mermaid
 flowchart TD
@@ -222,7 +222,7 @@ flowchart TD
     O --> P[生产运行]
 ```
 
-#<!-- chunk: 2.3 信创应用部署状态机 -->## 2.3 信创应用部署状态机
+## 2.3 信创应用部署状态机
 
 ```mermaid
 stateDiagram-v2
@@ -242,7 +242,7 @@ stateDiagram-v2
 
 <!-- chunk: 3. 技术架构 -->## 3. 技术架构
 
-#<!-- chunk: 3.1 信创 K8s 集群架构 -->## 3.1 信创 K8s 集群架构
+## 3.1 信创 K8s 集群架构
 
 ```mermaid
 graph TB
@@ -274,7 +274,7 @@ graph TB
     WN1 & WN2 & WN3 --> NET1 & NET2
 ```
 
-#<!-- chunk: 3.2 K8s YAML 配置 -->## 3.2 K8s YAML 配置
+## 3.2 K8s YAML 配置
 
 ```yaml
 # 信创节点池配置
@@ -420,7 +420,7 @@ spec:
 
 <!-- chunk: 4. 核心数据流 -->## 4. 核心数据流
 
-#<!-- chunk: 4.1 双轨并行迁移数据流 -->## 4.1 双轨并行迁移数据流
+## 4.1 双轨并行迁移数据流
 
 ```mermaid
 sequenceDiagram
@@ -449,7 +449,7 @@ sequenceDiagram
 
 <!-- chunk: 5. 安全与合规 -->## 5. 安全与合规
 
-#<!-- chunk: 5.1 等保三级合规架构 -->## 5.1 等保三级合规架构
+## 5.1 等保三级合规架构
 
 ```mermaid
 graph TB
@@ -536,17 +536,17 @@ graph TB
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

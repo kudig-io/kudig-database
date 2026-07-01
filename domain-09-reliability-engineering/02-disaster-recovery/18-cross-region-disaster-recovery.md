@@ -88,9 +88,9 @@ k8s_versions:
 
 <!-- chunk: 🌍 多活架构设计 -->## 🌍 多活架构设计
 
-#<!-- chunk: 地域分布策略 -->## 地域分布策略
+## 地域分布策略
 
-##<!-- chunk: 1. 三地域五中心架构 -->## 1. 三地域五中心架构
+## 1. 三地域五中心架构
 ```yaml
 # 多地域集群配置
 apiVersion: cluster.x-k8s.io/v1beta1
@@ -133,7 +133,7 @@ spec:
     name: tertiary-control-plane
 ```
 
-##<!-- chunk: 2. 流量分发策略 -->## 2. 流量分发策略
+## 2. 流量分发策略
 ```yaml
 # 全球负载均衡配置
 apiVersion: v1
@@ -167,26 +167,26 @@ spec:
   gateways:
   - global-gateway
   http:
-  - match:
-    - headers:
-        region:
-          exact: "us-east-1"
-    route:
-    - destination:
-        host: app.us-east-1.svc.cluster.local
-        port:
-          number: 8080
-      weight: 100
-  - match:
-    - headers:
-        region:
-          exact: "us-west-2"
-    route:
-    - destination:
-        host: app.us-west-2.svc.cluster.local
-        port:
-          number: 8080
-      weight: 100
+  - matchers:
+    - - headers=""
+    - region=""
+    - exact="us-east-1"
+    - route=""
+    - - destination=""
+    - host="app.us-east-1.svc.cluster.local"
+    - port=""
+    - number="8080"
+    - weight="100"
+  - matchers:
+    - - headers=""
+    - region=""
+    - exact="us-west-2"
+    - route=""
+    - - destination=""
+    - host="app.us-west-2.svc.cluster.local"
+    - port=""
+    - number="8080"
+    - weight="100"
   - route:
     - destination:
         host: app.us-east-1.svc.cluster.local
@@ -205,9 +205,9 @@ spec:
       weight: 10
 ```
 
-#<!-- chunk: 数据同步架构 -->## 数据同步架构
+## 数据同步架构
 
-##<!-- chunk: 1. 数据库多活配置 -->## 1. 数据库多活配置
+## 1. 数据库多活配置
 ```yaml
 # MySQL主主复制配置
 apiVersion: apps/v1
@@ -276,7 +276,7 @@ data:
     replicate-ignore-db=mysql
 ```
 
-##<!-- chunk: 2. Redis集群多地域部署 -->## 2. Redis集群多地域部署
+## 2. Redis集群多地域部署
 ```yaml
 # Redis多地域集群配置
 apiVersion: databases.spotahome.com/v1
@@ -337,9 +337,9 @@ data:
 
 <!-- chunk: 🔄 故障检测与切换 -->## 🔄 故障检测与切换
 
-#<!-- chunk: 智能故障检测 -->## 智能故障检测
+## 智能故障检测
 
-##<!-- chunk: 1. 多维度健康检查 -->## 1. 多维度健康检查
+## 1. 多维度健康检查
 ```python
 #!/usr/bin/env python3
 # 智能故障检测系统
@@ -641,7 +641,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-##<!-- chunk: 2. 自动故障切换 -->## 2. 自动故障切换
+## 2. 自动故障切换
 ```yaml
 # 自动故障切换配置
 apiVersion: apps/v1
@@ -712,9 +712,9 @@ data:
 
 <!-- chunk: 📊 数据一致性保障 -->## 📊 数据一致性保障
 
-#<!-- chunk: 分布式事务处理 -->## 分布式事务处理
+## 分布式事务处理
 
-##<!-- chunk: 1. 最终一致性协议 -->## 1. 最终一致性协议
+## 1. 最终一致性协议
 ```python
 #!/usr/bin/env python3
 # 分布式数据一致性管理器
@@ -1006,9 +1006,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-#<!-- chunk: 读写分离策略 -->## 读写分离策略
+## 读写分离策略
 
-##<!-- chunk: 1. 智能路由配置 -->## 1. 智能路由配置
+## 1. 智能路由配置
 ```yaml
 # 数据库读写分离配置
 apiVersion: apps/v1
@@ -1078,9 +1078,9 @@ data:
 
 <!-- chunk: 📈 性能优化 -->## 📈 性能优化
 
-#<!-- chunk: 延迟优化策略 -->## 延迟优化策略
+## 延迟优化策略
 
-##<!-- chunk: 1. CDN和边缘计算 -->## 1. CDN和边缘计算
+## 1. CDN和边缘计算
 ```yaml
 # 全球CDN配置
 apiVersion: networking.istio.io/v1beta1
@@ -1117,35 +1117,35 @@ spec:
   gateways:
   - global-gateway
   http:
-  - match:
-    - uri:
-        prefix: "/static/"
-    route:
-    - destination:
-        host: cdn-edge-cluster
-        port:
-          number: 80
-    headers:
-      response:
-        set:
-          cache-control: "public, max-age=31536000"
-  - match:
-    - uri:
-        prefix: "/api/"
-    route:
-    - destination:
-        host: app-primary-region
-        port:
-          number: 8080
-      weight: 70
-    - destination:
-        host: app-secondary-region
-        port:
-          number: 8080
-      weight: 30
+  - matchers:
+    - - uri=""
+    - prefix="/static/"
+    - route=""
+    - - destination=""
+    - host="cdn-edge-cluster"
+    - port=""
+    - number="80"
+    - headers=""
+    - response=""
+    - set=""
+    - cache-control="public, max-age=31536000"
+  - matchers:
+    - - uri=""
+    - prefix="/api/"
+    - route=""
+    - - destination=""
+    - host="app-primary-region"
+    - port=""
+    - number="8080"
+    - weight="70"
+    - - destination=""
+    - host="app-secondary-region"
+    - port=""
+    - number="8080"
+    - weight="30"
 ```
 
-##<!-- chunk: 2. 缓存策略优化 -->## 2. 缓存策略优化
+## 2. 缓存策略优化
 ```yaml
 # 多级缓存配置
 apiVersion: apps/v1
@@ -1220,7 +1220,7 @@ data:
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 架构设计阶段 -->## 架构设计阶段
+## 架构设计阶段
 - [ ] 设计多地域部署架构和网络拓扑
 - [ ] 规划数据同步和一致性策略
 - [ ] 制定故障检测和切换机制
@@ -1228,7 +1228,7 @@ data:
 - [ ] 配置安全隔离和访问控制
 - [ ] 建立监控告警和运维体系
 
-#<!-- chunk: 部署实施阶段 -->## 部署实施阶段
+## 部署实施阶段
 - [ ] 部署多地域Kubernetes集群
 - [ ] 配置数据库多活复制
 - [ ] 实施应用多地域部署
@@ -1236,7 +1236,7 @@ data:
 - [ ] 配置数据同步和一致性保障
 - [ ] 实施安全和合规控制
 
-#<!-- chunk: 运营维护阶段 -->## 运营维护阶段
+## 运营维护阶段
 - [ ] 建立常态化演练机制
 - [ ] 实施性能监控和优化
 - [ ] 维护故障处理流程
@@ -1253,9 +1253,9 @@ data:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -1267,9 +1267,9 @@ data:
 
 ## Related
 
-- [[release-notes/22-production-checklist|22-production-checklist]]
-- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production|02-spring-boot-kubernetes-production]]
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- 22-production-checklist
+- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
 
 ## See Also
 

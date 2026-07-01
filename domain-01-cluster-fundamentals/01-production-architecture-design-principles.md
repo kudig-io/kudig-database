@@ -87,9 +87,9 @@ k8s_versions:
 
 <!-- chunk: 🏗️ 高可用架构设计 -->## 🏗️ 高可用架构设计
 
-#<!-- chunk: 控制平面高可用 -->## 控制平面高可用
+## 控制平面高可用
 
-##<!-- chunk: 1. 控制平面组件冗余 -->## 1. 控制平面组件冗余
+## 1. 控制平面组件冗余
 ```yaml
 # etcd集群配置示例
 apiVersion: v1
@@ -107,7 +107,7 @@ spec:
         topologyKey: kubernetes.io/hostname
 ```
 
-##<!-- chunk: 2. API Server负载均衡 -->## 2. API Server负载均衡
+## 2. API Server负载均衡
 ```bash
 # HAProxy配置示例
 frontend k8s-api
@@ -120,7 +120,7 @@ frontend k8s-api
     server api3 10.0.1.12:6443 check
 ```
 
-##<!-- chunk: 3. 多区域部署策略 -->## 3. 多区域部署策略
+## 3. 多区域部署策略
 ```yaml
 # 拓扑感知调度配置
 apiVersion: apps/v1
@@ -139,9 +139,9 @@ spec:
             app: critical-app
 ```
 
-#<!-- chunk: 数据持久化高可用 -->## 数据持久化高可用
+## 数据持久化高可用
 
-##<!-- chunk: 1. etcd备份策略 -->## 1. etcd备份策略
+## 1. etcd备份策略
 ```bash
 #!/bin/bash
 # etcd备份脚本
@@ -153,7 +153,7 @@ ETCDCTL_API=3 etcdctl \
   snapshot save /backup/etcd-snapshot-$(date +%Y%m%d-%H%M%S).db
 ```
 
-##<!-- chunk: 2. 存储类高可用配置 -->## 2. 存储类高可用配置
+## 2. 存储类高可用配置
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -174,9 +174,9 @@ allowedTopologies:
 
 <!-- chunk: 🔒 安全架构设计 -->## 🔒 安全架构设计
 
-#<!-- chunk: 零信任网络模型 -->## 零信任网络模型
+## 零信任网络模型
 
-##<!-- chunk: 1. 网络策略实施 -->## 1. 网络策略实施
+## 1. 网络策略实施
 ```yaml
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -206,13 +206,9 @@ spec:
       port: 53
 ```
 
-##<!-- chunk: 2. Pod安全策略 -->## 2. Pod安全策略
+## 2. Pod安全策略
 ```yaml
 apiVersion: policy/v1beta1
-
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
 
 kind: PodSecurityPolicy
 metadata:
@@ -249,9 +245,9 @@ spec:
   readOnlyRootFilesystem: true
 ```
 
-#<!-- chunk: 身份认证与授权 -->## 身份认证与授权
+## 身份认证与授权
 
-##<!-- chunk: 1. RBAC最佳实践 -->## 1. RBAC最佳实践
+## 1. RBAC最佳实践
 ```yaml
 # 最小权限原则Role定义
 apiVersion: rbac.authorization.k8s.io/v1
@@ -284,9 +280,9 @@ roleRef:
 
 <!-- chunk: 📈 可扩展性设计 -->## 📈 可扩展性设计
 
-#<!-- chunk: 水平扩展策略 -->## 水平扩展策略
+## 水平扩展策略
 
-##<!-- chunk: 1. HPA配置优化 -->## 1. HPA配置优化
+## 1. HPA配置优化
 ```yaml
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -327,7 +323,7 @@ spec:
         periodSeconds: 60
 ```
 
-##<!-- chunk: 2. 集群自动扩缩容 -->## 2. 集群自动扩缩容
+## 2. 集群自动扩缩容
 ```yaml
 # Cluster Autoscaler配置
 apiVersion: apps/v1
@@ -354,9 +350,9 @@ spec:
         - --scale-down-unneeded-time=10m
 ```
 
-#<!-- chunk: 多租户架构 -->## 多租户架构
+## 多租户架构
 
-##<!-- chunk: 1. 命名空间隔离 -->## 1. 命名空间隔离
+## 1. 命名空间隔离
 ```yaml
 # 命名空间资源配置
 apiVersion: v1
@@ -396,9 +392,9 @@ spec:
 
 <!-- chunk: 🛠️ 架构设计工具 -->## 🛠️ 架构设计工具
 
-#<!-- chunk: 基础设施即代码 -->## 基础设施即代码
+## 基础设施即代码
 
-##<!-- chunk: 1. Terraform模块化设计 -->## 1. Terraform模块化设计
+## 1. Terraform模块化设计
 ```hcl
 # modules/kubernetes-cluster/main.tf
 variable "cluster_name" {
@@ -433,7 +429,7 @@ resource "aws_eks_cluster" "main" {
 }
 ```
 
-##<!-- chunk: 2. Helm Chart最佳实践 -->## 2. Helm Chart最佳实践
+## 2. Helm Chart最佳实践
 ```yaml
 # Chart.yaml
 apiVersion: v2
@@ -477,38 +473,38 @@ autoscaling:
 
 <!-- chunk: 📊 架构评估标准 -->## 📊 架构评估标准
 
-#<!-- chunk: 可用性指标 -->## 可用性指标
+## 可用性指标
 - **SLI目标**: 99.95% API Server可用性
 - **MTBF要求**: > 720小时（30天）
 - **MTTR目标**: < 30分钟
 
-#<!-- chunk: 性能指标 -->## 性能指标
+## 性能指标
 - **API响应时间**: P99 < 1秒
 - **Pod调度延迟**: < 5秒
 - **容器启动时间**: < 30秒
 
-#<!-- chunk: 安全指标 -->## 安全指标
+## 安全指标
 - **漏洞扫描覆盖率**: 100%
 - **合规检查通过率**: 100%
 - **访问控制有效性**: 无未授权访问
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 架构设计阶段 -->## 架构设计阶段
+## 架构设计阶段
 - [ ] 明确业务连续性要求（RTO/RPO）
 - [ ] 设计多层次故障隔离机制
 - [ ] 制定容量规划和扩展策略
 - [ ] 规划网络安全边界和访问控制
 - [ ] 设计监控告警和日志收集体系
 
-#<!-- chunk: 部署实施阶段 -->## 部署实施阶段
+## 部署实施阶段
 - [ ] 验证控制平面高可用配置
 - [ ] 测试灾难恢复预案
 - [ ] 验证安全策略有效性
 - [ ] 确认监控告警覆盖完整性
 - [ ] 执行性能基准测试
 
-#<!-- chunk: 运营维护阶段 -->## 运营维护阶段
+## 运营维护阶段
 - [ ] 建立定期架构评审机制
 - [ ] 持续优化资源利用率
 - [ ] 更新安全威胁模型
@@ -524,7 +520,7 @@ autoscaling:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
@@ -619,11 +615,11 @@ autoscaling:
 - 56-smart-elderly-care
 - 44-martech-adtech
 - 95-industrial-metaverse
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 
 - 99-kubernetes-multi-tenant-architecture
-- [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint|99-kubernetes-production-architecture-blueprint]]
+- [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
 - 02-multi-cloud-hybrid-deployment-strategy
 - 03-edge-computing-production-deployment

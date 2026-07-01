@@ -71,7 +71,7 @@ For a typical web application with 30s startup time:
 
 ## Related
 
-- [[skills/troubleshoot-pod-issues|troubleshoot-pod-issues]] — [[Troubleshoot Pod Issues|Troubleshoot Pod Issues]]
+- [[skills/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — [[skills/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
 - [[pod-lifecycle|[[Pod Lifecycle|Pod Lifecycle]]]]
 - [[deployment|Deployment]]
-- [[skills/troubleshoot-pod-issues|Troubleshoot Pod Issues]]
+- [[skills/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]

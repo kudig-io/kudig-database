@@ -69,7 +69,7 @@ created: "2026-05-23"
 
 分布式数据库的核心技术挑战包括：分布式事务的 ACID 保证（TiDB 的异步提交和 1PC 优化）、跨节点 JOIN 的查询优化（TiDB 的 MPP 模式）、数据均衡与热点处理（Region Split/Merge）、以及全球分布式部署的延迟优化（CockroachDB 的 Leaseholder 亲和性）。理解这些技术细节对于正确选型和运维至关重要。
 
-#<!-- chunk: 分布式数据库技术演进 -->## 分布式数据库技术演进
+## 分布式数据库技术演进
 
 分布式数据库的发展经历了三个主要阶段。第一代以 Google Spanner 和 Megastore 为代表，提出了分布式事务、TrueTime API 等基础概念。第二代以 TiDB、CockroachDB 为代表，将分布式数据库技术普及到开源社区，降低了使用门槛。第三代正在向 HTAP（混合事务/分析处理）方向演进，TiDB 通过 TiFlash 列存引擎实现了行存和列存的透明融合，使得同一套数据库系统既能处理高并发的 OLTP 请求，又能执行复杂的 OLAP 分析查询。
 
@@ -85,7 +85,7 @@ Apache ShardingSphere 则从数据库代理的角度切入，提供了一套通�
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 分布式数据库总体架构 -->## 分布式数据库总体架构
+## 分布式数据库总体架构
 
 ```mermaid
 graph TB
@@ -128,7 +128,7 @@ graph TB
     RG2 --> TIFLASH
 ```
 
-#<!-- chunk: 主流分布式数据库对比 -->## 主流分布式数据库对比
+## 主流分布式数据库对比
 
 | 维度 | TiDB | CockroachDB | YugabyteDB | Vitess |
 |:---|:---|:---|:---|:---|
@@ -141,7 +141,7 @@ graph TB
 | License | Apache-2.0 | BSL/Apache | Apache-2.0 | Apache-2.0 |
 | 适用场景 | HTAP 混合负载 | 全球分布式 | 云原生 PG 替代 | MySQL 水平扩展 |
 
-#<!-- chunk: Vitess 架构图 -->## Vitess 架构图
+## Vitess 架构图
 
 ```mermaid
 graph TB
@@ -179,7 +179,7 @@ graph TB
 
 <!-- chunk: 核心组件配置 -->## 核心组件配置
 
-#<!-- chunk: TiDB 集群完整配置 -->## TiDB 集群完整配置
+## TiDB 集群完整配置
 
 ```yaml
 # tidb-cluster.yaml - TiDB v9.0 生产部署 (TiDB Operator)
@@ -323,7 +323,7 @@ spec:
       memory: "4Gi"
 ```
 
-#<!-- chunk: Vitess 生产部署配置 -->## Vitess 生产部署配置
+## Vitess 生产部署配置
 
 ```yaml
 # vitess-operator-deploy.yaml
@@ -449,7 +449,7 @@ spec:
                     memory: "8Gi"
 ```
 
-#<!-- chunk: Apache ShardingSphere 配置 -->## Apache ShardingSphere 配置
+## Apache ShardingSphere 配置
 
 ```yaml
 # shardingsphere-config.yaml
@@ -549,7 +549,7 @@ props:
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: TiDB 性能参数调优 -->## TiDB 性能参数调优
+## TiDB 性能参数调优
 
 ```
 TiDB 性能调优参考（TiKV 节点 16核/32GB/NVMe SSD）：
@@ -585,7 +585,7 @@ GRPC:
   线性扩展: N 节点 × 单节点吞吐 (理想状态)
 ```
 
-#<!-- chunk: 热点诊断与处理 -->## 热点诊断与处理
+## 热点诊断与处理
 
 ```sql
 -- TiDB 热点 Region 诊断
@@ -616,7 +616,7 @@ ORDER BY region_count DESC;
 -- 3. 预切分 Region: SPLIT TABLE t_name BETWEEN (min) AND (max) REGIONS N
 ```
 
-#<!-- chunk: Vitess 查询优化 -->## Vitess 查询优化
+## Vitess 查询优化
 
 ```sql
 -- Vitess 查询计划分析
@@ -639,7 +639,7 @@ SELECT /*+ VTGTID commerce.-80 */ * FROM t_order LIMIT 10;
 
 <!-- chunk: 高可用与容灾 -->## 高可用与容灾
 
-#<!-- chunk: TiDB 多数据中心部署 -->## TiDB 多数据中心部署
+## TiDB 多数据中心部署
 
 ```yaml
 # TiDB 跨机房拓扑
@@ -685,7 +685,7 @@ tikv_servers:
       server.labels: { dc: "dc3", rack: "rack2", host: "tikv-5" }
 ```
 
-#<!-- chunk: 容灾切换流程 -->## 容灾切换流程
+## 容灾切换流程
 
 ```bash
 #!/bin/bash
@@ -738,7 +738,7 @@ esac
 
 <!-- chunk: 备份恢复 -->## 备份恢复
 
-#<!-- chunk: TiDB Backup & Restore -->## TiDB Backup & Restore
+## TiDB Backup & Restore
 
 ```bash
 #!/bin/bash
@@ -804,7 +804,7 @@ esac
 
 <!-- chunk: 监控告警 -->## 监控告警
 
-#<!-- chunk: TiDB Prometheus 告警规则 -->## TiDB Prometheus 告警规则
+## TiDB Prometheus 告警规则
 
 ```yaml
 groups:
@@ -863,7 +863,7 @@ groups:
 
 <!-- chunk: 运维管理 -->## 运维管理
 
-#<!-- chunk: TiDB 日常运维脚本 -->## TiDB 日常运维脚本
+## TiDB 日常运维脚本
 
 ```bash
 #!/bin/bash
@@ -913,7 +913,7 @@ esac
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 分片键选择原则 -->## 分片键选择原则
+## 分片键选择原则
 
 | 原则 | 说明 | 反模式 |
 |:---|:---|:---|
@@ -923,7 +923,7 @@ esac
 | 不可变 | 分片键值创建后不更新 | 使用可能变更的字段 |
 | 时间无关 | 避免按时间聚集 | 仅用 created_at 作为分片键 |
 
-#<!-- chunk: 分布式事务优化 -->## 分布式事务优化
+## 分布式事务优化
 
 ```sql
 -- TiDB 事务优化
@@ -952,7 +952,7 @@ CREATE TABLE orders (
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题速查表 -->## 常见问题速查表
+## 常见问题速查表
 
 | 问题现象 | 可能原因 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
@@ -976,7 +976,7 @@ CREATE TABLE orders (
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-28-enterprise-database-middleware MOC
-- [[domain-16-database-middleware/README|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
+- [[domain-16-database-middleware/README.md|Domain 16: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
 - Domain-28 企业数据库与中间件 — 开源项目索引
 - MySQL 企业级数据库运维管理
 - PostgreSQL 企业级数据库高可用架构

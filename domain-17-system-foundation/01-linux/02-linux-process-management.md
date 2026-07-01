@@ -58,7 +58,7 @@ created: "2026-05-23"
 
 <!-- chunk: 核心概念详解 -->## 核心概念详解
 
-#<!-- chunk: 进程与线程 -->## 进程与线程
+## 进程与线程
 
 Linux 内核采用"一切皆进程"的设计哲学，线程在内核视角中被称为"轻量级进程"（Lightweight Process, LWP）。每个进程或线程都有一个唯一的 PID（Process ID），由内核统一分配。
 
@@ -106,7 +106,7 @@ Linux 内核采用"一切皆进程"的设计哲学，线程在内核视角中被
 | **SID** | 会话 ID | 终端会话 | task_struct->session |
 | **TID** | 线程标识符 | 系统全局唯一 | task_struct->pid |
 
-#<!-- chunk: 进程类型 -->## 进程类型
+## 进程类型
 
 | 类型 | 说明 | 示例 | 特征 |
 |:---|:---|:---|:---|
@@ -119,7 +119,7 @@ Linux 内核采用"一切皆进程"的设计哲学，线程在内核视角中被
 
 ---
 
-#<!-- chunk: 进程生命周期 -->## 进程生命周期
+## 进程生命周期
 
 Linux 进程从创建到销毁经历一系列状态转换。理解这些状态对于排查容器中进程挂起、僵尸进程等问题至关重要。
 
@@ -195,7 +195,7 @@ Linux 进程从创建到销毁经历一系列状态转换。理解这些状态�
 
 ---
 
-#<!-- chunk: 进程创建：fork() 与 clone() -->## 进程创建：fork() 与 clone()
+## 进程创建：fork() 与 clone()
 
 Linux 进程通过 `fork()` 系统调用创建，新进程是父进程的完整副本。`clone()` 系统调用提供了更细粒度的控制，容器运行时正是利用 `clone()` 配合不同的 flags 来创建隔离的进程。
 
@@ -226,11 +226,11 @@ strace -e trace=clone,clone3,fork,vfork <command>
 
 ---
 
-#<!-- chunk: 信号与进程控制 -->## 信号与进程控制
+## 信号与进程控制
 
 信号（Signal）是 Linux 进程间通信和异步事件处理的核心机制。理解信号对于排查容器中的进程终止行为（如 Kubernetes 发送 SIGTERM 优雅终止）至关重要。
 
-##<!-- chunk: 信号架构 -->## 信号架构
+## 信号架构
 
 ```
 ┌───────────────┐    kill()    ┌──────────────────────────┐
@@ -251,7 +251,7 @@ strace -e trace=clone,clone3,fork,vfork <command>
                                     └──────────────────────┘
 ```
 
-##<!-- chunk: 常用信号详解 -->## 常用信号详解
+## 常用信号详解
 
 | 信号 | 编号 | 名称 | 说明 | 默认动作 | 是否可捕获 | Kubernetes 用途 |
 |:---|:---:|:---|:---|:---|:---:|:---|
@@ -266,9 +266,12 @@ strace -e trace=clone,clone3,fork,vfork <command>
 | **SIGUSR2** | 12 | 用户自定义 2 | 应用自定义用途 | 终止 | 是 | 应用热重载 |
 | **SIGCHLD** | 17 | 子进程状态变化 | 子进程终止/停止 | 忽略 | 是 | init 系统核心 |
 
-##<!-- chunk: 信号在 Kubernetes 中的应用 -->## 信号在 Kubernetes 中的应用
+## 信号在 Kubernetes 中的应用
 
 Kubernetes 在终止 Pod 时遵循以下信号流程：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
 1. kubectl delete pod / Pod 演进删除
@@ -315,9 +318,9 @@ killall -HUP nginx
 
 ---
 
-#<!-- chunk: 进程优先级与调度 -->## 进程优先级与调度
+## 进程优先级与调度
 
-##<!-- chunk: CFS 调度器 -->## CFS 调度器
+## CFS 调度器
 
 Linux 默认使用完全公平调度器（Completely Fair Scheduler, CFS），它使用红黑树维护进程的虚拟运行时间，确保所有进程公平地获得 CPU 时间。
 
@@ -347,7 +350,7 @@ Linux 默认使用完全公平调度器（Completely Fair Scheduler, CFS），�
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: 优先级调整 -->## 优先级调整
+## 优先级调整
 
 ```bash
 # nice 值范围: -20 (最高) 到 19 (最低)
@@ -382,11 +385,11 @@ chrt -p <pid>               # 查看调度策略
 
 ---
 
-#<!-- chunk: cgroups 资源控制 -->## cgroups 资源控制
+## cgroups 资源控制
 
 cgroups（Control Groups）是 Linux 内核提供的资源限制机制，也是 Kubernetes 实现 Pod 资源管理的底层基础。Kubernetes 中的 `resources.limits` 和 `resources.requests` 最终都通过 cgroups 来实施。
 
-##<!-- chunk: cgroups v1 vs v2 -->## cgroups v1 vs v2
+## cgroups v1 vs v2
 
 ```
 cgroups v1 (传统)                      cgroups v2 (现代)
@@ -407,7 +410,7 @@ cgroups v1 (传统)                      cgroups v2 (现代)
 └──────────────────────────┘          └──────────────────────────┘
 ```
 
-##<!-- chunk: cgroups v2 操作示例 -->## cgroups v2 操作示例
+## cgroups v2 操作示例
 
 ```bash
 # 查看 cgroups 版本
@@ -453,7 +456,7 @@ cat /sys/fs/cgroup/myapp/memory.peak
 cat /sys/fs/cgroup/myapp/io.stat
 ```
 
-##<!-- chunk: Kubernetes 与 cgroups 的对应关系 -->## Kubernetes 与 cgroups 的对应关系
+## Kubernetes 与 cgroups 的对应关系
 
 | Kubernetes 字段 | cgroups v2 参数 | 说明 |
 |:---|:---|:---|
@@ -464,11 +467,11 @@ cat /sys/fs/cgroup/myapp/io.stat
 
 ---
 
-#<!-- chunk: OOM Killer 机制 -->## OOM Killer 机制
+## OOM Killer 机制
 
 OOM Killer（Out-Of-Memory Killer）是 Linux 内核在内存不足时选择并终止进程的机制。在 Kubernetes 环境中，Pod 因 OOM 被终止（exit code 137）是最常见的问题之一。
 
-##<!-- chunk: OOM Killer 工作流程 -->## OOM Killer 工作流程
+## OOM Killer 工作流程
 
 ```
 系统内存不足
@@ -522,7 +525,7 @@ OOM Killer（Out-Of-Memory Killer）是 Linux 内核在内存不足时选择并�
 └──────────────────────────────┘
 ```
 
-##<!-- chunk: OOM 相关参数 -->## OOM 相关参数
+## OOM 相关参数
 
 ```bash
 # 查看 OOM 分数
@@ -552,7 +555,7 @@ sysctl vm.panic_on_oom
 # qosClass=BestEffort 的 Pod 有最高的 oom_score_adj (1000)
 ```
 
-##<!-- chunk: Kubernetes OOM 等级对应 -->## Kubernetes OOM 等级对应
+## Kubernetes OOM 等级对应
 
 | Pod QoS 类 | oom_score_adj | 被终止优先级 | 说明 |
 |:---|:---:|:---|:---|
@@ -580,7 +583,7 @@ journalctl -k | grep -i "oom"
 
 <!-- chunk: 常用命令参考 -->## 常用命令参考
 
-#<!-- chunk: 进程查看 -->## 进程查看
+## 进程查看
 
 ```bash
 # ps 命令 - 进程快照
@@ -620,7 +623,7 @@ pstree -u username              # 显示指定用户
 pstree -s <pid>                 # 显示进程的父进程链
 ```
 
-#<!-- chunk: 进程终止 -->## 进程终止
+## 进程终止
 
 ```bash
 # kill - 发送信号
@@ -643,7 +646,7 @@ killall -HUP nginx              # 发送 SIGHUP
 kill -l
 ```
 
-#<!-- chunk: 进程分析 -->## 进程分析
+## 进程分析
 
 ```bash
 # 查看进程文件描述符
@@ -694,7 +697,7 @@ perf report                     # 分析记录数据
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: 进程相关性能参数 -->## 进程相关性能参数
+## 进程相关性能参数
 
 ```bash
 # /etc/sysctl.d/99-process.conf
@@ -722,7 +725,7 @@ kernel.sched_autogroup_enabled = 0
 kernel.numa_balancing = 0       # 禁用自动 NUMA 平衡（数据库建议禁用）
 ```
 
-#<!-- chunk: ulimit 配置 -->## ulimit 配置
+## ulimit 配置
 
 ```bash
 # 查看当前限制
@@ -753,7 +756,7 @@ LimitMEMLOCK=infinity
 
 <!-- chunk: 安全加固 -->## 安全加固
 
-#<!-- chunk: 进程安全相关配置 -->## 进程安全相关配置
+## 进程安全相关配置
 
 ```bash
 # 内核安全参数
@@ -787,9 +790,12 @@ getcap /usr/bin/ping
 
 <!-- chunk: 与 Kubernetes 的关系 -->## 与 Kubernetes 的关系
 
-#<!-- chunk: 容器进程管理 -->## 容器进程管理
+## 容器进程管理
 
 在 Kubernetes 中，每个容器都有自己的 PID 命名空间。容器的 entrypoint 进程通常成为该命名空间中的 PID 1，这与 systemd 在主机上作为 PID 1 的角色类似。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 进入容器查看进程
@@ -808,7 +814,7 @@ nsenter --target <pid> --net /bin/bash
 PID=$(cat /proc/<pid>/task/<tid>/children 2>/dev/null || echo "N/A")
 ```
 
-#<!-- chunk: Pod 生命周期与信号 -->## Pod 生命周期与信号
+## Pod 生命周期与信号
 
 Kubernetes 通过信号控制 Pod 的生命周期：
 
@@ -832,7 +838,7 @@ Kubernetes 通过信号控制 Pod 的生命周期：
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 进程管理最佳实践 -->## 进程管理最佳实践
+## 进程管理最佳实践
 
 1. **PID 1 进程必须是信号转发器**: 容器中 PID 1 进程必须正确处理 SIGTERM 信号。如果使用 shell 脚本作为 entrypoint，确保使用 `exec` 替换进程
 
@@ -880,7 +886,7 @@ kubectl get events --field-selector reason=OOMKilling
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见进程问题诊断 -->## 常见进程问题诊断
+## 常见进程问题诊断
 
 ```bash
 # 僵尸进程处理
@@ -911,7 +917,10 @@ smartctl -a /dev/sda
 iostat -xz 1
 ```
 
-#<!-- chunk: 容器进程故障排查 -->## 容器进程故障排查
+## 容器进程故障排查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # Pod 处于 CrashLoopBackOff
@@ -951,3 +960,5 @@ crictl ps
 - 01-linux-system-architecture
 - 03-linux-filesystem-deep-dive
 - 04-linux-networking-configuration
+
+```

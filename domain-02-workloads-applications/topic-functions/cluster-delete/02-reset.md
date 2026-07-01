@@ -207,6 +207,7 @@ graph TD
     J --> J3[removeKubernetesContainers]
     J --> J4[CleanDir × N]
     J --> J5[os.RemoveAll kubeconfig files]
+
 ```
 
 ## 源码分析
@@ -432,8 +433,11 @@ timeouts:
 
 ### 标准 reset 流程
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
-kubeadm reset
+kubeadm reset  # ⚠️ 清理节点所有 K8s 配置
 #[reset] Are you sure you want to proceed? [y/N]: y
 #[preflight] Running pre-flight checks
 #[reset] Reading configuration from the cluster...
@@ -455,30 +459,37 @@ kubeadm reset
 
 ### etcd 成员移除超时
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
 # 场景：etcd 成员移除超时（网络延迟或 etcd 响应慢）
-kubeadm reset --force
+kubeadm reset --force  # ⚠️ 清理节点所有 K8s 配置
 # [reset] Failed to remove etcd member: context deadline exceeded
 
 # 解决方案 1: 增加超时时间
-kubeadm reset --config=reset.yaml
+kubeadm reset --config=reset.yaml  # ⚠️ 清理节点所有 K8s 配置
 # reset.yaml:
 # timeouts:
 #   etcdTakeover: 5m0s
 
 # 解决方案 2: 跳过 etcd 移除，手动处理
-kubeadm reset --force --skip-phases=remove-etcd-member
+kubeadm reset --force --skip-phases=remove-etcd-member  # ⚠️ 清理节点所有 K8s 配置
 
 # 手动移除 etcd 成员
 etcdctl member list
-etcdctl member remove <member-id> --endpoints=https://cp1:2379
+etcdctl member remove <member-id> --endpoints=https://cp1:2379  # ⚠️ 移除 etcd 成员，可能丢数据
 ```
 
 ### 配置文件指定非默认证书目录
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
 # 场景：使用自定义证书目录（如 /root/k8s/pki）
-kubeadm reset --config=reset.yaml
+kubeadm reset --config=reset.yaml  # ⚠️ 清理节点所有 K8s 配置
 # reset.yaml:
 # certificatesDir: /root/k8s/pki
 # force: true
@@ -488,8 +499,11 @@ kubeadm reset --config=reset.yaml
 
 ### 跳过特定阶段
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
-kubeadm reset --force --skip-phases=remove-etcd-member
+kubeadm reset --force --skip-phases=remove-etcd-member  # ⚠️ 清理节点所有 K8s 配置
 #[preflight] Running pre-flight checks
 #[skip] Skipping phase remove-etcd-member
 #[reset] Stopping the kubelet service
@@ -498,19 +512,25 @@ kubeadm reset --force --skip-phases=remove-etcd-member
 
 ### 手动清理提示后的完整清理
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
+
 ```bash
-kubeadm reset --force
+kubeadm reset --force  # ⚠️ 清理节点所有 K8s 配置
 # ... reset 输出 ...
 
 # 手动清理
 iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
 ipvsadm -C
-rm -rf /etc/cni/net.d
-rm -rf /var/lib/kubelet
-rm -rf $HOME/.kube
+rm -rf /etc/cni/net.d  # ⚠️ 删除系统/数据文件
+rm -rf /var/lib/kubelet  # ⚠️ 删除系统/数据文件
+rm -rf $HOME/.kube  # ⚠️ 删除系统/数据文件
 rm -f /etc/systemd/system/kubelet.service
-rm -rf /etc/systemd/system/kubelet.service.d/
+rm -rf /etc/systemd/system/kubelet.service.d/  # ⚠️ 删除系统/数据文件
 systemctl daemon-reload
+
 ```
 
 ## 常见错误
@@ -536,7 +556,9 @@ systemctl daemon-reload
 ## Related
 
 - [[README|README]]
-- [[man/INSTALL|INSTALL]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux|linux]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[scripts/man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+
+```

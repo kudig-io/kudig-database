@@ -31,9 +31,10 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
-# 容器运行时接口（[[Container Runtime|Container Runtime]] Interface, CRI）
+# 容器运行时接口（[[concepts/container-runtime.md|Container Runtime]] Interface, CRI）
 
 ## 概述
 
@@ -246,6 +247,9 @@ ImageService 操作：
 
 ## 命令快速参考
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 检查运行时版本
 containerd --version
@@ -289,4 +293,4 @@ sudo systemctl restart containerd
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

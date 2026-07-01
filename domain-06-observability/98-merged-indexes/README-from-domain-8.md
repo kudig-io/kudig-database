@@ -199,6 +199,6 @@ tier: peripheral---
 - 相关知识域: domain-02-workloads-applications
 - 相关知识域: domain-03-networking-traffic
 - 相关知识域: domain-07-platform-engineering
-- [[domain-17-system-foundation/topic-cheat-sheet/promql|速查卡: promql]]
+- [[domain-17-system-foundation/topic-cheat-sheet/promql.md|速查卡: promql]]
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]

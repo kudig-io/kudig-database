@@ -116,7 +116,7 @@ k8s_versions:
 
 <!-- chunk: 1. 行业背景 -->## 1. 行业背景
 
-#<!-- chunk: 1.1 业务特点 -->## 1.1 业务特点
+## 1.1 业务特点
 
 跨境电商面临多国家/地区运营、多币种结算、多语言支持、跨境物流、海关清关、税务合规等复杂挑战：
 
@@ -129,7 +129,7 @@ k8s_versions:
 | 跨境物流 | 海外仓 + 直邮 + 保税仓 | 物流追踪与库存同步 |
 | 内容合规 | 各国商品审核标准不同 | AI 审核 + 人工复核 |
 
-#<!-- chunk: 1.2 核心场景 -->## 1.2 核心场景
+## 1.2 核心场景
 
 - **全球商城**: 多语言/多币种商品展示与搜索
 - **跨境支付**: 聚合 PayPal/Stripe/支付宝/微信支付
@@ -141,7 +141,7 @@ k8s_versions:
 
 <!-- chunk: 2. 业务架构 -->## 2. 业务架构
 
-#<!-- chunk: 2.1 整体业务架构 -->## 2.1 整体业务架构
+## 2.1 整体业务架构
 
 ```mermaid
 graph TB
@@ -199,7 +199,7 @@ graph TB
     K8S1 & K8S2 & K8S3 --> DB1 & DB2 & MQ1
 ```
 
-#<!-- chunk: 2.2 跨境支付时序 -->## 2.2 跨境支付时序
+## 2.2 跨境支付时序
 
 ```mermaid
 sequenceDiagram
@@ -230,7 +230,7 @@ sequenceDiagram
     end
 ```
 
-#<!-- chunk: 2.3 海关三单对碰状态机 -->## 2.3 海关三单对碰状态机
+## 2.3 海关三单对碰状态机
 
 ```mermaid
 stateDiagram-v2
@@ -251,7 +251,7 @@ stateDiagram-v2
 
 <!-- chunk: 3. 技术架构 -->## 3. 技术架构
 
-#<!-- chunk: 3.1 全球多 Region 部署架构 -->## 3.1 全球多 Region 部署架构
+## 3.1 全球多 Region 部署架构
 
 ```mermaid
 graph TB
@@ -286,7 +286,7 @@ graph TB
     SG <--> CEN <--> US
 ```
 
-#<!-- chunk: 3.2 K8s 部署拓扑 -->## 3.2 K8s 部署拓扑
+## 3.2 K8s 部署拓扑
 
 ```yaml
 # 全球商城前端 Deployment
@@ -508,7 +508,7 @@ spec:
 
 <!-- chunk: 4. 核心数据流 -->## 4. 核心数据流
 
-#<!-- chunk: 4.1 跨境订单履约数据流 -->## 4.1 跨境订单履约数据流
+## 4.1 跨境订单履约数据流
 
 ```mermaid
 flowchart TD
@@ -531,7 +531,7 @@ flowchart TD
     P --> Q[订单完成 + 售后入口]
 ```
 
-#<!-- chunk: 4.2 多币种价格计算流程 -->## 4.2 多币种价格计算流程
+## 4.2 多币种价格计算流程
 
 ```mermaid
 sequenceDiagram
@@ -561,7 +561,7 @@ sequenceDiagram
 
 <!-- chunk: 5. 安全与合规 -->## 5. 安全与合规
 
-#<!-- chunk: 5.1 合规要求 -->## 5.1 合规要求
+## 5.1 合规要求
 
 | 合规项 | 适用范围 | 架构措施 |
 |:---|:---|:---|
@@ -570,7 +570,7 @@ sequenceDiagram
 | 等保三级 | 中国境内 | 云盾 + WAF + 堡垒机 + 日志审计 |
 | 海关数据安全 | 跨境申报 | 数据脱敏 + 传输加密 + 访问控制 |
 
-#<!-- chunk: 5.2 K8s 安全策略 -->## 5.2 K8s 安全策略
+## 5.2 K8s 安全策略
 
 ```yaml
 # NetworkPolicy: 支付服务网络隔离
@@ -634,7 +634,7 @@ metadata:
 
 <!-- chunk: 6. 可观测性 -->## 6. 可观测性
 
-#<!-- chunk: 6.1 监控体系 -->## 6.1 监控体系
+## 6.1 监控体系
 
 ```mermaid
 graph LR
@@ -666,7 +666,7 @@ graph LR
     S3 --> A1
 ```
 
-#<!-- chunk: 6.2 关键告警规则 -->## 6.2 关键告警规则
+## 6.2 关键告警规则
 
 ```yaml
 # PrometheusRule 示例
@@ -729,7 +729,7 @@ spec:
 
 <!-- chunk: 8. 生产检查清单 -->## 8. 生产检查清单
 
-#<!-- chunk: 8.1 部署前检查 -->## 8.1 部署前检查
+## 8.1 部署前检查
 
 - [ ] 多 Region ACK 集群版本一致性校验
 - [ ] PolarDB 全球多活同步延迟 < 1s
@@ -740,7 +740,7 @@ spec:
 - [ ] GDPR 数据分类标记完成
 - [ ] 灾备演练：单 Region 问题自动切换验证
 
-#<!-- chunk: 8.2 日常运维 -->## 8.2 日常运维
+## 8.2 日常运维
 
 - [ ] 每日：支付成功率、订单履约时效、海关申报成功率
 - [ ] 每周：跨 Region 数据同步延迟巡检
@@ -756,17 +756,17 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

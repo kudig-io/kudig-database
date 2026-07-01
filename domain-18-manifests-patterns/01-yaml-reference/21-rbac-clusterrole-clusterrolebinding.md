@@ -64,7 +64,7 @@ ClusterRole 和 ClusterRoleBinding 是 [[Kubernetes|Kubernetes]] RBAC 的**集�
 
 <!-- chunk: 1. ClusterRole 基础配置 -->## 1. ClusterRole 基础配置
 
-#<!-- chunk: 1.1 基本 ClusterRole -->## 1.1 基本 ClusterRole
+## 1.1 基本 ClusterRole
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -100,7 +100,7 @@ rules:
   verbs: ["get", "list", "watch"]
 ```
 
-#<!-- chunk: 1.2 访问集群资源的 ClusterRole -->## 1.2 访问集群资源的 ClusterRole
+## 1.2 访问集群资源的 ClusterRole
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -161,7 +161,7 @@ rules:
     - "watch"
 ```
 
-#<!-- chunk: 1.3 访问非资源 URL 的 ClusterRole -->## 1.3 访问非资源 URL 的 ClusterRole
+## 1.3 访问非资源 URL 的 ClusterRole
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -208,7 +208,7 @@ rules:
 # 支持通配符 * 表示子路径
 ```
 
-#<!-- chunk: 1.4 使用 aggregationRule 聚合 ClusterRole -->## 1.4 使用 aggregationRule 聚合 ClusterRole
+## 1.4 使用 aggregationRule 聚合 ClusterRole
 
 ```yaml
 ---
@@ -286,7 +286,7 @@ rules:
 
 <!-- chunk: 2. ClusterRoleBinding 基础配置 -->## 2. ClusterRoleBinding 基础配置
 
-#<!-- chunk: 2.1 基本 ClusterRoleBinding -->## 2.1 基本 ClusterRoleBinding
+## 2.1 基本 ClusterRoleBinding
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -318,7 +318,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-#<!-- chunk: 2.2 授权给 ServiceAccount -->## 2.2 授权给 ServiceAccount
+## 2.2 授权给 ServiceAccount
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -345,7 +345,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-#<!-- chunk: 2.3 授权给多个 Subjects -->## 2.3 授权给多个 Subjects
+## 2.3 授权给多个 Subjects
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -391,7 +391,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-#<!-- chunk: 2.4 授权特定 Namespace 的 ServiceAccount 访问集群资源 -->## 2.4 授权特定 Namespace 的 ServiceAccount 访问集群资源
+## 2.4 授权特定 Namespace 的 ServiceAccount 访问集群资源
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -421,7 +421,7 @@ roleRef:
 
 Kubernetes 预定义了一些内建 ClusterRole,位于 `kube-system` namespace。
 
-#<!-- chunk: 3.1 cluster-admin (超级管理员) -->## 3.1 cluster-admin (超级管理员)
+## 3.1 cluster-admin (超级管理员)
 
 ```yaml
 # 预定义的 cluster-admin ClusterRole
@@ -462,6 +462,9 @@ rules:
 - ⚠️ 可以访问所有 Secret,包括 ServiceAccount token
 - ⚠️ 谨慎授予,建议使用审计和 MFA
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 授予用户 cluster-admin 权限
 kubectl create clusterrolebinding admin-binding \
@@ -471,7 +474,7 @@ kubectl create clusterrolebinding admin-binding \
 
 ---
 
-#<!-- chunk: 3.2 admin (Namespace 管理员) -->## 3.2 admin (Namespace 管理员)
+## 3.2 admin (Namespace 管理员)
 
 ```yaml
 # 预定义的 admin ClusterRole
@@ -523,6 +526,9 @@ rules:
 - 不能修改 ResourceQuota、LimitRange
 - 不能删除 Namespace
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 授予用户 namespace 管理员权限
 kubectl create rolebinding namespace-admin \
@@ -533,7 +539,7 @@ kubectl create rolebinding namespace-admin \
 
 ---
 
-#<!-- chunk: 3.3 edit (编辑者) -->## 3.3 edit (编辑者)
+## 3.3 edit (编辑者)
 
 ```yaml
 # 预定义的 edit ClusterRole
@@ -594,6 +600,9 @@ rules:
 - 不能修改 ResourceQuota、LimitRange
 - 不能创建 ServiceAccount token (v1.24+)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 授予用户编辑权限
 kubectl create rolebinding developer \
@@ -604,7 +613,7 @@ kubectl create rolebinding developer \
 
 ---
 
-#<!-- chunk: 3.4 view (查看者) -->## 3.4 view (查看者)
+## 3.4 view (查看者)
 
 ```yaml
 # 预定义的 view ClusterRole
@@ -658,6 +667,9 @@ rules:
 - 不能读取 RBAC 资源
 - 不能修改任何资源
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 授予用户只读权限
 kubectl create rolebinding readonly-user \
@@ -668,7 +680,7 @@ kubectl create rolebinding readonly-user \
 
 ---
 
-#<!-- chunk: 3.5 内建 ClusterRole 对比表 -->## 3.5 内建 ClusterRole 对比表
+## 3.5 内建 ClusterRole 对比表
 
 | ClusterRole | 权限范围 | Secrets | RBAC | ResourceQuota | 使用场景 |
 |-------------|----------|---------|------|---------------|----------|
@@ -679,7 +691,7 @@ kubectl create rolebinding readonly-user \
 
 ---
 
-#<!-- chunk: 3.6 其他常用内建 ClusterRole -->## 3.6 其他常用内建 ClusterRole
+## 3.6 其他常用内建 ClusterRole
 
 ```yaml
 # system:node (Kubelet 权限)
@@ -742,7 +754,7 @@ rules:
 
 <!-- chunk: 4. SubjectAccessReview (权限审查 API) -->## 4. SubjectAccessReview (权限审查 API)
 
-#<!-- chunk: 4.1 SubjectAccessReview (检查其他用户权限) -->## 4.1 SubjectAccessReview (检查其他用户权限)
+## 4.1 SubjectAccessReview (检查其他用户权限)
 
 ```yaml
 apiVersion: authorization.k8s.io/v1
@@ -811,6 +823,9 @@ status:
 
 **使用 kubectl 检查权限**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 检查用户是否可以执行操作
 kubectl auth can-i get pods -n default --as alice@example.com
@@ -838,7 +853,7 @@ EOF
 
 ---
 
-#<!-- chunk: 4.2 SelfSubjectAccessReview (检查自己的权限) -->## 4.2 SelfSubjectAccessReview (检查自己的权限)
+## 4.2 SelfSubjectAccessReview (检查自己的权限)
 
 ```yaml
 apiVersion: authorization.k8s.io/v1
@@ -887,7 +902,7 @@ kubectl auth can-i --list -n default
 
 ---
 
-#<!-- chunk: 4.3 SelfSubjectRulesReview (列出自己的所有权限) -->## 4.3 SelfSubjectRulesReview (列出自己的所有权限)
+## 4.3 SelfSubjectRulesReview (列出自己的所有权限)
 
 ```yaml
 apiVersion: authorization.k8s.io/v1
@@ -961,7 +976,7 @@ kubectl auth can-i --list
 
 ---
 
-#<!-- chunk: 4.4 LocalSubjectAccessReview (Namespace 范围的权限检查) -->## 4.4 LocalSubjectAccessReview (Namespace 范围的权限检查)
+## 4.4 LocalSubjectAccessReview (Namespace 范围的权限检查)
 
 ```yaml
 apiVersion: authorization.k8s.io/v1
@@ -996,7 +1011,7 @@ status:
 
 <!-- chunk: 5. 生产案例 -->## 5. 生产案例
 
-#<!-- chunk: 5.1 案例 1: 集群级别监控系统权限 -->## 5.1 案例 1: 集群级别监控系统权限
+## 5.1 案例 1: 集群级别监控系统权限
 
 **场景**: Prometheus 需要监控整个集群的资源和指标。
 
@@ -1141,7 +1156,7 @@ spec:
       serviceAccountName: prometheus
       containers:
       - name: prometheus
-        image: prom/prometheus:v2.45.0
+        image: prom/prometheus:v3.2.1
         args:
           - "--config.file=/etc/prometheus/prometheus.yml"
           - "--storage.tsdb.path=/prometheus"
@@ -1221,7 +1236,7 @@ data:
 
 ---
 
-#<!-- chunk: 5.2 案例 2: 集群管理员权限分级 -->## 5.2 案例 2: 集群管理员权限分级
+## 5.2 案例 2: 集群管理员权限分级
 
 **场景**: 大型组织需要多级管理员: 平台管理员、集群管理员、Namespace 管理员。
 
@@ -1430,7 +1445,7 @@ kubectl auth can-i delete pods --all-namespaces --as auditor@example.com
 
 ---
 
-#<!-- chunk: 5.3 案例 3: CI/CD 系统跨 Namespace 部署 -->## 5.3 案例 3: CI/CD 系统跨 Namespace 部署
+## 5.3 案例 3: CI/CD 系统跨 Namespace 部署
 
 **场景**: GitLab CI/CD 需要部署到多个 namespace,使用 ClusterRole + RoleBinding。
 
@@ -1615,7 +1630,7 @@ roleRef:
 
 ---
 
-#<!-- chunk: 5.4 案例 4: 使用 aggregationRule 扩展内建角色 -->## 5.4 案例 4: 使用 aggregationRule 扩展内建角色
+## 5.4 案例 4: 使用 aggregationRule 扩展内建角色
 
 **场景**: 扩展内建 `view` ClusterRole,允许查看自定义资源。
 
@@ -1704,7 +1719,7 @@ kubectl auth can-i get applications -n default --as viewer@example.com
 
 ---
 
-#<!-- chunk: 5.5 案例 5: 节点维护权限 (Drain/Cordon) -->## 5.5 案例 5: 节点维护权限 (Drain/Cordon)
+## 5.5 案例 5: 节点维护权限 (Drain/Cordon)
 
 **场景**: SRE 团队需要维护节点 (drain, cordon, uncordon),但不需要完整的集群管理员权限。
 
@@ -1819,6 +1834,11 @@ automountServiceAccountToken: true
 
 **使用示例**:
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # SRE 可以 cordon 节点 (标记为不可调度)
 kubectl cordon node-1 --as sre@example.com
@@ -1841,7 +1861,7 @@ kubectl delete node node-1 --as sre@example.com
 
 <!-- chunk: 6. 最佳实践 -->## 6. 最佳实践
 
-#<!-- chunk: 6.1 ClusterRole vs Role 选择 -->## 6.1 ClusterRole vs Role 选择
+## 6.1 ClusterRole vs Role 选择
 
 | 场景 | 推荐 | 原因 |
 |------|------|------|
@@ -1851,7 +1871,7 @@ kubectl delete node node-1 --as sre@example.com
 | 单个 namespace 访问 | ClusterRole + RoleBinding | 定义一次,多个 namespace 重用 |
 | Namespace 专属权限 | Role + RoleBinding | 权限隔离更好 |
 
-#<!-- chunk: 6.2 安全建议 -->## 6.2 安全建议
+## 6.2 安全建议
 
 1. **避免过度使用 cluster-admin**:
    - 只用于集群引导和紧急情况
@@ -1885,7 +1905,7 @@ kubectl delete node node-1 --as sre@example.com
    - 监控 cluster-admin 使用
    - 告警异常的 RBAC 修改
 
-#<!-- chunk: 6.3 常见错误 -->## 6.3 常见错误
+## 6.3 常见错误
 
 ```yaml
 # ❌ 错误 1: ClusterRoleBinding 引用 Role
@@ -1973,7 +1993,7 @@ roleRef:
 
 <!-- chunk: 7. 常见问题排查 -->## 7. 常见问题排查
 
-#<!-- chunk: 7.1 权限升级风险检测 -->## 7.1 权限升级风险检测
+## 7.1 权限升级风险检测
 
 **检查是否有用户可以修改 RBAC**:
 
@@ -1988,11 +2008,15 @@ kubectl auth can-i create clusterrolebindings --as alice@example.com
 kubectl auth can-i update clusterroles --as system:serviceaccount:default:myapp-sa
 ```
 
-#<!-- chunk: 7.2 ClusterRole 聚合不生效 -->## 7.2 ClusterRole 聚合不生效
+## 7.2 ClusterRole 聚合不生效
 
 **症状**: 使用 `aggregationRule` 的 ClusterRole 的 rules 字段为空。
 
 **排查步骤**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 1. 检查父 ClusterRole
@@ -2012,7 +2036,7 @@ kubectl delete clusterrole monitoring-aggregate
 kubectl apply -f monitoring-aggregate.yaml
 ```
 
-#<!-- chunk: 7.3 非资源 URL 访问被拒绝 -->## 7.3 非资源 URL 访问被拒绝
+## 7.3 非资源 URL 访问被拒绝
 
 **症状**:
 ```bash
@@ -2021,6 +2045,9 @@ curl -k https://kubernetes.default.svc/healthz
 ```
 
 **排查步骤**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 检查是否有 ClusterRole 授权 /healthz
@@ -2068,7 +2095,7 @@ EOF
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests KUDIG Database — Global MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - index.md|Domain-32 YAML 清单 — 开源项目索引]]
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -2089,4 +2116,4 @@ EOF
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

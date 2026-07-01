@@ -219,6 +219,9 @@ Alertmanager 处理 Prometheus 发送的告警，负责去重、分组、路由�
 
 ### 任务 1: 部署 kube-prometheus-stack (45min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 添加 Helm repo
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -278,6 +281,9 @@ kubectl port-forward -n monitoring svc/prometheus-operated 9090:9090
 ```
 
 ### 任务 3: 告警规则配置 (45min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建自定义告警规则
@@ -421,4 +427,4 @@ Target down 意味着 Prometheus 无法从目标拉取指标。排查步骤：1)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

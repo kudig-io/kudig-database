@@ -112,7 +112,7 @@ k8s_versions:
 
 <!-- chunk: 一、多租户隔离模型 -->## 一、多租户隔离模型
 
-#<!-- chunk: 1.1 隔离层级金字塔 -->## 1.1 隔离层级金字塔
+## 1.1 隔离层级金字塔
 
 ```mermaid
 flowchart TB
@@ -150,7 +150,7 @@ flowchart TB
     style L5 fill:#b3e5fc
 ```
 
-#<!-- chunk: 1.2 租户隔离矩阵 -->## 1.2 租户隔离矩阵
+## 1.2 租户隔离矩阵
 
 | 隔离级别 | 实现方式 | 安全性 | 资源利用率 | 运维复杂度 | 适用场景 |
 |:---|:---|:---:|:---:|:---:|:---|
@@ -160,7 +160,7 @@ flowchart TB
 | **Namespace 级** | RBAC + NetworkPolicy + ResourceQuota | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ | 标准多租户 |
 | **Pod 级** | SecurityContext + Seccomp | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ | 基础隔离 |
 
-#<!-- chunk: 1.3 多租户架构全景 -->## 1.3 多租户架构全景
+## 1.3 多租户架构全景
 
 ```mermaid
 flowchart TB
@@ -223,7 +223,7 @@ flowchart TB
 
 <!-- chunk: 二、Namespace 级隔离架构 -->## 二、Namespace 级隔离架构
 
-#<!-- chunk: 2.1 命名空间设计模式 -->## 2.1 命名空间设计模式
+## 2.1 命名空间设计模式
 
 ```mermaid
 flowchart TB
@@ -264,7 +264,7 @@ flowchart TB
     style Shared_NS fill:#fff3e0
 ```
 
-#<!-- chunk: 2.2 Namespace 模板化创建 -->## 2.2 Namespace 模板化创建
+## 2.2 Namespace 模板化创建
 
 ```yaml
 # namespace-template.yaml
@@ -361,7 +361,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-#<!-- chunk: 2.3 命名空间生命周期管理 -->## 2.3 命名空间生命周期管理
+## 2.3 命名空间生命周期管理
 
 ```mermaid
 stateDiagram-v2
@@ -386,7 +386,7 @@ stateDiagram-v2
 
 <!-- chunk: 三、节点池级隔离架构 -->## 三、节点池级隔离架构
 
-#<!-- chunk: 3.1 多节点池隔离模型 -->## 3.1 多节点池隔离模型
+## 3.1 多节点池隔离模型
 
 ```mermaid
 flowchart TB
@@ -436,7 +436,7 @@ flowchart TB
     style SpotPool fill:#e8f5e9
 ```
 
-#<!-- chunk: 3.2 节点池配置 -->## 3.2 节点池配置
+## 3.2 节点池配置
 
 ```yaml
 # 系统节点池：禁止业务 Pod 调度
@@ -497,7 +497,7 @@ spec:
 
 <!-- chunk: 四、虚拟集群隔离 (vCluster) -->## 四、虚拟集群隔离 (vCluster)
 
-#<!-- chunk: 4.1 vCluster 架构 -->## 4.1 vCluster 架构
+## 4.1 vCluster 架构
 
 ```mermaid
 flowchart TB
@@ -536,7 +536,10 @@ flowchart TB
     style vClusterB fill:#e8f5e9
 ```
 
-#<!-- chunk: 4.2 vCluster 创建 -->## 4.2 vCluster 创建
+## 4.2 vCluster 创建
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 vCluster CLI
@@ -562,7 +565,7 @@ kubectl apply -f deployment.yaml
 
 <!-- chunk: 五、资源配额与限制架构 -->## 五、资源配额与限制架构
 
-#<!-- chunk: 5.1 层级配额模型 -->## 5.1 层级配额模型
+## 5.1 层级配额模型
 
 ```mermaid
 flowchart TB
@@ -595,7 +598,7 @@ flowchart TB
     style PodQuota fill:#fff9c4
 ```
 
-#<!-- chunk: 5.2 资源配额监控 -->## 5.2 资源配额监控
+## 5.2 资源配额监控
 
 ```yaml
 # PrometheusRule: 资源配额告警
@@ -638,7 +641,7 @@ spec:
 
 <!-- chunk: 六、网络隔离架构 -->## 六、网络隔离架构
 
-#<!-- chunk: 6.1 零信任网络模型 -->## 6.1 零信任网络模型
+## 6.1 零信任网络模型
 
 ```mermaid
 flowchart TB
@@ -673,7 +676,7 @@ flowchart TB
     style Monitoring fill:#e8f5e9
 ```
 
-#<!-- chunk: 6.2 Cilium L7 策略 -->## 6.2 Cilium L7 策略
+## 6.2 Cilium L7 策略
 
 ```yaml
 apiVersion: cilium.io/v2
@@ -718,7 +721,7 @@ spec:
 
 <!-- chunk: 七、Pod 安全标准实施架构 -->## 七、Pod 安全标准实施架构
 
-#<!-- chunk: 7.1 PSA (Pod Security Admission) 架构 -->## 7.1 PSA (Pod Security Admission) 架构
+## 7.1 PSA (Pod Security Admission) 架构
 
 ```mermaid
 flowchart TB
@@ -754,7 +757,7 @@ flowchart TB
     style ENFORCE fill:#ffebee
 ```
 
-#<!-- chunk: 7.2 PSA 实施配置 -->## 7.2 PSA 实施配置
+## 7.2 PSA 实施配置
 
 ```yaml
 # 集群级配置
@@ -790,7 +793,7 @@ metadata:
     pod-security.kubernetes.io/warn: restricted
 ```
 
-#<!-- chunk: 7.3 合规 Pod 模板 -->## 7.3 合规 Pod 模板
+## 7.3 合规 Pod 模板
 
 ```yaml
 apiVersion: v1
@@ -837,7 +840,7 @@ spec:
 
 <!-- chunk: 八、成本分摊与 FinOps 架构 -->## 八、成本分摊与 FinOps 架构
 
-#<!-- chunk: 8.1 成本归因模型 -->## 8.1 成本归因模型
+## 8.1 成本归因模型
 
 ```mermaid
 flowchart TB
@@ -873,7 +876,7 @@ flowchart TB
     style Report fill:#e8f5e9
 ```
 
-#<!-- chunk: 8.2 标签规范 -->## 8.2 标签规范
+## 8.2 标签规范
 
 ```yaml
 # 强制标签规范
@@ -921,7 +924,7 @@ spec:
 
 <!-- chunk: 九、多租户平台即服务 (PaaS) 架构 -->## 九、多租户平台即服务 (PaaS) 架构
 
-#<!-- chunk: 9.1 自服务平台架构 -->## 9.1 自服务平台架构
+## 9.1 自服务平台架构
 
 ```mermaid
 flowchart TB
@@ -971,7 +974,7 @@ flowchart TB
     style Platform fill:#fff8e1
 ```
 
-#<!-- chunk: 9.2 自助服务流程 -->## 9.2 自助服务流程
+## 9.2 自助服务流程
 
 ```mermaid
 sequenceDiagram
@@ -1060,9 +1063,9 @@ echo "=== 检查完成 ==="
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -1160,12 +1163,12 @@ echo "=== 检查完成 ==="
 - 56-smart-elderly-care
 - 44-martech-adtech
 - 95-industrial-metaverse
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/openkruise-index|OpenKruise 全局索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/openkruise-index.md|OpenKruise 全局索引]]
 
 ## See Also
 
 - 99-keda-event-driven-autoscaling-guide
 - 99-kubernetes-deployment-patterns-architecture
-- [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint|99-kubernetes-production-architecture-blueprint]]
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-production-architecture-design-principles]]
+- [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-production-architecture-design-principles]]

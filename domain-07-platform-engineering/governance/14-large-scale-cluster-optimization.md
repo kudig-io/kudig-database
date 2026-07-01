@@ -270,7 +270,7 @@ spec:
     spec:
       containers:
       - name: thanos-query
-        image: quay.io/thanos/thanos:v0.32.0
+        image: quay.io/thanos/thanos:v0.37.0
         args:
         - query
         - --grpc-address=0.0.0.0:10901
@@ -417,11 +417,11 @@ large_scale_cluster_check
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering KUDIG Database — Global MOC
-- [[domain-07-platform-engineering/README|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
+- [[domain-07-platform-engineering/README.md|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
 - index.md|Domain-9 平台运维 — 开源项目索引]]
 - 平台运维概述
 - 集群生命周期管理
-- [[domain-07-platform-engineering/governance/03-capacity-planning-resource-assessment]]
+- [[domain-07-platform-engineering/governance/03-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
 - 性能基准测试与调优 (Performance Benchmarking & Tuning)
 - 运维指标体系建设 (Operations Metrics System)
 - 监控告警体系
@@ -438,4 +438,4 @@ large_scale_cluster_check
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]

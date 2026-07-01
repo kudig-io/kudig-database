@@ -114,7 +114,7 @@ k8s_versions:
 
 <!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-#<!-- chunk: 1.1 市场规模与趋势 -->## 1.1 市场规模与趋势
+## 1.1 市场规模与趋势
 
 供应链金融解决中小微企业融资难题，通过核心企业信用多级传导降低融资成本。中国供应链金融市场规模预计从 2024 年的 35 万亿元增长到 2030 年的 60 万亿元。区块链、AI 风控和电子债权凭证是三大技术驱动力。政策支持包括《关于规范发展供应链金融 支持供应链产业链稳定循环和优化升级的意见》。
 
@@ -126,7 +126,7 @@ k8s_versions:
 | 电子债权凭证规模 | ¥5T | ¥15T | ¥40T |
 | 融资审批时效 | 3-7 天 | 1-3 天 | 实时 |
 
-#<!-- chunk: 1.2 行业痛点 -->## 1.2 行业痛点
+## 1.2 行业痛点
 
 | 痛点 | 说明 | 数字化转型驱动 |
 |:---|:---|:---|
@@ -137,7 +137,7 @@ k8s_versions:
 | 多方协同难 | 核心/供应商/金融机构协作 | 联盟链 + 统一平台 |
 | 合规监管 | 银保监会/央行监管 | 审计追踪 + 数据上报 |
 
-#<!-- chunk: 1.3 数字化转型架构影响 -->## 1.3 数字化转型架构影响
+## 1.3 数字化转型架构影响
 
 供应链金融架构需要覆盖参与方层（核心企业/多级供应商/金融机构/物流）、平台层（应收账款管理/电子债权凭证/融资申请/风控引擎/资金结算）、区块链层（贸易存证/确权/流转记录）和数据源层（ERP/税务/物流/银行流水）。核心挑战是贸易真实性验证和信用多级传导的安全性。
 
@@ -145,23 +145,23 @@ k8s_versions:
 
 <!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-#<!-- chunk: 2.1 应收账款保理融资 -->## 2.1 应收账款保理融资
+## 2.1 应收账款保理融资
 
 供应商基于对核心企业的应收账款向金融机构申请融资。核心企业在平台确认应付账款，区块链存证确权，金融机构基于确权信息进行风控评估和放款。融资利率比传统贷款低 2-5 个百分点。
 
-#<!-- chunk: 2.2 电子债权凭证拆分流转 -->## 2.2 电子债权凭证拆分流转
+## 2.2 电子债权凭证拆分流转
 
 核心企业向一级供应商开具电子债权凭证（类似数字欠条），凭证可在供应链上逐级拆分流转。一级供应商可将凭证拆分后转让给二级供应商，实现核心企业信用的多级传导。凭证到期由核心企业兑付。
 
-#<!-- chunk: 2.3 订单融资 -->## 2.3 订单融资
+## 2.3 订单融资
 
 基于核心企业的采购订单，供应商在发货前即可获得融资支持。系统需要验证订单真实性、供应商履约能力，并设置合理的融资比例（通常为订单金额的 60-80%）。
 
-#<!-- chunk: 2.4 存货质押融资 -->## 2.4 存货质押融资
+## 2.4 存货质押融资
 
 供应商以库存商品作为质押物获得融资。系统通过 IoT 传感器实时监控仓库库存，AI 分析库存价值和流动性，动态调整质押率和预警线。
 
-#<!-- chunk: 2.5 AI 供应链风险监控 -->## 2.5 AI 供应链风险监控
+## 2.5 AI 供应链风险监控
 
 实时监控供应链上下游企业的经营状况、舆情信息、司法风险和财务健康度。当核心企业或关键供应商出现风险信号时，系统自动预警并建议风险缓释措施。
 
@@ -169,7 +169,7 @@ k8s_versions:
 
 <!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-#<!-- chunk: 3.1 供应链金融全景架构 -->## 3.1 供应链金融全景架构
+## 3.1 供应链金融全景架构
 
 ```mermaid
 graph TB
@@ -243,7 +243,7 @@ graph TB
 
 <!-- chunk: 5. Kubernetes 部署方案 -->## 5. Kubernetes 部署方案
 
-#<!-- chunk: 5.1 供应链金融平台 Deployment -->## 5.1 供应链金融平台 Deployment
+## 5.1 供应链金融平台 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -334,7 +334,7 @@ spec:
             periodSeconds: 10
 ```
 
-#<!-- chunk: 5.2 AI 风控引擎 Deployment -->## 5.2 AI 风控引擎 Deployment
+## 5.2 AI 风控引擎 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -373,7 +373,7 @@ spec:
               cpu: "4000m"
 ```
 
-#<!-- chunk: 5.3 ConfigMap, Service 与 Secret -->## 5.3 ConfigMap, Service 与 Secret
+## 5.3 ConfigMap, Service 与 Secret
 
 ```yaml
 apiVersion: v1
@@ -440,7 +440,7 @@ stringData:
 
 <!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-#<!-- chunk: 6.1 贸易真实性验证数据流 -->## 6.1 贸易真实性验证数据流
+## 6.1 贸易真实性验证数据流
 
 ```mermaid
 flowchart TB
@@ -473,7 +473,7 @@ flowchart TB
     D1 -->|< 0.6| D4
 ```
 
-#<!-- chunk: 6.2 数据流说明 -->## 6.2 数据流说明
+## 6.2 数据流说明
 
 - **贸易数据流**: 合同/发票/物流数据经 OCR 识别后进行交叉验证，验证结果区块链存证
 - **凭证流转流**: 电子债权凭证的拆分/转让/兑付全程上链记录
@@ -484,7 +484,7 @@ flowchart TB
 
 <!-- chunk: 7. AI/ML 组件 -->## 7. AI/ML 组件
 
-#<!-- chunk: 7.1 核心模型 -->## 7.1 核心模型
+## 7.1 核心模型
 
 | 模型 | 用途 | 输入 | 输出 | 框架 |
 |:---|:---|:---|:---|:---|
@@ -499,7 +499,7 @@ flowchart TB
 
 <!-- chunk: 8. 安全与合规 -->## 8. 安全与合规
 
-#<!-- chunk: 8.1 行业法规与标准 -->## 8.1 行业法规与标准
+## 8.1 行业法规与标准
 
 | 法规/标准 | 适用范围 | 架构要求 |
 |:---|:---|:---|
@@ -511,7 +511,7 @@ flowchart TB
 | 央行征信管理 | 征信数据管理 | 征信数据合规使用 |
 | 区块链信息服务备案 | 区块链服务合规 | 区块链服务备案 |
 
-#<!-- chunk: 8.2 安全架构要点 -->## 8.2 安全架构要点
+## 8.2 安全架构要点
 
 - **区块链不可篡改**: 所有贸易确权和资金流转数据上链存证
 - **数据加密**: 企业财务数据、银行流水等敏感信息使用 KMS 加密
@@ -564,17 +564,17 @@ flowchart TB
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

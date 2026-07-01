@@ -37,6 +37,7 @@ prerequisites:
 - gpu-scheduling-basics
 - policy-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 08 - AI/ML基础设施专业词典
@@ -1529,7 +1530,9 @@ graph TB
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级
 
-## Related
+## 参考链接
 
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [Ai Infra Specialist]()
+
+## Related
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

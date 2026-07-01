@@ -107,7 +107,7 @@ JFrog Artifactory is an enterprise-grade universal artifact repository managemen
 
 <!-- chunk: 架构设计 (Architecture Design) -->## 架构设计 (Architecture Design)
 
-#<!-- chunk: 企业级架构 (Enterprise Architecture) -->## 企业级架构 (Enterprise Architecture)
+## 企业级架构 (Enterprise Architecture)
 
 ```yaml
 # Artifactory 企业级部署架构
@@ -172,7 +172,7 @@ data:
           cpu: "500m"
 ```
 
-#<!-- chunk: 高可用架构 (High Availability Architecture) -->## 高可用架构 (High Availability Architecture)
+## 高可用架构 (High Availability Architecture)
 
 ```mermaid
 graph TB
@@ -226,7 +226,7 @@ graph TB
 
 <!-- chunk: 部署配置 (Deployment Configuration) -->## 部署配置 (Deployment Configuration)
 
-#<!-- chunk: Kubernetes 部署 (Kubernetes Deployment) -->## Kubernetes 部署 (Kubernetes Deployment)
+## Kubernetes 部署 (Kubernetes Deployment)
 
 ```yaml
 # Artifactory 主部署配置
@@ -317,7 +317,7 @@ spec:
           storage: 200Gi
 ```
 
-#<!-- chunk: 数据库配置 (Database Configuration) -->## 数据库配置 (Database Configuration)
+## 数据库配置 (Database Configuration)
 
 ```yaml
 # PostgreSQL 主从配置
@@ -377,7 +377,7 @@ spec:
 
 <!-- chunk: 容器镜像管理 (Container Image Management) -->## 容器镜像管理 (Container Image Management)
 
-#<!-- chunk: Docker Registry 配置 (Docker Registry Configuration) -->## Docker Registry 配置 (Docker Registry Configuration)
+## Docker Registry 配置 (Docker Registry Configuration)
 
 ```yaml
 # Docker Repository 配置
@@ -411,7 +411,7 @@ repositories:
     dockerApiVersion: V2
 ```
 
-#<!-- chunk: 镜像生命周期管理 (Image Lifecycle Management) -->## 镜像生命周期管理 (Image Lifecycle Management)
+## 镜像生命周期管理 (Image Lifecycle Management)
 
 ```yaml
 # 镜像保留策略
@@ -461,7 +461,7 @@ policies:
 
 <!-- chunk: 安全管理 (Security Management) -->## 安全管理 (Security Management)
 
-#<!-- chunk: 镜像安全扫描 (Image Security Scanning) -->## 镜像安全扫描 (Image Security Scanning)
+## 镜像安全扫描 (Image Security Scanning)
 
 ```yaml
 # Xray 安全扫描集成
@@ -502,7 +502,7 @@ xray:
             - fail_build: false
 ```
 
-#<!-- chunk: 访问控制 (Access Control) -->## 访问控制 (Access Control)
+## 访问控制 (Access Control)
 
 ```yaml
 # 权限配置
@@ -561,7 +561,7 @@ security:
 
 <!-- chunk: CI/CD 集成 (CI/CD Integration) -->## CI/CD 集成 (CI/CD Integration)
 
-#<!-- chunk: Jenkins 集成 (Jenkins Integration) -->## Jenkins 集成 (Jenkins Integration)
+## Jenkins 集成 (Jenkins Integration)
 
 ```groovy
 // Jenkins Pipeline 示例
@@ -637,7 +637,7 @@ pipeline {
 }
 ```
 
-#<!-- chunk: GitOps 集成 (GitOps Integration) -->## GitOps 集成 (GitOps Integration)
+## GitOps 集成 (GitOps Integration)
 
 ```yaml
 # Argo CD 应用配置
@@ -673,7 +673,7 @@ spec:
 
 <!-- chunk: 性能优化 (Performance Optimization) -->## 性能优化 (Performance Optimization)
 
-#<!-- chunk: 缓存优化 (Cache Optimization) -->## 缓存优化 (Cache Optimization)
+## 缓存优化 (Cache Optimization)
 
 ```yaml
 # 缓存配置
@@ -697,7 +697,7 @@ shared:
     sleepIntervalMillis: 30000
 ```
 
-#<!-- chunk: 负载均衡优化 (Load Balancing Optimization) -->## 负载均衡优化 (Load Balancing Optimization)
+## 负载均衡优化 (Load Balancing Optimization)
 
 ```nginx
 # Nginx 负载均衡配置
@@ -747,7 +747,7 @@ server {
 
 <!-- chunk: 监控告警 (Monitoring and Alerting) -->## 监控告警 (Monitoring and Alerting)
 
-#<!-- chunk: 关键指标监控 (Key Metrics Monitoring) -->## 关键指标监控 (Key Metrics Monitoring)
+## 关键指标监控 (Key Metrics Monitoring)
 
 ```yaml
 # Prometheus 监控规则
@@ -805,7 +805,7 @@ groups:
       description: "More than 10 failed login attempts detected in the last 5 minutes."
 ```
 
-#<!-- chunk: 可视化仪表板 (Visualization Dashboard) -->## 可视化仪表板 (Visualization Dashboard)
+## 可视化仪表板 (Visualization Dashboard)
 
 ```json
 {
@@ -849,7 +849,7 @@ groups:
 
 <!-- chunk: 备份恢复 (Backup and Restore) -->## 备份恢复 (Backup and Restore)
 
-#<!-- chunk: 自动备份策略 (Automatic Backup Strategy) -->## 自动备份策略 (Automatic Backup Strategy)
+## 自动备份策略 (Automatic Backup Strategy)
 
 ```yaml
 # 备份配置
@@ -872,7 +872,10 @@ backups:
       path: "/backup/artifactory"
 ```
 
-#<!-- chunk: 恢复流程 (Recovery Process) -->## 恢复流程 (Recovery Process)
+## 恢复流程 (Recovery Process)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
 
 ```bash
 #!/bin/bash
@@ -915,7 +918,10 @@ restore_artifactory() {
 
 <!-- chunk: 问题排除 (Troubleshooting) -->## 问题排除 (Troubleshooting)
 
-#<!-- chunk: 常见问题诊断 (Common Issue Diagnosis) -->## 常见问题诊断 (Common Issue Diagnosis)
+## 常见问题诊断 (Common Issue Diagnosis)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -974,7 +980,7 @@ log_analysis() {
 
 <!-- chunk: 最佳实践 (Best Practices) -->## 最佳实践 (Best Practices)
 
-#<!-- chunk: 部署最佳实践 (Deployment Best Practices) -->## 部署最佳实践 (Deployment Best Practices)
+## 部署最佳实践 (Deployment Best Practices)
 
 1. **资源规划**
    ```yaml
@@ -997,7 +1003,7 @@ log_analysis() {
    - 合理配置缓存
    - 定期清理垃圾数据
 
-#<!-- chunk: 运维最佳实践 (Operations Best Practices) -->## 运维最佳实践 (Operations Best Practices)
+## 运维最佳实践 (Operations Best Practices)
 
 1. **监控覆盖**
    - 端到端性能监控
@@ -1025,7 +1031,7 @@ log_analysis() {
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-22-container-image-management MOC
-- [[domain-13-container-runtime/README|Domain 22: 容器镜像管理 (Container Image Management)]]
+- [[domain-13-container-runtime/README.md|Domain 13: 容器镜像管理 (Container Image Management)]]
 - Domain-22 容器镜像管理 — 开源项目索引
 - Harbor企业级容器镜像仓库深度实践
 - Docker Registry企业级镜像分发深度实践

@@ -53,7 +53,7 @@ created: "2026-05-23"
 # Vercel 前端部署平台深度指南
 # Vercel Frontend Deployment Platform In-Depth Guide
 
-> **领域**: 平台工程 | [[synthesis/platform-engineering-sre|Platform Engineering]]  
+> **领域**: 平台工程 | [[concepts/platform-engineering-sre.md|Platform Engineering]]  
 > **难度**: 入门到中级 | Beginner to Intermediate  
 > **阅读时间**: 约 45 分钟 | ~45 min read  
 > **最后更新**: 2026-04-03
@@ -82,7 +82,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. Vercel 概述与定位 -->## 1. Vercel 概述与定位
 
-#<!-- chunk: 1.1 什么是 Vercel？ -->## 1.1 什么是 Vercel？
+## 1.1 什么是 Vercel？
 
 **Vercel** 是一个面向前端开发者的云平台 (PaaS)，由 Next.js 的创造者 Guillermo Rauch 创立，专注于为 Web 应用提供零配置部署、全球边缘网络加速和 Serverless 计算能力。
 
@@ -105,7 +105,7 @@ Vercel 部署模式
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.2 Vercel 在开发者平台生态中的定位 -->## 1.2 Vercel 在开发者平台生态中的定位
+## 1.2 Vercel 在开发者平台生态中的定位
 
 ```
 开发者平台分层视图
@@ -135,7 +135,7 @@ Vercel 部署模式
 └──────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.3 核心功能矩阵 -->## 1.3 核心功能矩阵
+## 1.3 核心功能矩阵
 
 | 功能 | 说明 | 适用场景 |
 |------|------|---------|
@@ -148,7 +148,7 @@ Vercel 部署模式
 | **Web Analytics** | 内置 Core Web Vitals 性能分析 | 性能优化、用户体验监控 |
 | **AI SDK** | 构建 AI 驱动 Web 应用的工具集 | LLM 应用、AI Chatbot |
 
-#<!-- chunk: 1.4 支持的框架 -->## 1.4 支持的框架
+## 1.4 支持的框架
 
 ```yaml
 一等公民支持 (First-class):
@@ -176,7 +176,7 @@ Vercel 部署模式
 
 <!-- chunk: 2. 核心架构解析 -->## 2. 核心架构解析
 
-#<!-- chunk: 2.1 部署架构 -->## 2.1 部署架构
+## 2.1 部署架构
 
 ```mermaid
 graph TB
@@ -217,7 +217,7 @@ graph TB
     Lambda --> ISR
 ```
 
-#<!-- chunk: 2.2 请求处理流程 -->## 2.2 请求处理流程
+## 2.2 请求处理流程
 
 ```
 用户请求处理流程 (Request Flow)
@@ -240,7 +240,7 @@ Vercel Edge Network (最近的 PoP 节点)
         └── 缓存过期 → 返回旧页面 + 后台重新生成
 ```
 
-#<!-- chunk: 2.3 关键技术概念 -->## 2.3 关键技术概念
+## 2.3 关键技术概念
 
 | 概念 | 缩写 | 说明 |
 |------|------|------|
@@ -255,7 +255,7 @@ Vercel Edge Network (最近的 PoP 节点)
 
 <!-- chunk: 3. 快速入门指南 -->## 3. 快速入门指南
 
-#<!-- chunk: 3.1 前置准备 -->## 3.1 前置准备
+## 3.1 前置准备
 
 ```bash
 # 1. 确认 Node.js 版本 (推荐 18.x 或 20.x)
@@ -274,7 +274,7 @@ vercel --version
 # 预期输出: Vercel CLI 3x.x.x
 ```
 
-#<!-- chunk: 3.2 方式一：从模板创建 (推荐新手) -->## 3.2 方式一：从模板创建 (推荐新手)
+## 3.2 方式一：从模板创建 (推荐新手)
 
 ```bash
 # 使用 Next.js 模板创建项目
@@ -300,7 +300,7 @@ vercel
 # ✅ Production: https://my-app-xxxx.vercel.app
 ```
 
-#<!-- chunk: 3.3 方式二：导入已有 Git 仓库 -->## 3.3 方式二：导入已有 Git 仓库
+## 3.3 方式二：导入已有 Git 仓库
 
 ```bash
 # 步骤 1: 登录 Vercel
@@ -324,7 +324,7 @@ vercel --prod
 # ✅ Production: https://your-project.vercel.app
 ```
 
-#<!-- chunk: 3.4 方式三：通过 Web 界面导入 -->## 3.4 方式三：通过 Web 界面导入
+## 3.4 方式三：通过 Web 界面导入
 
 ```
 操作步骤:
@@ -337,7 +337,7 @@ vercel --prod
 7. 获得生产 URL: https://your-project.vercel.app
 ```
 
-#<!-- chunk: 3.5 CLI 常用命令速查 -->## 3.5 CLI 常用命令速查
+## 3.5 CLI 常用命令速查
 
 ```bash
 # === 部署相关 ===
@@ -370,7 +370,7 @@ vercel certs ls                # 列出 SSL 证书
 
 <!-- chunk: 4. 项目部署实战 -->## 4. 项目部署实战
 
-#<!-- chunk: 4.1 Next.js 项目 (全栈) -->## 4.1 Next.js 项目 (全栈)
+## 4.1 Next.js 项目 (全栈)
 
 ```bash
 # 创建 Next.js 项目
@@ -430,7 +430,7 @@ my-nextjs-app/
 }
 ```
 
-#<!-- chunk: 4.2 纯静态站点 (VitePress / Hugo) -->## 4.2 纯静态站点 (VitePress / Hugo)
+## 4.2 纯静态站点 (VitePress / Hugo)
 
 ```bash
 # VitePress 文档站点
@@ -450,7 +450,7 @@ EOF
 vercel --prod
 ```
 
-#<!-- chunk: 4.3 Monorepo 部署 -->## 4.3 Monorepo 部署
+## 4.3 Monorepo 部署
 
 ```json
 {
@@ -465,7 +465,7 @@ vercel --prod
 
 <!-- chunk: 5. Serverless Functions -->## 5. Serverless Functions
 
-#<!-- chunk: 5.1 基本用法 -->## 5.1 基本用法
+## 5.1 基本用法
 
 ```
 文件路径映射关系:
@@ -507,7 +507,7 @@ export async function POST(request: Request) {
 }
 ```
 
-#<!-- chunk: 5.2 Serverless Function 配置 -->## 5.2 Serverless Function 配置
+## 5.2 Serverless Function 配置
 
 ```json
 {
@@ -536,7 +536,7 @@ export async function POST(request: Request) {
 
 <!-- chunk: 6. Edge Functions 与 Edge Middleware -->## 6. Edge Functions 与 Edge Middleware
 
-#<!-- chunk: 6.1 Edge Middleware -->## 6.1 Edge Middleware
+## 6.1 Edge Middleware
 
 Edge Middleware 在请求到达应用之前执行，运行在全球所有边缘节点，延迟极低。
 
@@ -576,7 +576,7 @@ export const config = {
 };
 ```
 
-#<!-- chunk: 6.2 Edge Functions vs Serverless Functions -->## 6.2 Edge Functions vs Serverless Functions
+## 6.2 Edge Functions vs Serverless Functions
 
 | 对比维度 | Edge Functions | Serverless Functions |
 |---------|---------------|---------------------|
@@ -592,7 +592,7 @@ export const config = {
 
 <!-- chunk: 7. 自定义域名与 DNS 配置 -->## 7. 自定义域名与 DNS 配置
 
-#<!-- chunk: 7.1 添加自定义域名 -->## 7.1 添加自定义域名
+## 7.1 添加自定义域名
 
 ```bash
 # CLI 方式
@@ -605,7 +605,7 @@ vercel domains add example.com
 # > Value: vc-domain-verify=xxxxxxxxxxxx
 ```
 
-#<!-- chunk: 7.2 DNS 配置 -->## 7.2 DNS 配置
+## 7.2 DNS 配置
 
 ```
 配置方式一: Vercel DNS (推荐)
@@ -620,7 +620,7 @@ vercel domains add example.com
   CNAME   www     cname.vercel-dns.com
 ```
 
-#<!-- chunk: 7.3 HTTPS/SSL 证书 -->## 7.3 HTTPS/SSL 证书
+## 7.3 HTTPS/SSL 证书
 
 ```
 自动化证书管理流程:
@@ -634,7 +634,7 @@ vercel domains add example.com
 
 <!-- chunk: 8. 环境变量与密钥管理 -->## 8. 环境变量与密钥管理
 
-#<!-- chunk: 8.1 环境变量类型 -->## 8.1 环境变量类型
+## 8.1 环境变量类型
 
 ```bash
 # 添加环境变量 (交互式)
@@ -650,7 +650,7 @@ vercel env add DATABASE_URL
 vercel env pull .env.local
 ```
 
-#<!-- chunk: 8.2 敏感信息处理 -->## 8.2 敏感信息处理
+## 8.2 敏感信息处理
 
 ```
 环境变量安全最佳实践:
@@ -668,7 +668,7 @@ Next.js 环境变量前缀规则:
 
 <!-- chunk: 9. Preview Deployments 协作工作流 -->## 9. Preview Deployments 协作工作流
 
-#<!-- chunk: 9.1 工作流 -->## 9.1 工作流
+## 9.1 工作流
 
 ```
 Preview Deployment 工作流:
@@ -695,7 +695,7 @@ Preview Deployment 工作流:
    └── 可随时回顾任意版本
 ```
 
-#<!-- chunk: 9.2 Vercel Bot 在 PR 中的集成 -->## 9.2 Vercel Bot 在 PR 中的集成
+## 9.2 Vercel Bot 在 PR 中的集成
 
 ```
 GitHub PR 中 Vercel Bot 自动评论内容:
@@ -719,7 +719,7 @@ GitHub PR 中 Vercel Bot 自动评论内容:
 
 <!-- chunk: 10. 性能优化与 Web Analytics -->## 10. 性能优化与 Web Analytics
 
-#<!-- chunk: 10.1 Vercel Speed Insights -->## 10.1 Vercel Speed Insights
+## 10.1 Vercel Speed Insights
 
 ```
 Core Web Vitals 监控指标:
@@ -735,7 +735,7 @@ Core Web Vitals 监控指标:
 └────────────────┴────────────┴──────────────────────────┘
 ```
 
-#<!-- chunk: 10.2 性能优化清单 -->## 10.2 性能优化清单
+## 10.2 性能优化清单
 
 ```yaml
 静态资源优化:
@@ -761,7 +761,7 @@ Core Web Vitals 监控指标:
 
 在 Vercel 上部署项目，框架选型至关重要。Next.js 作为 Vercel 的「亲生框架」拥有最深度的集成，但并非所有场景都适合。本节帮助你做出正确选择。
 
-#<!-- chunk: 11.1 渲染模式对比 -->## 11.1 渲染模式对比
+## 11.1 渲染模式对比
 
 | 框架 | 默认渲染方式 | 服务端渲染 (SSR) | 静态生成 (SSG) | 增量再生 (ISR) |
 |------|------------|-----------------|---------------|---------------|
@@ -773,7 +773,7 @@ Core Web Vitals 监控指标:
 | **Remix** | 服务端优先 | ✅ 原生 | ❌ | ❌ |
 | **SvelteKit** | 服务端优先 | ✅ 原生 | ✅ 原生 | ❌ |
 
-#<!-- chunk: 11.2 Next.js vs 纯前端框架核心差异 -->## 11.2 Next.js vs 纯前端框架核心差异
+## 11.2 Next.js vs 纯前端框架核心差异
 
 ```
 ┌─────────────────┬──────────────────┬──────────────────┐
@@ -791,7 +791,7 @@ Core Web Vitals 监控指标:
 一句话总结：React 是引擎，Next.js 是整车。
 ```
 
-#<!-- chunk: 11.3 Next.js 独有的杀手级特性 -->## 11.3 Next.js 独有的杀手级特性
+## 11.3 Next.js 独有的杀手级特性
 
 | 特性 | 说明 |
 |------|------|
@@ -802,7 +802,7 @@ Core Web Vitals 监控指标:
 | **next/font** | 字体零 CLS（布局偏移），自动 self-host Google Fonts |
 | **Server Actions** | 表单直接调服务端函数，无需手写 API |
 
-#<!-- chunk: 11.4 框架选型决策指南 -->## 11.4 框架选型决策指南
+## 11.4 框架选型决策指南
 
 ```yaml
 选 Next.js:
@@ -828,7 +828,7 @@ Core Web Vitals 监控指标:
   - 可混用 React/Vue/Svelte 组件
 ```
 
-#<!-- chunk: 11.5 Vercel 上各框架的部署体验 -->## 11.5 Vercel 上各框架的部署体验
+## 11.5 Vercel 上各框架的部署体验
 
 | 框架 | Vercel 集成度 | 零配置部署 | 特殊优化 |
 |------|-------------|-----------|----------|
@@ -847,7 +847,7 @@ Core Web Vitals 监控指标:
 
 <!-- chunk: 12. 与 Kubernetes/云原生生态的关系 -->## 12. 与 Kubernetes/云原生生态的关系
 
-#<!-- chunk: 12.1 定位对比 -->## 12.1 定位对比
+## 12.1 定位对比
 
 ```
 Vercel vs Kubernetes: 不同抽象层级
@@ -865,7 +865,7 @@ Kubernetes (容器编排层)
 └── 底层: 云厂商 VM / 裸金属
 ```
 
-#<!-- chunk: 12.2 混合架构模式 -->## 12.2 混合架构模式
+## 12.2 混合架构模式
 
 在企业中，Vercel 与 Kubernetes 常常互补使用：
 
@@ -901,7 +901,7 @@ Kubernetes (容器编排层)
 └─────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 12.3 何时用 Vercel，何时用 Kubernetes -->## 12.3 何时用 Vercel，何时用 Kubernetes
+## 12.3 何时用 Vercel，何时用 Kubernetes
 
 | 场景 | 推荐方案 | 原因 |
 |------|---------|------|
@@ -918,7 +918,7 @@ Kubernetes (容器编排层)
 
 <!-- chunk: 13. 企业级功能与安全 -->## 13. 企业级功能与安全
 
-#<!-- chunk: 13.1 Vercel 计划对比 -->## 13.1 Vercel 计划对比
+## 13.1 Vercel 计划对比
 
 | 功能 | Hobby (免费) | Pro ($20/月) | Enterprise |
 |------|-------------|-------------|------------|
@@ -934,7 +934,7 @@ Kubernetes (容器编排层)
 | 审计日志 | ❌ | ❌ | ✅ |
 | IP 白名单 | ❌ | ❌ | ✅ |
 
-#<!-- chunk: 13.2 安全最佳实践 -->## 13.2 安全最佳实践
+## 13.2 安全最佳实践
 
 ```yaml
 部署安全:
@@ -957,7 +957,7 @@ Kubernetes (容器编排层)
 
 <!-- chunk: 14. 常见问题与故障排查 -->## 14. 常见问题与故障排查
 
-#<!-- chunk: 14.1 构建失败 -->## 14.1 构建失败
+## 14.1 构建失败
 
 ```bash
 # 查看构建日志
@@ -978,7 +978,7 @@ vercel logs <deployment-url>
 # 解决: 检查依赖，使用 tree-shaking，排除不必要的包
 ```
 
-#<!-- chunk: 14.2 部署成功但页面异常 -->## 14.2 部署成功但页面异常
+## 14.2 部署成功但页面异常
 
 ```bash
 # 检查步骤:
@@ -998,7 +998,7 @@ vercel logs <deployment-url> --follow
 vercel inspect <deployment-url>
 ```
 
-#<!-- chunk: 14.3 性能问题 -->## 14.3 性能问题
+## 14.3 性能问题
 
 ```
 性能排查清单:
@@ -1023,7 +1023,7 @@ vercel inspect <deployment-url>
 
 <!-- chunk: 15. 最佳实践总结 -->## 15. 最佳实践总结
 
-#<!-- chunk: 15.1 项目配置最佳实践 -->## 15.1 项目配置最佳实践
+## 15.1 项目配置最佳实践
 
 ```yaml
 推荐项目配置:
@@ -1051,7 +1051,7 @@ vercel inspect <deployment-url>
     - 监控 Core Web Vitals，保持 Performance Score > 90
 ```
 
-#<!-- chunk: 15.2 Vercel 学习资源 -->## 15.2 Vercel 学习资源
+## 15.2 Vercel 学习资源
 
 | 资源 | 链接 | 说明 |
 |------|------|------|
@@ -1081,7 +1081,7 @@ vercel inspect <deployment-url>
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-07-platform-engineering KUDIG Database — Global MOC
-- [[domain-07-platform-engineering/README|Domain 36: 平台工程 (Platform Engineering)]]
+- [[domain-07-platform-engineering/README.md|Domain 07: 平台工程 (Platform Engineering)]]
 - Domain-36 平台工程 — 开源项目索引
 - 平台工程概述与成熟度模型
 - 内部开发者平台设计原则

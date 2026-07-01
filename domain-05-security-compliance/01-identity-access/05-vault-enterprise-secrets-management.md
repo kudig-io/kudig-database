@@ -63,7 +63,7 @@ created: "2026-05-23"
 
 HashiCorp Vault 是企业级密钥管理和加密服务平台，提供集中式的密钥存储、动态凭证生成、加密即服务和完整的审计追踪能力。在云原生环境中，应用程序需要管理数据库凭证、API 密钥、TLS 证书、加密密钥等多种敏感数据，Vault 通过统一的 API 和策略引擎为这些需求提供安全、可审计的解决方案。本文详细探讨 Vault 企业级部署架构、多认证方式集成、密钥引擎使用、加密服务和运维管理，帮助企业在生产环境中构建安全、高可用的密钥管理平台。
 
-#<!-- chunk: 威胁模型分析 -->## 威胁模型分析
+## 威胁模型分析
 
 **密钥泄露**：开发人员将数据库密码、API Key 等硬编码在代码或配置文件中，通过代码仓库泄露。更常见的是将密钥以明文形式存储在环境变量或 ConfigMap 中，集群内的任何 Pod 都可能读取。Vault 通过动态凭证和 Agent Sidecar 注入模式，确保密钥仅在内存中存在，不落盘不暴露。
 
@@ -75,7 +75,7 @@ HashiCorp Vault 是企业级密钥管理和加密服务平台，提供集中式�
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: Vault 企业级组件架构 -->## Vault 企业级组件架构
+## Vault 企业级组件架构
 
 ```mermaid
 graph TB
@@ -150,7 +150,7 @@ graph TB
     STORAGE --> BACKUP
 ```
 
-#<!-- chunk: 企业级部署架构 -->## 企业级部署架构
+## 企业级部署架构
 
 ```yaml
 vault_enterprise_architecture:
@@ -213,7 +213,7 @@ vault_enterprise_architecture:
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: LDAP / Active Directory 认证 -->## LDAP / Active Directory 认证
+## LDAP / Active Directory 认证
 
 ```bash
 #!/bin/bash
@@ -261,7 +261,7 @@ vault write auth/ldap/users/admin.user \
     groups="security-team"
 ```
 
-#<!-- chunk: Kubernetes 认证 -->## Kubernetes 认证
+## Kubernetes 认证
 
 ```yaml
 apiVersion: v1
@@ -362,7 +362,7 @@ vault policy write backend-policy backend-policy.hcl
 vault policy write database-reader database-reader.hcl
 ```
 
-#<!-- chunk: AppRole 认证（机器对机器） -->## AppRole 认证（机器对机器）
+## AppRole 认证（机器对机器）
 
 ```bash
 #!/bin/bash
@@ -412,7 +412,7 @@ vault write auth/approle/login \
     secret_id="$SECRET_ID"
 ```
 
-#<!-- chunk: KV Secrets Engine -->## KV Secrets Engine
+## KV Secrets Engine
 
 ```bash
 #!/bin/bash
@@ -459,7 +459,7 @@ vault kv undelete -versions=1 secret/production/api-keys
 vault kv destroy -versions=3 secret/production/api-keys
 ```
 
-#<!-- chunk: Dynamic Database Credentials -->## Dynamic Database Credentials
+## Dynamic Database Credentials
 
 ```bash
 #!/bin/bash
@@ -513,7 +513,7 @@ vault read database/creds/read-only
 
 <!-- chunk: 安全策略实战 -->## 安全策略实战
 
-#<!-- chunk: Transit 加密即服务 -->## Transit 加密即服务
+## Transit 加密即服务
 
 Transit 引擎提供加密即服务（Encryption as a Service），应用程序无需自行管理加密密钥。密钥存储在 Vault 中，永远不暴露给应用。适合加密用户敏感数据如 SSN、信用卡号、健康记录等。
 
@@ -574,7 +574,7 @@ vault write transit/rewrap/customer-pii \
     ciphertext="vault:v1:abc123..."
 ```
 
-#<!-- chunk: PKI 证书管理 -->## PKI 证书管理
+## PKI 证书管理
 
 ```bash
 #!/bin/bash
@@ -656,7 +656,7 @@ vault write pki-intermediate/tidy \
     safety_buffer="72h"
 ```
 
-#<!-- chunk: 命名空间隔离 -->## 命名空间隔离
+## 命名空间隔离
 
 ```bash
 #!/bin/bash
@@ -723,7 +723,7 @@ vault write -namespace=development auth/userpass/users/dev-admin \
 
 <!-- chunk: 合规与审计 -->## 合规与审计
 
-#<!-- chunk: 审计日志配置 -->## 审计日志配置
+## 审计日志配置
 
 ```bash
 # Enable file audit
@@ -742,7 +742,7 @@ vault audit enable socket \
     format="json"
 ```
 
-#<!-- chunk: 审计日志分析 -->## 审计日志分析
+## 审计日志分析
 
 ```bash
 #!/bin/bash
@@ -797,7 +797,7 @@ jq 'select(.request.path | test("transit/(encrypt|decrypt)"))' "$AUDIT_LOG" | \
 
 <!-- chunk: 监控与告警 -->## 监控与告警
 
-#<!-- chunk: [[Prometheus|Prometheus]] 监控 -->## Prometheus 监控
+## Prometheus 监控
 
 ```bash
 # Configure Vault telemetry in server config
@@ -896,15 +896,15 @@ spec:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 最小权限原则 -->## 最小权限原则
+## 最小权限原则
 
 为每个应用创建独立的 Vault 策略，仅授予必要的路径和操作权限。使用命名空间隔离不同环境的密钥。定期审查策略和角色配置，删除不再使用的权限。
 
-#<!-- chunk: 密钥自动轮换 -->## 密钥自动轮换
+## 密钥自动轮换
 
 使用动态密钥引擎为数据库和云服务生成短期凭证。对于静态密钥，使用 External Secrets Operator 定期同步。加密密钥通过 Transit 引擎的 `auto_rotate_period` 自动轮换。
 
-#<!-- chunk: 备份与灾难恢复 -->## 备份与灾难恢复
+## 备份与灾难恢复
 
 ```bash
 #!/bin/bash
@@ -943,7 +943,7 @@ find "$BACKUP_DIR" -type d -mtime +30 -exec rm -rf {} \;
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题 -->## 常见问题
+## 常见问题
 
 **Vault Sealed**：检查 Auto Unseal KMS 配置。确认 KMS 密钥存在且有权限。查看 Vault 日志中的 unseal 错误信息。手动使用 unseal key 解封。
 
@@ -1007,8 +1007,8 @@ vault audit list -detailed
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
@@ -1026,9 +1026,9 @@ vault audit list -detailed
 - 09-opa-gatekeeper-policy
 - 10-image-security-scanning
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

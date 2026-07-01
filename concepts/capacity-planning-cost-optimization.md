@@ -9,6 +9,7 @@ tags:
   - k8s
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # 容量规划与成本优化
@@ -259,6 +260,6 @@ criticality: high                           # 业务关键度
 
 ## Related
 
-- [[concepts/finops-greenops-practices]] — FinOps 与绿色运维实践
-- [[concepts/gitops-production-operations]] — GitOps 生产运维
-- [[concepts/k8s-ai-ml-infrastructure]] — K8S AI/ML 基础设施
+- [[concepts/finops-greenops-practices.md|finops greenops practices]] — FinOps 与绿色运维实践
+- [[concepts/gitops-production-operations.md|gitops production operations]] — GitOps 生产运维
+- [[concepts/k8s-ai-ml-infrastructure.md|k8s ai ml infrastructure]] — K8S AI/ML 基础设施

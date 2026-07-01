@@ -137,40 +137,36 @@ route:
   
   routes:
     # SRE团队路由
-    - match:
-        team: sre
+    - matchers:
+      - team="sre"
       receiver: sre-pager
       group_by: ['alertname', 'service']
       continue: true
-      
     # 应用团队路由
-    - match_re:
-        team: ^(app-team|web-team)$
+    - matchers:
+      - team=~"^(app-team|web-team)$"
       receiver: team-slack
       group_wait: 1m
       group_interval: 10m
-      
     # 业务告警路由
-    - match:
-        category: business
+    - matchers:
+      - category="business"
       receiver: business-email
       group_by: ['business_domain']
-
 # 告警抑制规则
 inhibit_rules:
   # 抑制底层基础设施告警当上层服务已知问题时
-  - source_match:
-      alertname: ServiceDown
-    target_match:
-      alertname: NodeNotReady
-    equal: ['instance']
-    
+  - source_matchers:
+    - alertname="ServiceDown"
+    - target_match=""
+    - alertname="NodeNotReady"
+    - equal="['instance']"
   # 抑制资源告警当维护窗口期间
-  - source_match:
-      alertname: MaintenanceWindow
-    target_match_re:
-      severity: warning|info
-    equal: ['cluster']
+  - source_matchers:
+    - alertname="MaintenanceWindow"
+    - target_match_re=""
+    - severity="warning|info"
+    - equal="['cluster']"
 ```
 
 <!-- chunk: 二、多租户告警管理 -->
@@ -246,11 +242,11 @@ spec:
       
   # 告警成本控制
   inhibit_rules:
-  - source_match:
-      alertname: TenantQuotaExceeded
-    target_match:
-      tenant: "{{ .Values.tenantName }}"
-    equal: ['tenant']
+  - source_matchers:
+    - alertname="TenantQuotaExceeded"
+    - target_match=""
+    - tenant="{{ .Values.tenantName }}"
+    - equal="['tenant']"
 ```
 
 <!-- chunk: 三、告警生命周期管理 -->
@@ -533,8 +529,8 @@ alert_operations_dashboard:
 ## Obsidian 相关文档
 
 - observability/MOC.md|domain-06-observability MOC]]
-- [[domain-06-observability/README|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-8 可观测性 — 开源项目索引]]
+- [[domain-06-observability/README.md|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
 - 03 - 日志收集架构详解 (Logging Architecture)
@@ -552,8 +548,8 @@ alert_operations_dashboard:
 - 07-monitoring-dashboards
 - 08-logging-audit-compliance
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

@@ -151,6 +151,9 @@ k8s_versions:
 
 ### 1.2 报错查看方式汇总
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 节点级 I/O 监控
 iostat -x 1 10
@@ -514,7 +517,7 @@ if [ "$FS_TYPE" = "xfs" ]; then
 elif [ "$FS_TYPE" = "ext4" ]; then
   echo "1. ext4 文件系统调优:"
   # 关闭日志（仅适用于可重建的数据，如缓存）
-  # tune2fs -O ^has_journal /dev/$DISK  # ⚠️ 谨慎使用
+  # tune2fs -O ^has_journal /dev/$DISK
   
   # 增加预留块百分比（默认 5%，对于大容量盘可减少）
   tune2fs -m 1 /dev/$DISK
@@ -830,16 +833,18 @@ groups:
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/sql|sql]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting|02-csi-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting|03-snapshot-backup-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting|05-storageclass-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting|01-pv-pvc-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md|02-csi-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting.md|03-snapshot-backup-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting.md|05-storageclass-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md|01-pv-pvc-troubleshooting]]
+
+```

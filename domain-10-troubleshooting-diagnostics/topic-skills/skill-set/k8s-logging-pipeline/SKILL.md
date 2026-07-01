@@ -263,6 +263,7 @@ flowchart TD
     H -->|修复失败| J[升级给高级SRE]
     I --> K[更新监控告警]
     J --> L[准备问题报告]
+
 ```
 
 ## 工具速查表
@@ -308,4 +309,6 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/observability-stack-evolution|可观测性技术栈演进]] — 日志收集管道与可观测性体系架构
+- [[concepts/observability-stack-evolution.md|可观测性技术栈演进]] — 日志收集管道与可观测性体系架构
+
+```

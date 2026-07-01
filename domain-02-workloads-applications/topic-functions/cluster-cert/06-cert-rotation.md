@@ -279,6 +279,9 @@ kubeadm **不直接支持 CA 轮换**，因为：
 
 **手动 CA 轮换步骤**：
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 备份
 sudo cp -r /etc/kubernetes/pki /etc/kubernetes/pki.backup.$(date +%Y%m%d)
@@ -315,6 +318,9 @@ sudo systemctl restart kubelet
 ## 自动化轮换方案
 
 ### 方案 1: cron + kubeadm
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # /etc/cron.monthly/k8s-cert-renew
@@ -400,6 +406,10 @@ kubeadm upgrade 不会自动更新证书
 - 建议在升级流程中前置证书轮换步骤
 
 **推荐升级流程**：
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 检查证书
 kubeadm certs check-expiration
@@ -410,6 +420,7 @@ systemctl restart kubelet
 
 # 3. 执行升级
 kubeadm upgrade apply v1.32.0
+
 ```
 
 ---
@@ -433,6 +444,9 @@ kubeadm upgrade apply v1.32.0
 
 ### 场景 1: 仅 API Server 证书过期，集群仍可部分访问
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 如果还能通过某个 master 节点的本地连接执行命令
 sudo kubeadm certs renew apiserver
@@ -442,6 +456,9 @@ sudo systemctl restart kubelet
 ```
 
 ### 场景 2: 所有控制面证书过期，API 完全不可用
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 在所有 master 节点上，将系统时间回拨到证书有效期内（临时措施）
@@ -489,8 +506,10 @@ kubectl get nodes
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[entities/cert-manager|cert-manager]]
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/cert-manager.md|cert-manager]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+
+```

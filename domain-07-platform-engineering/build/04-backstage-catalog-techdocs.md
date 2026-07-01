@@ -112,7 +112,7 @@ k8s_versions:
 
 <!-- chunk: 1. 软件目录核心概念 -->## 1. 软件目录核心概念
 
-#<!-- chunk: 1.1 为什么需要软件目录？ -->## 1.1 为什么需要软件目录？
+## 1.1 为什么需要软件目录？
 
 在大型工程组织中，软件资产的管理面临巨大挑战：
 
@@ -142,7 +142,7 @@ k8s_versions:
   ✅ 技术统计一键报告
 ```
 
-#<!-- chunk: 1.2 Backstage 软件目录模型 -->## 1.2 Backstage 软件目录模型
+## 1.2 Backstage 软件目录模型
 
 ```mermaid
 graph TB
@@ -166,7 +166,7 @@ graph TB
     Template -.->|"用于创建"| Component
 ```
 
-#<!-- chunk: 1.3 实体命名规范 -->## 1.3 实体命名规范
+## 1.3 实体命名规范
 
 ```
 实体引用格式 (Entity Reference)
@@ -189,7 +189,7 @@ graph TB
 
 <!-- chunk: 2. catalog-info.yaml 完整指南 -->## 2. catalog-info.yaml 完整指南
 
-#<!-- chunk: 2.1 基础结构 -->## 2.1 基础结构
+## 2.1 基础结构
 
 ```yaml
 # catalog-info.yaml 基础结构
@@ -295,7 +295,7 @@ spec:
     - resource:default/order-events-topic
 ```
 
-#<!-- chunk: 2.2 高级注解详解 -->## 2.2 高级注解详解
+## 2.2 高级注解详解
 
 ```yaml
 # 常用注解完整参考
@@ -407,7 +407,7 @@ metadata:
 
 <!-- chunk: 3. 实体类型详解 -->## 3. 实体类型详解
 
-#<!-- chunk: 3.1 Component（组件） -->## 3.1 Component（组件）
+## 3.1 Component（组件）
 
 ```yaml
 # Component - 最常见的实体类型
@@ -505,7 +505,7 @@ spec:
     - resource:default/analytics-warehouse
 ```
 
-#<!-- chunk: 3.2 API（API 接口） -->## 3.2 API（API 接口）
+## 3.2 API（API 接口）
 
 ```yaml
 # API 类型实体
@@ -706,7 +706,7 @@ spec:
                     format: date-time
 ```
 
-#<!-- chunk: 3.3 Resource（资源） -->## 3.3 Resource（资源）
+## 3.3 Resource（资源）
 
 ```yaml
 # Resource 类型实体 - 基础设施资源
@@ -779,7 +779,7 @@ spec:
   system: system:default/order-system
 ```
 
-#<!-- chunk: 3.4 System（系统） -->## 3.4 System（系统）
+## 3.4 System（系统）
 
 ```yaml
 # System 类型 - 组件的逻辑集合
@@ -816,7 +816,7 @@ spec:
       icon: dashboard
 ```
 
-#<!-- chunk: 3.5 Domain（业务域） -->## 3.5 Domain（业务域）
+## 3.5 Domain（业务域）
 
 ```yaml
 # Domain 类型 - 最高层级的业务分类
@@ -839,7 +839,7 @@ spec:
   owner: group:default/ecommerce-leadership
 ```
 
-#<!-- chunk: 3.6 Group（团队）与 User（用户） -->## 3.6 Group（团队）与 User（用户）
+## 3.6 Group（团队）与 User（用户）
 
 ```yaml
 # Group 类型 - 团队定义
@@ -898,7 +898,7 @@ spec:
 
 <!-- chunk: 4. 实体关系与系统建模 -->## 4. 实体关系与系统建模
 
-#<!-- chunk: 4.1 关系类型 -->## 4.1 关系类型
+## 4.1 关系类型
 
 ```mermaid
 graph LR
@@ -920,7 +920,7 @@ graph LR
     end
 ```
 
-#<!-- chunk: 4.2 完整系统建模示例 -->## 4.2 完整系统建模示例
+## 4.2 完整系统建模示例
 
 ```yaml
 # 电商订单系统完整建模示例
@@ -987,7 +987,7 @@ spec:
     - resource:default/order-events-topic
 ```
 
-#<!-- chunk: 4.3 依赖关系图可视化 -->## 4.3 依赖关系图可视化
+## 4.3 依赖关系图可视化
 
 ```typescript
 // packages/app/src/components/catalog/EntityPage.tsx
@@ -1039,7 +1039,7 @@ const dependenciesContent = (
 
 <!-- chunk: 5. 目录发现机制 -->## 5. 目录发现机制
 
-#<!-- chunk: 5.1 GitHub 自动发现 -->## 5.1 GitHub 自动发现
+## 5.1 GitHub 自动发现
 
 ```yaml
 # app-config.yaml - GitHub 自动发现配置
@@ -1087,7 +1087,7 @@ catalog:
       frequency: { minutes: 60 }
 ```
 
-#<!-- chunk: 5.2 GitLab 自动发现 -->## 5.2 GitLab 自动发现
+## 5.2 GitLab 自动发现
 
 ```yaml
 catalog:
@@ -1107,7 +1107,7 @@ catalog:
         skipForkedRepos: true
 ```
 
-#<!-- chunk: 5.3 Kubernetes 服务发现 -->## 5.3 Kubernetes 服务发现
+## 5.3 Kubernetes 服务发现
 
 ```yaml
 catalog:
@@ -1139,7 +1139,7 @@ metadata:
     backstage.io/entity-name: order-service
 ```
 
-#<!-- chunk: 5.4 自定义 Location 类型 -->## 5.4 自定义 Location 类型
+## 5.4 自定义 Location 类型
 
 ```typescript
 // plugins/internal-catalog-processor/src/processor.ts
@@ -1212,7 +1212,7 @@ export class InternalServiceRegistryProcessor implements CatalogProcessor {
 
 <!-- chunk: 6. 自定义目录处理器 -->## 6. 自定义目录处理器
 
-#<!-- chunk: 6.1 实体验证处理器 -->## 6.1 实体验证处理器
+## 6.1 实体验证处理器
 
 ```typescript
 // 自定义验证处理器：确保所有服务符合平台标准
@@ -1302,7 +1302,7 @@ export class PlatformStandardsProcessor implements CatalogProcessor {
 }
 ```
 
-#<!-- chunk: 6.2 实体关系增强处理器 -->## 6.2 实体关系增强处理器
+## 6.2 实体关系增强处理器
 
 ```typescript
 // 自动发现和建立关系的处理器
@@ -1351,7 +1351,7 @@ export class AutoRelationshipProcessor implements CatalogProcessor {
 
 <!-- chunk: 7. TechDocs 架构与配置 -->## 7. TechDocs 架构与配置
 
-#<!-- chunk: 7.1 TechDocs 工作原理 -->## 7.1 TechDocs 工作原理
+## 7.1 TechDocs 工作原理
 
 ```mermaid
 graph LR
@@ -1381,7 +1381,7 @@ graph LR
     Backstage -->|"渲染"| Browser
 ```
 
-#<!-- chunk: 7.2 TechDocs 配置 -->## 7.2 TechDocs 配置
+## 7.2 TechDocs 配置
 
 ```yaml
 # app-config.yaml TechDocs 完整配置
@@ -1427,7 +1427,7 @@ techdocs:
       # 使用 Workload Identity 不需要显式 credentials
 ```
 
-#<!-- chunk: 7.3 TechDocs 自定义构建器 Dockerfile -->## 7.3 TechDocs 自定义构建器 Dockerfile
+## 7.3 TechDocs 自定义构建器 Dockerfile
 
 ```dockerfile
 # techdocs-builder/Dockerfile
@@ -1461,7 +1461,7 @@ RUN curl -L \
 
 <!-- chunk: 8. MkDocs 文档编写指南 -->## 8. MkDocs 文档编写指南
 
-#<!-- chunk: 8.1 mkdocs.yml 配置 -->## 8.1 mkdocs.yml 配置
+## 8.1 mkdocs.yml 配置
 
 ```yaml
 # docs/mkdocs.yml
@@ -1542,7 +1542,7 @@ nav:
     - 代码贡献: development/contributing.md
 ```
 
-#<!-- chunk: 8.2 文档编写规范与示例 -->## 8.2 文档编写规范与示例
+## 8.2 文档编写规范与示例
 
 ```markdown
 # 订单服务技术文档
@@ -1594,7 +1594,7 @@ graph TB
 
 <!-- chunk: API 使用示例 -->## API 使用示例
 
-#<!-- chunk: 创建订单 -->## 创建订单
+## 创建订单
 
 !!! example "POST /api/v2/orders"
 
@@ -1665,7 +1665,7 @@ graph TB
 
 <!-- chunk: 9. TechDocs CI/CD 集成 -->## 9. TechDocs CI/CD 集成
 
-#<!-- chunk: 9.1 GitHub Actions 工作流 -->## 9.1 GitHub Actions 工作流
+## 9.1 GitHub Actions 工作流
 
 ```yaml
 # .github/workflows/techdocs.yml
@@ -1757,7 +1757,7 @@ jobs:
             https://backstage.company.com/api/catalog/refresh
 ```
 
-#<!-- chunk: 9.2 GitLab CI 工作流 -->## 9.2 GitLab CI 工作流
+## 9.2 GitLab CI 工作流
 
 ```yaml
 # .gitlab-ci.yml
@@ -1825,7 +1825,7 @@ publish-techdocs:
 
 <!-- chunk: 10. API 文档集成 -->## 10. API 文档集成
 
-#<!-- chunk: 10.1 OpenAPI 规范与 Backstage 集成 -->## 10.1 OpenAPI 规范与 Backstage 集成
+## 10.1 OpenAPI 规范与 Backstage 集成
 
 ```yaml
 # 将 API 定义从外部 URL 引用（推荐，避免 catalog-info.yaml 过大）
@@ -1857,7 +1857,7 @@ spec:
   #     ...
 ```
 
-#<!-- chunk: 10.2 Swagger UI 集成 -->## 10.2 Swagger UI 集成
+## 10.2 Swagger UI 集成
 
 ```typescript
 // 配置 API 文档页面（支持 Swagger UI 交互式测试）
@@ -1893,7 +1893,7 @@ const apis: AnyApiFactory[] = [
 ];
 ```
 
-#<!-- chunk: 10.3 自动 API 变更检测 -->## 10.3 自动 API 变更检测
+## 10.3 自动 API 变更检测
 
 ```yaml
 # GitHub Actions: API 变更检测工作流
@@ -1964,7 +1964,7 @@ jobs:
 
 <!-- chunk: 11. 高级目录功能 -->## 11. 高级目录功能
 
-#<!-- chunk: 11.1 目录自定义过滤器 -->## 11.1 目录自定义过滤器
+## 11.1 目录自定义过滤器
 
 ```typescript
 // 自定义目录页面过滤器
@@ -2006,7 +2006,7 @@ const catalogPage = (
 );
 ```
 
-#<!-- chunk: 11.2 实体统计与报告 -->## 11.2 实体统计与报告
+## 11.2 实体统计与报告
 
 ```typescript
 // 目录统计 API 示例
@@ -2061,7 +2061,7 @@ async function getCatalogStats(catalogApi: CatalogApi) {
 }
 ```
 
-#<!-- chunk: 11.3 批量 catalog-info.yaml 生成脚本 -->## 11.3 批量 catalog-info.yaml 生成脚本
+## 11.3 批量 catalog-info.yaml 生成脚本
 
 ```python
 #!/usr/bin/env python3
@@ -2189,7 +2189,7 @@ if __name__ == '__main__':
 
 <!-- chunk: 12. 目录数据质量管理 -->## 12. 目录数据质量管理
 
-#<!-- chunk: 12.1 目录健康度指标 -->## 12.1 目录健康度指标
+## 12.1 目录健康度指标
 
 ```yaml
 # 目录数据质量衡量维度
@@ -2227,7 +2227,7 @@ catalog_quality_metrics:
     target: "> 95% 的服务在目录中"
 ```
 
-#<!-- chunk: 12.2 目录质量自动检查 -->## 12.2 目录质量自动检查
+## 12.2 目录质量自动检查
 
 ```typescript
 // 定期运行的目录质量检查任务
@@ -2296,7 +2296,7 @@ export async function runCatalogQualityCheck(
 }
 ```
 
-#<!-- chunk: 12.3 目录治理策略 -->## 12.3 目录治理策略
+## 12.3 目录治理策略
 
 ```yaml
 # 目录治理规范
@@ -2351,14 +2351,14 @@ governance_policy:
 
 Backstage 软件目录和 TechDocs 是构建统一开发者体验的关键基础：
 
-#<!-- chunk: 软件目录要点 -->## 软件目录要点
+## 软件目录要点
 
 1. **实体建模**：从 Domain → System → Component/API/Resource 建立完整的软件资产视图
 2. **自动发现**：通过 GitHub/GitLab Provider 自动发现服务，降低维护成本
 3. **关系建模**：明确声明服务依赖关系，支持影响分析和变更评估
 4. **数据质量**：建立治理策略和自动检查，保证目录数据的准确性和完整性
 
-#<!-- chunk: TechDocs 要点 -->## TechDocs 要点
+## TechDocs 要点
 
 1. **文档即代码**：文档与代码同仓库，通过 CI/CD 自动构建和发布
 2. **MkDocs 配置**：合理使用插件（Mermaid、admonition、tabbed 等）提升文档质量
@@ -2387,7 +2387,7 @@ Backstage 软件目录和 TechDocs 是构建统一开发者体验的关键基础
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Domain 36: 平台工程 (Platform Engineering)]]
+- [[domain-07-platform-engineering/README.md|Domain 07: 平台工程 (Platform Engineering)]]
 - Domain-36 平台工程 — 开源项目索引
 - 平台工程概述与成熟度模型
 - 内部开发者平台设计原则

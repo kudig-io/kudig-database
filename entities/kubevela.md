@@ -52,7 +52,7 @@ KubeVela 是现代应用交付平台，实现了开放应用模型（OAM）规�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -68,11 +68,11 @@ KubeVela 是现代应用交付平台，实现了开放应用模型（OAM）规�
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[flux]]
-- [[entities/argocd|[[ArgoCD|argocd]]]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 - [[deployment]]
-- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
 
 ## Related
 
@@ -80,8 +80,8 @@ KubeVela 是现代应用交付平台，实现了开放应用模型（OAM）规�
 - [[helm]] — Helm
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[entities/argocd|argocd]] — ArgoCD
+- [[entities/argocd.md|argocd]] — ArgoCD
 
 - kubevela
-- [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

@@ -2381,6 +2381,9 @@ helm install prometheus prometheus-community/kube-prometheus-stack \
 
 **检查 system:masters 组滥用**
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+
 ```bash
 # 查找所有 s
 
@@ -2823,6 +2826,10 @@ kind: Service
 
 ### 2.1 NGINX Ingress Controller
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 方式 1: Helm 安装
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
@@ -2938,6 +2945,9 @@ Pod A (10.244.1.2) → cni0 (10.244.1.1) → flannel.1 (VXLAN) → eth0 → Node
 
 ### 2.1 kubeadm 集群安装 Flannel
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 安装 CNI 插件
 kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
@@ -2950,6 +2960,9 @@ ip addr | grep flannel
 ```
 
 ### 2.2 自定义 CIDR
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 通过 kubeadm 配置 Pod CIDR
@@ -3162,6 +3175,8 @@ spec:
 
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[entities/argocd|argocd]] — ArgoCD
-- [[concepts/docker-architecture|docker-architecture]] — Docker Architecture and Container Runtime
+- [[entities/argocd.md|argocd]] — ArgoCD
+- [[concepts/docker-architecture.md|docker-architecture]] — Docker Architecture and Container Runtime
 - [[pod-lifecycle]] — Pod Lifecycle
+
+```

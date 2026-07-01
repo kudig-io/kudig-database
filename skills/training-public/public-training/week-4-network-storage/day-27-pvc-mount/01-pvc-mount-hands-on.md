@@ -40,7 +40,7 @@ created: "2026-05-23"
 
 # Day 27: 存储卷挂载实操
 
-> **日期**: Week 4 Day 6 | **主题**: 存储挂载方式与最佳实践 | **版本**: [[entities/kubernetes|[[Kubernetes 生产环境速查卡|k8s]]]] 1.28-1.33
+> **日期**: Week 4 Day 6 | **主题**: 存储挂载方式与最佳实践 | **版本**: [[entities/kubernetes.md|[[Kubernetes 生产环境速查卡|k8s]]]] 1.28-1.33
 
 ---
 
@@ -285,6 +285,9 @@ spec:
 
 ### 6.1 常见错误
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. "MountVolume.Mount failed"
 kubectl describe pod <pod-name> | grep -A15 "Events:"
@@ -309,6 +312,9 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.volumes[*].mountPropagation}'
 ```
 
 ### 6.3 ConfigMap/Secret 更新不生效
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 方式 1: 重启 Pod（推荐）

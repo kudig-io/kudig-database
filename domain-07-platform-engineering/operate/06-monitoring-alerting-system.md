@@ -127,7 +127,7 @@ spec:
     spec:
       containers:
       - name: prometheus
-        image: prom/prometheus:v2.45.0
+        image: prom/prometheus:v3.2.1
         args:
         - '--config.file=/etc/prometheus/prometheus.yml'
         - '--storage.tsdb.path=/prometheus'
@@ -306,23 +306,22 @@ route:
   receiver: 'default'
   
   routes:
-  - match:
-      severity: critical
-    receiver: 'pagerduty'
-  - match:
-      severity: warning
-    receiver: 'slack'
-  - match_re:
-      service: ^(frontend|backend)$
-    receiver: 'service-team'
-
+  - matchers:
+    - severity="critical"
+    receiver: pagerduty
+  - matchers:
+    - severity="warning"
+    receiver: slack
+  - matchers:
+    - service=~"^(frontend|backend)$"
+    receiver: service-team
 receivers:
 - name: 'default'
   email_configs:
   - to: 'alerts@example.com'
 - name: 'pagerduty'
   pagerduty_configs:
-  - service_key: '<pagerduty-service-key>'
+  - routing_key: '<pagerduty-service-key>'
 - name: 'slack'
   slack_configs:
   - api_url: '<slack-webhook-url>'
@@ -496,11 +495,11 @@ slos:
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering KUDIG Database — Global MOC
-- [[domain-07-platform-engineering/README|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
+- [[domain-07-platform-engineering/README.md|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
 - Domain-9 平台运维 — 开源项目索引
 - 平台运维概述
 - 集群生命周期管理
-- [[domain-07-platform-engineering/governance/03-capacity-planning-resource-assessment]]
+- [[domain-07-platform-engineering/governance/03-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
 - 性能基准测试与调优 (Performance Benchmarking & Tuning)
 - 运维指标体系建设 (Operations Metrics System)
 - GitOps配置管理 (GitOps Configuration Management)
@@ -518,7 +517,7 @@ slos:
 - 相关知识域: domain-06-observability
 - 相关知识域: domain-15-specialized-tech
 - 相关知识域: domain-10-troubleshooting-diagnostics
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ## See Also
 

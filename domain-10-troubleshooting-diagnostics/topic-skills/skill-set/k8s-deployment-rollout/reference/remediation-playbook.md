@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-deployment-rollout"
 created: "2026-05-22"
 updated: "2026-05-22"
+last_updated: 2026-05-22
 tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
@@ -51,6 +52,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 查看 FailedScheduling 原因
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 增加副本数（如果当前为 1）
   kubectl scale deployment/<name> --replicas=2 -n <namespace>
@@ -80,6 +85,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl get deployment <name> -n <namespace> -o jsonpath='{.spec.strategy}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 放宽 maxUnavailable 以允许更新进行
   kubectl patch deployment/<name> -n <namespace> -p '
@@ -90,6 +99,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl rollout status deployment/<name> -n <namespace>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch deployment/<name> -n <namespace> -p '
   {"spec":{"strategy":{"type":"RollingUpdate","rollingUpdate":{"maxUnavailable":"25%","maxSurge":"25%"}}}}'
@@ -129,6 +142,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 确认是镜像不存在、标签错误还是仓库认证问题
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 修正镜像标签
   kubectl set image deployment/<name> app=<correct-image>:<tag> -n <namespace>
@@ -152,6 +169,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl logs <pod> -n <namespace> --previous 2>/dev/null | tail -50
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 放宽初始延迟和超时时间
   kubectl patch deployment/<name> -n <namespace> --type='json' -p='
@@ -173,6 +194,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 查看 FailedScheduling 原因（node affinity, taints, resources）
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 添加 tolerations
   kubectl patch deployment/<name> -n <namespace> --type='json' -p='
@@ -198,6 +223,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl logs <pod> -n <namespace> -c <init-container-name>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 根据 init container 失败原因修复
   # 常见原因: 依赖服务未就绪、配置错误、权限不足
@@ -221,6 +250,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
      kubectl rollout history deployment/<name> -n <namespace>
      ```
   2. **执行回滚**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
      ```bash
      kubectl rollout undo deployment/<name> -n <namespace>
      # 或回滚到指定版本
@@ -239,6 +272,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   - 通知相关团队发布已回滚
   - 检查是否有数据库 schema 变更需要同步回滚
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 如果回滚后问题依旧，再次 undo 可回到新版本
   kubectl rollout undo deployment/<name> -n <namespace>

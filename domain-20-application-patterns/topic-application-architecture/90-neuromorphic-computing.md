@@ -110,7 +110,7 @@ k8s_versions:
 
 从云平台角度看，类脑计算平台需要提供：SNN 训练所需的 GPU 算力（ANN-to-SNN 转换或直接 SNN 训练）；大规模网络仿真所需的并行计算能力；模型部署到边缘神经形态芯片的工具链；实验管理和模型版本管理能力。
 
-#<!-- chunk: 1.1 行业背景 -->## 1.1 行业背景
+## 1.1 行业背景
 
 | 挑战 | 说明 | 架构影响 |
 |:---|:---|:---|
@@ -120,7 +120,7 @@ k8s_versions:
 | 边缘部署 | 超低功耗推理需求 | 模型量化 + 芯片适配 |
 | 软硬件协同 | 算法与芯片深度耦合 | 协同设计工具链 |
 
-#<!-- chunk: 1.2 核心场景 -->## 1.2 核心场景
+## 1.2 核心场景
 
 - **脉冲神经网络**: LIF/Izhikevich 等神经元模型的 SNN 建模与训练
 - **神经形态芯片**: Loihi/TrueNorth/天机芯等芯片设计与验证
@@ -132,19 +132,19 @@ k8s_versions:
 
 <!-- chunk: 2. 设计原则 -->## 2. 设计原则
 
-#<!-- chunk: 2.1 软硬件协同原则 -->## 2.1 软硬件协同原则
+## 2.1 软硬件协同原则
 
 类脑计算的性能高度依赖算法与硬件的匹配。SNN 的神经元模型、突触精度、连接拓扑等参数需要与目标芯片的能力对齐。平台设计需要提供软硬件协同仿真工具，让研究人员在软件仿真阶段就能评估模型在目标硬件上的性能表现。
 
-#<!-- chunk: 2.2 训练-部署闭环原则 -->## 2.2 训练-部署闭环原则
+## 2.2 训练-部署闭环原则
 
 SNN 的训练比传统 ANN 更复杂。主流方法有两种：一是 ANN-to-SNN 转换（先训练 ANN，再转换为 SNN），适合图像分类等静态任务；二是直接 SNN 训练（如替代梯度法、STDP 等），适合时序处理和在线学习。平台需要支持两种训练路径，并提供从训练到部署的完整工具链。
 
-#<!-- chunk: 2.3 事件驱动原则 -->## 2.3 事件驱动原则
+## 2.3 事件驱动原则
 
 类脑计算的核心特征是事件驱动。不同于传统 ANN 的稠密矩阵运算，SNN 只在神经元发放脉冲时进行计算，天然稀疏。平台设计需要充分利用这一特性，在数据输入（事件相机/DVS）、网络计算、芯片执行三个层面都采用事件驱动模式。
 
-#<!-- chunk: 2.4 可观测性原则 -->## 2.4 可观测性原则
+## 2.4 可观测性原则
 
 SNN 的内部状态（膜电位、脉冲发放率、突触权重）比 ANN 更复杂，需要专门的 visualization 工具。平台需要提供网络拓扑可视化、脉冲活动光栅图、膜电位时序图、权重分布热力图等分析工具，帮助研究人员理解网络行为。
 
@@ -152,7 +152,7 @@ SNN 的内部状态（膜电位、脉冲发放率、突触权重）比 ANN 更�
 
 <!-- chunk: 3. 架构模式 -->## 3. 架构模式
 
-#<!-- chunk: 3.1 类脑计算平台全景架构 -->## 3.1 类脑计算平台全景架构
+## 3.1 类脑计算平台全景架构
 
 ```mermaid
 graph TB
@@ -197,7 +197,7 @@ graph TB
     D1 & D2 & D3 & D4 --> A1 & S1
 ```
 
-#<!-- chunk: 3.2 ANN-to-SNN 转换流水线 -->## 3.2 ANN-to-SNN 转换流水线
+## 3.2 ANN-to-SNN 转换流水线
 
 ```mermaid
 flowchart LR
@@ -212,7 +212,7 @@ flowchart LR
     G --> I[芯片部署]
 ```
 
-#<!-- chunk: 3.3 边缘推理部署架构 -->## 3.3 边缘推理部署架构
+## 3.3 边缘推理部署架构
 
 ```mermaid
 graph TB
@@ -246,7 +246,7 @@ graph TB
 
 <!-- chunk: 4. 实现示例 -->## 4. 实现示例
 
-#<!-- chunk: 4.1 LIF 神经元脉冲神经网络 -->## 4.1 LIF 神经元脉冲神经网络
+## 4.1 LIF 神经元脉冲神经网络
 
 ```python
 import numpy as np
@@ -335,7 +335,7 @@ class SNNNetwork:
         return np.argmax(rates)
 ```
 
-#<!-- chunk: 4.2 STDP 学习规则实现 -->## 4.2 STDP 学习规则实现
+## 4.2 STDP 学习规则实现
 
 ```python
 import numpy as np
@@ -376,7 +376,7 @@ class STDPLearner:
         return self.weights.copy()
 ```
 
-#<!-- chunk: 4.3 SNN 模型管理与部署 -->## 4.3 SNN 模型管理与部署
+## 4.3 SNN 模型管理与部署
 
 ```go
 package neuromorphic
@@ -474,7 +474,7 @@ func (r *ModelRegistry) GetBestModel(chip string) (*SNNModel, error) {
 
 <!-- chunk: 5. 在 Kubernetes 上的部署 -->## 5. 在 Kubernetes 上的部署
 
-#<!-- chunk: 5.1 SNN 训练 GPU 集群 -->## 5.1 SNN 训练 GPU 集群
+## 5.1 SNN 训练 GPU 集群
 
 ```yaml
 apiVersion: apps/v1
@@ -535,7 +535,7 @@ spec:
             claimName: snn-models-pvc
 ```
 
-#<!-- chunk: 5.2 SNN 仿真服务 -->## 5.2 SNN 仿真服务
+## 5.2 SNN 仿真服务
 
 ```yaml
 apiVersion: apps/v1
@@ -574,7 +574,7 @@ spec:
               cpu: "16000m"
 ```
 
-#<!-- chunk: 5.3 模型部署工具链 -->## 5.3 模型部署工具链
+## 5.3 模型部署工具链
 
 ```yaml
 apiVersion: apps/v1
@@ -615,21 +615,21 @@ spec:
 
 <!-- chunk: 6. 最佳实践 -->## 6. 最佳实践
 
-#<!-- chunk: 6.1 SNN 训练优化 -->## 6.1 SNN 训练优化
+## 6.1 SNN 训练优化
 
 - **ANN-SNN 转换**: 对于图像分类等静态任务，先训练 ReLU-ANN，再通过权重归一化和阈值标定转换为 SNN，转换损失通常 < 1%
 - **替代梯度训练**: 对于需要时序处理的任务，使用替代梯度（Surrogate Gradient）方法直接训练 SNN
 - **混合训练**: 先用 ANN 预训练初始化权重，再用 STDP 等生物学习规则微调
 - **量化感知训练**: 训练时模拟目标芯片的精度约束（如 4-bit 突触权重），减少部署时的精度损失
 
-#<!-- chunk: 6.2 模型优化 -->## 6.2 模型优化
+## 6.2 模型优化
 
 - **权重剪枝**: 利用 SNN 的稀疏性，剪除低发放率的神经元和弱突触
 - **分层量化**: 输入层保持高精度，深层使用低精度（4-bit 或 2-bit）
 - **拓扑优化**: 根据目标芯片的片上连接约束调整网络拓扑
 - **能耗建模**: 在仿真阶段使用能耗模型估算推理功耗，指导模型优化
 
-#<!-- chunk: 6.3 部署管理 -->## 6.3 部署管理
+## 6.3 部署管理
 
 - **模型注册中心**: 管理不同版本的 SNN 模型，记录训练参数、精度、能耗指标
 - **芯片适配层**: 为不同神经形态芯片提供统一的编译接口
@@ -639,31 +639,31 @@ spec:
 
 <!-- chunk: 7. 反模式 -->## 7. 反模式
 
-#<!-- chunk: 7.1 直接套用 ANN 训练方法 -->## 7.1 直接套用 ANN 训练方法
+## 7.1 直接套用 ANN 训练方法
 
 将传统 ANN 的训练方法（如标准反向传播）直接用于 SNN，忽视 SNN 不可微的特性。
 
 **解决方案**: 使用替代梯度方法（用可微函数近似阶跃函数的梯度）或 ANN-to-SNN 转换策略。对于在线学习场景使用 STDP 等生物学习规则。
 
-#<!-- chunk: 7.2 忽视硬件约束 -->## 7.2 忽视硬件约束
+## 7.2 忽视硬件约束
 
 在仿真器上设计 SNN 时忽视目标芯片的约束（如最大神经元数、突触精度、连接带宽）。
 
 **解决方案**: 仿真时加入硬件约束模型，限制网络规模、权重精度和连接拓扑。使用硬件感知的神经架构搜索（HW-NAS）自动搜索适合目标芯片的网络结构。
 
-#<!-- chunk: 7.3 过度追求生物真实性 -->## 7.3 过度追求生物真实性
+## 7.3 过度追求生物真实性
 
 在工程应用中过度追求神经元模型的生物真实性（如使用 Hodgkin-Huxley 模型），导致计算开销过大。
 
 **解决方案**: 根据任务需求选择合适的神经元模型精度。大多数工程应用使用 LIF（Leaky Integrate-and-Fire）模型即可获得良好性能，计算开销远低于高精度模型。
 
-#<!-- chunk: 7.4 忽视脉冲编码设计 -->## 7.4 忽视脉冲编码设计
+## 7.4 忽视脉冲编码设计
 
 忽视输入数据的脉冲编码方式设计，导致信息在编码过程中丢失。
 
 **解决方案**: 根据数据类型选择合适的编码方式：图像数据常用频率编码（rate coding）或首脉冲时间编码（TTFS）；时序数据常用时间编码；事件相机数据天然就是脉冲形式。编码方式直接影响 SNN 性能。
 
-#<!-- chunk: 7.5 单一评估指标 -->## 7.5 单一评估指标
+## 7.5 单一评估指标
 
 仅使用精度作为 SNN 评估指标，忽视能耗和延迟。
 
@@ -673,7 +673,7 @@ spec:
 
 <!-- chunk: 8. 参考资源 -->## 8. 参考资源
 
-#<!-- chunk: 8.1 阿里云组件映射 -->## 8.1 阿里云组件映射
+## 8.1 阿里云组件映射
 
 | 功能域 | **阿里云云原生方案** |
 |:---|:---|
@@ -685,7 +685,7 @@ spec:
 | 可观测性 | **ARMS + SLS** |
 | 工作流 | **[[Argo|Argo]]go Workflows|Argo Workflows]]** |
 
-#<!-- chunk: 8.2 生产检查清单 -->## 8.2 生产检查清单
+## 8.2 生产检查清单
 
 - [ ] SNN 训练收敛性验证（与 ANN 基线对比）
 - [ ] ANN-to-SNN 转换精度损失 < 2%
@@ -695,7 +695,7 @@ spec:
 - [ ] 算法可解释性报告
 - [ ] 模型注册中心版本管理
 
-#<!-- chunk: 8.3 外部参考 -->## 8.3 外部参考
+## 8.3 外部参考
 
 - Intel Loihi 2 — 英特尔神经形态芯片
 - IBM TrueNorth — IBM 神经形态芯片
@@ -713,17 +713,17 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

@@ -49,28 +49,28 @@ created: "2026-05-23"
 ### 深度技术
 
 - 证书管理与 TLS 配置
-- [[entities/kubernetes]]
+- [[entities/kubernetes.md|kubernetes]]
 
 ### 证书工具
 
 - cert-manager 自动证书管理实践指南
-- [[domain-17-system-foundation/topic-cheat-sheet/tls-pki|TLS/SSL 与 PKI 速查表]]
+- [[domain-17-system-foundation/topic-cheat-sheet/tls-pki.md|TLS/SSL 与 PKI 速查表]]
 
 ### 故障排查
 
 - troubleshooting|证书故障排查 (Certificate Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting|[[Kubernetes 证书故障排查指南|Kubernetes 证书故障排查指南]]]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md|[[Kubernetes 证书故障排查指南|Kubernetes 证书故障排查指南]]]]
 
 ### 技能卡片
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry|[[证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis|证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis]]]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry.md|[[证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis|证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis]]]]
 
 ### 集群证书
 
-- [[domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation|证书轮换机制源码分析]]
-- [[domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys|[[ServiceAccount 密钥对源码分析|ServiceAccount 密钥对源码分析]]]]
-- [[domain-02-workloads-applications/topic-functions/cluster-cert/13-cert-config|kubeadm 配置对证书生成的影响]]
-- [[domain-02-workloads-applications/topic-functions/cluster-cert/17-pki-security-best-practices|[[Kubernetes PKI 安全最佳实践|Kubernetes PKI 安全最佳实践]]]]
+- [[domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation.md|证书轮换机制源码分析]]
+- [[domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md|[[ServiceAccount 密钥对源码分析|ServiceAccount 密钥对源码分析]]]]
+- [[domain-02-workloads-applications/topic-functions/cluster-cert/13-cert-config.md|kubeadm 配置对证书生成的影响]]
+- [[domain-02-workloads-applications/topic-functions/cluster-cert/17-pki-security-best-practices.md|[[Kubernetes PKI 安全最佳实践|Kubernetes PKI 安全最佳实践]]]]
 
 ---
 
@@ -85,19 +85,19 @@ created: "2026-05-23"
 
 ### 控制平面
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting|etcd 故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting|API Server 故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md|API Server 故障排查指南]]
 
 ### 安全
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting|RBAC 与认证故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/07-control-plane-security-troubleshooting|控制平面安全加固故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/07-control-plane-security-troubleshooting.md|控制平面安全加固故障排查指南]]
 
 ### 术语词典
 
-- [[domain-17-system-foundation/topic-dictionary/operations/certificates|[[Certificates（PKI 证书与要求）|Certificates（PKI 证书与要求）]]]]
-- [[domain-17-system-foundation/topic-dictionary/configuration/secrets|Secrets]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/communication-between-nodes-and-the-control-plane|[[Communication between Nodes and the Control Plane（节点与控制平面之间的通信）|Communication between Nodes and the Control Plane]]]]
+- [[domain-17-system-foundation/topic-dictionary/operations/certificates.md|[[Certificates（PKI 证书与要求）|Certificates（PKI 证书与要求）]]]]
+- [[domain-17-system-foundation/topic-dictionary/configuration/secrets.md|Secrets]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/communication-between-nodes-and-the-control-plane.md|[[Communication between Nodes and the Control Plane（节点与控制平面之间的通信）|Communication between Nodes and the Control Plane]]]]
 
 ---
 

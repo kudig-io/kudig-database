@@ -357,6 +357,9 @@ kubectl get nodenetworking -A
 
 ### 演示 2：Pod 安全组配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 步骤 1: 创建 PodNetworking (指定安全组和 vSwitch)
 cat <<EOF | kubectl apply -f -
@@ -391,6 +394,9 @@ kubectl get podeni -A | grep db-pod
 ```
 
 ### 演示 3：NetworkPolicy 实战
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 部署默认拒绝策略
@@ -452,6 +458,10 @@ kubectl get networkpolicy -A
 
 ### 演示 4：StatefulSet 固定 IP
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 步骤 1: 创建 PodNetworking
 cat <<EOF | kubectl apply -f -
@@ -507,6 +517,9 @@ kubectl get reservedip -A
 
 ### 演示 5：故障排查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 场景: Pod 卡在 ContainerCreating
 
@@ -529,6 +542,7 @@ kubectl get nodenetworking <node> -o yaml
 # 紧急处理: 手动清理泄漏 IP
 kubectl get ipinstance -A | grep -v Running
 kubectl delete ipinstance <leaked-ip-instance> -n <ns>
+
 ```
 
 ---
@@ -631,7 +645,7 @@ Terway
 |:---|:---|:---|
 | 1 | `domain-03-networking-traffic/topic-terway/01-product.md` | 产品概览: 定位、版本历史、模式总览 |
 | 2 | `domain-03-networking-traffic/topic-terway/02-architecture.md` | 架构原理: 控制面/数据面详解、IPAM |
-| 3 | `domain-03-networking-traffic/[[domain-03-networking-traffic/topic-terway/03-usage|03-usage]].md` | 使用指南: 安装配置、模式切换 |
+| 3 | `domain-03-networking-traffic/[[domain-03-networking-traffic/topic-terway/03-usage.md|03-usage]].md` | 使用指南: 安装配置、模式切换 |
 | 4 | `domain-03-networking-traffic/topic-terway/03b-crd-operations.md` | CRD 操作: PodENI/ReservedIP CRUD |
 | 5 | `domain-03-networking-traffic/topic-terway/04-operations.md` | 运维手册: 健康检查、GC、升级 |
 | 6 | `domain-03-networking-traffic/topic-terway/05-testing.md` | 测试验证: 网络连通性、NetworkPolicy 测试 |
@@ -659,4 +673,6 @@ Terway
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+```

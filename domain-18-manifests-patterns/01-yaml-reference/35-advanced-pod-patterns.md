@@ -132,7 +132,7 @@ k8s_versions:
 
 Init Container 在主容器启动前按顺序执行，常用于准备工作、依赖检查和配置初始化。
 
-#<!-- chunk: 1.1 数据预加载 -->## 1.1 数据预加载
+## 1.1 数据预加载
 
 ```yaml
 apiVersion: v1
@@ -204,7 +204,7 @@ spec:
       sizeLimit: 2Gi  # 限制 emptyDir 大小 (v1.25+)
 ```
 
-#<!-- chunk: 1.2 配置生成 -->## 1.2 配置生成
+## 1.2 配置生成
 
 ```yaml
 apiVersion: v1
@@ -280,7 +280,7 @@ spec:
     emptyDir: {}
 ```
 
-#<!-- chunk: 1.3 等待依赖服务 -->## 1.3 等待依赖服务
+## 1.3 等待依赖服务
 
 ```yaml
 apiVersion: v1
@@ -370,7 +370,7 @@ spec:
 
 Sidecar 容器与主容器共享生命周期，提供辅助功能如日志收集、监控、代理等。
 
-#<!-- chunk: 2.1 原生 Sidecar (v1.29+) -->## 2.1 原生 Sidecar (v1.29+)
+## 2.1 原生 Sidecar (v1.29+)
 
 Kubernetes v1.29 引入原生 Sidecar 容器支持，通过 `restartPolicy: Always` 标识。
 
@@ -442,7 +442,7 @@ spec:
       name: envoy-config
 ```
 
-#<!-- chunk: 2.2 日志收集 Sidecar -->## 2.2 日志收集 Sidecar
+## 2.2 日志收集 Sidecar
 
 ```yaml
 apiVersion: v1
@@ -525,7 +525,7 @@ spec:
       name: promtail-config
 ```
 
-#<!-- chunk: 2.3 代理注入模式 -->## 2.3 代理注入模式
+## 2.3 代理注入模式
 
 ```yaml
 apiVersion: v1
@@ -646,7 +646,7 @@ spec:
 
 <!-- chunk: 3. 多容器协作模式 -->## 3. 多容器协作模式
 
-#<!-- chunk: 3.1 Adapter 模式 -->## 3.1 Adapter 模式
+## 3.1 Adapter 模式
 
 Adapter 容器将主容器的输出转换为标准格式，便于监控系统采集。
 
@@ -731,7 +731,7 @@ spec:
       name: statsd-exporter-config
 ```
 
-#<!-- chunk: 3.2 Ambassador 模式 -->## 3.2 Ambassador 模式
+## 3.2 Ambassador 模式
 
 Ambassador 容器作为代理处理外部连接，简化主容器的网络逻辑。
 
@@ -846,7 +846,7 @@ data:
         server replica2 postgres-replica-2.database.svc.cluster.local:5432 check backup
 ```
 
-#<!-- chunk: 3.3 Proxy 模式 -->## 3.3 Proxy 模式
+## 3.3 Proxy 模式
 
 Proxy 容器拦截和管理主容器的所有网络流量，提供负载均衡、重试、熔断等功能。
 
@@ -934,7 +934,7 @@ spec:
 
 Pod 亲和性/反亲和性控制 Pod 在节点上的分布，实现高可用、性能优化等目标。
 
-#<!-- chunk: 4.1 Required 亲和性 -->## 4.1 Required 亲和性
+## 4.1 Required 亲和性
 
 硬性要求，必须满足才能调度。
 
@@ -1009,7 +1009,7 @@ spec:
             memory: 2Gi
 ```
 
-#<!-- chunk: 4.2 Preferred 亲和性 -->## 4.2 Preferred 亲和性
+## 4.2 Preferred 亲和性
 
 软性偏好，尽量满足但不强制。
 
@@ -1113,7 +1113,7 @@ spec:
             memory: 512Mi
 ```
 
-#<!-- chunk: 4.3 反亲和性模式 -->## 4.3 反亲和性模式
+## 4.3 反亲和性模式
 
 ```yaml
 apiVersion: apps/v1
@@ -1202,7 +1202,7 @@ spec:
 
 拓扑分布约束提供更精细的 Pod 分布控制，替代复杂的亲和性规则。
 
-#<!-- chunk: 5.1 基础拓扑分布 -->## 5.1 基础拓扑分布
+## 5.1 基础拓扑分布
 
 ```yaml
 apiVersion: apps/v1
@@ -1268,7 +1268,7 @@ spec:
             memory: 1Gi
 ```
 
-#<!-- chunk: 5.2 高级特性 (v1.26+) -->## 5.2 高级特性 (v1.26+)
+## 5.2 高级特性 (v1.26+)
 
 ```yaml
 apiVersion: apps/v1
@@ -2765,7 +2765,7 @@ resources:
 
 <!-- chunk: 12. 生产案例 -->## 12. 生产案例
 
-#<!-- chunk: 案例 1: 微服务 Sidecar 模式 -->## 案例 1: 微服务 Sidecar 模式
+## 案例 1: 微服务 Sidecar 模式
 
 ```yaml
 apiVersion: apps/v1
@@ -3014,7 +3014,7 @@ spec:
                 - c6i.4xlarge
 ```
 
-#<!-- chunk: 案例 2: 跨可用区高可用部署 -->## 案例 2: 跨可用区高可用部署
+## 案例 2: 跨可用区高可用部署
 
 ```yaml
 apiVersion: apps/v1
@@ -3235,7 +3235,7 @@ spec:
           storage: 100Gi
 ```
 
-#<!-- chunk: 案例 3: GPU 节点调度 -->## 案例 3: GPU 节点调度
+## 案例 3: GPU 节点调度
 
 ```yaml
 apiVersion: v1
@@ -3445,7 +3445,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -3466,4 +3466,4 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]

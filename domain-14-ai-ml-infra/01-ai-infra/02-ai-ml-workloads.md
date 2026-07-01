@@ -65,7 +65,7 @@ created: "2026-05-23"
 
 # 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubeflow|Kubeflow]]](https://www.kubeflow.org/), [Ray](https://ray.io/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubeflow.md|Kubeflow]]](https://www.kubeflow.org/), [Ray](https://ray.io/)
 
 ---
 
@@ -1279,6 +1279,9 @@ spec:
 
 ### 8.1 常用命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # ========== 训练任务管理 ==========
 
@@ -1339,7 +1342,7 @@ kubectl get podgroups -n ml-training
 ## Obsidian 相关文档
 
 - domain-11-ai-infra MOC
-- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
 - Domain-11 AI 基础设施 — 开源项目索引
 - AI 基础设施架构
 - GPU 调度与管理
@@ -1360,4 +1363,4 @@ kubectl get podgroups -n ml-training
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]

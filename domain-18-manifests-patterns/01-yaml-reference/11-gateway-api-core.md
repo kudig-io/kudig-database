@@ -79,7 +79,7 @@ created: "2026-05-23"
 
 <!-- chunk: API 概述与版本 -->## API 概述与版本
 
-#<!-- chunk: 基本信息 -->## 基本信息
+## 基本信息
 
 | 属性 | 值 |
 |------|-----|
@@ -88,7 +88,7 @@ created: "2026-05-23"
 | **稳定版本** | v1 (自 Gateway API v1.0.0) |
 | **安装方式** | `kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml` |
 
-#<!-- chunk: Gateway API 演进 -->## Gateway API 演进
+## Gateway API 演进
 
 ```yaml
 # Gateway API 版本标准分类
@@ -100,7 +100,7 @@ created: "2026-05-23"
 #   - BackendTLSPolicy (v1alpha2)
 ```
 
-#<!-- chunk: 与 Ingress 的核心差异 -->## 与 Ingress 的核心差异
+## 与 Ingress 的核心差异
 
 | 维度 | Ingress | Gateway API |
 |------|---------|-------------|
@@ -114,7 +114,7 @@ created: "2026-05-23"
 
 <!-- chunk: GatewayClass 配置 -->## GatewayClass 配置
 
-#<!-- chunk: 字段规格表 -->## 字段规格表
+## 字段规格表
 
 | 字段路径 | 类型 | 必填 | 版本 | 说明 |
 |----------|------|------|------|------|
@@ -126,7 +126,7 @@ created: "2026-05-23"
 | `spec.parametersRef.namespace` | string | ❌ | v1 | 参数资源命名空间(集群级参数可选) |
 | `spec.description` | string | ❌ | v1 | 人类可读描述 |
 
-#<!-- chunk: 基础示例 -->## 基础示例
+## 基础示例
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -146,7 +146,7 @@ spec:
   description: "Istio-based gateway for production traffic"
 ```
 
-#<!-- chunk: 多实现示例 -->## 多实现示例
+## 多实现示例
 
 ```yaml
 ---
@@ -183,7 +183,7 @@ spec:
   controllerName: traefik.io/gateway-controller
 ```
 
-#<!-- chunk: 带参数的 GatewayClass -->## 带参数的 GatewayClass
+## 带参数的 GatewayClass
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -219,7 +219,7 @@ spec:
 
 <!-- chunk: Gateway 配置 -->## Gateway 配置
 
-#<!-- chunk: 字段规格表 -->## 字段规格表
+## 字段规格表
 
 | 字段路径 | 类型 | 必填 | 版本 | 说明 |
 |----------|------|------|------|------|
@@ -238,7 +238,7 @@ spec:
 | `spec.addresses[]` | array | ❌ | v1 | 显式指定网关地址 |
 | `spec.infrastructure` | object | ❌ | v1.1+ | 基础设施配置(Annotations/Labels) |
 
-#<!-- chunk: 基础 HTTP Gateway -->## 基础 HTTP Gateway
+## 基础 HTTP Gateway
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -266,7 +266,7 @@ spec:
         from: All
 ```
 
-#<!-- chunk: 生产级 HTTPS Gateway -->## 生产级 HTTPS Gateway
+## 生产级 HTTPS Gateway
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -322,7 +322,7 @@ spec:
       - kind: HTTPRoute
 ```
 
-#<!-- chunk: 多端口多协议 Gateway -->## 多端口多协议 Gateway
+## 多端口多协议 Gateway
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -379,7 +379,7 @@ spec:
       - kind: TLSRoute
 ```
 
-#<!-- chunk: Gateway 基础设施配置 (v1.1+) -->## Gateway 基础设施配置 (v1.1+)
+## Gateway 基础设施配置 (v1.1+)
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -408,7 +408,7 @@ spec:
     protocol: HTTP
 ```
 
-#<!-- chunk: 显式地址分配 -->## 显式地址分配
+## 显式地址分配
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -434,7 +434,7 @@ spec:
 
 <!-- chunk: HTTPRoute 配置 -->## HTTPRoute 配置
 
-#<!-- chunk: 字段规格表 -->## 字段规格表
+## 字段规格表
 
 | 字段路径 | 类型 | 必填 | 版本 | 说明 |
 |----------|------|------|------|------|
@@ -454,7 +454,7 @@ spec:
 | `spec.rules[].timeouts.request` | duration | ❌ | v1.2+ | 请求超时(如"30s") |
 | `spec.rules[].timeouts.backendRequest` | duration | ❌ | v1.2+ | 后端请求超时 |
 
-#<!-- chunk: 基础路由 -->## 基础路由
+## 基础路由
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -479,7 +479,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: 路径匹配路由 -->## 路径匹配路由
+## 路径匹配路由
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -529,7 +529,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: 多条件匹配 -->## 多条件匹配
+## 多条件匹配
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -564,7 +564,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: 权重路由(金丝雀发布) -->## 权重路由(金丝雀发布)
+## 权重路由(金丝雀发布)
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -593,7 +593,7 @@ spec:
       weight: 10
 ```
 
-#<!-- chunk: 跨命名空间路由 -->## 跨命名空间路由
+## 跨命名空间路由
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -634,7 +634,7 @@ spec:
     kind: Service
 ```
 
-#<!-- chunk: 带超时配置 (v1.2+) -->## 带超时配置 (v1.2+)
+## 带超时配置 (v1.2+)
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -663,7 +663,7 @@ spec:
 
 <!-- chunk: HTTPRouteMatch 匹配规则 -->## HTTPRouteMatch 匹配规则
 
-#<!-- chunk: 匹配类型完整示例 -->## 匹配类型完整示例
+## 匹配类型完整示例
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -772,7 +772,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: 复杂组合匹配 -->## 复杂组合匹配
+## 复杂组合匹配
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -815,7 +815,7 @@ spec:
 
 <!-- chunk: HTTPRouteFilter 流量处理 -->## HTTPRouteFilter 流量处理
 
-#<!-- chunk: Filter 类型表 -->## Filter 类型表
+## Filter 类型表
 
 | Filter 类型 | 说明 | 用途 |
 |-------------|------|------|
@@ -826,7 +826,7 @@ spec:
 | `RequestMirror` | 流量镜像 | 生产流量复制到测试环境 |
 | `ExtensionRef` | 自定义扩展 | 实现特定的 Filter 逻辑 |
 
-#<!-- chunk: RequestHeaderModifier -->## RequestHeaderModifier
+## RequestHeaderModifier
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -865,7 +865,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: ResponseHeaderModifier -->## ResponseHeaderModifier
+## ResponseHeaderModifier
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -906,7 +906,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: RequestRedirect -->## RequestRedirect
+## RequestRedirect
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -960,7 +960,7 @@ spec:
         statusCode: 302
 ```
 
-#<!-- chunk: URLRewrite -->## URLRewrite
+## URLRewrite
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -1019,7 +1019,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: RequestMirror -->## RequestMirror
+## RequestMirror
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -1046,7 +1046,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: 多 Filter 组合 -->## 多 Filter 组合
+## 多 Filter 组合
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -1103,7 +1103,7 @@ spec:
 
 <!-- chunk: 内部实现原理 -->## 内部实现原理
 
-#<!-- chunk: 角色分离模型 -->## 角色分离模型
+## 角色分离模型
 
 ```yaml
 # Gateway API 的三层角色分离设计
@@ -1159,7 +1159,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: 路由绑定机制 -->## 路由绑定机制
+## 路由绑定机制
 
 ```yaml
 # Gateway 和 Route 的绑定流程
@@ -1238,7 +1238,7 @@ spec:
     kind: Service
 ```
 
-#<!-- chunk: 主机名匹配优先级 -->## 主机名匹配优先级
+## 主机名匹配优先级
 
 ```yaml
 # Gateway API 主机名匹配规则 (从高到低优先级)
@@ -1300,7 +1300,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: 控制器实现机制 -->## 控制器实现机制
+## 控制器实现机制
 
 ```yaml
 # Gateway API 控制器的工作原理
@@ -1341,7 +1341,7 @@ spec:
 
 <!-- chunk: 生产实战案例 -->## 生产实战案例
 
-#<!-- chunk: 案例1: 多租户 Gateway 架构 -->## 案例1: 多租户 Gateway 架构
+## 案例1: 多租户 Gateway 架构
 
 ```yaml
 # 场景: SaaS 平台为每个租户提供独立域名, 共享网关基础设施
@@ -1464,7 +1464,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: 案例2: 金丝雀发布 + A/B 测试 -->## 案例2: 金丝雀发布 + A/B 测试
+## 案例2: 金丝雀发布 + A/B 测试
 
 ```yaml
 # 场景: 新版本灰度发布, 同时支持 Header 定向测试
@@ -1534,7 +1534,7 @@ spec:
   - port: 8080
 ```
 
-#<!-- chunk: 案例3: 生产流量镜像 + 测试环境 -->## 案例3: 生产流量镜像 + 测试环境
+## 案例3: 生产流量镜像 + 测试环境
 
 ```yaml
 # 场景: 将生产流量镜像到测试环境, 验证新版本功能
@@ -1612,7 +1612,7 @@ spec:
     name: api-v2-test
 ```
 
-#<!-- chunk: 案例4: API 网关聚合多服务 -->## 案例4: API 网关聚合多服务
+## 案例4: API 网关聚合多服务
 
 ```yaml
 # 场景: 单一网关入口聚合多个微服务
@@ -1734,7 +1734,7 @@ spec:
 
 <!-- chunk: 版本兼容性与最佳实践 -->## 版本兼容性与最佳实践
 
-#<!-- chunk: Gateway API 版本演进 -->## Gateway API 版本演进
+## Gateway API 版本演进
 
 | Gateway API 版本 | Kubernetes 版本 | 主要特性 | 状态 |
 |------------------|-----------------|----------|------|
@@ -1743,7 +1743,7 @@ spec:
 | v1.2.0 | v1.29+ | `timeouts`, Session Persistence(Experimental) | GA |
 | v1.3.0 | v1.31+ | 增强 GRPC 支持, 改进 TLS 配置 | GA |
 
-#<!-- chunk: Kubernetes 版本支持 -->## Kubernetes 版本支持
+## Kubernetes 版本支持
 
 ```yaml
 # Gateway API 需要单独安装 CRD
@@ -1763,9 +1763,9 @@ kubectl get crd | grep gateway
 # referencegrants.gateway.networking.k8s.io
 ```
 
-#<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
 
-##<!-- chunk: 1. 命名空间隔离策略 -->## 1. 命名空间隔离策略
+## 1. 命名空间隔离策略
 
 ```yaml
 # 推荐: 三层命名空间架构
@@ -1810,7 +1810,7 @@ spec:
             gateway-access: "enabled"
 ```
 
-##<!-- chunk: 2. TLS 证书管理 -->## 2. TLS 证书管理
+## 2. TLS 证书管理
 
 ```yaml
 # 推荐: 使用 cert-manager 自动管理证书
@@ -1870,7 +1870,7 @@ spec:
       - name: api-tls-cert
 ```
 
-##<!-- chunk: 3. 可观测性配置 -->## 3. 可观测性配置
+## 3. 可观测性配置
 
 ```yaml
 # 推荐: 集成 OpenTelemetry/Prometheus 监控
@@ -1920,7 +1920,7 @@ spec:
       port: 8080
 ```
 
-##<!-- chunk: 4. 安全加固 -->## 4. 安全加固
+## 4. 安全加固
 
 ```yaml
 # 推荐: 配置严格的访问控制和安全头
@@ -1975,9 +1975,9 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: FAQ -->## FAQ
+## FAQ
 
-##<!-- chunk: Q1: Gateway API 与 Ingress 如何选择? -->## Q1: Gateway API 与 Ingress 如何选择?
+## Q1: Gateway API 与 Ingress 如何选择?
 
 **A:** 选择标准:
 - **新项目**: 优先使用 Gateway API (更灵活, 未来趋势)
@@ -1986,7 +1986,7 @@ spec:
 - **多团队**: Gateway API (角色分离模型)
 - **遗留系统**: 保持 Ingress (迁移成本高)
 
-##<!-- chunk: Q2: 如何平滑从 Ingress 迁移到 Gateway API? -->## Q2: 如何平滑从 Ingress 迁移到 Gateway API?
+## Q2: 如何平滑从 Ingress 迁移到 Gateway API?
 
 **A:** 迁移策略:
 ```yaml
@@ -2027,7 +2027,7 @@ spec:
 # 3. 验证流量后删除 Ingress
 ```
 
-##<!-- chunk: Q3: 如何调试 HTTPRoute 不生效? -->## Q3: 如何调试 HTTPRoute 不生效?
+## Q3: 如何调试 HTTPRoute 不生效?
 
 **A:** 诊断步骤:
 ```bash
@@ -2049,7 +2049,7 @@ kubectl get gateway <gateway-name> -n <namespace> -o jsonpath='{.spec.listeners[
 kubectl logs -n gateway-system -l app=gateway-controller
 ```
 
-##<!-- chunk: Q4: 权重路由的流量分配精确吗? -->## Q4: 权重路由的流量分配精确吗?
+## Q4: 权重路由的流量分配精确吗?
 
 **A:** 权重是**目标比例**, 不是绝对保证:
 - 小流量下可能有偏差 (如 10 个请求 90/10 分配)
@@ -2057,7 +2057,7 @@ kubectl logs -n gateway-system -l app=gateway-controller
 - 依赖控制器实现 (Envoy/Nginx 负载均衡算法)
 - 建议监控实际分配比例
 
-##<!-- chunk: Q5: RequestMirror 会影响主流量性能吗? -->## Q5: RequestMirror 会影响主流量性能吗?
+## Q5: RequestMirror 会影响主流量性能吗?
 
 **A:** 镜像是**异步非阻塞**:
 - 主请求不等待镜像响应
@@ -2069,18 +2069,18 @@ kubectl logs -n gateway-system -l app=gateway-controller
 
 <!-- chunk: 相关资源 -->## 相关资源
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 - Gateway API 官网: https://gateway-api.sigs.k8s.io/
 - API 参考: https://gateway-api.sigs.k8s.io/reference/spec/
 - 实现列表: https://gateway-api.sigs.k8s.io/implementations/
 
-#<!-- chunk: 控制器实现 -->## 控制器实现
+## 控制器实现
 - Istio Gateway: https://istio.io/latest/docs/tasks/traffic-management/ingress/gateway-api/
 - Nginx Gateway Fabric: https://github.com/nginxinc/nginx-gateway-fabric
 - Envoy Gateway: https://gateway.envoyproxy.io/
 - Traefik: https://doc.traefik.io/traefik/routing/providers/kubernetes-gateway/
 
-#<!-- chunk: 本知识库相关文档 -->## 本知识库相关文档
+## 本知识库相关文档
 - [12 - Gateway API 高级路由](./12-gateway-api-advanced-routes.md)
 - [Ingress 完整配置参考](./08-ingress-all-classes.md)
 - [Service YAML 参考](./02-service-all-types.md)
@@ -2095,7 +2095,7 @@ kubectl logs -n gateway-system -l app=gateway-controller
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考

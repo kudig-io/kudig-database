@@ -39,6 +39,7 @@ prerequisites:
 - tracing-basics
 - observability-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 04 - SRE运维成熟度模型
@@ -67,7 +68,7 @@ created: "2026-05-23"
 - [./operations-best-practices.md](././operations-best-practices.md) - 运维最佳实践
 - [./failure-patterns-analysis.md](././failure-patterns-analysis.md) - 故障模式分析
 - [03-capacity-planning-strategies.md](./03-capacity-planning-strategies.md) - 容量规划策略
-- [../domain-10-troubleshooting-diagnostics/[[domain-04-storage-data/README|[[KUDIG Database]]]].md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md) - 结构化故障排查
+- [../domain-10-troubleshooting-diagnostics/[[domain-04-storage-data/README.md|[[KUDIG Database]]]].md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md) - 结构化故障排查
 
 **学习路径**:
 1. 先了解当前团队所处的成熟度等级(第1节)
@@ -296,6 +297,10 @@ spec:
 ## 2. 自动化能力分级
 
 **Level 1 - 手工操作**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 人工部署应用
 kubectl apply -f deployment.yaml
@@ -304,6 +309,10 @@ kubectl apply -f configmap.yaml
 ```
 
 **Level 2 - 脚本化**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # 部署脚本 deploy.sh
@@ -420,6 +429,10 @@ spec:
 ### 渐进式示例
 
 **Level 1 - 手工操作示例**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 场景:部署新版本应用(完全手工)
 kubectl apply -f deployment.yaml
@@ -430,6 +443,10 @@ kubectl logs pod-name  # 手动查看日志确认
 **痛点**: 步骤繁琐,容易遗漏,无法批量操作
 
 **Level 2 - 脚本化示例**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # deploy.sh - 封装部署步骤
@@ -1144,6 +1161,11 @@ data:
 ### 渐进式示例
 
 **Level 1 - 无流程示例**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 开发者直接操作生产环境
 kubectl delete pod xxx  # 随意重启Pod
@@ -2805,6 +2827,10 @@ kubectl get crd | wc -l
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级
 
+## 参考链接
+
+- [Sre Maturity Model]()
+
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

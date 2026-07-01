@@ -728,7 +728,7 @@ capacity_checklist
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Platform Ops Domain (平台运维领域)]]
+- [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
 - Domain-9 平台运维 — 开源项目索引
 - 平台运维概述
 - 集群生命周期管理
@@ -749,4 +749,4 @@ capacity_checklist
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]

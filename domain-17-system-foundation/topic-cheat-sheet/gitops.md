@@ -65,6 +65,9 @@ Git = Single Source of Truth (唯一真实来源)
 
 ### 安装
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 安装 Argo CD
 kubectl create namespace argocd
@@ -252,6 +255,7 @@ flux resume kustomization my-app
 
 # 诊断
 flux trace my-app -n production
+
 ```
 
 ---
@@ -281,3 +285,5 @@ flux trace my-app -n production
 | 多集群 | Argo CD ApplicationSet / Flux Kustomization 管理多集群 |
 | RBAC | Argo CD RBAC 精细化到 project/app 级别 |
 | 备份 | Velero 备份 Argo CD / Flux 的 CRD 资源 |
+
+```

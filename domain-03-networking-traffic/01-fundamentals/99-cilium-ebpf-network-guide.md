@@ -100,6 +100,9 @@ Cilium 数据平面 (eBPF)
 
 ## 二、安装部署
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # Helm 安装 (推荐)
 helm repo add cilium https://helm.cilium.io/
@@ -214,11 +217,11 @@ spec:
     - name: default
       domains: ["*"]
       routes:
-      - match:
-          prefix: "/api/v1"
-        route:
-          cluster: default/my-service
-        timeout: 10s
+      - matchers:
+        - prefix="/api/v1"
+        - route=""
+        - cluster="default/my-service"
+        - timeout="10s"
 ```
 
 ---
@@ -352,7 +355,7 @@ encryption:
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic KUDIG Database — Global MOC
-- [[domain-03-networking-traffic/README|Domain-15: 网络基础]]
+- [[domain-03-networking-traffic/README.md|Domain-15: 网络基础]]
 - index.md|Domain-15 网络基础 — 开源项目索引]]
 - 网络协议栈详解
 - TCP/UDP 协议深度解析
@@ -370,6 +373,8 @@ encryption:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+
+```

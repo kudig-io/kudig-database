@@ -304,6 +304,10 @@ fi
 
 ### 步骤2：安装CNI插件
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # 安装 Calico
@@ -341,6 +345,9 @@ kubectl get pods -n calico-system
 ```
 
 ### 步骤3：配置网络策略
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash
@@ -407,6 +414,9 @@ EOF
 ```
 
 ### 步骤4：配置Ingress
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 #!/bin/bash
@@ -598,5 +608,5 @@ kubectl run dns-test --image=busybox --rm -it --restart=Never -- nslookup kubern
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

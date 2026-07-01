@@ -46,7 +46,7 @@ severity: critical
 created: "2026-05-23"
 ---
 
-title: 症状向量匹配引擎 ([[skills/Symptom Vector Matching Engine|[[Symptom Vector Matching Engine|Symptom Vector Matching Engine]]]])
+title: 症状向量匹配引擎 ([[skills/Symptom Vector Matching Engine.md|[[Symptom Vector Matching Engine|Symptom Vector Matching Engine]]]])
 description: '<!-- chunk: 一、设计目标' -->## 一、设计目标'
 category: fta
 tags:
@@ -101,7 +101,7 @@ k8s_versions:
 
 <!-- chunk: 一、设计目标 -->## 一、设计目标
 
-#<!-- chunk: 1.1 问题定义 -->## 1.1 问题定义
+## 1.1 问题定义
 
 ```
 传统方式:
@@ -120,7 +120,7 @@ k8s_versions:
   ]
 ```
 
-#<!-- chunk: 1.2 核心能力 -->## 1.2 核心能力
+## 1.2 核心能力
 
 | 能力 | 说明 |
 |:---|:---|
@@ -134,7 +134,7 @@ k8s_versions:
 
 <!-- chunk: 二、向量化设计 -->## 二、向量化设计
 
-#<!-- chunk: 2.1 特征空间定义 -->## 2.1 特征空间定义
+## 2.1 特征空间定义
 
 ```python
 # 症状特征向量 (32维)
@@ -250,7 +250,7 @@ class SymptomVectorizer:
         return None
 ```
 
-#<!-- chunk: 2.2 已知症状模式库 -->## 2.2 已知症状模式库
+## 2.2 已知症状模式库
 
 ```yaml
 symptom_patterns:
@@ -375,7 +375,7 @@ symptom_patterns:
 
 <!-- chunk: 三、匹配算法实现 -->## 三、匹配算法实现
 
-#<!-- chunk: 3.1 余弦相似度匹配 -->## 3.1 余弦相似度匹配
+## 3.1 余弦相似度匹配
 
 ```python
 import math
@@ -439,7 +439,7 @@ class SymptomVectorMatcher:
         return matches / len(keywords) if keywords else 0.0
 ```
 
-#<!-- chunk: 3.2 语义扩展匹配 -->## 3.2 语义扩展匹配
+## 3.2 语义扩展匹配
 
 ```python
 class SemanticExpander:
@@ -493,7 +493,7 @@ class SemanticExpander:
         return expanded
 ```
 
-#<!-- chunk: 3.3 未知症状检测 -->## 3.3 未知症状检测
+## 3.3 未知症状检测
 
 ```python
 class UnknownSymptomDetector:
@@ -639,7 +639,7 @@ class SymptomMatchingPipeline:
 
 <!-- chunk: 五、与 FTA 集成 -->## 五、与 FTA 集成
 
-#<!-- chunk: 5.1 匹配结果 → FTA 路径 -->## 5.1 匹配结果 → FTA 路径
+## 5.1 匹配结果 → FTA 路径
 
 ```python
 class FTARouter:
@@ -695,7 +695,7 @@ class FTARouter:
         return evidence
 ```
 
-#<!-- chunk: 5.2 集成示例 -->## 5.2 集成示例
+## 5.2 集成示例
 
 ```python
 # 使用示例
@@ -731,7 +731,7 @@ print(f"\nFTA 执行请求: {fta_request}")
 
 <!-- chunk: 六、模式库管理 -->## 六、模式库管理
 
-#<!-- chunk: 6.1 模式更新 API -->## 6.1 模式更新 API
+## 6.1 模式更新 API
 
 ```python
 class PatternLibraryManager:
@@ -781,7 +781,7 @@ class PatternLibraryManager:
         return new_pattern
 ```
 
-#<!-- chunk: 6.2 模式库持久化 -->## 6.2 模式库持久化
+## 6.2 模式库持久化
 
 ```yaml
 # pattern-library.yaml
@@ -835,22 +835,22 @@ proposed_patterns:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC|topic-fta MOC]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/README|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution|第一章：FTA 起源与发展史]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations|第二章：FTA 数学基础与理论模型]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards|第三章：FTA 符号体系与标准规范]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles|第四章：FTA 方法论核心原则]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/05-fta-construction-process|第五章：FTA 构建完整流程]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/06-fta-verification-and-quality|第六章：FTA 验证与质量保证]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/07-fta-maintenance-and-evolution|第七章：FTA 维护与演进策略]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution|第八章：AI Agent 时代的运维范式革命]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns|第十章：Agent 编排模式与 FTA 逻辑门映射]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|topic-fta MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis|kubernetes-fta-full-analysis]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/problem-solving-architecture|problem-solving-architecture]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution|01-fta-origin-and-evolution]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations|02-fta-mathematical-foundations]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/problem-solving-architecture.md|problem-solving-architecture]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|01-fta-origin-and-evolution]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations.md|02-fta-mathematical-foundations]]

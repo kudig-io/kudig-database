@@ -51,7 +51,7 @@ Flatcar Container Linux 是为容器优化的不可变 Linux 发行版，是 Cor
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -69,19 +69,19 @@ Flatcar Container Linux 是为容器优化的不可变 Linux 发行版，是 Cor
 
 - [[etcd]]
 - [[containerd]]
-- [[concepts/container-runtime-comparison|container-runtime-comparison]]
-- [[concepts/storage-model|storage-model]]
+- [[concepts/container-runtime-comparison.md|container-runtime-comparison]]
+- [[concepts/storage-model.md|storage-model]]
 - [[pod-lifecycle]]
 
 ## Related
 
-- [[serverless-devs]] — [[Serverless Devs|Serverless Devs]]
+- [[serverless-devs]] — [[entities/serverless-devs.md|Serverless Devs]]
 - [[sermant]] — Sermant
 - [[loxilb]] — LoxiLB
 - [[kube-ovn]] — Kube-OVN
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - flatcar
-- [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[entities/cncf-edge-ai.md|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]

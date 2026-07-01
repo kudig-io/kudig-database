@@ -4,6 +4,7 @@ category: execution-plan
 tags: [execution, remote-advisor, dialogue, skill]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 ---
 
 # 远程顾问模式改进执行计划

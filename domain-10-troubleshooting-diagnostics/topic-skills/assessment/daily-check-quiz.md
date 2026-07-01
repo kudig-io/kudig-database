@@ -141,7 +141,7 @@ E. API Server 未运行
 
 ### Day 6（周一）
 
-**题目**：你在控制平面节点执行 `openssl x509 -in /[[entities/kubernetes|kubernetes]]/pki/apiserver.crt -noout -dates` 发现证书已过期。接下来应该执行什么命令续期？
+**题目**：你在控制平面节点执行 `openssl x509 -in /[[entities/kubernetes.md|kubernetes]]/pki/apiserver.crt -noout -dates` 发现证书已过期。接下来应该执行什么命令续期？
 
 A. `kubeadm certs renew all`
 B. `kubeadm init --skip-certificates`

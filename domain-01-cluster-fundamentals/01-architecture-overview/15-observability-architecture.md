@@ -339,17 +339,16 @@ route:
   repeat_interval: 3h
   receiver: 'default-receiver'
   routes:
-  - match:
-      severity: critical
-    receiver: 'pagerduty'
+  - matchers:
+    - severity="critical"
+    receiver: pagerduty
     group_wait: 10s
-  - match:
-      severity: warning
-    receiver: 'slack-warning'
-  - match:
-      team: sre
-    receiver: 'sre-team'
-
+  - matchers:
+    - severity="warning"
+    receiver: slack-warning
+  - matchers:
+    - team="sre"
+    receiver: sre-team
 receivers:
 - name: 'default-receiver'
   email_configs:
@@ -358,7 +357,7 @@ receivers:
 
 - name: 'pagerduty'
   pagerduty_configs:
-  - service_key: '<pagerduty_service_key>'
+  - routing_key: '<pagerduty_service_key>'
     send_resolved: true
 
 - name: 'slack-warning'
@@ -1088,6 +1087,10 @@ graph TD
 ```
 
 #### 常见问题排查清单
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # observability-debug-checklist.sh
@@ -1200,7 +1203,7 @@ observability_maturity:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析
@@ -1221,4 +1224,4 @@ observability_maturity:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

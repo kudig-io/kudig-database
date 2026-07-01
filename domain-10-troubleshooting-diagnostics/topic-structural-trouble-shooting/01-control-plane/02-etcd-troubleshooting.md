@@ -589,6 +589,10 @@ etcd 对磁盘延迟极其敏感，因为它需要等待 Fsync 确认日志已�
 
 #### 3.1.1 解决步骤
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 场景 1：数据目录权限问题
 # 步骤 1：检查数据目录权限
@@ -650,6 +654,9 @@ systemctl restart etcd
 ### 3.2 etcd 集群无 Leader
 
 #### 3.2.1 解决步骤
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 步骤 1：检查所有成员状态
@@ -831,6 +838,10 @@ EOF
 
 #### 3.5.1 从快照恢复（推荐）
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 步骤 1：获取最新的 etcd 快照
 # 如果有定期备份
@@ -885,6 +896,9 @@ etcdctl member list
 
 #### 3.5.2 单节点强制恢复（最后手段）
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
 # ⚠️ 警告：此操作会丢失数据，仅在无其他选择时使用
 
@@ -896,7 +910,7 @@ mv /etc/kubernetes/manifests/*.yaml /tmp/manifests/
 cp -r /var/lib/etcd /var/lib/etcd.emergency.bak
 
 # 步骤 3：删除原数据目录
-rm -rf /var/lib/etcd
+rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
 
 # 步骤 4：使用 --force-new-cluster 参数创建新集群
 # 修改 etcd 启动参数，添加 --force-new-cluster
@@ -1021,6 +1035,10 @@ EOF
 
 #### 🔍 排查过程
 1. **现象确认**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
    ```bash
    kubectl apply -f deployment.yaml
    # Error from server: etcdserver: mvcc: database space exceeded
@@ -1086,7 +1104,7 @@ EOF
 
 3. **碎片整理回收空间**:
    ```bash
-   # ⚠️ Defrag 会短暂阻塞读写,生产环境需谨慎
+ 
    # 逐个节点执行,避免全部阻塞
    
    # 节点 1
@@ -1110,6 +1128,10 @@ EOF
    ```
 
 4. **清理过期 Event**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
    ```bash
    # Event 会自动过期,但可以主动清理旧的
    # 删除 1 小时前的 Event
@@ -1117,6 +1139,10 @@ EOF
    ```
 
 5. **5 分钟后恢复正常**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
    ```bash
    kubectl apply -f deployment.yaml
    # deployment.apps/myapp created  ✅ 恢复成功
@@ -1272,6 +1298,10 @@ EOF
 
 #### ⚡ 应急措施
 1. **立即隔离问题节点**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
    ```bash
    # 强制停止节点 2(少数派)
    ssh 10.0.2.1 "systemctl stop etcd"
@@ -1291,16 +1321,21 @@ EOF
    ```
 
 3. **修复网络后恢复节点**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
    ```bash
    # 删除节点 2 的数据目录(避免数据冲突)
-   ssh 10.0.2.1 "rm -rf /var/lib/etcd/*"
+   ssh 10.0.2.1 "rm -rf /var/lib/etcd/*"  # ⚠️ 删除系统/数据文件
    
    # 从节点 1 创建快照
    etcdctl --endpoints=https://10.0.1.1:2379 snapshot save /backup/snapshot-recovery.db
    
    # 在节点 2 恢复快照
    scp /backup/snapshot-recovery.db 10.0.2.1:/tmp/
-   ssh 10.0.2.1 "etcdctl snapshot restore /tmp/snapshot-recovery.db --data-dir=/var/lib/etcd"
+   ssh 10.0.2.1 "etcdctl snapshot restore /tmp/snapshot-recovery.db --data-dir=/var/lib/etcd"  # ⚠️ 覆盖 etcd 数据，集群状态回退
    
    # 启动节点 2
    ssh 10.0.2.1 "systemctl start etcd"
@@ -1365,14 +1400,16 @@ EOF
 - 16-troubleshooting-guide
 - [[hot|hot]]
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/10-control-plane-upgrade-troubleshooting|10-control-plane-upgrade-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting|01-apiserver-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting|03-scheduler-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting|04-controller-manager-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/10-control-plane-upgrade-troubleshooting.md|10-control-plane-upgrade-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md|01-apiserver-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md|04-controller-manager-troubleshooting]]
+
+```

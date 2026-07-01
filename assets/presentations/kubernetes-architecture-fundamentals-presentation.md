@@ -105,7 +105,7 @@ created: "2026-05-23"
 
 ### 什么是 Kubernetes？
 
-Kubernetes（简称 [[entities/kubernetes|k8s]]）是一个开源的容器编排平台，最初由 Google 设计并捐赠给 Cloud Native Computing Foundation（CNCF）。它的核心定位是**分布式系统的操作系统**（Cloud OS）——正如操作系统管理 CPU、内存、磁盘等硬件资源，Kubernetes 管理的是节点、网络、存储等分布式资源。
+Kubernetes（简称 [[entities/kubernetes.md|k8s]]）是一个开源的容器编排平台，最初由 Google 设计并捐赠给 Cloud Native Computing Foundation（CNCF）。它的核心定位是**分布式系统的操作系统**（Cloud OS）——正如操作系统管理 CPU、内存、磁盘等硬件资源，Kubernetes 管理的是节点、网络、存储等分布式资源。
 
 Google 每周运行超过 20 亿个容器，Kubernetes 的设计灵感来源于 Google 内部的 Borg 系统。Borg 系统的论文是理解 Kubernetes 设计哲学的重要参考文献。
 
@@ -450,6 +450,9 @@ kubectl get pods -n kube-system -o wide
 
 ### 演示 2：部署第一个应用并追踪生命周期
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 步骤 1: 创建 Deployment
 kubectl create deployment nginx-demo --image=nginx:1.25 --replicas=3
@@ -510,6 +513,9 @@ kubectl get events --field-selector reason=Created
 ```
 
 ### 演示 3：声明式 API 验证——自愈能力
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 步骤 1: 查看当前 Pod
@@ -634,6 +640,9 @@ kubectl -n kube-system exec -it etcd-master -- \
 
 ### 演示 6：资源隔离与配额
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建测试命名空间
 kubectl create namespace lab
@@ -728,9 +737,13 @@ kubectl describe resourcequota lab-quota -n lab
 
 **步骤**：
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. 清理环境
-kubectl delete deployment --all --force --grace-period=0 2>/dev/null
+kubectl delete deployment --all --force --grace-period=0 2>/dev/null  # ⚠️ 批量删除，波及面大
 
 # 2. 开启事件监控
 kubectl get events --sort-by=.lastTimestamp -w &
@@ -784,6 +797,11 @@ kubectl describe pod $POD_NAME | grep -A 20 Events
 **目标**：理解 ReplicaSet 控制器的 Watch-Diff-Reconcile 循环
 
 **步骤**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 1. 创建 Deployment
@@ -874,6 +892,7 @@ kubectl -n kube-system exec -it etcd-master -- \
 # 5. 验证备份
 kubectl -n kube-system exec -it etcd-master -- \
   etcdctl snapshot status /var/lib/etcd/lab-snapshot.db -w table
+
 ```
 
 ---
@@ -1039,3 +1058,5 @@ Kubernetes Architecture
 ---
 
 > **Kusheet Project** | 作者: Allen Galler (allengaller@gmail.com)
+
+```

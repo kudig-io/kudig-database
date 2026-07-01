@@ -225,6 +225,9 @@ K8s 知识图谱框架:
 
 #### Step 1: 集群基础 (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建命名空间
 kubectl create namespace production
@@ -284,6 +287,9 @@ kubectl apply -f app-deployment.yaml
 
 #### Step 2: 存储配置 (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建 StorageClass 和 PVC
 cat > storage.yaml << 'EOF'
@@ -316,6 +322,9 @@ kubectl apply -f storage.yaml
 ```
 
 #### Step 3: 网络暴露 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 Ingress + TLS
@@ -363,6 +372,10 @@ kubectl apply -f ingress.yaml
 ```
 
 #### Step 4: 监控告警 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 部署 Prometheus + Grafana（如果尚未部署）

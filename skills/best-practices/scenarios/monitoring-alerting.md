@@ -80,15 +80,15 @@ graph TD
 ## 相关文档
 
 - observability/README.md]]
-- [[domain-06-observability/README]]
-- [[domain-06-observability/README]]
+- [[domain-06-observability/README.md|README]]
+- [[domain-06-observability/README.md|README]]
 
 
 ---
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/monitoring-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/monitoring-fta.md|monitoring fta]]
 
 
 ---
@@ -107,7 +107,7 @@ graph TD
 
 ## Related
 
-- [[references/kudig-metadata-index|README]].md|README]]
+- [[entities/kudig-metadata-index.md|README]].md|README]]
 - prometheus.md|10-monitoring-metrics-prometheus]]
 - log.md|log]]
 - monitoring

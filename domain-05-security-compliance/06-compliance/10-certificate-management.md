@@ -327,6 +327,9 @@ echo "=========================================="
 
 ### kubeadm 证书更新
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # certificate-renew.sh
@@ -411,6 +414,10 @@ echo "=== 证书更新完成 ==="
 ## cert-manager 部署
 
 ### [[Helm|Helm]] 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash
@@ -1255,8 +1262,8 @@ spec:
 ## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Security Domain]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-7 安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Security Domain]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
 - Kubernetes 认证授权体系详解
 - 网络安全策略与零信任架构
 - 运行时安全防护与威胁检测
@@ -1274,9 +1281,11 @@ spec:
 - 11-secret-management-tools
 - 12-compliance-certification
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+
+```

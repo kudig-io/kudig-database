@@ -54,8 +54,6 @@ created: "2026-05-23"
 
 # K8s Security Incident Response 诊断与响应
 
-> ⚠️ **WARNING**: 本 [[SKILL|Skill]] 为 **L1-advisory** 模式。所有操作均为建议性质，必须由安全团队和人工审批后执行。Agent 不会自动执行任何可能影响证据或扩大影响的操作。
-
 [[Kubernetes|Kubernetes]] 安全事件可能涉及容器逃逸、权限提升、恶意镜像、未授权访问等。正确的响应流程对于控制影响范围、保留证据、满足合规要求至关重要。
 
 本 Skill 提供安全事件的识别、遏制、根除、恢复和总结的全流程指导。
@@ -230,7 +228,7 @@ created: "2026-05-23"
 
 - k8s-rbac-quota
 
-- [[skills/ts-control-plane]]
+- [[skills/ts-control-plane.md|ts control plane]]
 
 - k8s-ingress-gateway
 
@@ -325,4 +323,4 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/supply-chain-security|供应链安全]] — Kubernetes 镜像供应链安全与漏洞防护
+- [[concepts/supply-chain-security.md|供应链安全]] — Kubernetes 镜像供应链安全与漏洞防护

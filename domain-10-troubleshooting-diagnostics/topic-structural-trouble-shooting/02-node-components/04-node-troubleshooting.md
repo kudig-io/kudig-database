@@ -372,6 +372,10 @@ cat /var/lib/kubelet/config.yaml | grep -A20 eviction
 
 **解决步骤：**
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. SSH 到节点检查 kubelet 状态
 systemctl status kubelet
@@ -396,7 +400,7 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -enddate
 df -h
 # 清理空间
 crictl rmi --prune
-docker system prune -af  # 如果使用 Docker
+docker system prune -af  # 如果使用 Docker  # ⚠️ 强制清理，可能杀运行中容器
 journalctl --vacuum-size=500M
 
 # 4. 重启 kubelet
@@ -409,6 +413,10 @@ kubectl get node <node-name> -w
 #### 场景 2：网络不可达
 
 **解决步骤：**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 1. 检查节点网络
@@ -442,6 +450,11 @@ Conditions:
 ```
 
 **解决步骤：**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 检查内存使用
@@ -484,6 +497,9 @@ systemctl restart kubelet
 
 **解决步骤：**
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+
 ```bash
 # 1. 检查磁盘使用
 df -h
@@ -503,7 +519,7 @@ truncate -s 0 /var/log/containers/*.log
 # 清理未使用的镜像
 crictl rmi --prune
 # 或
-docker system prune -af
+docker system prune -af  # ⚠️ 强制清理，可能杀运行中容器
 
 # 清理已完成的容器
 crictl rm $(crictl ps -a -q --state exited)
@@ -562,6 +578,10 @@ Events:
 
 **解决步骤：**
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 查看节点污点
 kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
@@ -599,6 +619,10 @@ Events:
 ```
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 1. 查看 Pod 的 nodeSelector
@@ -653,6 +677,10 @@ kubectl get nodes -L topology.kubernetes.io/zone
 
 #### 场景 1：安全地维护节点
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 1. 标记节点不可调度
 kubectl cordon <node>
@@ -676,6 +704,10 @@ kubectl get pods -o wide | grep <node>
 
 #### 场景 2：处理节点问题
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 如果节点永久问题，删除节点
 kubectl delete node <node>
@@ -684,7 +716,7 @@ kubectl delete node <node>
 kubectl get pods -o wide
 
 # 3. 强制删除卡在问题节点的 Pod
-kubectl delete pod <pod-name> --force --grace-period=0
+kubectl delete pod <pod-name> --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 4. 如果节点恢复，重新加入集群
 kubeadm token create --print-join-command
@@ -801,6 +833,7 @@ echo -e "\n--- Evicted Pods ---"
 kubectl get pods --all-namespaces --field-selector=status.phase=Failed | grep Evicted | head -10
 
 echo -e "\n=== Check Complete ==="
+
 ```
 
 ---
@@ -821,6 +854,12 @@ echo -e "\n=== Check Complete ==="
 ## 附录
 
 ### 常用命令速查
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 节点状态
@@ -849,19 +888,21 @@ kubectl get pods --field-selector spec.nodeName=<node>
 ### 相关文档
 
 - [kubelet 故障排查](./01-kubelet-troubleshooting.md)
-- [Scheduler 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting|03-scheduler-troubleshooting]].md)
-- [资源配额故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/01-resources-quota-troubleshooting|01-resources-quota-troubleshooting]].md)
-- [Pod 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting|01-pod-troubleshooting]].md)
+- [Scheduler 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]].md)
+- [资源配额故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/01-resources-quota-troubleshooting.md|01-resources-quota-troubleshooting]].md)
+- [Pod 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting|02-kube-proxy-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting|03-container-runtime-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting|05-image-registry-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting|06-gpu-device-plugin-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting.md|02-kube-proxy-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting.md|05-image-registry-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.md|06-gpu-device-plugin-troubleshooting]]
+
+```

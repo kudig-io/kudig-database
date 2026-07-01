@@ -45,7 +45,7 @@ Service Internal Traffic Policy（Service 内部流量策略）用于控制集�
 
 - **kube-proxy 端点过滤**：kube-proxy 根据 Service 的 `spec.internalTrafficPolicy` 值，在维护本地路由规则时过滤 EndpointSlice。当策略为 `Local` 时，仅保留 `nodeName` 与当前节点匹配的端点。
 - **与 externalTrafficPolicy 的关系**：`internalTrafficPolicy` 和 `externalTrafficPolicy` 是相互独立的字段，可以分别设置。例如，将两者都设为 `Local`，可同时优化内部和外部流量的节点本地路由，并保留外部客户端的真实源 IP。
-- **与 [[Topology Aware Routing|Topology Aware Routing]] 的互斥**：同一 Service 上不能同时启用 `internalTrafficPolicy: Local` 和 Topology Aware Routing（`service.[[entities/kubernetes|[[Kubernetes|kubernetes]]]].io/topology-mode: Auto`），但可以在集群中为不同的 Service 分别使用这两种特性。
+- **与 [[domain-17-system-foundation/topic-dictionary/networking/topology-aware-routing.md|Topology Aware Routing]] 的互斥**：同一 Service 上不能同时启用 `internalTrafficPolicy: Local` 和 Topology Aware Routing（`service.[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]].io/topology-mode: Auto`），但可以在集群中为不同的 Service 分别使用这两种特性。
 
 ## 使用场景
 
@@ -160,6 +160,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Service 的流量策略
 kubectl get svc <name> -o jsonpath='{.spec.internalTrafficPolicy}'
@@ -184,3 +187,9 @@ kubectl exec <pod-on-same-node> -- curl -s http://<service>:<port>/healthz
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/services-networking/service-traffic-policy/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
+- [[domain-17-system-foundation/topic-dictionary/networking/akri.md|Akri 边缘设备发现]]
+- [[domain-17-system-foundation/topic-dictionary/networking/antrea.md|Antrea 网络方案]]

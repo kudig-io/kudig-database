@@ -100,7 +100,7 @@ created: "2026-05-23"
         └── 跨服务请求的完整调用链
 ```
 
-#<!-- chunk: Trace 核心概念 -->## Trace 核心概念
+## Trace 核心概念
 
 | 概念 | 说明 | 类比 |
 |:---|:---|:---|
@@ -133,7 +133,10 @@ OpenTelemetry (CNCF Graduated)
 
 <!-- chunk: 三、OpenTelemetry Collector 部署 -->## 三、OpenTelemetry Collector 部署
 
-#<!-- chunk: 3.1 [[Helm|Helm]] 安装 -->## 3.1 Helm 安装
+## 3.1 Helm 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
@@ -143,7 +146,7 @@ helm install otel-collector open-telemetry/opentelemetry-collector \
   --set mode=deployment
 ```
 
-#<!-- chunk: 3.2 生产级配置 -->## 3.2 生产级配置
+## 3.2 生产级配置
 
 ```yaml
 # values-otel-collector.yaml
@@ -232,7 +235,10 @@ config:
 
 <!-- chunk: 四、Jaeger 全链路追踪 -->## 四、Jaeger 全链路追踪
 
-#<!-- chunk: 4.1 部署 -->## 4.1 部署
+## 4.1 部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
@@ -245,7 +251,7 @@ helm install jaeger jaegertracing/jaeger \
   --set elasticsearch.replicas=1
 ```
 
-#<!-- chunk: 4.2 生产级配置 (使用外部存储) -->## 4.2 生产级配置 (使用外部存储)
+## 4.2 生产级配置 (使用外部存储)
 
 ```yaml
 # values-jaeger.yaml
@@ -287,7 +293,7 @@ query:
       - jaeger.example.com
 ```
 
-#<!-- chunk: 4.3 访问 Jaeger UI -->## 4.3 访问 Jaeger UI
+## 4.3 访问 Jaeger UI
 
 ```bash
 kubectl port-forward -n observability svc/jaeger-query 16686:16686
@@ -298,7 +304,10 @@ kubectl port-forward -n observability svc/jaeger-query 16686:16686
 
 <!-- chunk: 五、Grafana Tempo 轻量追踪 -->## 五、Grafana Tempo 轻量追踪
 
-#<!-- chunk: 5.1 部署 -->## 5.1 部署
+## 5.1 部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add grafana https://grafana.github.io/helm-charts
@@ -308,7 +317,7 @@ helm install tempo grafana/tempo \
   --set tempo.storage.trace.backend=local
 ```
 
-#<!-- chunk: 5.2 生产级配置 (对象存储) -->## 5.2 生产级配置 (对象存储)
+## 5.2 生产级配置 (对象存储)
 
 ```yaml
 # values-tempo.yaml
@@ -345,7 +354,7 @@ datasources:
     isDefault: false
 ```
 
-#<!-- chunk: 5.3 Tempo 优势 -->## 5.3 Tempo 优势
+## 5.3 Tempo 优势
 
 | 特性 | Jaeger | Tempo |
 |:---|:---|:---|
@@ -359,7 +368,7 @@ datasources:
 
 <!-- chunk: 六、应用自动埋点 -->## 六、应用自动埋点
 
-#<!-- chunk: 6.1 Java (OpenTelemetry Agent) -->## 6.1 Java (OpenTelemetry Agent)
+## 6.1 Java (OpenTelemetry Agent)
 
 ```dockerfile
 # Dockerfile
@@ -373,7 +382,7 @@ COPY target/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
 ```
 
-#<!-- chunk: 6.2 Node.js -->## 6.2 Node.js
+## 6.2 Node.js
 
 ```bash
 npm install @opentelemetry/auto-instrumentations-node
@@ -395,7 +404,7 @@ const sdk = new NodeSDK({
 sdk.start();
 ```
 
-#<!-- chunk: 6.3 Python -->## 6.3 Python
+## 6.3 Python
 
 ```bash
 pip install opentelemetry-distro opentelemetry-exporter-otlp
@@ -409,7 +418,7 @@ OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector.observability.svc.cluster.loca
 opentelemetry-instrument python app.py
 ```
 
-#<!-- chunk: 6.4 Go (手动埋点) -->## 6.4 Go (手动埋点)
+## 6.4 Go (手动埋点)
 
 ```go
 import (
@@ -439,7 +448,7 @@ func initTracer() (*trace.TracerProvider, error) {
 
 <!-- chunk: 七、追踪与日志关联 -->## 七、追踪与日志关联
 
-#<!-- chunk: 7.1 TraceID 注入日志 -->## 7.1 TraceID 注入日志
+## 7.1 TraceID 注入日志
 
 ```python
 # Python 示例
@@ -462,7 +471,7 @@ logger = logging.getLogger(__name__)
 logger.addFilter(TraceIdFilter())
 ```
 
-#<!-- chunk: 7.2 Loki 日志标签关联 -->## 7.2 Loki 日志标签关联
+## 7.2 Loki 日志标签关联
 
 ```yaml
 # Promtail 配置
@@ -480,7 +489,7 @@ scrape_configs:
 
 <!-- chunk: 八、采样策略与成本控制 -->## 八、采样策略与成本控制
 
-#<!-- chunk: 8.1 Head-based 采样 (Collector 端) -->## 8.1 Head-based 采样 (Collector 端)
+## 8.1 Head-based 采样 (Collector 端)
 
 ```yaml
 processors:
@@ -500,7 +509,7 @@ processors:
         latency: {threshold_ms: 1000}
 ```
 
-#<!-- chunk: 8.2 采样策略对比 -->## 8.2 采样策略对比
+## 8.2 采样策略对比
 
 | 策略 | 实现位置 | 优点 | 缺点 |
 |:---|:---|:---|:---|
@@ -508,7 +517,7 @@ processors:
 | Tail-based | Collector | 可基于错误/延迟采样 | 内存开销大 |
 | Adaptive | Collector | 动态调整采样率 | 配置复杂 |
 
-#<!-- chunk: 8.3 成本控制 -->## 8.3 成本控制
+## 8.3 成本控制
 
 ```
 追踪成本 ≈ 存储成本 + 网络成本 + 计算成本
@@ -536,7 +545,7 @@ processors:
 | **存储成本** | 高 | 低 | 中 |
 | **推荐场景** | 全功能追踪 | 成本敏感 / Grafana 生态 | 简单场景 / Spring |
 
-#<!-- chunk: 推荐架构 -->## 推荐架构
+## 推荐架构
 
 ```
 应用 (Auto-Instrumentation)
@@ -567,8 +576,8 @@ processors:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-20-enterprise-monitoring-alerting MOC
-- [[domain-06-observability/README|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-20 企业监控与告警 — 开源项目索引]]
+- [[domain-06-observability/README.md|Domain 06: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]]
 - Prometheus企业级监控系统深度实践
 - Grafana Enterprise Observability Platform 深度实践
 - OpenTelemetry分布式追踪与可观测性深度实践
@@ -586,8 +595,10 @@ processors:
 - 99-prometheus-enterprise-guide
 - 01-prometheus-enterprise-monitoring
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+```

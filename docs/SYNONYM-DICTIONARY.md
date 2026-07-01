@@ -48,11 +48,11 @@ tags:
 - dictionary
 - metadata
 relationships:
-- target: '[[docs/TAG-DICTIONARY|KUDIG 全局标签字典]]'
+- target: "[[docs/TAG-DICTIONARY.md|KUDIG 全局标签字典]]"
   type: related_to
-- target: '[[docs/FRONTMATTER-SPEC|KUDIG Frontmatter 规范]]'
+- target: "[[docs/FRONTMATTER-SPEC.md|KUDIG Frontmatter 规范]]"
   type: related_to
-- target: '[[docs/SCENARIO-TAXONOMY|KUDIG 场景分类体系]]'
+- target: "[[docs/SCENARIO-TAXONOMY.md|KUDIG 场景分类体系]]"
   type: related_to
 difficulty: intermediate
 reading_level: intermediate
@@ -218,7 +218,7 @@ aliases:
 
 ## Related
 
-- [[references/KUDIG Tag Dictionary|KUDIG Tag Dictionary]]
-- [[references/KUDIG Frontmatter Spec|KUDIG Frontmatter Spec]]
-- [[references/KUDIG Scenario Taxonomy|KUDIG Scenario Taxonomy]]
-- [[docs/TAG-DICTIONARY|KUDIG 全局标签字典]]
+- [[entities/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
+- [[entities/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
+- [[entities/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
+- [[docs/TAG-DICTIONARY.md|KUDIG 全局标签字典]]

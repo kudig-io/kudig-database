@@ -87,7 +87,7 @@ CIS (Center for Internet Security) 基准是Kubernetes安全配置的标准参�
 
 <!-- chunk: 🎯 CIS基准概述 -->## 🎯 CIS基准概述
 
-#<!-- chunk: 基准版本对应关系 -->## 基准版本对应关系
+## 基准版本对应关系
 
 | Kubernetes版本 | CIS基准版本 | 发布日期 |
 |---------------|------------|----------|
@@ -98,9 +98,9 @@ CIS (Center for Internet Security) 基准是Kubernetes安全配置的标准参�
 | v1.29         | CIS 1.29   | 2023-11  |
 | v1.30+        | CIS 1.30+  | 2024-02+ |
 
-#<!-- chunk: 控制平面检查项 (Master Node) -->## 控制平面检查项 (Master Node)
+## 控制平面检查项 (Master Node)
 
-##<!-- chunk: 1. Master节点安全配置 -->## 1. Master节点安全配置
+## 1. Master节点安全配置
 ```yaml
 # Master节点CIS检查配置
 apiVersion: batch/v1
@@ -146,7 +146,7 @@ spec:
       restartPolicy: Never
 ```
 
-##<!-- chunk: 2. 关键检查项示例 -->## 2. 关键检查项示例
+## 2. 关键检查项示例
 ```bash
 #!/bin/bash
 # Master节点CIS关键检查脚本
@@ -179,9 +179,9 @@ else
 fi
 ```
 
-#<!-- chunk: 工作节点检查项 (Worker Node) -->## 工作节点检查项 (Worker Node)
+## 工作节点检查项 (Worker Node)
 
-##<!-- chunk: 1. Worker节点安全配置 -->## 1. Worker节点安全配置
+## 1. Worker节点安全配置
 ```yaml
 # Worker节点CIS检查配置
 apiVersion: batch/v1
@@ -232,7 +232,7 @@ spec:
           path: "/var/lib/kubelet"
 ```
 
-##<!-- chunk: 2. 节点级检查项 -->## 2. 节点级检查项
+## 2. 节点级检查项
 ```bash
 #!/bin/bash
 # Worker节点CIS检查脚本
@@ -267,9 +267,9 @@ fi
 
 <!-- chunk: 🛠️ 自动化合规检查 -->## 🛠️ 自动化合规检查
 
-#<!-- chunk: 持续合规监控 -->## 持续合规监控
+## 持续合规监控
 
-##<!-- chunk: 1. 定期扫描配置 -->## 1. 定期扫描配置
+## 1. 定期扫描配置
 ```yaml
 # CIS基准定期扫描CronJob
 apiVersion: batch/v1
@@ -338,7 +338,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-##<!-- chunk: 2. 实时合规监控 -->## 2. 实时合规监控
+## 2. 实时合规监控
 ```yaml
 # 实时合规监控Operator
 apiVersion: apps/v1
@@ -399,9 +399,9 @@ data:
 
 <!-- chunk: 📊 合规报告生成 -->## 📊 合规报告生成
 
-#<!-- chunk: 详细报告模板 -->## 详细报告模板
+## 详细报告模板
 
-##<!-- chunk: 1. JSON格式报告 -->## 1. JSON格式报告
+## 1. JSON格式报告
 ```json
 {
   "scan_metadata": {
@@ -443,7 +443,7 @@ data:
 }
 ```
 
-##<!-- chunk: 2. HTML可视化报告 -->## 2. HTML可视化报告
+## 2. HTML可视化报告
 ```html
 <!DOCTYPE html>
 <html>
@@ -501,9 +501,13 @@ data:
 
 <!-- chunk: 🔧 不合规项修复 -->## 🔧 不合规项修复
 
-#<!-- chunk: 自动化修复脚本 -->## 自动化修复脚本
+## 自动化修复脚本
 
-##<!-- chunk: 1. Master节点修复 -->## 1. Master节点修复
+## 1. Master节点修复
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # Master节点CIS合规修复脚本
@@ -549,7 +553,11 @@ echo "Master node remediation completed. Restarting kubelet..."
 systemctl restart kubelet
 ```
 
-##<!-- chunk: 2. Worker节点修复 -->## 2. Worker节点修复
+## 2. Worker节点修复
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # Worker节点CIS合规修复脚本
@@ -601,9 +609,9 @@ systemctl restart kubelet
 
 <!-- chunk: 🚨 告警与通知 -->## 🚨 告警与通知
 
-#<!-- chunk: 合规状态监控 -->## 合规状态监控
+## 合规状态监控
 
-##<!-- chunk: 1. Prometheus告警规则 -->## 1. Prometheus告警规则
+## 1. Prometheus告警规则
 ```yaml
 # CIS合规告警规则
 apiVersion: monitoring.coreos.com/v1
@@ -643,7 +651,7 @@ spec:
         description: "Only {{ $value }}% of master nodes are compliant"
 ```
 
-##<!-- chunk: 2. Slack通知集成 -->## 2. Slack通知集成
+## 2. Slack通知集成
 ```yaml
 # Slack通知配置
 apiVersion: v1
@@ -701,7 +709,7 @@ spec:
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 基准检查准备 -->## 基准检查准备
+## 基准检查准备
 - [ ] 确认Kubernetes版本对应的CIS基准版本
 - [ ] 部署CIS检查工具(kube-bench等)
 - [ ] 配置检查范围和排除项
@@ -709,7 +717,7 @@ spec:
 - [ ] 设置定期扫描计划
 - [ ] 配置告警和通知机制
 
-#<!-- chunk: 合规修复实施 -->## 合规修复实施
+## 合规修复实施
 - [ ] 分析检查结果识别不合规项
 - [ ] 制定修复计划和优先级排序
 - [ ] 实施自动化修复脚本
@@ -717,7 +725,7 @@ spec:
 - [ ] 建立持续监控机制
 - [ ] 维护合规状态报告
 
-#<!-- chunk: 持续改进 -->## 持续改进
+## 持续改进
 - [ ] 定期更新CIS基准检查规则
 - [ ] 优化检查性能和准确性
 - [ ] 完善修复自动化流程
@@ -734,9 +742,9 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -748,9 +756,9 @@ spec:
 
 ## Related
 
-- [[domain-02-workloads-applications/03-jvm-gc-container-tuning|03-jvm-gc-container-tuning]]
+- [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
 
-- [[domain-05-security-compliance/README|返回目录]]- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-05-security-compliance/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 

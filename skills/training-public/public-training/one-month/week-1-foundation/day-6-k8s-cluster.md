@@ -169,6 +169,9 @@ maxSurge=1, maxUnavailable=0 意味着：先创建 1 个新 Pod，等新 Pod 就
 
 ### 任务 1: 部署第一个 Deployment (45min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建测试 namespace
 kubectl create namespace learn-k8s
@@ -255,6 +258,10 @@ kubectl describe deployment nginx-deployment -n learn-k8s
 
 ### 任务 2: 体验声明式管理 (45min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 修改副本数（命令式）
 kubectl scale deployment nginx-deployment --replicas=5 -n learn-k8s
@@ -316,6 +323,9 @@ kubectl get replicaset -n learn-k8s
 
 ### 任务 3: 创建 Service 暴露应用 (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建 Service
 cat > nginx-service.yaml << 'EOF'
@@ -360,6 +370,9 @@ kubectl run curl --image=curlimages/curl -it --rm --restart=Never -n learn-k8s -
 
 ### 任务 4: 查看集群事件 (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 查看 namespace 事件
 kubectl get events -n learn-k8s --sort-by='.lastTimestamp'
@@ -394,6 +407,9 @@ kubectl rollout undo deployment/nginx-deployment -n learn-k8s
 ```
 
 ### 任务 5: API 资源探索 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 查看所有 API 资源
@@ -476,6 +492,7 @@ spec:
             exec:
               command: ["/bin/sh", "-c", "sleep 5"]
       terminationGracePeriodSeconds: 30
+
 ```
 
 ---
@@ -530,4 +547,6 @@ Service 通过 Label Selector 匹配 Pod 的 labels。匹配到的 Pod IP 和端
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

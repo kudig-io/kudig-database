@@ -62,14 +62,14 @@ created: "2026-05-23"
 
 <!-- chunk: 演讲概述 -->## 演讲概述
 
-#<!-- chunk: 目标受众 -->## 目标受众
+## 目标受众
 
 - SRE 工程师：构建完整的可观测性体系
 - 全栈开发：理解应用的监控与日志最佳实践
 - 监控架构师：设计大规模集群的监控架构
 - 运维工程师：掌握 [[Prometheus|Prometheus]] 查询和告警配置
 
-#<!-- chunk: 预计时长 -->## 预计时长
+## 预计时长
 
 | 阶段 | 内容 | 时长 |
 |------|------|------|
@@ -82,7 +82,7 @@ created: "2026-05-23"
 | Q&A | 互动问答 | 15 分钟 |
 | **合计** | | **约 3.5 小时** |
 
-#<!-- chunk: 核心学习目标 -->## 核心学习目标
+## 核心学习目标
 
 完成本次培训后，学员能够：
 
@@ -93,7 +93,7 @@ created: "2026-05-23"
 5. 选择合适的日志采集方案并部署 Loki/ELK
 6. 设计高质量的告警规则，避免告警疲劳
 
-#<!-- chunk: 核心要点 -->## 核心要点
+## 核心要点
 
 1. 可观测性三大支柱：Metrics（指标）、Logging（日志）、Tracing（追踪）
 2. 黄金指标（Golden Signals）驱动监控体系设计
@@ -123,7 +123,7 @@ created: "2026-05-23"
 
 <!-- chunk: 核心概念讲解 -->## 核心概念讲解
 
-#<!-- chunk: 什么是可观测性？ -->## 什么是可观测性？
+## 什么是可观测性？
 
 可观测性（Observability）不同于监控（Monitoring）。监控告诉你"系统出了什么问题"，可观测性让你理解"为什么会出问题"。监控是可观测性的一个子集。
 
@@ -159,7 +159,7 @@ created: "2026-05-23"
 
 每一层都是上一层的根基——如果基础架构层出问题，应用层必然异常。设计监控时应该自底向上：先确保基础架构层有完整监控，再逐层向上建设。
 
-#<!-- chunk: 黄金指标 (Google's Four Golden Signals) -->## 黄金指标 (Google's Four Golden Signals)
+## 黄金指标 (Google's Four Golden Signals)
 
 Google SRE 手册定义了四个黄金指标，这是设计监控体系的起点：
 
@@ -190,7 +190,7 @@ histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket{status=~"
 | **Saturation（饱和度）** | 资源排队/溢出的程度 | 磁盘 I/O 等待队列 | `rate(node_disk_io_time_seconds_total[5m])` |
 | **Errors（错误）** | 错误事件计数 | 网络丢包率 | `rate(node_netstat_Tcp_RetransSegs[5m])` |
 
-#<!-- chunk: Prometheus 监控架构 -->## Prometheus 监控架构
+## Prometheus 监控架构
 
 Prometheus 是 Kubernetes 监控的事实标准，采用 **Pull 模式**主动拉取指标：
 
@@ -243,7 +243,7 @@ Prometheus 是 Kubernetes 监控的事实标准，采用 **Pull 模式**主动�
 | `predict_linear()` | 线性预测 | `predict_linear(node_filesystem_free_bytes[1h], 3600)` |
 | `absent()` | 检测指标是否缺失 | `absent(up{job="my-app"})` |
 
-#<!-- chunk: 日志采集方案 -->## 日志采集方案
+## 日志采集方案
 
 **DaemonSet 模式 vs Sidecar 模式：**
 
@@ -280,7 +280,7 @@ sum(count_over_time({app="my-app"} |= "error" [5m])) by (level)
 {app="my-app"} | logfmt | level="error" | status >= 500
 ```
 
-#<!-- chunk: 全链路追踪 (Tracing) -->## 全链路追踪 (Tracing)
+## 全链路追踪 (Tracing)
 
 在微服务架构中，一个用户请求可能经过多个服务。当出现延迟时，"谁慢了？"是最关键的问题——这正是链路追踪要解决的。
 
@@ -316,7 +316,7 @@ OpenTelemetry（OTel）是 CNCF 的可观测性统一标准，合并了 OpenTrac
 
 <!-- chunk: 架构图 -->## 架构图
 
-#<!-- chunk: Prometheus 监控架构 -->## Prometheus 监控架构
+## Prometheus 监控架构
 
 ```mermaid
 graph TB
@@ -357,7 +357,7 @@ graph TB
     style Infra fill:#e8f5e9,stroke:#2e7d32
 ```
 
-#<!-- chunk: 日志采集架构 (DaemonSet 模式) -->## 日志采集架构 (DaemonSet 模式)
+## 日志采集架构 (DaemonSet 模式)
 
 ```mermaid
 graph TB
@@ -391,7 +391,7 @@ graph TB
     style Storage fill:#fff3e0,stroke:#ef6c00
 ```
 
-#<!-- chunk: 全链路追踪架构 -->## 全链路追踪架构
+## 全链路追踪架构
 
 ```mermaid
 graph LR
@@ -414,7 +414,7 @@ graph LR
     style JAEGER fill:#e8f5e9,stroke:#2e7d32
 ```
 
-#<!-- chunk: Alertmanager 告警收敛架构 -->## Alertmanager 告警收敛架构
+## Alertmanager 告警收敛架构
 
 ```mermaid
 graph TB
@@ -438,7 +438,10 @@ graph TB
 
 <!-- chunk: 实战演示步骤 -->## 实战演示步骤
 
-#<!-- chunk: 演示 1：部署 Prometheus + Grafana 监控栈 -->## 演示 1：部署 Prometheus + Grafana 监控栈
+## 演示 1：部署 Prometheus + Grafana 监控栈
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 步骤 1: 添加 Helm 仓库
@@ -494,7 +497,7 @@ kubectl port-forward svc/monitoring-kube-prometheus-prometheus 9090:9090 -n moni
 # 浏览器访问 http://localhost:9090
 ```
 
-#<!-- chunk: 演示 2：黄金指标查询实战 -->## 演示 2：黄金指标查询实战
+## 演示 2：黄金指标查询实战
 
 ```bash
 # 在 Prometheus UI (http://localhost:9090) 中执行以下查询
@@ -542,7 +545,10 @@ predict_linear(node_filesystem_avail_bytes[1h], 4*3600)
 rate(kube_pod_container_status_restarts_total[15m]) > 0
 ```
 
-#<!-- chunk: 演示 3：ServiceMonitor 自动发现 -->## 演示 3：ServiceMonitor 自动发现
+## 演示 3：ServiceMonitor 自动发现
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 部署一个带 metrics 端点的应用
@@ -625,7 +631,10 @@ kubectl port-forward svc/monitoring-kube-prometheus-prometheus 9090:9090 -n moni
 # 预期输出: up{job="demo-app",instance="10.244.x.x:9100"} 1
 ```
 
-#<!-- chunk: 演示 4：告警规则配置 -->## 演示 4：告警规则配置
+## 演示 4：告警规则配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat <<EOF | kubectl apply -f -
@@ -720,7 +729,10 @@ kubectl get prometheusrule -n monitoring
 # 在 Prometheus UI → Alerts 页面查看所有告警规则
 ```
 
-#<!-- chunk: 演示 5：日志查询 (Loki) -->## 演示 5：日志查询 (Loki)
+## 演示 5：日志查询 (Loki)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 步骤 1: 部署 Loki + Promtail
@@ -765,9 +777,12 @@ sum(count_over_time({app=~".+"} |= "error" [5m])) by (app)
 
 <!-- chunk: 动手实验 -->## 动手实验
 
-#<!-- chunk: 实验 1：为应用添加自定义指标 -->## 实验 1：为应用添加自定义指标
+## 实验 1：为应用添加自定义指标
 
 **目标**：理解白盒监控的实现方式
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 部署一个暴露自定义指标的应用
@@ -833,7 +848,7 @@ EOF
 # probe_http_status_code
 ```
 
-#<!-- chunk: 实验 2：配置告警通知 -->## 实验 2：配置告警通知
+## 实验 2：配置告警通知
 
 **目标**：理解 Alertmanager 的告警路由和收敛
 
@@ -864,47 +879,47 @@ kubectl get secret -n monitoring \
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
 
-#<!-- chunk: Q1: Prometheus 的 Pull 模式有什么优势？ -->## Q1: Prometheus 的 Pull 模式有什么优势？
+## Q1: Prometheus 的 Pull 模式有什么优势？
 
 **回答**: Pull 模式的优势：(1) **服务发现**：Prometheus 知道所有监控目标，无需在应用侧配置推送地址；(2) **健康检查**：如果目标不可达，Prometheus 自动标记为 down，目标状态一目了然；(3) **去重**：多个 Prometheus 实例拉取同一目标不会导致指标重复；(4) **调试简单**：直接访问 `/metrics` 端点即可查看指标。劣势是不适合短生命周期任务（需用 Pushgateway），且 Prometheus 必须能网络到达所有目标。
 
-#<!-- chunk: Q2: 监控数据应该保留多久？ -->## Q2: 监控数据应该保留多久？
+## Q2: 监控数据应该保留多久？
 
 **回答**: 建议分级保留：原始数据保留 15-30 天（短期排查）；5 分钟聚合数据保留 3-6 个月（趋势分析）；1 小时聚合数据保留 1-2 年（容量规划）。可以使用 Thanos 或 Cortex 实现长期存储，将历史数据下沉到对象存储（S3/OSS）。Thanos 的 Compactor 组件自动执行降采样，将 5 分钟数据聚合为 1 小时数据。
 
-#<!-- chunk: Q3: DaemonSet 和 Sidecar 日志采集应该选哪个？ -->## Q3: DaemonSet 和 Sidecar 日志采集应该选哪个？
+## Q3: DaemonSet 和 Sidecar 日志采集应该选哪个？
 
 **回答**: 90% 的场景选 DaemonSet 模式。DaemonSet 每节点一个采集器，资源消耗低，运维简单。Sidecar 模式只在以下场景使用：(1) 日志不在 stdout/stderr（如写入特定文件）；(2) 需要每个 Pod 独立的日志处理管道；(3) 多租户环境需要严格隔离。Sidecar 会显著增加资源消耗和运维复杂度（每个 Pod 多一个容器）。
 
-#<!-- chunk: Q4: 如何设计高质量的告警？ -->## Q4: 如何设计高质量的告警？
+## Q4: 如何设计高质量的告警？
 
 **回答**: 高质量告警的三个原则：(1) **可操作性**：每个告警必须有明确的 SOP 处理流程，如果不需要人工介入就不要发告警；(2) **症状导向**：告警应该基于用户可感知的症状（如错误率升高），而非原因（如 CPU 高）——因为用户不关心 CPU 多高，只关心服务是否正常；(3) **分级管理**：P0（立即处理，电话通知）、P1（30 分钟内，即时通讯通知）、P2（工作时间处理，邮件通知）。避免"狼来了"效应——无意义告警会导致团队对告警麻木。
 
-#<!-- chunk: Q5: OpenTelemetry 和 Jaeger 的关系是什么？ -->## Q5: OpenTelemetry 和 Jaeger 的关系是什么？
+## Q5: OpenTelemetry 和 Jaeger 的关系是什么？
 
 **回答**: OpenTelemetry 是**数据采集标准**（API + SDK + Collector），Jaeger 是**追踪存储和可视化后端**。OpenTelemetry Collector 接收应用产生的 Trace 数据，然后导出到 Jaeger 进行存储和查询。两者是互补关系，不是替代关系。推荐架构：应用 → OTel SDK → OTel Collector → Jaeger。OTel Collector 作为中间层，可以同时导出到多个后端，避免应用与特定后端耦合。
 
-#<!-- chunk: Q6: 如何监控 Pod 的 OOM 事件？ -->## Q6: 如何监控 Pod 的 OOM 事件？
+## Q6: 如何监控 Pod 的 OOM 事件？
 
 **回答**: (1) kube-state-metrics 暴露 `kube_pod_container_status_terminated_reason{reason="OOMKilled"}` 指标；(2) 配置告警规则：`kube_pod_container_status_terminated_reason{reason="OOMKilled"} > 0`；(3) 查看 Kubernetes Events：`kubectl get events --field-selector reason=OOMKilling`；(4) 查看 Pod 上一次终止原因：`kubectl describe pod <name> | grep -A 5 "Last State"`；(5) 根本解决：调大 memory limit 或使用 pprof 排查内存泄漏。
 
-#<!-- chunk: Q7: 如何实现白盒监控？ -->## Q7: 如何实现白盒监控？
+## Q7: 如何实现白盒监控？
 
 **回答**: 白盒监控是指监控应用内部状态。实现方法：(1) 在应用中暴露 `/metrics` 端点，使用 Prometheus 客户端库（Go: `prometheus/client_golang`，Java: `micrometer`，Python: `prometheus_client`）；(2) 实现自定义业务指标（如订单数、缓存命中率、活跃连接数）；(3) 使用 Histogram 记录延迟分布（`histogram_quantile` 计算分位数）；(4) 使用 Counter 记录累计事件数（配合 `rate()` 使用）；(5) 使用 Gauge 记录当前状态值（如队列长度）。白盒监控的关键是在开发阶段就规划好需要暴露的指标。
 
-#<!-- chunk: Q8: Prometheus 的 cardinality 问题是什么？ -->## Q8: Prometheus 的 cardinality 问题是什么？
+## Q8: Prometheus 的 cardinality 问题是什么？
 
 **回答**: Cardinality（基数）是指时间序列的数量。如果某个 Label 有大量不同值（如 user_id、request_id、IP 地址），会导致时间序列爆炸，消耗大量内存和磁盘。排查方法：`topk(20, count by (__name__)({__name__=~".+"}))` 找出最多序列的指标。解决方案：(1) 移除高基数 Label；(2) 使用 Recording Rules 预聚合；(3) 在应用侧控制标签值范围；(4) 使用 `sample_limit` 限制最大序列数。经验法则：单个 Prometheus 实例管理的时间序列数不应超过 1000 万。
 
-#<!-- chunk: Q9: 如何监控 etcd 和控制平面？ -->## Q9: 如何监控 etcd 和控制平面？
+## Q9: 如何监控 etcd 和控制平面？
 
 **回答**: etcd 关键指标：`etcd_disk_wal_fsync_duration_seconds`（WAL 写入延迟，应 < 10ms）、`etcd_mvcc_db_total_size_in_bytes`（数据库大小）、`etcd_server_has_leader`（是否有 Leader）、`etcd_server_leader_changes_seen_total`（Leader 变更次数）。API Server 关键指标：`apiserver_request_duration_seconds`（请求延迟）、`apiserver_request_total{code=~"5.."}`（5xx 错误率）。kube-prometheus-stack 默认会采集这些指标，建议在 Grafana 中导入 etcd 监控面板（Dashboard ID: 3070）。
 
-#<!-- chunk: Q10: 如何构建告警收敛机制？ -->## Q10: 如何构建告警收敛机制？
+## Q10: 如何构建告警收敛机制？
 
 **回答**: (1) **分组（Grouping）**：将相关告警合并为一个通知（如同一节点上的所有 Pod 告警合并为一条通知）；(2) **抑制（Inhibition）**：高级别告警抑制低级别（如 Node Down 抑制该节点上的所有 Pod 告警）；(3) **静默（Silencing）**：计划维护期间静默相关告警；(4) **路由（Routing）**：不同告警发送到不同团队（如数据库告警发给 DBA 团队，网络告警发给网络团队）。Alertmanager 原生支持以上所有功能，配置通过 `alertmanager.yaml` 管理。
 
-#<!-- chunk: Q11: kube-state-metrics 和 node-exporter 的区别？ -->## Q11: kube-state-metrics 和 node-exporter 的区别？
+## Q11: kube-state-metrics 和 node-exporter 的区别？
 
 **回答**: **node-exporter** 采集 Node 级别的操作系统指标（CPU、内存、磁盘、网络），数据来源是 `/proc` 和 `/sys` 文件系统。**kube-state-metrics** 采集 Kubernetes 对象的状态指标（Pod 重启次数、Deployment 副本数、Node Condition），数据来源是 API Server 的 Watch 事件。两者互补：node-exporter 告诉你"节点资源使用多少"，kube-state-metrics 告诉你"Kubernetes 认为这个对象是什么状态"。
 
@@ -912,7 +927,7 @@ kubectl get secret -n monitoring \
 
 <!-- chunk: 要点总结 -->## 要点总结
 
-#<!-- chunk: 可观测性知识图谱 -->## 可观测性知识图谱
+## 可观测性知识图谱
 
 ```
 Observability
@@ -942,7 +957,7 @@ Observability
     └── 分级处理流程 (P0/P1/P2)
 ```
 
-#<!-- chunk: 关键 PromQL 速查表 -->## 关键 PromQL 速查表
+## 关键 PromQL 速查表
 
 | 场景 | PromQL |
 |------|--------|
@@ -955,7 +970,7 @@ Observability
 | 磁盘预测 | `predict_linear(node_filesystem_avail_bytes[1h], 4*3600)` |
 | OOM 检测 | `kube_pod_container_status_terminated_reason{reason="OOMKilled"} > 0` |
 
-#<!-- chunk: SRE 运维红线 -->## SRE 运维红线
+## SRE 运维红线
 
 | 红线 | 说明 | 违反后果 |
 |------|------|---------|
@@ -967,7 +982,7 @@ Observability
 | **红线 6** | Prometheus 数据保留期不少于 15 天 | 无法回溯分析历史问题 |
 | **红线 7** | etcd 和控制平面组件必须有独立监控面板 | 控制平面问题无法及时发现 |
 
-#<!-- chunk: 生产注意事项 -->## 生产注意事项
+## 生产注意事项
 
 1. **Prometheus 持久化**：配置 PVC 存储监控数据，避免 Pod 重启数据丢失
 2. **高可用**：部署 2 个 Prometheus 副本，使用 Thanos 实现全局查询视图
@@ -979,7 +994,7 @@ Observability
 
 <!-- chunk: 延伸阅读 -->## 延伸阅读
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 
 | 资源 | 链接 | 说明 |
 |------|------|------|
@@ -990,7 +1005,7 @@ Observability
 | Google SRE Book | https://sre.google/sre-book/monitoring-distributed-systems/ | 监控理论 |
 | Loki | https://grafana.com/docs/loki/latest/ | 日志系统 |
 
-#<!-- chunk: 关联培训专题 -->## 关联培训专题
+## 关联培训专题
 
 - `kubernetes-observability-presentation.md` — 本培训的可观测性深度扩展
 - `kubernetes-troubleshooting-methodology-presentation.md` — 利用可观测性数据进行排障
@@ -1028,4 +1043,4 @@ Observability
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

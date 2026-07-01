@@ -100,4 +100,4 @@ topic-best-practices 专题
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[secrets-management]] — Secrets Management
-- [[concepts/deployment-controller-architecture|Deployment 控制器架构]] — Cross-reference
+- [[concepts/deployment-controller-architecture.md|Deployment 控制器架构]] — Cross-reference

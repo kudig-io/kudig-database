@@ -45,7 +45,7 @@ title: Open Policy Agent (OPA)
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -57,16 +57,16 @@ title: Open Policy Agent (OPA)
 
 ## 参考链接
 
-- [[entities/crd-custom-resources|crd-custom-resources]]
-- [[concepts/storage-model|storage-model]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[concepts/storage-model.md|storage-model]]
 - [[pod-lifecycle]]
-- [[concepts/security-defense-depth|security-defense-depth]]
-- [[concepts/ci-cd-pipeline-patterns|ci-cd-pipeline-patterns]]
+- [[concepts/security-defense-depth.md|security-defense-depth]]
+- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
 
 ## Related
 
 - [[modelpack]] — ModelPack
-- [[oauth2-proxy]] — [[OAuth2 Proxy|OAuth2 Proxy]]
+- [[oauth2-proxy]] — OAuth2 Proxy
 - [[schemahero]] — SchemaHero
 - [[composefs]] — composefs
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
@@ -162,10 +162,10 @@ title: Open Policy Agent (OPA)
 - RELEASE-NOTES-0.54
 - RELEASE-NOTES-0.60
 - RELEASE-NOTES-0.31
-- [[references/release-notes-security|发布说明索引 — 安全]] — Cross-reference
-- [[synthesis/纵深防御 x 供应链安全|纵深防御 x 供应链安全]] — Cross-reference
-- [[synthesis/控制器模式 × Operator 模式|控制器模式 × Operator 模式]] — Cross-reference
-- [[concepts/multi-tenancy-isolation|Multi-Tenancy Isolation]] — Cross-reference
-- [[concepts/security-tool-evolution|安全工具演进]] — Cross-reference
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[entities/release-notes-security.md|发布说明索引 — 安全]] — Cross-reference
+- [[concepts/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — Cross-reference
+- [[concepts/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]] — Cross-reference
+- [[concepts/multi-tenancy-isolation.md|Multi-Tenancy Isolation]] — Cross-reference
+- [[concepts/security-tool-evolution.md|安全工具演进]] — Cross-reference
+- [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

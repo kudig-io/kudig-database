@@ -99,7 +99,7 @@ k8s_versions:
 
 <!-- chunk: 1. 有状态服务迁移策略 -->## 1. 有状态服务迁移策略
 
-#<!-- chunk: 1.1 策略选择 -->## 1.1 策略选择
+## 1.1 策略选择
 
 | 策略 | 说明 | 停机时间 | 复杂度 | 适用场景 |
 |------|------|---------|--------|---------|
@@ -107,7 +107,7 @@ k8s_versions:
 | **B: 保持 K8s StatefulSet** | 源集群 → ACK StatefulSet | 需停写同步 | 高 | 需 K8s 内运行 |
 | **C: 双写过渡** | 源集群 + ACK 同时写入 | 零停机 | 最高 | 金融级要求 |
 
-#<!-- chunk: 1.2 决策矩阵 -->## 1.2 决策矩阵
+## 1.2 决策矩阵
 
 ```
 自建集群中的数据库类型
@@ -133,7 +133,7 @@ k8s_versions:
 
 <!-- chunk: 2. MySQL 迁移 -->## 2. MySQL 迁移
 
-#<!-- chunk: 2.1 方案 A: 迁移到阿里云 RDS（推荐） -->## 2.1 方案 A: 迁移到阿里云 RDS（推荐）
+## 2.1 方案 A: 迁移到阿里云 RDS（推荐）
 
 ```bash
 # Step 1: 创建 RDS 实例
@@ -190,7 +190,7 @@ kubectl --context=ack-cluster create secret generic mysql-secret \
   --from-literal=database=production
 ```
 
-#<!-- chunk: 2.2 方案 B: 迁移到 ACK StatefulSet -->## 2.2 方案 B: 迁移到 ACK StatefulSet
+## 2.2 方案 B: 迁移到 ACK StatefulSet
 
 ```yaml
 # MySQL StatefulSet on ACK
@@ -281,7 +281,7 @@ kubectl --context=ack-cluster exec -n production mysql-0 -- \
 
 <!-- chunk: 3. Redis 迁移 -->## 3. Redis 迁移
 
-#<!-- chunk: 3.1 方案 A: 迁移到阿里云 Redis -->## 3.1 方案 A: 迁移到阿里云 Redis
+## 3.1 方案 A: 迁移到阿里云 Redis
 
 ```bash
 # 创建阿里云 Redis 实例
@@ -328,7 +328,7 @@ kubectl --context=source-cluster cp production/redis-0:/data/dump.rdb ./dump.rdb
 # 控制台: Redis → 备份与恢复 → 从 RDB 文件恢复
 ```
 
-#<!-- chunk: 3.2 纯缓存场景 -->## 3.2 纯缓存场景
+## 3.2 纯缓存场景
 
 ```bash
 # 如果 Redis 仅作为缓存，不需要数据迁移
@@ -348,7 +348,7 @@ redis-cli -h <ack-redis-host> -a "<password>" --pipe < warmup-commands.txt
 
 <!-- chunk: 4. Elasticsearch 迁移 -->## 4. Elasticsearch 迁移
 
-#<!-- chunk: 4.1 使用 Snapshot/Restore 迁移到阿里云 ES -->## 4.1 使用 Snapshot/Restore 迁移到阿里云 ES
+## 4.1 使用 Snapshot/Restore 迁移到阿里云 ES
 
 ```bash
 # Step 1: 在源 ES 注册 OSS Repository
@@ -393,7 +393,7 @@ curl -X POST "http://<aliyun-es>:9200/_snapshot/migration_repo/snapshot_1/_resto
 curl "http://<aliyun-es>:9200/_cat/indices?v&s=index"
 ```
 
-#<!-- chunk: 4.2 使用 Reindex 在线迁移 -->## 4.2 使用 Reindex 在线迁移
+## 4.2 使用 Reindex 在线迁移
 
 ```bash
 # 适合小数据量或需要在线迁移的场景
@@ -420,7 +420,7 @@ curl "http://<aliyun-es>:9200/_tasks?actions=*reindex&detailed"
 
 <!-- chunk: 5. Kafka/RocketMQ 迁移 -->## 5. Kafka/RocketMQ 迁移
 
-#<!-- chunk: 5.1 Kafka 迁移策略 -->## 5.1 Kafka 迁移策略
+## 5.1 Kafka 迁移策略
 
 ```
 方案 A: MirrorMaker 2 双向复制
@@ -443,7 +443,7 @@ curl "http://<aliyun-es>:9200/_tasks?actions=*reindex&detailed"
   缺点: 需要停机窗口
 ```
 
-#<!-- chunk: 5.2 MirrorMaker 2 配置 -->## 5.2 MirrorMaker 2 配置
+## 5.2 MirrorMaker 2 配置
 
 ```yaml
 # mm2.properties
@@ -470,6 +470,9 @@ sync.group.offsets.interval.seconds = 10
 <!-- chunk: 6. etcd 数据迁移 -->## 6. etcd 数据迁移
 
 > 注意: 此处指业务使用的 etcd（如 etcd 作为配置中心），非 K8s 控制面 etcd。
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
 ```bash
 # 导出 etcd 数据
@@ -557,7 +560,7 @@ kubectl --context=$ACK_CONTEXT rollout status sts/$STS_NAME -n $NS --timeout=600
 
 <!-- chunk: 8. 数据一致性校验 -->## 8. 数据一致性校验
 
-#<!-- chunk: 8.1 MySQL 校验 -->## 8.1 MySQL 校验
+## 8.1 MySQL 校验
 
 ```bash
 # 使用 pt-table-checksum 校验
@@ -590,7 +593,7 @@ mysql -h <ack-mysql> -u root -p"$ACK_PASSWORD" -e "
 diff /tmp/src_counts.txt /tmp/ack_counts.txt
 ```
 
-#<!-- chunk: 8.2 Redis 校验 -->## 8.2 Redis 校验
+## 8.2 Redis 校验
 
 ```bash
 # Key 数量对比
@@ -633,16 +636,16 @@ done
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-migration KUDIG Database — Global MOC
-- [[domain-08-release-change-management/topic-migration/README|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
-- [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning|01 - 迁移评估与规划]]
-- [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design|02 - ACK 目标集群设计与搭建]]
-- [[domain-08-release-change-management/topic-migration/03-application-workload-migration|03 - 应用工作负载迁移]]
-- [[domain-08-release-change-management/topic-migration/04-storage-data-migration|04 - 存储与数据迁移]]
-- [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover|05 - 网络迁移与流量切换]]
-- [[domain-08-release-change-management/topic-migration/07-observability-security-migration|07 - 可观测性与安全迁移]]
-- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission|08 - 验收、切换与旧集群退役]]
-- [[domain-08-release-change-management/topic-migration/09-migration-toolchain|09 - 迁移工具链参考]]
-- [[domain-08-release-change-management/topic-migration/10-real-world-case-study|10 - 生产迁移实战案例]]
+- [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
+- [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
+- [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
+- [[domain-08-release-change-management/topic-migration/03-application-workload-migration.md|03 - 应用工作负载迁移]]
+- [[domain-08-release-change-management/topic-migration/04-storage-data-migration.md|04 - 存储与数据迁移]]
+- [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换]]
+- [[domain-08-release-change-management/topic-migration/07-observability-security-migration.md|07 - 可观测性与安全迁移]]
+- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission.md|08 - 验收、切换与旧集群退役]]
+- [[domain-08-release-change-management/topic-migration/09-migration-toolchain.md|09 - 迁移工具链参考]]
+- [[domain-08-release-change-management/topic-migration/10-real-world-case-study.md|10 - 生产迁移实战案例]]
 
 ## See Also
 
@@ -653,5 +656,5 @@ done
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]

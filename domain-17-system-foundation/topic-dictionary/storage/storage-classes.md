@@ -152,6 +152,9 @@ volumeBindingMode: WaitForFirstConsumer
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 查看 StorageClass
 kubectl get sc
@@ -176,6 +179,8 @@ kubectl annotate sc gp3-encrypted storageclass.kubernetes.io/is-default-class=tr
 
 ## Related
 
-- index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume.md|Persistent Volume]]
+- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume-claim.md|Persistent Volume Claim]]
+- [[domain-17-system-foundation/topic-dictionary/storage/storage-class.md|Storage Class]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volume.md|Volume]]
+- [[domain-17-system-foundation/topic-dictionary/storage/emptydir.md|Emptydir]]

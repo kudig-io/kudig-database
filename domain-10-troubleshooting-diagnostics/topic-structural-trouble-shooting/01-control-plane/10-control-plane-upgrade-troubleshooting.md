@@ -106,6 +106,9 @@ k8s_versions:
 
 ### 升级前状态检查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # 升级前状态检查脚本
@@ -231,6 +234,9 @@ helm list --all-namespaces 2>/dev/null || echo "Helm 未安装或无法访问"
 ```
 
 #### 2. 数据迁移问题诊断
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -454,6 +460,9 @@ fi
 
 #### 方案一：etcd 数据清理和压缩
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # etcd 数据清理和压缩脚本
@@ -487,6 +496,12 @@ kubectl exec -n kube-system $ETCD_POD -- du -sh /var/lib/etcd/member/snap/db
 ```
 
 #### 方案二：完整的备份恢复流程
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -534,7 +549,7 @@ restore_from_backup() {
   systemctl stop etcd
   
   # 清理现有数据
-  rm -rf /var/lib/etcd/member
+  rm -rf /var/lib/etcd/member  # ⚠️ 删除系统/数据文件
   
   # 恢复数据
   ETCDCTL_API=3 etcdctl snapshot restore $backup_file \
@@ -570,6 +585,9 @@ echo "备份验证完成，可用于恢复操作"
 ### 证书问题解决
 
 #### 方案一：证书续期和轮换
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -667,6 +685,9 @@ fi
 
 #### 方案二：证书分发同步
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # 证书分发同步脚本
@@ -740,6 +761,11 @@ echo "证书同步完成！"
 ## 📊 升级验证与监控
 
 ### 升级后验证脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -962,14 +988,16 @@ echo "  4. 恢复工作节点到原版本"
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm|helm]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/08-control-plane-performance-troubleshooting|08-control-plane-performance-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/09-control-plane-ha-troubleshooting|09-control-plane-ha-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting|01-apiserver-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting|02-etcd-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/08-control-plane-performance-troubleshooting.md|08-control-plane-performance-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/09-control-plane-ha-troubleshooting.md|09-control-plane-ha-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md|01-apiserver-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
+
+```

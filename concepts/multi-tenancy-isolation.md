@@ -1,6 +1,6 @@
 ---
 title: Multi-Tenancy Isolation
-description: '- [[synthesis/服务网格 x 零信任安全|服务网格 x 零信任安全]] — synthesis'
+description: '- [[concepts/服务网格 x 零信任安全.md|服务网格 x 零信任安全]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -69,11 +69,11 @@ Multiple tenants share one cluster, isolated by:
 
 - [[opa]] — OPA (Open Policy Agent)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
-- [[concepts/security-defense-depth|security-defense-depth]] — Defense-in-Depth Security
-- [[skills/audit-rbac-configurations|audit-rbac-configurations]] — Audit RBAC Configurations
-- [[concepts/security-defense-depth|Defense-in-Depth Security]]
-- [[concepts/kubernetes-architecture-overview|Kubernetes Architecture Overview]]
-- [[skills/audit-rbac-configurations|Audit RBAC Configurations]]
-- [[synthesis/服务网格 x 零信任安全|服务网格 x 零信任安全]] — synthesis
-- [[synthesis/IaC x 多集群管理|IaC x 多集群管理]] — synthesis
+- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/security-defense-depth.md|security-defense-depth]] — Defense-in-Depth Security
+- [[skills/audit-rbac-configurations.md|audit-rbac-configurations]] — Audit RBAC Configurations
+- [[concepts/security-defense-depth.md|Defense-in-Depth Security]]
+- [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
+- [[skills/audit-rbac-configurations.md|Audit RBAC Configurations]]
+- [[concepts/服务网格 x 零信任安全.md|服务网格 x 零信任安全]] — synthesis
+- [[concepts/IaC x 多集群管理.md|IaC x 多集群管理]] — synthesis

@@ -31,7 +31,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-# [[Confidential Containers|Confidential Containers]] (CoCo)
+# Confidential Containers (CoCo)
 
 > **CNCF 状态**: Sandbox | **类别**: Security | **主要语言**: Rust, Go
 
@@ -45,7 +45,7 @@ Confidential Containers (CoCo) 是一个为 Kubernetes 提供机密计算能力�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -64,19 +64,19 @@ Confidential Containers (CoCo) 是一个为 Kubernetes 提供机密计算能力�
 
 - [[deployment]]
 - [[operator-pattern]]
-- [[concepts/controller-pattern|controller-pattern]]
-- [[concepts/secrets-management|secrets-management]]
+- [[concepts/controller-pattern.md|controller-pattern]]
+- [[concepts/secrets-management.md|secrets-management]]
 - [[pod-lifecycle]]
 
 ## Related
 
 - [[spire]] — SPIRE
 - [[akri]] — Akri
-- [[entities/cncf-edge-ai|cncf-edge-ai]] — CNCF 边缘计算与 AI/ML 项目全景
+- [[entities/cncf-edge-ai.md|cncf-edge-ai]] — CNCF 边缘计算与 AI/ML 项目全景
 - [[opa]] — OPA (Open Policy Agent)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - confidential-containers
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
-- [[entities/tetragon|Tetragon]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
+- [[entities/tetragon.md|Tetragon]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

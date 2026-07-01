@@ -110,7 +110,7 @@ k8s_versions:
 
 <!-- chunk: CASE-001: CPU MCE 导致 K8s Node 随机 NotReady -->## CASE-001: CPU MCE 导致 K8s Node 随机 NotReady
 
-#<!-- chunk: 问题概述 -->## 问题概述
+## 问题概述
 
 | 项目 | 内容 |
 |------|------|
@@ -119,7 +119,7 @@ k8s_versions:
 | 业务影响 | 该节点 Pod 被驱逐，服务短暂中断 |
 | 解决时长 | 4 小时 |
 
-#<!-- chunk: 问题现象 -->## 问题现象
+## 问题现象
 
 ```yaml
 初始告警:
@@ -134,7 +134,7 @@ k8s_versions:
   - 约 10-30 分钟会发生一次
 ```
 
-#<!-- chunk: 诊断过程 -->## 诊断过程
+## 诊断过程
 
 ```bash
 # Step 1: 检查节点状态
@@ -172,7 +172,7 @@ dmidecode -t processor
 # 确认 CPU 2 (物理插槽) 对应逻辑 CPU 12-23
 ```
 
-#<!-- chunk: MCE 错误解析 -->## MCE 错误解析
+## MCE 错误解析
 
 ```yaml
 MCE_Status_解析:
@@ -192,7 +192,7 @@ MCE_Status_解析:
   初步判断: CPU 内存控制器问题，可能是 CPU 或 DIMM 问题
 ```
 
-#<!-- chunk: 解决方案 -->## 解决方案
+## 解决方案
 
 ```yaml
 临时措施:
@@ -213,7 +213,7 @@ MCE_Status_解析:
   - kubectl uncordon node-worker-07
 ```
 
-#<!-- chunk: 复盘总结 -->## 复盘总结
+## 复盘总结
 
 ```yaml
 根本原因:
@@ -235,7 +235,7 @@ MCE_Status_解析:
 
 <!-- chunk: CASE-002: CPU 降频导致应用性能下降 50% -->## CASE-002: CPU 降频导致应用性能下降 50%
 
-#<!-- chunk: 问题概述 -->## 问题概述
+## 问题概述
 
 | 项目 | 内容 |
 |------|------|
@@ -244,7 +244,7 @@ MCE_Status_解析:
 | 业务影响 | API 响应时间从 50ms 增加到 200ms |
 | 解决时长 | 2 小时 |
 
-#<!-- chunk: 问题现象 -->## 问题现象
+## 问题现象
 
 ```yaml
 告警内容:
@@ -260,7 +260,7 @@ MCE_Status_解析:
   - 进程运行时间明显变长
 ```
 
-#<!-- chunk: 诊断过程 -->## 诊断过程
+## 诊断过程
 
 ```bash
 # Step 1: 检查 CPU 频率
@@ -290,7 +290,7 @@ cat /sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count
 # 原因: 数据中心最近调整了机柜布局，热通道封闭不当
 ```
 
-#<!-- chunk: 解决方案 -->## 解决方案
+## 解决方案
 
 ```yaml
 临时措施:
@@ -312,7 +312,7 @@ cat /sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count
 
 <!-- chunk: CASE-003: 内存 ECC 错误导致 Pod 随机 OOMKilled -->## CASE-003: 内存 ECC 错误导致 Pod 随机 OOMKilled
 
-#<!-- chunk: 问题概述 -->## 问题概述
+## 问题概述
 
 | 项目 | 内容 |
 |------|------|
@@ -321,7 +321,7 @@ cat /sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count
 | 业务影响 | 应用随机崩溃，重启后短时间内再次崩溃 |
 | 解决时长 | 3 天（定位困难） |
 
-#<!-- chunk: 问题现象 -->## 问题现象
+## 问题现象
 
 ```yaml
 表面现象:
@@ -335,7 +335,7 @@ cat /sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count
   - 内存 limit 设置足够大
 ```
 
-#<!-- chunk: 诊断过程 -->## 诊断过程
+## 诊断过程
 
 ```bash
 # Step 1: 常规 OOM 排查 (走了弯路)
@@ -380,7 +380,7 @@ dmidecode -t memory | grep -A 16 "CPU0_DIMM_A2"
 # Serial Number: 123ABC
 ```
 
-#<!-- chunk: 根因分析 -->## 根因分析
+## 根因分析
 
 ```yaml
 根本原因:
@@ -396,7 +396,10 @@ dmidecode -t memory | grep -A 16 "CPU0_DIMM_A2"
   - 需要检查 /proc/meminfo 才能发现
 ```
 
-#<!-- chunk: 解决方案 -->## 解决方案
+## 解决方案
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
 
 ```bash
 # 临时措施: 隔离节点
@@ -412,7 +415,7 @@ kubectl cordon node-worker-12
 kubectl uncordon node-worker-12
 ```
 
-#<!-- chunk: 监控改进 -->## 监控改进
+## 监控改进
 
 ```yaml
 新增监控规则:
@@ -431,7 +434,7 @@ kubectl uncordon node-worker-12
 
 <!-- chunk: CASE-005: NVMe SSD 静默问题导致 etcd 数据损坏 -->## CASE-005: NVMe SSD 静默问题导致 etcd 数据损坏
 
-#<!-- chunk: 问题概述 -->## 问题概述
+## 问题概述
 
 | 项目 | 内容 |
 |------|------|
@@ -440,7 +443,7 @@ kubectl uncordon node-worker-12
 | 业务影响 | 集群 API 不可用 2 小时 |
 | 解决时长 | 4 小时 |
 
-#<!-- chunk: 问题现象 -->## 问题现象
+## 问题现象
 
 ```yaml
 凌晨告警:
@@ -453,7 +456,7 @@ kubectl uncordon node-worker-12
   - 其他两个 etcd 成员正常
 ```
 
-#<!-- chunk: 诊断过程 -->## 诊断过程
+## 诊断过程
 
 ```bash
 # Step 1: 检查 etcd 状态
@@ -486,7 +489,7 @@ dmesg | grep nvme
 # 结论: NVMe SSD 发生静默问题，导致部分数据损坏
 ```
 
-#<!-- chunk: 解决方案 -->## 解决方案
+## 解决方案
 
 ```yaml
 紧急恢复:
@@ -512,7 +515,7 @@ dmesg | grep nvme
   - 重建 etcd 成员
 ```
 
-#<!-- chunk: 复盘总结 -->## 复盘总结
+## 复盘总结
 
 ```yaml
 根本原因:
@@ -535,7 +538,7 @@ dmesg | grep nvme
 
 <!-- chunk: CASE-006: RAID 卡电池问题导致写入性能骤降 -->## CASE-006: RAID 卡电池问题导致写入性能骤降
 
-#<!-- chunk: 问题概述 -->## 问题概述
+## 问题概述
 
 | 项目 | 内容 |
 |------|------|
@@ -544,7 +547,7 @@ dmesg | grep nvme
 | 业务影响 | 数据库写入延迟从 2ms 增加到 50ms |
 | 解决时长 | 1.5 小时 |
 
-#<!-- chunk: 问题现象 -->## 问题现象
+## 问题现象
 
 ```yaml
 监控告警:
@@ -556,7 +559,7 @@ dmesg | grep nvme
   - 批量导入任务超时
 ```
 
-#<!-- chunk: 诊断过程 -->## 诊断过程
+## 诊断过程
 
 ```bash
 # Step 1: 检查磁盘延迟
@@ -585,7 +588,7 @@ storcli64 /c0/bbu show all
 # 结论: BBU 问题导致写缓存被禁用
 ```
 
-#<!-- chunk: 解决方案 -->## 解决方案
+## 解决方案
 
 ```yaml
 临时措施:
@@ -606,7 +609,7 @@ storcli64 /c0/bbu show all
 
 <!-- chunk: CASE-008: 网卡固件 Bug 导致 K8s 网络间歇中断 -->## CASE-008: 网卡固件 Bug 导致 K8s 网络间歇中断
 
-#<!-- chunk: 问题概述 -->## 问题概述
+## 问题概述
 
 | 项目 | 内容 |
 |------|------|
@@ -615,7 +618,7 @@ storcli64 /c0/bbu show all
 | 业务影响 | Service 调用随机失败 |
 | 解决时长 | 5 天 |
 
-#<!-- chunk: 问题现象 -->## 问题现象
+## 问题现象
 
 ```yaml
 告警:
@@ -628,7 +631,7 @@ storcli64 /c0/bbu show all
   - 多个节点出现，但不同时
 ```
 
-#<!-- chunk: 诊断过程 -->## 诊断过程
+## 诊断过程
 
 ```bash
 # Step 1: 检查网卡状态
@@ -659,7 +662,7 @@ ethtool -i eth0
 # Bug: 高负载下可能触发 TX Hang
 ```
 
-#<!-- chunk: 解决方案 -->## 解决方案
+## 解决方案
 
 ```yaml
 解决方案:
@@ -683,7 +686,7 @@ ethtool -i eth0
 
 <!-- chunk: CASE-010: PSU 问题导致多节点突然宕机 -->## CASE-010: PSU 问题导致多节点突然宕机
 
-#<!-- chunk: 问题概述 -->## 问题概述
+## 问题概述
 
 | 项目 | 内容 |
 |------|------|
@@ -692,7 +695,7 @@ ethtool -i eth0
 | 业务影响 | 多个服务不可用 |
 | 解决时长 | 30 分钟 |
 
-#<!-- chunk: 问题现象 -->## 问题现象
+## 问题现象
 
 ```yaml
 告警:
@@ -705,7 +708,7 @@ ethtool -i eth0
   - 突然断电，无预警日志
 ```
 
-#<!-- chunk: 诊断过程 -->## 诊断过程
+## 诊断过程
 
 ```yaml
 物理检查:
@@ -722,7 +725,7 @@ ethtool -i eth0
   - 更换电源线后服务器正常启动
 ```
 
-#<!-- chunk: 复盘总结 -->## 复盘总结
+## 复盘总结
 
 ```yaml
 根本原因:
@@ -743,7 +746,7 @@ ethtool -i eth0
 
 <!-- chunk: 故障排查检查清单 -->## 故障排查检查清单
 
-#<!-- chunk: 通用检查流程 -->## 通用检查流程
+## 通用检查流程
 
 ```yaml
 硬件故障排查通用流程:
@@ -778,7 +781,7 @@ ethtool -i eth0
     - 线缆连接
 ```
 
-#<!-- chunk: K8s 环境专项检查 -->## K8s 环境专项检查
+## K8s 环境专项检查
 
 ```yaml
 K8s_硬件问题检查:
@@ -815,7 +818,7 @@ K8s_硬件问题检查:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-31-hardware MOC
-- [[domain-17-system-foundation/README|Domain 31 - 硬件基础设施]]
+- [[domain-17-system-foundation/README.md|Domain 31 - 硬件基础设施]]
 - Domain-31 硬件 — 开源项目索引
 - 云平台硬件基础架构
 - 服务器架构原理

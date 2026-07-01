@@ -232,6 +232,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Pod 列表及状态
 kubectl get pods -n <namespace> -o wide
@@ -273,4 +276,4 @@ kubectl get pod <pod-name> -n <namespace> -o yaml
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]

@@ -36,7 +36,7 @@ created: "2026-05-23"
 # Autoscaling Workloads
 
 ## 概述
-自动扩缩容（Autoscaling）允许工作负载根据资源需求自动调整规模，使集群能够更弹性和高效地响应变化。[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 支持水平扩缩容（增加/减少副本数）和垂直扩缩容（调整单个 Pod 的资源）。
+自动扩缩容（Autoscaling）允许工作负载根据资源需求自动调整规模，使集群能够更弹性和高效地响应变化。[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 支持水平扩缩容（增加/减少副本数）和垂直扩缩容（调整单个 Pod 的资源）。
 
 ## 核心概念/原理
 - **水平扩缩容（Horizontal Scaling）**：通过增加或减少 Pod 副本数来应对负载变化。
@@ -248,3 +248,9 @@ kubectl get apiservice v1beta1.metrics.k8s.io -o yaml
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/autoscaling/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/container-environment.md|容器环境（Container Environment）]]

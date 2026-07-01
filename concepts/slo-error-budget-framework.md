@@ -10,13 +10,14 @@ tags:
   - k8s
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # SLO/Error Budget 框架
 
 > 可靠性不是越高越好——它是**刚好够用**的工程权衡。Error Budget 是连接可靠性目标与产品迭代速度的桥梁。
 
-相关索引：[[domain-09-reliability-engineering/index]] · [[concepts/incident-management-patterns]]
+相关索引：[[domain-19-landscape-references/98-merged-indexes/index.md|index]] · [[concepts/incident-management-patterns.md|incident management patterns]]
 
 ---
 
@@ -365,6 +366,9 @@ sloth/prometheus/v1:
 
 **使用方式：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # CLI 生成 Prometheus 规则
 sloth generate -i slo.yaml -o prometheus-rules.yaml
@@ -649,6 +653,6 @@ Level 5：组织级治理
 
 ## Related
 
-- [[concepts/incident-management-patterns]] — 事件管理与响应模式
-- [[concepts/chaos-engineering-platforms]] — 混沌工程平台
-- [[concepts/k8s-observability-stack]] — K8S 可观测性技术栈
+- [[concepts/incident-management-patterns.md|incident management patterns]] — 事件管理与响应模式
+- [[concepts/chaos-engineering-platforms.md|chaos engineering platforms]] — 混沌工程平台
+- [[concepts/k8s-observability-stack.md|k8s observability stack]] — K8S 可观测性技术栈

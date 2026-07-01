@@ -67,7 +67,7 @@ This document provides comprehensive exploration of New Relic enterprise APM pla
 
 <!-- chunk: 1. New Relic Enterprise Architecture -->## 1. New Relic Enterprise Architecture
 
-#<!-- chunk: 1.1 Core Platform Components -->## 1.1 Core Platform Components
+## 1.1 Core Platform Components
 
 ```mermaid
 graph TB
@@ -158,7 +158,7 @@ graph TB
     Z --> AD
 ```
 
-#<!-- chunk: 1.2 Enterprise Deployment Architecture -->## 1.2 Enterprise Deployment Architecture
+## 1.2 Enterprise Deployment Architecture
 
 ```yaml
 new_relic_enterprise_deployment:
@@ -197,7 +197,7 @@ new_relic_enterprise_deployment:
 
 <!-- chunk: 2. Advanced APM Implementation -->## 2. Advanced APM Implementation
 
-#<!-- chunk: 2.1 Custom Instrumentation Strategies -->## 2.1 Custom Instrumentation Strategies
+## 2.1 Custom Instrumentation Strategies
 
 ```java
 // Java应用自定义instrumentation示例
@@ -260,7 +260,7 @@ public class OrderController {
 }
 ```
 
-#<!-- chunk: 2.2 Infrastructure Monitoring Configuration -->## 2.2 Infrastructure Monitoring Configuration
+## 2.2 Infrastructure Monitoring Configuration
 
 ```yaml
 # newrelic-infra.yml - 基础设施监控配置
@@ -308,7 +308,7 @@ instances:
       namespace: monitoring
 ```
 
-#<!-- chunk: 2.3 Synthetic Monitoring Setup -->## 2.3 Synthetic Monitoring Setup
+## 2.3 Synthetic Monitoring Setup
 
 ```javascript
 // New Relic Synthetics 脚本示例
@@ -385,7 +385,7 @@ exports.handler = async () => {
 
 <!-- chunk: 3. Alerting and Intelligent Notifications -->## 3. Alerting and Intelligent Notifications
 
-#<!-- chunk: 3.1 NRQL-Based Alerting Rules -->## 3.1 NRQL-Based Alerting Rules
+## 3.1 NRQL-Based Alerting Rules
 
 ```sql
 -- 新智能告警规则示例
@@ -433,7 +433,7 @@ FACET parent.serviceName
 SINCE 1 hour ago
 ```
 
-#<!-- chunk: 3.2 Advanced Alert Configuration -->## 3.2 Advanced Alert Configuration
+## 3.2 Advanced Alert Configuration
 
 ```yaml
 # newrelic-alerts.yaml
@@ -511,7 +511,7 @@ alert_policies:
 
 <!-- chunk: 4. AIOps and Anomaly Detection -->## 4. AIOps and Anomaly Detection
 
-#<!-- chunk: 4.1 Machine Learning Configuration -->## 4.1 Machine Learning Configuration
+## 4.1 Machine Learning Configuration
 
 ```python
 # newrelic-ml-anomaly-detection.py
@@ -615,7 +615,7 @@ anomalies = detector.detect_anomalies(data['data']['actor']['account']['nrql']['
 detector.create_anomaly_alert(anomalies, "ECommerce-API Response Time")
 ```
 
-#<!-- chunk: 4.2 Predictive Analytics Implementation -->## 4.2 Predictive Analytics Implementation
+## 4.2 Predictive Analytics Implementation
 
 ```sql
 -- 预测性分析NRQL查询
@@ -655,7 +655,7 @@ TIMESERIES 1 day
 
 <!-- chunk: 5. Integration and Automation -->## 5. Integration and Automation
 
-#<!-- chunk: 5.1 CI/CD Pipeline Integration -->## 5.1 CI/CD Pipeline Integration
+## 5.1 CI/CD Pipeline Integration
 
 ```yaml
 # .github/workflows/newrelic-deployment-tracking.yml
@@ -717,7 +717,7 @@ jobs:
         echo "Deployment successful - Apdex score: $APDEX_SCORE"
 ```
 
-#<!-- chunk: 5.2 Terraform Integration for Infrastructure -->## 5.2 Terraform Integration for Infrastructure
+## 5.2 Terraform Integration for Infrastructure
 
 ```hcl
 # terraform-newrelic-integration.tf
@@ -805,7 +805,7 @@ resource "newrelic_alert_policy_channel" "policy_channel_assoc" {
 
 <!-- chunk: 6. Security and Compliance -->## 6. Security and Compliance
 
-#<!-- chunk: 6.1 Data Security Configuration -->## 6.1 Data Security Configuration
+## 6.1 Data Security Configuration
 
 ```yaml
 # newrelic-security-config.yaml
@@ -852,7 +852,7 @@ security_settings:
       - data_export
 ```
 
-#<!-- chunk: 6.2 Compliance Reporting -->## 6.2 Compliance Reporting
+## 6.2 Compliance Reporting
 
 ```sql
 -- 合规性报告NRQL查询
@@ -892,7 +892,7 @@ TIMESERIES 1 week
 
 <!-- chunk: 7. Performance Optimization -->## 7. Performance Optimization
 
-#<!-- chunk: 7.1 Agent Configuration Optimization -->## 7.1 Agent Configuration Optimization
+## 7.1 Agent Configuration Optimization
 
 ```yaml
 # newrelic-java-agent-config.yml
@@ -946,7 +946,7 @@ development:
     enabled: true
 ```
 
-#<!-- chunk: 7.2 Dashboard Performance Optimization -->## 7.2 Dashboard Performance Optimization
+## 7.2 Dashboard Performance Optimization
 
 ```javascript
 // 高性能仪表板配置示例
@@ -1002,8 +1002,8 @@ const optimizedDashboard = {
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - observability/MOC.md|domain-20-enterprise-monitoring-alerting MOC]]
-- [[domain-06-observability/README|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-20 企业监控与告警 — 开源项目索引]]
+- [[domain-06-observability/README.md|Domain 06: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]]
 - Prometheus企业级监控系统深度实践
 - Grafana Enterprise Observability Platform 深度实践
 - OpenTelemetry分布式追踪与可观测性深度实践
@@ -1021,8 +1021,8 @@ const optimizedDashboard = {
 - 99-distributed-tracing-guide
 - 99-prometheus-enterprise-guide
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

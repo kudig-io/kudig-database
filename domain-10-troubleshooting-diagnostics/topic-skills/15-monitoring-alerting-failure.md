@@ -92,8 +92,6 @@ created: "2026-05-23"
 - **工具要求**: kubectl (v1.28+), curl, jq（可选但推荐）, promtool, amtool
 - **监控栈部署**: 本 Skill 假设使用 kube-prometheus-stack（Prometheus Operator）部署模式
 
-> ⚠️ **重要**: 监控系统问题属于**元问题**——当监控本身不可用时，其他问题可能无法被发现。P0 级监控问题应优先于其他 P1/P2 故障处理。
-
 ---
 
 ## 2. 症状识别
@@ -314,6 +312,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
 
 **Step D1.6**: 检查 Prometheus TSDB 存储状态
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查 TSDB 状态
   curl -s http://localhost:9090/api/v1/status/tsdb | jq '.data'
@@ -475,6 +477,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
 
 **Step D3.1**: 检查 AlertManager 路由配置
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 获取 AlertManager 配置
   kubectl get secret -n monitoring alertmanager-prometheus-kube-prometheus-alertmanager -o jsonpath='{.data.alertmanager\.yaml}' | base64 -d
@@ -506,6 +512,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
 
 **Step D3.3**: 测试通知渠道连通性
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 从 AlertManager Pod 测试 Webhook 可达性（示例）
   kubectl exec -n monitoring alertmanager-prometheus-kube-prometheus-alertmanager-0 -- wget -q --spider --timeout=5 <webhook-url> && echo "Webhook reachable" || echo "Webhook unreachable"
@@ -522,6 +532,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
 
 **Step D3.4**: 检查 AlertManager 集群状态
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查集群成员
   kubectl exec -n monitoring alertmanager-prometheus-kube-prometheus-alertmanager-0 -- amtool cluster show
@@ -607,6 +621,11 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
   kubectl get servicemonitor <name> -n <namespace> -o jsonpath='{.metadata.labels}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   # 方案 A: 为 ServiceMonitor 添加缺失的 label
   kubectl label servicemonitor <name> -n <namespace> release=prometheus
@@ -624,6 +643,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
   curl -s http://localhost:9090/api/v1/targets | jq '.data.activeTargets[] | select(.labels.job == "<expected-job>")'
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   kubectl label servicemonitor <name> -n <namespace> release-
   ```
@@ -631,6 +654,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
 #### REM-002: 修正 AlertManager 路由配置
 - **适用根因**: RC-003
 - **前置检查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 获取当前配置
   kubectl get secret -n monitoring alertmanager-prometheus-kube-prometheus-alertmanager -o jsonpath='{.data.alertmanager\.yaml}' | base64 -d
@@ -638,6 +665,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
   kubectl exec -n monitoring alertmanager-prometheus-kube-prometheus-alertmanager-0 -- amtool check-config /etc/alertmanager/config/alertmanager.yaml
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 创建修正后的配置文件
   cat <<EOF > /tmp/alertmanager-fixed.yaml
@@ -669,6 +700,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
     --dry-run=client -o yaml | kubectl apply -f -
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 等待 AlertManager 重载配置
   sleep 30
@@ -678,6 +713,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
   kubectl exec -n monitoring alertmanager-prometheus-kube-prometheus-alertmanager-0 -- amtool config routes show
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 恢复原配置（假设已备份）
   kubectl create secret generic alertmanager-prometheus-kube-prometheus-alertmanager \
@@ -696,6 +735,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
   kubectl get prometheusrule -A
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 编辑有问题的 PrometheusRule
   kubectl edit prometheusrule <name> -n <namespace>
@@ -711,6 +754,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
   curl -s http://localhost:9090/api/v1/rules | jq '.data.groups[] | .rules[] | select(.name == "<rule-name>") | {name: .name, health: .health}'
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 恢复原 PrometheusRule
   kubectl apply -f /tmp/prometheusrule-backup.yaml
@@ -761,6 +808,11 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
   kubectl get pvc -n monitoring -l app.kubernetes.io/name=prometheus
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 通过 Helm upgrade 增加资源（推荐）
   helm upgrade prometheus-stack prometheus-community/kube-prometheus-stack \
@@ -808,6 +860,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
   kubectl get secret -n monitoring alertmanager-prometheus-kube-prometheus-alertmanager -o jsonpath='{.data.alertmanager\.yaml}' | base64 -d > /tmp/alertmanager-backup.yaml
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 更新 Webhook URL 或认证信息
   # 使用 alertmanager.yaml 模板创建新配置
@@ -836,6 +892,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
     --dry-run=client -o yaml | kubectl apply -f -
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 等待配置重载
   sleep 30
@@ -846,6 +906,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
     amtool alert add test-alert severity=info
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl create secret generic alertmanager-prometheus-kube-prometheus-alertmanager \
     --from-file=alertmanager.yaml=/tmp/alertmanager-backup.yaml \
@@ -865,6 +929,11 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
   curl -s "http://localhost:9090/api/v1/query?query=count({__name__='<high_cardinality_metric>'}) by (label_name)" | jq '.data.result'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 在应用侧修复（推荐，需要应用团队配合）
   # 减少高基数 label 的使用
@@ -901,6 +970,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
   curl -s "http://localhost:9090/api/v1/query?query=count({__name__='<dropped_metric>'})" | jq '.data.result'
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 移除 metricRelabelings 配置
   kubectl edit servicemonitor <name> -n <namespace>
@@ -922,6 +995,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
   curl -s http://localhost:10902/api/v1/stores | jq '.data'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 方案 A: 重启 Thanos Sidecar
   kubectl rollout restart statefulset/prometheus-prometheus-kube-prometheus-prometheus -n monitoring
@@ -961,6 +1038,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
 - **影响说明**: TSDB 修复或重建可能导致数据丢失。在重建过程中，Prometheus 将无法采集新数据。这是**数据破坏性操作**，需要充分评估影响。
 - **操作步骤**:
   1. **评估数据损坏程度**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
      ```bash
      # 检查 TSDB 块状态
      kubectl exec -n monitoring prometheus-prometheus-kube-prometheus-prometheus-0 -- ls -la /prometheus/
@@ -974,6 +1055,11 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
      # 快照将保存在 /prometheus/snapshots/
      ```
   3. **尝试 TSDB 修复**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+
      ```bash
      # 停止 Prometheus（需要修改副本数为 0 或删除 Pod）
      kubectl scale statefulset/prometheus-prometheus-kube-prometheus-prometheus --replicas=0 -n monitoring
@@ -983,12 +1069,16 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
      # promtool tsdb list /prometheus
      
      # 如果 WAL 损坏，可以删除 WAL 目录（会丢失最近 2 小时数据）
-     # rm -rf /prometheus/wal/*
+     # rm -rf /prometheus/wal/*  # ⚠️ 删除系统/数据文件
      ```
   4. **重建 TSDB（最后手段）**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
      ```bash
      # 删除所有数据，从零开始
-     # kubectl exec -n monitoring prometheus-prometheus-kube-prometheus-prometheus-0 -- rm -rf /prometheus/*
+     # kubectl exec -n monitoring prometheus-prometheus-kube-prometheus-prometheus-0 -- rm -rf /prometheus/*  # ⚠️ 删除系统/数据文件
      # 注意：这将丢失所有历史数据
      ```
   5. **恢复 Prometheus**:
@@ -1011,6 +1101,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
 - **影响说明**: AlertManager 集群修复可能涉及 Pod 重建、数据同步。在修复期间，告警去重和静默功能可能不稳定。
 - **操作步骤**:
   1. **诊断集群状态**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
      ```bash
      # 检查各成员状态
      for i in 0 1 2; do
@@ -1019,12 +1113,20 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
      done
      ```
   2. **检查网络连通性**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
      ```bash
      # 确保成员之间可以通信
      kubectl exec -n monitoring alertmanager-prometheus-kube-prometheus-alertmanager-0 -- \
        nc -zv alertmanager-prometheus-kube-prometheus-alertmanager-1.alertmanager-operated 9094
      ```
   3. **尝试重建问题成员**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      # 删除状态异常的 Pod，让 StatefulSet 重建
      kubectl delete pod alertmanager-prometheus-kube-prometheus-alertmanager-<N> -n monitoring
@@ -1032,6 +1134,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
      kubectl wait --for=condition=ready pod/alertmanager-prometheus-kube-prometheus-alertmanager-<N> -n monitoring --timeout=300s
      ```
   4. **如果集群仍不健康，考虑完全重建**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      # 删除所有 AlertManager Pod
      kubectl delete pod -l app.kubernetes.io/name=alertmanager -n monitoring
@@ -1063,6 +1169,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
   - 导出 Prometheus TSDB 快照（如可能）
 - **操作步骤**:
   1. **完整备份**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
      ```bash
      # 备份所有 CRD 资源
      kubectl get prometheusrule -A -o yaml > prometheusrules-backup.yaml
@@ -1077,13 +1187,22 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
      kubectl exec -n monitoring deploy/grafana -- grafana-cli admin data-migration export > grafana-backup.json
      ```
   2. **卸载现有监控栈**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
-     helm uninstall prometheus-stack -n monitoring
+     helm uninstall prometheus-stack -n monitoring  # ⚠️ 删除 release 及关联资源
      # 等待资源清理
      kubectl delete pvc -l app.kubernetes.io/name=prometheus -n monitoring
      kubectl delete pvc -l app.kubernetes.io/name=alertmanager -n monitoring
      ```
   3. **重新安装监控栈**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
      ```bash
      helm repo update
      helm install prometheus-stack prometheus-community/kube-prometheus-stack \
@@ -1092,6 +1211,10 @@ curl -s http://localhost:9093/api/v2/status | jq '.cluster'
        --values /path/to/custom-values.yaml
      ```
   4. **恢复配置**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
      ```bash
      kubectl apply -f prometheusrules-backup.yaml
      kubectl apply -f servicemonitors-backup.yaml
@@ -1355,4 +1478,4 @@ curl -s http://localhost:3000/api/health
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

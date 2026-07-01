@@ -80,3 +80,9 @@ API 服务器透明地处理不同 API 版本之间的转换：所有不同版�
 ## 参考链接
 
 - [The Kubernetes API - Official Documentation](https://kubernetes.io/docs/concepts/overview/kubernetes-api/)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/annotations.md|注解]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/bpfman.md|bpfman eBPF 管理器]]

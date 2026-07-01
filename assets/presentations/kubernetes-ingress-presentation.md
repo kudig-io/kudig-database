@@ -483,6 +483,9 @@ graph TB
 
 ### 演示 1：部署 Nginx Ingress Controller
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 步骤 1: 使用 Helm 部署
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
@@ -522,6 +525,9 @@ kubectl get svc ingress-nginx-controller -n ingress-nginx
 ```
 
 ### 演示 2：创建第一个 Ingress
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 部署后端应用
@@ -584,6 +590,9 @@ curl -H "Host: myapp.example.com" http://203.0.113.10/api
 
 ### 演示 3：配置 TLS
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 步骤 1: 创建自签名证书（测试用）
 openssl req -x509 -nodes -days 365 \
@@ -635,6 +644,9 @@ curl -I http://myapp.example.com
 ```
 
 ### 演示 4：金丝雀发布实战
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 部署 v1 版本（稳定版）
@@ -701,6 +713,9 @@ done | sort | uniq -c
 
 ### 演示 5：性能调优配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 优化 Nginx Ingress ConfigMap
 cat <<EOF | kubectl apply -f -
@@ -764,6 +779,10 @@ EOF
 ### 实验 1：完整的应用发布流程
 
 **目标**：从部署到 TLS 到金丝雀发布的完整流程
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 1. 部署应用

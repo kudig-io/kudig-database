@@ -91,7 +91,7 @@ k8s_versions:
 
 <!-- chunk: 案例一：K8s 运维 AIOps Agent -->## 案例一：K8s 运维 AIOps Agent
 
-#<!-- chunk: 1.1 项目背景 -->## 1.1 项目背景
+## 1.1 项目背景
 
 **企业背景**：某大型互联网公司，K8s 集群规模 500+ 节点，日均问题工单 200+，SRE 团队 15 人。
 
@@ -106,7 +106,7 @@ k8s_versions:
 - 自动化处理率 40%（无需人工干预的问题）
 - 新人上手周期缩短至 1 个月
 
-#<!-- chunk: 1.2 架构设计 -->## 1.2 架构设计
+## 1.2 架构设计
 
 ```
 ┌────────────────────────────────────────────────────────┐
@@ -138,7 +138,7 @@ k8s_versions:
 └─────────────────────────────┘
 ```
 
-#<!-- chunk: 1.3 技术选型决策 -->## 1.3 技术选型决策
+## 1.3 技术选型决策
 
 | 组件 | 选择 | 决策理由 |
 |------|------|---------|
@@ -149,7 +149,7 @@ k8s_versions:
 | **知识库** | kudig-database | 覆盖 39 个 K8s 知识域，FTA 故障树结构天然适配 Agent 推理 |
 | **可观测性** | Langfuse（自托管） | 合规要求不能发送数据到外部 |
 
-#<!-- chunk: 1.4 核心实现：诊断 Agent -->## 1.4 核心实现：诊断 Agent
+## 1.4 核心实现：诊断 Agent
 
 ```python
 from langgraph.graph import StateGraph, END
@@ -307,7 +307,7 @@ def build_diagnosis_graph():
     return workflow.compile()
 ```
 
-#<!-- chunk: 1.5 生产数据与效果 -->## 1.5 生产数据与效果
+## 1.5 生产数据与效果
 
 **运行 6 个月后的关键指标**：
 
@@ -331,7 +331,7 @@ def build_diagnosis_graph():
 | 网络不通 | 35% | 复杂情况多，部分需人工 |
 | 控制平面问题 | 12% | 高风险，坚持人工审批 |
 
-#<!-- chunk: 1.6 踩坑经验 -->## 1.6 踩坑经验
+## 1.6 踩坑经验
 
 ```
 坑1: RAG 检索精度不够
@@ -361,7 +361,7 @@ def build_diagnosis_graph():
 
 <!-- chunk: 案例二：金融行业智能客服 Agent -->## 案例二：金融行业智能客服 Agent
 
-#<!-- chunk: 2.1 项目背景 -->## 2.1 项目背景
+## 2.1 项目背景
 
 **企业背景**：某股份制银行，日均客服咨询量 50,000+，人工坐席 200 人。
 
@@ -371,7 +371,7 @@ def build_diagnosis_graph():
 - 夜间和节假日服务能力不足
 - 合规风险：客服人员回答口径不一致，存在监管风险
 
-#<!-- chunk: 2.2 架构（重点：合规与安全） -->## 2.2 架构（重点：合规与安全）
+## 2.2 架构（重点：合规与安全）
 
 ```
 用户输入 → 安全过滤层（PII 脱敏 + 注入检测）
@@ -387,7 +387,7 @@ def build_diagnosis_graph():
   - 所有建议附加风险提示
 ```
 
-#<!-- chunk: 2.3 关键技术实现 -->## 2.3 关键技术实现
+## 2.3 关键技术实现
 
 ```python
 # 金融合规护栏（最关键的组件）
@@ -443,7 +443,7 @@ class FinancialComplianceGuard:
         }
 ```
 
-#<!-- chunk: 2.4 生产效果 -->## 2.4 生产效果
+## 2.4 生产效果
 
 | 指标 | 上线前（纯人工） | 上线后（人机协同） | 改善 |
 |------|--------------|-----------------|------|
@@ -459,7 +459,7 @@ class FinancialComplianceGuard:
 
 <!-- chunk: 案例三：DevOps 代码审查 Agent -->## 案例三：DevOps 代码审查 Agent
 
-#<!-- chunk: 3.1 项目背景 -->## 3.1 项目背景
+## 3.1 项目背景
 
 **企业背景**：某 SaaS 公司，500+ 研发人员，每日 PR 200+，代码审查是研发瓶颈。
 
@@ -469,7 +469,7 @@ class FinancialComplianceGuard:
 - 审查质量不稳定（取决于审查者经验和状态）
 - 安全漏洞和性能问题检出率低
 
-#<!-- chunk: 3.2 Agent 架构 -->## 3.2 Agent 架构
+## 3.2 Agent 架构
 
 ```
 PR 创建/更新
@@ -500,7 +500,7 @@ PR 创建/更新
   [自动通过] 或 [Request Changes + 详细意见]
 ```
 
-#<!-- chunk: 3.3 关键实现 -->## 3.3 关键实现
+## 3.3 关键实现
 
 ```python
 # Kubernetes YAML 专项审查（对接 kudig-database 知识）
@@ -543,7 +543,7 @@ class K8sManifestReviewer:
         return parse_review_output(review.content)
 ```
 
-#<!-- chunk: 3.4 生产效果 -->## 3.4 生产效果
+## 3.4 生产效果
 
 | 指标 | 上线前 | 上线后 | 改善 |
 |------|-------|-------|------|
@@ -558,7 +558,7 @@ class K8sManifestReviewer:
 
 <!-- chunk: 案例四：经验提炼与最佳实践 -->## 案例四：经验提炼与最佳实践
 
-#<!-- chunk: 4.1 成功共性要素 -->## 4.1 成功共性要素
+## 4.1 成功共性要素
 
 | 要素 | 描述 | 在三个案例中的体现 |
 |------|------|-----------------|
@@ -568,7 +568,7 @@ class K8sManifestReviewer:
 | **可观测性先行** | 上线第一天就接入完整的可观测性 | Langfuse + Prometheus 同步上线 |
 | **质量评估体系** | 建立基准测试集，持续监控质量 | 每日自动运行评估，监控质量回退 |
 
-#<!-- chunk: 4.2 规避的关键失败模式 -->## 4.2 规避的关键失败模式
+## 4.2 规避的关键失败模式
 
 ```
 失败模式1: "全部自动化" 的冒进设计
@@ -592,7 +592,7 @@ class K8sManifestReviewer:
   正确做法: 工具调用结果必须验证，最终状态要通过工具实际确认而非 LLM 描述
 ```
 
-#<!-- chunk: 4.3 企业 Agent 项目立项参考 -->## 4.3 企业 Agent 项目立项参考
+## 4.3 企业 Agent 项目立项参考
 
 ```
 Agent 项目 ROI 快速评估框架:
@@ -678,17 +678,17 @@ Phase 4: Mature（持续）
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 

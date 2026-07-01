@@ -560,6 +560,9 @@ spec:
 
 ### Cilium节点标签配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 #!/bin/bash
 # configure-egress-nodes.sh
@@ -823,8 +826,8 @@ spec:
   
   tls:
   # 从mesh内部到egress gateway
-  - match:
-    - gateways:
+  - matchers:
+    - - gateways=""
       - mesh
       port: 443
       sniHosts:
@@ -837,8 +840,8 @@ spec:
       weight: 100
   
   # 从egress gateway到外部服务
-  - match:
-    - gateways:
+  - matchers:
+    - - gateways=""
       - egress-gateway
       port: 443
       sniHosts:
@@ -950,8 +953,8 @@ spec:
   - mesh
   - egress-gateway
   tls:
-  - match:
-    - gateways:
+  - matchers:
+    - - gateways=""
       - mesh
       port: 443
     route:
@@ -1884,6 +1887,9 @@ data:
 
 ### 排查脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # egress-troubleshoot.sh
@@ -1989,6 +1995,9 @@ echo "=========================================="
 ```
 
 ### 常用排查命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查出站连接
@@ -2159,7 +2168,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -2180,4 +2189,4 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]

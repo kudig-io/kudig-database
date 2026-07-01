@@ -30,7 +30,7 @@ created: "2026-05-23"
 
 # kops v1.11 Release Notes
 
-Source: [1.11.1](https://github.[[entities/kubernetes|kubernetes]]/kops/releases/tag/1.11.1)
+Source: [1.11.1](https://github.[[entities/kubernetes.md|kubernetes]]/kops/releases/tag/1.11.1)
 
 Release 1.11.1
 

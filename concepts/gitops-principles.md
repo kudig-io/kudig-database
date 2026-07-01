@@ -85,14 +85,14 @@ Standard promotion flow: Development (auto-sync, no approval) -> Staging (auto-s
 
 ## Related
 
-- [[concepts/production-operations-best-practices|production-operations-best-practices]] — Production Operations Best Practices
-- [[concepts/infrastructure-as-code|infrastructure-as-code]] — Infrastructure as Code
+- [[concepts/production-operations-best-practices.md|production-operations-best-practices]] — Production Operations Best Practices
+- [[concepts/infrastructure-as-code.md|infrastructure-as-code]] — Infrastructure as Code
 - [[flux]] — Flux
-- [[entities/argocd|argocd]] — ArgoCD
-- [[concepts/ci-cd-pipeline-patterns|ci-cd-pipeline-patterns]] — CI/CD Pipeline Patterns
-- [[concepts/infrastructure-as-code|Infrastructure as Code]]
-- [[concepts/production-operations-best-practices|Production Operations Best Practices]]
-- [[concepts/ci-cd-pipeline-patterns|CI/CD Pipeline Patterns]]
-- [[entities/argocd|ArgoCD]]
+- [[entities/argocd.md|argocd]] — ArgoCD
+- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]] — CI/CD Pipeline Patterns
+- [[concepts/infrastructure-as-code.md|Infrastructure as Code]]
+- [[concepts/production-operations-best-practices.md|Production Operations Best Practices]]
+- [[concepts/ci-cd-pipeline-patterns.md|CI/CD Pipeline Patterns]]
+- [[entities/argocd.md|ArgoCD]]
 - [[flux|Flux]]
-- [[synthesis/GitOps x 平台工程|GitOps x 平台工程]] — synthesis
+- [[concepts/GitOps x 平台工程.md|GitOps x 平台工程]] — synthesis

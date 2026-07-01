@@ -257,7 +257,7 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep -i "scoring strat
 
 ## 交叉引用
 
-- [[entities/kubernetes|Kubernetes]] 调度器](./kubernetes-scheduler.md) — 评分阶段如何使用 NodeResourcesFit
+- [[entities/kubernetes.md|Kubernetes]] 调度器](./kubernetes-scheduler.md) — 评分阶段如何使用 NodeResourcesFit
 - [调度框架](./scheduling-framework.md) — Score 扩展点与 NormalizeScore
 - [调度器性能调优](./scheduler-performance-tuning.md) — 评分节点数量对装箱效果的影响
 - [动态资源分配](./dynamic-resource-allocation.md) — DRA 设备与装箱策略的交互
@@ -269,4 +269,6 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep -i "scoring strat
 
 ## Related
 
-- index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/scheduling/affinity.md|亲和性]]
+- [[domain-17-system-foundation/topic-dictionary/scheduling/anti-affinity.md|反亲和性]]
+- [[domain-17-system-foundation/topic-dictionary/scheduling/api-initiated-eviction.md|API-initiated Eviction]]

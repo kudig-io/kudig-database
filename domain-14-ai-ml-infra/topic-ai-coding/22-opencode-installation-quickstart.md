@@ -128,7 +128,7 @@ pnpm install -g opencode-ai
 yarn global add opencode-ai
 ```
 
-### 2.4 [[entities/docker|[[Docker & Containerd 速查卡|docker]]]]
+### 2.4 [[entities/docker.md|[[Docker & Containerd 速查卡|docker]]]]
 
 ```bash
 docker run -it --rm ghcr.io/anomalyco/opencode

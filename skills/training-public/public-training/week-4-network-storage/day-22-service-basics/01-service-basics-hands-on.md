@@ -131,6 +131,9 @@ spec:
 
 ### 3.1 环境变量发现
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Kube-proxy 在每个 Pod 中注入环境变量
 # 自动生成: {SVCNAME}_SERVICE_HOST, {SVCNAME}_SERVICE_PORT
@@ -189,6 +192,9 @@ kubectl get endpoints backend-svc
 ```
 
 ### 4.2 Service 无法访问
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 检查 Pod 是否正常运行
@@ -302,7 +308,7 @@ kind: Ingress
 metadata:
   name: web-ingress
   annotations:
-    nginx.ingress.[[entities/kubernetes|kubernetes]].io/rewrite-target: /
+    nginx.ingress.[[entities/kubernetes.md|kubernetes]].io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:

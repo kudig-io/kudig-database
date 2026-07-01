@@ -69,7 +69,7 @@ created: "2026-05-23"
 | 1 | 命令输出诊断语料 — 全量合并版 | 自动生成 | 469 | 全量 I-O 对，按 Domain 分组 |
 | 2 | P0 核心场景手工种子 I-O 对 | 手工精调 | 22 | 高质量参考模板，覆盖 10 Domain |
 | 3 | 命令输出解读语料 — 原始基准 | 原始基准 | 23 | 遗留基准数据 |
-| 4 | [[concepts/ai-agent-README]] | 说明文档 | - | 语料结构、使用方式、生成流水线 |
+| 4 | [[concepts/ai-agent-README.md|ai agent README]] | 说明文档 | - | 语料结构、使用方式、生成流水线 |
 | 5 | 命令输出诊断语料 — JSON 版 | 程序消费 | 469 | JSON 格式，供 Agent 直接加载 |
 | 6 | 命令输出诊断语料 — YAML 版 | 程序消费 | 469 | YAML 格式，供 Agent 直接加载 |
 | 7 | 覆盖率验证报告 | 验证报告 | - | 覆盖率检查输出 |
@@ -136,7 +136,7 @@ python3 validators/coverage_checker.py \
 
 ## Related
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/README|Skills 故障诊断手册]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-index|FTA 故障树索引]]
-- [[_reports/PRE-RELEASE-FINAL-EVALUATION-2026-05-19|发布前评估报告]]
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/README|Agent QA 对语料库 README]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/README.md|Skills 故障诊断手册]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-index.md|FTA 故障树索引]]
+- 发布前评估报告
+- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/README.md|Agent QA 对语料库 README]]

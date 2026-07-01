@@ -65,7 +65,7 @@ created: "2026-05-23"
 
 # 17 - 日志和审计表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/concepts/cluster-administration/logging](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/cluster-administration/logging](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
 
 <!-- chunk: 日志架构模式 -->
 ## 日志架构模式
@@ -599,8 +599,8 @@ groups:
 ## Obsidian 相关文档
 
 - domain-06-observability MOC
-- [[domain-06-observability/README|Observability Domain (可观测性领域)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-8 可观测性 — 开源项目索引]]
+- [[domain-06-observability/README.md|Observability Domain (可观测性领域)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
 - 03 - 日志收集架构详解 (Logging Architecture)
@@ -618,8 +618,8 @@ groups:
 - 13-cluster-health-check
 - 14-chaos-engineering
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

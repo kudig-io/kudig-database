@@ -44,17 +44,17 @@ created: "2026-05-23"
 
 ### nginx-ingress 核心文档
 - nginx-ingress 完全指南
-- [[assets/presentations/kubernetes-ingress-presentation]]
+- [[assets/presentations/kubernetes-ingress-presentation.md|kubernetes ingress presentation]]
 - Ingress Controller 深入剖析
 - Ingress TLS 与证书管理
 
 ### 故障排查
 - troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-nginx-ingress-troubleshooting|nginx-ingress 网关故障排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/nginx-ingress-fta|nginx-[[[[Ingress 异常故障树分析|Ingress 异常故障树分析]]|ingress FTA]] 故障树]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure|Ingress/Gateway 路由故障诊断与修复]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting|Ingress 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting|[[Service 与 Ingress 故障排查指南|Service 与 Ingress 故障排查指南]]]]
-- [[domain-10-troubleshooting-diagnostics/15-ingress-troubleshooting|15 - Ingress 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/nginx-ingress-fta.md|nginx-[[[[Ingress 异常故障树分析|Ingress 异常故障树分析]]|ingress FTA]] 故障树]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md|Ingress/Gateway 路由故障诊断与修复]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|Ingress 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|[[Service 与 Ingress 故障排查指南|Service 与 Ingress 故障排查指南]]]]
+- [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/15-ingress-troubleshooting.md|15 - Ingress 故障排查]]
 
 ### 迁移指南
 - nginx-ingress 迁移指南
@@ -64,9 +64,9 @@ created: "2026-05-23"
 
 ### 网络与路由
 - CNI 容器网络接口深度解析
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting|DNS 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting|NetworkPolicy 零信任安全治理]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting|Service Mesh 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|DNS 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 零信任安全治理]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh 故障排查]]
 - Ingress 监控与故障排查
 
 ### 云厂商集成
@@ -83,12 +83,12 @@ created: "2026-05-23"
 
 ### API 网关
 - Higress 企业级网关实践
-- [[domain-03-networking-traffic/README|API 网关全景图]]
+- [[domain-03-networking-traffic/README.md|API 网关全景图]]
 - Gateway API
 - Envoy
 
 ### Ingress 控制器对比
-- [[domain-17-system-foundation/topic-dictionary/networking/ingress-controllers|[[Ingress Controllers|Ingress Controllers]]]]
+- [[domain-17-system-foundation/topic-dictionary/networking/ingress-controllers.md|[[Ingress Controllers|Ingress Controllers]]]]
 - Contour
 - Emissary-Ingress
 
@@ -104,4 +104,4 @@ created: "2026-05-23"
 ### 学习培训
 - Ingress 学习路径
 - 网络与存储周
-- [[skills/training-public/inner-training/week-4-network-storage/day-23-ingress]]
+- [[skills/training-public/inner-training/week-4-network-storage/day-23-ingress.md|day 23 ingress]]

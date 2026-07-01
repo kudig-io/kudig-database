@@ -67,7 +67,7 @@ related_domains:
   - domain-05-security-compliance
 related_topics:
   - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-[[domain-02-workloads-applications/topic-functions/cluster-create/16-security|16-security]]-2
+  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-[[domain-02-workloads-applications/topic-functions/cluster-create/16-security.md|16-security]]-2
   - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-25-production-best-practices
 ---
 
@@ -174,6 +174,10 @@ Kubernetes 原生的 Secret 存在以下安全局限：
 ## 实战演练
 
 ### 任务 1: Kyverno 策略配置 (1h)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 Kyverno
@@ -306,6 +310,9 @@ kubectl apply -f add-security-context.yaml
 ```
 
 ### 任务 2: Secret 管理实践 (1h)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 Sealed Secrets Controller

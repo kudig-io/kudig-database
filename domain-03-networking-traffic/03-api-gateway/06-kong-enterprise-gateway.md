@@ -77,14 +77,14 @@ created: "2026-05-23"
 
 Kong 是全球使用最广泛的开源 API 网关之一，由 Kong Inc. 于 2015 年开源，基于 Nginx 和 OpenResty 构建。
 
-#<!-- chunk: 核心特点 -->## 核心特点
+## 核心特点
 
 - **成熟稳定**: 10 年以上生产验证，支撑数万亿级 API 调用
 - **丰富生态**: 最大的 API 网关插件市场（Kong Plugin Hub）
 - **灵活部署**: 支持传统 DB 模式、DB-less 模式和 Konnect 云托管
 - **多平台**: Kubernetes、VM、裸金属、多云环境均可部署
 
-#<!-- chunk: 产品线 -->## 产品线
+## 产品线
 
 | 产品 | 定位 | 许可 |
 |------|------|------|
@@ -132,9 +132,12 @@ Kong 是全球使用最广泛的开源 API 网关之一，由 Kong Inc. 于 2015
 
 <!-- chunk: 3. 部署模式 -->## 3. 部署模式
 
-#<!-- chunk: 模式一：DB 模式（传统） -->## 模式一：DB 模式（传统）
+## 模式一：DB 模式（传统）
 
 配置存储在 PostgreSQL 中，支持多节点集群：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # Helm 安装（DB 模式）
@@ -148,9 +151,12 @@ helm install kong kong/kong \
   --set env.pg_database=kong
 ```
 
-#<!-- chunk: 模式二：DB-less 模式（推荐 K8s） -->## 模式二：DB-less 模式（推荐 K8s）
+## 模式二：DB-less 模式（推荐 K8s）
 
 无需数据库，配置通过声明式文件加载：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # Helm 安装（DB-less 模式）
@@ -162,7 +168,7 @@ helm install kong kong/kong \
   --set ingressController.installCRDs=false
 ```
 
-#<!-- chunk: 模式三：混合模式（Hybrid） -->## 模式三：混合模式（Hybrid）
+## 模式三：混合模式（Hybrid）
 
 控制平面与数据平面分离部署，适合多集群/多区域：
 
@@ -195,7 +201,7 @@ env:
 
 <!-- chunk: 4. 路由与服务配置 -->## 4. 路由与服务配置
 
-#<!-- chunk: Admin API -->## Admin API
+## Admin API
 
 ```bash
 # 创建服务
@@ -218,7 +224,7 @@ curl -i -X POST http://localhost:8001/routes/api-route/plugins \
   --data config.redis_host=redis.svc
 ```
 
-#<!-- chunk: 负载均衡配置 -->## 负载均衡配置
+## 负载均衡配置
 
 ```bash
 # 创建上游和目标
@@ -243,7 +249,7 @@ curl -i -X POST http://localhost:8001/upstreams/api-upstream/targets \
 
 KIC 将 Kubernetes 资源（Ingress、Gateway API、自定义 CRD）转换为 Kong 配置：
 
-#<!-- chunk: Kubernetes Ingress -->## Kubernetes Ingress
+## Kubernetes Ingress
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -268,7 +274,7 @@ spec:
               number: 8080
 ```
 
-#<!-- chunk: Gateway API -->## Gateway API
+## Gateway API
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -292,7 +298,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: KongPlugin CRD -->## KongPlugin CRD
+## KongPlugin CRD
 
 ```yaml
 apiVersion: configuration.konghq.com/v1
@@ -317,7 +323,7 @@ plugin: jwt
 
 <!-- chunk: 6. 插件生态 -->## 6. 插件生态
 
-#<!-- chunk: 核心插件分类 -->## 核心插件分类
+## 核心插件分类
 
 | 类别 | CE 插件 | EE 独有 |
 |------|--------|---------|
@@ -328,7 +334,7 @@ plugin: jwt
 | **日志** | http-log, file-log, syslog, tcp-log, udp-log | kafka-log, datadog |
 | **分析** | prometheus, zipkin, opentelemetry | collector |
 
-#<!-- chunk: 自定义 Lua 插件 -->## 自定义 Lua 插件
+## 自定义 Lua 插件
 
 ```lua
 -- kong/plugins/my-plugin/handler.lua
@@ -448,7 +454,7 @@ services:
             temperature: 0.7
 ```
 
-#<!-- chunk: AI 限流 -->## AI 限流
+## AI 限流
 
 ```yaml
 plugins:
@@ -466,7 +472,7 @@ plugins:
 
 <!-- chunk: 9. 可观测性 -->## 9. 可观测性
 
-#<!-- chunk: Prometheus 指标 -->## Prometheus 指标
+## Prometheus 指标
 
 ```yaml
 # KongPlugin CRD 配置 Prometheus
@@ -492,7 +498,7 @@ plugin: prometheus
 - `kong_bandwidth_bytes` — 带宽统计
 - `kong_upstream_target_health` — 上游健康状态
 
-#<!-- chunk: OpenTelemetry 追踪 -->## OpenTelemetry 追踪
+## OpenTelemetry 追踪
 
 ```yaml
 plugins:
@@ -541,7 +547,7 @@ plugins:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-40-cloud-native-api-gateway MOC
-- [[domain-03-networking-traffic/README|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
 - Domain-40 云原生 API 网关 — 开源项目索引
 - 01 - 云原生 API 网关架构总览
 - 02 - Kubernetes Gateway API 标准深度解析
@@ -559,3 +565,5 @@ plugins:
 - 05-apisix-enterprise-gateway
 - 07-envoy-gateway-enterprise
 - 08-traefik-enterprise-gateway
+
+```

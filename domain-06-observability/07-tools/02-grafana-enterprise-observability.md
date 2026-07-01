@@ -70,7 +70,7 @@ This document provides in-depth exploration of Grafana Enterprise observability 
 
 <!-- chunk: 1. Grafana Enterprise Architecture Deep Dive -->## 1. Grafana Enterprise Architecture Deep Dive
 
-#<!-- chunk: 1.1 Core Component Architecture -->## 1.1 Core Component Architecture
+## 1.1 Core Component Architecture
 
 ```mermaid
 graph TB
@@ -113,7 +113,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 1.2 Enterprise Feature Matrix -->## 1.2 Enterprise Feature Matrix
+## 1.2 Enterprise Feature Matrix
 
 ```yaml
 enterprise_features:
@@ -159,7 +159,7 @@ enterprise_features:
 
 <!-- chunk: 2. Enterprise Deployment Architecture -->## 2. Enterprise Deployment Architecture
 
-#<!-- chunk: 2.1 High Availability Deployment -->## 2.1 High Availability Deployment
+## 2.1 High Availability Deployment
 
 ```yaml
 # grafana-enterprise-values.yaml
@@ -273,7 +273,7 @@ grafana:
       headers: Email:X-WEBAUTH-EMAIL, Name:X-WEBAUTH-NAME
 ```
 
-#<!-- chunk: 2.2 External Database Configuration -->## 2.2 External Database Configuration
+## 2.2 External Database Configuration
 
 ```yaml
 # postgresql-grafana.yaml
@@ -349,7 +349,7 @@ spec:
 
 <!-- chunk: 3. Dashboard Design Best Practices -->## 3. Dashboard Design Best Practices
 
-#<!-- chunk: 3.1 Dashboard Structure Design -->## 3.1 Dashboard Structure Design
+## 3.1 Dashboard Structure Design
 
 ```json
 {
@@ -481,7 +481,7 @@ spec:
 }
 ```
 
-#<!-- chunk: 3.2 Alert Rule Configuration -->## 3.2 Alert Rule Configuration
+## 3.2 Alert Rule Configuration
 
 ```yaml
 # grafana-alert-rules.yaml
@@ -599,7 +599,7 @@ spec:
 
 <!-- chunk: 4. Distributed Tracing Integration -->## 4. Distributed Tracing Integration
 
-#<!-- chunk: 4.1 Tempo Configuration -->## 4.1 Tempo Configuration
+## 4.1 Tempo Configuration
 
 ```yaml
 # tempo-config.yaml
@@ -632,7 +632,7 @@ storage:
       secret_key: ${S3_SECRET_KEY}
 ```
 
-#<!-- chunk: 4.2 Application Instrumentation -->## 4.2 Application Instrumentation
+## 4.2 Application Instrumentation
 
 ```python
 # python-opentelemetry-example.py
@@ -678,7 +678,7 @@ if __name__ == '__main__':
 
 <!-- chunk: 5. Machine Learning and Anomaly Detection -->## 5. Machine Learning and Anomaly Detection
 
-#<!-- chunk: 5.1 ML Alert Configuration -->## 5.1 ML Alert Configuration
+## 5.1 ML Alert Configuration
 
 ```yaml
 # ml-alerts.yaml
@@ -760,7 +760,7 @@ spec:
 
 <!-- chunk: 6. Enterprise Governance and Compliance -->## 6. Enterprise Governance and Compliance
 
-#<!-- chunk: 6.1 RBAC Configuration -->## 6.1 RBAC Configuration
+## 6.1 RBAC Configuration
 
 ```yaml
 # grafana-rbac.yaml
@@ -830,7 +830,7 @@ spec:
       builtin: false
 ```
 
-#<!-- chunk: 6.2 Audit Logging Configuration -->## 6.2 Audit Logging Configuration
+## 6.2 Audit Logging Configuration
 
 ```yaml
 # audit-logging-config.yaml
@@ -862,7 +862,7 @@ grafana.ini:
 
 <!-- chunk: 7. Performance Optimization -->## 7. Performance Optimization
 
-#<!-- chunk: 7.1 Caching Strategy -->## 7.1 Caching Strategy
+## 7.1 Caching Strategy
 
 ```yaml
 # grafana-caching.yaml
@@ -889,7 +889,7 @@ grafana.ini:
     ha_advertise_address: "${POD_IP}:9094"
 ```
 
-#<!-- chunk: 7.2 Query Optimization -->## 7.2 Query Optimization
+## 7.2 Query Optimization
 
 ```sql
 -- Optimized PromQL examples
@@ -927,7 +927,10 @@ rate(http_requests_total[5m]) / rate(http_requests_total[5m] offset 1d)
 
 <!-- chunk: 8. Disaster Recovery and Backup -->## 8. Disaster Recovery and Backup
 
-#<!-- chunk: 8.1 Backup Strategy -->## 8.1 Backup Strategy
+## 8.1 Backup Strategy
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
 ```bash
 #!/bin/bash
@@ -980,7 +983,7 @@ EOF
 tar -czf ${BACKUP_DIR}/${BACKUP_NAME}.tar.gz -C ${BACKUP_DIR} ${BACKUP_NAME}
 
 # 7. Cleanup temporary directory
-rm -rf ${BACKUP_DIR}/${BACKUP_NAME}
+rm -rf ${BACKUP_DIR}/${BACKUP_NAME}  # ⚠️ 删除系统/数据文件
 
 # 8. Upload to remote storage
 if [ -n "$REMOTE_STORAGE" ]; then
@@ -993,7 +996,7 @@ echo "Backup completed: ${BACKUP_DIR}/${BACKUP_NAME}.tar.gz"
 
 <!-- chunk: 9. Monitoring and Maintenance -->## 9. Monitoring and Maintenance
 
-#<!-- chunk: 9.1 Health Check Configuration -->## 9.1 Health Check Configuration
+## 9.1 Health Check Configuration
 
 ```yaml
 # grafana-health-check.yaml
@@ -1042,7 +1045,7 @@ data:
 
 <!-- chunk: 10. Future Trends and Roadmap -->## 10. Future Trends and Roadmap
 
-#<!-- chunk: 10.1 Emerging Technologies -->## 10.1 Emerging Technologies
+## 10.1 Emerging Technologies
 
 ```yaml
 future_trends:
@@ -1073,8 +1076,8 @@ future_trends:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-20-enterprise-monitoring-alerting MOC
-- [[domain-06-observability/README|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-20 企业监控与告警 — 开源项目索引]]
+- [[domain-06-observability/README.md|Domain 06: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]]
 - Prometheus企业级监控系统深度实践
 - OpenTelemetry分布式追踪与可观测性深度实践
 - Thanos Enterprise Metrics Federation and Long-term Storage
@@ -1092,8 +1095,8 @@ future_trends:
 - 03-opentelemetry-distributed-tracing
 - 04-thanos-enterprise-metrics-federation
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

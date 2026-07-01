@@ -5,6 +5,7 @@ tags: ["domain-11", "on-call", "告警", "值班", "SRE", "升级", "visibility/
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 status: reviewed
 ---
 
@@ -101,7 +102,7 @@ status: reviewed
 
 ## 相关链接
 
-- [[domain-11-production-operations/01-production-sre-daily-ops|production-sre-daily-ops]] — 日常巡检与值班手册
-- [[domain-11-production-operations/04-incident-response-template|incident-response-template]] — 事故响应模板
-- [[domain-11-production-operations/02-change-management-guide|change-management-guide]] — 变更管理指南
+- [[domain-11-production-operations/01-production-sre-daily-ops.md|production-sre-daily-ops]] — 日常巡检与值班手册
+- [[domain-11-production-operations/04-incident-response-template.md|incident-response-template]] — 事故响应模板
+- [[domain-11-production-operations/02-change-management-guide.md|change-management-guide]] — 变更管理指南
 - [[node-notready]] — 节点异常排查

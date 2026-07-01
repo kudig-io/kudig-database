@@ -222,7 +222,7 @@ NetworkPolicy 是 Kubernetes 中实现零信任网络的核心机制。当 Netwo
 
 ### 2.3 排除标准
 
-- 所有 Pod 间通信均失败（不仅是特定 Pod）→ 可能是 CNI 级问题 → [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting|03-networking-cni-troubleshooting]].md
+- 所有 Pod 间通信均失败（不仅是特定 Pod）→ 可能是 CNI 级问题 → [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/03-networking-cni-troubleshooting.md|03-networking-cni-troubleshooting]].md
 - DNS 解析失败 → SKILL-NET-001
 - Service 无 Endpoint → SKILL-NET-002
 - 节点状态 NotReady → SKILL-NODE-001
@@ -258,6 +258,10 @@ kubectl get pods -n calico-system -o wide 2>/dev/null || \
 > **判断规则**: 若 CNI Pod 不健康 → 可能不是纯策略问题，需扩展排查
 
 **Step T4**: 快速测试连通性方向
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 从源 Pod 测试到目标 Pod
 kubectl exec -n <src-ns> <src-pod> -- nc -zv <target-ip> <port>
@@ -389,6 +393,10 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
 
 **Step D2.2**: 检查 Calico NetworkPolicy 状态（如使用 Calico）
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # Calico 全局网络策略
   kubectl get globalnetworkpolicy 2>/dev/null
@@ -406,6 +414,10 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
 
 **Step D2.3**: 检查 Cilium 策略状态（如使用 Cilium）
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # Cilium 端点策略状态
   kubectl exec -n kube-system <cilium-pod> -- cilium endpoint list | grep -E '<target-pod-ip>|ENDPOINT'
@@ -455,6 +467,10 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
 
 **Step D2.6**: 检查服务账户和身份（Cilium 等高级 CNI）
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # Cilium 身份列表
   kubectl exec -n kube-system <cilium-pod> -- cilium identity list 2>/dev/null | grep -E '<src-label>|<target-label>'
@@ -470,11 +486,12 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
 
 ### Phase 3: 主动探测（低风险，可能需审批）
 
-> ⚠️ 以下步骤涉及在 Pod 内执行网络测试，在 L1-advisory 模式下，Agent 应**提出建议并等待人工确认**后执行。
-> **预计耗时**: 5-10 分钟
-
 **Step D3.1**: 从源 Pod 测试到目标 Pod 的连通性
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   kubectl exec -n <src-ns> <src-pod> -- nc -zv <target-pod-ip> <port>
   kubectl exec -n <src-ns> <src-pod> -- nc -zv <target-svc-name>.<target-ns>.svc.cluster.local <port>
@@ -490,6 +507,10 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
 
 **Step D3.2**: 临时允许所有流量验证（测试策略是否生效）
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 创建临时允许所有策略（测试用）
   cat <<EOF | kubectl apply -f -
@@ -520,6 +541,10 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
 
 **Step D3.3**: 测试特定规则段
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 测试特定端口
   kubectl exec -n <src-ns> <src-pod> -- nc -zv <target-ip> 80
@@ -563,6 +588,10 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
   # 确认标签不匹配
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方式1: 修改 Pod 标签（需重新创建 Pod，Deployment 需修改模板）
   kubectl patch deployment <deployment-name> -n <namespace> -p \
@@ -577,6 +606,10 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
   kubectl describe networkpolicy <policy-name> -n <namespace>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 恢复原始标签/选择器
   kubectl patch deployment <deployment-name> -n <namespace> -p \
@@ -591,6 +624,10 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
   # 确认缺失的端口/协议
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch networkpolicy <policy-name> -n <namespace> --type='merge' -p '{
     "spec": {
@@ -606,11 +643,20 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
   }'
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   kubectl get networkpolicy <policy-name> -n <namespace> -o yaml
   kubectl exec -n <src-ns> <src-pod> -- nc -zv <target-ip> <port>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo networkpolicy <policy-name> -n <namespace>  # 不适用，需手动恢复
   # 或重新应用原始策略 YAML
@@ -625,15 +671,27 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
   kubectl get namespace <target-namespace> -o jsonpath='{.metadata.labels}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   kubectl label namespace <target-namespace> <required-label>=<value> --overwrite
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   kubectl get namespace <target-namespace> --show-labels
   kubectl exec -n <src-ns> <src-pod> -- nc -zv <target-pod-ip> <port>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   kubectl label namespace <target-namespace> <required-label>-  # 删除标签
   ```
@@ -651,6 +709,10 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
   kubectl get svc -n <namespace>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   cat <<EOF | kubectl apply -f -
   apiVersion: networking.k8s.io/v1
@@ -675,11 +737,19 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
   EOF
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   kubectl get networkpolicy -n <namespace>
   kubectl exec -n <src-ns> <src-pod> -- nc -zv <target-pod-ip> <port>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl delete networkpolicy allow-<src>-to-<target> -n <namespace>
   ```
@@ -694,6 +764,10 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
   kubectl get networkpolicy -n <namespace> -o yaml
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   cat <<EOF | kubectl apply -f -
   apiVersion: networking.k8s.io/v1
@@ -724,6 +798,10 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
   # 从外部测试访问
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl delete networkpolicy allow-external -n <namespace>
   ```
@@ -738,6 +816,10 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
   # 确认冲突策略
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 备份策略
   kubectl get networkpolicy <policy-name> -n <namespace> -o yaml > /tmp/<policy-name>-backup.yaml
@@ -745,11 +827,19 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
   kubectl delete networkpolicy <policy-name> -n <namespace>
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   kubectl get networkpolicy -n <namespace>
   kubectl exec -n <src-ns> <src-pod> -- nc -zv <target-pod-ip> <port>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f /tmp/<policy-name>-backup.yaml
   ```
@@ -781,6 +871,10 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
      kubectl get networkpolicy -A -o yaml > /tmp/all-networkpolicies-backup.yaml
      ```
   2. 删除所有 NetworkPolicy（或使用 allow-all 替代）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
      ```bash
      # 方式1: 创建 allow-all 策略覆盖每个 namespace
      for ns in $(kubectl get ns -o jsonpath='{.items[*].metadata.name}'); do
@@ -809,6 +903,9 @@ kubectl exec -n <target-ns> <target-pod> -- nc -zv <src-ip> <port>
 ## 验证确认
 
 ### 7.1 即时验证（修复后 1 分钟内）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # V1: 测试修复后的连通性
@@ -1023,3 +1120,5 @@ receivers:
 *Skill ID: SKILL-NET-004*  
 *创建时间: 2026-05*  
 *维护者: Kudig Team*
+
+```

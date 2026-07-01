@@ -234,6 +234,9 @@ kubectl auth can-i --list --as=system:serviceaccount:<ns>:<sa>
 
 ### 2.3 ServiceAccount 排查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 步骤 1：检查 Pod 使用的 ServiceAccount
 kubectl get pod <pod-name> -o jsonpath='{.spec.serviceAccountName}'
@@ -259,6 +262,9 @@ kubectl auth can-i create pods --as=system:serviceaccount:<ns>:<sa>
 ### 3.1 创建 RBAC 权限
 
 #### 3.1.1 为用户授予权限
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 Role（命名空间级别）
@@ -322,6 +328,9 @@ EOF
 
 #### 3.1.2 为 ServiceAccount 授予权限
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建 ServiceAccount
 kubectl create serviceaccount <sa-name> -n <namespace>
@@ -364,6 +373,9 @@ kubectl create rolebinding <sa-name>-view \
 ### 3.2 证书问题解决
 
 #### 3.2.1 更新 kubeconfig 证书
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1：从 admin.conf 复制最新证书
@@ -417,6 +429,9 @@ kubectl config set-context <username>-context \
 ```
 
 ### 3.3 常见 RBAC 配置示例
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 只读访问 Pod 和日志
@@ -500,16 +515,16 @@ EOF
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting|03-pod-security-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting|04-audit-logging-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting|02-certificate-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting|03-pod-security-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting.md|03-pod-security-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting.md|03-pod-security-troubleshooting]]

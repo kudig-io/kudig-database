@@ -68,7 +68,7 @@ created: "2026-05-23"
 
 1. **环境准备**：配置内核参数（`net.bridge.bridge-nf-call-*`、`net.ipv4.ip_forward`），禁用 swap
 2. **安装容器运行时**：containerd 1.6+，启用 SystemdCgroup
-3. **安装 [[entities/kubernetes|Kubernetes 组件]]**：[[kubelet|kubelet]]、kubeadm、kubectl
+3. **安装 [[entities/kubernetes.md|Kubernetes 组件]]**：[[kubelet|kubelet]]、kubeadm、kubectl
 4. **初始化控制平面**：使用 kubeadm-config.yaml 初始化，配置 controlPlaneEndpoint
 5. **安装网络插件**：Calico/Cilium，确保 Pod CIDR 与集群配置一致 ^[inferred]
 6. **加入工作节点**：使用 kubeadm join 命令
@@ -96,15 +96,15 @@ created: "2026-05-23"
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]
-- [[entities/kube-apiserver|kube-apiserver]]
+- [[concepts/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
+- [[entities/kube-apiserver.md|kube-apiserver]]
 - [[etcd|etcd]]
-- [[skills/k8s-network-configuration-guide|Kubernetes 网络配置最佳实践]]
+- [[skills/k8s-network-configuration-guide.md|Kubernetes 网络配置最佳实践]]
 
 ## Related
 
-- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/k8s-production-best-practices|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[concepts/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践

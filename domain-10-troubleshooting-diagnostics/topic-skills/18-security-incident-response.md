@@ -117,10 +117,6 @@ created: "2026-05-23"
 - **审计日志**: Kubernetes 审计日志已启用并可访问
 - **证据存储**: 准备好安全的证据存储位置（非受感染系统）
 
-> ⚠️ **重要**: 安全事件响应的首要原则是 **"先隔离、后分析"**。在确认攻击范围前，优先限制攻击者的行动能力，避免证据被销毁或攻击范围扩大。
-
-> ⚠️ **合规提醒**: 根据 GDPR、等保 2.0、SOC2 等合规要求，数据泄露事件可能需要在 72 小时内向监管机构报告。请在事件确认后立即通知合规团队。
-
 ---
 
 ## 2. 症状识别
@@ -208,6 +204,11 @@ kubectl get pod SUSPECT_POD -n NAMESPACE -o jsonpath='{.spec.nodeName}'
 > - 如果多个 Namespace/Pod 受影响 → 提升一级
 
 **Step T2**: 隔离受影响工作负载（60 秒）
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 立即对可疑 Pod 应用 NetworkPolicy 隔离（阻止所有出入流量）
 cat <<EOF | kubectl apply -f -
@@ -233,6 +234,10 @@ kubectl cordon NODE_NAME
 > - 如果隔离失败（如 NetworkPolicy 不支持）→ 考虑直接删除 Pod 或 drain 节点
 
 **Step T3**: 收集初始证据（120 秒）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 保存 Pod 详细信息
 kubectl describe pod SUSPECT_POD -n NAMESPACE > /tmp/evidence-pod-describe.txt
@@ -304,6 +309,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
 
 **Step D1.2**: 检查容器进程
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 如果 Pod 仍在运行，检查进程
   kubectl exec SUSPECT_POD -n NAMESPACE -- ps aux
@@ -321,6 +330,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
 
 **Step D1.3**: 检查网络连接
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查容器的网络连接
   kubectl exec SUSPECT_POD -n NAMESPACE -- ss -tnp 2>/dev/null || \
@@ -338,6 +351,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
 
 **Step D1.4**: 检查文件系统异常
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 查找最近创建/修改的可执行文件
   kubectl exec SUSPECT_POD -n NAMESPACE -- find / -type f -executable \
@@ -380,6 +397,12 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
 
 **Step D1.6**: 快速隔离措施
 - **命令**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 方案 1: 应用 NetworkPolicy 隔离（推荐，保留取证能力）
   cat <<EOF | kubectl apply -f -
@@ -401,7 +424,7 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
   kubectl cordon NODE_NAME
   
   # 方案 3: 极端情况下，删除 Pod（会丢失部分证据）
-  # kubectl delete pod SUSPECT_POD -n NAMESPACE --grace-period=0 --force
+  # kubectl delete pod SUSPECT_POD -n NAMESPACE --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
   ```
 - **超时**: 15s
 - **风险级别**: 🟡 中（NetworkPolicy 可能影响合法流量；cordon 会阻止新 Pod 调度）
@@ -501,6 +524,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
 
 **Step D2.5**: 运行时安全事件检查
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查 Falco 日志
   kubectl logs -n falco deploy/falco --since=1h | grep -i "SUSPECT_POD"
@@ -756,6 +783,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
   kubectl get admissionconfiguration -o yaml
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   # 为 Namespace 添加 PSA 标签（warn 模式，不阻止但告警）
   kubectl label namespace NAMESPACE pod-security.kubernetes.io/warn=restricted --overwrite
@@ -773,6 +804,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
   kubectl run test-privileged --image=nginx --privileged -n NAMESPACE --dry-run=server
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   kubectl label namespace NAMESPACE pod-security.kubernetes.io/enforce- pod-security.kubernetes.io/warn-
   ```
@@ -789,6 +824,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
   kubectl get pods -n kube-system -l k8s-app=cilium -o name
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 部署默认拒绝所有入站流量的 NetworkPolicy
   cat <<EOF | kubectl apply -f -
@@ -838,6 +877,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
   EOF
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   kubectl get networkpolicy -n NAMESPACE
   # 预期: 显示已创建的 NetworkPolicy
@@ -846,6 +889,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
   kubectl exec test-pod -n NAMESPACE -- curl -s --max-time 5 external-service.other-namespace.svc || echo "Blocked as expected"
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl delete networkpolicy default-deny-ingress default-deny-egress allow-dns-egress -n NAMESPACE
   ```
@@ -870,6 +917,12 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
   kubectl get secret SECRET_NAME -n NAMESPACE -o yaml > /tmp/secret-backup-$(date +%s).yaml
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 生成新的凭据值（示例：数据库密码）
   NEW_PASSWORD=$(openssl rand -base64 32)
@@ -897,6 +950,11 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
   kubectl logs -l app=AFFECTED_APP -n NAMESPACE --tail=20
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl apply -f /tmp/secret-backup-*.yaml
   kubectl rollout restart deployment DEPLOYMENT_NAME -n NAMESPACE
@@ -919,6 +977,11 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
     jq -r '.verb + " " + .objectRef.resource' | sort | uniq -c | sort -rn
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 创建新的最小权限 Role
   cat <<EOF | kubectl apply -f -
@@ -952,6 +1015,11 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
   kubectl logs -l app=AFFECTED_APP -n NAMESPACE | grep -i "forbidden\|unauthorized"
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 记录操作前需要先备份原有 RoleBinding
   kubectl apply -f /tmp/rolebinding-backup.yaml
@@ -971,6 +1039,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
   done
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 使用 Kyverno 部署镜像签名验证策略
   cat <<EOF | kubectl apply -f -
@@ -1012,6 +1084,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
   kubectl run test-signed --image=signed-image:latest --dry-run=server
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl delete clusterpolicy verify-image-signature
   ```
@@ -1030,6 +1106,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
   kubectl top nodes
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
   ```bash
   # 使用 Helm 部署 Falco
   helm repo add falcosecurity https://falcosecurity.github.io/charts
@@ -1055,9 +1135,14 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
   # 预期: Falco 产生告警
   ```
 - **回滚命令**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
   ```bash
-  helm uninstall falco -n falco
-  kubectl delete namespace falco
+  helm uninstall falco -n falco  # ⚠️ 删除 release 及关联资源
+  kubectl delete namespace falco  # ⚠️ 不可逆：永久删除命名空间及全部资源
   ```
 
 ---
@@ -1074,6 +1159,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
      ls -la /tmp/evidence-*
      ```
   2. **应用严格隔离**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
      ```bash
      # 如果尚未隔离，应用最严格的 NetworkPolicy
      kubectl apply -f - <<EOF
@@ -1092,16 +1181,29 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
      EOF
      ```
   3. **Cordon 并 Drain 受影响节点**（如果节点可能被入侵）:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
      ```bash
      kubectl cordon INFECTED_NODE
      kubectl drain INFECTED_NODE --ignore-daemonsets --delete-emptydir-data --force --grace-period=60
      ```
   4. **删除受感染 Pod**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+
      ```bash
      # 强制删除（不等待优雅终止）
-     kubectl delete pod INFECTED_POD -n NAMESPACE --grace-period=0 --force
+     kubectl delete pod INFECTED_POD -n NAMESPACE --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
      ```
   5. **清理节点**（如果节点层被入侵）:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
      ```bash
      # SSH 到节点
      ssh NODE_IP
@@ -1124,6 +1226,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
   - 确认业务已切换到冗余实例
   - 通知相关团队
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 如果误删除了正常 Pod，重新部署
   kubectl apply -f deployment.yaml
@@ -1164,6 +1270,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
      crane tag IMAGE_REPO:MALICIOUS IMAGE_REPO:QUARANTINED
      ```
   5. **更新准入策略阻止恶意镜像**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
      ```bash
      # 添加黑名单规则
      kubectl apply -f - <<EOF
@@ -1193,6 +1303,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
   - 新镜像签名有效
   - 应用功能正常
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 如果新镜像有问题，回滚到上一个已知安全版本
   kubectl rollout undo deployment/DEPLOYMENT_NAME -n NAMESPACE
@@ -1207,6 +1321,11 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
      kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metadata.name}: {.spec.serviceAccountName}{"\n"}{end}' | grep SA_NAME
      ```
   2. **删除 SA 对应的 Secret（触发轮换）**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      # 对于 legacy token（K8s <1.24）
      TOKEN_SECRET=$(kubectl get sa SA_NAME -n NAMESPACE -o jsonpath='{.secrets[0].name}')
@@ -1218,6 +1337,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
      kubectl apply -f /tmp/sa-backup.yaml
      ```
   3. **重启所有使用该 SA 的 Pod**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
      ```bash
      for deploy in $(kubectl get deploy -n NAMESPACE -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'); do
        SA=$(kubectl get deploy $deploy -n NAMESPACE -o jsonpath='{.spec.template.spec.serviceAccountName}')
@@ -1227,6 +1350,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
      done
      ```
   4. **验证新 Token 正常工作**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
      ```bash
      kubectl exec POD_NAME -n NAMESPACE -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
      # 确认 Token 有效
@@ -1264,6 +1391,11 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
      done
      ```
   2. **部署安全加固措施**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
      ```bash
      # 启用全局 PSA（enforce restricted）
      for ns in $(kubectl get ns -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' | grep -v kube-system); do
@@ -1282,6 +1414,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
      kubectl apply -f enhanced-audit-policy.yaml
      ```
   3. **重建受影响组件**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
      ```bash
      # 重新部署所有可能受影响的工作负载
      kubectl rollout restart deployment --all -n AFFECTED_NAMESPACE
@@ -1290,6 +1426,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
      # （参见 REM-007）
      ```
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 使用备份恢复配置
   kubectl apply -f security-config-backup.yaml
@@ -1320,6 +1460,10 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
      cosign sign --key cosign.key IMAGE
      ```
   3. **部署准入控制策略**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
      ```bash
      # 使用 Kyverno/OPA 强制镜像签名验证
      # 使用 Sigstore Policy Controller
@@ -1341,6 +1485,9 @@ kubectl logs SUSPECT_POD -n NAMESPACE --all-containers > /tmp/evidence-logs.txt
 ## 7. 验证确认
 
 ### 7.1 即时验证（修复后 5-10 分钟内）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # V1: 确认恶意活动已停止
@@ -1636,4 +1783,4 @@ kubectl get events -A --field-selector reason=FailedValidation | grep -c securit
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

@@ -82,7 +82,7 @@ trigger_keywords:
 - certificate expired
 related_domains:
 - domain-01-cluster-fundamentals
-- domain-[[domain-07-platform-engineering/topic-code-analysis/cluster-delete/12-troubleshooting|12-troubleshooting]]
+- domain-[[domain-07-platform-engineering/topic-code-analysis/cluster-delete/12-troubleshooting.md|12-troubleshooting]]
 - domain-03-networking-traffic
 related_topics:
 - node-create/03-condition
@@ -580,7 +580,7 @@ openssl verify -CAfile /etc/kubernetes/pki/ca.crt /var/lib/kubelet/pki/kubelet-c
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/networking|networking]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

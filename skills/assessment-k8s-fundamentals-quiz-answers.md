@@ -34,6 +34,9 @@ created: "2026-05-23"
 
 **参考答案**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 排查步骤：
 
@@ -85,14 +88,14 @@ kubectl describe pod | grep -A5 "ImagePull"
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/Kubernetes Diagnostic Skills Overview|诊断技能总览]]
-- [[skills/troubleshoot-pod-issues|Pod 故障排查]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## Related
 
-- [[skills/ts-node-components|ts-node-components]] — 节点组件故障排查
+- [[skills/ts-node-components.md|ts-node-components]] — 节点组件故障排查
 - [[apiserver-fta]] — API Server 异常故障树分析
 - [[scheduler-fta]] — Scheduler 异常故障树分析
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[skills/assessment-k8s-fundamentals-quiz|assessment-k8s-fundamentals-quiz]] — K8S Fundamentals Quiz
+- [[skills/assessment-k8s-fundamentals-quiz.md|assessment-k8s-fundamentals-quiz]] — K8S Fundamentals Quiz

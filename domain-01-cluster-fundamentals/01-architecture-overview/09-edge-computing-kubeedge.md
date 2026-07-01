@@ -62,7 +62,7 @@ created: "2026-05-23"
 
 # 09 - 边缘计算集成架构 ([[KubeEdge|KubeEdge]]/OpenYurt)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubeedge.io](https://kubeedge.io/) | [[entities/openyurt|openyurt]].io](https://openyurt.io/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubeedge.io](https://kubeedge.io/) | [[entities/openyurt.md|openyurt]].io](https://openyurt.io/)
 
 <!-- chunk: 边缘计算框架对比 -->
 ## 边缘计算框架对比
@@ -328,7 +328,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析

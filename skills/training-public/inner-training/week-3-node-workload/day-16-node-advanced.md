@@ -40,7 +40,7 @@ title: Day 16: Node 节点进阶
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] node labels management
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] node labels management
   - Node taint toleration mechanism
   - Node maintenance cordon drain uncordon
   - Kubernetes node scheduling constraints
@@ -166,6 +166,10 @@ cordon → drain → 维护 → uncordon
 
 ### 任务 1: 节点标签管理 (45min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # Step 1: 查看所有节点标签
 kubectl get nodes --show-labels
@@ -277,6 +281,10 @@ kubectl label node node-worker-1 team-
 
 ### 任务 2: 污点与容忍 (45min)
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # Step 1: 查看节点污点
 kubectl describe node node-worker-1 | grep -A 5 Taints
@@ -353,6 +361,11 @@ kubectl taint nodes node-worker-2 test=noexecute:NoExecute-
 
 ### 任务 3: 节点维护操作 (45min)
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # Step 1: 标记节点不可调度 (cordon)
 kubectl cordon node-worker-1
@@ -397,7 +410,7 @@ echo "=== 执行节点维护 ==="
 # 常见维护操作:
 # - 内核升级: yum update kernel
 # - Docker/Containerd 升级
-# - 磁盘清理: docker system prune
+# - 磁盘清理: docker system prune  # ⚠️ 强制清理，可能杀运行中容器
 # - 硬件更换
 
 # Step 7: 恢复节点调度 (uncordon)
@@ -499,6 +512,7 @@ data:
     1. kubectl get nodes (确认 Ready)
     2. kubectl get pods -A -o wide (确认 Pod 重新调度)
     3. 检查监控指标是否正常
+
 ```
 
 ### 调度约束配置对比
@@ -601,3 +615,5 @@ data:
 ## 明日预告
 
 Day 17 将学习 ACK 节点池的基础概念与创建配置。
+
+```

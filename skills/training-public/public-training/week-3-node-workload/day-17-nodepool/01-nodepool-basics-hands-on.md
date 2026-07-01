@@ -37,7 +37,7 @@ title: Day 17: 节点池基础实操
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 节点池创建
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 节点池创建
   - 新节点加入集群
   - 节点池扩缩容
   - 工作负载调度到节点池
@@ -165,6 +165,9 @@ kubectl get nodes -l node-pool=gpu
 
 ### 3.1 为节点池添加标签
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 批量添加标签（所有 general-compute 节点）
 for node in $(kubectl get nodes -l node-pool=general-compute --no-headers | awk '{print $1}'); do
@@ -199,6 +202,11 @@ evictionHard:
 ```
 
 ### 3.3 节点池生命周期
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 查看节点池状态
@@ -322,6 +330,9 @@ ssh <new-node-ip> sudo journalctl -u kubelet --since "5m" | tail -50
 
 ### 5.2 节点池标签丢失
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 恢复节点标签
 kubectl label node <node-name> node-pool=general-compute --overwrite
@@ -362,6 +373,11 @@ kubectl get events --sort-by='.lastTimestamp' | tail -20
 
 ### 6.1 节点 OS 版本管理
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 查看节点 OS 版本
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.nodeInfo.osImage}{"\n"}'
@@ -378,6 +394,9 @@ done
 ```
 
 ### 6.2 节点 kubelet 版本管理
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 检查 kubelet 版本
@@ -404,3 +423,5 @@ done
 
 ---
 
+
+```

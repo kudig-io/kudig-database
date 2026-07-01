@@ -222,6 +222,9 @@ metadata:
 spec: {}
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 安装 Calico
 kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/calico.yaml
@@ -238,6 +241,9 @@ kubectl get pods -A -o wide
 ```
 
 ### 场景 2: 安装 Cilium CNI
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 使用 Helm 安装 Cilium
@@ -285,6 +291,9 @@ spec:
 # kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 安装 Nginx Ingress
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
@@ -328,6 +337,9 @@ spec:
           protocol: TCP
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 安装 Metrics Server
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
@@ -366,6 +378,9 @@ volumeBindingMode: WaitForFirstConsumer
 reclaimPolicy: Delete
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 安装
 kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.24/deploy/local-path-storage.yaml
@@ -393,6 +408,9 @@ EOF
 ## 配置示例
 
 ### 完整集群初始化脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash
@@ -436,6 +454,9 @@ kubeadm token create --print-join-command
 
 ### 检查集群缺失组件
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查 CNI 是否安装
 kubectl get pods -A | grep -E "calico|cilium|flannel|weave"
@@ -473,6 +494,9 @@ kubectl exec test-dns -- nslookup kubernetes.default
 | `Ingress 404` | Ingress Controller 未安装 | 安装 Nginx/Traefik Ingress |
 
 ### 场景 6: 安装 cert-manager (TLS 自动化)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 cert-manager
@@ -529,6 +553,9 @@ spec:
 
 ### 场景 7: 安装 Kubernetes Dashboard
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 安装 Dashboard
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
@@ -548,6 +575,9 @@ kubectl proxy
 ```
 
 ### 场景 8: 安装 Prometheus 监控栈
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 使用 kube-prometheus-stack (包含 Prometheus + Grafana + Alertmanager)
@@ -587,6 +617,9 @@ kubectl port-forward -n monitoring svc/monitoring-grafana 3000:80
 | Antrea | OVS | 高 | 支持 | 可选 | vSphere 环境 |
 
 ### kubeadm 初始化后完整部署流程
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash
@@ -629,6 +662,11 @@ echo "Join workers: kubeadm token create --print-join-command"
 ```
 
 ### 各 CNI 安装命令速查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # Calico
@@ -696,7 +734,7 @@ kubectl get pods -A -o wide
 ## Related
 
 - [[log|log]]
-- [[man/INSTALL|INSTALL]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/networking|networking]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[scripts/man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

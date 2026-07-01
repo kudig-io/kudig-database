@@ -118,7 +118,7 @@ k8s_versions:
 
 <!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-#<!-- chunk: 1.1 市场规模与趋势 -->## 1.1 市场规模与趋势
+## 1.1 市场规模与趋势
 
 智慧养老通过科技手段提升老年人生活质量和安全保障，应对人口老龄化挑战。中国 60 岁以上老年人口已达 3 亿，预计 2035 年超过 4 亿。智慧养老市场规模预计从 2024 年的 6000 亿元增长到 2030 年的 2 万亿元。核心技术包括 IoT 可穿戴、AI 跌倒检测、远程医疗、智能家居和社区服务聚合平台。
 
@@ -130,7 +130,7 @@ k8s_versions:
 | 跌倒检测准确率 | 90% | 95% | 98% |
 | 可穿戴设备渗透率 | 5% | 15% | 40% |
 
-#<!-- chunk: 1.2 行业痛点 -->## 1.2 行业痛点
+## 1.2 行业痛点
 
 | 痛点 | 说明 | 数字化转型驱动 |
 |:---|:---|:---|
@@ -141,7 +141,7 @@ k8s_versions:
 | 服务整合 | 医疗/家政/送餐分散 | 服务平台聚合 |
 | 隐私担忧 | 监控设备侵犯隐私 | 边缘计算 + 数据脱敏 |
 
-#<!-- chunk: 1.3 数字化转型架构影响 -->## 1.3 数字化转型架构影响
+## 1.3 数字化转型架构影响
 
 智慧养老架构需要覆盖老人端（可穿戴/智能床垫/跌倒雷达/药盒/呼叫按钮）、家庭端（子女APP/视频通话）、平台层（健康监测/紧急呼叫/服务调度/慢病管理）和服务层（社区医院/家政/送餐/养老机构）。核心挑战是适老化交互和误报率控制。
 
@@ -149,23 +149,23 @@ k8s_versions:
 
 <!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-#<!-- chunk: 2.1 居家安全监测 -->## 2.1 居家安全监测
+## 2.1 居家安全监测
 
 通过毫米波雷达（跌倒检测）、燃气报警器、门窗传感器、水浸传感器等设备，24 小时监测独居老人居家安全。跌倒检测无需摄像头，保护隐私。跌倒发生时 30 秒内自动告警至子女和呼叫中心。
 
-#<!-- chunk: 2.2 慢性病健康管理 -->## 2.2 慢性病健康管理
+## 2.2 慢性病健康管理
 
 通过智能手环/血压计/血糖仪持续监测老人健康数据，AI 分析趋势并在异常时通知签约医生和家属。支持用药提醒（智能药盒）、复诊提醒和健康报告生成。
 
-#<!-- chunk: 2.3 紧急呼叫与救援 -->## 2.3 紧急呼叫与救援
+## 2.3 紧急呼叫与救援
 
 老人通过一键呼叫按钮或语音呼救触发紧急救援。系统自动定位老人位置，通知子女、社区服务站和急救中心。支持跌倒自动检测触发（无需手动操作）。
 
-#<!-- chunk: 2.4 智能照护设备 -->## 2.4 智能照护设备
+## 2.4 智能照护设备
 
 智能床垫监测睡眠质量、呼吸和心率；智能药盒按剂量按时提醒服药；定位手环防止走失（电子围栏）；智能音箱提供语音交互和陪伴。
 
-#<!-- chunk: 2.5 养老服务聚合平台 -->## 2.5 养老服务聚合平台
+## 2.5 养老服务聚合平台
 
 整合社区周边的助餐、助洁、助医、助行、助浴等服务资源，老人或子女通过 APP 一键预约。平台统一管理服务质量和费用结算。
 
@@ -173,7 +173,7 @@ k8s_versions:
 
 <!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-#<!-- chunk: 3.1 智慧养老全景架构 -->## 3.1 智慧养老全景架构
+## 3.1 智慧养老全景架构
 
 ```mermaid
 graph TB
@@ -247,7 +247,7 @@ graph TB
 
 <!-- chunk: 5. Kubernetes 部署方案 -->## 5. Kubernetes 部署方案
 
-#<!-- chunk: 5.1 健康监测服务 Deployment -->## 5.1 健康监测服务 Deployment
+## 5.1 健康监测服务 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -332,7 +332,7 @@ spec:
             periodSeconds: 10
 ```
 
-#<!-- chunk: 5.2 紧急呼叫中心 Deployment -->## 5.2 紧急呼叫中心 Deployment
+## 5.2 紧急呼叫中心 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -371,7 +371,7 @@ spec:
               cpu: "2000m"
 ```
 
-#<!-- chunk: 5.3 ConfigMap, Service 与 Secret -->## 5.3 ConfigMap, Service 与 Secret
+## 5.3 ConfigMap, Service 与 Secret
 
 ```yaml
 apiVersion: v1
@@ -439,7 +439,7 @@ stringData:
 
 <!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-#<!-- chunk: 6.1 慢病管理数据流 -->## 6.1 慢病管理数据流
+## 6.1 慢病管理数据流
 
 ```mermaid
 flowchart TB
@@ -476,7 +476,7 @@ flowchart TB
     P3 --> O2 & O3 & O4
 ```
 
-#<!-- chunk: 6.2 数据流说明 -->## 6.2 数据流说明
+## 6.2 数据流说明
 
 - **健康数据流**: 可穿戴/家用医疗设备数据通过蓝牙/WiFi 上传，经 IoT 平台接入后写入 Lindorm
 - **告警数据流**: 异常数据实时触发分级告警（轻度→家属通知，重度→急救中心）
@@ -487,7 +487,7 @@ flowchart TB
 
 <!-- chunk: 7. AI/ML 组件 -->## 7. AI/ML 组件
 
-#<!-- chunk: 7.1 核心模型 -->## 7.1 核心模型
+## 7.1 核心模型
 
 | 模型 | 用途 | 输入 | 输出 | 框架 |
 |:---|:---|:---|:---|:---|
@@ -502,7 +502,7 @@ flowchart TB
 
 <!-- chunk: 8. 安全与合规 -->## 8. 安全与合规
 
-#<!-- chunk: 8.1 行业法规与标准 -->## 8.1 行业法规与标准
+## 8.1 行业法规与标准
 
 | 法规/标准 | 适用范围 | 架构要求 |
 |:---|:---|:---|
@@ -513,7 +513,7 @@ flowchart TB
 | 智慧健康养老标准 | 行业技术标准 | 设备互联互通 |
 | 互联网诊疗管理办法 | 远程医疗合规 | 医疗资质 + 数据安全 |
 
-#<!-- chunk: 8.2 安全架构要点 -->## 8.2 安全架构要点
+## 8.2 安全架构要点
 
 - **隐私优先**: 跌倒检测使用毫米波雷达（非摄像头），保护居家隐私
 - **数据脱敏**: 健康数据脱敏后存储，原始数据加密
@@ -564,17 +564,17 @@ flowchart TB
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

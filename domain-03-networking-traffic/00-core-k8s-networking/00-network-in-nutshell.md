@@ -276,8 +276,6 @@ flowchart LR
 | 生活比喻 | ☎️ 前台**转分机** | 🎭 出门**戴口罩**（伪装身份） |
 | 谁写规则 | `kube-proxy` | CNI / 内核 `MASQUERADE` |
 
-> ⚠️ 记住这个口诀：**`kube-proxy` 不搬包，它只写规则；真正搬包的是内核里的 iptables/IPVS。**
-
 ### 🗺️ 从 Linux 概念到 K8s 概念的映射
 
 ```mermaid
@@ -433,8 +431,6 @@ flowchart LR
   C2 --- NIC
 ```
 
-> ⚠️ 同 Pod 内容器**不能监听相同端口**（会冲突）。
-
 ### 模型 2：Pod ↔ Pod 通信（CNI 主战场）
 
 #### ① 同节点：Linux Bridge + veth pair
@@ -567,8 +563,6 @@ flowchart TB
 | **CoreDNS** | 解析 Service/Pod DNS | 不做转发 |
 | **Ingress Controller** | L7 路由、TLS、限流 | 非默认组件 |
 | **NetworkPolicy 引擎** | 执行 Pod 防火墙 | Flannel 原生不支持 |
-
-> ⚠️ `kube-proxy` 名字带 proxy，**实际不搬数据包**，只是把规则写入 iptables/IPVS，真正搬包的是 Linux 内核。
 
 ---
 
@@ -824,8 +818,6 @@ spec:
           port: 5432
 ```
 
-> ⚠️ **要让策略生效，CNI 必须支持它**。Flannel 原生不支持，需要换 Calico / Cilium，或叠加 Calico Policy-Only 模式。
-
 ---
 
 <!-- chunk: 🔎 服务发现：CoreDNS -->
@@ -860,6 +852,9 @@ flowchart LR
 ### 🌱 零基础 10 行命令先爽一把（强烈建议先跑这个）
 
 如果你此刻还没有任何 K8s 基础，**先花 3 分钟跑完下面这 10 行命令**，对"Pod / Service / 访问"有个直观感觉，再回头看概念会无比清晰。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 装工具（macOS，Linux 换成对应包管理器）
@@ -961,6 +956,9 @@ flowchart TB
 
 先体验最简单的 Flannel：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
 kubectl get nodes -w          # 逐个变 Ready
@@ -970,6 +968,9 @@ kubectl -n kube-system get pod -o wide
 > 想体验 NetworkPolicy/eBPF？把 Flannel 换成 Calico 或 Cilium（见下面 §7）。
 
 ### 3. 验证「模型 ①+②」：Pod 内 & Pod↔Pod
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 起三个 Pod，分散到不同节点
@@ -1008,6 +1009,9 @@ kubectl run tmp --rm -it --image=busybox:1.36 --restart=Never -- sh
 
 #### 5.1 NodePort（最朴素）
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch svc web -p '{"spec":{"type":"NodePort","ports":[{"port":80,"nodePort":30080}]}}'
 
@@ -1020,6 +1024,9 @@ curl http://localhost:8080
 #### 5.2 Ingress（生产标准）
 
 安装 ingress-nginx（已适配 kind）：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/deploy-ingress-nginx.yaml
@@ -1052,6 +1059,9 @@ spec:
                   number: 80
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply -f web-ingress.yaml
 curl http://demo.localtest.me     # 因为 kind 已映射宿主机 80，这里直接通
@@ -1071,6 +1081,9 @@ flowchart LR
 ### 6. 验证 NetworkPolicy（需换 CNI）
 
 Flannel 不支持策略，删集群换 Calico：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 kind delete cluster --name net-lab
@@ -1092,6 +1105,9 @@ spec:
   policyTypes: [Ingress]
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply -f deny-all.yaml
 # 再去 curl Service，应全部超时
@@ -1099,6 +1115,9 @@ kubectl apply -f deny-all.yaml
 ```
 
 ### 7. 进阶：换 Cilium，体验 eBPF + Hubble 可视化
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 kind delete cluster --name net-lab
@@ -1566,7 +1585,7 @@ flowchart LR
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
 - 网络核心组件
@@ -1587,5 +1606,5 @@ flowchart LR
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]

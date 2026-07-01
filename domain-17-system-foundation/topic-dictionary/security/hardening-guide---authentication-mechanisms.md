@@ -32,11 +32,11 @@ created: "2026-05-23"
 
 ## 概述
 
-选择适当的认证机制是保护集群安全的关键方面。[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 提供了多种内置认证机制，每种机制都有其自身的优缺点，在选择最佳认证方案时需要仔细权衡。通常建议启用尽可能少的认证机制，以简化用户管理并防止用户保留不再需要的集群访问权限。需要注意的是，Kubernetes 集群内部没有内置的用户数据库，而是从配置的认证系统中获取用户信息并用于授权决策。
+选择适当的认证机制是保护集群安全的关键方面。[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 提供了多种内置认证机制，每种机制都有其自身的优缺点，在选择最佳认证方案时需要仔细权衡。通常建议启用尽可能少的认证机制，以简化用户管理并防止用户保留不再需要的集群访问权限。需要注意的是，Kubernetes 集群内部没有内置的用户数据库，而是从配置的认证系统中获取用户信息并用于授权决策。
 
 ## 核心概念/原理
 
-对于具有多个用户直接访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 的生产集群，**建议使用外部认证源（如 OIDC）**。内部认证机制（如下文所述的客户端证书和服务账号令牌）不适合人类用户的生产用例。
+对于具有多个用户直接访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 的生产集群，**建议使用外部认证源（如 OIDC）**。内部认证机制（如下文所述的客户端证书和服务账号令牌）不适合人类用户的生产用例。
 
 ## 关键机制或特性
 
@@ -123,3 +123,9 @@ Webhook 令牌认证允许通过 webhook 联系内部或外部的认证服务进
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/security/hardening-guide/authentication-mechanisms/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/security/admission-controller.md|准入控制器]]
+- [[domain-17-system-foundation/topic-dictionary/security/application-security-checklist.md|应用安全清单]]
+- [[domain-17-system-foundation/topic-dictionary/security/athenz.md|Athenz 身份认证与授权]]

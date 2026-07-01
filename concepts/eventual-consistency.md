@@ -48,7 +48,7 @@ Kubernetes chooses **CP** (Consistency + Partition Tolerance) at the storage lay
 
 ## Convergence Model
 
-Each [[concepts/controller-pattern|Controller]] independently reconciles its resources:
+Each [[concepts/controller-pattern.md|Controller]] independently reconciles its resources:
 - A Deployment Controller creates a ReplicaSet
 - The ReplicaSet Controller creates Pods
 - The kubelet on each node starts containers
@@ -65,12 +65,12 @@ These controllers do not coordinate directly; they all read/write through API Se
 
 ## Related
 
-- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
-- [[concepts/high-availability-patterns|high-availability-patterns]] — High Availability Patterns
-- [[concepts/controller-pattern|Controller Pattern]]
-- [[concepts/kubernetes-architecture-overview|Kubernetes Architecture Overview]]
+- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
+- [[concepts/controller-pattern.md|Controller Pattern]]
+- [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
 - [[etcd|etcd]]
-- [[concepts/high-availability-patterns|High Availability Patterns]]
+- [[concepts/high-availability-patterns.md|High Availability Patterns]]

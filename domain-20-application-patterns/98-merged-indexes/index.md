@@ -5,6 +5,7 @@ tags: ["index", "domain-20-application-patterns", "navigation"]
 sources: ["auto-generated"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 ---
 
 # Domain 20 内容索引
@@ -221,5 +222,5 @@ updated: 2026-05-21
 - [[README]] — README
 
 ## 相关 Domain
-- [[domain-02-workloads-applications/98-merged-indexes/index|Domain 02 工作负载与应用 索引]]
-- [[domain-14-ai-ml-infra/98-merged-indexes/index|Domain 14 AI/ML 基础设施 索引]]
+- [[domain-02-workloads-applications/98-merged-indexes/index.md|Domain 02 工作负载与应用 索引]]
+- [[domain-14-ai-ml-infra/98-merged-indexes/index.md|Domain 14 AI/ML 基础设施 索引]]

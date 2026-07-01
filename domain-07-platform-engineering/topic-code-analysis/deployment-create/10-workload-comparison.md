@@ -367,8 +367,8 @@ spec:
 
 ## Related
 
-- [[concepts/deployment-controller-architecture|deployment-controller-architecture]]
-- [[entities/kubernetes|kubernetes]]
-- [[entities/cni|cni]]
-- [[domain-17-system-foundation/topic-cheat-sheet/sql|sql]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/daemonset|daemonset]]
+- [[concepts/deployment-controller-architecture.md|deployment-controller-architecture]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/cni.md|cni]]
+- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/daemonset.md|daemonset]]

@@ -46,7 +46,7 @@ LoxiLB 是一个基于 eBPF 的云原生负载均衡器，专注于为 Kubernete
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -62,7 +62,7 @@ LoxiLB 是一个基于 eBPF 的云原生负载均衡器，专注于为 Kubernete
 
 ## 参考链接
 
-- [[concepts/cilium-ebpf-networking|cilium-ebpf-networking]]
+- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
 
 ## Related
 
@@ -73,4 +73,4 @@ LoxiLB 是一个基于 eBPF 的云原生负载均衡器，专注于为 Kubernete
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - loxilb
-- [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
+- [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference

@@ -92,7 +92,7 @@ k8s_versions:
 
 <!-- chunk: 一、API 资源信息 -->## 一、API 资源信息
 
-#<!-- chunk: 1.1 基本信息 -->## 1.1 基本信息
+## 1.1 基本信息
 
 ```yaml
 # API 元数据
@@ -113,7 +113,7 @@ metadata:
 - **生命周期独立**: PV 可以独立于 PVC 存在
 - **容量单位**: 支持 Ki, Mi, Gi, Ti, Pi, Ei (二进制)
 
-#<!-- chunk: 1.2 核心字段结构 -->## 1.2 核心字段结构
+## 1.2 核心字段结构
 
 ```yaml
 spec:
@@ -137,7 +137,7 @@ status:
 
 <!-- chunk: 二、完整字段详解 -->## 二、完整字段详解
 
-#<!-- chunk: 2.1 容量声明 (capacity) -->## 2.1 容量声明 (capacity)
+## 2.1 容量声明 (capacity)
 
 ```yaml
 spec:
@@ -152,7 +152,7 @@ spec:
 - 云盘场景严格匹配云供应商规格 (如阿里云盘最小 20Gi)
 - 本地盘使用 `du -sh` 精确测量可用容量
 
-#<!-- chunk: 2.2 访问模式 (accessModes) -->## 2.2 访问模式 (accessModes)
+## 2.2 访问模式 (accessModes)
 
 ```yaml
 spec:
@@ -184,7 +184,7 @@ spec:
        └─ 否 → ROX
 ```
 
-#<!-- chunk: 2.3 回收策略 (persistentVolumeReclaimPolicy) -->## 2.3 回收策略 (persistentVolumeReclaimPolicy)
+## 2.3 回收策略 (persistentVolumeReclaimPolicy)
 
 ```yaml
 spec:
@@ -213,7 +213,7 @@ persistentVolumeReclaimPolicy: Retain
 # 5. 重新创建 PV 供新 PVC 使用
 ```
 
-#<!-- chunk: 2.4 存储类 (storageClassName) -->## 2.4 存储类 (storageClassName)
+## 2.4 存储类 (storageClassName)
 
 ```yaml
 spec:
@@ -230,7 +230,7 @@ spec:
 | 空字符串 `""` | PVC 也必须显式设置空字符串 | 遗留系统兼容,不使用 StorageClass |
 | 不设置该字段 | 匹配未设置 storageClassName 的 PVC | 早期版本(v1.6 之前)兼容 |
 
-#<!-- chunk: 2.5 卷模式 (volumeMode) -->## 2.5 卷模式 (volumeMode)
+## 2.5 卷模式 (volumeMode)
 
 ```yaml
 spec:
@@ -265,7 +265,7 @@ spec:
       devicePath: /dev/xvda     # 块设备路径
 ```
 
-#<!-- chunk: 2.6 挂载选项 (mountOptions) -->## 2.6 挂载选项 (mountOptions)
+## 2.6 挂载选项 (mountOptions)
 
 ```yaml
 spec:
@@ -303,7 +303,7 @@ mountOptions:
   - nobarrier                     # 禁用写屏障(电池备份 RAID 卡)
 ```
 
-#<!-- chunk: 2.7 节点亲和性 (nodeAffinity) -->## 2.7 节点亲和性 (nodeAffinity)
+## 2.7 节点亲和性 (nodeAffinity)
 
 ```yaml
 spec:
@@ -331,7 +331,7 @@ spec:
 - 与 StorageClass 的 `volumeBindingMode: WaitForFirstConsumer` 配合使用
 - 影响 Pod 调度(只能调度到匹配节点)
 
-#<!-- chunk: 2.8 绑定引用 (claimRef) -->## 2.8 绑定引用 (claimRef)
+## 2.8 绑定引用 (claimRef)
 
 ```yaml
 spec:
@@ -371,7 +371,7 @@ spec:
 
 <!-- chunk: 三、卷源类型 (Volume Sources) -->## 三、卷源类型 (Volume Sources)
 
-#<!-- chunk: 3.1 HostPath (开发/测试) -->## 3.1 HostPath (开发/测试)
+## 3.1 HostPath (开发/测试)
 
 ```yaml
 spec:
@@ -405,7 +405,7 @@ spec:
 # - 可能逃逸容器访问节点文件系统
 ```
 
-#<!-- chunk: 3.2 Local (生产级本地卷) -->## 3.2 Local (生产级本地卷)
+## 3.2 Local (生产级本地卷)
 
 ```yaml
 spec:
@@ -477,7 +477,7 @@ sudo mount -a
 df -h /mnt/disks/ssd1
 ```
 
-#<!-- chunk: 3.3 NFS (网络文件系统) -->## 3.3 NFS (网络文件系统)
+## 3.3 NFS (网络文件系统)
 
 ```yaml
 spec:
@@ -515,6 +515,10 @@ spec:
 ```
 
 **NFS 服务器配置**(Ubuntu 示例):
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 安装 NFS 服务器
 sudo apt-get install nfs-kernel-server
@@ -544,7 +548,7 @@ sudo yum install nfs-utils       # CentOS/RHEL
 sudo mount -t nfs4 nfs.example.com:/data/k8s/shared /mnt/test
 ```
 
-#<!-- chunk: 3.4 iSCSI (企业级块存储) -->## 3.4 iSCSI (企业级块存储)
+## 3.4 iSCSI (企业级块存储)
 
 ```yaml
 spec:
@@ -595,7 +599,7 @@ sudo iscsiadm -m node -T iqn.2024-01.com.example:storage.lun1 -p 192.168.1.200:3
 lsblk  # 查看新增块设备
 ```
 
-#<!-- chunk: 3.5 CSI (容器存储接口) -->## 3.5 CSI (容器存储接口)
+## 3.5 CSI (容器存储接口)
 
 ```yaml
 spec:
@@ -623,7 +627,7 @@ spec:
 
 **主流 CSI 驱动示例**:
 
-##<!-- chunk: AWS EBS CSI -->## AWS EBS CSI
+## AWS EBS CSI
 ```yaml
 spec:
   csi:
@@ -636,7 +640,7 @@ spec:
       throughput: "125"           # 吞吐量 MB/s
 ```
 
-##<!-- chunk: Azure Disk CSI -->## Azure Disk CSI
+## Azure Disk CSI
 ```yaml
 spec:
   csi:
@@ -648,7 +652,7 @@ spec:
       cachingMode: ReadOnly       # 缓存模式
 ```
 
-##<!-- chunk: Alibaba Cloud Disk CSI -->## Alibaba Cloud Disk CSI
+## Alibaba Cloud Disk CSI
 ```yaml
 spec:
   csi:
@@ -660,9 +664,7 @@ spec:
       performanceLevel: PL1       # 性能级别
 ```
 
-#<!-- chunk: 3.6 云盘卷源 (已废弃) -->## 3.6 云盘卷源 (已废弃)
-
-> ⚠️ **废弃警告**: 以下内置云盘卷源在 v1.26+ 标记为废弃,v1.31+ 完全移除,请迁移到对应 CSI 驱动
+## 3.6 云盘卷源 (已废弃)
 
 ```yaml
 # ❌ 已废弃 - 仅用于遗留集群
@@ -690,7 +692,7 @@ spec:
 
 <!-- chunk: 四、生命周期管理 -->## 四、生命周期管理
 
-#<!-- chunk: 4.1 PV 生命周期阶段 -->## 4.1 PV 生命周期阶段
+## 4.1 PV 生命周期阶段
 
 ```yaml
 status:
@@ -734,7 +736,7 @@ status:
 | **Released** | PVC 已删除,PV 保留(Retain) | 非空 | 保留 | 手动清理+删除 |
 | **Failed** | 自动回收失败 | - | 不确定 | 检查日志修复 |
 
-#<!-- chunk: 4.2 绑定机制 -->## 4.2 绑定机制
+## 4.2 绑定机制
 
 **绑定算法**(PV Controller):
 ```go
@@ -776,7 +778,12 @@ func findMatchingPV(pvc *PVC) *PV {
 - ✅ PV 的 claimRef 为空或指向当前 PVC
 - ✅ nodeAffinity 与 Pod 调度节点兼容(WaitForFirstConsumer 模式)
 
-#<!-- chunk: 4.3 手动回收流程 (Retain 策略) -->## 4.3 手动回收流程 (Retain 策略)
+## 4.3 手动回收流程 (Retain 策略)
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 场景: PVC 被删除,PV 变为 Released 状态,需要回收复用
@@ -803,7 +810,7 @@ tar czf /tmp/backup.tar.gz /mnt/nfs-mount/
 
 # 步骤 3: 清理数据
 # 登录节点或通过 Pod 执行
-rm -rf /mnt/disks/ssd1/*         # Local
+rm -rf /mnt/disks/ssd1/*         # Local  # ⚠️ 删除系统/数据文件
 # 或重新格式化
 mkfs.ext4 /dev/nvme1n1p1
 
@@ -820,6 +827,10 @@ kubectl apply -f new-pvc.yaml
 ```
 
 **自动化回收脚本**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 #!/bin/bash
 # reclaim-pv.sh - 自动回收 Released 状态的 PV
@@ -860,7 +871,7 @@ echo "PV $PV_NAME 已回收"
 
 <!-- chunk: 五、内部原理 -->## 五、内部原理
 
-#<!-- chunk: 5.1 PV Controller 工作机制 -->## 5.1 PV Controller 工作机制
+## 5.1 PV Controller 工作机制
 
 **核心组件**:
 - **PV Controller**: 运行在 kube-controller-manager 中
@@ -908,7 +919,7 @@ echo "PV $PV_NAME 已回收"
 └──────────┘  └──────────────────┘
 ```
 
-#<!-- chunk: 5.2 绑定优化算法 -->## 5.2 绑定优化算法
+## 5.2 绑定优化算法
 
 **最小满足原则**:
 ```yaml
@@ -936,7 +947,7 @@ volumeBindingMode: WaitForFirstConsumer
 # 5. PVC 变为 Bound, Pod 继续启动
 ```
 
-#<!-- chunk: 5.3 存储拓扑感知 -->## 5.3 存储拓扑感知
+## 5.3 存储拓扑感知
 
 **原理**:
 ```yaml
@@ -987,7 +998,7 @@ allowedTopologies:                # 限制 PV 创建的拓扑域
 
 <!-- chunk: 六、配置模板 -->## 六、配置模板
 
-#<!-- chunk: 6.1 最小配置 (开发环境) -->## 6.1 最小配置 (开发环境)
+## 6.1 最小配置 (开发环境)
 
 ```yaml
 apiVersion: v1
@@ -1004,7 +1015,7 @@ spec:
     type: DirectoryOrCreate
 ```
 
-#<!-- chunk: 6.2 生产级 Local PV -->## 6.2 生产级 Local PV
+## 6.2 生产级 Local PV
 
 ```yaml
 apiVersion: v1
@@ -1045,7 +1056,7 @@ spec:
           - i3.2xlarge                     # AWS 实例类型
 ```
 
-#<!-- chunk: 6.3 生产级 NFS PV -->## 6.3 生产级 NFS PV
+## 6.3 生产级 NFS PV
 
 ```yaml
 apiVersion: v1
@@ -1075,7 +1086,7 @@ spec:
     path: /exports/k8s/shared-logs
 ```
 
-#<!-- chunk: 6.4 生产级 CSI PV (AWS EBS) -->## 6.4 生产级 CSI PV (AWS EBS)
+## 6.4 生产级 CSI PV (AWS EBS)
 
 ```yaml
 apiVersion: v1
@@ -1117,7 +1128,7 @@ spec:
 
 <!-- chunk: 七、生产案例 -->## 七、生产案例
 
-#<!-- chunk: 7.1 案例 1: 高性能数据库 Local PV -->## 7.1 案例 1: 高性能数据库 Local PV
+## 7.1 案例 1: 高性能数据库 Local PV
 
 **场景**: PostgreSQL 数据库,要求低延迟、高 IOPS
 
@@ -1265,6 +1276,10 @@ sudo rm /mnt/disks/nvme0n1/test
 ```
 
 **性能验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 在 Pod 内测试
 kubectl exec -it postgresql-0 -- bash
@@ -1277,7 +1292,7 @@ fio --name=randwrite --ioengine=libaio --iodepth=32 --rw=randwrite --bs=8k --dir
 # - 延迟: < 1ms
 ```
 
-#<!-- chunk: 7.2 案例 2: 共享文件系统 NFS PV -->## 7.2 案例 2: 共享文件系统 NFS PV
+## 7.2 案例 2: 共享文件系统 NFS PV
 
 **场景**: 多个 Web 服务器共享静态资源(图片、CSS、JS)
 
@@ -1290,6 +1305,10 @@ NFS 服务器: 1 台专用服务器 (nfs.example.com)
 ```
 
 **NFS 服务器配置**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 安装 NFS 服务器 (Ubuntu 22.04)
 sudo apt-get update
@@ -1433,7 +1452,7 @@ done
 
 <!-- chunk: 八、故障排查 -->## 八、故障排查
 
-#<!-- chunk: 8.1 PV 无法绑定 -->## 8.1 PV 无法绑定
+## 8.1 PV 无法绑定
 
 **症状**:
 ```bash
@@ -1484,7 +1503,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep persiste
 | WaitForFirstConsumer 需 Pod | 创建使用该 PVC 的 Pod 才会触发绑定 |
 | PV 已有 claimRef | 删除或修改 claimRef 字段 |
 
-#<!-- chunk: 8.2 Local PV 挂载失败 -->## 8.2 Local PV 挂载失败
+## 8.2 Local PV 挂载失败
 
 **症状**:
 ```bash
@@ -1540,7 +1559,7 @@ sudo fsck -y /dev/nvme0n1p1    # 自动修复
 sudo mount /mnt/disks/ssd1
 ```
 
-#<!-- chunk: 8.3 NFS 挂载超时 -->## 8.3 NFS 挂载超时
+## 8.3 NFS 挂载超时
 
 **症状**:
 ```bash
@@ -1600,7 +1619,7 @@ sudo apt-get install -y nfs-common  # Ubuntu
 sudo yum install -y nfs-utils       # CentOS
 ```
 
-#<!-- chunk: 8.4 PV Released 无法复用 -->## 8.4 PV Released 无法复用
+## 8.4 PV Released 无法复用
 
 **症状**:
 ```bash
@@ -1614,6 +1633,10 @@ kubectl get pv
 **原因**: PV 的 `spec.claimRef` 仍指向已删除的 PVC
 
 **解决方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方法 1: 移除 claimRef
 kubectl patch pv my-pv -p '{"spec":{"claimRef":null}}'
@@ -1634,7 +1657,7 @@ kubectl get pv my-pv
 
 <!-- chunk: 九、最佳实践总结 -->## 九、最佳实践总结
 
-#<!-- chunk: 9.1 容量规划 -->## 9.1 容量规划
+## 9.1 容量规划
 
 ```yaml
 # ✅ 推荐
@@ -1646,7 +1669,7 @@ capacity:
   storage: 100Gi                  # 磁盘 100GB, PV 100Gi 会导致空间不足
 ```
 
-#<!-- chunk: 9.2 回收策略 -->## 9.2 回收策略
+## 9.2 回收策略
 
 ```yaml
 # ✅ 生产环境
@@ -1656,7 +1679,7 @@ persistentVolumeReclaimPolicy: Retain    # 防止数据意外丢失
 persistentVolumeReclaimPolicy: Delete    # 自动清理节省空间
 ```
 
-#<!-- chunk: 9.3 存储类选择 -->## 9.3 存储类选择
+## 9.3 存储类选择
 
 ```yaml
 # ✅ 显式设置
@@ -1669,7 +1692,7 @@ storageClassName: ""                     # 仅用于不使用 StorageClass 的�
 # 不设置 storageClassName                # 可能匹配意外的 PVC
 ```
 
-#<!-- chunk: 9.4 访问模式 -->## 9.4 访问模式
+## 9.4 访问模式
 
 ```yaml
 # ✅ 根据应用特性选择
@@ -1682,7 +1705,7 @@ storageClassName: ""                     # 仅用于不使用 StorageClass 的�
 accessModes: [ReadWriteOnce, ReadWriteMany]  # 不要同时声明多个模式
 ```
 
-#<!-- chunk: 9.5 监控与告警 -->## 9.5 监控与告警
+## 9.5 监控与告警
 
 ```bash
 # 关键指标
@@ -1696,7 +1719,7 @@ kubectl get pv -o json | jq -r '.items[] | select(.status.phase!="Bound") | .met
 kubectl get events --field-selector involvedObject.kind=PersistentVolumeClaim --sort-by='.lastTimestamp'
 ```
 
-#<!-- chunk: 9.6 备份策略 -->## 9.6 备份策略
+## 9.6 备份策略
 
 ```yaml
 # 方案 1: VolumeSnapshot (CSI 驱动支持)
@@ -1749,19 +1772,19 @@ spec:
 
 <!-- chunk: 十、参考资源 -->## 十、参考资源
 
-#<!-- chunk: 10.1 官方文档 -->## 10.1 官方文档
+## 10.1 官方文档
 
 - [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 - Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)
 - Volume Snapshots](https://kubernetes.io/docs/concepts/storage/volume-snapshots/)
 
-#<!-- chunk: 10.2 相关 KEP -->## 10.2 相关 KEP
+## 10.2 相关 KEP
 
 - [KEP-1412: Immutable Secrets and ConfigMaps](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/1412-immutable-secrets-configmaps)
 - [KEP-1432: Volume Health Monitoring](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/1432-volume-health-monitor)
 - [KEP-2485: ReadWriteOncePod Access Mode](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/2485-read-write-once-pod-pv-access-mode)
 
-#<!-- chunk: 10.3 版本差异 -->## 10.3 版本差异
+## 10.3 版本差异
 
 | 功能 | v1.25 | v1.26 | v1.27 | v1.28 | v1.29 | v1.30 | v1.31 | v1.32 |
 |------|-------|-------|-------|-------|-------|-------|-------|-------|
@@ -1779,7 +1802,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -1800,6 +1823,6 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]

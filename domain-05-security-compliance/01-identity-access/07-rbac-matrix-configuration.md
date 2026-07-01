@@ -60,7 +60,7 @@ created: "2026-05-23"
 
 # 07 - RBAC权限矩阵表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/reference/access-authn-authz/rbac](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/reference/access-authn-authz/rbac](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
 
 <!-- chunk: 内置ClusterRole -->
 ## 内置ClusterRole
@@ -598,6 +598,9 @@ spec:
           audience: https://kubernetes.default.svc
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 手动创建限时Token
 kubectl create token app-sa \
@@ -817,14 +820,11 @@ roleRef:
 |-----|---------|
 | v1.24 | 不再自动创建Secret for SA, 使用TokenRequest API |
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 | v1.25 | PodSecurityPolicy彻底移除 |
 | v1.27 | `kubectl auth whoami`命令添加 |
-| v1.28 | ValidatingAdmissionPolicy GA |
+| v1.28 | ValidatingAdmissionPolicy Beta（默认开启）|
 | v1.29 | 改进的审计日志格式 |
+| v1.30 | ValidatingAdmissionPolicy GA（CEL 原生准入验证）|
 
 ---
 
@@ -840,8 +840,8 @@ roleRef:
 ## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Security Domain]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-7 安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Security Domain]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
 - Kubernetes 认证授权体系详解
 - 网络安全策略与零信任架构
 - 运行时安全防护与威胁检测
@@ -859,8 +859,8 @@ roleRef:
 - 08-security-best-practices
 - 09-security-hardening-production
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

@@ -76,7 +76,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. SLSA 框架概述 -->## 1. SLSA 框架概述
 
-#<!-- chunk: 1.1 SLSA 设计理念 -->## 1.1 SLSA 设计理念
+## 1.1 SLSA 设计理念
 
 SLSA（读作 "salsa"）是 Google 在 2021 年提出并开源给 OpenSSF 维护的供应链安全框架。其核心理念是：
 
@@ -103,7 +103,7 @@ graph LR
     Build --> Verify
 ```
 
-#<!-- chunk: 1.2 SLSA 防御的威胁 -->## 1.2 SLSA 防御的威胁
+## 1.2 SLSA 防御的威胁
 
 ```
 SLSA 防御矩阵 (SLSA v1.0):
@@ -122,7 +122,7 @@ H: 欺骗消费者使用恶意制品            ❌   ✅   ✅   ✅
 ✅ = 完全防御  ~ = 部分防御  ❌ = 不防御
 ```
 
-#<!-- chunk: 1.3 SLSA v1.0 架构 -->## 1.3 SLSA v1.0 架构
+## 1.3 SLSA v1.0 架构
 
 ```
 SLSA v1.0 核心概念:
@@ -145,7 +145,7 @@ SLSA v1.0 核心概念:
 
 <!-- chunk: 2. SLSA 级别详解 L1-L4 -->## 2. SLSA 级别详解 L1-L4
 
-#<!-- chunk: 2.1 总体概览 -->## 2.1 总体概览
+## 2.1 总体概览
 
 ```mermaid
 graph TB
@@ -169,7 +169,7 @@ graph TB
     style L4 fill:#00c851,color:#fff
 ```
 
-#<!-- chunk: 2.2 SLSA Build L1 详解 -->## 2.2 SLSA Build L1 详解
+## 2.2 SLSA Build L1 详解
 
 **要求概述：** 提供基础的构建出处，证明制品来自特定源码。
 
@@ -261,7 +261,7 @@ jobs:
             ./provenance.json
 ```
 
-#<!-- chunk: 2.3 SLSA Build L2 详解 -->## 2.3 SLSA Build L2 详解
+## 2.3 SLSA Build L2 详解
 
 **要求概述：** 使用托管构建服务，出处由构建服务生成并签名，防止篡改。
 
@@ -357,7 +357,7 @@ jobs:
             SHA256SUMS
 ```
 
-#<!-- chunk: 2.4 SLSA Build L3 详解 -->## 2.4 SLSA Build L3 详解
+## 2.4 SLSA Build L3 详解
 
 **要求概述：** 强化的构建平台，提供不可伪造的出处，构建者无法访问签名密钥。
 
@@ -465,7 +465,7 @@ jobs:
           echo "image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}" >> $GITHUB_OUTPUT
 ```
 
-#<!-- chunk: 2.5 SLSA Build L4 详解 -->## 2.5 SLSA Build L4 详解
+## 2.5 SLSA Build L4 详解
 
 **要求概述：** 最高级别保证，要求密封构建、可重现构建和两人审查。
 
@@ -499,7 +499,7 @@ SLSA L4 额外要求（在 L3 基础上）:
 
 <!-- chunk: 3. 构建出处 (Build Provenance) -->## 3. 构建出处 (Build Provenance)
 
-#<!-- chunk: 3.1 出处格式规范 -->## 3.1 出处格式规范
+## 3.1 出处格式规范
 
 ```json
 // SLSA v1.0 出处格式完整示例
@@ -583,7 +583,7 @@ SLSA L4 额外要求（在 L3 基础上）:
 }
 ```
 
-#<!-- chunk: 3.2 in-toto 证明框架 -->## 3.2 in-toto 证明框架
+## 3.2 in-toto 证明框架
 
 in-toto 是 SLSA 出处的底层框架，提供通用的供应链完整性证明机制。
 
@@ -702,7 +702,7 @@ def verify_provenance_fields(provenance: dict) -> list:
     return issues
 ```
 
-#<!-- chunk: 3.3 构建参数完整性 -->## 3.3 构建参数完整性
+## 3.3 构建参数完整性
 
 ```bash
 #!/bin/bash
@@ -776,7 +776,7 @@ capture_build_context "build-context.json"
 
 <!-- chunk: 4. 源码完整性 (Source Integrity) -->## 4. 源码完整性 (Source Integrity)
 
-#<!-- chunk: 4.1 Git 提交完整性保护 -->## 4.1 Git 提交完整性保护
+## 4.1 Git 提交完整性保护
 
 ```bash
 # 源码完整性保护措施
@@ -846,7 +846,7 @@ kubernetes/ @security-team @platform-team
 EOF
 ```
 
-#<!-- chunk: 4.2 源码审计追踪 -->## 4.2 源码审计追踪
+## 4.2 源码审计追踪
 
 ```python
 #!/usr/bin/env python3
@@ -962,7 +962,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 5. 密封构建 (Hermetic Builds) -->## 5. 密封构建 (Hermetic Builds)
 
-#<!-- chunk: 5.1 密封构建原则 -->## 5.1 密封构建原则
+## 5.1 密封构建原则
 
 ```
 密封构建 (Hermetic Builds) 原则:
@@ -983,7 +983,7 @@ if __name__ == "__main__":
   ✅ 文件系统只读（除输出目录）
 ```
 
-#<!-- chunk: 5.2 实现密封的 Go 构建 -->## 5.2 实现密封的 Go 构建
+## 5.2 实现密封的 Go 构建
 
 ```dockerfile
 # 密封 Go 构建 Dockerfile
@@ -1043,7 +1043,7 @@ EXPOSE 8080
 ENTRYPOINT ["/app"]
 ```
 
-#<!-- chunk: 5.3 Bazel 密封构建 -->## 5.3 Bazel 密封构建
+## 5.3 Bazel 密封构建
 
 ```python
 # BUILD.bazel - Bazel 密封构建配置
@@ -1095,7 +1095,7 @@ http_file(
 )
 ```
 
-#<!-- chunk: 5.4 网络隔离构建配置 -->## 5.4 网络隔离构建配置
+## 5.4 网络隔离构建配置
 
 ```yaml
 # Kubernetes Job - 密封构建（无网络访问）
@@ -1199,7 +1199,7 @@ spec:
 
 <!-- chunk: 6. 可重现构建 (Reproducible Builds) -->## 6. 可重现构建 (Reproducible Builds)
 
-#<!-- chunk: 6.1 可重现构建基础 -->## 6.1 可重现构建基础
+## 6.1 可重现构建基础
 
 ```
 可重现构建 (Reproducible Builds):
@@ -1224,7 +1224,7 @@ Go 可重现构建最佳实践:
   ─ 固定 Go 版本
 ```
 
-#<!-- chunk: 6.2 Go 可重现构建实现 -->## 6.2 Go 可重现构建实现
+## 6.2 Go 可重现构建实现
 
 ```bash
 #!/bin/bash
@@ -1296,7 +1296,7 @@ else
 fi
 ```
 
-#<!-- chunk: 6.3 Docker 镜像可重现构建 -->## 6.3 Docker 镜像可重现构建
+## 6.3 Docker 镜像可重现构建
 
 ```dockerfile
 # 可重现的容器镜像构建
@@ -1382,7 +1382,7 @@ fi
 
 <!-- chunk: 7. GitHub Actions 实施指南 -->## 7. GitHub Actions 实施指南
 
-#<!-- chunk: 7.1 完整的 SLSA L3 工作流 -->## 7.1 完整的 SLSA L3 工作流
+## 7.1 完整的 SLSA L3 工作流
 
 ```yaml
 # .github/workflows/slsa-l3-release.yml
@@ -1651,7 +1651,7 @@ jobs:
 
 <!-- chunk: 8. Tekton Chains 实施指南 -->## 8. Tekton Chains 实施指南
 
-#<!-- chunk: 8.1 Tekton Chains 架构 -->## 8.1 Tekton Chains 架构
+## 8.1 Tekton Chains 架构
 
 ```mermaid
 graph TD
@@ -1672,7 +1672,11 @@ graph TD
     style Attest fill:#10ac84,color:#fff
 ```
 
-#<!-- chunk: 8.2 Tekton Chains 安装配置 -->## 8.2 Tekton Chains 安装配置
+## 8.2 Tekton Chains 安装配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 安装 Tekton Pipelines
@@ -1707,7 +1711,7 @@ kubectl get pods -n tekton-chains
 kubectl get configmap chains-config -n tekton-chains -o yaml
 ```
 
-#<!-- chunk: 8.3 Tekton Pipeline 配置 -->## 8.3 Tekton Pipeline 配置
+## 8.3 Tekton Pipeline 配置
 
 ```yaml
 # tekton-slsa-pipeline.yaml
@@ -1840,7 +1844,7 @@ spec:
 
 <!-- chunk: 9. SLSA 出处验证 -->## 9. SLSA 出处验证
 
-#<!-- chunk: 9.1 slsa-verifier 工具 -->## 9.1 slsa-verifier 工具
+## 9.1 slsa-verifier 工具
 
 ```bash
 # 安装 slsa-verifier
@@ -1872,7 +1876,7 @@ slsa-verifier verify-artifact ./myapp-linux-amd64 \
   --print-provenance | jq .
 ```
 
-#<!-- chunk: 9.2 Cosign 验证 -->## 9.2 Cosign 验证
+## 9.2 Cosign 验证
 
 ```bash
 # 使用 Cosign 验证 SLSA 出处证明
@@ -1917,7 +1921,7 @@ cosign verify-attestation \
   jq '.payload | @base64d | fromjson'
 ```
 
-#<!-- chunk: 9.3 自动化出处验证脚本 -->## 9.3 自动化出处验证脚本
+## 9.3 自动化出处验证脚本
 
 ```python
 #!/usr/bin/env python3
@@ -2056,7 +2060,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 10. SLSA 策略执行 -->## 10. SLSA 策略执行
 
-#<!-- chunk: 10.1 [[Kyverno|Kyverno]] SLSA 策略 -->## 10.1 Kyverno SLSA 策略
+## 10.1 Kyverno SLSA 策略
 
 ```yaml
 # Kyverno 策略: 要求 SLSA L2+ 出处
@@ -2132,7 +2136,7 @@ spec:
                     value: ":latest"
 ```
 
-#<!-- chunk: 10.2 OPA Gatekeeper SLSA 策略 -->## 10.2 OPA Gatekeeper SLSA 策略
+## 10.2 OPA Gatekeeper SLSA 策略
 
 ```rego
 # rego/slsa-policy.rego
@@ -2203,7 +2207,7 @@ image_from_trusted_registry(image) if {
 
 <!-- chunk: 11. 组织级 SLSA 实施路径 -->## 11. 组织级 SLSA 实施路径
 
-#<!-- chunk: 11.1 渐进式实施计划 -->## 11.1 渐进式实施计划
+## 11.1 渐进式实施计划
 
 ```yaml
 # 组织级 SLSA 实施路线图
@@ -2271,7 +2275,7 @@ phase_4_optimize (月9-12, 向 L4 进发):
     - 建立 SLSA 合规度量
 ```
 
-#<!-- chunk: 11.2 组织 SLSA 评估工具 -->## 11.2 组织 SLSA 评估工具
+## 11.2 组织 SLSA 评估工具
 
 ```python
 #!/usr/bin/env python3
@@ -2426,7 +2430,7 @@ class OrganizationSLSAAssessment:
 
 <!-- chunk: 12. SLSA v1.0 新特性 -->## 12. SLSA v1.0 新特性
 
-#<!-- chunk: 12.1 SLSA v0.1 → v1.0 主要变化 -->## 12.1 SLSA v0.1 → v1.0 主要变化
+## 12.1 SLSA v0.1 → v1.0 主要变化
 
 ```
 SLSA v1.0 重大更新 (2023年4月发布):
@@ -2452,7 +2456,7 @@ v1.0 出处: buildDefinition, runDetails（更清晰的语义）
 ─ 现有 v0.1/v0.2 项目可逐步迁移
 ```
 
-#<!-- chunk: 12.2 SLSA Source Track（实验性） -->## 12.2 SLSA Source Track（实验性）
+## 12.2 SLSA Source Track（实验性）
 
 ```yaml
 # SLSA Source Track L2+ 要求
@@ -2482,7 +2486,7 @@ SLSA_Source_L3:
     - 防止高权限用户绕过审查
 ```
 
-#<!-- chunk: 12.3 未来展望 -->## 12.3 未来展望
+## 12.3 未来展望
 
 ```
 SLSA 未来发展方向:
@@ -2511,7 +2515,7 @@ SLSA 未来发展方向:
 
 <!-- chunk: 参考资料与工具 -->## 参考资料与工具
 
-#<!-- chunk: 官方资源 -->## 官方资源
+## 官方资源
 
 | 资源 | 链接 |
 |------|------|
@@ -2524,7 +2528,7 @@ SLSA 未来发展方向:
 | Sigstore | https://sigstore.dev |
 | Rekor | https://rekor.sigstore.dev |
 
-#<!-- chunk: 实施工具 -->## 实施工具
+## 实施工具
 
 ```bash
 # 供应链安全工具完整安装脚本
@@ -2580,8 +2584,8 @@ trivy --version 2>/dev/null | head -1
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance KUDIG Database — Global MOC
-- [[domain-05-security-compliance/README|[[Domain 39: 供应链安全 (Supply Chain Security)|Domain 39: 供应链安全 (Supply Chain Security)]]]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-39 供应链安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|[[Domain 39: 供应链安全 (Supply Chain Security)|Domain 39: 供应链安全 (Supply Chain Security)]]]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
 - 供应链安全概述 (Supply Chain Security Overview)
 - 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 - SBOM 生成与管理 (SBOM Generation and Management)
@@ -2599,8 +2603,8 @@ trivy --version 2>/dev/null | head -1
 - 06-github-actions-slsa-build
 - 07-sigstore-cosign-signing
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

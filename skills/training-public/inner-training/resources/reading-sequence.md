@@ -72,7 +72,7 @@ created: "2026-05-23"
 | ⭐2 | `../../domain-12-cloud-providers/04-alicloud-ack/205-ack-cluster-types.md` | 集群类型对比 |
 | 📖3 | `../../domain-12-cloud-providers/04-alicloud-ack/280-ack-acr-integration.md` | ACR 镜像服务集成 |
 
-### [[skills/training-public/inner-training/week-1-ack-acr-lifecycle/day-2-ack-sdk-api|Day 2: ACK SDK & API]]
+### [[skills/training-public/inner-training/week-1-ack-acr-lifecycle/day-2-ack-sdk-api.md|Day 2: ACK SDK & API]]
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
@@ -273,4 +273,4 @@ created: "2026-05-23"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

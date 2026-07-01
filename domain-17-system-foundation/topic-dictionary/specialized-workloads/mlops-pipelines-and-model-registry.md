@@ -34,6 +34,7 @@ prerequisites:
 - monitoring-basics
 - gpu-scheduling-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # MLOps 流水线与模型仓库
@@ -141,6 +142,4 @@ def training_pipeline(data_path: str):
 - [TLVTech - Building Production-Ready AI Infrastructure](https://www.tlvtech.io/post/building-ai-infrastructure)
 
 ## Related
-
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

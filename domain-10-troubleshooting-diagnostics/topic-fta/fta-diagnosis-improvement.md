@@ -88,13 +88,13 @@ k8s_versions:
 
 <!-- chunk: 一、当前排查逻辑分析 -->## 一、当前排查逻辑分析
 
-#<!-- chunk: 1.1 现有逻辑架构 -->## 1.1 现有逻辑架构
+## 1.1 现有逻辑架构
 
 ```
 告警入口 → 意图识别 → FTA 导航 → Agent 调度 → 诊断执行 → 根因聚合 → 修复执行 → 学习反馈
 ```
 
-#<!-- chunk: 1.2 当前逻辑优势 -->## 1.2 当前逻辑优势
+## 1.2 当前逻辑优势
 
 | 优势 | 说明 |
 |:---|:---|
@@ -103,7 +103,7 @@ k8s_versions:
 | 概率排序 | 基于历史数据排序诊断路径 |
 | MECE 原则 | 事件之间互斥且完备 |
 
-#<!-- chunk: 1.3 当前逻辑不足 -->## 1.3 当前逻辑不足
+## 1.3 当前逻辑不足
 
 | 不足 | 影响 |
 |:---|:---|
@@ -119,7 +119,7 @@ k8s_versions:
 
 <!-- chunk: 二、改进建议 -->## 二、改进建议
 
-#<!-- chunk: 2.1 动态概率调整机制 -->## 2.1 动态概率调整机制
+## 2.1 动态概率调整机制
 
 **问题**: 当前 FTA 使用静态概率（如 annual_rate），但实际问题概率随时间、负载、季节等因素动态变化。
 
@@ -198,7 +198,7 @@ class DynamicProbabilityCalculator:
 
 ---
 
-#<!-- chunk: 2.2 多维度证据置信度评估 -->## 2.2 多维度证据置信度评估
+## 2.2 多维度证据置信度评估
 
 **问题**: 当前诊断只判断"发生/未发生"，没有置信度评估。
 
@@ -278,7 +278,7 @@ class EvidenceConfidenceEvaluator:
 
 ---
 
-#<!-- chunk: 2.3 时间窗口约束 -->## 2.3 时间窗口约束
+## 2.3 时间窗口约束
 
 **问题**: 问题传播有时序要求，如"持续超过 5 分钟"才触发，但当前 FTA 无此能力。
 
@@ -342,7 +342,7 @@ class TemporalDiagnosticEngine:
 
 ---
 
-#<!-- chunk: 2.4 修复前置条件检查 -->## 2.4 修复前置条件检查
+## 2.4 修复前置条件检查
 
 **问题**: 当前修复动作直接执行，忽略前置条件（如"需要人工审批"）。
 
@@ -432,7 +432,7 @@ healing_action:
 
 ---
 
-#<!-- chunk: 2.5 反馈学习机制 -->## 2.5 反馈学习机制
+## 2.5 反馈学习机制
 
 **问题**: 当前 FTA 概率需人工更新，无法从实际问题中学习。
 
@@ -519,7 +519,7 @@ learning_triggers:
 
 ---
 
-#<!-- chunk: 2.6 智能剪枝策略 -->## 2.6 智能剪枝策略
+## 2.6 智能剪枝策略
 
 **问题**: 当 OR 路径并行探索时，没有剪枝机制，效率低。
 
@@ -606,7 +606,7 @@ class IntelligentPathPruner:
 
 ---
 
-#<!-- chunk: 2.7 不确定性处理（贝叶斯推理） -->## 2.7 不确定性处理（贝叶斯推理）
+## 2.7 不确定性处理（贝叶斯推理）
 
 **问题**: 当证据不足时，当前系统可能做出错误判断。
 
@@ -721,21 +721,21 @@ FTA 先验概率:
 
 <!-- chunk: 五、实施建议 -->## 五、实施建议
 
-#<!-- chunk: 5.1 第一阶段（MVP） -->## 5.1 第一阶段（MVP）
+## 5.1 第一阶段（MVP）
 
 实现两个最高价值改进：
 
 1. **动态概率调整** - 快速提升诊断优先级准确性
 2. **反馈学习机制** - 形成自我优化闭环
 
-#<!-- chunk: 5.2 第二阶段 -->## 5.2 第二阶段
+## 5.2 第二阶段
 
 扩展到更多 Agent 编排：
 
 1. **证据置信度评估** - 增强诊断判断
 2. **智能剪枝策略** - 提升并行效率
 
-#<!-- chunk: 5.3 第三阶段 -->## 5.3 第三阶段
+## 5.3 第三阶段
 
 完善复杂场景支持：
 
@@ -753,22 +753,22 @@ FTA 先验概率:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC|topic-fta MOC]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/README|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution|第一章：FTA 起源与发展史]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations|第二章：FTA 数学基础与理论模型]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards|第三章：FTA 符号体系与标准规范]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles|第四章：FTA 方法论核心原则]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/05-fta-construction-process|第五章：FTA 构建完整流程]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/06-fta-verification-and-quality|第六章：FTA 验证与质量保证]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/07-fta-maintenance-and-evolution|第七章：FTA 维护与演进策略]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution|第八章：AI Agent 时代的运维范式革命]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns|第十章：Agent 编排模式与 FTA 逻辑门映射]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|topic-fta MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-c-references|appendix-c-references]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-d-templates|appendix-d-templates]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-execution-engine|fta-execution-engine]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-index|fta-index]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-c-references.md|appendix-c-references]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-d-templates.md|appendix-d-templates]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-execution-engine.md|fta-execution-engine]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-index.md|fta-index]]

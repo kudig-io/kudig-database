@@ -7,6 +7,7 @@ severity: "medium"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 title: "ServiceAccount 权限不足，无法创建 Pod — 远程顾问对话脚本"
 category: dialogue
 tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
@@ -14,7 +15,7 @@ tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 
 # ServiceAccount 权限不足，无法创建 Pod — 远程顾问对话脚本
 
-> 对应概念：[[concepts/rbac-authorization|RBAC 权限模型]]
+> 对应概念：[[concepts/rbac-authorization.md|RBAC 权限模型]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -153,6 +154,9 @@ kubectl get clusterrole -l <aggregation-label-key>=<aggregation-label-value>
 
 #### 方案 A：添加 RoleBinding
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl create rolebinding <sa>-pod-creator \
   --role=<role-name> \
@@ -164,6 +168,9 @@ kubectl create rolebinding <sa>-pod-creator \
 
 #### 方案 B：扩展 Role 规则
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch role <role-name> -n <ns> --type='json' -p='[{"op": "add", "path": "/rules/-", "value": {"apiGroups":[""],"resources":["pods"],"verbs":["create","get","list","watch"]}}]'
 ```
@@ -171,6 +178,9 @@ kubectl patch role <role-name> -n <ns> --type='json' -p='[{"op": "add", "path": 
 > **如果无法执行**：请使用 `kubectl edit role <role-name> -n <ns>` 手动在 rules 列表末尾添加 Pod 创建权限。
 
 #### 方案 C：使用 ClusterRole 绑定（跨命名空间）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 kubectl create clusterrolebinding <sa>-cluster-pod-creator \
@@ -181,6 +191,9 @@ kubectl create clusterrolebinding <sa>-cluster-pod-creator \
 > **如果无法执行**：请将 ClusterRoleBinding 保存为 YAML 后 apply，或确认当前用户是否有创建 clusterrolebinding 的权限。
 
 #### 方案 D：使用 cluster-admin（仅限测试）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 kubectl create clusterrolebinding <sa>-admin \
@@ -202,6 +215,6 @@ kubectl auth can-i create pods --as=system:serviceaccount:<ns>:<sa> -n <ns>
 
 ## 相关概念
 
-- [[concepts/rbac-authorization|RBAC 权限模型]]
-- [[concepts/rbac-authorization|ServiceAccount]]
-- [[concepts/rbac-authorization|RoleBinding 与 ClusterRoleBinding]]
+- [[concepts/rbac-authorization.md|RBAC 权限模型]]
+- [[concepts/rbac-authorization.md|ServiceAccount]]
+- [[concepts/rbac-authorization.md|RoleBinding 与 ClusterRoleBinding]]

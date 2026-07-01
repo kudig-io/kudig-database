@@ -96,7 +96,7 @@ k8s_versions:
 
 <!-- chunk: 架构概述 -->## 架构概述
 
-#<!-- chunk: Splunk平台架构 -->## Splunk平台架构
+## Splunk平台架构
 
 ```yaml
 # Splunk企业级日志分析平台整体架构
@@ -127,7 +127,7 @@ splunk_platform:
     reports: 自动化报表生成
 ```
 
-#<!-- chunk: 核心价值主张 -->## 核心价值主张
+## 核心价值主张
 
 **统一数据平台**
 - 单一平台处理机器数据、日志、指标、事件等多种数据类型
@@ -151,9 +151,9 @@ splunk_platform:
 
 <!-- chunk: 核心组件深度解析 -->## 核心组件深度解析
 
-#<!-- chunk: Indexer集群架构 -->## Indexer集群架构
+## Indexer集群架构
 
-##<!-- chunk: 集群部署配置 -->## 集群部署配置
+## 集群部署配置
 
 ```ini
 # Splunk Indexer集群配置
@@ -191,7 +191,7 @@ mgmtHostPort = splunk-indexer-03:8089
 site = site3
 ```
 
-##<!-- chunk: 索引优化配置 -->## 索引优化配置
+## 索引优化配置
 
 ```ini
 # 索引性能优化配置
@@ -218,9 +218,9 @@ maxDataSize = auto
 frozenTimePeriodInSecs = 7776000
 ```
 
-#<!-- chunk: Search Head集群配置 -->## Search Head集群配置
+## Search Head集群配置
 
-##<!-- chunk: 负载均衡配置 -->## 负载均衡配置
+## 负载均衡配置
 
 ```xml
 <!-- Search Head负载均衡配置 -->
@@ -241,7 +241,7 @@ frozenTimePeriodInSecs = 7776000
 </Location>
 ```
 
-##<!-- chunk: 搜索优化配置 -->## 搜索优化配置
+## 搜索优化配置
 
 ```ini
 # Search Head性能优化
@@ -268,9 +268,9 @@ site_search_factor = origin:1,total:2
 
 <!-- chunk: 企业级部署架构 -->## 企业级部署架构
 
-#<!-- chunk: 高可用部署方案 -->## 高可用部署方案
+## 高可用部署方案
 
-##<!-- chunk: Kubernetes部署架构 -->## Kubernetes部署架构
+## Kubernetes部署架构
 
 ```yaml
 # Splunk Kubernetes部署配置
@@ -377,7 +377,7 @@ spec:
             storage: 50Gi
 ```
 
-##<!-- chunk: 网络安全配置 -->## 网络安全配置
+## 网络安全配置
 
 ```yaml
 # 网络策略配置
@@ -447,9 +447,9 @@ spec:
           port: 1514 # Secure Syslog
 ```
 
-#<!-- chunk: 安全加固配置 -->## 安全加固配置
+## 安全加固配置
 
-##<!-- chunk: 访问控制策略 -->## 访问控制策略
+## 访问控制策略
 
 ```ini
 # Splunk安全配置
@@ -482,9 +482,9 @@ requireClientCert = false
 
 <!-- chunk: 数据摄入与处理 -->## 数据摄入与处理
 
-#<!-- chunk: Universal Forwarder配置 -->## Universal Forwarder配置
+## Universal Forwarder配置
 
-##<!-- chunk: 高级数据收集配置 -->## 高级数据收集配置
+## 高级数据收集配置
 
 ```ini
 # Universal Forwarder inputs.conf
@@ -532,7 +532,7 @@ TZ = Asia/Shanghai
 MAX_TIMESTAMP_LOOKAHEAD = 32
 ```
 
-##<!-- chunk: 数据预处理和丰富 -->## 数据预处理和丰富
+## 数据预处理和丰富
 
 ```python
 # Python脚本进行数据预处理
@@ -600,7 +600,7 @@ if __name__ == "__main__":
         print(processed_line)
 ```
 
-#<!-- chunk: Heavy Forwarder数据处理 -->## Heavy Forwarder数据处理
+## Heavy Forwarder数据处理
 
 ```ini
 # Heavy Forwarder props.conf
@@ -647,9 +647,9 @@ LOOKUP = user_lookup user_id OUTPUT user_name, department, role
 
 <!-- chunk: 实时搜索与分析 -->## 实时搜索与分析
 
-#<!-- chunk: SPL搜索语言高级应用 -->## SPL搜索语言高级应用
+## SPL搜索语言高级应用
 
-##<!-- chunk: 复杂数据分析查询 -->## 复杂数据分析查询
+## 复杂数据分析查询
 
 ```spl
 # 用户行为分析
@@ -689,7 +689,7 @@ index=application-logs sourcetype=transaction_log status=*
 | where success_rate < 95
 ```
 
-##<!-- chunk: 机器学习模型应用 -->## 机器学习模型应用
+## 机器学习模型应用
 
 ```spl
 # 异常检测模型训练
@@ -714,9 +714,9 @@ index=system-metrics sourcetype=cpu_usage
 
 <!-- chunk: 机器学习与AI能力 -->## 机器学习与AI能力
 
-#<!-- chunk: 内置ML算法应用 -->## 内置ML算法应用
+## 内置ML算法应用
 
-##<!-- chunk: 异常检测配置 -->## 异常检测配置
+## 异常检测配置
 
 ```ini
 # ML Toolkit异常检测配置
@@ -733,7 +733,7 @@ smoothing = exponential
 seasonality = daily,weekly
 ```
 
-##<!-- chunk: 预测模型配置 -->## 预测模型配置
+## 预测模型配置
 
 ```python
 # Python预测模型配置
@@ -783,9 +783,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 安全信息与事件管理 -->## 安全信息与事件管理
 
-#<!-- chunk: SIEM规则配置 -->## SIEM规则配置
+## SIEM规则配置
 
-##<!-- chunk: 威胁检测规则 -->## 威胁检测规则
+## 威胁检测规则
 
 ```xml
 <!-- XML格式的威胁检测规则 -->
@@ -835,7 +835,7 @@ if __name__ == "__main__":
 </threat_hunting_rule>
 ```
 
-##<!-- chunk: 行为基线建立 -->## 行为基线建立
+## 行为基线建立
 
 ```spl
 # 用户行为基线建立
@@ -864,9 +864,9 @@ index=application-logs sourcetype=user_activity
 
 <!-- chunk: 可视化与报表 -->## 可视化与报表
 
-#<!-- chunk: 仪表板配置 -->## 仪表板配置
+## 仪表板配置
 
-##<!-- chunk: 交互式仪表板 -->## 交互式仪表板
+## 交互式仪表板
 
 ```xml
 <!-- Dashboard XML配置 -->
@@ -921,7 +921,7 @@ index=application-logs sourcetype=user_activity
 </form>
 ```
 
-##<!-- chunk: 自动化报表生成 -->## 自动化报表生成
+## 自动化报表生成
 
 ```python
 # 自动化报表生成脚本
@@ -1025,9 +1025,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 性能优化策略 -->## 性能优化策略
 
-#<!-- chunk: 索引优化 -->## 索引优化
+## 索引优化
 
-##<!-- chunk: SmartStore配置 -->## SmartStore配置
+## SmartStore配置
 
 ```ini
 # SmartStore配置
@@ -1048,7 +1048,7 @@ maxCacheSize = 100000
 minHotIdleSecsBeforeForceUpload = 300
 ```
 
-##<!-- chunk: 搜索性能优化 -->## 搜索性能优化
+## 搜索性能优化
 
 ```spl
 # 性能优化的搜索示例
@@ -1064,7 +1064,7 @@ minHotIdleSecsBeforeForceUpload = 300
 | where avg_response > 1000 OR max_error > 0
 ```
 
-#<!-- chunk: 集群性能监控 -->## 集群性能监控
+## 集群性能监控
 
 ```bash
 #!/bin/bash
@@ -1122,7 +1122,7 @@ main
 
 <!-- chunk: 最佳实践总结 -->## 最佳实践总结
 
-#<!-- chunk: 部署架构建议 -->## 部署架构建议
+## 部署架构建议
 
 ```yaml
 # 生产环境推荐配置
@@ -1154,9 +1154,9 @@ production_recommendations:
     disaster_recovery: cross-region replication
 ```
 
-#<!-- chunk: 监控和维护 -->## 监控和维护
+## 监控和维护
 
-##<!-- chunk: 日常运维检查清单 -->## 日常运维检查清单
+## 日常运维检查清单
 
 - [ ] 集群健康状态检查
 - [ ] 索引器数据摄入速率监控
@@ -1174,8 +1174,8 @@ production_recommendations:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-21-logging-management-analytics MOC
-- [[domain-06-observability/README|Domain 21: 日志管理与分析 (Logging Management & Analytics)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-21 日志管理与分析 — 开源项目索引]]
+- [[domain-06-observability/README.md|Domain 06: 日志管理与分析 (Logging Management & Analytics)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-21 日志管理与分析 — 开源项目索引]]
 - ELK Stack企业级日志管理系统深度实践
 - Fluentd企业级日志收集与处理深度实践
 - Loki Enterprise Log Aggregation and Analytics Platform
@@ -1192,8 +1192,8 @@ production_recommendations:
 - 05-real-time-analytics-business-insights
 - 05-splunk-enterprise-log-analytics
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

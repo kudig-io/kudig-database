@@ -89,22 +89,22 @@ Tempo/Jaeger (distributed tracing)
 ```
 
 ## Related
-- [[synthesis/可观测性支柱 × Prometheus-Grafana|可观测性支柱 × Prometheus-Grafana]] — 综合
-- [[synthesis/Cilium eBPF × 可观测性|Cilium eBPF × 可观测性]] — 综合
-- [[synthesis/控制器模式 × 可观测性|控制器模式 × 可观测性]] — 综合
-- [[synthesis/CRD × 可观测性|CRD × 可观测性]] — 综合
-- [[synthesis/etcd × 可观测性|etcd × 可观测性]] — 综合
-- [[synthesis/Operator 模式 × 可观测性|Operator 模式 × 可观测性]] — 综合
+- [[concepts/可观测性支柱 × Prometheus-Grafana.md|可观测性支柱 × Prometheus-Grafana]] — 综合
+- [[concepts/Cilium eBPF × 可观测性.md|Cilium eBPF × 可观测性]] — 综合
+- [[concepts/控制器模式 × 可观测性.md|控制器模式 × 可观测性]] — 综合
+- [[concepts/CRD × 可观测性.md|CRD × 可观测性]] — 综合
+- [[concepts/etcd × 可观测性.md|etcd × 可观测性]] — 综合
+- [[concepts/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]] — 综合
 
 - [[jaeger]] — Jaeger
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/production-operations-best-practices|production-operations-best-practices]] — Production Operations Best Practices
-- [[concepts/microservice-resilience-patterns|microservice-resilience-patterns]] — Microservice Resilience Patterns
-- [[concepts/production-operations-best-practices|Production Operations Best Practices]]
-- [[concepts/microservice-resilience-patterns|Microservice Resilience Patterns]]
+- [[concepts/production-operations-best-practices.md|production-operations-best-practices]] — Production Operations Best Practices
+- [[concepts/microservice-resilience-patterns.md|microservice-resilience-patterns]] — Microservice Resilience Patterns
+- [[concepts/production-operations-best-practices.md|Production Operations Best Practices]]
+- [[concepts/microservice-resilience-patterns.md|Microservice Resilience Patterns]]
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - 02-grafana-enterprise-observability
 - RELEASE-NOTES-0.12
 - RELEASE-NOTES-2.32
@@ -194,31 +194,31 @@ Tempo/Jaeger (distributed tracing)
 - RELEASE-NOTES-3.8
 - RELEASE-NOTES-2.25
 - RELEASE-NOTES-1.9
-- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-11.0|RELEASE-NOTES-11.0]]
+- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-11.0.md|RELEASE-NOTES-11.0]]
 - RELEASE-NOTES-8.4
 - RELEASE-NOTES-4.0
 - RELEASE-NOTES-5.1
 - RELEASE-NOTES-10.1
 - RELEASE-NOTES-9.5
 - RELEASE-NOTES-6.6
-- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-12.3|RELEASE-NOTES-12.3]]
+- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-12.3.md|RELEASE-NOTES-12.3]]
 - RELEASE-NOTES-4.4
 - RELEASE-NOTES-8.0
 - RELEASE-NOTES-7.3
-- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-11.4|RELEASE-NOTES-11.4]]
+- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-11.4.md|RELEASE-NOTES-11.4]]
 - RELEASE-NOTES-6.2
 - RELEASE-NOTES-9.1
-- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-12.2|RELEASE-NOTES-12.2]]
+- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-12.2.md|RELEASE-NOTES-12.2]]
 - RELEASE-NOTES-4.5
 - RELEASE-NOTES-7.2
 - RELEASE-NOTES-8.1
-- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-11.5|RELEASE-NOTES-11.5]]
+- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-11.5.md|RELEASE-NOTES-11.5]]
 - RELEASE-NOTES-9.0
 - RELEASE-NOTES-6.3
-- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-10.4|RELEASE-NOTES-10.4]]
+- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-10.4.md|RELEASE-NOTES-10.4]]
 - RELEASE-NOTES-5.4
 - RELEASE-NOTES-1.8
-- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-11.1|RELEASE-NOTES-11.1]]
+- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-11.1.md|RELEASE-NOTES-11.1]]
 - RELEASE-NOTES-8.5
 - RELEASE-NOTES-4.1
 - RELEASE-NOTES-5.0
@@ -240,28 +240,28 @@ Tempo/Jaeger (distributed tracing)
 - RELEASE-NOTES-1.0
 - RELEASE-NOTES-1.4
 - RELEASE-NOTES-4.6
-- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-12.1|RELEASE-NOTES-12.1]]
-- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-11.6|RELEASE-NOTES-11.6]]
+- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-12.1.md|RELEASE-NOTES-12.1]]
+- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-11.6.md|RELEASE-NOTES-11.6]]
 - RELEASE-NOTES-7.1
 - RELEASE-NOTES-8.2
 - RELEASE-NOTES-9.3
 - RELEASE-NOTES-6.0
 - RELEASE-NOTES-7.5
-- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-11.2|RELEASE-NOTES-11.2]]
+- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-11.2.md|RELEASE-NOTES-11.2]]
 - RELEASE-NOTES-4.2
 - RELEASE-NOTES-5.3
 - RELEASE-NOTES-6.4
-- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-10.3|RELEASE-NOTES-10.3]]
+- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-10.3.md|RELEASE-NOTES-10.3]]
 - RELEASE-NOTES-7.4
-- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-11.3|RELEASE-NOTES-11.3]]
-- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-12.4|RELEASE-NOTES-12.4]]
+- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-11.3.md|RELEASE-NOTES-11.3]]
+- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-12.4.md|RELEASE-NOTES-12.4]]
 - RELEASE-NOTES-4.3
 - RELEASE-NOTES-5.2
 - RELEASE-NOTES-6.5
-- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-10.2|RELEASE-NOTES-10.2]]
-- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-12.0|RELEASE-NOTES-12.0]]
+- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-10.2.md|RELEASE-NOTES-10.2]]
+- [[domain-19-landscape-references/_archived-release-notes/observability/grafana/RELEASE-NOTES-12.0.md|RELEASE-NOTES-12.0]]
 - RELEASE-NOTES-8.3
 - RELEASE-NOTES-7.0
 - RELEASE-NOTES-6.1
 - RELEASE-NOTES-9.2
-- [[entities/inspektor-gadget|Inspektor Gadget]] — Cross-reference
+- [[entities/inspektor-gadget.md|Inspektor Gadget]] — Cross-reference

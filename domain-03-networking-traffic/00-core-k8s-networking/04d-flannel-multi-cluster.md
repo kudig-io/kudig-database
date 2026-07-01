@@ -198,6 +198,9 @@ done
 
 ### 3.3 完全重置子网分配
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+
 ```bash
 #!/bin/bash
 # reset-all-subnets.sh
@@ -220,7 +223,7 @@ ETCDCTL_API=3 etcdctl --endpoints=$ETCD_HOST \
   del /coreos.com/network/config
 
 echo "重启所有 flannel Pod..."
-kubectl delete pod -n kube-system -l app=flannel --all
+kubectl delete pod -n kube-system -l app=flannel --all  # ⚠️ 批量删除，波及面大
 
 echo "完成，等待子网重新分配..."
 sleep 30
@@ -271,6 +274,9 @@ data:
 
 ### 4.2 共享 etcd 但隔离前缀
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 使用不同的 etcd 键前缀
 # 集群 A
@@ -282,7 +288,7 @@ kubectl patch configmap -n kube-flannel kube-flannel-cfg --type merge -p \
   '{"data":{"net-conf.json":"{\"Network\":\"10.245.0.0/16\",\"Backend\":{\"Type\":\"vxlan\"},\"EtcdPrefix\":\"/cluster-b/network\"}"}}'
 ```
 
-### 4.3 使用 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 后端
+### 4.3 使用 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 后端
 
 **推荐方案**：避免使用 etcd 后端，改用 Kubernetes API 后端
 
@@ -305,6 +311,9 @@ args:
 ## 5. 子网冲突预防
 
 ### 5.1 初始化集群时指定 Pod CIDR
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # kubeadm 初始化时指定
@@ -381,6 +390,10 @@ echo "巡检完成" >> $LOG_FILE
 
 ### 6.1 Pod CIDR 变更流程
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 备份当前配置
 kubectl get configmap -n kube-system kube-flannel-cfg -o yaml > flannel-config-backup.yaml
@@ -409,6 +422,11 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.pod
 
 ### 6.2 集群合并流程
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # ⚠️ 警告：集群合并是高风险操作
 
@@ -431,7 +449,7 @@ kubectl patch configmap -n kube-system kube-flannel-cfg --type merge -p \
 kubectl delete pod -n kube-system -l app=flannel
 
 # 5. 重建所有 Pod（Pod IP 会变更）
-kubectl delete pod -A --all
+kubectl delete pod -A --all  # ⚠️ 批量删除，波及面大
 ```
 
 ---
@@ -468,7 +486,7 @@ flannelctl subnet list
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic KUDIG Database — Global MOC
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -489,4 +507,6 @@ flannelctl subnet list
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+
+```

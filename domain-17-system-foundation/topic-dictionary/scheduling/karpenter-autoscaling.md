@@ -322,6 +322,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 查看 NodePool 状态
 kubectl get nodepools
@@ -370,4 +373,4 @@ curl localhost:8080/metrics | grep karpenter_nodes
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]

@@ -122,7 +122,7 @@ created: "2026-05-23"
 
 运行时安全是云原生纵深防御的最后一道防线，负责在容器运行期间检测和响应异常行为。与静态分析不同，运行时安全工具能够捕获实际发生的系统调用、网络连接和进程行为，从而发现零日漏洞利用、供应链投毒和内部威胁等高级攻击。
 
-#<!-- chunk: 3.1 Falco (CNCF Graduated) -->## 3.1 Falco (CNCF Graduated)
+## 3.1 Falco (CNCF Graduated)
 
 Falco 是云原生运行时安全的基石项目，由 Sysdig 公司于 2016 年创建，2018 年捐赠给 CNCF，2022 年正式毕业。Falco 通过 eBPF 或内核模块捕获系统调用，利用灵活的规则引擎检测异常行为。其架构设计为插件化，支持自定义输出通道和 gRPC 流式 API。
 
@@ -190,7 +190,7 @@ spec:
 **GitHub**: https://github.com/falcosecurity/falco
 **文档**: https://falco.org/docs/
 
-#<!-- chunk: 3.2 Sysdig (商业开源) -->## 3.2 Sysdig (商业开源)
+## 3.2 Sysdig (商业开源)
 
 Sysdig 基于 Falco 规则引擎，提供企业级扩展能力。其核心差异化在于：
 
@@ -201,7 +201,7 @@ Sysdig 基于 Falco 规则引擎，提供企业级扩展能力。其核心差异
 - **多云统一管理平面**：AWS、Azure、GCP、本地集群统一安全视图
 - **Runtime Insights**：无需手动编写规则，自动发现容器中的可疑活动
 
-#<!-- chunk: 3.3 NeuVector (SUSE 开源) -->## 3.3 NeuVector (SUSE 开源)
+## 3.3 NeuVector (SUSE 开源)
 
 NeuVector 是全生命周期容器安全平台，2022 年被 SUSE 收购后于 2024 年完全开源：
 
@@ -213,7 +213,7 @@ NeuVector 是全生命周期容器安全平台，2022 年被 SUSE 收购后于 2
 - Admission Control 准入控制
 - 多集群集中管理
 
-#<!-- chunk: 3.4 Aqua Security (开源 + 商业) -->## 3.4 Aqua Security (开源 + 商业)
+## 3.4 Aqua Security (开源 + 商业)
 
 Aqua 提供开源和商业两个层次的容器安全方案：
 
@@ -227,7 +227,7 @@ Aqua 提供开源和商业两个层次的容器安全方案：
 
 策略引擎是云原生安全的「免疫系统」，通过准入控制（Admission Control）在资源创建和修改时自动执行安全策略，防止不安全配置进入集群。同时通过定期审计（Audit）扫描现有资源，确保持续的合规状态。
 
-#<!-- chunk: 4.1 OPA / Gatekeeper (CNCF Graduated) -->## 4.1 OPA / Gatekeeper (CNCF Graduated)
+## 4.1 OPA / Gatekeeper (CNCF Graduated)
 
 OPA (Open Policy Agent) 是通用策略引擎，Rego 是其声明式策略语言。OPA 的设计理念是将策略决策与策略执行解耦，使得同一套策略可以在 K8s Admission Control、API Gateway 授权、Terraform 计划审查、Kafka 消息路由等多种场景中复用。
 
@@ -255,7 +255,7 @@ OPA 核心特性:
 **GitHub OPA**: https://github.com/open-policy-agent/opa
 **GitHub Gatekeeper**: https://github.com/open-policy-agent/gatekeeper
 
-#<!-- chunk: 4.2 Kyverno (CNCF Graduated) -->## 4.2 Kyverno (CNCF Graduated)
+## 4.2 Kyverno (CNCF Graduated)
 
 Kyverno 的设计哲学是「K8s 原生策略管理」，使用标准 K8s YAML 定义策略，无需学习新的策略语言。这使得 K8s 管理员和安全团队无需掌握 Rego 就能编写和维护安全策略。
 
@@ -290,7 +290,7 @@ Kyverno 的设计哲学是「K8s 原生策略管理」，使用标准 K8s YAML �
 **GitHub**: https://github.com/kyverno/kyverno
 **文档**: https://kyverno.io/
 
-#<!-- chunk: 4.3 Kubescape (CNCF Incubating) -->## 4.3 Kubescape (CNCF Incubating)
+## 4.3 Kubescape (CNCF Incubating)
 
 Kubescape 是基于 NSA/CISA K8s 加固指南的合规扫描工具，由 ARMO 开源：
 
@@ -312,7 +312,7 @@ kubescape scan --submit  # 提交到 ARMO 平台
 
 **GitHub**: https://github.com/kubescape/kubescape
 
-#<!-- chunk: 4.4 Kubewarden (Rancher) -->## 4.4 Kubewarden (Rancher)
+## 4.4 Kubewarden (Rancher)
 
 Kubewarden 使用 WebAssembly (Wasm) 作为策略执行引擎，具有独特优势：
 
@@ -326,7 +326,7 @@ Kubewarden 使用 WebAssembly (Wasm) 作为策略执行引擎，具有独特优�
 
 <!-- chunk: 五、身份与访问 (Identity & Access) -->## 五、身份与访问 (Identity & Access)
 
-#<!-- chunk: 5.1 SPIFFE / SPIRE (CNCF Graduated) -->## 5.1 SPIFFE / SPIRE (CNCF Graduated)
+## 5.1 SPIFFE / SPIRE (CNCF Graduated)
 
 SPIFFE (Secure Production Identity Framework for Everyone) 是工作负载身份的标准框架，SPIRE 是其参考实现。在微服务架构中，服务间认证不再依赖网络边界，而是基于加密身份的工作负载身份验证。
 
@@ -347,7 +347,7 @@ SPIRE 架构组件:
 
 **GitHub SPIRE**: https://github.com/spiffe/spire
 
-#<!-- chunk: 5.2 Keycloak (CNCF Incubating) -->## 5.2 Keycloak (CNCF Incubating)
+## 5.2 Keycloak (CNCF Incubating)
 
 Keycloak 是企业级开源身份与访问管理平台，适用于 K8s 集群外部身份管理：
 
@@ -367,7 +367,7 @@ Keycloak 是企业级开源身份与访问管理平台，适用于 K8s 集群外
 
 供应链安全是近年来云原生安全最受关注的领域之一。SolarWinds 事件、Codecov 供应链攻击、Log4Shell 漏洞等安全事件暴露了现代软件供应链的脆弱性。SLSA (Supply-chain Levels for Software Artifacts) 框架定义了供应链完整性的四个等级，而 Sigstore 生态系统为镜像签名和验证提供了完整的开源工具链。
 
-#<!-- chunk: 6.1 Sigstore / cosign -->## 6.1 Sigstore / cosign
+## 6.1 Sigstore / cosign
 
 Sigstore 生态系统为容器镜像签名和验证提供了完整的开源工具链，其核心创新是 Keyless Signing（无密钥签名），通过 OIDC 身份验证替代传统的密钥管理：
 
@@ -399,14 +399,14 @@ cosign attest --predicate vuln.json --type vuln myregistry/myimage:latest
 
 **GitHub cosign**: https://github.com/sigstore/cosign
 
-#<!-- chunk: 6.2 TUF / in-toto -->## 6.2 TUF / in-toto
+## 6.2 TUF / in-toto
 
 | 项目 | 功能 | 适用场景 | SLSA 等级 |
 |:---|:---|:---|:---|
 | **TUF** | 框架防范软件更新攻击 (降档、无限冻结、恶意镜像、混合攻击) | 镜像仓库安全、Notary v2 底层 | SLSA Level 3+ |
 | **in-toto** | 记录和验证软件供应链每一步骤的完整性 | SLSA 合规、构建管道验证 | SLSA Level 2+ |
 
-#<!-- chunk: 6.3 Notary v2 -->## 6.3 Notary v2
+## 6.3 Notary v2
 
 Notary v2 是 OCI 镜像内容信任的下一代方案，基于 TUF 规范：
 
@@ -419,7 +419,7 @@ Notary v2 是 OCI 镜像内容信任的下一代方案，基于 TUF 规范：
 
 <!-- chunk: 七、镜像安全扫描 -->## 七、镜像安全扫描
 
-#<!-- chunk: 7.1 Trivy (Aqua) -->## 7.1 Trivy (Aqua)
+## 7.1 Trivy (Aqua)
 
 Trivy 是目前最流行的全栈安全扫描器，支持几乎所有主流漏洞数据库和制品格式。其设计理念是「简单、全面、快速」，一行命令即可完成扫描：
 
@@ -452,6 +452,9 @@ Trivy 是目前最流行的全栈安全扫描器，支持几乎所有主流漏�
 
 Trivy Operator 是 Trivy 的 K8s 原生版本，以 Operator 模式运行在集群内：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 helm install trivy-operator aqua/trivy-operator \
   --namespace trivy-system \
@@ -462,7 +465,7 @@ helm install trivy-operator aqua/trivy-operator \
 
 **GitHub**: https://github.com/aquasecurity/trivy
 
-#<!-- chunk: 7.2 Grype (Anchore) -->## 7.2 Grype (Anchore)
+## 7.2 Grype (Anchore)
 
 Grype 是 Anchore 开源的漏洞扫描工具，与 Syft SBOM 生成器配合使用：
 
@@ -478,7 +481,7 @@ grype dir:./project --fail-on critical
 grype registry.example.com/app:v1.0.0
 ```
 
-#<!-- chunk: 7.3 Syft (Anchore) -->## 7.3 Syft (Anchore)
+## 7.3 Syft (Anchore)
 
 Syft 是专用的 SBOM 生成工具，支持输出 CycloneDX 和 SPDX 格式：
 
@@ -487,7 +490,7 @@ syft packages dir:./project -o cyclonedx-json > sbom.json
 syft packages registry.example.com/app:v1.0.0 -o spdx-json > sbom.spdx.json
 ```
 
-#<!-- chunk: 7.4 Snyk / Aqua Enterprise -->## 7.4 Snyk / Aqua Enterprise
+## 7.4 Snyk / Aqua Enterprise
 
 - **Snyk**: 开发者友好的安全扫描平台，IDE 集成（VS Code, IntelliJ），SAST/SCA/容器/IaC 扫描一体，Developer Security Platform
 - **Aqua**: 企业级 CNAPP，运行时防护 + 供应链安全 + 合规管理 + 云安全态势管理 (CSPM)
@@ -496,7 +499,7 @@ syft packages registry.example.com/app:v1.0.0 -o spdx-json > sbom.spdx.json
 
 <!-- chunk: 八、密钥管理 -->## 八、密钥管理
 
-#<!-- chunk: 8.1 Vault (HashiCorp) -->## 8.1 Vault (HashiCorp)
+## 8.1 Vault (HashiCorp)
 
 ```yaml
 核心特性:
@@ -513,7 +516,7 @@ syft packages registry.example.com/app:v1.0.0 -o spdx-json > sbom.spdx.json
 
 **License 注意**: Vault v1.15+ 核心功能采用 BSL (Business Source License)，限制竞品使用。建议评估 **OpenBao** (社区分叉，Apache-2.0) 或 **External Secrets Operator** 作为纯开源替代。
 
-#<!-- chunk: 8.2 External Secrets Operator -->## 8.2 External Secrets Operator
+## 8.2 External Secrets Operator
 
 External Secrets Operator (ESO) 将外部 KMS/Secrets Manager 同步为标准 K8s Secret：
 
@@ -552,7 +555,7 @@ spec:
 
 **GitHub**: https://github.com/external-secrets/external-secrets
 
-#<!-- chunk: 8.3 Sealed Secrets (Bitnami) -->## 8.3 Sealed Secrets (Bitnami)
+## 8.3 Sealed Secrets (Bitnami)
 
 Sealed Secrets 是 GitOps 场景下加密 K8s Secret 的标准方案：
 
@@ -564,7 +567,7 @@ Sealed Secrets 是 GitOps 场景下加密 K8s Secret 的标准方案：
 
 **GitHub**: https://github.com/bitnami-labs/sealed-secrets
 
-#<!-- chunk: 8.4 SOPS (Mozilla) -->## 8.4 SOPS (Mozilla)
+## 8.4 SOPS (Mozilla)
 
 SOPS (Secrets OPerationS) 支持加密 YAML/JSON/ENV/INI 等格式文件：
 
@@ -574,7 +577,7 @@ SOPS (Secrets OPerationS) 支持加密 YAML/JSON/ENV/INI 等格式文件：
 - 支持密钥组 (key groups) 需要多个密钥才能解密
 - 原生集成 Flux SOPS 解密
 
-#<!-- chunk: 8.5 cert-manager (Let's Encrypt / ACME) -->## 8.5 cert-manager (Let's Encrypt / ACME)
+## 8.5 cert-manager (Let's Encrypt / ACME)
 
 cert-manager 是 K8s 原生的 TLS 证书管理器：
 
@@ -646,7 +649,7 @@ cert-manager 是 K8s 原生的 TLS 证书管理器：
   └── Sigstore/Rekor ──► 透明日志审计
 ```
 
-#<!-- chunk: 选型决策流程 -->## 选型决策流程
+## 选型决策流程
 
 ```
 需要运行时安全监控？
@@ -723,7 +726,7 @@ cert-manager 是 K8s 原生的 TLS 证书管理器：
 
 云原生安全工具链需要与监控告警系统深度集成，才能实现从检测到响应的闭环。以下是推荐的监控告警集成方案：
 
-#<!-- chunk: 13.1 Prometheus + Grafana 通用集成 -->## 13.1 Prometheus + Grafana 通用集成
+## 13.1 Prometheus + Grafana 通用集成
 
 大多数云原生安全工具原生暴露 Prometheus 指标：
 
@@ -736,7 +739,7 @@ cert-manager 是 K8s 原生的 TLS 证书管理器：
 | cert-manager | `certmanager_certificate_expiration_timestamp` | 证书到期时间 |
 | Vault | `vault_core_unsealed`, `vault_audit_log_request_count` | 密封状态、请求量 |
 
-#<!-- chunk: 13.2 Falco → Loki/Elasticsearch 日志管道 -->## 13.2 Falco → Loki/Elasticsearch 日志管道
+## 13.2 Falco → Loki/Elasticsearch 日志管道
 
 ```
 Falco DaemonSet → Falco Sidekick → Kafka/Loki/Elasticsearch → Grafana Dashboard
@@ -744,7 +747,7 @@ Falco DaemonSet → Falco Sidekick → Kafka/Loki/Elasticsearch → Grafana Dash
                                   AlertManager → Slack/PagerDuty/Opsgenie
 ```
 
-#<!-- chunk: 13.3 关键告警规则模板 -->## 13.3 关键告警规则模板
+## 13.3 关键告警规则模板
 
 ```yaml
 groups:
@@ -787,7 +790,7 @@ groups:
           summary: "检测到严重漏洞"
 ```
 
-#<!-- chunk: 13.4 安全事件生命周期管理 -->## 13.4 安全事件生命周期管理
+## 13.4 安全事件生命周期管理
 
 安全事件从检测到响应的完整生命周期应遵循以下流程：
 
@@ -805,7 +808,7 @@ groups:
 
 云原生安全工具的落地应遵循分阶段推进的策略，避免一次性引入过多工具导致运维负担。以下是推荐的三阶段落地路线图：
 
-#<!-- chunk: 14.1 第一阶段：基础安全基线 (0-3 个月) -->## 14.1 第一阶段：基础安全基线 (0-3 个月)
+## 14.1 第一阶段：基础安全基线 (0-3 个月)
 
 第一阶段的目标是建立基本的安全基线，覆盖最常见的攻击向量：
 
@@ -821,7 +824,7 @@ groups:
 
 第一阶段预计总工作量约 2-3 周，完成后可覆盖 NSA/CISA 加固指南中 80% 的控制项。
 
-#<!-- chunk: 14.2 第二阶段：深度防护 (3-6 个月) -->## 14.2 第二阶段：深度防护 (3-6 个月)
+## 14.2 第二阶段：深度防护 (3-6 个月)
 
 在基础安全基线之上，引入运行时安全和供应链保护：
 
@@ -835,7 +838,7 @@ groups:
 | P1 | 安全策略 GitOps 管理 | Kyverno + Argo CD | 3 天 |
 | P2 | 安全事件告警集成 | Falco → Slack/PagerDuty | 2 天 |
 
-#<!-- chunk: 14.3 第三阶段：持续优化 (6-12 个月) -->## 14.3 第三阶段：持续优化 (6-12 个月)
+## 14.3 第三阶段：持续优化 (6-12 个月)
 
 实现安全运营自动化和持续合规：
 
@@ -848,7 +851,7 @@ groups:
 | P2 | 定期安全演练 | Falco 模拟攻击 + Runbook | 5 天 |
 | P2 | 合规报告自动化 | Kubescape + Policy Reporter | 3 天 |
 
-#<!-- chunk: 14.4 团队技能矩阵 -->## 14.4 团队技能矩阵
+## 14.4 团队技能矩阵
 
 云原生安全的成功落地要求团队具备以下技能：
 
@@ -866,7 +869,7 @@ groups:
 
 企业在选择安全工具时，除了功能适配度，还需要考虑许可证成本、运维成本和学习成本。以下是基于 100 节点集群规模的成本估算：
 
-#<!-- chunk: 15.1 开源方案成本 -->## 15.1 开源方案成本
+## 15.1 开源方案成本
 
 | 工具 | 许可证成本 | 运维人力/月 | 基础设施成本/月 |
 |:---|:---|:---|:---|
@@ -878,7 +881,7 @@ groups:
 | External Secrets | 免费 | 0.1 FTE | $50 |
 | **合计** | **$0** | **1.6 FTE** | **$600** |
 
-#<!-- chunk: 15.2 商业方案成本 -->## 15.2 商业方案成本
+## 15.2 商业方案成本
 
 | 工具 | 年许可证 | 运维人力/月 | 说明 |
 |:---|:---|:---|:---|
@@ -887,7 +890,7 @@ groups:
 | Snyk | $20k-$100k | 0.2 FTE | 开发者平台，按开发者数收费 |
 | Vault Enterprise | $50k-$200k | 0.3 FTE | 含 HSM、多命名空间等企业特性 |
 
-#<!-- chunk: 15.3 混合方案推荐 -->## 15.3 混合方案推荐
+## 15.3 混合方案推荐
 
 对于大多数企业，推荐采用「开源为主、商业补充」的混合策略：
 
@@ -950,7 +953,7 @@ graph TB
     style A1 fill:#8b5cf6,stroke:#6d28d9,color:#fff
 ```
 
-#<!-- chunk: 事件流架构 -->## 事件流架构
+## 事件流架构
 
 ```mermaid
 sequenceDiagram
@@ -1024,7 +1027,7 @@ sequenceDiagram
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
@@ -1038,9 +1041,9 @@ sequenceDiagram
 
 ## See Also
 
-- [[domain-05-security-compliance/06-compliance/99-java-security-kubernetes-guide|99-java-security-kubernetes-guide]]
-- [[domain-05-security-compliance/07-incident-response/20-incident-response-process|20-incident-response-process]]
-- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-39|00-open-source-projects-index-from-domain-05-security-compliance]]
-- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-7|00-open-source-projects-index-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/06-compliance/99-java-security-kubernetes-guide.md|99-java-security-kubernetes-guide]]
+- [[domain-05-security-compliance/07-incident-response/20-incident-response-process.md|20-incident-response-process]]
+- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-39.md|00-open-source-projects-index-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-domain-05-security-compliance]]
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

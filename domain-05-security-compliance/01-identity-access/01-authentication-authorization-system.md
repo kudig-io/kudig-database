@@ -443,6 +443,9 @@ kubectl get clusterrolebindings -o json | jq '.items[] | select(.roleRef.name=="
 
 ### 准入控制排查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 检查准入控制器状态
 kubectl get validatingwebhookconfigurations,mutatingwebhookconfigurations
@@ -492,8 +495,8 @@ groups:
 ## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Security Domain]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-7 安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Security Domain]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
 - 网络安全策略与零信任架构
 - 运行时安全防护与威胁检测
 - 04 - 审计日志与合规性管理
@@ -510,9 +513,9 @@ groups:
 - 运行时安全防护
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-06-observability
-- [[domain-17-system-foundation/topic-cheat-sheet/tls-pki|速查卡: tls-pki]]
+- [[domain-17-system-foundation/topic-cheat-sheet/tls-pki.md|速查卡: tls-pki]]
 
-- [[domain-05-security-compliance/README|返回目录]]- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-05-security-compliance/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
 
 ## See Also
 

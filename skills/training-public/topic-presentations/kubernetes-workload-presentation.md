@@ -57,13 +57,13 @@ created: "2026-05-23"
 
 <!-- chunk: 演讲概述 -->## 演讲概述
 
-#<!-- chunk: 目标受众 -->## 目标受众
+## 目标受众
 
 - 开发者：理解在 Kubernetes 上运行应用的最佳实践
 - 运维初学者：掌握工作负载的创建、更新和排障
 - SRE 专家：深入控制器原理和生产稳定性保障
 
-#<!-- chunk: 预计时长 -->## 预计时长
+## 预计时长
 
 | 阶段 | 内容 | 时长 |
 |------|------|------|
@@ -75,7 +75,7 @@ created: "2026-05-23"
 | Q&A | 互动问答 | 15 分钟 |
 | **合计** | | **约 2.5 小时** |
 
-#<!-- chunk: 核心要点 -->## 核心要点
+## 核心要点
 
 1. 四种工作负载类型：Deployment、StatefulSet、[[DaemonSet|DaemonSet]]、Job/CronJob
 2. Deployment 通过 [[ReplicaSet|ReplicaSet]] 实现滚动更新和回滚
@@ -87,7 +87,7 @@ created: "2026-05-23"
 
 <!-- chunk: 核心概念讲解 -->## 核心概念讲解
 
-#<!-- chunk: 什么是 Workload？ -->## 什么是 Workload？
+## 什么是 Workload？
 
 Workload（工作负载）是在 Kubernetes 上运行的应用程序。Kubernetes 提供了五种内置的工作负载资源：
 
@@ -99,7 +99,7 @@ Workload（工作负载）是在 Kubernetes 上运行的应用程序。Kubernete
 | **Job** | 一次性任务 | 运行完成后退出 | 数据迁移、批处理 |
 | **CronJob** | 定时任务 | 按 Cron 表达式调度 | 定时报表、数据备份 |
 
-#<!-- chunk: Deployment 深度解析 -->## Deployment 深度解析
+## Deployment 深度解析
 
 **Deployment 并不直接管理 Pod**，而是通过 ReplicaSet 间接管理：
 
@@ -163,7 +163,7 @@ spec:
 | `revisionHistoryLimit` | 10 | 保留的旧 ReplicaSet 数量（用于回滚） |
 | `progressDeadlineSeconds` | 600 | 部署超时时间，超过则标记为失败 |
 
-#<!-- chunk: StatefulSet 与有状态应用 -->## StatefulSet 与有状态应用
+## StatefulSet 与有状态应用
 
 **StatefulSet 与 Deployment 的核心区别：**
 
@@ -219,7 +219,7 @@ postgres-1.postgres-headless.default.svc.cluster.local → Pod postgres-1 的 IP
 postgres-2.postgres-headless.default.svc.cluster.local → Pod postgres-2 的 IP
 ```
 
-#<!-- chunk: 资源 QoS 等级 -->## 资源 QoS 等级
+## 资源 QoS 等级
 
 Kubernetes 根据 Pod 的 requests 和 limits 配置将其分为三个 QoS 等级：
 
@@ -252,7 +252,7 @@ resources:
 # 不设置 resources
 ```
 
-#<!-- chunk: 探针 (Probes) -->## 探针 (Probes)
+## 探针 (Probes)
 
 探针是保障应用可用性的关键机制：
 
@@ -300,7 +300,7 @@ spec:
 | `exec` | 在容器内执行命令，返回 0 为成功 | 自定义健康检查脚本 |
 | `grpc` | gRPC 健康检查协议 | gRPC 服务 |
 
-#<!-- chunk: HPA (Horizontal Pod Autoscaler) -->## HPA (Horizontal Pod Autoscaler)
+## HPA (Horizontal Pod Autoscaler)
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -358,7 +358,7 @@ spec:
 
 <!-- chunk: 架构图 -->## 架构图
 
-#<!-- chunk: Deployment 更新机制 -->## Deployment 更新机制
+## Deployment 更新机制
 
 ```mermaid
 graph TB
@@ -390,7 +390,7 @@ graph TB
     style RS_Old fill:#f5f5f5,stroke:#9e9e9e
 ```
 
-#<!-- chunk: StatefulSet 有序管理 -->## StatefulSet 有序管理
+## StatefulSet 有序管理
 
 ```mermaid
 sequenceDiagram
@@ -416,7 +416,7 @@ sequenceDiagram
     P0-->>SS: Terminated
 ```
 
-#<!-- chunk: 探针工作机制 -->## 探针工作机制
+## 探针工作机制
 
 ```mermaid
 graph TB
@@ -442,7 +442,11 @@ graph TB
 
 <!-- chunk: 实战演示步骤 -->## 实战演示步骤
 
-#<!-- chunk: 演示 1：Deployment 滚动更新 -->## 演示 1：Deployment 滚动更新
+## 演示 1：Deployment 滚动更新
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 步骤 1: 创建 Deployment
@@ -475,7 +479,10 @@ kubectl set resources deployment/web-app -c=nginx --limits=cpu=1,memory=512Mi
 kubectl rollout resume deployment/web-app
 ```
 
-#<!-- chunk: 演示 2：StatefulSet 部署 -->## 演示 2：StatefulSet 部署
+## 演示 2：StatefulSet 部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 创建 Headless Service
@@ -537,7 +544,10 @@ kubectl run test --image=busybox --rm -it --restart=Never -- \
 kubectl get pvc -l app=nginx-sts
 ```
 
-#<!-- chunk: 演示 3：DaemonSet 部署 -->## 演示 3：DaemonSet 部署
+## 演示 3：DaemonSet 部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat <<EOF | kubectl apply -f -
@@ -582,7 +592,10 @@ kubectl get ds -n kube-system log-collector
 kubectl get pods -n kube-system -l app=log-collector -o wide
 ```
 
-#<!-- chunk: 演示 4：CronJob 定时任务 -->## 演示 4：CronJob 定时任务
+## 演示 4：CronJob 定时任务
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat <<EOF | kubectl apply -f -
@@ -619,7 +632,11 @@ kubectl get jobs
 kubectl create job manual-report --from=cronjob/daily-report
 ```
 
-#<!-- chunk: 演示 5：HPA 弹性伸缩 -->## 演示 5：HPA 弹性伸缩
+## 演示 5：HPA 弹性伸缩
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 步骤 1: 部署带资源请求的应用
@@ -668,43 +685,43 @@ kubectl get pods -l app=stress-app -w
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
 
-#<!-- chunk: Q1: Deployment 和 StatefulSet 应该怎么选？ -->## Q1: Deployment 和 StatefulSet 应该怎么选？
+## Q1: Deployment 和 StatefulSet 应该怎么选？
 
 **回答**: 99% 的应用应该使用 Deployment。只有当你的应用满足以下条件时才使用 StatefulSet：(1) 需要稳定的网络标识（如数据库主从需要知道彼此地址）；(2) 需要稳定的持久化存储（每个 Pod 独立的 PVC）；(3) 需要有序的部署和扩展（如 ZooKeeper、Kafka）；(4) 需要有序的滚动更新。
 
-#<!-- chunk: Q2: 滚动更新时如何保证零停机？ -->## Q2: 滚动更新时如何保证零停机？
+## Q2: 滚动更新时如何保证零停机？
 
 **回答**: 关键配置：(1) 设置 `ReadinessProbe`，只有就绪的 Pod 才接收流量；(2) `maxUnavailable: 0` 确保始终有足够的可用副本；(3) 配置 `preStop` 钩子等待连接排空：`lifecycle: preStop: exec: command: ["sleep", "15"]`；(4) 设置 `terminationGracePeriodSeconds: 30`；(5) 使用 `minReadySeconds: 5` 避免 Pod 刚就绪就被使用。
 
-#<!-- chunk: Q3: Pod 被 OOMKilled 怎么处理？ -->## Q3: Pod 被 OOMKilled 怎么处理？
+## Q3: Pod 被 OOMKilled 怎么处理？
 
 **回答**: (1) 查看 OOM 原因：`kubectl describe pod <name>` 看 Last State 的 Reason；(2) 检查 limits.memory 是否合理；(3) 分析内存使用趋势（Prometheus）；(4) 临时解决：调大 limits.memory；(5) 根本解决：排查内存泄漏（使用 pprof 或 heap dump）。注意：如果容器因 OOM 被杀，内核日志 `dmesg` 中会有 Out of memory 记录。
 
-#<!-- chunk: Q4: 如何选择 CPU requests 和 limits？ -->## Q4: 如何选择 CPU requests 和 limits？
+## Q4: 如何选择 CPU requests 和 limits？
 
 **回答**: (1) **requests** 设为 P99 使用量（影响调度决策）；(2) **limits** 设为 requests 的 1.5-2 倍（允许突发）；(3) CPU 是可压缩资源，超限会被 Throttle（不会杀 Pod）；(4) 内存是不可压缩资源，超限会被 OOMKill；(5) 核心业务推荐 Guaranteed QoS（requests == limits）。
 
-#<!-- chunk: Q5: LivenessProbe 和 ReadinessProbe 有什么区别？ -->## Q5: LivenessProbe 和 ReadinessProbe 有什么区别？
+## Q5: LivenessProbe 和 ReadinessProbe 有什么区别？
 
 **回答**: LivenessProbe 检查应用是否"活着"——失败会重启容器。ReadinessProbe 检查应用是否"就绪"——失败会将 Pod 从 Service 移除但不重启。关键区别：LivenessProbe 失败是毁灭性的（重启容器），ReadinessProbe 失败是保护性的（停止流量但保留容器）。**常见错误**：用 LivenessProbe 检查依赖服务（如数据库），这会导致级联重启。
 
-#<!-- chunk: Q6: 如何处理 Pod 启动慢的问题？ -->## Q6: 如何处理 Pod 启动慢的问题？
+## Q6: 如何处理 Pod 启动慢的问题？
 
 **回答**: 使用 StartupProbe：(1) 设置较大的 `failureThreshold` 和 `periodSeconds`（如 failureThreshold=30, periodSeconds=10，最长等待 300 秒）；(2) StartupProbe 通过后才开始 Liveness 和 Readiness 检查；(3) 这样应用有充足的时间完成初始化（如 JVM 预热、加载缓存）。不要通过调大 LivenessProbe 的参数来"绕过"，因为那会影响运行时的故障检测速度。
 
-#<!-- chunk: Q7: 如何实现蓝绿部署？ -->## Q7: 如何实现蓝绿部署？
+## Q7: 如何实现蓝绿部署？
 
 **回答**: (1) 创建两个 Deployment：web-app-blue（当前版本）和 web-app-green（新版本）；(2) Service 的 selector 指向 blue 版本；(3) 验证 green 版本正常后，更新 Service selector 指向 green；(4) 如需回滚，改回 blue。或者使用 Istio/Argo Rollouts 实现更精细的流量切换。
 
-#<!-- chunk: Q8: DaemonSet 和 Deployment 的区别？ -->## Q8: DaemonSet 和 Deployment 的区别？
+## Q8: DaemonSet 和 Deployment 的区别？
 
 **回答**: Deployment 的 Pod 数量由 `replicas` 决定，调度器决定放在哪个节点。DaemonSet 会在每个符合条件 的节点上运行一个 Pod（不受 replicas 控制），适合节点级别的服务（日志采集、监控 Agent、网络插件）。DaemonSet 自动适应节点增减——新节点加入时自动创建 Pod。
 
-#<!-- chunk: Q9: 如何排查 ImagePullBackOff？ -->## Q9: 如何排查 ImagePullBackOff？
+## Q9: 如何排查 ImagePullBackOff？
 
 **回答**: (1) `kubectl describe pod <name>` 查看 Events 中的具体错误；(2) 常见原因：镜像地址错误（拼写、标签不存在）、网络不通（无法访问镜像仓库）、认证失败（需要 imagePullSecrets）；(3) 验证镜像是否存在：`docker pull <image>` 或 `crane pull <image>`；(4) 私有仓库认证：创建 Secret 并在 Pod 中引用 `imagePullSecrets`。
 
-#<!-- chunk: Q10: 如何防止 Pod 被意外驱逐？ -->## Q10: 如何防止 Pod 被意外驱逐？
+## Q10: 如何防止 Pod 被意外驱逐？
 
 **回答**: (1) 使用 Guaranteed QoS（最后被驱逐）；(2) 配置 Pod Disruption Budget（PDB）：
 
@@ -726,7 +743,7 @@ PDB 确保自愿中断（如节点维护、集群升级）不会导致过多 Pod
 
 <!-- chunk: 要点总结 -->## 要点总结
 
-#<!-- chunk: Workload 知识图谱 -->## Workload 知识图谱
+## Workload 知识图谱
 
 ```
 Workload
@@ -759,7 +776,7 @@ Workload
     └── stabilizationWindow (稳定窗口)
 ```
 
-#<!-- chunk: SRE 运维红线 -->## SRE 运维红线
+## SRE 运维红线
 
 | 红线 | 说明 | 违反后果 |
 |------|------|---------|
@@ -773,7 +790,7 @@ Workload
 
 <!-- chunk: 延伸阅读 -->## 延伸阅读
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 
 | 资源 | 链接 | 说明 |
 |------|------|------|
@@ -782,7 +799,7 @@ Workload
 | StatefulSet | https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/ | StatefulSet 详解 |
 | HPA | https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/ | 自动扩缩 |
 
-#<!-- chunk: 关联培训专题 -->## 关联培训专题
+## 关联培训专题
 
 - `kubernetes-architecture-fundamentals-presentation.md` — 控制器模式原理
 - `kubernetes-scheduling-presentation.md` — 调度与 Pod 分布

@@ -1,5 +1,5 @@
 ---
-title: Day 2: 第一个工单处理指南 [quick-start]
+title: "Day 2: 第一个工单处理指南 [quick-start]"
 description: '# Day 2: 第一个工单处理指南'
 category: learning
 tags:
@@ -99,6 +99,10 @@ kubectl top pods -A --sort-by=memory 2>/dev/null | head -15 || echo "Metrics Ser
 
 ### 处理步骤
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # Step 1: 确认问题
 kubectl get pods -n <namespace> | grep -v Running
@@ -147,6 +151,10 @@ curl -s http://<service-name>.<namespace>.svc.cluster.local/health  # 确认服�
 
 ### 常用修复命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 重启 Deployment（最常用）
 kubectl rollout restart deployment <name> -n <namespace>
@@ -181,6 +189,9 @@ kubectl scale deployment <name> -n <namespace> --replicas=5
 > "前端 Pod 无法调用后端 API，返回 503"
 
 ### 处理步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # Step 1: 确认问题
@@ -227,7 +238,7 @@ kubectl run dns-test --rm -it --restart=Never --image=busybox:1.36 -- sh -c '
   echo "=== Testing DNS ==="
   nslookup backend-svc
   nslookup backend-svc.<namespace>.svc.cluster.local
-  nslookup [[entities/kubernetes|kubernetes]].default
+  nslookup [[entities/kubernetes.md|kubernetes]].default
   echo "=== Testing Connectivity ==="
   wget -qO- --timeout=5 http://backend-svc:80/health || echo "Connection failed"
 '
@@ -262,6 +273,10 @@ Service 无法访问
 
 ### 处理步骤
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # Step 1: 确认问题
 kubectl get nodes | grep -v Ready
@@ -294,6 +309,9 @@ kubectl get pods -o wide | grep <node-name>      # 确认 Pod 已调度回来
 ```
 
 ### 节点 NotReady 排障命令集
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 检查节点 Conditions
@@ -458,4 +476,6 @@ topic: onboarding
 type: hands-on-guide
 tags: [onboarding, first-ticket, troubleshooting, sre, ops-engineer, k8s-1.28-1.33]
 ---
+```
+
 ```

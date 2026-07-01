@@ -91,7 +91,7 @@ k8s_versions:
 
 <!-- chunk: 1. MCP 协议架构 -->## 1. MCP 协议架构
 
-#<!-- chunk: 1.1 协议分层 -->## 1.1 协议分层
+## 1.1 协议分层
 
 ```
 ┌──────────────────────────────────────────────┐
@@ -111,7 +111,7 @@ k8s_versions:
 └──────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.2 核心概念 -->## 1.2 核心概念
+## 1.2 核心概念
 
 | 概念 | 定义 | 类比 |
 |------|------|------|
@@ -123,7 +123,7 @@ k8s_versions:
 | **Prompts** | Server 提供的提示词模板 | API 文档模板 |
 | **Sampling** | Server 请求 Host 的 LLM 进行推理 | 反向调用 |
 
-#<!-- chunk: 1.3 通信流程 -->## 1.3 通信流程
+## 1.3 通信流程
 
 ```mermaid
 graph TB
@@ -154,7 +154,7 @@ graph TB
 
 <!-- chunk: 2. 传输方式详解 -->## 2. 传输方式详解
 
-#<!-- chunk: 2.1 三种传输方式对比 -->## 2.1 三种传输方式对比
+## 2.1 三种传输方式对比
 
 | 传输方式 | 协议 | 场景 | 优势 | 限制 |
 |---------|------|------|------|------|
@@ -162,7 +162,7 @@ graph TB
 | **SSE** | HTTP + Server-Sent Events | 远程服务 | 兼容性好 | 单向流，需轮询 |
 | **Streamable HTTP** | HTTP POST + SSE | 远程服务（推荐） | 双向流，支持无状态 | 较新，部分工具待支持 |
 
-#<!-- chunk: 2.2 stdio 传输（本地 MCP Server） -->## 2.2 stdio 传输（本地 MCP Server）
+## 2.2 stdio 传输（本地 MCP Server）
 
 最常用的本地集成方式，Agent CLI 通过 spawn 子进程启动 MCP Server：
 
@@ -183,7 +183,7 @@ graph TB
 2. 通过 stdin/stdout 进行 JSON-RPC 通信
 3. Agent CLI 退出时终止子进程
 
-#<!-- chunk: 2.3 Streamable HTTP（远程 MCP Server） -->## 2.3 Streamable HTTP（远程 MCP Server）
+## 2.3 Streamable HTTP（远程 MCP Server）
 
 适用于团队共享、集中管理的 MCP Server：
 
@@ -215,7 +215,7 @@ MCP Server ──▶ Agent CLI: 200 OK, 建立连接
 
 <!-- chunk: 3. MCP Server 开发实战 -->## 3. MCP Server 开发实战
 
-#<!-- chunk: 3.1 TypeScript MCP Server 开发 -->## 3.1 TypeScript MCP Server 开发
+## 3.1 TypeScript MCP Server 开发
 
 以开发一个 **Kubernetes Pod 管理 MCP Server** 为例：
 
@@ -298,7 +298,7 @@ const transport = new StdioServerTransport();
 await server.connect(transport);
 ```
 
-#<!-- chunk: 3.2 Python MCP Server 开发 -->## 3.2 Python MCP Server 开发
+## 3.2 Python MCP Server 开发
 
 ```python
 from mcp.server.fastmcp import FastMCP
@@ -352,7 +352,7 @@ if __name__ == "__main__":
     mcp.run(transport="stdio")
 ```
 
-#<!-- chunk: 3.3 MCP Server 最佳实践 -->## 3.3 MCP Server 最佳实践
+## 3.3 MCP Server 最佳实践
 
 | 实践 | 说明 | 示例 |
 |------|------|------|
@@ -368,7 +368,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 4. Agent CLI 中的 MCP 配置 -->## 4. Agent CLI 中的 MCP 配置
 
-#<!-- chunk: 4.1 各工具配置方式 -->## 4.1 各工具配置方式
+## 4.1 各工具配置方式
 
 **Claude Code**：
 ```bash
@@ -416,7 +416,7 @@ extensions:
     enabled: true
 ```
 
-#<!-- chunk: 4.2 MCP Server 发现与安装 -->## 4.2 MCP Server 发现与安装
+## 4.2 MCP Server 发现与安装
 
 **2026 年主流 MCP Server 注册表**：
 
@@ -444,7 +444,7 @@ extensions:
 
 <!-- chunk: 5. 企业级 MCP 架构 -->## 5. 企业级 MCP 架构
 
-#<!-- chunk: 5.1 远程 MCP Server 网关 -->## 5.1 远程 MCP Server 网关
+## 5.1 远程 MCP Server 网关
 
 企业环境中推荐通过 **MCP Gateway** 集中管理 MCP Server：
 
@@ -474,7 +474,7 @@ extensions:
 └──────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 5.2 安全加固清单 -->## 5.2 安全加固清单
+## 5.2 安全加固清单
 
 | 安全措施 | 实施方式 | 优先级 |
 |---------|---------|--------|
@@ -488,7 +488,7 @@ extensions:
 | **凭据管理** | 使用 Vault/KMS 管理 Server 凭据 | P1 |
 | **DLP** | 防止敏感数据通过工具泄露 | P2 |
 
-#<!-- chunk: 5.3 高可用部署 -->## 5.3 高可用部署
+## 5.3 高可用部署
 
 ```yaml
 # K8s 部署 MCP Gateway
@@ -548,7 +548,7 @@ spec:
 
 <!-- chunk: 6. MCP 调试与可观测性 -->## 6. MCP 调试与可观测性
 
-#<!-- chunk: 6.1 MCP Inspector -->## 6.1 MCP Inspector
+## 6.1 MCP Inspector
 
 MCP 官方提供的调试工具：
 
@@ -563,7 +563,7 @@ npx @modelcontextprotocol/inspector
 # - 检查 JSON-RPC 消息流
 ```
 
-#<!-- chunk: 6.2 日志与追踪 -->## 6.2 日志与追踪
+## 6.2 日志与追踪
 
 ```bash
 # Claude Code MCP 调试日志
@@ -577,7 +577,7 @@ claude --mcp-debug
 tail -f ~/Library/Logs/Claude/mcp-server-kubernetes.log
 ```
 
-#<!-- chunk: 6.3 常见问题排查 -->## 6.3 常见问题排查
+## 6.3 常见问题排查
 
 | 问题 | 症状 | 排查步骤 |
 |------|------|---------|
@@ -614,17 +614,17 @@ MCP 协议为 Agent CLI 提供了一个**可扩展、安全、标准化**的工�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 

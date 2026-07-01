@@ -31,7 +31,7 @@ created: "2026-05-23"
 
 # [[Litmus|Litmus]] 混沌工程实践
 
-## Litmus vs [[Chaos Mesh|Chaos Mesh]]
+## Litmus vs Chaos Mesh
 
 | 特性 | Litmus | Chaos Mesh |
 |------|--------|-----------|
@@ -52,6 +52,9 @@ Litmus 架构:
 ```
 
 ## 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 ChaosCenter
@@ -135,5 +138,7 @@ spec:
 
 ## 相关
 
-- [[domain-09-reliability-engineering/05-chaos-engineering/01-chaos-engineering-overview]]
-- [[domain-09-reliability-engineering/05-chaos-engineering/02-chaos-mesh-deployment]]
+- [[domain-09-reliability-engineering/05-chaos-engineering/01-chaos-engineering-overview.md|01 chaos engineering overview]]
+- [[domain-09-reliability-engineering/05-chaos-engineering/02-chaos-mesh-deployment.md|02 chaos mesh deployment]]
+
+```

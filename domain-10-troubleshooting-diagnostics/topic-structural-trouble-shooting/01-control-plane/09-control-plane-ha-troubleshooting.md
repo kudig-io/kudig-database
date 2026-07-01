@@ -105,6 +105,9 @@ k8s_versions:
 
 ### 问题影响范围评估
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 快速评估控制平面健康状态
 kubectl get nodes -l node-role.kubernetes.io/control-plane
@@ -164,6 +167,9 @@ done
 
 #### 1. etcd 集群故障诊断
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # etcd 集群高可用诊断脚本
@@ -199,6 +205,9 @@ done
 ```
 
 #### 2. API Server 高可用诊断
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -273,6 +282,10 @@ kubectl get events -n kube-system --field-selector reason=LeaderElection | tail 
 
 #### 方案一：单节点故障恢复
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # etcd 单节点故障恢复脚本
@@ -289,7 +302,7 @@ kubectl exec -n kube-system $ETCD_POD -- ETCDCTL_API=3 etcdctl --endpoints=https
 
 # 2. 清理问题节点数据
 echo "2. 清理问题节点数据:"
-ssh $FAILED_NODE "sudo rm -rf /var/lib/etcd/member"
+ssh $FAILED_NODE "sudo rm -rf /var/lib/etcd/member"  # ⚠️ 删除系统/数据文件
 
 # 3. 重新加入集群
 echo "3. 重新加入集群:"
@@ -301,6 +314,10 @@ kubectl exec -n kube-system $ETCD_POD -- ETCDCTL_API=3 etcdctl --endpoints=https
 ```
 
 #### 方案二：集群脑裂恢复
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -328,14 +345,14 @@ ssh $PRIMARY_NODE "sudo systemctl stop etcd"
 ssh $PRIMARY_NODE "sudo cp -r /var/lib/etcd /var/lib/etcd.backup.$(date +%Y%m%d_%H%M%S)"
 
 # 重建集群
-ssh $PRIMARY_NODE "sudo rm -rf /var/lib/etcd/member"
+ssh $PRIMARY_NODE "sudo rm -rf /var/lib/etcd/member"  # ⚠️ 删除系统/数据文件
 ssh $PRIMARY_NODE "sudo kubeadm init phase etcd local --config /etc/kubernetes/kubeadm-config.yaml"
 
 # 3. 逐步添加其他节点
 for node in "${MAJORITY_MEMBERS[@]:1}"; do
   echo "添加节点 $node 到集群:"
   ssh $node "sudo systemctl stop etcd"
-  ssh $node "sudo rm -rf /var/lib/etcd/member"
+  ssh $node "sudo rm -rf /var/lib/etcd/member"  # ⚠️ 删除系统/数据文件
   ssh $node "sudo kubeadm join-phase control-plane-join etcd --config /etc/kubernetes/kubeadm-config.yaml"
 done
 
@@ -517,6 +534,9 @@ MONITOR_LOG="/var/log/kubernetes/leader-election-monitor.log"
 
 ### 高可用验证脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # 高可用配置验证脚本
@@ -646,6 +666,9 @@ highAvailability:
 
 ### 定期高可用检查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # 定期高可用健康检查脚本
@@ -724,14 +747,16 @@ HEALTH_CHECK_LOG="/var/log/kubernetes/ha-health-check-$(date +%Y%m%d).log"
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/07-control-plane-security-troubleshooting|07-control-plane-security-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/08-control-plane-performance-troubleshooting|08-control-plane-performance-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/10-control-plane-upgrade-troubleshooting|10-control-plane-upgrade-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting|01-apiserver-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/07-control-plane-security-troubleshooting.md|07-control-plane-security-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/08-control-plane-performance-troubleshooting.md|08-control-plane-performance-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/10-control-plane-upgrade-troubleshooting.md|10-control-plane-upgrade-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md|01-apiserver-troubleshooting]]
+
+```

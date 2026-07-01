@@ -32,6 +32,9 @@ created: "2026-05-23"
 
 ### 故障排查命令速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 1. 检查 OpenKruise 组件状态
 kubectl get pods -n kruise-system
@@ -68,18 +71,18 @@ kubectl annotate pod <pod> -n <namespace> kruise.io/inplace-update-enabled="true
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 
 ## Related
 
 - observability.md|ts-monitoring-observability]] — 监控可观测性排查
-- [[skills/skill-k8s-node-notready-SKILL|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
+- [[skills/skill-k8s-node-notready-SKILL.md|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
 - [[kudig-prompts-catalog]] — KUDIG Prompt 模板集：故障排查、架构评审、配置生成与学习路径
-- [[skills/learn-decision-tree-mermaid|learn-decision-tree-mermaid]] — 故障排查决策树 - Mermaid 可视化版
+- [[skills/learn-decision-tree-mermaid.md|learn-decision-tree-mermaid]] — 故障排查决策树 - Mermaid 可视化版
 - [[openkruise]] — OpenKruise
 
 - [[nginx-ingress-fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/openkruise-fta|OpenKruise 工作负载异常故障树分析]]
-- [[skills/learn-05-ingress-basics|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/openkruise-index|OpenKruise 全局索引]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/openkruise-fta.md|OpenKruise 工作负载异常故障树分析]]
+- [[skills/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/openkruise-index.md|OpenKruise 全局索引]]

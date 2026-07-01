@@ -51,7 +51,7 @@ created: "2026-05-23"
 - 06 - Pod安全标准详解
 - 07 - RBAC权限矩阵表
 - 08 - 安全最佳实践表
-- [[entities/kubernetes|Kubernetes 安全加固]]]]
+- [[entities/kubernetes.md|Kubernetes 安全加固]]]]
 - 证书管理与 TLS 配置
 - 11 - 密钥与敏感信息管理工具
 - 14 - 策略引擎与合规
@@ -63,35 +63,35 @@ created: "2026-05-23"
 
 - 01 - NetworkPolicy 深度实践指南
 - 83 - 网络加密与mTLS
-- [[entities/03-containerd-security-hardening]]
+- [[entities/03-containerd-security-hardening.md|03 containerd security hardening]]
 
 ### 术语词典
 
-- [[domain-17-system-foundation/topic-dictionary/security/cloud-native-security-practices|09 - 云原生安全专家指南]]
-- [[domain-17-system-foundation/topic-dictionary/security/cloud-native-security|云原生安全]]
-- [[domain-17-system-foundation/topic-dictionary/security/controlling-access-to-the-kubernetes-api|控制对 Kubernetes API 的访问]]
-- [[domain-17-system-foundation/topic-dictionary/security/good-practices-for-kubernetes-secrets|Kubernetes Secrets 最佳实践]]
-- [[domain-17-system-foundation/topic-dictionary/security/pod-security-admission|Pod 安全准入]]
-- [[domain-17-system-foundation/topic-dictionary/security/pod-security-standards|Pod 安全标准]]
-- [[domain-17-system-foundation/topic-dictionary/security/policy-as-code|策略即代码（Policy as Code）]]
-- [[domain-17-system-foundation/topic-dictionary/security/role-based-access-control-good-practices|基于角色的访问控制（RBAC）最佳实践]]
-- [[domain-17-system-foundation/topic-dictionary/security/runtime-security|运行时安全]]
-- [[domain-17-system-foundation/topic-dictionary/security/secrets-management-deep-dive|密钥管理深度指南]]
-- [[domain-17-system-foundation/topic-dictionary/security/spiffe-spire-identity|SPIFFE / SPIRE 与工作负载身份]]
-- [[domain-17-system-foundation/topic-dictionary/security/supply-chain-security|软件供应链安全]]
-- [[domain-17-system-foundation/topic-dictionary/networking/network-policies|Network Policies]]
+- [[domain-17-system-foundation/topic-dictionary/security/cloud-native-security-practices.md|09 - 云原生安全专家指南]]
+- [[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|云原生安全]]
+- [[domain-17-system-foundation/topic-dictionary/security/controlling-access-to-the-kubernetes-api.md|控制对 Kubernetes API 的访问]]
+- [[domain-17-system-foundation/topic-dictionary/security/good-practices-for-kubernetes-secrets.md|Kubernetes Secrets 最佳实践]]
+- [[domain-17-system-foundation/topic-dictionary/security/pod-security-admission.md|Pod 安全准入]]
+- [[domain-17-system-foundation/topic-dictionary/security/pod-security-standards.md|Pod 安全标准]]
+- [[domain-17-system-foundation/topic-dictionary/security/policy-as-code.md|策略即代码（Policy as Code）]]
+- [[domain-17-system-foundation/topic-dictionary/security/role-based-access-control-good-practices.md|基于角色的访问控制（RBAC）最佳实践]]
+- [[domain-17-system-foundation/topic-dictionary/security/runtime-security.md|运行时安全]]
+- [[domain-17-system-foundation/topic-dictionary/security/secrets-management-deep-dive.md|密钥管理深度指南]]
+- [[domain-17-system-foundation/topic-dictionary/security/spiffe-spire-identity.md|SPIFFE / SPIRE 与工作负载身份]]
+- [[domain-17-system-foundation/topic-dictionary/security/supply-chain-security.md|软件供应链安全]]
+- [[domain-17-system-foundation/topic-dictionary/networking/network-policies.md|Network Policies]]
 
 ## 关联文档 (K8s 集成)
 
 ### 故障排查
 
-- [[domain-10-troubleshooting-diagnostics/12-rbac-quota-troubleshooting|12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/13-certificate-troubleshooting|13 - 证书故障排查 (Certificate Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/32-security-troubleshooting|32 - 安全相关故障排查 (Security Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting|RBAC 与认证故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting|Kubernetes 证书故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting|Pod 安全与 SecurityContext 故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting|审计日志故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/12-rbac-quota-troubleshooting.md|12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)]]
+- [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/13-certificate-troubleshooting.md|13 - 证书故障排查 (Certificate Troubleshooting)]]
+- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/32-security-troubleshooting.md|32 - 安全相关故障排查 (Security Troubleshooting)]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md|Kubernetes 证书故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting.md|Pod 安全与 SecurityContext 故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting.md|审计日志故障排查指南]]
 
 ### YAML 配置参考
 
@@ -103,14 +103,14 @@ created: "2026-05-23"
 
 ### 技能卡片
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/09-rbac-quota-failure|[[RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting|RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting]]]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure|[[ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting|ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting]]]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response|安全事件应急响应 / Security Incident Response]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/09-rbac-quota-failure.md|[[RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting|RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting]]]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure.md|[[ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting|ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting]]]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response.md|安全事件应急响应 / Security Incident Response]]
 
 ### FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/psp-scc-fta|PSP/SCC 异常 FTA 树]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/rbac-fta|RBAC 异常 FTA 树]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/psp-scc-fta.md|PSP/SCC 异常 FTA 树]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/rbac-fta.md|RBAC 异常 FTA 树]]
 
 ## 扩展参考
 
@@ -124,8 +124,8 @@ created: "2026-05-23"
 
 ### 供应链安全
 
-- [[domain-05-security-compliance/05-supply-chain/05-slsa-levels-implementation]]
-- [[domain-05-security-compliance/05-supply-chain/07-sigstore-cosign-signing]]
+- [[domain-05-security-compliance/05-supply-chain/05-slsa-levels-implementation.md|05 slsa levels implementation]]
+- [[domain-05-security-compliance/05-supply-chain/07-sigstore-cosign-signing.md|07 sigstore cosign signing]]
 
 ### 安全生态项目
 

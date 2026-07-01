@@ -287,7 +287,7 @@ created: "2026-05-23"
 | [Local Ephemeral Storage](domain-17-system-foundation/topic-dictionary/storage/local-ephemeral-storage.md) | 130 | 节点临时存储、驱逐阈值、资源配额 |
 | [Volume Health Monitoring](domain-17-system-foundation/topic-dictionary/storage/volume-health-monitoring.md) | 121 | 卷健康状态检测、CSI NodeGetVolumeStats |
 | [Volume Attributes Classes](domain-17-system-foundation/topic-dictionary/storage/volume-attributes-classes.md) | 153 | VolumeAttributesClass (v1.29+)、动态修改卷属性 |
-| [Node Volume Limits](domain-17-system-foundation/topic-dictionary/[[domain-17-system-foundation/topic-dictionary/storage/node-specific-volume-limits|node-specific-volume-limits]].md) | 114 | 节点卷挂载数量限制、云厂商限制 |
+| [Node Volume Limits](domain-17-system-foundation/topic-dictionary/[[domain-17-system-foundation/topic-dictionary/storage/node-specific-volume-limits.md|node-specific-volume-limits]].md) | 114 | 节点卷挂载数量限制、云厂商限制 |
 | [高性能存储网络](domain-17-system-foundation/topic-dictionary/storage/high-performance-storage-networks.md) | 145 | RDMA、NVMe-oF、RoCE、iWARP |
 | [对象存储与数据流水线](domain-17-system-foundation/topic-dictionary/storage/object-storage-and-data-pipelines.md) | 178 | S3/MinIO 集成、COSI（容器对象存储接口） |
 | [Storage Capacity](domain-17-system-foundation/topic-dictionary/storage/storage-capacity.md) | 105 | CSIStorageCapacity、拓扑感知供给 |

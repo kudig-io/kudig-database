@@ -255,6 +255,9 @@ kubectl get secret <name> -n <namespace> -o jsonpath='{.data.\.dockerconfigjson}
 
 #### 2.2.3 Pod 引用检查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查 Pod 的环境变量配置
 kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].env}' | jq
@@ -276,6 +279,10 @@ kubectl exec <pod-name> -- ls -la /path/to/config/
 ```
 
 #### 2.2.4 热更新检查
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 修改 ConfigMap 后检查 Pod 内文件更新时间
@@ -316,6 +323,9 @@ Events:
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. 确认资源是否存在
 kubectl get configmap app-config -n <namespace>
@@ -354,6 +364,9 @@ Events:
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 查看 ConfigMap 的所有 key
 kubectl get configmap app-config -n <namespace> -o jsonpath='{.data}' | jq 'keys'
@@ -378,6 +391,11 @@ kubectl edit configmap app-config -n <namespace>
 环境变量在 Pod 启动时注入，更新 ConfigMap/Secret 后不会自动更新。
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 方案 1: 重启 Pod (推荐用于无状态应用)
@@ -404,6 +422,9 @@ kubectl patch deployment <name> -n <namespace> -p \
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 确认没有使用 subPath
 kubectl get pod <pod-name> -o yaml | grep -A10 volumeMounts
@@ -429,6 +450,9 @@ kubectl exec <pod-name> -- ls -la /path/to/config/
 
 **解决方案：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 方案 1: 应用支持 SIGHUP 信号重新加载
 kubectl exec <pod-name> -- kill -HUP 1
@@ -451,6 +475,9 @@ curl -X POST http://<pod-ip>:<port>/-/reload
 Secret 数据解码后是乱码或不完整
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 检查当前数据
@@ -486,6 +513,10 @@ kubectl get secret my-secret -o jsonpath='{.data.password}' | base64 -d && echo
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 创建 docker-registry 类型的 Secret
 kubectl create secret docker-registry my-registry-secret \
@@ -520,6 +551,9 @@ Error: secrets "my-secret" is forbidden: User "system:serviceaccount:default:mya
 ```
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 创建 Role 允许访问特定 Secret
@@ -718,6 +752,12 @@ data:
 
 ### 常用命令速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # ConfigMap 操作
 kubectl create configmap <name> --from-file=<path>
@@ -742,20 +782,22 @@ kubectl rollout restart deployment <name>
 
 ### 相关文档
 
-- [Pod 故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting|01-pod-troubleshooting]].md)
-- [RBAC 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting|01-rbac-troubleshooting]].md)
-- [kubelet 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting|01-kubelet-troubleshooting]].md)
+- [Pod 故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
+- [RBAC 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]].md)
+- [kubelet 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting|04-daemonset-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting|05-job-cronjob-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting|01-pod-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|02-deployment-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting.md|04-daemonset-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting.md|05-job-cronjob-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
+
+```

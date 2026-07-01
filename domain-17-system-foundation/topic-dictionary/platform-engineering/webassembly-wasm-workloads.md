@@ -32,6 +32,7 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # WebAssembly（Wasm）工作负载
@@ -163,6 +164,9 @@ Wasm 采用 **Capability-based Security**：
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 查看已注册的 RuntimeClass
 kubectl get runtimeclass
@@ -214,3 +218,9 @@ kubectl get pods -A -o jsonpath='{range .items[?(@.spec.runtimeClassName)]}{.met
 - [Containerd Wasm Shims](https://github.com/containerd/runwasi)
 - [Ajeet Singh Raina - Top 5 Trends Shaping Kubernetes in 2026](https://www.ajeetraina.com/top-5-trends-shaping-kubernetes-in-2026/)
 - [CNCF WebAssembly Landscape](https://landscape.cncf.io/card-mode?category=wasm&grouping=category)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-group.md|API 组]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]

@@ -78,7 +78,7 @@ Traefik Mesh 的核心优势在于与 Traefik 生态的无缝集成——如果�
 
 本文档从企业级生产环境角度，全面覆盖 Traefik Mesh 的架构设计、流量管理、安全配置、可观测性、多区域部署和故障排查。所有配置均基于生产环境最佳实践，可直接应用于实际项目。
 
-#<!-- chunk: Traefik Mesh 架构全景 -->## Traefik Mesh 架构全景
+## Traefik Mesh 架构全景
 
 ```mermaid
 graph TB
@@ -138,7 +138,7 @@ graph TB
     TP_A & TP_B & TP_C --> LOKI_T
 ```
 
-#<!-- chunk: Traefik Mesh vs Sidecar 模式对比 -->## Traefik Mesh vs Sidecar 模式对比
+## Traefik Mesh vs Sidecar 模式对比
 
 | 维度 | Traefik Mesh (每节点) | Istio/Linkerd (Sidecar) |
 |:---|:---|:---|
@@ -155,7 +155,7 @@ graph TB
 
 <!-- chunk: 核心配置 — 企业级部署 -->## 核心配置 — 企业级部署
 
-#<!-- chunk: 命名空间与 Helm 安装 -->## 命名空间与 Helm 安装
+## 命名空间与 Helm 安装
 
 ```yaml
 apiVersion: v1
@@ -234,7 +234,10 @@ spec:
         maxConnections: 2048
 ```
 
-#<!-- chunk: 生产级手动安装 -->## 生产级手动安装
+## 生产级手动安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 添加 Helm 仓库
@@ -271,7 +274,7 @@ kubectl get traefikservices -A
 
 <!-- chunk: 流量管理实战 -->## 流量管理实战
 
-#<!-- chunk: 金丝雀发布 — 流量分割 -->## 金丝雀发布 — 流量分割
+## 金丝雀发布 — 流量分割
 
 ```yaml
 apiVersion: traefik.io/v1alpha1
@@ -375,7 +378,7 @@ spec:
               memory: "512Mi"
 ```
 
-#<!-- chunk: 高级路由规则 -->## 高级路由规则
+## 高级路由规则
 
 ```yaml
 apiVersion: traefik.io/v1alpha1
@@ -433,7 +436,7 @@ spec:
       namespace: production
 ```
 
-#<!-- chunk: Middleware 配置链 -->## Middleware 配置链
+## Middleware 配置链
 
 ```yaml
 apiVersion: traefik.io/v1alpha1
@@ -576,7 +579,7 @@ spec:
 
 <!-- chunk: 安全策略 — mTLS 与访问控制 -->## 安全策略 — mTLS 与访问控制
 
-#<!-- chunk: TLS 配置 -->## TLS 配置
+## TLS 配置
 
 ```yaml
 apiVersion: traefik.io/v1alpha1
@@ -644,7 +647,7 @@ spec:
         - admin.company.com
 ```
 
-#<!-- chunk: OAuth2 认证 -->## OAuth2 认证
+## OAuth2 认证
 
 ```yaml
 apiVersion: traefik.io/v1alpha1
@@ -707,7 +710,7 @@ spec:
 
 <!-- chunk: 可观测性 — Prometheus, Jaeger, Grafana 集成 -->## 可观测性 — Prometheus, Jaeger, Grafana 集成
 
-#<!-- chunk: Prometheus ServiceMonitor -->## Prometheus ServiceMonitor
+## Prometheus ServiceMonitor
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -740,7 +743,7 @@ spec:
       interval: 15s
 ```
 
-#<!-- chunk: Jaeger 追踪配置 -->## Jaeger 追踪配置
+## Jaeger 追踪配置
 
 ```yaml
 apiVersion: traefik.io/v1alpha1
@@ -775,7 +778,7 @@ spec:
       endpoint: "http://otel-collector.monitoring:4318"
 ```
 
-#<!-- chunk: 关键指标与告警 -->## 关键指标与告警
+## 关键指标与告警
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -833,7 +836,7 @@ spec:
             summary: "TLS certificate expiring in less than 14 days"
 ```
 
-#<!-- chunk: 关键 PromQL 查询 -->## 关键 PromQL 查询
+## 关键 PromQL 查询
 
 ```promql
 # 请求速率
@@ -857,7 +860,7 @@ traefik_tls_certificate_not_after - time()
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: 代理资源优化 -->## 代理资源优化
+## 代理资源优化
 
 ```yaml
 apiVersion: apps/v1
@@ -916,7 +919,7 @@ spec:
               containerPort: 9090
 ```
 
-#<!-- chunk: Traefik Mesh Controller 调优 -->## Traefik Mesh Controller 调优
+## Traefik Mesh Controller 调优
 
 ```yaml
 apiVersion: apps/v1
@@ -950,7 +953,10 @@ spec:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 完整诊断脚本 -->## 完整诊断脚本
+## 完整诊断脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1007,7 +1013,7 @@ echo "=== 12. Endpoint 检查 ==="
 kubectl get endpoints -n production
 ```
 
-#<!-- chunk: 常见问题速查 -->## 常见问题速查
+## 常见问题速查
 
 | 症状 | 可能原因 | 解决方案 |
 |:---|:---|:---|
@@ -1026,7 +1032,7 @@ kubectl get endpoints -n production
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 部署最佳实践 -->## 部署最佳实践
+## 部署最佳实践
 
 ```yaml
 部署最佳实践清单:
@@ -1039,7 +1045,7 @@ kubectl get endpoints -n production
   7. TLS 证书: 使用 cert-manager 自动管理
 ```
 
-#<!-- chunk: 安全最佳实践 -->## 安全最佳实践
+## 安全最佳实践
 
 ```yaml
 安全最佳实践清单:
@@ -1053,7 +1059,7 @@ kubectl get endpoints -n production
   8. 审计日志: 记录管理操作和认证事件
 ```
 
-#<!-- chunk: 可观测性最佳实践 -->## 可观测性最佳实践
+## 可观测性最佳实践
 
 ```yaml
 可观测性最佳实践清单:
@@ -1065,7 +1071,7 @@ kubectl get endpoints -n production
   6. SLO 监控: 基于 Prometheus 指标定义 SLO
 ```
 
-#<!-- chunk: 运维最佳实践 -->## 运维最佳实践
+## 运维最佳实践
 
 ```yaml
 运维最佳实践清单:
@@ -1089,7 +1095,7 @@ kubectl get endpoints -n production
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
 - Domain-26 服务网格与微服务 — 开源项目索引
 - Istio 企业级服务网格架构与实践
 - Linkerd 企业级服务网格深度实践
@@ -1110,4 +1116,4 @@ kubectl get endpoints -n production
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]

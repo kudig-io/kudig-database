@@ -83,7 +83,7 @@ Gateway API 是 Kubernetes SIG-Network 主导的下一代流量路由标准，�
 | **扩展性差** | 注解字符串，无类型安全 | 强类型 CRD，Policy Attachment |
 | **跨 NS 路由** | 不支持或非标准 | ReferenceGrant 原生支持 |
 
-#<!-- chunk: API 版本演进 -->## API 版本演进
+## API 版本演进
 
 | 版本 | 发布时间 | 关键特性 |
 |------|---------|---------|
@@ -127,7 +127,7 @@ Gateway API 是 Kubernetes SIG-Network 主导的下一代流量路由标准，�
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: GatewayClass -->## GatewayClass
+## GatewayClass
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -139,7 +139,7 @@ spec:
   description: "Higress cloud-native API gateway"
 ```
 
-#<!-- chunk: Gateway -->## Gateway
+## Gateway
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -172,7 +172,7 @@ spec:
             gateway-access: "true"
 ```
 
-#<!-- chunk: HTTPRoute -->## HTTPRoute
+## HTTPRoute
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -234,7 +234,7 @@ Gateway API 通过资源层次实现了清晰的职责分离：
 
 <!-- chunk: 4. HTTPRoute 深度解析 -->## 4. HTTPRoute 深度解析
 
-#<!-- chunk: 匹配规则优先级 -->## 匹配规则优先级
+## 匹配规则优先级
 
 HTTPRoute 匹配按以下优先级排序：
 
@@ -243,7 +243,7 @@ HTTPRoute 匹配按以下优先级排序：
 3. **Header 匹配数量多** > **Header 匹配数量少**
 4. **Query 参数匹配数量多** > **Query 参数匹配数量少**
 
-#<!-- chunk: 流量分割（金丝雀发布） -->## 流量分割（金丝雀发布）
+## 流量分割（金丝雀发布）
 
 ```yaml
 rules:
@@ -260,7 +260,7 @@ rules:
     weight: 5     # 5% 流量到金丝雀版
 ```
 
-#<!-- chunk: 请求/响应转换 -->## 请求/响应转换
+## 请求/响应转换
 
 ```yaml
 rules:
@@ -287,7 +287,7 @@ rules:
     port: 8080
 ```
 
-#<!-- chunk: 请求镜像 -->## 请求镜像
+## 请求镜像
 
 ```yaml
 rules:
@@ -308,7 +308,7 @@ rules:
 
 <!-- chunk: 5. 高级路由类型 -->## 5. 高级路由类型
 
-#<!-- chunk: GRPCRoute（v1.1 Standard） -->## GRPCRoute（v1.1 Standard）
+## GRPCRoute（v1.1 Standard）
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -330,7 +330,7 @@ spec:
       port: 50051
 ```
 
-#<!-- chunk: TCPRoute -->## TCPRoute
+## TCPRoute
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1alpha2
@@ -347,7 +347,7 @@ spec:
       port: 5432
 ```
 
-#<!-- chunk: TLSRoute（TLS Passthrough） -->## TLSRoute（TLS Passthrough）
+## TLSRoute（TLS Passthrough）
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1alpha2
@@ -409,7 +409,7 @@ Gateway API 定义了分层的一致性配置文件：
 | **Extended** | Header 匹配、URL 重写、流量分割 | 推荐支持 |
 | **Implementation-Specific** | 厂商自定义扩展 | 通过 Policy Attachment |
 
-#<!-- chunk: 运行一致性测试 -->## 运行一致性测试
+## 运行一致性测试
 
 ```bash
 # 安装 Gateway API 一致性测试套件
@@ -440,7 +440,7 @@ go test ./conformance/... -run TestConformance \
 
 <!-- chunk: 9. 从 Ingress 迁移到 Gateway API -->## 9. 从 Ingress 迁移到 Gateway API
 
-#<!-- chunk: 资源映射关系 -->## 资源映射关系
+## 资源映射关系
 
 | Ingress 概念 | Gateway API 对应 |
 |-------------|-----------------|
@@ -452,7 +452,7 @@ go test ./conformance/... -run TestConformance \
 | Nginx 注解 (rewrite) | `HTTPRoute.spec.rules[].filters` |
 | Nginx 注解 (rate-limit) | Policy Attachment (厂商扩展) |
 
-#<!-- chunk: 迁移示例 -->## 迁移示例
+## 迁移示例
 
 **Ingress (迁移前):**
 ```yaml
@@ -524,7 +524,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-40-cloud-native-api-gateway MOC
-- [[domain-03-networking-traffic/README|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
 - Domain-40 云原生 API 网关 — 开源项目索引
 - 01 - 云原生 API 网关架构总览
 - 03 - API 网关选型指南与对比矩阵

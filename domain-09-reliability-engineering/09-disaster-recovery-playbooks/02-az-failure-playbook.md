@@ -54,6 +54,9 @@ kubectl get pods -o wide -n production | grep $FAILED_AZ
 
 ### Step 2: 流量切换 (2-5 分钟)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 从负载均衡器中移除问题 AZ
 # AWS ALB
@@ -107,4 +110,4 @@ kubectl get pods -o wide -n production | grep Running
 
 ## 相关
 
-- [[domain-09-reliability-engineering/09-disaster-recovery-playbooks/01-dr-scenarios-catalog]]
+- [[domain-09-reliability-engineering/09-disaster-recovery-playbooks/01-dr-scenarios-catalog.md|01 dr scenarios catalog]]

@@ -319,14 +319,14 @@ spec:
     spec:
       containers:
       - name: prometheus
-        image: prom/prometheus:v2.47.0
+        image: prom/prometheus:v3.2.1
         args:
         - --config.file=/etc/prometheus/prometheus.yml
         - --storage.tsdb.path=/prometheus
         - --storage.tsdb.min-block-duration=2h
         - --storage.tsdb.max-block-duration=2h
       - name: thanos-sidecar
-        image: quay.io/thanos/thanos:v0.32.0
+        image: quay.io/thanos/thanos:v0.37.0
         args:
         - sidecar
         - --tsdb.path=/prometheus
@@ -344,7 +344,7 @@ spec:
     spec:
       containers:
       - name: thanos-query
-        image: quay.io/thanos/thanos:v0.32.0
+        image: quay.io/thanos/thanos:v0.37.0
         args:
         - query
         - --http-address=0.0.0.0:9090
@@ -454,7 +454,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Platform Ops Domain (平台运维领域)]]
+- [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
 - Domain-9 平台运维 — 开源项目索引
 - 平台运维概述
 - 集群生命周期管理
@@ -475,4 +475,4 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]

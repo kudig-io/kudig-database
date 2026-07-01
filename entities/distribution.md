@@ -51,7 +51,7 @@ Distribution (原 Docker Registry) 是 OCI 容器镜像分发的参考实现。�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -68,11 +68,11 @@ Distribution (原 Docker Registry) 是 OCI 容器镜像分发的参考实现。�
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[containerd]]
 - [[deployment]]
-- [[concepts/storage-model|storage-model]]
-- [[concepts/secrets-management|secrets-management]]
+- [[concepts/storage-model.md|storage-model]]
+- [[concepts/secrets-management.md|secrets-management]]
 
 ## Related
 
@@ -84,5 +84,5 @@ Distribution (原 Docker Registry) 是 OCI 容器镜像分发的参考实现。�
 
 - 02-docker-registry-enterprise-distribution
 - distribution
-- [[synthesis/etcd x 高可用模式|[[etcd × 高可用模式|etcd × 高可用模式]]]] — Cross-reference
-- [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
+- [[concepts/etcd x 高可用模式.md|[[etcd × 高可用模式|etcd × 高可用模式]]]] — Cross-reference
+- [[entities/cncf-storage.md|CNCF 存储与数据库项目全景]] — Cross-reference

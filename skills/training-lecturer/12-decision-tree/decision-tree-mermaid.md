@@ -599,4 +599,4 @@ flowchart TD
 
 ## 参见
 
-- [[skills/training-public/troubleshooting/decision-tree-mermaid|公开版]]
+- [[skills/training-public/troubleshooting/decision-tree-mermaid.md|公开版]]

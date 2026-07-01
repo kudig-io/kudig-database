@@ -65,8 +65,6 @@ OpenCode 完整支持 **MCP（Model Context Protocol）**，可通过 Local（st
     └─────────┘         └──────────┘
 ```
 
-> ⚠️ **上下文注意**：每个 MCP Server 的工具描述都会加入上下文。工具数量多的 MCP Server（如 GitHub MCP）容易超出上下文限制。建议按需启用。
-
 ---
 
 ## 2. Local MCP Server

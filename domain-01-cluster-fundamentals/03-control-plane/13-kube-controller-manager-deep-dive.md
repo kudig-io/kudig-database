@@ -231,7 +231,7 @@ created: "2026-05-23"
 | **TokenController** | ServiceAccount, Secret | Secret | SA Token的生成与清理 |
 | **LegacyServiceAccountTokenCleanUpController** | Secret | Secret | 清理过期的legacy SA Token |
 | **CertificateSigningController** | CSR | Certificate | 证书签名请求审批与签发 |
-| **BootstrapsignerController** | ConfigMap | ConfigMap | 为[[entities/kubelet|kubelet]]引导签名Token |
+| **BootstrapsignerController** | ConfigMap | ConfigMap | 为[[entities/kubelet.md|kubelet]]引导签名Token |
 | **TokencleanerController** | Secret | Secret | 清理过期的引导Token |
 | **ClusterTrustBundleController** | ClusterTrustBundle | ConfigMap/Secret | 集群信任包分发与管理 |
 | **ResourceQuotaController** | ResourceQuota | ResourceQuota Status | 配额使用量计算与更新 |
@@ -623,10 +623,13 @@ NodeLifecycle Controller 工作流程:
 | **启动参数** | `--concurrent-namespace-syncs` (默认10), `--namespace-sync-period` |
 | **问题影响** | Namespace删除卡住(一直处于Terminating)；或Namespace被误删时资源未清理干净导致泄漏 |
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```
 Namespace Controller 终止流程:
 
-1. 用户执行 kubectl delete ns <name>
+1. 用户执行 kubectl delete ns <name>  # ⚠️ 不可逆：永久删除命名空间及全部资源
    |
    ▼
 2. API Server 设置 Namespace DeletionTimestamp
@@ -1306,7 +1309,7 @@ token
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -1320,7 +1323,7 @@ token
 
 ## Related
 
-- [[entities/kubelet|kubelet]]
+- [[entities/kubelet.md|kubelet]]
 
 - etcd 深度解析
 - API Server 深度解析
@@ -1329,8 +1332,8 @@ token
 - 相关知识域: domain-03-networking-traffic
 - 相关知识域: domain-04-storage-data
 - 相关知识域: domain-05-security-compliance
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|速查卡: k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet|速查卡: kubectl-scene-cheatsheet]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
 
 ## See Also
 

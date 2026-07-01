@@ -180,7 +180,7 @@ flowchart TB
     style ObservabilityDevOps fill:#e8f5e9
 ```
 
-#<!-- chunk: 阿里云产品映射 -->## 阿里云产品映射
+## 阿里云产品映射
 
 | 架构层 | 阿里云方案 | 开源替代 |
 |:---|:---|:---|
@@ -233,7 +233,7 @@ flowchart TB
     style Clusters fill:#e8f5e9
 ```
 
-#<!-- chunk: Argo CD Application 配置 -->## Argo CD Application 配置
+## Argo CD Application 配置
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -489,7 +489,7 @@ flowchart TB
 
 <!-- chunk: 八、ACK 阿里云部署架构 -->## 八、ACK 阿里云部署架构
 
-#<!-- chunk: 多集群 GitOps 管理 -->## 多集群 GitOps 管理
+## 多集群 GitOps 管理
 
 ```yaml
 # ACK 多集群 kubeconfig Secret
@@ -567,7 +567,7 @@ spec:
 
 <!-- chunk: 多云部署方案对照 -->## 多云部署方案对照
 
-#<!-- chunk: 阿里云服务 → 多云映射表 -->## 阿里云服务 → 多云映射表
+## 阿里云服务 → 多云映射表
 
 | 能力域 | 阿里云服务 | AWS 对应 | GCP 对应 | Azure 对应 |
 |:---|:---|:---|:---|:---|
@@ -586,7 +586,7 @@ spec:
 | 测试管理 | **云效测试管理** | **CodeGuru** | **Cloud Test Lab** | **Azure Test Plans** |
 | GitOps | **ACK + Argo CD** | **EKS + Argo CD** | **GKE + Argo CD** | **AKS + Argo CD** |
 
-#<!-- chunk: 多云部署注意事项 -->## 多云部署注意事项
+## 多云部署注意事项
 
 1. **GitOps 跨云管理**: Argo CD 天然支持多集群管理。通过注册不同云的 K8s 集群为 Argo CD 的目标集群，可实现一套 Git 仓库管理多云部署。需确保各集群的 kubeconfig 和认证方式统一。
 2. **CI/CD 流水线选择**: 若需多云部署，建议使用云中立的 CI/CD 工具（GitHub Actions / GitLab CI / Tekton），而非各云原生的 CI/CD 服务。这样只需维护一套流水线配置。
@@ -595,7 +595,7 @@ spec:
 5. **网络策略**: 跨云 Pod 通信需通过 Service Mesh（Istio 多集群模式）或 VPN 打通。注意 MTU 差异和跨云延迟对微服务调用链的影响。
 6. **成本分摊**: 各云计费模型不同（AWS 按小时、GCP 按秒、Azure 按分钟），FinOps 工具需支持多云成本聚合。OpenCost 可作为开源多云成本分析工具。
 
-#<!-- chunk: 云中立方案（开源替代） -->## 云中立方案（开源替代）
+## 云中立方案（开源替代）
 
 | 能力域 | 开源方案 | 说明 |
 |:---|:---|:---|
@@ -624,17 +624,17 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

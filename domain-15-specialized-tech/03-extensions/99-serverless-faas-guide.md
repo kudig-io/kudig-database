@@ -109,6 +109,10 @@ K8s Serverless 三种模式
 
 ### 2.1 安装
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 安装 Knative Serving
 kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.17.0/serving-crds.yaml
@@ -128,6 +132,10 @@ kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1
 ```
 
 ### 2.2 配置 DNS
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 使用 Magic DNS (sslip.io)
@@ -232,6 +240,9 @@ spec:
 ## 四、OpenFunction 云原生函数
 
 ### 4.1 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add openfunction https://openfunction.github.io/charts/
@@ -339,6 +350,9 @@ spec:
 
 <!-- chunk: 六、事件驱动架构 (Knative Eventing) -->
 ## 六、事件驱动架构 (Knative Eventing)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 Eventing
@@ -491,7 +505,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech MOC
-- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
 - Domain-10 扩展与自定义 — 开源项目索引
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现
@@ -509,3 +523,5 @@ spec:
 - 99-quarkus-micronaut-cloud-native-java-guide
 - 01-crd-development-guide
 - 02-operator-development-patterns
+
+```

@@ -97,7 +97,7 @@ k8s_versions:
 
 探针（Probe）与健康检查是 Kubernetes 容器生命周期管理的核心机制，用于判断容器的健康状态并采取相应的自愈措施。本文档详细记录所有与探针健康检查相关的事件、配置参数、最佳实践和常见问题。
 
-#<!-- chunk: 探针类型对比 -->## 探针类型对比
+## 探针类型对比
 
 | 探针类型 | 引入版本 | 失败行为 | 主要用途 | 生产频率 |
 |:---|:---|:---|:---|:---|
@@ -105,7 +105,7 @@ k8s_versions:
 | **readinessProbe** | v1.0+ | 从 Service 端点移除 | 控制流量路由，只有就绪的 Pod 才接收流量 | 高频 |
 | **startupProbe** | v1.16+ (Beta)<br>v1.20+ (GA) | 阻塞其他探针，失败则重启 | 保护启动缓慢的容器，给予足够的启动时间 | 中频 |
 
-#<!-- chunk: 探针机制对比 -->## 探针机制对比
+## 探针机制对比
 
 | 机制类型 | 引入版本 | 检测方式 | 适用场景 | 性能开销 |
 |:---|:---|:---|:---|:---|
@@ -118,7 +118,7 @@ k8s_versions:
 
 <!-- chunk: 探针配置参数 -->## 探针配置参数
 
-#<!-- chunk: 核心参数详解 -->## 核心参数详解
+## 核心参数详解
 
 | 参数名称 | 引入版本 | 默认值 | 说明 | 生产建议 |
 |:---|:---|:---|:---|:---|
@@ -129,7 +129,7 @@ k8s_versions:
 | **failureThreshold** | v1.0+ | 3 | 从成功到失败需要的连续失败次数 | 根据容忍度设置，通常 3-5 次 |
 | **terminationGracePeriodSeconds** | v1.25+ | 继承 Pod 设置 | 探测失败后容器终止的宽限期 | 根据应用关闭时间设置，通常 30-60s |
 
-#<!-- chunk: 关键计算公式 -->## 关键计算公式
+## 关键计算公式
 
 ```
 最大启动时间 = initialDelaySeconds + (failureThreshold × periodSeconds)
@@ -142,7 +142,7 @@ k8s_versions:
 
 <!-- chunk: 探针事件详解 -->## 探针事件详解
 
-#<!-- chunk: `Unhealthy` (Liveness Probe Failed) - 存活探针失败 -->## `Unhealthy` (Liveness Probe Failed) - 存活探针失败
+## `Unhealthy` (Liveness Probe Failed) - 存活探针失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -152,7 +152,7 @@ k8s_versions:
 | **适用版本** | v1.0+ |
 | **生产频率** | 高频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 Liveness Probe（存活探针）失败表明容器内的主进程虽然在运行，但已经进入不健康状态（如死锁、资源耗尽、无法处理请求等）。kubelet 会在连续失败达到 `failureThreshold` 次数后重启容器，这是 Kubernetes 的自愈机制核心。
 
@@ -160,7 +160,7 @@ Liveness Probe（存活探针）失败表明容器内的主进程虽然在运行
 - Liveness 失败 → 重启容器（更激进的恢复措施）
 - Readiness 失败 → 仅移除流量（保守的隔离措施）
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 **HTTP 探针失败**：
 ```bash
@@ -190,7 +190,7 @@ Warning  Unhealthy  30s   kubelet  Liveness probe failed: OCI runtime exec faile
 Warning  Unhealthy  1m    kubelet  Liveness probe failed: gRPC probe failed: rpc error: code = Unavailable desc = connection error
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 
   - 容器重启期间（通常 5-30 秒）服务完全不可用
@@ -218,7 +218,7 @@ Warning  Unhealthy  1m    kubelet  Liveness probe failed: gRPC probe failed: rpc
     → Unhealthy (Readiness probe may still fail)
   ```
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **1. 查看探针配置**
 ```bash
@@ -230,6 +230,10 @@ kubectl get pod myapp-76d8f9c5d-xk2lp -o yaml | grep -A 15 livenessProbe
 ```
 
 **2. 检查探针端点/命令**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 对于 HTTP 探针，手动测试端点
 kubectl exec myapp-76d8f9c5d-xk2lp -- wget -O- http://localhost:8080/healthz
@@ -275,7 +279,7 @@ kubectl describe pod myapp-76d8f9c5d-xk2lp | grep -A 50 Events
 kubectl get pods -o custom-columns='NAME:.metadata.name,RESTARTS:.status.containerStatuses[*].restartCount'
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 常见原因 | 症状特征 | 解决方案 | 预防措施 |
 |:---|:---|:---|:---|
@@ -291,7 +295,7 @@ kubectl get pods -o custom-columns='NAME:.metadata.name,RESTARTS:.status.contain
 
 ---
 
-#<!-- chunk: `Unhealthy` (Readiness Probe Failed) - 就绪探针失败 -->## `Unhealthy` (Readiness Probe Failed) - 就绪探针失败
+## `Unhealthy` (Readiness Probe Failed) - 就绪探针失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -301,7 +305,7 @@ kubectl get pods -o custom-columns='NAME:.metadata.name,RESTARTS:.status.contain
 | **适用版本** | v1.0+ |
 | **生产频率** | 高频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 Readiness Probe（就绪探针）失败表明容器虽然在运行，但暂时无法处理请求（如正在初始化、依赖服务不可用、过载等）。kubelet 会将此 Pod 从 Service 的 Endpoints 中移除，阻止新流量路由到此 Pod，但**不会重启容器**。
 
@@ -310,7 +314,7 @@ Readiness Probe（就绪探针）失败表明容器虽然在运行，但暂时�
 - **依赖检查**：适合检查外部依赖（数据库、缓存、消息队列）
 - **流量控制**：滚动更新时控制新 Pod 何时接收流量
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe pod backend-api-7d9c8f-zx4mp
@@ -328,7 +332,7 @@ Events:
 Warning  Unhealthy  45s   kubelet  Readiness probe failed: command "/app/readiness-check" exited with code 1: output: "Database connection pool exhausted"
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 
   - 如果所有副本都 Unready，Service 无可用端点，用户收到 503 Service Unavailable
@@ -355,7 +359,7 @@ Warning  Unhealthy  45s   kubelet  Readiness probe failed: command "/app/readine
     → 流量恢复
   ```
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **1. 检查 Service Endpoints**
 ```bash
@@ -381,6 +385,10 @@ kubectl get pod backend-api-7d9c8f-zx4mp -o yaml | grep -A 10 -E '(liveness|read
 ```
 
 **3. 测试依赖连接**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 进入容器测试数据库连接
 kubectl exec backend-api-7d9c8f-zx4mp -- nc -zv mysql-service 3306
@@ -393,6 +401,10 @@ kubectl exec backend-api-7d9c8f-zx4mp -- curl -v http://auth-service/health
 ```
 
 **4. 分析探针响应内容**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 手动执行 HTTP Readiness 探针
 kubectl exec backend-api-7d9c8f-zx4mp -- curl -i http://localhost:8080/ready
@@ -401,7 +413,7 @@ kubectl exec backend-api-7d9c8f-zx4mp -- curl -i http://localhost:8080/ready
 kubectl exec backend-api-7d9c8f-zx4mp -- wget -O- -S http://localhost:8080/ready
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 常见原因 | 症状特征 | 解决方案 | 最佳实践 |
 |:---|:---|:---|:---|
@@ -415,7 +427,7 @@ kubectl exec backend-api-7d9c8f-zx4mp -- wget -O- -S http://localhost:8080/ready
 
 ---
 
-#<!-- chunk: `Unhealthy` (Startup Probe Failed) - 启动探针失败 -->## `Unhealthy` (Startup Probe Failed) - 启动探针失败
+## `Unhealthy` (Startup Probe Failed) - 启动探针失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -425,7 +437,7 @@ kubectl exec backend-api-7d9c8f-zx4mp -- wget -O- -S http://localhost:8080/ready
 | **适用版本** | v1.16+ (Beta), v1.20+ (GA) |
 | **生产频率** | 中频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 Startup Probe（启动探针）是 v1.20 正式引入的 GA 功能，专门用于保护**启动缓慢的容器**。在 Startup Probe 成功之前，Liveness 和 Readiness Probe 会被禁用，避免容器在启动阶段被过早杀死。
 
@@ -443,7 +455,7 @@ Startup Probe（启动探针）是 v1.20 正式引入的 GA 功能，专门用�
   → Liveness/Readiness Probe 开始工作
 ```
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe pod java-app-5d8c9f-kl3mp
@@ -467,7 +479,7 @@ Warning  Unhealthy  2m   kubelet  Liveness probe failed: ...
 Normal   Killing    1m   kubelet  Container app failed liveness probe, will be restarted
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 
   - 启动阶段失败，Pod 进入 CrashLoopBackOff，服务无法启动
@@ -493,7 +505,7 @@ Normal   Killing    1m   kubelet  Container app failed liveness probe, will be r
     → Created → Started (重新启动)
   ```
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **1. 检查启动时间预算**
 ```bash
@@ -506,6 +518,10 @@ kubectl get pod java-app-5d8c9f-kl3mp -o jsonpath='{.spec.containers[*].startupP
 ```
 
 **2. 手动测试启动过程**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看容器启动日志
 kubectl logs java-app-5d8c9f-kl3mp
@@ -532,7 +548,7 @@ kubectl describe pod java-app-5d8c9f-kl3mp | grep -A 5 "Limits\|Requests"
 kubectl top pod java-app-5d8c9f-kl3mp
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 常见原因 | 症状特征 | 解决方案 | 配置示例 |
 |:---|:---|:---|:---|
@@ -569,7 +585,7 @@ readinessProbe:
 
 ---
 
-#<!-- chunk: `ProbeWarning` - 探针警告 -->## `ProbeWarning` - 探针警告
+## `ProbeWarning` - 探针警告
 
 | 属性 | 说明 |
 |:---|:---|
@@ -579,7 +595,7 @@ readinessProbe:
 | **适用版本** | v1.21+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 `ProbeWarning` 是 v1.21 引入的新事件类型，用于记录**探针执行成功但有异常输出**的情况。这允许应用在健康检查通过的同时，向 Kubernetes 报告潜在问题或降级状态。
 
@@ -589,7 +605,7 @@ readinessProbe:
 - 资源使用接近阈值（如内存 80%）
 - 性能指标异常但未达到失败条件
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe pod api-server-6d7c8f-pm9kl
@@ -601,7 +617,7 @@ Events:
   Warning  ProbeWarning  3m                 kubelet            Liveness probe succeeded with warnings: memory usage at 85%, approaching limit
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 
   - Pod 仍然正常服务（探针成功）
@@ -621,7 +637,7 @@ Events:
     → (根据探针类型) 重启或移除流量
   ```
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **1. 查看警告详情**
 ```bash
@@ -633,6 +649,10 @@ kubectl logs api-server-6d7c8f-pm9kl | grep -i warning
 ```
 
 **2. 手动执行探针**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 获取探针返回的警告信息
 kubectl exec api-server-6d7c8f-pm9kl -- curl http://localhost:8080/health
@@ -642,6 +662,10 @@ kubectl exec api-server-6d7c8f-pm9kl -- curl http://localhost:8080/health
 ```
 
 **3. 检查指标**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看资源使用情况
 kubectl top pod api-server-6d7c8f-pm9kl
@@ -650,7 +674,7 @@ kubectl top pod api-server-6d7c8f-pm9kl
 kubectl exec api-server-6d7c8f-pm9kl -- curl http://localhost:9090/metrics | grep -i warning
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 警告类型 | 处理建议 | 预防措施 |
 |:---|:---|:---|
@@ -663,7 +687,7 @@ kubectl exec api-server-6d7c8f-pm9kl -- curl http://localhost:9090/metrics | gre
 
 <!-- chunk: 探针事件时间线图 -->## 探针事件时间线图
 
-#<!-- chunk: 正常启动流程 -->## 正常启动流程
+## 正常启动流程
 
 ```
 时间轴    容器生命周期                     探针状态                      事件
@@ -685,7 +709,7 @@ t=36s                                      │  [Readiness: Success ✓]
 t=∞       正常运行                         └─ 定期检查...
 ```
 
-#<!-- chunk: 启动失败流程（Startup Probe Timeout） -->## 启动失败流程（Startup Probe Timeout）
+## 启动失败流程（Startup Probe Timeout）
 
 ```
 时间轴    容器生命周期                     探针状态                      事件
@@ -705,7 +729,7 @@ t=331s    重新开始 Startup Probe           ┌─ Startup Probe 开始
   ...     (循环)
 ```
 
-#<!-- chunk: Liveness 失败重启流程 -->## Liveness 失败重启流程
+## Liveness 失败重启流程
 
 ```
 时间轴    容器生命周期                     探针状态                      事件
@@ -727,7 +751,7 @@ t=121s    Liveness/Readiness 恢复          ┌─ [Liveness: Success ✓]
                                            └─ [Readiness: Success ✓]      → Ready=True (重新加入 Endpoints)
 ```
 
-#<!-- chunk: Readiness 失败隔离流量 -->## Readiness 失败隔离流量
+## Readiness 失败隔离流量
 
 ```
 时间轴    容器生命周期                     探针状态                      事件/网络影响
@@ -755,7 +779,7 @@ t=130s    达到 successThreshold=1          [Readiness: Success ✓]         �
 
 <!-- chunk: 常见错误配置模式与最佳实践 -->## 常见错误配置模式与最佳实践
 
-#<!-- chunk: ❌ 反模式 1：Liveness 检查外部依赖 -->## ❌ 反模式 1：Liveness 检查外部依赖
+## ❌ 反模式 1：Liveness 检查外部依赖
 
 **错误配置**：
 ```yaml
@@ -816,7 +840,7 @@ http.HandleFunc("/readyz", func(w http.ResponseWriter, r *http.Request) {
 
 ---
 
-#<!-- chunk: ❌ 反模式 2：initialDelaySeconds 过短 -->## ❌ 反模式 2：initialDelaySeconds 过短
+## ❌ 反模式 2：initialDelaySeconds 过短
 
 **错误配置**（Java Spring Boot 应用）：
 ```yaml
@@ -875,7 +899,7 @@ readinessProbe:
 
 ---
 
-#<!-- chunk: ❌ 反模式 3：探针超时设置不合理 -->## ❌ 反模式 3：探针超时设置不合理
+## ❌ 反模式 3：探针超时设置不合理
 
 **错误配置**：
 ```yaml
@@ -920,7 +944,7 @@ http.HandleFunc("/ready", func(w http.ResponseWriter, r *http.Request) {
 
 ---
 
-#<!-- chunk: ❌ 反模式 4：Liveness 和 Readiness 完全相同 -->## ❌ 反模式 4：Liveness 和 Readiness 完全相同
+## ❌ 反模式 4：Liveness 和 Readiness 完全相同
 
 **错误配置**：
 ```yaml
@@ -963,7 +987,7 @@ readinessProbe:
 
 ---
 
-#<!-- chunk: ✅ 最佳实践总结 -->## ✅ 最佳实践总结
+## ✅ 最佳实践总结
 
 | 探针类型 | 检查内容 | 失败行为 | 典型配置 | 端点示例 |
 |:---|:---|:---|:---|:---|
@@ -975,7 +999,7 @@ readinessProbe:
 
 <!-- chunk: 生产级配置示例 -->## 生产级配置示例
 
-#<!-- chunk: 示例 1：Web 应用（Node.js Express） -->## 示例 1：Web 应用（Node.js Express）
+## 示例 1：Web 应用（Node.js Express）
 
 ```yaml
 apiVersion: apps/v1
@@ -1090,7 +1114,7 @@ app.listen(3000, () => {
 
 ---
 
-#<!-- chunk: 示例 2：Java Spring Boot 应用（慢启动） -->## 示例 2：Java Spring Boot 应用（慢启动）
+## 示例 2：Java Spring Boot 应用（慢启动）
 
 ```yaml
 apiVersion: apps/v1
@@ -1177,7 +1201,7 @@ management:
 
 ---
 
-#<!-- chunk: 示例 3：gRPC 微服务（v1.27+） -->## 示例 3：gRPC 微服务（v1.27+）
+## 示例 3：gRPC 微服务（v1.27+）
 
 ```yaml
 apiVersion: apps/v1
@@ -1265,7 +1289,7 @@ func main() {
 
 ---
 
-#<!-- chunk: 示例 4：数据库（PostgreSQL StatefulSet） -->## 示例 4：数据库（PostgreSQL StatefulSet）
+## 示例 4：数据库（PostgreSQL StatefulSet）
 
 ```yaml
 apiVersion: apps/v1
@@ -1349,6 +1373,9 @@ spec:
 
 <!-- chunk: 故障排查流程图 -->## 故障排查流程图
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 探针失败事件报告
          │
@@ -1405,7 +1432,7 @@ spec:
 
 <!-- chunk: 监控和告警建议 -->## 监控和告警建议
 
-#<!-- chunk: 关键指标 -->## 关键指标
+## 关键指标
 
 | 指标 | PromQL 示例 | 告警阈值 | 说明 |
 |:---|:---|:---|:---|
@@ -1414,7 +1441,7 @@ spec:
 | **CrashLoopBackOff** | `kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"} > 0` | > 0 | 严重问题 |
 | **探针延迟** | `kubelet_http_requests_duration_seconds{handler="/healthz"}` | P95 > 2s | 探针响应慢 |
 
-#<!-- chunk: Prometheus 告警规则示例 -->## Prometheus 告警规则示例
+## Prometheus 告警规则示例
 
 ```yaml
 groups:
@@ -1471,20 +1498,20 @@ groups:
 
 <!-- chunk: 相关文档 -->## 相关文档
 
-#<!-- chunk: Domain-33 内部文档 -->## Domain-33 内部文档
+## Domain-33 内部文档
 - **01-pod-lifecycle-events.md**: Pod 生命周期事件（Created, Started, Killing 等）
 - **02-scheduling-events.md**: 调度相关事件（FailedScheduling 等）
 - **03-image-pull-events.md**: 镜像拉取事件（Pulling, Pulled, Failed 等）
 - **05-resource-events.md**: 资源事件（OOMKilled, Evicted 等）
 
-#<!-- chunk: 跨域参考 -->## 跨域参考
+## 跨域参考
 - **Domain-1: 架构基础**: `01-kubernetes-architecture-overview.md`（kubelet 组件）
 - **Domain-2: 核心概念**: `05-pod-lifecycle.md`（Pod 生命周期详解）
 - **Domain-6: 可观测性**: `01-logging-architecture.md`（日志收集）
 - **Domain-6: 可观测性**: `02-metrics-monitoring.md`（Prometheus 监控）
 - **Topic: 故障排查**: `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md`
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 - [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
 - [Pod Lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
 - [gRPC Health Checking Protocol](https://github.com/grpc/grpc/blob/master/doc/health-checking.md)
@@ -1502,4 +1529,6 @@ groups:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+```

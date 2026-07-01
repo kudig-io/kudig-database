@@ -34,7 +34,7 @@ created: "2026-05-23"
 # Pod Quality of [[Service|Service]] Classes
 
 ## 概述
-[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 根据 Pod 内容器的资源请求（requests）和限制（limits）为每个 Pod 分配一个服务质量（QoS）等级。该等级用于在节点资源不足时决定驱逐优先级。
+[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 根据 Pod 内容器的资源请求（requests）和限制（limits）为每个 Pod 分配一个服务质量（QoS）等级。该等级用于在节点资源不足时决定驱逐优先级。
 
 ## 核心概念/原理
 可能的 QoS 等级有三种，按驱逐优先级从高到低排列：
@@ -219,3 +219,9 @@ kubectl describe node <node-name> | grep -A 5 "eviction"
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]

@@ -453,6 +453,10 @@ kubectl get daemonset <name> -n <namespace> -o jsonpath='{
 
 **Step D3.2**: 手动触发 DaemonSet Pod 删除（强制重建）
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl delete pod <bad-pod> -n <namespace>
   ```
@@ -462,6 +466,10 @@ kubectl get daemonset <name> -n <namespace> -o jsonpath='{
 
 **Step D3.3**: 临时添加 toleration 测试
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch daemonset <name> -n <namespace> --type='json' -p='[
     {"op": "add", "path": "/spec/template/spec/tolerations/-", "value": {
@@ -496,6 +504,11 @@ kubectl get daemonset <name> -n <namespace> -o jsonpath='{
 - **适用根因**: RC-001
 - **前置检查**: D1.3/D1.4 确认不匹配
 - **执行**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   # 方式1: 修改 DaemonSet nodeSelector
   kubectl patch daemonset <name> -n <namespace> -p \
@@ -510,6 +523,10 @@ kubectl get daemonset <name> -n <namespace> -o jsonpath='{
 - **适用根因**: RC-003/004
 - **前置检查**: D2.2 确认污点不匹配
 - **执行**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch daemonset <name> -n <namespace> --type='json' -p='[
     {"op": "add", "path": "/spec/template/spec/tolerations/-", "value": {
@@ -524,6 +541,10 @@ kubectl get daemonset <name> -n <namespace> -o jsonpath='{
 - **适用根因**: RC-002/006/009
 - **前置检查**: 确认其他节点 Pod 正常
 - **执行**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl delete pod <bad-pod> -n <namespace>
   ```
@@ -536,6 +557,10 @@ kubectl get daemonset <name> -n <namespace> -o jsonpath='{
 - **适用根因**: RC-005
 - **审批提示**: "建议降低 DaemonSet <name> 的资源请求，可能影响性能。是否批准？"
 - **执行**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch daemonset <name> -n <namespace> -p \
     '{"spec":{"template":{"spec":{"containers":[{"name":"<container>","resources":{"requests":{"cpu":"50m","memory":"64Mi"}}}]}}}}'
@@ -546,6 +571,10 @@ kubectl get daemonset <name> -n <namespace> -o jsonpath='{
 - **适用根因**: RC-006
 - **审批提示**: "建议修改 DaemonSet 端口配置，可能影响外部访问。是否批准？"
 - **执行**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 修改 DaemonSet 使用不同 hostPort
   kubectl patch daemonset <name> -n <namespace> --type='json' -p='[
@@ -558,6 +587,11 @@ kubectl get daemonset <name> -n <namespace> -o jsonpath='{
 - **适用根因**: RC-008
 - **审批提示**: "建议放宽 DaemonSet 安全限制，可能降低安全性。是否批准？"
 - **执行**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   # 方式1: 给 namespace 添加 privileged 标签
   kubectl label namespace <namespace> pod-security.kubernetes.io/enforce=privileged --overwrite

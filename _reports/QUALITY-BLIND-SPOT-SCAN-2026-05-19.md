@@ -61,8 +61,6 @@ PSP 在 K8s v1.25 已正式移除, 替代方案为 Pod Security Admission (PSA)�
 
 修复方案: 在每个提及 PSP 的段落添加弃用警告:
 ```
-> ⚠️ **弃用警告**: PodSecurityPolicy 已在 Kubernetes v1.25 中移除。
-> 请使用 [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
 ```
 
 ### 2. QA 语料质量 (P1)

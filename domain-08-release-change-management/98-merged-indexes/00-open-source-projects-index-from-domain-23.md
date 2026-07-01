@@ -146,7 +146,7 @@ CI/CD 领域则经历了从传统服务器模式到云原生模式的演进。Je
 
 Argo 生态是一套完整的云原生工作流与交付工具链，由 Akuity（Argo 项目创建者 Alexander Matyushentsev 创立）和开源社区共同维护。Argo 项目于 2020 年进入 CNCF 孵化，2022 年毕业。Red Hat 于 2023 年收购 Akuity 后，Argo 生态获得了更强的商业支持。Argo 生态包含四个核心子项目：Argo CD（声明式 GitOps 持续交付）、Argo Workflows（容器化工作流引擎）、Argo Rollouts（渐进式交付）和 Argo Events（事件驱动自动化），它们可以独立使用，也可以组合成完整的 CI/CD + GitOps 解决方案。
 
-#<!-- chunk: 3.1 Argo CD -->## 3.1 Argo CD
+## 3.1 Argo CD
 
 ```yaml
 核心特性:
@@ -180,6 +180,10 @@ Argo 生态是一套完整的云原生工作流与交付工具链，由 Akuity�
 - 低风险的 major 版本升级
 
 **Helm 安装**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 helm repo add argo https://argoproj.github.io/argo-helm
 helm install argocd argo/argo-cd --version 7.8.0 \
@@ -189,7 +193,7 @@ helm install argocd argo/argo-cd --version 7.8.0 \
 **GitHub**: https://github.com/argoproj/argo-cd
 **文档**: https://argo-cd.readthedocs.io/
 
-#<!-- chunk: 3.2 Argo Workflows -->## 3.2 Argo Workflows
+## 3.2 Argo Workflows
 
 Argo Workflows 是 Kubernetes 原生的工作流引擎，支持 DAG（有向无环图）和步骤式工作流定义。它在 CI/CD 场景中常用于编排复杂的构建、测试和部署流程。
 
@@ -207,7 +211,7 @@ Argo Workflows 是 Kubernetes 原生的工作流引擎，支持 DAG（有向无�
 
 **GitHub**: https://github.com/argoproj/argo-workflows
 
-#<!-- chunk: 3.3 Argo Rollouts -->## 3.3 Argo Rollouts
+## 3.3 Argo Rollouts
 
 Argo Rollouts 是渐进式交付控制器，替代 Kubernetes 原生的 Deployment 资源，提供更精细的发布控制能力。
 
@@ -224,7 +228,7 @@ Argo Rollouts 是渐进式交付控制器，替代 Kubernetes 原生的 Deployme
 
 **GitHub**: https://github.com/argoproj/argo-rollouts
 
-#<!-- chunk: 3.4 Argo Events -->## 3.4 Argo Events
+## 3.4 Argo Events
 
 Argo Events 是事件驱动架构的胶水层，可以将外部事件源（如 GitHub Webhook、S3 通知、日历定时器）转化为 Kubernetes 资源操作（如触发 Argo Workflow、创建 K8s 资源、调用 Lambda 函数）。
 
@@ -243,11 +247,9 @@ Argo Events 是事件驱动架构的胶水层，可以将外部事件源（如 G
 
 <!-- chunk: 四、Flux 生态详解 (CNCF Graduated) -->## 四、Flux 生态详解 (CNCF Graduated)
 
-> ⚠️ **社区动态**: Weaveworks (Flux 主要赞助公司) 于 2024 年初倒闭，但 Flux 项目已被 CNCF 社区接管，继续维护。主要维护者来自 Akuity、ControlPlane、Microsoft 等公司。
-
 Flux v2 是基于 GitOps Toolkit 构建的一组专用控制器集合。与 Argo CD 的集中式架构不同，Flux 采用分布式设计理念——每个集群运行自己的 Flux 实例，Git 仓库就是唯一的控制平面。这种设计使得 Flux 更轻量、更适合中小规模场景，同时也更适合"每集群自治"的多集群策略。
 
-#<!-- chunk: 4.1 Flux v2 -->## 4.1 Flux v2
+## 4.1 Flux v2
 
 ```yaml
 核心特性:
@@ -275,7 +277,7 @@ Flux v2 是基于 GitOps Toolkit 构建的一组专用控制器集合。与 Argo
 **GitHub**: https://github.com/fluxcd/flux2
 **文档**: https://fluxcd.io/
 
-#<!-- chunk: 4.2 Flagger -->## 4.2 Flagger
+## 4.2 Flagger
 
 Flagger 是与 Flux 紧密集成的渐进式交付工具，功能定位与 Argo Rollouts 类似，但设计上更贴近 Flux 生态。
 
@@ -295,7 +297,7 @@ Flagger 是与 Flux 紧密集成的渐进式交付工具，功能定位与 Argo 
 
 <!-- chunk: 五、CI/CD 流水线项目 -->## 五、CI/CD 流水线项目
 
-#<!-- chunk: 5.1 Tekton -->## 5.1 Tekton
+## 5.1 Tekton
 
 Tekton 是由 CDF（Continuous Delivery Foundation）托管的开源 CI/CD 框架，完全基于 Kubernetes 原生资源定义。它的设计理念是将 CI/CD 流水线分解为可复用的 Task 和 Pipeline 资源，每个 Step 对应一个容器执行。
 
@@ -324,7 +326,7 @@ Tekton 是由 CDF（Continuous Delivery Foundation）托管的开源 CI/CD 框�
 
 **GitHub**: https://github.com/tektoncd/pipeline
 
-#<!-- chunk: 5.2 Jenkins on K8s -->## 5.2 Jenkins on K8s
+## 5.2 Jenkins on K8s
 
 Jenkins 是最成熟的 CI/CD 服务器，拥有超过 1800 个插件和庞大的社区。在 Kubernetes 环境中，Jenkins 通过 Kubernetes Plugin 动态创建 Pod 作为 Agent，实现弹性构建能力。
 
@@ -340,7 +342,7 @@ Jenkins 是最成熟的 CI/CD 服务器，拥有超过 1800 个插件和庞大�
 
 **推荐**: Jenkins X (云原生 Jenkins) 已停止活跃开发，建议评估 **Tekton** 或 **Argo Workflows** 替代。
 
-#<!-- chunk: 5.3 GitLab CI / GitHub Actions -->## 5.3 GitLab CI / GitHub Actions
+## 5.3 GitLab CI / GitHub Actions
 
 | 维度 | GitLab CI | GitHub Actions |
 |:---|:---|:---|
@@ -361,7 +363,7 @@ Jenkins 是最成熟的 CI/CD 服务器，拥有超过 1800 个插件和庞大�
 
 在 GitOps 工作流中，密钥管理是最关键的安全环节之一。将 Kubernetes Secret 直接提交到 Git 仓库是严重的安全隐患，因此需要专用的密钥管理工具来解决这个问题。以下是主流的三种方案：
 
-#<!-- chunk: 6.1 Sealed Secrets -->## 6.1 Sealed Secrets
+## 6.1 Sealed Secrets
 
 Sealed Secrets 由 Bitnami 开发，采用非对称加密方案。用户在客户端使用 `kubeseal` CLI 工具将 Secret 加密为 SealedSecret 资源，加密后的资源可以安全地提交到 Git 仓库。集群内的 Sealed Secrets 控制器负责解密并还原为 Kubernetes Secret。
 
@@ -377,7 +379,7 @@ Sealed Secrets 由 Bitnami 开发，采用非对称加密方案。用户在客�
 
 **GitHub**: https://github.com/bitnami-labs/sealed-secrets
 
-#<!-- chunk: 6.2 External Secrets Operator (ESO) -->## 6.2 External Secrets Operator (ESO)
+## 6.2 External Secrets Operator (ESO)
 
 External Secrets Operator 将外部密钥管理系统（如 HashiCorp Vault、AWS Secrets Manager、GCP Secret Manager、Azure Key Vault）中的密钥同步到 Kubernetes Secret。
 
@@ -394,7 +396,7 @@ External Secrets Operator 将外部密钥管理系统（如 HashiCorp Vault、AW
 
 **GitHub**: https://github.com/external-secrets/external-secrets
 
-#<!-- chunk: 6.3 SOPS (Mozilla) -->## 6.3 SOPS (Mozilla)
+## 6.3 SOPS (Mozilla)
 
 SOPS 是一个通用的文件加密工具，支持 YAML、JSON、ENV、INI 等格式的加密。它可以与 AWS KMS、GCP KMS、Azure Key Vault、age 等加密后端配合使用。在 Flux 中，SOPS 得到了原生支持——source-controller 可以直接解密 SOPS 加密的文件。
 
@@ -415,7 +417,7 @@ SOPS 是一个通用的文件加密工具，支持 YAML、JSON、ENV、INI 等�
 
 <!-- chunk: 七、渐进式交付与发布编排 -->## 七、渐进式交付与发布编排
 
-#<!-- chunk: 7.1 Argo Rollouts vs Flagger -->## 7.1 Argo Rollouts vs Flagger
+## 7.1 Argo Rollouts vs Flagger
 
 | 维度 | Argo Rollouts | Flagger |
 |:---|:---|:---|
@@ -427,7 +429,7 @@ SOPS 是一个通用的文件加密工具，支持 YAML、JSON、ENV、INI 等�
 | UI | Kubectl 插件 + Dashboard | Prometheus Metrics |
 | 成熟度 | 企业级 (被 Red Hat 支持) | 生产就绪 |
 
-#<!-- chunk: 7.2 Spinnaker -->## 7.2 Spinnaker
+## 7.2 Spinnaker
 
 Spinnaker 是由 Netflix 开发、Armory 商业支持的多云持续交付平台。它支持 AWS、GCP、Azure、Kubernetes 等多种部署目标，提供完善的流水线编排能力。
 
@@ -448,7 +450,7 @@ Spinnaker 是由 Netflix 开发、Armory 商业支持的多云持续交付平台
 
 <!-- chunk: 八、依赖更新与制品管理 -->## 八、依赖更新与制品管理
 
-#<!-- chunk: 8.1 Renovate -->## 8.1 Renovate
+## 8.1 Renovate
 
 Renovate 是由 Mend 维护的自动化依赖更新工具，支持几乎所有包管理器（npm、Maven、Gradle、Go modules、Docker、Helm、Terraform 等）。它会自动检测过时的依赖，创建 Pull Request 并附带变更日志和发布说明。
 
@@ -465,7 +467,7 @@ Renovate 是由 Mend 维护的自动化依赖更新工具，支持几乎所有�
 
 **GitHub**: https://github.com/renovatebot/renovate
 
-#<!-- chunk: 8.2 Argo CD Image Updater -->## 8.2 Argo CD Image Updater
+## 8.2 Argo CD Image Updater
 
 Argo CD Image Updater 是专门为 Argo CD 设计的镜像自动更新工具，它监控镜像仓库中的新标签，并自动更新 Argo CD Application 中的镜像版本。
 
@@ -480,7 +482,7 @@ Argo CD Image Updater 是专门为 Argo CD 设计的镜像自动更新工具，�
 
 **GitHub**: https://github.com/argoproj-labs/argocd-image-updater
 
-#<!-- chunk: 8.3 Reloader -->## 8.3 Reloader
+## 8.3 Reloader
 
 Reloader 监控 ConfigMap 和 Secret 的变更，自动触发关联的 Deployment、DaemonSet、StatefulSet 滚动重启。在 GitOps 场景中，这解决了"更新了 ConfigMap 但 Pod 未重启"的问题。
 
@@ -499,7 +501,7 @@ Reloader 监控 ConfigMap 和 Secret 的变更，自动触发关联的 Deploymen
 
 <!-- chunk: 九、版本与发布动态 -->## 九、版本与发布动态
 
-#<!-- chunk: 9.1 Argo CD 支持周期 -->## 9.1 Argo CD 支持周期
+## 9.1 Argo CD 支持周期
 
 - 每 3 个月一个 minor 版本
 - 支持周期: 当前版本 + 前两个版本 (共 3 个活跃版本)
@@ -507,7 +509,7 @@ Reloader 监控 ConfigMap 和 Secret 的变更，自动触发关联的 Deploymen
 - 安全修复会回移到所有支持的 minor 版本
 - 升级路径: N-1 → N 即可，不需要逐版本升级
 
-#<!-- chunk: 9.2 Helm 4 前瞻 -->## 9.2 Helm 4 前瞻
+## 9.2 Helm 4 前瞻
 
 - 开发于 2024.11 KubeCon 正式启动
 - 预计 2025.11 KubeCon NA 发布
@@ -515,7 +517,7 @@ Reloader 监控 ConfigMap 和 Secret 的变更，自动触发关联的 Deploymen
 - 引入 OCI 原生支持增强
 - 改进的 Schema 验证机制
 
-#<!-- chunk: 9.3 Flux 社区接管 -->## 9.3 Flux 社区接管
+## 9.3 Flux 社区接管
 
 - Weaveworks 倒闭后，Flux 由 CNCF 社区维护
 - 主要维护者来自 Akuity、ControlPlane、Microsoft 等公司
@@ -523,7 +525,7 @@ Reloader 监控 ConfigMap 和 Secret 的变更，自动触发关联的 Deploymen
 - 社区治理模型已建立 (Steering Committee + Maintainer Team)
 - CNCF 提供基础设施支持
 
-#<!-- chunk: 9.4 Tekton 演进 -->## 9.4 Tekton 演进
+## 9.4 Tekton 演进
 
 - v0.65+ 引入 Step Revisions 和 Pipeline Results 增强
 - Tekton Results API 进入 Beta 阶段，提供流水线执行结果的持久化存储与查询
@@ -534,7 +536,7 @@ Reloader 监控 ConfigMap 和 Secret 的变更，自动触发关联的 Deploymen
 
 <!-- chunk: 十、GitOps 选型指南 -->## 十、GitOps 选型指南
 
-#<!-- chunk: 10.1 决策树 -->## 10.1 决策树
+## 10.1 决策树
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -574,7 +576,7 @@ Reloader 监控 ConfigMap 和 Secret 的变更，自动触发关联的 Deploymen
    └─ No  ──► 标准 CI/CD 即可
 ```
 
-#<!-- chunk: 10.2 选型对比矩阵 -->## 10.2 选型对比矩阵
+## 10.2 选型对比矩阵
 
 | 维度 | Argo CD | Flux | Tekton | Jenkins |
 |:---|:---|:---|:---|:---|
@@ -591,7 +593,7 @@ Reloader 监控 ConfigMap 和 Secret 的变更，自动触发关联的 Deploymen
 
 <!-- chunk: 十一、架构设计 -->## 十一、架构设计
 
-#<!-- chunk: 11.1 GitOps 通用架构 -->## 11.1 GitOps 通用架构
+## 11.1 GitOps 通用架构
 
 ```mermaid
 graph TB
@@ -631,7 +633,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 11.2 CI/CD 与 GitOps 协作架构 -->## 11.2 CI/CD 与 GitOps 协作架构
+## 11.2 CI/CD 与 GitOps 协作架构
 
 ```mermaid
 graph LR
@@ -663,7 +665,7 @@ graph LR
 
 在 GitOps 与 CI/CD 实践中，安全合规是不可忽视的关键维度。以下是企业在实施过程中需要重点关注的领域：
 
-#<!-- chunk: 12.1 供应链安全 (SLSA 框架) -->## 12.1 供应链安全 (SLSA 框架)
+## 12.1 供应链安全 (SLSA 框架)
 
 SLSA (Supply-chain Levels for Software Artifacts) 是一个供应链安全框架，定义了四个递进的安全等级。在 CI/CD 流水线中实现 SLSA Level 3 需要：
 
@@ -672,7 +674,7 @@ SLSA (Supply-chain Levels for Software Artifacts) 是一个供应链安全框架
 - **不可变构建**: 确保构建过程不可篡改，推荐使用 Tekton 的 hermetic 构建模式
 - **SBOM 生成**: 使用 Syft/Trivy 生成软件物料清单，存储在镜像附加层或 OCI Registry 中
 
-#<!-- chunk: 12.2 GitOps 安全最佳实践 -->## 12.2 GitOps 安全最佳实践
+## 12.2 GitOps 安全最佳实践
 
 ```yaml
 安全清单:
@@ -693,7 +695,7 @@ SLSA (Supply-chain Levels for Software Artifacts) 是一个供应链安全框架
 
 GitOps 多环境管理是企业的核心需求。以下是三种主流策略：
 
-#<!-- chunk: 13.1 环境分支策略 -->## 13.1 环境分支策略
+## 13.1 环境分支策略
 
 ```
 main (生产)
@@ -706,7 +708,7 @@ main (生产)
 - 通过 PR 进行环境间晋升 (Promotion)
 - Argo CD Application 的 `targetRevision` 指向对应分支
 
-#<!-- chunk: 13.2 环境目录策略 (推荐) -->## 13.2 环境目录策略 (推荐)
+## 13.2 环境目录策略 (推荐)
 
 ```
 apps/
@@ -721,7 +723,7 @@ apps/
 - 通过 Kustomize Overlay 实现环境差异化
 - Argo CD ApplicationSet 自动发现并部署
 
-#<!-- chunk: 13.3 ApplicationSet 多集群策略 -->## 13.3 ApplicationSet 多集群策略
+## 13.3 ApplicationSet 多集群策略
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -744,7 +746,7 @@ spec:
 
 <!-- chunk: 十四、监控与回滚 -->## 十四、监控与回滚
 
-#<!-- chunk: 14.1 GitOps 监控指标 -->## 14.1 GitOps 监控指标
+## 14.1 GitOps 监控指标
 
 | 工具 | 关键指标 | PromQL 示例 |
 |:---|:---|:---|
@@ -755,7 +757,7 @@ spec:
 | Flux | 同步耗时 | `gotk_reconcile_duration_seconds_bucket` |
 | Tekton | 流水线运行 | `tekton_pipelinerun_status` |
 
-#<!-- chunk: 14.2 回滚策略 -->## 14.2 回滚策略
+## 14.2 回滚策略
 
 ```yaml
 Argo CD 回滚:
@@ -778,7 +780,7 @@ Flux 回滚:
 
 <!-- chunk: 十五、最佳实践 -->## 十五、最佳实践
 
-#<!-- chunk: 15.1 GitOps 通用最佳实践 -->## 15.1 GitOps 通用最佳实践
+## 15.1 GitOps 通用最佳实践
 
 ```yaml
 1. 仓库设计:
@@ -805,7 +807,7 @@ Flux 回滚:
    - 多层级告警 (Warning/Critical)
 ```
 
-#<!-- chunk: 15.2 CI/CD 流水线最佳实践 -->## 15.2 CI/CD 流水线最佳实践
+## 15.2 CI/CD 流水线最佳实践
 
 ```yaml
 1. 流水线设计:
@@ -831,7 +833,7 @@ Flux 回滚:
 
 <!-- chunk: 十六、故障排查 -->## 十六、故障排查
 
-#<!-- chunk: 16.1 Argo CD 常见问题 -->## 16.1 Argo CD 常见问题
+## 16.1 Argo CD 常见问题
 
 ```yaml
 同步失败:
@@ -866,7 +868,7 @@ Flux 回滚:
     - 增加资源限制
 ```
 
-#<!-- chunk: 16.2 Flux 常见问题 -->## 16.2 Flux 常见问题
+## 16.2 Flux 常见问题
 
 ```yaml
 同步失败:
@@ -898,7 +900,7 @@ Flux 回滚:
     - 检查 GPG 签名密钥
 ```
 
-#<!-- chunk: 16.3 Tekton 常见问题 -->## 16.3 Tekton 常见问题
+## 16.3 Tekton 常见问题
 
 ```yaml
 TaskRun 失败:
@@ -949,7 +951,7 @@ Pipeline 卡住:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-08-release-change-management MOC
-- [[domain-08-release-change-management/README|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
+- [[domain-08-release-change-management/README.md|Domain 08: GitOps与CI/CD (GitOps & CI/CD)]]
 - Argo CD企业级GitOps实践指南
 - Jenkins企业级CI/CD流水线深度实践
 - GitLab CI/CD 企业级流水线自动化平台

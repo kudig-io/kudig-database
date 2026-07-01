@@ -69,7 +69,7 @@ Aqua Security 是企业级容器和云原生安全平台，提供从镜像构建
 
 本文详细探讨 Aqua 企业级部署架构、安全策略管理、运行时防护、合规检查和 CI/CD 集成，帮助企业在生产环境中构建全面的容器安全防护体系。涵盖 Console、Gateway、Enforcer、Scanner、KubeEnforcer 等核心组件的部署配置和安全策略定义。
 
-#<!-- chunk: 威胁模型分析 -->## 威胁模型分析
+## 威胁模型分析
 
 **已知漏洞利用**：容器镜像中的操作系统包和应用依赖包含大量已知 CVE。攻击者通过公开漏洞数据库匹配目标环境中的漏洞，利用远程代码执行（RCE）、权限提升等漏洞实现初始访问和横向移动。Aqua 的镜像扫描引擎在构建和部署阶段检测漏洞，配合准入控制阻止高风险镜像部署。
 
@@ -81,7 +81,7 @@ Aqua Security 是企业级容器和云原生安全平台，提供从镜像构建
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 企业级架构 -->## 企业级架构
+## 企业级架构
 
 ```mermaid
 graph TB
@@ -134,7 +134,7 @@ graph TB
     CICD --> SC
 ```
 
-#<!-- chunk: 部署配置 -->## 部署配置
+## 部署配置
 
 ```yaml
 # Aqua Namespace
@@ -193,7 +193,7 @@ data:
     }
 ```
 
-#<!-- chunk: Console 部署 -->## Console 部署
+## Console 部署
 
 ```yaml
 apiVersion: apps/v1
@@ -336,7 +336,7 @@ spec:
             storage: 50Gi
 ```
 
-#<!-- chunk: Enforcer [[DaemonSet|DaemonSet]] -->## Enforcer DaemonSet
+## Enforcer DaemonSet
 
 ```yaml
 apiVersion: apps/v1
@@ -431,7 +431,7 @@ spec:
             path: /var/log
 ```
 
-#<!-- chunk: KubeEnforcer 准入控制 -->## KubeEnforcer 准入控制
+## KubeEnforcer 准入控制
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -510,7 +510,7 @@ spec:
 
 <!-- chunk: 安全策略实战 -->## 安全策略实战
 
-#<!-- chunk: 镜像安全策略 -->## 镜像安全策略
+## 镜像安全策略
 
 ```yaml
 apiVersion: v1
@@ -595,7 +595,7 @@ data:
         action: block
 ```
 
-#<!-- chunk: 运行时安全策略 -->## 运行时安全策略
+## 运行时安全策略
 
 ```yaml
 # Runtime security policies
@@ -693,7 +693,7 @@ runtime_policies:
         severity: "high"
 ```
 
-#<!-- chunk: 行为学习与基线 -->## 行为学习与基线
+## 行为学习与基线
 
 ```yaml
 behavioral_learning:
@@ -744,7 +744,7 @@ behavioral_learning:
 
 <!-- chunk: 合规与审计 -->## 合规与审计
 
-#<!-- chunk: 合规框架检查 -->## 合规框架检查
+## 合规框架检查
 
 ```yaml
 compliance_frameworks:
@@ -811,7 +811,7 @@ compliance_frameworks:
         implementation: "Aqua FIM capabilities"
 ```
 
-#<!-- chunk: 合规报告自动化 -->## 合规报告自动化
+## 合规报告自动化
 
 ```python
 #!/usr/bin/env python3
@@ -914,7 +914,7 @@ class AquaComplianceReporter:
 
 <!-- chunk: 监控与告警 -->## 监控与告警
 
-#<!-- chunk: Prometheus 告警规则 -->## Prometheus 告警规则
+## Prometheus 告警规则
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -994,7 +994,7 @@ spec:
             summary: "High admission denial rate: {{ $value }}/s"
 ```
 
-#<!-- chunk: CI/CD 集成 -->## CI/CD 集成
+## CI/CD 集成
 
 ```groovy
 // Jenkinsfile - Aqua Security Pipeline
@@ -1073,7 +1073,7 @@ pipeline {
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 安全部署最佳实践 -->## 安全部署最佳实践
+## 安全部署最佳实践
 
 **网络隔离**：将 Aqua 组件部署在独立的命名空间中，使用 [[NetworkPolicy|NetworkPolicy]] 限制访问。Console 仅允许管理员网络访问，Gateway 仅允许 Enforcer 和 KubeEnforcer 连接，PostgreSQL 仅允许 Console 和 Gateway 访问。
 
@@ -1083,7 +1083,10 @@ pipeline {
 
 **备份策略**：定期备份 PostgreSQL 数据库和 Aqua 配置。使用 `pg_dump` 进行完整备份，至少每天一次。备份文件加密后存储在异地位置。
 
-#<!-- chunk: 问题排除 -->## 问题排除
+## 问题排除
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1137,8 +1140,8 @@ kubectl top pods -n aqua-system
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance KUDIG Database — Global MOC
-- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Kyverno 企业级策略管理深度实践
@@ -1156,4 +1159,4 @@ kubectl top pods -n aqua-system
 - 04-kyverno-enterprise-policy-management
 - 05-vault-enterprise-secrets-management
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

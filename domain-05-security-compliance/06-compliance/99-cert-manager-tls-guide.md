@@ -69,7 +69,7 @@ TLS 证书是云原生环境中服务间安全通信的基础。在 Kubernetes �
 
 cert-manager 的核心价值在于将证书管理从手动操作转变为声明式自动化。管理员只需创建一个 Certificate 资源，指定域名、颁发者和有效期，cert-manager 就会自动完成证书签发、Secret 创建和到期前自动轮换。当证书即将到期时，cert-manager 会自动申请新证书并更新 Secret，使用该 Secret 的 Ingress 和工作负载会自动获取新证书。对于 ACME（Let's Encrypt）证书，cert-manager 自动处理 HTTP-01 和 DNS-01 挑战，无需手动操作 DNS 记录或配置 Web 服务器。
 
-#<!-- chunk: 威胁模型分析 -->## 威胁模型分析
+## 威胁模型分析
 
 **证书过期导致服务中断**：未及时轮换的证书过期后，TLS 连接会失败，导致服务不可用。在微服务架构中，一个过期的证书可能影响整个调用链。例如，如果 API Gateway 的证书过期，所有通过网关的请求都会失败。如果服务间 mTLS 的证书过期，服务之间的通信会中断，导致级联问题。历史上，因证书过期导致的大规模服务中断事件屡见不鲜。cert-manager 通过自动轮换机制确保证书始终有效，在证书到期前自动申请续签。
 
@@ -95,7 +95,7 @@ cert-manager 的核心价值在于将证书管理从手动操作转变为声明�
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: cert-manager 组件架构 -->## cert-manager 组件架构
+## cert-manager 组件架构
 
 cert-manager 由三个核心控制器组成，每个控制器负责证书生命周期的不同阶段。Certificate Controller 监听 Certificate 资源的创建和变更，触发证书签发流程。Issuer Controller 管理与各种 CA 的交互，包括 ACME 注册、订单创建和挑战处理。CertificateRequest Controller 处理实际的证书签名请求，与 CA 通信获取签发的证书。
 
@@ -169,7 +169,10 @@ graph TB
     style CR fill:#f59e0b,stroke:#d97706,color:#fff
 ```
 
-#<!-- chunk: 安装部署 -->## 安装部署
+## 安装部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add jetstack https://charts.jetstack.io
@@ -264,9 +267,9 @@ extraArgs:
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: ACME / Let's Encrypt 配置 -->## ACME / Let's Encrypt 配置
+## ACME / Let's Encrypt 配置
 
-##<!-- chunk: HTTP-01 挑战 -->## HTTP-01 挑战
+## HTTP-01 挑战
 
 HTTP-01 挑战是最常用的 ACME 验证方式，适合公开可访问的域名。cert-manager 在集群中创建临时 HTTP 服务来响应 Let's Encrypt 的验证请求。HTTP-01 挑战的优点是配置简单，不需要 DNS 服务商的 API 凭据。缺点是不支持通配符证书，域名必须通过 Ingress 暴露到公网。
 
@@ -313,7 +316,7 @@ spec:
             class: nginx
 ```
 
-##<!-- chunk: DNS-01 挑战（通配符证书） -->## DNS-01 挑战（通配符证书）
+## DNS-01 挑战（通配符证书）
 
 DNS-01 挑战通过在 DNS 中添加 TXT 记录验证域名所有权，支持签发通配符证书。DNS-01 挑战的优点是支持通配符证书（`*.example.com`）、不需要公网可访问的 Ingress、可以签发内网域名证书。缺点是需要 DNS 服务商的 API 凭据，配置相对复杂。
 
@@ -418,9 +421,12 @@ spec:
               key: accessToken
 ```
 
-#<!-- chunk: 私有 CA 配置 -->## 私有 CA 配置
+## 私有 CA 配置
 
 私有 CA 适合内部服务间 mTLS 场景。cert-manager 管理私有 CA 的密钥对，并使用它签发子证书。私有 CA 证书需要分发到所有客户端的 TrustStore 中。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 CA 私钥和证书
@@ -513,7 +519,7 @@ spec:
         key: password
 ```
 
-#<!-- chunk: 证书申请与使用 -->## 证书申请与使用
+## 证书申请与使用
 
 ```yaml
 # 申请公开证书
@@ -583,7 +589,7 @@ spec:
 
 <!-- chunk: 安全策略实战 -->## 安全策略实战
 
-#<!-- chunk: Ingress TLS 自动化 -->## Ingress TLS 自动化
+## Ingress TLS 自动化
 
 cert-manager 与 Kubernetes Ingress 深度集成，通过注解可以自动为 Ingress 端点配置 TLS 证书。当 Ingress 资源中指定了 `tls` 字段但对应的 Secret 不存在时，cert-manager 会自动创建 Certificate 资源并签发证书。证书更新后 Secret 会自动更新，Ingress Controller 会自动加载新证书。
 
@@ -624,7 +630,7 @@ spec:
                   number: 80
 ```
 
-#<!-- chunk: Gateway API TLS -->## Gateway API TLS
+## Gateway API TLS
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -669,7 +675,7 @@ spec:
           port: 80
 ```
 
-#<!-- chunk: Vault PKI 集成 -->## Vault PKI 集成
+## Vault PKI 集成
 
 cert-manager 可以与 HashiCorp Vault 的 PKI 引擎集成，使用 Vault 作为证书颁发者。这适合已有 Vault PKI 基础设施的企业，可以统一管理所有证书的签发和撤销。
 
@@ -730,7 +736,7 @@ spec:
         key: password
 ```
 
-#<!-- chunk: mTLS 服务网格证书 -->## mTLS 服务网格证书
+## mTLS 服务网格证书
 
 ```yaml
 # 为 Istio 服务网格签发证书
@@ -777,7 +783,7 @@ spec:
 
 <!-- chunk: 合规与审计 -->## 合规与审计
 
-#<!-- chunk: 证书生命周期审计 -->## 证书生命周期审计
+## 证书生命周期审计
 
 ```bash
 #!/bin/bash
@@ -845,7 +851,7 @@ kubectl get certificates --all-namespaces -o json | \
     "WARNING: \(.ns)/\(.name) duration > 90 days: \(.duration)"'
 ```
 
-#<!-- chunk: 证书策略（Kyverno 集成） -->## 证书策略（Kyverno 集成）
+## 证书策略（Kyverno 集成）
 
 ```yaml
 apiVersion: kyverno.io/v1
@@ -889,7 +895,7 @@ spec:
 
 <!-- chunk: 监控与告警 -->## 监控与告警
 
-#<!-- chunk: Prometheus 告警规则 -->## Prometheus 告警规则
+## Prometheus 告警规则
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -982,7 +988,7 @@ spec:
             description: "证书将在 14-30 天内过期但尚未触发轮换，检查 renewBefore 配置"
 ```
 
-#<!-- chunk: Grafana Dashboard -->## Grafana Dashboard
+## Grafana Dashboard
 
 ```json
 {
@@ -1076,6 +1082,9 @@ spec:
 | Warning | ACME 订单失败 | < 8 小时 | 1. 检查 ACME 账户状态 2. 检查速率限制 3. 检查 DNS/Ingress 配置 |
 | Info | 证书轮换成功 | 记录 | 记录审计日志，无需操作 |
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 手动触发证书轮换
 kubectl annotate certificate <name> -n <namespace> \
@@ -1095,7 +1104,7 @@ kubectl get challenges -n <namespace>
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 证书策略建议 -->## 证书策略建议
+## 证书策略建议
 
 | 实践 | 说明 | 配置示例 |
 |:---|:---|:---|
@@ -1110,7 +1119,7 @@ kubectl get challenges -n <namespace>
 | KeyStore 自动生成 | 为 Java 应用生成 JKS/PKCS12 | `keystores: jks/pkcs12` |
 | 多集群统一 CA | 使用 Vault PKI 或集中 CA | Vault Issuer + ClusterIssuer |
 
-#<!-- chunk: 多集群证书管理 -->## 多集群证书管理
+## 多集群证书管理
 
 在多集群环境中，建议使用集中的 CA 或 Vault PKI 作为证书颁发者，各集群的 cert-manager 实例连接到统一的颁发者。这确保了证书信任链的一致性，便于证书管理和撤销。
 
@@ -1150,7 +1159,7 @@ spec:
           key: token
 ```
 
-#<!-- chunk: GitOps 集成 -->## GitOps 集成
+## GitOps 集成
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -1188,7 +1197,7 @@ spec:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题 -->## 常见问题
+## 常见问题
 
 **证书签发失败**：检查 Certificate 资源的状态 `kubectl describe certificate <name>`，查看 `status.conditions` 中的错误信息。确认 Issuer 配置正确，ACME 账户注册成功。常见原因包括 Issuer Secret 不存在或内容错误、ACME 账户注册失败、速率限制。
 
@@ -1200,7 +1209,7 @@ spec:
 
 **Webhook 证书问题**：cert-manager 的 Webhook 需要有效的 TLS 证书。如果 Webhook 证书过期，所有证书操作都会失败。检查 `cert-manager-webhook-ca` Secret 是否存在且有效。
 
-#<!-- chunk: 完整诊断脚本 -->## 完整诊断脚本
+## 完整诊断脚本
 
 ```bash
 #!/bin/bash
@@ -1271,8 +1280,8 @@ kubectl get ingress --all-namespaces -o json | \
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
@@ -1290,9 +1299,9 @@ kubectl get ingress --all-namespaces -o json | \
 - 99-falco-runtime-security-guide
 - 99-java-security-kubernetes-guide
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

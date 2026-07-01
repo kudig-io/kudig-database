@@ -58,7 +58,7 @@ This document provides comprehensive exploration of Azure Resource Manager enter
 
 <!-- chunk: 1. Azure Resource Manager Enterprise Architecture -->## 1. Azure Resource Manager Enterprise Architecture
 
-#<!-- chunk: 1.1 Core Component Architecture -->## 1.1 Core Component Architecture
+## 1.1 Core Component Architecture
 
 ```mermaid
 graph TB
@@ -127,7 +127,7 @@ graph TB
     X --> Y
 ```
 
-#<!-- chunk: 1.2 Enterprise Management Group Hierarchy -->## 1.2 Enterprise Management Group Hierarchy
+## 1.2 Enterprise Management Group Hierarchy
 
 ```json
 {
@@ -207,7 +207,7 @@ graph TB
 
 <!-- chunk: 2. Advanced ARM Template Design -->## 2. Advanced ARM Template Design
 
-#<!-- chunk: 2.1 Enterprise Template Structure -->## 2.1 Enterprise Template Structure
+## 2.1 Enterprise Template Structure
 
 ```json
 {
@@ -353,7 +353,7 @@ graph TB
 }
 ```
 
-#<!-- chunk: 2.2 Linked Template Implementation -->## 2.2 Linked Template Implementation
+## 2.2 Linked Template Implementation
 
 ```json
 {
@@ -428,7 +428,7 @@ graph TB
 
 <!-- chunk: 3. Azure Policy and Governance -->## 3. Azure Policy and Governance
 
-#<!-- chunk: 3.1 Custom Policy Definitions -->## 3.1 Custom Policy Definitions
+## 3.1 Custom Policy Definitions
 
 ```json
 {
@@ -467,7 +467,7 @@ graph TB
 }
 ```
 
-#<!-- chunk: 3.2 Initiative Definition -->## 3.2 Initiative Definition
+## 3.2 Initiative Definition
 
 ```json
 {
@@ -509,7 +509,7 @@ graph TB
 
 <!-- chunk: 4. Security and Compliance -->## 4. Security and Compliance
 
-#<!-- chunk: 4.1 Managed Identity Integration -->## 4.1 Managed Identity Integration
+## 4.1 Managed Identity Integration
 
 ```json
 {
@@ -538,7 +538,7 @@ graph TB
 }
 ```
 
-#<!-- chunk: 4.2 Key Vault Integration -->## 4.2 Key Vault Integration
+## 4.2 Key Vault Integration
 
 ```bash
 #!/bin/bash
@@ -599,7 +599,7 @@ EOF
 
 <!-- chunk: 5. Monitoring and Cost Optimization -->## 5. Monitoring and Cost Optimization
 
-#<!-- chunk: 5.1 Azure Monitor Integration -->## 5.1 Azure Monitor Integration
+## 5.1 Azure Monitor Integration
 
 ```json
 {
@@ -637,7 +637,7 @@ EOF
 }
 ```
 
-#<!-- chunk: 5.2 Cost Management Queries -->## 5.2 Cost Management Queries
+## 5.2 Cost Management Queries
 
 ```kql
 // Azure成本分析查询示例
@@ -685,7 +685,7 @@ Resources
 
 <!-- chunk: 6. CI/CD Integration -->## 6. CI/CD Integration
 
-#<!-- chunk: 6.1 Azure DevOps Pipeline -->## 6.1 Azure DevOps Pipeline
+## 6.1 Azure DevOps Pipeline
 
 ```yaml
 # azure-pipelines.yml
@@ -758,7 +758,7 @@ stages:
                       -adminPassword $(adminPassword)
 ```
 
-#<!-- chunk: 6.2 GitHub Actions Integration -->## 6.2 GitHub Actions Integration
+## 6.2 GitHub Actions Integration
 
 ```yaml
 # .github/workflows/azure-deploy.yml
@@ -822,7 +822,7 @@ jobs:
 
 <!-- chunk: 7. Best Practices and Troubleshooting -->## 7. Best Practices and Troubleshooting
 
-#<!-- chunk: 7.1 Template Best Practices -->## 7.1 Template Best Practices
+## 7.1 Template Best Practices
 
 ```json
 {
@@ -879,7 +879,7 @@ jobs:
 }
 ```
 
-#<!-- chunk: 7.2 Common Troubleshooting Commands -->## 7.2 Common Troubleshooting Commands
+## 7.2 Common Troubleshooting Commands
 
 ```bash
 #!/bin/bash
@@ -924,7 +924,7 @@ az group export \
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-24-infrastructure-as-code KUDIG Database — Global MOC
-- [[domain-08-release-change-management/README|Domain 24: 基础设施即代码 (Infrastructure as Code)]]
+- [[domain-08-release-change-management/README.md|Domain 08: 基础设施即代码 (Infrastructure as Code)]]
 - Domain-24 基础设施即代码 — 开源项目索引
 - Terraform企业级基础设施即代码实践
 - Ansible企业级自动化运维深度实践

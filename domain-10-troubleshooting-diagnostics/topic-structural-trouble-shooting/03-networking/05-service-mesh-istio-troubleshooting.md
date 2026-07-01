@@ -199,6 +199,9 @@ Istio 的控制面 `istiod` 与数据面 `Envoy` 之间通过 xDS（Discovery Se
 
 ### 2.2 专家工具箱
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 一键收集诊断包 (专家必备)
 istioctl bug-report --namespace istio-system --duration 5m
@@ -586,6 +589,9 @@ func (p *PilotServer) OnConfigChange(event ConfigEvent) {
 
 **证书轮换流程**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 证书轮换过程 (无需重启 Pod)
 
@@ -869,6 +875,7 @@ def connect_database():
             print(f"Retry {i}/10")
             time.sleep(2)
     raise Exception("Cannot connect to database")
+
 ```
 
 ---
@@ -918,6 +925,9 @@ def connect_database():
 ## 3.3 深度排查脚本集
 
 ### 3.3.1 Istio 健康检查脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1027,6 +1037,9 @@ echo -e "\n=== Health Check Complete ==="
 
 ### 3.3.2 Envoy 配置调试脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # 文件: envoy-config-debug.sh
@@ -1088,6 +1101,9 @@ echo "Full config dumps saved to /tmp/*.json"
 ```
 
 ### 3.3.3 流量追踪脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1318,6 +1334,9 @@ spec:
 
 **根因分析**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 检查 Envoy 重启原因
 kubectl get pods -A -l security.istio.io/tlsMode=istio \
@@ -1427,6 +1446,9 @@ done
 
 **防护措施**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 升级前配置审计
 istioctl experimental precheck
@@ -1469,6 +1491,9 @@ istioctl pc cluster <pod> --fqdn '*' | grep -E "BlackHoleCluster|PassthroughClus
 ## 附录: Istio 专家巡检清单 (扩展版)
 
 ### 每日自动化巡检
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1552,6 +1577,9 @@ Terway ENI 模式使用阿里云弹性网卡（ENI）直接挂载到 Pod，网�
 - 流量被直接路由到 ENI，绕过了 Envoy sidecar
 
 #### 排查步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # Step 1: 确认 Pod 使用 Terway ENI 模式
@@ -1644,6 +1672,9 @@ kubectl logs -n istio-system -l app=istio-ingressgateway --tail=50 | grep -i "ei
 #### 解决方案
 
 **方案 A: 移除 Pod EIP 绑定，统一通过 Ingress Gateway 入口**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 移除 Pod 的 EIP 直接绑定
@@ -1741,6 +1772,9 @@ spec:
 ```
 
 ### 6.4 Terway + ASM 问题快速检测命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -2483,18 +2517,20 @@ verification: |
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm|helm]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting|03-service-ingress-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting|04-networkpolicy-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting|06-gateway-api-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting|07-terway-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting.md|06-gateway-api-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
+
+```

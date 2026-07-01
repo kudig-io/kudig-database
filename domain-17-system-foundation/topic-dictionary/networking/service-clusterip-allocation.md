@@ -30,7 +30,7 @@ created: "2026-05-23"
 
 ## 概述
 
-在 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 中，`ClusterIP` 类型的 Service 会被分配一个集群范围内的虚拟 IP 地址，客户端通过该 IP 访问 Service，再由 Kubernetes 将流量负载均衡到后端 Pod。整个集群中，每个 Service 的 ClusterIP 必须唯一。Kubernetes 采用了一种分带（banding）分配策略，以降低用户手动指定静态 IP 与系统自动动态分配发生冲突的风险。
+在 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 中，`ClusterIP` 类型的 Service 会被分配一个集群范围内的虚拟 IP 地址，客户端通过该 IP 访问 Service，再由 Kubernetes 将流量负载均衡到后端 Pod。整个集群中，每个 Service 的 ClusterIP 必须唯一。Kubernetes 采用了一种分带（banding）分配策略，以降低用户手动指定静态 IP 与系统自动动态分配发生冲突的风险。
 
 ## 核心概念/原理
 
@@ -170,8 +170,14 @@ kubectl get svc <name> -o jsonpath='{.spec.clusterIP}'
 
 - [Service](service.md) — Service 类型和 ClusterIP 的使用
 - [DNS for Services](dns-for-services-and-[[Pods|pods]].md) — ClusterIP 与 DNS 记录的关系
-- [[domain-17-system-foundation/topic-dictionary/networking/ipv4-ipv6-dual-stack|IPv4/IPv6 Dual Stack]]](ipv4-ipv6-dual-stack.md) — 双栈 Service 的 IP 分配
+- [[domain-17-system-foundation/topic-dictionary/networking/ipv4-ipv6-dual-stack.md|IPv4/IPv6 Dual Stack]]](ipv4-ipv6-dual-stack.md) — 双栈 Service 的 IP 分配
 
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/services-networking/cluster-ip-allocation/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
+- [[domain-17-system-foundation/topic-dictionary/networking/akri.md|Akri 边缘设备发现]]
+- [[domain-17-system-foundation/topic-dictionary/networking/antrea.md|Antrea 网络方案]]

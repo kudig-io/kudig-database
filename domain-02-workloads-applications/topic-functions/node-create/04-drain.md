@@ -515,6 +515,9 @@ Delete API (不推荐):
 
 ### 场景 1: 节点维护 (内核升级)
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 1. 驱逐节点上的 Pod
 kubectl drain node-1 \
@@ -533,6 +536,11 @@ kubectl uncordon node-1
 ```
 
 ### 场景 2: 集群升级时 drain
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 逐个升级 worker 节点
@@ -598,6 +606,9 @@ spec:
 
 ### 场景 4: 批量 drain 带标签的节点
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # drain 所有 worker 节点
 kubectl drain -l node-role.kubernetes.io/worker= \
@@ -611,6 +622,9 @@ kubectl drain -l topology.kubernetes.io/zone=us-west-2a \
 ```
 
 ### 场景 5: 强制 drain (跳过 PDB)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 警告: 会违反 PDB 约束，仅在紧急情况使用
@@ -716,6 +730,10 @@ data:
 
 ### drain 完整操作
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # cordon 节点 (停止调度)
 kubectl cordon node-1
@@ -755,6 +773,9 @@ kubectl get nodes
 ```
 
 ### drain 时 PDB 阻止
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 设置 PDB: 最少 2 个 Pod 可用
@@ -829,8 +850,8 @@ kubectl get events --field-selector reason=Evicted -A
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/sql|sql]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[skills/node-drain-and-maintenance|node-drain-and-maintenance]]
-- [[entities/kubernetes|kubernetes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[skills/node-drain-and-maintenance.md|node-drain-and-maintenance]]
+- [[entities/kubernetes.md|kubernetes]]

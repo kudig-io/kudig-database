@@ -51,6 +51,7 @@ prerequisites:
 - tracing-basics
 - observability-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Kusheet 工具与开源项目 URL 汇总
@@ -895,7 +896,9 @@ created: "2026-05-23"
 ---
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级
 
-## Related
+## 参考链接
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [Tool Ecosystem]()
+
+## Related
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

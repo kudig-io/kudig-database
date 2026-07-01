@@ -1,6 +1,6 @@
 ---
 title: 多云/混合云网络故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: 多云/混合云[[skills/ts-networking|ts-networking]]指南'
+description: 'title: 多云/混合云[[skills/ts-networking.md|ts-networking]]指南'
 category: structural-troubleshooting
 tags:
 - troubleshooting
@@ -526,6 +526,9 @@ data:
 
 #### 方案二：Linkerd 多集群服务镜像
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # Linkerd 多集群部署与修复脚本
@@ -725,6 +728,7 @@ groups:
     annotations:
       summary: "Istio 远程集群连接断开"
       description: "Istiod 无法连接到远程集群 {{ $labels.cluster }}"
+
 ```
 
 ### 3.6 最佳实践
@@ -781,12 +785,14 @@ groups:
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting|03-cloud-resource-quota-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/01-cloud-provider-integration-troubleshooting|01-cloud-provider-integration-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting|03-cloud-resource-quota-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/01-cloud-provider-integration-troubleshooting|01-cloud-provider-integration-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md|03-cloud-resource-quota-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/01-cloud-provider-integration-troubleshooting.md|01-cloud-provider-integration-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md|03-cloud-resource-quota-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/01-cloud-provider-integration-troubleshooting.md|01-cloud-provider-integration-troubleshooting]]
+
+```

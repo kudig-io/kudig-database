@@ -286,6 +286,9 @@ data:
 
 ### 步骤1：配置etcd加密
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # 配置etcd加密
@@ -322,6 +325,9 @@ kubectl get secrets --all-namespaces -o json | jq '.items[] | select(.metadata.n
 ```
 
 ### 步骤2：安装External Secrets Operator
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 #!/bin/bash
@@ -376,6 +382,9 @@ vault kv put secret/database username="admin" password="securepassword"
 ```
 
 ### 步骤4：配置密钥轮换
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash
@@ -626,7 +635,7 @@ roleRef:
 
 ## Related
 
-- [[synthesis/CI-CD 流水线 × Secret 管理|CI-CD 流水线 × Secret 管理]] — Cross-reference
-- [[synthesis/Secret 管理 × 存储模型|Secret 管理 × 存储模型]] — Cross-reference
-- [[synthesis/Pod 生命周期 × Secret 管理|Pod 生命周期 × Secret 管理]] — Cross-reference
-- [[entities/metal3-io|Metal3]] — Cross-reference
+- [[concepts/CI-CD 流水线 × Secret 管理.md|CI-CD 流水线 × Secret 管理]] — Cross-reference
+- [[concepts/Secret 管理 × 存储模型.md|Secret 管理 × 存储模型]] — Cross-reference
+- [[concepts/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — Cross-reference
+- [[entities/metal3-io.md|Metal3]] — Cross-reference

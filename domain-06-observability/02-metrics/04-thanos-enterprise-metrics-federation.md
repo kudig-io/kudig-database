@@ -110,7 +110,7 @@ Thanos is an open-source Prometheus high availability solution that provides glo
 
 <!-- chunk: 架构设计 (Architecture Design) -->## 架构设计 (Architecture Design)
 
-#<!-- chunk: 核心组件 (Core Components) -->## 核心组件 (Core Components)
+## 核心组件 (Core Components)
 
 ```yaml
 # Thanos 架构组件
@@ -169,7 +169,7 @@ spec:
           storage: 200Gi
 ```
 
-#<!-- chunk: 联邦架构 (Federation Architecture) -->## 联邦架构 (Federation Architecture)
+## 联邦架构 (Federation Architecture)
 
 ```mermaid
 graph TB
@@ -214,7 +214,7 @@ graph TB
 
 <!-- chunk: 部署配置 (Deployment Configuration) -->## 部署配置 (Deployment Configuration)
 
-#<!-- chunk: 对象存储配置 (Object Storage Configuration) -->## 对象存储配置 (Object Storage Configuration)
+## 对象存储配置 (Object Storage Configuration)
 
 ```yaml
 # objstore.yml - 对象存储配置
@@ -235,7 +235,7 @@ config:
   part_size: 134217728
 ```
 
-#<!-- chunk: Hash Ring 配置 (Hash Ring Configuration) -->## Hash Ring 配置 (Hash Ring Configuration)
+## Hash Ring 配置 (Hash Ring Configuration)
 
 ```json
 [
@@ -250,7 +250,7 @@ config:
 ]
 ```
 
-#<!-- chunk: Query 组件部署 (Query Component Deployment) -->## Query 组件部署 (Query Component Deployment)
+## Query 组件部署 (Query Component Deployment)
 
 ```yaml
 apiVersion: apps/v1
@@ -294,7 +294,7 @@ spec:
 
 <!-- chunk: 联邦策略 (Federation Strategy) -->## 联邦策略 (Federation Strategy)
 
-#<!-- chunk: 数据分片策略 (Data Sharding Strategy) -->## 数据分片策略 (Data Sharding Strategy)
+## 数据分片策略 (Data Sharding Strategy)
 
 ```yaml
 # 联邦配置示例
@@ -337,7 +337,7 @@ scrape_configs:
       target_label: __address__
 ```
 
-#<!-- chunk: 跨集群联邦 (Cross-cluster Federation) -->## 跨集群联邦 (Cross-cluster Federation)
+## 跨集群联邦 (Cross-cluster Federation)
 
 ```yaml
 # 跨集群联邦配置
@@ -362,7 +362,7 @@ scrape_configs:
 
 <!-- chunk: 长期存储管理 (Long-term Storage Management) -->## 长期存储管理 (Long-term Storage Management)
 
-#<!-- chunk: 数据保留策略 (Data Retention Policy) -->## 数据保留策略 (Data Retention Policy)
+## 数据保留策略 (Data Retention Policy)
 
 ```yaml
 # 数据保留配置
@@ -402,7 +402,11 @@ spec:
           restartPolicy: OnFailure
 ```
 
-#<!-- chunk: 存储成本优化 (Storage Cost Optimization) -->## 存储成本优化 (Storage Cost Optimization)
+## 存储成本优化 (Storage Cost Optimization)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -448,7 +452,7 @@ optimize_storage() {
 
 <!-- chunk: 查询优化 (Query Optimization) -->## 查询优化 (Query Optimization)
 
-#<!-- chunk: 查询性能调优 (Query Performance Tuning) -->## 查询性能调优 (Query Performance Tuning)
+## 查询性能调优 (Query Performance Tuning)
 
 ```yaml
 # Query Frontend 配置
@@ -491,7 +495,7 @@ spec:
             memory: "4Gi"
 ```
 
-#<!-- chunk: 缓存策略 (Cache Strategy) -->## 缓存策略 (Cache Strategy)
+## 缓存策略 (Cache Strategy)
 
 ```yaml
 # 查询缓存配置
@@ -515,7 +519,7 @@ query_frontend:
 
 <!-- chunk: 监控告警 (Monitoring and Alerting) -->## 监控告警 (Monitoring and Alerting)
 
-#<!-- chunk: 关键指标监控 (Key Metrics Monitoring) -->## 关键指标监控 (Key Metrics Monitoring)
+## 关键指标监控 (Key Metrics Monitoring)
 
 ```yaml
 # Thanos 监控规则
@@ -572,7 +576,7 @@ groups:
       description: "Available disk space is below 10% on {{ $labels.instance }}."
 ```
 
-#<!-- chunk: 可视化仪表板 (Visualization Dashboard) -->## 可视化仪表板 (Visualization Dashboard)
+## 可视化仪表板 (Visualization Dashboard)
 
 ```json
 {
@@ -616,7 +620,10 @@ groups:
 
 <!-- chunk: 问题排除 (Troubleshooting) -->## 问题排除 (Troubleshooting)
 
-#<!-- chunk: 常见问题诊断 (Common Issue Diagnosis) -->## 常见问题诊断 (Common Issue Diagnosis)
+## 常见问题诊断 (Common Issue Diagnosis)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -675,7 +682,7 @@ data_consistency_check() {
 
 <!-- chunk: 最佳实践 (Best Practices) -->## 最佳实践 (Best Practices)
 
-#<!-- chunk: 部署最佳实践 (Deployment Best Practices) -->## 部署最佳实践 (Deployment Best Practices)
+## 部署最佳实践 (Deployment Best Practices)
 
 1. **高可用部署**
    - Receive 组件至少3个副本
@@ -698,7 +705,7 @@ data_consistency_check() {
    - 配置网络策略限制访问
    - 使用 ServiceAccount 和 RBAC
 
-#<!-- chunk: 运维最佳实践 (Operations Best Practices) -->## 运维最佳实践 (Operations Best Practices)
+## 运维最佳实践 (Operations Best Practices)
 
 1. **监控覆盖**
    - 端到端延迟监控
@@ -726,8 +733,8 @@ data_consistency_check() {
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-20-enterprise-monitoring-alerting MOC
-- [[domain-06-observability/README|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-20 企业监控与告警 — 开源项目索引]]
+- [[domain-06-observability/README.md|Domain 06: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]]
 - Prometheus企业级监控系统深度实践
 - Grafana Enterprise Observability Platform 深度实践
 - OpenTelemetry分布式追踪与可观测性深度实践
@@ -745,8 +752,8 @@ data_consistency_check() {
 - 05-datadog-enterprise-apm
 - 05-datadog-enterprise-monitoring
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

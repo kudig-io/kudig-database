@@ -99,7 +99,7 @@ k8s_versions:
 
 <!-- chunk: 1. CNI 差异与适配 -->## 1. CNI 差异与适配
 
-#<!-- chunk: 1.1 CNI 对比 -->## 1.1 CNI 对比
+## 1.1 CNI 对比
 
 | 维度 | Calico (自建常用) | Flannel (自建常用) | Terway (ACK 推荐) |
 |------|-----------------|------------------|-------------------|
@@ -110,7 +110,7 @@ k8s_versions:
 | **Pod IP 可路由** | 仅集群内 | 仅集群内 | VPC 内直接可路由 |
 | **对迁移的影响** | 需验证 NetworkPolicy 兼容 | 迁移最简单 | 需额外 Pod vSwitch |
 
-#<!-- chunk: 1.2 迁移注意事项 -->## 1.2 迁移注意事项
+## 1.2 迁移注意事项
 
 ```bash
 # 1. 确认自建集群 CNI 类型
@@ -134,7 +134,7 @@ kubectl --context=source-cluster get bgppeers 2>/dev/null
 
 <!-- chunk: 2. Service 与负载均衡迁移 -->## 2. Service 与负载均衡迁移
 
-#<!-- chunk: 2.1 负载均衡方案对比 -->## 2.1 负载均衡方案对比
+## 2.1 负载均衡方案对比
 
 | 自建方案 | ACK 替代方案 | 适用场景 | 注解前缀 |
 |---------|------------|---------|---------|
@@ -143,7 +143,7 @@ kubectl --context=source-cluster get bgppeers 2>/dev/null
 | 外部 Nginx/HAProxy | NLB (网络型) | 四层高性能 | `service.beta.kubernetes.io/alibaba-cloud-loadbalancer-*` |
 | 无（NodePort 直连） | SLB / NLB | 统一入口 | 同上 |
 
-#<!-- chunk: 2.2 SLB/NLB/ALB 选型 -->## 2.2 SLB/NLB/ALB 选型
+## 2.2 SLB/NLB/ALB 选型
 
 | 类型 | 协议 | 性能 | 适用场景 | 成本 |
 |------|------|------|---------|------|
@@ -151,7 +151,7 @@ kubectl --context=source-cluster get bgppeers 2>/dev/null
 | **NLB (网络型)** | TCP/UDP/TLS | 极高 (千万级并发) | 高性能四层 | 中 |
 | **ALB (应用型)** | HTTP/HTTPS/gRPC/WebSocket | 高 | 七层智能路由 | 中 |
 
-#<!-- chunk: 2.3 Service 迁移示例 -->## 2.3 Service 迁移示例
+## 2.3 Service 迁移示例
 
 ```yaml
 # --- 内部服务: ClusterIP（无需改动） ---
@@ -217,7 +217,7 @@ spec:
 
 <!-- chunk: 3. Ingress 迁移 -->## 3. Ingress 迁移
 
-#<!-- chunk: 3.1 Ingress Controller 选型 -->## 3.1 Ingress Controller 选型
+## 3.1 Ingress Controller 选型
 
 | 自建方案 | ACK 推荐 | 迁移难度 | 说明 |
 |---------|---------|---------|------|
@@ -227,7 +227,7 @@ spec:
 | Higress | Higress (ACK MSE) | 低 | 直接使用 MSE 托管版 |
 | 自建 HAProxy | ALB Ingress / nginx-ingress | 中 | 需改配置方式 |
 
-#<!-- chunk: 3.2 nginx-ingress 迁移（最常见） -->## 3.2 nginx-ingress 迁移（最常见）
+## 3.2 nginx-ingress 迁移（最常见）
 
 ```bash
 # 自建集群和 ACK 都使用 nginx-ingress 时，Ingress 资源几乎无需改动
@@ -247,7 +247,10 @@ curl -H "Host: api.example.com" http://$ACK_INGRESS_IP/health
 # 预期: 返回应用健康检查响应
 ```
 
-#<!-- chunk: 3.3 TLS 证书迁移 -->## 3.3 TLS 证书迁移
+## 3.3 TLS 证书迁移
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 导出自建集群的 TLS Secret
@@ -284,7 +287,7 @@ EOF
 
 <!-- chunk: 4. DNS 灰度切流 -->## 4. DNS 灰度切流
 
-#<!-- chunk: 4.1 切流策略 -->## 4.1 切流策略
+## 4.1 切流策略
 
 ```
 灰度切流时间线（推荐）:
@@ -318,7 +321,7 @@ Day 14: 退役源集群
   └── 参考 08-validation-cutover-decommission.md
 ```
 
-#<!-- chunk: 4.2 阿里云 DNS 权重配置 -->## 4.2 阿里云 DNS 权重配置
+## 4.2 阿里云 DNS 权重配置
 
 ```bash
 # 使用阿里云 DNS（云解析）进行权重路由
@@ -359,7 +362,7 @@ aliyun alidns SetDomainRecordWeight --RecordId <source-record-id> --Weight 0
 # aliyun alidns DeleteDomainRecord --RecordId <source-record-id>
 ```
 
-#<!-- chunk: 4.3 基于 GSLB/GTM 的智能切流 -->## 4.3 基于 GSLB/GTM 的智能切流
+## 4.3 基于 GSLB/GTM 的智能切流
 
 ```bash
 # 阿里云 GTM (全局流量管理) — 更精细的流量控制
@@ -386,7 +389,7 @@ aliyun alidns SetDomainRecordWeight --RecordId <source-record-id> --Weight 0
 # - 实时流量统计和监控
 ```
 
-#<!-- chunk: 4.4 切流监控看板 -->## 4.4 切流监控看板
+## 4.4 切流监控看板
 
 ```bash
 # 在 Grafana 创建切流监控 Dashboard，核心指标:
@@ -413,7 +416,7 @@ aliyun alidns SetDomainRecordWeight --RecordId <source-record-id> --Weight 0
 
 <!-- chunk: 5. NetworkPolicy 迁移 -->## 5. NetworkPolicy 迁移
 
-#<!-- chunk: 5.1 Calico NetworkPolicy → K8s NetworkPolicy -->## 5.1 Calico NetworkPolicy → K8s NetworkPolicy
+## 5.1 Calico NetworkPolicy → K8s NetworkPolicy
 
 ```yaml
 # Calico 特有的 GlobalNetworkPolicy（不兼容 ACK）
@@ -458,7 +461,7 @@ spec:
   - {}                        # 允许所有出站
 ```
 
-#<!-- chunk: 5.2 批量转换脚本 -->## 5.2 批量转换脚本
+## 5.2 批量转换脚本
 
 ```bash
 # 导出所有 Calico NetworkPolicy 并转换
@@ -517,7 +520,7 @@ kubectl --context=$ACK_CONTEXT delete pod net-test-1 net-test-2
 
 <!-- chunk: 7. 流量回滚方案 -->## 7. 流量回滚方案
 
-#<!-- chunk: 7.1 紧急回滚 SOP -->## 7.1 紧急回滚 SOP
+## 7.1 紧急回滚 SOP
 
 ```bash
 #!/bin/bash
@@ -558,7 +561,7 @@ echo ""
 echo "回滚执行完成，请持续观察源集群状态"
 ```
 
-#<!-- chunk: 7.2 DNS TTL 建议 -->## 7.2 DNS TTL 建议
+## 7.2 DNS TTL 建议
 
 | 阶段 | TTL 设置 | 说明 |
 |------|---------|------|
@@ -592,16 +595,16 @@ echo "回滚执行完成，请持续观察源集群状态"
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-migration MOC
-- [[domain-08-release-change-management/topic-migration/README|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
-- [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning|01 - 迁移评估与规划]]
-- [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design|02 - ACK 目标集群设计与搭建]]
-- [[domain-08-release-change-management/topic-migration/03-application-workload-migration|03 - 应用工作负载迁移]]
-- [[domain-08-release-change-management/topic-migration/04-storage-data-migration|04 - 存储与数据迁移]]
-- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration|06 - 有状态服务迁移]]
-- [[domain-08-release-change-management/topic-migration/07-observability-security-migration|07 - 可观测性与安全迁移]]
-- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission|08 - 验收、切换与旧集群退役]]
-- [[domain-08-release-change-management/topic-migration/09-migration-toolchain|09 - 迁移工具链参考]]
-- [[domain-08-release-change-management/topic-migration/10-real-world-case-study|10 - 生产迁移实战案例]]
+- [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
+- [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
+- [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
+- [[domain-08-release-change-management/topic-migration/03-application-workload-migration.md|03 - 应用工作负载迁移]]
+- [[domain-08-release-change-management/topic-migration/04-storage-data-migration.md|04 - 存储与数据迁移]]
+- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration.md|06 - 有状态服务迁移]]
+- [[domain-08-release-change-management/topic-migration/07-observability-security-migration.md|07 - 可观测性与安全迁移]]
+- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission.md|08 - 验收、切换与旧集群退役]]
+- [[domain-08-release-change-management/topic-migration/09-migration-toolchain.md|09 - 迁移工具链参考]]
+- [[domain-08-release-change-management/topic-migration/10-real-world-case-study.md|10 - 生产迁移实战案例]]
 
 ## See Also
 
@@ -612,4 +615,4 @@ echo "回滚执行完成，请持续观察源集群状态"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]

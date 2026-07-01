@@ -814,6 +814,9 @@ dr_site_monitoring:
 
 ### 灾备切换Runbook模板
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 set -euo pipefail
@@ -875,4 +878,4 @@ echo "Total failover duration: $SECONDS seconds"
 - [[README]]
 - [[README]]
 
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist|集群删除前的数据备份与迁移检查清单]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist.md|集群删除前的数据备份与迁移检查清单]]

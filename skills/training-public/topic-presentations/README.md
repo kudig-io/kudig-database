@@ -1,5 +1,5 @@
 ---
-title: Topic: Presentations（技术演示文稿） [topic-presentations]
+title: "Topic: Presentations（技术演示文稿） [topic-presentations]"
 description: 'description: ''**11 篇 Presentation** | 面向内部培训与技术分享的 Kubernetes 专题演示文稿'''
 category: learning
 tags:
@@ -747,6 +747,10 @@ brew install bind                   # macOS
 
 ### 集群访问验证
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # === 集群连通性验证 ===
 
@@ -854,6 +858,10 @@ kubectl describe node | grep -A 5 "Capacity"
 以下脚本用于搭建完整的培训实验环境。建议在课前由讲师执行，确保集群就绪。
 
 ### 集群初始化脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash
@@ -1097,6 +1105,9 @@ echo ""
 
 ### RBAC 配置脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # setup-student-rbac.sh - 为学员创建受限 RBAC 权限
@@ -1265,22 +1276,22 @@ echo "  KUBECONFIG=kubeconfig-student-${STUDENT_ID}.yaml kubectl auth can-i --li
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
+- [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
+- [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
-- [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
+- [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]

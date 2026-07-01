@@ -546,6 +546,9 @@ Scheduler 在做决定时并不会锁定节点，而是采用乐观锁（Optimis
 
 #### 3.1.1 解决步骤
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 步骤 1：检查启动失败原因
 journalctl -u kube-scheduler -b --no-pager | tail -100
@@ -598,6 +601,10 @@ curl -k https://127.0.0.1:10259/healthz
 
 #### 3.2.1 解决步骤
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 步骤 1：确认资源不足情况
 kubectl describe pod <pod-name> | grep -A10 Events
@@ -649,6 +656,11 @@ kubectl get pod <pod-name> -w
 ### 3.3 Pod 因亲和性/污点无法调度
 
 #### 3.3.1 解决步骤
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 步骤 1：检查 Pod 亲和性配置
@@ -758,6 +770,9 @@ curl -k https://127.0.0.1:10259/metrics | grep scheduler_scheduling_duration_sec
 ### 3.5 自定义调度器问题
 
 #### 3.5.1 解决步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 步骤 1：确认 Pod 使用的调度器
@@ -888,6 +903,10 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"schedulerName"
 
 #### ⚡ 应急措施
 1. **临时放宽约束**（修改为软约束）：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
    ```bash
    # 修改 Deployment
    kubectl edit deployment my-service -n production
@@ -1040,6 +1059,10 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"schedulerName"
 
 #### ⚡ 应急措施
 1. **立即删除问题服务**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
    ```bash
    # 删除新部署的服务（临时止血）
    kubectl delete deployment new-service -n production
@@ -1071,6 +1094,10 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"schedulerName"
    ```
 
 3. **部署并验证**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
    ```bash
    kubectl apply -f new-service.yaml
    
@@ -1224,6 +1251,10 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"schedulerName"
 
 #### ⚡ 应急措施
 1. **驱逐低优先级 Pod 释放资源**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
    ```bash
    # 查找占用资源多的节点
    kubectl top nodes --sort-by=cpu | head -5
@@ -1243,6 +1274,12 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"schedulerName"
    ```
 
 2. **调度 GPU 任务**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
    ```bash
    # 为 GPU Pod 指定节点（临时）
    kubectl patch pod gpu-training-job-xxxxx -p '{"spec":{"nodeName":"node-01"}}'
@@ -1359,16 +1396,18 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"schedulerName"
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting|01-apiserver-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting|02-etcd-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting|04-controller-manager-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting|05-webhook-admission-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md|01-apiserver-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md|04-controller-manager-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]]
+
+```

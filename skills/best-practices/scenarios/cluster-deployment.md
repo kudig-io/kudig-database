@@ -84,17 +84,17 @@ graph TD
 - domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md
 - domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md
 - domain-01-cluster-fundamentals/03-plane-high-availability.md
-- [[domain-07-platform-engineering/README]]
-- [[domain-08-release-change-management/topic-deployment/README]]
+- [[domain-07-platform-engineering/README.md|README]]
+- [[domain-08-release-change-management/topic-deployment/README.md|README]]
 
 
 ---
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|apiserver fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md|etcd fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node fta]]
 
 
 ---
@@ -113,7 +113,7 @@ graph TD
 
 ## Related
 
-- [[references/kudig-metadata-index|README]].md|README]]
-- [[skills/apiserver-fta|apiserver-fta]]
-- [[skills/etcd-fta|etcd-fta]]
-- [[entities/kubernetes|kubernetes]]
+- [[entities/kudig-metadata-index.md|README]].md|README]]
+- [[skills/apiserver-fta.md|apiserver-fta]]
+- [[skills/etcd-fta.md|etcd-fta]]
+- [[entities/kubernetes.md|kubernetes]]

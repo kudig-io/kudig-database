@@ -72,10 +72,10 @@ created: "2026-05-23"
 ## 目录
 
 - [kube-apiserver 参数](#kube-apiserver-参数)
-- [[entities/etcd|etcd]] 参数](#etcd-参数)
+- [[entities/etcd.md|etcd]] 参数](#etcd-参数)
 - [kube-scheduler 参数](#kube-scheduler-参数)
 - [kube-controller-manager 参数](#kube-controller-manager-参数)
-- [[entities/kubelet|kubelet]] 参数](#kubelet-参数)
+- [[entities/kubelet.md|kubelet]] 参数](#kubelet-参数)
 - [kube-proxy 参数](#kube-proxy-参数)
 - [Feature Gates 完整参考](#feature-gates-完整参考)
 - [生产配置示例](#生产配置示例)
@@ -496,12 +496,17 @@ echo "Backup completed: ${BACKUP_FILE}"
 
 **恢复流程**:
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 停止所有etcd节点
 systemctl stop etcd
 
 # 2. 清理旧数据目录 (所有节点)
-rm -rf /var/lib/etcd/*
+rm -rf /var/lib/etcd/*  # ⚠️ 删除系统/数据文件
 
 # 3. 恢复快照 (每个节点执行，注意参数不同)
 # 节点1
@@ -1731,6 +1736,9 @@ az aks nodepool add \
 
 ### 10.1 配置检查命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看API Server参数
 kubectl get pods -n kube-system -l component=kube-apiserver -o yaml | grep -A 100 'command:'
@@ -1781,7 +1789,7 @@ kubectl get componentstatuses  # 已弃用但仍可用
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析
@@ -1802,4 +1810,4 @@ kubectl get componentstatuses  # 已弃用但仍可用
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

@@ -348,34 +348,32 @@ spec:
   - bookinfo-gateway
   http:
   # 金丝雀发布路由
-  - match:
-    - headers:
-        user-agent:
-          regex: '.*Firefox.*'
-    route:
-    - destination:
-        host: reviews
-        subset: v2
-      weight: 100
-    retries:
-      attempts: 3
-      perTryTimeout: 2s
-      
+  - matchers:
+    - - headers=""
+    - user-agent=""
+    - regex=".*Firefox.*"
+    - route=""
+    - - destination=""
+    - host="reviews"
+    - subset="v2"
+    - weight="100"
+    - retries=""
+    - attempts="3"
+    - perTryTimeout="2s"
   # 基于用户身份的路由
-  - match:
-    - headers:
-        end-user:
-          exact: jason
-    route:
-    - destination:
-        host: reviews
-        subset: v2
-    fault:
-      delay:
-        percentage:
-          value: 100.0
-        fixedDelay: 7s
-        
+  - matchers:
+    - - headers=""
+    - end-user=""
+    - exact="jason"
+    - route=""
+    - - destination=""
+    - host="reviews"
+    - subset="v2"
+    - fault=""
+    - delay=""
+    - percentage=""
+    - value="100.0"
+    - fixedDelay="7s"
   # 默认路由
   - route:
     - destination:
@@ -393,17 +391,17 @@ spec:
       retryOn: connect-failure,refused-stream
       
   # 故障注入测试
-  - match:
-    - uri:
-        prefix: /fault
-    fault:
-      abort:
-        percentage:
-          value: 50.0
-        httpStatus: 503
-    route:
-    - destination:
-        host: ratings
+  - matchers:
+    - - uri=""
+    - prefix="/fault"
+    - fault=""
+    - abort=""
+    - percentage=""
+    - value="50.0"
+    - httpStatus="503"
+    - route=""
+    - - destination=""
+    - host="ratings"
 ```
 
 #### DestinationRule 服务策略
@@ -591,18 +589,18 @@ spec:
   - providers:
     - name: prometheus
     overrides:
-    - match:
-        metric: REQUEST_COUNT
-      tagOverrides:
-        request_operation:
-          value: "string(destination.service.name)"
-        grpc_status:
-          value: "string(response.grpc_status)"
-    - match:
-        metric: REQUEST_DURATION
-      tagOverrides:
-        response_flags:
-          value: "string(response.flags)"
+    - matchers:
+      - metric="REQUEST_COUNT"
+      - tagOverrides=""
+      - request_operation=""
+      - value="string(destination.service.name)"
+      - grpc_status=""
+      - value="string(response.grpc_status)"
+    - matchers:
+      - metric="REQUEST_DURATION"
+      - tagOverrides=""
+      - response_flags=""
+      - value="string(response.flags)"
 ```
 
 ---
@@ -648,27 +646,26 @@ spec:
   hosts:
   - "*.local"
   http:
-  - match:
-    - sourceLabels:
-        cluster: cluster-1
-    route:
-    - destination:
-        host: productpage.cluster-1.svc.cluster.local
-      weight: 90
-    - destination:
-        host: productpage.cluster-2.svc.cluster.local
-      weight: 10
-      
-  - match:
-    - sourceLabels:
-        cluster: cluster-2
-    route:
-    - destination:
-        host: productpage.cluster-2.svc.cluster.local
-      weight: 90
-    - destination:
-        host: productpage.cluster-1.svc.cluster.local
-      weight: 10
+  - matchers:
+    - - sourceLabels=""
+    - cluster="cluster-1"
+    - route=""
+    - - destination=""
+    - host="productpage.cluster-1.svc.cluster.local"
+    - weight="90"
+    - - destination=""
+    - host="productpage.cluster-2.svc.cluster.local"
+    - weight="10"
+  - matchers:
+    - - sourceLabels=""
+    - cluster="cluster-2"
+    - route=""
+    - - destination=""
+    - host="productpage.cluster-2.svc.cluster.local"
+    - weight="90"
+    - - destination=""
+    - host="productpage.cluster-1.svc.cluster.local"
+    - weight="10"
 ```
 
 ### 3.2 混合云服务网格
@@ -750,32 +747,30 @@ spec:
   - recommendation-service
   http:
   # 优先路由到低延迟实例
-  - match:
-    - headers:
-        x-user-tier:
-          exact: "premium"
-    route:
-    - destination:
-        host: recommendation-v1
-      weight: 70
-    - destination:
-        host: recommendation-v2
-      weight: 30
-    headers:
-      response:
-        set:
-          x-routing-strategy: "latency-based-premium"
-          
+  - matchers:
+    - - headers=""
+    - x-user-tier=""
+    - exact="premium"
+    - route=""
+    - - destination=""
+    - host="recommendation-v1"
+    - weight="70"
+    - - destination=""
+    - host="recommendation-v2"
+    - weight="30"
+    - headers=""
+    - response=""
+    - set=""
+    - x-routing-strategy="latency-based-premium"
   # 标准用户按地域路由
-  - match:
-    - headers:
-        x-region:
-          exact: "us-east"
-    route:
-    - destination:
-        host: recommendation-us-east
-      weight: 100
-      
+  - matchers:
+    - - headers=""
+    - x-region=""
+    - exact="us-east"
+    - route=""
+    - - destination=""
+    - host="recommendation-us-east"
+    - weight="100"
   # 默认路由
   - route:
     - destination:
@@ -970,22 +965,22 @@ spec:
   - providers:
     - name: prometheus
     overrides:
-    - match:
-        metric: REQUEST_DURATION
-      tagOverrides:
-        source_workload:
-          operation: UPSERT
-        destination_workload:
-          operation: UPSERT
-        response_code:
-          operation: UPSERT
-    - match:
-        metric: REQUEST_BYTES
-      tagOverrides:
-        source_workload:
-          operation: UPSERT
-        destination_workload:
-          operation: UPSERT
+    - matchers:
+      - metric="REQUEST_DURATION"
+      - tagOverrides=""
+      - source_workload=""
+      - operation="UPSERT"
+      - destination_workload=""
+      - operation="UPSERT"
+      - response_code=""
+      - operation="UPSERT"
+    - matchers:
+      - metric="REQUEST_BYTES"
+      - tagOverrides=""
+      - source_workload=""
+      - operation="UPSERT"
+      - destination_workload=""
+      - operation="UPSERT"
 ```
 
 ### 5.2 资源优化配置
@@ -1347,7 +1342,7 @@ class AITrafficRouter:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-2: Kubernetes 设计原则与核心机制]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
 - Domain-2 设计原则 — 开源项目索引
 - Kubernetes 设计原则与哲学
 - 声明式 API 与面向终态设计
@@ -1368,4 +1363,4 @@ class AITrafficRouter:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]

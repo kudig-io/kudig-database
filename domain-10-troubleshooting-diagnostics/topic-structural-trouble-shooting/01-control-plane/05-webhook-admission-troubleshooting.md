@@ -291,6 +291,9 @@ kubectl logs -n kube-system kube-apiserver-<node> | grep <webhook-name>
 
 #### 2.2.5 测试 Webhook 连接
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 从集群内部测试 Webhook 服务连接
 kubectl run curl-test --rm -it --image=curlimages/curl --restart=Never -- \
@@ -331,6 +334,10 @@ Post "https://webhook-service.default.svc:443/validate": dial tcp 10.96.x.x:443:
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 检查 Webhook 服务和 Pod 状态
 kubectl get svc,pods -n <webhook-namespace> -l <app-label>
@@ -365,6 +372,9 @@ failed calling webhook: x509: certificate signed by unknown authority
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 检查 Webhook 配置中的 CA Bundle
 kubectl get mutatingwebhookconfiguration <name> -o jsonpath='{.webhooks[0].clientConfig.caBundle}' | base64 -d | openssl x509 -noout -issuer
@@ -389,6 +399,12 @@ kubectl patch mutatingwebhookconfiguration <name> --type='json' -p="[{\"op\": \"
 #### 场景 3：证书过期
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 1. 检查证书过期时间
@@ -428,6 +444,9 @@ timeout: request did not complete within requested timeout 10s
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 查看当前超时设置
 kubectl get mutatingwebhookconfiguration <name> -o jsonpath='{.webhooks[0].timeoutSeconds}'
@@ -459,6 +478,9 @@ kubectl patch deployment -n <namespace> <webhook-deployment> --type='json' -p='[
 资源创建成功，但未被 Webhook 修改或验证
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 检查 Webhook 规则配置
@@ -496,6 +518,10 @@ kubectl patch mutatingwebhookconfiguration <name> --type='json' -p='[
 Webhook 影响了 kube-system 等系统命名空间，导致系统组件无法工作
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 1. 为系统命名空间添加排除标签
@@ -545,6 +571,10 @@ Pod 创建后没有 istio-proxy sidecar 容器
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 1. 检查 Istio Webhook 状态
 kubectl get mutatingwebhookconfiguration istio-sidecar-injector -o yaml
@@ -581,6 +611,9 @@ admission webhook "validation.gatekeeper.sh" denied the request:
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 查看 Gatekeeper 约束
 kubectl get constraints
@@ -615,6 +648,11 @@ Internal error occurred: failed calling webhook "webhook.cert-manager.io"
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 检查 cert-manager 组件状态
 kubectl get pods -n cert-manager
@@ -646,6 +684,10 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 所有资源创建/更新都被 Webhook 拦截
 
 **紧急恢复步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 方案 1: 删除问题 Webhook 配置
@@ -780,6 +822,10 @@ webhooks:
 
 ### 常用排查命令速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 查看 Webhook 配置
 kubectl get mutatingwebhookconfigurations
@@ -801,18 +847,20 @@ kubectl patch mutatingwebhookconfiguration <name> --type='json' -p='[{"op": "rep
 ### 相关文档
 
 - [API Server 故障排查](./01-apiserver-troubleshooting.md)
-- [证书故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting|02-certificate-troubleshooting]].md)
-- [RBAC 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting|01-rbac-troubleshooting]].md)
+- [证书故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]].md)
+- [RBAC 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting|03-scheduler-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting|04-controller-manager-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/06-apf-troubleshooting|06-apf-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/07-control-plane-security-troubleshooting|07-control-plane-security-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md|04-controller-manager-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/06-apf-troubleshooting.md|06-apf-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/07-control-plane-security-troubleshooting.md|07-control-plane-security-troubleshooting]]
+
+```

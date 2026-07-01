@@ -47,7 +47,7 @@ Kubernetes 提供了以下几种节点选择机制：
    - **Node affinity（节点亲和性）**：基于节点标签约束 Pod 可以调度到哪些节点，功能类似 `nodeSelector` 但更灵活，支持软规则（preferred）。
    - **Inter-pod affinity/anti-affinity（Pod 间亲和性/反亲和性）**：基于其他 Pod 的标签来约束 Pod 的放置，支持将相关 Pod 放置在同一个拓扑域或分散放置。
 3. **nodeName**：更直接的节点选择方式，如果 `nodeName` 字段不为空，调度器会忽略该 Pod，直接由指定节点上的 [[kubelet|kubelet]] 尝试放置。这种方式会绕过调度器。
-4. **[[Pod Topology Spread Constraints|Pod topology spread constraints]]（Pod 拓扑分布约束）**：控制 Pod 在集群中的分布方式，如跨区域、跨节点等。
+4. **[[domain-17-system-foundation/topic-dictionary/scheduling/pod-topology-spread-constraints.md|Pod topology spread constraints]]（Pod 拓扑分布约束）**：控制 Pod 在集群中的分布方式，如跨区域、跨节点等。
 
 ## 关键机制或特性
 
@@ -227,6 +227,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 查看节点标签
 kubectl get nodes --show-labels
@@ -260,4 +263,4 @@ kubectl run test --image=nginx --dry-run=server -o yaml --overrides='{"spec":{"n
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]

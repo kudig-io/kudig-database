@@ -49,7 +49,7 @@ https://velero.io/docs/v1.11/
 https://velero.io/docs/v1.11/upgrade-to-1.11/
 
 ### All changes
-  * Add support for OpenStack [[CSI Drivers|CSI drivers]] topology keys (#6488, @kayrus)
+  * Add support for OpenStack [[entities/csi-drivers.md|CSI drivers]] topology keys (#6488, @kayrus)
   * Enhance the code because of #6297, the return value of GetBucketRegion is not recorded, as a result, when it fails, we have no way to get the cause (#6477, @Lyndon-Li)
   * Fixed a bug where status.progress is not getting updated for backups. (#6324, @blackpiglet)
   * Restore Endpoints before Services (#6316, @ywk253100)

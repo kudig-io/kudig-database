@@ -208,6 +208,7 @@ spec:
   kubectl rollout status sts/postgres -n prod
   kubectl get pods -n prod -l app=postgres -o wide
   kubectl logs postgres-2 -n prod
+
   ```
 - **解决方案**: 修复配置后等待自动恢复，或使用 `kubectl rollout undo` 回滚。也可使用 `partition` 参数将其设置为失败 Pod 序号+1，先稳定其他 Pod。
 
@@ -233,6 +234,10 @@ spec:
 - [ ] 灰度更新策略已测试（`partition` 参数验证）
 
 ## 命令快速参考
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 查看 StatefulSet 状态
@@ -262,7 +267,7 @@ kubectl get pvc -n prod -l app=postgres
 - [StatefulSet 高级运维](../../domain-02-workloads-applications/03-statefulset-advanced-operations.md)
 - [工作负载概览与架构](../../domain-02-workloads-applications/01-workload-overview-architecture.md)
 - [StatefulSet 故障树分析 (FTA)](../../domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta.md)
-- [存储 CSI 故障排查](../../[[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting|04-storage-csi-troubleshooting]].md)
+- [存储 CSI 故障排查](../../[[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/04-storage-csi-troubleshooting.md|04-storage-csi-troubleshooting]].md)
 - [Pod Disruptions 中断管理](./disruptions.md)
 
 ## 参考链接
@@ -270,4 +275,6 @@ kubectl get pvc -n prod -l app=postgres
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

@@ -53,7 +53,7 @@ created: "2026-05-23"
 | `journal/` | 1 个 | 2 | 日志 |
 | `projects/` | 1 个 | 1 | 项目 |
 | `corpus-config/` | 1 个 | 2 | 语料配置 |
-| 根目录 .md | — | 9 | AGENTS.md, [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md 等 |
+| 根目录 .md | — | 9 | AGENTS.md, [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|README]].md 等 |
 
 ### 1.2 核心问题
 

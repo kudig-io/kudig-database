@@ -68,112 +68,112 @@ Every write increments a global revision number. Watch streams track from a spec
 - **Monitoring**: Watch disk commit duration, db size, leader changes, proposal failures
 
 ## Related
-- [[synthesis/etcd × Operator 模式|etcd × Operator 模式]] — 综合
-- [[synthesis/etcd × 可观测性|etcd × 可观测性]] — 综合
+- [[concepts/etcd × Operator 模式.md|etcd × Operator 模式]] — 综合
+- [[concepts/etcd × 可观测性.md|etcd × 可观测性]] — 综合
 
 - [[grpc]] — gRPC
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
-- [[concepts/high-availability-patterns|high-availability-patterns]] — High Availability Patterns
-- [[skills/backup-restore-etcd|backup-restore-etcd]] — Backup and Restore etcd
-- [[concepts/kubernetes-architecture-overview|Kubernetes Architecture Overview]]
-- [[concepts/watch-mechanism|Watch Mechanism]]
-- [[concepts/high-availability-patterns|High Availability Patterns]]
-- [[skills/backup-restore-etcd|Backup and Restore etcd]]
-- [[entities/kube-apiserver|kube-apiserver]]
-- [[concepts/etcd Operational Reference|etcd Operational Reference]]
+- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
+- [[skills/backup-restore-etcd.md|backup-restore-etcd]] — Backup and Restore etcd
+- [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
+- [[concepts/watch-mechanism.md|Watch Mechanism]]
+- [[concepts/high-availability-patterns.md|High Availability Patterns]]
+- [[skills/backup-restore-etcd.md|Backup and Restore etcd]]
+- [[entities/kube-apiserver.md|kube-apiserver]]
+- [[concepts/etcd Operational Reference.md|etcd Operational Reference]]
 
 - etcd 深度解析
 - 19-etcd-operations
 - 07-distributed-consensus-etcd
-- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting|02-control-plane-etcd-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance|10-etcd-maintenance]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta|etcd 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting|02-etcd-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/02-control-plane-etcd-troubleshooting.md|02-control-plane-etcd-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance.md|10-etcd-maintenance]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md|etcd 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
 - RELEASE-NOTES-0.2
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.5|RELEASE-NOTES-3.5]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.0|RELEASE-NOTES-2.0]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.1|RELEASE-NOTES-3.1]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.1|RELEASE-NOTES-2.1]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.0|RELEASE-NOTES-3.0]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.5.md|RELEASE-NOTES-3.5]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.1.md|RELEASE-NOTES-3.1]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.0.md|RELEASE-NOTES-3.0]]
 - RELEASE-NOTES-0.3
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.4|RELEASE-NOTES-3.4]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.2|RELEASE-NOTES-2.2]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.3|RELEASE-NOTES-3.3]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.4.md|RELEASE-NOTES-3.4]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.3.md|RELEASE-NOTES-3.3]]
 - RELEASE-NOTES-0.4
 - RELEASE-NOTES-0.1
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.6|RELEASE-NOTES-3.6]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.3|RELEASE-NOTES-2.3]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.2|RELEASE-NOTES-3.2]]
-- [[journal/digest-2026-05-21|Wiki Digest — Daily (2026-05-21)]] — Cross-reference
-- [[references/KUDIG Cheat Sheet Index|KUDIG Cheat Sheet Index]] — Cross-reference
-- [[references/specialized-workloads-terms|K8s 专用工作负载术语参考]] — Cross-reference
-- [[references/k8s-design-principles-deep-dive|设计原理：声明式 API、控制器模式与 etcd 共识]] — Cross-reference
-- [[references/workloads-terms|K8s 工作负载术语参考]] — Cross-reference
-- [[references/k8s-structured-troubleshooting|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
-- [[references/fundamentals-terms|K8s 基础概念术语参考]] — Cross-reference
-- [[references/k8s-architecture-fundamentals|K8s 架构基础与核心组件原理]] — Cross-reference
-- [[domain-19-landscape-references/98-merged-indexes/index|发布说明阅读指南]] — Cross-reference
-- [[references/k8s-advanced-ecosystem|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
-- [[references/k8s-control-plane-deep-dive|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]] — Cross-reference
-- [[references/kubectl-quick-reference|Kubectl Quick Reference]] — Cross-reference
-- [[references/k8s-deployment-create|Kubernetes Deployment 创建操作指南]] — Cross-reference
-- [[references/k8s-production-operations|生产运维：GitOps、FinOps、灾备恢复与变更管理]] — Cross-reference
-- [[references/k8s-cluster-delete|Kubernetes 集群删除操作指南]] — Cross-reference
-- [[references/k8s-cluster-create|Kubernetes 集群创建操作指南]] — Cross-reference
-- [[references/release-notes-core-deps|发布说明索引 — 核心依赖]] — Cross-reference
-- [[references/tooling-terms|K8s 工具链术语参考]] — Cross-reference
-- [[references/k8s-cluster-cert|Kubernetes 集群证书管理操作指南]] — Cross-reference
-- [[references/k8s-node-create|Kubernetes 节点管理操作指南]] — Cross-reference
-- [[references/KUDIG Scenario Taxonomy|KUDIG Scenario Taxonomy]] — Cross-reference
-- [[references/multi-cloud-terms|K8s 多云架构术语参考]] — Cross-reference
-- [[references/kudig-man-pages-index|KUDIG Man Pages Index]] — Cross-reference
-- [[references/version-upgrade-guide|版本升级指南]] — Cross-reference
-- [[references/operations-terms|K8s 运维运营术语参考]] — Cross-reference
-- [[synthesis/kubeadm-cluster-operations|kubeadm 集群运维全景]] — Cross-reference
-- [[synthesis/etcd x 高可用模式|etcd × 高可用模式]] — Cross-reference
-- [[synthesis/Production Troubleshooting Playbook|Production Troubleshooting Playbook]] — Cross-reference
-- [[concepts/k8s-mttr-benchmark|K8s 问题分布与 MTTR 基准]] — Cross-reference
-- [[synthesis/Structural Troubleshooting Framework|Structural Troubleshooting Framework]] — Cross-reference
-- [[synthesis/声明式 API × 控制器模式|声明式 API × 控制器模式]] — Cross-reference
-- [[concepts/deployment-controller-architecture|Deployment 控制器架构]] — Cross-reference
-- [[concepts/kubernetes-pki-certificate-system|Kubernetes PKI 证书体系]] — Cross-reference
-- [[concepts/bp-infrastructure|最佳实践：Infrastructure]] — Cross-reference
-- [[concepts/declarative-api|Declarative API]] — Cross-reference
-- [[concepts/core-dependency-version-matrix|核心依赖版本矩阵]] — Cross-reference
-- [[concepts/kubernetes-version-evolution|Kubernetes 版本演进]] — Cross-reference
-- [[concepts/ai-agent-openclaw-workspace|OpenClaw 工作空间配置]] — Cross-reference
-- [[concepts/infrastructure-as-code|Infrastructure as Code]] — Cross-reference
-- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[concepts/eventual-consistency|Eventual Consistency in Kubernetes]] — Cross-reference
-- [[concepts/k8s-production-best-practices|Kubernetes 生产环境最佳实践]] — Cross-reference
-- [[concepts/Kubernetes Core Concepts|Kubernetes Core Concepts]] — Cross-reference
-- [[concepts/tcp-udp-protocol-stack|TCP/UDP Protocol Stack]] — Cross-reference
-- [[skills/learn-01-day-one-checklist|Day 1: 新人首日检查清单]] — Cross-reference
-- [[skills/k8s-disaster-recovery-guide|Kubernetes 灾难恢复最佳实践]] — Cross-reference
-- [[skills/ts-node-components|节点组件故障排查]] — Cross-reference
-- [[skills/kubeadm-cluster-lifecycle|kubeadm 集群创建生命周期]] — Cross-reference
-- [[skills/ts-security-auth|安全认证故障排查]] — Cross-reference
-- [[skills/develop-crd-operator|Develop CRD Operator]] — Cross-reference
-- [[skills/node-drain-and-maintenance|节点驱逐与维护]] — Cross-reference
-- [[skills/statefulset-fta|StatefulSet 异常故障树分析]] — Cross-reference
-- [[skills/kubeadm-cluster-deletion|kubeadm 集群删除操作]] — Cross-reference
-- [[skills/kubeadm-ha-cluster-setup|kubeadm 高可用集群搭建]] — Cross-reference
-- [[skills/k8s-cluster-configuration-guide|Kubernetes 集群配置最佳实践]] — Cross-reference
-- [[skills/ts-control-plane|控制平面故障排查]] — Cross-reference
-- [[skills/monitor-kubernetes-metrics|Monitor Kubernetes Metrics]] — Cross-reference
-- [[skills/ts-gitops-devops|GitOps/DevOps 排查]] — Cross-reference
-- [[skills/learn-02-first-ticket-guide|Day 2: 第一个工单处理指南]] — Cross-reference
-- [[skills/learn-oncall-quick-qa|工单数字人快速问答 - On-Call 速查]] — Cross-reference
-- [[skills/skill-MOC|topic-skills MOC]] — Cross-reference
-- [[skills/FTA-Driven Runbook Automation|FTA-Driven Runbook Automation]] — Cross-reference
-- [[skills/ts-storage|存储故障排查]] — Cross-reference
-- [[skills/ts-cluster-operations|集群运维故障排查]] — Cross-reference
-- [[skills/skill-assets-escalation-template|Escalation Template]] — Cross-reference
-- [[domain-01-cluster-fundamentals/03-control-plane/11-etcd-deep-dive|etcd 深度解析]] — Cross-reference
-- [[domain-01-cluster-fundamentals/03-control-plane/12-apiserver-deep-dive|kube-apiserver 深度解析]] — Cross-reference
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.6.md|RELEASE-NOTES-3.6]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.3.md|RELEASE-NOTES-2.3]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.2.md|RELEASE-NOTES-3.2]]
+- Wiki Digest — Daily (2026-05-21) — Cross-reference
+- [[entities/KUDIG Cheat Sheet Index.md|KUDIG Cheat Sheet Index]] — Cross-reference
+- [[entities/specialized-workloads-terms.md|K8s 专用工作负载术语参考]] — Cross-reference
+- [[entities/k8s-design-principles-deep-dive.md|设计原理：声明式 API、控制器模式与 etcd 共识]] — Cross-reference
+- [[entities/workloads-terms.md|K8s 工作负载术语参考]] — Cross-reference
+- [[entities/k8s-structured-troubleshooting.md|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
+- [[entities/fundamentals-terms.md|K8s 基础概念术语参考]] — Cross-reference
+- [[entities/k8s-architecture-fundamentals.md|K8s 架构基础与核心组件原理]] — Cross-reference
+- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
+- [[entities/k8s-advanced-ecosystem.md|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
+- [[entities/k8s-control-plane-deep-dive.md|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]] — Cross-reference
+- [[entities/kubectl-quick-reference.md|Kubectl Quick Reference]] — Cross-reference
+- [[entities/k8s-deployment-create.md|Kubernetes Deployment 创建操作指南]] — Cross-reference
+- [[entities/k8s-production-operations.md|生产运维：GitOps、FinOps、灾备恢复与变更管理]] — Cross-reference
+- [[entities/k8s-cluster-delete.md|Kubernetes 集群删除操作指南]] — Cross-reference
+- [[entities/k8s-cluster-create.md|Kubernetes 集群创建操作指南]] — Cross-reference
+- [[entities/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
+- [[entities/tooling-terms.md|K8s 工具链术语参考]] — Cross-reference
+- [[entities/k8s-cluster-cert.md|Kubernetes 集群证书管理操作指南]] — Cross-reference
+- [[entities/k8s-node-create.md|Kubernetes 节点管理操作指南]] — Cross-reference
+- [[entities/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]] — Cross-reference
+- [[entities/multi-cloud-terms.md|K8s 多云架构术语参考]] — Cross-reference
+- [[entities/kudig-man-pages-index.md|KUDIG Man Pages Index]] — Cross-reference
+- [[entities/version-upgrade-guide.md|版本升级指南]] — Cross-reference
+- [[entities/operations-terms.md|K8s 运维运营术语参考]] — Cross-reference
+- [[concepts/kubeadm-cluster-operations.md|kubeadm 集群运维全景]] — Cross-reference
+- [[concepts/etcd x 高可用模式.md|etcd × 高可用模式]] — Cross-reference
+- [[concepts/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Cross-reference
+- [[concepts/k8s-mttr-benchmark.md|K8s 问题分布与 MTTR 基准]] — Cross-reference
+- [[concepts/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]] — Cross-reference
+- [[concepts/声明式 API × 控制器模式.md|声明式 API × 控制器模式]] — Cross-reference
+- [[concepts/deployment-controller-architecture.md|Deployment 控制器架构]] — Cross-reference
+- [[concepts/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]] — Cross-reference
+- [[concepts/bp-infrastructure.md|最佳实践：Infrastructure]] — Cross-reference
+- [[concepts/declarative-api.md|Declarative API]] — Cross-reference
+- [[concepts/core-dependency-version-matrix.md|核心依赖版本矩阵]] — Cross-reference
+- [[concepts/kubernetes-version-evolution.md|Kubernetes 版本演进]] — Cross-reference
+- [[concepts/ai-agent-openclaw-workspace.md|OpenClaw 工作空间配置]] — Cross-reference
+- [[concepts/infrastructure-as-code.md|Infrastructure as Code]] — Cross-reference
+- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[concepts/eventual-consistency.md|Eventual Consistency in Kubernetes]] — Cross-reference
+- [[concepts/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]] — Cross-reference
+- [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]] — Cross-reference
+- [[concepts/tcp-udp-protocol-stack.md|TCP/UDP Protocol Stack]] — Cross-reference
+- [[skills/learn-01-day-one-checklist.md|Day 1: 新人首日检查清单]] — Cross-reference
+- [[skills/k8s-disaster-recovery-guide.md|Kubernetes 灾难恢复最佳实践]] — Cross-reference
+- [[skills/ts-node-components.md|节点组件故障排查]] — Cross-reference
+- [[skills/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]] — Cross-reference
+- [[skills/ts-security-auth.md|安全认证故障排查]] — Cross-reference
+- [[skills/develop-crd-operator.md|Develop CRD Operator]] — Cross-reference
+- [[skills/node-drain-and-maintenance.md|节点驱逐与维护]] — Cross-reference
+- [[skills/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference
+- [[skills/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]] — Cross-reference
+- [[skills/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]] — Cross-reference
+- [[skills/k8s-cluster-configuration-guide.md|Kubernetes 集群配置最佳实践]] — Cross-reference
+- [[skills/ts-control-plane.md|控制平面故障排查]] — Cross-reference
+- [[skills/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]] — Cross-reference
+- [[skills/ts-gitops-devops.md|GitOps/DevOps 排查]] — Cross-reference
+- [[skills/learn-02-first-ticket-guide.md|Day 2: 第一个工单处理指南]] — Cross-reference
+- [[skills/learn-oncall-quick-qa.md|工单数字人快速问答 - On-Call 速查]] — Cross-reference
+- [[skills/skill-MOC.md|topic-skills MOC]] — Cross-reference
+- [[skills/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — Cross-reference
+- [[skills/ts-storage.md|存储故障排查]] — Cross-reference
+- [[skills/ts-cluster-operations.md|集群运维故障排查]] — Cross-reference
+- [[skills/skill-assets-escalation-template.md|Escalation Template]] — Cross-reference
+- [[domain-01-cluster-fundamentals/03-control-plane/11-etcd-deep-dive.md|etcd 深度解析]] — Cross-reference
+- [[domain-01-cluster-fundamentals/03-control-plane/12-apiserver-deep-dive.md|kube-apiserver 深度解析]] — Cross-reference
 - Domain-3: Kubernetes控制平面 — Cross-reference
-- [[entities/core-deps-changelog|核心依赖变更日志索引]] — Cross-reference
-- [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[entities/core-deps-changelog.md|核心依赖变更日志索引]] — Cross-reference
+- [[entities/cncf-edge-ai.md|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

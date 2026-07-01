@@ -282,6 +282,9 @@ spec:
 
 ### 2.2 客户端证书认证强化
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # 客户端证书生成和管理脚本
@@ -511,9 +514,6 @@ webhooks:
 
 ### 3.3 Pod 安全准入 (PSA)
 
-
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
 
 PodSecurityPolicy (PSP) 在 v1.25 中已移除。替代方案是 **Pod Security Admission (PSA)**，它通过 Namespace 标签实现安全标准强制执行。
 
@@ -1204,6 +1204,12 @@ graph TD
 
 ### 9.3 恢复操作清单
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 #!/bin/bash
 # 安全事件恢复脚本
@@ -1273,7 +1279,7 @@ verify_security_hardening() {
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -1294,4 +1300,4 @@ verify_security_hardening() {
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

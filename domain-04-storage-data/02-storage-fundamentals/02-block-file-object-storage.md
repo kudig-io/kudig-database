@@ -63,7 +63,7 @@ created: "2026-05-23"
 
 <!-- chunk: 块存储详解 -->## 块存储详解
 
-#<!-- chunk: 块存储特点 -->## 块存储特点
+## 块存储特点
 
 | 特性 | 说明 |
 |:---|:---|
@@ -73,7 +73,7 @@ created: "2026-05-23"
 | **性能** | 最高 |
 | **共享** | 通常单节点 |
 
-#<!-- chunk: 块存储协议 -->## 块存储协议
+## 块存储协议
 
 | 协议 | 传输介质 | 延迟 | 场景 |
 |:---|:---|:---|:---|
@@ -82,7 +82,7 @@ created: "2026-05-23"
 | iSCSI | 以太网 | 中等 | IP SAN |
 | NVMe-oF | RDMA/TCP | 极低 | 高性能 |
 
-#<!-- chunk: iSCSI 配置 -->## iSCSI 配置
+## iSCSI 配置
 
 ```bash
 # 目标端 (Target)
@@ -98,7 +98,7 @@ iscsiadm -m node --login
 lsblk  # 查看新设备
 ```
 
-#<!-- chunk: 块存储场景 -->## 块存储场景
+## 块存储场景
 
 | 场景 | 特点 |
 |:---|:---|
@@ -106,9 +106,9 @@ lsblk  # 查看新设备
 | 虚拟机 | 灵活分配 |
 | 容器持久卷 | 单 Pod 挂载 |
 
-#<!-- chunk: 企业级块存储最佳实践 -->## 企业级块存储最佳实践
+## 企业级块存储最佳实践
 
-##<!-- chunk: 高可用配置 -->## 高可用配置
+## 高可用配置
 
 ```bash
 # 多路径配置 (multipath)
@@ -138,7 +138,7 @@ systemctl start multipathd
 multipath -ll  # 查看多路径状态
 ```
 
-##<!-- chunk: 性能监控与告警 -->## 性能监控与告警
+## 性能监控与告警
 
 ```bash
 # 块设备性能监控脚本
@@ -176,7 +176,7 @@ EOF
 chmod +x /usr/local/bin/block-storage-monitor.sh
 ```
 
-##<!-- chunk: 故障排查流程 -->## 故障排查流程
+## 故障排查流程
 
 ```
 块存储故障诊断流程:
@@ -203,7 +203,7 @@ chmod +x /usr/local/bin/block-storage-monitor.sh
 
 <!-- chunk: 文件存储详解 -->## 文件存储详解
 
-#<!-- chunk: 文件存储特点 -->## 文件存储特点
+## 文件存储特点
 
 | 特性 | 说明 |
 |:---|:---|
@@ -213,7 +213,10 @@ chmod +x /usr/local/bin/block-storage-monitor.sh
 | **共享** | 多节点并发 |
 | **协议** | NFS, SMB |
 
-#<!-- chunk: NFS 配置 -->## NFS 配置
+## NFS 配置
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 服务端
@@ -231,7 +234,7 @@ mount -t nfs 192.168.1.100:/data/share /mnt/nfs
 192.168.1.100:/data/share /mnt/nfs nfs defaults,_netdev,hard,intr 0 0
 ```
 
-#<!-- chunk: NFS 版本对比 -->## NFS 版本对比
+## NFS 版本对比
 
 | 版本 | 特点 |
 |:---|:---|
@@ -240,7 +243,7 @@ mount -t nfs 192.168.1.100:/data/share /mnt/nfs
 | NFSv4.1 | 并行 NFS、多路径 |
 | NFSv4.2 | 服务端拷贝、稀疏文件 |
 
-#<!-- chunk: 文件存储场景 -->## 文件存储场景
+## 文件存储场景
 
 | 场景 | 特点 |
 |:---|:---|
@@ -248,9 +251,9 @@ mount -t nfs 192.168.1.100:/data/share /mnt/nfs
 | 容器共享卷 | 多 Pod 读写 |
 | 开发环境 | 代码共享 |
 
-#<!-- chunk: 企业级文件存储运维 -->## 企业级文件存储运维
+## 企业级文件存储运维
 
-##<!-- chunk: 高性能NFS配置 -->## 高性能NFS配置
+## 高性能NFS配置
 
 ```bash
 # NFS服务端优化配置
@@ -283,7 +286,7 @@ mount -o noatime,nodiratime,rsize=1048576,wsize=1048576,hard,intr \
     /dev/sdb1 /nfs/export
 ```
 
-##<!-- chunk: 监控告警体系 -->## 监控告警体系
+## 监控告警体系
 
 ```yaml
 # Prometheus NFS监控配置
@@ -324,7 +327,7 @@ groups:
       description: "{{ $labels.mountpoint }} 使用率 {{ $value }}%"
 ```
 
-##<!-- chunk: 故障诊断工具集 -->## 故障诊断工具集
+## 故障诊断工具集
 
 ```bash
 # NFS故障诊断脚本
@@ -368,7 +371,7 @@ chmod +x /usr/local/bin/nfs-diagnostic.sh
 
 <!-- chunk: 对象存储详解 -->## 对象存储详解
 
-#<!-- chunk: 对象存储特点 -->## 对象存储特点
+## 对象存储特点
 
 | 特性 | 说明 |
 |:---|:---|
@@ -378,7 +381,7 @@ chmod +x /usr/local/bin/nfs-diagnostic.sh
 | **规模** | 海量扩展 |
 | **成本** | 较低 |
 
-#<!-- chunk: S3 API 基本操作 -->## S3 API 基本操作
+## S3 API 基本操作
 
 | 操作 | 说明 |
 |:---|:---|
@@ -388,7 +391,7 @@ chmod +x /usr/local/bin/nfs-diagnostic.sh
 | HEAD | 获取元数据 |
 | LIST | 列出对象 |
 
-#<!-- chunk: MinIO 部署 -->## MinIO 部署
+## MinIO 部署
 
 ```bash
 # 单节点
@@ -406,7 +409,7 @@ mc mb myminio/mybucket
 mc cp file.txt myminio/mybucket/
 ```
 
-#<!-- chunk: 对象存储场景 -->## 对象存储场景
+## 对象存储场景
 
 | 场景 | 特点 |
 |:---|:---|
@@ -415,9 +418,9 @@ mc cp file.txt myminio/mybucket/
 | 大数据 | 数据湖 |
 | AI/ML | 训练数据 |
 
-#<!-- chunk: 企业级对象存储运维 -->## 企业级对象存储运维
+## 企业级对象存储运维
 
-##<!-- chunk: 高可用MinIO集群部署 -->## 高可用MinIO集群部署
+## 高可用MinIO集群部署
 
 ```yaml
 # Docker Compose MinIO分布式部署
@@ -502,7 +505,7 @@ services:
       - minio4
 ```
 
-##<!-- chunk: 对象存储监控告警 -->## 对象存储监控告警
+## 对象存储监控告警
 
 ```python
 # Python对象存储健康检查脚本
@@ -568,7 +571,7 @@ EOF
 chmod +x /usr/local/bin/object-storage-health.py
 ```
 
-##<!-- chunk: 性能基准测试 -->## 性能基准测试
+## 性能基准测试
 
 ```bash
 # s3-benchmark工具测试
@@ -590,7 +593,7 @@ chmod +x s3-benchmark_linux_amd64
 
 <!-- chunk: 存储融合方案 -->## 存储融合方案
 
-#<!-- chunk: Ceph 统一存储 -->## Ceph 统一存储
+## Ceph 统一存储
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -610,7 +613,7 @@ chmod +x s3-benchmark_linux_amd64
 | **CephFS** | POSIX 文件系统 |
 | **RGW** | S3 兼容对象存储 |
 
-#<!-- chunk: 存储网关 -->## 存储网关
+## 存储网关
 
 | 场景 | 方案 |
 |:---|:---|
@@ -622,7 +625,7 @@ chmod +x s3-benchmark_linux_amd64
 
 <!-- chunk: 访问模式对比 -->## 访问模式对比
 
-#<!-- chunk: 性能对比 -->## 性能对比
+## 性能对比
 
 | 类型 | 随机读写 | 顺序读写 | 元数据 |
 |:---|:---:|:---:|:---:|
@@ -630,7 +633,7 @@ chmod +x s3-benchmark_linux_amd64
 | 文件存储 | 中等 | 中等 | 中等 |
 | 对象存储 | 较低 | 高 | 高开销 |
 
-#<!-- chunk: 适用场景总结 -->## 适用场景总结
+## 适用场景总结
 
 | 需求 | 块 | 文件 | 对象 |
 |:---|:---:|:---:|:---:|
@@ -642,7 +645,7 @@ chmod +x s3-benchmark_linux_amd64
 | 备份归档 | - | - | ✓ |
 | Web 静态 | - | - | ✓ |
 
-#<!-- chunk: 企业级存储选型决策矩阵 -->## 企业级存储选型决策矩阵
+## 企业级存储选型决策矩阵
 
 | 评估维度 | 权重 | 块存储 | 文件存储 | 对象存储 |
 |:---|:---:|:---:|:---:|:---:|
@@ -673,4 +676,6 @@ chmod +x s3-benchmark_linux_amd64
 ## Related
 
 - index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+
+```

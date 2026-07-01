@@ -183,13 +183,13 @@ flowchart TD
 
 ## 相关链接
 
-- [[FTA Methodology and Core Principles|FTA 方法论]]
-- [[FTA Diagnostic Execution Engine|FTA 诊断执行引擎]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 - [[ts-workloads|工作负载故障排查]]
 
 ## See Also
 
-- [[skills/crd-operator-fta|crd-operator-fta]]
-- [[skills/csi-fta|csi-fta]]
-- [[skills/deployment-canary-and-bluegreen|deployment-canary-and-bluegreen]]
-- [[skills/deployment-fta|deployment-fta]]
+- [[skills/crd-operator-fta.md|crd-operator-fta]]
+- [[skills/csi-fta.md|csi-fta]]
+- [[skills/deployment-canary-and-bluegreen.md|deployment-canary-and-bluegreen]]
+- [[skills/deployment-fta.md|deployment-fta]]

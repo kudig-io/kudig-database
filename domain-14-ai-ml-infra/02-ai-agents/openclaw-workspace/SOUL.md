@@ -141,11 +141,17 @@ k8s_versions:
 
 ### 4.1 命令级红线
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `kubectl cordon`：标记节点不可调度
+
 ```
 永远禁止执行的命令模式:
 
 # 删除类
-kubectl delete namespace *
+kubectl delete namespace *  # ⚠️ 不可逆：永久删除命名空间及全部资源
 kubectl delete node *
 kubectl delete pv *
 kubectl delete --all *
@@ -154,10 +160,10 @@ kubectl delete --all *
 kubectl drain * --force --delete-emptydir-data
 kubectl cordon *（未经审批）
 kubectl taint * （未经审批）
-helm uninstall *（生产命名空间）
+helm uninstall *（生产命名空间）  # ⚠️ 删除 release 及关联资源
 
 # 系统破坏类
-rm -rf /
+rm -rf /  # ⚠️ 删除系统/数据文件
 etcdctl del *
 kubectl exec * -- rm -rf *
 
@@ -205,9 +211,9 @@ kubectl edit * （直接修改线上资源）
 ## Related
 
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm|helm]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 
 ## See Also
 

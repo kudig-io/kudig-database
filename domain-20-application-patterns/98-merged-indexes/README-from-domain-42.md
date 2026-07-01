@@ -75,7 +75,7 @@ created: "2026-05-23"
 
 ## 概述
 
-本专题聚焦于**基于 Kubernetes 的生产级应用层架构设计**，覆盖电商、社交、金融、教育、游戏、IoT、AI 等核心行业场景。每篇文档均包含完整的 **Mermaid 架构图解**、**[[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]] YAML 配置示例**、**生产最佳实践**与**高可用设计**，可直接作为企业架构设计的参考蓝图。
+本专题聚焦于**基于 Kubernetes 的生产级应用层架构设计**，覆盖电商、社交、金融、教育、游戏、IoT、AI 等核心行业场景。每篇文档均包含完整的 **Mermaid 架构图解**、**[[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]] YAML 配置示例**、**生产最佳实践**与**高可用设计**，可直接作为企业架构设计的参考蓝图。
 
 ---
 
@@ -101,8 +101,8 @@ created: "2026-05-23"
 | 16 | **音视频平台** | [16-video-shortform-architecture.md](./16-video-shortform-architecture.md) | 9+ | FFmpeg GPU、KEDA HTTP Scaler、CDN、Ingress-Nginx |
 | 17 | **SaaS 多租户** | [17-saas-multi-tenant-architecture.md](./17-saas-multi-tenant-architecture.md) | 8+ | vCluster、NetworkPolicy、ResourceQuota、RBAC |
 | 18 | **数据中台** | [18-data-midplatform-architecture.md](./18-data-midplatform-architecture.md) | 8+ | Airflow、Spark Operator、Kyverno、Pod Topology Spread |
-| 19 | **云原生 DevOps** | [19-cloudnative-devops-architecture.md](./19-cloudnative-devops-architecture.md) | 7+ | Tekton、[[entities/argocd|argocd]]、Ingress-Nginx、Cluster Autoscaler |
-| 20 | **微服务治理** | [20-microservice-governance-architecture.md](./20-microservice-governance-architecture.md) | 9+ | OpenTelemetry、[[entities/jaeger|Jaeger]]、[[entities/istio|Istio]]、mTLS、Sidecar |
+| 19 | **云原生 DevOps** | [19-cloudnative-devops-architecture.md](./19-cloudnative-devops-architecture.md) | 7+ | Tekton、[[entities/argocd.md|argocd]]、Ingress-Nginx、Cluster Autoscaler |
+| 20 | **微服务治理** | [20-microservice-governance-architecture.md](./20-microservice-governance-architecture.md) | 9+ | OpenTelemetry、[[entities/jaeger.md|Jaeger]]、[[entities/istio.md|Istio]]、mTLS、Sidecar |
 | 21 | **跨境电商** | [21-cross-border-ecommerce.md](./21-cross-border-ecommerce.md) | 9+ | HPA、KEDA、NetworkPolicy、Pod Topology Spread |
 | 22 | **新能源车联网** | [22-nev-connected-vehicle.md](./22-nev-connected-vehicle.md) | 8+ | DaemonSet、KubeEdge、StatefulSet、CronJob |
 | 23 | **信创替代** | [23-xinchuang-it-innovation.md](./23-xinchuang-it-innovation.md) | 7+ | NodeSelector、arm64、Pod Security、NetworkPolicy |
@@ -207,7 +207,7 @@ created: "2026-05-23"
 |:---|:---|:---|
 | 网络隔离 | 多租户/金融 | NetworkPolicy + Cilium |
 | 密钥管理 | 所有敏感配置 | Vault + Secrets Store CSI |
-| 运行时安全 | 容器安全 | [[entities/falco|Falco]] + AppArmor + Seccomp |
+| 运行时安全 | 容器安全 | [[entities/falco.md|Falco]] + AppArmor + Seccomp |
 | 合规审计 | 金融/政务 | Audit Policy + 不可变日志 |
 
 ---

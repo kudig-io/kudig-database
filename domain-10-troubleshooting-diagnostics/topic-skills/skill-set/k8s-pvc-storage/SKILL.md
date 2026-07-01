@@ -375,15 +375,15 @@ kubectl logs -n kube-system -l component=kube-apiserver --tail=20
 ## Related
 
 - 29-agentscope-studio-skill-demo
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[entities/coredns|coredns]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/coredns.md|coredns]]
 
 - 48-openclaw-skill-mechanism
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
 
 ## See Also
 
@@ -395,4 +395,4 @@ kubectl logs -n kube-system -l component=kube-apiserver --tail=20
 
 ## 相关概念
 
-- [[concepts/persistent-volume-claim|Persistent Volume Claim]] — PVC 申请、绑定与存储动态供给机制
+- [[concepts/persistent-volume-claim.md|Persistent Volume Claim]] — PVC 申请、绑定与存储动态供给机制

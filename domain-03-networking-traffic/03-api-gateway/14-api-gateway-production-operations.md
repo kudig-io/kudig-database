@@ -107,7 +107,7 @@ k8s_versions:
 
 <!-- chunk: 1. 高可用部署架构 -->## 1. 高可用部署架构
 
-#<!-- chunk: 1.1 多活 + 区域感知架构 -->## 1.1 多活 + 区域感知架构
+## 1.1 多活 + 区域感知架构
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -151,7 +151,7 @@ k8s_versions:
   - 可用性目标: 99.99%（4个九，允许年停机 < 52分钟）
 ```
 
-#<!-- chunk: 1.2 多集群网关联邦架构 -->## 1.2 多集群网关联邦架构
+## 1.2 多集群网关联邦架构
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
@@ -182,7 +182,7 @@ k8s_versions:
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.3 区域感知路由配置 -->## 1.3 区域感知路由配置
+## 1.3 区域感知路由配置
 
 ```yaml
 # 拓扑分布约束 - 确保跨区高可用
@@ -224,7 +224,7 @@ spec:
 
 <!-- chunk: 2. 滚动升级策略 -->## 2. 滚动升级策略
 
-#<!-- chunk: 2.1 零停机升级模式 -->## 2.1 零停机升级模式
+## 2.1 零停机升级模式
 
 ```
 滚动升级时序图:
@@ -242,7 +242,7 @@ T=120s [Pod1:v2] [Pod2:v2] [Pod3:v2] [Pod4:v2]  ← 升级完成
   ④ minReadySeconds 稳定后再升级下一个
 ```
 
-#<!-- chunk: 2.2 PodDisruptionBudget 配置 -->## 2.2 PodDisruptionBudget 配置
+## 2.2 PodDisruptionBudget 配置
 
 ```yaml
 # 网关 PDB - 保障升级期间最低服务能力
@@ -260,7 +260,7 @@ spec:
       app: api-gateway
 ```
 
-#<!-- chunk: 2.3 优雅排水配置 -->## 2.3 优雅排水配置
+## 2.3 优雅排水配置
 
 ```yaml
 # Deployment - 优雅关闭配置
@@ -312,7 +312,7 @@ spec:
                 sleep 20
 ```
 
-#<!-- chunk: 2.4 版本兼容性矩阵 -->## 2.4 版本兼容性矩阵
+## 2.4 版本兼容性矩阵
 
 | 升级路径 | 控制平面兼容 | 配置 CRD 兼容 | 插件 API 兼容 | 推荐方式 |
 |---------|-----------|-------------|-------------|---------|
@@ -327,7 +327,7 @@ spec:
 
 <!-- chunk: 3. GitOps 配置管理 -->## 3. GitOps 配置管理
 
-#<!-- chunk: 3.1 GitOps 工作流架构 -->## 3.1 GitOps 工作流架构
+## 3.1 GitOps 工作流架构
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
@@ -354,7 +354,7 @@ spec:
 └──────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 3.2 Kong deck 配置管理 -->## 3.2 Kong deck 配置管理
+## 3.2 Kong deck 配置管理
 
 ```yaml
 # deck.yaml - Kong 声明式配置示例
@@ -408,7 +408,7 @@ deck gateway sync \
   --kong-addr https://kong-admin:8444
 ```
 
-#<!-- chunk: 3.3 APISIX ADC 配置管理 -->## 3.3 APISIX ADC 配置管理
+## 3.3 APISIX ADC 配置管理
 
 ```yaml
 # apisix-config/routes.yaml - ADC 格式
@@ -470,7 +470,7 @@ adc sync --backend apisix \
   routes.yaml
 ```
 
-#<!-- chunk: 3.4 ArgoCD + Helm 统一管理 -->## 3.4 ArgoCD + Helm 统一管理
+## 3.4 ArgoCD + Helm 统一管理
 
 ```yaml
 # argocd-gateway-app.yaml
@@ -515,7 +515,7 @@ spec:
 
 <!-- chunk: 4. 证书生命周期管理 -->## 4. 证书生命周期管理
 
-#<!-- chunk: 4.1 cert-manager 集成架构 -->## 4.1 cert-manager 集成架构
+## 4.1 cert-manager 集成架构
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
@@ -547,7 +547,7 @@ spec:
 └──────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 4.2 ACME 自动化证书配置 -->## 4.2 ACME 自动化证书配置
+## 4.2 ACME 自动化证书配置
 
 ```yaml
 # 1. ClusterIssuer - Let's Encrypt 生产颁发者
@@ -604,7 +604,7 @@ spec:
   - key encipherment
 ```
 
-#<!-- chunk: 4.3 证书到期监控 -->## 4.3 证书到期监控
+## 4.3 证书到期监控
 
 ```yaml
 # Prometheus 告警规则
@@ -637,13 +637,14 @@ spec:
       annotations:
         summary: "【紧急】证书即将到期！"
         description: "证书 {{ $labels.subject_common_name }} 将在 {{ $value | printf \"%.0f\" }} 天后到期，请立即处理！"
+
 ```
 
 ---
 
 <!-- chunk: 5. 灾备与恢复 -->## 5. 灾备与恢复
 
-#<!-- chunk: 5.1 各产品备份策略对比 -->## 5.1 各产品备份策略对比
+## 5.1 各产品备份策略对比
 
 | 产品 | 配置存储 | 备份工具 | 备份频率 | 恢复命令 | RTO |
 |------|---------|---------|---------|---------|-----|
@@ -653,7 +654,7 @@ spec:
 | **Envoy GW** | etcd (K8s CRD) | Velero | 每小时 | `velero restore create` | < 5min |
 | **Traefik** | Kubernetes 原生 | Velero | 每小时 | `velero restore create` | < 3min |
 
-#<!-- chunk: 5.2 APISIX etcd 备份 -->## 5.2 APISIX etcd 备份
+## 5.2 APISIX etcd 备份
 
 ```bash
 #!/bin/bash
@@ -690,7 +691,7 @@ find $BACKUP_DIR -name "snapshot-*.db" \
 echo "[$(date +%Y%m%d-%H%M%S)] 备份完成: snapshot-${DATE}.db"
 ```
 
-#<!-- chunk: 5.3 跨区域故障转移 -->## 5.3 跨区域故障转移
+## 5.3 跨区域故障转移
 
 ```
 跨区域故障转移流程:
@@ -771,7 +772,7 @@ fi
 
 <!-- chunk: 6. 容量规划 -->## 6. 容量规划
 
-#<!-- chunk: 6.1 流量增长估算模型 -->## 6.1 流量增长估算模型
+## 6.1 流量增长估算模型
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -795,7 +796,7 @@ fi
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-#<!-- chunk: 6.2 HPA + VPA 协同配置 -->## 6.2 HPA + VPA 协同配置
+## 6.2 HPA + VPA 协同配置
 
 ```yaml
 # HPA - 水平自动扩缩容
@@ -867,7 +868,7 @@ spec:
 
 <!-- chunk: 7. 多租户网关模式 -->## 7. 多租户网关模式
 
-#<!-- chunk: 7.1 共享网关 vs 独立网关 -->## 7.1 共享网关 vs 独立网关
+## 7.1 共享网关 vs 独立网关
 
 ```
 模式对比：
@@ -889,7 +890,7 @@ spec:
 └─────────────────────────────┴─────────────────────────────┘
 ```
 
-#<!-- chunk: 7.2 Namespace 隔离配置 -->## 7.2 Namespace 隔离配置
+## 7.2 Namespace 隔离配置
 
 ```yaml
 # 多租户 Gateway API 隔离方案
@@ -943,7 +944,7 @@ spec:
       port: 80
 ```
 
-#<!-- chunk: 7.3 资源配额与速率限制 -->## 7.3 资源配额与速率限制
+## 7.3 资源配额与速率限制
 
 ```yaml
 # 租户级别资源配额
@@ -987,7 +988,7 @@ spec:
 
 <!-- chunk: 8. AI 网关生产模式 -->## 8. AI 网关生产模式
 
-#<!-- chunk: 8.1 LLM 上游故障转移 -->## 8.1 LLM 上游故障转移
+## 8.1 LLM 上游故障转移
 
 ```
 AI 网关 LLM 路由策略:
@@ -1016,7 +1017,7 @@ AI 网关 LLM 路由策略:
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 8.2 Higress AI 网关配置 -->## 8.2 Higress AI 网关配置
+## 8.2 Higress AI 网关配置
 
 ```yaml
 # AI 路由配置 - Higress
@@ -1072,7 +1073,7 @@ spec:
         endpoint: "http://ollama.ai-platform.svc.cluster.local:11434"
 ```
 
-#<!-- chunk: 8.3 成本追踪与 Token 预算 -->## 8.3 成本追踪与 Token 预算
+## 8.3 成本追踪与 Token 预算
 
 ```yaml
 # Prometheus 指标采集 - AI 网关成本追踪
@@ -1094,7 +1095,7 @@ ai_gateway_failover_count_total{from_provider, to_provider}    # 故障转移次
 
 <!-- chunk: 9. 运维巡检清单 -->## 9. 运维巡检清单
 
-#<!-- chunk: 9.1 日常巡检（每日） -->## 9.1 日常巡检（每日）
+## 9.1 日常巡检（每日）
 
 ```
 📋 API 网关每日巡检清单
@@ -1126,7 +1127,7 @@ ai_gateway_failover_count_total{from_provider, to_provider}    # 故障转移次
 □ 确认昨日所有 P1/P2 告警已解决或有跟进
 ```
 
-#<!-- chunk: 9.2 每周巡检 -->## 9.2 每周巡检
+## 9.2 每周巡检
 
 ```
 📋 API 网关每周巡检清单
@@ -1154,7 +1155,10 @@ ai_gateway_failover_count_total{from_provider, to_provider}    # 故障转移次
 □ 执行一次备份恢复演练（恢复到测试环境验证）
 ```
 
-#<!-- chunk: 9.3 每月巡检 -->## 9.3 每月巡检
+## 9.3 每月巡检
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```
 📋 API 网关每月巡检清单
@@ -1186,7 +1190,7 @@ ai_gateway_failover_count_total{from_provider, to_provider}    # 故障转移次
 
 <!-- chunk: 10. 问题应急手册 -->## 10. 问题应急手册
 
-#<!-- chunk: 10.1 问题场景索引 -->## 10.1 问题场景索引
+## 10.1 问题场景索引
 
 | 问题类型 | 影响范围 | 紧急程度 | 处理章节 |
 |---------|---------|---------|---------|
@@ -1197,7 +1201,12 @@ ai_gateway_failover_count_total{from_provider, to_provider}    # 故障转移次
 | 限流误杀正常流量 | 部分用户 429 | P2 | §10.6 |
 | etcd 异常 / 控制平面问题 | 控制面不可用 | P1 | §10.7 |
 
-#<!-- chunk: 10.2 网关全部 Pod 不可用（P0） -->## 10.2 网关全部 Pod 不可用（P0）
+## 10.2 网关全部 Pod 不可用（P0）
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # ============================================
@@ -1234,7 +1243,11 @@ curl -v https://api.example.com/healthz   # 确认外部可访问
 # 联系二线值班 / 网关产品负责人
 ```
 
-#<!-- chunk: 10.3 网关高延迟 / CPU 打满（P1） -->## 10.3 网关高延迟 / CPU 打满（P1）
+## 10.3 网关高延迟 / CPU 打满（P1）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # ============================================
@@ -1275,7 +1288,11 @@ kubectl scale deployment api-gateway \
 # Step 5: 如确认为异常流量，启用 WAF 封锁
 ```
 
-#<!-- chunk: 10.4 证书过期（P1） -->## 10.4 证书过期（P1）
+## 10.4 证书过期（P1）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # ============================================
@@ -1314,7 +1331,11 @@ kubectl create secret tls api-gateway-tls-secret \
 # ⚠️ 通知用户：证书临时降级为自签名，浏览器会有安全警告
 ```
 
-#<!-- chunk: 10.5 配置不同步（P2） -->## 10.5 配置不同步（P2）
+## 10.5 配置不同步（P2）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # ============================================
@@ -1370,7 +1391,7 @@ kubectl rollout restart deployment/higress-controller \
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-40-cloud-native-api-gateway MOC
-- [[domain-03-networking-traffic/README|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
 - Domain-40 云原生 API 网关 — 开源项目索引
 - 01 - 云原生 API 网关架构总览
 - 02 - Kubernetes Gateway API 标准深度解析
@@ -1388,3 +1409,5 @@ kubectl rollout restart deployment/higress-controller \
 - 13-api-gateway-performance-benchmarks
 - 99-envoy-gateway-enterprise-guide
 - 01-api-gateway-architecture-overview
+
+```

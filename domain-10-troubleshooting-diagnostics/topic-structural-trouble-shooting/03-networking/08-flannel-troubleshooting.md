@@ -243,6 +243,11 @@ cat /run/flannel/subnet.env
 - 多个集群使用相同的 Pod CIDR 且共享 etcd
 
 **修复**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方法 1：清理 etcd 中的旧子网记录（使用 etcd 后端时）
 ETCDCTL_API=3 etcdctl --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -326,6 +331,10 @@ tcpdump -i eth0 udp port 4789 -nn -e
 - VTEP MAC 冲突
 
 **修复 FDB**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 手动添加 FDB 条目（临时修复）
 bridge fdb add <remote-vtep-mac> dev flannel.1 dst <remote-node-ip>
@@ -359,6 +368,9 @@ iptables -L -n -v | grep DROP
 
 #### 2.3.3 MTU 问题排查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 测试大包连通性
 kubectl exec -it <pod-a> -- ping -M do -s 1472 <pod-b-ip>
@@ -374,6 +386,11 @@ ip link show flannel.1 | grep mtu
 ```
 
 **修复 MTU**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 修改 Flannel ConfigMap
 kubectl edit configmap -n kube-system kube-flannel-cfg
@@ -452,6 +469,10 @@ kubectl get pods -n kube-system | grep -E "flannel|calico"
 
 #### VXLAN → host-gw（同二层网络）
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 备份当前配置
 kubectl get configmap -n kube-system kube-flannel-cfg -o yaml > flannel-config-backup.yaml
@@ -475,6 +496,10 @@ watch kubectl get pods -n kube-system -l app=flannel
 
 ### 3.2 子网分配冲突修复
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方法 1：重置所有子网（Kubernetes API 后端）
 # 注意：此操作会导致所有 Pod 网络中断，需谨慎
@@ -493,6 +518,9 @@ kubectl delete pod -n kube-system -l app=flannel --field-selector spec.nodeName=
 ```
 
 ### 3.3 CNI 配置恢复
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 如果 CNI 配置被误删除，从 ConfigMap 恢复
@@ -712,15 +740,15 @@ fi
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[skills/ts-networking|ts-networking]]
-- [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[skills/ts-networking.md|ts-networking]]
+- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting|06-gateway-api-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting|07-terway-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-higress-troubleshooting|09-higress-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-nginx-ingress-troubleshooting|09-nginx-ingress-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting.md|06-gateway-api-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-higress-troubleshooting.md|09-higress-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-nginx-ingress-troubleshooting.md|09-nginx-ingress-troubleshooting]]

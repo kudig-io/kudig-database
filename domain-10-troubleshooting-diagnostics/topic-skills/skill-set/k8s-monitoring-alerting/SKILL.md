@@ -226,7 +226,7 @@ created: "2026-05-23"
 
 - k8s-performance
 
-- [[skills/ts-control-plane]]
+- [[skills/ts-control-plane.md|ts control plane]]
 
 
 当本Skill的诊断步骤无法定位根因时，建议按上述顺序排查相关Skill。
@@ -268,6 +268,7 @@ flowchart TD
     H -->|修复失败| J[升级给高级SRE]
     I --> K[更新监控告警]
     J --> L[准备问题报告]
+
 ```
 
 ## 工具速查表
@@ -313,4 +314,6 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/observability-stack-evolution|可观测性技术栈演进]] — 指标、日志、追踪三大支柱的演进与整合
+- [[concepts/observability-stack-evolution.md|可观测性技术栈演进]] — 指标、日志、追踪三大支柱的演进与整合
+
+```

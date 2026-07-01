@@ -74,6 +74,10 @@ created: "2026-05-23"
 - [ ] 存储 (Volume/Bind Mount/tmpfs)
 
 **我的理解:**
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+
 ```
 Docker 是容器化平台，核心是 Linux Namespace（隔离）和 Cgroup（资源限制）。
 镜像通过分层存储实现高效复用，容器运行时共享宿主机内核。
@@ -83,7 +87,7 @@ docker build -t app:v1 .         # 构建镜像
 docker run -d -p 80:80 nginx     # 运行容器
 docker exec -it <id> sh          # 进入容器
 docker logs <id>                 # 查看日志
-docker system prune -a           # 清理资源
+docker system prune -a           # 清理资源  # ⚠️ 强制清理，可能杀运行中容器
 ```
 
 **还需加强:**
@@ -162,6 +166,10 @@ cat /proc/<pid>/cgroup               # 查看 cgroup 信息
 ```
 
 **我的理解:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 K8s 采用声明式管理：用户声明期望状态，控制器通过 Reconcile Loop 持续将实际状态调整到期望状态。
 API Server 是所有操作的入口，etcd 是唯一的数据存储。
@@ -385,4 +393,6 @@ Pod → Prometheus (采集+存储) → Grafana (可视化)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

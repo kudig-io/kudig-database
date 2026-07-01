@@ -111,7 +111,7 @@ created: "2026-05-23"
 
 ## 维度二：专业技术专家知识库 (Expert Knowledge Base)
 
-**总评: ★★★★★ 9.0/10** — 达到顶级行业水准, 是国内最全面的 [[entities/kubernetes|kubernetes]] 生产运维知识库之一
+**总评: ★★★★★ 9.0/10** — 达到顶级行业水准, 是国内最全面的 [[entities/kubernetes.md|kubernetes]] 生产运维知识库之一
 
 ### 1. 技术深度与专业性 — 评分: 9.5/10
 

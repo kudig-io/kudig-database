@@ -67,7 +67,7 @@ created: "2026-05-23"
 
 # 04 - [[DaemonSet|DaemonSet]] 管理策略与最佳实践 (DaemonSet Management Strategies)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes|Kubernetes]] DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|Kubernetes]] DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
 
 <!-- chunk: DaemonSet 核心架构与应用场景 -->
 ## DaemonSet 核心架构与应用场景
@@ -505,6 +505,9 @@ dashboard:
 
 #### 6.1 常见问题诊断
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+
 ```bash
 # 1. 查看 DaemonSet 状态
 kubectl describe daemonset <daemonset-name> -n <namespace>
@@ -519,7 +522,7 @@ kubectl describe nodes | grep -A 5 "Taints"
 kubectl get nodes -l <node-selector> --show-labels
 
 # 5. 强制重新调度
-kubectl delete pod -l app=<app-name> -n <namespace> --grace-period=0 --force
+kubectl delete pod -l app=<app-name> -n <namespace> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 6. 检查污点容忍配置
 kubectl get nodes -o jsonpath='{.items[*].spec.taints}'
@@ -676,7 +679,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications KUDIG Database — Global MOC
-- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
 - Domain-4 工作负载 — 开源项目索引
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)

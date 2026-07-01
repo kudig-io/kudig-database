@@ -40,7 +40,7 @@ composefs 是一个 Linux 文件系统，设计用于高效挂载和共享容器
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -55,16 +55,16 @@ composefs 是一个 Linux 文件系统，设计用于高效挂载和共享容器
 
 ## 参考链接
 
-- [[concepts/storage-model|storage-model]]
+- [[concepts/storage-model.md|storage-model]]
 - [[pod-lifecycle]]
 
 ## Related
 
 - [[containerssh]] — ContainerSSH
 - [[modelpack]] — ModelPack
-- [[oauth2-proxy]] — [[OAuth2 Proxy|OAuth2 Proxy]]
+- [[oauth2-proxy]] — OAuth2 Proxy
 - [[schemahero]] — SchemaHero
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - composefs
-- [[entities/cncf-runtime|[[CNCF 容器运行时与工具链项目全景|CNCF 容器运行时与工具链项目全景]]]] — Cross-reference
+- [[entities/cncf-runtime.md|[[CNCF 容器运行时与工具链项目全景|CNCF 容器运行时与工具链项目全景]]]] — Cross-reference

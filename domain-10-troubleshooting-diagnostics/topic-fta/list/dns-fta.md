@@ -67,19 +67,19 @@ base_confidence: 0.7
 
 ## 相关链接
 
-- [[FTA Methodology and Core Principles|FTA 方法论]]
-- [[FTA Diagnostic Execution Engine|FTA 诊断执行引擎]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 - [[ts-networking|网络故障排查]]
 
 ## Related
 
 - [[coredns]] — CoreDNS
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
 
 ---
 
 > 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
-> [[_archives/troubleshooting-diagnostics/topic-fta/list/dns-fta|Dns FTA 完整版]]
+> [[_archives/troubleshooting-diagnostics/topic-fta/list/dns-fta.md|Dns FTA 完整版]]

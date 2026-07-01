@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. CSI 架构与原理 -->## 1. CSI 架构与原理
 
-#<!-- chunk: 1.1 CSI 核心组件 -->## 1.1 CSI 核心组件
+## 1.1 CSI 核心组件
 
 ```yaml
 CSI架构组件:
@@ -83,7 +83,7 @@ CSI架构组件:
     - csi-resizer: 卷大小调整
 ```
 
-#<!-- chunk: 1.2 CSI接口详解 -->## 1.2 CSI接口详解
+## 1.2 CSI接口详解
 
 ```go
 // CSI核心接口定义
@@ -122,7 +122,7 @@ type NodeServer interface {
 
 <!-- chunk: 2. 存储驱动开发实践 -->## 2. 存储驱动开发实践
 
-#<!-- chunk: 2.1 自定义CSI驱动开发 -->## 2.1 自定义CSI驱动开发
+## 2.1 自定义CSI驱动开发
 
 ```go
 // 自定义CSI驱动示例
@@ -227,7 +227,7 @@ func (d *Driver) Probe(ctx context.Context, req *csi.ProbeRequest) (*csi.ProbeRe
 }
 ```
 
-#<!-- chunk: 2.2 存储类配置优化 -->## 2.2 存储类配置优化
+## 2.2 存储类配置优化
 
 ```yaml
 # 高性能存储类配置
@@ -256,7 +256,7 @@ reclaimPolicy: Retain
 
 <!-- chunk: 3. 高级存储特性 -->## 3. 高级存储特性
 
-#<!-- chunk: 3.1 快照与克隆 -->## 3.1 快照与克隆
+## 3.1 快照与克隆
 
 ```yaml
 # 存储快照定义
@@ -350,7 +350,7 @@ func (sm *SnapshotManager) validateSnapshotRequest(req *csi.CreateSnapshotReques
 }
 ```
 
-#<!-- chunk: 3.2 卷克隆与复制 -->## 3.2 卷克隆与复制
+## 3.2 卷克隆与复制
 
 ```yaml
 # 卷克隆配置
@@ -374,7 +374,7 @@ spec:
 
 <!-- chunk: 4. 性能优化策略 -->## 4. 性能优化策略
 
-#<!-- chunk: 4.1 存储性能基准测试 -->## 4.1 存储性能基准测试
+## 4.1 存储性能基准测试
 
 ```bash
 #!/bin/bash
@@ -413,7 +413,7 @@ echo "=== 存储性能测试完成 ==="
 echo "结果保存在: $RESULTS_DIR"
 ```
 
-#<!-- chunk: 4.2 存储缓存策略 -->## 4.2 存储缓存策略
+## 4.2 存储缓存策略
 
 ```yaml
 # 缓存优化配置
@@ -455,7 +455,7 @@ data:
 
 <!-- chunk: 5. 监控与问题排除 -->## 5. 监控与问题排除
 
-#<!-- chunk: 5.1 存储性能监控 -->## 5.1 存储性能监控
+## 5.1 存储性能监控
 
 ```yaml
 # 存储监控配置
@@ -494,7 +494,7 @@ spec:
     app: custom-csi-driver
 ```
 
-#<!-- chunk: 5.2 关键监控指标 -->## 5.2 关键监控指标
+## 5.2 关键监控指标
 
 ```prometheus
 # CSI存储监控指标
@@ -517,7 +517,7 @@ csi_volume_read_ops_total
 csi_volume_write_ops_total
 ```
 
-#<!-- chunk: 5.3 问题排除工具 -->## 5.3 问题排除工具
+## 5.3 问题排除工具
 
 ```bash
 #!/bin/bash
@@ -571,7 +571,7 @@ echo "=== CSI故障诊断完成 ==="
 
 <!-- chunk: 6. 安全与合规 -->## 6. 安全与合规
 
-#<!-- chunk: 6.1 存储加密配置 -->## 6.1 存储加密配置
+## 6.1 存储加密配置
 
 ```yaml
 # 存储加密配置
@@ -608,7 +608,7 @@ data:
       rotationPeriod: 365d
 ```
 
-#<!-- chunk: 6.2 访问控制策略 -->## 6.2 访问控制策略
+## 6.2 访问控制策略
 
 ```yaml
 # 存储访问控制
@@ -644,33 +644,33 @@ roleRef:
 
 <!-- chunk: 7. 最佳实践总结 -->## 7. 最佳实践总结
 
-#<!-- chunk: 7.1 存储设计原则 -->## 7.1 存储设计原则
+## 7.1 存储设计原则
 
 ```markdown
 <!-- chunk: 💾 存储设计最佳实践 -->## 💾 存储设计最佳实践
 
-#<!-- chunk: 1. 性能导向设计 -->## 1. 性能导向设计
+## 1. 性能导向设计
 - 根据应用特性选择合适的存储类型
 - 合理配置IOPS和吞吐量参数
 - 优化缓存策略和预读设置
 
-#<!-- chunk: 2. 高可用性保障 -->## 2. 高可用性保障
+## 2. 高可用性保障
 - 实施多副本存储策略
 - 配置跨可用区部署
 - 建立完善的备份恢复机制
 
-#<!-- chunk: 3. 安全合规保障 -->## 3. 安全合规保障
+## 3. 安全合规保障
 - 实施端到端加密
 - 配置访问控制策略
 - 建立审计日志机制
 
-#<!-- chunk: 4. 成本效益优化 -->## 4. 成本效益优化
+## 4. 成本效益优化
 - 合理选择存储层级
 - 实施自动伸缩策略
 - 优化存储利用率
 ```
 
-#<!-- chunk: 7.2 实施检查清单 -->## 7.2 实施检查清单
+## 7.2 实施检查清单
 
 ```yaml
 CSI实施检查清单:
@@ -695,7 +695,7 @@ CSI实施检查清单:
 
 <!-- chunk: N. CSI存储 2026更新 -->## N. CSI存储 2026更新
 
-#<!-- chunk: N.1 ReadWriteOncePod (GA) -->## N.1 ReadWriteOncePod (GA)
+## N.1 ReadWriteOncePod (GA)
 - 第三种访问模式：确保PVC只能被单个Pod挂载
 - 对比RWO/RWX/RWOP三种模式
 - 适用场景：StatefulSet强一致性数据库
@@ -716,7 +716,7 @@ spec:
       storage: 100Gi
 ```
 
-#<!-- chunk: N.2 Volume Group Snapshots -->## N.2 Volume Group Snapshots
+## N.2 Volume Group Snapshots
 - VolumeGroupSnapshot/VolumeGroupSnapshotContent资源
 - 多Volume一致性快照（数据库WAL+数据文件同时快照）
 - 对比传统单Volume快照的局限
@@ -739,7 +739,7 @@ spec:
 
 <!-- chunk: 8. 未来发展趋势 -->## 8. 未来发展趋势
 
-#<!-- chunk: 8.1 存储技术演进 -->## 8.1 存储技术演进
+## 8.1 存储技术演进
 
 ```yaml
 未来存储技术趋势:
@@ -768,7 +768,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers KUDIG Database — Global MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - index.md|Domain-19 论文与参考 — 开源项目索引]]
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -789,5 +789,5 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]

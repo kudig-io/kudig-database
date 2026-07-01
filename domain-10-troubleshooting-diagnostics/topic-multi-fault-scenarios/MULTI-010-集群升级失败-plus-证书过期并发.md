@@ -4,6 +4,7 @@ type: "multi-fault"
 skills: ['25-cluster-upgrade-migration', '06-certificate-expiry']
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 title: "集群升级失败 + 证书过期并发"
 category: uncategorized
 tags: ["uncategorized", "visibility/public"]

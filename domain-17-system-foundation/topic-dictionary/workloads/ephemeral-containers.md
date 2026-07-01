@@ -74,7 +74,7 @@ kubectl debug -it myapp-pod \
 # - 查看主容器进程: ps aux
 # - 检查网络连通性: curl localhost:8080/healthz
 # - 抓包分析: tcpdump -i eth0 port 8080
-# - 检查 DNS: nslookup [[entities/kubernetes|kubernetes]].default
+# - 检查 DNS: nslookup [[entities/kubernetes.md|kubernetes]].default
 ```
 
 ### 场景 2：调试已崩溃的容器
@@ -184,3 +184,9 @@ kubectl debug node/<node-name> -it --image=ubuntu:22.04
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]

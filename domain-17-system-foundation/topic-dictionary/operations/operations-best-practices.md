@@ -43,6 +43,7 @@ prerequisites:
 - backup-basics
 - logging-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 01 - [[Kubernetes|Kubernetes]] 生产环境运维最佳实践字典
@@ -105,7 +106,7 @@ created: "2026-05-23"
 
 **核心要点**:
 - **API Server 并发控制**: 限制同时处理的请求数量，防止控制平面过载
-- **[[etcd|etcd]] 存储配额**: 限制集群状态数据的大小，防止存储空间耗尽导致集群瘫痪
+- **[[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]] 存储配额**: 限制集群状态数据的大小，防止存储空间耗尽导致集群瘫痪
 - **资源请求与限制**: 为每个容器设置 CPU/内存的下限（requests）和上限（limits），这是 K8s 调度和稳定性的基石
 - **健康检查三件套**: livenessProbe（存活探针）、readinessProbe（就绪探针）、startupProbe（启动探针）缺一不可
 - **网络策略**: 默认拒绝所有流量，按需开放，实现「零信任」网络
@@ -944,6 +945,10 @@ roleRef:
 - **启用审计日志**: 记录所有 API Server 请求，便于安全事件溯源
 
 **故障排查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Pod 的安全上下文
 kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}' | jq .
@@ -1170,6 +1175,10 @@ spec:
 - **定期审查告警**: 每月清理不再有效的告警规则，保持告警系统「干净」
 
 **故障排查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Prometheus 是否正常抓取目标
 kubectl port-forward -n monitoring svc/prometheus 9090:9090
@@ -1580,6 +1589,7 @@ spec:
         cpu: 2000m
         memory: 4Gi
       controlledResources: ["cpu", "memory"]
+
 ```
 
 ### 常见误区与最佳实践
@@ -1955,7 +1965,7 @@ spec:
     spec:
       containers:
       - name: thanos-query
-        image: quay.io/thanos/thanos:v0.32.0
+        image: quay.io/thanos/thanos:v0.37.0
         args:
         - query
         - --grpc-address=0.0.0.0:10901
@@ -2065,6 +2075,10 @@ echo "问题快照已保存到: /tmp/incidents/${INCIDENT_ID}/"
 | **P3 - 优化建议类** | 下一工作日处理 | 相关人员 | 纳入改进计划 | 需求池管理 |
 
 ### 9.2 应急响应标准操作程序(SOP)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 #!/bin/bash
@@ -2489,6 +2503,10 @@ echo -e "\n合规检查完成，详情请查看: ${COMPLIANCE_REPORT}"
 - **定期渗透测试**: 每季度对集群进行安全评估，使用 kube-bench 检查 CIS 基准
 
 **故障排查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 检查 Pod Security Admission 是否阻止了 Pod 创建
 kubectl get events -n <namespace> | grep "Forbidden"
@@ -2972,6 +2990,10 @@ spec:
 - **Feature Flags**: 将代码发布和功能开启解耦，先发布代码，再通过开关逐步开启功能
 
 **故障排查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 查看 Deployment 滚动更新状态
 kubectl rollout status deployment/<name> -n <namespace>
@@ -3050,6 +3072,12 @@ kubectl get pdb -A
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级
 
+## 参考链接
+
+- [Operations Best Practices]()
+
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

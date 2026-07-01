@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Service
@@ -183,6 +184,7 @@ spec:
           │
           └─ 否 → NodePort
                   └─ 仅做 DNS 映射？ → ExternalName
+
 ```
 
 ## 故障排查
@@ -241,4 +243,6 @@ kubectl port-forward svc/backend-api 8080:80 -n production
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
+
+```

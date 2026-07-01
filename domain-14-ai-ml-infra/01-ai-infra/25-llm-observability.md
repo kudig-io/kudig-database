@@ -60,7 +60,7 @@ created: "2026-05-23"
 
 # 25 - LLM可观测性与监控体系
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [[entities/prometheus|Prometheus]]](https://prometheus.io/) | [[entities/opentelemetry|OpenTelemetry]]](https://opentelemetry.io/) | [Grafana](https://grafana.com/) | [Elasticsearch](https://www.elastic.co/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [[entities/prometheus.md|Prometheus]]](https://prometheus.io/) | [[entities/opentelemetry.md|OpenTelemetry]]](https://opentelemetry.io/) | [Grafana](https://grafana.com/) | [Elasticsearch](https://www.elastic.co/)
 
 <!-- chunk: 一、企业级LLM可观测性架构 -->
 ## 一、企业级LLM可观测性架构
@@ -1243,7 +1243,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-11-ai-infra KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
 - index.md|Domain-11 AI 基础设施 — 开源项目索引]]
 - AI 基础设施架构
 - 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
@@ -1264,4 +1264,4 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

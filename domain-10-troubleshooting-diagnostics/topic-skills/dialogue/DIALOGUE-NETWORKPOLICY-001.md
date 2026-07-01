@@ -7,6 +7,7 @@ severity: "medium"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 title: "Pod 间网络不通，怀疑 NetworkPolicy 阻断 — 远程顾问对话脚本"
 category: dialogue
 tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
@@ -14,7 +15,7 @@ tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 
 # Pod 间网络不通，怀疑 NetworkPolicy 阻断 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/network-policy|NetworkPolicy]]
+> 对应概念：[[concepts/network-policy.md|NetworkPolicy]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -73,11 +74,17 @@ kubectl get networkpolicy -n <namespace> -o yaml
 
 **顾问**：请进入源 Pod 测试到目标地址的网络连通性：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 kubectl exec <source-pod> -n <namespace> -- ping -c 4 <target-ip>
 ```
 
 > **如果无法执行**：请在目标 Pod 所在节点上执行 `ping <target-pod-ip>`，或提供源 Pod 到目标 Service 的连通性测试结果。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 kubectl exec <source-pod> -n <namespace> -- nc -zv <target-ip> <port>
@@ -141,6 +148,9 @@ kubectl get networkpolicy <policy-name> -n <namespace> -o jsonpath='{.spec.ingre
 
 #### 方案 A：放宽 NetworkPolicy 规则
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl edit networkpolicy <policy-name> -n <namespace>
 ```
@@ -150,6 +160,9 @@ kubectl edit networkpolicy <policy-name> -n <namespace>
 > **如果无法执行 edit**：请使用 `kubectl patch` 或准备修改后的 YAML 文件执行 `kubectl apply -f`。
 
 #### 方案 B：添加 allow-all 策略（临时）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat <<EOF | kubectl apply -f -
@@ -182,6 +195,9 @@ kubectl get networkpolicy <policy-name> -n <namespace> -o jsonpath='{.spec.ingre
 
 **验证修复**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 kubectl exec <source-pod> -n <namespace> -- ping -c 4 <target-ip>
 ```
@@ -192,6 +208,6 @@ kubectl exec <source-pod> -n <namespace> -- ping -c 4 <target-ip>
 
 ## 相关概念
 
-- [[concepts/network-policy|NetworkPolicy]]
-- [[entities/cni|CNI 插件]]
-- [[best-practices/security/pod-security|Pod 安全策略]]
+- [[concepts/network-policy.md|NetworkPolicy]]
+- [[entities/cni.md|CNI 插件]]
+- [[skills/best-practices/best-practices/security/pod-security.md|Pod 安全策略]]

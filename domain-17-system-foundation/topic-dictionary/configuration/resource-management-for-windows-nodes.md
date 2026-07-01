@@ -29,13 +29,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Resource Management for Windows nodes
 
 ## 概述
 
-本文档概述了 Linux 与 Windows 节点在资源管理方面的差异。由于操作系统内核和进程隔离机制的不同，[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 在 Windows 节点上的资源管理方式与 Linux 存在显著区别。了解这些差异对于在混合操作系统集群中正确配置和调度工作负载至关重要。
+本文档概述了 Linux 与 Windows 节点在资源管理方面的差异。由于操作系统内核和进程隔离机制的不同，[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 在 Windows 节点上的资源管理方式与 Linux 存在显著区别。了解这些差异对于在混合操作系统集群中正确配置和调度工作负载至关重要。
 
 ## 核心概念/原理
 
@@ -214,3 +215,9 @@ kubectl get pods --all-namespaces --field-selector spec.nodeName=<windows-node>
 ## 参考链接
 
 - [Kubernetes 官方文档 - Resource Management for Windows nodes](https://kubernetes.io/docs/concepts/configuration/windows-resource-management/)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/configuration/configmap.md|配置映射]]
+- [[domain-17-system-foundation/topic-dictionary/configuration/configmaps.md|ConfigMaps]]
+- [[domain-17-system-foundation/topic-dictionary/configuration/env.md|环境变量配置]]

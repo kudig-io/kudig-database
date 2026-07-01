@@ -95,7 +95,7 @@ Tekton 在企业中的典型定位是 CI 层——负责代码构建、测试、
 
 <!-- chunk: 二、架构设计 -->## 二、架构设计
 
-#<!-- chunk: 2.1 Tekton 组件架构 -->## 2.1 Tekton 组件架构
+## 2.1 Tekton 组件架构
 
 ```mermaid
 graph TB
@@ -136,7 +136,7 @@ graph TB
     SIGN --> PROV
 ```
 
-#<!-- chunk: 2.2 核心概念 -->## 2.2 核心概念
+## 2.2 核心概念
 
 ```
 Tekton 组件
@@ -169,7 +169,10 @@ Tekton 组件
 
 <!-- chunk: 三、核心配置 -->## 三、核心配置
 
-#<!-- chunk: 3.1 安装部署 -->## 3.1 安装部署
+## 3.1 安装部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 Tekton Pipelines
@@ -206,7 +209,7 @@ data:
         type: RuntimeDefault
 ```
 
-#<!-- chunk: 3.2 Task 定义 -->## 3.2 Task 定义
+## 3.2 Task 定义
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -274,7 +277,7 @@ spec:
         - --digest-file=$(results.IMAGE_DIGEST.path)
 ```
 
-#<!-- chunk: 3.3 Pipeline 定义 -->## 3.3 Pipeline 定义
+## 3.3 Pipeline 定义
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -382,7 +385,7 @@ spec:
           value: "Pipeline completed for $(params.git-revision)"
 ```
 
-#<!-- chunk: 3.4 PipelineRun -->## 3.4 PipelineRun
+## 3.4 PipelineRun
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -421,7 +424,7 @@ spec:
     tasks: "30m"
 ```
 
-#<!-- chunk: 3.5 Triggers 事件触发 -->## 3.5 Triggers 事件触发
+## 3.5 Triggers 事件触发
 
 ```yaml
 apiVersion: triggers.tekton.dev/v1beta1
@@ -500,7 +503,7 @@ spec:
         ref: github-trigger-template
 ```
 
-#<!-- chunk: 3.6 与 Argo CD 集成 -->## 3.6 与 Argo CD 集成
+## 3.6 与 Argo CD 集成
 
 ```yaml
 # Pipeline 中的 GitOps 步骤
@@ -529,7 +532,7 @@ spec:
 
 <!-- chunk: 四、安全与合规 -->## 四、安全与合规
 
-#<!-- chunk: 4.1 Tekton Chains 供应链安全 -->## 4.1 Tekton Chains 供应链安全
+## 4.1 Tekton Chains 供应链安全
 
 ```yaml
 # Tekton Chains 配置
@@ -546,7 +549,7 @@ data:
   transparency.url: "https://rekor.sigstore.dev"
 ```
 
-#<!-- chunk: 4.2 安全上下文 -->## 4.2 安全上下文
+## 4.2 安全上下文
 
 ```yaml
 # Pod 安全模板
@@ -568,7 +571,7 @@ data:
 
 <!-- chunk: 五、多环境管理策略 -->## 五、多环境管理策略
 
-#<!-- chunk: 5.1 Workspace 数据传递 -->## 5.1 Workspace 数据传递
+## 5.1 Workspace 数据传递
 
 | 类型 | 用途 | 示例 |
 |:---|:---|:---|
@@ -578,7 +581,7 @@ data:
 | Secret | 敏感数据 | registry 凭证 |
 | VolumeClaimTemplate | 动态 PVC | PipelineRun 隔离 |
 
-#<!-- chunk: 5.2 多环境 Pipeline -->## 5.2 多环境 Pipeline
+## 5.2 多环境 Pipeline
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -619,7 +622,10 @@ spec:
 
 <!-- chunk: 六、监控与回滚 -->## 六、监控与回滚
 
-#<!-- chunk: 6.1 Tekton Results API -->## 6.1 Tekton Results API
+## 6.1 Tekton Results API
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 Tekton Results
@@ -630,7 +636,7 @@ tkn results list
 tkn results records <result-name>
 ```
 
-#<!-- chunk: 6.2 关键指标 -->## 6.2 关键指标
+## 6.2 关键指标
 
 ```yaml
 - alert: TektonPipelineRunFailed
@@ -642,7 +648,7 @@ tkn results records <result-name>
     summary: "Tekton PipelineRun 失败"
 ```
 
-#<!-- chunk: 6.3 回滚 -->## 6.3 回滚
+## 6.3 回滚
 
 ```bash
 # Tekton 本身不负责部署回滚
@@ -659,7 +665,7 @@ tkn pipelinerun retry <pipelinerun-name>
 
 <!-- chunk: 七、最佳实践 -->## 七、最佳实践
 
-#<!-- chunk: 7.1 选型对比 -->## 7.1 选型对比
+## 7.1 选型对比
 
 | 维度 | Tekton | Jenkins | GitHub Actions |
 |:---|:---|:---|:---|
@@ -678,7 +684,7 @@ tkn pipelinerun retry <pipelinerun-name>
   ✅ 需要跨云可移植性
 ```
 
-#<!-- chunk: 7.2 社区 Task 复用 -->## 7.2 社区 Task 复用
+## 7.2 社区 Task 复用
 
 ```bash
 # 从 Tekton Hub 安装
@@ -742,7 +748,7 @@ kubectl logs -n tekton-pipelines deploy/tekton-pipelines-controller
 
 <!-- chunk: 十、Tekton 企业级运维 -->## 十、Tekton 企业级运维
 
-#<!-- chunk: 10.1 Tekton CLI 高级用法 -->## 10.1 Tekton CLI 高级用法
+## 10.1 Tekton CLI 高级用法
 
 Tekton CLI (`tkn`) 是管理和调试 Tekton 资源的命令行工具。除了基本的创建、查看和删除操作外，`tkn` 还支持交互式日志查看、PipelineRun 重试和 TaskRun 调试等高级功能。
 
@@ -768,7 +774,7 @@ tkn triggerbinding list
 tkn triggertemplate list
 ```
 
-#<!-- chunk: 10.2 Workspace 高级配置 -->## 10.2 Workspace 高级配置
+## 10.2 Workspace 高级配置
 
 Workspace 是 Tekton 中 Task 和 Pipeline 间数据共享的核心机制。它支持多种 Volume 类型，可以根据数据特性选择最合适的存储方式。对于需要持久化缓存的场景（如 Maven 仓库），推荐使用 PVC；对于临时数据传递，推荐使用 VolumeClaimTemplate（每次 PipelineRun 创建独立的 PVC）。
 
@@ -800,7 +806,7 @@ workspaces:
       name: maven-settings
 ```
 
-#<!-- chunk: 10.3 Tekton 与 Argo CD 完整集成 -->## 10.3 Tekton 与 Argo CD 完整集成
+## 10.3 Tekton 与 Argo CD 完整集成
 
 Tekton + Argo CD 的集成是云原生 CI/CD 的标准模式。Tekton 负责 CI（构建、测试、推送镜像），Argo CD 负责 CD（同步部署）。集成点在于 Tekton Pipeline 的最后一步：更新 GitOps 清单仓库中的镜像标签，Argo CD 自动检测到变更并同步部署。
 
@@ -821,7 +827,7 @@ Tekton + Argo CD 的集成是云原生 CI/CD 的标准模式。Tekton 负责 CI�
 
 <!-- chunk: 十一、Tekton Pipeline 高级设计模式 -->## 十一、Tekton Pipeline 高级设计模式
 
-#<!-- chunk: 11.1 Matrix Pipeline -->## 11.1 Matrix Pipeline
+## 11.1 Matrix Pipeline
 
 Tekton 的 Matrix 功能允许在 Pipeline 中并行执行同一 Task 的多个变体。这非常适合多平台构建（如同时构建 Linux/amd64、Linux/arm64、Windows 镜像）、多版本测试（如同时测试 Java 17 和 Java 21）和多云部署场景。
 
@@ -873,7 +879,7 @@ spec:
           workspace: source
 ```
 
-#<!-- chunk: 11.2 条件执行与错误处理 -->## 11.2 条件执行与错误处理
+## 11.2 条件执行与错误处理
 
 Tekton 支持通过 `when` 表达式实现条件执行，通过 `onError` 和 `retries` 实现错误处理。`when` 表达式可以根据参数值、Task Result 或运行时条件决定是否执行某个 Task。`onError: continue` 允许 Task 失败后继续执行后续步骤，适用于非关键任务的场景。
 
@@ -932,7 +938,7 @@ spec:
       onError: continue
 ```
 
-#<!-- chunk: 11.3 Results 传递与跨 Task 通信 -->## 11.3 Results 传递与跨 Task 通信
+## 11.3 Results 传递与跨 Task 通信
 
 Tekton Results 是 Task 之间传递数据的核心机制。一个 Task 的输出 Result 可以被后续 Task 引用，形成数据流。Results 支持字符串类型，可以传递镜像摘要（digest）、版本号、测试结果等元数据。
 
@@ -974,7 +980,7 @@ spec:
 
 Tekton 负责 CI（构建、测试、推送镜像），Argo CD 负责 CD（同步部署）。这种"CI + GitOps CD"的模式是云原生 CI/CD 的标准架构。Tekton Pipeline 的最后一步更新 GitOps 清单仓库中的镜像标签，Argo CD 自动检测到变更并同步部署。
 
-#<!-- chunk: 12.1 完整工作流 -->## 12.1 完整工作流
+## 12.1 完整工作流
 
 ```bash
 # 完整 CI/CD + GitOps 工作流
@@ -996,7 +1002,7 @@ git push origin feature/my-feature
 # 6. PostSync Hook 执行冒烟测试
 ```
 
-#<!-- chunk: 12.2 Pipeline 可视化与调试 -->## 12.2 Pipeline 可视化与调试
+## 12.2 Pipeline 可视化与调试
 
 Tekton Dashboard 提供了 Web 界面可视化查看 PipelineRun 的执行状态、步骤日志和结果。`tkn` CLI 提供了命令行工具来调试 PipelineRun 和 TaskRun，支持交互式日志查看和重试操作。
 
@@ -1019,7 +1025,7 @@ tkn pipelinerun retry <name>
 
 <!-- chunk: 十三、Tekton 最佳实践总结 -->## 十三、Tekton 最佳实践总结
 
-#<!-- chunk: 13.1 生产环境 Checklist -->## 13.1 生产环境 Checklist
+## 13.1 生产环境 Checklist
 
 ```yaml
 Tekton 生产环境部署检查清单:
@@ -1050,7 +1056,7 @@ Tekton 生产环境部署检查清单:
     - 定期清理已完成的 PipelineRun
 ```
 
-#<!-- chunk: 13.2 常见错误与解决方案 -->## 13.2 常见错误与解决方案
+## 13.2 常见错误与解决方案
 
 ```yaml
 常见问题:
@@ -1096,7 +1102,7 @@ Tekton 生产环境部署检查清单:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-08-release-change-management MOC
-- [[domain-08-release-change-management/README|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
+- [[domain-08-release-change-management/README.md|Domain 08: GitOps与CI/CD (GitOps & CI/CD)]]
 - Domain-23 GitOps & CI/CD — 开源项目索引
 - Argo CD企业级GitOps实践指南
 - Jenkins企业级CI/CD流水线深度实践
@@ -1117,4 +1123,4 @@ Tekton 生产环境部署检查清单:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

@@ -10,6 +10,7 @@ tags:
   - k8s
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # K8S 网络演进
@@ -200,6 +201,6 @@ spec:
 
 ## Related
 
-- [[concepts/k8s-security-compliance]] — K8S 安全与合规
-- [[concepts/k8s-observability-stack]] — K8S 可观测性技术栈
-- [[concepts/specialized-k8s-technologies]] — 特殊化 K8S 技术
+- [[concepts/k8s-security-compliance.md|k8s security compliance]] — K8S 安全与合规
+- [[concepts/k8s-observability-stack.md|k8s observability stack]] — K8S 可观测性技术栈
+- [[concepts/specialized-k8s-technologies.md|specialized k8s technologies]] — 特殊化 K8S 技术

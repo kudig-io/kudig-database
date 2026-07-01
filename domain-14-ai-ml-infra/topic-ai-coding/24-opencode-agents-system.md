@@ -161,7 +161,7 @@ Subagent 创建的子会话可通过快捷键导航：
       }
     },
     "k8s-ops": {
-      "description": "[[entities/kubernetes|kubernetes]] operations specialist for cluster management",
+      "description": "[[entities/kubernetes.md|kubernetes]] operations specialist for cluster management",
       "mode": "subagent",
       "model": "anthropic/claude-sonnet-4-20250514",
       "prompt": "{file:./prompts/k8s-ops.txt}",

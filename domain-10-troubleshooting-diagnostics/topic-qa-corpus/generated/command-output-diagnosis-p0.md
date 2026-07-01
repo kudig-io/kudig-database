@@ -6125,7 +6125,7 @@ output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\":
   detection\": { \"events\": [\"FailedCreatePodSandBox\"], \"metrics\": [], \"logs\"\
   : [\"invalid CNI configuration\", \"error loading CNI config\"] },\n        \"remediation\"\
   : { \"manual_steps\": [\"检查 /etc/cni/net.d/ 配置文件\", \"验证 Terway ConfigMap 配置\",\
-  \ \"确认 CNI 版本与 [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]] 版本兼容\"\
+  \ \"确认 CNI 版本与 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]] 版本兼容\"\
   ], \"auto_actions\": [] } },\n      \"next_step\": \"gate_root_or\"\n    },\n  \
   \  {\n      \"name\": \"底事件: CNI 二进制/守护进程异常\", \"action\": \"bottom_event\", \"\
   step\": \"evt_cni_daemon\",\n      \"description\": \"Terway Daemon Pod 崩溃或 CNI\
@@ -6804,7 +6804,7 @@ output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\":
   detection\": { \"events\": [\"FailedCreatePodSandBox\"], \"metrics\": [], \"logs\"\
   : [\"invalid CNI configuration\", \"error loading CNI config\"] },\n        \"remediation\"\
   : { \"manual_steps\": [\"检查 /etc/cni/net.d/ 配置文件\", \"验证 Terway ConfigMap 配置\",\
-  \ \"确认 CNI 版本与 [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]] 版本兼容\"\
+  \ \"确认 CNI 版本与 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]] 版本兼容\"\
   ], \"auto_actions\": [] } },\n      \"next_step\": \"gate_root_or\"\n    },\n  \
   \  {\n      \"name\": \"底事件: CNI 二进制/守护进程异常\", \"action\": \"bottom_event\", \"\
   step\": \"evt_cni_daemon\",\n      \"description\": \"Terway Daemon Pod 崩溃或 CNI\
@@ -7482,7 +7482,7 @@ output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\":
   detection\": { \"events\": [\"FailedCreatePodSandBox\"], \"metrics\": [], \"logs\"\
   : [\"invalid CNI configuration\", \"error loading CNI config\"] },\n        \"remediation\"\
   : { \"manual_steps\": [\"检查 /etc/cni/net.d/ 配置文件\", \"验证 Terway ConfigMap 配置\",\
-  \ \"确认 CNI 版本与 [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]] 版本兼容\"\
+  \ \"确认 CNI 版本与 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]] 版本兼容\"\
   ], \"auto_actions\": [] } },\n      \"next_step\": \"gate_root_or\"\n    },\n  \
   \  {\n      \"name\": \"底事件: CNI 二进制/守护进程异常\", \"action\": \"bottom_event\", \"\
   step\": \"evt_cni_daemon\",\n      \"description\": \"Terway Daemon Pod 崩溃或 CNI\
@@ -8160,7 +8160,7 @@ output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\":
   detection\": { \"events\": [\"FailedCreatePodSandBox\"], \"metrics\": [], \"logs\"\
   : [\"invalid CNI configuration\", \"error loading CNI config\"] },\n        \"remediation\"\
   : { \"manual_steps\": [\"检查 /etc/cni/net.d/ 配置文件\", \"验证 Terway ConfigMap 配置\",\
-  \ \"确认 CNI 版本与 [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]] 版本兼容\"\
+  \ \"确认 CNI 版本与 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]] 版本兼容\"\
   ], \"auto_actions\": [] } },\n      \"next_step\": \"gate_root_or\"\n    },\n  \
   \  {\n      \"name\": \"底事件: CNI 二进制/守护进程异常\", \"action\": \"bottom_event\", \"\
   step\": \"evt_cni_daemon\",\n      \"description\": \"Terway Daemon Pod 崩溃或 CNI\
@@ -10352,7 +10352,7 @@ io_pair_id: IODIAG-POD-0042
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get pods -n kube-system -l [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]-app=kube-proxy
+command: kubectl get pods -n kube-system -l [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]-app=kube-proxy
   -o wide
 output_pattern: <typical output for this fault>
 diagnosis:

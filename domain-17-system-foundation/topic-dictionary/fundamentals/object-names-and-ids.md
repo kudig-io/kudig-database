@@ -41,7 +41,7 @@ created: "2026-05-23"
 - 如果删除对象，可以创建一个同名的新对象。
 - **名称必须在同一资源的所有 API 版本中唯一**。API 资源由 API 组、资源类型、命名空间（针对命名空间资源）和名称区分，API 版本在此上下文中无关紧要。
 
-**自动生成名称**：当在创建请求中提供 `generateName` 而非 `name` 时，服务器会将提供的值作为前缀，并附加生成的后缀。自 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] v1.31 起，服务器会最多尝试 8 次生成唯一名称，然后才返回 HTTP 409 冲突响应。
+**自动生成名称**：当在创建请求中提供 `generateName` 而非 `name` 时，服务器会将提供的值作为前缀，并附加生成的后缀。自 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] v1.31 起，服务器会最多尝试 8 次生成唯一名称，然后才返回 HTTP 409 冲突响应。
 
 ### 命名约束类型
 
@@ -69,3 +69,9 @@ UID 是 Kubernetes 系统生成的字符串，用于在整个集群生命周期�
 ## 参考链接
 
 - [Object Names and IDs - Official Documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/annotations.md|注解]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/bpfman.md|bpfman eBPF 管理器]]

@@ -43,7 +43,7 @@ title: Day 15: Node 节点基础
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] Node architecture [[kubelet|kubelet]] kube-proxy
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] Node architecture [[kubelet|kubelet]] kube-proxy
   - Node status conditions Ready NotReady
   - Node capacity allocatable resource management
   - Kubernetes node monitoring troubleshooting
@@ -392,6 +392,11 @@ kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig'
 
 ### 任务 5: 节点标签和污点管理 (30min)
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 查看节点标签
 kubectl get nodes --show-labels
@@ -589,3 +594,5 @@ echo "========================================"
 - [Node NotReady 诊断](../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md)
 - [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
 - [OOM 内存诊断](../../domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis.md)
+
+```

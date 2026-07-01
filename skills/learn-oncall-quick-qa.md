@@ -170,6 +170,10 @@ kubectl create secret docker-registry my-secret \
   --docker-username=<your-username> \
   --docker-password=<your-password> \
   --docker-email=<your-email>
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 
 然后在 Pod spec 里添加：
@@ -198,6 +202,9 @@ kubectl exec -it <pod-name> -- ping <registry-host>
 ```
 
 ### Q4: Pod Evicted 怎么办？
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
 【回复】
@@ -295,6 +302,10 @@ NetworkPolicy 可能阻止了流量。
 
 ### Q6: DNS 解析失败怎么办？
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```
 【回复】
 
@@ -389,6 +400,9 @@ Ingress Controller 必须在 Running 状态。
 
 ### Q8: NetworkPolicy 导致无法访问怎么办？
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 【回复】
 
@@ -447,6 +461,10 @@ spec:
 
 ### Q9: 资源配额超限怎么办？
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```
 【回复】
 
@@ -493,6 +511,10 @@ kubectl describe limitrange -n <namespace>
 ```
 
 ### Q10: Pod OOMKilled 怎么办？
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```
 【回复】
@@ -645,6 +667,10 @@ kubectl describe pod <pod-name> | grep -A10 "Affinity"
 
 ### Q13: 节点 NotReady 怎么办？
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```
 【回复】
 
@@ -681,7 +707,7 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -dates
 
 1. kubelet 没运行 → systemctl restart kubelet
 2. 证书过期 → 更新证书（kubeadm alpha certificates renew）
-3. 磁盘不足 → docker system prune 清理磁盘
+3. 磁盘不足 → docker system prune 清理磁盘  # ⚠️ 强制清理，可能杀运行中容器
 4. 内存不足 → 重启一些低优先级 Pod
 5. 网络不通 → 检查网络配置和防火墙
 
@@ -697,16 +723,21 @@ kubectl get nodes
 
 ### Q14: 节点上有个 Pod 一直无法删除怎么办？
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 【回复】
 
 "Pod 卡住无法删除，按以下步骤：
 
 第一步：强制删除
-kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
+kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 
 如果还是不行，暴力删除：
-kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force --dry-run=server
+kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force --dry-run=server  # ⚠️ 跳过优雅终止，可能丢数据
 
 第二步：检查是否有 Finalizers
 kubectl get pod <pod-name> -n <namespace> -o yaml | grep finalizers
@@ -804,6 +835,9 @@ CSI driver 应该在 Running 状态。
 
 ### Q16: Pod 无法挂载 Volume 怎么办？
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 【回复】
 
@@ -849,6 +883,9 @@ kubectl describe pvc <pvc-name> | grep -A5 "Mounted By"
 ## 六、安全问题（中频）
 
 ### Q17: RBAC Forbidden 怎么办？
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
 【回复】
@@ -975,6 +1012,9 @@ Secret 只是 base64 编码，不是加密！
 ## 七、应用问题（中频）
 
 ### Q19: Deployment 滚动更新卡住怎么办？
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```
 【回复】
@@ -1123,6 +1163,11 @@ kubectl describe limitrange -n <namespace>
 
 ### 快速修复命令
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 重启 Deployment
 kubectl rollout restart deployment <name> -n <namespace>
@@ -1131,7 +1176,7 @@ kubectl rollout restart deployment <name> -n <namespace>
 kubectl rollout undo deployment <name> -n <namespace>
 
 # 删除卡住的 Pod
-kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
+kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 扩缩容
 kubectl scale deployment <name> --replicas=3 -n <namespace>
@@ -1197,7 +1242,7 @@ kubectl rollout restart deployment/coredns -n kube-system
 ## Related
 
 - [[coredns]] — CoreDNS
-- [[entities/vault|vault]] — HashiCorp Vault
+- [[entities/vault.md|vault]] — HashiCorp Vault
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

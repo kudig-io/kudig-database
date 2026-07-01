@@ -5,6 +5,7 @@ tags: ["index", "domain-04-storage-data", "navigation"]
 sources: ["auto-generated"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 ---
 
 # Domain 04 内容索引
@@ -59,5 +60,5 @@ updated: 2026-05-21
 - [[README-from-domain-6]] — README from domain 6
 
 ## 相关 Domain
-- [[domain-03-networking-traffic/98-merged-indexes/index|Domain 03 网络与流量 索引]]
-- [[domain-16-database-middleware/98-merged-indexes/index|Domain 16 数据库与中间件 索引]]
+- [[domain-03-networking-traffic/98-merged-indexes/index.md|Domain 03 网络与流量 索引]]
+- [[domain-16-database-middleware/98-merged-indexes/index.md|Domain 16 数据库与中间件 索引]]

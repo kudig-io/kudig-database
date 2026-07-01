@@ -1,0 +1,119 @@
+name: Quality Gate
+
+on:
+  pull_request:
+    paths:
+      - 'domain-*/**'
+      - 'concepts/**'
+      - 'entities/**'
+      - 'skills/**'
+      - 'docs/**'
+      - 'scripts/**'
+      - '.github/workflows/quality.yml'
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: Ruff Lint (scripts/)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install ruff
+      - name: Ruff check
+        run: ruff check scripts/maintenance/
+
+  frontmatter:
+    name: Frontmatter Integrity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pyyaml
+      - name: Validate frontmatter (parseable + required fields)
+        run: |
+          python3 - <<'PY'
+          import sys, pathlib, yaml
+          ROOT = pathlib.Path('.')
+          EXCL = {'node_modules','.venv','.git','__pycache__','site','web'}
+          CONTENT = ('concepts', 'entities', 'skills', 'docs')
+          errors, checked = [], 0
+          for p in sorted(ROOT.rglob('*.md')):
+              if any(x in p.parts for x in EXCL):
+                  continue
+              if not (p.parts[0].startswith('domain-') or p.parts[0] in CONTENT):
+                  continue
+              txt = p.read_text(encoding='utf-8')
+              if not txt.startswith('---'):
+                  continue
+              checked += 1
+              parts = txt.split('---', 2)
+              if len(parts) < 3:
+                  errors.append(f"{p}: frontmatter 无法解析"); continue
+              try:
+                  fm = yaml.safe_load(parts[1])
+              except Exception as e:
+                  errors.append(f"{p}: YAML 解析失败: {e}"); continue
+              if not isinstance(fm, dict):
+                  errors.append(f"{p}: frontmatter 非映射结构"); continue
+              if 'title' not in fm:
+                  errors.append(f"{p}: 缺少必需字段 title")
+          print(f"checked {checked} markdown files")
+          if errors:
+              print(f"\n{len(errors)} frontmatter 错误:")
+              for e in errors[:80]:
+                  print("  " + e)
+              sys.exit(1)
+          print("frontmatter OK")
+          PY
+
+  wikilinks:
+    name: Broken Wikilink Report
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Scan broken [[...]] wikilinks
+        run: |
+          python3 - <<'PY'
+          import pathlib, re
+          ROOT = pathlib.Path('.')
+          EXCL = {'node_modules','.venv','.git','__pycache__','site','web'}
+          CONTENT = ('concepts', 'entities', 'skills', 'docs')
+          WL = re.compile(r'\[\[([^\]|#]+)(?:[#|][^\]]*)?\]\]')
+          def is_content(p):
+              return p.parts[0].startswith('domain-') or p.parts[0] in CONTENT
+          names = set()
+          for p in ROOT.rglob('*.md'):
+              if any(x in p.parts for x in EXCL) or not is_content(p):
+                  continue
+              names.add(p.stem); names.add(p.name)
+          broken = []
+          for p in sorted(ROOT.rglob('*.md')):
+              if any(x in p.parts for x in EXCL) or not is_content(p):
+                  continue
+              for m in WL.finditer(p.read_text(encoding='utf-8')):
+                  target = m.group(1).strip()
+                  if not target:
+                      continue
+                  stem = target.split('/')[-1].replace('.md','')
+                  if stem not in names and target not in names:
+                      broken.append(f"{p}:{target}")
+          print(f"broken wikilinks: {len(broken)}")
+          for b in broken[:40]:
+              print("  " + b)
+          if len(broken) > 40:
+              print(f"  ... and {len(broken)-40} more")
+          # 当前为报告模式；broken link 清零后将下面的阈值改为 fail-on-regression。
+          if broken:
+              print("::warning::存在 broken wikilinks，详见上方报告（当前不阻断，待清零后启用 gate）")
+          PY

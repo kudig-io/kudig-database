@@ -31,7 +31,7 @@ created: "2026-05-23"
 
 ## 概述
 
-[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 调度器（kube-scheduler）是控制平面的关键组件之一。配置错误的调度器可能产生安全影响，例如被用于针对特定节点并驱逐共享该节点及其资源的工作负载或应用，从而协助攻击者实施 **Yo-Yo 攻击**（针对脆弱自动扩缩容器的攻击）。本文档介绍如何提高调度器的安全态势。
+[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 调度器（kube-scheduler）是控制平面的关键组件之一。配置错误的调度器可能产生安全影响，例如被用于针对特定节点并驱逐共享该节点及其资源的工作负载或应用，从而协助攻击者实施 **Yo-Yo 攻击**（针对脆弱自动扩缩容器的攻击）。本文档介绍如何提高调度器的安全态势。
 
 ## 核心概念/原理
 
@@ -111,3 +111,9 @@ profiles:
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/security/hardening-guide/scheduler/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/security/admission-controller.md|准入控制器]]
+- [[domain-17-system-foundation/topic-dictionary/security/application-security-checklist.md|应用安全清单]]
+- [[domain-17-system-foundation/topic-dictionary/security/athenz.md|Athenz 身份认证与授权]]

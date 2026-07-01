@@ -88,7 +88,7 @@ created: "2026-05-23"
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Domain 36: 平台工程 (Platform Engineering)]]
+- [[domain-07-platform-engineering/README.md|Domain 07: 平台工程 (Platform Engineering)]]
 - 平台工程概述与成熟度模型
 - 内部开发者平台设计原则
 - Backstage 部署与配置

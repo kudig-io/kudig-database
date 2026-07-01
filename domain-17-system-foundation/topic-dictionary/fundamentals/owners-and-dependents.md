@@ -31,7 +31,7 @@ created: "2026-05-23"
 
 ## 概述
 
-在 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 中，一些对象是所有者（owners），而另一些对象是它们的依赖者（dependents）。例如，[[ReplicaSet|ReplicaSet]] 是一组 Pod 的所有者。所有权与标签和选择器机制不同，它帮助 Kubernetes 的不同部分避免干扰它们不控制的对象。
+在 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 中，一些对象是所有者（owners），而另一些对象是它们的依赖者（dependents）。例如，[[ReplicaSet|ReplicaSet]] 是一组 Pod 的所有者。所有权与标签和选择器机制不同，它帮助 Kubernetes 的不同部分避免干扰它们不控制的对象。
 
 ## 核心概念/原理
 
@@ -79,3 +79,9 @@ Kubernetes 在使用前台级联删除或孤立删除时也会向所有者资源
 ## 参考链接
 
 - [Owners and Dependents - Official Documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/owners-dependents/)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/annotations.md|注解]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/bpfman.md|bpfman eBPF 管理器]]

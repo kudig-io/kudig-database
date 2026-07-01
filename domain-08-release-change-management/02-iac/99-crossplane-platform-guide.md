@@ -84,6 +84,9 @@ created: "2026-05-23"
 
 ## 二、安装部署
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 helm repo add crossplane-stable https://charts.crossplane.io/stable
 helm install crossplane crossplane-stable/crossplane \
@@ -268,7 +271,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-24-infrastructure-as-code MOC
-- [[domain-08-release-change-management/README|Domain 24: 基础设施即代码 (Infrastructure as Code)]]
+- [[domain-08-release-change-management/README.md|Domain 08: 基础设施即代码 (Infrastructure as Code)]]
 - Domain-24 基础设施即代码 — 开源项目索引
 - Terraform企业级基础设施即代码实践
 - Ansible企业级自动化运维深度实践
@@ -282,3 +285,5 @@ spec:
 - 05-crossplane-enterprise-orchestration
 - 01-terraform-enterprise-iac
 - 02-ansible-enterprise-automation
+
+```

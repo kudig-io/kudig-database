@@ -444,6 +444,9 @@ kubectl top pods -n kube-system -l k8s-app=kube-dns
 
 ### 演示 2：DNS 解析验证
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 创建一个临时调试 Pod
 kubectl run dnsutils --image=registry.k8s.io/e2e-test-images/jessie-dnsutils:1.3 --command -- sleep infinity
@@ -491,6 +494,9 @@ nslookup kubernetes.default
 ```
 
 ### 演示 3：CoreDNS 性能调优
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 查看当前 Corefile
@@ -542,6 +548,10 @@ kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
 ```
 
 ### 演示 4：优化 Pod DNS 配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 方案 1: 调整 ndots（减少搜索域查询）
@@ -612,6 +622,10 @@ kubectl exec custom-dns -- cat /etc/resolv.conf
 
 ### 演示 5：NodeLocal DNSCache 部署
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 步骤 1: 下载 NodeLocal DNSCache YAML
 curl -sLO https://github.com/kubernetes/kubernetes/raw/master/cluster/addons/dns/nodelocaldns/nodelocaldns.yaml
@@ -660,6 +674,10 @@ kubectl exec -it dnsutils -- bash -c \
 
 **目标**：量化 ndots 参数对 DNS 性能的影响
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 创建默认 ndots:5 的 Pod
 cat <<EOF | kubectl apply -f -
@@ -702,6 +720,7 @@ kubectl exec ndots-1 -- nslookup www.google.com
 
 # 4. 使用 tcpdump 抓包验证
 # 在 CoreDNS Pod 上抓包查看查询量
+
 ```
 
 ---
@@ -782,6 +801,7 @@ CoreDNS
     ├── SERVFAIL → 检查 CoreDNS 日志和配置
     ├── 解析延迟高 → 检查 CPU/缓存/上游 DNS
     └── 搜索域问题 → 检查 ndots 和 resolv.conf
+
 ```
 
 ### DNS 排障速查表
@@ -833,4 +853,6 @@ CoreDNS
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
+
+```

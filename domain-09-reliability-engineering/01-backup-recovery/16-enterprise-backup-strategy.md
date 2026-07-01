@@ -88,9 +88,9 @@ k8s_versions:
 
 <!-- chunk: 🗃️ 备份架构设计 -->## 🗃️ 备份架构设计
 
-#<!-- chunk: 分层备份策略 -->## 分层备份策略
+## 分层备份策略
 
-##<!-- chunk: 1. etcd备份配置 -->## 1. etcd备份配置
+## 1. etcd备份配置
 ```yaml
 # etcd备份控制器
 apiVersion: apps/v1
@@ -135,7 +135,7 @@ spec:
           claimName: etcd-backup-pvc
 ```
 
-##<!-- chunk: 2. 应用数据备份 -->## 2. 应用数据备份
+## 2. 应用数据备份
 ```yaml
 # Velero备份配置
 apiVersion: velero.io/v1
@@ -182,9 +182,9 @@ spec:
           timeout: 300s
 ```
 
-#<!-- chunk: 备份策略管理 -->## 备份策略管理
+## 备份策略管理
 
-##<!-- chunk: 1. 备份策略定义 -->## 1. 备份策略定义
+## 1. 备份策略定义
 ```yaml
 # 备份策略CRD
 apiVersion: apiextensions.k8s.io/v1
@@ -236,7 +236,7 @@ spec:
     kind: BackupPolicy
 ```
 
-##<!-- chunk: 2. 备份控制器实现 -->## 2. 备份控制器实现
+## 2. 备份控制器实现
 ```python
 #!/usr/bin/env python3
 # 备份策略控制器
@@ -358,9 +358,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 🔧 备份验证和测试 -->## 🔧 备份验证和测试
 
-#<!-- chunk: 自动化验证机制 -->## 自动化验证机制
+## 自动化验证机制
 
-##<!-- chunk: 1. 备份完整性检查 -->## 1. 备份完整性检查
+## 1. 备份完整性检查
 ```yaml
 # 备份验证Job
 apiVersion: batch/v1
@@ -398,7 +398,7 @@ spec:
           restartPolicy: OnFailure
 ```
 
-##<!-- chunk: 2. 恢复测试框架 -->## 2. 恢复测试框架
+## 2. 恢复测试框架
 ```python
 #!/usr/bin/env python3
 # 恢复测试框架
@@ -502,9 +502,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 📊 备份监控和告警 -->## 📊 备份监控和告警
 
-#<!-- chunk: 备份状态监控 -->## 备份状态监控
+## 备份状态监控
 
-##<!-- chunk: 1. 备份指标收集 -->## 1. 备份指标收集
+## 1. 备份指标收集
 ```yaml
 # 备份监控指标
 apiVersion: monitoring.coreos.com/v1
@@ -522,7 +522,7 @@ spec:
     interval: 30s
 ```
 
-##<!-- chunk: 2. 备份告警规则 -->## 2. 备份告警规则
+## 2. 备份告警规则
 ```yaml
 # 备份告警配置
 apiVersion: monitoring.coreos.com/v1
@@ -555,7 +555,7 @@ spec:
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 备份策略配置 -->## 备份策略配置
+## 备份策略配置
 - [ ] 设计分层备份架构(etcd、应用、数据)
 - [ ] 配置自动化备份调度和执行
 - [ ] 实施备份加密和压缩
@@ -563,7 +563,7 @@ spec:
 - [ ] 配置多地备份存储
 - [ ] 建立备份验证机制
 
-#<!-- chunk: 恢复能力保障 -->## 恢复能力保障
+## 恢复能力保障
 - [ ] 制定详细的恢复流程文档
 - [ ] 定期进行恢复演练
 - [ ] 建立恢复时间目标(RTO)和恢复点目标(RPO)
@@ -571,7 +571,7 @@ spec:
 - [ ] 实施恢复自动化工具
 - [ ] 建立恢复验证机制
 
-#<!-- chunk: 监控和运维 -->## 监控和运维
+## 监控和运维
 - [ ] 部署备份状态监控系统
 - [ ] 配置备份告警和通知
 - [ ] 建立备份质量评估体系
@@ -588,9 +588,9 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -602,10 +602,10 @@ spec:
 
 ## Related
 
-- [[release-notes/13-backup-demo-video|13-backup-demo-video]]
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- 13-backup-demo-video
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 ## See Also
 

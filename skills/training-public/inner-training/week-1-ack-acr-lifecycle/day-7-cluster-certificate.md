@@ -489,4 +489,4 @@ ACK 托管版的管控面证书轮换是滚动进行的，不会导致服务中�
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

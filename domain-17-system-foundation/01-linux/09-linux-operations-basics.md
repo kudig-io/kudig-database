@@ -75,9 +75,13 @@ created: "2026-05-23"
 
 <!-- chunk: 生产环境运维最佳实践 -->## 生产环境运维最佳实践
 
-#<!-- chunk: 企业级系统基线配置 -->## 企业级系统基线配置
+## 企业级系统基线配置
 
-##<!-- chunk: 安全基线配置 -->## 安全基线配置
+## 安全基线配置
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 系统安全加固
 # 禁用不必要的服务
@@ -123,7 +127,7 @@ Defaults:opsuser !requiretty
 EOF
 ```
 
-##<!-- chunk: 性能基线配置 -->## 性能基线配置
+## 性能基线配置
 ```bash
 # 1. 文件系统优化
 # 为关键目录设置合适的挂载选项
@@ -165,9 +169,9 @@ ForwardToSyslog=no
 EOF
 ```
 
-#<!-- chunk: 监控告警体系 -->## 监控告警体系
+## 监控告警体系
 
-##<!-- chunk: 核心监控指标配置 -->## 核心监控指标配置
+## 核心监控指标配置
 ```yaml
 # Prometheus Node Exporter 告警规则
 groups:
@@ -214,7 +218,7 @@ groups:
       description: "1分钟负载 {{ $value }} 超过CPU核心数"
 ```
 
-##<!-- chunk: 自动化监控部署脚本 -->## 自动化监控部署脚本
+## 自动化监控部署脚本
 ```bash
 #!/bin/bash
 # 生产环境监控部署脚本
@@ -311,9 +315,9 @@ EOF
 #done
 ```
 
-#<!-- chunk: 应急响应流程 -->## 应急响应流程
+## 应急响应流程
 
-##<!-- chunk: 标准化故障处理SOP -->## 标准化故障处理SOP
+## 标准化故障处理SOP
 ```
 生产环境问题应急响应流程:
 
@@ -348,7 +352,7 @@ EOF
    └── 预防措施制定
 ```
 
-##<!-- chunk: 常见故障处理手册 -->## 常见故障处理手册
+## 常见故障处理手册
 ```bash
 # 系统问题快速诊断脚本
 cat > /usr/local/bin/system-diagnostic.sh << 'EOF'
@@ -402,7 +406,7 @@ chmod +x /usr/local/bin/system-diagnostic.sh
 
 ---
 
-#<!-- chunk: 常用监控命令 -->## 常用监控命令
+## 常用监控命令
 
 | 命令 | 用途 | 说明 |
 |------|------|------|
@@ -415,7 +419,7 @@ chmod +x /usr/local/bin/system-diagnostic.sh
 | `df -h` | 磁盘使用情况 | 报告文件系统磁盘空间使用情况 |
 | `du -sh` | 目录大小统计 | 估算文件空间使用情况 |
 
-#<!-- chunk: 系统性能指标 -->## 系统性能指标
+## 系统性能指标
 
 | 指标 | 正常范围 | 警告范围 | 危险范围 |
 |------|----------|----------|----------|
@@ -427,7 +431,10 @@ chmod +x /usr/local/bin/system-diagnostic.sh
 
 <!-- chunk: 进程和服务管理 -->## 进程和服务管理
 
-#<!-- chunk: 服务管理命令 -->## 服务管理命令
+## 服务管理命令
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # Systemd 服务管理
@@ -445,7 +452,7 @@ service <service> stop         # 停止服务
 chkconfig <service> on         # 设置开机自启
 ```
 
-#<!-- chunk: 进程管理 -->## 进程管理
+## 进程管理
 
 ```bash
 # 查看进程
@@ -470,7 +477,7 @@ nohup <command> &         # 后台运行命令，忽略挂断信号
 
 <!-- chunk: 网络运维基础 -->## 网络运维基础
 
-#<!-- chunk: 网络配置与诊断 -->## 网络配置与诊断
+## 网络配置与诊断
 
 ```bash
 # 网络接口管理
@@ -493,7 +500,10 @@ dig <domain>              # DNS查询
 nslookup <domain>         # DNS查询
 ```
 
-#<!-- chunk: 防火墙管理 -->## 防火墙管理
+## 防火墙管理
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 
 ```bash
 # iptables 基础命令
@@ -518,7 +528,7 @@ ufw enable/disable       # 启用/禁用防火墙
 
 <!-- chunk: 存储和文件系统运维 -->## 存储和文件系统运维
 
-#<!-- chunk: 文件系统管理 -->## 文件系统管理
+## 文件系统管理
 
 ```bash
 # 磁盘分区管理
@@ -542,7 +552,7 @@ mount -o ro /dev/sdX1 /mnt  # 只读挂载
 mount -a                 # 挂载fstab中的所有文件系统
 ```
 
-#<!-- chunk: 存储性能优化 -->## 存储性能优化
+## 存储性能优化
 
 | 优化项 | 参数 | 说明 |
 |--------|------|------|
@@ -553,7 +563,7 @@ mount -a                 # 挂载fstab中的所有文件系统
 
 <!-- chunk: 日志管理 -->## 日志管理
 
-#<!-- chunk: 系统日志 -->## 系统日志
+## 系统日志
 
 ```bash
 # 传统日志位置
@@ -572,7 +582,7 @@ journalctl -n 50          # 显示最近50行
 journalctl -b             # 仅显示本次启动日志
 ```
 
-#<!-- chunk: 日志轮转(logrotate) -->## 日志轮转(logrotate)
+## 日志轮转(logrotate)
 
 ```bash
 # logrotate 配置示例 (/etc/logrotate.d/myapp)
@@ -592,7 +602,7 @@ journalctl -b             # 仅显示本次启动日志
 
 <!-- chunk: 安全运维基础 -->## 安全运维基础
 
-#<!-- chunk: 用户和权限管理 -->## 用户和权限管理
+## 用户和权限管理
 
 ```bash
 # 用户管理
@@ -614,7 +624,7 @@ chmod g+s file             # 设置SGID
 chmod o+t file             # 设置Sticky Bit
 ```
 
-#<!-- chunk: SSH 安全配置 -->## SSH 安全配置
+## SSH 安全配置
 
 ```bash
 # /etc/ssh/sshd_config 安全配置
@@ -632,7 +642,7 @@ AllowGroups sshusers      # 允许特定组
 
 <!-- chunk: 故障排查基础 -->## 故障排查基础
 
-#<!-- chunk: 系统故障排查流程 -->## 系统故障排查流程
+## 系统故障排查流程
 
 1. **初步评估**
    - 检查系统整体状态
@@ -666,7 +676,7 @@ AllowGroups sshusers      # 允许特定组
    lsof -i :<port>
    ```
 
-#<!-- chunk: 常见故障诊断命令 -->## 常见故障诊断命令
+## 常见故障诊断命令
 
 ```bash
 # 内存泄漏检测
@@ -693,7 +703,7 @@ kill -USR1 <pid>          # 请求进程输出统计信息
 
 <!-- chunk: 备份与恢复 -->## 备份与恢复
 
-#<!-- chunk: 备份策略 -->## 备份策略
+## 备份策略
 
 | 备份类型 | 命令示例 | 说明 |
 |----------|----------|------|
@@ -702,7 +712,7 @@ kill -USR1 <pid>          # 请求进程输出统计信息
 | 差异备份 | `find /data -newer last_full_backup -print | tar -czf diff_backup.tar.gz -T -` | 自上次完整备份以来的更改 |
 | 数据库备份 | `mysqldump -u user -p db_name > backup.sql` | MySQL数据库备份 |
 
-#<!-- chunk: rsync 同步 -->## rsync 同步
+## rsync 同步
 
 ```bash
 # 基本同步命令
@@ -715,7 +725,7 @@ rsync --dry-run -avz /source/ /destination/  # 预览操作
 
 <!-- chunk: 自动化运维脚本 -->## 自动化运维脚本
 
-#<!-- chunk: 监控脚本示例 -->## 监控脚本示例
+## 监控脚本示例
 
 ```bash
 #!/bin/bash
@@ -753,7 +763,7 @@ check_services() {
 check_disk_usage && check_memory_usage && check_services
 ```
 
-#<!-- chunk: 定期任务(cron) -->## 定期任务(cron)
+## 定期任务(cron)
 
 ```bash
 # 编辑当前用户的cron任务
@@ -775,7 +785,7 @@ crontab -e
 
 <!-- chunk: 与 [[Kubernetes|Kubernetes]] 的关系 -->## 与 Kubernetes 的关系
 
-#<!-- chunk: 节点运维与 K8s 集群稳定性 -->## 节点运维与 K8s 集群稳定性
+## 节点运维与 K8s 集群稳定性
 
 Linux 运维技能直接关系到 Kubernetes 集群的稳定性。以下是关键的关联点：
 
@@ -788,7 +798,12 @@ Linux 运维技能直接关系到 Kubernetes 集群的稳定性。以下是关�
 | 安全加固 | Pod 安全策略、RBAC | 节点被入侵影响整个集群 |
 | 内核参数 | kubelet 系统要求 | 参数错误导致集群功能异常 |
 
-#<!-- chunk: 节点维护标准操作 -->## 节点维护标准操作
+## 节点维护标准操作
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 节点维护模式 (驱离 Pod)
@@ -810,7 +825,10 @@ kubectl get nodes
 kubectl describe node <node> | grep -A5 "Conditions"
 ```
 
-#<!-- chunk: 常见 K8s 节点级故障排查 -->## 常见 K8s 节点级故障排查
+## 常见 K8s 节点级故障排查
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
 ```bash
 # 节点 NotReady
@@ -822,7 +840,7 @@ journalctl -u kubelet -f
 # 节点磁盘压力
 df -h /var/lib/docker /var/lib/kubelet /var/lib/etcd
 docker system df
-docker system prune -a --volumes
+docker system prune -a --volumes  # ⚠️ 强制清理，可能杀运行中容器
 
 # 节点内存压力
 free -h
@@ -841,7 +859,7 @@ journalctl -u containerd -f        # 日志
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 生产环境运维清单 -->## 生产环境运维清单
+## 生产环境运维清单
 
 1. **定期检查系统健康**: 每日自动运行健康检查脚本，关注 CPU/内存/磁盘使用趋势
 2. **日志轮转配置**: 确保 /var/log 不会因为日志积累导致磁盘满，配置 logrotate 策略
@@ -858,7 +876,7 @@ journalctl -u containerd -f        # 日志
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 系统诊断快速命令 -->## 系统诊断快速命令
+## 系统诊断快速命令
 
 ```bash
 #!/bin/bash
@@ -903,7 +921,7 @@ echo "=== 诊断完成 ==="
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-17-system-foundation MOC
-- [[domain-17-system-foundation/README|Domain-14: Linux 基础知识体系]]
+- [[domain-17-system-foundation/README.md|Domain-14: Linux 基础知识体系]]
 - Domain-14 Linux — 开源项目索引
 - 01 - Linux 系统架构与内核深度解析：生产环境运维专家指南
 - 02 - Linux 进程管理与系统监控：生产环境运维专家实践
@@ -924,4 +942,6 @@ echo "=== 诊断完成 ==="
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+```

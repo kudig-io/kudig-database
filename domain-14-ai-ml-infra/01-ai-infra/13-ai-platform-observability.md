@@ -62,7 +62,7 @@ created: "2026-05-23"
 
 # AI平台可观测性体系
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/prometheus|Prometheus]]](https://prometheus.io/) | [[entities/opentelemetry|OpenTelemetry]]](https://opentelemetry.io/) | [Grafana](https://grafana.com/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/prometheus.md|Prometheus]]](https://prometheus.io/) | [[entities/opentelemetry.md|OpenTelemetry]]](https://opentelemetry.io/) | [Grafana](https://grafana.com/)
 
 <!-- chunk: 一、AI平台可观测性全景架构 -->
 ## 一、AI平台可观测性全景架构
@@ -459,15 +459,13 @@ data:
       
       # AI平台告警路由
       routes:
-      - match:
-          team: ai-platform
+      - matchers:
+        - team="ai-platform"
         receiver: ai-slack
         continue: true
-        
-      - match:
-          severity: critical
+      - matchers:
+        - severity="critical"
         receiver: ai-critical
-        
     receivers:
     - name: ai-slack
       slack_configs:
@@ -730,7 +728,7 @@ kubectl get pods -n ai-training -o wide | grep -E "(Pending|Evicted)"
 ## Obsidian 相关文档
 
 - domain-11-ai-infra KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
 - index.md|Domain-11 AI 基础设施 — 开源项目索引]]
 - AI 基础设施架构
 - 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
@@ -751,5 +749,5 @@ kubectl get pods -n ai-training -o wide | grep -E "(Pending|Evicted)"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]

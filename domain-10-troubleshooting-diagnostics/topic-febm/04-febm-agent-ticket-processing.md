@@ -91,7 +91,7 @@ k8s_versions:
 > **所属系列**: FEBM 法医鉴定循证方法论深度解析  
 > **关联主文档**: [FEBM 方法论深度解析](./febm-methodology-deep-dive.md)  
 > **上一章**: [第三章：FEBM 最佳实践](./03-febm-best-practices.md)  
-> **下一章**: [第五章：FEBM 体系建设方法论](./[[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology|05-febm-construction-methodology]].md)
+> **下一章**: [第五章：FEBM 体系建设方法论](./[[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|05-febm-construction-methodology]].md)
 
 ---
 
@@ -113,9 +113,9 @@ k8s_versions:
 
 <!-- chunk: 4.1 为什么工单处理需要 FEBM -->## 4.1 为什么工单处理需要 FEBM
 
-#<!-- chunk: 4.1.1 传统方法的根本性缺陷 -->## 4.1.1 传统方法的根本性缺陷
+## 4.1.1 传统方法的根本性缺陷
 
-##<!-- chunk: **方法一：规则匹配（Rule-Based Matching）** -->## **方法一：规则匹配（Rule-Based Matching）**
+## **方法一：规则匹配（Rule-Based Matching）**
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -150,7 +150,7 @@ Year 2023: 2,500 rules  → 处理 50% 工单（维护失控）
 Year 2024: ABANDONED   → 转向 FEBM
 ```
 
-##<!-- chunk: **方法二：FTA 故障树分析（Fault Tree Analysis）** -->## **方法二：FTA 故障树分析（Fault Tree Analysis）**
+## **方法二：FTA 故障树分析（Fault Tree Analysis）**
 
 ```
                       [服务不可用]
@@ -195,7 +195,7 @@ FEBM 发现的真相:
   根因: 连接池配置未随 HPA 扩容同步调整
 ```
 
-#<!-- chunk: 4.1.2 FEBM 的突破性创新 -->## 4.1.2 FEBM 的突破性创新
+## 4.1.2 FEBM 的突破性创新
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
@@ -266,7 +266,7 @@ FEBM 跨层证据链:
   根因: 新 Pod 的 IO 密集任务抢占了数据库的磁盘带宽
 ```
 
-#<!-- chunk: 4.1.3 三种方法的对比矩阵 -->## 4.1.3 三种方法的对比矩阵
+## 4.1.3 三种方法的对比矩阵
 
 | 维度 | 规则匹配 | FTA 故障树 | FEBM 证据方法 |
 |------|---------|-----------|--------------|
@@ -311,7 +311,7 @@ FEBM 跨层证据链:
 
 <!-- chunk: 4.2 FEBM 驱动的智能工单处理架构 -->## 4.2 FEBM 驱动的智能工单处理架构
 
-#<!-- chunk: 4.2.1 完整系统架构 -->## 4.2.1 完整系统架构
+## 4.2.1 完整系统架构
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────┐
@@ -410,9 +410,9 @@ FEBM 跨层证据链:
                           └───────────────────────────────┘
 ```
 
-#<!-- chunk: 4.2.2 数据流详细说明 -->## 4.2.2 数据流详细说明
+## 4.2.2 数据流详细说明
 
-##<!-- chunk: **阶段 1: 工单输入与语义理解** -->## **阶段 1: 工单输入与语义理解**
+## **阶段 1: 工单输入与语义理解**
 
 ```python
 # 工单输入示例
@@ -448,7 +448,7 @@ understanding = {
 }
 ```
 
-##<!-- chunk: **阶段 2: 并行证据收集** -->## **阶段 2: 并行证据收集**
+## **阶段 2: 并行证据收集**
 
 ```yaml
 # 证据收集任务并行化编排
@@ -540,7 +540,7 @@ execution:
   timeout: 20s  # 总超时
 ```
 
-##<!-- chunk: **阶段 3: 时间线重建** -->## **阶段 3: 时间线重建**
+## **阶段 3: 时间线重建**
 
 ```
 ┌────────────────────────────────────────────────────────────────────┐
@@ -583,7 +583,7 @@ execution:
 └────────────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: **阶段 4: 因果推理** -->## **阶段 4: 因果推理**
+## **阶段 4: 因果推理**
 
 ```python
 # 假设生成与验证
@@ -681,7 +681,7 @@ class CausalInferenceEngine:
         }
 ```
 
-##<!-- chunk: **阶段 5: 修复决策与执行** -->## **阶段 5: 修复决策与执行**
+## **阶段 5: 修复决策与执行**
 
 ```yaml
 # 修复计划生成
@@ -741,7 +741,7 @@ remediation_plan:
       escalate_to_human(senior_sre)
 ```
 
-#<!-- chunk: 4.2.3 与现有 ITSM 系统集成 -->## 4.2.3 与现有 ITSM 系统集成
+## 4.2.3 与现有 ITSM 系统集成
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -821,7 +821,7 @@ servicenow_integration:
 
 <!-- chunk: 4.3 FEBM Agent 的核心能力模型 -->## 4.3 FEBM Agent 的核心能力模型
 
-#<!-- chunk: 4.3.1 七大核心能力 -->## 4.3.1 七大核心能力
+## 4.3.1 七大核心能力
 
 ```
 ╔══════════════════════════════════════════════════════════════════╗
@@ -854,7 +854,7 @@ servicenow_integration:
 ╚══════════════════════════════════════════════════════════════════╝
 ```
 
-##<!-- chunk: **能力 1: 证据感知（Evidence Perception）** -->## **能力 1: 证据感知（Evidence Perception）**
+## **能力 1: 证据感知（Evidence Perception）**
 
 **定义**: 从多源异构数据中自动发现、提取和标准化证据的能力。
 
@@ -922,7 +922,7 @@ class Evidence:
 | **L4 - 全局感知** | 跨集群/跨云感知 | 统一采集多集群、多云环境的证据 |
 | **L5 - 认知感知** | 理解数据语义 | 使用 LLM 理解日志含义，提取隐含信息 |
 
-##<!-- chunk: **能力 2: 时间线构建（Timeline Construction）** -->## **能力 2: 时间线构建（Timeline Construction）**
+## **能力 2: 时间线构建（Timeline Construction）**
 
 **定义**: 将分散的证据按时间顺序组织，重建完整事件序列的能力。
 
@@ -1004,7 +1004,7 @@ class TimelineReconstructor:
 14:35:00 🔔 [ALERT] Alert fired → Ticket created
 ```
 
-##<!-- chunk: **能力 3: 模式识别（Pattern Recognition）** -->## **能力 3: 模式识别（Pattern Recognition）**
+## **能力 3: 模式识别（Pattern Recognition）**
 
 **定义**: 从历史案例中学习故障模式，快速识别已知问题的能力。
 
@@ -1104,7 +1104,7 @@ patterns:
     fix_success_rate: 0.89
 ```
 
-##<!-- chunk: **能力 4: 因果推理（Causal Inference）** -->## **能力 4: 因果推理（Causal Inference）**
+## **能力 4: 因果推理（Causal Inference）**
 
 **定义**: 从相关性中识别因果关系，区分根因与症状的能力。
 
@@ -1209,7 +1209,7 @@ class CausalInferenceEngine:
     [High Latency] ← 用户可见症状
 ```
 
-##<!-- chunk: **能力 5: 动态适应（Dynamic Adaptation）** -->## **能力 5: 动态适应（Dynamic Adaptation）**
+## **能力 5: 动态适应（Dynamic Adaptation）**
 
 **定义**: 根据系统演进自动调整分析策略的能力。
 
@@ -1246,7 +1246,7 @@ adaptation_scenarios:
       - action: "Add exclusion rules"
 ```
 
-##<!-- chunk: **能力 6: 可解释结论（Explainable Conclusions）** -->## **能力 6: 可解释结论（Explainable Conclusions）**
+## **能力 6: 可解释结论（Explainable Conclusions）**
 
 **定义**: 生成人类可理解的分析报告，支撑结论的能力。
 
@@ -1303,7 +1303,7 @@ adaptation_scenarios:
 └─────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: **能力 7: 持续学习（Continuous Learning）** -->## **能力 7: 持续学习（Continuous Learning）**
+## **能力 7: 持续学习（Continuous Learning）**
 
 **定义**: 从每个工单中提取知识，不断提升分析能力的能力。
 
@@ -1395,7 +1395,7 @@ class LearningMetrics:
 
 <!-- chunk: 4.4 FEBM Agent 工作流深度解析 -->## 4.4 FEBM Agent 工作流深度解析
 
-#<!-- chunk: 4.4.1 完整工作流程图 -->## 4.4.1 完整工作流程图
+## 4.4.1 完整工作流程图
 
 ```
 ┌───────────────────────────────────────────────────────────────────────┐
@@ -1626,7 +1626,7 @@ class LearningMetrics:
        • 管理层（如果影响重大）
 ```
 
-#<!-- chunk: 4.4.2 并行证据收集策略 -->## 4.4.2 并行证据收集策略
+## 4.4.2 并行证据收集策略
 
 **为什么需要并行化？**
 ```
@@ -1740,7 +1740,7 @@ class IntelligentParallelCollector:
         return results
 ```
 
-#<!-- chunk: 4.4.3 置信度评分机制 -->## 4.4.3 置信度评分机制
+## 4.4.3 置信度评分机制
 
 ```python
 class ConfidenceScorer:
@@ -1853,7 +1853,7 @@ class ConfidenceScorer:
 
 <!-- chunk: 4.5 FEBM vs. FTA 在工单 Agent 中的对比 -->## 4.5 FEBM vs. FTA 在工单 Agent 中的对比
 
-#<!-- chunk: 4.5.1 各类问题场景对比 -->## 4.5.1 各类问题场景对比
+## 4.5.1 各类问题场景对比
 
 | 问题场景 | FTA 方法 | FEBM 方法 | 推荐 | 原因 |
 |---------|----------|-----------|------|------|
@@ -1873,9 +1873,9 @@ class ConfidenceScorer:
 | **14. DNS 解析失败** | ✅ 有效 | ✅ 有效 | **FTA** | 原因有限，FTA 足够 |
 | **15. 证书过期** | ✅ 有效 | ✅ 有效 | **FTA** | 简单检查，FTA 即可 |
 
-#<!-- chunk: 4.5.2 详细案例分析 -->## 4.5.2 详细案例分析
+## 4.5.2 详细案例分析
 
-##<!-- chunk: **案例 1: CrashLoopBackOff（FTA 优势）** -->## **案例 1: CrashLoopBackOff（FTA 优势）**
+## **案例 1: CrashLoopBackOff（FTA 优势）**
 
 ```yaml
 # FTA 故障树（极快诊断）
@@ -1896,7 +1896,7 @@ CrashLoopBackOff:
 结论: FTA 完胜，无需 FEBM
 ```
 
-##<!-- chunk: **案例 2: 间歇性超时（FEBM 优势）** -->## **案例 2: 间歇性超时（FEBM 优势）**
+## **案例 2: 间歇性超时（FEBM 优势）**
 
 ```
 场景描述:
@@ -1932,7 +1932,7 @@ FEBM 分析:
     - FTA 没有"HPA + 连接池"的组合故障树
 ```
 
-##<!-- chunk: **案例 3: 性能退化（FEBM 优势）** -->## **案例 3: 性能退化（FEBM 优势）**
+## **案例 3: 性能退化（FEBM 优势）**
 
 ```
 场景: API 响应时间从 100ms 逐步增加到 2s，历时 3 天
@@ -1971,7 +1971,7 @@ FEBM 方法:
   修复: 添加索引后，延迟立即降至 50ms
 ```
 
-#<!-- chunk: 4.5.3 混合决策模型（推荐） -->## 4.5.3 混合决策模型（推荐）
+## 4.5.3 混合决策模型（推荐）
 
 ```python
 class HybridFaultDiagnosisAgent:
@@ -2077,9 +2077,9 @@ class HybridFaultDiagnosisAgent:
 
 <!-- chunk: 4.6 FEBM Agent 工单处理完整案例 -->## 4.6 FEBM Agent 工单处理完整案例
 
-#<!-- chunk: 案例 1: 间歇性超时 - HPA 扩容导致连接池耗尽 -->## 案例 1: 间歇性超时 - HPA 扩容导致连接池耗尽
+## 案例 1: 间歇性超时 - HPA 扩容导致连接池耗尽
 
-##<!-- chunk: **1.1 工单原始信息** -->## **1.1 工单原始信息**
+## **1.1 工单原始信息**
 
 ```yaml
 ticket:
@@ -2102,7 +2102,7 @@ ticket:
       cluster: "prod-us-west-2"
 ```
 
-##<!-- chunk: **1.2 FEBM Agent 处理过程（完整记录）** -->## **1.2 FEBM Agent 处理过程（完整记录）**
+## **1.2 FEBM Agent 处理过程（完整记录）**
 
 **阶段 1: 语义理解 (2秒)**
 ```json
@@ -2526,7 +2526,10 @@ validation_result_h2 = {
   └─────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 4.6.2 案例二：安全事件 - 容器逃逸检测与响应 -->## 4.6.2 案例二：安全事件 - 容器逃逸检测与响应
+## 4.6.2 案例二：安全事件 - 容器逃逸检测与响应
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
 ═══════════════════════════════════════════════════════════════
@@ -2584,7 +2587,7 @@ validation_result_h2 = {
   → 更新 RBAC 策略: 限制 exec 权限
 ```
 
-#<!-- chunk: 4.6.3 案例三：静默失败 - 数据一致性问题 -->## 4.6.3 案例三：静默失败 - 数据一致性问题
+## 4.6.3 案例三：静默失败 - 数据一致性问题
 
 ```
 ═══════════════════════════════════════════════════════════════
@@ -2628,7 +2631,7 @@ validation_result_h2 = {
 
 <!-- chunk: 4.7 人机协同分级模型 -->## 4.7 人机协同分级模型
 
-#<!-- chunk: 4.7.1 四级协同模型 -->## 4.7.1 四级协同模型
+## 4.7.1 四级协同模型
 
 | 问题级别 | FTA 特征 | Agent 角色 | 人类角色 | 自动化率 |
 |---------|---------|-----------|---------|---------|
@@ -2637,7 +2640,7 @@ validation_result_h2 = {
 | **复杂问题** | FTA 多条路径候选，置信度 < 0.7 | 数据采集+分析 | 决策和执行 | 30% |
 | **未知问题** | FTA 无匹配路径 | 尽力收集信息 | 全程主导 | 5% |
 
-#<!-- chunk: 4.7.2 升级机制 -->## 4.7.2 升级机制
+## 4.7.2 升级机制
 
 ```
 自动化处理失败 → 自动升级到人工
@@ -2714,7 +2717,7 @@ ChatOps 升级消息模板 (Slack):
 
 <!-- chunk: 4.9 规模化部署考量 -->## 4.9 规模化部署考量
 
-#<!-- chunk: 4.9.1 多集群 Agent 架构 -->## 4.9.1 多集群 Agent 架构
+## 4.9.1 多集群 Agent 架构
 
 ```
 ┌──────────────────────────────────────────────────────────┐
@@ -2743,7 +2746,7 @@ ChatOps 升级消息模板 (Slack):
 └──────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 4.9.2 资源开销管理 -->## 4.9.2 资源开销管理
+## 4.9.2 资源开销管理
 
 | 组件 | CPU 开销 | 内存开销 | 存储增长 |
 |------|---------|---------|---------|
@@ -2752,7 +2755,7 @@ ChatOps 升级消息模板 (Slack):
 | Agent 推理引擎 | 1-2 core | 2-4 GB | N/A |
 | 证据存储 | N/A | N/A | ~50GB/cluster/month |
 
-#<!-- chunk: 4.9.3 成本效益分析 -->## 4.9.3 成本效益分析
+## 4.9.3 成本效益分析
 
 ```
 FEBM Agent ROI 模型:
@@ -2782,21 +2785,21 @@ FEBM Agent ROI 模型:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-febm/MOC|topic-febm MOC]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/README|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations|第一章：FEBM 方法论原理与理论基础]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation|第二章:FEBM 技术实现体系]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices|第三章：FEBM 最佳实践]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology|第五章：FEBM 体系建设方法论]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution|第六章：未来演进方向]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix|第七章:附录]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive|法医鉴定循证方法论（FEBM）深度解析]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis|FTA-FEBM 联合诊断最佳实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/MOC.md|topic-febm MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md|第一章：FEBM 方法论原理与理论基础]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|第二章:FEBM 技术实现体系]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices.md|第三章：FEBM 最佳实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|第六章：未来演进方向]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix.md|第七章:附录]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation|02-febm-technical-implementation]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices|03-febm-best-practices]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology|05-febm-construction-methodology]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution|06-febm-future-evolution]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|02-febm-technical-implementation]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices.md|03-febm-best-practices]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|05-febm-construction-methodology]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|06-febm-future-evolution]]

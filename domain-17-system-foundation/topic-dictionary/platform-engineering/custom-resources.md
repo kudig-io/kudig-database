@@ -88,6 +88,9 @@ created: "2026-05-23"
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 查看 CRD
 kubectl get crd
@@ -104,7 +107,7 @@ kubectl delete crd <crd-name>
 
 ## 交叉引用
 
-- [扩展 Kubernetes API](./extending-[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|the-kubernetes-api]].md) — API 扩展总览
+- [扩展 Kubernetes API](./extending-[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|the-kubernetes-api]].md) — API 扩展总览
 - [Operator 模式](./operator-pattern.md) — CRD + Controller 最佳实践
 - [Admission Webhook](./admission-webhook-good-practices.md) — CR 验证与变更
 
@@ -114,4 +117,8 @@ kubectl delete crd <crd-name>
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-group.md|Api Group]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-version.md|Api Version]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/kind.md|Kind]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/manifest.md|Manifest]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/custom-resource.md|Custom Resource]]

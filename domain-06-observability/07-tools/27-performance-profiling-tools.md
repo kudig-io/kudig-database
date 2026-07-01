@@ -374,6 +374,9 @@ spec:
 
 ### 3. Gadget 完整使用手册
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # ==================== 安装与验证 ====================
 
@@ -1348,6 +1351,11 @@ cat results.json | jq '.summary | {
 
 ### 3. API Server 性能基准脚本
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # api-server-benchmark.sh
@@ -1378,7 +1386,7 @@ setup() {
 # 清理资源
 cleanup() {
     log "Cleaning up resources..."
-    kubectl delete namespace $NAMESPACE --ignore-not-found --wait=false
+    kubectl delete namespace $NAMESPACE --ignore-not-found --wait=false  # ⚠️ 不可逆：永久删除命名空间及全部资源
 }
 
 trap cleanup EXIT
@@ -2343,8 +2351,8 @@ spec:
 ## Obsidian 相关文档
 
 - domain-06-observability MOC
-- [[domain-06-observability/README|Observability Domain (可观测性领域)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-8 可观测性 — 开源项目索引]]
+- [[domain-06-observability/README.md|Observability Domain (可观测性领域)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
 - 03 - 日志收集架构详解 (Logging Architecture)
@@ -2357,9 +2365,9 @@ spec:
 
 ## Related
 
-- [[domain-02-workloads-applications/03-jvm-gc-container-tuning|03-jvm-gc-container-tuning]]
+- [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
 
-- [[domain-06-observability/README|返回目录]]- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-06-observability/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ## See Also
 

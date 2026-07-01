@@ -103,6 +103,9 @@ created: "2026-05-23"
 
 ### 1. GPU Operator安装(推荐)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 添加NVIDIA Helm仓库
 helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
@@ -855,7 +858,7 @@ sum(DCGM_FI_DEV_GPU_UTIL > 0) * 3 * 24
 ## Obsidian 相关文档
 
 - domain-11-ai-infra KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
 - index.md|Domain-11 AI 基础设施 — 开源项目索引]]
 - AI 基础设施架构
 - 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
@@ -876,4 +879,6 @@ sum(DCGM_FI_DEV_GPU_UTIL > 0) * 3 * 24
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
+
+```

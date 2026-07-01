@@ -100,7 +100,7 @@ OpenKruise 提供增强的 K8s 工作负载控制器。
 
 ### [[helm]] — 毕业项目（编排类）
 
-Helm 是 K8s 应用包管理器（详见 [[entities/cncf-orchestration|cncf-orchestration]]）。
+Helm 是 K8s 应用包管理器（详见 [[entities/cncf-orchestration.md|cncf-orchestration]]）。
 
 ### [[carvel]] — 沙箱项目
 
@@ -138,7 +138,7 @@ Backstage 是开源开发者门户。
 
 ### [[artifact-hub]] — 孵化项目
 
-[[Artifact Hub|Artifact Hub]] 是 CNCF 项目和 Helm Chart 的发现平台。
+Artifact Hub 是 CNCF 项目和 Helm Chart 的发现平台。
 
 ### [[score]] — 沙箱项目
 
@@ -172,9 +172,9 @@ Konveyor 帮助应用迁移到 K8s。
 
 ## 相关页面
 
-- [[entities/cncf-orchestration|cncf-orchestration]] — 编排与应用管理
-- [[entities/cncf-observability|cncf-observability]] — 可观测性
-- [[concepts/ci-cd-pipeline-patterns|ci-cd-pipeline-patterns]] — CI/CD 流水线模式
+- [[entities/cncf-orchestration.md|cncf-orchestration]] — 编排与应用管理
+- [[entities/cncf-observability.md|cncf-observability]] — 可观测性
+- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]] — CI/CD 流水线模式
 
 ## Related
 

@@ -31,6 +31,7 @@ prerequisites:
 - cloud-provider-basics
 - gpu-scheduling-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 高性能存储网络（RDMA / NVMe-oF）
@@ -180,7 +181,4 @@ nvme list-subsys
 - [WekaFS CSI Driver](https://docs.weka.io/appendix/weka-csi-plugin)
 
 ## Related
-
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

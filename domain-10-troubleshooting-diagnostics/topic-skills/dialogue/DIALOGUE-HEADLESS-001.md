@@ -7,6 +7,7 @@ severity: "medium"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 title: "StatefulSet Pod 域名解析失败 — 远程顾问对话脚本"
 category: dialogue
 tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
@@ -14,7 +15,7 @@ tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 
 # StatefulSet Pod 域名解析失败 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/headless-service|Headless Service]]
+> 对应概念：[[concepts/headless-service.md|Headless Service]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -127,6 +128,9 @@ kubectl get statefulset <sts-name> -n <namespace>
 
 **顾问**：请检查 Pod 内的 DNS 配置：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 kubectl exec <pod-name> -n <namespace> -- cat /etc/resolv.conf
 ```
@@ -152,6 +156,9 @@ kubectl get pod <pod-name> -n <namespace> -o yaml | grep -A 5 'dnsPolicy:'
 
 #### 方案 A：创建 Headless Service
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -172,6 +179,9 @@ EOF
 > **如果无法执行**：请手动创建 YAML 文件后执行 `kubectl apply -f headless-service.yaml`。注意 `clusterIP: None` 必须显式声明。
 
 #### 方案 B：重启 CoreDNS
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 kubectl rollout restart deployment/coredns -n kube-system
@@ -195,6 +205,9 @@ kubectl describe pod <sts-name>-0 -n <namespace>
 
 #### 方案 D：修正 DNS 配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch pod <pod-name> -n <namespace> --type='merge' -p='{"spec":{"dnsPolicy":"ClusterFirst","dnsConfig":{"searches":["<namespace>.svc.cluster.local","svc.cluster.local","cluster.local"]}}}'
 ```
@@ -202,6 +215,9 @@ kubectl patch pod <pod-name> -n <namespace> --type='merge' -p='{"spec":{"dnsPoli
 > **如果无法执行**：Pod 的 dnsPolicy 通常不可直接 patch。请修改 StatefulSet 的 Pod template 后重新部署。
 
 **验证修复**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 kubectl exec <pod-name> -n <namespace> -- nslookup <pod-name>.<svc-name>.<namespace>.svc.cluster.local
@@ -213,5 +229,5 @@ kubectl exec <pod-name> -n <namespace> -- nslookup <pod-name>.<svc-name>.<namesp
 
 ## 相关概念
 
-- [[concepts/headless-service|Headless Service]]
-- [[concepts/statefulset|StatefulSet]]
+- [[concepts/headless-service.md|Headless Service]]
+- [[concepts/statefulset.md|StatefulSet]]

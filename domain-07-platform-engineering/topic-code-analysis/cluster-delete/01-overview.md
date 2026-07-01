@@ -194,6 +194,7 @@ graph TD
     T --> X[CleanDir /etc/kubernetes]
     T --> Y[CleanDir /var/lib/kubelet]
     T --> Z[打印手动清理提示]
+
 ```
 
 ## 源码分析
@@ -359,13 +360,17 @@ func (r *Runner) Run(args []string) error {
 
 ### 删除方式对比
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     集群删除方式                                      │
 ├──────────────────────┬──────────────────────────────────────────────┤
-│ kubeadm reset        │ 单节点重置：停止 kubelet、删除容器/配置/证书   │
+│ kubeadm reset        │ 单节点重置：停止 kubelet、删除容器/配置/证书   │  # ⚠️ 清理节点所有 K8s 配置
 │ kubectl delete node  │ API 层删除：从 etcd 移除 Node 对象            │
-│ kubeadm reset --force│ 强制重置：跳过确认提示                        │
+│ kubeadm reset --force│ 强制重置：跳过确认提示                        │  # ⚠️ 清理节点所有 K8s 配置
 │ 手动清理             │ iptables、CNI、/var/lib/kubelet 等             │
 └──────────────────────┴──────────────────────────────────────────────┘
 ```
@@ -402,6 +407,7 @@ sequenceDiagram
     Cleanup-->>Workflow: OK
     Workflow-->>kubeadm: 完成
     kubeadm-->>User: 打印手动清理提示
+
 ```
 
 ## 使用场景
@@ -435,6 +441,12 @@ timeouts:
 
 ### 生产环境完整节点移除
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 步骤 1: 驱逐节点上的 Pod
 kubectl drain worker-1 --ignore-daemonsets --delete-emptydir-data
@@ -449,7 +461,7 @@ kubectl delete node worker-1
 # node "worker-1" deleted
 
 # 步骤 3: 在目标节点执行 reset
-kubeadm reset --force
+kubeadm reset --force  # ⚠️ 清理节点所有 K8s 配置
 # [reset] Reading configuration from the cluster...
 # [reset] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
 # [preflight] Running pre-flight checks
@@ -469,11 +481,14 @@ kubeadm reset --force
 # 步骤 4: 手动清理残留
 iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
 ipvsadm -C
-rm -rf /etc/cni/net.d
-rm -rf $HOME/.kube/config
+rm -rf /etc/cni/net.d  # ⚠️ 删除系统/数据文件
+rm -rf $HOME/.kube/config  # ⚠️ 删除系统/数据文件
 ```
 
 ### 仅移除 etcd 成员
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 
 ```bash
 # 查看当前 etcd 成员
@@ -503,13 +518,17 @@ ETCDCTL_API=3 etcdctl member remove 7c4c8d5d4f000003 \
 
 ### DryRun 模式
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
-kubeadm reset --dry-run
+kubeadm reset --dry-run  # ⚠️ 清理节点所有 K8s 配置
 # [dryrun] Would stop the kubelet service
 # [dryrun] Would unmount mounted directories in "/var/lib/kubelet"
 # [dryrun] Would remove Kubernetes-managed containers
 # [dryrun] Would delete contents of directories: [/etc/kubernetes/pki /etc/kubernetes/manifests]
 # [dryrun] Would delete files: [/etc/kubernetes/admin.conf /etc/kubernetes/kubelet.conf ...]
+
 ```
 
 ## 常见错误
@@ -536,7 +555,9 @@ kubeadm reset --dry-run
 ## Related
 
 - [[README|README]]
-- [[man/INSTALL|INSTALL]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux|linux]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[scripts/man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+
+```

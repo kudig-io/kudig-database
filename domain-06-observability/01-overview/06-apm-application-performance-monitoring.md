@@ -62,9 +62,9 @@ created: "2026-05-23"
 
 <!-- chunk: 🎯 APM架构设计 -->## 🎯 APM架构设计
 
-#<!-- chunk: 核心组件架构 -->## 核心组件架构
+## 核心组件架构
 
-##<!-- chunk: 1. OpenTelemetry采集层 -->## 1. OpenTelemetry采集层
+## 1. OpenTelemetry采集层
 ```yaml
 # OpenTelemetry Collector配置
 apiVersion: opentelemetry.io/v1alpha1
@@ -121,7 +121,7 @@ spec:
           exporters: [prometheus, logging]
 ```
 
-##<!-- chunk: 2. 应用埋点配置 -->## 2. 应用埋点配置
+## 2. 应用埋点配置
 ```yaml
 # Java应用OpenTelemetry配置
 apiVersion: v1
@@ -167,9 +167,9 @@ data:
 
 <!-- chunk: 📊 分布式追踪 -->## 📊 分布式追踪
 
-#<!-- chunk: Jaeger追踪配置 -->## Jaeger追踪配置
+## Jaeger追踪配置
 
-##<!-- chunk: 1. Jaeger Operator部署 -->## 1. Jaeger Operator部署
+## 1. Jaeger Operator部署
 ```yaml
 # Jaeger实例配置
 apiVersion: jaegertracing.io/v1
@@ -195,7 +195,7 @@ spec:
       nginx.ingress.kubernetes.io/auth-secret: jaeger-basic-auth
 ```
 
-##<!-- chunk: 2. 应用追踪埋点 -->## 2. 应用追踪埋点
+## 2. 应用追踪埋点
 ```java
 // Java应用追踪示例
 @RestController
@@ -234,9 +234,9 @@ public class UserController {
 }
 ```
 
-#<!-- chunk: 追踪数据采样 -->## 追踪数据采样
+## 追踪数据采样
 
-##<!-- chunk: 1. 智能采样策略 -->## 1. 智能采样策略
+## 1. 智能采样策略
 ```yaml
 # Tempo采样配置
 apiVersion: tempo.grafana.com/v1alpha1
@@ -267,7 +267,7 @@ spec:
         spans_per_second: 10
 ```
 
-##<!-- chunk: 2. 追踪数据过滤 -->## 2. 追踪数据过滤
+## 2. 追踪数据过滤
 ```yaml
 # 追踪数据过滤配置
 processors:
@@ -283,9 +283,9 @@ processors:
 
 <!-- chunk: 📈 性能指标监控 -->## 📈 性能指标监控
 
-#<!-- chunk: 应用指标收集 -->## 应用指标收集
+## 应用指标收集
 
-##<!-- chunk: 1. Micrometer集成 -->## 1. Micrometer集成
+## 1. Micrometer集成
 ```yaml
 # Spring Boot应用指标配置
 management:
@@ -307,7 +307,7 @@ management:
       environment: ${spring.profiles.active}
 ```
 
-##<!-- chunk: 2. 自定义业务指标 -->## 2. 自定义业务指标
+## 2. 自定义业务指标
 ```java
 // 自定义业务指标
 @Component
@@ -355,9 +355,9 @@ public class BusinessMetrics {
 }
 ```
 
-#<!-- chunk: 数据库性能监控 -->## 数据库性能监控
+## 数据库性能监控
 
-##<!-- chunk: 1. 数据库连接池监控 -->## 1. 数据库连接池监控
+## 1. 数据库连接池监控
 ```yaml
 # HikariCP监控配置
 spring:
@@ -374,7 +374,7 @@ management:
         descriptions: true
 ```
 
-##<!-- chunk: 2. SQL执行监控 -->## 2. SQL执行监控
+## 2. SQL执行监控
 ```java
 // SQL执行监控切面
 @Aspect
@@ -413,9 +413,9 @@ public class SqlMonitoringAspect {
 
 <!-- chunk: 🔍 异常监控告警 -->## 🔍 异常监控告警
 
-#<!-- chunk: 错误追踪配置 -->## 错误追踪配置
+## 错误追踪配置
 
-##<!-- chunk: 1. Sentry集成 -->## 1. Sentry集成
+## 1. Sentry集成
 ```yaml
 # Sentry配置
 sentry:
@@ -462,7 +462,7 @@ spec:
             memory: 512Mi
 ```
 
-##<!-- chunk: 2. 异常指标告警 -->## 2. 异常指标告警
+## 2. 异常指标告警
 ```yaml
 # 异常监控告警规则
 apiVersion: monitoring.coreos.com/v1
@@ -501,9 +501,9 @@ spec:
 
 <!-- chunk: 🎨 可视化展示 -->## 🎨 可视化展示
 
-#<!-- chunk: Grafana仪表板 -->## Grafana仪表板
+## Grafana仪表板
 
-##<!-- chunk: 1. 应用性能总览 -->## 1. 应用性能总览
+## 1. 应用性能总览
 ```json
 {
   "dashboard": {
@@ -564,7 +564,7 @@ spec:
 }
 ```
 
-##<!-- chunk: 2. 业务指标仪表板 -->## 2. 业务指标仪表板
+## 2. 业务指标仪表板
 ```json
 {
   "dashboard": {
@@ -605,9 +605,9 @@ spec:
 
 <!-- chunk: 🔧 性能调优 -->## 🔧 性能调优
 
-#<!-- chunk: 应用性能优化 -->## 应用性能优化
+## 应用性能优化
 
-##<!-- chunk: 1. JVM性能监控 -->## 1. JVM性能监控
+## 1. JVM性能监控
 ```yaml
 # JVM监控配置
 apiVersion: v1
@@ -630,7 +630,7 @@ data:
       attrNameSnakeCase: true
 ```
 
-##<!-- chunk: 2. 缓存性能监控 -->## 2. 缓存性能监控
+## 2. 缓存性能监控
 ```java
 // Redis缓存监控
 @Configuration
@@ -662,9 +662,9 @@ public class CacheMonitoringConfig {
 
 <!-- chunk: 🛡️ 安全与合规 -->## 🛡️ 安全与合规
 
-#<!-- chunk: 数据隐私保护 -->## 数据隐私保护
+## 数据隐私保护
 
-##<!-- chunk: 1. 敏感信息脱敏 -->## 1. 敏感信息脱敏
+## 1. 敏感信息脱敏
 ```java
 // 追踪数据脱敏
 @Component
@@ -693,7 +693,7 @@ public class TraceDataSanitizer {
 }
 ```
 
-##<!-- chunk: 2. 访问控制配置 -->## 2. 访问控制配置
+## 2. 访问控制配置
 ```yaml
 # APM工具访问控制
 apiVersion: networking.k8s.io/v1
@@ -722,7 +722,7 @@ spec:
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: APM平台建设 -->## APM平台建设
+## APM平台建设
 - [ ] 选择合适的APM工具链(OpenTelemetry/Jaeger/Tempo)
 - [ ] 部署分布式追踪基础设施
 - [ ] 集成应用性能指标收集
@@ -730,7 +730,7 @@ spec:
 - [ ] 建立可视化监控仪表板
 - [ ] 实施数据采样和存储策略
 
-#<!-- chunk: 应用集成 -->## 应用集成
+## 应用集成
 - [ ] 在关键应用中添加追踪埋点
 - [ ] 配置业务指标收集
 - [ ] 实施数据库和缓存性能监控
@@ -738,7 +738,7 @@ spec:
 - [ ] 配置安全和隐私保护措施
 - [ ] 建立性能基线和阈值
 
-#<!-- chunk: 运营维护 -->## 运营维护
+## 运营维护
 - [ ] 制定APM平台运维规范
 - [ ] 建立性能问题排查流程
 - [ ] 定期审查和优化监控配置
@@ -755,9 +755,9 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations KUDIG Database — Global MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -774,8 +774,8 @@ spec:
 - 07-zero-trust-security-architecture
 - 08-cis-benchmark-compliance-audit
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

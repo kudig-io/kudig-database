@@ -61,7 +61,7 @@ estimated_read_time: 240min
 related_domains:
   - domain-05-security-compliance
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-[[domain-02-workloads-applications/topic-functions/cluster-create/16-security|16-security]]-2
+  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-[[domain-02-workloads-applications/topic-functions/cluster-create/16-security.md|16-security]]-2
   - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
   - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
 ---
@@ -194,10 +194,6 @@ ServiceAccount 是 K8s 中 Pod 的身份标识。每个 Pod 都关联一个 Serv
 - **LimitRanger**: 确保资源请求在 LimitRange 范围内
 - **ResourceQuota**: 确保命名空间的资源配额不被超出
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 - **PodSecurity**: 实施 Pod 安全标准（替代已废弃的 PodSecurityPolicy）
 - **ValidatingAdmissionWebhook**: 调用外部 Webhook 进行验证（如 Kyverno）
 - **MutatingAdmissionWebhook**: 调用外部 Webhook 修改资源（如注入 Sidecar）
@@ -207,6 +203,10 @@ ServiceAccount 是 K8s 中 Pod 的身份标识。每个 Pod 都关联一个 Serv
 ## 实战演练
 
 ### 任务 1: ServiceAccount 实践 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 创建测试命名空间
@@ -255,6 +255,9 @@ kubectl exec -n rbac-test sa-test -- cat /var/run/secrets/kubernetes.io/servicea
 ```
 
 ### 任务 2: RBAC 配置实践 (1h)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 Role（命名空间级别权限）
@@ -337,6 +340,10 @@ echo "Can dev-sa create deployments? $(kubectl auth can-i create deployments --a
 
 ### 任务 3: 权限排查与审计 (30min)
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 查看当前用户的所有权限
 kubectl auth can-i --list
@@ -360,7 +367,7 @@ kubectl get clusterrolebindings | grep dev
 kubectl describe rolebinding dev-pod-reader -n rbac-test
 
 # 清理
-kubectl delete namespace rbac-test
+kubectl delete namespace rbac-test  # ⚠️ 不可逆：永久删除命名空间及全部资源
 kubectl delete clusterrole node-reader
 kubectl delete clusterrolebinding dev-node-reader
 ```

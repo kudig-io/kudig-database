@@ -731,14 +731,14 @@ groups:
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git|git]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting|01-gitops-devops-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting|02-tekton-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/04-backup-restore-troubleshooting|04-backup-restore-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting|01-gitops-devops-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting.md|01-gitops-devops-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting.md|02-tekton-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/04-backup-restore-troubleshooting.md|04-backup-restore-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting.md|01-gitops-devops-troubleshooting]]

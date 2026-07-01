@@ -102,4 +102,8 @@ kubectl get validatingwebhookconfigurations,mutatingwebhookconfigurations
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-group.md|Api Group]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-version.md|Api Version]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/kind.md|Kind]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/manifest.md|Manifest]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/custom-resource.md|Custom Resource]]

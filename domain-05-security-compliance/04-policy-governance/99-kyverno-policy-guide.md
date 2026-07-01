@@ -72,7 +72,7 @@ Kyverno 是专为 [[Kubernetes|Kubernetes]] 设计的策略引擎，以 CNCF 毕
 
 Kyverno 的价值在于将安全策略从人工审查转变为自动化执行。通过 K8s Admission Webhook 机制，Kyverno 在资源创建和修改时自动执行策略检查，拒绝不符合安全基线的资源。通过背景扫描，Kyverno 定期检查集群内现有资源的合规状态并生成策略报告。通过变异策略，Kyverno 可以自动修复不安全的配置。通过生成策略，Kyverno 可以在新命名空间创建时自动生成安全基础设施。通过镜像验证策略，Kyverno 可以确保只有经过签名验证的镜像才能部署。通过清理策略，Kyverno 可以定期清理过期的旧资源。这种全面的策略管理能力使 Kyverno 成为云原生安全基础设施的核心组件。
 
-#<!-- chunk: 威胁模型分析 -->## 威胁模型分析
+## 威胁模型分析
 
 策略引擎面临的威胁模型涵盖以下几个维度。首先是配置层面的威胁，包括特权容器逃逸、root 用户运行、不必要的 Linux capabilities、缺少资源限制等。这些配置缺陷可被攻击者直接利用，例如特权容器可以通过挂载宿主机文件系统实现容器逃逸，获取宿主机的完全控制权。以 root 运行的容器被入侵后，攻击者可以修改容器内的任意文件、安装恶意软件包、修改系统配置。
 
@@ -103,7 +103,7 @@ Kyverno 的价值在于将安全策略从人工审查转变为自动化执行。
 
 <!-- chunk: 二、架构设计 -->## 二、架构设计
 
-#<!-- chunk: 2.1 Kyverno 核心架构 -->## 2.1 Kyverno 核心架构
+## 2.1 Kyverno 核心架构
 
 Kyverno 的架构从 v1.11 开始采用多控制器模式，将不同职责拆分为独立的控制器，每个控制器可以独立扩展和升级。这种架构设计提高了系统的可靠性和可维护性，避免了单点问题。
 
@@ -174,7 +174,7 @@ graph TB
     style RPT fill:#f59e0b,stroke:#d97706,color:#fff
 ```
 
-#<!-- chunk: 2.2 策略处理流程 -->## 2.2 策略处理流程
+## 2.2 策略处理流程
 
 Kyverno 的策略处理流程设计为高性能和可扩展。当 API Server 接收到资源创建或修改请求后，通过 Admission Webhook 将请求转发给 Kyverno Admission Controller。Admission Controller 首先根据资源的类型、命名空间和标签快速匹配相关的 ClusterPolicy 和 Policy，跳过不相关的策略以提高性能。然后按照策略的优先级顺序依次执行验证、变异和镜像验证操作。验证策略检查资源是否符合安全基线，变异策略自动修复不安全的配置，镜像验证策略检查镜像的签名和摘要。最后将处理结果返回给 API Server，允许合规的资源创建，拒绝不合规的资源创建，或者返回变异后的资源配置。
 
@@ -184,9 +184,12 @@ Kyverno 的策略处理流程设计为高性能和可扩展。当 API Server 接
 
 <!-- chunk: 三、核心配置 -->## 三、核心配置
 
-#<!-- chunk: 3.1 Helm 生产级部署 -->## 3.1 Helm 生产级部署
+## 3.1 Helm 生产级部署
 
 生产环境的 Kyverno 部署需要考虑高可用性、资源管理和命名空间排除等因素。Admission Controller 至少需要三个副本以保证在节点问题时仍然可以处理准入请求。Background Controller 和 Reports Controller 各两个副本即可满足大多数场景的需求。资源请求和限制需要根据集群规模和策略数量进行调整。在大规模集群（500+ 节点）中，Admission Controller 的内存限制可能需要调高到 2Gi 以上。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add kyverno https://kyverno.github.io/kyverno/
@@ -204,7 +207,7 @@ helm install kyverno kyverno/kyverno \
   --version 3.3.0
 ```
 
-#<!-- chunk: 3.2 生产级 Values 配置 -->## 3.2 生产级 Values 配置
+## 3.2 生产级 Values 配置
 
 以下 Values 文件经过大规模生产环境验证，覆盖了资源管理、拓扑分布、命名空间排除等关键配置项。资源请求和限制需要根据集群规模和策略数量进行调整。在大规模集群（500+ 节点）中，Admission Controller 的内存限制可能需要调高到 2Gi 以上。
 
@@ -282,7 +285,7 @@ features:
     enabled: true
 ```
 
-#<!-- chunk: 3.3 Webhook 配置与排错 -->## 3.3 Webhook 配置与排错
+## 3.3 Webhook 配置与排错
 
 Kyverno 注册了以下 Webhook 到 K8s API Server，理解每个 Webhook 的作用有助于排查问题：
 
@@ -304,7 +307,7 @@ kubectl get validatingwebhookconfiguration kyverno-resource-validating-webhook-c
 
 <!-- chunk: 四、安全策略实战 -->## 四、安全策略实战
 
-#<!-- chunk: 4.1 Validate（验证策略） -->## 4.1 Validate（验证策略）
+## 4.1 Validate（验证策略）
 
 验证策略是最常用的策略类型。当资源不符合策略条件时，Kyverno 拒绝资源的创建或修改。以下策略覆盖了 Pod Security Standards 的核心要求，包括禁止 root 运行、禁止特权容器、要求只读文件系统、丢弃所有 Linux capabilities、以及强制设置资源限制。
 
@@ -442,7 +445,7 @@ spec:
                     value: ALL
 ```
 
-#<!-- chunk: 4.2 Mutate（变异策略） -->## 4.2 Mutate（变异策略）
+## 4.2 Mutate（变异策略）
 
 变异策略自动为资源添加安全配置，即使用户在提交时没有设置。这种「默认安全」的策略可以显著降低安全基线落地的阻力，因为开发团队不需要手动为每个工作负载配置 SecurityContext。
 
@@ -539,7 +542,7 @@ spec:
                   +(periodSeconds): 15
 ```
 
-#<!-- chunk: 4.3 Generate（生成策略） -->## 4.3 Generate（生成策略）
+## 4.3 Generate（生成策略）
 
 生成策略是新命名空间创建时的安全基础设施自动配置工具。在企业环境中，每个新命名空间都应该配备默认的网络策略（Default Deny Ingress/Egress）、资源配额、LimitRange 和 RBAC 配置。手动配置这些资源既耗时又容易遗漏，通过 Kyverno 的生成策略可以实现自动化。
 
@@ -670,7 +673,7 @@ spec:
                   memory: "64Mi"
 ```
 
-#<!-- chunk: 4.4 VerifyImages（镜像验证） -->## 4.4 VerifyImages（镜像验证）
+## 4.4 VerifyImages（镜像验证）
 
 镜像验证策略是供应链安全的关键环节。Kyverno 原生支持 cosign 签名验证和 Notary v2 验证，可以在准入阶段确保只有经过授权签名的镜像才能部署到集群。这有效防止了恶意镜像和未经验证的第三方镜像进入生产环境。
 
@@ -730,7 +733,7 @@ spec:
                       url: https://rekor.sigstore.dev
 ```
 
-#<!-- chunk: 4.5 CleanupPolicy（清理策略） -->## 4.5 CleanupPolicy（清理策略）
+## 4.5 CleanupPolicy（清理策略）
 
 清理策略是 Kyverno v1.11 引入的独特功能，允许通过 Cron 表达式定期清理集群中的过期资源。这在运维场景中非常有用——调试完成后遗留的临时 Pod、过期的 Job、旧的 ReplicaSet、以及不再使用的 ConfigMap 和 Secret 都可以通过清理策略自动回收。
 
@@ -799,7 +802,7 @@ spec:
 
 <!-- chunk: 五、合规与审计 -->## 五、合规与审计
 
-#<!-- chunk: 5.1 Pod Security Standards -->## 5.1 Pod Security Standards
+## 5.1 Pod Security Standards
 
 Kyverno 原生支持 K8s Pod Security Standards，可以一键强制执行 Restricted 配置文件。这是最简单的策略落地方式，推荐作为安全基线的起点。
 
@@ -826,7 +829,7 @@ spec:
           version: latest
 ```
 
-#<!-- chunk: 5.2 CIS Benchmark 策略集 -->## 5.2 CIS Benchmark 策略集
+## 5.2 CIS Benchmark 策略集
 
 以下策略映射到 CIS Kubernetes Benchmark 的关键控制项：
 
@@ -917,7 +920,7 @@ spec:
                   - value: "*password*|*secret*|*token*|*api_key*|*credential*"
 ```
 
-#<!-- chunk: 5.3 策略异常管理 -->## 5.3 策略异常管理
+## 5.3 策略异常管理
 
 在实际运维中，某些特殊资源可能需要豁免特定的安全策略。例如调试命名空间中的临时调试 Pod 可能需要以 root 用户运行，或者某些遗留应用暂时无法配置只读文件系统。Kyverno 通过 PolicyException 机制提供受控的策略豁免，确保豁免是显式声明和可审计的，而不是通过全局放行来绕过策略。
 
@@ -950,9 +953,12 @@ spec:
             - troubleshooting
 ```
 
-#<!-- chunk: 5.4 策略报告与可视化 -->## 5.4 策略报告与可视化
+## 5.4 策略报告与可视化
 
 Kyverno 自动为每个命名空间生成 PolicyReport，列出所有资源的合规状态。通过安装 Policy Reporter UI，可以获得直观的策略合规仪表板。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 kubectl get policyreport -A
@@ -966,7 +972,7 @@ helm install policy-reporter policy-reporter/policy-reporter \
   --set grafana.dashboard.enabled=true
 ```
 
-#<!-- chunk: 5.5 合规报告自动化脚本 -->## 5.5 合规报告自动化脚本
+## 5.5 合规报告自动化脚本
 
 ```bash
 #!/bin/bash
@@ -1021,7 +1027,7 @@ echo "Report generated: $REPORT_DIR/$DATE/report.md"
 
 <!-- chunk: 六、监控与告警 -->## 六、监控与告警
 
-#<!-- chunk: 6.1 Prometheus 监控 -->## 6.1 Prometheus 监控
+## 6.1 Prometheus 监控
 
 Kyverno 暴露了丰富的 Prometheus 指标用于监控策略执行情况。关键指标包括策略执行通过率和失败率、Webhook 处理延迟、以及规则匹配次数。建议为这些指标配置告警规则，当策略失败率异常升高或 Webhook 延迟过高时及时通知运维团队。
 
@@ -1081,7 +1087,7 @@ spec:
             description: "过多的策略例外可能削弱安全防护"
 ```
 
-#<!-- chunk: 6.2 Grafana Dashboard JSON -->## 6.2 Grafana Dashboard JSON
+## 6.2 Grafana Dashboard JSON
 
 ```json
 {
@@ -1172,7 +1178,7 @@ spec:
 | 监控告警 | 配置 Prometheus 告警规则 | 关注拒绝率和延迟 |
 | 定期审计 | 定期审查策略效果和例外 | 每月合规报告 |
 
-#<!-- chunk: 策略测试最佳实践 -->## 策略测试最佳实践
+## 策略测试最佳实践
 
 ```bash
 # 使用 Kyverno CLI 在本地测试策略
@@ -1188,7 +1194,7 @@ kyverno test ./policies/test/
 helm template mychart | kyverno apply policies/ --resource -
 ```
 
-#<!-- chunk: GitOps 集成 -->## GitOps 集成
+## GitOps 集成
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -1225,7 +1231,7 @@ spec:
 
 <!-- chunk: 八、故障排查 -->## 八、故障排查
 
-#<!-- chunk: 8.1 常见问题诊断 -->## 8.1 常见问题诊断
+## 8.1 常见问题诊断
 
 Kyverno 在生产环境中运行时可能遇到各种问题，本节总结了最常见的问题场景及其诊断方法。
 
@@ -1239,7 +1245,7 @@ Kyverno 在生产环境中运行时可能遇到各种问题，本节总结了最
 
 **镜像验证策略失败**：如果使用 cosign 密钥验证，检查公钥是否正确配置，以及镜像是否确实被签名。如果使用 Keyless 验证，检查 OIDC issuer 和 subject 配置是否匹配 CI/CD 管道的身份。可以使用 `cosign verify` 命令在本地验证镜像签名。
 
-#<!-- chunk: 8.2 诊断命令 -->## 8.2 诊断命令
+## 8.2 诊断命令
 
 ```bash
 # 查看策略详情和状态
@@ -1276,11 +1282,16 @@ kubectl describe policyexception breakglass-exception
 # 检查 CleanupPolicy 执行状态
 kubectl get clustercleanuppolicy
 kubectl logs -n kyverno -l app.kubernetes.io/component=cleanup-controller --tail=30
+
 ```
 
-#<!-- chunk: 8.3 紧急恢复 -->## 8.3 紧急恢复
+## 8.3 紧急恢复
 
 当 Kyverno 导致集群不可用时，可以通过以下步骤紧急恢复。首先，使用 kubectl patch 命令将所有 Kyverno Webhook 的 failurePolicy 改为 Ignore，使 API Server 在 Kyverno 不可达时仍然可以处理请求。然后，检查 Kyverno Pod 的状态和日志，定位问题根因。最后，修复问题后恢复 failurePolicy 为 Fail。
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 紧急恢复：将 Webhook failurePolicy 改为 Ignore
@@ -1296,10 +1307,10 @@ kubectl patch mutatingwebhookconfiguration kyverno-resource-mutating-webhook-cfg
   --type json -p='[{"op":"replace","path":"/webhooks/0/failurePolicy","value":"Fail"}]'
 
 # 紧急卸载（最后手段）
-helm uninstall kyverno -n kyverno
+helm uninstall kyverno -n kyverno  # ⚠️ 删除 release 及关联资源
 ```
 
-#<!-- chunk: 8.4 完整诊断脚本 -->## 8.4 完整诊断脚本
+## 8.4 完整诊断脚本
 
 ```bash
 #!/bin/bash
@@ -1359,8 +1370,8 @@ kubectl get clustercleanuppolicy -o wide
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
@@ -1378,4 +1389,5 @@ kubectl get clustercleanuppolicy -o wide
 - 99-opa-gatekeeper-policy-guide
 - 99-vault-k8s-secrets-guide
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
+```

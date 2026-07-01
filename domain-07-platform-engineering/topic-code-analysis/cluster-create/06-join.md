@@ -539,6 +539,12 @@ func (a *csrApproving) handleCSR(csr *certificatesv1.CertificateSigningRequest) 
 
 ### 从集群移除节点
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 在 control-plane 驱逐节点上的 Pod
 kubectl drain <node-name> --delete-emptydir-data --ignore-daemonsets
@@ -547,10 +553,10 @@ kubectl drain <node-name> --delete-emptydir-data --ignore-daemonsets
 kubectl delete node <node-name>
 
 # 3. 在被移除节点上执行 reset
-kubeadm reset --cleanup-iptables
+kubeadm reset --cleanup-iptables  # ⚠️ 清理节点所有 K8s 配置
 
 # 4. 如果是 control-plane 节点，还需要:
-#    - 移除 etcd 成员: etcdctl member remove <member-id>
+#    - 移除 etcd 成员: etcdctl member remove <member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
 #    - 删除 etcd 数据目录
 ETCDCTL_API=3 etcdctl member list \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -565,6 +571,9 @@ ETCDCTL_API=3 etcdctl member remove <id> \
 ```
 
 ### 自动化节点加入脚本
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
 
 ```bash
 #!/bin/bash
@@ -591,6 +600,7 @@ until kubectl get node $(hostname) -o jsonpath='{.status.conditions[?(@.type=="R
   sleep 5
 done
 echo "Node $(hostname) joined successfully!"
+
 ```
 
 ## 常见错误
@@ -702,8 +712,10 @@ current-context: default
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[entities/cni|cni]]
-- [[entities/containerd|containerd]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/cni.md|cni]]
+- [[entities/containerd.md|containerd]]
+
+```

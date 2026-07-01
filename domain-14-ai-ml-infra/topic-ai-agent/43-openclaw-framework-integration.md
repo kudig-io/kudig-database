@@ -94,7 +94,7 @@ OpenClaw 是一个以 **File-First（文件优先）架构** 为核心设计理�
 
 <!-- chunk: 1. OpenClaw 核心概念 -->## 1. OpenClaw 核心概念
 
-#<!-- chunk: 1.1 什么是 File-First 架构 -->## 1.1 什么是 File-First 架构
+## 1.1 什么是 File-First 架构
 
 ```
 传统 Agent 配置方式:
@@ -110,7 +110,7 @@ OpenClaw File-First 架构:
   Agent 运行时读取 → 热更新无需重启
 ```
 
-#<!-- chunk: 1.2 七大核心配置文件 -->## 1.2 七大核心配置文件
+## 1.2 七大核心配置文件
 
 | 文件 | 职责 | Harness 层映射 | 类比 |
 |------|------|---------------|------|
@@ -144,7 +144,7 @@ OpenClaw File-First 架构:
         └── SKILL.md
 ```
 
-#<!-- chunk: 1.3 File-First vs Harness Engineering 对比 -->## 1.3 File-First vs Harness Engineering 对比
+## 1.3 File-First vs Harness Engineering 对比
 
 ```
 设计理念对比:
@@ -175,7 +175,7 @@ Harness Engineering 六层架构:
 
 <!-- chunk: 2. 七大核心文件详解 -->## 2. 七大核心文件详解
 
-#<!-- chunk: 2.1 SOUL.md — 角色人格与绝对红线 -->## 2.1 SOUL.md — 角色人格与绝对红线
+## 2.1 SOUL.md — 角色人格与绝对红线
 
 **定位**：Agent 的"灵魂"，定义核心身份、价值观和不可逾越的行为边界。
 
@@ -202,7 +202,7 @@ SOUL.md 核心结构:
 
 **关键设计原则**：越具体越好。"要有帮助" 产生模糊行为，"每个诊断必须包含 Event 证据引用" 产生精确行为。
 
-#<!-- chunk: 2.2 USER.md — 用户画像与偏好 -->## 2.2 USER.md — 用户画像与偏好
+## 2.2 USER.md — 用户画像与偏好
 
 **定位**：写给 Agent 的"用户使用说明书"，让 Agent 理解服务对象。
 
@@ -230,7 +230,7 @@ USER.md 核心结构:
 
 **核心价值**：USER.md 是过滤"AI 味"最重要的一环——让 Agent 的输出风格匹配用户的实际期望。
 
-#<!-- chunk: 2.3 AGENTS.md — 行为规范与工作流 -->## 2.3 AGENTS.md — 行为规范与工作流
+## 2.3 AGENTS.md — 行为规范与工作流
 
 **定位**：Agent 的"日常行为配置"，定义任务处理流程和决策规范。
 
@@ -259,7 +259,7 @@ AGENTS.md 核心结构:
    - 引用必须标注来源
 ```
 
-#<!-- chunk: 2.4 TOOLS.md — 工具授权注册表 -->## 2.4 TOOLS.md — 工具授权注册表
+## 2.4 TOOLS.md — 工具授权注册表
 
 **定位**：定义 Agent 被授权使用的工具集、调用参数和安全规范。
 
@@ -287,7 +287,7 @@ TOOLS.md 核心结构:
 
 **与 Anthropic Agent Skill 的关系**：TOOLS.md 定义"能力"（Agent 能做什么），SKILL.md 定义"知识"（Agent 怎么做）。
 
-#<!-- chunk: 2.5 SKILL.md — 领域知识与 SOP -->## 2.5 SKILL.md — 领域知识与 SOP
+## 2.5 SKILL.md — 领域知识与 SOP
 
 **定位**：Agent 的"专业教科书"，将领域知识结构化为可执行的标准操作流程。
 
@@ -316,7 +316,7 @@ SKILL.md 核心结构:
 
 **与 Anthropic Agent Skill 的兼容**：OpenClaw 的 SKILL.md 与 Anthropic 提出的 Agent Skill 规范完全兼容，可直接注册到 AgentScope 的 Toolkit 中。
 
-#<!-- chunk: 2.6 MEMORY.md — 记忆系统与经验积累 -->## 2.6 MEMORY.md — 记忆系统与经验积累
+## 2.6 MEMORY.md — 记忆系统与经验积累
 
 **定位**：Agent 的"长期记忆"，存储跨会话的经验、模式和规则。
 
@@ -360,7 +360,7 @@ MEMORY.md 核心结构:
 短期记忆（下次会话时注入上下文）
 ```
 
-#<!-- chunk: 2.7 IDENTITY.md — 对外身份与品牌 -->## 2.7 IDENTITY.md — 对外身份与品牌
+## 2.7 IDENTITY.md — 对外身份与品牌
 
 **定位**：定义 Agent 的"外在形象"——名称、风格、问候语。
 
@@ -390,7 +390,7 @@ IDENTITY.md 核心结构:
 
 <!-- chunk: 3. OpenClaw × Harness Engineering 映射矩阵 -->## 3. OpenClaw × Harness Engineering 映射矩阵
 
-#<!-- chunk: 3.1 完整映射关系 -->## 3.1 完整映射关系
+## 3.1 完整映射关系
 
 ```
 OpenClaw 7 文件 × Harness 6 层 映射矩阵:
@@ -408,7 +408,7 @@ IDENTITY.md   │      │       │    ◐    │         │        │       
 ● = 主要映射    ◐ = 次要映射
 ```
 
-#<!-- chunk: 3.2 融合实现策略 -->## 3.2 融合实现策略
+## 3.2 融合实现策略
 
 ```python
 class HybridHarness:
@@ -453,7 +453,7 @@ class HybridHarness:
 
 <!-- chunk: 4. K8S 运维 Agent 实施方案 -->## 4. K8S 运维 Agent 实施方案
 
-#<!-- chunk: 4.1 工作区目录设计 -->## 4.1 工作区目录设计
+## 4.1 工作区目录设计
 
 本项目提供一套完整的 K8S 运维 Agent 工作区配置，位于 `openclaw-workspace/` 目录：
 
@@ -468,7 +468,7 @@ domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/
 └── IDENTITY.md     # 诊断助手品牌标识
 ```
 
-#<!-- chunk: 4.2 配置文件加载顺序 -->## 4.2 配置文件加载顺序
+## 4.2 配置文件加载顺序
 
 ```
 Agent 启动时的配置加载序列:
@@ -485,7 +485,7 @@ Agent 启动时的配置加载序列:
   SOUL.md → USER.md → MEMORY.md（最近 3 天） → AGENTS.md → 就绪
 ```
 
-#<!-- chunk: 4.3 与 AgentScope 集成 -->## 4.3 与 AgentScope 集成
+## 4.3 与 AgentScope 集成
 
 ```python
 import agentscope
@@ -528,7 +528,7 @@ agent = ReActAgent(
 
 <!-- chunk: 5. 与现有知识体系的关联 -->## 5. 与现有知识体系的关联
 
-#<!-- chunk: 5.1 OpenClaw 文件 × kudig-database 知识域映射 -->## 5.1 OpenClaw 文件 × kudig-database 知识域映射
+## 5.1 OpenClaw 文件 × kudig-database 知识域映射
 
 | OpenClaw 文件 | 关联的 kudig-database 知识域 | 知识注入方式 |
 |--------------|---------------------------|-------------|
@@ -540,7 +540,7 @@ agent = ReActAgent(
 | MEMORY.md | [domain-33-kubernetes-events](../domain-17-system-foundation/) | 事件模式知识库 |
 | IDENTITY.md | — | Agent 品牌独立设计 |
 
-#<!-- chunk: 5.2 与 Harness Engineering 系列的关联 -->## 5.2 与 Harness Engineering 系列的关联
+## 5.2 与 Harness Engineering 系列的关联
 
 | OpenClaw 机制 | 对应 Harness 文档 | 深度参考 |
 |--------------|------------------|---------|
@@ -556,7 +556,7 @@ agent = ReActAgent(
 
 <!-- chunk: 6. 最佳实践与反模式 -->## 6. 最佳实践与反模式
 
-#<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
 
 | 实践 | 说明 | 来源 |
 |------|------|------|
@@ -569,7 +569,7 @@ agent = ReActAgent(
 | **Git 版本管理** | 所有配置文件纳入 Git，变更可追溯 | DevOps 基础实践 |
 | **CI 质量门禁** | SOUL.md/SKILL.md 变更触发 Harness 回归测试 | Harness QA |
 
-#<!-- chunk: 反模式 -->## 反模式
+## 反模式
 
 | 反模式 | 问题 | 正确做法 |
 |--------|------|----------|
@@ -584,7 +584,7 @@ agent = ReActAgent(
 
 <!-- chunk: 7. File-First 架构的适用性分析 -->## 7. File-First 架构的适用性分析
 
-#<!-- chunk: 7.1 适用场景 -->## 7.1 适用场景
+## 7.1 适用场景
 
 | 场景 | 适合度 | 理由 |
 |------|--------|------|
@@ -594,7 +594,7 @@ agent = ReActAgent(
 | 企业级多租户平台 | 中 | 需要额外的动态加载和权限隔离机制 |
 | 高并发实时系统 | 低 | 文件读取 + 全量注入的 Token 开销过大 |
 
-#<!-- chunk: 7.2 与其他 Agent 框架的兼容性 -->## 7.2 与其他 Agent 框架的兼容性
+## 7.2 与其他 Agent 框架的兼容性
 
 | 框架 | 兼容方式 | 难度 |
 |------|---------|------|
@@ -608,7 +608,7 @@ agent = ReActAgent(
 
 <!-- chunk: 关联文档 -->## 关联文档
 
-#<!-- chunk: 子文档索引（各配置文件深度机制解析） -->## 子文档索引（各配置文件深度机制解析）
+## 子文档索引（各配置文件深度机制解析）
 
 | 序号 | 文档 | 内容概要 | 阅读耗时 |
 |:---:|------|---------|:-------:|
@@ -620,7 +620,7 @@ agent = ReActAgent(
 | 49 | [MEMORY.md 机制深度解析](./49-openclaw-memory-mechanism.md) | 三层记忆模型、新陈代谢机制、MemoryManager 代码、已知问题命中 | 25min |
 | 50 | [IDENTITY.md 机制深度解析](./50-openclaw-identity-mechanism.md) | SOUL/IDENTITY 分离设计、多渠道适配、IdentityManager 代码 | 20min |
 
-#<!-- chunk: Harness Engineering 关联 -->## Harness Engineering 关联
+## Harness Engineering 关联
 
 | 文档 | 关联内容 |
 |------|--------|
@@ -650,17 +650,17 @@ agent = ReActAgent(
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 

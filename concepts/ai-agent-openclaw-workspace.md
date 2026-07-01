@@ -278,7 +278,7 @@ cluster_profiles:
 
 ## Related
 
-- [[concepts/ai-agent-README|ai-agent-README]] — AI Agent 工程专题
+- [[concepts/ai-agent-README.md|ai-agent-README]] — AI Agent 工程专题
 - [[docker]] — Docker
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus

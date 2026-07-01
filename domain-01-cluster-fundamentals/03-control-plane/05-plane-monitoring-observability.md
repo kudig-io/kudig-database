@@ -1157,20 +1157,18 @@ route:
   receiver: 'default-receiver'
   
   routes:
-  - match:
-      severity: critical
-    receiver: 'pagerduty'
+  - matchers:
+    - severity="critical"
+    receiver: pagerduty
     group_wait: 10s
     group_interval: 1m
     repeat_interval: 30m
-    
-  - match:
-      severity: warning
-    receiver: 'slack-warning'
+  - matchers:
+    - severity="warning"
+    receiver: slack-warning
     group_wait: 1m
     group_interval: 10m
     repeat_interval: 2h
-
 receivers:
 - name: 'default-receiver'
   email_configs:
@@ -1179,7 +1177,7 @@ receivers:
 
 - name: 'pagerduty'
   pagerduty_configs:
-  - service_key: 'YOUR_PAGERDUTY_SERVICE_KEY'
+  - routing_key: 'YOUR_PAGERDUTY_SERVICE_KEY'
     send_resolved: true
 
 - name: 'slack-warning'
@@ -1457,6 +1455,9 @@ spec:
 ## 8. 性能基准建立
 
 ### 8.1 基准测试脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash
@@ -2045,7 +2046,7 @@ Level 5 - 自主运维 (Autonomous Operations)
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -2059,9 +2060,9 @@ Level 5 - 自主运维 (Autonomous Operations)
 
 ## Related
 
-- [[domain-02-workloads-applications/07-java-observability-kubernetes|07-java-observability-kubernetes]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-02-workloads-applications/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ## See Also
 

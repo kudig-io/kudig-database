@@ -61,7 +61,7 @@ created: "2026-05-23"
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-06-observability/00-open-source-projects-index|Domain-20 企业监控与告警 — 开源项目索引]] |  | observability, monitoring, alerting |  |
+| 1 | [[domain-06-observability/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]] |  | observability, monitoring, alerting |  |
 | 2 | Prometheus企业级监控系统深度实践 |  | observability, monitoring, alerting |  |
 | 3 | Grafana Enterprise Observability Platform 深度实践 |  | observability, monitoring, alerting |  |
 | 4 | OpenTelemetry分布式追踪与可观测性深度实践 |  | observability, monitoring, alerting |  |
@@ -125,9 +125,9 @@ graph TD
 
 ## See Also
 
-- [[domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-8|00-open-source-projects-index-from-domain-06-observability]]
-- [[domain-06-observability/98-merged-indexes/FINAL-QUALITY-ASSESSMENT|FINAL-QUALITY-ASSESSMENT]]
-- [[domain-06-observability/98-merged-indexes/MOC-from-domain-21|MOC-from-domain-06-observability]]
-- [[domain-06-observability/98-merged-indexes/MOC-from-domain-8|MOC-from-domain-06-observability]]
+- [[domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-8.md|00-open-source-projects-index-from-domain-06-observability]]
+- [[domain-06-observability/98-merged-indexes/FINAL-QUALITY-ASSESSMENT.md|FINAL-QUALITY-ASSESSMENT]]
+- [[domain-06-observability/98-merged-indexes/MOC-from-domain-21.md|MOC-from-domain-06-observability]]
+- [[domain-06-observability/98-merged-indexes/MOC-from-domain-8.md|MOC-from-domain-06-observability]]
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]

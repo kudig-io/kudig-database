@@ -5,6 +5,7 @@ tags: ["index", "domain-16-database-middleware", "navigation"]
 sources: ["auto-generated"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 ---
 
 # Domain 16 内容索引
@@ -59,5 +60,5 @@ updated: 2026-05-21
 - [[README-from-domain-28]] — README from domain 28
 
 ## 相关 Domain
-- [[domain-04-storage-data/98-merged-indexes/index|Domain 04 存储与数据 索引]]
-- [[domain-02-workloads-applications/98-merged-indexes/index|Domain 02 工作负载与应用 索引]]
+- [[domain-04-storage-data/98-merged-indexes/index.md|Domain 04 存储与数据 索引]]
+- [[domain-02-workloads-applications/98-merged-indexes/index.md|Domain 02 工作负载与应用 索引]]

@@ -109,7 +109,7 @@ yarn dev
 # 访问 http://localhost:3000
 ```
 
-#<!-- chunk: 生产级 app-config.yaml -->## 生产级 app-config.yaml
+## 生产级 app-config.yaml
 
 ```yaml
 app:
@@ -192,7 +192,7 @@ scaffolder:
 
 <!-- chunk: 三、Software Catalog 服务目录 -->## 三、Software Catalog 服务目录
 
-#<!-- chunk: 3.1 实体定义 (catalog-info.yaml) -->## 3.1 实体定义 (catalog-info.yaml)
+## 3.1 实体定义 (catalog-info.yaml)
 
 ```yaml
 apiVersion: backstage.io/v1alpha1
@@ -253,7 +253,7 @@ spec:
     $text: https://github.com/my-org/payment-service/blob/main/openapi.yaml
 ```
 
-#<!-- chunk: 3.2 自动发现配置 -->## 3.2 自动发现配置
+## 3.2 自动发现配置
 
 ```yaml
 # app-config.production.yaml
@@ -275,7 +275,7 @@ catalog:
 
 <!-- chunk: 四、Software Templates 自助服务 -->## 四、Software Templates 自助服务
 
-#<!-- chunk: 4.1 模板定义 -->## 4.1 模板定义
+## 4.1 模板定义
 
 ```yaml
 apiVersion: scaffolder.backstage.io/v1beta3
@@ -395,7 +395,7 @@ docs/
 
 <!-- chunk: 六、插件生态集成 -->## 六、插件生态集成
 
-#<!-- chunk: 6.1 核心生产插件 -->## 6.1 核心生产插件
+## 6.1 核心生产插件
 
 | 插件 | 作用 | 安装 |
 |:---|:---|:---|
@@ -416,7 +416,7 @@ docs/
 | `@backstage/plugin-airbrake` | 错误监控 | `yarn add` |
 | `@backstage/plugin-badges` | 状态徽章 | `yarn add` |
 
-#<!-- chunk: 6.2 K8s 插件配置 -->## 6.2 K8s 插件配置
+## 6.2 K8s 插件配置
 
 ```yaml
 # app-config.yaml
@@ -440,7 +440,7 @@ kubernetes:
 
 <!-- chunk: 七、认证与多租户 -->## 七、认证与多租户
 
-#<!-- chunk: 7.1 GitHub OAuth + 组织成员 -->## 7.1 GitHub OAuth + 组织成员
+## 7.1 GitHub OAuth + 组织成员
 
 ```typescript
 // packages/backend/src/plugins/auth.ts
@@ -463,7 +463,7 @@ export default createOAuthProviderIntegration({
 });
 ```
 
-#<!-- chunk: 7.2 权限框架 (Permissions Framework) -->## 7.2 权限框架 (Permissions Framework)
+## 7.2 权限框架 (Permissions Framework)
 
 ```yaml
 # app-config.yaml
@@ -500,7 +500,7 @@ export default createBackendModule({
 
 <!-- chunk: 八、生产部署 -->## 八、生产部署
 
-#<!-- chunk: 8.1 Docker 构建 -->## 8.1 Docker 构建
+## 8.1 Docker 构建
 
 ```dockerfile
 # packages/backend/Dockerfile
@@ -514,7 +514,10 @@ RUN tar xzf bundle.tar.gz && rm bundle.tar.gz
 CMD ["node", "packages/backend", "--config", "app-config.yaml", "--config", "app-config.production.yaml"]
 ```
 
-#<!-- chunk: 8.2 Helm 部署 -->## 8.2 Helm 部署
+## 8.2 Helm 部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 社区 Helm Chart (非官方)
@@ -526,7 +529,7 @@ helm install backstage backstage/backstage \
   --set postgresql.enabled=true
 ```
 
-#<!-- chunk: 8.3 生产 Checklist -->## 8.3 生产 Checklist
+## 8.3 生产 Checklist
 
 | 检查项 | 建议 |
 |:---|:---|
@@ -558,7 +561,7 @@ helm install backstage backstage/backstage \
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Domain 36: 平台工程 (Platform Engineering)]]
+- [[domain-07-platform-engineering/README.md|Domain 07: 平台工程 (Platform Engineering)]]
 - Domain-36 平台工程 — 开源项目索引
 - 平台工程概述与成熟度模型
 - 内部开发者平台设计原则

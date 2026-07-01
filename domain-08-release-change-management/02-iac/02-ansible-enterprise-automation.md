@@ -60,7 +60,7 @@ This document provides in-depth exploration of Ansible enterprise infrastructure
 
 <!-- chunk: 1. Ansible Architecture Deep Dive -->## 1. Ansible Architecture Deep Dive
 
-#<!-- chunk: 1.1 Core Component Architecture -->## 1.1 Core Component Architecture
+## 1.1 Core Component Architecture
 
 ```mermaid
 graph TB
@@ -100,7 +100,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 1.2 Execution Architecture -->## 1.2 Execution Architecture
+## 1.2 Execution Architecture
 
 ```yaml
 ansible_execution_model:
@@ -133,7 +133,7 @@ ansible_execution_model:
 
 <!-- chunk: 2. Enterprise Deployment Architecture -->## 2. Enterprise Deployment Architecture
 
-#<!-- chunk: 2.1 Ansible Tower/AWX Setup -->## 2.1 Ansible Tower/AWX Setup
+## 2.1 Ansible Tower/AWX Setup
 
 ```yaml
 # awx-deployment.yaml
@@ -235,7 +235,7 @@ data:
     }
 ```
 
-#<!-- chunk: 2.2 Dynamic Inventory Configuration -->## 2.2 Dynamic Inventory Configuration
+## 2.2 Dynamic Inventory Configuration
 
 ```yaml
 # dynamic-inventory-aws.yaml
@@ -265,7 +265,7 @@ compose:
 
 <!-- chunk: 3. Playbook Design Best Practices -->## 3. Playbook Design Best Practices
 
-#<!-- chunk: 3.1 Standard Playbook Structure -->## 3.1 Standard Playbook Structure
+## 3.1 Standard Playbook Structure
 
 ```yaml
 # site.yml - Main site playbook
@@ -309,7 +309,7 @@ compose:
         status_code: 200
 ```
 
-#<!-- chunk: 3.2 Role Structure Template -->## 3.2 Role Structure Template
+## 3.2 Role Structure Template
 
 ```bash
 # Standard role directory structure
@@ -348,7 +348,7 @@ roles/
         └── main.yml
 ```
 
-#<!-- chunk: 3.3 Advanced Playbook Example -->## 3.3 Advanced Playbook Example
+## 3.3 Advanced Playbook Example
 
 ```yaml
 # advanced-deployment.yml
@@ -523,7 +523,7 @@ roles/
 
 <!-- chunk: 4. Security and Compliance -->## 4. Security and Compliance
 
-#<!-- chunk: 4.1 Secure Configuration Management -->## 4.1 Secure Configuration Management
+## 4.1 Secure Configuration Management
 
 ```yaml
 # security-hardening.yml
@@ -653,7 +653,7 @@ roles/
       changed_when: false
 ```
 
-#<!-- chunk: 4.2 Compliance Automation -->## 4.2 Compliance Automation
+## 4.2 Compliance Automation
 
 ```yaml
 # compliance-checks.yml
@@ -716,7 +716,7 @@ roles/
 
 <!-- chunk: 5. Monitoring and Maintenance -->## 5. Monitoring and Maintenance
 
-#<!-- chunk: 5.1 Health Monitoring -->## 5.1 Health Monitoring
+## 5.1 Health Monitoring
 
 ```yaml
 # monitoring-setup.yml
@@ -796,7 +796,7 @@ roles/
         state: restarted
 ```
 
-#<!-- chunk: 5.2 Automated Maintenance -->## 5.2 Automated Maintenance
+## 5.2 Automated Maintenance
 
 ```yaml
 # automated-maintenance.yml
@@ -847,7 +847,7 @@ roles/
 
 <!-- chunk: 6. Performance Optimization -->## 6. Performance Optimization
 
-#<!-- chunk: 6.1 Ansible Configuration Tuning -->## 6.1 Ansible Configuration Tuning
+## 6.1 Ansible Configuration Tuning
 
 ```ini
 # ansible.cfg - Optimized configuration
@@ -890,7 +890,7 @@ connect_timeout = 30
 command_timeout = 30
 ```
 
-#<!-- chunk: 6.2 Parallel Execution Strategies -->## 6.2 Parallel Execution Strategies
+## 6.2 Parallel Execution Strategies
 
 ```yaml
 # parallel-execution.yml
@@ -941,37 +941,37 @@ command_timeout = 30
 
 <!-- chunk: 7. Best Practices and Guidelines -->## 7. Best Practices and Guidelines
 
-#<!-- chunk: 7.1 [[Infrastructure as Code|Infrastructure as Code]] Principles -->## 7.1 Infrastructure as Code Principles
+## 7.1 Infrastructure as Code Principles
 
 ```markdown
 <!-- chunk: 🏗️ Ansible Best Practices -->## 🏗️ Ansible Best Practices
 
-#<!-- chunk: 1. Code Organization -->## 1. Code Organization
+## 1. Code Organization
 - Use roles for reusable components
 - Implement proper directory structure
 - Separate variables from playbooks
 - Document all playbooks and roles
 
-#<!-- chunk: 2. Security Practices -->## 2. Security Practices
+## 2. Security Practices
 - Never store secrets in plain text
 - Use Ansible Vault for sensitive data
 - Implement least privilege access
 - Regular security audits and reviews
 
-#<!-- chunk: 3. Performance Optimization -->## 3. Performance Optimization
+## 3. Performance Optimization
 - Use appropriate forks setting
 - Enable pipelining for SSH
 - Implement fact caching
 - Use dynamic inventories
 
-#<!-- chunk: 4. Reliability and Testing -->## 4. Reliability and Testing
+## 4. Reliability and Testing
 - Implement comprehensive testing
 - Use check mode before applying changes
 - Implement proper error handling
 - Maintain rollback procedures
 ```
 
-#<!-- chunk: 7.2 Maintenance Guidelines -->## 7.2 Maintenance Guidelines
+## 7.2 Maintenance Guidelines
 
 ```yaml
 maintenance_schedule:
@@ -994,7 +994,7 @@ maintenance_schedule:
 
 <!-- chunk: 8. Future Trends and Evolution -->## 8. Future Trends and Evolution
 
-#<!-- chunk: 8.1 Automation Evolution -->## 8.1 Automation Evolution
+## 8.1 Automation Evolution
 
 ```yaml
 future_trends:
@@ -1031,7 +1031,7 @@ future_trends:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-24-infrastructure-as-code KUDIG Database — Global MOC
-- [[domain-08-release-change-management/README|[[Domain 24: 基础设施即代码 (Infrastructure as Code)|Domain 24: 基础设施即代码 (Infrastructure as Code)]]]]
+- [[domain-08-release-change-management/README.md|[[Domain 24: 基础设施即代码 (Infrastructure as Code)|Domain 24: 基础设施即代码 (Infrastructure as Code)]]]]
 - Domain-24 基础设施即代码 — 开源项目索引
 - Terraform企业级基础设施即代码实践
 - Pulumi Enterprise Infrastructure as Code Platform

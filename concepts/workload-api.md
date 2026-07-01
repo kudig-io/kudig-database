@@ -5,6 +5,7 @@ tags: ['api', 'workload', 'deployment', 'statefulset', 'visibility/public']
 sources: ["conceptss/"]
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 status: stub
 ---
 # Workload API
@@ -20,4 +21,4 @@ Workload API 是 Kubernetes 中用于管理工作负载的核心 API，包括 De
 
 ## 相关链接
 
-- [[concepts/kubernetes|Kubernetes]] — 核心概念
+- [[concepts/kubernetes.md|Kubernetes]] — 核心概念

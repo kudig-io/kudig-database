@@ -268,6 +268,9 @@ data:
 
 ### 1.3 插件工作机制
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # CoreDNS 插件链分析脚本
@@ -609,6 +612,9 @@ spec:
       value: "3"
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Pod DNS 测试脚本
 kubectl exec -it dns-test-pod -- sh -c '
@@ -644,6 +650,9 @@ nslookup $MY_IP
 ## 4. 故障诊断与排错
 
 ### 4.1 常见问题场景
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1222,8 +1231,8 @@ spec:
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic KUDIG Database — Global MOC
-- [[domain-03-networking-traffic/README|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]]]
-- [[domain-03-networking-traffic/00-core-k8s-networking/00-network-in-nutshell]]
+- [[domain-03-networking-traffic/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]]]
+- [[domain-03-networking-traffic/00-core-k8s-networking/00-network-in-nutshell.md|00 network in nutshell]]
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
 - 网络核心组件
@@ -1243,5 +1252,5 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]

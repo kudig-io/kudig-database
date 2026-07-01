@@ -362,16 +362,16 @@ ConfigMap/Secret 问题
 
 ## 相关链接
 
-- [[skills/troubleshoot-pod-issues|Pod 故障排查]]
-- [[skills/troubleshoot-node-issues|节点故障排查]]
+- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[skills/troubleshoot-node-issues.md|节点故障排查]]
 
 ## Related
 
-- [[entities/statefulset|statefulset]] — StatefulSet
+- [[entities/statefulset.md|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
-- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)
-- [[skills/deployment-fta|Deployment 异常故障树分析]] — Cross-reference
-- [[skills/statefulset-fta|StatefulSet 异常故障树分析]] — Cross-reference
-- [[skills/daemonset-fta|DaemonSet 异常故障树分析]] — Cross-reference
+- [[skills/deployment-fta.md|Deployment 异常故障树分析]] — Cross-reference
+- [[skills/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference
+- [[skills/daemonset-fta.md|DaemonSet 异常故障树分析]] — Cross-reference

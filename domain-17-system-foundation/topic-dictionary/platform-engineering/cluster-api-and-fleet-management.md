@@ -35,6 +35,7 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Cluster API 与集群舰队管理
@@ -101,7 +102,7 @@ spec:
 | 声明式集群创建 | 通过 YAML 定义即可在任意云上创建 K8s 集群 | 基础设施即代码 |
 | 自动修复 | MachineHealthCheck 自动检测并替换问题节点 | 提升可用性 |
 | 滚动升级 | 控制平面和工作节点支持无中断滚动升级 | 简化版本管理 |
-| 多集群 GitOps | 通过 Argo [[entities/flux|Flux]] 将应用同步到舰队中的所有集群 | 一致性交付 |
+| 多集群 GitOps | 通过 Argo [[entities/flux.md|Flux]] 将应用同步到舰队中的所有集群 | 一致性交付 |
 | 集群自动扩缩 | 根据负载自动调整工作节点数量 | 成本优化 |
 
 ### 集群分类策略
@@ -158,6 +159,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 查看所有管理的集群
 kubectl get clusters -A
@@ -210,6 +214,4 @@ kubectl annotate cluster <name> cluster.x-k8s.io/paused-
 - [Ajeet Singh Raina - Top 5 Trends Shaping Kubernetes in 2026](https://www.ajeetraina.com/top-5-trends-shaping-kubernetes-in-2026/)
 
 ## Related
-
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

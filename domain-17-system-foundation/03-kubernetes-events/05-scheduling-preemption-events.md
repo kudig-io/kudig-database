@@ -128,7 +128,7 @@ created: "2026-05-23"
 
 <!-- chunk: 📌 事件详细说明 -->## 📌 事件详细说明
 
-#<!-- chunk: `Scheduled` - 调度成功 -->## `Scheduled` - 调度成功
+## `Scheduled` - 调度成功
 
 | 属性 | 说明 |
 |:---|:---|
@@ -138,12 +138,12 @@ created: "2026-05-23"
 | **适用版本** | v1.0+ |
 | **生产频率** | 高频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 表示 Pod 已成功通过调度器的所有过滤和打分阶段,并被绑定到特定的节点上。这是 Pod 生命周期中最关键的事件之一,标志着 Pod 从 Pending 状态进入 Running 状态的转折点。调度器会记录调度决策的节点名称和调度耗时。
 
 此事件产生后,[[kubelet|kubelet]] 将接管 Pod 的后续生命周期管理,包括镜像拉取、容器创建、健康检查等。调度成功并不代表 Pod 一定能成功运行,后续仍可能因镜像拉取失败、资源限制等问题导致启动失败。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 ```yaml
 Type:    Normal
 Reason:  Scheduled
@@ -151,12 +151,12 @@ Message: Successfully assigned default/nginx-deployment-7d4c8c6d9f-xkj2m to node
 Source:  default-scheduler
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 - **资源预留**: 节点资源已被预留,影响后续 Pod 调度
 - **调度延迟**: 调度耗时影响 Pod 启动速度(正常 < 100ms)
 - **绑定不可逆**: 调度绑定后无法更改,除非删除 Pod 重建
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 1. **检查调度延迟**
    ```bash
    # 查看调度耗时(CreationTimestamp -> Scheduled Event)
@@ -183,7 +183,7 @@ Source:  default-scheduler
    kubectl get pod <pod-name> -o yaml | grep -A20 "nodeSelector\|affinity\|tolerations"
    ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 | 原因 | 解决方案 | 优先级 |
 |:----|:--------|:------|
 | 调度延迟过高 (>1s) | 检查调度器性能、减少节点数量、优化调度策略 | P2 |
@@ -193,7 +193,7 @@ Source:  default-scheduler
 
 ---
 
-#<!-- chunk: `FailedScheduling` - 调度失败 -->## `FailedScheduling` - 调度失败
+## `FailedScheduling` - 调度失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -203,12 +203,12 @@ Source:  default-scheduler
 | **适用版本** | v1.0+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 表示调度器无法为 Pod 找到满足所有调度约束的节点。这是生产环境中最常见的调度问题,原因多样且复杂,包括资源不足、节点污点、亲和性约束、拓扑分布约束、存储卷绑定失败、端口冲突等。Pod 将保持在 Pending 状态,调度器会持续重试(默认退避间隔 1s-60s)。
 
 调度失败的根本原因是**所有节点都无法通过 Filter 阶段的某个或多个过滤插件**。生产环境中需要根据失败原因快速定位问题,避免影响业务部署。调度器会记录每个节点的失败原因,格式为 `0/N nodes are available: <reason1>, <reason2>...`。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 ```yaml
 # 资源不足示例
 Type:    Warning
@@ -241,7 +241,7 @@ Reason:  FailedScheduling
 Message: 0/2 nodes are available: 2 node(s) didn't have free ports for the requested pod ports.
 ```
 
-##<!-- chunk: FailedScheduling 失败原因分类表 -->## FailedScheduling 失败原因分类表
+## FailedScheduling 失败原因分类表
 
 | 失败原因关键字 | 中文说明 | 原因分类 | 生产频率 | 解决难度 |
 |:-------------|:--------|:--------|:--------|:--------|
@@ -264,13 +264,13 @@ Message: 0/2 nodes are available: 2 node(s) didn't have free ports for the reque
 | `No preemption victims found` | 无法抢占低优先级 Pod | 抢占失败 | 低频 | 高 |
 | `didn't find available persistent volumes to bind` | 无可用 PV 绑定 | 存储绑定 | 中频 | 中 |
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 - **业务中断**: Pod 无法启动,影响服务可用性
 - **调度重试**: 调度器持续重试,消耗 API Server 资源
 - **资源浪费**: 资源配置不合理导致碎片化
 - **级联失败**: 亲和性约束可能导致关联 Pod 全部失败
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 1. **快速定位失败原因**
    ```bash
@@ -370,7 +370,7 @@ Message: 0/2 nodes are available: 2 node(s) didn't have free ports for the reque
    kubectl logs -n kube-system kube-scheduler-<node> --tail=500 | grep -A20 "Attempting to schedule pod"
    ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 原因 | 解决方案 | 优先级 | 影响范围 |
 |:----|:--------|:------|:--------|
@@ -392,7 +392,7 @@ Message: 0/2 nodes are available: 2 node(s) didn't have free ports for the reque
 
 ---
 
-#<!-- chunk: `Preempted` - 被抢占 -->## `Preempted` - 被抢占
+## `Preempted` - 被抢占
 
 | 属性 | 说明 |
 |:---|:---|
@@ -402,12 +402,12 @@ Message: 0/2 nodes are available: 2 node(s) didn't have free ports for the reque
 | **适用版本** | v1.11+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 表示当前 Pod 因集群资源不足,被更高优先级的 Pod 抢占而被驱逐。这是 Kubernetes 优先级调度机制的核心体现,确保高优先级工作负载(如生产业务)能够优先获得资源,牺牲低优先级工作负载(如批处理任务)。
 
 抢占流程:当高优先级 Pod 无法调度时,调度器会评估是否可以通过删除低优先级 Pod 来腾出资源。如果抢占可行,调度器会选择影响最小的节点和 Pod 组合,然后向 API Server 发送删除请求,被抢占的 Pod 会收到 Preempted 事件并进入 Terminating 状态。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 ```yaml
 Type:    Normal
 Reason:  Preempted
@@ -419,13 +419,13 @@ Reason:  Preempted
 Message: Preempted in order to admit pod "default/critical-app-abc123" on node "worker-node-5". This pod has priority 1000 while preempting pod has priority 10000.
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 - **服务中断**: 被抢占 Pod 立即终止,影响低优先级服务
 - **资源浪费**: 频繁抢占导致 Pod 重启,浪费计算资源
 - **调度延迟**: 被抢占 Pod 重新调度需要等待资源
 - **级联影响**: 可能触发多个 Pod 被抢占
 
-##<!-- chunk: PriorityClass 说明 -->## PriorityClass 说明
+## PriorityClass 说明
 
 Kubernetes 通过 PriorityClass 资源定义 Pod 优先级:
 
@@ -461,7 +461,7 @@ spec:
     image: nginx
 ```
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 1. **确认抢占详情**
    ```bash
@@ -505,7 +505,7 @@ spec:
    kubectl get pods -A -o json | jq '.items[] | select(.spec.priority > 5000) | {name: .metadata.name, resources: .spec.containers[].resources.requests}'
    ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 原因 | 解决方案 | 优先级 |
 |:----|:--------|:------|
@@ -518,7 +518,7 @@ spec:
 
 ---
 
-#<!-- chunk: `WaitingForGates` - 等待调度门 -->## `WaitingForGates` - 等待调度门
+## `WaitingForGates` - 等待调度门
 
 | 属性 | 说明 |
 |:---|:---|
@@ -528,12 +528,12 @@ spec:
 | **适用版本** | v1.26+ (Beta), v1.30 (GA) |
 | **生产频率** | 低频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 表示 Pod 因配置了 SchedulingGates 而暂停调度,等待外部控制器移除调度门后才会进入正常调度流程。这是 Kubernetes v1.26 引入的新特性,允许自定义调度控制逻辑,实现复杂的编排场景,如批量任务调度、多集群协调、配额检查等。
 
 SchedulingGates 提供了一种声明式的调度暂停机制,相比 PodScheduled Condition 更加简洁和灵活。Pod 创建时如果 `spec.schedulingGates` 非空,调度器会跳过该 Pod,直到所有 Gate 被移除。这允许外部系统在 Pod 调度前进行预处理,如资源预留、配额验证、依赖检查等。
 
-##<!-- chunk: SchedulingGates 说明 -->## SchedulingGates 说明
+## SchedulingGates 说明
 
 **基本用法**:
 ```yaml
@@ -558,6 +558,10 @@ spec:
 5. **审批流程**: 需要人工或自动审批后才调度
 
 **移除 SchedulingGate**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 使用 kubectl patch 移除特定 gate
 kubectl patch pod gated-pod --type=json -p='[{"op": "remove", "path": "/spec/schedulingGates/0"}]'
@@ -565,7 +569,7 @@ kubectl patch pod gated-pod --type=json -p='[{"op": "remove", "path": "/spec/sch
 # 使用 client-go 或自定义 controller 自动化管理
 ```
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 ```yaml
 Type:    Normal
 Reason:  WaitingForGates
@@ -577,12 +581,12 @@ Reason:  SchedulingGatesRemoved
 Message: All scheduling gates have been removed, proceeding with scheduling.
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 - **调度延迟**: Pod 处于 Pending 状态直到 Gate 移除
 - **控制器依赖**: 依赖外部控制器正确移除 Gate
 - **故障排查**: Gate 未移除会导致 Pod 永久 Pending
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 1. **检查调度门状态**
    ```bash
@@ -606,6 +610,10 @@ Message: All scheduling gates have been removed, proceeding with scheduling.
    ```
 
 3. **手动移除调度门**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
    ```bash
    # 查看当前 Gate 列表
    kubectl get pod <pod-name> -o json | jq '.spec.schedulingGates'
@@ -626,7 +634,7 @@ Message: All scheduling gates have been removed, proceeding with scheduling.
    kubectl api-resources | grep schedulinggates
    ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 原因 | 解决方案 | 优先级 |
 |:----|:--------|:------|
@@ -639,7 +647,7 @@ Message: All scheduling gates have been removed, proceeding with scheduling.
 
 ---
 
-#<!-- chunk: `TaintManagerEviction` - 污点驱逐 -->## `TaintManagerEviction` - 污点驱逐
+## `TaintManagerEviction` - 污点驱逐
 
 | 属性 | 说明 |
 |:---|:---|
@@ -649,12 +657,12 @@ Message: All scheduling gates have been removed, proceeding with scheduling.
 | **适用版本** | v1.13+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 表示 Pod 因节点污点(Taint)导致不再容忍(Tolerate)而被 Taint Manager 驱逐。这是 Kubernetes 节点状态异常处理机制的关键部分,当节点出现问题(如 NotReady、磁盘压力、内存压力)时,kube-controller-manager 的 node-controller 组件会为节点添加污点,并根据 Pod 的容忍配置决定是否驱逐。
 
 Taint Manager 是 node-controller 的一部分,负责监控节点污点变化,评估每个 Pod 的容忍时间(tolerationSeconds),并在超时后删除 Pod。这种机制比传统的节点故障检测更加灵活和可控,允许不同的 Pod 有不同的容忍策略。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 ```yaml
 # 节点 NotReady 驱逐
 Type:    Normal
@@ -672,7 +680,7 @@ Reason:  TaintManagerEviction
 Message: Marking for deletion Pod default/web-6f8d5c-4nk2p due to NoExecute taint node.kubernetes.io/memory-pressure:NoExecute on node worker-5
 ```
 
-##<!-- chunk: 常见节点污点类型 -->## 常见节点污点类型
+## 常见节点污点类型
 
 | 污点键名 | 污点效果 | 触发条件 | 默认容忍时间 | 生产频率 |
 |:--------|:--------|:--------|:-----------|:--------|
@@ -723,13 +731,13 @@ spec:
     image: nginx
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 - **服务中断**: Pod 被驱逐导致服务中断
 - **迁移延迟**: Pod 重新调度到其他节点需要时间
 - **级联影响**: 节点问题可能导致大量 Pod 同时驱逐
 - **数据丢失**: StatefulSet Pod 驱逐可能导致数据访问中断
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 1. **确认驱逐原因**
    ```bash
@@ -780,7 +788,7 @@ spec:
    # --node-monitor-grace-period=40s
    ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 原因 | 解决方案 | 优先级 |
 |:----|:--------|:------|
@@ -794,7 +802,7 @@ spec:
 
 ---
 
-#<!-- chunk: `FailedBinding` - 绑定失败 -->## `FailedBinding` - 绑定失败
+## `FailedBinding` - 绑定失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -804,12 +812,12 @@ spec:
 | **适用版本** | v1.0+ |
 | **生产频率** | 罕见 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 表示调度器已为 Pod 选择了目标节点,但在执行绑定操作(Binding)时失败。这是一个罕见但严重的错误,通常由于并发冲突、API Server 问题、权限问题或调度器内部错误导致。与 FailedScheduling 不同,FailedBinding 发生在调度决策完成后的绑定阶段。
 
 绑定流程:调度器通过 POST 请求向 API Server 发送 Binding 对象,将 Pod.spec.nodeName 设置为目标节点。如果绑定失败,Pod 会回退到 Pending 状态,调度器会重新调度。常见失败原因包括 Pod 已被其他调度器绑定、节点已被删除、API Server 不可达等。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 ```yaml
 # 绑定冲突示例
 Type:    Warning
@@ -827,13 +835,13 @@ Reason:  FailedBinding
 Message: Failed to bind pod: node "worker-node-99" not found
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 - **调度失败**: Pod 无法启动,持续 Pending
 - **资源浪费**: 调度决策完成但无法绑定,浪费调度资源
 - **并发冲突**: 可能反映集群并发控制问题
 - **API Server 问题**: 可能是 API Server 不稳定的信号
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 1. **确认绑定失败详情**
    ```bash
@@ -895,7 +903,7 @@ Message: Failed to bind pod: node "worker-node-99" not found
    kubectl auth can-i create pods/binding --as=system:kube-scheduler -n default
    ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 原因 | 解决方案 | 优先级 |
 |:----|:--------|:------|
@@ -911,7 +919,7 @@ Message: Failed to bind pod: node "worker-node-99" not found
 
 <!-- chunk: 🔍 跨场景排查建议 -->## 🔍 跨场景排查建议
 
-#<!-- chunk: 1. 大规模 Pod 调度失败排查 -->## 1. 大规模 Pod 调度失败排查
+## 1. 大规模 Pod 调度失败排查
 ```bash
 # 统计所有 Pending Pod 的失败原因分布
 kubectl get pods -A --field-selector status.phase=Pending -o json | \
@@ -926,7 +934,7 @@ kubectl describe nodes | grep -A5 "Allocated resources" | grep -E "cpu|memory" |
   awk '{sum+=$1; count++} END {print "平均资源使用率:", sum/count "%"}'
 ```
 
-#<!-- chunk: 2. 调度延迟分析 -->## 2. 调度延迟分析
+## 2. 调度延迟分析
 ```bash
 # 计算 Pod 调度耗时(创建到调度成功)
 kubectl get events --field-selector involvedObject.name=<pod-name> \
@@ -937,7 +945,7 @@ kubectl get events --field-selector involvedObject.name=<pod-name> \
     "\($start) -> \($end)"'
 ```
 
-#<!-- chunk: 3. 节点调度能力评估 -->## 3. 节点调度能力评估
+## 3. 节点调度能力评估
 ```bash
 # 计算每个节点还能调度多少 Pod(基于 CPU)
 kubectl get nodes -o json | jq -r '.items[] | 
@@ -951,19 +959,19 @@ kubectl get nodes -o json | jq -r '.items[] |
 
 <!-- chunk: 📚 相关文档交叉引用 -->## 📚 相关文档交叉引用
 
-#<!-- chunk: 相关事件文档 -->## 相关事件文档
+## 相关事件文档
 - **[01-pod-lifecycle-events.md](01-pod-lifecycle-events.md)** - Pod 创建、启动、删除事件
 - **[02-resource-management-events.md](02-resource-management-events.md)** - OOMKilled、Evicted 事件
 - **[03-volume-storage-events.md](03-volume-storage-events.md)** - PVC 绑定、挂载失败事件
 - **[06-node-lifecycle-events.md](06-node-lifecycle-events.md)** - 节点 NotReady、污点管理事件
 
-#<!-- chunk: 相关技术主题 -->## 相关技术主题
+## 相关技术主题
 - **[../domain-2-workload/10-pod-scheduling.md](../domain-2-workload/10-pod-scheduling.md)** - Pod 调度机制详解
 - **[../domain-4-storage/20-pv-pvc-dynamic-provisioning.md](../domain-4-storage/20-pv-pvc-dynamic-provisioning.md)** - 存储动态供应与绑定
 - **[../domain-3-cluster/15-node-management.md](../domain-3-cluster/15-node-management.md)** - 节点管理与污点配置
 - **[../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md)** - 调度器故障排查
 
-#<!-- chunk: 相关最佳实践 -->## 相关最佳实践
+## 相关最佳实践
 - **[../domain-17-system-foundation/topic-dictionary/01-operations-best-practices.md](../domain-17-system-foundation/topic-dictionary/01-operations-best-practices.md)** - 调度策略最佳实践
 - **[../domain-17-system-foundation/topic-dictionary/03-performance-tuning-expert.md](../domain-17-system-foundation/topic-dictionary/03-performance-tuning-expert.md)** - 调度性能优化
 
@@ -976,7 +984,7 @@ kubectl get nodes -o json | jq -r '.items[] |
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-33-kubernetes-events MOC
-- [[domain-17-system-foundation/README|Domain-33: Kubernetes Events 全域事件大全]]
+- [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
 - Domain-33 K8s 事件 — 开源项目索引
 - 01 - Kubernetes 事件系统架构与 API 参考
 - 02 - Pod 与容器生命周期事件
@@ -997,5 +1005,5 @@ kubectl get nodes -o json | jq -r '.items[] |
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]

@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 大规模集群性能挑战 -->## 1. 大规模集群性能挑战
 
-#<!-- chunk: 1.1 规模效应分析 -->## 1.1 规模效应分析
+## 1.1 规模效应分析
 
 ```yaml
 集群规模与性能关系:
@@ -91,7 +91,7 @@ created: "2026-05-23"
     - 复杂度: 极高
 ```
 
-#<!-- chunk: 1.2 核心性能瓶颈识别 -->## 1.2 核心性能瓶颈识别
+## 1.2 核心性能瓶颈识别
 
 ```bash
 # 性能瓶颈诊断命令
@@ -107,9 +107,9 @@ kubectl top nodes --sort-by=cpu
 
 <!-- chunk: 2. 控制平面优化策略 -->## 2. 控制平面优化策略
 
-#<!-- chunk: 2.1 API Server性能优化 -->## 2.1 API Server性能优化
+## 2.1 API Server性能优化
 
-##<!-- chunk: 请求处理优化 -->## 请求处理优化
+## 请求处理优化
 ```yaml
 API Server配置优化:
   请求限流配置:
@@ -125,7 +125,7 @@ API Server配置优化:
     --aggregator-available-versions-cache-ttl=10s
 ```
 
-##<!-- chunk: 资源对象优化 -->## 资源对象优化
+## 资源对象优化
 ```bash
 # 对象规模控制最佳实践
 # 1. 限制单个命名空间对象数量
@@ -136,9 +136,9 @@ kubectl get all -n production | wc -l  # 应该 < 1000
 # 单个对象大小建议 < 1MB
 ```
 
-#<!-- chunk: 2.2 etcd性能深度优化 -->## 2.2 etcd性能深度优化
+## 2.2 etcd性能深度优化
 
-##<!-- chunk: 存储引擎优化 -->## 存储引擎优化
+## 存储引擎优化
 ```yaml
 etcd配置优化:
   存储配置:
@@ -158,7 +158,7 @@ etcd配置优化:
     --grpc-keepalive-timeout=10s
 ```
 
-##<!-- chunk: 硬件和部署优化 -->## 硬件和部署优化
+## 硬件和部署优化
 ```bash
 # etcd节点硬件要求 (2000+节点集群)
 CPU: 16核以上
@@ -172,9 +172,9 @@ CPU: 16核以上
 # 跨可用区部署确保高可用
 ```
 
-#<!-- chunk: 2.3 调度器性能优化 -->## 2.3 调度器性能优化
+## 2.3 调度器性能优化
 
-##<!-- chunk: 调度算法优化 -->## 调度算法优化
+## 调度算法优化
 ```yaml
 调度器配置优化:
   并发调度配置:
@@ -193,7 +193,7 @@ CPU: 16核以上
     percentageOfNodesToScore: 5
 ```
 
-##<!-- chunk: 自定义调度器 -->## 自定义调度器
+## 自定义调度器
 ```go
 // 自定义调度器示例 (Go)
 type CustomScheduler struct {
@@ -211,9 +211,9 @@ func (s *CustomScheduler) Schedule() {
 
 <!-- chunk: 3. 网络性能优化 -->## 3. 网络性能优化
 
-#<!-- chunk: 3.1 CNI插件选择和优化 -->## 3.1 CNI插件选择和优化
+## 3.1 CNI插件选择和优化
 
-##<!-- chunk: 高性能CNI插件对比 -->## 高性能CNI插件对比
+## 高性能CNI插件对比
 ```yaml
 CNI插件性能对比 (2000节点集群):
   Cilium:
@@ -235,7 +235,7 @@ CNI插件性能对比 (2000节点集群):
     特性: 简单易用
 ```
 
-##<!-- chunk: Cilium eBPF优化配置 -->## Cilium eBPF优化配置
+## Cilium eBPF优化配置
 ```yaml
 # Cilium高性能配置
 apiVersion: cilium.io/v2
@@ -253,9 +253,9 @@ spec:
   bpf-ct-global-any-max: 262144
 ```
 
-#<!-- chunk: 3.2 服务发现优化 -->## 3.2 服务发现优化
+## 3.2 服务发现优化
 
-##<!-- chunk: CoreDNS性能优化 -->## CoreDNS性能优化
+## CoreDNS性能优化
 ```yaml
 # CoreDNS高性能配置
 apiVersion: v1
@@ -292,7 +292,7 @@ data:
     }
 ```
 
-##<!-- chunk: DNS缓存优化 -->## DNS缓存优化
+## DNS缓存优化
 ```yaml
 # NodeLocal DNSCache部署
 apiVersion: apps/v1
@@ -318,9 +318,9 @@ spec:
 
 <!-- chunk: 4. 存储性能优化 -->## 4. 存储性能优化
 
-#<!-- chunk: 4.1 CSI驱动优化 -->## 4.1 CSI驱动优化
+## 4.1 CSI驱动优化
 
-##<!-- chunk: 高性能存储类配置 -->## 高性能存储类配置
+## 高性能存储类配置
 ```yaml
 # 高性能SSD存储类
 apiVersion: storage.k8s.io/v1
@@ -340,7 +340,11 @@ mountOptions:
   - noatime  # 减少访问时间更新
 ```
 
-##<!-- chunk: 存储性能监控 -->## 存储性能监控
+## 存储性能监控
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 存储性能指标收集
 # 1. PVC使用率监控
@@ -353,7 +357,7 @@ kubectl exec -it <pod> -- iostat -x 1
 curl http://<csi-driver-metrics-endpoint>/metrics | grep csi
 ```
 
-#<!-- chunk: 4.2 本地存储优化 -->## 4.2 本地存储优化
+## 4.2 本地存储优化
 
 ```yaml
 # Local PV配置优化
@@ -382,9 +386,9 @@ spec:
 
 <!-- chunk: 5. 工作负载性能优化 -->## 5. 工作负载性能优化
 
-#<!-- chunk: 5.1 Pod启动优化 -->## 5.1 Pod启动优化
+## 5.1 Pod启动优化
 
-##<!-- chunk: 镜像优化策略 -->## 镜像优化策略
+## 镜像优化策略
 ```dockerfile
 # 高性能镜像构建示例
 FROM alpine:latest
@@ -395,7 +399,7 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD curl -f http://localhost:8080/health || exit 1
 ```
 
-##<!-- chunk: 资源请求优化 -->## 资源请求优化
+## 资源请求优化
 ```yaml
 # 高性能Pod配置
 apiVersion: v1
@@ -426,9 +430,9 @@ spec:
           resource: limits.cpu
 ```
 
-#<!-- chunk: 5.2 应用性能调优 -->## 5.2 应用性能调优
+## 5.2 应用性能调优
 
-##<!-- chunk: JVM应用优化 -->## JVM应用优化
+## JVM应用优化
 ```yaml
 # Java应用性能优化配置
 apiVersion: apps/v1
@@ -453,7 +457,7 @@ spec:
 
 <!-- chunk: 6. 监控和诊断工具 -->## 6. 监控和诊断工具
 
-#<!-- chunk: 6.1 性能监控指标体系 -->## 6.1 性能监控指标体系
+## 6.1 性能监控指标体系
 
 ```yaml
 核心性能指标:
@@ -474,7 +478,10 @@ spec:
     - 应用响应时间 (p99 < 500ms)
 ```
 
-#<!-- chunk: 6.2 性能诊断工具链 -->## 6.2 性能诊断工具链
+## 6.2 性能诊断工具链
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 性能诊断工具集
@@ -495,7 +502,7 @@ kubectl get --raw /metrics | grep apiserver
 
 <!-- chunk: 7. 实际案例分析 -->## 7. 实际案例分析
 
-#<!-- chunk: 7.1 案例一：5000节点集群优化 -->## 7.1 案例一：5000节点集群优化
+## 7.1 案例一：5000节点集群优化
 
 ```yaml
 优化前性能指标:
@@ -517,7 +524,7 @@ kubectl get --raw /metrics | grep apiserver
   存储IOPS: 读15000/写8000 (改善200%)
 ```
 
-#<!-- chunk: 7.2 案例二：大规模批处理作业优化 -->## 7.2 案例二：大规模批处理作业优化
+## 7.2 案例二：大规模批处理作业优化
 
 ```bash
 # 批处理作业性能优化
@@ -550,7 +557,7 @@ spec:
 
 <!-- chunk: 8. 最佳实践总结 -->## 8. 最佳实践总结
 
-#<!-- chunk: 8.1 性能优化原则 -->## 8.1 性能优化原则
+## 8.1 性能优化原则
 
 ```markdown
 <!-- chunk: 🔑 核心优化原则 -->## 🔑 核心优化原则
@@ -562,7 +569,7 @@ spec:
 5. **监控驱动** - 基于监控数据做决策
 ```
 
-#<!-- chunk: 8.2 优化检查清单 -->## 8.2 优化检查清单
+## 8.2 优化检查清单
 
 ```yaml
 性能优化检查清单:
@@ -601,7 +608,7 @@ spec:
 
 > **更新时间**: 2026-03-03 | 涵盖 In-Place Resize (1.33 Beta)、Streaming List API、DRA 大规模调度影响
 
-#<!-- chunk: 9.1 In-Place Pod Vertical Scaling (K8s 1.33 Beta) -->## 9.1 In-Place Pod Vertical Scaling (K8s 1.33 Beta)
+## 9.1 In-Place Pod Vertical Scaling (K8s 1.33 Beta)
 
 ```yaml
 原地垂直扩缩容:
@@ -626,7 +633,7 @@ spec:
     - 有状态服务（数据库/缓存）可在线扩容，消除运维窗口
 ```
 
-##<!-- chunk: Pod ResizePolicy配置示例 -->## Pod ResizePolicy配置示例
+## Pod ResizePolicy配置示例
 
 ```yaml
 apiVersion: v1
@@ -666,7 +673,7 @@ spec:
 
 > **与VPA协同使用**：In-Place Resize可以作为VPA的执行后端（VPA提供推荐值，In-Place Resize执行调整），二者互补而非替代。K8s 1.33中VPA已支持`updateMode: InPlace`。
 
-#<!-- chunk: 9.2 Streaming List API -->## 9.2 Streaming List API
+## 9.2 Streaming List API
 
 ```yaml
 Streaming List API (K8s 1.33 Beta):
@@ -730,7 +737,7 @@ data:
                 queueLengthLimit: 100
 ```
 
-#<!-- chunk: 9.3 [[Dynamic Resource Allocation|Dynamic Resource Allocation]] (DRA) -->## 9.3 Dynamic Resource Allocation (DRA)
+## 9.3 Dynamic Resource Allocation (DRA)
 
 ```yaml
 DRA对大规模调度性能影响:
@@ -780,7 +787,7 @@ dra_pending_resource_claims > 50  # 告警：待分配ResourceClaim积压
 
 <!-- chunk: 10. 未来发展趋势 -->## 10. 未来发展趋势
 
-#<!-- chunk: 10.1 新技术应用 -->## 10.1 新技术应用
+## 10.1 新技术应用
 
 ```yaml
 未来性能优化方向:
@@ -816,7 +823,7 @@ dra_pending_resource_claims > 50  # 告警：待分配ResourceClaim积压
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers KUDIG Database — Global MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Imp...
@@ -837,4 +844,4 @@ dra_pending_resource_claims > 50  # 告警：待分配ResourceClaim积压
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

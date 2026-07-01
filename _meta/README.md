@@ -5,6 +5,7 @@ tags: ["index", "meta", "schema", "visibility/public"]
 sources: ["_meta/"]
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 status: reviewed
 ---
 
@@ -12,13 +13,13 @@ status: reviewed
 
 > 仓库元数据、Schema 定义和分类体系。
 
-- [[_meta/dashboard|dashboard]]
-- [[_meta/schema|schema]]
-- [[_meta/taxonomy|taxonomy]]
+- _meta/dashboard.md
+- _meta/schema.md
+- _meta/taxonomy.md
 
 
 ## 元数据文件
 
-- [[_meta/metadata/knowledge-map|knowledge-map]]
-- [[_meta/metadata/tags-index|tags-index]]
-- [[_meta/metadata/difficulty-index|difficulty-index]]
+- _meta/metadata/knowledge-map.md
+- _meta/metadata/tags-index.md
+- _meta/metadata/difficulty-index.md

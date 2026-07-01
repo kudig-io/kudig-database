@@ -86,7 +86,7 @@ k8s_versions:
 
 <!-- chunk: MCE (Machine Check Exception) 错误码 -->## MCE (Machine Check Exception) 错误码
 
-#<!-- chunk: MCE 错误结构 -->## MCE 错误结构
+## MCE 错误结构
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -114,7 +114,7 @@ k8s_versions:
 └─────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: Intel MCE Bank 定义 -->## Intel MCE Bank 定义
+## Intel MCE Bank 定义
 
 ```yaml
 Intel_Xeon_MCE_Bank:
@@ -176,7 +176,7 @@ Intel_Xeon_MCE_Bank:
     说明: 具体定义因CPU型号而异
 ```
 
-#<!-- chunk: AMD MCE Bank 定义 -->## AMD MCE Bank 定义
+## AMD MCE Bank 定义
 
 ```yaml
 AMD_EPYC_MCE_Bank:
@@ -236,7 +236,7 @@ AMD_EPYC_MCE_Bank:
     功能单元: 参数块
 ```
 
-#<!-- chunk: MCE STATUS 字段解析 -->## MCE STATUS 字段解析
+## MCE STATUS 字段解析
 
 ```bash
 #!/bin/bash
@@ -369,7 +369,7 @@ decode_memory_error() {
 # decode_mce_status "0xBE0000000000011A"
 ```
 
-#<!-- chunk: 常见 MCE 错误快速参考 -->## 常见 MCE 错误快速参考
+## 常见 MCE 错误快速参考
 
 | STATUS 特征 | 错误类型 | 严重程度 | 处理建议 |
 |------------|---------|---------|---------|
@@ -382,7 +382,7 @@ decode_memory_error() {
 
 <!-- chunk: S.M.A.R.T. 属性码 -->## S.M.A.R.T. 属性码
 
-#<!-- chunk: 关键 SMART 属性 -->## 关键 SMART 属性
+## 关键 SMART 属性
 
 ```yaml
 SMART_关键属性:
@@ -495,7 +495,7 @@ SMART_关键属性:
     说明: 写入时发生的错误
 ```
 
-#<!-- chunk: SSD 特有属性 -->## SSD 特有属性
+## SSD 特有属性
 
 ```yaml
 SSD_SMART_属性:
@@ -577,7 +577,7 @@ SSD_SMART_属性:
     重要性: 参考
 ```
 
-#<!-- chunk: SMART 状态快速判断 -->## SMART 状态快速判断
+## SMART 状态快速判断
 
 ```bash
 #!/bin/bash
@@ -665,7 +665,7 @@ done
 
 <!-- chunk: NVMe 错误码 -->## NVMe 错误码
 
-#<!-- chunk: NVMe SMART 日志字段 -->## NVMe SMART 日志字段
+## NVMe SMART 日志字段
 
 ```yaml
 NVMe_SMART_日志:
@@ -746,7 +746,7 @@ NVMe_SMART_日志:
     用途: 检查是否有错误记录
 ```
 
-#<!-- chunk: NVMe 命令状态码 -->## NVMe 命令状态码
+## NVMe 命令状态码
 
 ```yaml
 NVMe_Status_Code:
@@ -813,7 +813,7 @@ NVMe_Status_Code:
 
 <!-- chunk: IPMI SEL 事件类型 -->## IPMI SEL 事件类型
 
-#<!-- chunk: SEL 事件类型码 -->## SEL 事件类型码
+## SEL 事件类型码
 
 ```yaml
 IPMI_SEL_Event_Type:
@@ -898,7 +898,7 @@ IPMI_Sensor_Type:
       OS_Boot_Failed: OS启动失败
 ```
 
-#<!-- chunk: SEL 日志解析脚本 -->## SEL 日志解析脚本
+## SEL 日志解析脚本
 
 ```bash
 #!/bin/bash
@@ -954,7 +954,7 @@ analyze_sel
 
 <!-- chunk: BIOS 蜂鸣码 -->## BIOS 蜂鸣码
 
-#<!-- chunk: AMI BIOS 蜂鸣码 -->## AMI BIOS 蜂鸣码
+## AMI BIOS 蜂鸣码
 
 | 蜂鸣模式 | 含义 | 可能原因 | 处理方法 |
 |---------|------|---------|---------|
@@ -976,7 +976,7 @@ analyze_sel
 | 连续短响 | 电源问题 | PSU问题 | 检查电源 |
 | 连续长响 | 内存未检测到 | 内存未安装 | 安装内存 |
 
-#<!-- chunk: Phoenix/Award BIOS 蜂鸣码 -->## Phoenix/Award BIOS 蜂鸣码
+## Phoenix/Award BIOS 蜂鸣码
 
 | 蜂鸣模式 | 含义 | 处理方法 |
 |---------|------|---------|
@@ -1010,7 +1010,7 @@ analyze_sel
 
 <!-- chunk: 服务器厂商专用诊断码 -->## 服务器厂商专用诊断码
 
-#<!-- chunk: Dell PowerEdge LCD 错误码 -->## Dell PowerEdge LCD 错误码
+## Dell PowerEdge LCD 错误码
 
 ```yaml
 Dell_LCD_Error_Code:
@@ -1150,7 +1150,7 @@ Dell_LCD_Error_Code:
     处理: 检查散热器/硅脂
 ```
 
-#<!-- chunk: HPE iLO 状态码 -->## HPE iLO 状态码
+## HPE iLO 状态码
 
 ```yaml
 HPE_iLO_Status:
@@ -1242,7 +1242,7 @@ HPE_iLO_Status:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-31-hardware KUDIG Database — Global MOC
-- [[domain-17-system-foundation/README|Domain 31 - 硬件基础设施]]
+- [[domain-17-system-foundation/README.md|Domain 31 - 硬件基础设施]]
 - Domain-31 硬件 — 开源项目索引
 - 云平台硬件基础架构
 - 服务器架构原理
@@ -1261,4 +1261,4 @@ HPE_iLO_Status:
 - 18-hardware-failure-case-studies
 - 01-cloud-hardware-architecture
 
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/08-troubleshooting|08-troubleshooting]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/08-troubleshooting.md|08-troubleshooting]]

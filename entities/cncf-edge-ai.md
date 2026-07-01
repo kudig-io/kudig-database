@@ -129,11 +129,11 @@ SlimFaas 是轻量级 FaaS 框架。
 
 ### [[serverless-devs]] — 沙箱项目
 
-[[Serverless Devs|Serverless Devs]] 是 Serverless 应用开发工具。
+[[entities/serverless-devs.md|Serverless Devs]] 是 Serverless 应用开发工具。
 
 ### [[serverless-workflow]] — 沙箱项目
 
-[[Serverless Workflow|Serverless Workflow]] 定义无服务器工作流规范。
+Serverless Workflow 定义无服务器工作流规范。
 
 ### [[Radius]] — 沙箱项目
 
@@ -179,8 +179,8 @@ InterLink 将远程计算资源连接到 K8s。
 
 ## 相关页面
 
-- [[entities/cncf-orchestration|cncf-orchestration]] — 编排与应用管理
-- [[entities/cncf-runtime|cncf-runtime]] — 容器运行时与工具链
+- [[entities/cncf-orchestration.md|cncf-orchestration]] — 编排与应用管理
+- [[entities/cncf-runtime.md|cncf-runtime]] — 容器运行时与工具链
 
 ## Related
 
@@ -190,5 +190,5 @@ InterLink 将远程计算资源连接到 K8s。
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[entities/kaito|KAITO]]
-- [[entities/kairos|Kairos]]
+- [[entities/kaito.md|KAITO]]
+- [[entities/kairos.md|Kairos]]

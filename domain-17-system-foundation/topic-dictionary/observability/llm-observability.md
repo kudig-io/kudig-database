@@ -151,5 +151,6 @@ cost_histogram.record(cost, attributes={"model": model_name})
 
 ## Related
 
-- index/observability-index|Observabilityty 可观测性知识图谱索引|Observability 可观测性知识图谱索引]]]]
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/observability/alerting-and-slo-monitoring.md|告警与 SLO 监控工程]]
+- [[domain-17-system-foundation/topic-dictionary/observability/alertmanager.md|告警管理器]]
+- [[domain-17-system-foundation/topic-dictionary/observability/datadog.md|Datadog]]

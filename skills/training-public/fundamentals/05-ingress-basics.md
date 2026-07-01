@@ -257,6 +257,9 @@ spec:
 
 ### 3.1 基本配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 【创建 TLS Secret】
 
@@ -322,6 +325,9 @@ Ingress Controller 是真正处理请求的组件：
 
 ### 4.2 安装 Ingress Controller
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```
 【使用 Helm 安装 nginx-ingress】
 
@@ -367,6 +373,9 @@ kubectl get pods -n ingress-nginx
 
 ### 5.2 404 错误
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 【原因】
 
@@ -393,6 +402,10 @@ kubectl get pods -n ingress-nginx
 ---
 
 ## 6. 总结
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
 【命令速查】

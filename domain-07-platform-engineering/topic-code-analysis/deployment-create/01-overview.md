@@ -192,6 +192,9 @@ Kubernetes Deployment 是最核心的工作负载控制器之一，它通过管�
 
 ### 控制器链架构
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    Deployment 控制器链                                │
@@ -535,6 +538,9 @@ spec:
 
 ### 创建 Deployment 并观察 Informer 事件
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建
 kubectl apply -f deployment.yaml
@@ -601,7 +607,7 @@ kubectl get pods -l app=web-frontend -w
 ## Related
 
 - [[README|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[concepts/deployment-controller-architecture|deployment-controller-architecture]]
-- [[entities/kubernetes|kubernetes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[concepts/deployment-controller-architecture.md|deployment-controller-architecture]]
+- [[entities/kubernetes.md|kubernetes]]

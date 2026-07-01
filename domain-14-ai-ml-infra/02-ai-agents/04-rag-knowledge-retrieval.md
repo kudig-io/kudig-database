@@ -91,7 +91,7 @@ RAG（Retrieval-Augmented Generation）是将外部知识库与 LLM 生成能力
 
 <!-- chunk: 1. RAG 架构全景 -->## 1. RAG 架构全景
 
-#<!-- chunk: 1.1 基础 RAG 流程 -->## 1.1 基础 RAG 流程
+## 1.1 基础 RAG 流程
 
 ```
                     ┌─────────────────────────────────────────┐
@@ -112,7 +112,7 @@ RAG（Retrieval-Augmented Generation）是将外部知识库与 LLM 生成能力
                          LLM 生成回答（携带检索上下文）
 ```
 
-#<!-- chunk: 1.2 RAG 演进路径 -->## 1.2 RAG 演进路径
+## 1.2 RAG 演进路径
 
 ```
 Naive RAG（朴素 RAG）
@@ -137,7 +137,7 @@ Agentic RAG
 
 <!-- chunk: 2. 数据准备与分块策略 -->## 2. 数据准备与分块策略
 
-#<!-- chunk: 2.1 文档预处理 -->## 2.1 文档预处理
+## 2.1 文档预处理
 
 ```python
 import re
@@ -192,11 +192,11 @@ class DocumentPreprocessor:
         return content.strip()
 ```
 
-#<!-- chunk: 2.2 分块策略详解 -->## 2.2 分块策略详解
+## 2.2 分块策略详解
 
 分块（Chunking）是 RAG 质量的关键决策，不同策略各有权衡：
 
-##<!-- chunk: 固定大小分块 -->## 固定大小分块
+## 固定大小分块
 
 ```python
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -217,7 +217,7 @@ splitter = RecursiveCharacterTextSplitter(
 )
 ```
 
-##<!-- chunk: 语义分块（推荐用于技术文档） -->## 语义分块（推荐用于技术文档）
+## 语义分块（推荐用于技术文档）
 
 ```python
 from llama_index.core.node_parser import SemanticSplitterNodeParser
@@ -234,7 +234,7 @@ semantic_splitter = SemanticSplitterNodeParser(
 nodes = semantic_splitter.get_nodes_from_documents(documents)
 ```
 
-##<!-- chunk: 层次化分块（Parent-Child Chunking） -->## 层次化分块（Parent-Child Chunking）
+## 层次化分块（Parent-Child Chunking）
 
 最适合技术文档的策略：**父块保留上下文，子块保证精确检索**：
 
@@ -265,7 +265,7 @@ retriever.add_documents(documents)
 relevant_docs = retriever.get_relevant_documents("Pod Pending 的原因")
 ```
 
-#<!-- chunk: 2.3 分块策略选型指南 -->## 2.3 分块策略选型指南
+## 2.3 分块策略选型指南
 
 | 场景 | 推荐策略 | chunk_size | overlap |
 |------|---------|-----------|---------|
@@ -280,7 +280,7 @@ relevant_docs = retriever.get_relevant_documents("Pod Pending 的原因")
 
 <!-- chunk: 3. Embedding 模型选型 -->## 3. Embedding 模型选型
 
-#<!-- chunk: 3.1 主流 Embedding 模型对比 -->## 3.1 主流 Embedding 模型对比
+## 3.1 主流 Embedding 模型对比
 
 | 模型 | 维度 | 最大 Token | MTEB 得分 | 中文能力 | 成本 | 特点 |
 |------|------|-----------|---------|---------|------|------|
@@ -291,7 +291,7 @@ relevant_docs = retriever.get_relevant_documents("Pod Pending 的原因")
 | **BGE-large-zh-v1.5** | 1024 | 512 | - | ★★★★★ | 开源免费 | 中文专项 |
 | **m3e-large** | 768 | 512 | - | ★★★★☆ | 开源免费 | 国产中文 |
 
-#<!-- chunk: 3.2 Embedding 维度与精度权衡 -->## 3.2 Embedding 维度与精度权衡
+## 3.2 Embedding 维度与精度权衡
 
 ```python
 # text-embedding-3 支持可变维度（缩减维度降低成本）
@@ -325,7 +325,7 @@ embedding_lite = client.embeddings.create(
 
 <!-- chunk: 4. 向量数据库选型 -->## 4. 向量数据库选型
 
-#<!-- chunk: 4.1 主流向量库对比 -->## 4.1 主流向量库对比
+## 4.1 主流向量库对比
 
 | 特性 | Chroma | Weaviate | Qdrant | Milvus | pgvector |
 |------|-------|---------|-------|-------|---------|
@@ -339,7 +339,7 @@ embedding_lite = client.embeddings.create(
 | **K8s 部署** | 简单 | Helm 完整 | Helm 完整 | Operator | 直接使用 |
 | **Managed 服务** | ✅ | ✅ WCS | ✅ Qdrant Cloud | ✅ Zilliz | ✅ Supabase |
 
-#<!-- chunk: 4.2 Qdrant 生产部署（推荐） -->## 4.2 Qdrant 生产部署（推荐）
+## 4.2 Qdrant 生产部署（推荐）
 
 Qdrant 在性能、功能和易用性上综合最优：
 
@@ -453,7 +453,7 @@ results = client.search(
 
 单纯向量检索对精确匹配（如专有名词、错误代码）效果差，混合检索结合稠密向量和稀疏 BM25 检索：
 
-#<!-- chunk: 5.1 BM25 + 向量检索融合 -->## 5.1 BM25 + 向量检索融合
+## 5.1 BM25 + 向量检索融合
 
 ```python
 from langchain_community.retrievers import BM25Retriever
@@ -485,7 +485,7 @@ docs = ensemble_retriever.get_relevant_documents(
 )
 ```
 
-#<!-- chunk: 5.2 Qdrant 原生混合检索 -->## 5.2 Qdrant 原生混合检索
+## 5.2 Qdrant 原生混合检索
 
 ```python
 from qdrant_client.models import SparseVector, NamedSparseVector, NamedVector, Query
@@ -583,7 +583,7 @@ context = "\n\n".join([doc for doc, score in reranked])
 
 <!-- chunk: 7. Advanced RAG 技术 -->## 7. Advanced RAG 技术
 
-#<!-- chunk: 7.1 查询改写（Query Rewriting） -->## 7.1 查询改写（Query Rewriting）
+## 7.1 查询改写（Query Rewriting）
 
 ```python
 # HyDE（Hypothetical Document Embeddings）：生成假设性答案再检索
@@ -622,7 +622,7 @@ multi_query_retriever = MultiQueryRetriever.from_llm(
 )
 ```
 
-#<!-- chunk: 7.2 上下文压缩（Context Compression） -->## 7.2 上下文压缩（Context Compression）
+## 7.2 上下文压缩（Context Compression）
 
 ```python
 from langchain.retrievers import ContextualCompressionRetriever
@@ -644,7 +644,7 @@ compressed_docs = compression_retriever.get_relevant_documents(
 )
 ```
 
-#<!-- chunk: 7.3 迭代 RAG（Iterative/Recursive RAG） -->## 7.3 迭代 RAG（Iterative/Recursive RAG）
+## 7.3 迭代 RAG（Iterative/Recursive RAG）
 
 ```python
 class IterativeRAG:
@@ -696,7 +696,7 @@ class IterativeRAG:
 
 <!-- chunk: 8. RAG 评估指标 -->## 8. RAG 评估指标
 
-#<!-- chunk: 8.1 RAGAS 评估框架 -->## 8.1 RAGAS 评估框架
+## 8.1 RAGAS 评估框架
 
 ```python
 from ragas import evaluate
@@ -744,7 +744,7 @@ print(result)
 #  'context_precision': 0.85, 'context_recall': 0.79}
 ```
 
-#<!-- chunk: 8.2 RAG 质量基准目标 -->## 8.2 RAG 质量基准目标
+## 8.2 RAG 质量基准目标
 
 | 指标 | 可接受 | 优秀 | 说明 |
 |------|-------|------|------|
@@ -855,7 +855,7 @@ class ProductionRAGPipeline:
 
 <!-- chunk: 10. 最佳实践与常见坑 -->## 10. 最佳实践与常见坑
 
-#<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
 
 - **元数据设计先行**：向量存储的元数据字段直接影响过滤效率，在建库前仔细设计
 - **先优化检索，再优化生成**：RAG 质量差通常是检索问题，不要急于换模型
@@ -863,7 +863,7 @@ class ProductionRAGPipeline:
 - **多路召回融合**：BM25 + 向量的组合几乎在所有场景下优于单一检索方式
 - **定期评估**：用 RAGAS 建立自动化质量监控，发现知识库更新后的退化
 
-#<!-- chunk: 常见坑 -->## 常见坑
+## 常见坑
 
 - **chunk_size 过大**：单块信息太多导致向量语义模糊，影响检索精度（推荐 400-800 字符子块）
 - **忽略重叠**：chunk_overlap 设为 0 导致句子在块边界被切断，损失上下文
@@ -892,17 +892,17 @@ class ProductionRAGPipeline:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/11-cost-latency-optimization|成本与延迟优化策略]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/11-cost-latency-optimization.md|成本与延迟优化策略]]
 
 ## See Also
 

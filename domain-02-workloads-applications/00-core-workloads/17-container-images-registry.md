@@ -229,6 +229,9 @@ spec:
 
 ### 1. Docker Registry Secret 创建
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # ==================== 命令行创建 ====================
 
@@ -312,6 +315,9 @@ spec:
 ```
 
 ### 3. 命名空间级别默认凭证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 为命名空间设置默认 imagePullSecrets
@@ -535,6 +541,9 @@ serviceMonitor:
   enabled: true
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 部署 Trivy Operator
 helm repo add aqua https://aquasecurity.github.io/helm-charts/
@@ -725,6 +734,9 @@ dfdaemon:
       proxies:
         - regx: blobs/sha256.*
 ```
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 部署 Dragonfly
@@ -959,7 +971,7 @@ groups:
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications KUDIG Database — Global MOC
-- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
 - Domain-4 工作负载 — 开源项目索引
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)

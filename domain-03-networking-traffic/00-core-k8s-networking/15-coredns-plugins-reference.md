@@ -89,6 +89,9 @@ created: "2026-05-23"
 
 ### 1.2 插件启用状态检查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看CoreDNS编译包含的插件
 kubectl exec -n kube-system deploy/coredns -- coredns -plugins
@@ -1061,7 +1064,7 @@ CoreDNS插件按照编译时定义的顺序执行，以下是官方推荐顺序�
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -1082,4 +1085,6 @@ CoreDNS插件按照编译时定义的顺序执行，以下是官方推荐顺序�
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
+
+```

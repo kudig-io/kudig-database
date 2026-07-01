@@ -141,7 +141,7 @@ AgentScope 生产部署架构
 
 <!-- chunk: 2. AgentScope Runtime -->## 2. AgentScope Runtime
 
-#<!-- chunk: 2.1 什么是 Runtime -->## 2.1 什么是 Runtime
+## 2.1 什么是 Runtime
 
 AgentScope Runtime（`agentscope-runtime`）是独立于核心框架的**生产运行时**，提供：
 
@@ -164,7 +164,7 @@ AgentScope Runtime 核心能力
     不仅支持 AgentScope，还兼容 LangGraph、AutoGen 等
 ```
 
-#<!-- chunk: 2.2 安装 -->## 2.2 安装
+## 2.2 安装
 
 ```bash
 # 核心安装
@@ -177,7 +177,7 @@ pip install "agentscope-runtime[ext]"
 pip install --pre agentscope-runtime
 ```
 
-#<!-- chunk: 2.3 框架兼容性 -->## 2.3 框架兼容性
+## 2.3 框架兼容性
 
 | 框架 | 消息/事件 | 工具 |
 |------|----------|------|
@@ -191,7 +191,7 @@ pip install --pre agentscope-runtime
 
 <!-- chunk: 3. AgentApp — Agent 服务化 -->## 3. AgentApp — Agent 服务化
 
-#<!-- chunk: 3.1 三阶段开发模式 -->## 3.1 三阶段开发模式
+## 3.1 三阶段开发模式
 
 AgentApp 采用 **init → query → shutdown** 三阶段模式：
 
@@ -216,7 +216,7 @@ AgentApp 生命周期
     └── 清理资源
 ```
 
-#<!-- chunk: 3.2 完整示例 -->## 3.2 完整示例
+## 3.2 完整示例
 
 ```python
 import os
@@ -326,7 +326,7 @@ async def query_func(
 agent_app.run(host="0.0.0.0", port=8090)
 ```
 
-#<!-- chunk: 3.3 API 调用 -->## 3.3 API 调用
+## 3.3 API 调用
 
 ```bash
 # SSE 流式请求
@@ -363,18 +363,21 @@ data: {"sequence_number":N,"object":"response","status":"completed",...}
 
 <!-- chunk: 4. Sandbox — 安全沙箱执行 -->## 4. Sandbox — 安全沙箱执行
 
-#<!-- chunk: 4.1 为什么需要沙箱 -->## 4.1 为什么需要沙箱
+## 4.1 为什么需要沙箱
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
 ```
 无沙箱风险
 │
-├── Agent 执行 "rm -rf /" → 系统级灾难
+├── Agent 执行 "rm -rf /" → 系统级灾难  # ⚠️ 删除系统/数据文件
 ├── Agent 执行恶意代码 → 安全漏洞
 ├── Agent 访问敏感文件 → 数据泄露
 └── Agent 消耗大量资源 → 宿主机 OOM
 ```
 
-#<!-- chunk: 4.2 AgentScope 沙箱类型 -->## 4.2 AgentScope 沙箱类型
+## 4.2 AgentScope 沙箱类型
 
 | 沙箱类型 | 适用场景 | 隔离级别 |
 |---------|---------|---------|
@@ -385,7 +388,7 @@ data: {"sequence_number":N,"object":"response","status":"completed",...}
 | **FilesystemSandbox** | 文件系统操作 | 容器级隔离 |
 | **MobileSandbox** | 移动端操作 | 容器级隔离 |
 
-#<!-- chunk: 4.3 沙箱配置示例 -->## 4.3 沙箱配置示例
+## 4.3 沙箱配置示例
 
 ```python
 from agentscope_runtime.sandbox import PythonSandbox
@@ -415,7 +418,7 @@ result = await sandbox.run_ipython_cell(
 
 <!-- chunk: 5. 部署方式 -->## 5. 部署方式
 
-#<!-- chunk: 5.1 本地部署 -->## 5.1 本地部署
+## 5.1 本地部署
 
 ```bash
 # 直接运行
@@ -425,7 +428,7 @@ python agent_app.py
 uvicorn agent_app:agent_app --host 0.0.0.0 --port 8090 --workers 4
 ```
 
-#<!-- chunk: 5.2 Docker 部署 -->## 5.2 Docker 部署
+## 5.2 Docker 部署
 
 ```dockerfile
 # Dockerfile
@@ -477,7 +480,7 @@ volumes:
   redis-data:
 ```
 
-#<!-- chunk: 5.3 Kubernetes 部署 -->## 5.3 Kubernetes 部署
+## 5.3 Kubernetes 部署
 
 ```yaml
 # k8s-deployment.yaml
@@ -587,7 +590,7 @@ stringData:
   dashscope-api-key: "sk-your-dashscope-api-key"
 ```
 
-#<!-- chunk: 5.4 Ingress 配置 -->## 5.4 Ingress 配置
+## 5.4 Ingress 配置
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -623,7 +626,7 @@ spec:
 
 <!-- chunk: 6. AgentScope Studio -->## 6. AgentScope Studio
 
-#<!-- chunk: 6.1 功能概览 -->## 6.1 功能概览
+## 6.1 功能概览
 
 AgentScope Studio 是独立的本地可视化开发工具，基于 Node.js，为 AgentScope Agent 应用提供透明、直观的开发、调试和评测体验。
 
@@ -656,7 +659,7 @@ AgentScope Studio
     └── 快速二次开发与高级功能集成
 ```
 
-#<!-- chunk: 6.2 安装与启动 -->## 6.2 安装与启动
+## 6.2 安装与启动
 
 **前置条件**：Node.js >= 20.0.0、npm >= 10.0.0，RHEL/CentOS 还需安装 `gcc-c++ make`（编译原生模块 better-sqlite3）。
 
@@ -695,7 +698,7 @@ npm install
 npm run dev
 ```
 
-#<!-- chunk: 6.3 连接 AgentScope 应用 -->## 6.3 连接 AgentScope 应用
+## 6.3 连接 AgentScope 应用
 
 在 Python 代码中配置 `studio_url`，Agent 的运行数据（Trace、LLM 调用、工具链路）将实时上报到 Studio：
 
@@ -710,7 +713,7 @@ agentscope.init(
 
 如果 Studio 和 Agent 应用分开部署（如 Studio 在本地 macOS，Agent 在远程服务器），将 `studio_url` 指向 Studio 实际地址即可。
 
-#<!-- chunk: 6.4 云服务器访问排查 -->## 6.4 云服务器访问排查
+## 6.4 云服务器访问排查
 
 在阿里云 ECS 等云服务器上部署后无法通过公网 IP 访问时，按以下顺序排查：
 
@@ -733,7 +736,7 @@ firewall-cmd --reload
 
 <!-- chunk: 7. OpenTelemetry Tracing -->## 7. OpenTelemetry Tracing
 
-#<!-- chunk: 7.1 AgentScope 追踪体系 -->## 7.1 AgentScope 追踪体系
+## 7.1 AgentScope 追踪体系
 
 AgentScope 基于 OpenTelemetry 实现全链路追踪：
 
@@ -759,7 +762,7 @@ AgentScope 基于 OpenTelemetry 实现全链路追踪：
     └── 任何 OTLP 兼容后端
 ```
 
-#<!-- chunk: 7.2 启用追踪 -->## 7.2 启用追踪
+## 7.2 启用追踪
 
 通过 `agentscope.init()` 统一初始化追踪（与 lifespan 中一致）：
 
@@ -786,7 +789,7 @@ agentscope.init(
 > **注意**：`agentscope.init()` 应在应用启动时调用一次（如 FastAPI lifespan），而非每次请求调用。
 > 无需手动导入 `setup_tracing`，`agentscope.init()` 内部会自动完成追踪配置。
 
-##<!-- chunk: 7.2.1 第三方集成 -->## 7.2.1 第三方集成
+## 7.2.1 第三方集成
 
 | 后端 | 配置方式 | 说明 |
 |------|---------|------|
@@ -796,7 +799,7 @@ agentscope.init(
 | **Alibaba Cloud CloudMonitor** | `tracing_url=...` 指向阿里云 OTLP | 企业级，与 DashScope 深度集成 |
 | **Jaeger / Zipkin** | `tracing_url=...` 指向对应 OTLP | 通用分布式追踪 |
 
-#<!-- chunk: 7.3 追踪数据示例 -->## 7.3 追踪数据示例
+## 7.3 追踪数据示例
 
 ```
 Trace: k8s-diagnosis-001 (总耗时: 12.3s)
@@ -820,7 +823,7 @@ Trace: k8s-diagnosis-001 (总耗时: 12.3s)
 
 <!-- chunk: 8. 生产最佳实践 -->## 8. 生产最佳实践
 
-#<!-- chunk: 8.1 部署清单 -->## 8.1 部署清单
+## 8.1 部署清单
 
 | 检查项 | 必要性 | 说明 |
 |--------|--------|------|
@@ -835,7 +838,7 @@ Trace: k8s-diagnosis-001 (总耗时: 12.3s)
 | 限流配置 | 推荐 | API 网关层限流 |
 | TLS 加密 | 必须 | 生产环境必须 HTTPS |
 
-#<!-- chunk: 8.2 监控告警 -->## 8.2 监控告警
+## 8.2 监控告警
 
 ```yaml
 # Prometheus 告警规则示例
@@ -870,7 +873,7 @@ groups:
           summary: "每小时 Token 消耗超过 100 万"
 ```
 
-#<!-- chunk: 8.3 成本控制 -->## 8.3 成本控制
+## 8.3 成本控制
 
 ```
 成本控制策略
@@ -896,7 +899,7 @@ groups:
 
 <!-- chunk: 9. 故障排查 -->## 9. 故障排查
 
-#<!-- chunk: 9.1 常见问题 -->## 9.1 常见问题
+## 9.1 常见问题
 
 | 问题 | 排查方向 | 解决方案 |
 |------|---------|---------|
@@ -907,7 +910,10 @@ groups:
 | OOM Killed | Agent 上下文过大 | 启用记忆压缩，减小 max_iters |
 | Token 超限 | 历史消息过多 | 配置上下文窗口管理，启用截断 |
 
-#<!-- chunk: 9.2 诊断命令 -->## 9.2 诊断命令
+## 9.2 诊断命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查 Agent 服务健康
@@ -930,7 +936,7 @@ kubectl get hpa -n agent-system
 
 <!-- chunk: 10. 最佳实践与反模式 -->## 10. 最佳实践与反模式
 
-#<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
 
 - **AgentApp 继承 FastAPI**：充分利用 FastAPI 生态（中间件、依赖注入、OpenAPI 文档）
 - **每次 reply 后保存状态**：防止异常导致会话丢失
@@ -938,7 +944,7 @@ kubectl get hpa -n agent-system
 - **沙箱执行所有代码**：`execute_python_code` 和 `execute_shell_command` 必须在沙箱中运行
 - **追踪覆盖所有 LLM 调用**：Token 消耗和延迟是成本控制的基础数据
 
-#<!-- chunk: 反模式 -->## 反模式
+## 反模式
 
 - **Agent 服务无状态但不持久化 Session**：多副本部署时会话漂移导致状态丢失
 - **Nginx 默认配置处理 SSE**：缓冲会导致流式响应变为批量响应
@@ -967,17 +973,17 @@ kubectl get hpa -n agent-system
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## Related
 

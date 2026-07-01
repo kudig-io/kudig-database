@@ -70,7 +70,7 @@ created: "2026-05-23"
 
 <!-- chunk: TCP 协议详解 -->## TCP 协议详解
 
-#<!-- chunk: TCP 特性 -->## TCP 特性
+## TCP 特性
 
 | 特性 | 说明 |
 |:---|:---|
@@ -80,7 +80,7 @@ created: "2026-05-23"
 | **流量控制** | 滑动窗口机制 |
 | **拥塞控制** | 避免网络拥塞 |
 
-#<!-- chunk: TCP 头部结构 -->## TCP 头部结构
+## TCP 头部结构
 
 | 字段 | 长度 | 说明 |
 |:---|:---:|:---|
@@ -93,7 +93,7 @@ created: "2026-05-23"
 | 窗口大小 | 16 bit | 接收窗口 |
 | 校验和 | 16 bit | 完整性校验 |
 
-#<!-- chunk: TCP 标志位 -->## TCP 标志位
+## TCP 标志位
 
 | 标志 | 说明 |
 |:---|:---|
@@ -108,7 +108,7 @@ created: "2026-05-23"
 
 <!-- chunk: TCP 连接管理 -->## TCP 连接管理
 
-#<!-- chunk: 三次握手 -->## 三次握手
+## 三次握手
 
 ```
      客户端                              服务端
@@ -122,7 +122,7 @@ created: "2026-05-23"
      ESTABLISHED                      ESTABLISHED
 ```
 
-#<!-- chunk: 四次挥手 -->## 四次挥手
+## 四次挥手
 
 ```
      客户端                              服务端
@@ -138,7 +138,7 @@ created: "2026-05-23"
      TIME_WAIT (2MSL)                  CLOSED
 ```
 
-#<!-- chunk: TCP 状态 -->## TCP 状态
+## TCP 状态
 
 | 状态 | 说明 |
 |:---|:---|
@@ -153,7 +153,7 @@ created: "2026-05-23"
 | LAST_ACK | 发送 FIN 后 |
 | CLOSED | 关闭 |
 
-#<!-- chunk: 查看 TCP 状态 -->## 查看 TCP 状态
+## 查看 TCP 状态
 
 ```bash
 # 状态统计
@@ -172,7 +172,7 @@ netstat -antp
 
 <!-- chunk: TCP 流量控制 -->## TCP 流量控制
 
-#<!-- chunk: 滑动窗口 -->## 滑动窗口
+## 滑动窗口
 
 ```
 发送方缓冲区
@@ -184,7 +184,7 @@ netstat -antp
                    发送窗口
 ```
 
-#<!-- chunk: 窗口大小 -->## 窗口大小
+## 窗口大小
 
 ```bash
 # 查看窗口参数
@@ -201,7 +201,7 @@ net.ipv4.tcp_wmem = 4096 65536 16777216
 
 <!-- chunk: TCP 拥塞控制 -->## TCP 拥塞控制
 
-#<!-- chunk: 拥塞控制算法 -->## 拥塞控制算法
+## 拥塞控制算法
 
 | 算法 | 特点 | 适用场景 |
 |:---|:---|:---|
@@ -210,7 +210,10 @@ net.ipv4.tcp_wmem = 4096 65536 16777216
 | **bbr** | Google 开发 | 高延迟/丢包网络 |
 | **vegas** | 基于延迟 | 低丢包网络 |
 
-#<!-- chunk: 拥塞控制配置 -->## 拥塞控制配置
+## 拥塞控制配置
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
 
 ```bash
 # 查看可用算法
@@ -226,7 +229,7 @@ sysctl -w net.ipv4.tcp_congestion_control=bbr
 echo "net.ipv4.tcp_congestion_control = bbr" >> /etc/sysctl.conf
 ```
 
-#<!-- chunk: 拥塞控制阶段 -->## 拥塞控制阶段
+## 拥塞控制阶段
 
 | 阶段 | 说明 |
 |:---|:---|
@@ -239,7 +242,7 @@ echo "net.ipv4.tcp_congestion_control = bbr" >> /etc/sysctl.conf
 
 <!-- chunk: UDP 协议详解 -->## UDP 协议详解
 
-#<!-- chunk: UDP 特性 -->## UDP 特性
+## UDP 特性
 
 | 特性 | 说明 |
 |:---|:---|
@@ -248,7 +251,7 @@ echo "net.ipv4.tcp_congestion_control = bbr" >> /etc/sysctl.conf
 | **无序** | 不保证顺序 |
 | **快速** | 开销小、延迟低 |
 
-#<!-- chunk: UDP 头部结构 -->## UDP 头部结构
+## UDP 头部结构
 
 | 字段 | 长度 | 说明 |
 |:---|:---:|:---|
@@ -257,7 +260,7 @@ echo "net.ipv4.tcp_congestion_control = bbr" >> /etc/sysctl.conf
 | 长度 | 16 bit | 报文长度 |
 | 校验和 | 16 bit | 可选校验 |
 
-#<!-- chunk: UDP 适用场景 -->## UDP 适用场景
+## UDP 适用场景
 
 | 场景 | 原因 |
 |:---|:---|
@@ -271,7 +274,7 @@ echo "net.ipv4.tcp_congestion_control = bbr" >> /etc/sysctl.conf
 
 <!-- chunk: TCP vs UDP 选择 -->## TCP vs UDP 选择
 
-#<!-- chunk: 对比 -->## 对比
+## 对比
 
 | 特性 | TCP | UDP |
 |:---|:---|:---|
@@ -282,7 +285,7 @@ echo "net.ipv4.tcp_congestion_control = bbr" >> /etc/sysctl.conf
 | 传输效率 | 较低 | 较高 |
 | 流控/拥控 | 有 | 无 |
 
-#<!-- chunk: 选择建议 -->## 选择建议
+## 选择建议
 
 | 需求 | 推荐协议 |
 |:---|:---|
@@ -295,9 +298,9 @@ echo "net.ipv4.tcp_congestion_control = bbr" >> /etc/sysctl.conf
 
 <!-- chunk: 生产环境 TCP 连接池优化 -->## 生产环境 TCP 连接池优化
 
-#<!-- chunk: 连接池管理策略 -->## 连接池管理策略
+## 连接池管理策略
 
-##<!-- chunk: 连接池配置参数 -->## 连接池配置参数
+## 连接池配置参数
 
 | 参数 | 说明 | 生产环境推荐值 | 影响 |
 |:---|:---|:---:|:---|
@@ -307,7 +310,7 @@ echo "net.ipv4.tcp_congestion_control = bbr" >> /etc/sysctl.conf
 | **max_lifetime** | 连接最大生存期 | 3600秒 | 防止僵死 |
 | **validation_timeout** | 验证超时 | 5秒 | 健康检查 |
 
-##<!-- chunk: 连接池监控指标 -->## 连接池监控指标
+## 连接池监控指标
 
 ```bash
 # TCP 连接池状态监控
@@ -338,9 +341,9 @@ monitor_connection_pool() {
 # monitor_connection_pool "web_service" 8080
 ```
 
-#<!-- chunk: TCP 性能监控与告警 -->## TCP 性能监控与告警
+## TCP 性能监控与告警
 
-##<!-- chunk: 关键性能指标 -->## 关键性能指标
+## 关键性能指标
 
 | 指标 | 正常范围 | 告警阈值 | 监控工具 |
 |:---|:---:|:---:|:---|
@@ -349,7 +352,7 @@ monitor_connection_pool() {
 | **连接建立时间** | < 100ms | > 500ms | tcpdump |
 | **吞吐量** | 根据带宽调整 | < 50%峰值 | iperf3 |
 
-##<!-- chunk: 生产环境监控脚本 -->## 生产环境监控脚本
+## 生产环境监控脚本
 
 ```bash
 #!/bin/bash
@@ -397,9 +400,9 @@ while true; do
 done
 ```
 
-#<!-- chunk: TCP 生产调优参数 -->## TCP 生产调优参数
+## TCP 生产调优参数
 
-##<!-- chunk: 应用层调优 -->## 应用层调优
+## 应用层调优
 
 ```bash
 # 应用层面 TCP 优化
@@ -430,7 +433,7 @@ net.ipv4.tcp_keepalive_intvl = 30
 net.ipv4.tcp_keepalive_probes = 3
 ```
 
-##<!-- chunk: 负载均衡器 TCP 优化 -->## 负载均衡器 TCP 优化
+## 负载均衡器 TCP 优化
 
 ```nginx
 # Nginx TCP 优化配置
@@ -465,9 +468,9 @@ server {
 
 <!-- chunk: 高级TCP连接池配置与优化 -->## 高级TCP连接池配置与优化
 
-#<!-- chunk: 连接池高级配置策略 -->## 连接池高级配置策略
+## 连接池高级配置策略
 
-##<!-- chunk: 动态连接池调整 -->## 动态连接池调整
+## 动态连接池调整
 
 ```bash
 # 智能连接池管理脚本
@@ -542,7 +545,7 @@ monitor_and_adjust() {
 # monitor_and_adjust &
 ```
 
-##<!-- chunk: 连接池故障自愈机制 -->## 连接池故障自愈机制
+## 连接池故障自愈机制
 
 ```bash
 # 连接池健康检查与自愈
@@ -599,9 +602,9 @@ check_connection_leaks() {
 
 <!-- chunk: TCP高级性能调优与监控 -->## TCP高级性能调优与监控
 
-#<!-- chunk: TCP高级调优参数详解 -->## TCP高级调优参数详解
+## TCP高级调优参数详解
 
-##<!-- chunk: BBR拥塞控制算法深度配置 -->## BBR拥塞控制算法深度配置
+## BBR拥塞控制算法深度配置
 
 ```bash
 # BBR拥塞控制高级配置
@@ -657,7 +660,7 @@ configure_bbr_for_scenario() {
 }
 ```
 
-##<!-- chunk: TCP Fast Open 配置 -->## TCP Fast Open 配置
+## TCP Fast Open 配置
 
 ```bash
 # TCP Fast Open 生产环境配置
@@ -686,9 +689,9 @@ EOF
 }
 ```
 
-#<!-- chunk: 高级TCP监控与告警系统 -->## 高级TCP监控与告警系统
+## 高级TCP监控与告警系统
 
-##<!-- chunk: TCP状态深度监控 -->## TCP状态深度监控
+## TCP状态深度监控
 
 ```bash
 #!/bin/bash
@@ -755,7 +758,7 @@ while true; do
 done
 ```
 
-##<!-- chunk: TCP性能瓶颈分析工具 -->## TCP性能瓶颈分析工具
+## TCP性能瓶颈分析工具
 
 ```bash
 # TCP性能瓶颈分析脚本
@@ -833,9 +836,9 @@ analyze_tcp_bottlenecks() {
 
 <!-- chunk: UDP高级应用场景优化 -->## UDP高级应用场景优化
 
-#<!-- chunk: 实时音视频UDP优化 -->## 实时音视频UDP优化
+## 实时音视频UDP优化
 
-##<!-- chunk: WebRTC UDP优化配置 -->## WebRTC UDP优化配置
+## WebRTC UDP优化配置
 
 ```bash
 # WebRTC实时通信UDP优化
@@ -887,9 +890,12 @@ EOF
 }
 ```
 
-#<!-- chunk: UDP广播与多播优化 -->## UDP广播与多播优化
+## UDP广播与多播优化
 
-##<!-- chunk: 多播UDP配置 -->## 多播UDP配置
+## 多播UDP配置
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 多播UDP生产环境配置
@@ -972,9 +978,9 @@ diagnose_multicast_issues() {
 }
 ```
 
-#<!-- chunk: UDP安全防护配置 -->## UDP安全防护配置
+## UDP安全防护配置
 
-##<!-- chunk: DDoS防护与速率限制 -->## DDoS防护与速率限制
+## DDoS防护与速率限制
 
 ```bash
 # UDP DDoS防护配置
@@ -1039,3 +1045,5 @@ detect_udp_anomalies() {
 - 01-network-protocols-stack
 - 03-dns-principles-configuration
 - 04-load-balancing-technologies
+
+```

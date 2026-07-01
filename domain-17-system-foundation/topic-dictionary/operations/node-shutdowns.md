@@ -35,7 +35,7 @@ created: "2026-05-23"
 
 ## 概述
 
-在 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 集群中，节点可能会因为计划内维护或意外原因（如断电）而关闭。如果节点在关闭前未被清空（drain），可能导致工作负载失败。节点关闭分为**优雅关闭（graceful）**和**非优雅关闭（non-graceful）**两种类型。Kubernetes 提供了相应的机制来尽量降低节点关闭对工作负载的影响。
+在 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群中，节点可能会因为计划内维护或意外原因（如断电）而关闭。如果节点在关闭前未被清空（drain），可能导致工作负载失败。节点关闭分为**优雅关闭（graceful）**和**非优雅关闭（non-graceful）**两种类型。Kubernetes 提供了相应的机制来尽量降低节点关闭对工作负载的影响。
 
 ## 核心概念/原理
 
@@ -108,6 +108,10 @@ FEATURE STATE: `Kubernetes v1.28 [stable]`（默认启用）
 
 ## 命令快速参考
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+
 ```bash
 # 优雅清空节点（计划内维护）
 kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
@@ -132,3 +136,13 @@ systemd-inhibit --list
 
 - [Node Shutdowns - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/node-shutdown/)
 - 相关主题：[Disruptions](../workloads/disruptions.md) · [Taints and Tolerations](../scheduling/taints-and-tolerations.md) · [Pod Lifecycle](../workloads/pod-lifecycle.md)
+
+## 参考链接
+
+- [Node Shutdowns]()
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
+- [[domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery.md|备份与灾难恢复（Backup & Disaster Recovery）]]
+- [[domain-17-system-foundation/topic-dictionary/operations/capacity-planning-forecasting.md|13 - 容量规划与资源预测]]

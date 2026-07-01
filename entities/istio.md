@@ -1,6 +1,6 @@
 ---
 title: Istio (entities)
-description: '- [[skills/k8s-network-security-guide|k8s-network-security-guide]] — Kubernetes 网络安全最佳实践'
+description: '- [[skills/k8s-network-security-guide.md|k8s-network-security-guide]] — Kubernetes 网络安全最佳实践'
 category: entities
 tags:
 - k8s
@@ -64,13 +64,13 @@ Benefits: lower resource overhead, simpler operations, no sidecar injection issu
 
 ## Related
 
-- [[skills/k8s-network-security-guide|k8s-network-security-guide]] — Kubernetes 网络安全最佳实践
+- [[skills/k8s-network-security-guide.md|k8s-network-security-guide]] — Kubernetes 网络安全最佳实践
 - [[03-istio-security-hardening]] — Istio 安全加固
 - [[envoy]] — Envoy
-- [[concepts/microservice-resilience-patterns|microservice-resilience-patterns]] — Microservice Resilience Patterns
-- [[concepts/service-mesh-architecture|service-mesh-architecture]] — Service Mesh Architecture
-- [[concepts/service-mesh-architecture|Service Mesh Architecture]]
-- [[concepts/microservice-resilience-patterns|Microservice Resilience Patterns]]
+- [[concepts/microservice-resilience-patterns.md|microservice-resilience-patterns]] — Microservice Resilience Patterns
+- [[concepts/service-mesh-architecture.md|service-mesh-architecture]] — Service Mesh Architecture
+- [[concepts/service-mesh-architecture.md|Service Mesh Architecture]]
+- [[concepts/microservice-resilience-patterns.md|Microservice Resilience Patterns]]
 - [[envoy|Envoy Proxy]]
 - [[linkerd|Linkerd]]
 
@@ -116,21 +116,21 @@ Benefits: lower resource overhead, simpler operations, no sidecar injection issu
 - RELEASE-NOTES-0.5
 - 99-istio-service-mesh-guide
 - 01-istio-enterprise-service-mesh
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-mesh-istio-fta|Service Mesh(Istio) 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting|05-service-mesh-istio-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md|05-service-mesh-istio-troubleshooting]]
 - istio
-- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[references/k8s-platform-extensions|平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格]] — Cross-reference
-- [[references/multi-cloud-terms|K8s 多云架构术语参考]] — Cross-reference
-- [[concepts/service-mesh-evolution|服务网格演进]] — Cross-reference
-- [[concepts/bp-security|最佳实践：Security]] — Cross-reference
-- [[skills/learn-05-ingress-basics|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
-- [[skills/service-mesh-istio-fta|Service Mesh(Istio) 异常故障树分析]] — Cross-reference
-- [[skills/ts-cloud-provider|云服务商集成排查]] — Cross-reference
-- [[skills/deployment-canary-and-bluegreen|金丝雀与蓝绿发布]] — Cross-reference
-- [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
-- [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[entities/k8s-platform-extensions.md|平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格]] — Cross-reference
+- [[entities/multi-cloud-terms.md|K8s 多云架构术语参考]] — Cross-reference
+- [[concepts/service-mesh-evolution.md|服务网格演进]] — Cross-reference
+- [[concepts/bp-security.md|最佳实践：Security]] — Cross-reference
+- [[skills/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
+- [[skills/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]] — Cross-reference
+- [[skills/ts-cloud-provider.md|云服务商集成排查]] — Cross-reference
+- [[skills/deployment-canary-and-bluegreen.md|金丝雀与蓝绿发布]] — Cross-reference
+- [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
+- [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
+- [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]

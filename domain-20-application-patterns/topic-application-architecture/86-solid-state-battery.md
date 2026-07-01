@@ -121,7 +121,7 @@ k8s_versions:
 
 <!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-#<!-- chunk: 1.1 市场规模与趋势 -->## 1.1 市场规模与趋势
+## 1.1 市场规模与趋势
 
 固态电池是下一代动力电池的核心方向，全球市场规模预计在 2030 年突破 400 亿美元。主要驱动力包括电动汽车续航焦虑、储能安全需求以及消费电子轻薄化趋势。丰田、三星 SDI、宁德时代、QuantumScape 等企业已投入数十亿美元进行研发。全固态电池能量密度有望达到 500 Wh/kg，远超当前液态锂电池的 250-300 Wh/kg。
 
@@ -133,7 +133,7 @@ k8s_versions:
 | 固态电解质类型 | 硫化物/氧化物/聚合物 | 硫化物为主流 | 复合固态电解质 |
 | 主要应用 | 消费电子/医疗 | 低速车/储能 | EV/航空航天 |
 
-#<!-- chunk: 1.2 行业痛点 -->## 1.2 行业痛点
+## 1.2 行业痛点
 
 | 痛点 | 说明 | 数字化转型驱动 |
 |:---|:---|:---|
@@ -144,7 +144,7 @@ k8s_versions:
 | 性能验证 | 长循环寿命测试周期长达数月 | 加速老化模型 + 数据闭环 |
 | 成本控制 | 硫化物电解质成本高 | 工艺仿真优化降本 |
 
-#<!-- chunk: 1.3 数字化转型架构影响 -->## 1.3 数字化转型架构影响
+## 1.3 数字化转型架构影响
 
 固态电池研发到量产涉及大量计算密集型任务（DFT/MD/FEA）、高吞吐数据采集（中试产线）、实时监控（BMS）和安全合规（电池安全标准）。整体架构需要覆盖 HPC 高性能计算、IoT 数据采集、AI 模型训练与推理、以及完整的数据溯源与审计链路。
 
@@ -152,27 +152,27 @@ k8s_versions:
 
 <!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-#<!-- chunk: 2.1 材料设计与筛选 -->## 2.1 材料设计与筛选
+## 2.1 材料设计与筛选
 
 通过高通量计算和 AI 模型筛选固态电解质和电极材料。系统需要支持 DFT（密度泛函理论）、MD（分子动力学）等第一性原理计算，结合材料基因组数据库进行大规模虚拟筛选。每日计算任务可达数千个，需要 GPU 集群和 HPC 调度系统支撑。
 
 **核心流程**: 目标属性定义 → 候选材料生成 → DFT/MD 计算 → 性能评估 → AI 排序 → 实验验证 → 数据反馈
 
-#<!-- chunk: 2.2 分子模拟与界面分析 -->## 2.2 分子模拟与界面分析
+## 2.2 分子模拟与界面分析
 
 针对固态电解质与电极的界面问题，进行原子尺度的分子动力学模拟。模拟系统需要支持数百万原子的长时间模拟，分析离子传导路径、界面副反应和机械应力分布。输出包括离子电导率、界面阻抗谱、以及机械稳定性评估。
 
-#<!-- chunk: 2.3 中试产线数字化 -->## 2.3 中试产线数字化
+## 2.3 中试产线数字化
 
 中试产线包含配料搅拌、涂布烘干、叠片封装、化成测试等环节。通过 IoT 传感器实时采集温度、湿度、压力、厚度等工艺参数，结合数字孪生模型进行工艺参数优化和良率预测。
 
 **核心流程**: 原料配比 → 搅拌涂布 → 辊压分切 → 叠片/卷绕 → 注液/固化 → 化成分容 → 性能测试
 
-#<!-- chunk: 2.4 BMS 电池管理系统 -->## 2.4 BMS 电池管理系统
+## 2.4 BMS 电池管理系统
 
 固态电池 BMS 需要实现电池状态估计（SOC/SOH/SOP）、均衡控制、热管理、故障诊断和寿命预测。通过实时采集电压、电流、温度数据，结合 AI 模型进行精准的状态估算和问题预警。
 
-#<!-- chunk: 2.5 安全测试与认证 -->## 2.5 安全测试与认证
+## 2.5 安全测试与认证
 
 支持针刺、挤压、过充、热箱等安全测试的数字化管理。测试数据需要完整记录、可追溯，满足 UN38.3、GB/T 31485、IEC 62660 等标准要求。
 
@@ -180,7 +180,7 @@ k8s_versions:
 
 <!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-#<!-- chunk: 3.1 固态电池全景架构 -->## 3.1 固态电池全景架构
+## 3.1 固态电池全景架构
 
 ```mermaid
 graph TB
@@ -231,7 +231,7 @@ graph TB
     I2 --> D1 & D2 & D3 & D4 & D5
 ```
 
-#<!-- chunk: 3.2 研发到量产全流程 -->## 3.2 研发到量产全流程
+## 3.2 研发到量产全流程
 
 ```mermaid
 flowchart LR
@@ -281,7 +281,7 @@ flowchart LR
 
 <!-- chunk: 5. Kubernetes 部署方案 -->## 5. Kubernetes 部署方案
 
-#<!-- chunk: 5.1 材料模拟 GPU Job -->## 5.1 材料模拟 GPU Job
+## 5.1 材料模拟 GPU Job
 
 ```yaml
 apiVersion: batch/v1
@@ -360,7 +360,7 @@ spec:
       restartPolicy: Never
 ```
 
-#<!-- chunk: 5.2 BMS 数据采集 Deployment -->## 5.2 BMS 数据采集 Deployment
+## 5.2 BMS 数据采集 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -442,7 +442,7 @@ spec:
             periodSeconds: 10
 ```
 
-#<!-- chunk: 5.3 BMS 服务与 ConfigMap -->## 5.3 BMS 服务与 ConfigMap
+## 5.3 BMS 服务与 ConfigMap
 
 ```yaml
 apiVersion: v1
@@ -504,7 +504,7 @@ stringData:
 
 <!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-#<!-- chunk: 6.1 数据流全景 -->## 6.1 数据流全景
+## 6.1 数据流全景
 
 ```mermaid
 flowchart TB
@@ -544,7 +544,7 @@ flowchart TB
     ST1 & ST2 & ST3 & ST4 --> A1 & A2 & A3
 ```
 
-#<!-- chunk: 6.2 数据流说明 -->## 6.2 数据流说明
+## 6.2 数据流说明
 
 - **计算数据流**: DFT/MD 计算结果通过 API 上传至 OSS，元数据存入 PolarDB，支持结果检索与复用
 - **IoT 数据流**: 产线传感器通过 MQTT 网关接入，经 Flink 实时清洗后写入 Lindorm 时序库
@@ -555,7 +555,7 @@ flowchart TB
 
 <!-- chunk: 7. AI/ML 组件 -->## 7. AI/ML 组件
 
-#<!-- chunk: 7.1 模型训练流水线 -->## 7.1 模型训练流水线
+## 7.1 模型训练流水线
 
 ```mermaid
 flowchart LR
@@ -571,7 +571,7 @@ flowchart LR
     I --> J[在线推理]
 ```
 
-#<!-- chunk: 7.2 核心模型 -->## 7.2 核心模型
+## 7.2 核心模型
 
 | 模型 | 用途 | 输入 | 输出 | 框架 |
 |:---|:---|:---|:---|:---|
@@ -582,7 +582,7 @@ flowchart LR
 | 安全风险预测 | 热失控风险预警 | 实时运行数据 | 风险等级 (1-5) | XGBoost Ensemble |
 | 异常检测 | 产线异常检测 | 传感器时序数据 | 异常分数 + 位置 | AutoEncoder |
 
-#<!-- chunk: 7.3 数据管道 -->## 7.3 数据管道
+## 7.3 数据管道
 
 训练数据通过 DataWorks 数据集成管道从多个数据源汇聚到 MaxCompute 数据湖，经特征工程处理后生成训练样本集。在线推理服务部署在 ACK 上的 PAI-EAS 端点，支持 A/B 测试和模型灰度发布。
 
@@ -590,7 +590,7 @@ flowchart LR
 
 <!-- chunk: 8. 安全与合规 -->## 8. 安全与合规
 
-#<!-- chunk: 8.1 行业法规与标准 -->## 8.1 行业法规与标准
+## 8.1 行业法规与标准
 
 | 法规/标准 | 适用范围 | 架构要求 |
 |:---|:---|:---|
@@ -602,7 +602,7 @@ flowchart LR
 | GB/T 35273 | 个人信息安全规范 | 实验人员数据保护 |
 | 等保三级 | 工业控制系统安全 | 网络隔离 + 审计日志 |
 
-#<!-- chunk: 8.2 安全架构要点 -->## 8.2 安全架构要点
+## 8.2 安全架构要点
 
 - **配方保密**: 核心固态电解质配方数据加密存储，访问需多因素认证
 - **实验数据**: 全链路审计日志，操作不可抵赖
@@ -657,17 +657,17 @@ flowchart LR
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

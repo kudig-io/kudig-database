@@ -104,7 +104,7 @@ k8s_versions:
 
 <!-- chunk: 1. 集群类型选择 -->## 1. 集群类型选择
 
-#<!-- chunk: 1.1 ACK 版本对比 -->## 1.1 ACK 版本对比
+## 1.1 ACK 版本对比
 
 | 维度 | ACK 标准托管版 | ACK Pro 版 | ACK Serverless |
 |------|--------------|-----------|---------------|
@@ -117,7 +117,7 @@ k8s_versions:
 | **适用场景** | 中小型业务 | 生产核心业务 | 突发/弹性负载 |
 | **迁移推荐** | 测试环境 | **生产环境（推荐）** | 补充弹性能力 |
 
-#<!-- chunk: 1.2 决策建议 -->## 1.2 决策建议
+## 1.2 决策建议
 
 ```
 自建集群规模
@@ -133,7 +133,7 @@ k8s_versions:
 
 <!-- chunk: 2. VPC 与网络规划 -->## 2. VPC 与网络规划
 
-#<!-- chunk: 2.1 网络架构设计 -->## 2.1 网络架构设计
+## 2.1 网络架构设计
 
 > **核心原则**: CIDR 不能与自建集群重叠（如需 VPN/专线互联），预留 3 倍以上扩展空间。
 
@@ -166,7 +166,7 @@ k8s_versions:
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 2.2 CIDR 规划规则 -->## 2.2 CIDR 规划规则
+## 2.2 CIDR 规划规则
 
 | 网段类型 | CIDR 范围 | 说明 | 规划建议 |
 |---------|----------|------|---------|
@@ -175,7 +175,7 @@ k8s_versions:
 | **Pod vSwitch** | /19 每个可用区 | Terway Pod IP | 每 AZ 8190 个 Pod IP |
 | **Service CIDR** | 172.21.0.0/16 | K8s Service VIP | 65534 个 Service |
 
-#<!-- chunk: 2.3 与自建集群网络互通 -->## 2.3 与自建集群网络互通
+## 2.3 与自建集群网络互通
 
 > 迁移期间，自建集群与 ACK 可能需要互访（如数据库同步、服务调用）。
 
@@ -219,7 +219,7 @@ aliyun vpc CreateVpnConnection \
 # 需通过控制台申请物理专线接入
 ```
 
-#<!-- chunk: 2.4 VPC 创建实操 -->## 2.4 VPC 创建实操
+## 2.4 VPC 创建实操
 
 ```bash
 # 创建 VPC
@@ -268,7 +268,7 @@ aliyun vpc DescribeVSwitches --VpcId $VPC_ID --output cols=VSwitchId,VSwitchName
 
 <!-- chunk: 3. 节点池设计 -->## 3. 节点池设计
 
-#<!-- chunk: 3.1 节点池规划 -->## 3.1 节点池规划
+## 3.1 节点池规划
 
 | 节点池 | 用途 | 实例规格 | 数量 | 标签 | 污点 |
 |--------|------|---------|------|------|------|
@@ -277,7 +277,7 @@ aliyun vpc DescribeVSwitches --VpcId $VPC_ID --output cols=VSwitchId,VSwitchName
 | **stateful-pool** | 有状态服务（DB/缓存） | ecs.r7.2xlarge (8C64G) | 2-4 | `node-role=stateful` | `workload-type=stateful:NoSchedule` |
 | **spot-pool** | 弹性/非核心任务 | ecs.g7.2xlarge | 0-5 (ASG) | `node-role=spot` | `spot=true:NoSchedule` |
 
-#<!-- chunk: 3.2 节点规格选型 -->## 3.2 节点规格选型
+## 3.2 节点规格选型
 
 ```
 自建集群节点规格 → ACK 节点规格映射
@@ -289,7 +289,7 @@ aliyun vpc DescribeVSwitches --VpcId $VPC_ID --output cols=VSwitchId,VSwitchName
 GPU 节点   → ecs.gn7i-c8g1.2xlarge   — NVIDIA A10，适合推理任务
 ```
 
-#<!-- chunk: 3.3 自动伸缩配置 -->## 3.3 自动伸缩配置
+## 3.3 自动伸缩配置
 
 ```yaml
 # 节点池自动伸缩配置（通过 ACK 控制台或 API 设置）
@@ -316,7 +316,7 @@ auto_scaling:
 
 <!-- chunk: 4. Addon 与组件配置 -->## 4. Addon 与组件配置
 
-#<!-- chunk: 4.1 核心 Addon 选型 -->## 4.1 核心 Addon 选型
+## 4.1 核心 Addon 选型
 
 | 类别 | Addon 名称 | 说明 | 迁移建议 |
 |------|-----------|------|---------|
@@ -330,7 +330,7 @@ auto_scaling:
 | **DNS** | coredns | 集群 DNS | **必装**，ACK 默认含 |
 | **安全** | ack-security-inspector | ACK 安全巡检 | **推荐** |
 
-#<!-- chunk: 4.2 CNI 选型决策 -->## 4.2 CNI 选型决策
+## 4.2 CNI 选型决策
 
 ```
 自建集群 CNI
@@ -356,7 +356,7 @@ auto_scaling:
 
 <!-- chunk: 5. 集群创建实操 -->## 5. 集群创建实操
 
-#<!-- chunk: 5.1 通过 API 创建 ACK Pro 集群 -->## 5.1 通过 API 创建 ACK Pro 集群
+## 5.1 通过 API 创建 ACK Pro 集群
 
 ```bash
 # 创建 ACK Pro 托管版集群
@@ -408,7 +408,7 @@ kubectl cluster-info
 kubectl get nodes  # 此时应为空（尚未创建节点池）
 ```
 
-#<!-- chunk: 5.2 创建节点池 -->## 5.2 创建节点池
+## 5.2 创建节点池
 
 ```bash
 # 系统节点池
@@ -477,7 +477,11 @@ kubectl get nodes -w
 
 <!-- chunk: 6. 基础设施验证 -->## 6. 基础设施验证
 
-#<!-- chunk: 6.1 集群健康检查 -->## 6.1 集群健康检查
+## 6.1 集群健康检查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 全面健康检查脚本
@@ -530,7 +534,10 @@ kubectl get svc -n kube-system | grep nginx-ingress
 echo "=== 健康检查完成 ==="
 ```
 
-#<!-- chunk: 6.2 性能基线测试 -->## 6.2 性能基线测试
+## 6.2 性能基线测试
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 部署网络性能测试工具
@@ -575,7 +582,10 @@ kubectl logs job/fio-test
 
 <!-- chunk: 7. 迁移前基线建立 -->## 7. 迁移前基线建立
 
-#<!-- chunk: 7.1 监控基线 -->## 7.1 监控基线
+## 7.1 监控基线
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 如果安装了 ARMS Prometheus，确认指标采集
@@ -599,7 +609,7 @@ helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
 # - 网络吞吐
 ```
 
-#<!-- chunk: 7.2 日志采集配置 -->## 7.2 日志采集配置
+## 7.2 日志采集配置
 
 ```yaml
 # 如果使用 SLS，配置 Logtail 采集规则
@@ -632,7 +642,7 @@ spec:
 
 <!-- chunk: 检查清单 -->## 检查清单
 
-#<!-- chunk: Phase 1 完成标准 -->## Phase 1 完成标准
+## Phase 1 完成标准
 
 - [ ] ACK 集群类型已选择（推荐 Pro 版）
 - [ ] VPC 和 vSwitch 已创建，CIDR 无冲突
@@ -656,16 +666,16 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-migration MOC
-- [[domain-08-release-change-management/topic-migration/README|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
-- [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning|01 - 迁移评估与规划]]
-- [[domain-08-release-change-management/topic-migration/03-application-workload-migration|03 - 应用工作负载迁移]]
-- [[domain-08-release-change-management/topic-migration/04-storage-data-migration|04 - 存储与数据迁移]]
-- [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover|05 - 网络迁移与流量切换]]
-- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration|06 - 有状态服务迁移]]
-- [[domain-08-release-change-management/topic-migration/07-observability-security-migration|07 - 可观测性与安全迁移]]
-- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission|08 - 验收、切换与旧集群退役]]
-- [[domain-08-release-change-management/topic-migration/09-migration-toolchain|09 - 迁移工具链参考]]
-- [[domain-08-release-change-management/topic-migration/10-real-world-case-study|10 - 生产迁移实战案例]]
+- [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
+- [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
+- [[domain-08-release-change-management/topic-migration/03-application-workload-migration.md|03 - 应用工作负载迁移]]
+- [[domain-08-release-change-management/topic-migration/04-storage-data-migration.md|04 - 存储与数据迁移]]
+- [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换]]
+- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration.md|06 - 有状态服务迁移]]
+- [[domain-08-release-change-management/topic-migration/07-observability-security-migration.md|07 - 可观测性与安全迁移]]
+- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission.md|08 - 验收、切换与旧集群退役]]
+- [[domain-08-release-change-management/topic-migration/09-migration-toolchain.md|09 - 迁移工具链参考]]
+- [[domain-08-release-change-management/topic-migration/10-real-world-case-study.md|10 - 生产迁移实战案例]]
 
 ## See Also
 
@@ -676,4 +686,4 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]

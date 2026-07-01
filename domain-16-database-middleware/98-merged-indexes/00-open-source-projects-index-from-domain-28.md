@@ -117,7 +117,7 @@ k8s_versions:
 
 <!-- chunk: 一、关系型数据库 -->## 一、关系型数据库
 
-#<!-- chunk: 1.1 MySQL 生态 -->## 1.1 MySQL 生态
+## 1.1 MySQL 生态
 
 | 项目 | 作用 | CNCF 状态 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -131,7 +131,7 @@ k8s_versions:
 | **Orchestrator** | MySQL 复制拓扑管理 | GitHub | v3.2.6 | 5.5k+ | Apache-2.0 |
 | **MHA** | MySQL 高可用故障转移 | Google Code Archive | v0.58 | 7k+ | GPL-2.0 |
 
-##<!-- chunk: MySQL 生态项目详解 -->## MySQL 生态项目详解
+## MySQL 生态项目详解
 
 MySQL 是全球使用最广泛的开源关系型数据库，由 Oracle 公司维护。在企业级场景中，MySQL 通常需要搭配多种工具来实现高可用、读写分离、备份恢复和性能监控。Percona Server 是 MySQL 的增强版本，提供了额外的性能监控和诊断工具（如 Performance Schema 增强、审计插件等），适合对性能有极致要求的场景。MariaDB 是 MySQL 的社区分支，由 MySQL 原始创始人 Michael Widenius 发起，提供了更多的存储引擎选择和性能优化。
 
@@ -141,7 +141,7 @@ ProxySQL 是 MySQL 生态中最流行的数据库代理，核心优势在于高�
 
 Orchestrator 是 MySQL 复制拓扑管理工具，提供了 Web UI 来可视化管理 MySQL 的主从关系。它支持自动故障检测和恢复（Automatic Recovery），可以在主库问题时自动执行故障转移，并通过 raft 共识协议实现自身的 HA 部署。
 
-#<!-- chunk: 1.2 PostgreSQL 生态 -->## 1.2 PostgreSQL 生态
+## 1.2 PostgreSQL 生态
 
 | 项目 | 作用 | CNCF 状态 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -155,7 +155,7 @@ Orchestrator 是 MySQL 复制拓扑管理工具，提供了 Web UI 来可视化�
 | **Barman** | PostgreSQL 备份管理 | EDB | v3.12.0 | 2k+ | GPL-3.0 |
 | **WAL-G** | PostgreSQL WAL 归档备份 | WAL-G | v3.0.0 | 3k+ | Apache-2.0 |
 
-##<!-- chunk: PostgreSQL 生态项目详解 -->## PostgreSQL 生态项目详解
+## PostgreSQL 生态项目详解
 
 PostgreSQL 是功能最强大的开源关系型数据库，以其丰富的数据类型（JSON/JSONB、Array、Hstore、GIS）、强大的扩展能力（Extension 机制）和严格的 SQL 标准合规性著称。在企业级场景中，PostgreSQL 的选择通常不需要像 MySQL 那样依赖复杂的中间件层，因为 PostgreSQL 原生支持很多高级特性（如逻辑复制、分区表、并行查询、窗口函数等）。
 
@@ -163,7 +163,7 @@ PostgreSQL 是功能最强大的开源关系型数据库，以其丰富的数据
 
 Patroni 是另一个重要的 PostgreSQL 高可用工具，由 Zalando 开发。它通过 etcd/Consul/ZooKeeper 等 DCS（Distributed Configuration Store）实现 Leader 选举和自动故障转移。Patroni 的优势在于与 Zalando Postgres Operator 的紧密集成，在 Kubernetes 上提供完整的 PostgreSQL 生命周期管理。
 
-#<!-- chunk: 1.3 分布式 SQL 数据库 -->## 1.3 分布式 SQL 数据库
+## 1.3 分布式 SQL 数据库
 
 | 项目 | 作用 | CNCF 状态 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -178,7 +178,7 @@ Patroni 是另一个重要的 PostgreSQL 高可用工具，由 Zalando 开发。
 
 <!-- chunk: 二、NoSQL 数据库 -->## 二、NoSQL 数据库
 
-#<!-- chunk: 2.1 文档型数据库 -->## 2.1 文档型数据库
+## 2.1 文档型数据库
 
 | 项目 | 作用 | CNCF 状态 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -186,7 +186,7 @@ Patroni 是另一个重要的 PostgreSQL 高可用工具，由 Zalando 开发。
 | **MongoDB Community Operator** | MongoDB K8s 运维 | MongoDB | v0.12.0 | 1k+ | Apache-2.0 |
 | **FerretDB** | MongoDB 兼容的 PostgreSQL 前端 | CNCF Sandbox | v1.24.0 | 9k+ | Apache-2.0 |
 
-#<!-- chunk: 2.2 键值存储 -->## 2.2 键值存储
+## 2.2 键值存储
 
 | 项目 | 作用 | CNCF 状态 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -198,7 +198,7 @@ Patroni 是另一个重要的 PostgreSQL 高可用工具，由 Zalando 开发。
 | **Apache Cassandra** | 分布式宽列存储 | Apache | v5.0.0 | 9k+ | Apache-2.0 |
 | **ScyllaDB** | Cassandra C++ 重写 | ScyllaDB | v6.2.0 | 13k+ | AGPL-3.0/BSL |
 
-#<!-- chunk: 2.3 时序数据库 -->## 2.3 时序数据库
+## 2.3 时序数据库
 
 | 项目 | 作用 | CNCF 状态 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -257,7 +257,7 @@ Patroni 是另一个重要的 PostgreSQL 高可用工具，由 Zalando 开发。
 
 <!-- chunk: 六、详细特性对比矩阵 -->## 六、详细特性对比矩阵
 
-#<!-- chunk: 6.1 关系型数据库功能矩阵 -->## 6.1 关系型数据库功能矩阵
+## 6.1 关系型数据库功能矩阵
 
 | 特性 | MySQL 9.2 | PostgreSQL 17.4 | MariaDB 11.4 | Percona Server 8.4 |
 |:---|:---|:---|:---|:---|
@@ -274,7 +274,7 @@ Patroni 是另一个重要的 PostgreSQL 高可用工具，由 Zalando 开发。
 | **连接池** | 需 ProxySQL | PgBouncer/PgPool-II | 需外部 | 需 ProxySQL |
 | **K8s Operator** | Percona/Oracle | CNPG (最佳) | MariaDB Operator | Percona Operator |
 
-#<!-- chunk: 6.2 NoSQL 数据库功能矩阵 -->## 6.2 NoSQL 数据库功能矩阵
+## 6.2 NoSQL 数据库功能矩阵
 
 | 特性 | Redis 8.0 | MongoDB 8.0 | Cassandra 5.0 | ScyllaDB 6.2 |
 |:---|:---|:---|:---|:---|
@@ -290,7 +290,7 @@ Patroni 是另一个重要的 PostgreSQL 高可用工具，由 Zalando 开发。
 | **延迟** | < 1ms | 1-5ms | 5-20ms | 1-5ms |
 | **K8s Operator** | OT-CONTAINER-KIT | Community Operator | Cass Operator | Scylla Operator |
 
-#<!-- chunk: 6.3 消息队列功能矩阵 -->## 6.3 消息队列功能矩阵
+## 6.3 消息队列功能矩阵
 
 | 特性 | Kafka 3.9 | Pulsar 4.0 | RabbitMQ 4.0 | NATS 2.11 | RocketMQ 5.3 |
 |:---|:---|:---|:---|:---|:---|
@@ -311,7 +311,7 @@ Patroni 是另一个重要的 PostgreSQL 高可用工具，由 Zalando 开发。
 
 <!-- chunk: 七、CNCF Landscape 映射 -->## 七、CNCF Landscape 映射
 
-#<!-- chunk: 7.1 CNCF 项目全景 -->## 7.1 CNCF 项目全景
+## 7.1 CNCF 项目全景
 
 ```yaml
 CNCF_Graduated (毕业项目):
@@ -335,7 +335,7 @@ CNCF_Sandbox (沙箱项目):
   - Strimzi: K8s Kafka Operator (2023)
 ```
 
-#<!-- chunk: 7.2 CNCF 项目成熟度评估 -->## 7.2 CNCF 项目成熟度评估
+## 7.2 CNCF 项目成熟度评估
 
 | 项目 | CNCF 状态 | 进入年份 | 社区活跃度 | 生产就绪度 | 商业支持 |
 |:---|:---|:---|:---|:---|:---|
@@ -351,7 +351,7 @@ CNCF_Sandbox (沙箱项目):
 
 <!-- chunk: 八、项目成熟度综合评估 -->## 八、项目成熟度综合评估
 
-#<!-- chunk: 8.1 生产就绪度评分 -->## 8.1 生产就绪度评分
+## 8.1 生产就绪度评分
 
 以下评分基于社区活跃度、文档完善度、生产案例、商业支持、K8s 生态集成度五个维度（1-5 分，5 为最佳）。
 
@@ -372,7 +372,7 @@ CNCF_Sandbox (沙箱项目):
 | **Debezium** | 4 | 4 | 5 | 4 (Red Hat) | 4 | 4.2 |
 | **ClickHouse** | 5 | 4 | 4 | 5 (ClickHouse Inc) | 3 | 4.2 |
 
-#<!-- chunk: 8.2 运维复杂度评估 -->## 8.2 运维复杂度评估
+## 8.2 运维复杂度评估
 
 | 项目 | 部署复杂度 | 配置复杂度 | 日常运维 | 故障排查 | 扩容难度 | 综合复杂度 |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -394,7 +394,7 @@ CNCF_Sandbox (沙箱项目):
 
 <!-- chunk: 九、选型决策矩阵 -->## 九、选型决策矩阵
 
-#<!-- chunk: 9.1 关系型数据库选型 -->## 9.1 关系型数据库选型
+## 9.1 关系型数据库选型
 
 ```mermaid
 graph TD
@@ -419,7 +419,7 @@ graph TD
     style VITESS fill:#fff3e0
 ```
 
-#<!-- chunk: 9.2 选型决策树 (完整版) -->## 9.2 选型决策树 (完整版)
+## 9.2 选型决策树 (完整版)
 
 ```yaml
 Step_1_确定数据模型:
@@ -480,7 +480,7 @@ Step_5_消息队列选型:
     → RocketMQ
 ```
 
-#<!-- chunk: 9.3 缓存选型 -->## 9.3 缓存选型
+## 9.3 缓存选型
 
 | 场景 | 推荐方案 | 理由 | 替代方案 |
 |:---|:---|:---|:---|
@@ -491,7 +491,7 @@ Step_5_消息队列选型:
 | 超高性能缓存 | Dragonfly / KeyDB | 多线程架构，吞吐量更高 | Redis 8.0 (IO threads) |
 | 发布订阅 | Redis Pub/Sub + Streams | 原生支持，持久化能力 | NATS, RabbitMQ |
 
-#<!-- chunk: 9.4 消息队列选型 -->## 9.4 消息队列选型
+## 9.4 消息队列选型
 
 | 场景 | 推荐方案 | 理由 | 替代方案 |
 |:---|:---|:---|:---|
@@ -501,7 +501,7 @@ Step_5_消息队列选型:
 | 物联网数据采集 | EMQX / RocketMQ | MQTT 协议，海量连接 | Kafka + MQTT Bridge |
 | Kafka 替代（简化运维） | Redpanda | 无 ZooKeeper，C++ 实现 | Strimzi + Kafka |
 
-#<!-- chunk: 9.5 数据库中间件选型 -->## 9.5 数据库中间件选型
+## 9.5 数据库中间件选型
 
 | 场景 | 推荐方案 | 理由 | 数据库支持 |
 |:---|:---|:---|:---|
@@ -527,7 +527,7 @@ Step_5_消息队列选型:
 | MulanPSL-2.0 | 中国开源许可 | 无 | OceanBase |
 | PostgreSQL License | 类BSD许可 | 无 | PostgreSQL |
 
-#<!-- chunk: 许可证风险矩阵 -->## 许可证风险矩阵
+## 许可证风险矩阵
 
 | 风险等级 | 许可证类型 | 使用建议 | 审查频率 |
 |:---|:---|:---|:---|
@@ -540,7 +540,7 @@ Step_5_消息队列选型:
 
 <!-- chunk: 十一、版本生命周期 -->## 十一、版本生命周期
 
-#<!-- chunk: 11.1 主要项目版本支持 -->## 11.1 主要项目版本支持
+## 11.1 主要项目版本支持
 
 | 项目 | 当前 LTS | 支持截止 | 下一 LTS | 升级建议 |
 |:---|:---|:---|:---|:---|
@@ -552,7 +552,7 @@ Step_5_消息队列选型:
 | **Kafka** | 3.9 | — | 4.0 (KRaft only) | 移除 ZooKeeper |
 | **TiDB** | 9.0 | — | — | 从 6.x/7.x 升级 |
 
-#<!-- chunk: 11.2 已 EOL 版本警告 -->## 11.2 已 EOL 版本警告
+## 11.2 已 EOL 版本警告
 
 ```yaml
 已停止维护版本 (必须升级):
@@ -577,7 +577,7 @@ Step_5_消息队列选型:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-28-enterprise-database-middleware MOC
-- [[domain-16-database-middleware/README|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
+- [[domain-16-database-middleware/README.md|Domain 16: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
 - MySQL 企业级数据库运维管理
 - PostgreSQL 企业级数据库高可用架构
 - 分布式数据库企业级实践深度指南

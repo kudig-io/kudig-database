@@ -67,7 +67,7 @@ Datadog is the industry-leading enterprise monitoring platform that provides uni
 
 <!-- chunk: 架构设计 (Architecture Design) -->## 架构设计 (Architecture Design)
 
-#<!-- chunk: Datadog 企业级监控架构 (Enterprise Datadog Monitoring Architecture) -->## Datadog 企业级监控架构 (Enterprise Datadog Monitoring Architecture)
+## Datadog 企业级监控架构 (Enterprise Datadog Monitoring Architecture)
 
 ```yaml
 # Datadog Agent 部署配置
@@ -108,7 +108,7 @@ datadog_agent:
       telemetry_enabled: true
 ```
 
-#<!-- chunk: 监控架构图 (Monitoring Architecture Diagram) -->## 监控架构图 (Monitoring Architecture Diagram)
+## 监控架构图 (Monitoring Architecture Diagram)
 
 ```mermaid
 graph TB
@@ -174,7 +174,7 @@ graph TB
 
 <!-- chunk: 核心功能配置 (Core Functionality Configuration) -->## 核心功能配置 (Core Functionality Configuration)
 
-#<!-- chunk: 基础设施监控配置 (Infrastructure Monitoring Configuration) -->## 基础设施监控配置 (Infrastructure Monitoring Configuration)
+## 基础设施监控配置 (Infrastructure Monitoring Configuration)
 
 ```yaml
 # 基础设施监控完整配置
@@ -259,7 +259,7 @@ infrastructure_monitoring:
         - cloud_run
 ```
 
-#<!-- chunk: 应用性能监控配置 (APM Configuration) -->## 应用性能监控配置 (APM Configuration)
+## 应用性能监控配置 (APM Configuration)
 
 ```yaml
 # APM 应用性能监控配置
@@ -311,7 +311,7 @@ apm_configuration:
 
 <!-- chunk: 监控策略 (Monitoring Strategies) -->## 监控策略 (Monitoring Strategies)
 
-#<!-- chunk: 关键业务指标监控 (Key Business Metrics Monitoring) -->## 关键业务指标监控 (Key Business Metrics Monitoring)
+## 关键业务指标监控 (Key Business Metrics Monitoring)
 
 ```python
 # Datadog 监控策略 Python SDK 示例
@@ -418,7 +418,7 @@ for monitor in infra_monitors:
     print(f"Created monitor: {result['name']} with ID: {result['id']}")
 ```
 
-#<!-- chunk: 日志监控配置 (Log Monitoring Configuration) -->## 日志监控配置 (Log Monitoring Configuration)
+## 日志监控配置 (Log Monitoring Configuration)
 
 ```yaml
 # 日志监控和分析配置
@@ -482,7 +482,7 @@ logs_configuration:
 
 <!-- chunk: 告警管理 (Alert Management) -->## 告警管理 (Alert Management)
 
-#<!-- chunk: 智能告警配置 (Intelligent Alerting Configuration) -->## 智能告警配置 (Intelligent Alerting Configuration)
+## 智能告警配置 (Intelligent Alerting Configuration)
 
 ```json
 {
@@ -541,7 +541,7 @@ logs_configuration:
 }
 ```
 
-#<!-- chunk: 告警抑制和去重 (Alert Suppression and Deduplication) -->## 告警抑制和去重 (Alert Suppression and Deduplication)
+## 告警抑制和去重 (Alert Suppression and Deduplication)
 
 ```yaml
 # 告警抑制策略
@@ -581,7 +581,7 @@ alert_suppression:
 
 <!-- chunk: 仪表板和可视化 (Dashboards and Visualization) -->## 仪表板和可视化 (Dashboards and Visualization)
 
-#<!-- chunk: 企业级仪表板配置 (Enterprise Dashboard Configuration) -->## 企业级仪表板配置 (Enterprise Dashboard Configuration)
+## 企业级仪表板配置 (Enterprise Dashboard Configuration)
 
 ```json
 {
@@ -686,7 +686,7 @@ alert_suppression:
 
 <!-- chunk: 运维管理 (Operational Management) -->## 运维管理 (Operational Management)
 
-#<!-- chunk: 自动化运维脚本 (Automated Operations Scripts) -->## 自动化运维脚本 (Automated Operations Scripts)
+## 自动化运维脚本 (Automated Operations Scripts)
 
 ```bash
 #!/bin/bash
@@ -827,7 +827,7 @@ main
 
 <!-- chunk: 最佳实践 (Best Practices) -->## 最佳实践 (Best Practices)
 
-#<!-- chunk: 监控设计原则 (Monitoring Design Principles) -->## 监控设计原则 (Monitoring Design Principles)
+## 监控设计原则 (Monitoring Design Principles)
 
 1. **业务导向监控**
    ```yaml
@@ -885,7 +885,7 @@ main
          - "temporary files"
    ```
 
-#<!-- chunk: 安全和合规 (Security and Compliance) -->## 安全和合规 (Security and Compliance)
+## 安全和合规 (Security and Compliance)
 
 ```yaml
 # 安全监控配置
@@ -926,8 +926,8 @@ security_monitoring:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - observability/MOC.md|domain-20-enterprise-monitoring-alerting MOC]]
-- [[domain-06-observability/README|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-20 企业监控与告警 — 开源项目索引]]
+- [[domain-06-observability/README.md|Domain 06: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]]
 - Prometheus企业级监控系统深度实践
 - Grafana Enterprise Observability Platform 深度实践
 - OpenTelemetry分布式追踪与可观测性深度实践
@@ -945,8 +945,8 @@ security_monitoring:
 - 06-elastic-stack-enterprise-logging
 - 06-elastic-stack-enterprise-observability
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

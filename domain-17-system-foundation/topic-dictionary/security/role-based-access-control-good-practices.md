@@ -31,6 +31,7 @@ prerequisites:
 - cloud-provider-basics
 - etcd-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 基于角色的访问控制（RBAC）最佳实践
@@ -105,6 +106,4 @@ RBAC 的核心设计原则是**最小权限（Least Privilege）**。理想情�
 - https://kubernetes.io/docs/concepts/security/rbac-good-practices/
 
 ## Related
-
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

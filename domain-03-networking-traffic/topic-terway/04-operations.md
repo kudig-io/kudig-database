@@ -87,6 +87,9 @@ kubectl get ds terway-eniip -n kube-system -o wide
 
 **查看 IP 分配状态:**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli show
 ```
@@ -94,6 +97,9 @@ kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli show
 输出包含: 本地 IP 池、已分配 IP、关联 Pod、ENI 辅助 IP 列表。
 
 **查看 ENI 详细信息:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli show eni
@@ -103,6 +109,9 @@ kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli show eni
 
 **GC 预演 (不实际清理):**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli garbage-collect --dry-run
 ```
@@ -111,6 +120,9 @@ kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli garbage-collect
 
 **强制同步本地状态:**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli sync
 ```
@@ -118,6 +130,9 @@ kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli sync
 触发本地 IPAM 与 [[Kubernetes|Kubernetes]]es API|Kubernetes API]] 全量同步，适用于状态不一致场景。
 
 **查看帮助:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli --help
@@ -330,6 +345,9 @@ eni_idle_timeout --> ENI 空闲判定 --> ENI 回收 --> 完成
 
 **方法一: 重启 Terway Pod (触发启动对账)**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 NODE="<node-name>"
 TERWAY_POD=$(kubectl get pods -n kube-system -l app=terway \
@@ -340,6 +358,9 @@ kubectl delete pod -n kube-system ${TERWAY_POD}
 Terway 重启后会执行一次全量对账 GC (源码中 `wait.PollUntilContextCancel` 的 `immediate=true`)。
 
 **方法二: 通过 terway-cli 手动清理**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli garbage-collect --dry-run
@@ -364,6 +385,10 @@ done
 
 **场景 A: 加速 GC (IP 泄漏严重时临时调整)**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 kubectl get cm eni-config -n kube-system -o json | \
   jq '.data.eni_conf = (.data.eni_conf | fromjson |
@@ -376,6 +401,10 @@ kubectl rollout restart ds/terway-eniip -n kube-system
 ```
 
 **场景 B: 大规模集群优化 (减少 API 压力)**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 kubectl get cm eni-config -n kube-system -o json | \
@@ -881,6 +910,10 @@ spec:
 
 方式二 — 通过 ConfigMap 存储并挂载 (Grafana sidecar 自动发现):
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 kubectl create configmap terway-grafana-dashboard \
   --from-literal='terway-overview.json=<粘贴上方 JSON 内容>' \
@@ -917,6 +950,9 @@ DaemonSet 滚动升级策略为逐节点更新，每节点 Terway Pod 重建后�
 
 ### 4.3 回滚
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 kubectl rollout history ds/terway-eniip -n kube-system
 kubectl rollout undo ds/terway-eniip -n kube-system
@@ -952,6 +988,9 @@ kubectl rollout status ds/terway-eniip -n kube-system
 | Pod 分配 IP 极慢 | OpenAPI 限流 / vSwitch IP 不足 | 检查 `terway_alloc_ip_duration_ms` 指标 |
 
 ### 5.2 排障流程 (5 步法)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
 Step 1: 检查 Terway Pod 状态
@@ -1048,6 +1087,9 @@ kubectl logs -n kube-system <terway-pod> -c terway --tail=200 | grep -iE 'api.*e
 ### 5.4 跨节点通信失败
 
 **排查步骤:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
 跨节点 Pod 不通
@@ -1181,6 +1223,10 @@ ENI 独占模式下，同节点 Pod 间流量直接通过 ENI 转发，不经过
 
 ### 6.2 紧急处理脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 #!/bin/bash
 set -euo pipefail
@@ -1238,6 +1284,9 @@ echo "=== 处理完成 ==="
 
 ### 6.3 Finalizer 阻塞处理
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl get ipinstances -A -o json | jq -r '
   .items[] | select(.metadata.deletionTimestamp != null) |
@@ -1276,6 +1325,9 @@ echo "阻塞的 PodENI: $(kubectl get podenis -A -o json | jq '[.items[] | selec
 
 **安全 Finalizer 移除步骤:**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # Step 1: 确认关联的 Pod 已真正不存在
 IPINSTANCE_NAME="<name>"
@@ -1296,6 +1348,9 @@ kubectl get ipinstance ${IPINSTANCE_NAME} 2>&1 | grep "NotFound" || echo "WARNIN
 
 **批量安全移除 (谨慎使用):**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 批量移除所有被阻塞超过 1 小时的 IPInstance Finalizer
 kubectl get ipinstances -A -o json | jq -r '
@@ -1306,6 +1361,7 @@ kubectl get ipinstances -A -o json | jq -r '
     kubectl patch ipinstance ${name} --type='json' \
       -p='[{"op": "remove", "path": "/metadata/finalizers"}]'
   done
+
 ```
 
 **预防措施:**
@@ -1409,7 +1465,7 @@ kubectl get ipinstances -A -o json | jq -r '
 |:---|:---|
 | [01-product.md](./01-product.md) | Terway 产品概览: 定位、版本历史、模式总览 |
 | [02-architecture.md](./02-architecture.md) | 架构原理: ENI/ENIIP/IPVlan 模式、IPAM 机制、CRD 模型 |
-| [03-usage.md](./[[domain-03-networking-traffic/topic-terway/03-usage|03-usage]].md) | 使用指南: 安装配置、NetworkPolicy、固定 IP |
+| [03-usage.md](./[[domain-03-networking-traffic/topic-terway/03-usage.md|03-usage]].md) | 使用指南: 安装配置、NetworkPolicy、固定 IP |
 | [05-testing.md](./05-testing.md) | 测试验证: 连通性测试、NetworkPolicy 测试、GC 验证 |
 | [06-performance.md](./06-performance.md) | 性能调优: 模式性能对比、内核调优、基准测试 |
 
@@ -1431,4 +1487,6 @@ kubectl get ipinstances -A -o json | jq -r '
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+```

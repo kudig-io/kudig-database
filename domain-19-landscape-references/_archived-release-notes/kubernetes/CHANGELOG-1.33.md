@@ -173,7 +173,7 @@ created: "2026-05-23"
     - [Container Images](#container-images-8)
   - [Changelog since v1.33.1](#changelog-since-v1331)
   - [Important Security Information](#important-security-information-1)
-    - [CVE-2025-4563: Nodes can bypass [[Dynamic Resource Allocation|dynamic resource allocation]] authorization checks](#cve-2025-4563-nodes-can-bypass-dynamic-resource-allocation-authorization-checks)
+    - [CVE-2025-4563: Nodes can bypass [[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation.md|dynamic resource allocation]] authorization checks](#cve-2025-4563-nodes-can-bypass-dynamic-resource-allocation-authorization-checks)
   - [Changes by Kind](#changes-by-kind-8)
     - [Feature](#feature-6)
     - [Bug or Regression](#bug-or-regression-7)
@@ -340,7 +340,7 @@ created: "2026-05-23"
 
 filename | sha512 hash
 -------- | -----------
-[[entities/kubernetes|kubernetes]].tar.gz](https://dl.k8s.io/v1.33.10/kubernetes.tar.gz) | 875815467c18946c0c6187e3787615c73a23a7d0452379cb947bee6ae9644d09668228d08bb976c5eba9c08d5c401cdcf2698642c31acef4b2b059c8444b11e1
+[[entities/kubernetes.md|kubernetes]].tar.gz](https://dl.k8s.io/v1.33.10/kubernetes.tar.gz) | 875815467c18946c0c6187e3787615c73a23a7d0452379cb947bee6ae9644d09668228d08bb976c5eba9c08d5c401cdcf2698642c31acef4b2b059c8444b11e1
 [kubernetes-src.tar.gz](https://dl.k8s.io/v1.33.10/kubernetes-src.tar.gz) | cae53c51086dd4d1231a42e3b2e7d3c78725491e559fb1146f1c2131edeaa689a3d6455af50bea357f8e068d3e8f89f448335b6a73a77b56397be306136ff65d
 
 ### Client Binaries

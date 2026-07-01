@@ -151,6 +151,9 @@ spec:
 
 ### 2.2 选择器与污点容忍
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+
 ```
 【确保 DaemonSet 在所有节点运行】
 
@@ -386,6 +389,9 @@ DaemonSet 适用：
 
 ### 5.2 DaemonSet 更新
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```
 【滚动更新策略】
 
@@ -501,6 +507,11 @@ spec:
 ---
 
 ## 7. 总结
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```
 【命令速查】

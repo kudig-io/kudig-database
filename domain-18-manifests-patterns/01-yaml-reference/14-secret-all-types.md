@@ -79,7 +79,7 @@ created: "2026-05-23"
 
 <!-- chunk: API 概述与版本 -->## API 概述与版本
 
-#<!-- chunk: 基本信息 -->## 基本信息
+## 基本信息
 
 | 属性 | 值 |
 |------|-----|
@@ -89,7 +89,7 @@ created: "2026-05-23"
 | **命名空间作用域** | ✅ 是 |
 | **缩写** | 无 |
 
-#<!-- chunk: 核心特性 -->## 核心特性
+## 核心特性
 
 ```yaml
 # Secret 与 ConfigMap 的差异
@@ -101,7 +101,7 @@ created: "2026-05-23"
 5. 审计日志:     Secret (敏感字段脱敏) vs ConfigMap (完整记录)
 ```
 
-#<!-- chunk: 安全模型 -->## 安全模型
+## 安全模型
 
 | 维度 | 说明 | 配置项 |
 |------|------|--------|
@@ -114,7 +114,7 @@ created: "2026-05-23"
 
 <!-- chunk: Secret 类型完整列表 -->## Secret 类型完整列表
 
-#<!-- chunk: 内置类型表 -->## 内置类型表
+## 内置类型表
 
 | Type | 用途 | 必需字段 | 版本 |
 |------|------|----------|------|
@@ -127,7 +127,7 @@ created: "2026-05-23"
 | `kubernetes.io/tls` | TLS 证书和私钥 | `tls.crt`, `tls.key` | v1 |
 | `bootstrap.kubernetes.io/token` | Bootstrap Token | `token-id`, `token-secret` | v1 |
 
-#<!-- chunk: 字段规格表 -->## 字段规格表
+## 字段规格表
 
 | 字段路径 | 类型 | 必填 | 版本 | 说明 |
 |----------|------|------|------|------|
@@ -144,7 +144,7 @@ created: "2026-05-23"
 
 <!-- chunk: Opaque 通用 Secret -->## Opaque 通用 Secret
 
-#<!-- chunk: 基础示例 -->## 基础示例
+## 基础示例
 
 ```yaml
 apiVersion: v1
@@ -161,7 +161,7 @@ data:
   api_key: YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXo=
 ```
 
-#<!-- chunk: 使用 stringData (推荐) -->## 使用 stringData (推荐)
+## 使用 stringData (推荐)
 
 ```yaml
 apiVersion: v1
@@ -179,7 +179,7 @@ stringData:
 # 注意: stringData 只在创建/更新时使用, kubectl get 时会转换为 data
 ```
 
-#<!-- chunk: 环境变量注入 -->## 环境变量注入
+## 环境变量注入
 
 ```yaml
 apiVersion: v1
@@ -214,7 +214,7 @@ spec:
           optional: true
 ```
 
-#<!-- chunk: envFrom 批量注入 -->## envFrom 批量注入
+## envFrom 批量注入
 
 ```yaml
 apiVersion: v1
@@ -235,7 +235,7 @@ spec:
     # api_key=abcdefghijklmnopqrstuvwxyz
 ```
 
-#<!-- chunk: Volume 挂载 -->## Volume 挂载
+## Volume 挂载
 
 ```yaml
 apiVersion: v1
@@ -264,7 +264,10 @@ spec:
       defaultMode: 0400  # r-------- (仅 owner 可读)
 ```
 
-#<!-- chunk: kubectl 创建 Opaque Secret -->## kubectl 创建 Opaque Secret
+## kubectl 创建 Opaque Secret
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 从字面量创建
@@ -298,7 +301,7 @@ kubectl create secret generic dir-secret \
 
 <!-- chunk: kubernetes.io/service-account-token -->## kubernetes.io/service-account-token
 
-#<!-- chunk: 说明 -->## 说明
+## 说明
 
 | 属性 | 值 |
 |------|-----|
@@ -306,7 +309,7 @@ kubectl create secret generic dir-secret \
 | **状态** | Deprecated (自 v1.22, 推荐使用 TokenRequest API) |
 | **自动创建** | v1.24+ 默认禁用, 需显式创建 |
 
-#<!-- chunk: 遗留方式 (v1.23 之前) -->## 遗留方式 (v1.23 之前)
+## 遗留方式 (v1.23 之前)
 
 ```yaml
 # Kubernetes v1.23 之前自动创建
@@ -331,7 +334,7 @@ data:
   token: <base64-jwt-token>
 ```
 
-#<!-- chunk: 显式创建 (v1.24+) -->## 显式创建 (v1.24+)
+## 显式创建 (v1.24+)
 
 ```yaml
 # v1.24+ 需要显式创建 (非推荐方式)
@@ -346,7 +349,7 @@ type: kubernetes.io/service-account-token
 # Kubernetes 自动填充 data 字段
 ```
 
-#<!-- chunk: 推荐方式: TokenRequest API (v1.22+) -->## 推荐方式: TokenRequest API (v1.22+)
+## 推荐方式: TokenRequest API (v1.22+)
 
 ```yaml
 # 方式1: Pod 自动挂载 (默认行为)
@@ -393,7 +396,7 @@ spec:
 
 <!-- chunk: kubernetes.io/dockerconfigjson -->## kubernetes.io/dockerconfigjson
 
-#<!-- chunk: 基础示例 -->## 基础示例
+## 基础示例
 
 ```yaml
 apiVersion: v1
@@ -407,7 +410,7 @@ data:
   .dockerconfigjson: eyJhdXRocyI6eyJyZWdpc3RyeS5leGFtcGxlLmNvbSI6eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJwYXNzd29yZCIsImF1dGgiOiJZV1J0YVc0NmNHRnpjM2R2Y21RPSJ9fX0=
 ```
 
-#<!-- chunk: JSON 格式解析 -->## JSON 格式解析
+## JSON 格式解析
 
 ```json
 // .dockerconfigjson 解码后的内容:
@@ -428,7 +431,10 @@ data:
 }
 ```
 
-#<!-- chunk: kubectl 创建 -->## kubectl 创建
+## kubectl 创建
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 方式1: 命令行参数
@@ -461,7 +467,7 @@ kubectl create secret generic multi-registry-secret \
   --type=kubernetes.io/dockerconfigjson
 ```
 
-#<!-- chunk: Pod 使用镜像拉取凭证 -->## Pod 使用镜像拉取凭证
+## Pod 使用镜像拉取凭证
 
 ```yaml
 apiVersion: v1
@@ -503,7 +509,7 @@ spec:
 
 <!-- chunk: kubernetes.io/basic-auth -->## kubernetes.io/basic-auth
 
-#<!-- chunk: 基础示例 -->## 基础示例
+## 基础示例
 
 ```yaml
 apiVersion: v1
@@ -519,14 +525,14 @@ stringData:
   # extra-field: value
 ```
 
-#<!-- chunk: 必需字段 -->## 必需字段
+## 必需字段
 
 | 字段 | 必需 | 说明 |
 |------|------|------|
 | `username` | ✅ | 用户名 |
 | `password` | ✅ | 密码 |
 
-#<!-- chunk: 使用示例: Ingress Basic Auth -->## 使用示例: Ingress Basic Auth
+## 使用示例: Ingress Basic Auth
 
 ```yaml
 # Nginx Ingress Controller Basic Auth
@@ -568,7 +574,7 @@ spec:
               number: 80
 ```
 
-#<!-- chunk: 使用示例: HTTP 客户端认证 -->## 使用示例: HTTP 客户端认证
+## 使用示例: HTTP 客户端认证
 
 ```yaml
 apiVersion: v1
@@ -604,7 +610,7 @@ spec:
 
 <!-- chunk: kubernetes.io/ssh-auth -->## kubernetes.io/ssh-auth
 
-#<!-- chunk: 基础示例 -->## 基础示例
+## 基础示例
 
 ```yaml
 apiVersion: v1
@@ -623,13 +629,16 @@ stringData:
     -----END OPENSSH PRIVATE KEY-----
 ```
 
-#<!-- chunk: 必需字段 -->## 必需字段
+## 必需字段
 
 | 字段 | 必需 | 说明 |
 |------|------|------|
 | `ssh-privatekey` | ✅ | SSH 私钥 (PEM 格式) |
 
-#<!-- chunk: kubectl 创建 -->## kubectl 创建
+## kubectl 创建
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 从 SSH 私钥文件创建
@@ -638,7 +647,7 @@ kubectl create secret generic ssh-secret \
   --type=kubernetes.io/ssh-auth
 ```
 
-#<!-- chunk: 使用示例: Git Clone -->## 使用示例: Git Clone
+## 使用示例: Git Clone
 
 ```yaml
 apiVersion: v1
@@ -687,7 +696,7 @@ spec:
     emptyDir: {}
 ```
 
-#<!-- chunk: 使用示例: SSH 客户端连接 -->## 使用示例: SSH 客户端连接
+## 使用示例: SSH 客户端连接
 
 ```yaml
 apiVersion: v1
@@ -727,7 +736,7 @@ spec:
 
 <!-- chunk: kubernetes.io/tls -->## kubernetes.io/tls
 
-#<!-- chunk: 基础示例 -->## 基础示例
+## 基础示例
 
 ```yaml
 apiVersion: v1
@@ -742,14 +751,17 @@ data:
   tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQ==
 ```
 
-#<!-- chunk: 必需字段 -->## 必需字段
+## 必需字段
 
 | 字段 | 必需 | 说明 |
 |------|------|------|
 | `tls.crt` | ✅ | TLS 证书 (PEM 格式) |
 | `tls.key` | ✅ | TLS 私钥 (PEM 格式) |
 
-#<!-- chunk: kubectl 创建 -->## kubectl 创建
+## kubectl 创建
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 从证书文件创建
@@ -776,7 +788,7 @@ stringData:
 EOF
 ```
 
-#<!-- chunk: 使用示例: Ingress TLS -->## 使用示例: Ingress TLS
+## 使用示例: Ingress TLS
 
 ```yaml
 apiVersion: v1
@@ -822,7 +834,7 @@ spec:
               number: 80
 ```
 
-#<!-- chunk: 使用示例: 应用 mTLS -->## 使用示例: 应用 mTLS
+## 使用示例: 应用 mTLS
 
 ```yaml
 # 服务端证书
@@ -919,7 +931,7 @@ data:
     }
 ```
 
-#<!-- chunk: cert-manager 自动管理 -->## cert-manager 自动管理
+## cert-manager 自动管理
 
 ```yaml
 # 使用 cert-manager 自动生成和续订证书
@@ -955,7 +967,7 @@ spec:
 
 <!-- chunk: bootstrap.kubernetes.io/token -->## bootstrap.kubernetes.io/token
 
-#<!-- chunk: 基础示例 -->## 基础示例
+## 基础示例
 
 ```yaml
 apiVersion: v1
@@ -985,14 +997,17 @@ stringData:
   auth-extra-groups: "system:bootstrappers:worker"
 ```
 
-#<!-- chunk: 必需字段 -->## 必需字段
+## 必需字段
 
 | 字段 | 必需 | 格式 | 说明 |
 |------|------|------|------|
 | `token-id` | ✅ | `[a-z0-9]{6}` | Token 标识符 (6个小写字母或数字) |
 | `token-secret` | ✅ | `[a-z0-9]{16}` | Token 密钥 (16个小写字母或数字) |
 
-#<!-- chunk: 创建 Bootstrap Token -->## 创建 Bootstrap Token
+## 创建 Bootstrap Token
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 使用 kubeadm 创建 (推荐)
@@ -1023,7 +1038,7 @@ stringData:
 EOF
 ```
 
-#<!-- chunk: 使用场景: 节点加入集群 -->## 使用场景: 节点加入集群
+## 使用场景: 节点加入集群
 
 ```bash
 # 新节点使用 Bootstrap Token 加入集群
@@ -1037,7 +1052,7 @@ kubeadm join <control-plane-endpoint>:6443 \
 
 <!-- chunk: 内部实现原理 -->## 内部实现原理
 
-#<!-- chunk: etcd 静态加密配置 -->## etcd 静态加密配置
+## etcd 静态加密配置
 
 ```yaml
 # EncryptionConfiguration 启用 Secret 加密
@@ -1067,7 +1082,7 @@ resources:
 # 未加密:   k8s:...
 ```
 
-#<!-- chunk: 加密算法对比 -->## 加密算法对比
+## 加密算法对比
 
 | 提供者 | 算法 | 性能 | 安全性 | 推荐场景 |
 |--------|------|------|--------|----------|
@@ -1077,7 +1092,7 @@ resources:
 | `secretbox` | XSalsa20+Poly1305 | 快 | 高 | 现代加密需求 |
 | `kms` | 外部 KMS (如 AWS KMS) | 慢 | 最高 | 合规要求 |
 
-#<!-- chunk: tmpfs 内存挂载 -->## tmpfs 内存挂载
+## tmpfs 内存挂载
 
 ```yaml
 # Secret 永远不会写入节点磁盘, 仅存在于内存 tmpfs 中
@@ -1105,7 +1120,7 @@ spec:
 # tmpfs on /etc/secrets type tmpfs (ro,relatime)
 ```
 
-#<!-- chunk: Base64 编码原理 -->## Base64 编码原理
+## Base64 编码原理
 
 ```yaml
 # Base64 不是加密, 仅是编码
@@ -1124,7 +1139,7 @@ spec:
 # 3. 避免在日志/事件中暴露 Secret 内容
 ```
 
-#<!-- chunk: Secret 自动更新机制 -->## Secret 自动更新机制
+## Secret 自动更新机制
 
 ```yaml
 # Secret 更新传播到 Pod (与 ConfigMap 相同)
@@ -1169,7 +1184,7 @@ spec:
 
 <!-- chunk: 生产实战案例 -->## 生产实战案例
 
-#<!-- chunk: 案例1: 数据库密码管理 -->## 案例1: 数据库密码管理
+## 案例1: 数据库密码管理
 
 ```yaml
 # 场景: 安全管理数据库凭证
@@ -1273,7 +1288,7 @@ spec:
               key: connection-string
 ```
 
-#<!-- chunk: 案例2: TLS 证书自动化 (cert-manager) -->## 案例2: TLS 证书自动化 (cert-manager)
+## 案例2: TLS 证书自动化 (cert-manager)
 
 ```yaml
 # 场景: 使用 cert-manager 自动管理 Let's Encrypt 证书
@@ -1352,7 +1367,7 @@ spec:
               number: 80
 ```
 
-#<!-- chunk: 案例3: 镜像仓库凭证管理 -->## 案例3: 镜像仓库凭证管理
+## 案例3: 镜像仓库凭证管理
 
 ```yaml
 # 场景: 多命名空间共享私有镜像仓库凭证
@@ -1409,7 +1424,7 @@ spec:
     image: harbor.company.com/myproject/myapp:latest
 ```
 
-#<!-- chunk: 案例4: External Secrets Operator -->## 案例4: External Secrets Operator
+## 案例4: External Secrets Operator
 
 ```yaml
 # 场景: 从外部密钥管理系统 (如 AWS Secrets Manager) 同步 Secret
@@ -1485,7 +1500,7 @@ spec:
 
 <!-- chunk: 版本兼容性与最佳实践 -->## 版本兼容性与最佳实践
 
-#<!-- chunk: 版本演进 -->## 版本演进
+## 版本演进
 
 | Kubernetes 版本 | Secret 变更 |
 |-----------------|-------------|
@@ -1495,9 +1510,9 @@ spec:
 | v1.25+ | 移除 `.dockercfg` 支持警告 |
 | v1.32+ | 无重大变更 |
 
-#<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
 
-##<!-- chunk: 1. 启用 etcd 加密 -->## 1. 启用 etcd 加密
+## 1. 启用 etcd 加密
 
 ```yaml
 # 生产环境必须启用 Secret 加密
@@ -1517,7 +1532,7 @@ resources:
 # head -c 32 /dev/urandom | base64
 ```
 
-##<!-- chunk: 2. 使用 External Secrets -->## 2. 使用 External Secrets
+## 2. 使用 External Secrets
 
 ```yaml
 # 推荐: 不在 Kubernetes 中存储敏感信息
@@ -1530,7 +1545,7 @@ resources:
 # 通过 External Secrets Operator 同步
 ```
 
-##<!-- chunk: 3. RBAC 最小权限 -->## 3. RBAC 最小权限
+## 3. RBAC 最小权限
 
 ```yaml
 # 限制 Secret 访问权限
@@ -1559,7 +1574,7 @@ rules:
   verbs: ["get"]  # 不包含 "list"
 ```
 
-##<!-- chunk: 4. 不可变 Secret -->## 4. 不可变 Secret
+## 4. 不可变 Secret
 
 ```yaml
 # 生产环境使用不可变 Secret
@@ -1579,7 +1594,7 @@ stringData:
 # 3. 版本化管理 (prod-secret-v1, v2, v3...)
 ```
 
-##<!-- chunk: 5. 避免日志泄露 -->## 5. 避免日志泄露
+## 5. 避免日志泄露
 
 ```yaml
 # 反模式: Secret 泄露到日志
@@ -1606,21 +1621,21 @@ spec:
 # 正确实践: 应用内部读取, 不输出到 stdout
 ```
 
-#<!-- chunk: FAQ -->## FAQ
+## FAQ
 
-##<!-- chunk: Q1: Secret 与 ConfigMap 如何选择? -->## Q1: Secret 与 ConfigMap 如何选择?
+## Q1: Secret 与 ConfigMap 如何选择?
 
 **A:** 选择标准:
 - **Secret**: 密码、API密钥、TLS证书等敏感信息
 - **ConfigMap**: 配置文件、环境变量、非敏感参数
 
-##<!-- chunk: Q2: Base64 编码是否安全? -->## Q2: Base64 编码是否安全?
+## Q2: Base64 编码是否安全?
 
 **A:** **不安全**, Base64 可轻易解码:
 - 真正的安全依赖: RBAC + etcd加密 + TLS传输
 - Base64 仅用于处理二进制数据
 
-##<!-- chunk: Q3: 如何轮换 Secret? -->## Q3: 如何轮换 Secret?
+## Q3: 如何轮换 Secret?
 
 **A:** 三种策略:
 ```yaml
@@ -1640,7 +1655,7 @@ spec:
 # - kubectl rollout restart deployment/myapp
 ```
 
-##<!-- chunk: Q4: 如何在 CI/CD 中管理 Secret? -->## Q4: 如何在 CI/CD 中管理 Secret?
+## Q4: 如何在 CI/CD 中管理 Secret?
 
 **A:** 推荐方案:
 1. **Sealed Secrets**: 加密后提交 Git
@@ -1648,7 +1663,7 @@ spec:
 3. **GitOps + Vault**: ArgoCD + HashiCorp Vault
 4. **SOPS**: 加密 YAML 文件
 
-##<!-- chunk: Q5: Secret 可以跨命名空间引用吗? -->## Q5: Secret 可以跨命名空间引用吗?
+## Q5: Secret 可以跨命名空间引用吗?
 
 **A:** 原生不支持, 解决方案:
 ```yaml
@@ -1669,18 +1684,18 @@ metadata:
 
 <!-- chunk: 相关资源 -->## 相关资源
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 - Secret 概念: https://kubernetes.io/docs/concepts/configuration/secret/
 - 加密静态数据: https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/
 
-#<!-- chunk: 工具推荐 -->## 工具推荐
+## 工具推荐
 - **External Secrets Operator**: https://external-secrets.io/
 - **Sealed Secrets**: https://github.com/bitnami-labs/sealed-secrets
 - **cert-manager**: https://cert-manager.io/
 - **Reflector**: https://github.com/emberstack/kubernetes-reflector
 - **SOPS**: https://github.com/mozilla/sops
 
-#<!-- chunk: 本知识库相关文档 -->## 本知识库相关文档
+## 本知识库相关文档
 - [13 - ConfigMap 参考](./13-configmap-reference.md)
 - [07 - RBAC 完整配置](./07-rbac-complete.md)
 - [存储卷类型参考](./06-volume-types.md)
@@ -1694,7 +1709,7 @@ metadata:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -1715,4 +1730,4 @@ metadata:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

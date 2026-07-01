@@ -138,6 +138,9 @@ NoExecute：
 
 ### 2.2 添加和删除污点
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+
 ```
 【给节点添加污点】
 
@@ -213,6 +216,9 @@ spec:
 
 ### 2.4 常见场景
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+
 ```
 【场景一：专用 GPU 节点】
 
@@ -267,6 +273,9 @@ preferredDuringSchedulingIgnoredDuringExecution：
 ```
 
 ### 3.2 nodeSelector（简单方式）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```
 【最简单的节点选择】
@@ -453,6 +462,10 @@ topologyKey 可以是：
 
 ### 5.1 场景一：GPU 训练任务
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```
 【节点配置】
 
@@ -547,6 +560,9 @@ spec:
 
 ### 6.2 污点容忍不生效
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+
 ```
 【排查步骤】
 
@@ -566,6 +582,9 @@ spec:
 ```
 
 ### 6.3 亲和性规则冲突
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```
 【场景】
@@ -593,6 +612,9 @@ Pod 同时有 nodeSelector 和 nodeAffinity：
 ## 7. 数字人 Q&A 场景
 
 ### 7.1 用户问：污点和节点选择器有什么区别？
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
 
 ```
 【回复】
@@ -694,6 +716,10 @@ spec:
 
 ## 8. 总结
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```
 【命令速查】
 
@@ -749,8 +775,8 @@ kubectl label nodes <node> key=value
 
 ## Related
 
-- [[skills/learn-07-namespace-resource-quota|learn-07-namespace-resource-quota]] — 第七课：Namespace 与资源隔离
-- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
-- [[entities/statefulset|statefulset]] — StatefulSet
+- [[skills/learn-07-namespace-resource-quota.md|learn-07-namespace-resource-quota]] — 第七课：Namespace 与资源隔离
+- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[entities/statefulset.md|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

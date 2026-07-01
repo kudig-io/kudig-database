@@ -40,7 +40,7 @@ Score 是一个与平台无关的工作负载规范，使开发者能够用统�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -56,7 +56,7 @@ Score 是一个与平台无关的工作负载规范，使开发者能够用统�
 
 ## 参考链接
 
-- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]]
+- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]]
 
 ## Related
 
@@ -67,7 +67,7 @@ Score 是一个与平台无关的工作负载规范，使开发者能够用统�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - score
-- [[concepts/scheduling-algorithm|[[Scheduling Algorithm|Scheduling Algorithm]]]] — Cross-reference
-- [[skills/kubelet-eviction-mechanism|kubelet 资源驱逐机制]] — Cross-reference
-- [[skills/Symptom Vector Matching Engine|Symptom Vector Matching Engine]] — Cross-reference
-- [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
+- [[concepts/scheduling-algorithm.md|[[Scheduling Algorithm|Scheduling Algorithm]]]] — Cross-reference
+- [[skills/kubelet-eviction-mechanism.md|kubelet 资源驱逐机制]] — Cross-reference
+- [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
+- [[entities/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference

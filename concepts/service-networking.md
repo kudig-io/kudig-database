@@ -1,6 +1,6 @@
 ---
 title: Service Networking
-description: '- [[concepts/cni-networking-model|cni-networking-model]] — CNI 网络模型与插件对比'
+description: '- [[concepts/cni-networking-model.md|cni-networking-model]] — CNI 网络模型与插件对比'
 category: concepts
 tags:
 - k8s
@@ -72,12 +72,12 @@ Since Kubernetes v1.21, EndpointSlice replaces Endpoints as the scalable way to 
 
 ## Related
 
-- [[concepts/cni-networking-model|cni-networking-model]] — CNI 网络模型与插件对比
+- [[concepts/cni-networking-model.md|cni-networking-model]] — CNI 网络模型与插件对比
 - [[coredns]] — CoreDNS
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[cilium]] — Cilium
 - [[cni]] — CNI (Container Network Interface)
-- [[entities/cni-plugins|CNI Plugins]]
+- [[entities/cni-plugins.md|CNI Plugins]]
 - [[coredns|CoreDNS]]
 - Kubernetes Network Model
 - Ingress Controller

@@ -43,7 +43,7 @@ title: Day 16: 安全体系 - Pod 安全 + 密钥管理
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] Pod Securityod Security Standards]]
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] Pod Securityod Security Standards]]
   - K8s Secret 管理最佳实践
   - [[Kyverno|Kyverno]] 策略引擎
   - Pod 安全上下文配置
@@ -98,10 +98,6 @@ Pod 安全和密钥管理是 Kubernetes 安全体系的两大核心支柱。Pod 
 
 ### Pod Security Standards (PSS)
 
-
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
 
 Pod Security Standards 是 Kubernetes 官方定义的 Pod 安全策略框架，在 K8s 1.25 中成为稳定特性，替代了已废弃的 PodSecurityPolicy（PSP）。PSS 定义了三个安全级别：
 
@@ -174,6 +170,11 @@ Kubernetes Secret 用于存储敏感数据，但默认情况下 Secret 只做了
 ## 实战演练
 
 ### 任务 1: Pod SecurityContext 配置 (45min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # Step 1: 创建安全的 Pod
@@ -276,6 +277,10 @@ kubectl run insecure --image=nginx -n secure-ns
 ```
 
 ### 任务 2: Secret 管理 (45min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # Step 1: 创建 Secret
@@ -398,6 +403,9 @@ kubectl exec secret-volume-test -- cat /etc/secrets/password
 ```
 
 ### 任务 3: Kyverno 策略实践 (45min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # Step 1: 安装 Kyverno
@@ -687,3 +695,5 @@ resources:
 - [文件: `../../domain-05-security-compliance/06-pod-security-standards.md`](../../domain-05-security-compliance/06-pod-security-standards.md)
 - [文件: `../../domain-05-security-compliance/11-secret-management-tools.md`](../../domain-05-security-compliance/11-secret-management-tools.md)
 - [文件: `../../domain-05-security-compliance/14-policy-engines-opa-kyverno.md`](../../domain-05-security-compliance/14-policy-engines-opa-kyverno.md)
+
+```

@@ -552,14 +552,15 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
 
 ### Phase 3: 主动探测（低风险，可能需审批）
 
-> ⚠️ 以下步骤涉及在容器内执行命令或创建临时容器，L1 模式下需人工确认。
-> L2-semi-auto 模式下，D3.1 和 D3.2 可自动执行。
-
 **Step D3.1**: Exec 进入运行中的容器
 
 - **前提**: 容器当前处于 Running 状态（CrashLoop 间隙或另一个未崩溃的副本）
 - **风险等级**: 🟢 低（只读操作）
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查文件系统中配置文件是否存在
   kubectl exec <pod> -n <namespace> -c <container> -- ls -la /path/to/config/
@@ -670,6 +671,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
 **Step D4.2**: Java 应用 — JFR/jmap heap dump
 - **前提**: 容器内有 JDK 工具（jcmd/jmap），或可以使用 ephemeral debug container
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 方式 1: 使用 jcmd 生成 heap dump
   kubectl exec <pod> -n <namespace> -- jcmd 1 GC.heap_dump /tmp/heap.hprof
@@ -705,6 +710,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
 **Step D4.3**: Python 应用 — tracemalloc / memory_profiler
 - **前提**: 应用代码中已集成 tracemalloc 或可以注入 profiler
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 方式 1: 如果应用已启用 tracemalloc，连接到应用的调试接口
   # 通常需要应用提供 HTTP 端点来获取 tracemalloc snapshot
@@ -729,6 +738,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
 **Step D4.4**: Node.js 应用 — --inspect + Chrome DevTools / clinic.js
 - **前提**: Node.js 应用启用了 `--inspect` 标志或可以修改启动参数
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 方式 1: 使用 --inspect 启动 Node.js并连接 Chrome DevTools
   # 确保应用以 node --inspect=0.0.0.0:9229 启动
@@ -797,6 +810,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   kubectl describe resourcequota -n <namespace>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方式 1: 使用 kubectl patch（推荐，可追溯）
   kubectl patch deployment <deployment> -n <namespace> --type='json' -p='[
@@ -822,6 +839,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   kubectl top pods -n <namespace> -l <label-selector> --containers
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deployment/<deployment> -n <namespace>
   ```
@@ -841,6 +862,11 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   kubectl get secret -n <namespace>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 如果是 ConfigMap 名称拼写错误，修正 Deployment 引用
   kubectl edit deployment <deployment> -n <namespace>
@@ -853,6 +879,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   kubectl get pods -n <namespace> -l <label-selector>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deployment/<deployment> -n <namespace>
   ```
@@ -869,6 +899,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   kubectl get endpoints <dependency-service> -n <namespace>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl delete pod <pod> -n <namespace>
   ```
@@ -902,6 +936,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   kubectl get deployment <deployment> -n <namespace> -o jsonpath='{.spec.strategy}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 更新镜像
   kubectl set image deployment/<deployment> -n <namespace> <container>=<new-image>:<tag>
@@ -917,6 +955,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   kubectl get pods -n <namespace> -l <label-selector> -o wide
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deployment/<deployment> -n <namespace>
   ```
@@ -935,6 +977,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   kubectl logs <pod> -n <namespace> --previous | head -20
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 推荐: 添加 startupProbe（最佳实践）
   kubectl patch deployment <deployment> -n <namespace> --type='json' -p='[
@@ -966,6 +1012,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   # 等待超过原来的 initialDelaySeconds，确认 Pod 不再被杀
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deployment/<deployment> -n <namespace>
   ```
@@ -1013,6 +1063,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   # 记录关键发现：泄漏点、增长速率、受影响的数据结构
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # Step 1: 临时增大 memory limits（赠送时间给应用团队修复）
   # 建议: 新 limit = 当前峰值内存 × 2（根据泄漏速率调整）
@@ -1051,6 +1105,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   kubectl get pod -n <namespace> -l <selector> -o custom-columns=NAME:.metadata.name,RESTARTS:.status.containerStatuses[0].restartCount
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deployment/<deployment> -n <namespace>
   ```
@@ -1078,6 +1136,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
      kubectl rollout history deployment/<deployment> -n <namespace> --revision=<target-revision>
      ```
   3. 执行回滚:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
      ```bash
      # 回滚到上一版本
      kubectl rollout undo deployment/<deployment> -n <namespace>
@@ -1098,6 +1160,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   kubectl get endpoints <service> -n <namespace>
   ```
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 如果回滚后仍有问题，再次回滚到之前版本
   kubectl rollout undo deployment/<deployment> -n <namespace>
@@ -1121,6 +1187,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
      kubectl describe nodes | grep -A5 "Allocated resources"
      ```
   3. 修改 ResourceQuota（需 cluster-admin 或 namespace-admin 权限）:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
      ```bash
      kubectl patch resourcequota <quota-name> -n <namespace> --type='json' -p='[
        {"op": "replace", "path": "/spec/hard/limits.memory", "value": "<new-quota>"}
@@ -1131,6 +1201,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   kubectl describe resourcequota -n <namespace>
   ```
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch resourcequota <quota-name> -n <namespace> --type='json' -p='[
     {"op": "replace", "path": "/spec/hard/limits.memory", "value": "<original-quota>"}
@@ -1157,6 +1231,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
      kubectl rollout pause deployment/<deployment> -n <namespace>
      ```
   2. **紧急回滚到已知良好版本**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
      ```bash
      kubectl rollout undo deployment/<deployment> -n <namespace> --to-revision=<last-known-good>
      kubectl rollout resume deployment/<deployment> -n <namespace>
@@ -1172,6 +1250,10 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
      # 确认用户流量恢复正常（通过监控面板或 curl 健康检查）
      ```
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 恢复到紧急回滚前的版本（使用备份文件）
   kubectl apply -f deployment-backup-<timestamp>.yaml
@@ -1496,3 +1578,5 @@ kubectl rollout status deployment/<deploy> -n <ns> --timeout=120s
 
 > **文档结束** — SKILL-POD-001 v1.0  
 > 如在使用过程中发现未覆盖的根因场景或误诊模式，请通过 Skill 改进记录（Section 10.4）提交反馈。
+
+```

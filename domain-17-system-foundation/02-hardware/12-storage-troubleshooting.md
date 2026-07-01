@@ -57,7 +57,7 @@ created: "2026-05-23"
 
 <!-- chunk: HDD故障排查 -->## HDD故障排查
 
-#<!-- chunk: HDD问题类型 -->## HDD问题类型
+## HDD问题类型
 
 ```yaml
 HDD问题分类:
@@ -92,7 +92,7 @@ HDD问题分类:
       处理: 预防性更换
 ```
 
-#<!-- chunk: S.M.A.R.T.诊断 -->## S.M.A.R.T.诊断
+## S.M.A.R.T.诊断
 
 ```bash
 #!/bin/bash
@@ -202,7 +202,7 @@ done
 
 <!-- chunk: SSD故障排查 -->## SSD故障排查
 
-#<!-- chunk: SSD问题类型 -->## SSD问题类型
+## SSD问题类型
 
 ```yaml
 SSD问题分类:
@@ -233,7 +233,7 @@ SSD问题分类:
       预防: 使用企业级SSD
 ```
 
-#<!-- chunk: NVMe诊断 -->## NVMe诊断
+## NVMe诊断
 
 ```bash
 #!/bin/bash
@@ -324,7 +324,7 @@ done
 
 <!-- chunk: RAID故障排查 -->## RAID故障排查
 
-#<!-- chunk: RAID状态诊断 -->## RAID状态诊断
+## RAID状态诊断
 
 ```yaml
 RAID状态:
@@ -351,7 +351,7 @@ RAID状态:
     原因: 缺盘、控制器问题
 ```
 
-#<!-- chunk: RAID诊断命令 -->## RAID诊断命令
+## RAID诊断命令
 
 ```bash
 #!/bin/bash
@@ -445,7 +445,7 @@ detect_and_check() {
 detect_and_check
 ```
 
-#<!-- chunk: RAID故障处理 -->## RAID故障处理
+## RAID故障处理
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -501,7 +501,7 @@ detect_and_check
 
 <!-- chunk: 存储性能问题排查 -->## 存储性能问题排查
 
-#<!-- chunk: 性能诊断 -->## 性能诊断
+## 性能诊断
 
 ```bash
 #!/bin/bash
@@ -538,7 +538,7 @@ for dev in /sys/block/sd*/queue/scheduler /sys/block/nvme*/queue/scheduler; do
 done
 ```
 
-#<!-- chunk: 性能问题速查 -->## 性能问题速查
+## 性能问题速查
 
 | 症状 | 可能原因 | 排查命令 | 解决方案 |
 |------|----------|----------|----------|
@@ -550,7 +550,7 @@ done
 
 <!-- chunk: 数据恢复指南 -->## 数据恢复指南
 
-#<!-- chunk: 紧急恢复步骤 -->## 紧急恢复步骤
+## 紧急恢复步骤
 
 ```yaml
 数据恢复原则:
@@ -597,7 +597,7 @@ done
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-31-hardware KUDIG Database — Global MOC
-- [[domain-17-system-foundation/README|Domain 31 - 硬件基础设施]]
+- [[domain-17-system-foundation/README.md|Domain 31 - 硬件基础设施]]
 - index.md|Domain-31 硬件 — 开源项目索引]]
 - 云平台硬件基础架构
 - 服务器架构原理
@@ -608,9 +608,9 @@ done
 - SSD固态硬盘技术
 - 网络硬件技术
 - 硬件厂商生态
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 

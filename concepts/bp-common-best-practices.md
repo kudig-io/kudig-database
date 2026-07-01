@@ -783,7 +783,7 @@ echo "=== 验证完成 ==="
 
 ## Obsidian 相关文档
 
-- [[references/kudig-metadata-index|README]]|Kubernetes 最佳实践指南]]
+- [[entities/kudig-metadata-index.md|README]]|Kubernetes 最佳实践指南]]
 
 ## 相关概念
 
@@ -796,4 +796,4 @@ echo "=== 验证完成 ==="
 - [[helm]] — Helm
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/secrets-management|secrets-management]] — Secrets Management
+- [[concepts/secrets-management.md|secrets-management]] — Secrets Management

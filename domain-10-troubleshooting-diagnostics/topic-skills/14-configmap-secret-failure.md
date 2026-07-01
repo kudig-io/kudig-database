@@ -85,8 +85,6 @@ ConfigMap 和 Secret 是 [[Kubernetes|Kubernetes]] 中管理应用配置和敏�
 - **工具要求**: base64（解码 Secret 数据）、jq（可选，解析 JSON）
 - **外部 Secret 环境**: 如涉及 External Secrets Operator 或 Vault，需了解其部署架构
 
-> ⚠️ **重要**: Secret 数据属于敏感信息，诊断过程中避免在日志或聊天中明文输出 Secret 内容。本 Skill 中的 Secret 内容检查仅用于验证数据存在性，不输出实际值。
-
 ---
 
 ## 2. 症状识别
@@ -267,6 +265,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
 
 **Step D1.4**: 检查挂载路径和文件内容
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查挂载点是否存在
   kubectl exec <pod-name> -n <namespace> -- ls -la /path/to/config
@@ -285,6 +287,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
 
 **Step D1.5**: 验证环境变量注入
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查特定环境变量是否存在和非空
   kubectl exec <pod-name> -n <namespace> -- printenv | grep -E "^<ENV_KEY>="
@@ -583,7 +589,7 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
 | RC-008 | **KMS Provider 解密失败** — apiserver 无法使用 KMS 提供的密钥解密 etcd 中的 Secret 数据 | ~5% | D2.7 日志包含 decrypt 错误；所有 Secret 读取失败 | 🔴 |
 | RC-009 | **应用未监听配置文件变化（需要 Reloader）** — ConfigMap 通过 Volume 挂载且已更新，但应用不监听文件变化，需要重启才能读取新配置 | ~5% | D2.8 ConfigMap 已更新；应用日志无配置变更记录；重启后生效 | 🟢 |
 | RC-010 | **Namespace 间 Secret 引用限制** — Pod 尝试引用其他 namespace 的 ConfigMap/Secret，Kubernetes 不支持跨 namespace 引用 | ~4% | D1.2 显示引用的 ConfigMap/Secret 在其他 namespace | 🟢 |
-| RC-011 | **配置漂移（手动修改 vs GitOps 源）** — ConfigMap/Secret 被手动修改后与 GitOps 源不一致，导致同步覆盖或冲突 | ~4% | [[entities/flux|Flux]] 显示 OutOfSync；kubectl get 与 Git 仓库内容不一致 | 🟡 |
+| RC-011 | **配置漂移（手动修改 vs GitOps 源）** — ConfigMap/Secret 被手动修改后与 GitOps 源不一致，导致同步覆盖或冲突 | ~4% | [[entities/flux.md|Flux]] 显示 OutOfSync；kubectl get 与 Git 仓库内容不一致 | 🟡 |
 | RC-012 | **Optional 引用的 ConfigMap/Secret 缺失导致静默失败** — 使用 `optional: true` 引用不存在的资源，Pod 启动成功但配置为空，应用行为异常 | ~5% | D1.2 显示 optional: true；D1.5 环境变量不存在但 Pod Running | 🟢 |
 
 ---
@@ -606,6 +612,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl auth can-i create secrets -n <namespace>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 创建 ConfigMap（从文件）
   kubectl create configmap <cm-name> -n <namespace> --from-file=<path/to/config>
@@ -630,6 +640,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   # 预期: Pod 状态变为 Running
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl delete configmap <cm-name> -n <namespace>
   kubectl delete secret <secret-name> -n <namespace>
@@ -646,6 +660,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl get deployment <deploy-name> -n <namespace> -o yaml | grep -A5 "configMapKeyRef\|secretKeyRef"
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方式一：修改 Deployment 中的 Key 引用（推荐，修改消费方）
   kubectl edit deployment <deploy-name> -n <namespace>
@@ -655,6 +673,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl patch configmap <cm-name> -n <namespace> --type merge -p '{"data":{"correct-key":"value"}}'
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 确认新 Pod 正常启动
   kubectl get pods -n <namespace> -l <selector> -w
@@ -663,6 +685,11 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl exec <new-pod-name> -n <namespace> -- printenv | grep <ENV_KEY>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 如果修改了 Deployment，可以回滚
   kubectl rollout undo deployment <deploy-name> -n <namespace>
@@ -679,6 +706,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl get deployment <deploy-name> -n <namespace> -o yaml | grep -A10 "volumeMounts:" | grep subPath
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 修改 Deployment，移除 subPath 使用完整 Volume 挂载
   kubectl edit deployment <deploy-name> -n <namespace>
@@ -696,6 +727,11 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   #   # 移除 subPath
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 等待新 Pod 启动
   kubectl rollout status deployment <deploy-name> -n <namespace>
@@ -707,6 +743,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl exec <pod-name> -n <namespace> -- cat /app/config/test-key
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deployment <deploy-name> -n <namespace>
   ```
@@ -721,6 +761,11 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   helm list -A | grep reloader
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   # 使用 Helm 安装 Reloader
   helm repo add stakater https://stakater.github.io/stakater-charts
@@ -734,6 +779,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl annotate deployment <deploy-name> -n <namespace> configmap.reloader.stakater.com/reload="<cm-name>"
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 确认 Reloader 运行正常
   kubectl get pods -n kube-system -l app=reloader
@@ -745,12 +794,17 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl get pods -n <namespace> -l <selector> -w
   ```
 - **回滚命令**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   # 移除 annotation
   kubectl annotate deployment <deploy-name> -n <namespace> reloader.stakater.com/auto-
   
   # 卸载 Reloader
-  helm uninstall reloader -n kube-system
+  helm uninstall reloader -n kube-system  # ⚠️ 删除 release 及关联资源
   ```
 
 ---
@@ -773,6 +827,11 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl get configmap <cm-name> -n <namespace> -o yaml > /tmp/<cm-name>-backup.yaml
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 方式一：删除并重建（会有短暂中断）
   kubectl delete configmap <cm-name> -n <namespace>
@@ -793,6 +852,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl get pods -n <namespace> -l <selector>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 从备份恢复原始 ConfigMap
   kubectl apply -f /tmp/<cm-name>-backup.yaml
@@ -811,6 +874,12 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl get secret <auth-secret> -n <namespace>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   # 更新认证 Secret（例如 AWS credentials）
   kubectl create secret generic aws-credentials -n <namespace> \
@@ -838,6 +907,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl get secret <target-secret> -n <namespace>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 恢复原认证 Secret
   kubectl apply -f /tmp/auth-secret-backup.yaml
@@ -848,6 +921,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
 - **影响说明**: 修复 Vault Agent Injector 可能需要重启 Pod 以重新触发注入。
 - **审批提示**: "建议修复 Vault Agent 配置。受影响的 Pod 可能需要重启以获取正确的 Secret 注入。是否批准？"
 - **前置检查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查 Vault Agent Injector 状态
   kubectl get pods -n vault -l app.kubernetes.io/name=vault-agent-injector
@@ -857,6 +934,11 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl exec -n vault vault-0 -- vault status
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 常见问题 1: Vault token 过期，重新配置 Kubernetes auth
   kubectl exec -n vault vault-0 -- vault write auth/kubernetes/config \
@@ -879,6 +961,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl rollout restart deployment <deploy-name> -n <namespace>
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查新 Pod 的 vault-agent 容器状态
   kubectl get pod <new-pod> -n <namespace> -o jsonpath='{.status.initContainerStatuses[*].name}={.status.initContainerStatuses[*].ready}'
@@ -887,6 +973,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl exec <new-pod> -n <namespace> -- ls -la /vault/secrets/
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 回滚 Deployment
   kubectl rollout undo deployment <deploy-name> -n <namespace>
@@ -905,6 +995,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl get configmap <cm-name> -n <namespace> -o jsonpath='{.data}' | jq 'keys'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 方案一：拆分为多个 ConfigMap
   # 将大文件按模块拆分
@@ -927,6 +1021,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
   kubectl logs <pod-name> -n <namespace> | grep -i config
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 恢复原 Deployment 配置
   kubectl rollout undo deployment <deploy-name> -n <namespace>
@@ -1013,6 +1111,10 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
      ```
   2. **重启 apiserver 应用新配置**
   3. **触发所有 Secret 重新加密**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
      ```bash
      # 使用 etcd 直接操作或 kubectl 更新所有 Secret
      kubectl get secrets -A -o json | kubectl replace -f -
@@ -1048,6 +1150,11 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
      - 收集所有需要重建的 Secret 列表
      - 从应用配置、CI/CD 系统、密码管理工具收集明文值
   3. **删除旧 Secret 并重建**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      # 临时禁用加密（使用 identity 提供商）
      # 修改 encryption-config.yaml
@@ -1071,6 +1178,9 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
 ## 7. 验证确认
 
 ### 7.1 即时验证（修复后 1-2 分钟内）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # V1: 确认 ConfigMap/Secret 存在且内容正确
@@ -1190,6 +1300,7 @@ kubectl logs <pod-name> -n <namespace> --tail=20 | grep -i config
    kubectl get events -n <namespace> --sort-by=.lastTimestamp > events.txt
    # ExternalSecret 状态（如适用）
    kubectl describe externalsecret <es-name> -n <namespace> > externalsecret.txt
+
    ```
 5. **事件时间线**: 最近 30 分钟内的关键事件
 
@@ -1295,4 +1406,6 @@ kubectl logs <pod-name> -n <namespace> --tail=20 | grep -i config
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+
+```

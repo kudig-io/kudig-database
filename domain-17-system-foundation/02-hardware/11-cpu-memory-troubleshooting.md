@@ -52,7 +52,7 @@ CPU和内存是服务器核心计算组件，其问题往往导致系统不稳�
 
 <!-- chunk: CPU故障排查 -->## CPU故障排查
 
-#<!-- chunk: CPU问题类型 -->## CPU问题类型
+## CPU问题类型
 
 ```yaml
 CPU问题分类:
@@ -82,7 +82,7 @@ CPU问题分类:
     原因: 内部错误、外部干扰
 ```
 
-#<!-- chunk: CPU故障诊断流程 -->## CPU故障诊断流程
+## CPU故障诊断流程
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -150,7 +150,7 @@ CPU问题分类:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: MCE错误分析 -->## MCE错误分析
+## MCE错误分析
 
 ```bash
 #!/bin/bash
@@ -220,7 +220,7 @@ check_mcelog
 analyze_mce
 ```
 
-#<!-- chunk: CPU降频排查 -->## CPU降频排查
+## CPU降频排查
 
 ```yaml
 CPU降频原因排查:
@@ -266,7 +266,7 @@ CPU降频原因排查:
 
 <!-- chunk: 内存故障排查 -->## 内存故障排查
 
-#<!-- chunk: 内存问题类型 -->## 内存问题类型
+## 内存问题类型
 
 ```yaml
 内存问题分类:
@@ -299,7 +299,7 @@ CPU降频原因排查:
       表现: POST失败、间歇问题
 ```
 
-#<!-- chunk: 内存诊断命令 -->## 内存诊断命令
+## 内存诊断命令
 
 ```bash
 #!/bin/bash
@@ -338,7 +338,7 @@ echo -e "\n=== IPMI SEL中的内存事件 ==="
 ipmitool sel elist 2>/dev/null | grep -i memory | tail -10
 ```
 
-#<!-- chunk: 内存错误定位 -->## 内存错误定位
+## 内存错误定位
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -401,7 +401,7 @@ ipmitool sel elist 2>/dev/null | grep -i memory | tail -10
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 内存压力测试 -->## 内存压力测试
+## 内存压力测试
 
 ```bash
 #!/bin/bash
@@ -486,7 +486,7 @@ case "${1:-full}" in
 esac
 ```
 
-#<!-- chunk: 常见内存问题与解决 -->## 常见内存问题与解决
+## 常见内存问题与解决
 
 ```yaml
 内存问题速查:
@@ -539,7 +539,7 @@ esac
 
 <!-- chunk: 联合故障排查 -->## 联合故障排查
 
-#<!-- chunk: CPU与内存交互问题 -->## CPU与内存交互问题
+## CPU与内存交互问题
 
 ```yaml
 CPU-内存交互问题:
@@ -591,7 +591,7 @@ CPU-内存交互问题:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-31-hardware KUDIG Database — Global MOC
-- [[domain-17-system-foundation/README|Domain 31 - 硬件基础设施]]
+- [[domain-17-system-foundation/README.md|Domain 31 - 硬件基础设施]]
 - index.md|Domain-31 硬件 — 开源项目索引]]
 - 云平台硬件基础架构
 - 服务器架构原理
@@ -602,9 +602,9 @@ CPU-内存交互问题:
 - SSD固态硬盘技术
 - 网络硬件技术
 - 硬件厂商生态
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 

@@ -1685,6 +1685,10 @@ func (r *RetryableReconciler) isPermanentError(err error) bool {
 
 ### 5. 生产环境部署脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 #!/bin/bash
 # production-operator-deploy.sh
@@ -1951,7 +1955,7 @@ main "$@"
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
 - Domain-10 扩展与自定义 — 开源项目索引
 - CRD 自定义资源定义开发指南
 - 03 - 准入控制器(Webhook)配置与实现

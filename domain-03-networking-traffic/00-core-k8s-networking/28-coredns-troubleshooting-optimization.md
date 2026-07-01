@@ -78,6 +78,9 @@ created: "2026-05-23"
 
 ### 1.1 排查流程图
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                      CoreDNS 故障排查流程                                    │
@@ -133,6 +136,9 @@ created: "2026-05-23"
 
 ### 1.2 快速诊断命令集
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # === CoreDNS Pod状态 ===
 kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
@@ -186,6 +192,11 @@ kubectl exec -n kube-system deploy/coredns -- wget -qO- http://localhost:9153/me
 | 5 | CNI状态 | `kubectl get pods -n kube-system -l k8s-app=<cni>` | CNI问题 |
 
 **解决方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 重启CoreDNS
 kubectl rollout restart deployment/coredns -n kube-system
@@ -215,6 +226,10 @@ kubectl get networkpolicy -A | grep -E "kube-system|default"
 | `nginx` (短名称) | 成功 | resolv.conf search域错误 |
 
 **排查命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查Service是否存在
 kubectl get svc nginx -n default
@@ -243,6 +258,10 @@ kubectl exec <pod> -- cat /etc/resolv.conf
 | kubernetes插件错误 | 日志中kubernetes相关错误 | 检查RBAC权限 |
 
 **诊断Corefile语法**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 验证Corefile语法
 kubectl exec -n kube-system deploy/coredns -- coredns -conf /etc/coredns/Corefile -validate
@@ -773,7 +792,7 @@ groups:
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -784,9 +803,9 @@ groups:
 - Flannel WireGuard 加密后端配置
 - Flannel IPv6 Dual Stack 支持
 - Flannel Windows 节点支持
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
@@ -797,4 +816,6 @@ groups:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
+
+```

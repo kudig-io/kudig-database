@@ -57,7 +57,7 @@ OpenCode 的 **Client/Server 架构** 使其成为唯一提供完整 HTTP API �
 └──────────────┘               └───────┬─────────┘
                                        │
 ┌──────────────┐               ┌───────▼─────────┐
-│  自定义客户端  │◄──────────►│  SQLite [[domain-04-storage-data/README|storage]]  │
+│  自定义客户端  │◄──────────►│  SQLite [[domain-04-storage-data/README.md|storage]]  │
 │  (SDK/脚本)   │               └─────────────────┘
 └──────────────┘
 ```

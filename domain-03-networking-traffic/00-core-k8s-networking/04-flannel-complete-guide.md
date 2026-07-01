@@ -507,6 +507,9 @@ tcpdump -i eth0 -n port 8472  # VXLAN UDP 端口
 
 Flannel 本身不支持 NetworkPolicy，需配合 Calico:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 安装 Canal (Flannel + Calico NetworkPolicy)
 kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/canal.yaml
@@ -533,7 +536,7 @@ kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic KUDIG Database — Global MOC
-- [[domain-03-networking-traffic/README|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]]]
+- [[domain-03-networking-traffic/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -554,5 +557,5 @@ kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]

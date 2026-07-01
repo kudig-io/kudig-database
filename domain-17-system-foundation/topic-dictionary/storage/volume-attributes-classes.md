@@ -141,6 +141,9 @@ spec:
       storage: 200Gi
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 业务高峰期切换到 Gold 级别
 kubectl patch pvc db-data -n database \
@@ -161,6 +164,9 @@ kubectl patch pvc db-data -n database \
 - [ ] 参数值参考 CSI 驱动文档
 
 ## 命令快速参考
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 查看 VolumeAttributesClass
@@ -184,5 +190,8 @@ kubectl get pvc <name> -o jsonpath='{.spec.volumeAttributesClassName}'
 
 ## Related
 
-- index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|[[CSI (Container Storage Interface) 知识图谱索引|CSI (Container Storage Interface) 知识图谱索引]]]]
+- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume.md|Persistent Volume]]
+- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume-claim.md|Persistent Volume Claim]]
+- [[domain-17-system-foundation/topic-dictionary/storage/storage-class.md|Storage Class]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volume.md|Volume]]
+- [[domain-17-system-foundation/topic-dictionary/storage/emptydir.md|Emptydir]]

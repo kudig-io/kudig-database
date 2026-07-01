@@ -1,5 +1,5 @@
 ---
-title: Day 4: 调试工具全家桶安装 [quick-start]
+title: "Day 4: 调试工具全家桶安装 [quick-start]"
 description: '### 1.1 kubectl 基础配置'
 category: learning
 tags:
@@ -65,6 +65,9 @@ source ~/.zshrc
 
 ### 1.2 kubectl 别名配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 添加到 ~/.bashrc 或 ~/.zshrc
 alias k='kubectl'
@@ -100,7 +103,7 @@ kn default  # 切换到 default namespace
   OS="$(uname | tr '[:upper:]' '[:lower:]')"
   ARCH="$(uname -m | sed -e 's/x86_64/amd64/;s/aarch64/arm64/')"
   KREW="krew-${OS}_${ARCH}"
-  curl -fsSLO "https://github.[[entities/kubernetes|kubernetes]]-sigs/krew/releases/latest/download/${KREW}.tar.gz"
+  curl -fsSLO "https://github.[[entities/kubernetes.md|kubernetes]]-sigs/krew/releases/latest/download/${KREW}.tar.gz"
   tar zxf "${KREW}.tar.gz"
   ./"${KREW}" install krew
 )
@@ -227,6 +230,9 @@ kubescape scan --format html --output report.html cluster
 ## 5. Popeye 集群健康检查
 
 ### 5.1 安装 Popeye
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # Helm 安装
@@ -441,4 +447,5 @@ topic: onboarding
 type: setup-guide
 tags: [onboarding, tools, kubectl, k9s, stern, debugging, sre, ops-engineer, k8s-1.28-1.33]
 ---
+```
 ```

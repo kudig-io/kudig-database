@@ -58,7 +58,7 @@ created: "2026-05-23"
 
 **Endpoints** 和 **EndpointSlice** 是 Kubernetes 中用于跟踪 [[Service|Service]] 后端 Pod 网络端点的资源对象。它们记录了符合 Service 标签选择器的 Pod IP 地址和端口信息,为服务发现和负载均衡提供基础数据。
 
-#<!-- chunk: 核心概念 -->## 核心概念
+## 核心概念
 
 **Endpoints (v1)**:
 - Kubernetes 早期的端点跟踪机制
@@ -73,7 +73,7 @@ created: "2026-05-23"
 - 减少网络流量和 API 负载
 - 支持双栈(IPv4/IPv6)和多种拓扑结构
 
-#<!-- chunk: 主要区别 -->## 主要区别
+## 主要区别
 
 | 特性 | Endpoints | EndpointSlice |
 |------|-----------|---------------|
@@ -84,7 +84,7 @@ created: "2026-05-23"
 | **双栈支持** | 有限 | 原生支持 IPv4/IPv6 |
 | **更新粒度** | 全量更新 | 增量更新(仅变更的 Slice) |
 
-#<!-- chunk: 使用场景 -->## 使用场景
+## 使用场景
 
 **自动管理(常规场景)**:
 - Service 带 `selector` 时,Endpoint Controller 自动创建和维护 Endpoints
@@ -124,7 +124,7 @@ GET /api/v1/namespaces/{namespace}/endpoints/{name}
 
 <!-- chunk: Endpoints 完整字段规格表 -->## Endpoints 完整字段规格表
 
-#<!-- chunk: 顶层字段 -->## 顶层字段
+## 顶层字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 | 版本要求 |
 |---------|------|------|--------|------|----------|
@@ -134,7 +134,7 @@ GET /api/v1/namespaces/{namespace}/endpoints/{name}
 | `metadata.namespace` | string | 否 | default | 命名空间 | v1.0+ |
 | `subsets[]` | array | 否 | [] | 端点子集列表 | v1.0+ |
 
-#<!-- chunk: subsets[] 字段 -->## subsets[] 字段
+## subsets[] 字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 |
 |---------|------|------|--------|------|
@@ -142,7 +142,7 @@ GET /api/v1/namespaces/{namespace}/endpoints/{name}
 | `notReadyAddresses[]` | array | 否 | [] | 未就绪状态的端点地址列表 |
 | `ports[]` | array | 否 | [] | 端口信息列表 |
 
-#<!-- chunk: addresses[] / notReadyAddresses[] 字段 -->## addresses[] / notReadyAddresses[] 字段
+## addresses[] / notReadyAddresses[] 字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 |
 |---------|------|------|--------|------|
@@ -151,7 +151,7 @@ GET /api/v1/namespaces/{namespace}/endpoints/{name}
 | `nodeName` | string | 否 | - | Pod 所在节点名称 |
 | `targetRef` | object | 否 | - | 引用的对象(通常是 Pod) |
 
-#<!-- chunk: targetRef 字段 -->## targetRef 字段
+## targetRef 字段
 
 | 字段路径 | 类型 | 说明 |
 |---------|------|------|
@@ -161,7 +161,7 @@ GET /api/v1/namespaces/{namespace}/endpoints/{name}
 | `uid` | string | 对象 UID |
 | `resourceVersion` | string | 资源版本 |
 
-#<!-- chunk: ports[] 字段 -->## ports[] 字段
+## ports[] 字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 |
 |---------|------|------|--------|------|
@@ -194,7 +194,7 @@ GET /apis/discovery.k8s.io/v1/namespaces/{namespace}/endpointslices
 
 <!-- chunk: EndpointSlice 完整字段规格表 -->## EndpointSlice 完整字段规格表
 
-#<!-- chunk: 顶层字段 -->## 顶层字段
+## 顶层字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 | 版本要求 |
 |---------|------|------|--------|------|----------|
@@ -207,14 +207,14 @@ GET /apis/discovery.k8s.io/v1/namespaces/{namespace}/endpointslices
 | `endpoints[]` | array | 否 | [] | 端点列表 | v1.21+ |
 | `ports[]` | array | 否 | [] | 端口信息列表 | v1.21+ |
 
-#<!-- chunk: 必需标签 -->## 必需标签
+## 必需标签
 
 | 标签键 | 说明 | 示例值 |
 |-------|------|--------|
 | `kubernetes.io/service-name` | 关联的 Service 名称 | my-service |
 | `endpointslice.kubernetes.io/managed-by` | 管理者标识 | endpointslice-controller.k8s.io |
 
-#<!-- chunk: addressType 值 -->## addressType 值
+## addressType 值
 
 | 值 | 说明 | 使用场景 |
 |----|------|----------|
@@ -222,7 +222,7 @@ GET /apis/discovery.k8s.io/v1/namespaces/{namespace}/endpointslices
 | `IPv6` | IPv6 地址 | IPv6 单栈或双栈集群 |
 | `FQDN` | 完全限定域名 | ExternalName 或外部端点 |
 
-#<!-- chunk: endpoints[] 字段 -->## endpoints[] 字段
+## endpoints[] 字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 |
 |---------|------|------|--------|------|
@@ -235,7 +235,7 @@ GET /apis/discovery.k8s.io/v1/namespaces/{namespace}/endpointslices
 | `hints` | object | 否 | - | 拓扑路由提示 |
 | `deprecatedTopology` | map | 否 | - | 已废弃的拓扑信息 |
 
-#<!-- chunk: conditions 字段 -->## conditions 字段
+## conditions 字段
 
 | 字段路径 | 类型 | 默认值 | 说明 |
 |---------|------|--------|------|
@@ -248,7 +248,7 @@ GET /apis/discovery.k8s.io/v1/namespaces/{namespace}/endpointslices
 - `ready=false, serving=true`: 端点未就绪但仍提供服务(如设置 `publishNotReadyAddresses: true`)
 - `terminating=true`: Pod 正在删除,即将移除
 
-#<!-- chunk: ports[] 字段 -->## ports[] 字段
+## ports[] 字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 |
 |---------|------|------|--------|------|
@@ -261,7 +261,7 @@ GET /apis/discovery.k8s.io/v1/namespaces/{namespace}/endpointslices
 
 <!-- chunk: 手动创建 Endpoints(无 selector Service) -->## 手动创建 Endpoints(无 selector Service)
 
-#<!-- chunk: 场景 1: 代理外部固定 IP 服务 -->## 场景 1: 代理外部固定 IP 服务
+## 场景 1: 代理外部固定 IP 服务
 
 **需求**: 将外部数据库(固定 IP)映射为集群内部 Service
 
@@ -308,7 +308,7 @@ kubectl run -it --rm mysql-client --image=mysql:8.0 --restart=Never -- \
   mysql -h external-database.production.svc.cluster.local -uroot -p
 ```
 
-#<!-- chunk: 场景 2: 跨集群服务代理 -->## 场景 2: 跨集群服务代理
+## 场景 2: 跨集群服务代理
 
 **需求**: 在集群 A 中访问集群 B 的服务
 
@@ -343,7 +343,7 @@ subsets:
     protocol: TCP
 ```
 
-#<!-- chunk: 场景 3: 混合端点(集群内 + 外部) -->## 场景 3: 混合端点(集群内 + 外部)
+## 场景 3: 混合端点(集群内 + 外部)
 
 **需求**: 部分流量转发到外部服务(如迁移场景)
 
@@ -429,7 +429,7 @@ spec:
 
 <!-- chunk: 手动创建 EndpointSlice -->## 手动创建 EndpointSlice
 
-#<!-- chunk: 基础示例 -->## 基础示例
+## 基础示例
 
 ```yaml
 apiVersion: discovery.k8s.io/v1
@@ -464,7 +464,7 @@ ports:
   appProtocol: mysql
 ```
 
-#<!-- chunk: 多 Slice 分片示例 -->## 多 Slice 分片示例
+## 多 Slice 分片示例
 
 **场景**: 超过 100 个端点时分片
 
@@ -511,7 +511,7 @@ ports:
   port: 8080
 ```
 
-#<!-- chunk: 双栈 EndpointSlice -->## 双栈 EndpointSlice
+## 双栈 EndpointSlice
 
 ```yaml
 # IPv4 Slice
@@ -556,7 +556,7 @@ ports:
 
 <!-- chunk: 最小配置示例 -->## 最小配置示例
 
-#<!-- chunk: Endpoints 最简配置 -->## Endpoints 最简配置
+## Endpoints 最简配置
 
 ```yaml
 apiVersion: v1
@@ -570,7 +570,7 @@ subsets:
   - port: 80
 ```
 
-#<!-- chunk: EndpointSlice 最简配置 -->## EndpointSlice 最简配置
+## EndpointSlice 最简配置
 
 ```yaml
 apiVersion: discovery.k8s.io/v1
@@ -590,7 +590,7 @@ ports:
 
 <!-- chunk: 生产级配置示例 -->## 生产级配置示例
 
-#<!-- chunk: 示例 1: 高可用外部数据库集成 -->## 示例 1: 高可用外部数据库集成
+## 示例 1: 高可用外部数据库集成
 
 ```yaml
 # Service 定义
@@ -721,7 +721,7 @@ spec:
     path: /metrics
 ```
 
-#<!-- chunk: 示例 2: 跨集群服务桥接(多集群联邦) -->## 示例 2: 跨集群服务桥接(多集群联邦)
+## 示例 2: 跨集群服务桥接(多集群联邦)
 
 ```yaml
 # 本地集群: Service 定义
@@ -805,7 +805,7 @@ spec:
   type: ClusterIP
 ```
 
-#<!-- chunk: 示例 3: FQDN 类型的 EndpointSlice -->## 示例 3: FQDN 类型的 EndpointSlice
+## 示例 3: FQDN 类型的 EndpointSlice
 
 **场景**: 引用外部 SaaS 服务的 DNS 名称
 
@@ -851,7 +851,7 @@ ports:
 
 <!-- chunk: 内部原理 -->## 内部原理
 
-#<!-- chunk: Endpoint Controller 工作流程 -->## Endpoint Controller 工作流程
+## Endpoint Controller 工作流程
 
 **自动管理(带 selector 的 Service)**:
 
@@ -882,7 +882,7 @@ ports:
 - Pod 必须有 `PodIP`(未分配 IP 的 Pod 不会加入)
 - containerPort 需要匹配 Service.spec.ports[].targetPort
 
-#<!-- chunk: EndpointSlice Controller 工作流程 -->## EndpointSlice Controller 工作流程
+## EndpointSlice Controller 工作流程
 
 **分片策略**:
 - 默认每个 Slice 最多 100 个端点(`--max-endpoints-per-slice`)
@@ -914,7 +914,7 @@ labels:
 | 网络流量 | 高 | 低(~90% 减少) |
 | API 负载 | 高 | 低 |
 
-#<!-- chunk: 拓扑感知路由(Topology Aware Hints) -->## 拓扑感知路由(Topology Aware Hints)
+## 拓扑感知路由(Topology Aware Hints)
 
 **v1.23+ GA 功能**:
 - EndpointSlice 包含拓扑信息(zone、node)
@@ -968,7 +968,7 @@ endpoints:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 1. 优先使用 EndpointSlice -->## 1. 优先使用 EndpointSlice
+## 1. 优先使用 EndpointSlice
 
 **原因**:
 - 更好的性能和可扩展性
@@ -984,7 +984,7 @@ kubectl get endpointslices -A
 kubectl get cm kube-proxy -n kube-system -o yaml | grep EndpointSlice
 ```
 
-#<!-- chunk: 2. 手动 Endpoints 维护规范 -->## 2. 手动 Endpoints 维护规范
+## 2. 手动 Endpoints 维护规范
 
 **命名一致性**:
 ```yaml
@@ -1010,7 +1010,7 @@ metadata:
     last-updated: "2026-02-10"
 ```
 
-#<!-- chunk: 3. 监控 Endpoints 健康状态 -->## 3. 监控 Endpoints 健康状态
+## 3. 监控 Endpoints 健康状态
 
 **关键指标**:
 - Endpoints 对象的端点数量
@@ -1055,7 +1055,7 @@ groups:
       summary: "Production endpoints disappeared"
 ```
 
-#<!-- chunk: 4. 外部服务健康检查 -->## 4. 外部服务健康检查
+## 4. 外部服务健康检查
 
 **问题**: 手动 Endpoints 不会自动检查外部服务健康状态
 
@@ -1095,7 +1095,7 @@ spec:
           restartPolicy: OnFailure
 ```
 
-#<!-- chunk: 5. EndpointSlice 分片策略 -->## 5. EndpointSlice 分片策略
+## 5. EndpointSlice 分片策略
 
 **自动分片配置**:
 ```yaml
@@ -1140,7 +1140,7 @@ endpoints:
 # ... 更多 zone-b 端点
 ```
 
-#<!-- chunk: 6. 拓扑感知路由最佳实践 -->## 6. 拓扑感知路由最佳实践
+## 6. 拓扑感知路由最佳实践
 
 **启用条件**:
 1. 集群节点有拓扑标签(`topology.kubernetes.io/zone`)
@@ -1148,6 +1148,10 @@ endpoints:
 3. Service 设置注解 `service.kubernetes.io/topology-aware-hints: "auto"`
 
 **检查拓扑标签**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 查看节点标签
 kubectl get nodes --show-labels | grep topology
@@ -1161,7 +1165,7 @@ kubectl label node node-1 topology.kubernetes.io/zone=us-east-1a
 - 端点数量需要足够(每个区域至少 2-3 个)
 - 可能与 `externalTrafficPolicy: Local` 冲突
 
-#<!-- chunk: 7. 双栈 Endpoints 管理 -->## 7. 双栈 Endpoints 管理
+## 7. 双栈 Endpoints 管理
 
 **创建双栈 Service 的 EndpointSlice**:
 ```yaml
@@ -1199,7 +1203,7 @@ kubectl run -it --rm debug --image=busybox -- nslookup dual-stack-svc
 # 应返回 A 和 AAAA 记录
 ```
 
-#<!-- chunk: 8. 自动化管理工具 -->## 8. 自动化管理工具
+## 8. 自动化管理工具
 
 **使用 Operator 管理外部端点**:
 
@@ -1232,7 +1236,7 @@ Operator 将:
 
 <!-- chunk: FAQ -->## FAQ
 
-#<!-- chunk: Q1: Service 有 selector 时能否手动创建 Endpoints? -->## Q1: Service 有 selector 时能否手动创建 Endpoints?
+## Q1: Service 有 selector 时能否手动创建 Endpoints?
 
 **回答**: 不能。带 `selector` 的 Service 的 Endpoints 由系统自动管理,手动创建会被覆盖。
 
@@ -1240,7 +1244,7 @@ Operator 将:
 1. 移除 Service 的 `selector` 字段
 2. 或创建两个 Service(一个自动,一个手动)
 
-#<!-- chunk: Q2: 如何查看 Service 的所有 EndpointSlice? -->## Q2: 如何查看 Service 的所有 EndpointSlice?
+## Q2: 如何查看 Service 的所有 EndpointSlice?
 
 ```bash
 # 方法 1: 通过标签过滤
@@ -1256,7 +1260,7 @@ kubectl get endpointslices -n namespace \
   -o yaml
 ```
 
-#<!-- chunk: Q3: Endpoints 为空但 Pod 正常运行? -->## Q3: Endpoints 为空但 Pod 正常运行?
+## Q3: Endpoints 为空但 Pod 正常运行?
 
 **排查步骤**:
 
@@ -1286,7 +1290,12 @@ kubectl get pods -n namespace -o jsonpath='{.items[*].status.podIP}'
 3. **Pod 无 IP**: 网络插件问题
 4. **命名空间错误**: Service 和 Pod 不在同一命名空间
 
-#<!-- chunk: Q4: 如何强制刷新 Endpoints? -->## Q4: 如何强制刷新 Endpoints?
+## Q4: 如何强制刷新 Endpoints?
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 方法 1: 触发 Service 更新
@@ -1299,7 +1308,7 @@ kubectl rollout restart deployment kube-controller-manager -n kube-system
 kubectl delete endpoints my-service -n namespace
 ```
 
-#<!-- chunk: Q5: EndpointSlice 和 Endpoints 数据不一致? -->## Q5: EndpointSlice 和 Endpoints 数据不一致?
+## Q5: EndpointSlice 和 Endpoints 数据不一致?
 
 **原因**: kube-proxy 可能同时监听两种资源
 
@@ -1320,7 +1329,7 @@ featureGates:
 - 确保 kube-proxy 启用 `EndpointSliceProxying` 特性门控
 - 升级 kube-proxy 到 v1.21+
 
-#<!-- chunk: Q6: 手动 Endpoints 的端口匹配规则? -->## Q6: 手动 Endpoints 的端口匹配规则?
+## Q6: 手动 Endpoints 的端口匹配规则?
 
 **规则**: Endpoints 的端口名称应与 Service 端口名称匹配(可选但推荐)
 
@@ -1342,7 +1351,7 @@ subsets:
 - 单端口 Service: 无影响
 - 多端口 Service: 可能导致端口映射错误
 
-#<!-- chunk: Q7: 如何实现 Endpoints 的灰度更新? -->## Q7: 如何实现 Endpoints 的灰度更新?
+## Q7: 如何实现 Endpoints 的灰度更新?
 
 **场景**: 外部服务从旧 IP 迁移到新 IP
 
@@ -1381,7 +1390,7 @@ conntrack -L | grep 192.0.2.10  # 旧 IP
 conntrack -L | grep 192.0.2.100 # 新 IP
 ```
 
-#<!-- chunk: Q8: EndpointSlice 的 serving 和 ready 条件区别? -->## Q8: EndpointSlice 的 serving 和 ready 条件区别?
+## Q8: EndpointSlice 的 serving 和 ready 条件区别?
 
 | 条件 | 含义 | 影响 |
 |------|------|------|
@@ -1404,7 +1413,7 @@ endpoints:
 
 <!-- chunk: 生产案例 -->## 生产案例
 
-#<!-- chunk: 案例 1: 外部 PostgreSQL 数据库集成 -->## 案例 1: 外部 PostgreSQL 数据库集成
+## 案例 1: 外部 PostgreSQL 数据库集成
 
 **需求**: 将现有的外部 PostgreSQL 集群映射为 Kubernetes Service
 
@@ -1551,7 +1560,7 @@ env:
 
 ---
 
-#<!-- chunk: 案例 2: 多集群服务桥接(Submariner 风格) -->## 案例 2: 多集群服务桥接(Submariner 风格)
+## 案例 2: 多集群服务桥接(Submariner 风格)
 
 **场景**: 集群 A 访问集群 B 的服务
 
@@ -1619,7 +1628,7 @@ spec:
 
 ---
 
-#<!-- chunk: 案例 3: 拓扑感知的全球分布式服务 -->## 案例 3: 拓扑感知的全球分布式服务
+## 案例 3: 拓扑感知的全球分布式服务
 
 **场景**: 跨多个地理区域的服务,优先路由到本地端点
 
@@ -1756,26 +1765,26 @@ kubectl run test-eu -n global --image=curlimages/curl --rm -it \
 
 <!-- chunk: 相关资源 -->## 相关资源
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 - [Endpoints 概念](https://kubernetes.io/docs/concepts/services-networking/service/#endpoints)
 - [EndpointSlice 概念](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/)
 - [EndpointSlice API 参考](https://kubernetes.io/docs/reference/kubernetes-api/service-resources/endpoint-slice-v1/)
 - [拓扑感知路由](https://kubernetes.io/docs/concepts/services-networking/topology-aware-routing/)
 
-#<!-- chunk: 控制器 -->## 控制器
+## 控制器
 - [Endpoint Controller 代码](https://github.com/kubernetes/kubernetes/tree/master/pkg/controller/endpoint)
 - [EndpointSlice Controller 代码](https://github.com/kubernetes/kubernetes/tree/master/pkg/controller/endpointslice)
 
-#<!-- chunk: 多集群方案 -->## 多集群方案
+## 多集群方案
 - [Kubernetes Multi-Cluster Services (MCS)](https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/1645-multi-cluster-services-api)
 - [Submariner](https://submariner.io/) - 跨集群服务发现
 - [Cilium Cluster Mesh](https://docs.cilium.io/en/stable/network/clustermesh/) - 多集群网络
 
-#<!-- chunk: 工具 -->## 工具
+## 工具
 - [kubectl-view-service-endpoints](https://github.com/kube-tools/kubectl-view-service-endpoints) - 可视化端点
 - [kubectl-slice](https://github.com/patrickdappollonio/kubectl-slice) - EndpointSlice 管理工具
 
-#<!-- chunk: 性能分析 -->## 性能分析
+## 性能分析
 - [Scaling Kubernetes to 7,500 Nodes](https://openai.com/research/scaling-kubernetes-to-7500-nodes) - EndpointSlice 性能提升案例
 - [EndpointSlice Performance Analysis](https://kubernetes.io/blog/2020/09/02/scaling-kubernetes-networking-endpointslices/)
 
@@ -1790,7 +1799,7 @@ kubectl run test-eu -n global --image=curlimages/curl --rm -it \
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -1811,4 +1820,4 @@ kubectl run test-eu -n global --image=curlimages/curl --rm -it \
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]

@@ -95,7 +95,7 @@ graph TD
     style L fill:#ef4444,stroke:#b91c1c,color:#fff
 ```
 
-#<!-- chunk: 1.1 Java 容器化核心原则 -->## 1.1 Java 容器化核心原则
+## 1.1 Java 容器化核心原则
 
 | 原则 | 说明 |
 |------|------|
@@ -110,7 +110,7 @@ graph TD
 
 <!-- chunk: 二、基础镜像选型 -->## 二、基础镜像选型
 
-#<!-- chunk: 2.1 基础镜像对比 -->## 2.1 基础镜像对比
+## 2.1 基础镜像对比
 
 | 镜像 | 大小 | 安全性 | 调试能力 | 推荐场景 |
 |------|------|--------|---------|---------|
@@ -127,7 +127,7 @@ graph TD
 docker images --format "{{.Repository}}:{{.Tag}}\t{{.Size}}" | grep -E "temurin|distroless|chainguard"
 ```
 
-#<!-- chunk: 2.2 JDK vs JRE 决策树 -->## 2.2 JDK vs JRE 决策树
+## 2.2 JDK vs JRE 决策树
 
 ```
 需要 javac、jdb、jcmd 等工具？ ─── 是 ──→ 使用 JDK 镜像
@@ -151,7 +151,7 @@ docker images --format "{{.Repository}}:{{.Tag}}\t{{.Size}}" | grep -E "temurin|
 
 <!-- chunk: 三、多阶段构建 -->## 三、多阶段构建
 
-#<!-- chunk: 3.1 Maven 多阶段 Dockerfile -->## 3.1 Maven 多阶段 Dockerfile
+## 3.1 Maven 多阶段 Dockerfile
 
 ```dockerfile
 # ========== Stage 1: 构建 ==========
@@ -199,7 +199,7 @@ USER appuser
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS org.springframework.boot.loader.launch.JarLauncher"]
 ```
 
-#<!-- chunk: 3.2 Gradle 多阶段 Dockerfile -->## 3.2 Gradle 多阶段 Dockerfile
+## 3.2 Gradle 多阶段 Dockerfile
 
 ```dockerfile
 # ========== Stage 1: 构建 ==========
@@ -239,7 +239,7 @@ USER appuser
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS org.springframework.boot.loader.launch.JarLauncher"]
 ```
 
-#<!-- chunk: 3.3 Distroless 安全版本 -->## 3.3 Distroless 安全版本
+## 3.3 Distroless 安全版本
 
 ```dockerfile
 FROM eclipse-temurin:21-jdk AS builder
@@ -268,6 +268,7 @@ ENTRYPOINT ["java", \
             "-XX:MaxRAMPercentage=75.0", \
             "-XX:+UseG1GC", \
             "org.springframework.boot.loader.launch.JarLauncher"]
+
 ```
 
 > **注意**: Distroless 镜像无 shell，无法使用 `kubectl exec -it -- sh` 进入容器。排查时需使用 `kubectl exec -- java -XX:...` 或 `kubectl debug` 附加调试容器。
@@ -276,7 +277,7 @@ ENTRYPOINT ["java", \
 
 <!-- chunk: 四、Dockerfile 生产级模板 -->## 四、Dockerfile 生产级模板
 
-#<!-- chunk: 4.1 完整生产级 Dockerfile -->## 4.1 完整生产级 Dockerfile
+## 4.1 完整生产级 Dockerfile
 
 ```dockerfile
 # ========== 构建元信息 ==========
@@ -353,7 +354,7 @@ USER appuser
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS org.springframework.boot.loader.launch.JarLauncher"]
 ```
 
-#<!-- chunk: 4.2 .dockerignore 文件 -->## 4.2 .dockerignore 文件
+## 4.2 .dockerignore 文件
 
 ```
 # 版本控制
@@ -398,7 +399,7 @@ Thumbs.db
 
 <!-- chunk: 五、Spring Boot 分层 JAR 优化 -->## 五、Spring Boot 分层 JAR 优化
 
-#<!-- chunk: 5.1 分层原理 -->## 5.1 分层原理
+## 5.1 分层原理
 
 ```mermaid
 graph LR
@@ -416,7 +417,7 @@ graph LR
     style E fill:#ef4444,stroke:#b91c1c,color:#fff
 ```
 
-#<!-- chunk: 5.2 启用分层 (Spring Boot 3.x) -->## 5.2 启用分层 (Spring Boot 3.x)
+## 5.2 启用分层 (Spring Boot 3.x)
 
 ```yaml
 # pom.xml
@@ -438,7 +439,7 @@ tasks.bootJar {
 }
 ```
 
-#<!-- chunk: 5.3 自定义分层配置 -->## 5.3 自定义分层配置
+## 5.3 自定义分层配置
 
 ```xml
 <!-- layers.xml -->
@@ -475,7 +476,7 @@ tasks.bootJar {
 
 <!-- chunk: 六、Jib 无 Dockerfile 构建 -->## 六、Jib 无 Dockerfile 构建
 
-#<!-- chunk: 6.1 Maven 配置 -->## 6.1 Maven 配置
+## 6.1 Maven 配置
 
 ```xml
 <plugin>
@@ -528,7 +529,7 @@ tasks.bootJar {
 </plugin>
 ```
 
-#<!-- chunk: 6.2 Gradle Kotlin DSL 配置 -->## 6.2 Gradle Kotlin DSL 配置
+## 6.2 Gradle Kotlin DSL 配置
 
 ```kotlin
 plugins {
@@ -568,7 +569,7 @@ jib {
 }
 ```
 
-#<!-- chunk: 6.3 构建命令 -->## 6.3 构建命令
+## 6.3 构建命令
 
 ```bash
 # 构建到 Docker daemon
@@ -590,7 +591,7 @@ jib {
 
 <!-- chunk: 七、Buildpacks 自动构建 -->## 七、Buildpacks 自动构建
 
-#<!-- chunk: 7.1 Paketo Buildpacks -->## 7.1 Paketo Buildpacks
+## 7.1 Paketo Buildpacks
 
 ```bash
 # 使用 pack CLI 构建
@@ -605,7 +606,7 @@ pack build registry.example.com/my-spring-app:v1.0.0 \
 pack inspect registry.example.com/my-spring-app:v1.0.0
 ```
 
-#<!-- chunk: 7.2 K8s 集成 (Tekton + Buildpacks) -->## 7.2 K8s 集成 (Tekton + Buildpacks)
+## 7.2 K8s 集成 (Tekton + Buildpacks)
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -640,7 +641,7 @@ spec:
 
 <!-- chunk: 八、镜像瘦身策略 -->## 八、镜像瘦身策略
 
-#<!-- chunk: 8.1 瘦身技巧对比 -->## 8.1 瘦身技巧对比
+## 8.1 瘦身技巧对比
 
 | 策略 | 镜像大小缩减 | 复杂度 | 适用场景 |
 |------|-------------|--------|---------|
@@ -652,7 +653,7 @@ spec:
 | AppCDS (类共享) | 不减大小，加速启动 | 中 | 大型应用 |
 | jlink 定制 JRE | ~30% 额外缩减 | 中 | 精简运行时 |
 
-#<!-- chunk: 8.2 jlink 定制 JRE -->## 8.2 jlink 定制 JRE
+## 8.2 jlink 定制 JRE
 
 ```dockerfile
 FROM eclipse-temurin:21-jdk AS jre-builder
@@ -684,7 +685,7 @@ ENTRYPOINT ["java", "-jar", "/app/app.jar"]
 
 <!-- chunk: 九、多架构构建 -->## 九、多架构构建
 
-#<!-- chunk: 9.1 Docker Buildx 多架构 -->## 9.1 Docker Buildx 多架构
+## 9.1 Docker Buildx 多架构
 
 ```bash
 # 创建多架构构建器
@@ -699,11 +700,11 @@ docker buildx build --push \
     .
 ```
 
-#<!-- chunk: 9.2 Jib 多架构 -->## 9.2 Jib 多架构
+## 9.2 Jib 多架构
 
 Jib 在 `configuration>from>platforms` 中配置多架构，构建时自动生成 manifest list。
 
-#<!-- chunk: 9.3 ARM64 注意事项 -->## 9.3 ARM64 注意事项
+## 9.3 ARM64 注意事项
 
 ```bash
 # 验证镜像架构
@@ -719,7 +720,7 @@ docker run --rm --platform linux/arm64 registry.example.com/my-spring-app:v1.0.0
 
 <!-- chunk: 十、安全加固 -->## 十、安全加固
 
-#<!-- chunk: 10.1 容器安全检查清单 -->## 10.1 容器安全检查清单
+## 10.1 容器安全检查清单
 
 | 检查项 | 命令/方法 | 状态 |
 |--------|----------|------|
@@ -731,7 +732,7 @@ docker run --rm --platform linux/arm64 registry.example.com/my-spring-app:v1.0.0
 | 镜像签名 | `cosign sign` | ☐ |
 | 漏洞扫描 | `[[Trivy|trivy]] image` / `grype` | ☐ |
 
-#<!-- chunk: 10.2 K8s SecurityContext -->## 10.2 K8s SecurityContext
+## 10.2 K8s SecurityContext
 
 ```yaml
 apiVersion: apps/v1
@@ -773,7 +774,7 @@ spec:
 
 <!-- chunk: 十一、CI/CD 集成 -->## 十一、CI/CD 集成
 
-#<!-- chunk: 11.1 GitHub Actions -->## 11.1 GitHub Actions
+## 11.1 GitHub Actions
 
 ```yaml
 name: Build Java Container
@@ -802,7 +803,7 @@ jobs:
           REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
 ```
 
-#<!-- chunk: 11.2 漏洞扫描集成 -->## 11.2 漏洞扫描集成
+## 11.2 漏洞扫描集成
 
 ```bash
 # Trivy 扫描
@@ -846,7 +847,7 @@ cosign sign --key cosign.key registry.example.com/my-spring-app:v1.0.0
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-13-container-runtime MOC
-- [[domain-13-container-runtime/README|Docker 容器技术深度解析]]
+- [[domain-13-container-runtime/README.md|Docker 容器技术深度解析]]
 - Domain-13 Docker — 开源项目索引
 - Docker 架构概述与核心概念
 - Docker 镜像管理详解
@@ -867,4 +868,6 @@ cosign sign --key cosign.key registry.example.com/my-spring-app:v1.0.0
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+```

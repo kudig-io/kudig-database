@@ -179,6 +179,10 @@ kubectl get pods -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE
 ### 2.1 kubectl create
 
 **语法格式:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl create -f <filename|url> [options]
 kubectl create <resource> <name> [flags]
@@ -194,6 +198,9 @@ kubectl create <resource> <name> [flags]
 | `--record` (已弃用) | 记录命令到 revision history | 改用 dry-run=server 方式 |
 
 **生产环境示例:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 从文件创建资源 (最常用)
@@ -226,6 +233,10 @@ kubectl create deployment nginx --image=nginx:1.25 --replicas=3 -o yaml --dry-ru
 ### 2.2 kubectl apply
 
 **语法格式:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply -f <filename|directory|url> [options]
 kubectl apply -k <kustomization_directory> [options]
@@ -245,6 +256,9 @@ kubectl apply -k <kustomization_directory> [options]
 | `--validate=true/false` | 是否进行 schema 验证 | `kubectl apply -f deploy.yaml --validate=false` |
 
 **生产环境示例:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 基础应用 (最常用)
@@ -282,6 +296,10 @@ kubectl apply -k ./overlays/production/
 ### 2.3 kubectl delete
 
 **语法格式:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 kubectl delete <resource> <name> [options]
 kubectl delete -f <filename> [options]
@@ -302,6 +320,12 @@ kubectl delete -f <filename> [options]
 
 **生产环境示例:**
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 从文件删除资源
 kubectl delete -f deployment.yaml
@@ -310,16 +334,16 @@ kubectl delete -f deployment.yaml
 kubectl delete deployments,pods,services -l env=testing --namespace staging
 
 # 3. 强制删除卡住的 Pod (关键 - 排查 Terminating 状态)
-kubectl delete pod nginx --grace-period=0 --force --namespace production
+kubectl delete pod nginx --grace-period=0 --force --namespace production  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 4. 级联策略控制 (保留 ReplicaSet 进行调试)
 kubectl delete deployment nginx --cascade=orphan
 
 # 5. 清理命名空间下所有资源 (保留命名空间本身)
-kubectl delete all --all --namespace temporary-namespace
+kubectl delete all --all --namespace temporary-namespace  # ⚠️ 批量删除，波及面大
 
 # 6. 带超时的删除操作 (脚本中使用)
-kubectl delete namespace old-project --timeout=300s --wait=true
+kubectl delete namespace old-project --timeout=300s --wait=true  # ⚠️ 不可逆：永久删除命名空间及全部资源
 
 # 7. 删除并忽略不存在错误 (幂等脚本)
 kubectl delete -f manifest.yaml --ignore-not-found=true
@@ -334,6 +358,10 @@ kubectl delete -f manifest.yaml --ignore-not-found=true
 ### 2.4 kubectl replace
 
 **语法格式:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl replace -f <filename> [options]
 ```
@@ -347,6 +375,9 @@ kubectl replace -f <filename> [options]
 | `--dry-run=server` | Server 端模拟 | `kubectl replace -f deploy.yaml --dry-run=server` |
 
 **生产环境示例:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 替换现有资源 (要求资源必须已存在)
@@ -675,7 +706,6 @@ kubectl events --for=Deployment/api-gateway -n production
 **生产环境示例:**
 
 
-
 > **注意事项:**
 > - restart 不会修改 Pod Template spec，仅添加 restartedAt annotation
 > - pause 后已更新的 Pod 保持运行
@@ -697,7 +727,6 @@ kubectl events --for=Deployment/api-gateway -n production
 **生产环境示例:**
 
 
-
 > **注意事项:**
 > - 被 HPA 管理的 Deployment 不应手动 scale
 > - 大规模扩容时注意节点资源
@@ -715,7 +744,6 @@ kubectl events --for=Deployment/api-gateway -n production
 | --memory-percent=<percent> | Memory 使用率阈值 | kubectl autoscale deployment nginx --memory-percent=80 --max=10 |
 
 **生产环境示例:**
-
 
 
 > **注意事项:**
@@ -739,7 +767,6 @@ kubectl events --for=Deployment/api-gateway -n production
 **生产环境示例:**
 
 
-
 #### 4.4.2 kubectl set resources
 
 | 常用选项 | 说明 | 示例 |
@@ -749,7 +776,6 @@ kubectl events --for=Deployment/api-gateway -n production
 | --containers | 指定容器 | kubectl set resources deployment/nginx --limits=cpu=1g --containers=app |
 
 **生产环境示例:**
-
 
 
 #### 4.4.3 kubectl set env
@@ -764,7 +790,6 @@ kubectl events --for=Deployment/api-gateway -n production
 **生产环境示例:**
 
 
-
 #### 4.4.4 kubectl set serviceaccount
 
 | 常用选项 | 说明 | 示例 |
@@ -773,7 +798,6 @@ kubectl events --for=Deployment/api-gateway -n production
 | --local | 本地输出 | kubectl set serviceaccount deployment/nginx sa-name --local -o yaml |
 
 **生产环境示例:**
-
 
 
 > **注意事项:**
@@ -895,7 +919,7 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
     "major": "1",
     "minor": "35",
     "gitVersion": "v1.35.3",
-    "gitCommit": "6c1cd99aef09161ddb07b8ade6c9564e9b9[[entities/bfe|bfe]]27",
+    "gitCommit": "6c1cd99aef09161ddb07b8ade6c9564e9b9[[entities/bfe.md|bfe]]27",
     "gitTreeState": "clean",
     "buildDate": "2026-03-18T18:30:07Z",
     "goVersion": "go1.26.1",
@@ -937,7 +961,6 @@ Client Version: v1.35.3
 **生产环境示例:**
 
 
-
 > **注意事项:**
 > -  是编写 RBAC 规则时的常用组合
 > -  可快速定位集群级资源 (如 Node, ClusterRole)
@@ -956,6 +979,10 @@ Client Version: v1.35.3
 ### 6.1 kubectl exec
 
 **语法格式:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 kubectl exec <pod-name> [-c <container>] -- <command> [args...]
 ```
@@ -968,6 +995,9 @@ kubectl exec <pod-name> [-c <container>] -- <command> [args...]
 | `--env=<key=value>` | 设置环境变量 | `kubectl exec nginx --env=DEBUG=1 -- env` |
 
 **生产环境示例:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 进入 Pod 的交互式 shell (最常用)
@@ -1257,6 +1287,10 @@ kubectl proxy --port=8080 --reject-paths='^/api/./pods/./exec,^/api/./pods/./att
 ### 8.1 kubectl cordon / uncordon
 
 **语法格式:**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+
 ```bash
 kubectl cordon <node-name>
 kubectl uncordon <node-name>
@@ -1268,6 +1302,9 @@ kubectl uncordon <node-name>
 | `--selector=<labels>` | 按标签选择 | `kubectl cordon -l node-role.kubernetes.io/worker` |
 
 **生产环境示例:**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
 
 ```bash
 # 1. 标记节点不可调度 (维护前)
@@ -1291,6 +1328,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,SCHEDULABLE:.spec.unsche
 ### 8.2 kubectl drain
 
 **语法格式:**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 kubectl drain <node-name> [options]
 ```
@@ -1307,6 +1348,9 @@ kubectl drain <node-name> [options]
 | `--skip-wait-for-delete-timeout=<seconds>` | 跳过等待 | `kubectl drain worker-01 --skip-wait-for-delete-timeout=60` |
 
 **生产环境示例:**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 1. 标准节点排空 (维护前)
@@ -1356,6 +1400,9 @@ kubectl taint <node-name> <key>:<effect>-  # 删除 taint
 | `--overwrite` | 覆盖现有 taint | `kubectl taint nodes worker-01 key=value:NoSchedule --overwrite` |
 
 **生产环境示例:**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
 
 ```bash
 # 1. 为节点添加 NoSchedule Taint (专用节点)
@@ -1498,6 +1545,10 @@ kubectl certificate deny csr-suspicious-xyz789
 ### 9.3 kubectl create token
 
 **语法格式:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl create token <serviceaccount-name> [options]
 ```
@@ -1511,6 +1562,9 @@ kubectl create token <serviceaccount-name> [options]
 | `--bound-object-name=<name>` | 绑定对象名称 | `kubectl create token app-sa --bound-object-name=pod-01` |
 
 **生产环境示例:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 为 ServiceAccount 创建临时 Token
@@ -1605,6 +1659,9 @@ kubectl kustomize <kustomization_directory> [options]
 
 **生产环境示例:**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. 渲染 Kustomize 配置为完整 YAML
 kubectl kustomize ./overlays/production/ > production-manifests.yaml
@@ -1631,6 +1688,10 @@ diff <(kubectl kustomize ./overlays/staging/) <(kubectl kustomize ./overlays/pro
 ### 10.3 kubectl patch
 
 **语法格式:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch <resource> <name> --type=<type> -p '<patch>' [options]
 ```
@@ -1649,6 +1710,9 @@ kubectl patch <resource> <name> --type=<type> -p '<patch>' [options]
 | `--dry-run=server` | Server 端模拟 | `kubectl patch deploy nginx -p '...' --dry-run=server` |
 
 **生产环境示例:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. Strategic Merge Patch - 更新副本数 (默认)
@@ -1699,6 +1763,9 @@ kubectl wait <resource> <name> --for=<condition> [options]
 
 **生产环境示例:**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. 等待 Pod 就绪
 kubectl wait pod nginx-7d8c9b4f5-x2k9m --for=condition=Ready --timeout=120s -n production
@@ -1732,6 +1799,10 @@ kubectl wait deployment/api-gateway --for=condition=Available --timeout=300s
 ### 10.5 kubectl annotate
 
 **语法格式:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 kubectl annotate <resource> <name> <key>=<value> [options]
 ```
@@ -1745,6 +1816,9 @@ kubectl annotate <resource> <name> <key>=<value> [options]
 | `--local` | 本地输出 | `kubectl annotate pod nginx note=test --local -o yaml` |
 
 **生产环境示例:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 1. 添加 annotation 标记资源所有者
@@ -1775,6 +1849,10 @@ kubectl annotate ingress api-gateway cert-manager.io/issue-temporary-certificate
 ### 10.6 kubectl label
 
 **语法格式:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 kubectl label <resource> <name> <key>=<value> [options]
 ```
@@ -1788,6 +1866,9 @@ kubectl label <resource> <name> <key>=<value> [options]
 | `--local` | 本地输出 | `kubectl label pod nginx env=prod --local -o yaml` |
 
 **生产环境示例:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 1. 为 Pod 添加标签
@@ -1915,6 +1996,12 @@ kubectl plugin list --name-only
 
 ### 12.1 高频命令速查
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                    kubectl Production Quick Reference                             │
@@ -1937,7 +2024,7 @@ kubectl plugin list --name-only
 │  kubectl logs <pod> -f --tail=100 -n <ns>                                        │
 │  kubectl get events -A --types=Warning                                           │
 │  kubectl top pod --sort-by=cpu -A | head -n 11                                   │
-│  kubectl delete pod <pod> --grace-period=0 --force -n <ns>  # 强制删除          │
+│  kubectl delete pod <pod> --grace-period=0 --force -n <ns>  # 强制删除          │  # ⚠️ 跳过优雅终止，可能丢数据
 │                                                                                  │
 │  容器调试                                                                        │
 │  ─────────────────────────────────────────────────────────────────────────────   │
@@ -2029,7 +2116,7 @@ kubectl plugin list --name-only
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -2048,5 +2135,5 @@ kubectl plugin list --name-only
 - 32-kubeadm-cluster-lifecycle
 - 32-kubeadm-upgrade-complete-guide
 
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/01-overview|01-overview]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/01-overview|01-overview]]
+- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/01-overview.md|01-overview]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/01-overview.md|01-overview]]

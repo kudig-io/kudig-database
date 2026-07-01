@@ -36,6 +36,7 @@ prerequisites:
 - tracing-basics
 - observability-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 企业级运维最佳实践
@@ -643,15 +644,15 @@ spec:
   hosts:
   - payment-service
   http:
-  - match:
-    - headers:
-        user-group:
-          exact: "internal"  # 内部员工先体验新版本
-    route:
-    - destination:
-        host: payment-service
-        subset: canary
-      weight: 100
+  - matchers:
+    - - headers=""
+    - user-group=""
+    - exact="internal"  # 内部员工先体验新版本"
+    - route=""
+    - - destination=""
+    - host="payment-service"
+    - subset="canary"
+    - weight="100"
   - route:
     - destination:
         host: payment-service
@@ -890,7 +891,7 @@ spec:
    ✅ **正确**: 预案需要包含诊断命令、多种修复方案(快速方案/彻底方案)、验证步骤、权限要求
    
 2. ❌ **误区**: 预案从不演练——"写了就放那儿，出事再看"
-   ✅ **正确**: 每季度进行故障演练([[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering|Chaos Engineering]])，验证预案有效性，让新人熟悉流程
+   ✅ **正确**: 每季度进行故障演练([[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]])，验证预案有效性，让新人熟悉流程
    
 3. ❌ **误区**: 所有问题都写预案——"覆盖100%的问题场景"
    ✅ **正确**: 优先覆盖高频(每月>1次)和高影响(P0/P1)的场景，长尾问题靠工程师能力
@@ -1224,24 +1225,22 @@ data:
   routing-rules.yaml: |
     routes:
     # P0 告警 - 立即呼叫
-    - match:
-        severity: P0
+    - matchers:
+      - severity="P0"
       receiver: oncall-phone-primary
       continue: true
       repeat_interval: 5m
-    
     # P1 告警 - SMS + Slack
-    - match:
-        severity: P1
+    - matchers:
+      - severity="P1"
       receiver: oncall-sms-slack
       repeat_interval: 30m
-    
     # P2/P3 - 仅 Slack(工作时间)
-    - match:
-        severity: P2|P3
+    - matchers:
+      - severity="P2|P3"
       receiver: oncall-slack-only
       repeat_interval: 4h
-      active_time_intervals:
+      active_time_intervals: 
       - business_hours
 
 ---
@@ -1262,6 +1261,7 @@ data:
     ## 常见问题快速处理
     
     ### 1. Pod CrashLoopBackOff
+
     ```bash
     kubectl logs <pod> --previous
     kubectl describe pod <pod>
@@ -1270,6 +1270,7 @@ data:
     ```
     
     ### 2. Node NotReady
+
     ```bash
     kubectl get nodes
     kubectl describe node <node>
@@ -1279,6 +1280,7 @@ data:
     ```
     
     ### 3. Disk Full
+
     ```bash
     df -h
     docker system prune -af --volumes  # 清理镜像
@@ -2015,7 +2017,7 @@ data:
 
 #### 自动化与编排
 - **Ansible/Terraform**: 基础设施即代码
-- **[[Argo|Argo]] [[entities/flux|Flux]]**: GitOps持续交付
+- **[[Argo|Argo]] [[entities/flux.md|Flux]]**: GitOps持续交付
 - **Jenkins/GitLab CI**: CI/CD流水线
 - **Spinnaker**: 多云交付平台
 
@@ -2068,6 +2070,12 @@ kubectl logs -n kube-system kube-apiserver-* --tail=50 | grep audit
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级
 
+## 参考链接
+
+- [Enterprise Ops Practices]()
+
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

@@ -125,13 +125,13 @@ k8s_versions:
 
 <!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-#<!-- chunk: 1.1 行业背景 -->## 1.1 行业背景
+## 1.1 行业背景
 
 量化交易是利用数学模型和计算机算法进行证券投资决策的交易方式，已成为全球资本市场的主流交易模式。美国市场中量化交易占比超过 70%，中国市场量化交易占比也在快速提升，已超过 25%。量化交易的核心优势在于：决策速度快（毫秒级响应）、情绪无干扰（规则化决策）、覆盖面广（全市场扫描）、回测可验证（策略历史表现量化评估）。
 
 量化交易对信息系统的要求是所有金融场景中最为极致的：高频交易（HFT）端到端延迟要求 < 10μs（从行情接收到报单发出），需要 FPGA 硬件加速和内核旁路技术；算法交易（TWAP/VWAP）需要毫秒级策略计算和订单管理；策略回测需要海量历史数据处理（Tick 级数据数百亿条）和并行计算；实时风控需要每秒处理百万级事件并做出拦截决策。这些需求驱动着量化交易系统向硬件加速（FPGA/ASIC）、超低延迟网络（eRDMA/内核旁路）、分布式计算和高可用架构方向演进。
 
-#<!-- chunk: 1.2 行业挑战 -->## 1.2 行业挑战
+## 1.2 行业挑战
 
 | 挑战 | 说明 | 架构影响 |
 |:---|:---|:---|
@@ -143,7 +143,7 @@ k8s_versions:
 | 数据一致性 | 多市场/多品种持仓实时一致性 | 分布式事务 + 内存状态同步 |
 | 监管趋严 | 证监会量化监管新规，报备要求 | 策略报备 + 交易行为监控 + 审计日志 |
 
-#<!-- chunk: 1.3 市场格局 -->## 1.3 市场格局
+## 1.3 市场格局
 
 中国量化私募管理规模已超过 1.5 万亿元，代表机构包括幻方量化、九坤投资、明汯投资、灵均投资等。量化交易技术服务商包括：恒生电子（交易系统）、迅投（XTP 交易接口）、艾扬软件（FPGA 行情解码）。阿里云金融云提供低延迟网络（eRDMA）、FPGA 实例（f3）、实时计算（Flink）等量化交易基础设施。国际上，Citadel Securities、Jump Trading、Two Sigma 等是量化交易和做市商的标杆。
 
@@ -151,23 +151,23 @@ k8s_versions:
 
 <!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-#<!-- chunk: 2.1 行情接收与处理 -->## 2.1 行情接收与处理
+## 2.1 行情接收与处理
 
 行情接收是量化交易系统的起点。中国 A 股市场提供 Level 1（快照行情，3 秒/5 档）和 Level 2（逐笔行情，毫秒级/10 档）两种行情数据。深交所和上交所的 Level 2 行情通过 UDP 组播分发，流量峰值可达 10 万笔/秒。高频策略需要在微秒级完成行情解码→策略计算→报单的全流程。FPGA 硬件解码是唯一能满足延迟要求的方案：L2 行情 UDP 组播→FPGA 硬件解码（< 1μs）→零拷贝共享内存→策略引擎读取。
 
-#<!-- chunk: 2.2 策略执行 -->## 2.2 策略执行
+## 2.2 策略执行
 
 策略执行引擎是量化交易的核心。策略类型包括：高频做市（双边报价赚取价差，持仓时间秒级）、统计套利（跨品种/跨期价差回归，持仓时间分钟级）、Alpha 策略（因子选股+量化组合优化，持仓时间天级）、CTA 策略（趋势跟踪/动量反转，持仓时间天-周级）、算法交易（大额订单拆分执行 TWAP/VWAP）。不同策略对延迟、吞吐、状态管理的要求差异极大。
 
-#<!-- chunk: 2.3 实时风控 -->## 2.3 实时风控
+## 2.3 实时风控
 
 交易行为实时监控与异常拦截是合规要求。风控引擎需要在每笔报单前进行检查：资金充足性检查（可用资金是否足够）、持仓限制检查（单票/行业/总持仓比例）、频率限制检查（撤单率/报单频率是否异常）、异常行为检测（自成交/幌骗/抢跑等违规模式）。风控引擎的延迟预算通常 < 5ms，不能成为交易链路的瓶颈。
 
-#<!-- chunk: 2.4 策略回测 -->## 2.4 策略回测
+## 2.4 策略回测
 
 历史数据策略验证是量化研究的基础。回测平台需要提供：Tick 级历史数据（数百亿条记录）、逐笔成交/委托数据、因子计算框架（技术指标/基本面因子/另类数据因子）、事件驱动回测引擎（模拟交易所撮合规则）、策略绩效分析（收益率/夏普比/最大回撤/换手率）。大规模回测需要分布式并行计算能力，将数年的 Tick 数据分片并行处理。
 
-#<!-- chunk: 2.5 清算结算 -->## 2.5 清算结算
+## 2.5 清算结算
 
 T+1 自动化清算处理。功能包括：成交回报处理、持仓成本计算（移动加权平均）、盈亏计算（已实现/未实现）、费用计算（佣金/印花税/过户费）、资金清算（可用/冻结/发生额）、对账（与券商/交易所数据核对）。清算系统需要保证数据的准确性和一致性，每笔交易的处理结果必须可审计。
 
@@ -175,7 +175,7 @@ T+1 自动化清算处理。功能包括：成交回报处理、持仓成本计�
 
 <!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-#<!-- chunk: 3.1 量化交易系统全景架构 -->## 3.1 量化交易系统全景架构
+## 3.1 量化交易系统全景架构
 
 ```mermaid
 graph TB
@@ -230,7 +230,7 @@ graph TB
     RK1 --> GW2
 ```
 
-#<!-- chunk: 3.2 高频交易时序 -->## 3.2 高频交易时序
+## 3.2 高频交易时序
 
 ```mermaid
 sequenceDiagram
@@ -253,7 +253,7 @@ sequenceDiagram
     OMS-->>STRAT: 更新持仓
 ```
 
-#<!-- chunk: 3.3 行情处理流水线 -->## 3.3 行情处理流水线
+## 3.3 行情处理流水线
 
 ```mermaid
 flowchart LR
@@ -290,7 +290,7 @@ flowchart LR
 
 <!-- chunk: 5. K8s 部署方案 -->## 5. K8s 部署方案
 
-#<!-- chunk: 5.1 行情处理 DaemonSet -->## 5.1 行情处理 DaemonSet
+## 5.1 行情处理 DaemonSet
 
 ```yaml
 apiVersion: apps/v1
@@ -352,7 +352,7 @@ spec:
             name: fpga-bitstream-v3
 ```
 
-#<!-- chunk: 5.2 策略执行 StatefulSet -->## 5.2 策略执行 StatefulSet
+## 5.2 策略执行 StatefulSet
 
 ```yaml
 apiVersion: apps/v1
@@ -411,7 +411,7 @@ spec:
             sizeLimit: 8Gi
 ```
 
-#<!-- chunk: 5.3 实时风控引擎 -->## 5.3 实时风控引擎
+## 5.3 实时风控引擎
 
 ```yaml
 apiVersion: apps/v1
@@ -464,7 +464,7 @@ spec:
 
 <!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-#<!-- chunk: 6.1 数据分层 -->## 6.1 数据分层
+## 6.1 数据分层
 
 | 数据类型 | 存储方案 | 保留策略 | 访问模式 | 数据量级 |
 |:---|:---|:---|:---|:---|
@@ -493,7 +493,7 @@ spec:
 
 <!-- chunk: 8. 安全合规 -->## 8. 安全合规
 
-#<!-- chunk: 8.1 安全体系 -->## 8.1 安全体系
+## 8.1 安全体系
 
 | 安全层级 | 措施 | 技术实现 |
 |:---|:---|:---|
@@ -504,7 +504,7 @@ spec:
 | 审计追踪 | 全链路操作不可篡改 | SLS 审计日志 + 区块链存证 |
 | 网络安全 | 金融云 VPC 专用网络 | 专线 + VPC + 安全组 |
 
-#<!-- chunk: 8.2 合规框架 -->## 8.2 合规框架
+## 8.2 合规框架
 
 - **证券期货市场量化交易管理暂行规定**: 策略报备、风控要求、异常交易定义
 - **等保三级**: 金融信息系统安全等级保护
@@ -526,19 +526,19 @@ spec:
 
 <!-- chunk: 10. 反模式 -->## 10. 反模式
 
-#<!-- chunk: 10.1 风控旁路 -->## 10.1 风控旁路
+## 10.1 风控旁路
 
 风控引擎不部署在交易链路上，仅在事后审计检查。
 
 **解决方案**: 风控引擎作为交易链路的必经环节（同步调用），每笔报单必须通过事前风控检查（资金/持仓/频率/异常行为）后才能发出。
 
-#<!-- chunk: 10.2 忽视行情突发 -->## 10.2 忽视行情突发
+## 10.2 忽视行情突发
 
 系统按平均流量设计，开盘/收盘/重大消息发布时的流量突增导致系统崩溃。
 
 **解决方案**: 行情处理采用背压控制机制，交易系统采用预热+弹性伸缩策略，开盘前将计算资源预热到峰值水平。
 
-#<!-- chunk: 10.3 策略代码明文 -->## 10.3 策略代码明文
+## 10.3 策略代码明文
 
 策略代码以明文形式存储在镜像和配置中，存在泄露风险。
 
@@ -548,7 +548,7 @@ spec:
 
 <!-- chunk: 11. 参考资源 -->## 11. 参考资源
 
-#<!-- chunk: 11.1 阿里云组件映射 -->## 11.1 阿里云组件映射
+## 11.1 阿里云组件映射
 
 | 功能域 | 阿里云方案 | 说明 |
 |:---|:---|:---|
@@ -564,7 +564,7 @@ spec:
 | 可观测性 | **ARMS + SLS** | 全链路延迟监控 |
 | 密钥管理 | **KMS + HSM** | 策略加密密钥管理 |
 
-#<!-- chunk: 11.2 生产检查清单 -->## 11.2 生产检查清单
+## 11.2 生产检查清单
 
 - [ ] FPGA bitstream 版本校验与回滚测试
 - [ ] 行情端到端延迟 < 10μs 基准测试
@@ -584,17 +584,17 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

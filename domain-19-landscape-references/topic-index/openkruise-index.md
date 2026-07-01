@@ -60,12 +60,12 @@ created: "2026-05-23"
 ## 结构化故障排查 - 工作负载
 
 - troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/|CloneSet 故障排查]]
-- troubleshooting|[[entities/kubernetes|Kubernetes]] 部署策略最佳实践|Deployment]] 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting|[[StatefulSet 故障排查|StatefulSet 故障排查]]]]
+- troubleshooting|[[entities/kubernetes.md|Kubernetes]] 部署策略最佳实践|Deployment]] 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|[[StatefulSet 故障排查|StatefulSet 故障排查]]]]
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/openkruise-fta|[[OpenKruise 工作负载异常故障树分析|OpenKruise FTA]] 故障树]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/openkruise-fta.md|[[OpenKruise 工作负载异常故障树分析|OpenKruise FTA]] 故障树]]
 
 ## 云厂商集成
 

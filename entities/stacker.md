@@ -42,7 +42,7 @@ Stacker 是一个无需特权即可构建 OCI 容器镜像的工具。它使用�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -58,17 +58,17 @@ Stacker 是一个无需特权即可构建 OCI 容器镜像的工具。它使用�
 
 ## 参考链接
 
-- [[concepts/ci-cd-pipeline-patterns|ci-cd-pipeline-patterns]]
+- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
 
 ## Related
 
 - [[ratify]] — Ratify
 - [[container2wasm]] — container2wasm
-- [[entities/06-containerd-observability|observability]]]] — [[containerd|containerd]]rd 可观测性|containerd 可观测性]]
+- [[entities/06-containerd-observability.md|observability]]]] — [[containerd|containerd]]rd 可观测性|containerd 可观测性]]
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - stacker
-- [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

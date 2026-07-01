@@ -202,8 +202,6 @@ Phase 5: 附加组件 (addon)
 | v1.31.x | v1.31 | 3.5.15 | 1.7.0 |
 | v1.32.x | v1.32 | 3.5.16 | 1.7.0 |
 
-> ⚠️ **重要**: kubeadm 遵循 **N-2 版本策略**，即 kubeadm v1.32 支持升级到 v1.33 和 v1.34，但不能直接跨大版本升级。
-
 ---
 
 <!-- chunk: 2. 集群初始化 (kubeadm init) -->
@@ -227,7 +225,7 @@ Phase 5: 附加组件 (addon)
 
 | 组件 | 端口 | 协议 | 方向 | 说明 |
 |------|------|------|------|------|
-| **API Server** | 6443 | TCP | Inbound | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 入口 |
+| **API Server** | 6443 | TCP | Inbound | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 入口 |
 | **etcd** | 2379-2380 | TCP | Inbound | etcd 客户端/对等通信 |
 | **kubelet** | 10250 | TCP | Inbound | Kubelet API |
 | **Scheduler** | 10259 | TCP | Inbound | 调度器度量端点 |
@@ -235,6 +233,9 @@ Phase 5: 附加组件 (addon)
 | **kube-proxy** | 10256 | TCP | Inbound | kube-proxy 健康检查 |
 
 #### 初始化前系统配置脚本
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -306,11 +307,6 @@ systemctl enable --now kubelet
 
 echo "=== Pre-flight configuration completed ==="
 ```
-
-> ⚠️ **注意事项**:
-> - RHEL/CentOS 需额外配置 SELinux: `setenforce 0` 或正确配置策略
-> - 防火墙需放行必要端口，或使用 `--ignore-preflight-errors=all` 跳过检查
-> - 生产环境建议固定 kubelet/kubeadm/kubectl 版本，避免意外升级
 
 ---
 
@@ -548,12 +544,6 @@ rotateCertificates: true
 serverTLSBootstrap: true
 ```
 
-> ⚠️ **v1beta3 vs v1beta4 关键区别**:
-> - `extraArgs` 格式从 `map[string]string` 改为 `[]ExtraArg` (支持 name/value 列表)
-> - v1beta4 新增 `timeout` 配置块
-> - v1beta4 新增 `dryRun` 和 `patches` 支持
-> - v1beta3 在 v1.34 中将被弃用，新环境建议使用 v1beta4
-
 ---
 
 ### 2.3 高可用初始化方案
@@ -661,11 +651,6 @@ etcd:
     keyFile: "/etc/kubernetes/pki/etcd/server.key"
 ```
 
-> ⚠️ **注意事项**:
-> - External etcd 需提前部署并确保证书正确配置
-> - 需将 etcd CA 证书复制到 `/etc/kubernetes/pki/etcd/`
-> - etcd 节点与控制平面节点网络必须互通
-
 ---
 
 ### 2.4 自定义 CRI 和镜像仓库
@@ -743,6 +728,9 @@ echo "All images pushed to ${REGISTRY}"
 
 #### 配置镜像仓库 CA 证书
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 获取私有仓库 CA 证书
 openssl s_client -showcerts -connect harbor.example.com:443 < /dev/null \
@@ -760,11 +748,6 @@ HOSTEOF
 
 systemctl restart containerd
 ```
-
-> ⚠️ **常见错误**:
-> - `failed to pull image`: 检查镜像仓库地址和 CA 证书配置
-> - `unauthorized`: 配置镜像仓库认证 (docker login / containerd auth)
-> - `manifest unknown`: 镜像标签不存在或架构不匹配
 
 ---
 
@@ -826,8 +809,6 @@ Then you can join any number of worker nodes by running:
 | **SA 公钥** | `/etc/kubernetes/pki/sa.pub` | ServiceAccount 签名 | 无期限 |
 | **SA 私钥** | `/etc/kubernetes/pki/sa.key` | ServiceAccount 签名 | 无期限 |
 
-> ⚠️ **重要**: 默认证书有效期为 1 年 (CA 为 10 年)，生产环境需配置自动轮换。
-
 ---
 
 <!-- chunk: 3. 节点加入 (kubeadm join) -->
@@ -870,11 +851,6 @@ nodeRegistration:
 ```bash
 kubeadm join --config=join-control-plane.yaml
 ```
-
-> ⚠️ **注意事项**:
-> - 必须使用 `--control-plane` 标志表示加入控制平面
-> - `--certificate-key` 用于解密 kubeadm-certs Secret
-> - 加入前确保负载均衡器已配置新节点后端
 
 ### 3.2 Worker 节点加入
 
@@ -989,12 +965,6 @@ nodeRegistration:
     - name: "register-with-taints"
       value: "nvidia.com/gpu=true:NoSchedule"
 ```
-
-> ⚠️ **常见错误**:
-> - `failed to request cluster-info`: Token 错误或 API Server 不可达
-> - `failed to find expected public key`: CA 证书哈希不匹配
-> - `unable to fetch token`: Token 已过期
-> - `certificate-key is required`: 控制平面加入时缺少 certificate-key
 
 ---
 
@@ -1121,11 +1091,6 @@ kubeadm join --dry-run --config=join-worker.yaml
 kubeadm config validate --config=kubeadm-config-v1beta4.yaml
 ```
 
-> ⚠️ **注意事项**:
-> - `--dry-run` 会模拟执行但不会实际修改系统
-> - 验证失败时仔细阅读错误信息，通常包含具体字段名
-> - 迁移配置后务必检查 `extraArgs` 格式是否正确转换
-
 ---
 
 <!-- chunk: 5. 证书管理 (kubeadm certs) -->
@@ -1173,6 +1138,10 @@ done
 ```
 
 ### 5.2 手动轮换证书
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 1. 备份现有证书
@@ -1293,7 +1262,8 @@ spec:
 
 ### 5.4 CA 证书轮换
 
-> ⚠️ **警告**: CA 证书轮换是高风险操作，会导致集群短暂不可用。
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 备份所有证书
@@ -1324,12 +1294,6 @@ systemctl restart kubelet
 kubectl get nodes
 kubectl get pods -n kube-system
 ```
-
-> ⚠️ **注意事项**:
-> - CA 轮换前务必完整备份
-> - 建议在维护窗口执行
-> - 轮换后所有 kubeconfig 需要重新生成
-> - 外部依赖 (如监控、CI/CD) 的 kubeconfig 也需要更新
 
 ---
 
@@ -1397,12 +1361,6 @@ kubectl get secret -n kube-system | grep bootstrap-token
 kubectl get secret bootstrap-token-abcdef -n kube-system -o yaml
 ```
 
-> ⚠️ **注意事项**:
-> - Token 在 Secret 中以 `bootstrap-token-<token-id>` 形式存储
-> - 泄露 Token 可能导致未授权节点加入
-> - 生产环境建议使用 `--discovery-token-ca-cert-hash` 增加安全性
-> - 定期轮换 Token 是最佳实践
-
 ---
 
 <!-- chunk: 7. 集群升级 (kubeadm upgrade) -->
@@ -1456,6 +1414,10 @@ echo "=== Pre-Upgrade Checks Complete ==="
 
 ### 7.2 控制平面升级步骤
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```
 控制平面升级顺序 (重要!):
 
@@ -1479,6 +1441,9 @@ echo "=== Pre-Upgrade Checks Complete ==="
 ```
 
 **第一个控制平面节点升级**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 升级 kubeadm
@@ -1506,6 +1471,9 @@ systemctl restart kubelet
 
 **其他控制平面节点升级**:
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 升级 kubeadm
 apt-mark unhold kubeadm
@@ -1525,6 +1493,10 @@ systemctl restart kubelet
 ```
 
 ### 7.3 kubelet/kubectl 升级
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # Worker 节点升级 (逐个进行)
@@ -1558,6 +1530,9 @@ kubectl uncordon worker-1
 ```
 
 ### 7.4 CNI 插件兼容性检查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 检查当前 CNI 版本
@@ -1619,6 +1594,10 @@ echo "=== Verification Complete ==="
 
 ### 7.6 回滚策略
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # 升级回滚脚本
@@ -1655,13 +1634,8 @@ kubectl get nodes
 kubectl get pods -n kube-system
 
 echo "=== Rollback Complete ==="
-```
 
-> ⚠️ **注意事项**:
-> - etcd 升级后无法直接回滚，必须使用备份恢复
-> - API 对象版本升级后可能无法回滚
-> - 建议在升级前完整测试回滚流程
-> - 生产环境建议先在测试集群验证升级
+```
 
 ---
 
@@ -1669,6 +1643,12 @@ echo "=== Rollback Complete ==="
 ## 8. 节点重置与清理 (kubeadm reset)
 
 ### 8.1 安全移除节点
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 1. 驱逐节点上的工作负载 (在控制平面执行)
@@ -1682,10 +1662,10 @@ kubectl drain worker-1 \
 kubectl delete node worker-1
 
 # 3. 在待移除节点上执行重置
-kubeadm reset
+kubeadm reset  # ⚠️ 清理节点所有 K8s 配置
 
 # 4. 清理 CNI 配置和网桥
-rm -rf /etc/cni/net.d
+rm -rf /etc/cni/net.d  # ⚠️ 删除系统/数据文件
 ip link delete cni0 2>/dev/null || true
 ip link delete flannel.1 2>/dev/null || true
 ip link delete vxlan.calico 2>/dev/null || true
@@ -1699,11 +1679,14 @@ ctr -n k8s.io containers list | awk '{print $1}' | xargs -r ctr -n k8s.io contai
 ctr -n k8s.io images list | awk '{print $1}' | xargs -r ctr -n k8s.io images delete
 
 # 7. 清理 kubelet 数据
-rm -rf /var/lib/kubelet/*
-rm -rf /var/lib/cni/
+rm -rf /var/lib/kubelet/*  # ⚠️ 删除系统/数据文件
+rm -rf /var/lib/cni/  # ⚠️ 删除系统/数据文件
 ```
 
 ### 8.2 清理 etcd 成员
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 
 ```bash
 # 1. 在控制平面节点查看 etcd 成员列表
@@ -1741,30 +1724,36 @@ ETCDCTL_API=3 etcdctl endpoint health --cluster \
 
 ### 8.3 保留/删除数据选项
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
 # 标准重置 (保留 /var/lib/etcd 中的 etcd 数据)
-kubeadm reset
+kubeadm reset  # ⚠️ 清理节点所有 K8s 配置
 
 # 强制重置 (不提示确认)
-kubeadm reset --force
+kubeadm reset --force  # ⚠️ 清理节点所有 K8s 配置
 
 # 完全重置并删除 etcd 数据
-kubeadm reset --force --cert-dir=/etc/kubernetes/pki
+kubeadm reset --force --cert-dir=/etc/kubernetes/pki  # ⚠️ 清理节点所有 K8s 配置
 
 # 重置并清理 CRI socket
-kubeadm reset --cri-socket=unix:///var/run/crio/crio.sock
+kubeadm reset --cri-socket=unix:///var/run/crio/crio.sock  # ⚠️ 清理节点所有 K8s 配置
 
 # 重置并跳过某些阶段
-kubeadm reset --skip-phases=remove-etcd-member
+kubeadm reset --skip-phases=remove-etcd-member  # ⚠️ 清理节点所有 K8s 配置
 
 # 自定义重置 (分阶段执行)
-kubeadm reset phase preflight
-kubeadm reset phase remove-etcd-member
-kubeadm reset phase cleanup-node
+kubeadm reset phase preflight  # ⚠️ 清理节点所有 K8s 配置
+kubeadm reset phase remove-etcd-member  # ⚠️ 清理节点所有 K8s 配置
+kubeadm reset phase cleanup-node  # ⚠️ 清理节点所有 K8s 配置
 ```
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```
-kubeadm reset 清理内容:
+kubeadm reset 清理内容:  # ⚠️ 清理节点所有 K8s 配置
 
 默认清理:
 ├── /etc/kubernetes/manifests/ (静态 Pod manifests)
@@ -1784,13 +1773,8 @@ kubeadm reset 清理内容:
 ├── 容器镜像
 ├── CNI 插件配置
 └── 自定义 kubelet 配置
-```
 
-> ⚠️ **注意事项**:
-> - `kubeadm reset` 是不可逆操作，执行前请确认
-> - 生产环境移除控制平面节点前，务必先移除 etcd 成员
-> - 重置后如需重新加入，必须重新执行 `kubeadm join`
-> - 保留 etcd 数据可用于灾难恢复场景
+```
 
 ---
 
@@ -1821,6 +1805,11 @@ kubeadm join 192.168.1.100:6443 \
 
 #### 移除控制平面节点
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 确认集群至少有 3 个控制平面节点
 kubectl get nodes -l node-role.kubernetes.io/control-plane
@@ -1840,7 +1829,7 @@ ETCDCTL_API=3 etcdctl member remove <MEMBER_ID> \
     --key=/etc/kubernetes/pki/etcd/server.key
 
 # 3. 在待移除节点上执行重置
-kubeadm reset --force
+kubeadm reset --force  # ⚠️ 清理节点所有 K8s 配置
 
 # 4. 从集群中删除节点对象
 kubectl delete node <node-name>
@@ -1849,6 +1838,9 @@ kubectl delete node <node-name>
 ```
 
 ### 9.2 etcd 成员管理
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 
 ```bash
 #!/bin/bash
@@ -2003,13 +1995,8 @@ stream {
         proxy_connect_timeout 5s;
     }
 }
-```
 
-> ⚠️ **注意事项**:
-> - 负载均衡器健康检查应检查 `/healthz` 端点
-> - 控制平面节点变更时同步更新负载均衡器后端
-> - 生产环境建议使用硬件负载均衡器或云厂商 SLB
-> - Keepalived 的 VIP 应与控制平面节点在同一网段
+```
 
 ---
 
@@ -2032,6 +2019,9 @@ stream {
 
 #### 初始化故障排查命令
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
 # 1. 查看 kubeadm 详细日志
 kubeadm init --v=5  # 日志级别 0-9
@@ -2053,7 +2043,7 @@ cat /etc/cni/net.d/*.conf
 kubeadm init --ignore-preflight-errors=Swap,NumCPU
 
 # 7. 重置后重试
-kubeadm reset --force
+kubeadm reset --force  # ⚠️ 清理节点所有 K8s 配置
 kubeadm init --config=kubeadm-config.yaml
 ```
 
@@ -2083,6 +2073,10 @@ iptables -L -n | grep 6443
 ```
 
 ### 10.3 网络插件安装问题
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 检查 CNI 插件是否安装
@@ -2138,12 +2132,6 @@ chmod 644 /etc/kubernetes/pki/*.crt
 kubeadm kubeconfig user --client-name kubernetes-admin \
   --config /etc/kubernetes/admin.conf > /tmp/admin.conf
 ```
-
-> ⚠️ **常见错误**:
-> - `x509: certificate has expired or is not yet valid`: 证书已过期，需轮换
-> - `x509: certificate signed by unknown authority`: CA 证书不匹配
-> - `Unauthorized`: kubeconfig 中的证书过期或用户权限不足
-> - `connection refused on 6443`: API Server 证书 SAN 不包含访问地址
 
 ---
 
@@ -2283,7 +2271,7 @@ kubeadm 作为 Kubernetes 官方推荐的集群生命周期管理工具，在生
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -2304,5 +2292,7 @@ kubeadm 作为 Kubernetes 官方推荐的集群生命周期管理工具，在生
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+```

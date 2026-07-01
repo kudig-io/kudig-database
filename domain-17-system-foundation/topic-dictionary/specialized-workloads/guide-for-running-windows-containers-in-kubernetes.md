@@ -27,6 +27,7 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 在 [[Kubernetes|Kubernetes]] 中运行 Windows 容器指南
@@ -151,7 +152,7 @@ tolerations:
 可以通过 `RuntimeClass` 将 `nodeSelector` 和 `tolerations` 封装起来，简化 Pod 配置：
 
 ```yaml
-apiVersion: node.[[entities/kubernetes|k8s]].io/v1
+apiVersion: node.[[entities/kubernetes.md|k8s]].io/v1
 kind: RuntimeClass
 metadata:
   name: windows-2019
@@ -195,3 +196,9 @@ spec:
 ## 参考链接
 
 - [Guide for Running Windows Containers in Kubernetes - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/windows/user-guide/)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/ai-infra-specialist.md|08 - AI/ML基础设施专业词典]]
+- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/gpu-resource-management-and-partitioning.md|GPU 资源管理与分区技术]]
+- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/hpc-and-bioinformatics.md|高性能计算与生物信息学（HPC & Bioinformatics）]]

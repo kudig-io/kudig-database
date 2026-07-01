@@ -363,6 +363,10 @@ kubectl describe pod <pod-name> | grep -i "volume\|zone\|affinity"
 ```
 
 **修复方案**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方案 1：修改 StorageClass 为 WaitForFirstConsumer（仅影响新 PVC）
 kubectl patch storageclass <name> --type merge -p \
@@ -375,6 +379,9 @@ kubectl patch storageclass <name> --type merge -p \
 ### 2.4 扩容失败排查
 
 #### 2.4.1 扩容条件检查清单
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. StorageClass 允许扩容
@@ -407,6 +414,9 @@ kubectl exec -it <pod-name> -- df -h
 
 #### 2.4.2 文件系统手动扩展
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 对于 ext4 文件系统
 kubectl exec -it <pod-name> -- resize2fs /dev/<device>
@@ -433,6 +443,11 @@ kubectl get storageclass -o json | \
 ```
 
 **修复**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 移除多余的默认标记（保留一个）
 kubectl patch storageclass <sc-name> --type json -p \
@@ -479,6 +494,9 @@ kubectl get pvc <name> -o jsonpath='{.spec.storageClassName}'
 
 #### 2.6.2 性能不达标排查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 确认 PVC 使用的 StorageClass 类型
 SC=$(kubectl get pvc <name> -o jsonpath='{.spec.storageClassName}')
@@ -506,6 +524,9 @@ kubectl exec -it <pod-name> -- fio --name=test --filename=/data/test \
 
 ### 3.1 StorageClass 参数修正
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 修改 StorageClass 参数（注意：已有 PV 不受影响，仅影响新供给）
 kubectl patch storageclass <name> --type merge -p \
@@ -518,6 +539,10 @@ kubectl patch storageclass <name> --type merge -p \
 ```
 
 ### 3.2 扩容流程
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 1. 确认 StorageClass 允许扩容
@@ -540,6 +565,11 @@ kubectl rollout restart deployment/<app>
 - 扩容失败时 PVC 可能处于 `Resizing` 状态，需要手动恢复
 
 ### 3.3 切换 StorageClass（数据迁移）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 场景：从低速 StorageClass 迁移到高速 StorageClass
@@ -835,18 +865,18 @@ fi
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting|03-snapshot-backup-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting|04-storage-performance-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting|01-pv-pvc-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting|02-csi-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting.md|03-snapshot-backup-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting.md|04-storage-performance-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md|01-pv-pvc-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md|02-csi-troubleshooting]]

@@ -62,7 +62,7 @@ created: "2026-05-23"
 3. [Wasm Shim 实现原理](#3-wasm-shim-实现原理)
 4. [安装与配置](#4-安装与配置)
 5. [RuntimeClass 配置](#5-runtimeclass-配置)
-6. [[entities/kubernetes|Kubernetes]] 集成](#6-kubernetes-集成)
+6. [[entities/kubernetes.md|Kubernetes]] 集成](#6-kubernetes-集成)
 7. [多运行时部署](#7-多运行时部署)
 8. [OCI Wasm 工件](#8-oci-wasm-工件)
 9. [性能调优](#9-性能调优)
@@ -74,7 +74,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. containerd 架构回顾 -->## 1. containerd 架构回顾
 
-#<!-- chunk: 1.1 containerd 整体架构 / Overall Architecture -->## 1.1 containerd 整体架构 / Overall Architecture
+## 1.1 containerd 整体架构 / Overall Architecture
 
 ```mermaid
 graph TD
@@ -102,7 +102,7 @@ graph TD
     end
 ```
 
-#<!-- chunk: 1.2 Runtime v2 Shim 接口 / Runtime v2 Interface -->## 1.2 Runtime v2 Shim 接口 / Runtime v2 Interface
+## 1.2 Runtime v2 Shim 接口 / Runtime v2 Interface
 
 containerd 使用 Runtime v2 (也称为 shim v2) 接口与容器运行时通信：
 
@@ -156,7 +156,7 @@ service TaskService {
 }
 ```
 
-#<!-- chunk: 1.3 Shim 生命周期 / Shim Lifecycle -->## 1.3 Shim 生命周期 / Shim Lifecycle
+## 1.3 Shim 生命周期 / Shim Lifecycle
 
 ```mermaid
 sequenceDiagram
@@ -193,7 +193,7 @@ sequenceDiagram
 
 <!-- chunk: 2. runwasi 项目 -->## 2. runwasi 项目
 
-#<!-- chunk: 2.1 项目概述 / Project Overview -->## 2.1 项目概述 / Project Overview
+## 2.1 项目概述 / Project Overview
 
 runwasi 是 containerd 社区维护的项目，提供在 containerd 中运行 WebAssembly 工作负载的框架：
 
@@ -223,7 +223,7 @@ github.com/containerd/runwasi
 └── README.md
 ```
 
-#<!-- chunk: 2.2 核心组件 / Core Components -->## 2.2 核心组件 / Core Components
+## 2.2 核心组件 / Core Components
 
 ```rust
 // containerd-shim-wasm 框架核心 trait 定义
@@ -263,7 +263,7 @@ pub trait RuntimeContext {
 }
 ```
 
-#<!-- chunk: 2.3 Wasmtime Shim 实现 / Wasmtime Shim Implementation -->## 2.3 Wasmtime Shim 实现 / Wasmtime Shim Implementation
+## 2.3 Wasmtime Shim 实现 / Wasmtime Shim Implementation
 
 ```rust
 // crates/containerd-shim-wasmtime/src/main.rs
@@ -388,7 +388,7 @@ fn main() {
 
 <!-- chunk: 3. Wasm Shim 实现原理 -->## 3. Wasm Shim 实现原理
 
-#<!-- chunk: 3.1 Shim 进程模型 / Shim Process Model -->## 3.1 Shim 进程模型 / Shim Process Model
+## 3.1 Shim 进程模型 / Shim Process Model
 
 ```
 Wasm Shim 进程架构
@@ -420,7 +420,7 @@ Wasm Shim 进程架构
   └────────────────────────────────────┘
 ```
 
-#<!-- chunk: 3.2 Bundle 结构 / OCI Bundle Structure -->## 3.2 Bundle 结构 / OCI Bundle Structure
+## 3.2 Bundle 结构 / OCI Bundle Structure
 
 ```
 OCI Bundle 目录结构
@@ -474,7 +474,7 @@ OCI Bundle 目录结构
 }
 ```
 
-#<!-- chunk: 3.3 多实例模型 / Multi-instance Model -->## 3.3 多实例模型 / Multi-instance Model
+## 3.3 多实例模型 / Multi-instance Model
 
 ```mermaid
 graph TD
@@ -555,7 +555,7 @@ fn sha256(data: &[u8]) -> String {
 
 <!-- chunk: 4. 安装与配置 -->## 4. 安装与配置
 
-#<!-- chunk: 4.1 前置要求 / Prerequisites -->## 4.1 前置要求 / Prerequisites
+## 4.1 前置要求 / Prerequisites
 
 ```bash
 # 检查 containerd 版本（需要 1.7+）
@@ -571,7 +571,7 @@ uname -m
 # x86_64 或 aarch64
 ```
 
-#<!-- chunk: 4.2 安装 runwasi Shim / Install runwasi Shim -->## 4.2 安装 runwasi Shim / Install runwasi Shim
+## 4.2 安装 runwasi Shim / Install runwasi Shim
 
 ```bash
 # 方法 1: 使用官方脚本安装
@@ -619,7 +619,7 @@ sudo make install
 containerd-shim-wasmtime-v1 --version
 ```
 
-#<!-- chunk: 4.3 配置 containerd / Configure containerd -->## 4.3 配置 containerd / Configure containerd
+## 4.3 配置 containerd / Configure containerd
 
 ```toml
 # /etc/containerd/config.toml
@@ -660,6 +660,9 @@ version = 2
   root_path = "/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs"
 ```
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 重启 containerd 使配置生效
 sudo systemctl restart containerd
@@ -677,7 +680,7 @@ sudo ctr run \
   wasm-demo-test
 ```
 
-#<!-- chunk: 4.4 安装 Spin Shim（可选）/ Install Spin Shim -->## 4.4 安装 Spin Shim（可选）/ Install Spin Shim
+## 4.4 安装 Spin Shim（可选）/ Install Spin Shim
 
 ```bash
 # 安装 Fermyon Spin shim
@@ -695,7 +698,7 @@ sudo install -m 755 containerd-shim-spin-v2 /usr/local/bin/
 
 <!-- chunk: 5. RuntimeClass 配置 -->## 5. RuntimeClass 配置
 
-#<!-- chunk: 5.1 基础 RuntimeClass / Basic RuntimeClass -->## 5.1 基础 RuntimeClass / Basic RuntimeClass
+## 5.1 基础 RuntimeClass / Basic RuntimeClass
 
 ```yaml
 # Wasmtime RuntimeClass
@@ -752,7 +755,10 @@ scheduling:
       operator: Exists
 ```
 
-#<!-- chunk: 5.2 节点标签与污点 / Node Labels and Taints -->## 5.2 节点标签与污点 / Node Labels and Taints
+## 5.2 节点标签与污点 / Node Labels and Taints
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 为 Wasm 节点添加标签
@@ -770,7 +776,7 @@ kubectl get nodes --show-labels | grep wasm
 kubectl describe node worker-node-1 | grep -A5 "Labels:"
 ```
 
-#<!-- chunk: 5.3 多运行时 RuntimeClass / Multi-runtime RuntimeClass -->## 5.3 多运行时 RuntimeClass / Multi-runtime RuntimeClass
+## 5.3 多运行时 RuntimeClass / Multi-runtime RuntimeClass
 
 ```yaml
 # 完整的多运行时配置
@@ -828,7 +834,7 @@ scheduling:
 
 <!-- chunk: 6. Kubernetes 集成 -->## 6. Kubernetes 集成
 
-#<!-- chunk: 6.1 部署 Wasm 工作负载 / Deploying Wasm Workloads -->## 6.1 部署 Wasm 工作负载 / Deploying Wasm Workloads
+## 6.1 部署 Wasm 工作负载 / Deploying Wasm Workloads
 
 ```yaml
 # 简单 Wasm Pod
@@ -971,7 +977,7 @@ spec:
                 - "true"
 ```
 
-#<!-- chunk: 6.2 Service 与 [[Ingress|Ingress]] / Service and Ingress -->## 6.2 Service 与 Ingress / Service and Ingress
+## 6.2 Service 与 Ingress / Service and Ingress
 
 ```yaml
 # Wasm 服务
@@ -1024,7 +1030,7 @@ spec:
               number: 80
 ```
 
-#<!-- chunk: 6.3 KEDA 自动伸缩 / KEDA Autoscaling -->## 6.3 KEDA 自动伸缩 / KEDA Autoscaling
+## 6.3 KEDA 自动伸缩 / KEDA Autoscaling
 
 ```yaml
 # KEDA ScaledObject - 基于 HTTP 流量伸缩
@@ -1091,7 +1097,7 @@ spec:
 
 <!-- chunk: 7. 多运行时部署 -->## 7. 多运行时部署
 
-#<!-- chunk: 7.1 混合工作负载集群 / Hybrid Workload Cluster -->## 7.1 混合工作负载集群 / Hybrid Workload Cluster
+## 7.1 混合工作负载集群 / Hybrid Workload Cluster
 
 ```mermaid
 graph TD
@@ -1126,7 +1132,7 @@ graph TD
     end
 ```
 
-#<!-- chunk: 7.2 节点池配置 / Node Pool Configuration -->## 7.2 节点池配置 / Node Pool Configuration
+## 7.2 节点池配置 / Node Pool Configuration
 
 ```yaml
 # 通用工作节点（containerd 配置）
@@ -1171,7 +1177,7 @@ version = 2
       runtime_type = "io.containerd.runc.v2"
 ```
 
-#<!-- chunk: 7.3 调度策略 / Scheduling Policies -->## 7.3 调度策略 / Scheduling Policies
+## 7.3 调度策略 / Scheduling Policies
 
 ```yaml
 # 使用 PriorityClass 优先调度 Wasm 工作负载
@@ -1231,7 +1237,7 @@ spec:
 
 <!-- chunk: 8. OCI Wasm 工件 -->## 8. OCI Wasm 工件
 
-#<!-- chunk: 8.1 Wasm OCI 规范 / Wasm OCI Specification -->## 8.1 Wasm OCI 规范 / Wasm OCI Specification
+## 8.1 Wasm OCI 规范 / Wasm OCI Specification
 
 ```
 OCI Wasm 工件格式
@@ -1271,7 +1277,7 @@ OCI Image Manifest:
 }
 ```
 
-#<!-- chunk: 8.2 构建 Wasm OCI 镜像 / Build Wasm OCI Image -->## 8.2 构建 Wasm OCI 镜像 / Build Wasm OCI Image
+## 8.2 构建 Wasm OCI 镜像 / Build Wasm OCI Image
 
 ```dockerfile
 # Dockerfile - 多阶段构建 Wasm 镜像
@@ -1325,7 +1331,7 @@ docker push ghcr.io/myorg/myapp:v1.0.0
 docker manifest inspect ghcr.io/myorg/myapp:v1.0.0
 ```
 
-#<!-- chunk: 8.3 使用 spin registry / Spin Registry Push -->## 8.3 使用 spin registry / Spin Registry Push
+## 8.3 使用 spin registry / Spin Registry Push
 
 ```bash
 # 使用 Spin CLI 构建并推送
@@ -1345,7 +1351,7 @@ spin up --from ghcr.io/myorg/myapp:v1.0.0
 
 <!-- chunk: 9. 性能调优 -->## 9. 性能调优
 
-#<!-- chunk: 9.1 Shim 性能参数 / Shim Performance Parameters -->## 9.1 Shim 性能参数 / Shim Performance Parameters
+## 9.1 Shim 性能参数 / Shim Performance Parameters
 
 ```toml
 # /etc/containerd/config.toml - 性能优化配置
@@ -1381,7 +1387,7 @@ wasmtime compile \
   -o /var/cache/containerd/wasmtime/api-server.cwasm
 ```
 
-#<!-- chunk: 9.2 内存优化 / Memory Optimization -->## 9.2 内存优化 / Memory Optimization
+## 9.2 内存优化 / Memory Optimization
 
 ```yaml
 # 为 Wasm 工作负载优化资源限制
@@ -1414,7 +1420,7 @@ spec:
         - ALL
 ```
 
-#<!-- chunk: 9.3 网络性能 / Network Performance -->## 9.3 网络性能 / Network Performance
+## 9.3 网络性能 / Network Performance
 
 ```yaml
 # 为 Wasm 服务使用高性能网络策略
@@ -1462,7 +1468,7 @@ spec:
 
 <!-- chunk: 10. 监控与可观测性 -->## 10. 监控与可观测性
 
-#<!-- chunk: 10.1 Metrics 暴露 / Metrics Exposure -->## 10.1 Metrics 暴露 / Metrics Exposure
+## 10.1 Metrics 暴露 / Metrics Exposure
 
 ```rust
 // Wasm 应用内置 Prometheus Metrics
@@ -1506,7 +1512,7 @@ fn handle_request(req: Request) -> anyhow::Result<impl IntoResponse> {
 }
 ```
 
-#<!-- chunk: 10.2 Prometheus 监控配置 / Prometheus Monitoring -->## 10.2 Prometheus 监控配置 / Prometheus Monitoring
+## 10.2 Prometheus 监控配置 / Prometheus Monitoring
 
 ```yaml
 # ServiceMonitor for Prometheus Operator
@@ -1568,7 +1574,7 @@ spec:
         summary: "Wasm 应用错误率过高"
 ```
 
-#<!-- chunk: 10.3 分布式追踪 / Distributed Tracing -->## 10.3 分布式追踪 / Distributed Tracing
+## 10.3 分布式追踪 / Distributed Tracing
 
 ```rust
 // Wasm 应用 OpenTelemetry 追踪
@@ -1616,7 +1622,10 @@ fn extract_trace_context(req: &Request) -> opentelemetry::Context {
 
 <!-- chunk: 11. 问题排除 -->## 11. 问题排除
 
-#<!-- chunk: 11.1 常见问题 / Common Issues -->## 11.1 常见问题 / Common Issues
+## 11.1 常见问题 / Common Issues
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 问题 1: containerd 无法找到 shim
@@ -1710,7 +1719,7 @@ if [ -n "$POD" ]; then
 fi
 ```
 
-#<!-- chunk: 11.2 性能分析 / Performance Profiling -->## 11.2 性能分析 / Performance Profiling
+## 11.2 性能分析 / Performance Profiling
 
 ```bash
 # 使用 perf 分析 Wasm shim 性能
@@ -1737,7 +1746,7 @@ valgrind --tool=massif \
 
 <!-- chunk: 12. 生产最佳实践 -->## 12. 生产最佳实践
 
-#<!-- chunk: 12.1 镜像安全 / Image Security -->## 12.1 镜像安全 / Image Security
+## 12.1 镜像安全 / Image Security
 
 ```yaml
 # 使用 cosign 签名 Wasm 镜像
@@ -1772,7 +1781,7 @@ spec:
     message: "Wasm 工作负载必须使用摘要引用镜像"
 ```
 
-#<!-- chunk: 12.2 资源配额 / Resource Quotas -->## 12.2 资源配额 / Resource Quotas
+## 12.2 资源配额 / Resource Quotas
 
 ```yaml
 # 为 Wasm 工作负载命名空间设置配额
@@ -1819,7 +1828,7 @@ spec:
       memory: "4Mi"
 ```
 
-#<!-- chunk: 12.3 高可用部署 / High Availability Deployment -->## 12.3 高可用部署 / High Availability Deployment
+## 12.3 高可用部署 / High Availability Deployment
 
 ```yaml
 # 生产级 Wasm 高可用配置
@@ -1887,7 +1896,7 @@ spec:
       app: wasm-ha-service
 ```
 
-#<!-- chunk: 12.4 GitOps 部署流程 / GitOps Deployment Flow -->## 12.4 GitOps 部署流程 / GitOps Deployment Flow
+## 12.4 GitOps 部署流程 / GitOps Deployment Flow
 
 ```yaml
 # ArgoCD Application for Wasm 服务
@@ -1939,16 +1948,16 @@ spec:
 
 <!-- chunk: 参考资料 / References -->## 参考资料 / References
 
-#<!-- chunk: 官方文档 / Official Documentation -->## 官方文档 / Official Documentation
+## 官方文档 / Official Documentation
 - [containerd 官方文档](https://containerd.io/docs/)
 - [runwasi GitHub](https://github.com/containerd/runwasi)
 - [containerd Runtime v2 规范](https://github.com/containerd/containerd/blob/main/runtime/v2/README.md)
 
-#<!-- chunk: CNCF 相关 / CNCF Related -->## CNCF 相关 / CNCF Related
+## CNCF 相关 / CNCF Related
 - [CNCF Wasm 白皮书](https://tag-runtime.cncf.io/wgs/wasm/whitepapers/wasm-cncf-whitepaper/)
 - [WasmEdge CNCF Sandbox](https://www.cncf.io/projects/wasmedge-runtime/)
 
-#<!-- chunk: 工具与项目 / Tools & Projects -->## 工具与项目 / Tools & Projects
+## 工具与项目 / Tools & Projects
 - [wasmtime](https://wasmtime.dev/)
 - [Fermyon Spin](https://developer.fermyon.com/)
 - [wasm-tools](https://github.com/bytecodealliance/wasm-tools)
@@ -1963,7 +1972,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native MOC
-- [[domain-15-specialized-tech/README|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: WebAssembly 云原生 (WebAssembly Cloud Native)]]
 - Domain-38 WebAssembly 云原生 — 开源项目索引
 - WebAssembly 云原生基础
 - SpinKube 框架实践

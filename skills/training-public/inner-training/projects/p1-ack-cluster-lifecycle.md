@@ -38,7 +38,7 @@ difficulty: intermediate
 intent_queries:
   - ACK cluster lifecycle management full流程
   - aliyun cs cluster creation deletion upgrade
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] cluster VPC vSwitch network planning
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] cluster VPC vSwitch network planning
   - ACK cluster certificate renewal
   - Cluster upgrade replacement strategy
 trigger_keywords:
@@ -368,6 +368,10 @@ aliyun cs GET /clusters/$CLUSTER_ID/upgradestatus | jq '.status'
 
 #### 4.4 升级节点 (替换升级)
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 通过替换方式升级节点池 (推荐)
 # 在控制台: 集群 → 节点池 → 选择节点池 → 升级
@@ -406,9 +410,13 @@ kubectl get ingress -A
 
 #### 5.2 删除业务资源
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```bash
-kubectl delete all --all -n default
-kubectl delete namespace <business-ns> 2>/dev/null
+kubectl delete all --all -n default  # ⚠️ 批量删除，波及面大
+kubectl delete namespace <business-ns> 2>/dev/null  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
 #### 5.3 删除集群

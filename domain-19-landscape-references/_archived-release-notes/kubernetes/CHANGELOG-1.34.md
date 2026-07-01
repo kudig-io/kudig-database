@@ -287,7 +287,7 @@ created: "2026-05-23"
 
 filename | sha512 hash
 -------- | -----------
-[[entities/kubernetes|kubernetes]].tar.gz](https://dl.k8s.io/v1.34.6/kubernetes.tar.gz) | 16349b7825a7e047b6dced5f0f673a49bbce3e8a22390e4c93502701a7e9de5943de673855ca20aa33bf7c2f937d17b021f35826fc002533c987f3621c24f238
+[[entities/kubernetes.md|kubernetes]].tar.gz](https://dl.k8s.io/v1.34.6/kubernetes.tar.gz) | 16349b7825a7e047b6dced5f0f673a49bbce3e8a22390e4c93502701a7e9de5943de673855ca20aa33bf7c2f937d17b021f35826fc002533c987f3621c24f238
 [kubernetes-src.tar.gz](https://dl.k8s.io/v1.34.6/kubernetes-src.tar.gz) | 8b066310812ad647ff3be8d3774f6812d58c10a6f7e9c00a752e6bd21006be938b88787b5ba10b18f69cfb98955fc001712e9c146bd0387ff830dd6d6f3d1d8c
 
 ### Client Binaries

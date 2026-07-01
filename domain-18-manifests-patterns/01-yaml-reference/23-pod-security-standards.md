@@ -81,13 +81,13 @@ created: "2026-05-23"
 
 <!-- chunk: 概述 -->## 概述
 
-#<!-- chunk: PSS/PSA 是什么 -->## PSS/PSA 是什么
+## PSS/PSA 是什么
 
 **Pod Security Standards (PSS)** 是 Kubernetes 定义的一套预定义的安全策略标准,替代了已废弃的 Pod Security Policy (PSP)。
 
 **Pod Security Admission (PSA)** 是内置的准入控制器,用于强制执行 PSS 定义的安全标准。
 
-#<!-- chunk: 关键特性 -->## 关键特性
+## 关键特性
 
 | 特性 | PSP (已废弃) | PSS/PSA (推荐) |
 |------|-------------|----------------|
@@ -99,7 +99,7 @@ created: "2026-05-23"
 | **学习曲线** | 复杂 | 简单直观 |
 | **审计能力** | 有限 | 内置 audit/warn 模式 |
 
-#<!-- chunk: 架构图 -->## 架构图
+## 架构图
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -136,7 +136,7 @@ created: "2026-05-23"
 
 <!-- chunk: 三种安全级别 -->## 三种安全级别
 
-#<!-- chunk: 1. Privileged (特权级) -->## 1. Privileged (特权级)
+## 1. Privileged (特权级)
 
 **适用场景**: 系统级组件、可信工作负载
 
@@ -150,7 +150,7 @@ created: "2026-05-23"
 - 特权调试容器
 ```
 
-#<!-- chunk: 2. Baseline (基线级) -->## 2. Baseline (基线级)
+## 2. Baseline (基线级)
 
 **适用场景**: 一般业务应用,平衡安全性和兼容性
 
@@ -170,7 +170,7 @@ created: "2026-05-23"
 | **Seccomp** | v1.19+ 必须设置 (可选 `RuntimeDefault` 或自定义) |
 | **Sysctls** | 禁止除安全 sysctls 外的所有配置 |
 
-#<!-- chunk: 3. Restricted (受限级) -->## 3. Restricted (受限级)
+## 3. Restricted (受限级)
 
 **适用场景**: 高安全要求的应用
 
@@ -191,7 +191,7 @@ created: "2026-05-23"
 
 <!-- chunk: 命名空间标签配置 -->## 命名空间标签配置
 
-#<!-- chunk: 标签语法 -->## 标签语法
+## 标签语法
 
 ```yaml
 # 完整标签格式
@@ -203,7 +203,7 @@ pod-security.kubernetes.io/<MODE>-version: <VERSION>
 # VERSION: v1.25, v1.26, ..., latest (可选)
 ```
 
-#<!-- chunk: 三种执行模式 -->## 三种执行模式
+## 三种执行模式
 
 | 模式 | 行为 | 适用场景 |
 |------|------|----------|
@@ -211,9 +211,9 @@ pod-security.kubernetes.io/<MODE>-version: <VERSION>
 | **audit** | 允许创建,但记录到审计日志 | 观察模式,分析影响 |
 | **warn** | 允许创建,返回警告信息给用户 | 过渡期提醒用户 |
 
-#<!-- chunk: 基础配置示例 -->## 基础配置示例
+## 基础配置示例
 
-##<!-- chunk: 1. Baseline 强制执行 -->## 1. Baseline 强制执行
+## 1. Baseline 强制执行
 
 ```yaml
 # namespace-baseline.yaml
@@ -236,7 +236,7 @@ metadata:
     pod-security.kubernetes.io/warn-version: v1.28
 ```
 
-##<!-- chunk: 2. 渐进式策略 (推荐生产环境) -->## 2. 渐进式策略 (推荐生产环境)
+## 2. 渐进式策略 (推荐生产环境)
 
 ```yaml
 # namespace-progressive.yaml
@@ -258,7 +258,7 @@ metadata:
     pod-security.kubernetes.io/warn-version: latest
 ```
 
-##<!-- chunk: 3. 系统命名空间 (Privileged) -->## 3. 系统命名空间 (Privileged)
+## 3. 系统命名空间 (Privileged)
 
 ```yaml
 # namespace-system.yaml
@@ -273,7 +273,7 @@ metadata:
     pod-security.kubernetes.io/warn: privileged
 ```
 
-#<!-- chunk: 版本锁定策略 -->## 版本锁定策略
+## 版本锁定策略
 
 ```yaml
 # 1. 锁定到特定版本 (推荐生产环境)
@@ -297,7 +297,7 @@ pod-security.kubernetes.io/enforce: baseline  # 等同于 latest
 
 <!-- chunk: 安全控制项详解 -->## 安全控制项详解
 
-#<!-- chunk: 完整控制项对照表 -->## 完整控制项对照表
+## 完整控制项对照表
 
 | 控制项 | Privileged | Baseline | Restricted | 检查字段 |
 |--------|-----------|----------|------------|----------|
@@ -317,9 +317,9 @@ pod-security.kubernetes.io/enforce: baseline  # 等同于 latest
 | **runAsNonRoot** | ✅ 可选 | ✅ 可选 | ⚠️ 必须 true | `securityContext.runAsNonRoot` |
 | **runAsUser** | ✅ 无限制 | ✅ 无限制 | ⚠️ 必须 ≠ 0 | `securityContext.runAsUser` |
 
-#<!-- chunk: 关键控制项详解 -->## 关键控制项详解
+## 关键控制项详解
 
-##<!-- chunk: 1. Capabilities 控制 -->## 1. Capabilities 控制
+## 1. Capabilities 控制
 
 ```yaml
 # Baseline 允许的 Capabilities
@@ -345,7 +345,7 @@ securityContext:
     add: ["NET_BIND_SERVICE"]          # 可选:添加绑定特权端口能力
 ```
 
-##<!-- chunk: 2. Seccomp 配置 -->## 2. Seccomp 配置
+## 2. Seccomp 配置
 
 ```yaml
 # Baseline: 必须设置 seccomp (v1.19+)
@@ -361,7 +361,7 @@ securityContext:
     # localhostProfile: my-profile.json  # 自定义配置文件
 ```
 
-##<!-- chunk: 3. Volume Types 限制 (Restricted) -->## 3. Volume Types 限制 (Restricted)
+## 3. Volume Types 限制 (Restricted)
 
 ```yaml
 # Restricted 允许的卷类型
@@ -402,7 +402,7 @@ volumes:
       monitors: [...]
 ```
 
-##<!-- chunk: 4. 安全 Sysctls -->## 4. 安全 Sysctls
+## 4. 安全 Sysctls
 
 ```yaml
 # Baseline/Restricted 允许的安全 sysctls
@@ -431,7 +431,7 @@ securityContext:
 
 <!-- chunk: PSP 到 PSS 迁移指南 -->## PSP 到 PSS 迁移指南
 
-#<!-- chunk: 迁移流程 -->## 迁移流程
+## 迁移流程
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -459,7 +459,7 @@ securityContext:
   └─ 监控和持续优化
 ```
 
-#<!-- chunk: PSP 到 PSS 映射表 -->## PSP 到 PSS 映射表
+## PSP 到 PSS 映射表
 
 | PSP 配置项 | PSS Baseline | PSS Restricted | 说明 |
 |-----------|-------------|----------------|------|
@@ -476,16 +476,13 @@ securityContext:
 | `volumes` 白名单 | ⚠️ 无限制 | ✅ 严格限制 | 只允许 6 种卷类型 |
 | `allowedCapabilities` | ⚠️ 限制列表 | ⚠️ 必须 DROP ALL | Capabilities 限制 |
 
-#<!-- chunk: 迁移实战示例 -->## 迁移实战示例
+## 迁移实战示例
 
-##<!-- chunk: 原 PSP 策略 -->## 原 PSP 策略
+## 原 PSP 策略
 
 ```yaml
 # legacy-psp.yaml (已废弃)
 apiVersion: policy/v1beta1
-
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
 
 kind: PodSecurityPolicy
 metadata:
@@ -516,7 +513,7 @@ spec:
   readOnlyRootFilesystem: false
 ```
 
-##<!-- chunk: 迁移到 PSS -->## 迁移到 PSS
+## 迁移到 PSS
 
 ```yaml
 # 1. 命名空间配置 (替代 PSP)
@@ -576,7 +573,10 @@ spec:
     emptyDir: {}
 ```
 
-#<!-- chunk: 迁移工具脚本 -->## 迁移工具脚本
+## 迁移工具脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 #!/bin/bash
@@ -631,9 +631,9 @@ kubectl label ns test-namespace \
 echo "迁移准备完成,请查看审计日志分析影响范围"
 ```
 
-#<!-- chunk: 不兼容场景处理 -->## 不兼容场景处理
+## 不兼容场景处理
 
-##<!-- chunk: 场景 1: 需要 hostPath 的监控 Agent -->## 场景 1: 需要 hostPath 的监控 Agent
+## 场景 1: 需要 hostPath 的监控 Agent
 
 ```yaml
 # 问题: Restricted 禁止 hostPath
@@ -683,7 +683,7 @@ spec:
           readOnly: true
 ```
 
-##<!-- chunk: 场景 2: 遗留应用以 root 运行 -->## 场景 2: 遗留应用以 root 运行
+## 场景 2: 遗留应用以 root 运行
 
 ```yaml
 # 问题: Restricted 要求 runAsNonRoot: true
@@ -714,7 +714,7 @@ metadata:
 
 <!-- chunk: 内部实现机制 -->## 内部实现机制
 
-#<!-- chunk: PodSecurity Admission Plugin 架构 -->## PodSecurity Admission Plugin 架构
+## PodSecurity Admission Plugin 架构
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -759,9 +759,9 @@ metadata:
    etcd 存储 Pod        审计日志文件          客户端收到警告
 ```
 
-#<!-- chunk: 启用 PodSecurity Admission -->## 启用 PodSecurity Admission
+## 启用 PodSecurity Admission
 
-##<!-- chunk: 1. 检查是否已启用 (v1.23+ 默认启用) -->## 1. 检查是否已启用 (v1.23+ 默认启用)
+## 1. 检查是否已启用 (v1.23+ 默认启用)
 
 ```bash
 # 查看 API Server 启动参数
@@ -771,7 +771,7 @@ kubectl get pod -n kube-system kube-apiserver-* -o yaml | grep enable-admission-
 # - --enable-admission-plugins=NodeRestriction,PodSecurity
 ```
 
-##<!-- chunk: 2. 手动启用 (v1.22) -->## 2. 手动启用 (v1.22)
+## 2. 手动启用 (v1.22)
 
 ```yaml
 # /etc/kubernetes/manifests/kube-apiserver.yaml
@@ -791,7 +791,7 @@ spec:
     # - --enable-admission-plugins=NodeRestriction,PodSecurityPolicy
 ```
 
-#<!-- chunk: 豁免配置 (Exemptions) -->## 豁免配置 (Exemptions)
+## 豁免配置 (Exemptions)
 
 某些特殊场景需要豁免 PSS 检查:
 
@@ -822,7 +822,7 @@ plugins:
         - "kube-node-lease"
 ```
 
-##<!-- chunk: 配置 API Server 使用豁免配置 -->## 配置 API Server 使用豁免配置
+## 配置 API Server 使用豁免配置
 
 ```yaml
 # /etc/kubernetes/manifests/kube-apiserver.yaml
@@ -843,7 +843,7 @@ spec:
       type: File
 ```
 
-#<!-- chunk: 审计日志分析 -->## 审计日志分析
+## 审计日志分析
 
 ```bash
 # 1. 查看 PodSecurity 审计事件
@@ -863,7 +863,7 @@ kubectl get events -n my-namespace --field-selector reason=FailedCreate | grep "
 
 <!-- chunk: YAML 配置示例 -->## YAML 配置示例
 
-#<!-- chunk: 示例 1: Baseline 级别最小配置 -->## 示例 1: Baseline 级别最小配置
+## 示例 1: Baseline 级别最小配置
 
 ```yaml
 # baseline-minimal.yaml
@@ -890,7 +890,7 @@ spec:
     - containerPort: 80
 ```
 
-#<!-- chunk: 示例 2: Restricted 级别完整配置 -->## 示例 2: Restricted 级别完整配置
+## 示例 2: Restricted 级别完整配置
 
 ```yaml
 # restricted-full.yaml
@@ -977,7 +977,7 @@ spec:
     emptyDir: {}
 ```
 
-#<!-- chunk: 示例 3: 多容器 Pod (Sidecar 模式) -->## 示例 3: 多容器 Pod (Sidecar 模式)
+## 示例 3: 多容器 Pod (Sidecar 模式)
 
 ```yaml
 # restricted-multi-container.yaml
@@ -1057,7 +1057,7 @@ spec:
       name: fluent-bit-config
 ```
 
-#<!-- chunk: 示例 4: Deployment 生产配置 -->## 示例 4: Deployment 生产配置
+## 示例 4: Deployment 生产配置
 
 ```yaml
 # restricted-deployment-production.yaml
@@ -1227,7 +1227,7 @@ spec:
     protocol: TCP
 ```
 
-#<!-- chunk: 示例 5: StatefulSet 持久化存储 -->## 示例 5: StatefulSet 持久化存储
+## 示例 5: StatefulSet 持久化存储
 
 ```yaml
 # restricted-statefulset.yaml
@@ -1313,7 +1313,7 @@ spec:
           storage: 10Gi
 ```
 
-#<!-- chunk: 示例 6: 特权系统组件 (Privileged) -->## 示例 6: 特权系统组件 (Privileged)
+## 示例 6: 特权系统组件 (Privileged)
 
 ```yaml
 # privileged-system-component.yaml
@@ -1403,7 +1403,7 @@ spec:
         operator: Exists
 ```
 
-#<!-- chunk: 示例 7: Job 批处理任务 -->## 示例 7: Job 批处理任务
+## 示例 7: Job 批处理任务
 
 ```yaml
 # restricted-job.yaml
@@ -1480,7 +1480,7 @@ spec:
 
 <!-- chunk: 版本兼容性 -->## 版本兼容性
 
-#<!-- chunk: PSS/PSA 演进时间线 -->## PSS/PSA 演进时间线
+## PSS/PSA 演进时间线
 
 | 版本 | 状态 | 重要变化 |
 |------|------|----------|
@@ -1497,7 +1497,7 @@ spec:
 | **v1.31** | GA | 支持更多卷类型白名单配置 |
 | **v1.32** | GA | 性能优化,降低准入延迟 |
 
-#<!-- chunk: 版本特性对照表 -->## 版本特性对照表
+## 版本特性对照表
 
 | 特性 | v1.23 | v1.25 | v1.28 | v1.32 |
 |------|-------|-------|-------|-------|
@@ -1512,9 +1512,9 @@ spec:
 | **hostPort 检查** | ✅ 基础 | ✅ 基础 | ✅ 基础 | ✅ 优化 |
 | **Windows 支持** | ⚠️ 实验 | ✅ | ✅ | ✅ 增强 |
 
-#<!-- chunk: 跨版本升级注意事项 -->## 跨版本升级注意事项
+## 跨版本升级注意事项
 
-##<!-- chunk: 从 v1.24 升级到 v1.25+ -->## 从 v1.24 升级到 v1.25+
+## 从 v1.24 升级到 v1.25+
 
 ```yaml
 # 升级前检查清单
@@ -1531,7 +1531,7 @@ spec:
    # 移除 PSP 相关的 RBAC 配置
 ```
 
-##<!-- chunk: 从 v1.25 升级到 v1.28+ -->## 从 v1.25 升级到 v1.28+
+## 从 v1.25 升级到 v1.28+
 
 ```yaml
 # 利用新特性
@@ -1551,7 +1551,7 @@ spec:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 1. 命名空间策略规划 -->## 1. 命名空间策略规划
+## 1. 命名空间策略规划
 
 ```yaml
 # 推荐的命名空间分层策略
@@ -1579,7 +1579,7 @@ spec:
 - tenant-b
 ```
 
-##<!-- chunk: 实施方案 -->## 实施方案
+## 实施方案
 
 ```yaml
 # tier1-system.yaml
@@ -1615,7 +1615,7 @@ metadata:
     pod-security.kubernetes.io/warn: restricted
 ```
 
-#<!-- chunk: 2. 渐进式策略实施 -->## 2. 渐进式策略实施
+## 2. 渐进式策略实施
 
 ```yaml
 # 阶段 1: 观察模式 (第 1-2 周)
@@ -1654,9 +1654,9 @@ metadata:
     pod-security.kubernetes.io/warn: restricted
 ```
 
-#<!-- chunk: 3. 安全配置模板 -->## 3. 安全配置模板
+## 3. 安全配置模板
 
-##<!-- chunk: 通用 SecurityContext 模板 -->## 通用 SecurityContext 模板
+## 通用 SecurityContext 模板
 
 ```yaml
 # security-context-template.yaml
@@ -1683,7 +1683,7 @@ containerSecurityContext:
   runAsUser: 1000
 ```
 
-##<!-- chunk: Kustomize 集成 -->## Kustomize 集成
+## Kustomize 集成
 
 ```yaml
 # kustomization.yaml
@@ -1692,8 +1692,7 @@ kind: Kustomization
 
 # 统一为所有 Pod 注入安全配置
 patches:
-- target:
-    kind: Pod
+- target: "`kind: Pod`"
   patch: |-
     - op: add
       path: /spec/securityContext
@@ -1703,8 +1702,7 @@ patches:
         seccompProfile:
           type: RuntimeDefault
 
-- target:
-    kind: Pod
+- target: "`kind: Pod`"
   patch: |-
     - op: add
       path: /spec/containers/0/securityContext
@@ -1719,7 +1717,7 @@ resources:
 - service.yaml
 ```
 
-#<!-- chunk: 4. 镜像构建最佳实践 -->## 4. 镜像构建最佳实践
+## 4. 镜像构建最佳实践
 
 ```dockerfile
 # Dockerfile - 遵循 Restricted 标准
@@ -1746,7 +1744,7 @@ EXPOSE 8080
 CMD ["node", "server.js"]
 ```
 
-#<!-- chunk: 5. 监控和告警 -->## 5. 监控和告警
+## 5. 监控和告警
 
 ```yaml
 # prometheus-rules.yaml
@@ -1787,7 +1785,7 @@ spec:
         description: "集群中有 {{ $value }} 个命名空间使用 Privileged 模式"
 ```
 
-#<!-- chunk: 6. CI/CD 集成 -->## 6. CI/CD 集成
+## 6. CI/CD 集成
 
 ```yaml
 # .gitlab-ci.yml
@@ -1845,7 +1843,7 @@ deny[msg] {
 
 <!-- chunk: 常见问题 FAQ -->## 常见问题 FAQ
 
-#<!-- chunk: Q1: PSS 和 PSP 的主要区别是什么? -->## Q1: PSS 和 PSP 的主要区别是什么?
+## Q1: PSS 和 PSP 的主要区别是什么?
 
 **A**: 
 
@@ -1857,7 +1855,7 @@ deny[msg] {
 | **维护成本** | 高 (复杂配置) | 低 (简单标签) |
 | **审计能力** | 有限 | 内置 audit/warn 模式 |
 
-#<!-- chunk: Q2: 如何判断应该使用哪个安全级别? -->## Q2: 如何判断应该使用哪个安全级别?
+## Q2: 如何判断应该使用哪个安全级别?
 
 **A**:
 
@@ -1884,7 +1882,7 @@ deny[msg] {
 3. 仅系统组件使用 Privileged
 ```
 
-#<!-- chunk: Q3: Restricted 级别下如何运行需要 hostPath 的应用? -->## Q3: Restricted 级别下如何运行需要 hostPath 的应用?
+## Q3: Restricted 级别下如何运行需要 hostPath 的应用?
 
 **A**:
 
@@ -1935,7 +1933,7 @@ spec:
       claimName: local-storage-pvc  # ✅ Restricted 允许
 ```
 
-#<!-- chunk: Q4: 如何为现有集群添加 PSS 而不中断业务? -->## Q4: 如何为现有集群添加 PSS 而不中断业务?
+## Q4: 如何为现有集群添加 PSS 而不中断业务?
 
 **A**:
 
@@ -1968,9 +1966,12 @@ kubectl label ns production \
 # 例如: enforce=baseline, audit/warn=restricted
 ```
 
-#<!-- chunk: Q5: Pod 被 PSS 拒绝,如何调试? -->## Q5: Pod 被 PSS 拒绝,如何调试?
+## Q5: Pod 被 PSS 拒绝,如何调试?
 
 **A**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 查看拒绝原因
@@ -1996,7 +1997,7 @@ cat /var/log/kubernetes/audit/audit.log | \
   jq '.annotations["pod-security.kubernetes.io/enforce-policy"]'
 ```
 
-#<!-- chunk: Q6: 多个标签冲突时的行为? -->## Q6: 多个标签冲突时的行为?
+## Q6: 多个标签冲突时的行为?
 
 **A**:
 
@@ -2035,7 +2036,7 @@ spec:
 # 📋 记录审计日志 (因为 audit=restricted)
 ```
 
-#<!-- chunk: Q7: 如何豁免特定 Pod? -->## Q7: 如何豁免特定 Pod?
+## Q7: 如何豁免特定 Pod?
 
 **A**:
 
@@ -2087,7 +2088,7 @@ spec:
   # 此 Pod 将绕过 PSS 检查
 ```
 
-#<!-- chunk: Q8: PSS 是否影响性能? -->## Q8: PSS 是否影响性能?
+## Q8: PSS 是否影响性能?
 
 **A**:
 
@@ -2132,7 +2133,7 @@ PSS Restricted:      平均 55ms (+10%)
 
 <!-- chunk: 生产案例 -->## 生产案例
 
-#<!-- chunk: 案例 1: 金融行业多租户平台 -->## 案例 1: 金融行业多租户平台
+## 案例 1: 金融行业多租户平台
 
 **背景**: 
 - 50+ 租户命名空间
@@ -2230,7 +2231,7 @@ spec:
 - ✅ 完整审计日志支持合规检查
 - ✅ 6 个月 0 安全事故
 
-#<!-- chunk: 案例 2: 电商平台 PSP 迁移 -->## 案例 2: 电商平台 PSP 迁移
+## 案例 2: 电商平台 PSP 迁移
 
 **背景**:
 - Kubernetes v1.24 → v1.26 升级
@@ -2286,8 +2287,7 @@ done
 # 解决: 使用 Kustomize 批量注入
 # kustomization.yaml
 patches:
-- target:
-    kind: Deployment
+- target: "`kind: Deployment`"
   patch: |-
     - op: add
       path: /spec/template/spec/securityContext
@@ -2349,7 +2349,7 @@ kubectl delete clusterrolebinding psp:*
 - ✅ 所有业务应用达到 Restricted 级别
 - ✅ 安全评分提升 40%
 
-#<!-- chunk: 案例 3: AI/ML 平台 GPU 工作负载 -->## 案例 3: AI/ML 平台 GPU 工作负载
+## 案例 3: AI/ML 平台 GPU 工作负载
 
 **背景**:
 - GPU 节点需要特殊设备访问
@@ -2538,7 +2538,7 @@ spec:
 
 <!-- chunk: 总结 -->## 总结
 
-#<!-- chunk: PSS/PSA 核心要点 -->## PSS/PSA 核心要点
+## PSS/PSA 核心要点
 
 1. **三种安全级别**:
    - Privileged: 无限制,仅系统组件
@@ -2584,10 +2584,10 @@ spec:
 - 24-admission-webhook-configuration
 - 25-validatingadmissionpolicy
 
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/13-security|13-security]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/10-security-delete|10-security-delete]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/17-pki-security-best-practices|17-pki-security-best-practices]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/13-security.md|13-security]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/10-security-delete.md|10-security-delete]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/17-pki-security-best-practices.md|17-pki-security-best-practices]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]

@@ -113,7 +113,7 @@ k8s_versions:
 
 <!-- chunk: 1. 合规框架与供应链安全映射 (Compliance Framework and Supply Chain Security Mapping) -->## 1. 合规框架与供应链安全映射 (Compliance Framework and Supply Chain Security Mapping)
 
-#<!-- chunk: 1.1 主要合规框架概览 (Major Compliance Framework Overview) -->## 1.1 主要合规框架概览 (Major Compliance Framework Overview)
+## 1.1 主要合规框架概览 (Major Compliance Framework Overview)
 
 ```mermaid
 graph TB
@@ -149,7 +149,7 @@ graph TB
     HIPAA -->|"§164.312(c) 完整性保护"| C2
 ```
 
-#<!-- chunk: 1.2 控制措施映射表 (Control Measures Mapping Table) -->## 1.2 控制措施映射表 (Control Measures Mapping Table)
+## 1.2 控制措施映射表 (Control Measures Mapping Table)
 
 | 合规要求 | 框架章节 | 技术实现 | 自动化工具 |
 |---------|---------|---------|----------|
@@ -166,7 +166,7 @@ graph TB
 
 <!-- chunk: 2. SOC 2 Type II 自动化 (SOC 2 Type II Automation) -->## 2. SOC 2 Type II 自动化 (SOC 2 Type II Automation)
 
-#<!-- chunk: 2.1 SOC 2 控制框架实现 (SOC 2 Control Framework Implementation) -->## 2.1 SOC 2 控制框架实现 (SOC 2 Control Framework Implementation)
+## 2.1 SOC 2 控制框架实现 (SOC 2 Control Framework Implementation)
 
 ```mermaid
 graph LR
@@ -200,7 +200,7 @@ graph LR
     end
 ```
 
-#<!-- chunk: 2.2 SOC 2 CC8.1 变更管理自动化 (SOC 2 CC8.1 Change Management Automation) -->## 2.2 SOC 2 CC8.1 变更管理自动化 (SOC 2 CC8.1 Change Management Automation)
+## 2.2 SOC 2 CC8.1 变更管理自动化 (SOC 2 CC8.1 Change Management Automation)
 
 ```yaml
 # .github/workflows/soc2-change-management.yml
@@ -476,7 +476,7 @@ jobs:
 
 <!-- chunk: 3. PCI-DSS v4.0 合规自动化 (PCI-DSS v4.0 Compliance Automation) -->## 3. PCI-DSS v4.0 合规自动化 (PCI-DSS v4.0 Compliance Automation)
 
-#<!-- chunk: 3.1 PCI-DSS 要求 6.3.x 自动化 (PCI-DSS Requirement 6.3.x Automation) -->## 3.1 PCI-DSS 要求 6.3.x 自动化 (PCI-DSS Requirement 6.3.x Automation)
+## 3.1 PCI-DSS 要求 6.3.x 自动化 (PCI-DSS Requirement 6.3.x Automation)
 
 ```yaml
 # .github/workflows/pci-dss-compliance.yml
@@ -700,7 +700,7 @@ jobs:
 
 <!-- chunk: 4. FedRAMP 持续监控 (FedRAMP Continuous Monitoring) -->## 4. FedRAMP 持续监控 (FedRAMP Continuous Monitoring)
 
-#<!-- chunk: 4.1 FedRAMP 连续授权监控架构 (FedRAMP ConMon Architecture) -->## 4.1 FedRAMP 连续授权监控架构 (FedRAMP ConMon Architecture)
+## 4.1 FedRAMP 连续授权监控架构 (FedRAMP ConMon Architecture)
 
 ```mermaid
 graph TB
@@ -745,7 +745,7 @@ graph TB
     SAR --> CSP
 ```
 
-#<!-- chunk: 4.2 FedRAMP SA-15 开发流程安全控制 (FedRAMP SA-15 Development Process Security) -->## 4.2 FedRAMP SA-15 开发流程安全控制 (FedRAMP SA-15 Development Process Security)
+## 4.2 FedRAMP SA-15 开发流程安全控制 (FedRAMP SA-15 Development Process Security)
 
 ```yaml
 # fedramp-sa15-controls.yaml
@@ -847,7 +847,7 @@ spec:
                     --kms-key-id "$COMPLIANCE_KMS_KEY"
 ```
 
-#<!-- chunk: 4.3 FedRAMP POA&M 自动化 (FedRAMP POA&M Automation) -->## 4.3 FedRAMP POA&M 自动化 (FedRAMP POA&M Automation)
+## 4.3 FedRAMP POA&M 自动化 (FedRAMP POA&M Automation)
 
 ```python
 #!/usr/bin/env python3
@@ -1006,7 +1006,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 5. 审计证据收集自动化 (Automated Audit Evidence Collection) -->## 5. 审计证据收集自动化 (Automated Audit Evidence Collection)
 
-#<!-- chunk: 5.1 证据收集架构 (Evidence Collection Architecture) -->## 5.1 证据收集架构 (Evidence Collection Architecture)
+## 5.1 证据收集架构 (Evidence Collection Architecture)
 
 ```mermaid
 graph LR
@@ -1054,7 +1054,7 @@ graph LR
     S3 & DB --> CH
 ```
 
-#<!-- chunk: 5.2 证据收集自动化脚本 (Evidence Collection Automation Script) -->## 5.2 证据收集自动化脚本 (Evidence Collection Automation Script)
+## 5.2 证据收集自动化脚本 (Evidence Collection Automation Script)
 
 ```python
 #!/usr/bin/env python3
@@ -1354,7 +1354,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 6. 合规仪表板 (Compliance Dashboards) -->## 6. 合规仪表板 (Compliance Dashboards)
 
-#<!-- chunk: 6.1 Grafana 合规仪表板配置 (Grafana Compliance Dashboard Configuration) -->## 6.1 Grafana 合规仪表板配置 (Grafana Compliance Dashboard Configuration)
+## 6.1 Grafana 合规仪表板配置 (Grafana Compliance Dashboard Configuration)
 
 ```json
 {
@@ -1473,7 +1473,7 @@ if __name__ == "__main__":
 }
 ```
 
-#<!-- chunk: 6.2 合规指标导出器 (Compliance Metrics Exporter) -->## 6.2 合规指标导出器 (Compliance Metrics Exporter)
+## 6.2 合规指标导出器 (Compliance Metrics Exporter)
 
 ```python
 #!/usr/bin/env python3
@@ -1652,7 +1652,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 7. 策略即代码合规框架 (Policy-as-Code Compliance Framework) -->## 7. 策略即代码合规框架 (Policy-as-Code Compliance Framework)
 
-#<!-- chunk: 7.1 Open Policy Agent 合规策略 (Open Policy Agent Compliance Policies) -->## 7.1 Open Policy Agent 合规策略 (Open Policy Agent Compliance Policies)
+## 7.1 Open Policy Agent 合规策略 (Open Policy Agent Compliance Policies)
 
 ```rego
 # compliance/soc2.rego
@@ -1767,7 +1767,7 @@ violations := [violation |
 ]
 ```
 
-#<!-- chunk: 7.2 合规即代码工作流 (Compliance-as-Code Workflow) -->## 7.2 合规即代码工作流 (Compliance-as-Code Workflow)
+## 7.2 合规即代码工作流 (Compliance-as-Code Workflow)
 
 ```yaml
 # .github/workflows/compliance-as-code.yml
@@ -1895,7 +1895,7 @@ jobs:
 
 <!-- chunk: 8. 合规持续监控 (Continuous Compliance Monitoring) -->## 8. 合规持续监控 (Continuous Compliance Monitoring)
 
-#<!-- chunk: 8.1 持续合规监控架构 (Continuous Compliance Monitoring Architecture) -->## 8.1 持续合规监控架构 (Continuous Compliance Monitoring Architecture)
+## 8.1 持续合规监控架构 (Continuous Compliance Monitoring Architecture)
 
 ```mermaid
 graph TB
@@ -1935,7 +1935,7 @@ graph TB
     R1 & R2 & R3 & R4 --> RP1 & RP2 & RP3 & RP4
 ```
 
-#<!-- chunk: 8.2 自动化合规状态机 (Automated Compliance State Machine) -->## 8.2 自动化合规状态机 (Automated Compliance State Machine)
+## 8.2 自动化合规状态机 (Automated Compliance State Machine)
 
 ```yaml
 # compliance-state-machine.yaml
@@ -2013,7 +2013,7 @@ stateMachine:
 
 <!-- chunk: 9. 审计员接口与报告 (Auditor Interface and Reporting) -->## 9. 审计员接口与报告 (Auditor Interface and Reporting)
 
-#<!-- chunk: 9.1 审计员只读访问配置 (Auditor Read-Only Access Configuration) -->## 9.1 审计员只读访问配置 (Auditor Read-Only Access Configuration)
+## 9.1 审计员只读访问配置 (Auditor Read-Only Access Configuration)
 
 ```yaml
 # auditor-access.yaml
@@ -2123,7 +2123,7 @@ subjects:
 # }
 ```
 
-#<!-- chunk: 9.2 自动化审计报告生成 (Automated Audit Report Generation) -->## 9.2 自动化审计报告生成 (Automated Audit Report Generation)
+## 9.2 自动化审计报告生成 (Automated Audit Report Generation)
 
 ```python
 #!/usr/bin/env python3
@@ -2162,7 +2162,7 @@ REPORT_TEMPLATE = """
 
 <!-- chunk: SOC 2 Type II Controls -->## SOC 2 Type II Controls
 
-#<!-- chunk: CC6.6 - Logical Access Controls (Supply Chain) -->## CC6.6 - Logical Access Controls (Supply Chain)
+## CC6.6 - Logical Access Controls (Supply Chain)
 
 **Status**: {{ 'PASS ✅' if soc2.cc6_6.passed else 'FAIL ❌' }}
 
@@ -2172,7 +2172,7 @@ REPORT_TEMPLATE = """
 | {{ check.name }} | {{ '✅ Pass' if check.passed else '❌ Fail' }} | [View Evidence]({{ check.evidence_url }}) |
 {% endfor %}
 
-#<!-- chunk: CC7.1 - System Monitoring (Vulnerability Management) -->## CC7.1 - System Monitoring (Vulnerability Management)
+## CC7.1 - System Monitoring (Vulnerability Management)
 
 **Status**: {{ 'PASS ✅' if soc2.cc7_1.passed else 'FAIL ❌' }}
 
@@ -2182,7 +2182,7 @@ Vulnerability Summary:
 - **Medium**: {{ soc2.cc7_1.medium_count }}
 - **Low**: {{ soc2.cc7_1.low_count }}
 
-#<!-- chunk: CC8.1 - Change Management -->## CC8.1 - Change Management
+## CC8.1 - Change Management
 
 **Status**: {{ 'PASS ✅' if soc2.cc8_1.passed else 'FAIL ❌' }}
 
@@ -2317,7 +2317,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 10. 行业特定合规扩展 (Industry-Specific Compliance Extensions) -->## 10. 行业特定合规扩展 (Industry-Specific Compliance Extensions)
 
-#<!-- chunk: 10.1 HIPAA 供应链扩展 (HIPAA Supply Chain Extensions) -->## 10.1 HIPAA 供应链扩展 (HIPAA Supply Chain Extensions)
+## 10.1 HIPAA 供应链扩展 (HIPAA Supply Chain Extensions)
 
 ```yaml
 # hipaa-supply-chain-policy.yaml
@@ -2388,7 +2388,7 @@ spec:
                     value: "true"
 ```
 
-#<!-- chunk: 10.2 金融行业合规扩展 (Financial Industry Compliance Extensions) -->## 10.2 金融行业合规扩展 (Financial Industry Compliance Extensions)
+## 10.2 金融行业合规扩展 (Financial Industry Compliance Extensions)
 
 ```yaml
 # fintech-supply-chain-policy.yaml
@@ -2472,7 +2472,7 @@ spec:
 
 <!-- chunk: 11. 合规自动化工具链 (Compliance Automation Toolchain) -->## 11. 合规自动化工具链 (Compliance Automation Toolchain)
 
-#<!-- chunk: 11.1 推荐工具矩阵 (Recommended Tool Matrix) -->## 11.1 推荐工具矩阵 (Recommended Tool Matrix)
+## 11.1 推荐工具矩阵 (Recommended Tool Matrix)
 
 | 类别 | 工具 | 用途 | 开源/商业 |
 |------|------|------|----------|
@@ -2492,7 +2492,7 @@ spec:
 | 合规管理 | Vanta | 持续合规监控 | 商业 |
 | 合规管理 | Steampipe | SQL 查询合规 | 开源 |
 
-#<!-- chunk: 11.2 合规工具链安装脚本 (Compliance Toolchain Installation Script) -->## 11.2 合规工具链安装脚本 (Compliance Toolchain Installation Script)
+## 11.2 合规工具链安装脚本 (Compliance Toolchain Installation Script)
 
 ```bash
 #!/bin/bash
@@ -2574,7 +2574,7 @@ echo "  checkov: $(checkov --version)"
 
 <!-- chunk: 12. 参考标准与最佳实践 (Reference Standards and Best Practices) -->## 12. 参考标准与最佳实践 (Reference Standards and Best Practices)
 
-#<!-- chunk: 12.1 主要参考文档 -->## 12.1 主要参考文档
+## 12.1 主要参考文档
 
 | 文档 | URL/发布机构 |
 |------|------------|
@@ -2587,7 +2587,7 @@ echo "  checkov: $(checkov --version)"
 | OpenSSF Scorecard | github.com/ossf/scorecard |
 | SLSA Framework | slsa.dev |
 
-#<!-- chunk: 12.2 合规自动化成熟度模型 (Compliance Automation Maturity Model) -->## 12.2 合规自动化成熟度模型 (Compliance Automation Maturity Model)
+## 12.2 合规自动化成熟度模型 (Compliance Automation Maturity Model)
 
 ```mermaid
 graph LR
@@ -2633,8 +2633,8 @@ graph LR
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 39: 供应链安全 (Supply Chain Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-39 供应链安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 供应链安全 (Supply Chain Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
 - 供应链安全概述 (Supply Chain Security Overview)
 - 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 - SBOM 生成与管理 (SBOM Generation and Management)
@@ -2652,4 +2652,4 @@ graph LR
 - 99-slsa-supply-chain-security-guide
 - 01-supply-chain-security-overview
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

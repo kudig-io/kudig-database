@@ -134,7 +134,7 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [Fluentd](./graduated/fluentd/fluentd.md) | Observability | 统一日志层 |
 | [Flux](./graduated/flux/flux.md) | App Definition | GitOps 持续交付 |
 | [Harbor](./graduated/harbor/harbor.md) | Provisioning | 企业级容器镜像仓库 |
-| [Helm](./[[entities/helm]]/helm.md) | App Definition | Kubernetes 包管理器 |
+| [Helm](./[[entities/helm.md|helm]]/helm.md) | App Definition | Kubernetes 包管理器 |
 | [in-toto](./graduated/in-toto/in-toto.md) | Security | 软件供应链安全框架 |
 | [Istio](./graduated/istio/istio.md) | Service Mesh | 服务网格平台 |
 | [Jaeger](./graduated/jaeger/jaeger.md) | Observability | 分布式追踪系统 |
@@ -292,7 +292,7 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | composefs](./sandbox/composefs/composefs.md) | 组合文件系统 |
 | [container2wasm](./sandbox/container2wasm/container2wasm.md) | 容器转 WASM |
 | [ContainerSSH](./sandbox/containerssh/containerssh.md) | SSH 容器服务 |
-| [Podman Container Tools](./[[entities/podman-container-tools|podman-container-tools]]/podman-container-tools.md) | Podman 工具集 |
+| [Podman Container Tools](./[[entities/podman-container-tools.md|podman-container-tools]]/podman-container-tools.md) | Podman 工具集 |
 
 ### 应用定义与交付 (25个)
 
@@ -357,7 +357,7 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [KubeElasti](./sandbox/kubeelasti/kubeelasti.md) | AI 弹性扩缩 |
 | [Armada](./sandbox/armada/armada.md) | 多集群批处理 |
 | [Cadence](./sandbox/cadence/cadence.md) | 工作流引擎 |
-| [Serverless Workflow](./[[entities/serverless-workflow|serverless-workflow]]/serverless-workflow.md) | 工作流规范 |
+| [Serverless Workflow](./[[entities/serverless-workflow.md|serverless-workflow]]/serverless-workflow.md) | 工作流规范 |
 
 ### 边缘计算与 IoT (5个)
 
@@ -403,7 +403,7 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [OpenChoreo](./sandbox/openchoreo/openchoreo.md) | 集成平台 |
 | [OpenFunction](./sandbox/openfunction/openfunction.md) | FaaS 平台 |
 | [OSCAL-COMPASS](./sandbox/oscal-compass/oscal-compass.md) | 合规自动化 |
-| [Podman Desktop](./[[entities/podman-desktop|podman-desktop]]/podman-desktop.md) | 容器桌面应用 |
+| [Podman Desktop](./[[entities/podman-desktop.md|podman-desktop]]/podman-desktop.md) | 容器桌面应用 |
 | [VS Code Kubernetes Tools](./sandbox/vscode-kubernetes-tools/vscode-kubernetes-tools.md) | VS Code 插件 |
 
 ---
@@ -476,7 +476,7 @@ Flux → Argo → Helm → Crossplane
 
 - [[helm]]
 - [[README]]
-- [[journal/digest-2026-05-21-full|digest-2026-05-21-full]]
+- digest-2026-05-21-full
 
-- [[entities/tinkerbell|Tinkerbell]]
-- [[entities/chaosblade|ChaosBlade]]
+- [[entities/tinkerbell.md|Tinkerbell]]
+- [[entities/chaosblade.md|ChaosBlade]]

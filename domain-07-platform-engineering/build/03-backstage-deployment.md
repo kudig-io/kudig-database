@@ -57,7 +57,7 @@ created: "2026-05-23"
 # [[Backstage|Backstage]] 部署与配置
 # Backstage Deployment and Configuration
 
-> **领域**: 平台工程 | [[synthesis/platform-engineering-sre|Platform Engineering]]  
+> **领域**: 平台工程 | [[concepts/platform-engineering-sre.md|Platform Engineering]]  
 > **难度**: 中级到高级 | Intermediate to Advanced  
 > **阅读时间**: 约 70 分钟 | ~70 min read  
 > **最后更新**: 2026-03-04
@@ -69,7 +69,7 @@ created: "2026-05-23"
 1. [Backstage 架构深度解析](#1-backstage-架构深度解析)
 2. [前端架构与插件系统](#2-前端架构与插件系统)
 3. [后端架构与 API 设计](#3-后端架构与-api-设计)
-4. [[entities/kubernetes|Kubernetes]] 生产部署](#4-kubernetes-生产部署)
+4. [[entities/kubernetes.md|Kubernetes]] 生产部署](#4-kubernetes-生产部署)
 5. [PostgreSQL 数据库配置](#5-postgresql-数据库配置)
 6. [认证配置：OAuth 与 OIDC](#6-认证配置oauth-与-oidc)
 7. [RBAC 权限控制](#7-rbac-权限控制)
@@ -84,7 +84,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. Backstage 架构深度解析 -->## 1. Backstage 架构深度解析
 
-#<!-- chunk: 1.1 整体架构概览 -->## 1.1 整体架构概览
+## 1.1 整体架构概览
 
 Backstage 是一个基于 React（前端）和 Node.js（后端）的全栈开发者门户平台：
 
@@ -130,7 +130,7 @@ graph TB
     PluginBE --> S3
 ```
 
-#<!-- chunk: 1.2 核心概念 -->## 1.2 核心概念
+## 1.2 核心概念
 
 ```
 Backstage 核心概念体系
@@ -164,7 +164,7 @@ Backstage 核心概念体系
    └── 基于 MkDocs 的文档系统，与代码同存储
 ```
 
-#<!-- chunk: 1.3 插件架构详解 -->## 1.3 插件架构详解
+## 1.3 插件架构详解
 
 ```mermaid
 graph LR
@@ -195,7 +195,7 @@ graph LR
 
 <!-- chunk: 2. 前端架构与插件系统 -->## 2. 前端架构与插件系统
 
-#<!-- chunk: 2.1 前端入口配置 -->## 2.1 前端入口配置
+## 2.1 前端入口配置
 
 ```typescript
 // packages/app/src/App.tsx
@@ -317,7 +317,7 @@ export default app.createRoot(
 );
 ```
 
-#<!-- chunk: 2.2 自定义主题配置 -->## 2.2 自定义主题配置
+## 2.2 自定义主题配置
 
 ```typescript
 // packages/app/src/theme/index.ts
@@ -380,7 +380,7 @@ export const customTheme = createUnifiedTheme({
 });
 ```
 
-#<!-- chunk: 2.3 实体页面自定义 -->## 2.3 实体页面自定义
+## 2.3 实体页面自定义
 
 ```typescript
 // packages/app/src/components/catalog/EntityPage.tsx
@@ -495,7 +495,7 @@ const serviceEntityPage = (
 
 <!-- chunk: 3. 后端架构与 API 设计 -->## 3. 后端架构与 API 设计
 
-#<!-- chunk: 3.1 后端插件开发示例 -->## 3.1 后端插件开发示例
+## 3.1 后端插件开发示例
 
 ```typescript
 // plugins/platform-metrics-backend/src/plugin.ts
@@ -627,7 +627,7 @@ export const platformMetricsPlugin = createBackendPlugin({
 });
 ```
 
-#<!-- chunk: 3.2 数据库迁移管理 -->## 3.2 数据库迁移管理
+## 3.2 数据库迁移管理
 
 ```typescript
 // plugins/platform-metrics-backend/src/database/migrations/001_initial.ts
@@ -683,7 +683,7 @@ export async function down(knex: Knex): Promise<void> {
 
 <!-- chunk: 4. Kubernetes 生产部署 -->## 4. Kubernetes 生产部署
 
-#<!-- chunk: 4.1 Backstage Docker 镜像构建 -->## 4.1 Backstage Docker 镜像构建
+## 4.1 Backstage Docker 镜像构建
 
 ```dockerfile
 # packages/backend/Dockerfile
@@ -742,7 +742,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
 CMD ["node", "index.js"]
 ```
 
-#<!-- chunk: 4.2 完整 Kubernetes 部署 YAML -->## 4.2 完整 Kubernetes 部署 YAML
+## 4.2 完整 Kubernetes 部署 YAML
 
 ```yaml
 # k8s/backstage/namespace.yaml
@@ -1240,7 +1240,7 @@ spec:
 
 <!-- chunk: 5. PostgreSQL 数据库配置 -->## 5. PostgreSQL 数据库配置
 
-#<!-- chunk: 5.1 PostgreSQL 高可用部署 -->## 5.1 PostgreSQL 高可用部署
+## 5.1 PostgreSQL 高可用部署
 
 ```yaml
 # k8s/postgres/postgres-ha.yaml
@@ -1351,7 +1351,7 @@ spec:
       client_idle_timeout: "600"
 ```
 
-#<!-- chunk: 5.2 数据库备份与恢复 -->## 5.2 数据库备份与恢复
+## 5.2 数据库备份与恢复
 
 ```bash
 #!/bin/bash
@@ -1412,7 +1412,7 @@ echo "✅ 备份流程完成"
 
 <!-- chunk: 6. 认证配置：OAuth 与 OIDC -->## 6. 认证配置：OAuth 与 OIDC
 
-#<!-- chunk: 6.1 Microsoft Azure AD (Entra ID) 配置 -->## 6.1 Microsoft Azure AD (Entra ID) 配置
+## 6.1 Microsoft Azure AD (Entra ID) 配置
 
 ```yaml
 # Azure AD OIDC 认证配置
@@ -1458,7 +1458,7 @@ auth:
             - resolver: emailLocalPartMatchingUserEntityName
 ```
 
-#<!-- chunk: 6.2 GitHub OAuth 配置 -->## 6.2 GitHub OAuth 配置
+## 6.2 GitHub OAuth 配置
 
 ```yaml
 # GitHub OAuth 配置
@@ -1487,7 +1487,7 @@ auth:
             - resolver: emailMatchingUserEntityProfileEmail
 ```
 
-#<!-- chunk: 6.3 自定义认证解析器 -->## 6.3 自定义认证解析器
+## 6.3 自定义认证解析器
 
 ```typescript
 // packages/backend/src/plugins/auth.ts
@@ -1561,7 +1561,7 @@ export const authModuleMicrosoftCustomResolver = createBackendModule({
 });
 ```
 
-#<!-- chunk: 6.4 Dex (OIDC Provider) 部署配置 -->## 6.4 Dex (OIDC Provider) 部署配置
+## 6.4 Dex (OIDC Provider) 部署配置
 
 ```yaml
 # 使用 Dex 作为统一的 OIDC Provider，聚合多个 IdP
@@ -1683,7 +1683,7 @@ staticClients:
 
 <!-- chunk: 7. RBAC 权限控制 -->## 7. RBAC 权限控制
 
-#<!-- chunk: 7.1 Backstage 权限框架 -->## 7.1 Backstage 权限框架
+## 7.1 Backstage 权限框架
 
 ```typescript
 // packages/backend/src/plugins/permission.ts
@@ -1790,7 +1790,7 @@ export const permissionModuleCompanyPolicy = createBackendModule({
 });
 ```
 
-#<!-- chunk: 7.2 RBAC 配置文件方式 -->## 7.2 RBAC 配置文件方式
+## 7.2 RBAC 配置文件方式
 
 ```yaml
 # rbac-policy.yaml
@@ -1856,7 +1856,7 @@ role_bindings:
 
 <!-- chunk: 8. 生产环境配置最佳实践 -->## 8. 生产环境配置最佳实践
 
-#<!-- chunk: 8.1 完整生产配置文件 -->## 8.1 完整生产配置文件
+## 8.1 完整生产配置文件
 
 ```yaml
 # app-config.production.yaml
@@ -2098,7 +2098,7 @@ catalog:
 
 <!-- chunk: 9. 性能调优 -->## 9. 性能调优
 
-#<!-- chunk: 9.1 Node.js 性能配置 -->## 9.1 Node.js 性能配置
+## 9.1 Node.js 性能配置
 
 ```yaml
 # 环境变量调优
@@ -2124,7 +2124,7 @@ catalog_performance:
   # 多 Token 轮询，提高 API 速率上限
 ```
 
-#<!-- chunk: 9.2 数据库查询优化 -->## 9.2 数据库查询优化
+## 9.2 数据库查询优化
 
 ```sql
 -- 为 Backstage 目录常用查询添加索引
@@ -2158,7 +2158,7 @@ SELECT cron.schedule(
 );
 ```
 
-#<!-- chunk: 9.3 Redis 缓存优化 -->## 9.3 Redis 缓存优化
+## 9.3 Redis 缓存优化
 
 ```yaml
 # Redis 缓存配置优化
@@ -2197,7 +2197,7 @@ cache_policies:
 
 <!-- chunk: 10. 监控与可观测性配置 -->## 10. 监控与可观测性配置
 
-#<!-- chunk: 10.1 Prometheus 监控配置 -->## 10.1 Prometheus 监控配置
+## 10.1 Prometheus 监控配置
 
 ```yaml
 # k8s/backstage/servicemonitor.yaml
@@ -2297,7 +2297,7 @@ spec:
             description: "目录处理错误率: {{ $value }}/s"
 ```
 
-#<!-- chunk: 10.2 Grafana 仪表板配置 -->## 10.2 Grafana 仪表板配置
+## 10.2 Grafana 仪表板配置
 
 ```json
 {
@@ -2364,7 +2364,7 @@ spec:
 
 <!-- chunk: 11. 高可用与灾备 -->## 11. 高可用与灾备
 
-#<!-- chunk: 11.1 多可用区部署 -->## 11.1 多可用区部署
+## 11.1 多可用区部署
 
 ```yaml
 # 拓扑分布约束
@@ -2396,7 +2396,7 @@ postgres_ha:
     failover_timeout: 30    # 30 秒内完成故障转移
 ```
 
-#<!-- chunk: 11.2 灾难恢复计划 -->## 11.2 灾难恢复计划
+## 11.2 灾难恢复计划
 
 ```yaml
 # 灾难恢复 (DR) 计划
@@ -2458,7 +2458,7 @@ recovery_procedures:
 
 <!-- chunk: 12. 升级策略与版本管理 -->## 12. 升级策略与版本管理
 
-#<!-- chunk: 12.1 Backstage 版本升级流程 -->## 12.1 Backstage 版本升级流程
+## 12.1 Backstage 版本升级流程
 
 ```bash
 #!/bin/bash
@@ -2514,7 +2514,7 @@ echo "  4. 在 Staging 环境部署测试"
 echo "  5. 生产环境蓝绿部署"
 ```
 
-#<!-- chunk: 12.2 蓝绿部署策略 -->## 12.2 蓝绿部署策略
+## 12.2 蓝绿部署策略
 
 ```yaml
 # 蓝绿部署配置
@@ -2583,6 +2583,10 @@ spec:
       targetPort: 7007
 ```
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 #!/bin/bash
 # 蓝绿切换脚本
@@ -2629,7 +2633,10 @@ rollback_to_blue() {
 
 <!-- chunk: 13. 故障排查指南 -->## 13. 故障排查指南
 
-#<!-- chunk: 13.1 常见问题与解决方案 -->## 13.1 常见问题与解决方案
+## 13.1 常见问题与解决方案
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 常见故障排查命令
@@ -2669,7 +2676,10 @@ kubectl exec -it backstage-xxx -n backstage -- \
   curl -s localhost:7007/metrics | grep http_request
 ```
 
-#<!-- chunk: 13.2 健康检查脚本 -->## 13.2 健康检查脚本
+## 13.2 健康检查脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -2760,7 +2770,7 @@ Backstage 的成功部署需要关注以下关键领域：
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Domain 36: 平台工程 (Platform Engineering)]]
+- [[domain-07-platform-engineering/README.md|Domain 07: 平台工程 (Platform Engineering)]]
 - Domain-36 平台工程 — 开源项目索引
 - 平台工程概述与成熟度模型
 - 内部开发者平台设计原则

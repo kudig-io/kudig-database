@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. Fulcio 证书颁发机构 (Fulcio Certificate Authority) -->## 1. Fulcio 证书颁发机构 (Fulcio Certificate Authority)
 
-#<!-- chunk: 1.1 Fulcio 系统架构 (Fulcio System Architecture) -->## 1.1 Fulcio 系统架构 (Fulcio System Architecture)
+## 1.1 Fulcio 系统架构 (Fulcio System Architecture)
 
 ```mermaid
 graph TB
@@ -118,7 +118,7 @@ graph TB
     CA_BACKEND -->|"颁发 X.509 证书"| CO
 ```
 
-#<!-- chunk: 1.2 Fulcio 证书结构 (Fulcio Certificate Structure) -->## 1.2 Fulcio 证书结构 (Fulcio Certificate Structure)
+## 1.2 Fulcio 证书结构 (Fulcio Certificate Structure)
 
 Fulcio 颁发的证书是标准 X.509 v3 证书，包含特殊的 OID 扩展：
 
@@ -176,7 +176,7 @@ openssl x509 -in /tmp/signing.pem -text -noout
 #                 12345678                                     ← Run ID
 ```
 
-#<!-- chunk: 1.3 Fulcio OID 扩展参考 (Fulcio OID Extension Reference) -->## 1.3 Fulcio OID 扩展参考 (Fulcio OID Extension Reference)
+## 1.3 Fulcio OID 扩展参考 (Fulcio OID Extension Reference)
 
 | OID | 名称 | 描述 |
 |-----|------|------|
@@ -195,7 +195,7 @@ openssl x509 -in /tmp/signing.pem -text -noout
 
 <!-- chunk: 2. OIDC 身份验证流程 (OIDC Identity Verification Flow) -->## 2. OIDC 身份验证流程 (OIDC Identity Verification Flow)
 
-#<!-- chunk: 2.1 GitHub Actions OIDC 令牌交换 (GitHub Actions OIDC Token Exchange) -->## 2.1 GitHub Actions OIDC 令牌交换 (GitHub Actions OIDC Token Exchange)
+## 2.1 GitHub Actions OIDC 令牌交换 (GitHub Actions OIDC Token Exchange)
 
 ```mermaid
 sequenceDiagram
@@ -232,7 +232,7 @@ sequenceDiagram
     Note over CTL: 证书永久记录在 CT Log 中
 ```
 
-#<!-- chunk: 2.2 支持的 OIDC 提供商 (Supported OIDC Providers) -->## 2.2 支持的 OIDC 提供商 (Supported OIDC Providers)
+## 2.2 支持的 OIDC 提供商 (Supported OIDC Providers)
 
 ```go
 // Fulcio 默认支持的 OIDC 提供商配置
@@ -270,7 +270,7 @@ OIDCIssuers: map[string]OIDCIssuer{
 }
 ```
 
-#<!-- chunk: 2.3 验证 OIDC 令牌的 JWT 内容 (Verifying JWT Content) -->## 2.3 验证 OIDC 令牌的 JWT 内容 (Verifying JWT Content)
+## 2.3 验证 OIDC 令牌的 JWT 内容 (Verifying JWT Content)
 
 ```bash
 # 解码 OIDC 令牌（不需要密钥，仅解码 payload）
@@ -311,7 +311,7 @@ curl -s https://fulcio.sigstore.dev/api/v2/trustBundle | \
 
 <!-- chunk: 3. Rekor 透明日志深度解析 (Rekor Transparency Log Deep Dive) -->## 3. Rekor 透明日志深度解析 (Rekor Transparency Log Deep Dive)
 
-#<!-- chunk: 3.1 Rekor 架构 (Rekor Architecture) -->## 3.1 Rekor 架构 (Rekor Architecture)
+## 3.1 Rekor 架构 (Rekor Architecture)
 
 ```mermaid
 graph TB
@@ -367,7 +367,7 @@ graph TB
     WI --> CT
 ```
 
-#<!-- chunk: 3.2 Rekor 日志条目格式 (Rekor Log Entry Format) -->## 3.2 Rekor 日志条目格式 (Rekor Log Entry Format)
+## 3.2 Rekor 日志条目格式 (Rekor Log Entry Format)
 
 ```bash
 # 查询特定条目
@@ -399,7 +399,7 @@ rekor-cli get --log-index 12345678
 # }
 ```
 
-#<!-- chunk: 3.3 Rekor 日志条目类型详解 (Rekor Log Entry Types) -->## 3.3 Rekor 日志条目类型详解 (Rekor Log Entry Types)
+## 3.3 Rekor 日志条目类型详解 (Rekor Log Entry Types)
 
 ```bash
 # hashedrekord - 最常用的条目类型（Cosign 使用）
@@ -460,7 +460,7 @@ EOF
 
 <!-- chunk: 4. Rekor CLI 完整操作指南 (Rekor CLI Complete Operations Guide) -->## 4. Rekor CLI 完整操作指南 (Rekor CLI Complete Operations Guide)
 
-#<!-- chunk: 4.1 安装 Rekor CLI (Installing Rekor CLI) -->## 4.1 安装 Rekor CLI (Installing Rekor CLI)
+## 4.1 安装 Rekor CLI (Installing Rekor CLI)
 
 ```bash
 # 安装 rekor-cli
@@ -476,7 +476,7 @@ chmod +x /usr/local/bin/rekor-cli
 rekor-cli version
 ```
 
-#<!-- chunk: 4.2 查询操作 (Query Operations) -->## 4.2 查询操作 (Query Operations)
+## 4.2 查询操作 (Query Operations)
 
 ```bash
 # 查询日志信息（树大小、哈希等）
@@ -523,7 +523,7 @@ for INDEX in $(seq 12345678 12345688); do
 done
 ```
 
-#<!-- chunk: 4.3 包含证明验证 (Inclusion Proof Verification) -->## 4.3 包含证明验证 (Inclusion Proof Verification)
+## 4.3 包含证明验证 (Inclusion Proof Verification)
 
 ```bash
 # 验证条目的默克尔树包含证明
@@ -549,7 +549,7 @@ rekor-cli verify \
   --rekor-server https://rekor.sigstore.dev
 ```
 
-#<!-- chunk: 4.4 Rekor REST API 使用 (Rekor REST API Usage) -->## 4.4 Rekor REST API 使用 (Rekor REST API Usage)
+## 4.4 Rekor REST API 使用 (Rekor REST API Usage)
 
 ```bash
 # 获取日志信息
@@ -580,7 +580,7 @@ curl -s "https://rekor.sigstore.dev/api/v1/log" | \
 
 <!-- chunk: 5. 证书透明度 (Certificate Transparency) -->## 5. 证书透明度 (Certificate Transparency)
 
-#<!-- chunk: 5.1 CT Log 与 SCT 机制 (CT Log and SCT Mechanism) -->## 5.1 CT Log 与 SCT 机制 (CT Log and SCT Mechanism)
+## 5.1 CT Log 与 SCT 机制 (CT Log and SCT Mechanism)
 
 ```mermaid
 sequenceDiagram
@@ -606,7 +606,7 @@ sequenceDiagram
     AUD->>AUD: 检查证书是否符合策略\n(检测错误颁发)
 ```
 
-#<!-- chunk: 5.2 SCT 验证 (SCT Verification) -->## 5.2 SCT 验证 (SCT Verification)
+## 5.2 SCT 验证 (SCT Verification)
 
 ```bash
 # 从证书中提取 SCT 信息
@@ -633,7 +633,7 @@ go run github.com/google/certificate-transparency-go/cmd/ct_hammer@latest verify
   --ct-log-url https://ctfe.sigstore.dev/test
 ```
 
-#<!-- chunk: 5.3 CT Log 监控 (CT Log Monitoring) -->## 5.3 CT Log 监控 (CT Log Monitoring)
+## 5.3 CT Log 监控 (CT Log Monitoring)
 
 ```python
 # ct_monitor.py - 监控 CT Log 的新证书
@@ -716,7 +716,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 6. 审计追踪实践 (Audit Trail Practices) -->## 6. 审计追踪实践 (Audit Trail Practices)
 
-#<!-- chunk: 6.1 供应链事件时间线重建 (Supply Chain Incident Timeline Reconstruction) -->## 6.1 供应链事件时间线重建 (Supply Chain Incident Timeline Reconstruction)
+## 6.1 供应链事件时间线重建 (Supply Chain Incident Timeline Reconstruction)
 
 ```mermaid
 graph LR
@@ -752,7 +752,7 @@ graph LR
     S6 --> C4
 ```
 
-#<!-- chunk: 6.2 完整事件调查脚本 (Complete Incident Investigation Script) -->## 6.2 完整事件调查脚本 (Complete Incident Investigation Script)
+## 6.2 完整事件调查脚本 (Complete Incident Investigation Script)
 
 ```bash
 #!/bin/bash
@@ -935,7 +935,7 @@ ls -la "$OUTPUT_DIR/"
 
 <!-- chunk: 7. 自托管 Rekor 部署 (Self-Hosted Rekor Deployment) -->## 7. 自托管 Rekor 部署 (Self-Hosted Rekor Deployment)
 
-#<!-- chunk: 7.1 [[Kubernetes|Kubernetes]] 部署配置 (Kubernetes Deployment Configuration) -->## 7.1 Kubernetes 部署配置 (Kubernetes Deployment Configuration)
+## 7.1 Kubernetes 部署配置 (Kubernetes Deployment Configuration)
 
 ```yaml
 # rekor-deployment.yaml
@@ -1081,7 +1081,10 @@ spec:
                   number: 80
 ```
 
-#<!-- chunk: 7.2 Trillian 日志树初始化 (Trillian Log Tree Initialization) -->## 7.2 Trillian 日志树初始化 (Trillian Log Tree Initialization)
+## 7.2 Trillian 日志树初始化 (Trillian Log Tree Initialization)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 Trillian 日志树
@@ -1115,7 +1118,10 @@ kubectl run trillian-verify \
     get_latest_signed_log_root
 ```
 
-#<!-- chunk: 7.3 Rekor 签名密钥管理 (Rekor Signing Key Management) -->## 7.3 Rekor 签名密钥管理 (Rekor Signing Key Management)
+## 7.3 Rekor 签名密钥管理 (Rekor Signing Key Management)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 生成 Rekor 签名密钥（用于签名树根哈希）
@@ -1152,7 +1158,7 @@ cat rekor-public-key.pem
 
 <!-- chunk: 8. 透明日志监控与告警 (Transparency Log Monitoring and Alerting) -->## 8. 透明日志监控与告警 (Transparency Log Monitoring and Alerting)
 
-#<!-- chunk: 8.1 Rekor 监控配置 (Rekor Monitoring Configuration) -->## 8.1 Rekor 监控配置 (Rekor Monitoring Configuration)
+## 8.1 Rekor 监控配置 (Rekor Monitoring Configuration)
 
 ```yaml
 # prometheus-rekor-rules.yaml
@@ -1212,7 +1218,7 @@ spec:
             description: "API 错误率超过 5%"
 ```
 
-#<!-- chunk: 8.2 透明日志一致性监控 (Transparency Log Consistency Monitoring) -->## 8.2 透明日志一致性监控 (Transparency Log Consistency Monitoring)
+## 8.2 透明日志一致性监控 (Transparency Log Consistency Monitoring)
 
 ```python
 #!/usr/bin/env python3
@@ -1378,7 +1384,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 9. 日志条目类型高级应用 (Advanced Log Entry Type Applications) -->## 9. 日志条目类型高级应用 (Advanced Log Entry Type Applications)
 
-#<!-- chunk: 9.1 DSSE 签名信封 (DSSE - Dead Simple Signing Envelope) -->## 9.1 DSSE 签名信封 (DSSE - Dead Simple Signing Envelope)
+## 9.1 DSSE 签名信封 (DSSE - Dead Simple Signing Envelope)
 
 ```bash
 # DSSE 是 in-toto 推荐的签名信封格式
@@ -1420,7 +1426,10 @@ rekor-cli upload \
   --pki-format x509
 ```
 
-#<!-- chunk: 9.2 Helm Chart 签名 (Helm Chart Signing) -->## 9.2 Helm Chart 签名 (Helm Chart Signing)
+## 9.2 Helm Chart 签名 (Helm Chart Signing)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 对 Helm Chart 进行签名（使用 Rekor 记录）
@@ -1462,7 +1471,7 @@ cosign verify \
 
 <!-- chunk: 10. 企业级透明日志架构 (Enterprise Transparency Log Architecture) -->## 10. 企业级透明日志架构 (Enterprise Transparency Log Architecture)
 
-#<!-- chunk: 10.1 高可用 Rekor 部署 (High-Availability Rekor Deployment) -->## 10.1 高可用 Rekor 部署 (High-Availability Rekor Deployment)
+## 10.1 高可用 Rekor 部署 (High-Availability Rekor Deployment)
 
 ```mermaid
 graph TB
@@ -1514,7 +1523,7 @@ graph TB
     R3 --> RD1
 ```
 
-#<!-- chunk: 10.2 跨区域 Rekor 联邦 (Cross-Region Rekor Federation) -->## 10.2 跨区域 Rekor 联邦 (Cross-Region Rekor Federation)
+## 10.2 跨区域 Rekor 联邦 (Cross-Region Rekor Federation)
 
 ```yaml
 # rekor-federation-config.yaml
@@ -1567,7 +1576,10 @@ data:
 
 <!-- chunk: 11. 安全事件响应 (Security Incident Response) -->## 11. 安全事件响应 (Security Incident Response)
 
-#<!-- chunk: 11.1 签名密钥泄露响应 (Signing Key Compromise Response) -->## 11.1 签名密钥泄露响应 (Signing Key Compromise Response)
+## 11.1 签名密钥泄露响应 (Signing Key Compromise Response)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 #!/bin/bash
@@ -1667,7 +1679,7 @@ echo "下一步: 通知安全团队并完成合规报告"
 
 <!-- chunk: 12. 参考资料 (References) -->## 12. 参考资料 (References)
 
-#<!-- chunk: 12.1 关键规范文档 -->## 12.1 关键规范文档
+## 12.1 关键规范文档
 
 | 文档 | URL |
 |------|-----|
@@ -1677,7 +1689,7 @@ echo "下一步: 通知安全团队并完成合规报告"
 | in-toto 规范 | https://github.com/in-toto/in-toto |
 | Trillian 设计 | https://github.com/google/trillian |
 
-#<!-- chunk: 12.2 相关工具 -->## 12.2 相关工具
+## 12.2 相关工具
 
 ```bash
 # 安装完整工具集
@@ -1725,8 +1737,8 @@ Fulcio 和 Rekor 共同构成了 Sigstore 无密钥签名的信任基础：
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 39: 供应链安全 (Supply Chain Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-39 供应链安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 供应链安全 (Supply Chain Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
 - 供应链安全概述 (Supply Chain Security Overview)
 - 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 - SBOM 生成与管理 (SBOM Generation and Management)
@@ -1744,4 +1756,4 @@ Fulcio 和 Rekor 共同构成了 Sigstore 无密钥签名的信任基础：
 - 09-policy-controller-verification
 - 10-compliance-automation-audit
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

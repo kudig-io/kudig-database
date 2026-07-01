@@ -121,7 +121,7 @@ k8s_versions:
 
 <!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-#<!-- chunk: 1.1 市场规模与趋势 -->## 1.1 市场规模与趋势
+## 1.1 市场规模与趋势
 
 DTC（Direct-to-Consumer）品牌绕过中间商直接面向消费者，通过自有渠道（官网/小程序/门店）建立品牌关系。全球 DTC 市场规模预计从 2024 年的 5000 亿美元增长到 2030 年的 2 万亿美元。中国新零售 DTC 市场由完美日记、三顿半、泡泡玛特、SHEIN 等品牌引领，核心趋势包括私域运营、CDP 客户数据平台、C2M 反向定制和柔性供应链。
 
@@ -133,7 +133,7 @@ DTC（Direct-to-Consumer）品牌绕过中间商直接面向消费者，通过�
 | C2M 定制占比 | 5% | 15% | 35% |
 | 订阅制零售占比 | 3% | 8% | 20% |
 
-#<!-- chunk: 1.2 行业痛点 -->## 1.2 行业痛点
+## 1.2 行业痛点
 
 | 痛点 | 说明 | 数字化转型驱动 |
 |:---|:---|:---|
@@ -143,7 +143,7 @@ DTC（Direct-to-Consumer）品牌绕过中间商直接面向消费者，通过�
 | 内容营销 | 品牌故事/UGC/KOL 内容管理 | 内容中台 + AIGC |
 | 订阅模式 | 周期性配送服务管理复杂 | 订阅引擎 + 智能履约 |
 
-#<!-- chunk: 1.3 数字化转型架构影响 -->## 1.3 数字化转型架构影响
+## 1.3 数字化转型架构影响
 
 DTC 架构需要覆盖消费者触点（官网/小程序/社交/门店/订阅）、中台层（商品/库存/订单/会员CDP/内容/营销自动化）、供应链（C2M定制/柔性工厂/仓储网络）和数据分析层。核心挑战是全渠道数据统一和实时个性化体验。
 
@@ -151,23 +151,23 @@ DTC 架构需要覆盖消费者触点（官网/小程序/社交/门店/订阅）
 
 <!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-#<!-- chunk: 2.1 品牌独立站商城 -->## 2.1 品牌独立站商城
+## 2.1 品牌独立站商城
 
 建设品牌自有官网商城，支持商品展示、购物车、支付、订单跟踪全流程。需要与 Shopify/WooCommerce 等平台差异化，提供更深度的品牌定制能力和数据自主权。性能目标 P99 < 1s，大促期间支持 10 倍流量峰值。
 
-#<!-- chunk: 2.2 私域 CDP 客户数据平台 -->## 2.2 私域 CDP 客户数据平台
+## 2.2 私域 CDP 客户数据平台
 
 汇聚全渠道用户数据（官网浏览/小程序行为/门店消费/社交互动），构建统一用户画像。支持人群圈选、个性化推荐、营销自动化和效果归因。CDP 是 DTC 品牌的核心数据资产。
 
-#<!-- chunk: 2.3 会员订阅服务 -->## 2.3 会员订阅服务
+## 2.3 会员订阅服务
 
 周期性商品订阅（如咖啡/美妆/零食订阅盒子），支持灵活的订阅计划管理（月度/季度/年度）、自动续费、暂停恢复、地址变更和赠礼功能。订阅引擎需要精确的配送日期计算和库存预留。
 
-#<!-- chunk: 2.4 智慧门店数字化 -->## 2.4 智慧门店数字化
+## 2.4 智慧门店数字化
 
 线下门店的数字化升级，包括智能导购（导购 APP + 顾客画像）、扫码购、电子价签、智能试衣间和门店 O2O（线上下单门店自提/配送）。门店库存与线上库存实时同步。
 
-#<!-- chunk: 2.5 C2M 柔性供应链 -->## 2.5 C2M 柔性供应链
+## 2.5 C2M 柔性供应链
 
 基于消费者需求数据驱动产品开发和生产。通过预售/众筹模式测试市场反应，根据实际订单安排生产，减少库存积压。柔性工厂支持小批量多品种快速切换。
 
@@ -175,7 +175,7 @@ DTC 架构需要覆盖消费者触点（官网/小程序/社交/门店/订阅）
 
 <!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-#<!-- chunk: 3.1 DTC 品牌全景架构 -->## 3.1 DTC 品牌全景架构
+## 3.1 DTC 品牌全景架构
 
 ```mermaid
 graph TB
@@ -253,7 +253,7 @@ graph TB
 
 <!-- chunk: 5. Kubernetes 部署方案 -->## 5. Kubernetes 部署方案
 
-#<!-- chunk: 5.1 DTC 官网 Deployment -->## 5.1 DTC 官网 Deployment
+## 5.1 DTC 官网 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -323,7 +323,7 @@ spec:
             periodSeconds: 10
 ```
 
-#<!-- chunk: 5.2 订阅引擎 Deployment -->## 5.2 订阅引擎 Deployment
+## 5.2 订阅引擎 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -362,7 +362,7 @@ spec:
               cpu: "2000m"
 ```
 
-#<!-- chunk: 5.3 ConfigMap, Service 与 Secret -->## 5.3 ConfigMap, Service 与 Secret
+## 5.3 ConfigMap, Service 与 Secret
 
 ```yaml
 apiVersion: v1
@@ -423,7 +423,7 @@ stringData:
 
 <!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-#<!-- chunk: 6.1 用户旅程数据闭环 -->## 6.1 用户旅程数据闭环
+## 6.1 用户旅程数据闭环
 
 ```mermaid
 flowchart LR
@@ -441,7 +441,7 @@ flowchart LR
     J --> F
 ```
 
-#<!-- chunk: 6.2 数据流说明 -->## 6.2 数据流说明
+## 6.2 数据流说明
 
 - **行为数据流**: 用户在官网/小程序的行为数据实时采集至 CDP，构建实时画像
 - **订单数据流**: 全渠道订单统一进入 OMS，驱动库存扣减和物流发货
@@ -452,7 +452,7 @@ flowchart LR
 
 <!-- chunk: 7. AI/ML 组件 -->## 7. AI/ML 组件
 
-#<!-- chunk: 7.1 核心模型 -->## 7.1 核心模型
+## 7.1 核心模型
 
 | 模型 | 用途 | 输入 | 输出 | 框架 |
 |:---|:---|:---|:---|---|
@@ -467,7 +467,7 @@ flowchart LR
 
 <!-- chunk: 8. 安全与合规 -->## 8. 安全与合规
 
-#<!-- chunk: 8.1 行业法规与标准 -->## 8.1 行业法规与标准
+## 8.1 行业法规与标准
 
 | 法规/标准 | 适用范围 | 架构要求 |
 |:---|:---|:---|
@@ -478,7 +478,7 @@ flowchart LR
 | 广告法 | 营销内容合规 | 内容审核系统 |
 | 跨境电商法规 | 跨境 DTC 合规 | 数据本地化 + 海关合规 |
 
-#<!-- chunk: 8.2 安全架构要点 -->## 8.2 安全架构要点
+## 8.2 安全架构要点
 
 - **数据自主**: 用户数据存储在自有数据库，不依赖第三方平台
 - **支付安全**: 支付信息通过令牌化处理，PCI-DSS 合规
@@ -529,17 +529,17 @@ flowchart LR
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

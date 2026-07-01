@@ -184,6 +184,9 @@ PVC 创建 ──▶ 等待 Pod 调度 ──▶ 根据 Pod 节点选择存储 �
 | PVC 扩容（`allowVolumeExpansion`） | ✅ 部分生效 — 仅 `allowVolumeExpansion` 字段被检查 |
 | 删除 PVC 后重建 | ✅ 生效 — 重新走动态供给流程 |
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 验证：修改 SC 参数后已有 PV 不受影响
 kubectl patch sc fast-ssd -p '{"parameters":{"performanceLevel":"PL3"}}'
@@ -431,6 +434,9 @@ allowedTopologies:
 ## 6. 默认 StorageClass 管理
 
 ### 6.1 设置默认 StorageClass
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 查看当前默认
@@ -1477,6 +1483,9 @@ provisioning_monitoring:
 
 ### 运维自动化脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 #!/bin/bash
 # storage-operations-automation.sh
@@ -1564,6 +1573,9 @@ volumeBindingMode: WaitForFirstConsumer
 allowVolumeExpansion: true
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # vSphere CSI 部署
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/vsphere-csi-driver/master/manifests/vanilla/deploy/vsphere-csi-driver.yaml
@@ -1589,6 +1601,9 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 allowVolumeExpansion: true
 ```
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # DigitalOcean CSI 部署
@@ -1698,7 +1713,7 @@ kubectl get pods -n kube-system -l app=ibm-vpc-block-csi-driver
 ## Obsidian 相关文档
 
 - domain-04-storage-data KUDIG Database — Global MOC
-- [[domain-04-storage-data/README|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
+- [[domain-04-storage-data/README.md|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
 - Domain-6 存储 — 开源项目索引
 - 存储架构概览与核心组件
 - PV/PVC 核心概念与企业级实践
@@ -1716,8 +1731,8 @@ kubectl get pods -n kube-system -l app=ibm-vpc-block-csi-driver
 - PV/PVC 核心概念
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-04-storage-data
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
 
 ## See Also
 
@@ -1725,3 +1740,5 @@ kubectl get pods -n kube-system -l app=ibm-vpc-block-csi-driver
 - 03-pvc-patterns-practices
 - 05-csi-drivers-integration
 - 06-storage-fundamental-concepts
+
+```

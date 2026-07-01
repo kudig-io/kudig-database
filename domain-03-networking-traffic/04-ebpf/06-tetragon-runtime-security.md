@@ -117,7 +117,7 @@ k8s_versions:
 
 <!-- chunk: 1. Tetragon 概述与 CNCF Sandbox -->## 1. Tetragon 概述与 CNCF Sandbox
 
-#<!-- chunk: 1.1 什么是 Tetragon (What is Tetragon) -->## 1.1 什么是 Tetragon (What is Tetragon)
+## 1.1 什么是 Tetragon (What is Tetragon)
 
 Tetragon 是由 Isovalent（Cilium 母公司）开源的基于 eBPF 的**运行时安全与可观测性**项目，于 2022 年捐赠给 CNCF 并进入 Sandbox 阶段。
 
@@ -140,7 +140,7 @@ timeline
             : 持续演进
 ```
 
-#<!-- chunk: 1.2 核心能力概览 (Core Capabilities) -->## 1.2 核心能力概览 (Core Capabilities)
+## 1.2 核心能力概览 (Core Capabilities)
 
 ```mermaid
 mindmap
@@ -172,7 +172,7 @@ mindmap
       内核级执行
 ```
 
-#<!-- chunk: 1.3 为什么选择 Tetragon (Why Tetragon) -->## 1.3 为什么选择 Tetragon (Why Tetragon)
+## 1.3 为什么选择 Tetragon (Why Tetragon)
 
 | 维度 | 传统方案（auditd/seccomp） | Agent 方案（Falco） | Tetragon (eBPF) |
 |------|--------------------------|--------------------|--------------------|
@@ -189,7 +189,7 @@ mindmap
 
 <!-- chunk: 2. eBPF 运行时安全原理 -->## 2. eBPF 运行时安全原理
 
-#<!-- chunk: 2.1 为什么 eBPF 适合运行时安全 (Why eBPF for Runtime Security) -->## 2.1 为什么 eBPF 适合运行时安全 (Why eBPF for Runtime Security)
+## 2.1 为什么 eBPF 适合运行时安全 (Why eBPF for Runtime Security)
 
 ```mermaid
 graph TB
@@ -246,7 +246,7 @@ graph TB
     style PRIV_MON fill:#4caf50
 ```
 
-#<!-- chunk: 2.2 eBPF 程序执行流程 (eBPF Execution Flow) -->## 2.2 eBPF 程序执行流程 (eBPF Execution Flow)
+## 2.2 eBPF 程序执行流程 (eBPF Execution Flow)
 
 ```mermaid
 sequenceDiagram
@@ -277,7 +277,7 @@ sequenceDiagram
     DAEMON->>外部: 输出日志/告警
 ```
 
-#<!-- chunk: 2.3 eBPF 安全检测的关键内核钩子点 -->## 2.3 eBPF 安全检测的关键内核钩子点
+## 2.3 eBPF 安全检测的关键内核钩子点
 
 ```mermaid
 graph TB
@@ -320,7 +320,7 @@ graph TB
 
 <!-- chunk: 3. Tetragon 架构组件 -->## 3. Tetragon 架构组件
 
-#<!-- chunk: 3.1 整体架构图 (Overall Architecture) -->## 3.1 整体架构图 (Overall Architecture)
+## 3.1 整体架构图 (Overall Architecture)
 
 ```mermaid
 graph TB
@@ -372,9 +372,9 @@ graph TB
     style LSM_PROG fill:#f44336
 ```
 
-#<!-- chunk: 3.2 组件详解 (Component Details) -->## 3.2 组件详解 (Component Details)
+## 3.2 组件详解 (Component Details)
 
-##<!-- chunk: Tetragon Daemon -->## Tetragon Daemon
+## Tetragon Daemon
 
 ```mermaid
 graph LR
@@ -409,7 +409,7 @@ graph LR
     end
 ```
 
-#<!-- chunk: 3.3 Tetragon 数据模型 (Data Model) -->## 3.3 Tetragon 数据模型 (Data Model)
+## 3.3 Tetragon 数据模型 (Data Model)
 
 每个 Tetragon 事件包含丰富的上下文信息：
 
@@ -464,7 +464,7 @@ graph LR
 
 <!-- chunk: 4. TracingPolicy CRD 详解 -->## 4. TracingPolicy CRD 详解
 
-#<!-- chunk: 4.1 TracingPolicy 结构概览 (Structure Overview) -->## 4.1 TracingPolicy 结构概览 (Structure Overview)
+## 4.1 TracingPolicy 结构概览 (Structure Overview)
 
 ```mermaid
 graph TB
@@ -506,7 +506,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 4.2 进程执行监控 (Process Execution Monitoring - kprobe: sys_execve) -->## 4.2 进程执行监控 (Process Execution Monitoring - kprobe: sys_execve)
+## 4.2 进程执行监控 (Process Execution Monitoring - kprobe: sys_execve)
 
 ```yaml
 # TracingPolicy: 检测可疑进程执行
@@ -609,7 +609,7 @@ spec:
       - action: Post
 ```
 
-#<!-- chunk: 4.3 文件访问监控 (File Access Monitoring - kprobe: security_file_open) -->## 4.3 文件访问监控 (File Access Monitoring - kprobe: security_file_open)
+## 4.3 文件访问监控 (File Access Monitoring - kprobe: security_file_open)
 
 ```yaml
 # TracingPolicy: 敏感文件访问监控
@@ -700,7 +700,7 @@ spec:
       - action: Post
 ```
 
-#<!-- chunk: 4.4 网络连接监控 (Network Monitoring - kprobe: tcp_connect) -->## 4.4 网络连接监控 (Network Monitoring - kprobe: tcp_connect)
+## 4.4 网络连接监控 (Network Monitoring - kprobe: tcp_connect)
 
 ```yaml
 # TracingPolicy: 网络连接监控
@@ -789,7 +789,7 @@ spec:
       - action: Post  # 记录所有 DNS 请求到非集群 DNS
 ```
 
-#<!-- chunk: 4.5 特权操作监控 (Privileged Operation Monitoring) -->## 4.5 特权操作监控 (Privileged Operation Monitoring)
+## 4.5 特权操作监控 (Privileged Operation Monitoring)
 
 ```yaml
 # TracingPolicy: 特权操作监控
@@ -892,7 +892,7 @@ spec:
         argSig: 9
 ```
 
-#<!-- chunk: 4.6 TracingPolicy 高级选择器 (Advanced Selectors) -->## 4.6 TracingPolicy 高级选择器 (Advanced Selectors)
+## 4.6 TracingPolicy 高级选择器 (Advanced Selectors)
 
 ```yaml
 # TracingPolicy: 组合多种选择器的复杂策略
@@ -974,7 +974,7 @@ spec:
 
 <!-- chunk: 5. 策略动作：Log, Signal, Override -->## 5. 策略动作：Log, Signal, Override
 
-#<!-- chunk: 5.1 动作类型详解 (Action Types) -->## 5.1 动作类型详解 (Action Types)
+## 5.1 动作类型详解 (Action Types)
 
 ```mermaid
 graph TB
@@ -1002,7 +1002,7 @@ graph TB
     style OVERRIDE fill:#ff9800
 ```
 
-#<!-- chunk: 5.2 Signal 动作配置详解 -->## 5.2 Signal 动作配置详解
+## 5.2 Signal 动作配置详解
 
 ```yaml
 # Signal 动作 - 终止可疑进程
@@ -1053,7 +1053,7 @@ spec:
       - action: Post
 ```
 
-#<!-- chunk: 5.3 Override 动作配置详解 -->## 5.3 Override 动作配置详解
+## 5.3 Override 动作配置详解
 
 ```yaml
 # Override 动作 - 覆盖系统调用返回值（返回错误码）
@@ -1099,7 +1099,7 @@ spec:
       - action: Post
 ```
 
-#<!-- chunk: 5.4 限速与聚合配置 -->## 5.4 限速与聚合配置
+## 5.4 限速与聚合配置
 
 ```yaml
 # Post 动作限速配置
@@ -1136,7 +1136,7 @@ spec:
 
 <!-- chunk: 6. 与 Falco 对比 -->## 6. 与 Falco 对比
 
-#<!-- chunk: 6.1 架构对比 (Architecture Comparison) -->## 6.1 架构对比 (Architecture Comparison)
+## 6.1 架构对比 (Architecture Comparison)
 
 ```mermaid
 graph TB
@@ -1183,7 +1183,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 6.2 详细特性对比矩阵 (Feature Comparison Matrix) -->## 6.2 详细特性对比矩阵 (Feature Comparison Matrix)
+## 6.2 详细特性对比矩阵 (Feature Comparison Matrix)
 
 | 特性维度 | Tetragon | Falco | 说明 |
 |---------|----------|-------|------|
@@ -1204,7 +1204,7 @@ graph TB
 | **企业支持** | Isovalent | Sysdig | 各有支持 |
 | **Audit 合规** | ✅ 内置 | ✅ 内置 | 均支持 |
 
-#<!-- chunk: 6.3 规则语言对比示例 -->## 6.3 规则语言对比示例
+## 6.3 规则语言对比示例
 
 ```yaml
 # === Falco 规则示例 ===
@@ -1261,7 +1261,7 @@ spec:
       #   argSig: 9
 ```
 
-#<!-- chunk: 6.4 场景选择建议 -->## 6.4 场景选择建议
+## 6.4 场景选择建议
 
 ```mermaid
 flowchart TD
@@ -1286,7 +1286,7 @@ flowchart TD
 
 <!-- chunk: 7. 容器逃逸检测 -->## 7. 容器逃逸检测
 
-#<!-- chunk: 7.1 容器逃逸攻击面分析 (Container Escape Attack Surface) -->## 7.1 容器逃逸攻击面分析 (Container Escape Attack Surface)
+## 7.1 容器逃逸攻击面分析 (Container Escape Attack Surface)
 
 ```mermaid
 graph TB
@@ -1329,7 +1329,7 @@ graph TB
     style CONTAINER fill:#ff9800,color:#fff
 ```
 
-#<!-- chunk: 7.2 Tetragon 检测各类逃逸的策略 -->## 7.2 Tetragon 检测各类逃逸的策略
+## 7.2 Tetragon 检测各类逃逸的策略
 
 ```yaml
 # TracingPolicy: 全面容器逃逸检测策略集
@@ -1490,7 +1490,7 @@ spec:
         argSig: 9
 ```
 
-#<!-- chunk: 7.3 容器逃逸检测事件示例 -->## 7.3 容器逃逸检测事件示例
+## 7.3 容器逃逸检测事件示例
 
 当检测到逃逸尝试时，Tetragon 输出如下结构化事件：
 
@@ -1538,7 +1538,7 @@ spec:
 
 <!-- chunk: 8. Kubernetes 集成与 Helm 部署 -->## 8. Kubernetes 集成与 Helm 部署
 
-#<!-- chunk: 8.1 系统要求 (System Requirements) -->## 8.1 系统要求 (System Requirements)
+## 8.1 系统要求 (System Requirements)
 
 ```mermaid
 graph TB
@@ -1563,7 +1563,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 8.2 Helm 部署配置 (Helm Deployment) -->## 8.2 Helm 部署配置 (Helm Deployment)
+## 8.2 Helm 部署配置 (Helm Deployment)
 
 ```yaml
 # tetragon-values.yaml - 生产环境配置
@@ -1666,6 +1666,11 @@ affinity:
           - linux
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 安装 Tetragon
 helm repo add cilium https://helm.cilium.io/
@@ -1694,7 +1699,10 @@ curl -L https://github.com/cilium/tetragon/releases/download/v1.1.0/tetra-linux-
 chmod +x tetra && sudo mv tetra /usr/local/bin/
 ```
 
-#<!-- chunk: 8.3 内置 TracingPolicy 库 (Built-in Policy Library) -->## 8.3 内置 TracingPolicy 库 (Built-in Policy Library)
+## 8.3 内置 TracingPolicy 库 (Built-in Policy Library)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # Tetragon 提供的内置策略示例（从 GitHub 安装）
@@ -1722,7 +1730,7 @@ kubectl get tracingpolicies.cilium.io
 tetra tracingpolicy list
 ```
 
-#<!-- chunk: 8.4 RBAC 配置 -->## 8.4 RBAC 配置
+## 8.4 RBAC 配置
 
 ```yaml
 # Tetragon 所需的 RBAC 权限
@@ -1762,10 +1770,6 @@ rules:
 # 安全策略（限制 Tetragon 自身权限）
 apiVersion: policy/v1beta1
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 kind: PodSecurityPolicy
 metadata:
   name: tetragon-psp
@@ -1798,7 +1802,7 @@ spec:
 
 <!-- chunk: 9. 告警与 SIEM 集成 -->## 9. 告警与 SIEM 集成
 
-#<!-- chunk: 9.1 Tetragon 事件导出架构 (Event Export Architecture) -->## 9.1 Tetragon 事件导出架构 (Event Export Architecture)
+## 9.1 Tetragon 事件导出架构 (Event Export Architecture)
 
 ```mermaid
 graph TB
@@ -1854,7 +1858,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 9.2 Fluent Bit 集成配置 -->## 9.2 Fluent Bit 集成配置
+## 9.2 Fluent Bit 集成配置
 
 ```yaml
 # Fluent Bit ConfigMap - 采集 Tetragon 日志
@@ -1931,7 +1935,7 @@ data:
         Decode_Field_As  escaped_utf8  process_exec.process.arguments
 ```
 
-#<!-- chunk: 9.3 Elasticsearch 索引与告警规则 -->## 9.3 Elasticsearch 索引与告警规则
+## 9.3 Elasticsearch 索引与告警规则
 
 ```json
 // Elasticsearch Index Template - Tetragon 事件
@@ -2005,7 +2009,7 @@ PUT _index_template/tetragon
 }
 ```
 
-#<!-- chunk: 9.4 Prometheus 告警规则 -->## 9.4 Prometheus 告警规则
+## 9.4 Prometheus 告警规则
 
 ```yaml
 # PrometheusRule - Tetragon 安全事件告警
@@ -2073,7 +2077,7 @@ spec:
         description: "节点 {{ $labels.instance }} 上的 Tetragon Agent 已离线"
 ```
 
-#<!-- chunk: 9.5 tetra CLI 实时监控 -->## 9.5 tetra CLI 实时监控
+## 9.5 tetra CLI 实时监控
 
 ```bash
 #!/bin/bash
@@ -2115,7 +2119,7 @@ tetra getevents --follow | jq '{
 
 <!-- chunk: 10. 企业级安全运营实践 -->## 10. 企业级安全运营实践
 
-#<!-- chunk: 10.1 安全运营框架 (Security Operations Framework) -->## 10.1 安全运营框架 (Security Operations Framework)
+## 10.1 安全运营框架 (Security Operations Framework)
 
 ```mermaid
 graph TB
@@ -2158,7 +2162,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 10.2 策略分级体系 (Policy Tier System) -->## 10.2 策略分级体系 (Policy Tier System)
+## 10.2 策略分级体系 (Policy Tier System)
 
 ```yaml
 # 策略分级 - P0: 立即阻断（高置信度威胁）
@@ -2250,7 +2254,7 @@ spec:
         rateLimit: "60s"
 ```
 
-#<!-- chunk: 10.3 GitOps 驱动的策略管理 (GitOps Policy Management) -->## 10.3 GitOps 驱动的策略管理 (GitOps Policy Management)
+## 10.3 GitOps 驱动的策略管理 (GitOps Policy Management)
 
 ```yaml
 # ArgoCD Application - TracingPolicy GitOps 管理
@@ -2311,7 +2315,7 @@ security-policies/
 │   └── README.md
 ```
 
-#<!-- chunk: 10.4 MITRE ATT&CK 映射 (MITRE ATT&CK Mapping) -->## 10.4 MITRE ATT&CK 映射 (MITRE ATT&CK Mapping)
+## 10.4 MITRE ATT&CK 映射 (MITRE ATT&CK Mapping)
 
 | ATT&CK 技战术 | ATT&CK 技术 | Tetragon 检测 | 覆盖级别 |
 |-------------|------------|--------------|---------|
@@ -2330,7 +2334,7 @@ security-policies/
 | **命令控制 (C2)** | T1571 - 非标准端口 | tcp_connect 异常端口监控 | ✅ 中 |
 | **影响 (Impact)** | T1485 - 数据销毁 | vfs_write 关键路径监控 | ✅ 中 |
 
-#<!-- chunk: 10.5 合规性与审计 (Compliance & Audit) -->## 10.5 合规性与审计 (Compliance & Audit)
+## 10.5 合规性与审计 (Compliance & Audit)
 
 ```yaml
 # TracingPolicy: CIS Kubernetes Benchmark 合规审计
@@ -2392,7 +2396,7 @@ spec:
       - action: Post  # 审计所有数据库文件访问
 ```
 
-#<!-- chunk: 10.6 安全事件响应剧本 (Incident Response Playbook) -->## 10.6 安全事件响应剧本 (Incident Response Playbook)
+## 10.6 安全事件响应剧本 (Incident Response Playbook)
 
 ```mermaid
 flowchart TD
@@ -2430,6 +2434,10 @@ flowchart TD
     style P1_RESP fill:#fff3e0
     style P2_RESP fill:#e8f5e9
 ```
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -2492,7 +2500,7 @@ echo "取证数据保存在 Secret: security-forensics/incident-evidence-${POD_N
 echo "等待安全团队接管..."
 ```
 
-#<!-- chunk: 10.7 性能调优最佳实践 (Performance Tuning) -->## 10.7 性能调优最佳实践 (Performance Tuning)
+## 10.7 性能调优最佳实践 (Performance Tuning)
 
 ```yaml
 # 生产环境 Tetragon 性能优化配置
@@ -2556,7 +2564,7 @@ spec:
         ratelimitScope: "process"
 ```
 
-#<!-- chunk: 10.8 多集群安全运营 (Multi-Cluster Security Operations) -->## 10.8 多集群安全运营 (Multi-Cluster Security Operations)
+## 10.8 多集群安全运营 (Multi-Cluster Security Operations)
 
 ```mermaid
 graph TB
@@ -2764,7 +2772,7 @@ tetra getevents --follow | \
 
 <!-- chunk: 附录 C：常见问题与排查 (FAQ & Troubleshooting) -->## 附录 C：常见问题与排查 (FAQ & Troubleshooting)
 
-#<!-- chunk: Q1: Tetragon 策略加载失败 -->## Q1: Tetragon 策略加载失败
+## Q1: Tetragon 策略加载失败
 
 ```bash
 # 检查策略加载状态
@@ -2776,7 +2784,7 @@ ls /sys/kernel/btf/vmlinux
 bpftool btf dump id 1 | head -5
 ```
 
-#<!-- chunk: Q2: 大量误报如何减少 -->## Q2: 大量误报如何减少
+## Q2: 大量误报如何减少
 
 ```bash
 # 分析误报来源
@@ -2789,7 +2797,10 @@ tetra getevents --follow | \
 # matchBinaries operator: NotIn 排除已知合法二进制
 ```
 
-#<!-- chunk: Q3: 性能问题排查 -->## Q3: 性能问题排查
+## Q3: 性能问题排查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查事件丢失率
@@ -2810,7 +2821,7 @@ kubectl exec -n kube-system daemonset/tetragon -- \
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-35-ebpf-technology MOC
-- [[domain-03-networking-traffic/README|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
+- [[domain-03-networking-traffic/README.md|Domain 03: eBPF 技术体系 (eBPF Technology Stack)]]
 - Domain-35 eBPF 技术 — 开源项目索引
 - eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...
 - eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)

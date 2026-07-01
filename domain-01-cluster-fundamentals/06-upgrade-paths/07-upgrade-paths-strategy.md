@@ -62,7 +62,7 @@ created: "2026-05-23"
 
 # 07 - 升级路径与策略指南
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/tasks/administer-cluster/cluster-upgrade](https://kubernetes.io/releases/version-skew-policy/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/tasks/administer-cluster/cluster-upgrade](https://kubernetes.io/releases/version-skew-policy/)
 
 <!-- chunk: 版本支持策略 -->
 ## 版本支持策略
@@ -133,6 +133,10 @@ created: "2026-05-23"
 
 <!-- chunk: kubeadm升级步骤 -->
 ## kubeadm升级步骤
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 升级第一个控制平面节点
@@ -221,6 +225,9 @@ aliyun cs DescribeClusterDetail --ClusterId <cluster-id>
 | **节点升级失败** | 重建节点或降级 | 无数据丢失 | 根据节点数 |
 | **应用不兼容** | 回滚Deployment | 无 | 分钟级 |
 | **全集群问题** | 从备份恢复 | 恢复到备份点 | 1-2小时 |
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
 ```bash
 # etcd快照恢复
@@ -572,6 +579,9 @@ spec:
 
 #### 8.4.2 快速回滚脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 #!/bin/bash
 # Kubernetes快速回滚脚本
@@ -804,7 +814,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析
@@ -825,4 +835,6 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

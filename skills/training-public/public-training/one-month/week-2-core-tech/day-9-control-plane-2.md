@@ -42,7 +42,7 @@ created: "2026-05-23"
 ---
 id: LEARN-ONE-MONTH-W2-DAY9
 title: Day 9 - 控制平面 - Scheduler + Controller Manager
-topic: [[entities/kubernetes|kubernetes]]
+topic: [[entities/kubernetes.md|kubernetes]]
 type: hands-on-guide
 tags: [scheduler, controller-manager, affinity, taint, toleration, nodeelector, hands-on, week-2]
 last_updated: 2026-05-18
@@ -123,6 +123,9 @@ related:
 
 ### 任务 1: 调度过程观察 (45min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 创建 Pod 并观察调度事件
 kubectl run scheduler-test --image=nginx:alpine
@@ -139,6 +142,11 @@ kubectl delete pod scheduler-test
 ```
 
 ### 任务 2: nodeSelector 实践 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 查看节点标签
@@ -172,6 +180,10 @@ kubectl label node <node-name> disktype-
 ```
 
 ### 任务 3: Affinity 实践 (45min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # Node Affinity
@@ -249,6 +261,11 @@ kubectl delete -f pod-antiaffinity.yaml
 
 ### 任务 4: Taints 和 Tolerations (30min)
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 查看节点的 Taints
 kubectl describe nodes | grep Taints
@@ -286,6 +303,10 @@ kubectl taint nodes <node-name> dedicated-
 ```
 
 ### 任务 5: Controller 行为观察 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 创建 Deployment

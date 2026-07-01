@@ -85,7 +85,7 @@ related_topics:
    - 文件: `../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md`
 
 2. **[[Service|Service]] 综合排障**
-   - 文件: `../../[[domain-10-troubleshooting-diagnostics/10-service-comprehensive-troubleshooting|10-service-comprehensive-troubleshooting]].md`
+   - 文件: `../../[[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/10-service-comprehensive-troubleshooting.md|10-service-comprehensive-troubleshooting]].md`
 
 3. **网络 CNI 排障**
    - 文件: `../../domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md`
@@ -98,6 +98,9 @@ related_topics:
 ## 实践任务 (2.5h) - 构造 5 类问题并排查
 
 ### 问题 1: ImagePullBackOff (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 构造问题
@@ -121,6 +124,10 @@ kubectl run image-ok --image=nginx:alpine
 ```
 
 ### 问题 2: OOMKilled (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 构造问题
@@ -159,6 +166,10 @@ kubectl delete pod oom-test
 ```
 
 ### 问题 3: Service 访问不通 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 创建 Deployment 但故意设置错误的 label
@@ -200,6 +211,10 @@ kubectl get endpoints web
 
 ### 问题 4: PVC Pending (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 构造问题: 请求不存在的 StorageClass
 cat > pvc-error.yaml << 'EOF'
@@ -232,6 +247,10 @@ kubectl delete pvc pvc-error
 ```
 
 ### 问题 5: CrashLoopBackOff (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 构造问题: 启动命令错误

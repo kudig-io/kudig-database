@@ -93,7 +93,7 @@ tier: peripheral---
 - **[10-平台团队拓扑与运营](./10-platform-team-topology.md)** - Team Topologies、平台运营、支持模式
 
 ### 🌐 前端部署平台 (11)
-- **[11-Vercel前端部署平台](./[[domain-07-platform-engineering/build/11-vercel-frontend-deployment-platform|11-vercel-frontend-deployment-platform]].md)** - Vercel 平台深度指南，涵盖零配置部署、Serverless/Edge Functions、企业级安全与性能优化
+- **[11-Vercel前端部署平台](./[[domain-07-platform-engineering/build/11-vercel-frontend-deployment-platform.md|11-vercel-frontend-deployment-platform]].md)** - Vercel 平台深度指南，涵盖零配置部署、Serverless/Edge Functions、企业级安全与性能优化
 
 ## 🎯 学习路径建议
 

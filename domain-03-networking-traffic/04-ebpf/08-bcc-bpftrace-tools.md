@@ -68,7 +68,7 @@ created: "2026-05-23"
 3. [bpftrace 语言基础](#3-bpftrace-语言基础)
 4. [bpftrace 单行脚本示例](#4-bpftrace-单行脚本示例)
 5. [复杂 bpftrace 脚本开发](#5-复杂-bpftrace-脚本开发)
-6. [[entities/kubernetes|Kubernetes]] 环境中的 eBPF 性能分析](#6-kubernetes-环境中的-ebpf-性能分析)
+6. [[entities/kubernetes.md|Kubernetes]] 环境中的 eBPF 性能分析](#6-kubernetes-环境中的-ebpf-性能分析)
 7. [容器感知的 eBPF 工具](#7-容器感知的-ebpf-工具)
 8. [自定义 bcc/bpftrace 工具开发](#8-自定义-bccbpftrace-工具开发)
 9. [性能分析方法论 (USE/RED)](#9-性能分析方法论-usered)
@@ -78,7 +78,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. bcc 项目概述与安装 -->## 1. bcc 项目概述与安装
 
-#<!-- chunk: 1.1 bcc 生态系统全景 (bcc Ecosystem Overview) -->## 1.1 bcc 生态系统全景 (bcc Ecosystem Overview)
+## 1.1 bcc 生态系统全景 (bcc Ecosystem Overview)
 
 bcc (BPF Compiler Collection) 是一个基于 LLVM/Clang 的 eBPF 程序开发工具集，提供了 Python 和 C++ 绑定，以及大量预置的性能分析工具。
 
@@ -117,7 +117,7 @@ graph TB
     HOOKS <--> MAPS
 ```
 
-#<!-- chunk: 1.2 bcc vs bpftrace 对比 (bcc vs bpftrace) -->## 1.2 bcc vs bpftrace 对比 (bcc vs bpftrace)
+## 1.2 bcc vs bpftrace 对比 (bcc vs bpftrace)
 
 ```mermaid
 graph LR
@@ -139,7 +139,7 @@ graph LR
 | **CO-RE 支持** | 部分 | 是 (bpftrace 0.16+) |
 | **依赖** | LLVM/Clang 运行时 | 无额外依赖 (BTF 模式) |
 
-#<!-- chunk: 1.3 安装 bcc (Installing bcc) -->## 1.3 安装 bcc (Installing bcc)
+## 1.3 安装 bcc (Installing bcc)
 
 **Ubuntu/Debian:**
 
@@ -213,7 +213,7 @@ docker run --rm -it \
 # (详见第6章)
 ```
 
-#<!-- chunk: 1.4 安装 bpftrace (Installing bpftrace) -->## 1.4 安装 bpftrace (Installing bpftrace)
+## 1.4 安装 bpftrace (Installing bpftrace)
 
 ```bash
 # Ubuntu 20.04+
@@ -246,7 +246,7 @@ bpftrace --version
 sudo bpftrace -l 'tracepoint:syscalls:*' | head -20
 ```
 
-#<!-- chunk: 1.5 环境验证 (Environment Verification) -->## 1.5 环境验证 (Environment Verification)
+## 1.5 环境验证 (Environment Verification)
 
 ```bash
 # 验证内核支持
@@ -273,7 +273,7 @@ sudo bpftool map list
 
 <!-- chunk: 2. bcc 常用工具详解 -->## 2. bcc 常用工具详解
 
-#<!-- chunk: 2.1 工具全景图 (Tools Overview) -->## 2.1 工具全景图 (Tools Overview)
+## 2.1 工具全景图 (Tools Overview)
 
 ```mermaid
 mindmap
@@ -312,9 +312,12 @@ mindmap
       sslsniff
 ```
 
-#<!-- chunk: 2.2 execsnoop - 进程执行追踪 -->## 2.2 execsnoop - 进程执行追踪
+## 2.2 execsnoop - 进程执行追踪
 
 execsnoop 追踪系统中所有新进程的创建，对于发现异常进程、调试应用启动问题极为有用。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 基本用法 - 追踪所有新进程
@@ -367,7 +370,7 @@ sudo execsnoop -t 2>/dev/null | \
   timeout 60 sort | uniq -c | sort -rn | head -10
 ```
 
-#<!-- chunk: 2.3 opensnoop - 文件打开追踪 -->## 2.3 opensnoop - 文件打开追踪
+## 2.3 opensnoop - 文件打开追踪
 
 ```bash
 # 追踪所有文件打开操作
@@ -414,7 +417,7 @@ sudo opensnoop -n nginx | grep -v "ENOENT"
 # 1234   nginx              5   0  /var/log/nginx/error.log
 ```
 
-#<!-- chunk: 2.4 tcpconnect / tcpaccept - TCP 连接追踪 -->## 2.4 tcpconnect / tcpaccept - TCP 连接追踪
+## 2.4 tcpconnect / tcpaccept - TCP 连接追踪
 
 ```bash
 # 追踪所有出站 TCP 连接
@@ -476,7 +479,7 @@ sudo tcpretrans 2>/dev/null | \
   sort | uniq -c | sort -rn
 ```
 
-#<!-- chunk: 2.5 biolatency - 块 I/O 延迟分析 -->## 2.5 biolatency - 块 I/O 延迟分析
+## 2.5 biolatency - 块 I/O 延迟分析
 
 biolatency 是分析磁盘 I/O 性能的利器，以直方图形式展示延迟分布。
 
@@ -541,7 +544,7 @@ sudo biotop  # 类似 top，按 I/O 排序
 # 1234   java             R 8   0    23    184     0.45
 ```
 
-#<!-- chunk: 2.6 funccount / funclatency - 函数调用分析 -->## 2.6 funccount / funclatency - 函数调用分析
+## 2.6 funccount / funclatency - 函数调用分析
 
 ```bash
 # 统计内核函数调用次数 (5秒)
@@ -581,7 +584,7 @@ sudo funclatency -l py:/* /usr/bin/python3 10
 sudo funclatency 'java:java.net.Socket:connect' 10
 ```
 
-#<!-- chunk: 2.7 其他重要工具 (Other Important Tools) -->## 2.7 其他重要工具 (Other Important Tools)
+## 2.7 其他重要工具 (Other Important Tools)
 
 **CPU 性能分析：**
 
@@ -645,7 +648,7 @@ sudo trace 'sys_read (args->count > 4096) "large read: %d", args->count'
 
 <!-- chunk: 3. bpftrace 语言基础 -->## 3. bpftrace 语言基础
 
-#<!-- chunk: 3.1 bpftrace 语言架构 (Language Architecture) -->## 3.1 bpftrace 语言架构 (Language Architecture)
+## 3.1 bpftrace 语言架构 (Language Architecture)
 
 ```mermaid
 graph TB
@@ -676,7 +679,7 @@ graph TB
     HEADER --> FILTER --> ACTION
 ```
 
-#<!-- chunk: 3.2 探针类型 (Probe Types) -->## 3.2 探针类型 (Probe Types)
+## 3.2 探针类型 (Probe Types)
 
 ```
 探针类型总览:
@@ -718,7 +721,7 @@ sudo bpftrace -l 'kprobe:tcp_*' | head -20
 sudo bpftrace -l 'uprobe:/usr/bin/python3:*' | head -10
 ```
 
-#<!-- chunk: 3.3 基础语法 (Basic Syntax) -->## 3.3 基础语法 (Basic Syntax)
+## 3.3 基础语法 (Basic Syntax)
 
 ```bpftrace
 // 单行注释
@@ -765,7 +768,7 @@ kretprobe:vfs_read
 }
 ```
 
-#<!-- chunk: 3.4 内置函数 (Built-in Functions) -->## 3.4 内置函数 (Built-in Functions)
+## 3.4 内置函数 (Built-in Functions)
 
 ```bpftrace
 // 字符串函数
@@ -813,7 +816,7 @@ if (cond) { } else { }
 unroll(N) { }      // 编译时展开循环
 ```
 
-#<!-- chunk: 3.5 Map 操作详解 (Map Operations) -->## 3.5 Map 操作详解 (Map Operations)
+## 3.5 Map 操作详解 (Map Operations)
 
 ```bpftrace
 // Map 声明 (自动创建)
@@ -854,7 +857,7 @@ END {
 
 <!-- chunk: 4. bpftrace 单行脚本示例 -->## 4. bpftrace 单行脚本示例
 
-#<!-- chunk: 4.1 系统调用分析 (Syscall Analysis) -->## 4.1 系统调用分析 (Syscall Analysis)
+## 4.1 系统调用分析 (Syscall Analysis)
 
 ```bash
 # 统计所有系统调用次数 (按进程名)
@@ -887,7 +890,7 @@ tracepoint:raw_syscalls:sys_enter
 { @[args->id] = count(); }'
 ```
 
-#<!-- chunk: 4.2 文件系统分析 (Filesystem Analysis) -->## 4.2 文件系统分析 (Filesystem Analysis)
+## 4.2 文件系统分析 (Filesystem Analysis)
 
 ```bash
 # 追踪所有文件打开 (类似 opensnoop)
@@ -925,7 +928,7 @@ tracepoint:syscalls:sys_enter_unlinkat
 { printf("%s deleted: %s\n", comm, str(args->pathname)); }'
 ```
 
-#<!-- chunk: 4.3 网络分析 (Network Analysis) -->## 4.3 网络分析 (Network Analysis)
+## 4.3 网络分析 (Network Analysis)
 
 ```bash
 # 追踪 TCP 连接建立
@@ -970,7 +973,7 @@ interval:s:1 {
 }'
 ```
 
-#<!-- chunk: 4.4 CPU 和调度分析 (CPU & Scheduling) -->## 4.4 CPU 和调度分析 (CPU & Scheduling)
+## 4.4 CPU 和调度分析 (CPU & Scheduling)
 
 ```bash
 # CPU 采样分析 (每秒 99 次，运行 10 秒)
@@ -1016,7 +1019,7 @@ tracepoint:sched:sched_switch
 }'
 ```
 
-#<!-- chunk: 4.5 内存分析 (Memory Analysis) -->## 4.5 内存分析 (Memory Analysis)
+## 4.5 内存分析 (Memory Analysis)
 
 ```bash
 # 统计 malloc 调用大小分布
@@ -1049,7 +1052,7 @@ interval:s:5 { print(@faults); clear(@faults); }'
 
 <!-- chunk: 5. 复杂 bpftrace 脚本开发 -->## 5. 复杂 bpftrace 脚本开发
 
-#<!-- chunk: 5.1 HTTP 请求延迟追踪器 (HTTP Latency Tracer) -->## 5.1 HTTP 请求延迟追踪器 (HTTP Latency Tracer)
+## 5.1 HTTP 请求延迟追踪器 (HTTP Latency Tracer)
 
 ```bpftrace
 #!/usr/bin/env bpftrace
@@ -1088,7 +1091,7 @@ END
 }
 ```
 
-#<!-- chunk: 5.2 数据库查询追踪器 (Database Query Tracer) -->## 5.2 数据库查询追踪器 (Database Query Tracer)
+## 5.2 数据库查询追踪器 (Database Query Tracer)
 
 ```bpftrace
 #!/usr/bin/env bpftrace
@@ -1141,7 +1144,7 @@ interval:s:30
 }
 ```
 
-#<!-- chunk: 5.3 TCP 连接全生命周期追踪器 (TCP Lifecycle Tracer) -->## 5.3 TCP 连接全生命周期追踪器 (TCP Lifecycle Tracer)
+## 5.3 TCP 连接全生命周期追踪器 (TCP Lifecycle Tracer)
 
 ```bpftrace
 #!/usr/bin/env bpftrace
@@ -1210,7 +1213,7 @@ END
 }
 ```
 
-#<!-- chunk: 5.4 内存泄漏探测器 (Memory Leak Detector) -->## 5.4 内存泄漏探测器 (Memory Leak Detector)
+## 5.4 内存泄漏探测器 (Memory Leak Detector)
 
 ```bpftrace
 #!/usr/bin/env bpftrace
@@ -1253,7 +1256,7 @@ interval:s:10
 }
 ```
 
-#<!-- chunk: 5.5 系统调用延迟追踪器 (Syscall Latency Tracer) -->## 5.5 系统调用延迟追踪器 (Syscall Latency Tracer)
+## 5.5 系统调用延迟追踪器 (Syscall Latency Tracer)
 
 ```bpftrace
 #!/usr/bin/env bpftrace
@@ -1319,7 +1322,7 @@ interval:s:30
 
 <!-- chunk: 6. Kubernetes 环境中的 eBPF 性能分析 -->## 6. Kubernetes 环境中的 eBPF 性能分析
 
-#<!-- chunk: 6.1 K8s eBPF 分析架构 (K8s eBPF Analysis Architecture) -->## 6.1 K8s eBPF 分析架构 (K8s eBPF Analysis Architecture)
+## 6.1 K8s eBPF 分析架构 (K8s eBPF Analysis Architecture)
 
 ```mermaid
 graph TB
@@ -1345,7 +1348,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 6.2 部署 eBPF 分析工具 DaemonSet -->## 6.2 部署 eBPF 分析工具 DaemonSet
+## 6.2 部署 eBPF 分析工具 DaemonSet
 
 ```yaml
 # ebpf-tools-daemonset.yaml
@@ -1431,7 +1434,7 @@ spec:
           type: DirectoryOrCreate
 ```
 
-#<!-- chunk: 6.3 容器感知的 eBPF 追踪 (Container-Aware eBPF) -->## 6.3 容器感知的 eBPF 追踪 (Container-Aware eBPF)
+## 6.3 容器感知的 eBPF 追踪 (Container-Aware eBPF)
 
 ```bash
 # 找到容器在宿主机上的 PID
@@ -1450,6 +1453,9 @@ find /proc -name "cgroup" 2>/dev/null | \
   head -1 | cut -d/ -f3
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 在宿主机上追踪特定容器内的系统调用
 # 先在 ebpf-tools DaemonSet Pod 中执行
@@ -1465,7 +1471,7 @@ kubectl exec -n monitoring ds/ebpf-tools -- \
   /usr/share/bcc/tools/profile -p $HOST_PID 30
 ```
 
-#<!-- chunk: 6.4 cgroup 级别性能分析 (cgroup-Level Analysis) -->## 6.4 cgroup 级别性能分析 (cgroup-Level Analysis)
+## 6.4 cgroup 级别性能分析 (cgroup-Level Analysis)
 
 ```bpftrace
 #!/usr/bin/env bpftrace
@@ -1511,7 +1517,7 @@ kubectl debug node/$NODE -it --image=ubuntu -- \
   /usr/sbin/tcpdump -i any -nn 'port 8080' -c 100
 ```
 
-#<!-- chunk: 6.5 Kubernetes 节点性能诊断脚本 -->## 6.5 Kubernetes 节点性能诊断脚本
+## 6.5 Kubernetes 节点性能诊断脚本
 
 ```bash
 #!/bin/bash
@@ -1545,7 +1551,7 @@ kubectl debug node/$NODE -it --image=quay.io/iovisor/bcc:latest -- \
 
 <!-- chunk: 7. 容器感知的 eBPF 工具 -->## 7. 容器感知的 eBPF 工具
 
-#<!-- chunk: 7.1 kubectl-trace 插件 (kubectl-trace Plugin) -->## 7.1 kubectl-trace 插件 (kubectl-trace Plugin)
+## 7.1 kubectl-trace 插件 (kubectl-trace Plugin)
 
 kubectl-trace 是一个 kubectl 插件，可以直接在 Kubernetes 节点上运行 bpftrace 脚本。
 
@@ -1577,7 +1583,7 @@ kubectl trace delete my-trace-xxx
 kubectl trace logs my-trace-xxx
 ```
 
-#<!-- chunk: 7.2 Inspektor Gadget (容器原生 eBPF 工具集) -->## 7.2 Inspektor Gadget (容器原生 eBPF 工具集)
+## 7.2 Inspektor Gadget (容器原生 eBPF 工具集)
 
 ```bash
 # 安装 Inspektor Gadget
@@ -1609,7 +1615,7 @@ kubectl gadget top block-io --namespace production
 kubectl gadget histogram block-io --namespace production
 ```
 
-#<!-- chunk: 7.3 容器感知的网络追踪 (Container-Aware Network Tracing) -->## 7.3 容器感知的网络追踪 (Container-Aware Network Tracing)
+## 7.3 容器感知的网络追踪 (Container-Aware Network Tracing)
 
 ```bpftrace
 #!/usr/bin/env bpftrace
@@ -1650,7 +1656,7 @@ interval:s:10
 }
 ```
 
-#<!-- chunk: 7.4 Pixie - Kubernetes 原生 eBPF 可观测性 -->## 7.4 Pixie - Kubernetes 原生 eBPF 可观测性
+## 7.4 Pixie - Kubernetes 原生 eBPF 可观测性
 
 ```bash
 # 安装 Pixie (自动化 Kubernetes eBPF 可观测性)
@@ -1697,7 +1703,7 @@ px run -f my-query.pxl
 
 <!-- chunk: 8. 自定义 bcc/bpftrace 工具开发 -->## 8. 自定义 bcc/bpftrace 工具开发
 
-#<!-- chunk: 8.1 bcc Python 工具开发框架 (bcc Python Development) -->## 8.1 bcc Python 工具开发框架 (bcc Python Development)
+## 8.1 bcc Python 工具开发框架 (bcc Python Development)
 
 ```python
 #!/usr/bin/env python3
@@ -1848,7 +1854,7 @@ if __name__ == "__main__":
     tracer.start()
 ```
 
-#<!-- chunk: 8.2 bpftrace 工具开发最佳实践 (bpftrace Development Best Practices) -->## 8.2 bpftrace 工具开发最佳实践 (bpftrace Development Best Practices)
+## 8.2 bpftrace 工具开发最佳实践 (bpftrace Development Best Practices)
 
 ```bpftrace
 #!/usr/bin/env bpftrace
@@ -1917,7 +1923,7 @@ END
 }
 ```
 
-#<!-- chunk: 8.3 eBPF CO-RE 工具开发 (CO-RE Development) -->## 8.3 eBPF CO-RE 工具开发 (CO-RE Development)
+## 8.3 eBPF CO-RE 工具开发 (CO-RE Development)
 
 ```c
 /* libbpf CO-RE 程序示例: tcp_monitor.c */
@@ -1975,7 +1981,7 @@ char LICENSE[] SEC("license") = "GPL";
 
 <!-- chunk: 9. 性能分析方法论 (USE/RED) -->## 9. 性能分析方法论 (USE/RED)
 
-#<!-- chunk: 9.1 USE 方法论 (USE Method) -->## 9.1 USE 方法论 (USE Method)
+## 9.1 USE 方法论 (USE Method)
 
 USE (Utilization, Saturation, Errors) 方法论由 Brendan Gregg 提出，是系统性能分析的标准框架。
 
@@ -2033,7 +2039,7 @@ sudo bpftrace -e '
 tracepoint:net:net_dev_xmit_timeout { @net_errors[comm] = count(); }'
 ```
 
-#<!-- chunk: 9.2 RED 方法论 (RED Method) -->## 9.2 RED 方法论 (RED Method)
+## 9.2 RED 方法论 (RED Method)
 
 RED (Rate, Errors, Duration) 方法论专注于服务/微服务层面的性能分析。
 
@@ -2084,7 +2090,7 @@ interval:s:1 {
 }'
 ```
 
-#<!-- chunk: 9.3 四大黄金信号 (Four Golden Signals) -->## 9.3 四大黄金信号 (Four Golden Signals)
+## 9.3 四大黄金信号 (Four Golden Signals)
 
 ```mermaid
 graph TB
@@ -2108,7 +2114,7 @@ graph TB
     SAT --> S1
 ```
 
-#<!-- chunk: 9.4 性能分析检查表 (Performance Analysis Checklist) -->## 9.4 性能分析检查表 (Performance Analysis Checklist)
+## 9.4 性能分析检查表 (Performance Analysis Checklist)
 
 ```bash
 #!/bin/bash
@@ -2162,7 +2168,7 @@ echo "=== 检查完成 ==="
 
 <!-- chunk: 10. 生产环境最佳实践 -->## 10. 生产环境最佳实践
 
-#<!-- chunk: 10.1 安全使用 eBPF (Safe eBPF Usage) -->## 10.1 安全使用 eBPF (Safe eBPF Usage)
+## 10.1 安全使用 eBPF (Safe eBPF Usage)
 
 ```mermaid
 graph TB
@@ -2194,7 +2200,7 @@ securityContext:
     - ALL
 ```
 
-#<!-- chunk: 10.2 性能开销控制 (Performance Overhead Control) -->## 10.2 性能开销控制 (Performance Overhead Control)
+## 10.2 性能开销控制 (Performance Overhead Control)
 
 ```bash
 # 测量 bpftrace 脚本的 CPU 开销
@@ -2235,7 +2241,7 @@ kprobe:tcp_sendmsg { @[comm] = count(); }
 interval:s:1 { print(@); clear(@); }'
 ```
 
-#<!-- chunk: 10.3 常见陷阱与规避 (Common Pitfalls) -->## 10.3 常见陷阱与规避 (Common Pitfalls)
+## 10.3 常见陷阱与规避 (Common Pitfalls)
 
 ```bash
 # 陷阱 1: Map 内存无限增长
@@ -2284,7 +2290,7 @@ kprobe:do_sys_open { @ts[tid] = nsecs; }  // tid 是线程唯一的
 kretprobe:do_sys_open { @ = nsecs - @ts[tid]; delete(@ts[tid]); }'
 ```
 
-#<!-- chunk: 10.4 生产级工具部署方案 (Production Deployment) -->## 10.4 生产级工具部署方案 (Production Deployment)
+## 10.4 生产级工具部署方案 (Production Deployment)
 
 ```yaml
 # 生产级 eBPF 监控 DaemonSet
@@ -2415,7 +2421,7 @@ data:
         blk_account_io_done: on_done
 ```
 
-#<!-- chunk: 10.5 eBPF 工具性能基准测试 (Performance Benchmarks) -->## 10.5 eBPF 工具性能基准测试 (Performance Benchmarks)
+## 10.5 eBPF 工具性能基准测试 (Performance Benchmarks)
 
 ```bash
 # 测试 bpftrace 各类探针的开销
@@ -2457,7 +2463,7 @@ interval:s:10 { exit(); }'
 # uprobe:     ~200-500ns/event (最慢, 谨慎使用在高频函数)
 ```
 
-#<!-- chunk: 10.6 故障排查案例集 (Troubleshooting Case Studies) -->## 10.6 故障排查案例集 (Troubleshooting Case Studies)
+## 10.6 故障排查案例集 (Troubleshooting Case Studies)
 
 **案例 1: CPU 使用率突增排查**
 
@@ -2548,7 +2554,7 @@ ss -s  # socket 统计
 ss -tnp | awk '{print $1}' | sort | uniq -c  # 按状态统计
 ```
 
-#<!-- chunk: 10.7 bcc/bpftrace 参考速查表 (Quick Reference) -->## 10.7 bcc/bpftrace 参考速查表 (Quick Reference)
+## 10.7 bcc/bpftrace 参考速查表 (Quick Reference)
 
 | 任务 | bcc 工具 | bpftrace 单行 |
 |------|---------|-------------|
@@ -2591,7 +2597,7 @@ ss -tnp | awk '{print $1}' | sort | uniq -c  # 按状态统计
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-35-ebpf-technology MOC
-- [[domain-03-networking-traffic/README|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
+- [[domain-03-networking-traffic/README.md|Domain 03: eBPF 技术体系 (eBPF Technology Stack)]]
 - Domain-35 eBPF 技术 — 开源项目索引
 - eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...
 - eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)

@@ -60,9 +60,9 @@ created: "2026-05-23"
 
 <!-- chunk: 🏗️ 监控架构设计 -->## 🏗️ 监控架构设计
 
-#<!-- chunk: 三层监控架构 -->## 三层监控架构
+## 三层监控架构
 
-##<!-- chunk: 1. 基础设施层监控 -->## 1. 基础设施层监控
+## 1. 基础设施层监控
 ```yaml
 # Node Exporter DaemonSet配置
 apiVersion: apps/v1
@@ -115,7 +115,7 @@ spec:
           path: /sys
 ```
 
-##<!-- chunk: 2. Kubernetes组件监控 -->## 2. Kubernetes组件监控
+## 2. Kubernetes组件监控
 ```yaml
 # kube-state-metrics配置
 apiVersion: apps/v1
@@ -173,7 +173,7 @@ spec:
     app: kube-state-metrics
 ```
 
-##<!-- chunk: 3. 应用层监控 -->## 3. 应用层监控
+## 3. 应用层监控
 ```yaml
 # 应用监控Sidecar模式
 apiVersion: apps/v1
@@ -206,9 +206,9 @@ spec:
 
 <!-- chunk: 📊 Prometheus监控栈 -->## 📊 Prometheus监控栈
 
-#<!-- chunk: 核心组件配置 -->## 核心组件配置
+## 核心组件配置
 
-##<!-- chunk: 1. Prometheus Server配置 -->## 1. Prometheus Server配置
+## 1. Prometheus Server配置
 ```yaml
 # Prometheus配置文件
 global:
@@ -265,7 +265,7 @@ scrape_configs:
     - targets: ['kube-state-metrics:8080']
 ```
 
-##<!-- chunk: 2. 长期存储配置 -->## 2. 长期存储配置
+## 2. 长期存储配置
 ```yaml
 # Thanos Sidecar配置
 apiVersion: apps/v1
@@ -285,7 +285,7 @@ spec:
     spec:
       containers:
       - name: thanos-sidecar
-        image: quay.io/thanos/thanos:v0.30.0
+        image: quay.io/thanos/thanos:v0.37.0
         args:
         - sidecar
         - --http-address=0.0.0.0:10902
@@ -312,9 +312,9 @@ spec:
           name: thanos-objstore-config
 ```
 
-#<!-- chunk: 告警规则配置 -->## 告警规则配置
+## 告警规则配置
 
-##<!-- chunk: 1. 核心告警规则 -->## 1. 核心告警规则
+## 1. 核心告警规则
 ```yaml
 # 核心告警规则
 groups:
@@ -361,9 +361,9 @@ groups:
 
 <!-- chunk: 🎨 Grafana可视化 -->## 🎨 Grafana可视化
 
-#<!-- chunk: 核心仪表板配置 -->## 核心仪表板配置
+## 核心仪表板配置
 
-##<!-- chunk: 1. 集群概览仪表板 -->## 1. 集群概览仪表板
+## 1. 集群概览仪表板
 ```json
 {
   "dashboard": {
@@ -408,7 +408,7 @@ groups:
 }
 ```
 
-##<!-- chunk: 2. 应用性能仪表板 -->## 2. 应用性能仪表板
+## 2. 应用性能仪表板
 ```json
 {
   "dashboard": {
@@ -451,9 +451,9 @@ groups:
 
 <!-- chunk: 🚨 Alertmanager告警管理 -->## 🚨 Alertmanager告警管理
 
-#<!-- chunk: 告警路由配置 -->## 告警路由配置
+## 告警路由配置
 
-##<!-- chunk: 1. 多级告警路由 -->## 1. 多级告警路由
+## 1. 多级告警路由
 ```yaml
 # Alertmanager配置
 global:
@@ -470,25 +470,21 @@ route:
   receiver: 'default-receiver'
   
   routes:
-  - match:
-      severity: critical
-    receiver: 'pagerduty'
+  - matchers:
+    - severity="critical"
+    receiver: pagerduty
     group_wait: 10s
     repeat_interval: 1h
-    
-  - match:
-      severity: warning
-    receiver: 'slack-warning'
+  - matchers:
+    - severity="warning"
+    receiver: slack-warning
     group_wait: 1m
-    
-  - match:
-      team: sre
-    receiver: 'sre-team'
-    routes:
-    - match:
-        service: database
-      receiver: 'db-team'
-
+  - matchers:
+    - team="sre"
+    receiver: sre-team
+  - matchers:
+    - service="database"
+    receiver: db-team
 receivers:
 - name: 'default-receiver'
   email_configs:
@@ -497,7 +493,7 @@ receivers:
 
 - name: 'pagerduty'
   pagerduty_configs:
-  - service_key: 'YOUR_PAGERDUTY_KEY'
+  - routing_key: 'YOUR_PAGERDUTY_KEY'
     send_resolved: true
 
 - name: 'slack-warning'
@@ -509,28 +505,27 @@ receivers:
     text: '{{ template "slack.warning.text" . }}'
 ```
 
-##<!-- chunk: 2. 告警抑制规则 -->## 2. 告警抑制规则
+## 2. 告警抑制规则
 ```yaml
 # 告警抑制配置
 inhibit_rules:
-- source_match:
-    alertname: 'NodeDown'
-  target_match:
-    alertname: 'ServiceDown'
-  equal: ['instance']
-
-- source_match:
-    alertname: 'ClusterDown'
-  target_match_re:
-    alertname: '.*'
-  equal: ['cluster']
+- source_matchers:
+  - alertname="NodeDown"
+  - target_match=""
+  - alertname="ServiceDown"
+  - equal="['instance']"
+- source_matchers:
+  - alertname="ClusterDown"
+  - target_match_re=""
+  - alertname=".*"
+  - equal="['cluster']"
 ```
 
 <!-- chunk: 📈 性能优化 -->## 📈 性能优化
 
-#<!-- chunk: 监控系统调优 -->## 监控系统调优
+## 监控系统调优
 
-##<!-- chunk: 1. Prometheus性能优化 -->## 1. Prometheus性能优化
+## 1. Prometheus性能优化
 ```yaml
 # Prometheus存储优化配置
 apiVersion: apps/v1
@@ -542,7 +537,7 @@ spec:
     spec:
       containers:
       - name: prometheus
-        image: prom/prometheus:v2.40.0
+        image: prom/prometheus:v3.2.1
         args:
         - --storage.tsdb.retention.time=30d
         - --storage.tsdb.retention.size=50GB
@@ -560,7 +555,7 @@ spec:
             memory: 16Gi
 ```
 
-##<!-- chunk: 2. 查询优化策略 -->## 2. 查询优化策略
+## 2. 查询优化策略
 ```yaml
 # Recording规则优化
 groups:
@@ -580,7 +575,7 @@ groups:
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 监控体系建设 -->## 监控体系建设
+## 监控体系建设
 - [ ] 设计完整的三层监控架构
 - [ ] 部署核心监控组件(Prometheus、Grafana、Alertmanager)
 - [ ] 配置基础设施层监控(Node Exporter、kube-state-metrics)
@@ -588,7 +583,7 @@ groups:
 - [ ] 建立完善的告警规则体系
 - [ ] 配置多渠道告警通知
 
-#<!-- chunk: 性能与可靠性 -->## 性能与可靠性
+## 性能与可靠性
 - [ ] 优化Prometheus存储和查询性能
 - [ ] 实施监控数据长期存储方案
 - [ ] 配置监控系统的高可用部署
@@ -596,7 +591,7 @@ groups:
 - [ ] 实施监控系统容量规划
 - [ ] 定期审查和优化告警规则
 
-#<!-- chunk: 运营维护 -->## 运营维护
+## 运营维护
 - [ ] 建立监控仪表板标准化模板
 - [ ] 实施监控数据质量监控
 - [ ] 建立告警响应和处理流程
@@ -613,9 +608,9 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations KUDIG Database — Global MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 05-日志收集分析平台
@@ -632,10 +627,10 @@ groups:
 - 05-logging-collection-analysis-platform
 - 06-apm-application-performance-monitoring
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]

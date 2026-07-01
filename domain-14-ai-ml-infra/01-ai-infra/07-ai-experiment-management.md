@@ -853,6 +853,9 @@ compiler.Compiler().compile(
 
 ### 4.2 Kubeflow部署
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 安装Kubeflow Pipelines
 export PIPELINE_VERSION=2.0.5
@@ -1460,7 +1463,7 @@ groups:
 ## Obsidian 相关文档
 
 - domain-11-ai-infra KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
 - index.md|Domain-11 AI 基础设施 — 开源项目索引]]
 - AI 基础设施架构
 - 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
@@ -1481,4 +1484,4 @@ groups:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]

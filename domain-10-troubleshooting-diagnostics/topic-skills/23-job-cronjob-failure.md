@@ -124,7 +124,7 @@ tier: peripheral---
 
 # Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 
-Job 和 CronJob 是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 批处理工作负载的核心控制器。Job 用于一次性任务执行，CronJob 用于定时触发 Job。它们的故障模式与长期运行的工作负载（Deployment/StatefulSet/DaemonSet）有显著差异：任务完成后 Pod 会终止、CronJob 的调度依赖控制器时间同步、Job 的完成条件涉及并行度和成功计数、历史 Job 的清理依赖 TTL 机制。
+Job 和 CronJob 是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 批处理工作负载的核心控制器。Job 用于一次性任务执行，CronJob 用于定时触发 Job。它们的故障模式与长期运行的工作负载（Deployment/StatefulSet/DaemonSet）有显著差异：任务完成后 Pod 会终止、CronJob 的调度依赖控制器时间同步、Job 的完成条件涉及并行度和成功计数、历史 Job 的清理依赖 TTL 机制。
 
 本 [[SKILL|Skill]] 覆盖 Job 执行失败、CronJob 未触发、错过调度、并发控制问题、重试耗尽、历史堆积、时区偏差等 10 种根因的诊断和修复。
 
@@ -471,6 +471,10 @@ kubectl get events -n <namespace> --field-selector involvedObject.kind=CronJob -
 
 **Step D3.1**: 手动触发 Job 执行测试
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 从 CronJob 创建一次性 Job
   kubectl create job --from=cronjob/<cronjob-name> <test-job-name> -n <namespace>
@@ -483,6 +487,10 @@ kubectl get events -n <namespace> --field-selector involvedObject.kind=CronJob -
 
 **Step D3.2**: 临时增加 backoffLimit 测试
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch job <name> -n <namespace> -p '{"spec":{"backoffLimit":10}}'
   ```
@@ -494,6 +502,10 @@ kubectl get events -n <namespace> --field-selector involvedObject.kind=CronJob -
 
 **Step D3.3**: 清理历史 Job 释放资源
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 删除所有 Completed Job（保留最近 10 个）
   kubectl get jobs -n <namespace> --field-selector status.successful=1 \
@@ -528,6 +540,10 @@ kubectl get events -n <namespace> --field-selector involvedObject.kind=CronJob -
 - **适用根因**: RC-002
 - **前置检查**: D1.4/D2.3 确认表达式错误
 - **执行**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch cronjob <name> -n <namespace> -p \
     '{"spec":{"schedule":"<correct-cron-expression>"}}'
@@ -539,6 +555,10 @@ kubectl get events -n <namespace> --field-selector involvedObject.kind=CronJob -
 - **适用根因**: RC-003
 - **前置检查**: D1.4 timezone 与实际需求不符
 - **执行**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch cronjob <name> -n <namespace> -p \
     '{"spec":{"timeZone":"Asia/Shanghai"}}'
@@ -551,6 +571,10 @@ kubectl get events -n <namespace> --field-selector involvedObject.kind=CronJob -
 - **适用根因**: RC-009
 - **前置检查**: D1.3/D2.4 确认无 TTL 且历史堆积
 - **执行**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 修改 CronJob 模板添加 TTL
   kubectl patch cronjob <name> -n <namespace> -p \
@@ -566,6 +590,10 @@ kubectl get events -n <namespace> --field-selector involvedObject.kind=CronJob -
 - **适用根因**: RC-006
 - **前置检查**: D1.3/D2.2 确认重试耗尽
 - **执行**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch job <name> -n <namespace> -p '{"spec":{"backoffLimit":10}}'
   ```
@@ -578,6 +606,10 @@ kubectl get events -n <namespace> --field-selector involvedObject.kind=CronJob -
 - **适用根因**: RC-004
 - **审批提示**: "建议修改 CronJob <name> 的并发策略从 Forbid 改为 Replace/Allow。是否批准？"
 - **执行**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch cronjob <name> -n <namespace> -p \
     '{"spec":{"concurrencyPolicy":"Replace"}}'
@@ -589,6 +621,10 @@ kubectl get events -n <namespace> --field-selector involvedObject.kind=CronJob -
 - **适用根因**: RC-007
 - **审批提示**: "建议增加 Job <name> 的执行超时时间。是否批准？"
 - **执行**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch job <name> -n <namespace> -p \
     '{"spec":{"activeDeadlineSeconds":<new-timeout>}}'
@@ -600,6 +636,10 @@ kubectl get events -n <namespace> --field-selector involvedObject.kind=CronJob -
 - **适用根因**: RC-009
 - **审批提示**: "建议清理 namespace <ns> 中的历史 Job，共 <count> 个。是否批准？"
 - **执行**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 删除所有成功的历史 Job
   kubectl delete jobs -n <namespace> --field-selector status.successful=1
@@ -617,10 +657,19 @@ kubectl get events -n <namespace> --field-selector involvedObject.kind=CronJob -
 - **适用根因**: RC-004/007/010
 - **操作步骤**:
   1. 删除 Job（级联删除 Pod）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      kubectl delete job <name> -n <namespace> --cascade=foreground
      ```
   2. 如 Job 删除卡住，强制删除
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
      ```bash
      kubectl patch job <name> -n <namespace> -p '{"metadata":{"finalizers":[]}}' --type=merge
      kubectl delete job <name> -n <namespace> --force

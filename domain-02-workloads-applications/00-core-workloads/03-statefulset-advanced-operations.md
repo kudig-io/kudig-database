@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 # 03 - [[StatefulSet|StatefulSet]] 高级运维指南 (StatefulSet Advanced Operations)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes|Kubernetes]] [[StatefulSets|StatefulSets]]](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|Kubernetes]] [[StatefulSets|StatefulSets]]](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 
 <!-- chunk: StatefulSet 核心特性解析 -->
 ## StatefulSet 核心特性解析
@@ -608,6 +608,11 @@ data:
 
 #### 5.1 常见问题诊断命令
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 查看 StatefulSet 状态
 kubectl describe statefulset <statefulset-name> -n <namespace>
@@ -623,7 +628,7 @@ kubectl describe pvc <pvc-name> -n <namespace>
 kubectl exec -it <pod-name> -n <namespace> -- df -h /var/lib/data
 
 # 5. 强制删除卡住的 Pod
-kubectl delete pod <pod-name> -n <namespace> --force --grace-period=0
+kubectl delete pod <pod-name> -n <namespace> --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 6. 手动触发更新 (OnDelete 策略)
 kubectl delete pod <statefulset-name>-<ordinal> -n <namespace>
@@ -633,6 +638,10 @@ kubectl scale statefulset <statefulset-name> -n <namespace> --replicas=<number>
 ```
 
 #### 5.2 数据恢复流程
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash
@@ -785,7 +794,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications KUDIG Database — Global MOC
-- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
 - Domain-4 工作负载 — 开源项目索引
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)

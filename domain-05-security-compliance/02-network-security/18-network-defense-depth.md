@@ -708,6 +708,9 @@ spec:
 
 #### 网络安全基线检查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # 11-network-security-check.sh
@@ -748,6 +751,10 @@ kubectl get pods --all-namespaces -o jsonpath='{range .items[*]}{.metadata.names
 ```
 
 #### 网络安全加固脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 #!/bin/bash
@@ -825,8 +832,8 @@ echo "Network security hardening completed!"
 ## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Security Domain]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-7 安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Security Domain]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
 - Kubernetes 认证授权体系详解
 - 网络安全策略与零信任架构
 - 运行时安全防护与威胁检测
@@ -844,8 +851,8 @@ echo "Network security hardening completed!"
 - 19-zero-trust-architecture
 - 20-incident-response-process
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

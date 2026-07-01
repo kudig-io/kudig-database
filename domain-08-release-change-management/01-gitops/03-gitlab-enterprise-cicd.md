@@ -131,7 +131,7 @@ GitLab 提供 CE（Community Edition）和 EE（Enterprise Edition）两个版�
 
 <!-- chunk: 二、架构设计 -->## 二、架构设计
 
-#<!-- chunk: 2.1 GitLab 企业级架构 -->## 2.1 GitLab 企业级架构
+## 2.1 GitLab 企业级架构
 
 ```mermaid
 graph TB
@@ -183,7 +183,7 @@ graph TB
     ALERT --> PROM
 ```
 
-#<!-- chunk: 2.2 Runner 架构 -->## 2.2 Runner 架构
+## 2.2 Runner 架构
 
 ```mermaid
 graph LR
@@ -212,7 +212,7 @@ graph LR
     SCHEDULER --> SSH_EXEC
 ```
 
-#<!-- chunk: 2.3 Kubernetes 部署 -->## 2.3 Kubernetes 部署
+## 2.3 Kubernetes 部署
 
 ```yaml
 apiVersion: apps/v1
@@ -306,7 +306,7 @@ spec:
 
 <!-- chunk: 三、核心配置 -->## 三、核心配置
 
-#<!-- chunk: 3.1 Runner 配置 -->## 3.1 Runner 配置
+## 3.1 Runner 配置
 
 ```toml
 # config.toml - GitLab Runner 配置
@@ -361,7 +361,7 @@ runners
     pull_policy = "if-not-present"
 ```
 
-#<!-- chunk: 3.2 企业级 CI/CD 流水线 -->## 3.2 企业级 CI/CD 流水线
+## 3.2 企业级 CI/CD 流水线
 
 ```yaml
 # .gitlab-ci.yml
@@ -517,7 +517,7 @@ cache:
   policy: pull-push
 ```
 
-#<!-- chunk: 3.3 流水线模板与复用 -->## 3.3 流水线模板与复用
+## 3.3 流水线模板与复用
 
 ```yaml
 # 流水线复用 - include 模板
@@ -574,7 +574,7 @@ deploy-production:
 
 <!-- chunk: 四、安全与合规 -->## 四、安全与合规
 
-#<!-- chunk: 4.1 安全扫描集成 -->## 4.1 安全扫描集成
+## 4.1 安全扫描集成
 
 ```yaml
 # 安全扫描完整配置
@@ -638,7 +638,7 @@ security-license-scanning:
       license_scanning: gl-license-scanning-report.json
 ```
 
-#<!-- chunk: 4.2 访问控制与环境保护 -->## 4.2 访问控制与环境保护
+## 4.2 访问控制与环境保护
 
 ```yaml
 # 分支保护规则
@@ -691,7 +691,7 @@ compliance-pipeline:
 
 <!-- chunk: 五、多环境管理策略 -->## 五、多环境管理策略
 
-#<!-- chunk: 5.1 环境晋升流程 -->## 5.1 环境晋升流程
+## 5.1 环境晋升流程
 
 ```yaml
 # 多环境晋升策略
@@ -754,7 +754,7 @@ stop-dev:
       when: manual
 ```
 
-#<!-- chunk: 5.2 Review Apps -->## 5.2 Review Apps
+## 5.2 Review Apps
 
 ```yaml
 # 动态环境 - Review Apps
@@ -787,7 +787,7 @@ stop-review:
 
 <!-- chunk: 六、监控与回滚 -->## 六、监控与回滚
 
-#<!-- chunk: 6.1 关键指标监控 -->## 6.1 关键指标监控
+## 6.1 关键指标监控
 
 ```yaml
 groups:
@@ -833,7 +833,7 @@ groups:
       summary: "GitLab 存储空间不足"
 ```
 
-#<!-- chunk: 6.2 回滚策略 -->## 6.2 回滚策略
+## 6.2 回滚策略
 
 ```bash
 # GitLab 环境回滚
@@ -856,7 +856,7 @@ curl --request POST \
 
 <!-- chunk: 七、最佳实践 -->## 七、最佳实践
 
-#<!-- chunk: 7.1 流水线优化 -->## 7.1 流水线优化
+## 7.1 流水线优化
 
 ```yaml
 1. 缓存策略:
@@ -885,7 +885,7 @@ curl --request POST \
    - 定期审查扫描报告
 ```
 
-#<!-- chunk: 7.2 GitOps 集成 -->## 7.2 GitOps 集成
+## 7.2 GitOps 集成
 
 ```yaml
 # GitLab CI + Argo CD 集成
@@ -909,7 +909,10 @@ update-gitops:
 
 <!-- chunk: 八、故障排查 -->## 八、故障排查
 
-#<!-- chunk: 8.1 常见问题诊断 -->## 8.1 常见问题诊断
+## 8.1 常见问题诊断
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -968,7 +971,7 @@ check_service_health() {
 
 <!-- chunk: 九、GitLab CI/CD 高级特性 -->## 九、GitLab CI/CD 高级特性
 
-#<!-- chunk: 9.1 并行矩阵构建 -->## 9.1 并行矩阵构建
+## 9.1 并行矩阵构建
 
 GitLab CI/CD 的 `parallel: matrix` 功能允许在单个 Job 定义中生成多个并行构建实例。这对于需要在不同运行时版本、不同操作系统或不同配置组合下测试的项目尤其有用。矩阵构建的每个实例都会获得独立的运行环境和变量，构建结果在 Merge Request 中以可折叠的形式展示。
 
@@ -991,7 +994,7 @@ build-matrix:
     expire_in: 1 week
 ```
 
-#<!-- chunk: 9.2 流水线缓存策略 -->## 9.2 流水线缓存策略
+## 9.2 流水线缓存策略
 
 缓存是加速 GitLab CI/CD 流水线的关键手段。GitLab 提供了分支级别的缓存隔离机制——默认情况下，每个分支只能访问自己的缓存和 main 分支的缓存。通过 `policy: pull-push` 配置，可以在首次运行时创建缓存，后续运行时优先拉取缓存。
 
@@ -1039,7 +1042,7 @@ test-mr:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 ```
 
-#<!-- chunk: 9.3 环境保护与审批流程 -->## 9.3 环境保护与审批流程
+## 9.3 环境保护与审批流程
 
 GitLab 的 Environment Protection 机制是生产部署安全的核心保障。通过配置环境保护规则，可以强制要求特定环境的部署必须经过指定审批人的确认，同时可以设置等待计时器防止误操作。结合 GitLab 的合规框架（Compliance Framework），可以实现跨项目的统一审批策略。
 
@@ -1074,7 +1077,7 @@ resource_groups:
     process_mode: unordered
 ```
 
-#<!-- chunk: 9.4 GitLab 与 Argo CD 深度集成 -->## 9.4 GitLab 与 Argo CD 深度集成
+## 9.4 GitLab 与 Argo CD 深度集成
 
 GitLab CI/CD 与 Argo CD 的集成是企业级 GitOps 的标准模式。在这种模式下，GitLab CI 负责构建镜像和运行测试，Argo CD 负责将镜像部署到 Kubernetes 集群。集成点在于 GitLab CI 在流水线成功后将镜像标签更新到 GitOps 清单仓库，Argo CD 自动检测到变更并同步部署。
 
@@ -1099,7 +1102,7 @@ update-gitops:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 ```
 
-#<!-- chunk: 9.5 GitLab Runner 运维管理 -->## 9.5 GitLab Runner 运维管理
+## 9.5 GitLab Runner 运维管理
 
 GitLab Runner 的运维管理包括注册注销、版本升级、资源监控和弹性伸缩。在 Kubernetes 环境中，推荐使用 Helm Chart 部署 Runner，通过 `values.yaml` 管理配置，实现声明式的 Runner 管理。
 
@@ -1145,7 +1148,7 @@ resources:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-08-release-change-management MOC
-- [[domain-08-release-change-management/README|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
+- [[domain-08-release-change-management/README.md|Domain 08: GitOps与CI/CD (GitOps & CI/CD)]]
 - Domain-23 GitOps & CI/CD — 开源项目索引
 - Argo CD企业级GitOps实践指南
 - Jenkins企业级CI/CD流水线深度实践
@@ -1166,4 +1169,4 @@ resources:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

@@ -63,9 +63,9 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 容量规划基础理论 -->## 1. 容量规划基础理论
 
-#<!-- chunk: 1.1 容量规划核心概念 -->## 1.1 容量规划核心概念
+## 1.1 容量规划核心概念
 
-##<!-- chunk: 容量规划定义与目标 -->## 容量规划定义与目标
+## 容量规划定义与目标
 ```yaml
 容量规划核心要素:
   资源维度:
@@ -86,7 +86,7 @@ created: "2026-05-23"
     - 预防性能瓶颈
 ```
 
-##<!-- chunk: 容量规划生命周期 -->## 容量规划生命周期
+## 容量规划生命周期
 ```mermaid
 graph LR
     A[需求分析] --> B[现状评估]
@@ -98,9 +98,9 @@ graph LR
     G --> A
 ```
 
-#<!-- chunk: 1.2 Kubernetes资源模型 -->## 1.2 Kubernetes资源模型
+## 1.2 Kubernetes资源模型
 
-##<!-- chunk: 资源请求与限制 -->## 资源请求与限制
+## 资源请求与限制
 ```yaml
 # 资源配置示例
 apiVersion: v1
@@ -120,7 +120,7 @@ spec:
         memory: "256Mi"  # 限制256MB内存
 ```
 
-##<!-- chunk: 资源计量单位说明 -->## 资源计量单位说明
+## 资源计量单位说明
 ```bash
 # CPU单位换算
 1 Core = 1000 milli cores (m)
@@ -136,9 +136,9 @@ spec:
 
 <!-- chunk: 2. 现状评估与数据分析 -->## 2. 现状评估与数据分析
 
-#<!-- chunk: 2.1 集群资源现状分析 -->## 2.1 集群资源现状分析
+## 2.1 集群资源现状分析
 
-##<!-- chunk: 集群资源使用情况收集 -->## 集群资源使用情况收集
+## 集群资源使用情况收集
 ```bash
 #!/bin/bash
 # cluster-capacity-analyzer.sh
@@ -176,7 +176,7 @@ kubectl get pv -o jsonpath='{
 }' | jq '.'
 ```
 
-##<!-- chunk: 资源使用率可视化脚本 -->## 资源使用率可视化脚本
+## 资源使用率可视化脚本
 ```python
 #!/usr/bin/env python3
 # resource-visualizer.py
@@ -253,9 +253,9 @@ if __name__ == "__main__":
     plot_resource_utilization(metrics)
 ```
 
-#<!-- chunk: 2.2 历史数据分析 -->## 2.2 历史数据分析
+## 2.2 历史数据分析
 
-##<!-- chunk: 资源使用历史数据收集 -->## 资源使用历史数据收集
+## 资源使用历史数据收集
 ```bash
 #!/bin/bash
 # historical-data-collector.sh
@@ -278,7 +278,7 @@ curl -G "http://prometheus-server:9090/api/v1/query_range" \
   --data-urlencode "step=1h" > /tmp/memory_usage_history.json
 ```
 
-##<!-- chunk: 趋势分析脚本 -->## 趋势分析脚本
+## 趋势分析脚本
 ```python
 #!/usr/bin/env python3
 # trend-analyzer.py
@@ -379,9 +379,9 @@ print(f"30天后预测: {result['predictions'][-1]:.2f}%")
 
 <!-- chunk: 3. 需求预测方法 -->## 3. 需求预测方法
 
-#<!-- chunk: 3.1 统计学预测方法 -->## 3.1 统计学预测方法
+## 3.1 统计学预测方法
 
-##<!-- chunk: 时间序列分析 -->## 时间序列分析
+## 时间序列分析
 ```python
 #!/usr/bin/env python3
 # time-series-forecast.py
@@ -460,9 +460,9 @@ decomposition = forecaster.decompose_series()
 forecast_result = forecaster.arima_forecast(periods=168)  # 预测一周
 ```
 
-#<!-- chunk: 3.2 机器学习预测方法 -->## 3.2 机器学习预测方法
+## 3.2 机器学习预测方法
 
-##<!-- chunk: 基于特征的预测模型 -->## 基于特征的预测模型
+## 基于特征的预测模型
 ```python
 #!/usr/bin/env python3
 # ml-capacity-predictor.py
@@ -625,9 +625,9 @@ future_predictions = predictor.predict_future(training_data, hours_ahead=168)
 
 <!-- chunk: 4. 容量规划策略 -->## 4. 容量规划策略
 
-#<!-- chunk: 4.1 扩容策略制定 -->## 4.1 扩容策略制定
+## 4.1 扩容策略制定
 
-##<!-- chunk: 基于阈值的自动扩容 -->## 基于阈值的自动扩容
+## 基于阈值的自动扩容
 ```yaml
 # hpa-capacity-planning.yaml
 apiVersion: autoscaling/v2
@@ -673,7 +673,7 @@ spec:
         periodSeconds: 120
 ```
 
-##<!-- chunk: 集群自动扩容配置 -->## 集群自动扩容配置
+## 集群自动扩容配置
 ```yaml
 # cluster-autoscaler-config.yaml
 apiVersion: v1
@@ -701,9 +701,9 @@ data:
     ok-total-unready-count: 3
 ```
 
-#<!-- chunk: 4.2 资源预留策略 -->## 4.2 资源预留策略
+## 4.2 资源预留策略
 
-##<!-- chunk: 节点资源预留配置 -->## 节点资源预留配置
+## 节点资源预留配置
 ```yaml
 # kubelet-config.yaml
 apiVersion: kubelet.config.k8s.io/v1beta1
@@ -723,7 +723,7 @@ evictionHard:
   imagefs.available: "15%"
 ```
 
-##<!-- chunk: 命名空间资源配额 -->## 命名空间资源配额
+## 命名空间资源配额
 ```yaml
 # namespace-quota.yaml
 apiVersion: v1
@@ -754,9 +754,9 @@ spec:
 
 <!-- chunk: 5. 成本效益分析 -->## 5. 成本效益分析
 
-#<!-- chunk: 5.1 成本计算模型 -->## 5.1 成本计算模型
+## 5.1 成本计算模型
 
-##<!-- chunk: 资源成本计算器 -->## 资源成本计算器
+## 资源成本计算器
 ```python
 #!/usr/bin/env python3
 # cost-calculator.py
@@ -881,9 +881,9 @@ for rec in recommendations:
     print(f"- {rec['action']}: {rec['savings']}")
 ```
 
-#<!-- chunk: 5.2 ROI计算与投资回报分析 -->## 5.2 ROI计算与投资回报分析
+## 5.2 ROI计算与投资回报分析
 
-##<!-- chunk: 容量投资回报计算器 -->## 容量投资回报计算器
+## 容量投资回报计算器
 ```python
 #!/usr/bin/env python3
 # roi-calculator.py
@@ -1012,9 +1012,9 @@ print(f"净现值(NPV): ${results['net_present_value']:,.2f}")
 
 <!-- chunk: 6. 实施与监控 -->## 6. 实施与监控
 
-#<!-- chunk: 6.1 容量规划实施框架 -->## 6.1 容量规划实施框架
+## 6.1 容量规划实施框架
 
-##<!-- chunk: 容量规划实施路线图 -->## 容量规划实施路线图
+## 容量规划实施路线图
 ```yaml
 # capacity-planning-roadmap.yaml
 capacity_planning_phases:
@@ -1063,9 +1063,9 @@ capacity_planning_phases:
       - 改进建议
 ```
 
-#<!-- chunk: 6.2 监控与告警体系 -->## 6.2 监控与告警体系
+## 6.2 监控与告警体系
 
-##<!-- chunk: 容量相关监控指标 -->## 容量相关监控指标
+## 容量相关监控指标
 ```yaml
 # capacity-monitoring-rules.yaml
 groups:
@@ -1115,7 +1115,7 @@ groups:
       description: "预测7天后节点 {{ $labels.node }} CPU资源将不足"
 ```
 
-##<!-- chunk: 容量规划仪表板配置 -->## 容量规划仪表板配置
+## 容量规划仪表板配置
 ```json
 {
   "dashboard": {
@@ -1168,29 +1168,29 @@ groups:
 
 <!-- chunk: 7. 最佳实践总结 -->## 7. 最佳实践总结
 
-#<!-- chunk: 7.1 成功关键因素 -->## 7.1 成功关键因素
+## 7.1 成功关键因素
 
-##<!-- chunk: 🎯 核心原则 -->## 🎯 核心原则
+## 🎯 核心原则
 ✅ **数据驱动决策**: 基于实际使用数据而非假设进行规划
 ✅ **持续监控**: 建立实时监控和预警机制
 ✅ **渐进式优化**: 小步快跑，持续改进
 ✅ **业务对齐**: 容量规划必须支持业务目标
 
-##<!-- chunk: 🛠️ 技术实践 -->## 🛠️ 技术实践
+## 🛠️ 技术实践
 ✅ **自动化工具**: 使用成熟的容量管理工具
 ✅ **标准化流程**: 建立标准化的容量规划流程
 ✅ **多维度考虑**: 综合考虑性能、成本、可靠性
 ✅ **风险管控**: 预留合理的安全边际
 
-#<!-- chunk: 7.2 常见误区避免 -->## 7.2 常见误区避免
+## 7.2 常见误区避免
 
-##<!-- chunk: ❌ 避免的错误做法 -->## ❌ 避免的错误做法
+## ❌ 避免的错误做法
 - 过度配置资源造成浪费
 - 忽视历史数据趋势
 - 缺乏预警机制
 - 不考虑业务增长变化
 
-##<!-- chunk: ✅ 推荐的最佳实践 -->## ✅ 推荐的最佳实践
+## ✅ 推荐的最佳实践
 - 建立容量基线和趋势分析
 - 实施预测性容量管理
 - 定期进行容量审查
@@ -1200,17 +1200,17 @@ groups:
 
 <!-- chunk: 📚 参考资源 -->## 📚 参考资源
 
-#<!-- chunk: 官方文档与标准 -->## 官方文档与标准
+## 官方文档与标准
 - [Kubernetes资源管理](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
 - [Horizontal Pod Autoscaler](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
 - [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler)
 
-#<!-- chunk: 工具推荐 -->## 工具推荐
+## 工具推荐
 - **监控工具**: [[Prometheus|Prometheus]], Grafana, Datadog
 - **预测工具**: Kubecost, [[OpenCost|OpenCost]]
 - **分析工具**: Python (pandas, scikit-learn), R
 
-#<!-- chunk: 学习资源 -->## 学习资源
+## 学习资源
 - 《Site Reliability Engineering》- Google
 - CNCF容量管理最佳实践
 - Kubernetes SIG Scalability
@@ -1223,9 +1223,9 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -1244,4 +1244,4 @@ groups:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]

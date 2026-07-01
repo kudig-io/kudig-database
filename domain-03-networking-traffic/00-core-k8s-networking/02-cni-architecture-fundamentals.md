@@ -576,6 +576,12 @@ spec:
 
 ### 10.3 CNI故障诊断与恢复
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # cni-troubleshooting.sh - CNI故障诊断脚本
@@ -698,7 +704,7 @@ EOF
   kubectl exec cni-test-pod-1 -- ping -c 3 8.8.8.8
   
   # 清理测试Pod
-  kubectl delete pod cni-test-pod-1 cni-test-pod-2 --force --grace-period=0
+  kubectl delete pod cni-test-pod-1 cni-test-pod-2 --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 } > /tmp/cni-connectivity-test.log
 
 # 5. 日志分析
@@ -901,6 +907,7 @@ data:
 4. **测试环境验证**: 在测试环境先行验证
 
 ### 滚动升级步骤
+
 ```bash
 # 1. 检查当前版本
 kubectl get pods -n kube-system -l k8s-app=calico-node -o jsonpath='{.items[0].spec.containers[0].image}'
@@ -939,7 +946,7 @@ kubectl apply -f calico-old-version.yaml
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -959,9 +966,9 @@ kubectl apply -f calico-old-version.yaml
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-03-networking-traffic
 - 相关知识域: domain-06-observability
-- [[domain-17-system-foundation/topic-cheat-sheet/networking|速查卡: networking]]
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|速查卡: networking]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
 
 ## See Also
 
@@ -969,3 +976,5 @@ kubectl apply -f calico-old-version.yaml
 - 01-network-architecture-overview
 - 03-cni-plugins-comparison
 - 04-flannel-complete-guide
+
+```

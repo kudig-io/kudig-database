@@ -47,7 +47,7 @@ intent_queries:
   - ACR console image management
   - ACK console kubectl command mapping
   - ACK cluster console operations guide
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] console operations tutorial
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] console operations tutorial
 trigger_keywords:
   - console
   - 控制台
@@ -140,6 +140,12 @@ related_topics:
 ## 实战演练 (3h)
 
 ### 任务 1: ACK 控制台功能巡览 (1h)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```
 登录阿里云控制台 → 容器服务 ACK
@@ -305,6 +311,12 @@ Dockerfile 路径: ./Dockerfile
 
 ### 任务 3: 控制台与 kubectl 操作对照 (45min)
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 echo "========== 控制台 ↔ kubectl 对照表 =========="
 
@@ -367,6 +379,11 @@ echo "========== 对照完毕 =========="
 
 ### 任务 4: 通过控制台完成一套完整操作 (30min)
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 完成以下操作流程并记录每个步骤对应的 kubectl 命令:
 
@@ -411,7 +428,7 @@ echo "========== 对照完毕 =========="
   kubectl get events -n test-console --sort-by='.lastTimestamp'
 
 步骤 7: 清理: 删除 Namespace
-  kubectl delete namespace test-console
+  kubectl delete namespace test-console  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
 ---

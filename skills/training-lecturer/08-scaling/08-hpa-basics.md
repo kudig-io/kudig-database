@@ -87,7 +87,7 @@ CPU/内存 = 顾客排队数量
 • 如果排队人数太少，系统自动关闭多余的窗口
 • 始终保持合理的工作效率
 
-【[[entities/kubernetes|k8s]] 类比】
+【[[entities/kubernetes.md|k8s]] 类比】
 
 HPA = 水平 Pod 自动伸缩器
 Deployment = 被伸缩的资源
@@ -335,6 +335,10 @@ HPA 在等待冷却时间结束，或者正在执行扩缩容操作。
 ---
 
 ## 5. 总结
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```
 【命令速查】

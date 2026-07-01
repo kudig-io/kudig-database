@@ -45,7 +45,7 @@ OpenFeature 是特性标志（Feature Flag）的开放标准，提供供应商�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -62,7 +62,7 @@ OpenFeature 是特性标志（Feature Flag）的开放标准，提供供应商�
 ## 参考链接
 
 - [[deployment]]
-- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]
 
 ## Related
@@ -74,5 +74,5 @@ OpenFeature 是特性标志（Feature Flag）的开放标准，提供供应商�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - openfeature
-- [[entities/cncf-infrastructure|[[CNCF 基础设施与混沌工程项目全景|CNCF 基础设施与混沌工程项目全景]]]] — Cross-reference
+- [[entities/cncf-infrastructure.md|[[CNCF 基础设施与混沌工程项目全景|CNCF 基础设施与混沌工程项目全景]]]] — Cross-reference
 - index/etcd-index|etcd 知识图谱索引]]

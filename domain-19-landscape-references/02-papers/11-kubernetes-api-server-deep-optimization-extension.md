@@ -64,7 +64,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. API Server 架构原理 -->## 1. API Server 架构原理
 
-#<!-- chunk: 1.1 API Server 核心组件 -->## 1.1 API Server 核心组件
+## 1.1 API Server 核心组件
 
 ```yaml
 API Server架构组件:
@@ -87,7 +87,7 @@ API Server架构组件:
     - Webhook: Webhook调用
 ```
 
-#<!-- chunk: 1.2 请求处理流程 -->## 1.2 请求处理流程
+## 1.2 请求处理流程
 
 ```mermaid
 graph TD
@@ -108,7 +108,7 @@ graph TD
 
 <!-- chunk: 2. 性能优化策略 -->## 2. 性能优化策略
 
-#<!-- chunk: 2.1 API Server 参数调优 -->## 2.1 API Server 参数调优
+## 2.1 API Server 参数调优
 
 ```yaml
 # 高性能API Server配置
@@ -183,7 +183,7 @@ spec:
       timeoutSeconds: 15
 ```
 
-#<!-- chunk: 2.2 高可用部署配置 -->## 2.2 高可用部署配置
+## 2.2 高可用部署配置
 
 ```yaml
 # API Server高可用配置
@@ -248,7 +248,7 @@ spec:
 
 <!-- chunk: 3. 扩展机制与API聚合 -->## 3. 扩展机制与API聚合
 
-#<!-- chunk: 3.1 API聚合层配置 -->## 3.1 API聚合层配置
+## 3.1 API聚合层配置
 
 ```yaml
 # API服务注册配置
@@ -281,7 +281,7 @@ spec:
   versionPriority: 100
 ```
 
-#<!-- chunk: 3.2 自定义API服务器开发 -->## 3.2 自定义API服务器开发
+## 3.2 自定义API服务器开发
 
 ```go
 // 自定义API服务器示例
@@ -407,7 +407,7 @@ type CustomAPIServer struct {
 
 <!-- chunk: 4. 准入控制器开发 -->## 4. 准入控制器开发
 
-#<!-- chunk: 4.1 准入控制器实现 -->## 4.1 准入控制器实现
+## 4.1 准入控制器实现
 
 ```go
 // 自定义准入控制器
@@ -628,7 +628,7 @@ func (ac *AdmissionController) writeAdmissionResponse(w http.ResponseWriter, res
 }
 ```
 
-#<!-- chunk: 4.2 Webhook配置 -->## 4.2 Webhook配置
+## 4.2 Webhook配置
 
 ```yaml
 # Validating Webhook配置
@@ -684,7 +684,7 @@ webhooks:
 
 <!-- chunk: 5. 监控与性能分析 -->## 5. 监控与性能分析
 
-#<!-- chunk: 5.1 API Server 监控指标 -->## 5.1 API Server 监控指标
+## 5.1 API Server 监控指标
 
 ```yaml
 # API Server监控配置
@@ -718,7 +718,7 @@ spec:
       targetLabel: __name__
 ```
 
-#<!-- chunk: 5.2 关键性能指标 -->## 5.2 关键性能指标
+## 5.2 关键性能指标
 
 ```prometheus
 # API Server关键指标
@@ -746,7 +746,7 @@ histogram_quantile(0.99, rate(apiserver_authn_duration_seconds_bucket[5m])) > 0.
 histogram_quantile(0.99, rate(apiserver_authz_duration_seconds_bucket[5m])) > 0.1
 ```
 
-#<!-- chunk: 5.3 性能分析工具 -->## 5.3 性能分析工具
+## 5.3 性能分析工具
 
 ```bash
 #!/bin/bash
@@ -807,7 +807,7 @@ echo "性能报告已生成: /tmp/apiserver-performance-report.txt"
 
 <!-- chunk: 6. Kubernetes 1.33/1.34 API Server新特性 — 2026更新 -->## 6. Kubernetes 1.33/1.34 API Server新特性 — 2026更新
 
-#<!-- chunk: 6.1 Streaming List API -->## 6.1 Streaming List API
+## 6.1 Streaming List API
 
 ```yaml
 Streaming List优化:
@@ -827,7 +827,7 @@ Streaming List优化:
     - 客户端: 使用client-go v0.30+自动利用
 ```
 
-#<!-- chunk: 6.2 CEL Admission表达式 -->## 6.2 CEL Admission表达式
+## 6.2 CEL Admission表达式
 
 ```yaml
 # ValidatingAdmissionPolicy - 替代部分Webhook
@@ -878,7 +878,7 @@ CEL vs Webhook准入对比:
   | 推荐场景 | 简单验证逻辑 | 复杂策略/mutate/generate |
 ```
 
-#<!-- chunk: 6.3 Aggregated Discovery API -->## 6.3 Aggregated Discovery API
+## 6.3 Aggregated Discovery API
 
 ```yaml
 Aggregated Discovery优化:
@@ -899,7 +899,7 @@ Aggregated Discovery优化:
 
 <!-- chunk: 7. 安全加固与最佳实践 -->## 7. 安全加固与最佳实践
 
-#<!-- chunk: 6.1 安全配置 -->## 6.1 安全配置
+## 6.1 安全配置
 
 ```yaml
 # API Server安全配置
@@ -958,7 +958,7 @@ spec:
         memory: 2Gi
 ```
 
-#<!-- chunk: 6.2 审计策略 -->## 6.2 审计策略
+## 6.2 审计策略
 
 ```yaml
 # API Server审计策略
@@ -1025,7 +1025,7 @@ rules:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -1046,4 +1046,4 @@ rules:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

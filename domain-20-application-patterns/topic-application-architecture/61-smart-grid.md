@@ -124,13 +124,13 @@ k8s_versions:
 
 <!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-#<!-- chunk: 1.1 行业背景 -->## 1.1 行业背景
+## 1.1 行业背景
 
 智慧电网是新型电力系统的核心基础设施，实现源网荷储协同互动。在"双碳"目标驱动下，中国电力系统正在经历从传统火电为主向新能源为主的深刻转型。截至 2025 年底，中国风电和光伏装机容量分别超过 4 亿千瓦和 6 亿千瓦，新能源占比持续提升。这一转型带来了电网运行方式的根本性变化：新能源出力具有间歇性和波动性，需要更加灵活的调度手段；分布式电源海量接入，需要更智能的配电网管理；电力市场化改革深入推进，需要支撑多样化的交易品种。
 
 智慧电网平台的信息化需求涵盖：新能源功率预测（短期/超短期/长期）、虚拟电厂（VPP）资源聚合与调度、需求响应（DR）管理、配电自动化（FA）、源网荷储协同优化、电力现货市场交易。这些需求对计算资源（AI 推理+优化求解）、存储资源（海量时序测点数据）和实时性（毫秒级保护控制）提出了极高要求。
 
-#<!-- chunk: 1.2 行业挑战 -->## 1.2 行业挑战
+## 1.2 行业挑战
 
 | 挑战 | 说明 | 架构影响 |
 |:---|:---|:---|
@@ -142,7 +142,7 @@ k8s_versions:
 | 市场化交易 | 现货市场实时出清，多品种并行 | 高并发交易引擎 + 清算系统 |
 | 海量数据 | 亿级智能电表数据采集，PB 级存储 | 时序数据库 Lindorm + 数据湖 |
 
-#<!-- chunk: 1.3 市场格局 -->## 1.3 市场格局
+## 1.3 市场格局
 
 中国电网投资规模持续增长，"十四五"期间电网投资总额超过 3 万亿元。国家电网和南方电网是两大电网运营商，分别覆盖 26 个和 5 个省份。智慧电网建设由两大电网主导，同时也催生了一批技术服务商：国电南瑞、许继电气、国网信通等传统电力设备企业，以及阿里云、华为云等云服务商。虚拟电厂、电力交易、综合能源服务等细分赛道吸引了大量创新企业。
 
@@ -150,23 +150,23 @@ k8s_versions:
 
 <!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-#<!-- chunk: 2.1 新能源功率预测 -->## 2.1 新能源功率预测
+## 2.1 新能源功率预测
 
 风电和光伏功率预测是电网调度的基础。短期预测（未来 72 小时）用于日前计划和检修安排；超短期预测（未来 4 小时，15 分钟分辨率）用于实时调度和 AGC；长期预测（月度/年度）用于中长期交易。预测需要融合气象数据（NWP 数值天气预报）、历史功率数据、设备运行状态等多源数据，利用 AI 模型（LSTM、Transformer、图神经网络）进行高精度预测。
 
-#<!-- chunk: 2.2 虚拟电厂（VPP） -->## 2.2 虚拟电厂（VPP）
+## 2.2 虚拟电厂（VPP）
 
 虚拟电厂通过信息通信技术将分布式电源、储能、可调负荷等资源聚合起来，作为一个整体参与电网调度和电力市场。核心功能包括：资源注册与认证、实时状态监测、聚合能力评估、优化调度策略生成、指令下发与执行跟踪、收益结算。VPP 需要协调成千上万个分布式资源，响应电网调度指令的延迟要求 < 100ms。
 
-#<!-- chunk: 2.3 需求响应（DR） -->## 2.3 需求响应（DR）
+## 2.3 需求响应（DR）
 
 在电网负荷紧张时段，通过价格信号或激励机制引导用户侧调整用电行为。场景包括：削峰需求响应（降低高峰负荷）、填谷需求响应（增加低谷用电）、紧急需求响应（应对突发供需失衡）。需求响应管理需要实时监测负荷变化、快速计算可调容量、自动执行响应策略。
 
-#<!-- chunk: 2.4 配电自动化 -->## 2.4 配电自动化
+## 2.4 配电自动化
 
 配电网问题的快速定位、隔离和恢复供电。核心功能包括：馈线自动化（FA）故障定位隔离、配电网自愈重构、分布式电源孤岛检测、配电网状态估计。配电自动化需要在毫秒级检测问题，在秒级完成隔离和转供。
 
-#<!-- chunk: 2.5 源网荷储协同 -->## 2.5 源网荷储协同
+## 2.5 源网荷储协同
 
 多能互补优化调度是新型电力系统的核心运行模式。通过协调风电、光伏、水电、火电、储能、可调负荷等多种资源，在满足电网安全约束的前提下，实现经济最优调度。协同优化需要构建大规模数学规划模型（混合整数线性规划 MILP），求解时间要求在分钟级以内。
 
@@ -174,7 +174,7 @@ k8s_versions:
 
 <!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-#<!-- chunk: 3.1 智慧电网全景架构 -->## 3.1 智慧电网全景架构
+## 3.1 智慧电网全景架构
 
 ```mermaid
 graph TB
@@ -220,7 +220,7 @@ graph TB
     P5 --> G1 & G2 & G3 & G4 & L1 & L2 & L3 & L4
 ```
 
-#<!-- chunk: 3.2 虚拟电厂调度时序 -->## 3.2 虚拟电厂调度时序
+## 3.2 虚拟电厂调度时序
 
 ```mermaid
 sequenceDiagram
@@ -246,7 +246,7 @@ sequenceDiagram
     GRID->>GRID: 实时平衡校验
 ```
 
-#<!-- chunk: 3.3 源网荷储协同优化 -->## 3.3 源网荷储协同优化
+## 3.3 源网荷储协同优化
 
 ```mermaid
 flowchart LR
@@ -281,7 +281,7 @@ flowchart LR
 
 <!-- chunk: 5. K8s 部署方案 -->## 5. K8s 部署方案
 
-#<!-- chunk: 5.1 新能源预测引擎 -->## 5.1 新能源预测引擎
+## 5.1 新能源预测引擎
 
 ```yaml
 apiVersion: apps/v1
@@ -354,7 +354,7 @@ spec:
             claimName: forecast-model-pvc
 ```
 
-#<!-- chunk: 5.2 边缘测控 DaemonSet -->## 5.2 边缘测控 DaemonSet
+## 5.2 边缘测控 DaemonSet
 
 ```yaml
 apiVersion: apps/v1
@@ -420,7 +420,7 @@ spec:
             secretName: grid-edge-certs
 ```
 
-#<!-- chunk: 5.3 VPP 调度优化服务 -->## 5.3 VPP 调度优化服务
+## 5.3 VPP 调度优化服务
 
 ```yaml
 apiVersion: apps/v1
@@ -468,7 +468,7 @@ spec:
 
 <!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-#<!-- chunk: 6.1 数据分层 -->## 6.1 数据分层
+## 6.1 数据分层
 
 ```mermaid
 flowchart TB
@@ -496,7 +496,7 @@ flowchart TB
     采集层 --> 存储层 --> 分析层
 ```
 
-#<!-- chunk: 6.2 数据存储策略 -->## 6.2 数据存储策略
+## 6.2 数据存储策略
 
 | 数据类型 | 存储方案 | 保留策略 | 写入频率 | 数据量级 |
 |:---|:---|:---|:---|:---|
@@ -511,7 +511,7 @@ flowchart TB
 
 <!-- chunk: 7. AI/ML 组件 -->## 7. AI/ML 组件
 
-#<!-- chunk: 7.1 AI 应用矩阵 -->## 7.1 AI 应用矩阵
+## 7.1 AI 应用矩阵
 
 | AI 场景 | 模型/算法 | 输入数据 | 输出 | 硬件需求 |
 |:---|:---|:---|:---|:---|
@@ -528,7 +528,7 @@ flowchart TB
 
 <!-- chunk: 8. 安全合规 -->## 8. 安全合规
 
-#<!-- chunk: 8.1 安全体系 -->## 8.1 安全体系
+## 8.1 安全体系
 
 | 安全层级 | 措施 | 技术实现 |
 |:---|:---|:---|
@@ -539,7 +539,7 @@ flowchart TB
 | 审计追踪 | 操作日志不可篡改 | SLS 审计 + WORM 存储 |
 | 安全监测 | 网络流量分析与入侵检测 | 云安全中心 +态势感知 |
 
-#<!-- chunk: 8.2 合规框架 -->## 8.2 合规框架
+## 8.2 合规框架
 
 - **电力监控系统安全防护规定**: 安全分区、网络专用、横向隔离、纵向认证
 - **等保 2.0 三级**: 电力关键信息基础设施等级保护
@@ -562,19 +562,19 @@ flowchart TB
 
 <!-- chunk: 10. 反模式 -->## 10. 反模式
 
-#<!-- chunk: 10.1 忽视电力安全分区 -->## 10.1 忽视电力安全分区
+## 10.1 忽视电力安全分区
 
 将生产控制区和管理信息区部署在同一网络平面，违反电力监控系统安全防护规定。
 
 **解决方案**: 严格执行安全分区原则，生产控制区（I/II 区）与管理信息区（III/IV 区）通过网闸物理隔离，ACK 集群分别部署在不同安全区。
 
-#<!-- chunk: 10.2 边缘节点无自治 -->## 10.2 边缘节点无自治
+## 10.2 边缘节点无自治
 
 边缘节点完全依赖云端控制，网络中断时变电站失去控制能力。
 
 **解决方案**: 边缘节点部署 ACK@Edge，具备本地自治能力。关键控制逻辑在边缘本地执行，网络恢复后自动同步数据。
 
-#<!-- chunk: 10.3 预测模型不更新 -->## 10.3 预测模型不更新
+## 10.3 预测模型不更新
 
 功率预测模型训练后长期不更新，模型老化导致预测精度持续下降。
 
@@ -584,7 +584,7 @@ flowchart TB
 
 <!-- chunk: 11. 参考资源 -->## 11. 参考资源
 
-#<!-- chunk: 11.1 阿里云组件映射 -->## 11.1 阿里云组件映射
+## 11.1 阿里云组件映射
 
 | 功能域 | 阿里云云原生方案 | 说明 |
 |:---|:---|:---|
@@ -598,7 +598,7 @@ flowchart TB
 | 数字孪生 | **DataV + 3D 可视化** | 电网全景数字孪生 |
 | 可观测性 | **ARMS + SLS** | 全链路监控与审计 |
 
-#<!-- chunk: 11.2 生产检查清单 -->## 11.2 生产检查清单
+## 11.2 生产检查清单
 
 - [ ] 新能源预测模型准确率验证（风电 > 85%，光伏 > 90%）
 - [ ] 虚拟电厂资源聚合能力端到端测试
@@ -618,17 +618,17 @@ flowchart TB
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

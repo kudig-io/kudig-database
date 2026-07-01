@@ -83,7 +83,7 @@ trigger_keywords:
 - Quota
 cross_refs:
 - type: fta
-  path: ../domain-10-troubleshooting-diagnostics/topic-fta/[[skills/resource-quota-fta|resource-quota-fta]].md
+  path: ../domain-10-troubleshooting-diagnostics/topic-fta/[[skills/resource-quota-fta.md|resource-quota-fta]].md
   label: '故障树: resource-quota'
 authors:
 - name: KUDIG Team
@@ -107,7 +107,7 @@ k8s_versions:
 
 <!-- chunk: 1. 多租户架构设计原则 -->## 1. 多租户架构设计原则
 
-#<!-- chunk: 1.1 多租户核心概念 -->## 1.1 多租户核心概念
+## 1.1 多租户核心概念
 
 ```yaml
 多租户架构原则:
@@ -132,7 +132,7 @@ k8s_versions:
      - 问题影响范围控制
 ```
 
-#<!-- chunk: 1.2 隔离级别模型 -->## 1.2 隔离级别模型
+## 1.2 隔离级别模型
 
 ```yaml
 隔离级别分类:
@@ -163,7 +163,7 @@ k8s_versions:
 
 <!-- chunk: 2. 命名空间与资源配额 -->## 2. 命名空间与资源配额
 
-#<!-- chunk: 2.1 命名空间管理策略 -->## 2.1 命名空间管理策略
+## 2.1 命名空间管理策略
 
 ```yaml
 # 命名空间模板配置
@@ -251,7 +251,7 @@ spec:
   backoffLimit: 4
 ```
 
-#<!-- chunk: 2.2 资源配额管理 -->## 2.2 资源配额管理
+## 2.2 资源配额管理
 
 ```yaml
 # 高级资源配额配置
@@ -316,7 +316,7 @@ data:
 
 <!-- chunk: 3. 网络隔离策略 -->## 3. 网络隔离策略
 
-#<!-- chunk: 3.1 多租户网络策略 -->## 3.1 多租户网络策略
+## 3.1 多租户网络策略
 
 ```yaml
 # 租户间网络隔离策略
@@ -430,7 +430,7 @@ spec:
       protocol: UDP
 ```
 
-#<!-- chunk: 3.2 高级网络隔离 -->## 3.2 高级网络隔离
+## 3.2 高级网络隔离
 
 ```yaml
 # 基于Cilium的高级网络策略
@@ -493,7 +493,7 @@ rules:
 
 <!-- chunk: 4. RBAC权限管理 -->## 4. RBAC权限管理
 
-#<!-- chunk: 4.1 租户角色权限设计 -->## 4.1 租户角色权限设计
+## 4.1 租户角色权限设计
 
 ```yaml
 # 租户管理员角色
@@ -556,7 +556,7 @@ rules:
   verbs: ["get", "list", "watch"]
 ```
 
-#<!-- chunk: 4.2 权限绑定策略 -->## 4.2 权限绑定策略
+## 4.2 权限绑定策略
 
 ```yaml
 # 租户权限绑定
@@ -627,7 +627,7 @@ roleRef:
 
 <!-- chunk: 5. 安全策略与准入控制 -->## 5. 安全策略与准入控制
 
-#<!-- chunk: 5.1 Pod安全策略 -->## 5.1 Pod安全策略
+## 5.1 Pod安全策略
 
 ```yaml
 # 多租户Pod安全策略
@@ -717,7 +717,7 @@ webhooks:
   reinvocationPolicy:IfNeeded
 ```
 
-#<!-- chunk: 5.2 策略引擎配置 -->## 5.2 策略引擎配置
+## 5.2 策略引擎配置
 
 ```yaml
 # Open Policy Agent (OPA) 策略
@@ -818,7 +818,7 @@ spec:
 
 <!-- chunk: 6. vCluster虚拟集群与ValidatingAdmissionPolicy — 2026更新 -->## 6. vCluster虚拟集群与ValidatingAdmissionPolicy — 2026更新
 
-#<!-- chunk: 6.1 vCluster虚拟集群多租户 -->## 6.1 vCluster虚拟集群多租户
+## 6.1 vCluster虚拟集群多租户
 
 vCluster提供虚拟Kubernetes集群能力，是多租户架构的重要补充，在隔离性和成本之间提供了优秀的折中方案。
 
@@ -840,7 +840,7 @@ vCluster核心价值:
   详见: "[26-vCluster与虚拟集群多租户](./26-kubernetes-vcluster-virtual-cluster-multi-tenancy.md)"
 ```
 
-#<!-- chunk: 6.2 ValidatingAdmissionPolicy租户策略 -->## 6.2 ValidatingAdmissionPolicy租户策略
+## 6.2 ValidatingAdmissionPolicy租户策略
 
 ```yaml
 # 使用K8s原生VAP实现租户策略强制执行
@@ -893,7 +893,7 @@ spec:
 
 <!-- chunk: 7. 监控与审计 -->## 7. 监控与审计
 
-#<!-- chunk: 6.1 多租户监控架构 -->## 6.1 多租户监控架构
+## 6.1 多租户监控架构
 
 ```yaml
 # 租户监控配置
@@ -995,7 +995,7 @@ spec:
         description: "租户间网络访问违反安全策略"
 ```
 
-#<!-- chunk: 6.2 审计日志管理 -->## 6.2 审计日志管理
+## 6.2 审计日志管理
 
 ```yaml
 # 审计策略配置
@@ -1096,7 +1096,7 @@ data:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -1117,4 +1117,4 @@ data:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

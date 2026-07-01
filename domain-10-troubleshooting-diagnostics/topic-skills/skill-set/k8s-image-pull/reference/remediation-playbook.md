@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-image-pull"
 created: "2026-05-22"
 updated: "2026-05-22"
+last_updated: 2026-05-22
 tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
@@ -46,6 +47,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 确认镜像名称和标签
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 方案 A: 修正 Deployment 中的镜像标签
   kubectl set image deployment/<name> <container>=<correct-image>:<tag> -n <namespace>
@@ -118,6 +123,11 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 确认认证信息是否正确
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 重新创建 docker-registry secret
   kubectl create secret docker-registry <secret-name> \
@@ -156,6 +166,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl get node <node> -o yaml | grep -i proxy
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 重新创建 Pod 测试拉取
   kubectl delete pod <pod> -n <namespace>

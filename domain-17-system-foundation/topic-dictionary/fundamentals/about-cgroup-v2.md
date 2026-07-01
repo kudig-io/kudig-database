@@ -21,8 +21,6 @@ trigger_keywords:
 - cgroup
 - v2
 - 关于
-- cgroup
-- v2
 - dictionary
 prerequisites:
 - kubectl-basics
@@ -39,7 +37,7 @@ created: "2026-05-23"
 ## 核心概念/原理
 
 - **cgroup v2**：Linux cgroup API 的下一个版本，提供了一个统一的控制系统，具有增强的资源管理能力。
-- **与 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 的集成**：自 v1.25 起，cgroup v2 在 Kubernetes 中达到 Stable 状态。kubelet 能够自动检测操作系统是否运行在 cgroup v2 上，并自动适配，无需额外配置。
+- **与 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 的集成**：自 v1.25 起，cgroup v2 在 Kubernetes 中达到 Stable 状态。kubelet 能够自动检测操作系统是否运行在 cgroup v2 上，并自动适配，无需额外配置。
 - **Kubernetes v1.35 弃用 cgroup v1**：cgroup v1 已被弃用，kubelet 默认不再在 cgroup v1 节点上启动。如需禁用该检查，集群管理员需在 kubelet 配置文件中设置 `failCgroupV1: false`。
 
 ## 关键机制或特性
@@ -83,3 +81,9 @@ stat -fc %T /sys/fs/cgroup/
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/architecture/cgroups/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/annotations.md|注解]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/bpfman.md|bpfman eBPF 管理器]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/cloud-controller-manager.md|Cloud Controller Manager（云控制器管理器）]]

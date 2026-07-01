@@ -41,7 +41,7 @@ Secret 是 [[Kubernetes|Kubernetes]] 中用于存储敏感数据（如密码、�
 ## 核心概念/原理
 
 - **与 ConfigMap 的对比**：Secret 与 ConfigMap 类似，但专门用于保存机密数据。Kubernetes 对 Secret 对象会施加额外的保护措施。
-- **默认存储状态**：默认情况下，Secret 以未加密形式存储在 API Server 的后端数据存储（[[etcd|etcd]]）中。任何拥有 API 访问权限或 etcd 访问权限的人都可以读取或修改 Secret。
+- **默认存储状态**：默认情况下，Secret 以未加密形式存储在 API Server 的后端数据存储（[[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]]）中。任何拥有 API 访问权限或 etcd 访问权限的人都可以读取或修改 Secret。
 - **访问控制**：在该命名空间中拥有创建 Pod 权限的用户，可以间接读取该命名空间下的所有 Secret（例如通过 Deployment）。因此，必须配合 RBAC 进行严格授权。
 - **数据字段**：
   - `data`：值为 base64 编码的字符串。
@@ -206,6 +206,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 从字面量创建 Opaque Secret
 kubectl create secret generic db-credentials \
@@ -244,6 +247,4 @@ kubectl get pods -n production -o json | jq '.items[] | select(.spec.volumes[]?.
 - [Kubernetes 官方文档 - Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
 
 ## Related
-
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]

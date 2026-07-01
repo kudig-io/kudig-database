@@ -196,6 +196,9 @@ created: "2026-05-23"
 
 ### 2. Chart 仓库操作大全
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # ==================== 仓库管理 ====================
 
@@ -630,6 +633,10 @@ secrets:
 
 ### 4. Helm 版本管理与回滚
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # ==================== 部署管理 ====================
 
@@ -714,13 +721,13 @@ helm test myapp -n production --logs
 # ==================== 卸载 ====================
 
 # 卸载 Release
-helm uninstall myapp -n production
+helm uninstall myapp -n production  # ⚠️ 删除 release 及关联资源
 
 # 卸载但保留历史
-helm uninstall myapp -n production --keep-history
+helm uninstall myapp -n production --keep-history  # ⚠️ 删除 release 及关联资源
 
 # 彻底删除 (包括保留的历史)
-helm uninstall myapp -n production --no-hooks
+helm uninstall myapp -n production --no-hooks  # ⚠️ 删除 release 及关联资源
 
 # ==================== Diff 插件 (推荐) ====================
 
@@ -1158,8 +1165,7 @@ patches:
                     value: production
   
   # JSON6902 Patch
-  - target:
-      group: apps
+  - target: "`group: apps`"
       version: v1
       kind: Deployment
       name: myapp
@@ -1285,6 +1291,10 @@ spec:
 ```
 
 ### 4. Kustomize 操作命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # ==================== 构建与预览 ====================
@@ -1970,6 +1980,10 @@ fi
 
 ### Helm 命令速查
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 仓库管理
 helm repo add NAME URL          # 添加仓库
@@ -1981,7 +1995,7 @@ helm install NAME CHART         # 安装
 helm upgrade NAME CHART         # 升级
 helm upgrade --install NAME     # 安装或升级
 helm rollback NAME REVISION     # 回滚
-helm uninstall NAME             # 卸载
+helm uninstall NAME             # 卸载  # ⚠️ 删除 release 及关联资源
 
 # 调试
 helm template NAME CHART        # 渲染模板
@@ -1996,6 +2010,9 @@ helm get values NAME            # 获取 Values
 ```
 
 ### Kustomize 命令速查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 构建
@@ -2055,7 +2072,7 @@ kustomize edit set namespace    # 设置命名空间
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
 - index.md|Domain-10 扩展与自定义 — 开源项目索引]]
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现
@@ -2069,7 +2086,7 @@ kustomize edit set namespace    # 设置命名空间
 
 ## Related
 
-- [[synthesis/Operator 模式 × 可观测性|Operator 模式 × 可观测性]]
+- [[concepts/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
 
 - CRD 开发指南
 - CI/CD 管道
@@ -2081,3 +2098,5 @@ kustomize edit set namespace    # 设置命名空间
 - 04-api-aggregation-extension
 - 06-helm-charts-management
 - 07-helm-advanced-operations
+
+```

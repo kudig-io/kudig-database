@@ -82,7 +82,7 @@ created: "2026-05-23"
 
 <!-- chunk: 块设备与分区 -->## 块设备与分区
 
-#<!-- chunk: 块设备概述 -->## 块设备概述
+## 块设备概述
 
 | 设备类型 | 命名 | 说明 |
 |:---|:---|:---|
@@ -91,7 +91,7 @@ created: "2026-05-23"
 | 虚拟磁盘 | /dev/vd[a-z] | virtio 磁盘 |
 | 设备映射 | /dev/dm-[0-9] | LVM/LUKS |
 
-#<!-- chunk: 查看块设备 -->## 查看块设备
+## 查看块设备
 
 ```bash
 # 列出块设备
@@ -105,7 +105,7 @@ blkid
 fdisk -l
 ```
 
-#<!-- chunk: 分区操作 -->## 分区操作
+## 分区操作
 
 ```bash
 # GPT 分区 (推荐)
@@ -123,7 +123,7 @@ parted /dev/sdb
 
 <!-- chunk: LVM 逻辑卷管理 -->## LVM 逻辑卷管理
 
-#<!-- chunk: LVM 架构 -->## LVM 架构
+## LVM 架构
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -138,7 +138,7 @@ parted /dev/sdb
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: LVM 操作 -->## LVM 操作
+## LVM 操作
 
 ```bash
 # 创建物理卷
@@ -168,7 +168,7 @@ mkfs.xfs /dev/vg01/lv_data
 mount /dev/vg01/lv_data /data
 ```
 
-#<!-- chunk: LVM 扩展 -->## LVM 扩展
+## LVM 扩展
 
 ```bash
 # 扩展 VG (添加新磁盘)
@@ -187,7 +187,7 @@ resize2fs /dev/vg01/lv_data
 xfs_growfs /data
 ```
 
-#<!-- chunk: LVM 快照 -->## LVM 快照
+## LVM 快照
 
 ```bash
 # 创建快照
@@ -207,7 +207,7 @@ lvremove /dev/vg01/lv_data_snap
 
 <!-- chunk: 软件 RAID -->## 软件 RAID
 
-#<!-- chunk: RAID 级别 -->## RAID 级别
+## RAID 级别
 
 | 级别 | 最少磁盘 | 容量利用 | 特点 |
 |:---|:---:|:---:|:---|
@@ -217,7 +217,7 @@ lvremove /dev/vg01/lv_data_snap
 | RAID 6 | 4 | (n-2)/n | 双校验 |
 | RAID 10 | 4 | 50% | 镜像+条带 |
 
-#<!-- chunk: mdadm 操作 -->## mdadm 操作
+## mdadm 操作
 
 ```bash
 # 创建 RAID 1
@@ -234,7 +234,7 @@ mdadm --detail /dev/md0
 mdadm --detail --scan >> /etc/mdadm.conf
 ```
 
-#<!-- chunk: RAID 管理 -->## RAID 管理
+## RAID 管理
 
 ```bash
 # 添加磁盘
@@ -257,7 +257,7 @@ mdadm --assemble /dev/md0 /dev/sdb1 /dev/sdc1
 
 <!-- chunk: I/O 调度器 -->## I/O 调度器
 
-#<!-- chunk: 调度器类型 -->## 调度器类型
+## 调度器类型
 
 | 调度器 | 特点 | 适用场景 |
 |:---|:---|:---|
@@ -266,7 +266,7 @@ mdadm --assemble /dev/md0 /dev/sdb1 /dev/sdc1
 | **bfq** | 公平队列 | 桌面交互 |
 | **kyber** | 低延迟 | 高性能 |
 
-#<!-- chunk: 配置调度器 -->## 配置调度器
+## 配置调度器
 
 ```bash
 # 查看当前调度器
@@ -283,7 +283,7 @@ echo mq-deadline > /sys/block/sda/queue/scheduler
 
 <!-- chunk: 存储性能分析 -->## 存储性能分析
 
-#<!-- chunk: I/O 监控 -->## I/O 监控
+## I/O 监控
 
 ```bash
 # iostat
@@ -296,7 +296,7 @@ iotop -oP
 dstat -d
 ```
 
-#<!-- chunk: iostat 字段 -->## iostat 字段
+## iostat 字段
 
 | 字段 | 说明 |
 |:---|:---|
@@ -307,7 +307,7 @@ dstat -d
 | await | 平均等待 (ms) |
 | %util | 磁盘利用率 |
 
-#<!-- chunk: 性能测试 -->## 性能测试
+## 性能测试
 
 ```bash
 # fio 测试
@@ -323,7 +323,7 @@ dd if=/test of=/dev/null bs=1M iflag=direct
 
 <!-- chunk: 磁盘配额 -->## 磁盘配额
 
-#<!-- chunk: 启用配额 -->## 启用配额
+## 启用配额
 
 ```bash
 # 挂载选项
@@ -337,7 +337,7 @@ quotacheck -cug /data
 quotaon /data
 ```
 
-#<!-- chunk: 配置配额 -->## 配置配额
+## 配置配额
 
 ```bash
 # 编辑用户配额
@@ -356,7 +356,7 @@ repquota /data
 
 <!-- chunk: 文件系统管理 -->## 文件系统管理
 
-#<!-- chunk: 文件系统类型对比 -->## 文件系统类型对比
+## 文件系统类型对比
 
 | 文件系统 | 最大卷 | 最大文件 | 日志 | 快照 | 适用场景 |
 |---------|--------|---------|------|------|---------|
@@ -365,7 +365,7 @@ repquota /data
 | **Btrfs** | 16EiB | 16EiB | COW | 是 | 数据完整性要求高 |
 | **ZFS** | 256ZiB | 16EiB | COW | 是 | 企业存储、NAS |
 
-#<!-- chunk: ext4 调优 -->## ext4 调优
+## ext4 调优
 
 ```bash
 # 创建 ext4 文件系统（优化参数）
@@ -386,7 +386,7 @@ mount -o noatime,nodiratime,data=writeback,barrier=0 /dev/vg01/lv_data /data
 /dev/vg01/lv_data  /data  ext4  defaults,noatime,nodiratime  0 2
 ```
 
-#<!-- chunk: XFS 调优 -->## XFS 调优
+## XFS 调优
 
 ```bash
 # 创建 XFS（优化参数）
@@ -406,7 +406,7 @@ xfs_growfs /data
 /dev/vg01/lv_data  /data  xfs  defaults,noatime,nodiratime,logbufs=8  0 2
 ```
 
-#<!-- chunk: 文件系统性能对比测试 -->## 文件系统性能对比测试
+## 文件系统性能对比测试
 
 ```bash
 #!/bin/bash
@@ -461,7 +461,7 @@ done
 
 <!-- chunk: 企业级 LVM 实践 -->## 企业级 LVM 实践
 
-#<!-- chunk: LVM 条带化（Striping） -->## LVM 条带化（Striping）
+## LVM 条带化（Striping）
 
 ```bash
 # 创建条带化 LV（提升顺序读写性能）
@@ -473,7 +473,7 @@ lvcreate -L 500G -i 4 -I 64K -n lv_stripe vg01
 lvcreate -L 200G -m 1 --mirrorlog mirrored -n lv_mirrored vg01
 ```
 
-#<!-- chunk: LVM 缓存池 -->## LVM 缓存池
+## LVM 缓存池
 
 ```bash
 # 创建缓存池（SSD 加速 HDD）
@@ -489,7 +489,7 @@ lvconvert --type cache-pool vg01/lv_cache_pool
 lvconvert --type cache --cachepool vg01/lv_cache_pool vg01/lv_data
 ```
 
-#<!-- chunk: LVM 精简配置（Thin Provisioning） -->## LVM 精简配置（Thin Provisioning）
+## LVM 精简配置（Thin Provisioning）
 
 ```bash
 # 创建精简池
@@ -509,7 +509,7 @@ lvresize -L +50G vg01/thin_pool
 
 <!-- chunk: 高级 RAID 运维 -->## 高级 RAID 运维
 
-#<!-- chunk: RAID 性能调优 -->## RAID 性能调优
+## RAID 性能调优
 
 ```bash
 # RAID 条带大小优化
@@ -530,7 +530,7 @@ mdadm --grow --bitmap=internal /dev/md0
 cat /proc/mdstat | grep recovery
 ```
 
-#<!-- chunk: RAID 磁盘故障处理 SOP -->## RAID 磁盘故障处理 SOP
+## RAID 磁盘故障处理 SOP
 
 ```bash
 #!/bin/bash
@@ -648,7 +648,7 @@ echo "=========================================="
 
 <!-- chunk: 网络文件系统 -->## 网络文件系统
 
-#<!-- chunk: NFS 客户端优化 -->## NFS 客户端优化
+## NFS 客户端优化
 
 ```bash
 # NFS 挂载优化参数
@@ -666,7 +666,7 @@ mount -t nfs -o vers=4.1,rsize=1048576,wsize=1048576,hard,intr,noatime \
 nfs-server:/export/data  /mnt/nfs  nfs  vers=4.1,rsize=1048576,wsize=1048576,hard,intr,noatime  0 0
 ```
 
-#<!-- chunk: iSCSI 配置 -->## iSCSI 配置
+## iSCSI 配置
 
 ```bash
 # 安装 iSCSI 客户端
@@ -693,7 +693,7 @@ multipath -ll
 
 <!-- chunk: 与 [[Kubernetes|Kubernetes]] 的关系 -->## 与 Kubernetes 的关系
 
-#<!-- chunk: K8s 持久化存储架构 -->## K8s 持久化存储架构
+## K8s 持久化存储架构
 
 Kubernetes 使用 PV (PersistentVolume) 和 PVC (PersistentVolumeClaim) 抽象存储管理，底层依赖 Linux 存储技术。
 
@@ -723,7 +723,7 @@ Kubernetes 使用 PV (PersistentVolume) 和 PVC (PersistentVolumeClaim) 抽象�
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: [[etcd|etcd]] 存储要求 -->## etcd 存储要求
+## etcd 存储要求
 
 etcd 是 Kubernetes 的核心数据存储，对磁盘 I/O 延迟极度敏感：
 
@@ -750,7 +750,7 @@ etcdctl endpoint status --write-out=table
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: 存储性能优化矩阵 -->## 存储性能优化矩阵
+## 存储性能优化矩阵
 
 | 场景 | 文件系统 | I/O 调度器 | 挂载参数 | RAID 级别 |
 |:---|:---|:---|:---|:---|
@@ -761,7 +761,11 @@ etcdctl endpoint status --write-out=table
 | **容器镜像** | XFS | none (SSD) | noatime | JBOD |
 | **NFS 服务** | XFS | mq-deadline | noatime | RAID6 |
 
-#<!-- chunk: LVM 与 K8s 动态存储供应 -->## LVM 与 K8s 动态存储供应
+## LVM 与 K8s 动态存储供应
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 使用 TopoLVM CSI 实现 LVM 动态供应
@@ -793,7 +797,7 @@ EOF
 
 <!-- chunk: 安全加固 -->## 安全加固
 
-#<!-- chunk: 存储安全 -->## 存储安全
+## 存储安全
 
 在生产环境中，存储安全是不可忽视的重要环节。数据加密、访问控制和完整性校验是存储安全的三大支柱。LUKS (Linux Unified Key Setup) 提供透明的块设备加密，确保即使物理磁盘被盗也无法读取数据。LVM 的精简配置需要特别监控，避免空间耗尽导致数据丢失。
 
@@ -845,7 +849,7 @@ iscsiadm -m node -T iqn.2024.storage:vol01 -p 192.168.1.100:3260 \
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 存储故障诊断 -->## 存储故障诊断
+## 存储故障诊断
 
 ```bash
 # LVM 问题
@@ -864,7 +868,7 @@ smartctl -H /dev/sda                   # 健康状态
 badblocks -sv /dev/sda                 # 坏块检测
 ```
 
-#<!-- chunk: 存储性能监控脚本 -->## 存储性能监控脚本
+## 存储性能监控脚本
 
 ```bash
 #!/bin/bash
@@ -904,7 +908,7 @@ done
 echo "=== 监控完成 ==="
 ```
 
-#<!-- chunk: 存储容量规划 -->## 存储容量规划
+## 存储容量规划
 
 存储容量规划是避免磁盘空间耗尽导致服务中断的关键。在 Kubernetes 环境中，需要同时关注节点本地存储和持久化存储的容量趋势。
 
@@ -964,5 +968,5 @@ echo "=== 检查完成 ==="
 ## Related
 
 - index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]

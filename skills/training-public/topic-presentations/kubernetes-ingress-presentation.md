@@ -58,14 +58,14 @@ created: "2026-05-23"
 
 <!-- chunk: 演讲概述 -->## 演讲概述
 
-#<!-- chunk: 目标受众 -->## 目标受众
+## 目标受众
 
 - 初级运维：理解 Ingress 在流量链路中的位置
 - 流量治理专家：掌握高级路由、金丝雀发布、A/B 测试
 - SRE 工程师：Ingress 高可用架构设计与故障排查
 - 网络工程师：理解 Nginx Ingress Controller 的内部机制
 
-#<!-- chunk: 预计时长 -->## 预计时长
+## 预计时长
 
 | 阶段 | 内容 | 时长 |
 |------|------|------|
@@ -78,7 +78,7 @@ created: "2026-05-23"
 | Q&A | 互动问答 | 15 分钟 |
 | **合计** | | **约 3 小时** |
 
-#<!-- chunk: 核心学习目标 -->## 核心学习目标
+## 核心学习目标
 
 完成本次培训后，学员能够：
 
@@ -89,7 +89,7 @@ created: "2026-05-23"
 5. 排查 Ingress 502/504 等常见问题
 6. 设计生产级高可用 Ingress 架构
 
-#<!-- chunk: 核心要点 -->## 核心要点
+## 核心要点
 
 1. Ingress 是集群 HTTP/HTTPS 的统一入口，提供域名和路径路由
 2. Ingress 资源是"规则"，Ingress Controller 是"执行者"
@@ -117,7 +117,7 @@ created: "2026-05-23"
 
 <!-- chunk: 核心概念讲解 -->## 核心概念讲解
 
-#<!-- chunk: 什么是 Ingress？ -->## 什么是 Ingress？
+## 什么是 Ingress？
 
 在 Kubernetes 中暴露服务有多种方式，各有局限：
 
@@ -153,7 +153,7 @@ created: "2026-05-23"
 
 Kubernetes 社区正在推出 Gateway API 作为 Ingress 的下一代替代。Gateway API 提供更丰富的路由能力（如流量拆分、Header 匹配、重试策略）和更精细的角色分离。但目前 Ingress 仍然是生产环境最广泛使用的方案，Nginx Ingress Controller 生态最成熟。
 
-#<!-- chunk: Ingress 资源类型 -->## Ingress 资源类型
+## Ingress 资源类型
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -225,7 +225,7 @@ spec:
 
 IngressClass 用于指定使用哪个 Ingress Controller 处理 Ingress 规则。当集群中部署了多个 Ingress Controller（如 Nginx + Traefik）时，通过 `spec.ingressClassName` 选择。
 
-#<!-- chunk: Ingress Controller 工作原理 -->## Ingress Controller 工作原理
+## Ingress Controller 工作原理
 
 以 Nginx Ingress Controller 为例：
 
@@ -268,7 +268,7 @@ graph LR
 | Shared Memory | 存储 Upstream 状态 | Worker 间共享数据 |
 | SSL Session Cache | TLS 会话复用 | 减少 TLS 握手开销 |
 
-#<!-- chunk: TLS 证书管理 (Cert-Manager) -->## TLS 证书管理 (Cert-Manager)
+## TLS 证书管理 (Cert-Manager)
 
 Cert-Manager 是 Kubernetes 的证书管理工具，可以自动化 Let's Encrypt 证书的申请和续签：
 
@@ -317,7 +317,7 @@ spec:
 8. 证书到期前 30 天自动重复以上流程
 ```
 
-#<!-- chunk: 高级流量治理 -->## 高级流量治理
+## 高级流量治理
 
 **金丝雀发布 (Canary Deployment)：**
 
@@ -381,7 +381,7 @@ spec:
 
 <!-- chunk: 架构图 -->## 架构图
 
-#<!-- chunk: 完整流量路径 -->## 完整流量路径
+## 完整流量路径
 
 ```mermaid
 graph TB
@@ -416,7 +416,7 @@ graph TB
     style IC fill:#e8f5e9,stroke:#2e7d32
 ```
 
-#<!-- chunk: Nginx Ingress Controller 内部架构 -->## Nginx Ingress Controller 内部架构
+## Nginx Ingress Controller 内部架构
 
 ```mermaid
 graph TB
@@ -451,7 +451,7 @@ graph TB
     style IC fill:#f3e5f5,stroke:#7b1fa2
 ```
 
-#<!-- chunk: 高可用部署架构 -->## 高可用部署架构
+## 高可用部署架构
 
 ```mermaid
 graph TB
@@ -490,7 +490,10 @@ graph TB
 
 <!-- chunk: 实战演示步骤 -->## 实战演示步骤
 
-#<!-- chunk: 演示 1：部署 Nginx Ingress Controller -->## 演示 1：部署 Nginx Ingress Controller
+## 演示 1：部署 Nginx Ingress Controller
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 步骤 1: 使用 Helm 部署
@@ -530,7 +533,10 @@ kubectl get svc ingress-nginx-controller -n ingress-nginx
 # 记录 EXTERNAL-IP，后续测试使用
 ```
 
-#<!-- chunk: 演示 2：创建第一个 Ingress -->## 演示 2：创建第一个 Ingress
+## 演示 2：创建第一个 Ingress
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 部署后端应用
@@ -591,7 +597,10 @@ curl -H "Host: myapp.example.com" http://203.0.113.10/api
 # 预期输出: Nginx 欢迎页面（来自 api-app）
 ```
 
-#<!-- chunk: 演示 3：配置 TLS -->## 演示 3：配置 TLS
+## 演示 3：配置 TLS
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 创建自签名证书（测试用）
@@ -643,7 +652,10 @@ curl -I http://myapp.example.com
 # 预期输出: 308 Permanent Redirect → Location: https://myapp.example.com/
 ```
 
-#<!-- chunk: 演示 4：金丝雀发布实战 -->## 演示 4：金丝雀发布实战
+## 演示 4：金丝雀发布实战
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 部署 v1 版本（稳定版）
@@ -708,7 +720,10 @@ done | sort | uniq -c
 # 预期输出: 大约 16 次 v1，4 次 v2（80%/20% 分配）
 ```
 
-#<!-- chunk: 演示 5：性能调优配置 -->## 演示 5：性能调优配置
+## 演示 5：性能调优配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 优化 Nginx Ingress ConfigMap
@@ -770,9 +785,13 @@ EOF
 
 <!-- chunk: 动手实验 -->## 动手实验
 
-#<!-- chunk: 实验 1：完整的应用发布流程 -->## 实验 1：完整的应用发布流程
+## 实验 1：完整的应用发布流程
 
 **目标**：从部署到 TLS 到金丝雀发布的完整流程
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 1. 部署应用
@@ -816,19 +835,19 @@ kubectl annotate ingress lab-ingress \
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
 
-#<!-- chunk: Q1: Ingress 和 Service 的区别是什么？ -->## Q1: Ingress 和 Service 的区别是什么？
+## Q1: Ingress 和 Service 的区别是什么？
 
 **回答**: Service 工作在 L4（TCP/UDP 层），只支持 IP:Port 的转发。Ingress 工作在 L7（HTTP 层），支持域名路由、路径匹配、TLS 终结等高级功能。一个 Service 只能对应一个后端服务，而一个 Ingress 可以管理多个后端服务的路由规则。在生产环境中，通常是"外部 LB → Ingress Controller → Service → Pod"的链路。Ingress 不替代 Service，而是在 Service 之上提供 L7 路由能力。
 
-#<!-- chunk: Q2: 应该选择哪个 Ingress Controller？ -->## Q2: 应该选择哪个 Ingress Controller？
+## Q2: 应该选择哪个 Ingress Controller？
 
 **回答**: 取决于场景。**Nginx Ingress** 生态最成熟，社区活跃，适合大多数场景。**Kong** 插件丰富，适合 API 网关。**Traefik** 配置简单，适合中小规模。**Envoy/Istio Gateway** 适合服务网格场景。**APISIX** 高性能，支持动态配置。推荐新手从 Nginx Ingress 开始，生产环境根据功能需求选择。
 
-#<!-- chunk: Q3: Ingress Controller 应该 DaemonSet 还是 Deployment？ -->## Q3: Ingress Controller 应该 DaemonSet 还是 Deployment？
+## Q3: Ingress Controller 应该 DaemonSet 还是 Deployment？
 
 **回答**: 推荐使用 **Deployment + HPA**，配合专用节点池和 Node Affinity。DaemonSet 的优势是每个节点一个 Pod，但在流量波动大的场景下无法动态扩缩。Deployment + HPA 可以根据 CPU/内存使用率自动增减副本数。同时使用 `nodeSelector` 或 `nodeAffinity` 将 Ingress Pod 调度到专用节点上，隔离 TLS 握手带来的 CPU 压力。
 
-#<!-- chunk: Q4: 如何处理 WebSocket 长连接？ -->## Q4: 如何处理 WebSocket 长连接？
+## Q4: 如何处理 WebSocket 长连接？
 
 **回答**: Nginx Ingress 默认支持 WebSocket，但需要配置超时参数：
 
@@ -841,11 +860,11 @@ annotations:
 
 关键是将 `proxy-read-timeout` 设置为大于 WebSocket 最大空闲时间，否则连接会被 Nginx 断开。
 
-#<!-- chunk: Q5: Ingress 的 502/504 错误如何排查？ -->## Q5: Ingress 的 502/504 错误如何排查？
+## Q5: Ingress 的 502/504 错误如何排查？
 
 **回答**: 排查步骤：(1) 检查后端 Service 和 Pod 是否正常：`kubectl get svc` 和 `kubectl get pods`；(2) 检查 Ingress 的 backend 配置是否正确：`kubectl describe ingress`；(3) 查看 Ingress Controller 日志：`kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --tail=100`；(4) 检查后端 Pod 的 Readiness Probe 是否通过；(5) 检查超时配置是否合理。502 通常是后端 Pod 不可用或未 Ready，504 通常是后端响应超时。
 
-#<!-- chunk: Q6: 如何实现基于 IP 的访问控制？ -->## Q6: 如何实现基于 IP 的访问控制？
+## Q6: 如何实现基于 IP 的访问控制？
 
 **回答**: 使用 `nginx.ingress.kubernetes.io/whitelist-source-range` 注解：
 
@@ -856,23 +875,23 @@ annotations:
 
 也可以使用 NetworkPolicy 在 Pod 级别限制。对于更复杂的访问控制，建议使用 OPA/Gatekeeper 等策略引擎。
 
-#<!-- chunk: Q7: 生产环境 Ingress 需要多少资源？ -->## Q7: 生产环境 Ingress 需要多少资源？
+## Q7: 生产环境 Ingress 需要多少资源？
 
 **回答**: 标准配置建议：requests: cpu=200m, memory=256Mi; limits: cpu=1, memory=512Mi。实际资源消耗取决于 QPS、TLS 握手频率、规则数量。建议通过监控观察实际使用量后调整。TLS 卸载是最消耗 CPU 的操作，如果 QPS > 5000，建议考虑硬件加速或使用外部 TLS 终结。在高并发场景下，Worker 进程数建议设置为 CPU 核心数。
 
-#<!-- chunk: Q8: 如何实现灰度发布/金丝雀发布？ -->## Q8: 如何实现灰度发布/金丝雀发布？
+## Q8: 如何实现灰度发布/金丝雀发布？
 
 **回答**: Nginx Ingress 支持 Canary 注解：(1) 基于权重：`canary-weight: "20"`（20% 流量到新版本）；(2) 基于 Header：`canary-by-header: "X-Canary"`（特定 Header 请求到新版本）；(3) 基于 Cookie：`canary-by-cookie: "canary"`（特定 Cookie 请求到新版本）。配合 `weight` 和 `header` 组合使用可以实现精细的灰度策略。注意金丝雀 Ingress 必须和稳定版 Ingress 使用相同的 host。
 
-#<!-- chunk: Q9: 如何监控 Ingress Controller？ -->## Q9: 如何监控 Ingress Controller？
+## Q9: 如何监控 Ingress Controller？
 
 **回答**: 关键指标：`nginx_ingress_controller_request_duration_seconds`（响应延迟 P99）、`nginx_ingress_controller_requests{status=~"5.."}`（5xx 错误率）、`nginx_ingress_controller_nginx_process_connections`（连接数）、`nginx_ingress_controller_config_last_reload_successful`（配置重载是否成功）、`nginx_ingress_controller_bytes`（吞吐量）。建议在 Grafana 中导入 Ingress 监控面板（Dashboard ID: 9614）。
 
-#<!-- chunk: Q10: Ingress 规则变更会不会导致断连？ -->## Q10: Ingress 规则变更会不会导致断连？
+## Q10: Ingress 规则变更会不会导致断连？
 
 **回答**: Nginx Ingress 区分两种更新：(1) **Pod Endpoints 变更**（最频繁）：通过 Lua 动态更新 Shared Memory，不需要 Reload，不会断连；(2) **Ingress 规则变更**（添加/修改/删除 Ingress 资源）：需要生成新配置并 Reload Nginx，会导致极短暂的连接中断（通常 < 1ms）。生产环境中 Ingress 规则变更频率远低于 Pod 变更频率，影响可忽略。
 
-#<!-- chunk: Q11: 如何排查 Ingress 路由不生效？ -->## Q11: 如何排查 Ingress 路由不生效？
+## Q11: 如何排查 Ingress 路由不生效？
 
 **回答**: (1) `kubectl describe ingress <name>` 查看 Backends 是否正确绑定；(2) `kubectl get endpoints <service>` 确认 Service 有健康的后端 Pod；(3) 检查 Ingress 的 `ingressClassName` 是否与 Controller 匹配；(4) 查看 Ingress Controller 日志中是否有配置错误；(5) 使用 `curl -vH "Host: xxx"` 测试，查看响应 Header 中的路由信息；(6) 检查注解拼写是否正确。
 
@@ -880,7 +899,7 @@ annotations:
 
 <!-- chunk: 要点总结 -->## 要点总结
 
-#<!-- chunk: Ingress 知识图谱 -->## Ingress 知识图谱
+## Ingress 知识图谱
 
 ```
 Ingress
@@ -909,7 +928,7 @@ Ingress
     └── 访问日志优化 (buffer + flush)
 ```
 
-#<!-- chunk: 关键注解速查表 -->## 关键注解速查表
+## 关键注解速查表
 
 | 注解 | 用途 | 示例值 |
 |------|------|--------|
@@ -924,7 +943,7 @@ Ingress
 | `limit-connections` | 连接数限制 | `"10"` |
 | `limit-rps` | 每秒请求数限制 | `"100"` |
 
-#<!-- chunk: SRE 运维红线 -->## SRE 运维红线
+## SRE 运维红线
 
 | 红线 | 说明 | 违反后果 |
 |------|------|---------|
@@ -939,7 +958,7 @@ Ingress
 
 <!-- chunk: 延伸阅读 -->## 延伸阅读
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 
 | 资源 | 链接 | 说明 |
 |------|------|------|
@@ -949,7 +968,7 @@ Ingress
 | Ingress API | https://kubernetes.io/docs/reference/kubernetes-api/service-resources/ingress-v1/ | API 参考 |
 | Gateway API | https://gateway-api.sigs.k8s.io/ | 下一代网关标准 |
 
-#<!-- chunk: 关联培训专题 -->## 关联培训专题
+## 关联培训专题
 
 - `kubernetes-service-presentation.md` — Service 四种类型与 Ingress 的协作
 - `kubernetes-security-rbac-presentation.md` — Ingress 安全加固

@@ -76,7 +76,7 @@ created: "2026-05-23"
 
 在 GitOps 与 CI/CD 实践中，安全合规是不可忽视的关键维度。随着软件供应链攻击事件的频发（如 SolarWinds、Codecov、Log4Shell），企业对软件交付过程中的安全性和可追溯性提出了更高的要求。SLSA（Supply-chain Levels for Software Artifacts）框架定义了四个递进的供应链安全等级，SBOM（Software Bill of Materials）提供了软件组件的完整清单，镜像签名确保了制品的完整性和来源可信。
 
-#<!-- chunk: 1.1 SLSA 安全等级详解 -->## 1.1 SLSA 安全等级详解
+## 1.1 SLSA 安全等级详解
 
 SLSA 框架定义了从 Level 1 到 Level 4 的递进安全等级。每个等级建立在前一个等级的基础之上，逐步加强供应链的安全保证。
 
@@ -132,7 +132,7 @@ SLSA_Level_4_最高安全等级:
   实施周期: 3-6个月
 ```
 
-#<!-- chunk: 1.2 SLSA Level 要求对比 -->## 1.2 SLSA Level 要求对比
+## 1.2 SLSA Level 要求对比
 
 | 要求 | Level 1 | Level 2 | Level 3 | Level 4 |
 |:---|:---|:---|:---|:---|
@@ -149,7 +149,7 @@ SLSA_Level_4_最高安全等级:
 
 <!-- chunk: 二、架构设计 -->## 二、架构设计
 
-#<!-- chunk: 2.1 供应链安全架构 -->## 2.1 供应链安全架构
+## 2.1 供应链安全架构
 
 ```mermaid
 graph TB
@@ -195,7 +195,7 @@ graph TB
 
 <!-- chunk: 三、Cosign 镜像签名完整工作流 -->## 三、Cosign 镜像签名完整工作流
 
-#<!-- chunk: 3.1 Cosign 密钥管理 -->## 3.1 Cosign 密钥管理
+## 3.1 Cosign 密钥管理
 
 ```bash
 # Generate key pair (interactive, will prompt for password)
@@ -214,7 +214,7 @@ cosign generate-key-pair --kms awskms:///alias/cosign-key
 cosign generate-key-pair --kms hashivault://cosign-key
 ```
 
-#<!-- chunk: 3.2 Cosign 签名完整流程 YAML -->## 3.2 Cosign 签名完整流程 YAML
+## 3.2 Cosign 签名完整流程 YAML
 
 ```yaml
 # GitHub Actions: Complete Cosign Signing Workflow
@@ -316,7 +316,7 @@ jobs:
             ghcr.io/${{ github.repository }}:${{ github.sha }}
 ```
 
-#<!-- chunk: 3.3 Tekton Chains SLSA Level 3 配置 -->## 3.3 Tekton Chains SLSA Level 3 配置
+## 3.3 Tekton Chains SLSA Level 3 配置
 
 ```yaml
 apiVersion: v1
@@ -351,7 +351,11 @@ data:
 
 <!-- chunk: 四、Sealed Secrets 完整示例 -->## 四、Sealed Secrets 完整示例
 
-#<!-- chunk: 4.1 安装与使用 -->## 4.1 安装与使用
+## 4.1 安装与使用
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # Install Sealed Secrets controller
@@ -384,7 +388,7 @@ echo "sealed-secret.yaml is safe to commit to Git"
 cat sealed-secret.yaml
 ```
 
-#<!-- chunk: 4.2 Sealed Secret 输出示例 -->## 4.2 Sealed Secret 输出示例
+## 4.2 Sealed Secret 输出示例
 
 ```yaml
 # sealed-secret.yaml - Safe to commit to Git
@@ -406,7 +410,7 @@ spec:
     type: Opaque
 ```
 
-#<!-- chunk: 4.3 Sealed Secrets 高级配置 -->## 4.3 Sealed Secrets 高级配置
+## 4.3 Sealed Secrets 高级配置
 
 ```yaml
 # Scope: cluster-wide (can be unsealed in any namespace)
@@ -429,7 +433,10 @@ kubectl get secret -n kube-system sealed-secrets-key -o yaml > sealed-secrets-ke
 
 <!-- chunk: 五、External Secrets Operator 完整设置 -->## 五、External Secrets Operator 完整设置
 
-#<!-- chunk: 5.1 安装 ESO -->## 5.1 安装 ESO
+## 5.1 安装 ESO
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # Install External Secrets Operator
@@ -448,7 +455,7 @@ echo "external-secrets-controller-manager-xxx             1/1     Running   0   
 echo "external-secrets-webhook-xxx                        1/1     Running   0          60s"
 ```
 
-#<!-- chunk: 5.2 Vault 后端配置 -->## 5.2 Vault 后端配置
+## 5.2 Vault 后端配置
 
 ```yaml
 # Vault SecretStore Configuration
@@ -507,7 +514,7 @@ spec:
         property: api_key
 ```
 
-#<!-- chunk: 5.3 AWS Secrets Manager 后端 -->## 5.3 AWS Secrets Manager 后端
+## 5.3 AWS Secrets Manager 后端
 
 ```yaml
 apiVersion: external-secrets.io/v1beta1
@@ -546,7 +553,7 @@ spec:
 
 <!-- chunk: 六、SBOM 生成与 Syft 完整实践 -->## 六、SBOM 生成与 Syft 完整实践
 
-#<!-- chunk: 6.1 Syft 安装与使用 -->## 6.1 Syft 安装与使用
+## 6.1 Syft 安装与使用
 
 ```bash
 # Install Syft
@@ -577,7 +584,7 @@ syft ghcr.io/org/app:v1.0.0 -o table
 # zlib              1.3     apk
 ```
 
-#<!-- chunk: 6.2 SBOM 附加到镜像 -->## 6.2 SBOM 附加到镜像
+## 6.2 SBOM 附加到镜像
 
 ```bash
 # Attach SBOM to OCI image
@@ -599,7 +606,7 @@ cosign verify-attestation \
   ghcr.io/org/app:v1.0.0
 ```
 
-#<!-- chunk: 6.3 SBOM CI 集成 (GitHub Actions) -->## 6.3 SBOM CI 集成 (GitHub Actions)
+## 6.3 SBOM CI 集成 (GitHub Actions)
 
 ```yaml
 - name: Generate SBOM with Syft
@@ -733,7 +740,7 @@ spec:
 
 <!-- chunk: 八、合规审计命令 -->## 八、合规审计命令
 
-#<!-- chunk: 8.1 镜像签名审计 -->## 8.1 镜像签名审计
+## 8.1 镜像签名审计
 
 ```bash
 #!/bin/bash
@@ -778,7 +785,7 @@ if [ "$UNVERIFIED" -gt 0 ]; then
 fi
 ```
 
-#<!-- chunk: 8.2 SBOM 审计 -->## 8.2 SBOM 审计
+## 8.2 SBOM 审计
 
 ```bash
 #!/bin/bash
@@ -806,7 +813,7 @@ for img in $IMAGES; do
 done
 ```
 
-#<!-- chunk: 8.3 Kyverno 合规策略审计 -->## 8.3 Kyverno 合规策略审计
+## 8.3 Kyverno 合规策略审计
 
 ```bash
 #!/bin/bash
@@ -840,7 +847,7 @@ kubectl get clusterpolicy -o wide 2>/dev/null || echo "No cluster policies found
 
 <!-- chunk: 九、密钥管理方案对比 -->## 九、密钥管理方案对比
 
-#<!-- chunk: 9.1 方案对比表 -->## 9.1 方案对比表
+## 9.1 方案对比表
 
 | 维度 | Sealed Secrets | External Secrets Operator | SOPS |
 |:---|:---|:---|:---|
@@ -854,7 +861,10 @@ kubectl get clusterpolicy -o wide 2>/dev/null || echo "No cluster policies found
 | **审计追踪** | K8s Events | K8s Events + Vault Audit | Git 历史 |
 | **多集群** | 需要共享证书 | 天然支持 (ClusterSecretStore) | 需要共享密钥 |
 
-#<!-- chunk: 9.2 SOPS + Flux 原生集成 -->## 9.2 SOPS + Flux 原生集成
+## 9.2 SOPS + Flux 原生集成
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # Generate age key
@@ -896,7 +906,7 @@ spec:
 
 <!-- chunk: 十、准入控制与策略引擎 -->## 十、准入控制与策略引擎
 
-#<!-- chunk: 10.1 Kyverno 镜像签名验证 -->## 10.1 Kyverno 镜像签名验证
+## 10.1 Kyverno 镜像签名验证
 
 ```yaml
 apiVersion: kyverno.io/v1
@@ -936,7 +946,7 @@ spec:
                       value: "log4j-core"
 ```
 
-#<!-- chunk: 10.2 OPA Gatekeeper 安全策略 -->## 10.2 OPA Gatekeeper 安全策略
+## 10.2 OPA Gatekeeper 安全策略
 
 ```yaml
 # Deny privileged containers
@@ -976,7 +986,7 @@ spec:
 
 <!-- chunk: 十一、监控与审计 -->## 十一、监控与审计
 
-#<!-- chunk: 11.1 Prometheus 告警规则 -->## 11.1 Prometheus 告警规则
+## 11.1 Prometheus 告警规则
 
 ```yaml
 groups:
@@ -1015,7 +1025,7 @@ groups:
           summary: "Critical vulnerability detected in image {{ $labels.image }}"
 ```
 
-#<!-- chunk: 11.2 签名验证审计脚本 -->## 11.2 签名验证审计脚本
+## 11.2 签名验证审计脚本
 
 ```bash
 #!/bin/bash
@@ -1149,7 +1159,7 @@ SOPS解密失败:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-08-release-change-management MOC
-- [[domain-08-release-change-management/README|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
+- [[domain-08-release-change-management/README.md|Domain 08: GitOps与CI/CD (GitOps & CI/CD)]]
 - Domain-23 GitOps & CI/CD — 开源项目索引
 - Argo CD企业级GitOps实践指南
 - Jenkins企业级CI/CD流水线深度实践

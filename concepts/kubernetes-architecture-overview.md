@@ -45,7 +45,7 @@ Kubernetes follows a layered architecture with seven distinct layers:
 | Layer 1 | Orchestration | Scheduling, automation | Scheduler, Controllers |
 | Layer 2 | API | Unified entry, auth, admission | API Server, Admission |
 | Layer 3 | Data | Persistent state | etcd |
-| Layer 4 | Runtime | Container execution | [[kubelet|kubelet]], [[Container Runtime|Container Runtime]] |
+| Layer 4 | Runtime | Container execution | [[kubelet|kubelet]], Container Runtime |
 | Layer 5 | Network | Pod networking, load balancing | CNI, kube-proxy |
 | Layer 6 | Storage | Persistent volume management | CSI, Volume Plugin |
 | Layer 7 | Extension | Custom functionality | CRD, Operator, Webhook |
@@ -56,7 +56,7 @@ The **control plane** manages cluster state through four core components:
 - **kube-apiserver**: Central REST API gateway, handles authentication, authorization, admission control, and persistence to [[etcd|etcd]]
 - **etcd**: Distributed key-value store using Raft consensus and MVCC for state persistence
 - **kube-scheduler**: Assigns Pods to nodes through a two-phase Filter+Score scheduling algorithm
-- **kube-controller-manager**: Runs 40+ built-in controllers maintaining desired state via [[concepts/controller-pattern|Controller Pattern]]
+- **kube-controller-manager**: Runs 40+ built-in controllers maintaining desired state via [[concepts/controller-pattern.md|Controller Pattern]]
 
 The **data plane** executes workloads on each node:
 - **kubelet**: Node agent managing Pod lifecycle, communicates with API Server via Watch mechanism
@@ -74,21 +74,21 @@ Kubernetes is built on core principles: declarative API, controller reconciliati
 ## Related
 
 - [[pod-lifecycle]] — Pod Lifecycle
-- [[concepts/declarative-api|declarative-api]] — Declarative API
-- [[entities/kube-scheduler|kube-scheduler]] — kube-scheduler
-- [[entities/kube-apiserver|kube-apiserver]] — kube-apiserver
+- [[concepts/declarative-api.md|declarative-api]] — Declarative API
+- [[entities/kube-scheduler.md|kube-scheduler]] — kube-scheduler
+- [[entities/kube-apiserver.md|kube-apiserver]] — kube-apiserver
 - [[etcd]] — etcd
-- [[concepts/controller-pattern|Controller Pattern]]
-- [[concepts/declarative-api|Declarative API]]
-- [[concepts/watch-mechanism|Watch Mechanism]]
+- [[concepts/controller-pattern.md|Controller Pattern]]
+- [[concepts/declarative-api.md|Declarative API]]
+- [[concepts/watch-mechanism.md|Watch Mechanism]]
 - [[etcd|etcd]]
-- [[entities/kube-apiserver|kube-apiserver]]
-- [[entities/kube-scheduler|kube-scheduler]]
-- [[entities/kubelet|kubelet]]
-- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]]
-- [[concepts/Kubernetes Core Concepts|Kubernetes Core Concepts]]
+- [[entities/kube-apiserver.md|kube-apiserver]]
+- [[entities/kube-scheduler.md|kube-scheduler]]
+- [[entities/kubelet.md|kubelet]]
+- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
+- [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
 
 - Kubernetes 架构全景图
-- [[entities/inspektor-gadget|Inspektor Gadget]] — Cross-reference
-- [[entities/metal3-io|Metal3]] — Cross-reference
-- [[entities/clusterpedia|Clusterpedia]] — Cross-reference
+- [[entities/inspektor-gadget.md|Inspektor Gadget]] — Cross-reference
+- [[entities/metal3-io.md|Metal3]] — Cross-reference
+- [[entities/clusterpedia.md|Clusterpedia]] — Cross-reference

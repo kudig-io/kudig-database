@@ -70,7 +70,7 @@ created: "2026-05-23"
 
 本文档深入探讨 Redis 在 K8s 上的三种主要部署模式：单实例 + Sentinel（适合中小规模）、Redis Cluster（适合大规模分片）、以及 Redis Operator 自动化管理。内容覆盖 Operator 选型、Sentinel vs Cluster 模式决策、内存规划、持久化策略、监控告警和故障排查。
 
-#<!-- chunk: Redis on Kubernetes 的挑战与对策 -->## Redis on Kubernetes 的挑战与对策
+## Redis on Kubernetes 的挑战与对策
 
 将 Redis 部署在 Kubernetes 上并不是一个简单的任务。Redis 作为内存数据库，对性能、数据持久化和网络稳定性有着极高的要求，而这些在容器化环境中都面临挑战。
 
@@ -86,7 +86,7 @@ created: "2026-05-23"
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: Redis on K8s 架构选型 -->## Redis on K8s 架构选型
+## Redis on K8s 架构选型
 
 ```mermaid
 graph TD
@@ -111,7 +111,7 @@ graph TD
     NET_C --> C_OP
 ```
 
-#<!-- chunk: Redis Cluster on K8s 架构 -->## Redis Cluster on K8s 架构
+## Redis Cluster on K8s 架构
 
 ```mermaid
 graph TB
@@ -176,7 +176,11 @@ graph TB
 
 <!-- chunk: 核心组件配置 -->## 核心组件配置
 
-#<!-- chunk: OT-CONTAINER-KIT Redis Operator 安装 -->## OT-CONTAINER-KIT Redis Operator 安装
+## OT-CONTAINER-KIT Redis Operator 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 Redis Operator
@@ -190,7 +194,7 @@ helm install redis-operator ot-redis/redis-operator \
   --set image.tag=v0.19.0
 ```
 
-#<!-- chunk: Redis Sentinel 模式部署 -->## Redis Sentinel 模式部署
+## Redis Sentinel 模式部署
 
 ```yaml
 apiVersion: redis.redis.opstreelabs.in/v1beta2
@@ -298,7 +302,7 @@ spec:
             topologyKey: kubernetes.io/hostname
 ```
 
-#<!-- chunk: Redis Cluster 模式部署 -->## Redis Cluster 模式部署
+## Redis Cluster 模式部署
 
 ```yaml
 apiVersion: redis.redis.opstreelabs.in/v1beta2
@@ -392,7 +396,7 @@ spec:
             redis_cluster_name: redis-cluster
 ```
 
-#<!-- chunk: 自定义 Redis 配置 -->## 自定义 Redis 配置
+## 自定义 Redis 配置
 
 ```yaml
 apiVersion: v1
@@ -433,7 +437,7 @@ data:
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: 内存规划 -->## 内存规划
+## 内存规划
 
 ```yaml
 Redis on K8s 内存规划（以 32GB Node 为例）:
@@ -459,7 +463,7 @@ Redis on K8s 内存规划（以 32GB Node 为例）:
     activedefrag: yes
 ```
 
-#<!-- chunk: 存储选型对比 -->## 存储选型对比
+## 存储选型对比
 
 | 存储类型 | 适用场景 | IOPS | 延迟 | 成本 | Pod迁移 |
 |:---|:---|:---|:---|:---|:---|
@@ -468,7 +472,7 @@ Redis on K8s 内存规划（以 32GB Node 为例）:
 | `gp3` (EBS) | 通用场景 | 中 (16K) | 中 (~2ms) | 低 | 可以 |
 | `local-path` | 测试/开发 | 中 | 低 | 最低 | 不可 |
 
-#<!-- chunk: 持久化策略选择 -->## 持久化策略选择
+## 持久化策略选择
 
 ```yaml
 策略一_纯缓存:
@@ -503,7 +507,7 @@ Redis on K8s 内存规划（以 32GB Node 为例）:
 
 <!-- chunk: 高可用与容灾 -->## 高可用与容灾
 
-#<!-- chunk: Sentinel vs Cluster 对比 -->## Sentinel vs Cluster 对比
+## Sentinel vs Cluster 对比
 
 | 维度 | Sentinel | Cluster |
 |:---|:---|:---|
@@ -516,7 +520,7 @@ Redis on K8s 内存规划（以 32GB Node 为例）:
 | 适用场景 | 中小规模、简单 KV | 大规模、需要扩展 |
 | K8s Operator | OT-CONTAINER-KIT / Spotahome | OT-CONTAINER-KIT |
 
-#<!-- chunk: 跨可用区部署 -->## 跨可用区部署
+## 跨可用区部署
 
 ```yaml
 # 确保 Redis Pod 分布在不同可用区
@@ -535,7 +539,10 @@ spec:
 
 <!-- chunk: 备份恢复 -->## 备份恢复
 
-#<!-- chunk: K8s 环境下的备份策略 -->## K8s 环境下的备份策略
+## K8s 环境下的备份策略
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -601,7 +608,7 @@ echo "备份位置: ${S3_BUCKET}/${CLUSTER}/${DATE}/"
 
 <!-- chunk: 监控告警 -->## 监控告警
 
-#<!-- chunk: Prometheus 监控配置 -->## Prometheus 监控配置
+## Prometheus 监控配置
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -621,7 +628,7 @@ spec:
       path: /metrics
 ```
 
-#<!-- chunk: 告警规则 -->## 告警规则
+## 告警规则
 
 ```yaml
 groups:
@@ -706,7 +713,12 @@ groups:
 
 <!-- chunk: 运维管理 -->## 运维管理
 
-#<!-- chunk: 日常运维脚本 -->## 日常运维脚本
+## 日常运维脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -774,7 +786,7 @@ esac
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: Redis on K8s 生产部署检查清单 -->## Redis on K8s 生产部署检查清单
+## Redis on K8s 生产部署检查清单
 
 ```yaml
 资源规划:
@@ -808,7 +820,7 @@ esac
   - 备份频率根据RPO要求确定
 ```
 
-#<!-- chunk: 部署模式选择 -->## 部署模式选择
+## 部署模式选择
 
 | 场景 | 数据量 | 推荐模式 | 资源配置 |
 |:---|:---|:---|:---|
@@ -816,7 +828,7 @@ esac
 | 业务缓存 | 10-500GB | Cluster 3M+3S | 4/8核, 8/16GB, 50GB gp3 |
 | 大规模生产 | > 500GB | 多Cluster | 4/8核, 16/32GB, 100GB local-ssd |
 
-#<!-- chunk: PDB 配置 -->## PDB 配置
+## PDB 配置
 
 ```yaml
 apiVersion: policy/v1
@@ -835,7 +847,7 @@ spec:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题速查表 -->## 常见问题速查表
+## 常见问题速查表
 
 | 问题现象 | 可能原因 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
@@ -861,7 +873,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-28-enterprise-database-middleware MOC
-- [[domain-16-database-middleware/README|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
+- [[domain-16-database-middleware/README.md|Domain 16: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
 - Domain-28 企业数据库与中间件 — 开源项目索引
 - MySQL 企业级数据库运维管理
 - PostgreSQL 企业级数据库高可用架构

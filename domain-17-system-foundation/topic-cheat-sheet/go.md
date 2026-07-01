@@ -2379,7 +2379,7 @@ myproject/
 ├── go.mod
 ├── go.sum
 ├── Makefile
-└── [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md
+└── [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|README]].md
 ```
 
 ### 配置管理

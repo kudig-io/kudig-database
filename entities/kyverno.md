@@ -60,21 +60,21 @@ Kyverno automates compliance checks for SOC 2, ISO 27001, PCI-DSS, and NIST CSF 
 
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/cloud-native-defense-in-depth|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
+- [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
 - [[supply-chain-security]] — Software Supply Chain Security
-- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
-- [[concepts/cloud-native-defense-in-depth|Cloud Native Defense in Depth]]
+- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
 - [[supply-chain-security|Supply Chain Security]]
 
 - 14-policy-engines-opa-kyverno
 - 99-kyverno-policy-guide
 - 04-kyverno-enterprise-policy-management
 - kyverno
-- [[synthesis/IaC x 多集群管理|基础设施即代码 x 多集群管理]] — Cross-reference
-- [[synthesis/纵深防御 x 供应链安全|纵深防御 x 供应链安全]] — Cross-reference
-- [[synthesis/控制器模式 × Operator 模式|控制器模式 × Operator 模式]] — Cross-reference
-- [[entities/argocd|ArgoCD]] — Cross-reference
-- [[entities/trivy|Trivy]] — Cross-reference
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[concepts/IaC x 多集群管理.md|基础设施即代码 x 多集群管理]] — Cross-reference
+- [[concepts/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — Cross-reference
+- [[concepts/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]] — Cross-reference
+- [[entities/argocd.md|ArgoCD]] — Cross-reference
+- [[entities/trivy.md|Trivy]] — Cross-reference
+- [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

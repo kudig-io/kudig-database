@@ -749,6 +749,9 @@ spec:
 
 ### ARMS Prometheus完整配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 安装ARMS Prometheus组件
 # 通过ACK控制台"应用"-"ARMS Prometheus"一键安装
@@ -894,6 +897,9 @@ kubectl get secrets -o yaml | grep "encryptionConfig"
 ```
 
 ### Virtual Node (ECI)配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装Virtual Node组件
@@ -1136,7 +1142,7 @@ echo "=== 10. 成本提醒 ==="
 ## Obsidian 相关文档
 
 - domain-11-ai-infra MOC
-- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
 - Domain-11 AI 基础设施 — 开源项目索引
 - AI 基础设施架构
 - 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
@@ -1157,4 +1163,4 @@ echo "=== 10. 成本提醒 ==="
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]

@@ -93,7 +93,7 @@ Jenkins 在企业中的定位正在从"全能 CI/CD 平台"向"复杂工作流�
 
 <!-- chunk: 二、架构设计 -->## 二、架构设计
 
-#<!-- chunk: 2.1 核心组件架构 -->## 2.1 核心组件架构
+## 2.1 核心组件架构
 
 ```mermaid
 graph TB
@@ -138,7 +138,7 @@ graph TB
     E --> S
 ```
 
-#<!-- chunk: 2.2 高可用架构设计 -->## 2.2 高可用架构设计
+## 2.2 高可用架构设计
 
 Jenkins Controller 本身不支持 Active-Active 多实例部署，但可以通过以下策略实现高可用：
 
@@ -172,7 +172,7 @@ jenkins_ha_architecture:
     automated: true
 ```
 
-#<!-- chunk: 2.3 Kubernetes Agent 调度模型 -->## 2.3 Kubernetes Agent 调度模型
+## 2.3 Kubernetes Agent 调度模型
 
 ```mermaid
 sequenceDiagram
@@ -199,7 +199,7 @@ sequenceDiagram
 
 <!-- chunk: 三、核心配置 -->## 三、核心配置
 
-#<!-- chunk: 3.1 Kubernetes 部署配置 -->## 3.1 Kubernetes 部署配置
+## 3.1 Kubernetes 部署配置
 
 ```yaml
 # jenkins-controller-deployment.yaml
@@ -286,7 +286,7 @@ spec:
           name: jenkins-plugins
 ```
 
-#<!-- chunk: 3.2 Configuration as Code (JCasC) -->## 3.2 Configuration as Code (JCasC)
+## 3.2 Configuration as Code (JCasC)
 
 ```yaml
 # jenkins-casc.yaml
@@ -433,7 +433,7 @@ jenkinsClouds:
               resourceRequestMemory: "512Mi"
 ```
 
-#<!-- chunk: 3.3 声明式流水线模板 -->## 3.3 声明式流水线模板
+## 3.3 声明式流水线模板
 
 ```groovy
 // Jenkinsfile - 企业级 Java CI/CD 流水线
@@ -678,7 +678,7 @@ spec:
 }
 ```
 
-#<!-- chunk: 3.4 Shared Library 实现复用 -->## 3.4 Shared Library 实现复用
+## 3.4 Shared Library 实现复用
 
 ```groovy
 // vars/buildMavenApp.groovy
@@ -771,7 +771,7 @@ spec:
 
 <!-- chunk: 四、安全与合规 -->## 四、安全与合规
 
-#<!-- chunk: 4.1 安全加固配置 -->## 4.1 安全加固配置
+## 4.1 安全加固配置
 
 ```yaml
 security:
@@ -815,7 +815,7 @@ security:
         - "SCM/Tag:developer-group"
 ```
 
-#<!-- chunk: 4.2 合规自动化 -->## 4.2 合规自动化
+## 4.2 合规自动化
 
 ```groovy
 pipeline {
@@ -869,7 +869,7 @@ pipeline {
 
 <!-- chunk: 五、多环境管理策略 -->## 五、多环境管理策略
 
-#<!-- chunk: 5.1 环境流水线设计 -->## 5.1 环境流水线设计
+## 5.1 环境流水线设计
 
 ```yaml
 environment_strategy:
@@ -900,7 +900,7 @@ environment_strategy:
     rollback: "automated on health check failure"
 ```
 
-#<!-- chunk: 5.2 多环境 Jenkinsfile -->## 5.2 多环境 Jenkinsfile
+## 5.2 多环境 Jenkinsfile
 
 ```groovy
 def deployToEnvironment(String env, String imageTag) {
@@ -926,7 +926,7 @@ def deployToEnvironment(String env, String imageTag) {
 
 <!-- chunk: 六、监控与回滚 -->## 六、监控与回滚
 
-#<!-- chunk: 6.1 Prometheus 监控 -->## 6.1 Prometheus 监控
+## 6.1 Prometheus 监控
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -982,7 +982,11 @@ spec:
         description: "Build success rate below 80%"
 ```
 
-#<!-- chunk: 6.2 备份与恢复 -->## 6.2 备份与恢复
+## 6.2 备份与恢复
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1009,7 +1013,7 @@ kubectl exec -n ci-cd deploy/jenkins-controller -- \
 
 # 压缩并上传
 tar -czf ${BACKUP_DIR}/${BACKUP_NAME}.tar.gz -C ${BACKUP_DIR} ${BACKUP_NAME}
-rm -rf ${BACKUP_DIR}/${BACKUP_NAME}
+rm -rf ${BACKUP_DIR}/${BACKUP_NAME}  # ⚠️ 删除系统/数据文件
 
 if [ -n "$S3_BUCKET" ]; then
     aws s3 cp ${BACKUP_DIR}/${BACKUP_NAME}.tar.gz s3://$S3_BUCKET/backups/
@@ -1020,7 +1024,7 @@ fi
 
 <!-- chunk: 七、最佳实践 -->## 七、最佳实践
 
-#<!-- chunk: 7.1 流水线设计原则 -->## 7.1 流水线设计原则
+## 7.1 流水线设计原则
 
 ```yaml
 1. 声明式优先:
@@ -1053,7 +1057,7 @@ fi
    - 建立插件评审流程
 ```
 
-#<!-- chunk: 7.2 运维检查清单 -->## 7.2 运维检查清单
+## 7.2 运维检查清单
 
 ```yaml
 daily:
@@ -1077,7 +1081,7 @@ monthly:
 
 <!-- chunk: 八、故障排查 -->## 八、故障排查
 
-#<!-- chunk: 8.1 常见问题 -->## 8.1 常见问题
+## 8.1 常见问题
 
 ```yaml
 Agent 无法连接:
@@ -1122,7 +1126,7 @@ JCasC 不生效:
 
 <!-- chunk: 九、性能调优深度实践 -->## 九、性能调优深度实践
 
-#<!-- chunk: 9.1 JVM 参数优化 -->## 9.1 JVM 参数优化
+## 9.1 JVM 参数优化
 
 Jenkins Controller 运行在 JVM 上，合理的 JVM 参数配置对性能至关重要。在大规模场景中（500+ Job/天），JVM 调优可以显著减少 GC 停顿，提升构建调度效率。推荐的 JVM 参数配置基于 G1GC 垃圾收集器，它在吞吐量和延迟之间提供了良好的平衡。
 
@@ -1145,7 +1149,7 @@ jenkins_controller_jvm_opts:
     heap_dump_path: "-XX:HeapDumpPath=/var/log/jenkins/heapdump.hprof"
 ```
 
-#<!-- chunk: 9.2 Jenkins Controller 性能调优 -->## 9.2 Jenkins Controller 性能调优
+## 9.2 Jenkins Controller 性能调优
 
 Jenkins Controller 的性能瓶颈通常出现在以下三个区域：磁盘 I/O（构建日志写入）、内存使用（大量 Job 加载）和线程调度（并发构建管理）。通过系统属性的精细调整，可以显著改善这些瓶颈。
 
@@ -1170,7 +1174,7 @@ system_properties:
   hudson.model.UsageStatistics.disabled: true
 ```
 
-#<!-- chunk: 9.3 构建缓存策略 -->## 9.3 构建缓存策略
+## 9.3 构建缓存策略
 
 构建缓存是加速 CI/CD 流水线的关键手段。对于 Java 项目，Maven 本地仓库缓存可以将依赖下载时间从分钟级降低到秒级；对于 Node.js 项目，npm 缓存同样可以显著加速安装过程。在 Kubernetes 环境中，推荐使用 ReadWriteMany PVC 作为共享缓存卷，多个构建 Pod 可以并发读取。
 
@@ -1239,7 +1243,7 @@ spec:
 }
 ```
 
-#<!-- chunk: 9.4 并行构建优化 -->## 9.4 并行构建优化
+## 9.4 并行构建优化
 
 对于大型项目，合理地并行化构建阶段可以显著缩短流水线执行时间。Jenkins 声明式流水线的 `parallel` 指令允许在同一阶段内并行执行多个分支，适用于相互独立的测试套件、多平台构建矩阵等场景。
 
@@ -1291,7 +1295,7 @@ spec:
 
 <!-- chunk: 十、企业级 Shared Library 设计 -->## 十、企业级 Shared Library 设计
 
-#<!-- chunk: 10.1 Shared Library 架构 -->## 10.1 Shared Library 架构
+## 10.1 Shared Library 架构
 
 Jenkins Shared Library 是实现 CI/CD 代码复用的核心机制。一个设计良好的 Shared Library 可以将企业级的构建、测试、部署流程标准化，使得各项目团队只需要提供项目特定的参数，即可获得一致的、经过安全审查的 CI/CD 能力。
 
@@ -1377,7 +1381,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-08-release-change-management KUDIG Database — Global MOC
-- [[domain-08-release-change-management/README|[[Domain 23: GitOps与CI/CD (GitOps & CI/CD)|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]tOps]] & CI/CD)]]
+- [[domain-08-release-change-management/README.md|[[Domain 23: GitOps与CI/CD (GitOps & CI/CD)|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]tOps]] & CI/CD)]]
 - index.md|Domain-23 GitOps & CI/CD — 开源项目索引]]
 - Argo CD企业级GitOps实践指南
 - GitLab CI/CD 企业级流水线自动化平台
@@ -1398,4 +1402,4 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

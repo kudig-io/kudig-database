@@ -151,6 +151,9 @@ k8s_versions:
 
 ### 1.2 报错查看方式汇总
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 CoreDNS Pod 状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns
@@ -434,6 +437,9 @@ data:
 
 **CoreDNS 水平扩展策略**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 根据集群规模设置副本数
 # 小集群（<50 节点）: 2 副本
@@ -713,6 +719,10 @@ kubectl logs -n kube-system -l k8s-app=kube-dns | grep -c "SERVFAIL"
 
 #### 3.1.1 解决步骤
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 步骤 1：检查 Pod 状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns
@@ -766,6 +776,11 @@ kubectl run test --rm -it --image=busybox -- nslookup kubernetes
 ### 3.2 DNS 解析失败
 
 #### 3.2.1 解决步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 步骤 1：确认问题范围
@@ -826,6 +841,11 @@ kubectl run test --rm -it --image=busybox -- nslookup google.com
 ### 3.3 DNS 性能优化
 
 #### 3.3.1 解决步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 步骤 1：检查当前性能
@@ -906,6 +926,10 @@ time kubectl run test --rm -it --image=busybox -- nslookup kubernetes.default
 ### 3.4 Pod DNS 配置问题
 
 #### 3.4.1 解决步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 步骤 1：检查 Pod 的 DNS 配置
@@ -1011,6 +1035,9 @@ kubectl exec <pod-name> -- nslookup kubernetes.default.svc.cluster.local
 
 **排查过程**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 抓取 Pod 内 DNS 查询日志
 kubectl exec -it payment-api-7d8f4 -- tcpdump -i any -n port 53 -A
@@ -1057,6 +1084,10 @@ spec:
 # 方案 B：应用层优化（临时）
 # 在代码中使用 FQDN：pay.example.com.（末尾加点）
 ```
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 执行滚动更新
@@ -1155,6 +1186,9 @@ EOF
 
 **排查过程**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 验证问题范围
 kubectl run test --rm -it --image=busybox -- nslookup google.com
@@ -1204,6 +1238,10 @@ kubectl get cm -n kube-system coredns -o yaml | grep -A3 forward
 ```
 
 **应急措施**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 紧急切换到公网 DNS（3 分钟内恢复）
@@ -1484,6 +1522,9 @@ kubectl logs -n kube-system coredns-7d8f4b6c9-5xqhz | awk '{print $NF}' | sort |
 
 **应急措施**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 临时提高内存 limit
 kubectl patch deployment -n kube-system coredns -p '{
@@ -1641,20 +1682,22 @@ EOF
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/sql|sql]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-nginx-ingress-troubleshooting|09-nginx-ingress-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting|01-cni-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting|03-service-ingress-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting|04-networkpolicy-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-nginx-ingress-troubleshooting.md|09-nginx-ingress-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]
+
+```

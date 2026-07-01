@@ -1,5 +1,5 @@
 ---
-title: etcd 进阶: HA 集群管理与性能调优 [cluster-create]
+title: "etcd 进阶: HA 集群管理与性能调优 [cluster-create]"
 description: 'title: ''etcd 进阶: HA 集群管理与性能调优'''
 category: general
 tags:
@@ -469,6 +469,10 @@ ETCDCTL_API=3 etcdctl endpoint status -w table \
 
 ### 场景 4: 移除问题 etcd 成员
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
 # 1. 列出成员
 ETCDCTL_API=3 etcdctl member list -w table \
@@ -483,7 +487,7 @@ ETCDCTL_API=3 etcdctl member remove <member-id> \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
 
 # 3. 在问题节点清理
-rm -rf /var/lib/etcd/*
+rm -rf /var/lib/etcd/*  # ⚠️ 删除系统/数据文件
 
 # 4. 重新加入
 kubeadm join --control-plane --certificate-key <key>
@@ -650,6 +654,11 @@ ps aux | grep etcd
 
 ### etcd 灾难恢复完整流程
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # === 在所有 control-plane 节点执行 ===
 
@@ -665,7 +674,7 @@ ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-disaster-recovery.db \
   --endpoints=https://192.168.1.10:2379
 
 # 3. 在所有节点清理 etcd 数据
-rm -rf /var/lib/etcd/member/
+rm -rf /var/lib/etcd/member/  # ⚠️ 删除系统/数据文件
 
 # 4. 从快照恢复 (在第一个节点)
 ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-disaster-recovery.db \
@@ -789,9 +798,9 @@ ETCDCTL_API=3 etcdctl member list -w table \
 ## Related
 
 - [[hot|hot]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[entities/coredns|coredns]]
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/coredns.md|coredns]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

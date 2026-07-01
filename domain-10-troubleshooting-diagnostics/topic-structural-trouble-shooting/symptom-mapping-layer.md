@@ -107,7 +107,7 @@ k8s_versions:
 
 <!-- chunk: 一、映射引擎设计 -->## 一、映射引擎设计
 
-#<!-- chunk: 1.1 设计原则 -->## 1.1 设计原则
+## 1.1 设计原则
 
 ```
 症状输入 → 向量化匹配 → 候选路径排序 → 执行验证 → 根因确认
@@ -119,7 +119,7 @@ k8s_versions:
   4. 可验证: 每个映射都有明确的验证条件
 ```
 
-#<!-- chunk: 1.2 输入 Schema -->## 1.2 输入 Schema
+## 1.2 输入 Schema
 
 ```yaml
 symptom_input:
@@ -143,7 +143,7 @@ symptom_input:
   urgency: enum[P0/P1/P2]     # 紧急程度
 ```
 
-#<!-- chunk: 1.3 输出 Schema -->## 1.3 输出 Schema
+## 1.3 输出 Schema
 
 ```yaml
 diagnosis_output:
@@ -179,7 +179,7 @@ diagnosis_output:
 
 <!-- chunk: 二、症状快速映射表 -->## 二、症状快速映射表
 
-#<!-- chunk: 2.1 Pod 相关症状 -->## 2.1 Pod 相关症状
+## 2.1 Pod 相关症状
 
 ```yaml
 symptom_mappings:
@@ -766,7 +766,7 @@ symptom_mappings:
       - path: "domain-01-cluster-fundamentals/02-etcd-troubleshooting.md"
         type: "domain"
         relevance: 0.95
-      - path: "[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance|10-etcd-maintenance]].md"
+      - path: "[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance.md|10-etcd-maintenance]].md"
         type: "domain"
         relevance: 0.90
 
@@ -1260,7 +1260,7 @@ symptom_mappings:
 
 <!-- chunk: 三、未知症状处理 -->## 三、未知症状处理
 
-#<!-- chunk: 3.1 未知症状升级路径 -->## 3.1 未知症状升级路径
+## 3.1 未知症状升级路径
 
 ```yaml
 unknown_symptom_handling:
@@ -1296,7 +1296,7 @@ unknown_symptom_handling:
       建议: 请人工排查，可参考 domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md
 ```
 
-#<!-- chunk: 3.2 未知症状示例 -->## 3.2 未知症状示例
+## 3.2 未知症状示例
 
 ```
 输入: "Pod 的 sidecar 容器无法连接主容器"
@@ -1380,7 +1380,7 @@ class SymptomMappingEngine:
 
 <!-- chunk: 五、集成说明 -->## 五、集成说明
 
-#<!-- chunk: 5.1 与 FTA 的集成 -->## 5.1 与 FTA 的集成
+## 5.1 与 FTA 的集成
 
 ```
 症状映射引擎 → FTA 知识图谱
@@ -1399,7 +1399,10 @@ FTA 路径: TE-2 → IE-2.1 → BE-2.3
 输出完整诊断路径
 ```
 
-#<!-- chunk: 5.2 与 Skills 的集成 -->## 5.2 与 Skills 的集成
+## 5.2 与 Skills 的集成
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```
 症状映射引擎 → Skills 自动化技能
@@ -1422,7 +1425,7 @@ FTA 路径: TE-2 → IE-2.1 → BE-2.3
 
 <!-- chunk: 六、生产级 SLO/SLA 集成 -->## 六、生产级 SLO/SLA 集成
 
-#<!-- chunk: 6.1 SLO 映射配置 -->## 6.1 SLO 映射配置
+## 6.1 SLO 映射配置
 
 ```yaml
 slo_integration:
@@ -1472,7 +1475,7 @@ slo_integration:
     exhausted_budget_action: "停止非关键变更，强制 review"
 ```
 
-#<!-- chunk: 6.2 On-Call 升级流程 -->## 6.2 On-Call 升级流程
+## 6.2 On-Call 升级流程
 
 ```yaml
 oncall_escalation:
@@ -1521,7 +1524,7 @@ oncall_escalation:
         timeout: 24h
 ```
 
-#<!-- chunk: 6.3 运行时告警抑制 -->## 6.3 运行时告警抑制
+## 6.3 运行时告警抑制
 
 ```yaml
 alert_suppression:
@@ -1556,7 +1559,7 @@ alert_suppression:
 
 <!-- chunk: 七、生产 Runbook 自动化 -->## 七、生产 Runbook 自动化
 
-#<!-- chunk: 7.1 Runbook 执行引擎 -->## 7.1 Runbook 执行引擎
+## 7.1 Runbook 执行引擎
 
 ```yaml
 runbook_engine:
@@ -1584,7 +1587,7 @@ runbook_engine:
     post_execution_survey: true
 ```
 
-#<!-- chunk: 7.2 标准 Runbook 模板 -->## 7.2 标准 Runbook 模板
+## 7.2 标准 Runbook 模板
 
 ```yaml
 runbooks:
@@ -1671,7 +1674,7 @@ runbooks:
 
 <!-- chunk: 八、生产事件管理集成 -->## 八、生产事件管理集成
 
-#<!-- chunk: 8.1 事件生命周期 -->## 8.1 事件生命周期
+## 8.1 事件生命周期
 
 ```yaml
 incident_lifecycle:
@@ -1712,7 +1715,7 @@ incident_lifecycle:
     related_alerts: true
 ```
 
-#<!-- chunk: 8.2 事后报告模板 -->## 8.2 事后报告模板
+## 8.2 事后报告模板
 
 ```markdown
 # 事后报告 (Postmortem)
@@ -1762,7 +1765,7 @@ incident_lifecycle:
 
 <!-- chunk: 九、变更 Freeze 与安全护栏 -->## 九、变更 Freeze 与安全护栏
 
-#<!-- chunk: 9.1 变更 Freeze 配置 -->## 9.1 变更 Freeze 配置
+## 9.1 变更 Freeze 配置
 
 ```yaml
 change_freeze:
@@ -1788,7 +1791,7 @@ change_freeze:
     override_annotation: "kudig.io/change-freeze-override"
 ```
 
-#<!-- chunk: 9.2 安全护栏配置 -->## 9.2 安全护栏配置
+## 9.2 安全护栏配置
 
 ```yaml
 security_guardrails:
@@ -1824,7 +1827,7 @@ security_guardrails:
 
 <!-- chunk: 十、多集群与云厂商适配 -->## 十、多集群与云厂商适配
 
-#<!-- chunk: 10.1 多集群统一问题映射 -->## 10.1 多集群统一问题映射
+## 10.1 多集群统一问题映射
 
 ```yaml
 multi_cluster_mapping:
@@ -1852,7 +1855,7 @@ multi_cluster_mapping:
     action: "跨集群级联问题告警"
 ```
 
-#<!-- chunk: 10.2 云厂商特定故障模式 -->## 10.2 云厂商特定故障模式
+## 10.2 云厂商特定故障模式
 
 ```yaml
 cloud_provider_specific:
@@ -1883,7 +1886,7 @@ cloud_provider_specific:
 
 <!-- chunk: 十一、知识库自学习 -->## 十一、知识库自学习
 
-#<!-- chunk: 11.1 诊断模式学习 -->## 11.1 诊断模式学习
+## 11.1 诊断模式学习
 
 ```yaml
 learning_engine:
@@ -1919,7 +1922,7 @@ learning_engine:
 
 <!-- chunk: 十二、性能与可观测性 -->## 十二、性能与可观测性
 
-#<!-- chunk: 12.1 映射引擎性能指标 -->## 12.1 映射引擎性能指标
+## 12.1 映射引擎性能指标
 
 ```yaml
 performance_metrics:
@@ -1943,7 +1946,7 @@ performance_metrics:
     rollback_rate: 0.05         # 需要回滚的比例
 ```
 
-#<!-- chunk: 12.2 可观测性集成 -->## 12.2 可观测性集成
+## 12.2 可观测性集成
 
 ```yaml
 observability_integration:
@@ -1977,7 +1980,7 @@ observability_integration:
 
 <!-- chunk: 十三、合规与审计 -->## 十三、合规与审计
 
-#<!-- chunk: 13.1 操作审计日志 -->## 13.1 操作审计日志
+## 13.1 操作审计日志
 
 ```yaml
 audit_log:
@@ -2015,7 +2018,7 @@ audit_log:
     audit_logs: 7y
 ```
 
-#<!-- chunk: 13.2 合规检查项 -->## 13.2 合规检查项
+## 13.2 合规检查项
 
 ```yaml
 compliance:
@@ -2052,11 +2055,11 @@ compliance:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/MOC|topic-structural-trouble-shooting MOC]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README|Kubernetes 结构化故障排查知识库]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-dra-troubleshooting|DRA（动态资源分配）故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance|etcd 维护专项文档]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/MOC.md|topic-structural-trouble-shooting MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md|Kubernetes 结构化故障排查知识库]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-dra-troubleshooting.md|DRA（动态资源分配）故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance.md|etcd 维护专项文档]]
 
 ## Related
 
@@ -2065,7 +2068,7 @@ compliance:
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-dra-troubleshooting|09-dra-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance|10-etcd-maintenance]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology|00-configuration-first-methodology]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-dra-troubleshooting|09-dra-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-dra-troubleshooting.md|09-dra-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance.md|10-etcd-maintenance]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md|00-configuration-first-methodology]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-dra-troubleshooting.md|09-dra-troubleshooting]]

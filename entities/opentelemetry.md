@@ -46,7 +46,7 @@ description: '## 项目概述'
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -58,9 +58,9 @@ description: '## 项目概述'
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[deployment]]
-- [[concepts/observability-pillars|observability-pillars]]
+- [[concepts/observability-pillars.md|observability-pillars]]
 
 ## Related
 
@@ -72,7 +72,7 @@ description: '## 项目概述'
 
 - 23-kubernetes-opentelemetry-native-observability
 - 03-opentelemetry-distributed-tracing
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/02-opentelemetry-troubleshooting|02-opentelemetry-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/02-opentelemetry-troubleshooting.md|02-opentelemetry-troubleshooting]]
 - opentelemetry
 - RELEASE-NOTES-0.43
 - RELEASE-NOTES-0.12
@@ -220,10 +220,10 @@ description: '## 项目概述'
 - RELEASE-NOTES-0.60
 - RELEASE-NOTES-0.31
 - RELEASE-NOTES-0.93
-- [[references/release-notes-observability|发布说明索引 — 可观测性]] — Cross-reference
-- [[concepts/bp-observability|最佳实践：Observability]] — Cross-reference
-- [[concepts/ai-agent-README|AI Agent 工程专题]] — Cross-reference
-- [[concepts/observability-stack-evolution|可观测性栈演进]] — Cross-reference
-- [[entities/cncf-observability|CNCF 可观测性项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/release-notes-observability.md|发布说明索引 — 可观测性]] — Cross-reference
+- [[concepts/bp-observability.md|最佳实践：Observability]] — Cross-reference
+- [[concepts/ai-agent-README.md|AI Agent 工程专题]] — Cross-reference
+- [[concepts/observability-stack-evolution.md|可观测性栈演进]] — Cross-reference
+- [[entities/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

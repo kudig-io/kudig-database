@@ -148,7 +148,7 @@ kind: DaemonSet
 
 <!-- chunk: 完整字段规格表 -->## 完整字段规格表
 
-#<!-- chunk: 核心字段 (spec) -->## 核心字段 (spec)
+## 核心字段 (spec)
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 | 引入版本 |
 |---------|------|------|--------|------|----------|
@@ -160,14 +160,14 @@ kind: DaemonSet
 | `spec.minReadySeconds` | integer | ❌ | 0 | Pod Ready 后等待的最小秒数 | v1.9 |
 | `spec.revisionHistoryLimit` | integer | ❌ | 10 | 保留的历史版本数量 | v1.9 |
 
-#<!-- chunk: updateStrategy 详细说明 -->## updateStrategy 详细说明
+## updateStrategy 详细说明
 
 | 策略类型 | 行为 | 使用场景 |
 |---------|------|----------|
 | **RollingUpdate** (默认) | 自动逐个节点滚动更新 Pod | 生产环境推荐,支持自动化更新 |
 | **OnDelete** | 仅在手动删除旧 Pod 后创建新 Pod | 需要手动控制更新时机的场景 |
 
-#<!-- chunk: maxUnavailable / maxSurge (v1.25+) -->## maxUnavailable / maxSurge (v1.25+)
+## maxUnavailable / maxSurge (v1.25+)
 
 | 参数 | 类型 | 说明 | 示例 |
 |------|------|------|------|
@@ -563,9 +563,9 @@ data:
 
 <!-- chunk: 高级特性 -->## 高级特性
 
-#<!-- chunk: 1. 控制部署范围 -->## 1. 控制部署范围
+## 1. 控制部署范围
 
-##<!-- chunk: 方法 1: nodeSelector (简单选择) -->## 方法 1: nodeSelector (简单选择)
+## 方法 1: nodeSelector (简单选择)
 
 ```yaml
 spec:
@@ -576,6 +576,9 @@ spec:
         logging: enabled
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 为节点添加标签
 kubectl label nodes node1 node2 logging=enabled
@@ -584,7 +587,7 @@ kubectl label nodes node1 node2 logging=enabled
 kubectl label nodes node1 logging-
 ```
 
-##<!-- chunk: 方法 2: nodeAffinity (复杂条件) -->## 方法 2: nodeAffinity (复杂条件)
+## 方法 2: nodeAffinity (复杂条件)
 
 ```yaml
 spec:
@@ -614,7 +617,7 @@ spec:
                 operator: Exists
 ```
 
-##<!-- chunk: 方法 3: Taints 和 Tolerations -->## 方法 3: Taints 和 Tolerations
+## 方法 3: Taints 和 Tolerations
 
 ```yaml
 spec:
@@ -634,9 +637,9 @@ spec:
         tolerationSeconds: 300
 ```
 
-#<!-- chunk: 2. 更新策略对比 -->## 2. 更新策略对比
+## 2. 更新策略对比
 
-##<!-- chunk: RollingUpdate (滚动更新) -->## RollingUpdate (滚动更新)
+## RollingUpdate (滚动更新)
 
 ```yaml
 spec:
@@ -658,7 +661,7 @@ spec:
 **优点**: 自动化,可控制更新速度
 **缺点**: 可能在所有节点应用未验证的配置
 
-##<!-- chunk: OnDelete (手动更新) -->## OnDelete (手动更新)
+## OnDelete (手动更新)
 
 ```yaml
 spec:
@@ -667,6 +670,11 @@ spec:
 ```
 
 **工作流程**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 更新 DaemonSet 配置 (不会触发 Pod 更新)
 kubectl apply -f daemonset.yaml
@@ -679,7 +687,7 @@ kubectl delete pod fluentd-xxx -n kube-system
 **优点**: 完全控制更新时机,可逐个节点验证
 **缺点**: 需要手动操作,容易遗漏节点
 
-#<!-- chunk: 3. maxSurge 策略 (v1.25+) -->## 3. maxSurge 策略 (v1.25+)
+## 3. maxSurge 策略 (v1.25+)
 
 ```yaml
 spec:
@@ -713,7 +721,7 @@ maxSurge 滚动更新 (maxSurge: 1):
 - `maxSurge + maxUnavailable` 必须 > 0
 - 节点上可能短暂运行 2 个 Pod (需要足够资源)
 
-#<!-- chunk: 4. 优先级与抢占 -->## 4. 优先级与抢占
+## 4. 优先级与抢占
 
 ```yaml
 spec:
@@ -746,7 +754,7 @@ description: "高优先级 DaemonSet"
 
 <!-- chunk: 内部原理 -->## 内部原理
 
-#<!-- chunk: 1. DaemonSet Controller 工作流程 -->## 1. DaemonSet Controller 工作流程
+## 1. DaemonSet Controller 工作流程
 
 ```mermaid
 graph TD
@@ -774,7 +782,7 @@ graph TD
 3. **Pod 更新**: 根据 updateStrategy 更新 Pod
 4. **Pod 删除**: 节点不再匹配时删除 Pod
 
-#<!-- chunk: 2. DaemonSet 与 kube-scheduler 协作 -->## 2. DaemonSet 与 kube-scheduler 协作
+## 2. DaemonSet 与 kube-scheduler 协作
 
 **历史演进**:
 
@@ -824,7 +832,7 @@ spec:
 - 支持 Pod 优先级和抢占
 - 统一调度逻辑 (Preemption, Topology Spread)
 
-#<!-- chunk: 3. Pod 命名规则 -->## 3. Pod 命名规则
+## 3. Pod 命名规则
 
 ```
 {daemonset-name}-{random-5-char}
@@ -842,7 +850,7 @@ fluentd-m3n4t
 - Pod 重建后名称会变化
 - 通过 `spec.nodeName` 字段确定运行节点
 
-#<!-- chunk: 4. 节点变更自动响应 -->## 4. 节点变更自动响应
+## 4. 节点变更自动响应
 
 | 事件 | DaemonSet 行为 |
 |------|---------------|
@@ -877,7 +885,7 @@ fluentd-m3n4t
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 1. 资源配置 -->## 1. 资源配置
+## 1. 资源配置
 
 ✅ **设置合理的资源限制**:
 ```yaml
@@ -896,7 +904,7 @@ resources:
 kubelet --kube-reserved=cpu=500m,memory=1Gi --system-reserved=cpu=500m,memory=1Gi
 ```
 
-#<!-- chunk: 2. 健康检查 -->## 2. 健康检查
+## 2. 健康检查
 
 ✅ **配置 livenessProbe 和 readinessProbe**:
 ```yaml
@@ -917,7 +925,7 @@ readinessProbe:
   periodSeconds: 10
 ```
 
-#<!-- chunk: 3. 日志与监控 -->## 3. 日志与监控
+## 3. 日志与监控
 
 ✅ **标准化日志输出**:
 ```yaml
@@ -939,7 +947,7 @@ containers:
     prometheus.io/port: "9090"
 ```
 
-#<!-- chunk: 4. 安全配置 -->## 4. 安全配置
+## 4. 安全配置
 
 ✅ **最小权限原则**:
 ```yaml
@@ -971,7 +979,7 @@ volumeMounts:
   readOnly: true  # 只读,防止误修改
 ```
 
-#<!-- chunk: 5. 更新策略 -->## 5. 更新策略
+## 5. 更新策略
 
 ✅ **生产环境使用 maxSurge** (v1.25+):
 ```yaml
@@ -988,7 +996,7 @@ updateStrategy:
   type: OnDelete  # 手动删除 Pod 触发更新
 ```
 
-#<!-- chunk: 6. 节点容忍度 -->## 6. 节点容忍度
+## 6. 节点容忍度
 
 ✅ **容忍常见污点**:
 ```yaml
@@ -1016,7 +1024,7 @@ tolerations:
 
 <!-- chunk: 常见问题 FAQ -->## 常见问题 FAQ
 
-#<!-- chunk: Q1: DaemonSet 和 Deployment 的区别? -->## Q1: DaemonSet 和 Deployment 的区别?
+## Q1: DaemonSet 和 Deployment 的区别?
 
 | 特性 | DaemonSet | Deployment |
 |-----|-----------|-----------|
@@ -1026,7 +1034,7 @@ tolerations:
 | **使用场景** | 节点级服务 (日志、监控、网络) | 应用服务 (Web、API) |
 | **Pod 分布** | 每节点均匀分布 (强制) | 可能集中在少数节点 |
 
-#<!-- chunk: Q2: 如何在特定节点上运行 DaemonSet? -->## Q2: 如何在特定节点上运行 DaemonSet?
+## Q2: 如何在特定节点上运行 DaemonSet?
 
 **方法 1: nodeSelector (推荐)**:
 ```yaml
@@ -1036,6 +1044,9 @@ spec:
       nodeSelector:
         role: logging  # 仅在标记的节点运行
 ```
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 为节点添加标签
@@ -1056,7 +1067,7 @@ spec:
                 operator: Exists
 ```
 
-#<!-- chunk: Q3: 如何排除 Master 节点? -->## Q3: 如何排除 Master 节点?
+## Q3: 如何排除 Master 节点?
 
 **移除 Master 节点容忍度** (默认配置会包含):
 ```yaml
@@ -1077,7 +1088,10 @@ affinity:
           operator: DoesNotExist
 ```
 
-#<!-- chunk: Q4: DaemonSet 滚动更新失败如何回滚? -->## Q4: DaemonSet 滚动更新失败如何回滚?
+## Q4: DaemonSet 滚动更新失败如何回滚?
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 查看历史版本
@@ -1093,9 +1107,13 @@ kubectl rollout undo daemonset fluentd -n kube-system --to-revision=3
 kubectl rollout status daemonset fluentd -n kube-system
 ```
 
-#<!-- chunk: Q5: 如何手动触发 DaemonSet Pod 重启? -->## Q5: 如何手动触发 DaemonSet Pod 重启?
+## Q5: 如何手动触发 DaemonSet Pod 重启?
 
 **方法 1: 修改 Pod 模板 (触发滚动更新)**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 修改注解触发更新
 kubectl patch daemonset fluentd -n kube-system -p \
@@ -1103,6 +1121,10 @@ kubectl patch daemonset fluentd -n kube-system -p \
 ```
 
 **方法 2: 手动删除 Pod (DaemonSet 会自动重建)**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 删除特定节点的 Pod
 kubectl delete pod fluentd-xxx -n kube-system
@@ -1111,7 +1133,7 @@ kubectl delete pod fluentd-xxx -n kube-system
 kubectl delete pods -l app=fluentd -n kube-system
 ```
 
-#<!-- chunk: Q6: 节点资源不足时 DaemonSet Pod 会被驱逐吗? -->## Q6: 节点资源不足时 DaemonSet Pod 会被驱逐吗?
+## Q6: 节点资源不足时 DaemonSet Pod 会被驱逐吗?
 
 **取决于 PriorityClass**:
 
@@ -1128,7 +1150,7 @@ spec:
       priorityClassName: system-node-critical  # 关键服务设置高优先级
 ```
 
-#<!-- chunk: Q7: 如何监控 DaemonSet 健康状态? -->## Q7: 如何监控 DaemonSet 健康状态?
+## Q7: 如何监控 DaemonSet 健康状态?
 
 ```bash
 # 查看 DaemonSet 状态
@@ -1159,7 +1181,7 @@ kubectl rollout status daemonset fluentd -n kube-system
 
 <!-- chunk: 生产案例 -->## 生产案例
 
-#<!-- chunk: 案例 1: Fluentd 日志收集 -->## 案例 1: Fluentd 日志收集
+## 案例 1: Fluentd 日志收集
 
 **架构**:
 - 每个节点运行 1 个 Fluentd Pod
@@ -1201,6 +1223,10 @@ spec:
 ```
 
 **运维技巧**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看某节点的日志收集状态
 kubectl exec -n kube-system fluentd-xxx -- fluentd --dry-run
@@ -1212,7 +1238,7 @@ kubectl exec -n kube-system fluentd-xxx -- killall -USR1 fluentd
 kubectl exec -n kube-system fluentd-xxx -- killall -HUP fluentd
 ```
 
-#<!-- chunk: 案例 2: Prometheus Node Exporter 监控 -->## 案例 2: Prometheus Node Exporter 监控
+## 案例 2: Prometheus Node Exporter 监控
 
 **架构**:
 - 每个节点运行 1 个 Node Exporter Pod
@@ -1304,7 +1330,7 @@ scrape_configs:
     target_label: instance
 ```
 
-#<!-- chunk: 案例 3: Calico CNI 网络插件 -->## 案例 3: Calico CNI 网络插件
+## 案例 3: Calico CNI 网络插件
 
 **架构**:
 - 每个节点运行 1 个 Calico Node Pod
@@ -1416,24 +1442,24 @@ spec:
 
 <!-- chunk: 相关资源 -->## 相关资源
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 - [Kubernetes DaemonSet 文档](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
 - [DaemonSet API 参考](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/daemon-set-v1/)
 - [DaemonSet Rolling Update](https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/)
 
-#<!-- chunk: 相关配置参考 -->## 相关配置参考
+## 相关配置参考
 - [01 - Pod YAML 配置参考](./01-pod-reference.md) - Pod 模板配置
 - [08 - ConfigMap YAML 配置参考](./08-configmap-reference.md) - 配置文件管理
 - [09 - Secret YAML 配置参考](./09-secret-reference.md) - 敏感信息管理
 
-#<!-- chunk: 常用 DaemonSet 项目 -->## 常用 DaemonSet 项目
+## 常用 DaemonSet 项目
 - [Fluentd Kubernetes DaemonSet](https://github.com/fluent/fluentd-kubernetes-daemonset)
 - [Prometheus Node Exporter](https://github.com/prometheus/node_exporter)
 - [Datadog Agent](https://docs.datadoghq.com/containers/kubernetes/)
 - [Calico CNI](https://docs.projectcalico.org/)
 - [Falco Security](https://falco.org/docs/getting-started/running/#kubernetes)
 
-#<!-- chunk: 最佳实践文章 -->## 最佳实践文章
+## 最佳实践文章
 - [Running DaemonSets in Production](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#writing-a-daemonset-spec)
 - [DaemonSet Performance Tuning](https://cloud.google.com/kubernetes-engine/docs/concepts/daemonset)
 
@@ -1446,7 +1472,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考

@@ -168,6 +168,9 @@ k9s:
 
 ### 3.1 安装
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 helm repo add headlamp https://headlamp-k8s.github.io/headlamp/
 helm install headlamp headlamp/headlamp \
@@ -175,6 +178,9 @@ helm install headlamp headlamp/headlamp \
 ```
 
 ### 3.2 访问
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 端口转发
@@ -371,6 +377,9 @@ kubectl popeye
 
 ### 7.2 kube-bench (安全审计)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml
 kubectl logs job/kube-bench
@@ -392,6 +401,12 @@ PROMPT='$(kube_ps1)'$PROMPT
 ## 八、Shell 别名与效率
 
 ### 8.1 推荐别名
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # ~/.zshrc 或 ~/.bashrc
@@ -444,7 +459,7 @@ source <(kubectl completion zsh)
 ## Obsidian 相关文档
 
 - domain-37-edge-computing KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README|[[Domain 37: 边缘计算 (Edge Computing)|Domain 37: 边缘计算 (Edge Computing)]]]]
+- [[domain-15-specialized-tech/README.md|[[Domain 37: 边缘计算 (Edge Computing)|Domain 37: 边缘计算 (Edge Computing)]]]]
 - index.md|Domain-37 边缘计算 — 开源项目索引]]
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)

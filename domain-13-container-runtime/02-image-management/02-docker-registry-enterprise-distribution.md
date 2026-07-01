@@ -58,7 +58,7 @@ This document provides in-depth exploration of Docker Registry enterprise image 
 
 <!-- chunk: 1. Docker Registry Architecture Deep Dive -->## 1. Docker Registry Architecture Deep Dive
 
-#<!-- chunk: 1.1 Core Component Architecture -->## 1.1 Core Component Architecture
+## 1.1 Core Component Architecture
 
 ```mermaid
 graph TB
@@ -97,7 +97,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 1.2 Storage Backend Options -->## 1.2 Storage Backend Options
+## 1.2 Storage Backend Options
 
 ```yaml
 storage_backends:
@@ -140,7 +140,7 @@ storage_backends:
 
 <!-- chunk: 2. Enterprise Deployment Configuration -->## 2. Enterprise Deployment Configuration
 
-#<!-- chunk: 2.1 High Availability Setup -->## 2.1 High Availability Setup
+## 2.1 High Availability Setup
 
 ```yaml
 # docker-registry-deployment.yaml
@@ -304,7 +304,7 @@ data:
 
 <!-- chunk: 3. Advanced Features Implementation -->## 3. Advanced Features Implementation
 
-#<!-- chunk: 3.1 Image Signing and Verification -->## 3.1 Image Signing and Verification
+## 3.1 Image Signing and Verification
 
 ```bash
 #!/bin/bash
@@ -333,7 +333,7 @@ signature:
 EOF
 ```
 
-#<!-- chunk: 3.2 Vulnerability Scanning Integration -->## 3.2 Vulnerability Scanning Integration
+## 3.2 Vulnerability Scanning Integration
 
 ```yaml
 # clair-scanner-integration.yaml
@@ -424,7 +424,7 @@ data:
 
 <!-- chunk: 4. Performance Optimization -->## 4. Performance Optimization
 
-#<!-- chunk: 4.1 CDN Integration -->## 4.1 CDN Integration
+## 4.1 CDN Integration
 
 ```yaml
 # cdn-configuration.yaml
@@ -460,7 +460,7 @@ cdn:
     min_content_length: 1024
 ```
 
-#<!-- chunk: 4.2 P2P Distribution Setup -->## 4.2 P2P Distribution Setup
+## 4.2 P2P Distribution Setup
 
 ```yaml
 # dragonfly-setup.yaml
@@ -552,7 +552,7 @@ spec:
 
 <!-- chunk: 5. Security and Compliance -->## 5. Security and Compliance
 
-#<!-- chunk: 5.1 Authentication and Authorization -->## 5.1 Authentication and Authorization
+## 5.1 Authentication and Authorization
 
 ```yaml
 # auth-service.yaml
@@ -623,24 +623,24 @@ data:
         password: "$2y$05$fghijklmnopqrstuvwxuzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     
     acl:
-      - match: {account: "admin"}
+      - matchers: ["account="admin""]
         actions: ["*"]
         comment: "Admin has full access to everything"
       
-      - match: {account: "developer", name: "myapp/*"}
+      - matchers: ["account="developer"", "name="myapp/*""]
         actions: ["pull"]
         comment: "Developers can pull myapp images"
       
-      - match: {account: "developer", name: "myapp/deploy-*"}
+      - matchers: ["account="developer"", "name="myapp/deploy-*""]
         actions: ["pull", "push"]
         comment: "Developers can push deploy images"
       
-      - match: {account: "anonymous"}
+      - matchers: ["account="anonymous""]
         actions: ["pull"]
         comment: "Anonymous users can pull public images"
 ```
 
-#<!-- chunk: 5.2 Audit and Compliance -->## 5.2 Audit and Compliance
+## 5.2 Audit and Compliance
 
 ```yaml
 # audit-logging.yaml
@@ -686,7 +686,7 @@ audit:
 
 <!-- chunk: 6. Monitoring and Maintenance -->## 6. Monitoring and Maintenance
 
-#<!-- chunk: 6.1 Health Monitoring -->## 6.1 Health Monitoring
+## 6.1 Health Monitoring
 
 ```yaml
 # monitoring-setup.yaml
@@ -746,7 +746,11 @@ spec:
         description: "Storage utilization is {{ $value | humanizePercentage }}"
 ```
 
-#<!-- chunk: 6.2 Backup and Disaster Recovery -->## 6.2 Backup and Disaster Recovery
+## 6.2 Backup and Disaster Recovery
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -787,7 +791,7 @@ EOF
 tar -czf ${BACKUP_DIR}/${BACKUP_NAME}.tar.gz -C ${BACKUP_DIR} ${BACKUP_NAME}
 
 # 6. Cleanup temporary directory
-rm -rf ${BACKUP_DIR}/${BACKUP_NAME}
+rm -rf ${BACKUP_DIR}/${BACKUP_NAME}  # ⚠️ 删除系统/数据文件
 
 # 7. Upload to remote storage
 if [ -n "$REMOTE_STORAGE" ]; then
@@ -800,7 +804,7 @@ echo "Backup completed: ${BACKUP_DIR}/${BACKUP_NAME}.tar.gz"
 
 <!-- chunk: 7. Best Practices and Guidelines -->## 7. Best Practices and Guidelines
 
-#<!-- chunk: 7.1 Image Management Policies -->## 7.1 Image Management Policies
+## 7.1 Image Management Policies
 
 ```yaml
 # image-retention-policy.yaml
@@ -840,30 +844,30 @@ retention_policy:
         webhook: "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK"
 ```
 
-#<!-- chunk: 7.2 Performance Guidelines -->## 7.2 Performance Guidelines
+## 7.2 Performance Guidelines
 
 ```markdown
 <!-- chunk: 🚀 Docker Registry Performance Best Practices -->## 🚀 Docker Registry Performance Best Practices
 
-#<!-- chunk: 1. Storage Optimization -->## 1. Storage Optimization
+## 1. Storage Optimization
 - Use SSD storage for better I/O performance
 - Enable compression for blob storage
 - Implement proper caching strategies
 - Regularly clean up unused blobs
 
-#<!-- chunk: 2. Network Optimization -->## 2. Network Optimization
+## 2. Network Optimization
 - Deploy registry close to users geographically
 - Use CDN for global distribution
 - Enable HTTP/2 for better performance
 - Implement connection pooling
 
-#<!-- chunk: 3. Resource Management -->## 3. Resource Management
+## 3. Resource Management
 - Set appropriate memory and CPU limits
 - Monitor and tune garbage collection
 - Scale horizontally based on demand
 - Use load balancing for high availability
 
-#<!-- chunk: 4. Security Hardening -->## 4. Security Hardening
+## 4. Security Hardening
 - Enable TLS encryption for all communications
 - Implement strong authentication mechanisms
 - Regular security scanning of images
@@ -872,7 +876,7 @@ retention_policy:
 
 <!-- chunk: 8. Future Trends and Evolution -->## 8. Future Trends and Evolution
 
-#<!-- chunk: 8.1 Emerging Technologies -->## 8.1 Emerging Technologies
+## 8.1 Emerging Technologies
 
 ```yaml
 future_trends:
@@ -903,7 +907,7 @@ future_trends:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-22-container-image-management MOC
-- [[domain-13-container-runtime/README|Domain 22: 容器镜像管理 (Container Image Management)]]
+- [[domain-13-container-runtime/README.md|Domain 13: 容器镜像管理 (Container Image Management)]]
 - Domain-22 容器镜像管理 — 开源项目索引
 - Harbor企业级容器镜像仓库深度实践
 - JFrog Artifactory Enterprise Container Registry Platform

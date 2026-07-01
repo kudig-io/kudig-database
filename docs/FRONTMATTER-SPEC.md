@@ -34,11 +34,11 @@ tags:
 - spec
 - metadata
 relationships:
-- target: '[[docs/TAG-DICTIONARY|KUDIG 全局标签字典]]'
+- target: "[[docs/TAG-DICTIONARY.md|KUDIG 全局标签字典]]"
   type: related_to
-- target: '[[docs/SCENARIO-TAXONOMY|KUDIG 场景分类体系]]'
+- target: "[[docs/SCENARIO-TAXONOMY.md|KUDIG 场景分类体系]]"
   type: related_to
-- target: '[[docs/SYNONYM-DICTIONARY|KUDIG 同义词与别名词典]]'
+- target: "[[docs/SYNONYM-DICTIONARY.md|KUDIG 同义词与别名词典]]"
   type: related_to
 difficulty: intermediate
 reading_level: intermediate
@@ -192,7 +192,7 @@ last_updated: "YYYY-MM-DD"
 
 ## Related
 
-- [[references/KUDIG Tag Dictionary|KUDIG Tag Dictionary]]
-- [[references/KUDIG Scenario Taxonomy|KUDIG Scenario Taxonomy]]
-- [[docs/SYNONYM-DICTIONARY]]
-- [[docs/TAG-DICTIONARY|KUDIG 全局标签字典]]
+- [[entities/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
+- [[entities/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
+- [[docs/SYNONYM-DICTIONARY.md|SYNONYM DICTIONARY]]
+- [[docs/TAG-DICTIONARY.md|KUDIG 全局标签字典]]

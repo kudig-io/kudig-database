@@ -41,7 +41,7 @@ and updates.
 
 ### Highlights
 
-#### [[Container Runtime|Container Runtime]] Interface (CRI)
+#### [[concepts/container-runtime.md|Container Runtime]] Interface (CRI)
 
 * **Fix NRI dropping requested CDI devices silently** ([#12650](https://github.com/containerd/containerd/pull/12650))
 * **Redact all query parameters in CRI error logs** ([#12551](https://github.com/containerd/containerd/pull/12551))

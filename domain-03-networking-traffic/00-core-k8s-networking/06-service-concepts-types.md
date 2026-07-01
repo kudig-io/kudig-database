@@ -242,6 +242,9 @@ tier: peripheral---
 
 ### 1.3 Service 工作流程
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────┐
 │                            Service 创建与流量转发流程                                      │
@@ -1943,6 +1946,9 @@ spec:
 
 ### 10.2 故障排查命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # service-troubleshooting.sh
@@ -2278,6 +2284,11 @@ data:
 
 ### 16.3 Service故障诊断与恢复
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # service-troubleshooting.sh - Service故障诊断脚本
@@ -2401,7 +2412,7 @@ EOF
   fi
   
   # 清理测试Pod
-  kubectl delete pod service-test-pod -n $NAMESPACE --force --grace-period=0
+  kubectl delete pod service-test-pod -n $NAMESPACE --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 } > /tmp/service-connectivity-test.log
 
 # 5. kube-proxy状态检查
@@ -2665,7 +2676,7 @@ roleRef:
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -2679,12 +2690,12 @@ roleRef:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|K8s 速查卡]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s 速查卡]]
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-03-networking-traffic
 - 相关知识域: domain-06-observability
-- [[domain-17-system-foundation/topic-cheat-sheet/networking|速查卡: networking]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|速查卡: networking]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
 
 ## See Also
 
@@ -2692,3 +2703,5 @@ roleRef:
 - 05-terway-advanced-guide
 - 07-service-implementation-details
 - 08-service-topology-aware
+
+```

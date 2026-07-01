@@ -33,12 +33,13 @@ prerequisites:
 - etcd-basics
 - logging-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Automatic Cleanup for Finished [[Jobs|Jobs]]
 
 ## 概述
-TTL-after-finished 控制器为已完成的 Job 对象提供基于生存时间（TTL）的自动清理机制。它有助于减少 API Server 中已完成 Job 的累积，降低 [[etcd|etcd]] 压力。
+TTL-after-finished 控制器为已完成的 Job 对象提供基于生存时间（TTL）的自动清理机制。它有助于减少 API Server 中已完成 Job 的累积，降低 [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]] 压力。
 
 ## 核心概念/原理
 - **触发时机**：计时器在 Job 状态变为 `Complete` 或 `Failed` 时开始计时。
@@ -46,7 +47,7 @@ TTL-after-finished 控制器为已完成的 Job 对象提供基于生存时间�
 - **配置字段**：在 Job 的 `spec.ttlSecondsAfterFinished` 字段中指定 TTL 秒数。
 
 ## 关键机制或特性
-- **动态修改**：可以在 Job 创建后或完成后修改 `ttlSecondsAfterFinished` 字段，但若在原有 TTL 已过期后再延长，[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 不保证一定保留该 Job。
+- **动态修改**：可以在 Job 创建后或完成后修改 `ttlSecondsAfterFinished` 字段，但若在原有 TTL 已过期后再延长，[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 不保证一定保留该 Job。
 - **时间偏差敏感**：TTL 控制器依赖 Job 状态中的时间戳判断 TTL 是否到期，集群时钟偏差可能导致清理时间出现偏差。
 - **多种设置方式**：
   - 在 Job 清单中直接声明。
@@ -172,6 +173,10 @@ webhooks:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 查看所有已完成但未清理的 Job
 kubectl get jobs --field-selector=status.successful=1 -A
@@ -201,3 +206,9 @@ kubectl get jobs -A --no-headers | wc -l
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/controllers/ttlafterfinished/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/container-environment.md|容器环境（Container Environment）]]

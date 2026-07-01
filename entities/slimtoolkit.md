@@ -40,7 +40,7 @@ SlimToolkit（原名 DockerSlim）是一个容器镜像优化工具，能够自�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -52,20 +52,20 @@ SlimToolkit（原名 DockerSlim）是一个容器镜像优化工具，能够自�
 
 ## 参考链接
 
-- [[concepts/secrets-management|secrets-management]]
-- [[concepts/security-defense-depth|security-defense-depth]]
-- [[concepts/ci-cd-pipeline-patterns|ci-cd-pipeline-patterns]]
+- [[concepts/secrets-management.md|secrets-management]]
+- [[concepts/security-defense-depth.md|security-defense-depth]]
+- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
 
 ## Related
 
-- [[connect-rpc]] — [[Connect RPC|Connect RPC]]
+- [[connect-rpc]] — Connect RPC
 - [[antrea]] — Antrea
 - [[linkerd]] — Linkerd
-- [[oscal-compass]] — [[OSCAL Compass|OSCAL Compass]]
+- [[oscal-compass]] — [[entities/oscal-compass.md|OSCAL Compass]]
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - slimtoolkit
-- [[entities/zot|zot]]
-- [[entities/eraser|Eraser]]
-- [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/zot.md|zot]]
+- [[entities/eraser.md|Eraser]]
+- [[entities/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

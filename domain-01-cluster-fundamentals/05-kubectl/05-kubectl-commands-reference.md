@@ -414,6 +414,9 @@ kubectl events -A --types=Warning --sort-by='.lastTimestamp' | head -50
 
 #### ConfigMap 创建详解
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 从文件创建
 kubectl create configmap nginx-conf --from-file=nginx.conf
@@ -436,6 +439,9 @@ kubectl create configmap app-config \
 ```
 
 #### Secret 创建详解
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 generic Secret
@@ -463,6 +469,9 @@ kubectl create secret generic ssh-key \
 
 #### Token 创建 (v1.24+)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建 ServiceAccount Token (v1.24+ 推荐方式)
 kubectl create token <service-account-name>
@@ -480,6 +489,10 @@ kubectl create token <sa-name> --bound-object-kind=Pod --bound-object-name=<pod-
 ### 3.2 kubectl apply - 声明式管理
 
 #### 基础用法
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 应用单个文件
@@ -514,6 +527,9 @@ kubectl annotate deployment/nginx kubernetes.io/change-cause="Update nginx to 1.
 
 #### 服务端 Apply (Server-Side Apply) 详解
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 服务端 Apply 优势:
 # 1. 更精确的字段所有权管理
@@ -532,6 +548,11 @@ kubectl apply --server-side --force-conflicts -f deployment.yaml
 
 ### 3.3 kubectl delete - 资源删除
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 删除单个资源
 kubectl delete pod nginx
@@ -546,10 +567,10 @@ kubectl delete -f deployment.yaml
 kubectl delete pods -l app=nginx
 
 # 删除命名空间下所有 Pod
-kubectl delete pods --all -n <namespace>
+kubectl delete pods --all -n <namespace>  # ⚠️ 批量删除，波及面大
 
 # 强制删除 (绕过优雅终止)
-kubectl delete pod nginx --force --grace-period=0
+kubectl delete pod nginx --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 级联删除策略 (v1.20+)
 kubectl delete deployment nginx --cascade=foreground  # 等待所有依赖删除
@@ -641,6 +662,9 @@ kubectl expose deployment nginx --port=80 --external-ip=192.168.1.100
 ## 4. Pod 调试与交互
 
 ### 4.1 kubectl exec - 容器命令执行
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 在 Pod 中执行命令
@@ -809,6 +833,9 @@ kubectl debug node/<node-name> -it --image=ubuntu
 
 ### 5.1 kubectl edit - 在线编辑
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 编辑资源
 kubectl edit deployment nginx
@@ -838,6 +865,9 @@ kubectl edit deployment nginx -o json
 | `json` | JSON Patch | 精确操作 (add/remove/replace) |
 
 #### Strategic Merge Patch
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 更新镜像
@@ -870,6 +900,9 @@ kubectl patch deployment nginx -p '{"spec":{"template":{"spec":{"nodeSelector":{
 
 #### JSON Patch
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 替换镜像
 kubectl patch deployment nginx --type='json' -p='[{"op":"replace","path":"/spec/template/spec/containers/0/image","value":"nginx:1.26"}]'
@@ -886,6 +919,9 @@ kubectl patch deployment nginx --type='json' -p='[{"op":"add","path":"/spec/temp
 
 #### Merge Patch
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 简单字段更新
 kubectl patch configmap mycm --type=merge -p '{"data":{"key":"new_value"}}'
@@ -896,6 +932,9 @@ kubectl patch deployment nginx --type=merge -p '{"spec":{"template":{"spec":{"no
 
 #### 子资源补丁 (v1.28+)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 更新 Deployment status
 kubectl patch deployment nginx --subresource=status -p '{"status":{"readyReplicas":3}}'
@@ -905,6 +944,9 @@ kubectl patch deployment nginx --subresource=scale -p '{"spec":{"replicas":10}}'
 ```
 
 ### 5.3 kubectl replace - 资源替换
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 替换资源
@@ -962,6 +1004,9 @@ kubectl set subject rolebinding admin --user=alice
 
 ### 5.5 kubectl label - 标签管理
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 添加标签
 kubectl label pods nginx env=prod
@@ -992,6 +1037,9 @@ kubectl get pods -l '!env'       # 无此标签
 ```
 
 ### 5.6 kubectl annotate - 注解管理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 添加注解
@@ -1035,6 +1083,9 @@ kubectl rollout status deployment/nginx --timeout=5m
 
 #### 历史与回滚
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 查看部署历史
 kubectl rollout history deployment/nginx
@@ -1068,6 +1119,9 @@ kubectl rollout resume deployment/nginx
 ```
 
 #### 重启
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 滚动重启 (v1.15+)
@@ -1109,6 +1163,9 @@ kubectl scale rs nginx-abc123 --replicas=5
 ```
 
 ### 6.3 kubectl autoscale - 自动扩缩容
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 创建 HPA
@@ -1218,9 +1275,13 @@ kubectl top pods --containers
 
 # 指定标签
 kubectl top pods -l app=nginx
+
 ```
 
 ### 7.3 kubectl cordon/uncordon - 节点调度控制
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
 
 ```bash
 # 标记节点不可调度
@@ -1235,9 +1296,13 @@ kubectl cordon node1 node2 node3
 # 查看节点状态
 kubectl get nodes
 # 输出: node1   Ready,SchedulingDisabled   ...
+
 ```
 
 ### 7.4 kubectl drain - 节点排空
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 排空节点 (基础)
@@ -1274,6 +1339,9 @@ kubectl uncordon <node-name>
 ```
 
 ### 7.5 kubectl taint - 节点污点管理
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
 
 ```bash
 # 添加污点
@@ -1598,6 +1666,9 @@ kubectl auth can-i get pods --subresource=logs
 
 ### 10.2 kubectl certificate - 证书管理
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 批准 CSR
 kubectl certificate approve <csr-name>
@@ -1629,6 +1700,9 @@ kubectl get csr myuser -o jsonpath='{.status.certificate}' | base64 -d > myuser.
 ```
 
 ### 10.3 RBAC 资源管理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 Role
@@ -1783,6 +1857,11 @@ kubectl deprecations  # 检查废弃 API
 | **避免 -o yaml/json** | 大量资源时禁用 | 用 jsonpath 提取需要的字段 |
 
 ### 12.2 生产环境别名配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # ~/.bashrc 或 ~/.zshrc
@@ -2009,6 +2088,9 @@ kubectl describe pod "$POD_NAME" -n "$NAMESPACE"
 
 ### 13.3 资源清理脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 #!/bin/bash
 # cleanup-resources.sh - 资源清理脚本
@@ -2110,6 +2192,9 @@ echo "=========================================="
 
 ### 14.2 常用排查命令速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Pod 相关
 kubectl get pods -A -o wide                    # 查看所有 Pod
@@ -2147,6 +2232,12 @@ kubectl auth can-i <verb> <resource> --as=<user>  # 检查用户权限
 
 ### 14.3 紧急操作速查
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+
 ```bash
 # 紧急回滚
 kubectl rollout undo deployment/<name>
@@ -2158,7 +2249,7 @@ kubectl scale deployment/<name> --replicas=10
 kubectl scale deployment/<name> --replicas=0
 
 # 强制删除卡住的 Pod
-kubectl delete pod <name> --force --grace-period=0
+kubectl delete pod <name> --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 紧急排空节点
 kubectl drain <node> --ignore-daemonsets --delete-emptydir-data --force
@@ -2171,6 +2262,7 @@ kubectl get --raw='/healthz?verbose'
 
 # 查看 etcd 健康 (需要访问权限)
 kubectl get --raw='/healthz/etcd'
+
 ```
 
 ---
@@ -2331,7 +2423,7 @@ kubectl get --raw='/healthz/etcd'
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析
@@ -2348,15 +2440,15 @@ kubectl get --raw='/healthz/etcd'
 - [[MOC]]
 
 - 架构全景图
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|K8s 速查卡]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s 速查卡]]
 - 相关知识域: domain-13-container-runtime
 - 相关知识域: domain-01-cluster-fundamentals
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|速查卡: k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet|速查卡: kubectl-scene-cheatsheet]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
 
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/01-overview|01-overview]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/01-overview|01-overview]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/01-pki-architecture|01-pki-architecture]]- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/01-overview.md|01-overview]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/01-overview.md|01-overview]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/01-pki-architecture.md|01-pki-architecture]]- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
@@ -2364,3 +2456,5 @@ kubectl get --raw='/healthz/etcd'
 - 04-source-code-structure
 - 06-cluster-configuration-parameters
 - 07-upgrade-paths-strategy
+
+```

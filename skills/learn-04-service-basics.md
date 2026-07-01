@@ -220,6 +220,9 @@ spec:
 
 ### 3.1 创建 Service
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 【方式一：从 Deployment 暴露】
 
@@ -322,6 +325,9 @@ MY_APP_SERVICE_PORT=80
 
 ### 5.2 Pod 无法解析 Service DNS
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 【排查步骤】
 
@@ -340,6 +346,9 @@ MY_APP_SERVICE_PORT=80
 ---
 
 ## 6. 总结
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
 【命令速查】
@@ -381,13 +390,13 @@ kubectl delete svc <name>
 
 ## 相关概念
 
-- [[domain-17-system-foundation/topic-dictionary/networking/service|service]]
+- [[domain-17-system-foundation/topic-dictionary/networking/service.md|service]]
 - 网络模型
 
 ## Related
 
-- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[deployment]] — Deployment
-- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[coredns]] — CoreDNS
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

@@ -93,7 +93,7 @@ AI Agent 是一类能够**自主感知环境、多步推理决策、调用外部
 
 <!-- chunk: 1. 什么是 AI Agent -->## 1. 什么是 AI Agent
 
-#<!-- chunk: 1.1 核心定义 -->## 1.1 核心定义
+## 1.1 核心定义
 
 Agent 与普通 LLM 应用的本质区别：
 
@@ -116,7 +116,7 @@ AI Agent:
 | **行动（Act）** | 调用工具或 API 执行具体操作 | Function Calling、代码执行 |
 | **学习（Learn）** | 从执行结果中获取反馈，调整后续决策 | Reflexion、RLHF、经验记忆 |
 
-#<!-- chunk: 1.2 Agent 分类体系 -->## 1.2 Agent 分类体系
+## 1.2 Agent 分类体系
 
 ```
 AI Agent 分类
@@ -182,7 +182,7 @@ Agent 的核心运行机制是一个**感知-规划-行动-观察**的闭环：
 └─────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: Agent Loop 的关键工程细节 -->## Agent Loop 的关键工程细节
+## Agent Loop 的关键工程细节
 
 **1. 终止条件设计**（避免无限循环）：
 ```python
@@ -235,7 +235,7 @@ class AgentState:
 
 <!-- chunk: 3. 主流推理框架 -->## 3. 主流推理框架
 
-#<!-- chunk: 3.1 ReAct（Reasoning + Acting） -->## 3.1 ReAct（Reasoning + Acting）
+## 3.1 ReAct（Reasoning + Acting）
 
 **最广泛使用的 Agent 推理模式**，交替进行思考（Thought）和行动（Action）：
 
@@ -300,7 +300,7 @@ tools = [
 agent = create_react_agent(llm=llm, tools=tools, prompt=react_prompt)
 ```
 
-#<!-- chunk: 3.2 Chain-of-Thought（CoT） -->## 3.2 Chain-of-Thought（CoT）
+## 3.2 Chain-of-Thought（CoT）
 
 适用于**复杂推理任务**，通过逐步分解思维链来提升准确性：
 
@@ -329,7 +329,7 @@ example = """
 """
 ```
 
-#<!-- chunk: 3.3 Tree-of-Thought（ToT） -->## 3.3 Tree-of-Thought（ToT）
+## 3.3 Tree-of-Thought（ToT）
 
 适用于**存在多个解决路径的复杂问题**，并行探索多个思维分支：
 
@@ -386,7 +386,7 @@ class TreeOfThought:
         return top_branches[0][0].conclusion
 ```
 
-#<!-- chunk: 3.4 Plan-and-Execute -->## 3.4 Plan-and-Execute
+## 3.4 Plan-and-Execute
 
 适用于**长流程、多步骤任务**，先制定完整计划再逐步执行：
 
@@ -421,7 +421,7 @@ class PlanAndExecuteAgent:
         return self._synthesize(goal, results)
 ```
 
-#<!-- chunk: 3.5 Reflexion（反思机制） -->## 3.5 Reflexion（反思机制）
+## 3.5 Reflexion（反思机制）
 
 通过**自我反思**从失败中学习，迭代改进：
 
@@ -472,7 +472,7 @@ class ReflexionAgent:
 
 <!-- chunk: 5. Agent 的关键工程挑战 -->## 5. Agent 的关键工程挑战
 
-#<!-- chunk: 5.1 幻觉（Hallucination）控制 -->## 5.1 幻觉（Hallucination）控制
+## 5.1 幻觉（Hallucination）控制
 
 ```python
 # 最佳实践: 强制 Agent 引用来源
@@ -485,7 +485,7 @@ system_prompt = """
 """
 ```
 
-#<!-- chunk: 5.2 工具调用失败处理 -->## 5.2 工具调用失败处理
+## 5.2 工具调用失败处理
 
 ```python
 import time
@@ -517,7 +517,7 @@ def resilient_tool_call(
     return False, "达到最大重试次数"
 ```
 
-#<!-- chunk: 5.3 上下文窗口管理 -->## 5.3 上下文窗口管理
+## 5.3 上下文窗口管理
 
 ```python
 class ContextWindowManager:
@@ -561,7 +561,7 @@ class ContextWindowManager:
 
 <!-- chunk: 6. 生产级 Agent 设计原则 -->## 6. 生产级 Agent 设计原则
 
-#<!-- chunk: 6.1 最小权限原则 -->## 6.1 最小权限原则
+## 6.1 最小权限原则
 
 ```yaml
 # Agent 的 K8s RBAC 配置示例
@@ -584,7 +584,7 @@ rules:
   # 严格禁止: 无 create/update/delete/exec 权限
 ```
 
-#<!-- chunk: 6.2 可审计性 -->## 6.2 可审计性
+## 6.2 可审计性
 
 每次 Agent 操作都必须完整记录：
 
@@ -629,7 +629,7 @@ class AuditedAgent:
             raise
 ```
 
-#<!-- chunk: 6.3 人工审批门禁（Human-in-the-Loop） -->## 6.3 人工审批门禁（Human-in-the-Loop）
+## 6.3 人工审批门禁（Human-in-the-Loop）
 
 ```python
 from enum import Enum
@@ -685,7 +685,7 @@ class HumanInLoopGate:
 
 <!-- chunk: 8. 最佳实践与反模式 -->## 8. 最佳实践与反模式
 
-#<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
 
 - **明确任务边界**：系统提示中清晰定义 Agent 的职责范围和禁止行为
 - **工具描述精准**：工具的 description 直接影响 LLM 的选择质量，要具体说明输入输出和适用场景
@@ -693,7 +693,7 @@ class HumanInLoopGate:
 - **失败快速**：设置合理的超时和重试上限，避免无效循环消耗资源
 - **结果验证**：Agent 的每次操作结果应有验证步骤，而非盲目继续
 
-#<!-- chunk: 反模式 -->## 反模式
+## 反模式
 
 - **工具过载**：给 Agent 超过 20 个工具会导致工具选择准确率显著下降
 - **无终止条件**：没有 max_iterations 限制，Agent 可能陷入无限循环
@@ -723,17 +723,17 @@ class HumanInLoopGate:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/11-cost-latency-optimization|成本与延迟优化策略]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/11-cost-latency-optimization.md|成本与延迟优化策略]]
 
 ## See Also
 

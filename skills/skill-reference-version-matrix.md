@@ -87,14 +87,14 @@ created: "2026-05-23"
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/Kubernetes Diagnostic Skills Overview|诊断技能总览]]
-- [[skills/troubleshoot-pod-issues|Pod 故障排查]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## Related
 
-- [[skills/troubleshoot-node-issues|troubleshoot-node-issues]] — [[Troubleshoot Node Issues|Troubleshoot Node Issues]]
-- [[skills/FTA Diagnostic Execution Engine|[[FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]]] — FTA Diagnostic Execution Engine
-- [[skills/skill-23-job-cronjob-failure|skill-23-job-cronjob-failure]] — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation Remediation
-- [[entities/kubelet|kubelet]] — kubelet
+- [[skills/troubleshoot-node-issues.md|troubleshoot-node-issues]] — [[skills/troubleshoot-node-issues.md|Troubleshoot Node Issues]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]]] — FTA Diagnostic Execution Engine
+- [[skills/skill-23-job-cronjob-failure.md|skill-23-job-cronjob-failure]] — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation Remediation
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

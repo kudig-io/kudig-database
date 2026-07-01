@@ -49,7 +49,7 @@ Pod 中使用 ConfigMap 的四种方式：
 1. **容器命令和参数**：在 `command` 或 `args` 中引用 ConfigMap 的值。
 2. **环境变量**：通过 `env.valueFrom.configMapKeyRef` 或 `envFrom.configMapRef` 将键值注入为环境变量。
 3. **只读卷挂载**：将 ConfigMap 挂载为卷中的文件，供应用读取。
-4. **[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 读取**：在 Pod 内通过代码直接调用 Kubernetes API 读取 ConfigMap，可订阅变更事件，也能访问其他命名空间的 ConfigMap。
+4. **[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 读取**：在 Pod 内通过代码直接调用 Kubernetes API 读取 ConfigMap，可订阅变更事件，也能访问其他命名空间的 ConfigMap。
 
 **自动更新机制**：
 - 通过卷挂载的 ConfigMap 在更新后会自动同步到 Pod（ eventual consistency，延迟取决于 [[kubelet|kubelet]] 同步周期和缓存策略）。
@@ -194,6 +194,11 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 从文件创建 ConfigMap
 kubectl create configmap app-config --from-file=application.yaml --from-file=nginx.conf -n production
@@ -226,4 +231,4 @@ kubectl get pods -n production -o json | jq '.items[] | select(.spec.volumes[]?.
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

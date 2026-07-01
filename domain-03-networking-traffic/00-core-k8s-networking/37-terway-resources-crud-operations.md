@@ -450,6 +450,10 @@ chmod +x check-podeni-status.sh
 
 #### 2.4.1 更新安全组
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方式一: 直接编辑
 kubectl edit podeni <podeni-name> -n <namespace>
@@ -481,6 +485,9 @@ kubectl apply -f update-podeni.yaml
 
 #### 2.4.2 更新 vSwitch 配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 更新 PodENI 的 vSwitch
 kubectl patch podeni <podeni-name> -n <namespace> --type='merge' -p='
@@ -494,6 +501,9 @@ kubectl patch podeni <podeni-name> -n <namespace> --type='merge' -p='
 ```
 
 #### 2.4.3 通过 Annotation 更新 Pod 网络配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 为现有 Pod 添加安全组 Annotation (需要 Pod 重建)
@@ -509,6 +519,11 @@ kubectl annotate pod <pod-name> -n <namespace> \
 
 ### 2.5 Delete - 删除 PodENI 资源
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # ============================================
 # 基础删除命令
@@ -518,7 +533,7 @@ kubectl annotate pod <pod-name> -n <namespace> \
 kubectl delete podeni <podeni-name> -n <namespace>
 
 # 删除指定命名空间所有 PodENI
-kubectl delete podenis -n <namespace> --all
+kubectl delete podenis -n <namespace> --all  # ⚠️ 批量删除，波及面大
 
 # 强制删除 (解决 Finalizer 阻塞问题)
 kubectl delete podeni <podeni-name> -n <namespace> \
@@ -697,6 +712,9 @@ chmod +x check-node-networking.sh
 
 ### 3.4 Update - 更新 NodeNetworking 资源
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # ============================================
 # 更新 ENI 配置
@@ -749,12 +767,16 @@ kubectl patch nodenetworking <node-name> --type='merge' -p='
 
 ### 3.5 Delete - 删除 NodeNetworking 资源
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 删除 NodeNetworking (通常不需要手动删除)
 kubectl delete nodenetworking <node-name>
 
 # 删除所有 NodeNetworking (危险操作)
-kubectl delete nodenetworkings --all
+kubectl delete nodenetworkings --all  # ⚠️ 批量删除，波及面大
 ```
 
 ---
@@ -882,6 +904,9 @@ kubectl get pod <pod-name> -o jsonpath='{.metadata.annotations.k8s\.aliyun\.com/
 
 ### 4.4 Update - 更新 PodNetworking 资源
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 更新 PodNetworking 的 vSwitch
 kubectl patch podnetworking <name> --type='json' -p='[
@@ -907,6 +932,9 @@ kubectl edit podnetworking <name>
 ```
 
 ### 4.5 Delete - 删除 PodNetworking 资源
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 删除 PodNetworking
@@ -1064,6 +1092,9 @@ chmod +x check-reserved-ips.sh
 
 ### 5.4 Update - 更新 ReservedIP 资源
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 更新 IP 保留时长
 kubectl patch reservedip <name> -n <namespace> --type='merge' -p='
@@ -1087,6 +1118,9 @@ kubectl patch reservedip <name> -n <namespace> --type='merge' -p='
 ```
 
 ### 5.5 Delete - 删除 ReservedIP 资源
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 删除固定 IP (会释放 IP 地址)
@@ -1286,6 +1320,11 @@ data:
 ```
 
 ### 7.2 ConfigMap CRUD 操作
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # ============================================
@@ -1591,6 +1630,11 @@ data:
 <!-- chunk: 11. 命令速查表 -->
 ## 11. 命令速查表
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # ============================================
 # PodENI 操作
@@ -1644,7 +1688,7 @@ kubectl describe podeni <name> -n <ns>           # 查看 PodENI 事件
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -1665,4 +1709,4 @@ kubectl describe podeni <name> -n <ns>           # 查看 PodENI 事件
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]

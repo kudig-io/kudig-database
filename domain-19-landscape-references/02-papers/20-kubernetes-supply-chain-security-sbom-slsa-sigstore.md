@@ -67,7 +67,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 供应链安全威胁全景 -->## 1. 供应链安全威胁全景
 
-#<!-- chunk: 1.1 重大供应链攻击事件回顾 -->## 1.1 重大供应链攻击事件回顾
+## 1.1 重大供应链攻击事件回顾
 
 ```yaml
 供应链攻击典型案例分析:
@@ -110,7 +110,7 @@ created: "2026-05-23"
       - CycloneDX VEX格式支持漏洞影响声明
 ```
 
-#<!-- chunk: 1.2 Kubernetes供应链攻击面分析 -->## 1.2 Kubernetes供应链攻击面分析
+## 1.2 Kubernetes供应链攻击面分析
 
 ```mermaid
 graph LR
@@ -155,7 +155,7 @@ graph LR
     style E1 fill:#ccccff
 ```
 
-#<!-- chunk: 1.3 NIST SSDF框架映射 -->## 1.3 NIST SSDF框架映射
+## 1.3 NIST SSDF框架映射
 
 ```yaml
 NIST SSDF (Secure Software Development Framework) v1.1 与K8s供应链映射:
@@ -200,7 +200,7 @@ NIST SSDF (Secure Software Development Framework) v1.1 与K8s供应链映射:
 
 <!-- chunk: 2. SBOM软件物料清单实践 -->## 2. SBOM软件物料清单实践
 
-#<!-- chunk: 2.1 SPDX vs CycloneDX格式对比 -->## 2.1 SPDX vs CycloneDX格式对比
+## 2.1 SPDX vs CycloneDX格式对比
 
 ```yaml
 SBOM格式对比分析:
@@ -252,7 +252,7 @@ SBOM格式对比分析:
     联邦要求(美国EO 14028): SPDX或CycloneDX均可
 ```
 
-#<!-- chunk: 2.2 Syft镜像SBOM生成 -->## 2.2 Syft镜像SBOM生成
+## 2.2 Syft镜像SBOM生成
 
 ```bash
 # ============================================================
@@ -372,7 +372,7 @@ jobs:
             ghcr.io/${{ github.repository }}:sbom
 ```
 
-#<!-- chunk: 2.3 [[Trivy|Trivy]] SBOM扫描与集成 -->## 2.3 Trivy SBOM扫描与集成
+## 2.3 Trivy SBOM扫描与集成
 
 ```yaml
 # ============================================================
@@ -455,7 +455,7 @@ spec:
 # kubectl get sbomreports -n production
 ```
 
-#<!-- chunk: 2.4 OCI Registry存储SBOM -->## 2.4 OCI Registry存储SBOM
+## 2.4 OCI Registry存储SBOM
 
 ```yaml
 OCI Artifact SBOM存储方案:
@@ -496,7 +496,7 @@ OCI Artifact SBOM存储方案:
 
 <!-- chunk: 3. SLSA构建来源证明 -->## 3. SLSA构建来源证明
 
-#<!-- chunk: 3.1 SLSA Level 1-4需求矩阵 -->## 3.1 SLSA Level 1-4需求矩阵
+## 3.1 SLSA Level 1-4需求矩阵
 
 ```yaml
 SLSA (Supply-chain Levels for Software Artifacts) v1.0 等级要求:
@@ -551,7 +551,7 @@ SLSA (Supply-chain Levels for Software Artifacts) v1.0 等级要求:
     渐进式路径: L1(1个月) → L2(3个月) → L3(6个月)
 ```
 
-#<!-- chunk: 3.2 Hermetic Build密封构建配置 -->## 3.2 Hermetic Build密封构建配置
+## 3.2 Hermetic Build密封构建配置
 
 ```yaml
 # ============================================================
@@ -658,7 +658,7 @@ data:
   transparency.url: "https://rekor.sigstore.dev"
 ```
 
-#<!-- chunk: 3.3 GitHub Actions SLSA Generator配置 -->## 3.3 GitHub Actions SLSA Generator配置
+## 3.3 GitHub Actions SLSA Generator配置
 
 ```yaml
 # ============================================================
@@ -743,7 +743,7 @@ jobs:
           echo "✅ SLSA Level 3 Provenance Verified Successfully"
 ```
 
-#<!-- chunk: 3.4 SLSA Verifier验证流程 -->## 3.4 SLSA Verifier验证流程
+## 3.4 SLSA Verifier验证流程
 
 ```yaml
 SLSA Verifier验证流程:
@@ -780,7 +780,7 @@ SLSA Verifier验证流程:
 
 <!-- chunk: 4. Sigstore无密钥签名体系 -->## 4. Sigstore无密钥签名体系
 
-#<!-- chunk: 4.1 Sigstore核心架构 -->## 4.1 Sigstore核心架构
+## 4.1 Sigstore核心架构
 
 ```mermaid
 graph TB
@@ -825,7 +825,7 @@ graph TB
     style REGISTRY fill:#9C27B0,color:#fff
 ```
 
-#<!-- chunk: 4.2 Cosign镜像签名流程 -->## 4.2 Cosign镜像签名流程
+## 4.2 Cosign镜像签名流程
 
 ```bash
 # ============================================================
@@ -890,7 +890,7 @@ cosign verify \
   ghcr.io/myorg/myapp@sha256:abc123... | jq '.[0].optional'
 ```
 
-#<!-- chunk: 4.3 Policy Controller强制验证配置 -->## 4.3 Policy Controller强制验证配置
+## 4.3 Policy Controller强制验证配置
 
 ```yaml
 # ============================================================
@@ -971,7 +971,7 @@ spec:
 
 <!-- chunk: 5. in-toto Attestation链路验证 -->## 5. in-toto Attestation链路验证
 
-#<!-- chunk: 5.1 Attestation概念与DSSE格式 -->## 5.1 Attestation概念与DSSE格式
+## 5.1 Attestation概念与DSSE格式
 
 ```yaml
 in-toto Attestation基础概念:
@@ -1015,7 +1015,7 @@ in-toto Attestation基础概念:
     全链: in-toto Link Metadata
 ```
 
-#<!-- chunk: 5.2 构建时Attestation生成 -->## 5.2 构建时Attestation生成
+## 5.2 构建时Attestation生成
 
 ```yaml
 # ============================================================
@@ -1098,7 +1098,7 @@ jobs:
             ghcr.io/${{ github.repository }}@${{ steps.build.outputs.digest }}
 ```
 
-#<!-- chunk: 5.3 Attestation链验证 -->## 5.3 Attestation链验证
+## 5.3 Attestation链验证
 
 ```bash
 # ============================================================
@@ -1143,7 +1143,7 @@ cosign tree $IMAGE
 
 <!-- chunk: 6. Admission Controller强制验证 -->## 6. Admission Controller强制验证
 
-#<!-- chunk: 6.1 Kyverno镜像签名验证策略 -->## 6.1 Kyverno镜像签名验证策略
+## 6.1 Kyverno镜像签名验证策略
 
 ```yaml
 # ============================================================
@@ -1267,7 +1267,7 @@ spec:
                         issuer: "https://token.actions.githubusercontent.com"
 ```
 
-#<!-- chunk: 6.2 OPA/Gatekeeper策略 -->## 6.2 OPA/Gatekeeper策略
+## 6.2 OPA/Gatekeeper策略
 
 ```yaml
 # ============================================================
@@ -1348,7 +1348,7 @@ spec:
       - "supply-chain.security/signature-verified"
 ```
 
-#<!-- chunk: 6.3 ValidatingAdmissionPolicy原生支持 -->## 6.3 ValidatingAdmissionPolicy原生支持
+## 6.3 ValidatingAdmissionPolicy原生支持
 
 ```yaml
 # ============================================================
@@ -1419,7 +1419,7 @@ spec:
 
 <!-- chunk: 7. 企业级供应链安全体系 -->## 7. 企业级供应链安全体系
 
-#<!-- chunk: 7.1 完整供应链安全门禁 -->## 7.1 完整供应链安全门禁
+## 7.1 完整供应链安全门禁
 
 ```mermaid
 graph TB
@@ -1479,7 +1479,7 @@ graph TB
     style S5E fill:#ff8800,color:#fff
 ```
 
-#<!-- chunk: 7.2 私有Sigstore部署 -->## 7.2 私有Sigstore部署
+## 7.2 私有Sigstore部署
 
 ```yaml
 # ============================================================
@@ -1605,7 +1605,7 @@ data:
   COSIGN_EXPERIMENTAL: "1"
 ```
 
-#<!-- chunk: 7.3 监控与审计集成 -->## 7.3 监控与审计集成
+## 7.3 监控与审计集成
 
 ```yaml
 # ============================================================
@@ -1773,7 +1773,7 @@ data:
 
 <!-- chunk: 9. 未来趋势 -->## 9. 未来趋势
 
-#<!-- chunk: 9.1 SLSA v1.0规范稳定化 -->## 9.1 SLSA v1.0规范稳定化
+## 9.1 SLSA v1.0规范稳定化
 
 ```yaml
 SLSA v1.0 发展动态 (2025-2026):
@@ -1805,7 +1805,7 @@ SLSA v1.0 发展动态 (2025-2026):
     - AI/ML模型SBOM与SLSA扩展规范
 ```
 
-#<!-- chunk: 9.2 Kubernetes原生镜像签名路线图 -->## 9.2 Kubernetes原生镜像签名路线图
+## 9.2 Kubernetes原生镜像签名路线图
 
 ```yaml
 K8s原生镜像签名进展:
@@ -1841,7 +1841,7 @@ K8s原生镜像签名进展:
     - OCI 1.2: 原生Attestation格式标准化
 ```
 
-#<!-- chunk: 9.3 相关领域链接 -->## 9.3 相关领域链接
+## 9.3 相关领域链接
 
 ```yaml
 知识体系关联:
@@ -1884,7 +1884,7 @@ K8s原生镜像签名进展:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -1905,4 +1905,4 @@ K8s原生镜像签名进展:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

@@ -46,7 +46,7 @@ OVN-Kubernetes 是一个基于 OVN (Open Virtual Network) 的 Kubernetes CNI 网
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -63,29 +63,29 @@ OVN-Kubernetes 是一个基于 OVN (Open Virtual Network) 的 Kubernetes CNI 网
 ## 参考链接
 
 - [[cilium]]
-- [[concepts/cilium-ebpf-networking|cilium-ebpf-networking]]
-- [[entities/cni-plugins|cni-plugins]]
-- [[entities/networkpolicy|[[NetworkPolicy|networkpolicy]]]]
-- [[concepts/storage-model|storage-model]]
+- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
+- [[entities/cni-plugins.md|cni-plugins]]
+- [[entities/networkpolicy.md|[[NetworkPolicy|networkpolicy]]]]
+- [[concepts/storage-model.md|storage-model]]
 
 ## Related
 
 - [[43-terway-crd-operations]] — Terway CRD 资源操作
 - [[sops]] — SOPS (Secrets OPerationS)
-- [[entities/argocd|argocd]] — ArgoCD
+- [[entities/argocd.md|argocd]] — ArgoCD
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - ovn-kubernetes
-- [[entities/antrea|Antrea]]
-- [[entities/kubeslice|KubeSlice]]
-- [[entities/kuadrant|Kuadrant]]
-- [[entities/kube-ovn|Kube-OVN]]
-- [[entities/easegress|Easegress]]
-- [[entities/bpfman|bpfman]]
-- [[entities/telepresence|Telepresence]]
-- [[entities/spiderpool|Spiderpool]]
-- [[entities/k8gb|K8GB]]
-- [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/antrea.md|Antrea]]
+- [[entities/kubeslice.md|KubeSlice]]
+- [[entities/kuadrant.md|Kuadrant]]
+- [[entities/kube-ovn.md|Kube-OVN]]
+- [[entities/easegress.md|Easegress]]
+- [[entities/bpfman.md|bpfman]]
+- [[entities/telepresence.md|Telepresence]]
+- [[entities/spiderpool.md|Spiderpool]]
+- [[entities/k8gb.md|K8GB]]
+- [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

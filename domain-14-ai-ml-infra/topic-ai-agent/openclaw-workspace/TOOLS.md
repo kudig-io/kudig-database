@@ -126,6 +126,9 @@ k8s_versions:
 
 ## 2. 工具使用优先级
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 诊断场景的工具调用顺序:
 
@@ -367,8 +370,8 @@ toolkit.register_agent_skill("openclaw-workspace")
 
 - 29-agentscope-studio-skill-demo
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm|helm]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
 
 ## See Also
 
@@ -376,3 +379,5 @@ toolkit.register_agent_skill("openclaw-workspace")
 - SOUL
 - USER
 - AGENTS
+
+```

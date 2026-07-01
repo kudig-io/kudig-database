@@ -109,7 +109,7 @@ k8s_versions:
 
 <!-- chunk: 架构概述 -->## 架构概述
 
-#<!-- chunk: Elastic Stack平台架构 -->## Elastic Stack平台架构
+## Elastic Stack平台架构
 
 ```yaml
 # Elastic Stack企业级可观测性平台整体架构
@@ -140,7 +140,7 @@ elastic_stack_platform:
     monitoring_ui: 集群监控界面
 ```
 
-#<!-- chunk: 核心价值主张 -->## 核心价值主张
+## 核心价值主张
 
 **统一数据平台**
 - 单一平台处理Logs、Metrics、APM三大数据类型
@@ -164,9 +164,9 @@ elastic_stack_platform:
 
 <!-- chunk: 核心组件深度解析 -->## 核心组件深度解析
 
-#<!-- chunk: Elasticsearch架构详解 -->## Elasticsearch架构详解
+## Elasticsearch架构详解
 
-##<!-- chunk: 集群架构设计 -->## 集群架构设计
+## 集群架构设计
 
 ```yaml
 # Elasticsearch企业级集群架构
@@ -215,7 +215,7 @@ elasticsearch_cluster:
       storage: 500gb
 ```
 
-##<!-- chunk: 索引生命周期管理(ILM) -->## 索引生命周期管理(ILM)
+## 索引生命周期管理(ILM)
 
 ```json
 {
@@ -277,9 +277,9 @@ elasticsearch_cluster:
 }
 ```
 
-#<!-- chunk: Beats数据采集器详解 -->## Beats数据采集器详解
+## Beats数据采集器详解
 
-##<!-- chunk: Filebeat配置优化 -->## Filebeat配置优化
+## Filebeat配置优化
 
 ```yaml
 # Filebeat企业级配置
@@ -355,7 +355,7 @@ setup.ilm.rollover_alias: "filebeat"
 setup.ilm.pattern: "{now/d}-000001"
 ```
 
-##<!-- chunk: Metricbeat系统监控 -->## Metricbeat系统监控
+## Metricbeat系统监控
 
 ```yaml
 # Metricbeat系统监控配置
@@ -445,9 +445,9 @@ output.elasticsearch:
 
 <!-- chunk: 企业级部署架构 -->## 企业级部署架构
 
-#<!-- chunk: 高可用集群部署 -->## 高可用集群部署
+## 高可用集群部署
 
-##<!-- chunk: Kubernetes部署架构 -->## Kubernetes部署架构
+## Kubernetes部署架构
 
 ```yaml
 # Elastic Stack Kubernetes部署配置
@@ -575,7 +575,7 @@ spec:
             storage: 2Ti
 ```
 
-##<!-- chunk: 网络安全配置 -->## 网络安全配置
+## 网络安全配置
 
 ```yaml
 # 网络策略配置
@@ -641,9 +641,9 @@ spec:
           port: 443
 ```
 
-#<!-- chunk: 安全加固配置 -->## 安全加固配置
+## 安全加固配置
 
-##<!-- chunk: RBAC权限管理 -->## RBAC权限管理
+## RBAC权限管理
 
 ```yaml
 # Elasticsearch角色和用户配置
@@ -696,7 +696,10 @@ users:
     roles: ["apm_writer_role"]
 ```
 
-##<!-- chunk: TLS证书管理 -->## TLS证书管理
+## TLS证书管理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash
@@ -746,9 +749,9 @@ kubectl create secret generic elasticsearch-certs \
 
 <!-- chunk: 日志分析与处理 -->## 日志分析与处理
 
-#<!-- chunk: Logstash管道配置 -->## Logstash管道配置
+## Logstash管道配置
 
-##<!-- chunk: 复杂日志处理管道 -->## 复杂日志处理管道
+## 复杂日志处理管道
 
 ```ruby
 # Logstash企业级配置
@@ -900,7 +903,7 @@ output {
 }
 ```
 
-#<!-- chunk: 索引模板配置 -->## 索引模板配置
+## 索引模板配置
 
 ```json
 {
@@ -980,9 +983,9 @@ output {
 
 <!-- chunk: 指标监控系统 -->## 指标监控系统
 
-#<!-- chunk: Metricbeat高级配置 -->## Metricbeat高级配置
+## Metricbeat高级配置
 
-##<!-- chunk: 自定义指标收集 -->## 自定义指标收集
+## 自定义指标收集
 
 ```yaml
 # Metricbeat自定义模块配置
@@ -1056,7 +1059,7 @@ metricbeat.modules:
       expiration_analysis: true
 ```
 
-##<!-- chunk: 指标预处理和丰富 -->## 指标预处理和丰富
+## 指标预处理和丰富
 
 ```javascript
 // Metricbeat JavaScript处理器示例
@@ -1104,9 +1107,9 @@ processors:
 
 <!-- chunk: APM应用性能监控 -->## APM应用性能监控
 
-#<!-- chunk: APM Server配置 -->## APM Server配置
+## APM Server配置
 
-##<!-- chunk: 高级APM配置 -->## 高级APM配置
+## 高级APM配置
 
 ```yaml
 # APM Server企业级配置
@@ -1181,9 +1184,9 @@ apm-server:
       password: "${MONITORING_PASSWORD}"
 ```
 
-#<!-- chunk: 应用程序APM集成 -->## 应用程序APM集成
+## 应用程序APM集成
 
-##<!-- chunk: Java应用APM配置 -->## Java应用APM配置
+## Java应用APM配置
 
 ```java
 // Spring Boot应用APM配置示例
@@ -1262,7 +1265,7 @@ public class ApmTracingAspect {
 }
 ```
 
-##<!-- chunk: 数据库查询监控 -->## 数据库查询监控
+## 数据库查询监控
 
 ```java
 // 数据库查询性能监控
@@ -1310,9 +1313,9 @@ public class DatabasePerformanceMonitor {
 
 <!-- chunk: 安全信息与事件管理 -->## 安全信息与事件管理
 
-#<!-- chunk: SIEM配置 -->## SIEM配置
+## SIEM配置
 
-##<!-- chunk: 威胁检测规则 -->## 威胁检测规则
+## 威胁检测规则
 
 ```yaml
 # Elastic SIEM威胁检测规则
@@ -1374,7 +1377,7 @@ spec:
         assign_to: "security-team"
 ```
 
-##<!-- chunk: 安全日志分析 -->## 安全日志分析
+## 安全日志分析
 
 ```python
 # 安全日志分析Python脚本
@@ -1544,9 +1547,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 可视化与告警 -->## 可视化与告警
 
-#<!-- chunk: Kibana仪表板配置 -->## Kibana仪表板配置
+## Kibana仪表板配置
 
-##<!-- chunk: 高级可视化配置 -->## 高级可视化配置
+## 高级可视化配置
 
 ```json
 {
@@ -1635,7 +1638,7 @@ if __name__ == "__main__":
 }
 ```
 
-##<!-- chunk: 告警规则配置 -->## 告警规则配置
+## 告警规则配置
 
 ```yaml
 # Watcher告警配置
@@ -1745,9 +1748,9 @@ PUT _watcher/watch/system-resource-alert
 
 <!-- chunk: 性能优化策略 -->## 性能优化策略
 
-#<!-- chunk: Elasticsearch性能调优 -->## Elasticsearch性能调优
+## Elasticsearch性能调优
 
-##<!-- chunk: 索引优化配置 -->## 索引优化配置
+## 索引优化配置
 
 ```yaml
 # 索引性能优化配置
@@ -1823,7 +1826,7 @@ PUT _index_template/logs-optimized
 }
 ```
 
-##<!-- chunk: 查询性能优化 -->## 查询性能优化
+## 查询性能优化
 
 ```json
 {
@@ -1888,7 +1891,7 @@ PUT _index_template/logs-optimized
 }
 ```
 
-#<!-- chunk: 集群健康监控 -->## 集群健康监控
+## 集群健康监控
 
 ```bash
 #!/bin/bash
@@ -1931,7 +1934,7 @@ echo "$heap_usage"
 
 <!-- chunk: 最佳实践总结 -->## 最佳实践总结
 
-#<!-- chunk: 部署架构最佳实践 -->## 部署架构最佳实践
+## 部署架构最佳实践
 
 ```yaml
 # 生产环境推荐配置
@@ -1969,9 +1972,9 @@ production_recommendations:
     verification_schedule: daily
 ```
 
-#<!-- chunk: 监控和维护 -->## 监控和维护
+## 监控和维护
 
-##<!-- chunk: 日常运维检查清单 -->## 日常运维检查清单
+## 日常运维检查清单
 
 - [ ] 集群健康状态检查
 - [ ] 节点资源使用率监控
@@ -1982,7 +1985,7 @@ production_recommendations:
 - [ ] 备份完整性验证
 - [ ] 安全配置审查
 
-##<!-- chunk: 性能基准测试 -->## 性能基准测试
+## 性能基准测试
 
 ```bash
 #!/bin/bash
@@ -2070,8 +2073,8 @@ curl -X DELETE "$ES_HOST/$INDEX_NAME"
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-20-enterprise-monitoring-alerting MOC
-- [[domain-06-observability/README|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-20 企业监控与告警 — 开源项目索引]]
+- [[domain-06-observability/README.md|Domain 06: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]]
 - Prometheus企业级监控系统深度实践
 - Grafana Enterprise Observability Platform 深度实践
 - OpenTelemetry分布式追踪与可观测性深度实践
@@ -2089,8 +2092,8 @@ curl -X DELETE "$ES_HOST/$INDEX_NAME"
 - 07-zabbix-enterprise-monitoring
 - 08-new-relic-enterprise-apm
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

@@ -85,7 +85,7 @@ k8s_versions:
 
 <!-- chunk: 一、核心概念 -->## 一、核心概念
 
-#<!-- chunk: 1.1 FTA vs FEBM 方法论对比 -->## 1.1 FTA vs FEBM 方法论对比
+## 1.1 FTA vs FEBM 方法论对比
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -129,7 +129,7 @@ k8s_versions:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.2 何时使用何种方法 -->## 1.2 何时使用何种方法
+## 1.2 何时使用何种方法
 
 | 场景 | 推荐方法 | 原因 |
 |:---|:---:|:---|
@@ -147,7 +147,7 @@ k8s_versions:
 
 <!-- chunk: 二、联合诊断架构 -->## 二、联合诊断架构
 
-#<!-- chunk: 2.1 联合诊断流程图 -->## 2.1 联合诊断流程图
+## 2.1 联合诊断流程图
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -209,7 +209,7 @@ k8s_versions:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 2.2 联合诊断决策树 -->## 2.2 联合诊断决策树
+## 2.2 联合诊断决策树
 
 ```
 问题发生
@@ -247,7 +247,7 @@ k8s_versions:
 
 <!-- chunk: 三、实战案例 -->## 三、实战案例
 
-#<!-- chunk: 3.1 案例 1：HPA 扩容后新型问题（FTA+FEBM 联合） -->## 3.1 案例 1：HPA 扩容后新型问题（FTA+FEBM 联合）
+## 3.1 案例 1：HPA 扩容后新型问题（FTA+FEBM 联合）
 
 **问题现象**:
 - 部分用户登录超时（不是全部用户）
@@ -332,7 +332,7 @@ FEBM 案例存档:
 
 ---
 
-#<!-- chunk: 3.2 案例 2：ASM Istio 未知故障模式（FEBM 主导） -->## 3.2 案例 2：ASM Istio 未知故障模式（FEBM 主导）
+## 3.2 案例 2：ASM Istio 未知故障模式（FEBM 主导）
 
 **问题现象**:
 - Service A 调用 Service B 出现偶发性超时
@@ -407,7 +407,7 @@ FTA 更新:
 
 ---
 
-#<!-- chunk: 3.3 案例 3：Terway ENI 复杂问题（FTA 主导 + FEBM 验证） -->## 3.3 案例 3：Terway ENI 复杂问题（FTA 主导 + FEBM 验证）
+## 3.3 案例 3：Terway ENI 复杂问题（FTA 主导 + FEBM 验证）
 
 **问题现象**:
 - 大规模 Pod 调度失败
@@ -415,6 +415,9 @@ FTA 更新:
 - 影响: 新部署完全失败
 
 **Phase 1: FTA 快速匹配**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
 匹配 TE: TE-9 Terway 网络问题
@@ -439,6 +442,9 @@ FTA 路径遍历:
 
 **Phase 2: FEBM 验证**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 FEBM 证据:
   - 泄漏 IP 大部分是 3 天前被删除的 Pod
@@ -460,7 +466,7 @@ FEBM 证据:
 
 <!-- chunk: 四、联合诊断检查清单 -->## 四、联合诊断检查清单
 
-#<!-- chunk: 4.1 Phase 1: FTA 快速匹配检查清单 -->## 4.1 Phase 1: FTA 快速匹配检查清单
+## 4.1 Phase 1: FTA 快速匹配检查清单
 
 ```
 □ 识别顶事件 (TE)
@@ -481,7 +487,7 @@ FEBM 证据:
   - 置信度 < 50% → 转到 FEBM
 ```
 
-#<!-- chunk: 4.2 Phase 2: FEBM 深度推理检查清单 -->## 4.2 Phase 2: FEBM 深度推理检查清单
+## 4.2 Phase 2: FEBM 深度推理检查清单
 
 ```
 □ 时间线重建
@@ -511,7 +517,7 @@ FEBM 证据:
   - 新路径的置信度是多少？
 ```
 
-#<!-- chunk: 4.3 修复与验证检查清单 -->## 4.3 修复与验证检查清单
+## 4.3 修复与验证检查清单
 
 ```
 □ 修复执行
@@ -582,7 +588,7 @@ FEBM 证据:
 
 <!-- chunk: 六、工具与模板 -->## 六、工具与模板
 
-#<!-- chunk: 6.1 FTA-FEBM 联合诊断记录模板 -->## 6.1 FTA-FEBM 联合诊断记录模板
+## 6.1 FTA-FEBM 联合诊断记录模板
 
 ```yaml
 incident_record:
@@ -628,7 +634,10 @@ incident_record:
   lessons_learned: "经验教训"
 ```
 
-#<!-- chunk: 6.2 常用命令速查 -->## 6.2 常用命令速查
+## 6.2 常用命令速查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # FTA 快速匹配
@@ -652,7 +661,7 @@ kubectl exec <pod> -- <diagnostic-command>
 
 <!-- chunk: 七、总结 -->## 七、总结
 
-#<!-- chunk: 7.1 联合诊断优势 -->## 7.1 联合诊断优势
+## 7.1 联合诊断优势
 
 | 优势 | 说明 |
 |:---|:---|
@@ -661,7 +670,7 @@ kubectl exec <pod> -- <diagnostic-command>
 | **完整性** | 联合使用覆盖已知+未知问题 |
 | **知识沉淀** | 发现新故障模式，持续更新 FTA |
 
-#<!-- chunk: 7.2 最佳实践 -->## 7.2 最佳实践
+## 7.2 最佳实践
 
 ```
 1. 优先使用 FTA 进行快速匹配
@@ -671,7 +680,7 @@ kubectl exec <pod> -- <diagnostic-command>
 5. FEBM 案例沉淀用于未来快速匹配
 ```
 
-#<!-- chunk: 7.3 适用场景总结 -->## 7.3 适用场景总结
+## 7.3 适用场景总结
 
 ```
 FTA 主导:
@@ -702,21 +711,23 @@ FTA + FEBM 联合:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-febm/MOC|topic-febm [[KUDIG Database — Global MOC|MOC]]]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/README|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations|第一章：FEBM 方法论原理与理论基础]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation|第二章:FEBM 技术实现体系]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices|第三章：FEBM 最佳实践]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing|第四章：FEBM 对云平台工单智能体托管的意义]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology|第五章：FEBM 体系建设方法论]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution|第六章：未来演进方向]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix|第七章:附录]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive|法医鉴定循证方法论（FEBM）深度解析]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/MOC.md|topic-febm [[KUDIG Database — Global MOC|MOC]]]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md|第一章：FEBM 方法论原理与理论基础]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|第二章:FEBM 技术实现体系]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices.md|第三章：FEBM 最佳实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|第六章：未来演进方向]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix.md|第七章:附录]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start|08-febm-production-quick-start]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive|febm-methodology-deep-dive]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations|01-febm-theory-foundations]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation|02-febm-technical-implementation]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|08-febm-production-quick-start]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|febm-methodology-deep-dive]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md|01-febm-theory-foundations]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|02-febm-technical-implementation]]
+
+```

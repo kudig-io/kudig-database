@@ -31,7 +31,7 @@ created: "2026-05-23"
 # Downward API
 
 ## 概述
-Downward API 允许容器在不使用 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 客户端或访问 API Server 的情况下，消费关于自身或集群的信息。它降低了应用与 Kubernetes 的耦合度。
+Downward API 允许容器在不使用 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 客户端或访问 API Server 的情况下，消费关于自身或集群的信息。它降低了应用与 Kubernetes 的耦合度。
 
 ## 核心概念/原理
 Downward API 提供两种方式将 Pod/容器级别的信息暴露给运行中的容器：
@@ -235,6 +235,10 @@ spec:
 - **症状**: 容器内读取的环境变量为空字符串。
 - **常见原因**: `fieldPath` 引用了不支持的字段；`containerName` 未正确指定。
 - **诊断命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 查看 Pod 中环境变量实际值
   kubectl exec <pod-name> -n prod -- env | grep -E "POD_|NODE_|CPU_|MEM_"
@@ -262,6 +266,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看容器中的 Downward API 环境变量
 kubectl exec <pod-name> -n prod -- env | sort
@@ -284,3 +291,9 @@ kubectl get pod <pod-name> -n prod -o jsonpath='{.spec.containers[0].resources}'
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/pods/downward-api/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]

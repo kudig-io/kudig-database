@@ -35,6 +35,7 @@ prerequisites:
 - tracing-basics
 - observability-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 可观测性（Observability）
@@ -115,4 +116,4 @@ Kubernetes 1.35 支持通过 **OpenTelemetry Protocol (OTLP)** 导出链路追�
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

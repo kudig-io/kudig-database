@@ -196,7 +196,7 @@ graph TB
         LB --> P2[Provider B fallback]
     end
 
-    subgraph [[domain-06-observability/README|observability]]["可观测性"]
+    subgraph [[domain-06-observability/README.md|observability]]["可观测性"]
         RETRY --> LANGFUSE[Langfuse 追踪]
         RETRY --> MONITOR[用量监控]
         MONITOR --> ALERT[告警]

@@ -1,6 +1,6 @@
 ---
 title: Service Mesh Architecture
-description: '- [[synthesis/eBPF x 运行时安全|eBPF x 运行时安全]] — synthesis'
+description: '- [[concepts/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -99,20 +99,20 @@ A service mesh is an infrastructure layer that handles service-to-service commun
 
 ## Related
 
-- [[concepts/deployment-controller-architecture|deployment-controller-architecture]]
+- [[concepts/deployment-controller-architecture.md|deployment-controller-architecture]]
 
-- [[concepts/tcp-udp-protocol-stack|tcp-udp-protocol-stack]] — TCP/UDP Protocol Stack
-- [[concepts/cloud-native-defense-in-depth|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
-- [[concepts/cilium-ebpf-networking|cilium-ebpf-networking]] — Cilium eBPF Networking
+- [[concepts/tcp-udp-protocol-stack.md|tcp-udp-protocol-stack]] — TCP/UDP Protocol Stack
+- [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
+- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]] — Cilium eBPF Networking
 - [[istio]] — Istio
 - [[envoy]] — Envoy
-- [[concepts/tcp-udp-protocol-stack|TCP/UDP Protocol Stack]]
-- [[concepts/cloud-native-defense-in-depth|Cloud Native Defense in Depth]]
-- [[concepts/cilium-ebpf-networking|Cilium eBPF Networking]]
+- [[concepts/tcp-udp-protocol-stack.md|TCP/UDP Protocol Stack]]
+- [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
+- [[concepts/cilium-ebpf-networking.md|Cilium eBPF Networking]]
 - [[istio|Istio]]
 - [[linkerd|Linkerd]]
 - [[envoy|Envoy Proxy]]
-- [[synthesis/eBPF x 运行时安全|eBPF x 运行时安全]] — synthesis
-- [[synthesis/服务网格 x 零信任安全|服务网格 x 零信任安全]] — synthesis
+- [[concepts/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis
+- [[concepts/服务网格 x 零信任安全.md|服务网格 x 零信任安全]] — synthesis
 
 - 14-service-mesh-architecture

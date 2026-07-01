@@ -36,6 +36,7 @@ prerequisites:
 - redis-basics
 - gpu-scheduling-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 边缘计算与轻量级 [[Kubernetes|Kubernetes]]
@@ -67,7 +68,7 @@ created: "2026-05-23"
 
 K3s 是边缘 Kubernetes 的主流选择：
 - **单节点即可运行**：Server 节点自带 controller 和 worker 能力
-- **默认使用 SQLite**：适合小规模集群（< 50 节点），可选外部 [[etcd|etcd]]
+- **默认使用 SQLite**：适合小规模集群（< 50 节点），可选外部 [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]]
 - **内置组件**：Traefik [[Ingress|Ingress]]、CoreDNS、Flannel CNI、Metrics Server
 - **资源占用低**：仅需 512MB 内存即可运行
 - **ARM64 支持**：完美适配 Raspberry Pi、NVIDIA Jetson 等边缘硬件
@@ -147,4 +148,4 @@ curl -sfL https://get.k3s.io | sh -
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

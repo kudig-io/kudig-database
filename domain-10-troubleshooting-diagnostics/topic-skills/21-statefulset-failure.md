@@ -132,7 +132,7 @@ tier: peripheral---
 
 # StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 
-StatefulSet 是 [[entities/kubernetes|kubernetes]] 中管理有状态应用的核心工作负载控制器。与 Deployment 不同，StatefulSet 为每个 Pod 提供稳定的网络标识（hostname）、稳定的存储（PVC）和有序的部署/扩展/更新保证。这些特性使其故障模式更为复杂：Pod 启动顺序依赖、PVC 与 Pod 的生命周期绑定、Headless Service 依赖、以及分布式一致性要求（如数据库集群的脑裂问题）。
+StatefulSet 是 [[entities/kubernetes.md|kubernetes]] 中管理有状态应用的核心工作负载控制器。与 Deployment 不同，StatefulSet 为每个 Pod 提供稳定的网络标识（hostname）、稳定的存储（PVC）和有序的部署/扩展/更新保证。这些特性使其故障模式更为复杂：Pod 启动顺序依赖、PVC 与 Pod 的生命周期绑定、Headless Service 依赖、以及分布式一致性要求（如数据库集群的脑裂问题）。
 
 本 Skill 覆盖 Pod 启动顺序卡住、PVC 绑定失败、Headless Service 异常、更新策略阻塞、存储容量不足、分布式脑裂等 10 种根因的诊断和修复。
 
@@ -264,6 +264,10 @@ kubectl get pvc -n <namespace> -l <statefulset-selector>
 > **判断规则**: 有 PVC Pending → 存储问题（RC-002/003）
 
 **Step T4**: 检查有状态集群健康状态（应用级）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # MySQL
 kubectl exec -n <ns> <mysql-pod> -- mysql -e "SHOW STATUS LIKE 'Slave_IO_Running';" 2>/dev/null
@@ -455,6 +459,10 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
 
 **Step D2.6**: 检查有状态集群应用状态（应用级诊断）
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # MySQL/MariaDB
   kubectl exec -n <ns> <pod> -- mysql -e "SHOW SLAVE STATUS\G" 2>/dev/null
@@ -494,12 +502,14 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
 
 ### Phase 3: 主动探测（低风险，可能需审批）
 
-> ⚠️ 以下步骤涉及 Pod 操作或应用命令执行，在 L1-advisory 模式下需人工确认。
-
 **Step D3.1**: 强制删除卡住的 Pod（StatefulSet 会重建）
 - **命令**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+
   ```bash
-  kubectl delete pod <pod-name> -n <namespace> --force --grace-period=0
+  kubectl delete pod <pod-name> -n <namespace> --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
   ```
 - **超时**: 15s
 - **风险级别**: 🟡 中（强制删除可能导致数据不一致，需确认应用支持）
@@ -512,6 +522,10 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
 
 **Step D3.2**: 临时扩容存储（云环境）
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 确认 PVC 容量请求
   kubectl get pvc <pvc-name> -n <namespace> -o jsonpath='{.spec.resources.requests.storage}'
@@ -529,6 +543,10 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
 
 **Step D3.3**: 手动调整 StatefulSet partition
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 检查当前 partition
   kubectl get statefulset <name> -n <namespace> -o jsonpath='{.spec.updateStrategy.rollingUpdate.partition}'
@@ -569,6 +587,10 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
   # 确认 Service 不存在
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   cat <<EOF | kubectl apply -f -
   apiVersion: v1
@@ -593,6 +615,10 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
   kubectl get endpoints <service-name> -n <namespace>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl delete service <service-name> -n <namespace>
   ```
@@ -605,6 +631,10 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
   kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.metadata.labels}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch service <service-name> -n <namespace> -p \
     '{"spec":{"selector":{"app":"<correct-label>"}}}'
@@ -614,6 +644,10 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
   kubectl get endpoints <service-name> -n <namespace>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch service <service-name> -n <namespace> -p \
     '{"spec":{"selector":{"app":"<original-label>"}}}'
@@ -626,6 +660,10 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
   kubectl get statefulset <name> -n <namespace> -o jsonpath='{.spec.updateStrategy.rollingUpdate.partition}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 重置 partition 为 0（全部更新）
   kubectl patch statefulset <name> -n <namespace> -p \
@@ -637,6 +675,10 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
   kubectl get pods -n <namespace> -l <selector>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch statefulset <name> -n <namespace> -p \
     '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":<original-value>}}}}'
@@ -656,11 +698,16 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
   kubectl get pvc -n <namespace> | grep <pod-name>
   ```
 - **执行命令**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 正常删除（有优雅终止期）
   kubectl delete pod <pod-name> -n <namespace>
   # 或强制删除（Pod 处于 Terminating 卡住时）
-  kubectl delete pod <pod-name> -n <namespace> --force --grace-period=0
+  kubectl delete pod <pod-name> -n <namespace> --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
   ```
 - **后置验证**:
   ```bash
@@ -682,11 +729,19 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
   # 确认 StorageClass 支持扩容
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch pvc <pvc-name> -n <namespace> -p \
     '{"spec":{"resources":{"requests":{"storage":"<new-size>"}}}}'
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   kubectl get pvc <pvc-name> -n <namespace>
   kubectl exec -n <namespace> <pod-name> -- df -h
@@ -698,11 +753,19 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
 - **影响说明**: 手动干预集群拓扑可能导致数据不一致。
 - **审批提示**: "建议手动触发 <cluster-type> 集群故障转移，可能影响数据一致性。是否批准？"
 - **前置检查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 确认当前集群状态
   kubectl exec -n <ns> <pod> -- <cluster-status-command>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # MySQL: 提升从节点为主
   kubectl exec -n <ns> <slave-pod> -- mysql -e "STOP SLAVE; RESET SLAVE ALL;"
@@ -712,6 +775,10 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
   kubectl exec -n <ns> <pod> -- redis-cli CLUSTER FAILOVER
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查新主节点状态
   kubectl exec -n <ns> <pod> -- <cluster-status-command>
@@ -964,3 +1031,5 @@ receivers:
 *Skill ID: SKILL-WORK-002*  
 *创建时间: 2026-05*  
 *维护者: Kudig Team*
+
+```

@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. GitOps 核心理念 -->## 1. GitOps 核心理念
 
-#<!-- chunk: 1.1 GitOps 基本原则 -->## 1.1 GitOps 基本原则
+## 1.1 GitOps 基本原则
 
 ```yaml
 GitOps四大原则:
@@ -91,12 +91,13 @@ GitOps四大原则:
      - 增强系统安全性
 ```
 
-#<!-- chunk: 1.2 传统运维 vs GitOps 对比 -->## 1.2 传统运维 vs GitOps 对比
+## 1.2 传统运维 vs GitOps 对比
 
 ```markdown
 <!-- chunk: 🔄 运维模式对比 -->## 🔄 运维模式对比
 
-#<!-- chunk: 传统命令式运维 -->## 传统命令式运维
+## 传统命令式运维
+
 ```bash
 # 手动执行部署命令
 kubectl apply -f deployment.yaml
@@ -105,7 +106,7 @@ terraform apply -auto-approve
 ```
 *痛点: 无版本控制、难追溯、易出错*
 
-#<!-- chunk: GitOps声明式运维 -->## GitOps声明式运维
+## GitOps声明式运维
 ```yaml
 # 声明期望状态，GitOps工具自动同步
 # 配置存储在Git仓库中，自动部署到集群
@@ -117,7 +118,7 @@ terraform apply -auto-approve
 
 <!-- chunk: 2. 工具选择与架构设计 -->## 2. 工具选择与架构设计
 
-#<!-- chunk: 2.1 主流GitOps工具对比 -->## 2.1 主流GitOps工具对比
+## 2.1 主流GitOps工具对比
 
 ```yaml
 工具选型对比:
@@ -154,7 +155,7 @@ terraform apply -auto-approve
     适用场景: 复杂CI/CD流程、任务编排
 ```
 
-#<!-- chunk: 2.2 企业级架构设计 -->## 2.2 企业级架构设计
+## 2.2 企业级架构设计
 
 ```mermaid
 graph TB
@@ -195,9 +196,9 @@ graph TB
 
 <!-- chunk: 3. ArgoCD 深度实践 -->## 3. ArgoCD 深度实践
 
-#<!-- chunk: 3.1 核心组件配置 -->## 3.1 核心组件配置
+## 3.1 核心组件配置
 
-##<!-- chunk: ArgoCD Server 部署 -->## ArgoCD Server 部署
+## ArgoCD Server 部署
 ```yaml
 # ArgoCD完整部署配置
 apiVersion: v1
@@ -251,7 +252,7 @@ spec:
             memory: 512Mi
 ```
 
-##<!-- chunk: 应用定义配置 -->## 应用定义配置
+## 应用定义配置
 ```yaml
 # ArgoCD Application配置
 apiVersion: argoproj.io/v1alpha1
@@ -291,9 +292,9 @@ spec:
         maxDuration: 3m
 ```
 
-#<!-- chunk: 3.2 高级功能应用 -->## 3.2 高级功能应用
+## 3.2 高级功能应用
 
-##<!-- chunk: ApplicationSet 多环境管理 -->## ApplicationSet 多环境管理
+## ApplicationSet 多环境管理
 ```yaml
 # ApplicationSet配置 - 多环境批量部署
 apiVersion: argoproj.io/v1alpha1
@@ -337,7 +338,7 @@ spec:
         namespace: '{{namespace}}'
 ```
 
-##<!-- chunk: 蓝绿部署策略 -->## 蓝绿部署策略
+## 蓝绿部署策略
 ```yaml
 # ArgoCD蓝绿部署配置
 apiVersion: argoproj.io/v1alpha1
@@ -367,9 +368,9 @@ spec:
 
 <!-- chunk: 4. FluxCD 实践指南 -->## 4. FluxCD 实践指南
 
-#<!-- chunk: 4.1 核心组件配置 -->## 4.1 核心组件配置
+## 4.1 核心组件配置
 
-##<!-- chunk: FluxCD完整部署 -->## FluxCD完整部署
+## FluxCD完整部署
 ```yaml
 # FluxCD安装配置
 apiVersion: v1
@@ -410,7 +411,7 @@ spec:
       namespace: production
 ```
 
-##<!-- chunk: HelmRelease配置 -->## HelmRelease配置
+## HelmRelease配置
 ```yaml
 # FluxCD HelmRelease配置
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -452,9 +453,9 @@ spec:
       remediateLastFailure: true
 ```
 
-#<!-- chunk: 4.2 高级部署策略 -->## 4.2 高级部署策略
+## 4.2 高级部署策略
 
-##<!-- chunk: 金丝雀发布 -->## 金丝雀发布
+## 金丝雀发布
 ```yaml
 # FluxCD金丝雀发布配置
 apiVersion: flagger.app/v1beta1
@@ -492,7 +493,7 @@ spec:
       interval: 1m
 ```
 
-##<!-- chunk: 多租户管理 -->## 多租户管理
+## 多租户管理
 ```yaml
 # FluxCD多租户配置
 apiVersion: v1
@@ -532,7 +533,7 @@ spec:
 
 <!-- chunk: 5. CI/CD 流水线集成 -->## 5. CI/CD 流水线集成
 
-#<!-- chunk: 5.1 完整流水线设计 -->## 5.1 完整流水线设计
+## 5.1 完整流水线设计
 
 ```yaml
 # GitHub Actions GitOps流水线
@@ -605,7 +606,7 @@ jobs:
         branch: staging-deploy-${{ github.sha }}
 ```
 
-#<!-- chunk: 5.2 自动化测试集成 -->## 5.2 自动化测试集成
+## 5.2 自动化测试集成
 
 ```yaml
 # 自动化测试配置
@@ -638,9 +639,9 @@ data:
 
 <!-- chunk: 6. 安全与权限管理 -->## 6. 安全与权限管理
 
-#<!-- chunk: 6.1 访问控制配置 -->## 6.1 访问控制配置
+## 6.1 访问控制配置
 
-##<!-- chunk: RBAC权限管理 -->## RBAC权限管理
+## RBAC权限管理
 ```yaml
 # GitOps RBAC配置
 apiVersion: rbac.authorization.k8s.io/v1
@@ -671,7 +672,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-##<!-- chunk: SOPS密钥管理 -->## SOPS密钥管理
+## SOPS密钥管理
 ```bash
 # SOPS加密配置
 #!/bin/bash
@@ -697,7 +698,7 @@ sops -e secrets.yaml > secrets.enc.yaml
 sops -d secrets.enc.yaml > secrets.yaml
 ```
 
-#<!-- chunk: 6.2 安全最佳实践 -->## 6.2 安全最佳实践
+## 6.2 安全最佳实践
 
 ```yaml
 GitOps安全检查清单:
@@ -722,7 +723,7 @@ GitOps安全检查清单:
 
 <!-- chunk: 7. 监控与可观测性 -->## 7. 监控与可观测性
 
-#<!-- chunk: 7.1 GitOps指标监控 -->## 7.1 GitOps指标监控
+## 7.1 GitOps指标监控
 
 ```yaml
 # Prometheus监控配置
@@ -761,7 +762,7 @@ spec:
     app.kubernetes.io/name: argocd-server
 ```
 
-#<!-- chunk: 7.2 关键指标定义 -->## 7.2 关键指标定义
+## 7.2 关键指标定义
 
 ```prometheus
 # GitOps关键监控指标
@@ -786,7 +787,7 @@ sum(increase(argocd_app_sync_total{phase="Succeeded"}[1h]))
 
 <!-- chunk: 8. 问题排除与最佳实践 -->## 8. 问题排除与最佳实践
 
-#<!-- chunk: 8.1 常见问题诊断 -->## 8.1 常见问题诊断
+## 8.1 常见问题诊断
 
 ```bash
 # GitOps故障诊断脚本
@@ -820,24 +821,24 @@ echo "5. 检查资源状态:"
 kubectl get events --sort-by='.lastTimestamp' -n production
 ```
 
-#<!-- chunk: 8.2 最佳实践总结 -->## 8.2 最佳实践总结
+## 8.2 最佳实践总结
 
 ```markdown
 <!-- chunk: 📋 GitOps最佳实践 -->## 📋 GitOps最佳实践
 
-#<!-- chunk: 配置管理 -->## 配置管理
+## 配置管理
 1. **单一事实来源** - 所有配置存储在Git仓库
 2. **环境分离** - 不同环境使用不同分支或路径
 3. **版本标签** - 使用语义化版本控制
 4. **配置模板** - 使用Helm或Kustomize管理配置
 
-#<!-- chunk: 安全实践 -->## 安全实践
+## 安全实践
 1. **密钥加密** - 使用SOPS或Sealed Secrets
 2. **权限最小化** - 实施RBAC最小权限原则
 3. **审计日志** - 完整的操作审计记录
 4. **安全扫描** - 集成安全扫描工具
 
-#<!-- chunk: 运维实践 -->## 运维实践
+## 运维实践
 1. **渐进部署** - 使用蓝绿或金丝雀发布
 2. **自动回滚** - 配置失败自动回滚机制
 3. **监控告警** - 建立完整的监控体系
@@ -846,7 +847,7 @@ kubectl get events --sort-by='.lastTimestamp' -n production
 
 <!-- chunk: 9. 企业级实施路线图 -->## 9. 企业级实施路线图
 
-#<!-- chunk: 9.1 分阶段实施计划 -->## 9.1 分阶段实施计划
+## 9.1 分阶段实施计划
 
 ```mermaid
 graph LR
@@ -859,7 +860,7 @@ graph LR
     C --> |持续| D
 ```
 
-#<!-- chunk: 9.2 成熟度评估模型 -->## 9.2 成熟度评估模型
+## 9.2 成熟度评估模型
 
 ```yaml
 GitOps成熟度等级:
@@ -886,7 +887,7 @@ GitOps成熟度等级:
 
 <!-- chunk: N. GitOps 2026技术更新 -->## N. GitOps 2026技术更新
 
-#<!-- chunk: N.1 ArgoCD 2.x最新特性 -->## N.1 ArgoCD 2.x最新特性
+## N.1 ArgoCD 2.x最新特性
 - ApplicationSet SCM Provider（自动发现GitHub/GitLab组织下所有仓库）
 - ApplicationSet Pull模型（多集群部署无需集群凭证）
 - argocd-image-updater（自动追踪镜像新版本并更新Git）
@@ -926,7 +927,7 @@ spec:
           selfHeal: true
 ```
 
-#<!-- chunk: N.2 FluxCD OCI支持 -->## N.2 FluxCD OCI支持
+## N.2 FluxCD OCI支持
 - OCIRepository资源（从OCI Registry拉取Helm Chart/Kustomize overlay）
 - cosign签名验证（供应链安全集成）
 - 详见 "[20-供应链安全](./20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md)"
@@ -949,14 +950,14 @@ spec:
       name: cosign-public-key
 ```
 
-#<!-- chunk: N.3 GitOps + AI/ML Pipeline -->## N.3 GitOps + AI/ML Pipeline
+## N.3 GitOps + AI/ML Pipeline
 - 模型版本作为GitOps管理对象
 - KServe + ArgoCD模型部署GitOps化
 - DVC + Git管理数据集版本
 
 <!-- chunk: 10. 未来发展趋势 -->## 10. 未来发展趋势
 
-#<!-- chunk: 10.1 技术演进方向 -->## 10.1 技术演进方向
+## 10.1 技术演进方向
 
 ```yaml
 GitOps发展趋势:
@@ -985,7 +986,7 @@ GitOps发展趋势:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -1006,5 +1007,7 @@ GitOps发展趋势:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

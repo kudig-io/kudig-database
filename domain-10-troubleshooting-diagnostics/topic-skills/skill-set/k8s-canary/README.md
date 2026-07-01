@@ -5,6 +5,7 @@ tags: ["skill", "domain-10", "visibility/public"]
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 status: reviewed
 ---
 
@@ -56,6 +57,6 @@ kubectl get deployment <canary-deployment> -n <namespace> -o yaml | grep -A10 en
 
 ## 相关概念
 
-- [[concepts/canary-deployment|金丝雀部署]] — 渐进式发布策略、流量权重与指标驱动的自动推进
-- [[concepts/blue-green-deployment|蓝绿部署]] — 零停机发布切换机制与回滚策略
-- [[concepts/autoscaling-strategies|自动扩缩容策略]] — HPA、VPA 与发布过程中的弹性保障
+- [[concepts/canary-deployment.md|金丝雀部署]] — 渐进式发布策略、流量权重与指标驱动的自动推进
+- [[concepts/blue-green-deployment.md|蓝绿部署]] — 零停机发布切换机制与回滚策略
+- [[concepts/autoscaling-strategies.md|自动扩缩容策略]] — HPA、VPA 与发布过程中的弹性保障

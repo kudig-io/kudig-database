@@ -75,19 +75,19 @@ This architecture ensures controllers are resilient to API Server outages and ne
 - **Non-blocking**: Errors are re-queued with backoff, not blocking other reconciliations
 
 ## Related
-- [[synthesis/控制器模式 × 可观测性|控制器模式 × 可观测性]] — 综合
-- [[synthesis/控制器模式 × Deployment|控制器模式 × Deployment]] — 综合
+- [[concepts/控制器模式 × 可观测性.md|控制器模式 × 可观测性]] — 综合
+- [[concepts/控制器模式 × Deployment.md|控制器模式 × Deployment]] — 综合
 
 - [[deployment]] — Deployment
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/eventual-consistency|eventual-consistency]] — Eventual Consistency in Kubernetes
-- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
-- [[concepts/declarative-api|Declarative API]]
-- [[concepts/watch-mechanism|Watch Mechanism]]
-- [[concepts/kubernetes-architecture-overview|Kubernetes Architecture Overview]]
+- [[concepts/eventual-consistency.md|eventual-consistency]] — Eventual Consistency in Kubernetes
+- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/declarative-api.md|Declarative API]]
+- [[concepts/watch-mechanism.md|Watch Mechanism]]
+- [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
 - [[operator-pattern|Operator Pattern]]
-- [[concepts/eventual-consistency|Eventual Consistency]]
+- [[concepts/eventual-consistency.md|Eventual Consistency]]
 
 - 控制器模式与调谐循环
-- [[entities/metal3-io|Metal3]] — Cross-reference
+- [[entities/metal3-io.md|Metal3]] — Cross-reference

@@ -102,7 +102,7 @@ k8s_versions:
 
 <!-- chunk: 1. 集群现状采集 -->## 1. 集群现状采集
 
-#<!-- chunk: 1.1 自动化采集脚本 -->## 1.1 自动化采集脚本
+## 1.1 自动化采集脚本
 
 > 在自建集群上运行以下脚本，一次性采集所有迁移决策所需信息。
 
@@ -258,7 +258,7 @@ bash migration-assessment.sh > assessment-report-$(date +%Y%m%d).txt
 less assessment-report-*.txt
 ```
 
-#<!-- chunk: 1.2 关键信息汇总表 -->## 1.2 关键信息汇总表
+## 1.2 关键信息汇总表
 
 根据采集结果填写以下表格：
 
@@ -279,7 +279,7 @@ less assessment-report-*.txt
 
 <!-- chunk: 2. 兼容性评估 -->## 2. 兼容性评估
 
-#<!-- chunk: 2.1 API 版本兼容性检查 -->## 2.1 API 版本兼容性检查
+## 2.1 API 版本兼容性检查
 
 ```bash
 # 检查已弃用的 API 版本
@@ -301,7 +301,7 @@ pluto detect-helm -A
 pluto detect-all-in-cluster -o json > deprecated-apis.json
 ```
 
-#<!-- chunk: 2.2 兼容性对照矩阵 -->## 2.2 兼容性对照矩阵
+## 2.2 兼容性对照矩阵
 
 | 组件/特性 | 自建集群 | ACK 兼容性 | 迁移动作 |
 |----------|---------|-----------|---------|
@@ -314,7 +314,7 @@ pluto detect-all-in-cluster -o json > deprecated-apis.json
 | **自定义调度器** | 可能部署 | ACK 支持 | 需重新部署 |
 | **etcd 直接访问** | 部分工具直连 etcd | ACK 托管版不暴露 etcd | 需改为 API Server 接口 |
 
-#<!-- chunk: 2.3 镜像仓库兼容性 -->## 2.3 镜像仓库兼容性
+## 2.3 镜像仓库兼容性
 
 ```bash
 # 导出所有镜像列表
@@ -334,7 +334,7 @@ cat images-list.txt | while read img; do
 done > sync-images.sh
 ```
 
-#<!-- chunk: 2.4 存储兼容性评估 -->## 2.4 存储兼容性评估
+## 2.4 存储兼容性评估
 
 | 自建存储方案 | ACK 替代方案 | 数据迁移方式 | 复杂度 |
 |------------|------------|------------|--------|
@@ -351,7 +351,7 @@ done > sync-images.sh
 
 <!-- chunk: 3. 风险分析与应对 -->## 3. 风险分析与应对
 
-#<!-- chunk: 3.1 风险矩阵 -->## 3.1 风险矩阵
+## 3.1 风险矩阵
 
 | 风险项 | 概率 | 影响 | 等级 | 应对策略 |
 |--------|------|------|------|---------|
@@ -367,7 +367,7 @@ done > sync-images.sh
 | 证书过期 | 低 | 中 | **P2** | 迁移前更新证书，ACK 使用 cert-manager |
 | 迁移耗时超预期 | 中 | 低 | **P3** | 预留 50% 缓冲时间，分批迁移 |
 
-#<!-- chunk: 3.2 回滚策略 -->## 3.2 回滚策略
+## 3.2 回滚策略
 
 ```
 迁移回滚决策树：
@@ -417,7 +417,7 @@ kubectl --context=ack-cluster scale deploy --all --replicas=0 -n <business-ns>
 
 <!-- chunk: 4. 迁移策略选择 -->## 4. 迁移策略选择
 
-#<!-- chunk: 4.1 三种迁移策略对比 -->## 4.1 三种迁移策略对比
+## 4.1 三种迁移策略对比
 
 | 策略 | 双集群灰度（推荐） | 蓝绿切换 | 直接迁移 |
 |------|------------------|---------|---------|
@@ -429,7 +429,7 @@ kubectl --context=ack-cluster scale deploy --all --replicas=0 -n <business-ns>
 | **实施复杂度** | 高 | 中 | 低 |
 | **数据一致性** | 需处理双写 | 切换前保证源数据最新 | 停机保证一致 |
 
-#<!-- chunk: 4.2 推荐策略：双集群灰度迁移 -->## 4.2 推荐策略：双集群灰度迁移
+## 4.2 推荐策略：双集群灰度迁移
 
 ```
 时间轴                                                          
@@ -454,7 +454,7 @@ kubectl --context=ack-cluster scale deploy --all --replicas=0 -n <business-ns>
 
 <!-- chunk: 5. 迁移项目计划模板 -->## 5. 迁移项目计划模板
 
-#<!-- chunk: 5.1 里程碑计划 -->## 5.1 里程碑计划
+## 5.1 里程碑计划
 
 | 阶段 | 里程碑 | 持续时间 | 产出物 | 完成标准 |
 |------|--------|---------|--------|---------|
@@ -465,7 +465,7 @@ kubectl --context=ack-cluster scale deploy --all --replicas=0 -n <business-ns>
 | **Phase 3** | 灰度切流完成 | 1-2 周 | 100% 流量在 ACK | 7 天稳定运行 |
 | **Phase 4** | 源集群退役 | 1 周 | 退役报告、资源释放 | 确认无残留流量 |
 
-#<!-- chunk: 5.2 RACI 矩阵 -->## 5.2 RACI 矩阵
+## 5.2 RACI 矩阵
 
 | 任务 | 迁移负责人 | 运维工程师 | DBA | 开发 | 网络工程师 |
 |------|-----------|-----------|-----|------|-----------|
@@ -485,7 +485,7 @@ kubectl --context=ack-cluster scale deploy --all --replicas=0 -n <business-ns>
 
 <!-- chunk: 6. 成本估算 -->## 6. 成本估算
 
-#<!-- chunk: 6.1 ACK 集群成本构成 -->## 6.1 ACK 集群成本构成
+## 6.1 ACK 集群成本构成
 
 | 费用项 | 计算方式 | 月估算（中型集群） | 备注 |
 |--------|---------|-------------------|------|
@@ -499,7 +499,7 @@ kubectl --context=ack-cluster scale deploy --all --replicas=0 -n <business-ns>
 | **SLS 日志** | 按写入量 + 存储量 | ¥200-1,000 | 30 天保留 |
 | **ARMS 监控** | 按 Agent 数量 | ¥0-2,000 | 基础版免费 |
 
-#<!-- chunk: 6.2 迁移期间额外成本 -->## 6.2 迁移期间额外成本
+## 6.2 迁移期间额外成本
 
 ```
 迁移期间成本 = 正常 ACK 运行成本 + 源集群运行成本（并行期间）
@@ -517,7 +517,7 @@ kubectl --context=ack-cluster scale deploy --all --replicas=0 -n <business-ns>
 
 <!-- chunk: 检查清单 -->## 检查清单
 
-#<!-- chunk: Phase 0 完成标准 -->## Phase 0 完成标准
+## Phase 0 完成标准
 
 - [ ] 集群现状采集脚本已运行，报告已生成
 - [ ] 兼容性评估表已填写，所有不兼容项已标注
@@ -539,16 +539,16 @@ kubectl --context=ack-cluster scale deploy --all --replicas=0 -n <business-ns>
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-migration MOC
-- [[domain-08-release-change-management/topic-migration/README|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
-- [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design|02 - ACK 目标集群设计与搭建]]
-- [[domain-08-release-change-management/topic-migration/03-application-workload-migration|03 - 应用工作负载迁移]]
-- [[domain-08-release-change-management/topic-migration/04-storage-data-migration|04 - 存储与数据迁移]]
-- [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover|05 - 网络迁移与流量切换]]
-- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration|06 - 有状态服务迁移]]
-- [[domain-08-release-change-management/topic-migration/07-observability-security-migration|07 - 可观测性与安全迁移]]
-- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission|08 - 验收、切换与旧集群退役]]
-- [[domain-08-release-change-management/topic-migration/09-migration-toolchain|09 - 迁移工具链参考]]
-- [[domain-08-release-change-management/topic-migration/10-real-world-case-study|10 - 生产迁移实战案例]]
+- [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
+- [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
+- [[domain-08-release-change-management/topic-migration/03-application-workload-migration.md|03 - 应用工作负载迁移]]
+- [[domain-08-release-change-management/topic-migration/04-storage-data-migration.md|04 - 存储与数据迁移]]
+- [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换]]
+- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration.md|06 - 有状态服务迁移]]
+- [[domain-08-release-change-management/topic-migration/07-observability-security-migration.md|07 - 可观测性与安全迁移]]
+- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission.md|08 - 验收、切换与旧集群退役]]
+- [[domain-08-release-change-management/topic-migration/09-migration-toolchain.md|09 - 迁移工具链参考]]
+- [[domain-08-release-change-management/topic-migration/10-real-world-case-study.md|10 - 生产迁移实战案例]]
 
 ## See Also
 
@@ -559,4 +559,4 @@ kubectl --context=ack-cluster scale deploy --all --replicas=0 -n <business-ns>
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]

@@ -9,6 +9,7 @@ tags:
   - k8s
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # 存储数据保护与灾难恢复
@@ -17,7 +18,7 @@ updated: 2026-05-24
 
 数据保护是 Kubernetes 存储体系中最后一道防线。本文涵盖 Velero 最佳实践、不可变备份、勒索软件防护、多层灾难恢复策略以及 RTO/RPO 目标设定。
 
-相关：[[concepts/csi-drivers]] | [[concepts/storage-tool-evolution]] | [[domain-04-storage-data/index]]
+相关：[[concepts/csi-drivers.md|csi drivers]] | [[concepts/storage-tool-evolution.md|storage tool evolution]] | [[domain-19-landscape-references/98-merged-indexes/index.md|index]]
 
 ---
 
@@ -455,6 +456,6 @@ spec:
 
 ## Related
 
-- [[concepts/csi-drivers]] — CSI 驱动规范与实现
-- [[concepts/multi-cluster-dr-automation]] — 多集群灾备与自动化
-- [[concepts/chaos-engineering-platforms]] — 混沌工程平台
+- [[concepts/csi-drivers.md|csi drivers]] — CSI 驱动规范与实现
+- [[concepts/multi-cluster-dr-automation.md|multi cluster dr automation]] — 多集群灾备与自动化
+- [[concepts/chaos-engineering-platforms.md|chaos engineering platforms]] — 混沌工程平台

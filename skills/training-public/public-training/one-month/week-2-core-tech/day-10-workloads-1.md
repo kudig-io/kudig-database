@@ -120,6 +120,10 @@ related:
 
 ### 任务 1: Deployment 滚动更新深入 (45min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 创建 Deployment
 cat > rolling-deployment.yaml << 'EOF'
@@ -172,6 +176,11 @@ kubectl rollout undo deployment/rolling-demo --to-revision=1
 ```
 
 ### 任务 2: StatefulSet 实践 (45min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 创建 Headless Service (StatefulSet 必需)
@@ -248,6 +257,10 @@ kubectl delete pvc -l app=nginx-sts
 
 ### 任务 3: DaemonSet 实践 (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 创建 DaemonSet (模拟日志采集)
 cat > daemonset-demo.yaml << 'EOF'
@@ -303,6 +316,10 @@ kubectl delete daemonset log-collector
 ```
 
 ### 任务 4: 对比三种工作负载 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 创建对比实验
@@ -377,4 +394,4 @@ Day 11 将学习 Pod 生命周期、资源管理和自动扩缩容 (HPA/VPA)。
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

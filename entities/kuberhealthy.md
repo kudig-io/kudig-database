@@ -50,7 +50,7 @@ Kuberhealthy 是一个 Kubernetes 综合健康检查和合成监控工具。它�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -65,10 +65,10 @@ Kuberhealthy 是一个 Kubernetes 综合健康检查和合成监控工具。它�
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[deployment]]
-- [[entities/crd-custom-resources|crd-custom-resources]]
-- [[concepts/observability-pillars|observability-pillars]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[concepts/observability-pillars.md|observability-pillars]]
 - [[pod-lifecycle]]
 
 ## Related
@@ -80,5 +80,5 @@ Kuberhealthy 是一个 Kubernetes 综合健康检查和合成监控工具。它�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - kuberhealthy
-- [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-infrastructure.md|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

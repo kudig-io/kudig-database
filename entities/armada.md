@@ -41,7 +41,7 @@ Armada 是一个多集群批处理作业调度系统，专为在多个 Kubernete
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -58,29 +58,29 @@ Armada 是一个多集群批处理作业调度系统，专为在多个 Kubernete
 ## 参考链接
 
 - [[pod-lifecycle]]
-- [[entities/kube-scheduler|kube-scheduler]]
-- [[concepts/ci-cd-pipeline-patterns|ci-cd-pipeline-patterns]]
+- [[entities/kube-scheduler.md|kube-scheduler]]
+- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
 
 ## Related
 
 - [[keycloak]] — Keycloak
 - [[kubearmor]] — KubeArmor
-- [[entities/cncf-cicd|cncf-cicd]] — CNCF CI/CD 与发布管理项目全景
+- [[entities/cncf-cicd.md|cncf-cicd]] — CNCF CI/CD 与发布管理项目全景
 - networking.md|cncf-networking]] — CNCF 网络与服务网格项目全景
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[journal/digest-2026-05-21-full|digest-2026-05-21-full]]
+- digest-2026-05-21-full
 - 08-multicloud-federation-karmada
 - armada
 - karmada
-- [[entities/cohdi|Cohdi]]
-- [[entities/kubefleet|KubeFleet]]
-- [[entities/clusternet|Clusternet]]
-- [[entities/kured|Kured (KUbernetes REboot Daemon)]]
-- [[entities/kubevela|KubeVela]]
-- [[entities/kubestellar|KubeStellar]]
-- [[entities/microcks|Microcks]]
-- [[entities/kudo|KUDO]]
-- [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cohdi.md|Cohdi]]
+- [[entities/kubefleet.md|KubeFleet]]
+- [[entities/clusternet.md|Clusternet]]
+- [[entities/kured.md|Kured (KUbernetes REboot Daemon)]]
+- [[entities/kubevela.md|KubeVela]]
+- [[entities/kubestellar.md|KubeStellar]]
+- [[entities/microcks.md|Microcks]]
+- [[entities/kudo.md|KUDO]]
+- [[entities/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

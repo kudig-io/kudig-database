@@ -103,7 +103,7 @@ Cluster Autoscaler              Karpenter
 
 <!-- chunk: 二、安装部署 -->## 二、安装部署
 
-#<!-- chunk: 2.1 AWS 前置准备 -->## 2.1 AWS 前置准备
+## 2.1 AWS 前置准备
 
 ```bash
 # 创建 IAM 角色 (OIDC 联邦)
@@ -145,7 +145,10 @@ aws iam create-policy \
   --policy-document file://karpenter-policy.json
 ```
 
-#<!-- chunk: 2.2 [[Helm|Helm]] 安装 -->## 2.2 Helm 安装
+## 2.2 Helm 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add karpenter https://charts.karpenter.sh
@@ -164,7 +167,7 @@ helm install karpenter oci://public.ecr.aws/karpenter/karpenter \
   --set controller.resources.limits.memory=1Gi
 ```
 
-#<!-- chunk: 2.3 验证安装 -->## 2.3 验证安装
+## 2.3 验证安装
 
 ```bash
 kubectl get pods -n karpenter
@@ -175,7 +178,7 @@ kubectl logs -n karpenter -l app.kubernetes.io/name=karpenter
 
 <!-- chunk: 三、NodePool 配置 -->## 三、NodePool 配置
 
-#<!-- chunk: 3.1 基础 NodePool -->## 3.1 基础 NodePool
+## 3.1 基础 NodePool
 
 ```yaml
 apiVersion: karpenter.sh/v1
@@ -246,7 +249,7 @@ spec:
   weight: 10
 ```
 
-#<!-- chunk: 3.2 专用 GPU NodePool -->## 3.2 专用 GPU NodePool
+## 3.2 专用 GPU NodePool
 
 ```yaml
 apiVersion: karpenter.sh/v1
@@ -333,7 +336,7 @@ spec:
 
 <!-- chunk: 五、多节点类型策略 -->## 五、多节点类型策略
 
-#<!-- chunk: 5.1 工作负载匹配 -->## 5.1 工作负载匹配
+## 5.1 工作负载匹配
 
 ```yaml
 # 通用工作负载
@@ -388,7 +391,7 @@ spec:
   weight: 10
 ```
 
-#<!-- chunk: 5.2 Pod 节点选择 -->## 5.2 Pod 节点选择
+## 5.2 Pod 节点选择
 
 ```yaml
 apiVersion: apps/v1
@@ -412,7 +415,10 @@ spec:
 
 <!-- chunk: 六、Spot 实例优化 -->## 六、Spot 实例优化
 
-#<!-- chunk: 6.1 中断处理 -->## 6.1 中断处理
+## 6.1 中断处理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 启用中断处理 (节点终止前优雅驱逐)
@@ -421,7 +427,7 @@ helm upgrade karpenter oci://public.ecr.aws/karpenter/karpenter \
   --set settings.interruptionQueue=${CLUSTER_NAME}
 ```
 
-#<!-- chunk: 6.2 Pod 优雅终止 -->## 6.2 Pod 优雅终止
+## 6.2 Pod 优雅终止
 
 ```yaml
 apiVersion: apps/v1
@@ -440,7 +446,7 @@ spec:
               command: ["/bin/sh", "-c", "sleep 30 && curl -X POST localhost:8080/drain"]
 ```
 
-#<!-- chunk: 6.3 Spot 占比控制 -->## 6.3 Spot 占比控制
+## 6.3 Spot 占比控制
 
 ```yaml
 spec:
@@ -460,7 +466,7 @@ spec:
 
 <!-- chunk: 七、整合与漂移 -->## 七、整合与漂移
 
-#<!-- chunk: 7.1 自动整合 -->## 7.1 自动整合
+## 7.1 自动整合
 
 ```yaml
 spec:
@@ -475,7 +481,7 @@ spec:
 | WhenUnderutilized | 重新调度以合并 | 成本优化 |
 | Never | 不自动整合 | 特殊场景 |
 
-#<!-- chunk: 7.2 漂移检测 -->## 7.2 漂移检测
+## 7.2 漂移检测
 
 ```
 漂移触发条件:
@@ -503,7 +509,7 @@ Karpenter 行为:
 | 节点过期轮换 | 避免老旧 | expireAfter: 720h |
 |  rightsizing | 匹配工作负载 | 精确的资源 requests |
 
-#<!-- chunk: 成本标签 -->## 成本标签
+## 成本标签
 
 ```yaml
 spec:
@@ -518,7 +524,7 @@ spec:
 
 <!-- chunk: 九、监控与告警 -->## 九、监控与告警
 
-#<!-- chunk: 9.1 [[Prometheus|Prometheus]] Metrics -->## 9.1 Prometheus Metrics
+## 9.1 Prometheus Metrics
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -538,7 +544,7 @@ spec:
     interval: 30s
 ```
 
-#<!-- chunk: 9.2 关键告警 -->## 9.2 关键告警
+## 9.2 关键告警
 
 ```yaml
 - alert: KarpenterNodeLaunchFailed
@@ -590,9 +596,9 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations KUDIG Database — Global MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]])]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]])]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -611,5 +617,7 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+
+```

@@ -61,7 +61,7 @@ created: "2026-05-23"
 
 <!-- chunk: 一、StorageClass (存储类) -->## 一、StorageClass (存储类)
 
-#<!-- chunk: 1.1 API 资源信息 -->## 1.1 API 资源信息
+## 1.1 API 资源信息
 
 ```yaml
 # API 元数据
@@ -83,7 +83,7 @@ metadata:
 - **参数化**: 通过 parameters 向 provisioner 传递配置
 - **不可变**: 创建后大部分字段不可修改(需删除重建)
 
-#<!-- chunk: 1.2 核心字段结构 -->## 1.2 核心字段结构
+## 1.2 核心字段结构
 
 ```yaml
 provisioner: ebs.csi.aws.com     # 供给器(必填)
@@ -104,7 +104,7 @@ mountOptions:                    # 挂载选项(可选)
 
 ---
 
-#<!-- chunk: 1.3 Provisioner (供给器) -->## 1.3 Provisioner (供给器)
+## 1.3 Provisioner (供给器)
 
 ```yaml
 provisioner: ebs.csi.aws.com     # CSI 驱动名称(必填)
@@ -131,7 +131,7 @@ provisioner: ebs.csi.aws.com     # CSI 驱动名称(必填)
 | 本地存储 CSI | local.csi.k8s.io | 高性能本地盘 |
 | 网络存储 CSI | nfs.csi.k8s.io | 共享文件系统 |
 
-#<!-- chunk: 1.4 Parameters (参数) -->## 1.4 Parameters (参数)
+## 1.4 Parameters (参数)
 
 ```yaml
 parameters:                      # 供给器特定参数(键值对)
@@ -154,7 +154,7 @@ parameters:                      # 供给器特定参数(键值对)
 
 **主流云供应商参数**:
 
-##<!-- chunk: AWS EBS CSI -->## AWS EBS CSI
+## AWS EBS CSI
 ```yaml
 parameters:
   type: gp3                      # 卷类型: gp2 | gp3 | io1 | io2 | st1 | sc1
@@ -165,7 +165,7 @@ parameters:
   fsType: ext4                   # 文件系统: ext4 | xfs
 ```
 
-##<!-- chunk: Azure Disk CSI -->## Azure Disk CSI
+## Azure Disk CSI
 ```yaml
 parameters:
   skuName: Premium_LRS           # SKU: Premium_LRS | StandardSSD_LRS | Standard_LRS | UltraSSD_LRS
@@ -174,7 +174,7 @@ parameters:
   fsType: ext4                   # 文件系统类型
 ```
 
-##<!-- chunk: Alibaba Cloud Disk CSI -->## Alibaba Cloud Disk CSI
+## Alibaba Cloud Disk CSI
 ```yaml
 parameters:
   type: cloud_essd               # 类型: cloud_efficiency | cloud_ssd | cloud_essd
@@ -183,7 +183,7 @@ parameters:
   fsType: ext4                   # 文件系统类型
 ```
 
-##<!-- chunk: Ceph RBD CSI -->## Ceph RBD CSI
+## Ceph RBD CSI
 ```yaml
 parameters:
   clusterID: rook-ceph           # Ceph 集群 ID
@@ -199,7 +199,7 @@ parameters:
   csi.storage.k8s.io/fstype: ext4
 ```
 
-#<!-- chunk: 1.5 ReclaimPolicy (回收策略) -->## 1.5 ReclaimPolicy (回收策略)
+## 1.5 ReclaimPolicy (回收策略)
 
 ```yaml
 reclaimPolicy: Delete            # 默认值
@@ -236,7 +236,7 @@ parameters:
   type: gp3
 ```
 
-#<!-- chunk: 1.6 VolumeBindingMode (绑定模式) -->## 1.6 VolumeBindingMode (绑定模式)
+## 1.6 VolumeBindingMode (绑定模式)
 
 ```yaml
 volumeBindingMode: WaitForFirstConsumer  # 延迟绑定(推荐)
@@ -297,7 +297,7 @@ allowedTopologies:
 volumeBindingMode: Immediate
 ```
 
-#<!-- chunk: 1.7 AllowVolumeExpansion (允许扩容) -->## 1.7 AllowVolumeExpansion (允许扩容)
+## 1.7 AllowVolumeExpansion (允许扩容)
 
 ```yaml
 allowVolumeExpansion: true       # 允许 PVC 扩容(默认 false)
@@ -346,7 +346,7 @@ kubectl get pvc data-pvc
 - ⚠️ 某些文件系统需要 Pod 重启才能识别新容量
 - ✅ 扩容期间 PVC 仍可正常使用(在线扩容)
 
-#<!-- chunk: 1.8 AllowedTopologies (拓扑约束) -->## 1.8 AllowedTopologies (拓扑约束)
+## 1.8 AllowedTopologies (拓扑约束)
 
 ```yaml
 allowedTopologies:               # 限制 PV 创建的拓扑域(可选)
@@ -371,7 +371,7 @@ allowedTopologies:               # 限制 PV 创建的拓扑域(可选)
 
 **使用场景**:
 
-##<!-- chunk: 场景 1: 限定可用区 -->## 场景 1: 限定可用区
+## 场景 1: 限定可用区
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -388,7 +388,7 @@ parameters:
   type: gp3
 ```
 
-##<!-- chunk: 场景 2: Local PV 节点约束 -->## 场景 2: Local PV 节点约束
+## 场景 2: Local PV 节点约束
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -405,7 +405,7 @@ allowedTopologies:
     - node-03
 ```
 
-#<!-- chunk: 1.9 MountOptions (挂载选项) -->## 1.9 MountOptions (挂载选项)
+## 1.9 MountOptions (挂载选项)
 
 ```yaml
 mountOptions:                    # 传递给 mount 命令的选项(可选)
@@ -444,9 +444,9 @@ mountOptions:
 
 ---
 
-#<!-- chunk: 1.10 配置模板 -->## 1.10 配置模板
+## 1.10 配置模板
 
-##<!-- chunk: 模板 1: AWS EBS 生产级配置 -->## 模板 1: AWS EBS 生产级配置
+## 模板 1: AWS EBS 生产级配置
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -477,7 +477,7 @@ allowedTopologies:
     - us-west-2c
 ```
 
-##<!-- chunk: 模板 2: Azure Disk 高性能配置 -->## 模板 2: Azure Disk 高性能配置
+## 模板 2: Azure Disk 高性能配置
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -495,7 +495,7 @@ parameters:
   fsType: ext4
 ```
 
-##<!-- chunk: 模板 3: Ceph RBD 存储类 -->## 模板 3: Ceph RBD 存储类
+## 模板 3: Ceph RBD 存储类
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -519,7 +519,7 @@ parameters:
   csi.storage.k8s.io/fstype: ext4
 ```
 
-##<!-- chunk: 模板 4: Local PV 存储类 -->## 模板 4: Local PV 存储类
+## 模板 4: Local PV 存储类
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -530,7 +530,7 @@ reclaimPolicy: Retain            # 数据保留
 volumeBindingMode: WaitForFirstConsumer  # 延迟绑定(必须)
 ```
 
-##<!-- chunk: 模板 5: NFS 存储类 -->## 模板 5: NFS 存储类
+## 模板 5: NFS 存储类
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -554,7 +554,7 @@ mountOptions:
 
 <!-- chunk: 二、VolumeSnapshot (卷快照) -->## 二、VolumeSnapshot (卷快照)
 
-#<!-- chunk: 2.1 API 资源信息 -->## 2.1 API 资源信息
+## 2.1 API 资源信息
 
 ```yaml
 # API 元数据
@@ -577,7 +577,7 @@ metadata:
 - **恢复数据源**: 可作为新 PVC 的 dataSource
 - **依赖 CSI**: 需要 CSI 驱动支持 CREATE_DELETE_SNAPSHOT 能力
 
-#<!-- chunk: 2.2 核心字段结构 -->## 2.2 核心字段结构
+## 2.2 核心字段结构
 
 ```yaml
 spec:
@@ -596,7 +596,7 @@ status:
     message: "snapshot creation failed"
 ```
 
-#<!-- chunk: 2.3 从 PVC 创建快照 -->## 2.3 从 PVC 创建快照
+## 2.3 从 PVC 创建快照
 
 ```yaml
 apiVersion: snapshot.storage.k8s.io/v1
@@ -641,7 +641,7 @@ VolumeSnapshot 绑定到 VolumeSnapshotContent
 status.readyToUse 设为 true
 ```
 
-#<!-- chunk: 2.4 从快照内容导入 -->## 2.4 从快照内容导入
+## 2.4 从快照内容导入
 
 ```yaml
 # 场景: 导入已存在的云快照
@@ -656,7 +656,7 @@ spec:
     volumeSnapshotContentName: pre-existing-snapcontent  # 引用已有内容
 ```
 
-#<!-- chunk: 2.5 快照恢复到 PVC -->## 2.5 快照恢复到 PVC
+## 2.5 快照恢复到 PVC
 
 ```yaml
 # 从快照创建新 PVC
@@ -681,7 +681,7 @@ spec:
 
 <!-- chunk: 三、VolumeSnapshotClass (快照类) -->## 三、VolumeSnapshotClass (快照类)
 
-#<!-- chunk: 3.1 API 资源信息 -->## 3.1 API 资源信息
+## 3.1 API 资源信息
 
 ```yaml
 # API 元数据
@@ -701,7 +701,7 @@ metadata:
 - **定义快照策略**: 配置快照驱动、删除策略等
 - **不可变**: 创建后字段不可修改
 
-#<!-- chunk: 3.2 核心字段结构 -->## 3.2 核心字段结构
+## 3.2 核心字段结构
 
 ```yaml
 driver: ebs.csi.aws.com          # CSI 驱动名称(必填)
@@ -710,7 +710,7 @@ parameters:                      # 驱动特定参数(可选)
   snapshotType: standard         # 示例参数
 ```
 
-#<!-- chunk: 3.3 Driver (驱动) -->## 3.3 Driver (驱动)
+## 3.3 Driver (驱动)
 
 ```yaml
 driver: ebs.csi.aws.com          # 必须与 StorageClass 的 provisioner 匹配
@@ -723,7 +723,7 @@ driver: ebs.csi.aws.com          # 必须与 StorageClass 的 provisioner 匹配
 - Ceph RBD: `rook-ceph.rbd.csi.ceph.com`
 - Alibaba Cloud: `diskplugin.csi.alibabacloud.com`
 
-#<!-- chunk: 3.4 DeletionPolicy (删除策略) -->## 3.4 DeletionPolicy (删除策略)
+## 3.4 DeletionPolicy (删除策略)
 
 ```yaml
 deletionPolicy: Delete           # VolumeSnapshot 删除后的行为(必填)
@@ -755,7 +755,7 @@ driver: ebs.csi.aws.com
 deletionPolicy: Retain           # 保留快照
 ```
 
-#<!-- chunk: 3.5 Parameters (参数) -->## 3.5 Parameters (参数)
+## 3.5 Parameters (参数)
 
 ```yaml
 parameters:                      # CSI 驱动特定参数
@@ -779,9 +779,9 @@ parameters:
   csi.storage.k8s.io/snapshotter-secret-namespace: rook-ceph
 ```
 
-#<!-- chunk: 3.6 配置模板 -->## 3.6 配置模板
+## 3.6 配置模板
 
-##<!-- chunk: 模板 1: AWS EBS 快照类 -->## 模板 1: AWS EBS 快照类
+## 模板 1: AWS EBS 快照类
 ```yaml
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
@@ -796,7 +796,7 @@ parameters:
   tagSpecification_2: "ManagedBy=kubernetes"
 ```
 
-##<!-- chunk: 模板 2: Azure Disk 快照类 -->## 模板 2: Azure Disk 快照类
+## 模板 2: Azure Disk 快照类
 ```yaml
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
@@ -808,7 +808,7 @@ parameters:
   incremental: "true"            # 增量快照(节省空间)
 ```
 
-##<!-- chunk: 模板 3: Ceph RBD 快照类 -->## 模板 3: Ceph RBD 快照类
+## 模板 3: Ceph RBD 快照类
 ```yaml
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
@@ -826,7 +826,7 @@ parameters:
 
 <!-- chunk: 四、VolumeSnapshotContent (快照内容) -->## 四、VolumeSnapshotContent (快照内容)
 
-#<!-- chunk: 4.1 API 资源信息 -->## 4.1 API 资源信息
+## 4.1 API 资源信息
 
 ```yaml
 # API 元数据
@@ -845,7 +845,7 @@ metadata:
 - **自动创建**: 通常由 External Snapshotter 自动创建(动态供给)
 - **静态导入**: 也可手动创建以导入已有快照
 
-#<!-- chunk: 4.2 核心字段结构 -->## 4.2 核心字段结构
+## 4.2 核心字段结构
 
 ```yaml
 spec:
@@ -869,7 +869,7 @@ status:
     message: "snapshot failed"
 ```
 
-#<!-- chunk: 4.3 动态创建 (自动) -->## 4.3 动态创建 (自动)
+## 4.3 动态创建 (自动)
 
 ```yaml
 # 用户创建 VolumeSnapshot 后,External Snapshotter 自动创建 VolumeSnapshotContent
@@ -894,7 +894,7 @@ kubectl get volumesnapshotcontent snapcontent-abc123 -o yaml
 #   readyToUse: true
 ```
 
-#<!-- chunk: 4.4 静态导入 (手动) -->## 4.4 静态导入 (手动)
+## 4.4 静态导入 (手动)
 
 ```yaml
 # 场景: 导入已存在的云快照 (如从控制台手动创建的快照)
@@ -949,7 +949,7 @@ spec:
 
 <!-- chunk: 五、生产案例 -->## 五、生产案例
 
-#<!-- chunk: 5.1 案例 1: 定时备份快照 -->## 5.1 案例 1: 定时备份快照
+## 5.1 案例 1: 定时备份快照
 
 **场景**: 每天凌晨 2 点自动创建 MySQL 数据库快照
 
@@ -1063,7 +1063,7 @@ subjects:
   namespace: database
 ```
 
-#<!-- chunk: 5.2 案例 2: 蓝绿部署使用快照 -->## 5.2 案例 2: 蓝绿部署使用快照
+## 5.2 案例 2: 蓝绿部署使用快照
 
 **场景**: 升级应用前创建快照,升级失败快速回滚
 
@@ -1124,7 +1124,7 @@ spec:
 # kubectl scale statefulset mysql -n database --replicas=3
 ```
 
-#<!-- chunk: 5.3 案例 3: 跨环境数据迁移 -->## 5.3 案例 3: 跨环境数据迁移
+## 5.3 案例 3: 跨环境数据迁移
 
 **场景**: 从生产环境快照迁移数据到测试环境
 
@@ -1235,7 +1235,7 @@ spec:
 
 <!-- chunk: 六、故障排查 -->## 六、故障排查
 
-#<!-- chunk: 6.1 快照一直 Pending -->## 6.1 快照一直 Pending
+## 6.1 快照一直 Pending
 
 **症状**:
 ```bash
@@ -1278,7 +1278,7 @@ kubectl logs -n kube-system -l app=csi-snapshotter
 | driver does not support snapshots | CSI 驱动不支持快照 | 升级驱动或使用其他备份方式 |
 | quota exceeded | 云账户快照配额不足 | 删除旧快照或增加配额 |
 
-#<!-- chunk: 6.2 从快照恢复失败 -->## 6.2 从快照恢复失败
+## 6.2 从快照恢复失败
 
 **症状**:
 ```bash
@@ -1306,9 +1306,13 @@ kubectl get volumesnapshot mysql-snapshot -n database -o jsonpath='{.status.rest
 kubectl logs -n kube-system -l app=ebs-csi-controller -c csi-provisioner
 ```
 
-#<!-- chunk: 6.3 快照无法删除 -->## 6.3 快照无法删除
+## 6.3 快照无法删除
 
 **症状**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 kubectl delete volumesnapshot mysql-snapshot -n database
 # volumesnapshot "mysql-snapshot" deleted
@@ -1322,6 +1326,11 @@ kubectl get volumesnapshot -n database
 **原因**: 快照有 [[Finalizers|finalizers]] 保护
 
 **排查步骤**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 检查 finalizers
 kubectl get volumesnapshot mysql-snapshot -n database -o jsonpath='{.metadata.finalizers}'
@@ -1347,7 +1356,7 @@ kubectl delete volumesnapshotcontent <content-name>
 
 <!-- chunk: 七、最佳实践总结 -->## 七、最佳实践总结
 
-#<!-- chunk: 7.1 StorageClass 最佳实践 -->## 7.1 StorageClass 最佳实践
+## 7.1 StorageClass 最佳实践
 
 ```yaml
 # ✅ 显式命名,语义清晰
@@ -1373,7 +1382,7 @@ parameters:
   kmsKeyId: "arn:aws:kms:..."
 ```
 
-#<!-- chunk: 7.2 VolumeSnapshot 最佳实践 -->## 7.2 VolumeSnapshot 最佳实践
+## 7.2 VolumeSnapshot 最佳实践
 
 ```yaml
 # ✅ 定时备份
@@ -1397,7 +1406,7 @@ metadata:
 # 自动删除超过保留期的快照
 ```
 
-#<!-- chunk: 7.3 监控告警 -->## 7.3 监控告警
+## 7.3 监控告警
 
 ```yaml
 # Prometheus 告警规则
@@ -1437,19 +1446,19 @@ groups:
 
 <!-- chunk: 八、参考资源 -->## 八、参考资源
 
-#<!-- chunk: 8.1 官方文档 -->## 8.1 官方文档
+## 8.1 官方文档
 
 - Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)
 - [Volume Snapshots](https://kubernetes.io/docs/concepts/storage/volume-snapshots/)
 - [CSI Volume Cloning](https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/)
 
-#<!-- chunk: 8.2 相关 KEP -->## 8.2 相关 KEP
+## 8.2 相关 KEP
 
 - [KEP-1495: Volume Health Monitoring](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/1495-volume-health-monitor)
 - [KEP-1900: CSI Driver Service Account Token](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/1900-csi-driver-service-account-token)
 - [KEP-2589: VolumeSnapshot Ready Time](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/2589-volumesnapshot-ready-time)
 
-#<!-- chunk: 8.3 版本差异 -->## 8.3 版本差异
+## 8.3 版本差异
 
 | 功能 | v1.25 | v1.26 | v1.27 | v1.28 | v1.29 | v1.30 | v1.31 | v1.32 |
 |------|-------|-------|-------|-------|-------|-------|-------|-------|
@@ -1468,7 +1477,7 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -1487,13 +1496,13 @@ groups:
 - 18-csi-driver-resources
 - 19-serviceaccount-token
 
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/14-storage-node|14-storage-node]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/22-storage-volumes|22-storage-volumes]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/14-storage-node.md|14-storage-node]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/22-storage-volumes.md|22-storage-volumes]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]

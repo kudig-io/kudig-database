@@ -247,7 +247,7 @@ flowchart LR
     style Platform fill:#e8f5e9
 ```
 
-#<!-- chunk: 领域驱动设计 (DDD) 映射 -->## 领域驱动设计 (DDD) 映射
+## 领域驱动设计 (DDD) 映射
 
 | 领域 | 服务 | K8s 工作负载 | 数据库 | 关键特性 |
 |:---|:---|:---|:---|:---|
@@ -301,7 +301,7 @@ flowchart TB
     style BFF fill:#e3f2fd
 ```
 
-#<!-- chunk: Gateway 生产配置 -->## Gateway 生产配置
+## Gateway 生产配置
 
 ```yaml
 apiVersion: networking.istio.io/v1beta1
@@ -335,40 +335,40 @@ spec:
   gateways:
     - ecommerce-gateway
   http:
-    - match:
-        - uri:
-            prefix: /api/v1/order
-      route:
-        - destination:
-            host: order-service
-            port:
-              number: 8080
-      timeout: 3s
-      retries:
-        attempts: 3
-        perTryTimeout: 1s
-        retryOn: gateway-error,connect-failure,refused-stream
-      fault:
-        delay:
-          percentage:
-            value: 0.1
-          fixedDelay: 5s
-    - match:
-        - uri:
-            prefix: /api/v1/payment
-      route:
-        - destination:
-            host: payment-service
-            port:
-              number: 8080
-      timeout: 10s
+    - matchers:
+      - - uri=""
+      - prefix="/api/v1/order"
+      - route=""
+      - - destination=""
+      - host="order-service"
+      - port=""
+      - number="8080"
+      - timeout="3s"
+      - retries=""
+      - attempts="3"
+      - perTryTimeout="1s"
+      - retryOn="gateway-error,connect-failure,refused-stream"
+      - fault=""
+      - delay=""
+      - percentage=""
+      - value="0.1"
+      - fixedDelay="5s"
+    - matchers:
+      - - uri=""
+      - prefix="/api/v1/payment"
+      - route=""
+      - - destination=""
+      - host="payment-service"
+      - port=""
+      - number="8080"
+      - timeout="10s"
 ```
 
 ---
 
 <!-- chunk: 四、订单核心链路架构 -->## 四、订单核心链路架构
 
-#<!-- chunk: 下单链路时序 -->## 下单链路时序
+## 下单链路时序
 
 ```mermaid
 sequenceDiagram
@@ -405,7 +405,7 @@ sequenceDiagram
     MQ->>Logistics: 创建物流单
 ```
 
-#<!-- chunk: 订单服务 K8s 部署 -->## 订单服务 K8s 部署
+## 订单服务 K8s 部署
 
 ```yaml
 apiVersion: apps/v1
@@ -579,7 +579,7 @@ flowchart TB
     style Pipeline fill:#e8f5e9
 ```
 
-#<!-- chunk: Elasticsearch K8s 部署 -->## Elasticsearch K8s 部署
+## Elasticsearch K8s 部署
 
 ```yaml
 apiVersion: elasticsearch.k8s.elastic.co/v1
@@ -676,7 +676,7 @@ flowchart TB
     style Security fill:#fff3e0
 ```
 
-#<!-- chunk: 支付服务安全部署 -->## 支付服务安全部署
+## 支付服务安全部署
 
 ```yaml
 apiVersion: apps/v1
@@ -786,7 +786,7 @@ flowchart TB
     style Warehouse fill:#e8f5e9
 ```
 
-#<!-- chunk: 库存扣减策略 -->## 库存扣减策略
+## 库存扣减策略
 
 ```mermaid
 stateDiagram-v2
@@ -804,7 +804,7 @@ stateDiagram-v2
 
 <!-- chunk: 八、营销与秒杀架构 -->## 八、营销与秒杀架构
 
-#<!-- chunk: 秒杀系统架构 -->## 秒杀系统架构
+## 秒杀系统架构
 
 ```mermaid
 flowchart TB
@@ -839,7 +839,7 @@ flowchart TB
     style Fallback fill:#ffebee
 ```
 
-#<!-- chunk: 秒杀核心代码 -->## 秒杀核心代码
+## 秒杀核心代码
 
 ```yaml
 # Redis Lua 脚本：原子扣减库存
@@ -965,7 +965,7 @@ flowchart TB
 
 <!-- chunk: 十、K8s 部署架构 -->## 十、K8s 部署架构
 
-#<!-- chunk: Namespace 组织 -->## Namespace 组织
+## Namespace 组织
 
 ```mermaid
 flowchart TB
@@ -999,7 +999,7 @@ flowchart TB
     style Data fill:#e8f5e9
 ```
 
-#<!-- chunk: 节点池规划 -->## 节点池规划
+## 节点池规划
 
 ```yaml
 apiVersion: karpenter.sh/v1
@@ -1087,7 +1087,7 @@ flowchart TB
     style DR fill:#fff8e1
 ```
 
-#<!-- chunk: 电商系统 SLA 矩阵 -->## 电商系统 SLA 矩阵
+## 电商系统 SLA 矩阵
 
 | 服务 | 可用性目标 | RTO | RPO | 策略 |
 |:---|:---:|:---:|:---:|:---|
@@ -1111,7 +1111,7 @@ flowchart TB
 
 <!-- chunk: 多云部署方案对照 -->## 多云部署方案对照
 
-#<!-- chunk: 阿里云服务 → 多云映射表 -->## 阿里云服务 → 多云映射表
+## 阿里云服务 → 多云映射表
 
 | 能力域 | 阿里云服务 | AWS 对应 | GCP 对应 | Azure 对应 |
 |:---|:---|:---|:---|:---|
@@ -1132,7 +1132,7 @@ flowchart TB
 | 日志 | **SLS (日志服务)** | **CloudWatch Logs** | **Cloud Logging** | **Log Analytics** |
 | 链路追踪 | **ARMS / 链路追踪** | **X-Ray** | **Cloud Trace** | **Application Insights** |
 
-#<!-- chunk: 多云部署注意事项 -->## 多云部署注意事项
+## 多云部署注意事项
 
 1. **数据主权与合规**: 电商涉及支付数据需关注 PCI-DSS，不同云厂商的 PCI-DSS 认证范围不同，需确认目标 Region 的合规状态。
 2. **网络互通**: 多云部署时需通过 VPN / 专线打通 VPC，注意跨云通信延迟对订单链路的影响（建议同城双活优先）。
@@ -1141,7 +1141,7 @@ flowchart TB
 5. **节点池策略**: AWS 用 Karpenter、GCP 用 Autopilot、Azure 用 Virtual Nodes，HPA/VPA 行为有差异，需分别压测。
 6. **支付通道隔离**: 支付 PCI-DSS 区域建议与业务区域在同一云内，避免跨云传输敏感数据。
 
-#<!-- chunk: 云中立方案（开源替代） -->## 云中立方案（开源替代）
+## 云中立方案（开源替代）
 
 | 能力域 | 开源方案 | 说明 |
 |:---|:---|:---|
@@ -1166,17 +1166,17 @@ flowchart TB
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture|智慧零售与新零售Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture.md|智慧零售与新零售Kubernetes生产架构设计]]
 
 ## See Also
 

@@ -691,7 +691,7 @@ team_capability_building:
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering KUDIG Database — Global MOC
-- [[domain-07-platform-engineering/README|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
+- [[domain-07-platform-engineering/README.md|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
 - index.md|Domain-9 平台运维 — 开源项目索引]]
 - 平台运维概述
 - 集群生命周期管理
@@ -712,4 +712,4 @@ team_capability_building:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

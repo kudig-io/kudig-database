@@ -70,7 +70,7 @@ created: "2026-05-23"
 
 <!-- chunk: DNS 基础概念 -->## DNS 基础概念
 
-#<!-- chunk: DNS 架构 -->## DNS 架构
+## DNS 架构
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -93,7 +93,7 @@ created: "2026-05-23"
    └─────────┘            └─────────┘
 ```
 
-#<!-- chunk: 域名层级 -->## 域名层级
+## 域名层级
 
 | 层级 | 示例 | 说明 |
 |:---|:---|:---|
@@ -102,7 +102,7 @@ created: "2026-05-23"
 | 二级域 | example.com | 注册域名 |
 | 子域 | www.example.com | 自定义子域 |
 
-#<!-- chunk: DNS 服务器类型 -->## DNS 服务器类型
+## DNS 服务器类型
 
 | 类型 | 功能 |
 |:---|:---|
@@ -115,7 +115,7 @@ created: "2026-05-23"
 
 <!-- chunk: DNS 解析过程 -->## DNS 解析过程
 
-#<!-- chunk: 递归查询流程 -->## 递归查询流程
+## 递归查询流程
 
 ```
 客户端                递归服务器              权威服务器
@@ -134,7 +134,7 @@ created: "2026-05-23"
    │◄──IP: 93.184.216.34─│                      │
 ```
 
-#<!-- chunk: 查询类型 -->## 查询类型
+## 查询类型
 
 | 类型 | 说明 |
 |:---|:---|
@@ -145,7 +145,7 @@ created: "2026-05-23"
 
 <!-- chunk: DNS 记录类型 -->## DNS 记录类型
 
-#<!-- chunk: 常用记录 -->## 常用记录
+## 常用记录
 
 | 类型 | 说明 | 示例 |
 |:---|:---|:---|
@@ -159,7 +159,7 @@ created: "2026-05-23"
 | **PTR** | 反向解析 | IP → 域名 |
 | **SRV** | 服务记录 | _sip._tcp.example.com |
 
-#<!-- chunk: 记录示例 -->## 记录示例
+## 记录示例
 
 ```
 ; Zone: example.com
@@ -189,7 +189,7 @@ mail    IN A    93.184.216.20
 
 <!-- chunk: DNS 服务器配置 -->## DNS 服务器配置
 
-#<!-- chunk: 客户端配置 -->## 客户端配置
+## 客户端配置
 
 ```bash
 # /etc/resolv.conf
@@ -199,7 +199,7 @@ options timeout:2 attempts:3
 search example.com
 ```
 
-#<!-- chunk: 常用公共 DNS -->## 常用公共 DNS
+## 常用公共 DNS
 
 | 服务商 | IPv4 | IPv6 |
 |:---|:---|:---|
@@ -208,7 +208,7 @@ search example.com
 | 阿里 | 223.5.5.5, 223.6.6.6 | - |
 | 腾讯 | 119.29.29.29 | - |
 
-#<!-- chunk: [[CoreDNS|CoreDNS]] 配置 -->## CoreDNS 配置
+## CoreDNS 配置
 
 ```
 # Corefile
@@ -229,7 +229,7 @@ example.com:53 {
 
 <!-- chunk: DNS 性能优化 -->## DNS 性能优化
 
-#<!-- chunk: TTL 策略 -->## TTL 策略
+## TTL 策略
 
 | 场景 | 推荐 TTL |
 |:---|:---|
@@ -238,7 +238,7 @@ example.com:53 {
 | CDN | 60-300 秒 |
 | 故障切换 | 30-60 秒 |
 
-#<!-- chunk: 本地缓存 -->## 本地缓存
+## 本地缓存
 
 ```bash
 # systemd-resolved
@@ -251,7 +251,7 @@ Cache=yes
 resolvectl statistics
 ```
 
-#<!-- chunk: 预取与预热 -->## 预取与预热
+## 预取与预热
 
 ```bash
 # DNS 预解析 (HTML)
@@ -265,7 +265,7 @@ cat domains.txt | xargs -I {} dig {} @resolver +short
 
 <!-- chunk: DNS 故障排查 -->## DNS 故障排查
 
-#<!-- chunk: 诊断命令 -->## 诊断命令
+## 诊断命令
 
 ```bash
 # dig 查询
@@ -283,7 +283,7 @@ host example.com
 host -t AAAA example.com
 ```
 
-#<!-- chunk: dig 输出解读 -->## dig 输出解读
+## dig 输出解读
 
 ```bash
 $ dig example.com
@@ -298,7 +298,7 @@ example.com.        3600    IN    A    93.184.216.34
 ;; MSG SIZE  rcvd: 56
 ```
 
-#<!-- chunk: 常见问题 -->## 常见问题
+## 常见问题
 
 | 问题 | 症状 | 解决方案 |
 |:---|:---|:---|
@@ -318,9 +318,9 @@ ipconfig /flushdns
 
 <!-- chunk: DNS高级安全防护体系 -->## DNS高级安全防护体系
 
-#<!-- chunk: DNS安全威胁模型与防护策略 -->## DNS安全威胁模型与防护策略
+## DNS安全威胁模型与防护策略
 
-##<!-- chunk: DNS攻击类型深度分析 -->## DNS攻击类型深度分析
+## DNS攻击类型深度分析
 
 | 攻击类型 | 攻击原理 | 影响范围 | 防护措施 | 检测方法 |
 |:---|:---|:---|:---|:---|
@@ -330,7 +330,7 @@ ipconfig /flushdns
 | **域名抢注** | 注册相似域名钓鱼 | 特定品牌 | 商标保护、监控 | 域名监控 |
 | **DNS隧道** | 利用DNS传输恶意数据 | 数据泄露 | DPI检测、策略阻断 | 异常查询检测 |
 
-##<!-- chunk: DNSSEC高级配置与管理 -->## DNSSEC高级配置与管理
+## DNSSEC高级配置与管理
 
 ```bash
 # DNSSEC生产环境部署指南
@@ -437,9 +437,9 @@ EOF
 }
 ```
 
-#<!-- chunk: DNS高级安全监控与告警 -->## DNS高级安全监控与告警
+## DNS高级安全监控与告警
 
-##<!-- chunk: DNS异常行为检测系统 -->## DNS异常行为检测系统
+## DNS异常行为检测系统
 
 ```bash
 #!/bin/bash
@@ -544,9 +544,9 @@ done
 
 <!-- chunk: 大规模DNS集群优化 -->## 大规模DNS集群优化
 
-#<!-- chunk: DNS集群架构设计 -->## DNS集群架构设计
+## DNS集群架构设计
 
-##<!-- chunk: 高可用DNS集群部署 -->## 高可用DNS集群部署
+## 高可用DNS集群部署
 
 ```yaml
 # Kubernetes DNS集群高可用部署
@@ -668,7 +668,10 @@ spec:
     targetPort: 9153
 ```
 
-##<!-- chunk: DNS负载均衡与故障切换 -->## DNS负载均衡与故障切换
+## DNS负载均衡与故障切换
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # DNS集群负载均衡配置
@@ -764,9 +767,9 @@ dns_cluster_health_check() {
 }
 ```
 
-#<!-- chunk: DNS性能优化与调优 -->## DNS性能优化与调优
+## DNS性能优化与调优
 
-##<!-- chunk: CoreDNS高级性能调优 -->## CoreDNS高级性能调优
+## CoreDNS高级性能调优
 
 ```yaml
 # CoreDNS生产环境高性能配置
@@ -832,7 +835,10 @@ data:
     }
 ```
 
-##<!-- chunk: DNS查询优化策略 -->## DNS查询优化策略
+## DNS查询优化策略
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # DNS查询性能优化脚本
@@ -957,7 +963,7 @@ hosts: files dns [!UNAVAIL=return] myhostname
 options timeout:1 attempts:2 rotate
 ```
 
-##<!-- chunk: CoreDNS 生产环境配置 -->## CoreDNS 生产环境配置
+## CoreDNS 生产环境配置
 
 ```yaml
 # CoreDNS 生产级配置
@@ -1004,9 +1010,9 @@ example.com:53 {
 }
 ```
 
-#<!-- chunk: DNS 安全最佳实践 -->## DNS 安全最佳实践
+## DNS 安全最佳实践
 
-##<!-- chunk: DNSSEC 配置 -->## DNSSEC 配置
+## DNSSEC 配置
 
 ```bash
 # 启用 DNSSEC 验证
@@ -1022,7 +1028,7 @@ dig +dnssec +multiline cloudflare.com
 delv @1.1.1.1 cloudflare.com
 ```
 
-##<!-- chunk: 防止 DNS 放大攻击 -->## 防止 DNS 放大攻击
+## 防止 DNS 放大攻击
 
 ```bash
 # iptables 防护规则
@@ -1039,7 +1045,7 @@ echo 'max-cache-ttl: 300' >> /etc/unbound/unbound.conf
 echo 'max-udp-size: 1232' >> /etc/unbound/unbound.conf
 ```
 
-##<!-- chunk: 私有 DNS 安全配置 -->## 私有 DNS 安全配置
+## 私有 DNS 安全配置
 
 ```yaml
 # CoreDNS 安全配置
@@ -1068,9 +1074,9 @@ echo 'max-udp-size: 1232' >> /etc/unbound/unbound.conf
 }
 ```
 
-#<!-- chunk: 大规模 DNS 部署最佳实践 -->## 大规模 DNS 部署最佳实践
+## 大规模 DNS 部署最佳实践
 
-##<!-- chunk: 高可用架构设计 -->## 高可用架构设计
+## 高可用架构设计
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -1091,7 +1097,7 @@ echo 'max-udp-size: 1232' >> /etc/unbound/unbound.conf
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: DNS 集群部署配置 -->## DNS 集群部署配置
+## DNS 集群部署配置
 
 ```yaml
 # Kubernetes DNS 集群配置
@@ -1188,7 +1194,7 @@ spec:
     protocol: TCP
 ```
 
-##<!-- chunk: DNS 性能监控告警 -->## DNS 性能监控告警
+## DNS 性能监控告警
 
 ```bash
 # DNS 性能监控脚本
@@ -1228,7 +1234,7 @@ while true; do
 done
 ```
 
-##<!-- chunk: DNS 故障切换策略 -->## DNS 故障切换策略
+## DNS 故障切换策略
 
 ```bash
 # DNS 问题自动切换脚本
@@ -1291,4 +1297,4 @@ done
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]

@@ -5,6 +5,7 @@ tags: ["domain-11", "事故响应", "incident", "MTTR", "复盘", "Commander", "
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 status: reviewed
 ---
 
@@ -115,13 +116,13 @@ timeline:
 1. **诊断建议**：基于经验提供排查方向，帮助缩小根因范围
 2. **方案审核**：对客户提出的修复方案进行风险评估，指出潜在副作用
 3. **事后复盘**：参与复盘会议，提供外部视角，帮助发现盲点和流程改进点
-4. **知识沉淀**：将事故处理过程写入 [[domain-09-reliability-engineering/06-postmortem/02-postmortem-culture-guide|postmortem]]，补充到 [[concepts/KUDIG Knowledge Base Architecture|knowledge-base]]
+4. **知识沉淀**：将事故处理过程写入 [[domain-09-reliability-engineering/06-postmortem/02-postmortem-culture-guide.md|postmortem]]，补充到 [[concepts/KUDIG Knowledge Base Architecture.md|knowledge-base]]
 
 > 远程顾问应避免直接「接管」指挥权，而是帮助客户 Commander 做出更 informed 的决策。
 
 ## 相关链接
 
-- [[domain-11-production-operations/03-on-call-playbook|on-call-playbook]] — 值班手册与告警响应规范
-- [[domain-11-production-operations/02-change-management-guide|change-management-guide]] — 变更管理指南
-- [[domain-11-production-operations/01-production-sre-daily-ops|production-sre-daily-ops]] — 日常巡检与值班手册
+- [[domain-11-production-operations/03-on-call-playbook.md|on-call-playbook]] — 值班手册与告警响应规范
+- [[domain-11-production-operations/02-change-management-guide.md|change-management-guide]] — 变更管理指南
+- [[domain-11-production-operations/01-production-sre-daily-ops.md|production-sre-daily-ops]] — 日常巡检与值班手册
 - [[node-notready]] — 节点异常排查

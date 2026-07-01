@@ -5,6 +5,7 @@ tags: ["skill", "domain-10", "visibility/public"]
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 status: reviewed
 ---
 
@@ -57,6 +58,6 @@ kubectl describe networkpolicy <policy-name> -n <namespace>
 
 ## 相关概念
 
-- [[concepts/network-policy|Network Policy]] — NetworkPolicy 规则语义、CNI 实现与标签匹配原理
-- [[concepts/cni-networking-model|CNI 网络模型]] — Kubernetes 容器网络接口与网络策略支持矩阵
-- [[concepts/security-defense-depth|纵深防御]] — 网络安全分层防御策略与零信任实践
+- [[concepts/network-policy.md|Network Policy]] — NetworkPolicy 规则语义、CNI 实现与标签匹配原理
+- [[concepts/cni-networking-model.md|CNI 网络模型]] — Kubernetes 容器网络接口与网络策略支持矩阵
+- [[concepts/security-defense-depth.md|纵深防御]] — 网络安全分层防御策略与零信任实践

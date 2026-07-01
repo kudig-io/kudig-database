@@ -112,7 +112,7 @@ k8s_versions:
 
 现代灾备体系不仅仅是工具的堆砌，更是架构设计、流程规范和组织协同的综合体现。一个成熟的企业灾备体系需要包含以下关键能力：数据保护能力（备份、快照、复制）、故障检测能力（监控、告警、自动发现）、故障恢复能力（自动切换、手动切换、数据恢复）和韧性验证能力（混沌工程、灾备演练、Game Day）。开源社区在这些领域都提供了优秀的解决方案，企业可以根据自身需求和预算选择合适的组合。
 
-#<!-- chunk: 核心术语定义 -->## 核心术语定义
+## 核心术语定义
 
 | 术语 | 全称 | 含义 |
 |:---|:---|:---|
@@ -129,7 +129,7 @@ k8s_versions:
 
 <!-- chunk: 项目综合对比表 -->## 项目综合对比表
 
-#<!-- chunk: 全部项目一览（含功能/成熟度/许可证） -->## 全部项目一览（含功能/成熟度/许可证）
+## 全部项目一览（含功能/成熟度/许可证）
 
 | 项目 | 分类 | 核心功能 | CNCF 状态 | Stars | 最新版本 | License | 生产就绪度 | 学习曲线 | 社区活跃度 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
@@ -157,7 +157,7 @@ k8s_versions:
 
 <!-- chunk: 核心项目索引 -->## 核心项目索引
 
-#<!-- chunk: Kubernetes 备份与恢复 -->## Kubernetes 备份与恢复
+## Kubernetes 备份与恢复
 
 | 项目 | 作用 | 归属 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -167,7 +167,7 @@ k8s_versions:
 | **Stash** | K8s 备份恢复 (Restic 后端) | AppsCode | v2024.12.0 | 4k+ | Apache-2.0 |
 | **CloudCasa** | SaaS K8s 备份与多集群管理 | Catalogic | — | — | 商业 |
 
-##<!-- chunk: Velero 深度解析 -->## Velero 深度解析
+## Velero 深度解析
 
 Velero（前身为 Heptio Ark）是 Kubernetes 生态中最成熟的开源备份与灾难恢复工具，由 VMware Tanzu 团队维护。Velero 能够备份 Kubernetes 集群的所有资源对象（Deployments、Services、ConfigMaps、Secrets、CRDs 等）以及持久卷（PV）数据，支持跨集群迁移和灾难恢复。
 
@@ -236,14 +236,14 @@ spec:
           onError: Continue
 ```
 
-#<!-- chunk: etcd 生命周期管理 -->## etcd 生命周期管理
+## etcd 生命周期管理
 
 | 项目 | 作用 | 归属 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
 | **etcd-backup-operator** | etcd 自动化备份与定时快照 | K8s 社区 | v0.1.0 | 200+ | Apache-2.0 |
 | **etcd-druid** | etcd 生命周期管理与备份编排 | Gardener (SAP) | v0.27.0 | 100+ | Apache-2.0 |
 
-##<!-- chunk: etcd 备份的重要性 -->## etcd 备份的重要性
+## etcd 备份的重要性
 
 etcd 是 Kubernetes 集群的大脑，所有集群状态（Pod、Service、ConfigMap、Secret、CRD 等）都存储在 etcd 中。Velero 备份的是通过 API Server 暴露的资源对象，但 etcd 本身包含更底层的集群状态。因此，etcd 备份是 Kubernetes 灾备体系中不可或缺的一环，必须独立配置。
 
@@ -324,7 +324,7 @@ spec:
           restartPolicy: OnFailure
 ```
 
-#<!-- chunk: 混沌工程 -->## 混沌工程
+## 混沌工程
 
 | 项目 | 作用 | 归属 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -334,7 +334,7 @@ spec:
 | **Chaos Monkey** | Netflix 微服务随机终止 | Netflix | v2.5.0 | 15k+ | Apache-2.0 |
 | **Toxiproxy** | 网络问题模拟代理 | Shopify | v2.11.0 | 11k+ | MIT |
 
-##<!-- chunk: LitmusChaos 与 Chaos Mesh 对比 -->## LitmusChaos 与 Chaos Mesh 对比
+## LitmusChaos 与 Chaos Mesh 对比
 
 | 维度 | LitmusChaos | Chaos Mesh |
 |:---|:---|:---|
@@ -404,7 +404,7 @@ spec:
   duration: "3m"
 ```
 
-#<!-- chunk: 集群管理与基础设施灾备 -->## 集群管理与基础设施灾备
+## 集群管理与基础设施灾备
 
 | 项目 | 作用 | 归属 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -413,13 +413,13 @@ spec:
 | **ArgoCD** | GitOps 持续交付与配置恢复 | CNCF Graduated | v2.13.0 | 19k+ | Apache-2.0 |
 | **Flux** | GitOps 自动化与集群状态同步 | CNCF Graduated | v2.5.0 | 17k+ | Apache-2.0 |
 
-##<!-- chunk: GitOps 在灾备中的关键作用 -->## GitOps 在灾备中的关键作用
+## GitOps 在灾备中的关键作用
 
 GitOps 工具（Argo CD 和 Flux）在灾备场景中扮演着关键角色：它们确保集群的期望状态存储在 Git 仓库中（唯一事实来源），当灾备集群需要恢复时，只需要在新的 Kubernetes 集群上安装 GitOps 控制器并指向同一个 Git 仓库，控制器会自动将集群状态收敛到 Git 中定义的期望状态。这种方式比传统的"备份-恢复"模式更加优雅和可靠，因为 Git 仓库本身就是一份完整的、可审查的、可回滚的配置备份。
 
 在灾备切换场景中，GitOps 的工作流程如下：在灾备集群安装 Argo CD/Flux，指向与应用集群相同的 Git 仓库；GitOps 控制器自动检测到应用清单并开始同步部署；结合 External Secrets Operator 从 Vault 同步密钥；结合 Velero 恢复 PV 数据；最终实现完整的应用栈恢复。
 
-#<!-- chunk: 存储与数据复制 -->## 存储与数据复制
+## 存储与数据复制
 
 | 项目 | 作用 | 归属 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -428,7 +428,7 @@ GitOps 工具（Argo CD 和 Flux）在灾备场景中扮演着关键角色：它
 | **MinIO** | S3 兼容对象存储与站点复制 | MinIO | v2025.4 | 52k+ | AGPL-3.0 |
 | **Vitess** | MySQL 数据库集群与分片复制 | CNCF Graduated | v21.0 | 19k+ | Apache-2.0 |
 
-##<!-- chunk: Longhorn 跨区域复制配置 -->## Longhorn 跨区域复制配置
+## Longhorn 跨区域复制配置
 
 Longhorn 提供了 Kubernetes 原生的分布式块存储能力，支持跨可用区和跨集群的卷复制。在灾备场景中，Longhorn 的关键特性包括：同步复制（适合同城双活）、异步灾备复制（适合异地容灾）、定期快照和备份到 S3/NFS。
 
@@ -478,7 +478,7 @@ allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
 ```
 
-#<!-- chunk: 流量管理与故障转移 -->## 流量管理与故障转移
+## 流量管理与故障转移
 
 | 项目 | 作用 | 归属 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -487,7 +487,7 @@ volumeBindingMode: WaitForFirstConsumer
 | **CoreDNS** | DNS 服务发现与健康路由 | CNCF Graduated | v1.12 | 13k+ | Apache-2.0 |
 | **external-dns** | K8s DNS 记录自动管理 | K8s SIGs | v0.16 | 8k+ | Apache-2.0 |
 
-##<!-- chunk: Istio 多集群流量故障转移 -->## Istio 多集群流量故障转移
+## Istio 多集群流量故障转移
 
 Istio 在灾备场景中的核心价值是提供跨集群的流量管理和自动故障转移。通过配置 DestinationRule 的 outlierDetection 和 localityLbSetting，可以实现当主集群不可用时自动将流量切换到灾备集群。
 
@@ -537,7 +537,7 @@ spec:
       locality: us-west-2/us-west-2a
 ```
 
-#<!-- chunk: 监控与可观测性 -->## 监控与可观测性
+## 监控与可观测性
 
 | 项目 | 作用 | 归属 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -546,7 +546,7 @@ spec:
 | **Alertmanager** | 告警路由、分组与静默 | Prometheus | v0.28 | 7k+ | Apache-2.0 |
 | **Loki** | 日志聚合与故障分析 | Grafana Labs | v3.5 | 25k+ | AGPL-3.0 |
 
-##<!-- chunk: 灾备监控告警配置 -->## 灾备监控告警配置
+## 灾备监控告警配置
 
 ```yaml
 groups:
@@ -641,7 +641,7 @@ groups:
 
 <!-- chunk: 架构演进路径 -->## 架构演进路径
 
-#<!-- chunk: 灾备架构演进（从 Level 1 到 Level 5） -->## 灾备架构演进（从 Level 1 到 Level 5）
+## 灾备架构演进（从 Level 1 到 Level 5）
 
 ```
 Level 1: Manual Backup
@@ -674,7 +674,7 @@ Level 5: Multi-Active + Zero RPO/RTO
   └── Cost: Highest
 ```
 
-#<!-- chunk: 技术栈组合演进路线 -->## 技术栈组合演进路线
+## 技术栈组合演进路线
 
 | 演进阶段 | 备份恢复 | 数据复制 | 配置管理 | 流量管理 | 韧性验证 |
 |:---|:---|:---|:---|:---|:---|
@@ -687,7 +687,7 @@ Level 5: Multi-Active + Zero RPO/RTO
 
 <!-- chunk: 选型决策树 -->## 选型决策树
 
-#<!-- chunk: 按场景推荐方案 -->## 按场景推荐方案
+## 按场景推荐方案
 
 | 场景 | 推荐方案 | RPO 能力 | RTO 能力 | 实施复杂度 | 预估工期 |
 |:---|:---|:---|:---|:---|:---|
@@ -701,7 +701,7 @@ Level 5: Multi-Active + Zero RPO/RTO
 | 对象存储灾备 | MinIO 站点复制 | 秒级 | 分钟级 | 中 | 2-4 周 |
 | PostgreSQL 灾备 | 逻辑复制 + pgBackRest | 秒级 | 分钟级 | 中 | 3-6 周 |
 
-#<!-- chunk: 选择决策流程 -->## 选择决策流程
+## 选择决策流程
 
 ```
 START: What is your DR requirement?
@@ -777,7 +777,7 @@ graph LR
 | MySQL 数据灾备 | Vitess VReplication | 秒级 | 分钟级 | 高 |
 | 对象存储灾备 | MinIO 站点复制 | 秒级 | 分钟级 | 中 |
 
-#<!-- chunk: 灾备工具组合方案（端到端） -->## 灾备工具组合方案（端到端）
+## 灾备工具组合方案（端到端）
 
 | 灾备成熟度 | 备份工具 | 数据复制 | 配置管理 | 流量管理 | 韧性验证 | 预估成本 |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -786,7 +786,7 @@ graph LR
 | 企业级 | Velero + Longhorn + Debezium CDC | DB 原生复制 + CDC | Argo CD + Crossplane | Istio 多集群故障转移 | LitmusChaos Game Day | 200-800 万/年 |
 | 极致级 | 全工具栈 + 商业方案 | 同步双写 + 存储同步 | 全 GitOps + IaC 自动化 | 全局 GSLB + 自动切换 | 持续混沌 + AI 预测 | 800 万+/年 |
 
-#<!-- chunk: 各工具许可证影响分析 -->## 各工具许可证影响分析
+## 各工具许可证影响分析
 
 | 工具 | License | 商业使用限制 | 企业部署注意事项 |
 |:---|:---|:---|:---|
@@ -826,7 +826,7 @@ graph LR
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-30-disaster-recovery-business-continuity MOC
-- [[domain-09-reliability-engineering/README|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
+- [[domain-09-reliability-engineering/README.md|Domain 09: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
 - VMware vSphere 企业级灾备与业务连续性
 - Veeam Backup & Replication 企业级备份恢复解决方案
 - 企业级容灾架构与混沌工程深度实践

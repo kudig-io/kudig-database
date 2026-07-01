@@ -62,7 +62,6 @@ created: "2026-05-23"
 ---
 
 
-
 # PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 
 ---
@@ -91,8 +90,6 @@ PVC/PV/CSI 存储问题是 [[Kubernetes|Kubernetes]] 集群中**影响数据持�
   - `kubectl` >= v1.28（客户端版本建议与集群版本相差不超过 1 个 minor）
   - `jq` >= 1.6（可选）
   - SSH 访问（用于节点级诊断）
-
-> ⚠️ **重要**: 存储问题涉及数据安全，修复操作需格外谨慎。P0 级别的数据丢失风险场景需立即升级到高级 SRE。
 
 ---
 
@@ -528,11 +525,12 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
 
 ### Phase 3: 主动探测（低风险，可能需审批）
 
-> ⚠️ 以下步骤涉及创建测试资源或主动写入操作。在 L1-advisory 模式下，Agent 应**提出建议并等待人工确认**后执行。
-> **预计耗时**: 5-10 分钟
-
 **Step D3.1**: 测试 PVC 创建（Provisioning 验证）
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 创建测试 PVC
   cat <<EOF | kubectl apply -f -
@@ -602,6 +600,10 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
 
 **Step D3.4**: 测试 Volume Mount（需要测试 Pod）
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 创建测试 Pod 挂载 Volume
   cat <<EOF | kubectl apply -f -
@@ -677,6 +679,10 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
   # 预期: 存在
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 设置默认 StorageClass
   kubectl patch storageclass <storage-class-name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
@@ -691,6 +697,10 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
   # 预期: Pending PVC 数量减少或消失
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch storageclass <storage-class-name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
   ```
@@ -708,6 +718,11 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
   # ROX: 多节点只读
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 注意: Access Mode 不能直接修改，需要重建 PVC
   # Step 1: 备份 PVC 配置
@@ -729,6 +744,10 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
   # 预期: STATUS 为 Bound
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 恢复原始配置
   kubectl apply -f pvc-backup.yaml.original
@@ -745,6 +764,11 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
   kubectl get pvc <pvc-name> -n <namespace> -o jsonpath='{.spec.storageClassName}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 导出 PVC 配置
   kubectl get pvc <pvc-name> -n <namespace> -o yaml > pvc-fix.yaml
@@ -784,6 +808,10 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
   kubectl get pvc -A | grep -c Pending
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 重启 CSI Controller Pod
   kubectl delete pod -n kube-system -l 'app in (csi-provisioner,ebs-csi-controller,disk-csi-controller,csi-controller)'
@@ -826,6 +854,10 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
   done
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 删除孤儿 VolumeAttachment
   kubectl delete volumeattachment <orphaned-va-name>
@@ -859,6 +891,10 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
   aliyun ecs DescribeDisks --RegionId <region> --Status In_use | jq '.TotalCount'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # === 阿里云 ACK 场景 ===
   # 方案1: 扩容云盘配额（联系阿里云提工单）
@@ -875,6 +911,10 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
   ssh <nfs-server> "df -h /nfs/data && du -sh /nfs/data/*"
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 验证容量已释放
   kubectl get csistoragecapacity -A
@@ -905,6 +945,11 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
   kubectl get pvc <pvc-name> -n <namespace> -o jsonpath='{.spec.resources.requests.storage}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 在线扩容（大多数云盘支持）
   kubectl patch pvc <pvc-name> -n <namespace> -p '{"spec":{"resources":{"requests":{"storage":"<new-size>"}}}}'
@@ -923,6 +968,10 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
   kubectl scale deployment <name> -n <namespace> --replicas=<original-count>
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查 PVC 容量
   kubectl get pvc <pvc-name> -n <namespace> -o jsonpath='{.status.capacity.storage}'
@@ -947,6 +996,11 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
 - **影响说明**: 对损坏的文件系统执行 fsck 修复。**此操作需要 Volume 处于未挂载状态**，可能导致数据丢失或修改。必须先备份数据（如可能）。
 - **操作步骤**:
   1. **确保 Volume 未被挂载**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      # 停止使用该 Volume 的所有 Pod
      kubectl scale deployment <name> -n <namespace> --replicas=0
@@ -957,11 +1011,20 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
      kubectl get pods -n <namespace> -l <label-selector>
      ```
   2. **在节点上 detach Volume（如果 VolumeAttachment 仍存在）**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      # 删除 VolumeAttachment 触发 detach
      kubectl delete volumeattachment <va-name>
      ```
   3. **手动挂载 Volume 进行 fsck（需要临时 attach 到某个节点）**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
      ```bash
      # 创建临时 Pod 进行修复（使用特权模式）
      cat <<EOF | kubectl apply -f -
@@ -993,6 +1056,10 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
      # fsck -y /dev/repair-vol
      ```
   4. **删除修复 Pod 并恢复正常使用**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      kubectl delete pod fsck-repair-pod
      kubectl scale deployment <name> -n <namespace> --replicas=<count>
@@ -1015,6 +1082,11 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
      # 确认 VolumeAttachment 存在很久但对应 Pod 已不存在
      ```
   2. **强制删除 VolumeAttachment**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
      ```bash
      # 添加 finalizer 清理
      kubectl patch volumeattachment <va-name> -p '{"metadata":{"finalizers":null}}' --type=merge
@@ -1064,6 +1136,10 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
      aliyun ecs DescribeSnapshots --RegionId <region> --DiskId <disk-id>
      ```
   2. **从快照创建新 PV**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
      ```bash
      # 使用 VolumeSnapshot 恢复
      cat <<EOF | kubectl apply -f -
@@ -1086,6 +1162,10 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
      EOF
      ```
   3. **验证恢复的数据**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
      ```bash
      # 创建临时 Pod 挂载恢复的 PVC
      kubectl run verify-restore --image=busybox --restart=Never -- sleep 3600
@@ -1106,6 +1186,10 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
 - **数据备份**: 操作前必须完成数据备份
 - **操作步骤**:
   1. **修改现有 PV 的 ReclaimPolicy**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
      ```bash
      # 将 Delete 改为 Retain（保护数据）
      kubectl patch pv <pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
@@ -1114,6 +1198,10 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
      kubectl get pv <pv-name> -o jsonpath='{.spec.persistentVolumeReclaimPolicy}'
      ```
   2. **处理 Released 状态的 PV**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
      ```bash
      # 方案1: 清除 claimRef 使 PV 可重新绑定
      kubectl patch pv <pv-name> --type json -p '[{"op": "remove", "path": "/spec/claimRef"}]'
@@ -1177,6 +1265,9 @@ kubectl get volumeattachment -o json | jq '.items[] | select(.spec.source.persis
 - [ ] 根因已明确记录并采取了预防措施
 
 ### 7.4 读写测试（建议执行）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # V5: 读写测试
@@ -1717,6 +1808,10 @@ echo -e "\n${GREEN}CSI 健康检查完成${NC}"
 
 ### A.3 修复后验证脚本 (verify-storage.sh)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 #!/bin/bash
 # =============================================================================
@@ -1928,6 +2023,9 @@ danger_operations:
 
 ### 通用验证步骤
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 确认 PVC 状态为 Bound
 kubectl get pvc <pvc> -n <ns>
@@ -1948,6 +2046,8 @@ kubectl get pods -n kube-system -l 'app in (csi-provisioner,ebs-csi-controller,d
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+
+```

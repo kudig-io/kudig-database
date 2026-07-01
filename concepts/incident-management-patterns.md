@@ -10,9 +10,10 @@ tags:
   - sre
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 related:
-  - "[[domain-09-reliability-engineering/index]]"
-  - "[[concepts/slo-error-budget-framework]]"
+  - "[[domain-19-landscape-references/98-merged-indexes/index.md|index]]"
+  - "[[concepts/slo-error-budget-framework.md|slo error budget framework]]"
 ---
 
 # 事件管理与复盘模式
@@ -86,6 +87,7 @@ spec:
           - "--label-selector=app={{workflow.parameters.app}}"
           - "--since=30m"
           - "--output=structured"
+
 ```
 
 #### 3. K8S 特有的 ICS 实践
@@ -310,19 +312,19 @@ route:
   receiver: default-slack
   routes:
     # SEV1 告警：立即通知 + 电话
-    - match:
-        severity: critical
+    - matchers:
+      - severity="critical"
       receiver: pagerduty-critical
       group_wait: 10s
       group_interval: 1m
     # SEV2 告警：仅 Slack
-    - match:
-        severity: warning
+    - matchers:
+      - severity="warning"
       receiver: slack-warning
       group_wait: 1m
     # 信息性告警：聚合后汇总
-    - match:
-        severity: info
+    - matchers:
+      - severity="info"
       receiver: slack-info
       group_interval: 30m
 ```
@@ -401,8 +403,8 @@ POST /api/v1/incidents/{id}/follow_ups
 
 3. **完成验证**：
    - P0 行动项需要 PR 链接或配置变更记录
-   - 关联的 Chaos 实验验证（参见 [[concepts/chaos-engineering-platforms]]）
-   - 关联的 SLO 指标改善（参见 [[concepts/slo-error-budget-framework]]）
+   - 关联的 Chaos 实验验证（参见 [[concepts/chaos-engineering-platforms.md|chaos engineering platforms]]）
+   - 关联的 SLO 指标改善（参见 [[concepts/slo-error-budget-framework.md|slo error budget framework]]）
 
 4. **度量与回顾**：
    - 追踪行动项完成率（Open → Done 比率）
@@ -477,9 +479,9 @@ jobs:
 
 ## 7. 相关资源
 
-- [[domain-09-reliability-engineering/index]] — 可靠性工程领域总览
-- [[concepts/slo-error-budget-framework]] — SLO 与 Error Budget 框架
-- [[concepts/chaos-engineering-platforms]] — 混沌工程平台对比
+- [[domain-19-landscape-references/98-merged-indexes/index.md|index]] — 可靠性工程领域总览
+- [[concepts/slo-error-budget-framework.md|slo error budget framework]] — SLO 与 Error Budget 框架
+- [[concepts/chaos-engineering-platforms.md|chaos engineering platforms]] — 混沌工程平台对比
 - [Google SRE Book - Postmortem Culture](https://sre.google/sre-book/postmortem-culture/)
 - [PagerDuty Incident Response](https://response.pagerduty.com/)
 - [Rootly Documentation](https://rootly.com/docs)
@@ -488,6 +490,8 @@ jobs:
 
 ## Related
 
-- [[concepts/slo-error-budget-framework]] — SLO 与 Error Budget 框架
-- [[concepts/chaos-engineering-platforms]] — 混沌工程平台
-- [[concepts/k8s-observability-stack]] — K8S 可观测性技术栈
+- [[concepts/slo-error-budget-framework.md|slo error budget framework]] — SLO 与 Error Budget 框架
+- [[concepts/chaos-engineering-platforms.md|chaos engineering platforms]] — 混沌工程平台
+- [[concepts/k8s-observability-stack.md|k8s observability stack]] — K8S 可观测性技术栈
+
+```

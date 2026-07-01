@@ -52,7 +52,7 @@ created: "2026-05-23"
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -68,10 +68,10 @@ created: "2026-05-23"
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
-- [[entities/argocd|argocd]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/argocd.md|argocd]]
 - [[deployment]]
-- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]
 
 ## Related
@@ -83,7 +83,7 @@ created: "2026-05-23"
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - litmus
-- [[references/k8s-observability-ecosystem|可观测性体系：指标、日志、链路追踪与混沌工程]] — Cross-reference
-- [[references/operations-terms|K8s 运维运营术语参考]] — Cross-reference
-- [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/k8s-observability-ecosystem.md|可观测性体系：指标、日志、链路追踪与混沌工程]] — Cross-reference
+- [[entities/operations-terms.md|K8s 运维运营术语参考]] — Cross-reference
+- [[entities/cncf-infrastructure.md|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

@@ -37,6 +37,7 @@ prerequisites:
 - etcd-basics
 - tls-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 多集群网络互联（Cluster Mesh）
@@ -203,4 +204,4 @@ cilium connectivity test --multi-cluster
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]

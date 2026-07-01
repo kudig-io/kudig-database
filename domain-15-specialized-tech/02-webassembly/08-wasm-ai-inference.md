@@ -60,7 +60,7 @@ created: "2026-05-23"
 
 1. [Wasm AI 推理架构概述](#1-wasm-ai-推理架构概述)
 2. [WASI-NN 标准接口](#2-wasi-nn-标准接口)
-3. [[entities/wasmedge|WasmEdge]] WASI-NN 实践](#3-wasmedge-wasi-nn-实践)
+3. [[entities/wasmedge.md|WasmEdge]] WASI-NN 实践](#3-wasmedge-wasi-nn-实践)
 4. [ONNX Runtime Wasm](#4-onnx-runtime-wasm)
 5. [llama.cpp Wasm 移植](#5-llamacpp-wasm-移植)
 6. [模型优化与量化](#6-模型优化与量化)
@@ -69,7 +69,7 @@ created: "2026-05-23"
 9. [Python/JS AI 推理集成](#9-pythonjs-ai-推理集成)
 10. [多模型服务架构](#10-多模型服务架构)
 11. [性能基准与对比](#11-性能基准与对比)
-12. [[entities/kubernetes|Kubernetes]] AI 推理集成](#12-kubernetes-ai-推理集成)
+12. [[entities/kubernetes.md|Kubernetes]] AI 推理集成](#12-kubernetes-ai-推理集成)
 13. [实战案例：图像分类服务](#13-实战案例图像分类服务)
 14. [实战案例：LLM 推理服务](#14-实战案例llm-推理服务)
 
@@ -77,7 +77,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. Wasm AI 推理架构概述 -->## 1. Wasm AI 推理架构概述
 
-#<!-- chunk: 1.1 为什么选择 Wasm 进行 AI 推理 -->## 1.1 为什么选择 Wasm 进行 AI 推理
+## 1.1 为什么选择 Wasm 进行 AI 推理
 
 ```mermaid
 graph TB
@@ -102,7 +102,7 @@ graph TB
     WasmAI --> CPU_GPU
 ```
 
-#<!-- chunk: 1.2 Wasm AI 推理生态全景 -->## 1.2 Wasm AI 推理生态全景
+## 1.2 Wasm AI 推理生态全景
 
 ```mermaid
 graph LR
@@ -145,7 +145,7 @@ graph LR
     Candle --> K8s
 ```
 
-#<!-- chunk: 1.3 关键技术指标 -->## 1.3 关键技术指标
+## 1.3 关键技术指标
 
 ```
 Wasm AI 推理性能指标（2025年）：
@@ -168,7 +168,7 @@ Wasm AI 推理性能指标（2025年）：
 
 <!-- chunk: 2. WASI-NN 标准接口 -->## 2. WASI-NN 标准接口
 
-#<!-- chunk: 2.1 WASI-NN 接口定义 -->## 2.1 WASI-NN 接口定义
+## 2.1 WASI-NN 接口定义
 
 WASI-NN（WebAssembly System Interface for Neural Networks）是标准化的 AI 推理接口：
 
@@ -253,7 +253,7 @@ interface tensor {
 }
 ```
 
-#<!-- chunk: 2.2 WASI-NN 调用流程 -->## 2.2 WASI-NN 调用流程
+## 2.2 WASI-NN 调用流程
 
 ```mermaid
 sequenceDiagram
@@ -282,7 +282,7 @@ sequenceDiagram
     end
 ```
 
-#<!-- chunk: 2.3 WASI-NN 错误类型 -->## 2.3 WASI-NN 错误类型
+## 2.3 WASI-NN 错误类型
 
 ```rust
 // WASI-NN 错误处理
@@ -318,7 +318,7 @@ impl std::fmt::Display for NnErrno {
 
 <!-- chunk: 3. WasmEdge WASI-NN 实践 -->## 3. WasmEdge WASI-NN 实践
 
-#<!-- chunk: 3.1 WasmEdge 安装与配置 -->## 3.1 WasmEdge 安装与配置
+## 3.1 WasmEdge 安装与配置
 
 ```bash
 # 安装 WasmEdge（带 WASI-NN 支持）
@@ -338,7 +338,7 @@ source ~/.bashrc
 export WASMEDGE_PLUGIN_PATH=/usr/local/lib/wasmedge
 ```
 
-#<!-- chunk: 3.2 完整图像分类示例 -->## 3.2 完整图像分类示例
+## 3.2 完整图像分类示例
 
 ```rust
 // Cargo.toml
@@ -455,7 +455,7 @@ fn postprocess_classification(logits: &[f32]) -> Vec<(usize, f32)> {
 }
 ```
 
-#<!-- chunk: 3.3 运行配置 -->## 3.3 运行配置
+## 3.3 运行配置
 
 ```bash
 # 使用 WasmEdge 运行
@@ -477,7 +477,7 @@ for img in images/*.jpg; do
 done
 ```
 
-#<!-- chunk: 3.4 GGML 后端（LLM 推理） -->## 3.4 GGML 后端（LLM 推理）
+## 3.4 GGML 后端（LLM 推理）
 
 ```rust
 // 使用 WasmEdge GGML 后端运行 LLM
@@ -555,7 +555,7 @@ wasmedge \
 
 <!-- chunk: 4. ONNX Runtime Wasm -->## 4. ONNX Runtime Wasm
 
-#<!-- chunk: 4.1 在浏览器中使用 ONNX Runtime Web -->## 4.1 在浏览器中使用 ONNX Runtime Web
+## 4.1 在浏览器中使用 ONNX Runtime Web
 
 ```javascript
 // 浏览器端 ONNX 推理
@@ -686,7 +686,7 @@ async function main() {
 }
 ```
 
-#<!-- chunk: 4.2 Node.js ONNX 推理服务 -->## 4.2 Node.js ONNX 推理服务
+## 4.2 Node.js ONNX 推理服务
 
 ```javascript
 // onnx-inference-server.js
@@ -916,7 +916,7 @@ server.initialize().then(() => {
 
 <!-- chunk: 5. llama.cpp Wasm 移植 -->## 5. llama.cpp Wasm 移植
 
-#<!-- chunk: 5.1 llama.cpp.wasm 使用 -->## 5.1 llama.cpp.wasm 使用
+## 5.1 llama.cpp.wasm 使用
 
 ```bash
 # 安装 llama.cpp wasm 版本
@@ -1092,7 +1092,7 @@ What is WebAssembly and why is it important for cloud native?
 }
 ```
 
-#<!-- chunk: 5.2 WasmEdge + llama.cpp 服务端部署 -->## 5.2 WasmEdge + llama.cpp 服务端部署
+## 5.2 WasmEdge + llama.cpp 服务端部署
 
 ```bash
 # 使用 WasmEdge 运行 llama.cpp API 服务器
@@ -1126,7 +1126,7 @@ curl http://localhost:8080/v1/chat/completions \
 
 <!-- chunk: 6. 模型优化与量化 -->## 6. 模型优化与量化
 
-#<!-- chunk: 6.1 ONNX 模型优化流程 -->## 6.1 ONNX 模型优化流程
+## 6.1 ONNX 模型优化流程
 
 ```python
 # optimize_model.py - 模型优化工具
@@ -1282,7 +1282,7 @@ if __name__ == "__main__":
     benchmark_model(f"{model_name}_int8.onnx", [1, 3, 224, 224])
 ```
 
-#<!-- chunk: 6.2 GGUF 量化级别选择 -->## 6.2 GGUF 量化级别选择
+## 6.2 GGUF 量化级别选择
 
 ```
 GGUF 量化级别对比（以 LLaMA-3-8B 为例）：
@@ -1309,7 +1309,7 @@ Q2_K       2.9 GB    3.2 GB     3.0x      较大
 
 <!-- chunk: 7. 边缘 AI 推理部署 -->## 7. 边缘 AI 推理部署
 
-#<!-- chunk: 7.1 [[KubeEdge|KubeEdge]] + Wasm AI -->## 7.1 KubeEdge + Wasm AI
+## 7.1 KubeEdge + Wasm AI
 
 ```yaml
 # kubeEdge-wasm-ai.yaml
@@ -1395,7 +1395,7 @@ spec:
             path: /opt/edge/ai/output
 ```
 
-#<!-- chunk: 7.2 边缘 AI 推理代码 -->## 7.2 边缘 AI 推理代码
+## 7.2 边缘 AI 推理代码
 
 ```rust
 // edge-inference-server/src/main.rs
@@ -1538,7 +1538,7 @@ impl EdgeInferenceServer {
 
 <!-- chunk: 8. Rust AI 推理开发 -->## 8. Rust AI 推理开发
 
-#<!-- chunk: 8.1 使用 Candle 框架 -->## 8.1 使用 Candle 框架
+## 8.1 使用 Candle 框架
 
 ```rust
 // Cargo.toml
@@ -1688,7 +1688,7 @@ pub extern "C" fn compute_similarity(
 }
 ```
 
-#<!-- chunk: 8.2 使用 Tract 框架（轻量推理） -->## 8.2 使用 Tract 框架（轻量推理）
+## 8.2 使用 Tract 框架（轻量推理）
 
 ```rust
 // 使用 tract 进行轻量级推理（纯 Rust，适合 Wasm）
@@ -1806,7 +1806,7 @@ fn softmax_top_k(logits: &[f32], k: usize) -> Vec<(usize, f32)> {
 
 <!-- chunk: 9. Python/JS AI 推理集成 -->## 9. Python/JS AI 推理集成
 
-#<!-- chunk: 9.1 Python 调用 WasmEdge 推理 -->## 9.1 Python 调用 WasmEdge 推理
+## 9.1 Python 调用 WasmEdge 推理
 
 ```python
 # python_wasm_inference.py
@@ -1943,7 +1943,7 @@ class AIInferenceClient:
 
 <!-- chunk: 10. 多模型服务架构 -->## 10. 多模型服务架构
 
-#<!-- chunk: 10.1 模型服务调度器 -->## 10.1 模型服务调度器
+## 10.1 模型服务调度器
 
 ```mermaid
 graph TB
@@ -2067,7 +2067,7 @@ impl ModelServingSystem {
 
 <!-- chunk: 11. 性能基准与对比 -->## 11. 性能基准与对比
 
-#<!-- chunk: 11.1 详细性能基准测试 -->## 11.1 详细性能基准测试
+## 11.1 详细性能基准测试
 
 ```python
 # benchmark_wasm_inference.py
@@ -2224,7 +2224,7 @@ if __name__ == "__main__":
               f"P99={result['p99_ms']:.1f}ms, errors={result['errors']}")
 ```
 
-#<!-- chunk: 11.2 Wasm vs 原生对比 -->## 11.2 Wasm vs 原生对比
+## 11.2 Wasm vs 原生对比
 
 ```
 AI 推理性能对比（Apple M2 MacBook Pro）：
@@ -2259,7 +2259,7 @@ WasmEdge WASI-NN         30ms   55ms   33/s     200MB   25MB
 
 <!-- chunk: 12. Kubernetes AI 推理集成 -->## 12. Kubernetes AI 推理集成
 
-#<!-- chunk: 12.1 Kubernetes 推理服务部署 -->## 12.1 Kubernetes 推理服务部署
+## 12.1 Kubernetes 推理服务部署
 
 ```yaml
 # k8s-ai-inference.yaml
@@ -2427,7 +2427,7 @@ spec:
 
 <!-- chunk: 13. 实战案例：图像分类服务 -->## 13. 实战案例：图像分类服务
 
-#<!-- chunk: 13.1 完整图像分类服务 -->## 13.1 完整图像分类服务
+## 13.1 完整图像分类服务
 
 ```rust
 // complete-image-classifier/src/main.rs
@@ -2608,7 +2608,7 @@ fn softmax_top_k(logits: &[f32], k: usize) -> Vec<(usize, f32)> {
 
 <!-- chunk: 14. 实战案例：LLM 推理服务 -->## 14. 实战案例：LLM 推理服务
 
-#<!-- chunk: 14.1 OpenAI 兼容 LLM API -->## 14.1 OpenAI 兼容 LLM API
+## 14.1 OpenAI 兼容 LLM API
 
 ```rust
 // llm-service/src/main.rs - OpenAI 兼容 API
@@ -2851,7 +2851,7 @@ Wasm AI 推理通过 **WASI-NN** 标准接口实现了跨平台、安全的 AI �
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
+- [[domain-15-specialized-tech/README.md|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
 - Domain-38 WebAssembly 云原生 — 开源项目索引
 - WebAssembly 云原生基础
 - containerd Wasm 运行时

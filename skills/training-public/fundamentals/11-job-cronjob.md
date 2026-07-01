@@ -146,6 +146,9 @@ CronJob = 周期性的定时任务
 
 ### 2.1 基本 Job 配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 【YAML 示例】
 
@@ -362,6 +365,9 @@ spec:
 
 ### 4.1 Job 失败排查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 【排查步骤】
 
@@ -484,6 +490,10 @@ kubectl describe cronjob <name>
 
 ### 5.2 用户问：任务执行失败怎么重试？
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 【回复】
 
@@ -530,6 +540,10 @@ kubectl logs <pod-name>
 ---
 
 ## 6. 总结
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
 【命令速查】

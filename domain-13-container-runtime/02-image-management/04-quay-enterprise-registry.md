@@ -59,7 +59,7 @@ Quay Container Registry is an enterprise container image registry developed by R
 
 <!-- chunk: 架构设计 (Architecture Design) -->## 架构设计 (Architecture Design)
 
-#<!-- chunk: Quay 企业级架构 (Enterprise Quay Architecture) -->## Quay 企业级架构 (Enterprise Quay Architecture)
+## Quay 企业级架构 (Enterprise Quay Architecture)
 
 ```yaml
 # Quay 集群部署配置
@@ -123,7 +123,7 @@ quay_enterprise:
         timeout: "5s"
 ```
 
-#<!-- chunk: 架构图 (Architecture Diagram) -->## 架构图 (Architecture Diagram)
+## 架构图 (Architecture Diagram)
 
 ```mermaid
 graph TB
@@ -193,7 +193,7 @@ graph TB
 
 <!-- chunk: 核心功能配置 (Core Functionality Configuration) -->## 核心功能配置 (Core Functionality Configuration)
 
-#<!-- chunk: 镜像仓库配置 (Registry Configuration) -->## 镜像仓库配置 (Registry Configuration)
+## 镜像仓库配置 (Registry Configuration)
 
 ```yaml
 # Quay 核心配置
@@ -249,7 +249,7 @@ quay_configuration:
     scan_on_push: true
 ```
 
-#<!-- chunk: 组织和仓库配置 (Organization and Repository Configuration) -->## 组织和仓库配置 (Organization and Repository Configuration)
+## 组织和仓库配置 (Organization and Repository Configuration)
 
 ```json
 {
@@ -346,7 +346,7 @@ quay_configuration:
 
 <!-- chunk: 安全特性 (Security Features) -->## 安全特性 (Security Features)
 
-#<!-- chunk: 镜像签名和验证 (Image Signing and Verification) -->## 镜像签名和验证 (Image Signing and Verification)
+## 镜像签名和验证 (Image Signing and Verification)
 
 ```yaml
 # 镜像签名配置
@@ -383,7 +383,7 @@ image_signing:
           - "notary-ca.crt"
 ```
 
-#<!-- chunk: 漏洞扫描配置 (Vulnerability Scanning Configuration) -->## 漏洞扫描配置 (Vulnerability Scanning Configuration)
+## 漏洞扫描配置 (Vulnerability Scanning Configuration)
 
 ```json
 {
@@ -453,7 +453,7 @@ image_signing:
 }
 ```
 
-#<!-- chunk: 访问控制配置 (Access Control Configuration) -->## 访问控制配置 (Access Control Configuration)
+## 访问控制配置 (Access Control Configuration)
 
 ```yaml
 # 访问控制和权限管理
@@ -523,7 +523,7 @@ access_control:
 
 <!-- chunk: CI/CD 集成 (CI/CD Integration) -->## CI/CD 集成 (CI/CD Integration)
 
-#<!-- chunk: Jenkins 集成配置 (Jenkins Integration Configuration) -->## Jenkins 集成配置 (Jenkins Integration Configuration)
+## Jenkins 集成配置 (Jenkins Integration Configuration)
 
 ```groovy
 // Jenkins Pipeline 集成脚本
@@ -616,7 +616,7 @@ pipeline {
 }
 ```
 
-#<!-- chunk: GitLab CI 集成配置 (GitLab CI Integration Configuration) -->## GitLab CI 集成配置 (GitLab CI Integration Configuration)
+## GitLab CI 集成配置 (GitLab CI Integration Configuration)
 
 ```yaml
 # .gitlab-ci.yml - GitLab CI 集成配置
@@ -691,7 +691,7 @@ deploy_to_production:
 
 <!-- chunk: 监控和告警 (Monitoring and Alerting) -->## 监控和告警 (Monitoring and Alerting)
 
-#<!-- chunk: [[Prometheus|Prometheus]] 监控配置 (Prometheus Monitoring Configuration) -->## Prometheus 监控配置 (Prometheus Monitoring Configuration)
+## Prometheus 监控配置 (Prometheus Monitoring Configuration)
 
 ```yaml
 # Prometheus 监控配置
@@ -748,7 +748,7 @@ key_metrics:
     type: "gauge"
 ```
 
-#<!-- chunk: 告警规则配置 (Alert Rules Configuration) -->## 告警规则配置 (Alert Rules Configuration)
+## 告警规则配置 (Alert Rules Configuration)
 
 ```yaml
 # Prometheus 告警规则
@@ -813,7 +813,7 @@ alert_rules:
 
 <!-- chunk: 运维管理 (Operational Management) -->## 运维管理 (Operational Management)
 
-#<!-- chunk: 日常维护脚本 (Daily Maintenance Scripts) -->## 日常维护脚本 (Daily Maintenance Scripts)
+## 日常维护脚本 (Daily Maintenance Scripts)
 
 ```bash
 #!/bin/bash
@@ -954,7 +954,7 @@ main
 
 <!-- chunk: 最佳实践 (Best Practices) -->## 最佳实践 (Best Practices)
 
-#<!-- chunk: 镜像管理最佳实践 (Image Management Best Practices) -->## 镜像管理最佳实践 (Image Management Best Practices)
+## 镜像管理最佳实践 (Image Management Best Practices)
 
 1. **镜像标签策略**
    ```yaml
@@ -1002,7 +1002,7 @@ main
        readers: ["auditors", "qa-team"]
    ```
 
-#<!-- chunk: 运维最佳实践 (Operations Best Practices) -->## 运维最佳实践 (Operations Best Practices)
+## 运维最佳实践 (Operations Best Practices)
 
 1. **高可用部署**
    ```yaml
@@ -1054,7 +1054,7 @@ main
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-22-container-image-management KUDIG Database — Global MOC
-- [[domain-13-container-runtime/README|Domain 22: 容器镜像管理 (Container Image Management)]]
+- [[domain-13-container-runtime/README.md|Domain 13: 容器镜像管理 (Container Image Management)]]
 - Domain-22 容器镜像管理 — 开源项目索引
 - Harbor企业级容器镜像仓库深度实践
 - Docker Registry企业级镜像分发深度实践

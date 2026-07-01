@@ -120,7 +120,7 @@ K8s FinOps 生命周期
   趋势分析             spot/预留           策略执行
 ```
 
-#<!-- chunk: K8s 成本构成 -->## K8s 成本构成
+## K8s 成本构成
 
 | 成本项 | 占比典型 | 优化手段 |
 |:---|:---|:---|
@@ -134,7 +134,10 @@ K8s FinOps 生命周期
 
 <!-- chunk: 二、OpenCost 部署 (CNCF 项目) -->## 二、OpenCost 部署 (CNCF 项目)
 
-#<!-- chunk: 2.1 Helm 安装 -->## 2.1 Helm 安装
+## 2.1 Helm 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add opencost https://opencost.github.io/opencost-helm-chart
@@ -146,7 +149,7 @@ helm install opencost opencost/opencost \
   --set opencost.exporter.defaultClusterId="production"
 ```
 
-#<!-- chunk: 2.2 对接现有 Prometheus -->## 2.2 对接现有 Prometheus
+## 2.2 对接现有 Prometheus
 
 ```yaml
 # values-opencost.yaml
@@ -188,7 +191,7 @@ opencost:
             - /
 ```
 
-#<!-- chunk: 2.3 关键指标 -->## 2.3 关键指标
+## 2.3 关键指标
 
 | 指标 | PromQL | 用途 |
 |:---|:---|:---|
@@ -200,7 +203,10 @@ opencost:
 
 <!-- chunk: 三、Kubecost 企业版功能 -->## 三、Kubecost 企业版功能
 
-#<!-- chunk: 3.1 安装 -->## 3.1 安装
+## 3.1 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add kubecost https://kubecost.github.io/cost-analyzer/
@@ -215,7 +221,7 @@ helm install kubecost kubecost/cost-analyzer \
   --set ingress.hosts=["kubecost.example.com"]
 ```
 
-#<!-- chunk: 3.2 企业级功能对比 -->## 3.2 企业级功能对比
+## 3.2 企业级功能对比
 
 | 功能 | OpenCost (开源) | Kubecost (免费) | Kubecost Enterprise |
 |:---|:---|:---|:---|
@@ -233,7 +239,7 @@ helm install kubecost kubecost/cost-analyzer \
 
 <!-- chunk: 四、Infracost IaC 成本预估 -->## 四、Infracost IaC 成本预估
 
-#<!-- chunk: 4.1 安装 -->## 4.1 安装
+## 4.1 安装
 
 ```bash
 # 安装 CLI
@@ -244,7 +250,7 @@ infracost auth login
 infracost configure set api_key <YOUR_API_KEY>
 ```
 
-#<!-- chunk: 4.2 Terraform 成本预估 -->## 4.2 Terraform 成本预估
+## 4.2 Terraform 成本预估
 
 ```bash
 # 在 Terraform 目录中运行
@@ -263,7 +269,7 @@ infracost breakdown --path .
 #  OVERALL TOTAL                                                                           $650.40
 ```
 
-#<!-- chunk: 4.3 CI/CD 集成 -->## 4.3 CI/CD 集成
+## 4.3 CI/CD 集成
 
 ```yaml
 # .github/workflows/infracost.yml
@@ -295,7 +301,7 @@ jobs:
 
 <!-- chunk: 五、成本分摊与多租户计费 -->## 五、成本分摊与多租户计费
 
-#<!-- chunk: 5.1 标签策略 -->## 5.1 标签策略
+## 5.1 标签策略
 
 ```yaml
 # 强制成本标签 (通过 Kyverno/OPA)
@@ -308,7 +314,7 @@ metadata:
     owner: "team-platform"       # 负责人
 ```
 
-#<!-- chunk: 5.2 Kubecost 分摊配置 -->## 5.2 Kubecost 分摊配置
+## 5.2 Kubecost 分摊配置
 
 ```yaml
 # values-kubecost.yaml
@@ -338,7 +344,10 @@ kubecostProductConfigs:
 
 <!-- chunk: 六、资源优化与自动缩放 -->## 六、资源优化与自动缩放
 
-#<!-- chunk: 6.1 VPA (Vertical Pod Autoscaler) + Goldilocks -->## 6.1 VPA (Vertical Pod Autoscaler) + Goldilocks
+## 6.1 VPA (Vertical Pod Autoscaler) + Goldilocks
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 安装 VPA
@@ -364,7 +373,7 @@ metadata:
     goldilocks.fairwinds.com/enabled: "true"
 ```
 
-#<!-- chunk: 6.2 成本感知 HPA -->## 6.2 成本感知 HPA
+## 6.2 成本感知 HPA
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -400,7 +409,7 @@ spec:
         periodSeconds: 15
 ```
 
-#<!-- chunk: 6.3 Spot 实例与 Karpenter -->## 6.3 Spot 实例与 Karpenter
+## 6.3 Spot 实例与 Karpenter
 
 ```yaml
 # Karpenter NodePool 优先使用 Spot
@@ -431,7 +440,7 @@ spec:
 
 <!-- chunk: 七、闲置资源检测与清理 -->## 七、闲置资源检测与清理
 
-#<!-- chunk: 7.1 检测清单 -->## 7.1 检测清单
+## 7.1 检测清单
 
 | 资源类型 | 检测条件 | 清理动作 |
 |:---|:---|:---|
@@ -442,7 +451,7 @@ spec:
 | 未使用 LoadBalancer | 无活跃连接 | 改为 ClusterIP |
 | 过度配置 PV | 使用率 < 20% | 缩减或迁移 |
 
-#<!-- chunk: 7.2 自动化清理工具 -->## 7.2 自动化清理工具
+## 7.2 自动化清理工具
 
 ```bash
 # kubectl-neat + 自定义脚本
@@ -460,7 +469,7 @@ kubectl get pvc --all-namespaces -o json | \
 
 <!-- chunk: 八、成本告警与治理 -->## 八、成本告警与治理
 
-#<!-- chunk: 8.1 Prometheus 告警规则 -->## 8.1 Prometheus 告警规则
+## 8.1 Prometheus 告警规则
 
 ```yaml
 - alert: NamespaceCostSpike
@@ -495,7 +504,7 @@ kubectl get pvc --all-namespaces -o json | \
     summary: "大量资源缺少成本标签"
 ```
 
-#<!-- chunk: 8.2 预算管控策略 -->## 8.2 预算管控策略
+## 8.2 预算管控策略
 
 ```yaml
 # Kubecost 预算告警
@@ -537,9 +546,9 @@ data:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -552,7 +561,7 @@ data:
 ## Related
 
 - 19-cloudnative-devops-architecture
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
 
 ## See Also
 
@@ -560,3 +569,5 @@ data:
 - 24-capacity-planning-forecasting
 - 99-greenops-sustainable-computing-guide
 - 99-karpenter-node-autoscaling-guide
+
+```

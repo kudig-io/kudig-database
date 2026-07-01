@@ -45,7 +45,7 @@ DevSpace 是一款开源的 Kubernetes 开发工具，旨在简化云原生应�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -64,7 +64,7 @@ DevSpace 是一款开源的 Kubernetes 开发工具，旨在简化云原生应�
 
 - [[deployment]]
 - [[pod-lifecycle]]
-- [[concepts/security-defense-depth|security-defense-depth]]
+- [[concepts/security-defense-depth.md|security-defense-depth]]
 
 ## Related
 
@@ -75,6 +75,6 @@ DevSpace 是一款开源的 Kubernetes 开发工具，旨在简化云原生应�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - devspace
-- [[entities/cncf-runtime|[[CNCF 容器运行时与工具链项目全景|CNCF 容器运行时与工具链项目全景]]]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-runtime.md|[[CNCF 容器运行时与工具链项目全景|CNCF 容器运行时与工具链项目全景]]]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

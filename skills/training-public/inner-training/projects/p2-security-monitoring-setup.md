@@ -36,7 +36,7 @@ difficulty: advanced
 intent_queries:
   - ACK RBAC RAM two-layer permission model
   - [[Prometheus|Prometheus]] monitoring|monitoring alerting]] configuration
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] audit log SLS integration
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] audit log SLS integration
   - ResourceQuota LimitRange configuration
   - Security hardening best practices
 trigger_keywords:
@@ -89,6 +89,9 @@ related_topics:
 ## 实施步骤
 
 ### Step 1: RBAC 权限配置 (40min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1.1 创建 Namespace 隔离
@@ -172,6 +175,9 @@ aliyun cs GET /clusters/<cluster_id>/grant_permissions
 
 ### Step 3: 监控体系搭建 (40min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 3.1 确认 ARMS Prometheus 已安装
 kubectl get pods -n arms-prom 2>/dev/null || kubectl get pods -n monitoring 2>/dev/null
@@ -247,6 +253,9 @@ aliyun cs GET /clusters/<cluster_id> | grep audit
 
 ### Step 5: 资源配额管理 (20min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 5.1 设置 Namespace 配额
 cat <<EOF | kubectl apply -f -
@@ -304,8 +313,12 @@ kubectl describe limitrange team-dev-limits -n team-dev
 
 ## 清理资源
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
-kubectl delete namespace team-dev team-ops
+kubectl delete namespace team-dev team-ops  # ⚠️ 不可逆：永久删除命名空间及全部资源
 kubectl delete clusterrole ops-readonly
 kubectl delete clusterrolebinding ops-binding
 ```

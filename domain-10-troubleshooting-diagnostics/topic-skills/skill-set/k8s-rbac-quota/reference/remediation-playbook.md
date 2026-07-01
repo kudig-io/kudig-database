@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-rbac-quota"
 created: "2026-05-22"
 updated: "2026-05-22"
+last_updated: 2026-05-22
 tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
@@ -48,6 +49,11 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 确认具体缺少哪个权限
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 编辑现有 Role 添加权限
   kubectl patch role <role-name> -n <namespace> --type='json' -p='
@@ -72,6 +78,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl auth can-i <verb> <resource> --as=system:serviceaccount:<ns>:<sa> -n <ns>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo role <role-name> -n <namespace>
   # 或手动恢复原始 Role YAML
@@ -86,6 +96,11 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 确认哪个资源已耗尽
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 增加配额
   kubectl patch resourcequota <quota-name> -n <namespace> --type='json' -p='
@@ -102,6 +117,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 预期: used < hard for all resources
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 恢复原始配额值
   kubectl patch resourcequota <quota-name> -n <namespace> --type='json' -p='
@@ -117,6 +136,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 预期: NotFound
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl create serviceaccount <sa-name> -n <namespace>
   ```
@@ -126,6 +149,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 预期: ServiceAccount 存在且已分配 token secret
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl delete serviceaccount <sa-name> -n <namespace>
   ```
@@ -139,6 +166,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl get clusterrolebinding | grep <sa-name>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # RoleBinding
   kubectl create rolebinding <binding-name> \
@@ -156,6 +187,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl auth can-i <verb> <resource> --as=system:serviceaccount:<ns>:<sa> -n <ns>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl delete rolebinding <binding-name> -n <namespace>
   kubectl delete clusterrolebinding <binding-name>
@@ -172,6 +207,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl describe networkpolicy <name> -n <namespace>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 允许 Pod 访问 Kubernetes API (tcp/443)
   cat <<EOF | kubectl apply -f -
@@ -212,6 +251,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
      kubectl get events -n <namespace> | grep -i "violated\|admission\|denied"
      ```
   2. **评估安全影响后调整**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
      ```bash
      # 为特定 namespace 放宽 PodSecurity（示例：从 restricted 到 baseline）
      kubectl label namespace <namespace> pod-security.kubernetes.io/enforce=baseline --overwrite
@@ -221,6 +264,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   - 确认放宽范围仅限于目标 namespace
   - 记录安全策略变更用于审计
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   kubectl label namespace <namespace> pod-security.kubernetes.io/enforce=restricted --overwrite
   ```

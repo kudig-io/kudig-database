@@ -38,7 +38,7 @@ title: Day 11: 风险点识别与防范
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - ACK [[entities/kubernetes|[[Kubernetes|kubernetes]]]] security risk assessment checklist
+  - ACK [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] security risk assessment checklist
   - Pod Securityod Security Standards]] PSS configuration
   - Kubernetes security baseline hardening
   - [[NetworkPolicy|NetworkPolicy]] zero trust security
@@ -222,6 +222,9 @@ default       my-app-svc    LoadBalancer   10.96.0.100   47.102.xx.xx   80:31234
 
 #### 2.1 为 Namespace 启用 PSS
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 kubectl label namespace default pod-security.kubernetes.io/enforce=baseline
 kubectl label namespace default pod-security.kubernetes.io/audit=baseline
@@ -235,6 +238,9 @@ kubectl get namespaces --show-labels | grep pod-security
 ```
 
 #### 2.2 测试: 创建特权 Pod (应该被拒绝)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > privileged-pod.yaml << 'EOF'
@@ -259,6 +265,9 @@ kubectl apply -f privileged-pod.yaml
 
 #### 2.3 测试: 创建符合 baseline 的 Pod
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 cat > safe-pod.yaml << 'EOF'
 apiVersion: v1
@@ -282,6 +291,9 @@ kubectl apply -f safe-pod.yaml
 ```
 
 #### 2.4 测试: 创建符合 restricted 的 Pod
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > restricted-pod.yaml << 'EOF'
@@ -329,6 +341,9 @@ kubectl apply -f restricted-pod.yaml
 
 #### 3.1 限制 ServiceAccount Token 自动挂载
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch serviceaccount default -p '{"automountServiceAccountToken": false}'
 
@@ -337,6 +352,9 @@ kubectl get sa default -o yaml | grep automount
 ```
 
 #### 3.2 创建安全的 Deployment 模板
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > secure-deployment.yaml << 'EOF'
@@ -400,6 +418,9 @@ kubectl apply -f secure-deployment.yaml
 ```
 
 #### 3.3 配置 NetworkPolicy 限制流量
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > network-policy.yaml << 'EOF'
@@ -517,6 +538,9 @@ kubectl apply -f network-policy.yaml
 
 ### PSS 标签速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # enforce: 违反时拒绝创建
 kubectl label namespace <ns> pod-security.kubernetes.io/enforce=<level>
@@ -557,15 +581,14 @@ spec:
 ### Q1: PSS 和 PSP 有什么区别？
 
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 PSP (PodSecurityPolicy) 在 K8s 1.25 中已被移除，PSS (Pod Security Standards) 是其替代方案。PSS 通过 Namespace 标签实现，配置更简单，无需创建额外的 API 资源。
 
 ### Q2: 如何在不阻断业务的情况下启用 PSS？
 
 建议使用 `warn` 模式先观察哪些 Pod 不合规，修复后再切换到 `enforce` 模式:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 kubectl label namespace <ns> pod-security.kubernetes.io/warn=baseline
@@ -614,3 +637,5 @@ Day 12 将学习集群审计日志的配置与分析方法。
 - [RBAC 矩阵配置](../../domain-05-security-compliance/07-rbac-matrix-configuration.md)
 - [认证授权系统](../../domain-05-security-compliance/01-authentication-authorization-system.md)
 - [NetworkPolicy 实践](../../domain-6-networking/12-network-policy-practice.md)
+
+```

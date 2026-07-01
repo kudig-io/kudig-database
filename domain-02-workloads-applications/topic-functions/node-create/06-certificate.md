@@ -396,6 +396,9 @@ kubeadm token create --print-join-command
 
 当 kubelet 证书过期且 Bootstrap Token 也过期时：
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
 # 步骤 1: 创建新的 Bootstrap Token
 kubeadm token create
@@ -416,7 +419,7 @@ kubeadm join --token <new-token> \
   <api-server>:6443
 
 # 或者直接使用 kubeadm 重置
-kubeadm reset
+kubeadm reset  # ⚠️ 清理节点所有 K8s 配置
 kubeadm join ...
 ```
 
@@ -449,8 +452,8 @@ kubeadm join ...
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/operations/certificates|certificates]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/02-registration|02-registration]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/operations/certificates.md|certificates]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/02-registration.md|02-registration]]

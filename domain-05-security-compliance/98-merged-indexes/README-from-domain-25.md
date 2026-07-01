@@ -568,6 +568,9 @@ core_technology_stack:
 
 ### Day 1 安全加固命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 #!/bin/bash
 set -euo pipefail
@@ -642,6 +645,10 @@ echo "Review the warnings above and address them based on priority"
 ```
 
 ### Falco 快速部署与规则验证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -932,6 +939,6 @@ security_incident_response_flow:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/tls-pki|速查卡: tls-pki]]
+- [[domain-17-system-foundation/topic-cheat-sheet/tls-pki.md|速查卡: tls-pki]]
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

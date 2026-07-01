@@ -5,6 +5,7 @@ tags: ['scheduling', 'batch', 'hpc', 'visibility/public']
 sources: ["conceptss/"]
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 status: stub
 ---
 # Gang Scheduling
@@ -20,4 +21,4 @@ Gang Scheduling 是一种调度策略，确保一组关联的 Pod 能够同时�
 
 ## 相关链接
 
-- [[concepts/kubernetes|Kubernetes]] — 核心概念
+- [[concepts/kubernetes.md|Kubernetes]] — 核心概念

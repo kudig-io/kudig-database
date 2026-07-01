@@ -119,7 +119,7 @@ k8s_versions:
 
 <!-- chunk: 2. 镜像仓库迁移 -->## 2. 镜像仓库迁移
 
-#<!-- chunk: 2.1 同步策略 -->## 2.1 同步策略
+## 2.1 同步策略
 
 | 方案 | 适用场景 | 优势 | 劣势 |
 |------|---------|------|------|
@@ -128,7 +128,7 @@ k8s_versions:
 | **docker pull/tag/push** | 少量镜像 | 简单直接 | 效率低 |
 | **ACR 镜像加速器** | 保留原仓库 | 零迁移成本 | 依赖外部仓库可用性 |
 
-#<!-- chunk: 2.2 使用 skopeo 批量同步 -->## 2.2 使用 skopeo 批量同步
+## 2.2 使用 skopeo 批量同步
 
 ```bash
 #!/bin/bash
@@ -169,7 +169,11 @@ done < "$IMAGES_FILE"
 echo "镜像同步完成"
 ```
 
-#<!-- chunk: 2.3 ACK 配置 ImagePullSecret -->## 2.3 ACK 配置 ImagePullSecret
+## 2.3 ACK 配置 ImagePullSecret
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 创建 ACR 拉取凭证（每个业务 Namespace 都需要）
@@ -189,7 +193,7 @@ kubectl patch serviceaccount default \
 
 <!-- chunk: 3. 资源导出与清洗 -->## 3. 资源导出与清洗
 
-#<!-- chunk: 3.1 导出资源 -->## 3.1 导出资源
+## 3.1 导出资源
 
 ```bash
 #!/bin/bash
@@ -236,7 +240,7 @@ echo "=== 导出完成: $EXPORT_DIR ==="
 find $EXPORT_DIR -name "*.yaml" | wc -l
 ```
 
-#<!-- chunk: 3.2 YAML 清洗脚本 -->## 3.2 YAML 清洗脚本
+## 3.2 YAML 清洗脚本
 
 > 导出的 YAML 包含集群特有字段（uid、resourceVersion、creationTimestamp 等），必须清理后才能导入 ACK。
 
@@ -305,7 +309,7 @@ echo "清洗完成: $CLEAN_DIR"
 
 <!-- chunk: 4. ACK 特有适配 -->## 4. ACK 特有适配
 
-#<!-- chunk: 4.1 镜像地址替换 -->## 4.1 镜像地址替换
+## 4.1 镜像地址替换
 
 ```bash
 # 将自建 Harbor 地址替换为 ACR 地址
@@ -320,7 +324,7 @@ grep -rn "registry.cn-hangzhou" ./migration-clean/ | head -5
 # 预期: 显示替换后的镜像地址
 ```
 
-#<!-- chunk: 4.2 Service 注解适配 -->## 4.2 Service 注解适配
+## 4.2 Service 注解适配
 
 | 自建集群配置 | ACK 等效配置 | 说明 |
 |------------|------------|------|
@@ -370,7 +374,7 @@ spec:
     app: web
 ```
 
-#<!-- chunk: 4.3 Ingress 注解映射 -->## 4.3 Ingress 注解映射
+## 4.3 Ingress 注解映射
 
 | 自建 nginx-ingress 注解 | ACK nginx-ingress 注解 | 兼容性 |
 |------------------------|----------------------|--------|
@@ -388,6 +392,9 @@ spec:
 ---
 
 <!-- chunk: 5. Namespace 与 RBAC 迁移 -->## 5. Namespace 与 RBAC 迁移
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 创建命名空间
@@ -469,7 +476,7 @@ kubectl --context=ack-cluster get configmaps -A --no-headers | grep -v kube- | w
 kubectl --context=ack-cluster get secrets -A --no-headers | grep -v kube- | wc -l
 ```
 
-#<!-- chunk: 关键注意事项 -->## 关键注意事项
+## 关键注意事项
 
 ```
 Secret 迁移注意:
@@ -502,7 +509,7 @@ done
 kubectl --context=ack-cluster get deployments -A | grep -v kube-
 ```
 
-#<!-- chunk: 常见适配项 -->## 常见适配项
+## 常见适配项
 
 ```yaml
 # 适配项 1: nodeSelector / nodeAffinity
@@ -681,7 +688,7 @@ echo "======================================"
 
 <!-- chunk: 12. 迁移验证 -->## 12. 迁移验证
 
-#<!-- chunk: 12.1 自动化验证脚本 -->## 12.1 自动化验证脚本
+## 12.1 自动化验证脚本
 
 ```bash
 #!/bin/bash
@@ -710,7 +717,7 @@ echo "=== ACK 事件告警 ==="
 kubectl --context=$ACK_CONTEXT get events -A --field-selector type=Warning --sort-by=.lastTimestamp | tail -20
 ```
 
-#<!-- chunk: 12.2 检查清单 -->## 12.2 检查清单
+## 12.2 检查清单
 
 - [ ] 镜像已全部同步到 ACR，ACK Pod 可正常拉取
 - [ ] 所有 Namespace 已创建
@@ -733,16 +740,16 @@ kubectl --context=$ACK_CONTEXT get events -A --field-selector type=Warning --sor
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-migration MOC
-- [[domain-08-release-change-management/topic-migration/README|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
-- [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning|01 - 迁移评估与规划]]
-- [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design|02 - ACK 目标集群设计与搭建]]
-- [[domain-08-release-change-management/topic-migration/04-storage-data-migration|04 - 存储与数据迁移]]
-- [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover|05 - 网络迁移与流量切换]]
-- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration|06 - 有状态服务迁移]]
-- [[domain-08-release-change-management/topic-migration/07-observability-security-migration|07 - 可观测性与安全迁移]]
-- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission|08 - 验收、切换与旧集群退役]]
-- [[domain-08-release-change-management/topic-migration/09-migration-toolchain|09 - 迁移工具链参考]]
-- [[domain-08-release-change-management/topic-migration/10-real-world-case-study|10 - 生产迁移实战案例]]
+- [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
+- [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
+- [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
+- [[domain-08-release-change-management/topic-migration/04-storage-data-migration.md|04 - 存储与数据迁移]]
+- [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换]]
+- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration.md|06 - 有状态服务迁移]]
+- [[domain-08-release-change-management/topic-migration/07-observability-security-migration.md|07 - 可观测性与安全迁移]]
+- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission.md|08 - 验收、切换与旧集群退役]]
+- [[domain-08-release-change-management/topic-migration/09-migration-toolchain.md|09 - 迁移工具链参考]]
+- [[domain-08-release-change-management/topic-migration/10-real-world-case-study.md|10 - 生产迁移实战案例]]
 
 ## See Also
 
@@ -750,3 +757,5 @@ kubectl --context=$ACK_CONTEXT get events -A --field-selector type=Warning --sor
 - 02-ack-target-cluster-design
 - 04-storage-data-migration
 - 05-network-migration-traffic-cutover
+
+```

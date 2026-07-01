@@ -75,9 +75,9 @@ created: "2026-05-23"
 
 <!-- chunk: 性能监控指标体系 -->## 性能监控指标体系
 
-#<!-- chunk: 核心性能指标分类 -->## 核心性能指标分类
+## 核心性能指标分类
 
-##<!-- chunk: 容器级别指标 -->## 容器级别指标
+## 容器级别指标
 ```bash
 # CPU 使用率监控
 docker stats --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}\t{{.BlockIO}}"
@@ -90,7 +90,7 @@ docker stats --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.Net
 - 磁盘I/O (IOPS) - 读写操作次数
 - 文件描述符数量 - 连接数和资源句柄
 
-##<!-- chunk: 主机级别指标 -->## 主机级别指标
+## 主机级别指标
 ```bash
 # 系统资源监控
 top -b -n 1 | grep docker
@@ -105,23 +105,23 @@ free -h
 - 网络接口流量统计
 - 进程和线程数量
 
-##<!-- chunk: Docker Daemon 指标 -->## Docker Daemon 指标
+## Docker Daemon 指标
 ```bash
 # Docker 引擎状态检查
 curl --unix-socket /var/run/docker.sock http://localhost/info | jq '.'
 curl --unix-socket /var/run/docker.sock http://localhost/metrics
 ```
 
-#<!-- chunk: 企业级监控维度 -->## 企业级监控维度
+## 企业级监控维度
 
-##<!-- chunk: 业务性能指标 -->## 业务性能指标
+## 业务性能指标
 - 应用响应时间 (Response Time)
 - 吞吐量 (Throughput/QPS)
 - 错误率 (Error Rate)
 - 可用性 (Availability)
 - 用户体验指标 (如页面加载时间)
 
-##<!-- chunk: 资源效率指标 -->## 资源效率指标
+## 资源效率指标
 - 资源利用率 (Resource Utilization)
 - 成本效益比 (Cost Efficiency)
 - 资源浪费率 (Resource Waste)
@@ -129,9 +129,9 @@ curl --unix-socket /var/run/docker.sock http://localhost/metrics
 
 <!-- chunk: 监控工具与平台 -->## 监控工具与平台
 
-#<!-- chunk: 原生监控工具 -->## 原生监控工具
+## 原生监控工具
 
-##<!-- chunk: Docker Stats 命令 -->## Docker Stats 命令
+## Docker Stats 命令
 ```bash
 # 实时监控所有容器
 docker stats
@@ -146,7 +146,7 @@ docker stats --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}"
 docker stats --format json --no-stream
 ```
 
-##<!-- chunk: Docker Events 监控 -->## Docker Events 监控
+## Docker Events 监控
 ```bash
 # 实时事件监听
 docker events --filter type=container --filter event=start
@@ -158,9 +158,9 @@ docker events --since 1h --until 30m
 docker events --filter container=web-server
 ```
 
-#<!-- chunk: 第三方监控解决方案 -->## 第三方监控解决方案
+## 第三方监控解决方案
 
-##<!-- chunk: [[Prometheus|Prometheus]] + Grafana -->## Prometheus + Grafana
+## Prometheus + Grafana
 ```yaml
 # prometheus.yml 配置示例
 scrape_configs:
@@ -183,7 +183,7 @@ docker run \
   gcr.io/cadvisor/cadvisor:latest
 ```
 
-##<!-- chunk: ELK Stack 集成 -->## ELK Stack 集成
+## ELK Stack 集成
 ```yaml
 # docker-compose.yml for ELK
 version: '3.8'
@@ -210,7 +210,7 @@ services:
       - elasticsearch
 ```
 
-##<!-- chunk: Datadog 集成 -->## Datadog 集成
+## Datadog 集成
 ```bash
 # 安装 Datadog Agent
 docker run -d \
@@ -224,9 +224,9 @@ docker run -d \
   gcr.io/datadoghq/agent:7
 ```
 
-#<!-- chunk: 企业级监控平台架构 -->## 企业级监控平台架构
+## 企业级监控平台架构
 
-##<!-- chunk: 分层监控体系 -->## 分层监控体系
+## 分层监控体系
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   应用层监控    │    │   容器层监控    │    │   基础设施层    │
@@ -247,9 +247,9 @@ docker run -d \
 
 <!-- chunk: 资源使用分析 -->## 资源使用分析
 
-#<!-- chunk: CPU 性能分析 -->## CPU 性能分析
+## CPU 性能分析
 
-##<!-- chunk: CPU 使用模式识别 -->## CPU 使用模式识别
+## CPU 使用模式识别
 ```bash
 # 分析容器CPU使用详情
 docker exec container_name top -b -n 1
@@ -261,7 +261,7 @@ docker exec container_name ps aux --sort=-%cpu
 docker run --cpuset-cpus="0-3" --cpu-shares=1024 app:latest
 ```
 
-##<!-- chunk: CPU 性能瓶颈诊断 -->## CPU 性能瓶颈诊断
+## CPU 性能瓶颈诊断
 ```bash
 # 检查CPU饱和度
 sar -u 1 5
@@ -273,9 +273,9 @@ vmstat 1 5
 cat /proc/interrupts
 ```
 
-#<!-- chunk: 内存性能分析 -->## 内存性能分析
+## 内存性能分析
 
-##<!-- chunk: 内存使用模式 -->## 内存使用模式
+## 内存使用模式
 ```bash
 # 详细内存信息
 docker exec container_name free -h
@@ -288,7 +288,7 @@ docker exec container_name pmap -x $(pgrep main_process)
 docker inspect container_name | jq '.[].HostConfig.Memory'
 ```
 
-##<!-- chunk: 内存优化策略 -->## 内存优化策略
+## 内存优化策略
 ```bash
 # 设置内存限制
 docker run -m 512m --memory-swap 1g app:latest
@@ -300,9 +300,9 @@ docker run --memory-reservation 256m app:latest
 docker run --memory-swappiness=0 app:latest
 ```
 
-#<!-- chunk: I/O 性能分析 -->## I/O 性能分析
+## I/O 性能分析
 
-##<!-- chunk: 磁盘I/O监控 -->## 磁盘I/O监控
+## 磁盘I/O监控
 ```bash
 # I/O 统计信息
 docker exec container_name iostat -x 1 5
@@ -314,7 +314,7 @@ docker exec container_name df -h
 docker exec container_name iotop -ao
 ```
 
-##<!-- chunk: 网络I/O分析 -->## 网络I/O分析
+## 网络I/O分析
 ```bash
 # 网络连接统计
 docker exec container_name ss -tuln
@@ -328,9 +328,9 @@ docker exec container_name ping -c 10 target_host
 
 <!-- chunk: 性能调优策略 -->## 性能调优策略
 
-#<!-- chunk: 容器资源配置优化 -->## 容器资源配置优化
+## 容器资源配置优化
 
-##<!-- chunk: CPU 调优 -->## CPU 调优
+## CPU 调优
 ```bash
 # CPU 配额设置
 docker run --cpu-period=100000 --cpu-quota=50000 app:latest
@@ -342,7 +342,7 @@ docker update --cpu-shares=512 container_name
 docker run --cpuset-mems="0" app:latest
 ```
 
-##<!-- chunk: 内存调优 -->## 内存调优
+## 内存调优
 ```bash
 # 内存优化参数
 docker run \
@@ -356,7 +356,7 @@ docker run \
 echo madvise > /sys/kernel/mm/transparent_hugepage/enabled
 ```
 
-##<!-- chunk: 存储调优 -->## 存储调优
+## 存储调优
 ```bash
 # 存储驱动选择
 {
@@ -375,9 +375,13 @@ docker volume create \
   fast-cache
 ```
 
-#<!-- chunk: 网络性能调优 -->## 网络性能调优
+## 网络性能调优
 
-##<!-- chunk: 网络栈优化 -->## 网络栈优化
+## 网络栈优化
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
+
 ```bash
 # 网络参数调优
 sysctl -w net.core.rmem_max=134217728
@@ -394,9 +398,9 @@ docker network create \
   optimized-network
 ```
 
-#<!-- chunk: 应用层面优化 -->## 应用层面优化
+## 应用层面优化
 
-##<!-- chunk: JVM 参数调优 (Java应用示例) -->## JVM 参数调优 (Java应用示例)
+## JVM 参数调优 (Java应用示例)
 ```bash
 # 容器感知的JVM参数
 docker run \
@@ -411,7 +415,7 @@ docker run \
 -XX:+UseCGroupMemoryLimitForHeap
 ```
 
-##<!-- chunk: 数据库性能调优 -->## 数据库性能调优
+## 数据库性能调优
 ```bash
 # MySQL 容器优化
 docker run \
@@ -426,9 +430,9 @@ docker run \
 
 <!-- chunk: 容量规划方法 -->## 容量规划方法
 
-#<!-- chunk: 资源需求评估 -->## 资源需求评估
+## 资源需求评估
 
-##<!-- chunk: 历史数据分析 -->## 历史数据分析
+## 历史数据分析
 ```python
 # 资源使用趋势分析脚本
 import pandas as pd
@@ -451,7 +455,7 @@ model.fit(X, y)
 future_cpu = model.predict(len(cpu_trend) + 30)  # 预测30天后
 ```
 
-##<!-- chunk: 压力测试方法 -->## 压力测试方法
+## 压力测试方法
 ```bash
 # 使用 Apache Bench 进行压力测试
 ab -n 10000 -c 100 http://container-ip:port/
@@ -463,9 +467,9 @@ wrk -t12 -c400 -d30s http://container-ip:port/
 docker run --rm -i loadimpact/k6 run - <script.js
 ```
 
-#<!-- chunk: 容量计算模型 -->## 容量计算模型
+## 容量计算模型
 
-##<!-- chunk: 基础计算公式 -->## 基础计算公式
+## 基础计算公式
 ```
 所需节点数 = (总资源需求 + 安全边际) / 单节点容量
 
@@ -475,7 +479,7 @@ docker run --rm -i loadimpact/k6 run - <script.js
 - 单节点容量 = 节点总资源 × 可用资源比例
 ```
 
-##<!-- chunk: 实际案例计算 -->## 实际案例计算
+## 实际案例计算
 ```bash
 # 计算示例
 应用A: CPU 0.5核, 内存 1GB, 副本数 3
@@ -496,9 +500,9 @@ docker run --rm -i loadimpact/k6 run - <script.js
 
 <!-- chunk: 自动化性能管理 -->## 自动化性能管理
 
-#<!-- chunk: 动态资源调度 -->## 动态资源调度
+## 动态资源调度
 
-##<!-- chunk: [[Kubernetes|Kubernetes]] Horizontal Pod Autoscaler -->## Kubernetes Horizontal Pod Autoscaler
+## Kubernetes Horizontal Pod Autoscaler
 ```yaml
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -526,7 +530,7 @@ spec:
         averageUtilization: 80
 ```
 
-##<!-- chunk: 自定义指标扩缩容 -->## 自定义指标扩缩容
+## 自定义指标扩缩容
 ```yaml
 # 基于自定义指标的HPA
 apiVersion: autoscaling/v2
@@ -544,9 +548,9 @@ spec:
         averageValue: "100"
 ```
 
-#<!-- chunk: 智能资源分配 -->## 智能资源分配
+## 智能资源分配
 
-##<!-- chunk: 优先级和抢占机制 -->## 优先级和抢占机制
+## 优先级和抢占机制
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -573,9 +577,9 @@ globalDefault: false
 description: "High priority applications"
 ```
 
-#<!-- chunk: 自愈机制实现 -->## 自愈机制实现
+## 自愈机制实现
 
-##<!-- chunk: 健康检查和自动重启 -->## 健康检查和自动重启
+## 健康检查和自动重启
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -602,9 +606,9 @@ spec:
 
 <!-- chunk: 故障预测与预防 -->## 故障预测与预防
 
-#<!-- chunk: 异常检测算法 -->## 异常检测算法
+## 异常检测算法
 
-##<!-- chunk: 基于统计的方法 -->## 基于统计的方法
+## 基于统计的方法
 ```python
 # 使用3-sigma规则检测异常
 import numpy as np
@@ -622,7 +626,7 @@ cpu_data = get_cpu_metrics()  # 获取历史CPU数据
 anomaly_points = detect_anomalies(cpu_data)
 ```
 
-##<!-- chunk: 机器学习方法 -->## 机器学习方法
+## 机器学习方法
 ```python
 # 使用孤立森林算法检测异常
 from sklearn.ensemble import IsolationForest
@@ -641,9 +645,9 @@ def ml_anomaly_detection(metrics_df):
     return anomalies
 ```
 
-#<!-- chunk: 预防性维护策略 -->## 预防性维护策略
+## 预防性维护策略
 
-##<!-- chunk: 资源枯竭预警 -->## 资源枯竭预警
+## 资源枯竭预警
 ```bash
 #!/bin/bash
 # 资源预警脚本
@@ -669,7 +673,11 @@ while true; do
 done
 ```
 
-##<!-- chunk: 自动清理机制 -->## 自动清理机制
+## 自动清理机制
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+
 ```bash
 # Docker 自动清理脚本
 #!/bin/bash
@@ -681,13 +689,13 @@ docker container prune -f
 docker image prune -a -f
 
 # 清理未使用的卷
-docker volume prune -f
+docker volume prune -f  # ⚠️ 强制清理，可能杀运行中容器
 
 # 清理构建缓存
 docker builder prune -a -f
 
 # 清理系统空间
-docker system prune -a -f --volumes
+docker system prune -a -f --volumes  # ⚠️ 强制清理，可能杀运行中容器
 ```
 
 通过以上全面的性能监控和调优体系，可以确保 Docker 环境在生产环境中稳定高效运行，及时发现并解决性能瓶颈问题。
@@ -697,7 +705,7 @@ docker system prune -a -f --volumes
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-13-container-runtime KUDIG Database — Global MOC
-- [[domain-13-container-runtime/README|Docker 容器技术深度解析]]
+- [[domain-13-container-runtime/README.md|Docker 容器技术深度解析]]
 - Domain-13 Docker — 开源项目索引
 - Docker 架构概述与核心概念
 - Docker 镜像管理详解

@@ -547,6 +547,7 @@ User                API Server         Scheduler          kubelet            CSI
   for: 5m
   annotations:
     summary: "VolumeAttachment {{ $labels.volumeattachment }} 附着超时（>5分钟）"
+
 ```
 
 ---
@@ -741,6 +742,9 @@ groups:
 ```
 
 #### 2.2.5 自动化修复脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 #!/bin/bash
@@ -1020,6 +1024,10 @@ spec:
 ```
 
 3. **验证修复**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查 Socket 文件是否存在
 kubectl exec -n kube-system <csi-node-pod> -c node-driver-registrar -- \
@@ -1052,6 +1060,11 @@ kubectl run tmp --rm -it --image=<new-csi-image> -- \
 ```
 
 2. **优雅升级流程**（适用于有状态应用）：
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # Step 1: Cordon 节点，停止新 Pod 调度
 kubectl cordon node-1
@@ -1072,6 +1085,11 @@ kubectl uncordon node-1
 ```
 
 3. **强制清理残留挂载点**（风险操作！仅限紧急情况）：
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 在节点上执行（需 root 权限）
 # 1. 查找残留挂载点
@@ -1084,7 +1102,7 @@ umount -f -l /var/lib/kubelet/pods/<pod-uid>/volumes/kubernetes.io~csi/pv-abc123
 kubectl delete volumeattachment csi-<hash> --force --grace-period=0
 
 # 4. 清理 Pod
-kubectl delete pod <pod-name> -n <namespace> --force --grace-period=0
+kubectl delete pod <pod-name> -n <namespace> --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
 ---
@@ -1217,6 +1235,10 @@ kubectl logs -n kube-system csi-ebs-node-xxx -c node-driver-registrar
 ```
 
 **Step 3：检查节点的 kubelet 根目录**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 在问题节点上执行
 ps aux | grep kubelet | grep -o -- '--root-dir=[^ ]*'
@@ -1240,6 +1262,11 @@ kubectl exec -n kube-system csi-ebs-node-xxx -c ebs-plugin -- \
 #### 5.1.3 解决方案
 
 **立即缓解**（15 分钟）：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 为节点池 B 创建专用的 CSI Node DaemonSet
 kubectl apply -f - <<EOF
@@ -1403,6 +1430,7 @@ spec:
                 done
               fi
           restartPolicy: OnFailure
+
 ```
 
 **成果**：
@@ -1480,6 +1508,10 @@ kubectl logs -n kube-system csi-ebs-node-xxx -c ebs-plugin
 ```
 
 **Step 5：对比新旧版本差异**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看旧版本的挂载点格式
 kubectl exec -n kube-system <old-csi-pod> -- mount | grep pv-abc123
@@ -1500,6 +1532,11 @@ kubectl exec -n kube-system <new-csi-pod> -- mount | grep pv-abc123
 #### 5.2.3 解决方案
 
 **紧急止损**（手动清理，2 小时完成）：
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 #!/bin/bash
 # 脚本：cleanup-legacy-mounts.sh
@@ -1542,11 +1579,16 @@ while read pod ns node; do
   fi
   
   # 4. 强制删除 Pod
-  kubectl delete pod $pod -n $ns --force --grace-period=0
+  kubectl delete pod $pod -n $ns --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 done
 ```
 
 **彻底修复**（回滚 + 重新升级，6 小时完成）：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # Step 1: 回滚到 v1.10.0
 helm rollback aws-ebs-csi-driver
@@ -1727,6 +1769,10 @@ aws ec2 describe-snapshots \
 #### 5.3.3 解决方案
 
 **立即缓解**（手动同步后端状态，30 分钟）：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 #!/bin/bash
 # 脚本：sync-snapshot-status.sh
@@ -1925,6 +1971,10 @@ spec:
   ```
 
 - [ ] **云平台凭证有效**：CSI 驱动的 IAM/ServiceAccount 权限是否未过期？
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # AWS 示例
   kubectl exec -n kube-system <csi-controller> -c ebs-plugin -- \
@@ -2108,6 +2158,9 @@ done
 
 ### H. 常用诊断命令速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 快速查看 CSI 系统状态
 kubectl get csidriver,csinode,csistoragecapacity,volumeattachment -A
@@ -2172,16 +2225,18 @@ kubectl logs -n kube-system -l app=csi-controller --all-containers=true -f | \
 - 16-troubleshooting-guide
 - [[hot|hot]]
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting|05-storageclass-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting|01-pv-pvc-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting|03-snapshot-backup-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting|04-storage-performance-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting.md|05-storageclass-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md|01-pv-pvc-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting.md|03-snapshot-backup-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting.md|04-storage-performance-troubleshooting]]
+
+```

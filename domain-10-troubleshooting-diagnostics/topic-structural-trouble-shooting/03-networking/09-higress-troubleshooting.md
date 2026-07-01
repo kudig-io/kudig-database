@@ -105,6 +105,9 @@ k8s_versions:
 
 ## 10 分钟快速诊断
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 检查 Higress 系统组件状态
 kubectl get pods -n higress-system
@@ -171,6 +174,9 @@ kubectl exec -it <higress-gateway-pod> -c envoy -- curl localhost:15000/config_d
 
 **排查步骤**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Step 1: 检查 Ingress 配置
 kubectl get ingress <name> -n <namespace> -o yaml
@@ -207,6 +213,9 @@ kubectl exec -it <higress-gateway-pod> -c envoy -- \
 
 **排查步骤**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Step 1: 检查 Istiod 状态
 kubectl get pods -n istio-system
@@ -242,6 +251,9 @@ curl localhost:15000/config_dump?resource=dynamic_endpoints
 
 **排查步骤**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Step 1: 检查 McpBridge CR 状态
 kubectl get mcphbridge -A -o yaml
@@ -275,6 +287,9 @@ kubectl get svc <service> -n <namespace> --show-labels
 
 **排查步骤**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Step 1: 检查插件 OCI 镜像可访问性
 crictl images | grep <plugin-image>
@@ -306,6 +321,9 @@ kubectl exec -it <higress-gateway-pod> -c envoy -- \
 **现象**: HTTPS 请求返回 400 或握手失败
 
 **排查步骤**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # Step 1: 检查 TLS Secret
@@ -429,6 +447,7 @@ spec:
     phase: REQUEST
     config:
       key: value
+
 ```
 
 ---
@@ -451,19 +470,21 @@ spec:
 - [Higress 企业级网关实践](./domain-03-networking-traffic/04-higress-enterprise-gateway.md)
 - Higress FTA 故障树](./domain-10-troubleshooting-diagnostics/topic-fta/list/higress-fta.md)
 - [Higress 全局索引](./domain-19-landscape-references/topic-index/higress-index.md)
-- [Ingress 通用故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting|03-service-ingress-troubleshooting]].md)
+- [Ingress 通用故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
 - [[index|index]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting|07-terway-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting|08-flannel-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-nginx-ingress-troubleshooting|09-nginx-ingress-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting|01-cni-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-nginx-ingress-troubleshooting.md|09-nginx-ingress-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
+
+```

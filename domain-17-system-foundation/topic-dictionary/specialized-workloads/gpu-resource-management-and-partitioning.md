@@ -70,7 +70,7 @@ Kubernetes 通过 **Device Plugin** 框架将 GPU、TPU 等硬件资源以 `nvid
 
 ### 4. 动态资源分配（DRA）
 
-Kubernetes 1.26+ 引入的 **[[Dynamic Resource Allocation|Dynamic Resource Allocation]] (DRA)** 提供了比 Device Plugin 更灵活的资源模型。DRA 支持：
+Kubernetes 1.26+ 引入的 **[[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]] (DRA)** 提供了比 Device Plugin 更灵活的资源模型。DRA 支持：
 - 定义自定义资源分配语义
 - 多节点 NVLink Domain 抽象
 - 更细粒度的调度决策
@@ -117,4 +117,8 @@ Kubernetes 1.26+ 引入的 **[[Dynamic Resource Allocation|Dynamic Resource Allo
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/pod.md|Pod]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/container.md|Container]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/node.md|Node]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/namespace.md|Namespace]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/cluster.md|Cluster]]

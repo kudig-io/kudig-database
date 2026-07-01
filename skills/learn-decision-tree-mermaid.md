@@ -532,14 +532,14 @@ flowchart TD
 ---
 
 **关联文档**:
-- [../README.md](../[[references/kudig-metadata-index|README]]]].md) — 讲师完整台词设计
+- [../README.md](../[[entities/kudig-metadata-index.md|README]]]].md) — 讲师完整台词设计
 - [../oncall-qa/oncall-quick-qa.md](../oncall-qa/oncall-quick-qa.md) — On-Call 快速问答
 - [../../P1-4-decision-tree-mermaid-visualization.md](../../P1-4-decision-tree-mermaid-visualization.md) — 完整决策树库
 - [../../domain-10-troubleshooting-diagnostics/](../../domain-10-troubleshooting-diagnostics/) — 故障排查文档
 
 ## Related
 
-- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

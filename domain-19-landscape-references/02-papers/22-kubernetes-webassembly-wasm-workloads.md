@@ -126,7 +126,7 @@ WebAssembly（Wasm）正在从浏览器沙箱技术演变为云原生生态系�
 
 <!-- chunk: 1. Wasm 兴起背景 -->## 1. Wasm 兴起背景
 
-#<!-- chunk: 1.1 从浏览器到云原生 -->## 1.1 从浏览器到云原生
+## 1.1 从浏览器到云原生
 
 WebAssembly 最初作为浏览器内的安全沙箱执行环境设计，允许非 JavaScript 代码在浏览器中高性能运行。然而，Solomon Hykes（Docker 联合创始人）在 2019 年的那句名言已经成为现实："如果 Wasm+WASI 在 2008 年就存在，我们就不需要创建 Docker 了。"
 
@@ -137,7 +137,7 @@ WebAssembly 最初作为浏览器内的安全沙箱执行环境设计，允许�
 - **CNCF 生态繁荣**：SpinKube (CNCF Sandbox)、wasmCloud (CNCF Incubating) 均达到生产就绪状态
 - **主流运行时支持**：containerd 2.x 原生支持 Wasm shim，无需额外 patch
 
-#<!-- chunk: 1.2 Wasm vs 容器对比分析 -->## 1.2 Wasm vs 容器对比分析
+## 1.2 Wasm vs 容器对比分析
 
 | 对比维度 | 传统容器 (OCI) | WebAssembly (Wasm) | 说明 |
 |---------|--------------|-------------------|------|
@@ -154,7 +154,7 @@ WebAssembly 最初作为浏览器内的安全沙箱执行环境设计，允许�
 | **多租户密度** | 节点 100-1000 容器 | 节点 10000+ Wasm 实例 | Wasm 密度高 10-100x |
 | **运行时成熟度** | 非常成熟 | 快速成熟 (2026) | 容器生态仍占主导 |
 
-#<!-- chunk: 1.3 WASI 标准化进程 -->## 1.3 WASI 标准化进程
+## 1.3 WASI 标准化进程
 
 **WASI (WebAssembly System Interface)** 是连接 Wasm 模块与操作系统能力的标准接口层：
 
@@ -185,7 +185,7 @@ WASI 版本演进时间线：
 | `wasi:ml` | 🔄 Draft | 机器学习推理接口 |
 | `wasi:gpu` | 📋 Proposal | GPU 计算访问 |
 
-#<!-- chunk: 1.4 2026 Wasm 生态成熟度评估 -->## 1.4 2026 Wasm 生态成熟度评估
+## 1.4 2026 Wasm 生态成熟度评估
 
 ```
 生态成熟度雷达图 (2026)：
@@ -204,7 +204,7 @@ Kubernetes集成  ████████░░░░ 75%
 
 <!-- chunk: 2. Wasm 运行时与 containerd 集成 -->## 2. Wasm 运行时与 containerd 集成
 
-#<!-- chunk: 2.1 整体架构 -->## 2.1 整体架构
+## 2.1 整体架构
 
 ```mermaid
 graph TB
@@ -257,7 +257,7 @@ graph TB
     style WASMEDGE fill:#00ADD8,color:#fff
 ```
 
-#<!-- chunk: 2.2 RuntimeClass 配置 -->## 2.2 RuntimeClass 配置
+## 2.2 RuntimeClass 配置
 
 Kubernetes 通过 `RuntimeClass` 资源声明不同的容器运行时处理器：
 
@@ -298,7 +298,7 @@ scheduling:
     runtime.platform.sh/wasm: "true"
 ```
 
-#<!-- chunk: 2.3 containerd 配置 -->## 2.3 containerd 配置
+## 2.3 containerd 配置
 
 在工作节点上配置 containerd 以支持 Wasm shim：
 
@@ -338,7 +338,10 @@ version = 3
           BinaryName = "/usr/local/bin/containerd-shim-wasmedge-v2"
 ```
 
-#<!-- chunk: 2.4 节点标签与工作负载注解 -->## 2.4 节点标签与工作负载注解
+## 2.4 节点标签与工作负载注解
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 为 Wasm 节点打标签
@@ -373,7 +376,7 @@ spec:
         memory: "128Mi"
 ```
 
-#<!-- chunk: 2.5 Wasm OCI 镜像规范 -->## 2.5 Wasm OCI 镜像规范
+## 2.5 Wasm OCI 镜像规范
 
 Wasm 模块打包为 OCI 镜像遵循特定的媒体类型规范：
 
@@ -396,7 +399,7 @@ wasm-to-oci push app.wasm my-registry.io/app:latest \
 
 <!-- chunk: 3. SpinKube 实践 -->## 3. SpinKube 实践
 
-#<!-- chunk: 3.1 SpinKube 架构概览 -->## 3.1 SpinKube 架构概览
+## 3.1 SpinKube 架构概览
 
 SpinKube 是在 Kubernetes 上运行 Fermyon Spin 应用的官方 CNCF 项目（Sandbox 阶段）：
 
@@ -446,7 +449,11 @@ graph LR
     style KEDA fill:#326CE5,color:#fff
 ```
 
-#<!-- chunk: 3.2 安装 SpinKube -->## 3.2 安装 SpinKube
+## 3.2 安装 SpinKube
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 安装 cert-manager (前置依赖)
@@ -475,7 +482,7 @@ kubectl get spinapps -A
 kubectl get runtimeclass wasmtime-spin-v2
 ```
 
-#<!-- chunk: 3.3 SpinApp CRD 完整示例 -->## 3.3 SpinApp CRD 完整示例
+## 3.3 SpinApp CRD 完整示例
 
 ```yaml
 # spinapp-complete.yaml
@@ -573,7 +580,7 @@ spec:
   type: ClusterIP
 ```
 
-#<!-- chunk: 3.4 Rust Wasm 应用开发示例 -->## 3.4 Rust Wasm 应用开发示例
+## 3.4 Rust Wasm 应用开发示例
 
 ```rust
 // src/lib.rs - Spin HTTP 应用 (Rust)
@@ -666,7 +673,7 @@ log_level = { required = true }
 cache_ttl = { default = "300" }
 ```
 
-#<!-- chunk: 3.5 KEDA 事件驱动自动扩缩 -->## 3.5 KEDA 事件驱动自动扩缩
+## 3.5 KEDA 事件驱动自动扩缩
 
 ```yaml
 # SpinApp 配合 KEDA HTTP Add-on 实现 Scale-to-Zero
@@ -711,7 +718,7 @@ spec:
 
 <!-- chunk: 4. wasmCloud Operator -->## 4. wasmCloud Operator
 
-#<!-- chunk: 4.1 wasmCloud 架构哲学 -->## 4.1 wasmCloud 架构哲学
+## 4.1 wasmCloud 架构哲学
 
 wasmCloud（CNCF Incubating）采用与 SpinKube 不同的架构理念：**分布式 Actor 模型**。应用由独立的 Wasm 组件（Actor）和可替换的 Provider 组成，通过 NATS lattice 消息总线连接：
 
@@ -772,7 +779,7 @@ graph TB
     style A1 fill:#654FF0,color:#fff
 ```
 
-#<!-- chunk: 4.2 wasmCloud Operator 部署 -->## 4.2 wasmCloud Operator 部署
+## 4.2 wasmCloud Operator 部署
 
 ```yaml
 # wasmcloud-operator 安装 (Helm)
@@ -829,7 +836,7 @@ spec:
       level: info
 ```
 
-#<!-- chunk: 4.3 wasmCloud 应用部署 (WadmApplication) -->## 4.3 wasmCloud 应用部署 (WadmApplication)
+## 4.3 wasmCloud 应用部署 (WadmApplication)
 
 ```yaml
 # wadm-application.yaml - 使用 OAM 规范部署 wasmCloud 应用
@@ -914,7 +921,7 @@ spec:
         bucket: order-cache
 ```
 
-#<!-- chunk: 4.4 Actor 开发示例 (Rust + Component Model) -->## 4.4 Actor 开发示例 (Rust + Component Model)
+## 4.4 Actor 开发示例 (Rust + Component Model)
 
 ```rust
 // order-processor/src/lib.rs
@@ -973,7 +980,7 @@ fn process_order(req: &IncomingRequest) -> OutgoingResponse {
 
 <!-- chunk: 5. Wasm AI 推理 -->## 5. Wasm AI 推理
 
-#<!-- chunk: 5.1 WasmEdge + ONNX 推理架构 -->## 5.1 WasmEdge + ONNX 推理架构
+## 5.1 WasmEdge + ONNX 推理架构
 
 WasmEdge 专为 AI/ML 推理场景优化，提供 ONNX Runtime 和 llama.cpp 的 Wasm 绑定：
 
@@ -1007,7 +1014,7 @@ graph LR
     end
 ```
 
-#<!-- chunk: 5.2 部署 Wasm AI 推理服务 -->## 5.2 部署 Wasm AI 推理服务
+## 5.2 部署 Wasm AI 推理服务
 
 ```yaml
 # wasmedge-inference-deployment.yaml
@@ -1082,7 +1089,7 @@ spec:
         hardware/cpu-optimized: "true"
 ```
 
-#<!-- chunk: 5.3 Wasm vs 容器推理延迟对比 -->## 5.3 Wasm vs 容器推理延迟对比
+## 5.3 Wasm vs 容器推理延迟对比
 
 | 推理场景 | 传统容器 (Docker) | WasmEdge | 差异 |
 |---------|-----------------|---------|------|
@@ -1095,7 +1102,7 @@ spec:
 
 > 测试环境：8核 32GB 节点，Llama-3.2-3B Q4 模型，100个并发请求
 
-#<!-- chunk: 5.4 边缘 LLM 部署策略 -->## 5.4 边缘 LLM 部署策略
+## 5.4 边缘 LLM 部署策略
 
 ```yaml
 # 边缘节点 LLM 推理 (极低资源)
@@ -1143,7 +1150,7 @@ spec:
 
 <!-- chunk: 6. 冷启动优化 -->## 6. 冷启动优化
 
-#<!-- chunk: 6.1 AOT 编译优化 -->## 6.1 AOT 编译优化
+## 6.1 AOT 编译优化
 
 Ahead-of-Time (AOT) 编译将 Wasm 字节码预编译为原生机器码，消除 JIT 编译开销：
 
@@ -1177,7 +1184,7 @@ wasmedge --reactor app.so _start
 | 持续运行吞吐 | 基准 | +15% | 编译优化 |
 | 二进制大小 | 1x | 3-5x | 增大但可接受 |
 
-#<!-- chunk: 6.2 模块缓存策略 -->## 6.2 模块缓存策略
+## 6.2 模块缓存策略
 
 ```yaml
 # containerd Wasm 模块缓存配置
@@ -1206,7 +1213,7 @@ spec:
     aot_cache: "true"
 ```
 
-#<!-- chunk: 6.3 Pre-warming 策略 -->## 6.3 Pre-warming 策略
+## 6.3 Pre-warming 策略
 
 ```python
 # Wasm 模块预热脚本 (部署前执行)
@@ -1248,7 +1255,7 @@ for r in results:
 
 <!-- chunk: 7. 生产用例 -->## 7. 生产用例
 
-#<!-- chunk: 7.1 Shopify Wasm 插件架构 -->## 7.1 Shopify Wasm 插件架构
+## 7.1 Shopify Wasm 插件架构
 
 Shopify 将 Wasm 用于其商家扩展插件系统（Shopify Functions）：
 
@@ -1280,7 +1287,7 @@ Shopify Functions 架构：
 - 平均执行延迟：2.3ms
 - 相比 V8 容器：内存减少 95%，密度提升 50x
 
-#<!-- chunk: 7.2 Cloudflare Workers 参考架构 -->## 7.2 Cloudflare Workers 参考架构
+## 7.2 Cloudflare Workers 参考架构
 
 ```
 Cloudflare Workers (Wasm) 全球部署：
@@ -1302,7 +1309,7 @@ Cloudflare Workers (Wasm) 全球部署：
 └────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 7.3 企业级 Serverless 场景实践 -->## 7.3 企业级 Serverless 场景实践
+## 7.3 企业级 Serverless 场景实践
 
 ```yaml
 # 金融机构 Wasm Serverless 函数平台
@@ -1349,7 +1356,7 @@ spec:
 
 <!-- chunk: 8. Wasm vs Container 决策矩阵 -->## 8. Wasm vs Container 决策矩阵
 
-#<!-- chunk: 8.1 场景选择指南 -->## 8.1 场景选择指南
+## 8.1 场景选择指南
 
 | 场景特征 | 推荐技术 | 原因 |
 |---------|---------|------|
@@ -1366,7 +1373,7 @@ spec:
 | AI 推理 (轻量模型) | Wasm | WasmEdge WASI-NN 支持 |
 | 安全敏感多租户 | Wasm | 更强隔离沙箱 |
 
-#<!-- chunk: 8.2 互补架构设计 -->## 8.2 互补架构设计
+## 8.2 互补架构设计
 
 ```mermaid
 graph TB
@@ -1394,7 +1401,7 @@ graph TB
     style GPU_POD fill:#FF6B35,color:#fff
 ```
 
-#<!-- chunk: 8.3 Wasm 工作负载生产就绪检查清单 -->## 8.3 Wasm 工作负载生产就绪检查清单
+## 8.3 Wasm 工作负载生产就绪检查清单
 
 ```
 🔧 运行时配置
@@ -1438,7 +1445,7 @@ graph TB
 
 <!-- chunk: 9. 未来趋势 -->## 9. 未来趋势
 
-#<!-- chunk: 9.1 Component Model 成熟化 (2026-2027) -->## 9.1 Component Model 成熟化 (2026-2027)
+## 9.1 Component Model 成熟化 (2026-2027)
 
 WASM Component Model 是 Wasm 生态最重要的演进方向，它使不同语言编写的 Wasm 模块能够通过 WIT (Wasm Interface Types) 接口安全互操作：
 
@@ -1477,7 +1484,7 @@ world order-service {
 }
 ```
 
-#<!-- chunk: 9.2 WASI 0.3 关键特性 (2026 GA) -->## 9.2 WASI 0.3 关键特性 (2026 GA)
+## 9.2 WASI 0.3 关键特性 (2026 GA)
 
 **异步 I/O 支持（最重要变化）：**
 ```rust
@@ -1497,7 +1504,7 @@ async fn handle_request(req: IncomingRequest) -> OutgoingResponse {
 }
 ```
 
-#<!-- chunk: 9.3 跨领域关联 -->## 9.3 跨领域关联
+## 9.3 跨领域关联
 
 | 相关技术 | 关联点 | 参考文档 |
 |---------|-------|---------|
@@ -1507,7 +1514,7 @@ async fn handle_request(req: IncomingRequest) -> OutgoingResponse {
 | eBPF | eBPF + Wasm 组合实现可编程内核 | 文档 18: eBPF/Cilium |
 | 供应链安全 | Wasm 模块签名与 SBOM | 文档 20: 供应链安全 |
 
-#<!-- chunk: 9.4 2026-2028 Wasm 技术路线图 -->## 9.4 2026-2028 Wasm 技术路线图
+## 9.4 2026-2028 Wasm 技术路线图
 
 ```
 2026 Q1-Q2:
@@ -1533,7 +1540,7 @@ async fn handle_request(req: IncomingRequest) -> OutgoingResponse {
   🌟 AI Agent 原生 Wasm 运行时
 ```
 
-#<!-- chunk: 9.5 对 Kubernetes 生态的影响 -->## 9.5 对 Kubernetes 生态的影响
+## 9.5 对 Kubernetes 生态的影响
 
 WebAssembly 不会取代容器，而是成为 Kubernetes 生态的重要补充：
 
@@ -1565,7 +1572,7 @@ WebAssembly 不会取代容器，而是成为 Kubernetes 生态的重要补充�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -1586,4 +1593,4 @@ WebAssembly 不会取代容器，而是成为 Kubernetes 生态的重要补充�
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

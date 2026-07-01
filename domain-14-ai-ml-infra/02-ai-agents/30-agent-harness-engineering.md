@@ -104,7 +104,7 @@ k8s_versions:
 
 <!-- chunk: 1. 什么是 Agent Harness -->## 1. 什么是 Agent Harness
 
-#<!-- chunk: 1.1 核心定义 -->## 1.1 核心定义
+## 1.1 核心定义
 
 一句话：**包裹在 AI 模型外部的完整系统，将模型的原始认知能力转化为可靠的生产输出。**
 
@@ -122,7 +122,7 @@ Agent + Harness（完整系统）:
 
 **模型是引擎，Harness 是整辆车。**
 
-#<!-- chunk: 1.2 Harness vs 相关概念辨析 -->## 1.2 Harness vs 相关概念辨析
+## 1.2 Harness vs 相关概念辨析
 
 | 概念 | 范围 | 关注点 | 代表实践 |
 |------|------|--------|---------|
@@ -145,7 +145,7 @@ Agent + Harness（完整系统）:
   × "评估模型能力"      → ✓ "评估端到端系统表现"
 ```
 
-#<!-- chunk: 1.3 为什么 2026 年是 Harness Engineering 之年 -->## 1.3 为什么 2026 年是 Harness Engineering 之年
+## 1.3 为什么 2026 年是 Harness Engineering 之年
 
 三个汇聚条件：
 
@@ -181,7 +181,7 @@ Agent Harness 六层架构
 
 > 六层之间相互增强：Loop 驱动 Tools 执行，Tools 的输出经 Context 过滤后进入 Verification，Constraints 全程约束每一层的行为，Persistence 跨循环保持状态。
 
-#<!-- chunk: 2.1 Layer 1: Loop（循环层） -->## 2.1 Layer 1: Loop（循环层）
+## 2.1 Layer 1: Loop（循环层）
 
 Agent 的核心执行引擎。与传统"请求-响应"模式不同，Agent Loop 持续运行：观察 → 思考 → 行动 → 观察结果 → 继续或终止。
 
@@ -252,7 +252,7 @@ class AgentLoop:
 - **反漂移检测**：识别 Agent 陷入"反复编辑同一文件"等死循环
 - **轨迹记录**：每一步都记录，用于事后审计和评估
 
-#<!-- chunk: 2.2 Layer 2: Tools（工具层） -->## 2.2 Layer 2: Tools（工具层）
+## 2.2 Layer 2: Tools（工具层）
 
 工具让 Agent 从"只能说"变为"能做事"。但工具不是越多越好——**Vercel 将 15 个工具精简为 2 个，准确率从 80% 提升到 100%，速度提升 3.5x**。
 
@@ -316,7 +316,7 @@ class ToolRegistry:
 | **参数验证** | 调用前校验参数合法性 | 禁止空路径、非法命令 |
 | **错误恢复** | 工具失败时提供有意义的错误信息 | 返回具体原因而非 "Error" |
 
-#<!-- chunk: 2.3 Layer 3: Context（上下文层） -->## 2.3 Layer 3: Context（上下文层）
+## 2.3 Layer 3: Context（上下文层）
 
 上下文层决定 Agent 的"视野"——看到什么信息直接决定推理质量。
 
@@ -384,7 +384,7 @@ class ContextManager:
   ✗ 与任务无关的知识
 ```
 
-#<!-- chunk: 2.4 Layer 4: Persistence（持久化层） -->## 2.4 Layer 4: Persistence（持久化层）
+## 2.4 Layer 4: Persistence（持久化层）
 
 让 Agent 拥有"记忆"——跨会话保持状态和经验。
 
@@ -439,7 +439,7 @@ class PersistenceLayer:
         return []
 ```
 
-#<!-- chunk: 2.5 Layer 5: Verification（验证层） -->## 2.5 Layer 5: Verification（验证层）
+## 2.5 Layer 5: Verification（验证层）
 
 Agent 执行完毕后的自检——这是 Harness 区别于"裸 Agent"的关键层。
 
@@ -537,7 +537,7 @@ Agent 完成任务
   自我纠正（最多 N 轮）
 ```
 
-#<!-- chunk: 2.6 Layer 6: Constraints（约束层） -->## 2.6 Layer 6: Constraints（约束层）
+## 2.6 Layer 6: Constraints（约束层）
 
 约束是 Harness 最容易被忽视但最关键的层——它定义了 Agent **不能**做什么。
 
@@ -615,7 +615,7 @@ Vercel 的案例完美诠释了这一原则：将 15 个工具精简为 2 个后
 
 <!-- chunk: 3. Harness 设计模式 -->## 3. Harness 设计模式
 
-#<!-- chunk: 3.1 五大核心设计模式 -->## 3.1 五大核心设计模式
+## 3.1 五大核心设计模式
 
 | 模式 | 说明 | 适用场景 | 实证来源 |
 |------|------|---------|---------|
@@ -625,7 +625,7 @@ Vercel 的案例完美诠释了这一原则：将 15 个工具精简为 2 个后
 | **推理预算分配** | 规划和验证分配更多 Token，执行分配较少 | 复杂多步任务 | LangChain 实证 |
 | **反漂移检测** | 检测 Agent 反复编辑同一文件等死循环 | 长时运行 Agent | Anthropic 最佳实践 |
 
-#<!-- chunk: 3.2 SOUL.md 与 SKILL.md 分层设计 -->## 3.2 SOUL.md 与 SKILL.md 分层设计
+## 3.2 SOUL.md 与 SKILL.md 分层设计
 
 Agent Harness 的配置通常分为两层：
 
@@ -649,7 +649,7 @@ SOUL.md 定义"你是谁"和"你不能做什么"（Constraints），SKILL.md 定
 
 <!-- chunk: 4. 行业实证案例 -->## 4. 行业实证案例
 
-#<!-- chunk: 4.1 LangChain 编码 Agent（2026 年 2 月） -->## 4.1 LangChain 编码 Agent（2026 年 2 月）
+## 4.1 LangChain 编码 Agent（2026 年 2 月）
 
 **实验设置**：在行业标准编码基准上测试，**不更换任何模型**，仅修改 Harness。
 
@@ -663,7 +663,7 @@ SOUL.md 定义"你是谁"和"你不能做什么"（Constraints），SKILL.md 定
 
 **结果**：基准分从 52.8% 提升至 66.5%，排名从 Top 30 外跃升至 Top 5。**没有换模型，没有微调，纯 Harness 改进。**
 
-#<!-- chunk: 4.2 Vercel AI Agent -->## 4.2 Vercel AI Agent
+## 4.2 Vercel AI Agent
 
 | 改进 | 具体操作 | 量化效果 |
 |------|---------|---------|
@@ -673,7 +673,7 @@ SOUL.md 定义"你是谁"和"你不能做什么"（Constraints），SKILL.md 定
 
 **核心洞察**：约束不是限制，是赋能。更少的选择 = 更精准的决策。
 
-#<!-- chunk: 4.3 OpenAI Codex -->## 4.3 OpenAI Codex
+## 4.3 OpenAI Codex
 
 Codex 采用完整 Harness 设计，生成超过 100 万行生产代码，**零手动输入**。其 Harness 包含：
 - 沙箱化的代码执行环境（每次执行在隔离容器中）
@@ -681,7 +681,7 @@ Codex 采用完整 Harness 设计，生成超过 100 万行生产代码，**零�
 - 严格的文件权限约束（只能操作指定目录）
 - 自动回滚机制（测试失败自动 revert）
 
-#<!-- chunk: 4.4 GitHub Copilot Agent Mode -->## 4.4 GitHub Copilot Agent Mode
+## 4.4 GitHub Copilot Agent Mode
 
 Sean Goedecke（GitHub Copilot 核心工程师）的总结：
 
@@ -704,7 +704,7 @@ Copilot Agent Mode 相比普通 Copilot 的 Harness 差异：
 
 <!-- chunk: 5. Agent 基准测试全景（2025-2026） -->## 5. Agent 基准测试全景（2025-2026）
 
-#<!-- chunk: 5.1 基准测试分类 -->## 5.1 基准测试分类
+## 5.1 基准测试分类
 
 ```
 Agent 基准测试分类:
@@ -737,7 +737,7 @@ Agent 基准测试分类:
     └── InjectBench        提示注入抵抗测试
 ```
 
-#<!-- chunk: 5.2 核心基准测试详解 -->## 5.2 核心基准测试详解
+## 5.2 核心基准测试详解
 
 | 基准 | 任务类型 | 规模 | 顶级得分 | 人类基线 | Harness 敏感度 |
 |------|---------|------|---------|---------|--------------|
@@ -752,7 +752,7 @@ Agent 基准测试分类:
 
 > **Harness 敏感度**反映了同一模型在不同 Harness 下的成绩波动幅度。SWE-bench 和 WebArena 的 Harness 敏感度极高，意味着 Harness 设计的好坏对成绩影响巨大。
 
-#<!-- chunk: 5.3 自定义基准测试设计 -->## 5.3 自定义基准测试设计
+## 5.3 自定义基准测试设计
 
 为特定场景（如 K8S 运维）设计基准测试：
 
@@ -813,7 +813,7 @@ class K8sAgentBenchmark:
 
 <!-- chunk: 6. Harness 验证与质量门禁 -->## 6. Harness 验证与质量门禁
 
-#<!-- chunk: 6.1 评测指标体系 -->## 6.1 评测指标体系
+## 6.1 评测指标体系
 
 | 评测维度 | 指标 | 生产目标值 | 工具 |
 |---------|------|-----------|------|
@@ -825,7 +825,7 @@ class K8sAgentBenchmark:
 | **轨迹质量** | 工具选择准确率 / 推理连贯性 / 错误恢复 | > 0.85 / > 0.80 / > 0.70 | TrajectoryEvaluator |
 | **可观测性** | Trace 覆盖率 / 告警响应时间 | 100% / < 5min | Langfuse + OTel |
 
-#<!-- chunk: 6.2 CI/CD 质量门禁集成 -->## 6.2 CI/CD 质量门禁集成
+## 6.2 CI/CD 质量门禁集成
 
 Agent 的 Harness 变更（Prompt/Tools/Loop 逻辑）必须经过质量门禁验证：
 
@@ -928,7 +928,7 @@ def check_quality_gate(report_path: str, baseline_path: str = None,
         print("Harness Quality Gate PASSED ✓")
 ```
 
-#<!-- chunk: 6.3 A/B 测试与灰度评估 -->## 6.3 A/B 测试与灰度评估
+## 6.3 A/B 测试与灰度评估
 
 新 Harness 上线前的灰度策略：
 
@@ -954,7 +954,7 @@ Harness 灰度发布流程:
 
 <!-- chunk: 7. Harness 可观测性 -->## 7. Harness 可观测性
 
-#<!-- chunk: 7.1 OpenTelemetry for Agents -->## 7.1 OpenTelemetry for Agents
+## 7.1 OpenTelemetry for Agents
 
 ```python
 from opentelemetry import trace
@@ -1002,7 +1002,7 @@ class TracedHarness:
             return result
 ```
 
-#<!-- chunk: 7.2 Prometheus 指标体系 -->## 7.2 Prometheus 指标体系
+## 7.2 Prometheus 指标体系
 
 ```python
 from prometheus_client import Counter, Histogram, Gauge
@@ -1036,7 +1036,7 @@ harness_constraint_violations = Counter(
 )
 ```
 
-#<!-- chunk: 7.3 关键告警规则 -->## 7.3 关键告警规则
+## 7.3 关键告警规则
 
 ```yaml
 groups:
@@ -1074,7 +1074,7 @@ groups:
 
 <!-- chunk: 8. K8S 运维 Agent Harness 完整设计 -->## 8. K8S 运维 Agent Harness 完整设计
 
-#<!-- chunk: 8.1 工单诊断智能体 Harness 架构 -->## 8.1 工单诊断智能体 Harness 架构
+## 8.1 工单诊断智能体 Harness 架构
 
 ```
 K8S 工单诊断智能体 Harness 全景:
@@ -1101,7 +1101,7 @@ K8S 工单诊断智能体 Harness 全景:
 └─────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 8.2 K8S Harness 完整实现 -->## 8.2 K8S Harness 完整实现
+## 8.2 K8S Harness 完整实现
 
 ```python
 from dataclasses import dataclass
@@ -1208,7 +1208,7 @@ class K8sDiagnosisHarness:
 
 <!-- chunk: 9. 多 Agent Harness 编排 -->## 9. 多 Agent Harness 编排
 
-#<!-- chunk: 9.1 Harness 组合模式 -->## 9.1 Harness 组合模式
+## 9.1 Harness 组合模式
 
 单个 Agent 的 Harness 就绪后，下一步是**多 Agent 的 Harness 组合**。
 
@@ -1235,7 +1235,7 @@ class K8sDiagnosisHarness:
 - 修复 Agent 的 Harness 带**人工审批**（Constraints: require_approval=True）
 - 验证 Agent 的 Harness **独立运行**，不信任修复 Agent 的自述结果
 
-#<!-- chunk: 9.2 分层 Harness 设计 -->## 9.2 分层 Harness 设计
+## 9.2 分层 Harness 设计
 
 ```python
 class LayeredHarness:
@@ -1275,7 +1275,7 @@ class LayeredHarness:
 
 <!-- chunk: 10. 最佳实践与反模式 -->## 10. 最佳实践与反模式
 
-#<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
 
 | 实践 | 说明 | 对应层 |
 |------|------|-------|
@@ -1290,7 +1290,7 @@ class LayeredHarness:
 | **失败模式学习** | 跨运行分析失败模式，自动优化 Harness | Persistence |
 | **基线对比** | 每次变更与历史基线对比，防止回退 | Verification |
 
-#<!-- chunk: 反模式 -->## 反模式
+## 反模式
 
 | 反模式 | 问题 | 正确做法 |
 |--------|------|----------|
@@ -1377,17 +1377,17 @@ L5 - 自进化 Harness
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 

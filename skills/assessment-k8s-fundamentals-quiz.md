@@ -42,14 +42,14 @@ E. 创建新的 Deployment
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/Kubernetes Diagnostic Skills Overview|诊断技能总览]]
-- [[skills/troubleshoot-pod-issues|Pod 故障排查]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## Related
 
-- [[skills/assessment-troubleshooting-lab-exam|assessment-troubleshooting-lab-exam]] — Troubleshootingbleshooting Lab Exam]]
-- [[skills/skill-20-networkpolicy-connectivity|skill-20-networkpolicy-connectivity]] — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
+- [[skills/assessment-troubleshooting-lab-exam.md|assessment-troubleshooting-lab-exam]] — Troubleshootingbleshooting Lab Exam]]
+- [[skills/skill-20-networkpolicy-connectivity.md|skill-20-networkpolicy-connectivity]] — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 - [[deployment]] — Deployment
-- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

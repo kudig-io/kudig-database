@@ -115,7 +115,7 @@ k8s_versions:
 
 <!-- chunk: 1. IDP 设计哲学与核心价值观 -->## 1. IDP 设计哲学与核心价值观
 
-#<!-- chunk: 1.1 设计哲学宣言 -->## 1.1 设计哲学宣言
+## 1.1 设计哲学宣言
 
 **内部开发者平台的设计必须以开发者为中心**，而非以技术为中心。这意味着：
 
@@ -138,7 +138,7 @@ IDP 设计哲学 (Platform Design Philosophy)
   一次性大爆炸的发布方式
 ```
 
-#<!-- chunk: 1.2 十大 IDP 设计原则 -->## 1.2 十大 IDP 设计原则
+## 1.2 十大 IDP 设计原则
 
 ```mermaid
 mindmap
@@ -185,7 +185,7 @@ mindmap
       定期评审机制
 ```
 
-#<!-- chunk: 1.3 设计原则优先级排序 -->## 1.3 设计原则优先级排序
+## 1.3 设计原则优先级排序
 
 当设计原则发生冲突时，使用以下优先级：
 
@@ -224,7 +224,7 @@ mindmap
 
 <!-- chunk: 2. 用户体验设计原则 -->## 2. 用户体验设计原则
 
-#<!-- chunk: 2.1 UX 设计框架 -->## 2.1 UX 设计框架
+## 2.1 UX 设计框架
 
 IDP 的用户体验设计应遵循 **5-Minute Rule（5分钟规则）**：
 
@@ -259,7 +259,7 @@ graph TB
     style L5 fill:#74c0fc
 ```
 
-#<!-- chunk: 2.2 信息架构设计 -->## 2.2 信息架构设计
+## 2.2 信息架构设计
 
 **平台门户信息架构**：
 
@@ -303,7 +303,7 @@ IDP Portal 信息架构
     └── 访问管理
 ```
 
-#<!-- chunk: 2.3 错误处理与反馈设计 -->## 2.3 错误处理与反馈设计
+## 2.3 错误处理与反馈设计
 
 良好的错误处理是 UX 的关键：
 
@@ -348,7 +348,7 @@ success_design:
     rollback_link: "如需回滚，点击此处"
 ```
 
-#<!-- chunk: 2.4 渐进式引导设计 -->## 2.4 渐进式引导设计
+## 2.4 渐进式引导设计
 
 **新用户 Onboarding 流程设计**：
 
@@ -381,7 +381,7 @@ sequenceDiagram
 
 <!-- chunk: 3. API 设计原则 -->## 3. API 设计原则
 
-#<!-- chunk: 3.1 API 优先设计 -->## 3.1 API 优先设计
+## 3.1 API 优先设计
 
 IDP 的所有功能必须先通过 API 实现，再通过 UI 暴露。这被称为 **API-First Design**：
 
@@ -410,7 +410,7 @@ API-First 设计流程:
   ✅ 文档与实现同步
 ```
 
-#<!-- chunk: 3.2 RESTful API 设计规范 -->## 3.2 RESTful API 设计规范
+## 3.2 RESTful API 设计规范
 
 ```yaml
 # IDP API 设计规范
@@ -490,7 +490,7 @@ pagination:
     }
 ```
 
-#<!-- chunk: 3.3 API 版本管理策略 -->## 3.3 API 版本管理策略
+## 3.3 API 版本管理策略
 
 ```mermaid
 graph LR
@@ -551,7 +551,7 @@ versioning_strategy:
     - "提供迁移验证测试套件"
 ```
 
-#<!-- chunk: 3.4 平台 API 安全设计 -->## 3.4 平台 API 安全设计
+## 3.4 平台 API 安全设计
 
 ```yaml
 # IDP API 安全规范
@@ -612,7 +612,7 @@ audit_logging:
   storage: "不可变存储 (S3 with Object Lock)"
 ```
 
-#<!-- chunk: 3.5 API 文档规范 -->## 3.5 API 文档规范
+## 3.5 API 文档规范
 
 ```yaml
 # OpenAPI 规范示例
@@ -714,7 +714,7 @@ paths:
 
 <!-- chunk: 4. 自助服务模式 -->## 4. 自助服务模式
 
-#<!-- chunk: 4.1 自助服务设计原则 -->## 4.1 自助服务设计原则
+## 4.1 自助服务设计原则
 
 自助服务是 IDP 的核心价值主张。设计良好的自助服务需要满足：
 
@@ -742,7 +742,7 @@ paths:
    实现: 安全策略作为默认值，需要时可提升权限
 ```
 
-#<!-- chunk: 4.2 自助服务能力矩阵 -->## 4.2 自助服务能力矩阵
+## 4.2 自助服务能力矩阵
 
 ```mermaid
 graph TB
@@ -792,7 +792,7 @@ graph TB
     style D3 fill:#ff6b6b
 ```
 
-#<!-- chunk: 4.3 自动化审批工作流 -->## 4.3 自动化审批工作流
+## 4.3 自动化审批工作流
 
 对于需要审批的操作，使用自动化规则替代人工判断：
 
@@ -834,7 +834,7 @@ policies:
       on_rejection: "Slack 原部署者 + 说明原因"
 ```
 
-#<!-- chunk: 4.4 自助服务流程示例 -->## 4.4 自助服务流程示例
+## 4.4 自助服务流程示例
 
 **示例：自助申请数据库实例**
 
@@ -878,7 +878,7 @@ sequenceDiagram
 
 <!-- chunk: 5. 抽象层设计 -->## 5. 抽象层设计
 
-#<!-- chunk: 5.1 抽象层的必要性与风险 -->## 5.1 抽象层的必要性与风险
+## 5.1 抽象层的必要性与风险
 
 ```
 抽象层的矛盾 (Abstraction Dilemma)
@@ -894,7 +894,7 @@ sequenceDiagram
         — Alan Kay (改编)
 ```
 
-#<!-- chunk: 5.2 IDP 抽象层架构 -->## 5.2 IDP 抽象层架构
+## 5.2 IDP 抽象层架构
 
 ```mermaid
 graph TB
@@ -934,7 +934,7 @@ graph TB
     CloudAPI --> PhysicalHW
 ```
 
-#<!-- chunk: 5.3 逃生门设计 (Escape Hatch) -->## 5.3 逃生门设计 (Escape Hatch)
+## 5.3 逃生门设计 (Escape Hatch)
 
 优秀的抽象层必须提供逃生门：
 
@@ -974,7 +974,7 @@ escape_hatch_levels:
     - "逃生门使用率过高说明抽象层需要改进"
 ```
 
-#<!-- chunk: 5.4 Open Application Model (OAM) 集成 -->## 5.4 Open Application Model (OAM) 集成
+## 5.4 Open Application Model (OAM) 集成
 
 OAM 是一种标准化的应用抽象模型：
 
@@ -1041,7 +1041,7 @@ spec:
 
 <!-- chunk: 6. 平台契约与 SLA -->## 6. 平台契约与 SLA
 
-#<!-- chunk: 6.1 平台契约设计 -->## 6.1 平台契约设计
+## 6.1 平台契约设计
 
 平台契约 (Platform Contract) 是平台团队与开发团队之间的正式协议，明确双方的权利和义务：
 
@@ -1141,7 +1141,7 @@ exception_handling:
     - "豁免有效期最长 6 个月，到期需重新申请"
 ```
 
-#<!-- chunk: 6.2 SLO/SLI 定义 -->## 6.2 SLO/SLI 定义
+## 6.2 SLO/SLI 定义
 
 ```yaml
 # platform-slo-definitions.yaml
@@ -1189,7 +1189,7 @@ error_budget_policy:
 
 <!-- chunk: 7. 渐进式复杂度暴露 -->## 7. 渐进式复杂度暴露
 
-#<!-- chunk: 7.1 渐进式披露 (Progressive Disclosure) 模式 -->## 7.1 渐进式披露 (Progressive Disclosure) 模式
+## 7.1 渐进式披露 (Progressive Disclosure) 模式
 
 渐进式披露是一种 UX 设计模式，向用户展示恰好需要的信息量：
 
@@ -1221,7 +1221,7 @@ YAML 配置文件，参数化模板
 适用: 平台工程师、需要特殊配置的团队
 ```
 
-#<!-- chunk: 7.2 渐进式复杂度配置示例 -->## 7.2 渐进式复杂度配置示例
+## 7.2 渐进式复杂度配置示例
 
 ```yaml
 # 层次 1: 零配置
@@ -1306,7 +1306,7 @@ spec:
 
 <!-- chunk: 8. 安全设计原则 -->## 8. 安全设计原则
 
-#<!-- chunk: 8.1 安全设计核心原则 -->## 8.1 安全设计核心原则
+## 8.1 安全设计核心原则
 
 ```mermaid
 graph TB
@@ -1320,7 +1320,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 8.2 供应链安全设计 -->## 8.2 供应链安全设计
+## 8.2 供应链安全设计
 
 ```yaml
 # 软件供应链安全策略
@@ -1391,7 +1391,7 @@ secrets_management:
     - "通过环境变量传递密钥（推荐使用 Vault Agent 注入）"
 ```
 
-#<!-- chunk: 8.3 平台访问控制设计 -->## 8.3 平台访问控制设计
+## 8.3 平台访问控制设计
 
 ```yaml
 # RBAC 设计示例
@@ -1472,7 +1472,7 @@ subjects:
 
 <!-- chunk: 9. 可观测性设计原则 -->## 9. 可观测性设计原则
 
-#<!-- chunk: 9.1 平台可观测性分层 -->## 9.1 平台可观测性分层
+## 9.1 平台可观测性分层
 
 平台的可观测性分为两个维度：**平台自身的可观测性**和**平台提供给用户的可观测性能力**。
 
@@ -1510,7 +1510,7 @@ graph TB
     DP3 --> DP4
 ```
 
-#<!-- chunk: 9.2 平台可观测性标准 -->## 9.2 平台可观测性标准
+## 9.2 平台可观测性标准
 
 ```yaml
 # 平台可观测性标准配置
@@ -1584,7 +1584,7 @@ tracing_standards:
     - "k8s.pod.name"
 ```
 
-#<!-- chunk: 9.3 告警设计原则 -->## 9.3 告警设计原则
+## 9.3 告警设计原则
 
 ```yaml
 # 告警设计规范
@@ -1624,22 +1624,19 @@ alertmanager_config: |
     
     routes:
       # P1: 生产问题 → PagerDuty + Slack
-      - match:
-          severity: critical
-          environment: production
-        receiver: 'pagerduty-and-slack'
+      - matchers:
+        - severity="critical"
+        - environment="production"
+        receiver: pagerduty-and-slack
         continue: false
-      
       # P2: 性能告警 → Slack 
-      - match:
-          severity: warning
-        receiver: 'slack-warning'
-      
+      - matchers:
+        - severity="warning"
+        receiver: slack-warning
       # 按团队路由
-      - match_re:
-          team: "ecommerce|payment"
-        receiver: 'ecommerce-team-slack'
-  
+      - matchers:
+        - team=~"ecommerce|payment"
+        receiver: ecommerce-team-slack
   receivers:
     - name: 'pagerduty-and-slack'
       pagerduty_configs:
@@ -1657,7 +1654,7 @@ alertmanager_config: |
 
 <!-- chunk: 10. 多租户设计原则 -->## 10. 多租户设计原则
 
-#<!-- chunk: 10.1 多租户隔离模型 -->## 10.1 多租户隔离模型
+## 10.1 多租户隔离模型
 
 ```mermaid
 graph TB
@@ -1689,7 +1686,7 @@ graph TB
     T3 --> H2
 ```
 
-#<!-- chunk: 10.2 命名空间命名规范 -->## 10.2 命名空间命名规范
+## 10.2 命名空间命名规范
 
 ```yaml
 # 命名空间命名规范
@@ -1741,7 +1738,7 @@ metadata:
     platform.company.com/on-call: "pagerduty://P1234567"
 ```
 
-#<!-- chunk: 10.3 资源配额管理 -->## 10.3 资源配额管理
+## 10.3 资源配额管理
 
 ```yaml
 # 资源配额模板
@@ -1816,7 +1813,7 @@ spec:
 
 <!-- chunk: 11. 扩展性与插件化架构 -->## 11. 扩展性与插件化架构
 
-#<!-- chunk: 11.1 插件化架构设计 -->## 11.1 插件化架构设计
+## 11.1 插件化架构设计
 
 ```mermaid
 graph TB
@@ -1851,7 +1848,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 11.2 插件接口设计 -->## 11.2 插件接口设计
+## 11.2 插件接口设计
 
 ```typescript
 // IDP 插件接口设计 (TypeScript/Backstage 风格)
@@ -1918,7 +1915,7 @@ export interface CatalogProcessor {
 }
 ```
 
-#<!-- chunk: 11.3 集成标准接口 -->## 11.3 集成标准接口
+## 11.3 集成标准接口
 
 ```yaml
 # 第三方系统集成规范
@@ -1963,7 +1960,7 @@ integration_standards:
 
 <!-- chunk: 12. 版本管理与演进策略 -->## 12. 版本管理与演进策略
 
-#<!-- chunk: 12.1 平台组件版本策略 -->## 12.1 平台组件版本策略
+## 12.1 平台组件版本策略
 
 ```yaml
 # 平台版本管理策略
@@ -2031,7 +2028,7 @@ support_policy:
     channels: ["邮件", "Slack", "Portal 横幅", "CLI 警告"]
 ```
 
-#<!-- chunk: 12.2 平台迁移指南框架 -->## 12.2 平台迁移指南框架
+## 12.2 平台迁移指南框架
 
 ```yaml
 # 版本迁移指南模板
@@ -2110,7 +2107,7 @@ migration:
 
 <!-- chunk: 13. 设计决策记录 (ADR) -->## 13. 设计决策记录 (ADR)
 
-#<!-- chunk: 13.1 ADR 的重要性 -->## 13.1 ADR 的重要性
+## 13.1 ADR 的重要性
 
 架构决策记录 (Architecture Decision Records, ADR) 是捕获重要架构决策的关键实践：
 
@@ -2133,7 +2130,7 @@ migration:
   ✅ 可以有依据地修改或维持决策
 ```
 
-#<!-- chunk: 13.2 ADR 模板 -->## 13.2 ADR 模板
+## 13.2 ADR 模板
 
 ```markdown
 # ADR-001: 选择 Backstage 作为 IDP Portal
@@ -2188,7 +2185,7 @@ migration:
 - [ADR-002: Backstage 部署架构](./ADR-002-backstage-architecture.md)
 ```
 
-#<!-- chunk: 13.3 IDP 关键 ADR 清单 -->## 13.3 IDP 关键 ADR 清单
+## 13.3 IDP 关键 ADR 清单
 
 以下是 IDP 建设过程中应该记录的关键架构决策：
 
@@ -2232,7 +2229,7 @@ critical_decisions_to_document:
 
 IDP 设计原则是构建成功内部开发者平台的基石。核心要点：
 
-#<!-- chunk: 设计要点回顾 -->## 设计要点回顾
+## 设计要点回顾
 
 1. **以开发者为中心**：所有设计决策从开发者体验出发，定期收集反馈
 2. **API 优先**：所有功能先 API 后 UI，保证自动化能力
@@ -2241,7 +2238,7 @@ IDP 设计原则是构建成功内部开发者平台的基石。核心要点：
 5. **安全左移**：安全内置到平台，而非额外步骤
 6. **记录决策**：ADR 是团队知识沉淀的重要载体
 
-#<!-- chunk: 成功的 IDP 特征 -->## 成功的 IDP 特征
+## 成功的 IDP 特征
 
 ```
 ✅ 新开发者 30 分钟内能部署第一个服务

@@ -87,7 +87,7 @@ related:
 
 ## 概述
 
-在理解了 Docker 基础概念之后，今天深入 Docker 的三大高级特性：网络、存储和安全。这三个方面直接影响容器化应用的生产可靠性。Docker 网络决定了容器间如何通信，存储决定了数据如何持久化，安全决定了容器运行时的隔离程度。掌握这些内容是理解 [[entities/kubernetes|[[Kubernetes 生产环境速查卡|k8s]]]] 网络 (CNI)、存储 (CSI) 和安全 (PSS) 的基础。
+在理解了 Docker 基础概念之后，今天深入 Docker 的三大高级特性：网络、存储和安全。这三个方面直接影响容器化应用的生产可靠性。Docker 网络决定了容器间如何通信，存储决定了数据如何持久化，安全决定了容器运行时的隔离程度。掌握这些内容是理解 [[entities/kubernetes.md|[[Kubernetes 生产环境速查卡|k8s]]]] 网络 (CNI)、存储 (CSI) 和安全 (PSS) 的基础。
 
 ---
 
@@ -310,6 +310,9 @@ docker-compose down
 
 #### 3.1 Volume 存储
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+
 ```bash
 # 创建 Volume
 docker volume create my-data
@@ -344,10 +347,13 @@ docker exec reader cat /shared/test.txt
 
 # 清理
 docker stop reader && docker rm reader
-docker volume rm my-data
+docker volume rm my-data  # ⚠️ 强制清理，可能杀运行中容器
 ```
 
 #### 3.2 Bind Mount 存储
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
 ```bash
 # Bind Mount: 将宿主机目录挂载到容器
@@ -370,7 +376,7 @@ docker run --rm -v ~/bind-test/config.yaml:/etc/app/config.yaml:ro alpine cat /e
 # config file content
 
 # 清理
-rm -rf ~/bind-test
+rm -rf ~/bind-test  # ⚠️ 删除系统/数据文件
 ```
 
 #### 3.3 tmpfs 存储
@@ -515,12 +521,15 @@ docker network prune                      # 清理未使用的网络
 
 ### Docker 存储命令速查
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+
 ```bash
 docker volume create <name>               # 创建 Volume
 docker volume ls                          # 列出 Volume
 docker volume inspect <name>             # 查看 Volume 详情
-docker volume rm <name>                   # 删除 Volume
-docker volume prune                       # 清理未使用的 Volume
+docker volume rm <name>                   # 删除 Volume  # ⚠️ 强制清理，可能杀运行中容器
+docker volume prune                       # 清理未使用的 Volume  # ⚠️ 强制清理，可能杀运行中容器
 ```
 
 ---

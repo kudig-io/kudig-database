@@ -69,7 +69,7 @@ created: "2026-05-23"
 
 **模板和标准**：
 - `templates/best-practice-template.md` - 最佳实践内容模板
-- `[[domain-04-storage-data/README|README]].md` - 最佳实践索引页面
+- `[[domain-04-storage-data/README.md|README]].md` - 最佳实践索引页面
 - `best-practices/infrastructure/kubernetes-cluster.md` - 示例最佳实践文档
 
 **评估和计划**：

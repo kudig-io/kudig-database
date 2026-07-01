@@ -477,13 +477,13 @@ service_mesh:
         - name: "frontend-routing"
           hosts: ["frontend.company.com"]
           http:
-            - match:
-                - uri: {prefix: "/api"}
-              route:
-                - destination: {host: "backend-service", subset: "v1"}
-                  weight: 90
-                - destination: {host: "backend-service", subset: "v2"}
-                  weight: 10
+            - matchers:
+              - - uri="{prefix: "/api"}"
+              - route=""
+              - - destination="{host: "backend-service", subset: "v1"}"
+              - weight="90"
+              - - destination="{host: "backend-service", subset: "v2"}"
+              - weight="10"
 ```
 
 ### 5.2 全局负载均衡
@@ -808,6 +808,11 @@ disaster_recovery:
 
 ### 8.2 灾备演练脚本
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # 灾备演练脚本
@@ -887,7 +892,7 @@ verify_recovery() {
 # 清理测试环境
 cleanup_test() {
     echo "Cleaning up test environment..."
-    kubectl delete namespace dr-test
+    kubectl delete namespace dr-test  # ⚠️ 不可逆：永久删除命名空间及全部资源
 }
 
 # 执行完整演练
@@ -933,7 +938,7 @@ esac
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)

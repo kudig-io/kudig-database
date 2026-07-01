@@ -35,6 +35,7 @@ prerequisites:
 - policy-basics
 - logging-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # DaemonSet
@@ -206,6 +207,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 查看 DaemonSet 状态（含 desired/current/ready 数量）
 kubectl get daemonset -n monitoring
@@ -236,4 +240,4 @@ kubectl describe ds node-exporter -n monitoring | tail -20
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

@@ -39,6 +39,7 @@ prerequisites:
 - cni-basics
 - kafka-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # eBPF 与 [[Cilium|Cilium]] 网络
@@ -127,6 +128,9 @@ Cilium 的网络策略支持基于**身份（Identity）**而非 IP 的细粒度
 ## 生产 YAML 示例
 
 ### Cilium Helm 安装关键配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # Cilium 安装（替代 kube-proxy）
@@ -245,4 +249,6 @@ kubectl logs -n kube-system -l k8s-app=cilium --tail=50
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

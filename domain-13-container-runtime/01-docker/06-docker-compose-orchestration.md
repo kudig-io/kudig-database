@@ -75,7 +75,7 @@ created: "2026-05-23"
 
 <!-- chunk: Compose 概述 -->## Compose 概述
 
-#<!-- chunk: 版本演进 -->## 版本演进
+## 版本演进
 
 | 版本 | 特性 | 状态 |
 |:---|:---|:---|
@@ -83,7 +83,7 @@ created: "2026-05-23"
 | Compose v2 | docker compose 命令 (Go) | 当前推荐 |
 | Compose Spec | 开放标准、无版本号 | 规范标准 |
 
-#<!-- chunk: 基本结构 -->## 基本结构
+## 基本结构
 
 ```yaml
 # compose.yaml (推荐) 或 docker-compose.yml
@@ -127,7 +127,7 @@ networks:
 
 <!-- chunk: 配置文件完整参考 -->## 配置文件完整参考
 
-#<!-- chunk: 顶级配置 -->## 顶级配置
+## 顶级配置
 
 | 字段 | 说明 | 示例 |
 |:---|:---|:---|
@@ -140,7 +140,7 @@ networks:
 | `[[Secrets|secrets]]` | 密钥定义 | Swarm/secrets |
 | `x-*` | 扩展字段 | YAML 锚点复用 |
 
-#<!-- chunk: 扩展字段 (YAML 锚点) -->## 扩展字段 (YAML 锚点)
+## 扩展字段 (YAML 锚点)
 
 ```yaml
 x-common-env: &common-env
@@ -183,7 +183,7 @@ services:
 
 <!-- chunk: 服务配置 -->## 服务配置
 
-#<!-- chunk: 镜像与构建 -->## 镜像与构建
+## 镜像与构建
 
 ```yaml
 services:
@@ -217,7 +217,7 @@ services:
     image: myregistry/myapp:${TAG:-latest}
 ```
 
-#<!-- chunk: 容器配置 -->## 容器配置
+## 容器配置
 
 ```yaml
 services:
@@ -251,7 +251,7 @@ services:
     stop_grace_period: 30s
 ```
 
-#<!-- chunk: 环境与配置 -->## 环境与配置
+## 环境与配置
 
 ```yaml
 services:
@@ -274,7 +274,7 @@ services:
       com.example.team: platform
 ```
 
-#<!-- chunk: 健康检查 -->## 健康检查
+## 健康检查
 
 ```yaml
 services:
@@ -293,7 +293,7 @@ services:
       disable: true
 ```
 
-#<!-- chunk: 依赖管理 -->## 依赖管理
+## 依赖管理
 
 ```yaml
 services:
@@ -313,7 +313,7 @@ services:
         condition: service_completed_successfully  # 等待完成
 ```
 
-#<!-- chunk: 资源限制 -->## 资源限制
+## 资源限制
 
 ```yaml
 services:
@@ -348,7 +348,7 @@ services:
       nproc: 4096
 ```
 
-#<!-- chunk: 重启策略 -->## 重启策略
+## 重启策略
 
 ```yaml
 services:
@@ -371,7 +371,7 @@ services:
         window: 120s
 ```
 
-#<!-- chunk: 安全配置 -->## 安全配置
+## 安全配置
 
 ```yaml
 services:
@@ -413,7 +413,7 @@ services:
 
 <!-- chunk: 网络配置 -->## 网络配置
 
-#<!-- chunk: 网络定义 -->## 网络定义
+## 网络定义
 
 ```yaml
 networks:
@@ -444,7 +444,7 @@ networks:
     name: my-existing-network
 ```
 
-#<!-- chunk: 服务网络配置 -->## 服务网络配置
+## 服务网络配置
 
 ```yaml
 services:
@@ -466,7 +466,7 @@ services:
           - app
 ```
 
-#<!-- chunk: DNS 配置 -->## DNS 配置
+## DNS 配置
 
 ```yaml
 services:
@@ -485,7 +485,7 @@ services:
       - "db.internal:192.168.1.11"
 ```
 
-#<!-- chunk: 端口配置 -->## 端口配置
+## 端口配置
 
 ```yaml
 services:
@@ -517,7 +517,7 @@ services:
 
 <!-- chunk: 存储配置 -->## 存储配置
 
-#<!-- chunk: 卷定义 -->## 卷定义
+## 卷定义
 
 ```yaml
 volumes:
@@ -544,7 +544,7 @@ volumes:
       - "env=production"
 ```
 
-#<!-- chunk: 服务存储配置 -->## 服务存储配置
+## 服务存储配置
 
 ```yaml
 services:
@@ -587,7 +587,7 @@ services:
 
 <!-- chunk: 多环境管理 -->## 多环境管理
 
-#<!-- chunk: 环境文件 -->## 环境文件
+## 环境文件
 
 ```bash
 # .env (默认加载)
@@ -609,7 +609,7 @@ services:
       DATABASE_URL: ${DATABASE_URL}
 ```
 
-#<!-- chunk: 多文件组合 -->## 多文件组合
+## 多文件组合
 
 ```bash
 # 基础 + 开发覆盖
@@ -648,7 +648,7 @@ services:
       DEBUG: "false"
 ```
 
-#<!-- chunk: Profiles -->## Profiles
+## Profiles
 
 ```yaml
 services:
@@ -682,7 +682,7 @@ docker compose --profile debug --profile tools up
 
 <!-- chunk: 生产环境配置 -->## 生产环境配置
 
-#<!-- chunk: 完整生产配置示例 -->## 完整生产配置示例
+## 完整生产配置示例
 
 ```yaml
 name: production-app
@@ -847,7 +847,7 @@ networks:
     internal: true
 ```
 
-#<!-- chunk: 安全加固配置 -->## 安全加固配置
+## 安全加固配置
 
 ```yaml
 services:
@@ -889,7 +889,7 @@ services:
 
 <!-- chunk: 常用命令 -->## 常用命令
 
-#<!-- chunk: 生命周期管理 -->## 生命周期管理
+## 生命周期管理
 
 | 命令 | 说明 | 示例 |
 |:---|:---|:---|
@@ -901,7 +901,7 @@ services:
 | `docker compose pause` | 暂停服务 | `docker compose pause` |
 | `docker compose unpause` | 恢复服务 | `docker compose unpause` |
 
-#<!-- chunk: up 命令选项 -->## up 命令选项
+## up 命令选项
 
 ```bash
 # 后台运行
@@ -926,7 +926,7 @@ docker compose up -d --remove-orphans
 docker compose up -d --wait --wait-timeout 60
 ```
 
-#<!-- chunk: down 命令选项 -->## down 命令选项
+## down 命令选项
 
 ```bash
 # 停止并删除
@@ -942,7 +942,7 @@ docker compose down --rmi all
 docker compose down --remove-orphans
 ```
 
-#<!-- chunk: 查看状态 -->## 查看状态
+## 查看状态
 
 ```bash
 # 服务状态
@@ -963,7 +963,7 @@ docker compose config --services
 docker compose config --volumes
 ```
 
-#<!-- chunk: 执行与调试 -->## 执行与调试
+## 执行与调试
 
 ```bash
 # 执行命令

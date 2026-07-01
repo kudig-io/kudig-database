@@ -31,6 +31,7 @@ prerequisites:
 - cloud-provider-basics
 - etcd-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 协调领导者选举（Coordinated Leader Election）
@@ -134,7 +135,7 @@ Lease 对象包含以下关键字段：
 - [ ] 监控 Lease 的 `renewTime`，超过 `leaseDurationSeconds` 未续租需告警
 - [ ] 混合版本升级时确认 `OldestEmulationVersion` 策略正确选择低版本实例
 - [ ] 控制平面组件的 `--leader-elect-lease-duration` 和 `--leader-elect-renew-deadline` 参数合理
-- [ ] [[etcd|etcd]] 网络延迟低于 Lease 续租间隔的 1/3
+- [ ] [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]] 网络延迟低于 Lease 续租间隔的 1/3
 - [ ] 升级完成后验证所有 LeaseCandidate 版本信息正确
 
 ## 命令快速参考
@@ -182,4 +183,6 @@ kubectl -n kube-system logs -l component=kube-scheduler | grep -i "leader"
 
 ## Related
 
-- index/etcd-index|etcd 知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-group.md|API 组]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]

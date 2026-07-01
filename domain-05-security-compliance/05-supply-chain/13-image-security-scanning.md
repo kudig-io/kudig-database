@@ -57,7 +57,7 @@ created: "2026-05-23"
 
 # 13 - 镜像安全扫描与漏洞管理
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[entities/trivy|Trivy]] Documentation](https://aquasecurity.github.io/trivy/) | [Clair Documentation](https://github.com/quay/clair)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[entities/trivy.md|Trivy]] Documentation](https://aquasecurity.github.io/trivy/) | [Clair Documentation](https://github.com/quay/clair)
 
 <!-- chunk: 一、镜像安全扫描架构 -->
 ## 一、镜像安全扫描架构
@@ -783,7 +783,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-05-security-compliance KUDIG Database — Global MOC
-- [[domain-05-security-compliance/README|[[Security Domain|Security Domain]]]]
+- [[domain-05-security-compliance/README.md|[[Security Domain|Security Domain]]]]
 - index.md|Domain-7 安全 — 开源项目索引]]
 - Kubernetes 认证授权体系详解
 - 网络安全策略与零信任架构
@@ -802,4 +802,4 @@ spec:
 - 14-policy-engines-opa-kyverno
 - 15-runtime-security-detection
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

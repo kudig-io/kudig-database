@@ -94,7 +94,7 @@ created: "2026-05-23"
 ## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Security Domain]]
+- [[domain-05-security-compliance/README.md|Security Domain]]
 - Kubernetes 认证授权体系详解
 - 网络安全策略与零信任架构
 - 运行时安全防护与威胁检测
@@ -108,9 +108,9 @@ created: "2026-05-23"
 
 ## See Also
 
-- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-25|00-open-source-projects-index-from-domain-05-security-compliance]]
-- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-39|00-open-source-projects-index-from-domain-05-security-compliance]]
-- [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-25|MOC-from-domain-05-security-compliance]]
-- [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-39|MOC-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-25.md|00-open-source-projects-index-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-39.md|00-open-source-projects-index-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-25.md|MOC-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-39.md|MOC-from-domain-05-security-compliance]]
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

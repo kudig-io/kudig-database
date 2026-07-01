@@ -60,7 +60,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 实时分析架构设计 -->## 1. 实时分析架构设计
 
-#<!-- chunk: 1.1 流处理架构模式 -->## 1.1 流处理架构模式
+## 1.1 流处理架构模式
 
 ```mermaid
 graph TB
@@ -107,9 +107,9 @@ graph TB
     end
 ```
 
-#<!-- chunk: 1.2 Lambda架构实现 -->## 1.2 Lambda架构实现
+## 1.2 Lambda架构实现
 
-##<!-- chunk: 1.2.1 批处理与流处理融合 -->## 1.2.1 批处理与流处理融合
+## 1.2.1 批处理与流处理融合
 
 ```yaml
 # lambda-architecture.yaml
@@ -185,9 +185,9 @@ integration_patterns:
 
 <!-- chunk: 2. 企业级流处理平台 -->## 2. 企业级流处理平台
 
-#<!-- chunk: 2.1 Apache Flink深度实践 -->## 2.1 Apache Flink深度实践
+## 2.1 Apache Flink深度实践
 
-##<!-- chunk: 2.1.1 高可用Flink集群部署 -->## 2.1.1 高可用Flink集群部署
+## 2.1.1 高可用Flink集群部署
 
 ```yaml
 # flink-cluster-deployment.yaml
@@ -297,7 +297,7 @@ data:
     appender.console.layout.pattern = %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m%n
 ```
 
-##<!-- chunk: 2.1.2 实时ETL处理管道 -->## 2.1.2 实时ETL处理管道
+## 2.1.2 实时ETL处理管道
 
 ```java
 // RealTimeETLPipeline.java
@@ -520,9 +520,9 @@ class Alert {
 }
 ```
 
-#<!-- chunk: 2.2 复杂事件处理(CEP) -->## 2.2 复杂事件处理(CEP)
+## 2.2 复杂事件处理(CEP)
 
-##<!-- chunk: 2.2.1 业务规则引擎实现 -->## 2.2.1 业务规则引擎实现
+## 2.2.1 业务规则引擎实现
 
 ```java
 // BusinessRulesEngine.java
@@ -686,9 +686,9 @@ public class BusinessRulesEngine {
 
 <!-- chunk: 3. 业务价值挖掘实践 -->## 3. 业务价值挖掘实践
 
-#<!-- chunk: 3.1 用户行为分析 -->## 3.1 用户行为分析
+## 3.1 用户行为分析
 
-##<!-- chunk: 3.1.1 实时用户画像构建 -->## 3.1.1 实时用户画像构建
+## 3.1.1 实时用户画像构建
 
 ```python
 # real-time-user-profiling.py
@@ -1030,9 +1030,9 @@ insights = profiler.generate_business_insights(24)
 print("业务洞察:", json.dumps(insights, indent=2, ensure_ascii=False))
 ```
 
-#<!-- chunk: 3.2 商业智能仪表板 -->## 3.2 商业智能仪表板
+## 3.2 商业智能仪表板
 
-##<!-- chunk: 3.2.1 实时KPI监控面板 -->## 3.2.1 实时KPI监控面板
+## 3.2.1 实时KPI监控面板
 
 ```json
 {
@@ -1179,9 +1179,9 @@ print("业务洞察:", json.dumps(insights, indent=2, ensure_ascii=False))
 
 <!-- chunk: 4. 企业级最佳实践 -->## 4. 企业级最佳实践
 
-#<!-- chunk: 4.1 性能优化策略 -->## 4.1 性能优化策略
+## 4.1 性能优化策略
 
-##<!-- chunk: 4.1.1 流处理性能调优 -->## 4.1.1 流处理性能调优
+## 4.1.1 流处理性能调优
 
 ```yaml
 # stream-processing-optimization.yaml
@@ -1301,7 +1301,7 @@ monitoring_and_alerting:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - observability/MOC.md|domain-21-logging-management-analytics MOC]]
-- [[domain-06-observability/README|[[Domain 21: 日志管理与分析 (Logging Management & Analytics)|Domain 21: 日志管理与分析 (Logging Management & Analytics)]] Management & Analytics)]]
+- [[domain-06-observability/README.md|[[Domain 21: 日志管理与分析 (Logging Management & Analytics)|Domain 21: 日志管理与分析 (Logging Management & Analytics)]] Management & Analytics)]]
 - index.md|Domain-21 日志管理与分析 — 开源项目索引]]
 - ELK Stack企业级日志管理系统深度实践
 - Fluentd企业级日志收集与处理深度实践
@@ -1319,4 +1319,4 @@ monitoring_and_alerting:
 - 05-splunk-enterprise-log-analytics
 - 06-loggly-cloud-log-management
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]

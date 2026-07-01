@@ -83,7 +83,7 @@ tags: [training, inner-training, ack, acr, k8s, month-1, k8s-1.28-1.33]
 
 ## 概述
 
-本培训大纲为内部运维工程师和技术支持人员设计，覆盖 ACK（阿里云容器服务）、ACR（阿里云容器镜像服务）和 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 三大技术栈，通过 28 天的系统性学习，从基础概念到生产运维，逐步建立完整的云原生运维能力。
+本培训大纲为内部运维工程师和技术支持人员设计，覆盖 ACK（阿里云容器服务）、ACR（阿里云容器镜像服务）和 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 三大技术栈，通过 28 天的系统性学习，从基础概念到生产运维，逐步建立完整的云原生运维能力。
 
 培训采用"每日主题学习 + 实操练习"的模式，每天 4-5 小时的学习时间，包含理论阅读（1.5-2h）、实践操作（2-2.5h）和费曼复述（0.5h）三个环节。每周结束有一个自测检验（checkpoint.md）和一个实践项目，确保学习效果可量化验证。
 
@@ -166,6 +166,9 @@ aliyun cs DELETE /clusters/<id>                         # 删除集群
 
 ### Day 8-14 核心知识点
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # Day 8: RBAC 配置
 kubectl create role developer --verb=get,list,watch --resource=pods,deployments
@@ -221,6 +224,12 @@ kubectl describe limitrange -n <ns>        # 查看限制范围
 **本周产出**: 能够管理节点池、排查 Pod 问题、维护 K8S 核心组件
 
 ### Day 15-21 核心知识点
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # Day 15-16: 节点管理

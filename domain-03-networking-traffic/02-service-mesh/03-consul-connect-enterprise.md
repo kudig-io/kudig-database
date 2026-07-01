@@ -74,7 +74,7 @@ Consul Connect 采用意图（Intentions）驱动的访问控制模型，通过�
 
 本文档从企业级生产环境角度，全面覆盖 Consul Connect 的架构设计、Kubernetes 部署、意图配置、安全策略、可观测性集成和故障排查。
 
-#<!-- chunk: Consul Connect 架构全景 -->## Consul Connect 架构全景
+## Consul Connect 架构全景
 
 ```mermaid
 graph TB
@@ -283,7 +283,7 @@ spec:
           replicas: 2
 ```
 
-#<!-- chunk: Consul Server 生产调优 -->## Consul Server 生产调优
+## Consul Server 生产调优
 
 ```hcl
 datacenter = "dc1"
@@ -347,7 +347,7 @@ audit:
 
 <!-- chunk: 流量管理实战 -->## 流量管理实战
 
-#<!-- chunk: 服务注册与发现 -->## 服务注册与发现
+## 服务注册与发现
 
 ```hcl
 service {
@@ -409,7 +409,7 @@ service {
 }
 ```
 
-#<!-- chunk: Kubernetes 服务注解 -->## Kubernetes 服务注解
+## Kubernetes 服务注解
 
 ```yaml
 apiVersion: v1
@@ -467,7 +467,7 @@ spec:
               memory: "1Gi"
 ```
 
-#<!-- chunk: 意图配置 — 访问控制 -->## 意图配置 — 访问控制
+## 意图配置 — 访问控制
 
 ```hcl
 Kind = "service-intentions"
@@ -522,7 +522,7 @@ Sources = [
 ]
 ```
 
-#<!-- chunk: 流量分割 — 金丝雀发布 -->## 流量分割 — 金丝雀发布
+## 流量分割 — 金丝雀发布
 
 ```hcl
 Kind = "service-splitter"
@@ -587,7 +587,7 @@ Subsets = {
 }
 ```
 
-#<!-- chunk: Ingress Gateway — 外部流量入口 -->## Ingress Gateway — 外部流量入口
+## Ingress Gateway — 外部流量入口
 
 ```hcl
 Kind = "ingress-gateway"
@@ -636,7 +636,7 @@ Listeners = [
 
 <!-- chunk: 安全策略 -->## 安全策略
 
-#<!-- chunk: mTLS 与证书管理 -->## mTLS 与证书管理
+## mTLS 与证书管理
 
 ```hcl
 Kind = "proxy-defaults"
@@ -664,7 +664,7 @@ data:
   tls.key: BASE64_ENCODED_CA_KEY
 ```
 
-#<!-- chunk: ACL 策略配置 -->## ACL 策略配置
+## ACL 策略配置
 
 ```hcl
 resource "consul_acl_policy" "service_mesh_policy" {
@@ -705,7 +705,7 @@ resource "consul_acl_token" "service_token" {
 }
 ```
 
-#<!-- chunk: Vault 集成 — 证书管理 -->## Vault 集成 — 证书管理
+## Vault 集成 — 证书管理
 
 ```hcl
 resource "vault_pki_secret_backend_role" "consul_intermediate" {
@@ -736,7 +736,7 @@ resource "consul_config_entry" "vault_ca" {
 }
 ```
 
-#<!-- chunk: 审计日志 -->## 审计日志
+## 审计日志
 
 ```hcl
 audit {
@@ -756,7 +756,7 @@ audit {
 
 <!-- chunk: 可观测性 — Prometheus, Grafana, Jaeger 集成 -->## 可观测性 — Prometheus, Grafana, Jaeger 集成
 
-#<!-- chunk: Prometheus 配置 -->## Prometheus 配置
+## Prometheus 配置
 
 ```yaml
 scrape_configs:
@@ -785,7 +785,7 @@ scrape_configs:
       format: ["prometheus"]
 ```
 
-#<!-- chunk: 告警规则 -->## 告警规则
+## 告警规则
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -850,7 +850,7 @@ spec:
 
 <!-- chunk: Consul 集群状态验证 -->## Consul 集群状态验证
 
-#<!-- chunk: 集群状态命令输出示例 -->## 集群状态命令输出示例
+## 集群状态命令输出示例
 
 ```bash
 $ consul members
@@ -887,7 +887,7 @@ cache-service [primary,v7.2,production]
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: Envoy Sidecar 资源优化 -->## Envoy Sidecar 资源优化
+## Envoy Sidecar 资源优化
 
 ```yaml
 apiVersion: apps/v1
@@ -905,7 +905,7 @@ spec:
         consul.hashicorp.com/sidecar-proxy-memory-limit: "256Mi"
 ```
 
-#<!-- chunk: Consul Server 调优参数 -->## Consul Server 调优参数
+## Consul Server 调优参数
 
 | 参数 | 默认值 | 说明 | 推荐值 (生产) |
 |:---|:---|:---|:---|
@@ -923,7 +923,10 @@ spec:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 诊断脚本 -->## 诊断脚本
+## 诊断脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -975,7 +978,7 @@ echo "=== 10. 日志分析 ==="
 kubectl logs -n consul -l component=connect-injector --tail=50 | grep -iE "error|warn"
 ```
 
-#<!-- chunk: 常见问题速查 -->## 常见问题速查
+## 常见问题速查
 
 | 症状 | 可能原因 | 诊断命令 | 解决方案 |
 |:---|:---|:---|:---|
@@ -1024,11 +1027,11 @@ kubectl logs -n consul -l component=connect-injector --tail=50 | grep -iE "error
 
 <!-- chunk: Consul Connect 多数据中心配置 -->## Consul Connect 多数据中心配置
 
-#<!-- chunk: 多数据中心架构概述 -->## 多数据中心架构概述
+## 多数据中心架构概述
 
 Consul Connect 的多数据中心能力是其核心差异化优势之一。与 Istio 的多集群方案不同，Consul 的多数据中心架构天然支持 WAN 级别互联，通过 Mesh Gateway 实现跨数据中心的加密通信。多数据中心部署需要两个关键前提：第一，每个数据中心必须有独立的 Consul Server 集群（3-5 节点），且通过 WAN gossip 协议互联；第二，Mesh Gateway 必须部署在每个数据中心，并配置正确的 WAN 地址，使跨数据中心流量能够穿越网络边界。以下是完整的多数据中心配置示例：
 
-#<!-- chunk: 主数据中心配置 -->## 主数据中心配置
+## 主数据中心配置
 
 ```hcl
 datacenter = "dc1"
@@ -1067,7 +1070,7 @@ telemetry:
   disable_hostname: true
 ```
 
-#<!-- chunk: 从数据中心配置 -->## 从数据中心配置
+## 从数据中心配置
 
 ```hcl
 datacenter = "dc2"
@@ -1092,7 +1095,7 @@ retry_join_wan:
   - "provider=aws tag_key=ConsulWAN tag_value=dc1"
 ```
 
-#<!-- chunk: 跨数据中心服务发现验证 -->## 跨数据中心服务发现验证
+## 跨数据中心服务发现验证
 
 ```bash
 $ consul members -wan
@@ -1119,7 +1122,7 @@ allowed
 
 <!-- chunk: Consul Connect 故障注入测试 -->## Consul Connect 故障注入测试
 
-#<!-- chunk: 故障注入配置 -->## 故障注入配置
+## 故障注入配置
 
 Consul Connect 支持通过 Envoy 过滤器实现服务故障注入，用于测试服务的弹性能力。以下配置展示了如何对一个目标服务注入延迟和中断问题，模拟网络抖动和上游服务不可用场景。在生产环境中进行故障注入测试时，建议从极小的问题比例（0.1%）开始，逐步增加，同时密切监控黄金指标（成功率、延迟、吞吐量），确保问题不会超出预期范围。
 
@@ -1149,7 +1152,7 @@ EnvoyExtension:
 
 <!-- chunk: Consul Connect 与 Kubernetes 原生服务发现集成 -->## Consul Connect 与 Kubernetes 原生服务发现集成
 
-#<!-- chunk: Consul DNS 与 CoreDNS 集成 -->## Consul DNS 与 CoreDNS 集成
+## Consul DNS 与 CoreDNS 集成
 
 Consul Connect 在 Kubernetes 环境中通过 Consul DNS 服务提供服务发现能力。为了让集群内的应用能够同时解析 Kubernetes Service DNS（如 `user-service.production.svc.cluster.local`）和 Consul Service DNS（如 `user-service.service.consul`），需要配置 CoreDNS 的 stubDomains 将 `.consul` 域名请求转发到 Consul DNS 服务。此外，对于跨数据中心的服务发现场景，Consul DNS 支持 `service.service.consul` 和 `service.query.consul` 两种查询格式，后者支持 Prepared Query 功能，可以实现基于位置的就近路由和故障转移。
 
@@ -1177,7 +1180,7 @@ data:
     }
 ```
 
-#<!-- chunk: Consul Service Mesh 与 Kubernetes Service 的共存策略 -->## Consul Service Mesh 与 Kubernetes Service 的共存策略
+## Consul Service Mesh 与 Kubernetes Service 的共存策略
 
 在企业迁移过程中，Kubernetes 原生 Service 和 Consul Service Mesh 经常需要共存。推荐采用渐进式迁移策略：第一阶段，应用通过 Kubernetes Service DNS 通信，逐步为关键服务启用 Consul Connect 注入；第二阶段，将上游服务切换到 Consul DNS 解析，获得 Consul 的健康检查和流量路由能力；第三阶段，全面启用 Intentions 和 L7 路由策略。在共存期间，需要注意避免 DNS 解析冲突——同一个服务名称不能同时存在于 Kubernetes CoreDNS 和 Consul DNS 中，建议使用不同的域名后缀进行区分。
 
@@ -1187,7 +1190,7 @@ data:
 
 <!-- chunk: 十、Consul Connect 性能基准测试 -->## 十、Consul Connect 性能基准测试
 
-#<!-- chunk: Sidecar 代理性能开销 -->## Sidecar 代理性能开销
+## Sidecar 代理性能开销
 
 在生产环境中部署 Consul Connect 时，了解 Sidecar 代理的性能开销至关重要。以下基准测试数据基于 Envoy 代理（Consul Connect 默认数据平面），测试环境为 AWS c5.xlarge 实例（4 vCPU / 8GB RAM），使用 fortio 和 wrk 进行压力测试。延迟数据为 P99 分位数，单位为毫秒。这些数据可以帮助团队制定容量规划和资源配额策略。
 
@@ -1199,7 +1202,7 @@ data:
 | gRPC 流式 | 0.5 | 0.9 | +80% | ~8% | +80MB |
 | TCP 直通 | 0.3 | 0.6 | +100% | ~5% | +60MB |
 
-#<!-- chunk: 大规模部署性能建议 -->## 大规模部署性能建议
+## 大规模部署性能建议
 
 当 Consul Connect 部署规模超过 1000 个服务实例时，需要关注以下性能瓶颈和优化建议。第一，Consul Server 集群的 CPU 使用率会随着服务注册数量和健康检查频率线性增长，建议每个数据中心至少部署 5 个 Server 节点，并使用 Dedicated Consul Server 实例（不运行业务工作负载）。第二，Envoy 代理的内存使用量与配置的 Cluster 和 Listener 数量正相关，对于连接大量上游服务的"中心"服务（如 API 网关），建议将代理内存限制设置为 512MB 以上。第三，使用 Consul 的 Partition 功能将大型部署划分为多个逻辑分区，减少跨分区的状态同步开销。第四，对于超大规模部署（5000+ 实例），建议评估 Consul Enterprise 的性能优化特性，包括增强的 Raft 存储引擎和优化的 xDS 增量推送。
 
@@ -1214,7 +1217,7 @@ data:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
 - Domain-26 服务网格与微服务 — 开源项目索引
 - Istio 企业级服务网格架构与实践
 - Linkerd 企业级服务网格深度实践
@@ -1235,4 +1238,4 @@ data:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]

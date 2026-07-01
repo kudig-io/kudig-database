@@ -172,6 +172,9 @@ v1.25 → v1.33 移除/弃用时间线
 
 ### 4.1 PodSecurityPolicy → Pod Security Admission
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 1. 检查现有 PSP
 kubectl get psp
@@ -192,6 +195,10 @@ kubectl auth can-i use podsecuritypolicies --as=system:serviceaccount:default:de
 ```
 
 ### 4.2 in-tree 存储驱动 → CSI
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 检查当前存储类
@@ -223,6 +230,10 @@ kubectl patch storageclass csi-gp3 -p '{"metadata": {"annotations":{"storageclas
 ```
 
 ### 4.3 kubelet --cloud-provider → 外部 CCM
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 检查当前 kubelet 配置
@@ -387,7 +398,7 @@ done
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析

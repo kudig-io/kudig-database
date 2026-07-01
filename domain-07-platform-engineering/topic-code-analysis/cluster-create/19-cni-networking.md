@@ -462,6 +462,9 @@ spec:
 
 ### 安装 Calico 并验证
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 安装 Calico
 kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/calico.yaml
@@ -503,6 +506,9 @@ kubectl run -it --rm debug --image=busybox -- sh
 
 ### DNS 调试
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 CoreDNS 日志
 kubectl logs -n kube-system -l k8s-app=kube-dns
@@ -521,6 +527,7 @@ kubectl exec -it <pod> -- cat /etc/resolv.conf
 # nameserver 10.96.0.10
 # search default.svc.cluster.local svc.cluster.local cluster.local
 # options ndots:5
+
 ```
 
 ## 常见错误
@@ -544,8 +551,10 @@ kubectl exec -it <pod> -- cat /etc/resolv.conf
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/networking|networking]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux|linux]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+
+```

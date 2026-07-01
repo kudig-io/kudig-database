@@ -36,7 +36,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-# [[Chaos Mesh|Chaos Mesh]] 企业级部署
+# Chaos Mesh 企业级部署
 
 ## 架构组件
 
@@ -49,6 +49,9 @@ Chaos Mesh 架构:
 ```
 
 ## [[Helm|Helm]] 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 添加 Helm repo
@@ -107,5 +110,7 @@ roleRef:
 
 ## 相关
 
-- [[domain-09-reliability-engineering/05-chaos-engineering/01-chaos-engineering-overview]]
-- [[domain-09-reliability-engineering/05-chaos-engineering/03-chaos-experiment-design]]
+- [[domain-09-reliability-engineering/05-chaos-engineering/01-chaos-engineering-overview.md|01 chaos engineering overview]]
+- [[domain-09-reliability-engineering/05-chaos-engineering/03-chaos-experiment-design.md|03 chaos experiment design]]
+
+```

@@ -76,6 +76,7 @@ func CleanDir(targetPath string) error
 // kubectl drain 相关
 func NewCmdDrain(f cmdutil.Factory, out io.Writer, errOut io.Writer) *cobra.Command
 func RunDrain(drainer *Drainer, f cmdutil.Factory, out io.Writer, errOut io.Writer, args []string) error
+
 ```
 
 ## 源码位置
@@ -171,6 +172,7 @@ graph TD
     F --> F1[证书/密钥删除]
     F --> F2[systemd 清理]
     F --> F3[RBAC 残留清理]
+
 ```
 
 ## 源码分析
@@ -219,6 +221,7 @@ func NewCmdReset(out io.Writer) *cobra.Command {
     resetRunner.BindToCommand(cmd)
     return cmd
 }
+
 ```
 
 ### 关键函数速查
@@ -295,6 +298,12 @@ timeouts:
 
 ### 完整节点移除流程
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 步骤 1: 驱逐 Pod
 kubectl drain worker-1 --ignore-daemonsets --delete-emptydir-data
@@ -307,7 +316,7 @@ kubectl delete node worker-1
 # node "worker-1" deleted
 
 # 步骤 3: 在目标节点 reset
-kubeadm reset --force
+kubeadm reset --force  # ⚠️ 清理节点所有 K8s 配置
 # [preflight] Running pre-flight checks
 # [reset] Stopping the kubelet service
 # [reset] Unmounting mounted directories in "/var/lib/kubelet"
@@ -319,10 +328,10 @@ kubeadm reset --force
 # 步骤 4: 手动清理
 iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
 ipvsadm -C
-rm -rf /etc/cni/net.d
-rm -rf $HOME/.kube/config
+rm -rf /etc/cni/net.d  # ⚠️ 删除系统/数据文件
+rm -rf $HOME/.kube/config  # ⚠️ 删除系统/数据文件
 rm -f /etc/systemd/system/kubelet.service
-rm -rf /etc/systemd/system/kubelet.service.d/
+rm -rf /etc/systemd/system/kubelet.service.d/  # ⚠️ 删除系统/数据文件
 systemctl daemon-reload
 ```
 
@@ -333,6 +342,7 @@ kubectl get nodes
 # NAME       STATUS   ROLES           AGE   VERSION
 # master-1   Ready    control-plane   2h    v1.28.0
 # worker-2   Ready    worker          1h    v1.28.0
+
 ```
 
 ## 常见错误
@@ -367,18 +377,20 @@ kubectl get nodes
 - domain-03-networking-traffic MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
+- [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
-- [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
+- [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+
+```

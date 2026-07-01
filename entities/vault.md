@@ -1,6 +1,6 @@
 ---
 title: HashiCorp Vault
-description: '- [[synthesis/Secret 管理 × 存储模型|Secret 管理 × 存储模型]] — 综合'
+description: '- [[concepts/Secret 管理 × 存储模型.md|Secret 管理 × 存储模型]] — 综合'
 category: entities
 tags:
 - k8s
@@ -57,15 +57,15 @@ HashiCorp Vault is the leading enterprise [[Secrets|secrets]]ts Management|secre
 Instead of static passwords that persist indefinitely, Vault generates temporary database credentials on each application request. Credentials auto-expire after TTL (e.g., 1 hour), limiting the blast radius of credential theft.
 
 ## Related
-- [[synthesis/Secret 管理 × 存储模型|Secret 管理 × 存储模型]] — 综合
+- [[concepts/Secret 管理 × 存储模型.md|Secret 管理 × 存储模型]] — 综合
 
 - [[tokenetes]] — Tokenetes
 - [[external-secrets]] — External Secrets Operator
 - radius — radius
-- [[concepts/secrets-management|secrets-management]] — Secrets Management
-- [[concepts/cloud-native-defense-in-depth|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
-- [[concepts/secrets-management|Secrets Management]]
-- [[concepts/cloud-native-defense-in-depth|Cloud Native Defense in Depth]]
+- [[concepts/secrets-management.md|secrets-management]] — Secrets Management
+- [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
+- [[concepts/secrets-management.md|Secrets Management]]
+- [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
 - [[cert-manager|cert-manager]]
 
 - 05-commvault-enterprise-disaster-recovery

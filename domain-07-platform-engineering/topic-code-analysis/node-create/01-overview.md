@@ -128,6 +128,9 @@ Kubernetes 中的节点管理采用了"声明式"的设计哲学：用户通过 
 
 ### 1.1 完整生命周期流程
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```
 节点生命周期:
   ┌─────────────────────────────────────────────────────────────┐
@@ -165,12 +168,15 @@ Kubernetes 中的节点管理采用了"声明式"的设计哲学：用户通过 
   │  阶段 5: 节点移除                                           │
   │  ├── drain: 驱逐所有 Pod (遵守 PDB)                          │
   │  ├── delete: 从 API Server 删除 Node 对象                    │
-  │  ├── reset: kubeadm reset 清理节点配置                       │
+  │  ├── reset: kubeadm reset 清理节点配置                       │  # ⚠️ 清理节点所有 K8s 配置
   │  └── 释放: 云厂商释放实例资源                                 │
   └─────────────────────────────────────────────────────────────┘
 ```
 
 ### 1.2 节点状态流转
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 
 ```
                    ┌──────────────┐
@@ -208,7 +214,7 @@ Kubernetes 中的节点管理采用了"声明式"的设计哲学：用户通过 
                              ┌──────────────┐
                              │   Evicted    │  Pod 被驱逐
                              └──────┬───────┘
-                                    │ kubeadm reset
+                                    │ kubeadm reset  # ⚠️ 清理节点所有 K8s 配置
                                     ▼
                              ┌──────────────┐
                              │   Removed    │  节点已移除
@@ -348,6 +354,9 @@ status:
 
 ### 4.1 节点角色标签
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 查看控制面节点
 kubectl get nodes -l node-role.kubernetes.io/control-plane
@@ -420,6 +429,11 @@ kubectl get node <node> -o jsonpath='{.status.allocatable}'
 
 ## 六、节点常用命令速查
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 查看所有节点
 kubectl get nodes -o wide
@@ -478,7 +492,9 @@ kubectl debug node/<node> -it --image=busybox
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/docker|docker]]
-- [[concepts/node-lifecycle-management|node-lifecycle-management]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]
+- [[concepts/node-lifecycle-management.md|node-lifecycle-management]]
+
+```

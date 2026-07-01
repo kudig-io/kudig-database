@@ -94,7 +94,7 @@ k8s_versions:
 
 Veeam Backup & Replication 是业界最广泛部署的备份与灾难恢复解决方案，专为虚拟化、物理和云原生环境设计。凭借其独特的基于快照的增量备份（Forward/Reverse Incremental）、即时恢复（Instant VM Recovery）、构建器合成全量（Synthetic Full）以及 CDP（Continuous Data Protection）等核心能力，Veeam 在企业灾备领域占据重要地位。本文档从企业级备份专家角度，系统阐述 Veeam 的架构设计、备份策略、恢复流程、容灾演练和运维管理最佳实践。
 
-#<!-- chunk: RPO 与 RTO 定义 -->## RPO 与 RTO 定义
+## RPO 与 RTO 定义
 
 - **RPO（Recovery Point Objective）**：可容忍的数据丢失量上限。Veeam 通过差异化的备份频率和复制策略实现不同级别的 RPO：常规备份可实现小时级 RPO，CDP 可实现秒级 RPO，存储复制可实现零数据丢失。
 - **RTO（Recovery Time Objective）**：从灾难发生到服务恢复的最大允许时间。Veeam 的即时恢复（Instant VM Recovery）可将 RTO 缩短至分钟级，而传统的文件级恢复则可能需要数小时。
@@ -122,7 +122,7 @@ veeam_rpo_rto_capabilities:
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 企业级 Veeam 备份架构 -->## 企业级 Veeam 备份架构
+## 企业级 Veeam 备份架构
 
 ```mermaid
 graph TB
@@ -185,7 +185,7 @@ graph TB
     DR_PLAN --> BRS
 ```
 
-#<!-- chunk: 核心组件配置 -->## 核心组件配置
+## 核心组件配置
 
 ```yaml
 # Veeam 企业级部署配置
@@ -278,7 +278,7 @@ veeam_enterprise:
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: 备份作业配置 -->## 备份作业配置
+## 备份作业配置
 
 ```powershell
 # Veeam PowerShell 备份作业配置
@@ -332,7 +332,7 @@ Set-VBRJobSchedule -Job $jobName -Options $scheduleOptions
 Enable-VBRJobSchedule -Job $jobName
 ```
 
-#<!-- chunk: 复制作业配置 -->## 复制作业配置
+## 复制作业配置
 
 ```powershell
 # 灾备复制作业
@@ -362,7 +362,7 @@ $cdpPolicy = Add-VBRCDPPolicy -Name $cdpPolicyName `
     -RPO 60  # 60秒 RPO
 ```
 
-#<!-- chunk: 存储优化与安全 -->## 存储优化与安全
+## 存储优化与安全
 
 ```yaml
 # Veeam 存储优化配置
@@ -404,7 +404,7 @@ storage_optimization:
 
 <!-- chunk: 备份策略 -->## 备份策略
 
-#<!-- chunk: 3-2-1-1-0 原则 -->## 3-2-1-1-0 原则
+## 3-2-1-1-0 原则
 
 现代备份策略应遵循 **3-2-1-1-0** 原则：
 
@@ -447,7 +447,7 @@ backup_strategy:
     data_integrity_check: "每日"
 ```
 
-#<!-- chunk: 分层备份频率 -->## 分层备份频率
+## 分层备份频率
 
 ```yaml
 # 基于业务关键性的备份频率
@@ -485,7 +485,7 @@ backup_frequencies:
 
 <!-- chunk: 恢复流程 -->## 恢复流程
 
-#<!-- chunk: 即时虚拟机恢复 -->## 即时虚拟机恢复
+## 即时虚拟机恢复
 
 ```powershell
 # Veeam Instant VM Recovery - 最快恢复路径
@@ -533,7 +533,7 @@ Start-InstantRecovery -VmName "ERP-Database-01" `
     -TargetDatastore "DR-Datastore-01"
 ```
 
-#<!-- chunk: 完整灾难恢复流程 -->## 完整灾难恢复流程
+## 完整灾难恢复流程
 
 ```yaml
 # Veeam 灾难恢复操作手册
@@ -662,7 +662,7 @@ dr_drill_program:
 
 <!-- chunk: 监控告警 -->## 监控告警
 
-#<!-- chunk: Veeam ONE 监控配置 -->## Veeam ONE 监控配置
+## Veeam ONE 监控配置
 
 ```yaml
 # Veeam ONE 监控配置
@@ -707,7 +707,7 @@ veeam_one:
         port: 514
 ```
 
-#<!-- chunk: Prometheus 告警规则 -->## Prometheus 告警规则
+## Prometheus 告警规则
 
 ```yaml
 apiVersion: v1
@@ -757,7 +757,7 @@ data:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 备份策略最佳实践 -->## 备份策略最佳实践
+## 备份策略最佳实践
 
 1. **实施 Scale-Out Backup Repository（SOBR）**：将性能层、容量层和归档层分层管理，自动移动备份数据
 2. **启用不可变存储**：使用 S3 Object Lock 或 WORM 存储防止勒索软件加密备份
@@ -765,7 +765,7 @@ data:
 4. **启用 SureBackup**：每次备份后自动验证可恢复性，而非等到需要恢复时才发现问题
 5. **使用 WAN Accelerator**：跨站点复制时启用广域网加速，减少 10 倍以上带宽消耗
 
-#<!-- chunk: 安全最佳实践 -->## 安全最佳实践
+## 安全最佳实践
 
 - 使用 Active Directory 集成认证，基于角色分配权限（Backup Admin / Operator / Viewer）
 - 启用 MFA 多因素认证访问 Veeam Enterprise Manager
@@ -773,7 +773,7 @@ data:
 - 审计日志保留 90 天以上，接入 SIEM 平台
 - 实施最小权限原则：备份服务账户仅赋予必要的 vCenter 权限
 
-#<!-- chunk: 性能最佳实践 -->## 性能最佳实践
+## 性能最佳实践
 
 - Backup Proxy 部署为 Virtual Appliance 模式，使用 HotAdd 传输
 - 每个 Proxy 不超过 20 个并发任务
@@ -785,7 +785,7 @@ data:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题诊断 -->## 常见问题诊断
+## 常见问题诊断
 
 ```powershell
 # Veeam 故障排查工具集
@@ -830,7 +830,7 @@ function Invoke-VeeamDiagnostics {
 }
 ```
 
-#<!-- chunk: 故障排查手册 -->## 故障排查手册
+## 故障排查手册
 
 | 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
 |:---|:---|:---|:---|
@@ -851,7 +851,7 @@ function Invoke-VeeamDiagnostics {
 
 <!-- chunk: Veeam CDP 连续数据保护 -->## Veeam CDP 连续数据保护
 
-#<!-- chunk: CDP 策略配置 -->## CDP 策略配置
+## CDP 策略配置
 
 Veeam 的 Continuous Data Protection（CDP）功能基于 VMware vSphere 的 I/O Filter 框架，可以在虚拟机磁盘级别实现持续的数据复制。CDP 的 RPO 可以达到秒级——当源虚拟机发生问题时，CDP 副本的数据丢失量不超过配置的 RPO 目标。
 
@@ -901,7 +901,7 @@ Add-VBRCDPPolicy -Name $cdpPolicy.Name `
     -TargetDatastore (Get-VBRViDatastore -Name $cdpPolicy.TargetDatastore)
 ```
 
-#<!-- chunk: CDP 故障切换 -->## CDP 故障切换
+## CDP 故障切换
 
 ```powershell
 # CDP 故障切换脚本
@@ -939,7 +939,7 @@ function Start-CDPFailover {
 
 <!-- chunk: Veeam 勒索软件防护 -->## Veeam 勒索软件防护
 
-#<!-- chunk: 防勒索软件多层策略 -->## 防勒索软件多层策略
+## 防勒索软件多层策略
 
 勒索软件已成为企业数据安全的头号威胁。Veeam 提供了完整的多层勒索软件防护方案：不可变备份（Immutability）确保备份数据无法被加密或删除；Veeam ONE 的异常检测可以在勒索软件加密数据的早期阶段发现异常；即时恢复（Instant Recovery）可以从干净的恢复点快速恢复受影响的系统。
 
@@ -987,7 +987,7 @@ ransomware_protection:
 
 ---
 
-#<!-- chunk: 关键监控指标 -->## 关键监控指标
+## 关键监控指标
 
 Veeam 企业级监控需要关注以下核心指标，每个指标都直接关联到灾备方案的有效性：
 
@@ -1033,7 +1033,7 @@ veeam_kpi_thresholds:
 
 <!-- chunk: Veeam 自动化运维 -->## Veeam 自动化运维
 
-#<!-- chunk: 日常运维自动化脚本 -->## 日常运维自动化脚本
+## 日常运维自动化脚本
 
 ```powershell
 # Veeam 日常运维自动化
@@ -1112,7 +1112,7 @@ function New-VeeamDailyReport {
 
 <!-- chunk: Veeam 与存储集成 -->## Veeam 与存储集成
 
-#<!-- chunk: 存储快照集成 -->## 存储快照集成
+## 存储快照集成
 
 Veeam 支持与主流存储阵列（Dell EMC PowerMax、NetApp ONTAP、HPE Primera、Pure Storage 等）直接集成，利用存储阵列的原生快照功能实现更快的备份和更低的性能影响。
 
@@ -1158,7 +1158,7 @@ storage_integration:
 
 <!-- chunk: Veeam 性能优化 -->## Veeam 性能优化
 
-#<!-- chunk: 大规模环境性能调优 -->## 大规模环境性能调优
+## 大规模环境性能调优
 
 在大规模企业环境中（保护数千台虚拟机），Veeam 的性能优化至关重要。以下是从备份代理、存储库、网络和并发四个维度的优化建议。
 
@@ -1207,7 +1207,7 @@ performance_optimization:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-30-disaster-recovery-business-continuity KUDIG Database — Global MOC
-- [[domain-09-reliability-engineering/README|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
+- [[domain-09-reliability-engineering/README.md|Domain 09: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
 - Domain-30 灾备与业务连续性 — 开源项目索引
 - VMware vSphere 企业级灾备与业务连续性
 - 企业级容灾架构与混沌工程深度实践
@@ -1227,4 +1227,4 @@ performance_optimization:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]

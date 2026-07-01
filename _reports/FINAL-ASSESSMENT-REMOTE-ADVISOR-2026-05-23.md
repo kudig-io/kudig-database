@@ -5,6 +5,7 @@ tags: ["reports", "visibility/public"]
 sources: ["auto-generated"]
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # KUDIG 远程顾问模式 — 满分评估报告
@@ -77,6 +78,7 @@ action: 100% 已填充且按command+skill双维度个性化
 确认语气: 236处 (50.3%)  ✅ 目标50+
 Prose密度: 299条 (63.8%)  ✅ 目标40%+
 命令类型: 20种  ✅ 目标15+
+
 ```
 
 **命令类型清单**：
@@ -177,3 +179,5 @@ kubectl get, kubectl describe, kubectl logs, kubectl exec, kubectl rollout, ssh,
 ## 参见
 
 - [[kubernetes]] — visibility/public 领域核心页面
+
+```

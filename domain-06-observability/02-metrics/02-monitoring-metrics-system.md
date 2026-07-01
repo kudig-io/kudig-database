@@ -81,7 +81,7 @@ created: "2026-05-23"
 
 # 02 - 指标监控体系详解 (Monitoring Metrics System)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/prometheus|prometheus]].io/docs](https://prometheus.io/docs/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/prometheus.md|prometheus]].io/docs](https://prometheus.io/docs/)
 
 <!-- chunk: 概述 -->
 ## 概述
@@ -520,18 +520,16 @@ alertmanager_config:
     
   inhibit_rules:
     # 当节点宕机时，抑制该节点上的所有告警
-    - source_match:
-        alertname: NodeNotReady
-      target_match:
-        alertname: PodNotReady
-      equal: ['node']
-      
+    - source_matchers:
+      - alertname="NodeNotReady"
+      - target_match=""
+      - alertname="PodNotReady"
+      - equal="['node']"
     # 当API Server宕机时，抑制所有相关告警
-    - source_match:
-        alertname: KubeAPIServerDown
-      target_match_re:
-        alertname: ^(Kube|Etcd).*
-        
+    - source_matchers:
+      - alertname="KubeAPIServerDown"
+      - target_match_re=""
+      - alertname="^(Kube|Etcd).*"
   receivers:
     - name: 'default-receiver'
       email_configs:
@@ -699,8 +697,8 @@ Level 5 - 自主运维 (Autonomous Operations)
 ## Obsidian 相关文档
 
 - observability/MOC.md|domain-06-observability MOC]]
-- [[domain-06-observability/README|Observability Domain (可观测性领域)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-8 可观测性 — 开源项目索引]]
+- [[domain-06-observability/README.md|Observability Domain (可观测性领域)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 03 - 日志收集架构详解 (Logging Architecture)
 - 分布式追踪体系
@@ -713,18 +711,18 @@ Level 5 - 自主运维 (Autonomous Operations)
 
 ## Related
 
-- [[synthesis/Operator 模式 × 可观测性|Operator 模式 × 可观测性]]
+- [[concepts/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
 
 - 可观测性架构体系
 - 分布式追踪体系
-- [[domain-17-system-foundation/topic-cheat-sheet/promql|PromQL 速查卡]]
+- [[domain-17-system-foundation/topic-cheat-sheet/promql.md|PromQL 速查卡]]
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-02-workloads-applications
 - 相关知识域: domain-03-networking-traffic
 - 相关知识域: domain-07-platform-engineering
-- [[domain-17-system-foundation/topic-cheat-sheet/promql|速查卡: promql]]
+- [[domain-17-system-foundation/topic-cheat-sheet/promql.md|速查卡: promql]]
 
-- [[domain-06-observability/README|返回目录]]- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-06-observability/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ## See Also
 

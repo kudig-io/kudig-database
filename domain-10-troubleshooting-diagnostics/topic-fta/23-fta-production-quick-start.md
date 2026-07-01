@@ -169,11 +169,11 @@ Week 4: Feedback Loop - 持续改进
 
 ```
 
-#<!-- chunk: 第一周详细任务清单 -->## 第一周详细任务清单
+## 第一周详细任务清单
 
 **Week 1 Deliverables**
 
-##<!-- chunk: 任务 1.1：识别 Top 5 高频问题场景（2天） -->## 任务 1.1：识别 Top 5 高频问题场景（2天）
+## 任务 1.1：识别 Top 5 高频问题场景（2天）
 
 **输入材料**：
 - 过去 3-6 个月的事件记录（Incident Tickets）
@@ -211,7 +211,7 @@ jq '.issues[] | {summary: .fields.summary, resolution_time: .fields.resolutionda
 - ☑ 高 MTTR（解决时间 > 30分钟）
 - ☑ 根因不明确（多次发生但未彻底解决）
 
-##<!-- chunk: 任务 1.2：构建第一棵故障树（2天） -->## 任务 1.2：构建第一棵故障树（2天）
+## 任务 1.2：构建第一棵故障树（2天）
 
 **选择场景**：Service 不可用
 
@@ -299,7 +299,7 @@ E7: CPU/Memory 资源不足
 E8: Node NotReady
 ```
 
-##<!-- chunk: 任务 1.3：为底事件绑定检测手段（1天） -->## 任务 1.3：为底事件绑定检测手段（1天）
+## 任务 1.3：为底事件绑定检测手段（1天）
 
 **底事件检测映射表**：
 
@@ -376,7 +376,7 @@ echo ""
 echo "========== Diagnostic Complete =========="
 ```
 
-#<!-- chunk: 第二周：配置监控告警 -->## 第二周：配置监控告警
+## 第二周：配置监控告警
 
 **Week 2 Checklist**：
 
@@ -462,18 +462,16 @@ route:
   
   routes:
     # FTA Service Unavailable 专用路由
-    - match:
-        fta_tree: service_unavailable
-      receiver: 'sre-oncall'
+    - matchers:
+      - fta_tree="service_unavailable"
+      receiver: sre-oncall
       continue: true
       group_by: ['fta_event']  # 按底事件聚合
-    
     # 关键路径事件立即通知
-    - match_re:
-        fta_event: ^(E5|E6|E8)$  # CrashLoop, OOM, Node Failure
-      receiver: 'pagerduty-critical'
+    - matchers:
+      - fta_event=~"^(E5|E6|E8)$  # CrashLoop, OOM, Node Failure"
+      receiver: pagerduty-critical
       group_wait: 0s
-
 receivers:
   - name: 'sre-oncall'
     slack_configs:
@@ -486,7 +484,7 @@ receivers:
           *Runbook*: {{ (index .Alerts 0).Annotations.runbook_url }}
 ```
 
-#<!-- chunk: 第三周：构建 Runbook -->## 第三周：构建 Runbook
+## 第三周：构建 Runbook
 
 **Week 3 Checklist**：
 
@@ -538,7 +536,7 @@ Running   Not Running ────────┐
 
 <!-- chunk: 诊断步骤 -->## 诊断步骤
 
-#<!-- chunk: Step 1: 确认问题范围 -->## Step 1: 确认问题范围
+## Step 1: 确认问题范围
 
 ```bash
 # 1.1 检查 Service Endpoint 是否就绪
@@ -558,9 +556,9 @@ kubectl get events -n <namespace> --sort-by='.lastTimestamp' | tail -20
 
 **如果异常**：继续 Step 2
 
-#<!-- chunk: Step 2: Pod 不可用诊断（E4-E6） -->## Step 2: Pod 不可用诊断（E4-E6）
+## Step 2: Pod 不可用诊断（E4-E6）
 
-##<!-- chunk: E4: ImagePullBackOff -->## E4: ImagePullBackOff
+## E4: ImagePullBackOff
 
 **检测**：
 ```bash
@@ -592,7 +590,7 @@ docker pull <image-name>
 - 重新创建 ImagePullSecret
 - 回滚到上一个可用版本
 
-##<!-- chunk: E5: CrashLoopBackOff -->## E5: CrashLoopBackOff
+## E5: CrashLoopBackOff
 
 **检测**：
 ```bash
@@ -606,6 +604,7 @@ kubectl describe pod <pod-name> -n <namespace>
 3. 应用代码 Bug
 
 **修复步骤**：
+
 ```bash
 # 查看容器启动日志
 kubectl logs <pod-name> -n <namespace> -c <container-name>
@@ -625,7 +624,7 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].live
 - 调整 Liveness Probe 阈值
 - 回滚到稳定版本
 
-##<!-- chunk: E6: OOMKilled -->## E6: OOMKilled
+## E6: OOMKilled
 
 **检测**：
 ```bash
@@ -655,7 +654,7 @@ kubectl set resources deployment/<deployment-name> -n <namespace> --limits=memor
 - 排查内存泄漏（Heap Dump / Profiling）
 - 实施水平扩容（HPA）
 
-#<!-- chunk: Step 3: Pod Pending 诊断（E7） -->## Step 3: Pod Pending 诊断（E7）
+## Step 3: Pod Pending 诊断（E7）
 
 **检测**：
 ```bash
@@ -688,9 +687,9 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.affinity}'
 - 调整 Pod 资源请求
 - 放宽调度约束
 
-#<!-- chunk: Step 4: Service/Ingress 配置诊断（E1-E2） -->## Step 4: Service/Ingress 配置诊断（E1-E2）
+## Step 4: Service/Ingress 配置诊断（E1-E2）
 
-##<!-- chunk: E2: Service Selector 不匹配 -->## E2: Service Selector 不匹配
+## E2: Service Selector 不匹配
 
 **检测**：
 ```bash
@@ -704,6 +703,7 @@ kubectl get pods -n <namespace> --show-labels | grep <service-name>
 ```
 
 **快速修复**：
+
 ```bash
 # 方法1: 修正 Service Selector
 kubectl edit svc <service-name> -n <namespace>
@@ -712,7 +712,7 @@ kubectl edit svc <service-name> -n <namespace>
 kubectl edit deployment <deployment-name> -n <namespace>
 ```
 
-##<!-- chunk: E1: Ingress Backend 未配置 -->## E1: Ingress Backend 未配置
+## E1: Ingress Backend 未配置
 
 **检测**：
 ```bash
@@ -721,6 +721,7 @@ kubectl describe ingress <ingress-name> -n <namespace>
 ```
 
 **快速修复**：
+
 ```bash
 kubectl edit ingress <ingress-name> -n <namespace>
 # 确保 backend.service.name 和 backend.service.port 正确
@@ -751,7 +752,7 @@ kubectl edit ingress <ingress-name> -n <namespace>
 - 历史事件：https://jira.example.com/issues/?jql=labels=service-unavailable
 ```
 
-#<!-- chunk: 第四周：反馈循环与扩展 -->## 第四周：反馈循环与扩展
+## 第四周：反馈循环与扩展
 
 **Week 4 Checklist**：
 
@@ -767,24 +768,24 @@ kubectl edit ingress <ingress-name> -n <namespace>
 ```markdown
 <!-- chunk: FTA 分析 -->## FTA 分析
 
-#<!-- chunk: 问题在 FTA 中的位置 -->## 问题在 FTA 中的位置
+## 问题在 FTA 中的位置
 - [ ] 此问题已在现有 FTA 中覆盖
   - 故障树: _______________
   - 底事件: _______________
 - [ ] 此问题为新发现的故障模式（需要更新 FTA）
 
-#<!-- chunk: FTA 检测有效性 -->## FTA 检测有效性
+## FTA 检测有效性
 - [ ] 告警及时触发（检测延迟 < 1分钟）
 - [ ] 告警准确（无误报）
 - [ ] Runbook 指导有效（快速定位根因）
 
-#<!-- chunk: FTA 改进行动项 -->## FTA 改进行动项
+## FTA 改进行动项
 - [ ] 新增底事件: _______________
 - [ ] 更新检测手段: _______________
 - [ ] 优化告警规则: _______________
 - [ ] 更新 Runbook: _______________
 
-#<!-- chunk: FTA 更新 PR -->## FTA 更新 PR
+## FTA 更新 PR
 - PR 链接: _______________
 - Review 负责人: _______________
 ```
@@ -795,14 +796,14 @@ kubectl edit ingress <ingress-name> -n <namespace>
 
 本节将手把手带你构建一棵完整的 Kubernetes 故障树，以 **"Service 不可用"** 为例。
 
-#<!-- chunk: 23.2.1 顶事件定义 -->## 23.2.1 顶事件定义
+## 23.2.1 顶事件定义
 
 **顶事件 (Top Event)**：
 - **现象**：用户访问服务时收到 HTTP 503 / 504 错误，或连接超时
 - **业务影响**：服务完全不可用，影响所有用户
 - **SLI 指标**：`probe_success{service="my-service"} == 0`（外部探测失败）
 
-#<!-- chunk: 23.2.2 第一层分解：确定主要问题路径 -->## 23.2.2 第一层分解：确定主要问题路径
+## 23.2.2 第一层分解：确定主要问题路径
 
 使用 **OR 门** 分解，表示任意一个分支发生都会导致顶事件。
 
@@ -829,7 +830,7 @@ kubectl edit ingress <ingress-name> -n <namespace>
 2. **Kubernetes Service 层问题**：Service、Endpoint 配置错误
 3. **Network/Ingress 层问题**：Ingress、负载均衡器配置错误或网络不通
 
-#<!-- chunk: 23.2.3 第二层分解：Backend Pod 不可用 -->## 23.2.3 第二层分解：Backend Pod 不可用
+## 23.2.3 第二层分解：Backend Pod 不可用
 
 ```
             ┌─────────────────────┐
@@ -846,7 +847,7 @@ kubectl edit ingress <ingress-name> -n <namespace>
   └───────────┘  └───────────┘  └───────────┘
 ```
 
-#<!-- chunk: 23.2.4 第三层分解：Pod Crash 的具体原因 -->## 23.2.4 第三层分解：Pod Crash 的具体原因
+## 23.2.4 第三层分解：Pod Crash 的具体原因
 
 ```
             ┌─────────────────────┐
@@ -865,7 +866,7 @@ kubectl edit ingress <ingress-name> -n <namespace>
      (E4)            (E5)            (E6)            (E9)
 ```
 
-#<!-- chunk: 23.2.5 第三层分解：Pod Pending 的具体原因 -->## 23.2.5 第三层分解：Pod Pending 的具体原因
+## 23.2.5 第三层分解：Pod Pending 的具体原因
 
 ```
             ┌─────────────────────┐
@@ -883,7 +884,7 @@ kubectl edit ingress <ingress-name> -n <namespace>
      (E7)            (E8)           (E10)           (E11)
 ```
 
-#<!-- chunk: 23.2.6 完整故障树图 -->## 23.2.6 完整故障树图
+## 23.2.6 完整故障树图
 
 ```
                               ┌──────────────────────────┐
@@ -931,7 +932,7 @@ E11: Taint/Toleration 不匹配
 E12: Network Policy / Firewall 阻断
 ```
 
-#<!-- chunk: 23.2.7 底事件详细定义与检测 -->## 23.2.7 底事件详细定义与检测
+## 23.2.7 底事件详细定义与检测
 
 | ID | 底事件名称 | 检测指标/命令 | 告警条件 | 修复 SOP |
 |----|-----------|--------------|---------|---------|
@@ -948,7 +949,7 @@ E12: Network Policy / Firewall 阻断
 | E11 | Taint/Toleration 不匹配 | Pod Event: FailedScheduling | 包含 "taint" | 添加 Toleration 或调整 Node Taint |
 | E12 | Network Policy 阻断 | 连通性测试失败 | Connection Refused | 检查 NetworkPolicy, Security Group |
 
-#<!-- chunk: 23.2.8 故障树到诊断命令的映射 -->## 23.2.8 故障树到诊断命令的映射
+## 23.2.8 故障树到诊断命令的映射
 
 **快速诊断脚本**：
 
@@ -1078,7 +1079,7 @@ echo "==========================================="
 
 <!-- chunk: 23.3 FTA 与 SRE On-Call 工作流集成 -->## 23.3 FTA 与 SRE On-Call 工作流集成
 
-#<!-- chunk: 23.3.1 On-Call 工作流现状痛点 -->## 23.3.1 On-Call 工作流现状痛点
+## 23.3.1 On-Call 工作流现状痛点
 
 传统 On-Call 工作流的常见问题：
 
@@ -1115,7 +1116,7 @@ echo "==========================================="
 └──────────────┘
 ```
 
-#<!-- chunk: 23.3.2 FTA 增强的 On-Call 工作流 -->## 23.3.2 FTA 增强的 On-Call 工作流
+## 23.3.2 FTA 增强的 On-Call 工作流
 
 ```
 FTA-Enhanced On-Call 流程：
@@ -1153,7 +1154,7 @@ FTA-Enhanced On-Call 流程：
 └──────────────────────┘
 ```
 
-#<!-- chunk: 23.3.3 告警聚合与降噪 -->## 23.3.3 告警聚合与降噪
+## 23.3.3 告警聚合与降噪
 
 **问题**：一个顶事件（如 Service 不可用）可能触发多个底事件告警，导致告警风暴。
 
@@ -1167,9 +1168,9 @@ route:
   group_interval: 5m
   
   routes:
-    - match:
-        fta_tree: service_unavailable
-      receiver: 'sre-oncall'
+    - matchers:
+      - fta_tree="service_unavailable"
+      receiver: sre-oncall
       continue: false
 ```
 
@@ -1208,7 +1209,7 @@ FTA 聚合后（1 条综合告警）：
    3. Check dependency services
 ```
 
-#<!-- chunk: 23.3.4 On-Call Playbook 决策树 -->## 23.3.4 On-Call Playbook 决策树
+## 23.3.4 On-Call Playbook 决策树
 
 **基于 FTA 的 On-Call 决策流程**：
 
@@ -1260,7 +1261,7 @@ Known Tree  Unknown Tree
               └─> 联系供应商 / 切换备用方案
 ```
 
-#<!-- chunk: 23.3.5 On-Call Handoff 模板 -->## 23.3.5 On-Call Handoff 模板
+## 23.3.5 On-Call Handoff 模板
 
 **交接清单（包含 FTA 上下文）**：
 
@@ -1271,15 +1272,15 @@ Known Tree  Unknown Tree
 **On-Call**: Alice -> Bob
 **时间段**: 2024-01-14 09:00 AM ~ 2024-01-15 09:00 AM
 
-#<!-- chunk: 事件汇总 -->## 事件汇总
+## 事件汇总
 
 **总事件数**: 3
 **P0/P1 事件**: 1
 **平均 MTTR**: 25 分钟
 
-#<!-- chunk: 详细事件 -->## 详细事件
+## 详细事件
 
-##<!-- chunk: Event 1: Service Unavailable - my-service -->## Event 1: Service Unavailable - my-service
+## Event 1: Service Unavailable - my-service
 
 - **触发时间**: 2024-01-14 14:32
 - **解决时间**: 2024-01-14 14:55
@@ -1293,7 +1294,7 @@ Known Tree  Unknown Tree
 - **FTA 更新**: 无需更新（已覆盖）
 - **Postmortem**: [LINK]
 
-##<!-- chunk: Event 2: Disk Space Warning - node-xyz -->## Event 2: Disk Space Warning - node-xyz
+## Event 2: Disk Space Warning - node-xyz
 
 - **触发时间**: 2024-01-14 22:15
 - **解决时间**: 2024-01-14 22:40
@@ -1307,37 +1308,37 @@ Known Tree  Unknown Tree
 - **FTA 更新**: 无需更新
 - **Postmortem**: 无需（常规运维）
 
-#<!-- chunk: 待跟进事项 -->## 待跟进事项
+## 待跟进事项
 
 - [ ] Event 1 的 HPA 配置（Owner: Alice, Due: 2024-01-17）
 - [ ] 所有 Node 的 logrotate 配置审计（Owner: Bob, Due: 2024-01-20）
 
-#<!-- chunk: FTA 改进建议 -->## FTA 改进建议
+## FTA 改进建议
 
 - [ ] 考虑为 "Disk Space" 场景创建独立的故障树
 - [ ] E6 (OOMKilled) 的告警阈值可以降低（当前 1 次触发，建议改为 0 次容忍）
 
-#<!-- chunk: 当前告警状态 -->## 当前告警状态
+## 当前告警状态
 
 **活跃告警**: 0
 **静默告警**: 2
   - NetworkPolicy audit (计划内维护)
   - Test cluster alert (开发环境)
 
-#<!-- chunk: 资源状态 -->## 资源状态
+## 资源状态
 
 **集群健康度**: ✅ Healthy
 **Node 可用性**: 100% (12/12 Ready)
 **关键 Service SLO 达成率**: 99.95%
 
-#<!-- chunk: 备注 -->## 备注
+## 备注
 
 本周计划内变更：
 - 2024-01-16 02:00 AM: Kubernetes 升级 (1.28 -> 1.29)
 - 2024-01-17 10:00 AM: Database 主从切换演练
 ```
 
-#<!-- chunk: 23.3.6 PagerDuty / OpsGenie 集成 -->## 23.3.6 PagerDuty / OpsGenie 集成
+## 23.3.6 PagerDuty / OpsGenie 集成
 
 **PagerDuty Event 格式（包含 FTA 信息）**：
 
@@ -1376,7 +1377,7 @@ Known Tree  Unknown Tree
 
 <!-- chunk: 23.4 FTA 与 Postmortem 流程集成 -->## 23.4 FTA 与 Postmortem 流程集成
 
-#<!-- chunk: 23.4.1 传统 Postmortem 的局限性 -->## 23.4.1 传统 Postmortem 的局限性
+## 23.4.1 传统 Postmortem 的局限性
 
 **常见问题**：
 
@@ -1385,7 +1386,7 @@ Known Tree  Unknown Tree
 3. **重复问题频发**：相同或类似问题反复发生
 4. **改进措施不落地**：Action Items 执行率低
 
-#<!-- chunk: 23.4.2 FTA-Enhanced Postmortem 模板 -->## 23.4.2 FTA-Enhanced Postmortem 模板
+## 23.4.2 FTA-Enhanced Postmortem 模板
 
 ```markdown
 # Postmortem: [事件标题]
@@ -1418,7 +1419,7 @@ Known Tree  Unknown Tree
 
 <!-- chunk: FTA 分析 -->## FTA 分析
 
-#<!-- chunk: 问题在 FTA 中的定位 -->## 问题在 FTA 中的定位
+## 问题在 FTA 中的定位
 
 - ✅ **此问题已在现有 FTA 中覆盖**
   - **故障树**: `service_unavailable`
@@ -1426,7 +1427,7 @@ Known Tree  Unknown Tree
   - **问题路径**: Backend Pod 不可用 -> Pod Crash -> OOMKilled
   - **底事件**: E6 (OOMKilled)
 
-#<!-- chunk: FTA 决策树演练 -->## FTA 决策树演练
+## FTA 决策树演练
 
 ```
 Service 不可用
@@ -1441,7 +1442,7 @@ Pod Crash? ✅ 是
 OOMKilled? ✅ 是 (E6)
 ```
 
-#<!-- chunk: FTA 检测有效性评估 -->## FTA 检测有效性评估
+## FTA 检测有效性评估
 
 | 检查项 | 状态 | 说明 |
 |--------|------|------|
@@ -1451,7 +1452,7 @@ OOMKilled? ✅ 是 (E6)
 | 根因定位时间 | ✅ 快 | 5 分钟内定位到 OOM 根因 |
 | 修复时间 | ⚠️ 偏长 | 修复耗时 28 分钟（等待 Pod 重启 + 调整配置 + 再次重启） |
 
-#<!-- chunk: FTA 覆盖度分析 -->## FTA 覆盖度分析
+## FTA 覆盖度分析
 
 - ✅ **底事件 E6 已覆盖**
 - ⚠️ **触发因素未覆盖**："流量突增"作为一个重要触发因素，未在 FTA 中体现
@@ -1478,7 +1479,7 @@ OOMKilled? ✅ 是 (E6)
 
 <!-- chunk: 根因分析 (Root Cause Analysis) -->## 根因分析 (Root Cause Analysis)
 
-#<!-- chunk: 5 Whys 分析 -->## 5 Whys 分析
+## 5 Whys 分析
 
 1. **为什么服务不可用？**
    - 因为所有 Pod 处于 CrashLoopBackOff 状态
@@ -1495,7 +1496,7 @@ OOMKilled? ✅ 是 (E6)
 5. **为什么流量突增时内存 Limit 不够用？**
    - 因为初始配置时使用的是低流量时的数据，未进行容量规划和压力测试
 
-#<!-- chunk: FTA Fault Path Analysis -->## FTA Fault Path Analysis
+## FTA Fault Path Analysis
 
 ```
 顶事件: Service 不可用
@@ -1515,7 +1516,7 @@ OOMKilled? ✅ 是 (E6)
   - 营销活动导致流量突增 3 倍
 ```
 
-#<!-- chunk: 贡献因素 (Contributing Factors) -->## 贡献因素 (Contributing Factors)
+## 贡献因素 (Contributing Factors)
 
 | 因素 | 分类 | 影响程度 |
 |------|------|---------|
@@ -1527,13 +1528,13 @@ OOMKilled? ✅ 是 (E6)
 
 <!-- chunk: 改进措施 (Action Items) -->## 改进措施 (Action Items)
 
-#<!-- chunk: 立即行动 (Immediate Actions - 已完成) -->## 立即行动 (Immediate Actions - 已完成)
+## 立即行动 (Immediate Actions - 已完成)
 
 - [x] 将 `my-service` Memory Limit 增加到 2Gi
 - [x] 手动扩容到 10 副本应对当前流量
 - [x] 监控内存使用情况，确保稳定
 
-#<!-- chunk: 短期行动 (Short-term - 1-2 周) -->## 短期行动 (Short-term - 1-2 周)
+## 短期行动 (Short-term - 1-2 周)
 
 | ID | 行动项 | 负责人 | 截止日期 | FTA 关联 |
 |----|--------|--------|---------|---------|
@@ -1546,22 +1547,22 @@ OOMKilled? ✅ 是 (E6)
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC|topic-fta MOC]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/README|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution|第一章：FTA 起源与发展史]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations|第二章：FTA 数学基础与理论模型]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards|第三章：FTA 符号体系与标准规范]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles|第四章：FTA 方法论核心原则]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/05-fta-construction-process|第五章：FTA 构建完整流程]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/06-fta-verification-and-quality|第六章：FTA 验证与质量保证]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/07-fta-maintenance-and-evolution|第七章：FTA 维护与演进策略]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution|第八章：AI Agent 时代的运维范式革命]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns|第十章：Agent 编排模式与 FTA 逻辑门映射]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|topic-fta MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/21-self-evolving-ops-system|21-self-evolving-ops-system]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/22-industry-standardization|22-industry-standardization]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/ack-fta-generator-v2|ack-fta-generator-v2]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-a-glossary|appendix-a-glossary]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/21-self-evolving-ops-system.md|21-self-evolving-ops-system]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/22-industry-standardization.md|22-industry-standardization]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/ack-fta-generator-v2.md|ack-fta-generator-v2]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-a-glossary.md|appendix-a-glossary]]

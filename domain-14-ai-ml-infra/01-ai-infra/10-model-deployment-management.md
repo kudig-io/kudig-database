@@ -61,7 +61,7 @@ created: "2026-05-23"
 
 # AI模型部署与生命周期管理
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kserve|KServe]]](https://kserve.github.io/website/) | [Seldon Core](https://docs.seldon.io/projects/seldon-core/) | [BentoML](https://docs.bentoml.org/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kserve.md|KServe]]](https://kserve.github.io/website/) | [Seldon Core](https://docs.seldon.io/projects/seldon-core/) | [BentoML](https://docs.bentoml.org/)
 
 <!-- chunk: 一、模型部署架构概览 -->
 ## 一、模型部署架构概览
@@ -837,6 +837,10 @@ rollback_manager.monitor_and_rollback("llama3-inference-deployment", rollback_wi
 ### 6.2 常见问题处理
 
 **模型加载失败**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查存储访问权限
 kubectl get pvc -n ai-models
@@ -850,6 +854,10 @@ kubectl logs <pod-name> -n ai-models -c model-loader
 ```
 
 **推理性能下降**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查GPU资源使用
 kubectl top nodes --selector=nvidia.com/gpu.present=true
@@ -878,7 +886,7 @@ kubectl describe pods -l app=<app-name> -n ai-models
 ## Obsidian 相关文档
 
 - domain-11-ai-infra KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
 - Domain-11 AI 基础设施 — 开源项目索引
 - AI 基础设施架构
 - 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
@@ -899,4 +907,4 @@ kubectl describe pods -l app=<app-name> -n ai-models
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]

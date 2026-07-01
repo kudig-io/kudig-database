@@ -554,8 +554,8 @@ collaboration_guidelines:
 ## Obsidian 相关文档
 
 - observability/MOC.md|domain-06-observability MOC]]
-- [[domain-06-observability/README|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-8 可观测性 — 开源项目索引]]
+- [[domain-06-observability/README.md|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
 - 03 - 日志收集架构详解 (Logging Architecture)
@@ -573,8 +573,8 @@ collaboration_guidelines:
 - 08-logging-audit-compliance
 - 09-events-audit-logs
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

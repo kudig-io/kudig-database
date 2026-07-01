@@ -128,10 +128,6 @@ RBAC 最佳实践:
 | 定期审计 | 清理过期权限 | 永不审查 RBAC |
 
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 **准入控制** 是请求通过认证和授权后的最后一道关卡。它可以在资源被持久化到 etcd 之前进行拦截和修改。常见的准入控制器包括：NamespaceLifecycle（防止在正在删除的命名空间中创建资源）、LimitRanger（确保资源请求在 LimitRange 范围内）、ResourceQuota（确保命名空间的资源配额不被超出）、PodSecurity（替代已废弃的 PodSecurityPolicy，实施 Pod 安全标准）。
 
 准入控制阶段:
@@ -259,6 +255,9 @@ FEBM 流程:
 
 ### 本周实操环境准备
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 确保集群正常运行
 kubectl get nodes
@@ -312,6 +311,7 @@ metric_relabel_configs:
 - source_labels: [__name__]
   regex: 'go_.*'
   action: drop
+
 ```
 
 ### Q3: 如何快速定位一个 Pod 的问题原因？
@@ -358,22 +358,24 @@ Day 19（故障排查方法论）是本周最关键的一天。FTA 和 FEBM 方�
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
+- [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
+- [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
-- [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
+- [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+
+```

@@ -5,6 +5,7 @@ tags: ["index", "domain-11-production-operations", "navigation"]
 sources: ["auto-generated"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 ---
 
 # Domain 11 内容索引
@@ -47,8 +48,8 @@ updated: 2026-05-21
 - [[README-original-from-domain-18]] — README original from domain 18
 
 ## 相关 Domain
-- [[domain-07-platform-engineering/98-merged-indexes/index|Domain 07 平台工程 索引]]
-- [[domain-09-reliability-engineering/98-merged-indexes/index|Domain 09 可靠性工程 索引]]
+- [[domain-07-platform-engineering/98-merged-indexes/index.md|Domain 07 平台工程 索引]]
+- [[domain-09-reliability-engineering/98-merged-indexes/index.md|Domain 09 可靠性工程 索引]]
 
 ## 生产运行手册
-- [[domain-11-production-operations/05-production-runbook-generator|Production Runbook Generator]]
+- [[domain-11-production-operations/05-production-runbook-generator.md|Production Runbook Generator]]

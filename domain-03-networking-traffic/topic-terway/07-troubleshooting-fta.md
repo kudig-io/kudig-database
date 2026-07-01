@@ -162,6 +162,7 @@ Pod ContainerCreating, 事件含 ENI/bindquota/AttachNetworkInterface
     |       |
     |       +-- 同时存在 "bindquota exceeded" + "Throttling"
     |               --> AND 门: 扩容网络阻塞 (gate_and_scale)
+
 ```
 
 ### 4.2 诊断命令
@@ -207,6 +208,7 @@ Pod ContainerCreating, 事件含 IP/pool/address
     |       |
     |       +-- 同时存在 "pool exhausted" + "IP not released"
     |               --> AND 门: IP 完全耗尽 (gate_and_ip)
+
 ```
 
 ### 5.2 诊断命令
@@ -222,6 +224,9 @@ Pod ContainerCreating, 事件含 IP/pool/address
 | | | `arping -I eth0 -c 3 ${CONFLICT_IP} 2>&1` | 多个 MAC 响应 | 确认根因 |
 
 ### 5.3 IP 泄漏检测脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -317,6 +322,7 @@ Pod 事件含 FailedCreatePodSandBox / cni plugin / terway
     +-- ping -s 1400 -M do <target>
             |
             +-- "message too long" / "Frag needed" --> MTU/分片异常 (evt_mtu_issue)
+
 ```
 
 ### 7.2 诊断命令
@@ -609,6 +615,7 @@ Terway BGP 会话中断或路由黑洞
     |       |
     |       +-- AS 号冲突 --> BGP AS 号冲突 (evt_bgp_as_conflict)
     |               原因: 多集群使用相同 AS 号
+
 ```
 
 ### 14.2 诊断命令
@@ -753,7 +760,7 @@ related_docs:
   - path: "07-troubleshooting-fta.md"
     type: "fta"
     relevance: 0.98
-  - path: "[[domain-03-networking-traffic/topic-terway/03-usage|03-usage]].md"
+  - path: "[[domain-03-networking-traffic/topic-terway/03-usage.md|03-usage]].md"
     type: "structural"
     relevance: 0.95
   - path: "../domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis-v2.md"
@@ -825,4 +832,6 @@ auto_heal_actions:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+```

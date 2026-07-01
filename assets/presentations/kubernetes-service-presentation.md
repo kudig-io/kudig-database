@@ -334,7 +334,7 @@ DNAT 到 Pod IP:Port
 - 减少 API Server 和网络压力
 
 ```yaml
-apiVersion: discovery.[[entities/kubernetes|k8s]].io/v1
+apiVersion: discovery.[[entities/kubernetes.md|k8s]].io/v1
 kind: EndpointSlice
 metadata:
   name: my-service-abc
@@ -526,6 +526,9 @@ graph TB
 
 ### 演示 1：Service 类型实践
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 步骤 1: 创建 Deployment
 kubectl create deployment demo-app --image=nginx --replicas=3
@@ -567,6 +570,10 @@ curl http://<node-ip>:30080
 
 ### 演示 2：kube-proxy 模式检查与切换
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 步骤 1: 查看当前 kube-proxy 模式
 kubectl get configmap kube-proxy -n kube-system -o yaml | grep mode
@@ -600,6 +607,9 @@ sudo ipvsadm -Ln | head -5
 ```
 
 ### 演示 3：Headless Service + StatefulSet
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat <<EOF | kubectl apply -f -
@@ -660,6 +670,9 @@ kubectl run test-dns --image=busybox --rm -it --restart=Never -- \
 ```
 
 ### 演示 4：ExternalTrafficPolicy 对比
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 LoadBalancer Service (Cluster 模式)
@@ -742,6 +755,9 @@ kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=50
 
 **目标**：验证 CoreDNS + Service + Endpoints 的完整发现流程
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. 创建 Deployment 和 Service
 kubectl create deployment discover-test --image=nginx --replicas=3
@@ -795,6 +811,7 @@ spec:
   sessionAffinityConfig:
     clientIP:
       timeoutSeconds: 10800  # 3 小时
+
 ```
 
 注意：这依赖于客户端 IP 不变，如果经过多层代理可能不生效。更可靠的方案是在应用层实现（如使用 Cookie、JWT Token 或一致性哈希）。
@@ -908,3 +925,5 @@ Service
 ---
 
 > **Kusheet Project** | 作者: Allen Galler (allengaller@gmail.com)
+
+```

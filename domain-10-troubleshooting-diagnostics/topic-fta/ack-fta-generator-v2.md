@@ -363,7 +363,7 @@ output:
 
 <!-- chunk: 3. ACK 特有组件覆盖要求 -->## 3. ACK 特有组件覆盖要求
 
-#<!-- chunk: 3.1 阿里云底层 IaaS 依赖层 -->## 3.1 阿里云底层 IaaS 依赖层
+## 3.1 阿里云底层 IaaS 依赖层
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -396,7 +396,7 @@ output:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 3.2 ACK 管控面组件 -->## 3.2 ACK 管控面组件
+## 3.2 ACK 管控面组件
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -421,7 +421,7 @@ output:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 3.3 Terway 网络插件 -->## 3.3 Terway 网络插件
+## 3.3 Terway 网络插件
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -452,7 +452,7 @@ output:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 3.4 ASM (Alibaba Cloud Service Mesh) -->## 3.4 ASM (Alibaba Cloud Service Mesh)
+## 3.4 ASM (Alibaba Cloud Service Mesh)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -482,7 +482,7 @@ output:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 3.5 ARMS (Application Real-Time Monitoring Service) -->## 3.5 ARMS (Application Real-Time Monitoring Service)
+## 3.5 ARMS (Application Real-Time Monitoring Service)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -507,7 +507,7 @@ output:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 3.6 ACK-One 多集群/混合云 -->## 3.6 ACK-One 多集群/混合云
+## 3.6 ACK-One 多集群/混合云
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -531,7 +531,7 @@ output:
 
 <!-- chunk: 4. FTA-FEBM 双向融合机制 -->## 4. FTA-FEBM 双向融合机制
 
-#<!-- chunk: 4.1 融合架构 -->## 4.1 融合架构
+## 4.1 融合架构
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -563,7 +563,7 @@ output:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 4.2 融合映射规则 -->## 4.2 融合映射规则
+## 4.2 融合映射规则
 
 ```yaml
 fta_febm_mapping:
@@ -622,7 +622,7 @@ fta_febm_mapping:
       - "在 FTA 中标记为 '需人工确认'"
 ```
 
-#<!-- chunk: 4.3 联合诊断流程 -->## 4.3 联合诊断流程
+## 4.3 联合诊断流程
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -663,7 +663,7 @@ fta_febm_mapping:
 
 <!-- chunk: 5. 自动化 FTA 生成能力 -->## 5. 自动化 FTA 生成能力
 
-#<!-- chunk: 5.1 从源码自动生成 FTA -->## 5.1 从源码自动生成 FTA
+## 5.1 从源码自动生成 FTA
 
 ```python
 class ACKFTAGenerator:
@@ -725,7 +725,7 @@ class ACKFTAGenerator:
         return ack_mapping
 ```
 
-#<!-- chunk: 5.2 从告警规则反推 FTA -->## 5.2 从告警规则反推 FTA
+## 5.2 从告警规则反推 FTA
 
 ```python
 class AlertToFTAGenerator:
@@ -767,7 +767,7 @@ class AlertToFTAGenerator:
         return "TE-2: 应用服务不可用"
 ```
 
-#<!-- chunk: 5.3 从问题日志生成 FTA -->## 5.3 从问题日志生成 FTA
+## 5.3 从问题日志生成 FTA
 
 ```python
 class IncidentToFTAGenerator:
@@ -800,7 +800,7 @@ class IncidentToFTAGenerator:
 
 <!-- chunk: 6. 可执行格式转换 -->## 6. 可执行格式转换
 
-#<!-- chunk: 6.1 FTA → 可执行命令 -->## 6.1 FTA → 可执行命令
+## 6.1 FTA → 可执行命令
 
 ```yaml
 # 从底事件自动生成可执行命令模板
@@ -847,7 +847,7 @@ executable_conversion:
         kubectl rollout status deployment/$DEPLOYMENT -n $NAMESPACE
 ```
 
-#<!-- chunk: 6.2 FTA → Kubernetes Operator/Controller -->## 6.2 FTA → Kubernetes Operator/Controller
+## 6.2 FTA → Kubernetes Operator/Controller
 
 ```yaml
 # FTA 驱动的自动修复 Operator
@@ -888,7 +888,7 @@ data:
         expected: "memory < limit * 0.8"
 ```
 
-#<!-- chunk: 6.3 FTA → Ansible Playbook -->## 6.3 FTA → Ansible Playbook
+## 6.3 FTA → Ansible Playbook
 
 ```yaml
 # FTA 驱动的 Ansible Playbook 模板
@@ -930,7 +930,7 @@ data:
               etcdctl snapshot restore /backup/etcd-latest.snap
 ```
 
-#<!-- chunk: 6.4 FTA → OpenTelemetry 指标映射 -->## 6.4 FTA → OpenTelemetry 指标映射
+## 6.4 FTA → OpenTelemetry 指标映射
 
 ```yaml
 # FTA 底事件 → OpenTelemetry 指标定义
@@ -988,7 +988,7 @@ otel_mapping:
 
 <!-- chunk: 7. 质量保证清单 -->## 7. 质量保证清单
 
-#<!-- chunk: 7.1 生成前检查 -->## 7.1 生成前检查
+## 7.1 生成前检查
 
 ```yaml
 pre_generation_checks:
@@ -1015,7 +1015,7 @@ pre_generation_checks:
       - validate_mesh_version: "ASM >= 1.9"
 ```
 
-#<!-- chunk: 7.2 生成后检查 -->## 7.2 生成后检查
+## 7.2 生成后检查
 
 ```yaml
 post_generation_checks:
@@ -1088,7 +1088,7 @@ post_generation_checks:
 
 <!-- chunk: 8. 输出格式模板 -->## 8. 输出格式模板
 
-#<!-- chunk: 8.1 完整输出示例 -->## 8.1 完整输出示例
+## 8.1 完整输出示例
 
 ```yaml
 # ACK-FTA 生成器输出示例
@@ -1332,7 +1332,7 @@ error_handling:
 
 <!-- chunk: 10. 完整示例对话 -->## 10. 完整示例对话
 
-#<!-- chunk: 输入 1：源码分析 -->## 输入 1：源码分析
+## 输入 1：源码分析
 
 ```yaml
 input:
@@ -1351,7 +1351,7 @@ input:
       - "apierrors.IsUnexpected"
 ```
 
-#<!-- chunk: 输出 1：生成的 FTA -->## 输出 1：生成的 FTA
+## 输出 1：生成的 FTA
 
 ```yaml
 output:
@@ -1488,22 +1488,22 @@ changelog:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC|topic-fta MOC]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/README|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution|第一章：FTA 起源与发展史]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations|第二章：FTA 数学基础与理论模型]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards|第三章：FTA 符号体系与标准规范]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles|第四章：FTA 方法论核心原则]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/05-fta-construction-process|第五章：FTA 构建完整流程]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/06-fta-verification-and-quality|第六章：FTA 验证与质量保证]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/07-fta-maintenance-and-evolution|第七章：FTA 维护与演进策略]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution|第八章：AI Agent 时代的运维范式革命]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns|第十章：Agent 编排模式与 FTA 逻辑门映射]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|topic-fta MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/22-industry-standardization|22-industry-standardization]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/23-fta-production-quick-start|23-fta-production-quick-start]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-a-glossary|appendix-a-glossary]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-b-tools-and-resources|appendix-b-tools-and-resources]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/22-industry-standardization.md|22-industry-standardization]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/23-fta-production-quick-start.md|23-fta-production-quick-start]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-a-glossary.md|appendix-a-glossary]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-b-tools-and-resources.md|appendix-b-tools-and-resources]]

@@ -126,6 +126,9 @@ created: "2026-05-23"
 
 ### 2.3 OCI Registry 支持
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 将 Chart 推送到 OCI 兼容仓库 (Harbor/ACR/ECR)
 helm push mychart-1.0.0.tgz oci://harbor.example.com/charts
@@ -261,6 +264,7 @@ spec:
 - TechDocs: 文档即代码 (MkDocs 集成)
 - 插件生态: 200+ 社区插件
 - 搜索聚合、API 文档、成本洞察
+
 ```
 
 ### 5.2 2025-2026 增长数据
@@ -381,7 +385,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech MOC
-- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现
 - 03 - 准入控制器(Webhook)配置与实现
@@ -392,3 +396,5 @@ spec:
 - CI/CD 管道
 - 48 - GitOps工作流
 - 103 - 容器镜像构建工具 (Container Image Build)
+
+```

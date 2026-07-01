@@ -42,7 +42,7 @@ description: '## 项目概述'
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -55,9 +55,9 @@ description: '## 项目概述'
 ## 参考链接
 
 - [[istio]]
-- [[entities/vault|[[HashiCorp Vault|vault]]]]
-- [[entities/csi-drivers|csi-drivers]]
-- [[concepts/security-defense-depth|security-defense-depth]]
+- [[entities/vault.md|[[HashiCorp Vault|vault]]]]
+- [[entities/csi-drivers.md|csi-drivers]]
+- [[concepts/security-defense-depth.md|security-defense-depth]]
 
 ## Related
 
@@ -68,7 +68,7 @@ description: '## 项目概述'
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - spiffe
-- [[entities/cncf-security|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference
+- [[entities/cncf-security.md|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference
 - index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

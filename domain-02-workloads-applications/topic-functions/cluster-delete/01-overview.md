@@ -121,7 +121,7 @@ func (r *resetData) ResetCfg() *kubeadmapi.ResetConfiguration
 | `newCmdReset` | `*cobra.Command` | 返回配置好的 reset 子命令 |
 | `ForceReset` | `bool` | 是否跳过用户确认 |
 | `DryRun` | `bool` | 是否为干跑模式 |
-| `Client` | `clientset.Interface` | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 客户端（dry-run 时为 FakeClient） |
+| `Client` | `clientset.Interface` | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 客户端（dry-run 时为 FakeClient） |
 | `Cfg` | `*kubeadmapi.InitConfiguration` | 从集群获取的配置，不可达时为 nil |
 
 ## 调用链
@@ -153,6 +153,7 @@ graph TD
     T --> X[CleanDir /etc/kubernetes]
     T --> Y[CleanDir /var/lib/kubelet]
     T --> Z[打印手动清理提示]
+
 ```
 
 ## 源码分析
@@ -318,13 +319,17 @@ func (r *Runner) Run(args []string) error {
 
 ### 删除方式对比
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     集群删除方式                                      │
 ├──────────────────────┬──────────────────────────────────────────────┤
-│ kubeadm reset        │ 单节点重置：停止 kubelet、删除容器/配置/证书   │
+│ kubeadm reset        │ 单节点重置：停止 kubelet、删除容器/配置/证书   │  # ⚠️ 清理节点所有 K8s 配置
 │ kubectl delete node  │ API 层删除：从 etcd 移除 Node 对象            │
-│ kubeadm reset --force│ 强制重置：跳过确认提示                        │
+│ kubeadm reset --force│ 强制重置：跳过确认提示                        │  # ⚠️ 清理节点所有 K8s 配置
 │ 手动清理             │ iptables、CNI、/var/lib/kubelet 等             │
 └──────────────────────┴──────────────────────────────────────────────┘
 ```
@@ -361,6 +366,7 @@ sequenceDiagram
     Cleanup-->>Workflow: OK
     Workflow-->>kubeadm: 完成
     kubeadm-->>User: 打印手动清理提示
+
 ```
 
 ## 使用场景
@@ -374,7 +380,7 @@ sequenceDiagram
 ## 配置示例
 
 ```yaml
-apiVersion: kubeadm.[[entities/kubernetes|k8s]].io/v1beta4
+apiVersion: kubeadm.[[entities/kubernetes.md|k8s]].io/v1beta4
 kind: ResetConfiguration
 certificatesDir: /etc/kubernetes/pki
 cleanupTmpDir: true
@@ -394,6 +400,12 @@ timeouts:
 
 ### 生产环境完整节点移除
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 步骤 1: 驱逐节点上的 Pod
 kubectl drain worker-1 --ignore-daemonsets --delete-emptydir-data
@@ -408,7 +420,7 @@ kubectl delete node worker-1
 # node "worker-1" deleted
 
 # 步骤 3: 在目标节点执行 reset
-kubeadm reset --force
+kubeadm reset --force  # ⚠️ 清理节点所有 K8s 配置
 # [reset] Reading configuration from the cluster...
 # [reset] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
 # [preflight] Running pre-flight checks
@@ -428,11 +440,14 @@ kubeadm reset --force
 # 步骤 4: 手动清理残留
 iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
 ipvsadm -C
-rm -rf /etc/cni/net.d
-rm -rf $HOME/.kube/config
+rm -rf /etc/cni/net.d  # ⚠️ 删除系统/数据文件
+rm -rf $HOME/.kube/config  # ⚠️ 删除系统/数据文件
 ```
 
 ### 仅移除 etcd 成员
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 
 ```bash
 # 查看当前 etcd 成员
@@ -462,13 +477,17 @@ ETCDCTL_API=3 etcdctl member remove 7c4c8d5d4f000003 \
 
 ### DryRun 模式
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
-kubeadm reset --dry-run
+kubeadm reset --dry-run  # ⚠️ 清理节点所有 K8s 配置
 # [dryrun] Would stop the kubelet service
 # [dryrun] Would unmount mounted directories in "/var/lib/kubelet"
 # [dryrun] Would remove Kubernetes-managed containers
 # [dryrun] Would delete contents of directories: [/etc/kubernetes/pki /etc/kubernetes/manifests]
 # [dryrun] Would delete files: [/etc/kubernetes/admin.conf /etc/kubernetes/kubelet.conf ...]
+
 ```
 
 ## 常见错误
@@ -491,3 +510,5 @@ kubeadm reset --dry-run
 - [`RemoveStackedEtcdMember`](05-etcd-cleanup.md) — 移除本地 stacked etcd 成员
 - [`CleanDir`](04-cleanup.md) — 清理目录内容但保留目录本身
 - [`InteractivelyConfirmAction`](02-reset.md) — 交互式确认操作
+
+```

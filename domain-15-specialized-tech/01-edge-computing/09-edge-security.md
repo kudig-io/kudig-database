@@ -81,7 +81,7 @@ Edge computing deploys compute to physically dispersed, network-complex, and har
 
 <!-- chunk: 1. 边缘安全威胁模型 -->## 1. 边缘安全威胁模型
 
-#<!-- chunk: 1.1 STRIDE 威胁分析 -->## 1.1 STRIDE 威胁分析
+## 1.1 STRIDE 威胁分析
 
 ```mermaid
 graph TB
@@ -133,7 +133,7 @@ graph TB
     E --> M_RBAC
 ```
 
-#<!-- chunk: 1.2 边缘攻击面分析 -->## 1.2 边缘攻击面分析
+## 1.2 边缘攻击面分析
 
 | 攻击面 | 威胁级别 | 攻击场景 | 防护措施 |
 |--------|---------|---------|---------|
@@ -145,7 +145,7 @@ graph TB
 | **供应链** | 🟠 中高 | 恶意依赖、污染镜像 | SBOM、Cosign 签名 |
 | **身份凭证** | 🔴 高 | 证书泄露、Token 窃取 | HSM/TPM、短期证书 |
 
-#<!-- chunk: 1.3 边缘安全架构全景 -->## 1.3 边缘安全架构全景
+## 1.3 边缘安全架构全景
 
 ```mermaid
 graph TB
@@ -187,7 +187,7 @@ graph TB
 
 <!-- chunk: 2. 边缘身份管理 -->## 2. 边缘身份管理
 
-#<!-- chunk: 2.1 SPIFFE/SPIRE 工作负载身份 -->## 2.1 SPIFFE/SPIRE 工作负载身份
+## 2.1 SPIFFE/SPIRE 工作负载身份
 
 SPIFFE (Secure Production Identity Framework For Everyone) 为边缘工作负载提供统一的身份标准。
 
@@ -220,7 +220,7 @@ sequenceDiagram
     Agent-->>Workload: 热更新证书 (无需重启)
 ```
 
-#<!-- chunk: 2.2 SPIRE 部署配置 -->## 2.2 SPIRE 部署配置
+## 2.2 SPIRE 部署配置
 
 ```yaml
 # spire-server-config.yaml (云端)
@@ -345,7 +345,7 @@ data:
 #   -ttl 3600
 ```
 
-#<!-- chunk: 2.3 边缘节点证书管理 -->## 2.3 边缘节点证书管理
+## 2.3 边缘节点证书管理
 
 ```bash
 #!/bin/bash
@@ -430,7 +430,7 @@ fi
 
 <!-- chunk: 3. mTLS 通信安全 -->## 3. mTLS 通信安全
 
-#<!-- chunk: 3.1 mTLS 工作原理 -->## 3.1 mTLS 工作原理
+## 3.1 mTLS 工作原理
 
 ```mermaid
 sequenceDiagram
@@ -459,7 +459,7 @@ sequenceDiagram
     Server-->>Client: 加密响应
 ```
 
-#<!-- chunk: 3.2 Istio 服务网格 mTLS -->## 3.2 Istio 服务网格 mTLS
+## 3.2 Istio 服务网格 mTLS
 
 ```yaml
 # 为边缘命名空间开启严格 mTLS 模式
@@ -512,7 +512,7 @@ spec:
             paths: ["/api/v1/data/ingest"]
 ```
 
-#<!-- chunk: 3.3 手动 mTLS 实现（非 [[Service|Service]]Service Mesh）|Service Mesh]] 场景） -->## 3.3 手动 mTLS 实现（非 Service Mesh 场景）
+## 3.3 手动 mTLS 实现（非 Service Mesh 场景）
 
 ```python
 # edge_mtls_client.py
@@ -658,7 +658,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 4. 设备认证机制 -->## 4. 设备认证机制
 
-#<!-- chunk: 4.1 设备认证架构 -->## 4.1 设备认证架构
+## 4.1 设备认证架构
 
 ```mermaid
 graph TB
@@ -691,7 +691,7 @@ graph TB
     ManufacturerCA --> Bootstrap
 ```
 
-#<!-- chunk: 4.2 基于 TPM 的设备证明 -->## 4.2 基于 TPM 的设备证明
+## 4.2 基于 TPM 的设备证明
 
 ```python
 # tpm_device_attestation.py
@@ -915,7 +915,7 @@ class DeviceEnrollmentServer:
 
 <!-- chunk: 5. 安全启动与可信执行环境 -->## 5. 安全启动与可信执行环境
 
-#<!-- chunk: 5.1 安全启动链 -->## 5.1 安全启动链
+## 5.1 安全启动链
 
 ```mermaid
 graph TD
@@ -947,7 +947,7 @@ graph TD
     SecureBoot_Check -.->|"PCR 7 扩展"| TPM
 ```
 
-#<!-- chunk: 5.2 Talos Linux 不可变操作系统 -->## 5.2 Talos Linux 不可变操作系统
+## 5.2 Talos Linux 不可变操作系统
 
 ```yaml
 # talos-machine-config.yaml
@@ -1040,7 +1040,7 @@ cluster:
                   secret: <BASE64_ENCRYPTED_KEY>
 ```
 
-#<!-- chunk: 5.3 容器安全配置 -->## 5.3 容器安全配置
+## 5.3 容器安全配置
 
 ```yaml
 # Pod 安全上下文配置示例
@@ -1168,7 +1168,7 @@ spec:
 
 <!-- chunk: 6. 边缘防火墙与网络策略 -->## 6. 边缘防火墙与网络策略
 
-#<!-- chunk: 6.1 nftables 边缘防火墙 -->## 6.1 nftables 边缘防火墙
+## 6.1 nftables 边缘防火墙
 
 ```bash
 #!/bin/bash
@@ -1242,7 +1242,7 @@ systemctl enable --now nftables
 echo "✅ 边缘防火墙规则配置完成"
 ```
 
-#<!-- chunk: 6.2 Kubernetes NetworkPolicy -->## 6.2 Kubernetes NetworkPolicy
+## 6.2 Kubernetes NetworkPolicy
 
 ```yaml
 # 边缘应用命名空间网络隔离策略
@@ -1356,7 +1356,7 @@ spec:
 
 <!-- chunk: 7. 零信任边缘架构 -->## 7. 零信任边缘架构
 
-#<!-- chunk: 7.1 零信任原则在边缘的应用 -->## 7.1 零信任原则在边缘的应用
+## 7.1 零信任原则在边缘的应用
 
 ```mermaid
 graph TB
@@ -1383,7 +1383,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 7.2 OPA 策略引擎 -->## 7.2 OPA 策略引擎
+## 7.2 OPA 策略引擎
 
 ```yaml
 # OPA Gatekeeper 部署和策略
@@ -1518,7 +1518,7 @@ spec:
 
 <!-- chunk: 8. 密钥管理与 PKI -->## 8. 密钥管理与 PKI
 
-#<!-- chunk: 8.1 边缘 PKI 架构 -->## 8.1 边缘 PKI 架构
+## 8.1 边缘 PKI 架构
 
 ```mermaid
 graph TB
@@ -1551,7 +1551,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 8.2 HashiCorp Vault 边缘密钥管理 -->## 8.2 HashiCorp Vault 边缘密钥管理
+## 8.2 HashiCorp Vault 边缘密钥管理
 
 ```yaml
 # vault-edge-config.yaml
@@ -1720,7 +1720,7 @@ echo "✅ Vault PKI 配置完成"
 
 <!-- chunk: 9. 入侵检测与审计 -->## 9. 入侵检测与审计
 
-#<!-- chunk: 9.1 Falco 运行时安全 -->## 9.1 Falco 运行时安全
+## 9.1 Falco 运行时安全
 
 ```yaml
 # falco-rules-edge.yaml - 边缘场景 Falco 规则
@@ -1864,7 +1864,7 @@ spec:
             name: falco-rules-edge
 ```
 
-#<!-- chunk: 9.2 不可篡改审计日志 -->## 9.2 不可篡改审计日志
+## 9.2 不可篡改审计日志
 
 ```yaml
 # audit-policy.yaml - Kubernetes API Server 审计策略
@@ -1961,7 +1961,7 @@ data:
 
 <!-- chunk: 10. 供应链安全 -->## 10. 供应链安全
 
-#<!-- chunk: 10.1 镜像签名与验证 -->## 10.1 镜像签名与验证
+## 10.1 镜像签名与验证
 
 ```bash
 #!/bin/bash
@@ -2049,7 +2049,7 @@ spec:
 
 <!-- chunk: 11. 合规与隐私保护 -->## 11. 合规与隐私保护
 
-#<!-- chunk: 11.1 GDPR/数据本地化合规 -->## 11.1 GDPR/数据本地化合规
+## 11.1 GDPR/数据本地化合规
 
 ```yaml
 # 数据分类和处理策略配置
@@ -2115,7 +2115,7 @@ data:
         method: pseudonymize   # 假名化
 ```
 
-#<!-- chunk: 11.2 数据脱敏实现 -->## 11.2 数据脱敏实现
+## 11.2 数据脱敏实现
 
 ```python
 # data_anonymizer.py
@@ -2239,7 +2239,7 @@ class EdgeDataAnonymizer:
 
 <!-- chunk: 12. 安全运维实践 -->## 12. 安全运维实践
 
-#<!-- chunk: 12.1 安全基线检查 -->## 12.1 安全基线检查
+## 12.1 安全基线检查
 
 ```bash
 #!/bin/bash
@@ -2364,7 +2364,7 @@ if [ "${FAIL}" -gt 0 ]; then
 fi
 ```
 
-#<!-- chunk: 12.2 安全事件响应流程 -->## 12.2 安全事件响应流程
+## 12.2 安全事件响应流程
 
 ```mermaid
 flowchart TD
@@ -2391,31 +2391,31 @@ flowchart TD
     style PostMortem fill:#e8f5e9,stroke:#2e7d32
 ```
 
-#<!-- chunk: 12.3 安全生产检查清单 -->## 12.3 安全生产检查清单
+## 12.3 安全生产检查清单
 
 ```markdown
 <!-- chunk: 边缘安全生产检查清单 -->## 边缘安全生产检查清单
 
-#<!-- chunk: 设备安全 -->## 设备安全
+## 设备安全
 - [ ] UEFI Secure Boot 已启用
 - [ ] 磁盘加密 (LUKS) 已配置
 - [ ] TPM 2.0 已激活并用于密钥保护
 - [ ] 物理访问需要身份验证（门禁/锁柜）
 
-#<!-- chunk: 身份与认证 -->## 身份与认证
+## 身份与认证
 - [ ] 所有节点使用唯一证书（非共享）
 - [ ] 节点证书有效期 ≤ 90 天
 - [ ] 工作负载 SVID 有效期 ≤ 1 小时
 - [ ] 证书自动续期已配置（≥15天前）
 - [ ] Root CA 离线存储
 
-#<!-- chunk: 通信安全 -->## 通信安全
+## 通信安全
 - [ ] 所有服务通信使用 mTLS
 - [ ] TLS 最低版本 1.2（推荐 1.3）
 - [ ] 弱密码套件已禁用
 - [ ] 证书固定（关键服务）
 
-#<!-- chunk: 容器安全 -->## 容器安全
+## 容器安全
 - [ ] 所有生产镜像使用 Digest 固定
 - [ ] 镜像签名验证策略已部署
 - [ ] 所有容器配置非 root 用户
@@ -2423,18 +2423,18 @@ flowchart TD
 - [ ] Seccomp 配置已应用
 - [ ] 资源限制已设置
 
-#<!-- chunk: 网络安全 -->## 网络安全
+## 网络安全
 - [ ] NetworkPolicy 默认拒绝策略
 - [ ] 防火墙规则最小化开放
 - [ ] 管理端口（SSH/API）限制来源 IP
 
-#<!-- chunk: 监控与审计 -->## 监控与审计
+## 监控与审计
 - [ ] Falco 运行时安全监控已部署
 - [ ] Kubernetes 审计日志已启用
 - [ ] 审计日志发送到不可篡改存储
 - [ ] 安全告警 P1 响应时间 < 15 分钟
 
-#<!-- chunk: 合规 -->## 合规
+## 合规
 - [ ] 数据分类策略已实施
 - [ ] PII 数据脱敏处理
 - [ ] 数据保留策略符合法规要求
@@ -2450,7 +2450,7 @@ flowchart TD
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-37-edge-computing MOC
-- [[domain-15-specialized-tech/README|Domain 37: 边缘计算 (Edge Computing)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: 边缘计算 (Edge Computing)]]
 - Domain-37 边缘计算 — 开源项目索引
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)

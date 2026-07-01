@@ -250,6 +250,9 @@ vSwitch ──▶ External Network ──▶ VXLAN Tunnel ──▶ Linux Node
 
 ### 5.2 验证跨平台连通
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 从 Linux Pod 测试到 Windows Pod
 kubectl exec -it <linux-pod> -- ping -c 3 10.244.1.2
@@ -407,7 +410,7 @@ C:\flannel\flanneld.exe --version
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic KUDIG Database — Global MOC
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -428,4 +431,4 @@ C:\flannel\flanneld.exe --version
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]

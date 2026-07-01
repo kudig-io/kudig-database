@@ -57,7 +57,7 @@ created: "2026-05-23"
 
 # 03 - 准入控制器(Webhook)配置与实现
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/reference/access-authn-authz/admission-controllers/](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/reference/access-authn-authz/admission-controllers/](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)
 
 <!-- chunk: 准入控制器架构与原理 -->
 ## 准入控制器架构与原理
@@ -246,6 +246,11 @@ func getSecureContainerSpec() corev1.Container {
 
 ### 3. 证书管理与自动轮换
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 #!/bin/bash
 # cert-manager.sh - Webhook证书管理脚本
@@ -304,7 +309,7 @@ EOF
         -n ${NAMESPACE} --dry-run=client -o yaml | kubectl apply -f -
     
     # 清理临时文件
-    cd - && rm -rf ${TEMP_DIR}
+    cd - && rm -rf ${TEMP_DIR}  # ⚠️ 删除系统/数据文件
     
     echo "✅ 证书生成完成"
 }
@@ -537,6 +542,10 @@ data:
   request-logging: "true"
   audit-logging: "true"
 ```
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 #!/bin/bash
@@ -1146,6 +1155,9 @@ spec:
 
 ### 2. 手动证书生成脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # generate-certs.sh
@@ -1198,6 +1210,10 @@ echo "🔑 Secret名称: ${SECRET_NAME}"
 ```
 
 ### 3. 部署脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 #!/bin/bash
@@ -1533,7 +1549,7 @@ echo "✅ 性能测试完成!"
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
 - index.md|Domain-10 扩展与自定义 — 开源项目索引]]
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现

@@ -95,9 +95,9 @@ k8s_versions:
 
 <!-- chunk: 🎯 DR演练框架 -->## 🎯 DR演练框架
 
-#<!-- chunk: 演练规划和设计 -->## 演练规划和设计
+## 演练规划和设计
 
-##<!-- chunk: 1. 演练场景分类 -->## 1. 演练场景分类
+## 1. 演练场景分类
 ```yaml
 # DR演练场景定义
 apiVersion: dr.example.com/v1
@@ -161,7 +161,7 @@ spec:
       estimatedTime: "45m"
 ```
 
-##<!-- chunk: 2. 演练计划管理 -->## 2. 演练计划管理
+## 2. 演练计划管理
 ```python
 #!/usr/bin/env python3
 # DR演练计划管理器
@@ -390,9 +390,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-#<!-- chunk: 演练执行管理 -->## 演练执行管理
+## 演练执行管理
 
-##<!-- chunk: 1. 演练指挥系统 -->## 1. 演练指挥系统
+## 1. 演练指挥系统
 ```yaml
 # 演练指挥中心配置
 apiVersion: apps/v1
@@ -477,7 +477,7 @@ data:
         - "评估服务质量"
 ```
 
-##<!-- chunk: 2. 实时状态跟踪 -->## 2. 实时状态跟踪
+## 2. 实时状态跟踪
 ```python
 #!/usr/bin/env python3
 # 演练状态跟踪器
@@ -722,9 +722,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 📊 演练评估和改进 -->## 📊 演练评估和改进
 
-#<!-- chunk: 演练效果评估 -->## 演练效果评估
+## 演练效果评估
 
-##<!-- chunk: 1. 评估指标体系 -->## 1. 评估指标体系
+## 1. 评估指标体系
 ```yaml
 # 演练评估指标
 apiVersion: dr.example.com/v1
@@ -800,7 +800,7 @@ spec:
       measurement: "经验教训分享和学习的效果"
 ```
 
-##<!-- chunk: 2. 评估报告生成器 -->## 2. 评估报告生成器
+## 2. 评估报告生成器
 ```python
 #!/usr/bin/env python3
 # 演练评估报告生成器
@@ -1107,9 +1107,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 🛡️ 演练安全控制 -->## 🛡️ 演练安全控制
 
-#<!-- chunk: 安全隔离机制 -->## 安全隔离机制
+## 安全隔离机制
 
-##<!-- chunk: 1. 演练环境隔离 -->## 1. 演练环境隔离
+## 1. 演练环境隔离
 ```yaml
 # 演练环境网络隔离
 apiVersion: networking.k8s.io/v1
@@ -1191,7 +1191,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-##<!-- chunk: 2. 数据保护措施 -->## 2. 数据保护措施
+## 2. 数据保护措施
 ```python
 #!/usr/bin/env python3
 # 演练数据保护控制器
@@ -1385,7 +1385,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 演练准备阶段 -->## 演练准备阶段
+## 演练准备阶段
 - [ ] 制定年度演练计划和时间表
 - [ ] 设计多样化的演练场景
 - [ ] 准备演练环境和测试数据
@@ -1393,7 +1393,7 @@ if __name__ == "__main__":
 - [ ] 配置演练监控和评估工具
 - [ ] 制定安全隔离和数据保护措施
 
-#<!-- chunk: 演练执行阶段 -->## 演练执行阶段
+## 演练执行阶段
 - [ ] 按计划启动演练场景
 - [ ] 实时跟踪演练进度和状态
 - [ ] 记录关键事件和时间节点
@@ -1401,7 +1401,7 @@ if __name__ == "__main__":
 - [ ] 协调各团队协同作战
 - [ ] 及时处理突发情况
 
-#<!-- chunk: 评估改进阶段 -->## 评估改进阶段
+## 评估改进阶段
 - [ ] 全面评估演练效果和表现
 - [ ] 识别问题和改进机会
 - [ ] 生成详细的评估报告
@@ -1418,9 +1418,9 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -1439,7 +1439,7 @@ if __name__ == "__main__":
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]

@@ -217,9 +217,9 @@ PromQL: 使用 yaml 代码块
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|[[Go 生产环境速查卡|go]]]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
 
 ## See Also
 

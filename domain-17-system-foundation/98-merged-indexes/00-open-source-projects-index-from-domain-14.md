@@ -112,7 +112,7 @@ Linux 生态系统中有大量开源项目支撑着现代基础设施的运行�
 
 <!-- chunk: 核心项目 -->## 核心项目
 
-#<!-- chunk: 系统管理与服务治理 -->## 系统管理与服务治理
+## 系统管理与服务治理
 
 | 项目 | 作用 | 归属 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -124,7 +124,7 @@ Linux 生态系统中有大量开源项目支撑着现代基础设施的运行�
 | **dbus** | 进程间通信总线 | freedesktop | v1.14.10 | - | AFL-2.1/GPL-2.0 |
 | **udev/eudev** | 设备管理 | systemd/gentoo | v255 | - | GPL-2.0 |
 
-##<!-- chunk: systemd 在云原生中的关键作用 -->## systemd 在云原生中的关键作用
+## systemd 在云原生中的关键作用
 
 systemd 不仅是 Linux 系统的服务管理器，它还深度集成了 cgroup 管理、日志收集和资源控制功能。在 Kubernetes 节点上，systemd 负责管理 kubelet、containerd 等关键服务的生命周期。当 cgroup 驱动设置为 systemd 时，kubelet 通过 systemd 的 slice/scope 机制管理 Pod 的 cgroup 层级。
 
@@ -151,7 +151,7 @@ systemd与Kubernetes关系:
     - TasksMax: 对应pids.max
 ```
 
-#<!-- chunk: 容器操作系统 -->## 容器操作系统
+## 容器操作系统
 
 容器优化操作系统（Container OS）是专为运行容器工作负载而设计的精简 Linux 发行版。它们通常采用不可变基础设施理念，通过原子更新机制确保系统一致性，大幅减少运维开销。
 
@@ -164,7 +164,7 @@ systemd与Kubernetes关系:
 | **CoreOS Ignition** | 机器配置供应 | CoreOS/Red Hat | v2.18.0 | - | Apache-2.0 |
 | **cloud-init** | 云实例初始化 | Canonical | v24.2 | 3k+ | Apache-2.0/GPL-3.0 |
 
-##<!-- chunk: 容器 OS 选型对比 -->## 容器 OS 选型对比
+## 容器 OS 选型对比
 
 | 特性 | Flatcar | Bottlerocket | Talos | Ubuntu |
 |:---|:---|:---|:---|:---|
@@ -198,7 +198,7 @@ spec:
           enabled: true
 ```
 
-#<!-- chunk: 内核关键子系统 -->## 内核关键子系统
+## 内核关键子系统
 
 Linux 内核的每个子系统都对容器和 Kubernetes 的运行方式产生深远影响。cgroups 实现了资源隔离和限制，namespaces 提供了进程视图的隔离，eBPF 开创了内核可编程的新纪元，seccomp 为容器提供了系统调用级别的安全防护。
 
@@ -212,7 +212,7 @@ Linux 内核的每个子系统都对容器和 Kubernetes 的运行方式产生�
 | **io_uring** | 高性能异步 I/O | Linux 内核 | 5.1+ | - | GPL-2.0 |
 | **CRIU** | 检查点/恢复 | OpenVZ | v0.12 | 3k+ | GPL-2.0 |
 
-##<!-- chunk: eBPF 的革命性影响 -->## eBPF 的革命性影响
+## eBPF 的革命性影响
 
 eBPF 正在从根本上改变 Linux 内核的扩展方式。它允许在不修改内核源码的情况下，安全地在内核中运行沙箱程序。
 
@@ -266,7 +266,7 @@ bpftrace -e 'kprobe:do_sys_open { printf("open: %s\n", str(arg1)); }'
 bpftrace -e 'profile:hz:99 /pid == 12345/ { @[ustack] = count(); }'
 ```
 
-#<!-- chunk: 安全框架 -->## 安全框架
+## 安全框架
 
 | 项目 | 作用 | 归属 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -278,7 +278,7 @@ bpftrace -e 'profile:hz:99 /pid == 12345/ { @[ustack] = count(); }'
 | **AIDE** | 文件完整性检测 | AIDE | v0.18.6 | - | GPL-2.0 |
 | **ClamAV** | 开源反病毒引擎 | Cisco | v1.3.1 | 4k+ | GPL-2.0 |
 
-##<!-- chunk: SELinux 与 Kubernetes -->## SELinux 与 Kubernetes
+## SELinux 与 Kubernetes
 
 SELinux 通过为进程和文件分配安全上下文标签，实现强制访问控制。在 Kubernetes 环境中，SELinux 可以防止容器进程访问不属于它的文件，即使该进程以 root 身份运行。
 
@@ -332,7 +332,7 @@ getsebool -a | grep container
 setsebool -P container_manage_cgroup on
 ```
 
-#<!-- chunk: 网络工具 -->## 网络工具
+## 网络工具
 
 | 项目 | 作用 | 归属 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -343,7 +343,7 @@ setsebool -P container_manage_cgroup on
 | **bridge-utils** | 网桥管理 | kernel.org | v1.7.1 | - | GPL-2.0 |
 | **WireGuard** | VPN 隧道 | WireGuard | v1.0.2 | 5k+ | GPL-2.0 |
 
-##<!-- chunk: kube-proxy 依赖的网络工具 -->## kube-proxy 依赖的网络工具
+## kube-proxy 依赖的网络工具
 
 ```yaml
 kube-proxy网络模式:
@@ -418,7 +418,7 @@ echo "[7] 网络接口统计"
 ip -s link show | grep -E "^[0-9]+:|RX:|TX:" | head -20
 ```
 
-#<!-- chunk: 容器与虚拟化工具 -->## 容器与虚拟化工具
+## 容器与虚拟化工具
 
 | 项目 | 作用 | 归属 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -429,7 +429,7 @@ ip -s link show | grep -E "^[0-9]+:|RX:|TX:" | head -20
 | **nsenter** | 命名空间进入 | util-linux | v2.40.0 | - | GPL-2.0+ |
 | **Cilium** | eBPF 网络插件 | Isovalent/CNCF | v1.16.0 | 19k+ | Apache-2.0 |
 
-##<!-- chunk: 容器运行时选型对比 -->## 容器运行时选型对比
+## 容器运行时选型对比
 
 | 特性 | containerd | CRI-O | Docker (已弃用) |
 |:---|:---|:---|:---|
@@ -440,7 +440,7 @@ ip -s link show | grep -E "^[0-9]+:|RX:|TX:" | head -20
 | **社区活跃度** | 非常高 | 高 | 维护模式 |
 | **K8s 版本支持** | 1.24+ | 1.24+ | 1.23 及以下 |
 
-#<!-- chunk: 性能监控 -->## 性能监控
+## 性能监控
 
 | 项目 | 作用 | 归属 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -451,7 +451,7 @@ ip -s link show | grep -E "^[0-9]+:|RX:|TX:" | head -20
 | **bcc-tools** | BCC 工具集 | iovisor | v0.30.0 | - | Apache-2.0 |
 | **bpftrace** | 高级 eBPF 追踪 | iovisor | v0.21.0 | 8k+ | Apache-2.0 |
 
-##<!-- chunk: USE 方法论工具对照 -->## USE 方法论工具对照
+## USE 方法论工具对照
 
 ```yaml
 USE方法论_工具对照表:
@@ -476,7 +476,7 @@ USE方法论_工具对照表:
     Errors: smartctl, dmesg (IO errors)
 ```
 
-#<!-- chunk: 存储管理 -->## 存储管理
+## 存储管理
 
 | 项目 | 作用 | 归属 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -490,7 +490,7 @@ USE方法论_工具对照表:
 
 <!-- chunk: 与 Kubernetes 的关系 -->## 与 Kubernetes 的关系
 
-#<!-- chunk: kube-proxy 依赖的内核项目 -->## kube-proxy 依赖的内核项目
+## kube-proxy 依赖的内核项目
 
 ```yaml
 kube-proxy依赖:
@@ -514,7 +514,7 @@ kube-proxy依赖:
     参数: net.bridge.bridge-nf-call-iptables=1
 ```
 
-#<!-- chunk: 容器运行时依赖的内核项目 -->## 容器运行时依赖的内核项目
+## 容器运行时依赖的内核项目
 
 ```yaml
 容器运行时依赖:
@@ -561,7 +561,7 @@ kube-proxy依赖:
 | K8s 1.31+ | 6.1 LTS 或更新 | User Namespace 支持、更好的 eBPF 性能 |
 | 边缘/嵌入式 | 5.10 LTS | 长期支持，硬件兼容性好 |
 
-#<!-- chunk: 必须验证的内核功能 -->## 必须验证的内核功能
+## 必须验证的内核功能
 
 ```bash
 #!/bin/bash
@@ -633,7 +633,7 @@ sysctl vm.swappiness
 
 <!-- chunk: 安全工具详解 -->## 安全工具详解
 
-#<!-- chunk: Falco 运行时安全配置 -->## Falco 运行时安全配置
+## Falco 运行时安全配置
 
 Falco 是 CNCF 毕业项目，是云原生环境下最重要的运行时安全检测工具。它使用内核模块或 eBPF 探针来捕获系统调用，然后通过规则引擎匹配已知的攻击模式。
 
@@ -666,7 +666,7 @@ spec:
       tags: [filesystem, sensitive]
 ```
 
-#<!-- chunk: OpenSCAP 安全扫描 -->## OpenSCAP 安全扫描
+## OpenSCAP 安全扫描
 
 ```bash
 # OpenSCAP 扫描示例
@@ -683,7 +683,7 @@ lynis audit system --pentest
 cat /var/log/lynis-report.dat
 ```
 
-#<!-- chunk: AIDE 文件完整性监控 -->## AIDE 文件完整性监控
+## AIDE 文件完整性监控
 
 ```bash
 # 初始化AIDE数据库
@@ -733,7 +733,7 @@ EOF
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-17-system-foundation MOC
-- [[domain-17-system-foundation/README|Domain-14: Linux 基础知识体系]]
+- [[domain-17-system-foundation/README.md|Domain-14: Linux 基础知识体系]]
 - 01 - Linux 系统架构与内核深度解析：生产环境运维专家指南
 - 02 - Linux 进程管理与系统监控：生产环境运维专家实践
 - 03 - Linux 文件系统深度解析：生产环境存储管理专家指南

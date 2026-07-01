@@ -117,6 +117,10 @@ CKA 官方考纲 7 大领域，以及本知识库对应的复习资料：
 | D7 | Week 1 模拟测试 | 限时 30 分钟完成 5 道题 |
 
 **核心命令记忆**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+
 ```bash
 # kubeadm 初始化
 kubeadm init --pod-network-cidr=10.244.0.0/16
@@ -132,7 +136,7 @@ ETCDCTL_API=3 etcdctl snapshot save snapshot.db \
   --key=/etc/kubernetes/pki/etcd/server.key
 
 # etcd 恢复
-ETCDCTL_API=3 etcdctl snapshot restore snapshot.db --data-dir=/var/lib/etcd-restored
+ETCDCTL_API=3 etcdctl snapshot restore snapshot.db --data-dir=/var/lib/etcd-restored  # ⚠️ 覆盖 etcd 数据，集群状态回退
 ```
 
 ### Week 2: 工作负载与调度（15%）
@@ -218,6 +222,10 @@ spec:
 | D21 | Week 3 模拟测试 | 限时 40 分钟完成 5 道题 |
 
 **核心命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 快速暴露 Deployment
 kubectl expose deployment web --port=80 --target-port=8080 --type=NodePort
@@ -289,6 +297,9 @@ Pod 异常？
 
 ### 考点 1：kubeadm 集群安装
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. 所有节点
 apt-get update && apt-get install -y apt-transport-https ca-certificates curl
@@ -309,6 +320,9 @@ kubeadm join <control-plane-ip>:6443 --token <token> --discovery-token-ca-cert-h
 
 ### 考点 2：etcd 备份恢复
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+
 ```bash
 # 备份
 ETCDCTL_API=3 etcdctl snapshot save /opt/snapshot-backup.db \
@@ -324,6 +338,10 @@ ETCDCTL_API=3 etcdctl snapshot restore /opt/snapshot-backup.db \
 ```
 
 ### 考点 3：节点维护与驱逐
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 标记节点不可调度
@@ -439,6 +457,10 @@ spec:
 
 ### 常用速查
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 快速创建 Pod（调试）
 kubectl run tmp --image=nginx:alpine --rm -it --restart=Never -- /bin/sh
@@ -457,7 +479,7 @@ kubectl top pods
 kubectl get pod web -o yaml > web.yaml
 
 # 强制删除（卡住的 Pod）
-kubectl delete pod <name> --force --grace-period=0
+kubectl delete pod <name> --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
 ---
@@ -475,6 +497,10 @@ kubectl delete pod <name> --force --grace-period=0
 kubectl run cka-pod --image=nginx:1.25 --port=80 --env="ENV=production"
 ```
 或写 YAML：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -500,6 +526,11 @@ EOF
 
 <details>
 <summary>参考答案</summary>
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 创建 Deployment
@@ -527,6 +558,10 @@ kubectl get pods -l app=web -o jsonpath='{range .items[*]}{.spec.containers[0].i
 <details>
 <summary>参考答案</summary>
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 标记不可调度
 kubectl cordon worker-1
@@ -548,13 +583,16 @@ kubectl uncordon worker-1
 <details>
 <summary>参考答案</summary>
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+
 ```bash
 # 1. 停止 etcd 和 kube-apiserver（移动 manifest 文件）
 mv /etc/kubernetes/manifests/etcd.yaml /tmp/
 mv /etc/kubernetes/manifests/kube-apiserver.yaml /tmp/
 
 # 2. 恢复 etcd
-ETCDCTL_API=3 etcdctl snapshot restore /opt/snapshot.db --data-dir=/var/lib/etcd-restored
+ETCDCTL_API=3 etcdctl snapshot restore /opt/snapshot.db --data-dir=/var/lib/etcd-restored  # ⚠️ 覆盖 etcd 数据，集群状态回退
 
 # 3. 修改 etcd manifest 中的 hostPath.data.path 指向 /var/lib/etcd-restored
 vim /tmp/etcd.yaml
@@ -598,6 +636,8 @@ kubectl get nodes
 ---
 
 **关联文档**:
-- [[skills/training-public/00-beginner-learning-roadmap]] — 完整学习路线图
+- [[skills/training-public/00-beginner-learning-roadmap.md|00 beginner learning roadmap]] — 完整学习路线图
 - ../../domain-10-troubleshooting-diagnostics/ — 故障排查深度文档
 - [[02-local-lab-environment]] — 本地实验环境搭建
+
+```

@@ -72,7 +72,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. AI/ML工作负载挑战概述 -->## 1. AI/ML工作负载挑战概述
 
-#<!-- chunk: 1.1 2026年AI基础设施现状 -->## 1.1 2026年AI基础设施现状
+## 1.1 2026年AI基础设施现状
 
 ```yaml
 AI工作负载规模演进:
@@ -108,7 +108,7 @@ AI工作负载规模演进:
     碎片化浪费: 典型集群30-50%
 ```
 
-#<!-- chunk: 1.2 Kubernetes AI调度核心挑战 -->## 1.2 Kubernetes AI调度核心挑战
+## 1.2 Kubernetes AI调度核心挑战
 
 ```mermaid
 graph TB
@@ -138,7 +138,7 @@ graph TB
 
 <!-- chunk: 2. GPU设备架构与Kubernetes集成 -->## 2. GPU设备架构与Kubernetes集成
 
-#<!-- chunk: 2.1 NVIDIA Device Plugin工作原理 -->## 2.1 NVIDIA Device Plugin工作原理
+## 2.1 NVIDIA Device Plugin工作原理
 
 ```yaml
 # NVIDIA Device Plugin DaemonSet部署
@@ -186,7 +186,7 @@ spec:
             path: /var/lib/kubelet/device-plugins
 ```
 
-#<!-- chunk: 2.2 GPU拓扑架构 -->## 2.2 GPU拓扑架构
+## 2.2 GPU拓扑架构
 
 ```yaml
 GPU拓扑层级:
@@ -219,7 +219,7 @@ GPU节点标签示例:
   nvidia.com/gpu.nvlink.topology: "full-mesh"
 ```
 
-#<!-- chunk: 2.3 [[Dynamic Resource Allocation|Dynamic Resource Allocation]] (DRA) -->## 2.3 Dynamic Resource Allocation (DRA)
+## 2.3 Dynamic Resource Allocation (DRA)
 
 ```yaml
 # DRA ResourceClaim 示例 - K8s 1.33+ Beta
@@ -297,7 +297,7 @@ DRA vs Extended Resources对比:
 
 <!-- chunk: 3. NVIDIA KAI Scheduler深度实践 -->## 3. NVIDIA KAI Scheduler深度实践
 
-#<!-- chunk: 3.1 KAI Scheduler架构 -->## 3.1 KAI Scheduler架构
+## 3.1 KAI Scheduler架构
 
 ```mermaid
 graph TB
@@ -330,7 +330,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 3.2 KAI Scheduler安装部署 -->## 3.2 KAI Scheduler安装部署
+## 3.2 KAI Scheduler安装部署
 
 ```yaml
 # KAI Scheduler Helm安装
@@ -386,7 +386,7 @@ data:
           gracePeriod: 60s
 ```
 
-#<!-- chunk: 3.3 GPU共享策略 -->## 3.3 GPU共享策略
+## 3.3 GPU共享策略
 
 ```yaml
 # GPU共享三种模式对比
@@ -456,7 +456,7 @@ data:
             replicas: 4  # 每个物理GPU虚拟为4个
 ```
 
-#<!-- chunk: 3.4 Gang Scheduling配置 -->## 3.4 Gang Scheduling配置
+## 3.4 Gang Scheduling配置
 
 ```yaml
 # KAI Scheduler Gang Scheduling - 训练作业
@@ -518,7 +518,7 @@ spec:
           effect: NoSchedule
 ```
 
-#<!-- chunk: 3.5 Priority-based Fairshare -->## 3.5 Priority-based Fairshare
+## 3.5 Priority-based Fairshare
 
 ```yaml
 # KAI Scheduler 队列与公平共享配置
@@ -573,7 +573,7 @@ spec:
 
 <!-- chunk: 4. vLLM on Kubernetes生产部署 -->## 4. vLLM on Kubernetes生产部署
 
-#<!-- chunk: 4.1 vLLM架构原理 -->## 4.1 vLLM架构原理
+## 4.1 vLLM架构原理
 
 ```yaml
 vLLM核心技术:
@@ -604,7 +604,7 @@ vLLM核心技术:
       - 不影响输出质量
 ```
 
-#<!-- chunk: 4.2 vLLM Kubernetes部署 -->## 4.2 vLLM Kubernetes部署
+## 4.2 vLLM Kubernetes部署
 
 ```yaml
 # vLLM推理服务Deployment
@@ -756,7 +756,7 @@ spec:
           periodSeconds: 300
 ```
 
-#<!-- chunk: 4.3 llm-d分布式推理框架 -->## 4.3 llm-d分布式推理框架
+## 4.3 llm-d分布式推理框架
 
 ```yaml
 # llm-d (Google开源) - 分布式推理网关
@@ -810,7 +810,7 @@ spec:
 
 <!-- chunk: 5. Ray on Kubernetes -->## 5. Ray on Kubernetes
 
-#<!-- chunk: 5.1 KubeRay Operator架构 -->## 5.1 KubeRay Operator架构
+## 5.1 KubeRay Operator架构
 
 ```mermaid
 graph TB
@@ -846,7 +846,7 @@ graph TB
     H --> R
 ```
 
-#<!-- chunk: 5.2 RayCluster部署配置 -->## 5.2 RayCluster部署配置
+## 5.2 RayCluster部署配置
 
 ```yaml
 # KubeRay RayCluster for LLM训练
@@ -944,7 +944,7 @@ spec:
               effect: NoSchedule
 ```
 
-#<!-- chunk: 5.3 Ray Serve推理部署 -->## 5.3 Ray Serve推理部署
+## 5.3 Ray Serve推理部署
 
 ```yaml
 # RayService for LLM推理
@@ -1009,7 +1009,7 @@ spec:
 
 <!-- chunk: 6. Google TPU/Ironwood on GKE -->## 6. Google TPU/Ironwood on GKE
 
-#<!-- chunk: 6.1 TPU Ironwood架构(2026 GA) -->## 6.1 TPU Ironwood架构(2026 GA)
+## 6.1 TPU Ironwood架构(2026 GA)
 
 ```yaml
 Google TPU Ironwood (第6代TPU):
@@ -1035,7 +1035,7 @@ Google TPU Ironwood (第6代TPU):
     - 自动容错(检查点+重启)
 ```
 
-#<!-- chunk: 6.2 GKE TPU工作负载配置 -->## 6.2 GKE TPU工作负载配置
+## 6.2 GKE TPU工作负载配置
 
 ```yaml
 # GKE TPU NodePool配置 (gcloud命令参考)
@@ -1107,7 +1107,7 @@ spec:
       # Autopilot自动创建匹配的TPU节点
 ```
 
-#<!-- chunk: 6.3 Ray on GKE with TPU -->## 6.3 Ray on GKE with TPU
+## 6.3 Ray on GKE with TPU
 
 ```yaml
 # KubeRay + GKE TPU 联合配置
@@ -1155,7 +1155,7 @@ spec:
 
 <!-- chunk: 7. GPU监控与可观测性 -->## 7. GPU监控与可观测性
 
-#<!-- chunk: 7.1 DCGM Exporter配置 -->## 7.1 DCGM Exporter配置
+## 7.1 DCGM Exporter配置
 
 ```yaml
 # NVIDIA DCGM Exporter DaemonSet
@@ -1236,7 +1236,7 @@ data:
     DCGM_FI_PROF_DRAM_ACTIVE, gauge, DRAM active ratio
 ```
 
-#<!-- chunk: 7.2 Prometheus告警规则 -->## 7.2 Prometheus告警规则
+## 7.2 Prometheus告警规则
 
 ```yaml
 # GPU关键告警规则
@@ -1311,7 +1311,7 @@ spec:
             description: "服务 {{ $labels.deployment }} 请求队列积压，考虑扩容推理实例"
 ```
 
-#<!-- chunk: 7.3 关键GPU Grafana Dashboard指标 -->## 7.3 关键GPU Grafana Dashboard指标
+## 7.3 关键GPU Grafana Dashboard指标
 
 ```yaml
 GPU集群Dashboard核心面板:
@@ -1344,7 +1344,7 @@ GPU集群Dashboard核心面板:
 
 <!-- chunk: 8. 最佳实践检查清单 -->## 8. 最佳实践检查清单
 
-#<!-- chunk: 8.1 GPU集群规划 -->## 8.1 GPU集群规划
+## 8.1 GPU集群规划
 
 ```yaml
 GPU集群规划检查清单:
@@ -1375,7 +1375,7 @@ GPU集群规划检查清单:
     ☐ 设置GPU利用率告警(低于20%浪费告警)
 ```
 
-#<!-- chunk: 8.2 LLM推理服务 -->## 8.2 LLM推理服务
+## 8.2 LLM推理服务
 
 ```yaml
 LLM推理服务检查清单:
@@ -1407,7 +1407,7 @@ LLM推理服务检查清单:
 
 <!-- chunk: 9. 未来发展趋势 -->## 9. 未来发展趋势
 
-#<!-- chunk: 9.1 技术演进方向 -->## 9.1 技术演进方向
+## 9.1 技术演进方向
 
 ```yaml
 AI基础设施演进趋势(2026-2027):
@@ -1442,7 +1442,7 @@ AI基础设施演进趋势(2026-2027):
     - FinOps GPU成本归属(按推理请求计费)
 ```
 
-#<!-- chunk: 9.2 相关领域链接 -->## 9.2 相关领域链接
+## 9.2 相关领域链接
 
 ```yaml
 交叉引用:
@@ -1460,7 +1460,7 @@ AI基础设施演进趋势(2026-2027):
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers KUDIG Database — Global MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - index.md|Domain-19 论文与参考 — 开源项目索引]]
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -1481,4 +1481,4 @@ AI基础设施演进趋势(2026-2027):
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]

@@ -877,4 +877,4 @@ NoSQL数据库:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/sql|速查卡: sql]]
+- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|速查卡: sql]]

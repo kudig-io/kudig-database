@@ -4,6 +4,7 @@ category: concepts
 tags: [patterns, microservices, event-driven, multi-tenancy, k8s]
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # K8S 应用模式
@@ -258,6 +259,6 @@ Dapr（Distributed Application Runtime）是 CNCF 孵化项目，为微服务提
 
 ## 相关概念
 
-- [[concepts/k8s-networking-evolution]] — K8S 网络演进
-- [[concepts/platform-engineering-idp]] — 平台工程与 IDP
-- [[concepts/progressive-delivery-strategies]] — 渐进式交付策略
+- [[concepts/k8s-networking-evolution.md|k8s networking evolution]] — K8S 网络演进
+- [[concepts/platform-engineering-idp.md|platform engineering idp]] — 平台工程与 IDP
+- [[concepts/progressive-delivery-strategies.md|progressive delivery strategies]] — 渐进式交付策略

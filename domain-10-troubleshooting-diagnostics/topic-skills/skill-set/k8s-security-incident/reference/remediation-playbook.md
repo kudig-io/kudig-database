@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-security-incident"
 created: "2026-05-22"
 updated: "2026-05-22"
+last_updated: 2026-05-22
 tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
@@ -48,6 +49,12 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl get pods --all-namespaces --field-selector spec.nodeName=<infected-node>
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   # Step 1: Cordon 节点（阻止新 Pod 调度）
   kubectl cordon <infected-node>
@@ -62,6 +69,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   - 确认被驱逐的 Pod 可以在其他节点运行
   - 保留节点用于取证，不要立即清理
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   kubectl uncordon <infected-node>
   kubectl label node <infected-node> security.quarantine-
@@ -76,6 +87,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl get events --all-namespaces | grep -i "serviceaccount\|token"
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 删除可疑 ServiceAccount
   kubectl delete serviceaccount <suspicious-sa> -n <namespace>
@@ -91,6 +106,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   - 确认删除不会影响合法服务
   - 提前通知受影响团队
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 重新创建 ServiceAccount
   kubectl create serviceaccount <sa-name> -n <namespace>
@@ -105,6 +124,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl get pods --all-namespaces -o jsonpath='{range .items[*].spec.containers[*]}{.image}{"\n"}{end}' | sort -u
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 方案 A: 使用 Admission Webhook 阻断
   # 配置 OPA/Gatekeeper 或 Kyverno 策略
@@ -135,6 +158,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl get rolebinding --all-namespaces -o json | jq -r '.items[] | "\(.metadata.namespace)/\(.metadata.name):\(.roleRef.name):\(.subjects[]? | "\(.kind):\(.name)")"'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 删除可疑的 clusterrolebinding
   kubectl delete clusterrolebinding <suspicious-binding>
@@ -150,6 +177,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   - 删除前导出配置备份
   - 确认删除不会影响系统组件
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f <backup-of-role>.yaml
   ```
@@ -163,6 +194,11 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl get events --all-namespaces | grep -i "patch\|update\|delete"
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 回滚 Deployment
   kubectl rollout undo deployment/<name> -n <namespace>
@@ -178,6 +214,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   - 确认回滚版本是安全的
   - 通知变更相关方
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deployment/<name> -n <namespace>
   ```

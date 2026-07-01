@@ -90,7 +90,7 @@ SKILL.md 与 Anthropic Agent Skill 规范完全兼容，是连接"知识库"与"
 
 <!-- chunk: 1. 设计原理 -->## 1. 设计原理
 
-#<!-- chunk: 1.1 渐进式披露（Progressive Disclosure） -->## 1.1 渐进式披露（Progressive Disclosure）
+## 1.1 渐进式披露（Progressive Disclosure）
 
 ```
 Anthropic Agent Skill 规范的核心原则:
@@ -114,7 +114,7 @@ Level 3: 资源（按需加载）
   Token 节省: 70%
 ```
 
-#<!-- chunk: 1.2 三种知识结构化范式 -->## 1.2 三种知识结构化范式
+## 1.2 三种知识结构化范式
 
 | 范式 | 说明 | 适用场景 | SKILL.md 对应 |
 |------|------|---------|--------------|
@@ -146,7 +146,7 @@ Level 3: 资源（按需加载）
   ▼ 输出结论
 ```
 
-#<!-- chunk: 1.3 TOOLS.md vs SKILL.md 的边界 -->## 1.3 TOOLS.md vs SKILL.md 的边界
+## 1.3 TOOLS.md vs SKILL.md 的边界
 
 ```
 清晰的职责分离:
@@ -171,7 +171,7 @@ SKILL.md = "知识"（Agent 怎么做）
 
 <!-- chunk: 2. Harness Engineering 映射 -->## 2. Harness Engineering 映射
 
-#<!-- chunk: 2.1 映射关系 -->## 2.1 映射关系
+## 2.1 映射关系
 
 ```
 SKILL.md × Harness 六层映射:
@@ -184,7 +184,7 @@ SKILL.md      │  ◐   │       │    ●    │         │        │     
 ◐ = 次要映射（Loop 层 — SOP 驱动的执行逻辑）
 ```
 
-#<!-- chunk: 2.2 Context 层映射 -->## 2.2 Context 层映射
+## 2.2 Context 层映射
 
 | SKILL.md 内容 | Harness Context 实现 | 注入方式 |
 |--------------|---------------------|---------|
@@ -193,7 +193,7 @@ SKILL.md      │  ◐   │       │    ●    │         │        │     
 | 知识库关联（8） | `KnowledgeLinker` — 关联外部文档 | Agent 需要深度参考时加载 |
 | 输出格式模板（7） | `OutputTemplate` — 格式化模板 | 输出阶段注入 |
 
-#<!-- chunk: 2.3 Loop 层映射 -->## 2.3 Loop 层映射
+## 2.3 Loop 层映射
 
 ```
 SOP 驱动的执行逻辑:
@@ -218,7 +218,7 @@ Agent 识别问题类型 → 从 SKILL.md 加载对应 SOP → 按步骤执行
 
 <!-- chunk: 3. K8S 运维实战案例 -->## 3. K8S 运维实战案例
 
-#<!-- chunk: 3.1 案例：SOP 驱动的 Pod Pending 诊断 -->## 3.1 案例：SOP 驱动的 Pod Pending 诊断
+## 3.1 案例：SOP 驱动的 Pod Pending 诊断
 
 ```
 用户输入: "Pod nginx-xxx 一直 Pending"
@@ -250,7 +250,7 @@ Step 5: 输出诊断结论
   修复: 扩容 worker 节点 或 调整 Pod 的 resource requests
 ```
 
-#<!-- chunk: 3.2 案例：kudig-database 知识注入 -->## 3.2 案例：kudig-database 知识注入
+## 3.2 案例：kudig-database 知识注入
 
 ```
 SKILL.md 知识库关联的实际使用:
@@ -272,7 +272,7 @@ Agent 输出:
    这些文档包含更详细的排查步骤和历史案例。"
 ```
 
-#<!-- chunk: 3.3 案例：多 Skill 按域拆分 -->## 3.3 案例：多 Skill 按域拆分
+## 3.3 案例：多 Skill 按域拆分
 
 ```
 推荐的 Skill 拆分方式:
@@ -304,7 +304,7 @@ Agent 按需加载匹配的 Skill
 
 <!-- chunk: 4. 配置协作机制 -->## 4. 配置协作机制
 
-#<!-- chunk: 4.1 SKILL.md 与其他文件的协作 -->## 4.1 SKILL.md 与其他文件的协作
+## 4.1 SKILL.md 与其他文件的协作
 
 ```
 SKILL.md 在配置体系中的知识角色:
@@ -326,7 +326,7 @@ SKILL.md ──→ MEMORY.md
               丰富 SKILL.md 的经验模式
 ```
 
-#<!-- chunk: 4.2 知识更新流程 -->## 4.2 知识更新流程
+## 4.2 知识更新流程
 
 ```
 SKILL.md 知识更新闭环:
@@ -354,7 +354,7 @@ SKILL.md 知识更新闭环:
 
 <!-- chunk: 5. AgentScope 集成代码 -->## 5. AgentScope 集成代码
 
-#<!-- chunk: 5.1 SkillLoader 实现 -->## 5.1 SkillLoader 实现
+## 5.1 SkillLoader 实现
 
 ```python
 import os
@@ -485,7 +485,7 @@ refs = loader.get_knowledge_references("pod")
 
 <!-- chunk: 6. 问题排除 -->## 6. 问题排除
 
-#<!-- chunk: 6.1 常见问题 -->## 6.1 常见问题
+## 6.1 常见问题
 
 | 问题 | 原因 | 解决方案 |
 |------|------|---------|
@@ -495,7 +495,7 @@ refs = loader.get_knowledge_references("pod")
 | Agent 无法匹配问题类型 | SKILL.md 覆盖范围的关键词不全 | 扩充技能覆盖范围的关键词列表 |
 | 知识库链接失效 | kudig-database 文档路径变更 | 定期检查并更新第 8 章关联表 |
 
-#<!-- chunk: 6.2 调试检查清单 -->## 6.2 调试检查清单
+## 6.2 调试检查清单
 
 ```
 SKILL.md 配置验证:
@@ -531,17 +531,17 @@ SKILL.md 配置验证:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 

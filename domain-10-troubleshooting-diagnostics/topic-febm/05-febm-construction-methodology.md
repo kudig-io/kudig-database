@@ -93,7 +93,7 @@ k8s_versions:
 
 > **所属系列**: FEBM 法医鉴定循证方法论深度解析  
 > **关联主文档**: [FEBM 方法论深度解析](./febm-methodology-deep-dive.md)  
-> **上一章**: [第四章：FEBM 对云平台工单智能体托管的意义](./[[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing|04-febm-agent-ticket-processing]].md)  
+> **上一章**: [第四章：FEBM 对云平台工单智能体托管的意义](./[[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing.md|04-febm-agent-ticket-processing]].md)  
 > **下一章**: [第六章：未来演进方向](./06-febm-future-evolution.md)
 
 ---
@@ -110,7 +110,7 @@ FEBM（Forensic Evidence-Based Methodology，法医鉴定循证方法论）体�
 
 FEBM 成熟度模型（FEBM Maturity Model）是评估组织在取证和循证诊断能力上的发展阶段的标准框架。该模型将成熟度划分为五个递进层级，每个层级都有明确的特征、关键绩效指标（KPI）、前置条件和交付物。
 
-#<!-- chunk: 5.1.1 成熟度层级概览 -->## 5.1.1 成熟度层级概览
+## 5.1.1 成熟度层级概览
 
 ```
                         ╔════════════════════════════════════════╗
@@ -137,9 +137,9 @@ FEBM 成熟度模型（FEBM Maturity Model）是评估组织在取证和循证�
        成熟度提升路径：从被动响应到智能预测，从经验驱动到数据驱动
 ```
 
-#<!-- chunk: 5.1.2 Level 1: Initial（初始层） -->## 5.1.2 Level 1: Initial（初始层）
+## 5.1.2 Level 1: Initial（初始层）
 
-##<!-- chunk: 特征描述 -->## 特征描述
+## 特征描述
 
 Level 1 是大多数组织的起点，特征是**反应式**和**非结构化**。在这个阶段：
 
@@ -151,7 +151,7 @@ Level 1 是大多数组织的起点，特征是**反应式**和**非结构化**�
 - **知识管理**：依赖个人经验，没有知识沉淀和共享机制
 - **工具使用**：仅使用 K8s 原生工具，没有专门的取证或安全工具
 
-##<!-- chunk: 关键痛点 -->## 关键痛点
+## 关键痛点
 
 1. **证据易丢失**：容器重启、Pod 驱逐、节点问题导致日志和上下文丢失
 2. **定位周期长**：缺乏历史数据和关联分析能力，故障定位依赖人工逐个排查
@@ -159,7 +159,7 @@ Level 1 是大多数组织的起点，特征是**反应式**和**非结构化**�
 4. **责任不清**：缺乏审计日志，无法追溯配置变更和操作历史
 5. **合规风险**：无法满足 SOC2、ISO27001 等安全合规要求
 
-##<!-- chunk: 关键绩效指标（KPI） -->## 关键绩效指标（KPI）
+## 关键绩效指标（KPI）
 
 | 指标类别       | 具体指标                           | 典型值           |
 |----------------|-----------------------------------|------------------|
@@ -170,7 +170,7 @@ Level 1 是大多数组织的起点，特征是**反应式**和**非结构化**�
 | 自动化程度     | 自动化响应占比                     | 0%               |
 | 知识沉淀       | 结构化案例库条目数                 | 0                |
 
-##<!-- chunk: 自我评估清单 -->## 自我评估清单
+## 自我评估清单
 
 - [ ] 是否只依赖 `kubectl logs` 进行日志查看？
 - [ ] 是否无法查询 7 天以前的日志？
@@ -183,13 +183,13 @@ Level 1 是大多数组织的起点，特征是**反应式**和**非结构化**�
 
 如果以上有 **5 项或以上**选"是"，则组织处于 Level 1。
 
-##<!-- chunk: 前置条件 -->## 前置条件
+## 前置条件
 
 - 已部署 Kubernetes 集群（可以是托管或自建）
 - 具备基本的 K8s 运维能力（kubectl 操作、YAML 编写）
 - 有意识到当前取证和诊断能力的不足
 
-##<!-- chunk: 交付物 -->## 交付物
+## 交付物
 
 Level 1 阶段通常没有正式的交付物，更多是**意识觉醒**阶段。建议的初步行动：
 
@@ -197,7 +197,7 @@ Level 1 阶段通常没有正式的交付物，更多是**意识觉醒**阶段�
 2. **现状评估报告**：使用本章提供的自我评估清单，明确当前短板
 3. **初步改进计划**：优先列出最痛点的 3-5 个改进项（如启用审计日志、统一日志收集）
 
-##<!-- chunk: 典型案例 -->## 典型案例
+## 典型案例
 
 **场景**：某创业公司的 K8s 集群在凌晨 2 点出现大规模 Pod 重启，导致服务不可用 30 分钟。
 
@@ -211,9 +211,9 @@ Level 1 阶段通常没有正式的交付物，更多是**意识觉醒**阶段�
 
 ---
 
-#<!-- chunk: 5.1.3 Level 2: Foundational（基础层） -->## 5.1.3 Level 2: Foundational（基础层）
+## 5.1.3 Level 2: Foundational（基础层）
 
-##<!-- chunk: 特征描述 -->## 特征描述
+## 特征描述
 
 Level 2 是 FEBM 体系建设的**起步阶段**，重点是建立**可观测性基座**和**基本安全检测能力**：
 
@@ -225,7 +225,7 @@ Level 2 是 FEBM 体系建设的**起步阶段**，重点是建立**可观测性
 - **镜像扫描**：在 CI/CD 中集成了 Trivy 或 Clair 进行镜像漏洞扫描
 - **初步流程**：有简单的事件响应清单，但尚未系统化
 
-##<!-- chunk: 关键改进点 -->## 关键改进点
+## 关键改进点
 
 1. **时间旅行能力**：可以回溯查看历史日志、指标，不再受限于容器生命周期
 2. **审计追溯**：可以知道"谁在什么时候做了什么操作"
@@ -233,7 +233,7 @@ Level 2 是 FEBM 体系建设的**起步阶段**，重点是建立**可观测性
 4. **供应链安全**：在部署前发现镜像中的已知漏洞
 5. **团队协作**：开始有初步的事件响应流程，减少对个人的依赖
 
-##<!-- chunk: 关键绩效指标（KPI） -->## 关键绩效指标（KPI）
+## 关键绩效指标（KPI）
 
 | 指标类别       | 具体指标                           | 典型值           |
 |----------------|-----------------------------------|------------------|
@@ -245,7 +245,7 @@ Level 2 是 FEBM 体系建设的**起步阶段**，重点是建立**可观测性
 | 日志保留时长   | 集中日志系统的数据保留时长         | 7-30 天          |
 | 自动化程度     | 自动化响应占比                     | 5-10%            |
 
-##<!-- chunk: 自我评估清单 -->## 自我评估清单
+## 自我评估清单
 
 - [ ] 是否部署了统一的日志聚合系统（如 Loki、Elasticsearch）？
 - [ ] 是否可以查询 30 天以内的历史日志？
@@ -258,14 +258,14 @@ Level 2 是 FEBM 体系建设的**起步阶段**，重点是建立**可观测性
 
 如果以上有 **6 项或以上**选"是"，则组织处于 Level 2。
 
-##<!-- chunk: 前置条件 -->## 前置条件
+## 前置条件
 
 - 完成 Level 1 的现状评估
 - 获得管理层对可观测性建设的支持（预算和人力）
 - 有专人负责可观测性和安全工具的部署维护
 - 具备基本的 Prometheus、Loki 等工具使用能力
 
-##<!-- chunk: 交付物 -->## 交付物
+## 交付物
 
 1. **可观测性架构图**：展示日志、指标、追踪的数据流和存储方案
 2. **K8s 审计日志策略文档**：明确审计规则、日志格式、存储位置
@@ -274,7 +274,7 @@ Level 2 是 FEBM 体系建设的**起步阶段**，重点是建立**可观测性
 5. **事件响应清单 v1.0**：简单的问题分类和初步排查步骤
 6. **工具使用培训材料**：面向 SRE 和开发人员的基础培训
 
-##<!-- chunk: 架构示意图 -->## 架构示意图
+## 架构示意图
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -325,7 +325,7 @@ Level 2 是 FEBM 体系建设的**起步阶段**，重点是建立**可观测性
     Level 2: 可观测性三支柱 + K8s 审计 + 基础安全检测
 ```
 
-##<!-- chunk: 资源需求估算 -->## 资源需求估算
+## 资源需求估算
 
 以中型集群（50 节点，500 Pod）为例：
 
@@ -340,7 +340,7 @@ Level 2 是 FEBM 体系建设的**起步阶段**，重点是建立**可观测性
 
 **总计**：约 10 核 CPU，30GB 内存，1.7TB 存储（初期）
 
-##<!-- chunk: 成功标准 -->## 成功标准
+## 成功标准
 
 - 可以在 5 分钟内查询到 30 天前的任意 Pod 日志
 - 可以通过审计日志追溯任意配置变更的操作者和时间
@@ -349,9 +349,9 @@ Level 2 是 FEBM 体系建设的**起步阶段**，重点是建立**可观测性
 
 ---
 
-#<!-- chunk: 5.1.4 Level 3: Systematic（系统化层） -->## 5.1.4 Level 3: Systematic（系统化层）
+## 5.1.4 Level 3: Systematic（系统化层）
 
-##<!-- chunk: 特征描述 -->## 特征描述
+## 特征描述
 
 Level 3 是 FEBM 体系建设的**成熟阶段**，标志是**流程标准化**和**多源关联分析**：
 
@@ -363,7 +363,7 @@ Level 3 是 FEBM 体系建设的**成熟阶段**，标志是**流程标准化**�
 - **知识库建设**：建立了结构化的案例库、检测规则库、Runbook 库
 - **跨团队协作**：SRE、Security、Dev 团队有清晰的职责分工和协作机制
 
-##<!-- chunk: 关键改进点 -->## 关键改进点
+## 关键改进点
 
 1. **流程确定性**：不再依赖个人能力，任何人都能按照 SOP 高效响应
 2. **证据可信度**：通过哈希验证、时间戳、访问控制确保证据法律效力
@@ -371,7 +371,7 @@ Level 3 是 FEBM 体系建设的**成熟阶段**，标志是**流程标准化**�
 4. **预防性措施**：通过演练和知识库，提前发现潜在风险
 5. **组织韧性**：关键人员离职不会导致能力下降
 
-##<!-- chunk: 关键绩效指标（KPI） -->## 关键绩效指标（KPI）
+## 关键绩效指标（KPI）
 
 | 指标类别       | 具体指标                           | 典型值           |
 |----------------|-----------------------------------|------------------|
@@ -385,7 +385,7 @@ Level 3 是 FEBM 体系建设的**成熟阶段**，标志是**流程标准化**�
 | 演练频率       | 年度故障演练次数                   | 4 次             |
 | 知识沉淀       | 结构化案例库条目数                 | 50+              |
 
-##<!-- chunk: 自我评估清单 -->## 自我评估清单
+## 自我评估清单
 
 - [ ] 是否有完整的事件响应 SOP 文档并定期更新？
 - [ ] 是否对关键证据（日志、快照）进行哈希和数字签名？
@@ -398,14 +398,14 @@ Level 3 是 FEBM 体系建设的**成熟阶段**，标志是**流程标准化**�
 
 如果以上有 **6 项或以上**选"是"，则组织处于 Level 3。
 
-##<!-- chunk: 前置条件 -->## 前置条件
+## 前置条件
 
 - 已完成 Level 2 的基础设施建设，系统稳定运行至少 6 个月
 - 团队成员熟练掌握 Prometheus、Loki、Falco 等工具
 - 获得管理层对流程建设和团队培训的支持
 - 至少经历过 3 次重大问题并完成 Postmortem
 
-##<!-- chunk: 交付物 -->## 交付物
+## 交付物
 
 1. **事件响应 SOP 文档**：包括分级标准、响应流程图、角色职责、沟通模板
 2. **Chain of Custody 操作指南**：证据采集、哈希计算、存储加密、访问日志
@@ -415,7 +415,7 @@ Level 3 是 FEBM 体系建设的**成熟阶段**，标志是**流程标准化**�
 6. **知识库平台**：可搜索的案例库、规则库、Runbook 库（如 Confluence、GitBook）
 7. **团队培训认证**：SRE、Security、Dev 团队的 FEBM 能力认证
 
-##<!-- chunk: 证据链管理流程 -->## 证据链管理流程
+## 证据链管理流程
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -498,7 +498,7 @@ Level 3 是 FEBM 体系建设的**成熟阶段**，标志是**流程标准化**�
   4. 时间可信（Timestamping）：使用 NTP 同步 + RFC3161 时间戳
 ```
 
-##<!-- chunk: 多源关联分析示例 -->## 多源关联分析示例
+## 多源关联分析示例
 
 **场景**：某 Pod 在凌晨 3:24 出现 CPU 使用率突增，30 秒后被 OOMKill。
 
@@ -559,7 +559,7 @@ Level 3 是 FEBM 体系建设的**成熟阶段**，标志是**流程标准化**�
    - 添加 Falco 规则检测未授权的外部网络访问
    - 对下载文件大小进行限制
 
-##<!-- chunk: 资源需求估算（增量） -->## 资源需求估算（增量）
+## 资源需求估算（增量）
 
 在 Level 2 基础上，Level 3 新增：
 
@@ -570,7 +570,7 @@ Level 3 是 FEBM 体系建设的**成熟阶段**，标志是**流程标准化**�
 | 知识库平台           | 500m     | 1Gi      | 50GB               | Confluence / GitBook     |
 | 演练环境             | 变动     | 变动     | -                  | 可使用现有测试集群       |
 
-##<!-- chunk: 成功标准 -->## 成功标准
+## 成功标准
 
 - 完成 3 次以上的故障演练，平均 MTTR < 2 小时
 - 证据保全成功率 > 95%（有哈希验证记录）
@@ -579,9 +579,9 @@ Level 3 是 FEBM 体系建设的**成熟阶段**，标志是**流程标准化**�
 
 ---
 
-#<!-- chunk: 5.1.5 Level 4: Automated（自动化层） -->## 5.1.5 Level 4: Automated（自动化层）
+## 5.1.5 Level 4: Automated（自动化层）
 
-##<!-- chunk: 特征描述 -->## 特征描述
+## 特征描述
 
 Level 4 是 FEBM 体系建设的**自动化阶段**，标志是**Forensics as Code**和**事件驱动编排**：
 
@@ -593,7 +593,7 @@ Level 4 是 FEBM 体系建设的**自动化阶段**，标志是**Forensics as Co
 - **智能增强**：引入异常检测（Anomaly Detection）、自动聚类（Clustering）等 ML 技术
 - **自服务能力**：开发人员可以通过 CLI 或 Web UI 自助查询取证数据
 
-##<!-- chunk: 关键改进点 -->## 关键改进点
+## 关键改进点
 
 1. **响应速度**：从分钟级降低到秒级（自动化触发）
 2. **人力成本**：减少 70% 的重复性人工操作
@@ -601,7 +601,7 @@ Level 4 是 FEBM 体系建设的**自动化阶段**，标志是**Forensics as Co
 4. **可扩展性**：从管理 1 个集群到管理 100 个集群，不需要线性增加人力
 5. **可审计性**：所有自动化操作都有 Git 记录和审计日志
 
-##<!-- chunk: 关键绩效指标（KPI） -->## 关键绩效指标（KPI）
+## 关键绩效指标（KPI）
 
 | 指标类别       | 具体指标                           | 典型值           |
 |----------------|-----------------------------------|------------------|
@@ -614,7 +614,7 @@ Level 4 是 FEBM 体系建设的**自动化阶段**，标志是**Forensics as Co
 | 自服务使用率   | 开发团队自助查询占比               | > 50%            |
 | ML 准确率      | 异常检测的精确率/召回率            | P: 80% / R: 70%  |
 
-##<!-- chunk: 自我评估清单 -->## 自我评估清单
+## 自我评估清单
 
 - [ ] 是否实现了 Falco 告警自动触发容器快照？
 - [ ] 是否部署了 SOAR 平台或 Argo Workflows 进行编排？
@@ -627,14 +627,14 @@ Level 4 是 FEBM 体系建设的**自动化阶段**，标志是**Forensics as Co
 
 如果以上有 **6 项或以上**选"是"，则组织处于 Level 4。
 
-##<!-- chunk: 前置条件 -->## 前置条件
+## 前置条件
 
 - 已完成 Level 3 的流程标准化，团队熟练掌握 FEBM 核心概念
 - 有专职的 DevOps/SRE 工程师负责自动化工具开发
 - 集群启用了 K8s Checkpoint API（1.25+）或有 CRIU 部署
 - 具备 Argo Workflows、Tekton 或类似编排工具的使用经验
 
-##<!-- chunk: 交付物 -->## 交付物
+## 交付物
 
 1. **事件驱动架构图**：Falco → Falcosidekick → Argo Workflows → Evidence Storage
 2. **Forensics as Code 仓库**：
@@ -952,7 +952,7 @@ Level 4 是 FEBM 体系建设的**自动化阶段**，标志是**Forensics as Co
    forensic-cli falco list --severity critical --since 24h
    ```
 
-##<!-- chunk: 事件驱动架构图 -->## 事件驱动架构图
+## 事件驱动架构图
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -1025,7 +1025,7 @@ Level 4 是 FEBM 体系建设的**自动化阶段**，标志是**Forensics as Co
   Total Time: 2-5 minutes (fully automated)
 ```
 
-##<!-- chunk: 资源需求估算（增量） -->## 资源需求估算（增量）
+## 资源需求估算（增量）
 
 在 Level 3 基础上，Level 4 新增：
 
@@ -1036,7 +1036,7 @@ Level 4 是 FEBM 体系建设的**自动化阶段**，标志是**Forensics as Co
 | ML 训练/推理         | 2 核     | 8Gi      | 100GB              | 可使用 GPU 加速          |
 | 自助查询服务         | 1 核     | 2Gi      | -                  | REST API + Web UI        |
 
-##<!-- chunk: 成功标准 -->## 成功标准
+## 成功标准
 
 - 从 Falco 告警到证据采集完成，平均耗时 < 5 分钟
 - 至少 70% 的事件响应流程实现自动化
@@ -1046,9 +1046,9 @@ Level 4 是 FEBM 体系建设的**自动化阶段**，标志是**Forensics as Co
 
 ---
 
-#<!-- chunk: 5.1.6 Level 5: Self-Evolving（自进化层） -->## 5.1.6 Level 5: Self-Evolving（自进化层）
+## 5.1.6 Level 5: Self-Evolving（自进化层）
 
-##<!-- chunk: 特征描述 -->## 特征描述
+## 特征描述
 
 Level 5 是 FEBM 体系建设的**终极形态**，标志是**AI 驱动的自进化**和**组织级知识图谱**：
 
@@ -1061,7 +1061,7 @@ Level 5 是 FEBM 体系建设的**终极形态**，标志是**AI 驱动的自进
 - **组织知识图谱**：构建包含服务依赖、故障模式、修复措施的全局知识图谱
 - **自我优化**：系统根据反馈自动调整检测阈值、响应策略、资源分配
 
-##<!-- chunk: 关键改进点 -->## 关键改进点
+## 关键改进点
 
 1. **从响应到预测**：不仅快速响应已发生的事件,更能预测未来风险
 2. **从人工到智能**：AI 完成 95% 的分析工作，人类只需决策和创造
@@ -1069,7 +1069,7 @@ Level 5 是 FEBM 体系建设的**终极形态**，标志是**AI 驱动的自进
 4. **从孤立到网络**：所有组件、服务、问题形成统一的知识图谱
 5. **从静态到动态**：系统持续学习和进化，不需要人工更新
 
-##<!-- chunk: 关键绩效指标（KPI） -->## 关键绩效指标（KPI）
+## 关键绩效指标（KPI）
 
 | 指标类别       | 具体指标                           | 典型值           |
 |----------------|-----------------------------------|------------------|
@@ -1081,7 +1081,7 @@ Level 5 是 FEBM 体系建设的**终极形态**，标志是**AI 驱动的自进
 | AI 参与率      | AI Agent 参与的事件分析占比        | > 90%            |
 | 持续改进       | 月度检测规则自动优化次数           | 10+              |
 
-##<!-- chunk: 自我评估清单 -->## 自我评估清单
+## 自我评估清单
 
 - [ ] 是否实现了故障预测（至少提前 10 分钟预警）？
 - [ ] 是否部署了多个协同工作的 AI Agent？
@@ -1094,7 +1094,7 @@ Level 5 是 FEBM 体系建设的**终极形态**，标志是**AI 驱动的自进
 
 如果以上有 **6 项或以上**选"是"，则组织处于 Level 5。
 
-##<!-- chunk: 前置条件 -->## 前置条件
+## 前置条件
 
 - 已完成 Level 4 的自动化建设，系统稳定运行至少 1 年
 - 积累了大量历史数据（至少 1 年的日志、指标、事件）
@@ -1102,7 +1102,7 @@ Level 5 是 FEBM 体系建设的**终极形态**，标志是**AI 驱动的自进
 - 具备大规模图数据处理能力（如 Neo4j、JanusGraph）
 - 具备 LLM 应用开发能力（如 LangChain、LlamaIndex）
 
-##<!-- chunk: 交付物 -->## 交付物
+## 交付物
 
 1. **预测性取证系统**：
    - 基于时间序列预测的资源耗尽告警（ARIMA、Prophet）
@@ -1538,7 +1538,7 @@ Level 5 是 FEBM 体系建设的**终极形态**，标志是**AI 驱动的自进
    print(f"Updated {len(rules)} Falco rules from threat intelligence")
    ```
 
-##<!-- chunk: 预测性取证示例 -->## 预测性取证示例
+## 预测性取证示例
 
 **场景**：在 Pod OOM 发生前 10 分钟自动预警并采集证据
 
@@ -1626,7 +1626,7 @@ def trigger_proactive_forensics(pod_name, reason, eta_minutes, forecast_data):
     )
 ```
 
-##<!-- chunk: 成功标准 -->## 成功标准
+## 成功标准
 
 - 实现至少一种预测性告警（如 OOM 预测、磁盘满预测）
 - 部署至少 3 个协同工作的 AI Agent
@@ -1637,9 +1637,9 @@ def trigger_proactive_forensics(pod_name, reason, eta_minutes, forecast_data):
 
 ---
 
-#<!-- chunk: 5.1.7 成熟度跃迁指南 -->## 5.1.7 成熟度跃迁指南
+## 5.1.7 成熟度跃迁指南
 
-##<!-- chunk: 如何从 Level 1 跃迁到 Level 2 -->## 如何从 Level 1 跃迁到 Level 2
+## 如何从 Level 1 跃迁到 Level 2
 
 **关键里程碑**：
 1. 部署统一日志聚合（Loki 或 ES）
@@ -1654,7 +1654,7 @@ def trigger_proactive_forensics(pod_name, reason, eta_minutes, forecast_data):
 - Falco 误报过多（需要逐步调优规则）
 - 团队学习曲线（需要培训和文档）
 
-##<!-- chunk: 如何从 Level 2 跃迁到 Level 3 -->## 如何从 Level 2 跃迁到 Level 3
+## 如何从 Level 2 跃迁到 Level 3
 
 **关键里程碑**：
 1. 编写完整的事件响应 SOP
@@ -1670,7 +1670,7 @@ def trigger_proactive_forensics(pod_name, reason, eta_minutes, forecast_data):
 - 人员流动导致知识流失（需要多人备份和文档化）
 - 演练影响生产（需要独立演练环境）
 
-##<!-- chunk: 如何从 Level 3 跃迁到 Level 4 -->## 如何从 Level 3 跃迁到 Level 4
+## 如何从 Level 3 跃迁到 Level 4
 
 **关键里程碑**：
 1. 部署 SOAR 平台（Argo Workflows 或商业产品）
@@ -1686,7 +1686,7 @@ def trigger_proactive_forensics(pod_name, reason, eta_minutes, forecast_data):
 - ML 模型效果不佳（需要足够的历史数据和持续调优）
 - 技术债务（代码质量和可维护性）
 
-##<!-- chunk: 如何从 Level 4 跃迁到 Level 5 -->## 如何从 Level 4 跃迁到 Level 5
+## 如何从 Level 4 跃迁到 Level 5
 
 **关键里程碑**：
 1. 实现故障预测（至少一种场景）
@@ -1745,22 +1745,22 @@ Month 19-24: Phase 5 (AI-Driven)
 Maturity Level:  L1    L2        L3             L4          L5
 ```
 
-#<!-- chunk: 5.2.1 Phase 1: 可观测性基座建设（0-3 个月） -->## 5.2.1 Phase 1: 可观测性基座建设（0-3 个月）
+## 5.2.1 Phase 1: 可观测性基座建设（0-3 个月）
 
-##<!-- chunk: 阶段目标 -->## 阶段目标
+## 阶段目标
 
 建立完整的**可观测性三支柱**（Logs、Metrics、Traces）和**基础安全检测能力**，为后续的取证能力奠定数据基础。
 
-##<!-- chunk: 前置条件 -->## 前置条件
+## 前置条件
 
 - [ ] K8s 集群已部署并稳定运行
 - [ ] 有专人负责可观测性工具的部署和维护
 - [ ] 预算已批准（存储、计算资源）
 - [ ] 团队具备基本的 K8s 和 YAML 编写能力
 
-##<!-- chunk: 详细任务清单 -->## 详细任务清单
+## 详细任务清单
 
-###<!-- chunk: 1.1 统一日志收集 -->## 1.1 统一日志收集
+## 1.1 统一日志收集
 
 - [ ] **选型决策**：评估 Loki vs. Elasticsearch
   - Loki：轻量级，成本低，适合云原生环境
@@ -1848,6 +1848,10 @@ Maturity Level:  L1    L2        L3             L4          L5
   ```
 
 - [ ] **部署 Loki**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
   ```bash
   helm repo add grafana https://grafana.github.io/helm-charts
   helm install loki grafana/loki-stack \
@@ -1864,7 +1868,7 @@ Maturity Level:  L1    L2        L3             L4          L5
   logcli query '{namespace="default"}' --since=1h --limit=100
   ```
 
-###<!-- chunk: 1.2 启用 K8s 审计日志 -->## 1.2 启用 K8s 审计日志
+## 1.2 启用 K8s 审计日志
 
 - [ ] **配置 API Server 审计策略**：
   ```yaml
@@ -1963,9 +1967,13 @@ Maturity Level:  L1    L2        L3             L4          L5
   kubectl logs -n logging -l app=audit-backend
   ```
 
-###<!-- chunk: 1.3 部署基础安全检测（Falco） -->## 1.3 部署基础安全检测（Falco）
+## 1.3 部署基础安全检测（Falco）
 
 - [ ] **部署 Falco**（DaemonSet）：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
   ```bash
   helm repo add falcosecurity https://falcosecurity.github.io/charts
   helm install falco falcosecurity/falco \
@@ -2028,9 +2036,13 @@ Maturity Level:  L1    L2        L3             L4          L5
   kubectl logs -n falco -l app=falco | grep "Sensitive file"
   ```
 
-###<!-- chunk: 1.4 建立基础监控（Prometheus + Grafana） -->## 1.4 建立基础监控（Prometheus + Grafana）
+## 1.4 建立基础监控（Prometheus + Grafana）
 
 - [ ] **部署 Prometheus**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
   ```bash
   helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
   helm install prometheus prometheus-community/kube-prometheus-stack \
@@ -2105,7 +2117,7 @@ Maturity Level:  L1    L2        L3             L4          L5
         summary: "Pod {{ $labels.namespace }}/{{ $labels.pod }} using >90% memory"
   ```
 
-###<!-- chunk: 1.5 配置时间同步（NTP） -->## 1.5 配置时间同步（NTP）
+## 1.5 配置时间同步（NTP）
 
 - [ ] **验证所有节点时间同步**：
   ```bash
@@ -2138,7 +2150,7 @@ Maturity Level:  L1    L2        L3             L4          L5
   done
   ```
 
-##<!-- chunk: 架构图（Phase 1 完成后） -->## 架构图（Phase 1 完成后）
+## 架构图（Phase 1 完成后）
 
 ```
 ┌────────────────────────────────────────────────────────────────┐
@@ -2198,7 +2210,7 @@ Maturity Level:  L1    L2        L3             L4          L5
           Phase 1 Architecture: Observability Foundation
 ```
 
-##<!-- chunk: 资源需求总结 -->## 资源需求总结
+## 资源需求总结
 
 | 组件                | CPU     | 内存    | 存储             | 节点数     |
 |---------------------|---------|---------|------------------|------------|
@@ -2210,7 +2222,7 @@ Maturity Level:  L1    L2        L3             L4          L5
 | Falcosidekick       | 500m    | 512MB   | -                | 1          |
 | **总计**            | **22.5核** | **54.5GB** | **1.51TB**   | -          |
 
-##<!-- chunk: 验收标准 -->## 验收标准
+## 验收标准
 
 - [ ] 可以查询到所有 Pod 的实时日志和 30 天内的历史日志
 - [ ] K8s 审计日志已启用，可以追溯任意配置变更操作
@@ -2219,7 +2231,7 @@ Maturity Level:  L1    L2        L3             L4          L5
 - [ ] 所有组件的告警规则已配置并验证有效
 - [ ] 团队成员完成基础培训，可以独立查询日志和指标
 
-##<!-- chunk: 常见问题与解决方案 -->## 常见问题与解决方案
+## 常见问题与解决方案
 
 **Q1: Fluent Bit 占用过多内存**
 
@@ -2253,22 +2265,22 @@ A: 逐步收紧规则，先从 WARNING 级别开始：
 
 ---
 
-#<!-- chunk: 5.2.2 Phase 2: 取证能力增强（3-6 个月） -->## 5.2.2 Phase 2: 取证能力增强（3-6 个月）
+## 5.2.2 Phase 2: 取证能力增强（3-6 个月）
 
-##<!-- chunk: 阶段目标 -->## 阶段目标
+## 阶段目标
 
 在可观测性基座之上，增强**主动取证能力**，包括容器快照、网络取证、自定义检测规则和证据管理。
 
-##<!-- chunk: 前置条件 -->## 前置条件
+## 前置条件
 
 - [ ] Phase 1 已完成并稳定运行至少 1 个月
 - [ ] K8s 版本 >= 1.25（支持 Checkpoint API）
 - [ ] 团队熟练掌握 Prometheus、Loki、Falco 的使用
 - [ ] 已规划证据存储方案（S3 或类似）
 
-##<!-- chunk: 详细任务清单 -->## 详细任务清单
+## 详细任务清单
 
-###<!-- chunk: 2.1 启用容器快照（Checkpoint） -->## 2.1 启用容器快照（Checkpoint）
+## 2.1 启用容器快照（Checkpoint）
 
 - [ ] **验证 K8s 版本和 Feature Gate**：
   ```bash
@@ -2374,9 +2386,13 @@ A: 逐步收紧规则，先从 WARNING 级别开始：
       checkpoint_pod(pod_name, namespace)
   ```
 
-###<!-- chunk: 2.2 部署 eBPF 探针 -->## 2.2 部署 eBPF 探针
+## 2.2 部署 eBPF 探针
 
 - [ ] **部署 Cilium（如果未部署）**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
   ```bash
   helm repo add cilium https://helm.cilium.io/
   helm install cilium cilium/cilium \
@@ -2439,7 +2455,7 @@ A: 逐步收紧规则，先从 WARNING 级别开始：
   hubble observe --verdict DROPPED
   ```
 
-###<!-- chunk: 2.3 自定义 Falco 检测规则 -->## 2.3 自定义 Falco 检测规则
+## 2.3 自定义 Falco 检测规则
 
 - [ ] **开发业务特定规则**（至少 10 条）：
   ```yaml
@@ -2515,6 +2531,11 @@ A: 逐步收紧规则，先从 WARNING 级别开始：
   ```
 
 - [ ] **部署自定义规则**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl create configmap falco-custom-rules \
     --from-file=custom-falco-rules.yaml \
@@ -2527,6 +2548,10 @@ A: 逐步收紧规则，先从 WARNING 级别开始：
   ```
 
 - [ ] **测试自定义规则**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 测试 SSH 检测
   kubectl exec -it test-pod -- ssh user@remote-host
@@ -2535,9 +2560,13 @@ A: 逐步收紧规则，先从 WARNING 级别开始：
   kubectl logs -n falco -l app=falco | grep "SSH lateral movement"
   ```
 
-###<!-- chunk: 2.4 实施证据管理 -->## 2.4 实施证据管理
+## 2.4 实施证据管理
 
 - [ ] **部署证据存储（S3-Compatible）**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
   ```bash
   # 使用 MinIO 作为内部对象存储
   helm repo add minio https://charts.min.io/
@@ -2647,7 +2676,7 @@ A: 逐步收紧规则，先从 WARNING 级别开始：
     }'
   ```
 
-##<!-- chunk: 验收标准 -->## 验收标准
+## 验收标准
 
 - [ ] 成功对运行中的 Pod 进行 Checkpoint 并导出
 - [ ] Cilium Hubble 可以查看所有 Pod 的网络流量
@@ -2657,22 +2686,22 @@ A: 逐步收紧规则，先从 WARNING 级别开始：
 
 ---
 
-#<!-- chunk: 5.2.3 Phase 3: 流程标准化（6-12 个月） -->## 5.2.3 Phase 3: 流程标准化（6-12 个月）
+## 5.2.3 Phase 3: 流程标准化（6-12 个月）
 
-##<!-- chunk: 阶段目标 -->## 阶段目标
+## 阶段目标
 
 建立**标准化的事件响应流程**、**证据保管链制度**和**知识管理体系**，实现从"工具驱动"到"流程驱动"的转型。
 
-##<!-- chunk: 前置条件 -->## 前置条件
+## 前置条件
 
 - [ ] Phase 2 已完成并积累了至少 3 个真实问题案例
 - [ ] 团队规模 >= 5 人（SRE + Security）
 - [ ] 获得管理层对流程建设的支持
 - [ ] 已完成至少一次事件回顾（Postmortem）
 
-##<!-- chunk: 详细任务清单 -->## 详细任务清单
+## 详细任务清单
 
-###<!-- chunk: 3.1 制定事件响应 SOP -->## 3.1 制定事件响应 SOP
+## 3.1 制定事件响应 SOP
 
 - [ ] **定义事件分级标准**：
 
@@ -2691,13 +2720,13 @@ A: 逐步收紧规则，先从 WARNING 级别开始：
 
 <!-- chunk: 1. 事件检测与分级 -->## 1. 事件检测与分级
 
-#<!-- chunk: 1.1 检测来源 -->## 1.1 检测来源
+## 1.1 检测来源
 - Prometheus 告警（Alertmanager）
 - Falco 安全告警
 - 用户报告（Support Ticket）
 - 巡检发现（Health Check）
 
-#<!-- chunk: 1.2 事件分级 -->## 1.2 事件分级
+## 1.2 事件分级
 | 级别 | 定义 | 响应时间 | 升级路径 |
 |------|------|---------|---------|
 | P0   | 核心业务中断 | 立即 | On-Call → Team Lead → Director |
@@ -2706,38 +2735,38 @@ A: 逐步收紧规则，先从 WARNING 级别开始：
 | P3   | 低影响问题 | 24h | 排入迭代处理 |
 
 <!-- chunk: 2. 证据采集操作 -->## 2. 证据采集操作
-#<!-- chunk: 2.1 自动采集（事件触发） -->## 2.1 自动采集（事件触发）
+## 2.1 自动采集（事件触发）
 - Falcosidekick 自动路由至 Argo Workflow
 - 容器检查点自动创建
 - 增强日志/指标/追踪采集
 
-#<!-- chunk: 2.2 手动采集（分析师触发） -->## 2.2 手动采集（分析师触发）
+## 2.2 手动采集（分析师触发）
 - kubectl 诊断命令集
 - 网络抓包 (tcpdump/cilium hubble)
 - 内存转储 (CRIU checkpoint)
 
 <!-- chunk: 3. 分析与诊断 -->## 3. 分析与诊断
-#<!-- chunk: 3.1 时间线重建（必选） -->## 3.1 时间线重建（必选）
-#<!-- chunk: 3.2 多源关联分析（必选） -->## 3.2 多源关联分析（必选）
-#<!-- chunk: 3.3 假设生成与验证 -->## 3.3 假设生成与验证
+## 3.1 时间线重建（必选）
+## 3.2 多源关联分析（必选）
+## 3.3 假设生成与验证
 
 <!-- chunk: 4. 遏制与修复 -->## 4. 遏制与修复
-#<!-- chunk: 4.1 NetworkPolicy 隔离模板 -->## 4.1 NetworkPolicy 隔离模板
-#<!-- chunk: 4.2 修复操作清单 -->## 4.2 修复操作清单
-#<!-- chunk: 4.3 验证恢复确认 -->## 4.3 验证恢复确认
+## 4.1 NetworkPolicy 隔离模板
+## 4.2 修复操作清单
+## 4.3 验证恢复确认
 
 <!-- chunk: 5. 事后活动 -->## 5. 事后活动
-#<!-- chunk: 5.1 事件报告撰写 -->## 5.1 事件报告撰写
-#<!-- chunk: 5.2 检测规则更新 -->## 5.2 检测规则更新
-#<!-- chunk: 5.3 响应手册优化 -->## 5.3 响应手册优化
-#<!-- chunk: 5.4 团队复盘会议 -->## 5.4 团队复盘会议
+## 5.1 事件报告撰写
+## 5.2 检测规则更新
+## 5.3 响应手册优化
+## 5.4 团队复盘会议
 ```
 
 ---
 
 <!-- chunk: 5.3 关键工具链参考 -->## 5.3 关键工具链参考
 
-#<!-- chunk: 5.3.1 工具分类与选型 -->## 5.3.1 工具分类与选型
+## 5.3.1 工具分类与选型
 
 | 工具类别 | 代表工具 | FEBM 应用 | 部署优先级 | 许可证 |
 |---------|---------|-----------|-----------|-------|
@@ -2759,7 +2788,7 @@ A: 逐步收紧规则，先从 WARNING 级别开始：
 | 取证基础设施 | OSDFIR Infrastructure | 一体化云原生取证平台 | P2 | Apache 2.0 |
 | 策略引擎 | OPA / Gatekeeper | 合规策略强制执行 | P1 | Apache 2.0 |
 
-#<!-- chunk: 5.3.2 工具选型决策框架 -->## 5.3.2 工具选型决策框架
+## 5.3.2 工具选型决策框架
 
 ```
 工具选型决策树:
@@ -2787,7 +2816,7 @@ A: 逐步收紧规则，先从 WARNING 级别开始：
 
 <!-- chunk: 5.4 组织能力建设 -->## 5.4 组织能力建设
 
-#<!-- chunk: 5.4.1 角色与职责矩阵 -->## 5.4.1 角色与职责矩阵
+## 5.4.1 角色与职责矩阵
 
 ```
 组织角色与职责矩阵:
@@ -2822,7 +2851,7 @@ A: 逐步收紧规则，先从 WARNING 级别开始：
 └────────────────┴──────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 5.4.2 跨职能协作机制 -->## 5.4.2 跨职能协作机制
+## 5.4.2 跨职能协作机制
 
 ```
 跨职能协作:
@@ -2833,7 +2862,7 @@ A: 逐步收紧规则，先从 WARNING 级别开始：
   → 定期演练:     安全团队设计场景，SRE 执行响应
 ```
 
-#<!-- chunk: 5.4.3 培训体系 -->## 5.4.3 培训体系
+## 5.4.3 培训体系
 
 | 培训模块 | 目标角色 | 内容 | 频率 |
 |---------|---------|------|------|
@@ -2848,7 +2877,7 @@ A: 逐步收紧规则，先从 WARNING 级别开始：
 
 <!-- chunk: 5.5 实施建议与注意事项 -->## 5.5 实施建议与注意事项
 
-#<!-- chunk: 建议一：从可观测性基座开始，而非从取证工具开始 -->## 建议一：从可观测性基座开始，而非从取证工具开始
+## 建议一：从可观测性基座开始，而非从取证工具开始
 
 FEBM 的基础是证据。没有完善的可观测性基础设施，任何取证工具都无法发挥价值。
 
@@ -2862,19 +2891,19 @@ FEBM 的基础是证据。没有完善的可观测性基础设施，任何取证
 ✗ 部署 OSDFIR → 基础数据源不完整
 ```
 
-#<!-- chunk: 建议二：审计日志是 FEBM 的"黄金数据源" -->## 建议二：审计日志是 FEBM 的"黄金数据源"
+## 建议二：审计日志是 FEBM 的"黄金数据源"
 
 Kubernetes 审计日志记录了 API Server 的所有操作，是追溯配置变更、权限使用、异常行为的核心证据源。务必在生产集群启用 RequestResponse 级别审计，并配置可靠的审计后端。
 
-#<!-- chunk: 建议三：持续取证优于事后取证 -->## 建议三：持续取证优于事后取证
+## 建议三：持续取证优于事后取证
 
 在 Kubernetes 的 ephemeral 环境中，等到事件发生后再启动证据采集为时已晚。建立"始终在线"的取证姿态——持续监控、持续采集、异常触发增强捕获。
 
-#<!-- chunk: 建议四：Forensics as Code 是规模化的关键 -->## 建议四：Forensics as Code 是规模化的关键
+## 建议四：Forensics as Code 是规模化的关键
 
 取证流程的代码化确保了可重复性和一致性。将检测规则、响应 Playbook、分析脚本纳入版本控制，通过 CI/CD 测试和部署。
 
-#<!-- chunk: 建议五：FTA 与 FEBM 互补而非替代 -->## 建议五：FTA 与 FEBM 互补而非替代
+## 建议五：FTA 与 FEBM 互补而非替代
 
 ```
 理想实践:
@@ -2885,11 +2914,11 @@ Kubernetes 审计日志记录了 API Server 的所有操作，是追溯配置变
            FTA 关键路径 → 指导 FEBM 监控重点
 ```
 
-#<!-- chunk: 建议六：关注证据质量而非数量 -->## 建议六：关注证据质量而非数量
+## 建议六：关注证据质量而非数量
 
 大规模集群产生的日志、指标、追踪数据量可达 PB 级。通过分层存储（热/温/冷）、智能降噪（异常检测过滤正常模式）和聚焦关键信号来管理复杂度。
 
-#<!-- chunk: 建议七：将 FEBM 能力嵌入 AI Agent 体系 -->## 建议七：将 FEBM 能力嵌入 AI Agent 体系
+## 建议七：将 FEBM 能力嵌入 AI Agent 体系
 
 ```
 Agent 能力 ←→ FEBM 映射:
@@ -2904,7 +2933,7 @@ Agent "学习" ←→ FEBM 知识沉淀 + 持续进化
 
 <!-- chunk: 5.6 预算与资源规划 -->## 5.6 预算与资源规划
 
-#<!-- chunk: 5.6.1 按集群规模估算 -->## 5.6.1 按集群规模估算
+## 5.6.1 按集群规模估算
 
 | 资源维度 | 小型 (10 nodes) | 中型 (50 nodes) | 大型 (200+ nodes) |
 |---------|:---:|:---:|:---:|
@@ -2917,7 +2946,7 @@ Agent "学习" ←→ FEBM 知识沉淀 + 持续进化
 | 分析平台 CPU | 4 core | 16 core | 64 core |
 | 分析平台内存 | 16 GB | 64 GB | 256 GB |
 
-#<!-- chunk: 5.6.2 ROI 分析框架 -->## 5.6.2 ROI 分析框架
+## 5.6.2 ROI 分析框架
 
 ```
 投入:
@@ -2938,7 +2967,7 @@ Agent "学习" ←→ FEBM 知识沉淀 + 持续进化
 
 <!-- chunk: 5.7 合规与法律考量 -->## 5.7 合规与法律考量
 
-#<!-- chunk: 5.7.1 数据保护合规 -->## 5.7.1 数据保护合规
+## 5.7.1 数据保护合规
 
 | 合规要求 | 影响 | FEBM 应对 |
 |---------|------|----------|
@@ -2947,13 +2976,13 @@ Agent "学习" ←→ FEBM 知识沉淀 + 持续进化
 | SOC 2 Type II | 安全控制持续有效 | Forensics as Code + 持续监控 |
 | PCI DSS | 支付数据安全 | 证据中支付数据需加密存储 |
 
-#<!-- chunk: 5.7.2 跨境数据考量 -->## 5.7.2 跨境数据考量
+## 5.7.2 跨境数据考量
 
 - 证据存储位置需符合数据居留要求
 - 跨境证据传输需评估合规风险
 - 多区域集群需分别管理证据存储
 
-#<!-- chunk: 5.7.3 法律程序准备 -->## 5.7.3 法律程序准备
+## 5.7.3 法律程序准备
 
 - Chain of Custody 文档需满足司法要求
 - 分析工具需经过行业认可验证
@@ -2968,21 +2997,21 @@ Agent "学习" ←→ FEBM 知识沉淀 + 持续进化
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-febm/MOC|topic-febm MOC]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/README|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations|第一章：FEBM 方法论原理与理论基础]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation|第二章:FEBM 技术实现体系]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices|第三章：FEBM 最佳实践]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing|第四章：FEBM 对云平台工单智能体托管的意义]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution|第六章：未来演进方向]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix|第七章:附录]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive|法医鉴定循证方法论（FEBM）深度解析]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis|FTA-FEBM 联合诊断最佳实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/MOC.md|topic-febm MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md|第一章：FEBM 方法论原理与理论基础]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|第二章:FEBM 技术实现体系]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices.md|第三章：FEBM 最佳实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|第六章：未来演进方向]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix.md|第七章:附录]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices|03-febm-best-practices]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing|04-febm-agent-ticket-processing]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution|06-febm-future-evolution]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix|07-febm-appendix]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices.md|03-febm-best-practices]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing.md|04-febm-agent-ticket-processing]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|06-febm-future-evolution]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix.md|07-febm-appendix]]

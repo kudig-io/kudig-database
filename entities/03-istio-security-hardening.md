@@ -46,7 +46,7 @@ description: Istio 安全配置指南，涵盖 mTLS、认证授权、证书管�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -58,10 +58,10 @@ description: Istio 安全配置指南，涵盖 mTLS、认证授权、证书管�
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[istio]]
-- [[entities/vault|[[HashiCorp Vault|vault]]]]
-- [[concepts/secrets-management|secrets-management]]
+- [[entities/vault.md|[[HashiCorp Vault|vault]]]]
+- [[concepts/secrets-management.md|secrets-management]]
 - [[pod-lifecycle]]
 
 ## Related
@@ -111,4 +111,4 @@ description: Istio 安全配置指南，涵盖 mTLS、认证授权、证书管�
 - RELEASE-NOTES-1.11
 - RELEASE-NOTES-0.5
 - 03-istio-security-hardening
-- [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
+- [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference

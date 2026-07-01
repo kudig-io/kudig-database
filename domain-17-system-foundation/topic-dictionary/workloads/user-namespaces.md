@@ -154,6 +154,9 @@ getsubids kubelet
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Pod 是否启用了用户命名空间
 kubectl get pod <pod-name> -n prod -o jsonpath='{.spec.hostUsers}'
@@ -176,4 +179,10 @@ kubectl get --raw /api/v1/nodes/<node-name>/proxy/metrics | grep user_namespace
 - [Pods 基础](./pods.md)
 
 ## 参考链接
-- https://[[entities/kubernetes|kubernetes]].io/docs/concepts/workloads/pods/user-namespaces/
+- https://[[entities/kubernetes.md|kubernetes]].io/docs/concepts/workloads/pods/user-namespaces/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]

@@ -42,7 +42,7 @@ title: Day 19: Pod 容器组基础
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[Kubernetes|Kubernetes]] [[Pod Lifecycle|Pod lifecycle]] Pending Running Succeeded Failed
+  - [[Kubernetes|Kubernetes]] Pod lifecycle Pending Running Succeeded Failed
   - Pod container debugging logs exec
   - Kubernetes Sidecar multi-container pattern
   - Init Container initialization
@@ -158,6 +158,9 @@ K8s 支持三种探针来检查容器的健康状态：
 
 ### 任务 1: Pod 创建与基本操作 (40min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建带资源限制和探针的 Pod
 cat <<EOF | kubectl apply -f -
@@ -233,6 +236,10 @@ kubectl get pod nginx-demo -o yaml
 
 ### 任务 2: Pod 日志与调试 (40min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 查看 Pod 日志
 kubectl logs nginx-demo
@@ -280,6 +287,10 @@ kubectl get pod nginx-demo --show-labels
 ```
 
 ### 任务 3: 多容器 Pod（Sidecar 模式）(40min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 创建带 Sidecar 日志采集器的 Pod
@@ -355,6 +366,10 @@ kubectl logs sidecar-demo -c log-collector --tail=5
 ```
 
 ### 任务 4: Init Container 与 Pod 生命周期观察 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 创建带多个 Init Container 的 Pod
@@ -581,3 +596,5 @@ Init Container 失败后，Pod 不会继续启动主容器。如果 restartPolic
 - [Pod 生命周期详解](../../domain-09-workload/02-pod-lifecycle.md)
 - [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
 - [ACK 工作负载管理](../../domain-12-cloud-providers/04-alicloud-ack/250-ack-workload.md)
+
+```

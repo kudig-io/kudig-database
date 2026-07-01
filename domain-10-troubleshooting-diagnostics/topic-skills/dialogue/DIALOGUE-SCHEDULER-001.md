@@ -7,6 +7,7 @@ severity: "high"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 title: "Pod 一直 Pending，无法调度 — 远程顾问对话脚本"
 category: dialogue
 tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
@@ -14,7 +15,7 @@ tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 
 # Pod 一直 Pending，无法调度 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/kube-scheduler|Kubernetes Scheduler]]
+> 对应概念：[[concepts/kube-scheduler.md|Kubernetes Scheduler]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -168,6 +169,9 @@ kubectl top pods -n <namespace> --sort-by=cpu
 
 > **如果无法执行**：请通过控制台或监控系统找出资源占用高的 Pod，评估是否可以删除或缩容。
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 kubectl cordon <node-name> && kubectl drain <node-name> --ignore-daemonsets
 ```
@@ -176,6 +180,9 @@ kubectl cordon <node-name> && kubectl drain <node-name> --ignore-daemonsets
 
 #### 方案 B：添加 Toleration
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch pod <pod-name> -n <namespace> --type='merge' -p='{"spec":{"tolerations":[{"key":"<taint-key>","operator":"Equal","value":"<taint-value>","effect":"NoSchedule"}]}}'
 ```
@@ -183,6 +190,9 @@ kubectl patch pod <pod-name> -n <namespace> --type='merge' -p='{"spec":{"tolerat
 > **如果无法执行**：请修改 Deployment/StatefulSet 的 Pod 模板，在 spec.template.spec.tolerations 中添加对应的 toleration 后重新部署。
 
 #### 方案 C：放宽 Affinity
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 kubectl patch deployment <deployment-name> -n <namespace> --type='merge' -p='{"spec":{"template":{"spec":{"affinity":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":null}}}}}}'
@@ -210,6 +220,6 @@ kubectl get pod <pod-name> -n <namespace> -w
 
 ## 相关概念
 
-- [[concepts/kube-scheduler|Kubernetes Scheduler]]
-- [[concepts/node-taint|节点 Taint 与 Toleration]]
-- [[concepts/pod-affinity|Pod 亲和性与反亲和性]]
+- [[concepts/kube-scheduler.md|Kubernetes Scheduler]]
+- [[concepts/node-taint.md|节点 Taint 与 Toleration]]
+- [[concepts/pod-affinity.md|Pod 亲和性与反亲和性]]

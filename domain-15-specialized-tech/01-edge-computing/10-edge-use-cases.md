@@ -120,7 +120,7 @@ Edge computing is transforming digital transformation across all industries. Fro
 
 <!-- chunk: 1. 智能工厂 (Industry 4.0) -->## 1. 智能工厂 (Industry 4.0)
 
-#<!-- chunk: 1.1 场景概述 -->## 1.1 场景概述
+## 1.1 场景概述
 
 某汽车零部件制造商拥有 12 个生产车间、2000+ 台设备，面临以下挑战：
 - 质量检测依赖人工视觉，漏检率 3%，每年损失 500 万元
@@ -128,7 +128,7 @@ Edge computing is transforming digital transformation across all industries. Fro
 - 云端推理延迟 200ms，不满足生产线 50ms 要求
 - 各车间数据孤岛，无法统一分析
 
-#<!-- chunk: 1.2 智能工厂边缘架构 -->## 1.2 智能工厂边缘架构
+## 1.2 智能工厂边缘架构
 
 ```mermaid
 graph TB
@@ -181,7 +181,7 @@ graph TB
     style CloudLayer fill:#fff3e0,stroke:#e65100
 ```
 
-#<!-- chunk: 1.3 工业质量检测系统 -->## 1.3 工业质量检测系统
+## 1.3 工业质量检测系统
 
 ```python
 # industrial_quality_inspection.py
@@ -534,7 +534,7 @@ class PredictiveMaintenanceEngine:
         )
 ```
 
-#<!-- chunk: 1.4 工厂边缘 Kubernetes 部署 -->## 1.4 工厂边缘 Kubernetes 部署
+## 1.4 工厂边缘 Kubernetes 部署
 
 ```yaml
 # factory-edge-deployment.yaml
@@ -652,7 +652,7 @@ spec:
               memory: "2Gi"
 ```
 
-#<!-- chunk: 1.5 业务价值量化 -->## 1.5 业务价值量化
+## 1.5 业务价值量化
 
 | 指标 | 部署前 | 部署后 | 提升 |
 |------|--------|--------|------|
@@ -666,7 +666,7 @@ spec:
 
 <!-- chunk: 2. 智慧城市 (Smart City) -->## 2. 智慧城市 (Smart City)
 
-#<!-- chunk: 2.1 场景概述 -->## 2.1 场景概述
+## 2.1 场景概述
 
 某省会城市推进智慧城市建设，覆盖 500+ 个路口摄像头、200 个智慧路灯杆、50 个环境监测站，管理 300 万常住人口出行。
 
@@ -709,7 +709,7 @@ graph TB
     style CityBrain fill:#e3f2fd,stroke:#1565c0
 ```
 
-#<!-- chunk: 2.2 交通流量检测系统 -->## 2.2 交通流量检测系统
+## 2.2 交通流量检测系统
 
 ```python
 # smart_traffic_edge.py
@@ -950,7 +950,7 @@ class AdaptiveTrafficSignalController:
         }
 ```
 
-#<!-- chunk: 2.3 智慧城市隐私保护 -->## 2.3 智慧城市隐私保护
+## 2.3 智慧城市隐私保护
 
 ```yaml
 # smart-city-privacy-policy.yaml
@@ -1011,7 +1011,7 @@ data:
 
 <!-- chunk: 3. 车联网 V2X (Connected Vehicles) -->## 3. 车联网 V2X (Connected Vehicles)
 
-#<!-- chunk: 3.1 V2X 架构 -->## 3.1 V2X 架构
+## 3.1 V2X 架构
 
 ```mermaid
 graph TB
@@ -1052,7 +1052,7 @@ graph TB
     CloudV2X -->|"地图/策略更新"| RSU_Edge
 ```
 
-#<!-- chunk: 3.2 V2X 边缘服务实现 -->## 3.2 V2X 边缘服务实现
+## 3.2 V2X 边缘服务实现
 
 ```python
 # v2x_edge_service.py
@@ -1266,7 +1266,7 @@ class CollisionWarningSystem:
 
 <!-- chunk: 4. 智慧零售 (Smart Retail) -->## 4. 智慧零售 (Smart Retail)
 
-#<!-- chunk: 4.1 智慧门店架构 -->## 4.1 智慧门店架构
+## 4.1 智慧门店架构
 
 ```mermaid
 graph TB
@@ -1312,7 +1312,7 @@ graph TB
     style RetailCloud fill:#e3f2fd,stroke:#1565c0
 ```
 
-#<!-- chunk: 4.2 货架缺货检测实现 -->## 4.2 货架缺货检测实现
+## 4.2 货架缺货检测实现
 
 ```python
 # smart_shelf_detection.py
@@ -1543,7 +1543,7 @@ class CustomerFlowAnalyzer:
 
 <!-- chunk: 5. 医疗边缘计算 (Healthcare Edge) -->## 5. 医疗边缘计算 (Healthcare Edge)
 
-#<!-- chunk: 5.1 医疗边缘架构 -->## 5.1 医疗边缘架构
+## 5.1 医疗边缘架构
 
 ```mermaid
 graph TB
@@ -1585,7 +1585,7 @@ graph TB
     style Radiology fill:#e8eaf6,stroke:#283593
 ```
 
-#<!-- chunk: 5.2 患者生命体征实时分析 -->## 5.2 患者生命体征实时分析
+## 5.2 患者生命体征实时分析
 
 ```python
 # patient_vital_monitor.py
@@ -1892,7 +1892,7 @@ class VitalSignsAnalyzer:
         return alerts
 ```
 
-#<!-- chunk: 5.3 医疗数据合规配置 -->## 5.3 医疗数据合规配置
+## 5.3 医疗数据合规配置
 
 ```yaml
 # healthcare-data-compliance.yaml
@@ -1964,7 +1964,7 @@ data:
 
 <!-- chunk: 6. 农业物联网 (Agricultural IoT) -->## 6. 农业物联网 (Agricultural IoT)
 
-#<!-- chunk: 6.1 精准农业架构 -->## 6.1 精准农业架构
+## 6.1 精准农业架构
 
 ```mermaid
 graph TB
@@ -2008,7 +2008,7 @@ graph TB
     AgriCloud -->|"模型/策略更新"| EdgeServer
 ```
 
-#<!-- chunk: 6.2 农业边缘 AI 实现 -->## 6.2 农业边缘 AI 实现
+## 6.2 农业边缘 AI 实现
 
 ```python
 # agricultural_edge_ai.py
@@ -2296,7 +2296,7 @@ class LoRaWANDataCollector:
             return None
 ```
 
-#<!-- chunk: 6.3 农业 IoT 边缘部署 -->## 6.3 农业 IoT 边缘部署
+## 6.3 农业 IoT 边缘部署
 
 ```yaml
 # farm-edge-deployment.yaml
@@ -2407,7 +2407,7 @@ spec:
 
 <!-- chunk: 7. 跨场景共性架构模式 -->## 7. 跨场景共性架构模式
 
-#<!-- chunk: 7.1 边缘计算通用架构模式 -->## 7.1 边缘计算通用架构模式
+## 7.1 边缘计算通用架构模式
 
 ```mermaid
 graph TB
@@ -2442,7 +2442,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 7.2 行业场景对比矩阵 -->## 7.2 行业场景对比矩阵
+## 7.2 行业场景对比矩阵
 
 | 场景 | 延迟要求 | 带宽消耗 | 离线能力 | AI 复杂度 | 安全级别 | 数据隐私 |
 |------|---------|---------|---------|---------|---------|---------|
@@ -2453,7 +2453,7 @@ graph TB
 | **医疗边缘** | <1s (监护) | 低 | 必须 | 高 | 极高 | 极高 |
 | **农业 IoT** | <5min | 极低 | 必须 | 中 | 低 | 低 |
 
-#<!-- chunk: 7.3 技术选型汇总 -->## 7.3 技术选型汇总
+## 7.3 技术选型汇总
 
 ```yaml
 # 各场景推荐技术栈汇总
@@ -2506,7 +2506,7 @@ edge_technology_recommendations:
     connectivity: "4G LTE (主) + LoRa (辅)"
 ```
 
-#<!-- chunk: 7.4 边缘计算 ROI 分析框架 -->## 7.4 边缘计算 ROI 分析框架
+## 7.4 边缘计算 ROI 分析框架
 
 ```python
 # edge_roi_calculator.py
@@ -2636,7 +2636,7 @@ mindmap
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-37-edge-computing MOC
-- [[domain-15-specialized-tech/README|Domain 37: 边缘计算 (Edge Computing)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: 边缘计算 (Edge Computing)]]
 - Domain-37 边缘计算 — 开源项目索引
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)

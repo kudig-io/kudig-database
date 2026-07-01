@@ -156,7 +156,7 @@ spec:
         args:
         - --kubelet-service=kube-system/kubelet
         - --prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.68.0
-        - --thanos-default-base-image=quay.io/thanos/thanos:v0.32.0
+        - --thanos-default-base-image=quay.io/thanos/thanos:v0.37.0
         - --secret-field-selector=type!=helm.sh/release.v1
         ports:
         - containerPort: 8080
@@ -1075,6 +1075,9 @@ metric_labels:
 
 ### 监控系统诊断脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # monitoring-diagnostics.sh
@@ -1130,7 +1133,7 @@ echo "=== 诊断完成 ==="
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech MOC
-- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
 - Domain-10 扩展与自定义 — 开源项目索引
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现

@@ -4,6 +4,7 @@ type: "multi-fault"
 skills: ['12-autoscaling-failure', '19-node-resource-pressure']
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 title: "HPA不扩容 + 节点资源压力并发"
 category: uncategorized
 tags: ["uncategorized", "visibility/public"]

@@ -93,7 +93,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. eBPF 安全应用概述 -->## 1. eBPF 安全应用概述
 
-#<!-- chunk: 1.1 为什么 eBPF 改变了安全格局 (Why eBPF Transforms Security) -->## 1.1 为什么 eBPF 改变了安全格局 (Why eBPF Transforms Security)
+## 1.1 为什么 eBPF 改变了安全格局 (Why eBPF Transforms Security)
 
 传统安全工具依赖内核模块或用户态 ptrace，面临性能开销高、稳定性差、绕过风险大等问题。eBPF 在内核验证器保障下以近零开销运行，实现了安全监控的范式转变。
 
@@ -128,7 +128,7 @@ graph TB
     style Traditional fill:#ffebee,stroke:#c62828
 ```
 
-#<!-- chunk: 1.2 eBPF 安全能力矩阵 (eBPF Security Capability Matrix) -->## 1.2 eBPF 安全能力矩阵 (eBPF Security Capability Matrix)
+## 1.2 eBPF 安全能力矩阵 (eBPF Security Capability Matrix)
 
 ```mermaid
 quadrantChart
@@ -151,7 +151,7 @@ quadrantChart
     合规审计: [0.35, 0.65]
 ```
 
-#<!-- chunk: 1.3 核心技术对比 (Technology Comparison) -->## 1.3 核心技术对比 (Technology Comparison)
+## 1.3 核心技术对比 (Technology Comparison)
 
 | 安全能力 | eBPF 方案 | 传统方案 | 性能开销 | 绕过风险 | 可见度 |
 |---------|-----------|---------|---------|---------|-------|
@@ -162,7 +162,7 @@ quadrantChart
 | 入侵检测 | [[Tetragon|Tetragon]]/Falco-eBPF | OSSEC/Suricata | <3% | 低 | 全栈可见 |
 | DDoS 防护 | XDP | iptables | <5% vs 60%+ | 低 | 线速处理 |
 
-#<!-- chunk: 1.4 eBPF 安全工具生态 (eBPF Security Ecosystem) -->## 1.4 eBPF 安全工具生态 (eBPF Security Ecosystem)
+## 1.4 eBPF 安全工具生态 (eBPF Security Ecosystem)
 
 ```mermaid
 mindmap
@@ -212,9 +212,9 @@ mindmap
 
 <!-- chunk: 2. 入侵检测系统 (IDS) -->## 2. 入侵检测系统 (IDS)
 
-#<!-- chunk: 2.1 网络流量异常检测 -->## 2.1 网络流量异常检测
+## 2.1 网络流量异常检测
 
-##<!-- chunk: 2.1.1 架构设计 (Architecture) -->## 2.1.1 架构设计 (Architecture)
+## 2.1.1 架构设计 (Architecture)
 
 ```mermaid
 flowchart TD
@@ -242,7 +242,7 @@ flowchart TD
     ALERT -.-> M4
 ```
 
-##<!-- chunk: 2.1.2 eBPF 网络异常检测程序 (Network Anomaly Detection eBPF Program) -->## 2.1.2 eBPF 网络异常检测程序 (Network Anomaly Detection eBPF Program)
+## 2.1.2 eBPF 网络异常检测程序 (Network Anomaly Detection eBPF Program)
 
 ```c
 // File: network_ids.c
@@ -519,7 +519,7 @@ int network_ids(struct xdp_md *ctx) {
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-##<!-- chunk: 2.1.3 用户态告警处理器 (Userspace Alert Handler) -->## 2.1.3 用户态告警处理器 (Userspace Alert Handler)
+## 2.1.3 用户态告警处理器 (Userspace Alert Handler)
 
 ```c
 // File: ids_agent.c
@@ -634,9 +634,9 @@ int main(int argc, char **argv) {
 }
 ```
 
-#<!-- chunk: 2.2 进程行为分析 -->## 2.2 进程行为分析
+## 2.2 进程行为分析
 
-##<!-- chunk: 2.2.1 TracingPolicy：进程行为基线 (Process Behavior Baseline) -->## 2.2.1 TracingPolicy：进程行为基线 (Process Behavior Baseline)
+## 2.2.1 TracingPolicy：进程行为基线 (Process Behavior Baseline)
 
 ```yaml
 # File: policy-process-behavior-ids.yaml
@@ -758,7 +758,7 @@ spec:
               rateLimit: "100/minute"
 ```
 
-##<!-- chunk: 2.2.2 eBPF 进程行为追踪程序 (Process Behavior Tracer) -->## 2.2.2 eBPF 进程行为追踪程序 (Process Behavior Tracer)
+## 2.2.2 eBPF 进程行为追踪程序 (Process Behavior Tracer)
 
 ```c
 // File: process_tracer.c
@@ -920,9 +920,9 @@ int trace_exit(struct pt_regs *ctx) {
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 2.3 文件完整性监控 -->## 2.3 文件完整性监控
+## 2.3 文件完整性监控
 
-##<!-- chunk: 2.3.1 TracingPolicy：关键文件监控 (Critical File Integrity Monitoring) -->## 2.3.1 TracingPolicy：关键文件监控 (Critical File Integrity Monitoring)
+## 2.3.1 TracingPolicy：关键文件监控 (Critical File Integrity Monitoring)
 
 ```yaml
 # File: policy-file-integrity-monitoring.yaml
@@ -1041,9 +1041,9 @@ spec:
 
 <!-- chunk: 3. DDoS 防护 -->## 3. DDoS 防护
 
-#<!-- chunk: 3.1 XDP SYN Flood 防护 -->## 3.1 XDP SYN Flood 防护
+## 3.1 XDP SYN Flood 防护
 
-##<!-- chunk: 3.1.1 SYN Cookie 架构 (SYN Cookie Architecture) -->## 3.1.1 SYN Cookie 架构 (SYN Cookie Architecture)
+## 3.1.1 SYN Cookie 架构 (SYN Cookie Architecture)
 
 ```mermaid
 sequenceDiagram
@@ -1072,7 +1072,7 @@ sequenceDiagram
     Server-->>Legit: 连接建立
 ```
 
-##<!-- chunk: 3.1.2 XDP SYN Flood 防护完整实现 -->## 3.1.2 XDP SYN Flood 防护完整实现
+## 3.1.2 XDP SYN Flood 防护完整实现
 
 ```c
 // File: syn_flood_protection.c
@@ -1293,9 +1293,9 @@ int syn_flood_protection(struct xdp_md *ctx) {
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 3.2 Rate Limiting 速率限制 -->## 3.2 Rate Limiting 速率限制
+## 3.2 Rate Limiting 速率限制
 
-##<!-- chunk: 3.2.1 Token Bucket 算法实现 -->## 3.2.1 Token Bucket 算法实现
+## 3.2.1 Token Bucket 算法实现
 
 ```c
 // File: rate_limiter_xdp.c
@@ -1420,9 +1420,9 @@ int rate_limiter(struct xdp_md *ctx) {
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 3.3 Connection Tracking 连接追踪 -->## 3.3 Connection Tracking 连接追踪
+## 3.3 Connection Tracking 连接追踪
 
-##<!-- chunk: 3.3.1 连接状态机 (Connection State Machine) -->## 3.3.1 连接状态机 (Connection State Machine)
+## 3.3.1 连接状态机 (Connection State Machine)
 
 ```mermaid
 stateDiagram-v2
@@ -1601,9 +1601,9 @@ char LICENSE[] SEC("license") = "GPL";
 
 <!-- chunk: 4. 容器安全 -->## 4. 容器安全
 
-#<!-- chunk: 4.1 容器逃逸检测 -->## 4.1 容器逃逸检测
+## 4.1 容器逃逸检测
 
-##<!-- chunk: 4.1.1 容器逃逸攻击向量 (Escape Attack Vectors) -->## 4.1.1 容器逃逸攻击向量 (Escape Attack Vectors)
+## 4.1.1 容器逃逸攻击向量 (Escape Attack Vectors)
 
 ```mermaid
 graph TB
@@ -1652,7 +1652,7 @@ graph TB
     style Response fill:#e8f5e9,stroke:#2e7d32
 ```
 
-##<!-- chunk: 4.1.2 TracingPolicy：容器逃逸检测完整策略 -->## 4.1.2 TracingPolicy：容器逃逸检测完整策略
+## 4.1.2 TracingPolicy：容器逃逸检测完整策略
 
 ```yaml
 # File: policy-container-escape-detection.yaml
@@ -1814,9 +1814,9 @@ spec:
               rateLimit: "5/minute"
 ```
 
-#<!-- chunk: 4.2 特权升级监控 -->## 4.2 特权升级监控
+## 4.2 特权升级监控
 
-##<!-- chunk: 4.2.1 eBPF 特权升级检测程序 -->## 4.2.1 eBPF 特权升级检测程序
+## 4.2.1 eBPF 特权升级检测程序
 
 ```c
 // File: privilege_escalation_detector.c
@@ -1923,9 +1923,9 @@ int BPF_KPROBE(trace_security_capset,
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 4.3 Namespace 隔离验证 -->## 4.3 Namespace 隔离验证
+## 4.3 Namespace 隔离验证
 
-##<!-- chunk: 4.3.1 Kubernetes Namespace 安全策略 -->## 4.3.1 Kubernetes Namespace 安全策略
+## 4.3.1 Kubernetes Namespace 安全策略
 
 ```yaml
 # File: policy-namespace-isolation-verify.yaml
@@ -2016,7 +2016,7 @@ spec:
 
 <!-- chunk: 5. 零信任网络安全 -->## 5. 零信任网络安全
 
-#<!-- chunk: 5.1 零信任架构 (Zero Trust Architecture) -->## 5.1 零信任架构 (Zero Trust Architecture)
+## 5.1 零信任架构 (Zero Trust Architecture)
 
 ```mermaid
 graph TB
@@ -2062,7 +2062,7 @@ graph TB
     style Observe fill:#e8f5e9,stroke:#2e7d32
 ```
 
-#<!-- chunk: 5.2 Cilium 零信任策略实现 -->## 5.2 Cilium 零信任策略实现
+## 5.2 Cilium 零信任策略实现
 
 ```yaml
 # File: zero-trust-cilium-policy.yaml
@@ -2156,7 +2156,7 @@ spec:
             security.istio.io/tlsMode: "istio"
 ```
 
-#<!-- chunk: 5.3 eBPF 零信任执行点 (Zero Trust Enforcement Points) -->## 5.3 eBPF 零信任执行点 (Zero Trust Enforcement Points)
+## 5.3 eBPF 零信任执行点 (Zero Trust Enforcement Points)
 
 ```c
 // File: zero_trust_enforcer.c
@@ -2284,9 +2284,9 @@ char LICENSE[] SEC("license") = "GPL";
 
 <!-- chunk: 6. 合规与审计 -->## 6. 合规与审计
 
-#<!-- chunk: 6.1 系统调用审计 -->## 6.1 系统调用审计
+## 6.1 系统调用审计
 
-##<!-- chunk: 6.1.1 合规框架映射 (Compliance Framework Mapping) -->## 6.1.1 合规框架映射 (Compliance Framework Mapping)
+## 6.1.1 合规框架映射 (Compliance Framework Mapping)
 
 ```mermaid
 graph LR
@@ -2319,7 +2319,7 @@ graph LR
     ISO -->|事件响应| SC5
 ```
 
-##<!-- chunk: 6.1.2 系统调用审计 eBPF 程序 -->## 6.1.2 系统调用审计 eBPF 程序
+## 6.1.2 系统调用审计 eBPF 程序
 
 ```c
 // File: syscall_auditor.c
@@ -2476,7 +2476,7 @@ int audit_ptrace(struct trace_event_raw_sys_enter *ctx) {
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-##<!-- chunk: 6.1.3 合规审计 TracingPolicy（PCI-DSS/SOC2） -->## 6.1.3 合规审计 TracingPolicy（PCI-DSS/SOC2）
+## 6.1.3 合规审计 TracingPolicy（PCI-DSS/SOC2）
 
 ```yaml
 # File: policy-compliance-audit.yaml
@@ -2565,9 +2565,9 @@ spec:
               rateLimit: "50/minute"
 ```
 
-#<!-- chunk: 6.2 网络访问审计 -->## 6.2 网络访问审计
+## 6.2 网络访问审计
 
-##<!-- chunk: 6.2.1 Hubble 网络审计配置 -->## 6.2.1 Hubble 网络审计配置
+## 6.2.1 Hubble 网络审计配置
 
 ```yaml
 # File: hubble-audit-config.yaml
@@ -2632,7 +2632,7 @@ data:
 
 <!-- chunk: 7. 威胁狩猎与响应 -->## 7. 威胁狩猎与响应
 
-#<!-- chunk: 7.1 威胁狩猎框架 (Threat Hunting Framework) -->## 7.1 威胁狩猎框架 (Threat Hunting Framework)
+## 7.1 威胁狩猎框架 (Threat Hunting Framework)
 
 ```mermaid
 flowchart LR
@@ -2667,7 +2667,7 @@ flowchart LR
     H4 --> Tools
 ```
 
-#<!-- chunk: 7.2 BPFTrace 威胁狩猎脚本 -->## 7.2 BPFTrace 威胁狩猎脚本
+## 7.2 BPFTrace 威胁狩猎脚本
 
 ```bash
 #!/usr/bin/env bpftrace
@@ -2732,7 +2732,7 @@ kprobe:__x64_sys_mmap
 }
 ```
 
-#<!-- chunk: 7.3 自动化威胁响应 (Automated Threat Response) -->## 7.3 自动化威胁响应 (Automated Threat Response)
+## 7.3 自动化威胁响应 (Automated Threat Response)
 
 ```yaml
 # File: threat-response-playbook.yaml
@@ -2838,7 +2838,7 @@ spec:
 
 <!-- chunk: 8. 与 SIEM/SOAR 集成 -->## 8. 与 SIEM/SOAR 集成
 
-#<!-- chunk: 8.1 集成架构 (SIEM/SOAR Integration Architecture) -->## 8.1 集成架构 (SIEM/SOAR Integration Architecture)
+## 8.1 集成架构 (SIEM/SOAR Integration Architecture)
 
 ```mermaid
 graph TB
@@ -2883,7 +2883,7 @@ graph TB
     style SOAR_Layer fill:#fff3e0,stroke:#e65100
 ```
 
-#<!-- chunk: 8.2 OpenTelemetry 集成配置 -->## 8.2 OpenTelemetry 集成配置
+## 8.2 OpenTelemetry 集成配置
 
 ```yaml
 # File: otel-collector-ebpf-config.yaml
@@ -3007,7 +3007,7 @@ data:
           processors: [batch]
           exporters:  [elasticsearch]
 
-#<!-- chunk: 8.3 Splunk SIEM 集成 -->## 8.3 Splunk SIEM 集成
+## 8.3 Splunk SIEM 集成
 
 ```yaml
 # File: splunk-hec-integration.yaml
@@ -3108,7 +3108,7 @@ data:
     end
 ```
 
-#<!-- chunk: 8.4 SOAR 自动响应 Playbook -->## 8.4 SOAR 自动响应 Playbook
+## 8.4 SOAR 自动响应 Playbook
 
 ```python
 # File: soar_playbook_container_escape.py
@@ -3287,7 +3287,7 @@ def quarantine_callback(action, success, container, results, handle):
 
 <!-- chunk: 9. 安全运营中心 (SOC) 集成 -->## 9. 安全运营中心 (SOC) 集成
 
-#<!-- chunk: 9.1 SOC 运营架构 (SOC Operations Architecture) -->## 9.1 SOC 运营架构 (SOC Operations Architecture)
+## 9.1 SOC 运营架构 (SOC Operations Architecture)
 
 ```mermaid
 graph TB
@@ -3331,7 +3331,7 @@ graph TB
     style DataSources fill:#e8f5e9,stroke:#2e7d32
 ```
 
-#<!-- chunk: 9.2 Grafana 安全仪表板配置 -->## 9.2 Grafana 安全仪表板配置
+## 9.2 Grafana 安全仪表板配置
 
 ```yaml
 # File: grafana-security-dashboard.yaml
@@ -3463,7 +3463,7 @@ data:
     }
 ```
 
-#<!-- chunk: 9.3 SOC 告警分级策略 (SOC Alert Triage Policy) -->## 9.3 SOC 告警分级策略 (SOC Alert Triage Policy)
+## 9.3 SOC 告警分级策略 (SOC Alert Triage Policy)
 
 ```yaml
 # File: alert-triage-rules.yaml
@@ -3567,7 +3567,7 @@ groups:
           team: security-engineering
 ```
 
-#<!-- chunk: 9.4 Tetragon Helm 生产部署配置 -->## 9.4 Tetragon Helm 生产部署配置
+## 9.4 Tetragon Helm 生产部署配置
 
 ```yaml
 # File: tetragon-soc-values.yaml
@@ -3660,7 +3660,7 @@ affinity:
 
 <!-- chunk: 10. 企业级安全架构最佳实践 -->## 10. 企业级安全架构最佳实践
 
-#<!-- chunk: 10.1 企业级 eBPF 安全架构全景 (Enterprise eBPF Security Architecture) -->## 10.1 企业级 eBPF 安全架构全景 (Enterprise eBPF Security Architecture)
+## 10.1 企业级 eBPF 安全架构全景 (Enterprise eBPF Security Architecture)
 
 ```mermaid
 graph TB
@@ -3729,7 +3729,7 @@ graph TB
     style SecurityStack fill:#f3e5f5,stroke:#7b1fa2
 ```
 
-#<!-- chunk: 10.2 安全成熟度模型 (Security Maturity Model) -->## 10.2 安全成熟度模型 (Security Maturity Model)
+## 10.2 安全成熟度模型 (Security Maturity Model)
 
 ```mermaid
 timeline
@@ -3751,7 +3751,7 @@ timeline
                       : 合规自动化报告
 ```
 
-#<!-- chunk: 10.3 关键性能指标与 SLA (KPIs and SLA) -->## 10.3 关键性能指标与 SLA (KPIs and SLA)
+## 10.3 关键性能指标与 SLA (KPIs and SLA)
 
 | 指标类别 | 具体指标 | 目标值 | eBPF 实现方式 |
 |---------|---------|--------|--------------|
@@ -3766,7 +3766,7 @@ timeline
 | **可见性** | 网络流覆盖率 | 100% | Hubble 全链路 |
 | **可见性** | 系统调用覆盖 | 100% | Tracepoint 全覆盖 |
 
-#<!-- chunk: 10.4 eBPF 安全部署最佳实践 Checklist -->## 10.4 eBPF 安全部署最佳实践 Checklist
+## 10.4 eBPF 安全部署最佳实践 Checklist
 
 ```yaml
 # File: ebpf-security-deployment-checklist.yaml
@@ -3893,9 +3893,9 @@ ebpf_security_checklist:
         sla: "1h"
 ```
 
-#<!-- chunk: 10.5 常见安全场景应对方案 (Common Security Scenarios) -->## 10.5 常见安全场景应对方案 (Common Security Scenarios)
+## 10.5 常见安全场景应对方案 (Common Security Scenarios)
 
-##<!-- chunk: 场景 1：CVE 漏洞利用缓解（虚拟补丁） -->## 场景 1：CVE 漏洞利用缓解（虚拟补丁）
+## 场景 1：CVE 漏洞利用缓解（虚拟补丁）
 
 ```c
 // File: virtual_patch_cve.c
@@ -3934,7 +3934,7 @@ int BPF_KPROBE(mitigate_dirtypipe,
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-##<!-- chunk: 场景 2：供应链安全 - 镜像运行时验证 -->## 场景 2：供应链安全 - 镜像运行时验证
+## 场景 2：供应链安全 - 镜像运行时验证
 
 ```yaml
 # File: policy-supply-chain-security.yaml
@@ -3988,7 +3988,7 @@ spec:
             - action: Sigkill
 ```
 
-#<!-- chunk: 10.6 故障排查与性能调优 (Troubleshooting and Performance Tuning) -->## 10.6 故障排查与性能调优 (Troubleshooting and Performance Tuning)
+## 10.6 故障排查与性能调优 (Troubleshooting and Performance Tuning)
 
 ```bash
 #!/bin/bash
@@ -4080,7 +4080,7 @@ echo " 健康检查完成"
 echo "======================================"
 ```
 
-#<!-- chunk: 10.7 学习路径与参考资源 (Learning Path and References) -->## 10.7 学习路径与参考资源 (Learning Path and References)
+## 10.7 学习路径与参考资源 (Learning Path and References)
 
 ```mermaid
 mindmap
@@ -4123,7 +4123,7 @@ mindmap
         取证分析
 ```
 
-##<!-- chunk: 推荐参考资源 -->## 推荐参考资源
+## 推荐参考资源
 
 | 资源类型 | 名称 | 说明 |
 |---------|------|------|
@@ -4199,7 +4199,7 @@ eBPF 技术正在深刻重塑企业安全运营的方式：
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-35-ebpf-technology MOC
-- [[domain-03-networking-traffic/README|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
+- [[domain-03-networking-traffic/README.md|Domain 03: eBPF 技术体系 (eBPF Technology Stack)]]
 - Domain-35 eBPF 技术 — 开源项目索引
 - eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...
 - eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)

@@ -184,6 +184,10 @@ pre_upgrade_checklist:
 ```
 
 #### 自动化健康检查脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # pre-upgrade-health-check.sh
@@ -447,6 +451,10 @@ upgrade:
 ### 3.2 分阶段升级流程
 
 #### 控制平面升级
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # control-plane-upgrade.sh
@@ -509,6 +517,12 @@ echo "🎉 控制平面升级完成"
 ```
 
 #### Worker 节点滚动升级
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # worker-nodes-upgrade.sh
@@ -683,6 +697,10 @@ multi_cloud_migration:
 ```
 
 #### 数据迁移脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # cross-cloud-migration.sh
@@ -938,6 +956,13 @@ rollback_triggers:
 ```
 
 #### 自动化回滚脚本
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 #!/bin/bash
 # automated-rollback.sh
@@ -962,7 +987,7 @@ for node in "${CONTROL_PLANE_NODES[@]}"; do
     echo "🔄 回滚控制平面节点: $node"
     ssh $node "
         # 恢复备份配置
-        sudo rm -rf /etc/kubernetes
+        sudo rm -rf /etc/kubernetes  # ⚠️ 删除系统/数据文件
         sudo cp -r /etc/kubernetes.backup.* /etc/kubernetes
         
         # 降级组件版本
@@ -999,7 +1024,7 @@ for node in $WORKER_NODES; do
     
     # 执行回滚
     ssh $node "
-        sudo rm -rf /etc/kubernetes
+        sudo rm -rf /etc/kubernetes  # ⚠️ 删除系统/数据文件
         sudo cp -r /etc/kubernetes.backup.* /etc/kubernetes
         
         sudo apt-mark unhold kubelet kubectl
@@ -1072,6 +1097,12 @@ disaster_recovery_plan:
 ```
 
 #### 灾难恢复执行脚本
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # disaster-recovery.sh
@@ -1388,10 +1419,10 @@ version_governance:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
 - index.md|Domain-1 架构基础 — 开源项目索引]]
 - Kubernetes 架构全景图
-- [[entities/kubernetes]]
+- [[entities/kubernetes.md|kubernetes]]
 - 03 - 功能和API表
 - structure.md|04 - Kubernetes 源码结构深度解析]]
 - kubectl 命令完整参考
@@ -1409,4 +1440,4 @@ version_governance:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

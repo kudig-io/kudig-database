@@ -414,6 +414,11 @@ graph TB
 
 ### 演示 1：创建第一个 PVC + Pod
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 步骤 1: 查看可用 StorageClass
 kubectl get sc
@@ -478,7 +483,7 @@ kubectl exec lab-pod -- cat /data/test-file
 # 预期输出: Hello K8s Storage
 
 # 步骤 6: 删除 Pod 后重建，验证数据持久化
-kubectl delete pod lab-pod --force --grace-period=0
+kubectl delete pod lab-pod --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 # 预期输出: pod "lab-pod" force deleted
 
 cat <<EOF | kubectl apply -f -
@@ -538,6 +543,10 @@ mount | grep $PV_NAME
 
 ### 演示 3：卷在线扩容
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 步骤 1: 确认 StorageClass 允许扩容
 kubectl get sc -o yaml | grep allowVolumeExpansion
@@ -569,6 +578,10 @@ kubectl exec lab-pod-2 -- df -h /data
 ```
 
 ### 演示 4：VolumeSnapshot 快照与恢复
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 步骤 1: 写入重要数据
@@ -695,6 +708,10 @@ velero schedule create daily-prod-backup \
 ### 实验 1：完整的数据生命周期管理
 
 **目标**：创建 PVC → 写入数据 → 快照 → 模拟灾难 → 从快照恢复
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 创建 StatefulSet 使用 PVC
@@ -881,6 +898,7 @@ Kubernetes 存储
     ├── PVC Pending 告警
     ├── CSI 插件健康检查
     └── 卷挂载失败告警
+
 ```
 
 ### 存储问题速查表
@@ -953,4 +971,6 @@ Kubernetes 存储
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+
+```

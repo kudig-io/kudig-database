@@ -55,7 +55,7 @@ created: "2026-05-23"
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-06-observability/00-open-source-projects-index|Domain-21 日志管理与分析 — 开源项目索引]] |  | observability, logging |  |
+| 1 | [[domain-06-observability/00-open-source-projects-index.md|Domain-21 日志管理与分析 — 开源项目索引]] |  | observability, logging |  |
 | 2 | ELK Stack企业级日志管理系统深度实践 |  | observability, logging |  |
 | 3 | Fluentd企业级日志收集与处理深度实践 |  | observability, logging |  |
 | 4 | Loki Enterprise Log Aggregation and Analytics Platform |  | observability, logging |  |
@@ -116,9 +116,9 @@ graph TD
 
 ## See Also
 
-- [[domain-06-observability/98-merged-indexes/FINAL-QUALITY-ASSESSMENT|FINAL-QUALITY-ASSESSMENT]]
-- [[domain-06-observability/98-merged-indexes/MOC-from-domain-20|MOC-from-domain-06-observability]]
-- [[domain-06-observability/98-merged-indexes/MOC-from-domain-8|MOC-from-domain-06-observability]]
-- [[domain-06-observability/98-merged-indexes/QUALITY-REPORT|QUALITY-REPORT]]
+- [[domain-06-observability/98-merged-indexes/FINAL-QUALITY-ASSESSMENT.md|FINAL-QUALITY-ASSESSMENT]]
+- [[domain-06-observability/98-merged-indexes/MOC-from-domain-20.md|MOC-from-domain-06-observability]]
+- [[domain-06-observability/98-merged-indexes/MOC-from-domain-8.md|MOC-from-domain-06-observability]]
+- [[domain-06-observability/98-merged-indexes/QUALITY-REPORT.md|QUALITY-REPORT]]
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]

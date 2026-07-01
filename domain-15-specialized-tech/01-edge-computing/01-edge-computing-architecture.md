@@ -107,7 +107,7 @@ k8s_versions:
 
 <!-- chunk: 1. 边缘计算定义与发展 -->## 1. 边缘计算定义与发展
 
-#<!-- chunk: 1.1 什么是边缘计算 (What is Edge Computing) -->## 1.1 什么是边缘计算 (What is Edge Computing)
+## 1.1 什么是边缘计算 (What is Edge Computing)
 
 边缘计算（Edge Computing）是一种分布式计算范式，将计算能力、存储资源和应用服务从集中式数据中心延伸到靠近数据源头的"边缘"位置。这里的"边缘"是指网络拓扑中距离数据产生源（如 IoT 设备、终端用户）更近的位置。
 
@@ -126,7 +126,7 @@ k8s_versions:
 - **数据隐私**：敏感数据可在本地处理，不离开边界
 - **实时响应**：毫秒级响应满足工业控制等需求
 
-#<!-- chunk: 1.2 发展历程 (Development History) -->## 1.2 发展历程 (Development History)
+## 1.2 发展历程 (Development History)
 
 ```
 2009  → Cloudlet 概念提出（Carnegie Mellon University）
@@ -161,7 +161,7 @@ k8s_versions:
 2023+ → 云边一体化、边缘 AI 推理爆发增长
 ```
 
-#<!-- chunk: 1.3 关键术语定义 (Key Terminology) -->## 1.3 关键术语定义 (Key Terminology)
+## 1.3 关键术语定义 (Key Terminology)
 
 | 术语 | 英文 | 说明 |
 |------|------|------|
@@ -179,7 +179,7 @@ k8s_versions:
 
 <!-- chunk: 2. 部署拓扑结构 -->## 2. 部署拓扑结构
 
-#<!-- chunk: 2.1 三层架构模型 (Three-Tier Architecture) -->## 2.1 三层架构模型 (Three-Tier Architecture)
+## 2.1 三层架构模型 (Three-Tier Architecture)
 
 ```mermaid
 graph TD
@@ -212,9 +212,9 @@ graph TD
     style Device fill:#fff3e0,stroke:#e65100
 ```
 
-#<!-- chunk: 2.2 典型部署拓扑 (Typical Deployment Topologies) -->## 2.2 典型部署拓扑 (Typical Deployment Topologies)
+## 2.2 典型部署拓扑 (Typical Deployment Topologies)
 
-##<!-- chunk: 2.2.1 工业边缘拓扑 (Industrial Edge Topology) -->## 2.2.1 工业边缘拓扑 (Industrial Edge Topology)
+## 2.2.1 工业边缘拓扑 (Industrial Edge Topology)
 
 ```mermaid
 graph LR
@@ -247,7 +247,7 @@ graph LR
     WAN --> CloudDC
 ```
 
-##<!-- chunk: 2.2.2 零售边缘拓扑 (Retail Edge Topology) -->## 2.2.2 零售边缘拓扑 (Retail Edge Topology)
+## 2.2.2 零售边缘拓扑 (Retail Edge Topology)
 
 ```mermaid
 graph TD
@@ -273,7 +273,7 @@ graph TD
     RegServer -->|专线| HQ
 ```
 
-##<!-- chunk: 2.2.3 运营商 MEC 拓扑 (Telecom MEC Topology) -->## 2.2.3 运营商 MEC 拓扑 (Telecom MEC Topology)
+## 2.2.3 运营商 MEC 拓扑 (Telecom MEC Topology)
 
 ```mermaid
 graph TD
@@ -289,7 +289,7 @@ graph TD
     style MEP fill:#f3e5f5,stroke:#6a1b9a
 ```
 
-#<!-- chunk: 2.3 多层边缘架构 (Multi-Tier Edge Architecture) -->## 2.3 多层边缘架构 (Multi-Tier Edge Architecture)
+## 2.3 多层边缘架构 (Multi-Tier Edge Architecture)
 
 ```mermaid
 graph TB
@@ -331,7 +331,7 @@ graph TB
 
 <!-- chunk: 3. 延迟需求与性能指标 -->## 3. 延迟需求与性能指标
 
-#<!-- chunk: 3.1 延迟分析 (Latency Analysis) -->## 3.1 延迟分析 (Latency Analysis)
+## 3.1 延迟分析 (Latency Analysis)
 
 ```mermaid
 graph LR
@@ -350,7 +350,7 @@ graph LR
     style L4 fill:#ffccbc
 ```
 
-#<!-- chunk: 3.2 各场景延迟要求 (Latency Requirements by Use Case) -->## 3.2 各场景延迟要求 (Latency Requirements by Use Case)
+## 3.2 各场景延迟要求 (Latency Requirements by Use Case)
 
 | 应用场景 | 最大可接受延迟 | 推荐部署层级 | 说明 |
 |---------|--------------|------------|------|
@@ -363,7 +363,7 @@ graph LR
 | 模型训练更新 | 分钟~小时 | 云中心 | 离线训练 |
 | 数据存档归档 | 非实时 | 云中心 | 历史数据存储 |
 
-#<!-- chunk: 3.3 性能指标体系 (Performance Metrics) -->## 3.3 性能指标体系 (Performance Metrics)
+## 3.3 性能指标体系 (Performance Metrics)
 
 ```yaml
 # 边缘节点关键性能指标
@@ -393,7 +393,7 @@ edge_node_metrics:
     packet_loss: "< 0.01%"           # 丢包率
 ```
 
-#<!-- chunk: 3.4 带宽优化策略 (Bandwidth Optimization) -->## 3.4 带宽优化策略 (Bandwidth Optimization)
+## 3.4 带宽优化策略 (Bandwidth Optimization)
 
 ```mermaid
 flowchart TD
@@ -414,9 +414,9 @@ flowchart TD
 
 <!-- chunk: 4. 典型使用场景 -->## 4. 典型使用场景
 
-#<!-- chunk: 4.1 工业物联网 (Industrial IoT) -->## 4.1 工业物联网 (Industrial IoT)
+## 4.1 工业物联网 (Industrial IoT)
 
-##<!-- chunk: 预测性维护架构 -->## 预测性维护架构
+## 预测性维护架构
 
 ```mermaid
 graph TB
@@ -457,7 +457,7 @@ graph TB
                                     云端：深度分析 + 模型更新
 ```
 
-#<!-- chunk: 4.2 智慧零售 (Smart Retail) -->## 4.2 智慧零售 (Smart Retail)
+## 4.2 智慧零售 (Smart Retail)
 
 ```yaml
 # 零售边缘应用场景
@@ -487,7 +487,7 @@ smart_retail_edge:
     output: "个性化广告内容 (< 200ms 切换)"
 ```
 
-#<!-- chunk: 4.3 自动驾驶与 V2X -->## 4.3 自动驾驶与 V2X
+## 4.3 自动驾驶与 V2X
 
 ```mermaid
 sequenceDiagram
@@ -508,7 +508,7 @@ sequenceDiagram
     EdgeMEC->>RSU: 信号灯控制策略
 ```
 
-#<!-- chunk: 4.4 智慧城市 (Smart City) -->## 4.4 智慧城市 (Smart City)
+## 4.4 智慧城市 (Smart City)
 
 ```mermaid
 graph TD
@@ -537,7 +537,7 @@ graph TD
     CityCloud -->|调度指令| EdgePOP
 ```
 
-#<!-- chunk: 4.5 医疗健康 (Healthcare) -->## 4.5 医疗健康 (Healthcare)
+## 4.5 医疗健康 (Healthcare)
 
 ```yaml
 # 医疗边缘计算场景
@@ -572,7 +572,7 @@ healthcare_edge:
 
 <!-- chunk: 5. 边缘计算 vs 云计算 -->## 5. 边缘计算 vs 云计算
 
-#<!-- chunk: 5.1 全面对比 (Comprehensive Comparison) -->## 5.1 全面对比 (Comprehensive Comparison)
+## 5.1 全面对比 (Comprehensive Comparison)
 
 ```mermaid
 graph LR
@@ -608,7 +608,7 @@ graph LR
 | **问题影响** | 单点高影响 | 局部影响 | 高可用→边缘 |
 | **软件多样性** | 丰富服务 | 受限 | 复杂应用→云 |
 
-#<!-- chunk: 5.2 云边协同最佳实践 (Cloud-Edge Best Practices) -->## 5.2 云边协同最佳实践 (Cloud-Edge Best Practices)
+## 5.2 云边协同最佳实践 (Cloud-Edge Best Practices)
 
 ```mermaid
 flowchart TD
@@ -627,7 +627,7 @@ flowchart TD
     Both -->|边缘决策 + 云端审计| ControlPattern[控制分层模式]
 ```
 
-#<!-- chunk: 5.3 决策框架 (Decision Framework) -->## 5.3 决策框架 (Decision Framework)
+## 5.3 决策框架 (Decision Framework)
 
 ```
 场景评估矩阵:
@@ -653,7 +653,7 @@ flowchart TD
 
 <!-- chunk: 6. 边缘节点分类 -->## 6. 边缘节点分类
 
-#<!-- chunk: 6.1 按硬件形态分类 (Hardware Classification) -->## 6.1 按硬件形态分类 (Hardware Classification)
+## 6.1 按硬件形态分类 (Hardware Classification)
 
 ```mermaid
 mindmap
@@ -681,7 +681,7 @@ mindmap
       CDN PoP
 ```
 
-#<!-- chunk: 6.2 按计算能力分类 (Compute Capability Classification) -->## 6.2 按计算能力分类 (Compute Capability Classification)
+## 6.2 按计算能力分类 (Compute Capability Classification)
 
 | 类别 | CPU | GPU/NPU | 内存 | 存储 | 典型产品 | 适用场景 |
 |------|-----|---------|------|------|---------|---------|
@@ -692,7 +692,7 @@ mindmap
 | **高性能** | Xeon/EPYC | T4/A2 GPU | 64-512GB | 数TB NVMe | 工业服务器 | 复杂边缘应用 |
 | **云边** | 云服务器 | 云 GPU | 弹性 | 弹性 | AWS Outposts | 云原生边缘 |
 
-#<!-- chunk: 6.3 边缘节点典型配置 -->## 6.3 边缘节点典型配置
+## 6.3 边缘节点典型配置
 
 ```yaml
 # 标准工业边缘节点配置
@@ -748,7 +748,7 @@ spec:
 
 <!-- chunk: 7. 网络模型与通信架构 -->## 7. 网络模型与通信架构
 
-#<!-- chunk: 7.1 边缘网络拓扑 (Edge Network Topology) -->## 7.1 边缘网络拓扑 (Edge Network Topology)
+## 7.1 边缘网络拓扑 (Edge Network Topology)
 
 ```mermaid
 graph TD
@@ -785,9 +785,9 @@ graph TD
     style OTNetwork fill:#fff9c4
 ```
 
-#<!-- chunk: 7.2 边缘通信协议 (Edge Communication Protocols) -->## 7.2 边缘通信协议 (Edge Communication Protocols)
+## 7.2 边缘通信协议 (Edge Communication Protocols)
 
-##<!-- chunk: 北向接口 (Northbound - Edge to Cloud) -->## 北向接口 (Northbound - Edge to Cloud)
+## 北向接口 (Northbound - Edge to Cloud)
 
 ```yaml
 # 边缘到云端通信协议
@@ -813,7 +813,7 @@ northbound_protocols:
     compression: "gzip/zstd"
 ```
 
-##<!-- chunk: 南向接口 (Southbound - Edge to Device) -->## 南向接口 (Southbound - Edge to Device)
+## 南向接口 (Southbound - Edge to Device)
 
 ```yaml
 # 边缘到设备通信协议
@@ -847,7 +847,7 @@ southbound_protocols:
       realtime: "< 1ms 实时通信"
 ```
 
-#<!-- chunk: 7.3 边缘网络隔离 (Network Isolation) -->## 7.3 边缘网络隔离 (Network Isolation)
+## 7.3 边缘网络隔离 (Network Isolation)
 
 ```mermaid
 graph LR
@@ -880,7 +880,7 @@ graph LR
 
 <!-- chunk: 8. 数据处理模型 -->## 8. 数据处理模型
 
-#<!-- chunk: 8.1 边缘数据处理流水线 (Edge Data Processing Pipeline) -->## 8.1 边缘数据处理流水线 (Edge Data Processing Pipeline)
+## 8.1 边缘数据处理流水线 (Edge Data Processing Pipeline)
 
 ```mermaid
 flowchart LR
@@ -905,7 +905,7 @@ flowchart LR
     end
 ```
 
-#<!-- chunk: 8.2 Lambda 架构在边缘的应用 (Lambda Architecture at Edge) -->## 8.2 Lambda 架构在边缘的应用 (Lambda Architecture at Edge)
+## 8.2 Lambda 架构在边缘的应用 (Lambda Architecture at Edge)
 
 ```mermaid
 graph TD
@@ -923,7 +923,7 @@ graph TD
     style QueryLayer fill:#c8e6c9
 ```
 
-#<!-- chunk: 8.3 数据分层存储策略 (Tiered Storage Strategy) -->## 8.3 数据分层存储策略 (Tiered Storage Strategy)
+## 8.3 数据分层存储策略 (Tiered Storage Strategy)
 
 ```yaml
 # 边缘数据分层存储配置
@@ -978,7 +978,7 @@ storage_tiering:
 
 <!-- chunk: 9. 安全架构 -->## 9. 安全架构
 
-#<!-- chunk: 9.1 边缘安全威胁模型 (Edge Security Threat Model) -->## 9.1 边缘安全威胁模型 (Edge Security Threat Model)
+## 9.1 边缘安全威胁模型 (Edge Security Threat Model)
 
 ```mermaid
 graph TD
@@ -1008,7 +1008,7 @@ graph TD
     T6 --> C6
 ```
 
-#<!-- chunk: 9.2 零信任边缘安全架构 (Zero Trust Edge Security) -->## 9.2 零信任边缘安全架构 (Zero Trust Edge Security)
+## 9.2 零信任边缘安全架构 (Zero Trust Edge Security)
 
 ```yaml
 # 零信任边缘安全配置
@@ -1057,7 +1057,10 @@ zero_trust_edge:
         handling: "无限制"
 ```
 
-#<!-- chunk: 9.3 边缘节点安全加固 (Edge Node Hardening) -->## 9.3 边缘节点安全加固 (Edge Node Hardening)
+## 9.3 边缘节点安全加固 (Edge Node Hardening)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -1128,7 +1131,7 @@ service auditd restart
 
 <!-- chunk: 10. 标准化与生态 -->## 10. 标准化与生态
 
-#<!-- chunk: 10.1 行业标准 (Industry Standards) -->## 10.1 行业标准 (Industry Standards)
+## 10.1 行业标准 (Industry Standards)
 
 ```mermaid
 mindmap
@@ -1157,7 +1160,7 @@ mindmap
       Y.3530 云计算+IoT
 ```
 
-#<!-- chunk: 10.2 主要开源项目对比 (Open Source Projects Comparison) -->## 10.2 主要开源项目对比 (Open Source Projects Comparison)
+## 10.2 主要开源项目对比 (Open Source Projects Comparison)
 
 | 项目 | 发起方 | 定位 | 架构特点 | 优势 | 劣势 |
 |------|--------|------|---------|------|------|
@@ -1168,7 +1171,7 @@ mindmap
 | **MicroK8s** | Canonical | 轻量 K8s | Snap 包 | Ubuntu 原生 | 仅 Ubuntu |
 | **EdgeX Foundry** | Linux Foundation | IoT 中间件 | 微服务架构 | 协议适配丰富 | 非 K8s 原生 |
 
-#<!-- chunk: 10.3 CNCF 边缘计算项目 (CNCF Edge Projects) -->## 10.3 CNCF 边缘计算项目 (CNCF Edge Projects)
+## 10.3 CNCF 边缘计算项目 (CNCF Edge Projects)
 
 ```yaml
 # CNCF 边缘相关项目清单
@@ -1209,7 +1212,7 @@ cncf_edge_projects:
 
 <!-- chunk: 11. Kubernetes 在边缘的演进 -->## 11. Kubernetes 在边缘的演进
 
-#<!-- chunk: 11.1 标准 K8s 的边缘局限性 (K8s Limitations at Edge) -->## 11.1 标准 K8s 的边缘局限性 (K8s Limitations at Edge)
+## 11.1 标准 K8s 的边缘局限性 (K8s Limitations at Edge)
 
 ```mermaid
 graph TD
@@ -1220,7 +1223,7 @@ graph TD
     Problem5[批量节点管理<br/>数千边缘节点] -->|导致| Effect5[无法分组管理\n节点策略]
 ```
 
-#<!-- chunk: 11.2 边缘 K8s 解决方案演进 (Edge K8s Solutions Evolution) -->## 11.2 边缘 K8s 解决方案演进 (Edge K8s Solutions Evolution)
+## 11.2 边缘 K8s 解决方案演进 (Edge K8s Solutions Evolution)
 
 ```
 2018 ──── KubeEdge v0.1 发布
@@ -1247,7 +1250,7 @@ graph TD
            统一管控面，异构硬件支持
 ```
 
-#<!-- chunk: 11.3 轻量化 K8s 对比 (Lightweight K8s Comparison) -->## 11.3 轻量化 K8s 对比 (Lightweight K8s Comparison)
+## 11.3 轻量化 K8s 对比 (Lightweight K8s Comparison)
 
 ```mermaid
 graph LR
@@ -1280,7 +1283,7 @@ graph LR
 
 <!-- chunk: 12. 实践架构设计 -->## 12. 实践架构设计
 
-#<!-- chunk: 12.1 生产级边缘架构参考 (Production Edge Architecture Reference) -->## 12.1 生产级边缘架构参考 (Production Edge Architecture Reference)
+## 12.1 生产级边缘架构参考 (Production Edge Architecture Reference)
 
 ```mermaid
 graph TB
@@ -1328,7 +1331,7 @@ graph TB
     AI -->|模型推送| MLInfer
 ```
 
-#<!-- chunk: 12.2 高可用边缘设计 (HA Edge Design) -->## 12.2 高可用边缘设计 (HA Edge Design)
+## 12.2 高可用边缘设计 (HA Edge Design)
 
 ```yaml
 # 边缘高可用配置
@@ -1420,7 +1423,7 @@ spec:
           name: edge-app-config
 ```
 
-#<!-- chunk: 12.3 边缘运维自动化 (Edge Operations Automation) -->## 12.3 边缘运维自动化 (Edge Operations Automation)
+## 12.3 边缘运维自动化 (Edge Operations Automation)
 
 ```yaml
 # GitOps 边缘部署工作流
@@ -1465,7 +1468,7 @@ jobs:
           kubectl --context ${{ matrix.site }} get pods -l app=edge-app
 ```
 
-#<!-- chunk: 12.4 容量规划指南 (Capacity Planning Guide) -->## 12.4 容量规划指南 (Capacity Planning Guide)
+## 12.4 容量规划指南 (Capacity Planning Guide)
 
 ```python
 # 边缘节点容量规划计算
@@ -1574,7 +1577,7 @@ print(f"推荐配置: {result['recommended_cpu_cores']} 核, "
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-37-edge-computing MOC
-- [[domain-15-specialized-tech/README|Domain 37: 边缘计算 (Edge Computing)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: 边缘计算 (Edge Computing)]]
 - Domain-37 边缘计算 — 开源项目索引
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
 - KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)

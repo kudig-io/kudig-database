@@ -75,7 +75,7 @@ created: "2026-05-23"
 
 <!-- chunk: 事件总览 -->## 事件总览
 
-#<!-- chunk: 事件统计表 -->## 事件统计表
+## 事件统计表
 
 | 组件 | 事件类型 | 事件数量 | 主要用途 |
 |------|---------|---------|---------|
@@ -87,7 +87,7 @@ created: "2026-05-23"
 | | Warning | 3 | 扩缩容失败 |
 | **总计** | - | **28** | 自动扩缩容全生命周期 |
 
-#<!-- chunk: 事件频率分级 -->## 事件频率分级
+## 事件频率分级
 
 | 频率级别 | 事件数量 | 代表事件 |
 |---------|---------|---------|
@@ -100,7 +100,7 @@ created: "2026-05-23"
 
 <!-- chunk: HPA 事件详解 -->## HPA 事件详解
 
-#<!-- chunk: 1. SuccessfulRescale -->## 1. SuccessfulRescale
+## 1. SuccessfulRescale
 
 **基本信息**
 ```yaml
@@ -174,7 +174,7 @@ spec:
 
 ---
 
-#<!-- chunk: 2. FailedRescale -->## 2. FailedRescale
+## 2. FailedRescale
 
 **基本信息**
 ```yaml
@@ -256,6 +256,10 @@ kubectl describe resourcequota -n production
 ```
 
 **解决方案**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方案 1: 调整 ResourceQuota
 kubectl edit resourcequota compute-quota
@@ -271,7 +275,7 @@ kubectl edit pdb web-app-pdb
 
 ---
 
-#<!-- chunk: 3. DesiredReplicasComputed -->## 3. DesiredReplicasComputed
+## 3. DesiredReplicasComputed
 
 **基本信息**
 ```yaml
@@ -344,7 +348,7 @@ status:
 
 ---
 
-#<!-- chunk: 4. FailedGetResourceMetric -->## 4. FailedGetResourceMetric
+## 4. FailedGetResourceMetric
 
 **基本信息**
 ```yaml
@@ -372,6 +376,10 @@ From: horizontal-pod-autoscaler
 **常见原因**
 
 **原因 1: Metrics Server 未安装或不可用**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 检查 Metrics Server
 kubectl get deployment metrics-server -n kube-system
@@ -445,6 +453,11 @@ kubectl get hpa web-app -o yaml | grep -A 20 conditions
 ```
 
 **解决方案**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 方案 1: 修复 Metrics Server
 kubectl edit deployment metrics-server -n kube-system
@@ -459,7 +472,7 @@ kubectl rollout restart deployment metrics-server -n kube-system
 
 ---
 
-#<!-- chunk: 5. FailedComputeMetricsReplicas -->## 5. FailedComputeMetricsReplicas
+## 5. FailedComputeMetricsReplicas
 
 **基本信息**
 ```yaml
@@ -517,7 +530,7 @@ kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1/namespaces/production/pods
 
 ---
 
-#<!-- chunk: 6-9. 指标获取失败事件 -->## 6-9. 指标获取失败事件
+## 6-9. 指标获取失败事件
 
 **FailedGetExternalMetric (v1.10+)**
 ```
@@ -547,7 +560,7 @@ Message: failed to get pods metric: unable to get metric http_requests for selec
 
 ---
 
-#<!-- chunk: 10-13. 配置错误事件 -->## 10-13. 配置错误事件
+## 10-13. 配置错误事件
 
 **InvalidMetricSourceType (v1.6+)**
 ```
@@ -579,7 +592,7 @@ Message: failed to get scale subresource: deployments.apps "web-app" not found
 
 ---
 
-#<!-- chunk: 14. AbleToScale -->## 14. AbleToScale
+## 14. AbleToScale
 
 **基本信息**
 ```yaml
@@ -613,7 +626,7 @@ Events:
 
 ---
 
-#<!-- chunk: 15. ReadyForNewScale -->## 15. ReadyForNewScale
+## 15. ReadyForNewScale
 
 **基本信息**
 ```yaml
@@ -650,7 +663,7 @@ spec:
 
 ---
 
-#<!-- chunk: 16. ScaleDownStabilized -->## 16. ScaleDownStabilized
+## 16. ScaleDownStabilized
 
 **基本信息**
 ```yaml
@@ -702,7 +715,7 @@ spec:
 
 <!-- chunk: VPA 事件详解 -->## VPA 事件详解
 
-#<!-- chunk: 17. EvictedByVPA -->## 17. EvictedByVPA
+## 17. EvictedByVPA
 
 **基本信息**
 ```yaml
@@ -772,7 +785,7 @@ Recommendation:
 
 ---
 
-#<!-- chunk: 18. RecommendationProvided -->## 18. RecommendationProvided
+## 18. RecommendationProvided
 
 **基本信息**
 ```yaml
@@ -799,7 +812,7 @@ From: vpa-recommender
 
 ---
 
-#<!-- chunk: 19. UpdateFailed -->## 19. UpdateFailed
+## 19. UpdateFailed
 
 **基本信息**
 ```yaml
@@ -826,7 +839,7 @@ From: vpa-updater
 
 ---
 
-#<!-- chunk: 20. CheckpointUpdated -->## 20. CheckpointUpdated
+## 20. CheckpointUpdated
 
 **基本信息**
 ```yaml
@@ -854,7 +867,7 @@ From: vpa-recommender
 
 <!-- chunk: Cluster Autoscaler 事件详解 -->## Cluster Autoscaler 事件详解
 
-#<!-- chunk: 21. ScaledUpGroup -->## 21. ScaledUpGroup
+## 21. ScaledUpGroup
 
 **基本信息**
 ```yaml
@@ -927,7 +940,7 @@ spec:
 
 ---
 
-#<!-- chunk: 22. ScaleDown -->## 22. ScaleDown
+## 22. ScaleDown
 
 **基本信息**
 ```yaml
@@ -970,7 +983,7 @@ From: cluster-autoscaler
 
 ---
 
-#<!-- chunk: 23. ScaleDownEmpty -->## 23. ScaleDownEmpty
+## 23. ScaleDownEmpty
 
 **基本信息**
 ```yaml
@@ -1005,7 +1018,7 @@ From: cluster-autoscaler
 
 ---
 
-#<!-- chunk: 24. ScaleDownFailed -->## 24. ScaleDownFailed
+## 24. ScaleDownFailed
 
 **基本信息**
 ```yaml
@@ -1048,7 +1061,7 @@ metadata:
 
 ---
 
-#<!-- chunk: 25. NotTriggerScaleUp -->## 25. NotTriggerScaleUp
+## 25. NotTriggerScaleUp
 
 **基本信息**
 ```yaml
@@ -1094,7 +1107,7 @@ nodeSelector:
 
 ---
 
-#<!-- chunk: 26. TriggeredScaleUp -->## 26. TriggeredScaleUp
+## 26. TriggeredScaleUp
 
 **基本信息**
 ```yaml
@@ -1139,7 +1152,7 @@ Normal  ScaledUpGroup  Scale-up: group node-group-1 size increased from 3 to 5
 
 ---
 
-#<!-- chunk: 27. ScaleDownDisabledAnnotation -->## 27. ScaleDownDisabledAnnotation
+## 27. ScaleDownDisabledAnnotation
 
 **基本信息**
 ```yaml
@@ -1182,7 +1195,7 @@ metadata:
 
 ---
 
-#<!-- chunk: 28. FailedToScaleUpGroup -->## 28. FailedToScaleUpGroup
+## 28. FailedToScaleUpGroup
 
 **基本信息**
 ```yaml
@@ -1224,7 +1237,7 @@ aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names node-gro
 
 <!-- chunk: HPA 决策算法 -->## HPA 决策算法
 
-#<!-- chunk: 基本计算公式 -->## 基本计算公式
+## 基本计算公式
 
 ```
 desiredReplicas = ceil[currentReplicas * (currentMetricValue / targetMetricValue)]
@@ -1236,7 +1249,7 @@ desiredReplicas = ceil[currentReplicas * (currentMetricValue / targetMetricValue
 - ceil: 向上取整
 ```
 
-#<!-- chunk: 详细计算流程 -->## 详细计算流程
+## 详细计算流程
 
 **步骤 1: 获取 Pod 指标**
 ```go
@@ -1275,7 +1288,7 @@ if abs((currentMetricValue - targetMetricValue) / targetMetricValue) < tolerance
 }
 ```
 
-#<!-- chunk: 实际示例 -->## 实际示例
+## 实际示例
 
 **示例 1: CPU 使用率扩容**
 ```
@@ -1317,7 +1330,7 @@ desiredReplicas = ceil[3 * (500 / 300)]
 结果: 扩容到 5 个副本
 ```
 
-#<!-- chunk: 多指标决策 -->## 多指标决策
+## 多指标决策
 
 **并行计算所有指标，取最大值**
 ```yaml
@@ -1347,7 +1360,7 @@ finalDesiredReplicas := max(cpuDesiredReplicas, memoryDesiredReplicas)
 // 结果: 7
 ```
 
-#<!-- chunk: 特殊场景处理 -->## 特殊场景处理
+## 特殊场景处理
 
 **场景 1: Pod 启动中（未就绪）**
 ```go
@@ -1381,7 +1394,7 @@ targetValue = 70%
 
 <!-- chunk: VPA 工作模式 -->## VPA 工作模式
 
-#<!-- chunk: 四种模式对比 -->## 四种模式对比
+## 四种模式对比
 
 | 模式 | 行为 | 适用场景 | 风险 |
 |------|------|---------|------|
@@ -1390,7 +1403,7 @@ targetValue = 70%
 | **Auto** | 自动驱逐并重建 Pod | 无状态应用 | 中 |
 | **Recreate** | 手动重启时应用建议 | 有状态应用、需要控制重启时间 | 低 |
 
-#<!-- chunk: 模式详解 -->## 模式详解
+## 模式详解
 
 **1. Off 模式 - 仅观察**
 ```yaml
@@ -1576,6 +1589,10 @@ updatePolicy:
 - 需要手动触发 Pod 重建（如滚动更新）
 
 **工作流程**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. VPA 更新 Deployment spec
 kubectl get deployment web-app -o yaml | grep -A 5 resources
@@ -1619,7 +1636,7 @@ web-app-new  Running   0          1m   # 使用新配置
 
 ---
 
-#<!-- chunk: VPA 与 HPA 共存 -->## VPA 与 HPA 共存
+## VPA 与 HPA 共存
 
 **推荐配置**
 ```yaml
@@ -1670,7 +1687,7 @@ spec:
 
 <!-- chunk: CA 扩缩容决策逻辑 -->## CA 扩缩容决策逻辑
 
-#<!-- chunk: 扩容决策流程 -->## 扩容决策流程
+## 扩容决策流程
 
 ```
 ┌─────────────────────────────────────────┐
@@ -1717,7 +1734,7 @@ spec:
 └─────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 缩容决策流程 -->## 缩容决策流程
+## 缩容决策流程
 
 ```
 ┌─────────────────────────────────────────┐
@@ -1766,7 +1783,7 @@ spec:
 └─────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 关键参数详解 -->## 关键参数详解
+## 关键参数详解
 
 **扩容参数**
 ```bash
@@ -1803,7 +1820,7 @@ spec:
 --scale-down-delay-after-failure=3m     # 缩容失败后 3 分钟内不重试
 ```
 
-#<!-- chunk: Expander 策略 -->## Expander 策略
+## Expander 策略
 
 **选择节点组的策略（当多个节点组都满足条件时）**
 
@@ -1857,14 +1874,14 @@ data:
 
 <!-- chunk: Behavior 行为配置 -->## Behavior 行为配置
 
-#<!-- chunk: v1.18+ Behavior 字段 -->## v1.18+ Behavior 字段
+## v1.18+ Behavior 字段
 
 **引入版本**: Kubernetes v1.18+  
 **稳定版本**: v1.23+
 
 **作用**: 精细控制 HPA 的扩缩容行为，避免频繁波动。
 
-#<!-- chunk: 完整配置示例 -->## 完整配置示例
+## 完整配置示例
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -1908,7 +1925,7 @@ spec:
       selectPolicy: Min  # 取两个策略的最小值（保守缩容）
 ```
 
-#<!-- chunk: 字段详解 -->## 字段详解
+## 字段详解
 
 **1. stabilizationWindowSeconds**
 
@@ -2036,7 +2053,7 @@ selectPolicy=Min: 取 min(5, 2) = 2
 
 ---
 
-#<!-- chunk: 常见配置场景 -->## 常见配置场景
+## 常见配置场景
 
 **场景 1: 快速扩容，慢速缩容**
 ```yaml
@@ -2085,7 +2102,7 @@ behavior:
 
 <!-- chunk: 故障排查场景 -->## 故障排查场景
 
-#<!-- chunk: 场景 1: HPA 无法获取指标 -->## 场景 1: HPA 无法获取指标
+## 场景 1: HPA 无法获取指标
 
 **症状**
 ```bash
@@ -2119,6 +2136,10 @@ kubectl top pods -n production
 ```
 
 **解决方案**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 安装/修复 Metrics Server
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
@@ -2129,7 +2150,7 @@ kubectl set resources deployment web-app --requests=cpu=100m,memory=128Mi
 
 ---
 
-#<!-- chunk: 场景 2: HPA 频繁扩缩容 -->## 场景 2: HPA 频繁扩缩容
+## 场景 2: HPA 频繁扩缩容
 
 **症状**
 ```bash
@@ -2169,7 +2190,7 @@ spec:
 
 ---
 
-#<!-- chunk: 场景 3: Cluster Autoscaler 不扩容 -->## 场景 3: Cluster Autoscaler 不扩容
+## 场景 3: Cluster Autoscaler 不扩容
 
 **症状**
 ```bash
@@ -2199,6 +2220,10 @@ aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names node-gro
 ```
 
 **解决方案**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 增加节点组最大值
 kubectl edit deployment cluster-autoscaler -n kube-system
@@ -2207,7 +2232,7 @@ kubectl edit deployment cluster-autoscaler -n kube-system
 
 ---
 
-#<!-- chunk: 场景 4: VPA 驱逐 Pod 失败 -->## 场景 4: VPA 驱逐 Pod 失败
+## 场景 4: VPA 驱逐 Pod 失败
 
 **症状**
 ```
@@ -2247,7 +2272,7 @@ spec:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: HPA 最佳实践 -->## HPA 最佳实践
+## HPA 最佳实践
 
 **1. 合理设置目标值**
 ```yaml
@@ -2309,7 +2334,7 @@ metrics:
 
 ---
 
-#<!-- chunk: VPA 最佳实践 -->## VPA 最佳实践
+## VPA 最佳实践
 
 **1. 分阶段部署**
 ```
@@ -2343,7 +2368,7 @@ spec:
 
 ---
 
-#<!-- chunk: Cluster Autoscaler 最佳实践 -->## Cluster Autoscaler 最佳实践
+## Cluster Autoscaler 最佳实践
 
 **1. 合理配置节点组**
 ```bash
@@ -2381,7 +2406,7 @@ metadata:
 
 <!-- chunk: 交叉引用 -->## 交叉引用
 
-#<!-- chunk: 相关文档 -->## 相关文档
+## 相关文档
 
 | 文档 | 描述 |
 |------|------|
@@ -2392,7 +2417,7 @@ metadata:
 | **domain-03-networking-traffic/30-service-mesh-deep-dive.md** | Service Mesh 环境下的自动扩缩容 |
 | **domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md** | Deployment 故障排查 |
 
-#<!-- chunk: 相关命令 -->## 相关命令
+## 相关命令
 
 ```bash
 # HPA
@@ -2422,7 +2447,7 @@ kubectl get events --sort-by='.lastTimestamp' | grep -E 'HorizontalPodAutoscaler
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-33-kubernetes-events MOC
-- [[domain-17-system-foundation/README|Domain-33: Kubernetes Events 全域事件大全]]
+- [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
 - Domain-33 K8s 事件 — 开源项目索引
 - 01 - Kubernetes 事件系统架构与 API 参考
 - 02 - Pod 与容器生命周期事件
@@ -2443,5 +2468,5 @@ kubectl get events --sort-by='.lastTimestamp' | grep -E 'HorizontalPodAutoscaler
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]

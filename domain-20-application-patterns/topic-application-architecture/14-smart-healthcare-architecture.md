@@ -169,7 +169,7 @@ flowchart TB
     style DataMed fill:#fff8e1
 ```
 
-#<!-- chunk: 阿里云产品映射 -->## 阿里云产品映射
+## 阿里云产品映射
 
 | 架构层 | 阿里云方案 | 医疗合规 |
 |:---|:---|:---|
@@ -289,7 +289,7 @@ flowchart TB
     style View fill:#fff8e1
 ```
 
-#<!-- chunk: PACS 影像存储 K8s 配置 -->## PACS 影像存储 K8s 配置
+## PACS 影像存储 K8s 配置
 
 ```yaml
 apiVersion: apps/v1
@@ -451,7 +451,7 @@ flowchart TB
 
 <!-- chunk: 八、ACK 阿里云部署架构 -->## 八、ACK 阿里云部署架构
 
-#<!-- chunk: 医疗等保三级部署 -->## 医疗等保三级部署
+## 医疗等保三级部署
 
 ```yaml
 apiVersion: apps/v1
@@ -528,7 +528,7 @@ spec:
 
 <!-- chunk: 多云部署方案对照 -->## 多云部署方案对照
 
-#<!-- chunk: 阿里云服务 → 多云映射表 -->## 阿里云服务 → 多云映射表
+## 阿里云服务 → 多云映射表
 
 | 能力域 | 阿里云服务 | AWS 对应 | GCP 对应 | Azure 对应 |
 |:---|:---|:---|:---|:---|
@@ -549,7 +549,7 @@ spec:
 | 视频转码 | **媒体处理** | **Elemental MediaConvert** | **Transcoder API** | **Media Services** |
 | 日志 | **SLS** | **CloudWatch Logs** | **Cloud Logging** | **Log Analytics** |
 
-#<!-- chunk: 多云部署注意事项 -->## 多云部署注意事项
+## 多云部署注意事项
 
 1. **医疗合规 (等保三级/HIPAA)**: 不同云厂商的医疗合规认证范围不同。在中国需关注等保三级和互联互通测评；在海外需关注 HIPAA BAA。多云部署时每朵云都需独立满足合规要求。
 2. **影像数据存储**: PACS 影像数据量巨大（单院 PB 级），跨云迁移成本高。建议影像存储在主云，通过 S3 兼容 API 暴露给跨云应用。冷数据可用各云归档存储（S3 Glacier / OSS 归档）。
@@ -558,7 +558,7 @@ spec:
 5. **AI 模型部署**: 医疗 AI 模型（如肺结节检测）建议使用 ONNX 格式，避免绑定单一云的 AI 平台。KServe / Triton 支持多云部署。
 6. **医保结算接口**: 医保结算通常走专线到医保局，与云厂商无关。多云部署时确保结算链路在主云完成，避免跨云调用增加延迟和风险。
 
-#<!-- chunk: 云中立方案（开源替代） -->## 云中立方案（开源替代）
+## 云中立方案（开源替代）
 
 | 能力域 | 开源方案 | 说明 |
 |:---|:---|:---|
@@ -581,17 +581,17 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

@@ -113,6 +113,10 @@ tags: [week-4, day-27, storage, volume, mount, k8s, k8s-1.28-1.33]
 
 ### 任务 1: 多种 Volume 挂载 (40min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 创建 ConfigMap 和 Secret
 kubectl create configmap app-config --from-literal=APP_ENV=production --from-literal=LOG_LEVEL=info
@@ -167,6 +171,11 @@ kubectl exec mount-demo -- cat /etc/nginx/conf.d/custom.conf
 
 ### 任务 2: Deployment + PVC 持久化 (40min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 创建 PVC
 cat <<EOF | kubectl apply -f -
@@ -220,6 +229,10 @@ kubectl exec deploy/app-with-storage -- cat /usr/share/nginx/html/index.html
 ```
 
 ### 任务 3: StatefulSet + volumeClaimTemplates (40min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 创建 StatefulSet (每个副本自动创建独立 PVC)
@@ -281,6 +294,11 @@ kubectl exec db-cluster-2 -- cat /data/identity.txt
 ```
 
 ### 任务 4: 云盘扩容 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 查看 StorageClass 是否支持扩容

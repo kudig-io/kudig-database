@@ -9,6 +9,7 @@ tags:
   - k8s
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # 存储性能优化
@@ -17,7 +18,7 @@ updated: 2026-05-24
 
 存储性能优化是 Kubernetes 数据密集型工作负载（数据库、AI/ML 训练、日志分析）的关键环节。本文涵盖基准测试方法论、硬件级优化、云厂商特化配置以及存储 QoS 策略。
 
-相关：[[concepts/csi-drivers]] | [[concepts/storageclass]] | [[domain-04-storage-data/index]]
+相关：[[concepts/csi-drivers.md|csi drivers]] | [[concepts/storageclass.md|storageclass]] | [[domain-19-landscape-references/98-merged-indexes/index.md|index]]
 
 ---
 
@@ -170,6 +171,9 @@ spec:
 ```
 
 ### 3.4 内核参数调优
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
 
 ```bash
 # 增大请求队列深度
@@ -340,6 +344,6 @@ echo "259:0 wbps=104857600" > /sys/fs/cgroup/kubepods/burstable/pod<uid>/io.max
 
 ## Related
 
-- [[concepts/csi-drivers]] — CSI 驱动规范与实现
-- [[concepts/cloud-native-storage-systems]] — 云原生存储系统架构
-- [[concepts/finops-greenops-practices]] — FinOps 与绿色运维实践
+- [[concepts/csi-drivers.md|csi drivers]] — CSI 驱动规范与实现
+- [[concepts/cloud-native-storage-systems.md|cloud native storage systems]] — 云原生存储系统架构
+- [[concepts/finops-greenops-practices.md|finops greenops practices]] — FinOps 与绿色运维实践

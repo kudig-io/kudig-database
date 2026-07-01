@@ -1,6 +1,6 @@
 ---
 title: Docker
-description: '- [[domain-13-container-runtime/README|Docker 容器技术深度解析]]'
+description: '- [[domain-13-container-runtime/README.md|Docker 容器技术深度解析]]'
 category: entities
 tags:
 - k8s
@@ -58,20 +58,20 @@ Use Docker for development and image building. Use containerd or CRI-O for K8s p
 
 ## Related
 
-- [[entities/container-runtime|container-runtime]] — Container Runtime
+- [[entities/container-runtime.md|container-runtime]] — Container Runtime
 - [[containerd]] — containerd
 - [[cri-o]] — CRI-O
-- [[concepts/docker-architecture|docker-architecture]] — Docker Architecture and Container Runtime
-- [[concepts/container-runtime-comparison|container-runtime-comparison]] — Container Runtime Comparison
-- [[concepts/docker-architecture|Docker Architecture]]
-- [[concepts/container-runtime-comparison|Container Runtime Comparison]]
+- [[concepts/docker-architecture.md|docker-architecture]] — Docker Architecture and Container Runtime
+- [[concepts/container-runtime-comparison.md|container-runtime-comparison]] — Container Runtime Comparison
+- [[concepts/docker-architecture.md|Docker Architecture]]
+- [[concepts/container-runtime-comparison.md|Container Runtime Comparison]]
 - [[containerd|containerd]]
 
 - 00-open-source-projects-index
 - 02-docker-registry-enterprise-distribution
 - 05-docker-storage-volumes
 - 11-docker-automation-devops
-- [[domain-13-container-runtime/README|Docker 容器技术深度解析]]
+- [[domain-13-container-runtime/README.md|Docker 容器技术深度解析]]
 - 04-docker-networking-deep-dive
 - 03-docker-container-lifecycle
 - 09-docker-performance-monitoring
@@ -84,21 +84,21 @@ Use Docker for development and image building. Use containerd or CRI-O for K8s p
 - 06-docker-compose-orchestration
 - 08-docker-troubleshooting-guide
 - 10-docker-logging-management
-- [[references/k8s-design-principles-deep-dive|设计原理：声明式 API、控制器模式与 etcd 共识]] — Cross-reference
-- [[references/kudig-contribution-guide|贡献指南、项目概览与版本发布说明]] — Cross-reference
-- [[references/k8s-knowledge-map|Kubernetes Knowledge Map]] — Cross-reference
-- [[references/k8s-cluster-create|Kubernetes 集群创建操作指南]] — Cross-reference
-- [[references/k8s-supply-chain-yaml-cheatsheet|供应链安全、YAML 配置清单与速查表]] — Cross-reference
-- [[references/k8s-difficulty-index|Kubernetes Difficulty Index]] — Cross-reference
+- [[entities/k8s-design-principles-deep-dive.md|设计原理：声明式 API、控制器模式与 etcd 共识]] — Cross-reference
+- [[entities/kudig-contribution-guide.md|贡献指南、项目概览与版本发布说明]] — Cross-reference
+- [[entities/k8s-knowledge-map.md|Kubernetes Knowledge Map]] — Cross-reference
+- [[entities/k8s-cluster-create.md|Kubernetes 集群创建操作指南]] — Cross-reference
+- [[entities/k8s-supply-chain-yaml-cheatsheet.md|供应链安全、YAML 配置清单与速查表]] — Cross-reference
+- [[entities/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
 - domain-13-container-runtime MOC — Cross-reference
-- [[concepts/cli-tools-evolution|CLI 工具演进]] — Cross-reference
-- [[concepts/ai-agent-openclaw-workspace|OpenClaw 工作空间配置]] — Cross-reference
-- [[concepts/overlayfs-storage|OverlayFS Storage]] — Cross-reference
-- [[concepts/linux-container-foundation|Linux Container Foundation]] — Cross-reference
-- [[skills/learn-13-daemonset-basics|第13课：DaemonSet 与节点守护]] — Cross-reference
-- [[skills/learn-01-what-is-kubernetes|第一课：Kubernetes 入门]] — Cross-reference
-- [[skills/learn-06-configmap-secret|第六课：ConfigMap 和 Secret - 配置管理]] — Cross-reference
-- [[skills/learn-02-pod-basics|第二课：Pod - K8s 的最小调度单元]] — Cross-reference
+- [[concepts/cli-tools-evolution.md|CLI 工具演进]] — Cross-reference
+- [[concepts/ai-agent-openclaw-workspace.md|OpenClaw 工作空间配置]] — Cross-reference
+- [[concepts/overlayfs-storage.md|OverlayFS Storage]] — Cross-reference
+- [[concepts/linux-container-foundation.md|Linux Container Foundation]] — Cross-reference
+- [[skills/learn-13-daemonset-basics.md|第13课：DaemonSet 与节点守护]] — Cross-reference
+- [[skills/learn-01-what-is-kubernetes.md|第一课：Kubernetes 入门]] — Cross-reference
+- [[skills/learn-06-configmap-secret.md|第六课：ConfigMap 和 Secret - 配置管理]] — Cross-reference
+- [[skills/learn-02-pod-basics.md|第二课：Pod - K8s 的最小调度单元]] — Cross-reference
 - Domain-3: Kubernetes控制平面 — Cross-reference
-- [[entities/kubernetes-changelog|Kubernetes 变更日志索引]] — Cross-reference
-- [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
+- [[entities/kubernetes-changelog.md|Kubernetes 变更日志索引]] — Cross-reference
+- [[entities/cncf-storage.md|CNCF 存储与数据库项目全景]] — Cross-reference

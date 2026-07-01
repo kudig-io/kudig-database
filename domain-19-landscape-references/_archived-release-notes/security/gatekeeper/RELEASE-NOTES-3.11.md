@@ -36,7 +36,7 @@ Source: [v3.11.1](https://github.com/open-policy-agent/gatekeeper/releases/tag/v
 
 ## Bug Fixes
 - cutpath for ../ paths (#2508) [#2508](https://github.com/open-policy-agent/gatekeeper/pull/2508) ([alex](https://github.com/open-policy-agent/gatekeeper/commit/6a534703ded69fb4aadc48b668a4f6bf4e5dd1ad))
-- [release-3.11] fix golang.org/x/net and github.[[entities/containerd|containerd]]/containerd vulns (#2711) [#2711](https://github.com/open-policy-agent/gatekeeper/pull/2711) ([Sertaç Özercan](https://github.com/open-policy-agent/gatekeeper/commit/5ab9a969fba77a308914c79cd958e8ac039d2ec5))
+- [release-3.11] fix golang.org/x/net and github.[[entities/containerd.md|containerd]]/containerd vulns (#2711) [#2711](https://github.com/open-policy-agent/gatekeeper/pull/2711) ([Sertaç Özercan](https://github.com/open-policy-agent/gatekeeper/commit/5ab9a969fba77a308914c79cd958e8ac039d2ec5))
 - [release-3.11] cherry pick #2690 (#2717) [#2717](https://github.com/open-policy-agent/gatekeeper/pull/2717) ([Sertaç Özercan](https://github.com/open-policy-agent/gatekeeper/commit/042991e3c9f440f6aae367b90d1ed2b606279942))
 
 ## Chores

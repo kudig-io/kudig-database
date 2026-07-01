@@ -41,7 +41,7 @@ Oxia 是一个可水平扩展的元数据存储和协调系统，旨在作为 Zo
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -68,6 +68,6 @@ Oxia 是一个可水平扩展的元数据存储和协调系统，旨在作为 Zo
 - [[etcd]] — etcd
 
 - oxia
-- [[entities/schemahero|[[SchemaHero|SchemaHero]]]]
+- [[entities/schemahero.md|[[SchemaHero|SchemaHero]]]]
 - index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

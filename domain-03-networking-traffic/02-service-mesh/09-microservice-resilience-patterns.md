@@ -75,7 +75,7 @@ created: "2026-05-23"
 
 弹性模式的核心目标不是消除问题，而是控制问题的影响范围和恢复时间。一个设计良好的弹性系统应当能够优雅降级而非完全失效，并在问题条件消除后快速恢复到正常状态。本文档覆盖五种核心弹性模式：熔断器（Circuit Breaker）、重试（Retry）、超时（Timeout）、舱壁隔离（Bulkhead）和限流（Rate Limiting），以及它们在 Kubernetes + Istio 环境下的生产级配置实践。
 
-#<!-- chunk: 弹性模式架构全景 -->## 弹性模式架构全景
+## 弹性模式架构全景
 
 ```mermaid
 graph TB
@@ -114,7 +114,7 @@ graph TB
 
 <!-- chunk: 一、熔断器 (Circuit Breaker) -->## 一、熔断器 (Circuit Breaker)
 
-#<!-- chunk: 1.1 熔断器原理 -->## 1.1 熔断器原理
+## 1.1 熔断器原理
 
 熔断器是微服务弹性模式中最核心的机制。它的工作原理类似于电路中的保险丝：当下游服务的错误率超过阈值时，熔断器"跳闸"，后续请求不再发送到已问题的下游服务，而是快速失败或执行降级逻辑。经过一段冷却期后，熔断器进入"半开"状态，允许少量探测请求通过，如果探测成功则恢复，否则继续断开。
 
@@ -127,7 +127,7 @@ stateDiagram-v2
     HalfOpen --> Open: 探测请求失败
 ```
 
-#<!-- chunk: 1.2 Resilience4j 熔断器配置 -->## 1.2 Resilience4j 熔断器配置
+## 1.2 Resilience4j 熔断器配置
 
 ```yaml
 resilience4j:
@@ -167,7 +167,7 @@ resilience4j:
         minimumNumberOfCalls: 3
 ```
 
-#<!-- chunk: 1.3 Java 实战代码 -->## 1.3 Java 实战代码
+## 1.3 Java 实战代码
 
 ```java
 @Service
@@ -219,7 +219,7 @@ public class OrderService {
 }
 ```
 
-#<!-- chunk: 1.4 Istio 熔断器 (Outlier Detection) -->## 1.4 Istio 熔断器 (Outlier Detection)
+## 1.4 Istio 熔断器 (Outlier Detection)
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -250,11 +250,11 @@ spec:
 
 <!-- chunk: 二、重试 (Retry) -->## 二、重试 (Retry)
 
-#<!-- chunk: 2.1 重试策略设计 -->## 2.1 重试策略设计
+## 2.1 重试策略设计
 
 重试是处理瞬时问题最直接的机制。但不当的重试配置（如无限重试、不区分错误类型）反而会加重系统负载，甚至引发重试风暴。合理的重试策略需要考虑：哪些错误可重试、重试次数、重试间隔、退避策略。
 
-#<!-- chunk: 2.2 Resilience4j 重试配置 -->## 2.2 Resilience4j 重试配置
+## 2.2 Resilience4j 重试配置
 
 ```yaml
 resilience4j:
@@ -292,7 +292,7 @@ resilience4j:
         waitDuration: 100ms
 ```
 
-#<!-- chunk: 2.3 Istio 重试配置 -->## 2.3 Istio 重试配置
+## 2.3 Istio 重试配置
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -314,7 +314,7 @@ spec:
       timeout: 10s
 ```
 
-#<!-- chunk: 2.4 避免双重重试 -->## 2.4 避免双重重试
+## 2.4 避免双重重试
 
 ```yaml
 问题:
@@ -346,7 +346,7 @@ spec:
 
 <!-- chunk: 三、超时 (Timeout) -->## 三、超时 (Timeout)
 
-#<!-- chunk: 3.1 超时层级设计 -->## 3.1 超时层级设计
+## 3.1 超时层级设计
 
 ```yaml
 超时层级 (由外到内):
@@ -363,7 +363,7 @@ spec:
   - 最外层超时最宽松 (用户体验)
 ```
 
-#<!-- chunk: 3.2 Resilience4j 超时配置 -->## 3.2 Resilience4j 超时配置
+## 3.2 Resilience4j 超时配置
 
 ```yaml
 resilience4j:
@@ -381,7 +381,7 @@ resilience4j:
         timeoutDuration: 10s
 ```
 
-#<!-- chunk: 3.3 Istio 超时配置 -->## 3.3 Istio 超时配置
+## 3.3 Istio 超时配置
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -393,13 +393,13 @@ spec:
   hosts:
     - user-service
   http:
-    - match:
-        - uri:
-            prefix: /api/users
-      timeout: 8s
-      route:
-        - destination:
-            host: user-service
+    - matchers:
+      - - uri=""
+      - prefix="/api/users"
+      - timeout="8s"
+      - route=""
+      - - destination=""
+      - host="user-service"
 ---
 apiVersion: networking.istio.io/v1
 kind: DestinationRule
@@ -422,11 +422,11 @@ spec:
 
 <!-- chunk: 四、舱壁隔离 (Bulkhead) -->## 四、舱壁隔离 (Bulkhead)
 
-#<!-- chunk: 4.1 舱壁隔离原理 -->## 4.1 舱壁隔离原理
+## 4.1 舱壁隔离原理
 
 舱壁隔离模式源自船舶设计：将船体分隔为多个密封舱室，一个舱室进水不会导致整船沉没。在微服务中，这意味着为不同的下游服务或操作分配独立的资源池（线程池或信号量），防止一个慢速下游耗尽所有资源。
 
-#<!-- chunk: 4.2 Resilience4j Bulkhead 配置 -->## 4.2 Resilience4j Bulkhead 配置
+## 4.2 Resilience4j Bulkhead 配置
 
 ```yaml
 resilience4j:
@@ -460,7 +460,7 @@ resilience4j:
         keepAliveDuration: 30s
 ```
 
-#<!-- chunk: 4.3 Java 舱壁隔离实现 -->## 4.3 Java 舱壁隔离实现
+## 4.3 Java 舱壁隔离实现
 
 ```java
 @Service
@@ -489,7 +489,7 @@ public class ResilientService {
 }
 ```
 
-#<!-- chunk: 4.4 Istio 连接池 (等效舱壁) -->## 4.4 Istio 连接池 (等效舱壁)
+## 4.4 Istio 连接池 (等效舱壁)
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -515,7 +515,7 @@ spec:
 
 <!-- chunk: 五、限流 (Rate Limiting) -->## 五、限流 (Rate Limiting)
 
-#<!-- chunk: 5.1 Resilience4j 限流配置 -->## 5.1 Resilience4j 限流配置
+## 5.1 Resilience4j 限流配置
 
 ```yaml
 resilience4j:
@@ -541,7 +541,7 @@ resilience4j:
         timeoutDuration: 0s
 ```
 
-#<!-- chunk: 5.2 Java 限流实现 -->## 5.2 Java 限流实现
+## 5.2 Java 限流实现
 
 ```java
 @Service
@@ -562,7 +562,7 @@ public class RateLimitedService {
 }
 ```
 
-#<!-- chunk: 5.3 Istio 速率限制 -->## 5.3 Istio 速率限制
+## 5.3 Istio 速率限制
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -610,7 +610,7 @@ spec:
 
 <!-- chunk: 六、降级 (Fallback) 模式 -->## 六、降级 (Fallback) 模式
 
-#<!-- chunk: 6.1 降级策略设计 -->## 6.1 降级策略设计
+## 6.1 降级策略设计
 
 ```yaml
 降级策略分层:
@@ -635,7 +635,7 @@ spec:
     - 通知降级为异步处理
 ```
 
-#<!-- chunk: 6.2 降级实现 -->## 6.2 降级实现
+## 6.2 降级实现
 
 ```java
 @Service
@@ -667,7 +667,7 @@ public class FallbackService {
 
 <!-- chunk: 七、弹性模式组合策略 -->## 七、弹性模式组合策略
 
-#<!-- chunk: 7.1 完整弹性配置 -->## 7.1 完整弹性配置
+## 7.1 完整弹性配置
 
 ```yaml
 resilience4j:
@@ -706,7 +706,7 @@ resilience4j:
         timeoutDuration: 5s
 ```
 
-#<!-- chunk: 7.2 Istio 与 Resilience4j 协同策略 -->## 7.2 Istio 与 Resilience4j 协同策略
+## 7.2 Istio 与 Resilience4j 协同策略
 
 ```yaml
 分层策略 (推荐):
@@ -735,7 +735,7 @@ resilience4j:
 
 <!-- chunk: 八、监控与告警 -->## 八、监控与告警
 
-#<!-- chunk: 8.1 Resilience4j [[Prometheus|Prometheus]] 指标 -->## 8.1 Resilience4j Prometheus 指标
+## 8.1 Resilience4j Prometheus 指标
 
 ```yaml
 management:
@@ -768,7 +768,7 @@ resilience4j_bulkhead_available_concurrent_calls
 resilience4j_ratelimiter_available_permissions
 ```
 
-#<!-- chunk: 8.2 告警规则 -->## 8.2 告警规则
+## 8.2 告警规则
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -840,7 +840,7 @@ spec:
 
 <!-- chunk: 弹性模式参数参考 -->## 弹性模式参数参考
 
-#<!-- chunk: Resilience4j CircuitBreaker 参数 -->## Resilience4j CircuitBreaker 参数
+## Resilience4j CircuitBreaker 参数
 
 | 参数 | 默认值 | 说明 | 推荐值 (生产) |
 |:---|:---|:---|:---|
@@ -854,7 +854,7 @@ spec:
 | permittedNumberOfCallsInHalfOpenState | 10 | 半开状态允许的探测请求数 | 3-5 |
 | automaticTransitionFromOpenToHalfOpenEnabled | false | 自动从开启转半开 | true |
 
-#<!-- chunk: Resilience4j Retry 参数 -->## Resilience4j Retry 参数
+## Resilience4j Retry 参数
 
 | 参数 | 默认值 | 说明 | 推荐值 (生产) |
 |:---|:---|:---|:---|
@@ -866,7 +866,7 @@ spec:
 | retryExceptions | - | 可重试的异常类型 | IOException, TimeoutException |
 | ignoreExceptions | - | 忽略的异常类型 | BusinessException |
 
-#<!-- chunk: Istio OutlierDetection 参数 -->## Istio OutlierDetection 参数
+## Istio OutlierDetection 参数
 
 | 参数 | 默认值 | 说明 | 推荐值 (生产) |
 |:---|:---|:---|:---|
@@ -881,7 +881,7 @@ spec:
 
 <!-- chunk: 九、最佳实践 -->## 九、最佳实践
 
-#<!-- chunk: 9.1 弹性设计原则 -->## 9.1 弹性设计原则
+## 9.1 弹性设计原则
 
 ```yaml
 核心原则:
@@ -903,7 +903,10 @@ spec:
   - 无监控 (弹性成为黑盒)
 ```
 
-#<!-- chunk: 9.2 故障排查 -->## 9.2 故障排查
+## 9.2 故障排查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -923,7 +926,7 @@ kubectl exec -n monitoring deploy/prometheus -- \
   'resilience4j_circuitbreaker_state{state="open"}'
 ```
 
-#<!-- chunk: 9.3 Actuator 健康检查输出示例 -->## 9.3 Actuator 健康检查输出示例
+## 9.3 Actuator 健康检查输出示例
 
 ```bash
 $ curl -s http://localhost:8080/actuator/health | jq '.components.circuitBreakers'
@@ -967,7 +970,7 @@ $ curl -s http://localhost:8080/actuator/health | jq '.components.circuitBreaker
 
 <!-- chunk: 十、弹性模式端到端验证 -->## 十、弹性模式端到端验证
 
-#<!-- chunk: 10.1 弹性验证测试脚本 -->## 10.1 弹性验证测试脚本
+## 10.1 弹性验证测试脚本
 
 在生产环境中验证弹性模式的有效性是确保系统可靠性的关键步骤。以下脚本通过模拟各种问题场景（服务不可用、高延迟、连接超时），验证熔断器、重试、超时和降级策略是否按预期工作。建议在非业务高峰期执行此测试脚本，并确保监控告警已正确配置，以便在测试过程中观察告警触发情况。
 
@@ -1035,7 +1038,12 @@ echo ""
 echo "=== 弹性验证完成 ==="
 ```
 
-#<!-- chunk: 10.2 Istio 弹性验证 -->## 10.2 Istio 弹性验证
+## 10.2 Istio 弹性验证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 echo "=== Istio 网格层弹性验证 ==="
@@ -1090,7 +1098,7 @@ echo "Istio resilience verification completed"
 
 <!-- chunk: 十一、弹性模式设计决策树 -->## 十一、弹性模式设计决策树
 
-#<!-- chunk: 选择正确的弹性模式 -->## 选择正确的弹性模式
+## 选择正确的弹性模式
 
 在面对微服务弹性设计时，选择正确的模式组合是关键。并非每个服务都需要全部五种弹性模式，过度配置会导致系统复杂度增加而收益递减。以下决策树帮助团队根据服务特征选择最合适的弹性策略。核心原则是：对外部依赖（第三方 API、数据库）使用最严格的弹性配置；对内部关键服务使用中等弹性配置；对内部非关键服务使用轻量弹性配置。
 
@@ -1144,7 +1152,7 @@ echo "Istio resilience verification completed"
 
 <!-- chunk: 十二、Istio 与 Resilience4j 协同部署配置 -->## 十二、Istio 与 Resilience4j 协同部署配置
 
-#<!-- chunk: 完整的分层弹性配置 -->## 完整的分层弹性配置
+## 完整的分层弹性配置
 
 以下配置展示了 Istio 和 Resilience4j 在生产环境中如何协同工作。Istio 层负责节点级熔断（Outlier Detection）、全局重试（仅 GET 请求）和全局超时兜底（10 秒）。Resilience4j 层负责应用级熔断（更精细的阈值控制）、幂等操作重试（POST 请求的幂等键重试）、方法级超时、线程隔离和业务级限流。两层通过明确的职责划分避免冲突：重试只在一层配置（GET 由 Istio 处理，POST 由 Resilience4j 处理），超时遵循外大内小原则（Istio 10s > Resilience4j 5s > HTTP Client 3s）。
 
@@ -1158,26 +1166,26 @@ spec:
   hosts:
     - user-service
   http:
-    - match:
-        - uri:
-            prefix: /api/users
-        - method:
-            exact: GET
-      route:
-        - destination:
-            host: user-service
-      retries:
-        attempts: 2
-        perTryTimeout: 3s
-        retryOn: 5xx,reset,connect-failure
-      timeout: 10s
-    - match:
-        - method:
-            exact: POST
-      route:
-        - destination:
-            host: user-service
-      timeout: 10s
+    - matchers:
+      - - uri=""
+      - prefix="/api/users"
+      - - method=""
+      - exact="GET"
+      - route=""
+      - - destination=""
+      - host="user-service"
+      - retries=""
+      - attempts="2"
+      - perTryTimeout="3s"
+      - retryOn="5xx,reset,connect-failure"
+      - timeout="10s"
+    - matchers:
+      - - method=""
+      - exact="POST"
+      - route=""
+      - - destination=""
+      - host="user-service"
+      - timeout="10s"
 ---
 apiVersion: networking.istio.io/v1
 kind: DestinationRule
@@ -1209,7 +1217,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-03-networking-traffic KUDIG Database — Global MOC
-- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
 - Domain-26 服务网格与微服务 — 开源项目索引
 - Istio 企业级服务网格架构与实践
 - Linkerd 企业级服务网格深度实践

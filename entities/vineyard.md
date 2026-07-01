@@ -40,7 +40,7 @@ Vineyard 是一个内存中的不可变数据管理器，为大数据和 AI/ML �
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -61,12 +61,12 @@ Vineyard 是一个内存中的不可变数据管理器，为大数据和 AI/ML �
 ## Related
 
 - [[hami]] — HAMI
-- [[open-policy-containers]] — [[entities/open-policy-containers|Open Policy Containers (OPCR)]]
+- [[open-policy-containers]] — [[entities/open-policy-containers.md|Open Policy Containers (OPCR)]]
 - [[werf]] — werf
 - [[dalec]] — Dalec
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - vineyard
 - storage|CNCF 存储与数据库项目全景]] — Cross-reference
-- [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-edge-ai.md|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

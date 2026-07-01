@@ -38,6 +38,9 @@ Kubernetes 节点从加入到移除的完整生命周期涉及 [[kubelet|kubelet
 
 ## 节点生命周期五个阶段
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```
 阶段 1: 节点准备
 ├── 物理/虚拟机创建
@@ -66,7 +69,7 @@ Kubernetes 节点从加入到移除的完整生命周期涉及 [[kubelet|kubelet
 阶段 5: 节点移除
 ├── drain 驱逐所有 Pod
 ├── delete node 从集群移除
-├── kubeadm reset 清理节点
+├── kubeadm reset 清理节点  # ⚠️ 清理节点所有 K8s 配置
 └── 云厂商释放实例
 ```
 
@@ -152,6 +155,7 @@ registerNode（创建 Node 对象）
 syncNodeStatus 循环上报状态
   ↓
 Node Ready
+
 ```
 
 ## Node Lifecycle Controller
@@ -206,10 +210,10 @@ Node Ready
 
 ## 相关概念
 
-- [[skills/node-drain-and-maintenance|[[节点驱逐与维护|节点驱逐与维护]]]]
-- [[skills/kubelet-certificate-rotation|[[kubelet 证书轮换机制|kubelet 证书轮换机制]]]]
-- [[skills/kubelet-eviction-mechanism|[[kubelet 资源驱逐机制|kubelet 资源驱逐机制]]]]
-- [[entities/kubelet|kubelet]]
+- [[skills/node-drain-and-maintenance.md|[[节点驱逐与维护|节点驱逐与维护]]]]
+- [[skills/kubelet-certificate-rotation.md|[[kubelet 证书轮换机制|kubelet 证书轮换机制]]]]
+- [[skills/kubelet-eviction-mechanism.md|[[kubelet 资源驱逐机制|kubelet 资源驱逐机制]]]]
+- [[entities/kubelet.md|kubelet]]
 - [[pod-lifecycle|Pod 生命周期]]
 
 ## Related
@@ -218,4 +222,6 @@ Node Ready
 - [[cri-o]] — CRI-O
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/kubelet.md|kubelet]] — kubelet
+
+```

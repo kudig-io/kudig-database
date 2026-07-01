@@ -184,6 +184,7 @@ spec:
   kubectl get pods -n prod -l app=web-api | grep -v Running
   # 查看 Pod 事件
   kubectl describe pod <new-pod-name> -n prod | tail -20
+
   ```
 - **解决方案**: 修复应用问题后等待自动恢复，或 `kubectl rollout undo` 回滚到上一版本。
 
@@ -221,6 +222,9 @@ spec:
 - [ ] HPA 场景下不硬编码 `spec.replicas`
 
 ## 命令快速参考
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 查看 Deployment 状态
@@ -262,4 +266,8 @@ kubectl get rs -n prod -l app=web-api --sort-by=.metadata.creationTimestamp
 
 ## Related
 
-- index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+
+```

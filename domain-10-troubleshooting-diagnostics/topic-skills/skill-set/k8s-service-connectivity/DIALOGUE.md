@@ -4,6 +4,7 @@ category: "troubleshooting"
 tags: ["networking", "remote-consultant"]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 dialogue_id: "DIALOGUE-SKILL-NET-002"
 skill_id: "SKILL-NET-002"
 version: "1.0.0"
@@ -11,15 +12,15 @@ role: "remote-consultant"
 language: "zh"
 summary: "服务连通性问题的远程顾问对话脚本，覆盖Service、Endpoint、kube-proxy排查。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL]]"
+  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
     type: uses
-  - target: "[[entities/cilium]]"
+  - target: "[[entities/cilium.md]]"
     type: uses
-  - target: "[[entities/coredns]]"
+  - target: "[[entities/coredns.md]]"
     type: uses
-  - target: "[[entities/deployment]]"
+  - target: "[[entities/deployment.md]]"
     type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/ingress]]"
+  - target: "[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]"
     type: uses
 ---
 
@@ -74,7 +75,7 @@ relationships:
 
 ### 入口 D：工程师报告外部访问 Service 失败（NodePort/LoadBalancer）
 
-**工程师**：「NodePort 不通」/「LoadBalancer 外部 IP 无法访问」/「[[domain-17-system-foundation/topic-dictionary/networking/ingress|Ingress]] 后端超时」
+**工程师**：「NodePort 不通」/「LoadBalancer 外部 IP 无法访问」/「[[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]] 后端超时」
 
 **顾问回应**：
 > 外部访问失败涉及 Service 网络链路的多个环节。先定位是 Service 内部问题还是外部暴露层问题。请执行：
@@ -120,7 +121,7 @@ relationships:
 **工程师反馈**：多个 Service 或整个命名空间的服务发现失效。
 
 **顾问指令**：
-> 多个 Service 同时问题通常指向集群级组件异常（kube-proxy、[[entities/coredns|CoreDNS]]、CNI）。先确认范围。
+> 多个 Service 同时问题通常指向集群级组件异常（kube-proxy、[[entities/coredns.md|CoreDNS]]、CNI）。先确认范围。
 > 1. 检查 kube-proxy Pod 状态：`kubectl get pods -n kube-system -l k8s-app=kube-proxy`
 > **如果没有 kube-proxy 标签** → `kubectl get pods -n kube-system | grep -i proxy`
 > 2. 检查 CoreDNS 状态：`kubectl get pods -n kube-system -l k8s-app=kube-dns`
@@ -132,7 +133,7 @@ relationships:
 
 **分支决策**：
 - **B1**：kube-proxy Pod 异常或部分节点缺失 → Round 2 — 分支 D（kube-proxy 修复）
-- **B2**：CoreDNS Pod 异常 → 升级至 [[skills/skill-k8s-node-notready-SKILL|SKILL]]-NET-001（DNS 问题诊断）
+- **B2**：CoreDNS Pod 异常 → 升级至 [[skills/skill-k8s-node-notready-SKILL.md|SKILL]]-NET-001（DNS 问题诊断）
 - **B3**：CNI Pod 异常 → 升级至 SKILL-NET-003（网络深度诊断）
 - **B4**：节点 NotReady → 升级至 SKILL-NODE-001（节点问题诊断）
 
@@ -349,7 +350,7 @@ relationships:
 > 2. 检查云安全组/ACL：登录云控制台，检查节点安全组的入站规则是否允许 NodePort 范围（默认 30000-32767）；确认是否有 Network ACL 限制；确认是否配置了源 IP 白名单
 > 3. 检查 NetworkPolicy：`kubectl get networkpolicy -n <namespace>`
 > **如果无法执行** → `kubectl get networkpolicy --all-namespaces`
-> **如果使用 [[entities/cilium|Cilium]]** → `kubectl get ciliumnetworkpolicy -n <namespace>`
+> **如果使用 [[entities/cilium.md|Cilium]]** → `kubectl get ciliumnetworkpolicy -n <namespace>`
 
 **分支决策**：
 - **F1**：节点防火墙阻断 → Round 3 — 分支 Q（开放防火墙端口）
@@ -539,6 +540,10 @@ relationships:
 
 ## 附录：常用命令速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 查看 Service 和 Endpoints
 kubectl get svc,endpoints -n <namespace>
@@ -666,7 +671,7 @@ kubectl get endpointslices -n <namespace>
 > **如果无法执行** → `kubectl describe pod <pod-name> -n <namespace> | grep -A 5 "DNS Policy"`
 > 2. 查看 dnsConfig：`kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.dnsConfig}'`
 > **如果无 dnsConfig** → 检查集群默认 DNS 配置：`kubectl get configmap coredns -n kube-system -o yaml | grep -A 10 "kubernetes"`
-> 3. 如需修改，在 [[entities/deployment|Deployment]] 中增加 dnsConfig：
+> 3. 如需修改，在 [[entities/deployment.md|Deployment]] 中增加 dnsConfig：
 > ```yaml
 > dnsPolicy: ClusterFirst
 > dnsConfig:
@@ -811,4 +816,4 @@ kubectl get endpointslices -n <namespace>
 
 ## 相关案例
 
-- [[synthesis/case-studies/2026-09-15-multicluster-network-partition|2026-09-15-multicluster-network-partition]]
+- [[concepts/case-studies/2026-09-15-multicluster-network-partition.md|2026-09-15-multicluster-network-partition]]

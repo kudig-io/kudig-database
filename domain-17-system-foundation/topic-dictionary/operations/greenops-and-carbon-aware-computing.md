@@ -37,7 +37,7 @@ created: "2026-05-23"
 
 ## 概述
 
-随着全球对气候变化的重视和企业 ESG（环境、社会与治理）合规要求的提升，**GreenOps** 正在成为云原生运维的重要分支。GreenOps 将环境可持续性纳入 IT 运营决策，通过**碳感知调度（Carbon-aware Scheduling）、资源效率优化和可再生能源优先**等手段，降低 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 工作负载的碳足迹。2026 年，欧盟 CSRD 等法规已要求大型企业披露数字基础设施的碳排放数据。
+随着全球对气候变化的重视和企业 ESG（环境、社会与治理）合规要求的提升，**GreenOps** 正在成为云原生运维的重要分支。GreenOps 将环境可持续性纳入 IT 运营决策，通过**碳感知调度（Carbon-aware Scheduling）、资源效率优化和可再生能源优先**等手段，降低 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 工作负载的碳足迹。2026 年，欧盟 CSRD 等法规已要求大型企业披露数字基础设施的碳排放数据。
 
 ## 核心概念/原理
 
@@ -83,7 +83,7 @@ GSF 提出了绿色软件开发的八大原则：
 
 ### 碳感知 Kubernetes 调度器
 
-通过扩展 [[Kubernetes Scheduler|Kubernetes Scheduler]] 或自定义控制器实现：
+通过扩展 [[domain-17-system-foundation/topic-dictionary/scheduling/kubernetes-scheduler.md|Kubernetes Scheduler]] 或自定义控制器实现：
 - 读取电网碳强度 API（如 Electricity Maps、WattTime）
 - 在节点标签中标记当前区域的碳强度分数
 - 调度器优先将可延迟批处理任务分配到碳强度低的节点/时段
@@ -172,3 +172,13 @@ kubectl get nodes -l kubernetes.io/arch=arm64
 - [Electricity Maps](https://app.electricitymaps.com/)
 - [WattTime API](https://www.watttime.org/)
 - 相关主题：[FinOps 与成本优化](finops-and-cost-optimization.md) · [Kubernetes Scheduler](../scheduling/kubernetes-scheduler.md) · [Karpenter Autoscaling](../scheduling/karpenter-autoscaling.md)
+
+## 参考链接
+
+- [Greenops And Carbon Aware Computing]()
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
+- [[domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery.md|备份与灾难恢复（Backup & Disaster Recovery）]]
+- [[domain-17-system-foundation/topic-dictionary/operations/capacity-planning-forecasting.md|13 - 容量规划与资源预测]]

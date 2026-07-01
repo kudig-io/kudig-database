@@ -196,6 +196,7 @@ graph TD
     E7 --> E8{cleanup-tmp-dir?}
     E8 -->|是| E9[CleanDir /etc/kubernetes/tmp]
     E8 -->|否| E10[跳过]
+
 ```
 
 ## 源码分析
@@ -352,9 +353,12 @@ func runCleanupNode(c workflow.RunData) error {
 
 ### init vs reset Phase 对比
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│  kubeadm init phases              │ kubeadm reset phases          │
+│  kubeadm init phases              │ kubeadm reset phases          │  # ⚠️ 清理节点所有 K8s 配置
 ├───────────────────────────────────┼──────────────────────────────┤
 │  preflight                        │ preflight                     │
 │  certs                            │ ─                            │
@@ -380,8 +384,11 @@ func runCleanupNode(c workflow.RunData) error {
 
 ## 执行流程
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```
-1. 用户执行 kubeadm reset phase <command>
+1. 用户执行 kubeadm reset phase <command>  # ⚠️ 清理节点所有 K8s 配置
 2. workflow.Runner 解析命令，匹配 Phase Name 或 Alias
 3. 从全局数据中获取 resetData
 4. 执行 Phase.Run(data)
@@ -420,8 +427,11 @@ timeouts:
 
 使用配置文件执行：
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
-kubeadm reset --config=reset-config.yaml
+kubeadm reset --config=reset-config.yaml  # ⚠️ 清理节点所有 K8s 配置
 ```
 
 **优先级**: 命令行标志 > 配置文件 > 默认值
@@ -430,19 +440,22 @@ kubeadm reset --config=reset-config.yaml
 
 ### 分阶段执行 reset
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
 # 阶段 1: 预检（带确认）
-kubeadm reset phase preflight
+kubeadm reset phase preflight  # ⚠️ 清理节点所有 K8s 配置
 # [reset] Are you sure you want to proceed? [y/N]: y
 # [preflight] Running pre-flight checks
 
 # 阶段 2: 移除 etcd 成员
-kubeadm reset phase remove-etcd-member --kubeconfig=/etc/kubernetes/admin.conf
+kubeadm reset phase remove-etcd-member --kubeconfig=/etc/kubernetes/admin.conf  # ⚠️ 清理节点所有 K8s 配置
 # [reset] Reading configuration from the cluster...
 # [reset] Removing local etcd member
 
 # 阶段 3: 清理节点
-kubeadm reset phase cleanup-node --cleanup-tmp-dir
+kubeadm reset phase cleanup-node --cleanup-tmp-dir  # ⚠️ 清理节点所有 K8s 配置
 # [reset] Stopping the kubelet service
 # [reset] Unmounting mounted directories in "/var/lib/kubelet"
 # [reset] Removing Kubernetes-managed containers
@@ -459,8 +472,11 @@ kubeadm reset phase cleanup-node --cleanup-tmp-dir
 
 ### 跳过 etcd 移除执行完整 reset
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
-kubeadm reset --force --skip-phases=remove-etcd-member
+kubeadm reset --force --skip-phases=remove-etcd-member  # ⚠️ 清理节点所有 K8s 配置
 # [preflight] Running pre-flight checks
 # [reset] Stopping the kubelet service
 # [reset] Unmounting mounted directories in "/var/lib/kubelet"
@@ -471,10 +487,13 @@ kubeadm reset --force --skip-phases=remove-etcd-member
 
 ### kubectl view 输出对比
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
 # 查看帮助
-kubeadm reset phase --help
-# Use "kubeadm reset phase <command> --help" for more information about a given command.
+kubeadm reset phase --help  # ⚠️ 清理节点所有 K8s 配置
+# Use "kubeadm reset phase <command> --help" for more information about a given command.  # ⚠️ 清理节点所有 K8s 配置
 #
 # Available Commands:
 #   cleanup-node        Run cleanup node
@@ -482,17 +501,18 @@ kubeadm reset phase --help
 #   remove-etcd-member  Remove a local etcd member
 
 # 查看 cleanup-node 帮助
-kubeadm reset phase cleanup-node --help
+kubeadm reset phase cleanup-node --help  # ⚠️ 清理节点所有 K8s 配置
 # Run cleanup node
 #
 # Usage:
-#   kubeadm reset phase cleanup-node [flags]
+#   kubeadm reset phase cleanup-node [flags]  # ⚠️ 清理节点所有 K8s 配置
 #
 # Flags:
 #       --certificates-dir string   The directory where the certificates are stored. (default "/etc/kubernetes/pki")
 #       --cleanup-tmp-dir           Also clean up the /etc/kubernetes/tmp directory.
 #       --cri-socket string         Path to the CRI socket to connect
 #   -h, --help                      help for cleanup-node
+
 ```
 
 ## 常见错误
@@ -517,7 +537,9 @@ kubeadm reset phase cleanup-node --help
 ## Related
 
 - [[README|README]]
-- [[man/INSTALL|INSTALL]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
+- [[scripts/man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+
+```

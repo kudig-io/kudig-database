@@ -33,13 +33,14 @@ prerequisites:
 - cloud-provider-basics
 - gpu-scheduling-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Resource Management for [[Pods|Pods]] and Containers
 
 ## 概述
 
-在 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 中，你可以为 Pod 中的每个容器指定所需的资源量。最常见的资源类型是 CPU 和内存（RAM）。通过设置 `requests`（请求）和 `limits`（限制），调度器可以为 Pod 选择合适的节点，而 [[kubelet|kubelet]] 则确保运行中的容器不会超出设定的资源上限。
+在 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 中，你可以为 Pod 中的每个容器指定所需的资源量。最常见的资源类型是 CPU 和内存（RAM）。通过设置 `requests`（请求）和 `limits`（限制），调度器可以为 Pod 选择合适的节点，而 [[kubelet|kubelet]] 则确保运行中的容器不会超出设定的资源上限。
 
 ## 核心概念/原理
 
@@ -245,6 +246,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 查看 Pod 资源使用
 kubectl top pods -n production
@@ -278,3 +282,9 @@ kubectl patch pod <pod-name> --subresource resize --type merge \
 ## 参考链接
 
 - [Kubernetes 官方文档 - Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/configuration/configmap.md|配置映射]]
+- [[domain-17-system-foundation/topic-dictionary/configuration/configmaps.md|ConfigMaps]]
+- [[domain-17-system-foundation/topic-dictionary/configuration/env.md|环境变量配置]]

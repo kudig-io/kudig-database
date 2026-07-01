@@ -67,7 +67,7 @@ Kyverno 是专为 Kubernetes 设计的策略引擎，以原生 YAML 语法定义
 
 Kyverno 的核心优势在于其低学习成本和高表达能力。策略使用标准 K8s YAML 定义，与 Deployment、Service 等资源的 YAML 格式完全一致。策略匹配使用 Kubernetes 标签选择器、资源类型和命名空间过滤，语法与 Kubernetes 原生的选择器语法一致。策略验证使用 JSON Patch 风格的模式匹配，支持通配符、条件表达式和变量引用。这种"Kubernetes 原生"的设计使得运维人员无需学习新的语言（如 Rego）就可以定义复杂的策略。
 
-#<!-- chunk: 威胁模型分析 -->## 威胁模型分析
+## 威胁模型分析
 
 在无策略管控的 Kubernetes 集群中，多种安全威胁可能通过配置缺陷被利用。Kyverno 在准入控制层面拦截这些威胁，确保所有部署的工作负载符合安全基线。
 
@@ -101,7 +101,7 @@ Kyverno 的核心优势在于其低学习成本和高表达能力。策略使用
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 核心组件架构 -->## 核心组件架构
+## 核心组件架构
 
 ```mermaid
 graph TB
@@ -162,7 +162,7 @@ graph TB
     style RPT fill:#f59e0b,stroke:#d97706,color:#fff
 ```
 
-#<!-- chunk: 企业级部署 -->## 企业级部署
+## 企业级部署
 
 ```yaml
 # values-kyverno-enterprise.yaml
@@ -247,6 +247,9 @@ serviceMonitor:
   interval: "30s"
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 helm repo add kyverno https://kyverno.github.io/kyverno/
 helm repo update
@@ -260,7 +263,7 @@ helm install kyverno kyverno/kyverno \
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: 验证策略（Validate） -->## 验证策略（Validate）
+## 验证策略（Validate）
 
 验证策略是最常用的策略类型，用于检查资源是否符合指定的规则。当资源不匹配时，可以拒绝请求（Enforce 模式）或仅记录违规（Audit 模式）。生产环境中建议先以 Audit 模式运行策略 2-3 周，观察违规情况并调整规则，确认无误后再切换到 Enforce 模式。
 
@@ -505,7 +508,7 @@ spec:
                   - value: "*password*|*secret*|*token*|*api_key*|*credential*"
 ```
 
-#<!-- chunk: 变异策略（Mutate） -->## 变异策略（Mutate）
+## 变异策略（Mutate）
 
 变异策略在资源创建时自动修改配置，无需开发人员手动添加安全字段。这降低了人为遗漏的风险，确保所有工作负载自动获得标准安全配置。变异策略使用 `+(field)` 语法表示仅在字段不存在时添加，不会覆盖用户已设置的值。
 
@@ -593,7 +596,7 @@ spec:
           mutateDigest: true
 ```
 
-#<!-- chunk: 镜像验证策略（VerifyImages） -->## 镜像验证策略（VerifyImages）
+## 镜像验证策略（VerifyImages）
 
 ```yaml
 apiVersion: kyverno.io/v1
@@ -655,7 +658,7 @@ spec:
                       value: 0
 ```
 
-#<!-- chunk: 生成策略（Generate） -->## 生成策略（Generate）
+## 生成策略（Generate）
 
 ```yaml
 apiVersion: kyverno.io/v1
@@ -771,7 +774,7 @@ spec:
 
 <!-- chunk: 安全策略实战 -->## 安全策略实战
 
-#<!-- chunk: Pod Security Standards 实施策略集 -->## Pod Security Standards 实施策略集
+## Pod Security Standards 实施策略集
 
 以下策略集实现了 Kubernetes Pod Security Standards 的 Restricted 级别，提供最严格的安全基线。建议在所有生产命名空间启用 Restricted 配置文件，在开发命名空间可以使用 Baseline 配置文件。
 
@@ -845,7 +848,7 @@ spec:
                 type: "RuntimeDefault | Localhost"
 ```
 
-#<!-- chunk: 合规策略集 -->## 合规策略集
+## 合规策略集
 
 ```yaml
 # PCI-DSS 合规策略
@@ -958,7 +961,7 @@ spec:
 
 <!-- chunk: 合规与审计 -->## 合规与审计
 
-#<!-- chunk: 策略报告 -->## 策略报告
+## 策略报告
 
 Kyverno 自动生成 PolicyReport 和 ClusterPolicyReport 资源，记录所有策略的审计结果。每个命名空间一个 PolicyReport，集群级策略由 ClusterPolicyReport 记录。
 
@@ -979,7 +982,10 @@ kubectl get policyreport -A -o json | \
   jq -r '.items[] | {ns: .metadata.namespace, pass: ([.results[] | select(.result=="pass")] | length), fail: ([.results[] | select(.result=="fail")] | length)} | "\(.ns): pass=\(.pass) fail=\(.fail)"'
 ```
 
-#<!-- chunk: Policy Reporter UI -->## Policy Reporter UI
+## Policy Reporter UI
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add policy-reporter https://kyverno.github.io/policy-reporter
@@ -993,7 +999,7 @@ helm install policy-reporter policy-reporter/policy-reporter \
   --set grafana.dashboard.enabled=true
 ```
 
-#<!-- chunk: 合规报告自动化 -->## 合规报告自动化
+## 合规报告自动化
 
 ```bash
 #!/bin/bash
@@ -1136,7 +1142,7 @@ spec:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 策略开发流程 -->## 策略开发流程
+## 策略开发流程
 
 建议采用渐进式策略部署。新建的策略首先以 Audit 模式运行，观察违规情况并调整规则。确认无误后在非关键命名空间切换为 Enforce 模式。稳定后逐步扩展到所有命名空间。所有策略变更通过 GitOps 流程管理，使用 Argo CD 或 Flux 自动同步。
 
@@ -1147,7 +1153,7 @@ spec:
 | 预发布 | Enforce (非关键 NS) | 1-2 周 | 确认无误报 |
 | 生产 | Enforce (所有 NS) | 持续 | 监控告警 |
 
-#<!-- chunk: GitOps 集成 -->## GitOps 集成
+## GitOps 集成
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -1180,7 +1186,7 @@ spec:
         - /status
 ```
 
-#<!-- chunk: 策略测试 -->## 策略测试
+## 策略测试
 
 ```bash
 # 使用 Kyverno CLI 测试策略
@@ -1194,7 +1200,7 @@ helm template mychart | kyverno apply policies/ --resource -
 kyverno apply policies/ --resource manifests/deployment.yaml --policy-report
 ```
 
-#<!-- chunk: 策略命名规范 -->## 策略命名规范
+## 策略命名规范
 
 | 前缀 | 类别 | 示例 |
 |:---|:---|:---|
@@ -1218,7 +1224,7 @@ kyverno apply policies/ --resource manifests/deployment.yaml --policy-report
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 完整诊断脚本 -->## 完整诊断脚本
+## 完整诊断脚本
 
 ```bash
 #!/bin/bash
@@ -1266,7 +1272,10 @@ for ns in $(kubectl get namespaces -o jsonpath='{.items[*].metadata.name}'); do
 done
 ```
 
-#<!-- chunk: 紧急恢复 -->## 紧急恢复
+## 紧急恢复
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 紧急恢复：将 Webhook failurePolicy 改为 Ignore
@@ -1291,8 +1300,8 @@ kubectl patch mutatingwebhookconfiguration kyverno-resource-mutating-webhook-cfg
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
@@ -1310,8 +1319,8 @@ kubectl patch mutatingwebhookconfiguration kyverno-resource-mutating-webhook-cfg
 - 05-vault-enterprise-secrets-management
 - 09-opa-gatekeeper-policy
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

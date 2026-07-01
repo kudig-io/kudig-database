@@ -72,4 +72,6 @@ LimitRange 是 [[Kubernetes|Kubernetes]] 中的一种策略对象，用于约束
 
 ## Related
 
-- index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/security/admission-controller.md|准入控制器]]
+- [[domain-17-system-foundation/topic-dictionary/security/application-security-checklist.md|应用安全清单]]
+- [[domain-17-system-foundation/topic-dictionary/security/athenz.md|Athenz 身份认证与授权]]

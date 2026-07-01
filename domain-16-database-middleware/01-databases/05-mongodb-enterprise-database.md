@@ -69,7 +69,7 @@ MongoDB 是全球领先的文档型 NoSQL 数据库，以其灵活的文档模�
 
 MongoDB 在 K8s 环境中的运维推荐使用 MongoDB Community Operator（开源）或 MongoDB Atlas（云托管）。对于自建场景，需要特别关注 [[StatefulSet|StatefulSet]] 的有序部署、PodDisruptionBudget 的配置、以及 PVC 的存储类选择。
 
-#<!-- chunk: MongoDB 技术架构深度解析 -->## MongoDB 技术架构深度解析
+## MongoDB 技术架构深度解析
 
 MongoDB 的文档模型是其最核心的设计理念。与传统关系型数据库的固定 Schema 不同，MongoDB 使用 BSON（Binary JSON）格式存储数据，支持嵌套文档、数组、多种数据类型（Date、ObjectId、Decimal128、Binary 等）。这种灵活性使得开发者可以在同一个集合中存储结构不同的文档，非常适合快速迭代的互联网应用。然而，灵活性也带来了挑战：缺乏 Schema 约束可能导致数据质量问题，因此生产环境建议使用 JSON Schema Validation 来定义文档结构约束。
 
@@ -83,7 +83,7 @@ MongoDB 的复制机制基于 Oplog（操作日志）实现。Primary 节点将�
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: MongoDB 分片集群架构 -->## MongoDB 分片集群架构
+## MongoDB 分片集群架构
 
 ```mermaid
 graph TB
@@ -146,7 +146,7 @@ graph TB
     S2P --> S2S2
 ```
 
-#<!-- chunk: WiredTiger 存储引擎架构 -->## WiredTiger 存储引擎架构
+## WiredTiger 存储引擎架构
 
 ```mermaid
 graph LR
@@ -187,7 +187,7 @@ graph LR
 
 <!-- chunk: 核心组件配置 -->## 核心组件配置
 
-#<!-- chunk: MongoDB 生产配置文件 -->## MongoDB 生产配置文件
+## MongoDB 生产配置文件
 
 ```yaml
 # mongod.conf - MongoDB 8.0 生产配置（Primary 节点）
@@ -281,7 +281,7 @@ auditLog:
   filter: '{"atype": {"$in": ["authenticate","createCollection","dropCollection","createIndex","dropIndex","createUser","dropUser","grantRole","revokeRole"]}}'
 ```
 
-#<!-- chunk: 副本集初始化脚本 -->## 副本集初始化脚本
+## 副本集初始化脚本
 
 ```javascript
 // rs_init.js - 副本集初始化
@@ -372,7 +372,7 @@ db.createUser({
 });
 ```
 
-#<!-- chunk: 分片集群管理 -->## 分片集群管理
+## 分片集群管理
 
 ```javascript
 // sharding_setup.js - 分片集群设置
@@ -420,7 +420,7 @@ db.chunks.aggregate([
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: 内存参数计算 -->## 内存参数计算
+## 内存参数计算
 
 ```
 MongoDB WiredTiger 内存分配参考（64GB 物理内存）：
@@ -439,7 +439,7 @@ maxIndexBuildMemoryUsageMegabytes = cacheSizeGB × 25% = ~7800MB
 journal commitIntervalMs = 100（平衡性能与安全性）
 ```
 
-#<!-- chunk: 索引优化实践 -->## 索引优化实践
+## 索引优化实践
 
 ```javascript
 // 索引诊断与优化
@@ -484,7 +484,7 @@ db.system.profile.find({
 });
 ```
 
-#<!-- chunk: 查询性能优化 -->## 查询性能优化
+## 查询性能优化
 
 ```javascript
 // 优化前：全表扫描
@@ -527,7 +527,7 @@ db.users.find({}).readPref("nearest", [
 
 <!-- chunk: 高可用与容灾 -->## 高可用与容灾
 
-#<!-- chunk: 跨机房副本集配置 -->## 跨机房副本集配置
+## 跨机房副本集配置
 
 ```javascript
 // 跨机房副本集配置（3 节点 + 1 仲裁者 + 1 延迟节点）
@@ -581,7 +581,7 @@ cfg.settings = {
 rs.reconfig(cfg);
 ```
 
-#<!-- chunk: 故障转移测试 -->## 故障转移测试
+## 故障转移测试
 
 ```bash
 #!/bin/bash
@@ -627,7 +627,7 @@ mongo --eval "
 
 <!-- chunk: 备份恢复 -->## 备份恢复
 
-#<!-- chunk: 生产级备份脚本 -->## 生产级备份脚本
+## 生产级备份脚本
 
 ```bash
 #!/bin/bash
@@ -736,7 +736,7 @@ esac
 
 <!-- chunk: 监控告警 -->## 监控告警
 
-#<!-- chunk: [[Prometheus|Prometheus]] 告警规则 -->## Prometheus 告警规则
+## Prometheus 告警规则
 
 ```yaml
 groups:
@@ -820,7 +820,7 @@ groups:
 
 <!-- chunk: 运维管理 -->## 运维管理
 
-#<!-- chunk: 综合运维脚本 -->## 综合运维脚本
+## 综合运维脚本
 
 ```bash
 #!/bin/bash
@@ -914,14 +914,14 @@ esac
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 1. 文档建模原则 -->## 1. 文档建模原则
+## 1. 文档建模原则
 
 - 嵌入 vs 引用：一对一和一对少量关系嵌入，一对多大量关系引用
 - 文档大小限制 16MB，实际建议 < 100KB
 - 使用 `db.collection.stats()` 监控平均文档大小
 - 避免无限增长的数组字段
 
-#<!-- chunk: 2. 索引设计 ESR 原则 -->## 2. 索引设计 ESR 原则
+## 2. 索引设计 ESR 原则
 
 ```
 复合索引字段顺序: Equality → Sort → Range
@@ -938,7 +938,7 @@ esac
   - 无 Range 字段
 ```
 
-#<!-- chunk: 3. 分片键选择 -->## 3. 分片键选择
+## 3. 分片键选择
 
 | 好的分片键 | 差的分片键 |
 |:---|:---|
@@ -950,7 +950,7 @@ esac
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题速查表 -->## 常见问题速查表
+## 常见问题速查表
 
 | 问题现象 | 可能原因 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
@@ -974,7 +974,7 @@ esac
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-28-enterprise-database-middleware MOC
-- [[domain-16-database-middleware/README|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
+- [[domain-16-database-middleware/README.md|Domain 16: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
 - Domain-28 企业数据库与中间件 — 开源项目索引
 - MySQL 企业级数据库运维管理
 - PostgreSQL 企业级数据库高可用架构

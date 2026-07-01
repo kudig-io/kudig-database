@@ -59,7 +59,7 @@ This document provides comprehensive exploration of Amazon ECR enterprise deploy
 
 <!-- chunk: 1. Amazon ECR Enterprise Architecture -->## 1. Amazon ECR Enterprise Architecture
 
-#<!-- chunk: 1.1 Core Component Architecture -->## 1.1 Core Component Architecture
+## 1.1 Core Component Architecture
 
 ```mermaid
 graph TB
@@ -117,7 +117,7 @@ graph TB
     F --> T
 ```
 
-#<!-- chunk: 1.2 Multi-Account Architecture -->## 1.2 Multi-Account Architecture
+## 1.2 Multi-Account Architecture
 
 ```yaml
 ecr_multi_account:
@@ -172,7 +172,7 @@ ecr_multi_account:
 
 <!-- chunk: 2. Advanced Security Configuration -->## 2. Advanced Security Configuration
 
-#<!-- chunk: 2.1 IAM Policy and Role Configuration -->## 2.1 IAM Policy and Role Configuration
+## 2.1 IAM Policy and Role Configuration
 
 ```json
 {
@@ -229,7 +229,7 @@ ecr_multi_account:
 }
 ```
 
-#<!-- chunk: 2.2 Repository Lifecycle Policies -->## 2.2 Repository Lifecycle Policies
+## 2.2 Repository Lifecycle Policies
 
 ```json
 {
@@ -290,7 +290,7 @@ ecr_multi_account:
 }
 ```
 
-#<!-- chunk: 2.3 Enhanced Security Scanning -->## 2.3 Enhanced Security Scanning
+## 2.3 Enhanced Security Scanning
 
 ```bash
 #!/bin/bash
@@ -413,7 +413,7 @@ EOF
 
 <!-- chunk: 3. Cross-Region and Cross-Account Management -->## 3. Cross-Region and Cross-Account Management
 
-#<!-- chunk: 3.1 Cross-Region Replication Setup -->## 3.1 Cross-Region Replication Setup
+## 3.1 Cross-Region Replication Setup
 
 ```bash
 #!/bin/bash
@@ -498,7 +498,7 @@ failover_to_replica() {
 }
 ```
 
-#<!-- chunk: 3.2 Cross-Account Sharing -->## 3.2 Cross-Account Sharing
+## 3.2 Cross-Account Sharing
 
 ```json
 {
@@ -540,7 +540,7 @@ failover_to_replica() {
 
 <!-- chunk: 4. Monitoring and Governance -->## 4. Monitoring and Governance
 
-#<!-- chunk: 4.1 CloudWatch Monitoring -->## 4.1 CloudWatch Monitoring
+## 4.1 CloudWatch Monitoring
 
 ```json
 {
@@ -565,7 +565,7 @@ failover_to_replica() {
 }
 ```
 
-#<!-- chunk: 4.2 Cost Optimization and Governance -->## 4.2 Cost Optimization and Governance
+## 4.2 Cost Optimization and Governance
 
 ```python
 #!/usr/bin/env python3
@@ -654,7 +654,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 5. Integration with Container Orchestration -->## 5. Integration with Container Orchestration
 
-#<!-- chunk: 5.1 EKS Integration -->## 5.1 EKS Integration
+## 5.1 EKS Integration
 
 ```yaml
 # eks_ecr_integration.yaml
@@ -714,7 +714,7 @@ spec:
         - containerPort: 8080
 ```
 
-#<!-- chunk: 5.2 ECS Integration -->## 5.2 ECS Integration
+## 5.2 ECS Integration
 
 ```json
 {
@@ -760,7 +760,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-22-container-image-management KUDIG Database — Global MOC
-- [[domain-13-container-runtime/README|[[Domain 22: 容器镜像管理 (Container Image Management)|Domain 22: 容器镜像管理 (Container Image Management)]]]]
+- [[domain-13-container-runtime/README.md|[[Domain 22: 容器镜像管理 (Container Image Management)|Domain 22: 容器镜像管理 (Container Image Management)]]]]
 - index.md|Domain-22 容器镜像管理 — 开源项目索引]]
 - Harbor企业级容器镜像仓库深度实践
 - Docker Registry企业级镜像分发深度实践

@@ -7,6 +7,7 @@ severity: "high"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 title: "PVC 一直 Pending，Pod 无法启动 — 远程顾问对话脚本"
 category: dialogue
 tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
@@ -14,7 +15,7 @@ tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 
 # PVC 一直 Pending，Pod 无法启动 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/persistent-volume-claim|PVC]]
+> 对应概念：[[concepts/persistent-volume-claim.md|PVC]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -163,6 +164,9 @@ kubectl get pv -o jsonpath='{range .items[?(@.status.phase=="Available")]}{.meta
 
 #### 方案 A：创建 PV（静态供应）
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -185,6 +189,9 @@ EOF
 
 #### 方案 B：创建或修改 StorageClass
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: storage.k8s.io/v1
@@ -205,6 +212,9 @@ EOF
 
 #### 方案 C：修改 PVC 的 Zone 约束
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch pvc <pvc-name> -n <namespace> --type='merge' -p='{"metadata":{"annotations":{"volume.kubernetes.io/selected-node":null}}}'
 ```
@@ -212,6 +222,9 @@ kubectl patch pvc <pvc-name> -n <namespace> --type='merge' -p='{"metadata":{"ann
 > **如果无法执行**：请删除并重新创建 PVC，或修改 StorageClass 的 `volumeBindingMode` 为 `WaitForFirstConsumer` 以延迟绑定到 Pod 调度后。
 
 #### 方案 D：调整 PVC 容量要求
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 kubectl patch pvc <pvc-name> -n <namespace> --type='merge' -p='{"spec":{"resources":{"requests":{"storage":"<smaller-size>"}}}}'
@@ -231,6 +244,6 @@ kubectl get pvc <pvc-name> -n <namespace> -w
 
 ## 相关概念
 
-- [[concepts/persistent-volume-claim|PVC]]
-- [[concepts/pv|PersistentVolume]]
-- [[concepts/storageclass|StorageClass]]
+- [[concepts/persistent-volume-claim.md|PVC]]
+- [[concepts/pv.md|PersistentVolume]]
+- [[concepts/storageclass.md|StorageClass]]

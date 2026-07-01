@@ -4,21 +4,22 @@ category: dialogue
 tags: [dialogue, remote-advisor, node-notready, skill, k8s, troubleshooting]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 summary: "节点NotReady问题的远程顾问对话脚本，覆盖kubelet、CNI、资源耗尽排查。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL]]"
+  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
     type: uses
-  - target: "[[entities/cilium]]"
+  - target: "[[entities/cilium.md]]"
     type: uses
-  - target: "[[entities/kubernetes]]"
+  - target: "[[entities/kubernetes.md]]"
     type: uses
-  - target: "[[video-scripts/node-notready]]"
+  - target: "[[scripts/video-scripts/node-notready.md]]"
     type: uses
 ---
 
-# [[video-scripts/node-notready|Node NotReady]] 远程顾问对话脚本
+# [[scripts/video-scripts/node-notready.md|Node NotReady]] 远程顾问对话脚本
 
-> 本脚本用于远程顾问指导现场工程师诊断和修复 [[entities/kubernetes|Kubernetes]] 节点 NotReady 问题。
+> 本脚本用于远程顾问指导现场工程师诊断和修复 [[entities/kubernetes.md|Kubernetes]] 节点 NotReady 问题。
 > 顾问无法直接连接集群，所有诊断依赖工程师执行命令并反馈结果。
 
 ---
@@ -303,11 +304,14 @@ kubectl get node <node-name> -o json | jq '.status.conditions'
 
 步骤 1：清理容器镜像和日志（SSH 到节点执行）：
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+
 ```bash
 # 清理未使用的镜像
 crictl rmi --prune
 # 或使用 docker（如果运行时支持）
-docker system prune -a -f
+docker system prune -a -f  # ⚠️ 强制清理，可能杀运行中容器
 
 # 清理日志
 cd /var/log && find . -name '*.log' -size +100M -exec ls -lh {} \;
@@ -341,12 +345,18 @@ kubectl get node <node-name>
 
 步骤 1：重启 kubelet：
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 systemctl restart kubelet
 systemctl status kubelet
 ```
 
 步骤 2：如果 kubelet 重启后仍异常，重启 containerd：
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 systemctl restart containerd
@@ -380,6 +390,9 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 ```
 
 步骤 2：手动触发证书轮转：
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 方法 A：重启 kubelet 自动轮转
@@ -428,6 +441,10 @@ kubectl top pods --all-namespaces --field-selector spec.nodeName=<node-name> --s
 - 如果某个 Pod 内存泄漏 → 重启该 Pod：`kubectl delete pod <pod-name> -n <namespace>`
 - 如果整体内存不足 → 执行节点排空并替换：
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 kubectl cordon <node-name>
 kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data --force
@@ -466,7 +483,7 @@ kubectl get pods -n kube-system | grep -E 'cni|calico|flannel|cilium|weave'
 
 - **Calico**：检查 calico-node Pod 日志，确认 BGP 连接状态
 - **Flannel**：检查 flannel DaemonSet，确认 VXLAN 接口正常
-- **[[entities/cilium|Cilium]]**：检查 cilium-agent Pod，确认 eBPF 状态
+- **[[entities/cilium.md|Cilium]]**：检查 cilium-agent Pod，确认 eBPF 状态
 
 > **如果无法执行 kubectl**：
 > 1. 检查云厂商安全组/ACL 是否有变更
@@ -513,7 +530,7 @@ kubectl run netshoot --rm -it --image nicolaka/netshoot -- /bin/bash
 
 ### 升级话术
 
-顾问："当前情况已超出本 [[skills/skill-k8s-node-notready-SKILL|Skill]] 的自主修复范围，建议立即升级。
+顾问："当前情况已超出本 [[skills/skill-k8s-node-notready-SKILL.md|Skill]] 的自主修复范围，建议立即升级。
 
 **请执行以下操作**：
 1. 通知值班经理 / 高级 SRE 团队
@@ -553,7 +570,7 @@ kubectl run netshoot --rm -it --image nicolaka/netshoot -- /bin/bash
 
 ## 相关案例
 
-- [[synthesis/case-studies/2026-01-15-node-notready-pod-eviction|2026-01-15-node-notready-pod-eviction]]
+- [[concepts/case-studies/2026-01-15-node-notready-pod-eviction.md|2026-01-15-node-notready-pod-eviction]]
 ## Related
 
-- [[entities/kubelet|kubelet]]
+- [[entities/kubelet.md|kubelet]]

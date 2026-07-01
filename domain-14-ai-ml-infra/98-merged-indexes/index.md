@@ -5,6 +5,7 @@ tags: ["index", "domain-14-ai-ml-infra", "navigation"]
 sources: ["auto-generated"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 ---
 
 # Domain 14 内容索引
@@ -114,13 +115,13 @@ updated: 2026-05-21
 
 #### OpenClaw 工作空间
 
-- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/AGENTS|AGENTS]] — AGENTS
-- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/IDENTITY|IDENTITY]] — IDENTITY
-- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/MEMORY|MEMORY]] — MEMORY
-- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/SKILL|SKILL]] — SKILL
-- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/SOUL|SOUL]] — SOUL
-- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/TOOLS|TOOLS]] — TOOLS
-- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/USER|USER]] — USER
+- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/AGENTS.md|AGENTS]] — AGENTS
+- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/IDENTITY.md|IDENTITY]] — IDENTITY
+- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/MEMORY.md|MEMORY]] — MEMORY
+- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/SKILL.md|SKILL]] — SKILL
+- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/SOUL.md|SOUL]] — SOUL
+- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/TOOLS.md|TOOLS]] — TOOLS
+- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/USER.md|USER]] — USER
 
 ### 98 Merged Indexes
 
@@ -188,13 +189,13 @@ updated: 2026-05-21
 
 #### OpenClaw 工作空间
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/AGENTS|AGENTS]] — AGENTS
-- [[domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/IDENTITY|IDENTITY]] — IDENTITY
-- [[domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/MEMORY|MEMORY]] — MEMORY
-- [[domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/SKILL|SKILL]] — SKILL
-- [[domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/SOUL|SOUL]] — SOUL
-- [[domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/TOOLS|TOOLS]] — TOOLS
-- [[domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/USER|USER]] — USER
+- [[domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/AGENTS.md|AGENTS]] — AGENTS
+- [[domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/IDENTITY.md|IDENTITY]] — IDENTITY
+- [[domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/MEMORY.md|MEMORY]] — MEMORY
+- [[domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/SKILL.md|SKILL]] — SKILL
+- [[domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/SOUL.md|SOUL]] — SOUL
+- [[domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/TOOLS.md|TOOLS]] — TOOLS
+- [[domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/USER.md|USER]] — USER
 
 ### AI 编程工具
 
@@ -225,5 +226,5 @@ updated: 2026-05-21
 - [[README]] — README
 
 ## 相关 Domain
-- [[domain-02-workloads-applications/98-merged-indexes/index|Domain 02 工作负载与应用 索引]]
-- [[domain-20-application-patterns/98-merged-indexes/index|Domain 20 应用场景与架构 索引]]
+- [[domain-02-workloads-applications/98-merged-indexes/index.md|Domain 02 工作负载与应用 索引]]
+- [[domain-20-application-patterns/98-merged-indexes/index.md|Domain 20 应用场景与架构 索引]]

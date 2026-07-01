@@ -39,7 +39,7 @@ last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
   - ACK multi-nodepool architecture design
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] node maintenance drain uncordon
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] node maintenance drain uncordon
   - Pod scheduling affinity anti-affinity
   - Kubernetes health probes configuration
   - Cluster autoscaler scaling policy
@@ -180,6 +180,12 @@ kubectl get nodes --show-labels | grep node-type
 
 ### Step 2: 节点运维操作 (40min)
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 2.1 获取 spot 节点名称
 NODE_NAME=$(kubectl get nodes -l node-type=spot -o jsonpath='{.items[0].metadata.name}' 2>/dev/null)
@@ -246,6 +252,9 @@ kubectl taint nodes ${NODE_NAME} maintenance=true:NoExecute-
 ```
 
 ### Step 3: 工作负载部署与调度 (40min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 3.1 部署 Deployment（调度到 app-pool）
@@ -558,6 +567,7 @@ spec:
           limits:
             cpu: 200m
             memory: 128Mi
+
 ```
 
 ---
@@ -610,10 +620,14 @@ spec:
 
 ## 清理资源
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 kubectl delete deployment web-app -n week3-practice
 kubectl delete job batch-job -n week3-practice
-kubectl delete namespace week3-practice
+kubectl delete namespace week3-practice  # ⚠️ 不可逆：永久删除命名空间及全部资源
 # 删除 spot 节点池（可选）
 aliyun cs DELETE /clusters/<cluster_id>/nodepools/<spot-pool-id>
 ```
@@ -626,3 +640,5 @@ aliyun cs DELETE /clusters/<cluster_id>/nodepools/<spot-pool-id>
 - [Pod 调度策略](../../domain-09-workload/05-pod-scheduling-strategies.md)
 - [HPA/VPA 自动伸缩](../../domain-02-workloads-applications/21-hpa-vpa-autoscaling.md)
 - [节点 NotReady 诊断](../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md)
+
+```

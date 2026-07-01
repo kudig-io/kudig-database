@@ -56,6 +56,7 @@ strategy:
   rollingUpdate:
     maxUnavailable: 1
     maxSurge: 1
+
 ```
 
 ### 金丝雀部署（Flagger）
@@ -105,17 +106,18 @@ maxSurge 和 maxUnavailable 配置不当会导致部署时资源不足，Pod 无
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
+- [[concepts/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
 - [[deployment|Deployment]]
-- [[skills/configure-health-probes|[[Configure Health Probes|Configure Health Probes]]]]
-- [[concepts/gitops-principles|[[GitOps 速查卡|GitOps]]ps Principles and Practice|GitOps Principles]]]]
+- [[skills/configure-health-probes.md|[[Configure Health Probes|Configure Health Probes]]]]
+- [[concepts/gitops-principles.md|[[GitOps 速查卡|GitOps]]ps Principles and Practice|GitOps Principles]]]]
 
 ## Related
 
-- [[skills/deployment-workload-selection|deployment-workload-selection]] — 工作负载控制器选型
-- [[skills/configure-health-probes|configure-health-probes]] — Configure Health Probes
+- [[skills/deployment-workload-selection.md|deployment-workload-selection]] — 工作负载控制器选型
+- [[skills/configure-health-probes.md|configure-health-probes]] — Configure Health Probes
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/k8s-production-best-practices|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[concepts/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
 
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/09-canary-bluegreen|Deployment 金丝雀与蓝绿发布模式]]
+- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/09-canary-bluegreen.md|Deployment 金丝雀与蓝绿发布模式]]
+```

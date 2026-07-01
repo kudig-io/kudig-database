@@ -5,6 +5,7 @@ tags: ["core-concept", "domain-03", "visibility/public"]
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 status: reviewed
 ---
 
@@ -71,7 +72,7 @@ NetworkPolicy 的生效完全依赖 CNI 插件的实现。若 CNI 不支持，�
 5. **规则顺序与叠加**：NetworkPolicy 为白名单机制，多条策略叠加时取并集。若 deny-all 策略与 allow 策略同时存在但标签选择器范围不一致，可能导致预期外的放行或拒绝。
 6. **DNS 出站被阻断**：若 deny-all egress 策略生效后 Pod 无法解析域名，需显式放行 CoreDNS 的 53/UDP 与 53/TCP 流量。这是应用 deny-all egress 后最常见的遗漏点。
 
-更多排查细节可参考 [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting|network-policy-troubleshooting]] 与 [[entities/cilium|cilium-network-policy]]。远程顾问应指导用户先确认 CNI 类型，再逐条核对策略规则，避免在错误的假设上消耗排查时间。
+更多排查细节可参考 [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md|network-policy-troubleshooting]] 与 [[entities/cilium.md|cilium-network-policy]]。远程顾问应指导用户先确认 CNI 类型，再逐条核对策略规则，避免在错误的假设上消耗排查时间。
 
 ## 相关概念
 

@@ -100,7 +100,7 @@ k8s_versions:
 
 <!-- chunk: 1. 总体架构 -->## 1. 总体架构
 
-#<!-- chunk: 1.1 可信智能体体系全景 -->## 1.1 可信智能体体系全景
+## 1.1 可信智能体体系全景
 
 ```mermaid
 graph TB
@@ -140,7 +140,7 @@ graph TB
     E3_QC -.-> ENG1
 ```
 
-#<!-- chunk: 1.2 五大产品线智能体矩阵 -->## 1.2 五大产品线智能体矩阵
+## 1.2 五大产品线智能体矩阵
 
 ```mermaid
 graph LR
@@ -161,7 +161,7 @@ graph LR
     Baseline --> Trusted[可信智能体认证<br/>强参考 + 强质检 + 窄口径]
 ```
 
-#<!-- chunk: 1.3 核心设计原则 -->## 1.3 核心设计原则
+## 1.3 核心设计原则
 
 | 原则 | 定义 | 实施手段 | 反模式 |
 |------|------|---------|--------|
@@ -173,7 +173,7 @@ graph LR
 
 <!-- chunk: 2. 语料工程 -->## 2. 语料工程
 
-#<!-- chunk: 2.1 4K 知识语料建设 -->## 2.1 4K 知识语料建设
+## 2.1 4K 知识语料建设
 
 4K 语料指每个产品线构建 **至少 4000 条**结构化知识条目（Knowledge Items），涵盖概念、原理、配置、排障四大类。
 
@@ -213,7 +213,7 @@ graph TB
 | 容器 | 600 | 1000 | 1000 | 1400 | 4000 | TBD |
 | AI | 700 | 800 | 1000 | 1500 | 4000 | TBD |
 
-#<!-- chunk: 2.2 QA 语料建设 -->## 2.2 QA 语料建设
+## 2.2 QA 语料建设
 
 QA 语料是以"问题-回答"对的形式组织的结构化语料，直接映射运维工单的咨询与排障场景。
 
@@ -245,7 +245,7 @@ graph TB
 | 容器 | 1500 | 500 | 300 | 2300 | Q1 |
 | AI | 1000 | 400 | 200 | 1600 | Q2 |
 
-#<!-- chunk: 2.3 语料质检流水线 -->## 2.3 语料质检流水线
+## 2.3 语料质检流水线
 
 ```mermaid
 graph LR
@@ -261,7 +261,7 @@ graph LR
 
 <!-- chunk: 3. Skills 工程 -->## 3. Skills 工程
 
-#<!-- chunk: 3.1 Skills 分类体系 -->## 3.1 Skills 分类体系
+## 3.1 Skills 分类体系
 
 ```mermaid
 graph TB
@@ -303,7 +303,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 3.2 各产品线 Skills 矩阵 -->## 3.2 各产品线 Skills 矩阵
+## 3.2 各产品线 Skills 矩阵
 
 | 产品线 | 诊断类 | 操作类 | 分析类 | 预防类 | 合计 | 优先级 |
 |-------|-------|-------|-------|-------|------|-------|
@@ -313,7 +313,7 @@ graph TB
 | 容器 | 12 | 8 | 5 | 4 | 29 | P0 |
 | AI | 6 | 4 | 4 | 3 | 17 | P1 |
 
-#<!-- chunk: 3.3 Skill 标准化定义模板 -->## 3.3 Skill 标准化定义模板
+## 3.3 Skill 标准化定义模板
 
 ```yaml
 # Skill 定义规范
@@ -360,7 +360,7 @@ skill:
 
 <!-- chunk: 4. Workflow 工程 -->## 4. Workflow 工程
 
-#<!-- chunk: 4.1 运维 Workflow 分类 -->## 4.1 运维 Workflow 分类
+## 4.1 运维 Workflow 分类
 
 ```mermaid
 graph TB
@@ -386,7 +386,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 4.2 故障诊断 Workflow 详细流程 -->## 4.2 故障诊断 Workflow 详细流程
+## 4.2 故障诊断 Workflow 详细流程
 
 ```mermaid
 graph TB
@@ -408,7 +408,7 @@ graph TB
     FEEDBACK --> LEARN[反馈入库<br/>持续优化语料]
 ```
 
-#<!-- chunk: 4.3 应急响应 Workflow -->## 4.3 应急响应 Workflow
+## 4.3 应急响应 Workflow
 
 ```mermaid
 graph TB
@@ -428,7 +428,7 @@ graph TB
 
 <!-- chunk: 5. 评测工程 -->## 5. 评测工程
 
-#<!-- chunk: 5.1 基于工单的评测体系 -->## 5.1 基于工单的评测体系
+## 5.1 基于工单的评测体系
 
 ```mermaid
 graph TB
@@ -454,7 +454,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 5.2 能力基线定义 -->## 5.2 能力基线定义
+## 5.2 能力基线定义
 
 每个产品线智能体必须通过以下能力基线认证，方可上线：
 
@@ -468,7 +468,7 @@ graph TB
 | **用户满意度** | >= 4.0/5.0 | 工单结束后评分 | 分析 Bad Case |
 | **平均处理时长** | <= 人工的 50% | 工单时间戳对比 | 优化 Workflow 路径 |
 
-#<!-- chunk: 5.3 评测流程 — 三级质检机制 -->## 5.3 评测流程 — 三级质检机制
+## 5.3 评测流程 — 三级质检机制
 
 ```mermaid
 graph LR
@@ -494,7 +494,7 @@ graph LR
     L1 --> L2 --> L3
 ```
 
-#<!-- chunk: 5.4 工单分级测评集 -->## 5.4 工单分级测评集
+## 5.4 工单分级测评集
 
 | 难度 | 描述 | 占比 | 示例 |
 |------|------|------|------|
@@ -507,7 +507,7 @@ graph LR
 
 <!-- chunk: 6. 能力提升工程 -->## 6. 能力提升工程
 
-#<!-- chunk: 6.1 三阶段能力提升路线 -->## 6.1 三阶段能力提升路线
+## 6.1 三阶段能力提升路线
 
 ```mermaid
 graph LR
@@ -542,7 +542,7 @@ graph LR
     P5 --> P10 --> P15
 ```
 
-#<!-- chunk: 6.2 短期目标: 基线达标（Q1-Q2） -->## 6.2 短期目标: 基线达标（Q1-Q2）
+## 6.2 短期目标: 基线达标（Q1-Q2）
 
 **目标**: 五大产品线智能体全部通过能力基线认证。
 
@@ -577,7 +577,7 @@ graph TB
 | M5: 灰度上线 | Q2-W6 | 灰度流量开启 | 线上无 P0 事故 |
 | M6: 全量上线 | Q2-W8 | 全量流量切换 | 用户满意度 >= 4.0 |
 
-#<!-- chunk: 6.3 中期目标: 能力优化（Q3） -->## 6.3 中期目标: 能力优化（Q3）
+## 6.3 中期目标: 能力优化（Q3）
 
 **目标**: 提升解决率到 75%+，支持跨产品线关联诊断。
 
@@ -589,7 +589,7 @@ graph TB
 | 多轮对话增强 | 上下文记忆、追问引导、进度跟踪 | 用户体验显著提升 |
 | 跨产品线关联 | 构建产品线间依赖关系图谱 | 复杂故障诊断能力突破 |
 
-#<!-- chunk: 6.4 长期目标: 自主进化（Q4） -->## 6.4 长期目标: 自主进化（Q4）
+## 6.4 长期目标: 自主进化（Q4）
 
 **目标**: 智能体具备自我学习和持续进化能力。
 
@@ -614,7 +614,7 @@ graph TB
 
 <!-- chunk: 7. 产品线分板块规划 -->## 7. 产品线分板块规划
 
-#<!-- chunk: 7.1 IaaS 智能体 -->## 7.1 IaaS 智能体
+## 7.1 IaaS 智能体
 
 ```mermaid
 graph TB
@@ -646,7 +646,7 @@ graph TB
     DISK --> DISK_K --> DISK_S
 ```
 
-#<!-- chunk: 7.2 PaaS 智能体 -->## 7.2 PaaS 智能体
+## 7.2 PaaS 智能体
 
 ```mermaid
 graph TB
@@ -664,7 +664,7 @@ graph TB
     APP --> APP_K[应用知识 1000 条]
 ```
 
-#<!-- chunk: 7.3 数据库智能体 -->## 7.3 数据库智能体
+## 7.3 数据库智能体
 
 ```mermaid
 graph TB
@@ -686,7 +686,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 7.4 容器智能体 -->## 7.4 容器智能体
+## 7.4 容器智能体
 
 ```mermaid
 graph TB
@@ -708,7 +708,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 7.5 AI 智能体 -->## 7.5 AI 智能体
+## 7.5 AI 智能体
 
 ```mermaid
 graph TB
@@ -772,7 +772,7 @@ graph LR
 
 <!-- chunk: 9. 组织保障与资源规划 -->## 9. 组织保障与资源规划
 
-#<!-- chunk: 9.1 组织架构 -->## 9.1 组织架构
+## 9.1 组织架构
 
 | 角色 | 职责 | 人力需求 |
 |------|------|---------|
@@ -784,7 +784,7 @@ graph LR
 | **平台工程师** | RAG 平台、Agent 框架、基础设施 | 3 人 |
 | **各产品线 SME** | 知识审核、测评标注、Bad Case 分析 | 5 人（兼职） |
 
-#<!-- chunk: 9.2 风险与应对 -->## 9.2 风险与应对
+## 9.2 风险与应对
 
 | 风险 | 影响 | 概率 | 应对措施 |
 |------|------|------|---------|
@@ -798,7 +798,7 @@ graph LR
 
 <!-- chunk: 10. 关键指标看板 -->## 10. 关键指标看板
 
-#<!-- chunk: 10.1 运营看板指标 -->## 10.1 运营看板指标
+## 10.1 运营看板指标
 
 ```mermaid
 graph TB
@@ -814,7 +814,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 10.2 各产品线达标跟踪 -->## 10.2 各产品线达标跟踪
+## 10.2 各产品线达标跟踪
 
 | 产品线 | 语料进度 | Skills 进度 | Workflow 进度 | 基线认证 | 上线状态 |
 |-------|---------|-----------|-------------|---------|---------|
@@ -848,17 +848,17 @@ graph TB
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## Related
 

@@ -75,7 +75,7 @@ estimated_read_time: 10min
 intent_queries:
 - 'Domain 27: 多云与混合云架构管理 是什么'
 - '如何 Domain 27: 多云与混合云架构管理'
-- [[entities/kubernetes|kubernetes]] 27 multi cloud hybrid 最佳实践
+- [[entities/kubernetes.md|kubernetes]] 27 multi cloud hybrid 最佳实践
 trigger_keywords:
 - Domain
 - '27:'
@@ -484,6 +484,9 @@ graph TB
 
 ### AWS EKS 快速启动
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 #!/bin/bash
 set -euo pipefail
@@ -651,6 +654,9 @@ echo "=== Alibaba ACK cluster ready ==="
 ```
 
 ### Karmada 多集群联邦快速部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 #!/bin/bash
@@ -855,6 +861,7 @@ document_version_specification:
     - last_updated: YYYY-MM-DD
     - applicable_versions: Product version range
     - maintainer: Team name
+
 ```
 
 ## 多云运维故障排查
@@ -967,3 +974,5 @@ spec:
 **文档版本**: v3.0
 **最后更新**: 2026年5月18日
 **维护者**: 多云与混合云架构团队
+
+```

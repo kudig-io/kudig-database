@@ -77,7 +77,7 @@ graph TD
 
 ## 相关文档
 
-- [[domain-15-specialized-tech/README]]
+- [[domain-15-specialized-tech/README.md|README]]
 - [[KubeEdge]].md]]
 
 
@@ -104,6 +104,6 @@ graph TD
 
 ## Related
 
-- [[references/kudig-metadata-index|README]].md|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[entities/kudig-metadata-index.md|README]].md|README]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - 09-edge-computing-kubeedge

@@ -7,6 +7,7 @@ severity: "medium"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 title: "Pod Security Policy 咨询与迁移 — 远程顾问对话脚本"
 category: dialogue
 tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
@@ -14,7 +15,7 @@ tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 
 # Pod Security Policy 咨询与迁移 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/pod-security-policy|Pod Security Policy]]  
+> 对应概念：[[concepts/pod-security-policy.md|Pod Security Policy]]  
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。  
 > **⚠️ 重要提示**：Pod Security Policy 已于 Kubernetes v1.21 弃用，v1.25 正式移除。本脚本同时覆盖遗留环境排查和迁移指导。
 
@@ -150,6 +151,9 @@ kubectl get events -n <namespace> | grep Forbidden
 
 #### 方案 A：v1.25+ 调整 PSA 级别（推荐）
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 kubectl label ns <namespace> pod-security.kubernetes.io/enforce=baseline --overwrite
 ```
@@ -162,6 +166,9 @@ kubectl get ns <namespace> --show-labels
 ```
 
 #### 方案 B：v1.24 及以下创建 PSP 绑定
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 kubectl create clusterrolebinding psp-<name> --clusterrole=psp:<psp-name> --serviceaccount=<ns>:<sa>
@@ -191,6 +198,7 @@ spec:
     - 'secret'
     - 'downwardAPI'
     - 'persistentVolumeClaim'
+
 ```
 
 > **如果无法执行**：请根据实际需求调整 `volumes` 和 `runAsUser` 规则，然后通过 `kubectl apply -f psp.yaml` 创建。
@@ -199,6 +207,10 @@ spec:
 
 1. 审计现有命名空间的安全需求
 2. 为每个命名空间设置合适的 PSA 标签：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
    ```bash
    kubectl label ns <ns> pod-security.kubernetes.io/enforce=baseline
    kubectl label ns <ns> pod-security.kubernetes.io/warn=restricted
@@ -211,5 +223,7 @@ spec:
 
 ## 相关概念
 
-- [[concepts/pod-security-policy|Pod Security Policy]]
-- [[domain-05-security-compliance/98-merged-indexes/index|安全合规索引]]
+- [[concepts/pod-security-policy.md|Pod Security Policy]]
+- [[domain-05-security-compliance/98-merged-indexes/index.md|安全合规索引]]
+
+```

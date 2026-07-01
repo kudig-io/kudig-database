@@ -62,7 +62,7 @@ This document provides comprehensive exploration of Splunk enterprise log analyt
 
 <!-- chunk: 1. Splunk Enterprise Architecture Deep Dive -->## 1. Splunk Enterprise Architecture Deep Dive
 
-#<!-- chunk: 1.1 Core Component Architecture -->## 1.1 Core Component Architecture
+## 1.1 Core Component Architecture
 
 ```mermaid
 graph TB
@@ -137,7 +137,7 @@ graph TB
     X --> Y
 ```
 
-#<!-- chunk: 1.2 High Availability Deployment -->## 1.2 High Availability Deployment
+## 1.2 High Availability Deployment
 
 ```yaml
 splunk_ha_deployment:
@@ -201,7 +201,7 @@ splunk_ha_deployment:
 
 <!-- chunk: 2. Advanced Log Collection Configuration -->## 2. Advanced Log Collection Configuration
 
-#<!-- chunk: 2.1 Universal Forwarder Deployment -->## 2.1 Universal Forwarder Deployment
+## 2.1 Universal Forwarder Deployment
 
 ```bash
 #!/bin/bash
@@ -262,7 +262,7 @@ sudo /opt/splunkforwarder/bin/splunk start --accept-license --answer-yes --no-pr
 sudo /opt/splunkforwarder/bin/splunk enable boot-start
 ```
 
-#<!-- chunk: 2.2 Heavy Forwarder Configuration -->## 2.2 Heavy Forwarder Configuration
+## 2.2 Heavy Forwarder Configuration
 
 ```ini
 # heavy_forwarder_inputs.conf
@@ -303,7 +303,7 @@ forceTimebasedAutoLB = true
 compressed = true
 ```
 
-#<!-- chunk: 2.3 HTTP Event Collector Configuration -->## 2.3 HTTP Event Collector Configuration
+## 2.3 HTTP Event Collector Configuration
 
 ```bash
 #!/bin/bash
@@ -404,7 +404,7 @@ EOF
 
 <!-- chunk: 3. Advanced Search and Analytics -->## 3. Advanced Search and Analytics
 
-#<!-- chunk: 3.1 SPL (Search Processing Language) Best Practices -->## 3.1 SPL (Search Processing Language) Best Practices
+## 3.1 SPL (Search Processing Language) Best Practices
 
 ```spl
 # 高级SPL查询示例
@@ -465,7 +465,7 @@ index=web_logs sourcetype=nginx:access
 | anomalydetection "transaction_anomalies"
 ```
 
-#<!-- chunk: 3.2 Custom Dashboard Development -->## 3.2 Custom Dashboard Development
+## 3.2 Custom Dashboard Development
 
 ```xml
 <!-- 高级仪表板配置示例 -->
@@ -561,7 +561,7 @@ index=web_logs sourcetype=nginx:access
 
 <!-- chunk: 4. Enterprise Security Implementation -->## 4. Enterprise Security Implementation
 
-#<!-- chunk: 4.1 Splunk Enterprise Security (ES) Configuration -->## 4.1 Splunk Enterprise Security (ES) Configuration
+## 4.1 Splunk Enterprise Security (ES) Configuration
 
 ```bash
 #!/bin/bash
@@ -635,7 +635,7 @@ risk_score = 80
 EOF
 ```
 
-#<!-- chunk: 4.2 Advanced Correlation Searches -->## 4.2 Advanced Correlation Searches
+## 4.2 Advanced Correlation Searches
 
 ```spl
 # 高级威胁关联分析
@@ -689,7 +689,7 @@ index=access_logs
 
 <!-- chunk: 5. Performance Optimization and Scaling -->## 5. Performance Optimization and Scaling
 
-#<!-- chunk: 5.1 Index Optimization Strategies -->## 5.1 Index Optimization Strategies
+## 5.1 Index Optimization Strategies
 
 ```bash
 #!/bin/bash
@@ -753,7 +753,7 @@ top -bn1 | grep "Cpu(s)"
 EOF
 ```
 
-#<!-- chunk: 5.2 Search Performance Optimization -->## 5.2 Search Performance Optimization
+## 5.2 Search Performance Optimization
 
 ```spl
 # 搜索性能优化技巧
@@ -793,7 +793,7 @@ index=large_dataset
 
 <!-- chunk: 6. Integration and Automation -->## 6. Integration and Automation
 
-#<!-- chunk: 6.1 REST API Integration Examples -->## 6.1 REST API Integration Examples
+## 6.1 REST API Integration Examples
 
 ```python
 #!/usr/bin/env python3
@@ -907,7 +907,7 @@ if __name__ == "__main__":
     print(f"Saved search creation: {'Success' if success else 'Failed'}")
 ```
 
-#<!-- chunk: 6.2 Alert Action Scripts -->## 6.2 Alert Action Scripts
+## 6.2 Alert Action Scripts
 
 ```python
 #!/usr/bin/env python3
@@ -1020,7 +1020,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 7. Backup and Disaster Recovery -->## 7. Backup and Disaster Recovery
 
-#<!-- chunk: 7.1 Automated Backup Strategy -->## 7.1 Automated Backup Strategy
+## 7.1 Automated Backup Strategy
 
 ```bash
 #!/bin/bash
@@ -1097,8 +1097,8 @@ echo "Backup completed successfully: $BACKUP_DIR"
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-21-logging-management-analytics MOC
-- [[domain-06-observability/README|Domain 21: 日志管理与分析 (Logging Management & Analytics)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-21 日志管理与分析 — 开源项目索引]]
+- [[domain-06-observability/README.md|Domain 06: 日志管理与分析 (Logging Management & Analytics)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-21 日志管理与分析 — 开源项目索引]]
 - ELK Stack企业级日志管理系统深度实践
 - Fluentd企业级日志收集与处理深度实践
 - Loki Enterprise Log Aggregation and Analytics Platform
@@ -1115,4 +1115,4 @@ echo "Backup completed successfully: $BACKUP_DIR"
 - 06-loggly-cloud-log-management
 - 01-elk-stack-enterprise-logging
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]

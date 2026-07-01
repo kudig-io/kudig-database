@@ -70,7 +70,7 @@ created: "2026-05-23"
 
 <!-- chunk: 网络安全概述 -->## 网络安全概述
 
-#<!-- chunk: 安全三要素 (CIA) -->## 安全三要素 (CIA)
+## 安全三要素 (CIA)
 
 | 要素 | 说明 | 保护措施 |
 |:---|:---|:---|
@@ -78,7 +78,7 @@ created: "2026-05-23"
 | **完整性** | 防止未授权修改 | 哈希、签名 |
 | **可用性** | 保证服务可访问 | 冗余、DDoS 防护 |
 
-#<!-- chunk: 安全层次 -->## 安全层次
+## 安全层次
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -96,7 +96,7 @@ created: "2026-05-23"
 
 <!-- chunk: 常见攻击类型 -->## 常见攻击类型
 
-#<!-- chunk: 攻击分类 -->## 攻击分类
+## 攻击分类
 
 | 攻击类型 | 说明 | 防护措施 |
 |:---|:---|:---|
@@ -107,7 +107,7 @@ created: "2026-05-23"
 | **XSS** | 跨站脚本攻击 | 输入过滤、CSP |
 | **CSRF** | 跨站请求伪造 | Token 验证 |
 
-#<!-- chunk: DDoS 类型 -->## DDoS 类型
+## DDoS 类型
 
 | 类型 | 层次 | 特点 |
 |:---|:---|:---|
@@ -120,7 +120,7 @@ created: "2026-05-23"
 
 <!-- chunk: 防火墙技术 -->## 防火墙技术
 
-#<!-- chunk: 防火墙类型 -->## 防火墙类型
+## 防火墙类型
 
 | 类型 | 说明 | 代表产品 |
 |:---|:---|:---|
@@ -129,7 +129,10 @@ created: "2026-05-23"
 | **应用网关** | 应用层代理 | WAF |
 | **下一代 (NGFW)** | 深度检测 | Palo Alto, Fortinet |
 
-#<!-- chunk: iptables 安全规则 -->## iptables 安全规则
+## iptables 安全规则
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 
 ```bash
 # 默认策略
@@ -157,7 +160,7 @@ iptables -A INPUT -m state --state INVALID -j DROP
 iptables -A INPUT -p tcp --syn -m limit --limit 1/s --limit-burst 3 -j ACCEPT
 ```
 
-#<!-- chunk: 网络分区 -->## 网络分区
+## 网络分区
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -180,7 +183,7 @@ iptables -A INPUT -p tcp --syn -m limit --limit 1/s --limit-burst 3 -j ACCEPT
 
 <!-- chunk: TLS/SSL 加密 -->## TLS/SSL 加密
 
-#<!-- chunk: TLS 握手 -->## TLS 握手
+## TLS 握手
 
 ```
 客户端                                      服务端
@@ -196,7 +199,7 @@ iptables -A INPUT -p tcp --syn -m limit --limit 1/s --limit-burst 3 -j ACCEPT
    │         [开始加密通信]                    │
 ```
 
-#<!-- chunk: TLS 版本 -->## TLS 版本
+## TLS 版本
 
 | 版本 | 状态 | 说明 |
 |:---|:---|:---|
@@ -205,7 +208,7 @@ iptables -A INPUT -p tcp --syn -m limit --limit 1/s --limit-burst 3 -j ACCEPT
 | **TLS 1.2** | 推荐 | 广泛支持 |
 | **TLS 1.3** | 推荐 | 更安全、更快 |
 
-#<!-- chunk: 证书配置 (Nginx) -->## 证书配置 (Nginx)
+## 证书配置 (Nginx)
 
 ```nginx
 server {
@@ -230,7 +233,7 @@ server {
 
 <!-- chunk: VPN 技术 -->## VPN 技术
 
-#<!-- chunk: VPN 类型 -->## VPN 类型
+## VPN 类型
 
 | 类型 | 协议 | 特点 |
 |:---|:---|:---|
@@ -239,7 +242,7 @@ server {
 | **WireGuard** | UDP | 现代、高性能 |
 | **SSL VPN** | HTTPS | 浏览器兼容 |
 
-#<!-- chunk: WireGuard 配置 -->## WireGuard 配置
+## WireGuard 配置
 
 ```ini
 # 服务端 /etc/wireguard/wg0.conf
@@ -272,7 +275,7 @@ wg-quick up wg0
 
 <!-- chunk: 安全最佳实践 -->## 安全最佳实践
 
-#<!-- chunk: 网络安全清单 -->## 网络安全清单
+## 网络安全清单
 
 | 项目 | 措施 |
 |:---|:---|
@@ -283,7 +286,7 @@ wg-quick up wg0
 | 监控告警 | 异常流量检测 |
 | 定期审计 | 规则审查 |
 
-#<!-- chunk: 端口安全 -->## 端口安全
+## 端口安全
 
 ```bash
 # 查看监听端口
@@ -293,7 +296,7 @@ ss -tlnp
 nmap -sT localhost
 ```
 
-#<!-- chunk: 日志监控 -->## 日志监控
+## 日志监控
 
 ```bash
 # 连接日志
@@ -305,9 +308,9 @@ iptables -A INPUT -j LOG --log-prefix "DROPPED: "
 
 <!-- chunk: 零信任网络安全架构 -->## 零信任网络安全架构
 
-#<!-- chunk: 零信任核心原则 -->## 零信任核心原则
+## 零信任核心原则
 
-##<!-- chunk: 零信任架构模型 -->## 零信任架构模型
+## 零信任架构模型
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -335,7 +338,7 @@ iptables -A INPUT -j LOG --log-prefix "DROPPED: "
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: 零信任实施框架 -->## 零信任实施框架
+## 零信任实施框架
 
 | 组件 | 功能 | 技术实现 |
 |:---|:---|:---|
@@ -345,9 +348,9 @@ iptables -A INPUT -j LOG --log-prefix "DROPPED: "
 | **信任评估** | 持续信任评估 | SIEM, UEBA |
 | **日志审计** | 安全事件记录 | ELK, Splunk |
 
-#<!-- chunk: DDoS 防护体系 -->## DDoS 防护体系
+## DDoS 防护体系
 
-##<!-- chunk: DDoS 攻击类型与防护 -->## DDoS 攻击类型与防护
+## DDoS 攻击类型与防护
 
 | 攻击类型 | 特征 | 防护策略 | 推荐工具 |
 |:---|:---|:---|:---|
@@ -356,7 +359,7 @@ iptables -A INPUT -j LOG --log-prefix "DROPPED: "
 | **HTTP Flood** | 应用层攻击 | 请求频率限制、验证码 | Nginx, ModSecurity |
 | **DNS Amplification** | DNS反射放大 | DNS Response Rate Limiting | BIND, PowerDNS |
 
-##<!-- chunk: DDoS 防护架构设计 -->## DDoS 防护架构设计
+## DDoS 防护架构设计
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -379,7 +382,10 @@ iptables -A INPUT -j LOG --log-prefix "DROPPED: "
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: Linux 系统 DDoS 防护配置 -->## Linux 系统 DDoS 防护配置
+## Linux 系统 DDoS 防护配置
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 
 ```bash
 # iptables DDoS 防护规则集
@@ -436,7 +442,7 @@ iptables -A INPUT -p tcp --dport 443 -j DROP
 iptables-save > /etc/iptables/rules.v4
 ```
 
-##<!-- chunk: BGP Flowspec DDoS 防护 -->## BGP Flowspec DDoS 防护
+## BGP Flowspec DDoS 防护
 
 ```bash
 # BGP Flowspec 配置示例
@@ -457,11 +463,11 @@ set protocols bgp group flowspec family inet flowspec
 set protocols bgp group flowspec export DDoS-Protection
 ```
 
-#<!-- chunk: 安全运营最佳实践 -->## 安全运营最佳实践
+## 安全运营最佳实践
 
-##<!-- chunk: 安全监控体系 -->## 安全监控体系
+## 安全监控体系
 
-###<!-- chunk: 日志收集与分析架构 -->## 日志收集与分析架构
+## 日志收集与分析架构
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -485,7 +491,7 @@ set protocols bgp group flowspec export DDoS-Protection
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: 安全监控脚本 -->## 安全监控脚本
+## 安全监控脚本
 
 ```bash
 #!/bin/bash
@@ -606,7 +612,7 @@ while true; do
 done
 ```
 
-##<!-- chunk: 安全合规检查清单 -->## 安全合规检查清单
+## 安全合规检查清单
 
 ```bash
 #!/bin/bash
@@ -716,4 +722,6 @@ echo "安全合规检查完成，报告已生成: $REPORT_FILE"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+```

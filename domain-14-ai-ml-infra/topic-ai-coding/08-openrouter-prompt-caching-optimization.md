@@ -285,7 +285,7 @@ console.log('Remaining:', keyInfo.data.limit_remaining);
 | [04 - 智能路由](./04-openrouter-provider-routing.md) | Sticky Routing 与路由策略 |
 | [03 - 模型与 Provider](./03-openrouter-models-providers.md) | 模型定价与成本比较 |
 | [12 - 企业级实践](./12-openrouter-enterprise-advanced.md) | Credits 管理与生产最佳实践 |
-| [11 - 安全与隐私](./11-openrouter-[[domain-05-security-compliance/README|security]]-privacy.md) | BYOK 与数据治理 |
+| [11 - 安全与隐私](./11-openrouter-[[domain-05-security-compliance/README.md|security]]-privacy.md) | BYOK 与数据治理 |
 
 ---
 

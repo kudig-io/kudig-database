@@ -87,5 +87,5 @@ created: "2026-05-23"
 
 ## 相关
 
-- [[domain-09-reliability-engineering/05-chaos-engineering/03-chaos-experiment-design]]
-- [[domain-09-reliability-engineering/08-performance-testing/01-load-testing-methodology]]
+- [[domain-09-reliability-engineering/05-chaos-engineering/03-chaos-experiment-design.md|03 chaos experiment design]]
+- [[domain-09-reliability-engineering/08-performance-testing/01-load-testing-methodology.md|01 load testing methodology]]

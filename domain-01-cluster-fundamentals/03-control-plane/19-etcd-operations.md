@@ -74,7 +74,7 @@ created: "2026-05-23"
 
 # 30 - etcd运维操作
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/etcd|etcd]].io/docs](https://etcd.io/docs/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/etcd.md|etcd]].io/docs](https://etcd.io/docs/)
 
 <!-- chunk: etcd集群规格建议 -->
 ## etcd集群规格建议
@@ -158,6 +158,10 @@ etcdctl snapshot status /backup/etcd-*.db -w table
 ```
 
 ### 恢复命令
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+
 ```bash
 # 停止API Server
 # 恢复快照(每个节点执行不同参数)
@@ -233,22 +237,29 @@ etcdctl alarm disarm
 <!-- chunk: 成员管理操作 -->
 ## 成员管理操作
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+
 ```bash
 # 添加成员
 etcdctl member add etcd-3 --peer-urls=https://10.0.0.4:2380
 
 # 移除成员
-etcdctl member remove <member_id>
+etcdctl member remove <member_id>  # ⚠️ 移除 etcd 成员，可能丢数据
 
 # 更新成员
 etcdctl member update <member_id> --peer-urls=https://10.0.0.4:2380
 
 # 强制移除成员(仅紧急情况)
-etcdctl member remove <member_id> --force
+etcdctl member remove <member_id> --force  # ⚠️ 移除 etcd 成员，可能丢数据
 ```
 
 <!-- chunk: 灾难恢复操作 -->
 ## 灾难恢复操作
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -482,6 +493,9 @@ groups:
 
 ### 集群成员管理
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+
 ```bash
 # 查看成员列表
 etcdctl member list -w table
@@ -490,13 +504,16 @@ etcdctl member list -w table
 etcdctl member add etcd-3 --peer-urls=https://10.0.0.3:2380
 
 # 移除成员 (缩容)
-etcdctl member remove <member-id>
+etcdctl member remove <member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
 
 # 更新成员地址
 etcdctl member update <member-id> --peer-urls=https://10.0.0.3:2380
 ```
 
 ### 数据备份与恢复
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
 ```bash
 # 创建快照 (在线备份)
@@ -596,7 +613,7 @@ etcdctl get /registry/leases --prefix --keys-only
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - index.md|Domain-3 控制平面 — 开源项目索引]]
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -617,4 +634,6 @@ etcdctl get /registry/leases --prefix --keys-only
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+```

@@ -28,13 +28,14 @@ prerequisites:
 - cloud-provider-basics
 - gpu-scheduling-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Node Resource Managers（节点资源管理器）
 
 ## 概述
 
-为了支持对延迟敏感（latency-critical）和高吞吐量（high-throughput）的工作负载，[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 提供了一套节点资源管理器（Node Resource Managers）。这些管理器旨在协调和优化节点上为 Pod 分配 CPU、设备（devices）和内存（大页，hugepages）资源时的对齐方式，以最大程度地提升工作负载性能。
+为了支持对延迟敏感（latency-critical）和高吞吐量（high-throughput）的工作负载，[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 提供了一套节点资源管理器（Node Resource Managers）。这些管理器旨在协调和优化节点上为 Pod 分配 CPU、设备（devices）和内存（大页，hugepages）资源时的对齐方式，以最大程度地提升工作负载性能。
 
 ## 核心概念/原理
 
@@ -116,3 +117,9 @@ Memory Manager 为 **Guaranteed** QoS 类别的 Pod 分配 RAM（内存和可选
 ## 参考链接
 
 - [Kubernetes 官方文档 - Node Resource Managers](https://kubernetes.io/docs/concepts/policy/node-resource-managers/)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/security/admission-controller.md|准入控制器]]
+- [[domain-17-system-foundation/topic-dictionary/security/application-security-checklist.md|应用安全清单]]
+- [[domain-17-system-foundation/topic-dictionary/security/athenz.md|Athenz 身份认证与授权]]

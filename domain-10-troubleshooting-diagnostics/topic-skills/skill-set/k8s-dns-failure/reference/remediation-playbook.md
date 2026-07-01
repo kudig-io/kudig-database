@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-dns-failure"
 created: "2026-05-22"
 updated: "2026-05-22"
+last_updated: 2026-05-22
 tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
@@ -13,12 +14,19 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
 
 ### 修复 1：重启 [[CoreDNS|CoreDNS]]
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 kubectl rollout restart deployment coredns -n kube-system
 kubectl rollout status deployment coredns -n kube-system
 ```
 
 ### 修复 2：修正 CoreDNS ConfigMap
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 kubectl get configmap coredns -n kube-system -o yaml
@@ -29,11 +37,17 @@ kubectl rollout restart deployment coredns -n kube-system
 
 ### 修复 3：扩大 CoreDNS 资源
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch deployment coredns -n kube-system -p '{"spec":{"template":{"spec":{"containers":[{"name":"coredns","resources":{"limits":{"memory":"256Mi","cpu":"500m"}}}]}}}}'
 ```
 
 ### 修复 4：修正 Pod DNS 配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 kubectl patch pod <pod> --type merge -p '{"spec":{"dnsPolicy":"ClusterFirst","dnsConfig":{"nameservers":["10.96.0.10"],"searches":["default.svc.cluster.local","svc.cluster.local","cluster.local"]}}}'

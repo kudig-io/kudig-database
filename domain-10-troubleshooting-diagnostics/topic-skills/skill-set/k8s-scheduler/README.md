@@ -5,6 +5,7 @@ tags: ["skill", "domain-10", "visibility/public"]
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 status: reviewed
 ---
 
@@ -59,6 +60,6 @@ kubectl get node <node-name> -o jsonpath='{.spec.taints}{.metadata.labels}'
 
 ## 相关概念
 
-- [[concepts/kube-scheduler|Kube Scheduler]] — Kubernetes 调度器原理、算法与扩展机制
-- [[concepts/node-lifecycle-management|节点生命周期管理]] — 节点注册、状态维护与驱逐机制
-- [[concepts/resource-management|资源管理]] — Kubernetes 资源请求、限制与配额管理
+- [[concepts/kube-scheduler.md|Kube Scheduler]] — Kubernetes 调度器原理、算法与扩展机制
+- [[concepts/node-lifecycle-management.md|节点生命周期管理]] — 节点注册、状态维护与驱逐机制
+- [[concepts/resource-management.md|资源管理]] — Kubernetes 资源请求、限制与配额管理

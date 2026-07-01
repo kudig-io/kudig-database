@@ -1,0 +1,9 @@
+schema_version: 1
+module_path: cluster_and_workloads
+title: Kubernetes 集群架构与工作负载管理
+scope:
+    - domain-01-cluster-fundamentals/
+    - domain-02-workloads-applications/
+source_files: []
+depends_on: []
+related_to: []

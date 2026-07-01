@@ -365,6 +365,10 @@ spec:
 <!-- chunk: 声明式 vs 命令式 -->
 ## 声明式 vs 命令式
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                      声明式(Declarative) vs 命令式(Imperative)               │
@@ -864,7 +868,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-2: Kubernetes 设计原则与核心机制]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
 - Domain-2 设计原则 — 开源项目索引
 - 声明式 API 与面向终态设计
 - 控制器模式与调谐循环
@@ -883,7 +887,7 @@ spec:
 - 架构全景图
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-01-cluster-fundamentals
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 

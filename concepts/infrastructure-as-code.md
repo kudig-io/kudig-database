@@ -1,6 +1,6 @@
 ---
 title: Infrastructure as Code
-description: '- [[synthesis/IaC x 多集群管理|IaC x 多集群管理]] — synthesis'
+description: '- [[concepts/IaC x 多集群管理.md|IaC x 多集群管理]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -52,7 +52,7 @@ created: "2026-05-23"
 
 **Modular Design**: Break infrastructure into reusable modules (networking, compute, storage). Each module has inputs, outputs, and internal resource definitions. Enables consistent patterns across environments.
 
-**State Management**: IaC tools track actual vs desired state. Terraform stores state in backends (S3+DynamoDB for locking, Terraform Cloud for team collaboration). Crossplane stores state in K8s etcd, naturally integrating with [[concepts/gitops-principles|GitOps]].
+**State Management**: IaC tools track actual vs desired state. Terraform stores state in backends (S3+DynamoDB for locking, Terraform Cloud for team collaboration). Crossplane stores state in K8s etcd, naturally integrating with [[concepts/gitops-principles.md|GitOps]].
 
 **Policy as Code**: Enforce infrastructure standards through automated policy checks:
 - **Sentinel**: HashiCorp policy framework (Terraform Enterprise)
@@ -78,19 +78,19 @@ Crossplane extends K8s API with custom resources for cloud infrastructure. A `Bu
 
 - [[helm]] — Helm
 - [[etcd]] — etcd
-- [[entities/argocd|argocd]] — ArgoCD
-- [[concepts/platform-engineering-idp|platform-engineering-idp]] — Platform Engineering and Internal Developer Platforms
+- [[entities/argocd.md|argocd]] — ArgoCD
+- [[concepts/platform-engineering-idp.md|platform-engineering-idp]] — Platform Engineering and Internal Developer Platforms
 - [[crossplane]] — Crossplane
-- [[concepts/gitops-principles|GitOps Principles]]
-- [[concepts/platform-engineering-idp|Platform Engineering and IDP]]
+- [[concepts/gitops-principles.md|GitOps Principles]]
+- [[concepts/platform-engineering-idp.md|Platform Engineering and IDP]]
 - [[crossplane|Crossplane]]
-- [[synthesis/IaC x 多集群管理|IaC x 多集群管理]] — synthesis
+- [[concepts/IaC x 多集群管理.md|IaC x 多集群管理]] — synthesis
 
 - 05-crossplane-enterprise-orchestration
 - 99-crossplane-platform-guide
 - 00-open-source-projects-index
 - 11-infrastructure-as-code
-- [[domain-08-release-change-management/README|Domain 24: 基础设施即代码 (Infrastructure as Code)]]
+- [[domain-08-release-change-management/README.md|Domain 08: 基础设施即代码 (Infrastructure as Code)]]
 - 03-pulumi-enterprise-iac
 - 02-ansible-enterprise-automation
 - 04-azure-resource-manager-enterprise

@@ -42,7 +42,7 @@ title: Day 8: 集群RBAC
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - "[[entities/kubernetes|kubernetes]] RBAC"
+  - "[[entities/kubernetes.md|kubernetes]] RBAC"
   - "Role ClusterRole"
   - "RoleBinding"
   - "权限配置"
@@ -212,6 +212,9 @@ kubectl auth can-i get secrets -n kube-system
 
 ### 任务 2: 创建自定义 RBAC (45min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建测试 Namespace
 kubectl create namespace rbac-test
@@ -271,6 +274,9 @@ kubectl get role,rolebinding -n rbac-test
 ```
 
 ### 任务 3: 验证 RBAC 权限 (45min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 使用 dev-user 身份测试权限（模拟 ServiceAccount 访问）
@@ -359,6 +365,11 @@ kubectl auth can-i get pods -n default --as=system:serviceaccount:rbac-test:dev-
 
 ### 任务 4: ACK RBAC 最佳实践 (30min)
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 查看 ACK 集群中的自定义 ClusterRole
 kubectl get clusterroles | grep -v "system:" | grep -v "kubernetes"
@@ -434,7 +445,7 @@ kubectl get clusterrolebinding -o json | \
   jq -r '.items[] | select(.roleRef.name=="cluster-admin") | .subjects[]? | "\(.kind)/\(.name)"'
 
 # 清理测试资源
-kubectl delete namespace rbac-test
+kubectl delete namespace rbac-test  # ⚠️ 不可逆：永久删除命名空间及全部资源
 kubectl delete clusterrole ops-engineer
 kubectl delete clusterrolebinding ops-engineer-binding
 ```

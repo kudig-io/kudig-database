@@ -27,13 +27,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Liveness, Readiness, and Startup Probes
 
 ## 概述
 
-[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 提供三种探针（Probe）来持续监控 Pod 中容器的健康状态。根据探针返回的结果，Kubernetes 可以决定是否需要重启不健康的容器，或者是否将流量路由到尚未就绪的容器。这三种探针分别是：Startup Probe（启动探针）、Liveness Probe（存活探针）和 Readiness Probe（就绪探针）。
+[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 提供三种探针（Probe）来持续监控 Pod 中容器的健康状态。根据探针返回的结果，Kubernetes 可以决定是否需要重启不健康的容器，或者是否将流量路由到尚未就绪的容器。这三种探针分别是：Startup Probe（启动探针）、Liveness Probe（存活探针）和 Readiness Probe（就绪探针）。
 
 ## 核心概念/原理
 
@@ -242,6 +243,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Pod 探针配置
 kubectl get pod <pod-name> -o jsonpath='{.spec.containers[0].livenessProbe}' | jq .
@@ -261,10 +265,16 @@ kubectl get pods --field-selector=status.phase=Running -o json | jq '.items[] | 
 
 ## 交叉引用
 
-- [[domain-17-system-foundation/topic-dictionary/configuration/configmaps|ConfigMaps]]](./configmaps.md) — 探针端口/路径可通过 ConfigMap 配置化
+- [[domain-17-system-foundation/topic-dictionary/configuration/configmaps.md|ConfigMaps]]](./configmaps.md) — 探针端口/路径可通过 ConfigMap 配置化
 - [Pod 和容器的资源管理](./resource-management-for-pods-and-containers.md) — 资源不足可导致探针超时
 - [Secrets](./secrets.md) — 需要认证的探针端点可使用 Secret 中的凭据
 
 ## 参考链接
 
 - [Kubernetes 官方文档 - Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/configuration/configmap.md|配置映射]]
+- [[domain-17-system-foundation/topic-dictionary/configuration/configmaps.md|ConfigMaps]]
+- [[domain-17-system-foundation/topic-dictionary/configuration/env.md|环境变量配置]]

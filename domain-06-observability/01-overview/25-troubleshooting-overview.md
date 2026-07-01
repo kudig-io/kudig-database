@@ -243,6 +243,7 @@ kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{range .spec.volumes[*]}{.p
 # 7. 节点Taint
 echo -e "\n=== 节点Taint ==="
 kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
+
 ```
 
 ### Pod CrashLoopBackOff 深度排查
@@ -389,6 +390,7 @@ if [ -n "$NODE" ]; then
   echo -e "\n=== 节点 $NODE 上的镜像 ==="
   kubectl debug node/$NODE -it --image=busybox -- crictl images 2>/dev/null | head -20
 fi
+
 ```
 
 ### Pod网络故障排查
@@ -493,6 +495,9 @@ EOF
 
 #### 资源压力缓解脚本
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
 #!/bin/bash
 # node-pressure-relief.sh - 节点资源压力缓解
@@ -518,7 +523,7 @@ crictl rmi --prune
 find /var/log -name "*.log" -mtime +7 -delete
 
 # 清理kubelet临时文件
-rm -rf /var/lib/kubelet/pods/*/volumes/kubernetes.io~empty-dir/*/lost+found
+rm -rf /var/lib/kubelet/pods/*/volumes/kubernetes.io~empty-dir/*/lost+found  # ⚠️ 删除系统/数据文件
 EOF
 
 # 3. MemoryPressure缓解
@@ -589,6 +594,7 @@ echo -e "\n=== 连通性测试命令 ==="
 SVC_IP=$(kubectl get svc $SVC_NAME -n $NAMESPACE -o jsonpath='{.spec.clusterIP}')
 SVC_PORT=$(kubectl get svc $SVC_NAME -n $NAMESPACE -o jsonpath='{.spec.ports[0].port}')
 echo "kubectl run test-conn --rm -it --image=curlimages/curl --restart=Never -- curl -v http://$SVC_IP:$SVC_PORT"
+
 ```
 
 ### DNS故障排查
@@ -1237,10 +1243,6 @@ done
 | 问题类型 | 描述 | 影响范围 | 解决方案 |
 |:---|:---|:---|:---|
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 | **PSP移除** | PodSecurityPolicy完全移除 | 安全策略 | 迁移到PSS |
 | **Ephemeral Containers GA** | 临时容器正式发布 | Pod调试 | 使用kubectl debug |
 | **CronJob时区** | 时区支持正式发布 | 定时任务 | 配置.spec.timeZone |
@@ -1661,6 +1663,7 @@ spec:
 │     │  - 预防措施                                                           │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
+
 ```
 
 ### 快速恢复Checklist
@@ -1676,6 +1679,11 @@ spec:
 | **存储挂载问题** | 重启CSI驱动，检查后端存储 | 10-30min |
 
 ### 值班工程师快速参考
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # ========== 紧急问题快速诊断命令 ==========
@@ -1705,7 +1713,7 @@ kubectl run dns-test --rm -it --image=busybox:1.36 --restart=Never -- nslookup k
 kubectl rollout undo deployment/<name> -n <namespace>
 
 # 9. 强制删除卡住的Pod
-kubectl delete pod <pod> -n <namespace> --grace-period=0 --force
+kubectl delete pod <pod> -n <namespace> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 10. 节点维护
 kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
@@ -1736,8 +1744,8 @@ kubectl uncordon <node>
 ## Obsidian 相关文档
 
 - domain-06-observability MOC
-- [[domain-06-observability/README|Observability Domain (可观测性领域)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-8 可观测性 — 开源项目索引]]
+- [[domain-06-observability/README.md|Observability Domain (可观测性领域)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
 - 03 - 日志收集架构详解 (Logging Architecture)
@@ -1747,15 +1755,15 @@ kubectl uncordon <node>
 - 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)
 - 08 - 日志审计与合规管理 (Logging Auditing & Compliance)
 - 05 - 事件与审计日志管理 (Events & Audit Logs)
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## Related
 
 - [[kudig-prompts-catalog]]
 
-- [[domain-06-observability/README|返回目录]]- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-06-observability/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ## See Also
 
@@ -1763,3 +1771,5 @@ kubectl uncordon <node>
 - 24-observability-tool-ecosystem
 - 26-troubleshooting-tools
 - 27-performance-profiling-tools
+
+```

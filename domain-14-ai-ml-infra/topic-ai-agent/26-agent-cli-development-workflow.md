@@ -91,7 +91,7 @@ k8s_versions:
 
 <!-- chunk: 1. 项目配置与自定义指令 -->## 1. 项目配置与自定义指令
 
-#<!-- chunk: 1.1 项目指令文件（Custom Instructions） -->## 1.1 项目指令文件（Custom Instructions）
+## 1.1 项目指令文件（Custom Instructions）
 
 项目指令文件是 Agent CLI 生产力的**最大杠杆点**——它将团队约定、架构决策和代码规范"灌输"给 Agent，避免重复解释。
 
@@ -106,7 +106,7 @@ k8s_versions:
 | Aider | `.aider.conf.yml` | 项目根目录 | 项目配置 |
 | Goose | `.goosehints` | 项目根目录 | 项目提示 |
 
-#<!-- chunk: 1.2 高效指令文件模板 -->## 1.2 高效指令文件模板
+## 1.2 高效指令文件模板
 
 以下是一个经过生产验证的 CLAUDE.md 模板：
 
@@ -142,7 +142,7 @@ k8s_versions:
 - `make dev` — 本地开发环境
 ```
 
-#<!-- chunk: 1.3 指令文件分层策略 -->## 1.3 指令文件分层策略
+## 1.3 指令文件分层策略
 
 ```
 项目根目录/
@@ -166,7 +166,7 @@ k8s_versions:
 
 <!-- chunk: 2. 典型开发场景工作流 -->## 2. 典型开发场景工作流
 
-#<!-- chunk: 2.1 新功能开发 -->## 2.1 新功能开发
+## 2.1 新功能开发
 
 ```mermaid
 graph TB
@@ -207,7 +207,7 @@ graph TB
 > 覆盖: 正常流程、Token 过期、无效签名、已撤销 Token
 ```
 
-#<!-- chunk: 2.2 Bug 修复 -->## 2.2 Bug 修复
+## 2.2 Bug 修复
 
 **高效 Bug 修复工作流**：
 
@@ -246,7 +246,7 @@ Bug 信息:
 5. 添加回归测试用例
 ```
 
-#<!-- chunk: 2.3 代码重构 -->## 2.3 代码重构
+## 2.3 代码重构
 
 ```bash
 # 大范围重构指令示例
@@ -262,7 +262,7 @@ Bug 信息:
 > - 每个 Service 重构后运行测试确认
 ```
 
-#<!-- chunk: 2.4 代码审查辅助 -->## 2.4 代码审查辅助
+## 2.4 代码审查辅助
 
 ```bash
 # 审查 Git diff
@@ -283,7 +283,7 @@ Bug 信息:
 
 <!-- chunk: 3. Prompt Engineering for Agent CLI -->## 3. Prompt Engineering for Agent CLI
 
-#<!-- chunk: 3.1 高效 Prompt 原则 -->## 3.1 高效 Prompt 原则
+## 3.1 高效 Prompt 原则
 
 | 原则 | 说明 | 示例 |
 |------|------|------|
@@ -293,7 +293,7 @@ Bug 信息:
 | **示例化** | 提供输入/输出示例 | "参考 UserService 的实现模式" |
 | **可验证** | 定义成功标准 | "修改后所有现有测试仍然通过" |
 
-#<!-- chunk: 3.2 常用 Prompt 模板 -->## 3.2 常用 Prompt 模板
+## 3.2 常用 Prompt 模板
 
 **架构分析**：
 ```
@@ -323,7 +323,7 @@ Bug 信息:
 5. 输出安全审计报告 (按风险等级排序)
 ```
 
-#<!-- chunk: 3.3 反模式与避坑 -->## 3.3 反模式与避坑
+## 3.3 反模式与避坑
 
 | 反模式 | 问题 | 改进 |
 |--------|------|------|
@@ -337,7 +337,7 @@ Bug 信息:
 
 <!-- chunk: 4. 上下文管理技巧 -->## 4. 上下文管理技巧
 
-#<!-- chunk: 4.1 高效传递上下文 -->## 4.1 高效传递上下文
+## 4.1 高效传递上下文
 
 ```bash
 # 方式 1: 指定文件
@@ -356,7 +356,7 @@ $ git log --oneline -20 | claude -p "总结最近 20 个 commit 的主题"
 > 列出文件和关键函数
 ```
 
-#<!-- chunk: 4.2 长会话管理 -->## 4.2 长会话管理
+## 4.2 长会话管理
 
 | 策略 | 适用场景 | 操作 |
 |------|---------|------|
@@ -365,7 +365,7 @@ $ git log --oneline -20 | claude -p "总结最近 20 个 commit 的主题"
 | **任务拆分** | 复杂任务 | 每个子任务独立会话 |
 | **检查点** | 关键节点 | "确认当前状态，列出已完成和待完成的工作" |
 
-#<!-- chunk: 4.3 利用 Agent 记忆 -->## 4.3 利用 Agent 记忆
+## 4.3 利用 Agent 记忆
 
 ```bash
 # Claude Code: 利用 CLAUDE.md 作为持久记忆
@@ -383,7 +383,7 @@ $ git log --oneline -20 | claude -p "总结最近 20 个 commit 的主题"
 
 <!-- chunk: 5. Git 集成工作流 -->## 5. Git 集成工作流
 
-#<!-- chunk: 5.1 分支管理 -->## 5.1 分支管理
+## 5.1 分支管理
 
 ```bash
 # 基于 Issue 创建分支
@@ -398,7 +398,7 @@ $ git log --oneline -20 | claude -p "总结最近 20 个 commit 的主题"
 > - 重写 commit message 为 Conventional Commits 格式
 ```
 
-#<!-- chunk: 5.2 Commit Message 生成 -->## 5.2 Commit Message 生成
+## 5.2 Commit Message 生成
 
 ```bash
 # 自动生成 commit message
@@ -417,7 +417,7 @@ $ git diff --staged | claude -p "根据 Conventional Commits 规范生成 commit
 # - Update auth middleware to handle expired access tokens
 ```
 
-#<!-- chunk: 5.3 PR 描述生成 -->## 5.3 PR 描述生成
+## 5.3 PR 描述生成
 
 ```bash
 # 生成 PR 描述
@@ -431,7 +431,7 @@ $ git diff --staged | claude -p "根据 Conventional Commits 规范生成 commit
 
 <!-- chunk: 6. 团队协作规范 -->## 6. 团队协作规范
 
-#<!-- chunk: 6.1 Agent CLI 团队使用规范 -->## 6.1 Agent CLI 团队使用规范
+## 6.1 Agent CLI 团队使用规范
 
 | 规范项 | 要求 | 理由 |
 |--------|------|------|
@@ -442,7 +442,7 @@ $ git diff --staged | claude -p "根据 Conventional Commits 规范生成 commit
 | **commit 标记** | 可选标记 Agent 辅助的 commit | 可追溯性 |
 | **敏感数据** | 禁止在 Prompt 中包含密钥/密码 | 安全要求 |
 
-#<!-- chunk: 6.2 知识沉淀与共享 -->## 6.2 知识沉淀与共享
+## 6.2 知识沉淀与共享
 
 ```
 ┌──────────────────────────────────────────┐
@@ -464,7 +464,7 @@ $ git diff --staged | claude -p "根据 Conventional Commits 规范生成 commit
 
 <!-- chunk: 7. 性能优化技巧 -->## 7. 性能优化技巧
 
-#<!-- chunk: 7.1 减少 Token 消耗 -->## 7.1 减少 Token 消耗
+## 7.1 减少 Token 消耗
 
 | 技巧 | 节省效果 | 实施方式 |
 |------|---------|---------|
@@ -473,7 +473,7 @@ $ git diff --staged | claude -p "根据 Conventional Commits 规范生成 commit
 | **利用指令文件** | ~15% | 减少重复上下文 |
 | **及时结束会话** | ~25% | 避免过长历史累积 |
 
-#<!-- chunk: 7.2 提升响应速度 -->## 7.2 提升响应速度
+## 7.2 提升响应速度
 
 ```bash
 # 技巧 1: 预加载上下文
@@ -494,7 +494,7 @@ $ git diff --staged | claude -p "根据 Conventional Commits 规范生成 commit
 
 <!-- chunk: 8. 实战场景集锦 -->## 8. 实战场景集锦
 
-#<!-- chunk: 8.1 K8s 运维场景 -->## 8.1 K8s 运维场景
+## 8.1 K8s 运维场景
 
 ```bash
 # 场景: Pod CrashLoopBackOff 诊断
@@ -513,7 +513,7 @@ $ git diff --staged | claude -p "根据 Conventional Commits 规范生成 commit
 > 3. 检查是否触及 maxReplicas 或资源配额
 ```
 
-#<!-- chunk: 8.2 数据库迁移场景 -->## 8.2 数据库迁移场景
+## 8.2 数据库迁移场景
 
 ```bash
 # 场景: 数据库 Schema 迁移
@@ -525,7 +525,7 @@ $ git diff --staged | claude -p "根据 Conventional Commits 规范生成 commit
 > 5. 确保 Up/Down 迁移都可执行
 ```
 
-#<!-- chunk: 8.3 API 开发场景 -->## 8.3 API 开发场景
+## 8.3 API 开发场景
 
 ```bash
 # 场景: 根据 OpenAPI Spec 生成代码
@@ -569,17 +569,17 @@ Agent CLI 的最佳实践可归纳为三个层次：
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 

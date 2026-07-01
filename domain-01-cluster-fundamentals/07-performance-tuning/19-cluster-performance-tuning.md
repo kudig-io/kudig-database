@@ -102,9 +102,9 @@ k8s_versions:
 
 <!-- chunk: ⚡ 内核参数优化 -->## ⚡ 内核参数优化
 
-#<!-- chunk: 系统级性能调优 -->## 系统级性能调优
+## 系统级性能调优
 
-##<!-- chunk: 1. 网络性能优化 -->## 1. 网络性能优化
+## 1. 网络性能优化
 ```bash
 #!/bin/bash
 # 网络性能优化脚本
@@ -152,7 +152,7 @@ ethtool -K $INTERFACE tso on
 ethtool -K $INTERFACE lro on
 ```
 
-##<!-- chunk: 2. 文件系统优化 -->## 2. 文件系统优化
+## 2. 文件系统优化
 ```bash
 #!/bin/bash
 # 文件系统性能优化
@@ -187,7 +187,7 @@ root hard nofile 1048576
 EOF
 ```
 
-##<!-- chunk: 3. 内存管理优化 -->## 3. 内存管理优化
+## 3. 内存管理优化
 ```bash
 #!/bin/bash
 # 内存性能优化
@@ -219,9 +219,9 @@ echo never > /sys/kernel/mm/transparent_hugepage/defrag
 echo never > /sys/kernel/mm/transparent_hugepage/enabled
 ```
 
-#<!-- chunk: 容器运行时优化 -->## 容器运行时优化
+## 容器运行时优化
 
-##<!-- chunk: 1. Containerd优化配置 -->## 1. Containerd优化配置
+## 1. Containerd优化配置
 ```toml
 # /etc/containerd/config.toml
 version = 2
@@ -263,7 +263,7 @@ version = 2
     insecure_skip_verify = true
 ```
 
-##<!-- chunk: 2. Docker性能优化 -->## 2. Docker性能优化
+## 2. Docker性能优化
 ```json
 {
   "registry-mirrors": [
@@ -295,9 +295,9 @@ version = 2
 
 <!-- chunk: 🎯 Kubernetes组件调优 -->## 🎯 Kubernetes组件调优
 
-#<!-- chunk: API Server优化 -->## API Server优化
+## API Server优化
 
-##<!-- chunk: 1. API Server配置优化 -->## 1. API Server配置优化
+## 1. API Server配置优化
 ```yaml
 # API Server优化配置
 apiVersion: v1
@@ -364,7 +364,7 @@ spec:
     - --tls-cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 ```
 
-##<!-- chunk: 2. API Server资源分配 -->## 2. API Server资源分配
+## 2. API Server资源分配
 ```yaml
 # API Server资源优化
 apiVersion: v1
@@ -414,9 +414,9 @@ spec:
       failureThreshold: 3
 ```
 
-#<!-- chunk: Etcd性能优化 -->## Etcd性能优化
+## Etcd性能优化
 
-##<!-- chunk: 1. Etcd配置优化 -->## 1. Etcd配置优化
+## 1. Etcd配置优化
 ```yaml
 # Etcd优化配置
 apiVersion: v1
@@ -461,7 +461,7 @@ spec:
     - --grpc-keepalive-timeout=20s
 ```
 
-##<!-- chunk: 2. Etcd存储优化 -->## 2. Etcd存储优化
+## 2. Etcd存储优化
 ```bash
 #!/bin/bash
 # Etcd存储性能优化
@@ -526,9 +526,9 @@ cat > /etc/cron.d/etcd-maintenance << EOF
 EOF
 ```
 
-#<!-- chunk: Controller Manager优化 -->## Controller Manager优化
+## Controller Manager优化
 
-##<!-- chunk: 1. Controller Manager配置 -->## 1. Controller Manager配置
+## 1. Controller Manager配置
 ```yaml
 # Controller Manager优化配置
 apiVersion: v1
@@ -580,7 +580,7 @@ spec:
     - --flex-volume-plugin-dir=/usr/libexec/kubernetes/kubelet-plugins/volume/exec/
 ```
 
-##<!-- chunk: 2. Scheduler优化配置 -->## 2. Scheduler优化配置
+## 2. Scheduler优化配置
 ```yaml
 # Scheduler优化配置
 apiVersion: v1
@@ -617,9 +617,9 @@ spec:
 
 <!-- chunk: 📊 性能监控和分析 -->## 📊 性能监控和分析
 
-#<!-- chunk: 性能指标收集 -->## 性能指标收集
+## 性能指标收集
 
-##<!-- chunk: 1. Prometheus性能监控 -->## 1. Prometheus性能监控
+## 1. Prometheus性能监控
 ```yaml
 # Kubernetes性能监控规则
 apiVersion: monitoring.coreos.com/v1
@@ -672,7 +672,7 @@ spec:
       expr: rate(container_network_receive_bytes_total[5m])
 ```
 
-##<!-- chunk: 2. 性能分析仪表板 -->## 2. 性能分析仪表板
+## 2. 性能分析仪表板
 ```json
 {
   "dashboard": {
@@ -735,9 +735,9 @@ spec:
 }
 ```
 
-#<!-- chunk: 性能瓶颈诊断 -->## 性能瓶颈诊断
+## 性能瓶颈诊断
 
-##<!-- chunk: 1. 性能分析脚本 -->## 1. 性能分析脚本
+## 1. 性能分析脚本
 ```python
 #!/usr/bin/env python3
 # Kubernetes性能分析工具
@@ -1137,7 +1137,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 基础性能优化 -->## 基础性能优化
+## 基础性能优化
 - [ ] 优化操作系统内核参数
 - [ ] 配置网络性能参数
 - [ ] 优化文件系统和存储
@@ -1145,7 +1145,7 @@ if __name__ == "__main__":
 - [ ] 优化容器运行时配置
 - [ ] 实施资源限制和QoS策略
 
-#<!-- chunk: 组件性能调优 -->## 组件性能调优
+## 组件性能调优
 - [ ] 优化API Server性能参数
 - [ ] 调整Etcd存储和网络配置
 - [ ] 优化Controller Manager并发设置
@@ -1153,7 +1153,7 @@ if __name__ == "__main__":
 - [ ] 实施组件资源配额
 - [ ] 配置健康检查和探针
 
-#<!-- chunk: 监控和诊断 -->## 监控和诊断
+## 监控和诊断
 - [ ] 部署性能监控系统
 - [ ] 配置关键性能指标收集
 - [ ] 建立性能基线和阈值
@@ -1170,9 +1170,9 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -1191,6 +1191,6 @@ if __name__ == "__main__":
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/openkruise-index|OpenKruise 全局索引]]
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/openkruise-index.md|OpenKruise 全局索引]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]

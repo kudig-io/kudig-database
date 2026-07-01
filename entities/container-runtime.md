@@ -61,12 +61,12 @@ Kubernetes removed the built-in Docker shim (dockershim) in v1.24. Docker images
 - [[containerd]] — containerd
 - [[cri-o]] — CRI-O
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — [[Kubernetes Architecture Overview|Kubernetes Architecture Overview]]
+- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
 - [[docker]] — Docker
-- [[entities/kubelet|kubelet]]
+- [[entities/kubelet.md|kubelet]]
 - [[pod-lifecycle|Pod Lifecycle]]
-- [[concepts/kubernetes-architecture-overview|Kubernetes Architecture Overview]]
+- [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
 
 - 21-container-runtime-deep-dive
 - 15-container-runtime-interfaces
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting|03-container-runtime-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]

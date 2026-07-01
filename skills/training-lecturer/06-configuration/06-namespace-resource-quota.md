@@ -56,7 +56,7 @@ created: "2026-05-23"
 • 测试团队使用集群
 • 生产环境使用集群
 
-但你只有一个 [[entities/kubernetes|k8s]] 集群！
+但你只有一个 [[entities/kubernetes.md|k8s]] 集群！
 
 问题：如何让不同团队互不干扰？
 
@@ -123,6 +123,9 @@ kubectl get all -n production
 ```
 
 ### 2.2 创建 Namespace
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
 【方式一：命令行】
@@ -325,6 +328,10 @@ spec:
 
 ### 6.1 资源配额超限
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```
 【错误信息】
 
@@ -366,6 +373,9 @@ spec:
 ---
 
 ## 7. 总结
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
 【命令速查】

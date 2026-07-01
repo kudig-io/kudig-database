@@ -33,7 +33,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-# [[entities/open-cluster-management|Open Cluster Management]] (OCM)
+# [[entities/open-cluster-management.md|Open Cluster Management]] (OCM)
 
 > **CNCF 状态**: Sandbox | **类别**: Orchestration | **主要语言**: Go
 
@@ -47,7 +47,7 @@ Open Cluster Management (OCM) 是一个社区驱动的多集群管理平台，�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -64,10 +64,10 @@ Open Cluster Management (OCM) 是一个社区驱动的多集群管理平台，�
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[deployment]]
 - [[operator-pattern]]
-- [[concepts/controller-pattern|controller-pattern]]
+- [[concepts/controller-pattern.md|controller-pattern]]
 
 ## Related
 
@@ -78,5 +78,5 @@ Open Cluster Management (OCM) 是一个社区驱动的多集群管理平台，�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - open-cluster-management
-- [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[entities/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

@@ -335,6 +335,9 @@ apiserver                  Jan 15, 2024 08:30 UTC   -5d     # 已过期
 
 **解决步骤：**
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 备份现有证书
 cp -r /etc/kubernetes/pki /etc/kubernetes/pki.backup.$(date +%Y%m%d)
@@ -364,6 +367,9 @@ kubectl get pods -n kube-system
 
 #### 场景 2：单独更新特定证书
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 只更新 API Server 证书
 kubeadm certs renew apiserver
@@ -384,6 +390,9 @@ systemctl restart kubelet
 ```
 
 #### 场景 3：手动生成证书 (非 kubeadm 集群)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 生成 API Server 证书
@@ -435,6 +444,9 @@ systemctl restart kube-apiserver
 - 高风险操作，建议在维护窗口执行
 
 **解决步骤：**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 检查 CA 过期时间
@@ -508,6 +520,10 @@ node-1   NotReady   <none>   180d   v1.25.0
 
 **解决步骤：**
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 在问题节点上检查 kubelet 证书
 openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -enddate
@@ -527,11 +543,15 @@ kubectl certificate approve <csr-name>
 kubeadm token create --print-join-command
 
 # 在 worker 上重置并重新加入
-kubeadm reset
+kubeadm reset  # ⚠️ 清理节点所有 K8s 配置
 kubeadm join <master-ip>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
 ```
 
 #### 场景 2：启用 kubelet 证书自动轮换
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 编辑 kubelet 配置
@@ -578,6 +598,9 @@ transport: authentication handshake failed: x509: certificate has expired
 
 **解决步骤：**
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 备份 etcd 数据
 ETCDCTL_API=3 etcdctl snapshot save /tmp/etcd-backup.db \
@@ -623,6 +646,10 @@ error: You must be logged in to the server (Unauthorized)
 
 **解决步骤：**
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 检查 SA 密钥对
 ls -la /etc/kubernetes/pki/sa.*
@@ -660,6 +687,9 @@ x509: certificate is valid for 10.96.0.1, not 192.168.1.100
 ```
 
 **解决步骤：**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 查看当前证书 SAN
@@ -823,19 +853,19 @@ kubectl certificate deny <csr>
 ### 相关文档
 
 - [API Server 故障排查](../01-control-plane/01-apiserver-troubleshooting.md)
-- [etcd 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting|02-etcd-troubleshooting]].md)
-- [kubelet 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting|01-kubelet-troubleshooting]].md)
-- [RBAC 故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting|01-rbac-troubleshooting]].md)
+- [etcd 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]].md)
+- [kubelet 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]].md)
+- [RBAC 故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting|04-audit-logging-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting|01-rbac-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting|03-pod-security-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting|04-audit-logging-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting.md|03-pod-security-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]

@@ -49,7 +49,7 @@ estimated_read_time: 5min
 intent_queries:
 - 'Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance) 是什么'
 - '如何 Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance)'
-- [[entities/kubernetes|kubernetes]] 29 automated testing quality 最佳实践
+- [[entities/kubernetes.md|kubernetes]] 29 automated testing quality 最佳实践
 trigger_keywords:
 - Domain
 - '29:'

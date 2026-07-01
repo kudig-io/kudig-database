@@ -23,7 +23,6 @@ intent_queries:
 trigger_keywords:
 - API
 - 优先级与公平性
-- API
 - Priority
 - and
 - Fairness
@@ -35,6 +34,7 @@ prerequisites:
 - gitops-basics
 - tls-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # API 优先级与公平性（API Priority and Fairness）
@@ -237,6 +237,4 @@ kubectl get flowschema <name> -o jsonpath='{.metadata.annotations.apf\.kubernete
 - [API Priority and Fairness - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/flow-control/)
 
 ## Related
-
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

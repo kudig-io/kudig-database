@@ -44,7 +44,7 @@ Bank-Vaults 是一套围绕 HashiCorp Vault 构建的 Kubernetes 原生密钥管
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -61,9 +61,9 @@ Bank-Vaults 是一套围绕 HashiCorp Vault 构建的 Kubernetes 原生密钥管
 ## 参考链接
 
 - [[etcd]]
-- [[entities/vault|vault]]
+- [[entities/vault.md|vault]]
 - [[deployment]]
-- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]
 
 ## Related
@@ -71,10 +71,10 @@ Bank-Vaults 是一套围绕 HashiCorp Vault 构建的 Kubernetes 原生密钥管
 - [[submariner]] — Submariner
 - [[03-prometheus-ha-deployment]] — [[Prometheus|Prometheus]]us 高可用部署|Prometheus 高可用部署]]
 - [[inclavare-containers]] — Inclavare Containers
-- [[entities/vault|vault]] — HashiCorp Vault
+- [[entities/vault.md|vault]] — HashiCorp Vault
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - bank-vaults
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

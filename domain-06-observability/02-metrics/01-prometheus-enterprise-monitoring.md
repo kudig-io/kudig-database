@@ -68,7 +68,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. Prometheus架构深度解析 -->## 1. Prometheus架构深度解析
 
-#<!-- chunk: 1.1 核心组件架构 -->## 1.1 核心组件架构
+## 1.1 核心组件架构
 
 ```mermaid
 graph TB
@@ -109,7 +109,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 1.2 TSDB存储引擎详解 -->## 1.2 TSDB存储引擎详解
+## 1.2 TSDB存储引擎详解
 
 ```yaml
 TSDB存储特性:
@@ -133,7 +133,7 @@ TSDB存储特性:
 
 <!-- chunk: 2. 企业级部署架构 -->## 2. 企业级部署架构
 
-#<!-- chunk: 2.1 高可用部署方案 -->## 2.1 高可用部署方案
+## 2.1 高可用部署方案
 
 ```yaml
 # Prometheus HA集群部署
@@ -165,7 +165,7 @@ spec:
             topologyKey: kubernetes.io/hostname
       containers:
       - name: prometheus
-        image: prom/prometheus:v2.40.0
+        image: prom/prometheus:v3.2.1
         args:
         - --config.file=/etc/prometheus/prometheus.yml
         - --storage.tsdb.path=/prometheus
@@ -278,7 +278,7 @@ data:
           target_label: kubernetes_pod_name
 ```
 
-#<!-- chunk: 2.2 Thanos全局视图架构 -->## 2.2 Thanos全局视图架构
+## 2.2 Thanos全局视图架构
 
 ```yaml
 # Thanos Sidecar配置
@@ -299,7 +299,7 @@ spec:
     spec:
       containers:
       - name: thanos-sidecar
-        image: quay.io/thanos/thanos:v0.30.0
+        image: quay.io/thanos/thanos:v0.37.0
         args:
         - sidecar
         - --prometheus.url=http://localhost:9090
@@ -350,7 +350,7 @@ spec:
     spec:
       containers:
       - name: thanos-query
-        image: quay.io/thanos/thanos:v0.30.0
+        image: quay.io/thanos/thanos:v0.37.0
         args:
         - query
         - --grpc-address=0.0.0.0:10901
@@ -368,7 +368,7 @@ spec:
 
 <!-- chunk: 3. 监控指标体系设计 -->## 3. 监控指标体系设计
 
-#<!-- chunk: 3.1 黄金信号监控 -->## 3.1 黄金信号监控
+## 3.1 黄金信号监控
 
 ```yaml
 # 核心业务指标监控
@@ -414,7 +414,7 @@ application_metrics:
     - response_size_bytes
 ```
 
-#<!-- chunk: 3.2 Kubernetes监控指标 -->## 3.2 Kubernetes监控指标
+## 3.2 Kubernetes监控指标
 
 ```yaml
 # Kubernetes核心组件监控
@@ -465,7 +465,7 @@ kubernetes_monitoring:
 
 <!-- chunk: 4. 告警规则设计 -->## 4. 告警规则设计
 
-#<!-- chunk: 4.1 基础设施告警 -->## 4.1 基础设施告警
+## 4.1 基础设施告警
 
 ```yaml
 # 基础设施告警规则
@@ -519,7 +519,7 @@ spec:
         description: "网络接收丢包率过高，当前值为{{ $value }}pps"
 ```
 
-#<!-- chunk: 4.2 应用层告警 -->## 4.2 应用层告警
+## 4.2 应用层告警
 
 ```yaml
 # 应用层告警规则
@@ -568,7 +568,7 @@ spec:
 
 <!-- chunk: 5. Alertmanager配置管理 -->## 5. Alertmanager配置管理
 
-#<!-- chunk: 5.1 告警路由配置 -->## 5.1 告警路由配置
+## 5.1 告警路由配置
 
 ```yaml
 # Alertmanager配置
@@ -589,27 +589,24 @@ route:
   
   routes:
   # 关键业务告警
-  - match:
-      severity: critical
-    receiver: 'pagerduty'
+  - matchers:
+    - severity="critical"
+    receiver: pagerduty
     group_wait: 10s
     group_interval: 1m
     repeat_interval: 30m
-  
   # 基础设施告警
-  - match:
-      severity: warning
-    receiver: 'slack-warning'
+  - matchers:
+    - severity="warning"
+    receiver: slack-warning
     group_wait: 1m
     group_interval: 10m
     repeat_interval: 2h
-  
   # 通知抑制规则
-  - match_re:
-      service: ^(mysql|redis|elasticsearch)$
-    receiver: 'dba-team'
+  - matchers:
+    - service=~"^(mysql|redis|elasticsearch)$"
+    receiver: dba-team
     continue: true
-
 receivers:
 - name: 'default-receiver'
   email_configs:
@@ -618,7 +615,7 @@ receivers:
 
 - name: 'pagerduty'
   pagerduty_configs:
-  - service_key: 'YOUR_PAGERDUTY_SERVICE_KEY'
+  - routing_key: 'YOUR_PAGERDUTY_SERVICE_KEY'
     send_resolved: true
 
 - name: 'slack-warning'
@@ -636,19 +633,18 @@ receivers:
 
 # 抑制规则
 inhibit_rules:
-- source_match:
-    severity: 'critical'
-  target_match:
-    severity: 'warning'
-  equal: ['alertname', 'cluster', 'service']
-
+- source_matchers:
+  - severity="critical"
+  - target_match=""
+  - severity="warning"
+  - equal="['alertname', 'cluster', 'service']"
 templates:
 - '/etc/alertmanager/template/*.tmpl'
 ```
 
 <!-- chunk: 6. 监控面板设计 -->## 6. 监控面板设计
 
-#<!-- chunk: 6.1 Grafana仪表板配置 -->## 6.1 Grafana仪表板配置
+## 6.1 Grafana仪表板配置
 
 ```json
 {
@@ -740,7 +736,7 @@ templates:
 
 <!-- chunk: 7. 性能优化与调优 -->## 7. 性能优化与调优
 
-#<!-- chunk: 7.1 Prometheus性能调优 -->## 7.1 Prometheus性能调优
+## 7.1 Prometheus性能调优
 
 ```yaml
 # Prometheus性能优化配置
@@ -757,15 +753,12 @@ performance_optimization:
     wal_compression: true
   
   scraping:
-    # 调整抓取间隔
+    # 调整抓取间隔（全局参数位于顶层，非 scraping 子段）
     scrape_interval: "30s"
     scrape_timeout: "10s"
-    
-    # 并发抓取设置
-    scrape.parallelism: 20
-    
-    # 启用抓取压缩
-    scrape.compression: "snappy"
+
+    # 注：Prometheus 无 scrape.parallelism / scrape.compression 配置项；
+    # 抓取并发由 target 数量与服务发现决定，压缩通过接收侧实现。
   
   querying:
     # 查询超时设置
@@ -788,7 +781,7 @@ performance_optimization:
     cpu_request: "4"
 ```
 
-#<!-- chunk: 7.2 查询优化技巧 -->## 7.2 查询优化技巧
+## 7.2 查询优化技巧
 
 ```sql
 -- PromQL查询优化示例
@@ -824,35 +817,35 @@ http_requests_total * on(job) group_left(instance) kube_pod_info
 
 <!-- chunk: 8. 监控最佳实践 -->## 8. 监控最佳实践
 
-#<!-- chunk: 8.1 监控设计原则 -->## 8.1 监控设计原则
+## 8.1 监控设计原则
 
 ```markdown
 <!-- chunk: 📊 监控设计最佳实践 -->## 📊 监控设计最佳实践
 
-#<!-- chunk: 1. 四个黄金信号 (Four Golden Signals) -->## 1. 四个黄金信号 (Four Golden Signals)
+## 1. 四个黄金信号 (Four Golden Signals)
 - **延迟 (Latency)**: 请求响应时间分布
 - **流量 (Traffic)**: 请求量和吞吐量
 - **错误 (Errors)**: 错误率和成功率
 - **饱和度 (Saturation)**: 资源利用率
 
-#<!-- chunk: 2. RED方法论 -->## 2. RED方法论
+## 2. RED方法论
 - **Rate**: 每秒请求数
 - **Errors**: 每秒错误数
 - **Duration**: 请求持续时间
 
-#<!-- chunk: 3. USE方法论 (Utilization Saturation Errors) -->## 3. USE方法论 (Utilization Saturation Errors)
+## 3. USE方法论 (Utilization Saturation Errors)
 - **Utilization**: 资源使用率
 - **Saturation**: 资源排队程度
 - **Errors**: 错误事件数量
 
-#<!-- chunk: 4. 监控分层策略 -->## 4. 监控分层策略
+## 4. 监控分层策略
 - 基础设施层监控
 - 平台层监控
 - 应用层监控
 - 业务层监控
 ```
 
-#<!-- chunk: 8.2 告警管理规范 -->## 8.2 告警管理规范
+## 8.2 告警管理规范
 
 ```yaml
 告警管理规范:
@@ -876,7 +869,7 @@ http_requests_total * on(job) group_left(instance) kube_pod_info
 
 <!-- chunk: 9. 故障排查与诊断 -->## 9. 故障排查与诊断
 
-#<!-- chunk: 9.1 常见问题诊断 -->## 9.1 常见问题诊断
+## 9.1 常见问题诊断
 
 ```bash
 # Prometheus故障排查命令
@@ -906,7 +899,7 @@ curl -G http://prometheus:9090/api/v1/query \
 du -sh /prometheus/*
 ```
 
-#<!-- chunk: 9.2 性能瓶颈分析 -->## 9.2 性能瓶颈分析
+## 9.2 性能瓶颈分析
 
 ```python
 #!/usr/bin/env python3
@@ -1006,7 +999,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 10. 未来发展与趋势 -->## 10. 未来发展与趋势
 
-#<!-- chunk: 10.1 监控技术演进 -->## 10.1 监控技术演进
+## 10.1 监控技术演进
 
 ```yaml
 监控技术发展趋势:
@@ -1037,9 +1030,9 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - observability/MOC.md|domain-20-enterprise-monitoring-alerting MOC]]
-- [[domain-06-observability/README|[[Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]]]
+- [[domain-06-observability/README.md|[[Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]]]
 - index.md|Domain-20 企业监控与告警 — 开源项目索引]]
-- [[domain-06-observability/07-tools/02-grafana-enterprise-observability]]
+- [[domain-06-observability/07-tools/02-grafana-enterprise-observability.md|02 grafana enterprise observability]]
 - OpenTelemetry分布式追踪与可观测性深度实践
 - Thanos Enterprise Metrics Federation and Long-term Storage
 - Datadog企业级APM深度实践
@@ -1056,8 +1049,8 @@ if __name__ == "__main__":
 - 02-grafana-enterprise-observability
 - 03-opentelemetry-distributed-tracing
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

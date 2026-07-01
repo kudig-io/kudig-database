@@ -962,6 +962,9 @@ kubectl get --raw /metrics | grep apiserver_admission_webhook_admission_duration
 
 #### 3.9.1 诊断流程
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```
 请求被拒绝 (403/500)
     │
@@ -984,6 +987,7 @@ kubectl get --raw /metrics | grep apiserver_admission_webhook_admission_duration
     │                                                    │
     └── 测试请求详情 ───────────────────────────────────┘
         kubectl -v=8 <command>  # 查看完整请求/响应
+
 ```
 
 #### 3.9.2 常见问题场景
@@ -1014,6 +1018,10 @@ journalctl -u kube-apiserver -f | grep -E "admission|webhook|denied|rejected"
 ```
 
 #### 3.9.4 紧急恢复操作
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 场景：某个 Mutating Webhook 问题导致所有 Pod 无法创建
@@ -1644,6 +1652,9 @@ kubectl api-versions
 
 ### 11.3 证书轮换
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # kubeadm 管理的集群
 kubeadm certs renew all
@@ -1741,7 +1752,7 @@ systemctl restart kube-apiserver
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -1764,9 +1775,9 @@ systemctl restart kube-apiserver
 - 相关知识域: domain-03-networking-traffic
 - 相关知识域: domain-04-storage-data
 - 相关知识域: domain-05-security-compliance
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|速查卡: k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet|速查卡: kubectl-scene-cheatsheet]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 
@@ -1774,3 +1785,5 @@ systemctl restart kube-apiserver
 - 11-etcd-deep-dive
 - 13-kube-controller-manager-deep-dive
 - 14-cloud-controller-manager-deep-dive
+
+```

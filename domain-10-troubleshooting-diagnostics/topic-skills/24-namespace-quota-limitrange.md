@@ -467,11 +467,13 @@ done
 
 ### Phase 3: 主动探测（低风险，可能需审批）
 
-> ⚠️ 以下步骤涉及写入或模拟操作，L1 模式下需人工确认
-
 **Step D3.1**: 测试 Pod 创建以确认具体限制条件
 - **目的**: 确定是哪个具体配额项或 LimitRange 约束导致创建失败
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 测试最小资源 Pod 创建
   cat <<EOF | kubectl apply -f -
@@ -508,6 +510,10 @@ done
 **Step D3.2**: 验证 LimitRange 默认值注入行为
 - **目的**: 确认 LimitRange 是否按预期注入默认资源
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 创建不指定 resources 的测试 Pod
   cat <<EOF | kubectl apply -f -
@@ -538,6 +544,10 @@ done
 **Step D3.3**: 测试 Namespace 资源释放情况
 - **目的**: 确认删除资源后配额是否正确释放
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 记录当前配额使用
   BEFORE=$(kubectl get resourcequota -n <namespace> -o jsonpath='{.items[0].status.used.pods}')
@@ -588,6 +598,10 @@ done
   kubectl top nodes
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方式 1: Patch 增加特定资源配额
   kubectl patch resourcequota <quota-name> -n <namespace> --type merge -p '{
@@ -606,6 +620,10 @@ done
   kubectl edit resourcequota <quota-name> -n <namespace>
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 验证新配额已生效
   kubectl get resourcequota <quota-name> -n <namespace>
@@ -614,6 +632,10 @@ done
   kubectl apply -f <previously-failed-pod.yaml>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch resourcequota <quota-name> -n <namespace> --type merge -p '{
     "spec": {
@@ -633,6 +655,10 @@ done
   kubectl get jobs -n <namespace>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 强制删除卡住的 Terminating Pod
   kubectl delete pods -n <namespace> --field-selector status.phase=Unknown --force --grace-period=0
@@ -668,6 +694,11 @@ done
   }{ .type }{" min="}{.min}{" max="}{.max}{" default="}{.default}{"\n"}{end}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方式 1: Patch 修复冲突值
   kubectl patch limitrange <limitrange-name> -n <namespace> --type merge -p '{
@@ -700,6 +731,11 @@ done
   kubectl apply -f corrected-limitrange.yaml
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 确认 LimitRange 已更新
   kubectl describe limitrange -n <namespace>
@@ -728,6 +764,10 @@ done
   kubectl delete pod limitrange-verify -n <namespace>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f /tmp/backup-limitrange.yaml
   ```
@@ -741,6 +781,10 @@ done
     .items[*].spec.limits[?(@.type=="Container")].default}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   cat <<EOF | kubectl apply -f -
   apiVersion: v1
@@ -766,6 +810,11 @@ done
   EOF
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 创建测试 Pod 验证默认值注入
   cat <<EOF | kubectl apply -f -
@@ -787,6 +836,10 @@ done
   kubectl delete pod default-test -n <namespace>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl delete limitrange default-resources -n <namespace>
   ```
@@ -805,6 +858,11 @@ done
   }{ "Name: " }{ .metadata.name }{ "\nHard: " }{ .spec.hard }{ "\n---\n" }{ end }'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 备份原有配额
   kubectl get resourcequota -n <namespace> -o yaml > /tmp/backup-quotas.yaml
@@ -836,6 +894,11 @@ done
   kubectl describe resourcequota unified-quota -n <namespace>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl delete resourcequota unified-quota -n <namespace>
   kubectl apply -f /tmp/backup-quotas.yaml
@@ -851,6 +914,10 @@ done
   kubectl get resourcequota <quota-name> -n <namespace> -o jsonpath='{.spec.hard}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch resourcequota <quota-name> -n <namespace> --type merge -p '{
     "spec": {
@@ -866,6 +933,10 @@ done
   kubectl get resourcequota <quota-name> -n <namespace> -o jsonpath='{.spec.hard}'
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch resourcequota <quota-name> -n <namespace> --type json -p='[
     {"op": "remove", "path": "/spec/hard/limits.cpu"},
@@ -911,6 +982,12 @@ done
   4. 验证 Namespace 已删除
   5. 如需重建，重新创建 Namespace 和配额配置
 - **执行命令**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 步骤 1: 备份资源
   kubectl api-resources --verbs=list --namespaced -o name | xargs -n1 -I{} sh -c 'kubectl get {} -n <namespace> -o yaml > /tmp/backup-<namespace>-{}.yaml 2>/dev/null || true'
@@ -919,7 +996,7 @@ done
   kubectl get namespace <namespace> -o json | jq '.spec.finalizers = []' | kubectl replace --raw "/api/v1/namespaces/<namespace>/finalize" -f -
   
   # 步骤 3: 如果 Namespace 仍存在，强制清理
-  kubectl delete namespace <namespace> --force --grace-period=0
+  kubectl delete namespace <namespace> --force --grace-period=0  # ⚠️ 不可逆：永久删除命名空间及全部资源
   
   # 备选方案：直接通过 API 删除 finalizers
   kubectl patch namespace <namespace> --type json -p='[{"op": "remove", "path": "/metadata/finalizers"}]'
@@ -929,6 +1006,9 @@ done
 ## 验证确认
 
 ### 7.1 即时验证（修复后 1 分钟内）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # V1: 验证 ResourceQuota 状态正常
@@ -1153,10 +1233,12 @@ receivers:
 
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/23-job-cronjob-failure|SKILL-WORK-004 Job/CronJob 故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/19-node-resource-pressure|SKILL-NODE-002 节点资源压力诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/20-networkpolicy-connectivity|SKILL-NET-004 NetworkPolicy 连通性问题]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/21-statefulset-failure|SKILL-WORK-002 StatefulSet 故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/22-daemonset-failure|SKILL-WORK-003 DaemonSet 故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/24-quota-limitrange-troubleshooting|Quota/LimitRange 深度排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/resource-quota-fta|Quota/LimitRange 故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/23-job-cronjob-failure.md|SKILL-WORK-004 Job/CronJob 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/19-node-resource-pressure.md|SKILL-NODE-002 节点资源压力诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/20-networkpolicy-connectivity.md|SKILL-NET-004 NetworkPolicy 连通性问题]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/21-statefulset-failure.md|SKILL-WORK-002 StatefulSet 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/22-daemonset-failure.md|SKILL-WORK-003 DaemonSet 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/24-quota-limitrange-troubleshooting.md|Quota/LimitRange 深度排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/resource-quota-fta.md|Quota/LimitRange 故障树分析]]
+
+```

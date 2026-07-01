@@ -5,6 +5,7 @@ tags: ['pod', 'debugging', 'ephemeral', 'visibility/public']
 sources: ["conceptss/"]
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 status: stub
 ---
 # Ephemeral Containers
@@ -20,4 +21,4 @@ Ephemeral Containers 是临时添加到运行中 Pod 的容器，用于调试和
 
 ## 相关链接
 
-- [[concepts/kubernetes|Kubernetes]] — 核心概念
+- [[concepts/kubernetes.md|Kubernetes]] — 核心概念

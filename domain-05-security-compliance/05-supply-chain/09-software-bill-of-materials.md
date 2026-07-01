@@ -95,9 +95,9 @@ k8s_versions:
 
 <!-- chunk: 📦 SBOM基础概念 -->## 📦 SBOM基础概念
 
-#<!-- chunk: SBOM标准格式 -->## SBOM标准格式
+## SBOM标准格式
 
-##<!-- chunk: 1. SPDX格式示例 -->## 1. SPDX格式示例
+## 1. SPDX格式示例
 ```json
 {
   "spdxVersion": "SPDX-2.3",
@@ -134,7 +134,7 @@ k8s_versions:
 }
 ```
 
-##<!-- chunk: 2. CycloneDX格式示例 -->## 2. CycloneDX格式示例
+## 2. CycloneDX格式示例
 ```json
 {
   "bomFormat": "CycloneDX",
@@ -182,9 +182,9 @@ k8s_versions:
 
 <!-- chunk: 🛠️ SBOM生成工具 -->## 🛠️ SBOM生成工具
 
-#<!-- chunk: Syft工具配置 -->## Syft工具配置
+## Syft工具配置
 
-##<!-- chunk: 1. 容器镜像SBOM生成 -->## 1. 容器镜像SBOM生成
+## 1. 容器镜像SBOM生成
 ```yaml
 # Syft配置文件
 apiVersion: batch/v1
@@ -229,7 +229,7 @@ spec:
       restartPolicy: Never
 ```
 
-##<!-- chunk: 2. 多格式输出配置 -->## 2. 多格式输出配置
+## 2. 多格式输出配置
 ```bash
 #!/bin/bash
 # 多格式SBOM生成脚本
@@ -255,9 +255,9 @@ echo "SBOM generation completed:"
 ls -la "$OUTPUT_DIR"
 ```
 
-#<!-- chunk: Grype漏洞扫描集成 -->## Grype漏洞扫描集成
+## Grype漏洞扫描集成
 
-##<!-- chunk: 1. 漏洞扫描配置 -->## 1. 漏洞扫描配置
+## 1. 漏洞扫描配置
 ```yaml
 # Grype扫描Job
 apiVersion: batch/v1
@@ -316,9 +316,9 @@ data:
 
 <!-- chunk: 📊 SBOM管理平台 -->## 📊 SBOM管理平台
 
-#<!-- chunk: Harbor SBOM集成 -->## Harbor SBOM集成
+## Harbor SBOM集成
 
-##<!-- chunk: 1. Harbor配置 -->## 1. Harbor配置
+## 1. Harbor配置
 ```yaml
 # Harbor SBOM插件配置
 apiVersion: v1
@@ -346,7 +346,7 @@ data:
         value: "os-package-vulnerability"
 ```
 
-##<!-- chunk: 2. 自动化SBOM生成 -->## 2. 自动化SBOM生成
+## 2. 自动化SBOM生成
 ```yaml
 # 镜像推送时自动生成SBOM
 apiVersion: tekton.dev/v1beta1
@@ -397,9 +397,9 @@ spec:
 
 <!-- chunk: 🔍 依赖关系分析 -->## 🔍 依赖关系分析
 
-#<!-- chunk: 依赖树可视化 -->## 依赖树可视化
+## 依赖树可视化
 
-##<!-- chunk: 1. 依赖关系图生成 -->## 1. 依赖关系图生成
+## 1. 依赖关系图生成
 ```python
 #!/usr/bin/env python3
 # 依赖关系分析脚本
@@ -479,7 +479,7 @@ if __name__ == "__main__":
     print(f"Connected components: {nx.number_weakly_connected_components(graph)}")
 ```
 
-##<!-- chunk: 2. 许可证合规检查 -->## 2. 许可证合规检查
+## 2. 许可证合规检查
 ```yaml
 # 许可证合规检查配置
 apiVersion: batch/v1
@@ -578,9 +578,9 @@ data:
 
 <!-- chunk: 🛡️ 安全合规集成 -->## 🛡️ 安全合规集成
 
-#<!-- chunk: 供应链安全框架 -->## 供应链安全框架
+## 供应链安全框架
 
-##<!-- chunk: 1. SLSA合规检查 -->## 1. SLSA合规检查
+## 1. SLSA合规检查
 ```yaml
 # SLSA合规验证
 apiVersion: batch/v1
@@ -612,7 +612,7 @@ spec:
           claimName: build-artifacts-pvc
 ```
 
-##<!-- chunk: 2. 签名验证配置 -->## 2. 签名验证配置
+## 2. 签名验证配置
 ```yaml
 # Cosign签名验证
 apiVersion: batch/v1
@@ -645,9 +645,9 @@ spec:
 
 <!-- chunk: 📈 监控与报告 -->## 📈 监控与报告
 
-#<!-- chunk: SBOM质量指标 -->## SBOM质量指标
+## SBOM质量指标
 
-##<!-- chunk: 1. Prometheus指标收集 -->## 1. Prometheus指标收集
+## 1. Prometheus指标收集
 ```yaml
 # SBOM质量监控指标
 apiVersion: monitoring.coreos.com/v1
@@ -696,7 +696,7 @@ spec:
           claimName: sbom-storage-pvc
 ```
 
-##<!-- chunk: 2. Grafana仪表板 -->## 2. Grafana仪表板
+## 2. Grafana仪表板
 ```json
 {
   "dashboard": {
@@ -739,7 +739,7 @@ spec:
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: SBOM生成配置 -->## SBOM生成配置
+## SBOM生成配置
 - [ ] 选择合适的SBOM生成工具(Syft、Tern等)
 - [ ] 配置自动化SBOM生成流程
 - [ ] 建立SBOM存储和版本管理机制
@@ -747,7 +747,7 @@ spec:
 - [ ] 集成漏洞扫描和许可证检查
 - [ ] 配置SBOM签名和验证机制
 
-#<!-- chunk: 合规性管理 -->## 合规性管理
+## 合规性管理
 - [ ] 建立软件供应链安全策略
 - [ ] 实施SLSA合规性验证
 - [ ] 配置许可证合规检查
@@ -755,7 +755,7 @@ spec:
 - [ ] 实施安全漏洞跟踪机制
 - [ ] 建立第三方组件审批流程
 
-#<!-- chunk: 监控与报告 -->## 监控与报告
+## 监控与报告
 - [ ] 部署SBOM质量监控系统
 - [ ] 建立合规性报告机制
 - [ ] 配置告警和通知系统
@@ -772,9 +772,9 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -791,4 +791,4 @@ spec:
 - 10-gitops-pipeline-practices
 - 11-infrastructure-as-code
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

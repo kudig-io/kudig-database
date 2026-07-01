@@ -97,7 +97,7 @@ Argo CD 的技术优势在于其丰富的生态——ApplicationSet 提供了声
 
 <!-- chunk: 二、GitOps架构深度解析 -->## 二、GitOps架构深度解析
 
-#<!-- chunk: 2.1 核心概念与原理 -->## 2.1 核心概念与原理
+## 2.1 核心概念与原理
 
 Argo CD 的核心工作循环是"持续协调"（Continuous Reconciliation）。Application Controller 定期从 Git 仓库拉取应用清单，与集群中的实际资源进行对比，当检测到偏差（Drift）时，根据配置的同步策略自动或手动地将集群状态拉回到期望状态。
 
@@ -146,7 +146,7 @@ graph TB
     J --> L
 ```
 
-#<!-- chunk: 2.2 GitOps工作流程详解 -->## 2.2 GitOps工作流程详解
+## 2.2 GitOps工作流程详解
 
 GitOps 工作流程可以分为四个阶段：开发、审查、部署和验证。每个阶段都有明确的职责边界和自动化检查点。
 
@@ -192,7 +192,7 @@ gitops_workflow:
         mechanism: "syncPolicy.retry + Rollback mechanism"
 ```
 
-#<!-- chunk: 2.3 Argo CD 内部组件交互 -->## 2.3 Argo CD 内部组件交互
+## 2.3 Argo CD 内部组件交互
 
 ```mermaid
 sequenceDiagram
@@ -221,7 +221,7 @@ sequenceDiagram
 
 <!-- chunk: 三、企业级高可用部署 -->## 三、企业级高可用部署
 
-#<!-- chunk: 3.1 Argo CD Helm部署配置 -->## 3.1 Argo CD Helm部署配置
+## 3.1 Argo CD Helm部署配置
 
 ```yaml
 # values-argo-cd-production.yaml
@@ -352,7 +352,7 @@ redis:
   enabled: true
 ```
 
-#<!-- chunk: 3.2 外部Redis高可用部署 -->## 3.2 外部Redis高可用部署
+## 3.2 外部Redis高可用部署
 
 ```yaml
 apiVersion: apps/v1
@@ -447,7 +447,10 @@ data:
     save 60 10000
 ```
 
-#<!-- chunk: 3.3 部署命令 -->## 3.3 部署命令
+## 3.3 部署命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add argo https://argoproj.github.io/argo-helm
@@ -470,7 +473,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret \
 
 <!-- chunk: 四、核心配置 -->## 四、核心配置
 
-#<!-- chunk: 4.1 Application 定义 -->## 4.1 Application 定义
+## 4.1 Application 定义
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -539,7 +542,7 @@ spec:
       value: "#team-alpha-alerts"
 ```
 
-#<!-- chunk: 4.2 AppProject 项目隔离 -->## 4.2 AppProject 项目隔离
+## 4.2 AppProject 项目隔离
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -615,7 +618,7 @@ spec:
       manualSync: false
 ```
 
-#<!-- chunk: 4.3 ApplicationSet 多环境管理 -->## 4.3 ApplicationSet 多环境管理
+## 4.3 ApplicationSet 多环境管理
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -650,7 +653,7 @@ spec:
           - CreateNamespace=true
 ```
 
-#<!-- chunk: 4.4 Helm Chart 应用 -->## 4.4 Helm Chart 应用
+## 4.4 Helm Chart 应用
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -705,7 +708,7 @@ spec:
 
 <!-- chunk: 五、安全与合规管理 -->## 五、安全与合规管理
 
-#<!-- chunk: 5.1 RBAC权限配置 -->## 5.1 RBAC权限配置
+## 5.1 RBAC权限配置
 
 ```yaml
 # Argo CD RBAC 配置 (ConfigMap argocd-rbac-cm)
@@ -749,7 +752,7 @@ policy.default: role:none
 scopes: '[groups]'
 ```
 
-#<!-- chunk: 5.2 SSO集成配置 -->## 5.2 SSO集成配置
+## 5.2 SSO集成配置
 
 ```yaml
 # Dex SSO 配置
@@ -808,7 +811,7 @@ dex.config: |
       secretEnv: ARGOCD_SSO_CLIENT_SECRET
 ```
 
-#<!-- chunk: 5.3 网络安全策略 -->## 5.3 网络安全策略
+## 5.3 网络安全策略
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -856,7 +859,7 @@ spec:
 
 <!-- chunk: 六、多环境管理策略 -->## 六、多环境管理策略
 
-#<!-- chunk: 6.1 环境目录策略 (推荐) -->## 6.1 环境目录策略 (推荐)
+## 6.1 环境目录策略 (推荐)
 
 ```
 gitops-repo/
@@ -894,7 +897,7 @@ gitops-repo/
         └── apps.yaml
 ```
 
-#<!-- chunk: 6.2 环境晋升流程 -->## 6.2 环境晋升流程
+## 6.2 环境晋升流程
 
 ```yaml
 promotion_workflow:
@@ -929,7 +932,7 @@ promotion_workflow:
 
 <!-- chunk: 七、监控与回滚 -->## 七、监控与回滚
 
-#<!-- chunk: 7.1 Prometheus监控配置 -->## 7.1 Prometheus监控配置
+## 7.1 Prometheus监控配置
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -1007,7 +1010,7 @@ spec:
         summary: "Repo Server 错误率过高"
 ```
 
-#<!-- chunk: 7.2 回滚策略 -->## 7.2 回滚策略
+## 7.2 回滚策略
 
 ```bash
 # 方式一: 命令行回滚到指定版本
@@ -1052,7 +1055,10 @@ spec:
   backoffLimit: 3
 ```
 
-#<!-- chunk: 7.3 备份与灾难恢复 -->## 7.3 备份与灾难恢复
+## 7.3 备份与灾难恢复
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
 ```bash
 #!/bin/bash
@@ -1078,7 +1084,7 @@ argocd admin export > ${BACKUP_DIR}/${BACKUP_NAME}/argocd-export.yaml
 
 # 压缩并上传
 tar -czf ${BACKUP_DIR}/${BACKUP_NAME}.tar.gz -C ${BACKUP_DIR} ${BACKUP_NAME}
-rm -rf ${BACKUP_DIR}/${BACKUP_NAME}
+rm -rf ${BACKUP_DIR}/${BACKUP_NAME}  # ⚠️ 删除系统/数据文件
 
 if [ -n "$REMOTE_STORAGE" ]; then
     aws s3 cp ${BACKUP_DIR}/${BACKUP_NAME}.tar.gz s3://$REMOTE_STORAGE/backups/
@@ -1089,7 +1095,7 @@ fi
 
 <!-- chunk: 八、最佳实践 -->## 八、最佳实践
 
-#<!-- chunk: 8.1 GitOps实施最佳实践 -->## 8.1 GitOps实施最佳实践
+## 8.1 GitOps实施最佳实践
 
 ```yaml
 仓库结构设计:
@@ -1119,7 +1125,7 @@ fi
   - 所有关键应用设置 revisionHistoryLimit
 ```
 
-#<!-- chunk: 8.2 性能优化 -->## 8.2 性能优化
+## 8.2 性能优化
 
 ```yaml
 大规模部署优化 (>500 apps):
@@ -1144,7 +1150,7 @@ fi
 
 <!-- chunk: 九、故障排查 -->## 九、故障排查
 
-#<!-- chunk: 9.1 常见问题诊断 -->## 9.1 常见问题诊断
+## 9.1 常见问题诊断
 
 ```yaml
 同步失败:
@@ -1213,7 +1219,7 @@ Repo Server 错误:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-08-release-change-management MOC
-- [[domain-08-release-change-management/README|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
+- [[domain-08-release-change-management/README.md|Domain 08: GitOps与CI/CD (GitOps & CI/CD)]]
 - Domain-23 GitOps & CI/CD — 开源项目索引
 - Jenkins企业级CI/CD流水线深度实践
 - GitLab CI/CD 企业级流水线自动化平台
@@ -1234,9 +1240,9 @@ Repo Server 错误:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## 相关合成分析
 
-- [[synthesis/gitops-sre-release-gate|GitOps SRE 发布门控]]
+- [[concepts/gitops-sre-release-gate.md|GitOps SRE 发布门控]]
 

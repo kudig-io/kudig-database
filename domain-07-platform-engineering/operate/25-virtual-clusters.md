@@ -92,6 +92,9 @@ created: "2026-05-23"
 <!-- chunk: vCluster安装 -->
 ## vCluster安装
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 安装vCluster CLI
 curl -L -o vcluster "https://github.com/loft-sh/vcluster/releases/latest/download/vcluster-linux-amd64"
@@ -353,7 +356,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering KUDIG Database — Global MOC
-- [[domain-07-platform-engineering/README|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
+- [[domain-07-platform-engineering/README.md|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
 - Domain-9 平台运维 — 开源项目索引
 - 平台运维概述
 - 集群生命周期管理
@@ -374,4 +377,6 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+
+```

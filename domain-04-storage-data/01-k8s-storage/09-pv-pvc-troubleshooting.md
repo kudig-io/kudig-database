@@ -632,6 +632,9 @@ echo "请在节点上运行: journalctl -u kubelet | grep -i 'volume\\|mount\\|a
 
 ### 存储扩容故障排查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 #!/bin/bash
 # volume-expansion-diagnostics.sh
@@ -1615,6 +1618,9 @@ if __name__ == "__main__":
 
 ### 自动化修复脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 #!/bin/bash
 # storage-auto-healing.sh
@@ -1813,7 +1819,7 @@ main
 ## Obsidian 相关文档
 
 - domain-04-storage-data KUDIG Database — Global MOC
-- [[domain-04-storage-data/README|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
+- [[domain-04-storage-data/README.md|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
 - Domain-6 存储 — 开源项目索引
 - 存储架构概览与核心组件
 - PV/PVC 核心概念与企业级实践
@@ -1824,9 +1830,9 @@ main
 - 07 - 存储日常运维操作手册
 - 08 - 存储性能调优与优化策略
 - 10 - 存储备份与灾难恢复
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
@@ -1837,6 +1843,8 @@ main
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+
+```

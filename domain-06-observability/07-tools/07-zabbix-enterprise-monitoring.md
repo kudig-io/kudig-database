@@ -71,7 +71,7 @@ This document provides comprehensive exploration of Zabbix enterprise monitoring
 
 <!-- chunk: 1. Zabbix Enterprise Architecture Deep Dive -->## 1. Zabbix Enterprise Architecture Deep Dive
 
-#<!-- chunk: 1.1 Core Component Architecture -->## 1.1 Core Component Architecture
+## 1.1 Core Component Architecture
 
 ```mermaid
 graph TB
@@ -117,7 +117,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 1.2 High Availability Architecture -->## 1.2 High Availability Architecture
+## 1.2 High Availability Architecture
 
 ```yaml
 zabbix_ha_architecture:
@@ -165,7 +165,7 @@ zabbix_ha_architecture:
 
 <!-- chunk: 2. Enterprise Deployment Strategy -->## 2. Enterprise Deployment Strategy
 
-#<!-- chunk: 2.1 Multi-Tier Proxy Architecture -->## 2.1 Multi-Tier Proxy Architecture
+## 2.1 Multi-Tier Proxy Architecture
 
 ```bash
 #!/bin/bash
@@ -222,7 +222,7 @@ systemctl enable zabbix-proxy
 systemctl start zabbix-proxy
 ```
 
-#<!-- chunk: 2.2 Database Optimization Configuration -->## 2.2 Database Optimization Configuration
+## 2.2 Database Optimization Configuration
 
 ```sql
 -- MySQL/Zabbix 性能优化配置
@@ -252,7 +252,7 @@ CREATE INDEX idx_trends_clock_itemid ON trends (clock, itemid);
 
 <!-- chunk: 3. Advanced Monitoring Configuration -->## 3. Advanced Monitoring Configuration
 
-#<!-- chunk: 3.1 Template Design Best Practices -->## 3.1 Template Design Best Practices
+## 3.1 Template Design Best Practices
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -348,7 +348,7 @@ CREATE INDEX idx_trends_clock_itemid ON trends (clock, itemid);
 </zabbix_export>
 ```
 
-#<!-- chunk: 3.2 Custom Script Monitoring -->## 3.2 Custom Script Monitoring
+## 3.2 Custom Script Monitoring
 
 ```python
 #!/usr/bin/env python3
@@ -413,7 +413,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 4. Alerting and Notification System -->## 4. Alerting and Notification System
 
-#<!-- chunk: 4.1 Advanced Alert Configuration -->## 4.1 Advanced Alert Configuration
+## 4.1 Advanced Alert Configuration
 
 ```yaml
 # zabbix_alert_rules.yaml
@@ -461,7 +461,7 @@ alert_rules:
         recovery: true
 ```
 
-#<!-- chunk: 4.2 Notification Media Configuration -->## 4.2 Notification Media Configuration
+## 4.2 Notification Media Configuration
 
 ```bash
 #!/bin/bash
@@ -534,7 +534,7 @@ esac
 
 <!-- chunk: 5. Performance Optimization and Scaling -->## 5. Performance Optimization and Scaling
 
-#<!-- chunk: 5.1 Horizontal Scaling Strategy -->## 5.1 Horizontal Scaling Strategy
+## 5.1 Horizontal Scaling Strategy
 
 ```yaml
 zabbix_scaling_strategy:
@@ -572,7 +572,10 @@ zabbix_scaling_strategy:
         responsible_for: hosts_10001_20000
 ```
 
-#<!-- chunk: 5.2 Caching and Performance Tuning -->## 5.2 Caching and Performance Tuning
+## 5.2 Caching and Performance Tuning
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -624,7 +627,10 @@ systemctl restart mysqld zabbix-server
 
 <!-- chunk: 6. Security and Compliance -->## 6. Security and Compliance
 
-#<!-- chunk: 6.1 Security Hardening Configuration -->## 6.1 Security Hardening Configuration
+## 6.1 Security Hardening Configuration
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
 
 ```bash
 #!/bin/bash
@@ -663,7 +669,7 @@ FLUSH PRIVILEGES;
 EOF
 ```
 
-#<!-- chunk: 6.2 Audit and Compliance -->## 6.2 Audit and Compliance
+## 6.2 Audit and Compliance
 
 ```sql
 -- 合规性审计查询
@@ -711,7 +717,7 @@ ORDER BY t.lastchange DESC;
 
 <!-- chunk: 7. Integration and Automation -->## 7. Integration and Automation
 
-#<!-- chunk: 7.1 API Integration Examples -->## 7.1 API Integration Examples
+## 7.1 API Integration Examples
 
 ```python
 #!/usr/bin/env python3
@@ -810,7 +816,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 8. Best Practices and Troubleshooting -->## 8. Best Practices and Troubleshooting
 
-#<!-- chunk: 8.1 Performance Troubleshooting -->## 8.1 Performance Troubleshooting
+## 8.1 Performance Troubleshooting
 
 ```bash
 #!/bin/bash
@@ -852,7 +858,7 @@ echo "select * from trends where clock > unix_timestamp() - 3600 limit 10;" | my
 echo -e "\n=== Diagnosis Complete ==="
 ```
 
-#<!-- chunk: 8.2 Capacity Planning Guidelines -->## 8.2 Capacity Planning Guidelines
+## 8.2 Capacity Planning Guidelines
 
 ```yaml
 capacity_planning:
@@ -903,8 +909,8 @@ capacity_planning:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-20-enterprise-monitoring-alerting MOC
-- [[domain-06-observability/README|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-20 企业监控与告警 — 开源项目索引]]
+- [[domain-06-observability/README.md|Domain 06: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]]
 - Prometheus企业级监控系统深度实践
 - Grafana Enterprise Observability Platform 深度实践
 - OpenTelemetry分布式追踪与可观测性深度实践
@@ -922,8 +928,8 @@ capacity_planning:
 - 08-new-relic-enterprise-apm
 - 99-distributed-tracing-guide
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

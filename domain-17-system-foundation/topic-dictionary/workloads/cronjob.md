@@ -52,7 +52,7 @@ CronJob 用于按重复的时间表创建 Job，类似于 Unix 系统中的 cron
 ## 关键机制或特性
 - **近似调度**：CronJob 控制器大约每分钟检查一次调度，某些情况下可能创建 0 个或 2 个 Job。
 - **100 次错过限制**：若从上次计划时间到现在错过的调度超过 100 次，控制器会报错并跳过启动。设置 `startingDeadlineSeconds` 可改变计算窗口。
-- ** Job 注解**：v1.32 起，CronJob 会在创建的 Job 上添加注解 `batch.[[entities/kubernetes|[[Kubernetes|kubernetes]]]].io/cronjob-scheduled-timestamp`，记录原始计划时间（RFC3339）。
+- ** Job 注解**：v1.32 起，CronJob 会在创建的 Job 上添加注解 `batch.[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]].io/cronjob-scheduled-timestamp`，记录原始计划时间（RFC3339）。
 - **幂等性**：由于可能出现重复执行或跳过，Job 任务应设计为幂等。
 
 ## 使用场景
@@ -195,6 +195,10 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 查看 CronJob 列表和上次调度时间
 kubectl get cronjob -n prod
@@ -225,3 +229,9 @@ kubectl logs job/$(kubectl get jobs -n prod -l app=db-backup --sort-by=.status.s
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]

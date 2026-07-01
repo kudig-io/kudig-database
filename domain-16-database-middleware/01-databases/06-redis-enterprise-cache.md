@@ -70,7 +70,7 @@ Redis 是全球使用最广泛的内存数据结构存储系统，在企业架�
 
 Redis 在 K8s 环境中的部署方案多样：简单的单实例 + Sentinel 适合中小规模场景，Redis Cluster 适合需要数据分片的大规模场景，而 Redis Operator（如 OT-CONTAINER-KIT 或 Spotahome）提供了自动化管理能力。选型时需要权衡数据规模、一致性要求、运维复杂度和成本。
 
-#<!-- chunk: Redis 数据结构与企业应用场景 -->## Redis 数据结构与企业应用场景
+## Redis 数据结构与企业应用场景
 
 Redis 提供了丰富的数据结构，每种结构都有其特定的应用场景和性能特征。理解这些数据结构的底层实现对于正确使用 Redis 至关重要。
 
@@ -92,7 +92,7 @@ Redis 提供了丰富的数据结构，每种结构都有其特定的应用场�
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: Redis 企业级高可用架构 -->## Redis 企业级高可用架构
+## Redis 企业级高可用架构
 
 ```mermaid
 graph TB
@@ -160,7 +160,7 @@ graph TB
     M0 --> AOF
 ```
 
-#<!-- chunk: Sentinel vs Cluster 选型 -->## Sentinel vs Cluster 选型
+## Sentinel vs Cluster 选型
 
 ```mermaid
 graph TD
@@ -182,7 +182,7 @@ graph TD
 
 <!-- chunk: 核心组件配置 -->## 核心组件配置
 
-#<!-- chunk: Redis 生产配置文件 -->## Redis 生产配置文件
+## Redis 生产配置文件
 
 ```ini
 # redis.conf - Redis 8.0 生产优化配置
@@ -340,7 +340,7 @@ cluster-enabled no
 # cluster-allow-replica-migration yes
 ```
 
-#<!-- chunk: ACL 用户配置 -->## ACL 用户配置
+## ACL 用户配置
 
 ```
 # /etc/redis/users.acl - Redis ACL 配置
@@ -361,7 +361,7 @@ user monitoring on #hash_password_placeholder ~* &* +info +client +ping +dbsize 
 user backup on #hash_password_placeholder ~* &* +@read +bgsave +lastsave +dbsize +ping +info +client +config|get +debug|object
 ```
 
-#<!-- chunk: Sentinel 配置 -->## Sentinel 配置
+## Sentinel 配置
 
 ```ini
 # sentinel.conf - Redis Sentinel 生产配置
@@ -396,7 +396,7 @@ protected-mode no
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: 内存计算与优化 -->## 内存计算与优化
+## 内存计算与优化
 
 ```
 Redis 内存分配参考（32GB 物理内存）：
@@ -419,7 +419,7 @@ maxmemory = 物理内存 × 70% = ~24GB
   > 2.0: 开启 activedefrag 整理碎片
 ```
 
-#<!-- chunk: 淘汰策略选择 -->## 淘汰策略选择
+## 淘汰策略选择
 
 | 策略 | 说明 | 适用场景 |
 |:---|:---|:---|
@@ -431,7 +431,7 @@ maxmemory = 物理内存 × 70% = ~24GB
 | `allkeys-random` | 随机淘汰 | 所有键访问概率相近 |
 | `volatile-ttl` | 淘汰 TTL 最短的 | 希望保留长期有效的数据 |
 
-#<!-- chunk: Pipeline 批量操作 -->## Pipeline 批量操作
+## Pipeline 批量操作
 
 ```python
 import redis
@@ -508,7 +508,7 @@ class RedisPipelineOps:
 
 <!-- chunk: 高可用与容灾 -->## 高可用与容灾
 
-#<!-- chunk: Redis Cluster 部署 -->## Redis Cluster 部署
+## Redis Cluster 部署
 
 ```bash
 #!/bin/bash
@@ -578,7 +578,7 @@ case "${1:-create}" in
 esac
 ```
 
-#<!-- chunk: 跨机房容灾 -->## 跨机房容灾
+## 跨机房容灾
 
 ```yaml
 # Redis 跨机房容灾配置
@@ -611,7 +611,10 @@ disaster_recovery:
 
 <!-- chunk: 备份恢复 -->## 备份恢复
 
-#<!-- chunk: 综合备份方案 -->## 综合备份方案
+## 综合备份方案
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -710,7 +713,7 @@ esac
 
 <!-- chunk: 监控告警 -->## 监控告警
 
-#<!-- chunk: Prometheus 告警规则 -->## Prometheus 告警规则
+## Prometheus 告警规则
 
 ```yaml
 groups:
@@ -814,7 +817,7 @@ groups:
 
 <!-- chunk: 运维管理 -->## 运维管理
 
-#<!-- chunk: 综合运维脚本 -->## 综合运维脚本
+## 综合运维脚本
 
 ```bash
 #!/bin/bash
@@ -887,7 +890,7 @@ esac
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 1. 键命名规范 -->## 1. 键命名规范
+## 1. 键命名规范
 
 ```
 格式: 业务:实体:标识符
@@ -905,7 +908,7 @@ TTL 设置:
   计数器:       1hour - 1day
 ```
 
-#<!-- chunk: 2. 大 Key 预防 -->## 2. 大 Key 预防
+## 2. 大 Key 预防
 
 - String 类型不超过 10KB
 - Hash 字段数不超过 5000
@@ -915,7 +918,7 @@ TTL 设置:
 - 使用 `redis-cli --bigkeys` 定期扫描
 - 使用 `MEMORY USAGE key` 检查单个键内存
 
-#<!-- chunk: 3. 缓存一致性策略 -->## 3. 缓存一致性策略
+## 3. 缓存一致性策略
 
 ```
 Cache-Aside (推荐):
@@ -933,7 +936,7 @@ Cache-Aside (推荐):
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题速查表 -->## 常见问题速查表
+## 常见问题速查表
 
 | 问题现象 | 可能原因 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
@@ -957,7 +960,7 @@ Cache-Aside (推荐):
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-28-enterprise-database-middleware KUDIG Database — Global MOC
-- [[domain-16-database-middleware/README|Domain 28: 企业级数据库与中间件运维 (Enterprise [[Database & Middleware|Database & Middleware]] Op...]]
+- [[domain-16-database-middleware/README.md|Domain 16: 企业级数据库与中间件运维 (Enterprise [[Database & Middleware|Database & Middleware]] Op...]]
 - Domain-28 企业数据库与中间件 — 开源项目索引
 - MySQL 企业级数据库运维管理
 - PostgreSQL 企业级数据库高可用架构

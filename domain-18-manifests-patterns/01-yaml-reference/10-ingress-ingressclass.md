@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 **IngressClass** (v1.19+ GA) 定义了 Ingress 的实现类别,支持在同一集群中运行多个 Ingress Controller(如 Nginx、Traefik、HAProxy 等)。
 
-#<!-- chunk: 核心概念 -->## 核心概念
+## 核心概念
 
 **Ingress 的作用**:
 - **统一入口**: 单个 LoadBalancer IP 暴露多个服务
@@ -91,7 +91,7 @@ created: "2026-05-23"
 - **Kong Ingress**
 - **云厂商**: AWS ALB、GCP GCLB、Azure Application Gateway
 
-#<!-- chunk: 使用场景 -->## 使用场景
+## 使用场景
 
 1. **多服务暴露**: 单个 IP 暴露多个后端服务
 2. **基于域名的路由**: `api.example.com` → API 服务, `www.example.com` → 前端服务
@@ -126,7 +126,7 @@ GET /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}
 
 <!-- chunk: Ingress 完整字段规格表 -->## Ingress 完整字段规格表
 
-#<!-- chunk: 顶层字段 -->## 顶层字段
+## 顶层字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 | 版本要求 |
 |---------|------|------|--------|------|----------|
@@ -140,7 +140,7 @@ GET /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}
 | `spec.tls[]` | array | 否 | - | TLS 配置列表 | v1.19+ |
 | `spec.rules[]` | array | 否 | - | 路由规则列表 | v1.19+ |
 
-#<!-- chunk: spec.defaultBackend 字段 -->## spec.defaultBackend 字段
+## spec.defaultBackend 字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 |
 |---------|------|------|--------|------|
@@ -151,7 +151,7 @@ GET /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}
 
 **注意**: `service.port.number` 和 `service.port.name` 二选一
 
-#<!-- chunk: spec.tls[] 字段 -->## spec.tls[] 字段
+## spec.tls[] 字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 |
 |---------|------|------|--------|------|
@@ -166,7 +166,7 @@ data:
   tls.key: <base64 编码的私钥>
 ```
 
-#<!-- chunk: spec.rules[] 字段 -->## spec.rules[] 字段
+## spec.rules[] 字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 |
 |---------|------|------|--------|------|
@@ -178,13 +178,13 @@ data:
 - 通配符: `*.example.com` (仅支持最左侧标签)
 - 空值: 匹配所有主机名
 
-#<!-- chunk: spec.rules[].http 字段 -->## spec.rules[].http 字段
+## spec.rules[].http 字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 |
 |---------|------|------|--------|------|
 | `paths[]` | array | 是 | - | 路径匹配规则列表 |
 
-#<!-- chunk: spec.rules[].http.paths[] 字段 -->## spec.rules[].http.paths[] 字段
+## spec.rules[].http.paths[] 字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 |
 |---------|------|------|--------|------|
@@ -192,7 +192,7 @@ data:
 | `pathType` | string | 是 | - | 路径匹配类型 |
 | `backend` | object | 是 | - | 后端服务配置 |
 
-#<!-- chunk: pathType 详解 -->## pathType 详解
+## pathType 详解
 
 | 值 | 匹配规则 | 示例 | 匹配路径 | 不匹配路径 |
 |----|---------|------|----------|------------|
@@ -210,7 +210,7 @@ data:
 2. 更长的路径优先于短路径
 3. 精确主机名优先于通配符主机名
 
-#<!-- chunk: spec.rules[].http.paths[].backend 字段 -->## spec.rules[].http.paths[].backend 字段
+## spec.rules[].http.paths[].backend 字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 |
 |---------|------|------|--------|------|
@@ -238,7 +238,7 @@ GET /apis/networking.k8s.io/v1/ingressclasses/{name}
 
 <!-- chunk: IngressClass 完整字段规格表 -->## IngressClass 完整字段规格表
 
-#<!-- chunk: 顶层字段 -->## 顶层字段
+## 顶层字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 | 版本要求 |
 |---------|------|------|--------|------|----------|
@@ -249,7 +249,7 @@ GET /apis/networking.k8s.io/v1/ingressclasses/{name}
 | `spec.controller` | string | 是 | - | Controller 标识符 | v1.19+ |
 | `spec.parameters` | object | 否 | - | Controller 特定参数 | v1.19+ |
 
-#<!-- chunk: 默认 IngressClass 配置 -->## 默认 IngressClass 配置
+## 默认 IngressClass 配置
 
 **注解**:
 ```yaml
@@ -262,7 +262,7 @@ metadata:
 - Ingress 未指定 `ingressClassName` 时使用默认 IngressClass
 - 仅允许一个 IngressClass 设置为默认(多个会导致冲突)
 
-#<!-- chunk: spec.controller 字段 -->## spec.controller 字段
+## spec.controller 字段
 
 **格式**: 唯一的域名格式字符串,标识 Ingress Controller
 
@@ -273,7 +273,7 @@ metadata:
 - AWS ALB: `ingress.k8s.aws/alb`
 - Istio: `istio.io/ingress-controller`
 
-#<!-- chunk: spec.parameters 字段 -->## spec.parameters 字段
+## spec.parameters 字段
 
 | 字段路径 | 类型 | 必需 | 说明 |
 |---------|------|------|------|
@@ -298,9 +298,9 @@ spec:
 
 注解(Annotations)是 Ingress 扩展功能的主要方式,不同 Ingress Controller 支持不同注解。以下列出常见 Controller 的注解。
 
-#<!-- chunk: NGINX Ingress Controller (k8s.io/ingress-nginx) -->## NGINX Ingress Controller (k8s.io/ingress-nginx)
+## NGINX Ingress Controller (k8s.io/ingress-nginx)
 
-##<!-- chunk: 基础配置 -->## 基础配置
+## 基础配置
 
 | 注解键 | 值类型 | 说明 | 示例 |
 |-------|--------|------|------|
@@ -313,7 +313,7 @@ spec:
 | `nginx.ingress.kubernetes.io/proxy-send-timeout` | string | 发送超时(秒) | `"60"` |
 | `nginx.ingress.kubernetes.io/proxy-read-timeout` | string | 读取超时(秒) | `"60"` |
 
-##<!-- chunk: 高级功能 -->## 高级功能
+## 高级功能
 
 | 注解键 | 值类型 | 说明 | 示例 |
 |-------|--------|------|------|
@@ -327,7 +327,7 @@ spec:
 | `nginx.ingress.kubernetes.io/cors-allow-methods` | string | CORS 允许方法 | `"GET, POST, PUT"` |
 | `nginx.ingress.kubernetes.io/cors-allow-headers` | string | CORS 允许头 | `"DNT,X-CustomHeader"` |
 
-##<!-- chunk: 金丝雀发布(Canary) -->## 金丝雀发布(Canary)
+## 金丝雀发布(Canary)
 
 | 注解键 | 值类型 | 说明 | 示例 |
 |-------|--------|------|------|
@@ -337,7 +337,7 @@ spec:
 | `nginx.ingress.kubernetes.io/canary-by-header-value` | string | 请求头值匹配 | `"always"` |
 | `nginx.ingress.kubernetes.io/canary-by-cookie` | string | 基于 Cookie | `"canary"` |
 
-##<!-- chunk: SSL/TLS 配置 -->## SSL/TLS 配置
+## SSL/TLS 配置
 
 | 注解键 | 值类型 | 说明 | 示例 |
 |-------|--------|------|------|
@@ -348,7 +348,7 @@ spec:
 
 ---
 
-#<!-- chunk: Traefik Ingress Controller -->## Traefik Ingress Controller
+## Traefik Ingress Controller
 
 | 注解键 | 值类型 | 说明 | 示例 |
 |-------|--------|------|------|
@@ -360,7 +360,7 @@ spec:
 
 ---
 
-#<!-- chunk: HAProxy Ingress Controller -->## HAProxy Ingress Controller
+## HAProxy Ingress Controller
 
 | 注解键 | 值类型 | 说明 | 示例 |
 |-------|--------|------|------|
@@ -373,7 +373,7 @@ spec:
 
 ---
 
-#<!-- chunk: AWS ALB Ingress Controller -->## AWS ALB Ingress Controller
+## AWS ALB Ingress Controller
 
 | 注解键 | 值类型 | 说明 | 示例 |
 |-------|--------|------|------|
@@ -389,7 +389,7 @@ spec:
 
 ---
 
-#<!-- chunk: GCP GCE Ingress Controller -->## GCP GCE Ingress Controller
+## GCP GCE Ingress Controller
 
 | 注解键 | 值类型 | 说明 | 示例 |
 |-------|--------|------|------|
@@ -403,7 +403,7 @@ spec:
 
 <!-- chunk: TLS 配置 -->## TLS 配置
 
-#<!-- chunk: 基础 TLS 配置 -->## 基础 TLS 配置
+## 基础 TLS 配置
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -431,9 +431,13 @@ spec:
               number: 80
 ```
 
-#<!-- chunk: 创建 TLS Secret -->## 创建 TLS Secret
+## 创建 TLS Secret
 
 **方法 1: 从证书文件创建**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl create secret tls example-tls \
   --cert=path/to/tls.crt \
@@ -460,7 +464,7 @@ cat tls.crt | base64 -w 0
 cat tls.key | base64 -w 0
 ```
 
-#<!-- chunk: 多域名 TLS 配置 -->## 多域名 TLS 配置
+## 多域名 TLS 配置
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -500,9 +504,13 @@ spec:
               number: 80
 ```
 
-#<!-- chunk: 自动证书管理(cert-manager) -->## 自动证书管理(cert-manager)
+## 自动证书管理(cert-manager)
 
 **安装 cert-manager**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.0/cert-manager.yaml
 ```
@@ -568,7 +576,7 @@ kubectl get secret example-tls -n namespace
 
 <!-- chunk: 最小配置示例 -->## 最小配置示例
 
-#<!-- chunk: 最简 Ingress(单服务) -->## 最简 Ingress(单服务)
+## 最简 Ingress(单服务)
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -589,7 +597,7 @@ spec:
               number: 80
 ```
 
-#<!-- chunk: 最简 IngressClass -->## 最简 IngressClass
+## 最简 IngressClass
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -604,7 +612,7 @@ spec:
 
 <!-- chunk: 生产级配置示例 -->## 生产级配置示例
 
-#<!-- chunk: 示例 1: 多域名多路径路由 -->## 示例 1: 多域名多路径路由
+## 示例 1: 多域名多路径路由
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -679,7 +687,7 @@ spec:
               name: health
 ```
 
-#<!-- chunk: 示例 2: 路径重写与 URL 重定向 -->## 示例 2: 路径重写与 URL 重定向
+## 示例 2: 路径重写与 URL 重定向
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -720,7 +728,7 @@ spec:
 - 重写目标: `/$2` → `/users/123`
 - 后端收到: `/users/123`
 
-#<!-- chunk: 示例 3: 金丝雀发布(Canary Deployment) -->## 示例 3: 金丝雀发布(Canary Deployment)
+## 示例 3: 金丝雀发布(Canary Deployment)
 
 ```yaml
 # 稳定版本 Ingress
@@ -806,9 +814,9 @@ annotations:
 # 3. 其余 → 稳定版本
 ```
 
-#<!-- chunk: 示例 4: 认证与授权 -->## 示例 4: 认证与授权
+## 示例 4: 认证与授权
 
-##<!-- chunk: Basic Auth -->## Basic Auth
+## Basic Auth
 
 ```yaml
 # 创建 htpasswd 文件
@@ -841,6 +849,10 @@ spec:
 ```
 
 **创建 Basic Auth Secret**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 生成密码文件
 htpasswd -c auth admin
@@ -855,7 +867,7 @@ kubectl create secret generic basic-auth \
 kubectl get secret basic-auth -n admin -o yaml
 ```
 
-##<!-- chunk: OAuth2 认证(外部认证服务) -->## OAuth2 认证(外部认证服务)
+## OAuth2 认证(外部认证服务)
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -882,7 +894,7 @@ spec:
               number: 80
 ```
 
-#<!-- chunk: 示例 5: IP 白名单与速率限制 -->## 示例 5: IP 白名单与速率限制
+## 示例 5: IP 白名单与速率限制
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -917,7 +929,7 @@ spec:
               number: 8080
 ```
 
-#<!-- chunk: 示例 6: CORS 配置 -->## 示例 6: CORS 配置
+## 示例 6: CORS 配置
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -951,7 +963,7 @@ spec:
               number: 8080
 ```
 
-#<!-- chunk: 示例 7: gRPC 服务 -->## 示例 7: gRPC 服务
+## 示例 7: gRPC 服务
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -988,7 +1000,7 @@ conn, err := grpc.Dial("grpc.example.com:443",
     grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{})))
 ```
 
-#<!-- chunk: 示例 8: WebSocket 支持 -->## 示例 8: WebSocket 支持
+## 示例 8: WebSocket 支持
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -1021,7 +1033,7 @@ spec:
               number: 8080
 ```
 
-#<!-- chunk: 示例 9: 默认后端(404 页面) -->## 示例 9: 默认后端(404 页面)
+## 示例 9: 默认后端(404 页面)
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -1050,7 +1062,7 @@ spec:
 # 访问 example.com/unknown → 路由到 custom-404 服务
 ```
 
-#<!-- chunk: 示例 10: 多 IngressClass 配置 -->## 示例 10: 多 IngressClass 配置
+## 示例 10: 多 IngressClass 配置
 
 ```yaml
 # IngressClass: NGINX
@@ -1130,7 +1142,7 @@ spec:
 
 <!-- chunk: 内部原理 -->## 内部原理
 
-#<!-- chunk: Ingress Controller 工作流程 -->## Ingress Controller 工作流程
+## Ingress Controller 工作流程
 
 ```
 1. 监听 API Server
@@ -1157,7 +1169,7 @@ spec:
    外部请求 → Ingress Controller → Service → Pod
 ```
 
-#<!-- chunk: NGINX Ingress 配置生成示例 -->## NGINX Ingress 配置生成示例
+## NGINX Ingress 配置生成示例
 
 **Ingress YAML**:
 ```yaml
@@ -1200,7 +1212,7 @@ upstream upstream-api-8080 {
 }
 ```
 
-#<!-- chunk: TLS 终结流程 -->## TLS 终结流程
+## TLS 终结流程
 
 ```
 1. 客户端发起 HTTPS 请求
@@ -1232,7 +1244,7 @@ upstream upstream-api-8080 {
    TLS 加密 → 客户端
 ```
 
-#<!-- chunk: IngressClass 选择机制 -->## IngressClass 选择机制
+## IngressClass 选择机制
 
 **优先级**:
 1. **明确指定**: `spec.ingressClassName: nginx`
@@ -1299,7 +1311,7 @@ spec:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 1. 使用 IngressClass 而非注解 -->## 1. 使用 IngressClass 而非注解
+## 1. 使用 IngressClass 而非注解
 
 **推荐**:
 ```yaml
@@ -1314,7 +1326,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
 ```
 
-#<!-- chunk: 2. 明确指定 pathType -->## 2. 明确指定 pathType
+## 2. 明确指定 pathType
 
 **推荐**:
 ```yaml
@@ -1329,7 +1341,7 @@ paths:
 # 遗漏 pathType 会导致验证失败
 ```
 
-#<!-- chunk: 3. TLS 证书管理 -->## 3. TLS 证书管理
+## 3. TLS 证书管理
 
 **使用 cert-manager 自动化**:
 - 自动获取和续期证书
@@ -1342,7 +1354,7 @@ annotations:
   cert-manager.io/cluster-issuer: "letsencrypt-prod"
 ```
 
-#<!-- chunk: 4. 路径匹配优先级规划 -->## 4. 路径匹配优先级规划
+## 4. 路径匹配优先级规划
 
 **设计规则**:
 - 更具体的路径放在前面
@@ -1363,7 +1375,7 @@ paths:
   backend: ...
 ```
 
-#<!-- chunk: 5. 监控与日志 -->## 5. 监控与日志
+## 5. 监控与日志
 
 **启用访问日志**:
 ```yaml
@@ -1382,7 +1394,7 @@ annotations:
 # - nginx_ingress_controller_response_size (响应大小)
 ```
 
-#<!-- chunk: 6. 安全加固 -->## 6. 安全加固
+## 6. 安全加固
 
 **强制 HTTPS**:
 ```yaml
@@ -1402,7 +1414,7 @@ annotations:
   nginx.ingress.kubernetes.io/limit-rps: "100"
 ```
 
-#<!-- chunk: 7. 高可用部署 -->## 7. 高可用部署
+## 7. 高可用部署
 
 **Ingress Controller 多副本**:
 ```yaml
@@ -1429,7 +1441,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"
 ```
 
-#<!-- chunk: 8. 资源限制 -->## 8. 资源限制
+## 8. 资源限制
 
 ```yaml
 spec:
@@ -1444,9 +1456,13 @@ spec:
         memory: "128Mi"
 ```
 
-#<!-- chunk: 9. 配置验证 -->## 9. 配置验证
+## 9. 配置验证
 
 **部署前验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 验证 YAML 语法
 kubectl apply --dry-run=client -f ingress.yaml
@@ -1459,7 +1475,7 @@ kubectl describe ingress ingress-name -n namespace
 kubectl logs -n ingress-nginx deployment/ingress-nginx-controller
 ```
 
-#<!-- chunk: 10. 渐进式部署 -->## 10. 渐进式部署
+## 10. 渐进式部署
 
 **金丝雀发布流程**:
 1. 部署新版本服务(v2)
@@ -1472,7 +1488,7 @@ kubectl logs -n ingress-nginx deployment/ingress-nginx-controller
 
 <!-- chunk: FAQ -->## FAQ
 
-#<!-- chunk: Q1: Ingress 创建后无法访问? -->## Q1: Ingress 创建后无法访问?
+## Q1: Ingress 创建后无法访问?
 
 **排查步骤**:
 ```bash
@@ -1511,7 +1527,7 @@ kubectl get svc -n ingress-nginx ingress-nginx-controller
 - TLS 证书问题
 - 防火墙/安全组规则
 
-#<!-- chunk: Q2: 多个 Ingress 匹配同一域名? -->## Q2: 多个 Ingress 匹配同一域名?
+## Q2: 多个 Ingress 匹配同一域名?
 
 **行为**: 合并规则(同一 IngressClass)
 
@@ -1560,7 +1576,7 @@ spec:
 - `/api` → api 服务
 - `/web` → web 服务
 
-#<!-- chunk: Q3: 如何实现同一域名的多个 TLS 证书? -->## Q3: 如何实现同一域名的多个 TLS 证书?
+## Q3: 如何实现同一域名的多个 TLS 证书?
 
 **场景**: 不同子路径使用不同证书
 
@@ -1571,7 +1587,7 @@ spec:
 2. 使用 SAN(Subject Alternative Name)多域名证书
 3. 为不同路径使用不同子域名
 
-#<!-- chunk: Q4: Ingress 如何实现灰度发布? -->## Q4: Ingress 如何实现灰度发布?
+## Q4: Ingress 如何实现灰度发布?
 
 **方案 1: 金丝雀 Ingress(NGINX)**
 ```yaml
@@ -1588,13 +1604,13 @@ spec:
   hosts:
   - app.example.com
   http:
-  - match:
-    - headers:
-        user-type:
-          exact: beta
-    route:
-    - destination:
-        host: app-v2
+  - matchers:
+    - - headers=""
+    - user-type=""
+    - exact="beta"
+    - route=""
+    - - destination=""
+    - host="app-v2"
   - route:
     - destination:
         host: app-v1
@@ -1604,7 +1620,7 @@ spec:
       weight: 10
 ```
 
-#<!-- chunk: Q5: 如何查看 Ingress 分配的 IP 地址? -->## Q5: 如何查看 Ingress 分配的 IP 地址?
+## Q5: 如何查看 Ingress 分配的 IP 地址?
 
 ```bash
 # 查看 Ingress 状态
@@ -1627,7 +1643,7 @@ kubectl get svc -n ingress-nginx ingress-nginx-controller
 # ingress-nginx-controller   LoadBalancer   10.96.100.50   203.0.113.50   80:30080/TCP,443:30443/TCP
 ```
 
-#<!-- chunk: Q6: Ingress 支持 TCP/UDP 服务吗? -->## Q6: Ingress 支持 TCP/UDP 服务吗?
+## Q6: Ingress 支持 TCP/UDP 服务吗?
 
 **答案**: 标准 Ingress 仅支持 HTTP/HTTPS(七层)。
 
@@ -1653,7 +1669,11 @@ args:
 - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
 ```
 
-#<!-- chunk: Q7: 如何强制删除卡住的 Ingress? -->## Q7: 如何强制删除卡住的 Ingress?
+## Q7: 如何强制删除卡住的 Ingress?
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 正常删除
@@ -1668,7 +1688,7 @@ kubectl edit ingress ingress-name -n namespace
 # 删除 metadata.finalizers 字段
 ```
 
-#<!-- chunk: Q8: Ingress 与 Gateway API 的区别? -->## Q8: Ingress 与 Gateway API 的区别?
+## Q8: Ingress 与 Gateway API 的区别?
 
 | 特性 | Ingress | Gateway API |
 |------|---------|-------------|
@@ -1716,7 +1736,7 @@ spec:
 
 <!-- chunk: 生产案例 -->## 生产案例
 
-#<!-- chunk: 案例 1: 微服务 API 网关 -->## 案例 1: 微服务 API 网关
+## 案例 1: 微服务 API 网关
 
 **场景**: 统一入口暴露多个微服务 API
 
@@ -1805,7 +1825,7 @@ spec:
 
 ---
 
-#<!-- chunk: 案例 2: 蓝绿部署与流量切换 -->## 案例 2: 蓝绿部署与流量切换
+## 案例 2: 蓝绿部署与流量切换
 
 **场景**: 零停机时间的版本切换
 
@@ -1862,6 +1882,12 @@ spec:
 ```
 
 **切换流程**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 部署绿色环境
 kubectl apply -f deployment-green.yaml
@@ -1884,7 +1910,7 @@ kubectl delete deployment app-blue -n production
 
 ---
 
-#<!-- chunk: 案例 3: 多租户 SaaS 平台 -->## 案例 3: 多租户 SaaS 平台
+## 案例 3: 多租户 SaaS 平台
 
 **场景**: 为每个租户提供独立子域名
 
@@ -1969,13 +1995,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 <!-- chunk: 相关资源 -->## 相关资源
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 - [Ingress 概念](https://kubernetes.io/docs/concepts/services-networking/ingress/)
 - [Ingress API 参考](https://kubernetes.io/docs/reference/kubernetes-api/service-resources/ingress-v1/)
 - [IngressClass API 参考](https://kubernetes.io/docs/reference/kubernetes-api/service-resources/ingress-class-v1/)
 - [Ingress Controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
 
-#<!-- chunk: Ingress Controller 实现 -->## Ingress Controller 实现
+## Ingress Controller 实现
 - [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/)
 - [Ingress-NGINX](https://github.com/nginxinc/kubernetes-ingress) (NGINX Inc.)
 - [Traefik](https://doc.traefik.io/traefik/providers/kubernetes-ingress/)
@@ -1985,18 +2011,18 @@ func handler(w http.ResponseWriter, r *http.Request) {
 - [Kong Ingress](https://docs.konghq.com/kubernetes-ingress-controller/)
 - [AWS ALB Ingress Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/)
 
-#<!-- chunk: 证书管理 -->## 证书管理
+## 证书管理
 - [cert-manager](https://cert-manager.io/)
 - [Let's Encrypt](https://letsencrypt.org/)
 
-#<!-- chunk: 下一代标准 -->## 下一代标准
+## 下一代标准
 - [Gateway API](https://gateway-api.sigs.k8s.io/)
 
-#<!-- chunk: 监控与可观测性 -->## 监控与可观测性
+## 监控与可观测性
 - [Prometheus NGINX Ingress Exporter](https://github.com/nginxinc/nginx-prometheus-exporter)
 - [Grafana Dashboards for NGINX Ingress](https://grafana.com/grafana/dashboards/)
 
-#<!-- chunk: 工具 -->## 工具
+## 工具
 - [kubectl-ingress-nginx](https://kubernetes.github.io/ingress-nginx/kubectl-plugin/) - NGINX Ingress 调试插件
 - [ingress-conformance-bats](https://github.com/kubernetes-sigs/ingress-controller-conformance) - Ingress 一致性测试
 
@@ -2011,7 +2037,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -2032,5 +2058,5 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]

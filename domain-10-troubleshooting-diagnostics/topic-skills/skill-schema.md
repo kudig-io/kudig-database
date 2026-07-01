@@ -52,7 +52,7 @@ created: "2026-05-23"
 
 ## 快速导航
 
-- [[domain-04-storage-data/README|[[KUDIG Database]]].md](../templates/README.md) — 模板体系索引
+- [[domain-04-storage-data/README.md|[[KUDIG Database]]].md](../templates/README.md) — 模板体系索引
 - [templates/skill-template.md](../templates/skill-template.md) — Skill 文档标准模板（现行版本）
 - [domain-10-troubleshooting-diagnostics/topic-skills/](../) — Skill 文档实际存放目录
 

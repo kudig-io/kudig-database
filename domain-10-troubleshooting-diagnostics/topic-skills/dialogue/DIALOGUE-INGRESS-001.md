@@ -7,6 +7,7 @@ severity: "medium"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 title: "Ingress 规则不生效 — 远程顾问对话脚本"
 category: dialogue
 tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
@@ -14,7 +15,7 @@ tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 
 # Ingress 规则不生效 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/ingress-controller|Ingress Controller]]
+> 对应概念：[[concepts/ingress-controller.md|Ingress Controller]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -160,6 +161,9 @@ kubectl get secret <tls-secret> -n <namespace> -o jsonpath='{.data.tls\.crt}' | 
 
 #### 方案 A：修正 Ingress Class
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch ingress <ingress-name> -n <namespace> --type='merge' -p='{"spec":{"ingressClassName":"<correct-class>"}}'
 ```
@@ -168,6 +172,9 @@ kubectl patch ingress <ingress-name> -n <namespace> --type='merge' -p='{"spec":{
 
 #### 方案 B：重启 Ingress Controller
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 kubectl rollout restart deployment/<ingress-controller> -n kube-system
 ```
@@ -175,6 +182,9 @@ kubectl rollout restart deployment/<ingress-controller> -n kube-system
 > **如果无法执行**：请执行 `kubectl delete pod -n kube-system -l app=<ingress-controller-label>` 让 Deployment 自动重建 Pod。
 
 #### 方案 C：重新创建 TLS Secret
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 kubectl create secret tls <secret-name> --cert=<cert-file> --key=<key-file> -n <namespace>
@@ -202,5 +212,5 @@ curl -H "Host:<your-domain>" http://<ingress-ip>/path -I
 
 ## 相关概念
 
-- [[concepts/ingress-controller|Ingress Controller]]
-- [[concepts/service-networking|Service 网络模型]]
+- [[concepts/ingress-controller.md|Ingress Controller]]
+- [[concepts/service-networking.md|Service 网络模型]]

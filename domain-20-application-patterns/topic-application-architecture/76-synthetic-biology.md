@@ -123,11 +123,11 @@ k8s_versions:
 
 <!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-#<!-- chunk: 1.1 行业背景 -->## 1.1 行业背景
+## 1.1 行业背景
 
 合成生物学（Synthetic Biology）是利用工程化原理设计和构建新型生物系统的交叉学科，被公认为继信息技术之后的下一代颠覆性技术。通过标准化生物元件（BioBrick）、DNA 合成技术、基因编辑工具和自动化实验平台，合成生物学实现了"设计-构建-测试-学习"（DBTL）的工程化研发范式。全球合成生物学市场规模预计到 2030 年将超过 1000 亿美元，涵盖生物医药（新药开发、细胞治疗、mRNA 疫苗）、生物制造（生物基化学品、可降解材料、生物燃料）、农业（合成肥料、抗病作物、替代蛋白）和环境（生物修复、碳捕获）等战略领域。
 
-#<!-- chunk: 1.2 行业挑战 -->## 1.2 行业挑战
+## 1.2 行业挑战
 
 | 挑战 | 说明 | 架构影响 |
 |:---|:---|:---|
@@ -139,7 +139,7 @@ k8s_versions:
 | 跨学科协作 | 生物学家/计算科学家/工程师协同 | 统一数据平台 + 可视化分析 |
 | 监管合规 | GMO 释放监管、基因治疗临床审批 | 数据溯源 + 电子签名 + 合规报告 |
 
-#<!-- chunk: 1.3 市场格局 -->## 1.3 市场格局
+## 1.3 市场格局
 
 全球合成生物学行业呈现出北美领先、欧洲追赶、亚洲崛起的格局。北美拥有 Ginkgo Bioworks、Zymergen、Twist Bioscience 等头部企业；欧洲在工业生物技术方面具有传统优势（BASF、Novozymes）；亚洲市场以中国为代表，华大基因、凯赛生物、蓝晶微生物等企业快速成长。中国在国家"十四五"规划中将合成生物学列为战略性前沿技术，在天津、深圳、上海等地建立了合成生物学研究中心。
 
@@ -147,23 +147,23 @@ k8s_versions:
 
 <!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-#<!-- chunk: 2.1 基因设计 -->## 2.1 基因设计
+## 2.1 基因设计
 
 DNA 序列设计与优化是合成生物学的基础环节。核心功能包括密码子优化（根据宿主偏好调整密码子使用频率）、基因元件组装（启动子-编码序列-终止子的标准化组装）、调控元件设计（核糖体结合位点强度预测、启动子库筛选）。业务流程为：目标蛋白序列输入→密码子优化→元件选择与组装→序列验证（BLAST 比对/酶切位点分析）→DNA 合成订单提交。
 
-#<!-- chunk: 2.2 蛋白质工程 -->## 2.2 蛋白质工程
+## 2.2 蛋白质工程
 
 基于 AlphaFold2/3 的蛋白质结构预测与改造是合成生物学的核心计算任务。场景包括：全新蛋白质设计（从零设计具有特定功能的蛋白质序列）、蛋白质改造（在现有蛋白质基础上优化稳定性、活性、表达量）、蛋白质-蛋白质相互作用预测、酶催化活性预测。蛋白质工程的计算流程需要 GPU 集群支撑，单次 AlphaFold 预测需要约 30 分钟到数小时的 GPU 时间。
 
-#<!-- chunk: 2.3 代谢工程 -->## 2.3 代谢工程
+## 2.3 代谢工程
 
 代谢网络模拟与菌株优化是生物制造的核心环节。通过基因组规模代谢网络模型（GSMM），模拟微生物菌株在各种条件下的代谢通量分布，预测基因敲除/过表达对目标产物产量的影响。核心工具包括 COBRApy（约束基建模）、MEMOTE（模型质量评估）、 cameo （菌株设计算法）。代谢工程需要构建高质量的基因组注释和代谢网络数据库。
 
-#<!-- chunk: 2.4 自动化实验 -->## 2.4 自动化实验
+## 2.4 自动化实验
 
 高通量筛选平台与液体处理机器人的集成管理。场景包括：自动化克隆构建（Golden Gate 组装、Gibson 组装）、高通量筛选（96/384 孔板的自动化培养和检测）、发酵过程监控（DO/pH/温度实时监测）。自动化实验平台需要与 LIMS 系统紧密集成，实现实验设计→设备调度→数据采集→结果分析的全流程自动化。
 
-#<!-- chunk: 2.5 生物信息学 -->## 2.5 生物信息学
+## 2.5 生物信息学
 
 基因组组装/注释/比较分析流水线。涵盖短读长（Illumina）和长读长（PacBio/Nanopore）测序数据的处理流程：原始数据质控→基因组组装→基因预测与注释→变异检测→比较基因组学分析。生物信息学流水线通常以 CWL/WDL/Nexflow 等工作流语言描述，在 K8s 上以 Argo Workflows 或 Nextflow 调度执行。
 
@@ -171,7 +171,7 @@ DNA 序列设计与优化是合成生物学的基础环节。核心功能包括�
 
 <!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-#<!-- chunk: 3.1 合成生物学平台全景架构 -->## 3.1 合成生物学平台全景架构
+## 3.1 合成生物学平台全景架构
 
 ```mermaid
 graph TB
@@ -217,7 +217,7 @@ graph TB
     L1 & L2 & L3 & L4 --> D1
 ```
 
-#<!-- chunk: 3.2 DBTL 闭环流程 -->## 3.2 DBTL 闭环流程
+## 3.2 DBTL 闭环流程
 
 ```mermaid
 flowchart LR
@@ -227,7 +227,7 @@ flowchart LR
     D --> A
 ```
 
-#<!-- chunk: 3.3 生物信息学流水线架构 -->## 3.3 生物信息学流水线架构
+## 3.3 生物信息学流水线架构
 
 ```mermaid
 flowchart LR
@@ -243,7 +243,7 @@ flowchart LR
 
 <!-- chunk: 4. 核心技术栈 -->## 4. 核心技术栈
 
-#<!-- chunk: 4.1 计算工具链 -->## 4.1 计算工具链
+## 4.1 计算工具链
 
 | 类别 | 开源工具/平台 | 阿里云方案 | 说明 |
 |:---|:---|:---|:---|
@@ -256,7 +256,7 @@ flowchart LR
 | 生物元件库 | iGEM Registry, SynBioHub | PolarDB + 图数据库 GDB | 标准化元件管理 |
 | 可视化 | Jupyter, NGL Viewer, DataV | PAI-DSW + DataV | 数据分析与可视化 |
 
-#<!-- chunk: 4.2 实验自动化技术栈 -->## 4.2 实验自动化技术栈
+## 4.2 实验自动化技术栈
 
 | 类别 | 工具/协议 | 说明 |
 |:---|:---|:---|
@@ -271,7 +271,7 @@ flowchart LR
 
 <!-- chunk: 5. K8s 部署方案 -->## 5. K8s 部署方案
 
-#<!-- chunk: 5.1 AlphaFold 推理服务 -->## 5.1 AlphaFold 推理服务
+## 5.1 AlphaFold 推理服务
 
 ```yaml
 apiVersion: apps/v1
@@ -339,7 +339,7 @@ spec:
             claimName: alphafold-output-pvc
 ```
 
-#<!-- chunk: 5.2 生物信息学批处理作业 -->## 5.2 生物信息学批处理作业
+## 5.2 生物信息学批处理作业
 
 ```yaml
 apiVersion: batch/v1
@@ -391,7 +391,7 @@ spec:
       restartPolicy: Never
 ```
 
-#<!-- chunk: 5.3 LIMS 数据管理服务 -->## 5.3 LIMS 数据管理服务
+## 5.3 LIMS 数据管理服务
 
 ```yaml
 apiVersion: apps/v1
@@ -461,7 +461,7 @@ spec:
 
 <!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-#<!-- chunk: 6.1 数据分层 -->## 6.1 数据分层
+## 6.1 数据分层
 
 ```mermaid
 flowchart TB
@@ -489,7 +489,7 @@ flowchart TB
     原始数据 --> 处理数据 --> 应用数据
 ```
 
-#<!-- chunk: 6.2 数据存储策略 -->## 6.2 数据存储策略
+## 6.2 数据存储策略
 
 | 数据类型 | 存储方案 | 保留策略 | 说明 |
 |:---|:---|:---|:---|
@@ -504,7 +504,7 @@ flowchart TB
 
 <!-- chunk: 7. AI/ML 组件 -->## 7. AI/ML 组件
 
-#<!-- chunk: 7.1 密码子优化模型 -->## 7.1 密码子优化模型
+## 7.1 密码子优化模型
 
 ```python
 from typing import Dict, List
@@ -566,7 +566,7 @@ class CodonOptimizer:
         return usage_tables.get(host, {})
 ```
 
-#<!-- chunk: 7.2 AI 应用矩阵 -->## 7.2 AI 应用矩阵
+## 7.2 AI 应用矩阵
 
 | AI 场景 | 模型/算法 | 输入 | 输出 | 硬件需求 |
 |:---|:---|:---|:---|:---|
@@ -582,7 +582,7 @@ class CodonOptimizer:
 
 <!-- chunk: 8. 安全合规 -->## 8. 安全合规
 
-#<!-- chunk: 8.1 生物安全管控 -->## 8.1 生物安全管控
+## 8.1 生物安全管控
 
 | 安全层级 | 措施 | 技术实现 |
 |:---|:---|:---|
@@ -593,7 +593,7 @@ class CodonOptimizer:
 | 伦理合规 | 人类基因编辑审批 | 电子签名 + 伦理委员会审批流 |
 | 物理安全 | 实验室门禁控制 | IoT 门禁 + 视频监控 |
 
-#<!-- chunk: 8.2 合规框架 -->## 8.2 合规框架
+## 8.2 合规框架
 
 - **生物安全法**: 高风险病原微生物实验审批，基因编辑生物安全管理
 - **人类遗传资源管理条例**: 人类基因组数据出境审批，采样知情同意
@@ -617,25 +617,25 @@ class CodonOptimizer:
 
 <!-- chunk: 10. 反模式 -->## 10. 反模式
 
-#<!-- chunk: 10.1 忽视生物安全 -->## 10.1 忽视生物安全
+## 10.1 忽视生物安全
 
 基因合成不筛查致病序列，直接下单合成。
 
 **解决方案**: 集成致病序列数据库（NCBI Pathogen Detection、BacDive），所有基因合成请求自动 BLAST 筛查，命中致病序列的订单触发安全委员会人工审核。
 
-#<!-- chunk: 10.2 计算与实验脱节 -->## 10.2 计算与实验脱节
+## 10.2 计算与实验脱节
 
 计算预测不与实验验证闭环，设计和实验数据分散在不同系统中。
 
 **解决方案**: 建立 DBTL 工作流引擎，将计算设计结果自动转换为实验方案，实验数据自动回流到分析平台，形成闭环迭代。
 
-#<!-- chunk: 10.3 数据不标准化 -->## 10.3 数据不标准化
+## 10.3 数据不标准化
 
 实验数据格式不统一，不同实验员使用不同模板，数据难以横向比较。
 
 **解决方案**: 采用 SBOL/GenBank 标准格式描述生物元件和序列数据，LIMS 系统强制使用标准实验协议模板，数据入库前自动校验格式。
 
-#<!-- chunk: 10.4 单体架构处理大规模数据 -->## 10.4 单体架构处理大规模数据
+## 10.4 单体架构处理大规模数据
 
 将基因组比对等大规模计算任务放在单体应用中处理，无法利用集群并行能力。
 
@@ -645,7 +645,7 @@ class CodonOptimizer:
 
 <!-- chunk: 11. 参考资源 -->## 11. 参考资源
 
-#<!-- chunk: 11.1 阿里云组件映射 -->## 11.1 阿里云组件映射
+## 11.1 阿里云组件映射
 
 | 功能域 | 阿里云云原生方案 | 说明 |
 |:---|:---|:---|
@@ -658,7 +658,7 @@ class CodonOptimizer:
 | 工作流 | **ACK + Argo Workflows** | 生信流水线编排 |
 | 可观测性 | **ARMS + SLS** | 全链路监控 |
 
-#<!-- chunk: 11.2 生产检查清单 -->## 11.2 生产检查清单
+## 11.2 生产检查清单
 
 - [ ] AlphaFold 预测精度验证（GDT-TS > 85）
 - [ ] 高通量实验设备 SiLA2/OPC UA 集成测试
@@ -678,17 +678,17 @@ class CodonOptimizer:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

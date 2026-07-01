@@ -191,7 +191,7 @@ created: "2026-05-23"
     - [Node Components](#node-components)
       - [Autoscaling and Metrics](#autoscaling-and-metrics)
         - [Cluster Autoscaler](#cluster-autoscaler)
-      - [[entities/container-runtime|Container Runtime]] Interface (CRI)](#container-runtime-interface-cri)
+      - [[entities/container-runtime.md|Container Runtime]] Interface (CRI)](#container-runtime-interface-cri)
       - [kubelet](#kubelet)
     - [Auth](#auth-1)
     - [Cluster Lifecycle](#cluster-lifecycle-1)

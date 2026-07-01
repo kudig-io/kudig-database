@@ -90,4 +90,4 @@ Inspektor Gadget 是一组基于 eBPF 的工具集合 ("gadgets")，用于调试
 ## Related
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

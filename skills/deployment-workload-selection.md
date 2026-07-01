@@ -187,17 +187,17 @@ spec:
 
 ## 相关技能
 
-- [[skills/deployment-rolling-update|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
-- [[skills/deployment-canary-and-bluegreen|[[金丝雀与蓝绿发布|金丝雀与蓝绿发布]]]]
+- [[skills/deployment-rolling-update.md|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
+- [[skills/deployment-canary-and-bluegreen.md|[[金丝雀与蓝绿发布|金丝雀与蓝绿发布]]]]
 - [[deployment|Deployment]]
-- [[entities/statefulset|StatefulSet]]
+- [[entities/statefulset.md|StatefulSet]]
 
 ## Related
 
 - [[fluentd]] — Fluentd
-- [[entities/statefulset|statefulset]] — StatefulSet
+- [[entities/statefulset.md|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/10-workload-comparison|Deployment vs StatefulSet vs DaemonSet 选型指南]]
+- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/10-workload-comparison.md|Deployment vs StatefulSet vs DaemonSet 选型指南]]

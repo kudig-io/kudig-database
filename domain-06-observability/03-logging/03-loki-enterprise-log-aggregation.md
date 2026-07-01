@@ -107,7 +107,7 @@ Loki is a horizontally scalable, highly available log aggregation system develop
 
 <!-- chunk: 架构设计 (Architecture Design) -->## 架构设计 (Architecture Design)
 
-#<!-- chunk: 核心组件架构 (Core Component Architecture) -->## 核心组件架构 (Core Component Architecture)
+## 核心组件架构 (Core Component Architecture)
 
 ```yaml
 # Loki 企业级架构
@@ -174,7 +174,7 @@ data:
       retention_delete_delay: 2h
 ```
 
-#<!-- chunk: 微服务架构 (Microservices Architecture) -->## 微服务架构 (Microservices Architecture)
+## 微服务架构 (Microservices Architecture)
 
 ```mermaid
 graph TB
@@ -220,7 +220,7 @@ graph TB
 
 <!-- chunk: 部署配置 (Deployment Configuration) -->## 部署配置 (Deployment Configuration)
 
-#<!-- chunk: 分布式部署 (Distributed Deployment) -->## 分布式部署 (Distributed Deployment)
+## 分布式部署 (Distributed Deployment)
 
 ```yaml
 # Loki Distributor 部署
@@ -327,7 +327,7 @@ spec:
           storage: 100Gi
 ```
 
-#<!-- chunk: 对象存储集成 (Object Storage Integration) -->## 对象存储集成 (Object Storage Integration)
+## 对象存储集成 (Object Storage Integration)
 
 ```yaml
 # AWS S3 配置
@@ -354,7 +354,7 @@ storage_config:
 
 <!-- chunk: 日志收集代理 (Log Collection Agents) -->## 日志收集代理 (Log Collection Agents)
 
-#<!-- chunk: Promtail 配置 (Promtail Configuration) -->## Promtail 配置 (Promtail Configuration)
+## Promtail 配置 (Promtail Configuration)
 
 ```yaml
 # Promtail 主配置
@@ -418,7 +418,7 @@ scrape_configs:
           source: message
 ```
 
-#<!-- chunk: Fluent Bit 集成 (Fluent Bit Integration) -->## Fluent Bit 集成 (Fluent Bit Integration)
+## Fluent Bit 集成 (Fluent Bit Integration)
 
 ```yaml
 # Fluent Bit Loki 输出插件配置
@@ -458,7 +458,7 @@ scrape_configs:
 
 <!-- chunk: 日志处理管道 (Log Processing Pipelines) -->## 日志处理管道 (Log Processing Pipelines)
 
-#<!-- chunk: 高级日志解析 (Advanced Log Parsing) -->## 高级日志解析 (Advanced Log Parsing)
+## 高级日志解析 (Advanced Log Parsing)
 
 ```yaml
 # 复杂日志处理管道
@@ -488,15 +488,14 @@ pipeline_stages:
       source: message
   
   # 条件过滤
-  - match:
-      selector: '{level="ERROR"}'
-      stages:
-        - static_labels:
-            severity: high
-        - drop:
-            source: error_code
-            expression: "^4\\d{2}$"
-  
+  - matchers:
+    - selector="{level="ERROR"}"
+    - stages=""
+    - - static_labels=""
+    - severity="high"
+    - - drop=""
+    - source="error_code"
+    - expression="^4\\d{2}$"
   # 正则表达式解析
   - regex:
       expression: '^(?P<ip>\d+\.\d+\.\d+\.\d+) - (?P<user>\S+) \[(?P<timestamp>[^\]]+)\] "(?P<method>\S+) (?P<path>\S+) (?P<protocol>\S+)" (?P<status>\d+) (?P<size>\d+)'
@@ -512,7 +511,7 @@ pipeline_stages:
       template: '{{ TrimPrefix "/" .Value }}'
 ```
 
-#<!-- chunk: 动态标签管理 (Dynamic Label Management) -->## 动态标签管理 (Dynamic Label Management)
+## 动态标签管理 (Dynamic Label Management)
 
 ```yaml
 # 动态标签配置
@@ -527,14 +526,14 @@ scrape_configs:
           cluster: production
           region: us-west-2
       # 基于内容的标签
-      - match:
-          selector: '{container="nginx"}'
-          stages:
-            - regex:
-                expression: 'GET|POST|PUT|DELETE'
-                source: msg
-            - labels:
-                method:
+      - matchers:
+        - selector="{container="nginx"}"
+        - stages=""
+        - - regex=""
+        - expression="GET|POST|PUT|DELETE"
+        - source="msg"
+        - - labels=""
+        - method=""
       # 标签重写
       - labeldrop:
           - pod_template_hash
@@ -548,7 +547,7 @@ scrape_configs:
 
 <!-- chunk: 查询分析 (Query and Analytics) -->## 查询分析 (Query and Analytics)
 
-#<!-- chunk: LogQL 查询语言 (LogQL Query Language) -->## LogQL 查询语言 (LogQL Query Language)
+## LogQL 查询语言 (LogQL Query Language)
 
 ```logql
 # 基础日志查询
@@ -577,7 +576,7 @@ by (pod) > 10
 | pattern "<_> - - <ip> <_> \"<method> <path> <_>\" <status> <size>"
 ```
 
-#<!-- chunk: 可视化分析 (Visualization Analytics) -->## 可视化分析 (Visualization Analytics)
+## 可视化分析 (Visualization Analytics)
 
 ```json
 {
@@ -621,7 +620,7 @@ by (pod) > 10
 
 <!-- chunk: 性能优化 (Performance Optimization) -->## 性能优化 (Performance Optimization)
 
-#<!-- chunk: 存储优化 (Storage Optimization) -->## 存储优化 (Storage Optimization)
+## 存储优化 (Storage Optimization)
 
 ```yaml
 # 性能优化配置
@@ -657,7 +656,10 @@ query_range:
         service: memcached-client
 ```
 
-#<!-- chunk: 查询优化 (Query Optimization) -->## 查询优化 (Query Optimization)
+## 查询优化 (Query Optimization)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -698,7 +700,7 @@ cleanup_storage() {
 
 <!-- chunk: 监控告警 (Monitoring and Alerting) -->## 监控告警 (Monitoring and Alerting)
 
-#<!-- chunk: 关键指标监控 (Key Metrics Monitoring) -->## 关键指标监控 (Key Metrics Monitoring)
+## 关键指标监控 (Key Metrics Monitoring)
 
 ```yaml
 # Loki 监控规则
@@ -758,7 +760,7 @@ groups:
 
 <!-- chunk: 安全配置 (Security Configuration) -->## 安全配置 (Security Configuration)
 
-#<!-- chunk: 认证授权 (Authentication and Authorization) -->## 认证授权 (Authentication and Authorization)
+## 认证授权 (Authentication and Authorization)
 
 ```yaml
 # Auth 配置
@@ -794,7 +796,7 @@ rbac:
         - read
 ```
 
-#<!-- chunk: 网络安全 (Network Security) -->## 网络安全 (Network Security)
+## 网络安全 (Network Security)
 
 ```yaml
 # Network Policies
@@ -830,7 +832,10 @@ spec:
 
 <!-- chunk: 问题排除 (Troubleshooting) -->## 问题排除 (Troubleshooting)
 
-#<!-- chunk: 常见问题诊断 (Common Issue Diagnosis) -->## 常见问题诊断 (Common Issue Diagnosis)
+## 常见问题诊断 (Common Issue Diagnosis)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -889,7 +894,7 @@ log_stream_diagnostics() {
 
 <!-- chunk: 最佳实践 (Best Practices) -->## 最佳实践 (Best Practices)
 
-#<!-- chunk: 部署最佳实践 (Deployment Best Practices) -->## 部署最佳实践 (Deployment Best Practices)
+## 部署最佳实践 (Deployment Best Practices)
 
 1. **资源规划**
    ```yaml
@@ -912,7 +917,7 @@ log_stream_diagnostics() {
    - 配置连接池
    - 优化超时设置
 
-#<!-- chunk: 运维最佳实践 (Operations Best Practices) -->## 运维最佳实践 (Operations Best Practices)
+## 运维最佳实践 (Operations Best Practices)
 
 1. **监控覆盖**
    - 端到端延迟监控
@@ -940,8 +945,8 @@ log_stream_diagnostics() {
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-21-logging-management-analytics MOC
-- [[domain-06-observability/README|Domain 21: 日志管理与分析 (Logging Management & Analytics)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-21 日志管理与分析 — 开源项目索引]]
+- [[domain-06-observability/README.md|Domain 06: 日志管理与分析 (Logging Management & Analytics)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-21 日志管理与分析 — 开源项目索引]]
 - ELK Stack企业级日志管理系统深度实践
 - Fluentd企业级日志收集与处理深度实践
 - 企业级日志治理与合规审计深度实践
@@ -958,8 +963,8 @@ log_stream_diagnostics() {
 - 04-enterprise-log-governance-compliance
 - 04-graylog-enterprise-logging
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

@@ -30,13 +30,14 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # [[Kubernetes|Kubernetes]] 对象状态指标（kube-state-metrics）
 
 ## 概述
 
-kube-state-metrics 是一个 Kubernetes 插件代理，用于从 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 中对象的状态生成并暴露集群级指标。它连接到 API 服务器，通过 HTTP 端点暴露由集群中各个对象状态生成的指标，使运维人员能够基于对象状态进行查询和告警。
+kube-state-metrics 是一个 Kubernetes 插件代理，用于从 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 中对象的状态生成并暴露集群级指标。它连接到 API 服务器，通过 HTTP 端点暴露由集群中各个对象状态生成的指标，使运维人员能够基于对象状态进行查询和告警。
 
 ## 核心概念/原理
 
@@ -109,4 +110,4 @@ kube-state-metrics 本身只是一个指标暴露端点，需要配合 Prometheu
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

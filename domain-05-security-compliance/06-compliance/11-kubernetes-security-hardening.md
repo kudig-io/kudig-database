@@ -97,7 +97,7 @@ Kubernetes 安全加固是构建安全云原生基础设施的基础工作。从
 
 本文系统性地介绍 Kubernetes 安全加固的完整方案，包括 CIS Benchmark 合规检查、Pod Security Standards 实施、网络隔离策略设计、Secrets 加密配置、安全上下文管理和运行时防护，帮助企业在多层防御体系下构建安全的 Kubernetes 集群。
 
-#<!-- chunk: 威胁模型分析 -->## 威胁模型分析
+## 威胁模型分析
 
 Kubernetes 集群面临的安全威胁来自多个攻击向量，需要分层防御：
 
@@ -113,7 +113,7 @@ Kubernetes 集群面临的安全威胁来自多个攻击向量，需要分层防
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: Kubernetes 多层安全架构 -->## Kubernetes 多层安全架构
+## Kubernetes 多层安全架构
 
 ```mermaid
 graph TB
@@ -169,7 +169,7 @@ graph TB
     SE --> MON
 ```
 
-#<!-- chunk: 安全加固检查清单 -->## 安全加固检查清单
+## 安全加固检查清单
 
 ```yaml
 kubernetes_hardening_checklist:
@@ -177,10 +177,6 @@ kubernetes_hardening_checklist:
     - "API Server: 禁用匿名访问"
     - "API Server: 启用 RBAC"
     - "API Server: 配置审计日志"
-
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
 
     - "API Server: 启用 PodSecurityPolicy 替代 (PSS)"
     - "etcd: 启用 TLS 加密通信"
@@ -218,7 +214,7 @@ kubernetes_hardening_checklist:
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: CIS Kubernetes Benchmark 合规 -->## CIS Kubernetes Benchmark 合规
+## CIS Kubernetes Benchmark 合规
 
 CIS Kubernetes Benchmark 是业界公认的 Kubernetes 安全配置基线。以下配置对照 CIS Benchmark 的关键检查项进行加固：
 
@@ -273,7 +269,7 @@ spec:
         - --etcd-servers=https://127.0.0.1:2379
 ```
 
-#<!-- chunk: 审计策略配置 -->## 审计策略配置
+## 审计策略配置
 
 ```yaml
 # /etc/kubernetes/audit-policy.yaml
@@ -327,7 +323,7 @@ rules:
       - RequestReceived
 ```
 
-#<!-- chunk: Secrets 静态加密配置 -->## Secrets 静态加密配置
+## Secrets 静态加密配置
 
 ```yaml
 # /etc/kubernetes/encryption-config.yaml
@@ -343,6 +339,10 @@ resources:
               secret: <BASE64_ENCODED_SECRET_32BYTES>
       - identity: {}
 ```
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash
@@ -388,7 +388,7 @@ ETCDCTL_API=3 etcdctl get / --prefix --keys-only \
   grep -c "k8s:enc:aescbc:v1:key1"
 ```
 
-#<!-- chunk: KMS 加密（生产级） -->## KMS 加密（生产级）
+## KMS 加密（生产级）
 
 对于生产环境，建议使用 KMS（Key Management Service）提供者进行 Secrets 加密，支持 AWS KMS、Azure Key Vault、Google Cloud KMS 等云服务：
 
@@ -412,7 +412,7 @@ resources:
       - identity: {}
 ```
 
-#<!-- chunk: kubelet 安全加固 -->## kubelet 安全加固
+## kubelet 安全加固
 
 ```yaml
 # /var/lib/kubelet/config.yaml
@@ -454,7 +454,7 @@ enableDebuggingHandlers: false
 
 <!-- chunk: 安全策略实战 -->## 安全策略实战
 
-#<!-- chunk: Pod Security Standards 实施 -->## Pod Security Standards 实施
+## Pod Security Standards 实施
 
 Pod Security Standards（PSS）是 Kubernetes 内置的 Pod 安全策略框架，定义了三个安全级别。Privileged 模式不做任何限制，适用于系统组件。Baseline 模式禁止已知的危险提升权限策略。Restricted 模式在 Baseline 基础上进一步加固，强制要求安全上下文配置：
 
@@ -494,7 +494,7 @@ metadata:
     pod-security.kubernetes.io/warn: baseline
 ```
 
-#<!-- chunk: 完整 SecurityContext 模板 -->## 完整 SecurityContext 模板
+## 完整 SecurityContext 模板
 
 ```yaml
 apiVersion: apps/v1
@@ -574,7 +574,7 @@ spec:
               app: secure-app
 ```
 
-#<!-- chunk: NetworkPolicy 网络隔离 -->## NetworkPolicy 网络隔离
+## NetworkPolicy 网络隔离
 
 ```yaml
 # 默认拒绝所有流量（每个命名空间的基线策略）
@@ -731,7 +731,7 @@ spec:
           protocol: UDP
 ```
 
-#<!-- chunk: 命名空间隔离策略 -->## 命名空间隔离策略
+## 命名空间隔离策略
 
 ```yaml
 # 命名空间级别的资源配额
@@ -780,7 +780,7 @@ spec:
 
 <!-- chunk: 合规与审计 -->## 合规与审计
 
-#<!-- chunk: CIS Benchmark 自动化检查 -->## CIS Benchmark 自动化检查
+## CIS Benchmark 自动化检查
 
 ```bash
 #!/bin/bash
@@ -812,7 +812,7 @@ jq '.Controls[] | {
   }' cis-report.json
 ```
 
-#<!-- chunk: 安全合规持续监控 -->## 安全合规持续监控
+## 安全合规持续监控
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -878,7 +878,7 @@ spec:
 
 <!-- chunk: 监控与告警 -->## 监控与告警
 
-#<!-- chunk: 安全监控仪表板 -->## 安全监控仪表板
+## 安全监控仪表板
 
 ```json
 {
@@ -949,7 +949,7 @@ spec:
 }
 ```
 
-#<!-- chunk: 安全事件审计管道 -->## 安全事件审计管道
+## 安全事件审计管道
 
 ```bash
 #!/bin/bash
@@ -987,25 +987,26 @@ echo "<!-- chunk: 4. RBAC Changes" >> "$REPORT_DIR/$DATE/report.md" -->## 4. RBA
 jq 'select(.objectRef.resource | test("role|clusterrole|rolebinding|clusterrolebinding"))
     | "| \(.stageTimestamp) | \(.user.username) | \(.verb) | \(.objectRef.name) |"' \
   "$AUDIT_LOG" >> "$REPORT_DIR/$DATE/report.md"
+
 ```
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 安全加固分层策略 -->## 安全加固分层策略
+## 安全加固分层策略
 
 Kubernetes 安全加固应采用分层防御策略。在基础设施层，确保节点操作系统已加固，禁用不必要的系统服务，启用 SELinux 或 AppArmor。在控制平面层，遵循 CIS Benchmark 配置 API Server、etcd 和 kubelet。在网络层，实施默认拒绝的 NetworkPolicy 和 mTLS。在工作负载层，应用 Pod Security Standards 和安全上下文。在数据层，加密 Secrets 和 PV。
 
-#<!-- chunk: 密钥管理最佳实践 -->## 密钥管理最佳实践
+## 密钥管理最佳实践
 
 永远不要将敏感信息硬编码在代码或镜像中。使用 Kubernetes Secrets 配合静态加密，或集成外部密钥管理系统（如 HashiCorp Vault）。启用 Secret 自动轮换，使用短 TTL 的动态凭证。限制 Secret 的 RBAC 访问权限，仅授予必要的服务账户读取权限。启用审计日志记录所有 Secret 访问行为。
 
-#<!-- chunk: 持续安全评估 -->## 持续安全评估
+## 持续安全评估
 
 安全加固不是一次性工作，需要建立持续评估机制。定期运行 CIS Benchmark 检查（至少每月一次）。使用 kube-bench 或 Trivy Operator 的 CIS 扫描功能自动化合规检查。对新发现的 CVE 及时评估影响范围，使用 Trivy 扫描集群中的镜像。建立安全事件响应流程，对告警进行分级处理。
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题 -->## 常见问题
+## 常见问题
 
 **PSS 阻止合法 Pod**：检查命名空间的 PSS 标签级别是否过高。使用 `kubectl label namespace` 临时调整为 audit 模式观察。对于确实需要宽松配置的系统组件，使用 privileged 级别的命名空间。
 
@@ -1070,8 +1071,8 @@ kubectl get events --all-namespaces --sort-by='.lastTimestamp' \
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
@@ -1089,4 +1090,5 @@ kubectl get events --all-namespaces --sort-by='.lastTimestamp' \
 - 17-gvisor-container-sandbox
 - 99-cert-manager-tls-guide
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
+```

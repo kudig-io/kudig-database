@@ -67,7 +67,6 @@ created: "2026-05-23"
 ---
 
 
-
 # Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 
 ---
@@ -93,8 +92,6 @@ Deployment 滚动更新问题是 [[Kubernetes|Kubernetes]] 生产环境中**最�
 - **工具要求**: kubectl, jq（可选但推荐用于 JSON 解析）
 - **监控系统**: Prometheus + kube-state-metrics（用于 trigger_metrics 匹配）
 - **镜像仓库访问**: 确保有权限验证镜像可用性
-
-> ⚠️ **重要**: 生产环境主服务的滚动更新失败属于 P0 事件，应立即响应。回滚操作本身也可能失败，需准备多重恢复方案。
 
 ---
 
@@ -373,6 +370,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
 
 **Step D2.3**: 检查 readinessProbe 配置与响应
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 获取 readinessProbe 配置
   kubectl get deploy NAME -n NS -o jsonpath='{.spec.template.spec.containers[*].readinessProbe}' | jq .
@@ -496,8 +497,6 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
 
 > **目标**: 针对特定工作负载类型（StatefulSet、DaemonSet）和高级场景（金丝雀、Webhook）进行深度分析。
 > **预计耗时**: 5-15 分钟
-> ⚠️ 以下部分步骤可能涉及 API 查询较多，请注意频率
-
 **Step D3.1**: StatefulSet 有序更新分析
 - **命令**:
   ```bash
@@ -646,6 +645,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   kubectl get deploy NAME -n NS -o jsonpath='{.spec.template.spec.containers[0].readinessProbe}' | jq .
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 增加 initialDelaySeconds（如果应用启动慢）
   kubectl patch deployment NAME -n NS --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/readinessProbe/initialDelaySeconds", "value": 30}]'
@@ -667,6 +670,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   # 预期: "deployment NAME successfully rolled out"
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 恢复原配置
   kubectl rollout undo deployment/NAME -n NS
@@ -681,6 +688,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   # 预期: 发现 maxUnavailable 和 maxSurge 配置过于保守
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 设置合理的滚动更新策略
   kubectl patch deployment NAME -n NS -p '{"spec":{"strategy":{"type":"RollingUpdate","rollingUpdate":{"maxUnavailable":"25%","maxSurge":"25%"}}}}'
@@ -689,6 +700,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   kubectl patch deployment NAME -n NS -p '{"spec":{"strategy":{"type":"RollingUpdate","rollingUpdate":{"maxUnavailable":1,"maxSurge":1}}}}'
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 确认策略已更新
   kubectl get deploy NAME -n NS -o jsonpath='{.spec.strategy}'
@@ -700,6 +715,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   kubectl rollout status deployment/NAME -n NS --timeout=300s
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 恢复原策略
   kubectl patch deployment NAME -n NS -p '{"spec":{"strategy":{"type":"RollingUpdate","rollingUpdate":{"maxUnavailable":"0","maxSurge":"0"}}}}'
@@ -717,6 +736,11 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   kubectl logs -n NS -l app=NAME --tail=50 | head -20
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 延长 deadline（例如设置为 20 分钟）
   kubectl patch deployment NAME -n NS -p '{"spec":{"progressDeadlineSeconds":1200}}'
@@ -733,6 +757,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   kubectl rollout status deployment/NAME -n NS --timeout=1200s
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 恢复原 deadline
   kubectl patch deployment NAME -n NS -p '{"spec":{"progressDeadlineSeconds":600}}'
@@ -750,6 +778,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   kubectl rollout history deployment/NAME -n NS --revision=$(kubectl rollout history deployment/NAME -n NS | tail -2 | head -1 | awk '{print $1}')
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 回滚到上一个版本
   kubectl rollout undo deployment/NAME -n NS
@@ -770,6 +802,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   # 预期: AVAILABLE = DESIRED
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 如果回滚有问题，可以再次 undo 回到之前版本
   kubectl rollout undo deployment/NAME -n NS
@@ -793,6 +829,12 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   kubectl get deploy -n NS -o jsonpath='{range .items[*]}{.metadata.name}: {.spec.template.spec.volumes[*].configMap.name}{"\n"}{end}' | grep CM_NAME
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 方案 A: 修复 ConfigMap 内容
   kubectl edit configmap CM_NAME -n NS
@@ -806,6 +848,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   kubectl rollout restart deployment/NAME -n NS
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 确认 Pod 使用了新配置
   kubectl exec -n NS POD_NAME -- cat /path/to/config/file
@@ -816,6 +862,11 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   kubectl rollout status deployment/NAME -n NS --timeout=300s
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 恢复原 ConfigMap 内容（需要有备份）
   kubectl apply -f configmap-backup.yaml
@@ -835,6 +886,11 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   kubectl get pdb PDB_NAME -n NS -o jsonpath='{.status}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 调整 maxUnavailable（允许一定数量不可用）
   kubectl patch pdb PDB_NAME -n NS -p '{"spec":{"maxUnavailable":1}}'
@@ -846,6 +902,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   kubectl delete pdb PDB_NAME -n NS
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 确认 PDB 已更新
   kubectl get pdb PDB_NAME -n NS -o jsonpath='{.status.disruptionsAllowed}'
@@ -856,6 +916,11 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   kubectl rollout status deployment/NAME -n NS --timeout=300s
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 恢复原 PDB 配置
   kubectl patch pdb PDB_NAME -n NS -p '{"spec":{"minAvailable":"100%"}}'
@@ -876,6 +941,11 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   cat deployment-backup.yaml | head -30
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 强制替换 Deployment
   kubectl replace --force -f deployment-backup.yaml
@@ -895,6 +965,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   kubectl get pods -n NS -l app=NAME
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 使用备份文件恢复（但版本会是替换前的版本）
   kubectl apply -f deployment-backup.yaml
@@ -914,6 +988,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
      kubectl get pods -n NS -l app=NAME -o wide --sort-by=.metadata.name
      ```
   2. **设置 partition 值，仅更新最后一个 Pod**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
      ```bash
      # 假设有 3 个副本 (pod-0, pod-1, pod-2)，设置 partition=2 只更新 pod-2
      kubectl patch sts NAME -n NS -p '{"spec":{"updateStrategy":{"type":"RollingUpdate","rollingUpdate":{"partition":2}}}}'
@@ -923,6 +1001,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
      kubectl get pods -n NS -l app=NAME -o jsonpath='{range .items[*]}{.metadata.name}: {.metadata.labels.controller-revision-hash}{"\n"}{end}'
      ```
   4. **逐步降低 partition 更新更多 Pod**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
      ```bash
      kubectl patch sts NAME -n NS -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":1}}}}'
      # 等待 pod-1 更新完成
@@ -937,6 +1019,11 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   - 确保每个 Pod 更新后应用功能正常再继续下一个
   - 对于数据库等有状态服务，确认数据复制正常
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 如果某个 Pod 更新失败，可以回滚整个 StatefulSet
   kubectl rollout undo sts/NAME -n NS
@@ -960,12 +1047,20 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
      kubectl get rs NEW_RS -n NS -w
      ```
   3. **验证新 Pod 功能正常**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
      ```bash
      # 检查新 Pod 日志和健康状态
      kubectl logs -n NS -l app=NAME --tail=50
      kubectl exec -n NS NEW_POD -- curl -s localhost:8080/health
      ```
   4. **手动缩容旧 RS**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+
      ```bash
      kubectl scale rs OLD_RS -n NS --replicas=0
      # 等待旧 Pod 终止
@@ -980,6 +1075,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   - 在缩容旧 RS 前确保新 RS 的 Pod 已经 Ready 且服务正常
   - 监控服务健康状况，避免容量不足
 - **回滚方案**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+
   ```bash
   # 如果新版本有问题，反向操作
   kubectl scale rs OLD_RS -n NS --replicas=DESIRED_REPLICAS
@@ -1010,6 +1109,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
      echo "Service NAME in namespace NS will be recreated. Expected downtime: 2-5 minutes."
      ```
   3. **删除 Deployment（会级联删除 RS 和 Pod）**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      kubectl delete deploy NAME -n NS
      # 等待所有 Pod 终止
@@ -1022,6 +1125,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
      # 移除 status 字段和 resourceVersion
      ```
   5. **重新创建 Deployment**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
      ```bash
      kubectl apply -f deploy-backup.yaml
      ```
@@ -1032,6 +1139,11 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
      kubectl get pods -n NS -l app=NAME
      ```
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 如果重建后仍有问题，可以使用原始备份
   # 但需要先删除当前 Deployment
@@ -1055,11 +1167,19 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
      kubectl get virtualservice -n NS -o yaml 2>/dev/null
      ```
   2. **方案 A: 切换 Service selector 回滚流量**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
      ```bash
      # 将 Service 指向稳定版本的 Deployment
      kubectl patch svc SERVICE_NAME -n NS -p '{"spec":{"selector":{"version":"stable"}}}'
      ```
   3. **方案 B: 调整 Ingress/VirtualService 权重**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
      ```bash
      # Istio 示例：将 100% 流量切回稳定版本
      kubectl patch virtualservice VS_NAME -n NS --type='json' -p='[
@@ -1076,6 +1196,10 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
   - 确认目标版本（稳定版）的 Pod 都在运行且健康
   - 观察切换后的错误率和延迟指标
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 恢复原流量配置
   kubectl apply -f traffic-config-backup.yaml
@@ -1212,6 +1336,7 @@ kubectl get deploy NAME -n NS -o jsonpath='{range .status.conditions[*]}{.type}:
    kubectl logs -n NS -l app=NAME --previous --tail=200 > pod-logs-previous.txt 2>/dev/null
    # 相关事件
    kubectl get events -n NS --sort-by=.lastTimestamp > events.txt
+
    ```
 5. **事件时间线**: 最近 30 分钟内的关键事件按时间排列
    - `HH:MM:SS` - 首次检测到滚动更新失败
@@ -1334,4 +1459,6 @@ kubectl get deploy NAME -n NS -o jsonpath='{range .status.conditions[*]}{.type}:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

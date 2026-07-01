@@ -78,7 +78,7 @@ created: "2026-05-23"
 
 Apache APISIX 是 Apache 软件基金会顶级项目，由 API7.ai 主导开发，是一款高性能、可扩展的云原生 API 网关。
 
-#<!-- chunk: 核心特点 -->## 核心特点
+## 核心特点
 
 - **极致性能**: 基于 OpenResty（Nginx + LuaJIT），单核可达 10K+ QPS
 - **丰富插件**: 100+ 内置插件，覆盖认证、限流、安全、可观测等场景
@@ -86,7 +86,7 @@ Apache APISIX 是 Apache 软件基金会顶级项目，由 API7.ai 主导开发�
 - **动态配置**: 基于 etcd 实时配置下发，毫秒级生效
 - **全协议支持**: HTTP/HTTPS、[[gRPC|gRPC]]、WebSocket、TCP/UDP、MQTT
 
-#<!-- chunk: 发展历程 -->## 发展历程
+## 发展历程
 
 | 时间 | 里程碑 |
 |------|--------|
@@ -136,7 +136,7 @@ Apache APISIX 是 Apache 软件基金会顶级项目，由 API7.ai 主导开发�
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 核心概念 -->## 核心概念
+## 核心概念
 
 | 概念 | 说明 |
 |------|------|
@@ -150,7 +150,10 @@ Apache APISIX 是 Apache 软件基金会顶级项目，由 API7.ai 主导开发�
 
 <!-- chunk: 3. 部署安装 -->## 3. 部署安装
 
-#<!-- chunk: Helm 安装（Kubernetes） -->## Helm 安装（Kubernetes）
+## Helm 安装（Kubernetes）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 添加 Helm 仓库
@@ -169,7 +172,7 @@ helm install apisix apisix/apisix \
 kubectl get pods -n apisix
 ```
 
-#<!-- chunk: Docker Compose（开发/测试） -->## Docker Compose（开发/测试）
+## Docker Compose（开发/测试）
 
 ```yaml
 version: "3"
@@ -202,7 +205,7 @@ services:
 
 <!-- chunk: 4. 路由与上游配置 -->## 4. 路由与上游配置
 
-#<!-- chunk: Admin API 创建路由 -->## Admin API 创建路由
+## Admin API 创建路由
 
 ```bash
 # 创建上游
@@ -232,7 +235,7 @@ curl http://127.0.0.1:9180/apisix/admin/routes/1 \
   }'
 ```
 
-#<!-- chunk: 负载均衡策略 -->## 负载均衡策略
+## 负载均衡策略
 
 ```json
 {
@@ -270,7 +273,7 @@ curl http://127.0.0.1:9180/apisix/admin/routes/1 \
 
 <!-- chunk: 5. 插件生态 -->## 5. 插件生态
 
-#<!-- chunk: 常用插件速查 -->## 常用插件速查
+## 常用插件速查
 
 | 类别 | 插件 | 说明 |
 |------|------|------|
@@ -299,7 +302,7 @@ curl http://127.0.0.1:9180/apisix/admin/routes/1 \
 | **流量** | traffic-split | 流量分割/金丝雀 |
 | | proxy-mirror | 流量镜像 |
 
-#<!-- chunk: 插件配置示例 -->## 插件配置示例
+## 插件配置示例
 
 ```json
 {
@@ -330,7 +333,7 @@ curl http://127.0.0.1:9180/apisix/admin/routes/1 \
 
 APISIX 支持通过 Plugin Runner 机制运行 Go、Java、Python 编写的插件：
 
-#<!-- chunk: Go 插件示例 -->## Go 插件示例
+## Go 插件示例
 
 ```go
 package main
@@ -361,7 +364,7 @@ func main() {
 }
 ```
 
-#<!-- chunk: 配置 Plugin Runner -->## 配置 Plugin Runner
+## 配置 Plugin Runner
 
 ```yaml
 # config.yaml
@@ -375,7 +378,7 @@ ext-plugin:
 
 APISIX Ingress Controller 在 Kubernetes 中以 CRD 方式管理 APISIX 配置：
 
-#<!-- chunk: 自定义 CRD 路由 -->## 自定义 CRD 路由
+## 自定义 CRD 路由
 
 ```yaml
 apiVersion: apisix.apache.org/v2
@@ -405,7 +408,7 @@ spec:
         time_window: 60
 ```
 
-#<!-- chunk: Kubernetes Ingress 兼容 -->## Kubernetes Ingress 兼容
+## Kubernetes Ingress 兼容
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -469,7 +472,7 @@ adc dump -o current.yaml
 
 <!-- chunk: 9. 可观测性 -->## 9. 可观测性
 
-#<!-- chunk: Prometheus 指标 -->## Prometheus 指标
+## Prometheus 指标
 
 ```bash
 # APISIX 内置 Prometheus 指标端点
@@ -483,7 +486,7 @@ curl http://127.0.0.1:9091/apisix/prometheus/metrics
 # apisix_node_info                      - 节点信息
 ```
 
-#<!-- chunk: OpenTelemetry 集成 -->## OpenTelemetry 集成
+## OpenTelemetry 集成
 
 ```json
 {
@@ -501,7 +504,7 @@ curl http://127.0.0.1:9091/apisix/prometheus/metrics
 
 <!-- chunk: 10. 生产环境最佳实践 -->## 10. 生产环境最佳实践
 
-#<!-- chunk: etcd 高可用 -->## etcd 高可用
+## etcd 高可用
 
 ```yaml
 # etcd 集群部署（至少 3 节点）
@@ -517,7 +520,7 @@ etcd:
       memory: "2Gi"
 ```
 
-#<!-- chunk: APISIX 资源配置 -->## APISIX 资源配置
+## APISIX 资源配置
 
 ```yaml
 gateway:
@@ -531,7 +534,7 @@ gateway:
       memory: "4Gi"
 ```
 
-#<!-- chunk: 关键调优参数 -->## 关键调优参数
+## 关键调优参数
 
 ```yaml
 # config.yaml
@@ -568,7 +571,7 @@ apisix:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-40-cloud-native-api-gateway MOC
-- [[domain-03-networking-traffic/README|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
 - Domain-40 云原生 API 网关 — 开源项目索引
 - 01 - 云原生 API 网关架构总览
 - 02 - Kubernetes Gateway API 标准深度解析
@@ -586,3 +589,5 @@ apisix:
 - 04-higress-enterprise-gateway
 - 06-kong-enterprise-gateway
 - 07-envoy-gateway-enterprise
+
+```

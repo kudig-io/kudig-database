@@ -85,7 +85,7 @@ related_domains:
 - domain-10-troubleshooting-diagnostics
 related_topics:
 - 09-upgrade
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/15-upgrade-advanced|15-upgrade-advanced]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/15-upgrade-advanced.md|15-upgrade-advanced]]
 - node-create/04-drain
 authors:
 - name: KUDIG Team
@@ -188,6 +188,9 @@ kubectl get nodes
 
 ### 2.2 控制面节点升级
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 在第一个控制面节点上执行
 # 1. 升级 kubeadm
@@ -207,6 +210,9 @@ systemctl restart kubelet
 ```
 
 ### 2.3 工作节点升级
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 在工作节点上执行
@@ -313,6 +319,10 @@ journalctl -u kubelet --no-pager -n 50
 
 ### 4.1 升级顺序
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 推荐升级顺序:
   ┌─────────────────────────────────────────────────────────────┐
@@ -346,6 +356,10 @@ journalctl -u kubelet --no-pager -n 50
 ```
 
 ### 4.2 工作节点滚动升级脚本
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -384,6 +398,9 @@ done
 ## 五、节点 OS 升级
 
 ### 5.1 OS 升级流程
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 1. Drain 节点
@@ -459,6 +476,9 @@ crictl ps
 
 ## 七、回滚（不推荐）
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 降级 kubelet（仅限紧急情况）
 sudo apt-get install kubelet=1.28.0-*
@@ -503,6 +523,8 @@ sudo apt-get install kubeadm=1.28.0-*
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+
+```

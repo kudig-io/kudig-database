@@ -47,7 +47,7 @@ title: containerd 分布式追踪与可观测性
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -60,7 +60,7 @@ title: containerd 分布式追踪与可观测性
 ## 参考链接
 
 - [[etcd]]
-- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[containerd]]
 - [[falco]]
 - [[deployment]]
@@ -74,4 +74,4 @@ title: containerd 分布式追踪与可观测性
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - 06-containerd-observability
-- [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
+- [[entities/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference

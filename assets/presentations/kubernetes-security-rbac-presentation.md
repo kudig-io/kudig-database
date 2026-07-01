@@ -201,10 +201,6 @@ ClusterRoleBinding│ 不适用       │ 集群权限
 | `LimitRanger` | 确保资源限制在 LimitRange 范围内 |
 | `ResourceQuota` | 检查是否超过 ResourceQuota |
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 | `PodSecurity` | 替代 PodSecurityPolicy 的安全策略 |
 | `DefaultStorageClass` | 自动分配默认 StorageClass |
 | `DefaultTolerationSeconds` | 设置默认容忍时间 |
@@ -214,7 +210,7 @@ ClusterRoleBinding│ 不适用       │ 集群权限
 NetworkPolicy 是 Pod 级别的防火墙，控制 Pod 之间的网络通信：
 
 ```yaml
-apiVersion: networking.[[entities/kubernetes|k8s]].io/v1
+apiVersion: networking.[[entities/kubernetes.md|k8s]].io/v1
 kind: NetworkPolicy
 metadata:
   name: default-deny-all
@@ -359,6 +355,9 @@ graph LR
 
 ### 演示 1：创建 RBAC 权限体系
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 步骤 1: 创建开发人员角色（只能读 Pod 和查看日志）
 cat <<EOF | kubectl apply -f -
@@ -426,6 +425,9 @@ EOF
 
 ### 演示 2：验证 RBAC 权限
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 步骤 1: 获取 ServiceAccount Token
 SA_TOKEN=$(kubectl create token developer-sa --duration=1h)
@@ -448,6 +450,10 @@ kubectl auth can-i --list --as=system:serviceaccount:production:developer-sa -n 
 ```
 
 ### 演示 3：NetworkPolicy 部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 步骤 1: 部署测试应用
@@ -537,6 +543,9 @@ kubectl auth can-i --list --as=system:anonymous
 ```
 
 ### 演示 5：Pod 安全标准
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 创建安全标签的命名空间

@@ -410,6 +410,9 @@ serverTLSBootstrap: true
 
 ### 验证 certSANs 是否生效
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 查看当前配置
 kubectl get cm kubeadm-config -n kube-system -o yaml
@@ -440,6 +443,10 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -ext subjectAltName
 ```
 
 ### kubeadm upgrade 与证书配置
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # upgrade 后如 SAN 缺失
@@ -475,14 +482,14 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 
 - [`CreatePKIAssets`](02-ca-generation.md) — 证书生成主入口
 - [`GetEtcdAltNames`](04-etcd-cert.md) — etcd SAN 收集
-- [`buildKubeConfigFromSpec`]([[domain-07-platform-engineering/topic-code-analysis/cluster-cert/12-kubeconfig-certs|12-kubeconfig-certs]].md) — kubeconfig 生成
+- [`buildKubeConfigFromSpec`]([[domain-07-platform-engineering/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md|12-kubeconfig-certs]].md) — kubeconfig 生成
 - [`kubeadm certs renew`](README.md) — 证书续期
 - [`kubeadm config validate`](17-init-phases.md) — 配置验证
 
 ## Related
 
 - [[README|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/networking|networking]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]

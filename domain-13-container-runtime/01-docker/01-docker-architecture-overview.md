@@ -101,7 +101,7 @@ k8s_versions:
 
 <!-- chunk: Docker 发展历史与版本演进 -->## Docker 发展历史与版本演进
 
-#<!-- chunk: 发展里程碑 -->## 发展里程碑
+## 发展里程碑
 
 | 年份 | 版本/事件 | 关键变化 |
 |:---:|:---|:---|
@@ -118,7 +118,7 @@ k8s_versions:
 | 2024 | Docker 25.0 | containerd 镜像存储正式 GA |
 | 2025 | Docker 26.0+ | 增强安全特性、改进构建性能 |
 
-#<!-- chunk: 版本命名规范 -->## 版本命名规范
+## 版本命名规范
 
 | 版本类型 | 命名格式 | 发布周期 | 示例 |
 |:---|:---|:---|:---|
@@ -130,7 +130,7 @@ k8s_versions:
 
 <!-- chunk: Docker 整体架构 -->## Docker 整体架构
 
-#<!-- chunk: 架构概览图 -->## 架构概览图
+## 架构概览图
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -172,7 +172,7 @@ k8s_versions:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 组件交互流程 -->## 组件交互流程
+## 组件交互流程
 
 ```
 docker run nginx:latest
@@ -194,7 +194,7 @@ docker run nginx:latest
 
 <!-- chunk: Docker Engine 核心组件 -->## Docker Engine 核心组件
 
-#<!-- chunk: 组件详解 -->## 组件详解
+## 组件详解
 
 | 组件 | 进程名 | 职责 | Socket |
 |:---|:---|:---|:---|
@@ -204,7 +204,7 @@ docker run nginx:latest
 | **containerd-shim** | containerd-shim-runc-v2 | 容器进程保持、IO转发 | per-container |
 | **runc** | runc | OCI 容器实际创建 | - |
 
-#<!-- chunk: dockerd 配置参数 -->## dockerd 配置参数
+## dockerd 配置参数
 
 | 参数 | 默认值 | 说明 |
 |:---|:---|:---|
@@ -220,7 +220,7 @@ docker run nginx:latest
 | `--userland-proxy` | true | 用户态端口代理 |
 | `--iptables` | true | 管理 iptables 规则 |
 
-#<!-- chunk: daemon.json 配置示例 -->## daemon.json 配置示例
+## daemon.json 配置示例
 
 ```json
 {
@@ -269,7 +269,7 @@ docker run nginx:latest
 
 <!-- chunk: 容器运行时层级 -->## 容器运行时层级
 
-#<!-- chunk: 运行时分层架构 -->## 运行时分层架构
+## 运行时分层架构
 
 | 层级 | 名称 | 代表 | 职责 |
 |:---|:---|:---|:---|
@@ -277,7 +277,7 @@ docker run nginx:latest
 | **中级运行时** | Container Manager | containerd, CRI-O | 容器生命周期管理、镜像分发 |
 | **低级运行时** | OCI Runtime | runc, crun, youki | 实际创建容器进程 |
 
-#<!-- chunk: containerd 架构 -->## containerd 架构
+## containerd 架构
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -301,7 +301,7 @@ docker run nginx:latest
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: containerd 配置 (/etc/containerd/config.toml) -->## containerd 配置 (/etc/containerd/config.toml)
+## containerd 配置 (/etc/containerd/config.toml)
 
 ```toml
 version = 2
@@ -337,7 +337,7 @@ state = "/run/containerd"
 
 <!-- chunk: OCI 标准规范 -->## OCI 标准规范
 
-#<!-- chunk: OCI 规范组成 -->## OCI 规范组成
+## OCI 规范组成
 
 | 规范 | 用途 | 当前版本 | 核心内容 |
 |:---|:---|:---|:---|
@@ -345,7 +345,7 @@ state = "/run/containerd"
 | **Image Spec** | 镜像格式 | v1.1.0 | 镜像层、配置、manifest |
 | **Distribution Spec** | 镜像分发 | v1.1.0 | Registry API、认证、推拉 |
 
-#<!-- chunk: OCI Runtime Spec - config.json 结构 -->## OCI Runtime Spec - config.json 结构
+## OCI Runtime Spec - config.json 结构
 
 ```json
 {
@@ -392,7 +392,7 @@ state = "/run/containerd"
 }
 ```
 
-#<!-- chunk: OCI Image Spec - 镜像结构 -->## OCI Image Spec - 镜像结构
+## OCI Image Spec - 镜像结构
 
 ```
 Image Index (多架构索引)
@@ -407,13 +407,14 @@ Image Index (多架构索引)
     └── Image Manifest (arm64)
             ├── Config Blob
             └── Layer Blobs
+
 ```
 
 ---
 
 <!-- chunk: Docker 替代方案对比 -->## Docker 替代方案对比
 
-#<!-- chunk: 容器引擎对比 -->## 容器引擎对比
+## 容器引擎对比
 
 | 特性 | Docker | Podman | nerdctl | CRI-O |
 |:---|:---:|:---:|:---:|:---:|
@@ -429,7 +430,7 @@ Image Index (多架构索引)
 | **镜像存储** | 私有格式 | OCI 标准 | containerd | OCI 标准 |
 | **适用场景** | 开发/小规模生产 | 开发/安全敏感 | 开发/K8s节点 | K8s 专用 |
 
-#<!-- chunk: Rootless 模式对比 -->## Rootless 模式对比
+## Rootless 模式对比
 
 | 方案 | 实现方式 | 网络 | 性能开销 |
 |:---|:---|:---|:---|
@@ -437,7 +438,7 @@ Image Index (多架构索引)
 | **Podman Rootless** | user namespaces + slirp4netns/pasta | pasta (较快) | 低 |
 | **nerdctl Rootless** | RootlessKit + slirp4netns | slirp4netns | 中等 |
 
-#<!-- chunk: 容器运行时对比 -->## 容器运行时对比
+## 容器运行时对比
 
 | 运行时 | 类型 | 语言 | 特点 |
 |:---|:---|:---|:---|
@@ -451,7 +452,7 @@ Image Index (多架构索引)
 
 <!-- chunk: 生产环境选型建议 -->## 生产环境选型建议
 
-#<!-- chunk: 场景选型矩阵 -->## 场景选型矩阵
+## 场景选型矩阵
 
 | 场景 | 推荐方案 | 理由 |
 |:---|:---|:---|
@@ -463,7 +464,7 @@ Image Index (多架构索引)
 | **多租户隔离** | Kata Containers | VM 级隔离 |
 | **合规环境** | gVisor | 内核隔离、减少攻击面 |
 
-#<!-- chunk: 从 Docker 迁移到 containerd -->## 从 Docker 迁移到 containerd
+## 从 Docker 迁移到 containerd
 
 | 步骤 | 命令/操作 |
 |:---|:---|
@@ -474,7 +475,7 @@ Image Index (多架构索引)
 | 5. 导入镜像 | `ctr images import images.tar` |
 | 6. 使用 nerdctl | `nerdctl run nginx` |
 
-#<!-- chunk: 企业 Docker Desktop 替代方案 -->## 企业 Docker Desktop 替代方案
+## 企业 Docker Desktop 替代方案
 
 | 方案 | 平台 | 特点 | 许可证 |
 |:---|:---|:---|:---|
@@ -487,7 +488,7 @@ Image Index (多架构索引)
 
 <!-- chunk: Docker 命令速查 -->## Docker 命令速查
 
-#<!-- chunk: 镜像操作 -->## 镜像操作
+## 镜像操作
 
 | 命令 | 说明 | 示例 |
 |:---|:---|:---|
@@ -502,7 +503,7 @@ Image Index (多架构索引)
 | `docker history` | 镜像历史 | `docker history nginx` |
 | `docker inspect` | 镜像详情 | `docker inspect nginx` |
 
-#<!-- chunk: 容器操作 -->## 容器操作
+## 容器操作
 
 | 命令 | 说明 | 示例 |
 |:---|:---|:---|
@@ -521,7 +522,7 @@ Image Index (多架构索引)
 | `docker wait` | 等待退出 | `docker wait container_id` |
 | `docker kill` | 强制停止 | `docker kill container_id` |
 
-#<!-- chunk: docker run 常用参数 -->## docker run 常用参数
+## docker run 常用参数
 
 | 参数 | 说明 | 示例 |
 |:---|:---|:---|
@@ -543,7 +544,7 @@ Image Index (多架构索引)
 | `--read-only` | 只读根文件系统 | `--read-only` |
 | `--rm` | 退出后删除 | `--rm` |
 
-#<!-- chunk: 网络操作 -->## 网络操作
+## 网络操作
 
 | 命令 | 说明 | 示例 |
 |:---|:---|:---|
@@ -554,7 +555,7 @@ Image Index (多架构索引)
 | `docker network disconnect` | 断开网络 | `docker network disconnect mynet app` |
 | `docker network inspect` | 网络详情 | `docker network inspect bridge` |
 
-#<!-- chunk: 存储操作 -->## 存储操作
+## 存储操作
 
 | 命令 | 说明 | 示例 |
 |:---|:---|:---|
@@ -564,7 +565,7 @@ Image Index (多架构索引)
 | `docker volume inspect` | 卷详情 | `docker volume inspect mydata` |
 | `docker volume prune` | 清理未用卷 | `docker volume prune -f` |
 
-#<!-- chunk: 系统操作 -->## 系统操作
+## 系统操作
 
 | 命令 | 说明 | 示例 |
 |:---|:---|:---|
@@ -580,7 +581,7 @@ Image Index (多架构索引)
 
 <!-- chunk: 与 Kubernetes 的关系 -->## 与 Kubernetes 的关系
 
-#<!-- chunk: 演进历史 -->## 演进历史
+## 演进历史
 
 ```
 2014-2020: K8s 使用 dockershim 集成 Docker
@@ -595,7 +596,7 @@ Image Index (多架构索引)
        Docker 镜像仍然兼容 (OCI 标准)
 ```
 
-#<!-- chunk: 当前最佳实践 -->## 当前最佳实践
+## 当前最佳实践
 
 | 环境 | 推荐运行时 | 说明 |
 |:---|:---|:---|
@@ -697,7 +698,7 @@ Image Index (多架构索引)
 - 56-smart-elderly-care
 - 44-martech-adtech
 - 95-industrial-metaverse
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 
@@ -705,3 +706,5 @@ Image Index (多架构索引)
 - 99-docker-commands-reference
 - 02-docker-images-management
 - 03-docker-container-lifecycle
+
+```

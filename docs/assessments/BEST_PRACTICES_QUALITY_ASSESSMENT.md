@@ -138,7 +138,7 @@ created: "2026-05-23"
 
 ### 2. 创建最佳实践索引
 
-**已创建索引**：`[[domain-04-storage-data/README|README]].md`
+**已创建索引**：`[[domain-04-storage-data/README.md|README]].md`
 
 **索引内容**：
 - 分类清晰的最佳实践列表

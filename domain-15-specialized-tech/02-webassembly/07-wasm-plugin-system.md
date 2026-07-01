@@ -62,8 +62,8 @@ created: "2026-05-23"
 
 1. [插件系统架构概述](#1-插件系统架构概述)
 2. [proxy-wasm 规范详解](#2-proxy-wasm-规范详解)
-3. [[entities/envoy|Envoy]] Wasm Filter 开发](#3-envoy-wasm-filter-开发)
-4. [[entities/istio|Istio]] Wasm Plugin 配置](#4-istio-wasm-plugin-配置)
+3. [[entities/envoy.md|Envoy]] Wasm Filter 开发](#3-envoy-wasm-filter-开发)
+4. [[entities/istio.md|Istio]] Wasm Plugin 配置](#4-istio-wasm-plugin-配置)
 5. [HTTP 头部操作插件](#5-http-头部操作插件)
 6. [限流插件实现](#6-限流插件实现)
 7. [可观测性插件](#7-可观测性插件)
@@ -79,7 +79,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 插件系统架构概述 -->## 1. 插件系统架构概述
 
-#<!-- chunk: 1.1 为什么选择 Wasm 插件 -->## 1.1 为什么选择 Wasm 插件
+## 1.1 为什么选择 Wasm 插件
 
 传统网络代理扩展方式的对比：
 
@@ -107,7 +107,7 @@ graph TB
     Wasm --> Multi
 ```
 
-#<!-- chunk: 1.2 proxy-wasm 生态全景 -->## 1.2 proxy-wasm 生态全景
+## 1.2 proxy-wasm 生态全景
 
 ```mermaid
 graph LR
@@ -144,7 +144,7 @@ graph LR
     Spec --> Higress
 ```
 
-#<!-- chunk: 1.3 proxy-wasm 执行模型 -->## 1.3 proxy-wasm 执行模型
+## 1.3 proxy-wasm 执行模型
 
 ```mermaid
 sequenceDiagram
@@ -167,7 +167,7 @@ sequenceDiagram
     Envoy->>Client: HTTP Response
 ```
 
-#<!-- chunk: 1.4 插件生命周期 -->## 1.4 插件生命周期
+## 1.4 插件生命周期
 
 ```
 插件生命周期（每个 Worker Thread）：
@@ -203,7 +203,7 @@ sequenceDiagram
 
 <!-- chunk: 2. proxy-wasm 规范详解 -->## 2. proxy-wasm 规范详解
 
-#<!-- chunk: 2.1 Host 函数 ABI -->## 2.1 Host 函数 ABI
+## 2.1 Host 函数 ABI
 
 proxy-wasm 定义了宿主函数接口，供 Wasm 插件调用：
 
@@ -257,7 +257,7 @@ proxy_record_metric(metric_id, value) -> Status
 proxy_get_metric(metric_id, return_value) -> Status
 ```
 
-#<!-- chunk: 2.2 Map 类型常量 -->## 2.2 Map 类型常量
+## 2.2 Map 类型常量
 
 ```rust
 // proxy-wasm map 类型
@@ -312,7 +312,7 @@ pub enum Status {
 
 <!-- chunk: 3. Envoy Wasm Filter 开发 -->## 3. Envoy Wasm Filter 开发
 
-#<!-- chunk: 3.1 Rust SDK 开发环境 -->## 3.1 Rust SDK 开发环境
+## 3.1 Rust SDK 开发环境
 
 ```bash
 # 安装 Rust Wasm 工具链
@@ -348,7 +348,7 @@ strip = true        # 剥离符号
 EOF
 ```
 
-#<!-- chunk: 3.2 完整 HTTP Filter 实现 -->## 3.2 完整 HTTP Filter 实现
+## 3.2 完整 HTTP Filter 实现
 
 ```rust
 // src/lib.rs - 完整的 HTTP 过滤器
@@ -656,7 +656,10 @@ impl proxy_wasm::traits::HttpContext for HttpContext {
 }
 ```
 
-#<!-- chunk: 3.3 构建与部署 -->## 3.3 构建与部署
+## 3.3 构建与部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 构建 Wasm 插件
@@ -683,7 +686,7 @@ kubectl create configmap envoy-wasm-plugin \
 
 <!-- chunk: 4. Istio Wasm Plugin 配置 -->## 4. Istio Wasm Plugin 配置
 
-#<!-- chunk: 4.1 WasmPlugin CRD -->## 4.1 WasmPlugin CRD
+## 4.1 WasmPlugin CRD
 
 ```yaml
 # istio-wasm-plugin.yaml
@@ -741,7 +744,7 @@ spec:
             fieldPath: metadata.namespace
 ```
 
-#<!-- chunk: 4.2 多阶段插件配置 -->## 4.2 多阶段插件配置
+## 4.2 多阶段插件配置
 
 ```yaml
 # 认证插件（AUTHN 阶段）
@@ -809,7 +812,7 @@ spec:
       - 1000
 ```
 
-#<!-- chunk: 4.3 OCI 镜像打包 -->## 4.3 OCI 镜像打包
+## 4.3 OCI 镜像打包
 
 ```dockerfile
 # Dockerfile.wasm - 打包 Wasm 插件为 OCI 镜像
@@ -846,7 +849,7 @@ crane manifest ghcr.io/my-org/auth-wasm-plugin:1.0.0
 
 <!-- chunk: 5. HTTP 头部操作插件 -->## 5. HTTP 头部操作插件
 
-#<!-- chunk: 5.1 请求头增强插件 -->## 5.1 请求头增强插件
+## 5.1 请求头增强插件
 
 ```rust
 // 请求头增强：添加追踪 ID、请求元数据
@@ -978,7 +981,7 @@ impl HeaderEnrichPlugin {
 }
 ```
 
-#<!-- chunk: 5.2 CORS 处理插件 -->## 5.2 CORS 处理插件
+## 5.2 CORS 处理插件
 
 ```rust
 // CORS 处理插件
@@ -1080,7 +1083,7 @@ impl HttpContext for CorsPlugin {
 
 <!-- chunk: 6. 限流插件实现 -->## 6. 限流插件实现
 
-#<!-- chunk: 6.1 基于令牌桶的限流 -->## 6.1 基于令牌桶的限流
+## 6.1 基于令牌桶的限流
 
 ```rust
 // 令牌桶限流插件（使用 proxy-wasm 共享内存）
@@ -1318,7 +1321,7 @@ impl RateLimitPlugin {
 }
 ```
 
-#<!-- chunk: 6.2 分布式限流（外部服务） -->## 6.2 分布式限流（外部服务）
+## 6.2 分布式限流（外部服务）
 
 ```rust
 // 基于 Redis/外部服务的分布式限流
@@ -1416,7 +1419,7 @@ impl HttpContext for DistributedRateLimitPlugin {
 
 <!-- chunk: 7. 可观测性插件 -->## 7. 可观测性插件
 
-#<!-- chunk: 7.1 自定义指标插件 -->## 7.1 自定义指标插件
+## 7.1 自定义指标插件
 
 ```rust
 // 全面的可观测性插件
@@ -1576,7 +1579,7 @@ impl HttpContext for ObsHttpContext {
 }
 ```
 
-#<!-- chunk: 7.2 请求/响应体采样插件 -->## 7.2 请求/响应体采样插件
+## 7.2 请求/响应体采样插件
 
 ```rust
 // 请求体审计采样插件
@@ -1655,7 +1658,7 @@ impl HttpContext for AuditPlugin {
 
 <!-- chunk: 8. 认证鉴权插件 -->## 8. 认证鉴权插件
 
-#<!-- chunk: 8.1 JWT 验证插件 -->## 8.1 JWT 验证插件
+## 8.1 JWT 验证插件
 
 ```rust
 // JWT 验证插件（不依赖外部服务，本地验证）
@@ -1891,7 +1894,7 @@ fn base64url_decode(input: &str) -> Result<Vec<u8>, String> {
 
 <!-- chunk: 9. 数据转换插件 -->## 9. 数据转换插件
 
-#<!-- chunk: 9.1 请求/响应体转换插件 -->## 9.1 请求/响应体转换插件
+## 9.1 请求/响应体转换插件
 
 ```rust
 // JSON <-> XML 转换插件
@@ -2123,7 +2126,7 @@ impl BodyTransformPlugin {
 
 <!-- chunk: 10. 插件调试与测试 -->## 10. 插件调试与测试
 
-#<!-- chunk: 10.1 单元测试 -->## 10.1 单元测试
+## 10.1 单元测试
 
 ```rust
 // tests/plugin_test.rs
@@ -2237,7 +2240,7 @@ fn base64url_encode(data: &[u8]) -> String {
 }
 ```
 
-#<!-- chunk: 10.2 集成测试（使用 envoy 沙盒） -->## 10.2 集成测试（使用 envoy 沙盒）
+## 10.2 集成测试（使用 envoy 沙盒）
 
 ```yaml
 # docker-compose.test.yml
@@ -2325,11 +2328,10 @@ static_resources:
                     - name: backend
                       domains: ["*"]
                       routes:
-                        - match:
-                            prefix: /
-                          route:
-                            cluster: upstream_service
-
+                        - matchers:
+                          - prefix="/"
+                          - route=""
+                          - cluster="upstream_service"
   clusters:
     - name: upstream_service
       connect_timeout: 5s
@@ -2350,7 +2352,7 @@ static_resources:
 
 <!-- chunk: 11. APISIX Wasm 插件 -->## 11. APISIX Wasm 插件
 
-#<!-- chunk: 11.1 APISIX Wasm 插件架构 -->## 11.1 APISIX Wasm 插件架构
+## 11.1 APISIX Wasm 插件架构
 
 ```mermaid
 graph TB
@@ -2368,7 +2370,7 @@ graph TB
     WasmPlugin --> |proxy-wasm ABI| WasmRuntime
 ```
 
-#<!-- chunk: 11.2 APISIX Wasm 插件配置 -->## 11.2 APISIX Wasm 插件配置
+## 11.2 APISIX Wasm 插件配置
 
 ```yaml
 # apisix-wasm-plugin.yaml
@@ -2442,7 +2444,7 @@ curl -X PUT http://127.0.0.1:9180/apisix/admin/routes/1 \
   }'
 ```
 
-#<!-- chunk: 11.3 AssemblyScript 编写 APISIX 插件 -->## 11.3 AssemblyScript 编写 APISIX 插件
+## 11.3 AssemblyScript 编写 APISIX 插件
 
 ```typescript
 // apisix-plugin.ts (AssemblyScript)
@@ -2513,7 +2515,7 @@ registerRootContext(
 
 <!-- chunk: 12. Kong Wasm 插件 -->## 12. Kong Wasm 插件
 
-#<!-- chunk: 12.1 Kong PDK for Wasm -->## 12.1 Kong PDK for Wasm
+## 12.1 Kong PDK for Wasm
 
 ```rust
 // Kong Wasm 插件（使用 proxy-wasm SDK）
@@ -2564,7 +2566,7 @@ impl HttpContext for KongPlugin {
 }
 ```
 
-#<!-- chunk: 12.2 Kong Wasm 插件部署 -->## 12.2 Kong Wasm 插件部署
+## 12.2 Kong Wasm 插件部署
 
 ```yaml
 # kong-wasm-plugin.yaml
@@ -2612,7 +2614,7 @@ spec:
 
 <!-- chunk: 13. 性能优化与基准 -->## 13. 性能优化与基准
 
-#<!-- chunk: 13.1 插件性能基准 -->## 13.1 插件性能基准
+## 13.1 插件性能基准
 
 ```
 proxy-wasm 插件性能基准（Envoy + V8 Runtime）：
@@ -2635,7 +2637,7 @@ gRPC 外部插件             5.0ms   15.0ms  18,000/s  53MB
 ──────────────────────────────────────────────────────────────
 ```
 
-#<!-- chunk: 13.2 插件优化技巧 -->## 13.2 插件优化技巧
+## 13.2 插件优化技巧
 
 ```rust
 // 优化技巧 1: 使用缓存避免重复解析
@@ -2677,7 +2679,7 @@ impl HttpContext for OptimizedPlugin {
 }
 ```
 
-#<!-- chunk: 13.3 Wasm Runtime 选择 -->## 13.3 Wasm Runtime 选择
+## 13.3 Wasm Runtime 选择
 
 ```
 Envoy 支持的 Wasm Runtime 对比：
@@ -2699,7 +2701,7 @@ Wasmer     ★★★★   ★★★★     ★★★★      多后端编译
 
 <!-- chunk: 14. 生产部署最佳实践 -->## 14. 生产部署最佳实践
 
-#<!-- chunk: 14.1 插件版本管理策略 -->## 14.1 插件版本管理策略
+## 14.1 插件版本管理策略
 
 ```yaml
 # 使用 Argo Rollout 实现插件渐进式发布
@@ -2730,7 +2732,7 @@ spec:
           wasm-plugin-version: "1.9.0"
 ```
 
-#<!-- chunk: 14.2 多集群插件分发 -->## 14.2 多集群插件分发
+## 14.2 多集群插件分发
 
 ```bash
 #!/bin/bash
@@ -2784,7 +2786,7 @@ done
 echo "Deployment complete!"
 ```
 
-#<!-- chunk: 14.3 插件监控告警 -->## 14.3 插件监控告警
+## 14.3 插件监控告警
 
 ```yaml
 # prometheus-rules.yaml
@@ -2830,7 +2832,10 @@ spec:
             summary: "More than 10% of requests are being rate limited"
 ```
 
-#<!-- chunk: 14.4 故障排查指南 -->## 14.4 故障排查指南
+## 14.4 故障排查指南
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查 Wasm 插件状态
@@ -2901,7 +2906,7 @@ Wasm 插件系统通过 **proxy-wasm 规范** 提供了标准化的代理扩展�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
+- [[domain-15-specialized-tech/README.md|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
 - Domain-38 WebAssembly 云原生 — 开源项目索引
 - WebAssembly 云原生基础
 - containerd Wasm 运行时

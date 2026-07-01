@@ -1,6 +1,6 @@
 ---
 title: Block, File, and Object Storage
-description: '- [[concepts/storage-tool-evolution|storage-tool-evolution]] — 存储工具演进'
+description: '- [[concepts/storage-tool-evolution.md|storage-tool-evolution]] — 存储工具演进'
 category: concepts
 tags:
 - k8s
@@ -86,16 +86,16 @@ Common K8s use cases: backup archives, static assets, data lakes, ML training da
 
 ## K8s Storage Integration
 
-K8s CSI (Container Storage Interface) abstracts storage providers. Block storage: [[CSI Drivers|CSI drivers]] provision RWO volumes. File storage: CSI drivers provision RWX volumes (NFS, CephFS). Object storage: No native CSI; accessed via S3 SDK or s3fs/goofys mount.
+K8s CSI (Container Storage Interface) abstracts storage providers. Block storage: CSI drivers provision RWO volumes. File storage: CSI drivers provision RWX volumes (NFS, CephFS). Object storage: No native CSI; accessed via S3 SDK or s3fs/goofys mount.
 
 ## Related
 
-- [[concepts/Kubernetes Core Concepts|Kubernetes Core Concepts]] — Kubernetes Core Concepts
-- [[concepts/storage-tool-evolution|storage-tool-evolution]] — 存储工具演进
-- [[concepts/overlayfs-storage|overlayfs-storage]] — OverlayFS Storage
-- [[concepts/linux-sysctl-tuning|linux-sysctl-tuning]] — Linux Sysctl Tuning for Kubernetes
-- [[entities/csi-drivers|csi-drivers]] — CSI Drivers
-- [[concepts/linux-sysctl-tuning|Linux Sysctl Tuning]]
+- [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]] — Kubernetes Core Concepts
+- [[concepts/storage-tool-evolution.md|storage-tool-evolution]] — 存储工具演进
+- [[concepts/overlayfs-storage.md|overlayfs-storage]] — OverlayFS Storage
+- [[concepts/linux-sysctl-tuning.md|linux-sysctl-tuning]] — Linux Sysctl Tuning for Kubernetes
+- [[entities/csi-drivers.md|csi-drivers]] — CSI Drivers
+- [[concepts/linux-sysctl-tuning.md|Linux Sysctl Tuning]]
 - Container Storage Interface
 
 - 02-block-file-object-storage

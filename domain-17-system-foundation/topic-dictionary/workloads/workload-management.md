@@ -36,6 +36,7 @@ prerequisites:
 - mysql-basics
 - logging-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Workload Management
@@ -239,3 +240,9 @@ kubectl get deployments -n prod -o custom-columns='NAME:.metadata.name,DESIRED:.
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/controllers/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]

@@ -109,8 +109,6 @@ created: "2026-05-23"
 - **监控系统**: Prometheus + Grafana + kube-state-metrics + node-exporter
 - **应用工具**: pprof (Go 应用)、JFR/jcmd (Java 应用)、perf (Linux 通用)
 
-> ⚠️ **重要**: 性能问题诊断需要基准数据对比。如果缺乏历史基准，需要先建立当前状态快照再进行分析。
-
 ---
 
 ## 2. 症状识别
@@ -559,6 +557,10 @@ ssh <node-ip> "iostat -x 1 5"
 
 **Step D2.10**: DNS 延迟分析
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 测试 Kubernetes DNS 解析延迟
   kubectl run dns-test --image=busybox:1.28 --rm -it --restart=Never -- \
@@ -584,8 +586,6 @@ ssh <node-ip> "iostat -x 1 5"
 
 > **目标**: 分析 Kubernetes 平台组件和应用级别的性能问题
 > **预计耗时**: 10-20 分钟
-> ⚠️ 部分步骤涉及应用内部诊断，可能需要临时暴露 debug 端口
-
 **Step D3.1**: API Server 请求分析
 - **命令**:
   ```bash
@@ -612,6 +612,10 @@ ssh <node-ip> "iostat -x 1 5"
 
 **Step D3.2**: etcd 慢操作分析
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 从 Prometheus 查询 etcd 磁盘指标
   # etcd_disk_wal_fsync_duration_seconds
@@ -681,6 +685,10 @@ ssh <node-ip> "iostat -x 1 5"
 
 **Step D3.5**: Java 应用 JFR 分析
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 启动 JFR 录制
   kubectl exec <pod> -- jcmd 1 JFR.start duration=60s filename=/tmp/recording.jfr
@@ -770,6 +778,10 @@ ssh <node-ip> "iostat -x 1 5"
   # container_cpu_cfs_throttled_periods_total{pod="<pod>"}
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方法 1: 直接 patch deployment（推荐增加 50-100%）
   kubectl patch deployment <deployment> -n <namespace> --type='json' -p='[
@@ -793,6 +805,10 @@ ssh <node-ip> "iostat -x 1 5"
   kubectl top pods -n <namespace> | grep <pod-name>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deployment/<deployment> -n <namespace>
   ```
@@ -807,6 +823,10 @@ ssh <node-ip> "iostat -x 1 5"
   kubectl get events -n <namespace> --field-selector involvedObject.name=<pod> | grep -i oom
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 增加内存限制（推荐增加 25-50%）
   kubectl patch deployment <deployment> -n <namespace> --type='json' -p='[
@@ -822,6 +842,10 @@ ssh <node-ip> "iostat -x 1 5"
   kubectl get events -n <namespace> --field-selector reason=OOMKilled
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deployment/<deployment> -n <namespace>
   ```
@@ -829,6 +853,10 @@ ssh <node-ip> "iostat -x 1 5"
 #### REM-003: 优化 ndots 配置减少 DNS 查询
 - **适用根因**: RC-014
 - **前置检查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查当前 DNS 配置
   kubectl exec <pod> -n <namespace> -- cat /etc/resolv.conf
@@ -837,6 +865,10 @@ ssh <node-ip> "iostat -x 1 5"
   kubectl exec <pod> -n <namespace> -- sh -c "time nslookup kubernetes.default.svc.cluster.local"
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 在 Pod spec 中添加 dnsConfig
   kubectl patch deployment <deployment> -n <namespace> --type='strategic' -p='
@@ -851,6 +883,10 @@ ssh <node-ip> "iostat -x 1 5"
   '
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 等待 Pod 重建
   kubectl rollout status deployment/<deployment> -n <namespace>
@@ -862,6 +898,10 @@ ssh <node-ip> "iostat -x 1 5"
   kubectl exec <new-pod> -n <namespace> -- sh -c "time nslookup kubernetes.default.svc.cluster.local"
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deployment/<deployment> -n <namespace>
   ```
@@ -878,6 +918,10 @@ ssh <node-ip> "iostat -x 1 5"
   ssh <node-ip> "dmesg | grep -i conntrack"
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
+
   ```bash
   # 临时调整（重启后失效）
   ssh <node-ip> "sysctl -w net.netfilter.nf_conntrack_max=524288"
@@ -897,6 +941,10 @@ ssh <node-ip> "iostat -x 1 5"
   ssh <node-ip> "cat /proc/sys/net/netfilter/nf_conntrack_count"
   ```
 - **回滚命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
+
   ```bash
   ssh <node-ip> "sysctl -w net.netfilter.nf_conntrack_max=262144"
   # 删除配置文件中的条目
@@ -956,6 +1004,10 @@ ssh <node-ip> "iostat -x 1 5"
   ssh <node-ip> "sysctl -a | grep -E 'tcp_tw|tcp_fin|tcp_keepalive|tcp_max_syn'"
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
+
   ```bash
   # 优化 TIME_WAIT 回收
   ssh <node-ip> "sysctl -w net.ipv4.tcp_tw_reuse=1"
@@ -993,6 +1045,10 @@ EOF"
   ssh <node-ip> "ss -tan state time-wait | wc -l"
   ```
 - **回滚命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
+
   ```bash
   # 恢复默认值
   ssh <node-ip> "sysctl -w net.ipv4.tcp_tw_reuse=0"
@@ -1004,6 +1060,10 @@ EOF"
 - **影响说明**: 修改 JVM 参数需要重启应用
 - **审批提示**: "建议调整 `<deployment>` 的 JVM GC 参数。需要重启 Pod，会导致短暂服务中断。是否批准？"
 - **前置检查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查当前 JVM 参数
   kubectl exec <pod> -n <namespace> -- jcmd 1 VM.flags
@@ -1012,6 +1072,10 @@ EOF"
   kubectl logs <pod> -n <namespace> | grep -i gc | tail -50
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 修改 deployment 中的 JVM 参数
   kubectl edit deployment <deployment> -n <namespace>
@@ -1028,6 +1092,10 @@ EOF"
   ]'
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   kubectl rollout status deployment/<deployment> -n <namespace>
   
@@ -1039,6 +1107,10 @@ EOF"
   # Full GC 次数应该减少
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deployment/<deployment> -n <namespace>
   ```
@@ -1143,6 +1215,10 @@ EOF"
 - **影响说明**: NUMA 绑定需要修改 kubelet 配置和 Pod 规格，可能需要重启节点
 - **操作步骤**:
   1. **启用 kubelet CPU Manager**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
      ```bash
      # 编辑 kubelet 配置
      ssh <node-ip> "vi /var/lib/kubelet/config.yaml"
@@ -1182,6 +1258,10 @@ EOF"
   - 验证现有 Guaranteed QoS Pod 不受影响
   - 在单个节点上测试后再推广
 - **回滚方案**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 恢复 kubelet 配置
   ssh <node-ip> "vi /var/lib/kubelet/config.yaml"
@@ -1979,4 +2059,6 @@ else
     echo -e "${RED}${BOLD}验证结果: 存在失败 (通过: $PASS_COUNT, 失败: $FAIL_COUNT)${NC}"
     exit 1
 fi
+```
+
 ```

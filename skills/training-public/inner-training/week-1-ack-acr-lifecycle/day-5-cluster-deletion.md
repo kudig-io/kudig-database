@@ -39,7 +39,7 @@ last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
   - ACK cluster deletion resource cleanup
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] cluster removal retain resources
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] cluster removal retain resources
   - SLB ENI security group cleanup
   - aliyun cs DELETE cluster API
   - Cluster deletion failure troubleshooting
@@ -206,20 +206,24 @@ echo "========== 检查完毕 =========="
 
 ### 任务 2: 业务资源清理 (45min)
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```bash
 # 列出所有业务 Namespace
 kubectl get namespaces --no-headers | awk '{print $1}' | grep -v -E 'kube-system|kube-public|default|kube-node-lease'
 
 # 逐个清理业务 Namespace (注意: 这是不可逆操作!)
-# kubectl delete namespace <business-ns-1>
-# kubectl delete namespace <business-ns-2>
+# kubectl delete namespace <business-ns-1>  # ⚠️ 不可逆：永久删除命名空间及全部资源
+# kubectl delete namespace <business-ns-2>  # ⚠️ 不可逆：永久删除命名空间及全部资源
 
 # 清理 default 命名空间中的资源
-kubectl delete all --all -n default
-kubectl delete pvc --all -n default
-kubectl delete ingress --all -n default
-kubectl delete configmap --all -n default
-kubectl delete secret --all -n default
+kubectl delete all --all -n default  # ⚠️ 批量删除，波及面大
+kubectl delete pvc --all -n default  # ⚠️ 批量删除，波及面大
+kubectl delete ingress --all -n default  # ⚠️ 批量删除，波及面大
+kubectl delete configmap --all -n default  # ⚠️ 批量删除，波及面大
+kubectl delete secret --all -n default  # ⚠️ 批量删除，波及面大
 
 # 等待所有 Pod 终止
 kubectl get pods -A | grep -v 'kube-system\|Running\|Completed'

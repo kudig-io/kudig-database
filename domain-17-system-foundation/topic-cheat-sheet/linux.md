@@ -274,6 +274,9 @@ stat <file>  # 详细状态信息
 
 ### 文件权限
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
+
 ```bash
 # 修改权限
 chmod 755 <file>  # rwxr-xr-x
@@ -1040,6 +1043,9 @@ grep sudo /var/log/secure  # RHEL/CentOS
 
 **适用系统**: RHEL/CentOS 7+, Ubuntu 16.04+, Debian 8+
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 服务状态
 sudo systemctl status <service>
@@ -1303,6 +1309,9 @@ sudo logrotate -d /etc/logrotate.conf
 ## 安全与防火墙
 
 ### SSH 安全
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # SSH 配置文件
@@ -1814,6 +1823,9 @@ echo ""
 
 ### Docker 命令
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+
 ```bash
 # Docker 版本
 docker --version
@@ -1851,8 +1863,8 @@ docker stats  # 资源使用
 docker top <container>  # 进程
 
 # 清理
-docker system prune  # 清理未使用资源
-docker system prune -a  # 清理所有未使用镜像
+docker system prune  # 清理未使用资源  # ⚠️ 强制清理，可能杀运行中容器
+docker system prune -a  # 清理所有未使用镜像  # ⚠️ 强制清理，可能杀运行中容器
 ```
 
 **Docker 版本**: v24.0+ (兼容 K8s v1.25-v1.32)
@@ -2085,6 +2097,9 @@ sudo dpkg-reconfigure --priority=low unattended-upgrades
 ```
 
 ### 性能优化
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 调整文件描述符限制

@@ -92,7 +92,7 @@ created: "2026-05-23"
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Platform Ops Domain (平台运维领域)]]
+- [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
 - 平台运维概述
 - 集群生命周期管理
 - 容量规划与资源评估 (Capacity Planning & Resource Assessment)

@@ -593,6 +593,10 @@ spec:
 
 ### 手动回滚命令参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # === kubectl 原生回滚 ===
 # 查看历史版本
@@ -814,10 +818,10 @@ argocd_app_info{sync_status="Synced",health_status="Healthy"}
 
 ## 相关
 
-- [[domain-09-reliability-engineering/04-slo-sli/03-error-budget-management]]
-- [[domain-09-reliability-engineering/04-slo-sli/04-burn-rate-alerting]]
+- [[domain-09-reliability-engineering/04-slo-sli/03-error-budget-management.md|03 error budget management]]
+- [[domain-09-reliability-engineering/04-slo-sli/04-burn-rate-alerting.md|04 burn rate alerting]]
 
 ## 相关合成分析
 
-- [[synthesis/gitops-sre-release-gate|GitOps SRE 发布门控]]
+- [[concepts/gitops-sre-release-gate.md|GitOps SRE 发布门控]]
 

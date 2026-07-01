@@ -426,27 +426,24 @@ route:
   
   routes:
   # 关键业务告警
-  - match:
-      severity: critical
-    receiver: 'pagerduty'
+  - matchers:
+    - severity="critical"
+    receiver: pagerduty
     group_wait: 10s
     repeat_interval: 30m
-  
   # 一般告警
-  - match:
-      severity: warning
-    receiver: 'slack-warning'
+  - matchers:
+    - severity="warning"
+    receiver: slack-warning
     group_wait: 1m
     repeat_interval: 2h
-  
   # 通知抑制规则
   inhibit_rules:
-  - source_match:
-      severity: 'critical'
-    target_match:
-      severity: 'warning'
-    equal: ['alertname', 'namespace', 'pod']
-
+  - source_matchers:
+    - severity="critical"
+    - target_match=""
+    - severity="warning"
+    - equal="['alertname', 'namespace', 'pod']"
 receivers:
 - name: 'default-receiver'
   email_configs:
@@ -455,7 +452,7 @@ receivers:
 
 - name: 'pagerduty'
   pagerduty_configs:
-  - service_key: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+  - routing_key: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
     send_resolved: true
 
 - name: 'slack-warning'
@@ -566,7 +563,7 @@ labels:
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications MOC
-- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
 - Domain-4 工作负载 — 开源项目索引
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
@@ -587,4 +584,4 @@ labels:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

@@ -50,7 +50,7 @@ description: '## 项目概述'
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -63,13 +63,13 @@ description: '## 项目概述'
 ## 参考链接
 
 - [[etcd]]
-- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[pod-lifecycle]]
 
 ## Related
 
 - [[kuadrant]] — Kuadrant
-- [[notary-project]] — [[Notary Project|Notary Project]]
+- [[notary-project]] — Notary Project
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
@@ -96,27 +96,27 @@ description: '## 项目概述'
 - RELEASE-NOTES-1.0
 - RELEASE-NOTES-1.4
 - RELEASE-NOTES-1.11
-- [[references/KUDIG Cheat Sheet Index|KUDIG Cheat Sheet Index]] — Cross-reference
-- [[references/networking-terms|K8s 网络术语参考]] — Cross-reference
-- [[references/k8s-structured-troubleshooting|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
-- [[references/release-notes-core-deps|发布说明索引 — 核心依赖]] — Cross-reference
-- [[synthesis/Production Troubleshooting Playbook|Production Troubleshooting Playbook]] — Cross-reference
-- [[synthesis/Structural Troubleshooting Framework|Structural Troubleshooting Framework]] — Cross-reference
-- [[concepts/core-dependency-version-matrix|核心依赖版本矩阵]] — Cross-reference
-- [[concepts/kubernetes-version-evolution|Kubernetes 版本演进]] — Cross-reference
-- [[concepts/cni-networking-model|CNI 网络模型与插件对比]] — Cross-reference
-- [[skills/dns-fta|DNS 异常故障树分析]] — Cross-reference
-- [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/skill-21-statefulset-failure|StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[skills/k8s-network-configuration-guide|Kubernetes 网络配置最佳实践]] — Cross-reference
-- [[skills/learn-04-service-basics|第四课：Service - 让应用可以被访问]] — Cross-reference
-- [[skills/learn-02-first-ticket-guide|Day 2: 第一个工单处理指南]] — Cross-reference
-- [[skills/learn-oncall-quick-qa|工单数字人快速问答 - On-Call 速查]] — Cross-reference
-- [[skills/learn-12-common-problems|第十课：常见问题排查]] — Cross-reference
-- [[skills/learn-analogy-dictionary|K8S 概念类比词典]] — Cross-reference
-- [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
-- [[entities/kubernetes-changelog|Kubernetes 变更日志索引]] — Cross-reference
-- [[entities/core-deps-changelog|核心依赖变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
+- [[entities/KUDIG Cheat Sheet Index.md|KUDIG Cheat Sheet Index]] — Cross-reference
+- [[entities/networking-terms.md|K8s 网络术语参考]] — Cross-reference
+- [[entities/k8s-structured-troubleshooting.md|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
+- [[entities/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
+- [[concepts/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Cross-reference
+- [[concepts/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]] — Cross-reference
+- [[concepts/core-dependency-version-matrix.md|核心依赖版本矩阵]] — Cross-reference
+- [[concepts/kubernetes-version-evolution.md|Kubernetes 版本演进]] — Cross-reference
+- [[concepts/cni-networking-model.md|CNI 网络模型与插件对比]] — Cross-reference
+- [[skills/dns-fta.md|DNS 异常故障树分析]] — Cross-reference
+- [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[skills/skill-21-statefulset-failure.md|StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[skills/k8s-network-configuration-guide.md|Kubernetes 网络配置最佳实践]] — Cross-reference
+- [[skills/learn-04-service-basics.md|第四课：Service - 让应用可以被访问]] — Cross-reference
+- [[skills/learn-02-first-ticket-guide.md|Day 2: 第一个工单处理指南]] — Cross-reference
+- [[skills/learn-oncall-quick-qa.md|工单数字人快速问答 - On-Call 速查]] — Cross-reference
+- [[skills/learn-12-common-problems.md|第十课：常见问题排查]] — Cross-reference
+- [[skills/learn-analogy-dictionary.md|K8S 概念类比词典]] — Cross-reference
+- [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
+- [[entities/kubernetes-changelog.md|Kubernetes 变更日志索引]] — Cross-reference
+- [[entities/core-deps-changelog.md|核心依赖变更日志索引]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]

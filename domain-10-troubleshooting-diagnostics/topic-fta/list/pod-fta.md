@@ -67,16 +67,16 @@ base_confidence: 0.7
 
 ## 相关链接
 
-- [[FTA Methodology and Core Principles|FTA 方法论]]
-- [[FTA Diagnostic Execution Engine|FTA 诊断执行引擎]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 - [[troubleshoot-pod-issues|Pod 故障排查]]
 
 ## Related
 
 - [[kube-scheduler]] — kube-scheduler
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
 
 ---
 
 > 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
-> [[_archives/troubleshooting-diagnostics/topic-fta/list/pod-fta|Pod FTA 完整版]]
+> [[_archives/troubleshooting-diagnostics/topic-fta/list/pod-fta.md|Pod FTA 完整版]]

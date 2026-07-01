@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-certificate-expiry"
 created: "2026-05-22"
 updated: "2026-05-22"
+last_updated: 2026-05-22
 tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
@@ -13,12 +14,15 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
 
 所有证书操作均为高风险。执行前请：
 1. 确认处于维护窗口
-2. 备份 `/[[entities/kubernetes|kubernetes]]/pki`
+2. 备份 `/[[entities/kubernetes.md|kubernetes]]/pki`
 3. 通知相关团队
 
 ## 修复步骤
 
 ### 修复 1：kubeadm 自动续期（推荐）
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 检查过期时间
@@ -71,6 +75,9 @@ mv /tmp/kube-apiserver.yaml /etc/kubernetes/manifests/
 ```
 
 ## 回滚方案
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 如果续期后异常，恢复备份

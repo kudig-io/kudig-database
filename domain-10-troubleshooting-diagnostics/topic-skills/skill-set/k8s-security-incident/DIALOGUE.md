@@ -4,22 +4,23 @@ category: dialogue
 tags: [dialogue, remote-advisor, k8s-security-incident, skill, security, incident-response, forensics, breach]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 summary: "安全事件的远程顾问对话脚本，覆盖容器逃逸、异常网络、权限提升检测。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL]]"
+  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
     type: uses
-  - target: "[[entities/cilium]]"
+  - target: "[[entities/cilium.md]]"
     type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/configuration/configmaps]]"
+  - target: "[[domain-17-system-foundation/topic-dictionary/configuration/configmaps.md]]"
     type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/fundamentals/nodes]]"
+  - target: "[[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md]]"
     type: uses
 ---
 
 # K8s Security Incident Response 远程顾问对话脚本
 
 > **角色设定**：你是部署在客户环境之外的远程安全顾问，无法直接连接集群。你只能通过对话指导现场工程师执行操作。
-> **⚠️ 重要提醒**：本 [[skills/skill-k8s-node-notready-SKILL|Skill]] 为 **L1-advisory** 模式。所有操作均为建议性质，必须由安全团队和人工审批后执行。Agent 不会自动执行任何可能影响证据或扩大影响的操作。
+> **⚠️ 重要提醒**：本 [[skills/skill-k8s-node-notready-SKILL.md|Skill]] 为 **L1-advisory** 模式。所有操作均为建议性质，必须由安全团队和人工审批后执行。Agent 不会自动执行任何可能影响证据或扩大影响的操作。
 > **对话目标**：在 30 分钟内完成安全事件的初步识别、遏制建议和风险评估。
 
 ---
@@ -42,7 +43,7 @@ relationships:
 顾问："未授权 API 访问是严重安全事件。请确认三点：
 1. **来源追踪**：未授权调用的来源 IP 和 UserAgent 是什么？是内部还是外部来源？
 2. **时间范围**：异常调用从什么时候开始？持续多久了？
-3. **访问范围**：尝试访问了哪些资源？（secrets / [[domain-17-system-foundation/topic-dictionary/configuration/configmaps|configmaps]] / pods / [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes|nodes]]）"
+3. **访问范围**：尝试访问了哪些资源？（secrets / [[domain-17-system-foundation/topic-dictionary/configuration/configmaps.md|configmaps]] / pods / [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|nodes]]）"
 
 ### 场景 C：工程师发现可疑镜像或后门
 
@@ -264,6 +265,9 @@ kubectl logs -n kube-system <audit-pod> | grep '<sa-name>' | tail -30
 
 顾问："数据泄露风险极高。请**立即**评估泄露范围：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 查看该 Pod 可访问的所有 secrets
 kubectl auth can-i list secrets --as=system:serviceaccount:<namespace>:<sa-name>
@@ -290,7 +294,7 @@ EOF
 
 > **如果无法创建 NetworkPolicy**：请尝试：
 > **替代方案 A**：通过云厂商安全组 / 防火墙规则限制该 Pod 所在节点的出网
-> **替代方案 B**：如果是 [[entities/cilium|Cilium]]，使用 Calico NetworkPolicy 或 CiliumNetworkPolicy 限制
+> **替代方案 B**：如果是 [[entities/cilium.md|Cilium]]，使用 Calico NetworkPolicy 或 CiliumNetworkPolicy 限制
 > **替代方案 C**：如果以上都无法执行，请立即联系网络团队手动阻断目标 IP
 
 风险评估：
@@ -369,6 +373,9 @@ kubectl logs -n kube-system <audit-log-pod> | grep -E 'create|update|delete|patc
 
 步骤 1：隔离节点
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+
 ```bash
 # 标记节点不可调度
 kubectl cordon <node-name>
@@ -411,6 +418,9 @@ kubectl logs <pod-name> -n <namespace> --previous > /tmp/evidence-pod-<pod-name>
 
 步骤 1：撤销异常权限
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 删除异常的 ClusterRoleBinding
 kubectl delete clusterrolebinding <suspicious-binding>
@@ -425,6 +435,9 @@ kubectl delete rolebinding <suspicious-binding> -n <namespace>
 > 3. 已通知相关应用团队
 
 步骤 2：轮换受损凭证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 删除可疑 ServiceAccount 的 Token Secret
@@ -454,6 +467,10 @@ kubectl get clusterrolebinding,rolebinding --all-namespaces -o yaml | grep -E 'c
 **遏制步骤**（需安全团队审批后执行）：
 
 步骤 1：停止受影响的工作负载
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 缩容受影响 Deployment（不删除，保留证据）
@@ -494,6 +511,9 @@ kubectl set image deployment/<deployment-name> <container>=<trusted-image>:<tag>
 
 步骤 1：阻断外连
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建临时出网限制 NetworkPolicy
 cat <<EOF | kubectl apply -f -
@@ -518,6 +538,9 @@ EOF
 > 3. 联系网络团队手动阻断目标 IP
 
 步骤 2：轮换可能泄露的凭证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 如果 secrets 可能被读取，立即更新
@@ -686,4 +709,4 @@ aliyun cr GetRepoScanResult --RepoNamespace <ns> --RepoName <repo> --Tag <tag>
 > 完整修复手册参考 `reference/remediation-playbook.md`
 ## Related
 
-- [[entities/deployment|Deployment]]
+- [[entities/deployment.md|Deployment]]

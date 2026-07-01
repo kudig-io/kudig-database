@@ -49,7 +49,7 @@ created: "2026-05-23"
 - troubleshooting|09 - PV/PVC故障排查与解决方案]]
 - 10 - 存储备份与灾难恢复
 - 16 - CSI 迁移：从 In-Tree 存储插件到 CSI
-- [[domain-04-storage-data/README|[[Kubernetes 存储配置最佳实践|Storage]]ge Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
+- [[domain-04-storage-data/README.md|[[Kubernetes 存储配置最佳实践|Storage]]ge Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
 
 ### YAML 配置参考
 
@@ -60,40 +60,40 @@ created: "2026-05-23"
 
 ### 术语词典 (存储相关)
 
-- [[domain-17-system-foundation/topic-dictionary/storage/csi-volume-cloning|[[CSI Volume Cloning（CSI 卷克隆）|CSI Volume Cloning（CSI 卷克隆）]]]]
-- [[domain-17-system-foundation/topic-dictionary/storage/dynamic-volume-provisioning|[[Dynamic Volume Provisioning（动态卷供给）|Dynamic Volume Provisioning（动态卷供给）]]]]
-- [[domain-17-system-foundation/topic-dictionary/storage/ephemeral-volumes|Ephemeral Volumes（临时卷）]]
-- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes|Persistent Volumes（持久卷）]]
-- [[domain-17-system-foundation/topic-dictionary/storage/storage-classes|Storage Classes（存储类）]]
-- [[domain-17-system-foundation/topic-dictionary/storage/volume-attributes-classes|[[Volume Attributes Classes（卷属性类）|Volume Attributes Classes（卷属性类）]]]]
-- [[domain-17-system-foundation/topic-dictionary/storage/volume-health-monitoring|[[Volume Health Monitoring（卷健康监控）|Volume Health Monitoring（卷健康监控）]]]]
-- [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshot-classes|Volume Snapshot Classes（卷快照类）]]
-- [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshots|Volume Snapshots（卷快照）]]
-- [[domain-17-system-foundation/topic-dictionary/storage/volumes|Volumes（卷）]]
+- [[domain-17-system-foundation/topic-dictionary/storage/csi-volume-cloning.md|[[CSI Volume Cloning（CSI 卷克隆）|CSI Volume Cloning（CSI 卷克隆）]]]]
+- [[domain-17-system-foundation/topic-dictionary/storage/dynamic-volume-provisioning.md|[[Dynamic Volume Provisioning（动态卷供给）|Dynamic Volume Provisioning（动态卷供给）]]]]
+- [[domain-17-system-foundation/topic-dictionary/storage/ephemeral-volumes.md|Ephemeral Volumes（临时卷）]]
+- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes.md|Persistent Volumes（持久卷）]]
+- [[domain-17-system-foundation/topic-dictionary/storage/storage-classes.md|Storage Classes（存储类）]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volume-attributes-classes.md|[[Volume Attributes Classes（卷属性类）|Volume Attributes Classes（卷属性类）]]]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volume-health-monitoring.md|[[Volume Health Monitoring（卷健康监控）|Volume Health Monitoring（卷健康监控）]]]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshot-classes.md|Volume Snapshot Classes（卷快照类）]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshots.md|Volume Snapshots（卷快照）]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volumes.md|Volumes（卷）]]
 
 ## 关联文档 (K8s 集成)
 
 ### 故障排查
 
-- [[domain-10-troubleshooting-diagnostics/14-pvc-storage-troubleshooting|14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting|04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/21-statefulset-troubleshooting|21 - StatefulSet 故障排查 (StatefulSet Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting|PV/PVC 存储深度排查与持久化治理指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting|CSI 存储驱动深度排查与架构优化指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting|CSI 快照与卷备份故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting|存储 I/O 性能故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting|StorageClass 配置与动态供给故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta|CSI 存储异常 FTA 树]]
+- [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/14-pvc-storage-troubleshooting.md|14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)]]
+- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/04-storage-csi-troubleshooting.md|04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)]]
+- [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/21-statefulset-troubleshooting.md|21 - StatefulSet 故障排查 (StatefulSet Troubleshooting)]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md|CSI 存储驱动深度排查与架构优化指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting.md|CSI 快照与卷备份故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting.md|存储 I/O 性能故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting.md|StorageClass 配置与动态供给故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md|CSI 存储异常 FTA 树]]
 
 ### 控制平面组件
 
-- [[domain-01-cluster-fundamentals/03-control-plane/22-container-storage-deep-dive]]
+- [[domain-01-cluster-fundamentals/03-control-plane/22-container-storage-deep-dive.md|22 container storage deep dive]]
 - cloud-controller-manager 深度解析 (CCM Deep Dive)
 
 ### 技能卡片
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/07-pvc-storage-failure|[[PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]]]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/03-pod-pending|Pod Pending 调度失败诊断与修复]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/07-pvc-storage-failure.md|[[PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]]]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/03-pod-pending.md|Pod Pending 调度失败诊断与修复]]
 
 ### K8s 事件
 
@@ -101,8 +101,8 @@ created: "2026-05-23"
 
 ### 功能操作
 
-- [[domain-02-workloads-applications/topic-functions/cluster-create/22-storage-volumes|存储与卷管理]]
-- [[domain-02-workloads-applications/topic-functions/node-create/14-storage-node|节点存储]]
+- [[domain-02-workloads-applications/topic-functions/cluster-create/22-storage-volumes.md|存储与卷管理]]
+- [[domain-02-workloads-applications/topic-functions/node-create/14-storage-node.md|节点存储]]
 
 ### 设计原则
 
@@ -128,10 +128,10 @@ created: "2026-05-23"
 
 ### 灾备与迁移
 
-- [[domain-08-release-change-management/topic-migration/04-storage-data-migration|04 - 存储与数据迁移]]
-- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration|06 - 有状态服务迁移]]
+- [[domain-08-release-change-management/topic-migration/04-storage-data-migration.md|04 - 存储与数据迁移]]
+- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration.md|06 - 有状态服务迁移]]
 - 17 - 灾难恢复演练
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常 FTA 树]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常 FTA 树]]
 
 ### 培训学习
 

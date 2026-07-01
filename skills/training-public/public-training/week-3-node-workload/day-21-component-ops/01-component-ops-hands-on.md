@@ -41,7 +41,7 @@ title: Day 21: K8s 组件运维实操
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 控制平面组件运维
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 控制平面组件运维
   - API Server 故障排查
   - [[etcd|etcd]] 备份恢复
   - 证书管理与续期
@@ -159,6 +159,9 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -dates
 
 ### 3.1 状态检查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 检查 Scheduler Pod
 kubectl get pods -n kube-system -l component=kube-scheduler
@@ -247,6 +250,9 @@ sudo crictl info
 
 ### 5.2 Kubelet 故障排查
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 节点 NotReady
 sudo journalctl -u kubelet --since "10m" | grep -E "error|failed|refused"
@@ -323,6 +329,9 @@ ETCDCTL_API=3 etcdctl snapshot save /backup/etcd.db \
 
 ### 7.1 证书检查与续期
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 检查证书过期时间
 for cert in /etc/kubernetes/pki/apiserver.crt /etc/kubernetes/pki/etcd/server.crt; do
@@ -347,6 +356,9 @@ sudo systemctl restart kube-apiserver
 ## 8. 综合故障处理 SOP
 
 ### 8.1 控制平面故障处理流程
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # ========== 控制平面问题 SOP ==========

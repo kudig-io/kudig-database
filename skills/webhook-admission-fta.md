@@ -160,16 +160,16 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine|FTA 诊断执行引擎]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 
 ## Related
 
 - [[etcd-fta]] — etcd 异常故障树分析
 - [[gitops-argocd-fta]] — GitOps(ArgoCD) 异常故障树分析
-- [[skills/skill-MOC|skill-MOC]] — topic-skills MOC
+- [[skills/skill-MOC.md|skill-MOC]] — topic-skills MOC
 - [[helm]] — Helm
 - [[coredns]] — CoreDNS
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/webhook-admission-fta|Admission Webhook 异常 FTA 树]]
-- [[skills/Agent Orchestration Patterns|Agent Orchestration Patterns for FTA]] — Cross-reference
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/webhook-admission-fta.md|Admission Webhook 异常 FTA 树]]
+- [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference

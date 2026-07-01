@@ -50,7 +50,7 @@ created: "2026-05-23"
 - SRE 工程师：掌握系统化的故障排查方法论
 - 架构师：设计可观测性和应急响应体系
 - 高级运维：处理生产环境复杂问题
-- 开发人员：理解应用在 [[entities/kubernetes|k8s]] 上的故障模式
+- 开发人员：理解应用在 [[entities/kubernetes.md|k8s]] 上的故障模式
 
 ### 预计时长
 
@@ -127,6 +127,9 @@ created: "2026-05-23"
 
 Kubernetes 问题可以从多个层级排查，建议从上到下（应用层 → 基础设施层）或根据问题现象从最可能的层开始：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 ┌────────────────────────────────────────────────┐
 │  Layer 5: 应用层 (Application)                   │  代码 Bug、配置错误、依赖超时
@@ -199,6 +202,9 @@ kubectl logs <pod> --previous
 ### 网络层排查
 
 **网络排障五步法：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # Step 1: DNS 是否正常？
@@ -406,6 +412,9 @@ graph LR
 
 ### 演示 1：Pod 故障排查全流程
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 场景: Pod 处于 CrashLoopBackOff
 
@@ -441,6 +450,9 @@ kubectl debug my-app-xxx -it --image=busybox
 ```
 
 ### 演示 2：网络故障排查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 场景: Pod A 无法访问 Pod B
@@ -478,6 +490,9 @@ kubectl exec -it <pod-a> -- tcpdump -i any -nn port <port> -c 10
 ```
 
 ### 演示 3：Node 故障排查
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 场景: Node NotReady
@@ -520,6 +535,9 @@ kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
 
 ### 演示 4：DNS 故障排查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 场景: DNS 解析失败
 
@@ -552,6 +570,10 @@ kubectl exec dns-debug -- dig @10.96.0.10 <domain> +short +timeout=2
 ```
 
 ### 演示 5：应急响应演练
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 场景: 大量 5xx 错误，需要快速恢复
@@ -620,6 +642,7 @@ kubectl get endpoints <service>
 kubectl describe pod <pending-pod>
 # 发现: 0/3 nodes are available: 3 node(s) had taints
 # 解决: kubectl taint node <node> <taint-key>-
+
 ```
 
 ---
@@ -708,6 +731,7 @@ kubectl describe pod <pending-pod>
     ├── 根因分析 (5-Whys)
     ├── 问题复盘 (Post-Mortem)
     └── 改进跟踪 (Action Items)
+
 ```
 
 ### 排障命令速查表
@@ -770,3 +794,5 @@ kubectl describe pod <pending-pod>
 ---
 
 > **Kusheet Project** | 作者: Allen Galler (allengaller@gmail.com)
+
+```

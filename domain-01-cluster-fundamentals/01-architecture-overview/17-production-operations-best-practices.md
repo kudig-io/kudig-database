@@ -67,7 +67,7 @@ cross_refs:
 created: "2026-05-23"
 ---
 
-# 17 - 生产环境运维最佳实践 ([[references/k8s-production-operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])
+# 17 - 生产环境运维最佳实践 ([[entities/k8s-production-operations.md|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])
 
 > **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [Kubernetes Production Guide](https://kubernetes.io/docs/setup/production-environment/), CNCF Production Readiness
 
@@ -184,10 +184,6 @@ EOF
 
 #### Pod安全策略配置
 ```yaml
-
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
 
 # PodSecurityPolicy示例 (已废弃，推荐使用Pod Security Admission)
 apiVersion: policy/v1beta1
@@ -572,6 +568,10 @@ echo "Backup validation completed successfully"
 ### 3.2 应用配置备份
 
 #### Helm Release备份
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
 #!/bin/bash
 # helm-backup.sh - Helm Release备份脚本
@@ -590,7 +590,7 @@ done
 
 # 压缩备份
 tar -czf ${BACKUP_DIR}/${DATE}-helm.tar.gz -C ${BACKUP_DIR} ${DATE}
-rm -rf ${BACKUP_DIR}/${DATE}
+rm -rf ${BACKUP_DIR}/${DATE}  # ⚠️ 删除系统/数据文件
 
 echo "Helm releases backup completed: ${BACKUP_DIR}/${DATE}-helm.tar.gz"
 ```
@@ -601,6 +601,12 @@ echo "Helm releases backup completed: ${BACKUP_DIR}/${DATE}-helm.tar.gz"
 ### 4.1 DR演练流程
 
 #### 集群重建脚本
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # cluster-restore.sh - 集群灾难恢复脚本
@@ -1422,6 +1428,9 @@ Kubernetes 使用 `resourceVersion` 实现乐观锁，避免多个控制器同�
 
 #### 9.1.9 完整调谐数据流总结
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 ┌──────────────────────── 端到端调谐数据流 ────────────────────────┐
 │                                                                      │
@@ -1793,6 +1802,9 @@ groups:
 
 ### 9.6 常见问题运维SOP
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # reconciler-diagnosis.sh - Reconciler健康诊断脚本
@@ -1874,7 +1886,7 @@ echo -e "\n=== 诊断完成 ==="
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析
@@ -1895,4 +1907,4 @@ echo -e "\n=== 诊断完成 ==="
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

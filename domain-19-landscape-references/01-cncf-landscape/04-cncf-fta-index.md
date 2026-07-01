@@ -83,7 +83,7 @@ created: "2026-05-23"
 | 项目 | FTA 文档 | 故障排查指南 | 核心问题 |
 |:-----|:---------|:-------------|:---------|
 | **Flannel** | [flannel-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/flannel-fta.md) | [08-flannel-troubleshooting](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md) | VXLAN/host-gw 路由 |
-| **Calico** | [calico-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md) | [05-calico-troubleshooting](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-calico-troubleshooting.md) | [[entities/networkpolicy|NetworkPolicy]] |
+| **Calico** | [calico-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md) | [05-calico-troubleshooting](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-calico-troubleshooting.md) | [[entities/networkpolicy.md|NetworkPolicy]] |
 | **[[Cilium|Cilium]]** | [cilium-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md) | [99-cilium-ebpf-network-guide](../domain-03-networking-traffic/99-cilium-ebpf-network-guide.md) | eBPF/XDP |
 | **[[Antrea|Antrea]]** | (待补充) | - | - |
 | **Kube-OVN** | (待补充) | - | - |
@@ -168,7 +168,7 @@ created: "2026-05-23"
 | **Controller Manager** | [controller-manager-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta.md) | - | 控制器循环 |
 | **Scheduler** | (待补充) | - | 调度决策 |
 | **Kubelet** | (待补充) | [Kubelet 故障排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-kubernetes-core/03-kubelet-troubleshooting.md) | 状态同步 |
-| **[[Container Runtime|Container Runtime]]** | (待补充) | - | 容器启动 |
+| **[[concepts/container-runtime.md|Container Runtime]]** | (待补充) | - | 容器启动 |
 
 ### 7.2 工作负载
 
@@ -306,7 +306,7 @@ flowchart TD
 ## Obsidian 相关文档
 
 - domain-19-landscape-references MOC
-- [[domain-19-landscape-references/README|Domain-34: CNCF Landscape 开源项目]]
+- [[domain-19-landscape-references/README.md|Domain-34: CNCF Landscape 开源项目]]
 - Domain-34 CNCF Landscape — 开源项目索引
 - CNCF 集成实践指南
 - CNCF 学习路径

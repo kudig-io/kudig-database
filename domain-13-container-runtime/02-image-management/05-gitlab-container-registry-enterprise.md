@@ -60,7 +60,7 @@ This document provides comprehensive exploration of GitLab Container Registry en
 
 <!-- chunk: 1. GitLab Container Registry Architecture -->## 1. GitLab Container Registry Architecture
 
-#<!-- chunk: 1.1 Core Component Architecture -->## 1.1 Core Component Architecture
+## 1.1 Core Component Architecture
 
 ```mermaid
 graph TB
@@ -121,7 +121,7 @@ graph TB
     E --> T
 ```
 
-#<!-- chunk: 1.2 High Availability Deployment -->## 1.2 High Availability Deployment
+## 1.2 High Availability Deployment
 
 ```yaml
 gitlab_registry_ha:
@@ -174,7 +174,7 @@ gitlab_registry_ha:
 
 <!-- chunk: 2. Enterprise Configuration and Security -->## 2. Enterprise Configuration and Security
 
-#<!-- chunk: 2.1 Registry Configuration -->## 2.1 Registry Configuration
+## 2.1 Registry Configuration
 
 ```ruby
 # /etc/gitlab/gitlab.rb - GitLab Registry配置
@@ -261,7 +261,7 @@ registry['experimental'] = {
 }
 ```
 
-#<!-- chunk: 2.2 Advanced Security Configuration -->## 2.2 Advanced Security Configuration
+## 2.2 Advanced Security Configuration
 
 ```bash
 #!/bin/bash
@@ -307,7 +307,7 @@ EOF
 chmod +x /opt/scripts/image_scan_hook.sh
 ```
 
-#<!-- chunk: 2.3 Access Control and Permissions -->## 2.3 Access Control and Permissions
+## 2.3 Access Control and Permissions
 
 ```yaml
 # gitlab_registry_access_control.yml
@@ -364,7 +364,7 @@ access_control:
 
 <!-- chunk: 3. CI/CD Integration and Automation -->## 3. CI/CD Integration and Automation
 
-#<!-- chunk: 3.1 GitLab CI/CD Registry Integration -->## 3.1 GitLab CI/CD Registry Integration
+## 3.1 GitLab CI/CD Registry Integration
 
 ```yaml
 # .gitlab-ci.yml - 容器镜像构建和推送
@@ -442,7 +442,7 @@ deploy-to-production:
     - master
 ```
 
-#<!-- chunk: 3.2 Advanced Registry Operations -->## 3.2 Advanced Registry Operations
+## 3.2 Advanced Registry Operations
 
 ```python
 #!/usr/bin/env python3
@@ -585,7 +585,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 4. Monitoring and Maintenance -->## 4. Monitoring and Maintenance
 
-#<!-- chunk: 4.1 Registry Health Monitoring -->## 4.1 Registry Health Monitoring
+## 4.1 Registry Health Monitoring
 
 ```bash
 #!/bin/bash
@@ -656,7 +656,7 @@ while true; do
 done
 ```
 
-#<!-- chunk: 4.2 Backup and Disaster Recovery -->## 4.2 Backup and Disaster Recovery
+## 4.2 Backup and Disaster Recovery
 
 ```bash
 #!/bin/bash
@@ -821,7 +821,7 @@ main "$@"
 
 <!-- chunk: 5. Performance Optimization -->## 5. Performance Optimization
 
-#<!-- chunk: 5.1 Registry Performance Tuning -->## 5.1 Registry Performance Tuning
+## 5.1 Registry Performance Tuning
 
 ```ruby
 # /etc/gitlab/gitlab.rb - 性能优化配置
@@ -894,7 +894,7 @@ nginx['gzip_types'] = [
 ]
 ```
 
-#<!-- chunk: 5.2 CDN Integration for Image Distribution -->## 5.2 CDN Integration for Image Distribution
+## 5.2 CDN Integration for Image Distribution
 
 ```yaml
 # cdn_integration.yml
@@ -948,7 +948,7 @@ cdn_configuration:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-22-container-image-management KUDIG Database — Global MOC
-- [[domain-13-container-runtime/README|Domain 22: 容器镜像管理 (Container Image Management)]]
+- [[domain-13-container-runtime/README.md|Domain 13: 容器镜像管理 (Container Image Management)]]
 - Domain-22 容器镜像管理 — 开源项目索引
 - Harbor企业级容器镜像仓库深度实践
 - Docker Registry企业级镜像分发深度实践

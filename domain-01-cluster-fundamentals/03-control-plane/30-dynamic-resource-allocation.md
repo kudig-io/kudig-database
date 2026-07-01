@@ -71,7 +71,7 @@ cross_refs:
 created: "2026-05-23"
 ---
 
-# 30 - 动态资源分配 ([[Dynamic Resource Allocation|Dynamic Resource Allocation]])
+# 30 - 动态资源分配 ([[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]])
 
 > **适用版本**: [[Kubernetes|Kubernetes]] v1.30+ (Alpha/Beta 演进中) | **最后更新**: 2026-04 | **文档类型**: 特性设计文档
 
@@ -1040,7 +1040,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -1061,4 +1061,4 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]

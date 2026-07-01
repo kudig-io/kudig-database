@@ -40,7 +40,7 @@ created: "2026-05-23"
 
 ---
 
-## 1. 阿里云 ACK / ACK (Alibaba Cloud [[entities/kubernetes|kubernetes]])
+## 1. 阿里云 ACK / ACK (Alibaba Cloud [[entities/kubernetes.md|kubernetes]])
 
 ### 1.1 控制平面问题 (CCE 控制台异常)
 
@@ -221,6 +221,9 @@ gcloud container clusters create <cluster> --zone <zone> --no-enable-autopilot
 | Anthos Config Management 异常 | `kubectl get pods -n config-management-system` | GitHub 连接问题 | 检查 Connector 配置 |
 | Policy Controller 拒绝 | `kubectl get constraints` | 不符合 Policy | 修改资源符合策略 |
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+
 ```bash
 # Anthos 配置检查
 kubectl get pods -n anthos-config-management
@@ -235,7 +238,7 @@ kubectl describe root-sync -n config-management-system
 # "Policy violation" → 查看 Policy Controller 日志
 
 # 重新同步
-kubectl delete syncs -n config-management-system --all
+kubectl delete syncs -n config-management-system --all  # ⚠️ 批量删除，波及面大
 ```
 
 ---
@@ -316,6 +319,9 @@ gcloud compute networks peerings list --router <router>
 ```
 
 ### 5.2 跨云 DNS 解析
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 方案 1: 私有 DNS 区域同步

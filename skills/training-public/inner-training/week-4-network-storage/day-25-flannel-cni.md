@@ -136,6 +136,10 @@ kubectl cluster-info dump | grep -m 1 "cluster-cidr" 2>/dev/null
 
 ### 任务 2: Flannel 网络连通性验证 (40min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 在不同节点创建测试 Pod
 cat <<EOF | kubectl apply -f -
@@ -184,6 +188,10 @@ kubectl exec flannel-test-1 -- nslookup kubernetes.default
 
 ### 任务 3: VxLAN 封装分析 (40min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看节点上的 flannel.1 接口 (需要 exec 到节点或使用特权 Pod)
 cat <<EOF | kubectl apply -f -
@@ -215,6 +223,9 @@ kubectl exec net-debug -- ip route | grep flannel 2>/dev/null
 ```
 
 ### 任务 4: Terway vs Flannel 对比实验 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 网络性能对比参考 (概念理解)
@@ -276,4 +287,4 @@ Day 26 将学习存储卷 (PV/PVC) 的创建与删除。
 ## Related
 
 - index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]

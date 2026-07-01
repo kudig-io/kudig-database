@@ -142,7 +142,7 @@ k8s_versions:
 
 **Deployment** 是 Kubernetes 中最常用的工作负载资源,用于管理无状态应用的声明式更新。它通过管理 **ReplicaSet** 来实现 Pod 的副本控制和滚动更新。
 
-#<!-- chunk: 三层架构关系 -->## 三层架构关系
+## 三层架构关系
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -167,7 +167,7 @@ k8s_versions:
 └─────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 核心功能 -->## 核心功能
+## 核心功能
 
 | 功能 | 说明 | 使用场景 |
 |------|------|---------|
@@ -177,7 +177,7 @@ k8s_versions:
 | **健康检查** | 结合 Probe 确保更新过程可用性 | 生产环境发布 |
 | **暂停/恢复** | 手动控制更新流程 | 金丝雀/蓝绿部署 |
 
-#<!-- chunk: 与其他工作负载对比 -->## 与其他工作负载对比
+## 与其他工作负载对比
 
 | 资源类型 | 适用场景 | Pod 管理 | 持久化 | 网络标识 |
 |---------|---------|---------|-------|---------|
@@ -199,7 +199,7 @@ k8s_versions:
 | **简写** | deploy |
 | **kubectl 命令** | `kubectl get deploy`, `kubectl rollout status deploy/<name>` |
 
-#<!-- chunk: API 演进历史 -->## API 演进历史
+## API 演进历史
 
 | 版本 | Kubernetes 版本 | 状态 | 说明 |
 |------|----------------|------|------|
@@ -216,7 +216,7 @@ k8s_versions:
 
 <!-- chunk: 3. Deployment 完整字段规格表 -->## 3. Deployment 完整字段规格表
 
-#<!-- chunk: 顶层字段 -->## 顶层字段
+## 顶层字段
 
 | 字段路径 | 类型 | 必填 | 默认值 | 版本 | 说明 |
 |---------|------|------|-------|------|------|
@@ -226,7 +226,7 @@ k8s_versions:
 | `spec` | DeploymentSpec | ✅ | - | v1.9+ | 期望状态规格 |
 | `status` | DeploymentStatus | ❌ | 系统生成 | v1.9+ | 当前状态 (只读) |
 
-#<!-- chunk: spec 字段详解 -->## spec 字段详解
+## spec 字段详解
 
 | 字段路径 | 类型 | 必填 | 默认值 | 不可变 | 说明 |
 |---------|------|------|-------|-------|------|
@@ -247,7 +247,7 @@ k8s_versions:
 | `spec.paused` | bool | ❌ | false | ❌ | 是否暂停 Deployment 更新 |
 | `spec.minReadySeconds` | int32 | ❌ | 0 | ❌ | Pod 就绪后等待时间 (秒) |
 
-#<!-- chunk: status 字段 (系统维护,只读) -->## status 字段 (系统维护,只读)
+## status 字段 (系统维护,只读)
 
 | 字段路径 | 类型 | 说明 |
 |---------|------|------|
@@ -264,11 +264,11 @@ k8s_versions:
 
 <!-- chunk: 4. 更新策略详解 -->## 4. 更新策略详解
 
-#<!-- chunk: 4.1 RollingUpdate 滚动更新 -->## 4.1 RollingUpdate 滚动更新
+## 4.1 RollingUpdate 滚动更新
 
 **默认策略**,逐步替换旧 Pod,确保更新过程中服务可用性。
 
-##<!-- chunk: 核心参数 -->## 核心参数
+## 核心参数
 
 ```yaml
 spec:
@@ -279,7 +279,7 @@ spec:
       maxUnavailable: 0     # 可以是整数或百分比
 ```
 
-##<!-- chunk: maxSurge (最大额外 Pod 数) -->## maxSurge (最大额外 Pod 数)
+## maxSurge (最大额外 Pod 数)
 
 **定义**：更新期间允许超过 `spec.replicas` 的额外 Pod 数量。
 
@@ -295,7 +295,7 @@ spec:
 # ceil() 为向上取整函数
 ```
 
-##<!-- chunk: maxUnavailable (最大不可用 Pod 数) -->## maxUnavailable (最大不可用 Pod 数)
+## maxUnavailable (最大不可用 Pod 数)
 
 **定义**：更新期间允许的最大不可用 Pod 数量。
 
@@ -311,7 +311,7 @@ spec:
 # floor() 为向下取整函数
 ```
 
-##<!-- chunk: 参数组合场景 -->## 参数组合场景
+## 参数组合场景
 
 | maxSurge | maxUnavailable | 更新行为 | 适用场景 |
 |----------|---------------|---------|---------|
@@ -321,7 +321,7 @@ spec:
 | **1** | **0** | 逐个替换,零宕机 | 生产环境谨慎更新 |
 | **3** | **1** | 快速更新,小幅不可用 | 开发/测试环境 |
 
-##<!-- chunk: 实际案例 -->## 实际案例
+## 实际案例
 
 **场景 1：默认配置 (replicas=10)**
 
@@ -381,7 +381,7 @@ spec:
 # 速度最快,但短期内仅 50% 可用
 ```
 
-#<!-- chunk: 4.2 Recreate 重建策略 -->## 4.2 Recreate 重建策略
+## 4.2 Recreate 重建策略
 
 **先删除所有旧 Pod,再创建新 Pod**,会导致短暂服务中断。
 
@@ -402,7 +402,7 @@ spec:
 2. **资源紧张环境**：集群资源无法同时容纳新旧 Pod
 3. **开发/测试环境**：对短暂中断不敏感
 
-#<!-- chunk: 4.3 策略选择指南 -->## 4.3 策略选择指南
+## 4.3 策略选择指南
 
 | 场景 | 推荐策略 | 参数建议 |
 |------|---------|---------|
@@ -416,7 +416,7 @@ spec:
 
 <!-- chunk: 5. 最小配置示例(初学者) -->## 5. 最小配置示例(初学者)
 
-#<!-- chunk: 基础 Nginx Deployment -->## 基础 Nginx Deployment
+## 基础 Nginx Deployment
 
 ```yaml
 # 最简配置:仅包含必填字段
@@ -443,6 +443,11 @@ spec:
 ```
 
 **应用命令**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 创建 Deployment
 kubectl apply -f nginx-deployment.yaml
@@ -467,7 +472,7 @@ kubectl rollout history deployment/nginx-deployment
 kubectl rollout undo deployment/nginx-deployment
 ```
 
-#<!-- chunk: 带资源限制的配置 -->## 带资源限制的配置
+## 带资源限制的配置
 
 ```yaml
 apiVersion: apps/v1
@@ -838,11 +843,11 @@ spec:
 
 <!-- chunk: 7. 高级特性 -->## 7. 高级特性
 
-#<!-- chunk: 7.1 Pause/Resume 暂停与恢复 -->## 7.1 Pause/Resume 暂停与恢复
+## 7.1 Pause/Resume 暂停与恢复
 
 **用途**：在执行多次配置更改时,暂停 Deployment 以避免触发多次滚动更新。
 
-##<!-- chunk: 暂停 Deployment -->## 暂停 Deployment
+## 暂停 Deployment
 
 ```bash
 # 暂停滚动更新
@@ -854,7 +859,7 @@ kubectl rollout pause deployment/my-deployment
 - 可以进行多次配置修改
 - 适用于金丝雀部署的手动控制
 
-##<!-- chunk: 修改配置示例 -->## 修改配置示例
+## 修改配置示例
 
 ```bash
 # 暂停后进行多次修改
@@ -873,7 +878,7 @@ kubectl set env deployment/my-deployment APP_VERSION=v2.0
 kubectl rollout resume deployment/my-deployment
 ```
 
-##<!-- chunk: 在 YAML 中设置 -->## 在 YAML 中设置
+## 在 YAML 中设置
 
 ```yaml
 apiVersion: apps/v1
@@ -901,11 +906,14 @@ spec:
 2. **批量配置更新**：避免多次滚动更新
 3. **问题排查**：暂停更新以观察问题
 
-#<!-- chunk: 7.2 Rollback 回滚操作 -->## 7.2 Rollback 回滚操作
+## 7.2 Rollback 回滚操作
 
 **Deployment 自动保留历史版本**,支持快速回滚到之前的稳定版本。
 
-##<!-- chunk: 查看历史版本 -->## 查看历史版本
+## 查看历史版本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 查看 Deployment 的修订历史
@@ -922,6 +930,10 @@ kubectl rollout history deployment/my-deployment --revision=2
 ```
 
 **记录变更原因**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 使用 --record 标志记录命令 (已弃用,但仍可用)
 kubectl set image deployment/my-deployment app=nginx:1.22 --record
@@ -930,7 +942,10 @@ kubectl set image deployment/my-deployment app=nginx:1.22 --record
 kubectl annotate deployment/my-deployment kubernetes.io/change-cause="升级到 nginx 1.22 修复安全漏洞"
 ```
 
-##<!-- chunk: 回滚到上一版本 -->## 回滚到上一版本
+## 回滚到上一版本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 回滚到上一个版本 (revision N-1)
@@ -940,14 +955,17 @@ kubectl rollout undo deployment/my-deployment
 kubectl rollout status deployment/my-deployment
 ```
 
-##<!-- chunk: 回滚到指定版本 -->## 回滚到指定版本
+## 回滚到指定版本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 回滚到特定版本 (如 revision 2)
 kubectl rollout undo deployment/my-deployment --to-revision=2
 ```
 
-##<!-- chunk: 回滚原理 -->## 回滚原理
+## 回滚原理
 
 ```
 当前状态:
@@ -967,9 +985,9 @@ ReplicaSet-v3 (0 个 Pod,历史版本)   ← 成为新的历史版本
 ReplicaSet-v1 (0 个 Pod,历史版本)
 ```
 
-#<!-- chunk: 7.3 Revision History 版本历史 -->## 7.3 Revision History 版本历史
+## 7.3 Revision History 版本历史
 
-##<!-- chunk: 历史版本数量控制 -->## 历史版本数量控制
+## 历史版本数量控制
 
 ```yaml
 spec:
@@ -981,7 +999,7 @@ spec:
 - 设置为 `0` 会禁用回滚功能
 - 每个 ReplicaSet 约占用 1-2 KB etcd 存储空间
 
-##<!-- chunk: 版本 Hash 生成 -->## 版本 Hash 生成
+## 版本 Hash 生成
 
 每个版本的 ReplicaSet 名称包含 **pod-template-hash**:
 
@@ -999,7 +1017,11 @@ my-deployment-9f3e2d1c4a      0         0         0       30m  # 历史版本
 hash := ComputeHash(&deployment.Spec.Template, deployment.Status.CollisionCount)
 ```
 
-##<!-- chunk: 清理历史版本 -->## 清理历史版本
+## 清理历史版本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 手动删除旧的 ReplicaSet
@@ -1013,11 +1035,11 @@ kubectl patch deployment my-deployment -p '{"spec":{"revisionHistoryLimit":2}}'
 
 <!-- chunk: 8. 内部原理 -->## 8. 内部原理
 
-#<!-- chunk: 8.1 Deployment Controller 控制循环 -->## 8.1 Deployment Controller 控制循环
+## 8.1 Deployment Controller 控制循环
 
 **Deployment Controller** 运行在 `kube-controller-manager` 中,负责协调 Deployment 的实际状态与期望状态。
 
-##<!-- chunk: 控制循环逻辑 -->## 控制循环逻辑
+## 控制循环逻辑
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -1077,7 +1099,7 @@ kubectl patch deployment my-deployment -p '{"spec":{"revisionHistoryLimit":2}}'
                          下一次控制循环
 ```
 
-##<!-- chunk: 调谐 (Reconcile) 步骤 -->## 调谐 (Reconcile) 步骤
+## 调谐 (Reconcile) 步骤
 
 ```go
 // 伪代码:Deployment Controller 核心逻辑
@@ -1112,9 +1134,9 @@ func (dc *DeploymentController) syncDeployment(d *Deployment) error {
 }
 ```
 
-#<!-- chunk: 8.2 Rolling Update 算法 -->## 8.2 Rolling Update 算法
+## 8.2 Rolling Update 算法
 
-##<!-- chunk: 滚动更新流程 -->## 滚动更新流程
+## 滚动更新流程
 
 ```yaml
 # 初始状态:
@@ -1161,7 +1183,7 @@ ReplicaSet-new:
   ReplicaSet-new: replicas=10 (全部 Ready)
 ```
 
-##<!-- chunk: 关键判断条件 -->## 关键判断条件
+## 关键判断条件
 
 ```go
 // 伪代码:滚动更新逻辑
@@ -1199,11 +1221,11 @@ func (dc *DeploymentController) rolloutRolling(d *Deployment, newRS *ReplicaSet,
 }
 ```
 
-#<!-- chunk: 8.3 Revision Hash 机制 -->## 8.3 Revision Hash 机制
+## 8.3 Revision Hash 机制
 
 **pod-template-hash** 用于唯一标识 Pod 模板版本,避免 ReplicaSet 名称冲突。
 
-##<!-- chunk: Hash 计算 -->## Hash 计算
+## Hash 计算
 
 ```go
 // Kubernetes 源码:计算 hash
@@ -1229,7 +1251,7 @@ func ComputeHash(template *PodTemplateSpec, collisionCount *int32) string {
 }
 ```
 
-##<!-- chunk: Hash 冲突处理 -->## Hash 冲突处理
+## Hash 冲突处理
 
 ```yaml
 # 极少见的情况:两个不同的 PodTemplate 生成相同 hash
@@ -1237,7 +1259,7 @@ status:
   collisionCount: 1  # 碰撞计数递增,重新计算 hash
 ```
 
-##<!-- chunk: ReplicaSet 命名规则 -->## ReplicaSet 命名规则
+## ReplicaSet 命名规则
 
 ```
 格式: <deployment-name>-<pod-template-hash>
@@ -1249,7 +1271,7 @@ nginx-deployment-5d4b7c9f8d
 └─ Deployment 名称
 ```
 
-#<!-- chunk: 8.4 ProgressDeadlineSeconds 超时机制 -->## 8.4 ProgressDeadlineSeconds 超时机制
+## 8.4 ProgressDeadlineSeconds 超时机制
 
 **作用**：防止滚动更新无限期挂起。
 
@@ -1258,7 +1280,7 @@ spec:
   progressDeadlineSeconds: 600  # 默认 600 秒 (10 分钟)
 ```
 
-##<!-- chunk: 超时判断逻辑 -->## 超时判断逻辑
+## 超时判断逻辑
 
 ```go
 // 伪代码:进度超时检测
@@ -1283,7 +1305,7 @@ func (dc *DeploymentController) checkProgressDeadline(d *Deployment) {
 }
 ```
 
-##<!-- chunk: 状态示例 -->## 状态示例
+## 状态示例
 
 ```bash
 $ kubectl describe deployment my-deployment
@@ -1309,7 +1331,7 @@ Events:
 
 <!-- chunk: 9. ReplicaSet 详解 -->## 9. ReplicaSet 详解
 
-#<!-- chunk: 9.1 API 信息 -->## 9.1 API 信息
+## 9.1 API 信息
 
 | 字段 | 值 |
 |------|-----|
@@ -1320,7 +1342,7 @@ Events:
 | **简写** | rs |
 | **kubectl 命令** | `kubectl get rs` |
 
-#<!-- chunk: 9.2 字段规格表 -->## 9.2 字段规格表
+## 9.2 字段规格表
 
 | 字段路径 | 类型 | 必填 | 默认值 | 说明 |
 |---------|------|------|-------|------|
@@ -1334,7 +1356,7 @@ Events:
 - ❌ 无 `revisionHistoryLimit` (不维护版本历史)
 - ❌ 无 `paused` (不支持暂停)
 
-#<!-- chunk: 9.3 配置示例 -->## 9.3 配置示例
+## 9.3 配置示例
 
 ```yaml
 apiVersion: apps/v1
@@ -1377,6 +1399,10 @@ spec:
 
 **扩缩容操作**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 创建 ReplicaSet
 kubectl apply -f frontend-rs.yaml
@@ -1395,7 +1421,7 @@ kubectl delete rs frontend-rs
 kubectl delete rs frontend-rs --cascade=orphan
 ```
 
-#<!-- chunk: 9.4 为什么很少直接使用 -->## 9.4 为什么很少直接使用
+## 9.4 为什么很少直接使用
 
 **ReplicaSet 的局限性**：
 
@@ -1408,6 +1434,9 @@ kubectl delete rs frontend-rs --cascade=orphan
 | **暂停/恢复** | ❌ | ✅ | 无法实现金丝雀部署 |
 
 **手动更新 ReplicaSet 的问题**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 场景:需要更新镜像版本
@@ -1433,13 +1462,11 @@ kubectl set image deployment/frontend nginx=nginx:1.22
 | **被其他控制器管理** | ReplicaSet | 如 Deployment 内部使用 |
 
 **总结**：
-> ⚠️ **在绝大多数情况下,应该使用 Deployment 而非直接使用 ReplicaSet**。ReplicaSet 主要作为 Deployment 的底层实现,不建议用户直接操作。
-
 ---
 
 <!-- chunk: 10. ReplicationController(Legacy) -->## 10. ReplicationController(Legacy)
 
-#<!-- chunk: 10.1 简要概述 -->## 10.1 简要概述
+## 10.1 简要概述
 
 **ReplicationController (RC)** 是 Kubernetes 早期的副本控制器,已被 **ReplicaSet** 取代。
 
@@ -1497,9 +1524,9 @@ spec:
         image: nginx:1.21
 ```
 
-#<!-- chunk: 10.2 迁移指南 -->## 10.2 迁移指南
+## 10.2 迁移指南
 
-##<!-- chunk: 从 RC 迁移到 Deployment -->## 从 RC 迁移到 Deployment
+## 从 RC 迁移到 Deployment
 
 **步骤 1：导出现有 RC 配置**
 
@@ -1533,6 +1560,11 @@ spec:
 
 **步骤 3：零宕机迁移**
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 创建 Deployment (不会立即删除 RC 管理的 Pod)
 kubectl apply -f my-app-deployment.yaml
@@ -1552,6 +1584,11 @@ kubectl delete rc my-app-rc
 ```
 
 **自动迁移脚本**：
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 #!/bin/bash
@@ -1585,7 +1622,7 @@ echo "迁移完成,请验证后手动删除 RC: kubectl delete rc $RC_NAME -n $N
 
 <!-- chunk: 11. 版本兼容性矩阵 -->## 11. 版本兼容性矩阵
 
-#<!-- chunk: Deployment API 版本 -->## Deployment API 版本
+## Deployment API 版本
 
 | API 版本 | Kubernetes 版本 | 状态 | 关键变更 |
 |---------|----------------|------|---------|
@@ -1594,7 +1631,7 @@ echo "迁移完成,请验证后手动删除 RC: kubectl delete rc $RC_NAME -n $N
 | `apps/v1beta2` | v1.8 - v1.16 | ❌ v1.16 移除 | 添加 `.spec.selector` 不可变规则 |
 | `apps/v1` | v1.9+ | ✅ 稳定 | **当前推荐版本** |
 
-#<!-- chunk: 功能特性兼容性 -->## 功能特性兼容性
+## 功能特性兼容性
 
 | 特性 | 引入版本 | 稳定版本 | 说明 |
 |------|---------|---------|------|
@@ -1607,9 +1644,9 @@ echo "迁移完成,请验证后手动删除 RC: kubectl delete rc $RC_NAME -n $N
 | **minReadySeconds** | v1.9 | v1.9 | 就绪后等待时间 |
 | **Server-side Apply** | v1.16 (beta) | v1.22 | 声明式配置合并 |
 
-#<!-- chunk: 版本迁移示例 -->## 版本迁移示例
+## 版本迁移示例
 
-##<!-- chunk: 从 apps/v1beta2 迁移到 apps/v1 -->## 从 apps/v1beta2 迁移到 apps/v1
+## 从 apps/v1beta2 迁移到 apps/v1
 
 ```yaml
 # apps/v1beta2 (旧)
@@ -1661,7 +1698,7 @@ kubectl convert -f old-deployment.yaml --output-version apps/v1
 
 <!-- chunk: 12. 生产最佳实践 -->## 12. 生产最佳实践
 
-#<!-- chunk: 副本数量规划 -->## 副本数量规划
+## 副本数量规划
 
 | 场景 | 推荐副本数 | 理由 |
 |------|-----------|------|
@@ -1690,7 +1727,7 @@ kubectl convert -f old-deployment.yaml --output-version apps/v1
         = 2 个 Pod (实际应至少 3 个以保证高可用)
 ```
 
-#<!-- chunk: 滚动更新策略 -->## 滚动更新策略
+## 滚动更新策略
 
 | 场景 | maxSurge | maxUnavailable | 说明 |
 |------|----------|---------------|------|
@@ -1700,7 +1737,7 @@ kubectl convert -f old-deployment.yaml --output-version apps/v1
 | **资源受限环境** | 0 | 1 | 先删除旧 Pod 释放资源 |
 | **蓝绿部署** | 100% | 0 | 创建全部新 Pod 后切换 |
 
-#<!-- chunk: 健康检查配置 -->## 健康检查配置
+## 健康检查配置
 
 ```yaml
 # 推荐的探针配置模板
@@ -1806,7 +1843,7 @@ func checkDependencies() bool {
 }
 ```
 
-#<!-- chunk: 资源配额设置 -->## 资源配额设置
+## 资源配额设置
 
 ```yaml
 # 生产环境资源配额指南
@@ -1834,7 +1871,7 @@ resources:
 | **数据处理** | 1000m | 4000m | 2Gi | 8Gi |
 | **Java 应用** | 500m | 2000m | 1Gi | 4Gi (设置 -Xmx 为 limits 的 75%) |
 
-#<!-- chunk: 标签和注解规范 -->## 标签和注解规范
+## 标签和注解规范
 
 ```yaml
 metadata:
@@ -1877,7 +1914,7 @@ metadata:
     ticket: "JIRA-12345"
 ```
 
-#<!-- chunk: 版本管理 -->## 版本管理
+## 版本管理
 
 ```yaml
 # 1. 镜像标签规范
@@ -1909,7 +1946,7 @@ spec:
   revisionHistoryLimit: 5     # 生产环境保留 5-10 个版本
 ```
 
-#<!-- chunk: 安全加固 -->## 安全加固
+## 安全加固
 
 ```yaml
 spec:
@@ -1961,7 +1998,7 @@ spec:
 
 <!-- chunk: 13. 常见问题 FAQ -->## 13. 常见问题 FAQ
 
-#<!-- chunk: Q1: Deployment 更新卡住 (Progressing 状态) -->## Q1: Deployment 更新卡住 (Progressing 状态)
+## Q1: Deployment 更新卡住 (Progressing 状态)
 
 **症状**：
 
@@ -2001,12 +2038,15 @@ kubectl logs <pod-name> -c <container-name>
 
 **快速回滚**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 如果新版本有问题,立即回滚
 kubectl rollout undo deployment/myapp
 ```
 
-#<!-- chunk: Q2: 如何实现零宕机更新？ -->## Q2: 如何实现零宕机更新？
+## Q2: 如何实现零宕机更新？
 
 **配置要点**：
 
@@ -2055,7 +2095,7 @@ done
 kubectl set image deployment/myapp app=myapp:v2.0
 ```
 
-#<!-- chunk: Q3: Deployment 与 StatefulSet 如何选择？ -->## Q3: Deployment 与 StatefulSet 如何选择？
+## Q3: Deployment 与 StatefulSet 如何选择？
 
 | 维度 | Deployment | StatefulSet |
 |------|-----------|------------|
@@ -2123,7 +2163,7 @@ spec:
           storage: 10Gi
 ```
 
-#<!-- chunk: Q4: 如何暂停自动更新 (Pause/Resume)？ -->## Q4: 如何暂停自动更新 (Pause/Resume)？
+## Q4: 如何暂停自动更新 (Pause/Resume)？
 
 **场景**：需要进行多次配置更改,避免每次修改都触发滚动更新。
 
@@ -2143,7 +2183,11 @@ kubectl rollout resume deployment/myapp
 kubectl rollout status deployment/myapp
 ```
 
-#<!-- chunk: Q5: 如何查看和回滚到历史版本？ -->## Q5: 如何查看和回滚到历史版本？
+## Q5: 如何查看和回滚到历史版本？
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 1. 查看历史版本
@@ -2169,6 +2213,9 @@ kubectl get pods -l app=myapp -o jsonpath='{.items[0].spec.containers[0].image}'
 
 **记录变更原因** (方便追溯)：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 方法 1: 使用 --record (已弃用但仍可用)
 kubectl set image deployment/myapp app=myapp:v2.0 --record
@@ -2177,7 +2224,7 @@ kubectl set image deployment/myapp app=myapp:v2.0 --record
 kubectl annotate deployment/myapp kubernetes.io/change-cause="升级到 v2.0 修复安全漏洞 CVE-2026-1234"
 ```
 
-#<!-- chunk: Q6: Deployment 更新后 Pod 数量不符合预期 -->## Q6: Deployment 更新后 Pod 数量不符合预期
+## Q6: Deployment 更新后 Pod 数量不符合预期
 
 **症状**：
 
@@ -2218,7 +2265,7 @@ kubectl describe node <node-name> | grep -A 10 "Allocated resources"
 3. **镜像拉取失败**：2 个 Pod 卡在 `ImagePullBackOff`
 4. **健康检查失败**：Pod 启动但未通过 Readiness Probe
 
-#<!-- chunk: Q7: 如何限制 Deployment 更新速度？ -->## Q7: 如何限制 Deployment 更新速度？
+## Q7: 如何限制 Deployment 更新速度？
 
 **场景**：希望更新过程更加保守,逐步验证新版本。
 
@@ -2243,11 +2290,11 @@ spec:
 
 <!-- chunk: 14. 生产案例 -->## 14. 生产案例
 
-#<!-- chunk: 14.1 蓝绿部署 -->## 14.1 蓝绿部署
+## 14.1 蓝绿部署
 
 **原理**：同时运行新旧两个版本,通过 Service 切换流量。
 
-##<!-- chunk: 架构图 -->## 架构图
+## 架构图
 
 ```
                   ┌─────────────────────┐
@@ -2282,7 +2329,7 @@ spec:
                   └─────────────────────┘
 ```
 
-##<!-- chunk: 实施步骤 -->## 实施步骤
+## 实施步骤
 
 **步骤 1：部署 Blue 版本 (v1.0)**
 
@@ -2329,6 +2376,9 @@ spec:
   type: LoadBalancer
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply -f blue-deployment.yaml
 kubectl apply -f service.yaml
@@ -2363,6 +2413,9 @@ spec:
         - containerPort: 8080
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 部署 green 版本 (流量仍在 blue)
 kubectl apply -f green-deployment.yaml
@@ -2377,6 +2430,9 @@ curl http://<green-pod-ip>:8080/healthz
 
 **步骤 3：切换流量到 Green**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 修改 Service selector
 kubectl patch service myapp-service -p '{"spec":{"selector":{"version":"green"}}}'
@@ -2387,6 +2443,10 @@ kubectl describe service myapp-service | grep Selector
 ```
 
 **步骤 4：验证和清理**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 监控新版本运行状态
@@ -2409,11 +2469,11 @@ kubectl patch service myapp-service -p '{"spec":{"selector":{"version":"blue"}}}
 - ❌ **资源占用翻倍**：需要同时运行两套环境
 - ❌ **数据库兼容性**：需确保新旧版本兼容同一数据库 schema
 
-#<!-- chunk: 14.2 金丝雀发布 -->## 14.2 金丝雀发布
+## 14.2 金丝雀发布
 
 **原理**：逐步将一部分流量切换到新版本,观察指标后再全量发布。
 
-##<!-- chunk: 架构图 -->## 架构图
+## 架构图
 
 ```
                 ┌─────────────────────┐
@@ -2433,7 +2493,7 @@ kubectl patch service myapp-service -p '{"spec":{"selector":{"version":"blue"}}}
 └──────────────────┘              └──────────────────┘
 ```
 
-##<!-- chunk: 方式 1：基于副本数控制 (简单) -->## 方式 1：基于副本数控制 (简单)
+## 方式 1：基于副本数控制 (简单)
 
 ```yaml
 # stable-deployment.yaml (v1.0 稳定版本)
@@ -2498,6 +2558,12 @@ spec:
 
 **发布流程**：
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 部署稳定版本
 kubectl apply -f stable-deployment.yaml
@@ -2529,7 +2595,7 @@ kubectl delete deployment myapp-stable
 kubectl patch deployment myapp-canary --patch '{"metadata":{"name":"myapp-stable"}}'
 ```
 
-##<!-- chunk: 方式 2：使用 Flagger (自动化) -->## 方式 2：使用 Flagger (自动化)
+## 方式 2：使用 Flagger (自动化)
 
 **Flagger** 是 Weaveworks 开源的渐进式交付工具,支持自动化金丝雀发布。
 
@@ -2600,11 +2666,11 @@ spec:
   → 发送告警通知
 ```
 
-#<!-- chunk: 14.3 带 PDB 的滚动更新 -->## 14.3 带 PDB 的滚动更新
+## 14.3 带 PDB 的滚动更新
 
 **PodDisruptionBudget (PDB)** 用于限制同时不可用的 Pod 数量,保护关键服务。
 
-##<!-- chunk: 场景 -->## 场景
+## 场景
 
 在进行节点维护或滚动更新时,防止过多 Pod 同时下线导致服务中断。
 
@@ -2657,6 +2723,9 @@ spec:
 ```
 
 **PDB 工作原理**：
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```
 滚动更新时:
@@ -2723,6 +2792,9 @@ spec:
 
 **验证 PDB 状态**：
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 查看 PDB 状态
 kubectl get pdb myapp-pdb
@@ -2741,25 +2813,25 @@ kubectl drain node-1 --ignore-daemonsets --delete-emptydir-data
 
 <!-- chunk: 15. 相关资源 -->## 15. 相关资源
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 
 - [Kubernetes Deployment 官方文档](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 - [ReplicaSet 官方文档](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)
 - [Rolling Update 策略详解](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/)
 - [PodDisruptionBudget 文档](https://kubernetes.io/docs/tasks/run-application/configure-pdb/)
 
-#<!-- chunk: API 参考 -->## API 参考
+## API 参考
 
 - [Deployment v1 apps API](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/)
 - [ReplicaSet v1 apps API](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/replica-set-v1/)
 - [Pod v1 core API](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/)
 
-#<!-- chunk: 源码 -->## 源码
+## 源码
 
 - [Deployment Controller 源码](https://github.com/kubernetes/kubernetes/tree/master/pkg/controller/deployment)
 - [ReplicaSet Controller 源码](https://github.com/kubernetes/kubernetes/tree/master/pkg/controller/replicaset)
 
-#<!-- chunk: 工具 -->## 工具
+## 工具
 
 - [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 - [Flagger - 渐进式交付工具](https://flagger.app/)
@@ -2767,19 +2839,19 @@ kubectl drain node-1 --ignore-daemonsets --delete-emptydir-data
 - [Kustomize - 配置管理](https://kustomize.io/)
 - [Helm - 包管理器](https://helm.sh/)
 
-#<!-- chunk: 社区资源 -->## 社区资源
+## 社区资源
 
 - [Kubernetes Blog - Deployment 最佳实践](https://kubernetes.io/blog/)
 - [CNCF 云原生技术图谱](https://landscape.cncf.io/)
 - [Kubernetes Slack 频道](https://kubernetes.slack.com/)
 
-#<!-- chunk: 推荐阅读 -->## 推荐阅读
+## 推荐阅读
 
 - [《Kubernetes in Action》](https://www.manning.com/books/kubernetes-in-action-second-edition) - 第 9 章 Deployments
 - [《Production Kubernetes》](https://www.oreilly.com/library/view/production-kubernetes/9781492092292/) - 第 4 章 Workload Resources
 - [Google SRE Book - Rolling Update](https://sre.google/sre-book/release-engineering/)
 
-#<!-- chunk: kudig-database 相关文档 -->## kudig-database 相关文档
+## kudig-database 相关文档
 
 - [01 - YAML 语法基础与资源通用规范](./01-yaml-syntax-resource-conventions.md)
 - [02 - Namespace / ResourceQuota / LimitRange](./02-namespace-resourcequota-limitrange.md)
@@ -2810,7 +2882,7 @@ kubectl drain node-1 --ignore-daemonsets --delete-emptydir-data
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考

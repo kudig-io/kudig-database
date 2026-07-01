@@ -78,7 +78,7 @@ created: "2026-05-23"
 
 本文档从生产环境架构师的视角，深入探讨 API 网关（以 Apache APISIX 和 Kong 为代表）与服务网格（以 Istio 为代表）的集成模式、配置实践和最佳实践。覆盖三种主流集成模式：边车注入模式、独立网关模式、Gateway API 统一模式，以及认证/授权、限流、可观测性等关键能力的端到端配置。
 
-#<!-- chunk: API 网关与服务网格定位 -->## API 网关与服务网格定位
+## API 网关与服务网格定位
 
 ```mermaid
 graph TB
@@ -126,7 +126,7 @@ graph TB
 
 <!-- chunk: 一、集成架构模式 -->## 一、集成架构模式
 
-#<!-- chunk: 1.1 模式一：边车注入网关 -->## 1.1 模式一：边车注入网关
+## 1.1 模式一：边车注入网关
 
 将 API 网关 Pod 纳入 Istio 服务网格，网关本身拥有 Sidecar 代理。这种模式的优点是网关与网格之间自动获得 mTLS 加密和统一可观测性，缺点是增加了网关的资源开销和配置复杂度。
 
@@ -182,7 +182,7 @@ spec:
               memory: "1Gi"
 ```
 
-#<!-- chunk: 1.2 模式二：独立网关 + Istio ServiceEntry -->## 1.2 模式二：独立网关 + Istio ServiceEntry
+## 1.2 模式二：独立网关 + Istio ServiceEntry
 
 API 网关不加入服务网格，通过 Istio ServiceEntry 将网关注册为外部流量源，然后在 AuthorizationPolicy 中控制网关到服务的访问权限。这种模式的优点是网关独立部署、运维简单，缺点是需要额外管理认证和证书。
 
@@ -219,7 +219,7 @@ spec:
             paths: ["/api/*"]
 ```
 
-#<!-- chunk: 1.3 模式三：Gateway API 统一管理 (推荐) -->## 1.3 模式三：Gateway API 统一管理 (推荐)
+## 1.3 模式三：Gateway API 统一管理 (推荐)
 
 使用 Kubernetes Gateway API 作为统一接口，同时管理南北向和东西向流量。这是2026年最推荐的集成模式，提供标准化的 API 和多实现兼容性。
 
@@ -306,7 +306,7 @@ spec:
 
 <!-- chunk: 二、Apache APISIX + Istio 集成 -->## 二、Apache APISIX + Istio 集成
 
-#<!-- chunk: 2.1 APISIX 网关部署 -->## 2.1 APISIX 网关部署
+## 2.1 APISIX 网关部署
 
 ```yaml
 apiVersion: v1
@@ -431,7 +431,7 @@ spec:
             name: apisix-config
 ```
 
-#<!-- chunk: 2.2 APISIX 路由与插件配置 -->## 2.2 APISIX 路由与插件配置
+## 2.2 APISIX 路由与插件配置
 
 ```yaml
 apiVersion: apisix.apache.org/v2
@@ -497,7 +497,7 @@ spec:
             rejected_code: 429
 ```
 
-#<!-- chunk: 2.3 APISIX 与 Istio mTLS 集成 -->## 2.3 APISIX 与 Istio mTLS 集成
+## 2.3 APISIX 与 Istio mTLS 集成
 
 ```yaml
 apiVersion: security.istio.io/v1beta1
@@ -533,7 +533,7 @@ spec:
 
 <!-- chunk: 三、Kong Gateway + Istio 集成 -->## 三、Kong Gateway + Istio 集成
 
-#<!-- chunk: 3.1 Kong 网关部署 -->## 3.1 Kong 网关部署
+## 3.1 Kong 网关部署
 
 ```yaml
 apiVersion: apps/v1
@@ -593,7 +593,7 @@ spec:
               memory: "2Gi"
 ```
 
-#<!-- chunk: 3.2 Kong 服务与路由配置 -->## 3.2 Kong 服务与路由配置
+## 3.2 Kong 服务与路由配置
 
 ```bash
 curl -X POST http://kong-admin:8001/services \
@@ -628,7 +628,7 @@ curl -X POST http://kong-admin:8001/services/user-service/plugins \
   -d "config.headers=Authorization,Content-Type"
 ```
 
-#<!-- chunk: 3.3 Kong + Istio 授权策略 -->## 3.3 Kong + Istio 授权策略
+## 3.3 Kong + Istio 授权策略
 
 ```yaml
 apiVersion: security.istio.io/v1beta1
@@ -664,7 +664,7 @@ spec:
 
 <!-- chunk: 四、认证/授权端到端集成 -->## 四、认证/授权端到端集成
 
-#<!-- chunk: 4.1 JWT 认证链路 -->## 4.1 JWT 认证链路
+## 4.1 JWT 认证链路
 
 ```mermaid
 graph LR
@@ -674,7 +674,7 @@ graph LR
     SVC -->|4. RBAC Check| DB[Database]
 ```
 
-#<!-- chunk: 4.2 端到端认证配置 -->## 4.2 端到端认证配置
+## 4.2 端到端认证配置
 
 ```yaml
 apiVersion: security.istio.io/v1beta1
@@ -714,7 +714,7 @@ spec:
 
 <!-- chunk: 五、可观测性集成 -->## 五、可观测性集成
 
-#<!-- chunk: 5.1 端到端追踪配置 -->## 5.1 端到端追踪配置
+## 5.1 端到端追踪配置
 
 ```yaml
 apiVersion: telemetry.istio.io/v1alpha1
@@ -754,7 +754,7 @@ spec:
               service.name: "apisix-gateway"
 ```
 
-#<!-- chunk: 5.2 统一监控面板 -->## 5.2 统一监控面板
+## 5.2 统一监控面板
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -788,7 +788,7 @@ spec:
       interval: 15s
 ```
 
-#<!-- chunk: 5.3 关键集成指标 -->## 5.3 关键集成指标
+## 5.3 关键集成指标
 
 ```promql
 rate(apisix_http_requests_total[1m])
@@ -798,7 +798,7 @@ sum(apisix_nginx_http_current_connections{state="active"})
 rate(apisix_http_requests_total{status=~"5.."}[1m]) / rate(apisix_http_requests_total[1m])
 ```
 
-#<!-- chunk: 5.4 集成告警规则 -->## 5.4 集成告警规则
+## 5.4 集成告警规则
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -857,7 +857,7 @@ spec:
 
 <!-- chunk: 六、限流端到端集成 -->## 六、限流端到端集成
 
-#<!-- chunk: 6.1 分层限流策略 -->## 6.1 分层限流策略
+## 6.1 分层限流策略
 
 ```yaml
 限流分层:
@@ -884,7 +884,7 @@ spec:
   - 监控三层限流触发情况
 ```
 
-#<!-- chunk: 6.2 限流阈值设计参考表 -->## 6.2 限流阈值设计参考表
+## 6.2 限流阈值设计参考表
 
 | 层级 | 范围 | 阈值参考 | 实现方式 |
 |:---|:---|:---|:---|
@@ -900,7 +900,10 @@ spec:
 
 <!-- chunk: 七、故障排查 -->## 七、故障排查
 
-#<!-- chunk: 7.1 集成故障排查命令 -->## 7.1 集成故障排查命令
+## 7.1 集成故障排查命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -930,7 +933,7 @@ echo "=== 流量追踪 ==="
 kubectl exec -n production deploy/sleep -- curl -v http://user-service:8080/health
 ```
 
-#<!-- chunk: 7.2 网关日志分析输出 -->## 7.2 网关日志分析输出
+## 7.2 网关日志分析输出
 
 ```bash
 $ kubectl logs -n ingress-apisix deploy/apisix --tail=10
@@ -945,7 +948,7 @@ $ kubectl logs -n ingress-apisix deploy/apisix --tail=10
 2026/04/24 10:00:06 [info] 42#42: *123461 opentelemetry trace propagated: trace_id=abc123, span_id=def456
 ```
 
-#<!-- chunk: 7.3 常见问题 -->## 7.3 常见问题
+## 7.3 常见问题
 
 | 问题 | 原因 | 解决 |
 |:---|:---|:---|
@@ -962,7 +965,7 @@ $ kubectl logs -n ingress-apisix deploy/apisix --tail=10
 
 <!-- chunk: 八、最佳实践 -->## 八、最佳实践
 
-#<!-- chunk: 8.1 集成选型建议 -->## 8.1 集成选型建议
+## 8.1 集成选型建议
 
 ```yaml
 小团队 (< 30 服务):
@@ -982,7 +985,7 @@ $ kubectl logs -n ingress-apisix deploy/apisix --tail=10
   原因: 标准化、可移植、面向未来
 ```
 
-#<!-- chunk: 8.2 安全最佳实践 -->## 8.2 安全最佳实践
+## 8.2 安全最佳实践
 
 ```yaml
 安全检查清单:
@@ -1000,7 +1003,7 @@ $ kubectl logs -n ingress-apisix deploy/apisix --tail=10
 
 <!-- chunk: 九、APISIX 高级插件配置 -->## 九、APISIX 高级插件配置
 
-#<!-- chunk: 9.1 认证插件组合 -->## 9.1 认证插件组合
+## 9.1 认证插件组合
 
 在 API 网关层实现多层认证策略是保护后端微服务的关键。以下配置展示了如何在 APISIX 中组合使用 JWT 认证、API Key 认证和 IP 白名单，实现细粒度的访问控制。对于公开 API（如移动端接口），使用 JWT 认证验证用户身份；对于内部服务间调用，使用 API Key 认证；对于管理接口，同时要求 IP 白名单和 API Key 双重验证。
 
@@ -1092,7 +1095,7 @@ spec:
                 - "Server"
 ```
 
-#<!-- chunk: 9.2 [[gRPC|gRPC]] 协议转码 -->## 9.2 gRPC 协议转码
+## 9.2 gRPC 协议转码
 
 APISIX 支持通过 grpc-transcode 插件将 RESTful JSON 请求转码为 gRPC 调用，使得后端 gRPC 服务可以同时为 Web 和移动端提供服务。以下配置展示了如何将 REST API 路径映射到 gRPC 方法，并自动进行 JSON ↔ Protobuf 的转换。
 
@@ -1125,7 +1128,7 @@ spec:
 
 <!-- chunk: 十、端到端流量追踪验证 -->## 十、端到端流量追踪验证
 
-#<!-- chunk: 10.1 追踪链路完整性测试 -->## 10.1 追踪链路完整性测试
+## 10.1 追踪链路完整性测试
 
 确保从客户端到 API 网关、经过 Istio Sidecar、再到后端微服务的完整追踪链路不中断是端到端可观测性的关键。以下脚本通过发送测试请求并检查 [[Jaeger|Jaeger]]/Tempo 中的追踪数据，验证各层的 trace context 传播是否正确。
 
@@ -1179,15 +1182,15 @@ echo "Trace verification completed"
 
 <!-- chunk: 十一、API 网关高可用部署策略 -->## 十一、API 网关高可用部署策略
 
-#<!-- chunk: APISIX 高可用架构 -->## APISIX 高可用架构
+## APISIX 高可用架构
 
 在生产环境中，API 网关是所有外部流量的入口点，其可用性直接影响整个系统的可用性。APISIX 的高可用架构包含以下关键设计：第一，部署 3 个或更多 APISIX 网关副本，通过 Kubernetes Service 的 LoadBalancer 类型暴露服务，云厂商的负载均衡器会自动进行健康检查和流量分配；第二，使用 etcd 集群（至少 3 节点）作为配置存储，确保配置数据的强一致性和高可用性；第三，配置 Pod 反亲和性规则，确保网关副本分布在不同节点上，防止单节点问题导致所有网关实例不可用；第四，配置 HPA 自动扩缩容，基于 CPU 和内存指标动态调整网关副本数量。
 
-#<!-- chunk: Kong 高可用架构 -->## Kong 高可用架构
+## Kong 高可用架构
 
 Kong Gateway 的高可用部署与 APISIX 类似，但有一些特有差异。Kong 支持两种数据库模式：传统的 PostgreSQL 模式（适合需要完整 API 管理功能的场景）和 DB-less 声明式模式（适合追求极致性能和简化的场景）。在 PostgreSQL 模式下，需要确保数据库的高可用性——推荐使用 Patroni 或 CloudSQL 等托管数据库服务。在 DB-less 模式下，Kong 的配置通过 Kubernetes CRD 或声明式 YAML 文件管理，不依赖外部数据库，适合 GitOps 驱动的部署流程。
 
-#<!-- chunk: 网关健康检查配置 -->## 网关健康检查配置
+## 网关健康检查配置
 
 ```yaml
 apiVersion: v1
@@ -1216,7 +1219,7 @@ spec:
       targetPort: 9443
 ```
 
-#<!-- chunk: 网关自动扩缩容配置 -->## 网关自动扩缩容配置
+## 网关自动扩缩容配置
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -1270,7 +1273,7 @@ spec:
 
 <!-- chunk: 十二、Gateway API 多团队协作模式 -->## 十二、Gateway API 多团队协作模式
 
-#<!-- chunk: 多团队 Gateway 管理策略 -->## 多团队 Gateway 管理策略
+## 多团队 Gateway 管理策略
 
 在大型企业中，API 网关和服务网格的配置通常涉及多个团队：平台团队负责管理 Gateway 基础设施，应用团队负责配置路由和后端服务。Gateway API 通过 RBAC 和 ReferenceGrant 机制实现了多团队安全协作。平台团队可以创建和配置 Gateway 资源，应用团队可以在自己的命名空间中创建 HTTPRoute 资源并附加到共享 Gateway 上。ReferenceGrant 资源用于控制跨命名空间引用的权限，确保应用团队只能将路由附加到被授权的 Gateway 上。
 
@@ -1311,7 +1314,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
 - Domain-26 服务网格与微服务 — 开源项目索引
 - Istio 企业级服务网格架构与实践
 - Linkerd 企业级服务网格深度实践

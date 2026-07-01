@@ -58,7 +58,7 @@ Cilium 是基于 eBPF 的 CNI 和服务网格。
 
 Antrea 是基于 Open vSwitch（OVS）的 CNI。
 
-### [[entities/ovn-kubernetes|kubernetes]]]] — 沙箱项目
+### [[entities/ovn-kubernetes.md|kubernetes]]]] — 沙箱项目
 
 OVN-Kubernetes 基于 OVN（Open Virtual Network）的 CNI 实现。
 
@@ -235,25 +235,25 @@ Telepresence 让本地开发环境连接远程 K8s 集群。
 
 ## 相关页面
 
-- [[entities/cncf-observability|cncf-observability]] — 可观测性
-- [[entities/cncf-security|cncf-security]] — 安全与合规
-- [[concepts/cni-networking-model|cni-networking-model]] — CNI 网络模型
+- [[entities/cncf-observability.md|cncf-observability]] — 可观测性
+- [[entities/cncf-security.md|cncf-security]] — 安全与合规
+- [[concepts/cni-networking-model.md|cni-networking-model]] — CNI 网络模型
 - concepts/service-mesh-deep-dive — 服务网格深入
 
 ## Related
 
 - [[41-terway-architecture-deep-dive]] — Terway 架构深度解析
-- [[entities/cncf-cicd|cncf-cicd]] — CNCF CI/CD 与发布管理项目全景
+- [[entities/cncf-cicd.md|cncf-cicd]] — CNCF CI/CD 与发布管理项目全景
 - [[aeraki-mesh]] — Aeraki Mesh
 - [[network-service-mesh]] — Network Service Mesh (NSM)
 - [[cni]] — CNI (Container Network Interface)
 
-- [[entities/antrea|Antrea]]
-- [[entities/kubeslice|KubeSlice]]
-- [[entities/kuadrant|Kuadrant]]
-- [[entities/kube-ovn|Kube-OVN]]
-- [[entities/easegress|Easegress]]
-- [[entities/bpfman|bpfman]]
-- [[entities/telepresence|Telepresence]]
-- [[entities/spiderpool|Spiderpool]]
-- [[entities/k8gb|K8GB]]
+- [[entities/antrea.md|Antrea]]
+- [[entities/kubeslice.md|KubeSlice]]
+- [[entities/kuadrant.md|Kuadrant]]
+- [[entities/kube-ovn.md|Kube-OVN]]
+- [[entities/easegress.md|Easegress]]
+- [[entities/bpfman.md|bpfman]]
+- [[entities/telepresence.md|Telepresence]]
+- [[entities/spiderpool.md|Spiderpool]]
+- [[entities/k8gb.md|K8GB]]

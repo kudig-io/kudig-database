@@ -58,14 +58,14 @@ created: "2026-05-23"
 
 <!-- chunk: 演讲概述 -->## 演讲概述
 
-#<!-- chunk: 目标受众 -->## 目标受众
+## 目标受众
 
 - 初级运维：理解 PV/PVC/StorageClass 基础概念
 - 存储架构师：深入 CSI 挂载机制和性能调优
 - SRE 工程师：存储故障排查与数据容灾保障
 - 应用开发者：理解 Pod 挂载和存储选择
 
-#<!-- chunk: 预计时长 -->## 预计时长
+## 预计时长
 
 | 阶段 | 内容 | 时长 |
 |------|------|------|
@@ -78,7 +78,7 @@ created: "2026-05-23"
 | Q&A | 互动问答 | 15 分钟 |
 | **合计** | | **约 3.5 小时** |
 
-#<!-- chunk: 核心学习目标 -->## 核心学习目标
+## 核心学习目标
 
 完成本次培训后，学员能够：
 
@@ -89,7 +89,7 @@ created: "2026-05-23"
 5. 排查 PVC Pending、Multi-Attach 等常见存储问题
 6. 设计完整的数据保护和备份恢复策略
 
-#<!-- chunk: 核心要点 -->## 核心要点
+## 核心要点
 
 1. 容器文件系统是临时的，持久化存储是生产环境的基础
 2. PV/PVC/StorageClass 三层抽象实现存储的自动化管理
@@ -117,7 +117,7 @@ created: "2026-05-23"
 
 <!-- chunk: 核心概念讲解 -->## 核心概念讲解
 
-#<!-- chunk: 为什么需要持久化存储？ -->## 为什么需要持久化存储？
+## 为什么需要持久化存储？
 
 容器的设计哲学是**无状态、可替换**的。容器的文件系统是临时的（Ephemeral）——当容器重启或 Pod 被重新调度时，所有写入文件系统的数据都会丢失。但现实中的业务应用（数据库、消息队列、文件存储）都需要持久化数据。
 
@@ -153,7 +153,7 @@ created: "2026-05-23"
 └──────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: PV、PVC 和 StorageClass 详解 -->## PV、PVC 和 StorageClass 详解
+## PV、PVC 和 StorageClass 详解
 
 **PV (PersistentVolume)**：集群中的一块存储资源，由管理员预先配置或由 StorageClass 动态创建。PV 是集群级资源（不属于任何命名空间），代表实际的存储后端（如一块云盘、一个 NFS 目录）。
 
@@ -204,7 +204,7 @@ spec:
           - cn-hangzhou-a
 ```
 
-#<!-- chunk: 四种访问模式 -->## 四种访问模式
+## 四种访问模式
 
 | 模式 | 缩写 | 说明 | 典型场景 | 存储类型 |
 |------|------|------|---------|---------|
@@ -215,7 +215,7 @@ spec:
 
 > **注意**: 不同云商和存储类型对访问模式的支持不同。例如阿里云云盘只支持 RWO，NAS 支持 RWX。选择存储类型前必须确认访问模式需求。
 
-#<!-- chunk: CSI 挂载全流程 -->## CSI 挂载全流程
+## CSI 挂载全流程
 
 CSI (Container Storage Interface) 是 Kubernetes 与存储系统之间的标准接口。一次完整的卷挂载分为四个阶段：
 
@@ -261,7 +261,7 @@ CSI (Container Storage Interface) 是 Kubernetes 与存储系统之间的标准�
 | External Snapshotter | 监听 VolumeSnapshot，调用 CSI Controller 创建快照 | Sidecar 容器 |
 | External Resizer | 监听 PVC 扩容请求，调用 CSI Controller 扩容 | Sidecar 容器 |
 
-#<!-- chunk: 存储拓扑感知 -->## 存储拓扑感知
+## 存储拓扑感知
 
 在多可用区集群中，云盘只能挂载到同一可用区的节点。如果在 Pod 调度前就创建了 PV（绑定到特定可用区的云盘），但 Pod 被调度到不同可用区，挂载就会失败。
 
@@ -301,7 +301,7 @@ allowedTopologies:
 | `Immediate` | PVC 创建即绑定 | 随机可用区 | 单可用区集群 |
 | `WaitForFirstConsumer` | Pod 调度后再绑定 | Pod 所在可用区 | **多可用区集群（推荐）** |
 
-#<!-- chunk: 回收策略 -->## 回收策略
+## 回收策略
 
 | 策略 | 行为 | PVC 删除后 | 适用场景 |
 |------|------|-----------|---------|
@@ -313,7 +313,7 @@ allowedTopologies:
 
 <!-- chunk: 架构图 -->## 架构图
 
-#<!-- chunk: Kubernetes 存储架构全景 -->## Kubernetes 存储架构全景
+## Kubernetes 存储架构全景
 
 ```mermaid
 graph TB
@@ -359,7 +359,7 @@ graph TB
     style Storage fill:#f3e5f5,stroke:#7b1fa2
 ```
 
-#<!-- chunk: CSI 挂载流程 -->## CSI 挂载流程
+## CSI 挂载流程
 
 ```mermaid
 sequenceDiagram
@@ -386,7 +386,7 @@ sequenceDiagram
     Note over User: Pod 开始运行，/data 可用
 ```
 
-#<!-- chunk: StorageClass 分级架构 -->## StorageClass 分级架构
+## StorageClass 分级架构
 
 ```mermaid
 graph TB
@@ -421,7 +421,12 @@ graph TB
 
 <!-- chunk: 实战演示步骤 -->## 实战演示步骤
 
-#<!-- chunk: 演示 1：创建第一个 PVC + Pod -->## 演示 1：创建第一个 PVC + Pod
+## 演示 1：创建第一个 PVC + Pod
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 步骤 1: 查看可用 StorageClass
@@ -487,7 +492,7 @@ kubectl exec lab-pod -- cat /data/test-file
 # 预期输出: Hello K8s Storage
 
 # 步骤 6: 删除 Pod 后重建，验证数据持久化
-kubectl delete pod lab-pod --force --grace-period=0
+kubectl delete pod lab-pod --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 # 预期输出: pod "lab-pod" force deleted
 
 cat <<EOF | kubectl apply -f -
@@ -513,7 +518,7 @@ kubectl exec lab-pod-2 -- cat /data/test-file
 # 预期输出: Hello K8s Storage ← 数据还在！
 ```
 
-#<!-- chunk: 演示 2：验证 CSI 挂载流程 -->## 演示 2：验证 CSI 挂载流程
+## 演示 2：验证 CSI 挂载流程
 
 ```bash
 # 步骤 1: 获取 Pod UID 和 PV 名称
@@ -545,7 +550,11 @@ ls /var/lib/kubelet/pods/$POD_UID/volumes/kubernetes.io~csi/$PV_NAME/
 mount | grep $PV_NAME
 ```
 
-#<!-- chunk: 演示 3：卷在线扩容 -->## 演示 3：卷在线扩容
+## 演示 3：卷在线扩容
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 步骤 1: 确认 StorageClass 允许扩容
@@ -577,7 +586,11 @@ kubectl exec lab-pod-2 -- df -h /data
 # 重要: 扩容不能缩容！从 20Gi 无法缩回 5Gi
 ```
 
-#<!-- chunk: 演示 4：VolumeSnapshot 快照与恢复 -->## 演示 4：VolumeSnapshot 快照与恢复
+## 演示 4：VolumeSnapshot 快照与恢复
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 步骤 1: 写入重要数据
@@ -657,7 +670,7 @@ kubectl exec verify-pod -- cat /data/important.txt
 # 预期输出: Important data before snapshot ← 数据恢复成功！
 ```
 
-#<!-- chunk: 演示 5：备份与恢复 (Velero) -->## 演示 5：备份与恢复 (Velero)
+## 演示 5：备份与恢复 (Velero)
 
 ```bash
 # 步骤 1: 安装 Velero
@@ -701,9 +714,13 @@ velero schedule create daily-prod-backup \
 
 <!-- chunk: 动手实验 -->## 动手实验
 
-#<!-- chunk: 实验 1：完整的数据生命周期管理 -->## 实验 1：完整的数据生命周期管理
+## 实验 1：完整的数据生命周期管理
 
 **目标**：创建 PVC → 写入数据 → 快照 → 模拟灾难 → 从快照恢复
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 创建 StatefulSet 使用 PVC
@@ -806,35 +823,35 @@ kubectl exec verify-restored -- cat /data/version.txt
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
 
-#<!-- chunk: Q1: PVC 一直 Pending 怎么办？ -->## Q1: PVC 一直 Pending 怎么办？
+## Q1: PVC 一直 Pending 怎么办？
 
 **回答**: 排查步骤：(1) `kubectl describe pvc <name>` 查看 Events——最直接的信息来源；(2) 检查 StorageClass 是否存在：`kubectl get sc`；(3) 检查 CSI Driver 是否运行：`kubectl get pods -n kube-system -l app=csi-plugin`；(4) 检查云商配额是否充足（磁盘配额、可用区配额）；(5) 如果使用 WaitForFirstConsumer，检查是否有 Pod 引用了这个 PVC——没有 Pod 则不会触发绑定；(6) 检查 ResourceQuota 是否限制了存储总量。
 
-#<!-- chunk: Q2: Multi-Attach 错误是什么意思？ -->## Q2: Multi-Attach 错误是什么意思？
+## Q2: Multi-Attach 错误是什么意思？
 
 **回答**: Multi-Attach 表示同一个 PV 被尝试挂载到多个节点，但该 PV 的访问模式是 RWO（只允许单节点读写）。常见原因：(1) Pod 被重新调度到新节点，但旧节点上的卷还未卸载（VolumeAttachment 仍存在）；(2) 旧 Pod 未完全终止（卡在 Terminating）。解决：等待旧 Pod 完全终止和卷卸载（通常 1-5 分钟），或手动检查 `kubectl get volumeattachment` 状态。紧急情况可以手动删除 VolumeAttachment。
 
-#<!-- chunk: Q3: WaitForFirstConsumer 和 Immediate 怎么选？ -->## Q3: WaitForFirstConsumer 和 Immediate 怎么选？
+## Q3: WaitForFirstConsumer 和 Immediate 怎么选？
 
 **回答**: 单可用区集群可以使用 Immediate。多可用区集群**必须使用 WaitForFirstConsumer**。因为云盘有可用区属性——在 cn-hangzhou-a 创建的云盘只能挂载到 cn-hangzhou-a 的节点。如果提前绑定，Pod 可能被调度到不同可用区导致挂载失败。建议：所有 StorageClass 统一使用 WaitForFirstConsumer，避免出错。
 
-#<!-- chunk: Q4: 如何选择存储性能级别？ -->## Q4: 如何选择存储性能级别？
+## Q4: 如何选择存储性能级别？
 
 **回答**: 根据应用的 IOPS 和延迟需求选择：(1) **ESSD PL3**（64,000 IOPS，延迟 < 0.2ms）：数据库（MySQL/PostgreSQL/MongoDB）、核心业务；(2) **ESSD PL2**（20,000 IOPS）：中间件（Redis/Kafka/Elasticsearch）、一般业务；(3) **ESSD PL1**（5,000 IOPS）：日志、文件存储、开发测试；(4) **高效云盘**：低频访问、归档数据。建议通过 `fio` 基准测试验证实际性能。
 
-#<!-- chunk: Q5: 卷扩容有没有风险？ -->## Q5: 卷扩容有没有风险？
+## Q5: 卷扩容有没有风险？
 
 **回答**: 在线扩容（Pod 运行中扩容）对大部分存储类型是安全的，但注意：(1) **扩容不能缩容**——一旦扩到 100Gi 就不能缩回 50Gi；(2) 扩容过程中可能有短暂的 I/O 暂停（取决于存储类型和文件系统）；(3) 文件系统在线扩容由 kubelet 自动完成（支持 ext4 和 xfs）；(4) 建议在业务低峰期执行扩容；(5) 先配置容量告警（85% 警告），在到达 100% 前完成扩容；(6) 确认 StorageClass 设置了 `allowVolumeExpansion: true`。
 
-#<!-- chunk: Q6: 如何实现存储的高可用？ -->## Q6: 如何实现存储的高可用？
+## Q6: 如何实现存储的高可用？
 
 **回答**: 存储高可用取决于存储后端：(1) **云盘**：依赖云商的数据冗余机制（如阿里云 ESSD 的三副本，数据可靠性 99.9999999%）；(2) **NAS**：多可用区可访问，天然支持高可用；(3) **Ceph**：副本或纠删码保证数据不丢失；(4) **备份**：定期 VolumeSnapshot + Velero 异地备份；(5) **应用层**：数据库主从复制、Redis AOF/RDB 等。注意：云盘本身不支持跨可用区访问，需要应用层实现故障切换。
 
-#<!-- chunk: Q7: HostPath 和 Local PV 有什么区别？ -->## Q7: HostPath 和 Local PV 有什么区别？
+## Q7: HostPath 和 Local PV 有什么区别？
 
 **回答**: HostPath 直接挂载节点上的目录到容器，不经过 PV/PVC 管理，数据不会随 Pod 迁移，生产环境**严禁使用**（安全风险：Pod 可以访问节点的任意文件）。Local PV 是 Kubernetes 原生支持的本地存储方案，经过 PV/PVC 管理，支持持久化（Pod 重建后数据保留），但不支持 Pod 跨节点迁移。Local PV 适合对延迟极度敏感且不需要迁移的场景（如本地缓存、分布式存储的数据目录）。
 
-#<!-- chunk: Q8: 如何监控存储使用情况？ -->## Q8: 如何监控存储使用情况？
+## Q8: 如何监控存储使用情况？
 
 **回答**: Kubelet 自动暴露存储指标（`/metrics/cadvisor`）：`kubelet_volume_stats_used_bytes`（已使用）、`kubelet_volume_stats_capacity_bytes`（总容量）、`kubelet_volume_stats_available_bytes`（可用）、`kubelet_volume_stats_inodes_used`（已使用 inode 数）。配置 Prometheus 告警规则：
 
@@ -848,11 +865,11 @@ kubectl exec verify-restored -- cat /data/version.txt
 
 同时监控 PVC Pending 数量和 CSI 插件错误率。
 
-#<!-- chunk: Q9: Velero 备份和 VolumeSnapshot 有什么区别？ -->## Q9: Velero 备份和 VolumeSnapshot 有什么区别？
+## Q9: Velero 备份和 VolumeSnapshot 有什么区别？
 
 **回答**: VolumeSnapshot 是**存储级别**的快照（秒级完成，依赖存储后端支持），只备份卷数据，不备份 Kubernetes 资源定义。Velero 是**集群级**备份工具，同时备份 Kubernetes 资源（Deployment、Service、ConfigMap 等 YAML 定义）和卷数据（通过 VolumeSnapshot 或文件复制）。生产环境推荐两者结合：VolumeSnapshot 用于快速恢复，Velero 用于完整的灾备和跨集群迁移。
 
-#<!-- chunk: Q10: 如何处理存储性能问题？ -->## Q10: 如何处理存储性能问题？
+## Q10: 如何处理存储性能问题？
 
 **回答**: (1) 确认存储类型和性能级别是否匹配业务需求——数据库用 PL3，日志用 PL1；(2) 使用 `fio` 进行基准测试验证实际 IOPS：`fio --name=test --filename=/data/test --rw=randwrite --bs=4k --size=1G --numjobs=16 --time_based --runtime=60 --group_reporting`；(3) 检查是否有多应用共享同一块磁盘导致 I/O 争抢；(4) 检查网络存储（NAS）的网络带宽是否成为瓶颈；(5) 考虑使用本地存储（Local PV）消除网络开销；(6) 监控 `kubelet_volume_stats_*` 和 etcd 磁盘延迟。
 
@@ -860,7 +877,7 @@ kubectl exec verify-restored -- cat /data/version.txt
 
 <!-- chunk: 要点总结 -->## 要点总结
 
-#<!-- chunk: 存储知识图谱 -->## 存储知识图谱
+## 存储知识图谱
 
 ```
 Kubernetes 存储
@@ -890,9 +907,10 @@ Kubernetes 存储
     ├── PVC Pending 告警
     ├── CSI 插件健康检查
     └── 卷挂载失败告警
+
 ```
 
-#<!-- chunk: 存储问题速查表 -->## 存储问题速查表
+## 存储问题速查表
 
 | 现象 | 可能原因 | 排查命令 | 解决方案 |
 |------|---------|---------|---------|
@@ -905,7 +923,7 @@ Kubernetes 存储
 | 磁盘满 | 未配置扩容 | `kubectl exec -- df -h` | 在线扩容 PVC |
 | 快照失败 | VolumeSnapshotClass 缺失 | `kubectl get volumesnapshotclass` | 创建 VolumeSnapshotClass |
 
-#<!-- chunk: SRE 运维红线 -->## SRE 运维红线
+## SRE 运维红线
 
 | 红线 | 说明 | 违反后果 |
 |------|------|---------|
@@ -916,7 +934,7 @@ Kubernetes 存储
 | **红线 5** | 存储变更必须经过备份验证和灰度发布 | 数据损坏无法恢复 |
 | **红线 6** | 定期执行 Velero 备份恢复演练 | 灾难时发现备份不可用 |
 
-#<!-- chunk: 每日/每周运维检查清单 -->## 每日/每周运维检查清单
+## 每日/每周运维检查清单
 
 ```markdown
 每日检查:
@@ -938,7 +956,7 @@ Kubernetes 存储
 
 <!-- chunk: 延伸阅读 -->## 延伸阅读
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 
 | 资源 | 链接 | 说明 |
 |------|------|------|
@@ -948,7 +966,7 @@ Kubernetes 存储
 | Velero | https://velero.io/docs/ | 备份工具文档 |
 | 存储最佳实践 | https://kubernetes.io/docs/concepts/storage/storage-classes/ | StorageClass |
 
-#<!-- chunk: 关联培训专题 -->## 关联培训专题
+## 关联培训专题
 
 - `kubernetes-architecture-fundamentals-presentation.md` — 存储在架构中的位置
 - `kubernetes-workload-presentation.md` — StatefulSet 与持久化存储
@@ -986,4 +1004,6 @@ Kubernetes 存储
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+
+```

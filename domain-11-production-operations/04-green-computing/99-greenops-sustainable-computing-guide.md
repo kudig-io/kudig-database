@@ -63,7 +63,7 @@ estimated_read_time: 5min
 intent_queries:
 - GreenOps 可持续计算与碳足迹优化指南 是什么
 - 如何 GreenOps 可持续计算与碳足迹优化指南
-- [[Kubernetes|Kubernetes]] 18 [[references/k8s-production-operations|production operations]] 最佳实践
+- [[Kubernetes|Kubernetes]] 18 [[entities/k8s-production-operations.md|production operations]] 最佳实践
 trigger_keywords:
 - GreenOps
 - 可持续计算与碳足迹优化指南
@@ -135,6 +135,9 @@ GreenOps = FinOps + 可持续性
 ## 二、Kepler 功耗监控部署
 
 ### 2.1 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add kepler https://sustainable-computing-io.github.io/kepler-helm-chart
@@ -240,6 +243,9 @@ data:
 ## 四、Kube-green 定时关机
 
 ### 4.1 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add kube-green https://kube-green.github.io/charts
@@ -448,9 +454,9 @@ kubectl top pod --all-namespaces > pod-usage.txt
 ## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -470,3 +476,5 @@ kubectl top pod --all-namespaces > pod-usage.txt
 - 99-finops-cost-optimization-guide
 - 99-karpenter-node-autoscaling-guide
 - 99-keda-event-driven-autoscaling-guide
+
+```

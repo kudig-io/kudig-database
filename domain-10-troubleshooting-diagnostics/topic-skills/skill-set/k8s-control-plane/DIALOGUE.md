@@ -4,6 +4,7 @@ category: "troubleshooting"
 tags: ["cluster", "remote-consultant"]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 dialogue_id: "DIALOGUE-K8S_CONTROL_PLANE"
 skill_id: "k8s-control-plane"
 version: "1.0.0"
@@ -11,13 +12,13 @@ role: "remote-consultant"
 language: "zh"
 summary: "控制平面问题的远程顾问对话脚本，覆盖API Server、etcd、Scheduler排查。"
 relationships:
-  - target: "[[entities/etcd]]"
+  - target: "[[entities/etcd.md]]"
     type: uses
-  - target: "[[entities/helm]]"
+  - target: "[[entities/helm.md]]"
     type: uses
-  - target: "[[entities/kubernetes]]"
+  - target: "[[entities/kubernetes.md]]"
     type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service]]"
+  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service.md]]"
     type: uses
 ---
 
@@ -68,7 +69,7 @@ relationships:
   - 如无法执行：请提供当前可执行的环境信息
 
 ### 分支 3：etcd异常
-- `kubectl exec -it [[entities/etcd|etcd]]-<node> -n kube-system -- etcdctl endpoint health`
+- `kubectl exec -it [[entities/etcd.md|etcd]]-<node> -n kube-system -- etcdctl endpoint health`
   > 💬 **顾问确认**：如输出与预期不符，请停止操作并立即反馈。
   - 如无法执行：请提供当前可执行的环境信息
 - `kubectl exec -it etcd-<node> -n kube-system -- etcdctl member list`
@@ -80,7 +81,7 @@ relationships:
 ### 分支 1：apiserver崩溃
 - `journalctl -u kube-apiserver -n 100 --no-pager`
   - 如无法执行：请提供当前可执行的环境信息
-- `检查证书有效期: openssl x509 -in /[[entities/kubernetes|kubernetes]]/pki/apiserver.crt -noout -dates`
+- `检查证书有效期: openssl x509 -in /[[entities/kubernetes.md|kubernetes]]/pki/apiserver.crt -noout -dates`
   - 如无法执行：请提供当前可执行的环境信息
 - `如证书过期: kubeadm certs renew all`
   - 如无法执行：请提供当前可执行的环境信息
@@ -386,7 +387,7 @@ kubectl无法连接
 ### 场景：无法访问 etcd 节点
 | 原命令 | 替代方案 A | 替代方案 B | 替代方案 C |
 |:---|:---|:---|:---|
-| `etcdctl endpoint health` | 通过 apiserver 间接检查：`kubectl get --raw /healthz/etcd` | 查看 etcd Pod 日志 | 检查 etcd [[domain-17-system-foundation/topic-dictionary/networking/service|Service]] Endpoint |
+| `etcdctl endpoint health` | 通过 apiserver 间接检查：`kubectl get --raw /healthz/etcd` | 查看 etcd Pod 日志 | 检查 etcd [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]] Endpoint |
 | `etcdctl member list` | 查看 etcd Pod 状态推断成员数 | 使用 `kubectl get endpoints -n kube-system etcd` | 请管理员协助执行 |
 | `etcdctl snapshot save` | 检查是否有自动化备份（Velero/etcd-backup-operator） | 使用云厂商 etcd 备份功能 | 联系 DBA 或存储团队协助 |
 
@@ -400,7 +401,7 @@ kubectl无法连接
 ### 场景：安全策略禁止执行命令
 | 原命令 | 替代方案 A | 替代方案 B | 替代方案 C |
 |:---|:---|:---|:---|
-| 任何 kubectl 命令 | 提供截图和描述 | 审查现有配置文件（[[entities/helm|Helm]]） | 转为文档指导和流程确认 |
+| 任何 kubectl 命令 | 提供截图和描述 | 审查现有配置文件（[[entities/helm.md|Helm]]） | 转为文档指导和流程确认 |
 | 修改静态 Pod manifest | 通过 GitOps/Config Management 下发 | 联系有权限的安全管理员 | 使用声明式 API 而非直接修改节点 |
 | etcd 数据操作 | 完全依赖自动化备份恢复流程 | 联系平台团队执行 | 准备重建集群的方案 |
 
@@ -432,7 +433,7 @@ kubectl无法连接
 
 ## 相关案例
 
-- [[synthesis/case-studies/2026-07-15--admission-webhook超时导致所有api操作失败|2026-07-15--admission-webhook超时导致所有api操作失败]]
+- [[concepts/case-studies/2026-07-15--admission-webhook超时导致所有api操作失败.md|2026-07-15--admission-webhook超时导致所有api操作失败]]
 ## Related
 
-- [[domain-17-system-foundation/03-kubernetes-events/02-pod-container-lifecycle-events|02 - Pod 与容器生命周期事件]]
+- [[domain-17-system-foundation/03-kubernetes-events/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]

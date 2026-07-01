@@ -589,11 +589,11 @@ common_upgrade_challenges:
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering KUDIG Database — Global MOC
-- [[domain-07-platform-engineering/README|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
+- [[domain-07-platform-engineering/README.md|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
 - index.md|Domain-9 平台运维 — 开源项目索引]]
 - 平台运维概述
 - 集群生命周期管理
-- [[domain-07-platform-engineering/governance/03-capacity-planning-resource-assessment]]
+- [[domain-07-platform-engineering/governance/03-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
 - 性能基准测试与调优 (Performance Benchmarking & Tuning)
 - 运维指标体系建设 (Operations Metrics System)
 - 监控告警体系

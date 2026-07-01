@@ -74,7 +74,7 @@ CloudNativePG 的核心设计理念是"原生 K8s 集成、零外部依赖"。�
 
 本文档系统覆盖 CNPG 的部署、配置、高可用、备份、监控、连接池、升级和生态集成，提供生产级 YAML 配置和运维脚本。
 
-#<!-- chunk: CloudNativePG 架构深度解析 -->## CloudNativePG 架构深度解析
+## CloudNativePG 架构深度解析
 
 CloudNativePG 的架构设计充分考虑了 Kubernetes 的特性，将 PostgreSQL 的运维最佳实践与 K8s 的声明式 API 深度融合。理解其内部工作原理对于正确配置和故障排查至关重要。
 
@@ -94,7 +94,7 @@ CloudNativePG 的架构设计充分考虑了 Kubernetes 的特性，将 PostgreS
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: CloudNativePG 架构图 -->## CloudNativePG 架构图
+## CloudNativePG 架构图
 
 ```mermaid
 graph TB
@@ -158,7 +158,7 @@ graph TB
     PRIMARY --> PODMON
 ```
 
-#<!-- chunk: 核心特性对比 -->## 核心特性对比
+## 核心特性对比
 
 | 特性 | CloudNativePG | Zalando PG Operator | Crunchy PGO |
 |:---|:---|:---|:---|
@@ -176,7 +176,11 @@ graph TB
 
 <!-- chunk: 核心组件配置 -->## 核心组件配置
 
-#<!-- chunk: Operator 安装 -->## Operator 安装
+## Operator 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 kubectl apply -f \
@@ -194,7 +198,7 @@ helm install cnpg cnpg/cloudnative-pg \
   --set resources.limits.memory=512Mi
 ```
 
-#<!-- chunk: 生产级集群配置 -->## 生产级集群配置
+## 生产级集群配置
 
 ```yaml
 apiVersion: postgresql.cnpg.io/v1
@@ -365,7 +369,7 @@ spec:
         eks.amazonaws.com/role-arn: "arn:aws:iam::123456789012:role/cnpg-s3"
 ```
 
-#<!-- chunk: 初始化 SQL -->## 初始化 SQL
+## 初始化 SQL
 
 ```sql
 -- create_extensions.sql
@@ -384,7 +388,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO app_readonly
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: 参数计算公式 -->## 参数计算公式
+## 参数计算公式
 
 ```
 CNPG PostgreSQL 参数参考（16GB 内存 Pod）：
@@ -399,7 +403,7 @@ max_wal_size              = shared_buffers × 2 = 8GB
 min_wal_size              = shared_buffers × 0.5 = 2GB
 ```
 
-#<!-- chunk: 关键调优参数 -->## 关键调优参数
+## 关键调优参数
 
 | 参数 | 默认值 | 推荐值 | 说明 |
 |:---|:---|:---|:---|
@@ -415,7 +419,7 @@ min_wal_size              = shared_buffers × 0.5 = 2GB
 
 <!-- chunk: 高可用与容灾 -->## 高可用与容灾
 
-#<!-- chunk: 同步复制配置 -->## 同步复制配置
+## 同步复制配置
 
 ```yaml
 spec:
@@ -426,7 +430,7 @@ spec:
       dataDurability: preferred
 ```
 
-#<!-- chunk: 故障转移机制 -->## 故障转移机制
+## 故障转移机制
 
 ```
 故障检测流程:
@@ -441,7 +445,7 @@ RTO: ~30 秒
 RPO: 近零（同步复制）/ < 1秒（异步复制）
 ```
 
-#<!-- chunk: 手动管理操作 -->## 手动管理操作
+## 手动管理操作
 
 ```bash
 # 查看集群状态
@@ -470,7 +474,7 @@ kubectl cnpg hibernate production-db -n database
 
 <!-- chunk: 备份恢复 -->## 备份恢复
 
-#<!-- chunk: 定时备份 -->## 定时备份
+## 定时备份
 
 ```yaml
 apiVersion: postgresql.cnpg.io/v1
@@ -487,7 +491,10 @@ spec:
   immediate: false
 ```
 
-#<!-- chunk: 按需备份 -->## 按需备份
+## 按需备份
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 kubectl apply -f - <<EOF
@@ -507,7 +514,7 @@ kubectl get backups -n database
 kubectl describe backup manual-backup-$(date +%Y%m%d) -n database
 ```
 
-#<!-- chunk: PITR 时间点恢复 -->## PITR 时间点恢复
+## PITR 时间点恢复
 
 ```yaml
 apiVersion: postgresql.cnpg.io/v1
@@ -545,7 +552,7 @@ spec:
           maxParallel: 8
 ```
 
-#<!-- chunk: 从现有集群克隆 -->## 从现有集群克隆
+## 从现有集群克隆
 
 ```yaml
 apiVersion: postgresql.cnpg.io/v1
@@ -574,7 +581,7 @@ spec:
 
 <!-- chunk: 监控告警 -->## 监控告警
 
-#<!-- chunk: Prometheus 监控集成 -->## Prometheus 监控集成
+## Prometheus 监控集成
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -598,7 +605,7 @@ spec:
       path: /metrics
 ```
 
-#<!-- chunk: 告警规则 -->## 告警规则
+## 告警规则
 
 ```yaml
 groups:
@@ -663,7 +670,7 @@ groups:
 
 <!-- chunk: 连接池与多租户 -->## 连接池与多租户
 
-#<!-- chunk: PgBouncer 连接池 -->## PgBouncer 连接池
+## PgBouncer 连接池
 
 ```yaml
 apiVersion: postgresql.cnpg.io/v1
@@ -715,7 +722,7 @@ spec:
               cnpg.io/pooler: production-db-pooler-rw
 ```
 
-#<!-- chunk: 多租户命名空间隔离 -->## 多租户命名空间隔离
+## 多租户命名空间隔离
 
 ```yaml
 # team-a-database.yaml
@@ -755,7 +762,10 @@ spec:
 
 <!-- chunk: 升级与维护 -->## 升级与维护
 
-#<!-- chunk: 滚动升级 -->## 滚动升级
+## 滚动升级
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 修改 imageName 触发滚动升级
@@ -771,7 +781,7 @@ kubectl cnpg status production-db -n database
 # 3. 升级旧主（现为 Replica）
 ```
 
-#<!-- chunk: 维护窗口 -->## 维护窗口
+## 维护窗口
 
 ```yaml
 spec:
@@ -781,7 +791,10 @@ spec:
     reusePVC: false
 ```
 
-#<!-- chunk: Major 版本升级 -->## Major 版本升级
+## Major 版本升级
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # CNPG 支持 major 版本升级（如 15 → 17）
@@ -821,7 +834,7 @@ EOF
 
 <!-- chunk: 运维管理 -->## 运维管理
 
-#<!-- chunk: 日常运维脚本 -->## 日常运维脚本
+## 日常运维脚本
 
 ```bash
 #!/bin/bash
@@ -903,7 +916,7 @@ esac
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题速查表 -->## 常见问题速查表
+## 常见问题速查表
 
 | 问题现象 | 可能原因 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
@@ -936,7 +949,7 @@ CloudNativePG (PostgreSQL)
     └── 定期备份 ---> S3 (长期归档)
 ```
 
-#<!-- chunk: 参考链接 -->## 参考链接
+## 参考链接
 
 - [CloudNativePG 官方文档](https://cloudnative-pg.io/documentation/)
 - [CloudNativePG GitHub](https://github.com/cloudnative-pg/cloudnative-pg)
@@ -956,7 +969,7 @@ CloudNativePG (PostgreSQL)
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-28-enterprise-database-middleware MOC
-- [[domain-16-database-middleware/README|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
+- [[domain-16-database-middleware/README.md|Domain 16: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
 - Domain-28 企业数据库与中间件 — 开源项目索引
 - MySQL 企业级数据库运维管理
 - PostgreSQL 企业级数据库高可用架构

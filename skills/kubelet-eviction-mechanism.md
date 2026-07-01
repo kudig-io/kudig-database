@@ -217,16 +217,16 @@ kubectl describe pod <pod> | grep -A 5 "Last State"
 
 ## 相关技能
 
-- [[skills/node-drain-and-maintenance|[[节点驱逐与维护|节点驱逐与维护]]]]
-- [[concepts/resource-management|资源管理]]
+- [[skills/node-drain-and-maintenance.md|[[节点驱逐与维护|节点驱逐与维护]]]]
+- [[concepts/resource-management.md|资源管理]]
 - [[pod-lifecycle|Pod 生命周期]]
-- [[entities/kubelet|kubelet]]
+- [[entities/kubelet.md|kubelet]]
 
 ## Related
 
-- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[score]] — Score
 - [[prometheus]] — Prometheus
 
 - [[pod-lifecycle|pod-lifecycle]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]

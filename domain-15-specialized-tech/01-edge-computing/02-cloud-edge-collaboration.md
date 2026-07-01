@@ -77,7 +77,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 云边协同概述 -->## 1. 云边协同概述
 
-#<!-- chunk: 1.1 云边协同的挑战 (Challenges of Cloud-Edge Collaboration) -->## 1.1 云边协同的挑战 (Challenges of Cloud-Edge Collaboration)
+## 1.1 云边协同的挑战 (Challenges of Cloud-Edge Collaboration)
 
 云边协同面临的核心挑战在于：**如何在不可靠的广域网连接下，保证分布在边缘和云端的系统协调一致地工作**。
 
@@ -109,7 +109,7 @@ graph TD
     C6 --> S6
 ```
 
-#<!-- chunk: 1.2 云边协同架构分层 (Architecture Layers) -->## 1.2 云边协同架构分层 (Architecture Layers)
+## 1.2 云边协同架构分层 (Architecture Layers)
 
 ```mermaid
 graph TB
@@ -139,7 +139,7 @@ graph TB
     CollaborationLayer <--> EdgeLayer
 ```
 
-#<!-- chunk: 1.3 协同模式分类 (Collaboration Pattern Categories) -->## 1.3 协同模式分类 (Collaboration Pattern Categories)
+## 1.3 协同模式分类 (Collaboration Pattern Categories)
 
 ```
 云边协同模式分类:
@@ -163,7 +163,7 @@ graph TB
 
 <!-- chunk: 2. 通信模式 -->## 2. 通信模式
 
-#<!-- chunk: 2.1 请求-响应模式 (Request-Response Pattern) -->## 2.1 请求-响应模式 (Request-Response Pattern)
+## 2.1 请求-响应模式 (Request-Response Pattern)
 
 **适用场景**：配置查询、状态上报、指令下发
 
@@ -225,7 +225,7 @@ func (c *EdgeCloudClient) handleResponse(client mqtt.Client, msg mqtt.Message) {
 }
 ```
 
-#<!-- chunk: 2.2 发布-订阅模式 (Publish-Subscribe Pattern) -->## 2.2 发布-订阅模式 (Publish-Subscribe Pattern)
+## 2.2 发布-订阅模式 (Publish-Subscribe Pattern)
 
 **适用场景**：设备遥测数据上报、事件广播、配置下发
 
@@ -293,7 +293,7 @@ mqtt_topic_design:
     config: 1       # 至少一次 + 幂等处理
 ```
 
-#<!-- chunk: 2.3 推送-拉取模式 (Push-Pull Pattern) -->## 2.3 推送-拉取模式 (Push-Pull Pattern)
+## 2.3 推送-拉取模式 (Push-Pull Pattern)
 
 ```mermaid
 graph TD
@@ -335,7 +335,7 @@ graph TD
 日志/指标批量上传         → 推送+本地缓冲
 ```
 
-#<!-- chunk: 2.4 长连接管理 (Long Connection Management) -->## 2.4 长连接管理 (Long Connection Management)
+## 2.4 长连接管理 (Long Connection Management)
 
 ```go
 // KubeEdge 风格的云边长连接管理
@@ -430,7 +430,7 @@ func (e *ExponentialBackoff) Next() time.Duration {
 
 <!-- chunk: 3. 数据同步策略 -->## 3. 数据同步策略
 
-#<!-- chunk: 3.1 数据同步模式概览 (Data Sync Pattern Overview) -->## 3.1 数据同步模式概览 (Data Sync Pattern Overview)
+## 3.1 数据同步模式概览 (Data Sync Pattern Overview)
 
 ```mermaid
 graph TD
@@ -457,7 +457,7 @@ graph TD
     P5 --> U5
 ```
 
-#<!-- chunk: 3.2 分级数据同步策略 (Tiered Data Sync Strategy) -->## 3.2 分级数据同步策略 (Tiered Data Sync Strategy)
+## 3.2 分级数据同步策略 (Tiered Data Sync Strategy)
 
 ```yaml
 # 边缘数据分级同步策略配置
@@ -520,7 +520,7 @@ data_sync_policy:
     resume_on_reconnect: true
 ```
 
-#<!-- chunk: 3.3 变更数据捕获 (Change Data Capture) -->## 3.3 变更数据捕获 (Change Data Capture)
+## 3.3 变更数据捕获 (Change Data Capture)
 
 ```mermaid
 sequenceDiagram
@@ -621,7 +621,7 @@ class EdgeCDCSyncService:
                 break
 ```
 
-#<!-- chunk: 3.4 冲突解决策略 (Conflict Resolution Strategies) -->## 3.4 冲突解决策略 (Conflict Resolution Strategies)
+## 3.4 冲突解决策略 (Conflict Resolution Strategies)
 
 ```mermaid
 graph TD
@@ -702,7 +702,7 @@ func (r *LWWRegister) Merge(other *LWWRegister) *LWWRegister {
 
 <!-- chunk: 4. 状态管理设计 -->## 4. 状态管理设计
 
-#<!-- chunk: 4.1 期望状态 vs 实际状态 (Desired State vs Actual State) -->## 4.1 期望状态 vs 实际状态 (Desired State vs Actual State)
+## 4.1 期望状态 vs 实际状态 (Desired State vs Actual State)
 
 [[Kubernetes|Kubernetes]]/KubeEdge 使用声明式 API 和控制器模式来管理边缘状态，这是云边协同的核心设计理念。
 
@@ -729,7 +729,7 @@ graph LR
     style ActualState fill:#c8e6c9
 ```
 
-#<!-- chunk: 4.2 DeviceTwin 状态模型 (DeviceTwin State Model) -->## 4.2 DeviceTwin 状态模型 (DeviceTwin State Model)
+## 4.2 DeviceTwin 状态模型 (DeviceTwin State Model)
 
 KubeEdge 的 DeviceTwin 是云边状态同步的核心机制：
 
@@ -786,7 +786,7 @@ sequenceDiagram
     Cloud->>Cloud: 检查 desired == reported ✓
 ```
 
-#<!-- chunk: 4.3 状态机设计 (State Machine Design) -->## 4.3 状态机设计 (State Machine Design)
+## 4.3 状态机设计 (State Machine Design)
 
 ```mermaid
 stateDiagram-v2
@@ -813,7 +813,7 @@ stateDiagram-v2
     end note
 ```
 
-#<!-- chunk: 4.4 边缘状态持久化 (Edge State Persistence) -->## 4.4 边缘状态持久化 (Edge State Persistence)
+## 4.4 边缘状态持久化 (Edge State Persistence)
 
 ```go
 // EdgeCore 本地状态存储 (使用 SQLite)
@@ -863,7 +863,7 @@ func (s *LocalStateStore) GetConfigMap(namespace, name string) (*v1.ConfigMap, e
 
 <!-- chunk: 5. 离线优先设计 -->## 5. 离线优先设计
 
-#<!-- chunk: 5.1 离线优先原则 (Offline-First Principles) -->## 5.1 离线优先原则 (Offline-First Principles)
+## 5.1 离线优先原则 (Offline-First Principles)
 
 ```
 离线优先设计的核心原则:
@@ -889,7 +889,7 @@ func (s *LocalStateStore) GetConfigMap(namespace, name string) (*v1.ConfigMap, e
    - 用户明确知晓离线状态
 ```
 
-#<!-- chunk: 5.2 YurtHub 离线缓存机制 (YurtHub Offline Cache) -->## 5.2 YurtHub 离线缓存机制 (YurtHub Offline Cache)
+## 5.2 YurtHub 离线缓存机制 (YurtHub Offline Cache)
 
 [[OpenYurt|OpenYurt]] 的 YurtHub 实现了边缘节点离线时的本地 API 代理：
 
@@ -969,7 +969,7 @@ func (p *YurtHubProxy) serveFromCache(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-#<!-- chunk: 5.3 离线业务连续性设计 (Offline Business Continuity) -->## 5.3 离线业务连续性设计 (Offline Business Continuity)
+## 5.3 离线业务连续性设计 (Offline Business Continuity)
 
 ```yaml
 # 边缘应用离线能力配置
@@ -1013,7 +1013,7 @@ offline_capabilities:
     threshold: 3  # 连续3次失败视为离线
 ```
 
-#<!-- chunk: 5.4 本地规则引擎 (Local Rule Engine) -->## 5.4 本地规则引擎 (Local Rule Engine)
+## 5.4 本地规则引擎 (Local Rule Engine)
 
 ```yaml
 # 边缘本地告警规则 (无需云端)
@@ -1067,7 +1067,7 @@ spec:
 
 <!-- chunk: 6. 最终一致性模式 -->## 6. 最终一致性模式
 
-#<!-- chunk: 6.1 CAP 定理在云边场景的应用 (CAP Theorem in Cloud-Edge) -->## 6.1 CAP 定理在云边场景的应用 (CAP Theorem in Cloud-Edge)
+## 6.1 CAP 定理在云边场景的应用 (CAP Theorem in Cloud-Edge)
 
 ```mermaid
 graph TD
@@ -1100,7 +1100,7 @@ graph TD
 本地操作日志           AP          可用性优先
 ```
 
-#<!-- chunk: 6.2 CRDT 数据结构应用 (CRDT Applications) -->## 6.2 CRDT 数据结构应用 (CRDT Applications)
+## 6.2 CRDT 数据结构应用 (CRDT Applications)
 
 CRDT（Conflict-free Replicated Data Types，无冲突复制数据类型）是实现最终一致性的强大工具：
 
@@ -1187,7 +1187,7 @@ func (s *ORSet) Contains(item string) bool {
 }
 ```
 
-#<!-- chunk: 6.3 Saga 模式在云边事务 (Saga Pattern for Cloud-Edge Transactions) -->## 6.3 Saga 模式在云边事务 (Saga Pattern for Cloud-Edge Transactions)
+## 6.3 Saga 模式在云边事务 (Saga Pattern for Cloud-Edge Transactions)
 
 ```mermaid
 sequenceDiagram
@@ -1220,7 +1220,7 @@ sequenceDiagram
 
 <!-- chunk: 7. 消息队列与事件驱动 -->## 7. 消息队列与事件驱动
 
-#<!-- chunk: 7.1 边缘消息架构 (Edge Messaging Architecture) -->## 7.1 边缘消息架构 (Edge Messaging Architecture)
+## 7.1 边缘消息架构 (Edge Messaging Architecture)
 
 ```mermaid
 graph TD
@@ -1253,7 +1253,7 @@ graph TD
     style CloudMQ fill:#e3f2fd
 ```
 
-#<!-- chunk: 7.2 MQTT 边缘部署配置 -->## 7.2 MQTT 边缘部署配置
+## 7.2 MQTT 边缘部署配置
 
 ```yaml
 # EMQ X Edge 配置 (边缘 MQTT Broker)
@@ -1323,7 +1323,7 @@ bridges:
         max_total_size: 1GB
 ```
 
-#<!-- chunk: 7.3 事件驱动边缘架构 (Event-Driven Edge Architecture) -->## 7.3 事件驱动边缘架构 (Event-Driven Edge Architecture)
+## 7.3 事件驱动边缘架构 (Event-Driven Edge Architecture)
 
 ```yaml
 # CloudEvents 标准事件格式 (云边统一)
@@ -1407,7 +1407,7 @@ async def handle_alert(event: CloudEvent):
 
 <!-- chunk: 8. 服务发现与负载均衡 -->## 8. 服务发现与负载均衡
 
-#<!-- chunk: 8.1 边缘服务发现机制 (Edge Service Discovery) -->## 8.1 边缘服务发现机制 (Edge Service Discovery)
+## 8.1 边缘服务发现机制 (Edge Service Discovery)
 
 ```mermaid
 graph TD
@@ -1433,7 +1433,7 @@ graph TD
     Note[离线时 CoreDNS 使用\nYurtHub 缓存的 Endpoint]
 ```
 
-#<!-- chunk: 8.2 NodePool 服务拓扑感知 (NodePool Topology-Aware Routing) -->## 8.2 NodePool 服务拓扑感知 (NodePool Topology-Aware Routing)
+## 8.2 NodePool 服务拓扑感知 (NodePool Topology-Aware Routing)
 
 OpenYurt NodePool 实现了边缘流量的拓扑感知路由：
 
@@ -1473,7 +1473,7 @@ spec:
     - "*"                           # 最后全局
 ```
 
-#<!-- chunk: 8.3 边缘 [[Ingress|Ingress]] 配置 (Edge Ingress Configuration) -->## 8.3 边缘 Ingress 配置 (Edge Ingress Configuration)
+## 8.3 边缘 Ingress 配置 (Edge Ingress Configuration)
 
 ```yaml
 # 边缘节点本地 Nginx Ingress
@@ -1518,7 +1518,7 @@ spec:
 
 <!-- chunk: 9. 配置管理与分发 -->## 9. 配置管理与分发
 
-#<!-- chunk: 9.1 GitOps 边缘配置管理 (GitOps for Edge) -->## 9.1 GitOps 边缘配置管理 (GitOps for Edge)
+## 9.1 GitOps 边缘配置管理 (GitOps for Edge)
 
 ```mermaid
 graph LR
@@ -1535,7 +1535,7 @@ graph LR
     style ArgoCD fill:#f3e5f5
 ```
 
-#<!-- chunk: 9.2 分层配置管理 (Hierarchical Config Management) -->## 9.2 分层配置管理 (Hierarchical Config Management)
+## 9.2 分层配置管理 (Hierarchical Config Management)
 
 ```
 配置优先级 (低 → 高):
@@ -1599,8 +1599,7 @@ configMapGenerator:
       - MQTT_BROKER=mqtt://10.10.1.100:1883
 
 patches:
-  - target:
-      kind: Deployment
+  - target: "`kind: Deployment`"
       name: edge-app
     patch: |-
       - op: replace
@@ -1608,7 +1607,7 @@ patches:
         value: 2  # 该站点部署2副本
 ```
 
-#<!-- chunk: 9.3 配置热重载 (Config Hot Reload) -->## 9.3 配置热重载 (Config Hot Reload)
+## 9.3 配置热重载 (Config Hot Reload)
 
 ```go
 // 边缘应用配置热重载实现
@@ -1680,7 +1679,7 @@ func (w *ConfigWatcher) handleConfigChange(newData map[string]string) {
 
 <!-- chunk: 10. 可观测性设计 -->## 10. 可观测性设计
 
-#<!-- chunk: 10.1 云边可观测性架构 (Cloud-Edge Observability) -->## 10.1 云边可观测性架构 (Cloud-Edge Observability)
+## 10.1 云边可观测性架构 (Cloud-Edge Observability)
 
 ```mermaid
 graph TB
@@ -1723,7 +1722,7 @@ graph TB
     style Cloud fill:#e3f2fd
 ```
 
-#<!-- chunk: 10.2 边缘指标采集配置 (Edge Metrics Collection) -->## 10.2 边缘指标采集配置 (Edge Metrics Collection)
+## 10.2 边缘指标采集配置 (Edge Metrics Collection)
 
 ```yaml
 # Prometheus 边缘采集配置 (本地 Prometheus)
@@ -1777,7 +1776,7 @@ remote_write:
       key_file: /etc/prometheus/certs/client-key.pem
 ```
 
-#<!-- chunk: 10.3 分布式追踪在云边 (Distributed Tracing) -->## 10.3 分布式追踪在云边 (Distributed Tracing)
+## 10.3 分布式追踪在云边 (Distributed Tracing)
 
 ```yaml
 # OpenTelemetry Collector 边缘配置
@@ -1838,7 +1837,7 @@ service:
 
 <!-- chunk: 11. 故障处理与恢复 -->## 11. 故障处理与恢复
 
-#<!-- chunk: 11.1 问题分类与处理策略 (Failure Classification) -->## 11.1 问题分类与处理策略 (Failure Classification)
+## 11.1 问题分类与处理策略 (Failure Classification)
 
 ```mermaid
 graph TD
@@ -1855,7 +1854,7 @@ graph TD
     DF --> DF_Strategy[策略:\n1. 数据校验\n2. 备份恢复\n3. 日志回放]
 ```
 
-#<!-- chunk: 11.2 熔断器模式 (Circuit Breaker Pattern) -->## 11.2 熔断器模式 (Circuit Breaker Pattern)
+## 11.2 熔断器模式 (Circuit Breaker Pattern)
 
 ```go
 // 边缘应用熔断器实现
@@ -1940,7 +1939,7 @@ if err != nil {
 }
 ```
 
-#<!-- chunk: 11.3 边缘节点自愈 (Edge Node Self-Healing) -->## 11.3 边缘节点自愈 (Edge Node Self-Healing)
+## 11.3 边缘节点自愈 (Edge Node Self-Healing)
 
 ```yaml
 # 边缘节点健康检查与自愈配置
@@ -2004,7 +2003,7 @@ spec:
 
 <!-- chunk: 12. 云边协同最佳实践 -->## 12. 云边协同最佳实践
 
-#<!-- chunk: 12.1 设计原则总结 (Design Principles Summary) -->## 12.1 设计原则总结 (Design Principles Summary)
+## 12.1 设计原则总结 (Design Principles Summary)
 
 ```
 ╔══════════════════════════════════════════════════════════╗
@@ -2036,7 +2035,7 @@ spec:
 ╚══════════════════════════════════════════════════════════╝
 ```
 
-#<!-- chunk: 12.2 云边协同反模式 (Anti-Patterns) -->## 12.2 云边协同反模式 (Anti-Patterns)
+## 12.2 云边协同反模式 (Anti-Patterns)
 
 ```
 ❌ 反模式 1: 实时强一致性依赖
@@ -2065,7 +2064,7 @@ spec:
    解决: NTP 时钟同步 + 容忍小时间偏差
 ```
 
-#<!-- chunk: 12.3 云边协同参考实现架构 -->## 12.3 云边协同参考实现架构
+## 12.3 云边协同参考实现架构
 
 ```yaml
 # 完整云边协同参考架构
@@ -2142,7 +2141,7 @@ reference_architecture:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-37-edge-computing MOC
-- [[domain-15-specialized-tech/README|Domain 37: 边缘计算 (Edge Computing)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: 边缘计算 (Edge Computing)]]
 - Domain-37 边缘计算 — 开源项目索引
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)

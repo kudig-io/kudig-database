@@ -311,6 +311,10 @@ spec:
 
 ### 5.2 使用 patch 调整资源
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方法 1: 使用 kubectl patch
 kubectl patch pod nginx-inplace-resize --patch "
@@ -667,6 +671,9 @@ cat /sys/fs/cgroup/kubepods.slice/.../memory.max
 
 ### 8.2 场景二：开发测试环境动态调整
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 白天开发高峰期扩容
 kubectl patch pod dev-app --patch "
@@ -869,7 +876,7 @@ kubectl describe pod <pod-name> | grep -A 5 Events
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -890,4 +897,4 @@ kubectl describe pod <pod-name> | grep -A 5 Events
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]

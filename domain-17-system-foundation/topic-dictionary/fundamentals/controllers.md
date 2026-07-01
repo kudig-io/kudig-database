@@ -32,7 +32,7 @@ created: "2026-05-23"
 
 ## 概述
 
-在 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 中，控制器是监控集群状态的控制循环（control loop）。它们持续比较集群的**当前状态（current state）**与**期望状态（desired state）**，并在必要时采取措施使当前状态向期望状态靠拢。控制器本身通常不直接执行操作，而是通过向 API 服务器发送请求来产生副作用。
+在 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 中，控制器是监控集群状态的控制循环（control loop）。它们持续比较集群的**当前状态（current state）**与**期望状态（desired state）**，并在必要时采取措施使当前状态向期望状态靠拢。控制器本身通常不直接执行操作，而是通过向 API 服务器发送请求来产生副作用。
 
 ## 核心概念/原理
 
@@ -65,3 +65,9 @@ created: "2026-05-23"
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/architecture/controller/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/annotations.md|注解]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/bpfman.md|bpfman eBPF 管理器]]

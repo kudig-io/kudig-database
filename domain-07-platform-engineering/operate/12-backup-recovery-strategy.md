@@ -386,6 +386,9 @@ cost_optimization_strategies:
 
 ### etcd 备份架构
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                        etcd Backup Architecture                         │
@@ -431,7 +434,7 @@ cost_optimization_strategies:
 │  │  Option 1: In-place restore (same cluster)                      │   │
 │  │  ┌─────────────────────────────────────────────────────────┐   │   │
 │  │  │ 1. Stop all etcd members                                 │   │   │
-│  │  │ 2. etcdctl snapshot restore on each node                │   │   │
+│  │  │ 2. etcdctl snapshot restore on each node                │   │   │  # ⚠️ 覆盖 etcd 数据，集群状态回退
 │  │  │ 3. Update data-dir in etcd configuration                │   │   │
 │  │  │ 4. Start etcd members one by one                        │   │   │
 │  │  └─────────────────────────────────────────────────────────┘   │   │
@@ -439,7 +442,7 @@ cost_optimization_strategies:
 │  │  Option 2: New cluster restore                                  │   │
 │  │  ┌─────────────────────────────────────────────────────────┐   │   │
 │  │  │ 1. Provision new etcd nodes                             │   │   │
-│  │  │ 2. etcdctl snapshot restore with new cluster config     │   │   │
+│  │  │ 2. etcdctl snapshot restore with new cluster config     │   │   │  # ⚠️ 覆盖 etcd 数据，集群状态回退
 │  │  │ 3. Start new etcd cluster                               │   │   │
 │  │  │ 4. Update API server etcd endpoints                     │   │   │
 │  │  └─────────────────────────────────────────────────────────┘   │   │
@@ -688,6 +691,10 @@ main "$@"
 
 ### etcd 恢复脚本 (生产级)
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # etcd-restore.sh - Production etcd restore script
@@ -820,7 +827,7 @@ restore_snapshot() {
     log "Restoring etcd snapshot..."
     
     # Build restore command
-    local restore_cmd="ETCDCTL_API=3 etcdctl snapshot restore $snapshot"
+    local restore_cmd="ETCDCTL_API=3 etcdctl snapshot restore $snapshot"  # ⚠️ 覆盖 etcd 数据，集群状态回退
     restore_cmd+=" --name=$ETCD_NAME"
     restore_cmd+=" --data-dir=$restore_dir"
     restore_cmd+=" --initial-cluster-token=$ETCD_INITIAL_CLUSTER_TOKEN"
@@ -1193,6 +1200,10 @@ spec:
 ```
 
 ### Velero Helm 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash
@@ -2305,7 +2316,7 @@ main "$@"
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Platform Ops Domain (平台运维领域)]]
+- [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
 - Domain-9 平台运维 — 开源项目索引
 - 平台运维概述
 - 集群生命周期管理
@@ -2319,8 +2330,8 @@ main "$@"
 
 ## Related
 
-- [[release-notes/13-backup-demo-video|13-backup-demo-video]]
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- 13-backup-demo-video
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
 
 ## See Also
 

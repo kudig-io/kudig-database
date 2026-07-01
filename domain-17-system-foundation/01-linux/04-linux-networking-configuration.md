@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 <!-- chunk: 核心概念详解 -->## 核心概念详解
 
-#<!-- chunk: Linux 网络架构总览 -->## Linux 网络架构总览
+## Linux 网络架构总览
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -106,7 +106,7 @@ created: "2026-05-23"
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 网络命名空间 (Network Namespace) -->## 网络命名空间 (Network Namespace)
+## 网络命名空间 (Network Namespace)
 
 网络命名空间是 Linux 内核提供的网络隔离机制，每个命名空间拥有独立的网络栈：网络接口、路由表、iptables 规则、端口号空间等。这是容器网络隔离的基础。
 
@@ -131,7 +131,7 @@ readlink /proc/1/ns/net
 readlink /proc/<pid>/ns/net
 ```
 
-##<!-- chunk: veth pair (虚拟以太网设备对) -->## veth pair (虚拟以太网设备对)
+## veth pair (虚拟以太网设备对)
 
 veth pair 是一对虚拟网络设备，数据从一端进入会从另一端出来，类似一根虚拟网线。Kubernetes 中每个 Pod 都通过 veth pair 连接到宿主机的网桥。
 
@@ -156,7 +156,7 @@ ip netns exec ns1 ip route add default via 10.0.0.1
 ip netns exec ns1 ping 10.0.0.1
 ```
 
-##<!-- chunk: 网桥 (Bridge) -->## 网桥 (Bridge)
+## 网桥 (Bridge)
 
 网桥是 Linux 内核提供的数据链路层设备，工作在 MAC 层，将多个网络接口连接在一起，类似于物理交换机。Kubernetes 的多种 CNI 插件（如 bridge 模式、Flannel、Calico）都使用网桥来连接 Pod。
 
@@ -205,11 +205,11 @@ ip addr add 172.17.0.1/16 dev br0
 
 ---
 
-#<!-- chunk: iptables / nftables 包过滤 -->## iptables / nftables 包过滤
+## iptables / nftables 包过滤
 
 iptables 是 Linux 内核 netfilter 框架的用户空间工具，用于配置网络包过滤、NAT 和 mangle 规则。Kubernetes 的 kube-proxy 在 iptables 模式下会生成大量 iptables 规则来实现 Service 负载均衡。
 
-##<!-- chunk: iptables 架构 -->## iptables 架构
+## iptables 架构
 
 ```
                            数据包进入
@@ -252,7 +252,7 @@ iptables 是 Linux 内核 netfilter 框架的用户空间工具，用于配置�
                         数据包发出
 ```
 
-##<!-- chunk: iptables 在 Kubernetes 中的应用 -->## iptables 在 Kubernetes 中的应用
+## iptables 在 Kubernetes 中的应用
 
 ```bash
 # kube-proxy 生成的 iptables 规则链
@@ -278,7 +278,7 @@ iptables-save | wc -l
 iptables -t nat -L KUBE-SERVICES -n -v
 ```
 
-##<!-- chunk: nftables (iptables 的继任者) -->## nftables (iptables 的继任者)
+## nftables (iptables 的继任者)
 
 ```bash
 # nftables 优势:
@@ -307,11 +307,11 @@ nft add rule inet myfilter input ct state established,related accept
 
 ---
 
-#<!-- chunk: IPVS 负载均衡 -->## IPVS 负载均衡
+## IPVS 负载均衡
 
 IPVS (IP Virtual Server) 是 Linux 内核内置的四层负载均衡器，性能远优于 iptables 模式。kube-proxy 的 IPVS 模式是大规模 Kubernetes 集群的首选。
 
-##<!-- chunk: IPVS vs iptables 模式对比 -->## IPVS vs iptables 模式对比
+## IPVS vs iptables 模式对比
 
 | 特性 | iptables 模式 | IPVS 模式 |
 |:---|:---|:---|
@@ -321,7 +321,7 @@ IPVS (IP Virtual Server) 是 Linux 内核内置的四层负载均衡器，性能
 | **适用规模** | < 1000 Service | 5000+ Service |
 | **依赖模块** | iptables, conntrack | ip_vs, ip_vs_rr 等 |
 
-##<!-- chunk: IPVS 调度算法 -->## IPVS 调度算法
+## IPVS 调度算法
 
 | 算法 | 名称 | 说明 | 适用场景 |
 |:---|:---|:---|:---|
@@ -332,7 +332,7 @@ IPVS (IP Virtual Server) 是 Linux 内核内置的四层负载均衡器，性能
 | **sh** | Source Hashing | 源地址哈希 | 会话保持 |
 | **dh** | Destination Hashing | 目标地址哈希 | 缓存服务器 |
 
-##<!-- chunk: IPVS 配置 -->## IPVS 配置
+## IPVS 配置
 
 ```bash
 # 加载 IPVS 模块
@@ -372,11 +372,11 @@ curl http://localhost:10249/proxyMode
 
 ---
 
-#<!-- chunk: 隧道技术 -->## 隧道技术
+## 隧道技术
 
 隧道技术用于在不同主机上的 Pod 之间建立网络通信，是 Kubernetes 跨节点网络的基础。
 
-##<!-- chunk: VXLAN (Virtual eXtensible LAN) -->## VXLAN (Virtual eXtensible LAN)
+## VXLAN (Virtual eXtensible LAN)
 
 ```
 ┌────────────────────────────────────────────────────────────────┐
@@ -424,7 +424,7 @@ bridge fdb show dev vxlan0
 
 <!-- chunk: 常用命令参考 -->## 常用命令参考
 
-#<!-- chunk: 网络配置命令 -->## 网络配置命令
+## 网络配置命令
 
 ```bash
 # ip 命令 (现代推荐)
@@ -457,7 +457,7 @@ ip netns exec ns1 <command>     # 执行命令
 ip netns identify <pid>         # 查看进程所属命名空间
 ```
 
-#<!-- chunk: 连接与端口查看 -->## 连接与端口查看
+## 连接与端口查看
 
 ```bash
 # ss 命令 (推荐替代 netstat)
@@ -483,7 +483,7 @@ ss -t src :80                   # 源端口 80
 # | `-i` | TCP 内部信息 |
 ```
 
-#<!-- chunk: 网络诊断工具 -->## 网络诊断工具
+## 网络诊断工具
 
 ```bash
 # 连通性测试
@@ -522,7 +522,7 @@ ethtool -S eth0                 # 网卡详细统计
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: 内核网络参数优化 -->## 内核网络参数优化
+## 内核网络参数优化
 
 ```bash
 # /etc/sysctl.d/99-network-tuning.conf
@@ -573,7 +573,7 @@ net.netfilter.nf_conntrack_tcp_timeout_time_wait = 30       # TIME_WAIT 超时
 sysctl --system
 ```
 
-#<!-- chunk: 网卡优化 -->## 网卡优化
+## 网卡优化
 
 ```bash
 # 查看网卡信息
@@ -602,7 +602,10 @@ set_irq_affinity eth0
 ethtool -L eth0 combined 4      # 4 个组合通道
 ```
 
-#<!-- chunk: 连接跟踪调优 -->## 连接跟踪调优
+## 连接跟踪调优
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
 
 ```bash
 # 查看当前连接跟踪数
@@ -627,7 +630,10 @@ conntrack -F
 
 <!-- chunk: 安全加固 -->## 安全加固
 
-#<!-- chunk: 防火墙安全配置 -->## 防火墙安全配置
+## 防火墙安全配置
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 
 ```bash
 # iptables 生产环境安全基线
@@ -660,7 +666,7 @@ iptables -A INPUT -j LOG --log-prefix "IPTables-Dropped: " --log-level 4
 iptables-save > /etc/iptables/rules.v4
 ```
 
-#<!-- chunk: 网络安全内核参数 -->## 网络安全内核参数
+## 网络安全内核参数
 
 ```bash
 # /etc/sysctl.d/99-network-security.conf
@@ -702,7 +708,7 @@ sysctl --system
 
 <!-- chunk: 与 Kubernetes 的关系 -->## 与 Kubernetes 的关系
 
-#<!-- chunk: kube-proxy 网络模式 -->## kube-proxy 网络模式
+## kube-proxy 网络模式
 
 Kubernetes 的 kube-proxy 组件负责实现 Service 的负载均衡，它支持三种模式：
 
@@ -713,7 +719,7 @@ Kubernetes 的 kube-proxy 组件负责实现 Service 的负载均衡，它支持
 | **IPVS** | 内核 IPVS | 最好 | 生产环境推荐 |
 | **nftables** | nftables 规则 | 好 | Kubernetes 1.29+ |
 
-#<!-- chunk: CNI 插件底层技术 -->## CNI 插件底层技术
+## CNI 插件底层技术
 
 | CNI 插件 | 底层技术 | 网络模式 | 适用场景 |
 |:---|:---|:---|:---|
@@ -757,7 +763,7 @@ ip route show | grep -E "10.244|bird"
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 网络故障诊断流程 -->## 网络故障诊断流程
+## 网络故障诊断流程
 
 ```bash
 # 1. 检查物理层
@@ -795,7 +801,11 @@ kubectl describe service <service>       # Service 详情
 
 ---
 
-#<!-- chunk: 常见网络问题场景 -->## 常见网络问题场景
+## 常见网络问题场景
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 场景 1: Pod 无法访问 Service

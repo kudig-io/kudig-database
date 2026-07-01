@@ -97,7 +97,7 @@ created: "2026-05-23"
 - [x] **扩充**: 控制器管理器完整控制器解析 (13)
 - [x] **扩充**: 节点问题检测器NPD + 机器健康检查MHC (15)
 - [x] **扩充**: API Server深度解析 - Structured Authentication Configuration
-- [x] **扩充**: Scheduler深度解析 - [[Pod Scheduling Readiness|Pod Scheduling Readiness]]
+- [x] **扩充**: Scheduler深度解析 - [[domain-17-system-foundation/topic-dictionary/scheduling/pod-scheduling-readiness.md|Pod Scheduling Readiness]]
 - [x] **扩充**: etcd运维操作 - 日常运维手册完善
 
 ### ✅ 技术深度检查
@@ -166,7 +166,7 @@ Domain-3控制平面文档体系已完成高质量查漏补缺：
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - index.md|Domain-3 控制平面 — 开源项目索引]]
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)

@@ -33,6 +33,7 @@ related_skills:
   - "SKILL-SEC-003"
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 title: "DNS 解析问题诊断与修复"
 tags: ["skills", "dns-failure", "troubleshooting", "visibility/public"]
 ---
@@ -179,7 +180,7 @@ tags: ["skills", "dns-failure", "troubleshooting", "visibility/public"]
 
 本Skill诊断过程中可能涉及的其他Skill：
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity.md|05 service connectivity]]
 
 - k8s-ingress-gateway
 
@@ -251,4 +252,4 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/cni-networking-model|CNI 网络模型]] — Kubernetes 容器网络接口与 DNS 解析原理
+- [[concepts/cni-networking-model.md|CNI 网络模型]] — Kubernetes 容器网络接口与 DNS 解析原理

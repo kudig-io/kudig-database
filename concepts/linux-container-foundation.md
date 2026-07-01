@@ -44,7 +44,7 @@ Namespaces provide isolation by giving processes their own view of system resour
 | PID | Process IDs | Per-Pod process tree | /proc/<pid>/ns/pid |
 | Network | Network stack, interfaces, routes | Pod network isolation | /proc/<pid>/ns/net |
 | Mount | Filesystem mount points | Container filesystem | /proc/<pid>/ns/mnt |
-| UTS | Hostname and domain | [[Pod Hostname|Pod hostname]] | /proc/<pid>/ns/uts |
+| UTS | Hostname and domain | Pod hostname | /proc/<pid>/ns/uts |
 | IPC | Inter-process communication | Shared memory isolation | /proc/<pid>/ns/ipc |
 | User | User/group ID mapping | Rootless containers | /proc/<pid>/ns/user |
 | Cgroup | Cgroup root view | Per-container cgroup view | /proc/<pid>/ns/cgroup |
@@ -95,12 +95,12 @@ Debug OOM kills: `dmesg | grep -i oom` or `journalctl -k --grep="Out of memory"`
 ## Related
 
 - [[docker]] — Docker
-- [[concepts/docker-architecture|docker-architecture]] — Docker Architecture and Container Runtime
-- [[concepts/linux-sysctl-tuning|linux-sysctl-tuning]] — Linux Sysctl Tuning for Kubernetes
-- [[entities/kubelet|kubelet]] — kubelet
-- [[concepts/linux-security-modules|linux-security-modules]] — Linux Security Modules for Containers
-- [[concepts/docker-architecture|Docker Architecture]]
-- [[concepts/overlayfs-storage|OverlayFS Storage]]
-- [[concepts/linux-sysctl-tuning|Linux Sysctl Tuning]]
-- [[concepts/linux-security-modules|Linux Security Modules]]
+- [[concepts/docker-architecture.md|docker-architecture]] — Docker Architecture and Container Runtime
+- [[concepts/linux-sysctl-tuning.md|linux-sysctl-tuning]] — Linux Sysctl Tuning for Kubernetes
+- [[entities/kubelet.md|kubelet]] — kubelet
+- [[concepts/linux-security-modules.md|linux-security-modules]] — Linux Security Modules for Containers
+- [[concepts/docker-architecture.md|Docker Architecture]]
+- [[concepts/overlayfs-storage.md|OverlayFS Storage]]
+- [[concepts/linux-sysctl-tuning.md|Linux Sysctl Tuning]]
+- [[concepts/linux-security-modules.md|Linux Security Modules]]
 - [[containerd|containerd]]

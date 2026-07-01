@@ -32,7 +32,7 @@ created: "2026-05-23"
 
 ## 概述
 
-[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 容器环境为容器提供了若干重要资源，包括文件系统、容器自身信息，以及集群中其他对象的信息。了解这些资源有助于开发人员在容器内正确获取运行时的上下文信息。
+[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 容器环境为容器提供了若干重要资源，包括文件系统、容器自身信息，以及集群中其他对象的信息。了解这些资源有助于开发人员在容器内正确获取运行时的上下文信息。
 
 ## 核心概念/原理
 
@@ -45,7 +45,7 @@ created: "2026-05-23"
 ### 容器自身信息
 
 - **主机名（Hostname）**：容器的主机名即其所在 Pod 的名称。可通过 `hostname` 命令或 libc 的 `gethostname` 函数调用获取
-- **Pod 名称和命名空间**：通过 [[Downward API|Downward API]] 以环境变量的形式注入到容器中
+- **Pod 名称和命名空间**：通过 [[domain-17-system-foundation/topic-dictionary/workloads/downward-api.md|Downward API]] 以环境变量的形式注入到容器中
 - **用户定义的环境变量**：在 Pod 定义中通过 `env` 或 `envFrom` 指定的环境变量，以及容器镜像构建时静态设置的环境变量，均对容器可见
 
 ### 集群信息
@@ -234,6 +234,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看容器内所有环境变量
 kubectl exec <pod> -c <container> -- env | sort
@@ -263,3 +266,9 @@ kubectl exec <pod> -- nslookup my-service.my-namespace.svc.cluster.local
 - [Kubernetes 官方文档：容器环境](https://kubernetes.io/docs/concepts/containers/container-environment/)
 - [Kubernetes Downward API 文档](https://kubernetes.io/docs/concepts/workloads/pods/downward-api/)
 - [Kubernetes Service 与 DNS](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]

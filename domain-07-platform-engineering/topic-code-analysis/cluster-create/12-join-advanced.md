@@ -1,5 +1,5 @@
 ---
-title: 节点加入进阶: Discovery 与 TLS Bootstrap 详解 [cluster-create]
+title: "节点加入进阶: Discovery 与 TLS Bootstrap 详解 [cluster-create]"
 description: 'title: ''节点加入进阶: Discovery 与 TLS Bootstrap 详解'''
 category: general
 tags:
@@ -820,6 +820,7 @@ kubeadm init phase bootstrap-token --dry-run 2>&1 | grep "discovery-token-ca-cer
 
 # 方法 3: 从 join 命令获取
 kubeadm token create --print-join-command | grep -o 'sha256:[a-f0-9]*'
+
 ```
 
 ## 常见错误
@@ -849,8 +850,10 @@ kubeadm token create --print-join-command | grep -o 'sha256:[a-f0-9]*'
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[entities/containerd|containerd]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/01-overview|01-overview]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/containerd.md|containerd]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/01-overview.md|01-overview]]
+
+```

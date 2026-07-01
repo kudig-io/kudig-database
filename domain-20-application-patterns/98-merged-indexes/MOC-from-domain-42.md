@@ -161,7 +161,7 @@ created: "2026-05-23"
 | | 94-smart-prison | | | |
 | | 95-industrial-metaverse | | | |
 | | 96-carbon-capture | | | |
-| | [[domain-20-application-patterns/README|Topic 应用层架构设计最佳实践]] | | | |
+| | [[domain-20-application-patterns/README.md|Topic 应用层架构设计最佳实践]] | | | |
 
 ---
 
@@ -170,7 +170,7 @@ created: "2026-05-23"
 ## Related
 
 - 01-plane-architecture-overview
-- [[entities/kubernetes|kubernetes]]
+- [[entities/kubernetes.md|kubernetes]]
 - daily-ops
 - [[log|log]]
-- [[domain-19-landscape-references/topic-index/README|topic-index 深度研究入口使用指南]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/README.md|topic-index 深度研究入口使用指南]] — Cross-reference

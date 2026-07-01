@@ -648,6 +648,10 @@ spec:
 
 #### 方案一：Workload Identity 配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 #!/bin/bash
 # GCP Workload Identity 配置脚本
@@ -982,6 +986,10 @@ spec:
 
 ### 集成验证脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 #!/bin/bash
 # 云厂商集成验证脚本
@@ -1235,14 +1243,14 @@ echo "安全检查报告已生成: $SECURITY_REPORT"
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/02-multi-cloud-networking-troubleshooting|02-multi-cloud-networking-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting|03-cloud-resource-quota-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/02-multi-cloud-networking-troubleshooting|02-multi-cloud-networking-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting|03-cloud-resource-quota-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/02-multi-cloud-networking-troubleshooting.md|02-multi-cloud-networking-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md|03-cloud-resource-quota-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/02-multi-cloud-networking-troubleshooting.md|02-multi-cloud-networking-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md|03-cloud-resource-quota-troubleshooting]]

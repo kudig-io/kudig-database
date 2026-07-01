@@ -5,6 +5,7 @@ tags: ["index", "domain-12-cloud-providers", "navigation"]
 sources: ["auto-generated"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 ---
 
 # Domain 12 内容索引
@@ -21,12 +22,12 @@ updated: 2026-05-21
 
 ### 阿里云
 
-- [[01-专有云架构概述]] — 专有云架构概述
-- [[02-ACK集群运维]] — ACK集群运维
-- [[03-Terway-CNI网络]] — Terway CNI网络
-- [[04-阿里云存储集成]] — 阿里云存储集成
-- [[05-阿里云SLB与Ingress]] — 阿里云SLB与Ingress
-- [[06-阿里云专有云远程顾问指南]] — 阿里云专有云远程顾问指南
+- [[domain-12-cloud-providers/01-alibaba-cloud/01-专有云架构概述.md|01 专有云架构概述]] — 专有云架构概述
+- [[domain-12-cloud-providers/01-alibaba-cloud/02-ACK集群运维.md|02 ACK集群运维]] — ACK集群运维
+- [[domain-12-cloud-providers/01-alibaba-cloud/03-Terway-CNI网络.md|03 Terway CNI网络]] — Terway CNI网络
+- [[domain-12-cloud-providers/01-alibaba-cloud/04-阿里云存储集成.md|04 阿里云存储集成]] — 阿里云存储集成
+- [[domain-12-cloud-providers/01-alibaba-cloud/05-阿里云SLB与Ingress.md|05 阿里云SLB与Ingress]] — 阿里云SLB与Ingress
+- [[domain-12-cloud-providers/01-alibaba-cloud/06-阿里云专有云远程顾问指南.md|06 阿里云专有云远程顾问指南]] — 阿里云专有云远程顾问指南
 - [[README]] — README
 
 ### AWS EKS
@@ -114,5 +115,5 @@ updated: 2026-05-21
 - [[README-from-domain-27]] — README from domain 27
 
 ## 相关 Domain
-- [[domain-01-cluster-fundamentals/98-merged-indexes/index|Domain 01 集群基础 索引]]
-- [[domain-07-platform-engineering/98-merged-indexes/index|Domain 07 平台工程 索引]]
+- [[domain-01-cluster-fundamentals/98-merged-indexes/index.md|Domain 01 集群基础 索引]]
+- [[domain-07-platform-engineering/98-merged-indexes/index.md|Domain 07 平台工程 索引]]

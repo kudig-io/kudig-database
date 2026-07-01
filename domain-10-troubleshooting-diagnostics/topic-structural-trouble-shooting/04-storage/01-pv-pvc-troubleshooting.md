@@ -104,7 +104,7 @@ k8s_versions:
 | **资深专家** | 解决大规模集群下的 I/O 瓶颈与数据一致性危机 | 深入底层：Attach/Detach 控制流、Mount 传播机制、块设备层故障诊断与专家级清理技巧。 |
 
 > **专项排查文档**：
-> - [StorageClass 配置与动态供给专项排查]([[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting|05-storageclass-troubleshooting]].md) — StorageClass 参数、volumeBindingMode、拓扑约束、扩容、性能等级
+> - [StorageClass 配置与动态供给专项排查]([[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting.md|05-storageclass-troubleshooting]].md) — StorageClass 参数、volumeBindingMode、拓扑约束、扩容、性能等级
 
 ---
 
@@ -345,6 +345,9 @@ kubectl get --raw /api/v1/nodes/<node>/proxy/stats/summary | jq '.pods[].volume[
 
 **6. Reclaiming（回收阶段）**
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```
 用户删除 PVC
   └─> PV 根据 persistentVolumeReclaimPolicy 处理
@@ -358,10 +361,13 @@ kubectl get --raw /api/v1/nodes/<node>/proxy/stats/summary | jq '.pods[].volume[
        │             └─> PV 对象被删除
        │
        └─ Recycle（已废弃）
-            └─> 运行 `rm -rf /volume/*` 清理数据
+            └─> 运行 `rm -rf /volume/*` 清理数据  # ⚠️ 删除系统/数据文件
 ```
 
 **Retain 策略手动回收流程**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. PVC 删除后，PV 状态变为 Released
@@ -434,6 +440,9 @@ allowedTopologies:
 
 **调试延迟绑定问题**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. PVC 长时间 Pending
 kubectl describe pvc data-pvc
@@ -502,6 +511,10 @@ kubectl get volumeattachment
 
 **解决步骤**
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 确认旧节点状态
 kubectl get node node-a
@@ -509,7 +522,7 @@ kubectl get node node-a
 # node-a   NotReady   <none>   10d   v1.28.0  # ← 节点问题
 
 # 2. 强制删除旧 Pod（触发卸载流程）
-kubectl delete pod app-pod-old --force --grace-period=0
+kubectl delete pod app-pod-old --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 3. 等待旧 VolumeAttachment 自动清理（通常 6 分钟）
 # 或手动删除（谨慎操作）
@@ -563,6 +576,10 @@ kubectl get pvc data-pvc -o jsonpath='{.status.phase}'
 
 **扩容操作**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 修改 PVC 容量（声明式）
 kubectl patch pvc data-pvc -p '{"spec":{"resources":{"requests":{"storage":"10Gi"}}}}'
@@ -586,6 +603,10 @@ kubectl exec app-pod -- df -h /data
 ```
 
 **扩容失败排查**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 场景：PV 容量已更新，但 Pod 内容量未变
@@ -678,6 +699,10 @@ ls -R /var/lib/kubelet/pods/<pod-uid>/volumes/kubernetes.io~csi/<pv-name>/
 **策略**：强制清理。
 1. **驱逐旧节点**：确保原节点上的 Pod 确实已销毁。
 2. **清理 VolumeAttachment**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
    ```bash
    kubectl delete volumeattachment <va-name> --force --grace-period=0
    ```
@@ -783,11 +808,16 @@ aws ec2 describe-volumes --volume-ids vol-0abc123
 
 **应急措施**
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 方案 A：清理僵尸 VolumeAttachment（推荐）
 
 # 1. 强制删除旧 Pod（触发删除流程）
-kubectl delete pod mysql-0-old --force --grace-period=0
+kubectl delete pod mysql-0-old --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 # Warning: Immediate deletion does not wait for confirmation that 
 #          the running resource has been terminated.
 # pod "mysql-0-old" force deleted
@@ -1041,6 +1071,9 @@ subjects:
 
 **排查过程**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 检查 Pod 资源使用
 kubectl top pod log-collector-abc123
@@ -1105,6 +1138,11 @@ journalctl -u kubelet | grep -i "expand\|resize" | tail -20
 ```
 
 **应急措施**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 方案 A：重启 Pod 触发离线扩容（推荐）
@@ -1386,17 +1424,19 @@ spec:
 - 16-troubleshooting-guide
 - [[hot|hot]]
 - [[log|log]]
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting|04-storage-performance-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting|05-storageclass-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting|02-csi-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting|03-snapshot-backup-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting.md|04-storage-performance-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting.md|05-storageclass-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md|02-csi-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting.md|03-snapshot-backup-troubleshooting]]
+
+```

@@ -11,6 +11,7 @@ tags:
 - p0
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 ---
 
 # P0 核心场景手工种子 I-O 对

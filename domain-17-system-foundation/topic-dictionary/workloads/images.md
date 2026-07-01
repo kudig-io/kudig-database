@@ -35,7 +35,7 @@ created: "2026-05-23"
 
 ## 概述
 
-容器镜像（Container Image）是封装了应用程序及其所有软件依赖项的二进制数据，是一个可独立运行的可执行软件包，并对其运行时环境做出非常明确的假设。在 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 中，通常需要先创建应用程序的容器镜像并推送到镜像仓库，然后在 Pod 中引用该镜像。
+容器镜像（Container Image）是封装了应用程序及其所有软件依赖项的二进制数据，是一个可独立运行的可执行软件包，并对其运行时环境做出非常明确的假设。在 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 中，通常需要先创建应用程序的容器镜像并推送到镜像仓库，然后在 Pod 中引用该镜像。
 
 ## 核心概念/原理
 
@@ -231,6 +231,9 @@ ENTRYPOINT ["/server"]
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 查看节点上的镜像列表
 crictl images
@@ -270,3 +273,9 @@ crictl imagefsinfo
 - [Kubernetes 官方文档：容器镜像](https://kubernetes.io/docs/concepts/containers/images/)
 - [OCI Image Manifest Specification](https://github.com/opencontainers/image-spec/blob/main/manifest.md)
 - [OCI Distribution Specification](https://github.com/opencontainers/distribution-spec)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]

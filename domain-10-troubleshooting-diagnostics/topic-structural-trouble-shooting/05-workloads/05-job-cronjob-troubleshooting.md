@@ -345,6 +345,11 @@ Events:
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 查看 Pod 失败原因
 kubectl get pods -l job-name=<job-name>
@@ -392,6 +397,10 @@ $ kubectl describe job data-export
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 查看 activeDeadlineSeconds 设置
 kubectl get job <job-name> -o jsonpath='{.spec.activeDeadlineSeconds}'
@@ -432,6 +441,11 @@ my-job-abc12   1/1     Running   0          2h
 ```
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 检查 Pod 内进程状态
@@ -478,6 +492,10 @@ backup     0 2 * * *     False     0        25h             7d
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 检查 CronJob 状态
 kubectl describe cronjob <name>
@@ -509,6 +527,9 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep cronjob
 #### 场景 2：配置时区
 
 **Kubernetes 1.24+ 支持 timeZone 字段：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 设置时区
@@ -550,6 +571,10 @@ backup-27893280         1/1           45m        125m
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 检查并发策略
 kubectl get cronjob <name> -o jsonpath='{.spec.concurrencyPolicy}'
@@ -574,6 +599,10 @@ kubectl patch cronjob <name> --type='json' -p='[
 
 #### 场景 4：取消挂起状态
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 检查是否挂起
 kubectl get cronjob <name> -o jsonpath='{.spec.suspend}'
@@ -590,6 +619,9 @@ kubectl create job --from=cronjob/<name> <job-name>-manual
 ### 3.3 并行执行问题
 
 #### 场景 1：配置并行任务
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 查看当前并行配置
@@ -654,6 +686,9 @@ spec:
 
 #### 场景 1：清理历史 Job
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 查看所有 Job
 kubectl get jobs
@@ -694,6 +729,9 @@ spec:
 ```
 
 #### 场景 3：Job TTL 自动清理 (Kubernetes 1.23+)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 为现有 Job 设置 TTL (注意：已完成的 Job 无法修改)
@@ -853,6 +891,11 @@ spec:
 
 ### 常用排查命令速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # Job 状态
 kubectl get jobs -o wide
@@ -903,19 +946,21 @@ kubectl patch cronjob <name> -p '{"spec":{"suspend":false}}'
 
 ### 相关文档
 
-- [Pod 故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting|01-pod-troubleshooting]].md)
-- [资源配额故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/01-resources-quota-troubleshooting|01-resources-quota-troubleshooting]].md)
-- [调度故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting|03-scheduler-troubleshooting]].md)
+- [Pod 故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
+- [资源配额故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/01-resources-quota-troubleshooting.md|01-resources-quota-troubleshooting]].md)
+- [调度故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting|03-statefulset-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting|04-daemonset-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting|06-configmap-secret-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting|01-pod-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting.md|04-daemonset-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]]
+
+```

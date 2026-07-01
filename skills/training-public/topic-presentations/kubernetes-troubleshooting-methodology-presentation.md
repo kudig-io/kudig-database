@@ -55,14 +55,14 @@ created: "2026-05-23"
 
 <!-- chunk: 演讲概述 -->## 演讲概述
 
-#<!-- chunk: 目标受众 -->## 目标受众
+## 目标受众
 
 - SRE 工程师：掌握系统化的故障排查方法论
 - 架构师：设计可观测性和应急响应体系
 - 高级运维：处理生产环境复杂问题
 - 开发人员：理解应用在 K8s 上的故障模式
 
-#<!-- chunk: 预计时长 -->## 预计时长
+## 预计时长
 
 | 阶段 | 内容 | 时长 |
 |------|------|------|
@@ -75,7 +75,7 @@ created: "2026-05-23"
 | Q&A | 互动问答 | 15 分钟 |
 | **合计** | | **约 3 小时** |
 
-#<!-- chunk: 核心学习目标 -->## 核心学习目标
+## 核心学习目标
 
 完成本次培训后，学员能够：
 
@@ -86,7 +86,7 @@ created: "2026-05-23"
 5. 使用 5-Whys 方法进行根因分析
 6. 建立自动化的故障检测和响应机制
 
-#<!-- chunk: 核心要点 -->## 核心要点
+## 核心要点
 
 1. 排障五步走：确认现象 → 信息收集 → 假设验证 → 快速止损 → 根因分析
 2. 分层排查：从应用层到基础设施层逐层定位
@@ -113,7 +113,7 @@ created: "2026-05-23"
 
 <!-- chunk: 核心概念讲解 -->## 核心概念讲解
 
-#<!-- chunk: 排障心法 -->## 排障心法
+## 排障心法
 
 **排障五步法：**
 
@@ -133,9 +133,12 @@ created: "2026-05-23"
 4. **二元分治法**：将问题空间一分为二，逐步缩小范围
 5. **记录所有操作**：每个操作和时间戳都要记录，便于复盘
 
-#<!-- chunk: 分层排查模型 -->## 分层排查模型
+## 分层排查模型
 
 Kubernetes 问题可以从多个层级排查，建议从上到下（应用层 → 基础设施层）或根据问题现象从最可能的层开始：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
 ┌────────────────────────────────────────────────┐
@@ -159,7 +162,7 @@ Kubernetes 问题可以从多个层级排查，建议从上到下（应用层 �
 └────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: Pod 层常见问题 -->## Pod 层常见问题
+## Pod 层常见问题
 
 **Pod 生命周期与问题点：**
 
@@ -206,9 +209,12 @@ kubectl logs <pod> --previous
 └─────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 网络层排查 -->## 网络层排查
+## 网络层排查
 
 **网络排障五步法：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # Step 1: DNS 是否正常？
@@ -232,7 +238,7 @@ curl -H "Host: xxx" http://<ingress-ip>
 # 不通 → 检查 Ingress Controller: kubectl describe ingress <name>
 ```
 
-#<!-- chunk: Node 层排查 -->## Node 层排查
+## Node 层排查
 
 **Node NotReady 排查清单：**
 
@@ -275,7 +281,7 @@ crictl ps
 crictl logs <container-id>
 ```
 
-#<!-- chunk: Control Plane 排查 -->## Control Plane 排查
+## Control Plane 排查
 
 **API Server 不可用的症状：**
 
@@ -315,7 +321,7 @@ kubectl logs -n kube-system kube-apiserver-<master> --tail=100
 
 <!-- chunk: 架构图 -->## 架构图
 
-#<!-- chunk: 故障排查决策树 -->## 故障排查决策树
+## 故障排查决策树
 
 ```mermaid
 graph TB
@@ -369,7 +375,7 @@ graph TB
     style PERF fill:#f3e5f5,stroke:#7b1fa2
 ```
 
-#<!-- chunk: 排障工具矩阵 -->## 排障工具矩阵
+## 排障工具矩阵
 
 ```mermaid
 graph LR
@@ -414,7 +420,10 @@ graph LR
 
 <!-- chunk: 实战演示步骤 -->## 实战演示步骤
 
-#<!-- chunk: 演示 1：Pod 故障排查全流程 -->## 演示 1：Pod 故障排查全流程
+## 演示 1：Pod 故障排查全流程
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 场景: Pod 处于 CrashLoopBackOff
@@ -450,7 +459,10 @@ kubectl debug my-app-xxx -it --image=busybox
 # 在临时容器中检查网络和文件系统
 ```
 
-#<!-- chunk: 演示 2：网络故障排查 -->## 演示 2：网络故障排查
+## 演示 2：网络故障排查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 场景: Pod A 无法访问 Pod B
@@ -487,7 +499,10 @@ kubectl get networkpolicy -A
 kubectl exec -it <pod-a> -- tcpdump -i any -nn port <port> -c 10
 ```
 
-#<!-- chunk: 演示 3：Node 故障排查 -->## 演示 3：Node 故障排查
+## 演示 3：Node 故障排查
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 场景: Node NotReady
@@ -528,7 +543,10 @@ systemctl status containerd  # 检查 containerd 状态
 kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
 ```
 
-#<!-- chunk: 演示 4：DNS 故障排查 -->## 演示 4：DNS 故障排查
+## 演示 4：DNS 故障排查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 场景: DNS 解析失败
@@ -561,7 +579,11 @@ kubectl get configmap coredns -n kube-system -o yaml
 kubectl exec dns-debug -- dig @10.96.0.10 <domain> +short +timeout=2
 ```
 
-#<!-- chunk: 演示 5：应急响应演练 -->## 演示 5：应急响应演练
+## 演示 5：应急响应演练
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 场景: 大量 5xx 错误，需要快速恢复
@@ -601,7 +623,7 @@ curl -s http://my-critical-app.example.com/healthz
 
 <!-- chunk: 动手实验 -->## 动手实验
 
-#<!-- chunk: 实验 1：综合故障排查演练 -->## 实验 1：综合故障排查演练
+## 实验 1：综合故障排查演练
 
 **目标**：在限定时间内排查并解决模拟的复合问题
 
@@ -630,29 +652,30 @@ kubectl get endpoints <service>
 kubectl describe pod <pending-pod>
 # 发现: 0/3 nodes are available: 3 node(s) had taints
 # 解决: kubectl taint node <node> <taint-key>-
+
 ```
 
 ---
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
 
-#<!-- chunk: Q1: 如何快速判断是应用问题还是基础设施问题？ -->## Q1: 如何快速判断是应用问题还是基础设施问题？
+## Q1: 如何快速判断是应用问题还是基础设施问题？
 
 **回答**: 检查其他应用是否正常：(1) 如果只有你的应用异常 → 大概率是应用问题；(2) 如果多个应用同时异常 → 大概率是基础设施问题；(3) 检查 Node 状态：`kubectl get nodes`，如果有 NotReady → 基础设施问题；(4) 检查核心组件：`kubectl get pods -n kube-system`，如果有异常 → 控制平面问题；(5) 检查 DNS：`kubectl exec <pod> -- nslookup kubernetes.default`。
 
-#<!-- chunk: Q2: kubectl debug 和 kubectl exec 有什么区别？ -->## Q2: kubectl debug 和 kubectl exec 有什么区别？
+## Q2: kubectl debug 和 kubectl exec 有什么区别？
 
 **回答**: `kubectl exec` 在现有容器内执行命令，要求容器有 shell 且正在运行。`kubectl debug` 可以：(1) 注入一个全新的临时容器到 Pod 中（Ephemeral Container），即使原容器没有 shell 或已崩溃；(2) 创建一个调试副本 Pod（`--copy-to`）；(3) 使用不同的镜像和工具集。调试完毕后临时容器会随 Pod 删除而消失。
 
-#<!-- chunk: Q3: 如何排查间歇性问题？ -->## Q3: 如何排查间歇性问题？
+## Q3: 如何排查间歇性问题？
 
 **回答**: 间歇性问题是最难排查的，关键是要捕获问题发生时的状态：(1) 配置持续监控，关注 P99/P95 指标而非平均值；(2) 增加应用日志的详细程度；(3) 检查是否有资源 Throttle（CPU limit 导致，监控 `container_cpu_cfs_throttled_periods_total`）；(4) 检查 GC（垃圾回收）暂停；(5) 检查 DNS 5 秒超时（conntrack 竞态）；(6) 使用自动化脚本在异常时自动收集信息。
 
-#<!-- chunk: Q4: 什么时候应该重启？什么时候不应该？ -->## Q4: 什么时候应该重启？什么时候不应该？
+## Q4: 什么时候应该重启？什么时候不应该？
 
 **回答**: **应该重启**：(1) 已确认是单次问题（如临时资源不足）；(2) 有自动恢复机制（Deployment 会自动重建 Pod）；(3) 已收集了必要的现场信息。**不应该重启**：(1) 还没收集日志和现场信息——重启会清除容器日志；(2) 重启可能破坏问题现场导致无法复现；(3) 问题可能是系统性的，重启只是推迟问题。原则：**先保留现场，再止损**。
 
-#<!-- chunk: Q5: 如何做根因分析 (RCA)？ -->## Q5: 如何做根因分析 (RCA)？
+## Q5: 如何做根因分析 (RCA)？
 
 **回答**: 推荐使用 5-Whys 方法（连续问 5 次"为什么"）。例如：
 - 为什么服务不可用？→ Pod OOMKilled
@@ -662,27 +685,27 @@ kubectl describe pod <pending-pod>
 - 为什么未关闭的连接没被测试发现？→ 缺乏内存泄漏测试
 最终改进措施：添加内存泄漏测试、在 CI 中加入内存使用断言。
 
-#<!-- chunk: Q6: 如何设计问题复盘 (Post-Mortem)？ -->## Q6: 如何设计问题复盘 (Post-Mortem)？
+## Q6: 如何设计问题复盘 (Post-Mortem)？
 
 **回答**: 问题复盘模板：(1) **问题概述**：发生时间、持续时间、影响范围（用户数、请求量）；(2) **时间线**：分钟级的事件记录（检测 → 响应 → 止血 → 恢复）；(3) **根因分析**：5-Whys 分析结果；(4) **改进措施**：每个措施有负责人和截止日期；(5) **经验教训**：做得好的和需要改进的。关键原则：**无 blame 文化**——目标是改进系统，不是追究个人。
 
-#<!-- chunk: Q7: 如何排查 etcd 性能问题？ -->## Q7: 如何排查 etcd 性能问题？
+## Q7: 如何排查 etcd 性能问题？
 
 **回答**: 关键指标：`etcd_disk_wal_fsync_duration_seconds`（WAL 写入延迟，应 < 10ms）、`etcd_mvcc_db_total_size_in_bytes`（数据库大小，应 < 2GB）、`etcd_server_leader_changes_seen_total`（Leader 变更次数）。如果 WAL 延迟 > 10ms，检查磁盘性能。如果数据库过大，检查是否有大量 ConfigMap 或 Secret。使用 `etcdctl endpoint status -w table` 查看详细状态。
 
-#<!-- chunk: Q8: 如何处理集群级别的问题？ -->## Q8: 如何处理集群级别的问题？
+## Q8: 如何处理集群级别的问题？
 
 **回答**: 集群级问题的应急流程：(1) **确认影响**：是否所有节点都受影响？(2) **保留现场**：SSH 到 Master 节点收集日志；(3) **尝试恢复**：重启 API Server/etcd Pod；(4) **降级方案**：如果 API Server 无法恢复，使用 `kubectl --kubeconfig` 连接备用 API Server；(5) **灾备切换**：如果有灾备集群，执行 DNS 切换。关键：提前演练灾备切换流程。
 
-#<!-- chunk: Q9: 如何排查 CPU Throttle 问题？ -->## Q9: 如何排查 CPU Throttle 问题？
+## Q9: 如何排查 CPU Throttle 问题？
 
 **回答**: CPU Throttle 发生在容器的 CPU 使用超过 limits.cpu 时（CFS 调度器）。排查：(1) `kubectl describe pod <name>` 查看 limits；(2) 监控 `container_cpu_cfs_throttled_periods_total`；(3) 检查是否 limits 设置过低（CPU 密集型应用建议至少 2 核）；(4) 检查是否是 GC（垃圾回收）导致的 CPU 峰值；(5) 解决方案：调大 limits 或优化代码减少 CPU 使用。注意：CPU 是可压缩资源，Throttle 不会导致 Pod 被杀，但会导致延迟升高。
 
-#<!-- chunk: Q10: 如何建立自动化的故障检测和响应？ -->## Q10: 如何建立自动化的故障检测和响应？
+## Q10: 如何建立自动化的故障检测和响应？
 
 **回答**: (1) **告警体系**：基于黄金指标（延迟、流量、错误率、饱和度）配置告警；(2) **自动诊断**：使用 Runbook 自动化执行常见排障步骤；(3) **自动恢复**：配置 HPA（自动扩缩）、PDB（防止驱逐过多 Pod）、自愈控制器（如 Deployment 自动重建 Pod）；(4) **On-Call 轮值**：结合 PagerDuty/Alertmanager 实现告警升级；(5) **混沌工程**：使用 Chaos Mesh 定期演练，验证系统的容错能力。
 
-#<!-- chunk: Q11: 如何排查 PVC 挂载失败？ -->## Q11: 如何排查 PVC 挂载失败？
+## Q11: 如何排查 PVC 挂载失败？
 
 **回答**: (1) `kubectl describe pvc <name>` 查看 Events；(2) 检查 StorageClass 是否存在；(3) 检查 CSI Driver 是否正常；(4) 检查是否是 Multi-Attach 错误（RWO 卷被多个节点挂载）；(5) 检查云商配额是否充足；(6) 如果使用 WaitForFirstConsumer，确认有 Pod 引用了该 PVC。
 
@@ -690,7 +713,7 @@ kubectl describe pod <pending-pod>
 
 <!-- chunk: 要点总结 -->## 要点总结
 
-#<!-- chunk: 排障知识图谱 -->## 排障知识图谱
+## 排障知识图谱
 
 ```
 故障排查方法论
@@ -718,9 +741,10 @@ kubectl describe pod <pending-pod>
     ├── 根因分析 (5-Whys)
     ├── 问题复盘 (Post-Mortem)
     └── 改进跟踪 (Action Items)
+
 ```
 
-#<!-- chunk: 排障命令速查表 -->## 排障命令速查表
+## 排障命令速查表
 
 | 场景 | 命令 | 关注点 |
 |------|------|--------|
@@ -735,7 +759,7 @@ kubectl describe pod <pending-pod>
 | etcd 慢 | `etcdctl endpoint status` | DB size, WAL latency |
 | 回滚 | `kubectl rollout undo deploy/<name>` | 快速止损 |
 
-#<!-- chunk: SRE 运维红线 -->## SRE 运维红线
+## SRE 运维红线
 
 | 红线 | 说明 | 违反后果 |
 |------|------|---------|
@@ -750,7 +774,7 @@ kubectl describe pod <pending-pod>
 
 <!-- chunk: 延伸阅读 -->## 延伸阅读
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 
 | 资源 | 链接 | 说明 |
 |------|------|------|
@@ -759,7 +783,7 @@ kubectl describe pod <pending-pod>
 | kubectl debug | https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/ | 临时容器调试 |
 | Windows 排障 | https://kubernetes.io/docs/tasks/debug/debug-cluster/windows/ | Windows 节点排障 |
 
-#<!-- chunk: 推荐书籍 -->## 推荐书籍
+## 推荐书籍
 
 | 书籍 | 说明 |
 |------|------|
@@ -768,7 +792,7 @@ kubectl describe pod <pending-pod>
 | The Phoenix Project | DevOps 小说，理解运维文化 |
 | Observability Engineering | 可观测性工程实践 |
 
-#<!-- chunk: 关联培训专题 -->## 关联培训专题
+## 关联培训专题
 
 - `kubernetes-observability-presentation.md` — 监控与告警体系
 - `kubernetes-coredns-presentation.md` — DNS 故障排查
@@ -797,9 +821,9 @@ kubectl describe pod <pending-pod>
 - Kubernetes 存储体系全栈进阶培训 (从入门到专家)
 - Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)
 - Kubernetes Workload 全栈进阶培训 (从入门到专家)
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
@@ -807,3 +831,5 @@ kubectl describe pod <pending-pod>
 - kubernetes-terway-presentation
 - kubernetes-workload-presentation
 - presentation-template
+
+```

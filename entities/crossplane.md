@@ -48,7 +48,7 @@ Crossplane extends Kubernetes with custom resources for cloud infrastructure, en
 | XRD (Composite Resource Definition) | Define a new resource type that composes multiple underlying resources |
 | Claim | Namespace-scoped request for a composite resource |
 
-## [[synthesis/platform-engineering-sre|Platform Engineering]] Role
+## [[concepts/platform-engineering-sre.md|Platform Engineering]] Role
 
 Crossplane enables platform teams to create self-service infrastructure abstractions. Developers request a "Database" claim, and Crossplane provisions RDS, creates K8s Secrets, and configures networking -- all declaratively.
 
@@ -57,18 +57,18 @@ Crossplane enables platform teams to create self-service infrastructure abstract
 - [[helm]] — Helm
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/infrastructure-as-code|infrastructure-as-code]] — Infrastructure as Code
-- [[concepts/platform-engineering-idp|platform-engineering-idp]] — Platform Engineering and Internal Developer Platforms
-- [[concepts/infrastructure-as-code|Infrastructure as Code]]
-- [[concepts/platform-engineering-idp|Platform Engineering and IDP]]
-- [[concepts/gitops-principles|GitOps Principles]]
+- [[concepts/infrastructure-as-code.md|infrastructure-as-code]] — Infrastructure as Code
+- [[concepts/platform-engineering-idp.md|platform-engineering-idp]] — Platform Engineering and Internal Developer Platforms
+- [[concepts/infrastructure-as-code.md|Infrastructure as Code]]
+- [[concepts/platform-engineering-idp.md|Platform Engineering and IDP]]
+- [[concepts/gitops-principles.md|GitOps Principles]]
 
 - 07-crossplane-platform-composition
 - 05-crossplane-enterprise-orchestration
 - 99-crossplane-platform-guide
 - crossplane
-- [[synthesis/IaC x 多集群管理|基础设施即代码 x 多集群管理]] — Cross-reference
-- [[synthesis/GitOps x 平台工程|GitOps x 平台工程]] — Cross-reference
-- [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[concepts/IaC x 多集群管理.md|基础设施即代码 x 多集群管理]] — Cross-reference
+- [[concepts/GitOps x 平台工程.md|GitOps x 平台工程]] — Cross-reference
+- [[entities/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

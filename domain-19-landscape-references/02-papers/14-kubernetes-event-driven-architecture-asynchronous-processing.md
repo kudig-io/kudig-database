@@ -101,7 +101,7 @@ k8s_versions:
 
 <!-- chunk: 1. 事件驱动架构基础 -->## 1. 事件驱动架构基础
 
-#<!-- chunk: 1.1 核心概念与模式 -->## 1.1 核心概念与模式
+## 1.1 核心概念与模式
 
 ```yaml
 事件驱动架构核心组件:
@@ -126,7 +126,7 @@ k8s_versions:
     - 提供事件查询能力
 ```
 
-#<!-- chunk: 1.2 架构模式分类 -->## 1.2 架构模式分类
+## 1.2 架构模式分类
 
 ```mermaid
 graph TD
@@ -150,7 +150,7 @@ graph TD
 
 <!-- chunk: 2. Kubernetes事件系统 -->## 2. Kubernetes事件系统
 
-#<!-- chunk: 2.1 内置事件机制 -->## 2.1 内置事件机制
+## 2.1 内置事件机制
 
 ```yaml
 # Kubernetes事件配置
@@ -199,7 +199,7 @@ spec:
         cpu: "200m"
 ```
 
-#<!-- chunk: 2.2 自定义事件处理 -->## 2.2 自定义事件处理
+## 2.2 自定义事件处理
 
 ```go
 // Kubernetes事件处理器实现
@@ -389,7 +389,7 @@ func main() {
 
 <!-- chunk: 3. 消息队列集成 -->## 3. 消息队列集成
 
-#<!-- chunk: 3.1 Kafka集成方案 -->## 3.1 Kafka集成方案
+## 3.1 Kafka集成方案
 
 ```yaml
 # Kafka Operator部署
@@ -474,7 +474,7 @@ spec:
     segment.bytes: 1073741824
 ```
 
-#<!-- chunk: 3.2 事件生产者实现 -->## 3.2 事件生产者实现
+## 3.2 事件生产者实现
 
 ```go
 // Kubernetes事件生产者
@@ -639,7 +639,7 @@ func main() {
 
 <!-- chunk: 4. 事件处理与消费 -->## 4. 事件处理与消费
 
-#<!-- chunk: 4.1 事件消费者实现 -->## 4.1 事件消费者实现
+## 4.1 事件消费者实现
 
 ```go
 // Kubernetes事件消费者
@@ -831,7 +831,7 @@ func main() {
 }
 ```
 
-#<!-- chunk: 4.2 事件驱动的自动化流程 -->## 4.2 事件驱动的自动化流程
+## 4.2 事件驱动的自动化流程
 
 ```yaml
 # 事件驱动的自动化工作流
@@ -955,7 +955,7 @@ spec:
 
 <!-- chunk: 5. 事件溯源与CQRS -->## 5. 事件溯源与CQRS
 
-#<!-- chunk: 5.1 事件存储设计 -->## 5.1 事件存储设计
+## 5.1 事件存储设计
 
 ```yaml
 # 事件存储配置
@@ -1050,7 +1050,7 @@ data:
     }
 ```
 
-#<!-- chunk: 5.2 CQRS查询模型 -->## 5.2 CQRS查询模型
+## 5.2 CQRS查询模型
 
 ```go
 // CQRS查询处理器
@@ -1258,7 +1258,7 @@ func main() {
 
 <!-- chunk: 6. 监控与可观测性 -->## 6. 监控与可观测性
 
-#<!-- chunk: 6.1 事件监控指标 -->## 6.1 事件监控指标
+## 6.1 事件监控指标
 
 ```yaml
 # 事件监控配置
@@ -1335,7 +1335,7 @@ spec:
         description: "Kafka消费者滞后消息数超过10000条"
 ```
 
-#<!-- chunk: 6.2 分布式追踪配置 -->## 6.2 分布式追踪配置
+## 6.2 分布式追踪配置
 
 ```yaml
 # OpenTelemetry追踪配置
@@ -1394,33 +1394,33 @@ data:
 
 <!-- chunk: 7. 最佳实践与实施指南 -->## 7. 最佳实践与实施指南
 
-#<!-- chunk: 7.1 事件驱动设计原则 -->## 7.1 事件驱动设计原则
+## 7.1 事件驱动设计原则
 
 ```markdown
 <!-- chunk: 🎯 事件驱动设计原则 -->## 🎯 事件驱动设计原则
 
-#<!-- chunk: 1. 事件粒度 -->## 1. 事件粒度
+## 1. 事件粒度
 - 设计有意义的事件
 - 避免事件过于细化或粗糙
 - 考虑业务场景的需求
 
-#<!-- chunk: 2. 异步处理 -->## 2. 异步处理
+## 2. 异步处理
 - 利用事件队列的缓冲能力
 - 实现错误处理和重试机制
 - 注意顺序一致性保证
 
-#<!-- chunk: 3. 最终一致性 -->## 3. 最终一致性
+## 3. 最终一致性
 - 接受最终一致性模型
 - 设计补偿机制
 - 实现幂等性处理
 
-#<!-- chunk: 4. 可观测性 -->## 4. 可观测性
+## 4. 可观测性
 - 建立完整的监控指标
 - 实现分布式追踪
 - 建立告警机制
 ```
 
-#<!-- chunk: 7.2 实施检查清单 -->## 7.2 实施检查清单
+## 7.2 实施检查清单
 
 ```yaml
 事件驱动架构实施清单:
@@ -1451,7 +1451,7 @@ data:
 
 <!-- chunk: 8. 未来发展趋势 -->## 8. 未来发展趋势
 
-#<!-- chunk: 8.1 云原生事件系统 -->## 8.1 云原生事件系统
+## 8.1 云原生事件系统
 
 ```yaml
 云原生事件发展趋势:
@@ -1479,7 +1479,7 @@ data:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -1494,7 +1494,7 @@ data:
 ## Related
 
 - 79-polar-research
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 

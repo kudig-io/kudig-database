@@ -80,7 +80,7 @@ created: "2026-05-23"
 │   ← domain-6 (storage) + domain-16 (storage-fundamentals)                    │
 │                                                                              │
 │ domain-05-security-compliance       61 文件                              │
-│   ← domain-7 (security) + domain-25 ([[domain-17-system-foundation/topic-dictionary/security/cloud-native-security|cloud-native-security]])                  │
+│   ← domain-7 (security) + domain-25 ([[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]])                  │
 │     + domain-39 (supply-chain-security) + domain-18 部分文件                 │
 │   子目录: 01-identity-access, 02-network-security, 03-runtime-security,      │
 │          04-policy-governance, 05-supply-chain, 06-compliance,               │

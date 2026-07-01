@@ -67,16 +67,16 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 概述 -->## 1. 概述
 
-#<!-- chunk: 1.1 组件配置简介 -->## 1.1 组件配置简介
+## 1.1 组件配置简介
 
 从 Kubernetes v1.10 开始，控制平面和节点组件逐步支持通过**类型化配置文件**（Typed Configuration Files）进行配置，而不是仅依赖命令行标志（CLI flags）。这种方式提供了以下优势:
 
 - **结构化和类型安全**：配置文件有明确的 API schema，可验证字段类型和约束
-- **版本化**：配置 API 遵循 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 版本控制原则，支持平滑升级
+- **版本化**：配置 API 遵循 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 版本控制原则，支持平滑升级
 - **易于管理**：配置文件可以纳入版本控制，便于审计和自动化部署
 - **减少命令行复杂度**：避免冗长的启动参数
 
-#<!-- chunk: 1.2 主要组件配置类型 -->## 1.2 主要组件配置类型
+## 1.2 主要组件配置类型
 
 Kubernetes 目前提供以下稳定或 beta 的组件配置 API:
 
@@ -91,7 +91,7 @@ Kubernetes 目前提供以下稳定或 beta 的组件配置 API:
 - **KubeControllerManagerConfiguration** 目前仍为内部 API（`kubecontrollermanager.config.k8s.io/v1alpha1`），尚未稳定，不建议在生产环境使用
 - 配置文件通过 `--config` 参数加载，例如：`kubelet --config=/etc/kubernetes/kubelet-config.yaml`
 
-#<!-- chunk: 1.3 配置加载优先级 -->## 1.3 配置加载优先级
+## 1.3 配置加载优先级
 
 组件配置的加载遵循以下优先级（从高到低）:
 
@@ -108,7 +108,7 @@ Kubernetes 目前提供以下稳定或 beta 的组件配置 API:
 
 <!-- chunk: 2. KubeletConfiguration 完整参考 -->## 2. KubeletConfiguration 完整参考
 
-#<!-- chunk: 2.1 API 信息 -->## 2.1 API 信息
+## 2.1 API 信息
 
 **KubeletConfiguration** 是 Kubelet 组件的配置 API，用于控制节点上容器运行时管理、资源管理、驱逐策略、CPU/内存拓扑管理等核心行为。
 
@@ -136,13 +136,13 @@ Drop-in 目录中的配置片段会按文件名字母顺序合并，后加载的
 
 ---
 
-#<!-- chunk: 2.2 完整字段规范 -->## 2.2 完整字段规范
+## 2.2 完整字段规范
 
 下面是 KubeletConfiguration v1beta1 的**完整字段详解**，涵盖所有重要配置项。
 
 ---
 
-##<!-- chunk: 2.2.1 容器运行时配置 -->## 2.2.1 容器运行时配置
+## 2.2.1 容器运行时配置
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -154,7 +154,7 @@ Drop-in 目录中的配置片段会按文件名字母顺序合并，后加载的
 
 ---
 
-##<!-- chunk: 2.2.2 DNS 和网络配置 -->## 2.2.2 DNS 和网络配置
+## 2.2.2 DNS 和网络配置
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -164,7 +164,7 @@ Drop-in 目录中的配置片段会按文件名字母顺序合并，后加载的
 
 ---
 
-##<!-- chunk: 2.2.3 Pod 资源限制 -->## 2.2.3 Pod 资源限制
+## 2.2.3 Pod 资源限制
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -174,11 +174,11 @@ Drop-in 目录中的配置片段会按文件名字母顺序合并，后加载的
 
 ---
 
-##<!-- chunk: 2.2.4 驱逐策略配置 -->## 2.2.4 驱逐策略配置
+## 2.2.4 驱逐策略配置
 
 驱逐策略用于在节点资源不足时主动终止 Pod，保护节点稳定性。
 
-###<!-- chunk: evictionHard（硬驱逐阈值） -->## evictionHard（硬驱逐阈值）
+## evictionHard（硬驱逐阈值）
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -191,7 +191,7 @@ Drop-in 目录中的配置片段会按文件名字母顺序合并，后加载的
 - `imagefs.available`：镜像文件系统可用空间（如 `/var/lib/containerd`）
 - `pid.available`：可用 PID 数量（v1.20+）
 
-###<!-- chunk: evictionSoft（软驱逐阈值） -->## evictionSoft（软驱逐阈值）
+## evictionSoft（软驱逐阈值）
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -203,7 +203,7 @@ Drop-in 目录中的配置片段会按文件名字母顺序合并，后加载的
 
 ---
 
-##<!-- chunk: 2.2.5 节点资源预留 -->## 2.2.5 节点资源预留
+## 2.2.5 节点资源预留
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -229,7 +229,7 @@ Memory Allocatable = 16Gi - 200Mi (system) - 200Mi (kube) - 100Mi (eviction) = 1
 
 ---
 
-##<!-- chunk: 2.2.6 镜像垃圾回收 -->## 2.2.6 镜像垃圾回收
+## 2.2.6 镜像垃圾回收
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -244,7 +244,7 @@ Memory Allocatable = 16Gi - 200Mi (system) - 200Mi (kube) - 100Mi (eviction) = 1
 
 ---
 
-##<!-- chunk: 2.2.7 CPU 管理策略 -->## 2.2.7 CPU 管理策略
+## 2.2.7 CPU 管理策略
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -266,7 +266,7 @@ reservedSystemCPUs: "0-1"  # 预留前 2 个核心给系统
 
 ---
 
-##<!-- chunk: 2.2.8 内存管理策略 -->## 2.2.8 内存管理策略
+## 2.2.8 内存管理策略
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -285,7 +285,7 @@ reservedSystemCPUs: "0-1"  # 预留前 2 个核心给系统
 
 ---
 
-##<!-- chunk: 2.2.9 拓扑管理器 -->## 2.2.9 拓扑管理器
+## 2.2.9 拓扑管理器
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -309,7 +309,7 @@ topologyManagerScope: pod                # 整个训练 Pod 对齐
 
 ---
 
-##<!-- chunk: 2.2.10 特性门控 -->## 2.2.10 特性门控
+## 2.2.10 特性门控
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -330,7 +330,7 @@ topologyManagerScope: pod                # 整个训练 Pod 对齐
 
 ---
 
-##<!-- chunk: 2.2.11 日志配置 -->## 2.2.11 日志配置
+## 2.2.11 日志配置
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -346,7 +346,7 @@ logging:
 
 ---
 
-##<!-- chunk: 2.2.12 健康检查和端口 -->## 2.2.12 健康检查和端口
+## 2.2.12 健康检查和端口
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -356,7 +356,7 @@ logging:
 
 ---
 
-##<!-- chunk: 2.2.13 认证和授权 -->## 2.2.13 认证和授权
+## 2.2.13 认证和授权
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -383,7 +383,7 @@ authorization:
 
 ---
 
-##<!-- chunk: 2.2.14 证书轮换 -->## 2.2.14 证书轮换
+## 2.2.14 证书轮换
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -404,7 +404,7 @@ serverTLSBootstrap: true
 
 ---
 
-##<!-- chunk: 2.2.15 优雅关机 -->## 2.2.15 优雅关机
+## 2.2.15 优雅关机
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -422,7 +422,7 @@ shutdownGracePeriodCriticalPods: 10s   # 最后 10 秒留给关键 Pod
 
 ---
 
-##<!-- chunk: 2.2.16 系统安全配置 -->## 2.2.16 系统安全配置
+## 2.2.16 系统安全配置
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -443,7 +443,7 @@ net.bridge.bridge-nf-call-ip6tables=1
 
 ---
 
-##<!-- chunk: 2.2.17 节点状态上报 -->## 2.2.17 节点状态上报
+## 2.2.17 节点状态上报
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -456,7 +456,7 @@ net.bridge.bridge-nf-call-ip6tables=1
 
 ---
 
-##<!-- chunk: 2.2.18 容器日志管理 -->## 2.2.18 容器日志管理
+## 2.2.18 容器日志管理
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -481,7 +481,7 @@ net.bridge.bridge-nf-call-ip6tables=1
 
 ---
 
-##<!-- chunk: 2.2.19 节点注册 -->## 2.2.19 节点注册
+## 2.2.19 节点注册
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -494,7 +494,7 @@ net.bridge.bridge-nf-call-ip6tables=1
 
 ---
 
-#<!-- chunk: 2.3 最小化示例 -->## 2.3 最小化示例
+## 2.3 最小化示例
 
 以下是一个**最小可用**的 KubeletConfiguration，适用于测试环境：
 
@@ -535,7 +535,7 @@ rotateCertificates: true
 
 ---
 
-#<!-- chunk: 2.4 生产级示例 -->## 2.4 生产级示例
+## 2.4 生产级示例
 
 以下是一个**生产级**的 KubeletConfiguration，包含资源预留、驱逐策略、CPU/内存管理等完整配置：
 
@@ -754,9 +754,9 @@ registerNode: true
 
 ---
 
-#<!-- chunk: 2.5 内部机制 -->## 2.5 内部机制
+## 2.5 内部机制
 
-##<!-- chunk: 2.5.1 配置文件加载 -->## 2.5.1 配置文件加载
+## 2.5.1 配置文件加载
 
 **单配置文件**（v1.10+）：
 ```bash
@@ -788,7 +788,7 @@ Drop-in 目录工作原理：
 
 ---
 
-##<!-- chunk: 2.5.2 CLI Flags vs Config File 优先级 -->## 2.5.2 CLI Flags vs Config File 优先级
+## 2.5.2 CLI Flags vs Config File 优先级
 
 **优先级**（从高到低）：
 1. **命令行标志**：显式指定的参数优先级最高
@@ -809,7 +809,7 @@ kubelet --config=/etc/kubernetes/kubelet.yaml --max-pods=150
 
 ---
 
-##<!-- chunk: 2.5.3 Dynamic Kubelet Configuration（已废弃） -->## 2.5.3 Dynamic Kubelet Configuration（已废弃）
+## 2.5.3 Dynamic Kubelet Configuration（已废弃）
 
 **历史**：
 - **v1.10-v1.21**：支持通过 ConfigMap 动态更新 Kubelet 配置
@@ -828,7 +828,7 @@ kubelet --config=/etc/kubernetes/kubelet.yaml --max-pods=150
 
 ---
 
-##<!-- chunk: 2.5.4 Node Allocatable 计算机制 -->## 2.5.4 Node Allocatable 计算机制
+## 2.5.4 Node Allocatable 计算机制
 
 **Allocatable 公式**：
 ```
@@ -887,11 +887,12 @@ cat /sys/fs/cgroup/kubepods/cpu.cfs_quota_us
 
 # 内存限制
 cat /sys/fs/cgroup/kubepods/memory.limit_in_bytes
+
 ```
 
 ---
 
-##<!-- chunk: 2.5.5 配置更新最佳实践 -->## 2.5.5 配置更新最佳实践
+## 2.5.5 配置更新最佳实践
 
 **更新流程**：
 1. 在配置管理系统（Ansible/GitLab）中修改 KubeletConfiguration
@@ -927,7 +928,7 @@ cat /sys/fs/cgroup/kubepods/memory.limit_in_bytes
 
 <!-- chunk: 3. KubeProxyConfiguration 完整参考 -->## 3. KubeProxyConfiguration 完整参考
 
-#<!-- chunk: 3.1 API 信息 -->## 3.1 API 信息
+## 3.1 API 信息
 
 **KubeProxyConfiguration** 是 Kube-Proxy 组件的配置 API,用于控制 Kubernetes Service 的负载均衡和网络代理行为。
 
@@ -947,9 +948,9 @@ kube-proxy --config=/etc/kubernetes/kube-proxy-config.yaml
 
 ---
 
-#<!-- chunk: 3.2 完整字段规范 -->## 3.2 完整字段规范
+## 3.2 完整字段规范
 
-##<!-- chunk: 3.2.1 代理模式 (mode) -->## 3.2.1 代理模式 (mode)
+## 3.2.1 代理模式 (mode)
 
 | 模式 | 平台 | 说明 | 适用场景 |
 |------|------|------|----------|
@@ -965,7 +966,7 @@ mode: "ipvs"  # 推荐:大型集群使用 IPVS
 
 ---
 
-##<!-- chunk: 3.2.2 iptables 模式配置 -->## 3.2.2 iptables 模式配置
+## 3.2.2 iptables 模式配置
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -992,7 +993,7 @@ KUBE-SERVICES (入口链)
 
 ---
 
-##<!-- chunk: 3.2.3 IPVS 模式配置 -->## 3.2.3 IPVS 模式配置
+## 3.2.3 IPVS 模式配置
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -1034,7 +1035,7 @@ TCP  10.96.0.1:443 rr
 
 ---
 
-##<!-- chunk: 3.2.4 nftables 模式配置 (v1.29+) -->## 3.2.4 nftables 模式配置 (v1.29+)
+## 3.2.4 nftables 模式配置 (v1.29+)
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|--------|------|------|
@@ -1050,7 +1051,7 @@ TCP  10.96.0.1:443 rr
 
 ---
 
-##<!-- chunk: 3.2.5 Conntrack 配置 -->## 3.2.5 Conntrack 配置
+## 3.2.5 Conntrack 配置
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -1091,7 +1092,7 @@ echo "scale=2; $(cat /proc/sys/net/netfilter/nf_conntrack_count) * 100 / $(cat /
 
 ---
 
-##<!-- chunk: 3.2.6 通用配置 -->## 3.2.6 通用配置
+## 3.2.6 通用配置
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -1112,7 +1113,7 @@ echo "scale=2; $(cat /proc/sys/net/netfilter/nf_conntrack_count) * 100 / $(cat /
 
 ---
 
-#<!-- chunk: 3.3 最小化示例 (iptables mode) -->## 3.3 最小化示例 (iptables mode)
+## 3.3 最小化示例 (iptables mode)
 
 ```yaml
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
@@ -1149,7 +1150,7 @@ metricsBindAddress: "127.0.0.1:10249"  # Metrics 端口 (仅本地)
 
 ---
 
-#<!-- chunk: 3.4 生产级示例 (IPVS mode with optimized conntrack) -->## 3.4 生产级示例 (IPVS mode with optimized conntrack)
+## 3.4 生产级示例 (IPVS mode with optimized conntrack)
 
 ```yaml
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
@@ -1167,7 +1168,7 @@ ipvs:
   scheduler: "rr"         # 轮询算法 (round-robin)
                           # 其他选项: lc/dh/sh/sed/nq
   
-  strictARP: true         # ⚠️ 启用严格 ARP (MetalLB 必需)
+  strictARP: true       
                           # 需配置内核参数:
                           # net.ipv4.conf.all.arp_ignore=1
                           # net.ipv4.conf.all.arp_announce=2
@@ -1224,7 +1225,7 @@ detectLocalMode: "NodeCIDR"  # 通过节点 PodCIDR 判断本地流量
 # ========================================
 healthzBindAddress: "0.0.0.0:10256"  # 允许外部健康检查
 metricsBindAddress: "0.0.0.0:10249"  # 允许 Prometheus 抓取
-                                      # ⚠️ 生产环境建议配合 NetworkPolicy 限制访问
+                                    
 
 # ========================================
 # 特性门控
@@ -1279,9 +1280,9 @@ sysctl -p /etc/sysctl.d/99-kube-proxy.conf
 
 ---
 
-#<!-- chunk: 3.5 内部机制 -->## 3.5 内部机制
+## 3.5 内部机制
 
-##<!-- chunk: 3.5.1 iptables 规则链结构 -->## 3.5.1 iptables 规则链结构
+## 3.5.1 iptables 规则链结构
 
 **完整规则链**:
 ```
@@ -1331,7 +1332,7 @@ POSTROUTING (nat 表)
 
 ---
 
-##<!-- chunk: 3.5.2 IPVS 虚拟服务器结构 -->## 3.5.2 IPVS 虚拟服务器结构
+## 3.5.2 IPVS 虚拟服务器结构
 
 **IPVS 表示例**:
 ```bash
@@ -1388,7 +1389,7 @@ iptables -t nat -L KUBE-SERVICES -n
 
 ---
 
-##<!-- chunk: 3.5.3 nftables 表结构 (v1.29+) -->## 3.5.3 nftables 表结构 (v1.29+)
+## 3.5.3 nftables 表结构 (v1.29+)
 
 **nftables 命名空间**:
 ```bash
@@ -1433,7 +1434,7 @@ table ip kube-proxy {
 
 ---
 
-##<!-- chunk: 3.5.4 Conntrack 表管理 -->## 3.5.4 Conntrack 表管理
+## 3.5.4 Conntrack 表管理
 
 **Conntrack 条目生命周期**:
 1. **NEW**: 新建连接,首包到达
@@ -1467,6 +1468,10 @@ tcp  6 86395 ESTABLISHED src=10.244.1.2 dst=10.96.0.1 sport=52134 dport=80 \
 - **[ASSURED]**: 双向流量已确认
 
 **conntrack 表满问题**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
+
 ```bash
 # 内核日志
 dmesg | grep nf_conntrack
@@ -1484,7 +1489,7 @@ sysctl -w net.netfilter.nf_conntrack_tcp_timeout_time_wait=30
 
 ---
 
-##<!-- chunk: 3.5.5 iptables vs IPVS 性能对比 -->## 3.5.5 iptables vs IPVS 性能对比
+## 3.5.5 iptables vs IPVS 性能对比
 
 **测试场景**: 10000 Services,每个 Service 10 个 Endpoints
 
@@ -1505,7 +1510,7 @@ sysctl -w net.netfilter.nf_conntrack_tcp_timeout_time_wait=30
 
 <!-- chunk: 4. KubeSchedulerConfiguration 完整参考 -->## 4. KubeSchedulerConfiguration 完整参考
 
-#<!-- chunk: 4.1 API 信息 -->## 4.1 API 信息
+## 4.1 API 信息
 
 **KubeSchedulerConfiguration** 是 Kube-Scheduler 组件的配置 API,用于控制 Pod 调度策略、插件配置和调度器行为。
 
@@ -1529,9 +1534,9 @@ kube-scheduler --config=/etc/kubernetes/scheduler-config.yaml
 
 ---
 
-#<!-- chunk: 4.2 完整字段规范 -->## 4.2 完整字段规范
+## 4.2 完整字段规范
 
-##<!-- chunk: 4.2.1 profiles[] (调度器 Profile) -->## 4.2.1 profiles[] (调度器 Profile)
+## 4.2.1 profiles[] (调度器 Profile)
 
 一个 Scheduler 可运行多个 Profile,每个 Profile 是独立的调度器实例,有自己的名称和插件配置。
 
@@ -1572,9 +1577,9 @@ profiles:
 
 ---
 
-##<!-- chunk: 4.2.2 重要插件配置 -->## 4.2.2 重要插件配置
+## 4.2.2 重要插件配置
 
-###<!-- chunk: NodeResourcesFit (资源适配) -->## NodeResourcesFit (资源适配)
+## NodeResourcesFit (资源适配)
 
 **作用**: 检查节点资源 (CPU/Memory) 是否满足 Pod 的 requests。
 
@@ -1602,7 +1607,7 @@ pluginConfig:
 
 ---
 
-###<!-- chunk: PodTopologySpread (拓扑分布) -->## PodTopologySpread (拓扑分布)
+## PodTopologySpread (拓扑分布)
 
 **作用**: 控制 Pod 在拓扑域 (zone/node/hostname) 上的分布,提高可用性。
 
@@ -1627,7 +1632,7 @@ pluginConfig:
 
 ---
 
-###<!-- chunk: InterPodAffinity (Pod 亲和性) -->## InterPodAffinity (Pod 亲和性)
+## InterPodAffinity (Pod 亲和性)
 
 **作用**: 处理 Pod 的亲和性 (Affinity) 和反亲和性 (Anti-Affinity) 规则。
 
@@ -1647,7 +1652,7 @@ pluginConfig:
 
 ---
 
-###<!-- chunk: NodeAffinity (节点亲和性) -->## NodeAffinity (节点亲和性)
+## NodeAffinity (节点亲和性)
 
 **作用**: 处理 Pod 的节点选择器 (NodeSelector) 和节点亲和性。
 
@@ -1674,7 +1679,7 @@ pluginConfig:
 
 ---
 
-###<!-- chunk: VolumeBinding (卷绑定) -->## VolumeBinding (卷绑定)
+## VolumeBinding (卷绑定)
 
 **作用**: 处理 PV/PVC 绑定,确保 Pod 和卷在同一拓扑域。
 
@@ -1694,9 +1699,9 @@ pluginConfig:
 
 ---
 
-##<!-- chunk: 4.2.3 全局配置 -->## 4.2.3 全局配置
+## 4.2.3 全局配置
 
-###<!-- chunk: percentageOfNodesToScore (节点采样比例) -->## percentageOfNodesToScore (节点采样比例)
+## percentageOfNodesToScore (节点采样比例)
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -1719,7 +1724,7 @@ percentageOfNodesToScore: 50  # 固定采样 50%
 
 ---
 
-###<!-- chunk: leaderElection (领导选举) -->## leaderElection (领导选举)
+## leaderElection (领导选举)
 
 | 字段 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -1743,7 +1748,7 @@ leaderElection:
 
 ---
 
-##<!-- chunk: 4.2.4 extenders[] (调度器扩展器) -->## 4.2.4 extenders[] (调度器扩展器)
+## 4.2.4 extenders[] (调度器扩展器)
 
 **Extender** 允许通过 HTTP Webhook 扩展调度器功能,调用外部服务进行过滤、打分、绑定。
 
@@ -1777,7 +1782,7 @@ extenders:
 
 ---
 
-#<!-- chunk: 4.3 最小化示例 -->## 4.3 最小化示例
+## 4.3 最小化示例
 
 ```yaml
 apiVersion: kubescheduler.config.k8s.io/v1
@@ -1807,7 +1812,7 @@ leaderElection:
 
 ---
 
-#<!-- chunk: 4.4 多 Profile 示例 -->## 4.4 多 Profile 示例
+## 4.4 多 Profile 示例
 
 **场景**: 为高优先级 Pod 和普通 Pod 使用不同的调度策略。
 
@@ -1891,7 +1896,7 @@ spec:
 
 ---
 
-#<!-- chunk: 4.5 Extender 示例 -->## 4.5 Extender 示例
+## 4.5 Extender 示例
 
 **场景**: 使用外部调度器处理自定义 GPU 调度逻辑。
 
@@ -1972,9 +1977,9 @@ leaderElection:
 
 ---
 
-#<!-- chunk: 4.6 内部机制 -->## 4.6 内部机制
+## 4.6 内部机制
 
-##<!-- chunk: 4.6.1 Scheduling Framework 架构 -->## 4.6.1 Scheduling Framework 架构
+## 4.6.1 Scheduling Framework 架构
 
 **调度周期** (Scheduling Cycle,同步):
 ```
@@ -2015,7 +2020,7 @@ PostBind (后绑定,清理工作)
 
 ---
 
-##<!-- chunk: 4.6.2 插件执行模型和错误处理 -->## 4.6.2 插件执行模型和错误处理
+## 4.6.2 插件执行模型和错误处理
 
 **插件返回值**:
 - **Success**: 继续执行
@@ -2047,7 +2052,7 @@ PostBind (后绑定,清理工作)
 
 ---
 
-##<!-- chunk: 4.6.3 percentageOfNodesToScore 优化 -->## 4.6.3 percentageOfNodesToScore 优化
+## 4.6.3 percentageOfNodesToScore 优化
 
 **调度性能优化**:
 - **小集群** (< 50 节点): 对所有节点打分 (100% 采样)
@@ -2083,9 +2088,9 @@ scheduler_scheduling_duration_seconds_bucket{le="1.0"} 1800
 
 ---
 
-#<!-- chunk: 5.1 关键 CLI Flags -->## 5.1 关键 CLI Flags
+## 5.1 关键 CLI Flags
 
-##<!-- chunk: 节点健康检查 -->## 节点健康检查
+## 节点健康检查
 
 | Flag | 默认值 | 说明 |
 |------|--------|------|
@@ -2099,7 +2104,7 @@ scheduler_scheduling_duration_seconds_bucket{le="1.0"} 1800
 
 ---
 
-##<!-- chunk: Controller 并发数 -->## Controller 并发数
+## Controller 并发数
 
 | Flag | 默认值 | 说明 |
 |------|--------|------|
@@ -2115,7 +2120,7 @@ scheduler_scheduling_duration_seconds_bucket{le="1.0"} 1800
 
 ---
 
-##<!-- chunk: Pod GC (垃圾回收) -->## Pod GC (垃圾回收)
+## Pod GC (垃圾回收)
 
 | Flag | 默认值 | 说明 |
 |------|--------|------|
@@ -2127,7 +2132,7 @@ scheduler_scheduling_duration_seconds_bucket{le="1.0"} 1800
 
 ---
 
-##<!-- chunk: 证书签发 -->## 证书签发
+## 证书签发
 
 | Flag | 默认值 | 说明 |
 |------|--------|------|
@@ -2141,7 +2146,7 @@ scheduler_scheduling_duration_seconds_bucket{le="1.0"} 1800
 
 ---
 
-##<!-- chunk: 特性门控 -->## 特性门控
+## 特性门控
 
 | Flag | 说明 |
 |------|------|
@@ -2154,7 +2159,7 @@ scheduler_scheduling_duration_seconds_bucket{le="1.0"} 1800
 
 ---
 
-#<!-- chunk: 5.2 systemd Unit 文件示例 -->## 5.2 systemd Unit 文件示例
+## 5.2 systemd Unit 文件示例
 
 ```ini
 # /etc/systemd/system/kube-controller-manager.service
@@ -2248,7 +2253,7 @@ systemctl status kube-controller-manager
 
 <!-- chunk: 6. 版本兼容性矩阵 -->## 6. 版本兼容性矩阵
 
-#<!-- chunk: 6.1 组件配置 API 版本 -->## 6.1 组件配置 API 版本
+## 6.1 组件配置 API 版本
 
 | 组件 | API Group | v1.25 | v1.26 | v1.27 | v1.28 | v1.29 | v1.30 | v1.31 | v1.32 |
 |------|-----------|-------|-------|-------|-------|-------|-------|-------|-------|
@@ -2265,7 +2270,7 @@ systemctl status kube-controller-manager
 
 ---
 
-#<!-- chunk: 6.2 Feature Gates 时间线 -->## 6.2 Feature Gates 时间线
+## 6.2 Feature Gates 时间线
 
 | Feature | 引入 | Beta | GA | 说明 |
 |---------|------|------|----|------|
@@ -2288,9 +2293,9 @@ systemctl status kube-controller-manager
 
 <!-- chunk: 7. 最佳实践 -->## 7. 最佳实践
 
-#<!-- chunk: 7.1 大规模集群调优 (1000+ nodes) -->## 7.1 大规模集群调优 (1000+ nodes)
+## 7.1 大规模集群调优 (1000+ nodes)
 
-##<!-- chunk: Kubelet 优化 -->## Kubelet 优化
+## Kubelet 优化
 ```yaml
 # 减少 API Server 压力
 nodeStatusReportFrequency: 10m  # 状态未变化时每 10 分钟上报 (默认 5m)
@@ -2309,7 +2314,7 @@ imageGCHighThresholdPercent: 90  # 提高高水位 (减少 GC 频率)
 imageGCLowThresholdPercent: 85
 ```
 
-##<!-- chunk: KubeProxy 优化 -->## KubeProxy 优化
+## KubeProxy 优化
 ```yaml
 mode: "ipvs"  # 必须使用 IPVS (iptables 无法支撑)
 
@@ -2323,7 +2328,7 @@ conntrack:
   tcpEstablishedTimeout: 3600s  # 减小超时 (释放表空间)
 ```
 
-##<!-- chunk: KubeScheduler 优化 -->## KubeScheduler 优化
+## KubeScheduler 优化
 ```yaml
 percentageOfNodesToScore: 10  # 仅采样 10% 节点 (加速调度)
 
@@ -2335,7 +2340,7 @@ profiles:
           hardPodAffinityWeight: 5  # 降低亲和性权重 (减少计算量)
 ```
 
-##<!-- chunk: KubeControllerManager 优化 -->## KubeControllerManager 优化
+## KubeControllerManager 优化
 ```bash
 --concurrent-deployment-syncs=20  # 增大并发数
 --concurrent-statefulset-syncs=20
@@ -2345,7 +2350,7 @@ profiles:
 
 ---
 
-#<!-- chunk: 7.2 Conntrack 表大小计算 -->## 7.2 Conntrack 表大小计算
+## 7.2 Conntrack 表大小计算
 
 **计算公式**:
 ```
@@ -2396,7 +2401,7 @@ node_nf_conntrack_entries / node_nf_conntrack_entries_limit
 
 ---
 
-#<!-- chunk: 7.3 CPU Manager Static 策略使用条件 -->## 7.3 CPU Manager Static 策略使用条件
+## 7.3 CPU Manager Static 策略使用条件
 
 **适用场景**:
 - ✅ 延迟敏感应用 (如实时音视频、游戏服务器)
@@ -2435,7 +2440,7 @@ Cpus_allowed_list: 2-5  # Pod 独占核心 2-5
 
 ---
 
-#<!-- chunk: 7.4 IPVS vs iptables 选择标准 -->## 7.4 IPVS vs iptables 选择标准
+## 7.4 IPVS vs iptables 选择标准
 
 | 指标 | iptables | IPVS | 推荐 |
 |------|----------|------|------|
@@ -2472,6 +2477,10 @@ Services 数量 > 100?
    ```
 
 3. **逐节点重启** Kube-Proxy:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
    ```bash
    kubectl rollout restart daemonset kube-proxy -n kube-system
    ```
@@ -2483,7 +2492,7 @@ Services 数量 > 100?
 
 ---
 
-#<!-- chunk: 7.5 优雅节点关机配置 -->## 7.5 优雅节点关机配置
+## 7.5 优雅节点关机配置
 
 **目的**: 节点关机/重启时,优雅终止 Pod,避免服务中断。
 
@@ -2533,7 +2542,7 @@ kubelet 0  root  1234 kubelet    shutdown Node graceful shutdown     delay
 
 ---
 
-#<!-- chunk: 7.6 镜像垃圾回收调优 -->## 7.6 镜像垃圾回收调优
+## 7.6 镜像垃圾回收调优
 
 **目标**: 平衡磁盘空间和镜像可用性。
 
@@ -2584,7 +2593,7 @@ crictl images
 
 <!-- chunk: 8. 常见问题 (FAQ) -->## 8. 常见问题 (FAQ)
 
-#<!-- chunk: Q1: KubeletConfiguration 修改后需要重启 Kubelet 吗? -->## Q1: KubeletConfiguration 修改后需要重启 Kubelet 吗?
+## Q1: KubeletConfiguration 修改后需要重启 Kubelet 吗?
 
 **A**: 是的,需要重启 Kubelet。
 
@@ -2592,6 +2601,10 @@ crictl images
 
 **安全重启流程**:
 1. **驱逐 Pod** (可选):
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
    ```bash
    kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
    ```
@@ -2602,6 +2615,10 @@ crictl images
    ```
 
 3. **重启 Kubelet**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
    ```bash
    systemctl restart kubelet
    ```
@@ -2618,7 +2635,7 @@ crictl images
 
 ---
 
-#<!-- chunk: Q2: IPVS 模式下为什么还有 iptables 规则? -->## Q2: IPVS 模式下为什么还有 iptables 规则?
+## Q2: IPVS 模式下为什么还有 iptables 规则?
 
 **A**: IPVS 仅处理负载均衡,其他网络功能仍需 iptables 辅助。
 
@@ -2639,7 +2656,7 @@ iptables -t nat -L KUBE-SERVICES -n
 
 ---
 
-#<!-- chunk: Q3: CPU Manager Static 策略为什么要求整数核心? -->## Q3: CPU Manager Static 策略为什么要求整数核心?
+## Q3: CPU Manager Static 策略为什么要求整数核心?
 
 **A**: 保证 CPU 亲和性,避免核心共享。
 
@@ -2674,7 +2691,7 @@ cat /proc/<pid>/status | grep Cpus_allowed_list
 
 ---
 
-#<!-- chunk: Q4: Conntrack 表满导致 Service 不可用,如何排查? -->## Q4: Conntrack 表满导致 Service 不可用,如何排查?
+## Q4: Conntrack 表满导致 Service 不可用,如何排查?
 
 **A**: 分 4 步排查和解决。
 
@@ -2691,6 +2708,10 @@ cat /proc/sys/net/netfilter/nf_conntrack_max
 ```
 
 **2. 临时扩容** (立即生效):
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
+
 ```bash
 # 增大 conntrack 表
 sysctl -w net.netfilter.nf_conntrack_max=1048576
@@ -2716,7 +2737,7 @@ conntrack:
 
 ---
 
-#<!-- chunk: Q5: 多调度器 Profile 的 Pod 如何选择调度器? -->## Q5: 多调度器 Profile 的 Pod 如何选择调度器?
+## Q5: 多调度器 Profile 的 Pod 如何选择调度器?
 
 **A**: 通过 `spec.schedulerName` 字段指定。
 
@@ -2755,7 +2776,7 @@ kubectl get pod gpu-workload -o yaml | grep schedulerName
 
 ---
 
-#<!-- chunk: Q6: KubeProxy IPVS strictARP 为什么对 MetalLB 是必需的? -->## Q6: KubeProxy IPVS strictARP 为什么对 MetalLB 是必需的?
+## Q6: KubeProxy IPVS strictARP 为什么对 MetalLB 是必需的?
 
 **A**: 避免 ARP 欺骗导致的流量黑洞。
 
@@ -2791,7 +2812,7 @@ tcpdump -i eth0 arp
 
 <!-- chunk: 9. 生产案例 -->## 9. 生产案例
 
-#<!-- chunk: 9.1 高密度节点配置 (250 Pods) -->## 9.1 高密度节点配置 (250 Pods)
+## 9.1 高密度节点配置 (250 Pods)
 
 **场景**: 高性能服务器 (64 核 256GB 内存),运行 250 个微服务 Pod。
 
@@ -2922,7 +2943,7 @@ Allocatable (扣除预留):
 
 ---
 
-#<!-- chunk: 9.2 CPU 密集型工作负载优化 -->## 9.2 CPU 密集型工作负载优化
+## 9.2 CPU 密集型工作负载优化
 
 **场景**: 延迟敏感的实时交易系统,要求 CPU 独占和 NUMA 本地内存。
 
@@ -3021,7 +3042,7 @@ cat /proc/$PID/status | grep Cpus_allowed_list
 
 ---
 
-#<!-- chunk: 9.3 IPVS 高性能代理 + MetalLB -->## 9.3 IPVS 高性能代理 + MetalLB
+## 9.3 IPVS 高性能代理 + MetalLB
 
 **场景**: 裸金属 Kubernetes 集群,使用 MetalLB 暴露 LoadBalancer 服务。
 
@@ -3037,7 +3058,7 @@ mode: "ipvs"
 
 ipvs:
   scheduler: "rr"      # 轮询算法
-  strictARP: true      # ⚠️ MetalLB 必需
+  strictARP: true    
   minSyncPeriod: 1s
   syncPeriod: 10s
   
@@ -3133,7 +3154,7 @@ curl http://192.168.1.100
 
 ---
 
-#<!-- chunk: 9.4 多调度器架构 -->## 9.4 多调度器架构
+## 9.4 多调度器架构
 
 **场景**: 集群运行多种工作负载 (Web 服务、批处理、AI 训练),需要不同的调度策略。
 
@@ -3316,7 +3337,7 @@ kubectl get --raw /metrics | grep scheduler_schedule_attempts_total
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -3335,7 +3356,8 @@ kubectl get --raw /metrics | grep scheduler_schedule_attempts_total
 - 35-advanced-pod-patterns
 - 36-ecosystem-kustomize-helm-argocd
 
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/10-kubelet-config|10-kubelet-config]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/04-kubeconfig|04-kubeconfig]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install|24-what-kubeadm-does-not-install]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/13-cert-config|13-cert-config]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/10-kubelet-config.md|10-kubelet-config]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/04-kubeconfig.md|04-kubeconfig]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md|24-what-kubeadm-does-not-install]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/13-cert-config.md|13-cert-config]]
+```

@@ -5,6 +5,7 @@ tags: ["reports", "visibility/public"]
 sources: ["auto-generated"]
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # KUDIG 生产环境 llm-wiki 后续待办评估 V2

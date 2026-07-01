@@ -119,7 +119,7 @@ k8s_versions:
 
 <!-- chunk: 一、生产环境整体架构 -->## 一、生产环境整体架构
 
-#<!-- chunk: 1.1 全景架构图 -->## 1.1 全景架构图
+## 1.1 全景架构图
 
 ```mermaid
 flowchart TB
@@ -202,7 +202,7 @@ flowchart TB
     style Data fill:#e8f5e9
 ```
 
-#<!-- chunk: 1.2 分层职责说明 -->## 1.2 分层职责说明
+## 1.2 分层职责说明
 
 | 层级 | 组件 | 职责 | 高可用策略 |
 |:---|:---|:---|:---|
@@ -213,7 +213,7 @@ flowchart TB
 | **可观测性** | Metrics, Logs, Traces | 监控、告警、链路追踪 | 多副本、远程存储 |
 | **安全平台** | 运行时检测、策略、密钥 | 威胁检测、合规、加密 | 多实例、自动轮换 |
 
-#<!-- chunk: 1.3 多可用区部署架构 -->## 1.3 多可用区部署架构
+## 1.3 多可用区部署架构
 
 ```mermaid
 flowchart TB
@@ -256,7 +256,7 @@ flowchart TB
 
 <!-- chunk: 二、控制平面高可用架构 -->## 二、控制平面高可用架构
 
-#<!-- chunk: 2.1 控制平面组件关系 -->## 2.1 控制平面组件关系
+## 2.1 控制平面组件关系
 
 ```mermaid
 flowchart LR
@@ -293,7 +293,7 @@ flowchart LR
     style API3 fill:#b3e5fc
 ```
 
-#<!-- chunk: 2.2 API Server 请求处理流程 -->## 2.2 API Server 请求处理流程
+## 2.2 API Server 请求处理流程
 
 ```mermaid
 sequenceDiagram
@@ -319,7 +319,7 @@ sequenceDiagram
     Watcher->>Watcher: 触发 Reconcile
 ```
 
-#<!-- chunk: 2.3 etcd 数据流与备份架构 -->## 2.3 etcd 数据流与备份架构
+## 2.3 etcd 数据流与备份架构
 
 ```mermaid
 flowchart TB
@@ -358,7 +358,7 @@ flowchart TB
 
 <!-- chunk: 三、工作节点与运行时架构 -->## 三、工作节点与运行时架构
 
-#<!-- chunk: 3.1 节点内部组件交互 -->## 3.1 节点内部组件交互
+## 3.1 节点内部组件交互
 
 ```mermaid
 flowchart TB
@@ -395,7 +395,7 @@ flowchart TB
     style CRICONTAINER fill:#c8e6c9
 ```
 
-#<!-- chunk: 3.2 节点池与自动扩缩容架构 -->## 3.2 节点池与自动扩缩容架构
+## 3.2 节点池与自动扩缩容架构
 
 ```mermaid
 flowchart LR
@@ -434,7 +434,7 @@ flowchart LR
     style Pools fill:#e1f5fe
 ```
 
-#<!-- chunk: 3.3 DRA (动态资源分配) GPU 架构 -->## 3.3 DRA (动态资源分配) GPU 架构
+## 3.3 DRA (动态资源分配) GPU 架构
 
 ```mermaid
 flowchart TB
@@ -478,7 +478,7 @@ flowchart TB
 
 <!-- chunk: 四、网络架构设计 -->## 四、网络架构设计
 
-#<!-- chunk: 4.1 生产环境网络全景 -->## 4.1 生产环境网络全景
+## 4.1 生产环境网络全景
 
 ```mermaid
 flowchart TB
@@ -524,7 +524,7 @@ flowchart TB
     style Policy fill:#ffebee
 ```
 
-#<!-- chunk: 4.2 Cilium eBPF 数据包路径 -->## 4.2 Cilium eBPF 数据包路径
+## 4.2 Cilium eBPF 数据包路径
 
 ```mermaid
 flowchart LR
@@ -558,7 +558,7 @@ flowchart LR
     style SOCK fill:#ffe0b2
 ```
 
-#<!-- chunk: 4.3 服务发现与 DNS 架构 -->## 4.3 服务发现与 DNS 架构
+## 4.3 服务发现与 DNS 架构
 
 ```mermaid
 flowchart TB
@@ -592,7 +592,7 @@ flowchart TB
 
 <!-- chunk: 五、存储架构设计 -->## 五、存储架构设计
 
-#<!-- chunk: 5.1 生产环境存储分层 -->## 5.1 生产环境存储分层
+## 5.1 生产环境存储分层
 
 ```mermaid
 flowchart TB
@@ -635,7 +635,7 @@ flowchart TB
     style DR fill:#ffebee
 ```
 
-#<!-- chunk: 5.2 有状态应用存储模式 -->## 5.2 有状态应用存储模式
+## 5.2 有状态应用存储模式
 
 ```mermaid
 flowchart LR
@@ -671,7 +671,7 @@ flowchart LR
 
 <!-- chunk: 六、安全架构设计 -->## 六、安全架构设计
 
-#<!-- chunk: 6.1 零信任安全架构 -->## 6.1 零信任安全架构
+## 6.1 零信任安全架构
 
 ```mermaid
 flowchart TB
@@ -720,7 +720,7 @@ flowchart TB
     style SupplyChain fill:#e8f5e9
 ```
 
-#<!-- chunk: 6.2 认证授权流程 -->## 6.2 认证授权流程
+## 6.2 认证授权流程
 
 ```mermaid
 sequenceDiagram
@@ -753,7 +753,7 @@ sequenceDiagram
     API-->>User: 响应
 ```
 
-#<!-- chunk: 6.3 密钥管理架构 -->## 6.3 密钥管理架构
+## 6.3 密钥管理架构
 
 ```mermaid
 flowchart TB
@@ -793,7 +793,7 @@ flowchart TB
 
 <!-- chunk: 七、可观测性架构 -->## 七、可观测性架构
 
-#<!-- chunk: 7.1 三大支柱统一架构 -->## 7.1 三大支柱统一架构
+## 7.1 三大支柱统一架构
 
 ```mermaid
 flowchart TB
@@ -854,7 +854,7 @@ flowchart TB
     style Visualization fill:#f3e5f5
 ```
 
-#<!-- chunk: 7.2 分布式追踪链路 -->## 7.2 分布式追踪链路
+## 7.2 分布式追踪链路
 
 ```mermaid
 sequenceDiagram
@@ -877,7 +877,7 @@ sequenceDiagram
     SVC_A-->>Ingress: Order Response
 ```
 
-#<!-- chunk: 7.3 告警路由架构 -->## 7.3 告警路由架构
+## 7.3 告警路由架构
 
 ```mermaid
 flowchart TB
@@ -920,7 +920,7 @@ flowchart TB
 
 <!-- chunk: 八、多集群与联邦架构 -->## 八、多集群与联邦架构
 
-#<!-- chunk: 8.1 多集群统一管理架构 -->## 8.1 多集群统一管理架构
+## 8.1 多集群统一管理架构
 
 ```mermaid
 flowchart TB
@@ -974,7 +974,7 @@ flowchart TB
     style Networking fill:#e8f5e9
 ```
 
-#<!-- chunk: 8.2 跨集群流量管理 -->## 8.2 跨集群流量管理
+## 8.2 跨集群流量管理
 
 ```mermaid
 flowchart LR
@@ -1008,7 +1008,7 @@ flowchart LR
 
 <!-- chunk: 九、灾备与业务连续性架构 -->## 九、灾备与业务连续性架构
 
-#<!-- chunk: 9.1 多层灾备架构 -->## 9.1 多层灾备架构
+## 9.1 多层灾备架构
 
 ```mermaid
 flowchart TB
@@ -1050,7 +1050,7 @@ flowchart TB
     style Layer4 fill:#ffccbc
 ```
 
-#<!-- chunk: 9.2 备份与恢复流程 -->## 9.2 备份与恢复流程
+## 9.2 备份与恢复流程
 
 ```mermaid
 sequenceDiagram
@@ -1082,7 +1082,7 @@ sequenceDiagram
 
 <!-- chunk: 十、GitOps 与 CI/CD 架构 -->## 十、GitOps 与 CI/CD 架构
 
-#<!-- chunk: 10.1 GitOps 完整流水线 -->## 10.1 GitOps 完整流水线
+## 10.1 GitOps 完整流水线
 
 ```mermaid
 flowchart TB
@@ -1128,7 +1128,7 @@ flowchart TB
     style Registry fill:#fff8e1
 ```
 
-#<!-- chunk: 10.2 金丝雀发布架构 -->## 10.2 金丝雀发布架构
+## 10.2 金丝雀发布架构
 
 ```mermaid
 flowchart LR
@@ -1222,9 +1222,9 @@ flowchart TD
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -1322,11 +1322,11 @@ flowchart TD
 - 56-smart-elderly-care
 - 44-martech-adtech
 - 95-industrial-metaverse
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 
 - 99-kubernetes-deployment-patterns-architecture
 - 99-kubernetes-multi-tenant-architecture
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-production-architecture-design-principles]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-production-architecture-design-principles]]
 - 02-multi-cloud-hybrid-deployment-strategy

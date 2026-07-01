@@ -78,7 +78,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. Wasm 安全模型概述 -->## 1. Wasm 安全模型概述
 
-#<!-- chunk: 1.1 Wasm 核心安全属性 -->## 1.1 Wasm 核心安全属性
+## 1.1 Wasm 核心安全属性
 
 WebAssembly 从设计之初就将安全作为第一原则，具备四大核心安全属性：
 
@@ -99,7 +99,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 1.2 安全边界模型 -->## 1.2 安全边界模型
+## 1.2 安全边界模型
 
 ```mermaid
 graph LR
@@ -133,7 +133,7 @@ graph LR
     WASI --> |能力控制| Network
 ```
 
-#<!-- chunk: 1.3 与传统安全技术对比 -->## 1.3 与传统安全技术对比
+## 1.3 与传统安全技术对比
 
 ```
 安全技术对比：
@@ -154,7 +154,7 @@ graph LR
 
 <!-- chunk: 2. 内存安全机制 -->## 2. 内存安全机制
 
-#<!-- chunk: 2.1 线性内存模型 -->## 2.1 线性内存模型
+## 2.1 线性内存模型
 
 ```mermaid
 graph TB
@@ -184,7 +184,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 2.2 内存访问验证实现 -->## 2.2 内存访问验证实现
+## 2.2 内存访问验证实现
 
 ```rust
 // wasmtime 内存边界检查原理
@@ -225,7 +225,7 @@ fn check_memory_access(
 // result = *(ptr as *const i32)
 ```
 
-#<!-- chunk: 2.3 内存访问配置 -->## 2.3 内存访问配置
+## 2.3 内存访问配置
 
 ```rust
 // wasmtime 内存安全配置
@@ -269,7 +269,7 @@ fn create_secure_engine() -> anyhow::Result<Engine> {
 }
 ```
 
-#<!-- chunk: 2.4 内存隔离验证测试 -->## 2.4 内存隔离验证测试
+## 2.4 内存隔离验证测试
 
 ```rust
 // 验证 Wasm 内存隔离的测试
@@ -387,7 +387,7 @@ mod memory_safety_tests {
 
 <!-- chunk: 3. WASI 能力模型 -->## 3. WASI 能力模型
 
-#<!-- chunk: 3.1 WASI 零权限原则 -->## 3.1 WASI 零权限原则
+## 3.1 WASI 零权限原则
 
 ```
 WASI 权限模型：默认拒绝一切（Deny by Default）
@@ -435,7 +435,7 @@ graph TD
     end
 ```
 
-#<!-- chunk: 3.2 WASI 能力配置 -->## 3.2 WASI 能力配置
+## 3.2 WASI 能力配置
 
 ```rust
 // 精细化 WASI 能力配置
@@ -524,7 +524,7 @@ fn production_wasi_config(
 }
 ```
 
-#<!-- chunk: 3.3 自定义能力接口 -->## 3.3 自定义能力接口
+## 3.3 自定义能力接口
 
 ```rust
 // 实现自定义能力接口（受控主机函数）
@@ -674,7 +674,7 @@ fn register_secure_capabilities(
 
 <!-- chunk: 4. 基于能力的访问控制 -->## 4. 基于能力的访问控制
 
-#<!-- chunk: 4.1 WASI 能力树 -->## 4.1 WASI 能力树
+## 4.1 WASI 能力树
 
 ```
 WASI 能力层次结构：
@@ -704,7 +704,7 @@ WASI 能力层次结构：
     └── args_get() / environ_get()
 ```
 
-#<!-- chunk: 4.2 细粒度文件系统能力控制 -->## 4.2 细粒度文件系统能力控制
+## 4.2 细粒度文件系统能力控制
 
 ```rust
 // 实现只读文件系统访问控制
@@ -797,7 +797,7 @@ impl FileAccessPolicy {
 }
 ```
 
-#<!-- chunk: 4.3 OPA/Rego 策略集成 -->## 4.3 OPA/Rego 策略集成
+## 4.3 OPA/Rego 策略集成
 
 ```rego
 # wasm-access-policy.rego
@@ -926,7 +926,7 @@ impl OpaEnforcer {
 
 <!-- chunk: 5. 沙箱隔离实现 -->## 5. 沙箱隔离实现
 
-#<!-- chunk: 5.1 多层沙箱架构 -->## 5.1 多层沙箱架构
+## 5.1 多层沙箱架构
 
 ```mermaid
 graph TB
@@ -962,7 +962,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 5.2 seccomp 加固 -->## 5.2 seccomp 加固
+## 5.2 seccomp 加固
 
 ```rust
 // 使用 seccomp 进一步限制 Wasm 运行时的 syscall
@@ -1024,7 +1024,7 @@ fn apply_wasm_sandbox_restrictions() -> anyhow::Result<()> {
 }
 ```
 
-#<!-- chunk: 5.3 资源限制配置 -->## 5.3 资源限制配置
+## 5.3 资源限制配置
 
 ```rust
 // 完整的资源限制配置
@@ -1120,7 +1120,7 @@ fn create_limited_store(
 
 <!-- chunk: 6. Wasm 供应链安全 -->## 6. Wasm 供应链安全
 
-#<!-- chunk: 6.1 供应链攻击威胁模型 -->## 6.1 供应链攻击威胁模型
+## 6.1 供应链攻击威胁模型
 
 ```mermaid
 graph TD
@@ -1149,7 +1149,7 @@ graph TD
     Deploy --> PolicyEnforce
 ```
 
-#<!-- chunk: 6.2 Wasm 模块签名 -->## 6.2 Wasm 模块签名
+## 6.2 Wasm 模块签名
 
 ```rust
 // Wasm 模块签名与验证
@@ -1266,7 +1266,7 @@ fn verify_wasm_module(
 }
 ```
 
-#<!-- chunk: 6.3 SBOM 生成与验证 -->## 6.3 SBOM 生成与验证
+## 6.3 SBOM 生成与验证
 
 ```rust
 // 生成 Wasm 软件物料清单（SBOM）
@@ -1370,7 +1370,10 @@ fn parse_cargo_lock_to_sbom_components(_cargo_lock: &str) -> Vec<SBOMComponent> 
 }
 ```
 
-#<!-- chunk: 6.4 OCI 镜像签名（Cosign） -->## 6.4 OCI 镜像签名（Cosign）
+## 6.4 OCI 镜像签名（Cosign）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash
@@ -1467,7 +1470,7 @@ kubectl apply -f kyverno-wasm-policy.yaml
 
 <!-- chunk: 7. 运行时安全加固 -->## 7. 运行时安全加固
 
-#<!-- chunk: 7.1 全面安全配置 -->## 7.1 全面安全配置
+## 7.1 全面安全配置
 
 ```rust
 // 生产级 Wasm 运行时安全配置
@@ -1551,7 +1554,7 @@ impl TimeoutController {
 }
 ```
 
-#<!-- chunk: 7.2 异常检测与防护 -->## 7.2 异常检测与防护
+## 7.2 异常检测与防护
 
 ```rust
 // Wasm 运行时异常行为检测
@@ -1623,7 +1626,7 @@ struct AnomalyReport {
 
 <!-- chunk: 8. 安全策略引擎 -->## 8. 安全策略引擎
 
-#<!-- chunk: 8.1 内置策略执行 -->## 8.1 内置策略执行
+## 8.1 内置策略执行
 
 ```rust
 // Wasm 安全策略引擎
@@ -1883,7 +1886,7 @@ pub enum PolicyDecision {
 
 <!-- chunk: 9. Wasm 漏洞防护 -->## 9. Wasm 漏洞防护
 
-#<!-- chunk: 9.1 已知 Wasm 漏洞防护 -->## 9.1 已知 Wasm 漏洞防护
+## 9.1 已知 Wasm 漏洞防护
 
 ```
 Wasm 已知安全问题与防护：
@@ -1924,7 +1927,7 @@ Wasm 已知安全问题与防护：
    - 禁止 Wasm 访问运行时内存
 ```
 
-#<!-- chunk: 9.2 安全编码实践 -->## 9.2 安全编码实践
+## 9.2 安全编码实践
 
 ```rust
 // Wasm 安全编码示例
@@ -2017,7 +2020,7 @@ fn write_to_file_safe(
 
 <!-- chunk: 10. 机密计算与 TEE -->## 10. 机密计算与 TEE
 
-#<!-- chunk: 10.1 Wasm + Intel SGX -->## 10.1 Wasm + Intel SGX
+## 10.1 Wasm + Intel SGX
 
 ```mermaid
 graph TB
@@ -2126,7 +2129,7 @@ mod tee_features {
 }
 ```
 
-#<!-- chunk: 10.2 机密计算工作流 -->## 10.2 机密计算工作流
+## 10.2 机密计算工作流
 
 ```yaml
 # confidential-computing-deployment.yaml
@@ -2171,7 +2174,7 @@ spec:
 
 <!-- chunk: 11. 合规与审计 -->## 11. 合规与审计
 
-#<!-- chunk: 11.1 审计日志系统 -->## 11.1 审计日志系统
+## 11.1 审计日志系统
 
 ```rust
 // 全面的审计日志实现
@@ -2326,7 +2329,7 @@ fn now_rfc3339() -> String {
 }
 ```
 
-#<!-- chunk: 11.2 合规性检查清单 -->## 11.2 合规性检查清单
+## 11.2 合规性检查清单
 
 ```yaml
 # compliance-checklist.yaml
@@ -2403,7 +2406,7 @@ security_controls:
 
 <!-- chunk: 12. 安全测试与模糊测试 -->## 12. 安全测试与模糊测试
 
-#<!-- chunk: 12.1 Wasm 模糊测试 -->## 12.1 Wasm 模糊测试
+## 12.1 Wasm 模糊测试
 
 ```rust
 // 使用 cargo-fuzz 进行 Wasm 解析器模糊测试
@@ -2453,7 +2456,7 @@ fn sanitize_path(base: &str, user_path: &str) -> Result<std::path::PathBuf, Stri
 }
 ```
 
-#<!-- chunk: 12.2 安全扫描集成 -->## 12.2 安全扫描集成
+## 12.2 安全扫描集成
 
 ```bash
 #!/bin/bash
@@ -2563,12 +2566,12 @@ echo "  - imports-exports.txt: Module interface analysis"
 
 <!-- chunk: 13. 生产安全最佳实践 -->## 13. 生产安全最佳实践
 
-#<!-- chunk: 13.1 安全加固检查清单 -->## 13.1 安全加固检查清单
+## 13.1 安全加固检查清单
 
 ```markdown
 <!-- chunk: Wasm 生产安全加固检查清单 -->## Wasm 生产安全加固检查清单
 
-#<!-- chunk: 构建阶段 -->## 构建阶段
+## 构建阶段
 - [x] 使用 Rust 编写，最小化 unsafe 代码
 - [x] 启用所有 clippy 警告并修复
 - [x] 运行 cargo-audit 检查已知 CVE
@@ -2576,7 +2579,7 @@ echo "  - imports-exports.txt: Module interface analysis"
 - [x] 使用 Cosign 对 OCI 镜像签名
 - [x] 在 CI 中验证 wasm-tools validate
 
-#<!-- chunk: 运行时配置 -->## 运行时配置
+## 运行时配置
 - [x] 设置内存上限（建议: 64-256MB）
 - [x] 配置 Fuel 或 Epoch 中断（防 DoS）
 - [x] 禁用 wasm_threads（防 Spectre）
@@ -2585,26 +2588,26 @@ echo "  - imports-exports.txt: Module interface analysis"
 - [x] 配置网络访问白名单
 - [x] 限制文件系统访问路径
 
-#<!-- chunk: 供应链安全 -->## 供应链安全
+## 供应链安全
 - [x] 验证所有依赖的 SHA256
 - [x] 在部署前验证 Cosign 签名
 - [x] 通过 Kyverno/OPA 强制执行签名策略
 - [x] 定期更新依赖并重新扫描
 
-#<!-- chunk: 运行时监控 -->## 运行时监控
+## 运行时监控
 - [x] 启用审计日志
 - [x] 配置安全告警（高错误率、内存增长异常）
 - [x] 监控冷启动时间（异常可能表明被篡改）
 - [x] 设置资源使用告警
 
-#<!-- chunk: 合规 -->## 合规
+## 合规
 - [x] 审计日志保留 ≥ 90 天
 - [x] 所有策略违规有告警
 - [x] 定期进行安全评审
 - [x] 维护模块清单（版本、SHA256、部署时间）
 ```
 
-#<!-- chunk: 13.2 零信任 Wasm 部署 -->## 13.2 零信任 Wasm 部署
+## 13.2 零信任 Wasm 部署
 
 ```yaml
 # zero-trust-wasm-deployment.yaml
@@ -2677,7 +2680,7 @@ spec:
 
 <!-- chunk: 14. 安全事件响应 -->## 14. 安全事件响应
 
-#<!-- chunk: 14.1 事件响应流程 -->## 14.1 事件响应流程
+## 14.1 事件响应流程
 
 ```mermaid
 graph TD
@@ -2697,7 +2700,11 @@ graph TD
     PostMortem --> Improve[改进措施]
 ```
 
-#<!-- chunk: 14.2 事件响应脚本 -->## 14.2 事件响应脚本
+## 14.2 事件响应脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -2893,7 +2900,7 @@ Layer 7: 机密计算（可选）  → SGX/SEV/TrustZone
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
+- [[domain-15-specialized-tech/README.md|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
 - index.md|Domain-38 WebAssembly 云原生 — 开源项目索引]]
 - WebAssembly 云原生基础
 - containerd Wasm 运行时

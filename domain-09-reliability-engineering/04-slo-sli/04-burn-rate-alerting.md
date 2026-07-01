@@ -530,26 +530,23 @@ route:
   receiver: default
   routes:
     # SLO 相关告警路由
-    - match:
-        severity: critical
+    - matchers:
+      - severity="critical"
       receiver: slo-critical
       group_wait: 10s
       repeat_interval: 30m
       continue: true
-      
-    - match:
-        severity: warning
+    - matchers:
+      - severity="warning"
       receiver: slo-warning
       group_wait: 1m
       repeat_interval: 2h
       continue: true
-      
-    - match:
-        severity: info
+    - matchers:
+      - severity="info"
       receiver: slo-info
       group_wait: 5m
       repeat_interval: 24h
-
 receivers:
   - name: default
     slack_configs:
@@ -558,7 +555,7 @@ receivers:
 
   - name: slo-critical
     pagerduty_configs:
-      - service_key: '<PAGERDUTY-SERVICE-KEY>'
+      - routing_key: '<PAGERDUTY-SERVICE-KEY>'
         severity: critical
         description: '{{ .GroupLabels.service }}: {{ .CommonAnnotations.summary }}'
     slack_configs:
@@ -909,7 +906,7 @@ Day 12: PaymentServiceSlowBurn 恢复
   → 短暂问题，预算影响很小
 ```
 
-### 故障注入验证 ([[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering|Chaos Engineering]])
+### 故障注入验证 ([[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]])
 
 ```yaml
 # burn-rate-chaos-experiment.yaml
@@ -1017,6 +1014,6 @@ spec:
 
 ## 相关
 
-- [[domain-09-reliability-engineering/04-slo-sli/03-error-budget-management]] — 错误预算管理
-- [[domain-09-reliability-engineering/07-sre-practices/02-release-gate-slo-based]] — 基于 SLO 的发布门控
-- [[domain-09-reliability-engineering/04-slo-sli/02-slo-implementation-guide]] — SLO 设定与实施指南
+- [[domain-09-reliability-engineering/04-slo-sli/03-error-budget-management.md|03 error budget management]] — 错误预算管理
+- [[domain-09-reliability-engineering/07-sre-practices/02-release-gate-slo-based.md|02 release gate slo based]] — 基于 SLO 的发布门控
+- [[domain-09-reliability-engineering/04-slo-sli/02-slo-implementation-guide.md|02 slo implementation guide]] — SLO 设定与实施指南

@@ -55,7 +55,7 @@ estimated_read_time: 5min
 intent_queries:
 - 'Domain 24: 基础设施即代码 (Infrastructure as Code) 是什么'
 - '如何 Domain 24: 基础设施即代码 (Infrastructure as Code)'
-- [[entities/kubernetes|kubernetes]] 24 infrastructure as code 最佳实践
+- [[entities/kubernetes.md|kubernetes]] 24 infrastructure as code 最佳实践
 trigger_keywords:
 - Domain
 - '24:'

@@ -505,6 +505,9 @@ spec:
 
 ### 7.1 检查命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 CSI 驱动注册状态
 kubectl get csidrivers
@@ -787,6 +790,11 @@ parameters:
 
 ### 性能测试工具
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # csi-performance-benchmark.sh
@@ -865,7 +873,7 @@ EOF
     
     # 5. 清理测试环境
     echo "🧹 清理测试环境..."
-    kubectl delete namespace $TEST_NAMESPACE --wait=false
+    kubectl delete namespace $TEST_NAMESPACE --wait=false  # ⚠️ 不可逆：永久删除命名空间及全部资源
     
     echo "✅ 性能测试完成"
 }
@@ -1055,6 +1063,10 @@ csi_upgrade_management:
 ```
 
 ### 自动化升级脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 #!/bin/bash
@@ -1401,7 +1413,7 @@ platform.run_continuous_monitoring()
 ## Obsidian 相关文档
 
 - domain-04-storage-data MOC
-- [[domain-04-storage-data/README|Storage Domain 存储领域知识库]]
+- [[domain-04-storage-data/README.md|Storage Domain 存储领域知识库]]
 - Domain-6 存储 — 开源项目索引
 - 存储架构概览与核心组件
 - PV/PVC 核心概念与企业级实践
@@ -1422,7 +1434,7 @@ platform.run_continuous_monitoring()
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]

@@ -201,9 +201,9 @@ Pod 内应用发起 DNS 查询:
 ## 相关概念
 
 - networking.md|Service 网络]]
-- [[entities/cni-plugins|CNI 插件]]
-- [[skills/kubeadm-cluster-lifecycle|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
-- [[entities/kube-apiserver|kube-apiserver]]
+- [[entities/cni-plugins.md|CNI 插件]]
+- [[skills/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
+- [[entities/kube-apiserver.md|kube-apiserver]]
 
 ## Related
 

@@ -142,6 +142,9 @@ k8s_versions:
 
 ### 1.1 删除顺序要求
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │  3 节点 HA 集群的安全删除顺序                                  │
@@ -150,18 +153,18 @@ k8s_versions:
 │  Step 1: 删除第 1 个控制面节点                                  │
 │    成员数: 3 → 2  (仲裁: 2, 仍可用 ✅)                        │
 │    ├─ drain + delete node                                      │
-│    ├─ kubeadm reset (自动移除 etcd 成员)                       │
+│    ├─ kubeadm reset (自动移除 etcd 成员)                       │  # ⚠️ 清理节点所有 K8s 配置
 │    └─ 确认 etcd 健康后继续                                     │
 │                                                                │
 │  Step 2: 删除第 2 个控制面节点                                  │
 │    成员数: 2 → 1  (仲裁: 1, 勉强可用 ⚠️)                      │
 │    ├─ drain + delete node                                      │
-│    ├─ kubeadm reset                                            │
+│    ├─ kubeadm reset                                            │  # ⚠️ 清理节点所有 K8s 配置
 │    └─ 此时集群仍有 1 个 etcd 成员                              │
 │                                                                │
 │  Step 3: 删除第 3 个控制面节点                                  │
 │    成员数: 1 → 0  (集群销毁)                                   │
-│    └─ kubeadm reset -f                                         │
+│    └─ kubeadm reset -f                                         │  # ⚠️ 清理节点所有 K8s 配置
 │                                                                │
 └──────────────────────────────────────────────────────────────┘
 ```
@@ -197,12 +200,15 @@ etcdctl move-leader <target-member-id> \
 
 ### 2.1 kube-vip
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
 # 查看 kube-vip 状态
 ip addr show | grep <vip-address>
 
 # kube-vip 作为静态 Pod 运行
-# kubeadm reset 会清理 /etc/kubernetes/manifests/kube-vip.yaml
+# kubeadm reset 会清理 /etc/kubernetes/manifests/kube-vip.yaml  # ⚠️ 清理节点所有 K8s 配置
 
 # 手动清理
 ip addr del <vip-address>/32 dev eth0
@@ -274,6 +280,9 @@ kubelet 停止
 
 ### 4.1 架构差异
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```
 ┌──────────────────────────────────────────────────────┐
 │  External etcd HA 集群                                │
@@ -281,7 +290,7 @@ kubelet 停止
 │  控制面节点: 无 etcd 静态 Pod                          │
 │  etcd 集群: 独立部署（不在 Kubernetes 管理范围内）     │
 │                                                        │
-│  kubeadm reset:                                       │
+│  kubeadm reset:                                       │  # ⚠️ 清理节点所有 K8s 配置
 │  ├─ 检测不到 etcd.yaml → "Assuming external etcd"     │
 │  ├─ 不执行 etcd 成员移除                               │
 │  └─ 仅清理控制面节点                                   │
@@ -289,6 +298,11 @@ kubelet 停止
 ```
 
 ### 4.2 手动处理 etcd
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 1. 列出所有 etcd 成员
@@ -300,13 +314,13 @@ ETCDCTL_API=3 etcdctl member list \
 
 # 2. 逐个删除控制面节点
 for node in cp1 cp2 cp3; do
-    ssh $node "kubeadm reset -f"
+    ssh $node "kubeadm reset -f"  # ⚠️ 清理节点所有 K8s 配置
     kubectl delete node $node
 done
 
 # 3. 清理 etcd 数据
 for etcd in etcd1 etcd2 etcd3; do
-    ssh $etcd "systemctl stop etcd && rm -rf /var/lib/etcd"
+    ssh $etcd "systemctl stop etcd && rm -rf /var/lib/etcd"  # ⚠️ 删除系统/数据文件
 done
 ```
 
@@ -315,6 +329,11 @@ done
 ## 5. 部分删除（缩小控制面规模）
 
 ### 5.1 从 5 节点缩减到 3 节点
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 1. 确认当前 etcd 健康
@@ -329,7 +348,7 @@ for node in cp4 cp5; do
     kubectl delete node $node
 
     # 在目标节点上 reset
-    ssh $node "kubeadm reset -f"
+    ssh $node "kubeadm reset -f"  # ⚠️ 清理节点所有 K8s 配置
 
     # 确认 etcd 成员已移除
     etcdctl member list
@@ -353,6 +372,12 @@ done
 
 ## 6. 完整 HA 集群销毁流程
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 #!/bin/bash
 set -e
@@ -375,7 +400,7 @@ for node in $CP_NODES; do
     echo ">>> 处理控制面节点: $node"
     kubectl drain $node --ignore-daemonsets --delete-emptydir-data --timeout=60s || true
     kubectl delete node $node || true
-    ssh $node "kubeadm reset -f" || true
+    ssh $node "kubeadm reset -f" || true  # ⚠️ 清理节点所有 K8s 配置
 
     # 等待 etcd 稳定
     sleep 10
@@ -383,17 +408,17 @@ done
 
 # Step 3: 在最后一个控制面节点上强制 reset
 echo ">>> 强制重置最后一个控制面节点"
-ssh ${CP_NODES[-1]} "kubeadm reset -f --cleanup-tmp-dir" || true
+ssh ${CP_NODES[-1]} "kubeadm reset -f --cleanup-tmp-dir" || true  # ⚠️ 清理节点所有 K8s 配置
 
 # Step 4: 清理所有节点
 for node in $CP_NODES $WORKER_NODES; do
     echo ">>> 清理节点: $node"
     ssh $node "bash -s" <<'EOF'
-        rm -rf /etc/kubernetes/
-        rm -rf /var/lib/kubelet/
-        rm -rf /var/lib/etcd/
-        rm -rf /etc/cni/net.d/
-        rm -rf $HOME/.kube/
+        rm -rf /etc/kubernetes/  # ⚠️ 删除系统/数据文件
+        rm -rf /var/lib/kubelet/  # ⚠️ 删除系统/数据文件
+        rm -rf /var/lib/etcd/  # ⚠️ 删除系统/数据文件
+        rm -rf /etc/cni/net.d/  # ⚠️ 删除系统/数据文件
+        rm -rf $HOME/.kube/  # ⚠️ 删除系统/数据文件
         iptables -F 2>/dev/null || true
         iptables -t nat -F 2>/dev/null || true
         iptables -t mangle -F 2>/dev/null || true
@@ -427,6 +452,9 @@ etcdctl endpoint health --cluster
 
 HA 初始化时使用 `kubeadm init --upload-certs` 上传证书到 Secret。reset 不会自动清理这些 Secret：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 手动清理（在集群仍可用时）
 kubectl delete secret -n kube-system kubeadm-certs
@@ -436,8 +464,12 @@ kubectl delete secret -n kube-system kubeadm-certs
 
 reset 不删除 `kubeadm-config` ConfigMap，需要手动清理：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 kubectl delete configmap -n kube-system kubeadm-config
+
 ```
 
 ---
@@ -451,7 +483,9 @@ kubectl delete configmap -n kube-system kubeadm-config
 ## Related
 
 - [[README|README]]
-- [[man/INSTALL|INSTALL]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git|git]]
+- [[scripts/man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
+
+```

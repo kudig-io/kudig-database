@@ -55,7 +55,7 @@ created: "2026-05-23"
 
 # 39 - 容器运行时对比表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/setup/production-environment/container-runtimes](https://kubernetes.io/docs/setup/production-environment/container-runtimes/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/setup/production-environment/container-runtimes](https://kubernetes.io/docs/setup/production-environment/container-runtimes/)
 
 <!-- chunk: 容器运行时对比 -->
 ## 容器运行时对比
@@ -171,6 +171,7 @@ spec:
   containers:
   - name: app
     image: nginx
+
 ```
 
 <!-- chunk: 从Docker迁移到containerd -->
@@ -183,6 +184,9 @@ spec:
 | 3 | 配置kubelet | `--container-runtime-endpoint=unix:///run/containerd/containerd.sock` |
 | 4 | 重启kubelet | `systemctl restart kubelet` |
 | 5 | 验证 | `crictl info` |
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # Docker到containerd迁移检查
@@ -301,7 +305,7 @@ journalctl -u containerd -f
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications MOC
-- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
 - Domain-4 工作负载 — 开源项目索引
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
@@ -319,3 +323,5 @@ journalctl -u containerd -f
 - 14-sidecar-containers-patterns
 - 16-runtime-class-configuration
 - 17-container-images-registry
+
+```

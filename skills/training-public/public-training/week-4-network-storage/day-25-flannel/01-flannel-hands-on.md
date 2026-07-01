@@ -71,6 +71,9 @@ Pod A (10.244.1.2) → cni0 (10.244.1.1) → flannel.1 (VXLAN) → eth0 → Node
 
 ### 2.1 kubeadm 集群安装 Flannel
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 安装 CNI 插件
 kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
@@ -83,6 +86,9 @@ ip addr | grep flannel
 ```
 
 ### 2.2 自定义 CIDR
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 通过 kubeadm 配置 Pod CIDR
@@ -137,6 +143,9 @@ etcdctl get /coreos.com/network/subnets
 
 ### 4.1 Pod 无法跨节点通信
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 检查 Flannel 是否在所有节点运行
 kubectl get pods -n kube-flannel -o wide
@@ -155,6 +164,9 @@ kubectl delete pod -n kube-flannel -l app=flannel
 ```
 
 ### 4.2 Flannel 启动失败
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 检查 Flannel 日志
@@ -186,6 +198,9 @@ route -n | grep flannel
 
 ### 5.1 Calico 安装（替代 Flannel）
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 如需 NetworkPolicy，使用 Calico
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
@@ -195,6 +210,9 @@ kubectl get pods -n kube-system -l k8s-app=calico-node
 ```
 
 ### 5.2 Flannel + Calico 混合
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 Flannel（基础网络）
@@ -210,6 +228,9 @@ kubectl apply -f https://docs.projectcalico.org/v3.25/manifests/calico-policy-on
 
 ### 6.1 VXLAN 参数调优
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 检查当前 MTU
 ip link show flannel.1 | grep mtu
@@ -224,6 +245,9 @@ kubectl edit configmap -n kube-flannel kube-flannel-cfg
 ```
 
 ### 6.2 网络延迟优化
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查 VXLAN 性能
@@ -340,5 +364,7 @@ ReadWriteOnce (单节点 RW) / ReadOnlyMany (多节点 RO) / ReadWriteMany (多�
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+
+```

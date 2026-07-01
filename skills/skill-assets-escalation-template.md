@@ -76,14 +76,14 @@ created: "2026-05-23"
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/Kubernetes Diagnostic Skills Overview|诊断技能总览]]
-- [[skills/troubleshoot-pod-issues|Pod 故障排查]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## Related
 
 - troubleshooting.md|k8s-structured-troubleshooting]] — 结构化排障方法论：配置优先、全组件排障指南
-- [[kudig-prompts-catalog]] — [[KUDIG Prompts Catalog|KUDIG Prompts Catalog]]
-- [[skills/FTA Methodology and Core Principles|[[FTA Methodology and Core Principles|FTA Methodology and Core Principles]]]] — FTA Methodology and Core Principles
+- [[kudig-prompts-catalog]] — [[entities/kudig-prompts-catalog.md|KUDIG Prompts Catalog]]
+- [[skills/FTA Methodology and Core Principles.md|[[FTA Methodology and Core Principles|FTA Methodology and Core Principles]]]] — FTA Methodology and Core Principles
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

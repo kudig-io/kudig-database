@@ -60,7 +60,7 @@ created: "2026-05-23"
 - **Unhealthy Pod Eviction Policy**：建议设置为 `AlwaysAllow`，以便在节点维护期间允许驱逐不健康的 Pod。
 
 ## 使用场景
-- 运行基于仲裁的应用（如 [[etcd|etcd]]、ZooKeeper），需要保证最低副本数。
+- 运行基于仲裁的应用（如 [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]]、ZooKeeper），需要保证最低副本数。
 - 集群管理员进行节点维护、升级或缩容时，确保业务不中断。
 - 多租户环境中，应用团队通过 PDB 声明可用性需求。
 
@@ -118,6 +118,7 @@ spec:
   selector:
     matchLabels:
       app: worker
+
 ```
 
 ### minAvailable vs maxUnavailable 对比
@@ -143,6 +144,7 @@ spec:
   kubectl get pods -n prod -l app=web-api -o wide
   # 检查是否有不健康的 Pod
   kubectl get pods -n prod -l app=web-api -o jsonpath='{range .items[*]}{.metadata.name}: Ready={.status.conditions[?(@.type=="Ready")].status}{"\n"}{end}'
+
   ```
 - **解决方案**:
   - 确认不健康 Pod 并修复，或设置 `unhealthyPodEvictionPolicy: AlwaysAllow`
@@ -159,6 +161,7 @@ spec:
 - **诊断命令**:
   ```bash
   kubectl get pdb web-api-pdb -n prod -o yaml
+
   ```
 - **常见原因**: 当前可用 Pod 数恰好等于 `minAvailable`，或有 Pod 不健康导致可用数不足。
 
@@ -173,6 +176,9 @@ spec:
 - [ ] 运维团队使用 `kubectl drain`（Eviction API）而非 `kubectl delete pod`
 
 ## 命令快速参考
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 查看所有 PDB 状态
@@ -193,11 +199,19 @@ kubectl get pdb -n <namespace> -o wide
 
 ## 交叉引用
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/deployments|Deployments]] 中断管理](./deployments.md)
-- [[entities/statefulset|StatefulSet]] 有序管理](./statefulsets.md)
+- [[domain-17-system-foundation/topic-dictionary/workloads/deployments.md|Deployments]] 中断管理](./deployments.md)
+- [[entities/statefulset.md|StatefulSet]] 有序管理](./statefulsets.md)
 - [工作负载概览与架构](../../domain-02-workloads-applications/01-workload-overview-architecture.md)
 - [节点 NotReady 诊断](../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md)
 - [Pod Pending 诊断](../../domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md)
 
 ## 参考链接
-- https://[[entities/kubernetes|[[Kubernetes|kubernetes]]]].io/docs/concepts/workloads/pods/disruptions/
+- https://[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]].io/docs/concepts/workloads/pods/disruptions/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+
+```

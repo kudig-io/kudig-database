@@ -98,71 +98,71 @@ reports/
 ## 报告 Wikilink 索引
 
 ### 评估与规划
-- [[_reports/FINAL-ASSESSMENT-REMOTE-ADVISOR-2026-05-23|Final Assessment Remote Advisor]]
-- [[_reports/PROJECT-RESTRUCTURE-PLAN|Project Restructure Plan]]
-- [[_reports/PROJECT-RESTRUCTURE-PLAN-v2|Project Restructure Plan v2]]
-- [[_reports/TRI-DIMENSION-DEEP-ASSESSMENT-2026-05-23|Tri-Dimension Deep Assessment]]
-- [[_reports/UNDERSTAND-KG-QUALITY-REPORT|KG Quality Report]]
+- _reports/FINAL-ASSESSMENT-REMOTE-ADVISOR-2026-05-23.md
+- _reports/PROJECT-RESTRUCTURE-PLAN.md
+- _reports/PROJECT-RESTRUCTURE-PLAN-v2.md
+- _reports/TRI-DIMENSION-DEEP-ASSESSMENT-2026-05-23.md
+- _reports/UNDERSTAND-KG-QUALITY-REPORT.md
 
 ### 知识评估
-- [[_reports/knowledge-completeness-assessment-2026-05-21|Knowledge Completeness Assessment]]
-- [[_reports/knowledge-gap-analysis-2026-05-21|Knowledge Gap Analysis]]
-- [[_reports/troubleshooting-completeness-assessment|Troubleshooting Completeness Assessment]]
-- [[_reports/domain-production-assessment|Domain Production Assessment]]
+- _reports/knowledge-completeness-assessment-2026-05-21.md
+- _reports/knowledge-gap-analysis-2026-05-21.md
+- _reports/troubleshooting-completeness-assessment.md
+- _reports/domain-production-assessment.md
 
 ### 生产计划
-- [[_reports/production-backlog-2026-05-21|Production Backlog]]
-- [[_reports/production-backlog-v2-2026-05-21|Production Backlog v2]]
-- [[_reports/execution-plan|Execution Plan]]
-- [[_reports/domain-migration-EXECUTED-2026-05-21|Domain Migration Executed]]
+- _reports/production-backlog-2026-05-21.md
+- _reports/production-backlog-v2-2026-05-21.md
+- _reports/execution-plan.md
+- _reports/domain-migration-EXECUTED-2026-05-21.md
 
 ### RAG 报告
-- [[_reports/rag-chunking-report|RAG Chunking Report]]
+- _reports/rag-chunking-report.md
 
 ### 质量报告
-- [[_reports/quality/QUALITY_REPORT_v2.0|Quality Report v2.0]]
-- [[_reports/quality/QUALITY_REPORT_v3.0|Quality Report v3.0]]
-- [[_reports/quality/QUALITY_REPORT_v4.0|Quality Report v4.0]]
-- [[_reports/quality/ENTERPRISE_BEST_PRACTICES|Enterprise Best Practices]]
-- [[_reports/DOMAIN-18-TOPIC-RESTRUCTURE-PLAN|Domain 18 Topic Restructure Plan]]
+- _reports/quality/QUALITY_REPORT_v2.0.md
+- _reports/quality/QUALITY_REPORT_v3.0.md
+- _reports/quality/QUALITY_REPORT_v4.0.md
+- _reports/quality/ENTERPRISE_BEST_PRACTICES.md
+- _reports/DOMAIN-18-TOPIC-RESTRUCTURE-PLAN.md
 
 ## Related
 
 - [[MOC|MOC]]
-- [[_reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN|OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN]]
+- _reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN.md
 - [[README|README]]
-- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-34|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
-- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-26|domain-26-service-mesh-microservices MOC]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-42|Topic 应用层架构设计最佳实践]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-42|topic-application-architecture MOC]] — Cross-reference
-- [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-23|domain-23-gitops-ci-cd MOC]] — Cross-reference
-- [[skills/learn-decision-tree-mermaid|问题排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/skill-22-daemonset-failure|DaemonSet 问题诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
-- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-30|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
-- [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
-- [[_reports/LESSONS-LEARNED-2026-05-21|LESSONS-LEARNED-2026-05-21]]
+- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-34.md|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
+- [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-26.md|domain-26-service-mesh-microservices MOC]] — Cross-reference
+- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-42.md|Topic 应用层架构设计最佳实践]] — Cross-reference
+- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-42.md|topic-application-architecture MOC]] — Cross-reference
+- [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-23.md|domain-23-gitops-ci-cd MOC]] — Cross-reference
+- [[skills/learn-decision-tree-mermaid.md|问题排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[skills/skill-22-daemonset-failure.md|DaemonSet 问题诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-30.md|Domain 09: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+- _reports/LESSONS-LEARNED-2026-05-21.md
 
 
 ## 历史报告
 
-- [[_reports/STATS|STATS]]
-- [[_reports/EVALUATION-2026-05-19|EVALUATION-2026-05-19]]
-- [[_reports/ROUND4-PROGRESS-2026-05-19|ROUND4-PROGRESS-2026-05-19]]
-- [[_reports/CONTENT-DEEP-EVALUATION-2026-05-19|CONTENT-DEEP-EVALUATION]]
-- [[_reports/EXTRACT-TROUBLESHOOTING|EXTRACT-TROUBLESHOOTING]]
-- [[_reports/QUALITY-BLIND-SPOT-SCAN-2026-05-19|QUALITY-BLIND-SPOT-SCAN]]
-- [[_reports/CONTENT-GAP-ANALYSIS|CONTENT-GAP-ANALYSIS]]
-- [[_reports/FIX-SUMMARY-2026-05-19|FIX-SUMMARY]]
-- [[_reports/DEEP-RESEARCH-ASSESSMENT|DEEP-RESEARCH-ASSESSMENT]]
-- [[_reports/FULL-FIX-PROGRESS-2026-05-19|FULL-FIX-PROGRESS]]
+- _reports/STATS.md
+- _reports/EVALUATION-2026-05-19.md
+- _reports/ROUND4-PROGRESS-2026-05-19.md
+- _reports/CONTENT-DEEP-EVALUATION-2026-05-19.md
+- _reports/EXTRACT-TROUBLESHOOTING.md
+- _reports/QUALITY-BLIND-SPOT-SCAN-2026-05-19.md
+- _reports/CONTENT-GAP-ANALYSIS.md
+- _reports/FIX-SUMMARY-2026-05-19.md
+- _reports/DEEP-RESEARCH-ASSESSMENT.md
+- _reports/FULL-FIX-PROGRESS-2026-05-19.md

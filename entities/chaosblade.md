@@ -48,7 +48,7 @@ ChaosBlade 是阿里巴巴开源的混沌工程实验工具，用于模拟各种
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -66,20 +66,20 @@ ChaosBlade 是阿里巴巴开源的混沌工程实验工具，用于模拟各种
 ## 参考链接
 
 - [[deployment]]
-- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]
 - [[pod-lifecycle]]
 
 ## Related
 
 - [[kcp]] — kcp
-- [[entities/cncf-security|cncf-security]] — CNCF 安全与合规项目全景
+- [[entities/cncf-security.md|cncf-security]] — CNCF 安全与合规项目全景
 - [[07-containerd-disaster-recovery]] — containerd 灾难恢复
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - chaosblade
-- [[entities/krkn|Krkn]]
-- [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/krkn.md|Krkn]]
+- [[entities/cncf-infrastructure.md|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

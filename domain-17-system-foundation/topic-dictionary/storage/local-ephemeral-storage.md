@@ -28,13 +28,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Local ephemeral storage（本地临时存储）
 
 ## 概述
 
-节点的本地临时存储由本地可写设备（如磁盘）或 RAM 支持。“临时”意味着 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 不提供长期的持久性保证。Pod 使用本地临时存储作为临时工作区、缓存和日志存放位置。[[kubelet|kubelet]] 也使用此类存储来保存容器镜像、运行中容器的可写层以及节点级容器日志。
+节点的本地临时存储由本地可写设备（如磁盘）或 RAM 支持。“临时”意味着 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 不提供长期的持久性保证。Pod 使用本地临时存储作为临时工作区、缓存和日志存放位置。[[kubelet|kubelet]] 也使用此类存储来保存容器镜像、运行中容器的可写层以及节点级容器日志。
 
 ## 核心概念/原理
 
@@ -124,6 +125,7 @@ spec:
       emptyDir:
         sizeLimit: 15Gi                    # emptyDir 独立限制
   restartPolicy: Never
+
 ```
 
 ## 故障排查
@@ -144,6 +146,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Pod 临时存储使用
 kubectl exec <pod-name> -- df -h /
@@ -160,3 +165,11 @@ kubectl describe node <node-name> | grep ephemeral-storage
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/ephemeral-storage/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/storage/ceph.md|Ceph]]
+- [[domain-17-system-foundation/topic-dictionary/storage/cloudnativepg.md|CloudNativePG 云原生 PostgreSQL]]
+- [[domain-17-system-foundation/topic-dictionary/storage/composefs.md|ComposeFS 只读文件系统]]
+
+```

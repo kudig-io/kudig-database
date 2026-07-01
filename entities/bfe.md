@@ -44,7 +44,7 @@ BFE 是百度开源的现代化七层负载均衡器和反向代理，处理百�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -60,8 +60,8 @@ BFE 是百度开源的现代化七层负载均衡器和反向代理，处理百�
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
-- [[concepts/controller-pattern|controller-pattern]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[concepts/controller-pattern.md|controller-pattern]]
 
 ## Related
 
@@ -72,4 +72,4 @@ BFE 是百度开源的现代化七层负载均衡器和反向代理，处理百�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - bfe
-- [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
+- [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference

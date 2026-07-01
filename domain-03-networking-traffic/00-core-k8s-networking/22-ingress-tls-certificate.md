@@ -173,6 +173,9 @@ data:
   tls.key: LS0tLS1CRUdJTi...
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 方式2: kubectl 命令创建
 kubectl create secret tls example-tls \
@@ -484,6 +487,9 @@ spec:
 
 ### 4.3 生成 mTLS 证书
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. 创建 CA 私钥和证书
 openssl genrsa -out ca.key 4096
@@ -582,6 +588,10 @@ curl -v --cert client.crt --key client.key --cacert ca.crt https://secure.exampl
 ```
 
 ### 5.2 安装 cert-manager
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 方式1: Helm 安装
@@ -887,6 +897,9 @@ kubectl get certificate -A -o custom-columns=\
 | **证书过期** | HTTPS 错误 | 检查证书日期 | 手动触发续期 |
 | **私钥不匹配** | TLS 握手失败 | 比较证书和私钥 | 重新签发证书 |
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 调试 cert-manager
 kubectl logs -n cert-manager -l app=cert-manager -f
@@ -1020,8 +1033,8 @@ spec:
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic KUDIG Database — Global MOC
-- [[domain-03-networking-traffic/README|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]]]
-- [[domain-03-networking-traffic/00-core-k8s-networking/00-network-in-nutshell]]
+- [[domain-03-networking-traffic/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]]]
+- [[domain-03-networking-traffic/00-core-k8s-networking/00-network-in-nutshell.md|00 network in nutshell]]
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
 - 网络核心组件
@@ -1041,6 +1054,6 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]

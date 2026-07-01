@@ -588,6 +588,9 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 
 #### 场景一：堆内存超过容器限制
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 症状: Pod 状态为 OOMKilled, lastState.terminated.reason = "OOMKilled"
 原因: JVM 堆 + 非堆内存总和超过 limits.memory
@@ -613,6 +616,9 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 
 #### 场景二：Metaspace 泄漏
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 症状: 容器内存持续增长，最终 OOMKilled
 原因: Metaspace 无上限（默认无限制），类加载器泄漏
@@ -634,6 +640,9 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 ```
 
 #### 场景三：Direct Buffer 泄漏
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
 症状: Native 内存持续增长，Heap 使用正常
@@ -693,6 +702,9 @@ echo "Total GC time in last hour: ${TOTAL_GC_TIME}ms"
 ```
 
 ### 5.4 Native Memory Tracking
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 启用 NMT（注意有 5-10% 性能开销）

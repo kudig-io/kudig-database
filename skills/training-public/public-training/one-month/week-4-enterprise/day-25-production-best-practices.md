@@ -39,7 +39,7 @@ title: Day 25: 生产运维最佳实践
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 变更管理
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 变更管理
   - 生产事故响应流程
   - 容量规划预测
   - SRE 最佳实践
@@ -336,6 +336,7 @@ spec:
 ## 常见问题快速响应
 
 ### Pod 大面积 Pending
+
 ```bash
 # Step 1: 检查节点状态
 kubectl get nodes
@@ -349,6 +350,7 @@ kubectl scale deployment <low-priority-app> --replicas=0 -n <ns>
 ```
 
 ### Service 不可用
+
 ```bash
 # Step 1: 检查 Endpoints
 kubectl get endpoints <svc> -n <ns>
@@ -361,6 +363,7 @@ kubectl rollout undo deployment/<deploy> -n <ns>
 ```
 
 ### 数据库连接问题
+
 ```bash
 # Step 1: 检查 Secret 配置
 kubectl get secret <db-secret> -n <ns> -o yaml
@@ -373,6 +376,7 @@ kubectl rollout restart deployment/<deploy> -n <ns>
 ```
 
 ### 节点 NotReady
+
 ```bash
 # Step 1: 检查节点状态
 kubectl describe node <node>
@@ -556,3 +560,5 @@ spec:
 - [文件: `../../domain-11-production-operations/22-change-management-process.md`](../../domain-11-production-operations/22-change-management-process.md)
 - [文件: `../../domain-11-production-operations/23-incident-response-handling.md`](../../domain-11-production-operations/23-incident-response-handling.md)
 - [文件: `../../domain-11-production-operations/24-capacity-planning-forecasting.md`](../../domain-11-production-operations/24-capacity-planning-forecasting.md)
+
+```

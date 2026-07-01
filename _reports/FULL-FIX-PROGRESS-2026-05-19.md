@@ -73,7 +73,7 @@ created: "2026-05-23"
 ### domain-10-troubleshooting-diagnostics/topic-qa-corpus/ (20 个文件)
 - 18 个 domain QA YAML 文件 (2,336 QA 对)
 - 1 个命令输出诊断语料 (23 场景)
-- 1 个 [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]] 索引
+- 1 个 [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|README]] 索引
 
 ### domain-10-troubleshooting-diagnostics/topic-skills/scripts/ (17 个脚本)
 - diagnose-pod-crashloop.sh

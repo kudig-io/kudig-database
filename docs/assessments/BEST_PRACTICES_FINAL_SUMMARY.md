@@ -69,7 +69,7 @@ created: "2026-05-23"
 - `templates/best-practice-template.md` - 最佳实践内容模板
 
 **最佳实践文档**：
-- `[[domain-04-storage-data/README|README]].md` - 最佳实践索引页面
+- `[[domain-04-storage-data/README.md|README]].md` - 最佳实践索引页面
 - `best-practices/common-best-practices.md` - 通用最佳实践参考
 
 **基础设施最佳实践**：

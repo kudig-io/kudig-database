@@ -74,7 +74,7 @@ MySQL 8.0 引入了诸多企业级特性：窗口函数、通用表表达式（C
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 企业级 MySQL 高可用架构图 -->## 企业级 MySQL 高可用架构图
+## 企业级 MySQL 高可用架构图
 
 ```mermaid
 graph TB
@@ -146,7 +146,7 @@ graph TB
     MYD --> S3
 ```
 
-#<!-- chunk: InnoDB 存储引擎架构 -->## InnoDB 存储引擎架构
+## InnoDB 存储引擎架构
 
 ```mermaid
 graph LR
@@ -197,7 +197,7 @@ graph LR
 
 <!-- chunk: 核心组件配置 -->## 核心组件配置
 
-#<!-- chunk: 生产级 my.cnf 完整配置 -->## 生产级 my.cnf 完整配置
+## 生产级 my.cnf 完整配置
 
 ```ini
 # my.cnf - MySQL 8.4 LTS 生产优化配置
@@ -373,7 +373,7 @@ no-auto-rehash
 default-character-set          = utf8mb4
 ```
 
-#<!-- chunk: 从节点配置 -->## 从节点配置
+## 从节点配置
 
 ```ini
 # slave.cnf - MySQL 从节点专用配置
@@ -400,7 +400,7 @@ innodb_flush_log_at_trx_commit = 2
 sync_binlog                    = 100
 ```
 
-#<!-- chunk: ProxySQL 完整配置 -->## ProxySQL 完整配置
+## ProxySQL 完整配置
 
 ```sql
 -- ProxySQL 生产配置脚本
@@ -451,7 +451,7 @@ SAVE MYSQL VARIABLES TO DISK;
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: 内存分配公式 -->## 内存分配公式
+## 内存分配公式
 
 ```
 MySQL 内存分配参考（64GB 物理内存）：
@@ -472,7 +472,7 @@ max_used_memory = innodb_buffer_pool_size
                 = 40GB + ~27GB = ~67GB（需要确保不超过物理内存）
 ```
 
-#<!-- chunk: InnoDB 性能参数调优 -->## InnoDB 性能参数调优
+## InnoDB 性能参数调优
 
 | 参数 | 推荐值 | 调优依据 | 影响范围 |
 |:---|:---|:---|:---|
@@ -487,7 +487,7 @@ max_used_memory = innodb_buffer_pool_size
 | `innodb_write_io_threads` | CPU 核心数 | 写 IO 线程数 | 写性能 |
 | `sync_binlog` | 1（安全）/ 100（性能） | binlog 同步频率 | 主从一致性 |
 
-#<!-- chunk: 查询优化实践 -->## 查询优化实践
+## 查询优化实践
 
 ```sql
 -- 1. 分析慢查询
@@ -549,7 +549,7 @@ ORDER BY data_free DESC;
 
 <!-- chunk: 高可用与容灾 -->## 高可用与容灾
 
-#<!-- chunk: Orchestrator 配置 -->## Orchestrator 配置
+## Orchestrator 配置
 
 ```json
 {
@@ -599,7 +599,7 @@ ORDER BY data_free DESC;
 }
 ```
 
-#<!-- chunk: 跨机房容灾架构 -->## 跨机房容灾架构
+## 跨机房容灾架构
 
 ```yaml
 # 跨机房容灾配置示例
@@ -634,7 +634,7 @@ disaster_recovery:
 
 <!-- chunk: 备份恢复 -->## 备份恢复
 
-#<!-- chunk: XtraBackup 物理备份脚本 -->## XtraBackup 物理备份脚本
+## XtraBackup 物理备份脚本
 
 ```bash
 #!/bin/bash
@@ -772,7 +772,11 @@ main() {
 main "$@"
 ```
 
-#<!-- chunk: 恢复操作 -->## 恢复操作
+## 恢复操作
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -829,7 +833,7 @@ fi
 
 <!-- chunk: 监控告警 -->## 监控告警
 
-#<!-- chunk: Prometheus MySQL Exporter 配置 -->## Prometheus MySQL Exporter 配置
+## Prometheus MySQL Exporter 配置
 
 ```yaml
 scrape_configs:
@@ -861,7 +865,7 @@ scrape_configs:
         - perf_schema.replication_group_members
 ```
 
-#<!-- chunk: 生产级告警规则 -->## 生产级告警规则
+## 生产级告警规则
 
 ```yaml
 groups:
@@ -952,7 +956,7 @@ groups:
 
 <!-- chunk: 运维管理 -->## 运维管理
 
-#<!-- chunk: 综合运维脚本 -->## 综合运维脚本
+## 综合运维脚本
 
 ```bash
 #!/bin/bash
@@ -1086,7 +1090,7 @@ esac
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 0. 生产环境部署清单 -->## 0. 生产环境部署清单
+## 0. 生产环境部署清单
 
 在企业级 MySQL 生产环境上线前，需要完成以下检查清单。这份清单基于多年大规模 MySQL 集群运维经验总结，涵盖了硬件规划、操作系统配置、MySQL 参数优化、安全加固和监控告警等关键维度。
 
@@ -1100,7 +1104,7 @@ esac
 
 **监控层面**：部署 Prometheus MySQL Exporter 采集核心指标；配置 Grafana 仪表盘展示关键性能指标（QPS、TPS、连接数、Buffer Pool 命中率、复制延迟）；设置分级告警规则并通过 AlertManager 路由到不同的通知渠道。
 
-#<!-- chunk: 1. 索引设计原则 -->## 1. 索引设计原则
+## 1. 索引设计原则
 
 - 为 WHERE、JOIN、ORDER BY、GROUP BY 列创建合适的索引
 - 遵循最左前缀原则设计复合索引
@@ -1109,7 +1113,7 @@ esac
 - 使用 `sys.schema_unused_indexes` 监控未使用索引
 - 限制单表索引数量在 5-8 个以内
 
-#<!-- chunk: 2. 数据类型选择 -->## 2. 数据类型选择
+## 2. 数据类型选择
 
 | 场景 | 推荐类型 | 避免使用 |
 |:---|:---|:---|
@@ -1120,7 +1124,7 @@ esac
 | IP 地址 | INT UNSIGNED + INET_ATON() | VARCHAR |
 | JSON 数据 | JSON 数据类型 | TEXT + 应用层解析 |
 
-#<!-- chunk: 3. 分区策略 -->## 3. 分区策略
+## 3. 分区策略
 
 ```sql
 -- 按时间范围分区（适用于日志、订单等时序数据）
@@ -1147,7 +1151,7 @@ PARTITION BY RANGE (TO_DAYS(created_at)) (
 ALTER TABLE orders ADD PARTITION (PARTITION p202605 VALUES LESS THAN (TO_DAYS('2026-06-01')));
 ```
 
-#<!-- chunk: 4. 安全加固清单 -->## 4. 安全加固清单
+## 4. 安全加固清单
 
 - [ ] 删除匿名用户和测试数据库
 - [ ] 限制 root 仅本地登录
@@ -1162,7 +1166,7 @@ ALTER TABLE orders ADD PARTITION (PARTITION p202605 VALUES LESS THAN (TO_DAYS('2
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题与解决方案 -->## 常见问题与解决方案
+## 常见问题与解决方案
 
 | 问题现象 | 可能原因 | 排查命令 | 解决方案 |
 |:---|:---|:---|:---|
@@ -1177,7 +1181,7 @@ ALTER TABLE orders ADD PARTITION (PARTITION p202605 VALUES LESS THAN (TO_DAYS('2
 | Buffer Pool 命中率低 | 内存不足 | `SHOW ENGINE INNODB STATUS` | 增大 `innodb_buffer_pool_size` |
 | `Got error 28 from storage engine` | 磁盘空间不足 | `df -h` | 清理磁盘、`tmpdir` 空间 |
 
-#<!-- chunk: 紧急故障处理流程 -->## 紧急故障处理流程
+## 紧急故障处理流程
 
 ```bash
 #!/bin/bash
@@ -1253,7 +1257,7 @@ esac
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-28-enterprise-database-middleware MOC
-- [[domain-16-database-middleware/README|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
+- [[domain-16-database-middleware/README.md|Domain 16: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
 - Domain-28 企业数据库与中间件 — 开源项目索引
 - PostgreSQL 企业级数据库高可用架构
 - 分布式数据库企业级实践深度指南

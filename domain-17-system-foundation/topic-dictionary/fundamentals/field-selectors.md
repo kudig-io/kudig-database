@@ -32,7 +32,7 @@ created: "2026-05-23"
 
 ## 概述
 
-字段选择器（Field Selectors）允许根据一个或多个资源字段的值来选择 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 对象。与标签选择器不同，字段选择器基于资源的实际字段值进行过滤，是一种更底层的资源筛选机制。
+字段选择器（Field Selectors）允许根据一个或多个资源字段的值来选择 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 对象。与标签选择器不同，字段选择器基于资源的实际字段值进行过滤，是一种更底层的资源筛选机制。
 
 ## 核心概念/原理
 
@@ -106,3 +106,9 @@ kubectl get statefulsets,services --all-namespaces --field-selector metadata.nam
 ## 参考链接
 
 - [Field Selectors - Official Documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/field-selectors/)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/annotations.md|注解]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/bpfman.md|bpfman eBPF 管理器]]

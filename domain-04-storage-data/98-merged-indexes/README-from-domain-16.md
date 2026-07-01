@@ -46,7 +46,7 @@ estimated_read_time: 5min
 intent_queries:
 - 'Domain-16: 存储基础 是什么'
 - '如何 Domain-16: 存储基础'
-- [[entities/kubernetes|kubernetes]] 16 storage fundamentals 最佳实践
+- [[entities/kubernetes.md|kubernetes]] 16 storage fundamentals 最佳实践
 trigger_keywords:
 - 'Domain-16:'
 - 存储基础

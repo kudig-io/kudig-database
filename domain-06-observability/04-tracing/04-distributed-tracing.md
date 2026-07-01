@@ -82,7 +82,7 @@ created: "2026-05-23"
 
 # 04 - 分布式追踪体系 (Distributed Tracing)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/opentelemetry|opentelemetry]].io](https://opentelemetry.io/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/opentelemetry.md|opentelemetry]].io](https://opentelemetry.io/)
 
 <!-- chunk: 概述 -->
 ## 概述
@@ -757,8 +757,8 @@ standard_tags:
 ## Obsidian 相关文档
 
 - observability/MOC.md|domain-06-observability MOC]]
-- [[domain-06-observability/README|Observability Domain (可观测性领域)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-8 可观测性 — 开源项目索引]]
+- [[domain-06-observability/README.md|Observability Domain (可观测性领域)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
 - 03 - 日志收集架构详解 (Logging Architecture)
@@ -771,7 +771,7 @@ standard_tags:
 
 ## Related
 
-- [[domain-02-workloads-applications/07-java-observability-kubernetes|07-java-observability-kubernetes]]
+- [[domain-02-workloads-applications/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
 
 - 可观测性架构体系
 - 指标监控体系
@@ -779,9 +779,9 @@ standard_tags:
 - 相关知识域: domain-02-workloads-applications
 - 相关知识域: domain-03-networking-traffic
 - 相关知识域: domain-07-platform-engineering
-- [[domain-17-system-foundation/topic-cheat-sheet/promql|速查卡: promql]]
+- [[domain-17-system-foundation/topic-cheat-sheet/promql.md|速查卡: promql]]
 
-- [[domain-06-observability/README|返回目录]]- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-06-observability/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ## See Also
 

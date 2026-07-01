@@ -172,6 +172,10 @@ echo "=== 检查完成 ==="
 
 ### 1.3 kubeadm 升级步骤
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 升级 kubeadm
 apt-mark unhold kubeadm && \
@@ -536,6 +540,10 @@ kubectl get --raw /api/v1/nodes/node-1/proxy/stats/summary
 
 ### 6.3 优雅节点维护
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 1. 标记节点不可调度
 kubectl cordon node-1
@@ -592,6 +600,9 @@ echo "=== 检查完成 ==="
 ```
 
 ### 7.2 每周检查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -676,7 +687,7 @@ echo "=== 检查完成 ==="
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Platform Ops Domain (平台运维领域)]]
+- [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
 - Domain-9 平台运维 — 开源项目索引
 - 平台运维概述
 - 集群生命周期管理
@@ -690,8 +701,8 @@ echo "=== 检查完成 ==="
 
 ## Related
 
-- [[release-notes/12-demo-env-guide|12-demo-env-guide]]
-- [[release-notes/21-platform-selection-guide|21-platform-selection-guide]]
+- 12-demo-env-guide
+- 21-platform-selection-guide
 
 ## See Also
 
@@ -699,3 +710,5 @@ echo "=== 检查完成 ==="
 - 99-java-k8s-client-operator-guide
 - 01-platform-ops-overview
 - 02-cluster-lifecycle-management
+
+```

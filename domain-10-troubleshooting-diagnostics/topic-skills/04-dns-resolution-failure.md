@@ -90,8 +90,6 @@ DNS 是 Kubernetes 集群中**所有服务发现的基石**。集群内部的 [[
 - **SSH 访问**: 部分深度诊断（conntrack 检查、NodeLocal DNSCache 排查）需要节点 SSH 访问
 - **监控系统**: Prometheus + CoreDNS metrics（用于 trigger_metrics 匹配和性能分析）
 
-> ⚠️ **重要**: DNS 问题的爆炸半径极大。集群级 DNS 完全不可用属于 P0 事件，需立即响应。诊断过程中应首先判断是全局性还是局部性 DNS 问题，以快速定位根因范围。
-
 ---
 
 ## 2. 症状识别
@@ -161,6 +159,10 @@ DNS 是 Kubernetes 集群中**所有服务发现的基石**。集群内部的 [[
 按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 快速验证集群 DNS 是否完全不可用
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 使用 kube-system 中的任一 Pod 测试 DNS（kube-system 中总有可用的 Pod）
 # 测试集群内部 DNS（kubernetes.default 是始终存在的 Service）
@@ -187,6 +189,10 @@ kubectl get endpoints kube-dns -n kube-system
 > - Endpoints 为空 → kube-dns Service 没有后端，等同于 DNS 不可用，**确认 P0**
 
 **Step T3**: 判断问题范围：集群级 / namespace 级 / Pod 级
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 从不同 namespace 的 Pod 中测试 DNS
 # 测试 1: 从 default namespace
@@ -283,6 +289,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 
 **Step D1.3**: 在受影响 Pod 内执行 DNS 测试
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 测试 1: 集群内部 DNS（kubernetes.default 是始终存在的 Service）
   kubectl exec <pod> -- nslookup kubernetes.default.svc.cluster.local
@@ -308,6 +318,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 
 **Step D1.4**: 检查受影响 Pod 的 DNS 配置
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 查看 Pod 的 resolv.conf
   kubectl exec <pod> -- cat /etc/resolv.conf
@@ -478,6 +492,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 
 **Step D2.5**: 检查 ndots 配置及其对外部域名解析的影响
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 查看 Pod 的 resolv.conf 中的 ndots 设置
   kubectl exec <pod> -- cat /etc/resolv.conf | grep ndots
@@ -576,6 +594,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 
 **Step D2.9**: 检查 Headless Service DNS 记录（如适用）
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查 Headless Service 配置
   kubectl get svc <service-name> -n <namespace> -o yaml | grep -A5 "clusterIP\|selector"
@@ -597,6 +619,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 
 **Step D2.10**: 检查上游 DNS 服务器连通性
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 从 CoreDNS Pod 中检查上游 DNS
   # 先确认 CoreDNS 使用的上游 DNS
@@ -621,11 +647,12 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 
 ### Phase 3: 主动探测（低风险，可能需审批）
 
-> ⚠️ 以下步骤涉及创建临时资源或主动网络请求。在 L2-semi-auto 模式下，低风险操作可自动执行，中风险需人工确认。
-> **预计耗时**: 3-5 分钟
-
 **Step D3.1**: 部署 DNS 调试 Pod 进行系统化测试
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 部署 dnsutils Pod（包含 dig、nslookup、host 等工具）
   kubectl run dnsutils --image=registry.k8s.io/e2e-test-images/agnhost:2.39 --restart=Never --command -- sleep 3600
@@ -652,13 +679,21 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   - 所有查询失败 → 确认集群 DNS 系统性问题
   - SRV 记录查询失败但 A 记录正常 → CoreDNS kubernetes 插件部分功能异常
 - **清理**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+
   ```bash
-  kubectl delete pod dnsutils --force --grace-period=0
+  kubectl delete pod dnsutils --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
   ```
 - **版本差异**: 无
 
 **Step D3.2**: 使用 `dig +trace` 追踪 DNS 解析链
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 追踪外部域名解析的完整路径
   kubectl exec dnsutils -- dig +trace google.com
@@ -677,6 +712,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 
 **Step D3.3**: DNS 延迟性能测试
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 批量 DNS 查询，测量延迟
   kubectl exec dnsutils -- sh -c '
@@ -743,6 +782,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 
 **Step D4.2**: 检查本地 DNS 缓存是否生效
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 从 Pod 中测试 NodeLocal DNS 链路本地地址 169.254.20.10
   kubectl exec -it <pod> -- nslookup kubernetes.default 169.254.20.10
@@ -857,6 +900,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 
 **Step D5.2**: 分析 dnsPolicy 行为差异
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 创建测试 Pod 比较不同 dnsPolicy 的行为
   # ClusterFirst Pod
@@ -875,8 +922,12 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   - **ClusterFirstWithHostNet**: 与 ClusterFirst 相同，但用于 hostNetwork Pod
 - **版本差异**: 无
 - **清理**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+
   ```bash
-  kubectl delete pod dns-test-cf --force --grace-period=0
+  kubectl delete pod dns-test-cf --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
   ```
 
 **Step D5.3**: 检查自定义 dnsConfig 配置
@@ -905,6 +956,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 
 **Step D5.4**: 分析 ndots 配置对解析性能的影响
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 获取当前 ndots 配置
   kubectl exec <pod> -- cat /etc/resolv.conf | grep ndots
@@ -965,6 +1020,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   kubectl get deployment coredns -n kube-system
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 滚动重启 CoreDNS（不会导致所有 Pod 同时重启）
   kubectl rollout restart deployment/coredns -n kube-system
@@ -981,6 +1040,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   # 预期: 返回正确的 ClusterIP
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 如果新 Pod 仍然崩溃，可回滚到上一个 revision（如果之前有配置变更）
   kubectl rollout undo deployment/coredns -n kube-system
@@ -998,6 +1061,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.metadata.ownerReferences[0].kind}/{.metadata.ownerReferences[0].name}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 修改 Deployment 的 dnsPolicy 为 ClusterFirst（默认值）
   kubectl patch deployment <deployment-name> -n <namespace> --type='json' -p='[
@@ -1009,6 +1076,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   # ]'
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 等待新 Pod 创建
   kubectl rollout status deployment/<deployment-name> -n <namespace> --timeout=120s
@@ -1020,6 +1091,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   # 预期: 解析成功
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 回滚到原来的 dnsPolicy
   kubectl patch deployment <deployment-name> -n <namespace> --type='json' -p='[
@@ -1030,6 +1105,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 #### REM-003: 优化 ndots 设置
 - **适用根因**: RC-005
 - **前置检查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 确认当前 ndots 设置
   kubectl exec <pod> -- cat /etc/resolv.conf | grep ndots
@@ -1037,6 +1116,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   # 确认应用确实大量访问外部域名（通过日志或流量分析）
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 在 Deployment 中添加 dnsConfig 降低 ndots
   kubectl patch deployment <deployment-name> -n <namespace> --type='merge' -p='
@@ -1063,6 +1146,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   > - `timeout: 2` — DNS 查询超时 2 秒（默认 5 秒）
   > - `attempts: 3` — 重试 3 次（默认 2 次）
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 等待新 Pod 创建
   kubectl rollout status deployment/<deployment-name> -n <namespace> --timeout=120s
@@ -1074,6 +1161,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   # 预期: 延迟显著降低（从 >5s 降至 <1s）
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 移除 dnsConfig（恢复默认 ndots:5）
   kubectl patch deployment <deployment-name> -n <namespace> --type='json' -p='[
@@ -1096,6 +1187,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   kubectl get deployment coredns -n kube-system -o jsonpath='{.spec.replicas}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 优化 1: 调整 cache TTL（延长缓存时间减少上游查询）
   # 编辑 CoreDNS ConfigMap，将 cache 30 调整为 cache 60 或更高
@@ -1133,6 +1228,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   # 预期: 延迟显著降低
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 恢复原始 Corefile 配置
   kubectl apply -f /tmp/coredns-configmap-backup.yaml
@@ -1157,6 +1256,11 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   kubectl get configmap coredns -n kube-system -o jsonpath='{.data.Corefile}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 场景 1: 修复 upstream DNS 指向（替换为可靠的 DNS 服务器）
   kubectl edit configmap coredns -n kube-system
@@ -1205,6 +1309,11 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   # 预期: 内部和外部 DNS 均解析成功
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 从备份恢复
   kubectl apply -f /tmp/coredns-configmap-backup.yaml
@@ -1226,6 +1335,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   kubectl get pdb -n kube-system | grep coredns
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 提升 CoreDNS 资源限制
   kubectl patch deployment coredns -n kube-system --type='json' -p='[
@@ -1246,6 +1359,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   kubectl run dns-verify --image=busybox:1.36 --rm -it --restart=Never -- nslookup kubernetes.default.svc.cluster.local
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 恢复原始资源配置
   kubectl patch deployment coredns -n kube-system --type='json' -p='[
@@ -1302,6 +1419,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   kubectl get svc kube-dns -n kube-system
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 方案 1: 在现有的 egress NetworkPolicy 中添加 DNS 例外
   # 如果 namespace 有 default-deny egress 策略，需要创建一个允许 DNS 的策略
@@ -1331,6 +1452,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   EOF
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 确认 NetworkPolicy 已创建
   kubectl get networkpolicy allow-dns-egress -n <namespace>
@@ -1339,6 +1464,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   # 预期: 解析成功
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 删除新创建的 NetworkPolicy
   kubectl delete networkpolicy allow-dns-egress -n <namespace>
@@ -1361,6 +1490,11 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   echo "kube-dns ClusterIP: $KUBE_DNS_IP"
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 场景 1: 已部署但问题，修复 NodeLocal DNS Pod
   # 滚动重启 DaemonSet
@@ -1402,6 +1536,11 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   kubectl top pods -n kube-system -l k8s-app=kube-dns
   ```
 - **回滚命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 如果 NodeLocal DNSCache 导致问题，可以禁用
   # 步骤 1: 删除 NodeLocal DNS DaemonSet
@@ -1440,6 +1579,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
      # __PILLAR__LOCAL__DNS__ → 169.254.20.10
      ```
   3. **部署 NodeLocal DNS DaemonSet**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
      ```bash
      kubectl apply -f nodelocaldns.yaml
      # 等待所有节点上的 Pod 就绪
@@ -1465,6 +1608,11 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   - 逐节点部署，每次验证一个节点后再继续下一个
   - 保留原始 kubelet 配置备份
 - **回滚方案**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 1. 将 kubelet --cluster-dns 恢复为原始 kube-dns ClusterIP
   # 2. 删除 NodeLocal DNS DaemonSet
@@ -1484,6 +1632,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
      ssh <node-ip> "cat /proc/sys/net/netfilter/nf_conntrack_count"
      ```
   2. **增大 conntrack 表上限**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
+
      ```bash
      # 临时修改（重启后失效）
      ssh <node-ip> "sysctl -w net.nf_conntrack_max=524288"
@@ -1510,6 +1662,10 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   - 524288 条目约占 150MB 内存
   - 在一个节点上验证后再推广到其他节点
 - **回滚方案**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
+
   ```bash
   # 恢复默认值
   ssh <node-ip> "sysctl -w net.nf_conntrack_max=131072"
@@ -1572,10 +1728,18 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
      EOF
      ```
   3. **应用新的 ConfigMap**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
      ```bash
      kubectl apply -f /tmp/coredns-corefile.yaml
      ```
   4. **强制重启 CoreDNS 确保加载新配置**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
      ```bash
      kubectl rollout restart deployment/coredns -n kube-system
      kubectl rollout status deployment/coredns -n kube-system --timeout=120s
@@ -1588,6 +1752,11 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
      kubectl run dns-verify-ext --image=busybox:1.36 --rm -it --restart=Never -- nslookup google.com
      ```
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 从备份恢复
   kubectl apply -f /tmp/coredns-configmap-full-backup-<timestamp>.yaml
@@ -1722,6 +1891,10 @@ kubectl run dns-v6 --image=busybox:1.36 --rm -it --restart=Never -- sh -c "time 
 3. **可能的根因假设**: 基于已有证据提出的根因假设及置信度
    - 例: "疑似 RC-003（Corefile 配置错误）— D2.2 显示 forward 指向的 IP 10.0.0.2 在 D2.10 测试中超时"
 4. **关键资源快照**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
    ```bash
    # CoreDNS Pod 状态和日志
    kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide > coredns-pods.txt
@@ -1916,4 +2089,6 @@ kubectl run dns-latency --image=busybox:1.36 --rm -it --restart=Never -- sh -c '
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
+
+```

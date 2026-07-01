@@ -155,6 +155,9 @@ chartmuseum:
   enabled: true
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 helm repo add harbor https://helm.goharbor.io
 helm install harbor harbor/harbor \
@@ -287,7 +290,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-22-container-image-management KUDIG Database — Global MOC
-- [[domain-13-container-runtime/README|[[Domain 22: 容器镜像管理 (Container Image Management)|Domain 22: 容器镜像管理 (Container Image Management)]]]]
+- [[domain-13-container-runtime/README.md|[[Domain 22: 容器镜像管理 (Container Image Management)|Domain 22: 容器镜像管理 (Container Image Management)]]]]
 - Domain-22 容器镜像管理 — 开源项目索引
 - Harbor企业级容器镜像仓库深度实践
 - Docker Registry企业级镜像分发深度实践

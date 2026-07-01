@@ -37,7 +37,7 @@ last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
   - ACK cluster creation process VPC vSwitch
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] cluster network CIDR planning
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] cluster network CIDR planning
   - aliyun cs POST clusters API
   - ACK console cluster creation wizard
   - Terway Flannel CNI selection

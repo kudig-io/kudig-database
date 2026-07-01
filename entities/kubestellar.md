@@ -40,7 +40,7 @@ KubeStellar 是一个多集群配置管理和工作负载分发平台，专注�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -57,9 +57,9 @@ KubeStellar 是一个多集群配置管理和工作负载分发平台，专注�
 ## 参考链接
 
 - [[deployment]]
-- [[concepts/controller-pattern|controller-pattern]]
-- [[concepts/gitops-principles|gitops-principles]]
-- [[concepts/secrets-management|secrets-management]]
+- [[concepts/controller-pattern.md|controller-pattern]]
+- [[concepts/gitops-principles.md|gitops-principles]]
+- [[concepts/secrets-management.md|secrets-management]]
 
 ## Related
 
@@ -70,6 +70,6 @@ KubeStellar 是一个多集群配置管理和工作负载分发平台，专注�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - kubestellar
-- [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

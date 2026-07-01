@@ -157,6 +157,9 @@ tags: [week-2, day-14, quota, resource, limitrange, k8s, k8s-1.28-1.33]
 
 #### 1.1 创建 ResourceQuota
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl create namespace quota-test
 
@@ -213,6 +216,9 @@ services         0      10
 
 #### 1.3 测试配额限制
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建 Deployment 消耗资源
 cat > quota-test-deploy.yaml << 'EOF'
@@ -257,6 +263,9 @@ kubectl describe resourcequota team-quota -n quota-test
 ### 任务 2: LimitRange 配置 (45min)
 
 #### 2.1 创建 LimitRange
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > limit-range.yaml << 'EOF'
@@ -332,6 +341,9 @@ kubectl get pod test-limit -n quota-test -o yaml | grep -A 10 resources
 ```
 
 #### 2.3 测试超限拒绝
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建超出最大限制的 Pod
@@ -417,6 +429,11 @@ ACK 集群级配额参考:
 
 #### 4.2 批量创建配额
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 创建团队 Namespace + ResourceQuota + LimitRange
 for team in dev test prod; do
@@ -483,7 +500,7 @@ for team in dev test prod; do
 done
 
 # 清理
-# kubectl delete namespace quota-test team-dev team-test team-prod
+# kubectl delete namespace quota-test team-dev team-test team-prod  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
 ---
@@ -632,5 +649,5 @@ kubectl get pod <name> -o jsonpath='{.status.qosClass}'
 
 - [资源管理](../../domain-02-workloads-applications/23-resource-management.md)
 - [配额排障](../../domain-10-troubleshooting-diagnostics/24-quota-limitrange-troubleshooting.md)
-- [K8s Resource Quota 文档](https://[[entities/kubernetes|[[Kubernetes|kubernetes]]]].io/docs/concepts/policy/resource-quotas/)
+- [K8s Resource Quota 文档](https://[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]].io/docs/concepts/policy/resource-quotas/)
 - [K8s Limit Range 文档](https://kubernetes.io/docs/concepts/policy/limit-range/)

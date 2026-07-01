@@ -41,7 +41,7 @@ Carina 是一个 Kubernetes 本地存储供应器，基于 LVM（Logical Volume 
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -57,22 +57,22 @@ Carina 是一个 Kubernetes 本地存储供应器，基于 LVM（Logical Volume 
 
 ## 参考链接
 
-- [[concepts/controller-pattern|controller-pattern]]
-- [[concepts/storage-model|storage-model]]
+- [[concepts/controller-pattern.md|controller-pattern]]
+- [[concepts/storage-model.md|storage-model]]
 - [[pod-lifecycle]]
-- [[entities/kube-scheduler|kube-scheduler]]
-- [[entities/csi-drivers|csi-drivers]]
+- [[entities/kube-scheduler.md|kube-scheduler]]
+- [[entities/csi-drivers.md|csi-drivers]]
 
 ## Related
 
 - [[hexa]] — Hexa
 - [[openchoreo]] — OpenChoreo
-- [[podman-desktop]] — [[Podman Desktop|Podman Desktop]]
+- [[podman-desktop]] — Podman Desktop
 - [[openyurt]] — OpenYurt
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - carina
-- [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-storage.md|CNCF 存储与数据库项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

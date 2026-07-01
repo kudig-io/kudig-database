@@ -163,4 +163,4 @@ Kubernetes工作负载管理域专注于生产环境下的工作负载控制器�
 
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-06-observability
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|速查卡: k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]

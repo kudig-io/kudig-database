@@ -137,7 +137,7 @@ created: "2026-05-23"
 
 <!-- chunk: 2. Namespace（命名空间） -->## 2. Namespace（命名空间）
 
-#<!-- chunk: 2.1 API 信息 -->## 2.1 API 信息
+## 2.1 API 信息
 
 | 字段 | 值 |
 |------|-----|
@@ -148,7 +148,7 @@ created: "2026-05-23"
 | **简写** | ns |
 | **kubectl 命令** | `kubectl get ns`, `kubectl create ns <name>` |
 
-#<!-- chunk: 2.2 完整字段规格表 -->## 2.2 完整字段规格表
+## 2.2 完整字段规格表
 
 | 字段路径 | 类型 | 必填 | 默认值 | 版本 | 说明 |
 |---------|------|------|-------|------|------|
@@ -165,7 +165,7 @@ created: "2026-05-23"
 | `status.phase` | string | ❌ | Active | v1.0+ | 生命周期阶段：`Active` / `Terminating` |
 | `status.conditions` | []Condition | ❌ | [] | v1.11+ | 条件列表 |
 
-#<!-- chunk: 2.3 最小配置示例（初学者） -->## 2.3 最小配置示例（初学者）
+## 2.3 最小配置示例（初学者）
 
 ```yaml
 # 最简单的 Namespace 配置
@@ -189,7 +189,7 @@ metadata:
     team: platform-team       # 团队归属
 ```
 
-#<!-- chunk: 2.4 生产级配置示例 -->## 2.4 生产级配置示例
+## 2.4 生产级配置示例
 
 ```yaml
 # 生产环境完整配置示例
@@ -250,9 +250,9 @@ metadata:
     scheduler.alpha.kubernetes.io/node-selector: "node-type=production"
 ```
 
-#<!-- chunk: 2.5 高级特性 -->## 2.5 高级特性
+## 2.5 高级特性
 
-##<!-- chunk: 2.5.1 默认命名空间 -->## 2.5.1 默认命名空间
+## 2.5.1 默认命名空间
 
 Kubernetes 集群包含 4 个默认命名空间：
 
@@ -275,7 +275,7 @@ kube-node-lease   Active   30d
 production        Active   10d
 ```
 
-##<!-- chunk: 2.5.2 Finalizer 保护机制 -->## 2.5.2 Finalizer 保护机制
+## 2.5.2 Finalizer 保护机制
 
 Finalizer 是删除前置钩子，防止命名空间被意外删除时丢失关键资源。
 
@@ -291,9 +291,12 @@ metadata:
 
 **工作流程**：
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```bash
 # 1. 删除命名空间
-kubectl delete namespace protected-namespace
+kubectl delete namespace protected-namespace  # ⚠️ 不可逆：永久删除命名空间及全部资源
 
 # 2. API Server 设置 deletionTimestamp
 kubectl get namespace protected-namespace -o yaml
@@ -314,9 +317,10 @@ metadata:
 # 5. API Server 真正删除命名空间
 # kubectl get namespace protected-namespace
 # Error from server (NotFound): namespaces "protected-namespace" not found
+
 ```
 
-##<!-- chunk: 2.5.3 命名空间卡住（Stuck Namespace）问题排除 -->## 2.5.3 命名空间卡住（Stuck Namespace）问题排除
+## 2.5.3 命名空间卡住（Stuck Namespace）问题排除
 
 **症状**：`kubectl delete namespace <name>` 无法完成，命名空间长期处于 `Terminating` 状态。
 
@@ -343,6 +347,11 @@ status:
 
 **解决方案**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方案 1：检查残留资源
 kubectl api-resources --verbs=list --namespaced -o name | \
@@ -364,7 +373,7 @@ kubectl edit namespace stuck-ns
 # 删除 metadata.finalizers 字段，保存退出
 ```
 
-##<!-- chunk: 2.5.4 Pod Security Standards（v1.23+） -->## 2.5.4 Pod Security Standards（v1.23+）
+## 2.5.4 Pod Security Standards（v1.23+）
 
 Kubernetes 1.23+ 引入 Pod Security Admission (PSA)，通过标签在命名空间级别强制执行安全策略。
 
@@ -420,16 +429,19 @@ pods "privileged-pod" is forbidden: violates PodSecurity "restricted:latest":
 privileged (container "nginx" must not set securityContext.privileged=true)
 ```
 
-#<!-- chunk: 2.6 内部原理 -->## 2.6 内部原理
+## 2.6 内部原理
 
-##<!-- chunk: 2.6.1 Namespace Lifecycle Controller -->## 2.6.1 Namespace Lifecycle Controller
+## 2.6.1 Namespace Lifecycle Controller
 
 Namespace Controller 监听命名空间的生命周期事件，负责清理资源。
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
 ```
 ┌─────────────────────────────────────────────────┐
 │  1. 用户执行删除命令                             │
-│     kubectl delete namespace production         │
+│     kubectl delete namespace production         │  # ⚠️ 不可逆：永久删除命名空间及全部资源
 └──────────────────┬──────────────────────────────┘
                    ▼
 ┌─────────────────────────────────────────────────┐
@@ -460,7 +472,7 @@ Namespace Controller 监听命名空间的生命周期事件，负责清理资�
 └─────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: 2.6.2 Namespace Scoping 工作机制 -->## 2.6.2 Namespace Scoping 工作机制
+## 2.6.2 Namespace Scoping 工作机制
 
 API Server 如何实现命名空间隔离：
 
@@ -514,7 +526,7 @@ spec:
 
 <!-- chunk: 3. ResourceQuota（资源配额） -->## 3. ResourceQuota（资源配额）
 
-#<!-- chunk: 3.1 API 信息 -->## 3.1 API 信息
+## 3.1 API 信息
 
 | 字段 | 值 |
 |------|-----|
@@ -525,7 +537,7 @@ spec:
 | **简写** | quota |
 | **kubectl 命令** | `kubectl get quota`, `kubectl describe quota <name>` |
 
-#<!-- chunk: 3.2 完整字段规格表 -->## 3.2 完整字段规格表
+## 3.2 完整字段规格表
 
 | 字段路径 | 类型 | 必填 | 默认值 | 版本 | 说明 |
 |---------|------|------|-------|------|------|
@@ -542,7 +554,7 @@ spec:
 | `status.hard` | map[string]string | ❌ | {} | v1.0+ | 硬限制（同 spec.hard） |
 | `status.used` | map[string]string | ❌ | {} | v1.0+ | 已使用量 |
 
-#<!-- chunk: 3.3 最小配置示例 -->## 3.3 最小配置示例
+## 3.3 最小配置示例
 
 ```yaml
 # 最简单的 CPU/内存配额
@@ -562,9 +574,9 @@ spec:
     limits.memory: "40Gi"     # 所有 Pod 的 Memory limits 总和不超过 40Gi
 ```
 
-#<!-- chunk: 3.4 生产级配置示例 -->## 3.4 生产级配置示例
+## 3.4 生产级配置示例
 
-##<!-- chunk: 3.4.1 完整资源配额（计算+存储+对象数量） -->## 3.4.1 完整资源配额（计算+存储+对象数量）
+## 3.4.1 完整资源配额（计算+存储+对象数量）
 
 ```yaml
 apiVersion: v1
@@ -623,7 +635,7 @@ spec:
     count/cronjobs.batch: "5"        # CronJob 总数：5 个
 ```
 
-##<!-- chunk: 3.4.2 范围选择器（Scope Selectors） -->## 3.4.2 范围选择器（Scope Selectors）
+## 3.4.2 范围选择器（Scope Selectors）
 
 ```yaml
 # 场景 1：仅限制长期运行的 Pod（排除 Job/CronJob）
@@ -715,9 +727,9 @@ spec:
 | **PriorityClass** | 匹配特定优先级类 | 配合 scopeSelector 使用 |
 | **CrossNamespacePodAffinity** | 使用跨命名空间 Pod 亲和性 | podAffinity 引用其他命名空间 |
 
-#<!-- chunk: 3.5 高级特性 -->## 3.5 高级特性
+## 3.5 高级特性
 
-##<!-- chunk: 3.5.1 多个 ResourceQuota 叠加效果 -->## 3.5.1 多个 ResourceQuota 叠加效果
+## 3.5.1 多个 ResourceQuota 叠加效果
 
 **规则**：一个命名空间可以有多个 ResourceQuota，Pod 必须同时满足所有配额。
 
@@ -772,7 +784,7 @@ spec:
 - 批处理 Pod：必须满足 `total-quota` **和** `batch-quota`
 - 普通 Pod：仅需满足 `total-quota`
 
-##<!-- chunk: 3.5.2 优先级类配额（Priority Class Quota） -->## 3.5.2 优先级类配额（Priority Class Quota）
+## 3.5.2 优先级类配额（Priority Class Quota）
 
 ```yaml
 # 步骤 1：创建 PriorityClass
@@ -821,11 +833,14 @@ spec:
         memory: "4Gi"
 ```
 
-#<!-- chunk: 3.6 内部原理 -->## 3.6 内部原理
+## 3.6 内部原理
 
-##<!-- chunk: 3.6.1 ResourceQuota Admission Controller -->## 3.6.1 ResourceQuota Admission Controller
+## 3.6.1 ResourceQuota Admission Controller
 
 ResourceQuota 由 **Admission Controller** 在 Pod 创建时强制执行。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -881,7 +896,7 @@ pods "large-pod" is forbidden: exceeded quota: production-quota,
 requested: requests.cpu=30, used: requests.cpu=75, limited: requests.cpu=100
 ```
 
-##<!-- chunk: 3.6.2 配额更新机制 -->## 3.6.2 配额更新机制
+## 3.6.2 配额更新机制
 
 ```go
 // ResourceQuota Controller 伪代码
@@ -916,7 +931,7 @@ func (c *ResourceQuotaController) syncResourceQuota(namespace string) {
 
 <!-- chunk: 4. LimitRange（资源限制范围） -->## 4. LimitRange（资源限制范围）
 
-#<!-- chunk: 4.1 API 信息 -->## 4.1 API 信息
+## 4.1 API 信息
 
 | 字段 | 值 |
 |------|-----|
@@ -927,7 +942,7 @@ func (c *ResourceQuotaController) syncResourceQuota(namespace string) {
 | **简写** | limits |
 | **kubectl 命令** | `kubectl get limits`, `kubectl describe limits <name>` |
 
-#<!-- chunk: 4.2 完整字段规格表 -->## 4.2 完整字段规格表
+## 4.2 完整字段规格表
 
 | 字段路径 | 类型 | 必填 | 默认值 | 版本 | 说明 |
 |---------|------|------|-------|------|------|
@@ -944,7 +959,7 @@ func (c *ResourceQuotaController) syncResourceQuota(namespace string) {
 | `spec.limits[*].max` | map[string]string | ❌ | {} | v1.0+ | 最大值（limits 必须 <= max） |
 | `spec.limits[*].maxLimitRequestRatio` | map[string]string | ❌ | {} | v1.0+ | limits/requests 最大比例 |
 
-#<!-- chunk: 4.3 最小配置示例 -->## 4.3 最小配置示例
+## 4.3 最小配置示例
 
 ```yaml
 # 最简单的 Container 级别限制
@@ -964,9 +979,9 @@ spec:
       memory: "128Mi"
 ```
 
-#<!-- chunk: 4.4 生产级配置示例 -->## 4.4 生产级配置示例
+## 4.4 生产级配置示例
 
-##<!-- chunk: 4.4.1 完整的容器/Pod/PVC 限制 -->## 4.4.1 完整的容器/Pod/PVC 限制
+## 4.4.1 完整的容器/Pod/PVC 限制
 
 ```yaml
 apiVersion: v1
@@ -1024,7 +1039,7 @@ spec:
       storage: "500Gi"        # PVC 请求存储不超过 500 GiB
 ```
 
-##<!-- chunk: 4.4.2 多场景配置示例 -->## 4.4.2 多场景配置示例
+## 4.4.2 多场景配置示例
 
 ```yaml
 # 场景 1：开发环境（资源宽松）
@@ -1091,9 +1106,9 @@ spec:
     # 不设置 min/max，仅提供默认值
 ```
 
-#<!-- chunk: 4.5 高级特性 -->## 4.5 高级特性
+## 4.5 高级特性
 
-##<!-- chunk: 4.5.1 LimitRange 应用规则 -->## 4.5.1 LimitRange 应用规则
+## 4.5.1 LimitRange 应用规则
 
 **规则优先级**：
 
@@ -1198,7 +1213,7 @@ spec:
 #     memory: "2Gi"
 ```
 
-##<!-- chunk: 4.5.2 MaxLimitRequestRatio 详解 -->## 4.5.2 MaxLimitRequestRatio 详解
+## 4.5.2 MaxLimitRequestRatio 详解
 
 `maxLimitRequestRatio` 用于限制 **limits/requests 的比例**，防止过度超卖。
 
@@ -1259,11 +1274,14 @@ but provided ratio is 10.000000, maximum memory limit to request ratio per Conta
 but provided ratio is 3.000000]
 ```
 
-#<!-- chunk: 4.6 内部原理 -->## 4.6 内部原理
+## 4.6 内部原理
 
-##<!-- chunk: 4.6.1 LimitRanger Admission Controller -->## 4.6.1 LimitRanger Admission Controller
+## 4.6.1 LimitRanger Admission Controller
 
 LimitRange 由 **LimitRanger Admission Plugin** 在资源创建时自动注入默认值并验证。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -1296,7 +1314,7 @@ LimitRange 由 **LimitRanger Admission Plugin** 在资源创建时自动注入�
 └──────────────────┘ └──────────────────────┘
 ```
 
-##<!-- chunk: 4.6.2 默认值注入逻辑 -->## 4.6.2 默认值注入逻辑
+## 4.6.2 默认值注入逻辑
 
 ```go
 // LimitRanger 伪代码
@@ -1368,9 +1386,12 @@ func (l *LimitRanger) Admit(pod *Pod) error {
 
 <!-- chunk: 6. 生产最佳实践 -->## 6. 生产最佳实践
 
-#<!-- chunk: 6.1 多租户命名空间策略 -->## 6.1 多租户命名空间策略
+## 6.1 多租户命名空间策略
 
-##<!-- chunk: 按环境隔离 -->## 按环境隔离
+## 按环境隔离
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建环境命名空间
@@ -1404,7 +1425,11 @@ spec:
 EOF
 ```
 
-##<!-- chunk: 按团队隔离 -->## 按团队隔离
+## 按团队隔离
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 创建团队命名空间
@@ -1417,9 +1442,9 @@ kubectl label namespace team-frontend team=frontend owner=frontend-team@example.
 kubectl label namespace team-backend team=backend owner=backend-team@example.com
 ```
 
-#<!-- chunk: 6.2 ResourceQuota 设计模式 -->## 6.2 ResourceQuota 设计模式
+## 6.2 ResourceQuota 设计模式
 
-##<!-- chunk: 模式 1：总量配额 + 优先级配额 -->## 模式 1：总量配额 + 优先级配额
+## 模式 1：总量配额 + 优先级配额
 
 ```yaml
 # 总量配额（所有 Pod）
@@ -1471,7 +1496,7 @@ spec:
       - low-priority
 ```
 
-##<!-- chunk: 模式 2：长期服务 + 批处理分离 -->## 模式 2：长期服务 + 批处理分离
+## 模式 2：长期服务 + 批处理分离
 
 ```yaml
 # 长期服务配额
@@ -1504,9 +1529,9 @@ spec:
   - Terminating
 ```
 
-#<!-- chunk: 6.3 LimitRange 配置指南 -->## 6.3 LimitRange 配置指南
+## 6.3 LimitRange 配置指南
 
-##<!-- chunk: 指南 1：始终设置默认值 -->## 指南 1：始终设置默认值
+## 指南 1：始终设置默认值
 
 ```yaml
 # ✅ 推荐：设置默认值防止未定义资源的 Pod
@@ -1526,7 +1551,7 @@ spec:
       memory: "256Mi"
 ```
 
-##<!-- chunk: 指南 2：合理设置 maxLimitRequestRatio -->## 指南 2：合理设置 maxLimitRequestRatio
+## 指南 2：合理设置 maxLimitRequestRatio
 
 ```yaml
 # 生产环境：限制超卖比例防止资源争抢
@@ -1543,7 +1568,7 @@ spec:
       memory: "2"            # 内存超卖比例 2:1（更保守）
 ```
 
-##<!-- chunk: 指南 3：设置合理的最大值 -->## 指南 3：设置合理的最大值
+## 指南 3：设置合理的最大值
 
 ```yaml
 # 防止单个容器占用过多资源
@@ -1569,9 +1594,13 @@ spec:
 
 <!-- chunk: 7. 常见问题 FAQ -->## 7. 常见问题 FAQ
 
-#<!-- chunk: Q1: 为什么创建 Pod 时提示 "forbidden: failed quota" 错误？ -->## Q1: 为什么创建 Pod 时提示 "forbidden: failed quota" 错误？
+## Q1: 为什么创建 Pod 时提示 "forbidden: failed quota" 错误？
 
 **原因**：命名空间的 ResourceQuota 已用尽。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 查看配额使用情况
@@ -1584,7 +1613,7 @@ kubectl delete pod <pod-name> -n <namespace>
 kubectl edit resourcequota <quota-name> -n <namespace>
 ```
 
-#<!-- chunk: Q2: 如何查看 LimitRange 为 Pod 注入了哪些默认值？ -->## Q2: 如何查看 LimitRange 为 Pod 注入了哪些默认值？
+## Q2: 如何查看 LimitRange 为 Pod 注入了哪些默认值？
 
 ```bash
 # 创建 Pod 后查看实际值
@@ -1600,7 +1629,7 @@ resources:
     memory: 512Mi
 ```
 
-#<!-- chunk: Q3: 一个命名空间可以有多个 LimitRange 吗？ -->## Q3: 一个命名空间可以有多个 LimitRange 吗？
+## Q3: 一个命名空间可以有多个 LimitRange 吗？
 
 **答案**：可以，但**不推荐**。多个 LimitRange 会导致行为不可预测。
 
@@ -1630,7 +1659,7 @@ spec:
 # ✅ 推荐：一个命名空间只有一个 LimitRange
 ```
 
-#<!-- chunk: Q4: ResourceQuota 和 LimitRange 有什么区别？ -->## Q4: ResourceQuota 和 LimitRange 有什么区别？
+## Q4: ResourceQuota 和 LimitRange 有什么区别？
 
 | 特性 | ResourceQuota | LimitRange |
 |------|--------------|------------|
@@ -1639,7 +1668,7 @@ spec:
 | **是否注入默认值** | ❌ 否 | ✅ 是 |
 | **典型用途** | 成本控制、多租户隔离 | 防止单个资源过大、提供默认值 |
 
-#<!-- chunk: Q5: 如何监控 ResourceQuota 使用情况？ -->## Q5: 如何监控 ResourceQuota 使用情况？
+## Q5: 如何监控 ResourceQuota 使用情况？
 
 ```bash
 # 方法 1：kubectl describe
@@ -1660,7 +1689,7 @@ kube_resourcequota{resource="requests.cpu",namespace="production"}
 
 <!-- chunk: 8. 生产案例 -->## 8. 生产案例
 
-#<!-- chunk: 案例 1：开发/测试/生产多环境隔离 -->## 案例 1：开发/测试/生产多环境隔离
+## 案例 1：开发/测试/生产多环境隔离
 
 ```yaml
 # === 开发环境配置 ===
@@ -1748,7 +1777,7 @@ spec:
       memory: "2"
 ```
 
-#<!-- chunk: 案例 2：多团队资源配额管理 -->## 案例 2：多团队资源配额管理
+## 案例 2：多团队资源配额管理
 
 ```yaml
 # 前端团队命名空间
@@ -1795,7 +1824,7 @@ spec:
     count/statefulsets.apps: "10"
 ```
 
-#<!-- chunk: 案例 3：成本控制配置 -->## 案例 3：成本控制配置
+## 案例 3：成本控制配置
 
 ```yaml
 # 限制昂贵资源的使用
@@ -1820,19 +1849,20 @@ spec:
     
     # 限制公网 IP（云服务商收费）
     count/ingresses.networking.k8s.io: "20"
+
 ```
 
 ---
 
 <!-- chunk: 9. 相关资源 -->## 9. 相关资源
 
-#<!-- chunk: 内部参考文档 -->## 内部参考文档
+## 内部参考文档
 
 - [01 - YAML 语法基础与 Kubernetes 资源通用规范](./01-yaml-syntax-resource-conventions.md)
 - [Domain 3 - 工作负载与调度](../domain-3-workload-scheduling/README.md)
 - [Topic - Kubernetes 调度演讲](../domain-11-production-operations/topic-presentations/kubernetes-scheduling-presentation.md)
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 
 - [Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 - [Resource Quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
@@ -1840,7 +1870,7 @@ spec:
 - [Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
 - [Configure Memory and CPU Quotas](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/)
 
-#<!-- chunk: 工具与监控 -->## 工具与监控
+## 工具与监控
 
 - [kube-resource-report](https://github.com/hjacobs/kube-resource-report) - 资源使用报告工具
 - [kubectl-view-allocations](https://github.com/davidB/kubectl-view-allocations) - 资源分配可视化
@@ -1876,7 +1906,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 03 - Pod 完整规格说明书
@@ -1897,4 +1927,6 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+```

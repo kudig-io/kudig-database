@@ -148,8 +148,12 @@ dmesg -w
 ```
 
 **解决**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
-sudo kubeadm reset -f
+sudo kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 ```
 
 reset 只检查 root 权限（`RunRootCheckOnly`），不检查其他系统条件。
@@ -214,17 +218,22 @@ ETCDCTL_API=3 etcdctl member list --write-out=table \
 
 **处理**:
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
 # 方案 1: 跳过 etcd 移除，直接清理
-kubeadm reset -f --skip-phases=remove-etcd-member
-rm -rf /var/lib/etcd
+kubeadm reset -f --skip-phases=remove-etcd-member  # ⚠️ 清理节点所有 K8s 配置
+rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
 
 # 方案 2: 手动恢复 etcd 仲裁后再移除
 # 在健康的 etcd 节点上
 etcdctl endpoint health --cluster
 etcdctl member list
 # 移除不健康的成员
-etcdctl member remove <unhealthy-member-id>
+etcdctl member remove <unhealthy-member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
 ```
 
 ### 2.3 "No etcd config found"
@@ -270,18 +279,23 @@ crictl info
 
 **解决**:
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 重启容器运行时
 systemctl restart containerd
 
 # 或指定 CRI socket
-kubeadm reset -f --cri-socket=unix:///run/containerd/containerd.sock
+kubeadm reset -f --cri-socket=unix:///run/containerd/containerd.sock  # ⚠️ 清理节点所有 K8s 配置
 
 # 如果 CRI 完全不可用，手动清理
 systemctl stop containerd
-rm -rf /var/lib/containerd/*
+rm -rf /var/lib/containerd/*  # ⚠️ 删除系统/数据文件
 systemctl start containerd
-kubeadm reset -f
+kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 ```
 
 ### 3.2 容器无法停止（任务忙碌）
@@ -327,6 +341,9 @@ cat /proc/mounts | grep kubelet
 
 **解决**:
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
 # 方案 1: 杀死占用进程
 fuser -km /var/lib/kubelet/pods/xxx/volumes/xxx
@@ -338,7 +355,7 @@ umount -l /var/lib/kubelet/pods/xxx/volumes/xxx
 umount -f /var/lib/kubelet/pods/xxx/volumes/xxx
 
 # 方案 4: 使用 MNT_DETACH 标志
-kubeadm reset -f --config=reset.yaml
+kubeadm reset -f --config=reset.yaml  # ⚠️ 清理节点所有 K8s 配置
 # reset.yaml:
 # unmountFlags: ["MNT_DETACH"]
 ```
@@ -348,6 +365,9 @@ kubeadm reset -f --config=reset.yaml
 **症状**: `umount` 命令完全卡死，无法中断
 
 **解决**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 
 ```bash
 # 使用懒卸载（不等待远程响应）
@@ -359,7 +379,7 @@ umount -f /var/lib/kubelet/pods/xxx/volumes/kubernetes.io~nfs/xxx
 
 # 2. 最后手段：重启
 reboot
-# 重启后执行 kubeadm reset -f
+# 重启后执行 kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 ```
 
 ---
@@ -373,6 +393,11 @@ reboot
 **原因**: kubelet 正在运行，会持续更新 Node 状态，Controller 也在处理关联 Pod。
 
 **解决**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 方案 1: 先停止目标节点的 kubelet
@@ -404,6 +429,10 @@ there are pending pods when an error occurred...
 | DaemonSet Pod | `--ignore-daemonsets` |
 | 无法驱逐的 Pod（unmanaged） | `--force` |
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 强制 drain
 kubectl drain <node> --ignore-daemonsets --delete-emptydir-data --force --timeout=60s
@@ -420,6 +449,9 @@ kubectl delete node <node> --force --grace-period=0
 
 **原因**: 旧容器或进程仍在使用端口。
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 查看端口占用
 ss -tlnp | grep 10250
@@ -435,8 +467,11 @@ systemctl restart containerd
 
 **原因**: `/etc/kubernetes/manifests/` 目录中有残留文件。
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
-rm -rf /etc/kubernetes/manifests/*
+rm -rf /etc/kubernetes/manifests/*  # ⚠️ 删除系统/数据文件
 kubeadm init ...
 ```
 
@@ -444,10 +479,14 @@ kubeadm init ...
 
 **原因**: 容器运行时配置残留。
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 重置容器运行时
 systemctl stop containerd
-rm -rf /var/lib/containerd/*
+rm -rf /var/lib/containerd/*  # ⚠️ 删除系统/数据文件
 systemctl start containerd
 ```
 
@@ -458,9 +497,12 @@ systemctl start containerd
 [etcd] Failed to start etcd: member count: 0
 ```
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
 # 确保 etcd 数据已完全清除
-rm -rf /var/lib/etcd
+rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
 # 确保目录存在
 mkdir -p /var/lib/etcd
 ```
@@ -480,12 +522,16 @@ mkdir -p /var/lib/etcd
 | 系统消息 | `journalctl -f` |
 
 **高级调试**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
 # 使用最高日志级别
-kubeadm reset -v=10
+kubeadm reset -v=10  # ⚠️ 清理节点所有 K8s 配置
 
 # strace 跟踪系统调用
-strace -f -e trace=umount kubeadm reset -f
+strace -f -e trace=umount kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 ```
 
 ---
@@ -499,7 +545,7 @@ strace -f -e trace=umount kubeadm reset -f
 ## Related
 
 - [[README|README]]
-- [[man/INSTALL|INSTALL]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
+- [[scripts/man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

@@ -31,6 +31,7 @@ prerequisites:
 - cloud-provider-basics
 - gpu-scheduling-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Taints and Tolerations
@@ -46,6 +47,10 @@ created: "2026-05-23"
 ### Taint（污点）
 
 通过 `kubectl taint` 命令为节点添加污点：
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+
 ```bash
 kubectl taint nodes node1 key1=value1:NoSchedule
 ```
@@ -259,6 +264,10 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+
 ```bash
 # 为节点添加污点
 kubectl taint nodes <node-name> key=value:NoSchedule
@@ -280,6 +289,7 @@ kubectl get events --field-selector reason=TaintManagerEviction --all-namespaces
 
 # 将节点标记为不可调度（添加 NoSchedule 污点）
 kubectl cordon <node-name>
+
 ```
 
 ## 交叉引用
@@ -296,4 +306,6 @@ kubectl cordon <node-name>
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+```

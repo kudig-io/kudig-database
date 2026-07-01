@@ -45,7 +45,7 @@ kubelet runs on every worker node and is responsible for:
 
 | Subsystem | Function |
 |-----------|----------|
-| **PLEG** ([[Pod Lifecycle|Pod Lifecycle]] Event Generator) | Monitors [[Container Runtime|container runtime]], generates state change events that trigger syncPod |
+| **PLEG** (Pod Lifecycle Event Generator) | Monitors [[concepts/container-runtime.md|container runtime]], generates state change events that trigger syncPod |
 | **Probe Manager** | Runs liveness, readiness, and startup probes |
 | **Volume Manager** | Mounts/unmounts volumes, interacts with CSI drivers |
 | **Eviction Manager** | Monitors node resources, evicts Pods when thresholds crossed |
@@ -77,20 +77,20 @@ kubelet auto-rotates its client certificate (`--rotate-certificates`), preventin
 ## Related
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/resource-management|resource-management]] — Resource Management (Requests, Limits, QoS)
-- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
 - [[pod-lifecycle]] — Pod Lifecycle
-- [[entities/container-runtime|container-runtime]] — Container Runtime
+- [[entities/container-runtime.md|container-runtime]] — Container Runtime
 - [[pod-lifecycle|Pod Lifecycle]]
-- [[concepts/resource-management|Resource Management]]
-- [[concepts/kubernetes-architecture-overview|Kubernetes Architecture Overview]]
-- [[entities/container-runtime|Container Runtime]]
+- [[concepts/resource-management.md|Resource Management]]
+- [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
+- [[entities/container-runtime.md|Container Runtime]]
 
 - 15-kubelet-deep-dive
 - 33-kubelet-eviction-thresholds
 - 20-kubelet-configuration
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting|01-kubelet-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
 - virtual-kubelet
-- [[skills/node-fta|Node 异常故障树分析]] — Cross-reference
-- [[skills/deployment-fta|Deployment 异常故障树分析]] — Cross-reference
-- [[skills/statefulset-fta|StatefulSet 异常故障树分析]] — Cross-reference
+- [[skills/node-fta.md|Node 异常故障树分析]] — Cross-reference
+- [[skills/deployment-fta.md|Deployment 异常故障树分析]] — Cross-reference
+- [[skills/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference

@@ -42,6 +42,7 @@ prerequisites:
 - backup-basics
 - logging-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 09 - 云原生安全专家指南
@@ -320,6 +321,10 @@ spec:
 | ❌ 一个命名空间只用一个NetworkPolicy | ✅ 为不同应用创建多个策略 | 规则过于宽泛无法实现细粒度隔离 |
 
 **调试NetworkPolicy的黄金命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 测试Pod间连通性
 kubectl run test-pod --rm -it --image=nicolaka/netshoot -- bash
@@ -744,6 +749,10 @@ spec:
 | ❌ 禁用所有Capabilities | ✅ 某些应用需要NET_BIND_SERVICE等权限 | 应用无法启动或功能异常 |
 
 **运行时安全验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看Falco告警
 kubectl logs -n falco -l app=falco --tail=100 | grep Priority
@@ -931,6 +940,7 @@ spec:
       value: "security-policies"
     - name: INPUT_DATA
       value: "$(workspaces.source.path)/scan-results.json"
+
 ```
 
 ---
@@ -1106,6 +1116,10 @@ results:
 | ❌ 不豁免系统组件 | ✅ kube-system等系统命名空间需要豁免 | 系统组件无法启动 |
 
 **策略调试技巧**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 查看Kyverno策略状态
 kubectl get clusterpolicy
@@ -1922,6 +1936,10 @@ roleRef:
 | ❌ 不测试响应Playbook | ✅ 定期演练(每季度) | 真正攻击时发现响应流程失效 |
 
 **异常检测调优技巧**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看过去7天的告警趋势
 promtool query range 'ALERTS{alertstate="firing"}' \
@@ -2427,10 +2445,6 @@ data:
           timing: "< 5 minutes"
           command: "crontab -l | grep attacker.com"
         
-
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
 
         - action: "应用PodSecurityPolicy/PodSecurity"
           timing: "< 10 minutes"
@@ -3048,6 +3062,10 @@ data:
 | ❌ 只部署工具不运营 | ✅ 配备SOC团队定期审查事件 | 工具成为摆设 |
 
 **工具集成验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 验证Falco事件是否到达Kafka
 kubectl exec -n security security-events-kafka-0 -- \
@@ -3489,8 +3507,12 @@ spec:
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级
 
-## Related
+## 参考链接
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [Cloud Native Security Practices]()
+
+## Related
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

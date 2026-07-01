@@ -71,18 +71,18 @@ created: "2026-05-23"
 
 <!-- chunk: 概述 -->## 概述
 
-#<!-- chunk: 什么是 Admission Webhook? -->## 什么是 Admission Webhook?
+## 什么是 Admission Webhook?
 
 Admission Webhook 是 Kubernetes 准入控制系统的扩展机制,允许在对象持久化到 [[etcd|etcd]] 之前拦截 API 请求并进行验证或修改。
 
-#<!-- chunk: Webhook 类型 -->## Webhook 类型
+## Webhook 类型
 
 | 类型 | 资源 | 作用 | 执行顺序 |
 |------|------|------|---------|
 | **Mutating** | MutatingWebhookConfiguration | 修改对象 | 先执行 |
 | **Validating** | ValidatingWebhookConfiguration | 验证对象 | 后执行 |
 
-#<!-- chunk: 调用链路 -->## 调用链路
+## 调用链路
 
 ```
 API 请求 → API Server
@@ -104,23 +104,23 @@ Validating Admission (内置 + Webhook)
 
 <!-- chunk: 核心概念 -->## 核心概念
 
-#<!-- chunk: 1. Webhook 注册 -->## 1. Webhook 注册
+## 1. Webhook 注册
 
 通过 `ValidatingWebhookConfiguration` 或 `MutatingWebhookConfiguration` 向 API Server 注册 Webhook 服务。
 
-#<!-- chunk: 2. 匹配规则 -->## 2. 匹配规则
+## 2. 匹配规则
 
 - **Rules**: 匹配哪些资源和操作
 - **NamespaceSelector**: 匹配哪些命名空间的对象
 - **ObjectSelector**: 匹配哪些标签的对象
 - **MatchConditions (v1.27+)**: 使用 CEL 表达式精确匹配
 
-#<!-- chunk: 3. 失败策略 -->## 3. 失败策略
+## 3. 失败策略
 
 - **Fail**: Webhook 失败时拒绝请求(安全优先)
 - **Ignore**: Webhook 失败时忽略并继续(可用性优先)
 
-#<!-- chunk: 4. 副作用声明 -->## 4. 副作用声明
+## 4. 副作用声明
 
 - **None**: 无副作用
 - **NoneOnDryRun**: DryRun 时无副作用
@@ -131,7 +131,7 @@ Validating Admission (内置 + Webhook)
 
 <!-- chunk: ValidatingWebhookConfiguration -->## ValidatingWebhookConfiguration
 
-#<!-- chunk: 基础示例 -->## 基础示例
+## 基础示例
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -172,7 +172,7 @@ webhooks:
     matchPolicy: Equivalent  # 匹配策略: Exact 或 Equivalent
 ```
 
-#<!-- chunk: 使用外部 URL -->## 使用外部 URL
+## 使用外部 URL
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -196,7 +196,7 @@ webhooks:
     timeoutSeconds: 15
 ```
 
-#<!-- chunk: 命名空间选择器 -->## 命名空间选择器
+## 命名空间选择器
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -231,7 +231,7 @@ webhooks:
     sideEffects: None
 ```
 
-#<!-- chunk: 对象选择器 -->## 对象选择器
+## 对象选择器
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -265,7 +265,7 @@ webhooks:
     sideEffects: None
 ```
 
-#<!-- chunk: 匹配条件 (v1.27+) -->## 匹配条件 (v1.27+)
+## 匹配条件 (v1.27+)
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -308,7 +308,7 @@ webhooks:
     timeoutSeconds: 10
 ```
 
-#<!-- chunk: 多规则配置 -->## 多规则配置
+## 多规则配置
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -351,7 +351,7 @@ webhooks:
 
 <!-- chunk: MutatingWebhookConfiguration -->## MutatingWebhookConfiguration
 
-#<!-- chunk: 基础示例 -->## 基础示例
+## 基础示例
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -383,7 +383,7 @@ webhooks:
     reinvocationPolicy: Never  # Never 或 IfNeeded
 ```
 
-#<!-- chunk: Sidecar 注入示例 -->## Sidecar 注入示例
+## Sidecar 注入示例
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -420,7 +420,7 @@ webhooks:
     reinvocationPolicy: Never
 ```
 
-#<!-- chunk: 重新调用策略 -->## 重新调用策略
+## 重新调用策略
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -448,7 +448,7 @@ webhooks:
     reinvocationPolicy: IfNeeded
 ```
 
-#<!-- chunk: 默认值注入 -->## 默认值注入
+## 默认值注入
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -475,7 +475,7 @@ webhooks:
     reinvocationPolicy: Never
 ```
 
-#<!-- chunk: 标签和注解修改 -->## 标签和注解修改
+## 标签和注解修改
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -509,7 +509,7 @@ webhooks:
 
 <!-- chunk: 完整字段说明 -->## 完整字段说明
 
-#<!-- chunk: Webhook 配置字段 -->## Webhook 配置字段
+## Webhook 配置字段
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -635,9 +635,9 @@ webhooks:
     # reinvocationPolicy: Never  # Never: 只调用一次 | IfNeeded: 需要时重新调用
 ```
 
-#<!-- chunk: Rules 字段详解 -->## Rules 字段详解
+## Rules 字段详解
 
-##<!-- chunk: Operations -->## Operations
+## Operations
 
 ```yaml
 rules:
@@ -649,7 +649,7 @@ rules:
       - "*"         # 所有操作
 ```
 
-##<!-- chunk: API Groups -->## API Groups
+## API Groups
 
 ```yaml
 rules:
@@ -661,7 +661,7 @@ rules:
       - "*"         # 所有组
 ```
 
-##<!-- chunk: Resources -->## Resources
+## Resources
 
 ```yaml
 rules:
@@ -676,7 +676,7 @@ rules:
       - "*/status"          # 所有资源的 status 子资源
 ```
 
-##<!-- chunk: Scope -->## Scope
+## Scope
 
 ```yaml
 rules:
@@ -685,7 +685,7 @@ rules:
   # scope: "*"         # 所有作用域
 ```
 
-#<!-- chunk: MatchPolicy 说明 -->## MatchPolicy 说明
+## MatchPolicy 说明
 
 ```yaml
 # Exact: 精确匹配
@@ -698,7 +698,7 @@ matchPolicy: Exact
 matchPolicy: Equivalent
 ```
 
-#<!-- chunk: FailurePolicy 说明 -->## FailurePolicy 说明
+## FailurePolicy 说明
 
 ```yaml
 # Fail: 安全优先
@@ -712,7 +712,7 @@ failurePolicy: Fail
 failurePolicy: Ignore
 ```
 
-#<!-- chunk: SideEffects 说明 -->## SideEffects 说明
+## SideEffects 说明
 
 ```yaml
 # None: 无副作用
@@ -733,7 +733,7 @@ sideEffects: NoneOnDryRun
 
 <!-- chunk: 内部原理 -->## 内部原理
 
-#<!-- chunk: 1. 调用链路详解 -->## 1. 调用链路详解
+## 1. 调用链路详解
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -803,9 +803,9 @@ sideEffects: NoneOnDryRun
 └─────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 2. Webhook 调用机制 -->## 2. Webhook 调用机制
+## 2. Webhook 调用机制
 
-##<!-- chunk: 串行 vs 并行 -->## 串行 vs 并行
+## 串行 vs 并行
 
 ```yaml
 # Mutating Webhooks: 同类型 Webhook 并行调用
@@ -831,7 +831,7 @@ sideEffects: NoneOnDryRun
 #   Webhook A ─→ 重新调用(因为对象被 B 或 C 修改)
 ```
 
-##<!-- chunk: 超时处理 -->## 超时处理
+## 超时处理
 
 ```yaml
 # timeoutSeconds 配置
@@ -845,7 +845,7 @@ webhooks:
     failurePolicy: Fail
 ```
 
-##<!-- chunk: 失败降级 -->## 失败降级
+## 失败降级
 
 ```yaml
 # 示例: 多层降级策略
@@ -866,7 +866,7 @@ webhooks:
     timeoutSeconds: 2
 ```
 
-#<!-- chunk: 3. Reinvocation 机制 (仅 Mutating) -->## 3. Reinvocation 机制 (仅 Mutating)
+## 3. Reinvocation 机制 (仅 Mutating)
 
 ```yaml
 # reinvocationPolicy: IfNeeded
@@ -896,9 +896,9 @@ webhooks:
     # 最多重新调用 1 次,避免无限循环
 ```
 
-#<!-- chunk: 4. AdmissionReview 请求/响应 -->## 4. AdmissionReview 请求/响应
+## 4. AdmissionReview 请求/响应
 
-##<!-- chunk: 请求格式 -->## 请求格式
+## 请求格式
 
 ```yaml
 # API Server 发送给 Webhook 的请求
@@ -942,7 +942,7 @@ webhooks:
 }
 ```
 
-##<!-- chunk: 响应格式 -->## 响应格式
+## 响应格式
 
 ```yaml
 # Webhook 返回的响应
@@ -1014,7 +1014,7 @@ webhooks:
 }
 ```
 
-#<!-- chunk: 5. 证书管理 -->## 5. 证书管理
+## 5. 证书管理
 
 ```yaml
 # Webhook 服务器必须使用 HTTPS
@@ -1063,7 +1063,7 @@ webhooks:
 
 <!-- chunk: 版本兼容性 -->## 版本兼容性
 
-#<!-- chunk: 各版本特性 -->## 各版本特性
+## 各版本特性
 
 | 版本 | 新增特性 | 变更 |
 |------|---------|------|
@@ -1080,7 +1080,7 @@ webhooks:
 | **v1.28** | matchConditions (Beta) | CEL 表达式匹配稳定 |
 | **v1.30** | matchConditions (GA) | CEL 表达式匹配正式发布 |
 
-#<!-- chunk: v1.25+ 迁移指南 -->## v1.25+ 迁移指南
+## v1.25+ 迁移指南
 
 ```yaml
 # v1.24 及以前(支持 v1beta1)
@@ -1102,7 +1102,7 @@ webhooks:
     # 2. patch 必须是 Base64 编码的 JSON
 ```
 
-#<!-- chunk: CEL 匹配条件 (v1.27+) -->## CEL 匹配条件 (v1.27+)
+## CEL 匹配条件 (v1.27+)
 
 ```yaml
 # v1.27+: Alpha,需要启用 feature gate
@@ -1135,7 +1135,7 @@ webhooks:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 1. 性能优化 -->## 1. 性能优化
+## 1. 性能优化
 
 ```yaml
 # ✅ 推荐: 使用选择器减少调用次数
@@ -1169,7 +1169,7 @@ webhooks:
     # 这会导致每个 API 请求都调用 Webhook!
 ```
 
-#<!-- chunk: 2. 可靠性保障 -->## 2. 可靠性保障
+## 2. 可靠性保障
 
 ```yaml
 # ✅ 推荐: 关键验证使用 Fail,非关键使用 Ignore
@@ -1255,7 +1255,7 @@ spec:
       app: webhook-server
 ```
 
-#<!-- chunk: 3. 安全配置 -->## 3. 安全配置
+## 3. 安全配置
 
 ```yaml
 # ✅ 推荐: 使用 namespaceSelector 限制作用域
@@ -1295,7 +1295,7 @@ webhooks:
           object.metadata.labels['team'] in ['platform', 'app']
 ```
 
-#<!-- chunk: 4. 调试和监控 -->## 4. 调试和监控
+## 4. 调试和监控
 
 ```yaml
 # ✅ 推荐: 添加详细的拒绝消息
@@ -1331,7 +1331,7 @@ webhooks:
 # - webhook_admission_errors_total{webhook="validate-pods",error_type="timeout|connection"}
 ```
 
-#<!-- chunk: 5. Webhook 命名规范 -->## 5. Webhook 命名规范
+## 5. Webhook 命名规范
 
 ```yaml
 # ✅ 推荐: 使用 FQDN 格式的名称
@@ -1353,7 +1353,7 @@ webhooks:
   - name: my-webhook  # 可能与其他组织的 Webhook 冲突
 ```
 
-#<!-- chunk: 6. 避免死锁 -->## 6. 避免死锁
+## 6. 避免死锁
 
 ```yaml
 # ❌ 危险: Webhook 验证自己命名空间的资源
@@ -1395,7 +1395,7 @@ webhooks:
         resources: [pods]
 ```
 
-#<!-- chunk: 7. DryRun 支持 -->## 7. DryRun 支持
+## 7. DryRun 支持
 
 ```yaml
 # ✅ 推荐: 正确声明副作用
@@ -1422,7 +1422,7 @@ webhooks:
 
 <!-- chunk: 生产案例 -->## 生产案例
 
-#<!-- chunk: 案例 1: OPA Gatekeeper -->## 案例 1: OPA Gatekeeper
+## 案例 1: OPA Gatekeeper
 
 OPA Gatekeeper 是一个基于 Open Policy Agent 的 Kubernetes 准入控制器。
 
@@ -1544,7 +1544,7 @@ spec:
       - memory
 ```
 
-#<!-- chunk: 案例 2: [[Kyverno|Kyverno]] -->## 案例 2: Kyverno
+## 案例 2: Kyverno
 
 Kyverno 是一个 Kubernetes 原生的策略引擎。
 
@@ -1691,7 +1691,7 @@ spec:
               - Egress
 ```
 
-#<!-- chunk: 案例 3: cert-manager Webhook -->## 案例 3: cert-manager Webhook
+## 案例 3: cert-manager Webhook
 
 cert-manager 使用 Webhook 验证和修改证书资源。
 
@@ -1788,7 +1788,7 @@ spec:
   # - duration 和 renewBefore 是否合理
 ```
 
-#<!-- chunk: 案例 4: [[Istio|Istio]] Sidecar 自动注入 -->## 案例 4: Istio Sidecar 自动注入
+## 案例 4: Istio Sidecar 自动注入
 
 Istio 使用 MutatingWebhook 自动注入 Envoy Sidecar 容器。
 
@@ -1944,7 +1944,7 @@ spec:
       name: istio-envoy
 ```
 
-#<!-- chunk: 案例 5: 自定义 Webhook 服务器示例 -->## 案例 5: 自定义 Webhook 服务器示例
+## 案例 5: 自定义 Webhook 服务器示例
 
 使用 Go 实现简单的 Validating Webhook。
 
@@ -2171,7 +2171,7 @@ func readyz(w http.ResponseWriter, r *http.Request) {
 
 <!-- chunk: FAQ -->## FAQ
 
-#<!-- chunk: Q1: Webhook 调用失败会怎样? -->## Q1: Webhook 调用失败会怎样?
+## Q1: Webhook 调用失败会怎样?
 
 **A**: 取决于 `failurePolicy`:
 
@@ -2192,7 +2192,7 @@ func readyz(w http.ResponseWriter, r *http.Request) {
 - 默认值注入、增强功能: 使用 `Ignore`
 - 提高 Webhook 可用性: 多副本 + PDB
 
-#<!-- chunk: Q2: 如何避免 Webhook 影响集群性能? -->## Q2: 如何避免 Webhook 影响集群性能?
+## Q2: 如何避免 Webhook 影响集群性能?
 
 **A**: 多层优化策略:
 
@@ -2235,7 +2235,7 @@ webhooks:
 # - webhook_admission_errors_total > threshold
 ```
 
-#<!-- chunk: Q3: Mutating 和 Validating 的区别? -->## Q3: Mutating 和 Validating 的区别?
+## Q3: Mutating 和 Validating 的区别?
 
 **A**: 
 
@@ -2262,7 +2262,7 @@ webhooks:
 #    - 合规性检查
 ```
 
-#<!-- chunk: Q4: 如何调试 Webhook? -->## Q4: 如何调试 Webhook?
+## Q4: 如何调试 Webhook?
 
 **A**: 多种方法:
 
@@ -2323,7 +2323,7 @@ kubectl get events --all-namespaces | grep admission
 # 解决: 查看错误消息,修复违反的策略
 ```
 
-#<!-- chunk: Q5: 如何处理 Webhook 证书轮换? -->## Q5: 如何处理 Webhook 证书轮换?
+## Q5: 如何处理 Webhook 证书轮换?
 
 **A**: 推荐使用 cert-manager 自动管理:
 
@@ -2423,7 +2423,7 @@ spec:
             # Webhook Pod 需要监听证书变化并重新加载
 ```
 
-#<!-- chunk: Q6: Webhook 可以修改哪些字段? -->## Q6: Webhook 可以修改哪些字段?
+## Q6: Webhook 可以修改哪些字段?
 
 **A**: Mutating Webhook 可以修改几乎所有字段,但有限制:
 
@@ -2499,7 +2499,7 @@ spec:
 ]
 ```
 
-#<!-- chunk: Q7: 如何实现 Webhook 的灰度发布? -->## Q7: 如何实现 Webhook 的灰度发布?
+## Q7: 如何实现 Webhook 的灰度发布?
 
 **A**: 多种策略:
 
@@ -2561,7 +2561,7 @@ webhooks:
 # 在 Webhook 服务器内部实现灰度逻辑
 ```
 
-#<!-- chunk: Q8: Webhook 性能基准是什么? -->## Q8: Webhook 性能基准是什么?
+## Q8: Webhook 性能基准是什么?
 
 **A**: 推荐指标:
 
@@ -2634,7 +2634,7 @@ Admission Webhook 是 Kubernetes 准入控制的强大扩展机制:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -2653,11 +2653,11 @@ Admission Webhook 是 Kubernetes 准入控制的强大扩展机制:
 - 25-validatingadmissionpolicy
 - 26-priorityclass-runtimeclass
 
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/10-kubelet-config|10-kubelet-config]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/04-kubeconfig|04-kubeconfig]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install|24-what-kubeadm-does-not-install]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/13-cert-config|13-cert-config]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/10-kubelet-config.md|10-kubelet-config]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/04-kubeconfig.md|04-kubeconfig]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md|24-what-kubeadm-does-not-install]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/13-cert-config.md|13-cert-config]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

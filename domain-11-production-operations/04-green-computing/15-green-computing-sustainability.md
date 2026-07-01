@@ -98,9 +98,9 @@ k8s_versions:
 
 <!-- chunk: 🌱 碳足迹管理 -->## 🌱 碳足迹管理
 
-#<!-- chunk: 碳排放监测体系 -->## 碳排放监测体系
+## 碳排放监测体系
 
-##<!-- chunk: 1. 能耗指标收集 -->## 1. 能耗指标收集
+## 1. 能耗指标收集
 ```yaml
 # 能耗监控配置
 apiVersion: monitoring.coreos.com/v1
@@ -157,7 +157,7 @@ spec:
             memory: 256Mi
 ```
 
-##<!-- chunk: 2. 碳足迹计算模型 -->## 2. 碳足迹计算模型
+## 2. 碳足迹计算模型
 ```python
 #!/usr/bin/env python3
 # 碳足迹计算器
@@ -375,9 +375,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-#<!-- chunk: 碳排放可视化 -->## 碳排放可视化
+## 碳排放可视化
 
-##<!-- chunk: 1. Grafana碳足迹仪表板 -->## 1. Grafana碳足迹仪表板
+## 1. Grafana碳足迹仪表板
 ```json
 {
   "dashboard": {
@@ -438,9 +438,9 @@ if __name__ == "__main__":
 
 <!-- chunk: ♻️ 节能优化策略 -->## ♻️ 节能优化策略
 
-#<!-- chunk: 智能资源调度 -->## 智能资源调度
+## 智能资源调度
 
-##<!-- chunk: 1. 绿色调度器配置 -->## 1. 绿色调度器配置
+## 1. 绿色调度器配置
 ```yaml
 # 绿色调度器配置
 apiVersion: v1
@@ -499,7 +499,7 @@ spec:
           name: green-scheduler-config
 ```
 
-##<!-- chunk: 2. 节能调度算法 -->## 2. 节能调度算法
+## 2. 节能调度算法
 ```python
 #!/usr/bin/env python3
 # 节能调度算法实现
@@ -733,9 +733,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-#<!-- chunk: 动态功率管理 -->## 动态功率管理
+## 动态功率管理
 
-##<!-- chunk: 1. 节能模式配置 -->## 1. 节能模式配置
+## 1. 节能模式配置
 ```yaml
 # 节能模式配置
 apiVersion: apps/v1
@@ -820,9 +820,9 @@ data:
 
 <!-- chunk: 📈 可持续发展指标 -->## 📈 可持续发展指标
 
-#<!-- chunk: 绿色指标监控 -->## 绿色指标监控
+## 绿色指标监控
 
-##<!-- chunk: 1. 可持续发展KPI -->## 1. 可持续发展KPI
+## 1. 可持续发展KPI
 ```yaml
 # 可持续发展指标配置
 apiVersion: monitoring.coreos.com/v1
@@ -859,7 +859,7 @@ spec:
       expr: baseline_cost - optimized_cost
 ```
 
-##<!-- chunk: 2. 可持续发展报告 -->## 2. 可持续发展报告
+## 2. 可持续发展报告
 ```python
 #!/usr/bin/env python3
 # 可持续发展报告生成器
@@ -1060,7 +1060,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 绿色计算基础建设 -->## 绿色计算基础建设
+## 绿色计算基础建设
 - [ ] 部署碳足迹监测和计量系统
 - [ ] 实施能耗数据收集和分析工具
 - [ ] 建立可再生能源采购和管理机制
@@ -1068,7 +1068,7 @@ if __name__ == "__main__":
 - [ ] 实施动态功率管理和节能策略
 - [ ] 建立绿色计算KPI监控体系
 
-#<!-- chunk: 优化策略实施 -->## 优化策略实施
+## 优化策略实施
 - [ ] 分析现有资源使用效率和碳排放基线
 - [ ] 制定节能减排目标和实施路线图
 - [ ] 实施智能资源调度和工作负载合并
@@ -1076,7 +1076,7 @@ if __name__ == "__main__":
 - [ ] 建立碳感知的容量规划机制
 - [ ] 实施绿色软件开发生命周期
 
-#<!-- chunk: 持续改进管理 -->## 持续改进管理
+## 持续改进管理
 - [ ] 建立可持续发展报告和披露机制
 - [ ] 实施定期的绿色计算效果评估
 - [ ] 建立节能减排创新激励机制
@@ -1093,9 +1093,9 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -1114,4 +1114,4 @@ if __name__ == "__main__":
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

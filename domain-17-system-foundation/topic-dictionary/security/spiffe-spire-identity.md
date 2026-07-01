@@ -35,6 +35,7 @@ prerequisites:
 - mysql-basics
 - policy-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # [[SPIFFE|SPIFFE]] / [[SPIRE|SPIRE]] 与工作负载身份
@@ -162,6 +163,6 @@ SPIRE 的短期 SVID 自动轮换机制大幅提升了安全性：
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

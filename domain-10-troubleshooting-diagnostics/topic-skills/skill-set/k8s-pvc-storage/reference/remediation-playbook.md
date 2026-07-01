@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-node-notready"
 created: "2026-05-22"
 updated: "2026-05-22"
+last_updated: 2026-05-22
 tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
@@ -120,6 +121,10 @@ version: 1.0.0
   # 预期: STATUS 列显示 Ready（不包含 SchedulingDisabled）
   ```
 - **回滚命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+
   ```bash
   kubectl cordon <node-name>
   ```
@@ -185,6 +190,10 @@ version: 1.0.0
   kubectl get pods --field-selector spec.nodeName=<node-name> --all-namespaces -o wide > /tmp/pods-before-restart.txt
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   ssh <node-ip> "systemctl restart kubelet"
   ```
@@ -206,6 +215,10 @@ version: 1.0.0
   # 预期: Ready=True, 所有压力条件为 False
   ```
 - **回滚命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # kubelet 重启为幂等操作，无需回滚
   # 如果重启后问题恶化，可再次停止 kubelet 并升级
@@ -233,6 +246,10 @@ version: 1.0.0
   # 如果有 StatefulSet Pod，需要额外谨慎
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   ssh <node-ip> "systemctl restart containerd"
 
@@ -289,6 +306,10 @@ version: 1.0.0
   #   pid.available: -1
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 备份现有配置
   ssh <node-ip> "cp /var/lib/kubelet/config.yaml /var/lib/kubelet/config.yaml.bak"
@@ -310,6 +331,10 @@ version: 1.0.0
   # 预期: 压力条件恢复为 False
   ```
 - **回滚命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 恢复原始配置
   ssh <node-ip> "cp /var/lib/kubelet/config.yaml.bak /var/lib/kubelet/config.yaml && systemctl restart kubelet"
@@ -330,6 +355,10 @@ version: 1.0.0
      # 确认其他节点有足够 CPU 和内存余量
      ```
   2. **排空节点**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
      ```bash
      kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data --force --grace-period=60 --timeout=300s
      ```
@@ -372,6 +401,10 @@ version: 1.0.0
 - **操作步骤**:
   1. **排空节点**（同 REM-006 步骤 1-3）
   2. **从集群中删除节点对象**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      kubectl delete node <node-name>
      ```
@@ -414,6 +447,10 @@ version: 1.0.0
      kubectl certificate approve <csr-name>
      ```
   3. **如果无 CSR 或证书已过期，需要重新 bootstrap**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
      ```bash
      # 在节点上删除旧证书
      ssh <node-ip> "rm -f /var/lib/kubelet/pki/kubelet-client-current.pem"
@@ -437,6 +474,10 @@ version: 1.0.0
   - 确认 CSR 请求来源确实是目标节点（检查 CSR 的 requestor 和 subject）
   - 确认 bootstrap token 的有效期和权限范围
 - **回滚方案**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 如果手动轮转导致问题恶化，恢复旧证书（如果有备份）
   ssh <node-ip> "cp /var/lib/kubelet/pki/kubelet-client-current.pem.bak /var/lib/kubelet/pki/kubelet-client-current.pem && systemctl restart kubelet"
@@ -656,4 +697,4 @@ kubectl get node <node-name> -o jsonpath='kubelet={.status.nodeInfo.kubeletVersi
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

@@ -55,7 +55,7 @@ created: "2026-05-23"
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-05-security-compliance/00-open-source-projects-index|Domain-39 供应链安全 — 开源项目索引]] |  | security, supply-chain |  |
+| 1 | [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]] |  | security, supply-chain |  |
 | 2 | 供应链安全概述 (Supply Chain Security Overview) |  | security, supply-chain, deep-dive |  |
 | 3 | 供应链安全成熟度模型 (Supply Chain Security Maturity Model) |  | security, supply-chain |  |
 | 4 | SBOM 生成与管理 (SBOM Generation and Management) |  | security, supply-chain |  |
@@ -118,9 +118,9 @@ graph TD
 
 ## See Also
 
-- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-7|00-open-source-projects-index-from-domain-05-security-compliance]]
-- [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-25|MOC-from-domain-05-security-compliance]]
-- [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-7|MOC-from-domain-05-security-compliance]]
-- [[domain-05-security-compliance/98-merged-indexes/README-from-domain-25|README-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-25.md|MOC-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-7.md|MOC-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/README-from-domain-25.md|README-from-domain-05-security-compliance]]
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

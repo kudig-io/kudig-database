@@ -74,9 +74,9 @@ created: "2026-05-23"
 
 <!-- chunk: 日志架构设计原则 -->## 日志架构设计原则
 
-#<!-- chunk: 企业级日志架构模式 -->## 企业级日志架构模式
+## 企业级日志架构模式
 
-##<!-- chunk: 分层日志架构 -->## 分层日志架构
+## 分层日志架构
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    应用层日志                               │
@@ -114,14 +114,14 @@ created: "2026-05-23"
 └─────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 设计原则与最佳实践 -->## 设计原则与最佳实践
+## 设计原则与最佳实践
 
-##<!-- chunk: CAP 定理在日志系统中的应用 -->## CAP 定理在日志系统中的应用
+## CAP 定理在日志系统中的应用
 - **一致性 (Consistency)**: 保证日志的准确性和完整性
 - **可用性 (Availability)**: 确保日志系统的高可用性
 - **分区容忍性 (Partition Tolerance)**: 网络分区情况下的系统稳定性
 
-##<!-- chunk: SLA 要求定义 -->## SLA 要求定义
+## SLA 要求定义
 ```yaml
 # 日志系统SLA配置
 logging_sla:
@@ -134,9 +134,9 @@ logging_sla:
 
 <!-- chunk: Docker 日志驱动配置 -->## Docker 日志驱动配置
 
-#<!-- chunk: 原生日志驱动详解 -->## 原生日志驱动详解
+## 原生日志驱动详解
 
-##<!-- chunk: JSON File 驱动 (默认) -->## JSON File 驱动 (默认)
+## JSON File 驱动 (默认)
 ```bash
 # 配置文件方式
 {
@@ -158,7 +158,7 @@ docker run \
   nginx:latest
 ```
 
-##<!-- chunk: Syslog 驱动配置 -->## Syslog 驱动配置
+## Syslog 驱动配置
 ```bash
 # TCP syslog 配置
 docker run \
@@ -176,7 +176,7 @@ docker run \
   app:latest
 ```
 
-##<!-- chunk: Journald 驱动 (systemd 系统) -->## Journald 驱动 (systemd 系统)
+## Journald 驱动 (systemd 系统)
 ```bash
 # journald 配置
 docker run \
@@ -189,9 +189,9 @@ docker run \
 journalctl -u docker CONTAINER_NAME=web-service -f
 ```
 
-#<!-- chunk: 高级日志驱动配置 -->## 高级日志驱动配置
+## 高级日志驱动配置
 
-##<!-- chunk: Fluentd 驱动 -->## Fluentd 驱动
+## Fluentd 驱动
 ```bash
 # fluentd 驱动配置
 docker run \
@@ -218,7 +218,7 @@ docker run \
 </match>
 ```
 
-##<!-- chunk: AWS CloudWatch Logs -->## AWS CloudWatch Logs
+## AWS CloudWatch Logs
 ```bash
 # AWS CloudWatch 配置
 docker run \
@@ -230,9 +230,9 @@ docker run \
   app:latest
 ```
 
-#<!-- chunk: 动态日志配置管理 -->## 动态日志配置管理
+## 动态日志配置管理
 
-##<!-- chunk: 运行时修改日志配置 -->## 运行时修改日志配置
+## 运行时修改日志配置
 ```bash
 # 修改正在运行容器的日志配置
 docker update \
@@ -244,7 +244,7 @@ docker update \
 docker ps --format "{{.Names}}" | xargs -I {} docker update --log-driver json-file {}
 ```
 
-##<!-- chunk: 条件化日志配置 -->## 条件化日志配置
+## 条件化日志配置
 ```bash
 # 基于环境的动态配置
 if [ "$ENVIRONMENT" = "production" ]; then
@@ -258,9 +258,9 @@ docker run $LOG_DRIVER app:latest
 
 <!-- chunk: 集中式日志解决方案 -->## 集中式日志解决方案
 
-#<!-- chunk: ELK Stack 企业级部署 -->## ELK Stack 企业级部署
+## ELK Stack 企业级部署
 
-##<!-- chunk: 架构设计 -->## 架构设计
+## 架构设计
 ```
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
 │   Filebeat  │    │   Logstash  │    │ Elasticsearch│    │   Kibana    │
@@ -268,7 +268,7 @@ docker run $LOG_DRIVER app:latest
 └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
 ```
 
-##<!-- chunk: Docker Compose 部署配置 -->## Docker Compose 部署配置
+## Docker Compose 部署配置
 ```yaml
 version: '3.8'
 
@@ -334,7 +334,7 @@ networks:
     driver: bridge
 ```
 
-##<!-- chunk: Logstash 配置文件 -->## Logstash 配置文件
+## Logstash 配置文件
 ```ruby
 # logstash/pipeline/logstash.conf
 input {
@@ -385,9 +385,9 @@ output {
 }
 ```
 
-#<!-- chunk: Grafana Loki 方案 -->## Grafana Loki 方案
+## Grafana Loki 方案
 
-##<!-- chunk: 轻量级日志架构 -->## 轻量级日志架构
+## 轻量级日志架构
 ```
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
 │   Promtail  │    │    Loki     │    │   Grafana   │    │  Alerting   │
@@ -395,7 +395,7 @@ output {
 └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
 ```
 
-##<!-- chunk: Docker Compose 配置 -->## Docker Compose 配置
+## Docker Compose 配置
 ```yaml
 version: '3.8'
 
@@ -443,7 +443,7 @@ networks:
     driver: bridge
 ```
 
-##<!-- chunk: Promtail 配置 -->## Promtail 配置
+## Promtail 配置
 ```yaml
 # promtail-config.yaml
 server:
@@ -481,9 +481,9 @@ scrape_configs:
 
 <!-- chunk: 日志收集与传输 -->## 日志收集与传输
 
-#<!-- chunk: 多源日志收集策略 -->## 多源日志收集策略
+## 多源日志收集策略
 
-##<!-- chunk: Filebeat 高级配置 -->## Filebeat 高级配置
+## Filebeat 高级配置
 ```yaml
 # filebeat.yml
 filebeat.inputs:
@@ -521,9 +521,9 @@ output.kafka:
   max_message_bytes: 1000000
 ```
 
-#<!-- chunk: 消息队列集成 -->## 消息队列集成
+## 消息队列集成
 
-##<!-- chunk: Kafka 集群配置 -->## Kafka 集群配置
+## Kafka 集群配置
 ```yaml
 version: '3.8'
 
@@ -551,7 +551,7 @@ services:
       KAFKA_LOG_SEGMENT_BYTES: 1073741824
 ```
 
-##<!-- chunk: Redis 作为缓冲队列 -->## Redis 作为缓冲队列
+## Redis 作为缓冲队列
 ```bash
 # Redis 配置用于日志缓冲
 docker run \
@@ -562,9 +562,9 @@ docker run \
   redis-server --appendonly yes --maxmemory 2gb --maxmemory-policy allkeys-lru
 ```
 
-#<!-- chunk: 传输可靠性保障 -->## 传输可靠性保障
+## 传输可靠性保障
 
-##<!-- chunk: 重试机制配置 -->## 重试机制配置
+## 重试机制配置
 ```yaml
 # Fluentd 重试配置
 <match docker.**>
@@ -590,9 +590,9 @@ docker run \
 
 <!-- chunk: 日志存储与索引 -->## 日志存储与索引
 
-#<!-- chunk: Elasticsearch 优化配置 -->## Elasticsearch 优化配置
+## Elasticsearch 优化配置
 
-##<!-- chunk: 索引模板管理 -->## 索引模板管理
+## 索引模板管理
 ```json
 {
   "index_patterns": ["docker-logs-*"],
@@ -622,7 +622,7 @@ docker run \
 }
 ```
 
-##<!-- chunk: 生命周期管理策略 -->## 生命周期管理策略
+## 生命周期管理策略
 ```json
 {
   "policy": {
@@ -663,9 +663,9 @@ docker run \
 }
 ```
 
-#<!-- chunk: 数据压缩与归档 -->## 数据压缩与归档
+## 数据压缩与归档
 
-##<!-- chunk: 日志压缩策略 -->## 日志压缩策略
+## 日志压缩策略
 ```bash
 #!/bin/bash
 # 日志压缩和归档脚本
@@ -700,9 +700,9 @@ find $ARCHIVE_DIR -name "*.tar.gz" -mtime +$RETENTION_DAYS -delete
 
 <!-- chunk: 日志分析与可视化 -->## 日志分析与可视化
 
-#<!-- chunk: Kibana 仪表板设计 -->## Kibana 仪表板设计
+## Kibana 仪表板设计
 
-##<!-- chunk: 核心监控面板 -->## 核心监控面板
+## 核心监控面板
 ```json
 {
   "dashboard": {
@@ -747,7 +747,7 @@ find $ARCHIVE_DIR -name "*.tar.gz" -mtime +$RETENTION_DAYS -delete
 }
 ```
 
-##<!-- chunk: 告警规则配置 -->## 告警规则配置
+## 告警规则配置
 ```yaml
 # Elastic Stack 告警规则
 PUT _watcher/watch/container_errors
@@ -812,9 +812,9 @@ PUT _watcher/watch/container_errors
 }
 ```
 
-#<!-- chunk: 自定义分析查询 -->## 自定义分析查询
+## 自定义分析查询
 
-##<!-- chunk: 常用分析场景 -->## 常用分析场景
+## 常用分析场景
 ```sql
 -- 错误日志分析
 GET docker-logs-*/_search
@@ -900,9 +900,9 @@ GET docker-logs-*/_search
 
 <!-- chunk: 日志安全管理 -->## 日志安全管理
 
-#<!-- chunk: 合规性要求实施 -->## 合规性要求实施
+## 合规性要求实施
 
-##<!-- chunk: GDPR 合规配置 -->## GDPR 合规配置
+## GDPR 合规配置
 ```yaml
 # 日志脱敏配置
 processors:
@@ -918,7 +918,7 @@ processors:
       target_field: "anonymized_ip"
 ```
 
-##<!-- chunk: 等保2.0要求 -->## 等保2.0要求
+## 等保2.0要求
 ```bash
 # 日志审计配置
 audit_log_config:
@@ -933,9 +933,9 @@ audit_log_config:
     key_rotation: 90d
 ```
 
-#<!-- chunk: 访问控制与权限管理 -->## 访问控制与权限管理
+## 访问控制与权限管理
 
-##<!-- chunk: RBAC 权限配置 -->## RBAC 权限配置
+## RBAC 权限配置
 ```yaml
 # Kibana 角色权限配置
 PUT _security/role/docker_logs_viewer
@@ -967,9 +967,9 @@ PUT _security/user/app_team
 
 <!-- chunk: 故障排查实战 -->## 故障排查实战
 
-#<!-- chunk: 典型问题诊断流程 -->## 典型问题诊断流程
+## 典型问题诊断流程
 
-##<!-- chunk: 日志收集问题排查 -->## 日志收集问题排查
+## 日志收集问题排查
 ```bash
 #!/bin/bash
 # 日志收集诊断脚本
@@ -990,7 +990,7 @@ echo "=== 日志收集器状态 ==="
 systemctl status filebeat || systemctl status fluentd
 ```
 
-##<!-- chunk: 性能瓶颈分析 -->## 性能瓶颈分析
+## 性能瓶颈分析
 ```python
 # 日志分析性能诊断工具
 import pandas as pd
@@ -1037,10 +1037,10 @@ print(analyzer.detect_anomalies())
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-13-container-runtime KUDIG Database — Global MOC
-- [[domain-13-container-runtime/README|[[Docker 容器技术深度解析|Docker 容器技术深度解析]]]]
+- [[domain-13-container-runtime/README.md|[[Docker 容器技术深度解析|Docker 容器技术深度解析]]]]
 - Domain-13 Docker — 开源项目索引
 - Docker 架构概述与核心概念
-- [[entities/docker]]
+- [[entities/docker.md|docker]]
 - Docker 容器生命周期管理
 - Docker 网络深度解析
 - Docker 存储与数据卷
@@ -1058,4 +1058,4 @@ print(analyzer.detect_anomalies())
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

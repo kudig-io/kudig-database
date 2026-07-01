@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-performance"
 created: "2026-05-22"
 updated: "2026-05-22"
+last_updated: 2026-05-22
 tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
@@ -47,6 +48,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 查询 Prometheus: rate(container_cpu_cfs_throttled_seconds_total{pod="<pod>"}[5m])
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 增加 CPU limit
   kubectl patch deployment <name> -n <namespace> --type='json' -p='
@@ -94,6 +99,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl top node <node>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 使用更快存储类
   kubectl patch pvc <name> -n <namespace> -p '{"spec":{"storageClassName":"fast-ssd"}}'
@@ -120,6 +129,12 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl describe node <node>
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 添加新节点（云环境）
   # 通过 Cluster Autoscaler 或手动添加节点
@@ -144,11 +159,19 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
 
 - **适用根因**: RC-004
 - **前置检查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 应用 profiling（如果支持）
   kubectl exec <pod> -n <namespace> -- curl -s localhost:6060/debug/pprof/heap
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 应用优化需要开发团队协作，常见措施：
   # - 优化 JVM 参数（Java 应用）
@@ -175,6 +198,11 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl run netperf --rm -i --restart=Never --image=nicolaka/netshoot -- ping -c 5 <target-pod-ip>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 方案 A: 使用本地 Service（拓扑感知路由）
   kubectl patch service <name> -n <namespace> -p '{"spec":{"internalTrafficPolicy":"Local"}}'

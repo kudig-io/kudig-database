@@ -1,11 +1,27 @@
 ---
-title: "KUDIG 全面修复报告 — 2026-05-24"
+title: KUDIG 全面修复报告 — 2026-05-24
 category: reports
-tags: ["reports", "fix", "quality", "broken-links", "orphans", "frontmatter", "visibility/public"]
-sources: ["_reports/"]
+tags:
+- reports
+- fix
+- quality
+- broken-links
+- orphans
+- frontmatter
+- visibility/public
+sources:
+- _reports/
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 status: reviewed
+relationships:
+- target: "_reports/obsidian-wiki-skills-evaluation-2026-05-24.md"
+  type: related_to
+- target: "_reports/wiki-lint-2026-05-24.md"
+  type: related_to
+- target: "_reports/wiki-dedup-audit-2026-05-24.md"
+  type: related_to
 ---
 
 # KUDIG 全面修复报告 — 2026-05-24
@@ -245,3 +261,9 @@ af4cec65  feat: KUDIG知识缺口全面修复（17 files）
 ## 参见
 
 - [[kubernetes]] — visibility/public 领域核心页面
+
+## Related
+
+- _reports/obsidian-wiki-skills-evaluation-2026-05-24.md
+- _reports/wiki-lint-2026-05-24.md
+- _reports/wiki-dedup-audit-2026-05-24.md

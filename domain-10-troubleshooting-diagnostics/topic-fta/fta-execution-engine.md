@@ -86,7 +86,7 @@ k8s_versions:
 
 <!-- chunk: 一、执行引擎架构 -->## 一、执行引擎架构
 
-#<!-- chunk: 1.1 核心组件 -->## 1.1 核心组件
+## 1.1 核心组件
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -125,7 +125,7 @@ k8s_versions:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.2 输入 Schema -->## 1.2 输入 Schema
+## 1.2 输入 Schema
 
 ```yaml
 diagnosis_request:
@@ -149,7 +149,7 @@ diagnosis_request:
     environment: string             # prod/staging
 ```
 
-#<!-- chunk: 1.3 输出 Schema -->## 1.3 输出 Schema
+## 1.3 输出 Schema
 
 ```yaml
 diagnosis_result:
@@ -189,7 +189,7 @@ diagnosis_result:
 
 <!-- chunk: 二、FTA 遍历引擎实现 -->## 二、FTA 遍历引擎实现
 
-#<!-- chunk: 2.1 路径选择算法 -->## 2.1 路径选择算法
+## 2.1 路径选择算法
 
 ```python
 class FTATraversalEngine:
@@ -310,7 +310,7 @@ class FTATraversalEngine:
         return pruned
 ```
 
-#<!-- chunk: 2.2 证据收集器 -->## 2.2 证据收集器
+## 2.2 证据收集器
 
 ```python
 class EvidenceCollector:
@@ -376,7 +376,7 @@ class EvidenceCollector:
 
 <!-- chunk: 三、置信度评估引擎 -->## 三、置信度评估引擎
 
-#<!-- chunk: 3.1 多维度置信度计算 -->## 3.1 多维度置信度计算
+## 3.1 多维度置信度计算
 
 ```python
 class ConfidenceEvaluator:
@@ -439,7 +439,7 @@ class ConfidenceEvaluator:
         return combined
 ```
 
-#<!-- chunk: 3.2 贝叶斯后验概率 -->## 3.2 贝叶斯后验概率
+## 3.2 贝叶斯后验概率
 
 ```python
 class BayesianReasoningEngine:
@@ -508,7 +508,7 @@ class BayesianReasoningEngine:
 
 <!-- chunk: 四、修复执行控制器 -->## 四、修复执行控制器
 
-#<!-- chunk: 4.1 前置条件检查 -->## 4.1 前置条件检查
+## 4.1 前置条件检查
 
 ```python
 class HealingPreconditionChecker:
@@ -590,7 +590,7 @@ class HealingPreconditionChecker:
         return CheckResult(met=True)
 ```
 
-#<!-- chunk: 4.2 修复执行流程 -->## 4.2 修复执行流程
+## 4.2 修复执行流程
 
 ```python
 class HealingExecutor:
@@ -679,7 +679,7 @@ class HealingExecutor:
 
 <!-- chunk: 五、学习反馈闭环 -->## 五、学习反馈闭环
 
-#<!-- chunk: 5.1 FTA 学习引擎 -->## 5.1 FTA 学习引擎
+## 5.1 FTA 学习引擎
 
 ```python
 class FTALearningEngine:
@@ -754,7 +754,7 @@ class FTALearningEngine:
         self.create_review_task(new_node)
 ```
 
-#<!-- chunk: 5.2 学习触发机制 -->## 5.2 学习触发机制
+## 5.2 学习触发机制
 
 ```yaml
 learning_triggers:
@@ -805,7 +805,7 @@ learning_triggers:
 
 <!-- chunk: 六、执行引擎配置 -->## 六、执行引擎配置
 
-#<!-- chunk: 6.1 全局配置 -->## 6.1 全局配置
+## 6.1 全局配置
 
 ```yaml
 fta_execution_engine:
@@ -912,22 +912,22 @@ Step 6: 学习反馈
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC|topic-fta [[KUDIG Database — Global MOC|MOC]]]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/README|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution|第一章：FTA 起源与发展史]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations|第二章：FTA 数学基础与理论模型]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards|第三章：FTA 符号体系与标准规范]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles|第四章：FTA 方法论核心原则]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/05-fta-construction-process|第五章：FTA 构建完整流程]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/06-fta-verification-and-quality|第六章：FTA 验证与质量保证]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/07-fta-maintenance-and-evolution|第七章：FTA 维护与演进策略]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution|第八章：AI Agent 时代的运维范式革命]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns|第十章：Agent 编排模式与 FTA 逻辑门映射]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|topic-fta [[KUDIG Database — Global MOC|MOC]]]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-d-templates|appendix-d-templates]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-diagnosis-improvement|fta-diagnosis-improvement]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-index|fta-index]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-methodology-and-agentic-practices|fta-methodology-and-agentic-practices]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-d-templates.md|appendix-d-templates]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-diagnosis-improvement.md|fta-diagnosis-improvement]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-index.md|fta-index]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-methodology-and-agentic-practices.md|fta-methodology-and-agentic-practices]]

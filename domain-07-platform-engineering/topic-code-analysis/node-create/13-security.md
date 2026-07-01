@@ -297,10 +297,6 @@ iptables -A INPUT -p tcp --dport 10250 -j DROP
 ### 4.1 Pod Security 替代 PSP
 
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/[[domain-17-system-foundation/topic-dictionary/security/pod-security-admission|pod-security-admission]]/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 Kubernetes v1.25 移除了 PodSecurityPolicy (PSP)，替换为 Pod Security Standards (PSS)。PSS 通过 Namespace 标签来强制执行 Pod 安全策略，无需创建额外的 API 对象。
 
 ### 4.2 三个安全级别
@@ -372,6 +368,10 @@ spec:
 ## 五、安全加固最佳实践
 
 ### 5.1 节点级别加固
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 内核安全参数
@@ -466,6 +466,6 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem \
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

@@ -98,7 +98,7 @@ AgentScope 是阿里巴巴推出的**生产级、开发者友好**的多 Agent �
 
 <!-- chunk: 1. AgentScope 是什么 -->## 1. AgentScope 是什么
 
-#<!-- chunk: 1.1 核心定位 -->## 1.1 核心定位
+## 1.1 核心定位
 
 ```
 AgentScope 定位
@@ -116,7 +116,7 @@ AgentScope 定位
     支持通过强化学习直接微调 Agent 行为
 ```
 
-#<!-- chunk: 1.2 设计哲学 -->## 1.2 设计哲学
+## 1.2 设计哲学
 
 AgentScope 1.0 的设计哲学与 LangChain 等框架有本质区别：
 
@@ -129,7 +129,7 @@ AgentScope 1.0 的设计哲学与 LangChain 等框架有本质区别：
 | **生产部署** | 需额外框架（如 FastAPI） | 内置 Runtime（AgentApp + FastAPI 继承） |
 | **微调能力** | 无内置支持 | 内置 Agentic RL 微调 |
 
-#<!-- chunk: 1.3 在 Agent 框架生态中的位置 -->## 1.3 在 Agent 框架生态中的位置
+## 1.3 在 Agent 框架生态中的位置
 
 ```
 Agent 框架生态（2026）
@@ -156,7 +156,7 @@ Agent 框架生态（2026）
 
 <!-- chunk: 2. 核心特性全景 -->## 2. 核心特性全景
 
-#<!-- chunk: 2.1 特性矩阵 -->## 2.1 特性矩阵
+## 2.1 特性矩阵
 
 ```
 AgentScope 核心特性
@@ -186,7 +186,7 @@ AgentScope 核心特性
     └── AgentScope Studio     - 可视化开发与追踪工具
 ```
 
-#<!-- chunk: 2.2 核心模块四层架构 -->## 2.2 核心模块四层架构
+## 2.2 核心模块四层架构
 
 AgentScope 1.0 将 Agent 应用所需的组件抽象为四大模块：
 
@@ -213,7 +213,7 @@ AgentScope 1.0 将 Agent 应用所需的组件抽象为四大模块：
 
 <!-- chunk: 3. 安装与环境准备 -->## 3. 安装与环境准备
 
-#<!-- chunk: 3.1 系统要求 -->## 3.1 系统要求
+## 3.1 系统要求
 
 | 要求 | 说明 |
 |------|------|
@@ -223,7 +223,7 @@ AgentScope 1.0 将 Agent 应用所需的组件抽象为四大模块：
 | **Node.js** | 20.0.0+（仅 AgentScope Studio 可视化工具需要） |
 | **可选** | Docker / Podman（用于沙箱执行和生产部署） |
 
-#<!-- chunk: 3.2 安装方式 -->## 3.2 安装方式
+## 3.2 安装方式
 
 **方式一：从 PyPI 安装（推荐）**
 
@@ -270,7 +270,7 @@ pip install agentscope-runtime
 pip install "agentscope-runtime[ext]"
 ```
 
-#<!-- chunk: 3.3 `agentscope[full]` 核心依赖清单 -->## 3.3 `agentscope[full]` 核心依赖清单
+## 3.3 `agentscope[full]` 核心依赖清单
 
 以下为 `agentscope[full]` v1.0.17 实际安装的核心依赖（基于 Python 3.13 / Linux x86_64 验证）：
 
@@ -296,7 +296,7 @@ pip install "agentscope-runtime[ext]"
 
 > 完整依赖树包含约 **242 个包**，以上仅列出核心直接依赖。
 
-#<!-- chunk: 3.4 验证安装 -->## 3.4 验证安装
+## 3.4 验证安装
 
 ```python
 import agentscope
@@ -304,7 +304,7 @@ print(agentscope.__version__)
 # 输出: 1.0.17（或更高版本）
 ```
 
-#<!-- chunk: 3.5 API Key 配置 -->## 3.5 API Key 配置
+## 3.5 API Key 配置
 
 AgentScope 支持多种 LLM 提供商，需要配置相应的 API Key：
 
@@ -334,7 +334,7 @@ ollama serve
 ollama pull qwen2.5:7b
 ```
 
-#<!-- chunk: 3.6 AgentScope Studio 安装（可视化工具） -->## 3.6 AgentScope Studio 安装（可视化工具）
+## 3.6 AgentScope Studio 安装（可视化工具）
 
 AgentScope Studio 是**独立的可视化开发工具**，基于 Node.js，需要单独安装。它提供 Trace 可视化、Agent 实时交互、评测分析等功能。
 
@@ -426,7 +426,7 @@ docker run -p 3000:3000 agentscope/studio:latest
 
 <!-- chunk: 4. Hello World：第一个 Agent -->## 4. Hello World：第一个 Agent
 
-#<!-- chunk: 4.1 最简示例 — ReAct Agent 对话 -->## 4.1 最简示例 — ReAct Agent 对话
+## 4.1 最简示例 — ReAct Agent 对话
 
 ```python
 from agentscope.agent import ReActAgent, UserAgent
@@ -491,7 +491,7 @@ Friday: 1+1 的结果是 2。
 user: exit
 ```
 
-#<!-- chunk: 4.2 使用 OpenAI 模型 -->## 4.2 使用 OpenAI 模型
+## 4.2 使用 OpenAI 模型
 
 ```python
 from agentscope.model import OpenAIChatModel
@@ -511,7 +511,7 @@ agent = ReActAgent(
 )
 ```
 
-#<!-- chunk: 4.3 使用本地模型（Ollama） -->## 4.3 使用本地模型（Ollama）
+## 4.3 使用本地模型（Ollama）
 
 ```python
 from agentscope.model import OllamaChatModel
@@ -532,7 +532,7 @@ agent = ReActAgent(
 )
 ```
 
-#<!-- chunk: 4.4 无工具的简单对话 Agent -->## 4.4 无工具的简单对话 Agent
+## 4.4 无工具的简单对话 Agent
 
 ```python
 from agentscope.agent import ReActAgent
@@ -575,7 +575,7 @@ asyncio.run(simple_chat())
 
 <!-- chunk: 5. 项目结构与生态 -->## 5. 项目结构与生态
 
-#<!-- chunk: 5.1 AgentScope 项目矩阵 -->## 5.1 AgentScope 项目矩阵
+## 5.1 AgentScope 项目矩阵
 
 ```
 AgentScope 生态
@@ -610,7 +610,7 @@ AgentScope 生态
     └── Agentic RL 微调示例
 ```
 
-#<!-- chunk: 5.2 与现有专题的关系 -->## 5.2 与现有专题的关系
+## 5.2 与现有专题的关系
 
 | 本系列文档 | 对应专题现有内容 | 关系说明 |
 |-----------|----------------|---------|
@@ -644,7 +644,7 @@ AgentScope 内置了实用工具函数，通过 `toolkit.register_tool_function(
 
 <!-- chunk: 7. 快速排错 -->## 7. 快速排错
 
-#<!-- chunk: 7.1 常见安装问题 -->## 7.1 常见安装问题
+## 7.1 常见安装问题
 
 **AgentScope 核心安装问题**：
 
@@ -667,7 +667,7 @@ AgentScope 内置了实用工具函数，通过 `toolkit.register_tool_function(
 | Studio 启动后外网无法访问 | 默认绑定 127.0.0.1 | `as_studio --host 0.0.0.0` + 安全组放行 + 防火墙放行 |
 | ECS 公网 IP 无法访问 3000 端口 | 阿里云安全组未配置 | ECS 控制台 → 安全组 → 入方向 → 添加 TCP/3000 规则 |
 
-#<!-- chunk: 7.2 推荐开发环境 -->## 7.2 推荐开发环境
+## 7.2 推荐开发环境
 
 ```bash
 # 推荐使用 pyenv + virtualenv
@@ -686,7 +686,7 @@ python -c "import agentscope; print(agentscope.__version__)"
 
 <!-- chunk: 8. 最佳实践与反模式 -->## 8. 最佳实践与反模式
 
-#<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
 
 - **从 ReActAgent 开始**：AgentScope 的 ReAct Agent 是最核心的组件，先熟练使用再扩展
 - **API Key 用环境变量管理**：避免在代码中硬编码密钥，使用 `os.environ` 或 `.env` 文件
@@ -694,7 +694,7 @@ python -c "import agentscope; print(agentscope.__version__)"
 - **使用 stream=True**：生产环境始终开启流式输出，提升用户体验和响应速度
 - **安装 full 依赖**：开发阶段建议安装 `agentscope[full]`，避免缺少依赖导致的功能缺失
 
-#<!-- chunk: 反模式 -->## 反模式
+## 反模式
 
 - **忽视异步设计**：AgentScope 原生异步，不要用 `sync` 包装器绕过 `async/await`
 - **跳过环境验证**：安装后不验证版本，可能导致 API 不兼容
@@ -721,17 +721,17 @@ python -c "import agentscope; print(agentscope.__version__)"
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 

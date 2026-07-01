@@ -83,7 +83,7 @@ Falco 的社区生态也非常活跃。官方规则库包含超过 300 条预置
 
 在实际部署中，Falco 通常与其他安全工具配合使用形成纵深防御体系。Kyverno 或 OPA Gatekeeper 在准入阶段阻止不安全配置进入集群，Trivy 在构建阶段扫描镜像漏洞，而 Falco 则负责运行时阶段的最后一道防线——即使前两道防线被突破，Falco 仍然可以检测到异常行为并触发告警。这种「不信任任何单一防线」的纵深防御理念，是云原生安全架构的核心原则。
 
-#<!-- chunk: 云原生运行时威胁模型 -->## 云原生运行时威胁模型
+## 云原生运行时威胁模型
 
 云原生环境面临的运行时威胁与传统基础设施有本质差异。容器共享宿主机内核，内核漏洞可能导致容器逃逸。微服务架构下东西向流量激增，攻击者可能通过一个被攻陷的 Pod 横向移动到其他服务。CI/CD 管道中的恶意依赖可能在运行时触发异常行为。以下是 Falco 关注的核心威胁类别：
 
@@ -102,7 +102,7 @@ Falco 的社区生态也非常活跃。官方规则库包含超过 300 条预置
 
 <!-- chunk: 二、架构设计 -->## 二、架构设计
 
-#<!-- chunk: 2.1 核心组件架构 -->## 2.1 核心组件架构
+## 2.1 核心组件架构
 
 Falco 的架构由数据采集层、规则引擎层、输出通道层和响应集成层四个层次组成。数据采集层负责从内核捕获系统调用事件，支持多种采集驱动以适配不同的内核版本和部署环境。规则引擎层负责加载 YAML 格式的规则文件，将原始事件与规则条件进行匹配，生成安全告警。输出通道层负责将告警发送到多种目的地，包括标准输出、syslog、gRPC API 和 HTTP 端点。响应集成层通过 Falco Sidekick 实现与 Slack、Elasticsearch、Kafka 等 50+ 外部系统的集成。
 
@@ -148,7 +148,7 @@ graph TB
     style L fill:#f59e0b,stroke:#b45309,color:#fff
 ```
 
-#<!-- chunk: 2.2 数据采集方式对比 -->## 2.2 数据采集方式对比
+## 2.2 数据采集方式对比
 
 Falco 支持三种系统调用采集方式，每种方式的适用场景不同：
 
@@ -159,7 +159,7 @@ Falco 支持三种系统调用采集方式，每种方式的适用场景不同�
 | **Kernel Module** | 最低 (<2%) | 任意 | 需加载模块 | 传统环境 |
 | **gVisor** | 高 (10-20%) | 任意 | 最安全 | 沙箱容器 |
 
-#<!-- chunk: 2.3 工作原理详解 -->## 2.3 工作原理详解
+## 2.3 工作原理详解
 
 Falco 的工作流程分为四个阶段：事件捕获、解析过滤、规则匹配和告警输出。每个阶段的性能和正确性都直接影响整体的安全检测效果。
 
@@ -175,7 +175,10 @@ Falco 的工作流程分为四个阶段：事件捕获、解析过滤、规则�
 
 <!-- chunk: 三、核心配置 -->## 三、核心配置
 
-#<!-- chunk: 3.1 Helm 生产级部署 -->## 3.1 Helm 生产级部署
+## 3.1 Helm 生产级部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add falcosecurity https://falcosecurity.github.io/charts/
@@ -194,7 +197,7 @@ helm install falco falcosecurity/falco \
   --version 4.10.0
 ```
 
-#<!-- chunk: 3.2 Falco 主配置文件 -->## 3.2 Falco 主配置文件
+## 3.2 Falco 主配置文件
 
 Falco 的主配置文件 falco.yaml 控制着引擎的所有行为参数。在生产环境中，正确的配置对性能和检测效果至关重要。以下配置经过大规模生产环境验证，覆盖了日志、规则、输出、gRPC、性能优化等关键配置项。
 
@@ -275,7 +278,7 @@ data:
       watch_freq_sec: 1
 ```
 
-#<!-- chunk: 3.3 Falco Sidekick 部署 -->## 3.3 Falco Sidekick 部署
+## 3.3 Falco Sidekick 部署
 
 Falco Sidekick 是 Falco 事件的路由和分发中心。它接收 Falco 引擎通过 HTTP 输出发送的安全事件，根据配置将事件路由到多个目的地。Sidekick 的设计理念是「单一入口、多路输出」——Falco 只需要发送到一个 HTTP 端点，Sidekick 负责将事件分发到 Slack、Elasticsearch、Loki、Kafka、S3 等所有配置的目的地。
 
@@ -357,7 +360,7 @@ spec:
 
 <!-- chunk: 四、安全策略实战 -->## 四、安全策略实战
 
-#<!-- chunk: 4.1 核心安全规则详解 -->## 4.1 核心安全规则详解
+## 4.1 核心安全规则详解
 
 Falco 规则由三个核心概念组成：**List**（可复用的值列表）、**Macro**（可复用的条件组合）和 **Rule**（最终的检测规则）。理解这三者的层次关系是编写高质量规则的基础。
 
@@ -506,7 +509,7 @@ Rule 是最上层的检测单元，定义了完整的检测条件、输出格式
   tags: [filesystem, mitre_defense_evasion]
 ```
 
-#<!-- chunk: 4.2 K8s 审计规则 -->## 4.2 K8s 审计规则
+## 4.2 K8s 审计规则
 
 Falco 可以通过 K8s Audit Log 监控 API Server 事件，检测集群级别的安全事件。K8s Audit Log 是 API Server 内置的审计功能，记录了所有对 API Server 的请求（包括成功和失败的请求）。Falco 通过 k8saudit 插件接收这些审计事件，应用专门的审计规则进行检测。
 
@@ -580,7 +583,7 @@ Falco 可以通过 K8s Audit Log 监控 API Server 事件，检测集群级别�
   tags: [k8s, sa, mitre_persistence]
 ```
 
-#<!-- chunk: 4.3 自定义规则开发 -->## 4.3 自定义规则开发
+## 4.3 自定义规则开发
 
 编写自定义规则时应遵循以下原则。这些原则来自 Falco 社区的最佳实践总结和大规模生产环境的运维经验，遵循这些原则可以显著提高规则质量和降低维护成本。
 
@@ -605,7 +608,7 @@ falco -r /etc/falco/rules.d/custom-rules.yaml -A
 
 <!-- chunk: 五、合规与审计 -->## 五、合规与审计
 
-#<!-- chunk: 5.1 CIS Benchmark 规则 -->## 5.1 CIS Benchmark 规则
+## 5.1 CIS Benchmark 规则
 
 CIS (Center for Internet Security) Kubernetes Benchmark 是业界广泛认可的 K8s 安全配置基准。Falco 可以通过系统调用监控检测违反 CIS Benchmark 的运行时行为，作为 Kubescape 静态扫描的补充。
 
@@ -647,7 +650,7 @@ CIS Benchmark 检测与静态扫描的区别在于：静态扫描（如 Kubescap
   tags: [cis, k8s, compliance, kubelet]
 ```
 
-#<!-- chunk: 5.2 K8s Audit Policy 配置 -->## 5.2 K8s Audit Policy 配置
+## 5.2 K8s Audit Policy 配置
 
 为了使 Falco 接收 K8s Audit Log，需要配置 API Server 的审计策略。审计策略定义了哪些 API 请求需要被记录，以及记录的详细程度。审计策略的配置需要平衡安全可见性和存储成本——过于详细的审计会产生大量日志，增加存储压力和搜索延迟；过于粗略的审计可能遗漏关键的安全事件。
 
@@ -689,7 +692,7 @@ rules:
         resources: ["events"]
 ```
 
-#<!-- chunk: 5.3 审计日志配置 -->## 5.3 审计日志配置
+## 5.3 审计日志配置
 
 ```yaml
 # Falco 审计日志 ConfigMap
@@ -730,7 +733,7 @@ data:
 
 <!-- chunk: 六、监控与告警 -->## 六、监控与告警
 
-#<!-- chunk: 6.1 Prometheus ServiceMonitor -->## 6.1 Prometheus ServiceMonitor
+## 6.1 Prometheus ServiceMonitor
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -798,7 +801,7 @@ spec:
             summary: "Falco 事件处理延迟过高 (>1ms)"
 ```
 
-#<!-- chunk: 6.2 Grafana Dashboard JSON -->## 6.2 Grafana Dashboard JSON
+## 6.2 Grafana Dashboard JSON
 
 Falco 的安全仪表板是安全团队日常运营的核心工具。一个好的仪表板应该能够回答以下问题：当前有多少活跃的安全事件？最常触发的规则是哪些？哪些容器/命名空间产生了最多的安全事件？安全事件的趋势是在增加还是减少？
 
@@ -851,7 +854,7 @@ Falco 的安全仪表板是安全团队日常运营的核心工具。一个好�
 
 <!-- chunk: 七、自动化响应 -->## 七、自动化响应
 
-#<!-- chunk: 7.1 响应引擎架构 -->## 7.1 响应引擎架构
+## 7.1 响应引擎架构
 
 Falco 检测到安全事件后，可以通过 Webhook 触发自动化响应动作。响应引擎接收 Falco Sidekick 转发的事件，根据预定义的策略执行响应动作。自动化响应是安全运营成熟度的关键指标——手动响应的平均时间（MTTR）通常以小时计，而自动化响应可以将响应时间缩短到秒级。
 
@@ -948,7 +951,7 @@ rules:
 
 <!-- chunk: 八、最佳实践 -->## 八、最佳实践
 
-#<!-- chunk: 8.1 规则管理 -->## 8.1 规则管理
+## 8.1 规则管理
 
 良好的规则管理是 Falco 成功运行的关键。在企业环境中，规则通常需要经过开发、测试、审核、发布的完整流程。推荐的规则管理流程如下：
 
@@ -966,7 +969,7 @@ rules:
 | 标签分类 | 使用 MITRE ATT&CK 标签，便于分类统计和合规报告 |
 | 规则审计 | 每季度审核现有规则，删除过时规则，更新白名单 |
 
-#<!-- chunk: 8.2 性能优化 -->## 8.2 性能优化
+## 8.2 性能优化
 
 | 配置项 | 推荐值 | 说明 |
 |:---|:---|:---|
@@ -981,7 +984,7 @@ rules:
 
 对于高密度节点（运行 500+ Pod），建议将 Falco 的 CPU 限制提高到 2000m，内存限制提高到 2Gi。同时，可以考虑使用规则过滤（`--filter`）只监控特定命名空间或容器，减少不必要的事件处理开销。
 
-#<!-- chunk: 8.3 安全运营 -->## 8.3 安全运营
+## 8.3 安全运营
 
 安全运营不仅仅是部署工具，更需要建立可持续的流程和团队文化。以下是 Falco 安全运营的推荐实践：
 
@@ -999,7 +1002,7 @@ rules:
 
 <!-- chunk: 九、故障排查 -->## 九、故障排查
 
-#<!-- chunk: 9.1 常见问题 -->## 9.1 常见问题
+## 9.1 常见问题
 
 Falco 在生产环境中可能遇到各种运维问题。本节总结了最常见的问题场景及其排查方法。
 
@@ -1024,11 +1027,14 @@ Falco 在生产环境中可能遇到各种运维问题。本节总结了最常�
 | 容器元数据缺失 | K8s API 连接失败 | 检查 ServiceAccount 权限和 `kubernetes.enabled=true` |
 | gRPC 连接失败 | 证书或网络问题 | 检查 gRPC bind_address 和 TLS 配置 |
 
-#<!-- chunk: 9.2 诊断命令 -->## 9.2 诊断命令
+## 9.2 诊断命令
 
 当 Falco 出现异常时，以下诊断命令可以帮助快速定位问题。建议将这些命令整理为运维 Runbook，方便值班人员快速参考。
 
 Falco 的日志是最重要的诊断信息来源。通过 `kubectl logs` 查看 Falco 容器的标准输出和标准错误，可以找到大多数问题的根本原因。特别关注包含 "error"、"fatal"、"drop" 关键词的日志行。对于 eBPF probe 加载问题，日志通常会包含具体的内核版本和 BPF 特性兼容性信息。对于规则匹配问题，可以启用 debug 日志级别（`log_level: debug`）查看详细的事件匹配过程。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查 Falco 状态
@@ -1059,7 +1065,7 @@ kubectl get validatingwebhookconfiguration -o yaml | grep -A 10 falco
 
 本节深入分析几个典型的云原生安全攻击场景，并展示 Falco 如何在每个阶段检测和响应这些威胁。理解攻击者的战术、技术和程序（TTP）有助于编写更精准的检测规则。
 
-#<!-- chunk: 10.1 场景一：容器逃逸攻击 -->## 10.1 场景一：容器逃逸攻击
+## 10.1 场景一：容器逃逸攻击
 
 容器逃逸是云原生环境中最严重的安全风险之一。攻击者通过利用内核漏洞（如 CVE-2024-1086 nf_tables 漏洞、CVE-2022-0185 namespace 漏洞）或错误配置（如 privileged Pod、hostPath 挂载）突破容器隔离，获取宿主机控制权。容器逃逸的成功意味着攻击者可以控制该节点上运行的所有容器，进而通过 K8s 控制面横向移动到整个集群。
 
@@ -1106,7 +1112,7 @@ Falco 检测策略包括多个层面：首先在准入阶段（配合 Kyverno）
   tags: [container, escape, mitre_privilege_escalation]
 ```
 
-#<!-- chunk: 10.2 场景二：供应链投毒攻击 -->## 10.2 场景二：供应链投毒攻击
+## 10.2 场景二：供应链投毒攻击
 
 供应链投毒攻击（Supply Chain Poisoning）是近年来增长最快的攻击类型之一。攻击者通过在公共镜像仓库中上传恶意镜像、在 NPM/PyPI 等包管理器中发布恶意依赖包、或者劫持 CI/CD 管道注入恶意代码，在受害者不知情的情况下将恶意代码引入生产环境。与传统的直接攻击不同，供应链攻击利用的是开发者对开源生态的信任，因此具有极高的隐蔽性和破坏力。
 
@@ -1143,7 +1149,7 @@ Falco 检测供应链投毒的策略侧重于运行时行为监控。即使恶�
   tags: [credential_access, supply_chain, mitre_credential_access]
 ```
 
-#<!-- chunk: 10.3 场景三：横向移动攻击 -->## 10.3 场景三：横向移动攻击
+## 10.3 场景三：横向移动攻击
 
 在微服务架构中，攻击者攻陷一个 Pod 后，通常会尝试横向移动到其他服务。横向移动是攻击链中的关键环节，它决定了攻击的影响范围。如果横向移动被及时发现和阻断，攻击的损害可以限制在单个 Pod 或服务内；如果横向移动成功，攻击者可能获取整个集群的控制权。
 
@@ -1179,7 +1185,7 @@ Falco 通过监控容器内的 K8s API 调用和异常网络连接来检测横�
   tags: [network, lateral_movement, mitre_discovery]
 ```
 
-#<!-- chunk: 10.4 场景四：数据外泄 -->## 10.4 场景四：数据外泄
+## 10.4 场景四：数据外泄
 
 数据外泄（Data Exfiltration）是攻击链的最后阶段，也是对企业影响最大的阶段。攻击者通过各种技术将窃取的数据传输到外部控制的服务器。常见的外泄通道包括：HTTPS 隐蔽通道、DNS 隧道、云对象存储（S3/GCS）同步、以及通过 Webhook 发送到外部服务。
 
@@ -1237,7 +1243,7 @@ Falco 检测数据外泄的策略包括：监控大量出站数据传输、检�
 
 在大规模生产环境（数百个节点、数千个 Pod）中，Falco 的性能表现直接影响安全检测的有效性。本节提供基于实际生产环境的性能基准数据和调优建议。
 
-#<!-- chunk: 11.1 性能基准数据 -->## 11.1 性能基准数据
+## 11.1 性能基准数据
 
 以下数据基于 64 核 / 256GB 内存节点、运行 200 个 Pod 的基准测试：
 
@@ -1249,7 +1255,7 @@ Falco 检测数据外泄的策略包括：监控大量出站数据传输、检�
 | 事件丢失率 | <0.01% | <0.05% | <0.01% |
 | 启动时间 | 3s | 5s | 2s |
 
-#<!-- chunk: 11.2 调优策略 -->## 11.2 调优策略
+## 11.2 调优策略
 
 在高负载环境下，建议采用以下调优策略。性能调优是一个持续迭代的过程，需要在安全检测覆盖率和系统资源消耗之间找到平衡点。
 
@@ -1265,7 +1271,7 @@ Falco 的 `snaplen` 参数控制捕获的事件数据长度。默认值 80 可�
 
 <!-- chunk: 十二、与其他安全工具集成 -->## 十二、与其他安全工具集成
 
-#<!-- chunk: 12.1 Falco + Kyverno 联合防护 -->## 12.1 Falco + Kyverno 联合防护
+## 12.1 Falco + Kyverno 联合防护
 
 Falco 和 Kyverno 在云原生安全中形成互补：Kyverno 在准入阶段阻止不安全配置进入集群，Falco 在运行时检测逃逸准入控制的安全事件。这种「前后配合」的模式构成了纵深防御的核心。
 
@@ -1278,7 +1284,7 @@ Falco 和 Kyverno 在云原生安全中形成互补：Kyverno 在准入阶段阻
 
 在实际部署中，建议先将 Kyverno 策略设置为 audit 模式（只记录不拒绝），观察 1-2 周的合规状态，然后逐步切换到 enforce 模式。Falco 规则也应同步调整，在 Kyverno enforce 模式生效后，将对应的运行时检测规则优先级从 Critical 降低到 Warning（因为准入控制已经阻止了大部分攻击）。
 
-#<!-- chunk: 12.2 Falco + SIEM 集成 -->## 12.2 Falco + SIEM 集成
+## 12.2 Falco + SIEM 集成
 
 企业级安全运营通常使用 SIEM（安全信息与事件管理）平台进行集中化的安全事件管理。Falco 事件可以通过以下通道集成到 SIEM 平台，实现容器安全事件与传统安全事件的统一分析。
 
@@ -1290,7 +1296,7 @@ Falco Sidekick 提供了丰富的输出插件，支持主流 SIEM 平台的原�
 - **Microsoft Sentinel**：通过 Log Analytics Agent 收集 Falco 日志，利用 KQL 查询分析
 - **Loki**：通过 Falco Sidekick 的 Loki 输出，配合 Grafana 实现轻量级日志分析
 
-#<!-- chunk: 12.3 Falco + SOAR 自动化 -->## 12.3 Falco + SOAR 自动化
+## 12.3 Falco + SOAR 自动化
 
 SOAR（安全编排自动化与响应）平台可以基于 Falco 事件触发自动化响应流程。典型的 SOAR 集成场景包括：
 
@@ -1299,7 +1305,7 @@ SOAR（安全编排自动化与响应）平台可以基于 Falco 事件触发自
 - 自动封禁恶意 IP 地址（联动防火墙/WAF）
 - 自动轮换可能泄露的凭据（联动 Vault）
 
-#<!-- chunk: 12.4 Falco 在多云环境中的部署 -->## 12.4 Falco 在多云环境中的部署
+## 12.4 Falco 在多云环境中的部署
 
 在多云架构（AWS EKS + GCP GKE + Azure AKS）中，Falco 需要在每个集群独立部署，但需要统一的规则管理和事件汇聚。多云环境中的 Falco 部署面临以下挑战：不同云厂商的托管 K8s 服务对节点访问权限的限制不同（如 EKS Fargate 不支持 DaemonSet），不同集群的内核版本可能不同（需要选择不同的 eBPF 驱动），以及需要将分散在各集群的安全事件汇聚到统一的分析平台。
 
@@ -1312,7 +1318,7 @@ SOAR（安全编排自动化与响应）平台可以基于 Falco 事件触发自
 
 在边缘计算场景（K3s 集群分布在边缘节点）中，Falco 的资源消耗需要特别关注。边缘节点通常 CPU 和内存资源有限，可能无法承受标准 Falco 部署的开销。建议在边缘场景中使用轻量级规则集，仅保留 Critical 和 High 优先级规则（如加密货币挖矿检测、反向 Shell 检测、特权容器检测），将 Low 和 Info 级别规则移除。同时，可以将缓冲区大小降低到 3（4MB），减少内存占用。另一种方案是在边缘节点仅收集原始事件，发送到中心集群进行规则匹配和分析。
 
-#<!-- chunk: 12.5 Falco 插件系统 -->## 12.5 Falco 插件系统
+## 12.5 Falco 插件系统
 
 Falco 0.36+ 引入了插件系统，支持扩展事件源和字段提取器。插件系统是 Falco 架构的一次重大升级，使其检测能力不再局限于系统调用事件，可以扩展到更广泛的数据源。
 
@@ -1327,7 +1333,7 @@ Falco 0.36+ 引入了插件系统，支持扩展事件源和字段提取器。�
 
 插件系统使 Falco 的检测能力不再局限于系统调用，可以扩展到云审计日志、应用日志等更广泛的数据源。这为统一的运行时安全监控提供了可能——用一个规则引擎同时监控容器行为和云平台操作。在企业环境中，这意味着安全团队只需要维护一套规则语言和告警管道，就能覆盖从容器到云平台的全部运行时安全监控需求。
 
-#<!-- chunk: 12.6 Falco 与服务网格集成 -->## 12.6 Falco 与服务网格集成
+## 12.6 Falco 与服务网格集成
 
 在部署了 Istio 或 Linkerd 服务网格的集群中，Falco 可以与服务网格的 mTLS 能力形成互补。服务网格提供加密传输和身份认证，Falco 提供运行时行为监控。具体而言：
 
@@ -1361,8 +1367,8 @@ Falco 0.36+ 引入了插件系统，支持扩展事件源和字段提取器。�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
 - Kyverno 企业级策略管理深度实践
@@ -1380,8 +1386,8 @@ Falco 0.36+ 引入了插件系统，支持扩展事件源和字段提取器。�
 - 02-sysdig-enterprise-container-security
 - 03-aqua-enterprise-container-security
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

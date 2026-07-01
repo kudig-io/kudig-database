@@ -29,6 +29,7 @@ prerequisites:
 - cloud-provider-basics
 - logging-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 日志架构（Logging Architecture）
@@ -121,4 +122,4 @@ kubelet 通过以下配置控制日志轮转：
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

@@ -49,7 +49,7 @@ Source: [v0.12.0](https://github.com/kubernetes-sigs/kind/releases/tag/v0.12.0)
 - Base image updates
   - [[containerd|Containerd]] version 1.5.10
   - Crictl 1.23.0
-  - [[CNI Plugins|CNI plugins]] 1.1.0
+  - [[entities/cni-plugins.md|CNI plugins]] 1.1.0
   - Containerd containerd/fuse-overlayfs-snapshotter 1.0.4
 
 New Node images have been built for kind `v0.12.0`, please use these **exact** images (IE like `kindest/node:v1.23.4@sha256:0e34f0d0fd448aa2f2819cfd74e99fe5793a6e4938b328f657c8e3f81ee0dfb9` including the digest) or build your own as we may need to change the image format again in the future :sweat_smile:

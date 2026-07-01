@@ -76,5 +76,5 @@ Porter 是一个 CNAB (Cloud Native Application Bundle) 包管理器，用于将
 
 - [[helm]] — Helm
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

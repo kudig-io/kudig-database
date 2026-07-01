@@ -5,6 +5,7 @@ tags: ["domain-11", "变更管理", "SRE", "运维", "灰度发布", "回滚", "
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 status: reviewed
 ---
 
@@ -61,6 +62,9 @@ status: reviewed
 
 ### 版本级回滚
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # Deployment 回滚到上一版本
 kubectl rollout undo deployment/my-app
@@ -72,6 +76,9 @@ kubectl rollout undo deployment/my-app --to-revision=3
 适用场景：镜像版本回退，回滚时间 < 30 秒。
 
 ### 配置级回滚
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 应用已保存的备份配置
@@ -110,7 +117,7 @@ kubectl apply -f configmap-backup.yaml
 
 ## 相关链接
 
-- [[domain-11-production-operations/01-production-sre-daily-ops|production-sre-daily-ops]] — 日常巡检与值班手册
-- [[concepts/cluster-upgrade-paths|cluster-upgrade-paths]] — 集群升级路径
-- [[domain-08-release-change-management/98-merged-indexes/index|gitops-deployment-patterns]] — GitOps 部署模式
-- [[domain-11-production-operations/04-incident-response-template|incident-response-playbook]] — 事件响应操作手册
+- [[domain-11-production-operations/01-production-sre-daily-ops.md|production-sre-daily-ops]] — 日常巡检与值班手册
+- [[concepts/cluster-upgrade-paths.md|cluster-upgrade-paths]] — 集群升级路径
+- [[domain-08-release-change-management/98-merged-indexes/index.md|gitops-deployment-patterns]] — GitOps 部署模式
+- [[domain-11-production-operations/04-incident-response-template.md|incident-response-playbook]] — 事件响应操作手册

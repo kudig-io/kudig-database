@@ -139,7 +139,7 @@ k8s_versions:
 | **Kuma** | Envoy 服务网格 | Sandbox | v2.10.0 | 3k+ | Apache-2.0 | C++ (Envoy) |
 | **Consul Connect** | HashiCorp 服务网格 | - | v1.20.0 | 28k+ | BSL-1.1 | C++ (Envoy) |
 | **Gateway API** | K8s 流量管理标准 | K8s SIG | v1.2.0 | - | Apache-2.0 | - |
-| **[[entities/emissary-ingress|emissary-ingress]]** | API 网关 | Incubating | v3.10.0 | 4.5k+ | Apache-2.0 | C++ (Envoy) |
+| **[[entities/emissary-ingress.md|emissary-ingress]]** | API 网关 | Incubating | v3.10.0 | 4.5k+ | Apache-2.0 | C++ (Envoy) |
 | **Contour** | Envoy Ingress | Incubating | v1.30.0 | 3.5k+ | Apache-2.0 | C++ (Envoy) |
 | **Traefik** | 云原生代理/网关 | - | v3.3 | 54k+ | MIT | Go |
 
@@ -186,7 +186,7 @@ graph TB
 
 <!-- chunk: Istio (CNCF Graduated) -->## Istio (CNCF Graduated)
 
-#<!-- chunk: 核心架构 -->## 核心架构
+## 核心架构
 
 Istio 自2017年由Google、IBM、Lyft联合推出以来，已发展成为功能最全面、社区最活跃的服务网格平台。2023年从CNCF毕业后，Istio 持续在企业级场景中占据主导地位。
 
@@ -203,7 +203,7 @@ Istio 自2017年由Google、IBM、Lyft联合推出以来，已发展成为功能
     - 优势: 简化部署、降低资源消耗、减少组件间通信开销
 ```
 
-#<!-- chunk: 关键特性详解 -->## 关键特性详解
+## 关键特性详解
 
 | 特性 | 说明 | 生产级配置要点 |
 |:---|:---|:---|
@@ -215,7 +215,7 @@ Istio 自2017年由Google、IBM、Lyft联合推出以来，已发展成为功能
 | Ambient Mesh | 无 Sidecar 模式 (ztunnel + waypoints) | 适合资源敏感场景和新部署 |
 | Gateway API | 原生支持 K8s Gateway API 标准 | 推荐用于新项目替代 Ingress |
 
-#<!-- chunk: Ambient Mesh (无 Sidecar 模式) -->## Ambient Mesh (无 Sidecar 模式)
+## Ambient Mesh (无 Sidecar 模式)
 
 Istio Ambient Mesh 是服务网格架构演进的重要里程碑，通过消除每个 Pod 的 Sidecar 代理，大幅降低资源开销和运维复杂度：
 
@@ -240,7 +240,7 @@ graph LR
     end
 ```
 
-#<!-- chunk: 版本支持策略 -->## 版本支持策略
+## 版本支持策略
 
 Istio 采用N-3版本支持策略，每个版本维护约6个月：
 
@@ -258,7 +258,7 @@ Istio 采用N-3版本支持策略，每个版本维护约6个月：
 
 <!-- chunk: Linkerd (CNCF Graduated) -->## Linkerd (CNCF Graduated)
 
-#<!-- chunk: 核心哲学与设计理念 -->## 核心哲学与设计理念
+## 核心哲学与设计理念
 
 Linkerd 诞生于2016年，是最早的服务网格项目（最初基于 Finagle/Scala，后以 Rust 重写数据平面），于2021年成为第二个CNCF毕业的服务网格项目。Linkerd 坚守"极简主义"设计哲学，在功能覆盖度和运维简洁性之间做出了明确的取舍：
 
@@ -285,7 +285,7 @@ Linkerd 诞生于2016年，是最早的服务网格项目（最初基于 Finagle
     - viz 扩展: 一键安装仪表板和监控
 ```
 
-#<!-- chunk: 架构组件 -->## 架构组件
+## 架构组件
 
 | 组件 | 作用 | 资源建议 |
 |:---|:---|:---|
@@ -295,7 +295,7 @@ Linkerd 诞生于2016年，是最早的服务网格项目（最初基于 Finagle
 | proxy-injector | Sidecar 自动注入 Webhook | CPU: 50-100m, Memory: 50-128Mi |
 | tap / viz | 流量观察与仪表板 | CPU: 50-200m, Memory: 50-256Mi |
 
-#<!-- chunk: 与 Istio 核心差异对比 -->## 与 Istio 核心差异对比
+## 与 Istio 核心差异对比
 
 | 维度 | Istio | Linkerd |
 |:---|:---|:---|
@@ -317,7 +317,7 @@ Linkerd 诞生于2016年，是最早的服务网格项目（最初基于 Finagle
 
 <!-- chunk: Cilium Service Mesh -->## Cilium Service Mesh
 
-#<!-- chunk: eBPF 原生服务网格 -->## eBPF 原生服务网格
+## eBPF 原生服务网格
 
 Cilium 基于 eBPF（Extended Berkeley Packet Filter）技术实现了内核级的服务网格能力，代表了服务网格技术演进的下一个方向。与传统的用户空间代理模式不同，Cilium 将网络和安全处理逻辑直接嵌入 Linux 内核，消除了用户态/内核态切换的开销。
 
@@ -345,7 +345,7 @@ Cilium 基于 eBPF（Extended Berkeley Packet Filter）技术实现了内核级�
     - 服务转发延迟低于 Sidecar 模式
 ```
 
-#<!-- chunk: 三种服务模式 -->## 三种服务模式
+## 三种服务模式
 
 | 模式 | 描述 | 性能 | 适用场景 |
 |:---|:---|:---|:---|
@@ -360,7 +360,7 @@ Cilium 基于 eBPF（Extended Berkeley Packet Filter）技术实现了内核级�
 
 <!-- chunk: Envoy 与网关生态 -->## Envoy 与网关生态
 
-#<!-- chunk: Envoy (CNCF Graduated) -->## Envoy (CNCF Graduated)
+## Envoy (CNCF Graduated)
 
 Envoy 是由 Lyft 开发的高性能 L3/L4/L7 代理，自2017年加入CNCF后迅速成为云原生服务代理的事实标准。几乎所有主流服务网格（Istio、Consul Connect、Kuma）和API网关（Emissary、Contour、Envoy Gateway）都选择 Envoy 作为数据平面：
 
@@ -394,7 +394,7 @@ Envoy 是由 Lyft 开发的高性能 L3/L4/L7 代理，自2017年加入CNCF后�
     - 管理接口 (Runtime 配置、调试端点)
 ```
 
-#<!-- chunk: Gateway API (K8s SIG) -->## Gateway API (K8s SIG)
+## Gateway API (K8s SIG)
 
 Gateway API 是 Kubernetes 社区推动的新一代流量管理标准，旨在取代传统的 Ingress 资源：
 
@@ -428,7 +428,7 @@ Gateway API 是 Kubernetes 社区推动的新一代流量管理标准，旨在�
   - HAProxy
 ```
 
-#<!-- chunk: 网关实现对比 -->## 网关实现对比
+## 网关实现对比
 
 | 项目 | 基于 | 特点 | Gateway API | 适用场景 |
 |:---|:---|:---|:---|:---|
@@ -443,7 +443,7 @@ Gateway API 是 Kubernetes 社区推动的新一代流量管理标准，旨在�
 
 <!-- chunk: Dapr 分布式应用运行时 -->## Dapr 分布式应用运行时
 
-#<!-- chunk: 定位与价值 -->## 定位与价值
+## 定位与价值
 
 Dapr (Distributed Application Runtime) 是微软发起的分布式应用运行时项目，与传统的服务网格有着本质区别。Dapr 不在网络层提供透明代理，而是在应用层通过标准化的 HTTP/gRPC API 提供分布式系统能力的构建块（Building Blocks）。这种定位使得 Dapr 与服务网格互补而非竞争：
 
@@ -489,7 +489,7 @@ Dapr (Distributed Application Runtime) 是微软发起的分布式应用运行�
     - 多后端: Redis / etcd
 ```
 
-#<!-- chunk: 与服务网格协同关系 -->## 与服务网格协同关系
+## 与服务网格协同关系
 
 | 维度 | Dapr | 服务网格 (Istio/Linkerd) |
 |:---|:---|:---|
@@ -512,7 +512,7 @@ Dapr (Distributed Application Runtime) 是微软发起的分布式应用运行�
 
 <!-- chunk: Consul Connect (HashiCorp) -->## Consul Connect (HashiCorp)
 
-#<!-- chunk: 企业级服务网格与 HashiCorp 生态集成 -->## 企业级服务网格与 HashiCorp 生态集成
+## 企业级服务网格与 HashiCorp 生态集成
 
 Consul Connect 是 HashiCorp Consul 的服务网格扩展，将服务发现、配置管理、服务网格能力统一在一个平台中。其核心差异化优势在于与 HashiCorp 生态（Terraform、Vault、Nomad）的深度集成，以及对 Kubernetes 和虚拟机工作负载的统一管理能力：
 
@@ -556,7 +556,7 @@ Consul Connect 是 HashiCorp Consul 的服务网格扩展，将服务发现、�
 
 <!-- chunk: 其他服务网格项目 -->## 其他服务网格项目
 
-#<!-- chunk: Kuma (Kong) -->## Kuma (Kong)
+## Kuma (Kong)
 
 Kuma 是 Kong 公司开源的基于 Envoy 的服务网格平台，提供 Universal 和 Kubernetes 两种部署模式。其核心特色在于与 Kong Gateway 的天然集成和 Multi-Zone 多区域管理能力：
 
@@ -593,7 +593,7 @@ Kuma 是 Kong 公司开源的基于 Envoy 的服务网格平台，提供 Univers
 
 <!-- chunk: 服务网格选型决策指南 -->## 服务网格选型决策指南
 
-#<!-- chunk: 选型决策树 -->## 选型决策树
+## 选型决策树
 
 ```mermaid
 graph TD
@@ -625,7 +625,7 @@ graph TD
     ISTIO2 --> FINAL
 ```
 
-#<!-- chunk: 场景化选型推荐 -->## 场景化选型推荐
+## 场景化选型推荐
 
 | 企业场景 | 推荐方案 | 理由 |
 |:---|:---|:---|
@@ -659,7 +659,7 @@ graph TD
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
 - Istio 企业级服务网格架构与实践
 - Linkerd 企业级服务网格深度实践
 - Consul Connect 企业级服务网格管理

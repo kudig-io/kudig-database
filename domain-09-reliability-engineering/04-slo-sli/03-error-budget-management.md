@@ -862,5 +862,5 @@ sum(rate(http_requests_total{status=~"5.."}[30d]))
 
 ## 相关
 
-- [[domain-09-reliability-engineering/04-slo-sli/02-slo-implementation-guide]] — SLO 设定与实施指南
-- [[domain-09-reliability-engineering/04-slo-sli/04-burn-rate-alerting]] — Burn Rate 告警
+- [[domain-09-reliability-engineering/04-slo-sli/02-slo-implementation-guide.md|02 slo implementation guide]] — SLO 设定与实施指南
+- [[domain-09-reliability-engineering/04-slo-sli/04-burn-rate-alerting.md|04 burn rate alerting]] — Burn Rate 告警

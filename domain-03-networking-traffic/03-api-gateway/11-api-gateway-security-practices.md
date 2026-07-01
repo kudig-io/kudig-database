@@ -73,7 +73,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. API 网关安全架构概述 -->## 1. API 网关安全架构概述
 
-#<!-- chunk: 1.1 纵深防御模型 -->## 1.1 纵深防御模型
+## 1.1 纵深防御模型
 
 API 网关作为流量入口，是实施纵深防御（Defense in Depth）的核心位置。安全能力从外到内分为多个层次：
 
@@ -115,7 +115,7 @@ API 网关作为流量入口，是实施纵深防御（Defense in Depth）的核
 上游微服务（已认证、已授权的请求）
 ```
 
-#<!-- chunk: 1.2 零信任在 API 网关的实践 -->## 1.2 零信任在 API 网关的实践
+## 1.2 零信任在 API 网关的实践
 
 ```
 传统边界安全模型                    零信任模型
@@ -134,7 +134,7 @@ API 网关作为流量入口，是实施纵深防御（Defense in Depth）的核
 
 <!-- chunk: 2. 认证模式 -->## 2. 认证模式
 
-#<!-- chunk: 2.1 JWT Token 验证 -->## 2.1 JWT Token 验证
+## 2.1 JWT Token 验证
 
 JWT（JSON Web Token）是最常见的无状态认证方案，网关侧负责验签，无需回调认证服务。
 
@@ -227,7 +227,7 @@ curl -X PUT http://127.0.0.1:9180/apisix/admin/routes/1 \
    │◄─ 200 OK ──────────────│                           │
 ```
 
-#<!-- chunk: 2.2 OIDC / OAuth2 标准流程 -->## 2.2 OIDC / OAuth2 标准流程
+## 2.2 OIDC / OAuth2 标准流程
 
 ```
                     OIDC 授权码流程（网关代理模式）
@@ -292,7 +292,7 @@ spec:
       X-User-Roles: "realm_access.roles"
 ```
 
-#<!-- chunk: 2.3 mTLS 客户端证书认证 -->## 2.3 mTLS 客户端证书认证
+## 2.3 mTLS 客户端证书认证
 
 适用于服务间 API 调用、B2B 集成场景，提供最强的身份绑定保证。
 
@@ -328,8 +328,8 @@ spec:
   hosts:
     - "api.example.com"
   http:
-    - match:
-        - headers:
+    - matchers:
+      - - headers=""
             # 网关提取证书 Subject 注入 Header
             x-forwarded-client-cert:
               regex: ".*CN=partner-a.*"
@@ -340,7 +340,7 @@ spec:
               number: 8080
 ```
 
-#<!-- chunk: 2.4 API Key 认证 -->## 2.4 API Key 认证
+## 2.4 API Key 认证
 
 ```yaml
 # Higress API Key 插件
@@ -373,7 +373,7 @@ curl -X PUT http://127.0.0.1:9180/apisix/admin/consumers/service-a \
   }'
 ```
 
-#<!-- chunk: 2.5 HMAC 签名认证 -->## 2.5 HMAC 签名认证
+## 2.5 HMAC 签名认证
 
 HMAC 适用于高安全要求的 API，防止请求被重放或篡改。
 
@@ -409,7 +409,7 @@ Authorization: hmac username="access-key-id", algorithm="hmac-sha256",
 
 <!-- chunk: 3. 鉴权体系 -->## 3. 鉴权体系
 
-#<!-- chunk: 3.1 OPA（Open Policy Agent）集成 -->## 3.1 OPA（Open Policy Agent）集成
+## 3.1 OPA（Open Policy Agent）集成
 
 OPA 提供统一的声明式策略引擎，将鉴权逻辑从应用代码中解耦。
 
@@ -472,7 +472,7 @@ deny if {
 allow = false if deny
 ```
 
-#<!-- chunk: 3.2 路由级细粒度权限绑定 -->## 3.2 路由级细粒度权限绑定
+## 3.2 路由级细粒度权限绑定
 
 ```yaml
 # APISIX 路由级 OPA 鉴权配置
@@ -501,7 +501,7 @@ routes:
         article-svc:8080: 1
 ```
 
-#<!-- chunk: 3.3 RBAC 模式 -->## 3.3 RBAC 模式
+## 3.3 RBAC 模式
 
 ```
 RBAC 层级结构
@@ -531,7 +531,7 @@ RBAC 层级结构
 
 <!-- chunk: 4. WAF 防护 -->## 4. WAF 防护
 
-#<!-- chunk: 4.1 WAF 在网关中的位置 -->## 4.1 WAF 在网关中的位置
+## 4.1 WAF 在网关中的位置
 
 ```
                 请求处理流水线（含 WAF）
@@ -548,7 +548,7 @@ RBAC 层级结构
  └────────────┘    └────────────┘    └────────────┘    └────────────┘
 ```
 
-#<!-- chunk: 4.2 ModSecurity 集成（Higress） -->## 4.2 ModSecurity 集成（Higress）
+## 4.2 ModSecurity 集成（Higress）
 
 ```yaml
 apiVersion: extensions.higress.io/v1alpha1
@@ -582,7 +582,7 @@ spec:
         SecRule REMOTE_ADDR "!@ipMatch 10.0.0.0/8,172.16.0.0/12"
 ```
 
-#<!-- chunk: 4.3 OWASP 核心规则集覆盖 -->## 4.3 OWASP 核心规则集覆盖
+## 4.3 OWASP 核心规则集覆盖
 
 | 规则文件 | 防护类型 | 关键漏洞 |
 |---------|---------|---------|
@@ -596,7 +596,7 @@ spec:
 | REQUEST-944 | Java 攻击 | Log4Shell, Struts |
 | REQUEST-913 | 扫描器检测 | Nikto, sqlmap 特征 |
 
-#<!-- chunk: 4.4 各产品 WAF 插件对比 -->## 4.4 各产品 WAF 插件对比
+## 4.4 各产品 WAF 插件对比
 
 | 产品 | WAF 实现 | 规则集 | 检测模式 | 性能影响 |
 |------|---------|-------|---------|---------|
@@ -610,7 +610,7 @@ spec:
 
 <!-- chunk: 5. 限流策略 -->## 5. 限流策略
 
-#<!-- chunk: 5.1 限流算法对比 -->## 5.1 限流算法对比
+## 5.1 限流算法对比
 
 ```
 令牌桶算法（Token Bucket）          滑动窗口算法（Sliding Window）
@@ -640,7 +640,7 @@ spec:
 └─────────────────────────┘
 ```
 
-#<!-- chunk: 5.2 本地限流 vs 分布式限流 -->## 5.2 本地限流 vs 分布式限流
+## 5.2 本地限流 vs 分布式限流
 
 ```
 本地限流（适合单实例或精度要求不高）
@@ -674,7 +674,7 @@ spec:
   实际整体限制 = 精确 100 req/s
 ```
 
-#<!-- chunk: 5.3 Higress 多维度限流配置 -->## 5.3 Higress 多维度限流配置
+## 5.3 Higress 多维度限流配置
 
 ```yaml
 apiVersion: extensions.higress.io/v1alpha1
@@ -729,7 +729,7 @@ spec:
       timeout: 50  # ms
 ```
 
-#<!-- chunk: 5.4 APISIX 限流插件对比 -->## 5.4 APISIX 限流插件对比
+## 5.4 APISIX 限流插件对比
 
 ```yaml
 # limit-count：固定窗口，分布式支持
@@ -767,7 +767,7 @@ plugins:
 
 <!-- chunk: 6. Bot 检测与 DDoS 防护 -->## 6. Bot 检测与 DDoS 防护
 
-#<!-- chunk: 6.1 Bot 指纹识别 -->## 6.1 Bot 指纹识别
+## 6.1 Bot 指纹识别
 
 ```
 Bot 检测信号矩阵
@@ -785,7 +785,7 @@ Bot 检测信号矩阵
   └── TLS 指纹异常（JA3 指纹与 UA 不匹配）
 ```
 
-#<!-- chunk: 6.2 Challenge 机制（Higress） -->## 6.2 Challenge 机制（Higress）
+## 6.2 Challenge 机制（Higress）
 
 ```yaml
 apiVersion: extensions.higress.io/v1alpha1
@@ -813,7 +813,7 @@ spec:
       - "Bingbot"
 ```
 
-#<!-- chunk: 6.3 DDoS 防护架构 -->## 6.3 DDoS 防护架构
+## 6.3 DDoS 防护架构
 
 ```
 DDoS 防护层次
@@ -839,7 +839,7 @@ DDoS 防护层次
 
 <!-- chunk: 7. 证书管理 -->## 7. 证书管理
 
-#<!-- chunk: 7.1 cert-manager 集成 -->## 7.1 cert-manager 集成
+## 7.1 cert-manager 集成
 
 ```yaml
 # 安装 cert-manager
@@ -871,7 +871,7 @@ spec:
               key: access-key-id
 ```
 
-#<!-- chunk: 7.2 自动证书申请与轮转 -->## 7.2 自动证书申请与轮转
+## 7.2 自动证书申请与轮转
 
 ```yaml
 # Gateway API：自动申请证书
@@ -913,7 +913,7 @@ spec:
   duration: 2160h           # 证书有效期 90 天
 ```
 
-#<!-- chunk: 7.3 证书轮转零停机流程 -->## 7.3 证书轮转零停机流程
+## 7.3 证书轮转零停机流程
 
 ```
 时间轴
@@ -938,7 +938,7 @@ spec:
 
 <!-- chunk: 8. 各产品安全能力对比表 -->## 8. 各产品安全能力对比表
 
-#<!-- chunk: 8.1 认证能力矩阵 -->## 8.1 认证能力矩阵
+## 8.1 认证能力矩阵
 
 | 认证方式 | Higress | APISIX | Kong | Envoy Gateway | Traefik |
 |---------|---------|-------|------|--------------|---------|
@@ -948,7 +948,7 @@ spec:
 | **API Key** | ⭐⭐⭐⭐⭐ Wasm 插件 | ⭐⭐⭐⭐⭐ 内置 | ⭐⭐⭐⭐⭐ 内置 | ⭐⭐⭐ 通过 Ext-authz | ⭐⭐⭐ 中间件 |
 | **HMAC** | ⭐⭐⭐ Wasm 插件 | ⭐⭐⭐⭐⭐ 内置 hmac-auth | ⭐⭐⭐⭐ 内置 | ⭐⭐ 自定义实现 | ⭐⭐ 自定义 |
 
-#<!-- chunk: 8.2 鉴权与 WAF 矩阵 -->## 8.2 鉴权与 WAF 矩阵
+## 8.2 鉴权与 WAF 矩阵
 
 | 能力 | Higress | APISIX | Kong | Envoy Gateway | Traefik |
 |------|---------|-------|------|--------------|---------|
@@ -978,7 +978,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-40-cloud-native-api-gateway MOC
-- [[domain-03-networking-traffic/README|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
 - Domain-40 云原生 API 网关 — 开源项目索引
 - 01 - 云原生 API 网关架构总览
 - 02 - Kubernetes Gateway API 标准深度解析

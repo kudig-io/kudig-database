@@ -74,7 +74,7 @@ created: "2026-05-23"
 
 Traefik 是由 Traefik Labs（前 Containous）开发的云原生反向代理和负载均衡器，以 **Go 语言**原生实现，以极低的资源占用和动态配置能力著称。
 
-#<!-- chunk: 核心特点 -->## 核心特点
+## 核心特点
 
 - **轻量高效**：单二进制文件，内存占用极低（生产环境 50~200MB）
 - **动态配置**：自动发现服务变化，零重启配置热更新
@@ -82,7 +82,7 @@ Traefik 是由 Traefik Labs（前 Containous）开发的云原生反向代理和
 - **多 Provider 支持**：Kubernetes、Docker、Consul、文件等 20+ 数据源
 - **内置监控**：自带 Web Dashboard，Prometheus 指标开箱即用
 
-#<!-- chunk: 产品线 -->## 产品线
+## 产品线
 
 | 产品 | 定位 | 许可 |
 |------|------|------|
@@ -90,7 +90,7 @@ Traefik 是由 Traefik Labs（前 Containous）开发的云原生反向代理和
 | **Traefik Enterprise** | 企业版（高级路由、集群模式） | 商业许可 |
 | **Traefik Hub** | API 管理与发布平台（SaaS） | 免费/付费分层 |
 
-#<!-- chunk: v2 vs v3 主要变化 -->## v2 vs v3 主要变化
+## v2 vs v3 主要变化
 
 | 特性 | Traefik v2 | Traefik v3 |
 |------|-----------|-----------|
@@ -104,7 +104,7 @@ Traefik 是由 Traefik Labs（前 Containous）开发的云原生反向代理和
 
 <!-- chunk: 2. 核心架构 -->## 2. 核心架构
 
-#<!-- chunk: Traefik 流量处理模型 -->## Traefik 流量处理模型
+## Traefik 流量处理模型
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -147,7 +147,7 @@ Traefik 是由 Traefik Labs（前 Containous）开发的云原生反向代理和
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 自动服务发现流程 -->## 自动服务发现流程
+## 自动服务发现流程
 
 ```
 Kubernetes API
@@ -168,7 +168,7 @@ Kubernetes API
 
 <!-- chunk: 3. 部署安装 -->## 3. 部署安装
 
-#<!-- chunk: Helm 安装（推荐） -->## Helm 安装（推荐）
+## Helm 安装（推荐）
 
 ```bash
 # 添加 Helm 仓库
@@ -179,7 +179,7 @@ helm repo update
 helm show values traefik/traefik > traefik-values.yaml
 ```
 
-#<!-- chunk: 生产 values 配置 -->## 生产 values 配置
+## 生产 values 配置
 
 ```yaml
 # traefik-values-prod.yaml
@@ -253,6 +253,9 @@ affinity:
       topologyKey: topology.kubernetes.io/zone
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 安装
 helm install traefik traefik/traefik \
@@ -272,7 +275,7 @@ kubectl get svc -n traefik
 
 Traefik 通过 **Provider** 抽象与不同平台集成，每个 Provider 负责从特定数据源读取路由配置。
 
-#<!-- chunk: Provider 对比 -->## Provider 对比
+## Provider 对比
 
 | Provider | 配置来源 | 使用场景 |
 |---------|---------|---------|
@@ -283,7 +286,7 @@ Traefik 通过 **Provider** 抽象与不同平台集成，每个 Provider 负责
 | `file` | 静态 YAML/TOML 文件 | 调试和静态配置 |
 | `consul` | Consul Key-Value | HashiCorp 生态 |
 
-#<!-- chunk: 多 Provider 同时启用 -->## 多 Provider 同时启用
+## 多 Provider 同时启用
 
 ```yaml
 # traefik-configmap.yaml（静态配置）
@@ -342,7 +345,7 @@ data:
 
 <!-- chunk: 5. IngressRoute CRD 路由配置 -->## 5. IngressRoute CRD 路由配置
 
-#<!-- chunk: 基础 IngressRoute -->## 基础 IngressRoute
+## 基础 IngressRoute
 
 ```yaml
 # ingressroute-basic.yaml
@@ -377,7 +380,7 @@ spec:
     - main: api.example.com
 ```
 
-#<!-- chunk: 高级路由规则 -->## 高级路由规则
+## 高级路由规则
 
 ```yaml
 # ingressroute-advanced.yaml
@@ -420,7 +423,7 @@ spec:
     secretName: app-tls-secret
 ```
 
-#<!-- chunk: IngressRouteTCP（四层路由） -->## IngressRouteTCP（四层路由）
+## IngressRouteTCP（四层路由）
 
 ```yaml
 # ingressroute-tcp.yaml
@@ -447,7 +450,7 @@ spec:
 
 Traefik 中间件是流量处理管道的核心，支持链式组合。
 
-#<!-- chunk: 中间件全景图 -->## 中间件全景图
+## 中间件全景图
 
 ```
 请求 ──▶ [IP白名单] ──▶ [基础认证] ──▶ [限流] ──▶ [Header改写]
@@ -455,7 +458,7 @@ Traefik 中间件是流量处理管道的核心，支持链式组合。
 响应 ◀── [压缩] ◀── [Header添加] ◀── 后端服务
 ```
 
-#<!-- chunk: 常用中间件配置 -->## 常用中间件配置
+## 常用中间件配置
 
 ```yaml
 # middlewares-collection.yaml
@@ -597,7 +600,7 @@ spec:
     - Cookie
 ```
 
-#<!-- chunk: 中间件链（MiddlewareChain） -->## 中间件链（MiddlewareChain）
+## 中间件链（MiddlewareChain）
 
 ```yaml
 # middleware-chain.yaml
@@ -620,7 +623,7 @@ spec:
 
 <!-- chunk: 7. TLS 自动化 -->## 7. TLS 自动化
 
-#<!-- chunk: ACME/Let's Encrypt 配置 -->## ACME/Let's Encrypt 配置
+## ACME/Let's Encrypt 配置
 
 Traefik 内置 ACME 客户端，支持三种验证方式：
 
@@ -630,7 +633,7 @@ Traefik 内置 ACME 客户端，支持三种验证方式：
 | `httpChallenge` | 通过 80 端口 HTTP 响应验证 | 标准 HTTP 挑战 |
 | `dnsChallenge` | 通过 DNS TXT 记录验证 | 通配符证书、内网服务 |
 
-#<!-- chunk: DNS 验证（推荐生产使用） -->## DNS 验证（推荐生产使用）
+## DNS 验证（推荐生产使用）
 
 ```yaml
 # traefik-acme-dns.yaml
@@ -655,6 +658,9 @@ certificatesResolvers:
         provider: alidns
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 配置 DNS Provider 凭证（以阿里云为例）
 kubectl create secret generic traefik-dns-credentials \
@@ -664,7 +670,7 @@ kubectl create secret generic traefik-dns-credentials \
   --from-literal=ALICLOUD_REGION_ID=cn-hangzhou
 ```
 
-#<!-- chunk: 通配符证书配置 -->## 通配符证书配置
+## 通配符证书配置
 
 ```yaml
 # ingressroute-wildcard.yaml
@@ -690,7 +696,7 @@ spec:
       - "*.example.com"
 ```
 
-#<!-- chunk: 自定义证书（Secret 方式） -->## 自定义证书（Secret 方式）
+## 自定义证书（Secret 方式）
 
 ```yaml
 # ingressroute-custom-cert.yaml
@@ -718,7 +724,7 @@ spec:
 
 Traefik v3 正式支持 Gateway API v1（稳定渠道），可通过 Gateway API 标准接口管理路由。
 
-#<!-- chunk: 启用 Gateway API Provider -->## 启用 Gateway API Provider
+## 启用 Gateway API Provider
 
 ```yaml
 # traefik-static-config.yaml
@@ -727,7 +733,7 @@ providers:
     enabled: true
 ```
 
-#<!-- chunk: GatewayClass 配置 -->## GatewayClass 配置
+## GatewayClass 配置
 
 ```yaml
 # traefik-gatewayclass.yaml
@@ -739,7 +745,7 @@ spec:
   controllerName: traefik.io/gateway-controller
 ```
 
-#<!-- chunk: Gateway 和 HTTPRoute（标准写法） -->## Gateway 和 HTTPRoute（标准写法）
+## Gateway 和 HTTPRoute（标准写法）
 
 ```yaml
 # traefik-gateway.yaml
@@ -791,7 +797,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: Traefik 私有 CRD vs Gateway API 对比 -->## Traefik 私有 CRD vs Gateway API 对比
+## Traefik 私有 CRD vs Gateway API 对比
 
 | 功能 | IngressRoute (Traefik CRD) | HTTPRoute (Gateway API) |
 |------|--------------------------|------------------------|
@@ -808,7 +814,7 @@ spec:
 
 Traefik Hub 是 Traefik Labs 提供的 API 管理和发布平台，分为免费层和付费层。
 
-#<!-- chunk: 核心能力 -->## 核心能力
+## 核心能力
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
@@ -832,7 +838,10 @@ Traefik Hub 是 Traefik Labs 提供的 API 管理和发布平台，分为免费�
 └──────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 安装 Hub Agent -->## 安装 Hub Agent
+## 安装 Hub Agent
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 获取 Hub Token（在 hub.traefik.io 注册后获得）
@@ -845,7 +854,7 @@ helm upgrade traefik traefik/traefik \
   --set hub.enabled=true
 ```
 
-#<!-- chunk: API 发布配置 -->## API 发布配置
+## API 发布配置
 
 ```yaml
 # hub-api.yaml
@@ -896,7 +905,7 @@ spec:
 
 <!-- chunk: 10. 生产部署建议 -->## 10. 生产部署建议
 
-#<!-- chunk: 高可用架构 -->## 高可用架构
+## 高可用架构
 
 ```
                 ┌─────────────────────────────────────┐
@@ -920,7 +929,10 @@ spec:
   推荐：cert-manager + Let's Encrypt 替代内置 ACME（多副本场景）
 ```
 
-#<!-- chunk: ACME 多副本方案 -->## ACME 多副本方案
+## ACME 多副本方案
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 方案 A：共享 PVC（ReadWriteMany）
@@ -937,7 +949,7 @@ helm install cert-manager jetstack/cert-manager \
   --set installCRDs=true
 ```
 
-#<!-- chunk: 资源规划与 HPA -->## 资源规划与 HPA
+## 资源规划与 HPA
 
 ```yaml
 # hpa-traefik.yaml
@@ -969,7 +981,7 @@ spec:
         averageValue: 1000
 ```
 
-#<!-- chunk: 监控告警规则 -->## 监控告警规则
+## 监控告警规则
 
 ```yaml
 # prometheusrule-traefik.yaml
@@ -1012,7 +1024,10 @@ spec:
         summary: "Traefik 实例下线"
 ```
 
-#<!-- chunk: 生产检查清单 -->## 生产检查清单
+## 生产检查清单
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # ✅ 检查 Traefik 版本
@@ -1057,7 +1072,7 @@ kubectl describe middleware rate-limit -n default
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-40-cloud-native-api-gateway MOC
-- [[domain-03-networking-traffic/README|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
 - Domain-40 云原生 API 网关 — 开源项目索引
 - 01 - 云原生 API 网关架构总览
 - 02 - Kubernetes Gateway API 标准深度解析

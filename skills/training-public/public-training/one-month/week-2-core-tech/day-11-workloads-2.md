@@ -40,7 +40,7 @@ created: "2026-05-23"
 ---
 id: LEARN-ONE-MONTH-W2-DAY11
 title: Day 11 - 工作负载 - Pod 生命周期 + 资源管理 + HPA
-topic: [[entities/kubernetes|kubernetes]]
+topic: [[entities/kubernetes.md|kubernetes]]
 type: hands-on-guide
 tags: [pod, lifecycle, probe, resources, qos, hpa, vpa, autoscaling, hands-on, week-2]
 last_updated: 2026-05-18
@@ -123,6 +123,11 @@ related:
 
 ### 任务 1: 探针配置实践 (45min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 创建带三种探针的 Pod
 cat > probe-demo.yaml << 'EOF'
@@ -177,6 +182,11 @@ kubectl delete pod probe-demo
 
 ### 任务 2: 生命周期 Hook 实践 (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 创建带 Hook 的 Pod
 cat > lifecycle-demo.yaml << 'EOF'
@@ -210,6 +220,11 @@ kubectl get pod lifecycle-demo -w
 ```
 
 ### 任务 3: Init Container 实践 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 创建带 Init Container 的 Pod
@@ -257,6 +272,10 @@ kubectl delete pod init-demo
 ```
 
 ### 任务 4: 资源管理和 QoS (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # Guaranteed QoS (requests = limits)
@@ -323,6 +342,10 @@ kubectl delete pod qos-guaranteed qos-burstable qos-besteffort
 ```
 
 ### 任务 5: HPA 自动扩缩容 (45min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 确保 metrics-server 已安装

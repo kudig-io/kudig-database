@@ -46,7 +46,7 @@ description: '## 项目概述'
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -58,11 +58,11 @@ description: '## 项目概述'
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[containerd]]
-- [[entities/cni-plugins|cni-plugins]]
-- [[concepts/container-runtime-comparison|container-runtime-comparison]]
-- [[concepts/storage-model|storage-model]]
+- [[entities/cni-plugins.md|cni-plugins]]
+- [[concepts/container-runtime-comparison.md|container-runtime-comparison]]
+- [[concepts/storage-model.md|storage-model]]
 
 ## Related
 
@@ -104,17 +104,17 @@ description: '## 项目概述'
 - RELEASE-NOTES-0.1
 - RELEASE-NOTES-1.25
 - RELEASE-NOTES-1.11
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/cri-o/RELEASE-NOTES-1.35|RELEASE-NOTES-1.35]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/cri-o/RELEASE-NOTES-1.35.md|RELEASE-NOTES-1.35]]
 - troubleshooting|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
-- [[references/k8s-control-plane-deep-dive|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]] — Cross-reference
-- [[references/release-notes-core-deps|发布说明索引 — 核心依赖]] — Cross-reference
-- [[concepts/core-dependency-version-matrix|核心依赖版本矩阵]] — Cross-reference
-- [[concepts/docker-architecture|Docker Architecture and Container Runtime]] — Cross-reference
-- [[concepts/node-lifecycle-management|节点生命周期管理]] — Cross-reference
-- [[skills/ts-node-components|节点组件故障排查]] — Cross-reference
-- [[skills/kubeadm-cluster-lifecycle|kubeadm 集群创建生命周期]] — Cross-reference
-- [[entities/core-deps-changelog|核心依赖变更日志索引]] — Cross-reference
-- [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
-- [[entities/container-runtime|Container Runtime]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/k8s-control-plane-deep-dive.md|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]] — Cross-reference
+- [[entities/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
+- [[concepts/core-dependency-version-matrix.md|核心依赖版本矩阵]] — Cross-reference
+- [[concepts/docker-architecture.md|Docker Architecture and Container Runtime]] — Cross-reference
+- [[concepts/node-lifecycle-management.md|节点生命周期管理]] — Cross-reference
+- [[skills/ts-node-components.md|节点组件故障排查]] — Cross-reference
+- [[skills/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]] — Cross-reference
+- [[entities/core-deps-changelog.md|核心依赖变更日志索引]] — Cross-reference
+- [[entities/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
+- [[entities/container-runtime.md|Container Runtime]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

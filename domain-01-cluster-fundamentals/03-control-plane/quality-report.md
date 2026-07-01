@@ -271,10 +271,6 @@ created: "2026-05-23"
 ## 专家评审总结 (Expert Review Summary)
 
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 1. **现代化演进**: 已全面移除过时的 PodSecurityPolicy (PSP) 推荐，转向原生的 Pod Security Admission (PSA) 和基于 CEL 的 ValidatingAdmissionPolicy。
 2. **安全加固**: 强化了 Bound ServiceAccount Tokens 的安全性说明，增加了针对 RBAC 提权风险的审计与预防措施。
 3. **性能调优**: 补充了 APF (API Priority and Fairness) 的借用机制 (Borrowing) 和 Seat 计算逻辑，适用于超大规模集群。
@@ -291,7 +287,7 @@ created: "2026-05-23"
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)

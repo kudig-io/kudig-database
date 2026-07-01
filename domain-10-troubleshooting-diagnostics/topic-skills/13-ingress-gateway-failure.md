@@ -95,8 +95,6 @@ Ingress 和 Gateway API 是 [[Kubernetes|Kubernetes]] 集群中**南北向流量
   - `jq` >= 1.6（可选但推荐）
 - **监控系统**: Prometheus + Ingress Controller 指标（用于 trigger_metrics 匹配）
 
-> ⚠️ **重要**: 本 Skill 覆盖多种 Ingress Controller（Nginx Ingress、Traefik、ALB Ingress、Envoy Gateway）以及 Gateway API 资源。不同控制器的诊断命令和日志格式有所差异，诊断时需确认实际使用的控制器类型。
-
 ---
 
 ## 2. 症状识别
@@ -395,6 +393,10 @@ kubectl get pods -n envoy-gateway-system -l control-plane=envoy-gateway
 
 **Step D2.2**: 验证 Nginx 配置（Nginx Ingress 特定）
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 导出当前 Nginx 配置
   kubectl exec -n ingress-nginx deploy/ingress-nginx-controller -- nginx -T 2>/dev/null | grep -E "server_name|location|upstream|proxy_pass" | head -100
@@ -487,6 +489,10 @@ kubectl get pods -n envoy-gateway-system -l control-plane=envoy-gateway
 
 **Step D2.6**: Upstream 连接分析
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # Nginx stub_status（如果启用）
   kubectl exec -n ingress-nginx deploy/ingress-nginx-controller -- curl -s http://localhost:10246/nginx_status
@@ -543,9 +549,6 @@ kubectl get pods -n envoy-gateway-system -l control-plane=envoy-gateway
 
 ### Phase 3: 高级诊断（低风险，可能需审批）
 
-> ⚠️ 以下步骤涉及更深入的检查和可能的写入操作。在 L1-advisory 模式下，Agent 应**提出建议并等待人工确认**后执行。
-> **预计耗时**: 5-10 分钟
-
 **Step D3.1**: 不同 Ingress Controller 的特异性诊断
 
 **Nginx Ingress Controller**:
@@ -600,6 +603,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
 
 **Step D3.2**: Rate Limiting / WAF 规则排查
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查 Nginx rate limiting 配置
   kubectl exec -n ingress-nginx deploy/ingress-nginx-controller -- nginx -T | grep -E "limit_req|limit_conn"
@@ -656,6 +663,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
 
 **Step D3.5**: 负载均衡算法与权重配置
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查 Nginx 负载均衡配置
   kubectl get configmap -n ingress-nginx ingress-nginx-controller -o jsonpath='{.data.load-balance}'
@@ -678,7 +689,7 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
 
 | 根因 ID | 描述 | 概率 | 诊断证据 | FTA 映射 | 风险等级 |
 |--------|------|------|---------|---------|---------|
-| RC-001 | **后端 Service 无 Ready Endpoints** — Service selector 不匹配、后端 Pod 全部不健康或正在重启，导致 Ingress 无法路由到任何后端 | ~20% | D2.3 显示 Endpoints 为空；D1.2 Backend 显示 `<error: endpoints>`；D2.1 日志包含 `no upstream host` | [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta|ingress-fta]]: BE-no-endpoints | 🟡 |
+| RC-001 | **后端 Service 无 Ready Endpoints** — Service selector 不匹配、后端 Pod 全部不健康或正在重启，导致 Ingress 无法路由到任何后端 | ~20% | D2.3 显示 Endpoints 为空；D1.2 Backend 显示 `<error: endpoints>`；D2.1 日志包含 `no upstream host` | [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|ingress-fta]]: BE-no-endpoints | 🟡 |
 | RC-002 | **Ingress Host/Path 规则配置错误** — Ingress 的 host、path 或 pathType 配置不正确，导致请求无法匹配到正确的后端 | ~15% | D1.6 返回 404；D2.2 Nginx 配置中未包含目标 `server_name` 或 `location`；D1.2 Rules 配置与请求不匹配 | ingress-fta: BE-rule-mismatch | 🟢 |
 | RC-003 | **TLS Secret 不存在或证书不匹配** — Ingress 引用的 TLS Secret 缺失、证书已过期、或证书 SAN 不包含目标域名 | ~12% | D2.4 Secret 不存在或证书过期/不匹配；D1.6 TLS 握手失败；D1.2 TLS 配置错误 | ingress-fta: BE-tls-invalid | 🟡 |
 | RC-004 | **IngressClass 未指定或不匹配** — Ingress 未指定 IngressClass 或指定的 IngressClass 与实际 Controller 不匹配，导致 Ingress 未被处理 | ~10% | D1.1 ADDRESS 为空；D1.3 IngressClass 不存在或 controller 不匹配；D1.2 无任何 Events | ingress-fta: BE-class-mismatch | 🟢 |
@@ -709,6 +720,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   echo "Expected Path: <path>"
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方法 1: 使用 kubectl patch
   kubectl patch ingress <ingress-name> -n <namespace> --type='json' -p='[
@@ -729,6 +744,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   # 预期: HTTP 200 或正确的业务响应
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch ingress <ingress-name> -n <namespace> --type='json' -p='[
     {"op": "replace", "path": "/spec/rules/0/host", "value": "<original-domain>"}
@@ -746,6 +765,11 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   kubectl get ingressclass <class-name> -o jsonpath='{.spec.controller}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   # 方法 1: 添加 ingressClassName 字段
   kubectl patch ingress <ingress-name> -n <namespace> --type='json' -p='[
@@ -769,6 +793,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   # 预期: 出现 "Sync" 或 "AddedOrUpdated" 事件
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch ingress <ingress-name> -n <namespace> --type='json' -p='[
     {"op": "remove", "path": "/spec/ingressClassName"}
@@ -786,6 +814,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   kubectl get secret <tls-secret> -n <namespace> -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -dates
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 创建新的 TLS Secret
   kubectl create secret tls <tls-secret> -n <namespace> \
@@ -811,6 +843,11 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   # 预期: TLS 握手成功
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 删除新创建的 Secret
   kubectl delete secret <tls-secret> -n <namespace>
@@ -830,6 +867,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   kubectl get configmap -n ingress-nginx ingress-nginx-controller -o jsonpath='{.data}' | jq . | grep -i timeout
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   # 为特定 Ingress 设置超时
   kubectl annotate ingress <ingress-name> -n <namespace> \
@@ -848,6 +889,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   # 预期: 请求在新的超时时间内完成或正确超时
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   kubectl annotate ingress <ingress-name> -n <namespace> \
     nginx.ingress.kubernetes.io/proxy-connect-timeout- \
@@ -872,6 +917,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   kubectl get configmap -n ingress-nginx ingress-nginx-controller -o jsonpath='{.data}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 编辑 ConfigMap
   kubectl edit configmap -n ingress-nginx ingress-nginx-controller
@@ -880,6 +929,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   kubectl patch configmap -n ingress-nginx ingress-nginx-controller --type='merge' -p='{"data":{"proxy-read-timeout":"120","proxy-connect-timeout":"60"}}'
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 验证配置已更新
   kubectl get configmap -n ingress-nginx ingress-nginx-controller -o jsonpath='{.data}'
@@ -893,6 +946,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   # 预期: 值为 1
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f /tmp/ingress-configmap-backup.yaml
   ```
@@ -913,6 +970,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   kubectl get referencegrant -n <backend-namespace>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   cat <<EOF | kubectl apply -f -
   # Valid for v1.28+ (v1beta1); v1 API available since v1.32+
@@ -941,6 +1002,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   # 预期: Accepted=True, ResolvedRefs=True
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl delete referencegrant allow-httproute-from-<route-namespace> -n <backend-namespace>
   ```
@@ -961,6 +1026,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   kubectl get gateway <gateway-name> -n <namespace> -o jsonpath='{.spec.listeners}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 修正 HTTPRoute 的 parentRef
   kubectl patch httproute <route-name> -n <namespace> --type='json' -p='[
@@ -981,6 +1050,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   curl -v http://<gateway-ip>/<path>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 恢复原始 parentRef
   kubectl patch httproute <route-name> -n <namespace> --type='json' -p='[
@@ -1001,6 +1074,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   kubectl top pod -n ingress-nginx -l app.kubernetes.io/component=controller
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 增加内存限制
   kubectl patch deploy -n ingress-nginx ingress-nginx-controller --type='json' -p='[
@@ -1021,6 +1098,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   # 预期: Running 状态
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deploy -n ingress-nginx ingress-nginx-controller
   ```
@@ -1044,6 +1125,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
      kubectl scale deploy -n ingress-nginx ingress-nginx-controller --replicas=2
      ```
   3. **执行滚动重启**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
      ```bash
      kubectl rollout restart deploy -n ingress-nginx ingress-nginx-controller
      ```
@@ -1061,6 +1146,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   - 在低流量时段执行（如凌晨）
   - 通知相关团队即将执行重启
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deploy -n ingress-nginx ingress-nginx-controller
   ```
@@ -1078,6 +1167,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
      kubectl get pods -n <backup-ingress-namespace> -l <backup-controller-label>
      ```
   2. **修改 Ingress 使用备用 IngressClass**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
      ```bash
      # 批量更新受影响的 Ingress
      for ing in $(kubectl get ingress -A -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metadata.name}{"\n"}{end}'); do
@@ -1101,6 +1194,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
   - 确认备用 Controller 配置与主 Controller 一致
   - 确认备用 Controller 有足够容量
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 将 IngressClass 改回原来的
   kubectl patch ingress <ingress-name> -n <namespace> --type='json' -p='[{"op": "replace", "path": "/spec/ingressClassName", "value": "<original-class>"}]'
@@ -1127,15 +1224,24 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
      kubectl get secrets -A -l type=kubernetes.io/tls -o yaml > /tmp/tls-secrets-backup.yaml
      ```
   2. **删除现有 Controller**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      # 使用 Helm
-     helm uninstall ingress-nginx -n ingress-nginx
+     helm uninstall ingress-nginx -n ingress-nginx  # ⚠️ 删除 release 及关联资源
      
      # 或使用 kubectl
      kubectl delete deploy -n ingress-nginx ingress-nginx-controller
      kubectl delete svc -n ingress-nginx ingress-nginx-controller
      ```
   3. **重新部署 Controller**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
      ```bash
      # 使用 Helm
      helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx \
@@ -1153,6 +1259,10 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
      curl -v http://<domain>/
      ```
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 恢复备份
   kubectl apply -f /tmp/all-ingress-backup.yaml
@@ -1165,6 +1275,9 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
 ## 7. 验证确认
 
 ### 7.1 即时验证（修复后 1-2 分钟内）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # V1: 确认 Ingress/Gateway 状态正常
@@ -1395,5 +1508,5 @@ kubectl logs -n ingress-nginx deploy/ingress-nginx-controller --tail=20 --since=
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]

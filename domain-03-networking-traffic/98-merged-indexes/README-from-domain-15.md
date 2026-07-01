@@ -150,4 +150,4 @@ TCP/IP模型
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/networking|速查卡: networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|速查卡: networking]]

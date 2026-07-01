@@ -78,11 +78,11 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 为什么要迁移 -->## 1. 为什么要迁移
 
-#<!-- chunk: nginx-ingress 的能力边界 -->## nginx-ingress 的能力边界
+## nginx-ingress 的能力边界
 
 nginx-ingress（ingress-nginx）是 [[Kubernetes|Kubernetes]] 社区使用最广泛的 Ingress 控制器，但随着业务复杂度提升，其局限性日益明显。
 
-##<!-- chunk: 功能对比：nginx-ingress vs 现代 API 网关 -->## 功能对比：nginx-ingress vs 现代 API 网关
+## 功能对比：nginx-ingress vs 现代 API 网关
 
 | 能力维度 | nginx-ingress | Higress | APISIX | Kong | [[Envoy|Envoy]] Gateway |
 |---------|--------------|---------|--------|------|--------------|
@@ -99,7 +99,7 @@ nginx-ingress（ingress-nginx）是 [[Kubernetes|Kubernetes]] 社区使用最广
 | **WebSocket/gRPC** | ✅ 支持 | ✅ 支持 | ✅ 支持 | ✅ 支持 | ✅ 原生 |
 | **配置热重载代价** | 高（Nginx reload）| 零 | 零 | 零 | 零 |
 
-#<!-- chunk: 迁移的核心驱动力 -->## 迁移的核心驱动力
+## 迁移的核心驱动力
 
 ```
 nginx-ingress 痛点分析
@@ -135,7 +135,7 @@ nginx-ingress 痛点分析
 
 <!-- chunk: 2. 迁移策略概述 -->## 2. 迁移策略概述
 
-#<!-- chunk: 三种迁移模式对比 -->## 三种迁移模式对比
+## 三种迁移模式对比
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -154,7 +154,7 @@ nginx-ingress 痛点分析
 └──────────────────┴──────────────────┴──────────────────────────────-┘
 ```
 
-#<!-- chunk: 并行部署架构（推荐） -->## 并行部署架构（推荐）
+## 并行部署架构（推荐）
 
 ```
 流量入口（DNS/LB）
@@ -176,7 +176,7 @@ nginx-ingress 痛点分析
 阶段 4: 下线 nginx-ingress
 ```
 
-#<!-- chunk: DNS 切流方案 -->## DNS 切流方案
+## DNS 切流方案
 
 ```bash
 # 方案 A：DNS 权重（Route53/阿里云 DNS）
@@ -195,7 +195,7 @@ nginx-ingress 痛点分析
 
 <!-- chunk: 3. Nginx 注解到插件映射表 -->## 3. Nginx 注解到插件映射表
 
-#<!-- chunk: 流量控制类注解映射 -->## 流量控制类注解映射
+## 流量控制类注解映射
 
 | nginx-ingress 注解 | Higress 等效配置 | APISIX 等效配置 | Kong 等效配置 |
 |-------------------|----------------|----------------|--------------|
@@ -206,7 +206,7 @@ nginx-ingress 痛点分析
 | `nginx.ingress.kubernetes.io/proxy-read-timeout` | `BackendTrafficPolicy` timeout | 上游超时配置 | `proxy` 插件超时 |
 | `nginx.ingress.kubernetes.io/proxy-send-timeout` | `BackendTrafficPolicy` timeout | 上游超时配置 | `proxy` 插件超时 |
 
-#<!-- chunk: 路由改写类注解映射 -->## 路由改写类注解映射
+## 路由改写类注解映射
 
 | nginx-ingress 注解 | Higress 等效配置 | APISIX 等效配置 | Kong 等效配置 |
 |-------------------|----------------|----------------|--------------|
@@ -215,7 +215,7 @@ nginx-ingress 痛点分析
 | `nginx.ingress.kubernetes.io/app-root` | HTTPRoute 重定向 | `redirect` 插件 | `redirect` 插件 |
 | `nginx.ingress.kubernetes.io/backend-protocol` | BackendTLSPolicy | 上游 scheme 配置 | `service.protocol` |
 
-#<!-- chunk: 认证安全类注解映射 -->## 认证安全类注解映射
+## 认证安全类注解映射
 
 | nginx-ingress 注解 | Higress 等效配置 | APISIX 等效配置 | Kong 等效配置 |
 |-------------------|----------------|----------------|--------------|
@@ -225,7 +225,7 @@ nginx-ingress 痛点分析
 | `nginx.ingress.kubernetes.io/whitelist-source-range` | `SecurityPolicy` ipAllowList | `ip-restriction` 插件 | `ip-restriction` 插件 |
 | `nginx.ingress.kubernetes.io/ssl-redirect` | HTTPRoute 重定向过滤器 | `redirect` 插件 | `redirect` 插件 |
 
-#<!-- chunk: TLS/SSL 类注解映射 -->## TLS/SSL 类注解映射
+## TLS/SSL 类注解映射
 
 | nginx-ingress 注解 | Higress 等效配置 | APISIX 等效配置 | Kong 等效配置 |
 |-------------------|----------------|----------------|--------------|
@@ -234,7 +234,7 @@ nginx-ingress 痛点分析
 | `nginx.ingress.kubernetes.io/backend-ssl` | `BackendTLSPolicy` | 上游 HTTPS 配置 | `service.protocol: https` |
 | `cert-manager.io/cluster-issuer` | 直接引用 Secret / cert-manager | cert-manager Secret | cert-manager Secret |
 
-#<!-- chunk: 高级功能类注解映射 -->## 高级功能类注解映射
+## 高级功能类注解映射
 
 | nginx-ingress 注解 | Higress 等效配置 | APISIX 等效配置 | Kong 等效配置 |
 |-------------------|----------------|----------------|--------------|
@@ -250,7 +250,7 @@ nginx-ingress 痛点分析
 
 <!-- chunk: 4. 迁移实战：nginx-ingress → Higress -->## 4. 迁移实战：nginx-ingress → Higress
 
-#<!-- chunk: 迁移前：原 nginx-ingress 配置 -->## 迁移前：原 nginx-ingress 配置
+## 迁移前：原 nginx-ingress 配置
 
 ```yaml
 # 原有 Ingress 配置（nginx-ingress）
@@ -292,9 +292,12 @@ spec:
               number: 8080
 ```
 
-#<!-- chunk: 迁移后：Higress 配置 -->## 迁移后：Higress 配置
+## 迁移后：Higress 配置
 
 **步骤 1：安装 Higress**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 安装 Higress（使用 Helm）
@@ -447,7 +450,7 @@ curl -H "Host: api.example.com" \
 
 <!-- chunk: 5. 迁移实战：nginx-ingress → APISIX -->## 5. 迁移实战：nginx-ingress → APISIX
 
-#<!-- chunk: 迁移前原配置 -->## 迁移前原配置
+## 迁移前原配置
 
 ```yaml
 # 原 nginx-ingress 配置（含认证和限流）
@@ -481,9 +484,12 @@ spec:
               number: 8080
 ```
 
-#<!-- chunk: 迁移到 APISIX -->## 迁移到 APISIX
+## 迁移到 APISIX
 
 **步骤 1：安装 APISIX Ingress Controller**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 安装 APISIX（含 Ingress Controller）
@@ -586,8 +592,8 @@ spec:
       enable: true
       config:
         rules:
-        - match:
-          - vars:
+        - matchers:
+          - - vars=""
             - ["http_x_canary", "==", "true"]
           weighted_upstreams:
           - upstream:
@@ -627,7 +633,7 @@ done
 
 <!-- chunk: 6. 迁移实战：nginx-ingress → Kong -->## 6. 迁移实战：nginx-ingress → Kong
 
-#<!-- chunk: 迁移前原配置 -->## 迁移前原配置
+## 迁移前原配置
 
 ```yaml
 # 原 nginx-ingress 配置（含 JWT 认证）
@@ -659,9 +665,12 @@ spec:
               number: 8080
 ```
 
-#<!-- chunk: 迁移到 Kong Ingress Controller（KIC） -->## 迁移到 Kong Ingress Controller（KIC）
+## 迁移到 Kong Ingress Controller（KIC）
 
 **步骤 1：安装 KIC**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 安装 Kong Ingress Controller（DB-less 模式）
@@ -795,7 +804,7 @@ curl -H "Host: api.example.com" \
 
 <!-- chunk: 7. 零停机迁移清单 -->## 7. 零停机迁移清单
 
-#<!-- chunk: 迁移前准备（Pre-Migration） -->## 迁移前准备（Pre-Migration）
+## 迁移前准备（Pre-Migration）
 
 ```bash
 # ─────────────────────────────────────────────────────────────────
@@ -830,7 +839,7 @@ kubectl get pods -n <target-gateway-namespace>
 kubectl get svc -n <target-gateway-namespace>
 ```
 
-#<!-- chunk: 并行验证阶段 -->## 并行验证阶段
+## 并行验证阶段
 
 ```bash
 # ─────────────────────────────────────────────────────────────────
@@ -869,7 +878,7 @@ for ep in "${endpoints[@]}"; do
 done
 ```
 
-#<!-- chunk: 流量切换阶段 -->## 流量切换阶段
+## 流量切换阶段
 
 ```bash
 # ─────────────────────────────────────────────────────────────────
@@ -890,7 +899,11 @@ watch -n 5 'kubectl top pods -n <new-gateway-ns>; \
   curl -s "http://localhost:9090/api/v1/query?query=sum(rate(http_requests_total{status=~\"5..\"}[1m]))/sum(rate(http_requests_total[1m]))" | jq ".data.result"'
 ```
 
-#<!-- chunk: 回滚预案 -->## 回滚预案
+## 回滚预案
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # ─────────────────────────────────────────────────────────────────
@@ -913,7 +926,11 @@ kubectl annotate ingress api-ingress -n production \
   kubernetes.io/ingress.class=nginx --overwrite
 ```
 
-#<!-- chunk: 迁移完成验证 -->## 迁移完成验证
+## 迁移完成验证
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
 ```bash
 # ─────────────────────────────────────────────────────────────────
@@ -935,15 +952,15 @@ for host in api.example.com app.example.com; do
 done
 
 # ✅ 清理 nginx-ingress（确认后执行）
-helm uninstall ingress-nginx -n ingress-nginx
-kubectl delete ns ingress-nginx
+helm uninstall ingress-nginx -n ingress-nginx  # ⚠️ 删除 release 及关联资源
+kubectl delete ns ingress-nginx  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
 ---
 
 <!-- chunk: 8. 常见问题与陷阱 -->## 8. 常见问题与陷阱
 
-#<!-- chunk: 问题 1：路径匹配语义差异 -->## 问题 1：路径匹配语义差异
+## 问题 1：路径匹配语义差异
 
 ```
 症状：迁移后部分路径无法路由，返回 404
@@ -977,7 +994,7 @@ Gateway API 行为：
       value: /apitest
 ```
 
-#<!-- chunk: 问题 2：rewrite-target 正则组引用 -->## 问题 2：rewrite-target 正则组引用
+## 问题 2：rewrite-target 正则组引用
 
 ```bash
 # nginx-ingress 写法
@@ -997,7 +1014,7 @@ filters:
       replacePrefixMatch: /     # 去掉 /api 前缀
 ```
 
-#<!-- chunk: 问题 3：SSL 重定向行为差异 -->## 问题 3：SSL 重定向行为差异
+## 问题 3：SSL 重定向行为差异
 
 | 行为 | nginx-ingress | 新网关处理方式 |
 |------|--------------|--------------|
@@ -1025,7 +1042,7 @@ spec:
         statusCode: 301
 ```
 
-#<!-- chunk: 问题 4：注解 configuration-snippet 无等价物 -->## 问题 4：注解 configuration-snippet 无等价物
+## 问题 4：注解 configuration-snippet 无等价物
 
 ```
 症状：迁移后无法使用 configuration-snippet 注入原始 Nginx 配置
@@ -1042,7 +1059,7 @@ spec:
 | Lua 脚本逻辑 | Wasm 插件 / serverless 插件 |
 | 限速算法调整 | RateLimitPolicy 精细配置 |
 
-#<!-- chunk: 问题 5：websocket 路由注解消失 -->## 问题 5：websocket 路由注解消失
+## 问题 5：websocket 路由注解消失
 
 ```yaml
 # nginx-ingress websocket 配置
@@ -1071,7 +1088,7 @@ spec:
       connectionIdleTimeout: "3600s"
 ```
 
-#<!-- chunk: 问题 6：IngressClass 迁移期间双路由冲突 -->## 问题 6：IngressClass 迁移期间双路由冲突
+## 问题 6：IngressClass 迁移期间双路由冲突
 
 ```bash
 # 现象：同一 Host 在两个 IngressController 中各有一条路由
@@ -1088,7 +1105,7 @@ kubectl get ingress -A | grep "api.example.com"
 # 不要在同一 K8s 集群内靠 IngressClass 区分同一 Host
 ```
 
-#<!-- chunk: 迁移问题快速参考 -->## 迁移问题快速参考
+## 迁移问题快速参考
 
 | 症状 | 可能原因 | 排查命令 |
 |------|---------|---------|
@@ -1126,7 +1143,7 @@ kubectl get ingress -A | grep "api.example.com"
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-40-cloud-native-api-gateway MOC
-- [[domain-03-networking-traffic/README|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
 - Domain-40 云原生 API 网关 — 开源项目索引
 - 01 - 云原生 API 网关架构总览
 - 02 - Kubernetes Gateway API 标准深度解析
@@ -1147,5 +1164,5 @@ kubectl get ingress -A | grep "api.example.com"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]

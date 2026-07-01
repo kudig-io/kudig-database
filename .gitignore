@@ -27,3 +27,23 @@ corpus-config/profiles/.vector-cache/
 web/node_modules/
 web/.astro/
 web/dist/
+
+# 密钥与环境变量（禁止入库）
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+
+# IDE / 编辑器
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 个人开发环境产物（非便携，勿追踪）
+.claude/skills/
+.claude/scripts/output/

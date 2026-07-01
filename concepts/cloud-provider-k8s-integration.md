@@ -4,6 +4,7 @@ category: concepts
 tags: [cloud, eks, gke, aks, ack, multi-cloud, k8s]
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # 云厂商 K8S 集成
@@ -219,6 +220,6 @@ SAP 开源的 Gardener 实现 K8S-as-a-Service：
 
 ## 相关概念
 
-- [[concepts/k8s-security-compliance]] — K8S 安全与合规实践
-- [[concepts/gitops-production-operations]] — GitOps 生产运维
-- [[concepts/finops-greenops-practices]] — FinOps 与 GreenOps 实践
+- [[concepts/k8s-security-compliance.md|k8s security compliance]] — K8S 安全与合规实践
+- [[concepts/gitops-production-operations.md|gitops production operations]] — GitOps 生产运维
+- [[concepts/finops-greenops-practices.md|finops greenops practices]] — FinOps 与 GreenOps 实践

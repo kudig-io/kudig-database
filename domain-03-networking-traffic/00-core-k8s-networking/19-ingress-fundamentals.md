@@ -187,7 +187,7 @@ created: "2026-05-23"
 
 | 概念 | 英文术语 | 定义 | 作用 | 版本要求 |
 |-----|---------|------|------|---------|
-| **Ingress** | Ingress | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 对象，管理集群外部访问集群内服务的 HTTP/HTTPS 路由规则 | 定义 L7 路由规则、TLS 终止、虚拟主机 | v1.19+ GA |
+| **Ingress** | Ingress | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 对象，管理集群外部访问集群内服务的 HTTP/HTTPS 路由规则 | 定义 L7 路由规则、TLS 终止、虚拟主机 | v1.19+ GA |
 | **Ingress Controller** | Ingress Controller | 负责实现 Ingress 规则的控制器组件，通常是反向代理服务器 | 监听 Ingress 资源变化，配置代理规则，实际处理流量转发 | - |
 | **IngressClass** | IngressClass | 定义 Ingress 控制器类型的 API 对象 | 支持多控制器共存，指定 Ingress 由哪个控制器处理 | v1.19+ GA |
 | **Backend** | Backend | Ingress 路由到的后端 Service | 接收转发的流量，负载均衡到 Pod | v1.19+ |
@@ -1566,6 +1566,7 @@ spec:
             name: web-service
             port:
               number: 80  # 或 name: http
+
 ```
 
 **迁移步骤:**
@@ -1593,6 +1594,9 @@ spec:
 
 ### 8.2 创建 Ingress 命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建简单 Ingress
 kubectl create ingress simple-ingress \
@@ -1619,6 +1623,9 @@ kubectl create ingress default-backend-ingress \
 ```
 
 ### 8.3 调试和排障命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 查看 IngressClass
@@ -2203,7 +2210,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -2224,5 +2231,7 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+
+```

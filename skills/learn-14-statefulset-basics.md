@@ -398,6 +398,9 @@ PVC 无法绑定（存储不足、StorageClass 不存在等）。
 
 ### 6.2 StatefulSet 无法更新
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 【排查步骤】
 
@@ -537,6 +540,10 @@ StatefulSet 确保：
 
 ## 8. 总结
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 【命令速查】
 
@@ -587,8 +594,8 @@ kubectl delete statefulset <name>
 
 ## Related
 
-- [[skills/learn-04-service-basics|learn-04-service-basics]] — 第四课：Service - 让应用可以被访问
-- [[skills/learn-02-pod-basics|learn-02-pod-basics]] — 第二课：Pod - K8s 的最小调度单元
-- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
-- [[entities/statefulset|statefulset]] — StatefulSet
+- [[skills/learn-04-service-basics.md|learn-04-service-basics]] — 第四课：Service - 让应用可以被访问
+- [[skills/learn-02-pod-basics.md|learn-02-pod-basics]] — 第二课：Pod - K8s 的最小调度单元
+- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[entities/statefulset.md|statefulset]] — StatefulSet
 - [[deployment]] — Deployment

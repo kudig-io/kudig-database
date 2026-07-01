@@ -17,15 +17,16 @@ sources:
   - ACK网络最佳实践
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 summary: "ACK Terway网络模式详解、IPAM管理及常见网络问题排查。"
 relationships:
-  - target: "[[entities/cni]]"
+  - target: "[[entities/cni.md]]"
     type: related_to
 ---
 
 # Terway CNI网络
 
-Terway 是阿里云自研的容器网络接口（[[entities/cni|CNI]]）插件，专为 ACK 集群设计。在专有云环境中，Terway 是推荐的网络方案，提供优于 Flannel 的网络性能和功能特性。本文档面向远程顾问，提供 Terway 模式详解、选型建议和排查指南。
+Terway 是阿里云自研的容器网络接口（[[entities/cni.md|CNI]]）插件，专为 ACK 集群设计。在专有云环境中，Terway 是推荐的网络方案，提供优于 Flannel 的网络性能和功能特性。本文档面向远程顾问，提供 Terway 模式详解、选型建议和排查指南。
 
 ---
 
@@ -263,6 +264,9 @@ kubectl logs -n kube-system -l app=terway-eniip --tail=200
 | IP池分配不均 | 检查各节点IP使用率 | 调整max_pool_size参数 |
 | 大量Terminated Pod占IP | 检查Terminating状态Pod | 强制删除或调优gc阈值 |
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查VSwitch IP余量
 aliyun vpc DescribeVSwitchAttributes --VSwitchId vsw-apsara-xxx --RegionId cn-apsara-local
@@ -271,6 +275,9 @@ kubectl exec -n kube-system terway-eniip-xxxx -- terway-cli show
 ```
 
 ### 3.2 ENI配额问题
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查ECS实例规格的ENI配额
@@ -327,6 +334,9 @@ aliyun ecs DescribeSecurityGroupAttribute --SecurityGroupId sg-apsara-xxx --Regi
 ### 4.1 ack-terway-cli 工具
 
 `ack-terway-cli` 是 Terway 诊断的核心工具，需在 Terway Pod 内或节点上执行：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 进入Terway Pod执行诊断
@@ -399,6 +409,9 @@ ip link show | grep terway
 ### 4.4 远程诊断检查清单
 
 远程顾问通过工单指导客户执行以下检查：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -496,16 +509,16 @@ containerLogMaxFiles: 5
 
 ## 相关文档
 
-- [[01-专有云架构概述|专有云架构概述]]
-- [[02-ACK集群运维|ACK集群运维]]
-- [[04-阿里云存储集成|阿里云存储集成]]
-- [[05-阿里云SLB与Ingress|阿里云SLB与Ingress]]
-- [[06-阿里云专有云远程顾问指南|阿里云专有云远程顾问指南]]
+- [[domain-12-cloud-providers/01-alibaba-cloud/01-专有云架构概述.md|专有云架构概述]]
+- [[domain-12-cloud-providers/01-alibaba-cloud/02-ACK集群运维.md|ACK集群运维]]
+- [[domain-12-cloud-providers/01-alibaba-cloud/04-阿里云存储集成.md|阿里云存储集成]]
+- [[domain-12-cloud-providers/01-alibaba-cloud/05-阿里云SLB与Ingress.md|阿里云SLB与Ingress]]
+- [[domain-12-cloud-providers/01-alibaba-cloud/06-阿里云专有云远程顾问指南.md|阿里云专有云远程顾问指南]]
 - [[242-ack-vpc-network|ACK VPC网络]]
 - [[alicloud-ack-overview|阿里云ACK概述]]
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/ingress|Ingress]]
-- [[domain-03-networking-traffic/00-core-k8s-networking/19-ingress-fundamentals|Kubernetes Ingress 基础概念与核心原理 (Ingress Fundamentals)]]
-- [[domain-03-networking-traffic/00-core-k8s-networking/20-ingress-controller-deep-dive|128 - Ingress Controller 深入剖析]]
-- [[domain-03-networking-traffic/00-core-k8s-networking/21-nginx-ingress-complete-guide|129 - NGINX Ingress 完整配置指南]]
+- [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]
+- [[domain-03-networking-traffic/00-core-k8s-networking/19-ingress-fundamentals.md|Kubernetes Ingress 基础概念与核心原理 (Ingress Fundamentals)]]
+- [[domain-03-networking-traffic/00-core-k8s-networking/20-ingress-controller-deep-dive.md|128 - Ingress Controller 深入剖析]]
+- [[domain-03-networking-traffic/00-core-k8s-networking/21-nginx-ingress-complete-guide.md|129 - NGINX Ingress 完整配置指南]]

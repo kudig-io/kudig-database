@@ -38,7 +38,7 @@ created: "2026-05-23"
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
 > **用途**: 容器逃逸检测、密钥轮换自动化、合规审计检查清单
-> **关联**: SKILL-SECURITY-001, domain-25-[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security|cloud-native-security]]
+> **关联**: SKILL-SECURITY-001, domain-25-[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]
 
 ---
 
@@ -74,6 +74,7 @@ flowchart TD
     REMEDIATE --> CLOSE
 
     ISOLATE --> ESCALATE["升级到 P0"]
+
 ```
 
 ### 1.3 容器逃逸检测 SOP
@@ -89,6 +90,12 @@ flowchart TD
 
 #### 阶段 2: 隔离
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 隔离可疑 Pod
 kubectl label pod <pod> isolation=quarantine --overwrite
@@ -99,7 +106,7 @@ kubectl cordon <node>
 kubectl drain <node> --ignore-daemonsets --force
 
 # 删除恶意 Pod
-kubectl delete pod <pod> --grace-period=0 --force
+kubectl delete pod <pod> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 检查同命名空间其他 Pod
 kubectl get pods -n <ns> -o yaml | grep -E "image:|hostNetwork:"
@@ -312,6 +319,7 @@ compliance_audit_report:
     low: 0
 
   next_audit_date: "2026-06-18"
+
 ```
 
 ---
@@ -329,6 +337,12 @@ compliance_audit_report:
 | 异常 ServiceAccount | cluster-admin 绑定 | `kubectl get clusterrolebindings \| grep cluster-admin` |
 
 ### 4.2 快速响应命令
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 隔离 Pod
@@ -416,3 +430,4 @@ spec:
 - [domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response.md](../domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response.md) — 安全事件 Skill
 - [domain-05-security-compliance/](../domain-05-security-compliance/) — 云原生安全
 - [P0-1: 工单分类体系](./P0-1-ticket-classification-intent-recognition.md)
+```

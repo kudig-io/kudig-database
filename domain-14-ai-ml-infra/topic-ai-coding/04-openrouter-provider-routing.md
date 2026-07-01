@@ -383,7 +383,7 @@ OpenRouter 还有一些自动路由行为：
 | [03 - 模型与 Provider 生态](./03-openrouter-models-providers.md) | Provider 与模型元数据 |
 | [05 - API 参考](./05-openrouter-api-reference.md) | provider 参数详解 |
 | [08 - Prompt Caching](./08-openrouter-prompt-caching-optimization.md) | Sticky Routing 与缓存亲和 |
-| [11 - 安全与隐私](./11-openrouter-[[domain-05-security-compliance/README|security]]-privacy.md) | ZDR 与数据治理路由 |
+| [11 - 安全与隐私](./11-openrouter-[[domain-05-security-compliance/README.md|security]]-privacy.md) | ZDR 与数据治理路由 |
 
 ---
 

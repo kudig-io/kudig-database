@@ -81,4 +81,4 @@ Metal3（Metal Kubed）提供裸金属基础设施的 Kubernetes 原生管理能
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - index/node-index|Node 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

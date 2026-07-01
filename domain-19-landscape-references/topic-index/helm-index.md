@@ -48,20 +48,20 @@ created: "2026-05-23"
 
 ## 核心文档
 
-- [[domain-17-system-foundation/topic-cheat-sheet/helm|[[Helm 速查卡|Helm 速查卡]]]] ← 命令速查
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|[[Helm 速查卡|Helm 速查卡]]]] ← 命令速查
 - troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting|Helm Chart 故障排查]] ← 排障文档
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta|[[[[Helm 发布异常故障树分析|Helm 发布异常故障树分析]]|Helm FTA]] 故障树]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta.md|[[[[Helm 发布异常故障树分析|Helm 发布异常故障树分析]]|Helm FTA]] 故障树]]
 - Kustomize/Helm/ArgoCD 对比
 
 ## 结构化故障排查 - 集群运维
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting|Helm 部署故障排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting|GitOps 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting|ArgoCD 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting.md|Helm 部署故障排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting.md|GitOps 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting.md|ArgoCD 故障排查]]
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta|Helm FTA 故障树]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta.md|Helm FTA 故障树]]
 
 ## 包管理器生态
 
@@ -82,7 +82,7 @@ created: "2026-05-23"
 ## 学习培训
 
 - Day 30: Helm 管理
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/gitops-and-continuous-delivery|[[GitOps 与持续交付|GitOps 与持续交付]]]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/gitops-and-continuous-delivery.md|[[GitOps 与持续交付|GitOps 与持续交付]]]]
 
 ## CNCF 生态
 
@@ -93,4 +93,4 @@ created: "2026-05-23"
 ## 术语词典
 
 - Helm 术语
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern|[[Operator 模式|Operator 模式]]]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern.md|[[Operator 模式|Operator 模式]]]]

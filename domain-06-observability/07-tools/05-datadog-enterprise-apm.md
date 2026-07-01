@@ -93,7 +93,7 @@ k8s_versions:
 
 <!-- chunk: 1. Datadog APM架构深度解析 -->## 1. Datadog APM架构深度解析
 
-#<!-- chunk: 1.1 核心组件架构 -->## 1.1 核心组件架构
+## 1.1 核心组件架构
 
 ```mermaid
 graph TB
@@ -139,15 +139,15 @@ graph TB
     end
 ```
 
-#<!-- chunk: 1.2 技术架构优势 -->## 1.2 技术架构优势
+## 1.2 技术架构优势
 
-##<!-- chunk: 1.2.1 分布式追踪能力 -->## 1.2.1 分布式追踪能力
+## 1.2.1 分布式追踪能力
 - **自动instrumentation**: 支持主流语言框架的自动埋点
 - **手动instrumentation**: 提供灵活的手动埋点API
 - **上下文传播**: 支持跨进程、跨服务的trace context传递
 - **采样策略**: 智能采样算法平衡性能和数据完整性
 
-##<!-- chunk: 1.2.2 实时分析处理 -->## 1.2.2 实时分析处理
+## 1.2.2 实时分析处理
 - **流式处理**: 实时处理和分析trace数据
 - **异常检测**: 基于机器学习的性能异常自动识别
 - **根因分析**: 自动关联分析找出性能瓶颈根源
@@ -155,9 +155,9 @@ graph TB
 
 <!-- chunk: 2. 企业级部署架构 -->## 2. 企业级部署架构
 
-#<!-- chunk: 2.1 高可用部署方案 -->## 2.1 高可用部署方案
+## 2.1 高可用部署方案
 
-##<!-- chunk: 2.1.1 多区域部署架构 -->## 2.1.1 多区域部署架构
+## 2.1.1 多区域部署架构
 
 ```yaml
 # datadog-apm-multiregion.yaml
@@ -276,7 +276,7 @@ spec:
             memory: "512Mi"
 ```
 
-##<!-- chunk: 2.1.2 负载均衡配置 -->## 2.1.2 负载均衡配置
+## 2.1.2 负载均衡配置
 
 ```yaml
 # apm-loadbalancer.yaml
@@ -303,9 +303,9 @@ spec:
   - "192.168.0.0/16"
 ```
 
-#<!-- chunk: 2.2 安全加固配置 -->## 2.2 安全加固配置
+## 2.2 安全加固配置
 
-##<!-- chunk: 2.2.1 网络安全策略 -->## 2.2.1 网络安全策略
+## 2.2.1 网络安全策略
 
 ```yaml
 # apm-network-policy.yaml
@@ -357,7 +357,7 @@ spec:
       port: 53
 ```
 
-##<!-- chunk: 2.2.2 认证授权配置 -->## 2.2.2 认证授权配置
+## 2.2.2 认证授权配置
 
 ```yaml
 # apm-security-config.yaml
@@ -417,9 +417,9 @@ data:
 
 <!-- chunk: 3. 企业级监控策略 -->## 3. 企业级监控策略
 
-#<!-- chunk: 3.1 服务级别指标(SLI/SLO) -->## 3.1 服务级别指标(SLI/SLO)
+## 3.1 服务级别指标(SLI/SLO)
 
-##<!-- chunk: 3.1.1 核心SLI定义 -->## 3.1.1 核心SLI定义
+## 3.1.1 核心SLI定义
 
 ```yaml
 # sli-slo-definition.yaml
@@ -456,7 +456,7 @@ spec:
         sum(rate(http_requests_total[5m])) by (service) >= 100
 ```
 
-##<!-- chunk: 3.1.2 SLO告警配置 -->## 3.1.2 SLO告警配置
+## 3.1.2 SLO告警配置
 
 ```yaml
 # slo-alerting.yaml
@@ -506,9 +506,9 @@ spec:
         description: "服务可用性低于目标值，当前值: {{ $value }}"
 ```
 
-#<!-- chunk: 3.2 智能告警策略 -->## 3.2 智能告警策略
+## 3.2 智能告警策略
 
-##<!-- chunk: 3.2.1 异常检测告警 -->## 3.2.1 异常检测告警
+## 3.2.1 异常检测告警
 
 ```python
 # anomaly_detection.py
@@ -600,9 +600,9 @@ alerts = detector.generate_alerts("user-service", anomalies)
 
 <!-- chunk: 4. 性能优化实践 -->## 4. 性能优化实践
 
-#<!-- chunk: 4.1 采样策略优化 -->## 4.1 采样策略优化
+## 4.1 采样策略优化
 
-##<!-- chunk: 4.1.1 智能采样配置 -->## 4.1.1 智能采样配置
+## 4.1.1 智能采样配置
 
 ```yaml
 # intelligent-sampling.yaml
@@ -655,7 +655,7 @@ data:
     }
 ```
 
-##<!-- chunk: 4.1.2 动态采样调整 -->## 4.1.2 动态采样调整
+## 4.1.2 动态采样调整
 
 ```python
 # dynamic_sampling.py
@@ -744,9 +744,9 @@ sampler = DynamicSampler("http://config-server:8080")
 sampler.start_auto_adjustment()
 ```
 
-#<!-- chunk: 4.2 数据存储优化 -->## 4.2 数据存储优化
+## 4.2 数据存储优化
 
-##<!-- chunk: 4.2.1 分层存储策略 -->## 4.2.1 分层存储策略
+## 4.2.1 分层存储策略
 
 ```yaml
 # tiered-storage.yaml
@@ -805,9 +805,9 @@ data:
 
 <!-- chunk: 5. 企业级最佳实践 -->## 5. 企业级最佳实践
 
-#<!-- chunk: 5.1 标签和元数据管理 -->## 5.1 标签和元数据管理
+## 5.1 标签和元数据管理
 
-##<!-- chunk: 5.1.1 统一标签策略 -->## 5.1.1 统一标签策略
+## 5.1.1 统一标签策略
 
 ```yaml
 # tagging-strategy.yaml
@@ -864,9 +864,9 @@ data:
         required: true
 ```
 
-#<!-- chunk: 5.2 成本优化策略 -->## 5.2 成本优化策略
+## 5.2 成本优化策略
 
-##<!-- chunk: 5.2.1 资源配额管理 -->## 5.2.1 资源配额管理
+## 5.2.1 资源配额管理
 
 ```yaml
 # resource-quota.yaml
@@ -907,7 +907,7 @@ spec:
       memory: "256Mi"
 ```
 
-##<!-- chunk: 5.2.2 成本监控告警 -->## 5.2.2 成本监控告警
+## 5.2.2 成本监控告警
 
 ```yaml
 # cost-monitoring.yaml
@@ -955,9 +955,12 @@ spec:
 
 <!-- chunk: 6. 故障排查与诊断 -->## 6. 故障排查与诊断
 
-#<!-- chunk: 6.1 常见问题诊断 -->## 6.1 常见问题诊断
+## 6.1 常见问题诊断
 
-##<!-- chunk: 6.1.1 Trace数据丢失排查 -->## 6.1.1 Trace数据丢失排查
+## 6.1.1 Trace数据丢失排查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -995,7 +998,7 @@ echo "6. 检查APM指标数据:"
 curl -s "http://prometheus:9090/api/v1/query?query=rate(datadog_trace_processed_total[5m])" | jq '.'
 ```
 
-##<!-- chunk: 6.1.2 性能瓶颈分析 -->## 6.1.2 性能瓶颈分析
+## 6.1.2 性能瓶颈分析
 
 ```python
 # performance_bottleneck_analyzer.py
@@ -1133,16 +1136,16 @@ print(report)
 
 <!-- chunk: 7. 未来发展与演进 -->## 7. 未来发展与演进
 
-#<!-- chunk: 7.1 技术发展趋势 -->## 7.1 技术发展趋势
+## 7.1 技术发展趋势
 
-##<!-- chunk: 7.1.1 AI驱动的智能监控 -->## 7.1.1 AI驱动的智能监控
+## 7.1.1 AI驱动的智能监控
 
 - **自适应阈值**: 基于机器学习的动态阈值设置
 - **预测性维护**: 基于历史数据的故障预测
 - **自动化根因分析**: AI辅助的问题根因快速定位
 - **智能告警抑制**: 减少告警噪音的智能算法
 
-##<!-- chunk: 7.1.2 云原生深度集成 -->## 7.1.2 云原生深度集成
+## 7.1.2 云原生深度集成
 
 - **Service Mesh集成**: 与Istio、Linkerd等服务网格深度集成
 - **Serverless监控**: 支持函数即服务的细粒度监控
@@ -1156,8 +1159,8 @@ print(report)
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-20-enterprise-monitoring-alerting MOC
-- [[domain-06-observability/README|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-20 企业监控与告警 — 开源项目索引]]
+- [[domain-06-observability/README.md|Domain 06: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]]
 - Prometheus企业级监控系统深度实践
 - Grafana Enterprise Observability Platform 深度实践
 - OpenTelemetry分布式追踪与可观测性深度实践
@@ -1175,8 +1178,8 @@ print(report)
 - 05-datadog-enterprise-monitoring
 - 06-elastic-stack-enterprise-logging
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

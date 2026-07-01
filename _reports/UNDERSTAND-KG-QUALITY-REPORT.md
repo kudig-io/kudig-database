@@ -229,22 +229,22 @@ created: "2026-05-23"
 
 ## Obsidian 相关文档
 
-- [[reports/CONTENT-DEEP-EVALUATION-2026-05-19|kudig-database 内容深度评估报告]]
-- [[reports/README|项目报告 (Reports)]]
-- [[reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19|kudig-database 内容深度评估 + 修复进展]]
-- [[reports/CONTENT-GAP-ANALYSIS|内容缺口分析报告]]
-- [[reports/DEEP-RESEARCH-ASSESSMENT|深度研究能力评估报告]]
-- [[reports/EVALUATION-2026-05-19|kudig-database 双维度评估报告]]
-- [[reports/EXTRACT-TROUBLESHOOTING|KUDIG Gitbook ZIP 解压问题诊断与解决方案]]
-- [[reports/FIX-SUMMARY-2026-05-19|kudig-database 全面质量修复完成报告]]
-- [[reports/FULL-FIX-PROGRESS-2026-05-19|kudig-database 全面修复进展总览]]
-- [[_reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN|Obsidian Wiki 模式 — AI Agent 语料全面改进计划]]
-- [[reports/PRE-RELEASE-FINAL-EVALUATION-2026-05-19|kudig-database 发布前终局评估]]
+- _reports/CONTENT-DEEP-EVALUATION-2026-05-19.md
+- [[domain-19-landscape-references/topic-release-notes/README.md|项目报告 (Reports)]]
+- _reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md
+- _reports/CONTENT-GAP-ANALYSIS.md
+- _reports/DEEP-RESEARCH-ASSESSMENT.md
+- _reports/EVALUATION-2026-05-19.md
+- _reports/EXTRACT-TROUBLESHOOTING.md
+- _reports/FIX-SUMMARY-2026-05-19.md
+- _reports/FULL-FIX-PROGRESS-2026-05-19.md
+- _reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN.md
+- _reports/PRE-RELEASE-FINAL-EVALUATION-2026-05-19.md
 
 ## Related
 
 - [[CHANGELOG|CHANGELOG]]
 - [[README|README]]
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git|git]]
-- [[_reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19|CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
+- _reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md

@@ -183,6 +183,10 @@ kubectl get pv
 
 ### 任务 2: 动态创建云盘 PVC (40min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 创建 PVC（动态供给，自动创建云盘）
 cat <<EOF | kubectl apply -f -
@@ -256,6 +260,10 @@ kubectl exec disk-pod-demo -- sh -c 'echo "test data written at $(date)" > /data
 ```
 
 ### 任务 3: 静态创建 NAS PV (40min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 创建 NAS 类型 PV（静态方式，需要已有 NAS 文件系统）
@@ -345,6 +353,9 @@ kubectl exec nas-test-abc12 -- cat /data/shared.log
 ```
 
 ### 任务 4: 存储卷删除与回收策略 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 查看当前 PV 的回收策略
@@ -438,6 +449,9 @@ spec:
 
 ### 云盘扩容
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 前提: StorageClass 的 allowVolumeExpansion 必须为 true
 kubectl get sc alicloud-disk-essd -o jsonpath='{.allowVolumeExpansion}'
@@ -452,6 +466,7 @@ kubectl get pvc disk-pvc-demo
 
 # 注意: 扩容不需要重建 Pod，CSI 驱动会自动在线扩容
 # 云盘只支持扩容不支持缩容
+
 ```
 
 ---
@@ -505,3 +520,5 @@ volumeClaimTemplates 为 StatefulSet 的每个 Pod 自动创建独立的 PVC。P
 ## Related
 
 - index/pvc-index|PVC 知识图谱索引]]
+
+```

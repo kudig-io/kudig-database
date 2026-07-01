@@ -357,6 +357,10 @@ echo "0 * * * * root /usr/local/bin/etcd-backup.sh >> /var/log/etcd-backup.log 2
   >> /etc/crontab
 ```
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # ===== 恢复 =====
 # 停止所有etcd节点
@@ -394,6 +398,9 @@ systemctl start etcd
 
 ### 4.3 成员管理
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+
 ```bash
 # 添加新成员 (Learner模式,推荐)
 etcdctl member add etcd-4 --learner \
@@ -407,7 +414,7 @@ etcdctl member add etcd-4 \
   --peer-urls=https://10.0.0.4:2380
 
 # 移除成员
-etcdctl member remove <member_id>
+etcdctl member remove <member_id>  # ⚠️ 移除 etcd 成员，可能丢数据
 
 # 更新成员peer URLs
 etcdctl member update <member_id> \
@@ -661,13 +668,16 @@ journalctl -u etcd | grep -E "(quota|space|compact)"
 
 ### 7.3 紧急恢复流程
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+
 ```bash
 # 场景1: 单节点问题 (3节点集群)
 # 1. 确认集群状态
 etcdctl endpoint health --cluster
 
 # 2. 移除问题成员
-etcdctl member remove <failed_member_id>
+etcdctl member remove <failed_member_id>  # ⚠️ 移除 etcd 成员，可能丢数据
 
 # 3. 添加新成员
 etcdctl member add etcd-new --peer-urls=https://new-ip:2380
@@ -820,6 +830,9 @@ spec:
 
 ### 9.2 升级策略
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 滚动升级步骤 (3.5.x -> 3.5.y)
 # 原则: 一次升级一个节点,先Follower后Leader
@@ -889,6 +902,10 @@ etcdctl endpoint status --cluster -w table
 <!-- chunk: 附录: etcdctl 命令速查 -->
 ## 附录: etcdctl 命令速查
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+
 ```bash
 # 基础操作
 etcdctl put key value                    # 写入
@@ -900,13 +917,13 @@ etcdctl watch key                        # 监听变化
 # 集群管理
 etcdctl member list                      # 成员列表
 etcdctl member add name --peer-urls=url  # 添加成员
-etcdctl member remove id                 # 移除成员
+etcdctl member remove id                 # 移除成员  # ⚠️ 移除 etcd 成员，可能丢数据
 etcdctl endpoint health --cluster        # 健康检查
 etcdctl endpoint status --cluster        # 状态详情
 
 # 维护操作
 etcdctl snapshot save file.db            # 快照备份
-etcdctl snapshot restore file.db         # 恢复
+etcdctl snapshot restore file.db         # 恢复  # ⚠️ 覆盖 etcd 数据，集群状态回退
 etcdctl compact revision                 # 压缩
 etcdctl defrag                           # 碎片整理
 etcdctl alarm list                       # 告警列表
@@ -936,7 +953,7 @@ etcdctl user grant-role user role        # 授权
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -959,10 +976,10 @@ etcdctl user grant-role user role        # 授权
 - 相关知识域: domain-03-networking-traffic
 - 相关知识域: domain-04-storage-data
 - 相关知识域: domain-05-security-compliance
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|速查卡: k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet|速查卡: kubectl-scene-cheatsheet]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
 
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist|集群删除前的数据备份与迁移检查清单]]- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist.md|集群删除前的数据备份与迁移检查清单]]- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 

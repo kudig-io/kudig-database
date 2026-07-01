@@ -4,6 +4,7 @@ category: "troubleshooting"
 tags: ["workloads", "remote-consultant"]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 dialogue_id: "DIALOGUE-SKILL-IMG-001"
 skill_id: "SKILL-IMG-001"
 version: "1.0.0"
@@ -11,15 +12,15 @@ role: "remote-consultant"
 language: "zh"
 summary: "镜像拉取问题的远程顾问对话脚本，覆盖镜像不存在、认证失败、仓库不可达排查。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL]]"
+  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
     type: uses
-  - target: "[[entities/deployment]]"
+  - target: "[[entities/deployment.md]]"
     type: uses
-  - target: "[[entities/kubelet]]"
+  - target: "[[entities/kubelet.md]]"
     type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces]]"
+  - target: "[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md]]"
     type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service]]"
+  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service.md]]"
     type: uses
 ---
 
@@ -37,7 +38,7 @@ relationships:
 
 **顾问回应**：
 > 收到，镜像拉取失败会直接导致 Pod 无法启动。作为远程顾问，我无法直连你的集群，请你配合执行检查命令。先回答三个问题（30 秒内）：
-> 1. **影响范围**：多少 Pod / [[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces|命名空间]] / 节点受影响？
+> 1. **影响范围**：多少 Pod / [[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md|命名空间]] / 节点受影响？
 > 2. **紧急程度**：业务是否已中断？是否有用户投诉？
 > 3. **发生时间**：问题是突然发生还是逐渐恶化？最近是否有发布变更？
 
@@ -45,7 +46,7 @@ relationships:
 
 ### 入口 B：工程师报告 Pod 无法启动（疑似镜像问题）
 
-**工程师**：「Pod 一直在 Pending」/「[[entities/deployment|Deployment]] 滚动更新卡住了」/「新发布的版本起不来」
+**工程师**：「Pod 一直在 Pending」/「[[entities/deployment.md|Deployment]] 滚动更新卡住了」/「新发布的版本起不来」
 
 **顾问回应**：
 > Pod 无法启动有多种可能，镜像拉取失败是最常见的根因之一。请先执行：
@@ -207,7 +208,7 @@ relationships:
 > **如果无法创建临时 Pod** → `kubectl exec -it <pod-name> -n <namespace> -- nslookup <registry-host>`
 
 **分支决策**：
-- **C1**：DNS 解析失败 → 升级至 [[skills/skill-k8s-node-notready-SKILL|SKILL]]-NET-001（DNS 问题诊断）
+- **C1**：DNS 解析失败 → 升级至 [[skills/skill-k8s-node-notready-SKILL.md|SKILL]]-NET-001（DNS 问题诊断）
 - **C2**：DNS 正常但 HTTP 超时，多节点受影响 → Round 3 — 分支 M（镜像仓库/代理排查）
 - **C3**：DNS 正常但 HTTP 超时，仅单节点受影响 → Round 3 — 分支 N（单节点网络排查）
 
@@ -452,6 +453,11 @@ kubectl get sa default -n <ns> -o yaml | grep imagePullSecrets
 **步骤 4：阿里云特定修复**
 
 如ACR免密插件异常：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 重启ACR免密插件
 kubectl delete pod -n kube-system -l app=acr-credential-helper
@@ -462,7 +468,7 @@ kubectl create secret docker-registry acr-secret   --docker-server=registry.<reg
 
 如专有云Harbor无法访问：
 1. 检查Harbor Pod状态
-2. 检查Harbor [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]
+2. 检查Harbor [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
 3. 检查节点到Harbor网络连通性
 4. 如Harbor异常，联系平台团队
 
@@ -475,7 +481,7 @@ kubectl create secret docker-registry acr-secret   --docker-server=registry.<reg
 | 涉及节点级容器运行时问题 | **SKILL-NODE-001** | 节点深度诊断 |
 | 涉及 DNS 解析失败 | **SKILL-NET-001** | DNS 问题诊断 |
 | 涉及网络策略/防火墙阻断出站 | **SKILL-NET-003** | 网络深度诊断 |
-| 需要修改节点系统级配置 | **节点管理团队** | systemd、[[entities/kubelet|kubelet]] 等 |
+| 需要修改节点系统级配置 | **节点管理团队** | systemd、[[entities/kubelet.md|kubelet]] 等 |
 | 镜像安全扫描/漏洞阻断 | **SKILL-SEC-003** | 安全策略相关 |
 | 怀疑镜像被篡改或供应链攻击 | **安全团队** | 需紧急安全审查 |
 
@@ -489,6 +495,11 @@ kubectl create secret docker-registry acr-secret   --docker-server=registry.<reg
 ---
 
 ## 附录：常用命令速查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 快速查看镜像拉取失败的 Pod

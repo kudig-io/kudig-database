@@ -71,7 +71,7 @@ estimated_read_time: 5min
 intent_queries:
 - 开发者体验度量 (Developer Experience Metrics) 是什么
 - 如何 开发者体验度量 (Developer Experience Metrics)
-- [[Kubernetes|Kubernetes]] 36 [[synthesis/platform-engineering-sre|platform engineering]] 最佳实践
+- [[Kubernetes|Kubernetes]] 36 [[concepts/platform-engineering-sre.md|platform engineering]] 最佳实践
 trigger_keywords:
 - 开发者体验度量
 - Developer
@@ -118,7 +118,7 @@ k8s_versions:
 
 <!-- chunk: 为何度量开发者体验 -->## 为何度量开发者体验
 
-#<!-- chunk: 度量的多重价值 -->## 度量的多重价值
+## 度量的多重价值
 
 ```mermaid
 mindmap
@@ -141,7 +141,7 @@ mindmap
       员工幸福感
 ```
 
-#<!-- chunk: 度量框架全景 -->## 度量框架全景
+## 度量框架全景
 
 ```mermaid
 graph TB
@@ -171,7 +171,7 @@ graph TB
 
 <!-- chunk: DORA 指标详解 -->## DORA 指标详解
 
-#<!-- chunk: 四大核心指标 -->## 四大核心指标
+## 四大核心指标
 
 DORA（DevOps Research and Assessment）通过多年大规模研究，识别出四个与组织绩效高度相关的软件交付指标：
 
@@ -195,7 +195,7 @@ graph LR
     end
 ```
 
-#<!-- chunk: 绩效等级对照表 -->## 绩效等级对照表
+## 绩效等级对照表
 
 | 指标 | Elite（精英） | High（高） | Medium（中） | Low（低） |
 |------|-------------|-----------|-------------|---------|
@@ -206,7 +206,7 @@ graph LR
 
 > 数据来源：2023 State of DevOps Report
 
-#<!-- chunk: 指标1：Deployment Frequency（部署频率） -->## 指标1：Deployment Frequency（部署频率）
+## 指标1：Deployment Frequency（部署频率）
 
 ```yaml
 # 通过 GitHub Actions 记录部署事件
@@ -378,7 +378,7 @@ class DORAMetricsCalculator:
         }
 ```
 
-#<!-- chunk: 指标可视化 Prometheus 规则 -->## 指标可视化 Prometheus 规则
+## 指标可视化 Prometheus 规则
 
 ```yaml
 # DORA Metrics Prometheus Rules
@@ -467,7 +467,7 @@ spec:
 
 <!-- chunk: SPACE 框架 -->## SPACE 框架
 
-#<!-- chunk: SPACE 框架概述 -->## SPACE 框架概述
+## SPACE 框架概述
 
 SPACE 框架由 GitHub、微软研究院和 Victoria University 联合提出（2021），是比 DORA 更全面的开发者生产力框架：
 
@@ -488,9 +488,9 @@ graph TD
     E --- S
 ```
 
-#<!-- chunk: SPACE 各维度指标 -->## SPACE 各维度指标
+## SPACE 各维度指标
 
-##<!-- chunk: S - Satisfaction（满意度） -->## S - Satisfaction（满意度）
+## S - Satisfaction（满意度）
 
 ```yaml
 # 季度开发者满意度调研问题
@@ -522,7 +522,7 @@ satisfaction_survey:
       question: "您当前工作中最大的痛点是什么？"
 ```
 
-##<!-- chunk: A - Activity（活动量指标） -->## A - Activity（活动量指标）
+## A - Activity（活动量指标）
 
 ```python
 # 从 GitHub 采集活动指标
@@ -559,7 +559,7 @@ class ActivityMetricsCollector:
         }
 ```
 
-##<!-- chunk: E - Efficiency（效率指标） -->## E - Efficiency（效率指标）
+## E - Efficiency（效率指标）
 
 ```sql
 -- 分析 PR 生命周期效率（BigQuery / Redshift）
@@ -630,7 +630,7 @@ ORDER BY team, avg_merge_time_hours DESC;
 
 <!-- chunk: 平台工程 KPI -->## 平台工程 KPI
 
-#<!-- chunk: 平台 KPI 体系 -->## 平台 KPI 体系
+## 平台 KPI 体系
 
 ```mermaid
 graph TB
@@ -663,7 +663,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: TTFHW 指标详解 -->## TTFHW 指标详解
+## TTFHW 指标详解
 
 TTFHW（Time to First Hello World）是衡量新工程师或新项目启动效率的关键指标：
 
@@ -742,7 +742,7 @@ status:
     - "本地 Docker 版本不兼容，缺少升级说明"
 ```
 
-#<!-- chunk: 平台 SLO 定义 -->## 平台 SLO 定义
+## 平台 SLO 定义
 
 ```yaml
 # Platform SLO Configuration
@@ -820,7 +820,7 @@ spec:
             }[5m]))
 ```
 
-#<!-- chunk: 自助服务率计算 -->## 自助服务率计算
+## 自助服务率计算
 
 ```python
 # 自助服务率 = 通过平台自动完成的请求 / 总请求
@@ -885,7 +885,7 @@ class SelfServiceRateCalculator:
 
 <!-- chunk: 开发者满意度调研 -->## 开发者满意度调研
 
-#<!-- chunk: 调研设计原则 -->## 调研设计原则
+## 调研设计原则
 
 ```mermaid
 mindmap
@@ -908,7 +908,7 @@ mindmap
       改进进展更新
 ```
 
-#<!-- chunk: 全面开发者满意度调研模板 -->## 全面开发者满意度调研模板
+## 全面开发者满意度调研模板
 
 ```json
 {
@@ -1068,7 +1068,7 @@ mindmap
 }
 ```
 
-#<!-- chunk: NPS 分析方法 -->## NPS 分析方法
+## NPS 分析方法
 
 ```python
 # Developer NPS 分析
@@ -1150,7 +1150,7 @@ class DeveloperNPSAnalyzer:
 
 <!-- chunk: 指标采集架构 -->## 指标采集架构
 
-#<!-- chunk: 指标数据流架构 -->## 指标数据流架构
+## 指标数据流架构
 
 ```mermaid
 graph TB
@@ -1212,7 +1212,7 @@ graph TB
     style "Visualization Layer（可视化层）" fill:#fce4ec
 ```
 
-#<!-- chunk: GitHub 指标采集器实现 -->## GitHub 指标采集器实现
+## GitHub 指标采集器实现
 
 ```python
 # github_metrics_exporter.py
@@ -1343,7 +1343,7 @@ class GitHubMetricsExporter:
 
 <!-- chunk: 平台指标仪表板 -->## 平台指标仪表板
 
-#<!-- chunk: Grafana Dashboard JSON 配置 -->## Grafana Dashboard JSON 配置
+## Grafana Dashboard JSON 配置
 
 ```json
 {
@@ -1483,7 +1483,7 @@ class GitHubMetricsExporter:
 
 <!-- chunk: DX 改进循环 -->## DX 改进循环
 
-#<!-- chunk: 持续改进循环 -->## 持续改进循环
+## 持续改进循环
 
 ```mermaid
 graph TD
@@ -1502,7 +1502,7 @@ graph TD
     style COMMUNICATE fill:#f1f8e9
 ```
 
-#<!-- chunk: OKR 示例：DX 改进 -->## OKR 示例：DX 改进
+## OKR 示例：DX 改进
 
 ```yaml
 # Platform Team Q1 2024 OKRs - Developer Experience Focus
@@ -1552,7 +1552,7 @@ key_results:
 
 <!-- chunk: 指标陷阱与反模式 -->## 指标陷阱与反模式
 
-#<!-- chunk: 常见陷阱 -->## 常见陷阱
+## 常见陷阱
 
 ```mermaid
 graph TD
@@ -1580,7 +1580,7 @@ graph TD
     T6 -.-> H4
 ```
 
-#<!-- chunk: 避免指标游戏的设计原则 -->## 避免指标游戏的设计原则
+## 避免指标游戏的设计原则
 
 ```yaml
 # 健康的指标使用原则
@@ -1617,7 +1617,7 @@ principles:
 
 <!-- chunk: 实施路径 -->## 实施路径
 
-#<!-- chunk: DX 度量实施计划 -->## DX 度量实施计划
+## DX 度量实施计划
 
 ```mermaid
 gantt
@@ -1644,27 +1644,27 @@ gantt
     Executive Dashboard        :p4-3, after p4-2, 14d
 ```
 
-#<!-- chunk: 快速启动检查清单 -->## 快速启动检查清单
+## 快速启动检查清单
 
 ```markdown
 <!-- chunk: 30天快速启动 DX 度量 -->## 30天快速启动 DX 度量
 
-#<!-- chunk: Week 1-2: 基础设施 -->## Week 1-2: 基础设施
+## Week 1-2: 基础设施
 - [ ] 安装 Prometheus + Grafana
 - [ ] 配置 GitHub Metrics Exporter
 - [ ] 部署 DORA 指标看板
 
-#<!-- chunk: Week 3: 第一次度量 -->## Week 3: 第一次度量
+## Week 3: 第一次度量
 - [ ] 计算当前 4 项 DORA 指标基线
 - [ ] 识别最大的部署瓶颈
 - [ ] 记录第一个改进目标
 
-#<!-- chunk: Week 4: 调研基线 -->## Week 4: 调研基线
+## Week 4: 调研基线
 - [ ] 发送首次开发者满意度调研（10题以内）
 - [ ] 计算开发者 NPS 基线
 - [ ] 提炼 Top 3 痛点
 
-#<!-- chunk: Month 2-3: 完善体系 -->## Month 2-3: 完善体系
+## Month 2-3: 完善体系
 - [ ] 添加 SPACE 框架指标
 - [ ] 实施平台 SLO 监控
 - [ ] 建立月度 DX Review 会议
@@ -1675,7 +1675,7 @@ gantt
 
 <!-- chunk: 总结 (Summary) -->## 总结 (Summary)
 
-#<!-- chunk: DX 度量的核心原则 -->## DX 度量的核心原则
+## DX 度量的核心原则
 
 | 原则 | 描述 |
 |------|------|
@@ -1686,7 +1686,7 @@ gantt
 | **定量+定性** | 数字与人的声音结合 |
 | **闭环改进** | 度量 → 分析 → 行动 → 验证 |
 
-#<!-- chunk: 度量成熟度路径 -->## 度量成熟度路径
+## 度量成熟度路径
 
 ```mermaid
 graph LR
@@ -1720,7 +1720,7 @@ graph LR
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Domain 36: 平台工程 (Platform Engineering)]]
+- [[domain-07-platform-engineering/README.md|Domain 07: 平台工程 (Platform Engineering)]]
 - Domain-36 平台工程 — 开源项目索引
 - 平台工程概述与成熟度模型
 - 内部开发者平台设计原则

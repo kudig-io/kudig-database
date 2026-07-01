@@ -44,7 +44,7 @@ created: "2026-05-23"
 | [[falco|Falco]] | 43 个版本 | 运行时安全与异常检测 |
 | [[opa|opa]] | 86 个版本 | 通用策略引擎 |
 | Gatekeeper | 24 个版本 | OPA 的 Kubernetes 准入集成 |
-| [[entities/trivy|[[Trivy|trivy]]]] | 28 个版本 | 容器和 IaC 安全扫描 |
+| [[entities/trivy.md|[[Trivy|trivy]]]] | 28 个版本 | 容器和 IaC 安全扫描 |
 | [[cert-manager|cert-manager]] | 37 个版本 | Kubernetes 证书管理 |
 
 ## Falco 版本演进
@@ -164,7 +164,7 @@ cert-manager 自动化 Kubernetes 中的 TLS 证书管理。
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[opa]] — OPA (Open Policy Agent)
 - [[falco]] — Falco
-- [[entities/trivy|trivy]] — Trivy
+- [[entities/trivy.md|trivy]] — Trivy
 - [[cert-manager]] — cert-manager
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

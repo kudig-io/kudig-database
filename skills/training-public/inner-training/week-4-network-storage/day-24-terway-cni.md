@@ -137,6 +137,9 @@ kubectl describe node <node-name> | grep -A 5 "Allocatable" | grep -i eni
 
 ### 任务 2: Pod 网络验证 (ENIIP 模式) (40min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 创建测试 Pod
 kubectl run terway-test-1 --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/busybox:1.36 \
@@ -163,6 +166,9 @@ kubectl exec terway-test-1 -- wget -qO- --timeout=5 http://100.100.100.200/lates
 ```
 
 ### 任务 3: NetworkPolicy 实践 (40min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建命名空间隔离
@@ -222,6 +228,11 @@ kubectl run test3 --namespace=np-test --labels="access=true" \
 
 ### 任务 4: Terway 排障 (30min)
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Terway 日志
 kubectl logs -n kube-system $(kubectl get pod -n kube-system -l app=terway-eniip -o jsonpath='{.items[0].metadata.name}') -c terway --tail=30
@@ -236,7 +247,7 @@ kubectl exec terway-test-1 -- ip route
 
 # 清理
 kubectl delete pod terway-test-1 terway-test-2
-kubectl delete namespace np-test
+kubectl delete namespace np-test  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
 ---

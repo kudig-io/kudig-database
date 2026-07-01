@@ -75,7 +75,7 @@ created: "2026-05-23"
 - [资源查询与筛选](#资源查询与筛选)
 - [Pod 操作](#pod-操作)
 - Deployment 管理](#deployment-管理)
-- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]] 与网络](#service-与网络)
+- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]] 与网络](#service-与网络)
 - [ConfigMap & Secret](#configmap--secret)
 - [存储管理](#存储管理)
 - [调度与亲和性](#调度与亲和性)
@@ -83,7 +83,7 @@ created: "2026-05-23"
 - [故障排查](#故障排查)
 - [资源监控](#资源监控)
 - [高级操作](#高级操作)
-- [[entities/etcd|etcd]] 操作](#etcd-操作)
+- [[entities/etcd.md|etcd]] 操作](#etcd-操作)
 - [API Server 管理](#api-server-管理)
 - [集群维护](#集群维护)
 
@@ -154,7 +154,7 @@ kubectl api-versions
 # 检查集群健康状态 (v1.25+)
 kubectl get --raw='/readyz?verbose' | jq
 kubectl get --raw='/livez?verbose' | jq
-kubectl get componentstatuses  # ⚠️ v1.19+ 已弃用
+kubectl get componentstatuses
 ```
 
 **版本兼容性**:
@@ -194,6 +194,9 @@ kubectl get pods --sort-by=.status.startTime
 ```
 
 ### 标签与选择器
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 按标签筛选
@@ -244,6 +247,12 @@ kubectl get pods -l app=nginx --field-selector status.phase=Running
 
 ### Pod 创建与删除
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 从 YAML 创建
 kubectl apply -f pod.yaml
@@ -259,12 +268,12 @@ kubectl run test --image=curlimages/curl:8.5.0 --rm -it -- sh
 
 # 删除 Pod
 kubectl delete pod <pod-name>
-kubectl delete pod <pod-name> --grace-period=0 --force  # 强制删除
+kubectl delete pod <pod-name> --grace-period=0 --force  # 强制删除  # ⚠️ 跳过优雅终止，可能丢数据
 kubectl delete pod <pod-name> --wait=false  # 异步删除
 
 # 批量删除
 kubectl delete pods -l app=nginx
-kubectl delete pods --all -n <namespace>
+kubectl delete pods --all -n <namespace>  # ⚠️ 批量删除，波及面大
 
 # 删除并重建 (v1.25+)
 kubectl replace --force -f pod.yaml
@@ -334,6 +343,9 @@ kubectl logs <pod-name> -c <init-container-name>
 
 ### Pod 执行命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 进入 Pod (交互式 shell)
 kubectl exec -it <pod-name> -- /bin/bash
@@ -384,6 +396,10 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.volumes[*]}'
 
 ### Deployment 创建与更新
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 创建 Deployment (v1.25+)
 kubectl create deployment nginx --image=nginx:1.25 --replicas=3
@@ -417,6 +433,9 @@ kubectl get deployment <deployment-name> -o yaml
 
 ### Deployment 滚动更新
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 查看滚动更新状态
 kubectl rollout status deployment/<deployment-name>
@@ -445,6 +464,9 @@ kubectl rollout restart deployment/<deployment-name>
 
 ### ReplicaSet 管理
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 查看 ReplicaSet
 kubectl get rs
@@ -465,6 +487,10 @@ kubectl delete rs <rs-name>
 ## Service 与网络
 
 ### Service 管理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 创建 Service (v1.25+)
@@ -523,6 +549,9 @@ spec:
 
 ### Ingress 管理
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 查看 Ingress (v1.25+ 使用 networking.k8s.io/v1)
 kubectl get ingress
@@ -549,6 +578,10 @@ kubectl get ingressclass
 - **Istio Ingress Gateway**: v1.19+ (兼容 K8s v1.25-v1.32)
 
 ### NetworkPolicy
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 查看 NetworkPolicy (v1.25+ 使用 networking.k8s.io/v1)
@@ -580,6 +613,11 @@ kubectl run test --image=busybox:1.36 --rm -it -- wget -O- http://<service-name>
 
 ### ConfigMap 管理
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 从字面量创建 ConfigMap (v1.25+)
 kubectl create configmap <cm-name> --from-literal=key1=value1 --from-literal=key2=value2
@@ -610,6 +648,10 @@ kubectl delete cm <cm-name>
 ```
 
 ### Secret 管理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 创建 Generic Secret (v1.25+)
@@ -654,6 +696,9 @@ kubectl delete secret <secret-name>
 
 ### PersistentVolume (PV)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 查看 PV (cluster-scoped)
 kubectl get pv
@@ -670,6 +715,11 @@ kubectl delete pv <pv-name>
 ```
 
 ### PersistentVolumeClaim (PVC)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 查看 PVC
@@ -693,6 +743,9 @@ kubectl edit pvc <pvc-name>  # 修改 spec.resources.requests.storage
 ```
 
 ### StorageClass
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 查看 StorageClass (v1.25+)
@@ -719,6 +772,9 @@ kubectl describe sc <sc-name>
 
 ### VolumeSnapshot (v1.25+)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 查看 VolumeSnapshot (需要 CSI 驱动支持)
 kubectl get volumesnapshot
@@ -739,6 +795,12 @@ kubectl apply -f pvc-from-snapshot.yaml
 ## 调度与亲和性
 
 ### 节点调度
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 节点标签操作
@@ -822,6 +884,9 @@ spec:
 
 ### PriorityClass (v1.25+)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 查看 PriorityClass
 kubectl get priorityclass
@@ -841,6 +906,9 @@ kubectl apply -f priorityclass.yaml
 
 ### ServiceAccount
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建 ServiceAccount (v1.25+)
 kubectl create serviceaccount <sa-name>
@@ -856,6 +924,7 @@ kubectl create token <sa-name> --duration=24h  # 自定义过期时间
 # 绑定到 Pod
 # spec:
 #   serviceAccountName: <sa-name>
+
 ```
 
 **Token 变更** (v1.25+):
@@ -864,6 +933,9 @@ kubectl create token <sa-name> --duration=24h  # 自定义过期时间
 - 或手动创建 `kubernetes.io/service-account-token` 类型 Secret (长期 Token)
 
 ### Role & RoleBinding (命名空间级别)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 Role (v1.25+)
@@ -891,6 +963,9 @@ kubectl auth can-i --list --as=<username>
 ```
 
 ### ClusterRole & ClusterRoleBinding (集群级别)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 ClusterRole
@@ -996,6 +1071,9 @@ kubectl get events --field-selector involvedObject.kind=Node,involvedObject.name
 
 ### 网络故障排查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 测试 Service 连通性
 kubectl run test --image=busybox:1.36 --rm -it -- wget -O- http://<service-name>.<namespace>.svc.cluster.local
@@ -1051,6 +1129,9 @@ kubectl get volumeattachment
 
 ### Metrics Server (v0.6.0+)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 安装 Metrics Server (适用 K8s v1.25-v1.32)
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
@@ -1085,6 +1166,9 @@ kubectl describe limitrange <limitrange-name>
 ```
 
 ### HorizontalPodAutoscaler (HPA, v1.25+ 使用 autoscaling/v2)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 创建 HPA
@@ -1128,10 +1212,16 @@ kubectl describe vpa <vpa-name>
 
 ### 批量操作
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 批量删除 Pod
 kubectl delete pods -l app=nginx
-kubectl delete pods --all -n <namespace>
+kubectl delete pods --all -n <namespace>  # ⚠️ 批量删除，波及面大
 
 # 批量重启 Deployment
 for deploy in $(kubectl get deploy -o name); do kubectl rollout restart $deploy; done
@@ -1146,6 +1236,9 @@ kubectl apply -f manifest.yaml -R  # 递归应用子目录
 ```
 
 ### Patch 操作 (v1.25+)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # JSON Patch
@@ -1184,6 +1277,9 @@ spec:
 
 ### Admission Webhook (v1.25+)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 查看 ValidatingWebhookConfiguration
 kubectl get validatingwebhookconfigurations
@@ -1208,6 +1304,9 @@ kubectl delete validatingwebhookconfiguration <webhook-name>
 - **K8s v1.31-v1.32**: etcd v3.5.13+
 
 ### etcd 命令 (etcdctl v3)
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
 ```bash
 # 设置 etcdctl API 版本
@@ -1368,6 +1467,10 @@ kubeadm init phase kubeconfig admin
 
 ### 升级集群 (kubeadm)
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 查看升级计划 (K8s v1.25+)
 kubeadm upgrade plan
@@ -1400,6 +1503,12 @@ kubectl uncordon <node-name>
 
 ### 节点维护
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 节点维护流程
 kubectl cordon <node-name>  # 1. 标记不可调度
@@ -1412,11 +1521,14 @@ kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data --force
 kubectl delete node <node-name>
 
 # 在节点上执行 (删除前)
-kubeadm reset
+kubeadm reset  # ⚠️ 清理节点所有 K8s 配置
 systemctl stop kubelet
 ```
 
 ### 清理资源
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 清理 Completed 状态的 Pod
@@ -1440,6 +1552,9 @@ docker image prune -a  # Docker
 ```
 
 ### 备份与恢复
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 备份关键资源 (生产环境推荐定期执行)
@@ -1598,5 +1713,7 @@ labels:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+```

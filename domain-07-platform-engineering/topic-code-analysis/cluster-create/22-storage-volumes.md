@@ -267,6 +267,9 @@ CSI 是 Kubernetes 与存储厂商对接的标准接口:
                     └─────────────────────────┘
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 部署 CSI Driver (以 AWS EBS 为例)
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-ebs-csi-driver/master/deploy/kubernetes/base/
@@ -372,8 +375,8 @@ kubectl get node <node> -o jsonpath='{.status.capacity}'
 ## Related
 
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[entities/fluentd|Fluentd]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/fluentd.md|Fluentd]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]

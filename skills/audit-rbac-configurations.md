@@ -1,6 +1,6 @@
 ---
 title: Audit RBAC Configurations
-description: '- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-security]] — 发布说明索引 — 安全'
+description: '- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-security]] — 发布说明索引 — 安全'
 category: skills
 tags:
 - k8s
@@ -83,11 +83,11 @@ Use tools like `rbac-lookup` or `kubectl-view-allocations` to audit RBAC at scal
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-security]] — 发布说明索引 — 安全
-- [[skills/k8s-pod-security-guide|k8s-pod-security-guide]] — Kubernetes Pod 安全最佳实践
-- [[skills/configure-health-probes|configure-health-probes]] — Configure Health Probes
-- [[concepts/multi-tenancy-isolation|multi-tenancy-isolation]] — Multi-Tenancy Isolation
-- [[concepts/security-defense-depth|security-defense-depth]] — Defense-in-Depth Security
-- [[concepts/security-defense-depth|Defense-in-Depth Security]]
-- [[concepts/multi-tenancy-isolation|Multi-Tenancy Isolation]]
-- [[skills/configure-health-probes|Configure Health Probes]]
+- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-security]] — 发布说明索引 — 安全
+- [[skills/k8s-pod-security-guide.md|k8s-pod-security-guide]] — Kubernetes Pod 安全最佳实践
+- [[skills/configure-health-probes.md|configure-health-probes]] — Configure Health Probes
+- [[concepts/multi-tenancy-isolation.md|multi-tenancy-isolation]] — Multi-Tenancy Isolation
+- [[concepts/security-defense-depth.md|security-defense-depth]] — Defense-in-Depth Security
+- [[concepts/security-defense-depth.md|Defense-in-Depth Security]]
+- [[concepts/multi-tenancy-isolation.md|Multi-Tenancy Isolation]]
+- [[skills/configure-health-probes.md|Configure Health Probes]]

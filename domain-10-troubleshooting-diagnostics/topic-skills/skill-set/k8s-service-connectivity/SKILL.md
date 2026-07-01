@@ -32,6 +32,7 @@ related_skills:
   - "SKILL-NET-003"
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 title: "[[Service|Service]] 连通性问题诊断与修复"
 tags: ["skills", "service-connectivity", "troubleshooting", "visibility/public"]
 ---
@@ -211,6 +212,7 @@ flowchart TD
     H -->|修复失败| J[升级给高级SRE]
     I --> K[更新监控告警]
     J --> L[准备问题报告]
+
 ```
 
 ## 工具速查表
@@ -417,6 +419,9 @@ ip route show | grep flannel
 
 **Istio 诊断命令**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Envoy sidecar 配置
 istioctl proxy-config cluster <pod> -n <namespace>
@@ -539,4 +544,6 @@ arping -I <iface> <lb-ip>
 
 ## 相关概念
 
-- [[concepts/cni-networking-model|CNI 网络模型]] — Kubernetes 容器网络接口与 Service 网络原理
+- [[concepts/cni-networking-model.md|CNI 网络模型]] — Kubernetes 容器网络接口与 Service 网络原理
+
+```

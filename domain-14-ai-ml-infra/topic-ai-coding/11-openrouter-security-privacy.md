@@ -29,7 +29,7 @@ created: "2026-05-23"
 
 # 安全、隐私与数据治理
 
-> **文档类型**: 安全指南 | **最后更新**: 2026-03 | **关键词**: OpenRouter, [[domain-05-security-compliance/README|security]], Privacy, Data Collection, Zero Data Retention, ZDR, EU Residency, BYOK, API Key, OAuth PKCE
+> **文档类型**: 安全指南 | **最后更新**: 2026-03 | **关键词**: OpenRouter, [[domain-05-security-compliance/README.md|security]], Privacy, Data Collection, Zero Data Retention, ZDR, EU Residency, BYOK, API Key, OAuth PKCE
 
 ---
 

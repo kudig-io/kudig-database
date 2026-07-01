@@ -983,7 +983,7 @@ created: "2026-05-23"
       - [Ephemeral Volumes（临时卷）](domain-17-system-foundation/topic-dictionary/storage/ephemeral-volumes.md)
       - [高性能存储网络（RDMA / NVMe-oF）](domain-17-system-foundation/topic-dictionary/storage/high-performance-storage-networks.md)
       - [Local ephemeral storage（本地临时存储）](domain-17-system-foundation/topic-dictionary/storage/local-ephemeral-storage.md)
-      - [Node-specific Volume Limits（节点特定卷限制）](domain-17-system-foundation/topic-dictionary/[[domain-17-system-foundation/topic-dictionary/storage/node-specific-volume-limits|node-specific-volume-limits]].md)
+      - [Node-specific Volume Limits（节点特定卷限制）](domain-17-system-foundation/topic-dictionary/[[domain-17-system-foundation/topic-dictionary/storage/node-specific-volume-limits.md|node-specific-volume-limits]].md)
       - [对象存储与数据流水线](domain-17-system-foundation/topic-dictionary/storage/object-storage-and-data-pipelines.md)
       - [Persistent Volumes（持久卷）](domain-17-system-foundation/topic-dictionary/storage/persistent-volumes.md)
       - [Projected Volumes（投射卷）](domain-17-system-foundation/topic-dictionary/storage/projected-volumes.md)

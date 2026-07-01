@@ -22,11 +22,14 @@ KUDIG Embedding Pipeline — 全库向量化索引构建
     └── index.faiss         # FAISS 索引（可选，需安装 faiss）
 
 Embedding Provider 配置（环境变量）：
-  EMBEDDING_PROVIDER=mock       # 默认：确定性伪向量（快速验证）
+  EMBEDDING_PROVIDER=local      # 默认：sentence-transformers 本地模型，更适合中文
+  EMBEDDING_PROVIDER=mock       # 确定性伪向量（快速验证，需显式设置）
   EMBEDDING_PROVIDER=openai     # OpenAI text-embedding-3-small
-  EMBEDDING_PROVIDER=local      # sentence-transformers 本地模型
   OPENAI_API_KEY=sk-xxx
-  LOCAL_MODEL_NAME=all-MiniLM-L6-v2
+  LOCAL_MODEL_NAME=BAAI/bge-m3  # 默认本地模型，首次下载较慢
+
+依赖：
+  pip install sentence-transformers
 """
 
 import argparse
@@ -45,7 +48,7 @@ import yaml
 # ========== 常量 ==========
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 CACHE_DIR = PROJECT_ROOT / "corpus-config" / "profiles" / ".vector-cache"
-DEFAULT_EMBEDDING_DIM = 384  # all-MiniLM-L6-v2
+DEFAULT_EMBEDDING_DIM = 1024  # BAAI/bge-m3
 
 
 # ========== 数据模型 ==========
@@ -297,12 +300,24 @@ class OpenAIProvider(EmbeddingProvider):
 
 
 class LocalProvider(EmbeddingProvider):
-    def __init__(self, model_name: str = "all-MiniLM-L6-v2"):
+    def __init__(self, model_name: str = "BAAI/bge-m3"):
         try:
             from sentence_transformers import SentenceTransformer
         except ImportError:
             raise ImportError("pip install sentence-transformers")
-        self.model = SentenceTransformer(model_name)
+
+        # 自动选择设备：优先 GPU，其次 CPU
+        device = "cpu"
+        try:
+            import torch
+            if torch.cuda.is_available():
+                device = "cuda"
+            elif torch.backends.mps.is_available():
+                device = "mps"
+        except ImportError:
+            pass
+
+        self.model = SentenceTransformer(model_name, device=device)
 
     def embed(self, texts: List[str]) -> List[List[float]]:
         embeddings = self.model.encode(texts, show_progress_bar=False, convert_to_numpy=True)
@@ -310,11 +325,11 @@ class LocalProvider(EmbeddingProvider):
 
 
 def get_provider() -> EmbeddingProvider:
-    provider_name = os.getenv("EMBEDDING_PROVIDER", "mock").lower()
+    provider_name = os.getenv("EMBEDDING_PROVIDER", "local").lower()
     if provider_name == "openai":
         return OpenAIProvider()
     elif provider_name == "local":
-        model = os.getenv("LOCAL_MODEL_NAME", "all-MiniLM-L6-v2")
+        model = os.getenv("LOCAL_MODEL_NAME", "BAAI/bge-m3")
         return LocalProvider(model)
     else:
         dim = int(os.getenv("MOCK_EMBEDDING_DIM", str(DEFAULT_EMBEDDING_DIM)))

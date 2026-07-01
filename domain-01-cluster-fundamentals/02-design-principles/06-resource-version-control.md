@@ -199,6 +199,9 @@ func needsReconcile(deploy *appsv1.Deployment) bool {
 
 ### SSA请求示例
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply --server-side --field-manager=my-controller -f pod.yaml
 ```
@@ -269,7 +272,7 @@ metadata:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README|Domain-2: Kubernetes 设计原则与核心机制]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
 - index.md|Domain-2 设计原则 — 开源项目索引]]
 - Kubernetes 设计原则与哲学
 - 声明式 API 与面向终态设计
@@ -290,4 +293,4 @@ metadata:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|[[etcd 知识图谱索引|etcd 知识图谱索引]]]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|[[etcd 知识图谱索引|etcd 知识图谱索引]]]]

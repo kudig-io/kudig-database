@@ -201,6 +201,10 @@ Taint（污点）和 Toleration（容忍）是 Kubernetes 中实现节点专用�
 
 **参考答案**:
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # Step 1: 标记节点不可调度
 kubectl cordon node-1
@@ -628,4 +632,6 @@ kubectl get pods -n kube-system -l app=flannel
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

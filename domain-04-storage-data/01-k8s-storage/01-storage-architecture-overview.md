@@ -420,6 +420,11 @@ spec:
 
 #### 扩容操作流程
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 修改PVC大小
 kubectl edit pvc data-pvc
@@ -712,9 +717,14 @@ mount | grep /var/lib/kubelet
 
 ### 强制清理挂载卷
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 删除Pod
-kubectl delete pod <pod-name> --grace-period=0 --force
+kubectl delete pod <pod-name> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 2. 删除VolumeAttachment
 kubectl delete volumeattachment <va-name>
@@ -803,6 +813,9 @@ spec:
 ```
 
 ### 方案四: Longhorn 分布式存储
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装Longhorn
@@ -1727,7 +1740,7 @@ graph TD
 ## Obsidian 相关文档
 
 - domain-04-storage-data MOC
-- [[domain-04-storage-data/README|Storage Domain 存储领域知识库]]
+- [[domain-04-storage-data/README.md|Storage Domain 存储领域知识库]]
 - Domain-6 存储 — 开源项目索引
 - PV/PVC 核心概念与企业级实践
 - 03 - PVC使用模式与最佳实践
@@ -1742,15 +1755,15 @@ graph TD
 ## Related
 
 - [[MOC]]
-- [[synthesis/Pod 生命周期 × 存储模型|Pod 生命周期 × 存储模型]]
+- [[concepts/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
 
 - PV/PVC 核心概念
 - StorageClass 动态供给
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-04-storage-data
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 ## See Also
 

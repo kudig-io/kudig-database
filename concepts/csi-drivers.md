@@ -4,6 +4,7 @@ category: concepts
 tags: ['csi', 'storage', 'drivers', 'k8s']
 created: 2026-05-23
 updated: 2026-05-24
+last_updated: 2026-05-24
 status: active
 ---
 
@@ -47,7 +48,7 @@ kube-controller-manager
 
 Kubernetes 早期将 AWS EBS、GCE PD 等存储驱动直接编译在 kubelet 和 controller-manager 中（in-tree）。CSI 的出现使得存储驱动可以独立于 Kubernetes 版本迭代，in-tree 驱动通过 CSI Migration 机制逐步迁移至 CSI 实现。
 
-> 详见 [[concepts/storage-model]] 了解存储整体架构，[[concepts/pv]] 了解 PersistentVolume，[[concepts/storageclass]] 了解 StorageClass 动态供应。
+> 详见 [[concepts/storage-model.md|storage model]] 了解存储整体架构，[[concepts/pv.md|pv]] 了解 PersistentVolume，[[concepts/storageclass.md|storageclass]] 了解 StorageClass 动态供应。
 
 ---
 
@@ -466,13 +467,13 @@ parameters:
 
 ## 相关概念
 
-- [[concepts/pv]] — PersistentVolume 和 PersistentVolumeClaim
-- [[concepts/storageclass]] — StorageClass 动态供应
-- [[concepts/storage-model]] — Kubernetes 存储模型总览
-- [[domain-04-storage-data/index]] — 存储与数据领域索引
+- [[concepts/pv.md|pv]] — PersistentVolume 和 PersistentVolumeClaim
+- [[concepts/storageclass.md|storageclass]] — StorageClass 动态供应
+- [[concepts/storage-model.md|storage model]] — Kubernetes 存储模型总览
+- [[domain-19-landscape-references/98-merged-indexes/index.md|index]] — 存储与数据领域索引
 
 ## Related
 
-- [[concepts/cloud-native-storage-systems]] — 云原生存储系统架构
-- [[concepts/storage-performance-optimization]] — 存储性能优化策略
-- [[concepts/storage-data-protection]] — 存储数据保护与灾备
+- [[concepts/cloud-native-storage-systems.md|cloud native storage systems]] — 云原生存储系统架构
+- [[concepts/storage-performance-optimization.md|storage performance optimization]] — 存储性能优化策略
+- [[concepts/storage-data-protection.md|storage data protection]] — 存储数据保护与灾备

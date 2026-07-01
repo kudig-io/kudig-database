@@ -187,9 +187,9 @@ bash scripts/verify-node.sh <node-name>
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
 
 
 ## 远程顾问信息收集
@@ -389,5 +389,5 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/pod-lifecycle|Pod 生命周期]] — Pod 创建、运行、终止的完整生命周期
-- [[concepts/node-lifecycle-management|节点生命周期管理]] — Kubernetes 节点状态管理与维护
+- [[concepts/pod-lifecycle.md|Pod 生命周期]] — Pod 创建、运行、终止的完整生命周期
+- [[concepts/node-lifecycle-management.md|节点生命周期管理]] — Kubernetes 节点状态管理与维护

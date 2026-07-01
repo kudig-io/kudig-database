@@ -176,18 +176,18 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine|FTA 诊断执行引擎]]
-- [[skills/ts-control-plane|控制平面故障排查]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[skills/ts-control-plane.md|控制平面故障排查]]
 
 ## Related
 
-- [[skills/skill-20-networkpolicy-connectivity|skill-20-networkpolicy-connectivity]] — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
-- [[skills/assessment-k8s-fundamentals-quiz|assessment-k8s-fundamentals-quiz]] — K8S Fundamentals Quiz
-- [[skills/ts-cloud-provider|ts-cloud-provider]] — 云服务商集成排查
-- [[skills/ts-node-components|ts-node-components]] — 节点组件故障排查
+- [[skills/skill-20-networkpolicy-connectivity.md|skill-20-networkpolicy-connectivity]] — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
+- [[skills/assessment-k8s-fundamentals-quiz.md|assessment-k8s-fundamentals-quiz]] — K8S Fundamentals Quiz
+- [[skills/ts-cloud-provider.md|ts-cloud-provider]] — 云服务商集成排查
+- [[skills/ts-node-components.md|ts-node-components]] — 节点组件故障排查
 - [[apiserver-fta]] — API Server 异常故障树分析
 
 - [[nginx-ingress-fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/scheduler-fta|Scheduler 异常故障树分析]]
-- [[skills/assessment-k8s-fundamentals-quiz-answers|K8S Fundamentals Quiz Answers]] — Cross-reference
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/scheduler-fta.md|Scheduler 异常故障树分析]]
+- [[skills/assessment-k8s-fundamentals-quiz-answers.md|K8S Fundamentals Quiz Answers]] — Cross-reference

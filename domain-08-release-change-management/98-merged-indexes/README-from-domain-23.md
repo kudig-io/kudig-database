@@ -95,6 +95,7 @@ OpenGitOps四大原则:
     描述: 软件代理持续对比实际状态和期望状态
     实现: Argo CD Controller、Flux Kustomization Controller
     好处: 自动漂移检测、自愈能力
+
 ```
 
 ---
@@ -844,6 +845,9 @@ Tekton Specific:
 
 ### 14.1 一键部署 Argo CD + Tekton
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 set -euo pipefail
@@ -923,4 +927,5 @@ CNCF项目状态:
 
 - 相关知识域: domain-07-platform-engineering
 - 相关知识域: domain-24-infrastructure-as-code
-- [[domain-17-system-foundation/topic-cheat-sheet/git|速查卡: git]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git.md|速查卡: git]]
+```

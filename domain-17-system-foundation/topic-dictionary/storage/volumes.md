@@ -61,7 +61,7 @@ created: "2026-05-23"
 ### 子路径（subPath / subPathExpr）
 
 - `subPath`：指定卷内的子路径进行挂载，使同一个卷可在同一 Pod 中被多个容器以不同子目录挂载。
-- `subPathExpr`：支持使用 [[Downward API|downward API]] 环境变量动态构建子路径名。
+- `subPathExpr`：支持使用 [[domain-17-system-foundation/topic-dictionary/workloads/downward-api.md|downward API]] 环境变量动态构建子路径名。
 
 ### 挂载传播（Mount Propagation）
 
@@ -168,6 +168,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Pod 的卷配置
 kubectl get pod <pod-name> -o jsonpath='{.spec.volumes}' | jq .
@@ -195,4 +198,8 @@ kubectl get pvc -n production
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume.md|Persistent Volume]]
+- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume-claim.md|Persistent Volume Claim]]
+- [[domain-17-system-foundation/topic-dictionary/storage/storage-class.md|Storage Class]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volume.md|Volume]]
+- [[domain-17-system-foundation/topic-dictionary/storage/emptydir.md|Emptydir]]

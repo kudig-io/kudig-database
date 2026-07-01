@@ -83,7 +83,7 @@ related:
 
 ## 概述
 
-Docker 是学习 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 的第一块基石。Kubernetes 的核心功能就是编排和管理容器，而 Docker 是目前最流行的容器运行时之一（准确地说，K8s 1.24+ 使用 [[containerd|containerd]] 作为运行时，但 Docker 的概念和操作仍然是理解容器技术的基础）。
+Docker 是学习 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 的第一块基石。Kubernetes 的核心功能就是编排和管理容器，而 Docker 是目前最流行的容器运行时之一（准确地说，K8s 1.24+ 使用 [[containerd|containerd]] 作为运行时，但 Docker 的概念和操作仍然是理解容器技术的基础）。
 
 今天的学习目标不是成为 Docker 专家，而是理解容器技术的本质、掌握 Docker 的核心操作，并建立"容器与 K8s 的关系"的认知框架。后续学习中遇到容器相关的问题时，你能够快速定位和解决。
 
@@ -154,6 +154,7 @@ FROM nginx:alpine          # 基础镜像层（Alpine Linux + Nginx）
 COPY index.html /usr/share/nginx/html/  # 新增一层（复制文件）
 EXPOSE 80                  # 元数据（不增加层大小）
 CMD ["nginx", "-g", "daemon off;"]  # 默认启动命令
+
 ```
 
 构建优化的核心原则：
@@ -294,6 +295,9 @@ docker inspect my-app | jq '.[0].State.Health'
 
 ### 任务 3: 镜像管理 (30min)
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+
 ```bash
 # 镜像标签管理
 docker tag my-nginx:v1 my-nginx:latest
@@ -311,7 +315,7 @@ docker inspect my-nginx:v1 | jq '.[0].RootFS.Layers'
 
 # 清理未使用的资源
 docker system df
-docker system prune -f
+docker system prune -f  # ⚠️ 强制清理，可能杀运行中容器
 docker image prune -a -f
 ```
 
@@ -382,3 +386,5 @@ containerd 是从 Docker 中拆分出来的容器运行时组件。Docker 的架
 - [Docker 网络深入](../../domain-13-container-runtime/04-docker-networking-deep-dive.md)
 - [Docker 安全最佳实践](../../domain-13-container-runtime/07-docker-security-best-practices.md)
 - [Docker 命令参考](../../domain-13-container-runtime/99-docker-commands-reference.md)
+
+```

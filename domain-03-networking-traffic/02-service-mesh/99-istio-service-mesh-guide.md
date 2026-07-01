@@ -77,7 +77,7 @@ Istio 是功能最全面的开源服务网格平台，提供流量管理、安�
 
 Istio 的核心设计理念是将分布式系统中的通信关注点从应用代码中分离出来，通过在基础设施层提供透明代理来实现服务间通信的统一治理。这使得开发者无需在业务代码中嵌入服务发现、负载均衡、重试、超时、加密等逻辑，而是通过声明式的 YAML 配置来管理这些横切关注点。2026年 Istio 的重大发展包括 Ambient Mesh 模式的 GA 发布、Gateway API 的全面支持，以及持续的性能优化和可观测性增强。
 
-#<!-- chunk: 架构图 -->## 架构图
+## 架构图
 
 ```mermaid
 graph TB
@@ -110,7 +110,7 @@ graph TB
 
 <!-- chunk: 一、架构模式选择 -->## 一、架构模式选择
 
-#<!-- chunk: 1.1 Sidecar 模式 (传统成熟) -->## 1.1 Sidecar 模式 (传统成熟)
+## 1.1 Sidecar 模式 (传统成熟)
 
 ```
 Pod
@@ -125,7 +125,7 @@ Pod
 **优点**: 功能完整（L3-L7）、社区案例丰富、WASM 扩展支持、成熟稳定
 **缺点**: 额外资源开销 (~100MB/Pod)、Pod 启动延迟 (+3-8s)、运维复杂度高
 
-#<!-- chunk: 1.2 Ambient Mesh (无 Sidecar — 2026 GA) -->## 1.2 Ambient Mesh (无 Sidecar — 2026 GA)
+## 1.2 Ambient Mesh (无 Sidecar — 2026 GA)
 
 ```
 Node
@@ -139,7 +139,7 @@ Pod (无 Sidecar — 零侵入)
 **优点**: 更低资源占用 (~85%节省)、更快启动、更简单运维、零侵入
 **状态**: v1.29 GA，生产可用
 
-#<!-- chunk: 1.3 选型建议 -->## 1.3 选型建议
+## 1.3 选型建议
 
 | 场景 | 推荐模式 | 原因 |
 |:---|:---|:---|
@@ -156,7 +156,7 @@ Pod (无 Sidecar — 零侵入)
 
 <!-- chunk: 二、安装部署 -->## 二、安装部署
 
-#<!-- chunk: 2.1 istioctl 安装 (推荐) -->## 2.1 istioctl 安装 (推荐)
+## 2.1 istioctl 安装 (推荐)
 
 ```bash
 # 下载安装 istioctl
@@ -200,7 +200,11 @@ istioctl verify-install
 # ✔ Installation complete
 ```
 
-#<!-- chunk: 2.2 [[Helm|Helm]] 安装 -->## 2.2 Helm 安装
+## 2.2 Helm 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 添加 Helm 仓库
@@ -229,7 +233,11 @@ helm list -n istio-system
 kubectl get pods -n istio-system -o wide
 ```
 
-#<!-- chunk: 2.3 命名空间注入 -->## 2.3 命名空间注入
+## 2.3 命名空间注入
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # Sidecar 自动注入
@@ -260,7 +268,7 @@ kubectl get svc
 
 <!-- chunk: 三、流量管理 -->## 三、流量管理
 
-#<!-- chunk: 3.1 VirtualService 与 DestinationRule -->## 3.1 VirtualService 与 DestinationRule
+## 3.1 VirtualService 与 DestinationRule
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -352,7 +360,7 @@ spec:
         simple: LEAST_REQUEST
 ```
 
-#<!-- chunk: 3.2 Gateway API (推荐新标准) -->## 3.2 Gateway API (推荐新标准)
+## 3.2 Gateway API (推荐新标准)
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -421,7 +429,7 @@ spec:
       weight: 10
 ```
 
-#<!-- chunk: 3.3 流量镜像 -->## 3.3 流量镜像
+## 3.3 流量镜像
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -445,7 +453,7 @@ spec:
       value: 10
 ```
 
-#<!-- chunk: 3.4 故障注入 -->## 3.4 故障注入
+## 3.4 故障注入
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -476,7 +484,7 @@ spec:
 
 <!-- chunk: 四、安全加固 -->## 四、安全加固
 
-#<!-- chunk: 4.1 全局 mTLS (STRICT 模式) -->## 4.1 全局 mTLS (STRICT 模式)
+## 4.1 全局 mTLS (STRICT 模式)
 
 ```yaml
 apiVersion: security.istio.io/v1beta1
@@ -498,7 +506,7 @@ spec:
     mode: PERMISSIVE
 ```
 
-#<!-- chunk: 4.2 授权策略 (AuthorizationPolicy) -->## 4.2 授权策略 (AuthorizationPolicy)
+## 4.2 授权策略 (AuthorizationPolicy)
 
 ```yaml
 apiVersion: security.istio.io/v1beta1
@@ -563,7 +571,7 @@ spec:
         principals: ["cluster.local/ns/production/sa/*"]
 ```
 
-#<!-- chunk: 4.3 JWT 认证 -->## 4.3 JWT 认证
+## 4.3 JWT 认证
 
 ```yaml
 apiVersion: security.istio.io/v1beta1
@@ -608,7 +616,7 @@ spec:
 
 <!-- chunk: 五、可观测性配置 -->## 五、可观测性配置
 
-#<!-- chunk: 5.1 Telemetry API -->## 5.1 Telemetry API
+## 5.1 Telemetry API
 
 ```yaml
 apiVersion: telemetry.istio.io/v1alpha1
@@ -621,15 +629,15 @@ spec:
   - providers:
     - name: prometheus
     overrides:
-    - match:
-        metric: ALL_METRICS
-      tagOverrides:
-        destination_cluster:
-          value: "cluster-1"
-        request_method:
-          value: "request.method"
-        request_host:
-          value: "request.host"
+    - matchers:
+      - metric="ALL_METRICS"
+      - tagOverrides=""
+      - destination_cluster=""
+      - value="cluster-1"
+      - request_method=""
+      - value="request.method"
+      - request_host=""
+      - value="request.host"
   accessLogging:
   - providers:
     - name: envoy
@@ -649,7 +657,10 @@ spec:
           value: "production"
 ```
 
-#<!-- chunk: 5.2 Kiali 可视化 -->## 5.2 Kiali 可视化
+## 5.2 Kiali 可视化
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装可观测性组件
@@ -669,7 +680,7 @@ istioctl dashboard grafana
 istioctl dashboard jaeger
 ```
 
-#<!-- chunk: 5.3 关键 PromQL 查询 -->## 5.3 关键 PromQL 查询
+## 5.3 关键 PromQL 查询
 
 ```promql
 # 服务错误率
@@ -692,7 +703,7 @@ sum(istio_tcp_connections_opened_total) by (destination_service)
 istio_cert_expiry_timestamp - time()
 ```
 
-#<!-- chunk: 5.4 Prometheus 告警规则 -->## 5.4 Prometheus 告警规则
+## 5.4 Prometheus 告警规则
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -752,7 +763,10 @@ spec:
 
 <!-- chunk: 六、多集群部署 -->## 六、多集群部署
 
-#<!-- chunk: 6.1 单网络多集群 (Flat Network) -->## 6.1 单网络多集群 (Flat Network)
+## 6.1 单网络多集群 (Flat Network)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # Cluster 1
@@ -780,7 +794,7 @@ istioctl create-remote-secret \
 istioctl proxy-status
 ```
 
-#<!-- chunk: 6.2 多网络多集群 (Gateway 互连) -->## 6.2 多网络多集群 (Gateway 互连)
+## 6.2 多网络多集群 (Gateway 互连)
 
 ```yaml
 apiVersion: networking.istio.io/v1beta1
@@ -806,7 +820,7 @@ spec:
 
 <!-- chunk: 七、性能调优 -->## 七、性能调优
 
-#<!-- chunk: 7.1 Sidecar 资源限制 -->## 7.1 Sidecar 资源限制
+## 7.1 Sidecar 资源限制
 
 ```yaml
 apiVersion: v1
@@ -824,7 +838,7 @@ data:
         sidecar.istio.io/proxyLimitMemory: "1Gi"
 ```
 
-#<!-- chunk: 7.2 Ambient 资源 -->## 7.2 Ambient 资源
+## 7.2 Ambient 资源
 
 ```yaml
 # ztunnel DaemonSet
@@ -854,7 +868,7 @@ spec:
           averageUtilization: 70
 ```
 
-#<!-- chunk: 7.3 istiod 调优 -->## 7.3 istiod 调优
+## 7.3 istiod 调优
 
 ```yaml
 apiVersion: apps/v1
@@ -895,7 +909,10 @@ spec:
 
 <!-- chunk: 八、故障排查 -->## 八、故障排查
 
-#<!-- chunk: 8.1 诊断命令 -->## 8.1 诊断命令
+## 8.1 诊断命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -939,9 +956,10 @@ kubectl exec -n default deploy/sleep -- \
 
 echo "=== 10. 证书检查 ==="
 istioctl proxy-config secret deployment/frontend -n production
+
 ```
 
-#<!-- chunk: 8.2 常见问题 -->## 8.2 常见问题
+## 8.2 常见问题
 
 | 问题 | 原因 | 诊断命令 | 解决方案 |
 |:---|:---|:---|:---|
@@ -972,7 +990,7 @@ istioctl proxy-config secret deployment/frontend -n production
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
 - Domain-26 服务网格与微服务 — 开源项目索引
 - Istio 企业级服务网格架构与实践
 - Linkerd 企业级服务网格深度实践
@@ -993,4 +1011,6 @@ istioctl proxy-config secret deployment/frontend -n production
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+
+```

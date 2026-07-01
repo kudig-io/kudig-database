@@ -125,7 +125,7 @@ New tags require discussion and addition to this file.
 ### Tier 4 — 部署与生态域
 
 - `domain/cloud-providers` — 多云厂商、混合部署
-- `domain/container-runtime` — [[entities/docker|docker]]、镜像管理
+- `domain/container-runtime` — [[entities/docker.md|docker]]、镜像管理
 - `domain/ai-ml-infra` — AI 基础设施
 - `domain/specialized-tech` — 边缘计算、WebAssembly、扩展
 - `domain/database-middleware` — 数据库、中间件

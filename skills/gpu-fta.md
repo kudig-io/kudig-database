@@ -140,17 +140,17 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
-- [[skills/ts-node-components|节点组件排查]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[skills/ts-node-components.md|节点组件排查]]
 
 ## Related
 
-- [[skills/Symptom Vector Matching Engine|[[Symptom Vector Matching Engine|Symptom Vector Matching Engine]]]] — Symptom Vector Matching Engine
-- [[skills/skill-reference-root-cause-catalog|skill-reference-root-cause-catalog]] — Root Cause Catalog
-- [[entities/container-runtime|container-runtime]] — Container Runtime
-- [[entities/kubelet|kubelet]] — kubelet
+- [[skills/Symptom Vector Matching Engine.md|[[Symptom Vector Matching Engine|Symptom Vector Matching Engine]]]] — Symptom Vector Matching Engine
+- [[skills/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
+- [[entities/container-runtime.md|container-runtime]] — Container Runtime
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/gpu-fta|GPU 异常故障树分析]]
-- [[skills/assessment-daily-check-quiz|Daily Check Quiz]] — Cross-reference
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/gpu-fta.md|GPU 异常故障树分析]]
+- [[skills/assessment-daily-check-quiz.md|Daily Check Quiz]] — Cross-reference

@@ -175,7 +175,7 @@ kube-scheduler --feature-gates=SchedulerQueueingHints=true
 - 减少不必要的重试和抢占
 - 更智能的 Pod 排队策略
 
-### DRA ([[Dynamic Resource Allocation|Dynamic Resource Allocation]]) 集成 (v1.33 GA)
+### DRA ([[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]]) 集成 (v1.33 GA)
 
 ```yaml
 # v1.33: DRA 控制平面 GA
@@ -650,7 +650,7 @@ kubectl get pods -A -o json | jq '.items[].spec.initContainers[]? | select(.rest
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析

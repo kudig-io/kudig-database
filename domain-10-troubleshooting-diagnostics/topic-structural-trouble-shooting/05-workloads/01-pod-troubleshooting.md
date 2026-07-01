@@ -230,6 +230,10 @@ crictl inspect <container-id> | jq '.info.runtimeSpec.linux.namespaces[] | selec
 | **Go** | `./main` 作为 PID 1 | 正常（Go runtime 内置处理） | ✅ Go 默认优雅处理信号 |
 
 **僵尸进程诊断**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 进入容器查看僵尸进程
 kubectl exec <pod> -- ps aux | grep defunct
@@ -382,6 +386,7 @@ process.wait()  # 阻塞直到子进程退出
 第 5 次失败：等待 80s
 第 6 次失败：等待 160s
 第 7 次失败：等待 300s (上限)
+
 ```
 
 #### 1.3.3 容器退出码详解
@@ -416,6 +421,7 @@ kubectl get pod <pod> -o jsonpath='{.status.containerStatuses[0].lastState.termi
 
 # 方法 2：通过 crictl（节点上）
 crictl inspect <container-id> | jq '.status'
+
 ```
 
 ---
@@ -467,6 +473,7 @@ crictl stats
 
 # 查看 CRI 调用延迟
 journalctl -u containerd | grep "RunPodSandbox\|CreateContainer" | tail -20
+
 ```
 
 ---
@@ -684,6 +691,9 @@ kubectl describe node <node-name> | grep Taints
 ### 3.2 第二阶段：容器内部环境诊断
 确认“环境是否如我所愿”。
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 验证环境变量与配置挂载
 kubectl exec <pod-name> -- env
@@ -716,6 +726,7 @@ spec:
   containers:
   - name: istio-proxy
     restartPolicy: Always # 标记为 Sidecar
+
 ```
 
 ---
@@ -865,6 +876,9 @@ ls -la /var/lib/kubelet/pods/$POD_UID/volumes/
 ### 3.3 第三阶段：容器运行时诊断
 
 **目标**：深入容器内部，验证应用环境和网络连通性。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 查看容器日志（最近 100 行）
@@ -1243,6 +1257,9 @@ jvm_memory_used_bytes{area="heap"} / jvm_memory_max_bytes{area="heap"}
 
 **Step 1：分析 JVM 内存布局**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 在 Pod 重启前执行（获取完整内存映射）
 kubectl exec java-app -- jcmd 1 VM.native_memory summary
@@ -1253,7 +1270,7 @@ kubectl exec java-app -- jcmd 1 VM.native_memory summary
 # Total:  reserved=2100MB, committed=1850MB
 #   - Heap:         reserved=1536MB, committed=1536MB  # ✅ 堆内存正常
 #   - Metaspace:    reserved=256MB,  committed=230MB   # ✅ 元空间正常
-#   - Thread:       reserved=150MB,  committed=150MB   # ⚠️ 线程栈
+#   - Thread:       reserved=150MB,  committed=150MB 
 #   - Code:         reserved=50MB,   committed=45MB
 #   - GC:           reserved=80MB,   committed=75MB
 #   - Direct:       reserved=28MB,   committed=28MB    # ❌ 堆外内存
@@ -1265,6 +1282,9 @@ kubectl exec java-app -- jcmd 1 VM.native_memory summary
 - **关键**：`Direct`（堆外内存）持续增长，从 28MB 增长至 300MB+（超出预期）
 
 **Step 2：定位堆外内存泄漏**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 查看堆外内存分配栈
@@ -1397,6 +1417,7 @@ spec:
                 kubectl exec $pod -- jcmd 1 VM.native_memory summary
               done
           restartPolicy: OnFailure
+
 ```
 
 **成果**：
@@ -1508,6 +1529,7 @@ journalctl -u kubelet -f | grep nginx-abc123
 # 错误日志：
 # E0210 10:30:00 kubelet.go:1234] Failed to stop container 9876543210ab: 
 #   context deadline exceeded (timeout waiting for container to stop)
+
 ```
 
 **根因分析**：
@@ -1520,6 +1542,10 @@ journalctl -u kubelet -f | grep nginx-abc123
 #### 5.2.3 解决方案
 
 **紧急止损**（强制清理，10 分钟）：
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # Step 1：在节点上强制杀死容器进程
@@ -1534,7 +1560,7 @@ umount -f -l /var/lib/kubelet/pods/<uid>/volumes/kubernetes.io~nfs/nginx-data-pv
 kubectl patch pod nginx-abc123 -p '{"metadata":{"finalizers":null}}'
 
 # Step 4：强制删除 Pod
-kubectl delete pod nginx-abc123 --force --grace-period=0
+kubectl delete pod nginx-abc123 --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 验证删除成功
 kubectl get pod nginx-abc123
@@ -1717,6 +1743,9 @@ Span: user-service -> order-service
 
 **Step 1：验证 DNS 解析性能**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 在 Pod 内测试 DNS 解析
 kubectl exec user-service-abc123 -- time nslookup order-service.default.svc.cluster.local
@@ -1742,6 +1771,9 @@ kubectl exec user-service-abc123 -- cat /etc/resolv.conf
 ```
 
 **Step 2：分析 DNS 查询链路**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 在 Pod 内抓包（使用 tcpdump）
@@ -2010,6 +2042,9 @@ webhooks:
 
 ## 附录：常用诊断命令速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 查看 Pod 完整状态
 kubectl get pod <pod> -o yaml
@@ -2061,14 +2096,16 @@ kubectl debug <pod> -it --image=nicolaka/netshoot --target=<container> -- \
 - 16-troubleshooting-guide
 - [[hot|hot]]
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting|05-job-cronjob-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting|06-configmap-secret-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|02-deployment-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting|03-statefulset-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting.md|05-job-cronjob-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
+
+```

@@ -168,7 +168,7 @@ flowchart TB
     style Infra fill:#e8f5e9
 ```
 
-#<!-- chunk: 阿里云产品映射 -->## 阿里云产品映射
+## 阿里云产品映射
 
 | 架构层 | 阿里云方案 | 多租户适配 |
 |:---|:---|:---|
@@ -222,7 +222,7 @@ flowchart TB
     style 独立Cluster fill:#ffccbc
 ```
 
-#<!-- chunk: 隔离模型选型矩阵 -->## 隔离模型选型矩阵
+## 隔离模型选型矩阵
 
 | 维度 | 共享数据库 | Schema 隔离 | 独立数据库 | 独立集群 |
 |:---|:---|:---|:---|:---|
@@ -263,7 +263,7 @@ flowchart TB
     style Storage fill:#e8f5e9
 ```
 
-#<!-- chunk: ShardingSphere 多租户配置 -->## ShardingSphere 多租户配置
+## ShardingSphere 多租户配置
 
 ```yaml
 # ShardingSphere 多租户数据源配置
@@ -480,7 +480,7 @@ flowchart TB
 
 <!-- chunk: 八、ACK 阿里云部署架构 -->## 八、ACK 阿里云部署架构
 
-#<!-- chunk: SaaS 平台 vCluster 隔离架构 -->## SaaS 平台 vCluster 隔离架构
+## SaaS 平台 vCluster 隔离架构
 
 ```mermaid
 flowchart TB
@@ -509,7 +509,7 @@ flowchart TB
     style SharedNamespace fill:#fff8e1
 ```
 
-#<!-- chunk: vCluster 大客户隔离配置 -->## vCluster 大客户隔离配置
+## vCluster 大客户隔离配置
 
 ```yaml
 # 使用 vCluster 为大客户创建独立虚拟集群
@@ -591,17 +591,17 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

@@ -4,6 +4,7 @@ type: "multi-fault"
 skills: ['21-statefulset-failure', '01-node-notready', '07-pvc-storage-failure']
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 title: "StatefulSet PVC未绑定 + 节点NotReady并发"
 category: uncategorized
 tags: ["uncategorized", "visibility/public"]

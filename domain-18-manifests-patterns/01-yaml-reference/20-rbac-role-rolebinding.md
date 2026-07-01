@@ -64,7 +64,7 @@ Role 和 RoleBinding 是 [[Kubernetes|Kubernetes]] RBAC (Role-Based Access Contr
 
 <!-- chunk: 1. Role 基础配置 -->## 1. Role 基础配置
 
-#<!-- chunk: 1.1 基本 Role -->## 1.1 基本 Role
+## 1.1 基本 Role
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -104,7 +104,7 @@ rules:
     - "watch"    # 监听资源变化
 ```
 
-#<!-- chunk: 1.2 多资源类型的 Role -->## 1.2 多资源类型的 Role
+## 1.2 多资源类型的 Role
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -182,7 +182,7 @@ rules:
     - "delete"
 ```
 
-#<!-- chunk: 1.3 使用 resourceNames 限制特定资源 -->## 1.3 使用 resourceNames 限制特定资源
+## 1.3 使用 resourceNames 限制特定资源
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -216,7 +216,7 @@ rules:
     - "watch"
 ```
 
-#<!-- chunk: 1.4 完整权限的 Role -->## 1.4 完整权限的 Role
+## 1.4 完整权限的 Role
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -269,7 +269,7 @@ rules:
 
 <!-- chunk: 2. RoleBinding 基础配置 -->## 2. RoleBinding 基础配置
 
-#<!-- chunk: 2.1 基本 RoleBinding -->## 2.1 基本 RoleBinding
+## 2.1 基本 RoleBinding
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -303,7 +303,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-#<!-- chunk: 2.2 授权给 ServiceAccount -->## 2.2 授权给 ServiceAccount
+## 2.2 授权给 ServiceAccount
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -334,7 +334,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-#<!-- chunk: 2.3 授权给多个 Subjects -->## 2.3 授权给多个 Subjects
+## 2.3 授权给多个 Subjects
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -381,7 +381,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-#<!-- chunk: 2.4 RoleBinding 引用 ClusterRole -->## 2.4 RoleBinding 引用 ClusterRole
+## 2.4 RoleBinding 引用 ClusterRole
 
 ```yaml
 # ClusterRole 定义 (集群范围)
@@ -447,7 +447,7 @@ roleRef:
 
 <!-- chunk: 3. 内部原理: RBAC Authorizer -->## 3. 内部原理: RBAC Authorizer
 
-#<!-- chunk: 3.1 RBAC 授权流程 -->## 3.1 RBAC 授权流程
+## 3.1 RBAC 授权流程
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -514,7 +514,7 @@ roleRef:
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 3.2 RBAC Authorizer 配置 -->## 3.2 RBAC Authorizer 配置
+## 3.2 RBAC Authorizer 配置
 
 kube-apiserver 启动参数:
 
@@ -528,7 +528,7 @@ kube-apiserver \
   ...
 ```
 
-#<!-- chunk: 3.3 权限评估示例 -->## 3.3 权限评估示例
+## 3.3 权限评估示例
 
 **请求示例**:
 
@@ -569,7 +569,7 @@ Role: pod-reader (namespace: default)
 Result: Allow (允许)
 ```
 
-#<!-- chunk: 3.4 RBAC 缓存机制 -->## 3.4 RBAC 缓存机制
+## 3.4 RBAC 缓存机制
 
 RBAC Authorizer 使用缓存优化性能:
 
@@ -609,7 +609,7 @@ RBAC Authorizer 使用缓存优化性能:
 
 <!-- chunk: 4. 常用 API 资源的 rules 配置 -->## 4. 常用 API 资源的 rules 配置
 
-#<!-- chunk: 4.1 核心资源 (core API group) -->## 4.1 核心资源 (core API group)
+## 4.1 核心资源 (core API group)
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -665,7 +665,7 @@ rules:
   verbs: ["get", "list", "watch", "create", "patch"]
 ```
 
-#<!-- chunk: 4.2 apps API group -->## 4.2 apps API group
+## 4.2 apps API group
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -707,7 +707,7 @@ rules:
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 ```
 
-#<!-- chunk: 4.3 batch API group -->## 4.3 batch API group
+## 4.3 batch API group
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -731,7 +731,7 @@ rules:
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 ```
 
-#<!-- chunk: 4.4 networking.k8s.io API group -->## 4.4 networking.k8s.io API group
+## 4.4 networking.k8s.io API group
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -758,7 +758,7 @@ rules:
   verbs: ["get", "list", "watch"]
 ```
 
-#<!-- chunk: 4.5 autoscaling API group -->## 4.5 autoscaling API group
+## 4.5 autoscaling API group
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -779,7 +779,7 @@ rules:
 
 <!-- chunk: 5. 生产案例 -->## 5. 生产案例
 
-#<!-- chunk: 5.1 案例 1: 开发者只读权限 -->## 5.1 案例 1: 开发者只读权限
+## 5.1 案例 1: 开发者只读权限
 
 **场景**: 开发团队成员需要查看 dev namespace 的资源,但不能修改。
 
@@ -921,7 +921,7 @@ kubectl auth can-i --list -n dev --as alice@example.com
 
 ---
 
-#<!-- chunk: 5.2 案例 2: 运维管理权限 -->## 5.2 案例 2: 运维管理权限
+## 5.2 案例 2: 运维管理权限
 
 **场景**: 运维团队需要管理 production namespace 的所有资源,但不能修改 RBAC。
 
@@ -965,10 +965,6 @@ rules:
   resources: ["*"]
   verbs: ["*"]
 
-
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
 
 # 规则 6: policy API 组 (PodDisruptionBudget, PodSecurityPolicy)
 - apiGroups: ["policy"]
@@ -1048,7 +1044,7 @@ kubectl auth can-i create rolebindings -n production --as ops-user
 
 ---
 
-#<!-- chunk: 5.3 案例 3: CI/CD 部署权限 -->## 5.3 案例 3: CI/CD 部署权限
+## 5.3 案例 3: CI/CD 部署权限
 
 **场景**: GitLab CI/CD 需要部署应用到 production namespace,只能操作特定资源。
 
@@ -1257,9 +1253,9 @@ kubectl auth can-i create statefulsets -n production --as system:serviceaccount:
 
 ---
 
-#<!-- chunk: 5.4 案例 4: 应用 ServiceAccount 最小权限 -->## 5.4 案例 4: 应用 ServiceAccount 最小权限
+## 5.4 案例 4: 应用 ServiceAccount 最小权限
 
-**场景**: 应用需要访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 获取自己的 Pod 信息和配置。
+**场景**: 应用需要访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 获取自己的 Pod 信息和配置。
 
 ```yaml
 ---
@@ -1438,7 +1434,7 @@ func main() {
 
 ---
 
-#<!-- chunk: 5.5 案例 5: 多租户隔离 -->## 5.5 案例 5: 多租户隔离
+## 5.5 案例 5: 多租户隔离
 
 **场景**: SaaS 平台,每个租户有独立的 namespace,租户之间完全隔离。
 
@@ -1637,6 +1633,9 @@ spec:
 
 **租户隔离验证**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 租户 A 管理员可以管理自己的 namespace
 kubectl auth can-i create deployments -n tenant-a --as admin@tenant-a.com
@@ -1660,7 +1659,7 @@ kubectl exec -it test-pod -n tenant-a -- curl http://service.tenant-b.svc.cluste
 
 <!-- chunk: 6. 最佳实践 -->## 6. 最佳实践
 
-#<!-- chunk: 6.1 权限设计原则 -->## 6.1 权限设计原则
+## 6.1 权限设计原则
 
 1. **最小权限原则 (Principle of Least Privilege)**:
    - 只授予完成任务所需的最小权限
@@ -1681,7 +1680,7 @@ kubectl exec -it test-pod -n tenant-a -- curl http://service.tenant-b.svc.cluste
    - 清理不再使用的 ServiceAccount
    - 监控异常的 API 访问
 
-#<!-- chunk: 6.2 RBAC 配置建议 -->## 6.2 RBAC 配置建议
+## 6.2 RBAC 配置建议
 
 ```yaml
 # 好的实践
@@ -1721,7 +1720,7 @@ rules:
   verbs: ["*"]
 ```
 
-#<!-- chunk: 6.3 验证权限 -->## 6.3 验证权限
+## 6.3 验证权限
 
 ```bash
 # 1. 检查当前用户权限
@@ -1748,7 +1747,7 @@ kubectl get roles -n default
 kubectl describe role pod-reader -n default
 ```
 
-#<!-- chunk: 6.4 RBAC 审计 -->## 6.4 RBAC 审计
+## 6.4 RBAC 审计
 
 启用 Audit Logging 记录 RBAC 操作:
 
@@ -1786,7 +1785,7 @@ rules:
 
 <!-- chunk: 7. 常见问题排查 -->## 7. 常见问题排查
 
-#<!-- chunk: 7.1 权限拒绝 (Forbidden) -->## 7.1 权限拒绝 (Forbidden)
+## 7.1 权限拒绝 (Forbidden)
 
 **症状**:
 ```
@@ -1816,7 +1815,7 @@ kubectl auth can-i list pods -n default --as alice
 kubectl logs -n kube-system kube-apiserver-master | grep -i forbidden
 ```
 
-#<!-- chunk: 7.2 ServiceAccount 无权限 -->## 7.2 ServiceAccount 无权限
+## 7.2 ServiceAccount 无权限
 
 **症状**:
 ```
@@ -1824,6 +1823,9 @@ Error from server (Forbidden): pods is forbidden: User "system:serviceaccount:de
 ```
 
 **排查步骤**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 检查 ServiceAccount 是否存在
@@ -1845,13 +1847,17 @@ kubectl get pod <pod-name> -n default -o jsonpath='{.spec.serviceAccountName}'
 kubectl exec <pod-name> -n default -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
 ```
 
-#<!-- chunk: 7.3 RBAC 更新不生效 -->## 7.3 RBAC 更新不生效
+## 7.3 RBAC 更新不生效
 
 **症状**: 更新 Role/RoleBinding 后,权限未生效。
 
 **原因**: RBAC Authorizer 有缓存 (默认 5 秒 TTL)。
 
 **解决方法**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 1. 等待 5-10 秒
@@ -1886,7 +1892,7 @@ kubectl apply -f rolebinding.yaml
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests KUDIG Database — Global MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -1907,4 +1913,4 @@ kubectl apply -f rolebinding.yaml
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

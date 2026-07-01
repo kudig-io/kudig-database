@@ -44,7 +44,7 @@ Hexa 是一个统一的策略编排引擎，使用 IDQL (Identity Query Language
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -60,7 +60,7 @@ Hexa 是一个统一的策略编排引擎，使用 IDQL (Identity Query Language
 
 ## 参考链接
 
-- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]]
+- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]]
 
 ## Related
 
@@ -71,4 +71,4 @@ Hexa 是一个统一的策略编排引擎，使用 IDQL (Identity Query Language
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - hexa
-- [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
+- [[entities/cncf-infrastructure.md|CNCF 基础设施与混沌工程项目全景]] — Cross-reference

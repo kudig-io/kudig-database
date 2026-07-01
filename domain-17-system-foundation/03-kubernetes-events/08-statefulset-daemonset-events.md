@@ -76,7 +76,7 @@ created: "2026-05-23"
 
 <!-- chunk: 事件概览 -->## 事件概览
 
-#<!-- chunk: 事件汇总表 -->## 事件汇总表
+## 事件汇总表
 
 | 事件原因 | 类型 | 来源组件 | 资源类型 | 生产频率 | 版本 |
 |:---|:---|:---|:---|:---|:---|
@@ -96,7 +96,7 @@ created: "2026-05-23"
 | SelectingAll | Warning | daemon-set-controller | DaemonSet | 罕见 | v1.2+ |
 | MissingSelector | Warning | daemon-set-controller | DaemonSet | 罕见 | v1.2+ |
 
-#<!-- chunk: 控制器特性对比 -->## 控制器特性对比
+## 控制器特性对比
 
 | 特性 | StatefulSet | DaemonSet |
 |:---|:---|:---|
@@ -112,7 +112,7 @@ created: "2026-05-23"
 
 <!-- chunk: StatefulSet 控制器事件 -->## StatefulSet 控制器事件
 
-#<!-- chunk: `SuccessfulCreate` - Pod 创建成功 -->## `SuccessfulCreate` - Pod 创建成功
+## `SuccessfulCreate` - Pod 创建成功
 
 | 属性 | 说明 |
 |:---|:---|
@@ -122,25 +122,25 @@ created: "2026-05-23"
 | **适用版本** | v1.5+ |
 | **生产频率** | 高频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 StatefulSet 控制器成功创建了一个 Pod。此事件表示 Pod 对象已被创建到 API Server，但不代表 Pod 已运行。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```
 create Pod web-0 in StatefulSet default/web successful
 create Pod web-1 in StatefulSet default/web successful
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **正常生命周期**: 扩容、初始部署时的正常事件
 - **有序创建**: 在 `OrderedReady` 模式下,只有前一个 Pod Running&Ready 后才创建下一个
 - **并行创建**: 在 `Parallel` 模式下,所有 Pod 同时创建
 - **PVC 绑定**: 如果定义了 volumeClaimTemplates,会同时创建对应的 PVC
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **查看 Pod 创建顺序:**
 ```bash
@@ -157,7 +157,7 @@ kubectl get pods -l app=web -o custom-columns=NAME:.metadata.name,CREATED:.metad
 kubectl get pvc -l app=web
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 正常事件,无需处理。如需优化:
 
@@ -179,7 +179,7 @@ kubectl logs web-0
 
 ---
 
-#<!-- chunk: `SuccessfulDelete` - Pod 删除成功 -->## `SuccessfulDelete` - Pod 删除成功
+## `SuccessfulDelete` - Pod 删除成功
 
 | 属性 | 说明 |
 |:---|:---|
@@ -189,25 +189,25 @@ kubectl logs web-0
 | **适用版本** | v1.5+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 StatefulSet 控制器成功删除了一个 Pod。通常发生在缩容、滚动更新或删除 StatefulSet 时。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```
 delete Pod web-2 in StatefulSet default/web successful
 delete Pod web-1 in StatefulSet default/web successful
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **有序删除**: 在 `OrderedReady` 模式下,从最大序号到最小序号依次删除
 - **并行删除**: 在 `Parallel` 模式下,所有 Pod 同时删除
 - **PVC 保留**: 删除 Pod 时,PVC 默认**不会被删除**(数据保护)
 - **终止宽限期**: 遵守 `terminationGracePeriodSeconds` 设置
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **查看删除顺序:**
 ```bash
@@ -224,7 +224,7 @@ kubectl get pods -l app=web -o yaml | grep deletionTimestamp
 kubectl get pvc -l app=web
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 正常事件,注意数据管理:
 
@@ -247,7 +247,7 @@ spec:
 
 ---
 
-#<!-- chunk: `FailedCreate` - Pod 创建失败 -->## `FailedCreate` - Pod 创建失败
+## `FailedCreate` - Pod 创建失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -257,11 +257,11 @@ spec:
 | **适用版本** | v1.5+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 StatefulSet 控制器无法创建 Pod,通常是 API 调用失败或配置错误导致。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```
 create Pod web-0 in StatefulSet default/web failed error: persistentvolumeclaim "data-web-0" not found
@@ -269,14 +269,14 @@ create Pod web-1 failed: pods "web-1" is forbidden: exceeded quota: compute-quot
 create Pod web-2 failed: Pod "web-2" is invalid: spec.containers[0].image: Required value
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **阻断部署**: 在 `OrderedReady` 模式下,创建失败会阻止后续 Pod 创建
 - **无限重试**: 控制器会持续重试创建操作
 - **PVC 依赖**: 如果 PVC 不存在或无法绑定,Pod 无法创建
 - **配额限制**: 资源配额、LimitRange 可能阻止创建
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **1. 查看详细错误:**
 ```bash
@@ -305,14 +305,22 @@ kubectl describe limitrange -n default
 ```
 
 **3. 验证 Pod 模板:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 检查 Pod 模板有效性
 kubectl get statefulset web -o yaml | kubectl create --dry-run=server -f -
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 **1. PVC 问题 - 预创建 PVC:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 手动创建 PVC(如果自动创建失败)
 kubectl apply -f - <<EOF
@@ -330,6 +338,10 @@ EOF
 ```
 
 **2. 配额问题 - 调整配额或请求:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 查看当前配额使用情况
 kubectl describe quota compute-quota
@@ -353,7 +365,7 @@ kubectl describe rolebinding -n default
 
 ---
 
-#<!-- chunk: `SuccessfulUpdate` - Pod 更新成功 -->## `SuccessfulUpdate` - Pod 更新成功
+## `SuccessfulUpdate` - Pod 更新成功
 
 | 属性 | 说明 |
 |:---|:---|
@@ -363,25 +375,25 @@ kubectl describe rolebinding -n default
 | **适用版本** | v1.7+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 StatefulSet 控制器成功更新了一个 Pod。在 RollingUpdate 策略下,控制器会按序号从大到小依次删除并重建 Pod。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```
 update Pod web-2 in StatefulSet default/web successful
 update Pod web-1 in StatefulSet default/web successful
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **滚动更新**: 从最大序号开始,逐个删除并重建 Pod
 - **分区更新**: 通过 `partition` 参数可以控制更新范围
 - **有序等待**: 每个 Pod 必须 Running&Ready 后才更新下一个
 - **手动控制**: `OnDelete` 策略需要手动删除 Pod 触发更新
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **查看更新进度:**
 ```bash
@@ -400,7 +412,7 @@ kubectl get pods -l app=web -o custom-columns=NAME:.metadata.name,IMAGE:.spec.co
 kubectl get statefulset web -o jsonpath='{.spec.updateStrategy}'
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 正常事件,可优化更新策略:
 
@@ -441,7 +453,7 @@ spec:
 
 ---
 
-#<!-- chunk: `FailedUpdate` - Pod 更新失败 -->## `FailedUpdate` - Pod 更新失败
+## `FailedUpdate` - Pod 更新失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -451,25 +463,25 @@ spec:
 | **适用版本** | v1.7+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 StatefulSet 控制器在更新过程中遇到错误,无法完成 Pod 的重建或更新操作。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```
 update Pod web-1 in StatefulSet default/web failed error: pods "web-1" already exists
 update Pod web-2 failed: persistentvolumeclaim "data-web-2" not found
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **更新中断**: 更新流程会停滞在失败的 Pod
 - **后续阻塞**: 后续 Pod 不会被更新(有序更新机制)
 - **服务降级**: 部分 Pod 可能处于旧版本,部分处于新版本
 - **PVC 依赖**: PVC 问题会导致 Pod 无法启动
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **1. 查看失败原因:**
 ```bash
@@ -497,15 +509,19 @@ kubectl get pod web-1 -o yaml
 kubectl describe pod web-1
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 **1. Pod 卡在 Terminating 状态:**
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+
 ```bash
 # 查看 Pod 终止状态
 kubectl get pod web-1 -o yaml | grep deletionTimestamp
 
 # 如果 Pod 长时间 Terminating,强制删除(谨慎操作)
-kubectl delete pod web-1 --grace-period=0 --force
+kubectl delete pod web-1 --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
 **2. PVC 问题:**
@@ -519,6 +535,11 @@ kubectl get pv | grep data-web-1
 ```
 
 **3. 回滚更新:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # StatefulSet 不支持自动回滚,需手动修改
 kubectl edit statefulset web
@@ -529,6 +550,11 @@ kubectl patch statefulset web -p '{"spec":{"updateStrategy":{"rollingUpdate":{"p
 ```
 
 **4. 重建 StatefulSet(保留 PVC):**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 删除 StatefulSet 但保留 Pod
 kubectl delete statefulset web --cascade=orphan
@@ -539,7 +565,7 @@ kubectl apply -f statefulset.yaml
 
 ---
 
-#<!-- chunk: `UnhealthyPodEviction` - 不健康 Pod 驱逐 -->## `UnhealthyPodEviction` - 不健康 Pod 驱逐
+## `UnhealthyPodEviction` - 不健康 Pod 驱逐
 
 | 属性 | 说明 |
 |:---|:---|
@@ -549,25 +575,25 @@ kubectl apply -f statefulset.yaml
 | **适用版本** | v1.28+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 StatefulSet 控制器检测到不健康的 Pod,并根据 `podManagementPolicy` 决定是否驱逐该 Pod。这是 v1.28 引入的增强特性。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```
 evicting unhealthy pod web-1 due to PodDisruptionCondition
 evicting unhealthy pod web-2, reason: NodeShutdown
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **自动恢复**: 控制器会删除不健康的 Pod 并重建
 - **节点问题**: 节点不可达或关闭时触发
 - **PodDisruptionCondition**: 基于 Pod 的 DisruptionTarget condition 判断
 - **仅 StatefulSet**: 此特性目前仅适用于 StatefulSet
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **1. 查看 Pod DisruptionTarget condition:**
 ```bash
@@ -595,9 +621,13 @@ kubectl get pdb
 kubectl describe pdb web-pdb
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 **1. 节点故障恢复:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 如果节点恢复,Pod 会自动重建
 kubectl get nodes
@@ -632,7 +662,7 @@ featureGates:
 
 <!-- chunk: DaemonSet 控制器事件 -->## DaemonSet 控制器事件
 
-#<!-- chunk: `SuccessfulCreate` - Pod 创建成功 -->## `SuccessfulCreate` - Pod 创建成功
+## `SuccessfulCreate` - Pod 创建成功
 
 | 属性 | 说明 |
 |:---|:---|
@@ -642,25 +672,25 @@ featureGates:
 | **适用版本** | v1.2+ |
 | **生产频率** | 高频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 DaemonSet 控制器成功在节点上创建了一个 Pod。每当有新节点加入集群,或 DaemonSet 首次部署时,都会触发此事件。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```
 Created pod: fluentd-abc123
 Created pod: fluentd-def456
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **每节点一副本**: DaemonSet 确保每个符合条件的节点运行一个 Pod 副本
 - **自动调度**: v1.12+ 使用标准调度器,v1.12- 使用 DaemonSet 控制器直接调度
 - **节点选择器**: 通过 nodeSelector/nodeAffinity 控制 Pod 分布
 - **容忍度**: 通过 tolerations 控制是否在有污点的节点运行
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **查看 Pod 分布:**
 ```bash
@@ -688,7 +718,7 @@ kubectl get daemonset fluentd -o jsonpath='{.spec.template.spec.nodeSelector}'
 kubectl get nodes --show-labels
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 正常事件,可优化调度策略:
 
@@ -733,7 +763,7 @@ spec:
 
 ---
 
-#<!-- chunk: `SuccessfulDelete` - Pod 删除成功 -->## `SuccessfulDelete` - Pod 删除成功
+## `SuccessfulDelete` - Pod 删除成功
 
 | 属性 | 说明 |
 |:---|:---|
@@ -743,25 +773,25 @@ spec:
 | **适用版本** | v1.2+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 DaemonSet 控制器成功删除了一个 Pod。通常发生在节点移除、DaemonSet 更新或节点不再符合调度条件时。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```
 Deleted pod: fluentd-abc123
 Deleted pod: fluentd-def456
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **节点移除**: 节点从集群移除时,对应的 DaemonSet Pod 会被删除
 - **选择器变更**: 修改 nodeSelector/nodeAffinity 后,不符合条件的节点上的 Pod 被删除
 - **滚动更新**: RollingUpdate 策略下,旧版本 Pod 被删除
 - **DaemonSet 删除**: 删除 DaemonSet 时,所有 Pod 被删除
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **查看删除原因:**
 ```bash
@@ -784,11 +814,16 @@ kubectl rollout history daemonset fluentd
 kubectl get daemonset fluentd -o yaml | grep -A 5 nodeSelector
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 正常事件,注意以下场景:
 
 **1. 节点维护时保留 DaemonSet Pod:**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 给节点打污点但不驱逐 DaemonSet Pod
 kubectl taint nodes node1 maintenance=true:NoSchedule
@@ -810,7 +845,7 @@ spec:
 
 ---
 
-#<!-- chunk: `FailedCreate` - Pod 创建失败 -->## `FailedCreate` - Pod 创建失败
+## `FailedCreate` - Pod 创建失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -820,11 +855,11 @@ spec:
 | **适用版本** | v1.2+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 DaemonSet 控制器无法在节点上创建 Pod,通常是由于资源不足、端口冲突或配置错误导致。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```
 Error creating: pods "fluentd-abc123" is forbidden: exceeded quota: compute-quota
@@ -832,14 +867,14 @@ Error creating: admission webhook "validate.pod.admission" denied the request
 Error creating: Pod "fluentd-def456" is invalid: spec.containers[0].ports[0].hostPort: Invalid value: 9200: host port is already allocated
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **节点覆盖不全**: 部分节点可能无法运行 DaemonSet Pod
 - **服务降级**: 节点级服务(如日志采集)可能中断
 - **无限重试**: 控制器会持续重试创建操作
 - **调度失败**: v1.12+ 调度器失败会反映在 Pod 事件中
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **1. 查看详细错误:**
 ```bash
@@ -866,6 +901,10 @@ kubectl get pods --all-namespaces -o json | jq '.items[] | select(.spec.containe
 ```
 
 **3. 检查准入控制器:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 查看准入 webhook
 kubectl get validatingwebhookconfiguration
@@ -875,7 +914,7 @@ kubectl get mutatingwebhookconfiguration
 kubectl create -f pod.yaml --dry-run=server
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 **1. 端口冲突 - 使用 hostNetwork 或修改端口:**
 ```yaml
@@ -925,7 +964,7 @@ kubectl describe pod fluentd-abc123
 
 ---
 
-#<!-- chunk: `FailedDaemonPod` - DaemonSet Pod 失败 -->## `FailedDaemonPod` - DaemonSet Pod 失败
+## `FailedDaemonPod` - DaemonSet Pod 失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -935,24 +974,24 @@ kubectl describe pod fluentd-abc123
 | **适用版本** | v1.2+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 DaemonSet 控制器检测到某个节点上的 Pod 处于失败状态(Failed Phase),通常需要人工介入排查。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```
 Found failed daemon pod fluentd-abc123 on node node1, will try to kill it
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **Pod 重启**: 控制器会尝试删除失败的 Pod 并重建
 - **节点问题**: 可能指示节点存在配置或资源问题
 - **镜像问题**: 镜像拉取失败或启动命令错误
 - **持续失败**: 如果问题未解决,Pod 会陷入 CrashLoopBackOff
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **1. 查看 Pod 失败原因:**
 ```bash
@@ -986,9 +1025,13 @@ kubectl get events --field-selector involvedObject.name=fluentd-abc123,reason=Fa
 kubectl run test --image=fluentd/fluentd:v1.14 --rm -it --restart=Never -- /bin/sh
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 **1. 镜像问题 - 修复镜像地址:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 修改 DaemonSet 镜像
 kubectl set image daemonset/fluentd fluentd=fluentd/fluentd:v1.14
@@ -1032,7 +1075,7 @@ spec:
 
 ---
 
-#<!-- chunk: `FailedPlacement` - Pod 放置失败 -->## `FailedPlacement` - Pod 放置失败
+## `FailedPlacement` - Pod 放置失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1042,11 +1085,11 @@ spec:
 | **适用版本** | v1.12+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 DaemonSet 控制器(通过标准调度器)无法在节点上放置 Pod,通常是由于节点资源不足、污点限制或亲和性规则不匹配。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```
 failed to place pod on node1: node(s) didn't match pod affinity rules
@@ -1054,14 +1097,14 @@ failed to place pod on node2: insufficient cpu
 failed to place pod on node3: node had taint {key=special:NoSchedule}, and pod didn't tolerate it
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **调度器管理**: v1.12+ DaemonSet 使用标准调度器,调度失败会记录此事件
 - **节点不可用**: 部分节点无法运行 DaemonSet Pod
 - **资源限制**: 节点资源不足导致无法调度
 - **污点限制**: 节点污点阻止 Pod 调度
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **1. 查看调度失败原因:**
 ```bash
@@ -1094,7 +1137,7 @@ kubectl describe nodes | grep Taints
 kubectl get daemonset fluentd -o jsonpath='{.spec.template.spec.tolerations}'
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 **1. 添加容忍度:**
 ```yaml
@@ -1150,7 +1193,7 @@ spec:
 
 ---
 
-#<!-- chunk: `SelectingAll` - 选择所有 Pod -->## `SelectingAll` - 选择所有 Pod
+## `SelectingAll` - 选择所有 Pod
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1160,23 +1203,23 @@ spec:
 | **适用版本** | v1.2+ |
 | **生产频率** | 罕见 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 DaemonSet 的选择器(selector)为空或过于宽泛,导致控制器可能选择到集群中所有的 Pod,这是配置错误。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```
 This daemon set is selecting all pods. A non-empty selector is required.
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **配置错误**: DaemonSet 必须有明确的 selector
 - **阻止创建**: Kubernetes 会拒绝创建没有 selector 的 DaemonSet
 - **API 验证**: 通常在 API 验证阶段就会被拦截
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **查看 DaemonSet 配置:**
 ```bash
@@ -1186,7 +1229,7 @@ kubectl get daemonset fluentd -o yaml | grep -A 3 selector
 # 正确的配置应该包含 matchLabels
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 **添加正确的 selector:**
 ```yaml
@@ -1210,7 +1253,7 @@ spec:
 
 ---
 
-#<!-- chunk: `MissingSelector` - 缺少选择器 -->## `MissingSelector` - 缺少选择器
+## `MissingSelector` - 缺少选择器
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1220,25 +1263,29 @@ spec:
 | **适用版本** | v1.2+ |
 | **生产频率** | 罕见 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 DaemonSet 没有定义 selector 字段,无法选择和管理 Pod。这是严重的配置错误。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```
 DaemonSet is missing selector
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **无法创建**: API Server 会拒绝创建缺少 selector 的 DaemonSet
 - **配置校验**: 通常在客户端或 API 验证时就会报错
 - **版本兼容**: v1.9+ 强制要求 selector 字段
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 **验证 DaemonSet 配置:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 使用 dry-run 验证配置
 kubectl apply -f daemonset.yaml --dry-run=server
@@ -1247,7 +1294,7 @@ kubectl apply -f daemonset.yaml --dry-run=server
 kubectl create -f daemonset.yaml
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 **添加 selector 字段:**
 ```yaml
@@ -1275,11 +1322,11 @@ spec:
 
 <!-- chunk: StatefulSet 特性说明 -->## StatefulSet 特性说明
 
-#<!-- chunk: Pod 管理策略 -->## Pod 管理策略
+## Pod 管理策略
 
 StatefulSet 提供两种 Pod 管理策略:
 
-##<!-- chunk: 1. OrderedReady(默认) -->## 1. OrderedReady(默认)
+## 1. OrderedReady(默认)
 
 - **有序创建**: Pod 按序号 0, 1, 2, ... 依次创建
 - **有序删除**: Pod 按序号 N, N-1, ..., 1, 0 依次删除
@@ -1300,7 +1347,7 @@ spec:
 缩容: 删除 web-2 → web-2 Terminated → 删除 web-1 → web-1 Terminated → 删除 web-0
 ```
 
-##<!-- chunk: 2. Parallel -->## 2. Parallel
+## 2. Parallel
 
 - **并行创建**: 所有 Pod 同时创建,不等待前一个 Ready
 - **并行删除**: 所有 Pod 同时删除
@@ -1321,7 +1368,7 @@ spec:
 缩容: 同时删除 web-0, web-1, web-2
 ```
 
-#<!-- chunk: PVC 自动管理 -->## PVC 自动管理
+## PVC 自动管理
 
 StatefulSet 通过 `volumeClaimTemplates` 自动为每个 Pod 创建独立的 PVC:
 
@@ -1361,6 +1408,9 @@ data-web-2
 3. **稳定绑定**: Pod 重建后会重新绑定到同名 PVC
 4. **手动清理**: 需要手动删除不再使用的 PVC
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 删除 StatefulSet 后,PVC 仍然存在
 kubectl delete statefulset web
@@ -1370,9 +1420,9 @@ kubectl get pvc  # data-web-0, data-web-1, data-web-2 仍存在
 kubectl delete pvc data-web-0 data-web-1 data-web-2
 ```
 
-#<!-- chunk: 滚动更新策略 -->## 滚动更新策略
+## 滚动更新策略
 
-##<!-- chunk: 1. RollingUpdate(默认) -->## 1. RollingUpdate(默认)
+## 1. RollingUpdate(默认)
 
 ```yaml
 apiVersion: apps/v1
@@ -1405,7 +1455,7 @@ replicas: 5, partition: 2
 保持旧版: web-1, web-0(不更新)
 ```
 
-##<!-- chunk: 2. OnDelete -->## 2. OnDelete
+## 2. OnDelete
 
 ```yaml
 apiVersion: apps/v1
@@ -1420,6 +1470,9 @@ spec:
 - 必须**手动删除** Pod,控制器才会使用新配置重建
 - 适用于需要精细控制更新流程的场景
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 手动触发更新
 kubectl delete pod web-2  # 控制器会用新配置重建 web-2
@@ -1427,7 +1480,7 @@ kubectl delete pod web-1
 kubectl delete pod web-0
 ```
 
-#<!-- chunk: 稳定的网络标识 -->## 稳定的网络标识
+## 稳定的网络标识
 
 StatefulSet 需要配合 Headless Service 使用,提供稳定的网络标识:
 
@@ -1478,20 +1531,20 @@ kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup web-0.ngi
 
 <!-- chunk: DaemonSet 特性说明 -->## DaemonSet 特性说明
 
-#<!-- chunk: 调度机制演进 -->## 调度机制演进
+## 调度机制演进
 
-##<!-- chunk: v1.12 之前: DaemonSet 控制器直接调度 -->## v1.12 之前: DaemonSet 控制器直接调度
+## v1.12 之前: DaemonSet 控制器直接调度
 
 - 控制器直接设置 Pod 的 `spec.nodeName`,绕过调度器
 - 不经过调度器的策略检查(如亲和性、资源检查)
 - 简单高效,但功能受限
 
-##<!-- chunk: v1.12+: 使用标准调度器 -->## v1.12+: 使用标准调度器
+## v1.12+: 使用标准调度器
 
 - DaemonSet Pod 通过标准调度器调度
 - 支持完整的调度特性:
   - Node affinity
-  - [[Taints and Tolerations|Taints and tolerations]]
+  - [[domain-17-system-foundation/topic-dictionary/scheduling/taints-and-tolerations.md|Taints and tolerations]]
   - Pod priority and preemption
   - Resource requests and limits
 - 调度失败会有调度器事件记录
@@ -1505,9 +1558,9 @@ kubectl describe pod <daemonset-pod> | grep -A 5 "Events"
 kubectl logs -n kube-system -l component=kube-scheduler | grep -i daemon
 ```
 
-#<!-- chunk: 节点选择机制 -->## 节点选择机制
+## 节点选择机制
 
-##<!-- chunk: 1. nodeSelector(简单) -->## 1. nodeSelector(简单)
+## 1. nodeSelector(简单)
 
 ```yaml
 apiVersion: apps/v1
@@ -1520,7 +1573,7 @@ spec:
         region: us-west
 ```
 
-##<!-- chunk: 2. nodeAffinity(灵活) -->## 2. nodeAffinity(灵活)
+## 2. nodeAffinity(灵活)
 
 ```yaml
 spec:
@@ -1545,7 +1598,7 @@ spec:
                 values: ["us-west"]
 ```
 
-##<!-- chunk: 3. Tolerations(污点容忍) -->## 3. Tolerations(污点容忍)
+## 3. Tolerations(污点容忍)
 
 DaemonSet 通常需要配置丰富的 tolerations,以确保在各种节点上运行:
 
@@ -1622,9 +1675,9 @@ tolerations:
   operator: Exists
 ```
 
-#<!-- chunk: 滚动更新策略 -->## 滚动更新策略
+## 滚动更新策略
 
-##<!-- chunk: 1. RollingUpdate(默认) -->## 1. RollingUpdate(默认)
+## 1. RollingUpdate(默认)
 
 ```yaml
 apiVersion: apps/v1
@@ -1659,7 +1712,7 @@ spec:
       maxUnavailable: 1  # 每次只更新 1 个节点
 ```
 
-##<!-- chunk: 2. OnDelete -->## 2. OnDelete
+## 2. OnDelete
 
 ```yaml
 apiVersion: apps/v1
@@ -1674,6 +1727,9 @@ spec:
 - 必须**手动删除** Pod,控制器才会使用新配置重建
 - 适用于需要手动控制更新节点顺序的场景
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 手动按节点逐个更新
 kubectl delete pod fluentd-node1
@@ -1681,11 +1737,11 @@ kubectl delete pod fluentd-node1
 kubectl delete pod fluentd-node2
 ```
 
-#<!-- chunk: 主机资源访问 -->## 主机资源访问
+## 主机资源访问
 
 DaemonSet 通常需要访问主机资源(文件系统、网络、进程等):
 
-##<!-- chunk: 1. hostPath 卷 -->## 1. hostPath 卷
+## 1. hostPath 卷
 
 ```yaml
 spec:
@@ -1708,7 +1764,7 @@ spec:
           path: /var/lib/docker/containers
 ```
 
-##<!-- chunk: 2. hostNetwork -->## 2. hostNetwork
+## 2. hostNetwork
 
 ```yaml
 spec:
@@ -1718,7 +1774,7 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet  # DNS 策略
 ```
 
-##<!-- chunk: 3. hostPID / hostIPC -->## 3. hostPID / hostIPC
+## 3. hostPID / hostIPC
 
 ```yaml
 spec:
@@ -1728,7 +1784,7 @@ spec:
       hostIPC: true  # 访问主机 IPC
 ```
 
-##<!-- chunk: 4. SecurityContext(特权模式) -->## 4. SecurityContext(特权模式)
+## 4. SecurityContext(特权模式)
 
 ```yaml
 spec:
@@ -1746,7 +1802,7 @@ spec:
 
 <!-- chunk: 实战案例 -->## 实战案例
 
-#<!-- chunk: 案例 1: StatefulSet 有序扩容卡住 -->## 案例 1: StatefulSet 有序扩容卡住
+## 案例 1: StatefulSet 有序扩容卡住
 
 **现象:**
 ```bash
@@ -1778,6 +1834,11 @@ Events:
 **原因:** StorageClass 没有配置动态供应,或 PV 资源不足。
 
 **解决:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方案 1: 手动创建 PV
 kubectl apply -f - <<EOF
@@ -1800,7 +1861,7 @@ kubectl patch storageclass standard -p '{"provisioner": "kubernetes.io/gce-pd"}'
 
 ---
 
-#<!-- chunk: 案例 2: StatefulSet 滚动更新回滚 -->## 案例 2: StatefulSet 滚动更新回滚
+## 案例 2: StatefulSet 滚动更新回滚
 
 **现象:**
 ```bash
@@ -1831,6 +1892,11 @@ Error: Invalid configuration: missing required field "database.host"
 **原因:** 新版本配置错误,导致 Pod 无法启动。
 
 **解决:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方案 1: 使用 partition 暂停更新
 kubectl patch statefulset web -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":2}}}}'
@@ -1847,7 +1913,7 @@ kubectl delete pod web-2  # 手动删除问题 Pod
 
 ---
 
-#<!-- chunk: 案例 3: DaemonSet 未在 Master 节点运行 -->## 案例 3: DaemonSet 未在 Master 节点运行
+## 案例 3: DaemonSet 未在 Master 节点运行
 
 **现象:**
 ```bash
@@ -1877,6 +1943,10 @@ $ kubectl get daemonset node-exporter -o jsonpath='{.spec.template.spec.tolerati
 **原因:** DaemonSet 未配置容忍 master 节点污点。
 
 **解决:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 添加容忍度
 kubectl patch daemonset node-exporter -p '
@@ -1906,7 +1976,7 @@ node-exporter-ghi56   1/1     Running   0          10s   master-1
 
 ---
 
-#<!-- chunk: 案例 4: DaemonSet hostPort 冲突 -->## 案例 4: DaemonSet hostPort 冲突
+## 案例 4: DaemonSet hostPort 冲突
 
 **现象:**
 ```bash
@@ -1939,6 +2009,10 @@ $ kubectl get pods --all-namespaces -o json | jq -r '.items[] | select(.spec.con
 2. 或 DaemonSet 配置错误导致同一节点创建多个 Pod
 
 **解决:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方案 1: 移除 hostPort,使用 hostNetwork
 kubectl patch daemonset fluentd --type json -p='[{"op": "remove", "path": "/spec/template/spec/containers/0/ports/0/hostPort"}]'
@@ -1953,9 +2027,13 @@ kubectl get daemonset fluentd -o yaml | grep -A 3 nodeSelector
 
 ---
 
-#<!-- chunk: 案例 5: StatefulSet PVC 遗留清理 -->## 案例 5: StatefulSet PVC 遗留清理
+## 案例 5: StatefulSet PVC 遗留清理
 
 **现象:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 删除 StatefulSet 后缩容后,PVC 仍然存在
 $ kubectl delete statefulset web --cascade=orphan
@@ -1972,6 +2050,10 @@ data-web-2  Bound    pv-003   10Gi       RWO            standard       10m
 **影响:** PVC 继续占用存储配额和底层存储资源。
 
 **解决:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 方案 1: 手动删除不需要的 PVC
 kubectl delete pvc data-web-1 data-web-2
@@ -2008,9 +2090,9 @@ spec:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: StatefulSet 最佳实践 -->## StatefulSet 最佳实践
+## StatefulSet 最佳实践
 
-##<!-- chunk: 1. 选择合适的 Pod 管理策略 -->## 1. 选择合适的 Pod 管理策略
+## 1. 选择合适的 Pod 管理策略
 
 ```yaml
 # 有主从关系 → OrderedReady
@@ -2028,7 +2110,7 @@ spec:
   # 示例: 独立的缓存节点
 ```
 
-##<!-- chunk: 2. 使用 Headless Service -->## 2. 使用 Headless Service
+## 2. 使用 Headless Service
 
 ```yaml
 apiVersion: v1
@@ -2046,7 +2128,7 @@ spec:
   serviceName: "web"  # 必须指定
 ```
 
-##<!-- chunk: 3. 配置合理的健康检查 -->## 3. 配置合理的健康检查
+## 3. 配置合理的健康检查
 
 ```yaml
 spec:
@@ -2072,7 +2154,10 @@ spec:
           periodSeconds: 5
 ```
 
-##<!-- chunk: 4. 使用分区更新实现金丝雀发布 -->## 4. 使用分区更新实现金丝雀发布
+## 4. 使用分区更新实现金丝雀发布
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 设置 partition,先更新一个 Pod(最大序号)
@@ -2091,7 +2176,7 @@ kubectl patch statefulset web -p '{"spec":{"updateStrategy":{"rollingUpdate":{"p
 kubectl patch statefulset web -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":0}}}}'
 ```
 
-##<!-- chunk: 5. PVC 管理策略 -->## 5. PVC 管理策略
+## 5. PVC 管理策略
 
 ```yaml
 # v1.27+ 配置自动删除策略
@@ -2111,7 +2196,7 @@ spec:
           storage: 10Gi
 ```
 
-##<!-- chunk: 6. 设置 PodDisruptionBudget -->## 6. 设置 PodDisruptionBudget
+## 6. 设置 PodDisruptionBudget
 
 ```yaml
 apiVersion: policy/v1
@@ -2127,9 +2212,9 @@ spec:
 
 ---
 
-#<!-- chunk: DaemonSet 最佳实践 -->## DaemonSet 最佳实践
+## DaemonSet 最佳实践
 
-##<!-- chunk: 1. 配置完整的容忍度 -->## 1. 配置完整的容忍度
+## 1. 配置完整的容忍度
 
 ```yaml
 apiVersion: apps/v1
@@ -2163,7 +2248,7 @@ spec:
       # - operator: Exists
 ```
 
-##<!-- chunk: 2. 设置合理的资源请求和限制 -->## 2. 设置合理的资源请求和限制
+## 2. 设置合理的资源请求和限制
 
 ```yaml
 spec:
@@ -2180,7 +2265,7 @@ spec:
             memory: 256Mi
 ```
 
-##<!-- chunk: 3. 使用 updateStrategy 控制更新速度 -->## 3. 使用 updateStrategy 控制更新速度
+## 3. 使用 updateStrategy 控制更新速度
 
 ```yaml
 spec:
@@ -2191,7 +2276,7 @@ spec:
       # maxUnavailable: 20%  # 或使用百分比
 ```
 
-##<!-- chunk: 4. 使用 hostNetwork 时配置 DNS 策略 -->## 4. 使用 hostNetwork 时配置 DNS 策略
+## 4. 使用 hostNetwork 时配置 DNS 策略
 
 ```yaml
 spec:
@@ -2201,7 +2286,7 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet  # 重要!
 ```
 
-##<!-- chunk: 5. 配置 priorityClassName -->## 5. 配置 priorityClassName
+## 5. 配置 priorityClassName
 
 ```yaml
 apiVersion: apps/v1
@@ -2213,7 +2298,7 @@ spec:
       # priorityClassName: system-cluster-critical
 ```
 
-##<!-- chunk: 6. 使用节点亲和性精确控制调度 -->## 6. 使用节点亲和性精确控制调度
+## 6. 使用节点亲和性精确控制调度
 
 ```yaml
 spec:
@@ -2233,7 +2318,7 @@ spec:
                 values: ["special"]
 ```
 
-##<!-- chunk: 7. 设置合理的终止宽限期 -->## 7. 设置合理的终止宽限期
+## 7. 设置合理的终止宽限期
 
 ```yaml
 spec:
@@ -2246,7 +2331,7 @@ spec:
 
 <!-- chunk: 相关文档 -->## 相关文档
 
-#<!-- chunk: Kubernetes 官方文档 -->## Kubernetes 官方文档
+## Kubernetes 官方文档
 
 - **StatefulSet**: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/
 - **DaemonSet**: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
@@ -2254,7 +2339,7 @@ spec:
 - **StatefulSet 更新策略**: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
 - **DaemonSet 更新策略**: https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/
 
-#<!-- chunk: KUDIG-DATABASE 相关文档 -->## KUDIG-DATABASE 相关文档
+## KUDIG-DATABASE 相关文档
 
 - **[Domain-33] 01 - Pod 生命周期事件**: Pod 相关事件详解
 - **[Domain-33] 02 - Deployment 滚动更新事件**: Deployment 控制器事件
@@ -2264,7 +2349,7 @@ spec:
 - **[Topic] StatefulSet 故障排查**: 结构化故障排查文档
 - **[Topic] DaemonSet 故障排查**: 结构化故障排查文档
 
-#<!-- chunk: 故障排查相关 -->## 故障排查相关
+## 故障排查相关
 
 - **StatefulSet 常见问题**: 
   - PVC 绑定失败
@@ -2277,7 +2362,7 @@ spec:
   - 资源不足导致调度失败
   - 权限问题
 
-#<!-- chunk: 监控告警 -->## 监控告警
+## 监控告警
 
 **StatefulSet 关键指标:**
 ```promql
@@ -2316,4 +2401,4 @@ kube_daemonset_status_updated_number_scheduled < kube_daemonset_status_desired_n
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

@@ -35,6 +35,9 @@ created: "2026-05-23"
 
 ### 故障排查命令速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 检查 nginx-ingress 状态
 kubectl get pods -n ingress-nginx
@@ -80,15 +83,15 @@ kubectl exec -it ingress-nginx/<pod> -n ingress-nginx -- \
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 - networking.md|网络故障排查]]
 
 ## Related
 
-- [[skills/ts-node-components|ts-node-components]] — 节点组件故障排查
+- [[skills/ts-node-components.md|ts-node-components]] — 节点组件故障排查
 - [[apiserver-fta]] — [[apiserver-fta|[[API Server 异常故障树分析|API Server 异常故障树分析]]]]
 - [[scheduler-fta]] — Scheduler 异常故障树分析
-- [[skills/assessment-k8s-fundamentals-quiz-answers|assessment-k8s-fundamentals-quiz-answers]] — K8S Fundamentals Quiz Answers
+- [[skills/assessment-k8s-fundamentals-quiz-answers.md|assessment-k8s-fundamentals-quiz-answers]] — K8S Fundamentals Quiz Answers
 - [[prometheus]] — Prometheus
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]

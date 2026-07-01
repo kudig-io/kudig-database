@@ -71,7 +71,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. APIService 基础概念 -->## 1. APIService 基础概念
 
-#<!-- chunk: 1.1 什么是 APIService -->## 1.1 什么是 APIService
+## 1.1 什么是 APIService
 
 APIService 是 Kubernetes 的**聚合层(Aggregation Layer)**机制,允许扩展 API Server 的功能:
 
@@ -80,7 +80,7 @@ APIService 是 Kubernetes 的**聚合层(Aggregation Layer)**机制,允许扩展
 - **复杂业务逻辑**: 支持复杂的计算、聚合、外部系统集成
 - **透明代理**: 客户端无需感知后端 API Server,统一通过 kube-apiserver 访问
 
-#<!-- chunk: 1.2 APIService vs CRD -->## 1.2 APIService vs CRD
+## 1.2 APIService vs CRD
 
 | 特性 | APIService (聚合 API) | CRD |
 |------|----------------------|-----|
@@ -91,7 +91,7 @@ APIService 是 Kubernetes 的**聚合层(Aggregation Layer)**机制,允许扩展
 | **适用场景** | 计算型/聚合型资源 | 配置型资源 |
 | **典型案例** | Metrics Server, Custom Metrics API | 自定义 CRD(如 Database, Pipeline) |
 
-#<!-- chunk: 1.3 架构图 -->## 1.3 架构图
+## 1.3 架构图
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -124,7 +124,7 @@ APIService 是 Kubernetes 的**聚合层(Aggregation Layer)**机制,允许扩展
 
 <!-- chunk: 2. 完整字段说明 -->## 2. 完整字段说明
 
-#<!-- chunk: 2.1 基础结构 YAML -->## 2.1 基础结构 YAML
+## 2.1 基础结构 YAML
 
 ```yaml
 apiVersion: apiregistration.k8s.io/v1
@@ -174,7 +174,7 @@ spec:
   insecureSkipTLSVerify: false
 ```
 
-#<!-- chunk: 2.2 本地 APIService(API Server 内置) -->## 2.2 本地 APIService(API Server 内置)
+## 2.2 本地 APIService(API Server 内置)
 
 某些 API 组由 kube-apiserver 直接提供,无需后端 Service:
 
@@ -192,7 +192,7 @@ spec:
   service: null
 ```
 
-#<!-- chunk: 2.3 完整示例 - Metrics Server -->## 2.3 完整示例 - Metrics Server
+## 2.3 完整示例 - Metrics Server
 
 ```yaml
 apiVersion: apiregistration.k8s.io/v1
@@ -287,7 +287,7 @@ spec:
 
 <!-- chunk: 3. 本地 vs 远程 APIService -->## 3. 本地 vs 远程 APIService
 
-#<!-- chunk: 3.1 本地 APIService -->## 3.1 本地 APIService
+## 3.1 本地 APIService
 
 **特点**: 由 kube-apiserver 直接提供,无需额外 Pod
 
@@ -312,7 +312,7 @@ kubectl get apiservices | grep '<none>'
 # v1.batch                     Local  True   ...
 ```
 
-#<!-- chunk: 3.2 远程 APIService -->## 3.2 远程 APIService
+## 3.2 远程 APIService
 
 **特点**: 代理到独立的 API Server Pod
 
@@ -339,7 +339,7 @@ kubectl get apiservices | grep -v '<none>'
 # v1beta1.metrics.k8s.io    kube-system/metrics-server  True  ...
 ```
 
-#<!-- chunk: 3.3 对比表 -->## 3.3 对比表
+## 3.3 对比表
 
 | 维度 | 本地 APIService | 远程 APIService |
 |------|----------------|----------------|
@@ -354,7 +354,7 @@ kubectl get apiservices | grep -v '<none>'
 
 <!-- chunk: 4. 内部原理 -->## 4. 内部原理
 
-#<!-- chunk: 4.1 API 聚合层路由 -->## 4.1 API 聚合层路由
+## 4.1 API 聚合层路由
 
 ```
 客户端请求 (kubectl top nodes)
@@ -394,7 +394,7 @@ kubectl get apiservices | grep -v '<none>'
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 4.2 优先级解析 -->## 4.2 优先级解析
+## 4.2 优先级解析
 
 当多个 APIService 定义相同的 group/version 时(极少见),优先级规则:
 
@@ -434,7 +434,7 @@ spec:
 # 3. 如果仍相同,按 metadata.name 字典序排序
 ```
 
-#<!-- chunk: 4.3 健康检查机制 -->## 4.3 健康检查机制
+## 4.3 健康检查机制
 
 APIService 会持续监控后端 Service 的可用性:
 
@@ -473,9 +473,12 @@ status:
 
 <!-- chunk: 5. 生产案例 -->## 5. 生产案例
 
-#<!-- chunk: 5.1 Metrics Server 完整部署 -->## 5.1 Metrics Server 完整部署
+## 5.1 Metrics Server 完整部署
 
 **1. 生成 TLS 证书**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 生成 CA 证书
@@ -734,6 +737,9 @@ spec:
 
 **3. 部署和验证**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 应用所有资源
 kubectl apply -f metrics-server-rbac.yaml
@@ -758,7 +764,7 @@ kubectl top nodes
 kubectl top pods -n kube-system
 ```
 
-#<!-- chunk: 5.2 自定义 API Server - Task 资源示例 -->## 5.2 自定义 API Server - Task 资源示例
+## 5.2 自定义 API Server - Task 资源示例
 
 **场景**: 创建一个自定义 API Server 管理异步任务
 
@@ -945,6 +951,9 @@ spec:
 
 **3. 使用自定义资源**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建 Task
 kubectl create -f - <<EOF
@@ -970,7 +979,7 @@ kubectl get --raw /apis/tasks.example.com/v1/namespaces/default/tasks
 
 <!-- chunk: 6. 故障排查 -->## 6. 故障排查
 
-#<!-- chunk: 6.1 APIService 不可用 -->## 6.1 APIService 不可用
+## 6.1 APIService 不可用
 
 **症状**: `kubectl get apiservices` 显示 `Available=False`
 
@@ -988,6 +997,9 @@ status:
 ```
 
 **排查步骤:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 检查后端 Service 是否存在
@@ -1007,7 +1019,7 @@ kubectl exec -n kube-system kube-apiserver-xxx -- \
   curl -k https://metrics-server.kube-system.svc:443/healthz
 ```
 
-#<!-- chunk: 6.2 TLS 证书验证失败 -->## 6.2 TLS 证书验证失败
+## 6.2 TLS 证书验证失败
 
 **症状**: `x509: certificate signed by unknown authority`
 
@@ -1019,6 +1031,10 @@ E0210 10:00:00.123456 1 controller.go:116] loading OpenAPI spec for "v1beta1.met
 ```
 
 **解决方案:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 验证 caBundle 配置
@@ -1038,7 +1054,7 @@ kubectl patch apiservice v1beta1.metrics.k8s.io --type=json -p='[
 ]'
 ```
 
-#<!-- chunk: 6.3 请求超时 -->## 6.3 请求超时
+## 6.3 请求超时
 
 **症状**: `context deadline exceeded`
 
@@ -1057,7 +1073,7 @@ kubectl get pods -n kube-system -l k8s-app=metrics-server -o jsonpath='{.items[*
 kubectl logs -n kube-system kube-apiserver-xxx | grep metrics-server
 ```
 
-#<!-- chunk: 6.4 认证失败 -->## 6.4 认证失败
+## 6.4 认证失败
 
 **症状**: `User "system:anonymous" cannot get path "/apis/metrics.k8s.io/v1beta1"`
 
@@ -1075,7 +1091,7 @@ kubectl get role extension-apiserver-authentication-reader -n kube-system -o yam
 kubectl get rolebinding metrics-server-auth-reader -n kube-system
 ```
 
-#<!-- chunk: 6.5 调试技巧 -->## 6.5 调试技巧
+## 6.5 调试技巧
 
 ```bash
 # 1. 启用 kube-apiserver 详细日志
@@ -1100,7 +1116,7 @@ kubectl logs -n kube-system kube-apiserver-xxx | grep aggregator
 <!-- chunk: 📚 参考资源 -->## 📚 参考资源
 
 - **官方文档**:
-  - [Extend [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|the Kubernetes API]] with the aggregation layer](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
+  - [Extend [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|the Kubernetes API]] with the aggregation layer](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
   - [Configure the aggregation layer](https://kubernetes.io/docs/tasks/extend-kubernetes/configure-aggregation-layer/)
   - [Metrics Server](https://github.com/kubernetes-sigs/metrics-server)
 - **API Server 开发**:
@@ -1128,7 +1144,7 @@ kubectl logs -n kube-system kube-apiserver-xxx | grep aggregator
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考

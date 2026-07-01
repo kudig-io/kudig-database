@@ -31,6 +31,7 @@ prerequisites:
 - kafka-basics
 - mysql-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Persistent Volumes（持久卷）
@@ -173,6 +174,7 @@ spec:
     name: postgres-snapshot-20260407
     kind: VolumeSnapshot
     apiGroup: snapshot.storage.k8s.io
+
 ```
 
 ## 故障排查
@@ -194,6 +196,9 @@ spec:
 - [ ] 迁移 in-tree 插件到 CSI 驱动
 
 ## 命令快速参考
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 查看 PV/PVC 状态
@@ -223,7 +228,8 @@ kubectl patch pv <pv-name> -p '{"spec":{"claimRef":null}}'
 
 ## Related
 
-- index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/storage/ceph.md|Ceph]]
+- [[domain-17-system-foundation/topic-dictionary/storage/cloudnativepg.md|CloudNativePG 云原生 PostgreSQL]]
+- [[domain-17-system-foundation/topic-dictionary/storage/composefs.md|ComposeFS 只读文件系统]]
+
+```

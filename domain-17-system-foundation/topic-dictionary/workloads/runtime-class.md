@@ -33,13 +33,14 @@ prerequisites:
 - gpu-scheduling-basics
 - policy-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 运行时类（RuntimeClass）
 
 ## 概述
 
-RuntimeClass 是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 中用于选择容器运行时配置的特性（自 v1.20 起进入 Stable）。它允许用户为不同的 Pod 指定不同的容器运行时配置，从而在性能与安全性之间取得平衡。
+RuntimeClass 是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 中用于选择容器运行时配置的特性（自 v1.20 起进入 Stable）。它允许用户为不同的 Pod 指定不同的容器运行时配置，从而在性能与安全性之间取得平衡。
 
 ## 核心概念/原理
 
@@ -111,7 +112,7 @@ spec:
 
 > **注意**：默认情况下，RuntimeClass 假设集群节点配置是同质的；若节点异构，应通过 `scheduling` 字段进行约束。
 
-### Pod 开销（[[Pod Overhead|Pod Overhead]]）
+### Pod 开销（[[domain-17-system-foundation/topic-dictionary/scheduling/pod-overhead.md|Pod Overhead]]）
 
 自 v1.24 起进入 Stable。RuntimeClass 支持通过 `overhead` 字段声明运行 Pod 所需的额外资源开销（如虚拟化层消耗的资源），使调度器和其他组件在决策时能够将其纳入考量：
 
@@ -266,6 +267,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看所有 RuntimeClass
 kubectl get runtimeclasses
@@ -306,3 +310,9 @@ kubectl exec test-kata -- uname -r    # Kata 会显示 guest kernel 版本
 - [RuntimeClass API 参考](https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/runtime-class-v1/)
 - [Pod Overhead 概念文档](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-overhead/)
 - [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]

@@ -65,7 +65,7 @@ This document provides in-depth exploration of Sysdig enterprise container secur
 
 <!-- chunk: 1. Sysdig Architecture Deep Dive -->## 1. Sysdig Architecture Deep Dive
 
-#<!-- chunk: 1.1 Core Component Architecture -->## 1.1 Core Component Architecture
+## 1.1 Core Component Architecture
 
 ```mermaid
 graph TB
@@ -105,7 +105,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 1.2 Security Capabilities Matrix -->## 1.2 Security Capabilities Matrix
+## 1.2 Security Capabilities Matrix
 
 ```yaml
 sysdig_security_capabilities:
@@ -140,7 +140,7 @@ sysdig_security_capabilities:
 
 <!-- chunk: 2. Enterprise Deployment Architecture -->## 2. Enterprise Deployment Architecture
 
-#<!-- chunk: 2.1 Sysdig Agent Deployment -->## 2.1 Sysdig Agent Deployment
+## 2.1 Sysdig Agent Deployment
 
 ```yaml
 # sysdig-agent-daemonset.yaml
@@ -275,7 +275,7 @@ spec:
             path: /var/lib/calico
 ```
 
-#<!-- chunk: 2.2 Sysdig Secure Configuration -->## 2.2 Sysdig Secure Configuration
+## 2.2 Sysdig Secure Configuration
 
 ```yaml
 # sysdig-secure-config.yaml
@@ -346,7 +346,7 @@ data:
 
 <!-- chunk: 3. Security Policy Management -->## 3. Security Policy Management
 
-#<!-- chunk: 3.1 Runtime Security Policies -->## 3.1 Runtime Security Policies
+## 3.1 Runtime Security Policies
 
 ```yaml
 # runtime-security-policies.yaml
@@ -443,7 +443,7 @@ data:
           tags: [cis, capabilities, compliance]
 ```
 
-#<!-- chunk: 3.2 Image Scanning Policies -->## 3.2 Image Scanning Policies
+## 3.2 Image Scanning Policies
 
 ```yaml
 # image-scanning-policies.yaml
@@ -509,7 +509,7 @@ data:
 
 <!-- chunk: 4. Threat Detection and Response -->## 4. Threat Detection and Response
 
-#<!-- chunk: 4.1 Behavioral Analysis Rules -->## 4.1 Behavioral Analysis Rules
+## 4.1 Behavioral Analysis Rules
 
 ```python
 #!/usr/bin/env python3
@@ -876,7 +876,7 @@ if __name__ == "__main__":
         print(f"Detected threat: {threat['type']} (confidence: {threat['confidence']})")
 ```
 
-#<!-- chunk: 4.2 Automated Response Configuration -->## 4.2 Automated Response Configuration
+## 4.2 Automated Response Configuration
 
 ```yaml
 # automated-response-config.yaml
@@ -944,7 +944,7 @@ data:
 
 <!-- chunk: 5. Compliance and Reporting -->## 5. Compliance and Reporting
 
-#<!-- chunk: 5.1 Compliance Framework Integration -->## 5.1 Compliance Framework Integration
+## 5.1 Compliance Framework Integration
 
 ```yaml
 # compliance-frameworks.yaml
@@ -1001,7 +1001,7 @@ data:
         schedule: "monthly"
 ```
 
-#<!-- chunk: 5.2 Automated Reporting -->## 5.2 Automated Reporting
+## 5.2 Automated Reporting
 
 ```python
 #!/usr/bin/env python3
@@ -1268,7 +1268,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 6. Monitoring and Alerting -->## 6. Monitoring and Alerting
 
-#<!-- chunk: 6.1 [[Prometheus|Prometheus]] Integration -->## 6.1 Prometheus Integration
+## 6.1 Prometheus Integration
 
 ```yaml
 # prometheus-monitoring.yaml
@@ -1337,7 +1337,7 @@ spec:
         description: "Current compliance score is {{ $value }}%"
 ```
 
-#<!-- chunk: 6.2 Custom Dashboards -->## 6.2 Custom Dashboards
+## 6.2 Custom Dashboards
 
 ```json
 {
@@ -1424,37 +1424,37 @@ spec:
 
 <!-- chunk: 7. Best Practices and Guidelines -->## 7. Best Practices and Guidelines
 
-#<!-- chunk: 7.1 Security Implementation Guidelines -->## 7.1 Security Implementation Guidelines
+## 7.1 Security Implementation Guidelines
 
 ```markdown
 <!-- chunk: 🔐 Sysdig Security Best Practices -->## 🔐 Sysdig Security Best Practices
 
-#<!-- chunk: 1. Deployment Security -->## 1. Deployment Security
+## 1. Deployment Security
 - Run agents with minimal required privileges
 - Use secure communication channels (TLS)
 - Implement proper network segmentation
 - Regular security updates and patches
 
-#<!-- chunk: 2. Policy Management -->## 2. Policy Management
+## 2. Policy Management
 - Start with default policies and customize gradually
 - Regular policy review and updates
 - Implement least privilege principles
 - Maintain policy version control
 
-#<!-- chunk: 3. Monitoring and Response -->## 3. Monitoring and Response
+## 3. Monitoring and Response
 - Configure appropriate alert thresholds
 - Establish incident response procedures
 - Regular drill and testing
 - Continuous improvement based on findings
 
-#<!-- chunk: 4. Compliance and Auditing -->## 4. Compliance and Auditing
+## 4. Compliance and Auditing
 - Align policies with regulatory requirements
 - Maintain comprehensive audit logs
 - Regular compliance reporting
 - Automated compliance checking
 ```
 
-#<!-- chunk: 7.2 Performance Optimization -->## 7.2 Performance Optimization
+## 7.2 Performance Optimization
 
 ```yaml
 performance_optimization:
@@ -1489,7 +1489,7 @@ performance_optimization:
 
 <!-- chunk: 8. Future Trends and Evolution -->## 8. Future Trends and Evolution
 
-#<!-- chunk: 8.1 Container Security Evolution -->## 8.1 Container Security Evolution
+## 8.1 Container Security Evolution
 
 ```yaml
 future_trends:
@@ -1526,8 +1526,8 @@ future_trends:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance KUDIG Database — Global MOC
-- [[domain-05-security-compliance/README|[[Domain 25: 云原生安全 (Cloud Native Security)|Domain 25: 云原生安全 (Cloud Native Security)]]]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|[[Domain 25: 云原生安全 (Cloud Native Security)|Domain 25: 云原生安全 (Cloud Native Security)]]]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
 - Falco 云原生安全监控深度实践
 - Aqua Security 企业级容器安全平台深度实践
 - Kyverno 企业级策略管理深度实践
@@ -1545,4 +1545,4 @@ future_trends:
 - 03-aqua-enterprise-container-security
 - 04-kyverno-enterprise-policy-management
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

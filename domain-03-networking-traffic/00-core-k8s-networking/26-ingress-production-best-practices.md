@@ -823,6 +823,7 @@ spec:
             name: static-service
             port:
               number: 80
+
 ```
 
 ---
@@ -844,6 +845,12 @@ spec:
 
 ### 5.2 紧急回滚操作
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 回滚 Ingress 配置
 kubectl rollout undo deployment/app-deployment -n production
@@ -862,6 +869,9 @@ kubectl annotate ingress app-ingress -n production nginx.ingress.kubernetes.io/s
 ```
 
 ### 5.3 证书更新操作
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 查看证书过期时间
@@ -1023,6 +1033,9 @@ spec:
 
 ### 8.2 升级步骤
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 1. 备份当前配置
 kubectl get ingress -A -o yaml > ingress-backup.yaml
@@ -1048,6 +1061,10 @@ curl -I https://app.example.com
 ```
 
 ### 8.3 回滚步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 使用 Helm 回滚
@@ -1107,7 +1124,7 @@ kubectl apply -f ingress-backup.yaml
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -1125,3 +1142,5 @@ kubectl apply -f ingress-backup.yaml
 - 25-ingress-monitoring-troubleshooting
 - 27-cni-troubleshooting-optimization
 - 28-coredns-troubleshooting-optimization
+
+```

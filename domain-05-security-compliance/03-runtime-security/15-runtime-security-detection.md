@@ -60,7 +60,7 @@ created: "2026-05-23"
 
 # 15 - 安全扫描与检测工具
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[entities/falco|Falco]] Documentation](https://falco.org/docs/) | [[entities/kubearmor|KubeArmor]] Documentation](https://kubearmor.io/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[entities/falco.md|Falco]] Documentation](https://falco.org/docs/) | [[entities/kubearmor.md|KubeArmor]] Documentation](https://kubearmor.io/)
 
 <!-- chunk: 一、运行时安全检测架构 -->
 ## 一、运行时安全检测架构
@@ -737,17 +737,15 @@ data:
       repeat_interval: 3h
       
       routes:
-      - match:
-          severity: 'critical'
-        receiver: 'critical-alerts'
+      - matchers:
+        - severity="critical"
+        receiver: critical-alerts
         group_wait: 10s
         repeat_interval: 1h
-        
-      - match:
-          severity: 'warning'
-        receiver: 'warning-alerts'
+      - matchers:
+        - severity="warning"
+        receiver: warning-alerts
         group_wait: 1m
-        
     receivers:
     - name: 'default-receiver'
       slack_configs:
@@ -890,8 +888,8 @@ spec:
 ## Obsidian 相关文档
 
 - domain-05-security-compliance KUDIG Database — Global MOC
-- [[domain-05-security-compliance/README|Security Domain]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-7 安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Security Domain]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
 - Kubernetes 认证授权体系详解
 - 网络安全策略与零信任架构
 - 运行时安全防护与威胁检测
@@ -909,4 +907,4 @@ spec:
 - 16-compliance-audit-practices
 - 17-comprehensive-security-scanning
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

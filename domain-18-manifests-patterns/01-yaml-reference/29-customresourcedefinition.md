@@ -71,7 +71,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. CRD 基础概念 -->## 1. CRD 基础概念
 
-#<!-- chunk: 1.1 什么是 CRD -->## 1.1 什么是 CRD
+## 1.1 什么是 CRD
 
 CustomResourceDefinition (CRD) 是 Kubernetes 的扩展机制,允许用户定义自己的资源类型:
 
@@ -80,7 +80,7 @@ CustomResourceDefinition (CRD) 是 Kubernetes 的扩展机制,允许用户定义
 - **Schema 验证**: 通过 OpenAPI v3 Schema 定义资源结构和验证规则
 - **版本管理**: 支持多版本共存、自动转换、存储版本迁移
 
-#<!-- chunk: 1.2 CRD vs APIService -->## 1.2 CRD vs APIService
+## 1.2 CRD vs APIService
 
 | 特性 | CRD | APIService (聚合 API) |
 |------|-----|----------------------|
@@ -94,7 +94,7 @@ CustomResourceDefinition (CRD) 是 Kubernetes 的扩展机制,允许用户定义
 
 <!-- chunk: 2. 完整字段说明 -->## 2. 完整字段说明
 
-#<!-- chunk: 2.1 基础结构 YAML -->## 2.1 基础结构 YAML
+## 2.1 基础结构 YAML
 
 ```yaml
 apiVersion: apiextensions.k8s.io/v1
@@ -291,7 +291,7 @@ spec:
 
 <!-- chunk: 3. OpenAPI v3 Schema 详解 -->## 3. OpenAPI v3 Schema 详解
 
-#<!-- chunk: 3.1 基础类型 -->## 3.1 基础类型
+## 3.1 基础类型
 
 ```yaml
 schema:
@@ -339,7 +339,7 @@ schema:
         format: byte
 ```
 
-#<!-- chunk: 3.2 复杂类型 -->## 3.2 复杂类型
+## 3.2 复杂类型
 
 ```yaml
 properties:
@@ -383,7 +383,7 @@ properties:
           type: string
 ```
 
-#<!-- chunk: 3.3 特殊字段 -->## 3.3 特殊字段
+## 3.3 特殊字段
 
 ```yaml
 properties:
@@ -425,7 +425,7 @@ properties:
           type: string
 ```
 
-#<!-- chunk: 3.4 默认值与示例 -->## 3.4 默认值与示例
+## 3.4 默认值与示例
 
 ```yaml
 properties:
@@ -452,7 +452,7 @@ properties:
 
 <!-- chunk: 4. CEL 验证规则 (v1.25+) -->## 4. CEL 验证规则 (v1.25+)
 
-#<!-- chunk: 4.1 CEL 基础语法 -->## 4.1 CEL 基础语法
+## 4.1 CEL 基础语法
 
 Common Expression Language (CEL) 提供比 OpenAPI Schema 更强大的验证能力:
 
@@ -482,7 +482,7 @@ schema:
             fieldPath: ".spec.replicas"  # 错误关联到特定字段
 ```
 
-#<!-- chunk: 4.2 CEL 内置函数 -->## 4.2 CEL 内置函数
+## 4.2 CEL 内置函数
 
 ```yaml
 x-kubernetes-validations:
@@ -519,7 +519,7 @@ x-kubernetes-validations:
     message: "如果提供 optional,其 value 必须大于 0"
 ```
 
-#<!-- chunk: 4.3 Transition Rules (变更验证) -->## 4.3 Transition Rules (变更验证)
+## 4.3 Transition Rules (变更验证)
 
 ```yaml
 properties:
@@ -544,7 +544,7 @@ properties:
         message: "不能删除 ref 字段"
 ```
 
-#<!-- chunk: 4.4 高级 CEL 示例 -->## 4.4 高级 CEL 示例
+## 4.4 高级 CEL 示例
 
 ```yaml
 properties:
@@ -596,7 +596,7 @@ properties:
 
 <!-- chunk: 5. 多版本与转换 -->## 5. 多版本与转换
 
-#<!-- chunk: 5.1 版本策略 -->## 5.1 版本策略
+## 5.1 版本策略
 
 ```yaml
 versions:
@@ -618,7 +618,7 @@ versions:
     deprecationWarning: "v1alpha1 将在 v2.0 中移除,请迁移到 v1"
 ```
 
-#<!-- chunk: 5.2 Webhook 转换器 -->## 5.2 Webhook 转换器
+## 5.2 Webhook 转换器
 
 **Conversion Webhook 配置:**
 
@@ -676,9 +676,12 @@ func handleConvert(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-#<!-- chunk: 5.3 存储版本迁移 -->## 5.3 存储版本迁移
+## 5.3 存储版本迁移
 
 当更改存储版本时(如 v1beta1 → v1),需要迁移 etcd 中的数据:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 更新 CRD,将新版本设为 storage: true
@@ -711,7 +714,10 @@ spec:
 
 <!-- chunk: 6. 内部原理 -->## 6. 内部原理
 
-#<!-- chunk: 6.1 CRD 注册流程 -->## 6.1 CRD 注册流程
+## 6.1 CRD 注册流程
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -752,7 +758,7 @@ spec:
 - **CRDRegistrationController**: 监听 CRD 变更,动态注册/注销 API 路径
 - **CustomResourceDefinitionStorageVersion**: 管理存储版本
 
-#<!-- chunk: 6.2 Schema 验证引擎 -->## 6.2 Schema 验证引擎
+## 6.2 Schema 验证引擎
 
 ```
 客户端请求 (kubectl/API)
@@ -785,7 +791,7 @@ spec:
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 6.3 版本转换机制 -->## 6.3 版本转换机制
+## 6.3 版本转换机制
 
 **场景**: 用户请求 v1,但 etcd 存储为 v2 (或反之)
 
@@ -829,7 +835,7 @@ spec:
 
 <!-- chunk: 7. 生产案例 -->## 7. 生产案例
 
-#<!-- chunk: 7.1 简单 CRD - 数据库实例 -->## 7.1 简单 CRD - 数据库实例
+## 7.1 简单 CRD - 数据库实例
 
 ```yaml
 apiVersion: apiextensions.k8s.io/v1
@@ -1002,7 +1008,7 @@ spec:
     retentionDays: 30
 ```
 
-#<!-- chunk: 7.2 多版本 CRD - 应用部署 -->## 7.2 多版本 CRD - 应用部署
+## 7.2 多版本 CRD - 应用部署
 
 ```yaml
 apiVersion: apiextensions.k8s.io/v1
@@ -1264,7 +1270,7 @@ func convertV2ToV1(v2obj *V2Application) *V1Application {
 }
 ```
 
-#<!-- chunk: 7.3 CEL 高级验证 - CI/CD Pipeline -->## 7.3 CEL 高级验证 - CI/CD Pipeline
+## 7.3 CEL 高级验证 - CI/CD Pipeline
 
 ```yaml
 apiVersion: apiextensions.k8s.io/v1
@@ -1504,15 +1510,19 @@ spec:
           action: deploy
           timeout: "15m"
           when: success
+
 ```
 
 ---
 
 <!-- chunk: 8. 故障排查 -->## 8. 故障排查
 
-#<!-- chunk: 8.1 CRD 无法创建 -->## 8.1 CRD 无法创建
+## 8.1 CRD 无法创建
 
 **症状**: `kubectl apply -f crd.yaml` 失败
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 检查 CRD 定义
@@ -1531,6 +1541,9 @@ Error: spec.versions: Invalid value: ...: must have exactly one version marked a
 
 **解决方案:**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 验证 CRD 结构
 kubectl apply -f crd.yaml --validate=true
@@ -1539,7 +1552,7 @@ kubectl apply -f crd.yaml --validate=true
 kubectl logs -n kube-system kube-apiserver-xxx | grep -i customresourcedefinition
 ```
 
-#<!-- chunk: 8.2 CR 创建失败(Schema 验证) -->## 8.2 CR 创建失败(Schema 验证)
+## 8.2 CR 创建失败(Schema 验证)
 
 **症状**: CustomResource 无法创建,提示字段验证错误
 
@@ -1552,6 +1565,9 @@ Error from server (Invalid): error when creating "cr.yaml":
 
 **调试步骤:**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. 查看 CRD Schema
 kubectl get crd databases.db.example.com -o jsonpath='{.spec.versions[?(@.storage==true)].schema.openAPIV3Schema}' | jq
@@ -1563,7 +1579,7 @@ kubectl apply -f cr.yaml --dry-run=server -v=8
 kubectl get crd databases.db.example.com -o jsonpath='{.spec.versions[0].schema.openAPIV3Schema.properties.spec.x-kubernetes-validations}'
 ```
 
-#<!-- chunk: 8.3 版本转换失败 -->## 8.3 版本转换失败
+## 8.3 版本转换失败
 
 **症状**: Webhook 转换错误
 
@@ -1596,7 +1612,7 @@ kubectl get crd databases.db.example.com -o jsonpath='{.spec.conversion}' | jq
 kubectl get crd databases.db.example.com -o jsonpath='{.spec.conversion.webhook.clientConfig.caBundle}' | base64 -d | openssl x509 -text
 ```
 
-#<!-- chunk: 8.4 CRD 更新失败 -->## 8.4 CRD 更新失败
+## 8.4 CRD 更新失败
 
 **症状**: 无法更新 CRD Schema
 
@@ -1607,6 +1623,10 @@ Error: spec.versions[0].schema: Forbidden:
 ```
 
 **安全更新策略:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 添加新版本(不修改旧版本 Schema)
@@ -1635,7 +1655,7 @@ kubectl patch crd databases.db.example.com --type=json -p='[
 ]'
 ```
 
-#<!-- chunk: 8.5 性能问题 -->## 8.5 性能问题
+## 8.5 性能问题
 
 **症状**: CR 列表查询缓慢
 
@@ -1691,7 +1711,7 @@ kubectl get databases --field-selector spec.engine=mysql
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -1709,3 +1729,5 @@ kubectl get databases --field-selector spec.engine=mysql
 - 28-poddisruptionbudget-reference
 - 30-apiservice-aggregation
 - 31-api-priority-fairness
+
+```

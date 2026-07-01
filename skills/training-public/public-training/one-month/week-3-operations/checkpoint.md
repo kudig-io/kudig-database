@@ -267,6 +267,9 @@ kubectl describe node <node-name> | grep -A 20 "Allocated resources"
 
 **参考要点:**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # etcd 备份命令
 ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}')
@@ -446,6 +449,9 @@ kubectl get events -n <namespace> --sort-by='.lastTimestamp' -o yaml
 ```
 
 **参考答案:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # Step 1: 创建 ServiceAccount（如果没有）
@@ -667,6 +673,9 @@ kubectl set resources deployment/<deploy-name> \
 
 **生产环境实施方案**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # Step 1: 为不同命名空间设置 PSS 级别
 # kube-system: privileged（系统组件需要特权）
@@ -745,4 +754,4 @@ kubectl run test-privileged --image=nginx --restart=Never --overrides='{"spec":{
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

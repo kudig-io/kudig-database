@@ -155,21 +155,21 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine|FTA 诊断执行引擎]]
-- [[skills/ts-security-auth|安全认证排查]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[skills/ts-security-auth.md|安全认证排查]]
 
 ## Related
 
-- [[skills/ts-cluster-operations|ts-cluster-operations]] — 集群运维故障排查
-- [[skills/ts-storage|ts-storage]] — 存储故障排查
-- [[skills/skill-19-node-resource-pressure|skill-19-node-resource-pressure]] — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
-- [[entities/kubelet|kubelet]] — kubelet
+- [[skills/ts-cluster-operations.md|ts-cluster-operations]] — 集群运维故障排查
+- [[skills/ts-storage.md|ts-storage]] — 存储故障排查
+- [[skills/skill-19-node-resource-pressure.md|skill-19-node-resource-pressure]] — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[cert-manager]] — cert-manager
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/certificate-fta|证书异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/certificate-fta.md|证书异常故障树分析]]
 
 ---
 
 > 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
-> [[_archives/troubleshooting-diagnostics/topic-fta/list/certificate-fta|Certificate FTA 完整版]]
+> [[_archives/troubleshooting-diagnostics/topic-fta/list/certificate-fta.md|Certificate FTA 完整版]]

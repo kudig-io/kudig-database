@@ -1,5 +1,5 @@
 ---
-title: Week 1 Checkpoint: 自测检验 [week-1-ack-acr-lifecycle]
+title: "Week 1 Checkpoint: 自测检验 [week-1-ack-acr-lifecycle]"
 description: '## 概述'
 category: learning
 tags:
@@ -376,6 +376,9 @@ kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}'
 
 **参考答案:**
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
 ```
@@ -473,8 +476,6 @@ aliyun cs POST /clusters/<cluster_id>/certrenew
 (在此写下你的答案)
 
 
-
-
 ```
 
 **参考要点:**
@@ -511,8 +512,6 @@ aliyun ram ListPoliciesForUser --UserName <user>
 
 ```
 (在此写下你的答案)
-
-
 
 
 ```
@@ -555,8 +554,6 @@ aliyun ram ListPoliciesForUser --UserName <user>
 (在此写下你的答案)
 
 
-
-
 ```
 
 **参考要点:**
@@ -589,8 +586,6 @@ aliyun cs DELETE /clusters/<cluster_id>
 
 ```
 (在此写下你的答案)
-
-
 
 
 ```
@@ -643,9 +638,7 @@ kubectl get nodes
 1.
 
 
-
 2.
-
 
 
 3.
@@ -696,4 +689,4 @@ kubectl get nodes
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

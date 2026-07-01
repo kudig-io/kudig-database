@@ -134,6 +134,9 @@ ethtool -L eth0 combined 8
 
 通过 init container 或 [[DaemonSet|DaemonSet]] 在节点上持久化以下参数:
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
+
 ```bash
 sysctl -w net.core.somaxconn=65535
 sysctl -w net.ipv4.tcp_max_syn_backlog=65535
@@ -383,6 +386,9 @@ data:
 
 开启带宽管理器后，eBPF 在 socket 层直接执行 EDT (Earliest Departure Time) 限速，避免 qdisc 队列堆积:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 kubectl exec -n kube-system <terway-pod> -- \
   cilium bandwidth list
@@ -393,6 +399,11 @@ kubectl exec -n kube-system <terway-pod> -- \
 ### 6.4 iptables → eBPF 迁移指南
 
 **迁移步骤:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```
 Step 1: 确认前置条件
@@ -427,6 +438,11 @@ Step 4: 观察运行状态
 
 **回滚步骤:**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 切换回 iptables 模式
 kubectl edit cm terway-config -n kube-system
@@ -454,6 +470,9 @@ kubectl exec -n kube-system <terway-pod> -- iptables -L -n | grep -c terway
 | SCTP 协议 | eBPF 对 SCTP 支持有限 | 暂不支持，需保持 iptables 模式 |
 
 **验证命令:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 确认 eBPF 数据面状态
@@ -701,7 +720,7 @@ nstat -az | grep -E "TcpRetransSegs|TcpOutRsts"
 |:---|:---|
 | [01-product.md](./01-product.md) | Terway 产品概览、版本历史、模式总览 |
 | [02-architecture.md](./02-architecture.md) | 架构原理、数据面/控制面、CRD 资源模型 |
-| [03-usage.md](./[[domain-03-networking-traffic/topic-terway/03-usage|03-usage]].md) | 安装配置、模式切换、NetworkPolicy、固定 IP |
+| [03-usage.md](./[[domain-03-networking-traffic/topic-terway/03-usage.md|03-usage]].md) | 安装配置、模式切换、NetworkPolicy、固定 IP |
 | [04-operations.md](./04-operations.md) | 健康检查、GC 机制、升级策略、监控告警 |
 | [05-testing.md](./05-testing.md) | Pod 网络验证、连通性测试、NetworkPolicy 测试 |
 
@@ -723,4 +742,6 @@ nstat -az | grep -E "TcpRetransSegs|TcpOutRsts"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+```

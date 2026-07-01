@@ -20,7 +20,6 @@ trigger_keywords:
 - CSI
 - Volume
 - Cloning
-- CSI
 - 卷克隆
 - dictionary
 prerequisites:
@@ -127,6 +126,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建克隆 PVC
 kubectl apply -f clone-pvc.yaml
@@ -147,7 +149,6 @@ kubectl describe pvc db-data-clone -n staging
 
 ## Related
 
-- index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/storage/ceph.md|Ceph]]
+- [[domain-17-system-foundation/topic-dictionary/storage/cloudnativepg.md|CloudNativePG 云原生 PostgreSQL]]
+- [[domain-17-system-foundation/topic-dictionary/storage/composefs.md|ComposeFS 只读文件系统]]

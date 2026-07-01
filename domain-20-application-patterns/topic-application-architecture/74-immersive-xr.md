@@ -127,7 +127,7 @@ k8s_versions:
 
 <!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-#<!-- chunk: 1.1 市场规模与趋势 -->## 1.1 市场规模与趋势
+## 1.1 市场规模与趋势
 
 沉浸式 XR（VR/AR/MR）融合虚拟与现实，开启空间计算时代。随着 Apple Vision Pro、Meta Quest 3、PICO 4 等设备普及，全球 XR 市场规模预计从 2024 年的 500 亿美元增长到 2030 年的 3500 亿美元。关键技术趋势包括：眼动追踪注视点渲染、空间计算、手势交互、数字人、云渲染串流。
 
@@ -140,7 +140,7 @@ k8s_versions:
 | 交互延迟要求 | < 20ms | < 15ms | < 10ms |
 | 数字人市场规模 | $5B | $15B | $60B |
 
-#<!-- chunk: 1.2 行业痛点 -->## 1.2 行业痛点
+## 1.2 行业痛点
 
 | 痛点 | 说明 | 数字化转型驱动 |
 |:---|:---|:---|
@@ -151,7 +151,7 @@ k8s_versions:
 | 硬件差异 | 不同头显算力/分辨率差异大 | 自适应码率 + 分级渲染 |
 | 带宽需求 | 云渲染需 50-200 Mbps | 视锥编码 + 感知压缩 |
 
-#<!-- chunk: 1.3 数字化转型架构影响 -->## 1.3 数字化转型架构影响
+## 1.3 数字化转型架构影响
 
 XR 系统架构需要覆盖终端设备层（VR/AR 头显、手机、空间计算设备）、渲染层（云 GPU 渲染、边缘渲染、本地渲染）、平台层（空间定位、内容分发、多人协同）和内容层（3D 模型库、场景编辑器）。核心挑战是延迟预算极紧（端到端 < 20ms），需要边缘节点 + GPU 云渲染 + 智能编码的协同优化。
 
@@ -159,23 +159,23 @@ XR 系统架构需要覆盖终端设备层（VR/AR 头显、手机、空间计�
 
 <!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-#<!-- chunk: 2.1 VR 沉浸娱乐 -->## 2.1 VR 沉浸娱乐
+## 2.1 VR 沉浸娱乐
 
 VR 游戏、影视、社交应用是 XR 最大的消费市场。系统需要支持多人在线、物理引擎、实时语音、手势交互等能力。渲染以云端 GPU 为主，通过 H.265/H.265 串流到终端。典型场景包括 VR 电竞、虚拟演唱会、沉浸式观影。
 
-#<!-- chunk: 2.2 AR 工业辅助 -->## 2.2 AR 工业辅助
+## 2.2 AR 工业辅助
 
 AR 远程协助、培训和巡检是工业 XR 的核心场景。现场工作人员佩戴 AR 眼镜，远程专家通过视频看到第一视角并叠加指导标注。系统需要低延迟视频传输、空间锚点定位和实时标注同步。工业场景对可靠性和安全性要求极高。
 
-#<!-- chunk: 2.3 MR 协同办公 -->## 2.3 MR 协同办公
+## 2.3 MR 协同办公
 
 虚拟会议室和协作空间支持多地团队成员在共享空间中进行 3D 协作。需要空间音频、手势识别、白板共享、3D 模型共同编辑。系统状态同步需要支持 10+ 人同时在线。
 
-#<!-- chunk: 2.4 空间计算与环境理解 -->## 2.4 空间计算与环境理解
+## 2.4 空间计算与环境理解
 
 通过 SLAM、深度感知和环境理解技术，设备可以扫描和重建物理空间。空间锚点允许多设备共享同一坐标系，实现持久化虚拟内容放置。应用场景包括室内导航、虚拟家居布置、城市 AR。
 
-#<!-- chunk: 2.5 数字人交互 -->## 2.5 数字人交互
+## 2.5 数字人交互
 
 基于 AI 驱动的数字人用于虚拟客服、虚拟主播、虚拟教师等场景。系统需要实时面部捕捉、语音合成、动作生成和情感计算。数字人渲染可以云端完成，通过视频串流到终端。
 
@@ -183,7 +183,7 @@ AR 远程协助、培训和巡检是工业 XR 的核心场景。现场工作人�
 
 <!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-#<!-- chunk: 3.1 沉浸式 XR 全景架构 -->## 3.1 沉浸式 XR 全景架构
+## 3.1 沉浸式 XR 全景架构
 
 ```mermaid
 graph TB
@@ -263,7 +263,7 @@ graph TB
 
 <!-- chunk: 5. Kubernetes 部署方案 -->## 5. Kubernetes 部署方案
 
-#<!-- chunk: 5.1 云渲染 GPU Deployment -->## 5.1 云渲染 GPU Deployment
+## 5.1 云渲染 GPU Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -358,7 +358,7 @@ spec:
             sizeLimit: "50Gi"
 ```
 
-#<!-- chunk: 5.2 协同空间服务 Deployment -->## 5.2 协同空间服务 Deployment
+## 5.2 协同空间服务 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -400,7 +400,7 @@ spec:
               cpu: "4000m"
 ```
 
-#<!-- chunk: 5.3 ConfigMap, Service 与 Secret -->## 5.3 ConfigMap, Service 与 Secret
+## 5.3 ConfigMap, Service 与 Secret
 
 ```yaml
 apiVersion: v1
@@ -469,7 +469,7 @@ stringData:
 
 <!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-#<!-- chunk: 6.1 XR 数据流全景 -->## 6.1 XR 数据流全景
+## 6.1 XR 数据流全景
 
 ```mermaid
 flowchart TB
@@ -513,7 +513,7 @@ flowchart TB
     C1 --> ST1 & ST2
 ```
 
-#<!-- chunk: 6.2 数据流说明 -->## 6.2 数据流说明
+## 6.2 数据流说明
 
 - **传感器上行**: 头显 6DOF 位姿、眼动、手势数据以 90-120Hz 上行至边缘/云端
 - **渲染下行**: 云端渲染画面通过 WebRTC 串流至终端，延迟目标 < 15ms
@@ -524,7 +524,7 @@ flowchart TB
 
 <!-- chunk: 7. AI/ML 组件 -->## 7. AI/ML 组件
 
-#<!-- chunk: 7.1 核心模型 -->## 7.1 核心模型
+## 7.1 核心模型
 
 | 模型 | 用途 | 输入 | 输出 | 框架 |
 |:---|:---|:---|:---|:---|
@@ -535,7 +535,7 @@ flowchart TB
 | 内容审核 | XR 内容安全审核 | 3D 模型 / 全景视频 | 违规标记 | Multi-Modal CLIP |
 | 场景理解 | 环境语义分割 | RGB-D 帧 | 3D 语义标签 | PointNet++ |
 
-#<!-- chunk: 7.2 模型推理管道 -->## 7.2 模型推理管道
+## 7.2 模型推理管道
 
 边缘端部署轻量级模型（手势/注视点），云端部署重量级模型（渲染优化/内容审核/数字人）。模型通过 PAI-EAS 管理生命周期，支持灰度发布和 A/B 测试。
 
@@ -543,7 +543,7 @@ flowchart TB
 
 <!-- chunk: 8. 安全与合规 -->## 8. 安全与合规
 
-#<!-- chunk: 8.1 行业法规与标准 -->## 8.1 行业法规与标准
+## 8.1 行业法规与标准
 
 | 法规/标准 | 适用范围 | 架构要求 |
 |:---|:---|:---|
@@ -555,7 +555,7 @@ flowchart TB
 | ISO 27001 | 信息安全管理 | 安全管理体系 |
 | VR 使用安全 | VR 使用时长限制/健康 | 使用时长监控与提醒 |
 
-#<!-- chunk: 8.2 安全架构要点 -->## 8.2 安全架构要点
+## 8.2 安全架构要点
 
 - **环境隐私**: 环境扫描数据（含家庭环境）严格加密，不上传原始点云
 - **内容安全**: UGC 3D 内容通过 AI 审核后才能公开
@@ -611,17 +611,17 @@ flowchart TB
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

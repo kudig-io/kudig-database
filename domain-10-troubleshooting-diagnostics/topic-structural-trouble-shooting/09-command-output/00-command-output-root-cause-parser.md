@@ -972,6 +972,7 @@ output_pattern:
       - cause: "kubelet 没有正确配置 metrics 端点"
         indicators: ["metrics not available" + APIService unavailable"]
         next_step: "检查 kubelet 配置 --authentication-webhook 和 metrics 端口"
+
 ```
 
 ---
@@ -1320,6 +1321,7 @@ output_pattern:
     severity: P0
     status: "normal"
     note: "如 Allowed disruptions 为 0，说明 PDB 保护了所有 Pod，驱逐将被阻止"
+
 ```
 
 ---
@@ -1445,6 +1447,7 @@ output_pattern:
       - cause: "K8s 1.28+ 废弃了 --to-revision 参数"
         indicators: ["cannot specify revision"]
         next_step: "使用 kubectl rollout history 查看各 revision，再通过 apply 或 set image 回退到指定版本"
+
 ```
 
 ---
@@ -1841,12 +1844,14 @@ related:
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser|00-command-output-root-cause-parser]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/01-kubectl-watch-output-parser|01-kubectl-watch-output-parser]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/01-kubectl-watch-output-parser|01-kubectl-watch-output-parser]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser|00-command-output-root-cause-parser]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
+
+```

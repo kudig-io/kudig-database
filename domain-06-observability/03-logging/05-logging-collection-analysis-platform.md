@@ -59,9 +59,9 @@ created: "2026-05-23"
 
 <!-- chunk: 🏗️ 日志架构设计 -->## 🏗️ 日志架构设计
 
-#<!-- chunk: 分层日志架构 -->## 分层日志架构
+## 分层日志架构
 
-##<!-- chunk: 1. 日志收集层 -->## 1. 日志收集层
+## 1. 日志收集层
 ```yaml
 # Fluent Bit DaemonSet配置
 apiVersion: apps/v1
@@ -159,7 +159,7 @@ data:
         Retry_Limit     False
 ```
 
-##<!-- chunk: 2. 日志缓冲层 -->## 2. 日志缓冲层
+## 2. 日志缓冲层
 ```yaml
 # Kafka作为日志缓冲
 apiVersion: apps/v1
@@ -209,7 +209,7 @@ spec:
           storage: 100Gi
 ```
 
-##<!-- chunk: 3. 日志存储层 -->## 3. 日志存储层
+## 3. 日志存储层
 ```yaml
 # Elasticsearch集群配置
 apiVersion: elasticsearch.k8s.elastic.co/v1
@@ -251,9 +251,9 @@ spec:
 
 <!-- chunk: 🔍 日志分析平台 -->## 🔍 日志分析平台
 
-#<!-- chunk: Kibana配置 -->## Kibana配置
+## Kibana配置
 
-##<!-- chunk: 1. Kibana部署配置 -->## 1. Kibana部署配置
+## 1. Kibana部署配置
 ```yaml
 # Kibana配置
 apiVersion: kibana.k8s.elastic.co/v1
@@ -277,7 +277,7 @@ spec:
         disabled: true
 ```
 
-##<!-- chunk: 2. 日志索引模板 -->## 2. 日志索引模板
+## 2. 日志索引模板
 ```json
 {
   "index_patterns": ["kubernetes-*"],
@@ -314,9 +314,9 @@ spec:
 }
 ```
 
-#<!-- chunk: 日志解析优化 -->## 日志解析优化
+## 日志解析优化
 
-##<!-- chunk: 1. 结构化日志处理 -->## 1. 结构化日志处理
+## 1. 结构化日志处理
 ```yaml
 # 日志解析配置
 parsers.conf: |
@@ -341,7 +341,7 @@ parsers.conf: |
       Time_Format %b %d %H:%M:%S
 ```
 
-##<!-- chunk: 2. 多格式日志适配 -->## 2. 多格式日志适配
+## 2. 多格式日志适配
 ```yaml
 # 多格式日志路由
 apiVersion: v1
@@ -380,9 +380,9 @@ data:
 
 <!-- chunk: 📊 日志分析实践 -->## 📊 日志分析实践
 
-#<!-- chunk: 关键指标监控 -->## 关键指标监控
+## 关键指标监控
 
-##<!-- chunk: 1. 错误日志监控 -->## 1. 错误日志监控
+## 1. 错误日志监控
 ```yaml
 # 错误日志告警规则
 apiVersion: monitoring.coreos.com/v1
@@ -404,7 +404,7 @@ spec:
         description: "{{ $labels.app }} is generating {{ printf \"%.2f\" $value }} errors per second"
 ```
 
-##<!-- chunk: 2. 应用性能日志 -->## 2. 应用性能日志
+## 2. 应用性能日志
 ```json
 {
   "dashboard": {
@@ -433,9 +433,9 @@ spec:
 }
 ```
 
-#<!-- chunk: 日志搜索优化 -->## 日志搜索优化
+## 日志搜索优化
 
-##<!-- chunk: 1. Elasticsearch索引生命周期管理 -->## 1. Elasticsearch索引生命周期管理
+## 1. Elasticsearch索引生命周期管理
 ```yaml
 # ILM策略配置
 apiVersion: elasticsearch.k8s.elastic.co/v1
@@ -489,7 +489,7 @@ PUT _ilm/policy/log_retention_policy
 }
 ```
 
-##<!-- chunk: 2. 日志采样策略 -->## 2. 日志采样策略
+## 2. 日志采样策略
 ```yaml
 # 智能日志采样配置
 apiVersion: v1
@@ -525,9 +525,9 @@ data:
 
 <!-- chunk: 🔧 平台运维管理 -->## 🔧 平台运维管理
 
-#<!-- chunk: 安全访问控制 -->## 安全访问控制
+## 安全访问控制
 
-##<!-- chunk: 1. 认证授权配置 -->## 1. 认证授权配置
+## 1. 认证授权配置
 ```yaml
 # Kibana安全配置
 apiVersion: kibana.k8s.elastic.co/v1
@@ -554,7 +554,7 @@ data:
     base64_encoded_encryption_key
 ```
 
-##<!-- chunk: 2. 网络策略配置 -->## 2. 网络策略配置
+## 2. 网络策略配置
 ```yaml
 # 日志组件网络隔离
 apiVersion: networking.k8s.io/v1
@@ -594,9 +594,9 @@ spec:
       port: 53
 ```
 
-#<!-- chunk: 性能调优 -->## 性能调优
+## 性能调优
 
-##<!-- chunk: 1. 资源配额管理 -->## 1. 资源配额管理
+## 1. 资源配额管理
 ```yaml
 # 日志组件资源限制
 apiVersion: v1
@@ -629,7 +629,7 @@ spec:
     type: Container
 ```
 
-##<!-- chunk: 2. 存储优化配置 -->## 2. 存储优化配置
+## 2. 存储优化配置
 ```yaml
 # Elasticsearch存储优化
 apiVersion: elasticsearch.k8s.elastic.co/v1
@@ -674,9 +674,9 @@ spec:
 
 <!-- chunk: 📈 监控与告警 -->## 📈 监控与告警
 
-#<!-- chunk: 日志平台健康监控 -->## 日志平台健康监控
+## 日志平台健康监控
 
-##<!-- chunk: 1. 组件健康检查 -->## 1. 组件健康检查
+## 1. 组件健康检查
 ```yaml
 # 日志组件健康监控
 apiVersion: monitoring.coreos.com/v1
@@ -720,7 +720,7 @@ spec:
         summary: "Fluent Bit buffer is overrun"
 ```
 
-##<!-- chunk: 2. 性能指标监控 -->## 2. 性能指标监控
+## 2. 性能指标监控
 ```json
 {
   "dashboard": {
@@ -753,7 +753,7 @@ spec:
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 平台部署 -->## 平台部署
+## 平台部署
 - [ ] 设计日志收集架构和数据流向
 - [ ] 部署日志收集代理(Fluent Bit/Fluentd)
 - [ ] 配置日志缓冲层(Kafka/Redis)
@@ -761,7 +761,7 @@ spec:
 - [ ] 配置日志分析界面(Kibana)
 - [ ] 实现日志解析和结构化处理
 
-#<!-- chunk: 安全与性能 -->## 安全与性能
+## 安全与性能
 - [ ] 配置访问认证和授权机制
 - [ ] 实施网络安全隔离策略
 - [ ] 优化存储和查询性能
@@ -769,7 +769,7 @@ spec:
 - [ ] 实施日志采样和过滤策略
 - [ ] 建立监控告警体系
 
-#<!-- chunk: 运营维护 -->## 运营维护
+## 运营维护
 - [ ] 制定日志保留和清理策略
 - [ ] 建立日志平台运维手册
 - [ ] 定期进行性能调优
@@ -786,9 +786,9 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations KUDIG Database — Global MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -805,4 +805,4 @@ spec:
 - 06-apm-application-performance-monitoring
 - 07-zero-trust-security-architecture
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]

@@ -226,8 +226,12 @@ var flagMap = map[string]int{
 | `UMOUNT_NOFOLLOW` | 8 | 不跟随符号链接 |
 
 **使用方法**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
-kubeadm reset --config=reset.yaml
+kubeadm reset --config=reset.yaml  # ⚠️ 清理节点所有 K8s 配置
 # reset.yaml:
 # unmountFlags:
 #   - MNT_DETACH
@@ -454,6 +458,7 @@ if r.Cfg() != nil && features.Enabled(r.Cfg().FeatureGates, features.RootlessCon
 │  └────────────────────────────────┘                              │
 │                                                                   │
 └─────────────────────────────────────────────────────────────────┘
+
 ```
 
 ---
@@ -473,11 +478,15 @@ if r.Cfg() != nil && features.Enabled(r.Cfg().FeatureGates, features.RootlessCon
 
 **手动清理命令**:
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
+
 ```bash
 iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
 ipvsadm -C
-rm -rf /etc/cni/net.d
-rm -rf $HOME/.kube/config
+rm -rf /etc/cni/net.d  # ⚠️ 删除系统/数据文件
+rm -rf $HOME/.kube/config  # ⚠️ 删除系统/数据文件
 ```
 
 ---
@@ -491,7 +500,9 @@ rm -rf $HOME/.kube/config
 ## Related
 
 - [[README|README]]
-- [[man/INSTALL|INSTALL]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux|linux]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[scripts/man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+
+```

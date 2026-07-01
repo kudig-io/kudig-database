@@ -75,7 +75,7 @@ cross_refs:
 created: "2026-05-23"
 ---
 
-# 容器运行时深度解析 ([[Container Runtime|Container Runtime]] Interface Deep Dive)
+# 容器运行时深度解析 ([[concepts/container-runtime.md|Container Runtime]] Interface Deep Dive)
 
 <!-- chunk: 目录 -->
 ## 目录
@@ -83,7 +83,7 @@ created: "2026-05-23"
 1. [容器运行时演进历史](#1-容器运行时演进历史)
 2. [容器运行时架构](#2-容器运行时架构)
 3. [CRI 接口规范](#3-cri-接口规范)
-4. [[entities/containerd|containerd]] 深度解析](#4-containerd-深度解析)
+4. [[entities/containerd.md|containerd]] 深度解析](#4-containerd-深度解析)
 5. [CRI-O 深度解析](#5-cri-o-深度解析)
 6. [OCI 运行时详解](#6-oci-运行时详解)
 7. [安全容器运行时](#7-安全容器运行时)
@@ -1949,6 +1949,9 @@ cat /proc/<container-pid>/mountinfo
 
 ### 11.1 案例一: 从 Docker 迁移到 containerd
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 迁移步骤
 
@@ -2205,7 +2208,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)

@@ -1110,6 +1110,9 @@ kubeadm join loadbalancer.example.com:6443 \
 
 #### 备份与恢复
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+
 ```bash
 # etcd 快照备份
 ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d).db \
@@ -1745,6 +1748,11 @@ spec:
 
 ### C. 常用命令速查
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 集群信息
 kubectl cluster-info
@@ -1811,6 +1819,12 @@ multi_region_deployment:
 ```
 
 #### 零信任安全架构实施
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 生产环境安全加固脚本
 #!/bin/bash
@@ -2052,6 +2066,12 @@ cost_optimized_scheduling:
 ```
 
 #### 混合云成本优化策略
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 #!/bin/bash
 # hybrid-cloud-cost-optimizer.sh
@@ -2152,6 +2172,11 @@ graph TD
 ```
 
 #### 自动化故障恢复脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # automated-failure-recovery.sh
@@ -2236,7 +2261,7 @@ echo "🎯 问题监控已启动 (PID: $!)"
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 核心组件深度剖析
 - 03 - 功能和API表
@@ -2252,12 +2277,12 @@ echo "🎯 问题监控已启动 (PID: $!)"
 
 - 设计原则——理解 K8s 的设计哲学
 - 控制平面架构深度解析
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|K8s 命令速查卡]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s 命令速查卡]]
 - 相关知识域: domain-13-container-runtime
 - 相关知识域: domain-01-cluster-fundamentals
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|速查卡: k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet|速查卡: kubectl-scene-cheatsheet]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 

@@ -121,7 +121,7 @@ k8s_versions:
 
 <!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-#<!-- chunk: 1.1 市场规模与趋势 -->## 1.1 市场规模与趋势
+## 1.1 市场规模与趋势
 
 数字孪生工厂将物理产线实时映射到虚拟空间，实现全生命周期管理。全球数字孪生制造市场规模预计从 2024 年的 120 亿美元增长到 2030 年的 800 亿美元。西门子、达索、PTC、NVIDIA 等引领行业发展。核心价值包括：新产线虚拟调试节省 60%+ 调试时间、预测性维护降低 30% 停机时间、工艺优化提升 15% 产能。
 
@@ -133,7 +133,7 @@ k8s_versions:
 | 三维渲染帧率 | 30FPS | 60FPS | 120FPS |
 | 预测性维护准确率 | 85% | 92% | 97% |
 
-#<!-- chunk: 1.2 行业痛点 -->## 1.2 行业痛点
+## 1.2 行业痛点
 
 | 痛点 | 说明 | 数字化转型驱动 |
 |:---|:---|:---|
@@ -144,7 +144,7 @@ k8s_versions:
 | 预测维护 | 设备问题提前预警 | AI 时序预测 |
 | 安全隔离 | OT/IT 网络安全 | 工控安全 + 纵深防御 |
 
-#<!-- chunk: 1.3 数字化转型架构影响 -->## 1.3 数字化转型架构影响
+## 1.3 数字化转型架构影响
 
 数字孪生工厂架构需要覆盖物理工厂层（PLC/机器人/传感器/CNC/AGV）、数据采集层（OPC-UA/MQTT/Modbus/边缘网关）、数字孪生平台层（三维渲染/物理仿真/数据融合/AI分析/虚拟调试）和应用层（监控大屏/虚拟工厂/预测维护/工艺优化/AR运维）。核心挑战是物理到虚拟的实时映射精度和大规模数据融合。
 
@@ -152,23 +152,23 @@ k8s_versions:
 
 <!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-#<!-- chunk: 2.1 工厂三维可视化 -->## 2.1 工厂三维可视化
+## 2.1 工厂三维可视化
 
 将工厂产线、设备和环境构建为高精度三维模型，叠加 IoT 实时数据，在监控大屏上展示工厂运行状态。支持缩放、旋转、穿透查看和设备状态查询。渲染目标 > 30FPS，数据映射延迟 < 100ms。
 
-#<!-- chunk: 2.2 PLC 虚拟调试 -->## 2.2 PLC 虚拟调试
+## 2.2 PLC 虚拟调试
 
 在新产线建设前，在虚拟环境中连接真实 PLC 程序进行调试验证。PLC 发出的控制指令驱动虚拟设备动作，传感器反馈信号回传至 PLC。虚拟调试可发现 80%+ 的逻辑错误，大幅缩短现场调试时间。
 
-#<!-- chunk: 2.3 预测性维护 -->## 2.3 预测性维护
+## 2.3 预测性维护
 
 基于设备传感器数据（振动/温度/电流/压力），AI 模型预测设备健康度和剩余使用寿命（RUL）。在问题发生前 1-4 周发出预警，安排预防性维修。将非计划停机减少 30-50%。
 
-#<!-- chunk: 2.4 工艺参数优化 -->## 2.4 工艺参数优化
+## 2.4 工艺参数优化
 
 通过仿真模拟不同工艺参数组合对产品质量和产能的影响，找到最优参数配置。支持 DOE（实验设计）和自动寻优。优化后的参数下发至 MES 系统。
 
-#<!-- chunk: 2.5 AR 远程运维 -->## 2.5 AR 远程运维
+## 2.5 AR 远程运维
 
 现场工程师佩戴 AR 眼镜，数字孪生系统在设备上叠加维修指引、历史问题记录和备件信息。远程专家通过第一视角视频进行指导，维修步骤实时标注在 AR 眼镜中。
 
@@ -176,7 +176,7 @@ k8s_versions:
 
 <!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-#<!-- chunk: 3.1 数字孪生工厂全景架构 -->## 3.1 数字孪生工厂全景架构
+## 3.1 数字孪生工厂全景架构
 
 ```mermaid
 graph TB
@@ -239,7 +239,7 @@ graph TB
 
 <!-- chunk: 5. Kubernetes 部署方案 -->## 5. Kubernetes 部署方案
 
-#<!-- chunk: 5.1 三维渲染引擎 GPU StatefulSet -->## 5.1 三维渲染引擎 GPU StatefulSet
+## 5.1 三维渲染引擎 GPU StatefulSet
 
 ```yaml
 apiVersion: apps/v1
@@ -327,7 +327,7 @@ spec:
             storage: 100Gi
 ```
 
-#<!-- chunk: 5.2 数据采集服务 Deployment -->## 5.2 数据采集服务 Deployment
+## 5.2 数据采集服务 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -368,7 +368,7 @@ spec:
               cpu: "2000m"
 ```
 
-#<!-- chunk: 5.3 ConfigMap, Service 与 Secret -->## 5.3 ConfigMap, Service 与 Secret
+## 5.3 ConfigMap, Service 与 Secret
 
 ```yaml
 apiVersion: v1
@@ -431,7 +431,7 @@ stringData:
 
 <!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-#<!-- chunk: 6.1 物理到虚拟映射数据流 -->## 6.1 物理到虚拟映射数据流
+## 6.1 物理到虚拟映射数据流
 
 ```mermaid
 flowchart TB
@@ -471,7 +471,7 @@ flowchart TB
     C4 --> O4
 ```
 
-#<!-- chunk: 6.2 数据流说明 -->## 6.2 数据流说明
+## 6.2 数据流说明
 
 - **IoT 数据流**: 传感器以 100Hz 采集数据，经边缘网关压缩后写入 Lindorm
 - **PLC 数据流**: OPC-UA 协议采集 PLC 状态，驱动虚拟设备实时联动
@@ -482,7 +482,7 @@ flowchart TB
 
 <!-- chunk: 7. AI/ML 组件 -->## 7. AI/ML 组件
 
-#<!-- chunk: 7.1 核心模型 -->## 7.1 核心模型
+## 7.1 核心模型
 
 | 模型 | 用途 | 输入 | 输出 | 框架 |
 |:---|:---|:---|:---|:---|
@@ -497,7 +497,7 @@ flowchart TB
 
 <!-- chunk: 8. 安全与合规 -->## 8. 安全与合规
 
-#<!-- chunk: 8.1 行业法规与标准 -->## 8.1 行业法规与标准
+## 8.1 行业法规与标准
 
 | 法规/标准 | 适用范围 | 架构要求 |
 |:---|:---|:---|
@@ -507,7 +507,7 @@ flowchart TB
 | 工业数据安全 | 工艺数据保护 | 数据加密 + 权限控制 |
 | GDPR / PIPL | 员工数据保护 | 视频数据脱敏 |
 
-#<!-- chunk: 8.2 安全架构要点 -->## 8.2 安全架构要点
+## 8.2 安全架构要点
 
 - **OT/IT 隔离**: 工业控制网络与数字孪生平台网络隔离，通过安全网闸交换数据
 - **工艺数据加密**: 核心工艺参数加密存储和传输
@@ -559,17 +559,17 @@ flowchart TB
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

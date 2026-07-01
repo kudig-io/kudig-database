@@ -120,7 +120,7 @@ k8s_versions:
 
 <!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-#<!-- chunk: 1.1 市场规模与趋势 -->## 1.1 市场规模与趋势
+## 1.1 市场规模与趋势
 
 低空经济以 eVTOL（电动垂直起降飞行器）和无人机为核心，涵盖城市空中交通（UAM）、物流配送、应急救援等场景。全球低空经济市场规模预计从 2024 年的 500 亿美元增长到 2030 年的 5000 亿美元。Joby、Lilium、亿航、峰飞等 eVTOL 企业加速适航认证，中国已有 20+ 个城市启动低空经济试点。
 
@@ -132,7 +132,7 @@ k8s_versions:
 | 无人机配送日单量 | 10 万 | 100 万 | 1000 万 |
 | UTM 管理系统覆盖 | 5 城市 | 20 城市 | 100+ 城市 |
 
-#<!-- chunk: 1.2 行业痛点 -->## 1.2 行业痛点
+## 1.2 行业痛点
 
 | 痛点 | 说明 | 数字化转型驱动 |
 |:---|:---|:---|
@@ -143,7 +143,7 @@ k8s_versions:
 | 法规合规 | 适航认证/空域审批复杂 | 审计追踪 + 合规平台 |
 | 公众接受度 | 噪声/隐私/安全担忧 | 透明运营 + 安全数据公示 |
 
-#<!-- chunk: 1.3 数字化转型架构影响 -->## 1.3 数字化转型架构影响
+## 1.3 数字化转型架构影响
 
 低空经济架构需要覆盖飞行器层（eVTOL/无人机）、通信层（5G-A/卫星/ADS-B/雷达）、管控层（UTM 空域管理/飞行调度/路径规划/冲突检测/气象）和平台层（飞行监控/运行控制/资产/数据分析）。核心挑战是毫秒级冲突检测和 99.999% 系统可用性。
 
@@ -151,23 +151,23 @@ k8s_versions:
 
 <!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-#<!-- chunk: 2.1 城市空中交通 eVTOL 通勤 -->## 2.1 城市空中交通 eVTOL 通勤
+## 2.1 城市空中交通 eVTOL 通勤
 
 eVTOL 在城市垂直起降场之间运行，提供 10-50 公里的短途空中通勤服务。单座成本目标降至出租车 2-3 倍，飞行时间仅为地面交通的 1/5。需要 UTM 空管系统实时监控所有飞行器。
 
-#<!-- chunk: 2.2 无人机末端配送 -->## 2.2 无人机末端配送
+## 2.2 无人机末端配送
 
 无人机从配送中心起飞，将外卖/药品/快递送达小区起降台。支持 5-20 公里范围，单程 < 30 分钟。系统需要多机调度、路径规划和禁飞区避让。
 
-#<!-- chunk: 2.3 应急救援 -->## 2.3 应急救援
+## 2.3 应急救援
 
 医疗急救物资/血液/器官通过无人机快速送达，空中消防监测和救援。需要最高优先级的空域和路径保障。
 
-#<!-- chunk: 2.4 低空巡检 -->## 2.4 低空巡检
+## 2.4 低空巡检
 
 无人机巡检电力线路、油气管道、桥梁和铁路。AI 自动识别缺陷并生成巡检报告。巡检数据叠加至 GIS 地图。
 
-#<!-- chunk: 2.5 飞行培训与模拟 -->## 2.5 飞行培训与模拟
+## 2.5 飞行培训与模拟
 
 eVTOL 飞行员通过数字孪生模拟器进行培训。模拟器复现城市低空环境、气象变化和应急场景。
 
@@ -175,7 +175,7 @@ eVTOL 飞行员通过数字孪生模拟器进行培训。模拟器复现城市�
 
 <!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-#<!-- chunk: 3.1 低空经济全景架构 -->## 3.1 低空经济全景架构
+## 3.1 低空经济全景架构
 
 ```mermaid
 graph TB
@@ -244,7 +244,7 @@ graph TB
 
 <!-- chunk: 5. Kubernetes 部署方案 -->## 5. Kubernetes 部署方案
 
-#<!-- chunk: 5.1 UTM 核心系统 Deployment -->## 5.1 UTM 核心系统 Deployment
+## 5.1 UTM 核心系统 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -329,7 +329,7 @@ spec:
             periodSeconds: 10
 ```
 
-#<!-- chunk: 5.2 飞行监控服务 Deployment -->## 5.2 飞行监控服务 Deployment
+## 5.2 飞行监控服务 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -368,7 +368,7 @@ spec:
               cpu: "4000m"
 ```
 
-#<!-- chunk: 5.3 ConfigMap, Service 与 Secret -->## 5.3 ConfigMap, Service 与 Secret
+## 5.3 ConfigMap, Service 与 Secret
 
 ```yaml
 apiVersion: v1
@@ -436,7 +436,7 @@ stringData:
 
 <!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-#<!-- chunk: 6.1 实时空域管理数据流 -->## 6.1 实时空域管理数据流
+## 6.1 实时空域管理数据流
 
 ```mermaid
 flowchart TB
@@ -477,7 +477,7 @@ flowchart TB
     P2 --> ST2
 ```
 
-#<!-- chunk: 6.2 数据流说明 -->## 6.2 数据流说明
+## 6.2 数据流说明
 
 - **Telemetry 流**: 飞行器以 10Hz 上报位置/速度/高度，经 Flink 实时处理
 - **冲突检测流**: 所有飞行器位置实时计算冲突概率，检测周期 < 1s
@@ -488,7 +488,7 @@ flowchart TB
 
 <!-- chunk: 7. AI/ML 组件 -->## 7. AI/ML 组件
 
-#<!-- chunk: 7.1 核心模型 -->## 7.1 核心模型
+## 7.1 核心模型
 
 | 模型 | 用途 | 输入 | 输出 | 框架 |
 |:---|:---|:---|:---|:---|
@@ -503,7 +503,7 @@ flowchart TB
 
 <!-- chunk: 8. 安全与合规 -->## 8. 安全与合规
 
-#<!-- chunk: 8.1 行业法规与标准 -->## 8.1 行业法规与标准
+## 8.1 行业法规与标准
 
 | 法规/标准 | 适用范围 | 架构要求 |
 |:---|:---|:---|
@@ -514,7 +514,7 @@ flowchart TB
 | 数据安全法 | 飞行数据安全 | 数据加密 + 本地化 |
 | 噪声标准 | eVTOL 噪声限制 | 噪声监测 |
 
-#<!-- chunk: 8.2 安全架构要点 -->## 8.2 安全架构要点
+## 8.2 安全架构要点
 
 - **系统可用性 99.999%**: UTM 核心系统多可用区部署，故障切换 < 1s
 - **通信冗余**: 5G-A + ADS-B + 卫星多链路冗余
@@ -566,17 +566,17 @@ flowchart TB
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

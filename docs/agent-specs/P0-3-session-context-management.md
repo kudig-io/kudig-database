@@ -633,5 +633,5 @@ Integration_Monitoring:
 **关联文档**:
 - [P0-1: 工单分类体系与意图识别语料库](./P0-1-ticket-classification-intent-recognition.md)
 - [P0-2: 多技能协同协议](./P0-2-multi-skill-coordination-protocol.md)
-- [domain-10-troubleshooting-diagnostics/[[domain-04-storage-data/README|README]].md](../domain-10-troubleshooting-diagnostics/topic-skills/README.md)
+- [domain-10-troubleshooting-diagnostics/[[domain-04-storage-data/README.md|README]].md](../domain-10-troubleshooting-diagnostics/topic-skills/README.md)
 - [domain-10-troubleshooting-diagnostics/topic-fta/list/](../domain-10-troubleshooting-diagnostics/topic-fta/list/) — FTA 问题树参考

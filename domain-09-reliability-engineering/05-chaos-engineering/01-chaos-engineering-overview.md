@@ -103,7 +103,7 @@ created: "2026-05-23"
 | 级别 | 特征 | 工具 |
 |------|------|------|
 | **1. 萌芽** | 随机故障注入 | 手动 kubectl delete pod |
-| **2. 基础** | 有计划的人工实验 | [[Chaos Mesh|Chaos Mesh]] Dashboard |
+| **2. 基础** | 有计划的人工实验 | Chaos Mesh Dashboard |
 | **3. 中级** | 自动化实验，事后分析 | [[Litmus|Litmus]] + CI/CD 集成 |
 | **4. 高级** | 生产环境持续运行，自动回滚 | Gremlin / 自研平台 |
 | **5. 专家** | 智能故障预测，AI 驱动 | 智能混沌平台 |
@@ -111,4 +111,4 @@ created: "2026-05-23"
 ## 相关
 
 - deployment]]
-- [[domain-09-reliability-engineering/05-chaos-engineering/03-chaos-experiment-design]]
+- [[domain-09-reliability-engineering/05-chaos-engineering/03-chaos-experiment-design.md|03 chaos experiment design]]

@@ -9,6 +9,7 @@ tags:
   - k8s
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # 容器运行时演进
@@ -79,6 +80,6 @@ WebAssembly 作为新型容器运行时正在崛起：
 
 ## Related
 
-- [[concepts/specialized-k8s-technologies]] — 特殊化 K8S 技术
-- [[concepts/k8s-security-compliance]] — K8S 安全与合规
-- [[concepts/k8s-ai-ml-infrastructure]] — K8S AI/ML 基础设施
+- [[concepts/specialized-k8s-technologies.md|specialized k8s technologies]] — 特殊化 K8S 技术
+- [[concepts/k8s-security-compliance.md|k8s security compliance]] — K8S 安全与合规
+- [[concepts/k8s-ai-ml-infrastructure.md|k8s ai ml infrastructure]] — K8S AI/ML 基础设施

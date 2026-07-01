@@ -92,7 +92,7 @@ Verification（验证层）是 Agent Harness 六层架构的第五层，也是 H
 
 <!-- chunk: 1. 验证层核心理论 -->## 1. 验证层核心理论
 
-#<!-- chunk: 1.1 为什么验证是最高 ROI 的 Harness 改进 -->## 1.1 为什么验证是最高 ROI 的 Harness 改进
+## 1.1 为什么验证是最高 ROI 的 Harness 改进
 
 ```
 验证层 ROI 实证数据:
@@ -118,7 +118,7 @@ Anthropic 长运行 Agent:
     - 安全风险: 占拦截问题的 15%
 ```
 
-#<!-- chunk: 1.2 验证分类体系 -->## 1.2 验证分类体系
+## 1.2 验证分类体系
 
 ```
 Agent 输出验证分类:
@@ -152,7 +152,7 @@ Agent 输出验证分类:
 
 <!-- chunk: 2. 多维度验证器设计 -->## 2. 多维度验证器设计
 
-#<!-- chunk: 2.1 验证器框架 -->## 2.1 验证器框架
+## 2.1 验证器框架
 
 ```python
 from abc import ABC, abstractmethod
@@ -251,7 +251,7 @@ class VerificationPipeline:
         return VerificationReport.from_results(results)
 ```
 
-#<!-- chunk: 2.2 事实一致性验证器 -->## 2.2 事实一致性验证器
+## 2.2 事实一致性验证器
 
 ```python
 class FactualConsistencyVerifier(BaseVerifier):
@@ -325,7 +325,7 @@ class FactualConsistencyVerifier(BaseVerifier):
         return {"consistent": False, "score": 0.0}
 ```
 
-#<!-- chunk: 2.3 命令安全验证器 -->## 2.3 命令安全验证器
+## 2.3 命令安全验证器
 
 ```python
 import re
@@ -424,7 +424,7 @@ class CommandSafetyVerifier(BaseVerifier):
         return commands
 ```
 
-#<!-- chunk: 2.4 输出格式验证器 -->## 2.4 输出格式验证器
+## 2.4 输出格式验证器
 
 ```python
 import yaml
@@ -507,7 +507,7 @@ class OutputFormatVerifier(BaseVerifier):
         return issues
 ```
 
-#<!-- chunk: 2.5 完整性验证器 -->## 2.5 完整性验证器
+## 2.5 完整性验证器
 
 ```python
 class CompletenessVerifier(BaseVerifier):
@@ -578,7 +578,7 @@ class CompletenessVerifier(BaseVerifier):
 
 <!-- chunk: 3. 自检循环模式 -->## 3. 自检循环模式
 
-#<!-- chunk: 3.1 自检循环实现 -->## 3.1 自检循环实现
+## 3.1 自检循环实现
 
 ```python
 class SelfCheckLoop:
@@ -683,7 +683,7 @@ class SelfCheckLoop:
         return corrected
 ```
 
-#<!-- chunk: 3.2 自检清单模板 -->## 3.2 自检清单模板
+## 3.2 自检清单模板
 
 ```python
 class DiagnosisChecklist:
@@ -763,7 +763,7 @@ class DiagnosisChecklist:
 
 <!-- chunk: 4. LLM-as-Judge 评估范式 -->## 4. LLM-as-Judge 评估范式
 
-#<!-- chunk: 4.1 Judge 模型选择策略 -->## 4.1 Judge 模型选择策略
+## 4.1 Judge 模型选择策略
 
 ```
 LLM-as-Judge 模型选择:
@@ -786,7 +786,7 @@ LLM-as-Judge 模型选择:
   Format (格式正确性):      权重 10%
 ```
 
-#<!-- chunk: 4.2 Judge 评估器实现 -->## 4.2 Judge 评估器实现
+## 4.2 Judge 评估器实现
 
 ```python
 class LLMJudge:
@@ -818,19 +818,19 @@ class LLMJudge:
 
 <!-- chunk: 评估维度 -->## 评估维度
 
-#<!-- chunk: 1. Faithfulness（忠实度）0-10 分 -->## 1. Faithfulness（忠实度）0-10 分
+## 1. Faithfulness（忠实度）0-10 分
 回答中的每个事实是否都有上下文支撑？是否存在幻觉？
 
-#<!-- chunk: 2. Relevancy（相关性）0-10 分 -->## 2. Relevancy（相关性）0-10 分
+## 2. Relevancy（相关性）0-10 分
 回答是否直接针对了提出的问题？是否偏离主题？
 
-#<!-- chunk: 3. Completeness（完整性）0-10 分 -->## 3. Completeness（完整性）0-10 分
+## 3. Completeness（完整性）0-10 分
 回答是否覆盖了问题的所有方面？是否有遗漏？
 
-#<!-- chunk: 4. Safety（安全性）0-10 分 -->## 4. Safety（安全性）0-10 分
+## 4. Safety（安全性）0-10 分
 给出的命令/操作是否安全？是否存在风险操作未被标注？
 
-#<!-- chunk: 5. Format（格式正确性）0-10 分 -->## 5. Format（格式正确性）0-10 分
+## 5. Format（格式正确性）0-10 分
 YAML/JSON 语法是否正确？命令格式是否规范？
 
 <!-- chunk: 输出格式（JSON） -->## 输出格式（JSON）
@@ -875,7 +875,7 @@ YAML/JSON 语法是否正确？命令格式是否规范？
 
 <!-- chunk: 5. RAGAS 评测框架集成 -->## 5. RAGAS 评测框架集成
 
-#<!-- chunk: 5.1 RAGAS 指标体系 -->## 5.1 RAGAS 指标体系
+## 5.1 RAGAS 指标体系
 
 ```
 RAGAS 核心指标:
@@ -901,7 +901,7 @@ RAGAS 核心指标:
    阈值: > 0.75
 ```
 
-#<!-- chunk: 5.2 RAGAS 集成实现 -->## 5.2 RAGAS 集成实现
+## 5.2 RAGAS 集成实现
 
 ```python
 class RAGASEvaluator:
@@ -1016,7 +1016,7 @@ class RAGASEvaluator:
 
 <!-- chunk: 6. CI/CD 质量门禁 -->## 6. CI/CD 质量门禁
 
-#<!-- chunk: 6.1 质量门禁配置 -->## 6.1 质量门禁配置
+## 6.1 质量门禁配置
 
 ```yaml
 # harness-quality-gate.yaml
@@ -1059,7 +1059,7 @@ quality_gate:
       - answer_relevancy
 ```
 
-#<!-- chunk: 6.2 质量门禁检查器 -->## 6.2 质量门禁检查器
+## 6.2 质量门禁检查器
 
 ```python
 import json
@@ -1190,7 +1190,7 @@ class QualityGateChecker:
 
 <!-- chunk: 7. A/B 测试与灰度评估 -->## 7. A/B 测试与灰度评估
 
-#<!-- chunk: 7.1 Shadow Mode 评估器 -->## 7.1 Shadow Mode 评估器
+## 7.1 Shadow Mode 评估器
 
 ```python
 class ShadowModeEvaluator:
@@ -1252,7 +1252,7 @@ class ShadowModeEvaluator:
 
 <!-- chunk: 8. 最佳实践 -->## 8. 最佳实践
 
-#<!-- chunk: 8.1 验证层核心原则 -->## 8.1 验证层核心原则
+## 8.1 验证层核心原则
 
 | 原则 | 说明 | 实践建议 |
 |------|------|---------|
@@ -1263,7 +1263,7 @@ class ShadowModeEvaluator:
 | **门禁自动化** | 质量门禁集成到 CI/CD | 每次 Harness 变更自动评估 |
 | **基线对比** | 每次评估保存基线 | 防止回归 |
 
-#<!-- chunk: 8.2 反模式 -->## 8.2 反模式
+## 8.2 反模式
 
 | 反模式 | 问题 | 正确做法 |
 |--------|------|----------|
@@ -1304,17 +1304,17 @@ class ShadowModeEvaluator:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## Related
 

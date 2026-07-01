@@ -50,7 +50,7 @@ authors:
   role: contributor
 cross_refs:
 - type: fta
-  path: ../domain-10-troubleshooting-diagnostics/topic-fta/[[skills/job-cronjob-fta|job-cronjob-fta]].md
+  path: ../domain-10-troubleshooting-diagnostics/topic-fta/[[skills/job-cronjob-fta.md|job-cronjob-fta]].md
   label: '故障树: job-cronjob'
 created: "2026-05-23"
 ---
@@ -83,7 +83,7 @@ created: "2026-05-23"
 
 <!-- chunk: 概述 -->## 概述
 
-#<!-- chunk: Job - 一次性任务 -->## Job - 一次性任务
+## Job - 一次性任务
 
 Job 创建一个或多个 Pod,并确保指定数量的 Pod 成功完成。Pod 成功完成后,Job 跟踪成功的次数。当成功次数达到指定值时,Job 本身完成。
 
@@ -100,7 +100,7 @@ Job 创建一个或多个 Pod,并确保指定数量的 Pod 成功完成。Pod �
 - 一次性脚本执行
 - CI/CD 构建任务
 
-#<!-- chunk: CronJob - 定时任务 -->## CronJob - 定时任务
+## CronJob - 定时任务
 
 CronJob 按照指定的时间计划 (Cron 表达式) 定期创建 Job。相当于 Linux Cron 在 Kubernetes 中的实现。
 
@@ -139,7 +139,7 @@ kind: Job
 
 <!-- chunk: Job 完整字段规格表 -->## Job 完整字段规格表
 
-#<!-- chunk: 核心字段 (spec) -->## 核心字段 (spec)
+## 核心字段 (spec)
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 | 引入版本 |
 |---------|------|------|--------|------|----------|
@@ -160,14 +160,14 @@ kind: Job
 | `spec.managedBy` | string | ❌ | - | 外部控制器管理标识 | v1.30+ |
 | `spec.podReplacementPolicy` | string | ❌ | TerminatingOrFailed | Pod 替换策略: `TerminatingOrFailed` / `Failed` | v1.29+ |
 
-#<!-- chunk: completionMode 详细说明 -->## completionMode 详细说明
+## completionMode 详细说明
 
 | 模式 | 说明 | 使用场景 |
 |-----|------|----------|
 | **NonIndexed** (默认) | 非索引模式,Pod 无序号 | 并行任务无需区分身份 |
 | **Indexed** (v1.24+) | 索引模式,每个 Pod 有唯一索引 (0 ~ completions-1) | 需要任务分片、Map-Reduce |
 
-#<!-- chunk: podFailurePolicy 规则 (v1.26+) -->## podFailurePolicy 规则 (v1.26+)
+## podFailurePolicy 规则 (v1.26+)
 
 ```yaml
 podFailurePolicy:
@@ -182,7 +182,7 @@ podFailurePolicy:
       status: "True"
 ```
 
-#<!-- chunk: successPolicy 规则 (v1.31+) -->## successPolicy 规则 (v1.31+)
+## successPolicy 规则 (v1.31+)
 
 ```yaml
 successPolicy:
@@ -240,7 +240,7 @@ kubectl logs job/hello-job
 
 <!-- chunk: Job 生产级配置示例 -->## Job 生产级配置示例
 
-#<!-- chunk: 示例 1: 数据库备份任务 -->## 示例 1: 数据库备份任务
+## 示例 1: 数据库备份任务
 
 ```yaml
 # 生产级 Job 配置 - PostgreSQL 数据库备份
@@ -411,7 +411,7 @@ spec:
           sizeLimit: 10Gi  # 临时存储上限
 ```
 
-#<!-- chunk: 示例 2: 索引式并行任务 (v1.24+) -->## 示例 2: 索引式并行任务 (v1.24+)
+## 示例 2: 索引式并行任务 (v1.24+)
 
 ```yaml
 # 索引式并行任务 - 批量数据处理
@@ -488,7 +488,7 @@ spec:
 - 适用于 Map-Reduce、数据分片处理
 - Pod 名称格式: `{job-name}-{index}-{random-suffix}`
 
-#<!-- chunk: 示例 3: Pod 失败策略 (v1.26+) -->## 示例 3: Pod 失败策略 (v1.26+)
+## 示例 3: Pod 失败策略 (v1.26+)
 
 ```yaml
 # 自定义 Pod 失败处理策略
@@ -558,7 +558,7 @@ kind: CronJob
 
 <!-- chunk: CronJob 完整字段规格表 -->## CronJob 完整字段规格表
 
-#<!-- chunk: 核心字段 (spec) -->## 核心字段 (spec)
+## 核心字段 (spec)
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 | 引入版本 |
 |---------|------|------|--------|------|----------|
@@ -571,7 +571,7 @@ kind: CronJob
 | `spec.successfulJobsHistoryLimit` | integer | ❌ | 3 | 保留的成功 Job 数量 | v1.5 |
 | `spec.failedJobsHistoryLimit` | integer | ❌ | 1 | 保留的失败 Job 数量 | v1.5 |
 
-#<!-- chunk: schedule - Cron 表达式格式 -->## schedule - Cron 表达式格式
+## schedule - Cron 表达式格式
 
 ```
 # 标准 Cron 表达式 (5 个字段)
@@ -597,7 +597,7 @@ kind: CronJob
 | `*/15 * * * *` | 每 15 分钟 |
 | `0 0 1 1 *` | 每年 1 月 1 日午夜 |
 
-#<!-- chunk: concurrencyPolicy 详细说明 -->## concurrencyPolicy 详细说明
+## concurrencyPolicy 详细说明
 
 | 策略 | 说明 | 使用场景 |
 |-----|------|----------|
@@ -653,7 +653,7 @@ spec:
 
 <!-- chunk: CronJob 生产级配置示例 -->## CronJob 生产级配置示例
 
-#<!-- chunk: 示例 1: 数据库定期备份 -->## 示例 1: 数据库定期备份
+## 示例 1: 数据库定期备份
 
 ```yaml
 # 生产级 CronJob 配置 - MySQL 每日备份
@@ -823,7 +823,7 @@ spec:
               sizeLimit: 50Gi
 ```
 
-#<!-- chunk: 示例 2: 定时报表生成 -->## 示例 2: 定时报表生成
+## 示例 2: 定时报表生成
 
 ```yaml
 # 每周一生成周报
@@ -898,7 +898,7 @@ spec:
                 memory: "4Gi"
 ```
 
-#<!-- chunk: 示例 3: 证书自动续期 -->## 示例 3: 证书自动续期
+## 示例 3: 证书自动续期
 
 ```yaml
 # 每月检查并续期 TLS 证书
@@ -980,7 +980,7 @@ spec:
 
 <!-- chunk: 内部原理 -->## 内部原理
 
-#<!-- chunk: 1. Job Controller 工作流程 -->## 1. Job Controller 工作流程
+## 1. Job Controller 工作流程
 
 ```mermaid
 graph TD
@@ -1007,7 +1007,7 @@ graph TD
 - **退避重试**: 失败次数越多,重试间隔越长 (指数退避: 10s, 20s, 40s, ...)
 - **完成判断**: 成功 Pod 数量达到 `completions` 时,Job 完成
 
-#<!-- chunk: 2. CronJob Controller 工作流程 -->## 2. CronJob Controller 工作流程
+## 2. CronJob Controller 工作流程
 
 ```mermaid
 graph TD
@@ -1034,7 +1034,7 @@ graph TD
 - **启动延迟**: 如果错过调度时间且超过 `startingDeadlineSeconds`,跳过本次执行
 - **历史清理**: 根据 `successfulJobsHistoryLimit` 和 `failedJobsHistoryLimit` 自动清理旧 Job
 
-#<!-- chunk: 3. 索引式任务原理 (Indexed Mode) -->## 3. 索引式任务原理 (Indexed Mode)
+## 3. 索引式任务原理 (Indexed Mode)
 
 **NonIndexed 模式** (默认):
 - Pod 名称: `{job-name}-{random-suffix}`
@@ -1062,7 +1062,7 @@ spec:
 
 <!-- chunk: 版本兼容性 -->## 版本兼容性
 
-#<!-- chunk: Job 功能演进 -->## Job 功能演进
+## Job 功能演进
 
 | 功能特性 | 引入版本 | 稳定版本 | 说明 |
 |---------|---------|---------|------|
@@ -1077,7 +1077,7 @@ spec:
 | `managedBy` | v1.30 (Alpha) | v1.32 (Beta) | 外部控制器管理 |
 | `successPolicy` | v1.31 (Alpha) | 计划 v1.33 (Beta) | 自定义成功策略 |
 
-#<!-- chunk: CronJob 功能演进 -->## CronJob 功能演进
+## CronJob 功能演进
 
 | 功能特性 | 引入版本 | 稳定版本 | 说明 |
 |---------|---------|---------|------|
@@ -1102,7 +1102,7 @@ spec:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 1. restartPolicy 选择 -->## 1. restartPolicy 选择
+## 1. restartPolicy 选择
 
 | restartPolicy | 行为 | 适用场景 |
 |--------------|------|----------|
@@ -1118,7 +1118,7 @@ restartPolicy: Never
 restartPolicy: OnFailure
 ```
 
-#<!-- chunk: 2. 资源与超时配置 -->## 2. 资源与超时配置
+## 2. 资源与超时配置
 
 ✅ **设置合理的资源限制和超时时间**:
 ```yaml
@@ -1139,7 +1139,7 @@ spec:
             memory: "4Gi"
 ```
 
-#<!-- chunk: 3. 自动清理完成的 Job -->## 3. 自动清理完成的 Job
+## 3. 自动清理完成的 Job
 
 ✅ **使用 ttlSecondsAfterFinished 自动清理**:
 ```yaml
@@ -1155,7 +1155,7 @@ spec:
   failedJobsHistoryLimit: 1      # 保留最近 1 次失败
 ```
 
-#<!-- chunk: 4. 失败重试策略 -->## 4. 失败重试策略
+## 4. 失败重试策略
 
 ✅ **设置合理的 backoffLimit**:
 ```yaml
@@ -1182,7 +1182,7 @@ spec:
         values: [2]
 ```
 
-#<!-- chunk: 5. CronJob 并发控制 -->## 5. CronJob 并发控制
+## 5. CronJob 并发控制
 
 ✅ **根据任务特性选择 concurrencyPolicy**:
 
@@ -1207,7 +1207,7 @@ spec:
   concurrencyPolicy: Allow
 ```
 
-#<!-- chunk: 6. 时区配置 (v1.27+) -->## 6. 时区配置 (v1.27+)
+## 6. 时区配置 (v1.27+)
 
 ✅ **明确指定时区**:
 ```yaml
@@ -1222,7 +1222,7 @@ spec:
 - `America/New_York` (美国东部时间)
 - `Europe/London` (英国时间)
 
-#<!-- chunk: 7. 监控与告警 -->## 7. 监控与告警
+## 7. 监控与告警
 
 ✅ **监控 Job 状态**:
 ```bash
@@ -1269,7 +1269,7 @@ groups:
 
 <!-- chunk: 常见问题 FAQ -->## 常见问题 FAQ
 
-#<!-- chunk: Q1: Job 和 CronJob 的区别? -->## Q1: Job 和 CronJob 的区别?
+## Q1: Job 和 CronJob 的区别?
 
 | 特性 | Job | CronJob |
 |-----|-----|---------|
@@ -1277,7 +1277,11 @@ groups:
 | **调度方式** | 手动创建 | 自动调度 (Cron 表达式) |
 | **适用场景** | 临时任务、批处理 | 定期备份、报表生成 |
 
-#<!-- chunk: Q2: 如何手动触发 CronJob? -->## Q2: 如何手动触发 CronJob?
+## Q2: 如何手动触发 CronJob?
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 方法 1: 从 CronJob 创建 Job (推荐)
@@ -1289,7 +1293,10 @@ kubectl patch cronjob my-cronjob -p '{"spec":{"schedule":"*/1 * * * *"}}'  # 改
 kubectl patch cronjob my-cronjob -p '{"spec":{"schedule":"0 3 * * *"}}'  # 恢复原调度
 ```
 
-#<!-- chunk: Q3: 如何暂停 CronJob? -->## Q3: 如何暂停 CronJob?
+## Q3: 如何暂停 CronJob?
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 方法 1: 修改 suspend 字段
@@ -1303,7 +1310,7 @@ kubectl edit cronjob my-cronjob
 # 修改 spec.suspend: true
 ```
 
-#<!-- chunk: Q4: 为什么 CronJob 没有按时执行? -->## Q4: 为什么 CronJob 没有按时执行?
+## Q4: 为什么 CronJob 没有按时执行?
 
 **可能原因**:
 
@@ -1325,7 +1332,7 @@ kubectl edit cronjob my-cronjob
    kubectl get pods -n kube-system -l component=kube-controller-manager
    ```
 
-#<!-- chunk: Q5: 如何查看 Job 失败原因? -->## Q5: 如何查看 Job 失败原因?
+## Q5: 如何查看 Job 失败原因?
 
 ```bash
 # 1. 查看 Job 状态
@@ -1342,7 +1349,10 @@ kubectl describe pod my-job-xxx
 kubectl get pod my-job-xxx -o jsonpath='{.status.containerStatuses[0].state.terminated.exitCode}'
 ```
 
-#<!-- chunk: Q6: 如何删除所有完成的 Job? -->## Q6: 如何删除所有完成的 Job?
+## Q6: 如何删除所有完成的 Job?
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 删除所有成功的 Job
@@ -1357,7 +1367,7 @@ kubectl get jobs -o json | \
   xargs kubectl delete job
 ```
 
-#<!-- chunk: Q7: 如何在 Job 中共享数据 (多 Pod 协作)? -->## Q7: 如何在 Job 中共享数据 (多 Pod 协作)?
+## Q7: 如何在 Job 中共享数据 (多 Pod 协作)?
 
 **方法 1: 使用 PVC 共享存储**:
 ```yaml
@@ -1385,7 +1395,7 @@ containers:
     value: "redis://redis.default.svc.cluster.local:6379"
 ```
 
-#<!-- chunk: Q8: 索引式任务如何处理失败的分片? -->## Q8: 索引式任务如何处理失败的分片?
+## Q8: 索引式任务如何处理失败的分片?
 
 **使用 backoffLimitPerIndex** (v1.29+):
 ```yaml
@@ -1405,7 +1415,7 @@ spec:
 
 <!-- chunk: 生产案例 -->## 生产案例
 
-#<!-- chunk: 案例 1: 数据库备份与恢复 -->## 案例 1: 数据库备份与恢复
+## 案例 1: 数据库备份与恢复
 
 **场景**: PostgreSQL 数据库每日自动备份,支持快速恢复
 
@@ -1447,12 +1457,16 @@ spec:
 ```
 
 **恢复任务 (手动触发)**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建一次性恢复 Job
 kubectl create job postgres-restore-$(date +%s) --from=cronjob/postgres-backup -- /scripts/restore.sh s3://backup-bucket/postgres-backup-20260210.sql.gz
 ```
 
-#<!-- chunk: 案例 2: 大规模数据处理 (索引式任务) -->## 案例 2: 大规模数据处理 (索引式任务)
+## 案例 2: 大规模数据处理 (索引式任务)
 
 **场景**: 处理 100 万条记录,分为 100 个分片并行处理
 
@@ -1525,7 +1539,7 @@ if __name__ == "__main__":
     process_shard(args.shard_id, args.total_shards, args.batch_size)
 ```
 
-#<!-- chunk: 案例 3: 定时健康检查与告警 -->## 案例 3: 定时健康检查与告警
+## 案例 3: 定时健康检查与告警
 
 **场景**: 每 5 分钟检查外部服务健康状态,异常时发送告警
 
@@ -1597,24 +1611,24 @@ spec:
 
 <!-- chunk: 相关资源 -->## 相关资源
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 - [Kubernetes Job 文档](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
 - [Kubernetes CronJob 文档](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)
 - [Job API 参考](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/job-v1/)
 - [CronJob API 参考](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/cron-job-v1/)
 
-#<!-- chunk: 相关配置参考 -->## 相关配置参考
+## 相关配置参考
 - [01 - Pod YAML 配置参考](./01-pod-reference.md) - Pod 模板配置
 - [08 - ConfigMap YAML 配置参考](./08-configmap-reference.md) - 任务脚本管理
 - [09 - Secret YAML 配置参考](./09-secret-reference.md) - 敏感信息管理
 
-#<!-- chunk: 工具与生态 -->## 工具与生态
+## 工具与生态
 - Argo Workflows](https://argoproj.github.io/argo-workflows/) - 高级工作流引擎
 - [Tekton Pipelines](https://tekton.dev/) - CI/CD 流水线
 - [Kubeflow](https://www.kubeflow.org/) - 机器学习工作流
 - [Velero](https://velero.io/) - 定期备份工具
 
-#<!-- chunk: 最佳实践文章 -->## 最佳实践文章
+## 最佳实践文章
 - [Job Patterns in Kubernetes](https://kubernetes.io/docs/concepts/workloads/controllers/job/#job-patterns)
 - [CronJob Best Practices](https://cloud.google.com/kubernetes-engine/docs/how-to/cronjobs)
 - [Cron Expression Generator](https://crontab.guru/) - Cron 表达式在线工具
@@ -1628,7 +1642,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考

@@ -73,7 +73,7 @@ created: "2026-05-23"
 | 3738 | domain-19-landscape-references/_archived-release-notes/kubernetes/CHANGELOG-1.31.md |
 | 3698 | domain-19-landscape-references/_archived-release-notes/kubernetes/CHANGELOG-1.25.md |
 | 3511 | domain-17-system-foundation/topic-dictionary/tooling/cli-commands.md |
-| 3489 | domain-17-system-foundation/topic-dictionary/[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security|cloud-native-security]]-practices.md |
+| 3489 | domain-17-system-foundation/topic-dictionary/[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]-practices.md |
 | 3463 | domain-19-landscape-references/_archived-release-notes/kubernetes/CHANGELOG-1.18.md |
 | 3450 | domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md |
 | 3420 | domain-18-manifests-patterns/35-advanced-pod-patterns.md |

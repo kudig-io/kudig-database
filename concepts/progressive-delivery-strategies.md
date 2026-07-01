@@ -9,6 +9,7 @@ tags:
   - k8s
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # 渐进式交付策略
@@ -228,6 +229,6 @@ overlays/
 
 ## Related
 
-- [[concepts/gitops-production-operations]] — GitOps 生产运维
-- [[concepts/platform-engineering-idp]] — 平台工程与 IDP
-- [[concepts/slo-error-budget-framework]] — SLO 与 Error Budget 框架
+- [[concepts/gitops-production-operations.md|gitops production operations]] — GitOps 生产运维
+- [[concepts/platform-engineering-idp.md|platform engineering idp]] — 平台工程与 IDP
+- [[concepts/slo-error-budget-framework.md|slo error budget framework]] — SLO 与 Error Budget 框架

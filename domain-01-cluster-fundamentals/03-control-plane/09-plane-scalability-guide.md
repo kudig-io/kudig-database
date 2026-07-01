@@ -330,6 +330,9 @@ spec:
 
 ### 3.2 垂直扩展配置优化
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # 垂直扩展优化脚本
@@ -486,6 +489,10 @@ optimize_etcd
 
 ### 4.2 etcd扩缩容操作手册
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # etcd扩缩容管理脚本
@@ -547,7 +554,7 @@ scale_down_etcd() {
     
     # 3. 从集群中移除成员
     echo "步骤2: 从集群移除成员..."
-    etcdctl member remove $member_id
+    etcdctl member remove $member_id  # ⚠️ 移除 etcd 成员，可能丢数据
     
     # 4. 验证集群状态
     echo "步骤3: 验证集群状态..."
@@ -1108,6 +1115,10 @@ spec:
 
 ### 9.2 性能基准测试
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # 控制平面性能基准测试脚本
@@ -1235,7 +1246,7 @@ analyze_results() {
 # 5. 清理测试资源
 cleanup_test() {
     echo "清理测试资源..."
-    kubectl delete namespace scalability-test --ignore-not-found=true
+    kubectl delete namespace scalability-test --ignore-not-found=true  # ⚠️ 不可逆：永久删除命名空间及全部资源
     rm -f /tmp/scalability-test.yaml /tmp/temp-pod.yaml /tmp/get-latency.txt /tmp/post-latency.txt /tmp/concurrent-results.txt
 }
 
@@ -1541,7 +1552,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -1555,8 +1566,8 @@ spec:
 
 ## Related
 
-- [[release-notes/12-demo-env-guide|12-demo-env-guide]]
-- [[release-notes/21-platform-selection-guide|21-platform-selection-guide]]
+- 12-demo-env-guide
+- 21-platform-selection-guide
 
 ## See Also
 

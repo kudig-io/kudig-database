@@ -5,6 +5,7 @@ tags: ["skill", "domain-10", "visibility/public"]
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 status: reviewed
 ---
 
@@ -30,6 +31,10 @@ kubectl get service <service-name> -n <namespace> -o jsonpath='{.spec.clusterIP}
 > 如果无法执行，替代方案：请用户提供 Service 的 YAML 定义文件内容，或从集群管理控制台截图 Service 详情。
 
 ### 步骤2: 验证 CoreDNS 及 DNS 配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 kubectl exec <pod-name> -n <namespace> -- cat /etc/resolv.conf
@@ -59,6 +64,6 @@ kubectl get networkpolicy -n <namespace>
 
 ## 相关概念
 
-- [[concepts/headless-service|Headless Service]] — Headless Service DNS 解析与 StatefulSet 网络标识
-- [[concepts/cni-networking-model|CNI 网络模型]] — Kubernetes 容器网络接口与 Pod 间通信原理
-- [[concepts/service-networking|Service 网络模型]] — Kubernetes Service 核心概念与流量转发机制
+- [[concepts/headless-service.md|Headless Service]] — Headless Service DNS 解析与 StatefulSet 网络标识
+- [[concepts/cni-networking-model.md|CNI 网络模型]] — Kubernetes 容器网络接口与 Pod 间通信原理
+- [[concepts/service-networking.md|Service 网络模型]] — Kubernetes Service 核心概念与流量转发机制

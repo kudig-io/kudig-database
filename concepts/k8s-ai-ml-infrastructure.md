@@ -12,6 +12,7 @@ tags:
   - k8s
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # K8S AI/ML 基础设施
@@ -298,6 +299,6 @@ spec:
 
 ## Related
 
-- [[concepts/finops-greenops-practices]] — FinOps 与绿色运维实践
-- [[concepts/container-runtime-evolution]] — 容器运行时演进
-- [[concepts/k8s-networking-evolution]] — K8S 网络技术演进
+- [[concepts/finops-greenops-practices.md|finops greenops practices]] — FinOps 与绿色运维实践
+- [[concepts/container-runtime-evolution.md|container runtime evolution]] — 容器运行时演进
+- [[concepts/k8s-networking-evolution.md|k8s networking evolution]] — K8S 网络技术演进

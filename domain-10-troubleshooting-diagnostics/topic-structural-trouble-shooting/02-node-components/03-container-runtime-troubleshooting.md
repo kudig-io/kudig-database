@@ -500,6 +500,9 @@ cat /sys/fs/cgroup/cpu/cpu.cfs_quota_us
 
 #### 3.3.1 解决步骤
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 步骤 1：确认错误类型
 crictl pull <image-name>
@@ -563,6 +566,9 @@ crictl pull <image-name>
 
 #### 3.4.1 解决步骤
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+
 ```bash
 # 步骤 1：检查空间使用
 df -h /var/lib/containerd/
@@ -578,7 +584,7 @@ crictl rmi --prune
 ctr -n k8s.io images prune --all
 
 # Docker 方式
-docker system prune -a
+docker system prune -a  # ⚠️ 强制清理，可能杀运行中容器
 
 # 步骤 3：清理已停止的容器
 crictl rm $(crictl ps -a -q --state exited)
@@ -589,7 +595,7 @@ docker builder prune
 # 步骤 5：检查是否有悬空卷
 # Docker
 docker volume ls -f dangling=true
-docker volume prune
+docker volume prune  # ⚠️ 强制清理，可能杀运行中容器
 
 # 步骤 6：清理日志文件
 find /var/lib/containerd/ -name "*.log" -mtime +7 -delete
@@ -611,10 +617,13 @@ df -h /var/lib/containerd/
 
 #### 3.4.3 安全生产风险提示
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+
 ```
 ⚠️  安全生产风险提示：
 1. 清理前确认镜像不被当前 Pod 使用
-2. docker system prune -a 会清理所有未使用资源
+2. docker system prune -a 会清理所有未使用资源  # ⚠️ 强制清理，可能杀运行中容器
 3. 考虑配置镜像垃圾回收策略
 4. 监控存储使用，设置告警
 5. 生产环境建议预留足够空间
@@ -623,6 +632,9 @@ df -h /var/lib/containerd/
 ### 3.5 cgroup 驱动不匹配
 
 #### 3.5.1 解决步骤
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 步骤 1：检查当前配置
@@ -693,6 +705,9 @@ cat /var/lib/kubelet/config.yaml | grep cgroupDriver
 
 #### 3.6.1 解决步骤
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 步骤 1：确认 runc 版本
 runc --version
@@ -751,6 +766,9 @@ crictl run --help
 ### 3.7 containerd 配置优化
 
 #### 3.7.1 生产环境推荐配置
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 生成基础配置
@@ -833,13 +851,13 @@ systemctl restart containerd
 - 16-troubleshooting-guide
 - [[hot|hot]]
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting|01-kubelet-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting|02-kube-proxy-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting|04-node-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting|05-image-registry-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting.md|02-kube-proxy-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting.md|04-node-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting.md|05-image-registry-troubleshooting]]

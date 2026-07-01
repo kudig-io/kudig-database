@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 <!-- chunk: 摘要 -->## 摘要
 
-虚拟集群（Virtual Cluster）技术在 2026 年已成为 Kubernetes 多租户架构的主流方案之一。vCluster（由 Loft Labs 开源，CNCF Sandbox 项目）通过在物理 Kubernetes 集群中运行轻量级虚拟 Kubernetes 控制平面，为每个租户提供完整、隔离的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 体验，同时共享底层物理资源，兼顾了隔离性、成本和运维效率。
+虚拟集群（Virtual Cluster）技术在 2026 年已成为 Kubernetes 多租户架构的主流方案之一。vCluster（由 Loft Labs 开源，CNCF Sandbox 项目）通过在物理 Kubernetes 集群中运行轻量级虚拟 Kubernetes 控制平面，为每个租户提供完整、隔离的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 体验，同时共享底层物理资源，兼顾了隔离性、成本和运维效率。
 
 本文深度探讨 vCluster 的核心架构、生产部署实践、与 Cluster API 的集成模式，以及多租户 SaaS 平台的完整架构设计。通过真实的 CI/CD 自动化用例、安全边界分析和成本分配模型，帮助平台工程师选择最适合的多租户策略，构建高效、安全、可扩展的多租户 Kubernetes 平台。
 
@@ -88,7 +88,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 虚拟集群概念 -->## 1. 虚拟集群概念
 
-#<!-- chunk: 1.1 多租户技术三层对比 -->## 1.1 多租户技术三层对比
+## 1.1 多租户技术三层对比
 
 Kubernetes 多租户有三种核心技术方案，各有优劣：
 
@@ -109,7 +109,7 @@ Kubernetes 多租户有三种核心技术方案，各有优劣：
 | **适用规模** | 团队/项目级 | 产品/业务线级 | 大型企业/SaaS |
 | **典型场景** | 同团队多环境 | SaaS 租户 | 金融/医疗严格隔离 |
 
-#<!-- chunk: 1.2 vCluster CNCF 状态 -->## 1.2 vCluster CNCF 状态
+## 1.2 vCluster CNCF 状态
 
 ```
 vCluster 项目状态 (2026)：
@@ -130,7 +130,7 @@ GitHub Stars: 8,500+ (2026-03)
 ────────────────────────────────────────────
 ```
 
-#<!-- chunk: 1.3 何时选择 vCluster -->## 1.3 何时选择 vCluster
+## 1.3 何时选择 vCluster
 
 ```
 决策树：
@@ -161,7 +161,7 @@ GitHub Stars: 8,500+ (2026-03)
 
 <!-- chunk: 2. vCluster 架构深度 -->## 2. vCluster 架构深度
 
-#<!-- chunk: 2.1 核心架构图 -->## 2.1 核心架构图
+## 2.1 核心架构图
 
 ```mermaid
 graph TB
@@ -216,7 +216,7 @@ graph TB
     style HOST_API fill:#326CE5,color:#fff
 ```
 
-#<!-- chunk: 2.2 控制平面嵌入对比 -->## 2.2 控制平面嵌入对比
+## 2.2 控制平面嵌入对比
 
 vCluster 支持三种虚拟控制平面实现：
 
@@ -230,7 +230,7 @@ vCluster 支持三种虚拟控制平面实现：
 | **适用场景** | 大多数场景默认推荐 | 低资源边缘 | 严格兼容性需求 |
 | **Kubernetes 版本滞后** | 通常滞后 1-2 版本 | 紧跟上游 | 无滞后 |
 
-#<!-- chunk: 2.3 Syncer 双向同步机制 -->## 2.3 Syncer 双向同步机制
+## 2.3 Syncer 双向同步机制
 
 Syncer 是 vCluster 的核心组件，负责在虚拟集群和物理集群之间同步资源：
 
@@ -279,7 +279,7 @@ Pod 名称重写示例：
 
 <!-- chunk: 3. 部署实践 -->## 3. 部署实践
 
-#<!-- chunk: 3.1 CLI 快速创建 vCluster -->## 3.1 CLI 快速创建 vCluster
+## 3.1 CLI 快速创建 vCluster
 
 ```bash
 # 安装 vCluster CLI
@@ -311,7 +311,7 @@ vcluster disconnect
 vcluster delete my-vcluster --namespace team-a
 ```
 
-#<!-- chunk: 3.2 Helm 生产部署 -->## 3.2 Helm 生产部署
+## 3.2 Helm 生产部署
 
 ```yaml
 # vcluster-values.yaml - 生产级 vCluster 配置
@@ -408,6 +408,9 @@ telemetry:
   enabled: false  # 生产环境可禁用
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # Helm 部署 vCluster
 helm repo add loft-sh https://charts.loft.sh
@@ -433,7 +436,7 @@ vcluster connect tenant-a-vcluster -n tenant-a \
   --print > tenant-a-kubeconfig.yaml
 ```
 
-#<!-- chunk: 3.3 存储配置 -->## 3.3 存储配置
+## 3.3 存储配置
 
 ```yaml
 # 在 vCluster 内使用存储（StorageClass 来自宿主集群）
@@ -459,7 +462,7 @@ spec:
 # 命名空间: tenant-a (宿主命名空间)
 ```
 
-#<!-- chunk: 3.4 网络配置 -->## 3.4 网络配置
+## 3.4 网络配置
 
 ```yaml
 # vCluster Service 映射到宿主集群
@@ -484,7 +487,7 @@ networking:
 
 <!-- chunk: 4. 高级企业特性 -->## 4. 高级企业特性
 
-#<!-- chunk: 4.1 多命名空间模式 -->## 4.1 多命名空间模式
+## 4.1 多命名空间模式
 
 默认情况下，vCluster 的所有 Pod 都同步到宿主集群的同一个命名空间（vCluster 命名空间）。多命名空间模式允许虚拟命名空间映射到宿主集群中的独立命名空间，提供更好的隔离：
 
@@ -506,7 +509,7 @@ experimental:
 # ✅ NetworkPolicy 在宿主级别精确控制
 ```
 
-#<!-- chunk: 4.2 隔离模式配置 -->## 4.2 隔离模式配置
+## 4.2 隔离模式配置
 
 ```yaml
 # 强隔离模式 - 限制 vCluster 访问宿主集群
@@ -554,7 +557,7 @@ roleRef:
   name: vcluster-isolated-role
 ```
 
-#<!-- chunk: 4.3 虚拟调度器 -->## 4.3 虚拟调度器
+## 4.3 虚拟调度器
 
 vCluster 可以启用独立的虚拟调度器，实现租户自定义调度策略：
 
@@ -586,7 +589,7 @@ description: "High priority for critical production workloads"
 
 <!-- chunk: 5. Cluster API 集成 -->## 5. Cluster API 集成
 
-#<!-- chunk: 5.1 vCluster as CAPI Provider -->## 5.1 vCluster as CAPI Provider
+## 5.1 vCluster as CAPI Provider
 
 vCluster 可以作为 Cluster API (CAPI) 的基础设施提供商，实现标准化的集群生命周期管理：
 
@@ -626,7 +629,7 @@ graph TB
     style VCLUSTER_PROV fill:#FF6B35,color:#fff
 ```
 
-#<!-- chunk: 5.2 CAPI + vCluster 自动化生命周期 -->## 5.2 CAPI + vCluster 自动化生命周期
+## 5.2 CAPI + vCluster 自动化生命周期
 
 ```yaml
 # cluster-api-vcluster.yaml - 通过 CAPI 声明式创建 vCluster
@@ -691,7 +694,12 @@ spec:
             enabled: true
 ```
 
-#<!-- chunk: 5.3 自动化生命周期管理 -->## 5.3 自动化生命周期管理
+## 5.3 自动化生命周期管理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 使用 CAPI 自动化 vCluster 生命周期
@@ -726,7 +734,7 @@ kubectl delete cluster tenant-prod-cluster -n capi-system
 
 <!-- chunk: 6. 开发测试环境实践 -->## 6. 开发测试环境实践
 
-#<!-- chunk: 6.1 PR Preview 环境自动创建 -->## 6.1 PR Preview 环境自动创建
+## 6.1 PR Preview 环境自动创建
 
 GitHub Actions 集成，每个 PR 自动创建独立的 vCluster 测试环境：
 
@@ -849,7 +857,7 @@ jobs:
         echo "🗑️ Cleaned up PR $PR_NUMBER preview environment"
 ```
 
-#<!-- chunk: 6.2 TTL 自动删除配置 -->## 6.2 TTL 自动删除配置
+## 6.2 TTL 自动删除配置
 
 ```yaml
 # vcluster-ttl-controller.yaml - 自动清理超期 vCluster
@@ -898,7 +906,7 @@ spec:
           restartPolicy: OnFailure
 ```
 
-#<!-- chunk: 6.3 测试套件隔离 -->## 6.3 测试套件隔离
+## 6.3 测试套件隔离
 
 ```yaml
 # 每个测试套件独立的 vCluster
@@ -980,7 +988,7 @@ spec:
 
 <!-- chunk: 7. 安全边界分析 -->## 7. 安全边界分析
 
-#<!-- chunk: 7.1 vCluster 隔离能力与限制 -->## 7.1 vCluster 隔离能力与限制
+## 7.1 vCluster 隔离能力与限制
 
 ```
 vCluster 安全隔离能力评估：
@@ -1017,7 +1025,7 @@ DNS 泄露          默认情况下 Pod 可以解析宿主集群 DNS
                   → 建议: 配置 coreDNS 策略限制
 ```
 
-#<!-- chunk: 7.2 租户逃逸风险评估 -->## 7.2 租户逃逸风险评估
+## 7.2 租户逃逸风险评估
 
 ```
 风险矩阵 (vCluster vs 物理集群)：
@@ -1033,7 +1041,7 @@ Secret 泄露         低          低          各自隔离
 资源争抢 DoS        中          低          需要配置 ResourceQuota
 ```
 
-#<!-- chunk: 7.3 PSA/Kyverno 安全增强 -->## 7.3 PSA/Kyverno 安全增强
+## 7.3 PSA/Kyverno 安全增强
 
 ```yaml
 # 在宿主集群上应用 PSA，限制 vCluster 同步的 Pod
@@ -1122,7 +1130,7 @@ spec:
 
 <!-- chunk: 8. 生产多租户架构 -->## 8. 生产多租户架构
 
-#<!-- chunk: 8.1 SaaS 平台多租户架构 -->## 8.1 SaaS 平台多租户架构
+## 8.1 SaaS 平台多租户架构
 
 ```mermaid
 graph TB
@@ -1181,7 +1189,7 @@ graph TB
     style MONITOR fill:#FF6B35,color:#fff
 ```
 
-#<!-- chunk: 8.2 各 vCluster 监控隔离 -->## 8.2 各 vCluster 监控隔离
+## 8.2 各 vCluster 监控隔离
 
 ```yaml
 # 为每个 vCluster 配置独立的 Prometheus 抓取 (宿主集群)
@@ -1210,7 +1218,7 @@ spec:
 # {tenant="tenant-a", __name__=~"container_.*"}
 ```
 
-#<!-- chunk: 8.3 成本分配模型 -->## 8.3 成本分配模型
+## 8.3 成本分配模型
 
 ```python
 # 成本分配脚本 - 按 vCluster 计算资源消耗
@@ -1301,7 +1309,7 @@ for ns, tenant in tenants:
 print(f"\n总计月成本: ${total_monthly:.2f}")
 ```
 
-#<!-- chunk: 8.4 生产多租户运维检查清单 -->## 8.4 生产多租户运维检查清单
+## 8.4 生产多租户运维检查清单
 
 ```
 🏗️ vCluster 基础配置
@@ -1347,7 +1355,7 @@ print(f"\n总计月成本: ${total_monthly:.2f}")
 
 <!-- chunk: 9. 未来趋势 -->## 9. 未来趋势
 
-#<!-- chunk: 9.1 Virtual Cluster API KEP -->## 9.1 Virtual Cluster API KEP
+## 9.1 Virtual Cluster API KEP
 
 Kubernetes 社区正在讨论将虚拟集群能力标准化为 Kubernetes Enhancement Proposal (KEP)：
 
@@ -1375,7 +1383,7 @@ Virtual Cluster API KEP 关键目标 (2026-2028)：
    - 健康状态统一上报
 ```
 
-#<!-- chunk: 9.2 Kamaji - 控制平面即服务 -->## 9.2 Kamaji - 控制平面即服务
+## 9.2 Kamaji - 控制平面即服务
 
 ```yaml
 # Kamaji - 另一个虚拟集群方案 (CNCF Sandbox)
@@ -1413,7 +1421,7 @@ spec:
     - "10.96.0.10"
 ```
 
-#<!-- chunk: 9.3 跨领域关联 -->## 9.3 跨领域关联
+## 9.3 跨领域关联
 
 | 相关技术 | 关联点 | 参考文档 |
 |---------|-------|---------|
@@ -1423,7 +1431,7 @@ spec:
 | CI/CD | PR Preview 环境、测试隔离 | GitOps/Argo CD 文档 |
 | 成本优化 | 高密度 vCluster 对比物理集群 TCO | 文档 25: GKE Autopilot |
 
-#<!-- chunk: 9.4 2026-2028 vCluster 技术路线图 -->## 9.4 2026-2028 vCluster 技术路线图
+## 9.4 2026-2028 vCluster 技术路线图
 
 ```
 2026 (当前状态):
@@ -1451,7 +1459,7 @@ spec:
   🌟 硬件辅助虚拟化(AMD SEV/Intel TDX)集成
 ```
 
-#<!-- chunk: 9.5 vCluster vs 竞争方案总结 -->## 9.5 vCluster vs 竞争方案总结
+## 9.5 vCluster vs 竞争方案总结
 
 ```
 2026 年虚拟集群方案对比总结：
@@ -1493,7 +1501,7 @@ Cluster API   ★★★★★   ★★★★★    ★★★☆☆  ★★★★
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -1514,4 +1522,4 @@ Cluster API   ★★★★★   ★★★★★    ★★★☆☆  ★★★★
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

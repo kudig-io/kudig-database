@@ -145,7 +145,7 @@ kind: StatefulSet
 
 <!-- chunk: 完整字段规格表 -->## 完整字段规格表
 
-#<!-- chunk: 核心字段 (spec) -->## 核心字段 (spec)
+## 核心字段 (spec)
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 | 引入版本 |
 |---------|------|------|--------|------|----------|
@@ -163,14 +163,14 @@ kind: StatefulSet
 | `spec.persistentVolumeClaimRetentionPolicy` | object | ❌ | Retain | PVC 保留策略 (whenDeleted/whenScaled) | v1.27+ |
 | `spec.ordinals.start` | integer | ❌ | 0 | Pod 序号起始值 | v1.27+ |
 
-#<!-- chunk: PVC 保留策略字段 (v1.27+) -->## PVC 保留策略字段 (v1.27+)
+## PVC 保留策略字段 (v1.27+)
 
 | 字段路径 | 可选值 | 说明 |
 |---------|--------|------|
 | `persistentVolumeClaimRetentionPolicy.whenDeleted` | `Retain` / `Delete` | StatefulSet 删除时的 PVC 处理策略 |
 | `persistentVolumeClaimRetentionPolicy.whenScaled` | `Retain` / `Delete` | 缩容时的 PVC 处理策略 |
 
-#<!-- chunk: volumeClaimTemplates[] 字段 -->## volumeClaimTemplates[] 字段
+## volumeClaimTemplates[] 字段
 
 ```yaml
 volumeClaimTemplates:
@@ -617,7 +617,7 @@ spec:
 
 <!-- chunk: 高级特性 -->## 高级特性
 
-#<!-- chunk: 1. 有序部署与删除 -->## 1. 有序部署与删除
+## 1. 有序部署与删除
 
 ```yaml
 spec:
@@ -635,7 +635,7 @@ spec:
 - **删除**: 所有 Pod 并行删除
 - **适用场景**: 无依赖关系的分片集群 (如 Kafka)
 
-#<!-- chunk: 2. PVC 保留策略 (v1.27+) -->## 2. PVC 保留策略 (v1.27+)
+## 2. PVC 保留策略 (v1.27+)
 
 ```yaml
 spec:
@@ -659,7 +659,7 @@ spec:
 - 需要启用 Feature Gate: `StatefulSetAutoDeletePVC=true` (v1.27-v1.26)
 - PVC 删除时会同时删除对应的 PV (取决于 PV reclaimPolicy)
 
-#<!-- chunk: 3. 分区更新 (Partitioned Rolling Update) -->## 3. 分区更新 (Partitioned Rolling Update)
+## 3. 分区更新 (Partitioned Rolling Update)
 
 ```yaml
 spec:
@@ -676,6 +676,9 @@ spec:
 
 **金丝雀发布示例**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 初始状态: 3 个 Pod 运行 v1 版本
 kubectl get pods -l app=web
@@ -691,7 +694,7 @@ kubectl patch sts web -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition
 kubectl patch sts web -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":0}}}}'
 ```
 
-#<!-- chunk: 4. Pod 序号起始值 (v1.27+) -->## 4. Pod 序号起始值 (v1.27+)
+## 4. Pod 序号起始值 (v1.27+)
 
 ```yaml
 spec:
@@ -709,7 +712,7 @@ spec:
 - 兼容传统应用 (要求节点 ID 从 1 开始)
 - 避免序号 0 的特殊语义 (某些应用中 0 代表禁用)
 
-#<!-- chunk: 5. 最大不可用 Pod 数 (v1.24+) -->## 5. 最大不可用 Pod 数 (v1.24+)
+## 5. 最大不可用 Pod 数 (v1.24+)
 
 ```yaml
 spec:
@@ -728,7 +731,7 @@ spec:
 
 <!-- chunk: 内部原理 -->## 内部原理
 
-#<!-- chunk: 1. 稳定网络标识 -->## 1. 稳定网络标识
+## 1. 稳定网络标识
 
 **Pod 命名规则**:
 ```
@@ -762,7 +765,7 @@ DNS 记录:
 - 即使 Pod 调度到不同节点,网络标识依然稳定
 - 应用可以通过 DNS 发现集群成员
 
-#<!-- chunk: 2. 有序创建与删除算法 -->## 2. 有序创建与删除算法
+## 2. 有序创建与删除算法
 
 **创建流程 (OrderedReady)**:
 ```
@@ -797,7 +800,7 @@ kubectl scale sts mysql --replicas=2
 # PVC data-mysql-3, data-mysql-4 保留 (需手动删除)
 ```
 
-#<!-- chunk: 3. PVC 绑定与保留 -->## 3. PVC 绑定与保留
+## 3. PVC 绑定与保留
 
 **PVC 命名规则**:
 ```
@@ -820,7 +823,7 @@ PVC 名称: data-mysql-0
 - **重建**: Pod 重建后会重新绑定到原 PVC (数据持久化)
 - **删除**: 需要手动删除或配置 PVC 保留策略 (v1.27+)
 
-#<!-- chunk: 4. StatefulSet Controller 工作流程 -->## 4. StatefulSet Controller 工作流程
+## 4. StatefulSet Controller 工作流程
 
 ```mermaid
 graph TD
@@ -866,7 +869,7 @@ graph TD
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 1. 网络配置 -->## 1. 网络配置
+## 1. 网络配置
 
 ✅ **必须配置 Headless Service**:
 ```yaml
@@ -894,7 +897,7 @@ spec:
     # 通过自定义标签或 Endpoint 选择主库
 ```
 
-#<!-- chunk: 2. 存储配置 -->## 2. 存储配置
+## 2. 存储配置
 
 ✅ **使用高性能 StorageClass**:
 ```yaml
@@ -927,7 +930,7 @@ spec:
     persistentVolumeClaimName: data-mysql-0
 ```
 
-#<!-- chunk: 3. 更新策略 -->## 3. 更新策略
+## 3. 更新策略
 
 ✅ **生产环境使用分区更新**:
 ```yaml
@@ -938,6 +941,11 @@ updateStrategy:
 ```
 
 ✅ **金丝雀发布流程**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 更新镜像并设置高 partition (仅更新 1 个 Pod)
 kubectl patch sts mysql --type='json' -p='[
@@ -954,7 +962,7 @@ kubectl patch sts mysql -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partiti
 kubectl patch sts mysql -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":0}}}}'
 ```
 
-#<!-- chunk: 4. 监控与可观测性 -->## 4. 监控与可观测性
+## 4. 监控与可观测性
 
 ✅ **配置健康检查**:
 ```yaml
@@ -992,7 +1000,7 @@ kubectl get events --field-selector involvedObject.name=mysql --sort-by='.lastTi
 kubectl get pods -l app=mysql -w
 ```
 
-#<!-- chunk: 5. 高可用配置 -->## 5. 高可用配置
+## 5. 高可用配置
 
 ✅ **配置 Pod 反亲和性**:
 ```yaml
@@ -1016,7 +1024,7 @@ topologySpreadConstraints:
       app: mysql
 ```
 
-#<!-- chunk: 6. 安全最佳实践 -->## 6. 安全最佳实践
+## 6. 安全最佳实践
 
 ✅ **使用 Secret 管理密码**:
 ```yaml
@@ -1042,7 +1050,7 @@ securityContext:
 
 <!-- chunk: 常见问题 FAQ -->## 常见问题 FAQ
 
-#<!-- chunk: Q1: StatefulSet 和 Deployment 的区别是什么? -->## Q1: StatefulSet 和 Deployment 的区别是什么?
+## Q1: StatefulSet 和 Deployment 的区别是什么?
 
 | 特性 | StatefulSet | Deployment |
 |-----|-------------|------------|
@@ -1053,7 +1061,7 @@ securityContext:
 | **更新策略** | 支持分区更新 | 滚动更新 |
 | **使用场景** | 有状态应用 (数据库、消息队列) | 无状态应用 (Web 服务、API) |
 
-#<!-- chunk: Q2: 如何访问 StatefulSet 中的特定 Pod? -->## Q2: 如何访问 StatefulSet 中的特定 Pod?
+## Q2: 如何访问 StatefulSet 中的特定 Pod?
 
 **方法 1: 通过 DNS (推荐)**:
 ```bash
@@ -1083,7 +1091,7 @@ spec:
   - port: 3306
 ```
 
-#<!-- chunk: Q3: StatefulSet 缩容后 PVC 如何处理? -->## Q3: StatefulSet 缩容后 PVC 如何处理?
+## Q3: StatefulSet 缩容后 PVC 如何处理?
 
 **v1.26 及之前**:
 - PVC 不会自动删除,需要手动清理
@@ -1096,6 +1104,10 @@ persistentVolumeClaimRetentionPolicy:
 ```
 
 **手动清理 PVC**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 缩容到 2 个副本
 kubectl scale sts mysql --replicas=2
@@ -1104,14 +1116,19 @@ kubectl scale sts mysql --replicas=2
 kubectl delete pvc data-mysql-2 data-mysql-3
 ```
 
-#<!-- chunk: Q4: 如何强制删除卡住的 Pod? -->## Q4: 如何强制删除卡住的 Pod?
+## Q4: 如何强制删除卡住的 Pod?
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 尝试正常删除
 kubectl delete pod mysql-2
 
 # 2. 如果 Pod 卡在 Terminating,强制删除
-kubectl delete pod mysql-2 --force --grace-period=0
+kubectl delete pod mysql-2 --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 3. 如果依然卡住,编辑 Pod 移除 finalizers
 kubectl patch pod mysql-2 -p '{"metadata":{"finalizers":null}}'
@@ -1119,7 +1136,10 @@ kubectl patch pod mysql-2 -p '{"metadata":{"finalizers":null}}'
 
 **警告**: 强制删除可能导致数据不一致,仅用于紧急情况。
 
-#<!-- chunk: Q5: StatefulSet 滚动更新失败如何回滚? -->## Q5: StatefulSet 滚动更新失败如何回滚?
+## Q5: StatefulSet 滚动更新失败如何回滚?
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 查看历史版本
@@ -1135,7 +1155,10 @@ kubectl rollout undo sts mysql --to-revision=3
 kubectl rollout status sts mysql
 ```
 
-#<!-- chunk: Q6: 如何临时停止 StatefulSet (保留 PVC)? -->## Q6: 如何临时停止 StatefulSet (保留 PVC)?
+## Q6: 如何临时停止 StatefulSet (保留 PVC)?
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
 
 ```bash
 # 缩容到 0 副本
@@ -1145,7 +1168,7 @@ kubectl scale sts mysql --replicas=0
 kubectl scale sts mysql --replicas=3
 ```
 
-#<!-- chunk: Q7: StatefulSet Pod 启动顺序依赖如何处理? -->## Q7: StatefulSet Pod 启动顺序依赖如何处理?
+## Q7: StatefulSet Pod 启动顺序依赖如何处理?
 
 **方法 1: 使用 initContainer 等待依赖**:
 ```yaml
@@ -1181,7 +1204,7 @@ func connectToMaster() {
 
 <!-- chunk: 生产案例 -->## 生产案例
 
-#<!-- chunk: 案例 1: MySQL 主从复制集群 -->## 案例 1: MySQL 主从复制集群
+## 案例 1: MySQL 主从复制集群
 
 **架构**:
 - 1 个主库 (mysql-0) + 2 个从库 (mysql-1, mysql-2)
@@ -1209,6 +1232,11 @@ spec:
 ```
 
 **运维操作**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 手动主从切换 (Failover)
 # 1. 将 mysql-1 提升为主库 (应用层操作)
@@ -1221,7 +1249,7 @@ kubectl patch svc mysql-write -p '{"spec":{"selector":{"statefulset.kubernetes.i
 kubectl exec mysql-0 -- mysql -uroot -p$PASSWORD -e "CHANGE MASTER TO MASTER_HOST='mysql-1.mysql-headless'..."
 ```
 
-#<!-- chunk: 案例 2: Kafka 集群 -->## 案例 2: Kafka 集群
+## 案例 2: Kafka 集群
 
 **架构**:
 - 3 节点 Kafka 集群
@@ -1276,7 +1304,7 @@ kubectl scale sts kafka --replicas=5
 kafka-reassign-partitions.sh --zookeeper zk:2181 --generate --topics-to-move-json-file topics.json
 ```
 
-#<!-- chunk: 案例 3: Elasticsearch 集群 -->## 案例 3: Elasticsearch 集群
+## 案例 3: Elasticsearch 集群
 
 **架构**:
 - 3 个 Master 节点 (master-0, master-1, master-2)
@@ -1344,6 +1372,11 @@ spec:
 ```
 
 **滚动重启**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 禁用分片分配 (避免数据迁移)
 kubectl exec es-master-0 -- curl -X PUT "localhost:9200/_cluster/settings" \
@@ -1361,23 +1394,23 @@ kubectl exec es-master-0 -- curl -X PUT "localhost:9200/_cluster/settings" \
 
 <!-- chunk: 相关资源 -->## 相关资源
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 - [Kubernetes StatefulSet 文档](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 - [StatefulSet API 参考](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/stateful-set-v1/)
 - [PVC 保留策略 KEP](https://github.com/kubernetes/enhancements/tree/master/keps/sig-apps/1847-autoremove-statefulset-pvcs)
 
-#<!-- chunk: 相关配置参考 -->## 相关配置参考
+## 相关配置参考
 - [02 - Service YAML 配置参考](./02-service-reference.md) - Headless Service 配置
 - [03 - PersistentVolume YAML 配置参考](./03-persistentvolume-reference.md) - 存储配置
 - [04 - Deployment YAML 配置参考](./04-deployment-reference.md) - 对比无状态工作负载
 
-#<!-- chunk: 工具与生态 -->## 工具与生态
+## 工具与生态
 - [Percona Operator](https://github.com/percona/percona-xtradb-cluster-operator) - MySQL 集群自动化
 - [Strimzi Kafka Operator](https://strimzi.io/) - Kafka 集群管理
 - [Elastic Cloud on Kubernetes](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) - Elasticsearch 集群
 - [Velero](https://velero.io/) - StatefulSet 备份与恢复
 
-#<!-- chunk: 最佳实践文章 -->## 最佳实践文章
+## 最佳实践文章
 - [Running MySQL on Kubernetes](https://kubernetes.io/blog/2017/02/mysql-on-kubernetes/)
 - [StatefulSet Best Practices](https://cloud.google.com/kubernetes-engine/docs/concepts/statefulset)
 
@@ -1390,7 +1423,7 @@ kubectl exec es-master-0 -- curl -X PUT "localhost:9200/_cluster/settings" \
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考

@@ -5,6 +5,7 @@ tags: ["storage", "storageclass", "dynamic-provisioning", "core", "visibility/pu
 sources: ["concepts/"]
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 status: stub
 ---
 # StorageClass
@@ -21,6 +22,6 @@ StorageClass 是 Kubernetes 中用于定义存储"类"的资源对象，它描�
 
 ## 相关链接
 
-- [[concepts/pv|PersistentVolume]] — 持久化卷
-- [[concepts/persistent-volume-claim|PersistentVolumeClaim]] — 持久化卷声明
-- [[concepts/kubernetes|Kubernetes]] — 核心概念
+- [[concepts/pv.md|PersistentVolume]] — 持久化卷
+- [[concepts/persistent-volume-claim.md|PersistentVolumeClaim]] — 持久化卷声明
+- [[concepts/kubernetes.md|Kubernetes]] — 核心概念

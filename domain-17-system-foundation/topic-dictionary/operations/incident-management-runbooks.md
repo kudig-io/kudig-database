@@ -33,6 +33,7 @@ prerequisites:
 - monitoring-basics
 - etcd-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 12 - 生产事故管理与应急手册
@@ -204,6 +205,10 @@ class IncidentStateMachine:
 #### 📝 最小示例
 
 **完整的事故处理示例**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 #!/bin/bash
@@ -468,6 +473,9 @@ class CommunicationsLead(IncidentRole):
 #### 📝 最小示例
 
 **War Room角色协同示例**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -3321,6 +3329,10 @@ kubectl rollout undo deployment/<name> -n <namespace>
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级
 
+## 参考链接
+
+- [Incident Management Runbooks]()
+
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

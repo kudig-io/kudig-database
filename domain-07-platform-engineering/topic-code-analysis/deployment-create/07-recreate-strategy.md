@@ -349,6 +349,9 @@ spec:
 
 ### 观察 Recreate 更新过程
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 设置 Recreate 策略并触发更新
 kubectl patch deployment db-migrator \
@@ -417,8 +420,8 @@ db-migrator-7c8e0d9g6-ij3kl   1/1     Running       0          10s
 
 ## Related
 
-- [[entities/kubernetes|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/pods|pods]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/replicaset|replicaset]]
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/04-rolling-update|04-rolling-update]]
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/05-deployment-status|05-deployment-status]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/pods.md|pods]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/replicaset.md|replicaset]]
+- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/04-rolling-update.md|04-rolling-update]]
+- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/05-deployment-status.md|05-deployment-status]]

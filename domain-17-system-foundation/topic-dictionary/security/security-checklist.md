@@ -55,11 +55,11 @@ created: "2026-05-23"
 
 ### 网络安全
 
-- 使用的 CNI 插件支持网络策略（[[Network Policies|Network Policies]]）。
+- 使用的 CNI 插件支持网络策略（[[domain-17-system-foundation/topic-dictionary/networking/network-policies.md|Network Policies]]）。
 - 为集群中的所有工作负载应用入站和出站网络策略。
 - 在每个命名空间中设置默认网络策略，选择所有 Pod 并拒绝所有流量。
 - 在适当时使用服务网格加密集群内的所有通信。
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]]、kubelet API 和 etcd 不公开暴露在互联网上。
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]]、kubelet API 和 etcd 不公开暴露在互联网上。
 - 过滤工作负载对云元数据 API（`169.254.169.254`）的访问。
 - 限制 LoadBalancer 和 ExternalIPs 的使用（缓解 CVE-2020-8554）。
 
@@ -134,4 +134,8 @@ created: "2026-05-23"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/security/rbac.md|Rbac]]
+- [[domain-17-system-foundation/topic-dictionary/security/role.md|Role]]
+- [[domain-17-system-foundation/topic-dictionary/security/clusterrole.md|Clusterrole]]
+- [[domain-17-system-foundation/topic-dictionary/security/rolebinding.md|Rolebinding]]
+- [[domain-17-system-foundation/topic-dictionary/security/clusterrolebinding.md|Clusterrolebinding]]

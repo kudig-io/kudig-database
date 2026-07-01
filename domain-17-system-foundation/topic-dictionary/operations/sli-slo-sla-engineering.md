@@ -33,6 +33,7 @@ prerequisites:
 - monitoring-basics
 - redis-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 15 - SLI/SLO/SLA工程实践
@@ -1967,6 +1968,12 @@ kubectl get prometheusrule -A
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级
 
+## 参考链接
+
+- [Sli Slo Sla Engineering]()
+
 ## Related
 
-- index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
+- [[domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery.md|备份与灾难恢复（Backup & Disaster Recovery）]]
+- [[domain-17-system-foundation/topic-dictionary/operations/capacity-planning-forecasting.md|13 - 容量规划与资源预测]]

@@ -53,7 +53,7 @@ created: "2026-05-23"
 
 # 46 - Kubernetes客户端库
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/reference/using-api/client-libraries](https://kubernetes.io/docs/reference/using-api/client-libraries/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/reference/using-api/client-libraries](https://kubernetes.io/docs/reference/using-api/client-libraries/)
 
 <!-- chunk: 客户端库架构 -->
 ## 客户端库架构
@@ -1211,7 +1211,7 @@ func applyPod(clientset *kubernetes.Clientset) error {
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering KUDIG Database — Global MOC
-- [[domain-07-platform-engineering/README|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
+- [[domain-07-platform-engineering/README.md|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
 - Domain-9 平台运维 — 开源项目索引
 - 平台运维概述
 - 集群生命周期管理

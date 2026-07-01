@@ -70,6 +70,9 @@ kubefed join <cluster-name> --cluster-context <context> --host-cluster-context <
 
 ### 1.2 资源同步问题
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 检查资源同步状态
 kubectl describe federateddeployment <name> -n <ns>
@@ -174,6 +177,9 @@ done
 | 无法跨集群访问 Service | `kubectl exec <pod> -- curl <svc>.<ns>.svc.cluster.local` | 跨集群 DNS 未配置 | 配置 Submariner 或 Cilium ClusterMesh |
 | Service 无法导出 | `kubectl get exporting` | 导出策略未配置 | 配置 ServiceExport |
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Submariner 状态检查
 submarinerctl status
@@ -191,6 +197,9 @@ kubectl exec -it <pod> -- nc -vz <svc>.<ns>.svc.cluster.local 443
 ```
 
 ### 3.2 跨集群网络连通性
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查网络路径

@@ -40,7 +40,7 @@ created: "2026-05-23"
 # API Server 异常 FTA 树
 
 ## 适用范围与说明
-- **目标**：覆盖 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] Server 不可用/性能劣化的关键成因与路径，支撑生产环境快速定位与自动化处置。
+- **目标**：覆盖 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] Server 不可用/性能劣化的关键成因与路径，支撑生产环境快速定位与自动化处置。
 - **范围**：APIServer 进程与配置、认证鉴权、请求排队与限流、依赖组件、证书与时间、网络与基础设施。
 - **符号**：
   - **OR 门**：任一子事件成立即可触发父事件
@@ -173,23 +173,23 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine|FTA 诊断执行引擎]]
-- [[skills/ts-control-plane|控制平面故障排查]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[skills/ts-control-plane.md|控制平面故障排查]]
 
 ## Related
 
-- [[skills/assessment-k8s-fundamentals-quiz|assessment-k8s-fundamentals-quiz]] — K8S Fundamentals Quiz
-- [[skills/ts-cloud-provider|ts-cloud-provider]] — 云服务商集成排查
-- [[skills/ts-node-components|ts-node-components]] — 节点组件故障排查
-- [[entities/kube-apiserver|kube-apiserver]] — kube-apiserver
+- [[skills/assessment-k8s-fundamentals-quiz.md|assessment-k8s-fundamentals-quiz]] — K8S Fundamentals Quiz
+- [[skills/ts-cloud-provider.md|ts-cloud-provider]] — 云服务商集成排查
+- [[skills/ts-node-components.md|ts-node-components]] — 节点组件故障排查
+- [[entities/kube-apiserver.md|kube-apiserver]] — kube-apiserver
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - [[nginx-ingress-fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
-- [[skills/assessment-k8s-fundamentals-quiz-answers|K8S Fundamentals Quiz Answers]] — Cross-reference
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[skills/assessment-k8s-fundamentals-quiz-answers.md|K8S Fundamentals Quiz Answers]] — Cross-reference
 
 ---
 
 > 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
-> [[_archives/troubleshooting-diagnostics/topic-fta/list/apiserver-fta|Apiserver FTA 完整版]]
+> [[_archives/troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|Apiserver FTA 完整版]]

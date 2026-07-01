@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Communication between Nodes and the Control Plane（节点与控制平面之间的通信）
@@ -81,4 +82,6 @@ Kubernetes 采用“轮毂-辐条（Hub-and-Spoke）”API 模式：
 
 ## Related
 
-- index/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/annotations.md|注解]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/bpfman.md|bpfman eBPF 管理器]]

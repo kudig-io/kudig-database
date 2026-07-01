@@ -171,7 +171,7 @@ flowchart TB
     style Services fill:#e8f5e9
 ```
 
-#<!-- chunk: 阿里云产品映射 -->## 阿里云产品映射
+## 阿里云产品映射
 
 | 架构层 | 阿里云方案 | 开源替代 |
 |:---|:---|:---|
@@ -187,7 +187,7 @@ flowchart TB
 
 <!-- chunk: 二、服务网格 (Service Mesh) 架构 -->## 二、服务网格 (Service Mesh) 架构
 
-#<!-- chunk: Sidecar vs Ambient vs eBPF -->## Sidecar vs Ambient vs eBPF
+## Sidecar vs Ambient vs eBPF
 
 ```mermaid
 flowchart TB
@@ -215,7 +215,7 @@ flowchart TB
     style EBPF fill:#c8e6c9
 ```
 
-#<!-- chunk: ASM 流量管理配置 -->## ASM 流量管理配置
+## ASM 流量管理配置
 
 ```yaml
 apiVersion: networking.istio.io/v1beta1
@@ -227,15 +227,15 @@ spec:
   hosts:
     - order-service
   http:
-    - match:
-        - headers:
-            x-canary:
-              exact: "true"
-      route:
-        - destination:
-            host: order-service
-            subset: v2
-          weight: 100
+    - matchers:
+      - - headers=""
+      - x-canary=""
+      - exact="true"
+      - route=""
+      - - destination=""
+      - host="order-service"
+      - subset="v2"
+      - weight="100"
     - route:
         - destination:
             host: order-service
@@ -354,7 +354,7 @@ flowchart TB
     style Scenarios fill:#e8f5e9
 ```
 
-#<!-- chunk: Sentinel 规则配置 -->## Sentinel 规则配置
+## Sentinel 规则配置
 
 ```yaml
 apiVersion: v1
@@ -512,7 +512,7 @@ flowchart TB
     style Config fill:#e8f5e9
 ```
 
-#<!-- chunk: Nacos K8s 部署 -->## Nacos K8s 部署
+## Nacos K8s 部署
 
 ```yaml
 apiVersion: apps/v1
@@ -607,7 +607,7 @@ spec:
 
 <!-- chunk: 八、ACK + ASM 阿里云部署架构 -->## 八、ACK + ASM 阿里云部署架构
 
-#<!-- chunk: ASM 多集群网格 -->## ASM 多集群网格
+## ASM 多集群网格
 
 ```mermaid
 flowchart TB
@@ -638,7 +638,7 @@ flowchart TB
     style ClusterSH fill:#fff8e1
 ```
 
-#<!-- chunk: ASM 统一流量管理 -->## ASM 统一流量管理
+## ASM 统一流量管理
 
 ```yaml
 apiVersion: networking.istio.io/v1beta1
@@ -673,12 +673,12 @@ spec:
     matchLabels:
       version: gray
   rules:
-    - match:
-        - headers:
-            x-canary:
-              exact: "true"
-      target:
-        - lane: gray
+    - matchers:
+      - - headers=""
+      - x-canary=""
+      - exact="true"
+      - target=""
+      - - lane="gray"
 ```
 
 ---
@@ -696,17 +696,17 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

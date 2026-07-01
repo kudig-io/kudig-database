@@ -132,7 +132,7 @@ GET /api/v1/namespaces/{namespace}/services/{name}
 
 <!-- chunk: 完整字段规格表 -->## 完整字段规格表
 
-#<!-- chunk: 核心字段 -->## 核心字段
+## 核心字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 | 版本要求 |
 |---------|------|------|--------|------|----------|
@@ -158,7 +158,7 @@ GET /api/v1/namespaces/{namespace}/services/{name}
 | `spec.loadBalancerIP` | string | 否 | - | 指定负载均衡器 IP（已废弃） | v1.0-v1.24 |
 | `spec.loadBalancerSourceRanges` | []string | 否 | - | 允许访问 LB 的源 CIDR | v1.0+ |
 
-#<!-- chunk: spec.ports[] 字段 -->## spec.ports[] 字段
+## spec.ports[] 字段
 
 | 字段路径 | 类型 | 必需 | 默认值 | 说明 |
 |---------|------|------|--------|------|
@@ -175,7 +175,7 @@ GET /api/v1/namespaces/{namespace}/services/{name}
 
 <!-- chunk: ClusterIP 详解 -->## ClusterIP 详解
 
-#<!-- chunk: 标准 ClusterIP -->## 标准 ClusterIP
+## 标准 ClusterIP
 
 **特点**：
 - 默认类型，仅在集群内部可访问
@@ -210,7 +210,7 @@ spec:
   sessionAffinity: None  # 会话亲和性：None 或 ClientIP
 ```
 
-#<!-- chunk: Headless Service（无头服务） -->## Headless Service（无头服务）
+## Headless Service（无头服务）
 
 **特点**：
 - 设置 `clusterIP: None`
@@ -254,7 +254,7 @@ nslookup mysql-0.mysql-headless.database.svc.cluster.local
 # 返回：10.244.1.5
 ```
 
-#<!-- chunk: 手动指定 ClusterIP -->## 手动指定 ClusterIP
+## 手动指定 ClusterIP
 
 ```yaml
 apiVersion: v1
@@ -306,7 +306,7 @@ spec:
   externalTrafficPolicy: Local  # 流量策略：保留源 IP，减少跳转
 ```
 
-#<!-- chunk: externalTrafficPolicy 详解 -->## externalTrafficPolicy 详解
+## externalTrafficPolicy 详解
 
 | 值 | 行为 | 源 IP | 负载均衡 | 健康检查 |
 |----|------|-------|----------|----------|
@@ -335,7 +335,7 @@ spec:
 - ❌ 缺点：可能导致负载不均（只转发到有 Pod 的节点）
 - 💡 使用场景：需要源 IP 的应用（如日志审计、地理位置限制）
 
-#<!-- chunk: 自定义 NodePort 范围 -->## 自定义 NodePort 范围
+## 自定义 NodePort 范围
 
 修改 kube-apiserver 参数：
 ```bash
@@ -381,7 +381,7 @@ spec:
   externalTrafficPolicy: Local  # 保留源 IP
 ```
 
-#<!-- chunk: loadBalancerClass（v1.24+） -->## loadBalancerClass（v1.24+）
+## loadBalancerClass（v1.24+）
 
 **用途**：指定特定的负载均衡器实现（支持多 LB 控制器）
 
@@ -410,7 +410,7 @@ spec:
   controller: example.com/lb-controller
 ```
 
-#<!-- chunk: allocateLoadBalancerNodePorts（v1.24+） -->## allocateLoadBalancerNodePorts（v1.24+）
+## allocateLoadBalancerNodePorts（v1.24+）
 
 **用途**：禁用自动分配 NodePort（某些 LB 实现直接路由到 Pod）
 
@@ -434,9 +434,9 @@ spec:
 - 节省 NodePort 端口资源
 - 减少网络跳转提高性能
 
-#<!-- chunk: 云提供商注解参考 -->## 云提供商注解参考
+## 云提供商注解参考
 
-##<!-- chunk: AWS -->## AWS
+## AWS
 
 ```yaml
 annotations:
@@ -457,7 +457,7 @@ annotations:
   service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
 ```
 
-##<!-- chunk: GCP -->## GCP
+## GCP
 
 ```yaml
 annotations:
@@ -471,7 +471,7 @@ annotations:
   cloud.google.com/neg: '{"ingress": true}'
 ```
 
-##<!-- chunk: Azure -->## Azure
+## Azure
 
 ```yaml
 annotations:
@@ -537,7 +537,7 @@ spec:
 
 <!-- chunk: 高级字段 -->## 高级字段
 
-#<!-- chunk: internalTrafficPolicy（v1.26+） -->## internalTrafficPolicy（v1.26+）
+## internalTrafficPolicy（v1.26+）
 
 **用途**：控制集群内部流量路由策略
 
@@ -570,7 +570,7 @@ spec:
 - 提高数据本地性（存储感知应用）
 - 拓扑感知路由（v1.21+ 可用更细粒度的拓扑感知提示）
 
-#<!-- chunk: sessionAffinity 与 sessionAffinityConfig -->## sessionAffinity 与 sessionAffinityConfig
+## sessionAffinity 与 sessionAffinityConfig
 
 **用途**：实现会话保持（同一客户端请求转发到同一 Pod）
 
@@ -596,7 +596,7 @@ spec:
 - 可能导致负载不均
 - 对于需要强会话保持的应用，建议使用应用层解决方案（如 Cookie、JWT）
 
-#<!-- chunk: externalIPs -->## externalIPs
+## externalIPs
 
 **用途**：手动指定外部 IP（不通过云负载均衡器）
 
@@ -628,7 +628,7 @@ spec:
 
 <!-- chunk: 双栈支持（IPv4/IPv6） -->## 双栈支持（IPv4/IPv6）
 
-#<!-- chunk: ipFamilies 与 ipFamilyPolicy -->## ipFamilies 与 ipFamilyPolicy
+## ipFamilies 与 ipFamilyPolicy
 
 **v1.20+ 功能**：支持 IPv4/IPv6 双栈服务
 
@@ -686,7 +686,7 @@ spec:
 
 <!-- chunk: 最小配置示例 -->## 最小配置示例
 
-#<!-- chunk: ClusterIP（最简） -->## ClusterIP（最简）
+## ClusterIP（最简）
 
 ```yaml
 apiVersion: v1
@@ -701,7 +701,7 @@ spec:
     targetPort: 8080
 ```
 
-#<!-- chunk: NodePort（最简） -->## NodePort（最简）
+## NodePort（最简）
 
 ```yaml
 apiVersion: v1
@@ -717,7 +717,7 @@ spec:
     targetPort: 8080
 ```
 
-#<!-- chunk: LoadBalancer（最简） -->## LoadBalancer（最简）
+## LoadBalancer（最简）
 
 ```yaml
 apiVersion: v1
@@ -733,7 +733,7 @@ spec:
     targetPort: 8080
 ```
 
-#<!-- chunk: ExternalName（最简） -->## ExternalName（最简）
+## ExternalName（最简）
 
 ```yaml
 apiVersion: v1
@@ -749,7 +749,7 @@ spec:
 
 <!-- chunk: 生产级配置示例 -->## 生产级配置示例
 
-#<!-- chunk: 示例 1：高可用 Web 应用（ClusterIP + Ingress） -->## 示例 1：高可用 Web 应用（ClusterIP + Ingress）
+## 示例 1：高可用 Web 应用（ClusterIP + Ingress）
 
 ```yaml
 apiVersion: v1
@@ -784,7 +784,7 @@ spec:
   internalTrafficPolicy: Cluster  # 跨节点负载均衡
 ```
 
-#<!-- chunk: 示例 2：NodePort 外部访问（带源 IP 保留） -->## 示例 2：NodePort 外部访问（带源 IP 保留）
+## 示例 2：NodePort 外部访问（带源 IP 保留）
 
 ```yaml
 apiVersion: v1
@@ -821,7 +821,7 @@ spec:
       timeoutSeconds: 3600  # 1 小时会话保持
 ```
 
-#<!-- chunk: 示例 3：云负载均衡器（AWS NLB） -->## 示例 3：云负载均衡器（AWS NLB）
+## 示例 3：云负载均衡器（AWS NLB）
 
 ```yaml
 apiVersion: v1
@@ -871,7 +871,7 @@ spec:
   allocateLoadBalancerNodePorts: true
 ```
 
-#<!-- chunk: 示例 4：Headless Service + StatefulSet -->## 示例 4：Headless Service + StatefulSet
+## 示例 4：Headless Service + StatefulSet
 
 ```yaml
 # Headless Service
@@ -938,7 +938,7 @@ spec:
 - `mysql-1.mysql.database.svc.cluster.local` → Pod mysql-1
 - `mysql-2.mysql.database.svc.cluster.local` → Pod mysql-2
 
-#<!-- chunk: 示例 5：双栈服务（IPv4 + IPv6） -->## 示例 5：双栈服务（IPv4 + IPv6）
+## 示例 5：双栈服务（IPv4 + IPv6）
 
 ```yaml
 apiVersion: v1
@@ -977,7 +977,7 @@ kubectl get svc modern-web -o yaml
 #     - ip: 2001:db8::1234
 ```
 
-#<!-- chunk: 示例 6：外部服务代理（无 Selector + 手动 Endpoints） -->## 示例 6：外部服务代理（无 Selector + 手动 Endpoints）
+## 示例 6：外部服务代理（无 Selector + 手动 Endpoints）
 
 ```yaml
 # Service 定义（无 selector）
@@ -1020,11 +1020,11 @@ subsets:
 
 <!-- chunk: 内部原理 -->## 内部原理
 
-#<!-- chunk: kube-proxy 实现机制 -->## kube-proxy 实现机制
+## kube-proxy 实现机制
 
 **三种代理模式**：
 
-##<!-- chunk: 1. iptables 模式（默认） -->## 1. iptables 模式（默认）
+## 1. iptables 模式（默认）
 
 **原理**：
 - kube-proxy 监听 Service/Endpoints 变化
@@ -1046,7 +1046,7 @@ iptables -t nat -L KUBE-SERVICES -n | grep my-service
 - ❌ 规则数量与 Service/Pod 数量线性增长（大规模集群性能下降）
 - ❌ 负载均衡算法简单（随机选择）
 
-##<!-- chunk: 2. IPVS 模式（推荐用于大规模集群） -->## 2. IPVS 模式（推荐用于大规模集群）
+## 2. IPVS 模式（推荐用于大规模集群）
 
 **原理**：
 - 使用 Linux IPVS（IP Virtual Server）模块
@@ -1082,7 +1082,7 @@ ipvsadm -Ln
 - ❌ 需要额外内核模块
 - ❌ 调试相对复杂
 
-##<!-- chunk: 3. nftables 模式（v1.29+ 实验性） -->## 3. nftables 模式（v1.29+ 实验性）
+## 3. nftables 模式（v1.29+ 实验性）
 
 **原理**：
 - 使用 nftables 替代 iptables
@@ -1092,7 +1092,7 @@ ipvsadm -Ln
 - v1.29+ 开始支持（Alpha）
 - 未来可能取代 iptables 模式
 
-#<!-- chunk: Service CIDR -->## Service CIDR
+## Service CIDR
 
 **定义**：为 ClusterIP 分配的 IP 地址池
 
@@ -1115,7 +1115,7 @@ ipvsadm -Ln
 --service-cluster-ip-range=10.96.0.0/12,fd00:10:96::/108
 ```
 
-#<!-- chunk: DNS 记录生成 -->## DNS 记录生成
+## DNS 记录生成
 
 **CoreDNS/kube-dns 自动创建 A/AAAA 记录**：
 
@@ -1171,7 +1171,7 @@ dig SRV _http._tcp.web.production.svc.cluster.local
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 1. 服务类型选择 -->## 1. 服务类型选择
+## 1. 服务类型选择
 
 | 场景 | 推荐类型 | 理由 |
 |------|---------|------|
@@ -1181,7 +1181,7 @@ dig SRV _http._tcp.web.production.svc.cluster.local
 | 有状态应用（数据库） | Headless (ClusterIP: None) | 稳定网络标识 |
 | 外部服务引用 | ExternalName | DNS 抽象 |
 
-#<!-- chunk: 2. 端口命名规范 -->## 2. 端口命名规范
+## 2. 端口命名规范
 
 ```yaml
 ports:
@@ -1200,7 +1200,7 @@ ports:
 - 提高可读性和可维护性
 - 支持引用（targetPort: http）
 
-#<!-- chunk: 3. 使用命名端口 -->## 3. 使用命名端口
+## 3. 使用命名端口
 
 ```yaml
 # Pod 定义
@@ -1225,7 +1225,7 @@ spec:
 - 容器端口变更时无需修改 Service
 - 更清晰的意图表达
 
-#<!-- chunk: 4. 合理设置 externalTrafficPolicy -->## 4. 合理设置 externalTrafficPolicy
+## 4. 合理设置 externalTrafficPolicy
 
 **选择指南**：
 
@@ -1241,7 +1241,7 @@ spec:
 - 或配合 Pod 反亲和性实现均匀分布
 - 监控负载不均情况
 
-#<!-- chunk: 5. LoadBalancer 注解集中管理 -->## 5. LoadBalancer 注解集中管理
+## 5. LoadBalancer 注解集中管理
 
 ```yaml
 # 使用 ConfigMap 管理通用注解
@@ -1264,7 +1264,7 @@ service:
     {{- include "common-lb-annotations" . | nindent 4 }}
 ```
 
-#<!-- chunk: 6. 健康检查配置 -->## 6. 健康检查配置
+## 6. 健康检查配置
 
 ```yaml
 # 应用容器暴露健康检查端点
@@ -1289,7 +1289,7 @@ spec:
 - NodePort/LoadBalancer 自动基于 Pod readinessProbe
 - 云 LB 可通过注解自定义健康检查参数
 
-#<!-- chunk: 7. 监控与可观测性 -->## 7. 监控与可观测性
+## 7. 监控与可观测性
 
 **关键指标**：
 ```yaml
@@ -1306,7 +1306,7 @@ annotations:
 - 网络延迟和错误率
 - kube-proxy 规则同步延迟
 
-#<!-- chunk: 8. 安全加固 -->## 8. 安全加固
+## 8. 安全加固
 
 **限制 externalIPs 使用**（准入控制）：
 ```yaml
@@ -1337,7 +1337,7 @@ spec:
   - 203.0.113.0/24  # 仅允许特定 CIDR 访问
 ```
 
-#<!-- chunk: 9. 资源标签与注解 -->## 9. 资源标签与注解
+## 9. 资源标签与注解
 
 **标准化标签**：
 ```yaml
@@ -1367,7 +1367,7 @@ annotations:
   updated-by: "platform-team"
 ```
 
-#<!-- chunk: 10. 多集群服务 -->## 10. 多集群服务
+## 10. 多集群服务
 
 **使用 Multi-Cluster Services（MCS）**：
 ```yaml
@@ -1398,7 +1398,7 @@ metadata:
 
 <!-- chunk: FAQ -->## FAQ
 
-#<!-- chunk: Q1: ClusterIP 无法访问？ -->## Q1: ClusterIP 无法访问？
+## Q1: ClusterIP 无法访问？
 
 **排查步骤**：
 ```bash
@@ -1428,7 +1428,7 @@ kubectl logs -n kube-system kube-proxy-xxxxx
 kubectl get networkpolicy -n namespace
 ```
 
-#<!-- chunk: Q2: NodePort 无法从外部访问？ -->## Q2: NodePort 无法从外部访问？
+## Q2: NodePort 无法从外部访问？
 
 **常见原因**：
 1. **防火墙规则**：云平台安全组未开放端口
@@ -1451,7 +1451,7 @@ iptables -t nat -L KUBE-NODEPORTS -n
 aws ec2 describe-security-groups --group-ids sg-xxxxx
 ```
 
-#<!-- chunk: Q3: LoadBalancer 一直 Pending？ -->## Q3: LoadBalancer 一直 Pending？
+## Q3: LoadBalancer 一直 Pending？
 
 **原因**：
 - 集群未集成云控制器管理器（Cloud Controller Manager）
@@ -1474,7 +1474,7 @@ aws elbv2 describe-load-balancers
 - 使用 [MetalLB](https://metallb.universe.tf/)
 - 使用 [Cilium LB IPAM](https://docs.cilium.io/en/stable/network/lb-ipam/)
 
-#<!-- chunk: Q4: 如何实现金丝雀发布？ -->## Q4: 如何实现金丝雀发布？
+## Q4: 如何实现金丝雀发布？
 
 **方案 1：多版本 Service**
 ```yaml
@@ -1536,14 +1536,14 @@ spec:
   hosts:
   - app.example.com
   http:
-  - match:
-    - headers:
-        user-agent:
-          regex: ".*Mobile.*"  # 移动端用户使用金丝雀版本
-    route:
-    - destination:
-        host: app
-        subset: v2
+  - matchers:
+    - - headers=""
+    - user-agent=""
+    - regex=".*Mobile.*"  # 移动端用户使用金丝雀版本"
+    - route=""
+    - - destination=""
+    - host="app"
+    - subset="v2"
   - route:
     - destination:
         host: app
@@ -1555,7 +1555,7 @@ spec:
       weight: 10  # 10% 流量
 ```
 
-#<!-- chunk: Q5: Service 如何实现跨命名空间访问？ -->## Q5: Service 如何实现跨命名空间访问？
+## Q5: Service 如何实现跨命名空间访问？
 
 **DNS 全限定名**：
 ```yaml
@@ -1587,7 +1587,7 @@ spec:
   externalName: api-service.namespace-b.svc.cluster.local
 ```
 
-#<!-- chunk: Q6: 如何查看 Service 背后的 Pod IP？ -->## Q6: 如何查看 Service 背后的 Pod IP？
+## Q6: 如何查看 Service 背后的 Pod IP？
 
 ```bash
 # 方法 1：查看 Endpoints
@@ -1603,7 +1603,7 @@ kubectl get endpoints my-service -n namespace -o yaml
 kubectl get endpointslices -n namespace -l kubernetes.io/service-name=my-service
 ```
 
-#<!-- chunk: Q7: Service 的 sessionAffinity 不生效？ -->## Q7: Service 的 sessionAffinity 不生效？
+## Q7: Service 的 sessionAffinity 不生效？
 
 **检查点**：
 1. **客户端 IP 是否被 NAT**：`externalTrafficPolicy: Cluster` 会导致源 IP 被 SNAT
@@ -1620,7 +1620,11 @@ spec:
       timeoutSeconds: 10800  # 明确设置超时
 ```
 
-#<!-- chunk: Q8: 如何强制删除处于 Terminating 的 Service？ -->## Q8: 如何强制删除处于 Terminating 的 Service？
+## Q8: 如何强制删除处于 Terminating 的 Service？
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 正常删除
@@ -1638,7 +1642,7 @@ kubectl edit svc my-service -n namespace
 
 <!-- chunk: 生产案例 -->## 生产案例
 
-#<!-- chunk: 案例 1：Headless Service + StatefulSet 部署 MySQL 集群 -->## 案例 1：Headless Service + StatefulSet 部署 MySQL 集群
+## 案例 1：Headless Service + StatefulSet 部署 MySQL 集群
 
 **场景**：部署一个主从复制的 MySQL 集群，需要稳定的网络标识和存储。
 
@@ -1798,7 +1802,7 @@ mysql -h mysql-read.database.svc.cluster.local -uroot -p
 
 ---
 
-#<!-- chunk: 案例 2：双栈服务（IPv4 + IPv6） -->## 案例 2：双栈服务（IPv4 + IPv6）
+## 案例 2：双栈服务（IPv4 + IPv6）
 
 **场景**：现代云原生应用需要同时支持 IPv4 和 IPv6 客户端。
 
@@ -1870,7 +1874,7 @@ spec:
 
 ---
 
-#<!-- chunk: 案例 3：云 LB 高级配置（AWS NLB 与 TLS 终结） -->## 案例 3：云 LB 高级配置（AWS NLB 与 TLS 终结）
+## 案例 3：云 LB 高级配置（AWS NLB 与 TLS 终结）
 
 **场景**：在 AWS EKS 上部署 HTTPS 服务，使用 ACM 证书在 NLB 层终结 TLS。
 
@@ -1954,32 +1958,32 @@ aws s3 ls s3://my-lb-logs/prod/secure-web/
 
 <!-- chunk: 相关资源 -->## 相关资源
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 - [Service 概念](https://kubernetes.io/docs/concepts/services-networking/service/)
 - [Service API 参考](https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/)
 - [DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
 - [Topology Aware Routing](https://kubernetes.io/docs/concepts/services-networking/topology-aware-routing/)
 
-#<!-- chunk: 网络组件 -->## 网络组件
+## 网络组件
 - [kube-proxy](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/)
 - [IPVS 代理模式](https://kubernetes.io/blog/2018/07/09/ipvs-based-in-cluster-load-balancing-deep-dive/)
 - [CoreDNS](https://coredns.io/)
 
-#<!-- chunk: 云集成 -->## 云集成
+## 云集成
 - [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/)
 - [GCP Cloud Controller Manager](https://github.com/kubernetes/cloud-provider-gcp)
 - [Azure Cloud Provider](https://cloud-provider-azure.sigs.k8s.io/)
 
-#<!-- chunk: 裸金属 LB 方案 -->## 裸金属 LB 方案
+## 裸金属 LB 方案
 - [MetalLB](https://metallb.universe.tf/)
 - [Cilium LB IPAM](https://docs.cilium.io/en/stable/network/lb-ipam/)
 - [Porter (QingCloud)](https://porterlb.io/)
 
-#<!-- chunk: 多集群服务 -->## 多集群服务
+## 多集群服务
 - [Kubernetes Multi-Cluster Services (MCS)](https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/1645-multi-cluster-services-api)
 - [Submariner](https://submariner.io/)
 
-#<!-- chunk: 工具 -->## 工具
+## 工具
 - [kubectl-view-service-tree](https://github.com/knight42/kubectl-view-service-tree) - 可视化 Service 与 Pod 关系
 - [kubectl-service-plugin](https://github.com/superbrothers/kubectl-service-plugin) - Service 管理插件
 
@@ -1994,7 +1998,7 @@ aws s3 ls s3://my-lb-logs/prod/secure-web/
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -2015,4 +2019,4 @@ aws s3 ls s3://my-lb-logs/prod/secure-web/
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]

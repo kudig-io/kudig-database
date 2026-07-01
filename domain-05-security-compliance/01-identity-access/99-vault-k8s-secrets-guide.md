@@ -58,7 +58,7 @@ created: "2026-05-23"
 # Vault K8s 密钥管理集成深度实践
 
 > **Author**: Cloud Native Security Architect | **Version**: v1.0 | **Update Time**: 2026-05-18
-> **Scenario**: HashiCorp Vault integration with [[Kubernetes|Kubernetes]] [[Secrets Management|secrets management]] | **Complexity**: ⭐⭐⭐⭐
+> **Scenario**: HashiCorp Vault integration with [[Kubernetes|Kubernetes]] secrets management | **Complexity**: ⭐⭐⭐⭐
 
 <!-- chunk: 概述 -->## 概述
 
@@ -66,7 +66,7 @@ Kubernetes 原生 Secret 资源仅提供 base64 编码，缺乏细粒度的访�
 
 Vault 与 Kubernetes 的集成解决了原生 Secret 的多个核心问题。首先是安全性——原生 Secret 仅以 base64 编码存储在 etcd 中，而 Vault 提供了加密存储、访问控制列表（ACL）和审计日志。其次是动态性——Vault 的动态密钥引擎可以按需生成短期数据库凭证，过期后自动回收，消除了静态密码泄露的风险。第三是可审计性——Vault 记录了所有密钥访问操作，包括谁在什么时间访问了什么密钥，满足合规审计要求。第四是集中管理——在多集群环境中，Vault 作为集中的密钥管理后端，确保了密钥的一致性和可管理性。
 
-#<!-- chunk: 威胁模型分析 -->## 威胁模型分析
+## 威胁模型分析
 
 **密钥泄露风险**：Kubernetes Secret 默认以 base64 编码存储在 etcd 中，任何有 etcd 访问权限或 namespace 级别 Secret 读取权限的用户都可以获取密钥明文。更危险的是，开发人员可能将 Secret 以明文形式写入 ConfigMap、环境变量或代码中，导致凭据泄露到 Git 仓库、镜像层或日志系统中。密钥泄露的后果非常严重——攻击者获取了数据库密码后可以直接访问生产数据库，获取了 API Key 后可以冒充应用调用第三方服务，获取了 TLS 私钥后可以解密流量或冒充服务器。
 
@@ -91,7 +91,7 @@ Vault 与 Kubernetes 的集成解决了原生 Secret 的多个核心问题。首
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 三种集成模式对比 -->## 三种集成模式对比
+## 三种集成模式对比
 
 ```mermaid
 graph TB
@@ -133,9 +133,12 @@ graph TB
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: Vault HA 部署 -->## Vault HA 部署
+## Vault HA 部署
 
 生产环境的 Vault 部署使用 Raft 存储后端的高可用模式，推荐 3 节点集群确保仲裁。Auto-unseal 使用 AWS KMS 等云 KMS 服务，避免手动 unseal 操作。TLS 加密所有 Vault 通信。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add hashicorp https://helm.releases.hashicorp.com
@@ -281,9 +284,13 @@ csi:
       cpu: 200m
 ```
 
-#<!-- chunk: Kubernetes 认证配置 -->## Kubernetes 认证配置
+## Kubernetes 认证配置
 
 Vault 的 Kubernetes 认证方法允许 Pod 使用其 ServiceAccount JWT Token 向 Vault 认证。Vault 通过 TokenReview API 验证 JWT Token 的有效性，然后根据配置的角色和策略返回对应的密钥。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -379,7 +386,7 @@ kubectl create serviceaccount external-secrets-sa -n external-secrets
 
 <!-- chunk: 安全策略实战 -->## 安全策略实战
 
-#<!-- chunk: Vault Agent Injector 密钥注入 -->## Vault Agent Injector 密钥注入
+## Vault Agent Injector 密钥注入
 
 Vault Agent Injector 通过 Mutating Admission Webhook 自动向 Pod 注入 Vault Agent Sidecar 容器，Sidecar 使用 Kubernetes ServiceAccount Token 向 Vault 认证，获取密钥后写入共享内存卷供应用容器读取。这是生产环境推荐的集成模式，因为密钥仅存在于内存卷中，不会写入 etcd。
 
@@ -485,7 +492,7 @@ spec:
             medium: Memory
 ```
 
-#<!-- chunk: External Secrets Operator -->## External Secrets Operator
+## External Secrets Operator
 
 External Secrets Operator（ESO）将 Vault 密钥同步为标准 Kubernetes Secret 资源，与 GitOps 工具兼容性更好。ESO 的优势在于：密钥同步为标准 K8s Secret 后，Argo CD 可以正常管理和追踪这些 Secret；应用不需要修改代码即可使用——原来通过环境变量引用 Secret 的应用无需改动；支持模板化密钥转换——可以将 Vault 中的密钥格式转换为应用需要的格式。
 
@@ -588,9 +595,12 @@ spec:
         key: database/creds/myapp
 ```
 
-#<!-- chunk: 动态数据库凭证 -->## 动态数据库凭证
+## 动态数据库凭证
 
 Vault 的动态密钥引擎是区分于其他密钥管理工具的核心功能。它不存储静态的数据库密码，而是在应用请求时临时创建数据库用户，分配有限权限，设置 TTL。凭证过期后自动回收（删除数据库用户）。这消除了静态密码泄露的风险，每个应用实例获取的凭证都是唯一且短期的。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 启用数据库引擎
@@ -631,7 +641,10 @@ kubectl exec -it vault-0 -n vault -- vault write database/roles/myapp-audit \
 kubectl exec -it vault-0 -n vault -- vault read database/creds/myapp
 ```
 
-#<!-- chunk: PKI 引擎自动 TLS -->## PKI 引擎自动 TLS
+## PKI 引擎自动 TLS
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 启用 PKI 引擎
@@ -672,7 +685,10 @@ kubectl exec -it vault-0 -n vault -- vault write pki/issue/myapp \
   ttl=24h
 ```
 
-#<!-- chunk: Transit 引擎加密即服务 -->## Transit 引擎加密即服务
+## Transit 引擎加密即服务
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 启用 Transit 引擎
@@ -698,9 +714,12 @@ kubectl exec -it vault-0 -n vault -- vault write -f transit/keys/myapp-encryptio
 
 <!-- chunk: 合规与审计 -->## 合规与审计
 
-#<!-- chunk: Vault 审计日志 -->## Vault 审计日志
+## Vault 审计日志
 
 Vault 的审计日志记录了所有操作，包括认证请求、密钥访问、策略变更和管理操作。审计日志是合规审计的重要证据来源。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 启用文件审计
@@ -716,7 +735,7 @@ kubectl exec -it vault-0 -n vault -- vault audit enable syslog \
 kubectl exec -it vault-0 -n vault -- vault audit list -detailed
 ```
 
-#<!-- chunk: 审计日志分析 -->## 审计日志分析
+## 审计日志分析
 
 ```bash
 #!/bin/bash
@@ -763,7 +782,10 @@ jq 'select(.request.path | test("pki/issue"))' "$AUDIT_LOG" | \
   jq -r '"\(.time) | \(.request.path) | \(.request.data.common_name)"'
 ```
 
-#<!-- chunk: 合规检查脚本 -->## 合规检查脚本
+## 合规检查脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -806,7 +828,7 @@ kubectl exec -it vault-0 -n vault -- vault operator raft list-peers
 
 <!-- chunk: 监控与告警 -->## 监控与告警
 
-#<!-- chunk: Prometheus 监控 -->## Prometheus 监控
+## Prometheus 监控
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -916,7 +938,7 @@ spec:
 | 策略审计 | 定期审查策略和角色 | 删除不再使用的权限 |
 | HA 部署 | 至少 3 节点 Raft 集群 | 确保 Raft 仲裁 |
 
-#<!-- chunk: 多集群密钥管理 -->## 多集群密钥管理
+## 多集群密钥管理
 
 ```yaml
 # 主集群 Vault 配置（读写）
@@ -965,7 +987,7 @@ spec:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题 -->## 常见问题
+## 常见问题
 
 **Agent 注入不生效**：检查 Pod 是否有正确的注解 `vault.hashicorp.com/agent-inject: "true"`。确认 Vault Injector 的 Mutating Webhook 是否正常运行。查看 Injector 日志是否有错误。检查 namespace 是否被 Webhook 排除。
 
@@ -974,6 +996,10 @@ spec:
 **密钥获取为空**：检查 KV 引擎路径和版本（v1/v2）。确认策略中的路径是否正确（v2 需要使用 `secret/data/` 前缀）。验证密钥确实存在于指定路径。
 
 **动态凭证创建失败**：检查数据库连接配置是否正确。确认 Vault 管理员账号是否有足够的权限创建数据库用户。查看 Vault 日志中的数据库错误信息。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1046,8 +1072,8 @@ kubectl exec -it vault-0 -n vault -- vault read pki/cert/ca-chain | grep -E "Not
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
@@ -1065,4 +1091,4 @@ kubectl exec -it vault-0 -n vault -- vault read pki/cert/ca-chain | grep -E "Not
 - 01-falco-cloud-native-security
 - 02-sysdig-enterprise-container-security
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

@@ -90,7 +90,7 @@ reflection_triggers:
   # 类型 4: 矛盾结果
   contradictory_result:
     patterns:
-      - "node is Ready but [[concepts/pod-lifecycle|pod]] cannot schedule"
+      - "node is Ready but [[concepts/pod-lifecycle.md|pod]] cannot schedule"
       - "service exists but no endpoints"
     action: "深入检查资源关联关系"
 ```

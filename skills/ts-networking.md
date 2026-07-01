@@ -59,7 +59,6 @@ created: "2026-05-23"
 #### 排查方法与步骤
 
 
-
 #### 2.1 排查原理：CNI 架构与数据平面
 
 CNI（Container Network Interface）负责为 Pod 配置网络。深入理解其架构是高效排查的关键：
@@ -84,6 +83,7 @@ CNI（Container Network Interface）负责为 Pod 配置网络。深入理解其
     "netns": "/var/run/netns/cni-xxx",
     "ifname": "eth0"
   }
+
   ```
 - **返回结果**：包含分配的 IP 地址、路由、DNS 配置等
 
@@ -141,7 +141,6 @@ CNI（Container Network Interface）负责为 Pod 配置网络。深入理解其
 ---
 
 #### 排查方法与步骤
-
 
 
 #### 2.1 排查原理
@@ -236,7 +235,6 @@ kubernetes cluster.local in-addr.arpa ip6.arpa {
 ---
 
 #### 排查方法与步骤
-
 
 
 #### 2.1 排查原理与架构深度剖析
@@ -400,7 +398,6 @@ Kubernetes Service 通过 kube-proxy 实现流量转发，支持三种代理模�
 #### 2. 排查方法与步骤
 
 
-
 #### 2.2 Pod IP 分配失败排查
 
 #### 2.2.1 排查逻辑决策树
@@ -424,6 +421,9 @@ Pod 处于 ContainerCreating，事件显示 IP 分配失败
 ```
 
 #### 2.2.2 ENI 配额不足
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 查看节点已分配的 ENI 和 IP 数量
@@ -449,6 +449,9 @@ curl "https://ecs.aliyuncs.com/?Action=DescribeInstanceTypes&InstanceTypes.1=<in
 - 调整 Terway 配置，使用 `eniip` 模式（共享辅助 IP）替代 `eni` 模式（独占 ENI）
 
 #### 2.2.3 IP 资源池耗尽
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 查看 terway 资源池详情
@@ -480,7 +483,6 @@ kubectl get pods --all-namespaces --field-selector spec.nodeName=<node-name> -o 
 ---
 
 #### 2. 排查方法与步骤
-
 
 
 #### 2.2 Pod IP 分配失败排查
@@ -528,8 +530,8 @@ cat /run/flannel/subnet.env
 
 ## 相关链接
 
-- [[skills/ts-networking|网络故障排查总览]]
-- [[skills/troubleshoot-pod-issues|Pod 故障排查]]
+- [[skills/ts-networking.md|网络故障排查总览]]
+- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## Related
 
@@ -538,5 +540,7 @@ cat /run/flannel/subnet.env
 - [[envoy]] — Envoy
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[skills/dns-fta|DNS 异常故障树分析]] — Cross-reference
-- [[skills/service-mesh-istio-fta|Service Mesh(Istio) 异常故障树分析]] — Cross-reference
+- [[skills/dns-fta.md|DNS 异常故障树分析]] — Cross-reference
+- [[skills/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]] — Cross-reference
+
+```

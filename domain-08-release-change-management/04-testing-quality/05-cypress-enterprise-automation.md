@@ -59,7 +59,7 @@ This document provides comprehensive exploration of Cypress enterprise deploymen
 
 <!-- chunk: 1. Cypress Enterprise Architecture -->## 1. Cypress Enterprise Architecture
 
-#<!-- chunk: 1.1 Core Component Architecture -->## 1.1 Core Component Architecture
+## 1.1 Core Component Architecture
 
 ```mermaid
 graph TB
@@ -142,7 +142,7 @@ graph TB
     AC --> AD
 ```
 
-#<!-- chunk: 1.2 Enterprise Test Suite Architecture -->## 1.2 Enterprise Test Suite Architecture
+## 1.2 Enterprise Test Suite Architecture
 
 ```yaml
 cypress_enterprise_suite:
@@ -257,7 +257,7 @@ cypress_enterprise_suite:
 
 <!-- chunk: 2. Advanced Test Automation Framework -->## 2. Advanced Test Automation Framework
 
-#<!-- chunk: 2.1 Page Object Model Implementation -->## 2.1 Page Object Model Implementation
+## 2.1 Page Object Model Implementation
 
 ```javascript
 // Page Objects for Enterprise Application
@@ -463,7 +463,7 @@ module.exports = {
 };
 ```
 
-#<!-- chunk: 2.2 Custom Commands and Utilities -->## 2.2 Custom Commands and Utilities
+## 2.2 Custom Commands and Utilities
 
 ```javascript
 // cypress/support/commands.js
@@ -578,7 +578,7 @@ Cypress.Commands.add('assertUrlContains', (expectedPath) => {
 
 <!-- chunk: 3. Test Data Management -->## 3. Test Data Management
 
-#<!-- chunk: 3.1 Dynamic Test Data Generation -->## 3.1 Dynamic Test Data Generation
+## 3.1 Dynamic Test Data Generation
 
 ```javascript
 // cypress/support/test-data.js
@@ -770,7 +770,7 @@ module.exports = {
 };
 ```
 
-#<!-- chunk: 3.2 API Mocking and Stubbing -->## 3.2 API Mocking and Stubbing
+## 3.2 API Mocking and Stubbing
 
 ```javascript
 // cypress/plugins/api-mocking.js
@@ -854,7 +854,7 @@ module.exports = (on, config) => {
 
 <!-- chunk: 4. Parallel Testing and CI/CD Integration -->## 4. Parallel Testing and CI/CD Integration
 
-#<!-- chunk: 4.1 Parallel Test Execution Configuration -->## 4.1 Parallel Test Execution Configuration
+## 4.1 Parallel Test Execution Configuration
 
 ```javascript
 // cypress.config.js - Parallel Execution Setup
@@ -920,7 +920,7 @@ module.exports = defineConfig({
 });
 ```
 
-#<!-- chunk: 4.2 GitHub Actions CI/CD Pipeline -->## 4.2 GitHub Actions CI/CD Pipeline
+## 4.2 GitHub Actions CI/CD Pipeline
 
 ```yaml
 # .github/workflows/cypress-tests.yml
@@ -1004,7 +1004,7 @@ jobs:
 
 <!-- chunk: 5. Advanced Testing Patterns -->## 5. Advanced Testing Patterns
 
-#<!-- chunk: 5.1 Component Testing with Cypress -->## 5.1 Component Testing with Cypress
+## 5.1 Component Testing with Cypress
 
 ```javascript
 // Component Testing Examples
@@ -1091,7 +1091,7 @@ describe('Form Component', () => {
 });
 ```
 
-#<!-- chunk: 5.2 Visual Regression Testing -->## 5.2 Visual Regression Testing
+## 5.2 Visual Regression Testing
 
 ```javascript
 // Visual Regression Testing with Percy
@@ -1154,7 +1154,7 @@ describe('Visual Regression Tests', () => {
 
 <!-- chunk: 6. Performance and Load Testing -->## 6. Performance and Load Testing
 
-#<!-- chunk: 6.1 Performance Testing Integration -->## 6.1 Performance Testing Integration
+## 6.1 Performance Testing Integration
 
 ```javascript
 // Performance Testing with Cypress
@@ -1240,7 +1240,7 @@ module.exports = (on, config) => {
 };
 ```
 
-#<!-- chunk: 6.2 Accessibility Testing -->## 6.2 Accessibility Testing
+## 6.2 Accessibility Testing
 
 ```javascript
 // Accessibility Testing with axe-core
@@ -1298,7 +1298,7 @@ describe('Accessibility Tests', () => {
 
 <!-- chunk: 7. Test Reporting and Analytics -->## 7. Test Reporting and Analytics
 
-#<!-- chunk: 7.1 Custom Reporting Dashboard -->## 7.1 Custom Reporting Dashboard
+## 7.1 Custom Reporting Dashboard
 
 ```javascript
 // cypress/plugins/reporting.js
@@ -1460,7 +1460,7 @@ module.exports = (on, config) => {
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-29-automated-testing-quality KUDIG Database — Global MOC
-- [[domain-08-release-change-management/README|Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
+- [[domain-08-release-change-management/README.md|Domain 08: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
 - Domain-29 自动化测试与质量 — 开源项目索引
 - Selenium 企业级自动化测试平台
 - JUnit 5 企业级单元测试框架深度实践

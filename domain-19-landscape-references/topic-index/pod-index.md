@@ -52,17 +52,17 @@ created: "2026-05-23"
 
 ### 故障排查
 
-- [[domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis|[[Pod Pending 状态深度诊断|Pod Pending 状态深度诊断]] (Pod Pending Diagnosis)]]
+- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/05-pod-pending-diagnosis.md|[[Pod Pending 状态深度诊断|Pod Pending 状态深度诊断]] (Pod Pending Diagnosis)]]
 - troubleshooting|Pod 全面故障排查 (Pod Comprehensive Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting|[[Pod 故障排查与运行机制深度指南|Pod 故障排查与运行机制深度指南]]]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|[[Pod 故障排查与运行机制深度指南|Pod 故障排查与运行机制深度指南]]]]
 
 ### FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta|Pod 异常 FTA 树]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|Pod 异常 FTA 树]]
 
 ### 技能卡片
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/03-pod-pending|[[Pod Pending 调度失败诊断与修复|Pod Pending 调度失败诊断与修复]]]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/03-pod-pending.md|[[Pod Pending 调度失败诊断与修复|Pod Pending 调度失败诊断与修复]]]]
 
 ### YAML 配置
 
@@ -82,36 +82,36 @@ created: "2026-05-23"
 
 ### 工作负载
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|Deployment 故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting|StatefulSet 故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting|DaemonSet 故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting|Job 与 CronJob 故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting|[[ConfigMap 与 Secret 故障排查指南|ConfigMap 与 Secret 故障排查指南]]]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md|Deployment 故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|StatefulSet 故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting.md|DaemonSet 故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting.md|Job 与 CronJob 故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting.md|[[ConfigMap 与 Secret 故障排查指南|ConfigMap 与 Secret 故障排查指南]]]]
 
 ### 控制平面
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting|kubelet 故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting|容器运行时故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting|Scheduler 故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|kubelet 故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md|容器运行时故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|Scheduler 故障排查指南]]
 
 ### 网络
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting|CNI 网络插件故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting|[[Service 与 Ingress 故障排查指南|Service 与 Ingress 故障排查指南]]]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|[[Service 与 Ingress 故障排查指南|Service 与 Ingress 故障排查指南]]]]
 
 ### 存储
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting|PV/PVC 存储深度排查与持久化治理指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
 
 ### 安全
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting|[[Pod 安全与 SecurityContext 故障排查指南|Pod 安全与 SecurityContext 故障排查指南]]]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting|RBAC 与认证故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting.md|[[Pod 安全与 SecurityContext 故障排查指南|Pod 安全与 SecurityContext 故障排查指南]]]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
 
 ### 调度资源
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/02-autoscaling-troubleshooting|HPA 与 VPA 自动扩缩容故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/04-pdb-troubleshooting|[[PodDisruptionBudget (PDB) 故障排查指南|PodDisruptionBudget (PDB) 故障排查指南]]]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/02-autoscaling-troubleshooting.md|HPA 与 VPA 自动扩缩容故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/04-pdb-troubleshooting.md|[[PodDisruptionBudget (PDB) 故障排查指南|PodDisruptionBudget (PDB) 故障排查指南]]]]
 
 ---
 
@@ -121,13 +121,13 @@ created: "2026-05-23"
 
 ### 节点相关
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting|节点问题专项排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting|GPU 与设备插件故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting.md|节点问题专项排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
 
 ### 术语词典
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/pods|Pods]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/pod-lifecycle|Pod Lifecycle]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/managing-workloads|Managing Workloads]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/[[sidecar-containers]]|Sidecar Containers]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/vertical-pod-autoscaling|[[Vertical Pod Autoscaling|Vertical Pod Autoscaling]]]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/pods.md|Pods]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/pod-lifecycle.md|Pod Lifecycle]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/managing-workloads.md|Managing Workloads]]
+- domain-17-system-foundation/topic-dictionary/workloads/[[sidecar-containers|Sidecar Containers]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/vertical-pod-autoscaling.md|[[Vertical Pod Autoscaling|Vertical Pod Autoscaling]]]]

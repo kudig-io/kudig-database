@@ -180,7 +180,7 @@ flowchart TB
 
 <!-- chunk: 二、支付核心架构 -->## 二、支付核心架构
 
-#<!-- chunk: 支付链路时序 -->## 支付链路时序
+## 支付链路时序
 
 ```mermaid
 sequenceDiagram
@@ -218,7 +218,7 @@ sequenceDiagram
     end
 ```
 
-#<!-- chunk: 支付状态机 -->## 支付状态机
+## 支付状态机
 
 ```mermaid
 stateDiagram-v2
@@ -279,7 +279,7 @@ flowchart TB
     style BookLayer fill:#e8f5e9
 ```
 
-#<!-- chunk: 复式记账示例 -->## 复式记账示例
+## 复式记账示例
 
 ```yaml
 # 支付 100 元购买商品
@@ -346,7 +346,7 @@ flowchart TB
     style ActionLayer fill:#fff8e1
 ```
 
-#<!-- chunk: 实时风控流水线 -->## 实时风控流水线
+## 实时风控流水线
 
 ```yaml
 apiVersion: flink.apache.org/v1beta1
@@ -451,7 +451,7 @@ flowchart TB
     style KeyTypes fill:#fff8e1
 ```
 
-#<!-- chunk: Vault 集成配置 -->## Vault 集成配置
+## Vault 集成配置
 
 ```yaml
 apiVersion: secrets-store.csi.x-k8s.io/v1
@@ -546,7 +546,7 @@ flowchart TB
 
 <!-- chunk: 八、K8s 安全部署架构 -->## 八、K8s 安全部署架构
 
-#<!-- chunk: 金融级安全 Namespace 设计 -->## 金融级安全 Namespace 设计
+## 金融级安全 Namespace 设计
 
 ```mermaid
 flowchart TB
@@ -577,7 +577,7 @@ flowchart TB
     style DMZ fill:#fff8e1
 ```
 
-#<!-- chunk: 金融核心服务部署 -->## 金融核心服务部署
+## 金融核心服务部署
 
 ```yaml
 apiVersion: apps/v1
@@ -731,7 +731,7 @@ spec:
 
 <!-- chunk: 多云部署方案对照 -->## 多云部署方案对照
 
-#<!-- chunk: 阿里云服务 → 多云映射表 -->## 阿里云服务 → 多云映射表
+## 阿里云服务 → 多云映射表
 
 | 能力域 | 阿里云服务 | AWS 对应 | GCP 对应 | Azure 对应 |
 |:---|:---|:---|:---|:---|
@@ -750,7 +750,7 @@ spec:
 | 容器镜像 | **ACR** | **ECR** | **Artifact Registry** | **ACR (Azure)** |
 | 可观测性 | **ARMS / SLS** | **CloudWatch / X-Ray** | **Cloud Ops Suite** | **Monitor / App Insights** |
 
-#<!-- chunk: 多云部署注意事项 -->## 多云部署注意事项
+## 多云部署注意事项
 
 1. **HSM 与密钥管理**: 金融级 HSM 不支持跨云直接同步。若多云部署，需在每朵云独立部署 HSM，并通过应用层实现密钥轮转同步，或使用 HashiCorp Vault Enterprise 的跨域复制功能。
 2. **PCI-DSS 合规边界**: PCI-DSS 要求明确安全边界。多云部署时每朵云都需独立通过 PCI-DSS 评估（或使用 QSA 联合审计），避免合规范围蔓延。
@@ -759,7 +759,7 @@ spec:
 5. **监管报送**: 不同云的日志格式和审计链不同，需统一审计日志格式（如 JSON Schema），确保监管报送数据一致。
 6. **灾备切换**: 金融灾备 RTO 通常要求 <15 分钟。多云灾备需测试实际切换时间，包括 DNS 切换、数据库主从切换、HSM 密钥恢复。
 
-#<!-- chunk: 云中立方案（开源替代） -->## 云中立方案（开源替代）
+## 云中立方案（开源替代）
 
 | 能力域 | 开源方案 | 说明 |
 |:---|:---|:---|
@@ -781,17 +781,17 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture|智慧零售与新零售Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture.md|智慧零售与新零售Kubernetes生产架构设计]]
 
 ## See Also
 

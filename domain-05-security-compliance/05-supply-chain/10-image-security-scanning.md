@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 本文深入探讨镜像安全扫描的完整技术栈，包括 [[Trivy|Trivy]] 和 Grype 漏洞扫描工具、SBOM（软件物料清单）生成与管理、Cosign 镜像签名验证，以及基于准入控制器的自动安全门禁，帮助企业在 CI/CD 管道和 [[Kubernetes|Kubernetes]] 集群中构建端到端的镜像安全防护体系。
 
-#<!-- chunk: 威胁模型分析 -->## 威胁模型分析
+## 威胁模型分析
 
 **已知漏洞利用**：基础镜像和依赖包中的已知 CVE 是最常见的攻击面。攻击者利用公开披露的漏洞实现远程代码执行、权限提升或数据泄露。镜像扫描通过比对 CVE 数据库识别已知漏洞，并根据严重程度提供修复建议。
 
@@ -80,7 +80,7 @@ created: "2026-05-23"
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 镜像安全全生命周期架构 -->## 镜像安全全生命周期架构
+## 镜像安全全生命周期架构
 
 ```mermaid
 graph LR
@@ -111,7 +111,7 @@ graph LR
     end
 ```
 
-#<!-- chunk: 技术栈总览 -->## 技术栈总览
+## 技术栈总览
 
 ```yaml
 image_security_stack:
@@ -145,7 +145,7 @@ image_security_stack:
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: Trivy 全面扫描配置 -->## Trivy 全面扫描配置
+## Trivy 全面扫描配置
 
 Trivy 是目前最流行的开源容器漏洞扫描工具，支持漏洞检测、配置审计、密钥扫描和 SBOM 生成等多种功能。以下配置展示了 Trivy 在生产环境中的完整使用方式：
 
@@ -224,7 +224,7 @@ CVE-2023-XXXXX
 CVE-2024-XXXXX
 ```
 
-#<!-- chunk: Trivy Operator (Kubernetes 集成) -->## Trivy Operator (Kubernetes 集成)
+## Trivy Operator (Kubernetes 集成)
 
 Trivy Operator 以 Kubernetes Operator 形式运行，自动扫描集群中的镜像并生成 VulnerabilityReport 和 ConfigAuditReport 资源：
 
@@ -269,6 +269,9 @@ serviceMonitor:
   interval: 30s
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 安装 Trivy Operator
 helm repo add aqua https://aquasecurity.github.io/helm-charts
@@ -292,7 +295,7 @@ kubectl get vulnerabilityreport \
 kubectl get compliance.report -o yaml
 ```
 
-#<!-- chunk: Grype 扫描配置 -->## Grype 扫描配置
+## Grype 扫描配置
 
 Grype 是 Anchore 公司开发的漏洞扫描工具，以 SBOM 为驱动进行漏洞匹配，与 Syft SBOM 生成工具配合使用：
 
@@ -329,7 +332,7 @@ CVE-2023-XXXXX
 CVE-2024-XXXXX
 ```
 
-#<!-- chunk: SBOM 生成与管理 -->## SBOM 生成与管理
+## SBOM 生成与管理
 
 SBOM（Software Bill of Materials）是软件组成成分的完整清单，记录了镜像中包含的所有软件包、版本和依赖关系。SBOM 对于漏洞管理、许可证合规和供应链安全至关重要：
 
@@ -397,7 +400,7 @@ spec:
 
 <!-- chunk: 安全策略实战 -->## 安全策略实战
 
-#<!-- chunk: Cosign 镜像签名与验证 -->## Cosign 镜像签名与验证
+## Cosign 镜像签名与验证
 
 Cosign 是 Sigstore 项目提供的容器镜像签名工具，支持密钥对签名和 Keyless 签名（基于 OIDC 身份和 Rekor 透明日志），实现镜像来源验证和完整性保护：
 
@@ -456,7 +459,7 @@ cosign tree "$IMAGE"
 cosign copy "$IMAGE" "harbor.company.com/myapp:v1.2.3"
 ```
 
-#<!-- chunk: CI/CD 管道集成 -->## CI/CD 管道集成
+## CI/CD 管道集成
 
 ```yaml
 # .github/workflows/image-security.yml
@@ -546,7 +549,7 @@ jobs:
           sarif_file: 'trivy-results.sarif'
 ```
 
-#<!-- chunk: Kubernetes 准入控制 -->## Kubernetes 准入控制
+## Kubernetes 准入控制
 
 基于签名验证的准入控制确保只有经过签名和验证的镜像才能部署到集群中。以下展示使用 Kyverno 和 Trivy Operator 实现的安全门禁：
 
@@ -631,7 +634,7 @@ spec:
 
 <!-- chunk: 合规与审计 -->## 合规与审计
 
-#<!-- chunk: 许可证合规扫描 -->## 许可证合规扫描
+## 许可证合规扫描
 
 ```bash
 # Trivy 许可证扫描
@@ -644,7 +647,7 @@ syft "$IMAGE" -o cyclonedx-json | jq '.components[] | {name, version, licenses}'
 grype "$IMAGE" --only-fixed --severity critical
 ```
 
-#<!-- chunk: 合规报告自动化 -->## 合规报告自动化
+## 合规报告自动化
 
 ```bash
 #!/bin/bash
@@ -687,7 +690,7 @@ kubectl get pods --all-namespaces -o json | \
 
 <!-- chunk: 监控与告警 -->## 监控与告警
 
-#<!-- chunk: Trivy Operator [[Prometheus|Prometheus]] 指标 -->## Trivy Operator Prometheus 指标
+## Trivy Operator Prometheus 指标
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -740,7 +743,7 @@ spec:
             description: "镜像 {{ $labels.image }} 已超过 90 天未更新"
 ```
 
-#<!-- chunk: Grafana Dashboard -->## Grafana Dashboard
+## Grafana Dashboard
 
 ```json
 {
@@ -802,7 +805,7 @@ spec:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 镜像安全基线 -->## 镜像安全基线
+## 镜像安全基线
 
 **选择最小化基础镜像**：使用 distroless 或 Alpine 等最小化基础镜像，减少攻击面。Distroless 镜像不包含 shell 和包管理器，显著降低漏洞风险。
 
@@ -814,7 +817,7 @@ spec:
 
 **定期重建镜像**：即使应用代码没有变化，也应定期重建镜像以获取基础镜像的安全更新。建议至少每周重建一次。
 
-#<!-- chunk: 扫描策略分级 -->## 扫描策略分级
+## 扫描策略分级
 
 ```yaml
 # 扫描策略分级配置
@@ -852,13 +855,13 @@ scan_policy:
       - disallowed_tags
 ```
 
-#<!-- chunk: SBOM 管理最佳实践 -->## SBOM 管理最佳实践
+## SBOM 管理最佳实践
 
 SBOM 应作为镜像构建流程的标准产出物，与镜像一同存储在 OCI 兼容的 Registry 中。通过 Cosign 将 SBOM 附加到镜像，并使用签名确保 SBOM 完整性。定期检查 SBOM 中组件的漏洞状态，当新 CVE 发布时快速定位受影响的镜像版本。
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题 -->## 常见问题
+## 常见问题
 
 **扫描超时**：大型镜像或网络不稳定可能导致扫描超时。增大 Trivy 的超时参数 `--timeout 10m`，使用 Trivy Server 模式共享漏洞数据库减少下载时间。
 
@@ -912,8 +915,8 @@ kubectl get pods --all-namespaces -o json | \
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
@@ -931,4 +934,4 @@ kubectl get pods --all-namespaces -o json | \
 - 11-kubernetes-security-hardening
 - 17-gvisor-container-sandbox
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

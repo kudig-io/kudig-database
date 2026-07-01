@@ -91,13 +91,17 @@ mysql -e "SHOW ENGINE INNODB STATUS\G"
 # → 长事务需尽早提交
 ```
 
-### 1.4 MySQL Operator 问题 ([[entities/kubernetes|k8s]])
+### 1.4 MySQL Operator 问题 ([[entities/kubernetes.md|k8s]])
 
 | 症状 | 诊断命令 | 根因 | 修复 |
 |------|---------|------|------|
 | MySQL Pod 无法启动 | `kubectl describe pod -n mysql` | 配置文件错误/资源不足 | 检查 PVC、资源限制 |
 | 主从切换失败 | `kubectl logs <pod> -n mysql` | Patroni/etcd 连接问题 | 检查 etcd 状态 |
 | 数据不一致 | - | 主从复制中断未修复 | 重新同步数据或重建从库 |
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # Percona Operator 检查
@@ -346,6 +350,9 @@ psql -h <host> -U postgres -d db_name < /backup/db.sql
 ```
 
 ### 4.3 Redis 备份恢复
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # RDB 备份

@@ -78,7 +78,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 成熟度模型概述 -->## 1. 成熟度模型概述
 
-#<!-- chunk: 1.1 模型设计理念 -->## 1.1 模型设计理念
+## 1.1 模型设计理念
 
 供应链安全成熟度模型（Supply Chain Security Maturity Model, SCSM）参考了 CMMI（能力成熟度模型集成）和 BSIMM（软件安全构建成熟度模型）的设计思想，专注于软件供应链安全领域。
 
@@ -97,7 +97,7 @@ created: "2026-05-23"
 5. 适应性   - 适用于不同规模和行业的组织
 ```
 
-#<!-- chunk: 1.2 成熟度模型总览 -->## 1.2 成熟度模型总览
+## 1.2 成熟度模型总览
 
 ```mermaid
 graph TB
@@ -118,7 +118,7 @@ graph TB
     style L5 fill:#54a0ff,color:#fff
 ```
 
-#<!-- chunk: 1.3 与主要框架的关系 -->## 1.3 与主要框架的关系
+## 1.3 与主要框架的关系
 
 | 成熟度级别 | SLSA 对应 | NIST CSF | OpenSSF Scorecard | BSIMM |
 |-----------|----------|----------|-------------------|-------|
@@ -132,7 +132,7 @@ graph TB
 
 <!-- chunk: 2. SCSM 成熟度级别 L1-L5 -->## 2. SCSM 成熟度级别 L1-L5
 
-#<!-- chunk: 2.1 Level 1 - 初始级 (Initial) -->## 2.1 Level 1 - 初始级 (Initial)
+## 2.1 Level 1 - 初始级 (Initial)
 
 **特征描述：** 供应链安全实践是临时的、被动的，缺乏系统化管理。
 
@@ -179,7 +179,7 @@ L1 评估问题集:
     Q9: "您是否订阅了 CVE 通知？"
 ```
 
-#<!-- chunk: 2.2 Level 2 - 已管理级 (Managed) -->## 2.2 Level 2 - 已管理级 (Managed)
+## 2.2 Level 2 - 已管理级 (Managed)
 
 **特征描述：** 基本的供应链安全实践已建立，以项目为单位执行，但不一致。
 
@@ -279,7 +279,7 @@ jobs:
 EOF
 ```
 
-#<!-- chunk: 2.3 Level 3 - 已定义级 (Defined) -->## 2.3 Level 3 - 已定义级 (Defined)
+## 2.3 Level 3 - 已定义级 (Defined)
 
 **特征描述：** 供应链安全实践标准化，在整个组织推广，有明确的流程文档和培训。
 
@@ -342,7 +342,7 @@ graph TD
     CVSS < 4.0 (Low): 月度批量处理
 ```
 
-#<!-- chunk: 2.4 Level 4 - 量化管理级 (Quantitatively Managed) -->## 2.4 Level 4 - 量化管理级 (Quantitatively Managed)
+## 2.4 Level 4 - 量化管理级 (Quantitatively Managed)
 
 **特征描述：** 使用度量指标量化管理供应链安全，数据驱动决策，可预测风险。
 
@@ -500,7 +500,7 @@ data:
     }
 ```
 
-#<!-- chunk: 2.5 Level 5 - 优化级 (Optimizing) -->## 2.5 Level 5 - 优化级 (Optimizing)
+## 2.5 Level 5 - 优化级 (Optimizing)
 
 **特征描述：** 持续改进，行业领先，预测性安全，供应链安全已完全融入企业文化。
 
@@ -537,7 +537,7 @@ Level 5 核心特征:
 
 <!-- chunk: 3. 评估框架与方法论 -->## 3. 评估框架与方法论
 
-#<!-- chunk: 3.1 评估维度框架 -->## 3.1 评估维度框架
+## 3.1 评估维度框架
 
 ```mermaid
 graph TB
@@ -567,21 +567,21 @@ graph TB
     D4 --> D4d[改进执行]
 ```
 
-#<!-- chunk: 3.2 评估问卷 -->## 3.2 评估问卷
+## 3.2 评估问卷
 
 ```markdown
 <!-- chunk: 供应链安全成熟度评估问卷 v2.0 -->## 供应链安全成熟度评估问卷 v2.0
 
-#<!-- chunk: 维度 A: 依赖管理 (Dependency Management) -->## 维度 A: 依赖管理 (Dependency Management)
+## 维度 A: 依赖管理 (Dependency Management)
 
-##<!-- chunk: A1. 依赖清单与追踪 -->## A1. 依赖清单与追踪
+## A1. 依赖清单与追踪
 | 问题 | L1 | L2 | L3 | L4 | L5 |
 |-----|----|----|----|----|-----|
 | 是否有所有依赖的完整清单？ | 无 | 部分 | 完整手动 | 自动维护 | AI辅助预测 |
 | 依赖清单更新频率？ | 从不 | 手动 | 每次发布 | 实时更新 | 预测性更新 |
 | 传递依赖是否追踪？ | 否 | 部分 | 是 | 完整图谱 | 动态分析 |
 
-##<!-- chunk: A2. 版本管理 -->## A2. 版本管理
+## A2. 版本管理
 | 实践 | 评分 (1-5) | 证据 |
 |-----|-----------|------|
 | 使用依赖锁定文件 | ___ | ___ |
@@ -589,7 +589,7 @@ graph TB
 | 有版本升级策略 | ___ | ___ |
 | 自动化版本更新工具 | ___ | ___ |
 
-##<!-- chunk: A3. 漏洞管理 -->## A3. 漏洞管理
+## A3. 漏洞管理
 | 实践 | 是/否 | 工具 | SLA |
 |-----|------|------|-----|
 | 持续漏洞扫描 | ___ | ___ | ___ |
@@ -597,16 +597,16 @@ graph TB
 | 自动化修复流程 | ___ | ___ | ___ |
 | 例外管理流程 | ___ | ___ | ___ |
 
-#<!-- chunk: 维度 B: 构建安全 (Build Security) -->## 维度 B: 构建安全 (Build Security)
+## 维度 B: 构建安全 (Build Security)
 
-##<!-- chunk: B1. 构建环境 -->## B1. 构建环境
+## B1. 构建环境
 - [ ] L1: 开发者本地构建，无隔离
 - [ ] L2: 使用共享 CI/CD 系统，无隔离
 - [ ] L3: 使用托管构建服务，有基本隔离
 - [ ] L4: 短暂隔离构建环境，不可变基础设施
 - [ ] L5: 完全密封构建，可重现，有出处
 
-##<!-- chunk: B2. 构建出处 -->## B2. 构建出处
+## B2. 构建出处
 | 要素 | 已实施 | 覆盖率 |
 |-----|-------|-------|
 | 构建参数记录 | ___ | ___% |
@@ -617,9 +617,9 @@ graph TB
 | 签名出处 | ___ | ___% |
 | SLSA 出处格式 | ___ | ___% |
 
-#<!-- chunk: 维度 C: 制品安全 (Artifact Security) -->## 维度 C: 制品安全 (Artifact Security)
+## 维度 C: 制品安全 (Artifact Security)
 
-##<!-- chunk: C1. SBOM 实践 -->## C1. SBOM 实践
+## C1. SBOM 实践
 | 指标 | 当前状态 | 目标 |
 |-----|---------|-----|
 | SBOM 生成覆盖率 | ___% | 100% |
@@ -627,7 +627,7 @@ graph TB
 | SBOM 存储位置 | ___ | 集中管理 |
 | SBOM 与制品关联 | ___ | 自动关联 |
 
-##<!-- chunk: C2. 签名与验证 -->## C2. 签名与验证
+## C2. 签名与验证
 | 实践 | 实施状态 |
 |-----|---------|
 | 容器镜像签名 | ___ |
@@ -636,9 +636,9 @@ graph TB
 | 签名验证策略 | ___ |
 | 透明日志记录 | ___ |
 
-#<!-- chunk: 维度 D: 运行时安全 (Runtime Security) -->## 维度 D: 运行时安全 (Runtime Security)
+## 维度 D: 运行时安全 (Runtime Security)
 
-##<!-- chunk: D1. 准入控制 -->## D1. 准入控制
+## D1. 准入控制
 | 控制 | 实施状态 | 强制程度 |
 |-----|---------|---------|
 | 镜像签名验证 | ___ | 审计/强制 |
@@ -646,7 +646,7 @@ graph TB
 | 已知漏洞阻断 | ___ | 阈值 |
 | 受信任仓库限制 | ___ | 白名单 |
 
-#<!-- chunk: 评分计算 -->## 评分计算
+## 评分计算
 
 总分计算公式:
 Score = (Dependency × 0.25) + (Build × 0.25) + 
@@ -660,7 +660,7 @@ Score = (Dependency × 0.25) + (Build × 0.25) +
 - 5.0:       Level 5 (优化)
 ```
 
-#<!-- chunk: 3.3 差距分析工具 -->## 3.3 差距分析工具
+## 3.3 差距分析工具
 
 ```python
 #!/usr/bin/env python3
@@ -774,7 +774,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 4. 能力域详细评估 -->## 4. 能力域详细评估
 
-#<!-- chunk: 4.1 源代码安全能力域 -->## 4.1 源代码安全能力域
+## 4.1 源代码安全能力域
 
 ```
 源代码安全成熟度矩阵:
@@ -799,7 +799,7 @@ if __name__ == "__main__":
 └─────────────────────┴────────┴────────┴────────┴────────┴────────┘
 ```
 
-#<!-- chunk: 4.2 依赖管理能力域详细评估 -->## 4.2 依赖管理能力域详细评估
+## 4.2 依赖管理能力域详细评估
 
 ```yaml
 # 依赖管理成熟度评估框架
@@ -869,7 +869,7 @@ L5_特征:
     - 贡献上游修复
 ```
 
-#<!-- chunk: 4.3 CI/CD 安全能力域 -->## 4.3 CI/CD 安全能力域
+## 4.3 CI/CD 安全能力域
 
 ```mermaid
 graph TD
@@ -1020,7 +1020,7 @@ jobs:
 
 <!-- chunk: 5. 改进路线图 -->## 5. 改进路线图
 
-#<!-- chunk: 5.1 从 L1 到 L2 的路线图 -->## 5.1 从 L1 到 L2 的路线图
+## 5.1 从 L1 到 L2 的路线图
 
 ```
 L1 → L2 改进路线图 (目标: 3个月)
@@ -1059,7 +1059,7 @@ Week 11-12: 验证和调整
   ✅ 培训开发团队
 ```
 
-#<!-- chunk: 5.2 从 L2 到 L3 的路线图 -->## 5.2 从 L2 到 L3 的路线图
+## 5.2 从 L2 到 L3 的路线图
 
 ```yaml
 # L2 → L3 改进路线图
@@ -1119,7 +1119,7 @@ Week 11-12: 验证和调整
     - SLSA L2 全覆盖
 ```
 
-#<!-- chunk: 5.3 技术债务清理路径 -->## 5.3 技术债务清理路径
+## 5.3 技术债务清理路径
 
 ```bash
 #!/bin/bash
@@ -1194,7 +1194,7 @@ echo "--- 技术债务摘要报告已生成 ---"
 
 <!-- chunk: 6. 合规性映射 -->## 6. 合规性映射
 
-#<!-- chunk: 6.1 SOC 2 Type II 映射 -->## 6.1 SOC 2 Type II 映射
+## 6.1 SOC 2 Type II 映射
 
 ```
 SCSM 与 SOC 2 Type II 控制映射:
@@ -1220,7 +1220,7 @@ SOC 2 A1.2 - 可用性保证
 └── SCSM L4: SLA 量化管理
 ```
 
-#<!-- chunk: 6.2 PCI-DSS v4.0 映射 -->## 6.2 PCI-DSS v4.0 映射
+## 6.2 PCI-DSS v4.0 映射
 
 ```yaml
 PCI-DSS_v4.0_映射:
@@ -1255,7 +1255,7 @@ PCI-DSS_v4.0_映射:
         - 包含所有组件和许可证信息
 ```
 
-#<!-- chunk: 6.3 FedRAMP 映射 -->## 6.3 FedRAMP 映射
+## 6.3 FedRAMP 映射
 
 ```
 FedRAMP 中/高基线供应链相关控制:
@@ -1284,7 +1284,7 @@ SR-1 到 SR-11 供应链风险管理新族:
     SCSM L3 → 制品签名和验证
 ```
 
-#<!-- chunk: 6.4 合规矩阵总览 -->## 6.4 合规矩阵总览
+## 6.4 合规矩阵总览
 
 ```
 合规性覆盖矩阵:
@@ -1309,7 +1309,7 @@ EO 14028 SBOM      |    |    | ✓  | ✓✓ | ✓✓✓
 
 <!-- chunk: 7. 组织能力建设 -->## 7. 组织能力建设
 
-#<!-- chunk: 7.1 团队结构与职责 -->## 7.1 团队结构与职责
+## 7.1 团队结构与职责
 
 ```
 供应链安全组织结构:
@@ -1343,7 +1343,7 @@ L5 阶段 (安全嵌入文化):
       └── 开源社区贡献
 ```
 
-#<!-- chunk: 7.2 培训计划 -->## 7.2 培训计划
+## 7.2 培训计划
 
 ```yaml
 # 供应链安全培训计划
@@ -1386,7 +1386,7 @@ L5 阶段 (安全嵌入文化):
   - 开源项目贡献
 ```
 
-#<!-- chunk: 7.3 变更管理策略 -->## 7.3 变更管理策略
+## 7.3 变更管理策略
 
 ```mermaid
 graph TD
@@ -1413,7 +1413,7 @@ graph TD
 
 <!-- chunk: 8. 度量与 KPI -->## 8. 度量与 KPI
 
-#<!-- chunk: 8.1 核心 KPI 体系 -->## 8.1 核心 KPI 体系
+## 8.1 核心 KPI 体系
 
 ```python
 # 供应链安全 KPI 定义和计算
@@ -1519,7 +1519,7 @@ SUPPLY_CHAIN_KPIS = {
 }
 ```
 
-#<!-- chunk: 8.2 KPI 仪表盘 -->## 8.2 KPI 仪表盘
+## 8.2 KPI 仪表盘
 
 ```yaml
 # Prometheus 指标定义（供供应链安全监控）
@@ -1568,7 +1568,7 @@ metrics:
 
 <!-- chunk: 9. 技术实施指南 -->## 9. 技术实施指南
 
-#<!-- chunk: 9.1 L2 快速启动包 -->## 9.1 L2 快速启动包
+## 9.1 L2 快速启动包
 
 ```bash
 #!/bin/bash
@@ -1675,7 +1675,7 @@ echo "3. 审查并修复发现的漏洞"
 echo "4. 在 GitHub 仓库设置中启用分支保护"
 ```
 
-#<!-- chunk: 9.2 L3 实施检查清单 -->## 9.2 L3 实施检查清单
+## 9.2 L3 实施检查清单
 
 ```yaml
 # L3 实施检查清单 (操作手册)
@@ -1784,7 +1784,7 @@ phase_3_policy_as_code:
 
 <!-- chunk: 10. 行业最佳实践案例 -->## 10. 行业最佳实践案例
 
-#<!-- chunk: 10.1 Google 的供应链安全实践 -->## 10.1 Google 的供应链安全实践
+## 10.1 Google 的供应链安全实践
 
 ```
 Google 供应链安全关键实践:
@@ -1805,7 +1805,7 @@ Google 供应链安全关键实践:
    ─ 合规性证明自动化
 ```
 
-#<!-- chunk: 10.2 Sigstore 社区实践 -->## 10.2 Sigstore 社区实践
+## 10.2 Sigstore 社区实践
 
 ```bash
 # Sigstore 在 Kubernetes 项目的实际应用
@@ -1830,7 +1830,7 @@ cosign verify-blob kubectl \
   --certificate-identity krel-staging@k8s-releng-prod.iam.gserviceaccount.com
 ```
 
-#<!-- chunk: 10.3 金融行业实践案例 -->## 10.3 金融行业实践案例
+## 10.3 金融行业实践案例
 
 ```yaml
 # 金融行业供应链安全要求（基于 PCI-DSS 合规）
@@ -1883,7 +1883,7 @@ cosign verify-blob kubectl \
 
 <!-- chunk: 11. 持续改进机制 -->## 11. 持续改进机制
 
-#<!-- chunk: 11.1 PDCA 改进循环 -->## 11.1 PDCA 改进循环
+## 11.1 PDCA 改进循环
 
 ```mermaid
 graph TD
@@ -1903,7 +1903,7 @@ graph TD
     E1 & E2 & E3 & E4 & E5 --> P
 ```
 
-#<!-- chunk: 11.2 年度评审流程 -->## 11.2 年度评审流程
+## 11.2 年度评审流程
 
 ```yaml
 # 年度供应链安全评审流程
@@ -1953,7 +1953,7 @@ graph TD
 
 <!-- chunk: 12. 成熟度评估工具 -->## 12. 成熟度评估工具
 
-#<!-- chunk: 12.1 自动化评估工具 -->## 12.1 自动化评估工具
+## 12.1 自动化评估工具
 
 ```python
 #!/usr/bin/env python3
@@ -2192,10 +2192,10 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance KUDIG Database — Global MOC
-- [[domain-05-security-compliance/README|[[Domain 39: 供应链安全 (Supply Chain Security)|Domain 39: 供应链安全 (Supply Chain Security)]]]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-39 供应链安全 — 开源项目索引]]
-- [[domain-05-security-compliance/05-supply-chain/01-supply-chain-security-overview]]
-- [[domain-05-security-compliance/05-supply-chain/03-sbom-generation-management]]
+- [[domain-05-security-compliance/README.md|[[Domain 39: 供应链安全 (Supply Chain Security)|Domain 39: 供应链安全 (Supply Chain Security)]]]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
+- [[domain-05-security-compliance/05-supply-chain/01-supply-chain-security-overview.md|01 supply chain security overview]]
+- [[domain-05-security-compliance/05-supply-chain/03-sbom-generation-management.md|03 sbom generation management]]
 - SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance)
 - SLSA 级别与实施 (SLSA Levels and Implementation)
 - GitHub Actions SLSA 构建 (GitHub Actions SLSA Build)
@@ -2211,4 +2211,4 @@ if __name__ == "__main__":
 - 03-sbom-generation-management
 - 04-sbom-vulnerability-analysis
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

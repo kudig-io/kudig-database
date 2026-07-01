@@ -62,7 +62,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. SRE核心理念与原则 -->## 1. SRE核心理念与原则
 
-#<!-- chunk: 1.1 SRE基本原则 -->## 1.1 SRE基本原则
+## 1.1 SRE基本原则
 
 ```yaml
 SRE三大支柱:
@@ -82,7 +82,7 @@ SRE三大支柱:
      - 风险控制策略
 ```
 
-#<!-- chunk: 1.2 SLI/SLO/Error Budget管理 -->## 1.2 SLI/SLO/Error Budget管理
+## 1.2 SLI/SLO/Error Budget管理
 
 ```yaml
 核心SLI指标:
@@ -104,7 +104,7 @@ SRE三大支柱:
 
 <!-- chunk: 2. 监控告警体系建设 -->## 2. 监控告警体系建设
 
-#<!-- chunk: 2.1 黄金指标监控 -->## 2.1 黄金指标监控
+## 2.1 黄金指标监控
 
 ```yaml
 RED方法 (Rate/Errors/Duration):
@@ -140,7 +140,7 @@ USE方法 (Utilization/Saturation/Errors):
     - 应用错误: application_errors
 ```
 
-#<!-- chunk: 2.2 监控系统架构 -->## 2.2 监控系统架构
+## 2.2 监控系统架构
 
 ```yaml
 # 监控系统架构配置
@@ -201,7 +201,7 @@ spec:
   configSecret: alertmanager-config
 ```
 
-#<!-- chunk: 2.3 高级告警规则 -->## 2.3 高级告警规则
+## 2.3 高级告警规则
 
 ```yaml
 # 高级告警规则配置
@@ -298,7 +298,7 @@ spec:
 
 <!-- chunk: 3. 自动化运维系统 -->## 3. 自动化运维系统
 
-#<!-- chunk: 3.1 运维机器人实现 -->## 3.1 运维机器人实现
+## 3.1 运维机器人实现
 
 ```python
 #!/usr/bin/env python3
@@ -663,7 +663,11 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-#<!-- chunk: 3.2 自动化运维脚本 -->## 3.2 自动化运维脚本
+## 3.2 自动化运维脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 #!/bin/bash
@@ -857,7 +861,7 @@ main "$@"
 
 <!-- chunk: 4. 问题响应与恢复 -->## 4. 问题响应与恢复
 
-#<!-- chunk: 4.1 问题响应流程 -->## 4.1 问题响应流程
+## 4.1 问题响应流程
 
 ```yaml
 # 问题响应流程配置
@@ -933,7 +937,7 @@ data:
           - verify_data_consistency
 ```
 
-#<!-- chunk: 4.2 自愈系统配置 -->## 4.2 自愈系统配置
+## 4.2 自愈系统配置
 
 ```yaml
 # 自愈系统配置
@@ -979,7 +983,7 @@ data:
 
 <!-- chunk: 5. 变更管理与发布 -->## 5. 变更管理与发布
 
-#<!-- chunk: 5.1 变更管理流程 -->## 5.1 变更管理流程
+## 5.1 变更管理流程
 
 ```yaml
 # 变更管理配置
@@ -1035,7 +1039,7 @@ data:
         criteria: ["resource_impact_approved", "rollback_plan_verified"]
 ```
 
-#<!-- chunk: 5.2 发布策略配置 -->## 5.2 发布策略配置
+## 5.2 发布策略配置
 
 ```yaml
 # 发布策略配置
@@ -1111,7 +1115,7 @@ spec:
 
 <!-- chunk: 6. 容量规划与性能优化 -->## 6. 容量规划与性能优化
 
-#<!-- chunk: 6.1 容量规划工具 -->## 6.1 容量规划工具
+## 6.1 容量规划工具
 
 ```python
 #!/usr/bin/env python3
@@ -1305,33 +1309,33 @@ if __name__ == "__main__":
 
 <!-- chunk: 7. 最佳实践与实施指南 -->## 7. 最佳实践与实施指南
 
-#<!-- chunk: 7.1 SRE实施原则 -->## 7.1 SRE实施原则
+## 7.1 SRE实施原则
 
 ```markdown
 <!-- chunk: ⚙️ SRE实施原则 -->## ⚙️ SRE实施原则
 
-#<!-- chunk: 1. 可靠性优先 -->## 1. 可靠性优先
+## 1. 可靠性优先
 - 以SLI/SLO为衡量标准
 - 建立错误预算管理机制
 - 平衡新功能开发与系统稳定性
 
-#<!-- chunk: 2. 自动化驱动 -->## 2. 自动化驱动
+## 2. 自动化驱动
 - 用代码管理运维任务
 - 实施无人值守运维
 - 建立自愈能力
 
-#<!-- chunk: 3. 持续改进 -->## 3. 持续改进
+## 3. 持续改进
 - 定期进行事后分析
 - 从问题中学习改进
 - 持续优化系统架构
 
-#<!-- chunk: 4. 文化建设 -->## 4. 文化建设
+## 4. 文化建设
 - 建立学习型组织
 - 鼓励实验和创新
 - 营造无指责文化
 ```
 
-#<!-- chunk: 7.2 实施检查清单 -->## 7.2 实施检查清单
+## 7.2 实施检查清单
 
 ```yaml
 SRE实施检查清单:
@@ -1368,12 +1372,12 @@ SRE实施检查清单:
 
 <!-- chunk: N. SRE实践 2026更新 -->## N. SRE实践 2026更新
 
-#<!-- chunk: N.1 AI辅助事件响应 -->## N.1 AI辅助事件响应
+## N.1 AI辅助事件响应
 - LLM辅助故障排查（结构化Runbook + LLM推理）
 - K8s事件流 → AI分析 → 自动修复建议工作流
 - AI Ops告警聚合与根因分析
 
-#<!-- chunk: N.2 OpenTelemetry集成SRE -->## N.2 OpenTelemetry集成SRE
+## N.2 OpenTelemetry集成SRE
 - SLO基于OTel指标定义
 - Error Budget基于Trace错误率计算
 - Pyrra SLO管理工具集成
@@ -1381,7 +1385,7 @@ SRE实施检查清单:
 
 <!-- chunk: 8. 未来发展趋势 -->## 8. 未来发展趋势
 
-#<!-- chunk: 8.1 智能化运维 -->## 8.1 智能化运维
+## 8.1 智能化运维
 
 ```yaml
 SRE智能化趋势:
@@ -1410,13 +1414,13 @@ SRE智能化趋势:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers KUDIG Database — Global MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - index.md|Domain-19 论文与参考 — 开源项目索引]]
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
 - Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Imp...
 - Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Archit...
-- [[domain-19-landscape-references/02-papers/05-kubernetes-gitops-complete-practice-guide]]
+- [[domain-19-landscape-references/02-papers/05-kubernetes-gitops-complete-practice-guide.md|05 kubernetes gitops complete practice guide]]
 - Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and F...
 - Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface ...
 - Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro...
@@ -1431,4 +1435,4 @@ SRE智能化趋势:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

@@ -103,6 +103,9 @@ k8s_versions:
 
 ### 报错查看方式汇总
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查 API Server 安全配置
 kubectl get pod -n kube-system -l component=kube-apiserver -o jsonpath='{.items[*].spec.containers[*].command}' | jq '.'
@@ -337,6 +340,9 @@ rules:
 
 #### 方案四：禁用匿名认证和不安全配置
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # 安全加固脚本
@@ -550,6 +556,7 @@ LOG_FILE="/var/log/kubernetes/security-check-$(date +%Y%m%d).log"
 #if [ -n "$ALERT_EMAIL" ]; then
 #  mail -s "Kubernetes Security Check Report" "$ALERT_EMAIL" < "$LOG_FILE"
 #fi
+
 ```
 
 ## 🔄 问题案例分析
@@ -592,14 +599,16 @@ LOG_FILE="/var/log/kubernetes/security-check-$(date +%Y%m%d).log"
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git|git]]
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting|05-webhook-admission-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/06-apf-troubleshooting|06-apf-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/08-control-plane-performance-troubleshooting|08-control-plane-performance-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/09-control-plane-ha-troubleshooting|09-control-plane-ha-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/06-apf-troubleshooting.md|06-apf-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/08-control-plane-performance-troubleshooting.md|08-control-plane-performance-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/09-control-plane-ha-troubleshooting.md|09-control-plane-ha-troubleshooting]]
+
+```

@@ -139,7 +139,7 @@ AgentScope 提供三种内置记忆实现，均实现相同的 `Memory` 接口�
 | `AsyncSQLAlchemyMemory` | SQLite/PostgreSQL/MySQL | 是 | 生产环境单机/单数据库 |
 | `RedisMemory` | Redis | 是 | 生产环境分布式、高性能 |
 
-#<!-- chunk: 2.1 InMemoryMemory——基础使用 -->## 2.1 InMemoryMemory——基础使用
+## 2.1 InMemoryMemory——基础使用
 
 ```python
 from agentscope.memory import InMemoryMemory
@@ -161,7 +161,7 @@ messages = await memory.get_memory()
 count = len(messages)
 ```
 
-#<!-- chunk: 2.2 AsyncSQLAlchemyMemory——SQL 持久化 -->## 2.2 AsyncSQLAlchemyMemory——SQL 持久化
+## 2.2 AsyncSQLAlchemyMemory——SQL 持久化
 
 ```python
 from agentscope.memory import AsyncSQLAlchemyMemory
@@ -186,7 +186,7 @@ messages = await memory.get_memory()
 
 > **优势**：进程重启后记忆不丢失；支持连接池；适合 FastAPI 等 Web 服务。
 
-#<!-- chunk: 2.3 RedisMemory——分布式 -->## 2.3 RedisMemory——分布式
+## 2.3 RedisMemory——分布式
 
 ```python
 from agentscope.memory import RedisMemory
@@ -200,7 +200,7 @@ memory = RedisMemory(
 await memory.add(Msg("user", "etcd leader 频繁切换", "user"))
 ```
 
-#<!-- chunk: 2.4 在 Agent 中使用 -->## 2.4 在 Agent 中使用
+## 2.4 在 Agent 中使用
 
 ```python
 from agentscope.agent import ReActAgent
@@ -218,7 +218,7 @@ agent = ReActAgent(
 # 3. 下次推理时 → memory.get_memory() 获取历史作为上下文
 ```
 
-#<!-- chunk: 2.5 消息标记系统（Marks） -->## 2.5 消息标记系统（Marks）
+## 2.5 消息标记系统（Marks）
 
 AgentScope 的记忆支持 **marks**（字符串标签），用于消息的分类、过滤和批量删除：
 
@@ -251,7 +251,7 @@ Marks 常见用法
 └── "summary"      → 压缩生成的摘要消息
 ```
 
-#<!-- chunk: 2.6 状态管理 -->## 2.6 状态管理
+## 2.6 状态管理
 
 ```python
 memory = InMemoryMemory()
@@ -273,7 +273,7 @@ messages = await new_memory.get_memory()
 
 <!-- chunk: 3. 长期记忆 -->## 3. 长期记忆
 
-#<!-- chunk: 3.1 设计理念 -->## 3.1 设计理念
+## 3.1 设计理念
 
 AgentScope 不严格区分短期和长期记忆的作用——一切以**需求驱动**。长期记忆提供两种实现和三种运行模式：
 
@@ -292,7 +292,7 @@ AgentScope 不严格区分短期和长期记忆的作用——一切以**需求�
 | `static_control` | 框架在 reply 前后自动读写 | 简单场景，自动化知识增强 |
 | `both` | 两者同时激活 | 最大灵活性 |
 
-#<!-- chunk: 3.2 Mem0LongTermMemory -->## 3.2 Mem0LongTermMemory
+## 3.2 Mem0LongTermMemory
 
 ```python
 from agentscope.memory import Mem0LongTermMemory
@@ -318,7 +318,7 @@ agent = ReActAgent(
 )
 ```
 
-#<!-- chunk: 3.3 agent_control 模式 -->## 3.3 agent_control 模式
+## 3.3 agent_control 模式
 
 智能体通过工具函数自主管理长期记忆——决定何时保存重要信息、何时检索历史知识。
 
@@ -351,7 +351,7 @@ Agent 调用: recall_from_long_term_memory("etcd 诊断")
 Agent 回复: "上次 etcd 的问题是磁盘 IOPS 不足导致 leader 频繁切换..."
 ```
 
-#<!-- chunk: 3.4 static_control 模式 -->## 3.4 static_control 模式
+## 3.4 static_control 模式
 
 框架在每次 `reply` 调用的开始/结束时自动处理长期记忆：
 
@@ -381,7 +381,7 @@ agent = ReActAgent(
 
 <!-- chunk: 4. 记忆压缩 -->## 4. 记忆压缩
 
-#<!-- chunk: 4.1 为什么需要压缩 -->## 4.1 为什么需要压缩
+## 4.1 为什么需要压缩
 
 随着对话增长，记忆内容膨胀会导致：
 
@@ -394,7 +394,7 @@ agent = ReActAgent(
 └── 4. 延迟增加      → 更长的 prompt 导致更慢的响应
 ```
 
-#<!-- chunk: 4.2 AgentScope 内置 CompressionConfig -->## 4.2 AgentScope 内置 CompressionConfig
+## 4.2 AgentScope 内置 CompressionConfig
 
 AgentScope 的 `ReActAgent` 内置了记忆压缩功能，通过 `CompressionConfig` 配置：
 
@@ -456,7 +456,7 @@ CompressionConfig 工作流程
 
 > **注意**：`CompressionConfig` 是 AgentScope 内置的压缩方案，无需自定义压缩类。如果需要更精细的控制，可通过 `summary_schema` 参数自定义摘要格式。
 
-#<!-- chunk: 4.3 手动实现压缩策略 -->## 4.3 手动实现压缩策略
+## 4.3 手动实现压缩策略
 
 ```python
 from agentscope.message import Msg
@@ -526,7 +526,7 @@ class CompressedMemory:
 
 <!-- chunk: 5. Session 管理 -->## 5. Session 管理
 
-#<!-- chunk: 5.1 为什么需要 Session -->## 5.1 为什么需要 Session
+## 5.1 为什么需要 Session
 
 ```
 无 Session（开发阶段）:
@@ -538,7 +538,7 @@ class CompressedMemory:
   Agent 重启 → 从持久化存储恢复状态 → 继续对话
 ```
 
-#<!-- chunk: 5.2 JSONSession（文件持久化） -->## 5.2 JSONSession（文件持久化）
+## 5.2 JSONSession（文件持久化）
 
 AgentScope 提供 `JSONSession` 作为内置 Session 方案，基于文件系统持久化：
 
@@ -564,7 +564,7 @@ session.load_session_state(
 )
 ```
 
-#<!-- chunk: 5.3 生产环境 Session 选型 -->## 5.3 生产环境 Session 选型
+## 5.3 生产环境 Session 选型
 
 对于生产环境的分布式部署，推荐结合 `AsyncSQLAlchemyMemory` 作为记忆后端 + `JSONSession` 作为状态持久化：
 
@@ -578,7 +578,7 @@ session.load_session_state(
 
 <!-- chunk: 6. Token 管理与上下文窗口 -->## 6. Token 管理与上下文窗口
 
-#<!-- chunk: 6.1 Token 计算 -->## 6.1 Token 计算
+## 6.1 Token 计算
 
 AgentScope 提供 Token 计算工具，用于监控和管理上下文窗口使用：
 
@@ -596,7 +596,7 @@ token_count = count_tokens(
 print(f"当前上下文: {token_count} tokens")
 ```
 
-#<!-- chunk: 6.2 上下文窗口管理策略 -->## 6.2 上下文窗口管理策略
+## 6.2 上下文窗口管理策略
 
 ```
 上下文窗口管理
@@ -622,7 +622,7 @@ print(f"当前上下文: {token_count} tokens")
     └── 降级到更短的 prompt
 ```
 
-#<!-- chunk: 6.3 实践：上下文窗口管理器 -->## 6.3 实践：上下文窗口管理器
+## 6.3 实践：上下文窗口管理器
 
 ```python
 class ContextWindowManager:
@@ -671,7 +671,7 @@ class ContextWindowManager:
 
 <!-- chunk: 7. 状态持久化深度解析 -->## 7. 状态持久化深度解析
 
-#<!-- chunk: 7.1 AgentScope 的嵌套式状态管理 -->## 7.1 AgentScope 的嵌套式状态管理
+## 7.1 AgentScope 的嵌套式状态管理
 
 ```
 Agent.state_dict()
@@ -690,7 +690,7 @@ Agent.state_dict()
     └── 长期记忆内容和索引
 ```
 
-#<!-- chunk: 7.2 完整的状态管理流程 -->## 7.2 完整的状态管理流程
+## 7.2 完整的状态管理流程
 
 ```python
 import json
@@ -734,7 +734,7 @@ await load_agent_state(new_agent, "/tmp/agent_state.json")
 
 <!-- chunk: 8. 生产环境记忆架构设计 -->## 8. 生产环境记忆架构设计
 
-#<!-- chunk: 8.1 推荐架构 -->## 8.1 推荐架构
+## 8.1 推荐架构
 
 ```
 生产环境记忆架构
@@ -761,7 +761,7 @@ await load_agent_state(new_agent, "/tmp/agent_state.json")
         └── 知识图谱索引
 ```
 
-#<!-- chunk: 8.2 FastAPI + AsyncSQLAlchemyMemory 生产示例 -->## 8.2 FastAPI + AsyncSQLAlchemyMemory 生产示例
+## 8.2 FastAPI + AsyncSQLAlchemyMemory 生产示例
 
 ```python
 from contextlib import asynccontextmanager
@@ -827,7 +827,7 @@ async def chat(session_id: str, user_id: str, message: str):
 
 <!-- chunk: 9. 最佳实践与反模式 -->## 9. 最佳实践与反模式
 
-#<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
 
 - **开发用 InMemoryMemory，生产用 AsyncSQLAlchemyMemory/RedisMemory**：开发调试时 InMemoryMemory 足够，上线前切换到持久化记忆
 - **使用 CompressionConfig**：长对话场景（>30 轮）必须启用内置压缩，无需自定义压缩类
@@ -835,7 +835,7 @@ async def chat(session_id: str, user_id: str, message: str):
 - **Agent 状态定期持久化**：在每次 reply 完成后保存状态，防止异常丢失
 - **长期记忆用 agent_control**：让智能体自主决定何时保存/检索，比 static_control 更灵活
 
-#<!-- chunk: 反模式 -->## 反模式
+## 反模式
 
 - **InMemoryMemory 用于生产**：进程重启后所有对话丢失——生产应用 AsyncSQLAlchemyMemory 或 RedisMemory
 - **不管理上下文窗口**：随对话增长 Token 超限，LLM 返回截断或错误——用 CompressionConfig
@@ -863,17 +863,17 @@ async def chat(session_id: str, user_id: str, message: str):
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|[[AI Agent 工程专题|AI Agent 工程专题]]]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## Related
 

@@ -244,9 +244,12 @@ kubectl run test --image=nginx:1.25 --dry-run=server
 
 ### 场景
 
-[[Dynamic Resource Allocation|Dynamic Resource Allocation]] (v1.33 GA) 允许 Pod 请求 GPU/FPGA 等外部资源，替代 Device Plugin 方案。
+[[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]] (v1.33 GA) 允许 Pod 请求 GPU/FPGA 等外部资源，替代 Device Plugin 方案。
 
 ### 前置条件
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 1. 启用 DRA
@@ -309,6 +312,9 @@ spec:
 
 ### 验证
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 ResourceClaim
 kubectl get resourceclaims
@@ -343,6 +349,9 @@ lsmod | grep nft
 ```
 
 ### 配置 kube-proxy
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 方式一：修改 kube-proxy ConfigMap
@@ -382,6 +391,9 @@ featureGates:
 ```
 
 ### 重启 kube-proxy
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 删除 kube-proxy Pod 触发重建
@@ -446,6 +458,9 @@ spec:
 
 ### 执行原地调整
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方法 1：直接 PATCH
 kubectl patch pod resize-demo --patch '{
@@ -465,6 +480,9 @@ kubectl edit pod resize-demo
 ```
 
 ### 验证调整结果
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 查看 Pod 状态
@@ -619,6 +637,9 @@ spec:
 
 ### 动态调整性能
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 修改 PVC 的性能等级
 kubectl patch pvc dynamic-perf-pvc --type=merge -p \
@@ -673,6 +694,9 @@ spec:
 ```
 
 ### 验证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 查看挂载选项
@@ -839,6 +863,9 @@ spec:
 
 ### 验证 NUMA 亲和性
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Pod 被分配到的 NUMA 节点
 kubectl exec numa-demo -- numactl --show
@@ -859,6 +886,9 @@ cat /sys/fs/cgroup/kubepods/pod-*/cpuset.cpus.effective
 UserNamespacesSupport (v1.33 GA) 为 Pod 提供用户命名空间隔离，将容器内的 root (UID 0) 映射到节点上的非特权 UID。
 
 ### 前置条件
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
 
 ```bash
 # 1. 内核 >= 5.19（推荐 >= 6.3）
@@ -892,6 +922,9 @@ spec:
 ```
 
 ### 验证隔离
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 在容器内查看 UID（显示 root）
@@ -1072,7 +1105,7 @@ echo "  kubelet (config.yaml featureGates 节)"
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析

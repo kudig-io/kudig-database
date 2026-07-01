@@ -121,7 +121,7 @@ created: "2026-05-23"
 
 ## Related
 
-- [[references/k8s-knowledge-map|k8s-knowledge-map]] — Kubernetes Knowledge Map
-- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
+- [[entities/k8s-knowledge-map.md|k8s-knowledge-map]] — Kubernetes Knowledge Map
+- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[cilium]] — Cilium
 - [[submariner]] — Submariner

@@ -68,7 +68,7 @@ created: "2026-05-23"
 
 Falco 是 CNCF 毕业项目，是云原生运行时安全的行业标准工具。它通过内核模块或 eBPF 探针捕获系统调用，结合容器感知和 [[Kubernetes|Kubernetes]] 元数据，使用灵活的规则引擎实时检测异常行为。Falco 能够检测容器逃逸、权限提升、文件完整性违规、网络异常、加密货币挖矿等多种安全威胁，是企业构建运行时安全防线的核心组件。
 
-#<!-- chunk: 威胁模型分析 -->## 威胁模型分析
+## 威胁模型分析
 
 运行时安全威胁是容器环境中最具挑战性的防护领域。与构建时和部署时的预防性控制不同，运行时威胁发生在应用已部署并运行之后，需要实时检测和响应能力。
 
@@ -84,7 +84,7 @@ Falco 是 CNCF 毕业项目，是云原生运行时安全的行业标准工具�
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: Falco 核心架构 -->## Falco 核心架构
+## Falco 核心架构
 
 ```mermaid
 graph TB
@@ -141,7 +141,7 @@ graph TB
     PROM --> GRAFANA
 ```
 
-#<!-- chunk: 部署架构 -->## 部署架构
+## 部署架构
 
 Falco 以 DaemonSet 形式部署在每个 Kubernetes 节点上，通过内核模块或 eBPF 探针捕获系统调用。推荐使用 eBPF 模式，因为它不需要编译内核模块，兼容性更好且安全性更高。Falco Sidekick 作为告警聚合和分发组件，支持将安全事件发送到多种通知渠道和日志系统。
 
@@ -210,6 +210,9 @@ extra:
       value: "4194304"
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 部署 Falco
 helm repo add falcosecurity https://falcosecurity.github.io/charts
@@ -233,7 +236,7 @@ helm install falcosidekick falcosecurity/falcosidekick \
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: 自定义安全规则 -->## 自定义安全规则
+## 自定义安全规则
 
 Falco 规则由三个核心元素组成：Macro（宏）定义可复用的条件组合，List（列表）定义可复用的值集合，Rule（规则）定义检测条件和输出格式。以下规则覆盖了常见的运行时安全场景：
 
@@ -502,7 +505,7 @@ data:
       tags: [execution, drift, mitre_T1059]
 ```
 
-#<!-- chunk: Kubernetes 审计日志集成 -->## Kubernetes 审计日志集成
+## Kubernetes 审计日志集成
 
 Falco 可以消费 Kubernetes API Server 的审计日志，检测基于 API 的安全事件，如未授权访问、RBAC 变更、Secret 读取等：
 
@@ -580,7 +583,7 @@ data:
 
 <!-- chunk: 安全策略实战 -->## 安全策略实战
 
-#<!-- chunk: Falco Sidekick 多通道告警 -->## Falco Sidekick 多通道告警
+## Falco Sidekick 多通道告警
 
 ```yaml
 # values-falcosidekick.yaml
@@ -634,7 +637,7 @@ config:
       minimumpriority: "critical"
 ```
 
-#<!-- chunk: 自动响应 Webhook -->## 自动响应 Webhook
+## 自动响应 Webhook
 
 ```python
 #!/usr/bin/env python3
@@ -718,7 +721,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 合规与审计 -->## 合规与审计
 
-#<!-- chunk: Falco 合规规则集 -->## Falco 合规规则集
+## Falco 合规规则集
 
 Falco 内置了针对 CIS Docker Benchmark 和 NIST 网络安全框架的合规规则集。以下补充规则覆盖常见的合规要求：
 
@@ -776,7 +779,7 @@ data:
       tags: [cis, host_mount, compliance]
 ```
 
-#<!-- chunk: 合规报告生成 -->## 合规报告生成
+## 合规报告生成
 
 ```bash
 #!/bin/bash
@@ -812,7 +815,7 @@ echo "Report generated: $REPORT_DIR/$DATE/report.md"
 
 <!-- chunk: 监控与告警 -->## 监控与告警
 
-#<!-- chunk: Prometheus 集成 -->## Prometheus 集成
+## Prometheus 集成
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -884,7 +887,7 @@ spec:
             description: "节点 {{ $labels.instance }} 上的 Falco 规则加载出现错误"
 ```
 
-#<!-- chunk: Grafana Dashboard -->## Grafana Dashboard
+## Grafana Dashboard
 
 ```json
 {
@@ -942,21 +945,21 @@ spec:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 规则开发流程 -->## 规则开发流程
+## 规则开发流程
 
 Falco 规则开发应遵循渐进式流程。首先在 Audit 模式下部署新规则，仅记录不阻断，观察告警结果。分析误报原因，通过添加白名单 Macro 或调整条件来优化规则。误报率降低到可接受水平后，再考虑与自动响应动作集成。
 
-#<!-- chunk: 白名单管理 -->## 白名单管理
+## 白名单管理
 
 合理使用白名单减少误报是 Falco 运维的关键。白名单应基于镜像仓库、命名空间、进程名称等维度建立。使用独立的 ConfigMap 管理白名单，避免频繁修改主规则文件。定期审查白名单的有效性，确保不会过度放宽检测范围。
 
-#<!-- chunk: 性能优化 -->## 性能优化
+## 性能优化
 
 在高负载节点上，Falco 可能消耗较多资源。通过调整 `FALCO_BUFSIZE` 增大缓冲区、降低规则复杂度、减少不必要的系统调用捕获范围来优化性能。使用 eBPF 模式替代内核模块以获得更好的性能和兼容性。
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题 -->## 常见问题
+## 常见问题
 
 | 问题 | 原因 | 解决方案 |
 |:---|:---|:---|
@@ -965,6 +968,9 @@ Falco 规则开发应遵循渐进式流程。首先在 Audit 模式下部署新�
 | 无 K8s 元数据 | 未启用 collectors | 启用 containerd 收集器，确认 socket 路径正确 |
 | Sidekick 未收到事件 | 网络不通 | 检查 Service DNS 和网络策略，测试 HTTP 连通性 |
 | 规则不生效 | 语法错误 | 检查 ConfigMap 是否挂载，使用 `falco -V` 验证规则语法 |
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1005,8 +1011,8 @@ kubectl logs -n falco -l app.kubernetes.io/name=falcosidekick --tail=10
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
@@ -1024,4 +1030,4 @@ kubectl logs -n falco -l app.kubernetes.io/name=falcosidekick --tail=10
 - 99-java-security-kubernetes-guide
 - 99-kyverno-policy-guide
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

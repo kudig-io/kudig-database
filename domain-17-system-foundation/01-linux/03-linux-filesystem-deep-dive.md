@@ -80,7 +80,7 @@ created: "2026-05-23"
 
 <!-- chunk: VFS 虚拟文件系统 -->## VFS 虚拟文件系统
 
-#<!-- chunk: VFS 架构 -->## VFS 架构
+## VFS 架构
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -101,7 +101,7 @@ created: "2026-05-23"
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: VFS 核心对象 -->## VFS 核心对象
+## VFS 核心对象
 
 | 对象 | 说明 | 作用 |
 |:---|:---|:---|
@@ -114,7 +114,7 @@ created: "2026-05-23"
 
 <!-- chunk: 文件系统类型 -->## 文件系统类型
 
-#<!-- chunk: 本地文件系统对比 -->## 本地文件系统对比
+## 本地文件系统对比
 
 | 文件系统 | 最大文件 | 最大卷 | 特点 | 推荐场景 |
 |:---|:---|:---|:---|:---|
@@ -123,7 +123,7 @@ created: "2026-05-23"
 | **btrfs** | 16EB | 16EB | CoW、快照、校验 | 高级功能需求 |
 | **zfs** | 16EB | 256ZB | 企业级、完整性 | 需要 ZFS 特性 |
 
-#<!-- chunk: 特殊文件系统 -->## 特殊文件系统
+## 特殊文件系统
 
 | 文件系统 | 说明 | 挂载点 |
 |:---|:---|:---|
@@ -137,7 +137,7 @@ created: "2026-05-23"
 
 <!-- chunk: 磁盘分区与挂载 -->## 磁盘分区与挂载
 
-#<!-- chunk: 分区工具 -->## 分区工具
+## 分区工具
 
 ```bash
 # fdisk (MBR)
@@ -154,7 +154,7 @@ lsblk
 fdisk -l
 ```
 
-#<!-- chunk: 创建文件系统 -->## 创建文件系统
+## 创建文件系统
 
 ```bash
 # ext4
@@ -170,7 +170,7 @@ mkfs.ext4 -L data /dev/sdb1
 blkid
 ```
 
-#<!-- chunk: 挂载管理 -->## 挂载管理
+## 挂载管理
 
 ```bash
 # 临时挂载
@@ -186,7 +186,7 @@ mount | grep sdb
 df -Th
 ```
 
-#<!-- chunk: /etc/fstab 配置 -->## /etc/fstab 配置
+## /etc/fstab 配置
 
 ```bash
 # /etc/fstab
@@ -196,7 +196,7 @@ UUID=xxx-xxx     /backup       ext4    defaults          0      2
 LABEL=data       /mnt/data     xfs     defaults          0      2
 ```
 
-#<!-- chunk: 常用挂载选项 -->## 常用挂载选项
+## 常用挂载选项
 
 | 选项 | 说明 |
 |:---|:---|
@@ -212,7 +212,10 @@ LABEL=data       /mnt/data     xfs     defaults          0      2
 
 <!-- chunk: 文件权限与 ACL -->## 文件权限与 ACL
 
-#<!-- chunk: 基本权限 -->## 基本权限
+## 基本权限
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
 
 ```bash
 # 查看权限
@@ -228,7 +231,7 @@ chown user:group file
 chown -R user:group dir/
 ```
 
-#<!-- chunk: 权限位 -->## 权限位
+## 权限位
 
 | 权限 | 数值 | 文件 | 目录 |
 |:---:|:---:|:---|:---|
@@ -236,7 +239,7 @@ chown -R user:group dir/
 | w | 2 | 修改内容 | 创建/删除文件 |
 | x | 1 | 执行 | 进入目录 |
 
-#<!-- chunk: 特殊权限 -->## 特殊权限
+## 特殊权限
 
 | 权限 | 数值 | 位置 | 说明 |
 |:---|:---:|:---|:---|
@@ -244,7 +247,7 @@ chown -R user:group dir/
 | SGID | 2000 | 组x -> s | 以文件所属组执行 |
 | Sticky | 1000 | 其他x -> t | 仅所有者可删除 |
 
-#<!-- chunk: ACL 扩展权限 -->## ACL 扩展权限
+## ACL 扩展权限
 
 ```bash
 # 查看 ACL
@@ -264,7 +267,7 @@ setfacl -b file  # 删除所有
 
 <!-- chunk: inode 与链接 -->## inode 与链接
 
-#<!-- chunk: inode 结构 -->## inode 结构
+## inode 结构
 
 | 内容 | 说明 |
 |:---|:---|
@@ -275,7 +278,7 @@ setfacl -b file  # 删除所有
 | 时间戳 | atime, mtime, ctime |
 | 数据块指针 | 直接/间接块 |
 
-#<!-- chunk: 查看 inode -->## 查看 inode
+## 查看 inode
 
 ```bash
 # 查看 inode 信息
@@ -286,7 +289,7 @@ ls -i file
 df -i
 ```
 
-#<!-- chunk: 硬链接 vs 软链接 -->## 硬链接 vs 软链接
+## 硬链接 vs 软链接
 
 | 特性 | 硬链接 | 软链接 |
 |:---|:---|:---|
@@ -307,7 +310,7 @@ ln -s source link
 
 <!-- chunk: 文件系统管理 -->## 文件系统管理
 
-#<!-- chunk: 扩展文件系统 -->## 扩展文件系统
+## 扩展文件系统
 
 ```bash
 # ext4
@@ -317,7 +320,7 @@ resize2fs /dev/sdb1
 xfs_growfs /mnt/data
 ```
 
-#<!-- chunk: 检查修复 -->## 检查修复
+## 检查修复
 
 ```bash
 # 检查
@@ -328,7 +331,7 @@ xfs_repair /dev/sdb1   # xfs
 # 注意：必须先卸载
 ```
 
-#<!-- chunk: 磁盘配额 -->## 磁盘配额
+## 磁盘配额
 
 ```bash
 # 启用配额
@@ -347,7 +350,7 @@ quota -u username
 repquota /data
 ```
 
-#<!-- chunk: 常用命令 -->## 常用命令
+## 常用命令
 
 ```bash
 # 磁盘使用
@@ -370,7 +373,7 @@ locate filename
 
 <!-- chunk: 生产环境文件系统选型指南 -->## 生产环境文件系统选型指南
 
-#<!-- chunk: 企业级文件系统对比 -->## 企业级文件系统对比
+## 企业级文件系统对比
 
 | 文件系统 | 最佳场景 | 性能特点 | 可靠性 | 运维复杂度 |
 |:---|:---|:---|:---|:---|
@@ -379,7 +382,7 @@ locate filename
 | **btrfs** | 虚拟化、容器 | 快照、校验、压缩 | 中 | 高 |
 | **zfs** | NAS、备份存储 | 完整性校验、快照 | 高 | 高 |
 
-#<!-- chunk: 生产环境挂载参数优化 -->## 生产环境挂载参数优化
+## 生产环境挂载参数优化
 
 ```bash
 # 数据库存储优化
@@ -395,7 +398,7 @@ tmpfs /tmp tmpfs defaults,size=2G,mode=1777 0 0
 /dev/sdd1 /var/lib/docker xfs defaults,noatime,nobarrier,inode64 0 2
 ```
 
-#<!-- chunk: 文件系统性能监控脚本 -->## 文件系统性能监控脚本
+## 文件系统性能监控脚本
 
 ```bash
 #!/bin/bash
@@ -486,7 +489,7 @@ esac
 
 <!-- chunk: 数据保护与备份策略 -->## 数据保护与备份策略
 
-#<!-- chunk: 快照管理脚本 -->## 快照管理脚本
+## 快照管理脚本
 
 ```bash
 #!/bin/bash
@@ -587,7 +590,7 @@ esac
 
 <!-- chunk: 容量规划与预测 -->## 容量规划与预测
 
-#<!-- chunk: 存储容量预测模型 -->## 存储容量预测模型
+## 存储容量预测模型
 
 ```bash
 #!/bin/bash
@@ -752,7 +755,7 @@ esac
 
 <!-- chunk: 与 [[Kubernetes|Kubernetes]] 的关系 -->## 与 Kubernetes 的关系
 
-#<!-- chunk: 容器存储 (Container Storage) -->## 容器存储 (Container Storage)
+## 容器存储 (Container Storage)
 
 Kubernetes 的容器存储建立在 Linux 文件系统之上，理解底层原理对于排查存储问题至关重要。
 
@@ -785,7 +788,7 @@ Kubernetes 的容器存储建立在 Linux 文件系统之上，理解底层原�
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: OverlayFS 与容器存储 -->## OverlayFS 与容器存储
+## OverlayFS 与容器存储
 
 ```bash
 # 查看 Kubernetes 使用的 overlay 挂载
@@ -802,7 +805,7 @@ du -sh /var/lib/docker/overlay2/
 docker system df -v
 ```
 
-#<!-- chunk: inode 耗尽问题 -->## inode 耗尽问题
+## inode 耗尽问题
 
 inode 耗尽是 Kubernetes 集群中常见的存储问题，特别是日志量大的场景：
 
@@ -841,7 +844,7 @@ find /var/lib/kubelet/pods/ -type f | wc -l
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: 文件系统性能优化 -->## 文件系统性能优化
+## 文件系统性能优化
 
 ```bash
 # 挂载参数优化
@@ -869,7 +872,7 @@ xfs_info /data                       # XFS 参数
 
 <!-- chunk: 安全加固 -->## 安全加固
 
-#<!-- chunk: 文件系统安全 -->## 文件系统安全
+## 文件系统安全
 
 ```bash
 # 查找 SUID 文件 (安全审计)
@@ -906,7 +909,7 @@ mount /dev/mapper/encrypted /secure
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 文件系统常见问题 -->## 文件系统常见问题
+## 文件系统常见问题
 
 ```bash
 # 文件系统变为只读
@@ -941,7 +944,7 @@ find /path -type f | awk -F/ '{print NF-1, $0}' | sort -n | tail -20
 
 ---
 
-#<!-- chunk: 生产环境文件系统运维脚本 -->## 生产环境文件系统运维脚本
+## 生产环境文件系统运维脚本
 
 ```bash
 #!/bin/bash

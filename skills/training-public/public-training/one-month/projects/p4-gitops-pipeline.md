@@ -137,6 +137,9 @@ ArgoCD 的核心资源是 Application CRD，它定义了：
 
 ### Step 1: 安装 ArgoCD (20min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建 namespace
 kubectl create namespace argocd
@@ -267,8 +270,7 @@ replicas:
 - name: demo-app
   count: 1
 patches:
-- target:
-    kind: Deployment
+- target: "`kind: Deployment`"
   patch: |
     - op: replace
       path: /spec/template/spec/containers/0/image
@@ -298,8 +300,7 @@ replicas:
 - name: demo-app
   count: 3
 patches:
-- target:
-    kind: Deployment
+- target: "`kind: Deployment`"
   patch: |
     - op: add
       path: /spec/template/spec/containers/0/resources/limits/memory
@@ -319,6 +320,9 @@ git push -u origin main
 ```
 
 ### Step 3: 创建 ArgoCD Application (20min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 dev 环境 Application（自动同步）
@@ -541,6 +545,7 @@ spec:
     policies:
     - p, proj:team-frontend:developer, applications, get, team-frontend/*, allow
     - p, proj:team-frontend:developer, applications, sync, team-frontend/*, allow
+
 ```
 
 ---
@@ -591,11 +596,15 @@ ArgoCD 支持多集群管理。首先通过 `argocd cluster add` 注册多个集
 
 ## 清理资源
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 kubectl delete application demo-dev demo-prod -n argocd
-kubectl delete namespace dev staging prod
+kubectl delete namespace dev staging prod  # ⚠️ 不可逆：永久删除命名空间及全部资源
 # 卸载 ArgoCD（可选）
-# kubectl delete namespace argocd
+# kubectl delete namespace argocd  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
 ---
@@ -609,4 +618,6 @@ kubectl delete namespace dev staging prod
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

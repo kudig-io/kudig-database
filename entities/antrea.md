@@ -50,7 +50,7 @@ Antrea 是基于 Open vSwitch (OVS) 构建的 Kubernetes 网络解决方案，�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -67,22 +67,22 @@ Antrea 是基于 Open vSwitch (OVS) 构建的 Kubernetes 网络解决方案，�
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
-- [[entities/cni-plugins|cni-plugins]]
-- [[entities/networkpolicy|networkpolicy]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/cni-plugins.md|cni-plugins]]
+- [[entities/networkpolicy.md|networkpolicy]]
 - [[deployment]]
-- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
 
 ## Related
 
 - [[kgateway]] — kgateway
 - [[urunc]] — urunc
 - [[connect-rpc]] — Connect RPC
-- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - antrea
-- [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

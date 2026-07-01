@@ -32,6 +32,7 @@ related_skills:
   - "SKILL-NODE-001"
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 title: "Pod CrashLoopBackOff / OOMKilled 诊断与修复"
 tags: ["skills", "pod-crashloop", "troubleshooting", "visibility/public"]
 ---
@@ -308,4 +309,4 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/pod-lifecycle|Pod 生命周期]] — Pod 创建、运行、终止的完整生命周期
+- [[concepts/pod-lifecycle.md|Pod 生命周期]] — Pod 创建、运行、终止的完整生命周期

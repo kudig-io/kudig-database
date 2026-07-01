@@ -47,7 +47,7 @@ OpenKruise 是 Kubernetes 的增强工作负载套件，提供高级部署、原
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -64,7 +64,7 @@ OpenKruise 是 Kubernetes 的增强工作负载套件，提供高级部署、原
 ## 参考链接
 
 - [[deployment]]
-- [[concepts/controller-pattern|controller-pattern]]
+- [[concepts/controller-pattern.md|controller-pattern]]
 - [[pod-lifecycle]]
 
 ## Related
@@ -72,11 +72,11 @@ OpenKruise 是 Kubernetes 的增强工作负载套件，提供高级部署、原
 - [[krkn]] — Krkn
 - [[opengitops]] — OpenGitOps
 - [[cadence]] — Cadence
-- [[entities/statefulset|statefulset]] — StatefulSet
+- [[entities/statefulset.md|statefulset]] — StatefulSet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/openkruise-fta|OpenKruise 工作负载异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/openkruise-fta.md|OpenKruise 工作负载异常故障树分析]]
 - openkruise
-- [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/openkruise-index|OpenKruise 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/openkruise-index.md|OpenKruise 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

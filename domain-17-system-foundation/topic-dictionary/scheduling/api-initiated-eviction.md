@@ -57,6 +57,7 @@ API 发起驱逐（API-initiated Eviction）是通过 Eviction API 创建 `Evict
 或者使用 curl：
 ```bash
 curl -v -H 'Content-type: application/json' https://your-cluster-api-endpoint.example/api/v1/namespaces/default/pods/quux/eviction -d @eviction.json
+
 ```
 
 ## 关键机制或特性
@@ -170,6 +171,7 @@ curl -v -H 'Content-type: application/json' \
   --cacert /etc/kubernetes/pki/ca.crt \
   --cert /etc/kubernetes/pki/admin.crt \
   --key /etc/kubernetes/pki/admin.key
+
 ```
 
 ## 故障排查
@@ -194,6 +196,10 @@ curl -v -H 'Content-type: application/json' \
 
 ## 命令快速参考
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 安全排空节点（维护前）
 kubectl drain <node-name> \
@@ -215,7 +221,7 @@ kubectl uncordon <node-name>
 kubectl get events --field-selector reason=Evicted --all-namespaces
 
 # 强制删除卡住的 Pod（最后手段）
-kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
+kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
 ## 交叉引用
@@ -231,4 +237,6 @@ kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+```

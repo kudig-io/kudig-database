@@ -59,7 +59,7 @@ Argo CD 是声明式 GitOps 持续交付工具，支持 Kubernetes 资源同步�
 - 生产就绪版本
 - 集群注册安全改进（修复 client-cert 凭证持久化问题 #1742）
 - 支持 HA 部署模式
-- 快速安装命令：`kubectl apply -n [[entities/argocd|[[ArgoCD|argocd]]]] -f install.yaml`
+- 快速安装命令：`kubectl apply -n [[entities/argocd.md|[[ArgoCD|argocd]]]] -f install.yaml`
 
 ### v1.x 系列
 
@@ -176,4 +176,4 @@ Tekton 是云原生 CI/CD Pipeline 框架，基于 Kubernetes CRD 构建。
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[argo]] — Argo Workflows
 - [[flux]] — Flux
-- [[entities/argocd|argocd]] — ArgoCD
+- [[entities/argocd.md|argocd]] — ArgoCD

@@ -64,6 +64,10 @@ created: "2026-05-23"
 <!-- chunk: 容器生命周期架构 -->
 ## 容器生命周期架构
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                        容器完整生命周期                                              │
@@ -356,6 +360,9 @@ spec:
 
 <!-- chunk: 优雅终止完整流程 -->
 ## 优雅终止完整流程
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
@@ -821,6 +828,9 @@ spec:
 <!-- chunk: 调试钩子执行 -->
 ## 调试钩子执行
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # ==================== 查看事件 ====================
 
@@ -918,11 +928,11 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.terminationGracePeriodSeconds}'
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications KUDIG Database — Global MOC
-- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
 - index.md|Domain-4 工作负载 — 开源项目索引]]
-- 01 - [[concepts/kubernetes-architecture-overview]]
+- 01 - [[concepts/kubernetes-architecture-overview.md|kubernetes architecture overview]]
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
-- 03 - [[domain-02-workloads-applications/00-core-workloads/03-statefulset-advanced-operations]]
+- 03 - [[domain-02-workloads-applications/00-core-workloads/03-statefulset-advanced-operations.md|03 statefulset advanced operations]]
 - 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)
 - 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
 - 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)
@@ -936,3 +946,5 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.terminationGracePeriodSeconds}'
 - 12-advanced-pod-patterns
 - 14-sidecar-containers-patterns
 - 15-container-runtime-interfaces
+
+```

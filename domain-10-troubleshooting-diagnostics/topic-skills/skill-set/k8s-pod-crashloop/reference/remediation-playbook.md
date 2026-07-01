@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-pod-crashloop"
 created: "2026-05-22"
 updated: "2026-05-22"
+last_updated: 2026-05-22
 tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
@@ -32,6 +33,9 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
 
 ### 修复 1：增加内存限制（OOMKilled）
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 检查当前限制
 kubectl get pod <pod> -o jsonpath='{.spec.containers[0].resources}'
@@ -45,6 +49,9 @@ kubectl get pod <new-pod> -o jsonpath='{.spec.containers[0].resources}'
 
 ### 修复 2：回滚到上一个版本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 查看历史版本
 kubectl rollout history deployment/<deployment>
@@ -57,6 +64,9 @@ kubectl rollout status deployment/<deployment>
 ```
 
 ### 修复 3：修正健康检查配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 编辑 Deployment

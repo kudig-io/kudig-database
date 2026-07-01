@@ -100,7 +100,7 @@ Selenium is the industry-leading open-source web automation testing framework th
 
 <!-- chunk: 架构设计 (Architecture Design) -->## 架构设计 (Architecture Design)
 
-#<!-- chunk: 企业级测试架构 (Enterprise Testing Architecture) -->## 企业级测试架构 (Enterprise Testing Architecture)
+## 企业级测试架构 (Enterprise Testing Architecture)
 
 ```yaml
 # Selenium Grid 4 高可用部署
@@ -175,7 +175,7 @@ networks:
     driver: bridge
 ```
 
-#<!-- chunk: 测试架构图 (Testing Architecture Diagram) -->## 测试架构图 (Testing Architecture Diagram)
+## 测试架构图 (Testing Architecture Diagram)
 
 ```mermaid
 graph TB
@@ -232,7 +232,7 @@ graph TB
 
 <!-- chunk: 核心测试框架配置 (Core Testing Framework Configuration) -->## 核心测试框架配置 (Core Testing Framework Configuration)
 
-#<!-- chunk: 测试项目结构 (Test Project Structure) -->## 测试项目结构 (Test Project Structure)
+## 测试项目结构 (Test Project Structure)
 
 ```python
 # 企业级Selenium测试项目结构
@@ -274,7 +274,7 @@ selenium_enterprise_tests/
 └── README.md
 ```
 
-#<!-- chunk: WebDriver工厂配置 (WebDriver Factory Configuration) -->## WebDriver工厂配置 (WebDriver Factory Configuration)
+## WebDriver工厂配置 (WebDriver Factory Configuration)
 
 ```java
 // WebDriver工厂类
@@ -348,7 +348,7 @@ public class WebDriverFactory {
 
 <!-- chunk: 测试策略与框架 (Testing Strategy and Framework) -->## 测试策略与框架 (Testing Strategy and Framework)
 
-#<!-- chunk: Page Object Model实现 (Page Object Model Implementation) -->## Page Object Model实现 (Page Object Model Implementation)
+## Page Object Model实现 (Page Object Model Implementation)
 
 ```java
 // 基础页面类
@@ -426,7 +426,7 @@ public class LoginPage extends BasePage {
 }
 ```
 
-#<!-- chunk: 测试数据管理 (Test Data Management) -->## 测试数据管理 (Test Data Management)
+## 测试数据管理 (Test Data Management)
 
 ```java
 // 测试数据生成器
@@ -476,7 +476,7 @@ public class TestDataGenerator {
 
 <!-- chunk: 持续集成配置 (Continuous Integration Configuration) -->## 持续集成配置 (Continuous Integration Configuration)
 
-#<!-- chunk: Jenkins Pipeline配置 (Jenkins Pipeline Configuration) -->## Jenkins Pipeline配置 (Jenkins Pipeline Configuration)
+## Jenkins Pipeline配置 (Jenkins Pipeline Configuration)
 
 ```groovy
 // Jenkinsfile - Selenium测试流水线
@@ -616,7 +616,7 @@ pipeline {
 
 <!-- chunk: 监控与报告 (Monitoring and Reporting) -->## 监控与报告 (Monitoring and Reporting)
 
-#<!-- chunk: 测试监控配置 (Test Monitoring Configuration) -->## 测试监控配置 (Test Monitoring Configuration)
+## 测试监控配置 (Test Monitoring Configuration)
 
 ```yaml
 # Prometheus监控配置
@@ -654,7 +654,7 @@ dashboard:
           legendFormat: "Failures per hour"
 ```
 
-#<!-- chunk: 测试报告生成 (Test Report Generation) -->## 测试报告生成 (Test Report Generation)
+## 测试报告生成 (Test Report Generation)
 
 ```java
 // 测试监听器和报告生成
@@ -722,7 +722,7 @@ public class TestListener implements ITestListener {
 
 <!-- chunk: 运维管理 (Operational Management) -->## 运维管理 (Operational Management)
 
-#<!-- chunk: 故障排查工具 (Troubleshooting Tools) -->## 故障排查工具 (Troubleshooting Tools)
+## 故障排查工具 (Troubleshooting Tools)
 
 ```bash
 #!/bin/bash
@@ -775,7 +775,10 @@ log_analysis() {
 }
 ```
 
-#<!-- chunk: 日常运维脚本 (Daily Operations Scripts) -->## 日常运维脚本 (Daily Operations Scripts)
+## 日常运维脚本 (Daily Operations Scripts)
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
 ```bash
 #!/bin/bash
@@ -789,8 +792,8 @@ maintenance_tasks() {
     find target/ -name "*.png" -mtime +7 -delete
     
     # 清理浏览器缓存
-    docker exec chrome-node-1 rm -rf /tmp/.com.google.Chrome.*
-    docker exec firefox-node rm -rf /tmp/rust*
+    docker exec chrome-node-1 rm -rf /tmp/.com.google.Chrome.*  # ⚠️ 删除系统/数据文件
+    docker exec firefox-node rm -rf /tmp/rust*  # ⚠️ 删除系统/数据文件
     
     # 重启不健康的节点
     local unhealthy_nodes=$(curl -s http://localhost:4444/status | jq -r '.value.nodes[] | select(.availability != "UP") | .id')
@@ -841,7 +844,7 @@ health_check() {
 
 <!-- chunk: 最佳实践 (Best Practices) -->## 最佳实践 (Best Practices)
 
-#<!-- chunk: 测试设计最佳实践 (Test Design Best Practices) -->## 测试设计最佳实践 (Test Design Best Practices)
+## 测试设计最佳实践 (Test Design Best Practices)
 
 1. **Page Object模式**
    ```java
@@ -892,7 +895,7 @@ health_check() {
    </suite>
    ```
 
-#<!-- chunk: 基础设施最佳实践 (Infrastructure Best Practices) -->## 基础设施最佳实践 (Infrastructure Best Practices)
+## 基础设施最佳实践 (Infrastructure Best Practices)
 
 1. **容器化部署**
    ```dockerfile
@@ -949,7 +952,7 @@ health_check() {
          description: "Selenium node {{ $labels.instance }} is not responding"
    ```
 
-#<!-- chunk: 质量保证最佳实践 (Quality Assurance Best Practices) -->## 质量保证最佳实践 (Quality Assurance Best Practices)
+## 质量保证最佳实践 (Quality Assurance Best Practices)
 
 1. **测试覆盖率目标**
    - 功能测试覆盖率: 90%+
@@ -982,7 +985,7 @@ health_check() {
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-29-automated-testing-quality MOC
-- [[domain-08-release-change-management/README|Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
+- [[domain-08-release-change-management/README.md|Domain 08: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
 - Domain-29 自动化测试与质量 — 开源项目索引
 - JUnit 5 企业级单元测试框架深度实践
 - 企业级AI测试与质量保障深度实践

@@ -80,7 +80,7 @@ created: "2026-05-23"
 
 服务网格市场在2026年已进入成熟期，各项目在功能边界、性能特征、运维复杂度上形成了明显的差异化定位。选型的核心不是寻找"最好"的服务网格，而是找到最适合企业当前阶段和未来演进方向的技术方案。本文档通过标准化的对比维度、量化的性能数据、真实的客户案例和清晰的决策流程，帮助架构团队在2-4周内完成服务网格的技术选型。
 
-#<!-- chunk: 核心对比维度 -->## 核心对比维度
+## 核心对比维度
 
 ```mermaid
 graph TB
@@ -111,7 +111,7 @@ graph TB
 
 <!-- chunk: 一、架构哲学对比 -->## 一、架构哲学对比
 
-#<!-- chunk: 1.1 设计理念差异 -->## 1.1 设计理念差异
+## 1.1 设计理念差异
 
 五个项目在架构哲学上有根本性差异，理解这些差异是选型的第一步：
 
@@ -123,7 +123,7 @@ graph TB
 | **Dapr** | 应用级抽象、多运行时 | SDK + Sidecar | Go (自研) | 应用侵入 vs 丰富能力 |
 | **Traefik Mesh** | Go 原生、云原生友好 | Sidecar (Traefik) | Go (Traefik) | 简单 vs 功能不够成熟 |
 
-#<!-- chunk: 1.2 架构对比图 -->## 1.2 架构对比图
+## 1.2 架构对比图
 
 ```mermaid
 graph TB
@@ -170,7 +170,7 @@ graph TB
 
 <!-- chunk: 二、功能覆盖度对比 -->## 二、功能覆盖度对比
 
-#<!-- chunk: 2.1 核心功能矩阵 -->## 2.1 核心功能矩阵
+## 2.1 核心功能矩阵
 
 | 功能 | Istio | Linkerd | Consul Connect | Dapr | Traefik Mesh |
 |:---|:---|:---|:---|:---|:---|
@@ -195,7 +195,7 @@ graph TB
 | **绑定** | ❌ | ❌ | ❌ | ✅ | ❌ |
 | **无 Sidecar 模式** | ✅ (Ambient) | ❌ | ❌ | ❌ | ❌ |
 
-#<!-- chunk: 2.2 流量管理能力对比 -->## 2.2 流量管理能力对比
+## 2.2 流量管理能力对比
 
 ```yaml
 Istio 流量管理:
@@ -234,7 +234,7 @@ Traefik Mesh 流量管理:
 
 <!-- chunk: 三、性能与资源对比 -->## 三、性能与资源对比
 
-#<!-- chunk: 3.1 控制平面资源消耗 -->## 3.1 控制平面资源消耗
+## 3.1 控制平面资源消耗
 
 | 资源维度 | Istio (istiod) | Linkerd Controller | Consul Server | Dapr Control Plane | Traefik Controller |
 |:---|:---|:---|:---|:---|:---|
@@ -243,7 +243,7 @@ Traefik Mesh 流量管理:
 | **副本数 (HA)** | 3 | 3 | 3-5 | 2-3 | 2 |
 | **总控制面开销** | ~2-6GB | ~0.5-1.5GB | ~1-5GB | ~1-3GB | ~0.5GB |
 
-#<!-- chunk: 3.2 数据平面资源消耗 (每 Pod) -->## 3.2 数据平面资源消耗 (每 Pod)
+## 3.2 数据平面资源消耗 (每 Pod)
 
 | 资源维度 | Istio Sidecar | Linkerd Proxy | Consul Sidecar | Dapr Sidecar | Traefik Sidecar |
 |:---|:---|:---|:---|:---|:---|
@@ -253,7 +253,7 @@ Traefik Mesh 流量管理:
 | **额外延迟 (P99)** | 2-5ms | 0.5-1.5ms | 2-5ms | 1-3ms | 1-3ms |
 | **启动时间** | 3-8s | 1-3s | 3-5s | 2-5s | 2-4s |
 
-#<!-- chunk: 3.3 规模化性能 -->## 3.3 规模化性能
+## 3.3 规模化性能
 
 | 维度 | Istio | Linkerd | Consul Connect | Dapr | Traefik Mesh |
 |:---|:---|:---|:---|:---|:---|
@@ -262,7 +262,7 @@ Traefik Mesh 流量管理:
 | **配置推送延迟** | 1-5s | < 1s | 1-3s | 1-3s | 1-2s |
 | **大规模生产案例** | 多家 >1000 服务 | 多家 >500 服务 | 多家 >2000 服务 | 多家 >500 服务 | 有限 |
 
-#<!-- chunk: 3.4 Ambient Mesh 资源对比 (Istio 特有) -->## 3.4 Ambient Mesh 资源对比 (Istio 特有)
+## 3.4 Ambient Mesh 资源对比 (Istio 特有)
 
 ```yaml
 Sidecar 模式 (1000 个 Pod):
@@ -280,7 +280,7 @@ Ambient 模式 (1000 个 Pod, 50 节点):
 
 <!-- chunk: 四、安全能力对比 -->## 四、安全能力对比
 
-#<!-- chunk: 4.1 安全功能矩阵 -->## 4.1 安全功能矩阵
+## 4.1 安全功能矩阵
 
 | 安全能力 | Istio | Linkerd | Consul Connect | Dapr | Traefik Mesh |
 |:---|:---|:---|:---|:---|:---|
@@ -294,7 +294,7 @@ Ambient 模式 (1000 个 Pod, 50 节点):
 | **SPIFFE/SPIRE** | ✅ | ✅ | ⚠️ | ✅ | ❌ |
 | **零信任默认** | ✅ (deny-all) | ✅ (默认安全) | ✅ (deny by default) | ⚠️ | ❌ |
 
-#<!-- chunk: 4.2 安全最佳实践对比 -->## 4.2 安全最佳实践对比
+## 4.2 安全最佳实践对比
 
 ```yaml
 Istio 安全最佳实践:
@@ -321,7 +321,7 @@ Consul Connect 安全最佳实践:
 
 <!-- chunk: 五、可观测性对比 -->## 五、可观测性对比
 
-#<!-- chunk: 5.1 可观测性能力矩阵 -->## 5.1 可观测性能力矩阵
+## 5.1 可观测性能力矩阵
 
 | 可观测性 | Istio | Linkerd | Consul Connect | Dapr | Traefik Mesh |
 |:---|:---|:---|:---|:---|:---|
@@ -332,7 +332,7 @@ Consul Connect 安全最佳实践:
 | **实时流量** | ✅ (Kiali) | ✅ (tap) | ⚠️ | ❌ | ❌ |
 | **仪表板** | ✅ (Kiali/Grafana) | ✅ (viz/Grafana) | ✅ (Consul UI) | ✅ (Dashboard) | ⚠️ |
 
-#<!-- chunk: 5.2 监控集成配置对比 -->## 5.2 监控集成配置对比
+## 5.2 监控集成配置对比
 
 ```yaml
 Istio 监控栈:
@@ -366,7 +366,7 @@ Dapr 监控栈:
 
 <!-- chunk: 六、运维复杂度对比 -->## 六、运维复杂度对比
 
-#<!-- chunk: 6.1 安装与升级 -->## 6.1 安装与升级
+## 6.1 安装与升级
 
 | 运维维度 | Istio | Linkerd | Consul Connect | Dapr | Traefik Mesh |
 |:---|:---|:---|:---|:---|:---|
@@ -377,7 +377,7 @@ Dapr 监控栈:
 | **排错工具** | istioctl (丰富) | linkerd viz (简洁) | consul debug | dapr dashboard | kubectl logs |
 | **CRD 数量** | ~50+ | ~15 | ~20 | ~20 | ~10 |
 
-#<!-- chunk: 6.2 日常运维工作量 -->## 6.2 日常运维工作量
+## 6.2 日常运维工作量
 
 ```yaml
 Istio 运维:
@@ -415,7 +415,7 @@ Traefik Mesh 运维:
 
 <!-- chunk: 七、选型决策矩阵 -->## 七、选型决策矩阵
 
-#<!-- chunk: 7.1 按企业规模选型 -->## 7.1 按企业规模选型
+## 7.1 按企业规模选型
 
 | 企业规模 | 服务数量 | 推荐方案 | 备选方案 | 关键考虑 |
 |:---|:---|:---|:---|:---|
@@ -424,7 +424,7 @@ Traefik Mesh 运维:
 | 大型 (200-2000人) | 100-1000 | Istio | Consul Connect | 功能全面、可扩展 |
 | 超大型 (> 2000人) | > 1000 | Istio + Dapr | Consul + Dapr | 多层治理、多集群 |
 
-#<!-- chunk: 7.2 按技术场景选型 -->## 7.2 按技术场景选型
+## 7.2 按技术场景选型
 
 | 技术场景 | 首选 | 次选 | 原因 |
 |:---|:---|:---|:---|
@@ -441,7 +441,7 @@ Traefik Mesh 运维:
 | eBPF 优先 | Cilium | Istio Ambient | 内核级性能 |
 | 无 Sidecar 需求 | Istio Ambient | Cilium | 生产就绪 |
 
-#<!-- chunk: 7.3 选型评分卡 -->## 7.3 选型评分卡
+## 7.3 选型评分卡
 
 ```yaml
 评估维度权重:
@@ -509,7 +509,7 @@ Traefik Mesh 评分:
 
 <!-- chunk: 八、混合架构方案 -->## 八、混合架构方案
 
-#<!-- chunk: 8.1 服务网格 + Dapr 组合方案 -->## 8.1 服务网格 + Dapr 组合方案
+## 8.1 服务网格 + Dapr 组合方案
 
 在大型企业场景中，单一方案往往无法满足所有需求。最推荐的混合架构是"网络层服务网格 + 应用层 Dapr 运行时"：
 
@@ -543,7 +543,7 @@ graph TB
     B1 & B2 & B3 & B4 & B5 --> C1 & C2 & C3 & C4 & C5
 ```
 
-#<!-- chunk: 8.2 分层治理原则 -->## 8.2 分层治理原则
+## 8.2 分层治理原则
 
 ```yaml
 Istio/Linkerd 负责的网络层治理:
@@ -570,7 +570,7 @@ Dapr 负责的应用层治理:
 
 <!-- chunk: 九、选型执行计划 -->## 九、选型执行计划
 
-#<!-- chunk: 9.1 PoC 验证清单 -->## 9.1 PoC 验证清单
+## 9.1 PoC 验证清单
 
 ```yaml
 第一阶段 (Week 1): 基础功能验证
@@ -598,7 +598,7 @@ Dapr 负责的应用层治理:
   - 文档完整性评估
 ```
 
-#<!-- chunk: 9.2 TCO 分析模板 -->## 9.2 TCO 分析模板
+## 9.2 TCO 分析模板
 
 ```yaml
 年度总拥有成本 (TCO):
@@ -625,7 +625,7 @@ Dapr 负责的应用层治理:
 
 <!-- chunk: 十、结论与推荐 -->## 十、结论与推荐
 
-#<!-- chunk: 10.1 推荐决策 -->## 10.1 推荐决策
+## 10.1 推荐决策
 
 | 企业画像 | 推荐方案 | 置信度 |
 |:---|:---|:---|
@@ -636,7 +636,7 @@ Dapr 负责的应用层治理:
 | 边缘计算/IoT 场景 | Linkerd 或 Istio Ambient | 高 |
 | 新项目，标准化优先 | Istio + Gateway API | 高 |
 
-#<!-- chunk: 10.2 避坑指南 -->## 10.2 避坑指南
+## 10.2 避坑指南
 
 ```yaml
 常见选型错误:
@@ -676,7 +676,7 @@ Dapr 负责的应用层治理:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
 - Domain-26 服务网格与微服务 — 开源项目索引
 - Istio 企业级服务网格架构与实践
 - Linkerd 企业级服务网格深度实践

@@ -5,6 +5,7 @@ tags: ["domain-11", "runbook", "操作手册", "SRE", "运维", "ACK", "visibili
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 status: reviewed
 ---
 
@@ -28,6 +29,9 @@ Runbook（操作手册）是值班工程师在高压环境下的「救命稻草�
 - ✅ `kubectl delete pod my-pod -n my-ns`
 
 变量使用显式占位符：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 NAMESPACE="default"
@@ -57,12 +61,18 @@ kubectl get pod "$POD_NAME" -n "$NAMESPACE" -o jsonpath='{.status.phase}'
 
 ### Pod 重启
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 kubectl rollout restart deployment/my-app -n my-ns
 kubectl rollout status deployment/my-app -n my-ns
 ```
 
 ### 节点排空
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 kubectl drain node-01 --ignore-daemonsets --delete-emptydir-data
@@ -72,6 +82,9 @@ kubectl uncordon node-01  # 恢复调度
 
 ### 证书更新
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 kubeadm certs check-expiration
 kubeadm certs renew all
@@ -79,6 +92,9 @@ systemctl restart kubelet
 ```
 
 ### 配置回滚
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 kubectl rollout history deployment/my-app -n my-ns
@@ -120,7 +136,7 @@ kubectl get nodes -l alibabacloud.com/nodepool-id=$NP_ID
 
 - 在 ACK 控制台查看待升级组件列表
 - 先在测试集群验证兼容性
-- 升级后参考 [[concepts/cluster-upgrade-paths|cluster-upgrade-paths]] 确认版本一致
+- 升级后参考 [[concepts/cluster-upgrade-paths.md|cluster-upgrade-paths]] 确认版本一致
 
 ### 集群备份
 
@@ -142,7 +158,7 @@ kubectl get nodes -l alibabacloud.com/nodepool-id=$NP_ID
 
 ## 相关链接
 
-- [[domain-11-production-operations/01-production-sre-daily-ops|production-sre-daily-ops]] — 日常巡检与值班手册
-- [[domain-11-production-operations/03-on-call-playbook|on-call-playbook]] — 值班手册与告警响应规范
-- [[domain-11-production-operations/04-incident-response-template|incident-response-template]] — 事故响应模板
-- [[concepts/cluster-upgrade-paths|cluster-upgrade-paths]] — 集群升级路径与版本兼容性
+- [[domain-11-production-operations/01-production-sre-daily-ops.md|production-sre-daily-ops]] — 日常巡检与值班手册
+- [[domain-11-production-operations/03-on-call-playbook.md|on-call-playbook]] — 值班手册与告警响应规范
+- [[domain-11-production-operations/04-incident-response-template.md|incident-response-template]] — 事故响应模板
+- [[concepts/cluster-upgrade-paths.md|cluster-upgrade-paths]] — 集群升级路径与版本兼容性

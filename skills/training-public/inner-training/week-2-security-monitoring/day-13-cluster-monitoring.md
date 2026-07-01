@@ -42,7 +42,7 @@ last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
   - ACK ARMS [[Prometheus|Prometheus]] monitoring configuration
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] PrometheusQuery PromQL queries
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] PrometheusQuery PromQL queries
   - Grafana dashboard Kubernetes monitoring
   - PrometheusRule alerting rules configuration
   - kube-state-metrics cluster monitoring
@@ -233,6 +233,9 @@ kubectl port-forward -n monitoring svc/grafana 3000:80
 ---
 
 ### 任务 3: 自定义告警规则 (45min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > ack-alerts.yaml << 'EOF'
@@ -521,3 +524,5 @@ Day 14 将学习集群资源配额与 License 管理。
 - [告警管理](../../domain-06-observability/05-alerting-management.md)
 - [Prometheus 监控](../../domain-06-observability/10-monitoring-metrics-prometheus.md)
 - [可观测性架构总览](../../domain-06-observability/01-observability-architecture-overview.md)
+
+```

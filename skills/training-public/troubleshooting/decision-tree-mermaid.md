@@ -599,4 +599,4 @@ flowchart TD
 
 ## 参见
 
-- [[skills/training-lecturer/12-decision-tree/decision-tree-mermaid|讲师版]]
+- [[skills/training-lecturer/12-decision-tree/decision-tree-mermaid.md|讲师版]]

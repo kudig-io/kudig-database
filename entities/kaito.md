@@ -43,7 +43,7 @@ KAITO 是一个 Kubernetes Operator，简化在 Kubernetes 集群上运行 AI/ML
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -60,10 +60,10 @@ KAITO 是一个 Kubernetes Operator，简化在 Kubernetes 集群上运行 AI/ML
 ## 参考链接
 
 - [[falco]]
-- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]
-- [[concepts/storage-model|storage-model]]
-- [[concepts/secrets-management|secrets-management]]
+- [[concepts/storage-model.md|storage-model]]
+- [[concepts/secrets-management.md|secrets-management]]
 
 ## Related
 
@@ -74,6 +74,6 @@ KAITO 是一个 Kubernetes Operator，简化在 Kubernetes 集群上运行 AI/ML
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - kaito
-- [[entities/cncf-edge-ai|[[CNCF 边缘计算与 AI/ML 项目全景|CNCF 边缘计算与 AI/ML 项目全景]]]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-edge-ai.md|[[CNCF 边缘计算与 AI/ML 项目全景|CNCF 边缘计算与 AI/ML 项目全景]]]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

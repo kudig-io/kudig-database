@@ -656,6 +656,9 @@ ls -la /etc/kubernetes/pki/ca.crt
 
 #### 3.2.1 预防性措施
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 🛡️ 证书监控告警配置
 # PrometheusRule 示例
@@ -685,6 +688,9 @@ kubeadm alpha certs renew --certificate-dir=/etc/kubernetes/pki
 ```
 
 #### 3.2.1 解决步骤
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 步骤 1：确认证书过期情况
@@ -789,6 +795,9 @@ kubectl get nodes
 
 #### 3.4.1 解决步骤
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 步骤 1：确认资源瓶颈
 top -p $(pgrep kube-apiserver) -b -n 1
@@ -849,6 +858,9 @@ curl -k https://127.0.0.1:6443/metrics | grep -E "process_resident_memory|proces
 ### 3.5 请求限流（429 Too Many Requests）
 
 #### 3.5.1 解决步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1：确认限流情况
@@ -976,6 +988,9 @@ kubectl get --raw /healthz
 ### 3.7 紧急恢复流程
 
 #### 3.7.1 完全不可用时的恢复步骤
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 紧急恢复检查清单
@@ -1191,6 +1206,10 @@ kubectl get pods -A
    ```
 
 2. **重启关键组件**：
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
    ```bash
    # 重启 kubelet 使新证书生效
    systemctl restart kubelet
@@ -1218,6 +1237,10 @@ kubectl get pods -A
 
 #### 🛡️ 长期防护
 1. **自动化证书轮转**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
    ```bash
    # 配置 kubelet 证书自动轮转
    cat >> /var/lib/kubelet/config.yaml << EOF
@@ -1329,6 +1352,10 @@ kubectl get pods -A
 
 #### 🛡️ 长期优化
 1. **定时压缩任务**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
    ```bash
    # CronJob 每天凌晨压缩和整理
    cat << EOF | kubectl apply -f -
@@ -1372,6 +1399,7 @@ kubectl get pods -A
    
    # etcd 慢请求告警
    histogram_quantile(0.99, etcd_disk_wal_fsync_duration_seconds_bucket) > 0.1  # > 100ms
+
    ```
 
 #### 💡 经验总结
@@ -1389,6 +1417,11 @@ kubectl get pods -A
 
 #### 🔍 排查过程
 1. **现象确认**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
    ```bash
    kubectl apply -f deployment.yaml
    # Error from server (InternalError): Internal error occurred: failed calling webhook "validate.pod.com": Post "https://pod-validator.default.svc:443/validate": dial tcp 10.96.100.200:443: connect: connection refused
@@ -1406,6 +1439,10 @@ kubectl get pods -A
 
 #### ⚡ 紧急恢复
 1. **跳过 Webhook 直接修改 API Server**（高风险操作）：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
    ```bash
    # 方案 1：临时禁用 Webhook 准入控制（需重启 API Server）
    vim /etc/kubernetes/manifests/kube-apiserver.yaml
@@ -1434,7 +1471,7 @@ kubectl get pods -A
    # 删除问题配置
    ETCDCTL_API=3 etcdctl del /registry/admissionregistration.k8s.io/validatingwebhookconfigurations/pod-validator
    
-   # ⚠️ 风险：直接操作 etcd 跳过 API Server 校验，可能导致数据不一致
+ 
    ```
 
 3. **修复 Webhook Pod**：
@@ -1488,16 +1525,18 @@ kubectl get pods -A
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/09-control-plane-ha-troubleshooting|09-control-plane-ha-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/10-control-plane-upgrade-troubleshooting|10-control-plane-upgrade-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting|02-etcd-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting|03-scheduler-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/09-control-plane-ha-troubleshooting.md|09-control-plane-ha-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/10-control-plane-upgrade-troubleshooting.md|10-control-plane-upgrade-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]]
+
+```

@@ -1,5 +1,5 @@
 ---
-title: Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南 [topic-java-kubernetes]
+title: "Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南 [topic-java-kubernetes]"
 description: '# Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南'
 category: java-kubernetes
 tags:
@@ -278,7 +278,7 @@ metadata:
   name: jib-build
   namespace: ci-cd
 spec:
-  description: "使用 Jib 构建容器镜像（无需 [[entities/docker|docker]] daemon）"
+  description: "使用 Jib 构建容器镜像（无需 [[entities/docker.md|docker]] daemon）"
   workspaces:
     - name: source
   params:

@@ -49,7 +49,6 @@ created: "2026-05-23"
 #### 排查方法与步骤
 
 
-
 #### ResourceQuota 排查
 
 ```bash
@@ -98,7 +97,6 @@ kubectl get pods -n <namespace> -o json | \
 7. **证据留存**：保存 HPA/VPA 描述、metrics-server 日志与 metrics API 输出。
 
 #### 排查方法与步骤
-
 
 
 #### 排查决策树
@@ -158,8 +156,10 @@ HPA/VPA 问题
 #### 排查方法与步骤
 
 
-
 #### 排查决策树
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```
 Cluster Autoscaler 问题
@@ -211,7 +211,6 @@ Cluster Autoscaler 问题
 #### 排查方法与步骤
 
 
-
 #### 排查决策树
 
 ```
@@ -249,13 +248,13 @@ PDB 问题
 
 ## 相关链接
 
-- [[skills/monitor-kubernetes-metrics|K8s 监控指标]]
-- [[skills/troubleshoot-node-issues|节点故障排查]]
+- [[skills/monitor-kubernetes-metrics.md|K8s 监控指标]]
+- [[skills/troubleshoot-node-issues.md|节点故障排查]]
 
 ## Related
 
 - [[csi-fta]] — CSI 存储异常故障树分析
 - [[helm-fta]] — Helm 发布异常故障树分析
-- [[skills/skill-reference-diagnostic-workflow|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
-- [[skills/ts-command-output|ts-command-output]] — 命令输出根因解析
-- [[entities/kubelet|kubelet]] — kubelet
+- [[skills/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
+- [[skills/ts-command-output.md|ts-command-output]] — 命令输出根因解析
+- [[entities/kubelet.md|kubelet]] — kubelet

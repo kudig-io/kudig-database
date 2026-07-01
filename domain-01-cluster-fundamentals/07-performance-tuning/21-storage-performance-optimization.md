@@ -56,9 +56,9 @@ created: "2026-05-23"
 
 <!-- chunk: 💾 CSI驱动性能优化 -->## 💾 CSI驱动性能优化
 
-#<!-- chunk: 本地存储优化 -->## 本地存储优化
+## 本地存储优化
 
-##<!-- chunk: 1. Local PV配置优化 -->## 1. Local PV配置优化
+## 1. Local PV配置优化
 ```yaml
 # 本地存储CSI驱动配置
 apiVersion: storage.k8s.io/v1
@@ -162,7 +162,7 @@ parameters:
 reclaimPolicy: Delete
 ```
 
-##<!-- chunk: 2. 本地存储性能调优脚本 -->## 2. 本地存储性能调优脚本
+## 2. 本地存储性能调优脚本
 ```bash
 #!/bin/bash
 # 本地存储性能优化脚本
@@ -292,9 +292,9 @@ fi
 main "$@"
 ```
 
-#<!-- chunk: 云存储CSI优化 -->## 云存储CSI优化
+## 云存储CSI优化
 
-##<!-- chunk: 1. AWS EBS CSI优化 -->## 1. AWS EBS CSI优化
+## 1. AWS EBS CSI优化
 ```yaml
 # AWS EBS CSI驱动配置
 apiVersion: storage.k8s.io/v1
@@ -392,7 +392,7 @@ parameters:
 reclaimPolicy: Delete
 ```
 
-##<!-- chunk: 2. Google Cloud CSI优化 -->## 2. Google Cloud CSI优化
+## 2. Google Cloud CSI优化
 ```yaml
 # GCP PD CSI驱动配置
 apiVersion: storage.k8s.io/v1
@@ -437,9 +437,9 @@ reclaimPolicy: Delete
 
 <!-- chunk: 🎯 存储性能监控 -->## 🎯 存储性能监控
 
-#<!-- chunk: 存储指标收集 -->## 存储指标收集
+## 存储指标收集
 
-##<!-- chunk: 1. 存储性能Prometheus规则 -->## 1. 存储性能Prometheus规则
+## 1. 存储性能Prometheus规则
 ```yaml
 # 存储性能监控规则
 apiVersion: monitoring.coreos.com/v1
@@ -491,7 +491,7 @@ spec:
       expr: avg by(storageclass) (storage:io_utilization:percentage)
 ```
 
-##<!-- chunk: 2. 存储性能仪表板 -->## 2. 存储性能仪表板
+## 2. 存储性能仪表板
 ```json
 {
   "dashboard": {
@@ -550,9 +550,9 @@ spec:
 }
 ```
 
-#<!-- chunk: 存储性能分析工具 -->## 存储性能分析工具
+## 存储性能分析工具
 
-##<!-- chunk: 1. 存储性能分析脚本 -->## 1. 存储性能分析脚本
+## 1. 存储性能分析脚本
 ```python
 #!/usr/bin/env python3
 # 存储性能分析工具
@@ -932,9 +932,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 🚀 存储优化实践 -->## 🚀 存储优化实践
 
-#<!-- chunk: 存储分层策略 -->## 存储分层策略
+## 存储分层策略
 
-##<!-- chunk: 1. 多层存储配置 -->## 1. 多层存储配置
+## 1. 多层存储配置
 ```yaml
 # 多层存储类配置
 apiVersion: storage.k8s.io/v1
@@ -986,7 +986,7 @@ parameters:
 reclaimPolicy: Delete
 ```
 
-##<!-- chunk: 2. 智能存储分配 -->## 2. 智能存储分配
+## 2. 智能存储分配
 ```python
 #!/usr/bin/env python3
 # 智能存储分配控制器
@@ -1228,7 +1228,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 存储基础设施优化 -->## 存储基础设施优化
+## 存储基础设施优化
 - [ ] 选择和配置高性能CSI驱动
 - [ ] 优化本地存储设备和文件系统
 - [ ] 配置云存储性能参数
@@ -1236,7 +1236,7 @@ if __name__ == "__main__":
 - [ ] 部署存储性能监控系统
 - [ ] 建立存储容量规划机制
 
-#<!-- chunk: 性能调优实施 -->## 性能调优实施
+## 性能调优实施
 - [ ] 分析现有存储性能瓶颈
 - [ ] 优化存储I/O参数配置
 - [ ] 实施智能存储分配策略
@@ -1244,7 +1244,7 @@ if __name__ == "__main__":
 - [ ] 优化存储网络配置
 - [ ] 实施存储缓存策略
 
-#<!-- chunk: 监控和维护 -->## 监控和维护
+## 监控和维护
 - [ ] 部署存储性能指标收集
 - [ ] 建立存储性能基线
 - [ ] 实施自动化存储诊断
@@ -1261,9 +1261,9 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations KUDIG Database — Global MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -1282,5 +1282,5 @@ if __name__ == "__main__":
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]

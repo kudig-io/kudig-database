@@ -90,8 +90,6 @@ created: "2026-05-23"
   - `openssl` >= 1.1.1
 - **监控系统**: Prometheus + etcd exporter + kube-state-metrics >= v2.10（用于 trigger_metrics 匹配）
 
-> ⚠️ **重要**: 本 Skill 覆盖自建集群和托管集群的控制平面问题场景。对于托管集群，部分诊断步骤不适用（控制平面不可见），需要通过云厂商控制台或 API 进行排查。所有 etcd 修复操作（🔴⚫级别）执行前**必须备份 etcd 快照**。
-
 ---
 
 ## 2. 症状识别
@@ -191,6 +189,10 @@ kubectl get events -n kube-system --sort-by=.lastTimestamp --field-selector type
 > - 有 Warning 事件但组件 Running → **P2**，继续 T3
 
 **Step T3**: etcd 集群健康快检（60s，需要 etcdctl）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 在控制平面节点上执行，或通过 kubectl exec 进入 etcd Pod
 # 自建集群方式：
@@ -275,6 +277,10 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
 
 **Step D1.2**: etcd 集群状态检查
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 通过 kubectl exec 检查 etcd 状态
   ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}')
@@ -757,6 +763,11 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
   kubectl get pods -A | grep webhook
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方式1: 临时禁用问题 Webhook（添加 namespaceSelector 排除）
   kubectl patch validatingwebhookconfiguration <webhook-name> \
@@ -779,6 +790,10 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
   kubectl get --raw /metrics | grep apiserver_current_inflight_requests
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 恢复 Webhook 配置
   kubectl apply -f <webhook-backup.yaml>
@@ -795,7 +810,7 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
 - **审批提示**: "建议对 etcd 集群执行碎片整理 (defrag) 操作，以回收磁盘空间。操作将逐个成员进行，每个成员在 defrag 期间（通常 10-60s）无法处理请求。是否批准？"
 - **前置检查**:
   ```bash
-  # ⚠️ 必须先备份 etcd
+
   ETCDCTL_API=3 etcdctl \
     --endpoints=https://127.0.0.1:2379 \
     --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -873,7 +888,7 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
 - **审批提示**: "etcd 触发了 NOSPACE alarm，需要调整配额并清除 alarm。此操作需要修改 etcd 配置并可能需要重启 etcd 成员。是否批准？"
 - **前置检查**:
   ```bash
-  # ⚠️ 必须先备份 etcd
+
   ETCDCTL_API=3 etcdctl \
     --endpoints=https://127.0.0.1:2379 \
     --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -932,6 +947,11 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
   # 添加或修改 --quota-backend-bytes=8589934592 (8GB)
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 确认 alarm 已清除
   ETCDCTL_API=3 etcdctl \
@@ -966,6 +986,11 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
   kubectl get --raw /metrics | grep apiserver_flowcontrol_rejected_requests_total
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方式1: 增加特定 PriorityLevel 的并发数
   kubectl patch prioritylevelconfiguration <pl-name> \
@@ -1002,6 +1027,11 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
   # 监控 5 分钟内拒绝数是否下降
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 删除自定义 FlowSchema
   kubectl delete flowschema exempt-important-client
@@ -1026,6 +1056,11 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
   kubectl get pods -n kube-system -l component=kube-controller-manager
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 重启 Scheduler（如果使用 static pod）
   kubectl delete pod -n kube-system -l component=kube-scheduler
@@ -1095,9 +1130,13 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
        member remove <member-id>
      ```
   4. **准备新成员**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
      ```bash
      # 在新节点上准备 etcd 数据目录
-     rm -rf /var/lib/etcd/member
+     rm -rf /var/lib/etcd/member  # ⚠️ 删除系统/数据文件
      
      # 复制证书（从现有控制平面节点）
      scp /etc/kubernetes/pki/etcd/* new-node:/etc/kubernetes/pki/etcd/
@@ -1193,9 +1232,13 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
   - 通知可能受影响的用户
   - 确保 kubeadm 版本与集群版本匹配
 - **回滚方案**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
   ```bash
   # 恢复备份的证书
-  rm -rf /etc/kubernetes/pki
+  rm -rf /etc/kubernetes/pki  # ⚠️ 删除系统/数据文件
   cp -r /etc/kubernetes/pki.bak.<timestamp> /etc/kubernetes/pki
   
   # 重启控制平面组件
@@ -1211,11 +1254,19 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
      mv /etc/kubernetes/manifests/etcd.yaml /tmp/
      ```
   2. **清理旧数据目录**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
      ```bash
      # 在所有控制平面节点上
-     rm -rf /var/lib/etcd/member
+     rm -rf /var/lib/etcd/member  # ⚠️ 删除系统/数据文件
      ```
   3. **在第一个节点上从快照恢复**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+
      ```bash
      ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-snapshot.db \
        --name=<member-name> \
@@ -1298,9 +1349,13 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
      kubectl get nodes
      ```
 - **回滚方案**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
   ```bash
   # 恢复备份的 manifest
-  rm -rf /etc/kubernetes/manifests
+  rm -rf /etc/kubernetes/manifests  # ⚠️ 删除系统/数据文件
   cp -r /etc/kubernetes/manifests.bak.<timestamp> /etc/kubernetes/manifests
   ```
 
@@ -1309,6 +1364,10 @@ kubectl exec -n kube-system etcd-<control-plane-node> -- \
 ## 7. 验证确认
 
 ### 7.1 即时验证（修复后 2-5 分钟内）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # V1: etcd 集群健康检查
@@ -1919,6 +1978,10 @@ echo -e "\n${GREEN}etcd 性能诊断完成${NC}"
 ```
 
 ### A.3 控制平面修复后验证 (verify-control-plane.sh)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 #!/bin/bash

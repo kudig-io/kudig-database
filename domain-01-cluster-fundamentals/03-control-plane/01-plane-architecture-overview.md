@@ -258,6 +258,9 @@ kubelet ↔ CRI/gRPC
 
 ### 3.1 写操作数据流
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                           Write Operation Data Flow                              │
@@ -835,7 +838,7 @@ Kubernetes控制平面是整个系统的指挥中枢，其架构设计直接影�
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
 - 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...
@@ -853,3 +856,5 @@ Kubernetes控制平面是整个系统的指挥中枢，其架构设计直接影�
 - quality-report
 - 02-plane-components-interaction
 - 03-plane-high-availability
+
+```

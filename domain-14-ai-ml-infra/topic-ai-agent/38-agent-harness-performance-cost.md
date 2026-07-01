@@ -92,7 +92,7 @@ Agent Harness 的性能和成本优化是生产化的核心挑战。一个未优
 
 <!-- chunk: 1. Agent 成本结构分析 -->## 1. Agent 成本结构分析
 
-#<!-- chunk: 1.1 成本组成 -->## 1.1 成本组成
+## 1.1 成本组成
 
 ```
 Agent 任务成本分解:
@@ -123,7 +123,7 @@ Agent 任务成本分解:
   优化上下文长度的收益是乘数级的。
 ```
 
-#<!-- chunk: 1.2 成本-质量权衡矩阵 -->## 1.2 成本-质量权衡矩阵
+## 1.2 成本-质量权衡矩阵
 
 | 优化策略 | 成本节省 | 质量影响 | 风险 | 优先级 |
 |---------|---------|---------|------|--------|
@@ -139,7 +139,7 @@ Agent 任务成本分解:
 
 <!-- chunk: 2. Token 优化策略 -->## 2. Token 优化策略
 
-#<!-- chunk: 2.1 上下文压缩 -->## 2.1 上下文压缩
+## 2.1 上下文压缩
 
 ```python
 class ContextCompressor:
@@ -241,7 +241,7 @@ class ContextCompressor:
         return len(text.split()) * 1.3  # 粗略估算
 ```
 
-#<!-- chunk: 2.2 推理预算分配 -->## 2.2 推理预算分配
+## 2.2 推理预算分配
 
 ```python
 class ReasoningBudgetAllocator:
@@ -289,7 +289,7 @@ class ReasoningBudgetAllocator:
 
 <!-- chunk: 3. 模型路由 -->## 3. 模型路由
 
-#<!-- chunk: 3.1 智能模型路由器 -->## 3.1 智能模型路由器
+## 3.1 智能模型路由器
 
 ```python
 class ModelRouter:
@@ -380,7 +380,7 @@ class ModelRouter:
 
 <!-- chunk: 4. 缓存策略 -->## 4. 缓存策略
 
-#<!-- chunk: 4.1 多级缓存架构 -->## 4.1 多级缓存架构
+## 4.1 多级缓存架构
 
 ```python
 import hashlib
@@ -483,7 +483,7 @@ class SemanticCache:
         )
 ```
 
-#<!-- chunk: 4.2 工具结果缓存 -->## 4.2 工具结果缓存
+## 4.2 工具结果缓存
 
 ```python
 class ToolResultCache:
@@ -526,7 +526,7 @@ class ToolResultCache:
 
 <!-- chunk: 5. 延迟优化 -->## 5. 延迟优化
 
-#<!-- chunk: 5.1 并行化策略 -->## 5.1 并行化策略
+## 5.1 并行化策略
 
 ```python
 class LatencyOptimizer:
@@ -572,7 +572,7 @@ class LatencyOptimizer:
         return full_response
 ```
 
-#<!-- chunk: 5.2 Prompt Caching -->## 5.2 Prompt Caching
+## 5.2 Prompt Caching
 
 ```python
 class PromptCacheOptimizer:
@@ -610,7 +610,7 @@ class PromptCacheOptimizer:
 
 <!-- chunk: 6. Agent FinOps -->## 6. Agent FinOps
 
-#<!-- chunk: 6.1 成本监控 Dashboard -->## 6.1 成本监控 Dashboard
+## 6.1 成本监控 Dashboard
 
 ```python
 class AgentFinOps:
@@ -666,7 +666,7 @@ class AgentFinOps:
         return opportunities
 ```
 
-#<!-- chunk: 6.2 成本预警与限流 -->## 6.2 成本预警与限流
+## 6.2 成本预警与限流
 
 ```python
 class CostThrottler:
@@ -710,7 +710,7 @@ class CostThrottler:
 
 <!-- chunk: 7. 最佳实践 -->## 7. 最佳实践
 
-#<!-- chunk: 7.1 性能优化核心原则 -->## 7.1 性能优化核心原则
+## 7.1 性能优化核心原则
 
 | 原则 | 说明 | 预期收益 |
 |------|------|---------|
@@ -722,7 +722,7 @@ class CostThrottler:
 | **Prompt 缓存** | 利用 Provider 前缀缓存 | 成本 -80% 前缀 |
 | **语义缓存** | 相似问题复用答案 | 成本 -20% |
 
-#<!-- chunk: 7.2 反模式 -->## 7.2 反模式
+## 7.2 反模式
 
 | 反模式 | 问题 | 正确做法 |
 |--------|------|----------|
@@ -764,17 +764,17 @@ class CostThrottler:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## Related
 

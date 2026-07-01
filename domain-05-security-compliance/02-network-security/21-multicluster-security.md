@@ -564,14 +564,14 @@ spec:
     secret:
       name: shared-secrets
   data:
-    - match:
-        secretKey: api-key
-        remoteRef:
-          remoteKey: "shared/api-key"
-    - match:
-        secretKey: client-cert
-        remoteRef:
-          remoteKey: "shared/client-cert"
+    - matchers:
+      - secretKey="api-key"
+      - remoteRef=""
+      - remoteKey="shared/api-key"
+    - matchers:
+      - secretKey="client-cert"
+      - remoteRef=""
+      - remoteKey="shared/client-cert"
 ```
 
 <!-- chunk: 四、统一安全策略管理 -->
@@ -986,7 +986,7 @@ echo "Report saved to: /reports/security_report_$(date +%Y%m%d).txt"
 ## Obsidian 相关文档
 
 - domain-05-security-compliance KUDIG Database — Global MOC
-- [[domain-05-security-compliance/README|[[Security Domain|Security Domain]]]]
+- [[domain-05-security-compliance/README.md|[[Security Domain|Security Domain]]]]
 - index.md|Domain-7 安全 — 开源项目索引]]
 - Kubernetes 认证授权体系详解
 - 网络安全策略与零信任架构
@@ -1005,4 +1005,4 @@ echo "Report saved to: /reports/security_report_$(date +%Y%m%d).txt"
 - 01-authentication-authorization-system
 - 02-network-security-policies
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

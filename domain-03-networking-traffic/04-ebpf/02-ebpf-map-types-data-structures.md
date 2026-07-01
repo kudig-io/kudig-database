@@ -73,7 +73,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. eBPF Map 概述与作用 -->## 1. eBPF Map 概述与作用
 
-#<!-- chunk: 1.1 什么是 eBPF Map (What is eBPF Map) -->## 1.1 什么是 eBPF Map (What is eBPF Map)
+## 1.1 什么是 eBPF Map (What is eBPF Map)
 
 eBPF Map 是内核中的键值存储数据结构，是 eBPF 程序间以及 eBPF 程序与用户空间程序通信的核心机制。它提供了持久化存储、状态共享和数据传递等功能。
 
@@ -124,7 +124,7 @@ eBPF Map 访问接口:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-#<!-- chunk: 1.2 所有 Map 类型总览 (All Map Types Overview) -->## 1.2 所有 Map 类型总览 (All Map Types Overview)
+## 1.2 所有 Map 类型总览 (All Map Types Overview)
 
 ```
 eBPF Map 类型分类 (Linux 6.x)
@@ -170,7 +170,7 @@ Array            BPF_MAP_TYPE_ARRAY                     3.19     固定数组
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-#<!-- chunk: 1.3 Map 创建与基本操作 (Map Creation) -->## 1.3 Map 创建与基本操作 (Map Creation)
+## 1.3 Map 创建与基本操作 (Map Creation)
 
 ```c
 /* eBPF 程序中的 Map 定义方式 */
@@ -274,7 +274,7 @@ int main() {
 
 <!-- chunk: 2. Hash Map 类型 -->## 2. Hash Map 类型
 
-#<!-- chunk: 2.1 BPF_MAP_TYPE_HASH 基础哈希表 -->## 2.1 BPF_MAP_TYPE_HASH 基础哈希表
+## 2.1 BPF_MAP_TYPE_HASH 基础哈希表
 
 ```
 Hash Map 内部结构
@@ -422,7 +422,7 @@ int xdp_conn_track(struct xdp_md *ctx) {
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 2.2 BPF_MAP_TYPE_PERCPU_HASH Per-CPU 哈希表 -->## 2.2 BPF_MAP_TYPE_PERCPU_HASH Per-CPU 哈希表
+## 2.2 BPF_MAP_TYPE_PERCPU_HASH Per-CPU 哈希表
 
 ```c
 /* Per-CPU Hash Map - 无锁高并发计数 */
@@ -483,7 +483,7 @@ void read_percpu_hash(int map_fd) {
 }
 ```
 
-#<!-- chunk: 2.3 BPF_MAP_TYPE_LRU_HASH LRU 哈希表 -->## 2.3 BPF_MAP_TYPE_LRU_HASH LRU 哈希表
+## 2.3 BPF_MAP_TYPE_LRU_HASH LRU 哈希表
 
 ```c
 /* LRU Hash Map - 自动淘汰最久未使用的条目 */
@@ -549,7 +549,7 @@ int track_flows(struct xdp_md *ctx) {
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 2.4 Hash Map 对比表 -->## 2.4 Hash Map 对比表
+## 2.4 Hash Map 对比表
 
 ```
 Hash Map 类型对比
@@ -574,7 +574,7 @@ Hash Map 类型对比
 
 <!-- chunk: 3. Array Map 类型 -->## 3. Array Map 类型
 
-#<!-- chunk: 3.1 BPF_MAP_TYPE_ARRAY 基础数组 -->## 3.1 BPF_MAP_TYPE_ARRAY 基础数组
+## 3.1 BPF_MAP_TYPE_ARRAY 基础数组
 
 ```
 Array Map 内部结构
@@ -686,7 +686,7 @@ int xdp_count_protos(struct xdp_md *ctx) {
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 3.2 BPF_MAP_TYPE_PERCPU_ARRAY Per-CPU 数组 -->## 3.2 BPF_MAP_TYPE_PERCPU_ARRAY Per-CPU 数组
+## 3.2 BPF_MAP_TYPE_PERCPU_ARRAY Per-CPU 数组
 
 ```c
 /* Per-CPU Array - 最高性能计数器 */
@@ -801,7 +801,7 @@ void print_xdp_stats(int map_fd) {
 }
 ```
 
-#<!-- chunk: 3.3 BPF_MAP_TYPE_PROG_ARRAY 程序数组 (尾调用) -->## 3.3 BPF_MAP_TYPE_PROG_ARRAY 程序数组 (尾调用)
+## 3.3 BPF_MAP_TYPE_PROG_ARRAY 程序数组 (尾调用)
 
 ```c
 /* Prog Array - 实现 eBPF 程序链 (Tail Calls) */
@@ -910,7 +910,7 @@ void setup_tail_calls(struct bpf_object *obj) {
 
 <!-- chunk: 4. Ring Buffer 高性能事件传递 -->## 4. Ring Buffer 高性能事件传递
 
-#<!-- chunk: 4.1 Ring Buffer 架构 (Ring Buffer Architecture) -->## 4.1 Ring Buffer 架构 (Ring Buffer Architecture)
+## 4.1 Ring Buffer 架构 (Ring Buffer Architecture)
 
 ```
 Ring Buffer vs Perf Event Array 对比
@@ -961,7 +961,7 @@ BPF_MAP_TYPE_RINGBUF (5.8+，推荐):
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-#<!-- chunk: 4.2 Ring Buffer 完整使用示例 -->## 4.2 Ring Buffer 完整使用示例
+## 4.2 Ring Buffer 完整使用示例
 
 ```c
 /* eBPF 程序侧 - 使用 Ring Buffer */
@@ -1217,7 +1217,7 @@ cleanup:
 }
 ```
 
-#<!-- chunk: 4.3 Ring Buffer 高级特性 -->## 4.3 Ring Buffer 高级特性
+## 4.3 Ring Buffer 高级特性
 
 ```c
 /* Ring Buffer 高级特性 */
@@ -1264,7 +1264,7 @@ int check_ringbuf_space(struct pt_regs *ctx) {
 
 <!-- chunk: 5. Perf Event Array -->## 5. Perf Event Array
 
-#<!-- chunk: 5.1 Perf Event Array 使用 -->## 5.1 Perf Event Array 使用
+## 5.1 Perf Event Array 使用
 
 ```c
 /* BPF_MAP_TYPE_PERF_EVENT_ARRAY 使用示例 */
@@ -1371,7 +1371,7 @@ int main() {
 
 <!-- chunk: 6. Stack 与 Queue Map -->## 6. Stack 与 Queue Map
 
-#<!-- chunk: 6.1 BPF_MAP_TYPE_STACK (LIFO) -->## 6.1 BPF_MAP_TYPE_STACK (LIFO)
+## 6.1 BPF_MAP_TYPE_STACK (LIFO)
 
 ```c
 /* Stack Map - 后进先出 (LIFO) */
@@ -1437,7 +1437,7 @@ int process_ips(struct pt_regs *ctx) {
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 6.2 BPF_MAP_TYPE_QUEUE (FIFO) -->## 6.2 BPF_MAP_TYPE_QUEUE (FIFO)
+## 6.2 BPF_MAP_TYPE_QUEUE (FIFO)
 
 ```c
 /* Queue Map - 先进先出 (FIFO) */
@@ -1513,7 +1513,7 @@ int process_queue(struct pt_regs *ctx) {
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 6.3 BPF_MAP_TYPE_STACK_TRACE 调用栈跟踪 -->## 6.3 BPF_MAP_TYPE_STACK_TRACE 调用栈跟踪
+## 6.3 BPF_MAP_TYPE_STACK_TRACE 调用栈跟踪
 
 ```c
 /* Stack Trace Map - 存储内核/用户态调用栈 */
@@ -1599,7 +1599,7 @@ interval:s:10 {
 
 <!-- chunk: 7. LPM Trie Map -->## 7. LPM Trie Map
 
-#<!-- chunk: 7.1 LPM Trie 原理 (LPM Trie Principles) -->## 7.1 LPM Trie 原理 (LPM Trie Principles)
+## 7.1 LPM Trie 原理 (LPM Trie Principles)
 
 ```
 LPM Trie (Longest Prefix Match Trie) 结构
@@ -1809,7 +1809,7 @@ int main() {
 
 <!-- chunk: 8. Map-in-Map 嵌套结构 -->## 8. Map-in-Map 嵌套结构
 
-#<!-- chunk: 8.1 Map-in-Map 原理与类型 -->## 8.1 Map-in-Map 原理与类型
+## 8.1 Map-in-Map 原理与类型
 
 ```
 Map-in-Map 嵌套结构
@@ -2014,7 +2014,7 @@ int hot_update_policy(int outer_map_fd, struct policy_entry *new_rules, int coun
 
 <!-- chunk: 9. 用户空间与内核空间通信模式 -->## 9. 用户空间与内核空间通信模式
 
-#<!-- chunk: 9.1 通信模式总览 -->## 9.1 通信模式总览
+## 9.1 通信模式总览
 
 ```
 eBPF 内核↔用户空间通信模式
@@ -2049,7 +2049,7 @@ BPF Iterator          内→用户       遍历内核对象            批量数
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-#<!-- chunk: 9.2 BPF Iterator - 高效批量数据导出 -->## 9.2 BPF Iterator - 高效批量数据导出
+## 9.2 BPF Iterator - 高效批量数据导出
 
 ```c
 /* BPF Iterator - 遍历内核对象并导出数据 (5.8+) */
@@ -2105,7 +2105,7 @@ int dump_tcp_sockets(struct bpf_iter__tcp *ctx) {
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 9.3 BPF Local Storage - 绑定对象的存储 -->## 9.3 BPF Local Storage - 绑定对象的存储
+## 9.3 BPF Local Storage - 绑定对象的存储
 
 ```c
 /* BPF Local Storage - 无需哈希查找的对象绑定存储 */
@@ -2220,7 +2220,7 @@ char LICENSE[] SEC("license") = "GPL";
 
 <!-- chunk: 10. Map 性能优化与调优 -->## 10. Map 性能优化与调优
 
-#<!-- chunk: 10.1 Map 选择决策树 -->## 10.1 Map 选择决策树
+## 10.1 Map 选择决策树
 
 ```
 Map 类型选择决策树
@@ -2260,7 +2260,7 @@ Map 类型选择决策树
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-#<!-- chunk: 10.2 Map 性能基准 -->## 10.2 Map 性能基准
+## 10.2 Map 性能基准
 
 ```
 Map 操作性能基准 (Intel Xeon, Linux 5.15, eBPF JIT)
@@ -2287,7 +2287,7 @@ LRU_PERCPU_HASH            ~30         ~35       Per-CPU LRU，竞争少
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-#<!-- chunk: 10.3 内存优化策略 -->## 10.3 内存优化策略
+## 10.3 内存优化策略
 
 ```c
 /* 内存优化技巧 */
@@ -2349,7 +2349,7 @@ struct {
 /* Per-CPU Map 每个核心独立 Cache Line，避免竞争 */
 ```
 
-#<!-- chunk: 10.4 Map 监控与调优 -->## 10.4 Map 监控与调优
+## 10.4 Map 监控与调优
 
 ```bash
 # Map 监控工具
@@ -2406,7 +2406,7 @@ ulimit -l unlimited  # 或在 /etc/security/limits.conf 中设置
 
 <!-- chunk: 11. bpftool Map 操作实践 -->## 11. bpftool Map 操作实践
 
-#<!-- chunk: 11.1 bpftool 基础操作 (Basic Operations) -->## 11.1 bpftool 基础操作 (Basic Operations)
+## 11.1 bpftool 基础操作 (Basic Operations)
 
 ```bash
 # ========================================================
@@ -2458,7 +2458,7 @@ bpftool btf show id <btf_id>
 bpftool btf dump id <btf_id>
 ```
 
-#<!-- chunk: 11.2 实战脚本示例 -->## 11.2 实战脚本示例
+## 11.2 实战脚本示例
 
 ```bash
 #!/bin/bash
@@ -2552,7 +2552,7 @@ print(' '.join(f'{b:02x}' for b in ip))
 # add_prefix "$MAP_ID" "10.0.0.0/8" 1        # 允许内网
 ```
 
-#<!-- chunk: 11.3 使用 libbpf skeleton 的完整示例 -->## 11.3 使用 libbpf skeleton 的完整示例
+## 11.3 使用 libbpf skeleton 的完整示例
 
 ```c
 /* 完整的 eBPF 程序骨架 - 展示 Map 综合使用 */
@@ -2781,7 +2781,7 @@ data:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-35-ebpf-technology MOC
-- [[domain-03-networking-traffic/README|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
+- [[domain-03-networking-traffic/README.md|Domain 03: eBPF 技术体系 (eBPF Technology Stack)]]
 - Domain-35 eBPF 技术 — 开源项目索引
 - eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...
 - Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)

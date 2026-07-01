@@ -105,7 +105,7 @@ k8s_versions:
 
 <!-- chunk: 一、滚动更新 (Rolling Update) -->## 一、滚动更新 (Rolling Update)
 
-#<!-- chunk: 1.1 架构原理 -->## 1.1 架构原理
+## 1.1 架构原理
 
 ```mermaid
 flowchart LR
@@ -133,7 +133,7 @@ flowchart LR
     style Transition fill:#fff8e1
 ```
 
-#<!-- chunk: 1.2 状态机流转 -->## 1.2 状态机流转
+## 1.2 状态机流转
 
 ```mermaid
 stateDiagram-v2
@@ -151,7 +151,7 @@ stateDiagram-v2
     Running --> [*]: 删除 Deployment
 ```
 
-#<!-- chunk: 1.3 生产配置 -->## 1.3 生产配置
+## 1.3 生产配置
 
 ```yaml
 apiVersion: apps/v1
@@ -185,7 +185,7 @@ spec:
 
 <!-- chunk: 二、蓝绿部署 (Blue-Green Deployment) -->## 二、蓝绿部署 (Blue-Green Deployment)
 
-#<!-- chunk: 2.1 架构原理 -->## 2.1 架构原理
+## 2.1 架构原理
 
 ```mermaid
 flowchart TB
@@ -214,7 +214,7 @@ flowchart TB
     style Green fill:#fff8e1
 ```
 
-#<!-- chunk: 2.2 切换流程 -->## 2.2 切换流程
+## 2.2 切换流程
 
 ```mermaid
 sequenceDiagram
@@ -244,7 +244,7 @@ sequenceDiagram
     end
 ```
 
-#<!-- chunk: 2.3 完整配置 -->## 2.3 完整配置
+## 2.3 完整配置
 
 ```yaml
 # Blue 环境 (当前活跃)
@@ -303,7 +303,7 @@ spec:
       targetPort: 8080
 ```
 
-#<!-- chunk: 2.4 数据库兼容性处理 -->## 2.4 数据库兼容性处理
+## 2.4 数据库兼容性处理
 
 ```mermaid
 flowchart TB
@@ -332,7 +332,7 @@ flowchart TB
 
 <!-- chunk: 三、金丝雀发布 (Canary Release) -->## 三、金丝雀发布 (Canary Release)
 
-#<!-- chunk: 3.1 架构原理 -->## 3.1 架构原理
+## 3.1 架构原理
 
 ```mermaid
 flowchart TB
@@ -369,7 +369,7 @@ flowchart TB
     style Canary fill:#ffe0b2
 ```
 
-#<!-- chunk: 3.2 Flagger 自动金丝雀流程 -->## 3.2 Flagger 自动金丝雀流程
+## 3.2 Flagger 自动金丝雀流程
 
 ```mermaid
 stateDiagram-v2
@@ -393,7 +393,7 @@ stateDiagram-v2
     Succeeded --> Waiting: 等待下一次更新
 ```
 
-#<!-- chunk: 3.3 Flagger + Gateway API 配置 -->## 3.3 Flagger + Gateway API 配置
+## 3.3 Flagger + Gateway API 配置
 
 ```yaml
 apiVersion: flagger.app/v1beta1
@@ -441,7 +441,7 @@ spec:
           cmd: "curl -f http://payment-canary:8080/healthz"
 ```
 
-#<!-- chunk: 3.4 渐进式流量调整 -->## 3.4 渐进式流量调整
+## 3.4 渐进式流量调整
 
 ```mermaid
 flowchart LR
@@ -474,7 +474,7 @@ flowchart LR
 
 <!-- chunk: 四、A/B 测试部署 -->## 四、A/B 测试部署
 
-#<!-- chunk: 4.1 架构原理 -->## 4.1 架构原理
+## 4.1 架构原理
 
 ```mermaid
 flowchart TB
@@ -504,7 +504,7 @@ flowchart TB
     style B fill:#ffe0b2
 ```
 
-#<!-- chunk: 4.2 Istio A/B 测试配置 -->## 4.2 Istio A/B 测试配置
+## 4.2 Istio A/B 测试配置
 
 ```yaml
 apiVersion: networking.istio.io/v1beta1
@@ -515,17 +515,17 @@ spec:
   hosts:
     - payment.example.com
   http:
-    - match:
-        - headers:
-            x-canary:
-              exact: "true"
-        - uri:
-            prefix: /api/v2
-      route:
-        - destination:
-            host: payment
-            subset: v2
-          weight: 100
+    - matchers:
+      - - headers=""
+      - x-canary=""
+      - exact="true"
+      - - uri=""
+      - prefix="/api/v2"
+      - route=""
+      - - destination=""
+      - host="payment"
+      - subset="v2"
+      - weight="100"
     - route:
         - destination:
             host: payment
@@ -555,7 +555,7 @@ spec:
 
 <!-- chunk: 五、影子流量部署 (Shadow / Mirror) -->## 五、影子流量部署 (Shadow / Mirror)
 
-#<!-- chunk: 5.1 架构原理 -->## 5.1 架构原理
+## 5.1 架构原理
 
 ```mermaid
 flowchart TB
@@ -586,7 +586,7 @@ flowchart TB
     style Analysis fill:#e8f5e9
 ```
 
-#<!-- chunk: 5.2 Istio 流量镜像配置 -->## 5.2 Istio 流量镜像配置
+## 5.2 Istio 流量镜像配置
 
 ```yaml
 apiVersion: networking.istio.io/v1beta1
@@ -613,7 +613,7 @@ spec:
 
 <!-- chunk: 六、特性开关部署 (Feature Flag) -->## 六、特性开关部署 (Feature Flag)
 
-#<!-- chunk: 6.1 架构原理 -->## 6.1 架构原理
+## 6.1 架构原理
 
 ```mermaid
 flowchart TB
@@ -644,7 +644,7 @@ flowchart TB
     style Flags fill:#e3f2fd
 ```
 
-#<!-- chunk: 6.2 与 K8s 集成的特性开关 -->## 6.2 与 K8s 集成的特性开关
+## 6.2 与 K8s 集成的特性开关
 
 ```yaml
 # ConfigMap 作为简单特性开关
@@ -677,7 +677,7 @@ spec:
 
 <!-- chunk: 七、多环境晋升流水线 -->## 七、多环境晋升流水线
 
-#<!-- chunk: 7.1 完整晋升流程 -->## 7.1 完整晋升流程
+## 7.1 完整晋升流程
 
 ```mermaid
 flowchart LR
@@ -714,7 +714,7 @@ flowchart LR
     style DR fill:#ffebee
 ```
 
-#<!-- chunk: 7.2 GitOps 晋升流水线 -->## 7.2 GitOps 晋升流水线
+## 7.2 GitOps 晋升流水线
 
 ```mermaid
 sequenceDiagram
@@ -751,7 +751,7 @@ sequenceDiagram
 
 <!-- chunk: 八、部署模式选型决策树 -->## 八、部署模式选型决策树
 
-#<!-- chunk: 8.1 综合决策树 -->## 8.1 综合决策树
+## 8.1 综合决策树
 
 ```mermaid
 flowchart TD
@@ -792,7 +792,7 @@ flowchart TD
     style ROLLBACK fill:#ffebee
 ```
 
-#<!-- chunk: 8.2 模式对比矩阵 -->## 8.2 模式对比矩阵
+## 8.2 模式对比矩阵
 
 | 模式 | 零停机 | 快速回滚 | 资源需求 | 复杂度 | 适用场景 |
 |:---|:---:|:---:|:---:|:---:|:---|
@@ -881,9 +881,9 @@ echo "=== 检查完成 ==="
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -981,11 +981,11 @@ echo "=== 检查完成 ==="
 - 56-smart-elderly-care
 - 44-martech-adtech
 - 95-industrial-metaverse
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 
 - 99-karpenter-node-autoscaling-guide
 - 99-keda-event-driven-autoscaling-guide
 - 99-kubernetes-multi-tenant-architecture
-- [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint|99-kubernetes-production-architecture-blueprint]]
+- [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]

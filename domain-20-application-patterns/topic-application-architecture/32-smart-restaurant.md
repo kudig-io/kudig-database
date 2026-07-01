@@ -118,7 +118,7 @@ k8s_versions:
 
 <!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-#<!-- chunk: 1.1 市场规模与趋势 -->## 1.1 市场规模与趋势
+## 1.1 市场规模与趋势
 
 智慧餐饮涵盖点餐、后厨、供应链、会员运营全链路，是餐饮数字化转型的核心。中国餐饮市场规模超过 5 万亿元，智慧餐饮 SaaS 市场预计从 2024 年的 200 亿元增长到 2030 年的 800 亿元。美团、饿了么、客如云、哗啦啦等平台竞争激烈，核心趋势包括扫码点餐、智能后厨 KDS、AI 菜品推荐和供应链预测。
 
@@ -130,7 +130,7 @@ k8s_versions:
 | 智能 KDS 部署率 | 20% | 40% | 70% |
 | AI 推荐覆盖 | 5% | 20% | 50% |
 
-#<!-- chunk: 1.2 行业痛点 -->## 1.2 行业痛点
+## 1.2 行业痛点
 
 | 痛点 | 说明 | 数字化转型驱动 |
 |:---|:---|:---|
@@ -141,7 +141,7 @@ k8s_versions:
 | 供应链 | 食材采购与库存管理 | AI 需求预测 + 自动补货 |
 | 食品安全 | 明厨亮灶与溯源 | 视频监控 + 区块链溯源 |
 
-#<!-- chunk: 1.3 数字化转型架构影响 -->## 1.3 数字化转型架构影响
+## 1.3 数字化转型架构影响
 
 智慧餐饮架构需要覆盖顾客触点（扫码点餐/预订/自助收银/外卖）、门店运营（桌台/点餐/KDS后厨/库存/会员）、总部管理（菜品研发/供应链/营销/财务）和数据中台（销售分析/顾客画像/供应链预测/成本核算）。核心挑战是午晚高峰的高并发处理和后厨智能排单。
 
@@ -149,23 +149,23 @@ k8s_versions:
 
 <!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-#<!-- chunk: 2.1 扫码点餐与自助收银 -->## 2.1 扫码点餐与自助收银
+## 2.1 扫码点餐与自助收银
 
 顾客扫码进入小程序点餐，支持菜品定制（口味/加料/忌口）、套餐推荐和多种支付方式。订单实时推送至后厨 KDS 系统。高峰期需要支持单店每分钟 100+ 单的并发处理能力。
 
-#<!-- chunk: 2.2 后厨 KDS 智能排单 -->## 2.2 后厨 KDS 智能排单
+## 2.2 后厨 KDS 智能排单
 
 Kitchen Display System 将订单按工作站（凉菜/热菜/烧烤/饮品）分发，根据菜品制作时间、锅具占用和厨师负荷智能排序。优先级调整考虑订单等待时间、催单和外卖时效。后厨状态实时同步至前厅。
 
-#<!-- chunk: 2.3 桌台与排队管理 -->## 2.3 桌台与排队管理
+## 2.3 桌台与排队管理
 
 实时管理桌台状态（空闲/就餐/待清洁），排队叫号根据桌型和大厅空位智能匹配。翻台提醒和清洁任务自动派发。翻台率数据用于优化排班和桌台布局。
 
-#<!-- chunk: 2.4 会员精准营销 -->## 2.4 会员精准营销
+## 2.4 会员精准营销
 
 基于消费数据构建用户画像，支持积分/储值/优惠券/生日关怀等多维度会员运营。AI 推荐引擎根据用户口味偏好和历史消费推荐菜品。精准营销提升复购率 20%+。
 
-#<!-- chunk: 2.5 智能供应链 -->## 2.5 智能供应链
+## 2.5 智能供应链
 
 基于历史销量、天气、节假日等因素预测各门店食材需求，自动生成采购单。库存管理支持先进先出、效期预警和损耗分析。将食材浪费降低 15%+。
 
@@ -173,7 +173,7 @@ Kitchen Display System 将订单按工作站（凉菜/热菜/烧烤/饮品）分
 
 <!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-#<!-- chunk: 3.1 智慧餐饮全景架构 -->## 3.1 智慧餐饮全景架构
+## 3.1 智慧餐饮全景架构
 
 ```mermaid
 graph TB
@@ -247,7 +247,7 @@ graph TB
 
 <!-- chunk: 5. Kubernetes 部署方案 -->## 5. Kubernetes 部署方案
 
-#<!-- chunk: 5.1 点餐服务 Deployment -->## 5.1 点餐服务 Deployment
+## 5.1 点餐服务 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -322,7 +322,7 @@ spec:
             periodSeconds: 10
 ```
 
-#<!-- chunk: 5.2 KDS 后厨显示 Deployment -->## 5.2 KDS 后厨显示 Deployment
+## 5.2 KDS 后厨显示 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -361,7 +361,7 @@ spec:
               cpu: "1000m"
 ```
 
-#<!-- chunk: 5.3 ConfigMap, Service 与 Secret -->## 5.3 ConfigMap, Service 与 Secret
+## 5.3 ConfigMap, Service 与 Secret
 
 ```yaml
 apiVersion: v1
@@ -428,7 +428,7 @@ stringData:
 
 <!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-#<!-- chunk: 6.1 订单数据流 -->## 6.1 订单数据流
+## 6.1 订单数据流
 
 ```mermaid
 flowchart TB
@@ -465,7 +465,7 @@ flowchart TB
     O4 --> O1A & O2A & O3A & O4A
 ```
 
-#<!-- chunk: 6.2 数据流说明 -->## 6.2 数据流说明
+## 6.2 数据流说明
 
 - **订单流**: 全渠道订单统一接入 OMS，经智能分单后推送至 KDS
 - **实时状态流**: 订单状态通过 WebSocket 实时推送到顾客端和后厨
@@ -476,7 +476,7 @@ flowchart TB
 
 <!-- chunk: 7. AI/ML 组件 -->## 7. AI/ML 组件
 
-#<!-- chunk: 7.1 核心模型 -->## 7.1 核心模型
+## 7.1 核心模型
 
 | 模型 | 用途 | 输入 | 输出 | 框架 |
 |:---|:---|:---|:---|---|
@@ -491,7 +491,7 @@ flowchart TB
 
 <!-- chunk: 8. 安全与合规 -->## 8. 安全与合规
 
-#<!-- chunk: 8.1 行业法规与标准 -->## 8.1 行业法规与标准
+## 8.1 行业法规与标准
 
 | 法规/标准 | 适用范围 | 架构要求 |
 |:---|:---|:---|
@@ -501,7 +501,7 @@ flowchart TB
 | 个人信息保护法 | 顾客数据保护 | 数据脱敏 + 授权 |
 | 明厨亮灶工程 | 后厨视频公开 | 视频存储合规 |
 
-#<!-- chunk: 8.2 安全架构要点 -->## 8.2 安全架构要点
+## 8.2 安全架构要点
 
 - **支付安全**: 支付信息令牌化，PCI-DSS 合规
 - **食品安全**: 明厨亮灶视频 AI 自动检测违规行为
@@ -552,17 +552,17 @@ flowchart TB
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

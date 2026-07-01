@@ -410,6 +410,12 @@ spec:
 ```
 
 #### 灾难恢复流程
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # etcd灾难恢复脚本
@@ -435,7 +441,7 @@ systemctl stop etcd || true
 
 # 2. 清理现有数据
 echo "2. 清理现有数据..."
-rm -rf /var/lib/etcd/member
+rm -rf /var/lib/etcd/member  # ⚠️ 删除系统/数据文件
 
 # 3. 恢复备份
 echo "3. 恢复备份数据..."
@@ -522,6 +528,10 @@ spec:
 ```
 
 #### 证书管理最佳实践
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # etcd证书轮换脚本
@@ -633,6 +643,7 @@ openssl x509 -in /etc/kubernetes/pki/etcd/server.crt -text -noout
 │   └── default/
 │       └── default-token-xxxxx
 └── ...
+
 ```
 
 <!-- chunk: etcd集群架构 -->
@@ -724,7 +735,7 @@ ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d%H%M).db \
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README|Domain-2: Kubernetes 设计原则与核心机制]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
 - index.md|Domain-2 设计原则 — 开源项目索引]]
 - Kubernetes 设计原则与哲学
 - 声明式 API 与面向终态设计
@@ -745,4 +756,6 @@ ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d%H%M).db \
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+```

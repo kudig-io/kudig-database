@@ -716,10 +716,10 @@ data:
                         - name: app
                           domains: ["*"]
                           routes:
-                            - match:
-                                prefix: "/"
-                              route:
-                                cluster: local_app
+                            - matchers:
+                              - prefix="/"
+                              - route=""
+                              - cluster="local_app"
                     http_filters:
                       - name: envoy.filters.http.router
                         typed_config:
@@ -744,10 +744,10 @@ data:
                         - name: external
                           domains: ["*"]
                           routes:
-                            - match:
-                                prefix: "/"
-                              route:
-                                cluster: external_service
+                            - matchers:
+                              - prefix="/"
+                              - route=""
+                              - cluster="external_service"
                     http_filters:
                       - name: envoy.filters.http.router
                         typed_config:
@@ -859,7 +859,7 @@ spec:
 | **localhost** | 127.0.0.1 | TCP/HTTP 标准 | 需要端口协调 | 代理、API 调用 |
 | **Unix Socket** | 共享 Volume 中的 socket | 高性能、安全 | 需要两端支持 | 高性能 IPC |
 | **共享内存** | emptyDir (medium: Memory) | 最高性能 | 复杂、需要锁机制 | 极高性能场景 |
-| **环境变量** | [[Downward API|Downward API]] | 简单 | 只能传递静态值 | 配置传递 |
+| **环境变量** | [[domain-17-system-foundation/topic-dictionary/workloads/downward-api.md|Downward API]] | 简单 | 只能传递静态值 | 配置传递 |
 
 ### 通信配置示例
 
@@ -1104,9 +1104,9 @@ spec:
 ---
 
 **参考资料**:
-- [KEP-753: [[Sidecar Containers|Sidecar Containers]]](https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/753-sidecar-containers)
+- [KEP-753: [[domain-17-system-foundation/topic-dictionary/workloads/sidecar-containers.md|Sidecar Containers]]](https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/753-sidecar-containers)
 - [Kubernetes Sidecar 模式](https://kubernetes.io/blog/2023/08/25/native-sidecar-containers/)
-- [[entities/istio|Istio]] Sidecar 注入](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/)
+- [[entities/istio.md|Istio]] Sidecar 注入](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/)
 
 ---
 
@@ -1114,7 +1114,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications MOC
-- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
 - Domain-4 工作负载 — 开源项目索引
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)

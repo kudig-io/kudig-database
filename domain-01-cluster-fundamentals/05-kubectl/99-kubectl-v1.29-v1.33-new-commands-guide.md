@@ -135,6 +135,9 @@ kubectl alpha node-logs mynode --tail=100 -f
 
 ### kubectl apply --prune-allowlist 改进
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 更安全的 prune，允许指定保留的资源类型
 kubectl apply -k ./ --prune --prune-allowlist=core/v1/ConfigMap --prune-allowlist=core/v1/Secret
@@ -184,6 +187,9 @@ kubectl debug mypod --custom=securityContext.privileged=true
 
 ### kubectl create token 改进
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建短期 ServiceAccount Token
 kubectl create token mysa --duration=10m
@@ -206,6 +212,9 @@ kubectl get pods --show-labels -L app,version
 
 ### kubectl delete --wait / --now
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 强制立即删除 (不等待优雅终止)
 kubectl delete pod mypod --now
@@ -215,6 +224,9 @@ kubectl delete deployment myapp --wait --timeout=60s
 ```
 
 ### kubectl label/annotate --dry-run 改进
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 预览标签变更
@@ -257,6 +269,9 @@ kubectl get pods --sort-by='.spec.nodeName'
 ```
 
 ### kubectl patch 增强
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 原地调整 Pod 资源 (v1.33 Alpha Feature Gate)
@@ -327,6 +342,12 @@ asdf global kubectl 1.33.0
 <!-- chunk: 八、快捷别名推荐 -->
 ## 八、快捷别名推荐
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # ~/.bashrc 或 ~/.zshrc
 
@@ -391,10 +412,10 @@ source <(kubectl completion zsh)   # Zsh
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
 - index.md|Domain-1 架构基础 — 开源项目索引]]
-- [[entities/kubernetes]]
-- [[entities/kubernetes]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/kubernetes.md|kubernetes]]
 - 03 - 功能和API表
 - 04 - Kubernetes 源码结构深度解析
 - kubectl 命令完整参考
@@ -412,4 +433,4 @@ source <(kubectl completion zsh)   # Zsh
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

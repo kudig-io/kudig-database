@@ -217,6 +217,9 @@ Kubernetes 集群的可观测性依赖于日志收集、指标监控和告警系
 
 #### Fluentd/Fluent Bit 检查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查采集器 DaemonSet 状态
 kubectl get ds -n logging
@@ -241,6 +244,9 @@ kubectl exec -n logging <fluent-bit-pod> -- ls -la /var/log/pods/
 
 #### Elasticsearch/OpenSearch 检查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查集群健康状态
 kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cluster/health | jq
@@ -259,6 +265,9 @@ kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cat/shards?v | head 
 ```
 
 #### Loki 检查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查 Loki 状态
@@ -363,6 +372,11 @@ fluent-bit-abc12    0/1     CrashLoopBackOff   5          10m
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 查看崩溃日志
 kubectl logs -n logging <fluent-bit-pod> --previous
@@ -394,6 +408,9 @@ kubectl get pods -n logging -l app=fluent-bit -w
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 确认日志在节点上存在
 kubectl debug node/<node> -it --image=busybox -- ls -la /host/var/log/containers/
@@ -420,6 +437,9 @@ kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cat/indices?v | grep
 #### 场景 3：日志延迟
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 检查采集器队列状态
@@ -477,12 +497,19 @@ kubectl top pods -n logging | grep elasticsearch
 #### 场景 1：Elasticsearch 集群红色状态
 
 **问题现象：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 $ kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cluster/health
 {"status":"red",...}
 ```
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 检查未分配的分片
@@ -512,6 +539,9 @@ kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cluster/health | jq 
 #### 场景 2：Loki 查询超时
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 检查 Loki 资源使用
@@ -543,6 +573,10 @@ kubectl logs -n logging -l app=loki | grep -i "storage\|s3\|gcs"
 部分服务在 Targets 页面显示 DOWN
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 检查 Prometheus Targets
@@ -581,6 +615,9 @@ curl -X POST http://localhost:9090/-/reload
 #### 场景 2：Prometheus OOM 或慢查询
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 检查资源使用
@@ -655,6 +692,9 @@ curl -X POST http://localhost:9093/api/v2/alerts -H 'Content-Type: application/j
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 配置告警分组
 kubectl edit secret alertmanager-<name> -n monitoring
@@ -697,6 +737,10 @@ kubectl edit prometheusrule <name> -n monitoring
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 检查数据源配置
 kubectl port-forward -n monitoring svc/grafana 3000:80
@@ -721,6 +765,9 @@ kubectl rollout restart deployment grafana -n monitoring
 #### 场景 2：Dashboard 加载缓慢
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 检查 Grafana 资源使用
@@ -864,6 +911,9 @@ spec:
 
 ### 常用排查命令速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 日志系统
 kubectl get pods -n logging
@@ -888,18 +938,20 @@ kubectl top pods -n monitoring
 ### 相关文档
 
 - [DaemonSet 故障排查](../05-workloads/04-daemonset-troubleshooting.md) (日志采集器)
-- [StatefulSet 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting|03-statefulset-troubleshooting]].md) (ES/Prometheus)
-- [Service 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting|03-service-ingress-troubleshooting]].md)
-- [HPA/VPA 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/02-autoscaling-troubleshooting|02-autoscaling-troubleshooting]].md) (依赖 metrics)
+- [StatefulSet 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]].md) (ES/Prometheus)
+- [Service 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]].md)
+- [HPA/VPA 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/02-autoscaling-troubleshooting.md|02-autoscaling-troubleshooting]].md) (依赖 metrics)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/06-kustomize-troubleshooting|06-kustomize-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/01-cluster-maintenance-troubleshooting|01-cluster-maintenance-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting|03-helm-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/04-ha-disaster-recovery-troubleshooting|04-ha-disaster-recovery-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/06-kustomize-troubleshooting.md|06-kustomize-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|01-cluster-maintenance-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|04-ha-disaster-recovery-troubleshooting]]
+
+```

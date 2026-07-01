@@ -172,6 +172,9 @@ sudo ip netns delete ns2
 
 ### 任务 3: iptables 基础 (30min)
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+
 ```bash
 # 查看 iptables 规则
 sudo iptables -L -n -v
@@ -185,10 +188,13 @@ sudo iptables -t nat -L -n | grep 8888
 sudo iptables -t nat -L DOCKER -n -v
 
 # 清理
-docker rm -f iptables-test
+docker rm -f iptables-test  # ⚠️ 强制清理，可能杀运行中容器
 ```
 
 ### 任务 4: 内核参数调优 (30min)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
 
 ```bash
 # 查看当前内核参数
@@ -287,4 +293,4 @@ ss -ant | awk '{print $1}' | sort | uniq -c | sort -rn
 
 ## 明日预告
 
-Day 5 将正式进入 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 架构学习，理解 Master/Node 组件及其交互。
+Day 5 将正式进入 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 架构学习，理解 Master/Node 组件及其交互。

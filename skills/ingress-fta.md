@@ -73,12 +73,12 @@ base_confidence: 0.7
 
 ## 相关链接
 
-- [[FTA Methodology and Core Principles|FTA 方法论]]
-- [[FTA Diagnostic Execution Engine|FTA 诊断执行引擎]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 - [[ts-networking|网络故障排查]]
 
 ## Related
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]

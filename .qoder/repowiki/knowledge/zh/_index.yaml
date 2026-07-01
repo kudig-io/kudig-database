@@ -1,0 +1,26 @@
+# 知识卡导出索引文件
+schema_version: 1
+locale: zh-CN
+branch: main
+exported_at: "2026-06-22T08:23:34Z"
+modules:
+    cluster_and_workloads:
+        dir_name: Kubernetes 集群架构与工作负载管理
+        title: Kubernetes 集群架构与工作负载管理
+        scope:
+            - domain-01-cluster-fundamentals/
+            - domain-02-workloads-applications/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    networking_and_storage:
+        dir_name: 云原生网络与存储架构
+        title: 云原生网络与存储架构
+        scope:
+            - domain-03-networking-traffic/
+            - domain-04-storage-data/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []

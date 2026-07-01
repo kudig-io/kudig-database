@@ -10,11 +10,12 @@ tags:
   - k8s
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # FinOps 与 GreenOps 实践
 
-> 关联索引：[[domain-11-production-operations/index]] · [[concepts/capacity-planning-cost-optimization]]
+> 关联索引：[[domain-19-landscape-references/98-merged-indexes/index.md|index]] · [[concepts/capacity-planning-cost-optimization.md|capacity planning cost optimization]]
 
 ---
 
@@ -572,6 +573,6 @@ spec:
 
 ## Related
 
-- [[concepts/capacity-planning-cost-optimization]] — 容量规划与成本优化
-- [[concepts/storage-performance-optimization]] — 存储性能优化策略
-- [[concepts/k8s-ai-ml-infrastructure]] — K8S AI/ML 基础设施
+- [[concepts/capacity-planning-cost-optimization.md|capacity planning cost optimization]] — 容量规划与成本优化
+- [[concepts/storage-performance-optimization.md|storage performance optimization]] — 存储性能优化策略
+- [[concepts/k8s-ai-ml-infrastructure.md|k8s ai ml infrastructure]] — K8S AI/ML 基础设施

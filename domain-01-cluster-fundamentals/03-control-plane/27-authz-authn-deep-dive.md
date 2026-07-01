@@ -719,6 +719,9 @@ kubectl auth reconcile -f role.yaml --remove-extra-permissions --confirm
 
 ### 6.3 准入控制问题
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 检查准入控制器状态
 kubectl get mutatingwebhookconfigurations
@@ -830,10 +833,10 @@ kubectl get serviceaccounts --all-namespaces | grep -E "(default|system)"
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - index.md|Domain-3 控制平面 — 开源项目索引]]
-- [[concepts/kubernetes-architecture-overview]]
-- [[domain-01-cluster-fundamentals/03-control-plane/02-plane-components-interaction]]
+- [[concepts/kubernetes-architecture-overview.md|kubernetes architecture overview]]
+- [[domain-01-cluster-fundamentals/03-control-plane/02-plane-components-interaction.md|02 plane components interaction]]
 - 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...
 - 控制平面安全加固指南 (Control Plane Security Hardening Guide)
 - 控制平面监控与可观测性 (Control Plane Monitoring & Observability)

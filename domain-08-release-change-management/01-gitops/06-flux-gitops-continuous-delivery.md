@@ -102,7 +102,7 @@ Flux v2 的核心组件包括六大控制器：Source Controller（源管理）�
 
 <!-- chunk: 二、架构设计 -->## 二、架构设计
 
-#<!-- chunk: 2.1 Flux 多集群架构 -->## 2.1 Flux 多集群架构
+## 2.1 Flux 多集群架构
 
 ```mermaid
 graph TB
@@ -145,7 +145,7 @@ graph TB
     FLUX_DEV --> KC_DEV
 ```
 
-#<!-- chunk: 2.2 GitOps Toolkit 组件交互 -->## 2.2 GitOps Toolkit 组件交互
+## 2.2 GitOps Toolkit 组件交互
 
 ```mermaid
 sequenceDiagram
@@ -170,7 +170,7 @@ sequenceDiagram
 
 <!-- chunk: 三、核心配置 -->## 三、核心配置
 
-#<!-- chunk: 3.1 Bootstrap 与目录结构 -->## 3.1 Bootstrap 与目录结构
+## 3.1 Bootstrap 与目录结构
 
 ```bash
 # 安装 Flux CLI
@@ -215,7 +215,7 @@ flux-gitops/
         └── patches/
 ```
 
-#<!-- chunk: 3.2 Kustomization 高级配置 -->## 3.2 Kustomization 高级配置
+## 3.2 Kustomization 高级配置
 
 ```yaml
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -288,7 +288,7 @@ spec:
         namespace: production
 ```
 
-#<!-- chunk: 3.3 HelmRelease 高级配置 -->## 3.3 HelmRelease 高级配置
+## 3.3 HelmRelease 高级配置
 
 ```yaml
 apiVersion: source.toolkit.fluxcd.io/v1
@@ -361,7 +361,7 @@ spec:
       optional: true
 ```
 
-#<!-- chunk: 3.4 OCI Chart 支持 -->## 3.4 OCI Chart 支持
+## 3.4 OCI Chart 支持
 
 ```yaml
 apiVersion: source.toolkit.fluxcd.io/v1
@@ -389,7 +389,7 @@ spec:
     replicaCount: 2
 ```
 
-#<!-- chunk: 3.5 ImageUpdateAutomation 完整配置 -->## 3.5 ImageUpdateAutomation 完整配置
+## 3.5 ImageUpdateAutomation 完整配置
 
 ```yaml
 # 扫描镜像仓库
@@ -461,7 +461,10 @@ spec:
 
 <!-- chunk: 四、安全与合规 -->## 四、安全与合规
 
-#<!-- chunk: 4.1 SOPS 加密集成 -->## 4.1 SOPS 加密集成
+## 4.1 SOPS 加密集成
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 生成 age 密钥
@@ -485,7 +488,7 @@ spec:
       name: sops-age-key
 ```
 
-#<!-- chunk: 4.2 多租户 RBAC -->## 4.2 多租户 RBAC
+## 4.2 多租户 RBAC
 
 ```yaml
 # 团队 A ServiceAccount
@@ -529,7 +532,7 @@ rules:
 
 <!-- chunk: 五、多环境管理策略 -->## 五、多环境管理策略
 
-#<!-- chunk: 5.1 多集群 Tenant 管理 -->## 5.1 多集群 Tenant 管理
+## 5.1 多集群 Tenant 管理
 
 ```yaml
 # clusters/production/tenants/team-a.yaml
@@ -553,7 +556,7 @@ spec:
       namespace: team-a
 ```
 
-#<!-- chunk: 5.2 Terraform Controller 集成 -->## 5.2 Terraform Controller 集成
+## 5.2 Terraform Controller 集成
 
 ```yaml
 apiVersion: infra.contrib.fluxcd.io/v1alpha2
@@ -586,7 +589,7 @@ spec:
 
 <!-- chunk: 六、监控与回滚 -->## 六、监控与回滚
 
-#<!-- chunk: 6.1 通知配置 -->## 6.1 通知配置
+## 6.1 通知配置
 
 ```yaml
 apiVersion: notification.toolkit.fluxcd.io/v1beta3
@@ -638,7 +641,7 @@ spec:
     name: github-receiver-token
 ```
 
-#<!-- chunk: 6.2 回滚操作 -->## 6.2 回滚操作
+## 6.2 回滚操作
 
 ```bash
 # Git revert 回滚 (推荐)
@@ -660,7 +663,7 @@ flux logs --level=info
 
 <!-- chunk: 七、最佳实践 -->## 七、最佳实践
 
-#<!-- chunk: 7.1 Flux vs Argo CD -->## 7.1 Flux vs Argo CD
+## 7.1 Flux vs Argo CD
 
 | 维度 | Flux | Argo CD |
 |:---|:---|:---|
@@ -672,7 +675,7 @@ flux logs --level=info
 | 规模 | <100 apps/集群 | 1000+ apps/实例 |
 | 学习曲线 | 低 | 中 |
 
-#<!-- chunk: 7.2 目录结构建议 -->## 7.2 目录结构建议
+## 7.2 目录结构建议
 
 ```
 flux-gitops/
@@ -733,7 +736,7 @@ flux get providers -A
 
 <!-- chunk: 九、Flux 多集群与 Tenant 管理深度实践 -->## 九、Flux 多集群与 Tenant 管理深度实践
 
-#<!-- chunk: 9.1 多集群管理架构 -->## 9.1 多集群管理架构
+## 9.1 多集群管理架构
 
 Flux 的多集群管理采用"每集群独立实例"的架构模式。每个 Kubernetes 集群运行自己的 Flux 实例，通过同一个或不同的 Git 仓库获取配置。这种架构的优势在于：每个集群完全自治，不存在单点问题；集群间的问题不会相互影响；可以根据集群规模独立调整 Flux 组件的资源配额。
 
@@ -765,7 +768,7 @@ spec:
     branch: main
 ```
 
-#<!-- chunk: 9.2 Tenant 隔离策略 -->## 9.2 Tenant 隔离策略
+## 9.2 Tenant 隔离策略
 
 在多租户场景中，Flux 通过 ServiceAccount 和 RBAC 实现命名空间级别的隔离。每个租户（团队）拥有独立的 ServiceAccount，该 ServiceAccount 只能在指定的命名空间中创建和管理资源。Kustomize Controller 使用 `serviceAccountName` 字段指定执行 Kustomization 时使用的 ServiceAccount。
 
@@ -808,7 +811,7 @@ rules:
     verbs: ["*"]
 ```
 
-#<!-- chunk: 9.3 HelmRelease Values 管理策略 -->## 9.3 HelmRelease Values 管理策略
+## 9.3 HelmRelease Values 管理策略
 
 HelmRelease 的 values 管理是 Flux 企业级实践的关键环节。Flux 支持多种 values 来源：内联 values、ConfigMap 引用、Secret 引用以及外部文件引用。通过合理的 values 管理策略，可以实现环境差异化配置和密钥安全注入。
 
@@ -849,7 +852,7 @@ spec:
       optional: true
 ```
 
-#<!-- chunk: 9.4 Image Automation 深度实践 -->## 9.4 Image Automation 深度实践
+## 9.4 Image Automation 深度实践
 
 Flux 的 Image Automation 是其区别于其他 GitOps 工具的核心特性。它由三个组件协同工作：ImageRepository 负责定期扫描镜像仓库中的标签，ImagePolicy 负责根据策略选择最新的镜像版本，ImageUpdateAutomation 负责将选中的镜像版本自动提交回 Git 仓库。
 
@@ -884,7 +887,7 @@ spec:
 
 <!-- chunk: 十、Flux 生产环境最佳实践 -->## 十、Flux 生产环境最佳实践
 
-#<!-- chunk: 10.1 Flux 多集群拓扑设计 -->## 10.1 Flux 多集群拓扑设计
+## 10.1 Flux 多集群拓扑设计
 
 在管理多个 Kubernetes 集群时，Flux 的拓扑设计直接影响运维效率。推荐的模式是"Hub-Spoke"架构：一个中心集群（Hub）运行 Flux 的 Image Automation 和监控组件，多个工作集群（Spoke）运行 Flux 的 Source、Kustomize 和 Helm Controller。中心集群通过 GitOps 管理所有工作集群的配置，工作集群独立处理自己的工作负载同步。
 
@@ -911,7 +914,7 @@ spec:
         name: production-cluster-config
 ```
 
-#<!-- chunk: 10.2 ImagePolicy 自动化更新策略 -->## 10.2 ImagePolicy 自动化更新策略
+## 10.2 ImagePolicy 自动化更新策略
 
 Flux 的 Image Automation Controller 可以根据配置的策略自动更新工作负载的容器镜像引用。结合 ImagePolicy，可以实现语义化版本控制（SemVer）、正则表达式匹配和字母序排序等多种更新策略。这是 Flux 生态区别于 Argo CD 的独特能力。
 
@@ -961,7 +964,7 @@ spec:
       name: setters
 ```
 
-#<!-- chunk: 10.3 SOPS 密钥加密集成 -->## 10.3 SOPS 密钥加密集成
+## 10.3 SOPS 密钥加密集成
 
 Flux 原生支持 Mozilla SOPS（Secrets OPerationS）加密的密钥文件。通过 `spec.decryption` 配置，Flux 可以在同步时自动解密 SOPS 加密的 Secret 文件。支持多种加密后端：age（推荐，简单易用）、GPG（传统选择）、AWS KMS、GCP KMS 和 Azure Key Vault。
 
@@ -1007,7 +1010,7 @@ sops:
 
 <!-- chunk: 十一、Flux 监控与可观测性 -->## 十一、Flux 监控与可观测性
 
-#<!-- chunk: 11.1 Prometheus 指标 -->## 11.1 Prometheus 指标
+## 11.1 Prometheus 指标
 
 Flux 的每个 Controller 都暴露了 Prometheus 格式的指标，可以直接被 Prometheus 抓取。关键指标包括协调延迟、错误率和资源状态。通过配置 PrometheusRule 和 Grafana Dashboard，可以实现 Flux 的全面监控。
 
@@ -1052,7 +1055,7 @@ spec:
             summary: "Resource {{ $labels.kind }}/{{ $labels.name }} has not been updated for over 1 hour"
 ```
 
-#<!-- chunk: 11.2 Flux 与 Git 仓库交互优化 -->## 11.2 Flux 与 Git 仓库交互优化
+## 11.2 Flux 与 Git 仓库交互优化
 
 Flux 与 Git 仓库的交互效率直接影响同步延迟。对于大型 Git 仓库（超过 1GB），建议使用稀疏检出来减少传输量和检出时间。Flux 的 GitRepository 资源支持 `spec.include` 配置，可以将多个 Git 仓库组合使用。
 
@@ -1133,7 +1136,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-08-release-change-management MOC
-- [[domain-08-release-change-management/README|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
+- [[domain-08-release-change-management/README.md|Domain 08: GitOps与CI/CD (GitOps & CI/CD)]]
 - Domain-23 GitOps & CI/CD — 开源项目索引
 - Argo CD企业级GitOps实践指南
 - Jenkins企业级CI/CD流水线深度实践

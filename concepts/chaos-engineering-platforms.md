@@ -10,9 +10,10 @@ tags:
   - gremlin
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 related:
-  - "[[domain-09-reliability-engineering/index]]"
-  - "[[concepts/slo-error-budget-framework]]"
+  - "[[domain-19-landscape-references/98-merged-indexes/index.md|index]]"
+  - "[[concepts/slo-error-budget-framework.md|slo error budget framework]]"
 ---
 
 # 混沌工程平台对比
@@ -404,7 +405,7 @@ spec:
 2. **小爆炸半径**：从单个副本开始，逐步扩大
 3. **监控先行**：确保有完善的数据库监控（查询延迟、连接数、复制延迟、缓冲命中率）
 4. **自动回滚**：配置 Health Check 失败自动终止实验
-5. **与 SLO 联动**：参考 [[concepts/slo-error-budget-framework]]，仅在 Error Budget 充足时执行
+5. **与 SLO 联动**：参考 [[concepts/slo-error-budget-framework.md|slo error budget framework]]，仅在 Error Budget 充足时执行
 6. **测试恢复过程**：验证备份恢复、故障切换、数据一致性
 7. **记录发现**：每个实验结果必须记录并关联改进项
 
@@ -430,8 +431,8 @@ spec:
 
 ## 8. 相关资源
 
-- [[domain-09-reliability-engineering/index]] — 可靠性工程领域总览
-- [[concepts/slo-error-budget-framework]] — SLO 与 Error Budget 框架
+- [[domain-19-landscape-references/98-merged-indexes/index.md|index]] — 可靠性工程领域总览
+- [[concepts/slo-error-budget-framework.md|slo error budget framework]] — SLO 与 Error Budget 框架
 - [Chaos Mesh 官方文档](https://chaos-mesh.org/docs/)
 - [Litmus 官方文档](https://litmuschaos.io/docs/)
 - [Gremlin 官方文档](https://www.gremlin.com/docs/)
@@ -440,6 +441,6 @@ spec:
 
 ## Related
 
-- [[concepts/slo-error-budget-framework]] — SLO 与 Error Budget 框架
-- [[concepts/incident-management-patterns]] — 事件管理与响应模式
-- [[concepts/multi-cluster-dr-automation]] — 多集群灾备与自动化
+- [[concepts/slo-error-budget-framework.md|slo error budget framework]] — SLO 与 Error Budget 框架
+- [[concepts/incident-management-patterns.md|incident management patterns]] — 事件管理与响应模式
+- [[concepts/multi-cluster-dr-automation.md|multi cluster dr automation]] — 多集群灾备与自动化

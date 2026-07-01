@@ -121,6 +121,9 @@ created: "2026-05-23"
 
 ### 2.1 kube-prometheus-stack (推荐)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 添加仓库
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -199,7 +202,7 @@ alertmanager:
         text: '{% raw %}{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}{% endraw %}'
     - name: 'pagerduty-critical'
       pagerduty_configs:
-      - service_key: '<PAGERDUTY_KEY>'
+      - routing_key: '<PAGERDUTY_KEY>'
     - name: 'slack-warning'
       slack_configs:
       - api_url: 'https://hooks.slack.com/services/YYY'
@@ -465,8 +468,8 @@ prometheus:
 ## Obsidian 相关文档
 
 - observability/MOC.md|domain-20-enterprise-monitoring-alerting MOC]]
-- [[domain-06-observability/README|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-20 企业监控与告警 — 开源项目索引]]
+- [[domain-06-observability/README.md|Domain 06: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]]
 - Prometheus企业级监控系统深度实践
 - Grafana Enterprise Observability Platform 深度实践
 - OpenTelemetry分布式追踪与可观测性深度实践
@@ -484,8 +487,10 @@ prometheus:
 - 01-prometheus-enterprise-monitoring
 - 02-grafana-enterprise-observability
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+```

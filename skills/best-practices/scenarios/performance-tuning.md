@@ -80,16 +80,16 @@ graph TD
 ## 相关文档
 
 - domain-01-cluster-fundamentals/13-performance-tuning-guide.md
-- [[domain-07-platform-engineering/README]]
-- [[domain-11-production-operations/README]]
+- [[domain-07-platform-engineering/README.md|README]]
+- [[domain-11-production-operations/README.md|README]]
 
 
 ---
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/hpa-fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/hpa-fta.md|hpa fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node fta]]
 
 
 ---
@@ -108,7 +108,7 @@ graph TD
 
 ## Related
 
-- [[references/kudig-metadata-index|README]].md|README]]
+- [[entities/kudig-metadata-index.md|README]].md|README]]
 - observability/19-cluster-performance-tuning.md|19-cluster-performance-tuning]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta|node-fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/vpa-fta|vpa-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/vpa-fta.md|vpa-fta]]

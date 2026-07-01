@@ -56,7 +56,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 企业级日志治理架构 -->## 1. 企业级日志治理架构
 
-#<!-- chunk: 1.1 治理框架设计 -->## 1.1 治理框架设计
+## 1.1 治理框架设计
 
 ```mermaid
 graph TB
@@ -103,9 +103,9 @@ graph TB
     end
 ```
 
-#<!-- chunk: 1.2 治理成熟度模型 -->## 1.2 治理成熟度模型
+## 1.2 治理成熟度模型
 
-##<!-- chunk: 1.2.1 治理等级划分 -->## 1.2.1 治理等级划分
+## 1.2.1 治理等级划分
 
 ```yaml
 # governance-maturity-model.yaml
@@ -173,9 +173,9 @@ governance_levels:
 
 <!-- chunk: 2. 合规标准实施 -->## 2. 合规标准实施
 
-#<!-- chunk: 2.1 国际合规框架映射 -->## 2.1 国际合规框架映射
+## 2.1 国际合规框架映射
 
-##<!-- chunk: 2.1.1 SOX(Sarbanes-Oxley)合规 -->## 2.1.1 SOX(Sarbanes-Oxley)合规
+## 2.1.1 SOX(Sarbanes-Oxley)合规
 
 ```yaml
 # sox-compliance-framework.yaml
@@ -233,7 +233,7 @@ sox_implementation:
       access_control: "审计委员会专属"
 ```
 
-##<!-- chunk: 2.1.2 GDPR合规实施 -->## 2.1.2 GDPR合规实施
+## 2.1.2 GDPR合规实施
 
 ```yaml
 # gdpr-compliance-implementation.yaml
@@ -349,9 +349,9 @@ technical_controls:
       - 通知记录系统
 ```
 
-#<!-- chunk: 2.2 行业特定合规要求 -->## 2.2 行业特定合规要求
+## 2.2 行业特定合规要求
 
-##<!-- chunk: 2.2.1 金融行业PCI DSS合规 -->## 2.2.1 金融行业PCI DSS合规
+## 2.2.1 金融行业PCI DSS合规
 
 ```yaml
 # pci-dss-compliance.yaml
@@ -421,7 +421,7 @@ pci_logging_specifications:
     escalation: "异常情况立即上报"
 ```
 
-##<!-- chunk: 2.2.2 医疗行业HIPAA合规 -->## 2.2.2 医疗行业HIPAA合规
+## 2.2.2 医疗行业HIPAA合规
 
 ```yaml
 # hipaa-compliance.yaml
@@ -498,9 +498,9 @@ hipaa_logging_requirements:
 
 <!-- chunk: 3. 企业级审计管理 -->## 3. 企业级审计管理
 
-#<!-- chunk: 3.1 审计框架设计 -->## 3.1 审计框架设计
+## 3.1 审计框架设计
 
-##<!-- chunk: 3.1.1 审计类型分类 -->## 3.1.1 审计类型分类
+## 3.1.1 审计类型分类
 
 ```yaml
 # audit-framework.yaml
@@ -587,7 +587,7 @@ audit_evidence_management:
       - 操作时间戳记
 ```
 
-##<!-- chunk: 3.1.2 审计计划制定 -->## 3.1.2 审计计划制定
+## 3.1.2 审计计划制定
 
 ```python
 # audit-planning.py
@@ -748,9 +748,9 @@ audit_plan = planner.export_audit_plan('2026_audit_plan.json')
 print(json.dumps(audit_plan, indent=2, ensure_ascii=False))
 ```
 
-#<!-- chunk: 3.2 审计证据收集 -->## 3.2 审计证据收集
+## 3.2 审计证据收集
 
-##<!-- chunk: 3.2.1 自动化证据收集系统 -->## 3.2.1 自动化证据收集系统
+## 3.2.1 自动化证据收集系统
 
 ```yaml
 # automated-evidence-collection.yaml
@@ -858,7 +858,7 @@ data:
     }
 ```
 
-##<!-- chunk: 3.2.2 证据完整性验证 -->## 3.2.2 证据完整性验证
+## 3.2.2 证据完整性验证
 
 ```python
 # evidence-integrity-validator.py
@@ -1052,9 +1052,9 @@ print(json.dumps(report, indent=2, ensure_ascii=False))
 
 <!-- chunk: 4. 高级分析与报告 -->## 4. 高级分析与报告
 
-#<!-- chunk: 4.1 合规态势感知 -->## 4.1 合规态势感知
+## 4.1 合规态势感知
 
-##<!-- chunk: 4.1.1 实时合规监控仪表板 -->## 4.1.1 实时合规监控仪表板
+## 4.1.1 实时合规监控仪表板
 
 ```json
 {
@@ -1157,9 +1157,9 @@ print(json.dumps(report, indent=2, ensure_ascii=False))
 }
 ```
 
-#<!-- chunk: 4.2 智能合规分析 -->## 4.2 智能合规分析
+## 4.2 智能合规分析
 
-##<!-- chunk: 4.2.1 合规风险预测模型 -->## 4.2.1 合规风险预测模型
+## 4.2.1 合规风险预测模型
 
 ```python
 # compliance-risk-predictor.py
@@ -1386,8 +1386,8 @@ for key, value in risk_assessment.items():
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - observability/MOC.md|domain-21-logging-management-analytics MOC]]
-- [[domain-06-observability/README|[[Domain 21: 日志管理与分析 (Logging Management & Analytics)|Domain 21: 日志管理与分析 (Logging Management & Analytics)]] Management & Analytics)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-21 日志管理与分析 — 开源项目索引]]
+- [[domain-06-observability/README.md|[[Domain 21: 日志管理与分析 (Logging Management & Analytics)|Domain 21: 日志管理与分析 (Logging Management & Analytics)]] Management & Analytics)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-21 日志管理与分析 — 开源项目索引]]
 - ELK Stack企业级日志管理系统深度实践
 - Fluentd企业级日志收集与处理深度实践
 - Loki Enterprise Log Aggregation and Analytics Platform
@@ -1404,8 +1404,8 @@ for key, value in risk_assessment.items():
 - 04-graylog-enterprise-logging
 - 04-splunk-enterprise-siem
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

@@ -136,11 +136,11 @@ FEBM 作为一个结合传统法医取证严谨性与现代云原生架构动态
 
 <!-- chunk: 6.1 AI/ML 增强的混合方法 -->## 6.1 AI/ML 增强的混合方法
 
-#<!-- chunk: 6.1.1 ML 预测赋能 FTA 基础事件概率 -->## 6.1.1 ML 预测赋能 FTA 基础事件概率
+## 6.1.1 ML 预测赋能 FTA 基础事件概率
 
 传统 FTA 依赖专家经验估计基础事件发生概率,在云原生环境中可通过机器学习实现动态、数据驱动的概率预测。
 
-##<!-- chunk: 时间序列预测 - OOMKilled 事件 -->## 时间序列预测 - OOMKilled 事件
+## 时间序列预测 - OOMKilled 事件
 
 **场景**: 预测 Pod 在未来 1 小时内发生 OOM 的概率
 
@@ -250,7 +250,7 @@ P=0.12*    P=0.03
   历史均值: 0.04
 ```
 
-##<!-- chunk: 节点故障预测 -->## 节点故障预测
+## 节点故障预测
 
 ```python
 # 基于随机森林的节点故障预测
@@ -313,9 +313,9 @@ print(f"特征重要性: {predictor.get_feature_importance()}")
 # }
 ```
 
-#<!-- chunk: 6.1.2 智能取证代理 - 自动化证据关联 -->## 6.1.2 智能取证代理 - 自动化证据关联
+## 6.1.2 智能取证代理 - 自动化证据关联
 
-##<!-- chunk: 异常检测 - Isolation Forest 识别可疑行为 -->## 异常检测 - Isolation Forest 识别可疑行为
+## 异常检测 - Isolation Forest 识别可疑行为
 
 ```python
 from sklearn.ensemble import IsolationForest
@@ -417,7 +417,7 @@ class FEBMEvidenceCorrelator:
         return evidence
 ```
 
-##<!-- chunk: 图神经网络 (GNN) - 攻击路径重建 -->## 图神经网络 (GNN) - 攻击路径重建
+## 图神经网络 (GNN) - 攻击路径重建
 
 ```python
 import torch
@@ -590,7 +590,7 @@ for i, path in enumerate(paths[:3], 1):
 └─────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: NLP 驱动的日志证据提取 -->## NLP 驱动的日志证据提取
+## NLP 驱动的日志证据提取
 
 ```python
 from transformers import BertTokenizer, BertForSequenceClassification
@@ -690,7 +690,7 @@ class LogEvidenceExtractor:
         return narrative
 ```
 
-#<!-- chunk: 6.1.3 因果推断模型 - 统一逻辑与证据 -->## 6.1.3 因果推断模型 - 统一逻辑与证据
+## 6.1.3 因果推断模型 - 统一逻辑与证据
 
 **结构因果模型 (Structural Causal Model, SCM)** 可用于从观察到的证据推断根本原因,弥合 FTA 演绎推理与法医归纳推理的鸿沟。
 
@@ -938,7 +938,7 @@ Kubernetes 问题因果图
 - Memory Pressure → Request Timeout: β = 0.38, p < 0.05
 ```
 
-#<!-- chunk: 6.1.4 LLM 赋能的取证分析助手 -->## 6.1.4 LLM 赋能的取证分析助手
+## 6.1.4 LLM 赋能的取证分析助手
 
 ```python
 class LLMForensicsAssistant:
@@ -1159,7 +1159,7 @@ result = assistant.natural_language_query(
 assistant.interactive_rca("所有 payment-service 的 Pod 不断重启")
 ```
 
-#<!-- chunk: 6.1.5 强化学习 - 最优证据收集策略 -->## 6.1.5 强化学习 - 最优证据收集策略
+## 6.1.5 强化学习 - 最优证据收集策略
 
 ```python
 import gym
@@ -1270,7 +1270,7 @@ class RLEvidenceCollector:
         return collected
 ```
 
-#<!-- chunk: 6.1.6 联邦学习 - 跨组织威胁情报 -->## 6.1.6 联邦学习 - 跨组织威胁情报
+## 6.1.6 联邦学习 - 跨组织威胁情报
 
 ```python
 import flwr as fl
@@ -1349,11 +1349,11 @@ fl.client.start_numpy_client(
 
 <!-- chunk: 6.2 云原生取证基础设施 -->## 6.2 云原生取证基础设施
 
-#<!-- chunk: 6.2.1 OSDFIR 基础设施 -->## 6.2.1 OSDFIR 基础设施
+## 6.2.1 OSDFIR 基础设施
 
 **Open Source Digital Forensics and Incident Response (OSDFIR)** 是一套容器化的取证工具栈,专为云原生环境设计。
 
-##<!-- chunk: 架构概览 -->## 架构概览
+## 架构概览
 
 ```
 ┌──────────────────── OSDFIR on Kubernetes ─────────────────────┐
@@ -1411,7 +1411,7 @@ fl.client.start_numpy_client(
 └────────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: Helm 部署配置 -->## Helm 部署配置
+## Helm 部署配置
 
 ```yaml
 # osdfir-values.yaml
@@ -1546,7 +1546,7 @@ yeti:
       interval: 86400
 ```
 
-##<!-- chunk: 与 FEBM 工作流集成 -->## 与 FEBM 工作流集成
+## 与 FEBM 工作流集成
 
 ```python
 class OSDFIRIntegration:
@@ -1698,7 +1698,7 @@ class OSDFIRIntegration:
         return findings
 ```
 
-#<!-- chunk: 6.2.2 Container Explorer - 容器级取证处理 -->## 6.2.2 Container Explorer - 容器级取证处理
+## 6.2.2 Container Explorer - 容器级取证处理
 
 传统取证工具针对虚拟机和物理机设计,Container Explorer 专门处理容器特有的证据结构。
 
@@ -1911,7 +1911,7 @@ class ContainerForensicsWorkflow:
         return report
 ```
 
-#<!-- chunk: 6.2.3 Forensic-Ready Kubernetes 发行版 -->## 6.2.3 Forensic-Ready Kubernetes 发行版
+## 6.2.3 Forensic-Ready Kubernetes 发行版
 
 一些 Kubernetes 发行版开始内置取证能力:
 
@@ -2057,7 +2057,7 @@ spec:
             name: auditbeat-config
 ```
 
-#<!-- chunk: 6.2.4 Serverless/FaaS 取证挑战 -->## 6.2.4 Serverless/FaaS 取证挑战
+## 6.2.4 Serverless/FaaS 取证挑战
 
 Serverless 环境的短生命周期特性给取证带来独特挑战:
 
@@ -2194,7 +2194,7 @@ class ServerlessForensics:
 
 <!-- chunk: 6.3 持续取证与 DevSecOps 融合 -->## 6.3 持续取证与 DevSecOps 融合
 
-#<!-- chunk: 6.3.1 证据收集嵌入日常运维 -->## 6.3.1 证据收集嵌入日常运维
+## 6.3.1 证据收集嵌入日常运维
 
 ```yaml
 # 在 CI/CD 流水线中集成取证能力
@@ -2266,7 +2266,7 @@ forensic_validation:
     - production
 ```
 
-#<!-- chunk: 6.3.2 Shift-Left Forensics -->## 6.3.2 Shift-Left Forensics
+## 6.3.2 Shift-Left Forensics
 
 在开发阶段提前集成取证就绪性:
 
@@ -2385,7 +2385,7 @@ if __name__ == '__main__':
     main()
 ```
 
-#<!-- chunk: 6.3.3 运行时安全即持续取证 -->## 6.3.3 运行时安全即持续取证
+## 6.3.3 运行时安全即持续取证
 
 ```yaml
 # Falco + Falcosidekick 自动化响应
@@ -2646,7 +2646,7 @@ spec:
 
 <!-- chunk: 6.4 意图模型与证据协同 -->## 6.4 意图模型与证据协同
 
-#<!-- chunk: 6.4.1 声明式配置作为预期状态基线 -->## 6.4.1 声明式配置作为预期状态基线
+## 6.4.1 声明式配置作为预期状态基线
 
 ```python
 class IntentEvidenceFaultAnalyzer:
@@ -2885,7 +2885,7 @@ class OPAIntentValidator:
         return policy
 ```
 
-#<!-- chunk: 6.4.2 GitOps 审计轨迹作为取证证据 -->## 6.4.2 GitOps 审计轨迹作为取证证据
+## 6.4.2 GitOps 审计轨迹作为取证证据
 
 ```python
 class GitOpsForensics:
@@ -3001,7 +3001,7 @@ class GitOpsForensics:
 
 <!-- chunk: 6.5 数字孪生与仿真取证 -->## 6.5 数字孪生与仿真取证
 
-#<!-- chunk: 6.5.1 Kubernetes 集群的数字孪生 -->## 6.5.1 Kubernetes 集群的数字孪生
+## 6.5.1 Kubernetes 集群的数字孪生
 
 ```python
 class K8sDigitalTwin:
@@ -3213,7 +3213,7 @@ class K8sDigitalTwin:
         }
 ```
 
-#<!-- chunk: 6.5.2 攻击场景仿真与证据生成 -->## 6.5.2 攻击场景仿真与证据生成
+## 6.5.2 攻击场景仿真与证据生成
 
 ```python
 class AttackSimulationEngine:
@@ -3391,7 +3391,7 @@ class AttackSimulationEngine:
 
 <!-- chunk: 6.6 量子计算对数字取证的影响 -->## 6.6 量子计算对数字取证的影响
 
-#<!-- chunk: 6.6.1 后量子密码学与证据完整性 -->## 6.6.1 后量子密码学与证据完整性
+## 6.6.1 后量子密码学与证据完整性
 
 ```python
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
@@ -3502,7 +3502,7 @@ class PostQuantumEvidenceIntegrity:
 
 <!-- chunk: 6.7 标准化与行业协作 -->## 6.7 标准化与行业协作
 
-#<!-- chunk: 6.7.1 云原生取证新兴标准 -->## 6.7.1 云原生取证新兴标准
+## 6.7.1 云原生取证新兴标准
 
 | 标准/规范 | 组织 | 状态 | FEBM 相关性 |
 |----------|------|------|------------|
@@ -3513,7 +3513,7 @@ class PostQuantumEvidenceIntegrity:
 | **CNCF Security TAG Guidelines** | CNCF | 持续更新 | 云原生安全最佳实践 |
 | **ISO/IEC 27050 (eDiscovery)** | ISO | 已发布 | 电子证据保全流程 |
 
-#<!-- chunk: 6.7.2 开源社区与工作组 -->## 6.7.2 开源社区与工作组
+## 6.7.2 开源社区与工作组
 
 ```
 云原生取证生态系统
@@ -3550,7 +3550,7 @@ class PostQuantumEvidenceIntegrity:
 └─────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 6.7.3 认证与职业发展 -->## 6.7.3 认证与职业发展
+## 6.7.3 认证与职业发展
 
 新兴的云原生取证认证路径:
 
@@ -3575,7 +3575,7 @@ class PostQuantumEvidenceIntegrity:
 
 <!-- chunk: 6.8 FEBM 方法论的学术研究方向 -->## 6.8 FEBM 方法论的学术研究方向
 
-#<!-- chunk: 6.8.1 自动化 RCA (AutoRCA) 标准化框架 -->## 6.8.1 自动化 RCA (AutoRCA) 标准化框架
+## 6.8.1 自动化 RCA (AutoRCA) 标准化框架
 
 ```python
 class AutoRCAFramework:
@@ -3643,7 +3643,7 @@ class AutoRCAFramework:
         return sum(similarities) / len(similarities) if similarities else 0.0
 ```
 
-#<!-- chunk: 6.8.2 大规模集群方法可扩展性优化 -->## 6.8.2 大规模集群方法可扩展性优化
+## 6.8.2 大规模集群方法可扩展性优化
 
 **研究课题**: 如何在万级节点集群中高效执行 FEBM 调查?
 
@@ -3726,7 +3726,7 @@ class ScalableFEBM:
         return aggregated
 ```
 
-#<!-- chunk: 6.8.3 动态故障树与实时取证数据融合 -->## 6.8.3 动态故障树与实时取证数据融合
+## 6.8.3 动态故障树与实时取证数据融合
 
 **研究目标**: 将 FTA 的静态分析与 FEBM 的动态证据实时融合
 
@@ -3805,7 +3805,7 @@ class DynamicFaultTreeFEBM:
         return FaultTreeBranch.from_json(branch_definition)
 ```
 
-#<!-- chunk: 6.8.4 形式化验证 FEBM 结论 -->## 6.8.4 形式化验证 FEBM 结论
+## 6.8.4 形式化验证 FEBM 结论
 
 **研究问题**: 如何证明 FEBM 诊断的正确性?
 
@@ -3905,7 +3905,7 @@ class FormalFEBMVerification:
             }
 ```
 
-#<!-- chunk: 6.8.5 认知科学在取证分析中的应用 -->## 6.8.5 认知科学在取证分析中的应用
+## 6.8.5 认知科学在取证分析中的应用
 
 **研究方向**: 模拟人类专家的诊断思维过程
 
@@ -4010,21 +4010,21 @@ FEBM 不是静态的方法论,而是一个持续演进的生态系统。随着�
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-febm/MOC|topic-febm MOC]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/README|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations|第一章：FEBM 方法论原理与理论基础]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation|第二章:FEBM 技术实现体系]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices|第三章：FEBM 最佳实践]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing|第四章：FEBM 对云平台工单智能体托管的意义]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology|第五章：FEBM 体系建设方法论]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix|第七章:附录]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive|法医鉴定循证方法论（FEBM）深度解析]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis|FTA-FEBM 联合诊断最佳实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/MOC.md|topic-febm MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md|第一章：FEBM 方法论原理与理论基础]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|第二章:FEBM 技术实现体系]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices.md|第三章：FEBM 最佳实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix.md|第七章:附录]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing|04-febm-agent-ticket-processing]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology|05-febm-construction-methodology]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix|07-febm-appendix]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start|08-febm-production-quick-start]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing.md|04-febm-agent-ticket-processing]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|05-febm-construction-methodology]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix.md|07-febm-appendix]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|08-febm-production-quick-start]]

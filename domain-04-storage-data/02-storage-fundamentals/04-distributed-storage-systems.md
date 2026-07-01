@@ -62,7 +62,7 @@ created: "2026-05-23"
 
 <!-- chunk: 分布式存储概述 -->## 分布式存储概述
 
-#<!-- chunk: 核心特性 -->## 核心特性
+## 核心特性
 
 | 特性 | 说明 |
 |:---|:---|
@@ -71,14 +71,14 @@ created: "2026-05-23"
 | **故障自愈** | 自动检测和恢复 |
 | **一致性** | 分布式一致性保证 |
 
-#<!-- chunk: 数据保护策略 -->## 数据保护策略
+## 数据保护策略
 
 | 策略 | 优点 | 缺点 |
 |:---|:---|:---|
 | **多副本** | 简单、恢复快 | 空间效率低 |
 | **纠删码** | 空间效率高 | 计算开销大 |
 
-#<!-- chunk: 企业级分布式存储架构 -->## 企业级分布式存储架构
+## 企业级分布式存储架构
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -104,7 +104,7 @@ created: "2026-05-23"
 
 <!-- chunk: Ceph 存储系统 -->## Ceph 存储系统
 
-#<!-- chunk: 架构组件 -->## 架构组件
+## 架构组件
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -125,7 +125,7 @@ created: "2026-05-23"
 | **MGR** | 监控、管理界面 |
 | **MDS** | CephFS 元数据 |
 
-#<!-- chunk: Ceph 部署 (cephadm) -->## Ceph 部署 (cephadm)
+## Ceph 部署 (cephadm)
 
 ```bash
 # 引导集群
@@ -148,9 +148,9 @@ ceph status
 ceph osd tree
 ```
 
-#<!-- chunk: 企业级Ceph生产部署 -->## 企业级Ceph生产部署
+## 企业级Ceph生产部署
 
-##<!-- chunk: 高可用架构配置 -->## 高可用架构配置
+## 高可用架构配置
 
 ```yaml
 # cephadm配置文件
@@ -191,7 +191,7 @@ service_specifications:
       metadata_server_standby_count: 2
 ```
 
-##<!-- chunk: 性能调优配置 -->## 性能调优配置
+## 性能调优配置
 
 ```bash
 # Ceph集群性能优化
@@ -219,7 +219,7 @@ osd mount options xfs = noatime,inode64,logbsize=256k,logbufs=8
 EOF
 ```
 
-#<!-- chunk: [[Kubernetes|Kubernetes]] CSI -->## Kubernetes CSI
+## Kubernetes CSI
 
 ```yaml
 # StorageClass
@@ -237,9 +237,9 @@ reclaimPolicy: Delete
 allowVolumeExpansion: true
 ```
 
-#<!-- chunk: Ceph监控告警体系 -->## Ceph监控告警体系
+## Ceph监控告警体系
 
-##<!-- chunk: Prometheus监控配置 -->## Prometheus监控配置
+## Prometheus监控配置
 
 ```yaml
 # Ceph监控ServiceMonitor
@@ -261,7 +261,7 @@ spec:
       app: rook-ceph-mgr
 ```
 
-##<!-- chunk: 关键告警规则 -->## 关键告警规则
+## 关键告警规则
 
 ```yaml
 groups:
@@ -312,7 +312,7 @@ groups:
 
 <!-- chunk: MinIO 对象存储 -->## MinIO 对象存储
 
-#<!-- chunk: 分布式部署 -->## 分布式部署
+## 分布式部署
 
 ```bash
 # 4节点集群
@@ -326,14 +326,14 @@ docker run -d \
   http://node{1...4}/data --console-address ":9001"
 ```
 
-#<!-- chunk: 纠删码配置 -->## 纠删码配置
+## 纠删码配置
 
 ```bash
 # 默认 EC 配置: 数据块4 + 校验块4
 # 可容忍 4 块盘问题
 ```
 
-#<!-- chunk: MinIO 客户端 -->## MinIO 客户端
+## MinIO 客户端
 
 ```bash
 # 配置
@@ -345,9 +345,9 @@ mc cp file.txt myminio/mybucket/
 mc ls myminio/mybucket/
 ```
 
-#<!-- chunk: 企业级MinIO运维实践 -->## 企业级MinIO运维实践
+## 企业级MinIO运维实践
 
-##<!-- chunk: 高可用部署配置 -->## 高可用部署配置
+## 高可用部署配置
 
 ```yaml
 # Docker Compose高可用部署
@@ -393,7 +393,7 @@ services:
       - minio4
 ```
 
-##<!-- chunk: 性能监控脚本 -->## 性能监控脚本
+## 性能监控脚本
 
 ```python
 # MinIO性能监控脚本
@@ -460,7 +460,7 @@ chmod +x /usr/local/bin/minio-monitor.py
 
 <!-- chunk: GlusterFS 文件存储 -->## GlusterFS 文件存储
 
-#<!-- chunk: 卷类型 -->## 卷类型
+## 卷类型
 
 | 类型 | 说明 | 最少节点 |
 |:---|:---|:---:|
@@ -469,7 +469,7 @@ chmod +x /usr/local/bin/minio-monitor.py
 | Stripe | 条带化 | 2 |
 | Distributed-Replicate | 分布式副本 | 4 |
 
-#<!-- chunk: 快速部署 -->## 快速部署
+## 快速部署
 
 ```bash
 # 安装
@@ -493,9 +493,9 @@ gluster volume start vol1
 mount -t glusterfs node1:/vol1 /mnt/glusterfs
 ```
 
-#<!-- chunk: 企业级GlusterFS运维 -->## 企业级GlusterFS运维
+## 企业级GlusterFS运维
 
-##<!-- chunk: 高可用配置 -->## 高可用配置
+## 高可用配置
 
 ```bash
 # 创建高可用卷
@@ -513,7 +513,7 @@ gluster volume set ha-vol performance.cache-size 256MB
 gluster volume set ha-vol performance.write-behind-window-size 4MB
 ```
 
-##<!-- chunk: 监控告警配置 -->## 监控告警配置
+## 监控告警配置
 
 ```bash
 # GlusterFS监控脚本
@@ -560,7 +560,7 @@ chmod +x /usr/local/bin/gluster-monitor.sh
 
 <!-- chunk: 存储系统选型 -->## 存储系统选型
 
-#<!-- chunk: 对比 -->## 对比
+## 对比
 
 | 特性 | Ceph | MinIO | GlusterFS |
 |:---|:---|:---|:---|
@@ -569,7 +569,7 @@ chmod +x /usr/local/bin/gluster-monitor.sh
 | 性能 | 高 | 高 | 中 |
 | K8s 集成 | 成熟 | 成熟 | 一般 |
 
-#<!-- chunk: 选型建议 -->## 选型建议
+## 选型建议
 
 | 需求 | 推荐方案 |
 |:---|:---|
@@ -578,7 +578,7 @@ chmod +x /usr/local/bin/gluster-monitor.sh
 | 简单文件共享 | GlusterFS/NFS |
 | K8s 持久卷 | Ceph RBD/Longhorn |
 
-#<!-- chunk: 企业级存储架构决策矩阵 -->## 企业级存储架构决策矩阵
+## 企业级存储架构决策矩阵
 
 | 评估维度 | 权重 | Ceph | MinIO | GlusterFS |
 |:---|:---:|:---:|:---:|:---:|

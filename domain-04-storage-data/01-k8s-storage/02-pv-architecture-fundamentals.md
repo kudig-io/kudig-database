@@ -290,6 +290,9 @@ PV 与 PVC 绑定后，Kubernetes 会自动添加以下保护机制：
 | **`kubernetes.io/pv-protection`** (PV finalizer) | PV 绑定到 PVC 后添加，**阻止 PV 被直接删除**。必须先删除 PVC，PV 才能被回收 |
 | **`kubernetes.io/pvc-protection`** (PVC finalizer) | PVC 被 Pod 使用时添加，**阻止 PVC 在 Pod 使用期间被删除**。所有引用 PVC 的 Pod 终止后才能删除 PVC |
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 查看绑定保护 annotation
 kubectl get pvc <name> -o jsonpath='{.metadata.annotations}'
@@ -997,6 +1000,9 @@ storage_monitoring_config:
 
 ### 自动化监控部署脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # storage-monitoring-deployment.sh
@@ -1171,7 +1177,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-04-storage-data KUDIG Database — Global MOC
-- [[domain-04-storage-data/README|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
+- [[domain-04-storage-data/README.md|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
 - index.md|Domain-6 存储 — 开源项目索引]]
 - 存储架构概览与核心组件
 - 03 - PVC使用模式与最佳实践
@@ -1191,9 +1197,9 @@ spec:
 - StorageClass 动态供给
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-04-storage-data
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 ## See Also
 

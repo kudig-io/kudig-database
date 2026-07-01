@@ -118,7 +118,7 @@ Crossplane 是一个开源的 Kubernetes 扩展框架，由 Upbound 维护，现
 
 <!-- chunk: Crossplane 核心架构 -->## Crossplane 核心架构
 
-#<!-- chunk: 整体架构图 -->## 整体架构图
+## 整体架构图
 
 ```mermaid
 graph TB
@@ -184,7 +184,7 @@ graph TB
     style "Azure Cloud" fill:#f3e5f5,stroke:#7b1fa2
 ```
 
-#<!-- chunk: 核心概念层次 -->## 核心概念层次
+## 核心概念层次
 
 ```mermaid
 graph TD
@@ -219,7 +219,7 @@ graph TD
     style "Cloud（云层）" fill:#fce4ec
 ```
 
-#<!-- chunk: 数据流 -->## 数据流
+## 数据流
 
 ```mermaid
 sequenceDiagram
@@ -247,7 +247,7 @@ sequenceDiagram
 
 <!-- chunk: Provider 生态系统 -->## Provider 生态系统
 
-#<!-- chunk: 主流 Provider 列表 -->## 主流 Provider 列表
+## 主流 Provider 列表
 
 ```mermaid
 mindmap
@@ -283,7 +283,7 @@ mindmap
         腾讯云资源
 ```
 
-#<!-- chunk: 安装 Provider -->## 安装 Provider
+## 安装 Provider
 
 ```yaml
 # 安装 AWS Provider
@@ -321,7 +321,7 @@ spec:
                   memory: 512Mi
 ```
 
-#<!-- chunk: ProviderConfig（凭证配置） -->## ProviderConfig（凭证配置）
+## ProviderConfig（凭证配置）
 
 ```yaml
 # AWS 凭证配置
@@ -384,7 +384,7 @@ spec:
 
 <!-- chunk: Managed Resources 详解 -->## Managed Resources 详解
 
-#<!-- chunk: 直接使用 Managed Resource -->## 直接使用 Managed Resource
+## 直接使用 Managed Resource
 
 ```yaml
 # 直接创建 RDS PostgreSQL 实例（低级 API）
@@ -422,7 +422,7 @@ spec:
     name: aws-irsa
 ```
 
-#<!-- chunk: Managed Resource 生命周期注解 -->## Managed Resource 生命周期注解
+## Managed Resource 生命周期注解
 
 ```yaml
 metadata:
@@ -445,7 +445,7 @@ spec:
   deletionPolicy: Delete  # 或 Orphan（孤立，不删除云资源）
 ```
 
-#<!-- chunk: Managed Resource 状态检查 -->## Managed Resource 状态检查
+## Managed Resource 状态检查
 
 ```bash
 # 检查资源状态
@@ -483,7 +483,7 @@ status:
 
 <!-- chunk: Composite Resources (XR) -->## Composite Resources (XR)
 
-#<!-- chunk: XR vs Claim 的关系 -->## XR vs Claim 的关系
+## XR vs Claim 的关系
 
 ```mermaid
 graph LR
@@ -513,7 +513,7 @@ graph LR
     style "AWS" fill:#fff3e0
 ```
 
-#<!-- chunk: Claim 提交示例（应用团队视角） -->## Claim 提交示例（应用团队视角）
+## Claim 提交示例（应用团队视角）
 
 ```yaml
 # 应用团队提交的 PostgreSQL Claim（高级抽象 API）
@@ -550,7 +550,7 @@ spec:
 
 <!-- chunk: XRD — 复合资源定义 -->## XRD — 复合资源定义
 
-#<!-- chunk: XRD 完整示例 -->## XRD 完整示例
+## XRD 完整示例
 
 ```yaml
 # Platform Team 定义的 XRD
@@ -690,7 +690,7 @@ spec:
 
 <!-- chunk: Composition 组合机制 -->## Composition 组合机制
 
-#<!-- chunk: Composition 完整示例 -->## Composition 完整示例
+## Composition 完整示例
 
 ```yaml
 # Platform Team 编写的 AWS PostgreSQL Composition
@@ -910,7 +910,7 @@ spec:
                 fmt: "postgres%s"
 ```
 
-#<!-- chunk: Patch 类型速查表 -->## Patch 类型速查表
+## Patch 类型速查表
 
 | Patch 类型 | 方向 | 用途 |
 |-----------|------|------|
@@ -921,7 +921,7 @@ spec:
 | `CombineFromComposite` | 多个XR字段 → MR | 合并多个字段为单个值 |
 | `PatchSet` | 引用 PatchSet | 复用 Patch 集合 |
 
-#<!-- chunk: Transform 类型速查表 -->## Transform 类型速查表
+## Transform 类型速查表
 
 ```yaml
 transforms:
@@ -965,7 +965,7 @@ transforms:
 
 <!-- chunk: Composition Functions -->## Composition Functions
 
-#<!-- chunk: Composition Functions 介绍 -->## Composition Functions 介绍
+## Composition Functions 介绍
 
 Composition Functions 是 Crossplane v1.14+ 引入的功能，允许用 **任意编程语言**（Go、Python、CUE 等）编写复杂的组合逻辑，克服了纯 YAML Patches 的局限性。
 
@@ -996,7 +996,7 @@ graph LR
     F3 -.-> PT
 ```
 
-#<!-- chunk: 使用 Function 的 Composition -->## 使用 Function 的 Composition
+## 使用 Function 的 Composition
 
 ```yaml
 apiVersion: apiextensions.crossplane.io/v1
@@ -1086,7 +1086,7 @@ spec:
                   family: postgres15
 ```
 
-#<!-- chunk: 自定义 Function（Go 实现） -->## 自定义 Function（Go 实现）
+## 自定义 Function（Go 实现）
 
 ```go
 // function.go - 自定义 Crossplane Function
@@ -1151,7 +1151,7 @@ func (f *Function) RunFunction(ctx context.Context, req *fnv1beta1.RunFunctionRe
 
 <!-- chunk: 多云基础设施抽象 -->## 多云基础设施抽象
 
-#<!-- chunk: 多云数据库抽象层 -->## 多云数据库抽象层
+## 多云数据库抽象层
 
 ```mermaid
 graph TD
@@ -1188,7 +1188,7 @@ graph TD
     style "Cloud Resources" fill:#fff3e0
 ```
 
-#<!-- chunk: GCP Cloud SQL Composition -->## GCP Cloud SQL Composition
+## GCP Cloud SQL Composition
 
 ```yaml
 apiVersion: apiextensions.crossplane.io/v1
@@ -1253,7 +1253,7 @@ spec:
           toFieldPath: "spec.forProvider.settings[0].diskSize"
 ```
 
-#<!-- chunk: 多云成本优化策略 -->## 多云成本优化策略
+## 多云成本优化策略
 
 ```yaml
 # Environment-based Composition 选择
@@ -1297,7 +1297,7 @@ spec:
 
 <!-- chunk: Platform API 设计模式 -->## Platform API 设计模式
 
-#<!-- chunk: 平台 API 分层模型 -->## 平台 API 分层模型
+## 平台 API 分层模型
 
 ```mermaid
 graph TB
@@ -1321,7 +1321,7 @@ graph TB
     style "Level 1: Provider API（Provider API）" fill:#ffe0b2
 ```
 
-#<!-- chunk: 环境感知 API 设计 -->## 环境感知 API 设计
+## 环境感知 API 设计
 
 ```yaml
 # 环境抽象 XRD
@@ -1369,7 +1369,7 @@ spec:
                           default: USD
 ```
 
-#<!-- chunk: XRD Schema 最佳实践 -->## XRD Schema 最佳实践
+## XRD Schema 最佳实践
 
 ```yaml
 # 好的 Schema 设计原则示例
@@ -1416,7 +1416,7 @@ spec:
 
 <!-- chunk: RBAC 与访问控制 -->## RBAC 与访问控制
 
-#<!-- chunk: Crossplane RBAC 模型 -->## Crossplane RBAC 模型
+## Crossplane RBAC 模型
 
 ```mermaid
 graph TD
@@ -1441,7 +1441,7 @@ graph TD
     AR2 --> CT
 ```
 
-#<!-- chunk: RBAC 配置示例 -->## RBAC 配置示例
+## RBAC 配置示例
 
 ```yaml
 # 为应用团队配置 Claim 访问权限
@@ -1490,7 +1490,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-#<!-- chunk: Usage Policy（使用策略） -->## Usage Policy（使用策略）
+## Usage Policy（使用策略）
 
 ```yaml
 # Crossplane Usage Resource - 防止级联删除
@@ -1517,7 +1517,7 @@ spec:
 
 <!-- chunk: 可观测性与调试 -->## 可观测性与调试
 
-#<!-- chunk: 资源状态检查命令 -->## 资源状态检查命令
+## 资源状态检查命令
 
 ```bash
 # 查看所有 Claim 状态
@@ -1539,7 +1539,7 @@ kubectl get events --field-selector involvedObject.kind=XPostgreSQL
 crossplane beta trace postgresqlclaim payments-db -n team-payments
 ```
 
-#<!-- chunk: 常见问题排查 -->## 常见问题排查
+## 常见问题排查
 
 ```mermaid
 flowchart TD
@@ -1562,7 +1562,7 @@ flowchart TD
     C4 -->|Yes| SUCCESS[✅ All Good]
 ```
 
-#<!-- chunk: Prometheus 监控 -->## Prometheus 监控
+## Prometheus 监控
 
 ```yaml
 # Crossplane Metrics ServiceMonitor
@@ -1614,7 +1614,7 @@ spec:
 
 <!-- chunk: 生产最佳实践 -->## 生产最佳实践
 
-#<!-- chunk: 凭证管理策略 -->## 凭证管理策略
+## 凭证管理策略
 
 ```mermaid
 graph LR
@@ -1638,7 +1638,7 @@ graph LR
     style "不推荐 (Avoid)" fill:#ffebee
 ```
 
-#<!-- chunk: Composition 版本升级策略 -->## Composition 版本升级策略
+## Composition 版本升级策略
 
 ```yaml
 # Composition 灰度升级
@@ -1670,7 +1670,7 @@ spec:
     tier: standard
 ```
 
-#<!-- chunk: 成本标签强制策略 -->## 成本标签强制策略
+## 成本标签强制策略
 
 ```yaml
 # Composition 中强制注入成本标签
@@ -1704,7 +1704,7 @@ resources:
         toFieldPath: "spec.forProvider.tags['Environment']"
 ```
 
-#<!-- chunk: 资源配额与成本控制 -->## 资源配额与成本控制
+## 资源配额与成本控制
 
 ```yaml
 # 使用 ResourceQuota 限制 Claim 数量
@@ -1725,7 +1725,7 @@ spec:
 
 <!-- chunk: Crossplane vs Terraform -->## Crossplane vs Terraform
 
-#<!-- chunk: 详细对比 -->## 详细对比
+## 详细对比
 
 | 维度 | Crossplane | Terraform |
 |------|-----------|-----------|
@@ -1741,7 +1741,7 @@ spec:
 | **回滚能力** | Kubernetes Rollback | 手动 terraform apply 历史版本 |
 | **计算资源** | 需要运行 Controller | 无常驻服务 |
 
-#<!-- chunk: 何时选择 Crossplane -->## 何时选择 Crossplane
+## 何时选择 Crossplane
 
 ```mermaid
 flowchart TD
@@ -1762,7 +1762,7 @@ flowchart TD
     Q5 -->|No| EITHER
 ```
 
-#<!-- chunk: 迁移路径：Terraform → Crossplane -->## 迁移路径：Terraform → Crossplane
+## 迁移路径：Terraform → Crossplane
 
 ```bash
 # 1. 导入已有云资源到 Crossplane（不重建）
@@ -1796,7 +1796,7 @@ spec:
 
 <!-- chunk: 总结 (Summary) -->## 总结 (Summary)
 
-#<!-- chunk: Crossplane 价值矩阵 -->## Crossplane 价值矩阵
+## Crossplane 价值矩阵
 
 ```mermaid
 quadrantChart
@@ -1816,7 +1816,7 @@ quadrantChart
     Hybrid Cloud: [0.70, 0.85]
 ```
 
-#<!-- chunk: 核心要点回顾 -->## 核心要点回顾
+## 核心要点回顾
 
 1. **Provider 抽象**: 将云 API 转化为 Kubernetes CRD，统一管理界面
 2. **XRD + Composition**: 平台团队定义高层 API，隐藏底层复杂性
@@ -1842,7 +1842,7 @@ quadrantChart
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Domain 36: 平台工程 (Platform Engineering)]]
+- [[domain-07-platform-engineering/README.md|Domain 07: 平台工程 (Platform Engineering)]]
 - Domain-36 平台工程 — 开源项目索引
 - 平台工程概述与成熟度模型
 - 内部开发者平台设计原则

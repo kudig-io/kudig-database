@@ -41,6 +41,7 @@ prerequisites:
 - logging-basics
 - observability-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 10 - 多云混合云运维手册
@@ -1330,46 +1331,39 @@ data:
       
       routes:
       # 1. 生产环境Critical告警 -> PagerDuty + Slack
-      - match:
-          environment: production
-          severity: critical
-        receiver: 'pagerduty-critical'
+      - matchers:
+        - environment="production"
+        - severity="critical"
+        receiver: pagerduty-critical
         continue: true  # 继续匹配其他路由
-        
-      - match:
-          environment: production
-          severity: critical
-        receiver: 'slack-critical'
-        
+      - matchers:
+        - environment="production"
+        - severity="critical"
+        receiver: slack-critical
       # 2. 生产环境Warning告警 -> Slack
-      - match:
-          environment: production
-          severity: warning
-        receiver: 'slack-warning'
+      - matchers:
+        - environment="production"
+        - severity="warning"
+        receiver: slack-warning
         group_wait: 5m  # 等待5分钟聚合
-        
       # 3. 按团队路由
-      - match_re:
-          namespace: ^team-frontend-.*
-        receiver: 'slack-frontend-team'
-        
-      - match_re:
-          namespace: ^team-backend-.*
-        receiver: 'slack-backend-team'
-        
+      - matchers:
+        - namespace=~"^team-frontend-.*"
+        receiver: slack-frontend-team
+      - matchers:
+        - namespace=~"^team-backend-.*"
+        receiver: slack-backend-team
       # 4. 非生产环境 -> 低优先级Slack
-      - match_re:
-          environment: development|staging|testing
-        receiver: 'slack-non-prod'
+      - matchers:
+        - environment=~"development|staging|testing"
+        receiver: slack-non-prod
         group_wait: 30m  # 等待30分钟聚合
         repeat_interval: 24h  # 24小时重复一次
-        
       # 5. 特定云厂商告警
-      - match:
-          provider: aws
-          alertname: HighAWSCost
-        receiver: 'email-finops'
-        
+      - matchers:
+        - provider="aws"
+        - alertname="HighAWSCost"
+        receiver: email-finops
     # 告警接收器定义
     receivers:
     # 默认接收器
@@ -1380,7 +1374,7 @@ data:
     # PagerDuty (生产Critical)
     - name: 'pagerduty-critical'
       pagerduty_configs:
-      - service_key: 'xxxxxxxxxxxxx'
+      - routing_key: 'xxxxxxxxxxxxx'
         description: '[{{ .GroupLabels.cluster }}] {{ .GroupLabels.alertname }}'
         details:
           firing: '{{ .Alerts.Firing | len }}'
@@ -1438,19 +1432,17 @@ data:
     # 告警抑制规则
     inhibit_rules:
     # 如果集群宕机,抑制该集群的其他告警
-    - source_match:
-        alertname: 'KubernetesClusterDown'
-      target_match_re:
-        alertname: '.*'
-      equal: ['cluster']
-      
+    - source_matchers:
+      - alertname="KubernetesClusterDown"
+      - target_match_re=""
+      - alertname=".*"
+      - equal="['cluster']"
     # 如果节点宕机,抑制该节点上的Pod告警
-    - source_match:
-        alertname: 'NodeDown'
-      target_match:
-        alertname: 'PodCrashLooping'
-      equal: ['node']
-
+    - source_matchers:
+      - alertname="NodeDown"
+      - target_match=""
+      - alertname="PodCrashLooping"
+      - equal="['node']"
 ---
 # 2. 跨集群告警规则示例
 apiVersion: monitoring.coreos.com/v1
@@ -1522,7 +1514,6 @@ spec:
 | **误区2: 每个集群独立Alertmanager** | 无法统一抑制和路由,重复告警 | 使用中心化Alertmanager集群 |
 | **误区3: 不设置告警抑制** | 一个问题触发几十个告警,淹没真实问题 | 配置inhibit_rules,上游问题抑制下游 |
 | **误区4: 告警模板千篇一律** | 缺少上下文信息,无法快速响应 | 包含cluster、runbook_url、常用命令 |
-
 
 
 ---
@@ -2485,6 +2476,7 @@ spec:
           for app in my-app-aws-prod my-app-azure-prod my-app-gcp-prod; do
             argocd app wait $app --sync --health --timeout 600
           done
+
 ```
 
 #### ⚠️ 常见误区
@@ -2502,7 +2494,6 @@ spec:
 3. **审计追踪**: 所有变更有Git commit记录,可回溯
 4. **渐进发布**: 先部署到测试集群,验证后再推广到生产
 5. **回滚机制**: Git revert即可回滚,快速恢复
-
 
 
 ### 1.5 集群联邦 (Cluster Federation)
@@ -2939,17 +2930,15 @@ spec:
     
     routes:
     # 生产环境告警 -> PagerDuty
-    - match:
-        severity: critical
-        env: production
+    - matchers:
+      - severity="critical"
+      - env="production"
       receiver: pagerduty-critical
       continue: true
-      
     # 所有告警 -> Slack
-    - match:
-        severity: warning|critical
+    - matchers:
+      - severity="warning|critical"
       receiver: slack-alerts
-      
   receivers:
   - name: default
     emailConfigs:
@@ -2990,7 +2979,6 @@ spec:
 | **GitOps多集群部署** | ArgoCD ApplicationSet | 声明式、版本控制友好 |
 | **临时查看多集群** | kubectl + kubectx插件 | 轻量级、无额外组件 |
 | **企业级完整方案** | Rancher/OpenShift | 集成RBAC、监控、日志、市场 |
-
 
 
 ---
@@ -3654,7 +3642,6 @@ data:
 - [ ] 切换脚本经过演练验证
 - [ ] 监控告警已配置
 - [ ] 回切方案已准备(主集群恢复后如何切回)
-
 
 
 ---
@@ -4398,6 +4385,9 @@ data:
 
 **实战操作指南:**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. 查看Pod资源使用情况
 kubectl top pods -n production --sort-by=cpu
@@ -4638,6 +4628,12 @@ spec:
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级
 
+## 参考链接
+
+- [Multi Cloud Operations]()
+
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

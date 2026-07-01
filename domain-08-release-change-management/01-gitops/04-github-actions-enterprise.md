@@ -95,7 +95,7 @@ GitHub Actions 的核心设计理念是"事件驱动"——每个工作流由 Gi
 
 <!-- chunk: 二、架构设计 -->## 二、架构设计
 
-#<!-- chunk: 2.1 核心组件架构 -->## 2.1 核心组件架构
+## 2.1 核心组件架构
 
 ```mermaid
 graph TB
@@ -142,7 +142,7 @@ graph TB
     API --> EXT
 ```
 
-#<!-- chunk: 2.2 企业 Runner 架构 -->## 2.2 企业 Runner 架构
+## 2.2 企业 Runner 架构
 
 ```yaml
 github_actions_enterprise:
@@ -189,7 +189,7 @@ github_actions_enterprise:
         - "172.16.0.0/12"
 ```
 
-#<!-- chunk: 2.3 自托管 Runner [[Kubernetes|Kubernetes]] 部署 -->## 2.3 自托管 Runner Kubernetes 部署
+## 2.3 自托管 Runner Kubernetes 部署
 
 ```yaml
 # actions-runner-controller (ARC) 部署
@@ -248,7 +248,7 @@ spec:
 
 <!-- chunk: 三、核心配置 -->## 三、核心配置
 
-#<!-- chunk: 3.1 企业级 CI/CD 工作流 -->## 3.1 企业级 CI/CD 工作流
+## 3.1 企业级 CI/CD 工作流
 
 ```yaml
 # .github/workflows/enterprise-ci-cd.yml
@@ -460,7 +460,7 @@ jobs:
             -n production --timeout=5m
 ```
 
-#<!-- chunk: 3.2 可复用工作流 -->## 3.2 可复用工作流
+## 3.2 可复用工作流
 
 ```yaml
 # .github/workflows/reusable-security-scan.yml
@@ -522,7 +522,7 @@ jobs:
       severity: 'high'
 ```
 
-#<!-- chunk: 3.3 Composite Action -->## 3.3 Composite Action
+## 3.3 Composite Action
 
 ```yaml
 # .github/actions/setup-build/action.yml
@@ -562,7 +562,7 @@ runs:
 
 <!-- chunk: 四、安全与合规 -->## 四、安全与合规
 
-#<!-- chunk: 4.1 安全加固 -->## 4.1 安全加固
+## 4.1 安全加固
 
 ```yaml
 # .github/dependabot.yml
@@ -592,7 +592,7 @@ updates:
       interval: "weekly"
 ```
 
-#<!-- chunk: 4.2 OIDC 云提供商认证 -->## 4.2 OIDC 云提供商认证
+## 4.2 OIDC 云提供商认证
 
 ```yaml
 # AWS OIDC 认证 (无长期密钥)
@@ -635,7 +635,7 @@ jobs:
           location: us-central1
 ```
 
-#<!-- chunk: 4.3 Environment Protection Rules -->## 4.3 Environment Protection Rules
+## 4.3 Environment Protection Rules
 
 ```yaml
 # 环境保护规则配置 (GitHub UI / API)
@@ -672,7 +672,7 @@ environments:
 
 <!-- chunk: 五、多环境管理策略 -->## 五、多环境管理策略
 
-#<!-- chunk: 5.1 环境矩阵部署 -->## 5.1 环境矩阵部署
+## 5.1 环境矩阵部署
 
 ```yaml
 # 矩阵化多环境部署
@@ -710,7 +710,7 @@ jobs:
             --atomic
 ```
 
-#<!-- chunk: 5.2 GitOps 集成 -->## 5.2 GitOps 集成
+## 5.2 GitOps 集成
 
 ```yaml
 # GitHub Actions + Argo CD / Flux GitOps 集成
@@ -743,7 +743,7 @@ jobs:
 
 <!-- chunk: 六、监控与回滚 -->## 六、监控与回滚
 
-#<!-- chunk: 6.1 工作流性能监控 -->## 6.1 工作流性能监控
+## 6.1 工作流性能监控
 
 ```yaml
 # .github/workflows/metrics.yml
@@ -764,7 +764,7 @@ jobs:
           slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
 ```
 
-#<!-- chunk: 6.2 回滚策略 -->## 6.2 回滚策略
+## 6.2 回滚策略
 
 ```bash
 # 方式一: 重新运行成功的工作流
@@ -787,7 +787,7 @@ gh workflow run deploy.yml \
 
 <!-- chunk: 七、最佳实践 -->## 七、最佳实践
 
-#<!-- chunk: 7.1 工作流设计原则 -->## 7.1 工作流设计原则
+## 7.1 工作流设计原则
 
 ```yaml
 1. 安全优先:
@@ -815,18 +815,22 @@ gh workflow run deploy.yml \
    - 构建产物 (SBOM/Provenance) 可追溯
 ```
 
-#<!-- chunk: 7.2 性能优化脚本 -->## 7.2 性能优化脚本
+## 7.2 性能优化脚本
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
 ```bash
 #!/bin/bash
 # Runner 维护脚本
 
 # 清理 Docker 缓存
-docker system prune -af --volumes
+docker system prune -af --volumes  # ⚠️ 强制清理，可能杀运行中容器
 
 # 清理构建缓存
-rm -rf /tmp/_github_actions_*
-rm -rf /tmp/github_actions_*
+rm -rf /tmp/_github_actions_*  # ⚠️ 删除系统/数据文件
+rm -rf /tmp/github_actions_*  # ⚠️ 删除系统/数据文件
 
 # 清理 npm/pip 缓存
 npm cache clean --force 2>/dev/null
@@ -843,7 +847,7 @@ fi
 
 <!-- chunk: 八、故障排查 -->## 八、故障排查
 
-#<!-- chunk: 8.1 常见问题 -->## 8.1 常见问题
+## 8.1 常见问题
 
 ```yaml
 工作流不触发:
@@ -872,7 +876,7 @@ Job 被跳过:
     - 只有 main 分支的缓存对所有分支可见
 ```
 
-#<!-- chunk: 8.2 调试技巧 -->## 8.2 调试技巧
+## 8.2 调试技巧
 
 ```yaml
 # 调试工作流
@@ -896,7 +900,7 @@ jobs:
 
 <!-- chunk: 九、GitHub Actions 高级模式 -->## 九、GitHub Actions 高级模式
 
-#<!-- chunk: 9.1 可复用工作流设计模式 -->## 9.1 可复用工作流设计模式
+## 9.1 可复用工作流设计模式
 
 可复用工作流（Reusable Workflows）是 GitHub Actions 实现跨仓库代码复用的核心机制。一个设计良好的可复用工作流可以将企业级的 CI/CD 标准流程封装成一个可参数化的模板，多个仓库可以引用同一个工作流定义。这种模式确保了所有项目遵循统一的安全标准、质量门禁和部署流程，同时减少了重复配置。
 
@@ -950,7 +954,7 @@ jobs:
           cache-to: type=gha,mode=max
 ```
 
-#<!-- chunk: 9.2 矩阵策略高级配置 -->## 9.2 矩阵策略高级配置
+## 9.2 矩阵策略高级配置
 
 矩阵策略（Matrix Strategy）允许在多个配置组合下并行执行工作流。结合 `include` 和 `exclude` 指令，可以精确控制哪些组合需要执行，避免不必要的构建。
 
@@ -987,7 +991,7 @@ jobs:
       - run: npm ci && npm test
 ```
 
-#<!-- chunk: 9.3 环境保护与合规流水线 -->## 9.3 环境保护与合规流水线
+## 9.3 环境保护与合规流水线
 
 环境保护规则是 GitHub Actions 企业安全的核心机制。通过配置环境保护规则，可以实现强制审批、等待计时器和部署分支策略，确保生产部署的安全性和可审计性。
 
@@ -1036,7 +1040,7 @@ jobs:
         run: echo "Deploying with compliance approval"
 ```
 
-#<!-- chunk: 9.4 自托管 Runner 弹性伸缩 -->## 9.4 自托管 Runner 弹性伸缩
+## 9.4 自托管 Runner 弹性伸缩
 
 在企业环境中，自托管 Runner 的弹性伸缩是控制成本和保障构建性能的关键。actions-runner-controller（ARC）是社区推荐的 Kubernetes Runner 管理方案，它通过 HorizontalRunnerAutoscaler 根据 GitHub Actions 队列深度自动调整 Runner 数量。
 
@@ -1062,7 +1066,7 @@ spec:
         - your-org/your-repo
 ```
 
-#<!-- chunk: 9.5 GitHub Actions 与 Argo CD 集成 -->## 9.5 GitHub Actions 与 Argo CD 集成
+## 9.5 GitHub Actions 与 Argo CD 集成
 
 GitHub Actions 与 Argo CD 的集成是企业级 GitOps 的最佳实践之一。在这种模式下，GitHub Actions 负责代码构建、测试和镜像推送，然后将镜像标签更新提交到 GitOps 清单仓库。Argo CD 检测到清单变更后自动同步部署。
 
@@ -1105,7 +1109,7 @@ jobs:
 
 <!-- chunk: 十、GitHub Actions 企业治理 -->## 十、GitHub Actions 企业治理
 
-#<!-- chunk: 10.1 组织级策略管理 -->## 10.1 组织级策略管理
+## 10.1 组织级策略管理
 
 GitHub Enterprise 提供了组织级别的策略管理能力，可以统一控制所有仓库的工作流权限、Secret 访问范围和 Action 使用策略。通过合理的组织级策略配置，可以确保所有团队遵循统一的安全标准，同时保持足够的灵活性。
 
@@ -1133,7 +1137,7 @@ organization_policies:
     maximum_size: "10GB"
 ```
 
-#<!-- chunk: 10.2 审计与合规 -->## 10.2 审计与合规
+## 10.2 审计与合规
 
 GitHub Enterprise 的审计日志记录了所有组织级别的操作，包括工作流执行、Secret 访问和环境部署。结合 GitHub 的 Compliance API，可以实现自动化的合规检查和报告生成。
 
@@ -1157,7 +1161,7 @@ gh api orgs/{org}/actions/permissions
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-08-release-change-management KUDIG Database — Global MOC
-- [[domain-08-release-change-management/README|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
+- [[domain-08-release-change-management/README.md|Domain 08: GitOps与CI/CD (GitOps & CI/CD)]]
 - Domain-23 GitOps & CI/CD — 开源项目索引
 - Argo CD企业级GitOps实践指南
 - Jenkins企业级CI/CD流水线深度实践
@@ -1178,4 +1182,4 @@ gh api orgs/{org}/actions/permissions
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

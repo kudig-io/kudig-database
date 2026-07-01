@@ -34,7 +34,7 @@ created: "2026-05-23"
 
 ## 概述
 
-[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 支持在 Windows 节点上运行工作负载，并允许与 Linux 节点混合部署在同一个集群中。Windows 容器网络通过 CNI 插件暴露，其网络模型与 Linux 有显著差异：每个容器拥有一个虚拟网卡（vNIC），连接到 Hyper-V 虚拟交换机（vSwitch），由 Host Networking [[Service|Service]]（HNS）和 Host Compute Service（HCS）协同管理。
+[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 支持在 Windows 节点上运行工作负载，并允许与 Linux 节点混合部署在同一个集群中。Windows 容器网络通过 CNI 插件暴露，其网络模型与 Linux 有显著差异：每个容器拥有一个虚拟网卡（vNIC），连接到 Hyper-V 虚拟交换机（vSwitch），由 Host Networking [[Service|Service]]（HNS）和 Host Compute Service（HCS）协同管理。
 
 ## 核心概念/原理
 
@@ -180,3 +180,9 @@ kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=20
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/services-networking/windows-networking/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
+- [[domain-17-system-foundation/topic-dictionary/networking/akri.md|Akri 边缘设备发现]]
+- [[domain-17-system-foundation/topic-dictionary/networking/antrea.md|Antrea 网络方案]]

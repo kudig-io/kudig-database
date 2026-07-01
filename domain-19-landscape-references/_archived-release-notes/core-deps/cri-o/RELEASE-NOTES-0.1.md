@@ -37,7 +37,7 @@ Source: [v0.1](https://github.com/cri-o/cri-o/releases/tag/v0.1)
 We are able to run a k8s cluster with cri-o and run basic [[Pods|pods]] with this release. 
 
 Features:
-1. [[Pod Lifecycle|Pod lifecycle]]
+1. Pod lifecycle
 2. Container lifecycle
 3. Image lifecycle
 4. CNI networking integration

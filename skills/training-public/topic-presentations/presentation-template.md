@@ -65,7 +65,7 @@ created: "2026-05-23"
 
 每篇 Presentation 必须严格遵循以下标准化结构。该结构经过教学实践验证，确保知识传递效率和学员吸收率。
 
-#<!-- chunk: 结构总览 -->## 结构总览
+## 结构总览
 
 ```mermaid
 graph TD
@@ -89,7 +89,7 @@ graph TD
     style I fill:#795548,color:#fff
 ```
 
-#<!-- chunk: 标准章节列表 -->## 标准章节列表
+## 标准章节列表
 
 | 序号 | 章节 | 类型 | 必选 | 说明 |
 |:---:|:---|:---:|:---:|:---|
@@ -107,7 +107,7 @@ graph TD
 
 <!-- chunk: 每个章节的详细要求（Detailed Section Requirements） -->## 每个章节的详细要求（Detailed Section Requirements）
 
-#<!-- chunk: 第 0 章：演讲概述（Overview） -->## 第 0 章：演讲概述（Overview）
+## 第 0 章：演讲概述（Overview）
 
 **目的：** 让学员和讲师快速了解本篇 Presentation 的定位、范围和预期成果。
 
@@ -151,14 +151,14 @@ graph TD
 
 ---
 
-#<!-- chunk: 第 1 章：快速入门与核心概念（Beginner — 45min） -->## 第 1 章：快速入门与核心概念（Beginner — 45min）
+## 第 1 章：快速入门与核心概念（Beginner — 45min）
 
 **目的：** 建立认知基线，让零基础学员理解"为什么"和"是什么"。
 
 **结构要求：**
 
 ```markdown
-#<!-- chunk: 🔰 第一阶段：快速入门与核心概念 (Beginner - 45min) -->## 🔰 第一阶段：快速入门与核心概念 (Beginner - 45min)
+## 🔰 第一阶段：快速入门与核心概念 (Beginner - 45min)
 
 1. **为什么需要 [组件名称]？** (10min)
    - 解决什么痛点？（用具体的生产场景举例）
@@ -174,6 +174,7 @@ graph TD
    - 基础命令行操作（CRUD: Create/Read/Update/Delete）
    - 查看状态与基本排障
    - 学员跟随操作的微实验（5 分钟可完成）
+
 ```
 
 **写作要求：**
@@ -185,14 +186,14 @@ graph TD
 
 ---
 
-#<!-- chunk: 第 2 章：核心架构与深度原理（Deep Dive — 60min） -->## 第 2 章：核心架构与深度原理（Deep Dive — 60min）
+## 第 2 章：核心架构与深度原理（Deep Dive — 60min）
 
 **目的：** 深入理解内部机制，建立系统性认知模型。
 
 **结构要求：**
 
 ```markdown
-#<!-- chunk: 📘 第二阶段：核心架构与深度原理 (Deep Dive - 60min) -->## 📘 第二阶段：核心架构与深度原理 (Deep Dive - 60min)
+## 📘 第二阶段：核心架构与深度原理 (Deep Dive - 60min)
 
 4. **架构演进与设计哲学** (20min)
    - 原生设计理念分析（Why it was built this way）
@@ -224,14 +225,14 @@ graph TD
 
 ---
 
-#<!-- chunk: 第 3 章：生产部署与高可用架构（Architecture — 90min） -->## 第 3 章：生产部署与高可用架构（Architecture — 90min）
+## 第 3 章：生产部署与高可用架构（Architecture — 90min）
 
 **目的：** 掌握生产级架构设计、配置规范和性能调优。
 
 **结构要求：**
 
 ```markdown
-#<!-- chunk: ⚡ 第三阶段：生产部署与高可用架构 (Architecture - 90min) -->## ⚡ 第三阶段：生产部署与高可用架构 (Architecture - 90min)
+## ⚡ 第三阶段：生产部署与高可用架构 (Architecture - 90min)
 
 7. **企业级高可用与配置规范** (30min)
    - 高可用拓扑设计（多副本/多可用区/多集群）
@@ -260,14 +261,14 @@ graph TD
 
 ---
 
-#<!-- chunk: 第 4 章：故障诊断与 SRE 运维（SRE Ops — 60min） -->## 第 4 章：故障诊断与 SRE 运维（SRE Ops — 60min）
+## 第 4 章：故障诊断与 SRE 运维（SRE Ops — 60min）
 
 **目的：** 建立系统化的故障排查能力和运维 SOP。
 
 **结构要求：**
 
 ```markdown
-#<!-- chunk: 🛠️ 第四阶段：故障诊断与 SRE 运维 (SRE Ops - 60min) -->## 🛠️ 第四阶段：故障诊断与 SRE 运维 (SRE Ops - 60min)
+## 🛠️ 第四阶段：故障诊断与 SRE 运维 (SRE Ops - 60min)
 
 10. **故障排查方法论与实战** (30min)
     - 分层诊断模型（应用层 → 网络层 → 存储层 → 节点层 → 控制平面）
@@ -285,7 +286,7 @@ graph TD
 **问题案例模板：**
 
 ```markdown
-##<!-- chunk: 案例 X: [问题标题] -->## 案例 X: [问题标题]
+## 案例 X: [问题标题]
 
 | 属性 | 内容 |
 |:---|:---|
@@ -301,14 +302,14 @@ graph TD
 
 ---
 
-#<!-- chunk: 第 5 章：高级进阶与安全加固（Advanced — 30min） -->## 第 5 章：高级进阶与安全加固（Advanced — 30min）
+## 第 5 章：高级进阶与安全加固（Advanced — 30min）
 
 **目的：** 补充安全、扩展和前沿话题，满足专家级学员需求。
 
 **结构要求：**
 
 ```markdown
-#<!-- chunk: 🛡️ 第五阶段：高级进阶与安全加固 (Advanced - 30min) -->## 🛡️ 第五阶段：高级进阶与安全加固 (Advanced - 30min)
+## 🛡️ 第五阶段：高级进阶与安全加固 (Advanced - 30min)
 
 12. **安全加固、扩展功能与未来演进**
     - RBAC 最小权限配置
@@ -323,7 +324,7 @@ graph TD
 
 <!-- chunk: 视觉设计指南（Visual Design Guidelines） -->## 视觉设计指南（Visual Design Guidelines）
 
-#<!-- chunk: 配色规范 -->## 配色规范
+## 配色规范
 
 本培训体系采用统一的配色方案，确保所有 Presentation 视觉风格一致。
 
@@ -337,7 +338,7 @@ graph TD
 | 中性色 — 灰色 | ⚪ | `#607D8B` | 注释、次要信息 |
 | 背景色 — 浅灰 | ◻️ | `#F5F5F5` | 代码块背景 |
 
-#<!-- chunk: Mermaid 图表配色 -->## Mermaid 图表配色
+## Mermaid 图表配色
 
 ```mermaid
 graph LR
@@ -355,7 +356,7 @@ graph LR
     style F fill:#607D8B,color:#fff
 ```
 
-#<!-- chunk: Mermaid 样式模板 -->## Mermaid 样式模板
+## Mermaid 样式模板
 
 在所有 Mermaid 图表中使用以下统一样式：
 
@@ -369,7 +370,7 @@ style 高级概念 fill:#9C27B0,color:#fff
 style 外部系统 fill:#607D8B,color:#fff
 ```
 
-#<!-- chunk: Markdown 格式规范 -->## Markdown 格式规范
+## Markdown 格式规范
 
 | 元素 | 格式 | 示例 |
 |:---|:---|:---|
@@ -381,7 +382,7 @@ style 外部系统 fill:#607D8B,color:#fff
 | 对比 | 表格 | Before/After 对比表 |
 | 输出示例 | 纯文本代码块 | `` ```text ``` `` |
 
-#<!-- chunk: 代码块规范 -->## 代码块规范
+## 代码块规范
 
 ```yaml
 # ✅ 正确示例：每个关键字段都有注释
@@ -415,7 +416,7 @@ spec:
 
 以下提供 12 种常用 Mermaid 图表模板，可直接复制使用。
 
-#<!-- chunk: 1. 组件交互架构图（Component Architecture） -->## 1. 组件交互架构图（Component Architecture）
+## 1. 组件交互架构图（Component Architecture）
 
 ```mermaid
 graph TB
@@ -459,7 +460,7 @@ graph TB
     style CNI fill:#9C27B0,color:#fff
 ```
 
-#<!-- chunk: 2. 请求生命周期时序图（Request Lifecycle Sequence） -->## 2. 请求生命周期时序图（Request Lifecycle Sequence）
+## 2. 请求生命周期时序图（Request Lifecycle Sequence）
 
 ```mermaid
 sequenceDiagram
@@ -494,7 +495,7 @@ sequenceDiagram
     A->>E: 写入 Pod 状态
 ```
 
-#<!-- chunk: 3. 状态流转图（State Machine） -->## 3. 状态流转图（State Machine）
+## 3. 状态流转图（State Machine）
 
 ```mermaid
 stateDiagram-v2
@@ -517,7 +518,7 @@ stateDiagram-v2
     OOMKilled --> CrashLoopBackOff: RestartPolicy=Always
 ```
 
-#<!-- chunk: 4. 网络流量路径图（Network Traffic Flow） -->## 4. 网络流量路径图（Network Traffic Flow）
+## 4. 网络流量路径图（Network Traffic Flow）
 
 ```mermaid
 graph LR
@@ -550,7 +551,7 @@ graph LR
     style DNS fill:#9C27B0,color:#fff
 ```
 
-#<!-- chunk: 5. 控制器 Reconcile Loop 流程图 -->## 5. 控制器 Reconcile Loop 流程图
+## 5. 控制器 Reconcile Loop 流程图
 
 ```mermaid
 flowchart TD
@@ -587,7 +588,7 @@ flowchart TD
     style UPDATE_STATUS fill:#9C27B0,color:#fff
 ```
 
-#<!-- chunk: 6. CSI 卷挂载流程图（CSI Volume Mount） -->## 6. CSI 卷挂载流程图（CSI Volume Mount）
+## 6. CSI 卷挂载流程图（CSI Volume Mount）
 
 ```mermaid
 sequenceDiagram
@@ -626,7 +627,7 @@ sequenceDiagram
     SP-->>CSI: Detached
 ```
 
-#<!-- chunk: 7. RBAC 权限模型类图（RBAC Class Diagram） -->## 7. RBAC 权限模型类图（RBAC Class Diagram）
+## 7. RBAC 权限模型类图（RBAC Class Diagram）
 
 ```mermaid
 classDiagram
@@ -683,7 +684,7 @@ classDiagram
     ClusterRoleBinding --> RoleRef : references
 ```
 
-#<!-- chunk: 8. 调度器决策流程图（Scheduler Decision） -->## 8. 调度器决策流程图（Scheduler Decision）
+## 8. 调度器决策流程图（Scheduler Decision）
 
 ```mermaid
 flowchart TD
@@ -716,7 +717,7 @@ flowchart TD
     style UNSCHEDULABLE fill:#F44336,color:#fff
 ```
 
-#<!-- chunk: 9. 可观测性三大支柱关系图（Observability Three Pillars） -->## 9. 可观测性三大支柱关系图（Observability Three Pillars）
+## 9. 可观测性三大支柱关系图（Observability Three Pillars）
 
 ```mermaid
 graph TB
@@ -756,7 +757,7 @@ graph TB
     style JAEGER fill:#9C27B0,color:#fff
 ```
 
-#<!-- chunk: 10. Deployment 滚动更新流程图（Rolling Update） -->## 10. Deployment 滚动更新流程图（Rolling Update）
+## 10. Deployment 滚动更新流程图（Rolling Update）
 
 ```mermaid
 flowchart LR
@@ -790,7 +791,7 @@ flowchart LR
     style P6 fill:#FF9800,color:#fff
 ```
 
-#<!-- chunk: 11. 分层排障模型图（Layered Troubleshooting） -->## 11. 分层排障模型图（Layered Troubleshooting）
+## 11. 分层排障模型图（Layered Troubleshooting）
 
 ```mermaid
 graph BT
@@ -839,7 +840,7 @@ graph BT
     style L5 fill:#9C27B0,color:#fff
 ```
 
-#<!-- chunk: 12. Service 类型对比图（Service Types Comparison） -->## 12. Service 类型对比图（Service Types Comparison）
+## 12. Service 类型对比图（Service Types Comparison）
 
 ```mermaid
 graph TB
@@ -877,12 +878,12 @@ graph TB
 
 每个 Presentation 的实验环节必须按以下标准化模板编写：
 
-#<!-- chunk: 实验模板结构 -->## 实验模板结构
+## 实验模板结构
 
 ```markdown
 <!-- chunk: 🧪 实验模块：[实验名称] -->## 🧪 实验模块：[实验名称]
 
-#<!-- chunk: 实验概述 -->## 实验概述
+## 实验概述
 
 | 属性 | 内容 |
 |:---|:---|
@@ -892,7 +893,7 @@ graph TB
 | **前置条件** | [已完成的实验/课程] |
 | **所需资源** | [集群规模/节点数/特殊组件] |
 
-#<!-- chunk: 环境准备 -->## 环境准备
+## 环境准备
 
 \`\`\`bash
 # Step 0: 确认环境就绪
@@ -901,7 +902,7 @@ kubectl get namespaces
 # [其他前置验证命令]
 \`\`\`
 
-#<!-- chunk: 实验 X.1: [实验子任务名称]（XX 分钟） -->## 实验 X.1: [实验子任务名称]（XX 分钟）
+## 实验 X.1: [实验子任务名称]（XX 分钟）
 
 **目标：** [具体目标]
 
@@ -932,18 +933,18 @@ kubectl get [资源] -o wide
 |:---|:---|:---|
 | [问题现象] | [根因] | `kubectl [命令]` |
 
-#<!-- chunk: 实验 X.2: [实验子任务名称]（XX 分钟） -->## 实验 X.2: [实验子任务名称]（XX 分钟）
+## 实验 X.2: [实验子任务名称]（XX 分钟）
 
 [同上结构]
 
-#<!-- chunk: 清理环境 -->## 清理环境
+## 清理环境
 
 \`\`\`bash
 # 清理所有实验资源
 kubectl delete [资源] --all -n [namespace]
 \`\`\`
 
-#<!-- chunk: 实验总结 -->## 实验总结
+## 实验总结
 
 | 知识点 | 本次实验验证了什么 |
 |:---|:---|
@@ -951,7 +952,7 @@ kubectl delete [资源] --all -n [namespace]
 | [知识点 2] | [验证内容] |
 ```
 
-#<!-- chunk: 实验难度分级 -->## 实验难度分级
+## 实验难度分级
 
 | 难度 | 标记 | 内容要求 | 通过标准 |
 |:---|:---:|:---|:---|
@@ -963,14 +964,14 @@ kubectl delete [资源] --all -n [namespace]
 
 <!-- chunk: Q&A 设计模板（Q&A Design Template） -->## Q&A 设计模板（Q&A Design Template）
 
-#<!-- chunk: 预设问题设计 -->## 预设问题设计
+## 预设问题设计
 
 每个 Presentation 必须准备至少 15 个预设 Q&A，按难度分级：
 
 ```markdown
 <!-- chunk: ❓ Q&A 互动问答 -->## ❓ Q&A 互动问答
 
-#<!-- chunk: 入门级问题 (🔰) -->## 入门级问题 (🔰)
+## 入门级问题 (🔰)
 
 **Q1: [简短的问题]？**
 
@@ -984,7 +985,7 @@ kubectl delete [资源] --all -n [namespace]
 
 > [预设回答方向]
 
-#<!-- chunk: 中级问题 (📘) -->## 中级问题 (📘)
+## 中级问题 (📘)
 
 **Q3: [需要一定深度的问题]？**
 
@@ -998,7 +999,7 @@ kubectl delete [资源] --all -n [namespace]
 
 > [预设回答方向]
 
-#<!-- chunk: 高级问题 (⚡) -->## 高级问题 (⚡)
+## 高级问题 (⚡)
 
 **Q5: [架构设计或生产场景问题]？**
 
@@ -1008,7 +1009,7 @@ kubectl delete [资源] --all -n [namespace]
 > - [建议 1]
 > - [建议 2]
 
-#<!-- chunk: 互动讨论题 -->## 互动讨论题
+## 互动讨论题
 
 **讨论 1: [开放式讨论话题]**
 - 分组讨论（5 分钟）
@@ -1016,7 +1017,7 @@ kubectl delete [资源] --all -n [namespace]
 - 讲师总结最佳实践
 ```
 
-#<!-- chunk: Q&A 问题类型分布 -->## Q&A 问题类型分布
+## Q&A 问题类型分布
 
 | 类型 | 数量 | 说明 |
 |:---|:---:|:---|
@@ -1030,11 +1031,11 @@ kubectl delete [资源] --all -n [namespace]
 
 <!-- chunk: 时间分配指南（Time Allocation Guide） -->## 时间分配指南（Time Allocation Guide）
 
-#<!-- chunk: 按总时长分配 -->## 按总时长分配
+## 按总时长分配
 
 不同培训场景需要不同的时间分配策略。以下是 4 种常见时长的标准分配方案：
 
-##<!-- chunk: 30 分钟版本（技术分享/Lightning Talk） -->## 30 分钟版本（技术分享/Lightning Talk）
+## 30 分钟版本（技术分享/Lightning Talk）
 
 ```mermaid
 pie title 30 分钟时间分配
@@ -1056,7 +1057,7 @@ pie title 30 分钟时间分配
 - 只展示 1 个架构图
 - 实验改为讲师演示，不做学员动手
 
-##<!-- chunk: 60 分钟版本（部门培训） -->## 60 分钟版本（部门培训）
+## 60 分钟版本（部门培训）
 
 ```mermaid
 pie title 60 分钟时间分配
@@ -1080,7 +1081,7 @@ pie title 60 分钟时间分配
 - 跳过第四、五阶段，用"生产经验"替代
 - 实验改为讲师演示 + 1 个简单学员练习
 
-##<!-- chunk: 90 分钟版本（Workshop 精华） -->## 90 分钟版本（Workshop 精华）
+## 90 分钟版本（Workshop 精华）
 
 ```mermaid
 pie title 90 分钟时间分配
@@ -1107,7 +1108,7 @@ pie title 90 分钟时间分配
 - 第五阶段完全跳过
 - 实验环节保证学员动手
 
-##<!-- chunk: 120 分钟版本（完整 Workshop） -->## 120 分钟版本（完整 Workshop）
+## 120 分钟版本（完整 Workshop）
 
 ```mermaid
 pie title 120 分钟时间分配
@@ -1133,7 +1134,7 @@ pie title 120 分钟时间分配
 - 第五阶段用 5 分钟快速过
 - 实验环节充足，包含基础+进阶实验
 
-#<!-- chunk: 时间弹性策略 -->## 时间弹性策略
+## 时间弹性策略
 
 | 情况 | 调整方案 |
 |:---|:---|
@@ -1146,7 +1147,7 @@ pie title 120 分钟时间分配
 
 <!-- chunk: 文档约定与标记系统 -->## 文档约定与标记系统
 
-#<!-- chunk: 难度标记 -->## 难度标记
+## 难度标记
 
 | 符号 | 级别 | 建议内容 |
 |:---|:---|:---|
@@ -1157,7 +1158,7 @@ pie title 120 分钟时间分配
 | 🛡️ | **安全** | 安全策略、RBAC 配置、合规要求 |
 | 🧪 | **实验** | 动手操作、验证步骤 |
 
-#<!-- chunk: 提示框类型 -->## 提示框类型
+## 提示框类型
 
 | 标记 | 用途 | Markdown 语法 |
 |:---|:---|:---|
@@ -1241,3 +1242,5 @@ pie title 120 分钟时间分配
 - kubernetes-workload-presentation
 - decision-tree-mermaid
 - 01-what-is-kubernetes
+
+```

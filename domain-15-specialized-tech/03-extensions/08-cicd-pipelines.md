@@ -455,6 +455,9 @@ spec:
 
 ### ArgoCD多集群管理
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 添加外部集群
 argocd cluster add <context-name> --name prod-cluster-us
@@ -1654,6 +1657,9 @@ tkn pipelinerun cancel <run>     # 取消运行
 
 ### 回滚策略
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # Deployment回滚
 kubectl rollout undo deployment/myapp
@@ -1757,7 +1763,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech MOC
-- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
 - Domain-10 扩展与自定义 — 开源项目索引
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现
@@ -1775,7 +1781,7 @@ spec:
 - CRD 开发指南
 - GitOps 配置管理
 - 相关知识域: domain-07-platform-engineering
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 

@@ -41,7 +41,7 @@ title: Day 15: Node 节点基础实操
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 节点管理
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 节点管理
   - kubectl cordon drain uncordon
   - 节点状态 NotReady 排查
   - Pod 调度到特定节点
@@ -123,6 +123,9 @@ kubectl top nodes
 
 ### 2.2 NotReady 排查流程
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. SSH 到问题节点
 ssh <node-ip>
@@ -174,6 +177,9 @@ sudo journalctl --since "1h" | grep -i "oom"
 
 **目的**: 阻止新 Pod 调度到该节点（不影响现有 Pod）
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+
 ```bash
 # 单节点 cordon
 kubectl cordon <node-name>
@@ -188,6 +194,9 @@ kubectl get nodes | grep SchedulingDisabled
 ### 3.2 Drain（驱逐 Pod）
 
 **目的**: 安全驱逐节点上所有 Pod（允许优雅终止）
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 标准 drain（忽略 DaemonSet）
@@ -216,6 +225,10 @@ kubectl uncordon $(kubectl get nodes --no-headers | grep "SchedulingDisabled" | 
 ```
 
 ### 3.4 维护流程 SOP
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # ========== 节点维护 SOP ==========
@@ -251,6 +264,9 @@ kubectl get pods -A -o wide | grep <node-name>
 ## 4. 节点标签与污点管理
 
 ### 4.1 标签操作
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 添加标签
@@ -317,6 +333,9 @@ spec:
 
 ### 5.1 调度到特定节点
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 将 Pod 调度到 GPU 节点
 kubectl run gpu-job --image=nvidia/cuda:11.0 \
@@ -377,13 +396,16 @@ sudo systemctl enable kubelet
 
 ### 案例 2: 磁盘压力导致 Pod 被驱逐
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+
 ```bash
 # 现象：Pod 被 Evicted，Reason: "DiskPressure"
 # 根因：/var/lib/kubelet 使用率 > 85%
 # 排查：
 ssh <node-ip>
 df -h /var/lib/kubelet
-docker system prune -a  # 清理未使用的镜像和容器
+docker system prune -a  # 清理未使用的镜像和容器  # ⚠️ 强制清理，可能杀运行中容器
 
 # 预防：设置 eviction threshold 或使用更大磁盘
 ```
@@ -402,3 +424,5 @@ docker system prune -a  # 清理未使用的镜像和容器
 
 ---
 
+
+```

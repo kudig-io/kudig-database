@@ -120,7 +120,7 @@ k8s_versions:
 
 <!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-#<!-- chunk: 1.1 市场规模与趋势 -->## 1.1 市场规模与趋势
+## 1.1 市场规模与趋势
 
 自动驾驶仿真通过虚拟环境加速算法验证，是自动驾驶研发的核心基础设施。全球自动驾驶仿真市场规模预计从 2024 年的 35 亿美元增长到 2030 年的 200 亿美元。CARLA、LGSVL、PreScan、VTD 等仿真平台广泛应用。核心趋势包括生成式 AI 场景生成、大规模并行 GPU 仿真和硬件在环（HIL）测试。
 
@@ -132,7 +132,7 @@ k8s_versions:
 | 场景库规模 | 10 万+ | 100 万+ | 1000 万+ |
 | 仿真替代路测比例 | 60% | 75% | 90% |
 
-#<!-- chunk: 1.2 行业痛点 -->## 1.2 行业痛点
+## 1.2 行业痛点
 
 | 痛点 | 说明 | 数字化转型驱动 |
 |:---|:---|:---|
@@ -143,7 +143,7 @@ k8s_versions:
 | 数据闭环 | 仿真结果驱动模型迭代 | 自动化数据流水线 |
 | 仿真可信度 | 仿真与真实场景一致性 | 仿真验证与校准 |
 
-#<!-- chunk: 1.3 数字化转型架构影响 -->## 1.3 数字化转型架构影响
+## 1.3 数字化转型架构影响
 
 自动驾驶仿真架构需要覆盖场景层（自然驾驶/危险/边界/生成式场景）、仿真层（动力学/传感器/交通流/环境仿真）、测试层（SIL/HIL/VIL/DIL）和评估层（功能安全/性能/法规/覆盖率）。核心挑战是传感器仿真的物理真实感和大规模并行仿真的资源调度。
 
@@ -151,23 +151,23 @@ k8s_versions:
 
 <!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-#<!-- chunk: 2.1 参数化场景生成 -->## 2.1 参数化场景生成
+## 2.1 参数化场景生成
 
 基于自然驾驶数据和交通规则生成海量测试场景。支持参数化调整（天气/光照/行人行为/车辆密度），自动探索边界条件。生成式 AI 可从文本描述自动生成复杂交通场景。
 
-#<!-- chunk: 2.2 物理级传感器仿真 -->## 2.2 物理级传感器仿真
+## 2.2 物理级传感器仿真
 
 仿真摄像头（包括镜头畸变/噪声/运动模糊）、LiDAR（包括点云密度/反射率/天气影响）和 Radar。使用 GPU 光线追踪实现物理级渲染，仿真传感器数据直接输入自动驾驶算法。
 
-#<!-- chunk: 2.3 SIL 软件在环测试 -->## 2.3 SIL 软件在环测试
+## 2.3 SIL 软件在环测试
 
 自动驾驶算法（感知/规划/控制）在仿真环境中运行，验证功能正确性。支持回放真实路测数据（log replay）和纯仿真场景。可并行运行数千个场景的 SIL 测试。
 
-#<!-- chunk: 2.4 HIL 硬件在环测试 -->## 2.4 HIL 硬件在环测试
+## 2.4 HIL 硬件在环测试
 
 真实自动驾驶域控制器接入仿真系统，仿真环境生成传感器数据注入控制器，控制器输出控制指令驱动仿真车辆。HIL 测试验证软硬件集成后的实时性能。
 
-#<!-- chunk: 2.5 数据闭环 -->## 2.5 数据闭环
+## 2.5 数据闭环
 
 仿真发现的失败场景自动提取为回归测试用例，问题场景用于重训练感知/规划模型。形成"仿真→问题→训练→验证"的数据闭环。
 
@@ -175,7 +175,7 @@ k8s_versions:
 
 <!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-#<!-- chunk: 3.1 自动驾驶仿真全景架构 -->## 3.1 自动驾驶仿真全景架构
+## 3.1 自动驾驶仿真全景架构
 
 ```mermaid
 graph TB
@@ -245,7 +245,7 @@ graph TB
 
 <!-- chunk: 5. Kubernetes 部署方案 -->## 5. Kubernetes 部署方案
 
-#<!-- chunk: 5.1 GPU 仿真工作器 Deployment -->## 5.1 GPU 仿真工作器 Deployment
+## 5.1 GPU 仿真工作器 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -325,7 +325,7 @@ spec:
             periodSeconds: 15
 ```
 
-#<!-- chunk: 5.2 仿真编排器 Deployment -->## 5.2 仿真编排器 Deployment
+## 5.2 仿真编排器 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -364,7 +364,7 @@ spec:
               cpu: "4000m"
 ```
 
-#<!-- chunk: 5.3 ConfigMap, Service 与 Secret -->## 5.3 ConfigMap, Service 与 Secret
+## 5.3 ConfigMap, Service 与 Secret
 
 ```yaml
 apiVersion: v1
@@ -433,7 +433,7 @@ stringData:
 
 <!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-#<!-- chunk: 6.1 仿真数据闭环 -->## 6.1 仿真数据闭环
+## 6.1 仿真数据闭环
 
 ```mermaid
 flowchart LR
@@ -449,7 +449,7 @@ flowchart LR
     I --> J[仿真可信度评估]
 ```
 
-#<!-- chunk: 6.2 数据流说明 -->## 6.2 数据流说明
+## 6.2 数据流说明
 
 - **场景分发流**: 编排器将场景分发至 GPU 工作器，每个工作器独立运行仿真
 - **传感器数据流**: 仿真引擎生成传感器数据注入自动驾驶算法
@@ -460,7 +460,7 @@ flowchart LR
 
 <!-- chunk: 7. AI/ML 组件 -->## 7. AI/ML 组件
 
-#<!-- chunk: 7.1 核心模型 -->## 7.1 核心模型
+## 7.1 核心模型
 
 | 模型 | 用途 | 输入 | 输出 | 框架 |
 |:---|:---|:---|:---|---|
@@ -475,7 +475,7 @@ flowchart LR
 
 <!-- chunk: 8. 安全与合规 -->## 8. 安全与合规
 
-#<!-- chunk: 8.1 行业法规与标准 -->## 8.1 行业法规与标准
+## 8.1 行业法规与标准
 
 | 法规/标准 | 适用范围 | 架构要求 |
 |:---|:---|:---|
@@ -486,7 +486,7 @@ flowchart LR
 | NHTSA / Euro NCAP | 安全评级 | 碰撞/紧急场景测试 |
 | 数据安全法 | 仿真数据安全 | 场景数据保护 |
 
-#<!-- chunk: 8.2 安全架构要点 -->## 8.2 安全架构要点
+## 8.2 安全架构要点
 
 - **仿真隔离**: SIL/HIL 仿真环境与生产网络隔离
 - **场景数据保护**: 高精地图和场景数据加密存储
@@ -538,17 +538,17 @@ flowchart LR
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

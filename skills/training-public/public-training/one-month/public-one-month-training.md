@@ -72,7 +72,7 @@ related_domains:
   - domain-10-troubleshooting-diagnostics
 related_topics:
   - domain-11-production-operations/topic-learn/quick-start
-  - domain-11-production-operations/topic-learn/public-training/[[domain-04-storage-data/README|README]]
+  - domain-11-production-operations/topic-learn/public-training/[[domain-04-storage-data/README.md|README]]
 id: PUBLIC-TRAINING-BOOT-001
 topic: training
 type: landing-page
@@ -291,6 +291,9 @@ tags: [training, bootcamp, 28-days, k8s, sre, devops, k8s-1.28-1.33]
 
 </div>
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 能力维度              学习前                        28天后
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -356,4 +359,4 @@ GitOps          ❌ 手动 kubectl apply    ✅ ArgoCD 全自动部署
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

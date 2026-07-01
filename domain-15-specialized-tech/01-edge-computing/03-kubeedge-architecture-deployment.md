@@ -65,7 +65,7 @@ created: "2026-05-23"
 3. [CloudCore 组件详解](#3-cloudcore-组件详解)
 4. [EdgeCore 组件详解](#4-edgecore-组件详解)
 5. [通信机制](#5-通信机制)
-6. [[entities/helm|Helm]] 部署](#6-helm-部署)
+6. [[entities/helm.md|Helm]] 部署](#6-helm-部署)
 7. [keadm CLI 部署](#7-keadm-cli-部署)
 8. [高可用部署](#8-高可用部署)
 9. [配置详解](#9-配置详解)
@@ -77,7 +77,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. KubeEdge 概述 -->## 1. KubeEdge 概述
 
-#<!-- chunk: 1.1 项目简介 (Project Overview) -->## 1.1 项目简介 (Project Overview)
+## 1.1 项目简介 (Project Overview)
 
 KubeEdge 是一个开源的边缘计算框架，构建在 [[Kubernetes|Kubernetes]] 之上，将容器化应用的编排能力扩展到边缘节点。由华为发起，2019 年进入 CNCF Sandbox，2022 年晋升为 CNCF Incubating 项目。
 
@@ -99,7 +99,7 @@ KubeEdge 核心能力:
 └────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.2 版本信息 (Version Information) -->## 1.2 版本信息 (Version Information)
+## 1.2 版本信息 (Version Information)
 
 | KubeEdge 版本 | 支持 K8s 版本 | 主要特性 |
 |-------------|------------|---------|
@@ -109,7 +109,7 @@ KubeEdge 核心能力:
 | v1.12 (2022) | v1.23-v1.25 | 边缘 Node 日志查询 |
 | v1.11 (2022) | v1.22-v1.24 | CNCF Incubating, 边缘 exec/logs |
 
-#<!-- chunk: 1.3 与标准 K8s 的差异 (Differences from Standard K8s) -->## 1.3 与标准 K8s 的差异 (Differences from Standard K8s)
+## 1.3 与标准 K8s 的差异 (Differences from Standard K8s)
 
 ```mermaid
 graph LR
@@ -137,7 +137,7 @@ graph LR
 
 <!-- chunk: 2. 整体架构设计 -->## 2. 整体架构设计
 
-#<!-- chunk: 2.1 KubeEdge 完整架构图 -->## 2.1 KubeEdge 完整架构图
+## 2.1 KubeEdge 完整架构图
 
 ```mermaid
 graph TB
@@ -201,7 +201,7 @@ graph TB
     style Edge fill:#e8f5e9,stroke:#2e7d32
 ```
 
-#<!-- chunk: 2.2 消息流架构 (Message Flow Architecture) -->## 2.2 消息流架构 (Message Flow Architecture)
+## 2.2 消息流架构 (Message Flow Architecture)
 
 ```mermaid
 sequenceDiagram
@@ -230,7 +230,7 @@ sequenceDiagram
 
 <!-- chunk: 3. CloudCore 组件详解 -->## 3. CloudCore 组件详解
 
-#<!-- chunk: 3.1 CloudHub (云端通信中枢) -->## 3.1 CloudHub (云端通信中枢)
+## 3.1 CloudHub (云端通信中枢)
 
 CloudHub 是 CloudCore 的核心通信组件，负责管理与所有边缘节点的 WebSocket 连接。
 
@@ -294,7 +294,7 @@ modules:
     tlsPrivateKeyFile: /etc/kubeedge/certs/server.key
 ```
 
-#<!-- chunk: 3.2 EdgeController (边缘控制器) -->## 3.2 EdgeController (边缘控制器)
+## 3.2 EdgeController (边缘控制器)
 
 EdgeController 负责在 K8s API Server 和边缘节点之间同步资源状态：
 
@@ -349,7 +349,7 @@ var syncedResources = []string{
 }
 ```
 
-#<!-- chunk: 3.3 DeviceController (设备控制器) -->## 3.3 DeviceController (设备控制器)
+## 3.3 DeviceController (设备控制器)
 
 ```mermaid
 graph TD
@@ -380,7 +380,7 @@ graph TD
     UpstreamController -->|更新 Status| DeviceCRD
 ```
 
-#<!-- chunk: 3.4 SyncController (同步控制器) -->## 3.4 SyncController (同步控制器)
+## 3.4 SyncController (同步控制器)
 
 SyncController 负责管理边缘节点对象的可靠同步，处理网络中断后的重新同步：
 
@@ -402,7 +402,7 @@ modules:
 
 <!-- chunk: 4. EdgeCore 组件详解 -->## 4. EdgeCore 组件详解
 
-#<!-- chunk: 4.1 EdgeHub (边缘通信中枢) -->## 4.1 EdgeHub (边缘通信中枢)
+## 4.1 EdgeHub (边缘通信中枢)
 
 EdgeHub 是 EdgeCore 的通信核心，维护与 CloudCore 的 WebSocket 连接：
 
@@ -485,7 +485,7 @@ modules:
       tlsPrivateKeyFile: /etc/kubeedge/certs/server.key
 ```
 
-#<!-- chunk: 4.2 MetaManager (元数据管理器) -->## 4.2 MetaManager (元数据管理器)
+## 4.2 MetaManager (元数据管理器)
 
 MetaManager 负责在边缘节点本地持久化 Kubernetes 资源对象，实现离线自治：
 
@@ -546,7 +546,7 @@ CREATE TABLE IF NOT EXISTS meta (
 // Device: "devices.kubeedge.io/v1alpha2/devices/{namespace}/{name}"
 ```
 
-#<!-- chunk: 4.3 Edged (轻量化 kubelet) -->## 4.3 Edged (轻量化 kubelet)
+## 4.3 Edged (轻量化 kubelet)
 
 Edged 是 KubeEdge 对 kubelet 的精简实现，去掉了边缘不需要的功能：
 
@@ -606,7 +606,7 @@ modules:
     maxContainerCount: -1
 ```
 
-#<!-- chunk: 4.4 DeviceTwin (设备影子) -->## 4.4 DeviceTwin (设备影子)
+## 4.4 DeviceTwin (设备影子)
 
 DeviceTwin 是 KubeEdge 的核心创新，实现云端设备期望状态和边缘实际状态的双向同步：
 
@@ -640,7 +640,7 @@ graph LR
     CommModule -->|上报| EdgeHub
 ```
 
-#<!-- chunk: 4.5 EventBus (事件总线) -->## 4.5 EventBus (事件总线)
+## 4.5 EventBus (事件总线)
 
 EventBus 作为 MQTT 消息的代理，连接边缘应用和物理设备：
 
@@ -668,7 +668,7 @@ modules:
       enable: false
 ```
 
-#<!-- chunk: 4.6 ServiceBus (服务总线) -->## 4.6 ServiceBus (服务总线)
+## 4.6 ServiceBus (服务总线)
 
 ServiceBus 使云端应用能够调用边缘应用的 HTTP API：
 
@@ -694,7 +694,7 @@ sequenceDiagram
 
 <!-- chunk: 5. 通信机制 -->## 5. 通信机制
 
-#<!-- chunk: 5.1 消息格式 (Message Format) -->## 5.1 消息格式 (Message Format)
+## 5.1 消息格式 (Message Format)
 
 KubeEdge 使用统一的消息格式进行云边通信：
 
@@ -727,7 +727,7 @@ KubeEdge 使用统一的消息格式进行云边通信：
 }
 ```
 
-#<!-- chunk: 5.2 双向通信流 (Bidirectional Communication) -->## 5.2 双向通信流 (Bidirectional Communication)
+## 5.2 双向通信流 (Bidirectional Communication)
 
 ```mermaid
 graph LR
@@ -750,7 +750,7 @@ graph LR
     EdgeCore -.-> Upstream
 ```
 
-#<!-- chunk: 5.3 消息可靠性保证 (Message Reliability) -->## 5.3 消息可靠性保证 (Message Reliability)
+## 5.3 消息可靠性保证 (Message Reliability)
 
 ```go
 // KubeEdge 消息队列实现
@@ -803,7 +803,7 @@ func (q *MessageQueue) ResendOnReconnect() {
 
 <!-- chunk: 6. Helm 部署 -->## 6. Helm 部署
 
-#<!-- chunk: 6.1 前置条件 (Prerequisites) -->## 6.1 前置条件 (Prerequisites)
+## 6.1 前置条件 (Prerequisites)
 
 ```bash
 # 1. 确认 Kubernetes 集群版本
@@ -822,7 +822,11 @@ helm repo update
 helm search repo kubeedge/cloudcore --versions
 ```
 
-#<!-- chunk: 6.2 CloudCore Helm 安装 -->## 6.2 CloudCore Helm 安装
+## 6.2 CloudCore Helm 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建命名空间
@@ -845,7 +849,7 @@ helm install cloudcore kubeedge/cloudcore \
   --set-file global.cloudHub.keyFile=/path/to/server.key
 ```
 
-#<!-- chunk: 6.3 完整 Helm values 配置 -->## 6.3 完整 Helm values 配置
+## 6.3 完整 Helm values 配置
 
 ```yaml
 # values-production.yaml
@@ -944,6 +948,9 @@ iptablesManager:
   mode: "external"
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 使用自定义 values 安装
 helm install cloudcore kubeedge/cloudcore \
@@ -959,7 +966,7 @@ kubectl get svc -n kubeedge
 kubectl get secret tokensecret -n kubeedge -o jsonpath='{.data.tokendata}' | base64 -d
 ```
 
-#<!-- chunk: 6.4 验证 CloudCore 部署 -->## 6.4 验证 CloudCore 部署
+## 6.4 验证 CloudCore 部署
 
 ```bash
 # 检查 Pod 状态
@@ -983,7 +990,7 @@ curl -k https://1.2.3.4:10002/ca.crt  # 获取 CA 证书
 
 <!-- chunk: 7. keadm CLI 部署 -->## 7. keadm CLI 部署
 
-#<!-- chunk: 7.1 keadm 安装 (keadm Installation) -->## 7.1 keadm 安装 (keadm Installation)
+## 7.1 keadm 安装 (keadm Installation)
 
 ```bash
 # 下载 keadm (在需要部署的节点上执行)
@@ -999,7 +1006,7 @@ sudo install keadm-${VERSION}-linux-${ARCH}/keadm /usr/local/bin/
 keadm version
 ```
 
-#<!-- chunk: 7.2 CloudCore 部署 (keadm init) -->## 7.2 CloudCore 部署 (keadm init)
+## 7.2 CloudCore 部署 (keadm init)
 
 ```bash
 # 在云端 Kubernetes 节点上部署 CloudCore
@@ -1030,7 +1037,10 @@ keadm gettoken
 kubectl get secret tokensecret -n kubeedge -o jsonpath='{.data.tokendata}' | base64 -d
 ```
 
-#<!-- chunk: 7.3 EdgeCore 部署 (keadm join) -->## 7.3 EdgeCore 部署 (keadm join)
+## 7.3 EdgeCore 部署 (keadm join)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 在边缘节点上执行
@@ -1072,7 +1082,7 @@ kubectl get nodes
 # edge-node-001     Ready    edge          1m    v1.28.0
 ```
 
-#<!-- chunk: 7.4 keadm 常用命令 -->## 7.4 keadm 常用命令
+## 7.4 keadm 常用命令
 
 ```bash
 # ====== 云端操作 ======
@@ -1125,7 +1135,7 @@ openssl x509 -in /etc/kubeedge/certs/server.crt -text -noout | grep -A 2 "Validi
 
 <!-- chunk: 8. 高可用部署 -->## 8. 高可用部署
 
-#<!-- chunk: 8.1 CloudCore 高可用架构 -->## 8.1 CloudCore 高可用架构
+## 8.1 CloudCore 高可用架构
 
 ```mermaid
 graph TB
@@ -1159,7 +1169,7 @@ graph TB
     style CloudCoreCluster fill:#e8f5e9
 ```
 
-#<!-- chunk: 8.2 高可用 CloudCore 部署 -->## 8.2 高可用 CloudCore 部署
+## 8.2 高可用 CloudCore 部署
 
 ```yaml
 # values-ha.yaml - 高可用配置
@@ -1194,6 +1204,9 @@ cloudCore:
     minAvailable: 1
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 部署 HA CloudCore
 helm install cloudcore kubeedge/cloudcore \
@@ -1205,7 +1218,7 @@ kubectl get pods -n kubeedge -w
 kubectl get pdb -n kubeedge
 ```
 
-#<!-- chunk: 8.3 边缘节点高可用 -->## 8.3 边缘节点高可用
+## 8.3 边缘节点高可用
 
 KubeEdge v1.13+ 支持边缘节点高可用（多节点 EdgeCore 集群）：
 
@@ -1229,7 +1242,7 @@ modules:
 
 <!-- chunk: 9. 配置详解 -->## 9. 配置详解
 
-#<!-- chunk: 9.1 完整 CloudCore 配置 -->## 9.1 完整 CloudCore 配置
+## 9.1 完整 CloudCore 配置
 
 ```yaml
 # /etc/kubeedge/config/cloudcore.yaml
@@ -1325,7 +1338,7 @@ modules:
     enable: true
 ```
 
-#<!-- chunk: 9.2 完整 EdgeCore 配置 -->## 9.2 完整 EdgeCore 配置
+## 9.2 完整 EdgeCore 配置
 
 ```yaml
 # /etc/kubeedge/config/edgecore.yaml
@@ -1446,7 +1459,7 @@ modules:
 
 <!-- chunk: 10. 证书管理 -->## 10. 证书管理
 
-#<!-- chunk: 10.1 证书架构 (Certificate Architecture) -->## 10.1 证书架构 (Certificate Architecture)
+## 10.1 证书架构 (Certificate Architecture)
 
 ```mermaid
 graph TD
@@ -1471,7 +1484,7 @@ graph TD
     ServerCert -->|认证| EdgeCert
 ```
 
-#<!-- chunk: 10.2 手动证书生成 (Manual Certificate Generation) -->## 10.2 手动证书生成 (Manual Certificate Generation)
+## 10.2 手动证书生成 (Manual Certificate Generation)
 
 ```bash
 #!/bin/bash
@@ -1565,7 +1578,7 @@ echo "=== 证书 SAN ==="
 openssl x509 -in $CERTS_DIR/server.crt -text -noout | grep -A 5 "Subject Alternative Name"
 ```
 
-#<!-- chunk: 10.3 证书自动轮换 (Certificate Auto-Rotation) -->## 10.3 证书自动轮换 (Certificate Auto-Rotation)
+## 10.3 证书自动轮换 (Certificate Auto-Rotation)
 
 ```yaml
 # KubeEdge 支持通过 CSR 机制自动轮换证书
@@ -1592,7 +1605,7 @@ keadm join \
 
 <!-- chunk: 11. 网络配置 -->## 11. 网络配置
 
-#<!-- chunk: 11.1 防火墙规则 (Firewall Rules) -->## 11.1 防火墙规则 (Firewall Rules)
+## 11.1 防火墙规则 (Firewall Rules)
 
 ```bash
 # 云端防火墙规则
@@ -1611,9 +1624,12 @@ iptables -A OUTPUT -p tcp --dport 10002 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 10003 -j ACCEPT
 ```
 
-#<!-- chunk: 11.2 EdgeMesh 部署 (EdgeMesh) -->## 11.2 EdgeMesh 部署 (EdgeMesh)
+## 11.2 EdgeMesh 部署 (EdgeMesh)
 
 EdgeMesh 提供边缘节点之间的服务网格能力（边缘节点跨越 NAT 的服务发现）：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 安装 EdgeMesh
@@ -1663,7 +1679,7 @@ modules:
     TunnelBaseAddr: "9.0.0.0/8"
 ```
 
-#<!-- chunk: 11.3 CNI 配置 (CNI for Edge) -->## 11.3 CNI 配置 (CNI for Edge)
+## 11.3 CNI 配置 (CNI for Edge)
 
 ```yaml
 # 边缘节点 Flannel CNI 配置
@@ -1689,6 +1705,9 @@ modules:
 }
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查边缘节点 CNI 状态
 kubectl get nodes edge-node-001 -o jsonpath='{.spec.podCIDR}'
@@ -1702,7 +1721,7 @@ kubectl exec -n edge-production -it test-pod -- ping 10.244.200.1
 
 <!-- chunk: 12. 升级与维护 -->## 12. 升级与维护
 
-#<!-- chunk: 12.1 版本升级策略 (Upgrade Strategy) -->## 12.1 版本升级策略 (Upgrade Strategy)
+## 12.1 版本升级策略 (Upgrade Strategy)
 
 ```mermaid
 graph LR
@@ -1717,7 +1736,10 @@ graph LR
     style Done fill:#c8e6c9
 ```
 
-#<!-- chunk: 12.2 CloudCore 升级 -->## 12.2 CloudCore 升级
+## 12.2 CloudCore 升级
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 1. 备份现有配置
@@ -1738,7 +1760,10 @@ kubectl get pods -n kubeedge
 kubectl logs -n kubeedge -l app=cloudcore | grep "version"
 ```
 
-#<!-- chunk: 12.3 EdgeCore 升级 -->## 12.3 EdgeCore 升级
+## 12.3 EdgeCore 升级
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 方式1: 使用 keadm OTA 升级 (v1.13+)
@@ -1766,7 +1791,11 @@ systemctl start edgecore
 journalctl -u edgecore -f
 ```
 
-#<!-- chunk: 12.4 运维常用命令 -->## 12.4 运维常用命令
+## 12.4 运维常用命令
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # ====== 日常运维 ======
@@ -1812,7 +1841,7 @@ keadm reset
 keadm join --cloudcore-ipport="1.2.3.4:10000" --token="TOKEN"
 ```
 
-#<!-- chunk: 12.5 性能调优 (Performance Tuning) -->## 12.5 性能调优 (Performance Tuning)
+## 12.5 性能调优 (Performance Tuning)
 
 ```yaml
 # CloudCore 性能调优
@@ -1892,7 +1921,7 @@ KubeEdge 部署检查清单:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-37-edge-computing MOC
-- [[domain-15-specialized-tech/README|Domain 37: 边缘计算 (Edge Computing)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: 边缘计算 (Edge Computing)]]
 - Domain-37 边缘计算 — 开源项目索引
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)

@@ -62,7 +62,7 @@ Common kubelet issues:
 - Certificate expiration (check `--tls-cert-file`)
 - API Server connectivity failure
 - CRI socket not responding
-- cgroup driver mismatch with [[Container Runtime|container runtime]]
+- cgroup driver mismatch with container runtime
 
 ### Step 3: Check Container Runtime
 
@@ -111,6 +111,10 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -text -noout | 
 
 ## Node Drain and Replace
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 kubectl cordon <node-name>        # Mark unschedulable
 kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
@@ -120,15 +124,15 @@ kubectl uncordon <node-name>
 
 ## Related
 
-- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 - [[cni]] — CNI (Container Network Interface)
-- [[concepts/resource-management|resource-management]] — Resource Management (Requests, Limits, QoS)
-- [[skills/skill-reference-diagnostic-workflow|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
-- [[entities/kubelet|kubelet]]
-- [[entities/container-runtime|Container Runtime]]
-- [[concepts/resource-management|Resource Management]]
-- [[skills/troubleshoot-pod-issues|Troubleshoot Pod Issues]]
-- [[concepts/Symptom-SOP-RootCause Mapping|Symptom-SOP-RootCause Mapping]]
-- [[skills/Kubernetes FTA Top Events Index|Kubernetes FTA Top Events Index]]
-- [[skills/node-fta|Node 异常故障树分析]] — Cross-reference
+- [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[skills/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
+- [[entities/kubelet.md|kubelet]]
+- [[entities/container-runtime.md|Container Runtime]]
+- [[concepts/resource-management.md|Resource Management]]
+- [[skills/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
+- [[concepts/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
+- [[skills/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
+- [[skills/node-fta.md|Node 异常故障树分析]] — Cross-reference

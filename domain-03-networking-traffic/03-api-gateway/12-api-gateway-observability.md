@@ -72,7 +72,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 网关可观测性架构 -->## 1. 网关可观测性架构
 
-#<!-- chunk: 1.1 可观测性三支柱 -->## 1.1 可观测性三支柱
+## 1.1 可观测性三支柱
 
 ```
                       API 网关可观测性全景
@@ -112,7 +112,7 @@ created: "2026-05-23"
                     └─────────────────┘
 ```
 
-#<!-- chunk: 1.2 数据流架构 -->## 1.2 数据流架构
+## 1.2 数据流架构
 
 ```
 API 网关 Pod
@@ -143,7 +143,7 @@ API 网关 Pod
 
 <!-- chunk: 2. 黄金信号 -->## 2. 黄金信号
 
-#<!-- chunk: 2.1 四大黄金信号（网关视角） -->## 2.1 四大黄金信号（网关视角）
+## 2.1 四大黄金信号（网关视角）
 
 Google SRE 定义的四大黄金信号在 API 网关场景的具体含义：
 
@@ -176,7 +176,7 @@ Google SRE 定义的四大黄金信号在 API 网关场景的具体含义：
 └────────────────┴──────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 2.2 延迟细化分析（P99/P999） -->## 2.2 延迟细化分析（P99/P999）
+## 2.2 延迟细化分析（P99/P999）
 
 ```
 请求时间线分解
@@ -204,7 +204,7 @@ Google SRE 定义的四大黄金信号在 API 网关场景的具体含义：
 
 <!-- chunk: 3. Prometheus 指标 -->## 3. Prometheus 指标
 
-#<!-- chunk: 3.1 Higress 核心指标 -->## 3.1 Higress 核心指标
+## 3.1 Higress 核心指标
 
 ```
 # Higress 指标端点
@@ -248,7 +248,7 @@ envoy_cluster_membership_healthy{
 envoy_cluster_membership_total{...}
 ```
 
-#<!-- chunk: 3.2 APISIX 核心指标 -->## 3.2 APISIX 核心指标
+## 3.2 APISIX 核心指标
 
 ```
 # APISIX 指标端点（prometheus 插件）
@@ -291,7 +291,7 @@ apisix_bandwidth_bytes_total{
 }
 ```
 
-#<!-- chunk: 3.3 Kong 核心指标 -->## 3.3 Kong 核心指标
+## 3.3 Kong 核心指标
 
 ```
 # Kong 指标端点（prometheus 插件）
@@ -329,7 +329,7 @@ kong_upstream_target_health{
 }
 ```
 
-#<!-- chunk: 3.4 Envoy Gateway 核心指标 -->## 3.4 Envoy Gateway 核心指标
+## 3.4 Envoy Gateway 核心指标
 
 ```
 # Envoy Gateway（继承 Envoy 指标体系）
@@ -353,7 +353,7 @@ envoy_cluster_membership_degraded{
 }
 ```
 
-#<!-- chunk: 3.5 Traefik 核心指标 -->## 3.5 Traefik 核心指标
+## 3.5 Traefik 核心指标
 
 ```
 # Traefik 指标端点
@@ -394,7 +394,7 @@ traefik_service_retries_total{
 
 <!-- chunk: 4. 结构化访问日志 -->## 4. 结构化访问日志
 
-#<!-- chunk: 4.1 JSON 日志格式标准化 -->## 4.1 JSON 日志格式标准化
+## 4.1 JSON 日志格式标准化
 
 ```json
 {
@@ -453,7 +453,7 @@ traefik_service_retries_total{
 }
 ```
 
-#<!-- chunk: 4.2 Higress 访问日志配置 -->## 4.2 Higress 访问日志配置
+## 4.2 Higress 访问日志配置
 
 ```yaml
 # Higress 自定义访问日志格式
@@ -493,7 +493,7 @@ data:
         }
 ```
 
-#<!-- chunk: 4.3 APISIX 结构化日志配置 -->## 4.3 APISIX 结构化日志配置
+## 4.3 APISIX 结构化日志配置
 
 ```yaml
 # APISIX http-logger 插件（推送至 HTTP 端点）
@@ -518,7 +518,7 @@ plugins:
       trace_id: "$opentelemetry_context_traceparent"
 ```
 
-#<!-- chunk: 4.4 ELK / Loki 集成 -->## 4.4 ELK / Loki 集成
+## 4.4 ELK / Loki 集成
 
 ```yaml
 # Fluentd 配置：从 Kubernetes 日志收集并转发
@@ -569,7 +569,7 @@ data:
 
 <!-- chunk: 5. 分布式链路追踪 -->## 5. 分布式链路追踪
 
-#<!-- chunk: 5.1 OpenTelemetry 集成架构 -->## 5.1 OpenTelemetry 集成架构
+## 5.1 OpenTelemetry 集成架构
 
 ```
   客户端         API 网关              微服务 A              微服务 B
@@ -595,7 +595,7 @@ data:
                     └──► Zipkin（兼容协议）
 ```
 
-#<!-- chunk: 5.2 Higress 链路追踪配置 -->## 5.2 Higress 链路追踪配置
+## 5.2 Higress 链路追踪配置
 
 ```yaml
 apiVersion: v1
@@ -617,7 +617,7 @@ data:
       #   address: "otel-collector.monitoring.svc.cluster.local:4317"
 ```
 
-#<!-- chunk: 5.3 APISIX 链路追踪配置 -->## 5.3 APISIX 链路追踪配置
+## 5.3 APISIX 链路追踪配置
 
 ```yaml
 # APISIX opentelemetry 插件
@@ -652,7 +652,7 @@ plugin_attr:
       max_queue_size: 1024
 ```
 
-#<!-- chunk: 5.4 OTel Collector 配置 -->## 5.4 OTel Collector 配置
+## 5.4 OTel Collector 配置
 
 ```yaml
 # OpenTelemetry Collector（DaemonSet 模式）
@@ -712,7 +712,7 @@ data:
           exporters: [jaeger, otlp/tempo]
 ```
 
-#<!-- chunk: 5.5 各产品追踪支持对比 -->## 5.5 各产品追踪支持对比
+## 5.5 各产品追踪支持对比
 
 | 产品 | OTel | Zipkin | Jaeger | 采样配置 | Header 传播 |
 |------|------|--------|--------|---------|-----------|
@@ -726,7 +726,7 @@ data:
 
 <!-- chunk: 6. Grafana 仪表盘设计 -->## 6. Grafana 仪表盘设计
 
-#<!-- chunk: 6.1 核心面板布局 -->## 6.1 核心面板布局
+## 6.1 核心面板布局
 
 ```
 Grafana 仪表盘布局（API 网关总览）
@@ -754,7 +754,7 @@ Grafana 仪表盘布局（API 网关总览）
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 6.2 关键 PromQL 查询示例 -->## 6.2 关键 PromQL 查询示例
+## 6.2 关键 PromQL 查询示例
 
 ```promql
 # ===================== 流量指标 =====================
@@ -842,7 +842,7 @@ envoy_cluster_membership_healthy
 envoy_cluster_membership_total
 ```
 
-#<!-- chunk: 6.3 Grafana Dashboard as Code（Provisioning） -->## 6.3 Grafana Dashboard as Code（Provisioning）
+## 6.3 Grafana Dashboard as Code（Provisioning）
 
 ```yaml
 # grafana/dashboards/api-gateway.yaml（Grafana Provisioning）
@@ -860,7 +860,7 @@ providers:
 
 <!-- chunk: 7. 告警规则 -->## 7. 告警规则
 
-#<!-- chunk: 7.1 PrometheusRule 示例（关键告警） -->## 7.1 PrometheusRule 示例（关键告警）
+## 7.1 PrometheusRule 示例（关键告警）
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -1032,7 +1032,7 @@ spec:
             description: "当前 RPS 相较 30 分钟前下降超过 70%，请检查网关状态或上游服务。"
 ```
 
-#<!-- chunk: 7.2 Alertmanager 路由配置 -->## 7.2 Alertmanager 路由配置
+## 7.2 Alertmanager 路由配置
 
 ```yaml
 # Alertmanager 告警路由
@@ -1053,23 +1053,21 @@ data:
       repeat_interval: 4h
       routes:
         # Critical 级别：立即通知 + PagerDuty
-        - match:
-            severity: critical
-          receiver: "pagerduty-critical"
+        - matchers:
+          - severity="critical"
+          receiver: pagerduty-critical
           group_wait: 0s
           repeat_interval: 30m
-
         # Warning 级别：Slack + 邮件
-        - match:
-            severity: warning
-            team: platform
-          receiver: "slack-platform"
+        - matchers:
+          - severity="warning"
+          - team="platform"
+          receiver: slack-platform
           repeat_interval: 2h
-
     receivers:
       - name: "pagerduty-critical"
         pagerduty_configs:
-          - service_key: "<PAGERDUTY_KEY>"
+          - routing_key: "<PAGERDUTY_KEY>"
             severity: critical
             description: "{{ .CommonAnnotations.summary }}"
 
@@ -1086,7 +1084,7 @@ data:
 
 <!-- chunk: 8. 各产品可观测性对比表 -->## 8. 各产品可观测性对比表
 
-#<!-- chunk: 8.1 指标能力对比 -->## 8.1 指标能力对比
+## 8.1 指标能力对比
 
 | 能力 | Higress | APISIX | Kong | Envoy Gateway | Traefik |
 |------|---------|-------|------|--------------|---------|
@@ -1095,7 +1093,7 @@ data:
 | **自定义指标（插件注册）** | ⭐⭐⭐⭐ Wasm proxy_define_metric | ⭐⭐⭐ 插件扩展 | ⭐⭐⭐ 插件扩展 | ⭐⭐⭐⭐ Wasm + ext_proc | ⭐⭐ 有限 |
 | **按路由细粒度指标** | ⭐⭐⭐⭐ 支持 | ⭐⭐⭐⭐⭐ 完善 | ⭐⭐⭐⭐⭐ 完善 | ⭐⭐⭐⭐ 支持 | ⭐⭐⭐ 基本支持 |
 
-#<!-- chunk: 8.2 日志能力对比 -->## 8.2 日志能力对比
+## 8.2 日志能力对比
 
 | 能力 | Higress | APISIX | Kong | Envoy Gateway | Traefik |
 |------|---------|-------|------|--------------|---------|
@@ -1104,7 +1102,7 @@ data:
 | **字段动态配置** | ⭐⭐⭐⭐⭐ Envoy 格式符 | ⭐⭐⭐⭐ log_format 配置 | ⭐⭐⭐⭐ 可配置 | ⭐⭐⭐⭐⭐ 灵活 | ⭐⭐⭐ 固定字段为主 |
 | **日志采样** | ⭐⭐⭐ 插件支持 | ⭐⭐⭐ 插件支持 | ⭐⭐⭐ 插件支持 | ⭐⭐⭐⭐ 原生 | ⭐⭐ 有限 |
 
-#<!-- chunk: 8.3 链路追踪能力对比 -->## 8.3 链路追踪能力对比
+## 8.3 链路追踪能力对比
 
 | 能力 | Higress | APISIX | Kong | Envoy Gateway | Traefik |
 |------|---------|-------|------|--------------|---------|
@@ -1135,7 +1133,7 @@ data:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-40-cloud-native-api-gateway MOC
-- [[domain-03-networking-traffic/README|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
 - Domain-40 云原生 API 网关 — 开源项目索引
 - 01 - 云原生 API 网关架构总览
 - 02 - Kubernetes Gateway API 标准深度解析

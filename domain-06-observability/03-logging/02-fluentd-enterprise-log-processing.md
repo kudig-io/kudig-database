@@ -59,7 +59,7 @@ This document provides in-depth exploration of [[Fluentd|Fluentd]] enterprise lo
 
 <!-- chunk: 1. Fluentd Architecture Deep Dive -->## 1. Fluentd Architecture Deep Dive
 
-#<!-- chunk: 1.1 Core Component Architecture -->## 1.1 Core Component Architecture
+## 1.1 Core Component Architecture
 
 ```mermaid
 graph TB
@@ -100,7 +100,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 1.2 Plugin Architecture -->## 1.2 Plugin Architecture
+## 1.2 Plugin Architecture
 
 ```yaml
 fluentd_plugin_types:
@@ -135,7 +135,7 @@ fluentd_plugin_types:
 
 <!-- chunk: 2. Enterprise Deployment Architecture -->## 2. Enterprise Deployment Architecture
 
-#<!-- chunk: 2.1 High Availability Configuration -->## 2.1 High Availability Configuration
+## 2.1 High Availability Configuration
 
 ```yaml
 # fluentd-daemonset.yaml
@@ -238,7 +238,7 @@ spec:
         effect: NoSchedule
 ```
 
-#<!-- chunk: 2.2 Fluentd Configuration -->## 2.2 Fluentd Configuration
+## 2.2 Fluentd Configuration
 
 ```ruby
 # fluent.conf
@@ -441,7 +441,7 @@ spec:
 
 <!-- chunk: 3. Advanced Log Processing -->## 3. Advanced Log Processing
 
-#<!-- chunk: 3.1 Multi-line Log Handling -->## 3.1 Multi-line Log Handling
+## 3.1 Multi-line Log Handling
 
 ```ruby
 # Multi-line log configuration
@@ -467,7 +467,7 @@ spec:
 </filter>
 ```
 
-#<!-- chunk: 3.2 Structured Log Parsing -->## 3.2 Structured Log Parsing
+## 3.2 Structured Log Parsing
 
 ```ruby
 # JSON log parsing with schema validation
@@ -512,7 +512,7 @@ spec:
 
 <!-- chunk: 4. Performance Optimization -->## 4. Performance Optimization
 
-#<!-- chunk: 4.1 Buffer Tuning -->## 4.1 Buffer Tuning
+## 4.1 Buffer Tuning
 
 ```ruby
 # High-performance buffer configuration
@@ -540,7 +540,7 @@ spec:
 </buffer>
 ```
 
-#<!-- chunk: 4.2 Resource Management -->## 4.2 Resource Management
+## 4.2 Resource Management
 
 ```yaml
 # fluentd-resource-config.yaml
@@ -570,7 +570,7 @@ env:
 
 <!-- chunk: 5. Security and Compliance -->## 5. Security and Compliance
 
-#<!-- chunk: 5.1 Secure Configuration -->## 5.1 Secure Configuration
+## 5.1 Secure Configuration
 
 ```ruby
 # Security-enhanced fluent.conf
@@ -627,7 +627,7 @@ env:
 </match>
 ```
 
-#<!-- chunk: 5.2 Compliance Logging -->## 5.2 Compliance Logging
+## 5.2 Compliance Logging
 
 ```ruby
 # GDPR/PCI DSS compliant logging
@@ -668,7 +668,7 @@ env:
 
 <!-- chunk: 6. Monitoring and Troubleshooting -->## 6. Monitoring and Troubleshooting
 
-#<!-- chunk: 6.1 Health Monitoring -->## 6.1 Health Monitoring
+## 6.1 Health Monitoring
 
 ```ruby
 # Comprehensive monitoring configuration
@@ -720,7 +720,7 @@ env:
 </label>
 ```
 
-#<!-- chunk: 6.2 Diagnostic Commands -->## 6.2 Diagnostic Commands
+## 6.2 Diagnostic Commands
 
 ```bash
 #!/bin/bash
@@ -763,7 +763,7 @@ top -b -n 1 | grep fluentd
 
 <!-- chunk: 7. Scaling and High Availability -->## 7. Scaling and High Availability
 
-#<!-- chunk: 7.1 Multi-node Architecture -->## 7.1 Multi-node Architecture
+## 7.1 Multi-node Architecture
 
 ```yaml
 # fluentd-ha-deployment.yaml
@@ -834,7 +834,7 @@ spec:
 
 <!-- chunk: 8. Future Trends and Roadmap -->## 8. Future Trends and Roadmap
 
-#<!-- chunk: 8.1 Emerging Technologies -->## 8.1 Emerging Technologies
+## 8.1 Emerging Technologies
 
 ```yaml
 future_trends:
@@ -865,8 +865,8 @@ future_trends:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-21-logging-management-analytics MOC
-- [[domain-06-observability/README|Domain 21: 日志管理与分析 (Logging Management & Analytics)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-21 日志管理与分析 — 开源项目索引]]
+- [[domain-06-observability/README.md|Domain 06: 日志管理与分析 (Logging Management & Analytics)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-21 日志管理与分析 — 开源项目索引]]
 - ELK Stack企业级日志管理系统深度实践
 - Loki Enterprise Log Aggregation and Analytics Platform
 - 企业级日志治理与合规审计深度实践
@@ -883,8 +883,8 @@ future_trends:
 - 03-loki-enterprise-log-aggregation
 - 04-enterprise-log-governance-compliance
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

@@ -446,8 +446,8 @@ cluster_autoscaler_last_activity                          # 最后一次活动�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[concepts/node-lifecycle-management|node-lifecycle-management]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes|nodes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[concepts/node-lifecycle-management.md|node-lifecycle-management]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|nodes]]

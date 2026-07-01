@@ -70,9 +70,9 @@ created: "2026-05-23"
 1. [Hubble 概述与架构](#1-hubble-概述与架构)
 2. [Hubble 组件详解](#2-hubble-组件详解)
 3. [L3/L4/L7 流量可视化](#3-l3l4l7-流量可视化)
-4. [[domain-17-system-foundation/topic-dictionary/networking/service|Service]] Map 与依赖关系图](#4-service-map-与依赖关系图)
+4. [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]] Map 与依赖关系图](#4-service-map-与依赖关系图)
 5. [网络策略可视化](#5-网络策略可视化)
-6. [[entities/prometheus|Prometheus]] Metrics 导出](#6-prometheus-metrics-导出)
+6. [[entities/prometheus.md|Prometheus]] Metrics 导出](#6-prometheus-metrics-导出)
 7. [Hubble 部署与配置 ([[Helm|Helm]])](#7-hubble-部署与配置-helm)
 8. [与 Grafana 集成仪表板](#8-与-grafana-集成仪表板)
 9. [故障排查与网络诊断](#9-故障排查与网络诊断)
@@ -82,7 +82,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. Hubble 概述与架构 -->## 1. Hubble 概述与架构
 
-#<!-- chunk: 1.1 什么是 Hubble (What is Hubble) -->## 1.1 什么是 Hubble (What is Hubble)
+## 1.1 什么是 Hubble (What is Hubble)
 
 Hubble 是一个针对云原生工作负载的网络和安全可观测性工具，深度集成于 Cilium 生态系统。与传统的基于 sidecar 代理的可观测性方案不同，Hubble 直接利用 Linux 内核的 eBPF 技术，在**不修改任何应用代码、不注入 sidecar** 的前提下，获取完整的网络可见性。
 
@@ -98,7 +98,7 @@ Hubble 是一个针对云原生工作负载的网络和安全可观测性工具�
 | **Kafka 观测** | 追踪 Kafka 主题生产者/消费者 |
 | **指标导出** | Prometheus 兼容的 metrics 导出 |
 
-#<!-- chunk: 1.2 Hubble 整体架构 (Overall Architecture) -->## 1.2 Hubble 整体架构 (Overall Architecture)
+## 1.2 Hubble 整体架构 (Overall Architecture)
 
 ```mermaid
 graph TB
@@ -134,7 +134,7 @@ graph TB
     HCLI -->|Terminal| DEV[Developer]
 ```
 
-#<!-- chunk: 1.3 eBPF 数据采集原理 (eBPF Data Collection) -->## 1.3 eBPF 数据采集原理 (eBPF Data Collection)
+## 1.3 eBPF 数据采集原理 (eBPF Data Collection)
 
 Hubble 的数据采集完全依赖 eBPF，无需任何 sidecar：
 
@@ -157,7 +157,7 @@ sequenceDiagram
     Note over HS: 默认缓存 4096 条
 ```
 
-#<!-- chunk: 1.4 与传统可观测性方案对比 (Comparison with Traditional Solutions) -->## 1.4 与传统可观测性方案对比 (Comparison with Traditional Solutions)
+## 1.4 与传统可观测性方案对比 (Comparison with Traditional Solutions)
 
 ```mermaid
 graph LR
@@ -189,7 +189,7 @@ graph LR
 
 <!-- chunk: 2. Hubble 组件详解 -->## 2. Hubble 组件详解
 
-#<!-- chunk: 2.1 Hubble Server (每节点组件) -->## 2.1 Hubble Server (每节点组件)
+## 2.1 Hubble Server (每节点组件)
 
 Hubble Server 作为 Cilium Agent 的内嵌组件运行在每个节点上，负责从 eBPF 收集原始 flow 数据。
 
@@ -254,6 +254,10 @@ data:
 
 **Flow 缓冲区调优：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看当前 Hubble Server 状态
 kubectl exec -n kube-system ds/cilium -- hubble status
@@ -269,7 +273,7 @@ helm upgrade cilium cilium/cilium \
   --set hubble.bufferSize=16384
 ```
 
-#<!-- chunk: 2.2 Hubble Relay (集群聚合组件) -->## 2.2 Hubble Relay (集群聚合组件)
+## 2.2 Hubble Relay (集群聚合组件)
 
 Hubble Relay 是一个独立部署的服务，负责聚合所有节点的 Hubble Server 数据流，提供集群级别的统一视图。
 
@@ -374,7 +378,7 @@ spec:
   type: ClusterIP
 ```
 
-#<!-- chunk: 2.3 Hubble UI (可视化界面) -->## 2.3 Hubble UI (可视化界面)
+## 2.3 Hubble UI (可视化界面)
 
 Hubble UI 是一个基于 React 的前端应用，通过 Hubble Relay 获取数据并提供直观的服务依赖图和流量分析界面。
 
@@ -453,6 +457,9 @@ hubble:
 
 **访问 Hubble UI：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方式 1: Port Forward
 kubectl port-forward -n kube-system svc/hubble-ui 12000:80 &
@@ -466,7 +473,7 @@ kubectl patch svc hubble-ui -n kube-system \
   -p '{"spec":{"type":"NodePort","ports":[{"port":80,"nodePort":30080}]}}'
 ```
 
-#<!-- chunk: 2.4 Hubble CLI (命令行工具) -->## 2.4 Hubble CLI (命令行工具)
+## 2.4 Hubble CLI (命令行工具)
 
 Hubble CLI 是强大的命令行工具，支持实时流量观测和历史流量查询。
 
@@ -571,7 +578,7 @@ hubble observe --namespace default --print-node-name --follow | \
 
 <!-- chunk: 3. L3/L4/L7 流量可视化 -->## 3. L3/L4/L7 流量可视化
 
-#<!-- chunk: 3.1 流量层次模型 (Traffic Layer Model) -->## 3.1 流量层次模型 (Traffic Layer Model)
+## 3.1 流量层次模型 (Traffic Layer Model)
 
 ```mermaid
 graph TB
@@ -594,7 +601,7 @@ graph TB
     L3 -.->|eBPF XDP/TC| E3
 ```
 
-#<!-- chunk: 3.2 L3/L4 流量观测 (L3/L4 Flow Observation) -->## 3.2 L3/L4 流量观测 (L3/L4 Flow Observation)
+## 3.2 L3/L4 流量观测 (L3/L4 Flow Observation)
 
 ```bash
 # 查看 TCP 连接建立
@@ -667,7 +674,7 @@ hubble observe --verdict DROPPED -o json | jq '{
 }
 ```
 
-#<!-- chunk: 3.3 L7 流量观测 (L7 Flow Observation) -->## 3.3 L7 流量观测 (L7 Flow Observation)
+## 3.3 L7 流量观测 (L7 Flow Observation)
 
 L7 可见性需要在 Cilium 网络策略中显式开启：
 
@@ -764,7 +771,7 @@ hubble observe --protocol http \
 }
 ```
 
-#<!-- chunk: 3.4 gRPC 流量观测 (gRPC Flow Observation) -->## 3.4 gRPC 流量观测 (gRPC Flow Observation)
+## 3.4 gRPC 流量观测 (gRPC Flow Observation)
 
 ```yaml
 # 启用 gRPC L7 可见性
@@ -804,7 +811,7 @@ hubble observe --protocol grpc -o json | jq '.flow.l7.http | {
 # POST /helloworld.Greeter/SayHello -> 0 (gRPC OK) (5ms)
 ```
 
-#<!-- chunk: 3.5 DNS 流量观测 (DNS Flow Observation) -->## 3.5 DNS 流量观测 (DNS Flow Observation)
+## 3.5 DNS 流量观测 (DNS Flow Observation)
 
 ```bash
 # 观测所有 DNS 查询
@@ -830,7 +837,7 @@ hubble observe --protocol dns -o json | \
 
 <!-- chunk: 4. Service Map 与依赖关系图 -->## 4. Service Map 与依赖关系图
 
-#<!-- chunk: 4.1 Service Map 概念 (Service Map Concept) -->## 4.1 Service Map 概念 (Service Map Concept)
+## 4.1 Service Map 概念 (Service Map Concept)
 
 Service Map 是 Hubble UI 的核心功能，自动从实时流量中构建服务拓扑图，无需手动配置。
 
@@ -852,7 +859,7 @@ graph LR
     end
 ```
 
-#<!-- chunk: 4.2 Hubble UI 服务图操作 (Service Map Operations) -->## 4.2 Hubble UI 服务图操作 (Service Map Operations)
+## 4.2 Hubble UI 服务图操作 (Service Map Operations)
 
 **命名空间选择器：**
 
@@ -876,7 +883,7 @@ Hubble UI 界面操作流程:
 └─────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 4.3 CLI 方式生成依赖关系 (CLI Dependency Analysis) -->## 4.3 CLI 方式生成依赖关系 (CLI Dependency Analysis)
+## 4.3 CLI 方式生成依赖关系 (CLI Dependency Analysis)
 
 ```bash
 # 提取服务间通信关系
@@ -905,7 +912,7 @@ hubble observe --namespace production --since 1h -o json | \
 dot -Tpng graph.dot -o service-map.png
 ```
 
-#<!-- chunk: 4.4 服务延迟分析 (Service Latency Analysis) -->## 4.4 服务延迟分析 (Service Latency Analysis)
+## 4.4 服务延迟分析 (Service Latency Analysis)
 
 ```bash
 # 分析 HTTP 请求延迟分布
@@ -933,7 +940,7 @@ hubble observe \
 
 <!-- chunk: 5. 网络策略可视化 -->## 5. 网络策略可视化
 
-#<!-- chunk: 5.1 策略决策可视化 (Policy Decision Visualization) -->## 5.1 策略决策可视化 (Policy Decision Visualization)
+## 5.1 策略决策可视化 (Policy Decision Visualization)
 
 Hubble 实时显示每个网络流量的策略决策结果：
 
@@ -976,7 +983,7 @@ hubble observe --verdict DROPPED --since 1h -o json | \
   sort | uniq -c | sort -rn | head -10
 ```
 
-#<!-- chunk: 5.2 策略可视化配置 (Policy Visualization Config) -->## 5.2 策略可视化配置 (Policy Visualization Config)
+## 5.2 策略可视化配置 (Policy Visualization Config)
 
 ```yaml
 # 启用审计模式 (策略违规可见但不阻断)
@@ -1002,7 +1009,7 @@ hubble observe --verdict AUDIT -o json | \
   }'
 ```
 
-#<!-- chunk: 5.3 策略推断工具 (Policy Inference) -->## 5.3 策略推断工具 (Policy Inference)
+## 5.3 策略推断工具 (Policy Inference)
 
 ```bash
 # 基于观测到的流量自动推断网络策略
@@ -1027,7 +1034,7 @@ cat production-flows.json | \
   jq -s 'unique_by([.src_label, .dst_label, .dst_port])'
 ```
 
-#<!-- chunk: 5.4 可视化网络策略验证 (Visual Policy Validation) -->## 5.4 可视化网络策略验证 (Visual Policy Validation)
+## 5.4 可视化网络策略验证 (Visual Policy Validation)
 
 ```yaml
 # 测试网络策略前后的流量变化
@@ -1049,6 +1056,9 @@ spec:
       - port: "8080"
         protocol: TCP
 ```
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 验证策略效果: 从 frontend 访问 backend 应该成功
@@ -1075,7 +1085,7 @@ hubble observe \
 
 <!-- chunk: 6. Prometheus Metrics 导出 -->## 6. Prometheus Metrics 导出
 
-#<!-- chunk: 6.1 Hubble Metrics 概述 (Metrics Overview) -->## 6.1 Hubble Metrics 概述 (Metrics Overview)
+## 6.1 Hubble Metrics 概述 (Metrics Overview)
 
 ```mermaid
 graph LR
@@ -1094,7 +1104,7 @@ graph LR
     TSDB --> GRAFANA[Grafana]
 ```
 
-#<!-- chunk: 6.2 启用 Hubble Metrics (Enable Metrics) -->## 6.2 启用 Hubble Metrics (Enable Metrics)
+## 6.2 启用 Hubble Metrics (Enable Metrics)
 
 ```yaml
 # Helm values.yaml
@@ -1142,7 +1152,7 @@ hubble:
         - traffic_direction
 ```
 
-#<!-- chunk: 6.3 核心 Metrics 说明 (Core Metrics Reference) -->## 6.3 核心 Metrics 说明 (Core Metrics Reference)
+## 6.3 核心 Metrics 说明 (Core Metrics Reference)
 
 **流量 Metrics：**
 
@@ -1198,7 +1208,7 @@ sum(rate(hubble_flows_processed_total[5m]))
 hubble_drop_total / hubble_flows_processed_total
 ```
 
-#<!-- chunk: 6.4 ServiceMonitor 配置 (ServiceMonitor Config) -->## 6.4 ServiceMonitor 配置 (ServiceMonitor Config)
+## 6.4 ServiceMonitor 配置 (ServiceMonitor Config)
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -1243,7 +1253,7 @@ spec:
     interval: 30s
 ```
 
-#<!-- chunk: 6.5 告警规则 (Alerting Rules) -->## 6.5 告警规则 (Alerting Rules)
+## 6.5 告警规则 (Alerting Rules)
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -1313,7 +1323,10 @@ spec:
 
 <!-- chunk: 7. Hubble 部署与配置 (Helm) -->## 7. Hubble 部署与配置 (Helm)
 
-#<!-- chunk: 7.1 最小化部署 (Minimal Deployment) -->## 7.1 最小化部署 (Minimal Deployment)
+## 7.1 最小化部署 (Minimal Deployment)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 添加 Cilium Helm 仓库
@@ -1333,7 +1346,7 @@ kubectl -n kube-system get pods -l k8s-app=hubble-relay
 kubectl -n kube-system get pods -l k8s-app=cilium
 ```
 
-#<!-- chunk: 7.2 完整生产级配置 (Full Production Config) -->## 7.2 完整生产级配置 (Full Production Config)
+## 7.2 完整生产级配置 (Full Production Config)
 
 ```yaml
 # hubble-production-values.yaml
@@ -1460,6 +1473,9 @@ hubble:
         - protocol
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 应用完整配置
 helm upgrade --install cilium cilium/cilium \
@@ -1479,7 +1495,11 @@ kubectl wait --for=condition=ready pod \
   --timeout=60s
 ```
 
-#<!-- chunk: 7.3 TLS 证书管理 (TLS Certificate Management) -->## 7.3 TLS 证书管理 (TLS Certificate Management)
+## 7.3 TLS 证书管理 (TLS Certificate Management)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 方式 1: Helm 自动管理 (适合小集群)
@@ -1508,7 +1528,7 @@ helm upgrade cilium cilium/cilium \
   --set hubble.tls.auto.schedule="0 0 1 */4 *"  # 每4个月轮换
 ```
 
-#<!-- chunk: 7.4 多集群 Hubble 配置 (Multi-Cluster) -->## 7.4 多集群 Hubble 配置 (Multi-Cluster)
+## 7.4 多集群 Hubble 配置 (Multi-Cluster)
 
 ```yaml
 # Cluster Mesh 配置 (多集群场景)
@@ -1543,7 +1563,7 @@ hubble:
 
 <!-- chunk: 8. 与 Grafana 集成仪表板 -->## 8. 与 Grafana 集成仪表板
 
-#<!-- chunk: 8.1 Grafana 数据源配置 (Grafana DataSource) -->## 8.1 Grafana 数据源配置 (Grafana DataSource)
+## 8.1 Grafana 数据源配置 (Grafana DataSource)
 
 ```yaml
 # Grafana DataSource ConfigMap
@@ -1570,7 +1590,7 @@ data:
           datasourceUid: tempo
 ```
 
-#<!-- chunk: 8.2 核心 Grafana 仪表板 (Core Dashboards) -->## 8.2 核心 Grafana 仪表板 (Core Dashboards)
+## 8.2 核心 Grafana 仪表板 (Core Dashboards)
 
 **网络流量总览仪表板面板配置：**
 
@@ -1646,7 +1666,11 @@ data:
 }
 ```
 
-#<!-- chunk: 8.3 使用官方 Hubble Grafana Dashboard -->## 8.3 使用官方 Hubble Grafana Dashboard
+## 8.3 使用官方 Hubble Grafana Dashboard
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 导入官方 Hubble Dashboard (ID: 16611)
@@ -1665,7 +1689,7 @@ kubectl patch configmap hubble-grafana-dashboard \
   -p '{"metadata":{"labels":{"grafana_dashboard":"1"}}}'
 ```
 
-#<!-- chunk: 8.4 服务级别指标仪表板 (Service-Level Dashboard) -->## 8.4 服务级别指标仪表板 (Service-Level Dashboard)
+## 8.4 服务级别指标仪表板 (Service-Level Dashboard)
 
 ```yaml
 # 以 production 命名空间为例的 Grafana Dashboard
@@ -1704,7 +1728,10 @@ sum by (drop_reason) (
 )
 ```
 
-#<!-- chunk: 8.5 Kube-Prometheus-Stack 集成 (Complete Stack) -->## 8.5 Kube-Prometheus-Stack 集成 (Complete Stack)
+## 8.5 Kube-Prometheus-Stack 集成 (Complete Stack)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 使用 kube-prometheus-stack + Cilium/Hubble 完整部署
@@ -1735,7 +1762,7 @@ kubectl get prometheusrule -n monitoring
 
 <!-- chunk: 9. 故障排查与网络诊断 -->## 9. 故障排查与网络诊断
 
-#<!-- chunk: 9.1 诊断工作流 (Diagnostic Workflow) -->## 9.1 诊断工作流 (Diagnostic Workflow)
+## 9.1 诊断工作流 (Diagnostic Workflow)
 
 ```mermaid
 flowchart TD
@@ -1756,7 +1783,7 @@ flowchart TD
     PERF --> CMD4[hubble observe\n--protocol http\n分析 latency_ns]
 ```
 
-#<!-- chunk: 9.2 常见问题诊断 (Common Issue Diagnosis) -->## 9.2 常见问题诊断 (Common Issue Diagnosis)
+## 9.2 常见问题诊断 (Common Issue Diagnosis)
 
 **问题 1: 服务无法访问**
 
@@ -1846,7 +1873,10 @@ hubble observe --protocol dns --since 1h -o json | \
   sort | uniq -c | sort -rn | head -10
 ```
 
-#<!-- chunk: 9.3 Cilium 内置诊断工具 (Built-in Diagnostic Tools) -->## 9.3 Cilium 内置诊断工具 (Built-in Diagnostic Tools)
+## 9.3 Cilium 内置诊断工具 (Built-in Diagnostic Tools)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 使用 cilium CLI 进行诊断
@@ -1883,7 +1913,7 @@ kubectl exec -n kube-system ds/cilium -- \
   cilium identity list | grep "app=frontend"
 ```
 
-#<!-- chunk: 9.4 网络诊断脚本 (Network Diagnostic Scripts) -->## 9.4 网络诊断脚本 (Network Diagnostic Scripts)
+## 9.4 网络诊断脚本 (Network Diagnostic Scripts)
 
 ```bash
 #!/bin/bash
@@ -1952,7 +1982,7 @@ echo ""
 echo "=== 诊断完成 ==="
 ```
 
-#<!-- chunk: 9.5 常见错误与解决方案 (Common Errors & Solutions) -->## 9.5 常见错误与解决方案 (Common Errors & Solutions)
+## 9.5 常见错误与解决方案 (Common Errors & Solutions)
 
 | 错误现象 | Hubble 观测命令 | 可能原因 | 解决方案 |
 |---------|--------------|---------|---------|
@@ -1966,7 +1996,7 @@ echo "=== 诊断完成 ==="
 
 <!-- chunk: 10. 企业级可观测性实践 -->## 10. 企业级可观测性实践
 
-#<!-- chunk: 10.1 可观测性成熟度模型 (Observability Maturity Model) -->## 10.1 可观测性成熟度模型 (Observability Maturity Model)
+## 10.1 可观测性成熟度模型 (Observability Maturity Model)
 
 ```mermaid
 graph TB
@@ -1983,7 +2013,7 @@ graph TB
     style L4 fill:#66bb6a
 ```
 
-#<!-- chunk: 10.2 生产环境配置清单 (Production Checklist) -->## 10.2 生产环境配置清单 (Production Checklist)
+## 10.2 生产环境配置清单 (Production Checklist)
 
 ```yaml
 # 生产环境 Hubble 配置最佳实践
@@ -2042,7 +2072,7 @@ hubble:
       - '{"verdict":["DROPPED","AUDIT"]}'
 ```
 
-#<!-- chunk: 10.3 SLO 监控配置 (SLO Monitoring) -->## 10.3 SLO 监控配置 (SLO Monitoring)
+## 10.3 SLO 监控配置 (SLO Monitoring)
 
 ```yaml
 # 基于 Hubble Metrics 的 SLO 配置
@@ -2093,7 +2123,10 @@ spec:
         runbook: "https://wiki.internal/runbooks/slo-violation"
 ```
 
-#<!-- chunk: 10.4 多租户可观测性 (Multi-Tenant Observability) -->## 10.4 多租户可观测性 (Multi-Tenant Observability)
+## 10.4 多租户可观测性 (Multi-Tenant Observability)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 按团队隔离 Hubble 访问权限
@@ -2128,7 +2161,7 @@ EOF
 hubble observe --namespace dev-namespace --follow
 ```
 
-#<!-- chunk: 10.5 与分布式追踪集成 (Distributed Tracing Integration) -->## 10.5 与分布式追踪集成 (Distributed Tracing Integration)
+## 10.5 与分布式追踪集成 (Distributed Tracing Integration)
 
 ```mermaid
 graph LR
@@ -2184,7 +2217,10 @@ data:
         Type              _doc
 ```
 
-#<!-- chunk: 10.6 容量规划建议 (Capacity Planning) -->## 10.6 容量规划建议 (Capacity Planning)
+## 10.6 容量规划建议 (Capacity Planning)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 评估 Hubble 资源需求的指导原则
@@ -2214,7 +2250,7 @@ kubectl top pod -n kube-system -l k8s-app=hubble-relay
 kubectl exec -n kube-system ds/cilium -- hubble status --all-nodes
 ```
 
-#<!-- chunk: 10.7 安全加固 (Security Hardening) -->## 10.7 安全加固 (Security Hardening)
+## 10.7 安全加固 (Security Hardening)
 
 ```yaml
 # Hubble 安全最佳实践
@@ -2299,7 +2335,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-35-ebpf-technology MOC
-- [[domain-03-networking-traffic/README|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
+- [[domain-03-networking-traffic/README.md|Domain 03: eBPF 技术体系 (eBPF Technology Stack)]]
 - Domain-35 eBPF 技术 — 开源项目索引
 - eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...
 - eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)

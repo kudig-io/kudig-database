@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 概述 -->## 1. 概述
 
-#<!-- chunk: 1.1 集成原则 -->## 1.1 集成原则
+## 1.1 集成原则
 
 | 原则 | 说明 |
 |:-----|:-----|
@@ -75,7 +75,7 @@ created: "2026-05-23"
 | **安全内建** | 安全性贯穿各层 |
 | **云原生** | 符合云原生设计理念 |
 
-#<!-- chunk: 1.2 典型技术栈 -->## 1.2 典型技术栈
+## 1.2 典型技术栈
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -120,7 +120,7 @@ created: "2026-05-23"
 
 <!-- chunk: 2. 监控与可观测性集成 -->## 2. 监控与可观测性集成
 
-#<!-- chunk: 2.1 Prometheus + Grafana + Alertmanager -->## 2.1 Prometheus + Grafana + Alertmanager
+## 2.1 Prometheus + Grafana + Alertmanager
 
 **架构图**：
 ```
@@ -179,9 +179,9 @@ spec:
       group_interval: 5m
       receiver: 'default'
       routes:
-        - match:
-            severity: critical
-          receiver: 'critical'
+        - matchers:
+          - severity="critical"
+          receiver: critical
     receivers:
       - name: 'default'
         webhook_configs:
@@ -192,7 +192,7 @@ spec:
             channel: '#alerts-critical'
 ```
 
-#<!-- chunk: 2.2 OpenTelemetry Collector 集成 -->## 2.2 OpenTelemetry Collector 集成
+## 2.2 OpenTelemetry Collector 集成
 
 **架构**：
 ```
@@ -266,7 +266,7 @@ spec:
           exporters: [prometheus]
 ```
 
-#<!-- chunk: 2.3 链路追踪集成 (Jaeger + OpenTelemetry) -->## 2.3 链路追踪集成 (Jaeger + OpenTelemetry)
+## 2.3 链路追踪集成 (Jaeger + OpenTelemetry)
 
 ```yaml
 # Jaeger Operator CRD
@@ -293,7 +293,7 @@ spec:
 
 <!-- chunk: 3. 网络与服务网格集成 -->## 3. 网络与服务网格集成
 
-#<!-- chunk: 3.1 Cilium + Hubble 集成 -->## 3.1 Cilium + Hubble 集成
+## 3.1 Cilium + Hubble 集成
 
 **架构**：
 ```
@@ -333,6 +333,9 @@ spec:
 
 **Helm 安装**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 helm repo add cilium https://helm.cilium.io/
 
@@ -345,7 +348,7 @@ helm install cilium cilium/cilium \
   --set operator.prometheus.enabled=true
 ```
 
-#<!-- chunk: 3.2 Istio + Kiali + Prometheus 集成 -->## 3.2 Istio + Kiali + Prometheus 集成
+## 3.2 Istio + Kiali + Prometheus 集成
 
 ```yaml
 # Istio 安装配置
@@ -396,7 +399,7 @@ spec:
       in_cluster_url: http://jaeger-query:16685
 ```
 
-#<!-- chunk: 3.3 Linkerd + Buoyant Cloud 集成 -->## 3.3 Linkerd + Buoyant Cloud 集成
+## 3.3 Linkerd + Buoyant Cloud 集成
 
 ```yaml
 # Linkerd 安装
@@ -415,7 +418,7 @@ linkerd viz install | kubectl apply -f -
 
 <!-- chunk: 4. 安全集成 -->## 4. 安全集成
 
-#<!-- chunk: 4.1 Falco + Prometheus + Alertmanager -->## 4.1 Falco + Prometheus + Alertmanager
+## 4.1 Falco + Prometheus + Alertmanager
 
 ```yaml
 # Falco 配置
@@ -463,7 +466,7 @@ spec:
             summary: "Falco warning event detected"
 ```
 
-#<!-- chunk: 4.2 cert-manager + Istio + External DNS -->## 4.2 cert-manager + Istio + External DNS
+## 4.2 cert-manager + Istio + External DNS
 
 ```yaml
 # cert-manager ClusterIssuer
@@ -510,7 +513,7 @@ spec:
         - "*.example.com"
 ```
 
-#<!-- chunk: 4.3 OPA + Gatekeeper 策略集成 -->## 4.3 OPA + Gatekeeper 策略集成
+## 4.3 OPA + Gatekeeper 策略集成
 
 ```yaml
 # Gatekeeper 安装
@@ -541,7 +544,7 @@ spec:
 
 <!-- chunk: 5. 存储集成 -->## 5. 存储集成
 
-#<!-- chunk: 5.1 Rook + Ceph + Prometheus -->## 5.1 Rook + Ceph + Prometheus
+## 5.1 Rook + Ceph + Prometheus
 
 ```yaml
 # Rook CephCluster
@@ -586,7 +589,7 @@ reclaimPolicy: Retain
 allowVolumeExpansion: true
 ```
 
-#<!-- chunk: 5.2 Longhorn + Backup to S3 -->## 5.2 Longhorn + Backup to S3
+## 5.2 Longhorn + Backup to S3
 
 ```yaml
 # Longhorn 设置
@@ -610,9 +613,9 @@ spec:
 
 ---
 
-<!-- chunk: 6. [[domain-17-system-foundation/topic-cheat-sheet/gitops|GitOps]] 速查卡|GitOps]] 集成 -->## 6. GitOps 集成
+<!-- chunk: 6. [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|GitOps]] 速查卡|GitOps]] 集成 -->## 6. GitOps 集成
 
-#<!-- chunk: 6.1 Argo CD + Argo Rollouts + Flagger -->## 6.1 Argo CD + Argo Rollouts + Flagger
+## 6.1 Argo CD + Argo Rollouts + Flagger
 
 ```yaml
 # Argo CD 安装
@@ -659,7 +662,7 @@ spec:
         interval: 1m
 ```
 
-#<!-- chunk: 6.2 [[Flux|Flux]] + Helm + Image Automation -->## 6.2 Flux + Helm + Image Automation
+## 6.2 Flux + Helm + Image Automation
 
 ```yaml
 # Flux 安装
@@ -703,7 +706,7 @@ spec:
 
 <!-- chunk: 7. 事件驱动与 Serverless -->## 7. 事件驱动与 Serverless
 
-#<!-- chunk: 7.1 [[Knative|Knative]] + Kafka + Prometheus -->## 7.1 Knative + Kafka + Prometheus
+## 7.1 Knative + Kafka + Prometheus
 
 ```yaml
 # Knative Eventing 安装
@@ -775,7 +778,7 @@ spec:
               value: my-cluster-kafka-bootstrap.kafka:9092
 ```
 
-#<!-- chunk: 7.2 KEDA + Kafka + HPA -->## 7.2 KEDA + Kafka + HPA
+## 7.2 KEDA + Kafka + HPA
 
 ```yaml
 # KEDA 安装
@@ -810,7 +813,7 @@ spec:
 
 <!-- chunk: 8. 多集群集成 -->## 8. 多集群集成
 
-#<!-- chunk: 8.1 Karmada + Argo CD -->## 8.1 Karmada + Argo CD
+## 8.1 Karmada + Argo CD
 
 ```yaml
 # Karmada 安装
@@ -854,7 +857,7 @@ spec:
 
 <!-- chunk: 9. 完整技术栈示例 -->## 9. 完整技术栈示例
 
-#<!-- chunk: 9.1 生产环境推荐架构 -->## 9.1 生产环境推荐架构
+## 9.1 生产环境推荐架构
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -899,7 +902,11 @@ spec:
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 9.2 快速部署命令 -->## 9.2 快速部署命令
+## 9.2 快速部署命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash

@@ -489,6 +489,10 @@ spec:
 
 ### 回收策略运维操作
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 查看当前回收策略
 kubectl get sc -o custom-columns=NAME:.metadata.name,POLICY:.reclaimPolicy
@@ -810,6 +814,9 @@ volumeBindingMode: WaitForFirstConsumer
 allowVolumeExpansion: true
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply -f storageclass.yaml
 kubectl get sc quick-start-sc
@@ -829,6 +836,9 @@ spec:
     requests:
       storage: 20Gi
 ```
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 kubectl apply -f pvc.yaml
@@ -856,6 +866,10 @@ spec:
       claimName: quick-start-pvc
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 kubectl apply -f pod.yaml
 
@@ -875,6 +889,9 @@ kubectl exec quick-start-pod -- cat /usr/share/nginx/html/index.html
 
 ### 清理
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 kubectl delete pod quick-start-pod
 kubectl delete pvc quick-start-pvc
@@ -891,6 +908,10 @@ kubectl delete sc quick-start-sc
 ### 练习 1: 静态供给与动态供给对比
 
 **目标**: 分别通过静态和动态方式创建 PVC，并验证绑定过程。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 1. 创建静态 PV
@@ -938,6 +959,11 @@ kubectl delete pv lab-static-pv
 
 **目标**: 验证 RWO 卷的多节点挂载限制。
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 创建 PVC (RWO)
 cat <<EOF | kubectl apply -f -
@@ -975,13 +1001,17 @@ spec:
 EOF
 
 # 观察 Pod A 运行状态后清理
-kubectl delete pod lab-pod-a --force
+kubectl delete pod lab-pod-a --force  # ⚠️ 跳过优雅终止，可能丢数据
 kubectl delete pvc lab-rwo-pvc
 ```
 
 ### 练习 3: 回收策略行为验证
 
 **目标**: 对比 Retain 和 Delete 策略在 PVC 删除后的行为差异。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 1. 创建两种 StorageClass
@@ -1051,4 +1081,4 @@ kubectl delete sc lab-retain lab-delete
 ## Related
 
 - index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|[[CSI (Container Storage Interface) 知识图谱索引|CSI (Container Storage Interface) 知识图谱索引]]]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|[[CSI (Container Storage Interface) 知识图谱索引|CSI (Container Storage Interface) 知识图谱索引]]]]

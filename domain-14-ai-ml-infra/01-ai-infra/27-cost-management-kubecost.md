@@ -216,6 +216,10 @@ Kubernetes 成本管理是确保云原生基础设施经济高效运行的关键
 
 ### Helm 安装
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # deploy-kubecost.sh
@@ -1169,7 +1173,7 @@ echo "=== 检查完成 ==="
 ## Obsidian 相关文档
 
 - domain-11-ai-infra MOC
-- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
 - Domain-11 AI 基础设施 — 开源项目索引
 - AI 基础设施架构
 - 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
@@ -1187,3 +1191,5 @@ echo "=== 检查完成 ==="
 - 26-cost-optimization-overview
 - 28-green-computing-sustainability
 - 29-alibaba-cloud-integration
+
+```

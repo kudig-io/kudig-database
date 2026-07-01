@@ -5,6 +5,7 @@ tags: ["index", "domain-09-reliability-engineering", "navigation"]
 sources: ["auto-generated"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 ---
 
 # Domain 09 内容索引
@@ -84,5 +85,5 @@ updated: 2026-05-21
 - [[README-from-domain-30]] — README from domain 30
 
 ## 相关 Domain
-- [[domain-08-release-change-management/98-merged-indexes/index|Domain 08 发布与变更管理 索引]]
-- [[domain-11-production-operations/98-merged-indexes/index|Domain 11 生产运维 索引]]
+- [[domain-08-release-change-management/98-merged-indexes/index.md|Domain 08 发布与变更管理 索引]]
+- [[domain-11-production-operations/98-merged-indexes/index.md|Domain 11 生产运维 索引]]

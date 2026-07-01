@@ -50,7 +50,7 @@ created: "2026-05-23"
 |:---:|:---|:---|:---:|:---:|:---|
 | 1 | topic-terway | [01-product.md](./01-product.md) | 332 | 专题 | 产品定位、版本历史、5 种模式总览、CNI 对比、ECS 规格速查 |
 | 2 | topic-terway | [02-architecture.md](./02-architecture.md) | 973 | 专题 | 整体架构图、控制面/数据面、IPAM 流程、5 个 CRD 模型、BoltDB 持久化 |
-| 3 | topic-terway | [03-usage.md](./[[domain-03-networking-traffic/topic-terway/03-usage|03-usage]].md) | 1022 | 专题 | 安装初始化、5 种模式 YAML 配置、[[NetworkPolicy|NetworkPolicy]]、固定 IP、IPv6 双栈、容量规划 |
+| 3 | topic-terway | [03-usage.md](./[[domain-03-networking-traffic/topic-terway/03-usage.md|03-usage]].md) | 1022 | 专题 | 安装初始化、5 种模式 YAML 配置、[[NetworkPolicy|NetworkPolicy]]、固定 IP、IPv6 双栈、容量规划 |
 | 4 | topic-terway | [03b-crd-operations.md](./03b-crd-operations.md) | 1231 | 专题 | 5 个 CRD 全量清单与完整 CRUD、ConfigMap 管理、综合诊断脚本 |
 | 5 | topic-terway | [04-operations.md](./04-operations.md) | 1388 | 专题 | 健康检查、GC 机制(设计原则/参数调优)、[[Prometheus|Prometheus]] 告警、升级回滚、巡检清单 |
 | 6 | topic-terway | [05-testing.md](./05-testing.md) | 1028 | 专题 | 端到端测试套件、ENI 密度压测、NetworkPolicy 测试、iperf3 基准、MTU 测试 |

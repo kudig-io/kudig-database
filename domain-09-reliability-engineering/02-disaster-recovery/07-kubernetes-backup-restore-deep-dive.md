@@ -68,7 +68,7 @@ created: "2026-05-23"
 
 Kubernetes 已经成为企业应用部署的标准平台，但 Kubernetes 自身并不提供内置的备份与灾难恢复能力。当集群遭遇灾难性问题——无论是 [[etcd|etcd]] 数据损坏、整个集群不可用、还是误操作删除关键资源——如果没有完善的备份策略，将面临严重的数据丢失和业务中断。本文档全面探讨 Kubernetes 环境下的备份与恢复实践，涵盖 Velero 深度配置、etcd 备份恢复、持久卷（PV）数据保护、CSI 快照集成、集群迁移以及完整的灾难恢复编排。
 
-#<!-- chunk: RPO 与 RTO 定义 -->## RPO 与 RTO 定义
+## RPO 与 RTO 定义
 
 - **RPO（Recovery Point Objective）**：在 Kubernetes 环境中，RPO 由三个层面决定：etcd 备份频率决定集群状态的 RPO；Velero 定时备份决定资源对象的 RPO；PV 快照频率决定持久数据的 RPO。企业应根据工作负载关键性，分层设定 RPO 目标。
 - **RTO（Recovery Time Objective）**：Kubernetes 的 RTO 取决于恢复范围。单个命名空间恢复可在分钟级完成；完整集群重建通常需要 30 分钟到数小时；跨集群迁移恢复取决于数据量和网络带宽。
@@ -100,7 +100,7 @@ k8s_backup_rpo_rto:
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: Kubernetes 多层备份架构 -->## Kubernetes 多层备份架构
+## Kubernetes 多层备份架构
 
 ```mermaid
 graph TB
@@ -158,7 +158,7 @@ graph TB
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: etcd 备份策略 -->## etcd 备份策略
+## etcd 备份策略
 
 etcd 是 Kubernetes 的"大脑"，存储了集群的所有状态数据。etcd 备份是 Kubernetes 灾备的基础。
 
@@ -251,7 +251,12 @@ spec:
           restartPolicy: OnFailure
 ```
 
-#<!-- chunk: etcd 恢复流程 -->## etcd 恢复流程
+## etcd 恢复流程
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -322,7 +327,7 @@ echo "=== etcd 恢复完成 ==="
 echo "验证集群状态: kubectl get nodes"
 ```
 
-#<!-- chunk: PV 持久卷备份策略 -->## PV 持久卷备份策略
+## PV 持久卷备份策略
 
 ```yaml
 # PV 数据保护 - CSI 快照策略
@@ -367,7 +372,7 @@ spec:
     ttl: 168h
 ```
 
-#<!-- chunk: 集群迁移方案 -->## 集群迁移方案
+## 集群迁移方案
 
 ```yaml
 # 跨集群迁移配置
@@ -431,7 +436,7 @@ migration_plan:
 
 <!-- chunk: 备份策略 -->## 备份策略
 
-#<!-- chunk: 多层备份策略矩阵 -->## 多层备份策略矩阵
+## 多层备份策略矩阵
 
 ```yaml
 k8s_backup_strategy:
@@ -477,7 +482,7 @@ k8s_backup_strategy:
 
 <!-- chunk: 恢复流程 -->## 恢复流程
 
-#<!-- chunk: 分级恢复操作手册 -->## 分级恢复操作手册
+## 分级恢复操作手册
 
 ```yaml
 k8s_recovery_procedures:
@@ -642,7 +647,7 @@ data:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题诊断 -->## 常见问题诊断
+## 常见问题诊断
 
 ```bash
 #!/bin/bash
@@ -677,7 +682,7 @@ echo "[5] PVC 状态"
 kubectl get pvc -A | grep -v Bound
 ```
 
-#<!-- chunk: 故障排查手册 -->## 故障排查手册
+## 故障排查手册
 
 | 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
 |:---|:---|:---|:---|
@@ -698,7 +703,7 @@ kubectl get pvc -A | grep -v Bound
 
 <!-- chunk: Velero 高级配置 -->## Velero 高级配置
 
-#<!-- chunk: 多 BackupStorageLocation 策略 -->## 多 BackupStorageLocation 策略
+## 多 BackupStorageLocation 策略
 
 在生产环境中，企业通常需要将备份数据存储在多个位置以满足合规和灾备要求。Velero 支持配置多个 BackupStorageLocation（BSL），可以将不同命名空间或不同类型的备份存储到不同的位置。
 
@@ -758,7 +763,7 @@ spec:
     ttl: 720h
 ```
 
-#<!-- chunk: 备份 Hook 深度配置 -->## 备份 Hook 深度配置
+## 备份 Hook 深度配置
 
 Velero 的 Pre/Post Hook 是实现应用一致性备份的关键机制。对于数据库等有状态应用，直接备份文件系统可能导致数据不一致。通过 Pre Hook 在备份前执行数据库冻结或逻辑转储，Post Hook 在备份后清理临时文件，可以确保备份数据的完整性和一致性。
 
@@ -805,7 +810,7 @@ spec:
 
 <!-- chunk: Velero 插件生态 -->## Velero 插件生态
 
-#<!-- chunk: 云提供商插件 -->## 云提供商插件
+## 云提供商插件
 
 Velero 通过插件机制支持多种云提供商和存储后端。每个插件负责与特定云平台的 API 交互，实现对象存储操作和卷快照管理。
 
@@ -817,7 +822,7 @@ Velero 通过插件机制支持多种云提供商和存储后端。每个插件�
 | velero-plugin-for-gcp | GCP | GCS 存储 + PD 快照 | `velero plugin add velero/velero-plugin-for-gcp:v1.8.0` |
 | velero-plugin-for-alibabacloud | 阿里云 | OSS 存储 + 云盘快照 | 社区维护 |
 
-#<!-- chunk: 自定义插件开发 -->## 自定义插件开发
+## 自定义插件开发
 
 对于使用非标准存储后端的企业，可以开发自定义 Velero 插件。插件需要实现 `BackupItemAction`、`RestoreItemAction`、`ObjectStore` 和 `VolumeSnapshotter` 四个接口。
 
@@ -857,7 +862,7 @@ func (s *CustomObjectStore) GetObject(bucket, key string) (io.ReadCloser, error)
 
 <!-- chunk: 灾备自动化编排 -->## 灾备自动化编排
 
-#<!-- chunk: 完整灾难恢复自动化脚本 -->## 完整灾难恢复自动化脚本
+## 完整灾难恢复自动化脚本
 
 以下脚本实现了从集群不可用到完整恢复的自动化流程。它假设已经有一个预配置的灾备集群，Velero 已经安装并指向同一 BSL。
 
@@ -919,7 +924,7 @@ echo "请执行应用层验证测试"
 
 <!-- chunk: 安全最佳实践 -->## 安全最佳实践
 
-#<!-- chunk: Velero 安全加固 -->## Velero 安全加固
+## Velero 安全加固
 
 1. **对象存储加密**：所有备份存储桶启用 SSE-S3 或 SSE-KMS 加密
 2. **网络隔离**：Velero 运行在独立命名空间，使用 [[NetworkPolicy|NetworkPolicy]] 限制流量
@@ -969,7 +974,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-30-disaster-recovery-business-continuity MOC
-- [[domain-09-reliability-engineering/README|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
+- [[domain-09-reliability-engineering/README.md|Domain 09: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
 - Domain-30 灾备与业务连续性 — 开源项目索引
 - VMware vSphere 企业级灾备与业务连续性
 - Veeam Backup & Replication 企业级备份恢复解决方案

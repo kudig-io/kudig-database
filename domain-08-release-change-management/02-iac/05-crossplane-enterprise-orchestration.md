@@ -62,11 +62,11 @@ created: "2026-05-23"
 
 <!-- chunk: 🎯 Abstract -->## 🎯 Abstract
 
-This document provides comprehensive exploration of Crossplane enterprise deployment architecture, multi-cloud management practices, and operational orchestration. Based on large-scale production environment experience, it offers complete technical guidance from control plane setup to provider management, helping enterprises build unified, vendor-agnostic infrastructure automation platforms with Kubernetes-native approach across AWS, Azure, GCP and other [[skills/ts-cloud-provider|cloud providers]].
+This document provides comprehensive exploration of Crossplane enterprise deployment architecture, multi-cloud management practices, and operational orchestration. Based on large-scale production environment experience, it offers complete technical guidance from control plane setup to provider management, helping enterprises build unified, vendor-agnostic infrastructure automation platforms with Kubernetes-native approach across AWS, Azure, GCP and other [[skills/ts-cloud-provider.md|cloud providers]].
 
 <!-- chunk: 1. Crossplane Enterprise Architecture -->## 1. Crossplane Enterprise Architecture
 
-#<!-- chunk: 1.1 Core Component Architecture -->## 1.1 Core Component Architecture
+## 1.1 Core Component Architecture
 
 ```mermaid
 graph TB
@@ -134,7 +134,7 @@ graph TB
     X --> Y
 ```
 
-#<!-- chunk: 1.2 Enterprise Deployment Architecture -->## 1.2 Enterprise Deployment Architecture
+## 1.2 Enterprise Deployment Architecture
 
 ```yaml
 crossplane_enterprise_deployment:
@@ -244,7 +244,7 @@ crossplane_enterprise_deployment:
 
 <!-- chunk: 2. Advanced Provider Management -->## 2. Advanced Provider Management
 
-#<!-- chunk: 2.1 Provider Configuration -->## 2.1 Provider Configuration
+## 2.1 Provider Configuration
 
 ```yaml
 # provider_config.yaml
@@ -290,7 +290,7 @@ spec:
   assumeRoleARN: arn:aws:iam::123456789012:role/crossplane-infrastructure-role
 ```
 
-#<!-- chunk: 2.2 Multi-Provider Composition -->## 2.2 Multi-Provider Composition
+## 2.2 Multi-Provider Composition
 
 ```yaml
 # composite_database.yaml
@@ -373,7 +373,7 @@ spec:
 
 <!-- chunk: 3. GitOps Integration and Automation -->## 3. GitOps Integration and Automation
 
-#<!-- chunk: 3.1 [[Argo|Argo]] CD Integration -->## 3.1 Argo CD Integration
+## 3.1 Argo CD Integration
 
 ```yaml
 # argo_application.yaml
@@ -407,7 +407,7 @@ spec:
         - /status
 ```
 
-#<!-- chunk: 3.2 [[Flux|Flux]] CD Integration -->## 3.2 Flux CD Integration
+## 3.2 Flux CD Integration
 
 ```yaml
 # flux_kustomization.yaml
@@ -432,7 +432,7 @@ spec:
 
 <!-- chunk: 4. Security and Governance -->## 4. Security and Governance
 
-#<!-- chunk: 4.1 RBAC Configuration -->## 4.1 RBAC Configuration
+## 4.1 RBAC Configuration
 
 ```yaml
 # crossplane_rbac.yaml
@@ -491,7 +491,7 @@ rules:
       - delete
 ```
 
-#<!-- chunk: 4.2 Policy Enforcement with OPA -->## 4.2 Policy Enforcement with OPA
+## 4.2 Policy Enforcement with OPA
 
 ```rego
 # crossplane_policy.rego
@@ -533,7 +533,7 @@ deny[msg] {
 
 <!-- chunk: 5. Monitoring and Observability -->## 5. Monitoring and Observability
 
-#<!-- chunk: 5.1 Prometheus Metrics Configuration -->## 5.1 Prometheus Metrics Configuration
+## 5.1 Prometheus Metrics Configuration
 
 ```yaml
 # crossplane_monitoring.yaml
@@ -579,7 +579,7 @@ spec:
       protocol: TCP
 ```
 
-#<!-- chunk: 5.2 Grafana Dashboard -->## 5.2 Grafana Dashboard
+## 5.2 Grafana Dashboard
 
 ```json
 {
@@ -646,7 +646,7 @@ spec:
 
 <!-- chunk: 6. Multi-Cloud Resource Management -->## 6. Multi-Cloud Resource Management
 
-#<!-- chunk: 6.1 Cloud-Specific Configurations -->## 6.1 Cloud-Specific Configurations
+## 6.1 Cloud-Specific Configurations
 
 ```yaml
 # multi_cloud_database.yaml
@@ -683,7 +683,7 @@ spec:
       region: eastus
 ```
 
-#<!-- chunk: 6.2 Hybrid Cloud Networking -->## 6.2 Hybrid Cloud Networking
+## 6.2 Hybrid Cloud Networking
 
 ```yaml
 # hybrid_network.yaml
@@ -739,7 +739,7 @@ spec:
 
 <!-- chunk: 7. Disaster Recovery and Backup -->## 7. Disaster Recovery and Backup
 
-#<!-- chunk: 7.1 Crossplane State Backup -->## 7.1 Crossplane State Backup
+## 7.1 Crossplane State Backup
 
 ```bash
 #!/bin/bash
@@ -793,7 +793,7 @@ done
 echo "Backup completed: $BACKUP_DIR/backup_manifest_$DATE.json"
 ```
 
-#<!-- chunk: 7.2 Cross-Cloud Recovery Strategy -->## 7.2 Cross-Cloud Recovery Strategy
+## 7.2 Cross-Cloud Recovery Strategy
 
 ```yaml
 # disaster_recovery_plan.yaml
@@ -835,7 +835,7 @@ spec:
 
 <!-- chunk: 8. Performance Optimization -->## 8. Performance Optimization
 
-#<!-- chunk: 8.1 Controller Optimization -->## 8.1 Controller Optimization
+## 8.1 Controller Optimization
 
 ```yaml
 # optimized_controller_config.yaml
@@ -871,7 +871,7 @@ spec:
             topologyKey: kubernetes.io/hostname
 ```
 
-#<!-- chunk: 8.2 Caching and Rate Limiting -->## 8.2 Caching and Rate Limiting
+## 8.2 Caching and Rate Limiting
 
 ```yaml
 # caching_config.yaml
@@ -904,7 +904,7 @@ data:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-24-infrastructure-as-code MOC
-- [[domain-08-release-change-management/README|Domain 24: 基础设施即代码 (Infrastructure as Code)]]
+- [[domain-08-release-change-management/README.md|Domain 08: 基础设施即代码 (Infrastructure as Code)]]
 - Domain-24 基础设施即代码 — 开源项目索引
 - Terraform企业级基础设施即代码实践
 - Ansible企业级自动化运维深度实践

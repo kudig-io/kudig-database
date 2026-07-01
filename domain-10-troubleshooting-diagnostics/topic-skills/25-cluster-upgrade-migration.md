@@ -214,6 +214,10 @@ kubectl get nodes --no-headers | awk '
 > - 如果仅单个节点受影响 → P2
 
 **Step T2**: 检查核心组件状态
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查 kube-system 中核心 Pod 状态
 kubectl get pods -n kube-system -o jsonpath='{
@@ -333,6 +337,10 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
 
 **Step D1.5**: 检查证书有效期
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查 API Server 证书
   kubectl get pods -n kube-system -l component=kube-apiserver -o jsonpath='{.items[0].metadata.name}' | xargs -I{} kubectl exec -n kube-system {} -- sh -c "openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout | grep 'Not After'"
@@ -368,6 +376,10 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
 
 **Step D2.2**: 检查 etcd 集群详细状态
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}')
   kubectl exec -n kube-system $ETCD_POD -- sh -c "
@@ -468,11 +480,14 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
 
 ### Phase 3: 主动探测（低风险，可能需审批）
 
-> ⚠️ 以下步骤涉及写入或侵入性操作，L1 模式下需人工确认
-
 **Step D3.1**: 测试 API 兼容性（创建测试资源）
 - **目的**: 验证目标 API 版本是否可用
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 测试 Deployment apps/v1 兼容性
   cat <<EOF | kubectl apply -f -
@@ -510,10 +525,15 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
 **Step D3.2**: 测试节点加入/重新加入集群
 - **目的**: 验证升级后的节点是否可以正常注册
 - **命令**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
-  # 对问题节点执行 kubeadm reset + join（仅限可替换节点）
+  # 对问题节点执行 kubeadm reset + join（仅限可替换节点）  # ⚠️ 清理节点所有 K8s 配置
   # 先在问题节点上执行：
-  # kubeadm reset --force
+  # kubeadm reset --force  # ⚠️ 清理节点所有 K8s 配置
   # kubeadm join <control-plane-endpoint> --token <token> --discovery-token-ca-cert-hash <hash>
   
   # 或者仅重启 kubelet
@@ -531,6 +551,10 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
 **Step D3.3**: 验证 etcd 数据完整性
 - **目的**: 确认 etcd 升级后数据未损坏
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}')
   kubectl exec -n kube-system $ETCD_POD -- sh -c "
@@ -582,6 +606,10 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
   kubectl get pods -n kube-system -l component=kube-apiserver --field-selector status.phase!=Running
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 删除异常的控制平面 Pod（由 static pod 自动重建）
   kubectl delete pod -n kube-system -l component=kube-apiserver --field-selector status.phase!=Running
@@ -607,6 +635,11 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
   kubectl get deployments --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namespace}{"/"}{.metadata.name}{"\t"}{.apiVersion}{"\n"}{end}' | grep -v "apps/v1"
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 获取资源并修改 API 版本后重新应用
   kubectl get deployment <name> -n <namespace> -o yaml | sed 's/apiVersion: apps\/v1beta1/apiVersion: apps\/v1/' | sed 's/apiVersion: extensions\/v1beta1/apiVersion: apps\/v1/' > /tmp/migrated-deployment.yaml
@@ -627,6 +660,10 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
   kubectl get pods -n <namespace> -l app=<label>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 如果迁移失败，从原始备份恢复
   kubectl apply -f /tmp/backup-deployment.yaml
@@ -635,6 +672,10 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
 #### REM-003: 重启 etcd Pod 恢复集群健康
 - **适用根因**: RC-004
 - **前置检查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}')
   kubectl exec -n kube-system $ETCD_POD -- sh -c "
@@ -646,6 +687,11 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
   "
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 逐个重启 etcd Pod（每次等待集群恢复）
   for pod in $(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[*].metadata.name}'); do
@@ -664,6 +710,10 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
   done
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   kubectl get --raw /healthz/etcd
   kubectl exec -n kube-system $(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}') -- sh -c "
@@ -691,15 +741,22 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
   kubectl get pdb --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namespace}{"/"}{.metadata.name}{"\t"}{.spec.minAvailable}{"\n"}{end}'
   ```
 - **执行命令**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
   ```bash
   # 1. 排空节点
   kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data --force
   
   # 2. 在节点上执行（通过 SSH 或节点调试）
-  # kubeadm reset --force
+  # kubeadm reset --force  # ⚠️ 清理节点所有 K8s 配置
   # iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
   # ipvsadm --clear 2>/dev/null || true
-  # rm -rf /etc/cni/net.d/*
+  # rm -rf /etc/cni/net.d/*  # ⚠️ 删除系统/数据文件
   # systemctl restart containerd
   
   # 3. 重新加入集群
@@ -729,6 +786,10 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
   # Cilium 1.14+ 兼容 K8s 1.28-1.32
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 备份当前插件配置
   kubectl get daemonset,deployment,configmap -n kube-system -l k8s-app=calico-node -o yaml > /tmp/calico-backup.yaml
@@ -746,6 +807,10 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
   kubectl run network-test --image=busybox:1.36 -n default --rm -it -- sh -c "ping -c 3 8.8.8.8"
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f /tmp/calico-backup.yaml
   ```
@@ -774,6 +839,10 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
   1. 停止所有 API Server 实例
   2. 停止所有 etcd 实例
   3. 在每个 etcd 节点上执行恢复：
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+
      ```bash
      etcdctl snapshot restore <backup-file> \
        --data-dir=/var/lib/etcd-restored \
@@ -808,6 +877,10 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
 ## 验证确认
 
 ### 7.1 即时验证（修复后 1 分钟内）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # V1: 验证控制平面健康
@@ -1031,20 +1104,22 @@ receivers:
 
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/11-control-plane-failure|SKILL-CP-001 etcd 与控制平面故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/24-namespace-quota-limitrange|SKILL-CONFIG-002 Namespace/Quota/LimitRange 问题]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/19-node-resource-pressure|SKILL-NODE-002 节点资源压力诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/20-networkpolicy-connectivity|SKILL-NET-004 NetworkPolicy 连通性问题]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/21-statefulset-failure|SKILL-WORK-002 StatefulSet 故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/22-daemonset-failure|SKILL-WORK-003 DaemonSet 故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/23-job-cronjob-failure|SKILL-WORK-004 Job/CronJob 故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/34-upgrade-migration-troubleshooting|升级迁移深度排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-upgrade-fta|升级迁移故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/11-control-plane-failure.md|SKILL-CP-001 etcd 与控制平面故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/24-namespace-quota-limitrange.md|SKILL-CONFIG-002 Namespace/Quota/LimitRange 问题]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/19-node-resource-pressure.md|SKILL-NODE-002 节点资源压力诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/20-networkpolicy-connectivity.md|SKILL-NET-004 NetworkPolicy 连通性问题]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/21-statefulset-failure.md|SKILL-WORK-002 StatefulSet 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/22-daemonset-failure.md|SKILL-WORK-003 DaemonSet 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/23-job-cronjob-failure.md|SKILL-WORK-004 Job/CronJob 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/34-upgrade-migration-troubleshooting.md|升级迁移深度排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-upgrade-fta.md|升级迁移故障树分析]]
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/19-node-resource-pressure|19-node-resource-pressure]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/20-networkpolicy-connectivity|20-networkpolicy-connectivity]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/24-namespace-quota-limitrange|24-namespace-quota-limitrange]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/22-daemonset-failure|22-daemonset-failure]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/19-node-resource-pressure.md|19-node-resource-pressure]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/20-networkpolicy-connectivity.md|20-networkpolicy-connectivity]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/24-namespace-quota-limitrange.md|24-namespace-quota-limitrange]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/22-daemonset-failure.md|22-daemonset-failure]]
+
+```

@@ -51,7 +51,7 @@ Strimzi 是在 Kubernetes 上运行 Apache Kafka 的开源项目，通过 Kubern
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -67,23 +67,23 @@ Strimzi 是在 Kubernetes 上运行 Apache Kafka 的开源项目，通过 Kubern
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
-- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]
-- [[concepts/controller-pattern|controller-pattern]]
-- [[concepts/storage-model|storage-model]]
+- [[concepts/controller-pattern.md|controller-pattern]]
+- [[concepts/storage-model.md|storage-model]]
 
 ## Related
 
 - [[bootc]] — bootc
-- [[serverless-workflow]] — [[Serverless Workflow|Serverless Workflow]]
+- [[serverless-workflow]] — Serverless Workflow
 - [[cloudnativepg]] — CloudNativePG
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - 08-kafka-kubernetes-strimzi
 - strimzi
-- [[entities/tremor|[[Tremor|Tremor]]]]
-- [[entities/cncf-infrastructure|[[CNCF 基础设施与混沌工程项目全景|CNCF 基础设施与混沌工程项目全景]]]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/tremor.md|[[Tremor|Tremor]]]]
+- [[entities/cncf-infrastructure.md|[[CNCF 基础设施与混沌工程项目全景|CNCF 基础设施与混沌工程项目全景]]]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

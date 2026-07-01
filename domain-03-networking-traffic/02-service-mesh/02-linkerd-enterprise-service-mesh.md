@@ -76,7 +76,7 @@ Linkerd 的核心差异化优势在于其 Rust 编写的 linkerd-proxy 数据平
 
 本文档从企业级生产环境角度，全面覆盖 Linkerd 的架构设计、高可用部署、流量管理、安全策略、可观测性集成、性能调优和故障排查实践。
 
-#<!-- chunk: Linkerd 架构全景 -->## Linkerd 架构全景
+## Linkerd 架构全景
 
 ```mermaid
 graph TB
@@ -129,7 +129,7 @@ graph TB
 
 <!-- chunk: 核心配置 — 高可用部署 -->## 核心配置 — 高可用部署
 
-#<!-- chunk: 生产级 [[Helm|Helm]] 安装 -->## 生产级 Helm 安装
+## 生产级 Helm 安装
 
 ```yaml
 apiVersion: v1
@@ -142,6 +142,9 @@ metadata:
     linkerd.io/control-plane-ns: linkerd
     pod-security.kubernetes.io/enforce: restricted
 ```
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 linkerd install \
@@ -160,7 +163,7 @@ linkerd install \
 linkerd check
 ```
 
-#<!-- chunk: Linkerd 安装验证输出示例 -->## Linkerd 安装验证输出示例
+## Linkerd 安装验证输出示例
 
 ```bash
 $ linkerd check
@@ -222,7 +225,7 @@ linkerd-version
 Status check results are √
 ```
 
-#<!-- chunk: 控制平面资源配置 -->## 控制平面资源配置
+## 控制平面资源配置
 
 ```yaml
 apiVersion: apps/v1
@@ -276,7 +279,7 @@ spec:
             periodSeconds: 10
 ```
 
-#<!-- chunk: 完整 Helm Values 生产配置 -->## 完整 Helm Values 生产配置
+## 完整 Helm Values 生产配置
 
 ```yaml
 # linkerd-production-values.yaml
@@ -370,7 +373,7 @@ nodeAffinity:
 
 <!-- chunk: 流量管理实战 -->## 流量管理实战
 
-#<!-- chunk: 服务配置与注入 -->## 服务配置与注入
+## 服务配置与注入
 
 ```yaml
 apiVersion: v1
@@ -431,7 +434,7 @@ spec:
       targetPort: 8080
 ```
 
-#<!-- chunk: 流量分割 — 金丝雀发布 -->## 流量分割 — 金丝雀发布
+## 流量分割 — 金丝雀发布
 
 ```yaml
 apiVersion: split.smi-spec.io/v1alpha4
@@ -476,7 +479,7 @@ spec:
       targetPort: 8080
 ```
 
-#<!-- chunk: 重试与超时 — ServiceProfile -->## 重试与超时 — ServiceProfile
+## 重试与超时 — ServiceProfile
 
 ```yaml
 apiVersion: linkerd.io/v1alpha2
@@ -519,7 +522,7 @@ spec:
       timeout: 5s
 ```
 
-#<!-- chunk: 故障注入 -->## 故障注入
+## 故障注入
 
 ```yaml
 apiVersion: policy.linkerd.io/v1alpha1
@@ -541,7 +544,7 @@ spec:
 
 <!-- chunk: 安全策略 — mTLS 与授权 -->## 安全策略 — mTLS 与授权
 
-#<!-- chunk: 自动 mTLS (默认启用) -->## 自动 mTLS (默认启用)
+## 自动 mTLS (默认启用)
 
 Linkerd 安装后自动启用 mTLS，无需任何额外配置。Identity Controller 为每个 Pod 签发基于 SPIFFE 标准的身份证书，证书 TTL 为 24 小时，自动轮换。
 
@@ -551,7 +554,7 @@ linkerd identity deployment/webapp -n production
 linkerd viz stat deployment -n production
 ```
 
-#<!-- chunk: mTLS 状态验证输出示例 -->## mTLS 状态验证输出示例
+## mTLS 状态验证输出示例
 
 ```bash
 $ linkerd viz stat deployment -n production --from deploy/gateway
@@ -571,7 +574,7 @@ webapp pod webapp-7b9f8c6d4f-abc12
   Mesh TLS: STRICT (all connections encrypted)
 ```
 
-#<!-- chunk: 外部 CA 集成 (cert-manager) -->## 外部 CA 集成 (cert-manager)
+## 外部 CA 集成 (cert-manager)
 
 ```yaml
 apiVersion: linkerd.io/v1alpha2
@@ -594,7 +597,7 @@ spec:
     secretName: linkerd-root-ca-secret
 ```
 
-#<!-- chunk: 授权策略 -->## 授权策略
+## 授权策略
 
 ```yaml
 apiVersion: policy.linkerd.io/v1alpha1
@@ -639,7 +642,7 @@ spec:
   mode: STRICT
 ```
 
-#<!-- chunk: 网络策略 -->## 网络策略
+## 网络策略
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -676,7 +679,10 @@ spec:
 
 <!-- chunk: 可观测性 — Prometheus, Grafana, Viz 集成 -->## 可观测性 — Prometheus, Grafana, Viz 集成
 
-#<!-- chunk: Viz 扩展安装 -->## Viz 扩展安装
+## Viz 扩展安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 linkerd viz install | kubectl apply -f -
@@ -684,7 +690,7 @@ linkerd viz check
 linkerd viz dashboard
 ```
 
-#<!-- chunk: Prometheus ServiceMonitor -->## Prometheus ServiceMonitor
+## Prometheus ServiceMonitor
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -724,7 +730,7 @@ spec:
       interval: 15s
 ```
 
-#<!-- chunk: 关键监控指标与告警 -->## 关键监控指标与告警
+## 关键监控指标与告警
 
 ```promql
 sum(rate(response_total{classification="success"}[1m])) by (dst) /
@@ -803,7 +809,7 @@ spec:
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: Proxy 资源优化 -->## Proxy 资源优化
+## Proxy 资源优化
 
 ```yaml
 apiVersion: v1
@@ -822,7 +828,7 @@ data:
         memory: "128Mi"
 ```
 
-#<!-- chunk: 连接池调优 -->## 连接池调优
+## 连接池调优
 
 ```yaml
 apiVersion: linkerd.io/v1alpha2
@@ -844,7 +850,7 @@ spec:
           ttl: 10s
 ```
 
-#<!-- chunk: Linkerd Proxy 注解参数参考 -->## Linkerd Proxy 注解参数参考
+## Linkerd Proxy 注解参数参考
 
 | 注解 | 默认值 | 说明 | 推荐值 |
 |:---|:---|:---|:---|
@@ -864,7 +870,7 @@ spec:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 诊断脚本 -->## 诊断脚本
+## 诊断脚本
 
 ```bash
 #!/bin/bash
@@ -911,7 +917,7 @@ echo "=== 10. 性能分析 ==="
 linkerd viz top deploy/webapp -n production --max-rps 100
 ```
 
-#<!-- chunk: linkerd viz stat 输出示例 -->## linkerd viz stat 输出示例
+## linkerd viz stat 输出示例
 
 ```bash
 $ linkerd viz stat deploy -n production
@@ -938,7 +944,7 @@ req id=0:2 proxy=in  src=10.0.1.8:42156 dst=10.0.2.11:8080 tls=true :method=POST
 req id=0:3 proxy=out src=10.0.2.10:45678 dst=10.0.3.5:8080  tls=true :method=GET :path=/api/products :authority=api-server.production.svc.cluster.local response_code=200 latency=5ms
 ```
 
-#<!-- chunk: 常见问题速查 -->## 常见问题速查
+## 常见问题速查
 
 | 症状 | 可能原因 | 诊断命令 | 解决方案 |
 |:---|:---|:---|:---|
@@ -987,7 +993,7 @@ req id=0:3 proxy=out src=10.0.2.10:45678 dst=10.0.3.5:8080  tls=true :method=GET
 
 <!-- chunk: 多集群生产部署 -->## 多集群生产部署
 
-#<!-- chunk: 多集群架构 -->## 多集群架构
+## 多集群架构
 
 ```yaml
 多集群拓扑:
@@ -1008,7 +1014,12 @@ req id=0:3 proxy=out src=10.0.2.10:45678 dst=10.0.3.5:8080  tls=true :method=GET
     orders-west: Cluster east 访问 Cluster west 的 orders
 ```
 
-#<!-- chunk: 多集群部署命令 -->## 多集群部署命令
+## 多集群部署命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # Cluster East: 安装多集群组件
@@ -1041,7 +1052,7 @@ kubectl exec -n production deploy/test-client --context west -- \
   curl -s http://webapp-east:80/health
 ```
 
-#<!-- chunk: 多集群网络策略 -->## 多集群网络策略
+## 多集群网络策略
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -1072,7 +1083,7 @@ spec:
 
 <!-- chunk: Linkerd 2.18+ 新特性 -->## Linkerd 2.18+ 新特性
 
-#<!-- chunk: Policy API (v1alpha1) -->## Policy API (v1alpha1)
+## Policy API (v1alpha1)
 
 ```yaml
 # MeshTLS 全局策略
@@ -1116,7 +1127,10 @@ spec:
       methods: ["GET"]
 ```
 
-#<!-- chunk: 性能基准测试 -->## 性能基准测试
+## 性能基准测试
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 使用 fortio 进行基准测试
@@ -1134,7 +1148,7 @@ kubectl exec fortio -- fortio load -t 30s -qps 500 http://webapp:80/api/users
 # 开销: P50 +25%, P99 +16% (远低于Istio的+100%/+65%)
 ```
 
-#<!-- chunk: Linkerd vs Istio 性能对比表 -->## Linkerd vs Istio 性能对比表
+## Linkerd vs Istio 性能对比表
 
 | 指标 | Linkerd | Istio (Sidecar) | Istio (Ambient L4) |
 |:---|:---|:---|:---|
@@ -1150,11 +1164,15 @@ kubectl exec fortio -- fortio load -t 30s -qps 500 http://webapp:80/api/users
 
 <!-- chunk: Linkerd 生产环境故障注入测试 -->## Linkerd 生产环境故障注入测试
 
-#<!-- chunk: 渐进式故障注入 -->## 渐进式故障注入
+## 渐进式故障注入
 
 在生产环境中验证服务网格的弹性能力是确保系统可靠性的关键步骤。Linkerd 提供了内置的故障注入功能，允许运维团队在不修改应用代码的情况下模拟服务问题。通过渐进式地增加问题比例（从 0.1% 到 1% 到 5% 到 10%），可以安全地观察系统在问题条件下的行为，验证熔断器、重试和降级策略是否按预期工作。建议在非业务高峰期执行故障注入测试，并准备好快速回滚方案。
 
-#<!-- chunk: 故障注入验证脚本 -->## 故障注入验证脚本
+## 故障注入验证脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 #!/bin/bash
@@ -1228,7 +1246,7 @@ kubectl delete faultinjection webapp-abort-test -n production
 echo "Fault injection test completed successfully"
 ```
 
-#<!-- chunk: 故障注入输出示例 -->## 故障注入输出示例
+## 故障注入输出示例
 
 ```bash
 $ linkerd viz stat deploy -n production --from deploy/gateway
@@ -1248,7 +1266,7 @@ webapp   3/3      97.85%  125.3rps         2ms         5ms         9ms        12
 
 <!-- chunk: Linkerd 自动金丝雀发布 (Flagger 集成) -->## Linkerd 自动金丝雀发布 (Flagger 集成)
 
-#<!-- chunk: Flagger 安装与配置 -->## Flagger 安装与配置
+## Flagger 安装与配置
 
 Flagger 是一个 Kubernetes 自动化金丝雀发布工具，与 Linkerd 原生集成。它通过渐进式流量迁移和自动化指标分析，实现零人工干预的金丝雀发布。Flagger 会自动创建 TrafficSplit 资源，逐步将流量从稳定版本迁移到金丝雀版本，同时监控成功率、延迟和自定义指标。如果在金丝雀期间检测到指标异常（如成功率下降超过阈值），Flagger 会自动回滚到稳定版本。
 
@@ -1300,7 +1318,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
 - Domain-26 服务网格与微服务 — 开源项目索引
 - Istio 企业级服务网格架构与实践
 - Consul Connect 企业级服务网格管理
@@ -1321,4 +1339,4 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]

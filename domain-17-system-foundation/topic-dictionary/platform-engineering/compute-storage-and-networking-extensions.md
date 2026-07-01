@@ -35,7 +35,7 @@ created: "2026-05-23"
 
 ## 概述
 
-[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 提供了多种扩展机制，用于增强集群中节点的能力，或提供连接 Pod 的网络 fabric。这些扩展并非 Kubernetes 核心自带的组件，但能够灵活地支持新硬件、新存储类型以及不同的网络拓扑。
+[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 提供了多种扩展机制，用于增强集群中节点的能力，或提供连接 Pod 的网络 fabric。这些扩展并非 Kubernetes 核心自带的组件，但能够灵活地支持新硬件、新存储类型以及不同的网络拓扑。
 
 ## 核心概念/原理
 
@@ -98,3 +98,9 @@ ls /var/lib/kubelet/device-plugins/
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-group.md|API 组]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]

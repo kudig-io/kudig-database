@@ -65,7 +65,7 @@ created: "2026-05-23"
 
 # 05 - 告警管理策略 (Alerting Management)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/prometheus|prometheus]].io/docs/alerting](https://prometheus.io/docs/alerting/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/prometheus.md|prometheus]].io/docs/alerting](https://prometheus.io/docs/alerting/)
 
 <!-- chunk: 概述 -->
 ## 概述
@@ -470,7 +470,7 @@ receivers:
       send_resolved: true
       color: '{{ if eq .Status "firing" }}danger{{ else }}good{{ end }}'
     pagerduty_configs:
-    - service_key: 'BUSINESS_SERVICE_KEY'
+    - routing_key: 'BUSINESS_SERVICE_KEY'
       send_resolved: true
 ```
 
@@ -896,8 +896,8 @@ global_alert_management:
 ## Obsidian 相关文档
 
 - observability/MOC.md|domain-06-observability MOC]]
-- [[domain-06-observability/README|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-8 可观测性 — 开源项目索引]]
+- [[domain-06-observability/README.md|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
 - 03 - 日志收集架构详解 (Logging Architecture)
@@ -915,8 +915,8 @@ global_alert_management:
 - 06-monitoring-alerting-practice
 - 07-monitoring-dashboards
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

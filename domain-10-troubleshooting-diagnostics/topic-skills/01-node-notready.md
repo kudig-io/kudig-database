@@ -92,8 +92,6 @@ Node NotReady 是 [[Kubernetes|Kubernetes]] 集群中**爆炸半径最大**的�
   - `crictl` >= 1.28（如需直接操作容器运行时）
 - **监控系统**: Prometheus + kube-state-metrics >= v2.10（用于 trigger_metrics 匹配）
 
-> ⚠️ **重要**: 本 Skill 覆盖工作节点和控制平面节点的 NotReady 场景。控制平面节点 NotReady 属于 P0 事件，需立即升级。
-
 ---
 
 ## 2. 症状识别
@@ -525,9 +523,6 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 
 ### Phase 3: 主动探测（低风险，可能需审批）
 
-> ⚠️ 以下步骤涉及主动网络请求或轻量修改操作。在 L1-advisory 模式下，Agent 应**提出建议并等待人工确认**后执行。
-> **预计耗时**: 2-5 分钟
-
 **Step D3.1**: 从节点测试 apiserver 健康状态
 - **命令**:
   ```bash
@@ -644,6 +639,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 
 **Step D4.3**: 控制平面健康检查
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查 etcd 集群健康状态
   kubectl get pods -n kube-system -l component=etcd
@@ -734,6 +733,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   # 预期: STATUS 列显示 Ready（不包含 SchedulingDisabled）
   ```
 - **回滚命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+
   ```bash
   kubectl cordon <node-name>
   ```
@@ -795,6 +798,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   kubectl get pods --field-selector spec.nodeName=<node-name> --all-namespaces -o wide > /tmp/pods-before-restart.txt
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   ssh <node-ip> "systemctl restart kubelet"
   ```
@@ -816,6 +823,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   # 预期: Ready=True, 所有压力条件为 False
   ```
 - **回滚命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # kubelet 重启为幂等操作，无需回滚
   # 如果重启后问题恶化，可再次停止 kubelet 并升级
@@ -840,6 +851,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   # 如果有 StatefulSet Pod，需要额外谨慎
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   ssh <node-ip> "systemctl restart containerd"
 
@@ -893,6 +908,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   #   pid.available: -1
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 备份现有配置
   ssh <node-ip> "cp /var/lib/kubelet/config.yaml /var/lib/kubelet/config.yaml.bak"
@@ -914,6 +933,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   # 预期: 压力条件恢复为 False
   ```
 - **回滚命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 恢复原始配置
   ssh <node-ip> "cp /var/lib/kubelet/config.yaml.bak /var/lib/kubelet/config.yaml && systemctl restart kubelet"
@@ -933,6 +956,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
      # 确认其他节点有足够 CPU 和内存余量
      ```
   2. **排空节点**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
      ```bash
      kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data --force --grace-period=60 --timeout=300s
      ```
@@ -972,6 +999,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 - **操作步骤**:
   1. **排空节点**（同 REM-006 步骤 1-3）
   2. **从集群中删除节点对象**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      kubectl delete node <node-name>
      ```
@@ -1011,6 +1042,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
      kubectl certificate approve <csr-name>
      ```
   3. **如果无 CSR 或证书已过期，需要重新 bootstrap**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
      ```bash
      # 在节点上删除旧证书
      ssh <node-ip> "rm -f /var/lib/kubelet/pki/kubelet-client-current.pem"
@@ -1034,6 +1069,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   - 确认 CSR 请求来源确实是目标节点（检查 CSR 的 requestor 和 subject）
   - 确认 bootstrap token 的有效期和权限范围
 - **回滚方案**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 如果手动轮转导致问题恶化，恢复旧证书（如果有备份）
   ssh <node-ip> "cp /var/lib/kubelet/pki/kubelet-client-current.pem.bak /var/lib/kubelet/pki/kubelet-client-current.pem && systemctl restart kubelet"
@@ -1080,6 +1119,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
      ssh <node-ip> "ls -la /var/lib/kubelet/ && ls -la /var/lib/containerd/"
      ```
   4. **节点重启（如果节点未自动重启）**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
      ```bash
      # 先排空节点工作负载
      kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data --force --grace-period=60 --timeout=300s
@@ -1110,6 +1153,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   - kdump 日志已备份用于后续分析
   - **如果硬件检查失败**：不要将节点重新投入使用，转入 REM-010（硬件更换）流程
 - **回滚方案**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+
   ```bash
   # 如果重启后节点仍不稳定，标记节点为不可调度
   kubectl cordon <node-name>
@@ -1499,4 +1546,6 @@ kubectl get pods --field-selector spec.nodeName=<node-name> --all-namespaces
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+
+```

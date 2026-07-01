@@ -37,7 +37,7 @@ created: "2026-05-23"
 
 ## 概述
 
-随着 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 集群规模和复杂度的增长，云资源浪费已成为企业 IT 支出的主要痛点。研究表明，生产集群普遍存在 **40%–60% 的超配（Overprovisioning）**，开发测试环境全天候运行进一步加剧了成本问题。**FinOps** 是将财务管理与云原生运营相结合的实践，通过成本可视化、资源右调优（Right-sizing）、自动伸缩和 spot 实例策略，帮助企业在 2026 年将 Kubernetes 成本降低 30%–40%。
+随着 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群规模和复杂度的增长，云资源浪费已成为企业 IT 支出的主要痛点。研究表明，生产集群普遍存在 **40%–60% 的超配（Overprovisioning）**，开发测试环境全天候运行进一步加剧了成本问题。**FinOps** 是将财务管理与云原生运营相结合的实践，通过成本可视化、资源右调优（Right-sizing）、自动伸缩和 spot 实例策略，帮助企业在 2026 年将 Kubernetes 成本降低 30%–40%。
 
 ## 核心概念/原理
 
@@ -186,3 +186,13 @@ kubectl get nodeclaim -o custom-columns=NAME:.metadata.name,TYPE:.spec.requireme
 - [Kubecost Documentation](https://docs.kubecost.com/)
 - [kube-green - Sustainable Kubernetes](https://kube-green.dev/)
 - 相关主题：[Horizontal Pod Autoscaling](../workloads/horizontal-pod-autoscaling.md) · [Vertical Pod Autoscaling](../workloads/vertical-pod-autoscaling.md) · [Karpenter Autoscaling](../scheduling/karpenter-autoscaling.md) · [Spot and Preemptible Workloads](../workloads/spot-and-preemptible-workloads.md)
+
+## 参考链接
+
+- [Finops And Cost Optimization]()
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
+- [[domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery.md|备份与灾难恢复（Backup & Disaster Recovery）]]
+- [[domain-17-system-foundation/topic-dictionary/operations/capacity-planning-forecasting.md|13 - 容量规划与资源预测]]

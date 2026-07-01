@@ -238,6 +238,9 @@ Reconcile 循环详解:
 
 ### 排查决策树
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 CRD/Operator 问题
         │
@@ -446,6 +449,9 @@ kubectl logs -n <webhook-namespace> <webhook-pod>
 
 **解决步骤**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 步骤 1: 确认 CRD 是否存在
 kubectl get crd | grep <expected-crd-name>
@@ -484,6 +490,9 @@ spec:
 
 **解决步骤**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 步骤 1: 分析拒绝原因
 # 错误信息通常会说明拒绝原因
@@ -506,6 +515,10 @@ kubectl apply -f <fixed-cr.yaml>
 
 **临时禁用 Webhook（紧急情况）**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # ⚠️ 警告：这会跳过所有验证，仅在紧急情况使用
 
@@ -524,6 +537,10 @@ kubectl delete validatingwebhookconfiguration <name>
 **问题现象**：CR 状态不更新，Operator 日志显示 reconcile 错误。
 
 **解决步骤**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 步骤 1: 查看 Operator 日志定位错误
@@ -558,6 +575,9 @@ kubectl rollout restart deployment <operator-deployment> -n <operator-namespace>
 **问题现象**：Operator 日志显示 `forbidden` 或 `unauthorized` 错误。
 
 **解决步骤**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 步骤 1: 识别缺失的权限
@@ -600,6 +620,9 @@ rules:
   verbs: ["create", "patch"]
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 步骤 4: 重启 Operator 使新权限生效
 kubectl rollout restart deployment <operator-deployment> -n <operator-namespace>
@@ -610,6 +633,9 @@ kubectl rollout restart deployment <operator-deployment> -n <operator-namespace>
 **问题现象**：CR 一直处于 `Terminating` 状态无法删除。
 
 **解决步骤**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 步骤 1: 检查 Finalizers
@@ -645,6 +671,9 @@ kubectl patch <resource-type> <name> -n <namespace> --type='json' \
 
 **解决步骤**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 步骤 1: 检查 Pod 状态和事件
 kubectl describe pod <operator-pod> -n <operator-namespace>
@@ -679,6 +708,9 @@ kubectl rollout restart deployment <operator-deployment> -n <operator-ns>
 **问题现象**：CRD 版本升级后，旧版本 CR 不兼容。
 
 **解决步骤**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 检查当前存储版本
@@ -748,6 +780,10 @@ spec:
 **问题现象**：删除 namespace 时卡在 Terminating 状态，因为包含有 Finalizer 的 CR。
 
 **解决步骤**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 步骤 1: 找出阻塞删除的资源
@@ -863,14 +899,16 @@ spec:
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm|helm]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting|03-helm-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/04-ha-disaster-recovery-troubleshooting|04-ha-disaster-recovery-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/06-kustomize-troubleshooting|06-kustomize-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/01-cluster-maintenance-troubleshooting|01-cluster-maintenance-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|04-ha-disaster-recovery-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/06-kustomize-troubleshooting.md|06-kustomize-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|01-cluster-maintenance-troubleshooting]]
+
+```

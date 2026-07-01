@@ -135,14 +135,14 @@ created: "2026-05-23"
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/Kubernetes Diagnostic Skills Overview|诊断技能总览]]
-- [[skills/troubleshoot-pod-issues|Pod 故障排查]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## Related
 
-- [[skills/skill-assets-escalation-template|skill-assets-escalation-template]] — Escalation Template
-- [[skills/ts-cluster-operations|ts-cluster-operations]] — 集群运维故障排查
-- [[skills/ts-storage|ts-storage]] — 存储故障排查
-- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
+- [[skills/skill-assets-escalation-template.md|skill-assets-escalation-template]] — Escalation Template
+- [[skills/ts-cluster-operations.md|ts-cluster-operations]] — 集群运维故障排查
+- [[skills/ts-storage.md|ts-storage]] — 存储故障排查
+- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

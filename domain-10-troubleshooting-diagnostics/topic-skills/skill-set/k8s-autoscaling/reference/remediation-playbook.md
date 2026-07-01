@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-autoscaling"
 created: "2026-05-22"
 updated: "2026-05-22"
+last_updated: 2026-05-22
 tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
@@ -45,6 +46,12 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl logs -n kube-system -l k8s-app=metrics-server --tail=50
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 方案 A: 如果 metrics-server 被删除，重新安装
   kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
@@ -71,6 +78,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 检查 metrics 类型、target 值、scaleTargetRef
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 修正 scaleTargetRef
   kubectl patch hpa <name> -n <namespace> --type='json' -p='
@@ -102,6 +113,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 检查节点池最大/最小节点数
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 增加 ResourceQuota
   kubectl patch resourcequota <name> -n <namespace> --type='json' -p='
@@ -127,6 +142,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl logs -n kube-system -l app=vpa-admission-controller --tail=30
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 重启 VPA 组件
   kubectl rollout restart deployment vpa-admission-controller -n kube-system
@@ -148,6 +167,11 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl get configmap cluster-autoscaler-status -n kube-system -o yaml
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 方案 A: 修复云提供商权限
   # 确认 Cluster Autoscaler 使用的 ServiceAccount 有正确的云权限

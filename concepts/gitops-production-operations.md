@@ -10,11 +10,12 @@ tags:
   - k8s
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # GitOps 与生产运维
 
-> 相关领域：[[domain-11-production-operations/index]] | [[concepts/capacity-planning-cost-optimization]]
+> 相关领域：[[domain-19-landscape-references/98-merged-indexes/index.md|index]] | [[concepts/capacity-planning-cost-optimization.md|capacity planning cost optimization]]
 
 ---
 
@@ -273,6 +274,9 @@ krr simple --prometheus-url http://prometheus:9090 -n default --format table
 
 CNCF 沙箱项目，Kubernetes 成本分配与分析。
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 部署 OpenCost
 helm install opencost opencost/opencost \
@@ -472,6 +476,6 @@ GitOps 已从"声明式部署"演进为完整的生产运维体系：
 
 ## Related
 
-- [[concepts/progressive-delivery-strategies]] — 渐进式交付策略
-- [[concepts/platform-engineering-idp]] — 平台工程与 IDP
-- [[concepts/k8s-security-compliance]] — K8S 安全与合规
+- [[concepts/progressive-delivery-strategies.md|progressive delivery strategies]] — 渐进式交付策略
+- [[concepts/platform-engineering-idp.md|platform engineering idp]] — 平台工程与 IDP
+- [[concepts/k8s-security-compliance.md|k8s security compliance]] — K8S 安全与合规

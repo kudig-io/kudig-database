@@ -91,8 +91,6 @@ created: "2026-05-23"
 - **工具要求**: kubectl (v1.28+), metrics-server, jq（可选）
 - **云厂商 CLI**: 阿里云 CLI (aliyun) / AWS CLI (aws) / GCP CLI (gcloud)（节点池操作时需要）
 
-> ⚠️ **重要**: HPA/VPA 不应同时配置管理同一资源的相同指标。VPA 在 Auto/Recreate 模式下会重启 Pod，生产环境需谨慎使用。
-
 ---
 
 ## 2. 症状识别
@@ -679,6 +677,10 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   # 预期: requests 字段为空或缺失
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 使用 kubectl patch 添加 resources.requests
   kubectl patch deploy <deployment-name> -n <namespace> --type=json -p='[
@@ -711,6 +713,10 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   # 预期: TARGETS 列显示实际百分比而非 unknown
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deploy/<deployment-name> -n <namespace>
   ```
@@ -724,6 +730,11 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   cat /tmp/hpa-backup.yaml
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 示例: 修正指标类型从 Value 到 AverageValue（根据实际情况调整）
   kubectl patch hpa <hpa-name> -n <namespace> --type=json -p='[
@@ -748,6 +759,10 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   # 预期: Conditions 中 ScalingActive=True, AbleToScale=True
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f /tmp/hpa-backup.yaml
   ```
@@ -760,6 +775,10 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   kubectl get hpa <hpa-name> -n <namespace> -o jsonpath='{.spec.behavior}' | jq .
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 调整 scaleUp 的 stabilizationWindowSeconds 以加快扩容响应
   kubectl patch hpa <hpa-name> -n <namespace> --type=merge -p='{
@@ -806,6 +825,10 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   kubectl get hpa <hpa-name> -n <namespace> -w
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 恢复默认 behavior
   kubectl patch hpa <hpa-name> -n <namespace> --type=json -p='[{"op": "remove", "path": "/spec/behavior"}]'
@@ -818,6 +841,10 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   kubectl get hpa <hpa-name> -n <namespace> -o yaml > /tmp/hpa-behavior-backup.yaml
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 配置合理的扩缩容策略
   kubectl apply -f - <<EOF
@@ -866,6 +893,10 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   # 预期: behavior 已更新
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f /tmp/hpa-behavior-backup.yaml
   ```
@@ -886,6 +917,12 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   kubectl logs -n kube-system -l k8s-app=metrics-server --tail=20
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 如果 Metrics Server 未安装，使用官方 manifest 安装
   kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
@@ -917,6 +954,11 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   # 预期: TARGETS 列不再显示 unknown
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 如果新部署出问题，删除 Metrics Server
   kubectl delete -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
@@ -939,6 +981,11 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   kubectl get cm -n custom-metrics adapter-config -o yaml 2>/dev/null
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 检查并修复 Prometheus Adapter 配置
   # 示例: 确保配置中包含需要的指标规则
@@ -958,6 +1005,10 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/<namespace>/pods/*/http_requests_total"
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl rollout undo deploy/prometheus-adapter -n custom-metrics
   ```
@@ -976,6 +1027,11 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   kubectl top nodes
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   # 移除 scale-down-disabled annotation
   kubectl annotate node <node-name> cluster-autoscaler.kubernetes.io/scale-down-disabled-
@@ -995,6 +1051,10 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   kubectl logs -n kube-system deploy/cluster-autoscaler --tail=100 | grep <node-name>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   # 重新添加 annotation 阻止缩容
   kubectl annotate node <node-name> cluster-autoscaler.kubernetes.io/scale-down-disabled=true
@@ -1010,6 +1070,10 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   kubectl describe scaledobject <name> -n <namespace>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 示例: 修复 Prometheus 触发器配置
   kubectl apply -f - <<EOF
@@ -1045,6 +1109,10 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   # 预期: HPA 已创建且 targets 正常
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f /tmp/scaledobject-backup.yaml
   ```
@@ -1118,10 +1186,19 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
        ```
      - **方案 B**: 使用 KEDA + VPA（KEDA 不直接与 VPA 冲突）
      - **方案 C**: 禁用 VPA Auto 模式，仅使用推荐值
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
        ```bash
        kubectl patch vpa <vpa-name> -n <namespace> --type=merge -p='{"spec":{"updatePolicy":{"updateMode":"Off"}}}'
        ```
   3. **应用新配置**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      # 先删除冲突的配置，再应用新配置
      kubectl delete hpa <hpa-name> -n <namespace>  # 如果要改为 KEDA
@@ -1137,6 +1214,10 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
   - 保留原始配置备份
   - 逐步切换，观察行为
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f /tmp/original-hpa.yaml
   kubectl apply -f /tmp/original-vpa.yaml
@@ -1163,6 +1244,11 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
      kubectl get secret -n kube-system | grep autoscaler
      ```
   3. **更新或重建 CA**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      # 使用最新版本的 CA
      # 参考云厂商文档获取最新 manifest
@@ -1182,6 +1268,10 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
      # 预期: 无认证错误，能正常检测和处理 Pending Pod
      ```
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f /tmp/ca-deploy-backup.yaml
   ```
@@ -1420,4 +1510,6 @@ kubectl get scaledobject -A
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+```

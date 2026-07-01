@@ -127,7 +127,7 @@ created: "2026-05-23"
   - 日志包含 `connection refused` 或 `dial tcp <apiserver-ip>:6443: connect: connection refused` → 网络不通或 apiserver 不可达（RC-006）
   - 日志包含 `x509: certificate has expired` 或 `certificate signed by unknown authority` → 证书问题（RC-007），关联 SKILL-SEC-001
   - 日志包含 `PLEG is not healthy` → PLEG 不健康（RC-008），继续 D2.6
-  - 日志包含 `[[Container Runtime|container runtime]] is not running` 或 `runtime connect using default endpoints` → 容器运行时问题（RC-002）
+  - 日志包含 `container runtime is not running` 或 `runtime connect using default endpoints` → 容器运行时问题（RC-002）
   - 日志包含 `failed to garbage collect` + 磁盘相关错误 → 磁盘空间不足（RC-003）
   - 日志包含 `OOM` 或 `oom_kill` → 内存压力（RC-004）
   - 日志包含 `too many open files` 或 `no space left on device` → 资源耗尽（RC-003 或 RC-005）
@@ -155,14 +155,14 @@ created: "2026-05-23"
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/Kubernetes Diagnostic Skills Overview|诊断技能总览]]
-- [[skills/troubleshoot-pod-issues|Pod 故障排查]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## Related
 
-- [[skills/skill-k8s-node-notready-SKILL|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
-- [[entities/container-runtime|container-runtime]] — Container Runtime
-- [[entities/kubelet|kubelet]] — kubelet
+- [[skills/skill-k8s-node-notready-SKILL.md|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
+- [[entities/container-runtime.md|container-runtime]] — Container Runtime
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

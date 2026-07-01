@@ -127,7 +127,7 @@ k8s_versions:
 
 <!-- chunk: 1. 背景与演进 -->## 1. 背景与演进
 
-#<!-- chunk: 1.1 NGINX Ingress Controller 退役事件 -->## 1.1 NGINX Ingress Controller 退役事件
+## 1.1 NGINX Ingress Controller 退役事件
 
 2026 年 3 月，Kubernetes 社区与 NGINX 官方联合宣布 **ingress-nginx**（`kubernetes/ingress-nginx`）进入维护终止（End-of-Life）阶段，这标志着 Kubernetes 流量管理领域长达近十年的"Ingress 时代"正式落幕。
 
@@ -141,7 +141,7 @@ k8s_versions:
 | 可扩展性有限 | 缺乏标准化的策略（Policy）附加机制，无法优雅支持认证、限流、超时等横切关注点 |
 | 多租户支持薄弱 | 不同团队共享同一 Ingress 资源，路由冲突风险高，隔离性差 |
 
-#<!-- chunk: 1.2 Ingress API 的历史局限 -->## 1.2 Ingress API 的历史局限
+## 1.2 Ingress API 的历史局限
 
 Kubernetes Ingress API 自 2015 年引入以来，始终停留在 `networking.k8s.io/v1` 阶段，从未进入 v2 迭代。其设计之初仅考虑了最基础的 HTTP 虚拟主机路由场景，导致：
 
@@ -150,7 +150,7 @@ Kubernetes Ingress API 自 2015 年引入以来，始终停留在 `networking.k8
 - **调试困难**：路由逻辑隐藏在注解字符串中，无法通过 `kubectl` 直接查询路由状态
 - **无状态反馈**：Ingress 对象没有标准化的 `.status` 条件（Conditions），控制器实现差异巨大
 
-#<!-- chunk: 1.3 Gateway API 版本演进时间线 -->## 1.3 Gateway API 版本演进时间线
+## 1.3 Gateway API 版本演进时间线
 
 ```
 Gateway API 演进历程
@@ -189,7 +189,7 @@ Gateway API 演进历程
 
 <!-- chunk: 2. Gateway API 架构设计 -->## 2. Gateway API 架构设计
 
-#<!-- chunk: 2.1 三层角色分离模型 -->## 2.1 三层角色分离模型
+## 2.1 三层角色分离模型
 
 Gateway API 最核心的设计哲学是**关注点分离（Separation of Concerns）**，将流量管理的责任分解为三个独立角色层次：
 
@@ -221,7 +221,7 @@ Gateway API 最核心的设计哲学是**关注点分离（Separation of Concern
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 2.2 核心资源关系图 -->## 2.2 核心资源关系图
+## 2.2 核心资源关系图
 
 ```mermaid
 graph TB
@@ -276,7 +276,7 @@ graph TB
     style TCR1 fill:#e0f2f1,stroke:#00796b
 ```
 
-#<!-- chunk: 2.3 Gateway API vs Ingress 对比 -->## 2.3 Gateway API vs Ingress 对比
+## 2.3 Gateway API vs Ingress 对比
 
 | 对比维度 | Ingress API | Gateway API |
 |---------|------------|------------|
@@ -295,7 +295,7 @@ graph TB
 
 <!-- chunk: 3. 核心资源配置详解 -->## 3. 核心资源配置详解
 
-#<!-- chunk: 3.1 GatewayClass — 定义实现类型 -->## 3.1 GatewayClass — 定义实现类型
+## 3.1 GatewayClass — 定义实现类型
 
 GatewayClass 是集群范围（Cluster-scoped）的资源，由基础设施提供商创建，描述可用的 Gateway 实现类型：
 
@@ -361,7 +361,7 @@ spec:
         port: 4317
 ```
 
-#<!-- chunk: 3.2 Gateway — 声明监听器与 TLS 配置 -->## 3.2 Gateway — 声明监听器与 TLS 配置
+## 3.2 Gateway — 声明监听器与 TLS 配置
 
 Gateway 资源由集群运维团队管理，定义实际的网络监听端点：
 
@@ -480,7 +480,7 @@ status:
       reason: Programmed
 ```
 
-#<!-- chunk: 3.3 HTTPRoute — HTTP 路由配置精讲 -->## 3.3 HTTPRoute — HTTP 路由配置精讲
+## 3.3 HTTPRoute — HTTP 路由配置精讲
 
 HTTPRoute 是 Gateway API 中最常用的资源，支持丰富的匹配条件和流量控制：
 
@@ -635,7 +635,7 @@ status:
           status: "True"
 ```
 
-#<!-- chunk: 3.4 GRPCRoute — gRPC 服务路由 -->## 3.4 GRPCRoute — gRPC 服务路由
+## 3.4 GRPCRoute — gRPC 服务路由
 
 ```yaml
 # grpcroute-example.yaml
@@ -695,7 +695,7 @@ spec:
           port: 50053
 ```
 
-#<!-- chunk: 3.5 TLSRoute 与 TCPRoute -->## 3.5 TLSRoute 与 TCPRoute
+## 3.5 TLSRoute 与 TCPRoute
 
 ```yaml
 # tlsroute-tcproute.yaml
@@ -739,7 +739,7 @@ spec:
 
 <!-- chunk: 4. 高级流量管理 -->## 4. 高级流量管理
 
-#<!-- chunk: 4.1 CORS 策略配置 -->## 4.1 CORS 策略配置
+## 4.1 CORS 策略配置
 
 Gateway API 通过 Policy Attachment 框架支持 CORS 策略，不同实现器的具体 CRD 有所不同，以 Envoy Gateway 为例：
 
@@ -779,7 +779,7 @@ spec:
     allowCredentials: true
 ```
 
-#<!-- chunk: 4.2 重试策略与超时配置 -->## 4.2 重试策略与超时配置
+## 4.2 重试策略与超时配置
 
 ```yaml
 # retry-timeout-policy.yaml
@@ -827,7 +827,7 @@ spec:
     maxParallelRetries: 64
 ```
 
-#<!-- chunk: 4.3 限流策略（RateLimitPolicy） -->## 4.3 限流策略（RateLimitPolicy）
+## 4.3 限流策略（RateLimitPolicy）
 
 ```yaml
 # ratelimit-policy.yaml
@@ -871,7 +871,7 @@ spec:
             unit: Minute
 ```
 
-#<!-- chunk: 4.4 流量镜像（Traffic Mirroring） -->## 4.4 流量镜像（Traffic Mirroring）
+## 4.4 流量镜像（Traffic Mirroring）
 
 流量镜像允许将生产流量的副本发送到影子服务，用于测试新版本而不影响用户：
 
@@ -909,7 +909,7 @@ spec:
           weight: 100
 ```
 
-#<!-- chunk: 4.5 A/B 测试与金丝雀发布 -->## 4.5 A/B 测试与金丝雀发布
+## 4.5 A/B 测试与金丝雀发布
 
 Gateway API 原生支持基于权重的流量分割，结合 Header 匹配可实现精细化的 A/B 测试：
 
@@ -983,6 +983,10 @@ spec:
 
 **金丝雀发布权重调整脚本：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # canary-weight-updater.sh
@@ -1034,7 +1038,7 @@ echo "🎉 Canary rollout completed! 100% traffic on new version."
 
 <!-- chunk: 5. 多 Gateway 合并与跨命名空间路由 -->## 5. 多 Gateway 合并与跨命名空间路由
 
-#<!-- chunk: 5.1 跨命名空间路由绑定 -->## 5.1 跨命名空间路由绑定
+## 5.1 跨命名空间路由绑定
 
 在多租户 Kubernetes 平台中，应用团队的路由资源（HTTPRoute）通常位于应用命名空间，而 Gateway 位于基础设施命名空间。Gateway API 通过 **ReferenceGrant** 实现安全的跨命名空间资源引用授权。
 
@@ -1054,7 +1058,7 @@ app-namespace (team-alpha)          infra-namespace (infra-gateways)
             授权 team-alpha 中的 HTTPRoute 引用此 Gateway
 ```
 
-#<!-- chunk: 5.2 ReferenceGrant 配置 -->## 5.2 ReferenceGrant 配置
+## 5.2 ReferenceGrant 配置
 
 ```yaml
 # reference-grant.yaml
@@ -1103,7 +1107,7 @@ spec:
       kind: Gateway
 ```
 
-#<!-- chunk: 5.3 多团队共享 Gateway 模式 -->## 5.3 多团队共享 Gateway 模式
+## 5.3 多团队共享 Gateway 模式
 
 ```yaml
 # 平台团队创建共享 Gateway
@@ -1164,7 +1168,10 @@ spec:
           port: 8080
 ```
 
-#<!-- chunk: 5.4 命名空间标签管理 -->## 5.4 命名空间标签管理
+## 5.4 命名空间标签管理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 为需要访问共享 Gateway 的命名空间添加标签
@@ -1185,7 +1192,7 @@ kubectl describe httproute team-alpha-app -n team-alpha | grep -A 10 "Status:"
 
 <!-- chunk: 6. 从 NGINX Ingress 迁移指南 -->## 6. 从 NGINX Ingress 迁移指南
 
-#<!-- chunk: 6.1 迁移前评估检查清单 -->## 6.1 迁移前评估检查清单
+## 6.1 迁移前评估检查清单
 
 在开始迁移之前，需要全面评估现有 NGINX Ingress 的使用情况：
 
@@ -1232,7 +1239,7 @@ kubectl get ingress --all-namespaces -o json | \
 | cert-manager 兼容版本 | `kubectl get deploy -n cert-manager` | Running |
 | 测试命名空间已准备 | `kubectl get ns ingress-migration-test` | Active |
 
-#<!-- chunk: 6.2 NGINX 注解到 HTTPRoute 映射表 -->## 6.2 NGINX 注解到 HTTPRoute 映射表
+## 6.2 NGINX 注解到 HTTPRoute 映射表
 
 | NGINX Ingress 注解 | HTTPRoute 等效配置 | 说明 |
 |-------------------|------------------|------|
@@ -1251,9 +1258,12 @@ kubectl get ingress --all-namespaces -o json | \
 | `nginx.ingress.kubernetes.io/force-ssl-redirect` | HTTPRoute 重定向规则 | 强制 HTTPS |
 | `nginx.ingress.kubernetes.io/use-regex: "true"` | HTTPRoute `RegularExpression` 类型匹配 | 正则路径 |
 
-#<!-- chunk: 6.3 ingress2gateway 工具使用 -->## 6.3 ingress2gateway 工具使用
+## 6.3 ingress2gateway 工具使用
 
 Kubernetes 社区提供了官方迁移工具 `ingress2gateway`，可自动将 Ingress 资源转换为 Gateway API 配置：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 ingress2gateway
@@ -1291,7 +1301,7 @@ ingress2gateway print \
 - 转换后的 YAML 需仔细审查，特别是 TLS 配置和认证相关逻辑
 - `nginx.ingress.kubernetes.io/configuration-snippet` 无法直接转换，需改用实现器的 Policy API
 
-#<!-- chunk: 6.4 蓝绿迁移策略 -->## 6.4 蓝绿迁移策略
+## 6.4 蓝绿迁移策略
 
 推荐采用**蓝绿（Blue-Green）并行运行策略**，降低迁移风险：
 
@@ -1353,7 +1363,7 @@ spec:
 
 <!-- chunk: 7. 主流实现器横向对比 -->## 7. 主流实现器横向对比
 
-#<!-- chunk: 7.1 五大实现器概览 -->## 7.1 五大实现器概览
+## 7.1 五大实现器概览
 
 | 实现器 | 维护方 | 底层代理 | 定位 | 成熟度 |
 |-------|-------|---------|-----|-------|
@@ -1363,7 +1373,7 @@ spec:
 | **NGINX Gateway Fabric** | F5 / NGINX | NGINX | 传统 NGINX 用户迁移路径 | GA |
 | **kgateway (HAProxy)** | HAProxy Technologies | HAProxy | 高性能金融级场景 | GA |
 
-#<!-- chunk: 7.2 功能支持矩阵 -->## 7.2 功能支持矩阵
+## 7.2 功能支持矩阵
 
 | 功能特性 | Cilium | Istio | Envoy GW | NGINX GF | kgateway |
 |---------|--------|-------|---------|---------|---------|
@@ -1385,7 +1395,7 @@ spec:
 | **Prometheus 指标** | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **OpenTelemetry** | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-#<!-- chunk: 7.3 性能基准对比 -->## 7.3 性能基准对比
+## 7.3 性能基准对比
 
 > **测试环境**: 8 vCPU / 32GB RAM 节点，HTTP/1.1，1KB 响应体，1000 并发连接
 
@@ -1397,9 +1407,7 @@ spec:
 | **NGINX Gateway Fabric** | 1.0ms | 3.8ms | 140,000 | 0.8 core | 640MB |
 | **kgateway** | 0.9ms | 3.5ms | 160,000 | 0.7 core | 580MB |
 
-> ⚠️ 注：以上数据为示意性对比，实际性能受工作负载特征、配置复杂度、TLS 算法等因素影响显著。建议在目标环境中进行针对性基准测试。
-
-#<!-- chunk: 7.4 选型决策树 -->## 7.4 选型决策树
+## 7.4 选型决策树
 
 ```
 你的主要诉求是什么？
@@ -1427,7 +1435,7 @@ spec:
 
 <!-- chunk: 8. 最佳实践检查清单 -->## 8. 最佳实践检查清单
 
-#<!-- chunk: 8.1 cert-manager 与 Gateway API 集成 -->## 8.1 cert-manager 与 Gateway API 集成
+## 8.1 cert-manager 与 Gateway API 集成
 
 Gateway API 与 cert-manager 的集成通过 `Certificate` 资源或 `Issuer` 注解实现：
 
@@ -1502,7 +1510,7 @@ spec:
                 kind: Gateway
 ```
 
-#<!-- chunk: 8.2 生产部署检查清单 -->## 8.2 生产部署检查清单
+## 8.2 生产部署检查清单
 
 ```yaml
 # production-checklist.yaml
@@ -1624,7 +1632,7 @@ productionChecklist:
         expected: "empty (所有 Route 均有 team 标签)"
 ```
 
-#<!-- chunk: 8.3 监控与告警配置 -->## 8.3 监控与告警配置
+## 8.3 监控与告警配置
 
 ```yaml
 # gateway-api-alerts.yaml
@@ -1696,7 +1704,7 @@ spec:
 
 <!-- chunk: 9. 未来方向 -->## 9. 未来方向
 
-#<!-- chunk: 9.1 GAMMA 倡议 — 服务网格原生路由 -->## 9.1 GAMMA 倡议 — 服务网格原生路由
+## 9.1 GAMMA 倡议 — 服务网格原生路由
 
 **GAMMA（Gateway API for Mesh Management and Administration）** 是 Gateway API 最重要的扩展方向，旨在将 Gateway API 的路由语义延伸到服务网格（东西向流量）领域，统一 Ingress（南北向）与 Mesh（东西向）的流量管理 API。
 
@@ -1767,7 +1775,7 @@ spec:
 | 2026-Q2 (v1.5 预计) | GAMMA GA，成为服务网格路由的统一标准 |
 | 2026-Q4 (预计) | 跨集群 GAMMA 路由提案，支持多集群服务网格 |
 
-#<!-- chunk: 9.2 BackendLBPolicy 与 BackendTLSPolicy GA -->## 9.2 BackendLBPolicy 与 BackendTLSPolicy GA
+## 9.2 BackendLBPolicy 与 BackendTLSPolicy GA
 
 **BackendTLSPolicy**（v1.4 已 GA）允许为 Gateway 到后端服务之间的连接配置 TLS，实现真正的端到端加密：
 
@@ -1820,15 +1828,15 @@ spec:
     idleTimeout: 30m
 ```
 
-#<!-- chunk: 9.3 跨集群路由（Multi-Cluster Gateway） -->## 9.3 跨集群路由（Multi-Cluster Gateway）
+## 9.3 跨集群路由（Multi-Cluster Gateway）
 
 Gateway API 工作组正在推进跨集群路由标准，与 ClusterSet / MCS（Multi-Cluster Services）API 协同，实现真正的多集群统一流量入口。预计在 2026 下半年进入实验阶段。
 
-#<!-- chunk: 9.4 Infrastructure 注解标准化 -->## 9.4 Infrastructure 注解标准化
+## 9.4 Infrastructure 注解标准化
 
 v1.4 引入的 `infrastructure` 字段正在扩展，计划在未来版本中标准化云厂商 LoadBalancer 注解，减少对 Service 注解的依赖，让 Gateway 配置更加自包含和可移植。
 
-#<!-- chunk: 9.5 与本系列其他文档的关联 -->## 9.5 与本系列其他文档的关联
+## 9.5 与本系列其他文档的关联
 
 本文档与 kudig-database 知识库中以下文档存在深度关联，建议结合阅读：
 
@@ -1865,7 +1873,7 @@ v1.4 引入的 `infrastructure` 字段正在扩展，计划在未来版本中标
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -1886,4 +1894,4 @@ v1.4 引入的 `infrastructure` 字段正在扩展，计划在未来版本中标
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

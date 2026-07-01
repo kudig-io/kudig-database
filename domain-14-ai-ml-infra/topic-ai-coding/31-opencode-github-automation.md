@@ -304,7 +304,7 @@ jobs:
     model: anthropic/claude-sonnet-4-5
     prompt: |
       Review this pull request with focus on:
-      1. [[domain-05-security-compliance/README|security]] vulnerabilities (OWASP Top 10)
+      1. [[domain-05-security-compliance/README.md|security]] vulnerabilities (OWASP Top 10)
       2. Performance regressions
       3. API backward compatibility
       4. Test coverage for new code

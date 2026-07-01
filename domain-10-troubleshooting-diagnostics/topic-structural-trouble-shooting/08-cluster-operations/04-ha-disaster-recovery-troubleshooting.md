@@ -330,11 +330,14 @@ journalctl -u etcd --tail=100
 
 #### 场景：etcd 成员故障恢复
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+
 ```bash
 # 场景: 一个 etcd 成员永久问题，需要替换
 
 # 1. 移除问题成员
-etcdctl member remove <member-id>
+etcdctl member remove <member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
 
 # 2. 在新节点上准备 etcd
 
@@ -420,6 +423,9 @@ echo "0 */6 * * * root /usr/local/bin/etcd-backup.sh" >> /etc/crontab
 
 **警告: 此操作会重置整个集群状态，请谨慎执行！**
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+
 ```bash
 # 1. 停止所有控制平面组件
 # 在所有 Master 节点执行
@@ -460,6 +466,11 @@ kubectl get pods -n kube-system
 
 #### 场景：单 Master 节点问题
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 检查问题节点状态
 kubectl get nodes
@@ -473,7 +484,7 @@ kubectl delete node <failed-master>
 
 # 4. 清理 etcd 成员 (如果该节点运行 etcd)
 etcdctl member list
-etcdctl member remove <member-id>
+etcdctl member remove <member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
 
 # 5. 添加新的 Master 节点
 # 在新节点执行
@@ -485,6 +496,9 @@ kubeadm join <lb-endpoint>:6443 \
 ```
 
 #### 场景：所有 Master 问题后恢复
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 最严重的情况: 所有 Master 都不可用
@@ -508,6 +522,9 @@ kubectl get nodes
 ### 负载均衡器问题
 
 #### 场景：检查和修复 LB
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 检查 LB 后端健康
@@ -542,6 +559,10 @@ systemctl restart haproxy
 ```
 
 ### 灾难恢复演练
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -639,13 +660,16 @@ spec:
 
 ### 常用命令速查
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+
 ```bash
 # etcd 操作
 etcdctl endpoint health --cluster
 etcdctl endpoint status --cluster -w table
 etcdctl member list -w table
 etcdctl snapshot save /path/to/backup.db
-etcdctl snapshot restore /path/to/backup.db
+etcdctl snapshot restore /path/to/backup.db  # ⚠️ 覆盖 etcd 数据，集群状态回退
 
 # 控制平面检查
 kubectl get nodes -l node-role.kubernetes.io/control-plane=
@@ -660,19 +684,21 @@ kubeadm certs renew all
 ### 相关文档
 
 - [etcd 故障排查](../01-control-plane/02-etcd-troubleshooting.md)
-- [API Server 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting|01-apiserver-troubleshooting]].md)
-- [证书故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting|02-certificate-troubleshooting]].md)
-- [集群维护故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/01-cluster-maintenance-troubleshooting|01-cluster-maintenance-troubleshooting]].md)
+- [API Server 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md|01-apiserver-troubleshooting]].md)
+- [证书故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]].md)
+- [集群维护故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|01-cluster-maintenance-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/02-logging-monitoring-troubleshooting|02-logging-monitoring-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting|03-helm-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/05-crd-operator-troubleshooting|05-crd-operator-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/06-kustomize-troubleshooting|06-kustomize-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/02-logging-monitoring-troubleshooting.md|02-logging-monitoring-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/05-crd-operator-troubleshooting.md|05-crd-operator-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/06-kustomize-troubleshooting.md|06-kustomize-troubleshooting]]
+
+```

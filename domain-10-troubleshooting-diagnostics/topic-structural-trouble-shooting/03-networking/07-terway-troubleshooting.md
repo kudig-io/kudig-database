@@ -212,6 +212,9 @@ Pod 处于 ContainerCreating，事件显示 IP 分配失败
 
 #### 2.2.2 ENI 配额不足
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看节点已分配的 ENI 和 IP 数量
 kubectl describe node <node-name> | grep -E "aliyun.com/allocated-eni|aliyun.com/allocated-ip|aliyun.com/eni-max|aliyun.com/ip-max"
@@ -237,6 +240,9 @@ curl "https://ecs.aliyuncs.com/?Action=DescribeInstanceTypes&InstanceTypes.1=<in
 
 #### 2.2.3 IP 资源池耗尽
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 terway 资源池详情
 kubectl exec -n kube-system <terway-pod> -- terway-cli show
@@ -254,6 +260,9 @@ kubectl exec -n kube-system <terway-pod> -- terway-cli garbage-collect --dry-run
 - Terway 版本过旧，存在 IP 泄漏 Bug
 
 #### 2.2.4 固定 IP 冲突
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 查看使用固定 IP 的 Pod
@@ -289,6 +298,9 @@ kubectl logs -n kube-system <terway-pod> --tail=500 | grep -iE "api|error|fail|t
 ### 2.3 跨节点通信失败排查
 
 #### 2.3.1 VPC 路由检查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 在 Pod 内测试跨节点连通性
@@ -330,6 +342,9 @@ aliyun ecs DescribeSecurityGroupAttribute --SecurityGroupId <sg-id> --RegionId <
 - **注意**：如果 Pod 使用独立安全组（Terway 高级特性），需额外检查 Pod 级安全组规则
 
 #### 2.3.3 Terway 路由同步问题
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查 terway 是否成功同步路由
@@ -396,6 +411,9 @@ kubectl logs -n kube-system <terway-pod> | grep -i "api.*latency\|api.*duration"
 
 #### 2.5.2 网络延迟与丢包
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Pod 间延迟测试
 kubectl exec -it <pod-a> -- ping -c 100 -i 0.01 <pod-b-ip>
@@ -418,10 +436,14 @@ sysctl -a | grep -E "net.core.netdev_max_backlog|net.ipv4.tcp_congestion_control
 
 #### 方案一：释放 ENI/IP 资源
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 查找并删除已终止但未释放资源的 Pod
 kubectl get pods --all-namespaces --field-selector spec.nodeName=<node-name>,status.phase=Failed
-kubectl delete pods --all-namespaces --field-selector spec.nodeName=<node-name>,status.phase=Failed
+kubectl delete pods --all-namespaces --field-selector spec.nodeName=<node-name>,status.phase=Failed  # ⚠️ 批量删除，波及面大
 
 # 对于使用独占 ENI 的 StatefulSet，考虑调整为共享模式
 # 修改 Terway ConfigMap
@@ -432,6 +454,9 @@ kubectl edit configmap -n kube-system eni-config
 **风险**：修改 Terway 配置后，新创建的 Pod 会使用新模式，已运行的 Pod 不受影响。建议在低峰期操作。
 
 #### 方案二：升级实例规格
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 通过阿里云 CLI 升级实例规格（需先停止实例）
@@ -445,6 +470,9 @@ kubectl patch nodepool <nodepool-name> --type merge -p '{"spec":{"instanceTypes"
 
 #### 方案三：调整 ENI 辅助 IP 数量
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 编辑 Terway ConfigMap，调整单 ENI 的最大辅助 IP 数
 kubectl edit configmap -n kube-system eni-config
@@ -454,6 +482,9 @@ kubectl edit configmap -n kube-system eni-config
 ### 3.2 跨节点通信修复
 
 #### 方案一：修复 VPC 路由
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 如果路由缺失，重启 terway Pod 触发路由同步
@@ -497,6 +528,10 @@ kubectl set image ds/calico-node -n kube-system calico-node=registry-vpc.cn-hang
 
 #### 方案一：启用 IPVlan 模式
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 修改 Terway ConfigMap 启用 IPVlan
 kubectl edit configmap -n kube-system eni-config
@@ -514,6 +549,9 @@ kubectl rollout restart ds/terway-eniip -n kube-system
 - 不与其他依赖 macvlan 的应用共存
 
 #### 方案二：启用 ENI 预分配
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 在 Terway ConfigMap 中配置预分配参数
@@ -695,6 +733,9 @@ fi
 
 ## 附录 B: Terway 常用 CLI 命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 进入 terway Pod 执行诊断
 kubectl exec -it -n kube-system <terway-pod> -- /bin/sh
@@ -731,15 +772,17 @@ terway-cli --help
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[skills/ts-networking|ts-networking]]
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[skills/ts-networking.md|ts-networking]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting|05-service-mesh-istio-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting|06-gateway-api-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting|08-flannel-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-higress-troubleshooting|09-higress-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md|05-service-mesh-istio-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting.md|06-gateway-api-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-higress-troubleshooting.md|09-higress-troubleshooting]]
+
+```

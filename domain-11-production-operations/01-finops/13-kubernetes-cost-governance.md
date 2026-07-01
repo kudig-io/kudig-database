@@ -70,7 +70,7 @@ estimated_read_time: 5min
 intent_queries:
 - Kubernetes成本治理 是什么
 - 如何 Kubernetes成本治理
-- [[Kubernetes|Kubernetes]] 18 [[references/k8s-production-operations|production operations]] 最佳实践
+- [[Kubernetes|Kubernetes]] 18 [[entities/k8s-production-operations.md|production operations]] 最佳实践
 trigger_keywords:
 - Kubernetes成本治理
 - production
@@ -96,9 +96,9 @@ Kubernetes成本治理是FinOps实践的核心组成部分。本文档详细介�
 
 <!-- chunk: 💰 成本分析框架 -->## 💰 成本分析框架
 
-#<!-- chunk: 成本构成分析 -->## 成本构成分析
+## 成本构成分析
 
-##<!-- chunk: 1. 成本分摊模型 -->## 1. 成本分摊模型
+## 1. 成本分摊模型
 ```yaml
 # 成本分摊配置
 apiVersion: v1
@@ -140,7 +140,7 @@ data:
           multiplier: 0.2
 ```
 
-##<!-- chunk: 2. 成本标签体系 -->## 2. 成本标签体系
+## 2. 成本标签体系
 ```yaml
 # 资源标签策略
 apiVersion: v1
@@ -172,9 +172,9 @@ data:
       regex: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
 ```
 
-#<!-- chunk: 成本收集和计量 -->## 成本收集和计量
+## 成本收集和计量
 
-##<!-- chunk: 1. Prometheus成本指标 -->## 1. Prometheus成本指标
+## 1. Prometheus成本指标
 ```yaml
 # 成本相关指标收集
 apiVersion: monitoring.coreos.com/v1
@@ -203,7 +203,7 @@ spec:
       expr: sum(rate(container_network_receive_bytes_total[1h]) + rate(container_network_transmit_bytes_total[1h])) by (namespace, pod)
 ```
 
-##<!-- chunk: 2. 成本数据聚合 -->## 2. 成本数据聚合
+## 2. 成本数据聚合
 ```python
 #!/usr/bin/env python3
 # 成本数据聚合和分析脚本
@@ -451,9 +451,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 📊 成本优化策略 -->## 📊 成本优化策略
 
-#<!-- chunk: 资源权利化 -->## 资源权利化
+## 资源权利化
 
-##<!-- chunk: 1. 自动权利化工具 -->## 1. 自动权利化工具
+## 1. 自动权利化工具
 ```python
 #!/usr/bin/env python3
 # 自动资源权利化工具
@@ -641,9 +641,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-#<!-- chunk: Spot实例优化 -->## Spot实例优化
+## Spot实例优化
 
-##<!-- chunk: 1. Spot实例调度器 -->## 1. Spot实例调度器
+## 1. Spot实例调度器
 ```yaml
 # Spot实例节点组配置
 apiVersion: eksctl.io/v1alpha5
@@ -723,7 +723,7 @@ spec:
             memory: "4Gi"
 ```
 
-##<!-- chunk: 2. Spot中断处理 -->## 2. Spot中断处理
+## 2. Spot中断处理
 ```python
 #!/usr/bin/env python3
 # Spot实例中断处理程序
@@ -955,9 +955,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 📈 成本监控告警 -->## 📈 成本监控告警
 
-#<!-- chunk: 预算管理和告警 -->## 预算管理和告警
+## 预算管理和告警
 
-##<!-- chunk: 1. 预算配置 -->## 1. 预算配置
+## 1. 预算配置
 ```yaml
 # 成本预算配置
 apiVersion: v1
@@ -1003,7 +1003,7 @@ data:
       - "project-managers@example.com"
 ```
 
-##<!-- chunk: 2. 成本告警规则 -->## 2. 成本告警规则
+## 2. 成本告警规则
 ```yaml
 # Prometheus成本告警规则
 apiVersion: monitoring.coreos.com/v1
@@ -1063,7 +1063,7 @@ spec:
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 成本治理体系 -->## 成本治理体系
+## 成本治理体系
 - [ ] 建立成本分摊和标签体系
 - [ ] 部署成本收集和计量工具
 - [ ] 实施资源权利化自动化
@@ -1071,7 +1071,7 @@ spec:
 - [ ] 建立预算管理和告警机制
 - [ ] 实施成本可视化和报告
 
-#<!-- chunk: 优化策略实施 -->## 优化策略实施
+## 优化策略实施
 - [ ] 分析现有资源使用效率
 - [ ] 制定资源权利化计划
 - [ ] 配置自动扩缩容策略
@@ -1079,7 +1079,7 @@ spec:
 - [ ] 优化存储和网络成本
 - [ ] 建立成本优化持续改进
 
-#<!-- chunk: 监控和治理 -->## 监控和治理
+## 监控和治理
 - [ ] 部署实时成本监控系统
 - [ ] 配置多层级告警机制
 - [ ] 建立成本异常检测能力
@@ -1096,9 +1096,9 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系

@@ -118,7 +118,7 @@ created: "2026-05-23"
   - `MemoryPressure` 为 `True` → 记录，可能根因为 RC-004
   - `DiskPressure` 为 `True` → 记录，可能根因为 RC-003
   - `PIDPressure` 为 `True` → 记录，可能根因为 RC-005
-  - Message 字段包含 `[[Container Runtime|container runtime]] is down` → RC-002（容器运行时问题）
+  - Message 字段包含 `[[concepts/container-runtime.md|container runtime]] is down` → RC-002（容器运行时问题）
   - Message 字段包含 `PLEG is not healthy` → RC-008（PLEG 不健康）
   - Message 字段包含 `certificate` 或 `x509` → RC-007（证书问题），关联 SKILL-SEC-001
 - **版本差异**:
@@ -415,9 +415,6 @@ created: "2026-05-23"
 
 ## Phase 3: 主动探测（低风险，可能需审批）
 
-> ⚠️ 以下步骤涉及主动网络请求或轻量修改操作。在 L1-advisory 模式下，Agent 应**提出建议并等待人工确认**后执行。
-> **预计耗时**: 2-5 分钟
-
 ### Step D3.1: 从节点测试 apiserver 健康状态
 
 - **命令**:
@@ -491,4 +488,4 @@ created: "2026-05-23"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

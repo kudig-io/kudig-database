@@ -58,7 +58,7 @@ created: "2026-05-23"
 
 Rubrik 是新一代云数据管理平台的代表，以零信任数据安全（Zero Trust Data Security）为核心理念，提供从备份恢复、灾难恢复、勒索软件防护到数据治理的一体化解决方案。与传统备份软件不同，Rubrik 采用超融合硬件（Brik）或纯软件（Rubrik Cloud Cluster）的部署方式，内置分布式文件系统、全局去重、不可变快照和基于 SLA 的自动化策略引擎，大幅简化了企业数据保护的复杂度。本文档基于大规模混合云环境经验，全面探讨 Rubrik 的企业级部署、数据保护和灾备实践。
 
-#<!-- chunk: RPO 与 RTO 定义 -->## RPO 与 RTO 定义
+## RPO 与 RTO 定义
 
 - **RPO（Recovery Point Objective）**：Rubrik 通过 SLA 策略驱动备份频率，支持从每小时到每天不等的备份周期，配合 NearSync 技术可实现最短 10 秒的 RPO。对于关键数据库，Live Mount 可提供接近零的 RPO 恢复能力。
 - **RTO（Recovery Time Objective）**：Rubrik 的即时恢复（Instant Recovery / Live Mount）能力是其核心竞争优势——虚拟机可直接从备份存储运行，无需等待数据拷贝完成，RTO 可缩短至 1-5 分钟。文件级恢复可在秒级完成。
@@ -86,7 +86,7 @@ rubrik_rpo_rto:
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: Rubrik 核心组件架构 -->## Rubrik 核心组件架构
+## Rubrik 核心组件架构
 
 ```mermaid
 graph TB
@@ -140,7 +140,7 @@ graph TB
     BRIK --> RADAR & INSIGHT & SEARCH & ORCHESTRATOR
 ```
 
-#<!-- chunk: 企业级部署架构 -->## 企业级部署架构
+## 企业级部署架构
 
 ```yaml
 rubrik_enterprise:
@@ -199,7 +199,7 @@ rubrik_enterprise:
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: SLA 策略配置 -->## SLA 策略配置
+## SLA 策略配置
 
 ```python
 #!/usr/bin/env python3
@@ -294,7 +294,7 @@ sla_templates = {
 }
 ```
 
-#<!-- chunk: 勒索软件防护配置 -->## 勒索软件防护配置
+## 勒索软件防护配置
 
 ```yaml
 # Rubrik Radar 勒索软件防护配置
@@ -336,7 +336,7 @@ ransomware_protection:
 
 <!-- chunk: 备份策略 -->## 备份策略
 
-#<!-- chunk: 分层数据保护策略 -->## 分层数据保护策略
+## 分层数据保护策略
 
 ```yaml
 # Rubrik 分层数据保护策略
@@ -382,7 +382,7 @@ data_protection_tiers:
 
 <!-- chunk: 恢复流程 -->## 恢复流程
 
-#<!-- chunk: Live Mount 即时恢复 -->## Live Mount 即时恢复
+## Live Mount 即时恢复
 
 ```python
 # Rubrik Live Mount 恢复脚本
@@ -434,7 +434,7 @@ class RubrikRecovery:
         return resp.json()
 ```
 
-#<!-- chunk: 灾难恢复操作手册 -->## 灾难恢复操作手册
+## 灾难恢复操作手册
 
 ```yaml
 # Rubrik 灾难恢复操作手册
@@ -588,7 +588,7 @@ rubrik_monitoring:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题诊断 -->## 常见问题诊断
+## 常见问题诊断
 
 ```bash
 #!/bin/bash
@@ -622,7 +622,7 @@ curl -sk -H "Authorization: Bearer $RUBRIK_TOKEN" \
   "https://rubrik.company.com/api/internal/sla_domain" | jq '.[] | {name, compliance}'
 ```
 
-#<!-- chunk: 故障排查手册 -->## 故障排查手册
+## 故障排查手册
 
 | 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
 |:---|:---|:---|:---|
@@ -637,7 +637,7 @@ curl -sk -H "Authorization: Bearer $RUBRIK_TOKEN" \
 
 <!-- chunk: 性能优化与容量规划 -->## 性能优化与容量规划
 
-#<!-- chunk: Rubrik 集群性能调优 -->## Rubrik 集群性能调优
+## Rubrik 集群性能调优
 
 Rubrik 集群的性能直接影响备份和恢复的效率。在大规模企业环境中，需要从网络、存储、并发任务和资源分配四个维度进行系统性优化。
 
@@ -709,7 +709,7 @@ class RubrikCapacityPlanner:
         }
 ```
 
-#<!-- chunk: 备份窗口优化 -->## 备份窗口优化
+## 备份窗口优化
 
 在大规模环境中，备份窗口是稀缺资源。以下策略可以帮助优化备份窗口的使用：
 
@@ -753,7 +753,7 @@ backup_window_optimization:
 
 <!-- chunk: 合规性与审计 -->## 合规性与审计
 
-#<!-- chunk: 数据保护合规框架 -->## 数据保护合规框架
+## 数据保护合规框架
 
 在金融、医疗、政府等受监管行业，备份数据管理需要满足多项合规要求。Rubrik 提供了内置的合规性支持，包括数据加密、不可变存储、审计日志和合规报告。
 
@@ -800,7 +800,7 @@ compliance_configuration:
       schedule: "年度"
 ```
 
-#<!-- chunk: 自动化合规检查 -->## 自动化合规检查
+## 自动化合规检查
 
 ```python
 #!/usr/bin/env python3
@@ -892,7 +892,7 @@ class RubrikComplianceChecker:
 
 <!-- chunk: 高级恢复场景 -->## 高级恢复场景
 
-#<!-- chunk: 勒索软件恢复工作流 -->## 勒索软件恢复工作流
+## 勒索软件恢复工作流
 
 勒索软件攻击已成为企业面临的最大数据安全威胁之一。Rubrik 的 Radar 功能结合不可变存储，提供了一套完整的勒索软件检测和恢复工作流。
 
@@ -949,7 +949,7 @@ ransomware_recovery_workflow:
       - "加强相关系统安全防护"
 ```
 
-#<!-- chunk: 跨集群数据迁移 -->## 跨集群数据迁移
+## 跨集群数据迁移
 
 在数据中心迁移或合并场景中，需要将大量备份数据从一个 Rubrik 集群迁移到另一个。Rubrik 支持集群间的数据复制和迁移，可以通过配置集群间复制目标来实现。
 
@@ -991,7 +991,7 @@ cluster_migration:
 
 <!-- chunk: 多云数据保护 -->## 多云数据保护
 
-#<!-- chunk: AWS 工作负载保护 -->## AWS 工作负载保护
+## AWS 工作负载保护
 
 ```yaml
 # Rubrik AWS 工作负载保护配置
@@ -1016,7 +1016,7 @@ aws_protection:
     snapshot_frequency: "每 4 小时"
 ```
 
-#<!-- chunk: Azure 工作负载保护 -->## Azure 工作负载保护
+## Azure 工作负载保护
 
 ```yaml
 # Rubrik Azure 工作负载保护配置
@@ -1038,7 +1038,7 @@ azure_protection:
 
 <!-- chunk: 安全最佳实践 -->## 安全最佳实践
 
-#<!-- chunk: 零信任数据安全 -->## 零信任数据安全
+## 零信任数据安全
 
 Rubrik 的零信任数据安全架构是其核心竞争力之一。以下是其关键安全实践：
 
@@ -1087,7 +1087,7 @@ zero_trust_security:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-30-disaster-recovery-business-continuity KUDIG Database — Global MOC
-- [[domain-09-reliability-engineering/README|Domain 30: 企业级灾备与业务连续性 (Enterprise [[Kubernetes 灾难恢复最佳实践|Disaster Recovery]] & Busin...]]
+- [[domain-09-reliability-engineering/README.md|Domain 09: 企业级灾备与业务连续性 (Enterprise [[Kubernetes 灾难恢复最佳实践|Disaster Recovery]] & Busin...]]
 - index.md|Domain-30 灾备与业务连续性 — 开源项目索引]]
 - VMware vSphere 企业级灾备与业务连续性
 - Veeam Backup & Replication 企业级备份恢复解决方案
@@ -1107,4 +1107,4 @@ zero_trust_security:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]

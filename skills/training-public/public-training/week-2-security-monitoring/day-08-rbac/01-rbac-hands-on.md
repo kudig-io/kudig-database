@@ -68,7 +68,7 @@ subjects:
 
 ```yaml
 rules:
-  - apiGroups: [""]           # "" = core API group ([[concepts/pod-lifecycle|pod]]/Service/ConfigMap)
+  - apiGroups: [""]           # "" = core API group ([[concepts/pod-lifecycle.md|pod]]/Service/ConfigMap)
     resources: ["pods", "services"]
     verbs: ["get", "list"]
   - apiGroups: ["apps"]
@@ -86,6 +86,9 @@ rules:
 
 ### 2.1 创建 Role
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 cat > app-team-readonly.yaml <<'EOF'
 apiVersion: rbac.authorization.k8s.io/v1
@@ -102,6 +105,9 @@ kubectl apply -f app-team-readonly.yaml
 ```
 
 ### 2.2 创建 RoleBinding（绑定用户）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > app-team-readonly-binding.yaml <<'EOF'
@@ -142,6 +148,9 @@ kubectl describe rolebinding app-team-readonly-binding -n app-team
 
 ### 3.1 创建 ClusterRole（集群范围只读）
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 cat > cluster-readonly.yaml <<'EOF'
 apiVersion: rbac.authorization.k8s.io/v1
@@ -157,6 +166,9 @@ kubectl apply -f cluster-readonly.yaml
 ```
 
 ### 3.2 创建 RoleBinding（跨 namespace 绑定 SA）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > monitoring-read-all-binding.yaml <<'EOF'
@@ -185,6 +197,9 @@ kubectl apply -f monitoring-read-all-binding.yaml
 
 ### 4.1 创建受限编辑 Role
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 cat > deploy-manager.yaml <<'EOF'
 apiVersion: rbac.authorization.k8s.io/v1
@@ -209,6 +224,9 @@ kubectl apply -f deploy-manager.yaml
 
 ### 4.2 绑定用户
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl create rolebinding dev-lead-deploy \
   --role=deploy-manager \
@@ -223,6 +241,9 @@ kubectl create rolebinding dev-lead-deploy \
 **场景**: 授予 [[kubelet|kubelet]] 正确的节点管理权限（遵循最小权限原则）。
 
 ### 5.1 使用内置 ClusterRole
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 系统已内置 node-admin ClusterRole（绑定到 Node 主体）
@@ -249,6 +270,9 @@ kubectl create clusterrolebinding node-admin-binding \
 **场景**: 安全团队需要读取所有 namespace 的审计事件，但不能修改任何资源。
 
 ### 6.1 创建审计只读 ClusterRole
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > audit-reader.yaml <<'EOF'

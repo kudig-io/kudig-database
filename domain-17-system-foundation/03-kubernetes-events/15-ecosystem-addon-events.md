@@ -76,7 +76,7 @@ created: "2026-05-23"
 
 <!-- chunk: 一、事件总览 -->## 一、事件总览
 
-#<!-- chunk: 1.1 生态插件事件全景图 -->## 1.1 生态插件事件全景图
+## 1.1 生态插件事件全景图
 
 | 组件分类 | 组件名称 | 事件数量 | 主要关注场景 | 生产重要性 |
 |:---|:---|:---:|:---|:---|
@@ -91,7 +91,7 @@ created: "2026-05-23"
 | **DNS 集成** | External DNS | 4 | DNS 记录同步 | ⭐⭐⭐⭐ |
 | **裸金属 LB** | MetalLB | 4 | IP 地址分配、BGP 宣告 | ⭐⭐⭐⭐ |
 
-#<!-- chunk: 1.2 本文档覆盖的事件列表 -->## 1.2 本文档覆盖的事件列表
+## 1.2 本文档覆盖的事件列表
 
 | 事件原因 (Reason) | 类型 | 组件 | 适用版本 | 生产频率 | 简要说明 |
 |:---|:---|:---|:---|:---|:---|
@@ -169,173 +169,173 @@ created: "2026-05-23"
 
 ---
 
-#<!-- chunk: `KernelOops` - 内核 Oops 错误 -->## `KernelOops` - 内核 Oops 错误
+## `KernelOops` - 内核 Oops 错误
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | node-problem-detector/kernel-monitor |
 | **适用版本** | NPD v0.8+ |
 | **生产频率** | 罕见 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 内核检测到严重错误(Oops),通常由内核模块 bug、硬件问题或内核版本不兼容导致。Oops 不会导致立即崩溃,但系统不稳定。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 dmesg -T | grep -i 'oops\|bug'
 kubectl describe node <node-name> | grep -A 10 KernelOops
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 立即隔离节点 (`kubectl cordon`),升级内核或更换硬件。
 
 ---
 
-#<!-- chunk: `DockerHung` / `ContainerdHung` - 容器运行时挂起 -->## `DockerHung` / `ContainerdHung` - 容器运行时挂起
+## `DockerHung` / `ContainerdHung` - 容器运行时挂起
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | node-problem-detector/system-log-monitor |
 | **适用版本** | NPD v0.8+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 容器运行时守护进程无响应,通常由磁盘 I/O 瓶颈、并发操作过多或内存耗尽导致。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 systemctl status containerd
 df -h /var/lib/containerd
 crictl ps  # 测试是否挂起
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 重启运行时 `systemctl restart containerd`,清理磁盘空间,扩容或使用 SSD。
 
 ---
 
-#<!-- chunk: `ReadonlyFilesystem` - 文件系统变为只读 -->## `ReadonlyFilesystem` - 文件系统变为只读
+## `ReadonlyFilesystem` - 文件系统变为只读
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | node-problem-detector/system-log-monitor |
 | **适用版本** | NPD v0.8+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 磁盘 I/O 错误导致 Linux 内核强制文件系统变为只读模式。原因包括物理磁盘损坏、网络存储中断、文件系统 bug。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 mount | grep 'ro,'
 dmesg | grep -i 'readonly\|i/o error'
 smartctl -a /dev/sda
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 本地磁盘: 运行 `fsck` 或更换磁盘。网络存储: 检查存储后端健康。
 
 ---
 
-#<!-- chunk: `CorruptDockerOverlay2` - overlay2 文件系统损坏 -->## `CorruptDockerOverlay2` - overlay2 文件系统损坏
+## `CorruptDockerOverlay2` - overlay2 文件系统损坏
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | node-problem-detector/custom-plugin-monitor |
 | **适用版本** | NPD v0.8+ |
 | **生产频率** | 罕见 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Docker overlay2 存储驱动元数据损坏,通常由意外断电或磁盘空间耗尽触发。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 docker info | grep "Storage Driver"
 dmesg | grep overlay
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 停止 Docker,删除损坏目录 `rm -rf /var/lib/docker/overlay2/<id>`,重启 Docker。
 
 ---
 
-#<!-- chunk: `TaskHung` - 任务挂起超时 -->## `TaskHung` - 任务挂起超时
+## `TaskHung` - 任务挂起超时
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | node-problem-detector/kernel-monitor |
 | **适用版本** | NPD v0.8+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 进程在不可中断睡眠状态 (D state) 超过 120 秒,通常等待磁盘/网络 I/O。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 ps aux | grep ' D '
 iotop -o -b -n 3
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 排查存储性能,调整 NFS/iSCSI 超时参数。
 
 ---
 
-#<!-- chunk: `UnregisterNetDevice` - 网络设备注销异常 -->## `UnregisterNetDevice` - 网络设备注销异常
+## `UnregisterNetDevice` - 网络设备注销异常
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | node-problem-detector/kernel-monitor |
 | **适用版本** | NPD v0.8+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 网络设备注销时出现异常引用或资源泄漏,常见于 CNI 插件删除设备时出错。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 dmesg | grep 'unregister_netdevice'
 ip link show
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 升级 CNI 插件到最新版本,重启节点清理网络栈。
 
 ---
 
-#<!-- chunk: `KernelDeadlock` - 内核死锁 -->## `KernelDeadlock` - 内核死锁
+## `KernelDeadlock` - 内核死锁
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | node-problem-detector/kernel-monitor |
 | **适用版本** | NPD v0.8+ |
 | **生产频率** | 罕见 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 内核死锁检测机制发现循环锁依赖,这是严重的内核 bug。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 dmesg | grep -A 50 'possible deadlock'
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 立即隔离节点,升级内核,向社区报告 bug。
 
 ---
 
-#<!-- chunk: `OOMKilling` - 内核 OOM Killer 触发 -->## `OOMKilling` - 内核 OOM Killer 触发
+## `OOMKilling` - 内核 OOM Killer 触发
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | node-problem-detector/kernel-monitor |
 | **适用版本** | NPD v0.8+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 系统内存耗尽,内核 OOM Killer 强制终止进程。与 Pod OOM 不同,这是系统级 OOM,影响节点稳定性。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 dmesg | grep 'Out of memory'
 free -h
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 调整 Kubelet 内存预留 `--system-reserved=memory=1Gi --eviction-hard=memory.available<500Mi`。
 
 ---
 
-#<!-- chunk: `FilesystemCorruption` - 文件系统损坏 -->## `FilesystemCorruption` - 文件系统损坏
+## `FilesystemCorruption` - 文件系统损坏
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | node-problem-detector/custom-plugin-monitor |
 | **适用版本** | NPD v0.8+ |
 | **生产频率** | 罕见 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 文件系统元数据损坏,可能导致文件丢失或读写失败。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 dmesg | grep -i 'ext4-fs error\|corruption'
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 运行 `fsck -y /dev/sda1` (需卸载或单用户模式),备份数据,更换硬盘。
 
 ---
@@ -346,77 +346,77 @@ dmesg | grep -i 'ext4-fs error\|corruption'
 
 ---
 
-#<!-- chunk: `Sync` - Ingress 配置同步成功 -->## `Sync` - Ingress 配置同步成功
+## `Sync` - Ingress 配置同步成功
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | ingress-nginx-controller |
 | **适用版本** | v0.20+ |
 | **生产频率** | 高频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 控制器成功将 Ingress 规则转换为 NGINX 配置并重载。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl describe ingress <ingress-name>
 kubectl logs -n ingress-nginx deployment/ingress-nginx-controller
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件,如果频繁出现检查是否有自动化工具误操作。
 
 ---
 
-#<!-- chunk: `CREATE` / `UPDATE` / `DELETE` - Ingress 规则生命周期 -->## `CREATE` / `UPDATE` / `DELETE` - Ingress 规则生命周期
+## `CREATE` / `UPDATE` / `DELETE` - Ingress 规则生命周期
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | ingress-nginx-controller |
 | **适用版本** | v0.20+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Ingress 控制器检测到资源创建、更新或删除。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get ingress -A
 kubectl get ingress <name> -o yaml
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常生命周期事件。如果 DELETE 后流量仍存在,检查 NGINX 配置重载。
 
 ---
 
-#<!-- chunk: `Rejected` - Ingress 规则被拒绝 -->## `Rejected` - Ingress 规则被拒绝
+## `Rejected` - Ingress 规则被拒绝
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | ingress-nginx-admission-webhook |
 | **适用版本** | v0.20+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Ingress 配置验证失败,常见原因: 无效注解语法、缺少 TLS 证书、与现有规则冲突。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl describe ingress <ingress-name>
 kubectl logs -n ingress-nginx deployment/ingress-nginx-admission
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 修复 YAML: 检查注解拼写、确保 Secret 存在、避免重复 host/path。
 
 ---
 
-#<!-- chunk: `AddedOrUpdated` - Ingress 添加或更新 -->## `AddedOrUpdated` - Ingress 添加或更新
+## `AddedOrUpdated` - Ingress 添加或更新
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | ingress-nginx-controller |
 | **适用版本** | v0.20+ |
 | **生产频率** | 高频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 控制器成功处理 Ingress 新增或变更。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 curl -H "Host: example.com" http://<ingress-ip>/path
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。如果流量异常,检查 Service 和 Pod 是否就绪。
 
 ---
@@ -427,150 +427,150 @@ curl -H "Host: example.com" http://<ingress-ip>/path
 
 ---
 
-#<!-- chunk: `Issuing` - 正在签发证书 -->## `Issuing` - 正在签发证书
+## `Issuing` - 正在签发证书
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | cert-manager |
 | **适用版本** | v1.0+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 cert-manager 开始向 Issuer 请求签发证书。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl describe certificate <cert-name>
 kubectl get certificaterequest
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常流程。如果长时间停留,检查 Issuer 是否 Ready、ACME Challenge 是否完成。
 
 ---
 
-#<!-- chunk: `Issued` - 证书签发成功 -->## `Issued` - 证书签发成功
+## `Issued` - 证书签发成功
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | cert-manager |
 | **适用版本** | v1.0+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 证书成功签发并存储到 Secret。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get secret <tls-secret> -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -text -noout
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。
 
 ---
 
-#<!-- chunk: `Ready` - 证书已就绪 -->## `Ready` - 证书已就绪
+## `Ready` - 证书已就绪
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | cert-manager |
 | **适用版本** | v1.0+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 证书已签发且尚未过期,可正常使用。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get certificate <name> -o jsonpath='{.status.notAfter}'
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常状态,cert-manager 会在到期前自动续期。
 
 ---
 
-#<!-- chunk: `NotReady` - 证书未就绪 -->## `NotReady` - 证书未就绪
+## `NotReady` - 证书未就绪
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | cert-manager |
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 证书签发失败、过期或被撤销。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl describe certificate <name>
 kubectl describe certificaterequest <request-name>
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 根据失败原因: 检查 Issuer 配置、确保 ACME Challenge 可访问、删除旧 Secret 触发重新签发。
 
 ---
 
-#<!-- chunk: `IssuerNotReady` - 签发者未就绪 -->## `IssuerNotReady` - 签发者未就绪
+## `IssuerNotReady` - 签发者未就绪
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | cert-manager |
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Issuer/ClusterIssuer 配置错误或依赖资源不可用。常见原因: ACME 服务器不可达、CA 证书 Secret 不存在、Vault 服务未认证。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl describe issuer <issuer-name>
 kubectl get secret <ca-secret>
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 ACME: 检查网络连通性,确认 ACME 账户 Secret。CA: 确保 CA 证书和私钥正确。
 
 ---
 
-#<!-- chunk: `OrderCreated` - ACME Order 已创建 -->## `OrderCreated` - ACME Order 已创建
+## `OrderCreated` - ACME Order 已创建
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | cert-manager/acme-controller |
 | **适用版本** | v1.0+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 使用 ACME 协议签发证书时,创建了 Order 资源,开始域名验证 Challenge。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get order
 kubectl describe challenge <challenge-name>
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 等待 Challenge 完成。HTTP-01: 确保 Ingress 配置 `/.well-known/acme-challenge/`。DNS-01: 验证 DNS 提供商凭证。
 
 ---
 
-#<!-- chunk: `OrderComplete` - ACME Order 完成 -->## `OrderComplete` - ACME Order 完成
+## `OrderComplete` - ACME Order 完成
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | cert-manager/acme-controller |
 | **适用版本** | v1.0+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 ACME Order 的所有 Challenge 已完成,证书即将签发。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get certificate <name>
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常流程,通常几秒后收到 `Issued` 事件。
 
 ---
 
-#<!-- chunk: `RenewalScheduled` - 证书续期已调度 -->## `RenewalScheduled` - 证书续期已调度
+## `RenewalScheduled` - 证书续期已调度
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | cert-manager |
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 证书即将到期,cert-manager 已调度自动续期任务(默认在生命周期 2/3 时)。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get certificate <name> -o jsonpath='{.status.notAfter}'
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常自动续期。如果续期失败,会产生 `NotReady` 事件。
 
 ---
@@ -581,96 +581,100 @@ kubectl get certificate <name> -o jsonpath='{.status.notAfter}'
 
 ---
 
-#<!-- chunk: `InjectionSucceeded` - Sidecar 注入成功 -->## `InjectionSucceeded` - Sidecar 注入成功
+## `InjectionSucceeded` - Sidecar 注入成功
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | istio-sidecar-injector |
 | **适用版本** | Istio v1.6+ |
 | **生产频率** | 高频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Mutating Admission Webhook 成功向 Pod 注入 Envoy Sidecar 容器。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].name}'
 kubectl get namespace <ns> -o jsonpath='{.metadata.labels.istio-injection}'
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。如果 Pod 无 Sidecar,检查 Namespace 是否有 `istio-injection=enabled` 标签。
 
 ---
 
-#<!-- chunk: `InjectionFailed` - Sidecar 注入失败 -->## `InjectionFailed` - Sidecar 注入失败
+## `InjectionFailed` - Sidecar 注入失败
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | istio-sidecar-injector |
 | **适用版本** | Istio v1.6+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Webhook 无法注入 Sidecar。常见原因: istio-sidecar-injector 服务不可达、Pod 定义不兼容 (如 hostNetwork)、资源限制。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get mutatingwebhookconfiguration istio-sidecar-injector -o yaml
 kubectl logs -n istio-system deployment/istio-sidecar-injector
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 Webhook 不可用: 重启 istiod。资源限制: 增加 Namespace ResourceQuota。hostNetwork Pod: 添加 `sidecar.istio.io/inject=false`。
 
 ---
 
-#<!-- chunk: `ProxyConfigChanged` - Envoy 配置变更 -->## `ProxyConfigChanged` - Envoy 配置变更
+## `ProxyConfigChanged` - Envoy 配置变更
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | istiod |
 | **适用版本** | Istio v1.6+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 istiod 向 Envoy 代理下发了新的配置 (xDS)。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 istioctl proxy-config cluster <pod-name>.<namespace>
 istioctl proxy-status
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。配置未生效可能需要等待几秒 (最终一致性)。
 
 ---
 
-#<!-- chunk: `EnvoyReady` - Envoy 代理就绪 -->## `EnvoyReady` - Envoy 代理就绪
+## `EnvoyReady` - Envoy 代理就绪
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | istio-proxy |
 | **适用版本** | Istio v1.6+ |
 | **生产频率** | 高频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Envoy Sidecar 容器已启动并完成初始化。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl logs <pod-name> -c istio-proxy
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件,标志 Sidecar 可以处理流量。
 
 ---
 
-#<!-- chunk: `EnvoyNotReady` - Envoy 代理未就绪 -->## `EnvoyNotReady` - Envoy 代理未就绪
+## `EnvoyNotReady` - Envoy 代理未就绪
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | istio-proxy |
 | **适用版本** | Istio v1.6+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Envoy 容器启动失败或无法与 istiod 建立连接。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 kubectl logs <pod-name> -c istio-proxy
 kubectl exec <pod-name> -c istio-proxy -- curl http://istiod.istio-system:15010/ready
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 无法连接 istiod: 检查网络策略或 DNS。配置错误: 查看 istiod 日志。资源不足: 增加 Sidecar 资源限制。
 
 ---
@@ -681,130 +685,130 @@ kubectl exec <pod-name> -c istio-proxy -- curl http://istiod.istio-system:15010/
 
 ---
 
-#<!-- chunk: `Synced` - 应用同步成功 -->## `Synced` - 应用同步成功
+## `Synced` - 应用同步成功
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | argocd-application-controller |
 | **适用版本** | ArgoCD v2.0+ |
 | **生产频率** | 高频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Application 的期望状态 (Git) 与实际状态 (集群) 已同步。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 argocd app get <app-name>
 argocd app history <app-name>
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。如果同步后应用仍异常,检查 Pod 是否就绪。
 
 ---
 
-#<!-- chunk: `SyncFailed` - 应用同步失败 -->## `SyncFailed` - 应用同步失败
+## `SyncFailed` - 应用同步失败
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | argocd-application-controller |
 | **适用版本** | ArgoCD v2.0+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 ArgoCD 无法将 Git 资源应用到集群。常见原因: YAML 语法错误、ServiceAccount 权限不足、资源配额耗尽。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 argocd app get <app-name>
 kubectl logs -n argocd deployment/argocd-application-controller
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 YAML 错误: 修复 Git 仓库配置。权限不足: 授予 RBAC 权限。资源配额: 扩容或清理。
 
 ---
 
-#<!-- chunk: `Degraded` - 应用降级 -->## `Degraded` - 应用降级
+## `Degraded` - 应用降级
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | argocd-application-controller |
 | **适用版本** | ArgoCD v2.0+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 应用健康检查失败,虽然同步成功但 Pod 不健康、Job 失败等。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 argocd app get <app-name>
 kubectl get all -l app.kubernetes.io/instance=<app-name>
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 根据资源类型检查 Pod 日志、Job 失败原因、Service Endpoint。
 
 ---
 
-#<!-- chunk: `Healthy` - 应用健康 -->## `Healthy` - 应用健康
+## `Healthy` - 应用健康
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | argocd-application-controller |
 | **适用版本** | ArgoCD v2.0+ |
 | **生产频率** | 高频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 所有资源已同步且健康检查通过。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 无需排查。
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 无需处理。
 
 ---
 
-#<!-- chunk: `OutOfSync` - 应用漂移 -->## `OutOfSync` - 应用漂移
+## `OutOfSync` - 应用漂移
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | argocd-application-controller |
 | **适用版本** | ArgoCD v2.0+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 集群资源被手动修改,与 Git 仓库不一致,ArgoCD 检测到漂移。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 argocd app diff <app-name>
 kubectl get events --field-selector involvedObject.name=<resource-name>
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 恢复同步: `argocd app sync <app-name>`。自动纠偏: 启用 `spec.syncPolicy.automated.selfHeal=true`。
 
 ---
 
-#<!-- chunk: `Progressing` - 应用部署中 -->## `Progressing` - 应用部署中
+## `Progressing` - 应用部署中
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | argocd-application-controller |
 | **适用版本** | ArgoCD v2.0+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 ArgoCD 正在应用资源变更,等待所有资源达到就绪状态。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 argocd app get <app-name>
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常过程。长时间停留检查 Pod 是否卡在 ImagePullBackOff 或 Deployment 滚动更新阻塞。
 
 ---
 
-#<!-- chunk: `Pruned` - 资源已清理 -->## `Pruned` - 资源已清理
+## `Pruned` - 资源已清理
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | argocd-application-controller |
 | **适用版本** | ArgoCD v2.0+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Git 中删除的资源已从集群清理 (需启用 `spec.syncOptions: [Prune=true]`)。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get application <app-name> -o jsonpath='{.spec.syncPolicy}'
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常清理。如果资源仍存在,确认启用 Prune 选项且资源无 `Prevent=true` 注解。
 
 ---
@@ -815,95 +819,95 @@ kubectl get application <app-name> -o jsonpath='{.spec.syncPolicy}'
 
 ---
 
-#<!-- chunk: `RevisionReady` - Revision 已就绪 -->## `RevisionReady` - Revision 已就绪
+## `RevisionReady` - Revision 已就绪
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | knative-serving-controller |
 | **适用版本** | Knative v0.20+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Knative Revision (不可变部署版本) 的所有 Pod 已就绪,可接收流量。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get revision
 kubectl describe revision <revision-name>
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。Revision 就绪后 Route 开始分配流量。
 
 ---
 
-#<!-- chunk: `ConfigurationReady` - Configuration 已就绪 -->## `ConfigurationReady` - Configuration 已就绪
+## `ConfigurationReady` - Configuration 已就绪
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | knative-serving-controller |
 | **适用版本** | Knative v0.20+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Configuration 的最新 Revision 已创建并就绪。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get configuration
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件,标志应用可处理请求。
 
 ---
 
-#<!-- chunk: `RouteReady` - Route 已就绪 -->## `RouteReady` - Route 已就绪
+## `RouteReady` - Route 已就绪
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | knative-serving-controller |
 | **适用版本** | Knative v0.20+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Route 已将流量规则应用到底层 Ingress/Gateway。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get route
 kubectl get route <route-name> -o jsonpath='{.status.traffic}'
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。可通过 Route 的 URL 访问服务。
 
 ---
 
-#<!-- chunk: `IngressNotReady` - Ingress 未就绪 -->## `IngressNotReady` - Ingress 未就绪
+## `IngressNotReady` - Ingress 未就绪
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | knative-serving-controller |
 | **适用版本** | Knative v0.20+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Knative 无法创建或配置底层 Ingress 资源 (可能是 Istio Gateway 或 Contour HTTPProxy)。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get ingress -n <namespace>
 kubectl get configmap config-network -n knative-serving -o yaml
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 Ingress Controller 未安装: 安装 Istio、Contour 或 Kourier。配置错误: 检查 `config-network` 中的 `ingress.class`。
 
 ---
 
-#<!-- chunk: `InternalError` - 内部错误 -->## `InternalError` - 内部错误
+## `InternalError` - 内部错误
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | knative-serving-controller |
 | **适用版本** | Knative v0.20+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Knative 控制器遇到内部错误,无法协调资源。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl logs -n knative-serving deployment/controller
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 临时错误可能自动恢复。持久错误查看日志向 Knative 社区报告 bug。
 
 ---
@@ -914,76 +918,76 @@ kubectl logs -n knative-serving deployment/controller
 
 ---
 
-#<!-- chunk: `PrometheusRuleCreated` - PrometheusRule 创建成功 -->## `PrometheusRuleCreated` - PrometheusRule 创建成功
+## `PrometheusRuleCreated` - PrometheusRule 创建成功
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | prometheus-operator |
 | **适用版本** | v0.40+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Operator 成功将 PrometheusRule 转换为 Prometheus 配置。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get prometheusrule
 curl http://<prometheus-url>/api/v1/rules | jq .
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。如果规则未生效,检查 PrometheusRule 的 label 是否匹配 Prometheus 的 `spec.ruleSelector`。
 
 ---
 
-#<!-- chunk: `AlertmanagerConfigSynced` - Alertmanager 配置同步 -->## `AlertmanagerConfigSynced` - Alertmanager 配置同步
+## `AlertmanagerConfigSynced` - Alertmanager 配置同步
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | prometheus-operator |
 | **适用版本** | v0.40+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Alertmanager 配置 (告警路由、接收器) 已同步到 Alertmanager Pod。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get secret alertmanager-<name> -o jsonpath='{.data.alertmanager\.yaml}' | base64 -d
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。配置更新后 Alertmanager 自动重载。
 
 ---
 
-#<!-- chunk: `ConfigReloaded` - Prometheus 配置重载 -->## `ConfigReloaded` - Prometheus 配置重载
+## `ConfigReloaded` - Prometheus 配置重载
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | prometheus-operator |
 | **适用版本** | v0.40+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Prometheus 已重载配置文件,应用了新的抓取目标或规则。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 curl http://<prometheus-url>/api/v1/status/config | jq .
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。重载不会中断现有抓取任务。
 
 ---
 
-#<!-- chunk: `SyncFailed` - 配置同步失败 -->## `SyncFailed` - 配置同步失败
+## `SyncFailed` - 配置同步失败
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | prometheus-operator |
 | **适用版本** | v0.40+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 Operator 无法生成有效 Prometheus 配置。常见原因: PrometheusRule PromQL 语法错误、ServiceMonitor 选择器无法匹配、资源引用不存在。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl logs -n monitoring deployment/prometheus-operator
 promtool check rules <rule-file.yaml>
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 根据日志修复: 检查 PromQL 语法、确认 label selector、检查引用的 Secret/ConfigMap。
 
 ---
@@ -994,97 +998,97 @@ promtool check rules <rule-file.yaml>
 
 ---
 
-#<!-- chunk: `BackupCompleted` - 备份完成 -->## `BackupCompleted` - 备份完成
+## `BackupCompleted` - 备份完成
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | velero |
 | **适用版本** | Velero v1.5+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 备份任务成功完成,数据已存储到对象存储 (S3/GCS/Azure Blob)。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 velero backup describe <backup-name>
 velero backup logs <backup-name>
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。定期验证备份可恢复性 (执行 `velero restore`)。
 
 ---
 
-#<!-- chunk: `BackupFailed` - 备份失败 -->## `BackupFailed` - 备份失败
+## `BackupFailed` - 备份失败
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | velero |
 | **适用版本** | Velero v1.5+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 备份任务失败。常见原因: 对象存储凭证过期或权限不足、网络连接中断、资源选择器未匹配对象。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 velero backup describe <backup-name>
 kubectl logs -n velero deployment/velero
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 存储凭证: 更新 S3/GCS 凭证 Secret。网络问题: 检查连通性。选择器: 调整 `--selector` 或 `--include-namespaces`。
 
 ---
 
-#<!-- chunk: `RestoreCompleted` - 恢复完成 -->## `RestoreCompleted` - 恢复完成
+## `RestoreCompleted` - 恢复完成
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | velero |
 | **适用版本** | Velero v1.5+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 从备份成功恢复资源到集群。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 velero restore describe <restore-name>
 kubectl get all -n <namespace>
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。恢复后验证 Pod 是否正常运行、PV 数据是否完整。
 
 ---
 
-#<!-- chunk: `RestoreFailed` - 恢复失败 -->## `RestoreFailed` - 恢复失败
+## `RestoreFailed` - 恢复失败
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | velero |
 | **适用版本** | Velero v1.5+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 恢复任务失败。常见原因: 资源已存在 (名称冲突)、Kubernetes 版本不兼容 (API 废弃)、PV 快照无法挂载。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 velero restore describe <restore-name>
 velero restore logs <restore-name>
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 资源冲突: 删除冲突资源或使用 `--namespace-mappings`。版本不兼容: 升级集群或手动修改 YAML。PV 问题: 检查存储类。
 
 ---
 
-#<!-- chunk: `ScheduledBackupCreated` - 定时备份创建 -->## `ScheduledBackupCreated` - 定时备份创建
+## `ScheduledBackupCreated` - 定时备份创建
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | velero |
 | **适用版本** | Velero v1.5+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 定时备份任务 (Schedule) 触发并创建了新的 Backup 资源。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 velero schedule get
 velero backup get
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。定期清理过期备份 (配置 `--ttl`)。
 
 ---
@@ -1095,76 +1099,76 @@ velero backup get
 
 ---
 
-#<!-- chunk: `CreateRecord` - DNS 记录创建 -->## `CreateRecord` - DNS 记录创建
+## `CreateRecord` - DNS 记录创建
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | external-dns |
 | **适用版本** | v0.7+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 External DNS 在外部 DNS 提供商创建了 A/CNAME 记录。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl logs -n kube-system deployment/external-dns
 dig <hostname>
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。如果 DNS 未生效,检查 Service/Ingress 注解 `external-dns.alpha.kubernetes.io/hostname`、DNS 提供商凭证。
 
 ---
 
-#<!-- chunk: `UpdateRecord` - DNS 记录更新 -->## `UpdateRecord` - DNS 记录更新
+## `UpdateRecord` - DNS 记录更新
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | external-dns |
 | **适用版本** | v0.7+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 External DNS 更新了 DNS 记录 (如 LoadBalancer IP 变更)。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 nslookup <hostname>
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。注意 DNS TTL,记录变更生效有延迟。
 
 ---
 
-#<!-- chunk: `DeleteRecord` - DNS 记录删除 -->## `DeleteRecord` - DNS 记录删除
+## `DeleteRecord` - DNS 记录删除
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | external-dns |
 | **适用版本** | v0.7+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 External DNS 删除了不再需要的 DNS 记录。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 dig <hostname>
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。如果需要保留记录,确保资源仍存在或使用 `--policy=upsert-only`。
 
 ---
 
-#<!-- chunk: `FailedToSyncRecords` - DNS 记录同步失败 -->## `FailedToSyncRecords` - DNS 记录同步失败
+## `FailedToSyncRecords` - DNS 记录同步失败
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | external-dns |
 | **适用版本** | v0.7+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 External DNS 无法同步记录到 DNS 提供商。常见原因: API 凭证过期或权限不足、DNS Zone 不存在、达到 API 限流或配额。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl logs -n kube-system deployment/external-dns
 kubectl get secret external-dns -o yaml
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 权限问题: 更新 IAM 角色或 API Token。Zone 不存在: 在 DNS 提供商创建 Zone。限流: 降低同步频率 `--interval`。
 
 ---
@@ -1175,84 +1179,84 @@ kubectl get secret external-dns -o yaml
 
 ---
 
-#<!-- chunk: `IPAssigned` - IP 地址分配成功 -->## `IPAssigned` - IP 地址分配成功
+## `IPAssigned` - IP 地址分配成功
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | metallb-controller |
 | **适用版本** | MetalLB v0.10+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 MetalLB 从 IP 地址池中为 Service 成功分配了外部 IP。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get svc <svc-name>
 kubectl get configmap -n metallb-system config -o yaml
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。IP 会自动写入 `status.loadBalancer.ingress`。
 
 ---
 
-#<!-- chunk: `AllocationFailed` - IP 地址分配失败 -->## `AllocationFailed` - IP 地址分配失败
+## `AllocationFailed` - IP 地址分配失败
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | metallb-controller |
 | **适用版本** | MetalLB v0.10+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 MetalLB 无法分配 IP。常见原因: IP 地址池耗尽、Service 注解指定的池不存在、配置错误。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl get ipaddresspool -n metallb-system
 kubectl get svc --all-namespaces -o wide | grep LoadBalancer
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 扩展 IP 池: 在 MetalLB 配置中添加更多 IP 范围。释放 IP: 删除无用 LoadBalancer Service。检查配置: 确认 address-pool 名称正确。
 
 ---
 
-#<!-- chunk: `nodeAssigned` - 节点 BGP 宣告 -->## `nodeAssigned` - 节点 BGP 宣告
+## `nodeAssigned` - 节点 BGP 宣告
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Normal |
 | **来源组件** | metallb-speaker |
 | **适用版本** | MetalLB v0.10+ |
 | **生产频率** | 中频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 MetalLB speaker 成功在节点上建立 BGP 会话并宣告路由。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl logs -n metallb-system daemonset/speaker | grep BGP
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 正常事件。如果路由未生效,检查 BGP peer 配置、路由器防火墙规则 (TCP 179)。
 
 ---
 
-#<!-- chunk: `IPNotAssigned` - IP 地址未分配 -->## `IPNotAssigned` - IP 地址未分配
+## `IPNotAssigned` - IP 地址未分配
 | 属性 | 说明 |
 |:---|:---|
 | **事件类型** | Warning |
 | **来源组件** | metallb-controller |
 | **适用版本** | MetalLB v0.10+ |
 | **生产频率** | 低频 |
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 MetalLB 控制器检测到 Service 应该有外部 IP,但未能分配。
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 ```bash
 kubectl describe svc <svc-name>
 kubectl logs -n metallb-system deployment/controller
 ```
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 配置 IP 池: 创建 IPAddressPool 资源。检查 Service 类型: 确认 `type: LoadBalancer`。查看控制器日志排查错误。
 
 ---
 
 <!-- chunk: 十二、生产环境最佳实践 -->## 十二、生产环境最佳实践
 
-#<!-- chunk: 12.1 生态插件事件监控策略 -->## 12.1 生态插件事件监控策略
+## 12.1 生态插件事件监控策略
 
 | 监控维度 | 推荐工具 | 关键指标 | 告警阈值建议 |
 |:---|:---|:---|:---|
@@ -1262,7 +1266,7 @@ kubectl logs -n metallb-system deployment/controller
 | **证书到期** | cert-manager Exporter | `certmanager_certificate_expiration_timestamp_seconds` | < 7 天 |
 | **备份成功率** | Velero Prometheus Metrics | `velero_backup_success_total / velero_backup_attempt_total` | < 95% |
 
-#<!-- chunk: 12.2 插件版本兼容性矩阵 -->## 12.2 插件版本兼容性矩阵
+## 12.2 插件版本兼容性矩阵
 
 | 插件 | k8s v1.25 | v1.26 | v1.27 | v1.28 | v1.29 | v1.30+ |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -1274,7 +1278,7 @@ kubectl logs -n metallb-system deployment/controller
 | **Velero** | v1.10+ | v1.11+ | v1.11+ | v1.12+ | v1.13+ | v1.13+ |
 | **MetalLB** | v0.13+ | v0.13+ | v0.13+ | v0.14+ | v0.14+ | v0.14+ |
 
-#<!-- chunk: 12.3 插件部署优先级 -->## 12.3 插件部署优先级
+## 12.3 插件部署优先级
 
 **优先级 1 (必备):**
 - ✅ Node Problem Detector: 节点健康监控
@@ -1291,7 +1295,7 @@ kubectl logs -n metallb-system deployment/controller
 - ArgoCD: GitOps 持续交付
 - Knative: Serverless 工作负载
 
-#<!-- chunk: 12.4 插件事件排查工作流 -->## 12.4 插件事件排查工作流
+## 12.4 插件事件排查工作流
 
 ```
 用户报告问题
@@ -1315,7 +1319,7 @@ kubectl logs -n metallb-system deployment/controller
             GitHub Issues / Slack / 官方文档
 ```
 
-#<!-- chunk: 12.5 关键插件告警规则示例 -->## 12.5 关键插件告警规则示例
+## 12.5 关键插件告警规则示例
 
 ```yaml
 # Prometheus AlertManager 告警规则
@@ -1343,7 +1347,7 @@ groups:
         severity: warning
 ```
 
-#<!-- chunk: 12.6 插件升级注意事项 -->## 12.6 插件升级注意事项
+## 12.6 插件升级注意事项
 
 **升级前检查清单:**
 1. ✅ 阅读 Release Notes,确认无破坏性变更
@@ -1357,7 +1361,7 @@ groups:
 - **cert-manager**: CRD 升级可能导致证书重新签发
 - **ArgoCD**: 数据库迁移可能需要停机
 
-#<!-- chunk: 12.7 插件安全加固 -->## 12.7 插件安全加固
+## 12.7 插件安全加固
 
 | 安全层面 | 加固措施 | 适用插件 |
 |:---|:---|:---|
@@ -1376,7 +1380,7 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-33-kubernetes-events MOC
-- [[domain-17-system-foundation/README|Domain-33: Kubernetes Events 全域事件大全]]
+- [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
 - Domain-33 K8s 事件 — 开源项目索引
 - 01 - Kubernetes 事件系统架构与 API 参考
 - 02 - Pod 与容器生命周期事件
@@ -1397,4 +1401,6 @@ groups:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+```

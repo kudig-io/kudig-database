@@ -60,7 +60,7 @@ jobs:
         run: |
           cd scripts/corpus-generator
           python3 -c "
-          import json
+          import json, sys
           with open('corpus-coverage-report.json') as f:
               report = json.load(f)
           passed = report['summary']['checks_passed']
@@ -70,8 +70,8 @@ jobs:
               print('Coverage gaps detected:')
               for rec in report['recommendations']:
                   print(f'  - {rec}')
-              # 不阻断构建，仅警告
-              print('::warning::Corpus coverage below target')
+              print('::error::语料覆盖率低于目标，请补齐缺失技能/FTA 分支')
+              sys.exit(1)
           "
 
       - name: Report corpus stats

@@ -92,7 +92,7 @@ k8s_versions:
 
 Commvault 是业界功能最全面的企业级数据保护和管理平台之一，提供从备份恢复、灾难恢复、归档管理到数据治理的一体化解决方案。其独特的 CommServe 集中管理架构、MediaAgent 分布式数据处理设计以及智能数据管理（IDM）能力，使其成为金融、医疗、政府等受监管行业的首选数据保护方案。本文档基于大规模生产环境经验，全面探讨 Commvault 的企业级部署架构、灾备策略实施和业务连续性管理。
 
-#<!-- chunk: RPO 与 RTO 定义 -->## RPO 与 RTO 定义
+## RPO 与 RTO 定义
 
 - **RPO（Recovery Point Objective）**：在 Commvault 环境中，RPO 直接由备份频率和存储复制策略决定。通过连续数据保护（CDP）功能可实现秒级 RPO；通过定时备份策略实现小时级 RPO；通过存储阵列复制实现近零 RPO。
 - **RTO（Recovery Time Objective）**：Commvault 的 RTO 能力取决于恢复方式和目标环境。裸金属恢复（BMR）可实现 30 分钟内的系统级恢复；虚拟机即时挂载（Live Mount）可实现分钟级文件/应用恢复；跨站点故障切换可将 RTO 缩短至小时级。
@@ -120,7 +120,7 @@ commvault_rpo_rto_capabilities:
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 核心组件架构 -->## 核心组件架构
+## 核心组件架构
 
 ```mermaid
 graph TB
@@ -176,7 +176,7 @@ graph TB
     DR_PLAN --> DR_TEST & DR_MONITOR
 ```
 
-#<!-- chunk: 企业级部署配置 -->## 企业级部署配置
+## 企业级部署配置
 
 ```yaml
 commvault_enterprise_deployment:
@@ -281,7 +281,7 @@ commvault_enterprise_deployment:
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: 分层备份策略配置 -->## 分层备份策略配置
+## 分层备份策略配置
 
 ```powershell
 # Commvault PowerShell 分层备份策略
@@ -348,7 +348,7 @@ New-CVBackupSet -ClientGroup "Production-Servers" `
     }
 ```
 
-#<!-- chunk: 应用一致性备份 -->## 应用一致性备份
+## 应用一致性备份
 
 ```xml
 <!-- Commvault 应用一致性备份配置 -->
@@ -394,7 +394,7 @@ New-CVBackupSet -ClientGroup "Production-Servers" `
 
 <!-- chunk: 备份策略 -->## 备份策略
 
-#<!-- chunk: 多站点灾备存储策略 -->## 多站点灾备存储策略
+## 多站点灾备存储策略
 
 ```yaml
 # Commvault 多站点灾备配置
@@ -448,7 +448,7 @@ multi_site_disaster_recovery:
 
 <!-- chunk: 恢复流程 -->## 恢复流程
 
-#<!-- chunk: 自动化恢复编排 -->## 自动化恢复编排
+## 自动化恢复编排
 
 ```powershell
 # Commvault 灾难恢复编排脚本
@@ -576,7 +576,7 @@ dr_drill_program:
 
 <!-- chunk: 监控告警 -->## 监控告警
 
-#<!-- chunk: 智能告警规则 -->## 智能告警规则
+## 智能告警规则
 
 ```yaml
 commvault_alerting:
@@ -626,7 +626,7 @@ commvault_alerting:
         recipients: ["dr-team@company.com"]
 ```
 
-#<!-- chunk: 监控仪表板 -->## 监控仪表板
+## 监控仪表板
 
 ```json
 {
@@ -670,7 +670,7 @@ commvault_alerting:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题诊断 -->## 常见问题诊断
+## 常见问题诊断
 
 ```bash
 #!/bin/bash
@@ -717,7 +717,7 @@ ssh commserve-prod "
 "
 ```
 
-#<!-- chunk: 故障排查手册 -->## 故障排查手册
+## 故障排查手册
 
 | 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
 |:---|:---|:---|:---|
@@ -732,7 +732,7 @@ ssh commserve-prod "
 
 <!-- chunk: 性能优化与容量规划 -->## 性能优化与容量规划
 
-#<!-- chunk: Commvault 性能调优策略 -->## Commvault 性能调优策略
+## Commvault 性能调优策略
 
 Commvault 在大规模企业环境中的性能优化需要从多个维度系统性考量。首先是数据库层面的优化——CommServe 的 SQL Server 数据库存储了所有作业元数据、配置信息和索引，其性能直接影响整个备份系统的响应速度。建议为 SQL Server 分配至少 16GB 内存，启用即时文件初始化（Instant File Initialization），配置合适的最大/最小内存限制，并定期更新统计信息和重建索引。
 
@@ -770,7 +770,7 @@ performance_optimization:
     mount_options: "noatime,nobarrier"
 ```
 
-#<!-- chunk: 网络带宽优化 -->## 网络带宽优化
+## 网络带宽优化
 
 跨站点备份和复制是企业级 Commvault 部署中的常见场景。在带宽受限的情况下，需要使用网络节流（Throttle）和压缩技术来优化传输效率。
 
@@ -804,7 +804,7 @@ network_optimization:
     protocol_optimization: true
 ```
 
-#<!-- chunk: 容量预测与规划 -->## 容量预测与规划
+## 容量预测与规划
 
 ```python
 #!/usr/bin/env python3
@@ -857,7 +857,7 @@ class CommvaultCapacityPlanner:
 
 <!-- chunk: 合规性与审计 -->## 合规性与审计
 
-#<!-- chunk: 企业合规框架 -->## 企业合规框架
+## 企业合规框架
 
 Commvault 在合规性方面提供了全面的支持，包括 GDPR、等保 2.0、SEC 17a-4、HIPAA 等法规框架。企业应根据自身行业和监管要求，配置相应的合规策略。
 
@@ -946,7 +946,7 @@ security_hardening:
 
 <!-- chunk: Commvault 自动化运维 -->## Commvault 自动化运维
 
-#<!-- chunk: 自动化运维脚本集 -->## 自动化运维脚本集
+## 自动化运维脚本集
 
 Commvault 在大规模环境中的日常运维需要高度自动化。以下脚本集涵盖了从备份验证、存储清理、作业监控到合规检查的完整运维场景。
 
@@ -1101,7 +1101,7 @@ function New-CVComplianceReport {
 }
 ```
 
-#<!-- chunk: Commvault REST API 自动化 -->## Commvault REST API 自动化
+## Commvault REST API 自动化
 
 Commvault 提供了完整的 REST API 接口，支持所有管理操作的自动化。以下是使用 Python 调用 Commvault API 的示例，涵盖备份触发、状态查询和恢复操作。
 
@@ -1195,7 +1195,7 @@ class CommvaultAPI:
 
 <!-- chunk: Commvault 与云平台集成 -->## Commvault 与云平台集成
 
-#<!-- chunk: 多云数据保护 -->## 多云数据保护
+## 多云数据保护
 
 Commvault 支持与 AWS、Azure、GCP 和阿里云等主流云平台深度集成，提供云工作负载保护、云存储归档和跨云数据迁移能力。
 
@@ -1243,7 +1243,7 @@ cloud_integration:
 
 <!-- chunk: Commvault 灾备编排 -->## Commvault 灾备编排
 
-#<!-- chunk: 自动化恢复编排 -->## 自动化恢复编排
+## 自动化恢复编排
 
 Commvault 的恢复编排功能允许定义多步骤的恢复流程，包括前置验证、数据恢复、应用启动和后置验证。通过将恢复流程脚本化，可以消除人工操作的不确定性，确保每次恢复都按照预定流程执行。
 
@@ -1333,7 +1333,7 @@ recovery_orchestration:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-30-disaster-recovery-business-continuity KUDIG Database — Global MOC
-- [[domain-09-reliability-engineering/README|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
+- [[domain-09-reliability-engineering/README.md|Domain 09: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
 - Domain-30 灾备与业务连续性 — 开源项目索引
 - VMware vSphere 企业级灾备与业务连续性
 - Veeam Backup & Replication 企业级备份恢复解决方案
@@ -1353,4 +1353,4 @@ recovery_orchestration:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]

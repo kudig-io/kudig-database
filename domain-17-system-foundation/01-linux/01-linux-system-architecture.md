@@ -89,7 +89,7 @@ created: "2026-05-23"
 
 <!-- chunk: Linux 内核架构 -->## Linux 内核架构
 
-#<!-- chunk: 内核层次结构 -->## 内核层次结构
+## 内核层次结构
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -121,7 +121,7 @@ created: "2026-05-23"
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 内核子系统 -->## 内核子系统
+## 内核子系统
 
 | 子系统 | 功能 | 核心组件 |
 |:---|:---|:---|
@@ -132,7 +132,7 @@ created: "2026-05-23"
 | **设备驱动** | 硬件抽象、驱动框架 | 块设备、字符设备 |
 | **安全模块** | 访问控制 | SELinux、AppArmor |
 
-#<!-- chunk: 内核版本 -->## 内核版本
+## 内核版本
 
 | 版本系列 | LTS 支持 | 主要特性 |
 |:---|:---|:---|
@@ -146,7 +146,7 @@ created: "2026-05-23"
 
 <!-- chunk: 系统启动过程 -->## 系统启动过程
 
-#<!-- chunk: 启动流程 -->## 启动流程
+## 启动流程
 
 ```
 电源开启
@@ -183,7 +183,7 @@ created: "2026-05-23"
 └───────────────┘
 ```
 
-#<!-- chunk: GRUB2 配置 -->## GRUB2 配置
+## GRUB2 配置
 
 ```bash
 # 配置文件
@@ -199,7 +199,7 @@ GRUB_DISABLE_RECOVERY="true"
 grub2-mkconfig -o /boot/grub2/grub.cfg
 ```
 
-#<!-- chunk: 内核启动参数 -->## 内核启动参数
+## 内核启动参数
 
 | 参数 | 说明 | 示例 |
 |:---|:---|:---|
@@ -214,7 +214,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 
 <!-- chunk: systemd 服务管理 -->## systemd 服务管理
 
-#<!-- chunk: 常用命令 -->## 常用命令
+## 常用命令
 
 | 命令 | 说明 |
 |:---|:---|
@@ -229,7 +229,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 | `systemctl list-units` | 列出所有单元 |
 | `systemctl daemon-reload` | 重载 unit 文件 |
 
-#<!-- chunk: Unit 文件 -->## Unit 文件
+## Unit 文件
 
 ```ini
 # /etc/systemd/system/myapp.service
@@ -254,7 +254,7 @@ StandardError=journal
 WantedBy=multi-user.target
 ```
 
-#<!-- chunk: Service 类型 -->## Service 类型
+## Service 类型
 
 | 类型 | 说明 |
 |:---|:---|
@@ -264,7 +264,7 @@ WantedBy=multi-user.target
 | `notify` | 服务就绪时通知 systemd |
 | `dbus` | 注册 D-Bus 后就绪 |
 
-#<!-- chunk: 日志查看 -->## 日志查看
+## 日志查看
 
 ```bash
 # 查看服务日志
@@ -284,7 +284,10 @@ journalctl -u myapp.service -b
 
 <!-- chunk: 内核参数调优 -->## 内核参数调优
 
-#<!-- chunk: sysctl 配置 -->## sysctl 配置
+## sysctl 配置
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
 
 ```bash
 # 查看参数
@@ -299,9 +302,9 @@ echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.d/99-custom.conf
 sysctl --system
 ```
 
-#<!-- chunk: 常用内核参数 -->## 常用内核参数
+## 常用内核参数
 
-##<!-- chunk: 网络参数 -->## 网络参数
+## 网络参数
 
 | 参数 | 说明 | 推荐值 |
 |:---|:---|:---|
@@ -312,7 +315,7 @@ sysctl --system
 | `net.ipv4.tcp_fin_timeout` | FIN 超时 | 15 |
 | `net.ipv4.tcp_tw_reuse` | TIME_WAIT 重用 | 1 |
 
-##<!-- chunk: 内存参数 -->## 内存参数
+## 内存参数
 
 | 参数 | 说明 | 推荐值 |
 |:---|:---|:---|
@@ -321,14 +324,14 @@ sysctl --system
 | `vm.dirty_background_ratio` | 后台刷盘比例 | 5 |
 | `vm.overcommit_memory` | 内存过量分配 | 0/1/2 |
 
-##<!-- chunk: 文件系统参数 -->## 文件系统参数
+## 文件系统参数
 
 | 参数 | 说明 | 推荐值 |
 |:---|:---|:---|
 | `fs.file-max` | 最大文件数 | 2097152 |
 | `fs.inotify.max_user_watches` | inotify 监控数 | 524288 |
 
-#<!-- chunk: 生产配置示例 -->## 生产配置示例
+## 生产配置示例
 
 ```bash
 # /etc/sysctl.d/99-kubernetes.conf
@@ -349,7 +352,7 @@ fs.inotify.max_user_instances = 8192
 
 <!-- chunk: 内核模块管理 -->## 内核模块管理
 
-#<!-- chunk: 模块操作 -->## 模块操作
+## 模块操作
 
 ```bash
 # 查看已加载模块
@@ -369,7 +372,7 @@ modinfo br_netfilter
 echo "br_netfilter" >> /etc/modules-load.d/kubernetes.conf
 ```
 
-#<!-- chunk: 容器相关模块 -->## 容器相关模块
+## 容器相关模块
 
 | 模块 | 用途 |
 |:---|:---|
@@ -392,7 +395,7 @@ echo "br_netfilter" >> /etc/modules-load.d/kubernetes.conf
 | **Alpine** | apk | 2 年 | 容器基础镜像 |
 | **Fedora** | dnf | 1 年 | 新技术验证 |
 
-#<!-- chunk: 容器推荐 -->## 容器推荐
+## 容器推荐
 
 | 场景 | 推荐发行版 |
 |:---|:---|
@@ -404,7 +407,10 @@ echo "br_netfilter" >> /etc/modules-load.d/kubernetes.conf
 
 <!-- chunk: 生产环境最佳实践 -->## 生产环境最佳实践
 
-#<!-- chunk: 系统基线配置 -->## 系统基线配置
+## 系统基线配置
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -461,7 +467,7 @@ systemctl mask firewalld
 systemctl enable --now chronyd rsyslog
 ```
 
-#<!-- chunk: 内核版本管理策略 -->## 内核版本管理策略
+## 内核版本管理策略
 
 | 场景 | 推荐策略 | 说明 |
 |:---|:---|:---|
@@ -470,7 +476,7 @@ systemctl enable --now chronyd rsyslog
 | **Web 应用服务器** | 最新稳定版本 | 平衡性能和稳定性 |
 | **开发测试环境** | 最新版本 | 获取最新特性和安全补丁 |
 
-#<!-- chunk: 系统分区规划 -->## 系统分区规划
+## 系统分区规划
 
 ```bash
 # 生产环境推荐分区方案
@@ -487,7 +493,7 @@ systemctl enable --now chronyd rsyslog
 
 <!-- chunk: 系统监控与告警 -->## 系统监控与告警
 
-#<!-- chunk: 核心监控指标 -->## 核心监控指标
+## 核心监控指标
 
 | 指标类别 | 关键指标 | 告警阈值 | 监控工具 |
 |:---|:---|:---|:---|
@@ -497,7 +503,7 @@ systemctl enable --now chronyd rsyslog
 | **网络** | 带宽使用、连接数、错误包 | >80%, >1% | ss, ifstat |
 | **系统** | 进程数、文件句柄、登录用户 | 异常增长 | ps, lsof |
 
-#<!-- chunk: Prometheus Node Exporter 配置 -->## Prometheus Node Exporter 配置
+## Prometheus Node Exporter 配置
 
 ```yaml
 # /etc/prometheus/node_exporter.yml
@@ -529,7 +535,7 @@ groups:
       summary: "Instance {{ $labels.instance }} memory usage is above 85%"
 ```
 
-#<!-- chunk: Grafana 仪表板配置 -->## Grafana 仪表板配置
+## Grafana 仪表板配置
 
 ```json
 {
@@ -559,7 +565,7 @@ groups:
 
 <!-- chunk: 故障排查与诊断 -->## 故障排查与诊断
 
-#<!-- chunk: 系统健康检查脚本 -->## 系统健康检查脚本
+## 系统健康检查脚本
 
 ```bash
 #!/bin/bash
@@ -631,7 +637,7 @@ if grep -q "警告" $LOG_FILE; then
 fi
 ```
 
-#<!-- chunk: 内核崩溃诊断 -->## 内核崩溃诊断
+## 内核崩溃诊断
 
 ```bash
 # 启用内核崩溃转储
@@ -650,7 +656,7 @@ systemctl start kdump
 crash /var/crash/vmcore /usr/lib/debug/lib/modules/$(uname -r)/vmlinux
 ```
 
-#<!-- chunk: 系统性能瓶颈分析流程 -->## 系统性能瓶颈分析流程
+## 系统性能瓶颈分析流程
 
 ```
 1. 初步评估
@@ -674,7 +680,7 @@ crash /var/crash/vmcore /usr/lib/debug/lib/modules/$(uname -r)/vmlinux
 
 <!-- chunk: 安全加固配置 -->## 安全加固配置
 
-#<!-- chunk: SELinux 生产配置 -->## SELinux 生产配置
+## SELinux 生产配置
 
 ```bash
 # 检查 SELinux 状态
@@ -704,7 +710,10 @@ restorecon -Rv /web
 semanage port -l | grep http
 ```
 
-#<!-- chunk: 系统审计配置 -->## 系统审计配置
+## 系统审计配置
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 安装审计工具
@@ -752,7 +761,7 @@ ausearch -k identity --start recent
 aureport --summary
 ```
 
-#<!-- chunk: 防火墙生产配置 -->## 防火墙生产配置
+## 防火墙生产配置
 
 ```bash
 # firewalld 生产配置
@@ -782,7 +791,7 @@ firewall-cmd --reload
 
 <!-- chunk: 自动化运维脚本 -->## 自动化运维脚本
 
-#<!-- chunk: 系统批量管理脚本 -->## 系统批量管理脚本
+## 系统批量管理脚本
 
 ```bash
 #!/bin/bash
@@ -856,7 +865,7 @@ case "$1" in
 esac
 ```
 
-#<!-- chunk: 配置备份脚本 -->## 配置备份脚本
+## 配置备份脚本
 
 ```bash
 #!/bin/bash
@@ -926,7 +935,7 @@ echo "配置备份完成: $BACKUP_DIR/system_config_$DATE.tar.gz"
 
 <!-- chunk: 与 Kubernetes 的关系 -->## 与 Kubernetes 的关系
 
-#<!-- chunk: systemd 在 K8s 中的角色 -->## systemd 在 K8s 中的角色
+## systemd 在 K8s 中的角色
 
 Kubernetes 的 kubelet 就是作为 systemd 服务运行的。每个 Kubelet 管理的容器最终也由容器运行时（containerd/CRI-O）通过 systemd 或 cgroupfs 管理 cgroup。理解 systemd 对于管理 K8s 节点至关重要。
 
@@ -944,7 +953,7 @@ systemd-cgls                          # 查看完整 cgroup 树
 systemd-cgls | grep -A10 kubepods     # K8s Pod 的 cgroup
 ```
 
-#<!-- chunk: cgroups 与 K8s 资源管理 -->## cgroups 与 K8s 资源管理
+## cgroups 与 K8s 资源管理
 
 Kubernetes 通过 cgroups 实现资源管理。kubelet 支持 cgroupfs 和 systemd 两种 cgroup 驱动：
 
@@ -972,7 +981,7 @@ K8s 节点 cgroup 层级 (systemd 驱动):
 └── user.slice/
 ```
 
-#<!-- chunk: 内核模块与 K8s -->## 内核模块与 K8s
+## 内核模块与 K8s
 
 Kubernetes 依赖以下内核模块才能正常工作：
 
@@ -1021,7 +1030,7 @@ sysctl --system
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 内核相关问题 -->## 内核相关问题
+## 内核相关问题
 
 ```bash
 # 内核 panic 后分析
@@ -1058,4 +1067,4 @@ cat /proc/modules | wc -l
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

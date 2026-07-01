@@ -51,7 +51,7 @@ SOPS (Secrets OPerationS) 是一个加密文件编辑器，支持 YAML、JSON、
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -69,23 +69,23 @@ SOPS (Secrets OPerationS) 是一个加密文件编辑器，支持 YAML、JSON、
 ## 参考链接
 
 - [[flux]]
-- [[entities/argocd|argocd]]
-- [[entities/vault|vault]]
+- [[entities/argocd.md|argocd]]
+- [[entities/vault.md|vault]]
 - [[deployment]]
-- [[concepts/controller-pattern|controller-pattern]]
+- [[concepts/controller-pattern.md|controller-pattern]]
 
 ## Related
 
 - [[prometheus]] — Prometheus
 - [[interlink]] — InterLink
 - [[tinkerbell]] — Tinkerbell
-- [[entities/vault|vault]] — HashiCorp Vault
+- [[entities/vault.md|vault]] — HashiCorp Vault
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - sops
-- [[entities/ratify|Ratify]]
-- [[synthesis/IaC x 多集群管理|基础设施即代码 x 多集群管理]] — Cross-reference
-- [[synthesis/GitOps x 平台工程|GitOps x 平台工程]] — Cross-reference
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/ratify.md|Ratify]]
+- [[concepts/IaC x 多集群管理.md|基础设施即代码 x 多集群管理]] — Cross-reference
+- [[concepts/GitOps x 平台工程.md|GitOps x 平台工程]] — Cross-reference
+- [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

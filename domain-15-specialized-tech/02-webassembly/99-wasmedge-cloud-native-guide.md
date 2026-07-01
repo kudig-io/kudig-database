@@ -134,6 +134,9 @@ containerd ──► containerd-wasm-shims ──► Wasm Runtime (WasmEdge/wasm
 
 ### 3.1 安装 Wasm Shims
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 下载最新 shims
 wget https://github.com/containerd/runwasi/releases/download/containerd-shim-wasmedge%2Fv0.8.0/containerd-shim-wasmedge-v1-linux-x86_64.tar.gz
@@ -481,7 +484,7 @@ Cloudflare Workers = V8 Isolate + Wasm
 ## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native MOC
-- [[domain-15-specialized-tech/README|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: WebAssembly 云原生 (WebAssembly Cloud Native)]]
 - Domain-38 WebAssembly 云原生 — 开源项目索引
 - WebAssembly 云原生基础
 - containerd Wasm 运行时
@@ -499,3 +502,5 @@ Cloudflare Workers = V8 Isolate + Wasm
 - 10-wasm-security-sandbox
 - 01-wasm-fundamentals-cloud-native
 - 02-containerd-wasm-shim
+
+```

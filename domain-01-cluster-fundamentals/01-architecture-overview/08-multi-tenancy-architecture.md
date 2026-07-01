@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 # 08 - 多租户架构设计 (Multi-Tenancy Architecture)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/concepts/security/multi-tenancy](https://kubernetes.io/docs/concepts/security/multi-tenancy/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/security/multi-tenancy](https://kubernetes.io/docs/concepts/security/multi-tenancy/)
 
 <!-- chunk: 多租户隔离级别 -->
 ## 多租户隔离级别
@@ -261,6 +261,9 @@ metadata:
 | **资源映射** | 虚拟资源映射到宿主 | 资源高效利用 |
 | **CRD隔离** | 租户可安装自己的CRD | 不影响其他租户 |
 | **版本灵活** | 可运行不同K8S版本 | 升级灵活 |
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 安装vCluster
@@ -470,7 +473,7 @@ roleRef:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析
@@ -491,4 +494,4 @@ roleRef:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

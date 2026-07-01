@@ -114,8 +114,8 @@ k8s_versions:
 | **资深专家** | 深入剖析 VXLAN/IPIP 封装原理、BGP 路由分发机制、eBPF（Cilium）对内核协议栈的加速优化，以及在大规模集群下的 IPAM 地址池管理和跨可用区网络延迟调优。 |
 
 > **专项排查文档**：
-> - [Terway（阿里云 CNI）深度排查]([[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting|07-terway-troubleshooting]].md) — 阿里云 ACK/ASK 集群网络问题
-> - [Flannel 专项排查]([[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting|08-flannel-troubleshooting]].md) — VXLAN/host-gw/UDP 模式、子网分配、跨节点通信
+> - [Terway（阿里云 CNI）深度排查]([[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]].md) — 阿里云 ACK/ASK 集群网络问题
+> - [Flannel 专项排查]([[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]].md) — VXLAN/host-gw/UDP 模式、子网分配、跨节点通信
 
 ---
 
@@ -417,6 +417,10 @@ CNI（Container Network Interface）负责为 Pod 配置网络。深入理解其
   - **Route Reflector**：指定部分节点作为 RR，其他节点仅与 RR 建立连接（适用大规模集群）
   - **ToR（Top-of-Rack）集成**：与物理交换机建立 BGP，将 Pod 路由注入数据中心网络
 - **Bird 配置**：Calico-node 内置 BIRD BGP daemon
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 进入 calico-node 容器
   kubectl exec -it -n kube-system calico-node-xxx -c calico-node -- /bin/bash
@@ -462,6 +466,10 @@ CNI（Container Network Interface）负责为 Pod 配置网络。深入理解其
   - Pod MTU 与物理链路不匹配
   - Overlay 封装增加头部，导致报文超过 MTU 且设置 DF（Don't Fragment）位
 - **排查**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 测试路径 MTU
   ping -M do -s 1472 <pod-ip>  # 1472 + 28(IP+ICMP) = 1500
@@ -569,6 +577,9 @@ kubectl get daemonset -n kube-system
 
 #### 2.2.3 第三步：检查 Pod 网络
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查 Pod IP 分配
 kubectl get pods -A -o wide
@@ -666,6 +677,10 @@ nsenter -t $pid -n tcpdump -i eth0 -nn
 ### 3.1 CNI 配置未初始化
 
 #### 3.1.1 解决步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1：检查 CNI 配置目录
@@ -767,6 +782,9 @@ kubectl get pods -A -o wide | grep Pending
 
 #### 3.3.1 解决步骤
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 步骤 1：确认问题范围
 kubectl get pods -o wide -A
@@ -827,6 +845,11 @@ kubectl exec -it <pod-a> -- ping <pod-on-other-node-ip>
 ### 3.4 MTU 问题导致大包丢失
 
 #### 3.4.1 解决步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 步骤 1：确认 MTU 问题
@@ -937,6 +960,9 @@ Kubernetes Service DNAT/SNAT 完全依赖 conntrack，它是生产网络问题�
 ```
 
 #### D.2 conntrack 全面诊断
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
 
 ```bash
 # ========== 1. 基础状态 ==========
@@ -1173,6 +1199,10 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
    ```
 
 3. **触发 Pod 重建**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
    ```bash
    # 删除 Pending Pod 触发重新调度
    kubectl get pods -A --field-selector=status.phase=Pending -o name | xargs kubectl delete --wait=false
@@ -1234,6 +1264,10 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
    ```
 
 3. **定期清理脚本**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
    ```bash
    # CronJob 每小时清理一次
    cat <<EOF | kubectl apply -f -
@@ -1340,6 +1374,10 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
 
 #### 🔍 排查过程
 1. **现象确认**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
    ```bash
    # 测试小文件上传（成功）
    kubectl exec -it test-client -- curl -F "file=@/tmp/small.txt" http://upload-service/upload
@@ -1357,6 +1395,10 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
    ```
 
 2. **MTU 测试**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
    ```bash
    # 测试不同大小的 ping
    kubectl exec -it test-client -- ping -M do -s 1400 <upload-pod-ip>
@@ -1373,6 +1415,10 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
    ```
 
 3. **网络配置检查**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
    ```bash
    # 检查 Pod 网卡 MTU
    kubectl exec -it upload-pod -- ip link show eth0
@@ -1408,6 +1454,10 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
 
 #### ⚡ 应急措施
 1. **立即修复 Calico MTU 配置**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
    ```bash
    # 修改 Calico 配置
    kubectl edit cm calico-config -n kube-system
@@ -1425,6 +1475,10 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
    ```
 
 2. **重启 Calico DaemonSet**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
    ```bash
    # 滚动重启 calico-node
    kubectl rollout restart daemonset calico-node -n kube-system
@@ -1434,6 +1488,11 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
    ```
 
 3. **重建测试 Pod**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
    ```bash
    # 删除现有 Pod（触发重建以应用新 MTU）
    kubectl delete pod upload-pod test-client
@@ -1447,6 +1506,10 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
    ```
 
 4. **验证大文件传输**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
    ```bash
    # 再次测试大文件上传
    kubectl exec -it test-client -- curl -F "file=@/tmp/large.mp4" http://upload-service/upload
@@ -1502,6 +1565,10 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
    ```
 
 3. **验证 MTU 配置的自动化测试**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
    ```bash
    # 部署 MTU 测试 DaemonSet
    cat <<EOF | kubectl apply -f -
@@ -1606,6 +1673,10 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
 
 #### 🛠️ 解决方案
 1. **紧急处理**：
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
+
    ```bash
    sysctl -w net.netfilter.nf_conntrack_max=524288
    sysctl -w net.netfilter.nf_conntrack_buckets=131072
@@ -1648,6 +1719,10 @@ bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(
    ```
 
 #### 🛠️ 解决方案
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
+
 ```bash
 # 关闭严格 rp_filter
 sysctl -w net.ipv4.conf.all.rp_filter=0
@@ -1670,18 +1745,18 @@ sysctl -p /etc/sysctl.d/99-kubernetes.conf
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-higress-troubleshooting|09-higress-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-nginx-ingress-troubleshooting|09-nginx-ingress-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting|02-dns-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting|03-service-ingress-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-higress-troubleshooting.md|09-higress-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-nginx-ingress-troubleshooting.md|09-nginx-ingress-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]]

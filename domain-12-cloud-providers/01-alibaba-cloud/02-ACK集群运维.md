@@ -16,13 +16,14 @@ sources:
   - ASCM 控制台操作指南
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 summary: "ACK专有版与托管版集群的运维管理、日志监控及安全配置指南。"
 relationships:
-  - target: "[[entities/etcd]]"
+  - target: "[[entities/etcd.md]]"
     type: uses
-  - target: "[[entities/kubelet]]"
+  - target: "[[entities/kubelet.md]]"
     type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/security/pod-security-policies]]"
+  - target: "[[domain-17-system-foundation/topic-dictionary/security/pod-security-policies.md]]"
     type: uses
 ---
 
@@ -41,7 +42,7 @@ ACK 专有版（Dedicated）与托管版（Managed）的核心区别：专有版
 | 维度 | 专有版 ACK | 托管版 ACK | 专有云可用性 |
 |------|------------|------------|--------------|
 | Master 节点 | 客户自建/可见 | 阿里云托管 | 专有版为主 |
-| [[entities/etcd|etcd]] | 客户自管 | 阿里云托管 | 专有版自管 |
+| [[entities/etcd.md|etcd]] | 客户自管 | 阿里云托管 | 专有版自管 |
 | 适用场景 | 金融/强合规 | 通用互联网 | 专有云多专有版 |
 | 运维复杂度 | 高 | 低 | 需掌握 etcd/管控面 |
 
@@ -76,6 +77,10 @@ ACK 专有版（Dedicated）与托管版（Managed）的核心区别：专有版
 ### 1.2 集群扩缩容
 
 **垂直扩容（升降配节点规格）**：
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 1. 查看当前节点规格
@@ -160,7 +165,7 @@ aliyun cs GET /clusters/<cluster-id>/upgrade_status
 | 检查项 | 命令/方法 | 风险等级 |
 |--------|-----------|----------|
 | API 废弃检查 | `kubectl get --raw=/api/v1` | 高 |
-| [[domain-17-system-foundation/topic-dictionary/security/pod-security-policies|Pod 安全策略]] | `kubectl get psp` | 高 |
+| [[domain-17-system-foundation/topic-dictionary/security/pod-security-policies.md|Pod 安全策略]] | `kubectl get psp` | 高 |
 | 节点镜像预热 | 确认新节点镜像可用 | 中 |
 | CRD 兼容性 | `kubectl get crd` | 中 |
 
@@ -285,6 +290,10 @@ aliyun cs GET /clusters/<cluster-id>/nodepools/<np-id>
 ```
 
 ### 2.3 节点池运维命令速查
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # === 节点池列表 ===
@@ -444,7 +453,7 @@ ACK 专有版安全组规则模板：
 |------|------|------|---------|------|
 | 入站 | TCP | 22 | 堡垒机IP段 | SSH管理 |
 | 入站 | TCP | 6443 | 运维网段 | API Server |
-| 入站 | TCP | 10250 | 节点间 | [[entities/kubelet|Kubelet]] |
+| 入站 | TCP | 10250 | 节点间 | [[entities/kubelet.md|Kubelet]] |
 | 入站 | TCP | 8472 | 节点间 | Flannel VXLAN |
 | 入站 | UDP | 4789 | 节点间 | Terway VXLAN |
 | 入站 | TCP | 30000-32767 | 负载均衡 | NodePort |
@@ -507,14 +516,14 @@ ETCDCTL_API=3 etcdctl endpoint health \
 
 ## 相关文档
 
-- [[01-专有云架构概述|专有云架构概述]]
-- [[03-Terway-CNI网络|Terway-CNI网络]]
-- [[04-阿里云存储集成|阿里云存储集成]]
-- [[05-阿里云SLB与Ingress|阿里云SLB与Ingress]]
-- [[06-阿里云专有云远程顾问指南|阿里云专有云远程顾问指南]]
+- [[domain-12-cloud-providers/01-alibaba-cloud/01-专有云架构概述.md|专有云架构概述]]
+- [[domain-12-cloud-providers/01-alibaba-cloud/03-Terway-CNI网络.md|Terway-CNI网络]]
+- [[domain-12-cloud-providers/01-alibaba-cloud/04-阿里云存储集成.md|阿里云存储集成]]
+- [[domain-12-cloud-providers/01-alibaba-cloud/05-阿里云SLB与Ingress.md|阿里云SLB与Ingress]]
+- [[domain-12-cloud-providers/01-alibaba-cloud/06-阿里云专有云远程顾问指南.md|阿里云专有云远程顾问指南]]
 - [[alicloud-ack-overview|阿里云ACK概述]]
 - [[alicloud-apsara-ack-overview|阿里云专有版ACK概述]]
 ## Related
 
-- [[entities/coredns|CoreDNS (entities)]]
-- [[domain-17-system-foundation/topic-dictionary/networking/ingress|Ingress]]
+- [[entities/coredns.md|CoreDNS (entities)]]
+- [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]

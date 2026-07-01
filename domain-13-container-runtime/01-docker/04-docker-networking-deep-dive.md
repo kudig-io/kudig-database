@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 <!-- chunk: Docker 网络模型 -->## Docker 网络模型
 
-#<!-- chunk: 网络架构概览 -->## 网络架构概览
+## 网络架构概览
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -101,7 +101,7 @@ created: "2026-05-23"
                          外部网络
 ```
 
-#<!-- chunk: 网络组件 -->## 网络组件
+## 网络组件
 
 | 组件 | 说明 | 功能 |
 |:---|:---|:---|
@@ -115,7 +115,7 @@ created: "2026-05-23"
 
 <!-- chunk: 网络驱动类型 -->## 网络驱动类型
 
-#<!-- chunk: 驱动对比 -->## 驱动对比
+## 驱动对比
 
 | 驱动 | 类型 | 隔离性 | 性能 | 使用场景 |
 |:---|:---|:---|:---|:---|
@@ -126,7 +126,7 @@ created: "2026-05-23"
 | **macvlan** | 本地 | 高 | 高 | 需要直接二层访问 |
 | **ipvlan** | 本地 | 高 | 高 | 共享 MAC 地址 |
 
-#<!-- chunk: Bridge 网络 -->## Bridge 网络
+## Bridge 网络
 
 ```bash
 # 创建自定义网桥
@@ -151,7 +151,7 @@ docker network connect mynetwork existing_container
 docker run -d --network mynetwork --ip 172.20.0.100 nginx
 ```
 
-##<!-- chunk: Bridge 网络选项 -->## Bridge 网络选项
+## Bridge 网络选项
 
 | 选项 | 默认值 | 说明 |
 |:---|:---|:---|
@@ -161,7 +161,7 @@ docker run -d --network mynetwork --ip 172.20.0.100 nginx
 | `com.docker.network.bridge.host_binding_ipv4` | 0.0.0.0 | 端口绑定地址 |
 | `com.docker.network.driver.mtu` | 1500 | MTU 大小 |
 
-#<!-- chunk: Host 网络 -->## Host 网络
+## Host 网络
 
 ```bash
 # 使用 host 网络
@@ -183,7 +183,7 @@ docker run -d --network host nginx
 - 安全性降低
 - Linux only (Mac/Windows 不支持)
 
-#<!-- chunk: None 网络 -->## None 网络
+## None 网络
 
 ```bash
 # 禁用网络
@@ -193,7 +193,7 @@ docker run -d --network none myapp
 # 需要自行配置网络
 ```
 
-#<!-- chunk: Overlay 网络 -->## Overlay 网络
+## Overlay 网络
 
 ```bash
 # 创建 overlay 网络 (需要 Swarm 模式)
@@ -211,7 +211,7 @@ docker network create \
 # - 支持加密
 ```
 
-#<!-- chunk: Macvlan 网络 -->## Macvlan 网络
+## Macvlan 网络
 
 ```bash
 # 创建 macvlan 网络
@@ -237,7 +237,7 @@ docker network create \
 - 可被外部直接访问
 - 无需 NAT
 
-#<!-- chunk: IPvlan 网络 -->## IPvlan 网络
+## IPvlan 网络
 
 ```bash
 # L2 模式
@@ -266,7 +266,7 @@ docker network create \
 
 <!-- chunk: 容器网络命名空间 -->## 容器网络命名空间
 
-#<!-- chunk: Linux 网络命名空间 -->## Linux 网络命名空间
+## Linux 网络命名空间
 
 ```bash
 # 查看命名空间
@@ -282,7 +282,7 @@ docker exec container_name cat /etc/resolv.conf
 docker exec container_name cat /etc/hosts
 ```
 
-#<!-- chunk: 网络命名空间隔离 -->## 网络命名空间隔离
+## 网络命名空间隔离
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -307,7 +307,7 @@ docker exec container_name cat /etc/hosts
             │                                                       │
 ```
 
-#<!-- chunk: 共享网络命名空间 -->## 共享网络命名空间
+## 共享网络命名空间
 
 ```bash
 # Pod 模式: 容器共享网络
@@ -325,7 +325,7 @@ docker run -d --network container:pause myapp
 
 <!-- chunk: Docker DNS 解析 -->## Docker DNS 解析
 
-#<!-- chunk: 内置 DNS 服务器 -->## 内置 DNS 服务器
+## 内置 DNS 服务器
 
 ```
 容器 DNS 解析流程:
@@ -342,7 +342,7 @@ docker run -d --network container:pause myapp
               └─────────────────────────────┘
 ```
 
-#<!-- chunk: DNS 配置 -->## DNS 配置
+## DNS 配置
 
 ```bash
 # 容器 resolv.conf
@@ -367,7 +367,7 @@ docker run -d \
 }
 ```
 
-#<!-- chunk: 服务发现 -->## 服务发现
+## 服务发现
 
 ```bash
 # 创建自定义网络
@@ -386,7 +386,7 @@ docker run -d --network mynet --network-alias db --name mysql mysql
 # 可以通过 db 或 mysql 访问
 ```
 
-#<!-- chunk: hosts 文件管理 -->## hosts 文件管理
+## hosts 文件管理
 
 ```bash
 # 添加 host 条目
@@ -403,7 +403,7 @@ docker exec container_name cat /etc/hosts
 
 <!-- chunk: 端口映射原理 -->## 端口映射原理
 
-#<!-- chunk: iptables 实现 -->## iptables 实现
+## iptables 实现
 
 ```bash
 # 端口映射
@@ -419,7 +419,7 @@ iptables -t nat -L -n -v
 -A POSTROUTING -s 172.17.0.0/16 ! -o docker0 -j MASQUERADE
 ```
 
-#<!-- chunk: 端口映射类型 -->## 端口映射类型
+## 端口映射类型
 
 ```bash
 # 指定主机端口
@@ -444,7 +444,7 @@ docker run -d -p 8080-8090:80-90 myapp
 docker run -d -p 80:80 -p 443:443 nginx
 ```
 
-#<!-- chunk: docker-proxy -->## docker-proxy
+## docker-proxy
 
 ```bash
 # 默认使用用户态代理
@@ -457,7 +457,7 @@ ps aux | grep docker-proxy
 }
 ```
 
-#<!-- chunk: 查看端口映射 -->## 查看端口映射
+## 查看端口映射
 
 ```bash
 # 查看容器端口
@@ -471,7 +471,7 @@ docker inspect -f '{{range $p, $conf := .NetworkSettings.Ports}}{{$p}} -> {{(ind
 
 <!-- chunk: 网络配置实践 -->## 网络配置实践
 
-#<!-- chunk: 多层网络架构 -->## 多层网络架构
+## 多层网络架构
 
 ```bash
 # 创建前端网络
@@ -496,7 +496,7 @@ docker run -d --name mysql --network backend mysql
 # - nginx 不可访问 mysql
 ```
 
-#<!-- chunk: 生产网络配置 -->## 生产网络配置
+## 生产网络配置
 
 ```yaml
 # docker-compose.yml
@@ -555,7 +555,7 @@ services:
       MYSQL_ROOT_PASSWORD: secret
 ```
 
-#<!-- chunk: 网络安全配置 -->## 网络安全配置
+## 网络安全配置
 
 ```bash
 # 禁用容器间通信
@@ -572,7 +572,7 @@ iptables -I DOCKER-USER -s 172.17.0.2 -d 172.17.0.3 -j DROP
 
 <!-- chunk: 网络故障排查 -->## 网络故障排查
 
-#<!-- chunk: 诊断命令 -->## 诊断命令
+## 诊断命令
 
 ```bash
 # 网络列表
@@ -588,7 +588,7 @@ docker inspect -f '{{json .NetworkSettings.Networks}}' container_name | jq
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
 ```
 
-#<!-- chunk: 连通性测试 -->## 连通性测试
+## 连通性测试
 
 ```bash
 # 进入容器测试
@@ -611,7 +611,7 @@ curl -v http://other_container:80
 nc -zv other_container 80
 ```
 
-#<!-- chunk: 使用 netshoot 调试 -->## 使用 netshoot 调试
+## 使用 netshoot 调试
 
 ```bash
 # 启动调试容器
@@ -627,7 +627,7 @@ iptables -L -n -v          # 查看防火墙
 traceroute target_host     # 路由追踪
 ```
 
-#<!-- chunk: 常见问题 -->## 常见问题
+## 常见问题
 
 | 问题 | 症状 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
@@ -637,7 +637,7 @@ traceroute target_host     # 路由追踪
 | **端口映射失败** | 外部无法访问 | docker port 查看映射 | 检查防火墙/端口冲突 |
 | **网络性能差** | 延迟高 | 检查 MTU | 调整 MTU 配置 |
 
-#<!-- chunk: 清理网络资源 -->## 清理网络资源
+## 清理网络资源
 
 ```bash
 # 删除未使用的网络

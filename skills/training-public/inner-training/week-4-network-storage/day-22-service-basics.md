@@ -40,7 +40,7 @@ title: Day 22: Service 基础
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - "[[entities/kubernetes|kubernetes]] Service类型"
+  - "[[entities/kubernetes.md|kubernetes]] Service类型"
   - "ClusterIP NodePort LoadBalancer"
   - "Service Endpoints"
   - "kube-proxy配置"
@@ -140,6 +140,9 @@ kube-proxy 负责在节点上实现 Service 的转发规则。有两种主要模
 
 ### 任务 1: ClusterIP Service (40min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建 Deployment
 kubectl create deployment web --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/nginx:1.24 --replicas=3
@@ -213,6 +216,9 @@ kubectl run dns-test --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/busybo
 
 ### 任务 2: NodePort Service (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建 NodePort Service
 cat <<EOF | kubectl apply -f -
@@ -248,6 +254,9 @@ curl http://${NODE_IP}:30080
 ```
 
 ### 任务 3: LoadBalancer Service（ACK + SLB）(40min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 LoadBalancer Service（ACK 自动创建 SLB）
@@ -305,6 +314,10 @@ kubectl describe svc web-lb | grep -A 10 "Events:"
 ```
 
 ### 任务 4: Headless Service 与 DNS (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 创建 Headless Service

@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-monitoring-alerting"
 created: "2026-05-22"
 updated: "2026-05-22"
+last_updated: 2026-05-22
 tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
@@ -46,6 +47,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 检查 spec.selector.matchLabels 是否与目标 Service 标签匹配
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 修正选择器标签
   kubectl patch servicemonitor <name> -n <namespace> --type='json' -p='
@@ -73,6 +78,11 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 检查 datasource URL 和认证配置
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 更新 Prometheus datasource
   cat <<EOF | kubectl apply -f -
@@ -100,6 +110,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl get secret alertmanager-<name> -n <namespace> -o jsonpath='{.data.alertmanager\.yaml}' | base64 -d
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 更新 Alertmanager 配置 Secret
   cat <<EOF | kubectl apply -f -
@@ -136,6 +150,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 检查 PromQL 语法
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 修正规则中的 PromQL
   kubectl patch prometheusrules <name> -n <namespace> --type='json' -p='
@@ -153,11 +171,19 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
 
 - **适用根因**: RC-001
 - **前置检查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   kubectl get pvc -n <namespace> | grep prometheus
   kubectl exec <prometheus-pod> -n <namespace> -- df -h /prometheus
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 删除旧数据（缩短 retention）
   kubectl patch prometheus <name> -n <namespace> --type='json' -p='
@@ -173,6 +199,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
     {"limits":{"memory":"16Gi"},"requests":{"memory":"8Gi"}}}]'
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   kubectl get pods -n <namespace> | grep prometheus
   kubectl exec <prometheus-pod> -n <namespace> -- df -h /prometheus
@@ -186,6 +216,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl get networkpolicy -n <target-namespace>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 允许 Prometheus 抓取目标 namespace
   cat <<EOF | kubectl apply -f -
@@ -220,6 +254,9 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
 ## 验证确认
 
 ### 即时验证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # V1: Prometheus Running

@@ -80,15 +80,15 @@ graph TD
 
 ## 相关文档
 
-- [[domain-08-release-change-management/README]]
-- [[domain-08-release-change-management/README]]
+- [[domain-08-release-change-management/README.md|README]]
+- [[domain-08-release-change-management/README.md|README]]
 
 
 ---
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta.md|helm fta]]
 
 
 ---
@@ -107,8 +107,8 @@ graph TD
 
 ## Related
 
-- [[references/kudig-metadata-index|README]].md|README]]
-- [[concepts/infrastructure-as-code|infrastructure-as-code]]
-- [[skills/helm-fta|helm-fta]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm|[[Helm|helm]]]]
-- [[domain-17-system-foundation/topic-cheat-sheet/gitops|gitops]]
+- [[entities/kudig-metadata-index.md|README]].md|README]]
+- [[concepts/infrastructure-as-code.md|infrastructure-as-code]]
+- [[skills/helm-fta.md|helm-fta]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|[[Helm|helm]]]]
+- [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|gitops]]

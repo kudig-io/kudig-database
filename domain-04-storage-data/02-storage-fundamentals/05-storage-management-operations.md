@@ -70,7 +70,7 @@ created: "2026-05-23"
 
 <!-- chunk: 存储运维体系架构 -->## 存储运维体系架构
 
-#<!-- chunk: 企业级存储运维框架 -->## 企业级存储运维框架
+## 企业级存储运维框架
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -89,7 +89,7 @@ created: "2026-05-23"
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 运维职责分工 -->## 运维职责分工
+## 运维职责分工
 
 | 角色 | 职责范围 | 技能要求 |
 |:---|:---|:---|
@@ -102,9 +102,9 @@ created: "2026-05-23"
 
 <!-- chunk: 日常运维操作 -->## 日常运维操作
 
-#<!-- chunk: 存储系统巡检清单 -->## 存储系统巡检清单
+## 存储系统巡检清单
 
-##<!-- chunk: 每日巡检项目 -->## 每日巡检项目
+## 每日巡检项目
 
 ```bash
 # 存储日常巡检脚本
@@ -196,7 +196,7 @@ chmod +x /usr/local/bin/daily-storage-check.sh
 echo "0 9 * * * /usr/local/bin/daily-storage-check.sh" >> /etc/crontab
 ```
 
-##<!-- chunk: 每周运维任务 -->## 每周运维任务
+## 每周运维任务
 
 ```bash
 # 存储周度维护脚本
@@ -267,7 +267,7 @@ EOF
 chmod +x /usr/local/bin/weekly-storage-maintenance.sh
 ```
 
-#<!-- chunk: 存储变更管理流程 -->## 存储变更管理流程
+## 存储变更管理流程
 
 ```
 存储变更管理流程:
@@ -305,7 +305,7 @@ chmod +x /usr/local/bin/weekly-storage-maintenance.sh
 
 <!-- chunk: 监控告警体系 -->## 监控告警体系
 
-#<!-- chunk: 监控架构设计 -->## 监控架构设计
+## 监控架构设计
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -320,7 +320,7 @@ chmod +x /usr/local/bin/weekly-storage-maintenance.sh
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: Prometheus监控配置 -->## Prometheus监控配置
+## Prometheus监控配置
 
 ```yaml
 # 存储监控完整配置
@@ -413,7 +413,7 @@ groups:
 EOF
 ```
 
-#<!-- chunk: Grafana仪表板配置 -->## Grafana仪表板配置
+## Grafana仪表板配置
 
 ```json
 {
@@ -486,9 +486,9 @@ EOF
 
 <!-- chunk: 容量规划管理 -->## 容量规划管理
 
-#<!-- chunk: 容量规划方法论 -->## 容量规划方法论
+## 容量规划方法论
 
-##<!-- chunk: 容量需求分析框架 -->## 容量需求分析框架
+## 容量需求分析框架
 
 ```
 容量规划分析维度:
@@ -512,7 +512,7 @@ EOF
    └── 扩容成本预测
 ```
 
-##<!-- chunk: 容量预测模型 -->## 容量预测模型
+## 容量预测模型
 
 ```python
 # 存储容量预测工具
@@ -594,9 +594,9 @@ EOF
 chmod +x /usr/local/bin/capacity-forecast.py
 ```
 
-#<!-- chunk: 容量优化策略 -->## 容量优化策略
+## 容量优化策略
 
-##<!-- chunk: 存储分层管理 -->## 存储分层管理
+## 存储分层管理
 
 | 层级 | 存储类型 | 成本系数 | 数据特征 | 管理策略 |
 |:---|:---|:---:|:---|:---|
@@ -605,7 +605,7 @@ chmod +x /usr/local/bin/capacity-forecast.py
 | **冷数据** | SAS HDD | 0.2 | 偶尔访问、归档数据 | 压缩存储 |
 | **冰数据** | 磁带/对象 | 0.05 | 很少访问、合规保存 | 自动归档 |
 
-##<!-- chunk: 数据去重与压缩 -->## 数据去重与压缩
+## 数据去重与压缩
 
 ```bash
 # 存储优化脚本
@@ -659,7 +659,7 @@ chmod +x /usr/local/bin/storage-optimizer.sh
 
 <!-- chunk: 备份恢复策略 -->## 备份恢复策略
 
-#<!-- chunk: 备份架构设计 -->## 备份架构设计
+## 备份架构设计
 
 ```
 企业级备份架构:
@@ -680,7 +680,7 @@ chmod +x /usr/local/bin/storage-optimizer.sh
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 备份策略配置 -->## 备份策略配置
+## 备份策略配置
 
 ```bash
 # 企业级备份脚本框架
@@ -777,9 +777,9 @@ EOF
 chmod +x /usr/local/bin/enterprise-backup.sh
 ```
 
-#<!-- chunk: 灾难恢复计划 -->## 灾难恢复计划
+## 灾难恢复计划
 
-##<!-- chunk: RTO/RPO定义 -->## RTO/RPO定义
+## RTO/RPO定义
 
 | 业务系统 | RTO(恢复时间目标) | RPO(恢复点目标) | 备份频率 | 恢复策略 |
 |:---|:---:|:---:|:---:|:---|
@@ -788,7 +788,10 @@ chmod +x /usr/local/bin/enterprise-backup.sh
 | **文件存储** | 24小时 | 24小时 | 每日备份 | 文件级恢复 |
 | **归档数据** | 72小时 | 7天 | 每周备份 | 磁带恢复 |
 
-##<!-- chunk: 恢复演练流程 -->## 恢复演练流程
+## 恢复演练流程
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 灾难恢复演练脚本
@@ -861,7 +864,7 @@ chmod +x /usr/local/bin/drill-recovery.sh
 
 <!-- chunk: 故障处理流程 -->## 故障处理流程
 
-#<!-- chunk: 标准化故障处理SOP -->## 标准化故障处理SOP
+## 标准化故障处理SOP
 
 ```
 存储故障处理标准流程 (SOP):
@@ -897,9 +900,9 @@ chmod +x /usr/local/bin/drill-recovery.sh
    └── 预防措施制定
 ```
 
-#<!-- chunk: 常见故障处理手册 -->## 常见故障处理手册
+## 常见故障处理手册
 
-##<!-- chunk: 磁盘故障处理 -->## 磁盘故障处理
+## 磁盘故障处理
 
 ```bash
 # 磁盘故障诊断与处理脚本
@@ -967,7 +970,7 @@ EOF
 chmod +x /usr/local/bin/disk-failure-handler.sh
 ```
 
-##<!-- chunk: 网络存储故障处理 -->## 网络存储故障处理
+## 网络存储故障处理
 
 ```bash
 # NFS故障诊断脚本
@@ -1024,9 +1027,9 @@ chmod +x /usr/local/bin/nfs-troubleshooter.sh
 
 <!-- chunk: 性能优化实践 -->## 性能优化实践
 
-#<!-- chunk: 性能调优方法论 -->## 性能调优方法论
+## 性能调优方法论
 
-##<!-- chunk: 性能分析框架 -->## 性能分析框架
+## 性能分析框架
 
 ```
 存储性能优化分析框架:
@@ -1052,7 +1055,7 @@ chmod +x /usr/local/bin/nfs-troubleshooter.sh
    └── 定期评估调整
 ```
 
-##<!-- chunk: 性能基准测试工具 -->## 性能基准测试工具
+## 性能基准测试工具
 
 ```bash
 # 综合性能测试套件
@@ -1157,7 +1160,7 @@ EOF
 chmod +x /usr/local/bin/performance-benchmark.sh
 ```
 
-#<!-- chunk: 系统级性能优化 -->## 系统级性能优化
+## 系统级性能优化
 
 ```bash
 # 存储系统优化配置
@@ -1232,9 +1235,9 @@ systemctl enable storage-optimization.service
 
 <!-- chunk: 安全管理规范 -->## 安全管理规范
 
-#<!-- chunk: 存储安全框架 -->## 存储安全框架
+## 存储安全框架
 
-##<!-- chunk: 安全控制措施 -->## 安全控制措施
+## 安全控制措施
 
 | 安全领域 | 控制措施 | 实施要点 | 检查项 |
 |:---|:---|:---|:---|
@@ -1243,7 +1246,7 @@ systemctl enable storage-optimization.service
 | **审计监控** | 操作日志、行为分析 | syslog、SIEM集成 | 日志完整性验证 |
 | **物理安全** | 机房访问、设备保护 | 门禁系统、监控摄像头 | 物理访问记录 |
 
-##<!-- chunk: 安全配置基线 -->## 安全配置基线
+## 安全配置基线
 
 ```bash
 # 存储安全配置检查脚本
@@ -1315,9 +1318,9 @@ EOF
 chmod +x /usr/local/bin/storage-security-check.sh
 ```
 
-#<!-- chunk: 合规性管理 -->## 合规性管理
+## 合规性管理
 
-##<!-- chunk: 等保2.0存储要求 -->## 等保2.0存储要求
+## 等保2.0存储要求
 
 ```bash
 # 等保2.0存储合规检查
@@ -1380,7 +1383,7 @@ chmod +x /usr/local/bin/compliance-check.sh
 
 <!-- chunk: 自动化运维工具 -->## 自动化运维工具
 
-#<!-- chunk: Ansible存储管理Playbook -->## Ansible存储管理Playbook
+## Ansible存储管理Playbook
 
 ```yaml
 # 存储自动化管理playbook
@@ -1464,7 +1467,7 @@ cat > /etc/ansible/playbooks/storage-management.yml << 'EOF'
 EOF
 ```
 
-#<!-- chunk: 自动化巡检工具 -->## 自动化巡检工具
+## 自动化巡检工具
 
 ```python
 # Python自动化巡检工具
@@ -1578,7 +1581,7 @@ chmod +x /usr/local/bin/auto-inspector.py
 
 <!-- chunk: 最佳实践总结 -->## 最佳实践总结
 
-#<!-- chunk: 存储运维成熟度模型 -->## 存储运维成熟度模型
+## 存储运维成熟度模型
 
 ```
 存储运维成熟度等级:
@@ -1614,9 +1617,9 @@ Level 5 - 自主化 (Autonomous)
 └── 持续优化改进
 ```
 
-#<!-- chunk: 关键成功要素 -->## 关键成功要素
+## 关键成功要素
 
-##<!-- chunk: 技术要素 -->## 技术要素
+## 技术要素
 
 1. **监控体系建设**
    - 建立全覆盖的监控指标体系
@@ -1633,7 +1636,7 @@ Level 5 - 自主化 (Autonomous)
    - 定期性能调优
    - 建立性能基线
 
-##<!-- chunk: 管理要素 -->## 管理要素
+## 管理要素
 
 1. **流程规范化**
    - 建立标准化SOP
@@ -1650,7 +1653,7 @@ Level 5 - 自主化 (Autonomous)
    - 最佳实践推广
    - 技术创新应用
 
-#<!-- chunk: 运维质量指标 -->## 运维质量指标
+## 运维质量指标
 
 | 指标类别 | 关键指标 | 目标值 | 计算方法 |
 |:---|:---|:---:|:---|
@@ -1668,7 +1671,7 @@ Level 5 - 自主化 (Autonomous)
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-04-storage-data KUDIG Database — Global MOC
-- [[domain-04-storage-data/README|Domain-16: 存储基础]]
+- [[domain-04-storage-data/README.md|Domain-16: 存储基础]]
 - Domain-16 存储基础 — 开源项目索引
 - 01 - 存储技术概述
 - 02 - 块存储、文件存储、对象存储

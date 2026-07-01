@@ -81,7 +81,7 @@ created: "2026-05-23"
 
 <!-- chunk: 高级路由概述 -->## 高级路由概述
 
-#<!-- chunk: 路由类型与成熟度 -->## 路由类型与成熟度
+## 路由类型与成熟度
 
 | 路由类型 | API 版本 | 成熟度 | 协议支持 | 用途 |
 |----------|----------|--------|----------|------|
@@ -91,7 +91,7 @@ created: "2026-05-23"
 | **TLSRoute** | v1alpha2 | Experimental | TLS (SNI) | TLS 透传 |
 | **UDPRoute** | v1alpha2 | Experimental | UDP | DNS、视频流 |
 
-#<!-- chunk: 安装 Experimental Channel -->## 安装 Experimental Channel
+## 安装 Experimental Channel
 
 ```yaml
 # Standard Channel 仅包含 HTTPRoute (GA)
@@ -109,7 +109,7 @@ kubectl get crd | grep gateway
 # udproutes.gateway.networking.k8s.io
 ```
 
-#<!-- chunk: 控制器支持矩阵 -->## 控制器支持矩阵
+## 控制器支持矩阵
 
 | 控制器实现 | HTTPRoute | GRPCRoute | TCPRoute | TLSRoute | UDPRoute |
 |------------|-----------|-----------|----------|----------|----------|
@@ -122,7 +122,7 @@ kubectl get crd | grep gateway
 
 <!-- chunk: GRPCRoute 配置 -->## GRPCRoute 配置
 
-#<!-- chunk: API 信息 -->## API 信息
+## API 信息
 
 | 属性 | 值 |
 |------|-----|
@@ -132,7 +132,7 @@ kubectl get crd | grep gateway
 | **成熟度** | Experimental |
 | **Gateway 协议要求** | `HTTPS` (gRPC over HTTP/2) |
 
-#<!-- chunk: 字段规格表 -->## 字段规格表
+## 字段规格表
 
 | 字段路径 | 类型 | 必填 | 版本 | 说明 |
 |----------|------|------|------|------|
@@ -147,7 +147,7 @@ kubectl get crd | grep gateway
 | `spec.rules[].filters[]` | array | ❌ | v1alpha2 | 流量处理过滤器 |
 | `spec.rules[].backendRefs[]` | array | ✅ | v1alpha2 | 后端 gRPC 服务 |
 
-#<!-- chunk: 基础 gRPC 路由 -->## 基础 gRPC 路由
+## 基础 gRPC 路由
 
 ```yaml
 # 前置: Gateway 必须配置 HTTPS 监听器
@@ -199,7 +199,7 @@ spec:
       port: 9090
 ```
 
-#<!-- chunk: gRPC 方法级路由 -->## gRPC 方法级路由
+## gRPC 方法级路由
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1alpha2
@@ -250,7 +250,7 @@ spec:
       port: 9090
 ```
 
-#<!-- chunk: gRPC Header 匹配 -->## gRPC Header 匹配
+## gRPC Header 匹配
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1alpha2
@@ -289,7 +289,7 @@ spec:
       port: 9090
 ```
 
-#<!-- chunk: gRPC 权重路由(金丝雀) -->## gRPC 权重路由(金丝雀)
+## gRPC 权重路由(金丝雀)
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1alpha2
@@ -320,7 +320,7 @@ spec:
       weight: 10
 ```
 
-#<!-- chunk: gRPC 流量镜像 -->## gRPC 流量镜像
+## gRPC 流量镜像
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1alpha2
@@ -357,7 +357,7 @@ spec:
 
 <!-- chunk: TCPRoute 配置 -->## TCPRoute 配置
 
-#<!-- chunk: API 信息 -->## API 信息
+## API 信息
 
 | 属性 | 值 |
 |------|-----|
@@ -366,7 +366,7 @@ spec:
 | **成熟度** | Experimental |
 | **Gateway 协议要求** | `TCP` |
 
-#<!-- chunk: 字段规格表 -->## 字段规格表
+## 字段规格表
 
 | 字段路径 | 类型 | 必填 | 说明 |
 |----------|------|------|------|
@@ -377,7 +377,7 @@ spec:
 | `spec.rules[].backendRefs[].port` | int32 | ✅ | Service 端口 |
 | `spec.rules[].backendRefs[].weight` | int32 | ❌ | 流量权重 |
 
-#<!-- chunk: TCP Gateway 配置 -->## TCP Gateway 配置
+## TCP Gateway 配置
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -406,7 +406,7 @@ spec:
       - kind: TCPRoute
 ```
 
-#<!-- chunk: 基础 TCP 路由 -->## 基础 TCP 路由
+## 基础 TCP 路由
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1alpha2
@@ -428,7 +428,7 @@ spec:
       port: 3306
 ```
 
-#<!-- chunk: TCP 读写分离 -->## TCP 读写分离
+## TCP 读写分离
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -496,7 +496,7 @@ spec:
       weight: 50
 ```
 
-#<!-- chunk: Redis 集群路由 -->## Redis 集群路由
+## Redis 集群路由
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -543,7 +543,7 @@ spec:
 
 <!-- chunk: TLSRoute 配置 -->## TLSRoute 配置
 
-#<!-- chunk: API 信息 -->## API 信息
+## API 信息
 
 | 属性 | 值 |
 |------|-----|
@@ -553,7 +553,7 @@ spec:
 | **Gateway 协议要求** | `TLS` (Passthrough 模式) |
 | **匹配机制** | SNI (Server Name Indication) |
 
-#<!-- chunk: 字段规格表 -->## 字段规格表
+## 字段规格表
 
 | 字段路径 | 类型 | 必填 | 说明 |
 |----------|------|------|------|
@@ -562,7 +562,7 @@ spec:
 | `spec.rules[]` | array | ✅ | 路由规则 |
 | `spec.rules[].backendRefs[]` | array | ✅ | 后端 TLS 服务 |
 
-#<!-- chunk: TLS Passthrough Gateway -->## TLS Passthrough Gateway
+## TLS Passthrough Gateway
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -588,7 +588,7 @@ spec:
         from: All
 ```
 
-#<!-- chunk: 基于 SNI 的 TLS 路由 -->## 基于 SNI 的 TLS 路由
+## 基于 SNI 的 TLS 路由
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1alpha2
@@ -612,7 +612,7 @@ spec:
       port: 8443
 ```
 
-#<!-- chunk: 多域名 TLS 路由 -->## 多域名 TLS 路由
+## 多域名 TLS 路由
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1alpha2
@@ -655,7 +655,7 @@ spec:
       port: 9443
 ```
 
-#<!-- chunk: TLS 权重路由 -->## TLS 权重路由
+## TLS 权重路由
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1alpha2
@@ -686,7 +686,7 @@ spec:
 
 <!-- chunk: UDPRoute 配置 -->## UDPRoute 配置
 
-#<!-- chunk: API 信息 -->## API 信息
+## API 信息
 
 | 属性 | 值 |
 |------|-----|
@@ -696,7 +696,7 @@ spec:
 | **Gateway 协议要求** | `UDP` |
 | **典型用途** | DNS, QUIC, 视频流, 游戏服务器 |
 
-#<!-- chunk: 字段规格表 -->## 字段规格表
+## 字段规格表
 
 | 字段路径 | 类型 | 必填 | 说明 |
 |----------|------|------|------|
@@ -704,7 +704,7 @@ spec:
 | `spec.rules[]` | array | ✅ | 路由规则 |
 | `spec.rules[].backendRefs[]` | array | ✅ | 后端 UDP 服务 |
 
-#<!-- chunk: UDP Gateway 配置 -->## UDP Gateway 配置
+## UDP Gateway 配置
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -733,7 +733,7 @@ spec:
       - kind: UDPRoute
 ```
 
-#<!-- chunk: DNS 服务路由 -->## DNS 服务路由
+## DNS 服务路由
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1alpha2
@@ -755,7 +755,7 @@ spec:
       port: 53
 ```
 
-#<!-- chunk: 游戏服务器路由 -->## 游戏服务器路由
+## 游戏服务器路由
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -818,7 +818,7 @@ spec:
 
 <!-- chunk: ReferenceGrant 跨命名空间授权 -->## ReferenceGrant 跨命名空间授权
 
-#<!-- chunk: API 信息 -->## API 信息
+## API 信息
 
 | 属性 | 值 |
 |------|-----|
@@ -827,7 +827,7 @@ spec:
 | **用途** | 授权跨命名空间资源引用 |
 | **部署位置** | 被引用资源的命名空间 |
 
-#<!-- chunk: 字段规格表 -->## 字段规格表
+## 字段规格表
 
 | 字段路径 | 类型 | 必填 | 说明 |
 |----------|------|------|------|
@@ -840,7 +840,7 @@ spec:
 | `spec.to[].kind` | string | ✅ | 目标资源类型 (如 `Service`) |
 | `spec.to[].name` | string | ❌ | 特定资源名称(可选) |
 
-#<!-- chunk: 跨命名空间路由授权 -->## 跨命名空间路由授权
+## 跨命名空间路由授权
 
 ```yaml
 # 场景: team-a 的 HTTPRoute 引用 shared-services 命名空间的 Service
@@ -883,7 +883,7 @@ spec:
     kind: Service
 ```
 
-#<!-- chunk: 限制特定资源授权 -->## 限制特定资源授权
+## 限制特定资源授权
 
 ```yaml
 # 仅允许引用特定名称的 Service
@@ -904,7 +904,7 @@ spec:
     name: public-api-service  # 仅允许引用此特定 Service
 ```
 
-#<!-- chunk: 跨命名空间 TLS 证书授权 -->## 跨命名空间 TLS 证书授权
+## 跨命名空间 TLS 证书授权
 
 ```yaml
 # 场景: Gateway 在 gateway-system, Secret 在 cert-manager 命名空间
@@ -946,7 +946,7 @@ spec:
     kind: Secret
 ```
 
-#<!-- chunk: 多来源多目标授权 -->## 多来源多目标授权
+## 多来源多目标授权
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1beta1
@@ -979,7 +979,7 @@ spec:
 
 <!-- chunk: BackendTLSPolicy 配置 -->## BackendTLSPolicy 配置
 
-#<!-- chunk: API 信息 -->## API 信息
+## API 信息
 
 | 属性 | 值 |
 |------|-----|
@@ -988,7 +988,7 @@ spec:
 | **成熟度** | Experimental (Gateway API v1.1+) |
 | **用途** | 配置网关到后端的 TLS 连接 |
 
-#<!-- chunk: 字段规格表 -->## 字段规格表
+## 字段规格表
 
 | 字段路径 | 类型 | 必填 | 说明 |
 |----------|------|------|------|
@@ -1000,7 +1000,7 @@ spec:
 | `spec.validation.caCertificateRefs[]` | array | ✅ | CA 证书引用 (ConfigMap/Secret) |
 | `spec.validation.hostname` | string | ✅ | 后端 TLS 主机名验证 |
 
-#<!-- chunk: 基础 mTLS 后端配置 -->## 基础 mTLS 后端配置
+## 基础 mTLS 后端配置
 
 ```yaml
 # 场景: 网关与后端服务之间使用 mTLS 加密通信
@@ -1075,7 +1075,7 @@ spec:
       port: 8443
 ```
 
-#<!-- chunk: 使用 Secret 存储 CA 证书 -->## 使用 Secret 存储 CA 证书
+## 使用 Secret 存储 CA 证书
 
 ```yaml
 # CA 证书存储在 Secret 中
@@ -1110,7 +1110,7 @@ spec:
     hostname: secure-backend.production.svc.cluster.local
 ```
 
-#<!-- chunk: 跨命名空间后端 TLS -->## 跨命名空间后端 TLS
+## 跨命名空间后端 TLS
 
 ```yaml
 # HTTPRoute 引用其他命名空间的后端
@@ -1172,7 +1172,7 @@ spec:
 
 <!-- chunk: 生产实战案例 -->## 生产实战案例
 
-#<!-- chunk: 案例1: 微服务 gRPC 网关 -->## 案例1: 微服务 gRPC 网关
+## 案例1: 微服务 gRPC 网关
 
 ```yaml
 # 场景: 统一 gRPC 网关入口, 路由多个微服务
@@ -1292,7 +1292,7 @@ spec:
     kind: Gateway
 ```
 
-#<!-- chunk: 案例2: 数据库四层代理网关 -->## 案例2: 数据库四层代理网关
+## 案例2: 数据库四层代理网关
 
 ```yaml
 # 场景: 为多个数据库提供统一网关入口, 支持读写分离
@@ -1418,7 +1418,7 @@ spec:
       port: 6379
 ```
 
-#<!-- chunk: 案例3: TLS Passthrough 多租户网关 -->## 案例3: TLS Passthrough 多租户网关
+## 案例3: TLS Passthrough 多租户网关
 
 ```yaml
 # 场景: 多租户 SaaS, 每个租户使用自己的 TLS 证书(透传)
@@ -1533,7 +1533,7 @@ spec:
 
 <!-- chunk: 版本兼容性与最佳实践 -->## 版本兼容性与最佳实践
 
-#<!-- chunk: Gateway API 版本演进 -->## Gateway API 版本演进
+## Gateway API 版本演进
 
 | Gateway API 版本 | 新增高级路由特性 | Kubernetes 最低版本 |
 |------------------|------------------|---------------------|
@@ -1542,7 +1542,7 @@ spec:
 | v1.0.0 | HTTPRoute (GA), 其他路由保持 Experimental | v1.25+ |
 | v1.1.0 | BackendTLSPolicy (Alpha), 改进 GRPCRoute | v1.27+ |
 
-#<!-- chunk: 控制器支持检查 -->## 控制器支持检查
+## 控制器支持检查
 
 ```bash
 # 检查控制器支持的路由类型
@@ -1554,9 +1554,9 @@ kubectl explain tlsroute
 kubectl get gateway <gateway-name> -o yaml | grep -A 10 allowedRoutes
 ```
 
-#<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
 
-##<!-- chunk: 1. 选择合适的路由类型 -->## 1. 选择合适的路由类型
+## 1. 选择合适的路由类型
 
 | 场景 | 推荐路由类型 | 原因 |
 |------|--------------|------|
@@ -1566,7 +1566,7 @@ kubectl get gateway <gateway-name> -o yaml | grep -A 10 allowedRoutes
 | 自签名证书透传 | TLSRoute | SNI 路由, 后端自行处理 TLS |
 | DNS 服务 | UDPRoute | 无状态 UDP 协议 |
 
-##<!-- chunk: 2. GRPCRoute 性能优化 -->## 2. GRPCRoute 性能优化
+## 2. GRPCRoute 性能优化
 
 ```yaml
 # 推荐: 为 gRPC 启用 HTTP/2
@@ -1584,7 +1584,7 @@ spec:
     protocol: TCP
 ```
 
-##<!-- chunk: 3. TCPRoute 健康检查 -->## 3. TCPRoute 健康检查
+## 3. TCPRoute 健康检查
 
 ```yaml
 # TCP 后端 Service 配置健康检查
@@ -1605,7 +1605,7 @@ spec:
     name: mysql
 ```
 
-##<!-- chunk: 4. ReferenceGrant 安全策略 -->## 4. ReferenceGrant 安全策略
+## 4. ReferenceGrant 安全策略
 
 ```yaml
 # 最小权限原则: 仅授权必要的资源
@@ -1625,7 +1625,7 @@ spec:
     name: public-api-only  # 明确指定资源名称
 ```
 
-##<!-- chunk: 5. 可观测性 -->## 5. 可观测性
+## 5. 可观测性
 
 ```yaml
 # 为高级路由添加监控标签
@@ -1649,9 +1649,9 @@ spec:
       port: 9090
 ```
 
-#<!-- chunk: FAQ -->## FAQ
+## FAQ
 
-##<!-- chunk: Q1: GRPCRoute 与 HTTPRoute 有何区别? -->## Q1: GRPCRoute 与 HTTPRoute 有何区别?
+## Q1: GRPCRoute 与 HTTPRoute 有何区别?
 
 **A:** 核心差异:
 - **协议**: GRPCRoute 专为 gRPC (HTTP/2) 设计
@@ -1676,7 +1676,7 @@ spec:
       port: 9090
 ```
 
-##<!-- chunk: Q2: TCPRoute 如何实现会话保持? -->## Q2: TCPRoute 如何实现会话保持?
+## Q2: TCPRoute 如何实现会话保持?
 
 **A:** TCPRoute 本身不支持会话保持, 需依赖:
 1. **Service 层**: 使用 `sessionAffinity: ClientIP`
@@ -1696,7 +1696,7 @@ spec:
 
 2. **控制器特性**: 某些实现支持 Session Persistence (Experimental)
 
-##<!-- chunk: Q3: UDPRoute 适用于哪些场景? -->## Q3: UDPRoute 适用于哪些场景?
+## Q3: UDPRoute 适用于哪些场景?
 
 **A:** 典型用途:
 - **DNS 服务**: CoreDNS, BIND
@@ -1707,14 +1707,14 @@ spec:
 
 **不适用**: 需要可靠传输的场景(文件传输, 数据库)
 
-##<!-- chunk: Q4: TLSRoute Passthrough 与 Terminate 如何选择? -->## Q4: TLSRoute Passthrough 与 Terminate 如何选择?
+## Q4: TLSRoute Passthrough 与 Terminate 如何选择?
 
 | 模式 | TLS 解密位置 | 用途 | 优势 | 劣势 |
 |------|--------------|------|------|------|
 | **Terminate** | Gateway | HTTPRoute, GRPCRoute | 网关可检查/修改流量, 集中证书管理 | 增加 Gateway 负载 |
 | **Passthrough** | Backend | TLSRoute | 端到端加密, 自定义 TLS 配置 | 无法在网关层过滤流量 |
 
-##<!-- chunk: Q5: BackendTLSPolicy 何时必需? -->## Q5: BackendTLSPolicy 何时必需?
+## Q5: BackendTLSPolicy 何时必需?
 
 **A:** 必需场景:
 - Gateway 与后端之间使用 mTLS
@@ -1728,17 +1728,17 @@ spec:
 
 <!-- chunk: 相关资源 -->## 相关资源
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 - Gateway API 高级路由: https://gateway-api.sigs.k8s.io/guides/
 - GRPCRoute 规范: https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1alpha2.GRPCRoute
 - ReferenceGrant 指南: https://gateway-api.sigs.k8s.io/api-types/referencegrant/
 
-#<!-- chunk: 实现文档 -->## 实现文档
+## 实现文档
 - Istio Gateway API: https://istio.io/latest/docs/tasks/traffic-management/ingress/gateway-api/
 - Envoy Gateway: https://gateway.envoyproxy.io/latest/user/grpc-routing/
 - Traefik: https://doc.traefik.io/traefik/routing/providers/kubernetes-gateway/
 
-#<!-- chunk: 本知识库相关文档 -->## 本知识库相关文档
+## 本知识库相关文档
 - [11 - Gateway API 核心资源](./11-gateway-api-core.md)
 - [Service 全类型参考](./02-service-all-types.md)
 - [Service Mesh 故障排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md)
@@ -1752,7 +1752,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考

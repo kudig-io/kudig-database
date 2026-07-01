@@ -39,7 +39,7 @@ SlimFaas 是一个轻量级的 Kubernetes 原生 Function-as-a-[[Service|Service
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -67,5 +67,5 @@ SlimFaas 是一个轻量级的 Kubernetes 原生 Function-as-a-[[Service|Service
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - slimfaas
-- [[entities/cncf-edge-ai|[[CNCF 边缘计算与 AI/ML 项目全景|CNCF 边缘计算与 AI/ML 项目全景]]]] — Cross-reference
+- [[entities/cncf-edge-ai.md|[[CNCF 边缘计算与 AI/ML 项目全景|CNCF 边缘计算与 AI/ML 项目全景]]]] — Cross-reference
 - index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

@@ -136,6 +136,9 @@ spec:
 
 ### PVC批量创建脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # batch-create-pvc.sh
@@ -170,6 +173,10 @@ done
 
 ### PVC状态管理
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 查看Pending状态的PVC及其原因
 kubectl get pvc --all-namespaces --field-selector=status.phase=Pending -o wide
@@ -202,6 +209,10 @@ kubectl get pv <pv-name> -o jsonpath='{.spec.csi.driver}'
 
 ### 执行扩容操作
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方法1: 直接编辑PVC
 kubectl edit pvc <pvc-name> -n <namespace>
@@ -225,6 +236,10 @@ EOF
 ```
 
 ### 扩容验证步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 1. 监控扩容过程
@@ -274,6 +289,10 @@ spec:
 ```
 
 ### 备份管理脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 #!/bin/bash
@@ -413,6 +432,9 @@ kubectl get pods -n kube-system -l app.kubernetes.io/component=csi-driver
 
 ### 性能监控指标收集
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 收集I/O统计信息
 kubectl exec -it <pod-name> -n <namespace> -- iostat -x 1 5
@@ -447,6 +469,9 @@ spec:
 ```
 
 ### 性能测试脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -568,6 +593,10 @@ echo "=========================================="
 
 ### 存储问题应急响应
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 #!/bin/bash
 # storage-emergency-response.sh
@@ -674,7 +703,7 @@ emergency_response
 ## Obsidian 相关文档
 
 - domain-04-storage-data KUDIG Database — Global MOC
-- [[domain-04-storage-data/README|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
+- [[domain-04-storage-data/README.md|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
 - index.md|Domain-6 存储 — 开源项目索引]]
 - 存储架构概览与核心组件
 - PV/PVC 核心概念与企业级实践
@@ -695,4 +724,4 @@ emergency_response
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]

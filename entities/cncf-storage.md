@@ -79,7 +79,7 @@ Carina 是基于 LVM 的本地存储管理方案。
 
 ### [[piraeus-datastore]] — 沙箱项目
 
-[[Piraeus Datastore|Piraeus Datastore]] 在 K8s 上部署 LINSTOR SDS。
+Piraeus Datastore 在 K8s 上部署 LINSTOR SDS。
 
 ### [[cubefs]] — 毕业项目
 
@@ -204,21 +204,21 @@ Kanister 提供应用级数据保护框架。
 
 ## 相关页面
 
-- [[entities/cncf-observability|cncf-observability]] — 可观测性
-- [[entities/cncf-security|cncf-security]] — 安全与合规
-- [[entities/cncf-networking|cncf-networking]] — 网络与服务网格
-- [[concepts/block-file-object-storage|block-file-object-storage]] — 存储类型概念
+- [[entities/cncf-observability.md|cncf-observability]] — 可观测性
+- [[entities/cncf-security.md|cncf-security]] — 安全与合规
+- [[entities/cncf-networking.md|cncf-networking]] — 网络与服务网格
+- [[concepts/block-file-object-storage.md|block-file-object-storage]] — 存储类型概念
 
 ## Related
 
 - [[docker]] — Docker
 - [[containerd]] — containerd
-- [[entities/trivy|trivy]] — Trivy
+- [[entities/trivy.md|trivy]] — Trivy
 - [[harbor]] — Harbor
 - [[piraeus-datastore]] — Piraeus Datastore
 
-- [[entities/kanister|Kanister]]
-- [[entities/oxia|Oxia]]
-- [[entities/opengemini|openGemini]]
-- [[entities/schemahero|SchemaHero]]
-- [[entities/vineyard|Vineyard]]
+- [[entities/kanister.md|Kanister]]
+- [[entities/oxia.md|Oxia]]
+- [[entities/opengemini.md|openGemini]]
+- [[entities/schemahero.md|SchemaHero]]
+- [[entities/vineyard.md|Vineyard]]

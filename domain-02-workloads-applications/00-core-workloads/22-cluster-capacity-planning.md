@@ -1414,7 +1414,7 @@ data:
 | **v1.31** | 调度器吞吐量优化 | 支持更大规模集群 |
 | | 新增 `NodeResourcesFitArgs` 评分调优 | 更精细的资源匹配 |
 | **v1.30** | etcd 3.5.x 默认版本 | 性能提升 ~50% |
-| | 新增 `DRA` ([[Dynamic Resource Allocation|Dynamic Resource Allocation]]) | GPU 等资源更灵活分配 |
+| | 新增 `DRA` ([[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]]) | GPU 等资源更灵活分配 |
 | **v1.29** | Cluster Autoscaler 性能优化 | 大规模集群扩缩容更快 |
 | | 新增 `--max-pod-eviction-time` | 更可控的节点缩容 |
 | **v1.28** | 引入 `SchedulerQueueingHints` | 调度性能提升 |
@@ -1456,7 +1456,7 @@ data:
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications KUDIG Database — Global MOC
-- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
 - index.md|Domain-4 工作负载 — 开源项目索引]]
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
@@ -1477,5 +1477,5 @@ data:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]

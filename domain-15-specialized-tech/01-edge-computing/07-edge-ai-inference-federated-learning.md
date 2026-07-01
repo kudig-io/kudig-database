@@ -127,7 +127,7 @@ Edge AI inference brings intelligence to the edge, solving latency, bandwidth, a
 
 <!-- chunk: 1. 边缘 AI 推理框架对比 -->## 1. 边缘 AI 推理框架对比
 
-#<!-- chunk: 1.1 框架选型矩阵 -->## 1.1 框架选型矩阵
+## 1.1 框架选型矩阵
 
 | 框架 | 硬件支持 | 模型格式 | 量化支持 | 语言绑定 | 适用场景 |
 |------|---------|---------|---------|---------|---------|
@@ -138,7 +138,7 @@ Edge AI inference brings intelligence to the edge, solving latency, bandwidth, a
 | **MNN** | CPU/GPU/NPU | MNN/ONNX/TF | INT8 | C++/Java/Python | 阿里移动端 |
 | **NCNN** | CPU/Vulkan | NCNN | INT8 | C++ | 嵌入式高性能 |
 
-#<!-- chunk: 1.2 边缘设备推理性能对比 -->## 1.2 边缘设备推理性能对比
+## 1.2 边缘设备推理性能对比
 
 ```mermaid
 graph LR
@@ -160,7 +160,7 @@ graph LR
     end
 ```
 
-#<!-- chunk: 1.3 框架选型决策树 -->## 1.3 框架选型决策树
+## 1.3 框架选型决策树
 
 ```mermaid
 flowchart TD
@@ -187,7 +187,7 @@ flowchart TD
 
 <!-- chunk: 2. ONNX Runtime 边缘部署 -->## 2. ONNX Runtime 边缘部署
 
-#<!-- chunk: 2.1 ONNX Runtime 架构 -->## 2.1 ONNX Runtime 架构
+## 2.1 ONNX Runtime 架构
 
 ```mermaid
 graph TB
@@ -220,7 +220,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 2.2 ONNX Runtime Python 推理示例 -->## 2.2 ONNX Runtime Python 推理示例
+## 2.2 ONNX Runtime Python 推理示例
 
 ```python
 # onnx_edge_inference.py
@@ -408,7 +408,7 @@ if __name__ == "__main__":
     print(f"  吞吐量: {bench['throughput_qps']:.1f} QPS")
 ```
 
-#<!-- chunk: 2.3 模型转换为 ONNX -->## 2.3 模型转换为 ONNX
+## 2.3 模型转换为 ONNX
 
 ```python
 # model_converter.py - 将各种框架模型转换为 ONNX
@@ -503,7 +503,7 @@ def optimize_onnx_model(input_path: str, output_path: str) -> None:
 
 <!-- chunk: 3. TensorFlow Lite 实践 -->## 3. TensorFlow Lite 实践
 
-#<!-- chunk: 3.1 TFLite 部署架构 -->## 3.1 TFLite 部署架构
+## 3.1 TFLite 部署架构
 
 ```mermaid
 graph TB
@@ -535,7 +535,7 @@ graph TB
     TFLite_Model --> EdgeTPU_Delegate
 ```
 
-#<!-- chunk: 3.2 TFLite 转换与部署 -->## 3.2 TFLite 转换与部署
+## 3.2 TFLite 转换与部署
 
 ```python
 # tflite_edge_deploy.py
@@ -753,7 +753,7 @@ class EdgeObjectDetector:
 
 <!-- chunk: 4. OpenVINO 边缘推理 -->## 4. OpenVINO 边缘推理
 
-#<!-- chunk: 4.1 OpenVINO 工具链 -->## 4.1 OpenVINO 工具链
+## 4.1 OpenVINO 工具链
 
 ```mermaid
 graph LR
@@ -787,7 +787,7 @@ graph LR
     IR --> HDDL_Plugin
 ```
 
-#<!-- chunk: 4.2 OpenVINO 推理实现 -->## 4.2 OpenVINO 推理实现
+## 4.2 OpenVINO 推理实现
 
 ```python
 # openvino_inference.py
@@ -946,7 +946,7 @@ class OpenVINOEdgeEngine:
 
 <!-- chunk: 5. 模型量化优化 -->## 5. 模型量化优化
 
-#<!-- chunk: 5.1 量化原理 -->## 5.1 量化原理
+## 5.1 量化原理
 
 ```mermaid
 graph LR
@@ -967,7 +967,7 @@ graph LR
     INT8 -->|"反量化:\nX = S*(Q-Z)"| FP32
 ```
 
-#<!-- chunk: 5.2 量化类型对比 -->## 5.2 量化类型对比
+## 5.2 量化类型对比
 
 | 量化类型 | 适用场景 | 精度损失 | 压缩比 | 速度提升 | 实现难度 |
 |---------|---------|---------|--------|---------|---------|
@@ -977,7 +977,7 @@ graph LR
 | **FP16 量化** | GPU 推理 | 极低 | 2x | 1.5-2x | 简单 |
 | **混合精度** | 平衡精度/速度 | 低 | 可调 | 可调 | 中等 |
 
-#<!-- chunk: 5.3 PyTorch 模型量化实现 -->## 5.3 PyTorch 模型量化实现
+## 5.3 PyTorch 模型量化实现
 
 ```python
 # pytorch_quantization.py
@@ -1149,7 +1149,7 @@ class QuantizationPipeline:
 
 <!-- chunk: 6. 模型剪枝技术 -->## 6. 模型剪枝技术
 
-#<!-- chunk: 6.1 剪枝策略 -->## 6.1 剪枝策略
+## 6.1 剪枝策略
 
 ```mermaid
 mindmap
@@ -1176,7 +1176,7 @@ mindmap
       激活统计
 ```
 
-#<!-- chunk: 6.2 通道剪枝实现 -->## 6.2 通道剪枝实现
+## 6.2 通道剪枝实现
 
 ```python
 # channel_pruning.py
@@ -1296,7 +1296,7 @@ class ChannelPruner:
 
 <!-- chunk: 7. 知识蒸馏 -->## 7. 知识蒸馏
 
-#<!-- chunk: 7.1 知识蒸馏架构 -->## 7.1 知识蒸馏架构
+## 7.1 知识蒸馏架构
 
 ```mermaid
 graph TB
@@ -1331,7 +1331,7 @@ graph TB
     Total --> S_Model
 ```
 
-#<!-- chunk: 7.2 知识蒸馏代码实现 -->## 7.2 知识蒸馏代码实现
+## 7.2 知识蒸馏代码实现
 
 ```python
 # knowledge_distillation.py
@@ -1575,7 +1575,7 @@ class EdgeModelDistiller:
 
 <!-- chunk: 8. 联邦学习架构 -->## 8. 联邦学习架构
 
-#<!-- chunk: 8.1 联邦学习整体架构 -->## 8.1 联邦学习整体架构
+## 8.1 联邦学习整体架构
 
 ```mermaid
 graph TB
@@ -1634,7 +1634,7 @@ graph TB
     style EdgeClient3 fill:#fff3e0,stroke:#e65100
 ```
 
-#<!-- chunk: 8.2 FedAvg 算法实现 -->## 8.2 FedAvg 算法实现
+## 8.2 FedAvg 算法实现
 
 ```python
 # federated_learning.py
@@ -1927,7 +1927,7 @@ class FederatedClient:
 
 <!-- chunk: 9. 隐私保护机器学习 -->## 9. 隐私保护机器学习
 
-#<!-- chunk: 9.1 隐私保护技术体系 -->## 9.1 隐私保护技术体系
+## 9.1 隐私保护技术体系
 
 ```mermaid
 graph TB
@@ -1969,7 +1969,7 @@ graph TB
     TEE --> PPML
 ```
 
-#<!-- chunk: 9.2 差分隐私实现 -->## 9.2 差分隐私实现
+## 9.2 差分隐私实现
 
 ```python
 # differential_privacy.py
@@ -2100,7 +2100,7 @@ class DifferentialPrivacyEngine:
 
 <!-- chunk: 10. 边缘 AI Kubernetes 部署 -->## 10. 边缘 AI Kubernetes 部署
 
-#<!-- chunk: 10.1 AI 推理服务部署配置 -->## 10.1 AI 推理服务部署配置
+## 10.1 AI 推理服务部署配置
 
 ```yaml
 # edge-ai-inference-deployment.yaml
@@ -2280,7 +2280,7 @@ spec:
             sizeLimit: 5Gi
 ```
 
-#<!-- chunk: 10.2 模型版本管理 -->## 10.2 模型版本管理
+## 10.2 模型版本管理
 
 ```yaml
 # model-registry-config.yaml
@@ -2348,7 +2348,7 @@ data:
 
 <!-- chunk: 11. 性能基准测试 -->## 11. 性能基准测试
 
-#<!-- chunk: 11.1 推理框架性能对比实验 -->## 11.1 推理框架性能对比实验
+## 11.1 推理框架性能对比实验
 
 ```python
 # benchmark_inference.py
@@ -2481,7 +2481,7 @@ class InferenceBenchmark:
 
 <!-- chunk: 12. 最佳实践 -->## 12. 最佳实践
 
-#<!-- chunk: 12.1 边缘 AI 部署决策矩阵 -->## 12.1 边缘 AI 部署决策矩阵
+## 12.1 边缘 AI 部署决策矩阵
 
 ```mermaid
 quadrantChart
@@ -2499,37 +2499,37 @@ quadrantChart
     TFLite + NNAPI: [0.35, 0.45]
 ```
 
-#<!-- chunk: 12.2 联邦学习生产检查清单 -->## 12.2 联邦学习生产检查清单
+## 12.2 联邦学习生产检查清单
 
 ```markdown
 <!-- chunk: 联邦学习生产环境检查清单 -->## 联邦学习生产环境检查清单
 
-#<!-- chunk: 模型设计 -->## 模型设计
+## 模型设计
 - [ ] 模型参数量适合边缘设备内存（推荐 <50MB）
 - [ ] 支持断点续传（训练状态持久化）
 - [ ] 梯度压缩（TopK / 随机稀疏化）减少通信量
 - [ ] 配置合理的本地训练轮数（避免客户端漂移）
 
-#<!-- chunk: 隐私保护 -->## 隐私保护
+## 隐私保护
 - [ ] 差分隐私预算 ε ≤ 10（敏感数据 ε ≤ 1）
 - [ ] 梯度裁剪阈值合理配置
 - [ ] 安全聚合防止服务器推断单个客户端梯度
 - [ ] 定期隐私审计
 
-#<!-- chunk: 系统稳定性 -->## 系统稳定性
+## 系统稳定性
 - [ ] 处理客户端掉线（Partial Participation）
 - [ ] 异步联邦学习支持（避免等待慢速客户端）
 - [ ] 模型版本控制
 - [ ] 训练指标实时监控
 
-#<!-- chunk: 通信优化 -->## 通信优化
+## 通信优化
 - [ ] 模型压缩后上传（gzip/lz4）
 - [ ] 仅传输模型差异（增量更新）
 - [ ] 配置带宽限速（避免影响业务流量）
 - [ ] 断网恢复机制
 ```
 
-#<!-- chunk: 12.3 推荐架构组合 -->## 12.3 推荐架构组合
+## 12.3 推荐架构组合
 
 | 场景 | 推理框架 | 量化方案 | 联邦学习 | 隐私保护 |
 |------|---------|---------|---------|---------|
@@ -2548,7 +2548,7 @@ quadrantChart
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-37-edge-computing MOC
-- [[domain-15-specialized-tech/README|Domain 37: 边缘计算 (Edge Computing)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: 边缘计算 (Edge Computing)]]
 - Domain-37 边缘计算 — 开源项目索引
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)

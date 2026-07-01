@@ -49,7 +49,7 @@ Capsule 是一个 Kubernetes 多租户框架，允许在单个集群中实现多
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -66,20 +66,20 @@ Capsule 是一个 Kubernetes 多租户框架，允许在单个集群中实现多
 
 ## 参考链接
 
-- [[entities/networkpolicy|networkpolicy]]
+- [[entities/networkpolicy.md|networkpolicy]]
 - [[deployment]]
-- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]
-- [[concepts/controller-pattern|controller-pattern]]
+- [[concepts/controller-pattern.md|controller-pattern]]
 
 ## Related
 
 - [[buildpacks]] — Cloud Native Buildpacks
 - [[kube-rs]] — kube-rs
 - [[02-prometheus-promql-advanced]] — PromQL 高级查询
-- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - capsule
-- [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

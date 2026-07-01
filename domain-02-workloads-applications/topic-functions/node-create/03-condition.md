@@ -385,6 +385,9 @@ ip route
 
 ### 6.2 网络状态清除
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # CNI 插件负责将 NetworkUnavailable 设置为 False
 # 不同的 CNI 插件有不同的实现:
@@ -500,8 +503,8 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.a
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[entities/cni|cni]]
-- [[entities/containerd|containerd]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/cni.md|cni]]
+- [[entities/containerd.md|containerd]]

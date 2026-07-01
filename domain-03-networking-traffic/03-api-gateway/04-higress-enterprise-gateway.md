@@ -86,7 +86,7 @@ created: "2026-05-23"
 
 Higress 是阿里巴巴开源的云原生 API 网关，基于 Istio 和 Envoy 构建，2022 年开源，2023 年进入 CNCF Sandbox。其命名源自 "High" + "[[Ingress|Ingress]]"，寓意高性能的入口网关。
 
-#<!-- chunk: 核心定位 -->## 核心定位
+## 核心定位
 
 | 定位 | 说明 |
 |------|------|
@@ -95,7 +95,7 @@ Higress 是阿里巴巴开源的云原生 API 网关，基于 Istio 和 Envoy �
 | **Ingress 控制器** | 同时兼容 Kubernetes Ingress、Gateway API、自有 CRD 三种配置方式 |
 | **微服务网关** | 通过 McpBridge 对接 Nacos/Consul/Eureka 等注册中心，覆盖 Spring Cloud 等传统微服务架构 |
 
-#<!-- chunk: 核心特点 -->## 核心特点
+## 核心特点
 
 - **基于 Envoy + Istiod**: 复用 Envoy 高性能数据平面和 Istio 成熟的 xDS 配置下发链路，经过阿里内部大规模验证
 - **Wasm 插件一等支持**: 插件以 OCI 镜像分发，热加载无需重启网关，支持 Go/Rust/C++ 等多语言
@@ -103,7 +103,7 @@ Higress 是阿里巴巴开源的云原生 API 网关，基于 Istio 和 Envoy �
 - **兼容性极强**: 高度兼容 nginx-ingress 注解，迁移成本最低
 - **阿里云生态**: MSE 提供全托管商业版，与 ACK/ASM 深度集成
 
-#<!-- chunk: 发展历程 -->## 发展历程
+## 发展历程
 
 | 时间 | 里程碑 |
 |------|--------|
@@ -118,7 +118,7 @@ Higress 是阿里巴巴开源的云原生 API 网关，基于 Istio 和 Envoy �
 
 <!-- chunk: 2. 核心架构与原理 -->## 2. 核心架构与原理
 
-#<!-- chunk: 2.1 整体架构 -->## 2.1 整体架构
+## 2.1 整体架构
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -169,7 +169,7 @@ Higress 是阿里巴巴开源的云原生 API 网关，基于 Istio 和 Envoy �
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 2.2 核心组件职责 -->## 2.2 核心组件职责
+## 2.2 核心组件职责
 
 | 组件 | 技术栈 | 职责 | 原理说明 |
 |------|--------|------|---------|
@@ -178,7 +178,7 @@ Higress 是阿里巴巴开源的云原生 API 网关，基于 Istio 和 Envoy �
 | **Envoy Proxy** | C++ | 高性能数据平面，处理实际流量请求。基于 Filter Chain 架构，每个请求经过一系列 Filter 处理 | 零拷贝转发、连接池复用、异步非阻塞 |
 | **Higress Console** | Java/React | 可选的 Web 管理控制台，提供图形化配置能力 | 通过 K8s API 读写 CRD |
 
-#<!-- chunk: 2.3 xDS 配置下发原理 -->## 2.3 xDS 配置下发原理
+## 2.3 xDS 配置下发原理
 
 ```
 配置变更流程:
@@ -208,7 +208,7 @@ xDS 资源类型:
   └─ SDS (Secret Discovery Service)      → TLS 证书和密钥
 ```
 
-#<!-- chunk: 2.4 与 nginx-ingress 架构对比 -->## 2.4 与 nginx-ingress 架构对比
+## 2.4 与 nginx-ingress 架构对比
 
 | 维度 | nginx-ingress | Higress |
 |------|--------------|---------|
@@ -224,7 +224,7 @@ xDS 资源类型:
 
 > 目标：在 Mac 上零 K8s 依赖，快速体验 Higress 核心功能。
 
-#<!-- chunk: 方式一：Docker All-in-One（最快） -->## 方式一：Docker All-in-One（最快）
+## 方式一：Docker All-in-One（最快）
 
 > **⚠️ 镜像仓库说明**: Higress all-in-one 镜像**仅托管在阿里云中国区镜像仓库** (`higress-registry.cn-hangzhou.cr.aliyuncs.com`)，Docker Hub 上不存在该镜像。海外网络环境拉取时可能遇到 EOF 错误，重试几次通常可解决。
 
@@ -303,7 +303,7 @@ $ curl -vk https://localhost:8443
 # < server: istio-envoy
 ```
 
-#<!-- chunk: 方式二：Docker Compose（带后端服务完整 Demo） -->## 方式二：Docker Compose（带后端服务完整 Demo）
+## 方式二：Docker Compose（带后端服务完整 Demo）
 
 ```bash
 # 创建 demo 目录
@@ -386,7 +386,11 @@ curl -X POST -H "Host: demo.example.com" \
      http://localhost:8080/post
 ```
 
-#<!-- chunk: 方式三：Kind + Helm（Mac 上的完整 K8s 体验） -->## 方式三：Kind + Helm（Mac 上的完整 K8s 体验）
+## 方式三：Kind + Helm（Mac 上的完整 K8s 体验）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 前提：安装 kind 和 helm
@@ -457,7 +461,10 @@ kind delete cluster --name higress-demo
 
 <!-- chunk: 4. Kubernetes 集群部署 -->## 4. Kubernetes 集群部署
 
-#<!-- chunk: Helm 安装（生产推荐） -->## Helm 安装（生产推荐）
+## Helm 安装（生产推荐）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 添加 Helm 仓库
@@ -480,7 +487,10 @@ helm install higress-console higress/higress-console \
   -n higress-system
 ```
 
-#<!-- chunk: 验证安装 -->## 验证安装
+## 验证安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查 Pod 状态
@@ -507,7 +517,7 @@ kubectl exec -n higress-system deploy/higress-gateway -- \
 
 <!-- chunk: 5. 路由配置详解 -->## 5. 路由配置详解
 
-#<!-- chunk: 方式一：Kubernetes Ingress（最简单） -->## 方式一：Kubernetes Ingress（最简单）
+## 方式一：Kubernetes Ingress（最简单）
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -536,7 +546,7 @@ spec:
               number: 8080
 ```
 
-#<!-- chunk: 方式二：Gateway API（标准化推荐） -->## 方式二：Gateway API（标准化推荐）
+## 方式二：Gateway API（标准化推荐）
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -571,7 +581,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: 金丝雀发布（权重路由） -->## 金丝雀发布（权重路由）
+## 金丝雀发布（权重路由）
 
 ```yaml
 # Ingress 注解方式
@@ -630,7 +640,7 @@ spec:
 
 Higress 的核心差异化能力之一是通过 **McpBridge** CRD 对接传统微服务注册中心，让 Nacos/Consul/Eureka 注册的服务无需 K8s Service 即可被网关路由。
 
-#<!-- chunk: 原理 -->## 原理
+## 原理
 
 ```
 McpBridge CRD → Higress Controller → 轮询注册中心 API
@@ -645,7 +655,7 @@ McpBridge CRD → Higress Controller → 轮询注册中心 API
                                     Envoy 直接路由到注册中心的实例 IP
 ```
 
-#<!-- chunk: Nacos 对接 -->## Nacos 对接
+## Nacos 对接
 
 ```yaml
 apiVersion: networking.higress.io/v1
@@ -665,7 +675,7 @@ spec:
     - PROD_GROUP
 ```
 
-#<!-- chunk: Consul 对接 -->## Consul 对接
+## Consul 对接
 
 ```yaml
 apiVersion: networking.higress.io/v1
@@ -686,7 +696,7 @@ spec:
 
 <!-- chunk: 7. 插件生态 -->## 7. 插件生态
 
-#<!-- chunk: 内置插件分类 -->## 内置插件分类
+## 内置插件分类
 
 | 类别 | 内置插件 | 说明 |
 |------|---------|------|
@@ -697,7 +707,7 @@ spec:
 | **可观测性** | prometheus, request-log, skywalking | 自定义指标和日志格式 |
 | **AI 网关** | ai-proxy, ai-token-ratelimit, ai-cache, ai-prompt-template, ai-statistics | LLM 专属插件集 |
 
-#<!-- chunk: 插件配置示例（WasmPlugin CRD） -->## 插件配置示例（WasmPlugin CRD）
+## 插件配置示例（WasmPlugin CRD）
 
 ```yaml
 apiVersion: extensions.higress.io/v1alpha1
@@ -732,7 +742,7 @@ spec:
     max_age: 3600
 ```
 
-#<!-- chunk: 插件执行阶段 -->## 插件执行阶段
+## 插件执行阶段
 
 ```
 请求流入 → AUTHN(认证) → AUTHZ(鉴权) → STATS(统计) → Router(转发) → 响应返回
@@ -748,7 +758,7 @@ spec:
 
 > 详细参考：[10-Wasm 插件生态与开发实践](./10-wasm-plugin-ecosystem.md)
 
-#<!-- chunk: Go（TinyGo）开发示例 -->## Go（TinyGo）开发示例
+## Go（TinyGo）开发示例
 
 ```go
 package main
@@ -799,7 +809,7 @@ func (ctx *httpContext) OnHttpRequestHeaders(numHeaders int, endOfStream bool) t
 }
 ```
 
-#<!-- chunk: 编译与发布 -->## 编译与发布
+## 编译与发布
 
 ```bash
 # 安装 TinyGo（Mac）
@@ -819,7 +829,7 @@ docker push registry.example.com/my-plugin:v1
 
 Higress 是目前开源社区中 AI 网关能力最完整的产品之一，核心功能包括：
 
-#<!-- chunk: 功能矩阵 -->## 功能矩阵
+## 功能矩阵
 
 | 能力 | 说明 | 对应插件 |
 |------|------|---------|
@@ -831,7 +841,7 @@ Higress 是目前开源社区中 AI 网关能力最完整的产品之一，核�
 | **AI 可观测性** | Token 用量、延迟、成本统计 | ai-statistics |
 | **模型映射** | 将外部模型名映射为内部实际模型 | ai-proxy (modelMapping) |
 
-#<!-- chunk: AI 代理路由配置 -->## AI 代理路由配置
+## AI 代理路由配置
 
 ```yaml
 apiVersion: extensions.higress.io/v1alpha1
@@ -854,7 +864,7 @@ spec:
           "*": "gpt-3.5-turbo"    # 默认回退
 ```
 
-#<!-- chunk: Token 级限流 -->## Token 级限流
+## Token 级限流
 
 ```yaml
 apiVersion: extensions.higress.io/v1alpha1
@@ -878,7 +888,7 @@ spec:
           token_per_day: 100000
 ```
 
-#<!-- chunk: 多模型 Fallback -->## 多模型 Fallback
+## 多模型 Fallback
 
 ```yaml
 apiVersion: extensions.higress.io/v1alpha1
@@ -906,7 +916,7 @@ spec:
             "*": "qwen-max"
 ```
 
-#<!-- chunk: Mac 上体验 AI 网关 Demo -->## Mac 上体验 AI 网关 Demo
+## Mac 上体验 AI 网关 Demo
 
 ```bash
 # 使用 Docker All-in-One
@@ -1002,7 +1012,7 @@ spec:
 
 <!-- chunk: 11. 可观测性 -->## 11. 可观测性
 
-#<!-- chunk: Prometheus 指标 -->## Prometheus 指标
+## Prometheus 指标
 
 ```yaml
 # Higress 默认暴露核心 Envoy 指标
@@ -1018,7 +1028,7 @@ kubectl port-forward svc/higress-gateway 15020:15020 -n higress-system
 curl http://localhost:15020/stats/prometheus
 ```
 
-#<!-- chunk: ServiceMonitor -->## ServiceMonitor
+## ServiceMonitor
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -1036,7 +1046,7 @@ spec:
     interval: 15s
 ```
 
-#<!-- chunk: 访问日志配置 -->## 访问日志配置
+## 访问日志配置
 
 ```yaml
 apiVersion: v1
@@ -1062,7 +1072,7 @@ data:
 
 <!-- chunk: 12. 生产环境调优 -->## 12. 生产环境调优
 
-#<!-- chunk: 资源配置建议 -->## 资源配置建议
+## 资源配置建议
 
 | 规模 | Gateway CPU | Gateway Memory | 副本数 |
 |------|------------|---------------|--------|
@@ -1070,7 +1080,7 @@ data:
 | 中型（1K-10K QPS） | 2-4 core | 2-4Gi | 2-4 |
 | 大型（> 10K QPS） | 4-8 core | 4-8Gi | 4-10 |
 
-#<!-- chunk: HPA 配置 -->## HPA 配置
+## HPA 配置
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -1099,7 +1109,7 @@ spec:
       stabilizationWindowSeconds: 300
 ```
 
-#<!-- chunk: Envoy 性能调优 -->## Envoy 性能调优
+## Envoy 性能调优
 
 ```yaml
 # 关键调优参数（通过 Higress 配置或 EnvoyFilter）
@@ -1114,7 +1124,7 @@ stream_idle_timeout: 300s         # HTTP/2 流空闲超时
 # connect_timeout: 5s              # 连接超时
 ```
 
-#<!-- chunk: PodDisruptionBudget -->## PodDisruptionBudget
+## PodDisruptionBudget
 
 ```yaml
 apiVersion: policy/v1
@@ -1160,6 +1170,9 @@ Higress 基于 Istiod 构建控制平面，可与 Istio 服务网格无缝协同
 
 **复用已有 Istiod：** 如果集群中已部署 Istio，Higress 可以复用现有 Istiod 实例，通过 Helm values 配置：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 helm install higress higress/higress \
   -n higress-system --create-namespace \
@@ -1172,7 +1185,10 @@ helm install higress higress/higress \
 
 <!-- chunk: 14. 常见故障排查 -->## 14. 常见故障排查
 
-#<!-- chunk: 排查工具箱 -->## 排查工具箱
+## 排查工具箱
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 查看 Gateway 配置（xDS dump）
@@ -1194,7 +1210,7 @@ kubectl logs -n higress-system -l app=higress-gateway -f
 kubectl logs -n higress-system -l app=higress-controller -f
 ```
 
-#<!-- chunk: 常见问题 -->## 常见问题
+## 常见问题
 
 | 症状 | 可能原因 | 排查方法 |
 |------|---------|---------|
@@ -1243,7 +1259,7 @@ kubectl logs -n higress-system -l app=higress-controller -f
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-40-cloud-native-api-gateway MOC
-- [[domain-03-networking-traffic/README|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
 - Domain-40 云原生 API 网关 — 开源项目索引
 - 01 - 云原生 API 网关架构总览
 - 02 - Kubernetes Gateway API 标准深度解析
@@ -1264,5 +1280,7 @@ kubectl logs -n higress-system -l app=higress-controller -f
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+
+```

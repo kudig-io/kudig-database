@@ -173,6 +173,10 @@ Operator 的典型应用场景：
 
 ### 任务 1: Helm 实践 (1h)
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 添加常用 Helm repo
 helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -227,10 +231,14 @@ helm history my-nginx
 helm rollback my-nginx 1 --namespace demo
 
 # 卸载
-helm uninstall my-nginx --namespace demo
+helm uninstall my-nginx --namespace demo  # ⚠️ 删除 release 及关联资源
 ```
 
 ### 任务 2: 创建自定义 Helm Chart (1h)
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 创建 Chart 骨架
@@ -296,10 +304,14 @@ kubectl get all -n demo
 helm get manifest test-release --namespace demo
 
 # 清理
-helm uninstall test-release --namespace demo
+helm uninstall test-release --namespace demo  # ⚠️ 删除 release 及关联资源
 ```
 
 ### 任务 3: CRD 和 Operator 实践 (1h)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 查看集群中已有的 CRD

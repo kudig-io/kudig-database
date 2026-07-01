@@ -63,14 +63,13 @@ created: "2026-05-23"
 ---
 
 
-
 # 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 
 ---
 
 ## 1. 概述
 
-镜像拉取问题是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 集群中**最常见的 Pod 启动失败原因之一**，约占所有 Pod 异常工单的 20-30%。当容器镜像无法成功拉取时，Pod 将持续处于 `ImagePullBackOff` 或 `ErrImagePull` 状态，导致服务无法启动或扩容失败。对于生产环境中的关键服务，镜像拉取问题可能直接导致业务中断。
+镜像拉取问题是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群中**最常见的 Pod 启动失败原因之一**，约占所有 Pod 异常工单的 20-30%。当容器镜像无法成功拉取时，Pod 将持续处于 `ImagePullBackOff` 或 `ErrImagePull` 状态，导致服务无法启动或扩容失败。对于生产环境中的关键服务，镜像拉取问题可能直接导致业务中断。
 
 ### 典型触发场景
 
@@ -89,8 +88,6 @@ created: "2026-05-23"
 - **节点访问**: 深度诊断（Phase 2+）可能需要 SSH 访问节点或使用 `kubectl debug node/`
 - **工具要求**: kubectl (v1.28+), crictl (节点诊断), curl/openssl (网络/TLS 诊断)
 - **可选工具**: crane/skopeo (镜像 manifest 检查), cosign/notation (签名验证)
-
-> ⚠️ **重要**: 本 Skill 覆盖 containerd 和 CRI-O 两种容器运行时。针对不同仓库（Docker Hub、Harbor、ACR、ECR、GCR、GHCR）提供差异化诊断指南。
 
 ---
 
@@ -342,6 +339,10 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
 
 **Step D2.1**: 仓库认证测试
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 准备测试 Secret（dry-run 模式，不实际创建）
   kubectl create secret docker-registry test-auth \
@@ -551,9 +552,6 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
 
 ### Phase 3: 高级诊断（低风险，可能需审批）
 
-> ⚠️ 以下步骤涉及与外部仓库的认证交互或更深入的系统检查。在 L2 模式下，Agent 可执行只读操作，修改类操作需人工确认。
-> **预计耗时**: 5-10 分钟
-
 **Step D3.1**: 仓库端日志检查（如有权限）
 - **命令**:
   ```bash
@@ -680,6 +678,10 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
   crane manifest <correct-image>:<correct-tag> || skopeo inspect docker://<correct-image>:<correct-tag>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 对于 Deployment
   kubectl set image deployment/<deployment-name> <container-name>=<correct-image>:<correct-tag> -n <namespace>
@@ -712,6 +714,11 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
   kubectl get secrets -n <namespace> -o name | grep -i docker
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 创建新的 imagePullSecret
   kubectl create secret docker-registry <secret-name> \
@@ -743,6 +750,11 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
   kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.imagePullSecrets}'
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl delete secret <secret-name> -n <namespace>
   kubectl patch deployment <deployment-name> -n <namespace> -p '{"spec":{"template":{"spec":{"imagePullSecrets":null}}}}'
@@ -759,6 +771,10 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
   kubectl get secret <secret-name> -n <namespace>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 为 ServiceAccount 添加默认 imagePullSecrets
   kubectl patch serviceaccount <sa-name> -n <namespace> -p '{"imagePullSecrets":[{"name":"<secret-name>"}]}'
@@ -770,6 +786,10 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
   # - name: <secret-name>
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 验证 SA 配置
   kubectl get sa <sa-name> -n <namespace> -o yaml | grep -A2 imagePullSecrets
@@ -780,6 +800,10 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
   kubectl get pods -n <namespace> -l <selector> -w
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch serviceaccount <sa-name> -n <namespace> --type=json -p='[{"op":"remove","path":"/imagePullSecrets"}]'
   ```
@@ -801,6 +825,10 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
   ssh <node-ip> "curl -v https://<mirror-registry>/v2/"
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 方式 1: 使用 containerd certs.d 配置（推荐，无需重启）
   ssh <node-ip> "mkdir -p /etc/containerd/certs.d/docker.io"
@@ -835,9 +863,14 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
   # 预期: Ready
   ```
 - **回滚命令**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 删除 certs.d 配置
-  ssh <node-ip> "rm -rf /etc/containerd/certs.d/docker.io"
+  ssh <node-ip> "rm -rf /etc/containerd/certs.d/docker.io"  # ⚠️ 删除系统/数据文件
   
   # 或恢复 containerd 配置
   ssh <node-ip> "cp /etc/containerd/config.toml.bak /etc/containerd/config.toml && systemctl restart containerd"
@@ -856,6 +889,10 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
   ssh <node-ip> "openssl x509 -in /tmp/registry-ca.crt -noout -subject -issuer"
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 方式 1: 使用 containerd certs.d（推荐，无需重启）
   ssh <node-ip> "mkdir -p /etc/containerd/certs.d/<registry-host>"
@@ -888,9 +925,13 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
   # 预期: 拉取成功
   ```
 - **回滚命令**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
   ```bash
   # 删除 certs.d 配置
-  ssh <node-ip> "rm -rf /etc/containerd/certs.d/<registry-host>"
+  ssh <node-ip> "rm -rf /etc/containerd/certs.d/<registry-host>"  # ⚠️ 删除系统/数据文件
   
   # 或从系统信任存储移除
   ssh <node-ip> "rm /etc/pki/ca-trust/source/anchors/registry-ca.crt && update-ca-trust"
@@ -909,6 +950,10 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
   ssh <node-ip> "systemctl show containerd --property=Environment"
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 创建 containerd 代理配置
   ssh <node-ip> "mkdir -p /etc/systemd/system/containerd.service.d"
@@ -942,6 +987,10 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
   # 预期: 拉取成功
   ```
 - **回滚命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   ssh <node-ip> "rm /etc/systemd/system/containerd.service.d/proxy.conf && systemctl daemon-reload && systemctl restart containerd"
   ```
@@ -959,6 +1008,11 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
   curl -u "<username>:<password>" https://hub.docker.com/v2/users/login
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 1: 创建 Docker Hub 认证 Secret
   kubectl create secret docker-registry dockerhub-auth \
@@ -976,6 +1030,10 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
   # 需要在 Harbor 中配置 Docker Hub 为 registry endpoint
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 删除并重建 Pod
   kubectl delete pod <pod-name> -n <namespace>
@@ -988,6 +1046,11 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
   # 预期: RateLimit-Limit: 200（认证用户）
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch sa default -n <namespace> --type=json -p='[{"op":"remove","path":"/imagePullSecrets"}]'
   kubectl delete secret dockerhub-auth -n <namespace>
@@ -1031,6 +1094,10 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
      ssh <node-ip> "crictl images | grep <image>"
      ```
   5. **重建 Pod 使用本地镜像**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      # 确保 imagePullPolicy 为 IfNotPresent 或 Never
      kubectl delete pod <pod-name> -n <namespace>
@@ -1063,6 +1130,10 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
      kubectl describe cpol <policy-name>
      ```
   2. **临时豁免（推荐）**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
      ```bash
      # Gatekeeper: 添加 namespace 到 exemptNamespaces
      kubectl patch constraint <constraint-name> --type=merge -p '{
@@ -1083,6 +1154,10 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
      }'
      ```
   3. **紧急禁用（最后手段）**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      # 禁用 Gatekeeper admission webhook（危险）
      kubectl delete validatingwebhookconfiguration gatekeeper-validating-webhook-configuration
@@ -1091,6 +1166,10 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
      kubectl delete validatingwebhookconfiguration kyverno-resource-validating-webhook-cfg
      ```
   4. **验证 Pod 可以创建**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      kubectl delete pod <pod-name> -n <namespace>
      kubectl get pods -n <namespace> -l <selector> -w
@@ -1100,6 +1179,11 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
   - 设置提醒在问题解决后恢复策略
   - 评估安全影响并通知安全团队
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 恢复 Gatekeeper 策略
   kubectl patch constraint <constraint-name> --type=merge -p '{
@@ -1169,6 +1253,10 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
      # 或配置 containerd 镜像重写
      ```
   6. **验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      kubectl delete pod <pod-name> -n <namespace>
      kubectl get pods -n <namespace> -l <selector> -w

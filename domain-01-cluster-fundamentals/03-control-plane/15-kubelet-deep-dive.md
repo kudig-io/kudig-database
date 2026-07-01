@@ -1010,6 +1010,7 @@ spec:
       path: /etc/ssl/certs
       type: DirectoryOrCreate
     name: ca-certs
+
 ```
 
 ### 11.5 镜像 Pod (Mirror Pod)
@@ -1023,6 +1024,9 @@ spec:
 | **删除方式** | 只能删除节点上的 manifest 文件 |
 | **状态同步** | kubelet 将容器状态同步到 Mirror Pod |
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 查看静态 Pod 的 Mirror Pod
 kubectl get pods -n kube-system
@@ -1033,6 +1037,7 @@ kubectl get pods -n kube-system
 
 # 尝试删除会提示无法删除（或自动重建）
 kubectl delete pod kube-apiserver-master-1 -n kube-system
+
 ```
 
 ### 11.6 与 DaemonSet 的区别
@@ -1313,7 +1318,7 @@ cat /sys/fs/cgroup/kubepods.slice/kubepods-pod<uid>.slice/memory.min
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -1334,4 +1339,6 @@ cat /sys/fs/cgroup/kubepods.slice/kubepods-pod<uid>.slice/memory.min
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+
+```

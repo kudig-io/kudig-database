@@ -102,7 +102,7 @@ k8s_versions:
 
 <!-- chunk: 1. 监控体系迁移 -->## 1. 监控体系迁移
 
-#<!-- chunk: 1.1 方案选择 -->## 1.1 方案选择
+## 1.1 方案选择
 
 | 方案 | 说明 | 适用场景 | 成本 |
 |------|------|---------|------|
@@ -110,7 +110,10 @@ k8s_versions:
 | **自建 Prometheus → ARMS Prometheus** | 使用阿里云托管 Prometheus | 免运维，与 ACK 深度集成 | ARMS 服务费 |
 | **混合方案** | ACK 自建 Prometheus + ARMS 基础指标 | 灵活，可渐进迁移 | 中等 |
 
-#<!-- chunk: 1.2 自建 Prometheus 部署 -->## 1.2 自建 Prometheus 部署
+## 1.2 自建 Prometheus 部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 在 ACK 部署 kube-prometheus-stack（推荐 Helm 方式）
@@ -171,7 +174,7 @@ kubectl get pods -n monitoring
 kubectl get svc -n monitoring
 ```
 
-#<!-- chunk: 1.3 自定义指标抓取配置迁移 -->## 1.3 自定义指标抓取配置迁移
+## 1.3 自定义指标抓取配置迁移
 
 ```bash
 # 导出源集群的 Prometheus 额外抓取配置
@@ -190,7 +193,7 @@ kubectl --context=source-cluster get servicemonitors -A -o yaml | kubectl neat >
 kubectl --context=ack-cluster apply -f src-servicemonitors.yaml
 ```
 
-#<!-- chunk: 1.4 PrometheusRule 迁移 -->## 1.4 PrometheusRule 迁移
+## 1.4 PrometheusRule 迁移
 
 ```bash
 # 导出自定义告警规则
@@ -208,7 +211,7 @@ curl -s http://localhost:9090/api/v1/rules | jq '.data.groups | length'
 
 <!-- chunk: 2. 日志体系迁移 -->## 2. 日志体系迁移
 
-#<!-- chunk: 2.1 方案选择 -->## 2.1 方案选择
+## 2.1 方案选择
 
 | 方案 | 说明 | 适用场景 |
 |------|------|---------|
@@ -216,7 +219,7 @@ curl -s http://localhost:9090/api/v1/rules | jq '.data.groups | length'
 | **EFK → SLS** | 迁移到阿里云日志服务 | 免运维，强大查询 |
 | **Loki → ACK Loki** | 在 ACK 重新部署 Loki | 轻量级，与 Grafana 集成 |
 
-#<!-- chunk: 2.2 使用 SLS（推荐） -->## 2.2 使用 SLS（推荐）
+## 2.2 使用 SLS（推荐）
 
 ```yaml
 # ACK 默认已安装 logtail-ds
@@ -264,7 +267,10 @@ spec:
         io.kubernetes.pod.namespace: "production"
 ```
 
-#<!-- chunk: 2.3 EFK Stack 迁移 -->## 2.3 EFK Stack 迁移
+## 2.3 EFK Stack 迁移
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 如果保持 EFK Stack，在 ACK 部署
@@ -289,6 +295,9 @@ helm install kibana elastic/kibana \
 
 <!-- chunk: 3. 链路追踪迁移 -->## 3. 链路追踪迁移
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 方案 A: 使用阿里云 ARMS（推荐）
 # ACK 安装 ARMS Agent
@@ -312,7 +321,7 @@ helm install jaeger jaegertracing/jaeger \
 
 <!-- chunk: 4. 告警规则迁移 -->## 4. 告警规则迁移
 
-#<!-- chunk: 4.1 Alertmanager 配置迁移 -->## 4.1 Alertmanager 配置迁移
+## 4.1 Alertmanager 配置迁移
 
 ```bash
 # 导出源集群 Alertmanager 配置
@@ -327,7 +336,7 @@ kubectl --context=ack-cluster create secret generic alertmanager-config \
   --from-file=alertmanager.yaml=src-alertmanager.yaml
 ```
 
-#<!-- chunk: 4.2 告警通道配置 -->## 4.2 告警通道配置
+## 4.2 告警通道配置
 
 ```yaml
 # alertmanager.yaml 示例（适配阿里云环境）
@@ -341,13 +350,12 @@ route:
   repeat_interval: 4h
   receiver: 'default'
   routes:
-  - match:
-      severity: critical
-    receiver: 'critical-channel'
-  - match:
-      severity: warning
-    receiver: 'warning-channel'
-
+  - matchers:
+    - severity="critical"
+    receiver: critical-channel
+  - matchers:
+    - severity="warning"
+    receiver: warning-channel
 receivers:
 - name: 'default'
   webhook_configs:
@@ -411,7 +419,7 @@ kubectl --context=ack-cluster create configmap grafana-dashboard-apps \
 
 <!-- chunk: 6. RBAC 与权限迁移 -->## 6. RBAC 与权限迁移
 
-#<!-- chunk: 6.1 RBAC 迁移清单 -->## 6.1 RBAC 迁移清单
+## 6.1 RBAC 迁移清单
 
 ```bash
 # 导出并迁移自定义 RBAC（已在 03 文档中覆盖）
@@ -438,7 +446,7 @@ subjects:
 EOF
 ```
 
-#<!-- chunk: 6.2 Pod Security Standards -->## 6.2 Pod Security Standards
+## 6.2 Pod Security Standards
 
 ```yaml
 # ACK 1.25+ 使用 Pod Security Standards (PSS) 替代 PSP
@@ -481,7 +489,7 @@ done
 
 <!-- chunk: 8. 安全基线建立 -->## 8. 安全基线建立
 
-#<!-- chunk: 8.1 ACK 安全巡检 -->## 8.1 ACK 安全巡检
+## 8.1 ACK 安全巡检
 
 ```bash
 # 启用 ACK 安全巡检
@@ -524,7 +532,7 @@ EOF
 kubectl logs job/kube-bench
 ```
 
-#<!-- chunk: 8.2 安全迁移检查清单 -->## 8.2 安全迁移检查清单
+## 8.2 安全迁移检查清单
 
 - [ ] 监控体系已部署（Prometheus/ARMS）
 - [ ] 核心指标采集正常（CPU/内存/网络/磁盘）
@@ -550,16 +558,16 @@ kubectl logs job/kube-bench
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-migration MOC
-- [[domain-08-release-change-management/topic-migration/README|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
-- [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning|01 - 迁移评估与规划]]
-- [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design|02 - ACK 目标集群设计与搭建]]
-- [[domain-08-release-change-management/topic-migration/03-application-workload-migration|03 - 应用工作负载迁移]]
-- [[domain-08-release-change-management/topic-migration/04-storage-data-migration|04 - 存储与数据迁移]]
-- [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover|05 - 网络迁移与流量切换]]
-- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration|06 - 有状态服务迁移]]
-- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission|08 - 验收、切换与旧集群退役]]
-- [[domain-08-release-change-management/topic-migration/09-migration-toolchain|09 - 迁移工具链参考]]
-- [[domain-08-release-change-management/topic-migration/10-real-world-case-study|10 - 生产迁移实战案例]]
+- [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
+- [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
+- [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
+- [[domain-08-release-change-management/topic-migration/03-application-workload-migration.md|03 - 应用工作负载迁移]]
+- [[domain-08-release-change-management/topic-migration/04-storage-data-migration.md|04 - 存储与数据迁移]]
+- [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换]]
+- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration.md|06 - 有状态服务迁移]]
+- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission.md|08 - 验收、切换与旧集群退役]]
+- [[domain-08-release-change-management/topic-migration/09-migration-toolchain.md|09 - 迁移工具链参考]]
+- [[domain-08-release-change-management/topic-migration/10-real-world-case-study.md|10 - 生产迁移实战案例]]
 
 ## See Also
 
@@ -567,3 +575,5 @@ kubectl logs job/kube-bench
 - 06-stateful-services-migration
 - 08-validation-cutover-decommission
 - 09-migration-toolchain
+
+```

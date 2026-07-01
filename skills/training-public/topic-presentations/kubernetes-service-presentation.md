@@ -54,14 +54,14 @@ created: "2026-05-23"
 
 <!-- chunk: 演讲概述 -->## 演讲概述
 
-#<!-- chunk: 目标受众 -->## 目标受众
+## 目标受众
 
 - 初级运维：理解 Service 的核心概念和四种类型
 - 网络架构师：深入 kube-proxy 转发机制和性能优化
 - SRE 工程师：Service 故障排查与高可用设计
 - 应用开发者：理解 Service DNS 和服务发现机制
 
-#<!-- chunk: 预计时长 -->## 预计时长
+## 预计时长
 
 | 阶段 | 内容 | 时长 |
 |------|------|------|
@@ -73,7 +73,7 @@ created: "2026-05-23"
 | Q&A | 互动问答 | 15 分钟 |
 | **合计** | | **约 3 小时** |
 
-#<!-- chunk: 核心学习目标 -->## 核心学习目标
+## 核心学习目标
 
 完成本次培训后，学员能够：
 
@@ -84,7 +84,7 @@ created: "2026-05-23"
 5. 排查 Service 访问不通的常见问题
 6. 选择合适的 ExternalTrafficPolicy 策略
 
-#<!-- chunk: 核心要点 -->## 核心要点
+## 核心要点
 
 1. Service 为动态变化的 Pod 提供稳定的访问入口
 2. 四种 Service 类型各有适用场景
@@ -113,7 +113,7 @@ created: "2026-05-23"
 
 <!-- chunk: 核心概念讲解 -->## 核心概念讲解
 
-#<!-- chunk: 为什么需要 Service？ -->## 为什么需要 Service？
+## 为什么需要 Service？
 
 在 Kubernetes 中，Pod 是短暂的——它们会被创建、销毁、重新调度。每次重建后 Pod 的 IP 都会变化。如果客户端直接使用 Pod IP 访问服务，当 Pod 重建后连接就会断开。
 
@@ -157,7 +157,7 @@ spec:
 
 Service 通过 Label Selector 自动发现匹配的 Pod，并维护一个 Endpoints 列表。当 Pod 增减时，Endpoints 自动更新。
 
-#<!-- chunk: 四种 Service 类型 -->## 四种 Service 类型
+## 四种 Service 类型
 
 **ClusterIP（默认）**
 
@@ -244,7 +244,7 @@ spec:
 - 集群内应用通过 `external-db` 访问外部数据库
 - 适用场景：集群内服务引用外部服务（如 RDS）
 
-#<!-- chunk: Service 类型对比 -->## Service 类型对比
+## Service 类型对比
 
 | 维度 | ClusterIP | NodePort | LoadBalancer | ExternalName |
 |------|-----------|----------|-------------|-------------|
@@ -255,7 +255,7 @@ spec:
 | 成本 | 无 | 无 | 云商 LB 费用 | 无 |
 | 生产推荐 | 内部服务 | 不推荐 | 单服务暴露 | 外部引用 |
 
-#<!-- chunk: kube-proxy 转发模式 -->## kube-proxy 转发模式
+## kube-proxy 转发模式
 
 kube-proxy 是 Service 实现的数据平面组件，负责将到达 Service IP 的流量转发到后端 Pod。
 
@@ -329,7 +329,7 @@ DNAT 到 Pod IP:Port
 | 连接保持 | 不支持 | 支持 |
 | 推荐 | 小规模集群 | **所有生产环境** |
 
-#<!-- chunk: EndpointSlice -->## EndpointSlice
+## EndpointSlice
 
 传统 Endpoints 对象将所有后端 Pod IP 存储在单个资源中。在大规模集群中（10000+ Service，每个 Service 有数百个 Pod），这会导致：
 
@@ -382,7 +382,7 @@ ports:
 | 大规模性能 | 差 | 好 |
 | Kubernetes 默认 | v1.21 之前 | v1.21+ 默认 |
 
-#<!-- chunk: Headless Service -->## Headless Service
+## Headless Service
 
 ```yaml
 apiVersion: v1
@@ -423,7 +423,7 @@ postgres-2.postgres-service.production.svc.cluster.local → 10.244.3.30
 | `my-service.default.svc.cluster.local` | 返回 ClusterIP (10.96.0.100) | 返回所有 Pod IP (10.244.1.10, 10.244.2.20, ...) |
 | `pod-0.my-service.default.svc.cluster.local` | 不支持 | 返回特定 Pod IP |
 
-#<!-- chunk: ExternalTrafficPolicy -->## ExternalTrafficPolicy
+## ExternalTrafficPolicy
 
 | 策略 | 行为 | 源 IP | 网络跳转 | 适用场景 |
 |------|------|-------|---------|---------|
@@ -464,7 +464,7 @@ spec:
 
 <!-- chunk: 架构图 -->## 架构图
 
-#<!-- chunk: Service 流量转发路径 -->## Service 流量转发路径
+## Service 流量转发路径
 
 ```mermaid
 graph TB
@@ -492,7 +492,7 @@ graph TB
     style KP fill:#e8f5e9,stroke:#2e7d32
 ```
 
-#<!-- chunk: iptables 转发链路 -->## iptables 转发链路
+## iptables 转发链路
 
 ```mermaid
 graph TB
@@ -510,7 +510,7 @@ graph TB
     style KUBE_SVC fill:#fff3e0,stroke:#ef6c00
 ```
 
-#<!-- chunk: IPVS 转发架构 -->## IPVS 转发架构
+## IPVS 转发架构
 
 ```mermaid
 graph TB
@@ -534,7 +534,10 @@ graph TB
 
 <!-- chunk: 实战演示步骤 -->## 实战演示步骤
 
-#<!-- chunk: 演示 1：Service 类型实践 -->## 演示 1：Service 类型实践
+## 演示 1：Service 类型实践
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 创建 Deployment
@@ -575,7 +578,11 @@ curl http://<node-ip>:30080
 # 预期输出: Nginx 欢迎页面
 ```
 
-#<!-- chunk: 演示 2：kube-proxy 模式检查与切换 -->## 演示 2：kube-proxy 模式检查与切换
+## 演示 2：kube-proxy 模式检查与切换
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 步骤 1: 查看当前 kube-proxy 模式
@@ -609,7 +616,10 @@ sudo ipvsadm -Ln | head -5
 # 应该能看到 IPVS 规则
 ```
 
-#<!-- chunk: 演示 3：Headless Service + StatefulSet -->## 演示 3：Headless Service + StatefulSet
+## 演示 3：Headless Service + StatefulSet
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat <<EOF | kubectl apply -f -
@@ -669,7 +679,10 @@ kubectl run test-dns --image=busybox --rm -it --restart=Never -- \
 # 预期: 返回所有 3 个 Pod 的 IP
 ```
 
-#<!-- chunk: 演示 4：ExternalTrafficPolicy 对比 -->## 演示 4：ExternalTrafficPolicy 对比
+## 演示 4：ExternalTrafficPolicy 对比
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 LoadBalancer Service (Cluster 模式)
@@ -714,7 +727,7 @@ kubectl get endpoints lb-local
 # Local 模式：看到的是真实客户端 IP
 ```
 
-#<!-- chunk: 演示 5：性能诊断 -->## 演示 5：性能诊断
+## 演示 5：性能诊断
 
 ```bash
 # 查看 conntrack 状态
@@ -748,9 +761,12 @@ kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=50
 
 <!-- chunk: 动手实验 -->## 动手实验
 
-#<!-- chunk: 实验 1：Service 发现机制验证 -->## 实验 1：Service 发现机制验证
+## 实验 1：Service 发现机制验证
 
 **目标**：验证 CoreDNS + Service + Endpoints 的完整发现流程
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 创建 Deployment 和 Service
@@ -783,19 +799,19 @@ kubectl get endpoints discover-svc
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
 
-#<!-- chunk: Q1: Service 的 ClusterIP 是怎么分配的？ -->## Q1: Service 的 ClusterIP 是怎么分配的？
+## Q1: Service 的 ClusterIP 是怎么分配的？
 
 **回答**: ClusterIP 从 `--service-cluster-ip-range`（默认 10.96.0.0/12）中分配。每个 Service 分配一个唯一的虚拟 IP，这个 IP 不会出现在任何网络接口上，只存在于 iptables/IPVS 规则中。数据包到达时由 kube-proxy 的规则进行 DNAT 转发到后端 Pod。如果需要指定 ClusterIP，可以设置 `spec.clusterIP: 10.96.100.50`（必须在 service-cluster-ip-range 内）。
 
-#<!-- chunk: Q2: 为什么有时候 Service 访问不通？ -->## Q2: 为什么有时候 Service 访问不通？
+## Q2: 为什么有时候 Service 访问不通？
 
 **回答**: 排查步骤：(1) `kubectl get endpoints <service>` ——无 Endpoints 说明 Label Selector 不匹配或 Pod 不 Ready；(2) `kubectl get pods -l app=xxx` ——检查 Pod 状态和 Ready 列；(3) `kubectl get pods -n kube-system -l k8s-app=kube-proxy` ——检查 kube-proxy 是否正常；(4) `sudo iptables -L -n | grep KUBE-SVC` 或 `sudo ipvsadm -Ln` ——检查转发规则是否存在；(5) `cat /proc/sys/net/netfilter/nf_conntrack_count` ——检查 conntrack 是否满。
 
-#<!-- chunk: Q3: Service 和 Ingress 应该配合使用吗？ -->## Q3: Service 和 Ingress 应该配合使用吗？
+## Q3: Service 和 Ingress 应该配合使用吗？
 
 **回答**: 是的。标准架构是：外部 LB → Ingress Controller → Service → Pod。Ingress 负责 L7（域名/路径）路由，Service 负责 L4（IP:Port）负载均衡。Ingress 的 backend 指向 Service，Service 再将流量分发到 Pod。不要试图用 Service 替代 Ingress——Service 只提供 L4 转发，无法做域名路由和 TLS 终结。
 
-#<!-- chunk: Q4: 如何实现会话保持 (Session Affinity)？ -->## Q4: 如何实现会话保持 (Session Affinity)？
+## Q4: 如何实现会话保持 (Session Affinity)？
 
 **回答**: Service 支持 `sessionAffinity: ClientIP`，基于客户端 IP 进行会话保持：
 
@@ -805,35 +821,36 @@ spec:
   sessionAffinityConfig:
     clientIP:
       timeoutSeconds: 10800  # 3 小时
+
 ```
 
 注意：这依赖于客户端 IP 不变，如果经过多层代理可能不生效。更可靠的方案是在应用层实现（如使用 Cookie、JWT Token 或一致性哈希）。
 
-#<!-- chunk: Q5: EndpointSlice 和 Endpoints 的区别？ -->## Q5: EndpointSlice 和 Endpoints 的区别？
+## Q5: EndpointSlice 和 Endpoints 的区别？
 
 **回答**: Endpoints 将所有 Pod IP 存在一个对象中（最多 1000 个），大规模时更新压力大（全量更新）。EndpointSlice 将 Pod IP 分片存储（每片最多 100 个），更新时只传变化的部分（增量更新）。Kubernetes v1.21+ 默认使用 EndpointSlice。对于 100+ Pod 的 Service，EndpointSlice 性能优势显著。
 
-#<!-- chunk: Q6: 如何调试 Service 的 DNS 问题？ -->## Q6: 如何调试 Service 的 DNS 问题？
+## Q6: 如何调试 Service 的 DNS 问题？
 
 **回答**: (1) `kubectl exec <pod> -- nslookup <service-name>` ——短域名测试；(2) `kubectl exec <pod> -- nslookup <service-name>.<namespace>.svc.cluster.local` ——FQDN 测试；(3) 检查 CoreDNS 日志：`kubectl logs -n kube-system -l k8s-app=kube-dns`；(4) 检查 Pod 的 `/etc/resolv.conf`；(5) 检查 CoreDNS Service 和 Endpoints 是否正常。常见问题：namespace 拼写错误、Service 名称拼写错误、CoreDNS Pod 异常。
 
-#<!-- chunk: Q7: 生产环境应该使用哪种 kube-proxy 模式？ -->## Q7: 生产环境应该使用哪种 kube-proxy 模式？
+## Q7: 生产环境应该使用哪种 kube-proxy 模式？
 
 **回答**: 生产环境**必须使用 IPVS 模式**。iptables 模式在 Service 数量超过 1000 后性能显著下降（线性查找 O(n)），而 IPVS 模式性能不受 Service 数量影响（哈希查找 O(1)）。IPVS 还支持更多负载均衡算法（rr/lc/wrr/wlc）和连接保持功能。切换方法：修改 kube-proxy ConfigMap 中的 mode 为 "ipvs"，然后 `kubectl rollout restart ds kube-proxy -n kube-system`。
 
-#<!-- chunk: Q8: 如何处理 Service 的端口冲突？ -->## Q8: 如何处理 Service 的端口冲突？
+## Q8: 如何处理 Service 的端口冲突？
 
 **回答**: 同一 Service 中的端口不能冲突（每个端口必须有唯一的 name 或 number）。不同 Service 的 ClusterIP + Port 组合必须唯一。NodePort 的端口范围是 30000-32767，如果需要自定义端口范围，修改 API Server 的 `--service-node-port-range` 参数。LoadBalancer 的端口由外部 LB 管理，不在此限制范围内。
 
-#<!-- chunk: Q9: ExternalName Service 的实际用途是什么？ -->## Q9: ExternalName Service 的实际用途是什么？
+## Q9: ExternalName Service 的实际用途是什么？
 
 **回答**: ExternalName Service 主要用于：(1) 集群内应用通过统一 DNS 名访问外部服务（如 RDS），无需硬编码 IP；(2) 服务迁移期间，通过修改 ExternalName 指向新服务实现无缝切换；(3) 跨集群服务引用。注意：ExternalName 仅返回 CNAME 记录，不做代理转发，不会有 Endpoints。
 
-#<!-- chunk: Q10: 如何监控 Service 的健康状态？ -->## Q10: 如何监控 Service 的健康状态？
+## Q10: 如何监控 Service 的健康状态？
 
 **回答**: 关键指标：`kubeproxy_sync_proxy_rules_duration_seconds`（规则同步延迟，> 5s 需关注）、`kubeproxy_network_programming_duration_seconds`（编程延迟，从 API 变更到转发生效的时间）、`kube_proxy_endpoint_changes_pending`（待处理的 Endpoints 变更数，持续增长说明同步瓶颈）。建议配置告警：同步延迟 > 5s 警告，conntrack 表使用率 > 80% 警告，Endpoints 变更积压 > 100 警告。
 
-#<!-- chunk: Q11: Service 的 targetPort 可以是字符串吗？ -->## Q11: Service 的 targetPort 可以是字符串吗？
+## Q11: Service 的 targetPort 可以是字符串吗？
 
 **回答**: 可以。targetPort 支持数字和字符串两种格式。字符串格式会匹配 Pod 容器的 `ports[].name`：
 
@@ -855,7 +872,7 @@ ports:
 
 <!-- chunk: 要点总结 -->## 要点总结
 
-#<!-- chunk: Service 知识图谱 -->## Service 知识图谱
+## Service 知识图谱
 
 ```
 Service
@@ -882,7 +899,7 @@ Service
     └── ExternalTrafficPolicy 选择
 ```
 
-#<!-- chunk: SRE 运维红线 -->## SRE 运维红线
+## SRE 运维红线
 
 | 红线 | 说明 | 违反后果 |
 |------|------|---------|
@@ -897,7 +914,7 @@ Service
 
 <!-- chunk: 延伸阅读 -->## 延伸阅读
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 
 | 资源 | 链接 | 说明 |
 |------|------|------|
@@ -907,7 +924,7 @@ Service
 | kube-proxy | https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/ | 参数参考 |
 | Topology Aware Routing | https://kubernetes.io/docs/concepts/services-networking/topology-aware-routing/ | 拓扑路由 |
 
-#<!-- chunk: 关联培训专题 -->## 关联培训专题
+## 关联培训专题
 
 - `kubernetes-coredns-presentation.md` — DNS 解析与 Service 的协作
 - `kubernetes-ingress-presentation.md` — Ingress 与 Service 的配合
@@ -942,3 +959,5 @@ Service
 - kubernetes-security-rbac-presentation
 - kubernetes-storage-presentation
 - kubernetes-terway-presentation
+
+```

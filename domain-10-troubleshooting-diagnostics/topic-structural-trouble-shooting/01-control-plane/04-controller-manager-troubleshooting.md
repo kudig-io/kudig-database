@@ -630,6 +630,9 @@ Node Controller 负责在节点 NotReady 时驱逐 Pod。
 
 #### 3.1.1 解决步骤
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 步骤 1：检查启动失败原因
 journalctl -u kube-controller-manager -b --no-pager | tail -100
@@ -681,6 +684,9 @@ curl -k https://127.0.0.1:10257/healthz
 
 #### 3.2.1 解决步骤
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 步骤 1：确认问题
 kubectl get deployments -A -o wide
@@ -729,6 +735,11 @@ kubectl rollout status deployment <name> -n <namespace>
 ### 3.3 Endpoints 控制器异常
 
 #### 3.3.1 解决步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 步骤 1：确认问题
@@ -784,6 +795,9 @@ kubectl get endpoints <service-name>
 
 #### 3.4.1 解决步骤
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+
 ```bash
 # 步骤 1：确认问题
 kubectl get nodes
@@ -837,6 +851,9 @@ kubectl get nodes
 
 #### 3.5.1 解决步骤
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 步骤 1：确认问题
 kubectl get ns
@@ -885,6 +902,9 @@ kubectl get all -A | grep <namespace>
 ### 3.6 PersistentVolume Controller 异常
 
 #### 3.6.1 解决步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1：确认问题
@@ -1314,11 +1334,15 @@ kube-controller-manager --controllers=* --help 2>&1 | grep -A100 "controllers"
 
 #### ⚡ 应急措施
 1. **手动触发 Pod 重建**：
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+
    ```bash
    # 立即删除问题节点上的 Pod（不等待自动驱逐）
    kubectl get pods -A --field-selector spec.nodeName=node-worker-05 -o json | \
      jq -r '.items[] | "\(.metadata.namespace)/\(.metadata.name)"' | \
-     xargs -I {} kubectl delete pod {} --grace-period=0 --force
+     xargs -I {} kubectl delete pod {} --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
    
    # 验证 Pod 在新节点启动
    kubectl get pods -n production -l app=myapp -o wide
@@ -1343,6 +1367,10 @@ kube-controller-manager --controllers=* --help 2>&1 | grep -A100 "controllers"
    ```
 
 3. **验证新配置**：
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
    ```bash
    # 模拟节点问题（在测试环境）
    kubectl drain test-node --ignore-daemonsets --delete-emptydir-data
@@ -1461,15 +1489,15 @@ kube-controller-manager --controllers=* --help 2>&1 | grep -A100 "controllers"
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting|02-etcd-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting|03-scheduler-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting|05-webhook-admission-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/06-apf-troubleshooting|06-apf-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/06-apf-troubleshooting.md|06-apf-troubleshooting]]

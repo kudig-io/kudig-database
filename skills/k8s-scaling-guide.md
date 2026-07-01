@@ -115,15 +115,15 @@ VPA 和 HPA 同时配置到同一 Deployment 会导致扩缩容行为异常。�
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
-- [[concepts/autoscaling-strategies|[[Autoscaling Strategies|Autoscaling Strategies]]]]
-- [[concepts/resource-management|[[Resource Management (Requests, Limits, QoS)|Resource Management]]]]
-- [[skills/k8s-deployment-strategies-guide|[[Kubernetes 部署策略最佳实践|Kubernetes 部署策略最佳实践]]]]
+- [[concepts/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
+- [[concepts/autoscaling-strategies.md|[[Autoscaling Strategies|Autoscaling Strategies]]]]
+- [[concepts/resource-management.md|[[Resource Management (Requests, Limits, QoS)|Resource Management]]]]
+- [[skills/k8s-deployment-strategies-guide.md|[[Kubernetes 部署策略最佳实践|Kubernetes 部署策略最佳实践]]]]
 
 ## Related
 
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/resource-management|resource-management]] — Resource Management (Requests, Limits, QoS)
-- [[concepts/k8s-production-best-practices|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
-- [[concepts/autoscaling-strategies|autoscaling-strategies]] — Autoscaling Strategies
+- [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[concepts/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[concepts/autoscaling-strategies.md|autoscaling-strategies]] — Autoscaling Strategies

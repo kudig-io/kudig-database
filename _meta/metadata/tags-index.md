@@ -85,7 +85,7 @@ created: "2026-05-23"
 ### ingress
 - domain-03-networking-traffic/27: Ingress 基础
 - domain-10-troubleshooting-diagnostics/15: Ingress 故障排查
-- domain-10-troubleshooting-diagnostics/topic-fta/[[skills/ingress-fta|ingress-fta]].md
+- domain-10-troubleshooting-diagnostics/topic-fta/[[skills/ingress-fta.md|ingress-fta]].md
 
 ### gateway-api
 - domain-03-networking-traffic/35: Gateway API 概览

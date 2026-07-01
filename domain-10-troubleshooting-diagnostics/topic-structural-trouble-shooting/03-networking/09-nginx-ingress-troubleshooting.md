@@ -106,6 +106,9 @@ k8s_versions:
 
 ## 10 分钟快速诊断
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 检查 nginx-ingress 状态
 kubectl get pods -n ingress-nginx
@@ -175,6 +178,9 @@ kubectl exec -it <nginx-pod> -n ingress-nginx -- nginx -t
 **现象**: 客户端请求返回 502
 
 **排查步骤**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # Step 1: 检查 upstream Pod 状态
@@ -282,6 +288,9 @@ kubectl get deployment -n ingress-nginx -o yaml | grep -A5 "args"
 
 **排查步骤**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Step 1: 检查 Secret 是否存在且正确
 kubectl get secret <secret-name> -n <namespace>
@@ -319,6 +328,9 @@ openssl s_client -connect <ingress-ip>:443 -tls1_2
 
 **排查步骤**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Step 1: 检查 annotation 是否正确配置
 kubectl describe ingress <name> | grep -i rewrite
@@ -352,6 +364,9 @@ curl -v http://<ingress-ip>/foo/bar -H "Host: <host>"
 
 **排查步骤**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Step 1: 检查 upstream keepalive 配置
 kubectl exec -it <nginx-pod> -n ingress-nginx -- \
@@ -384,6 +399,9 @@ kubectl exec -it <nginx-pod> -n ingress-nginx -- \
 **现象**: Prometheus 无法抓取 nginx-ingress 指标
 
 **排查步骤**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # Step 1: 检查 metrics 端点
@@ -497,19 +515,21 @@ data:
 - [nginx-ingress 迁移指南](./domain-03-networking-traffic/09-nginx-ingress-migration-guide.md)
 - [nginx-ingress FTA 故障树](./domain-10-troubleshooting-diagnostics/topic-fta/list/nginx-ingress-fta.md)
 - [nginx-ingress 全局索引](./domain-19-landscape-references/topic-index/nginx-ingress-index.md)
-- [Ingress 通用故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting|03-service-ingress-troubleshooting]].md)
+- [Ingress 通用故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
 - [[index|index]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting|08-flannel-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-higress-troubleshooting|09-higress-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting|01-cni-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting|02-dns-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-higress-troubleshooting.md|09-higress-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]]
+
+```

@@ -86,7 +86,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. Cilium 概述与 CNCF Graduated 地位 -->## 1. Cilium 概述与 CNCF Graduated 地位
 
-#<!-- chunk: 1.1 什么是 Cilium (What is Cilium) -->## 1.1 什么是 Cilium (What is Cilium)
+## 1.1 什么是 Cilium (What is Cilium)
 
 Cilium 是一个基于 **eBPF (extended Berkeley Packet Filter)** 技术构建的开源网络、安全和可观测性平台，专为云原生环境（特别是 Kubernetes）设计。它在 Linux 内核层面透明地插入安全可见性和控制逻辑，无需修改应用程序或容器配置。
 
@@ -102,7 +102,7 @@ Cilium 是一个基于 **eBPF (extended Berkeley Packet Filter)** 技术构建�
 | 多集群 | 需要额外工具 | 原生 Cluster Mesh |
 | 服务网格 | 需独立 Sidecar | 无 Sidecar 内核级方案 |
 
-#<!-- chunk: 1.2 CNCF Graduated 历程 (CNCF Graduation Journey) -->## 1.2 CNCF Graduated 历程 (CNCF Graduation Journey)
+## 1.2 CNCF Graduated 历程 (CNCF Graduation Journey)
 
 ```
 时间线:
@@ -121,7 +121,7 @@ Cilium 是一个基于 **eBPF (extended Berkeley Packet Filter)** 技术构建�
 - 活跃的维护者社区（50+ 核心维护者，来自 Isovalent/Cisco、Google、AWS）
 - 完善的治理模型（GOVERNANCE.md，技术指导委员会）
 
-#<!-- chunk: 1.3 Cilium 生态系统 (Cilium Ecosystem) -->## 1.3 Cilium 生态系统 (Cilium Ecosystem)
+## 1.3 Cilium 生态系统 (Cilium Ecosystem)
 
 ```mermaid
 graph TB
@@ -169,7 +169,7 @@ graph TB
 
 <!-- chunk: 2. Cilium 核心组件架构 -->## 2. Cilium 核心组件架构
 
-#<!-- chunk: 2.1 整体架构图 (Overall Architecture) -->## 2.1 整体架构图 (Overall Architecture)
+## 2.1 整体架构图 (Overall Architecture)
 
 ```mermaid
 graph TB
@@ -232,11 +232,11 @@ graph TB
     style BPF_MAP fill:#6f9,stroke:#3f6,stroke-width:2px
 ```
 
-#<!-- chunk: 2.2 Cilium Agent (每节点 DaemonSet) -->## 2.2 Cilium Agent (每节点 DaemonSet)
+## 2.2 Cilium Agent (每节点 DaemonSet)
 
 Cilium Agent 是整个系统的核心组件，以 DaemonSet 形式运行在每个 Kubernetes 节点上。
 
-##<!-- chunk: 2.2.1 Agent 职责 -->## 2.2.1 Agent 职责
+## 2.2.1 Agent 职责
 
 ```mermaid
 mindmap
@@ -266,7 +266,7 @@ mindmap
       端点状态共享
 ```
 
-##<!-- chunk: 2.2.2 Agent DaemonSet 配置示例 -->## 2.2.2 Agent DaemonSet 配置示例
+## 2.2.2 Agent DaemonSet 配置示例
 
 ```yaml
 # cilium-agent-daemonset.yaml
@@ -448,7 +448,7 @@ spec:
         kubernetes.io/os: linux
 ```
 
-##<!-- chunk: 2.2.3 Agent ConfigMap 关键配置 -->## 2.2.3 Agent ConfigMap 关键配置
+## 2.2.3 Agent ConfigMap 关键配置
 
 ```yaml
 # cilium-config.yaml
@@ -549,11 +549,11 @@ data:
   monitor-aggregation-interval: "5s"
 ```
 
-#<!-- chunk: 2.3 Cilium Operator (集群控制器) -->## 2.3 Cilium Operator (集群控制器)
+## 2.3 Cilium Operator (集群控制器)
 
 Cilium Operator 运行为 Deployment（通常 1-2 副本），负责**集群级**的操作，不处理节点级的细节。
 
-##<!-- chunk: 2.3.1 Operator 核心职责 -->## 2.3.1 Operator 核心职责
+## 2.3.1 Operator 核心职责
 
 ```mermaid
 graph LR
@@ -574,7 +574,7 @@ graph LR
     style B fill:#ffd,stroke:#aa0
 ```
 
-##<!-- chunk: 2.3.2 Operator Deployment -->## 2.3.2 Operator Deployment
+## 2.3.2 Operator Deployment
 
 ```yaml
 # cilium-operator-deployment.yaml
@@ -669,11 +669,11 @@ spec:
         effect: NoSchedule
 ```
 
-#<!-- chunk: 2.4 CNI Plugin (容器网络接口) -->## 2.4 CNI Plugin (容器网络接口)
+## 2.4 CNI Plugin (容器网络接口)
 
 CNI Plugin 是一个在 Pod 创建/删除时由容器运行时调用的**二进制程序**（`/opt/cni/bin/cilium-cni`），而非长期运行的进程。
 
-##<!-- chunk: 2.4.1 CNI 调用流程 -->## 2.4.1 CNI 调用流程
+## 2.4.1 CNI 调用流程
 
 ```mermaid
 sequenceDiagram
@@ -697,7 +697,7 @@ sequenceDiagram
     Note over K,eBPF: Pod 删除时调用 DEL 命令，清理资源
 ```
 
-##<!-- chunk: 2.4.2 CNI 配置文件 -->## 2.4.2 CNI 配置文件
+## 2.4.2 CNI 配置文件
 
 ```json
 // /etc/cni/net.d/05-cilium.conflist
@@ -714,11 +714,11 @@ sequenceDiagram
 }
 ```
 
-#<!-- chunk: 2.5 Hubble (可观测性组件) -->## 2.5 Hubble (可观测性组件)
+## 2.5 Hubble (可观测性组件)
 
 Hubble 是 Cilium 内置的**网络可观测性**平台，基于 eBPF 在内核级别捕获所有网络事件，无需修改应用或注入 Sidecar。
 
-##<!-- chunk: 2.5.1 Hubble 架构 -->## 2.5.1 Hubble 架构
+## 2.5.1 Hubble 架构
 
 ```mermaid
 graph TB
@@ -753,7 +753,7 @@ graph TB
     style HR fill:#69f,stroke:#339
 ```
 
-##<!-- chunk: 2.5.2 Hubble Relay 与 UI 部署 -->## 2.5.2 Hubble Relay 与 UI 部署
+## 2.5.2 Hubble Relay 与 UI 部署
 
 ```yaml
 # hubble-relay-deployment.yaml
@@ -866,7 +866,7 @@ spec:
 
 <!-- chunk: 3. eBPF 数据路径详解 -->## 3. eBPF 数据路径详解
 
-#<!-- chunk: 3.1 eBPF 在 Cilium 中的应用 (eBPF in Cilium) -->## 3.1 eBPF 在 Cilium 中的应用 (eBPF in Cilium)
+## 3.1 eBPF 在 Cilium 中的应用 (eBPF in Cilium)
 
 ```mermaid
 graph LR
@@ -899,9 +899,9 @@ graph LR
     style TC_EG fill:#69f,stroke:#336
 ```
 
-#<!-- chunk: 3.2 Pod 间通信数据路径 (Pod-to-Pod Data Path) -->## 3.2 Pod 间通信数据路径 (Pod-to-Pod Data Path)
+## 3.2 Pod 间通信数据路径 (Pod-to-Pod Data Path)
 
-##<!-- chunk: 同节点通信 (Same Node Communication) -->## 同节点通信 (Same Node Communication)
+## 同节点通信 (Same Node Communication)
 
 ```mermaid
 sequenceDiagram
@@ -924,7 +924,7 @@ sequenceDiagram
     Note over BPF1,BPF2: 完全 bypass iptables/netfilter<br/>性能提升 50-100%
 ```
 
-##<!-- chunk: 跨节点通信 (Cross-Node Communication) - VXLAN 模式 -->## 跨节点通信 (Cross-Node Communication) - VXLAN 模式
+## 跨节点通信 (Cross-Node Communication) - VXLAN 模式
 
 ```
 数据包路径 (VXLAN Tunnel Mode):
@@ -971,7 +971,7 @@ veth lxc-podB
 Pod B (Node2)
 ```
 
-#<!-- chunk: 3.3 eBPF Maps 详解 (eBPF Maps Details) -->## 3.3 eBPF Maps 详解 (eBPF Maps Details)
+## 3.3 eBPF Maps 详解 (eBPF Maps Details)
 
 ```mermaid
 graph TB
@@ -994,7 +994,7 @@ graph TB
     style POL fill:#faf,stroke:#a0a
 ```
 
-##<!-- chunk: 重要 Map 查看命令 -->## 重要 Map 查看命令
+## 重要 Map 查看命令
 
 ```bash
 # 查看所有 BPF Maps
@@ -1020,7 +1020,7 @@ cilium monitor --type drop
 cilium monitor --type trace
 ```
 
-#<!-- chunk: 3.4 安全身份 (Security Identity) -->## 3.4 安全身份 (Security Identity)
+## 3.4 安全身份 (Security Identity)
 
 Cilium 的核心创新之一是**基于身份**的安全模型，而非传统的基于 IP 的模型。
 
@@ -1065,7 +1065,7 @@ cilium endpoint list
 
 <!-- chunk: 4. kube-proxy 替代模式 -->## 4. kube-proxy 替代模式
 
-#<!-- chunk: 4.1 为什么替代 kube-proxy (Why Replace kube-proxy) -->## 4.1 为什么替代 kube-proxy (Why Replace kube-proxy)
+## 4.1 为什么替代 kube-proxy (Why Replace kube-proxy)
 
 ```
 传统 kube-proxy 问题:
@@ -1093,7 +1093,7 @@ Cilium kube-proxy 替代方案:
 └─────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 4.2 DSR (Direct Server Return) 模式 -->## 4.2 DSR (Direct Server Return) 模式
+## 4.2 DSR (Direct Server Return) 模式
 
 ```mermaid
 graph LR
@@ -1130,7 +1130,7 @@ data:
   node-port-acceleration: "native"  # 需要网卡支持 XDP
 ```
 
-#<!-- chunk: 4.3 Maglev 一致性哈希 (Maglev Consistent Hashing) -->## 4.3 Maglev 一致性哈希 (Maglev Consistent Hashing)
+## 4.3 Maglev 一致性哈希 (Maglev Consistent Hashing)
 
 Google Maglev 算法确保在后端变化时，已有连接不受影响（最小化连接重新分配）。
 
@@ -1142,7 +1142,7 @@ data:
   bpf-lb-maglev-table-size: "16381"
 ```
 
-#<!-- chunk: 4.4 完整 kube-proxy-free 配置 -->## 4.4 完整 kube-proxy-free 配置
+## 4.4 完整 kube-proxy-free 配置
 
 ```yaml
 # helm/values-kubeproxyfree.yaml
@@ -1195,9 +1195,9 @@ cilium service list
 
 <!-- chunk: 5. Cilium 部署方式 -->## 5. Cilium 部署方式
 
-#<!-- chunk: 5.1 使用 cilium-cli 部署 (Deploy with cilium-cli) -->## 5.1 使用 cilium-cli 部署 (Deploy with cilium-cli)
+## 5.1 使用 cilium-cli 部署 (Deploy with cilium-cli)
 
-##<!-- chunk: 5.1.1 安装 cilium-cli -->## 5.1.1 安装 cilium-cli
+## 5.1.1 安装 cilium-cli
 
 ```bash
 # macOS
@@ -1213,7 +1213,7 @@ sudo tar xzvfC cilium-linux-${CLI_ARCH}.tar.gz /usr/local/bin
 rm cilium-linux-${CLI_ARCH}.tar.gz{,.sha256sum}
 ```
 
-##<!-- chunk: 5.1.2 快速安装 -->## 5.1.2 快速安装
+## 5.1.2 快速安装
 
 ```bash
 # 基础安装（自动检测 K8s 环境）
@@ -1235,16 +1235,16 @@ cilium status --wait
 cilium connectivity test
 ```
 
-#<!-- chunk: 5.2 使用 Helm 部署 (Deploy with Helm) -->## 5.2 使用 Helm 部署 (Deploy with Helm)
+## 5.2 使用 Helm 部署 (Deploy with Helm)
 
-##<!-- chunk: 5.2.1 添加 Helm Repository -->## 5.2.1 添加 Helm Repository
+## 5.2.1 添加 Helm Repository
 
 ```bash
 helm repo add cilium https://helm.cilium.io/
 helm repo update
 ```
 
-##<!-- chunk: 5.2.2 生产级 values.yaml -->## 5.2.2 生产级 values.yaml
+## 5.2.2 生产级 values.yaml
 
 ```yaml
 # production-values.yaml
@@ -1425,6 +1425,9 @@ bpf:
   monitorInterval: "5s"
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 安装命令
 helm install cilium cilium/cilium \
@@ -1443,9 +1446,9 @@ helm upgrade cilium cilium/cilium \
 helm get values cilium -n kube-system
 ```
 
-#<!-- chunk: 5.3 在不同 K8s 发行版上的部署 (Deployment on Different K8s Distributions) -->## 5.3 在不同 K8s 发行版上的部署 (Deployment on Different K8s Distributions)
+## 5.3 在不同 K8s 发行版上的部署 (Deployment on Different K8s Distributions)
 
-##<!-- chunk: 5.3.1 EKS (AWS) -->## 5.3.1 EKS (AWS)
+## 5.3.1 EKS (AWS)
 
 ```bash
 # EKS 需要启用 ENI IPAM 模式（可选，或使用 overlay）
@@ -1465,7 +1468,10 @@ cilium install \
 #   - "kubernetes.io/cluster/<cluster-name>=owned"
 ```
 
-##<!-- chunk: 5.3.2 GKE (Google Cloud) -->## 5.3.2 GKE (Google Cloud)
+## 5.3.2 GKE (Google Cloud)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # GKE 需要特殊配置（DatapathV2 是 Cilium 的商业版本）
@@ -1482,7 +1488,7 @@ helm install cilium cilium/cilium \
   --set nodePort.directRoutingDevice=eth0
 ```
 
-##<!-- chunk: 5.3.3 Kind (本地开发) -->## 5.3.3 Kind (本地开发)
+## 5.3.3 Kind (本地开发)
 
 ```bash
 # 创建 Kind 集群（禁用默认 CNI）
@@ -1515,7 +1521,7 @@ cilium connectivity test
 
 <!-- chunk: 6. 从传统 CNI 迁移到 Cilium -->## 6. 从传统 CNI 迁移到 Cilium
 
-#<!-- chunk: 6.1 迁移前评估 (Pre-Migration Assessment) -->## 6.1 迁移前评估 (Pre-Migration Assessment)
+## 6.1 迁移前评估 (Pre-Migration Assessment)
 
 ```mermaid
 flowchart TD
@@ -1547,7 +1553,13 @@ flowchart TD
     style VALIDATE fill:#6f9,stroke:#363
 ```
 
-#<!-- chunk: 6.2 从 Flannel 迁移 (Migrate from Flannel) -->## 6.2 从 Flannel 迁移 (Migrate from Flannel)
+## 6.2 从 Flannel 迁移 (Migrate from Flannel)
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # Step 1: 备份当前 Flannel 配置
@@ -1568,7 +1580,7 @@ kubectl drain node-1 \
 # 在节点上执行:
 # sudo rm -f /etc/cni/net.d/10-flannel.conflist
 # sudo ip link delete flannel.1 2>/dev/null || true
-# sudo rm -rf /run/flannel/
+# sudo rm -rf /run/flannel/  # ⚠️ 删除系统/数据文件
 
 # Step 5: 安装 Cilium（如果是第一个节点）
 helm install cilium cilium/cilium \
@@ -1583,10 +1595,10 @@ kubectl uncordon node-1
 
 # Step 7: 删除 Flannel DaemonSet
 kubectl delete daemonset kube-flannel-ds -n kube-flannel
-kubectl delete namespace kube-flannel
+kubectl delete namespace kube-flannel  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
-#<!-- chunk: 6.3 CNI 链式模式 (CNI Chaining Mode) -->## 6.3 CNI 链式模式 (CNI Chaining Mode)
+## 6.3 CNI 链式模式 (CNI Chaining Mode)
 
 对于不支持完全替换的场景，Cilium 可以作为链式 CNI 插件：
 
@@ -1635,7 +1647,7 @@ cni:
 
 <!-- chunk: 7. 多集群 Cluster Mesh 配置 -->## 7. 多集群 Cluster Mesh 配置
 
-#<!-- chunk: 7.1 Cluster Mesh 架构 (Cluster Mesh Architecture) -->## 7.1 Cluster Mesh 架构 (Cluster Mesh Architecture)
+## 7.1 Cluster Mesh 架构 (Cluster Mesh Architecture)
 
 ```mermaid
 graph TB
@@ -1670,7 +1682,10 @@ graph TB
     style SVC3 fill:#ffa,stroke:#aa0
 ```
 
-#<!-- chunk: 7.2 Cluster Mesh 部署步骤 (Deployment Steps) -->## 7.2 Cluster Mesh 部署步骤 (Deployment Steps)
+## 7.2 Cluster Mesh 部署步骤 (Deployment Steps)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # ============================================
@@ -1717,7 +1732,7 @@ cilium clustermesh connect \
 cilium clustermesh status
 ```
 
-#<!-- chunk: 7.3 Global Service 配置 (Global Service Configuration) -->## 7.3 Global Service 配置 (Global Service Configuration)
+## 7.3 Global Service 配置 (Global Service Configuration)
 
 ```yaml
 # 在两个集群中都创建同名 Service，并添加 Global 注解
@@ -1743,7 +1758,7 @@ spec:
   type: ClusterIP
 ```
 
-#<!-- chunk: 7.4 Cluster Mesh 网络策略 (Cluster Mesh Network Policy) -->## 7.4 Cluster Mesh 网络策略 (Cluster Mesh Network Policy)
+## 7.4 Cluster Mesh 网络策略 (Cluster Mesh Network Policy)
 
 ```yaml
 # 允许来自 cluster-2 的特定 Pod 访问
@@ -1767,7 +1782,7 @@ spec:
 
 <!-- chunk: 8. Cilium 与 Kubernetes 网络模型 -->## 8. Cilium 与 Kubernetes 网络模型
 
-#<!-- chunk: 8.1 IPAM 模式对比 (IPAM Mode Comparison) -->## 8.1 IPAM 模式对比 (IPAM Mode Comparison)
+## 8.1 IPAM 模式对比 (IPAM Mode Comparison)
 
 | IPAM 模式 | 适用场景 | 特点 |
 |-----------|---------|------|
@@ -1779,7 +1794,7 @@ spec:
 | `alibabacloud-eni` | 阿里云 ACK | 使用阿里云 ENI |
 | `multi-pool` | 多 IP 池 | 支持为不同命名空间分配不同 CIDR |
 
-##<!-- chunk: 8.1.1 Multi-Pool IPAM 配置 -->## 8.1.1 Multi-Pool IPAM 配置
+## 8.1.1 Multi-Pool IPAM 配置
 
 ```yaml
 # 为不同命名空间/Pod 使用不同 IP 池
@@ -1819,7 +1834,7 @@ metadata:
     ipam.cilium.io/ip-pool: pool-red
 ```
 
-#<!-- chunk: 8.2 BGP 集成 (BGP Integration) -->## 8.2 BGP 集成 (BGP Integration)
+## 8.2 BGP 集成 (BGP Integration)
 
 ```yaml
 # 启用 BGP 控制平面（替代 overlay 隧道）
@@ -1859,7 +1874,7 @@ spec:
         expose-via-bgp: "true"
 ```
 
-#<!-- chunk: 8.3 WireGuard 透明加密 (WireGuard Transparent Encryption) -->## 8.3 WireGuard 透明加密 (WireGuard Transparent Encryption)
+## 8.3 WireGuard 透明加密 (WireGuard Transparent Encryption)
 
 ```yaml
 # 节点间流量自动加密
@@ -1885,7 +1900,10 @@ encryption:
 
 <!-- chunk: 9. 故障排查与诊断 -->## 9. 故障排查与诊断
 
-#<!-- chunk: 9.1 诊断工具集 (Diagnostic Toolkit) -->## 9.1 诊断工具集 (Diagnostic Toolkit)
+## 9.1 诊断工具集 (Diagnostic Toolkit)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # ============================================
@@ -1910,7 +1928,7 @@ CILIUM_POD=$(kubectl get pods -n kube-system -l k8s-app=cilium -o jsonpath='{.it
 kubectl exec -it -n kube-system $CILIUM_POD -- cilium status
 ```
 
-#<!-- chunk: 9.2 网络连通性排查 (Network Connectivity Troubleshooting) -->## 9.2 网络连通性排查 (Network Connectivity Troubleshooting)
+## 9.2 网络连通性排查 (Network Connectivity Troubleshooting)
 
 ```bash
 # ============================================
@@ -1950,7 +1968,7 @@ hubble observe --verdict DROPPED  # 只看被丢弃的流量
 hubble observe --http-method GET --http-path "/api/*"  # HTTP 过滤
 ```
 
-#<!-- chunk: 9.3 常见问题排查 (Common Issues) -->## 9.3 常见问题排查 (Common Issues)
+## 9.3 常见问题排查 (Common Issues)
 
 ```mermaid
 flowchart TD
@@ -1983,7 +2001,7 @@ flowchart TD
     style FIX_POLICY fill:#ffd,stroke:#aa0
 ```
 
-#<!-- chunk: 9.4 性能诊断 (Performance Diagnostics) -->## 9.4 性能诊断 (Performance Diagnostics)
+## 9.4 性能诊断 (Performance Diagnostics)
 
 ```bash
 # ============================================
@@ -2028,7 +2046,7 @@ hubble observe --verdict DROPPED --output json | \
           .flow.destination.port, .flow.drop_reason] | @tsv'
 ```
 
-#<!-- chunk: 9.5 sysdump 收集诊断信息 (Collect Diagnostic Info) -->## 9.5 sysdump 收集诊断信息 (Collect Diagnostic Info)
+## 9.5 sysdump 收集诊断信息 (Collect Diagnostic Info)
 
 ```bash
 # 收集完整的 Cilium 诊断包（提交 Issue 时使用）
@@ -2051,7 +2069,7 @@ cilium sysdump --output-filename cilium-sysdump-$(date +%Y%m%d)
 
 <!-- chunk: 10. 2026 最新特性 -->## 10. 2026 最新特性
 
-#<!-- chunk: 10.1 Gateway API GA (Gateway API 正式可用) -->## 10.1 Gateway API GA (Gateway API 正式可用)
+## 10.1 Gateway API GA (Gateway API 正式可用)
 
 Cilium 1.15+ 提供对 Kubernetes Gateway API 的完整实现，替代 Ingress。
 
@@ -2128,7 +2146,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: 10.2 Sidecar-Free Service Mesh (无 Sidecar 服务网格) -->## 10.2 Sidecar-Free Service Mesh (无 Sidecar 服务网格)
+## 10.2 Sidecar-Free Service Mesh (无 Sidecar 服务网格)
 
 Cilium 通过 eBPF 实现了无需注入 Sidecar 的服务网格能力：
 
@@ -2157,7 +2175,7 @@ hubble:
     - tcp
 ```
 
-#<!-- chunk: 10.3 Cilium 1.16/1.17 新特性 (New Features) -->## 10.3 Cilium 1.16/1.17 新特性 (New Features)
+## 10.3 Cilium 1.16/1.17 新特性 (New Features)
 
 ```
 Cilium 1.16 (2024 Q4 - 2025 Q1):
@@ -2182,7 +2200,7 @@ Cilium 1.17 (2026 规划):
 └── 改进的 IPv6 only 集群支持
 ```
 
-#<!-- chunk: 10.4 CiliumEndpointSlice (性能优化) -->## 10.4 CiliumEndpointSlice (性能优化)
+## 10.4 CiliumEndpointSlice (性能优化)
 
 ```yaml
 # 启用 CiliumEndpointSlice（大规模集群性能优化）
@@ -2196,7 +2214,7 @@ operator:
 # 在 1000+ 节点的集群中效果显著
 ```
 
-#<!-- chunk: 10.5 网络策略编辑器 (Network Policy Editor) -->## 10.5 网络策略编辑器 (Network Policy Editor)
+## 10.5 网络策略编辑器 (Network Policy Editor)
 
 ```bash
 # 2026 年 Cilium 引入内置策略编辑器和可视化工具
@@ -2294,7 +2312,7 @@ cilium debuginfo                       # 调试信息
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-35-ebpf-technology MOC
-- [[domain-03-networking-traffic/README|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
+- [[domain-03-networking-traffic/README.md|Domain 03: eBPF 技术体系 (eBPF Technology Stack)]]
 - Domain-35 eBPF 技术 — 开源项目索引
 - eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...
 - eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)

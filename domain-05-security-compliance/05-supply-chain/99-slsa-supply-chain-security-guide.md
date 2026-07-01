@@ -94,7 +94,7 @@ created: "2026-05-23"
     └── 中间人攻击
 ```
 
-#<!-- chunk: 著名供应链攻击 -->## 著名供应链攻击
+## 著名供应链攻击
 
 | 事件 | 年份 | 影响 | 教训 |
 |:---|:---|:---|:---|
@@ -125,7 +125,7 @@ SLSA (Supply-chain Levels for Software Artifacts)
     └── 可验证 (Verifiable)
 ```
 
-#<!-- chunk: SLSA 等级要求 -->## SLSA 等级要求
+## SLSA 等级要求
 
 | 等级 | 来源 | 构建 | 依赖 | 典型实现 |
 |:---|:---|:---|:---|:---|
@@ -138,7 +138,7 @@ SLSA (Supply-chain Levels for Software Artifacts)
 
 <!-- chunk: 三、Sigstore 无密钥签名 -->## 三、Sigstore 无密钥签名
 
-#<!-- chunk: 3.1 架构 -->## 3.1 架构
+## 3.1 架构
 
 ```
 Sigstore 生态
@@ -155,7 +155,7 @@ Sigstore 生态
 5. 证书自动过期，无需管理密钥
 ```
 
-#<!-- chunk: 3.2 安装 cosign -->## 3.2 安装 cosign
+## 3.2 安装 cosign
 
 ```bash
 # 安装
@@ -171,13 +171,16 @@ cosign version
 
 <!-- chunk: 四、Tekton Chains 构建证明 -->## 四、Tekton Chains 构建证明
 
-#<!-- chunk: 4.1 安装 -->## 4.1 安装
+## 4.1 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 kubectl apply -f https://storage.googleapis.com/tekton-releases/chains/latest/release.yaml
 ```
 
-#<!-- chunk: 4.2 配置 -->## 4.2 配置
+## 4.2 配置
 
 ```yaml
 apiVersion: v1
@@ -202,7 +205,7 @@ data:
   transparency.url: https://rekor.sigstore.dev
 ```
 
-#<!-- chunk: 4.3 Pipeline 中的 SBOM + 签名 -->## 4.3 Pipeline 中的 SBOM + 签名
+## 4.3 Pipeline 中的 SBOM + 签名
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -239,7 +242,7 @@ spec:
 
 <!-- chunk: 五、cosign 镜像签名与验证 -->## 五、cosign 镜像签名与验证
 
-#<!-- chunk: 5.1 Keyless 签名 (推荐) -->## 5.1 Keyless 签名 (推荐)
+## 5.1 Keyless 签名 (推荐)
 
 ```bash
 # 签名镜像 (使用 OIDC 身份)
@@ -256,7 +259,7 @@ cosign verify myregistry/app:v1.0.0 \
   --certificate-oidc-issuer=https://accounts.google.com
 ```
 
-#<!-- chunk: 5.2 在 K8s 中验证 (Kyverno) -->## 5.2 在 K8s 中验证 (Kyverno)
+## 5.2 在 K8s 中验证 (Kyverno)
 
 ```yaml
 apiVersion: kyverno.io/v1
@@ -291,7 +294,7 @@ spec:
             value: "myapp"
 ```
 
-#<!-- chunk: 5.3 在 K8s 中验证 (OPA Gatekeeper) -->## 5.3 在 K8s 中验证 (OPA Gatekeeper)
+## 5.3 在 K8s 中验证 (OPA Gatekeeper)
 
 ```yaml
 apiVersion: templates.gatekeeper.sh/v1
@@ -325,7 +328,7 @@ spec:
 
 <!-- chunk: 六、SBOM 生成与管理 -->## 六、SBOM 生成与管理
 
-#<!-- chunk: 6.1 生成 SBOM -->## 6.1 生成 SBOM
+## 6.1 生成 SBOM
 
 ```bash
 # Syft (Anchore)
@@ -338,7 +341,7 @@ syft packages myregistry/app:v1.0.0 -o spdx-json > sbom.spdx.json
 syft packages myregistry/app:v1.0.0 -o cyclonedx-json > sbom.cyclonedx.json
 ```
 
-#<!-- chunk: 6.2 存储与分发 -->## 6.2 存储与分发
+## 6.2 存储与分发
 
 ```bash
 # 将 SBOM 附加到镜像
@@ -348,7 +351,7 @@ cosign attach sbom --sbom sbom.spdx.json myregistry/app:v1.0.0
 cosign download sbom myregistry/app:v1.0.0
 ```
 
-#<!-- chunk: 6.3 SBOM 格式对比 -->## 6.3 SBOM 格式对比
+## 6.3 SBOM 格式对比
 
 | 格式 | 标准组织 | 特点 | 推荐场景 |
 |:---|:---|:---|:---|
@@ -360,7 +363,7 @@ cosign download sbom myregistry/app:v1.0.0
 
 <!-- chunk: 七、策略引擎验证 -->## 七、策略引擎验证
 
-#<!-- chunk: 7.1 Kyverno 镜像签名验证 (完整示例) -->## 7.1 Kyverno 镜像签名验证 (完整示例)
+## 7.1 Kyverno 镜像签名验证 (完整示例)
 
 ```yaml
 apiVersion: kyverno.io/v1
@@ -506,8 +509,8 @@ K8s 准入控制
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance KUDIG Database — Global MOC
-- [[domain-05-security-compliance/README|Domain 39: 供应链安全 (Supply Chain Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-39 供应链安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 供应链安全 (Supply Chain Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
 - 供应链安全概述 (Supply Chain Security Overview)
 - 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 - SBOM 生成与管理 (SBOM Generation and Management)
@@ -525,4 +528,5 @@ K8s 准入控制
 - 01-supply-chain-security-overview
 - 02-supply-chain-maturity-model
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
+```

@@ -79,7 +79,7 @@ Flannel v0.20+ 支持 IPv6 Dual Stack，允许集群同时使用 IPv4 和 IPv6 �
 | 功能 | 支持情况 |
 |:-----|:-------:|
 | 单 IPv6 集群 | ✓ 支持 |
-| [[domain-17-system-foundation/topic-dictionary/networking/ipv4-ipv6-dual-stack|IPv4/IPv6 Dual Stack]] | ✓ v0.20+ |
+| [[domain-17-system-foundation/topic-dictionary/networking/ipv4-ipv6-dual-stack.md|IPv4/IPv6 Dual Stack]] | ✓ v0.20+ |
 | IPv6 only 后端 (VXLAN) | ✓ v0.21+ |
 | Windows 节点 IPv6 | ✗ 暂不支持 |
 
@@ -252,6 +252,9 @@ ip -d link show flannel.1
 
 ### 5.4 测试双栈连通性
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 测试 IPv4 连通性
 kubectl exec -it <pod-a> -- ping -c 3 <pod-b-ipv4>
@@ -378,7 +381,7 @@ net-conf.json: |
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic KUDIG Database — Global MOC
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -399,4 +402,4 @@ net-conf.json: |
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]

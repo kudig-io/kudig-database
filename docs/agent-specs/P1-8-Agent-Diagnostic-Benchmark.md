@@ -708,7 +708,7 @@ test_case_003:
     diagnosis: |
       - kubectl get nodes: Ready (但 unschedulable)
       - kubectl describe node: 无异常事件
-      - kubectl exec test-pod -- curl -k https://[[entities/kubernetes|kubernetes]].default: 无法连接
+      - kubectl exec test-pod -- curl -k https://[[entities/kubernetes.md|kubernetes]].default: 无法连接
   
   expected:
     category: "TC-INFRA-NET"

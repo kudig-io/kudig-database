@@ -72,6 +72,10 @@ Pod → Terway CNI → Veth Pair → Host Bridge → ENI (云网络)
 
 ### 2.1 安装 Terway
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # Alibaba Cloud ACK
 # 集群创建时选择 Terway 网络插件
@@ -118,6 +122,9 @@ ip addr | grep -E "veth|eth"
 ```
 
 ### 3.2 Pod 网络问题排查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 检查 Pod 是否获得 ENI IP
@@ -202,6 +209,9 @@ spec:
 
 ### 4.2 跨节点通信问题
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查 Terway ENI 模式
 cat /etc/terway/config.json | grep ENIMode
@@ -255,7 +265,7 @@ kind: Pod
 metadata:
   name: bandwidth-limited-pod
   annotations:
-    [[entities/kubernetes|kubernetes]].io/ingress-bandwidth: "10M"
+    [[entities/kubernetes.md|kubernetes]].io/ingress-bandwidth: "10M"
     kubernetes.io/egress-bandwidth: "10M"
 spec:
   containers:
@@ -366,3 +376,5 @@ ReadWriteOnce (单节点 RW) / ReadOnlyMany (多节点 RO) / ReadWriteMany (多�
 
 </details>
 
+
+```

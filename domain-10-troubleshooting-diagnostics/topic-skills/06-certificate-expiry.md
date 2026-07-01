@@ -598,9 +598,6 @@ kubectl 不可用?
 
 ### Phase 3: 主动探测（低风险，可能需审批）
 
-> ⚠️ 以下步骤涉及主动连接测试或轻量探测操作。在 L1-advisory 模式下，Agent 应**提出建议并等待人工确认**后执行。
-> **预计耗时**: 2-5 分钟
-
 **Step D3.1**: 使用特定证书验证端到端连接
 - **命令**:
   ```bash
@@ -628,6 +625,11 @@ kubectl 不可用?
 
 **Step D3.2**: 测试 cert-manager 证书签发能力
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 创建临时 Certificate 资源以验证 Issuer 工作正常
   # 注意：这将创建一个测试资源，测试后需要删除
@@ -815,6 +817,10 @@ kubectl 不可用?
 
 **Step D4.6**: 检查 Private CA / Vault Issuer 连接
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # Private CA Issuer: 检查 CA Secret
   kubectl get secret <ca-secret-name> -n <namespace> -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -dates -subject
@@ -847,6 +853,10 @@ kubectl 不可用?
 
 **Step D5.1**: 双向 TLS 握手失败分析
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 测试双向 TLS 连接
   openssl s_client -connect <host>:<port> \
@@ -990,6 +1000,10 @@ kubectl 不可用?
   kubectl get secret <tls-secret-name> -n <namespace> -o yaml > /tmp/cert-backup-<cert-name>.yaml
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 方法1（推荐）：删除关联的 Secret，cert-manager 将检测到 Secret 缺失并重新签发
   kubectl delete secret <tls-secret-name> -n <namespace>
@@ -1012,6 +1026,10 @@ kubectl 不可用?
   # 预期: notAfter 为新的到期时间
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 如果新证书签发失败，从备份恢复旧 Secret
   kubectl apply -f /tmp/cert-backup-<cert-name>.yaml
@@ -1034,6 +1052,10 @@ kubectl 不可用?
   kubectl get secret <tls-secret-name> -n <namespace> -o yaml > /tmp/secret-backup-<tls-secret-name>.yaml
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 使用新证书更新 Secret
   kubectl create secret tls <tls-secret-name> \
@@ -1055,6 +1077,10 @@ kubectl 不可用?
   # 预期: 显示新证书的有效期（可能需要 Ingress Controller 自动 reload）
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f /tmp/secret-backup-<tls-secret-name>.yaml
   ```
@@ -1120,6 +1146,11 @@ kubectl 不可用?
   kubectl get clusterissuer <issuer-name> -o yaml > /tmp/issuer-backup.yaml
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 根据具体错误类型修复。常见场景：
   # 场景 A: CA Secret 不存在 → 创建 CA Secret
@@ -1140,6 +1171,10 @@ kubectl 不可用?
   # 预期: 失败的 Certificate 状态逐步变为 True
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f /tmp/issuer-backup.yaml
   ```
@@ -1154,6 +1189,10 @@ kubectl 不可用?
   ssh <node-ip> "date -u && chronyc tracking 2>/dev/null"
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 重启 chronyd（或 ntpd / systemd-timesyncd）
   ssh <node-ip> "systemctl restart chronyd 2>/dev/null || systemctl restart ntpd 2>/dev/null || systemctl restart systemd-timesyncd 2>/dev/null"
@@ -1162,6 +1201,10 @@ kubectl 不可用?
   sleep 10
   ```
 - **后置验证**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   ssh <node-ip> "timedatectl status"
   # 预期: System clock synchronized: yes
@@ -1190,6 +1233,11 @@ kubectl 不可用?
   kubectl get mutatingwebhookconfiguration <webhook-name> -o yaml > /tmp/webhook-backup.yaml
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   # 获取正确的 CA 证书并 base64 编码
   CA_BUNDLE=$(kubectl get secret <webhook-tls-secret> -n <webhook-namespace> -o jsonpath='{.data.ca\.crt}')
@@ -1204,6 +1252,10 @@ kubectl 不可用?
     cert-manager.io/inject-ca-from=<namespace>/<certificate-name> --overwrite
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 测试 webhook 是否正常工作（尝试创建/更新一个受该 webhook 管理的资源）
   kubectl create namespace test-webhook-verify --dry-run=server 2>&1
@@ -1214,6 +1266,10 @@ kubectl 不可用?
   # 预期: 显示正确的 CA 证书有效期
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f /tmp/webhook-backup.yaml
   ```
@@ -1237,6 +1293,11 @@ kubectl 不可用?
   kubectl get secret <tls-secret-name> -n <namespace> -o yaml > /tmp/cert-backup-<cert-name>-$(date +%Y%m%d%H%M%S).yaml
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   # 方法 1（推荐）: 使用 cmctl CLI 触发续期
   cmctl renew <cert-name> -n <namespace>
@@ -1272,6 +1333,10 @@ kubectl 不可用?
   # 预期: 显示新证书的有效期（可能需要等待 Ingress Controller reload）
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 从备份恢复旧 Secret
   kubectl apply -f /tmp/cert-backup-<cert-name>-<timestamp>.yaml
@@ -1305,6 +1370,10 @@ kubectl 不可用?
      # 预期: 所有证书的 RESIDUAL TIME 为 364d（约 1 年）
      ```
   5. **重启控制平面组件**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
      ```bash
      # Static pod 方式：重启 kubelet 会重建所有 static pod
      systemctl restart kubelet
@@ -1322,6 +1391,10 @@ kubectl 不可用?
   - 如果是 HA 集群，建议逐个节点操作，确保始终有可用的 control plane
   - 确认 etcd 集群在重启期间仍有 quorum（至少 N/2+1 成员可用）
 - **回滚方案**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 恢复备份的证书和配置
   cp -r /etc/kubernetes/pki.bak.<timestamp>/* /etc/kubernetes/pki/
@@ -1357,6 +1430,10 @@ kubectl 不可用?
      # 如果不存在，需要创建（使用步骤 2 中的 token）
      ```
   5. **重启 kubelet**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
      ```bash
      ssh <node-ip> "systemctl restart kubelet"
      ```
@@ -1378,6 +1455,10 @@ kubectl 不可用?
   - 确认 CSR 的 Subject 中 O=system:nodes, CN=system:node:<expected-node-name>
   - 不要批准 Subject 中包含非预期节点名称的 CSR
 - **回滚方案**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 恢复备份的证书
   ssh <node-ip> "cp /var/lib/kubelet/pki.bak.<timestamp>/* /var/lib/kubelet/pki/"
@@ -1437,6 +1518,11 @@ kubectl 不可用?
   - HA 集群中确认一次只操作一个 etcd 成员
   - 验证备份快照完整性
 - **回滚方案**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 恢复证书
   cp -r /etc/kubernetes/pki/etcd.bak.<timestamp>/* /etc/kubernetes/pki/etcd/
@@ -1483,6 +1569,11 @@ kubectl 不可用?
      openssl x509 -in /tmp/correct-ca.crt -noout -dates -subject
      ```
   3. **更新客户端 CA bundle ConfigMap**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
      ```bash
      # 更新 ConfigMap
      kubectl create configmap <client-ca-bundle> -n <namespace> \
@@ -1504,6 +1595,10 @@ kubectl 不可用?
      kubectl get certificate <server-cert-name> -n <namespace> -w
      ```
   5. **重启依赖 Pod 以加载新证书**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
      ```bash
      # 重启客户端应用
      kubectl rollout restart deployment/<client-app> -n <client-namespace>
@@ -1516,6 +1611,10 @@ kubectl 不可用?
      kubectl rollout status deployment/<server-app> -n <server-namespace> --timeout=300s
      ```
   6. **验证 mTLS 连接**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
      ```bash
      # 从客户端 Pod 测试 mTLS 连接
      kubectl exec <client-pod> -n <client-namespace> -- \
@@ -1531,6 +1630,11 @@ kubectl 不可用?
   - 在非生产环境验证 CA 更新流程
   - 确认滚动重启策略（maxUnavailable）不会导致服务完全不可用
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 恢复旧 CA bundle
   kubectl apply -f /tmp/client-ca-bundle-backup.yaml
@@ -1576,6 +1680,10 @@ kubectl 不可用?
      ```
   2. **使用新 CA 重新签发所有下游证书**: `kubeadm certs renew all`
   3. **分发新 CA 到所有节点并重启 kubelet**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
      ```bash
      for node in $(kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}'); do
        scp /etc/kubernetes/pki/ca.crt ${node}:/etc/kubernetes/pki/ca.crt
@@ -1586,6 +1694,10 @@ kubectl 不可用?
   5. **更新所有 Webhook 的 caBundle**（参见 REM-006）
   6. **验证整个集群功能**
 - **回滚方案**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 恢复旧 CA 和证书
   tar xzf /tmp/k8s-pki-backup-<timestamp>.tar.gz -C /
@@ -1638,6 +1750,10 @@ kubectl 不可用?
      kubectl get pods -n kube-system  # 验证所有组件恢复
      ```
 - **回滚方案**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 恢复备份
   cp -r /etc/kubernetes/pki.emergency.bak/* /etc/kubernetes/pki/
@@ -1650,6 +1766,10 @@ kubectl 不可用?
 ## 7. 验证确认
 
 ### 7.1 即时验证（修复后 1-2 分钟内）
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # V1: 确认 kubeadm 管理的证书有效期已更新
@@ -1687,7 +1807,7 @@ echo | openssl s_client -connect <apiserver-host>:6443 2>/dev/null | openssl x50
 
 # V7: 确认 Webhook 功能正常
 kubectl create namespace test-webhook-verify --dry-run=server 2>&1
-kubectl delete namespace test-webhook-verify 2>/dev/null
+kubectl delete namespace test-webhook-verify 2>/dev/null  # ⚠️ 不可逆：永久删除命名空间及全部资源
 # 预期: 无 webhook 错误
 ```
 
@@ -1906,6 +2026,7 @@ kubectl delete namespace test-webhook-verify 2>/dev/null
   labels: { severity: warning }
   annotations:
     summary: "cert-manager Certificate {{ $labels.namespace }}/{{ $labels.name }} expires in less than 7 days"
+
 ```
 
 #### kubeadm 默认证书有效期
@@ -2006,4 +2127,6 @@ kubectl get secret <tls-secret> -n <ns> -o jsonpath='{.data.tls\.crt}' | base64 
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+
+```

@@ -69,7 +69,7 @@ created: "2026-05-23"
 
 OPA（Open Policy Agent）是一个通用的开源策略引擎，采用 Rego 语言声明式定义策略，能够与 Kubernetes、API 网关、CI/CD 管道等多种系统集成。Gatekeeper 是 OPA 在 Kubernetes 中的准入控制器实现，通过 CRD 将策略定义为 Kubernetes 原生资源，支持验证（Validate）、变异（Mutate）和审计（Audit）三种模式，为企业提供声明式的安全策略管理能力。
 
-#<!-- chunk: 威胁模型分析 -->## 威胁模型分析
+## 威胁模型分析
 
 在 Kubernetes 集群中，如果没有统一的策略执行机制，开发人员和运维人员可能会创建不安全的工作负载配置，导致严重的安全风险。以下是 OPA Gatekeeper 重点防护的威胁场景：
 
@@ -85,7 +85,7 @@ OPA（Open Policy Agent）是一个通用的开源策略引擎，采用 Rego 语
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 核心组件架构 -->## 核心组件架构
+## 核心组件架构
 
 ```mermaid
 graph TB
@@ -143,7 +143,7 @@ graph TB
     CTRL --> PROM
 ```
 
-#<!-- chunk: 工作流程 -->## 工作流程
+## 工作流程
 
 Gatekeeper 的工作流程分为三个阶段。首先是策略定义阶段，管理员创建 ConstraintTemplate CRD，其中包含 Rego 策略逻辑和参数 Schema 定义。然后基于模板创建具体的 Constraint 实例，指定匹配规则和参数值。
 
@@ -151,7 +151,7 @@ Gatekeeper 的工作流程分为三个阶段。首先是策略定义阶段，管
 
 最后是审计阶段，Gatekeeper 的 Audit 组件定期扫描集群中已有的资源，对比当前策略进行检查，将违规资源记录到 Constraint 的 status 字段中，并生成 Prometheus 指标供监控系统消费。
 
-#<!-- chunk: 高可用部署架构 -->## 高可用部署架构
+## 高可用部署架构
 
 ```yaml
 # values-gatekeeper-ha.yaml
@@ -200,7 +200,7 @@ emitAuditEvents: true
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: ConstraintTemplate 定义 -->## ConstraintTemplate 定义
+## ConstraintTemplate 定义
 
 ConstraintTemplate 是 Gatekeeper 的核心抽象，将 Rego 策略封装为可复用的 CRD。每个模板定义了策略逻辑和参数 Schema，Constraint 实例基于模板创建并传入具体参数。
 
@@ -397,7 +397,7 @@ spec:
         }
 ```
 
-#<!-- chunk: Constraint 策略实例 -->## Constraint 策略实例
+## Constraint 策略实例
 
 ```yaml
 apiVersion: constraints.gatekeeper.sh/v1beta1
@@ -481,7 +481,7 @@ spec:
 
 <!-- chunk: 安全策略实战 -->## 安全策略实战
 
-#<!-- chunk: 禁止宿主机命名空间共享 -->## 禁止宿主机命名空间共享
+## 禁止宿主机命名空间共享
 
 宿主机 PID、IPC 和 Network 命名空间共享是容器逃逸的主要途径之一。攻击者可通过共享命名空间访问宿主机进程、网络连接和 IPC 资源。以下策略全面禁止这些危险配置：
 
@@ -531,7 +531,7 @@ spec:
       - cilium-test
 ```
 
-#<!-- chunk: 强制安全上下文 -->## 强制安全上下文
+## 强制安全上下文
 
 安全上下文（Security Context）是 Pod 和容器级别的安全配置，包括运行用户、文件系统权限、能力控制等。以下策略确保所有工作负载都配置了合理的安全上下文：
 
@@ -591,7 +591,7 @@ spec:
         }
 ```
 
-#<!-- chunk: 变异策略自动注入安全配置 -->## 变异策略自动注入安全配置
+## 变异策略自动注入安全配置
 
 变异策略（Mutation）允许 Gatekeeper 在资源创建时自动修改配置，无需开发人员手动添加安全字段。这降低了人为遗漏的风险：
 
@@ -650,7 +650,7 @@ spec:
       value: "gatekeeper-mutation"
 ```
 
-#<!-- chunk: 外部数据集成 -->## 外部数据集成
+## 外部数据集成
 
 Gatekeeper 支持通过 External Data 功能在策略评估时查询外部数据源，实现更灵活的策略控制。例如查询镜像漏洞数据库、CMDB 系统或审批系统：
 
@@ -694,7 +694,7 @@ spec:
 
 <!-- chunk: 合规与审计 -->## 合规与审计
 
-#<!-- chunk: 审计配置 -->## 审计配置
+## 审计配置
 
 Gatekeeper 的审计组件定期扫描集群中的存量资源，将违规信息写入 Constraint 的 status 字段。通过 Config 资源可以自定义审计行为：
 
@@ -732,7 +732,7 @@ spec:
         dump: "All"
 ```
 
-#<!-- chunk: 合规报告生成 -->## 合规报告生成
+## 合规报告生成
 
 ```bash
 #!/bin/bash
@@ -768,7 +768,7 @@ done
 echo "Report generated: $REPORT_DIR/$DATE/report.md"
 ```
 
-#<!-- chunk: OPA vs Kyverno 对比与选型 -->## OPA vs Kyverno 对比与选型
+## OPA vs Kyverno 对比与选型
 
 企业在选择策略引擎时需要综合考虑多个因素。OPA Gatekeeper 使用 Rego 语言定义策略，Rego 是一种功能强大的声明式策略语言，支持复杂的逻辑表达、集合运算和递归查询，适合处理复杂的策略场景。缺点是学习曲线陡峭，需要专门的 Rego 知识。
 
@@ -778,7 +778,7 @@ Kyverno 采用 YAML 定义策略，与 Kubernetes 资源定义风格一致，学
 
 <!-- chunk: 监控与告警 -->## 监控与告警
 
-#<!-- chunk: Prometheus 监控配置 -->## Prometheus 监控配置
+## Prometheus 监控配置
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -853,7 +853,7 @@ spec:
             description: "最近 5 分钟每秒拒绝 {{ $value }} 个请求，可能存在配置错误"
 ```
 
-#<!-- chunk: Grafana Dashboard -->## Grafana Dashboard
+## Grafana Dashboard
 
 ```json
 {
@@ -911,11 +911,11 @@ spec:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 策略开发流程 -->## 策略开发流程
+## 策略开发流程
 
 策略开发应遵循结构化的流程以确保质量和可维护性。首先明确策略目标和适用范围，确定需要验证的资源类型、命名空间和匹配条件。然后编写 ConstraintTemplate 和 Constraint，使用 `conftest` 工具在本地进行单元测试。测试通过后在开发集群中以 Audit 模式部署，观察一段时间确认无误报后再切换为 Enforce 模式。最后将策略纳入 GitOps 流程，通过代码审查和 CI/CD 管道管理策略变更。
 
-#<!-- chunk: 渐进式策略部署 -->## 渐进式策略部署
+## 渐进式策略部署
 
 建议采用渐进式部署策略。初始阶段仅启用 Audit 模式，观察并收集违规数据，评估策略对现有工作负载的影响。根据审计结果调整策略参数和排除规则后，对非关键命名空间切换为 Enforce 模式。确认稳定后逐步扩展到所有命名空间。
 
@@ -938,7 +938,7 @@ spec:
       - key: app.kubernetes.io/version
 ```
 
-#<!-- chunk: 策略测试框架 -->## 策略测试框架
+## 策略测试框架
 
 ```yaml
 # .github/workflows/gatekeeper-policy-test.yml
@@ -975,7 +975,7 @@ jobs:
           done
 ```
 
-#<!-- chunk: GitOps 集成 -->## GitOps 集成
+## GitOps 集成
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -1010,7 +1010,7 @@ spec:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题诊断 -->## 常见问题诊断
+## 常见问题诊断
 
 **策略未生效**：首先检查 ConstraintTemplate 是否已成功创建并就绪，`kubectl get constrainttemplates` 查看状态。然后检查 Constraint 的 match 字段是否正确匹配目标资源和命名空间。确认 Webhook 配置是否正确，`kubectl get validatingwebhookconfigurations` 查看 Gatekeeper webhook 是否注册。
 
@@ -1046,7 +1046,7 @@ echo "=== Controller Logs (last 50 lines) ==="
 kubectl logs -n gatekeeper-system -l app=gatekeeper --tail=50
 ```
 
-#<!-- chunk: 性能优化 -->## 性能优化
+## 性能优化
 
 在高规模集群中，Gatekeeper 的性能表现至关重要。建议将 Rego 策略保持在简洁高效的水平，避免在单条规则中进行大量集合运算。使用 `auditFromCache: true` 减少审计期间的 API Server 压力。合理设置 `auditChunkSize` 控制审计扫描的批量大小。对于复杂的策略场景，考虑使用 External Data Provider 将部分计算卸载到专用服务。
 
@@ -1059,8 +1059,8 @@ kubectl logs -n gatekeeper-system -l app=gatekeeper --tail=50
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
@@ -1078,9 +1078,9 @@ kubectl logs -n gatekeeper-system -l app=gatekeeper --tail=50
 - 10-image-security-scanning
 - 11-kubernetes-security-hardening
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/_archived-release-notes/security/gatekeeper/RELEASE-NOTES-3.22|gatekeeper v3.22 Release Notes]]
-- [[domain-19-landscape-references/_archived-release-notes/security/gatekeeper/RELEASE-NOTES-3.21|gatekeeper v3.21 Release Notes]]
+- [[domain-19-landscape-references/_archived-release-notes/security/gatekeeper/RELEASE-NOTES-3.22.md|gatekeeper v3.22 Release Notes]]
+- [[domain-19-landscape-references/_archived-release-notes/security/gatekeeper/RELEASE-NOTES-3.21.md|gatekeeper v3.21 Release Notes]]

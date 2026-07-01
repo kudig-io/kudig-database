@@ -74,7 +74,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1️⃣ Kustomize 配置参考 -->## 1️⃣ Kustomize 配置参考
 
-#<!-- chunk: 1.1 kustomization.yaml 完整字段规范 -->## 1.1 kustomization.yaml 完整字段规范
+## 1.1 kustomization.yaml 完整字段规范
 
 ```yaml
 # kustomization.yaml - Kustomize 配置文件
@@ -196,8 +196,7 @@ patchesStrategicMerge:
 
 # JSON 补丁（RFC 6902）
 patchesJson6902:
-  - target:
-      group: apps
+  - target: "`group: apps`"
       version: v1
       kind: Deployment
       name: my-app
@@ -214,14 +213,13 @@ patchesJson6902:
       - op: remove
         path: /spec/template/spec/containers/0/env/0
 
-  - target:
-      kind: Service
+  - target: "`kind: Service`"
       name: my-service
     path: patch-service.json           # 从文件读取补丁
 
 # 通用补丁（Patch）
 patches:
-  - target:                            # 目标选择器
+  - target: "# 目标选择器"
       group: apps
       version: v1
       kind: Deployment
@@ -316,7 +314,7 @@ openapi:
   path: https://k8s.io/api/openapi-spec/swagger.json  # OpenAPI schema 路径
 ```
 
-#<!-- chunk: 1.2 Base + Overlays 目录结构模式 -->## 1.2 Base + Overlays 目录结构模式
+## 1.2 Base + Overlays 目录结构模式
 
 ```bash
 # 标准目录结构
@@ -360,7 +358,7 @@ my-app/
     └── production.yaml
 ```
 
-##<!-- chunk: base/kustomization.yaml -->## base/kustomization.yaml
+## base/kustomization.yaml
 
 ```yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
@@ -383,7 +381,7 @@ images:
     newTag: latest
 ```
 
-##<!-- chunk: overlays/production/kustomization.yaml -->## overlays/production/kustomization.yaml
+## overlays/production/kustomization.yaml
 
 ```yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
@@ -444,7 +442,7 @@ replicas:
     count: 5
 ```
 
-##<!-- chunk: overlays/production/patch-resources.yaml -->## overlays/production/patch-resources.yaml
+## overlays/production/patch-resources.yaml
 
 ```yaml
 # 生产环境资源限制补丁
@@ -475,9 +473,9 @@ spec:
             topologyKey: kubernetes.io/hostname
 ```
 
-#<!-- chunk: 1.3 Components（组件）模式 -->## 1.3 Components（组件）模式
+## 1.3 Components（组件）模式
 
-##<!-- chunk: components/monitoring/kustomization.yaml -->## components/monitoring/kustomization.yaml
+## components/monitoring/kustomization.yaml
 
 ```yaml
 apiVersion: kustomize.config.k8s.io/v1alpha1
@@ -494,8 +492,7 @@ commonLabels:
 
 # 添加 Pod 注解（用于 Prometheus 抓取）
 patches:
-  - target:
-      kind: Deployment
+  - target: "`kind: Deployment`"
     patch: |-
       - op: add
         path: /spec/template/metadata/annotations
@@ -505,7 +502,7 @@ patches:
           prometheus.io/path: "/metrics"
 ```
 
-##<!-- chunk: components/monitoring/servicemonitor.yaml -->## components/monitoring/servicemonitor.yaml
+## components/monitoring/servicemonitor.yaml
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -522,9 +519,9 @@ spec:
     path: /metrics
 ```
 
-#<!-- chunk: 1.4 生产案例：多环境 Kustomize 配置 -->## 1.4 生产案例：多环境 Kustomize 配置
+## 1.4 生产案例：多环境 Kustomize 配置
 
-##<!-- chunk: 案例：微服务应用多环境部署 -->## 案例：微服务应用多环境部署
+## 案例：微服务应用多环境部署
 
 ```bash
 microservice-app/
@@ -572,7 +569,7 @@ microservice-app/
         └── cronjob-backup.yaml
 ```
 
-##<!-- chunk: overlays/production/kustomization.yaml（完整生产配置） -->## overlays/production/kustomization.yaml（完整生产配置）
+## overlays/production/kustomization.yaml（完整生产配置）
 
 ```yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
@@ -653,8 +650,7 @@ components:
   - ../../components/backup            # 启用备份
 
 patches:
-  - target:
-      kind: Deployment
+  - target: "`kind: Deployment`"
       labelSelector: tier=backend
     patch: |-
       - op: add
@@ -666,8 +662,7 @@ patches:
           seccompProfile:
             type: RuntimeDefault
 
-  - target:
-      kind: Deployment
+  - target: "`kind: Deployment`"
     patch: |-
       - op: add
         path: /spec/template/spec/topologySpreadConstraints
@@ -704,7 +699,7 @@ generatorOptions:
 
 <!-- chunk: 2️⃣ Helm 配置参考 -->## 2️⃣ Helm 配置参考
 
-#<!-- chunk: 2.1 Chart.yaml 完整字段规范 -->## 2.1 Chart.yaml 完整字段规范
+## 2.1 Chart.yaml 完整字段规范
 
 ```yaml
 # Chart.yaml - Helm Chart 元数据文件
@@ -803,7 +798,7 @@ annotations:
 deprecated: false                      # 是否已废弃
 ```
 
-#<!-- chunk: 2.2 values.yaml 设计模式 -->## 2.2 values.yaml 设计模式
+## 2.2 values.yaml 设计模式
 
 ```yaml
 # values.yaml - Helm Chart 默认配置值
@@ -1141,9 +1136,9 @@ application:
     maxSize: 1000
 ```
 
-#<!-- chunk: 2.3 Templates 语法和最佳实践 -->## 2.3 Templates 语法和最佳实践
+## 2.3 Templates 语法和最佳实践
 
-##<!-- chunk: templates/deployment.yaml -->## templates/deployment.yaml
+## templates/deployment.yaml
 
 ```yaml
 {{- /*
@@ -1301,7 +1296,7 @@ spec:
       {{- end }}
 ```
 
-##<!-- chunk: templates/_helpers.tpl（命名模板） -->## templates/_helpers.tpl（命名模板）
+## templates/_helpers.tpl（命名模板）
 
 ```yaml
 {{/*
@@ -1506,7 +1501,10 @@ TPL 函数（动态渲染模板字符串）
 {{- end }}
 ```
 
-##<!-- chunk: templates/NOTES.txt（安装后提示） -->## templates/NOTES.txt（安装后提示）
+## templates/NOTES.txt（安装后提示）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```
 ================================================================
@@ -1644,9 +1642,9 @@ PostgreSQL 用户名: {{ .Values.postgresql.auth.username }}
 ================================================================
 ```
 
-#<!-- chunk: 2.4 生产案例：Helm 生产级 Values -->## 2.4 生产案例：Helm 生产级 Values
+## 2.4 生产案例：Helm 生产级 Values
 
-##<!-- chunk: values-production.yaml（生产环境配置） -->## values-production.yaml（生产环境配置）
+## values-production.yaml（生产环境配置）
 
 ```yaml
 # ========================================
@@ -2018,7 +2016,7 @@ application:
 
 <!-- chunk: 3️⃣ ArgoCD 配置参考 -->## 3️⃣ ArgoCD 配置参考
 
-#<!-- chunk: 3.1 Application CRD 完整字段规范 -->## 3.1 Application CRD 完整字段规范
+## 3.1 Application CRD 完整字段规范
 
 ```yaml
 # ArgoCD Application - GitOps 应用定义
@@ -2071,8 +2069,7 @@ spec:
       commonAnnotations:               # 通用注解
         managed-by: argocd
       patches:                         # 内联补丁
-        - target:
-            kind: Deployment
+        - target: "`kind: Deployment`"
             name: my-app
           patch: |-
             - op: replace
@@ -2251,7 +2248,7 @@ spec:
   revisionHistoryLimit: 10             # 保留的修订历史数量
 ```
 
-#<!-- chunk: 3.2 ApplicationSet CRD 完整字段规范 -->## 3.2 ApplicationSet CRD 完整字段规范
+## 3.2 ApplicationSet CRD 完整字段规范
 
 ```yaml
 # ArgoCD ApplicationSet - 多应用生成器
@@ -2498,7 +2495,7 @@ spec:
   #     {{- end }}
 ```
 
-##<!-- chunk: 生成器示例：Matrix Generator（环境 × 地区） -->## 生成器示例：Matrix Generator（环境 × 地区）
+## 生成器示例：Matrix Generator（环境 × 地区）
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -2566,9 +2563,9 @@ spec:
           - CreateNamespace=true
 ```
 
-#<!-- chunk: 3.3 同步策略和健康检查 -->## 3.3 同步策略和健康检查
+## 3.3 同步策略和健康检查
 
-##<!-- chunk: Sync Waves（同步波次） -->## Sync Waves（同步波次）
+## Sync Waves（同步波次）
 
 ```yaml
 # 使用注解控制同步顺序（数字越小越先同步）
@@ -2688,7 +2685,7 @@ spec:
       restartPolicy: Never
 ```
 
-##<!-- chunk: Resource Hooks（资源钩子） -->## Resource Hooks（资源钩子）
+## Resource Hooks（资源钩子）
 
 ```yaml
 # PreSync Hook（同步前执行）
@@ -2765,7 +2762,7 @@ spec:
       restartPolicy: Never
 ```
 
-##<!-- chunk: 自定义健康检查 -->## 自定义健康检查
+## 自定义健康检查
 
 ```yaml
 # ArgoCD ConfigMap：自定义资源健康检查
@@ -2817,9 +2814,9 @@ data:
     return hs
 ```
 
-#<!-- chunk: 3.4 生产案例：ArgoCD 多集群 GitOps -->## 3.4 生产案例：ArgoCD 多集群 GitOps
+## 3.4 生产案例：ArgoCD 多集群 GitOps
 
-##<!-- chunk: 目录结构 -->## 目录结构
+## 目录结构
 
 ```bash
 k8s-manifests/
@@ -2865,7 +2862,7 @@ k8s-manifests/
         └── cluster-config.yaml
 ```
 
-##<!-- chunk: argocd/projects/production.yaml（ArgoCD 项目） -->## argocd/projects/production.yaml（ArgoCD 项目）
+## argocd/projects/production.yaml（ArgoCD 项目）
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -2947,7 +2944,7 @@ spec:
         - developers
 ```
 
-##<!-- chunk: argocd/applicationsets/apps.yaml（多环境应用） -->## argocd/applicationsets/apps.yaml（多环境应用）
+## argocd/applicationsets/apps.yaml（多环境应用）
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -3071,7 +3068,7 @@ spec:
             - /data                    # 由 cert-manager 管理
 ```
 
-##<!-- chunk: 生产案例：带同步波次的完整应用 -->## 生产案例：带同步波次的完整应用
+## 生产案例：带同步波次的完整应用
 
 ```yaml
 # apps/backend/overlays/production/kustomization.yaml
@@ -3091,43 +3088,37 @@ commonLabels:
 
 # 为不同资源添加同步波次
 patches:
-  - target:
-      kind: Namespace
+  - target: "`kind: Namespace`"
     patch: |-
       - op: add
         path: /metadata/annotations/argocd.argoproj.io~1sync-wave
         value: "-10"
   
-  - target:
-      kind: Secret
+  - target: "`kind: Secret`"
     patch: |-
       - op: add
         path: /metadata/annotations/argocd.argoproj.io~1sync-wave
         value: "-5"
   
-  - target:
-      kind: ConfigMap
+  - target: "`kind: ConfigMap`"
     patch: |-
       - op: add
         path: /metadata/annotations/argocd.argoproj.io~1sync-wave
         value: "-3"
   
-  - target:
-      kind: Deployment
+  - target: "`kind: Deployment`"
     patch: |-
       - op: add
         path: /metadata/annotations/argocd.argoproj.io~1sync-wave
         value: "0"
   
-  - target:
-      kind: Service
+  - target: "`kind: Service`"
     patch: |-
       - op: add
         path: /metadata/annotations/argocd.argoproj.io~1sync-wave
         value: "1"
   
-  - target:
-      kind: Ingress
+  - target: "`kind: Ingress`"
     patch: |-
       - op: add
         path: /metadata/annotations/argocd.argoproj.io~1sync-wave
@@ -3138,21 +3129,21 @@ patches:
 
 <!-- chunk: 📚 最佳实践总结 -->## 📚 最佳实践总结
 
-#<!-- chunk: Kustomize 最佳实践 -->## Kustomize 最佳实践
+## Kustomize 最佳实践
 1. **Base + Overlays 分离**：基础配置环境无关，环境特定配置在 overlays
 2. **使用 Components**：可选功能模块化（监控、TLS 等）
 3. **生产环境使用镜像摘要**：确保不可变部署
 4. **避免过度嵌套**：最多 2-3 层 bases 引用
 5. **使用 replacements 替代废弃的 vars**
 
-#<!-- chunk: Helm 最佳实践 -->## Helm 最佳实践
+## Helm 最佳实践
 1. **values.yaml 结构化**：按功能分组，使用注释
 2. **命名模板复用**：`_helpers.tpl` 中定义通用逻辑
 3. **生产环境固定版本**：Chart 和镜像使用固定版本/摘要
 4. **健康检查必需**：Liveness、Readiness、Startup 探针
 5. **NOTES.txt 提供访问信息**：部署后如何访问应用
 
-#<!-- chunk: ArgoCD 最佳实践 -->## ArgoCD 最佳实践
+## ArgoCD 最佳实践
 1. **使用 ApplicationSet 管理多环境**：减少重复配置
 2. **同步波次控制顺序**：Namespace → Secret → ConfigMap → Deployment → Service → Ingress
 3. **ignoreDifferences 避免误报**：忽略 HPA 管理的 replicas、cert-manager 管理的 Secret
@@ -3175,7 +3166,7 @@ patches:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -3196,5 +3187,5 @@ patches:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/helm-index|Helm 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/helm-index.md|Helm 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

@@ -90,7 +90,7 @@ k8s_versions:
 
 <!-- chunk: 1. ELK架构深度解析 -->## 1. ELK架构深度解析
 
-#<!-- chunk: 1.1 核心组件架构 -->## 1.1 核心组件架构
+## 1.1 核心组件架构
 
 ```mermaid
 graph TB
@@ -126,7 +126,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 1.2 组件功能详解 -->## 1.2 组件功能详解
+## 1.2 组件功能详解
 
 ```yaml
 ELK Stack组件说明:
@@ -169,7 +169,7 @@ ELK Stack组件说明:
 
 <!-- chunk: 2. 企业级部署架构 -->## 2. 企业级部署架构
 
-#<!-- chunk: 2.1 高可用集群部署 -->## 2.1 高可用集群部署
+## 2.1 高可用集群部署
 
 ```yaml
 # Elasticsearch集群部署
@@ -317,7 +317,7 @@ spec:
           storage: 500Gi
 ```
 
-#<!-- chunk: 2.2 Filebeat日志收集配置 -->## 2.2 Filebeat日志收集配置
+## 2.2 Filebeat日志收集配置
 
 ```yaml
 # Filebeat配置文件
@@ -383,7 +383,7 @@ logging.files:
 
 <!-- chunk: 3. 日志处理管道设计 -->## 3. 日志处理管道设计
 
-#<!-- chunk: 3.1 Logstash配置管道 -->## 3.1 Logstash配置管道
+## 3.1 Logstash配置管道
 
 ```ruby
 # Logstash主配置文件
@@ -545,7 +545,7 @@ output {
 
 <!-- chunk: 4. 索引生命周期管理 -->## 4. 索引生命周期管理
 
-#<!-- chunk: 4.1 ILM策略配置 -->## 4.1 ILM策略配置
+## 4.1 ILM策略配置
 
 ```json
 {
@@ -601,7 +601,7 @@ output {
 }
 ```
 
-#<!-- chunk: 4.2 索引模板配置 -->## 4.2 索引模板配置
+## 4.2 索引模板配置
 
 ```json
 {
@@ -688,7 +688,7 @@ output {
 
 <!-- chunk: 5. Kibana可视化配置 -->## 5. Kibana可视化配置
 
-#<!-- chunk: 5.1 仪表板配置 -->## 5.1 仪表板配置
+## 5.1 仪表板配置
 
 ```json
 {
@@ -710,7 +710,7 @@ output {
 }
 ```
 
-#<!-- chunk: 5.2 可视化查询配置 -->## 5.2 可视化查询配置
+## 5.2 可视化查询配置
 
 ```json
 {
@@ -729,7 +729,7 @@ output {
 
 <!-- chunk: 6. 安全与权限管理 -->## 6. 安全与权限管理
 
-#<!-- chunk: 6.1 Elasticsearch安全配置 -->## 6.1 Elasticsearch安全配置
+## 6.1 Elasticsearch安全配置
 
 ```yaml
 # Elasticsearch安全配置
@@ -760,7 +760,7 @@ xpack.security.authc.realms:
       role_mapping: "/usr/share/elasticsearch/config/roles_mapping.yml"
 ```
 
-#<!-- chunk: 6.2 角色权限配置 -->## 6.2 角色权限配置
+## 6.2 角色权限配置
 
 ```yaml
 # Elasticsearch角色定义
@@ -810,7 +810,7 @@ roles:
 
 <!-- chunk: 7. 性能优化与调优 -->## 7. 性能优化与调优
 
-#<!-- chunk: 7.1 Elasticsearch性能调优 -->## 7.1 Elasticsearch性能调优
+## 7.1 Elasticsearch性能调优
 
 ```yaml
 # Elasticsearch性能优化配置
@@ -861,7 +861,7 @@ performance_tuning:
       queue_size: 1000
 ```
 
-#<!-- chunk: 7.2 Logstash性能优化 -->## 7.2 Logstash性能优化
+## 7.2 Logstash性能优化
 
 ```ruby
 # Logstash性能优化配置
@@ -908,7 +908,7 @@ output {
 
 <!-- chunk: 8. 监控与告警 -->## 8. 监控与告警
 
-#<!-- chunk: 8.1 系统监控配置 -->## 8.1 系统监控配置
+## 8.1 系统监控配置
 
 ```yaml
 # Elasticsearch监控配置
@@ -932,7 +932,7 @@ monitoring.elasticsearch.username: "logstash_monitoring"
 monitoring.elasticsearch.password: "password"
 ```
 
-#<!-- chunk: 8.2 告警规则配置 -->## 8.2 告警规则配置
+## 8.2 告警规则配置
 
 ```yaml
 # Elastic Stack告警规则
@@ -953,7 +953,7 @@ alerts:
     timeframe: "1m"
     actions:
       - type: "pagerduty"
-        service_key: "your-pagerduty-key"
+        routing_key: "your-pagerduty-key"
   
   - name: "Log Ingestion Lag"
     type: "ingestion_lag"
@@ -966,7 +966,7 @@ alerts:
 
 <!-- chunk: 9. 故障排查与维护 -->## 9. 故障排查与维护
 
-#<!-- chunk: 9.1 常见问题诊断 -->## 9.1 常见问题诊断
+## 9.1 常见问题诊断
 
 ```bash
 # ELK Stack故障排查命令
@@ -994,7 +994,7 @@ filebeat test output
 curl -u elastic:password -X GET "localhost:9200/_cluster/allocation/explain?pretty"
 ```
 
-#<!-- chunk: 9.2 维护脚本 -->## 9.2 维护脚本
+## 9.2 维护脚本
 
 ```python
 #!/usr/bin/env python3
@@ -1082,37 +1082,37 @@ if __name__ == "__main__":
 
 <!-- chunk: 10. 最佳实践与未来发展 -->## 10. 最佳实践与未来发展
 
-#<!-- chunk: 10.1 日志管理最佳实践 -->## 10.1 日志管理最佳实践
+## 10.1 日志管理最佳实践
 
 ```markdown
 <!-- chunk: 📝 日志管理最佳实践 -->## 📝 日志管理最佳实践
 
-#<!-- chunk: 1. 日志格式标准化 -->## 1. 日志格式标准化
+## 1. 日志格式标准化
 - 使用JSON格式记录结构化日志
 - 统一时间戳格式(ISO8601)
 - 包含必要的上下文信息
 - 避免敏感信息泄露
 
-#<!-- chunk: 2. 索引策略优化 -->## 2. 索引策略优化
+## 2. 索引策略优化
 - 按服务和时间分割索引
 - 合理设置分片和副本数
 - 实施生命周期管理
 - 定期清理过期数据
 
-#<!-- chunk: 3. 性能优化要点 -->## 3. 性能优化要点
+## 3. 性能优化要点
 - 适当调整JVM堆大小
 - 优化批量处理参数
 - 启用适当的缓存机制
 - 监控和调优资源使用
 
-#<!-- chunk: 4. 安全合规要求 -->## 4. 安全合规要求
+## 4. 安全合规要求
 - 启用传输层加密
 - 实施细粒度访问控制
 - 定期审计日志访问
 - 符合数据保护法规
 ```
 
-#<!-- chunk: 10.2 技术发展趋势 -->## 10.2 技术发展趋势
+## 10.2 技术发展趋势
 
 ```yaml
 日志技术发展趋势:
@@ -1143,8 +1143,8 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-21-logging-management-analytics MOC
-- [[domain-06-observability/README|Domain 21: 日志管理与分析 (Logging Management & Analytics)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-21 日志管理与分析 — 开源项目索引]]
+- [[domain-06-observability/README.md|Domain 06: 日志管理与分析 (Logging Management & Analytics)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-21 日志管理与分析 — 开源项目索引]]
 - Fluentd企业级日志收集与处理深度实践
 - Loki Enterprise Log Aggregation and Analytics Platform
 - 企业级日志治理与合规审计深度实践
@@ -1161,8 +1161,8 @@ if __name__ == "__main__":
 - 02-fluentd-enterprise-log-processing
 - 03-loki-enterprise-log-aggregation
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

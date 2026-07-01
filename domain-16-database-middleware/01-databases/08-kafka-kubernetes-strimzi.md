@@ -76,7 +76,7 @@ Strimzi 的核心价值在于：将 Kafka 集群（包括 Broker、ZooKeeper 或
 
 本文档系统覆盖 Strimzi Operator 的部署配置、Topic 管理、Consumer Group 监控、Exactly-Once 语义实现、以及企业级运维实践。
 
-#<!-- chunk: Kafka 架构核心概念深度解析 -->## Kafka 架构核心概念深度解析
+## Kafka 架构核心概念深度解析
 
 Kafka 的架构设计围绕三个核心抽象展开：Topic（主题）、Partition（分区）和 Consumer Group（消费者组）。理解这三个概念及其交互方式，是正确使用和调优 Kafka 的基础。
 
@@ -86,7 +86,7 @@ Kafka 的架构设计围绕三个核心抽象展开：Topic（主题）、Partit
 
 **Offset 管理**是消费者端的关键机制。Consumer 需要定期提交已消费消息的 Offset，以便在重启或 Rebalance 后从上次的位置继续消费。Offset 可以自动提交（`enable.auto.commit=true`）或手动提交（`commitSync`/`commitAsync`）。生产环境建议使用手动提交，确保每条消息处理完成后再提交 Offset，避免消息丢失。但手动提交需要权衡 Exactly-Once 语义和吞吐量：每条消息都同步提交可以确保不丢消息但吞吐量很低，异步提交吞吐量高但可能在宕机时丢失少量消息。
 
-#<!-- chunk: Strimzi Operator 的设计理念 -->## Strimzi Operator 的设计理念
+## Strimzi Operator 的设计理念
 
 Strimzi 采用了"声明式状态管理"的设计理念。用户通过 CRD 描述期望的 Kafka 集群状态（多少个 Broker、什么配置、什么存储），Strimzi Operator 负责将当前状态向期望状态收敛。这种模式与 K8s 原生控制器的工作方式一致，使得 Kafka 集群的管理体验与 K8s 中其他资源（Deployment、Service、ConfigMap）保持一致。
 
@@ -98,7 +98,7 @@ Strimzi 的安全模型值得一提。它支持三种认证方式：TLS 双向�
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: Strimzi Kafka 架构图 -->## Strimzi Kafka 架构图
+## Strimzi Kafka 架构图
 
 ```mermaid
 graph TB
@@ -167,7 +167,7 @@ graph TB
     CERTS --> B2
 ```
 
-#<!-- chunk: KRaft vs ZooKeeper -->## KRaft vs ZooKeeper
+## KRaft vs ZooKeeper
 
 | 维度 | KRaft (推荐) | ZooKeeper (传统) |
 |:---|:---|:---|
@@ -182,7 +182,10 @@ graph TB
 
 <!-- chunk: 核心组件配置 -->## 核心组件配置
 
-#<!-- chunk: Strimzi Operator 安装 -->## Strimzi Operator 安装
+## Strimzi Operator 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add strimzi https://strimzi.io/charts/
@@ -198,7 +201,7 @@ helm install strimzi-kafka strimzi/strimzi-kafka-operator \
   --set logLevel=INFO
 ```
 
-#<!-- chunk: 生产级 Kafka 集群 (KRaft) -->## 生产级 Kafka 集群 (KRaft)
+## 生产级 Kafka 集群 (KRaft)
 
 ```yaml
 apiVersion: kafka.strimzi.io/v1beta2
@@ -390,7 +393,7 @@ spec:
 
 <!-- chunk: Topic 管理 -->## Topic 管理
 
-#<!-- chunk: 声明式 Topic 管理 -->## 声明式 Topic 管理
+## 声明式 Topic 管理
 
 ```yaml
 apiVersion: kafka.strimzi.io/v1beta2
@@ -449,7 +452,10 @@ spec:
     min.insync.replicas: 2
 ```
 
-#<!-- chunk: Topic 运维脚本 -->## Topic 运维脚本
+## Topic 运维脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -495,7 +501,10 @@ esac
 
 <!-- chunk: Consumer Group 监控 -->## Consumer Group 监控
 
-#<!-- chunk: Consumer Group 管理脚本 -->## Consumer Group 管理脚本
+## Consumer Group 管理脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -543,7 +552,7 @@ esac
 
 <!-- chunk: Exactly-Once 语义 -->## Exactly-Once 语义
 
-#<!-- chunk: 事务性 Producer 配置 -->## 事务性 Producer 配置
+## 事务性 Producer 配置
 
 ```yaml
 apiVersion: kafka.strimzi.io/v1beta2
@@ -573,7 +582,7 @@ spec:
         operations: [Describe, Write]
 ```
 
-#<!-- chunk: Exactly-Once 配置要点 -->## Exactly-Once 配置要点
+## Exactly-Once 配置要点
 
 ```
 Kafka Exactly-Once 语义实现:
@@ -601,7 +610,7 @@ Broker 端:
 
 <!-- chunk: 监控告警 -->## 监控告警
 
-#<!-- chunk: Kafka Exporter + JMX 监控 -->## Kafka Exporter + JMX 监控
+## Kafka Exporter + JMX 监控
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -627,7 +636,7 @@ spec:
       path: /metrics
 ```
 
-#<!-- chunk: 告警规则 -->## 告警规则
+## 告警规则
 
 ```yaml
 groups:
@@ -686,7 +695,11 @@ groups:
 
 <!-- chunk: 运维管理 -->## 运维管理
 
-#<!-- chunk: 综合运维脚本 -->## 综合运维脚本
+## 综合运维脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 #!/bin/bash
@@ -756,7 +769,7 @@ esac
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 0. Kafka on K8s 生产部署检查清单 -->## 0. Kafka on K8s 生产部署检查清单
+## 0. Kafka on K8s 生产部署检查清单
 
 将 Kafka 部署到 Kubernetes 生产环境之前，需要完成一系列系统性检查。Kafka 是有状态的、对性能敏感的分布式系统，其部署质量直接影响业务的稳定性和数据可靠性。
 
@@ -772,7 +785,7 @@ esac
 
 **监控体系**：Kafka 的监控需要覆盖 Broker 层面和 Consumer Group 层面。Broker 层面通过 JMX Exporter 采集 JVM 指标和 Kafka 内部指标（消息速率、请求延迟、磁盘使用、ISR 状态等）。Consumer Group 层面通过 Kafka Exporter 采集 Lag 指标。关键告警规则包括：Broker 宕机、Under-replicated Partition、Consumer Group Lag 过大、磁盘使用率超过 85%。
 
-#<!-- chunk: 1. Partition 数量规划 -->## 1. Partition 数量规划
+## 1. Partition 数量规划
 
 ```
 Partition 数量计算:
@@ -790,7 +803,7 @@ Partition 数量计算:
   - 预估未来增长，适当预留
 ```
 
-#<!-- chunk: 2. 资源配置建议 -->## 2. 资源配置建议
+## 2. 资源配置建议
 
 | 规模 | Brokers | CPU (per broker) | 内存 (per broker) | 磁盘 (per broker) |
 |:---|:---|:---|:---|:---|
@@ -802,7 +815,7 @@ Partition 数量计算:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题速查表 -->## 常见问题速查表
+## 常见问题速查表
 
 | 问题现象 | 可能原因 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
@@ -826,7 +839,7 @@ Partition 数量计算:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-28-enterprise-database-middleware MOC
-- [[domain-16-database-middleware/README|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
+- [[domain-16-database-middleware/README.md|Domain 16: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
 - Domain-28 企业数据库与中间件 — 开源项目索引
 - MySQL 企业级数据库运维管理
 - PostgreSQL 企业级数据库高可用架构

@@ -76,7 +76,7 @@ Istio 的技术架构在2026年已经非常成熟，支持两种数据平面模�
 
 本文档从生产环境运维专家角度，深入探讨 Istio 的企业级部署架构、流量管理实战、安全策略配置、可观测性集成、性能调优和故障排查。所有配置均基于 Istio v1.29，涵盖传统 Sidecar 模式和新兴的 Ambient Mesh 模式，并提供可直接用于生产环境的完整 YAML 配置。
 
-#<!-- chunk: Istio 企业级架构全景 -->## Istio 企业级架构全景
+## Istio 企业级架构全景
 
 ```mermaid
 graph TB
@@ -153,7 +153,7 @@ graph TB
 
 <!-- chunk: 核心配置 — 企业级部署 -->## 核心配置 — 企业级部署
 
-#<!-- chunk: IstioOperator 高可用部署 -->## IstioOperator 高可用部署
+## IstioOperator 高可用部署
 
 ```yaml
 apiVersion: install.istio.io/v1alpha1
@@ -314,7 +314,7 @@ spec:
       traceSampling: 10.0
 ```
 
-#<!-- chunk: Istio Sidecar 资源限制 — 全局配置 -->## Istio Sidecar 资源限制 — 全局配置
+## Istio Sidecar 资源限制 — 全局配置
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -365,7 +365,7 @@ spec:
 
 <!-- chunk: 流量管理实战 -->## 流量管理实战
 
-#<!-- chunk: 虚拟服务 — 完整流量路由 -->## 虚拟服务 — 完整流量路由
+## 虚拟服务 — 完整流量路由
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -455,7 +455,7 @@ spec:
         value: 10
 ```
 
-#<!-- chunk: 目标规则 — 连接池与异常检测 -->## 目标规则 — 连接池与异常检测
+## 目标规则 — 连接池与异常检测
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -509,7 +509,7 @@ spec:
           simple: LEAST_REQUEST
 ```
 
-#<!-- chunk: Gateway API 配置 (推荐新标准) -->## Gateway API 配置 (推荐新标准)
+## Gateway API 配置 (推荐新标准)
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -568,7 +568,7 @@ spec:
           weight: 10
 ```
 
-#<!-- chunk: EnvoyFilter — 自定义 WASM 扩展 -->## EnvoyFilter — 自定义 WASM 扩展
+## EnvoyFilter — 自定义 WASM 扩展
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -618,7 +618,7 @@ spec:
 
 <!-- chunk: 安全策略 -->## 安全策略
 
-#<!-- chunk: mTLS 全局严格模式 -->## mTLS 全局严格模式
+## mTLS 全局严格模式
 
 ```yaml
 apiVersion: security.istio.io/v1beta1
@@ -643,7 +643,7 @@ spec:
       app: legacy-service
 ```
 
-#<!-- chunk: 授权策略 — 零信任安全 -->## 授权策略 — 零信任安全
+## 授权策略 — 零信任安全
 
 ```yaml
 apiVersion: security.istio.io/v1beta1
@@ -689,7 +689,7 @@ spec:
             paths: ["/details/*"]
 ```
 
-#<!-- chunk: JWT 认证配置 -->## JWT 认证配置
+## JWT 认证配置
 
 ```yaml
 apiVersion: security.istio.io/v1beta1
@@ -727,7 +727,7 @@ spec:
 
 <!-- chunk: 可观测性 — Kiali, Jaeger, Prometheus 集成 -->## 可观测性 — Kiali, Jaeger, Prometheus 集成
 
-#<!-- chunk: Telemetry 配置 -->## Telemetry 配置
+## Telemetry 配置
 
 ```yaml
 apiVersion: telemetry.istio.io/v1alpha1
@@ -740,13 +740,13 @@ spec:
     - providers:
         - name: prometheus
       overrides:
-        - match:
-            metric: ALL_METRICS
-          tagOverrides:
-            request_method:
-              value: "request.method"
-            request_host:
-              value: "request.host"
+        - matchers:
+          - metric="ALL_METRICS"
+          - tagOverrides=""
+          - request_method=""
+          - value="request.method"
+          - request_host=""
+          - value="request.host"
   accessLogging:
     - providers:
         - name: otel-collector
@@ -763,7 +763,7 @@ spec:
             defaultValue: "unknown"
 ```
 
-#<!-- chunk: Prometheus 告警规则 -->## Prometheus 告警规则
+## Prometheus 告警规则
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -858,7 +858,7 @@ spec:
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: Sidecar 资源与并发优化 -->## Sidecar 资源与并发优化
+## Sidecar 资源与并发优化
 
 ```yaml
 apiVersion: v1
@@ -883,7 +883,7 @@ data:
         tracer: "zipkin"
 ```
 
-#<!-- chunk: 连接池全局调优 -->## 连接池全局调优
+## 连接池全局调优
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -908,7 +908,7 @@ spec:
       mode: ISTIO_MUTUAL
 ```
 
-#<!-- chunk: istiod 性能调优 -->## istiod 性能调优
+## istiod 性能调优
 
 ```yaml
 apiVersion: apps/v1
@@ -944,7 +944,10 @@ spec:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 诊断脚本 -->## 诊断脚本
+## 诊断脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1011,7 +1014,7 @@ kubectl exec -n default deploy/productpage-v1 -c istio-proxy -- \
   curl -s http://localhost:15090/stats/prometheus | grep -E "upstream_rq_time|downstream_cx_active"
 ```
 
-#<!-- chunk: Istio 安装验证 — Shell 输出示例 -->## Istio 安装验证 — Shell 输出示例
+## Istio 安装验证 — Shell 输出示例
 
 ```bash
 $ istioctl verify-install
@@ -1034,7 +1037,7 @@ reviews-v2-7bf8f9696f-ghi78.default                   Kubernetes  SYNCED SYNCED 
 ratings-v1-5745f4bdfc-jkl90.default                   Kubernetes  SYNCED SYNCED SYNCED SYNCED SYNCED istiod-6f9c6b7b4c-5mnpq     1.29.0
 ```
 
-#<!-- chunk: istioctl analyze — 配置验证输出示例 -->## istioctl analyze — 配置验证输出示例
+## istioctl analyze — 配置验证输出示例
 
 ```bash
 $ istioctl analyze -A
@@ -1051,9 +1054,10 @@ Info [IST0108]: DestinationRule "reviews-policy" uses outlier detection with bas
   Outlier detection is configured for host "reviews" in namespace "default".
 
 ✔ Configuration analysis completed with 0 errors, 1 warning, 2 informational messages.
+
 ```
 
-#<!-- chunk: 常见问题速查 -->## 常见问题速查
+## 常见问题速查
 
 | 症状 | 可能原因 | 诊断命令 | 解决方案 |
 |:---|:---|:---|:---|
@@ -1075,7 +1079,7 @@ Info [IST0108]: DestinationRule "reviews-policy" uses outlier detection with bas
 
 <!-- chunk: Istio 参数参考 -->## Istio 参数参考
 
-#<!-- chunk: istiod 关键环境变量 -->## istiod 关键环境变量
+## istiod 关键环境变量
 
 | 环境变量 | 默认值 | 说明 | 推荐值 (生产) |
 |:---|:---|:---|:---|
@@ -1087,11 +1091,11 @@ Info [IST0108]: DestinationRule "reviews-policy" uses outlier detection with bas
 | PILOT_EVICTION_INTERVAL | 0s | 清理无效代理配置的间隔 | 30s |
 | PILOT_CERT_PROVIDER | istiod | 证书提供者类型 | istiod |
 | ENABLE_DEBUG_ON_HTTP | true | 是否启用 /debug 端点 | false (生产) |
-| KUBE_API_REQUEST_TIMEOUT | 60s | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 请求超时 | 60s |
+| KUBE_API_REQUEST_TIMEOUT | 60s | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 请求超时 | 60s |
 | PILOT_WORKLOAD_ENTRY_GRACE_PERIOD | 30s | WorkloadEntry 注入后的宽限期 | 30s |
 | PILOT_SIDECAR_ENABLE_INBOUND_PASSTHROUGH_PORTS | true | 是否允许入站流量直通 | 按需 |
 
-#<!-- chunk: DestinationRule 连接池参数 -->## DestinationRule 连接池参数
+## DestinationRule 连接池参数
 
 | 参数 | 默认值 | 说明 | 推荐范围 |
 |:---|:---|:---|:---|
@@ -1108,7 +1112,7 @@ Info [IST0108]: DestinationRule "reviews-policy" uses outlier detection with bas
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 部署最佳实践 -->## 部署最佳实践
+## 部署最佳实践
 
 ```yaml
 部署最佳实践清单:
@@ -1148,15 +1152,19 @@ Info [IST0108]: DestinationRule "reviews-policy" uses outlier detection with bas
 
 <!-- chunk: 多集群部署 — Istio multi-cluster -->## 多集群部署 — Istio Multi-Cluster
 
-#<!-- chunk: 多集群架构概述 -->## 多集群架构概述
+## 多集群架构概述
 
 Istio 多集群部署是企业级服务网格的关键能力之一。在多集群场景下，多个 Kubernetes 集群通过 Istio 控制平面互联，实现跨集群的服务发现、流量路由和 mTLS 加密通信。Istio 支持两种主要的多集群拓扑：共享控制平面（单网络）和独立控制平面（多网络）。共享控制平面模式适用于同一 VPC 内的多个集群，通过跨集群的 Pod 直达通信实现最低延迟；独立控制平面模式适用于跨区域、跨云厂商的部署，通过东西向网关进行跨集群流量转发。
 
-#<!-- chunk: 多集群部署前置条件 -->## 多集群部署前置条件
+## 多集群部署前置条件
 
 在开始多集群部署之前，需要确保以下条件已满足：每个集群的 Kubernetes 版本不低于 1.28，集群间的网络可达性已验证（跨集群 Pod CIDR 不重叠或通过 NAT 网关连通），每个集群已安装 Istio CNI 插件，DNS 解析能够跨集群工作（使用 Istio 的 ServiceEntry 或外部 DNS 配置）。此外，需要确保证书信任链共享——所有集群使用相同的 Root CA 证书，以便跨集群的 mTLS 握手能够成功建立。
 
-#<!-- chunk: 多集群安装命令 -->## 多集群安装命令
+## 多集群安装命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 export CTX_EAST="east-cluster"
@@ -1207,7 +1215,7 @@ kubectl exec --context $CTX_WEST -n sample deploy/sleep -- \
   curl -s http://helloworld.sample.svc.cluster.local:5000/hello
 ```
 
-#<!-- chunk: 多集群流量管理配置 -->## 多集群流量管理配置
+## 多集群流量管理配置
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -1261,7 +1269,7 @@ spec:
 
 <!-- chunk: Istio 扩展 — WasmPlugin 自定义过滤器 -->## Istio 扩展 — WasmPlugin 自定义过滤器
 
-#<!-- chunk: WasmPlugin 配置示例 -->## WasmPlugin 配置示例
+## WasmPlugin 配置示例
 
 WasmPlugin 是 Istio 扩展数据平面行为的推荐方式，通过 WebAssembly（WASM）技术在 Envoy 代理中运行自定义过滤器。WasmPlugin 相比传统的 EnvoyFilter 具有更好的隔离性（沙箱执行）、更安全的运行时（崩溃不影响代理进程）和更灵活的开发语言选择（Rust、Go、C++、AssemblyScript 均可）。以下是一个完整的请求头修改 WasmPlugin 配置示例：
 
@@ -1302,7 +1310,10 @@ spec:
         value: "info"
 ```
 
-#<!-- chunk: WasmPlugin 故障排查 -->## WasmPlugin 故障排查
+## WasmPlugin 故障排查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 echo "=== WasmPlugin 状态检查 ==="
@@ -1331,7 +1342,7 @@ istioctl proxy-config listener deploy/istio-ingressgateway -n istio-system --jso
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
 - Domain-26 服务网格与微服务 — 开源项目索引
 - Linkerd 企业级服务网格深度实践
 - Consul Connect 企业级服务网格管理
@@ -1352,9 +1363,11 @@ istioctl proxy-config listener deploy/istio-ingressgateway -n istio-system --jso
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
 
 ## 相关合成分析
 
-- [[synthesis/service-mesh-zero-trust-security|Service Mesh 零信任安全架构]]
+- [[concepts/service-mesh-zero-trust-security.md|Service Mesh 零信任安全架构]]
 
+
+```

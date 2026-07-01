@@ -38,7 +38,7 @@ created: "2026-05-23"
 
 # Java Operator SDK 开发指南
 
-> **适用版本**: JDK 17+ / Java Operator SDK 4.x / fabric8 7.x / [[entities/kubernetes|[[Kubernetes|kubernetes]]]] v1.28+
+> **适用版本**: JDK 17+ / Java Operator SDK 4.x / fabric8 7.x / [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] v1.28+
 > **最后更新**: 2026-04-30
 
 ---
@@ -1219,6 +1219,7 @@ spec:
               path: /q/health/ready
               port: 8080
             periodSeconds: 10
+
 ```
 
 ---
@@ -1240,6 +1241,9 @@ spec:
 
 **手动移除 Finalizer 的应急操作**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 仅在 Operator 问题无法正常清理时使用
 kubectl patch webapp <name> -n <namespace> --type='json' \
@@ -1256,3 +1260,5 @@ kubectl patch webapp <name> -n <namespace> --type='json' \
 - [Kubernetes Operator 模式](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/)
 - [Kubernetes Informer 机制](https://kubernetes.io/docs/reference/using-api/api-concepts/)
 - [CRD 开发最佳实践](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/)
+
+```

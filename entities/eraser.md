@@ -43,7 +43,7 @@ Eraser 是一个 Kubernetes 原生的镜像清理工具，用于自动从集群�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -60,24 +60,24 @@ Eraser 是一个 Kubernetes 原生的镜像清理工具，用于自动从集群�
 ## 参考链接
 
 - [[containerd]]
-- [[entities/trivy|trivy]]
-- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[entities/trivy.md|trivy]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]
-- [[concepts/controller-pattern|controller-pattern]]
+- [[concepts/controller-pattern.md|controller-pattern]]
 
 ## Related
 
-- [[entities/external-secrets|secrets]]]] — External Secrets Operator
+- [[entities/external-secrets.md|secrets]]]] — External Secrets Operator
 - [[kube-burner]] — Kube-burner
-- [[entities/trivy|trivy]] — Trivy
+- [[entities/trivy.md|trivy]] — Trivy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[coredns]] — CoreDNS
 
 - eraser
-- [[entities/zot|zot]]
-- [[entities/kitops|KitOps]]
-- [[entities/copa|Copa (Copacetic)]]
-- [[entities/stacker|Stacker]]
-- [[entities/xregistry|xRegistry]]
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/zot.md|zot]]
+- [[entities/kitops.md|KitOps]]
+- [[entities/copa.md|Copa (Copacetic)]]
+- [[entities/stacker.md|Stacker]]
+- [[entities/xregistry.md|xRegistry]]
+- [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

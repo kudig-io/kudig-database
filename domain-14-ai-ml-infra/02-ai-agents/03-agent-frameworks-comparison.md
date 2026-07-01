@@ -92,7 +92,7 @@ Agent 框架是连接 LLM 与工具调用、记忆管理、多 Agent 协作的�
 
 <!-- chunk: 1. 框架全景概览 -->## 1. 框架全景概览
 
-#<!-- chunk: 1.1 主流框架定位 -->## 1.1 主流框架定位
+## 1.1 主流框架定位
 
 ```
 Agent 框架生态
@@ -123,7 +123,7 @@ Agent 框架生态
 
 <!-- chunk: 2. 核心框架深度分析 -->## 2. 核心框架深度分析
 
-#<!-- chunk: 2.1 LangChain -->## 2.1 LangChain
+## 2.1 LangChain
 
 **定位**：最全面的 LLM 应用开发框架，生态最成熟。
 
@@ -217,7 +217,7 @@ result = agent_executor.invoke({
 | LangSmith 可观测性完整 | 学习曲线较陡，过度封装 |
 | 支持所有主流 LLM | 某些抽象设计不够直观 |
 
-#<!-- chunk: 2.2 LlamaIndex -->## 2.2 LlamaIndex
+## 2.2 LlamaIndex
 
 **定位**：以数据连接和 RAG 为核心的 LLM 框架，特别擅长知识检索场景。
 
@@ -281,7 +281,7 @@ response = agent.chat("Pod CrashLoopBackOff 的常见原因和排查步骤是什
 | 结构化数据查询（NL2SQL）出色 | 多 Agent 协作支持有限 |
 | 轻量级，性能好 | 工具调用不如 LangChain 灵活 |
 
-#<!-- chunk: 2.3 AutoGen -->## 2.3 AutoGen
+## 2.3 AutoGen
 
 **定位**：微软出品，专注于多 Agent 对话与协作，支持 Group Chat 编排。
 
@@ -357,7 +357,7 @@ user_proxy.initiate_chat(
 | Group Chat 编排灵活 | 对话管理有时难以控制 |
 | 微软生态集成好（Azure OpenAI） | 文档质量参差不齐 |
 
-#<!-- chunk: 2.4 CrewAI -->## 2.4 CrewAI
+## 2.4 CrewAI
 
 **定位**：角色扮演式多 Agent 框架，上手最简单，适合快速原型。
 
@@ -437,7 +437,7 @@ result = migration_crew.kickoff()
 | 社区增长快，示例丰富 | 工具生态不如 LangChain 成熟 |
 | 支持层级和顺序两种流程 | 缺乏细粒度的状态管理 |
 
-#<!-- chunk: 2.5 Dify -->## 2.5 Dify
+## 2.5 Dify
 
 **定位**：开源 LLM 应用开发平台，提供可视化工作流 + API + 代码双模式，适合快速生产部署。
 
@@ -507,7 +507,7 @@ for line in response.iter_lines():
 
 <!-- chunk: 3. 框架选型对比矩阵 -->## 3. 框架选型对比矩阵
 
-#<!-- chunk: 3.1 核心能力对比 -->## 3.1 核心能力对比
+## 3.1 核心能力对比
 
 | 特性 | LangChain | LlamaIndex | AutoGen | CrewAI | Dify |
 |------|----------|-----------|---------|-------|------|
@@ -523,7 +523,7 @@ for line in response.iter_lines():
 | **.NET/Java 支持** | ❌ | ❌ | ❌ | ❌ | ✅ API |
 | **本地化部署** | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-#<!-- chunk: 3.2 选型决策树 -->## 3.2 选型决策树
+## 3.2 选型决策树
 
 ```
 框架选型入口
@@ -699,7 +699,7 @@ def knowledge_augmented_diagnosis(state):
 
 <!-- chunk: 6. 最佳实践与反模式 -->## 6. 最佳实践与反模式
 
-#<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
 
 - **不要过度依赖框架抽象**：生产中遇到问题时，了解底层 API 调用原理比理解框架抽象更重要
 - **从简单开始**：先用最简单的 ReAct + OpenAI Functions，需要复杂编排时再引入 LangGraph
@@ -707,7 +707,7 @@ def knowledge_augmented_diagnosis(state):
 - **评估框架的可观测性**：选框架时同时评估其可追踪性——Langfuse 可对接多数框架
 - **自定义工具优于内置工具**：框架内置工具往往不适配你的环境，宁可自己写清晰的工具函数
 
-#<!-- chunk: 反模式 -->## 反模式
+## 反模式
 
 - **为用框架而用框架**：简单的 API 调用场景，直接调用 OpenAI SDK 比引入 LangChain 更清晰
 - **忽视 Streaming 支持**：对话场景必须用流式输出，框架的 Streaming API 差异较大
@@ -734,17 +734,17 @@ def knowledge_augmented_diagnosis(state):
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/11-cost-latency-optimization|成本与延迟优化策略]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/11-cost-latency-optimization.md|成本与延迟优化策略]]
 
 ## See Also
 

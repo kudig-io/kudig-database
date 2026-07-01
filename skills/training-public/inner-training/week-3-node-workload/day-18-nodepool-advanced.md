@@ -307,6 +307,9 @@ aliyun cs POST /clusters/<cluster_id>/nodepools \
 
 ### 任务 2: 配置应用使用弹性节点池 (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 部署能容忍 Spot 污点的应用
 cat > spot-deployment.yaml << 'EOF'
@@ -408,6 +411,10 @@ aliyun cs GET /clusters/<cluster_id>/nodepools/<nodepool_id> | jq '.status'
 
 ### 任务 4: 节点池升级演练 (30min)
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 查看当前集群版本
 kubectl version --short
@@ -453,7 +460,7 @@ metadata:
   name: cluster-autoscaler-status
   namespace: kube-system
 data:
-  cluster-autoscaler.[[entities/kubernetes|kubernetes]].io/cluster-autoscaler-status: |
+  cluster-autoscaler.[[entities/kubernetes.md|kubernetes]].io/cluster-autoscaler-status: |
     Cluster-wide:
       Health: Healthy
       ScaleUp: Needed 3 nodes, scaled up 3 nodes

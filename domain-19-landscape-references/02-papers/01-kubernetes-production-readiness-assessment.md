@@ -73,7 +73,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 评估框架概述 -->## 1. 评估框架概述
 
-#<!-- chunk: 1.1 评估维度体系 -->## 1.1 评估维度体系
+## 1.1 评估维度体系
 
 ```yaml
 生产就绪性评估框架:
@@ -92,7 +92,7 @@ created: "2026-05-23"
     - 治理策略 (Governance Policy)
 ```
 
-#<!-- chunk: 1.2 评估等级定义 -->## 1.2 评估等级定义
+## 1.2 评估等级定义
 
 | 等级 | 描述 | 生产就绪度 | 建议行动 |
 |------|------|------------|----------|
@@ -103,9 +103,9 @@ created: "2026-05-23"
 
 <!-- chunk: 2. 详细评估标准 -->## 2. 详细评估标准
 
-#<!-- chunk: 2.1 架构设计评估 (权重: 15%) -->## 2.1 架构设计评估 (权重: 15%)
+## 2.1 架构设计评估 (权重: 15%)
 
-##<!-- chunk: 控制平面评估 -->## 控制平面评估
+## 控制平面评估
 ```bash
 # 控制平面高可用检查清单
 ✓ API Server副本数 ≥ 3
@@ -115,7 +115,7 @@ created: "2026-05-23"
 ✓ 证书有效期管理机制
 ```
 
-##<!-- chunk: 网络架构评估 -->## 网络架构评估
+## 网络架构评估
 ```yaml
 网络设计标准:
   CNI插件选择:
@@ -129,7 +129,7 @@ created: "2026-05-23"
     ✓ 外部访问控制策略
 ```
 
-##<!-- chunk: 存储架构评估 -->## 存储架构评估
+## 存储架构评估
 ```bash
 # 存储类配置检查
 kubectl get storageclass -o wide
@@ -141,9 +141,9 @@ kubectl get storageclass -o wide
 ✓ 快照功能启用
 ```
 
-#<!-- chunk: 2.2 安全合规评估 (权重: 20%) -->## 2.2 安全合规评估 (权重: 20%)
+## 2.2 安全合规评估 (权重: 20%)
 
-##<!-- chunk: 身份认证与授权 -->## 身份认证与授权
+## 身份认证与授权
 ```yaml
 RBAC最佳实践:
   角色分离:
@@ -158,7 +158,7 @@ RBAC最佳实践:
     ✓ 审计日志记录
 ```
 
-##<!-- chunk: 网络安全 -->## 网络安全
+## 网络安全
 ```bash
 # 网络策略实施检查
 kubectl get networkpolicy --all-namespaces
@@ -167,7 +167,7 @@ kubectl get networkpolicy --all-namespaces
 kube-bench run --targets master,node,controlplane,policies
 ```
 
-##<!-- chunk: 镜像安全 -->## 镜像安全
+## 镜像安全
 ```yaml
 镜像安全策略:
   扫描要求:
@@ -182,9 +182,9 @@ kube-bench run --targets master,node,controlplane,policies
     ✓ 敏感信息扫描
 ```
 
-#<!-- chunk: 2.3 可观测性评估 (权重: 15%) -->## 2.3 可观测性评估 (权重: 15%)
+## 2.3 可观测性评估 (权重: 15%)
 
-##<!-- chunk: 监控体系 -->## 监控体系
+## 监控体系
 ```yaml
 监控栈配置:
   核心组件:
@@ -200,7 +200,7 @@ kube-bench run --targets master,node,controlplane,policies
     ✓ 业务关键指标 (SLI/SLO)
 ```
 
-##<!-- chunk: 日志管理 -->## 日志管理
+## 日志管理
 ```bash
 # 日志架构检查
 ✓ 集中化日志收集 (Loki/ELK)
@@ -209,7 +209,7 @@ kube-bench run --targets master,node,controlplane,policies
 ✓ 敏感信息脱敏处理
 ```
 
-##<!-- chunk: 链路追踪 -->## 链路追踪
+## 链路追踪
 ```yaml
 分布式追踪配置:
   工具选择: Jaeger, Tempo, Zipkin
@@ -219,9 +219,9 @@ kube-bench run --targets master,node,controlplane,policies
     - 告警触发: 动态采样
 ```
 
-#<!-- chunk: 2.4 可靠性评估 (权重: 15%) -->## 2.4 可靠性评估 (权重: 15%)
+## 2.4 可靠性评估 (权重: 15%)
 
-##<!-- chunk: 高可用设计 -->## 高可用设计
+## 高可用设计
 ```bash
 # 多区域部署检查
 ✓ 控制平面跨可用区部署
@@ -230,7 +230,7 @@ kube-bench run --targets master,node,controlplane,policies
 ✓ 负载均衡器冗余配置
 ```
 
-##<!-- chunk: 故障恢复能力 -->## 故障恢复能力
+## 故障恢复能力
 ```yaml
 故障恢复指标:
   RTO (恢复时间目标):
@@ -244,7 +244,7 @@ kube-bench run --targets master,node,controlplane,policies
     - 一般数据: < 1小时
 ```
 
-##<!-- chunk: 自愈能力 -->## 自愈能力
+## 自愈能力
 ```bash
 # 自动修复配置检查
 ✓ 节点自动修复 (Cluster Autoscaler)
@@ -253,9 +253,9 @@ kube-bench run --targets master,node,controlplane,policies
 ✓ 资源限制和请求设置
 ```
 
-#<!-- chunk: 2.5 性能优化评估 (权重: 10%) -->## 2.5 性能优化评估 (权重: 10%)
+## 2.5 性能优化评估 (权重: 10%)
 
-##<!-- chunk: 资源调度优化 -->## 资源调度优化
+## 资源调度优化
 ```yaml
 调度器配置优化:
   资源请求设置:
@@ -269,7 +269,7 @@ kube-bench run --targets master,node,controlplane,policies
     ✓ 拓扑分布约束
 ```
 
-##<!-- chunk: 网络性能优化 -->## 网络性能优化
+## 网络性能优化
 ```bash
 # CNI性能调优
 ✓ MTU设置优化
@@ -278,9 +278,9 @@ kube-bench run --targets master,node,controlplane,policies
 ✓ DNS缓存配置
 ```
 
-#<!-- chunk: 2.6 成本治理评估 (权重: 10%) -->## 2.6 成本治理评估 (权重: 10%)
+## 2.6 成本治理评估 (权重: 10%)
 
-##<!-- chunk: 资源利用率分析 -->## 资源利用率分析
+## 资源利用率分析
 ```bash
 # 资源使用效率检查
 kubectl top nodes
@@ -293,7 +293,7 @@ kubectl top pods --all-namespaces
 ✓ 网络带宽利用率: < 70%
 ```
 
-##<!-- chunk: 成本优化策略 -->## 成本优化策略
+## 成本优化策略
 ```yaml
 成本控制措施:
   资源回收:
@@ -307,9 +307,9 @@ kubectl top pods --all-namespaces
     ✓ 存储类型优化选择
 ```
 
-#<!-- chunk: 2.7 运维自动化评估 (权重: 5%) -->## 2.7 运维自动化评估 (权重: 5%)
+## 2.7 运维自动化评估 (权重: 5%)
 
-##<!-- chunk: GitOps实施程度 -->## GitOps实施程度
+## GitOps实施程度
 ```bash
 # GitOps成熟度检查
 ✓ 声明式配置管理
@@ -318,7 +318,7 @@ kubectl top pods --all-namespaces
 ✓ 回滚机制完善
 ```
 
-##<!-- chunk: 基础设施即代码 -->## 基础设施即代码
+## 基础设施即代码
 ```yaml
 IaC实施检查:
   工具栈:
@@ -333,9 +333,9 @@ IaC实施检查:
     ✓ 安全扫描集成
 ```
 
-#<!-- chunk: 2.8 灾难恢复评估 (权重: 5%) -->## 2.8 灾难恢复评估 (权重: 5%)
+## 2.8 灾难恢复评估 (权重: 5%)
 
-##<!-- chunk: 备份策略 -->## 备份策略
+## 备份策略
 ```bash
 # 备份完整性检查
 ✓ etcd完整备份 (每日+实时)
@@ -344,7 +344,7 @@ IaC实施检查:
 ✓ 备份验证流程
 ```
 
-##<!-- chunk: 恢复演练 -->## 恢复演练
+## 恢复演练
 ```yaml
 DR演练要求:
   频率:
@@ -361,7 +361,7 @@ DR演练要求:
 
 <!-- chunk: 3. 评估工具和方法 -->## 3. 评估工具和方法
 
-#<!-- chunk: 3.1 自动化评估工具 -->## 3.1 自动化评估工具
+## 3.1 自动化评估工具
 
 ```bash
 # 生产就绪性检查脚本
@@ -388,7 +388,7 @@ echo "4. Backup Configuration Check"
 kubectl get cronjobs -n backup 2>/dev/null || echo "Backup jobs not configured"
 ```
 
-#<!-- chunk: 3.2 评估问卷模板 -->## 3.2 评估问卷模板
+## 3.2 评估问卷模板
 
 ```yaml
 评估问卷结构:
@@ -411,7 +411,7 @@ kubectl get cronjobs -n backup 2>/dev/null || echo "Backup jobs not configured"
 
 <!-- chunk: 4. 评估报告模板 -->## 4. 评估报告模板
 
-#<!-- chunk: 4.1 总体评分报告 -->## 4.1 总体评分报告
+## 4.1 总体评分报告
 
 ```yaml
 生产就绪性评估报告:
@@ -436,7 +436,7 @@ kubectl get cronjobs -n backup 2>/dev/null || echo "Backup jobs not configured"
     灾难恢复: 4/5 (80%)
 ```
 
-#<!-- chunk: 4.2 改进建议清单 -->## 4.2 改进建议清单
+## 4.2 改进建议清单
 
 ```markdown
 <!-- chunk: 🔧 优先级改进项 (P0) -->## 🔧 优先级改进项 (P0)
@@ -473,7 +473,7 @@ kubectl get cronjobs -n backup 2>/dev/null || echo "Backup jobs not configured"
 
 <!-- chunk: 5. 实施建议 -->## 5. 实施建议
 
-#<!-- chunk: 5.1 分阶段实施路线图 -->## 5.1 分阶段实施路线图
+## 5.1 分阶段实施路线图
 
 ```mermaid
 graph LR
@@ -488,7 +488,7 @@ graph LR
     D --> |持续| E
 ```
 
-#<!-- chunk: 5.2 团队能力建设 -->## 5.2 团队能力建设
+## 5.2 团队能力建设
 
 ```yaml
 技能提升计划:
@@ -510,7 +510,7 @@ graph LR
 
 <!-- chunk: N. 生产就绪性评估 2026更新 -->## N. 生产就绪性评估 2026更新
 
-#<!-- chunk: N.1 2026新增评估维度 -->## N.1 2026新增评估维度
+## N.1 2026新增评估维度
 - Gateway API就绪性（是否从Ingress迁移到Gateway API）
 - OpenTelemetry可观测性成熟度（是否部署OTel Collector）
 - 供应链安全（是否实施SBOM/SLSA/Sigstore）
@@ -520,14 +520,14 @@ graph LR
 
 <!-- chunk: 6. 附录 -->## 6. 附录
 
-#<!-- chunk: 6.1 参考标准和规范 -->## 6.1 参考标准和规范
+## 6.1 参考标准和规范
 
 - **Google SRE Workbook** - 可靠性工程实践指南
 - **CNCF Kubernetes Security Special Interest Group** - 安全最佳实践
 - **CIS Kubernetes Benchmark** - 安全配置基线
 - **ISO/IEC 27001** - 信息安全管理标准
 
-#<!-- chunk: 6.2 相关工具推荐 -->## 6.2 相关工具推荐
+## 6.2 相关工具推荐
 
 ```bash
 # 评估和监控工具
@@ -547,7 +547,7 @@ trivy               # 镜像安全扫描
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
 - Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Imp...

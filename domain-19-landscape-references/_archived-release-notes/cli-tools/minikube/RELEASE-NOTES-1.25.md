@@ -48,7 +48,7 @@ Features:
 * [Addon] Kong [[Ingress|Ingress]] Controller [#13326](https://github.com/kubernetes/minikube/pull/13326)
 * add arch to binary and image cache paths [#13539](https://github.com/kubernetes/minikube/pull/13539)
 * Adds 'minikube [[Service|service]] --all' feature to allow forwarding all services in a namespace [#13367](https://github.com/kubernetes/minikube/pull/13367)
-* Make the default [[Container Runtime|container runtime]] dynamic [#13251](https://github.com/kubernetes/minikube/pull/13251)
+* Make the default [[concepts/container-runtime.md|container runtime]] dynamic [#13251](https://github.com/kubernetes/minikube/pull/13251)
 * Add `--disable-optimizations` flag [#13340](https://github.com/kubernetes/minikube/pull/13340)
 
 Bug Fixes:

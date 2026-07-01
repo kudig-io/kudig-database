@@ -119,13 +119,13 @@ k8s_versions:
 
 <!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-#<!-- chunk: 1.1 行业背景与趋势 -->## 1.1 行业背景与趋势
+## 1.1 行业背景与趋势
 
 二手交易与循环经济是近年来快速增长的赛道。全球二手市场规模预计 2026 年将突破 5000 亿美元，中国二手交易市场年增长率超过 20%。在碳中和战略背景下，循环经济成为国家重点发展方向，二手交易平台作为循环经济的核心基础设施，承载着延长产品生命周期、减少资源浪费、降低碳排放的重要使命。
 
 中国二手交易市场呈现以下特征：移动端为主（超过 90% 交易在移动端完成）、年轻人主导（Z 世代和千禧一代是核心用户群）、品类多元化（从 3C 数码扩展到服饰、奢侈品、图书、家具、汽车等全品类）、信任机制逐步完善（从单纯 C2C 到平台担保交易、官方质检并存）。
 
-#<!-- chunk: 1.2 核心挑战与架构影响 -->## 1.2 核心挑战与架构影响
+## 1.2 核心挑战与架构影响
 
 | 挑战 | 说明 | 架构影响 |
 |:---|:---|:---|
@@ -137,7 +137,7 @@ k8s_versions:
 | 环保价值量化 | 碳减排量计算与激励 | 绿色积分体系 + 碳足迹追踪 |
 | 合规监管 | 未成年人保护、违禁品管控 | 内容审核 + 年龄验证 + 合规引擎 |
 
-#<!-- chunk: 1.3 市场规模与用户画像 -->## 1.3 市场规模与用户画像
+## 1.3 市场规模与用户画像
 
 中国主要二手交易平台日活用户超过 5000 万，日均交易量超过 100 万笔。用户群体呈现年轻化趋势，18-35 岁用户占比超过 70%。核心品类交易金额占比：3C 数码（35%）、服饰鞋包（25%）、图书音像（10%）、家居家电（10%）、母婴（8%）、其他（12%）。
 
@@ -145,7 +145,7 @@ k8s_versions:
 
 <!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-#<!-- chunk: 2.1 核心业务场景 -->## 2.1 核心业务场景
+## 2.1 核心业务场景
 
 - **商品发布与智能描述**: 用户上传照片后 AI 自动生成商品描述、分类标签、成色评估、建议售价
 - **以图搜图与智能搜索**: 拍照搜索同款商品、相似商品推荐、语义搜索（如"九成新 iPhone 15 Pro Max"）
@@ -155,7 +155,7 @@ k8s_versions:
 - **回收与以旧换新**: 上门回收、门店回收、以旧换新补贴
 - **社区与内容**: 二手好物分享、闲置交换社区、环保达人激励
 
-#<!-- chunk: 2.2 交易状态机 -->## 2.2 交易状态机
+## 2.2 交易状态机
 
 ```mermaid
 stateDiagram-v2
@@ -183,7 +183,7 @@ stateDiagram-v2
     已退款 --> [*]
 ```
 
-#<!-- chunk: 2.3 业务场景交互时序 -->## 2.3 业务场景交互时序
+## 2.3 业务场景交互时序
 
 ```mermaid
 sequenceDiagram
@@ -220,7 +220,7 @@ sequenceDiagram
 
 <!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-#<!-- chunk: 3.1 系统全景架构 -->## 3.1 系统全景架构
+## 3.1 系统全景架构
 
 ```mermaid
 graph TB
@@ -283,7 +283,7 @@ graph TB
     B1 & B2 & B3 & B4 & B5 & B6 & B7 & B8 --> I1 & I2 & I3 & I4 & I5 & I6
 ```
 
-#<!-- chunk: 3.2 商品发布与 AI 识别流程 -->## 3.2 商品发布与 AI 识别流程
+## 3.2 商品发布与 AI 识别流程
 
 ```mermaid
 flowchart TD
@@ -304,7 +304,7 @@ flowchart TD
     N -->|否| O[退回修改]
 ```
 
-#<!-- chunk: 3.3 信用体系架构 -->## 3.3 信用体系架构
+## 3.3 信用体系架构
 
 ```mermaid
 graph LR
@@ -339,7 +339,7 @@ graph LR
 
 <!-- chunk: 4. 核心技术栈 -->## 4. 核心技术栈
 
-#<!-- chunk: 4.1 技术栈总览 -->## 4.1 技术栈总览
+## 4.1 技术栈总览
 
 | 层次 | 技术选型 | 说明 |
 |:---|:---|:---|
@@ -360,7 +360,7 @@ graph LR
 | 可观测性 | ARMS + SLS | APM、日志、监控 |
 | 时序数据库 | Lindorm | 碳减排数据、行为数据 |
 
-#<!-- chunk: 4.2 核心技术组件关系 -->## 4.2 核心技术组件关系
+## 4.2 核心技术组件关系
 
 | 组件 | 功能 | 关联服务 |
 |:---|:---|:---|
@@ -374,7 +374,7 @@ graph LR
 
 <!-- chunk: 5. K8s 部署方案 -->## 5. K8s 部署方案
 
-#<!-- chunk: 5.1 图像搜索 GPU 服务 -->## 5.1 图像搜索 GPU 服务
+## 5.1 图像搜索 GPU 服务
 
 ```yaml
 apiVersion: apps/v1
@@ -488,7 +488,7 @@ spec:
   type: ClusterIP
 ```
 
-#<!-- chunk: 5.2 智能定价引擎 -->## 5.2 智能定价引擎
+## 5.2 智能定价引擎
 
 ```yaml
 apiVersion: apps/v1
@@ -566,7 +566,7 @@ spec:
           averageValue: "100"
 ```
 
-#<!-- chunk: 5.3 交易订单服务 -->## 5.3 交易订单服务
+## 5.3 交易订单服务
 
 ```yaml
 apiVersion: apps/v1
@@ -631,7 +631,7 @@ spec:
             storage: 100Gi
 ```
 
-#<!-- chunk: 5.4 风控引擎 -->## 5.4 风控引擎
+## 5.4 风控引擎
 
 ```yaml
 apiVersion: apps/v1
@@ -680,7 +680,7 @@ spec:
               cpu: "4000m"
 ```
 
-#<!-- chunk: 5.5 Namespace 与 ResourceQuota -->## 5.5 Namespace 与 ResourceQuota
+## 5.5 Namespace 与 ResourceQuota
 
 ```yaml
 apiVersion: v1
@@ -734,7 +734,7 @@ spec:
 
 <!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-#<!-- chunk: 6.1 数据分层架构 -->## 6.1 数据分层架构
+## 6.1 数据分层架构
 
 ```mermaid
 graph TB
@@ -774,7 +774,7 @@ graph TB
     D4 --> A1 & A2 & A3 & A4 & A5
 ```
 
-#<!-- chunk: 6.2 核心数据模型 -->## 6.2 核心数据模型
+## 6.2 核心数据模型
 
 | 数据域 | 核心实体 | 存储引擎 | 数据量级 | 保留周期 |
 |:---|:---|:---|:---|:---|
@@ -790,7 +790,7 @@ graph TB
 
 <!-- chunk: 7. AI/ML 组件 -->## 7. AI/ML 组件
 
-#<!-- chunk: 7.1 AI 能力矩阵 -->## 7.1 AI 能力矩阵
+## 7.1 AI 能力矩阵
 
 | AI 能力 | 模型类型 | 输入 | 输出 | 性能要求 |
 |:---|:---|:---|:---|:---|
@@ -802,7 +802,7 @@ graph TB
 | 内容审核 | 多模态模型 | 图片+文本 | 合规/违规/待审 | P99 < 300ms |
 | 推荐排序 | DeepFM + DIN | 用户画像+商品池 | 排序商品列表 | P99 < 100ms |
 
-#<!-- chunk: 7.2 AI 模型训练与部署流水线 -->## 7.2 AI 模型训练与部署流水线
+## 7.2 AI 模型训练与部署流水线
 
 ```mermaid
 flowchart LR
@@ -826,7 +826,7 @@ flowchart LR
 
 <!-- chunk: 8. 安全合规 -->## 8. 安全合规
 
-#<!-- chunk: 8.1 安全架构 -->## 8.1 安全架构
+## 8.1 安全架构
 
 ```mermaid
 graph TB
@@ -871,7 +871,7 @@ graph TB
     D1 & D2 & D3 & D4 --> E1 & E2 & E3 & E4
 ```
 
-#<!-- chunk: 8.2 合规要求矩阵 -->## 8.2 合规要求矩阵
+## 8.2 合规要求矩阵
 
 | 合规项 | 法规依据 | 实施措施 | 验证频率 |
 |:---|:---|:---|:---|
@@ -886,7 +886,7 @@ graph TB
 
 <!-- chunk: 9. 最佳实践 -->## 9. 最佳实践
 
-#<!-- chunk: 9.1 架构最佳实践 -->## 9.1 架构最佳实践
+## 9.1 架构最佳实践
 
 - **担保交易模式**: 所有资金流转通过平台担保账户，买家确认收货前资金冻结，保障双方权益
 - **AI 定价辅助**: 新商品发布时自动推荐价格区间，降低定价门槛，提高成交率
@@ -897,7 +897,7 @@ graph TB
 - **碳减排追踪**: 每笔二手交易计算碳减排量，累计用户绿色积分，激励循环消费
 - **分级存储**: 热数据 PolarDB、温数据 Lindorm、冷数据 OSS 归档，优化存储成本
 
-#<!-- chunk: 9.2 性能优化实践 -->## 9.2 性能优化实践
+## 9.2 性能优化实践
 
 - 商品搜索使用 OpenSearch + 向量检索混合排序，兼顾关键词匹配和语义相似度
 - 图片上传使用 OSS 直传 + CDN 分发，减少服务器带宽压力
@@ -908,7 +908,7 @@ graph TB
 
 <!-- chunk: 10. 反模式 -->## 10. 反模式
 
-#<!-- chunk: 10.1 常见反模式与解决方案 -->## 10.1 常见反模式与解决方案
+## 10.1 常见反模式与解决方案
 
 | 反模式 | 问题描述 | 正确做法 |
 |:---|:---|:---|
@@ -925,7 +925,7 @@ graph TB
 
 <!-- chunk: 11. 参考资源 -->## 11. 参考资源
 
-#<!-- chunk: 11.1 阿里云组件映射 -->## 11.1 阿里云组件映射
+## 11.1 阿里云组件映射
 
 | 功能域 | 阿里云方案 | 说明 |
 |:---|:---|:---|
@@ -942,7 +942,7 @@ graph TB
 | 安全 | WAF + 云盾 | Web 防护、DDoS 防护 |
 | 区块链 | 蚂蚁链 BaaS | 商品溯源、碳减排存证 |
 
-#<!-- chunk: 11.2 生产检查清单 -->## 11.2 生产检查清单
+## 11.2 生产检查清单
 
 - [ ] 图像搜索 P99 延迟 < 500ms
 - [ ] 智能定价准确率 > 85%（误差 ±15% 以内）
@@ -956,7 +956,7 @@ graph TB
 - [ ] 个人信息保护合规审计通过
 - [ ] 容灾演练 RTO < 30min、RPO < 5min
 
-#<!-- chunk: 11.3 参考文档 -->## 11.3 参考文档
+## 11.3 参考文档
 
 - [PolarDB MySQL 产品文档](https://help.aliyun.com/product/60571.html)
 - [PAI 机器学习平台](https://help.aliyun.com/product/30347.html)
@@ -973,17 +973,17 @@ graph TB
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

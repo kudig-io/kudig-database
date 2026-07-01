@@ -804,7 +804,7 @@ func (sched *Scheduler) scheduleOne(ctx context.Context) {
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - index.md|Domain-3 控制平面 — 开源项目索引]]
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...

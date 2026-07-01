@@ -604,6 +604,10 @@ func RunNode(flags *NodeFlags) error {
 
 ### HA 集群滚动升级流程
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```
 步骤 1: 升级第一个 control-plane 节点
     → kubeadm upgrade apply v1.29.0
@@ -636,6 +640,9 @@ func RunNode(flags *NodeFlags) error {
 ## 使用场景
 
 ### 场景 1: 标准 minor 版本升级 (1.28 → 1.29)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 检查升级计划
@@ -674,6 +681,10 @@ kubectl get nodes
 
 ### 场景 2: HA 集群滚动升级
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 第一个 control-plane 节点
 kubeadm upgrade apply v1.29.0 --certificate-key=<key>
@@ -693,6 +704,10 @@ kubectl get nodes -o wide
 ```
 
 ### 场景 3: 升级失败回滚
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 查找备份目录
@@ -824,6 +839,10 @@ data:
 ## 实战示例
 
 ### 完整升级演练 (1.28 → 1.29)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # === 升级前检查 ===
@@ -978,6 +997,6 @@ kubeadm upgrade diff v1.29.0
 ## Related
 
 - [[hot|hot]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

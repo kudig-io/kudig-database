@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Cloud Controller Manager（云控制器管理器）
@@ -86,4 +87,6 @@ cloud-controller-manager 需要以下 API 对象访问权限（以 ClusterRole �
 
 ## Related
 
-- index/etcd-index|etcd 知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/annotations.md|注解]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/bpfman.md|bpfman eBPF 管理器]]

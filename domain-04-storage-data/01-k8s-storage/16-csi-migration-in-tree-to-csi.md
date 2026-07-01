@@ -298,6 +298,9 @@ parameters:
 
 ### 评估检查清单
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # csi-migration-assessment.sh - CSI 迁移前评估工具
@@ -383,6 +386,9 @@ bash csi-migration-assessment.sh
 
 #### 阶段 2: 安装 CSI 驱动
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # AWS EBS CSI 驱动安装示例
 helm repo add aws-ebs-csi-driver https://kubernetes-sigs.github.io/aws-ebs-csi-driver
@@ -425,6 +431,9 @@ allowVolumeExpansion: true
 
 #### 阶段 5: 逐步迁移 PVC
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 方案 A: 新 PVC 使用新 SC（推荐渐进式）
 # 仅修改应用 Deployment 中的 storageClassName
@@ -441,6 +450,10 @@ kubectl annotate storageclass gp3-csi storageclass.kubernetes.io/is-default-clas
 
 <!-- chunk: 回滚方案 -->
 ## 回滚方案
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 如果迁移后出现问题，回滚步骤:
@@ -466,6 +479,11 @@ systemctl restart kubelet
 
 <!-- chunk: 迁移验证脚本 -->
 ## 迁移验证脚本
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 #!/bin/bash
@@ -536,7 +554,7 @@ else
 fi
 
 # 清理
-kubectl delete pod csi-migration-test-pod --force 2>/dev/null
+kubectl delete pod csi-migration-test-pod --force 2>/dev/null  # ⚠️ 跳过优雅终止，可能丢数据
 kubectl delete pvc csi-migration-test-pvc 2>/dev/null
 kubectl delete sc "$TEST_SC" 2>/dev/null
 
@@ -624,6 +642,6 @@ echo "=========================================="
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]

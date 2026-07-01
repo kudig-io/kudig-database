@@ -79,12 +79,12 @@ base_confidence: 0.7
 
 ## 相关链接
 
-- [[FTA Methodology and Core Principles|FTA 方法论]]
-- [[FTA Diagnostic Execution Engine|FTA 诊断执行引擎]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 
 ## See Also
 
-- [[skills/etcd-fta|etcd-fta]]
-- [[skills/flannel-fta|flannel-fta]]
-- [[skills/gitops-argocd-fta|gitops-argocd-fta]]
-- [[skills/gpu-fta|gpu-fta]]
+- [[skills/etcd-fta.md|etcd-fta]]
+- [[skills/flannel-fta.md|flannel-fta]]
+- [[skills/gitops-argocd-fta.md|gitops-argocd-fta]]
+- [[skills/gpu-fta.md|gpu-fta]]

@@ -551,6 +551,10 @@ spec:
 
 ### 灾备演练脚本
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # dr-drill-script.sh
@@ -867,7 +871,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-04-storage-data MOC
-- [[domain-04-storage-data/README|Storage Domain 存储领域知识库]]
+- [[domain-04-storage-data/README.md|Storage Domain 存储领域知识库]]
 - Domain-6 存储 — 开源项目索引
 - 存储架构概览与核心组件
 - PV/PVC 核心概念与企业级实践
@@ -888,4 +892,4 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]

@@ -100,7 +100,7 @@ Argo CD 的核心优势包括：丰富的 Web UI 提供应用拓扑可视化；A
 
 <!-- chunk: 二、架构设计 -->## 二、架构设计
 
-#<!-- chunk: 2.1 组件架构 -->## 2.1 组件架构
+## 2.1 组件架构
 
 ```mermaid
 graph TB
@@ -136,7 +136,7 @@ graph TB
     DEX --> SSO
 ```
 
-#<!-- chunk: 2.2 单实例架构 -->## 2.2 单实例架构
+## 2.2 单实例架构
 
 ```
 ┌──────────────────────────────────────────────┐
@@ -156,7 +156,7 @@ graph TB
 └──────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 2.3 高可用架构 -->## 2.3 高可用架构
+## 2.3 高可用架构
 
 ```
 ┌──────────────────────────────────────────────┐
@@ -178,7 +178,7 @@ graph TB
 
 <!-- chunk: 三、Helm 部署 -->## 三、Helm 部署
 
-#<!-- chunk: 3.1 生产级 Values -->## 3.1 生产级 Values
+## 3.1 生产级 Values
 
 ```yaml
 # values-argo-cd-production.yaml
@@ -303,7 +303,10 @@ redis:
   enabled: true
 ```
 
-#<!-- chunk: 3.2 部署命令 -->## 3.2 部署命令
+## 3.2 部署命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add argo https://argoproj.github.io/argo-helm
@@ -330,7 +333,7 @@ kubectl get pods -n argocd
 
 <!-- chunk: 四、核心配置 -->## 四、核心配置
 
-#<!-- chunk: 4.1 多租户 AppProject -->## 4.1 多租户 AppProject
+## 4.1 多租户 AppProject
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -376,7 +379,7 @@ spec:
       manualSync: true
 ```
 
-#<!-- chunk: 4.2 Application 定义 -->## 4.2 Application 定义
+## 4.2 Application 定义
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -420,7 +423,7 @@ spec:
   revisionHistoryLimit: 10
 ```
 
-#<!-- chunk: 4.3 ApplicationSet 多环境管理 -->## 4.3 ApplicationSet 多环境管理
+## 4.3 ApplicationSet 多环境管理
 
 ```yaml
 # Git 目录生成器
@@ -487,7 +490,7 @@ spec:
 
 <!-- chunk: 五、安全与合规 -->## 五、安全与合规
 
-#<!-- chunk: 5.1 密钥管理集成 -->## 5.1 密钥管理集成
+## 5.1 密钥管理集成
 
 ```yaml
 # External Secrets Operator (推荐)
@@ -515,7 +518,10 @@ spec:
         property: api_key
 ```
 
-#<!-- chunk: 5.2 Sealed Secrets -->## 5.2 Sealed Secrets
+## 5.2 Sealed Secrets
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 安装 Sealed Secrets 控制器
@@ -530,7 +536,7 @@ kubeseal --controller-namespace=kube-system \
 # sealed-secret.yaml 可安全提交到 Git
 ```
 
-#<!-- chunk: 5.3 RBAC 配置 -->## 5.3 RBAC 配置
+## 5.3 RBAC 配置
 
 ```yaml
 # ConfigMap: argocd-rbac-cm
@@ -550,7 +556,7 @@ scopes: '[groups]'
 
 <!-- chunk: 六、多环境管理策略 -->## 六、多环境管理策略
 
-#<!-- chunk: 6.1 推荐目录结构 -->## 6.1 推荐目录结构
+## 6.1 推荐目录结构
 
 ```
 gitops-repo/
@@ -583,7 +589,7 @@ gitops-repo/
         └── apps.yaml
 ```
 
-#<!-- chunk: 6.2 环境晋升流程 -->## 6.2 环境晋升流程
+## 6.2 环境晋升流程
 
 ```yaml
 # Kustomize overlay 示例 - production
@@ -593,8 +599,7 @@ kind: Kustomization
 resources:
   - ../../base/api
 patches:
-  - target:
-      kind: Deployment
+  - target: "`kind: Deployment`"
       name: api
     patch: |
       - op: replace
@@ -612,7 +617,7 @@ patches:
 
 <!-- chunk: 七、监控与回滚 -->## 七、监控与回滚
 
-#<!-- chunk: 7.1 Prometheus 监控 -->## 7.1 Prometheus 监控
+## 7.1 Prometheus 监控
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -632,7 +637,7 @@ spec:
     interval: 30s
 ```
 
-#<!-- chunk: 7.2 关键告警规则 -->## 7.2 关键告警规则
+## 7.2 关键告警规则
 
 ```yaml
 - alert: ArgoCDAppSyncFailed
@@ -662,7 +667,7 @@ spec:
     summary: "Controller 协调延迟过高"
 ```
 
-#<!-- chunk: 7.3 回滚操作 -->## 7.3 回滚操作
+## 7.3 回滚操作
 
 ```bash
 # 方式一: CLI 回滚
@@ -717,7 +722,7 @@ argocd admin import < argocd-backup.yaml
 
 <!-- chunk: 九、故障排查 -->## 九、故障排查
 
-#<!-- chunk: 9.1 常用排查命令 -->## 9.1 常用排查命令
+## 9.1 常用排查命令
 
 ```bash
 # 应用状态检查
@@ -738,7 +743,7 @@ argocd app get <app> --refresh --hard
 kubectl describe application <app> -n argocd
 ```
 
-#<!-- chunk: 9.2 常见问题 -->## 9.2 常见问题
+## 9.2 常见问题
 
 ```yaml
 同步失败:
@@ -770,7 +775,7 @@ Secret 管理问题:
 
 <!-- chunk: 十、Argo CD 高级运维 -->## 十、Argo CD 高级运维
 
-#<!-- chunk: 10.1 大规模部署优化 -->## 10.1 大规模部署优化
+## 10.1 大规模部署优化
 
 当管理 500+ 应用时，Argo CD Controller 的性能优化变得至关重要。主要的优化手段包括：增加状态处理器（status-processors）和操作处理器（operation-processors）的并发数、配置资源排除规则减少不必要的监控、启用 Server-Side Apply 减少 API Server 负载。
 
@@ -793,7 +798,7 @@ controller:
       cpu: 4000m
 ```
 
-#<!-- chunk: 10.2 Resource Hook 深度实践 -->## 10.2 Resource Hook 深度实践
+## 10.2 Resource Hook 深度实践
 
 Resource Hook 是 Argo CD 在同步过程中执行自定义逻辑的机制。PreSync Hook 在同步前执行（如数据库迁移），Sync Hook 在同步过程中执行（如通知），PostSync Hook 在同步完成后执行（如冒烟测试），SyncFail Hook 在同步失败时执行（如告警通知）。
 
@@ -842,9 +847,12 @@ spec:
       restartPolicy: Never
 ```
 
-#<!-- chunk: 10.3 升级与维护 -->## 10.3 升级与维护
+## 10.3 升级与维护
 
 Argo CD 的升级遵循 N-1 路径，即可以从前一个 minor 版本直接升级到当前版本。建议在升级前备份配置，在 staging 环境验证升级结果后再升级生产环境。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 升级步骤
@@ -866,7 +874,7 @@ kubectl get applications -n argocd
 
 <!-- chunk: 十一、Argo CD 多集群管理 -->## 十一、Argo CD 多集群管理
 
-#<!-- chunk: 11.1 集群注册与生命周期 -->## 11.1 集群注册与生命周期
+## 11.1 集群注册与生命周期
 
 Argo CD 支持管理多个 Kubernetes 集群，通过集群注册机制将目标集群添加到 Argo CD 的管理范围。集群注册方式包括：通过 `argocd cluster add` 命令自动配置 ServiceAccount 和 RBAC、手动导入 kubeconfig 文件、以及通过 GitOps 方式管理集群 Secret。
 
@@ -884,7 +892,7 @@ argocd cluster list
 argocd cluster list -l environment=production
 ```
 
-#<!-- chunk: 11.2 ApplicationSet 集群生成器 -->## 11.2 ApplicationSet 集群生成器
+## 11.2 ApplicationSet 集群生成器
 
 ApplicationSet 的 Cluster Generator 可以自动为每个注册的集群生成 Application，实现"一次定义，多集群部署"的模式。结合集群标签，可以实现精细化的部署目标选择。
 
@@ -919,7 +927,7 @@ spec:
           selfHeal: true
 ```
 
-#<!-- chunk: 11.3 集群权限隔离 -->## 11.3 集群权限隔离
+## 11.3 集群权限隔离
 
 在多租户环境中，不同团队只能部署到特定的集群和命名空间。Argo CD 通过 Project 的 cluster 资源白名单实现权限隔离，确保团队 A 无法将应用部署到团队 B 的集群。
 
@@ -951,7 +959,7 @@ spec:
 
 <!-- chunk: 十二、Argo CD 与 Helm 深度集成 -->## 十二、Argo CD 与 Helm 深度集成
 
-#<!-- chunk: 12.1 Helm Chart 管理策略 -->## 12.1 Helm Chart 管理策略
+## 12.1 Helm Chart 管理策略
 
 Argo CD 原生支持 Helm Chart 的部署和管理。在企业环境中，Helm Chart 的版本管理、Value 文件组织和多环境差异化配置是关键挑战。推荐使用"Chart + Overlay"模式：基础 Chart 定义在独立仓库中，环境差异通过 Argo CD 的 `helm.parameters` 或 Kustomize `patchesStrategicMerge` 实现。
 
@@ -988,7 +996,7 @@ spec:
     namespace: myapp
 ```
 
-#<!-- chunk: 12.2 Helm Hook 与 Argo CD Sync Hook 协调 -->## 12.2 Helm Hook 与 Argo CD Sync Hook 协调
+## 12.2 Helm Hook 与 Argo CD Sync Hook 协调
 
 Helm 的 Hook 机制（如 `helm.sh/hook`）和 Argo CD 的 Resource Hook（如 `argocd.argoproj.io/hook`）可能产生冲突。推荐的最佳实践是：在 Argo CD 管理的 Chart 中，使用 Argo CD 的 Resource Hook 替代 Helm Hook，避免两者同时触发导致不可预期的行为。
 
@@ -1017,7 +1025,7 @@ spec:
 
 Argo CD 可以与多种 Service Mesh 集成，实现更精细的流量管理和安全控制。与 Istio 集成时，Argo CD 管理 VirtualService 和 DestinationRule 配置，Argo Rollouts 控制金丝雀流量的切换。与 Linkerd 集成时，Argo CD 管理 Service Profile 和 Traffic Split 配置。与 AWS App Mesh 集成时，Argo CD 管理 Virtual Router 和 Virtual Node 配置。所有这些配置都通过 GitOps 流程管理，确保变更可追踪、可回滚。
 
-#<!-- chunk: 13.1 Istio 流量管理 -->## 13.1 Istio 流量管理
+## 13.1 Istio 流量管理
 
 ```yaml
 # Argo Rollouts + Istio 流量管理
@@ -1049,7 +1057,7 @@ spec:
         - setWeight: 100
 ```
 
-#<!-- chunk: 13.2 Argo CD Notifications Controller -->## 13.2 Argo CD Notifications Controller
+## 13.2 Argo CD Notifications Controller
 
 Argo CD Notifications Controller 可以在 Application 状态变化时自动发送通知到多种渠道。通过配置 Trigger 和 Template，可以精确控制通知内容和触发条件，确保团队及时了解部署状态。
 
@@ -1075,7 +1083,7 @@ spec:
 
 <!-- chunk: 十四、Argo CD 最佳实践总结 -->## 十四、Argo CD 最佳实践总结
 
-#<!-- chunk: 14.1 生产环境 Checklist -->## 14.1 生产环境 Checklist
+## 14.1 生产环境 Checklist
 
 ```yaml
 Argo CD 生产环境部署检查清单:
@@ -1101,7 +1109,7 @@ Argo CD 生产环境部署检查清单:
     - 配置日志级别和审计日志
 ```
 
-#<!-- chunk: 14.2 常见错误与解决方案 -->## 14.2 常见错误与解决方案
+## 14.2 常见错误与解决方案
 
 ```yaml
 常见问题:
@@ -1141,7 +1149,7 @@ Argo CD 生产环境部署检查清单:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-08-release-change-management MOC
-- [[domain-08-release-change-management/README|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
+- [[domain-08-release-change-management/README.md|Domain 08: GitOps与CI/CD (GitOps & CI/CD)]]
 - Domain-23 GitOps & CI/CD — 开源项目索引
 - Argo CD企业级GitOps实践指南
 - Jenkins企业级CI/CD流水线深度实践
@@ -1162,4 +1170,4 @@ Argo CD 生产环境部署检查清单:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

@@ -21,7 +21,6 @@ intent_queries:
 trigger_keywords:
 - Windows
 - Storage
-- Windows
 - 存储
 - dictionary
 prerequisites:
@@ -34,7 +33,7 @@ created: "2026-05-23"
 
 ## 概述
 
-Windows 节点上的存储行为与 Linux 节点存在显著差异，主要是由于 Windows 的文件系统架构、NTFS、注册表和 SAM（Security Account Manager）数据库的隔离机制。[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 在 Windows 上支持部分卷类型和功能，但也有一些 Linux 特有的功能不被支持。
+Windows 节点上的存储行为与 Linux 节点存在显著差异，主要是由于 Windows 的文件系统架构、NTFS、注册表和 SAM（Security Account Manager）数据库的隔离机制。[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 在 Windows 上支持部分卷类型和功能，但也有一些 Linux 特有的功能不被支持。
 
 ## 核心概念/原理
 
@@ -176,3 +175,9 @@ kubectl get pod <pod> -o jsonpath='{.spec.containers[0].volumeMounts}' | jq .
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/windows-storage/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/storage/ceph.md|Ceph]]
+- [[domain-17-system-foundation/topic-dictionary/storage/cloudnativepg.md|CloudNativePG 云原生 PostgreSQL]]
+- [[domain-17-system-foundation/topic-dictionary/storage/composefs.md|ComposeFS 只读文件系统]]

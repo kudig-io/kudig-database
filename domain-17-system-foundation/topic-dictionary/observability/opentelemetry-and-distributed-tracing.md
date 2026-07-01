@@ -38,6 +38,7 @@ prerequisites:
 - tracing-basics
 - observability-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # [[OpenTelemetry|OpenTelemetry]] 与分布式链路追踪
@@ -160,6 +161,6 @@ Istio、Linkerd、Cilium Service Mesh 均可自动生成分布式追踪数据并
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

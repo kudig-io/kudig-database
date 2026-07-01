@@ -47,7 +47,7 @@ Source: [v1.20.3](https://github.com/kubernetes/kops/releases/tag/v1.20.3)
 
 # Significant changes
 
-* Default [[Container Runtime|container runtime]] is now set to `[[containerd|containerd]]` for new clusters running [[Kubernetes|Kubernetes]] 1.20.0+.
+* Default [[concepts/container-runtime.md|container runtime]] is now set to `[[containerd|containerd]]` for new clusters running [[Kubernetes|Kubernetes]] 1.20.0+.
 
 * Added experimental Azure support. To get started check the [docs](https://kops.sigs.k8s.io/getting_started/azure/)
 

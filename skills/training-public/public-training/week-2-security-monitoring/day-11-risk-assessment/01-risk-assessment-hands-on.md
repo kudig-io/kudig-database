@@ -68,7 +68,7 @@ created: "2026-05-23"
 | API Server | 未授权访问、提权 | RBAC + 审计日志 + 认证 |
 | [[etcd|etcd]] | 数据泄露 | TLS + 网络隔离 + 加密 |
 | [[kubelet|Kubelet]] | 容器逃逸 | RBAC + 静态 Pod + PSP |
-| [[Container Runtime|Container Runtime]] | 权限过大 | 最小化 capabilities |
+| [[concepts/container-runtime.md|Container Runtime]] | 权限过大 | 最小化 capabilities |
 | 网络 | 横向移动 | [[NetworkPolicy|NetworkPolicy]] + CNI 隔离 |
 
 ---
@@ -136,6 +136,9 @@ chmod +x check-rbac.sh
 
 ### 3.1 检测特权 Pod
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 查找 privileged Pod
 kubectl get pods -A -o yaml | grep -E "privileged: true" | head -20
@@ -166,10 +169,6 @@ kubectl port-forward -n popeye svc/popeye 8080:80
 # 限制 Pod 安全上下文
 apiVersion: policy/v1beta1
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 kind: PodSecurityPolicy
 metadata:
   name: restricted-psp
@@ -198,6 +197,9 @@ spec:
 ## 4. 网络安全风险
 
 ### 4.1 检测未隔离的命名空间
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 检查命名空间是否有 NetworkPolicy
@@ -443,7 +445,7 @@ estimated_read_time: 50min
 related_domains:
   - domain-05-security-compliance
   - domain-10-troubleshooting-diagnostics
-  - domain-25-[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security|cloud-native-security]]
+  - domain-25-[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]
 related_topics:
   - security
   - rbac
@@ -455,4 +457,5 @@ related:
   - domain-05-security-compliance/05-pod-security-standards.md
   - domain-05-security-compliance/01-falco-cloud-native-security.md
 ---
+```
 ```

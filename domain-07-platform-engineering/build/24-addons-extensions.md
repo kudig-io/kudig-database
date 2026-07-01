@@ -71,7 +71,7 @@ created: "2026-05-23"
 
 # 14 - 附加组件和扩展表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/concepts/cluster-administration/addons](https://kubernetes.io/docs/concepts/cluster-administration/addons/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/cluster-administration/addons](https://kubernetes.io/docs/concepts/cluster-administration/addons/)
 
 <!-- chunk: 必备附加组件 -->
 ## 必备附加组件
@@ -339,6 +339,9 @@ data:
 
 ### cert-manager 生产配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 安装cert-manager
 helm repo add jetstack https://charts.jetstack.io
@@ -405,6 +408,9 @@ spec:
 
 ### ArgoCD GitOps 生产配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 安装ArgoCD
 kubectl create namespace argocd
@@ -456,6 +462,9 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 | **Service Mesh** | 年度 | 金丝雀升级 | 卸载Sidecar |
 
 ### Helm组件升级命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 查看可升级版本
@@ -556,6 +565,9 @@ wget -O- http://<service>.<namespace>.svc.cluster.local
 ```
 
 ### Ingress故障排查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查Ingress配置
@@ -702,7 +714,7 @@ subjects:
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Platform Ops Domain (平台运维领域)]]
+- [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
 - Domain-9 平台运维 — 开源项目索引
 - 平台运维概述
 - 集群生命周期管理

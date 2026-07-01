@@ -91,9 +91,9 @@ k8s_versions:
 
 <!-- chunk: 🌐 边缘计算架构 -->## 🌐 边缘计算架构
 
-#<!-- chunk: 边缘节点分类 -->## 边缘节点分类
+## 边缘节点分类
 
-##<!-- chunk: 1. 微边缘节点 (Micro Edge) -->## 1. 微边缘节点 (Micro Edge)
+## 1. 微边缘节点 (Micro Edge)
 ```yaml
 # 资源受限节点配置
 apiVersion: v1
@@ -146,7 +146,7 @@ spec:
         emptyDir: {}
 ```
 
-##<!-- chunk: 2. 小边缘节点 (Mini Edge) -->## 2. 小边缘节点 (Mini Edge)
+## 2. 小边缘节点 (Mini Edge)
 ```yaml
 # 小边缘节点配置
 apiVersion: v1
@@ -203,9 +203,9 @@ spec:
           storage: 10Gi
 ```
 
-#<!-- chunk: 网络架构设计 -->## 网络架构设计
+## 网络架构设计
 
-##<!-- chunk: 1. 边缘网络拓扑 -->## 1. 边缘网络拓扑
+## 1. 边缘网络拓扑
 ```yaml
 # 边缘网络策略配置
 apiVersion: cilium.io/v2
@@ -230,7 +230,7 @@ spec:
     - 172.16.0.0/12
 ```
 
-##<!-- chunk: 2. 离线运行支持 -->## 2. 离线运行支持
+## 2. 离线运行支持
 ```yaml
 # 线运行DaemonSet配置
 apiVersion: apps/v1
@@ -270,9 +270,9 @@ spec:
 
 <!-- chunk: 📦 镜像管理策略 -->## 📦 镜像管理策略
 
-#<!-- chunk: 轻量化镜像构建 -->## 轻量化镜像构建
+## 轻量化镜像构建
 
-##<!-- chunk: 1. 多阶段构建优化 -->## 1. 多阶段构建优化
+## 1. 多阶段构建优化
 ```dockerfile
 # 多阶段构建Dockerfile
 FROM golang:1.19-alpine AS builder
@@ -289,7 +289,7 @@ CMD ["./main"]
 # 镜像大小对比：原始 1.2GB → 优化后 15MB
 ```
 
-##<!-- chunk: 2. 镜像分层缓存 -->## 2. 镜像分层缓存
+## 2. 镜像分层缓存
 ```yaml
 # Kaniko缓存配置
 apiVersion: batch/v1
@@ -317,9 +317,9 @@ spec:
           name: build-context
 ```
 
-#<!-- chunk: 镜像预推送到边缘 -->## 镜像预推送到边缘
+## 镜像预推送到边缘
 
-##<!-- chunk: 1. 镜像预加载脚本 -->## 1. 镜像预加载脚本
+## 1. 镜像预加载脚本
 ```bash
 #!/bin/bash
 # 边缘节点镜像预加载脚本
@@ -341,7 +341,7 @@ scp /tmp/*.tar.gz edge-node:/tmp/
 ssh edge-node "for file in /tmp/*.tar.gz; do docker load -i \$file; done"
 ```
 
-##<!-- chunk: 2. 镜像仓库边缘缓存 -->## 2. 镜像仓库边缘缓存
+## 2. 镜像仓库边缘缓存
 ```yaml
 # Registry边缘缓存配置
 apiVersion: apps/v1
@@ -388,9 +388,9 @@ spec:
 
 <!-- chunk: 🔧 资源管理优化 -->## 🔧 资源管理优化
 
-#<!-- chunk: 节点资源分配 -->## 节点资源分配
+## 节点资源分配
 
-##<!-- chunk: 1. 系统保留资源 -->## 1. 系统保留资源
+## 1. 系统保留资源
 ```yaml
 # Kubelet资源配置
 apiVersion: v1
@@ -420,7 +420,7 @@ data:
       imagefs.available: "2Gi"
 ```
 
-##<!-- chunk: 2. 边缘工作负载优先级 -->## 2. 边缘工作负载优先级
+## 2. 边缘工作负载优先级
 ```yaml
 # PriorityClass配置
 apiVersion: scheduling.k8s.io/v1
@@ -440,9 +440,9 @@ globalDefault: true
 description: "Default priority class for edge workloads"
 ```
 
-#<!-- chunk: 存储优化策略 -->## 存储优化策略
+## 存储优化策略
 
-##<!-- chunk: 1. 本地存储管理 -->## 1. 本地存储管理
+## 1. 本地存储管理
 ```yaml
 # Local PV配置
 apiVersion: v1
@@ -468,7 +468,7 @@ spec:
           - edge-node-1
 ```
 
-##<!-- chunk: 2. 数据持久化策略 -->## 2. 数据持久化策略
+## 2. 数据持久化策略
 ```yaml
 # 边缘数据库StatefulSet
 apiVersion: apps/v1
@@ -525,9 +525,9 @@ spec:
 
 <!-- chunk: 🛡️ 安全加固措施 -->## 🛡️ 安全加固措施
 
-#<!-- chunk: 边缘节点安全 -->## 边缘节点安全
+## 边缘节点安全
 
-##<!-- chunk: 1. 最小化攻击面 -->## 1. 最小化攻击面
+## 1. 最小化攻击面
 ```yaml
 # 边缘节点安全配置
 apiVersion: apps/v1
@@ -588,7 +588,7 @@ spec:
           path: /etc
 ```
 
-##<!-- chunk: 2. 网络策略强化 -->## 2. 网络策略强化
+## 2. 网络策略强化
 ```yaml
 # 边缘网络安全策略
 apiVersion: networking.k8s.io/v1
@@ -621,9 +621,9 @@ spec:
       port: 53
 ```
 
-#<!-- chunk: 身份认证增强 -->## 身份认证增强
+## 身份认证增强
 
-##<!-- chunk: 1. 证书轮换自动化 -->## 1. 证书轮换自动化
+## 1. 证书轮换自动化
 ```yaml
 # Cert-Manager配置
 apiVersion: cert-manager.io/v1
@@ -647,7 +647,7 @@ spec:
     size: 2048
 ```
 
-##<!-- chunk: 2. 边缘设备认证 -->## 2. 边缘设备认证
+## 2. 边缘设备认证
 ```yaml
 # SPIFFE/SPIRE配置
 apiVersion: spire.spiffe.io/v1alpha1
@@ -667,9 +667,9 @@ spec:
 
 <!-- chunk: 📊 监控与运维 -->## 📊 监控与运维
 
-#<!-- chunk: 边缘监控架构 -->## 边缘监控架构
+## 边缘监控架构
 
-##<!-- chunk: 1. 轻量化监控代理 -->## 1. 轻量化监控代理
+## 1. 轻量化监控代理
 ```yaml
 # Node Exporter轻量化配置
 apiVersion: apps/v1
@@ -709,7 +709,7 @@ spec:
             memory: 128Mi
 ```
 
-##<!-- chunk: 2. 边缘日志收集 -->## 2. 边缘日志收集
+## 2. 边缘日志收集
 ```yaml
 # Fluent Bit边缘配置
 apiVersion: v1
@@ -754,9 +754,9 @@ data:
         Port  24224
 ```
 
-#<!-- chunk: 远程运维支持 -->## 远程运维支持
+## 远程运维支持
 
-##<!-- chunk: 1. SSH隧道配置 -->## 1. SSH隧道配置
+## 1. SSH隧道配置
 ```yaml
 # 反向SSH隧道Deployment
 apiVersion: apps/v1
@@ -793,7 +793,7 @@ spec:
             add: ["NET_BIND_SERVICE"]
 ```
 
-##<!-- chunk: 2. 远程诊断工具 -->## 2. 远程诊断工具
+## 2. 远程诊断工具
 ```bash
 #!/bin/bash
 # 边缘节点诊断脚本
@@ -827,7 +827,7 @@ echo "Diagnostic package created: ${DIAG_DIR}.tar.gz"
 
 <!-- chunk: 🔧 部署实施检查清单 -->## 🔧 部署实施检查清单
 
-#<!-- chunk: 预部署准备 -->## 预部署准备
+## 预部署准备
 - [ ] 评估边缘节点硬件规格和网络条件
 - [ ] 设计适合的边缘架构拓扑
 - [ ] 准备轻量化的容器镜像
@@ -835,7 +835,7 @@ echo "Diagnostic package created: ${DIAG_DIR}.tar.gz"
 - [ ] 设置监控告警机制
 - [ ] 制定远程运维流程
 
-#<!-- chunk: 部署实施 -->## 部署实施
+## 部署实施
 - [ ] 在边缘节点安装轻量化Kubernetes发行版
 - [ ] 配置节点标签和污点
 - [ ] 部署必要的系统组件
@@ -843,7 +843,7 @@ echo "Diagnostic package created: ${DIAG_DIR}.tar.gz"
 - [ ] 测试应用部署和扩缩容
 - [ ] 验证监控数据收集
 
-#<!-- chunk: 运营维护 -->## 运营维护
+## 运营维护
 - [ ] 建立定期健康检查机制
 - [ ] 实施自动化故障恢复
 - [ ] 优化资源使用效率
@@ -859,9 +859,9 @@ echo "Diagnostic package created: ${DIAG_DIR}.tar.gz"
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 04-企业级监控体系
 - 05-日志收集分析平台
@@ -873,11 +873,11 @@ echo "Diagnostic package created: ${DIAG_DIR}.tar.gz"
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-production-architecture-design-principles]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-production-architecture-design-principles]]
 - 02-multi-cloud-hybrid-deployment-strategy
 - 04-enterprise-monitoring-system
 - 05-logging-collection-analysis-platform
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

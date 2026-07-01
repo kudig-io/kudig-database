@@ -94,8 +94,6 @@ created: "2026-05-23"
 - **日志平台访问**: 需要 Elasticsearch/Loki/Kibana/Grafana 的查询权限
 - **监控系统**: Prometheus + 日志采集器的 metrics exporter
 
-> ⚠️ **重要**: 本 Skill 覆盖 Fluentd、Fluent Bit、Vector 三种主流采集器，以及 Elasticsearch 和 Loki 两种主流存储后端。审计日志管理问题也在覆盖范围内。
-
 ---
 
 ## 2. 症状识别
@@ -197,6 +195,10 @@ kubectl logs -n logging -l app=vector --tail=30 --since=5m 2>/dev/null | grep -i
 > - 日志中出现 `connection refused`、`429`、`disk full` → 继续 T3
 
 **Step T3**: 验证日志平台可用性（60 秒）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Elasticsearch 健康检查
 kubectl exec -n logging $(kubectl get pod -n logging -l app=elasticsearch -o jsonpath='{.items[0].metadata.name}') -- curl -s localhost:9200/_cluster/health?pretty 2>/dev/null
@@ -335,6 +337,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
 
 **Step D1.5**: 检查日志源目录
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 在某个采集器 Pod 中检查日志源目录
   POD_NAME=$(kubectl get pods -n logging -l app=fluent-bit -o jsonpath='{.items[0].metadata.name}' 2>/dev/null || kubectl get pods -n logging -l app=fluentd -o jsonpath='{.items[0].metadata.name}')
@@ -382,6 +388,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
 
 **Step D2.1**: 检查 Buffer 状态
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # Fluentd buffer 状态（通过 metrics）
   kubectl exec -n logging $(kubectl get pod -n logging -l app=fluentd -o jsonpath='{.items[0].metadata.name}') -- curl -s localhost:24231/metrics 2>/dev/null | grep -E 'fluentd_output_status_buffer|fluentd_output_status_retry'
@@ -403,6 +413,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
 
 **Step D2.2**: 检查 Buffer 目录磁盘空间
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # Fluentd buffer 目录
   kubectl exec -n logging $(kubectl get pod -n logging -l app=fluentd -o jsonpath='{.items[0].metadata.name}') -- df -h /var/log/fluentd-buffers 2>/dev/null
@@ -424,6 +438,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
 
 **Step D2.3**: 检查背压状态
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # Fluent Bit backpressure 指标
   kubectl exec -n logging $(kubectl get pod -n logging -l app=fluent-bit -o jsonpath='{.items[0].metadata.name}') -- curl -s localhost:2020/api/v1/metrics 2>/dev/null | grep -E 'paused|backpressure'
@@ -444,6 +462,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
 
 **Step D2.4**: 检查输出插件错误
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # Fluentd 输出插件状态
   kubectl exec -n logging $(kubectl get pod -n logging -l app=fluentd -o jsonpath='{.items[0].metadata.name}') -- curl -s localhost:24231/metrics 2>/dev/null | grep -E 'fluentd_output_status_emit_records|fluentd_output_status_emit_count|fluentd_output_status_num_errors'
@@ -464,6 +486,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
 
 **Step D2.5**: 检查到存储后端的连接
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 从采集器 Pod 测试 Elasticsearch 连接
   kubectl exec -n logging $(kubectl get pod -n logging -l app=fluent-bit -o jsonpath='{.items[0].metadata.name}') -- \
@@ -531,6 +557,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
 
 **Step D2.8**: 检查采集速率
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # Fluentd 输入速率
   kubectl exec -n logging $(kubectl get pod -n logging -l app=fluentd -o jsonpath='{.items[0].metadata.name}') -- curl -s localhost:24231/metrics 2>/dev/null | grep 'fluentd_input_status_num_records_total'
@@ -559,6 +589,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
 
 **Step D3.1**: 检查 Elasticsearch 集群健康
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 集群健康状态
   kubectl exec -n logging $(kubectl get pod -n logging -l app=elasticsearch -o jsonpath='{.items[0].metadata.name}' 2>/dev/null) -- \
@@ -733,6 +767,11 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   kubectl logs <pod-name> --tail=5 | head -3
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 备份当前配置
   kubectl get cm -n logging fluent-bit-config -o yaml > /tmp/fluent-bit-config-backup.yaml
@@ -753,6 +792,11 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   # 在日志平台查询最近的日志，确认时间戳正确
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl apply -f /tmp/fluent-bit-config-backup.yaml
   kubectl rollout restart ds -n logging fluent-bit
@@ -766,6 +810,11 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   kubectl logs <java-pod> --tail=50 | grep -A 5 'Exception\|at '
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 备份配置
   kubectl get cm -n logging fluent-bit-config -o yaml > /tmp/fluent-bit-config-backup.yaml
@@ -799,6 +848,11 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   # 在日志平台查询 Java exception，确认 stacktrace 已合并为单条记录
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl apply -f /tmp/fluent-bit-config-backup.yaml
   kubectl rollout restart ds -n logging fluent-bit
@@ -815,6 +869,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   ssh <node-ip> "du -sh /var/log/pods/*/* | sort -rh | head -10"
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 修改 kubelet 配置（需要在所有节点执行）
   ssh <node-ip> "cat >> /var/lib/kubelet/config.yaml << EOF
@@ -835,6 +893,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   kubectl get node <node-name>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 恢复原配置并重启 kubelet
   ssh <node-ip> "vim /var/lib/kubelet/config.yaml"
@@ -849,6 +911,11 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   kubectl logs <pod-name> --tail=3 | grep -oE '\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 备份并更新 ConfigMap
   kubectl get cm -n logging fluent-bit-config -o yaml > /tmp/fluent-bit-config-backup.yaml
@@ -867,6 +934,11 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   # 检查新日志的 @timestamp 是否与应用日志时间一致
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl apply -f /tmp/fluent-bit-config-backup.yaml
   kubectl rollout restart ds -n logging fluent-bit
@@ -889,6 +961,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   kubectl get ds -n logging fluent-bit -o jsonpath='{.spec.template.spec.containers[0].resources}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 备份当前配置
   kubectl get ds -n logging fluent-bit -o yaml > /tmp/fluent-bit-ds-backup.yaml
@@ -912,6 +988,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   # </buffer>
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 等待滚动更新完成
   kubectl rollout status ds -n logging fluent-bit
@@ -923,6 +1003,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   kubectl exec -n logging $(kubectl get pod -n logging -l app=fluent-bit -o jsonpath='{.items[0].metadata.name}') -- curl -s localhost:2020/api/v1/metrics | grep buffer
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f /tmp/fluent-bit-ds-backup.yaml
   ```
@@ -932,6 +1016,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
 - **影响说明**: 更新连接配置后需要重启采集器，期间日志会暂时积压在 buffer 中。
 - **审批提示**: "建议更新日志存储后端连接配置，需要重启采集器 Pod。是否批准？"
 - **前置检查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 测试当前连接
   kubectl exec -n logging $(kubectl get pod -n logging -l app=fluent-bit -o jsonpath='{.items[0].metadata.name}') -- \
@@ -941,6 +1029,11 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   kubectl get secret -n logging es-credentials -o yaml 2>/dev/null
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 更新认证凭据（示例）
   kubectl create secret generic -n logging es-credentials \
@@ -958,6 +1051,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   kubectl rollout restart ds -n logging fluent-bit
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   kubectl rollout status ds -n logging fluent-bit
   
@@ -970,6 +1067,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   kubectl logs -n logging -l app=fluent-bit --tail=20 | grep -i error
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 恢复旧凭据并重启
   kubectl rollout undo ds -n logging fluent-bit
@@ -1058,6 +1159,11 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   # 在日志平台搜索 password=, token=, apikey= 等
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 备份配置
   kubectl get cm -n logging fluent-bit-config -o yaml > /tmp/fluent-bit-config-backup.yaml
@@ -1096,6 +1202,12 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
   # 在日志平台搜索，确认敏感信息已被替换为 ***REDACTED***
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   kubectl apply -f /tmp/fluent-bit-config-backup.yaml
   kubectl delete cm -n logging fluent-bit-lua-scripts
@@ -1244,19 +1356,32 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
      kubectl get secret -n logging -o yaml > /tmp/logging-secret-backup.yaml
      ```
   3. **删除旧的日志管道组件**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+
      ```bash
      # 警告：此操作会导致日志采集完全停止
-     kubectl delete ds -n logging --all
-     kubectl delete deployment -n logging --all
-     kubectl delete sts -n logging --all
+     kubectl delete ds -n logging --all  # ⚠️ 批量删除，波及面大
+     kubectl delete deployment -n logging --all  # ⚠️ 批量删除，波及面大
+     kubectl delete sts -n logging --all  # ⚠️ 批量删除，波及面大
      ```
   4. **清理残留资源**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+
      ```bash
-     kubectl delete pvc -n logging --all
-     kubectl delete cm -n logging --all
-     kubectl delete secret -n logging --all
+     kubectl delete pvc -n logging --all  # ⚠️ 批量删除，波及面大
+     kubectl delete cm -n logging --all  # ⚠️ 批量删除，波及面大
+     kubectl delete secret -n logging --all  # ⚠️ 批量删除，波及面大
      ```
   5. **重新部署日志管道**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
      ```bash
      # 使用 Helm 或标准 YAML 重新部署
      helm install fluent-bit fluent/fluent-bit -n logging
@@ -1265,6 +1390,10 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
      kubectl apply -f logging-stack.yaml
      ```
   6. **恢复配置和数据**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
      ```bash
      # 恢复自定义配置
      kubectl apply -f /tmp/logging-cm-backup.yaml
@@ -1281,6 +1410,9 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
 ## 7. 验证确认
 
 ### 7.1 即时验证（修复后 1-2 分钟内）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # V1: 确认所有采集器 Pod Running
@@ -1512,5 +1644,5 @@ kubectl exec -n logging $(kubectl get pod -n logging -l app=fluent-bit -o jsonpa
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

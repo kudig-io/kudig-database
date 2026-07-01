@@ -34,7 +34,7 @@ title: Day 9: RAM 账号管理
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - ACK RAM authorization [[entities/kubernetes|[[Kubernetes|kubernetes]]]] RBAC integration
+  - ACK RAM authorization [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] RBAC integration
   - aliyun cs grant_permissions RAM user cluster access
   - RAM role assume role Kubernetes
   - Multi-team RBAC namespace isolation
@@ -179,6 +179,9 @@ aliyun ram CreatePolicy \
 
 ### 任务 3: 为 RAM 用户配置 kubeconfig (45min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. RAM 用户获取 kubeconfig (需要 RAM 用户自己的 AK/SK)
 # 方式一: 通过控制台下载
@@ -197,6 +200,10 @@ kubectl auth can-i --list
 ```
 
 ### 任务 4: 多团队权限管理方案 (30min)
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 场景: 为开发、测试、运维三个团队配置不同权限
@@ -220,7 +227,7 @@ kubectl get pods -n dev    # 成功
 kubectl get pods -n test   # 失败 (无权限)
 
 # 清理
-kubectl delete namespace dev test
+kubectl delete namespace dev test  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
 ---

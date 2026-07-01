@@ -435,6 +435,10 @@ graph TB
 
 ### 演示 1：Deployment 滚动更新
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 步骤 1: 创建 Deployment
 kubectl create deployment web-app --image=nginx:1.24 --replicas=5
@@ -467,6 +471,9 @@ kubectl rollout resume deployment/web-app
 ```
 
 ### 演示 2：StatefulSet 部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 创建 Headless Service
@@ -530,6 +537,9 @@ kubectl get pvc -l app=nginx-sts
 
 ### 演示 3：DaemonSet 部署
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
@@ -575,6 +585,9 @@ kubectl get pods -n kube-system -l app=log-collector -o wide
 
 ### 演示 4：CronJob 定时任务
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: batch/v1
@@ -611,6 +624,10 @@ kubectl create job manual-report --from=cronjob/daily-report
 ```
 
 ### 演示 5：HPA 弹性伸缩
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 步骤 1: 部署带资源请求的应用

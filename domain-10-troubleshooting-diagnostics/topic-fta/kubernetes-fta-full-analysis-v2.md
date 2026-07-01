@@ -113,7 +113,7 @@ k8s_versions:
 
 <!-- chunk: 一、故障树总览 -->## 一、故障树总览
 
-#<!-- chunk: 1.1 顶部事件定义表（增强版） -->## 1.1 顶部事件定义表（增强版）
+## 1.1 顶部事件定义表（增强版）
 
 | 编号 | 顶部事件 | 严重程度 | 影响范围 | 典型症状 | ACK 特有 |
 |:---|:---|:---:|:---|:---|:---|
@@ -134,7 +134,7 @@ k8s_versions:
 | TE-15 | 灾难恢复失败 | 🔴 P0 | 业务连续性 | 备份恢复失败/DR 演练失败 | 备份/DR |
 | TE-16 | 可观测性完整性缺失 | 🟡 P2 | 监控盲区 | 关键指标丢失/追踪断裂 | OTel/可观测性 |
 
-#<!-- chunk: 1.2 故障树总览图 (ASCII) -->## 1.2 故障树总览图 (ASCII)
+## 1.2 故障树总览图 (ASCII)
 
 ```
                                     ┌─────────────────────────────────────────────────┐
@@ -170,7 +170,7 @@ k8s_versions:
 
 <!-- chunk: 二、TE-1: 集群完全不可用 🔴 P0 -->## 二、TE-1: 集群完全不可用 🔴 P0
 
-#<!-- chunk: 2.1 完整故障树（5 层深度 + ACK IaaS 层） -->## 2.1 完整故障树（5 层深度 + ACK IaaS 层）
+## 2.1 完整故障树（5 层深度 + ACK IaaS 层）
 
 ```
 TE-1: 集群完全不可用 [OR门] 🔴 P0
@@ -264,7 +264,7 @@ TE-1: 集群完全不可用 [OR门] 🔴 P0
 
 <!-- chunk: 三、TE-2: 应用服务不可用 🔴 P0 -->## 三、TE-2: 应用服务不可用 🔴 P0
 
-#<!-- chunk: 3.1 完整故障树（5 层深度 + ASM/ARMS 层） -->## 3.1 完整故障树（5 层深度 + ASM/ARMS 层）
+## 3.1 完整故障树（5 层深度 + ASM/ARMS 层）
 
 ```
 TE-2: 应用服务不可用 [OR门] 🔴 P0
@@ -364,7 +364,7 @@ TE-2: 应用服务不可用 [OR门] 🔴 P0
 
 <!-- chunk: 四、TE-3: Pod启动失败 🟠 P1 -->## 四、TE-3: Pod启动失败 🟠 P1
 
-#<!-- chunk: 4.1 完整故障树 -->## 4.1 完整故障树
+## 4.1 完整故障树
 
 ```
 TE-3: Pod启动失败 [OR门] 🟠 P1
@@ -423,7 +423,7 @@ TE-3: Pod启动失败 [OR门] 🟠 P1
 
 <!-- chunk: 五、TE-4: 网络通信异常 🟠 P1 -->## 五、TE-4: 网络通信异常 🟠 P1
 
-#<!-- chunk: 5.1 完整故障树（包含 Terway 特有层） -->## 5.1 完整故障树（包含 Terway 特有层）
+## 5.1 完整故障树（包含 Terway 特有层）
 
 ```
 TE-4: 网络通信异常 [OR门] 🟠 P1
@@ -496,7 +496,7 @@ TE-4: 网络通信异常 [OR门] 🟠 P1
 
 <!-- chunk: 六、TE-5: 存储访问失败 🟠 P1 -->## 六、TE-5: 存储访问失败 🟠 P1
 
-#<!-- chunk: 6.1 完整故障树（包含 OSS/CSI 特有层） -->## 6.1 完整故障树（包含 OSS/CSI 特有层）
+## 6.1 完整故障树（包含 OSS/CSI 特有层）
 
 ```
 TE-5: 存储访问失败 [OR门] 🟠 P1
@@ -558,7 +558,7 @@ TE-5: 存储访问失败 [OR门] 🟠 P1
 
 <!-- chunk: 七、TE-6: 资源调度异常 🟡 P2 -->## 七、TE-6: 资源调度异常 🟡 P2
 
-#<!-- chunk: 7.1 完整故障树 -->## 7.1 完整故障树
+## 7.1 完整故障树
 
 ```
 TE-6: 资源调度异常 [OR门] 🟡 P2
@@ -605,7 +605,7 @@ TE-6: 资源调度异常 [OR门] 🟡 P2
 
 <!-- chunk: 八、TE-7: 安全认证失败 🟠 P1 -->## 八、TE-7: 安全认证失败 🟠 P1
 
-#<!-- chunk: 8.1 完整故障树 -->## 8.1 完整故障树
+## 8.1 完整故障树
 
 ```
 TE-7: 安全认证失败 [OR门] 🟠 P1
@@ -657,7 +657,7 @@ TE-7: 安全认证失败 [OR门] 🟠 P1
 
 <!-- chunk: 九、TE-8: 监控告警异常 🟡 P2 -->## 九、TE-8: 监控告警异常 🟡 P2
 
-#<!-- chunk: 9.1 完整故障树（包含 ARMS/MSP 层） -->## 9.1 完整故障树（包含 ARMS/MSP 层）
+## 9.1 完整故障树（包含 ARMS/MSP 层）
 
 ```
 TE-8: 监控告警异常 [OR门] 🟡 P2
@@ -1068,7 +1068,7 @@ TE-16: 可观测性完整性缺失 [OR门] 🟡 P2
 
 <!-- chunk: 十八、底事件完整索引 -->## 十八、底事件完整索引
 
-#<!-- chunk: 18.1 按故障域分类 -->## 18.1 按故障域分类
+## 18.1 按故障域分类
 
 | 故障域 | 底事件数量 | 顶事件覆盖 |
 |:---|:---:|:---|
@@ -1085,7 +1085,7 @@ TE-16: 可观测性完整性缺失 [OR门] 🟡 P2
 | 变更管理 (升级/回滚/配置漂移) | 12+ | TE-13 |
 | 容量/DR (备份/恢复/扩容) | 15+ | TE-14, TE-15 |
 
-#<!-- chunk: 18.2 问题传播路径示例 -->## 18.2 问题传播路径示例
+## 18.2 问题传播路径示例
 
 ```
 路径1: etcd 磁盘满 → API Server 不可用 → 集群不可用
@@ -1108,7 +1108,7 @@ TE-16: 可观测性完整性缺失 [OR门] 🟡 P2
 
 <!-- chunk: 十九、故障树元数据 -->## 十九、故障树元数据
 
-#<!-- chunk: 19.1 版本信息 -->## 19.1 版本信息
+## 19.1 版本信息
 
 ```yaml
 fta_metadata:
@@ -1124,7 +1124,7 @@ fta_metadata:
     multi_cluster: 80%
 ```
 
-#<!-- chunk: 19.2 维护要求 -->## 19.2 维护要求
+## 19.2 维护要求
 
 ```
 更新触发条件:
@@ -1162,28 +1162,28 @@ fta_metadata:
 > **文档版本**: v2.0 Enhanced
 > **生成日期**: 2026-05-18
 > **维护团队**: SRE Team / Platform Team
-> **关联文档**: [ack-fta-generator-v2.md](./[[domain-10-troubleshooting-diagnostics/topic-fta/ack-fta-generator-v2|ack-fta-generator-v2]].md) | [fta-methodology-and-agentic-practices.md](./fta-methodology-and-agentic-practices.md)
+> **关联文档**: [ack-fta-generator-v2.md](./[[domain-10-troubleshooting-diagnostics/topic-fta/ack-fta-generator-v2.md|ack-fta-generator-v2]].md) | [fta-methodology-and-agentic-practices.md](./fta-methodology-and-agentic-practices.md)
 
 ---
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC|topic-fta MOC]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/README|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution|第一章：FTA 起源与发展史]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations|第二章：FTA 数学基础与理论模型]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards|第三章：FTA 符号体系与标准规范]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles|第四章：FTA 方法论核心原则]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/05-fta-construction-process|第五章：FTA 构建完整流程]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/06-fta-verification-and-quality|第六章：FTA 验证与质量保证]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/07-fta-maintenance-and-evolution|第七章：FTA 维护与演进策略]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution|第八章：AI Agent 时代的运维范式革命]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns|第十章：Agent 编排模式与 FTA 逻辑门映射]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|topic-fta MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-index|fta-index]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-methodology-and-agentic-practices|fta-methodology-and-agentic-practices]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis|kubernetes-fta-full-analysis]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/problem-solving-architecture|problem-solving-architecture]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-index.md|fta-index]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-methodology-and-agentic-practices.md|fta-methodology-and-agentic-practices]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/problem-solving-architecture.md|problem-solving-architecture]]

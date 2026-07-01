@@ -56,14 +56,14 @@ created: "2026-05-23"
 
 <!-- chunk: 演讲概述 -->## 演讲概述
 
-#<!-- chunk: 目标受众 -->## 目标受众
+## 目标受众
 
 - 网络初学者：理解 DNS 在 Kubernetes 中的角色
 - SRE 工程师：掌握 CoreDNS 性能调优和故障排查
 - 架构师：设计大规模集群的 DNS 架构方案
 - 应用开发者：理解 Pod DNS 配置对应用的影响
 
-#<!-- chunk: 预计时长 -->## 预计时长
+## 预计时长
 
 | 阶段 | 内容 | 时长 |
 |------|------|------|
@@ -76,7 +76,7 @@ created: "2026-05-23"
 | Q&A | 互动问答 | 15 分钟 |
 | **合计** | | **约 3 小时** |
 
-#<!-- chunk: 核心学习目标 -->## 核心学习目标
+## 核心学习目标
 
 完成本次培训后，学员能够：
 
@@ -87,7 +87,7 @@ created: "2026-05-23"
 5. 排查 DNS 解析失败、5 秒超时等常见问题
 6. 监控 CoreDNS 的关键性能指标并配置告警
 
-#<!-- chunk: 核心要点 -->## 核心要点
+## 核心要点
 
 1. CoreDNS 是集群内部的"电话簿"，所有服务发现依赖它
 2. 理解 DNS 解析规则：FQDN、短域名、搜索域
@@ -115,7 +115,7 @@ created: "2026-05-23"
 
 <!-- chunk: 核心概念讲解 -->## 核心概念讲解
 
-#<!-- chunk: 什么是 CoreDNS？ -->## 什么是 CoreDNS？
+## 什么是 CoreDNS？
 
 CoreDNS 是 Kubernetes 集群内部的 DNS 服务器，从 v1.13 开始取代 kube-dns 成为默认 DNS 方案。它的核心职责是**将服务名称解析为 IP 地址**——当 Pod 想要访问 `my-service` 时，它会向 CoreDNS 查询"这个服务的 IP 是什么？"。
 
@@ -152,7 +152,7 @@ CoreDNS kubernetes 插件查找 Service 记录
 | 社区活跃度 | CNCF 毕业项目 | 已废弃 |
 | 性能 | 更好（Go 实现，无 dnsmasq 瓶颈） | 较差 |
 
-#<!-- chunk: DNS 解析规则详解 -->## DNS 解析规则详解
+## DNS 解析规则详解
 
 **全限定域名 (FQDN)** 格式：
 
@@ -208,7 +208,7 @@ options ndots:5
 2. 增加 DNS 解析延迟
 3. 增加 conntrack 表压力，触发 5 秒超时
 
-#<!-- chunk: CoreDNS 插件架构 -->## CoreDNS 插件架构
+## CoreDNS 插件架构
 
 CoreDNS 采用**插件化**架构，每个功能都通过插件实现：
 
@@ -276,7 +276,7 @@ CoreDNS 采用**插件化**架构，每个功能都通过插件实现：
 | `debug` | 开启调试模式 | 调试 | 仅调试时 |
 | `trace` | OpenTelemetry 追踪 | 可选 | 按需 |
 
-#<!-- chunk: NodeLocal DNSCache -->## NodeLocal DNSCache
+## NodeLocal DNSCache
 
 **解决的问题：**
 
@@ -336,7 +336,7 @@ iptables 规则 (OUTPUT 链)
 
 <!-- chunk: 架构图 -->## 架构图
 
-#<!-- chunk: CoreDNS 整体架构 -->## CoreDNS 整体架构
+## CoreDNS 整体架构
 
 ```mermaid
 graph TB
@@ -378,7 +378,7 @@ graph TB
     style APIServer fill:#fce4ec,stroke:#c62828
 ```
 
-#<!-- chunk: NodeLocal DNSCache 部署架构 -->## NodeLocal DNSCache 部署架构
+## NodeLocal DNSCache 部署架构
 
 ```mermaid
 graph TB
@@ -421,7 +421,7 @@ graph TB
 
 <!-- chunk: 实战演示步骤 -->## 实战演示步骤
 
-#<!-- chunk: 演示 1：CoreDNS 状态检查 -->## 演示 1：CoreDNS 状态检查
+## 演示 1：CoreDNS 状态检查
 
 ```bash
 # 查看 CoreDNS Pod 状态
@@ -451,7 +451,10 @@ kubectl top pods -n kube-system -l k8s-app=kube-dns
 # coredns-5d78c9869d-def34   3m           22Mi
 ```
 
-#<!-- chunk: 演示 2：DNS 解析验证 -->## 演示 2：DNS 解析验证
+## 演示 2：DNS 解析验证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 创建一个临时调试 Pod
@@ -499,7 +502,10 @@ nslookup kubernetes.default
 # Address: 10.96.0.1
 ```
 
-#<!-- chunk: 演示 3：CoreDNS 性能调优 -->## 演示 3：CoreDNS 性能调优
+## 演示 3：CoreDNS 性能调优
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 查看当前 Corefile
@@ -550,7 +556,11 @@ kubectl scale deployment coredns --replicas=3 -n kube-system
 kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
 ```
 
-#<!-- chunk: 演示 4：优化 Pod DNS 配置 -->## 演示 4：优化 Pod DNS 配置
+## 演示 4：优化 Pod DNS 配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 方案 1: 调整 ndots（减少搜索域查询）
@@ -619,7 +629,11 @@ kubectl exec custom-dns -- cat /etc/resolv.conf
 # options ndots:1 timeout:2 attempts:2
 ```
 
-#<!-- chunk: 演示 5：NodeLocal DNSCache 部署 -->## 演示 5：NodeLocal DNSCache 部署
+## 演示 5：NodeLocal DNSCache 部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 步骤 1: 下载 NodeLocal DNSCache YAML
@@ -665,9 +679,13 @@ kubectl exec -it dnsutils -- bash -c \
 
 <!-- chunk: 动手实验 -->## 动手实验
 
-#<!-- chunk: 实验 1：ndots 对比实验 -->## 实验 1：ndots 对比实验
+## 实验 1：ndots 对比实验
 
 **目标**：量化 ndots 参数对 DNS 性能的影响
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 创建默认 ndots:5 的 Pod
@@ -711,53 +729,54 @@ kubectl exec ndots-1 -- nslookup www.google.com
 
 # 4. 使用 tcpdump 抓包验证
 # 在 CoreDNS Pod 上抓包查看查询量
+
 ```
 
 ---
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
 
-#<!-- chunk: Q1: CoreDNS Pod 应该部署多少副本？ -->## Q1: CoreDNS Pod 应该部署多少副本？
+## Q1: CoreDNS Pod 应该部署多少副本？
 
 **回答**: 生产环境建议至少 2 个副本，且使用 podAntiAffinity 确保分布在不同节点上。副本数的计算公式：`副本数 = max(2, ceil(集群节点数 / 50))`。对于 100 节点以上的集群，建议 4-6 个副本。同时配合 HPA（基于 CPU 使用率或 QPS）实现动态扩缩。CoreDNS 的 CPU 消耗主要来自查询处理，建议每个核心处理 5000-10000 QPS。
 
-#<!-- chunk: Q2: ndots 值应该设置成多少？ -->## Q2: ndots 值应该设置成多少？
+## Q2: ndots 值应该设置成多少？
 
 **回答**: 取决于集群内域名的使用模式。如果大部分请求是集群内 Service（点数通常 ≤ 4），保持默认 `ndots:5` 即可。如果大量请求是外部域名，建议降低到 `ndots:2` 或者使用 FQDN（尾部加点）直接解析。最佳实践：为高频外部域名访问的 Pod 单独配置 `dnsConfig`，降低 ndots 并减少 timeout。
 
-#<!-- chunk: Q3: CoreDNS 解析延迟正常范围是多少？ -->## Q3: CoreDNS 解析延迟正常范围是多少？
+## Q3: CoreDNS 解析延迟正常范围是多少？
 
 **回答**: 集群内 Service 解析：< 5ms（命中缓存）到 < 50ms（未命中，需查 Informer 缓存）。外部域名解析：50-200ms（取决于上游 DNS 响应速度）。如果 P99 延迟超过 100ms，需要检查：(1) CoreDNS CPU 是否充足（`kubectl top pods -n kube-system`）；(2) 缓存配置是否合理（cache TTL 和大小）；(3) 上游 DNS 是否正常。NodeLocal DNSCache 命中时延迟 < 1ms。
 
-#<!-- chunk: Q4: CoreDNS 的 cache TTL 应该设置多大？ -->## Q4: CoreDNS 的 cache TTL 应该设置多大？
+## Q4: CoreDNS 的 cache TTL 应该设置多大？
 
 **回答**: 默认 Corefile 中的 cache TTL 是 30 秒。对于集群内 Service，30 秒足够（Service IP 很少变化，但 Endpoints 可能频繁变化）。对于外部域名，建议 30-300 秒，取决于域名变化的频率。过大的 TTL 会导致 Service IP 变更后客户端长时间使用旧 IP（最长等一个 TTL 周期）。建议保持默认 30 秒，配合 `prefetch` 插件提前刷新即将过期的缓存。
 
-#<!-- chunk: Q5: 如何排查 DNS 5 秒超时问题？ -->## Q5: 如何排查 DNS 5 秒超时问题？
+## Q5: 如何排查 DNS 5 秒超时问题？
 
 **回答**: (1) 确认是否是 conntrack 竞态：检查 `dmesg | grep conntrack` 是否有表满错误；(2) 检查 conntrack 使用率：`cat /proc/sys/net/netfilter/nf_conntrack_count` vs `nf_conntrack_max`（使用率 > 80% 需关注）；(3) 解决方案：部署 NodeLocal DNSCache（根治）；(4) 临时缓解：调大 conntrack 表 `sysctl -w net.netfilter.nf_conntrack_max=131072`；(5) 将 DNS 查询切换为 TCP 协议（`use-vc` 选项）可以避免 conntrack 竞态。
 
-#<!-- chunk: Q6: CoreDNS 和外部 DNS（如 Bind）如何联动？ -->## Q6: CoreDNS 和外部 DNS（如 Bind）如何联动？
+## Q6: CoreDNS 和外部 DNS（如 Bind）如何联动？
 
 **回答**: CoreDNS 通过 `forward` 插件将非集群内域名转发到上游 DNS。配置示例：`forward . /etc/resolv.conf` 会使用节点配置的 DNS 服务器作为上游。如果需要指定上游：`forward . 8.8.8.8 8.8.4.4 { max_concurrent 1000 }`。`max_concurrent` 控制并发转发请求数，建议设置为 500-1000。`policy sequential` 按顺序使用上游 DNS，`policy random` 随机选择。
 
-#<!-- chunk: Q7: CoreDNS Pod 重启后缓存会丢失吗？ -->## Q7: CoreDNS Pod 重启后缓存会丢失吗？
+## Q7: CoreDNS Pod 重启后缓存会丢失吗？
 
 **回答**: 会。CoreDNS 的缓存是内存级别的，Pod 重启后缓存丢失，会短暂增加上游 DNS 查询量和解析延迟。解决方案：(1) 部署多个副本分摊风险（滚动更新时逐个重启）；(2) 使用 NodeLocal DNSCache 作为一级缓存（即使 CoreDNS 重启，NodeLocal 还能命中自己的缓存）；(3) 调大 CoreDNS 的 cache TTL 和容量；(4) 配置 `terminationGracePeriodSeconds` 和 `lameduck` 让 CoreDNS 优雅关闭。
 
-#<!-- chunk: Q8: 如何监控 CoreDNS 的健康状态？ -->## Q8: 如何监控 CoreDNS 的健康状态？
+## Q8: 如何监控 CoreDNS 的健康状态？
 
 **回答**: 关键指标（Prometheus :9153 端点）：`coredns_dns_request_duration_seconds`（解析延迟，P99 应 < 50ms）、`coredns_dns_responses_total{rcode="SERVFAIL"}`（解析失败率，应接近 0）、`coredns_cache_hits_total`（缓存命中率，应 > 70%）、`coredns_forward_request_duration_seconds`（上游转发延迟）。建议配置告警：SERVFAIL 率 > 1% 告警，P99 延迟 > 100ms 告警，缓存命中率 < 50% 告警。
 
-#<!-- chunk: Q9: 自定义 Corefile 变更需要重启 CoreDNS 吗？ -->## Q9: 自定义 Corefile 变更需要重启 CoreDNS 吗？
+## Q9: 自定义 Corefile 变更需要重启 CoreDNS 吗？
 
 **回答**: 不需要。CoreDNS 配置了 `reload` 插件后会自动检测 Corefile 变更并热重载，默认检测间隔 30 秒。修改 ConfigMap 后最多等 30 秒即可生效。但如果需要立即生效，可以手动重启：`kubectl rollout restart deployment coredns -n kube-system`。注意：热重载期间不会丢失正在处理的请求。
 
-#<!-- chunk: Q10: 如何为不同命名空间配置不同的 DNS 策略？ -->## Q10: 如何为不同命名空间配置不同的 DNS 策略？
+## Q10: 如何为不同命名空间配置不同的 DNS 策略？
 
 **回答**: 通过 Pod 级别的 `dnsConfig` 和 `dnsPolicy` 实现。`dnsPolicy: Default` 使用节点 DNS 配置；`dnsPolicy: ClusterFirst` 使用 CoreDNS（默认）；`dnsPolicy: ClusterFirstWithHostNet` 使用 hostNetwork 时仍然使用 CoreDNS；`dnsPolicy: None` 允许完全自定义 `dnsConfig`。可以为特定命名空间创建 LimitRange 或 Admission Webhook 自动注入 DNS 配置。
 
-#<!-- chunk: Q11: CoreDNS 的 forward 插件使用 TCP 还是 UDP？ -->## Q11: CoreDNS 的 forward 插件使用 TCP 还是 UDP？
+## Q11: CoreDNS 的 forward 插件使用 TCP 还是 UDP？
 
 **回答**: 默认使用 UDP。UDP 在高并发下更容易触发 conntrack 竞态。可以通过 `force_tcp` 选项强制使用 TCP：`forward . 8.8.8.8 { force_tcp max_concurrent 1000 }`。TCP 的优势：避免 conntrack 竞态（每个连接有独立的状态跟踪），适合高并发场景。劣势：TCP 连接建立有额外开销（三次握手），单次查询延迟略高。推荐在大规模集群中使用 `force_tcp`。
 
@@ -765,7 +784,7 @@ kubectl exec ndots-1 -- nslookup www.google.com
 
 <!-- chunk: 要点总结 -->## 要点总结
 
-#<!-- chunk: CoreDNS 知识图谱 -->## CoreDNS 知识图谱
+## CoreDNS 知识图谱
 
 ```
 CoreDNS
@@ -791,9 +810,10 @@ CoreDNS
     ├── SERVFAIL → 检查 CoreDNS 日志和配置
     ├── 解析延迟高 → 检查 CPU/缓存/上游 DNS
     └── 搜索域问题 → 检查 ndots 和 resolv.conf
+
 ```
 
-#<!-- chunk: DNS 排障速查表 -->## DNS 排障速查表
+## DNS 排障速查表
 
 | 现象 | 可能原因 | 排查命令 | 解决方案 |
 |------|---------|---------|---------|
@@ -805,7 +825,7 @@ CoreDNS
 | 短域名解析失败 | ndots 搜索域问题 | `cat /etc/resolv.conf` | 使用 FQDN 或调整 ndots |
 | Pod 内无法解析 | resolv.conf 配置错误 | `kubectl exec <pod> -- cat /etc/resolv.conf` | 检查 dnsPolicy/dnsConfig |
 
-#<!-- chunk: SRE 运维红线 -->## SRE 运维红线
+## SRE 运维红线
 
 | 红线 | 说明 | 违反后果 |
 |------|------|---------|
@@ -820,7 +840,7 @@ CoreDNS
 
 <!-- chunk: 延伸阅读 -->## 延伸阅读
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 
 | 资源 | 链接 | 说明 |
 |------|------|------|
@@ -829,7 +849,7 @@ CoreDNS
 | NodeLocal DNSCache | https://kubernetes.io/docs/tasks/administer-cluster/nodelocaldns/ | 部署指南 |
 | DNS Policy | https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/ | Pod DNS 策略 |
 
-#<!-- chunk: 关联培训专题 -->## 关联培训专题
+## 关联培训专题
 
 - `kubernetes-service-presentation.md` — Service 发现机制与 CoreDNS 的协作
 - `kubernetes-troubleshooting-methodology-presentation.md` — DNS 排障方法论
@@ -866,4 +886,6 @@ CoreDNS
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
+
+```

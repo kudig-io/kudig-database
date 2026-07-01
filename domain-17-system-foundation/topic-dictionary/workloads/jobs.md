@@ -71,7 +71,7 @@ Job 用于表示一次性任务，运行到完成即停止。Job 会创建一个
 - 使用 `restartPolicy: Never` 调试 Job 更方便查看失败日志。
 - 应用代码需具备幂等性，以应对 Pod 重启或重新调度。
 - 使用 `podFailurePolicy` 忽略由集群中断（如抢占、驱逐）导致的失败，避免不必要的重试。
-- 为已完成 Job 设置 `ttlSecondsAfterFinished`，防止 [[etcd|etcd]] 中堆积过多历史对象。
+- 为已完成 Job 设置 `ttlSecondsAfterFinished`，防止 [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]] 中堆积过多历史对象。
 - 使用 Indexed Job 时，确保应用能正确读取 `JOB_COMPLETION_INDEX` 或主机名来分配任务。
 
 ## 实战 YAML 示例
@@ -155,7 +155,7 @@ spec:
         - name: JOB_COMPLETION_INDEX
           valueFrom:
             fieldRef:
-              fieldPath: metadata.annotations['batch.[[entities/kubernetes|kubernetes]].io/job-completion-index']
+              fieldPath: metadata.annotations['batch.[[entities/kubernetes.md|kubernetes]].io/job-completion-index']
         resources:
           requests:
             cpu: "500m"
@@ -211,6 +211,10 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 查看 Job 状态
 kubectl get jobs -n prod
@@ -244,3 +248,9 @@ kubectl patch job <job-name> -n prod -p '{"spec":{"suspend":true}}'
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/controllers/job/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]

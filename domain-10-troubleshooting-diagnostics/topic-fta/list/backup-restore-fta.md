@@ -147,20 +147,20 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 
 ## Related
 
 - [[resource-quota-fta]] — ResourceQuota 异常故障树分析
 - [[cloud-provider-fta]] — 云平台集成异常故障树分析
-- Index.md|[[Kubernetes FTA Top Events Index|Kubernetes FTA Top Events Index]]]] — Kubernetes FTA Top Events Index
+- Index.md|[[skills/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]]] — Kubernetes FTA Top Events Index
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
-- [[skills/Symptom Vector Matching Engine|Symptom Vector Matching Engine]] — Cross-reference
-- [[skills/skills-run-README|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
+- [[skills/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

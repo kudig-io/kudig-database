@@ -188,6 +188,9 @@ kubectl get nodes --show-labels
 
 ## Step 2: 创建 Namespace (10min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # Step 2.1: 创建 namespace
 kubectl create namespace web-app
@@ -220,6 +223,9 @@ kubectl config current-context
 ---
 
 ## Step 3: 部署 Deployment (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # Step 3.1: 创建 Deployment YAML
@@ -342,6 +348,9 @@ kubectl get pods -n web-app -o wide
 
 ## Step 4: 创建 Service (20min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # Step 4.1: 创建 Service YAML
 cat > service.yaml << 'EOF'
@@ -397,6 +406,10 @@ kubectl run curl-test --image=curlimages/curl -n web-app --rm -it --restart=Neve
 ---
 
 ## Step 5: 测试和调试 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # Step 5.1: 查看 Pod 日志
@@ -613,8 +626,11 @@ kubectl get pods -n web-app --show-labels
 
 ## 清理资源
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```bash
-kubectl delete namespace web-app
+kubectl delete namespace web-app  # ⚠️ 不可逆：永久删除命名空间及全部资源
 kind delete cluster --name learn-k8s
 ```
 
@@ -629,4 +645,6 @@ kind delete cluster --name learn-k8s
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

@@ -345,4 +345,4 @@ s  - s
 
 ## 参见
 
-- [[skills/training-lecturer/01-introduction/01-what-is-kubernetes|讲师版]]
+- [[skills/training-lecturer/01-introduction/01-what-is-kubernetes.md|讲师版]]

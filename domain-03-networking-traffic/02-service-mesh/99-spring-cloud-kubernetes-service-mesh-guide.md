@@ -78,7 +78,7 @@ created: "2026-05-23"
 
 Spring Cloud 是 Java 生态中最成熟的微服务框架，但在 Kubernetes 环境中，许多 Spring Cloud 组件的功能已被 K8s 原生能力替代。本指南深入探讨 Spring Cloud 微服务迁移到 Kubernetes 的策略、Spring Cloud Kubernetes 的配置实践、与 Istio 服务网格的集成模式，以及 Resilience4j 容错和分布式事务的完整方案。目标是帮助企业从传统的 Spring Cloud Netflix 架构平滑演进到"Spring Boot 应用 + Kubernetes 基础设施 + Istio 服务网格"的现代云原生架构。
 
-#<!-- chunk: 迁移架构演进 -->## 迁移架构演进
+## 迁移架构演进
 
 ```mermaid
 graph LR
@@ -114,7 +114,7 @@ graph LR
 
 <!-- chunk: 一、Spring Cloud 与 K8s 原生能力映射 -->## 一、Spring Cloud 与 K8s 原生能力映射
 
-#<!-- chunk: 1.1 能力映射表 -->## 1.1 能力映射表
+## 1.1 能力映射表
 
 | Spring Cloud 组件 | K8s 原生替代 | 推荐策略 |
 |:---|:---|:---|
@@ -128,7 +128,7 @@ graph LR
 | Spring Cloud Stream | Kafka / RabbitMQ on K8s | 保留 |
 | Spring Cloud Security | K8s RBAC + Istio mTLS | 按需组合 |
 
-#<!-- chunk: 1.2 架构决策树 -->## 1.2 架构决策树
+## 1.2 架构决策树
 
 ```mermaid
 graph TD
@@ -146,7 +146,7 @@ graph TD
 
 <!-- chunk: 二、Spring Cloud Kubernetes 配置 -->## 二、Spring Cloud Kubernetes 配置
 
-#<!-- chunk: 2.1 依赖配置 -->## 2.1 依赖配置
+## 2.1 依赖配置
 
 ```xml
 <dependencyManagement>
@@ -189,7 +189,7 @@ graph TD
 </dependencies>
 ```
 
-#<!-- chunk: 2.2 核心配置 -->## 2.2 核心配置
+## 2.2 核心配置
 
 ```yaml
 spring:
@@ -216,7 +216,7 @@ spring:
         strategy: refresh
 ```
 
-#<!-- chunk: 2.3 RBAC 配置 -->## 2.3 RBAC 配置
+## 2.3 RBAC 配置
 
 ```yaml
 apiVersion: v1
@@ -253,7 +253,7 @@ subjects:
 
 <!-- chunk: 三、服务发现集成 -->## 三、服务发现集成
 
-#<!-- chunk: 3.1 K8s Service 替代 Eureka -->## 3.1 K8s Service 替代 Eureka
+## 3.1 K8s Service 替代 Eureka
 
 ```java
 @Configuration
@@ -278,7 +278,7 @@ public class OrderService {
 }
 ```
 
-#<!-- chunk: 3.2 OpenFeign 集成 -->## 3.2 OpenFeign 集成
+## 3.2 OpenFeign 集成
 
 ```java
 @FeignClient(name = "user-service", url = "http://user-service.production.svc.cluster.local:8080")
@@ -291,7 +291,7 @@ public interface UserClient {
 }
 ```
 
-#<!-- chunk: 3.3 K8s Service 定义 -->## 3.3 K8s Service 定义
+## 3.3 K8s Service 定义
 
 ```yaml
 apiVersion: v1
@@ -315,7 +315,7 @@ spec:
 
 <!-- chunk: 四、配置管理集成 -->## 四、配置管理集成
 
-#<!-- chunk: 4.1 ConfigMap 配置中心 -->## 4.1 ConfigMap 配置中心
+## 4.1 ConfigMap 配置中心
 
 ```yaml
 apiVersion: v1
@@ -347,7 +347,7 @@ data:
             read-timeout: 10000
 ```
 
-#<!-- chunk: 4.2 Secret 管理 -->## 4.2 Secret 管理
+## 4.2 Secret 管理
 
 ```yaml
 apiVersion: v1
@@ -362,7 +362,7 @@ stringData:
   SPRING_REDIS_PASSWORD: "r3disP@ss"
 ```
 
-#<!-- chunk: 4.3 配置热更新 -->## 4.3 配置热更新
+## 4.3 配置热更新
 
 ```java
 @RestController
@@ -385,7 +385,7 @@ public class DynamicConfigController {
 
 <!-- chunk: 五、Spring Cloud Gateway on K8s -->## 五、Spring Cloud Gateway on K8s
 
-#<!-- chunk: 5.1 Gateway 部署 -->## 5.1 Gateway 部署
+## 5.1 Gateway 部署
 
 ```yaml
 server:
@@ -419,7 +419,7 @@ spring:
                 key-resolver: "#{@ipKeyResolver}"
 ```
 
-#<!-- chunk: 5.2 K8s 部署 -->## 5.2 K8s 部署
+## 5.2 K8s 部署
 
 ```yaml
 apiVersion: apps/v1
@@ -459,7 +459,7 @@ spec:
 
 <!-- chunk: 六、Spring Cloud 与 Istio 对比与迁移 -->## 六、Spring Cloud 与 Istio 对比与迁移
 
-#<!-- chunk: 6.1 能力对比 -->## 6.1 能力对比
+## 6.1 能力对比
 
 | 能力 | Spring Cloud | Istio | 建议 |
 |:---|:---|:---|:---|
@@ -472,7 +472,7 @@ spec:
 | 追踪 | Micrometer | Envoy 注入 | OTel Agent |
 | 灰度发布 | 自定义 | Istio + Argo | Istio |
 
-#<!-- chunk: 6.2 迁移路径 -->## 6.2 迁移路径
+## 6.2 迁移路径
 
 ```mermaid
 graph LR
@@ -480,7 +480,7 @@ graph LR
     B -->|Phase 2| C[Spring Boot + Istio]
 ```
 
-#<!-- chunk: 6.3 Phase 1: 移除 Eureka/Ribbon -->## 6.3 Phase 1: 移除 Eureka/Ribbon
+## 6.3 Phase 1: 移除 Eureka/Ribbon
 
 ```yaml
 # 移除依赖:
@@ -496,7 +496,7 @@ graph LR
 # 移除 @EnableEurekaClient
 ```
 
-#<!-- chunk: 6.4 Phase 2: 引入 Istio -->## 6.4 Phase 2: 引入 Istio
+## 6.4 Phase 2: 引入 Istio
 
 ```yaml
 apiVersion: apps/v1
@@ -511,7 +511,10 @@ spec:
         traffic.sidecar.istio.io/includeInboundPorts: "8080"
 ```
 
-#<!-- chunk: 6.5 迁移验证输出 -->## 6.5 迁移验证输出
+## 6.5 迁移验证输出
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 $ kubectl get pods -n production -o wide
@@ -538,7 +541,7 @@ user-service-5c8d7e9f1a-mno90.production               Kubernetes  SYNCED SYNCED
 
 <!-- chunk: 七、混合模式最佳实践 -->## 七、混合模式最佳实践
 
-#<!-- chunk: 7.1 分层治理模型 -->## 7.1 分层治理模型
+## 7.1 分层治理模型
 
 ```mermaid
 graph TB
@@ -557,7 +560,7 @@ graph TB
     L1 --> L2 --> L3 --> L4
 ```
 
-#<!-- chunk: 7.2 避免双重重试 -->## 7.2 避免双重重试
+## 7.2 避免双重重试
 
 ```yaml
 # 方案一: Istio 管理重试, Spring 不重试
@@ -588,7 +591,7 @@ spec:
 
 <!-- chunk: 八、Resilience4j 容错 -->## 八、Resilience4j 容错
 
-#<!-- chunk: 8.1 完整配置 -->## 8.1 完整配置
+## 8.1 完整配置
 
 ```yaml
 resilience4j:
@@ -628,7 +631,7 @@ resilience4j:
         maxWaitDuration: 3s
 ```
 
-#<!-- chunk: 8.2 使用示例 -->## 8.2 使用示例
+## 8.2 使用示例
 
 ```java
 @Service
@@ -653,7 +656,7 @@ public class OrderService {
 
 <!-- chunk: 九、分布式事务 (Seata) -->## 九、分布式事务 (Seata)
 
-#<!-- chunk: 9.1 Seata on K8s -->## 9.1 Seata on K8s
+## 9.1 Seata on K8s
 
 ```yaml
 apiVersion: apps/v1
@@ -688,7 +691,7 @@ spec:
               cpu: "1000m"
 ```
 
-#<!-- chunk: 9.2 Seata Server 完整配置 -->## 9.2 Seata Server 完整配置
+## 9.2 Seata Server 完整配置
 
 ```yaml
 server:
@@ -739,7 +742,7 @@ seata:
 
 <!-- chunk: 十、微服务可观测性集成 -->## 十、微服务可观测性集成
 
-#<!-- chunk: 10.1 Spring Boot + OTel + Prometheus -->## 10.1 Spring Boot + OTel + Prometheus
+## 10.1 Spring Boot + OTel + Prometheus
 
 ```yaml
 management:
@@ -756,7 +759,7 @@ management:
         resilience4j.circuitbreaker.calls: true
 ```
 
-#<!-- chunk: 10.2 K8s ServiceMonitor -->## 10.2 K8s ServiceMonitor
+## 10.2 K8s ServiceMonitor
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -778,7 +781,7 @@ spec:
       interval: 15s
 ```
 
-#<!-- chunk: 10.3 Spring Boot Actuator 完整配置 -->## 10.3 Spring Boot Actuator 完整配置
+## 10.3 Spring Boot Actuator 完整配置
 
 ```yaml
 management:
@@ -834,7 +837,7 @@ management:
 
 <!-- chunk: 十一、Spring Cloud Kubernetes 高级配置 -->## 十一、Spring Cloud Kubernetes 高级配置
 
-#<!-- chunk: 11.1 Spring Boot 生产级 Deployment -->## 11.1 Spring Boot 生产级 Deployment
+## 11.1 Spring Boot 生产级 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -946,7 +949,7 @@ spec:
   type: ClusterIP
 ```
 
-#<!-- chunk: 11.2 Istio VirtualService for Spring Boot -->## 11.2 Istio VirtualService for Spring Boot
+## 11.2 Istio VirtualService for Spring Boot
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -958,18 +961,18 @@ spec:
   hosts:
     - order-service
   http:
-    - match:
-        - headers:
-            x-version:
-              exact: v2
-      route:
-        - destination:
-            host: order-service
-            subset: v2
-      retries:
-        attempts: 3
-        perTryTimeout: 2s
-        retryOn: 5xx,reset,connect-failure
+    - matchers:
+      - - headers=""
+      - x-version=""
+      - exact="v2"
+      - route=""
+      - - destination=""
+      - host="order-service"
+      - subset="v2"
+      - retries=""
+      - attempts="3"
+      - perTryTimeout="2s"
+      - retryOn="5xx,reset,connect-failure"
     - route:
         - destination:
             host: order-service
@@ -1063,7 +1066,10 @@ Phase_4_生产验证:
 
 <!-- chunk: 十三、Spring Boot on K8s 故障排查 -->## 十三、Spring Boot on K8s 故障排查
 
-#<!-- chunk: 13.1 诊断脚本 -->## 13.1 诊断脚本
+## 13.1 诊断脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1115,7 +1121,7 @@ kubectl exec -n production deploy/order-service -c order-service -- curl -s http
 
 <!-- chunk: 十四、Spring Boot 3.x + Istio 集成常见问题 -->## 十四、Spring Boot 3.x + Istio 集成常见问题
 
-#<!-- chunk: 14.1 问题诊断参考表 -->## 14.1 问题诊断参考表
+## 14.1 问题诊断参考表
 
 | 症状 | 可能原因 | 诊断命令 | 解决方案 |
 |:---|:---|:---|:---|
@@ -1130,7 +1136,7 @@ kubectl exec -n production deploy/order-service -c order-service -- curl -s http
 | HPA 不触发 | 自定义指标未注册 | `kubectl get --raw /apis/custom.metrics.k8s.io` | 配置 Prometheus Adapter |
 | gRPC 负载不均衡 | kube-proxy iptables 不感知 gRPC | 检查 K8s Service 配置 | 使用 Istio client-side LB (LEAST_CONN) |
 
-#<!-- chunk: 14.2 JVM 参数优化参考 -->## 14.2 JVM 参数优化参考
+## 14.2 JVM 参数优化参考
 
 | 参数 | 默认值 | 说明 | 推荐值 (K8s + Istio) |
 |:---|:---|:---|:---|
@@ -1148,15 +1154,15 @@ kubectl exec -n production deploy/order-service -c order-service -- curl -s http
 
 <!-- chunk: 十五、Spring Boot 3.x + Istio 生产环境调优 -->## 十五、Spring Boot 3.x + Istio 生产环境调优
 
-#<!-- chunk: 15.1 启动优化 -->## 15.1 启动优化
+## 15.1 启动优化
 
 Spring Boot 应用在 Istio Sidecar 模式下的启动时间通常会增加 3-5 秒，这是由于 Sidecar 注入后 iptables 规则的设置和 Envoy 代理的初始化。为了优化启动时间，建议采取以下措施：第一，启用 `holdApplicationUntilProxyStarts: true`，确保 Envoy 代理完全就绪后才启动应用容器，避免应用在代理未就绪时发起请求导致连接失败；第二，使用 Spring Boot 3.x 的 Lazy Initialization（`spring.main.lazy-initialization=true`），将非关键 Bean 的初始化延迟到首次使用时；第三，启用 Spring Framework 6.x 的 AOT（Ahead-Of-Time）编译，通过 GraalVM Native Image 实现毫秒级启动；第四，优化 JVM 参数，使用 `-Dspring.backgroundpreinitializer.ignore=true` 跳过后台预初始化。
 
-#<!-- chunk: 15.2 内存优化 -->## 15.2 内存优化
+## 15.2 内存优化
 
 Spring Boot 应用在 Kubernetes 环境中的内存配置需要特别注意。首先，必须启用容器感知 GC（`-XX:+UseContainerSupport`），否则 JVM 可能无法正确识别容器的内存限制。其次，使用 `MaxRAMPercentage` 替代固定的 `-Xmx` 参数，这样 JVM 会根据容器的内存限制动态调整堆大小。对于使用 Istio Sidecar 的场景，需要为 Sidecar 代理预留内存——建议容器内存限制至少比 JVM 堆内存大 30%，以容纳非堆内存（线程栈、直接内存、Metaspace）和 Sidecar 代理的内存使用。例如，如果容器内存限制为 1GB，则 MaxRAMPercentage 应设置为 75%（约 750MB 堆），剩余 250MB 供非堆内存和 Sidecar 使用。
 
-#<!-- chunk: 15.3 Istio Sidecar 与 Spring Boot 生命周期协调 -->## 15.3 Istio Sidecar 与 Spring Boot 生命周期协调
+## 15.3 Istio Sidecar 与 Spring Boot 生命周期协调
 
 Spring Boot 应用与 Istio Sidecar 的生命周期协调是确保零停机部署的关键。在 Pod 终止时，Kubernetes 先发送 SIGTERM 给应用容器和 Sidecar 容器，然后等待 terminationGracePeriodSeconds 后发送 SIGKILL。如果 Sidecar 先于应用退出，正在处理中的请求将无法完成。推荐的配置策略：设置 `terminationGracePeriodSeconds: 60`，配置 Spring Boot 的 `server.shutdown=graceful`，启用 Istio 的 `holdApplicationUntilProxyStarts: true`，并使用 preStop hook 延迟应用容器的 SIGTERM 信号，确保 Sidecar 在应用容器终止后才退出。
 
@@ -1176,7 +1182,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
 - Domain-26 服务网格与微服务 — 开源项目索引
 - Istio 企业级服务网格架构与实践
 - Linkerd 企业级服务网格深度实践
@@ -1197,4 +1203,4 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]

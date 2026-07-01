@@ -90,7 +90,7 @@ MEMORY.md 配合 `memory/` 目录（短期记忆）构成完整的记忆系统�
 
 <!-- chunk: 1. 设计原理 -->## 1. 设计原理
 
-#<!-- chunk: 1.1 三层记忆模型 -->## 1.1 三层记忆模型
+## 1.1 三层记忆模型
 
 ```
 MEMORY.md 三层记忆模型:
@@ -114,7 +114,7 @@ Layer 3: 用户偏好（交互学习）
      特点: 个性化定制，随使用而丰富
 ```
 
-#<!-- chunk: 1.2 记忆流转机制 -->## 1.2 记忆流转机制
+## 1.2 记忆流转机制
 
 ```
 记忆生命周期:
@@ -140,7 +140,7 @@ Layer 3: 用户偏好（交互学习）
 下次会话: MEMORY.md + 最近 3 天 memory/ → 注入上下文
 ```
 
-#<!-- chunk: 1.3 新陈代谢机制 -->## 1.3 新陈代谢机制
+## 1.3 新陈代谢机制
 
 ```
 记忆新陈代谢（防止记忆膨胀）:
@@ -169,7 +169,7 @@ Layer 3: 用户偏好（交互学习）
 
 <!-- chunk: 2. Harness Engineering 映射 -->## 2. Harness Engineering 映射
 
-#<!-- chunk: 2.1 映射关系 -->## 2.1 映射关系
+## 2.1 映射关系
 
 ```
 MEMORY.md × Harness 六层映射:
@@ -182,7 +182,7 @@ MEMORY.md     │      │       │    ◐    │    ●    │        │     
 ◐ = 次要映射（Context 层 — 记忆注入上下文）
 ```
 
-#<!-- chunk: 2.2 Persistence 层映射详解 -->## 2.2 Persistence 层映射详解
+## 2.2 Persistence 层映射详解
 
 | MEMORY.md 内容 | Harness Persistence 实现 | 存储方式 |
 |---------------|------------------------|---------|
@@ -192,7 +192,7 @@ MEMORY.md     │      │       │    ◐    │    ●    │        │     
 | 管理元数据（4） | `MemoryMetadata` — 元数据管理 | 自动统计和维护 |
 | memory/ 目录 | `DailyLog` — 每日诊断日志 | 每天一个 Markdown 文件 |
 
-#<!-- chunk: 2.3 Context 层映射 -->## 2.3 Context 层映射
+## 2.3 Context 层映射
 
 ```
 MEMORY.md 记忆注入 LLM 上下文的策略:
@@ -223,7 +223,7 @@ MEMORY.md 记忆注入 LLM 上下文的策略:
 
 <!-- chunk: 3. K8S 运维实战案例 -->## 3. K8S 运维实战案例
 
-#<!-- chunk: 3.1 案例：已知问题命中 -->## 3.1 案例：已知问题命中
+## 3.1 案例：已知问题命中
 
 ```
 场景: 用户报告 "Pod 启动很慢，等了 30 多秒"
@@ -245,7 +245,7 @@ Agent 响应（快速命中已知问题）:
   诊断时间: 从 5 分钟缩短到 30 秒
 ```
 
-#<!-- chunk: 3.2 案例：经验模式学习 -->## 3.2 案例：经验模式学习
+## 3.2 案例：经验模式学习
 
 ```
 第 1 次诊断（无经验）:
@@ -270,7 +270,7 @@ Agent 记录到 memory/2026-04-01.md:
     occurrences: 5
 ```
 
-#<!-- chunk: 3.3 案例：失败教训记录 -->## 3.3 案例：失败教训记录
+## 3.3 案例：失败教训记录
 
 ```
 失败案例:
@@ -294,7 +294,7 @@ Agent 记录到 memory/2026-04-01.md:
 
 <!-- chunk: 4. 配置协作机制 -->## 4. 配置协作机制
 
-#<!-- chunk: 4.1 MEMORY.md 与其他文件的协作 -->## 4.1 MEMORY.md 与其他文件的协作
+## 4.1 MEMORY.md 与其他文件的协作
 
 ```
 MEMORY.md 在配置体系中的记忆角色:
@@ -316,7 +316,7 @@ USER.md ──→ MEMORY.md
              MEMORY.md 从交互中学习更多偏好
 ```
 
-#<!-- chunk: 4.2 memory/ 目录管理 -->## 4.2 memory/ 目录管理
+## 4.2 memory/ 目录管理
 
 ```
 短期记忆目录结构:
@@ -351,7 +351,7 @@ memory/
 
 <!-- chunk: 5. AgentScope 集成代码 -->## 5. AgentScope 集成代码
 
-#<!-- chunk: 5.1 MemoryManager 实现 -->## 5.1 MemoryManager 实现
+## 5.1 MemoryManager 实现
 
 ```python
 import os
@@ -486,7 +486,7 @@ memory.record_daily(
 
 <!-- chunk: 6. 问题排除 -->## 6. 问题排除
 
-#<!-- chunk: 6.1 常见问题 -->## 6.1 常见问题
+## 6.1 常见问题
 
 | 问题 | 原因 | 解决方案 |
 |------|------|---------|
@@ -497,7 +497,7 @@ memory.record_daily(
 | 经验模式置信度不准 | 样本量不足就标高置信度 | 累计 5+ 次同类事件后才标注高置信 |
 | Agent 记录低质量记忆 | 未经验证的猜测也被记录 | SOUL.md 诚实原则约束：只记录有数据支撑的结论 |
 
-#<!-- chunk: 6.2 调试检查清单 -->## 6.2 调试检查清单
+## 6.2 调试检查清单
 
 ```
 MEMORY.md 配置验证:
@@ -533,17 +533,17 @@ MEMORY.md 配置验证:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 

@@ -78,7 +78,7 @@ created: "2026-05-23"
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
 | **Sidecar 容器** | - | - | Alpha | Beta | Beta | GA | GA | GA | **GA** | init 容器 restartPolicy: Always |
 | **ReadWriteOncePod** | - | - | - | - | **GA** | GA | GA | GA | GA | PVC 单 Pod 独占 |
-| **[[Pod Scheduling Readiness|Pod Scheduling Readiness]]** | - | - | - | - | Beta | **GA** | GA | GA | GA | SchedulingGates |
+| **[[domain-17-system-foundation/topic-dictionary/scheduling/pod-scheduling-readiness.md|Pod Scheduling Readiness]]** | - | - | - | - | Beta | **GA** | GA | GA | GA | SchedulingGates |
 | **In-Place Pod Resize** | - | - | - | - | Beta | Beta | Beta | Beta | **Alpha** | 原地调整资源 |
 | **PodIndexLabel** | - | - | - | - | - | - | - | - | **GA** | [[StatefulSet|StatefulSet]] 自动标签 |
 | **Job Mutable Scheduling Directives** | - | - | - | - | - | - | - | - | - | 已稳定 |
@@ -269,7 +269,7 @@ kubectl get csidrivers
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
 - Domain-1 架构基础 — 开源项目索引
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析

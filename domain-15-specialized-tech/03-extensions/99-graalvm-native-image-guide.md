@@ -759,6 +759,9 @@ native-image -pgo=default.iprof -jar myapp.jar
 
 ### 10.2 调试技巧
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看编译时初始化报告
 native-image -H:+PrintClassInitialization -jar myapp.jar
@@ -811,7 +814,7 @@ kubectl exec -it deployment/my-spring-app-native -- /app/my-spring-app -XX:+Prin
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech MOC
-- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
 - Domain-10 扩展与自定义 — 开源项目索引
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现

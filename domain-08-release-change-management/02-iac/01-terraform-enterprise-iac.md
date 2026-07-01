@@ -58,7 +58,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. Terraform架构深度解析 -->## 1. Terraform架构深度解析
 
-#<!-- chunk: 1.1 核心组件架构 -->## 1.1 核心组件架构
+## 1.1 核心组件架构
 
 ```mermaid
 graph TB
@@ -118,7 +118,7 @@ graph TB
     T --> I
 ```
 
-#<!-- chunk: 1.2 工作流程详解 -->## 1.2 工作流程详解
+## 1.2 工作流程详解
 
 ```yaml
 terraform_workflow:
@@ -152,7 +152,7 @@ terraform_workflow:
 
 <!-- chunk: 2. 企业级项目结构设计 -->## 2. 企业级项目结构设计
 
-#<!-- chunk: 2.1 标准化目录结构 -->## 2.1 标准化目录结构
+## 2.1 标准化目录结构
 
 ```bash
 # 企业级Terraform项目结构
@@ -207,7 +207,7 @@ terraform-enterprise/
 └── README.md                   # 项目文档
 ```
 
-#<!-- chunk: 2.2 后端配置管理 -->## 2.2 后端配置管理
+## 2.2 后端配置管理
 
 ```hcl
 # backend.tf - 远程状态配置
@@ -241,7 +241,7 @@ terraform {
 
 <!-- chunk: 3. 模块化架构设计 -->## 3. 模块化架构设计
 
-#<!-- chunk: 3.1 网络基础设施模块 -->## 3.1 网络基础设施模块
+## 3.1 网络基础设施模块
 
 ```hcl
 # modules/networking/main.tf
@@ -436,7 +436,7 @@ output "bastion_security_group_id" {
 }
 ```
 
-#<!-- chunk: 3.2 计算资源模块 -->## 3.2 计算资源模块
+## 3.2 计算资源模块
 
 ```hcl
 # modules/compute/main.tf
@@ -678,7 +678,7 @@ output "target_group_arn" {
 
 <!-- chunk: 4. 策略管理与治理 -->## 4. 策略管理与治理
 
-#<!-- chunk: 4.1 Sentinel策略配置 -->## 4.1 Sentinel策略配置
+## 4.1 Sentinel策略配置
 
 ```hcl
 # policies/sentinel.hcl
@@ -729,7 +729,7 @@ main = rule {
 }
 ```
 
-#<!-- chunk: 4.2 Conftest策略配置 -->## 4.2 Conftest策略配置
+## 4.2 Conftest策略配置
 
 ```rego
 # policies/conftest.rego
@@ -774,7 +774,7 @@ warn[msg] {
 
 <!-- chunk: 5. 状态管理与协作 -->## 5. 状态管理与协作
 
-#<!-- chunk: 5.1 远程状态配置 -->## 5.1 远程状态配置
+## 5.1 远程状态配置
 
 ```hcl
 # backend.tf - 生产环境后端配置
@@ -806,7 +806,7 @@ terraform {
 */
 ```
 
-#<!-- chunk: 5.2 工作区管理 -->## 5.2 工作区管理
+## 5.2 工作区管理
 
 ```bash
 #!/bin/bash
@@ -893,7 +893,7 @@ esac
 
 <!-- chunk: 6. CI/CD集成实践 -->## 6. CI/CD集成实践
 
-#<!-- chunk: 6.1 GitHub Actions工作流 -->## 6.1 GitHub Actions工作流
+## 6.1 GitHub Actions工作流
 
 ```yaml
 # .github/workflows/terraform.yml
@@ -1033,7 +1033,7 @@ jobs:
         run: terraform apply -auto-approve -input=false
 ```
 
-#<!-- chunk: 6.2 自动化测试脚本 -->## 6.2 自动化测试脚本
+## 6.2 自动化测试脚本
 
 ```python
 #!/usr/bin/env python3
@@ -1219,7 +1219,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 7. 监控与运维管理 -->## 7. 监控与运维管理
 
-#<!-- chunk: 7.1 状态监控配置 -->## 7.1 状态监控配置
+## 7.1 状态监控配置
 
 ```hcl
 # monitoring/terraform_monitoring.tf
@@ -1285,7 +1285,7 @@ resource "aws_sns_topic_subscription" "cost_slack" {
 }
 ```
 
-#<!-- chunk: 7.2 运维脚本工具 -->## 7.2 运维脚本工具
+## 7.2 运维脚本工具
 
 ```bash
 #!/bin/bash
@@ -1510,37 +1510,37 @@ esac
 
 <!-- chunk: 8. 最佳实践与经验总结 -->## 8. 最佳实践与经验总结
 
-#<!-- chunk: 8.1 基础设施即代码最佳实践 -->## 8.1 基础设施即代码最佳实践
+## 8.1 基础设施即代码最佳实践
 
 ```markdown
 <!-- chunk: 🏗️ Terraform最佳实践 -->## 🏗️ Terraform最佳实践
 
-#<!-- chunk: 1. 项目结构规范 -->## 1. 项目结构规范
+## 1. 项目结构规范
 - 模块化设计，职责分离
 - 环境隔离，配置独立
 - 版本控制，变更追踪
 - 文档齐全，易于维护
 
-#<!-- chunk: 2. 配置管理原则 -->## 2. 配置管理原则
+## 2. 配置管理原则
 - 变量抽象，避免硬编码
 - 输出定义，便于集成
 - 状态管理，远程存储
 - 锁定机制，防止冲突
 
-#<!-- chunk: 3. 安全合规要求 -->## 3. 安全合规要求
+## 3. 安全合规要求
 - 最小权限原则
 - 加密传输存储
 - 定期安全扫描
 - 合规策略执行
 
-#<!-- chunk: 4. 运维管理规范 -->## 4. 运维管理规范
+## 4. 运维管理规范
 - 自动化测试验证
 - 持续集成部署
 - 监控告警体系
 - 灾难恢复预案
 ```
 
-#<!-- chunk: 8.2 常见问题解决方案 -->## 8.2 常见问题解决方案
+## 8.2 常见问题解决方案
 
 ```yaml
 常见问题及解决方案:
@@ -1587,7 +1587,7 @@ esac
 
 <!-- chunk: 9. 未来发展与趋势 -->## 9. 未来发展与趋势
 
-#<!-- chunk: 9.1 Infrastructure as Code演进方向 -->## 9.1 Infrastructure as Code演进方向
+## 9.1 Infrastructure as Code演进方向
 
 ```yaml
 IaC技术发展趋势:
@@ -1618,10 +1618,10 @@ IaC技术发展趋势:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-24-infrastructure-as-code KUDIG Database — Global MOC
-- [[domain-08-release-change-management/README|[[Domain 24: 基础设施即代码 (Infrastructure as Code)|Domain 24: 基础设施即代码 (Infrastructure as Code)]]e|Infrastructure as Code]])]]
+- [[domain-08-release-change-management/README.md|[[Domain 24: 基础设施即代码 (Infrastructure as Code)|Domain 24: 基础设施即代码 (Infrastructure as Code)]]e|Infrastructure as Code]])]]
 - Domain-24 基础设施即代码 — 开源项目索引
 - Ansible企业级自动化运维深度实践
-- [[domain-08-release-change-management/02-iac/11-infrastructure-as-code]]
+- [[domain-08-release-change-management/02-iac/11-infrastructure-as-code.md|11 infrastructure as code]]
 - Azure Resource Manager (ARM) Enterprise 深度实践
 - Crossplane Enterprise Infrastructure Orchestration 深度实践
 - Crossplane 平台工程实践指南

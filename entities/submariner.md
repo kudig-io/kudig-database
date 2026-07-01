@@ -46,7 +46,7 @@ Submariner 实现 Kubernetes 多集群之间的 Pod 和 [[Service|Service]] 网�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -62,17 +62,17 @@ Submariner 实现 Kubernetes 多集群之间的 Pod 和 [[Service|Service]] 网�
 
 ## 参考链接
 
-- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[pod-lifecycle]]
 
 ## Related
 
 - [[hwameistor]] — HwameiStor
 - [[dragonfly]] — Dragonfly
-- [[aeraki-mesh]] — [[Aeraki Mesh|Aeraki Mesh]]
+- [[aeraki-mesh]] — Aeraki Mesh
 - [[atlantis]] — Atlantis
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - submariner
-- [[skills/ts-cloud-provider|云服务商集成排查]] — Cross-reference
-- [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
+- [[skills/ts-cloud-provider.md|云服务商集成排查]] — Cross-reference
+- [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference

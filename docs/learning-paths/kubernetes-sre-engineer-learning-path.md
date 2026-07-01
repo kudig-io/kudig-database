@@ -4,6 +4,7 @@ category: "learning-path"
 tags: ["reliability", "cluster"]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 ---
 
 # K8s运维工程师学习路线
@@ -23,7 +24,7 @@ updated: "2026-05-23"
 - [ ] 存储模型：PV、PVC、StorageClass、CSI
 
 **推荐学习**：
-- [[Kubernetes Core Concepts]]
+- [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
 - `domain-01-cluster-fundamentals/01-architecture-overview/`
 - `domain-01-cluster-fundamentals/05-kubectl/`
 
@@ -34,6 +35,10 @@ updated: "2026-05-23"
 - [ ] 输出格式化：jsonpath、json、yaml、custom-columns
 
 **练习清单**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 完成以下操作至少3次
 kubectl get pods --all-namespaces
@@ -71,7 +76,7 @@ kubectl top pod -n <namespace>
 - [ ] 节点亲和性和反亲和性
 
 **推荐学习**：
-- [[video-scripts/node-notready]]
+- [[scripts/video-scripts/node-notready.md|node notready]]
 - `domain-01-cluster-fundamentals/07-performance-tuning/`
 
 ### 2.2 应用管理
@@ -81,8 +86,8 @@ kubectl top pod -n <namespace>
 - [ ] HPA和VPA配置
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/02-pod-crashloop-oomkilled]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md|08 deployment rollout failure]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/02-pod-crashloop-oomkilled.md|02 pod crashloop oomkilled]]
 - k8s-autoscaling
 
 ### 2.3 存储与配置
@@ -94,7 +99,7 @@ kubectl top pod -n <namespace>
 **推荐学习**：
 - k8s-pvc-storage
 - k8s-config-secret
-- [[domain-10-troubleshooting-diagnostics/topic-skills/21-statefulset-failure]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/21-statefulset-failure.md|21 statefulset failure]]
 
 ### 2.4 网络排查
 - [ ] Service连通性诊断
@@ -103,9 +108,9 @@ kubectl top pod -n <namespace>
 - [ ] Ingress和SLB问题诊断
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity.md|05 service connectivity]]
 - k8s-dns-failure
-- [[domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md|13 ingress gateway failure]]
 
 ### 阶段二评估标准
 > 能够独立完成以下操作即达标：
@@ -127,8 +132,8 @@ kubectl top pod -n <namespace>
 - [ ] etcd备份和恢复
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/11-control-plane-failure]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/11-control-plane-failure.md|11 control plane failure]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry.md|06 certificate expiry]]
 - `domain-01-cluster-fundamentals/06-upgrade-paths/`
 
 ### 3.2 安全与合规
@@ -138,8 +143,8 @@ kubectl top pod -n <namespace>
 - [ ] 审计日志配置
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/09-rbac-quota-failure]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/09-rbac-quota-failure.md|09 rbac quota failure]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response.md|18 security incident response]]
 - `domain-05-security-compliance/`
 
 ### 3.3 可观测性体系
@@ -149,8 +154,8 @@ kubectl top pod -n <namespace>
 - [ ] 分布式链路追踪
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/15-monitoring-alerting-failure]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/16-logging-pipeline-failure]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/15-monitoring-alerting-failure.md|15 monitoring alerting failure]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/16-logging-pipeline-failure.md|16 logging pipeline failure]]
 - `domain-06-observability/`
 
 ### 3.4 性能优化
@@ -160,7 +165,7 @@ kubectl top pod -n <namespace>
 - [ ] 大规模集群性能考量
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/17-performance-bottleneck]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/17-performance-bottleneck.md|17 performance bottleneck]]
 - `domain-01-cluster-fundamentals/07-performance-tuning/`
 
 ### 阶段三评估标准

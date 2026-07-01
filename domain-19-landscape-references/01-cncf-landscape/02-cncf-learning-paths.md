@@ -86,7 +86,7 @@ created: "2026-05-23"
 
 <!-- chunk: 2. 角色学习路径 -->## 2. 角色学习路径
 
-#<!-- chunk: 2.1 DevOps 工程师路径 -->## 2.1 DevOps 工程师路径
+## 2.1 DevOps 工程师路径
 
 ```
 Week 1-4: 基础 (40h)
@@ -129,15 +129,15 @@ Week 9-12: 运维实践 (40h)
 
 **推荐文档**：
 - [Kubernetes](./graduated/kubernetes/kubernetes.md)
-- [[entities/containerd|containerd]]|containerd]]](./graduated/containerd/containerd.md)
-- [[entities/helm|Helm]]](./graduated/helm/helm.md)
+- [[entities/containerd.md|containerd]]|containerd]]](./graduated/containerd/containerd.md)
+- [[entities/helm.md|Helm]]](./graduated/helm/helm.md)
 - [Prometheus](./graduated/prometheus/prometheus.md)
 - [Argo CD](./graduated/argo/argo.md)
 - [Flux](./graduated/flux/flux.md)
 
 ---
 
-#<!-- chunk: 2.2 SRE 工程师路径 -->## 2.2 SRE 工程师路径
+## 2.2 SRE 工程师路径
 
 ```
 Week 1-4: 可观测性 (40h)
@@ -192,7 +192,7 @@ Week 13-16: 生产实践 (40h)
 **推荐文档**：
 - [Prometheus](./graduated/prometheus/prometheus.md)
 - [Istio](./graduated/istio/istio.md)
-- [[entities/linkerd|Linkerd]]](./graduated/linkerd/linkerd.md)
+- [[entities/linkerd.md|Linkerd]]](./graduated/linkerd/linkerd.md)
 - [OpenTelemetry](./incubating/opentelemetry/opentelemetry.md)
 - [Falco](./graduated/falco/falco.md)
 - [Chaos Mesh](./incubating/chaos-mesh/chaos-mesh.md)
@@ -201,7 +201,7 @@ Week 13-16: 生产实践 (40h)
 
 ---
 
-#<!-- chunk: 2.3 架构师路径 -->## 2.3 架构师路径
+## 2.3 架构师路径
 
 ```
 Month 1-2: 战略基础 (80h)
@@ -275,7 +275,7 @@ Month 7-8: 行业解决方案 (80h)
 
 ---
 
-#<!-- chunk: 2.4 安全工程师路径 -->## 2.4 安全工程师路径
+## 2.4 安全工程师路径
 
 ```
 Month 1: 基础安全 (40h)
@@ -322,16 +322,16 @@ Month 3: 身份与零信任 (40h)
 - [OPA](./graduated/opa/opa.md)
 - [Falco](./graduated/falco/falco.md)
 - [SPIFFE](./graduated/spiffe/spiffe.md)
-- [[entities/spire|SPIRE]]](./graduated/spire/spire.md)
+- [[entities/spire.md|SPIRE]]](./graduated/spire/spire.md)
 - [Kyverno](./incubating/kyverno/kyverno.md)
 - [in-toto](./graduated/in-toto/in-toto.md)
-- [[entities/operator-framework|The Update Framework (TUF)]]|TUF]]](./graduated/tuf/tuf.md)
+- [[entities/operator-framework.md|The Update Framework (TUF)]]|TUF]]](./graduated/tuf/tuf.md)
 
 ---
 
 <!-- chunk: 3. 专项学习路径 -->## 3. 专项学习路径
 
-#<!-- chunk: 3.1 网络专项 -->## 3.1 网络专项
+## 3.1 网络专项
 
 ```
 阶段一：基础网络 (20h)
@@ -365,7 +365,7 @@ Month 3: 身份与零信任 (40h)
 
 ---
 
-#<!-- chunk: 3.2 存储专项 -->## 3.2 存储专项
+## 3.2 存储专项
 
 ```
 阶段一：存储基础 (15h)
@@ -396,7 +396,7 @@ Month 3: 身份与零信任 (40h)
 
 ---
 
-#<!-- chunk: 3.3 可观测性专项 -->## 3.3 可观测性专项
+## 3.3 可观测性专项
 
 ```
 阶段一：监控 (25h)
@@ -433,7 +433,7 @@ Month 3: 身份与零信任 (40h)
 
 <!-- chunk: 4. 认证路径 -->## 4. 认证路径
 
-#<!-- chunk: 4.1 CKA (Kubernetes 管理员) -->## 4.1 CKA (Kubernetes 管理员)
+## 4.1 CKA (Kubernetes 管理员)
 
 **考试内容**：
 - 集群架构与运维 (25%)
@@ -451,7 +451,7 @@ Month 3: 身份与零信任 (40h)
 
 ---
 
-#<!-- chunk: 4.2 CKS (Kubernetes 安全专家) -->## 4.2 CKS (Kubernetes 安全专家)
+## 4.2 CKS (Kubernetes 安全专家)
 
 **考试内容**：
 - 集群架构 (10%)
@@ -473,7 +473,7 @@ Month 3: 身份与零信任 (40h)
 
 ---
 
-#<!-- chunk: 4.3 KCNA (Kubernetes 云原生助理) -->## 4.3 KCNA (Kubernetes 云原生助理)
+## 4.3 KCNA (Kubernetes 云原生助理)
 
 **考试内容**：
 - 容器编排基础 (30%)
@@ -486,7 +486,7 @@ Month 3: 身份与零信任 (40h)
 
 ---
 
-#<!-- chunk: 4.4 PCA (Prometheus 认证专家) -->## 4.4 PCA (Prometheus 认证专家)
+## 4.4 PCA (Prometheus 认证专家)
 
 **考试内容**：
 - Prometheus 基础 (20%)
@@ -504,7 +504,7 @@ Month 3: 身份与零信任 (40h)
 
 <!-- chunk: 5. 学习资源汇总 -->## 5. 学习资源汇总
 
-#<!-- chunk: 5.1 官方文档 -->## 5.1 官方文档
+## 5.1 官方文档
 
 | 项目 | 文档链接 |
 |:-----|:---------|
@@ -514,7 +514,7 @@ Month 3: 身份与零信任 (40h)
 | Cilium | https://docs.cilium.io/ |
 | Argo CD | https://argoproj.github.io/argo-cd/ |
 
-#<!-- chunk: 5.2 实践平台 -->## 5.2 实践平台
+## 5.2 实践平台
 
 | 平台 | 用途 |
 |:-----|:-----|
@@ -523,7 +523,7 @@ Month 3: 身份与零信任 (40h)
 | Katacoda | 交互式学习 |
 | Azure Kubernetes Workshop | 微软官方实验 |
 
-#<!-- chunk: 5.3 社区资源 -->## 5.3 社区资源
+## 5.3 社区资源
 
 | 资源 | 链接 |
 |:-----|:-----|
@@ -550,7 +550,7 @@ Month 3: 身份与零信任 (40h)
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-landscape-references MOC
-- [[domain-19-landscape-references/README|Domain-34: CNCF Landscape 开源项目]]
+- [[domain-19-landscape-references/README.md|Domain-34: CNCF Landscape 开源项目]]
 - Domain-34 CNCF Landscape — 开源项目索引
 - CNCF 集成实践指南
 - CNCF 项目选型指南

@@ -152,9 +152,9 @@ k8s_versions:
 
 <!-- chunk: 2. YAML 语法精要 -->## 2. YAML 语法精要
 
-#<!-- chunk: 2.1 基本语法规则 -->## 2.1 基本语法规则
+## 2.1 基本语法规则
 
-##<!-- chunk: 缩进规则（核心要点） -->## 缩进规则（核心要点）
+## 缩进规则（核心要点）
 
 ```yaml
 # ✅ 正确：使用空格缩进（推荐 2 空格）
@@ -178,7 +178,7 @@ metadata:
 - 推荐统一使用 **2 空格** 作为缩进单位（Kubernetes 社区标准）
 - 同一层级必须对齐，子级必须比父级多缩进
 
-##<!-- chunk: 键值对（Key-Value Pairs） -->## 键值对（Key-Value Pairs）
+## 键值对（Key-Value Pairs）
 
 ```yaml
 # 标量值（Scalar Values）
@@ -198,7 +198,7 @@ metadata:
 metadata: {name: my-app, namespace: default}
 ```
 
-##<!-- chunk: 列表（Lists） -->## 列表（Lists）
+## 列表（Lists）
 
 ```yaml
 # 块风格列表（推荐）
@@ -224,7 +224,7 @@ env:
         key: api-key
 ```
 
-##<!-- chunk: 注释 -->## 注释
+## 注释
 
 ```yaml
 # 这是单行注释（以 # 开头）
@@ -242,9 +242,9 @@ metadata:
 # 第三行注释
 ```
 
-#<!-- chunk: 2.2 多行字符串 -->## 2.2 多行字符串
+## 2.2 多行字符串
 
-##<!-- chunk: 字面量块（Literal Block）- 使用 `|` 符号 -->## 字面量块（Literal Block）- 使用 `|` 符号
+## 字面量块（Literal Block）- 使用 `|` 符号
 
 ```yaml
 apiVersion: v1
@@ -270,7 +270,7 @@ data:
   # exit 0
 ```
 
-##<!-- chunk: 折叠块（Folded Block）- 使用 `>` 符号 -->## 折叠块（Folded Block）- 使用 `>` 符号
+## 折叠块（Folded Block）- 使用 `>` 符号
 
 ```yaml
 apiVersion: v1
@@ -294,7 +294,7 @@ data:
   # This is a new paragraph because there's an empty line above.
 ```
 
-##<!-- chunk: 裁剪指示符（Chomping Indicators） -->## 裁剪指示符（Chomping Indicators）
+## 裁剪指示符（Chomping Indicators）
 
 ```yaml
 apiVersion: v1
@@ -347,9 +347,9 @@ spec:
         nginx -g 'daemon off;'
 ```
 
-#<!-- chunk: 2.3 锚点与别名 -->## 2.3 锚点与别名
+## 2.3 锚点与别名
 
-##<!-- chunk: 基本用法（& 定义锚点，* 引用别名） -->## 基本用法（& 定义锚点，* 引用别名）
+## 基本用法（& 定义锚点，* 引用别名）
 
 ```yaml
 apiVersion: v1
@@ -378,7 +378,7 @@ data:
 #   log-level: info
 ```
 
-##<!-- chunk: 合并键（Merge Key）- 使用 `<<` 符号 -->## 合并键（Merge Key）- 使用 `<<` 符号
+## 合并键（Merge Key）- 使用 `<<` 符号
 
 ```yaml
 # 定义基础配置锚点
@@ -411,7 +411,7 @@ metadata:
 #   version: "1.0"
 ```
 
-##<!-- chunk: 多锚点合并 -->## 多锚点合并
+## 多锚点合并
 
 ```yaml
 resource-limits: &cpu-limits
@@ -474,9 +474,9 @@ spec:
     image: busybox:1.36
 ```
 
-#<!-- chunk: 2.4 常见陷阱 -->## 2.4 常见陷阱
+## 2.4 常见陷阱
 
-##<!-- chunk: 陷阱 1：布尔值歧义 -->## 陷阱 1：布尔值歧义
+## 陷阱 1：布尔值歧义
 
 ```yaml
 # ❌ 错误：YAML 1.1 中这些都会被解析为布尔值
@@ -502,7 +502,7 @@ data:
   country: "NO"          # ✅ 正确写法
 ```
 
-##<!-- chunk: 陷阱 2：数字与字符串 -->## 陷阱 2：数字与字符串
+## 陷阱 2：数字与字符串
 
 ```yaml
 # ❌ 错误：端口号被解析为数字（可能导致问题）
@@ -528,7 +528,7 @@ image: "nginx:1.27"      # ✅ 完整字符串
 image: nginx:"1.27"      # ✅ 版本号字符串化
 ```
 
-##<!-- chunk: 陷阱 3：空值与 null -->## 陷阱 3：空值与 null
+## 陷阱 3：空值与 null
 
 ```yaml
 # YAML 中的 null 值表示方式
@@ -553,7 +553,7 @@ spec:
     args: []             # 空列表（非 null）
 ```
 
-##<!-- chunk: 陷阱 4：特殊字符与引号 -->## 陷阱 4：特殊字符与引号
+## 陷阱 4：特殊字符与引号
 
 ```yaml
 apiVersion: v1
@@ -580,7 +580,7 @@ data:
   safe_text: "Use quotes for: [] {} > | * & ! % @ `"
 ```
 
-##<!-- chunk: 陷阱 5：缩进不一致 -->## 陷阱 5：缩进不一致
+## 陷阱 5：缩进不一致
 
 ```yaml
 # ❌ 错误：缩进混乱
@@ -604,7 +604,7 @@ spec:
     - containerPort: 80
 ```
 
-##<!-- chunk: 陷阱 6：列表项格式 -->## 陷阱 6：列表项格式
+## 陷阱 6：列表项格式
 
 ```yaml
 # ❌ 错误：列表格式不当
@@ -642,9 +642,9 @@ status:                     # 系统管理的实际状态（只读）
   # ...由控制器更新
 ```
 
-#<!-- chunk: 3.1 apiVersion -->## 3.1 apiVersion
+## 3.1 apiVersion
 
-##<!-- chunk: 格式规范 -->## 格式规范
+## 格式规范
 
 ```yaml
 # 格式：<API组>/<版本> 或 <版本>（核心 API 组）
@@ -658,7 +658,7 @@ apiVersion: batch/v1        # Job, CronJob
 apiVersion: networking.k8s.io/v1  # Ingress, NetworkPolicy, IngressClass
 ```
 
-##<!-- chunk: 完整 API 组资源映射表 -->## 完整 API 组资源映射表
+## 完整 API 组资源映射表
 
 | API 组 (apiVersion) | 主要资源 (Kind) | 用途说明 | GA 版本 |
 |-------------------|----------------|---------|---------|
@@ -681,7 +681,7 @@ apiVersion: networking.k8s.io/v1  # Ingress, NetworkPolicy, IngressClass
 | **flowcontrol.apiserver.k8s.io/v1** | FlowSchema, PriorityLevelConfiguration | API 流控 | v1.29+ |
 | **gateway.networking.k8s.io/v1** | Gateway, GatewayClass, HTTPRoute | Gateway API | v1.29+ (部分) |
 
-##<!-- chunk: API 版本生命周期标识 -->## API 版本生命周期标识
+## API 版本生命周期标识
 
 ```yaml
 # Alpha 版本（实验性功能）
@@ -699,11 +699,11 @@ apiVersion: apps/v1                    # 生产可用，向后兼容
 - ⚠️  测试环境可尝试 beta 版本
 - ❌ 避免在生产环境使用 alpha 版本
 
-#<!-- chunk: 3.2 kind -->## 3.2 kind
+## 3.2 kind
 
 `kind` 字段指定资源类型，必须与 `apiVersion` 匹配。Kubernetes 内置 60+ 种资源类型。
 
-##<!-- chunk: 按 API 组分类的完整 Kind 列表 -->## 按 API 组分类的完整 Kind 列表
+## 按 API 组分类的完整 Kind 列表
 
 **核心资源 (v1)**
 
@@ -765,7 +765,7 @@ apiVersion: apps/v1                    # 生产可用，向后兼容
 | RoleBinding | - | Namespaced |
 | ClusterRoleBinding | - | Cluster |
 
-##<!-- chunk: Kind 使用示例 -->## Kind 使用示例
+## Kind 使用示例
 
 ```yaml
 # 示例 1：工作负载资源
@@ -796,11 +796,11 @@ metadata:
   name: pod-reader
 ```
 
-#<!-- chunk: 3.3 metadata -->## 3.3 metadata
+## 3.3 metadata
 
 `metadata` 字段包含用于标识和管理资源的元数据信息。
 
-##<!-- chunk: 完整字段结构 -->## 完整字段结构
+## 完整字段结构
 
 ```yaml
 metadata:
@@ -844,7 +844,7 @@ metadata:
     fieldsV1: {}
 ```
 
-##<!-- chunk: 字段详解 -->## 字段详解
+## 字段详解
 
 **1. name（必填）**
 
@@ -959,7 +959,7 @@ metadata:
 # 5. finalizers 列表为空时，API Server 真正删除对象
 ```
 
-##<!-- chunk: 完整示例 -->## 完整示例
+## 完整示例
 
 ```yaml
 apiVersion: apps/v1
@@ -1016,14 +1016,14 @@ spec:
         - containerPort: 80
 ```
 
-#<!-- chunk: 3.4 spec 与 status -->## 3.4 spec 与 status
+## 3.4 spec 与 status
 
 Kubernetes 采用**声明式 API** 设计，资源配置分为两部分：
 
 - **spec**：期望状态（Desired State）- 用户定义
 - **status**：实际状态（Observed State）- 系统管理
 
-##<!-- chunk: 工作原理 -->## 工作原理
+## 工作原理
 
 ```yaml
 # 用户创建资源时只需定义 spec
@@ -1054,7 +1054,10 @@ status:                         # 实际状态（系统自动更新）
   observedGeneration: 1         # 控制器观测到的 generation
 ```
 
-##<!-- chunk: 控制循环（Control Loop） -->## 控制循环（Control Loop）
+## 控制循环（Control Loop）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -1087,7 +1090,7 @@ status:                         # 实际状态（系统自动更新）
 └─────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: status 字段示例 -->## status 字段示例
+## status 字段示例
 
 ```yaml
 # Pod 的 status
@@ -1157,7 +1160,10 @@ status:
     pods: "110"
 ```
 
-##<!-- chunk: 声明式 vs 命令式 -->## 声明式 vs 命令式
+## 声明式 vs 命令式
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 命令式（Imperative）- 告诉系统"怎么做"
@@ -1180,7 +1186,7 @@ kubectl apply -f deployment.yaml  # 系统自动计算差异并执行
 
 Kubernetes 使用多种 DNS 命名标准来规范资源名称，确保兼容性和一致性。
 
-#<!-- chunk: 4.1 DNS-1123 子域名 -->## 4.1 DNS-1123 子域名
+## 4.1 DNS-1123 子域名
 
 **应用场景**：大部分资源的 `metadata.name`（如 Deployment、Service、ConfigMap 等）
 
@@ -1207,7 +1213,7 @@ name: app.-test                 # ❌ 点号后接连字符
 name: "a" * 254                 # ❌ 超过 253 字符
 ```
 
-#<!-- chunk: 4.2 DNS-1123 标签 -->## 4.2 DNS-1123 标签
+## 4.2 DNS-1123 标签
 
 **应用场景**：标签键值（`metadata.labels`）、命名空间名称
 
@@ -1233,7 +1239,7 @@ labels:
   -app: test                    # ❌ 连字符开头
 ```
 
-#<!-- chunk: 4.3 DNS-1035 标签 -->## 4.3 DNS-1035 标签
+## 4.3 DNS-1035 标签
 
 **应用场景**：Service 名称（历史兼容性要求）
 
@@ -1259,7 +1265,7 @@ metadata:
   # 但为兼容性建议仍以字母开头
 ```
 
-#<!-- chunk: 4.4 RFC 1123 vs RFC 952 -->## 4.4 RFC 1123 vs RFC 952
+## 4.4 RFC 1123 vs RFC 952
 
 | 特性 | RFC 952 (DNS-1035) | RFC 1123 (DNS-1123) |
 |------|-------------------|---------------------|
@@ -1283,11 +1289,11 @@ metadata:
 
 <!-- chunk: 5. 标签与注解最佳实践 -->## 5. 标签与注解最佳实践
 
-#<!-- chunk: 5.1 推荐标签 (app.kubernetes.io/*) -->## 5.1 推荐标签 (app.kubernetes.io/*)
+## 5.1 推荐标签 (app.kubernetes.io/*)
 
 Kubernetes 社区推荐使用标准化标签前缀 `app.kubernetes.io/`，确保工具链兼容性。
 
-##<!-- chunk: 推荐标签清单 -->## 推荐标签清单
+## 推荐标签清单
 
 ```yaml
 apiVersion: apps/v1
@@ -1337,7 +1343,7 @@ spec:
         app.kubernetes.io/component: frontend
 ```
 
-##<!-- chunk: 完整示例：微服务架构标签 -->## 完整示例：微服务架构标签
+## 完整示例：微服务架构标签
 
 ```yaml
 # 电商平台 - 订单服务
@@ -1369,7 +1375,7 @@ metadata:
     app.kubernetes.io/managed-by: helm
 ```
 
-#<!-- chunk: 5.2 运维标签 -->## 5.2 运维标签
+## 5.2 运维标签
 
 除了推荐标签，生产环境还需补充运维管理标签。
 
@@ -1408,7 +1414,7 @@ metadata:
     log-retention: "30d"               # 日志保留
 ```
 
-##<!-- chunk: 标签选择器示例 -->## 标签选择器示例
+## 标签选择器示例
 
 ```bash
 # 查询特定团队的所有资源
@@ -1424,11 +1430,11 @@ kubectl get all -l app.kubernetes.io/part-of=ecommerce-platform
 kubectl get pods -l 'app.kubernetes.io/name=nginx,environment in (production,staging)'
 ```
 
-#<!-- chunk: 5.3 注解用途 -->## 5.3 注解用途
+## 5.3 注解用途
 
 注解（Annotations）用于存储任意非标识性元数据，不会被选择器使用。
 
-##<!-- chunk: 常见注解分类 -->## 常见注解分类
+## 常见注解分类
 
 ```yaml
 metadata:
@@ -1487,7 +1493,7 @@ metadata:
       {"apiVersion":"apps/v1","kind":"Deployment",...}
 ```
 
-##<!-- chunk: 注解 vs 标签决策树 -->## 注解 vs 标签决策树
+## 注解 vs 标签决策树
 
 ```
 是否需要通过 kubectl 选择器查询该字段？
@@ -1508,7 +1514,7 @@ metadata:
 
 <!-- chunk: 6. 字段验证规则 -->## 6. 字段验证规则
 
-#<!-- chunk: 6.1 必填与可选字段 -->## 6.1 必填与可选字段
+## 6.1 必填与可选字段
 
 Kubernetes 资源字段分为三类：
 
@@ -1539,11 +1545,11 @@ spec:
   terminationGracePeriodSeconds: 30  # 可选（默认 30）
 ```
 
-#<!-- chunk: 6.2 不可变字段 -->## 6.2 不可变字段
+## 6.2 不可变字段
 
 某些字段在创建后**不可修改**（Immutable），尝试修改会导致 API 拒绝。
 
-##<!-- chunk: 按资源类型分类的不可变字段 -->## 按资源类型分类的不可变字段
+## 按资源类型分类的不可变字段
 
 **Pod**
 ```yaml
@@ -1590,12 +1596,12 @@ spec:
   storageClassName: "ssd"     # ❌ 创建后不可更改
   volumeName: "pv-123"        # ❌ 绑定后不可更改
   
-  resources:                  # ⚠️  仅支持扩容（v1.11+），不可缩容
+  resources:                
     requests:
       storage: "10Gi"
 ```
 
-##<!-- chunk: 完整不可变字段列表 -->## 完整不可变字段列表
+## 完整不可变字段列表
 
 | 资源 | 不可变字段 | 备注 |
 |------|----------|------|
@@ -1607,7 +1613,11 @@ spec:
 | **PVC** | `spec.storageClassName`, `spec.volumeName` | 绑定后锁定 |
 | **Namespace** | `metadata.name` | 名称不可变 |
 
-##<!-- chunk: 尝试修改不可变字段的错误示例 -->## 尝试修改不可变字段的错误示例
+## 尝试修改不可变字段的错误示例
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 创建 Deployment
@@ -1629,11 +1639,11 @@ kubectl delete deployment nginx
 kubectl apply -f deployment.yaml
 ```
 
-#<!-- chunk: 6.3 Server-side Field Validation (v1.25+) -->## 6.3 Server-side Field Validation (v1.25+)
+## 6.3 Server-side Field Validation (v1.25+)
 
 Kubernetes 1.25+ 引入**服务端字段验证**，提供三种严格级别。
 
-##<!-- chunk: 验证级别 -->## 验证级别
+## 验证级别
 
 | 级别 | 行为 | 使用场景 |
 |------|------|---------|
@@ -1641,7 +1651,10 @@ Kubernetes 1.25+ 引入**服务端字段验证**，提供三种严格级别。
 | **Warn** | 警告但接受 | 开发环境（提示错误） |
 | **Ignore** | 忽略验证 | 兼容旧配置 |
 
-##<!-- chunk: kubectl 使用方式 -->## kubectl 使用方式
+## kubectl 使用方式
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 严格验证（推荐生产环境）
@@ -1657,7 +1670,7 @@ kubectl apply -f deployment.yaml --validate=false
 # 效果：跳过所有验证
 ```
 
-##<!-- chunk: 实际案例 -->## 实际案例
+## 实际案例
 
 ```yaml
 # 示例：包含错误字段的 Deployment
@@ -1683,6 +1696,9 @@ spec:
         unknownField: "test"  # ❌ 未知字段
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 应用时触发严格验证
 $ kubectl apply -f deployment.yaml --validate=strict
@@ -1698,7 +1714,10 @@ Warning: unknown field "spec.template.spec.containers[0].unknownField"
 deployment.apps/nginx created  # 仍然创建成功
 ```
 
-##<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # CI/CD 管道中启用严格验证
@@ -1711,17 +1730,18 @@ kubectl apply -f dev-deployment.yaml --validate=warn
 
 # 生产环境强制严格模式
 kubectl apply -f prod-deployment.yaml --validate=strict
+
 ```
 
 ---
 
 <!-- chunk: 7. kubectl 操作与内部原理 -->## 7. kubectl 操作与内部原理
 
-#<!-- chunk: 7.1 apply vs create vs replace -->## 7.1 apply vs create vs replace
+## 7.1 apply vs create vs replace
 
 Kubernetes 提供三种主要的资源创建/更新命令，内部机制完全不同。
 
-##<!-- chunk: 命令对比表 -->## 命令对比表
+## 命令对比表
 
 | 特性 | `kubectl create` | `kubectl replace` | `kubectl apply` |
 |------|-----------------|------------------|-----------------|
@@ -1732,7 +1752,10 @@ Kubernetes 提供三种主要的资源创建/更新命令，内部机制完全�
 | **字段合并策略** | - | 完全替换 | 智能合并 |
 | **推荐场景** | 一次性创建 | 完整替换配置 | **生产环境标准操作** |
 
-##<!-- chunk: 1. kubectl create（命令式创建） -->## 1. kubectl create（命令式创建）
+## 1. kubectl create（命令式创建）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建资源（仅在不存在时成功）
@@ -1747,9 +1770,13 @@ deployments.apps "nginx" already exists
 kubectl create namespace production       # 创建命名空间
 kubectl create secret generic db-secret \ # 创建 Secret
   --from-literal=password=abc123
+
 ```
 
-##<!-- chunk: 2. kubectl replace（命令式替换） -->## 2. kubectl replace（命令式替换）
+## 2. kubectl replace（命令式替换）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 完全替换现有资源（资源必须已存在）
@@ -1774,9 +1801,13 @@ kubectl replace -f deployment.yaml --force
 #   replicas: 5
 #
 # 执行 replace 后，strategy 字段会被删除！
+
 ```
 
-##<!-- chunk: 3. kubectl apply（声明式更新）⭐ 推荐 -->## 3. kubectl apply（声明式更新）⭐ 推荐
+## 3. kubectl apply（声明式更新）⭐ 推荐
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建或更新资源（幂等操作）
@@ -1792,9 +1823,10 @@ kubectl apply -f manifests/        # 递归应用所有 YAML
 
 # 从 URL 应用
 kubectl apply -f https://example.com/deployment.yaml
+
 ```
 
-##<!-- chunk: 三方合并机制（Three-way Merge） -->## 三方合并机制（Three-way Merge）
+## 三方合并机制（Three-way Merge）
 
 `kubectl apply` 使用**三方合并**算法，对比三个版本的配置：
 
@@ -1828,7 +1860,7 @@ kubectl apply -f https://example.com/deployment.yaml
        └──────────────────────┘
 ```
 
-##<!-- chunk: 三方合并示例 -->## 三方合并示例
+## 三方合并示例
 
 ```yaml
 # === 初始配置（first-apply.yaml）===
@@ -1888,7 +1920,7 @@ status:
 # kubectl apply 只更新 spec 部分，status 保持不变
 ```
 
-##<!-- chunk: 字段删除行为 -->## 字段删除行为
+## 字段删除行为
 
 ```yaml
 # === 初始配置 ===
@@ -1911,17 +1943,18 @@ spec:
 # kubectl replace 行为：
 # - replicas: 3 → 5（更新）
 # - strategy: 删除（replace 删除所有未指定字段）
+
 ```
 
 **关键区别**：
 - ✅ `apply`：保留未指定字段（智能合并）
 - ❌ `replace`：删除未指定字段（完全替换）
 
-#<!-- chunk: 7.2 Server-side Apply (v1.22+ GA) -->## 7.2 Server-side Apply (v1.22+ GA)
+## 7.2 Server-side Apply (v1.22+ GA)
 
 Server-side Apply (SSA) 是 `kubectl apply` 的升级版本，由 API Server 执行合并逻辑。
 
-##<!-- chunk: Client-side Apply vs Server-side Apply -->## Client-side Apply vs Server-side Apply
+## Client-side Apply vs Server-side Apply
 
 | 特性 | Client-side Apply | Server-side Apply |
 |------|------------------|------------------|
@@ -1932,7 +1965,10 @@ Server-side Apply (SSA) 是 `kubectl apply` 的升级版本，由 API Server 执
 | **性能** | ⚠️  需传输完整配置 | ✅ 仅传输变更字段 |
 | **默认行为** | `kubectl apply` | `kubectl apply --server-side` |
 
-##<!-- chunk: 启用 Server-side Apply -->## 启用 Server-side Apply
+## 启用 Server-side Apply
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 使用 Server-side Apply
@@ -1949,7 +1985,7 @@ kubectl apply -f deployment.yaml \
   --force-conflicts
 ```
 
-##<!-- chunk: 字段所有权（Field Ownership） -->## 字段所有权（Field Ownership）
+## 字段所有权（Field Ownership）
 
 ```yaml
 # Server-side Apply 自动记录字段所有权
@@ -1978,7 +2014,10 @@ metadata:
             f:containers: {}  # 控制器管理 containers 字段
 ```
 
-##<!-- chunk: 冲突检测与解决 -->## 冲突检测与解决
+## 冲突检测与解决
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 场景：两个管理器尝试修改同一字段
@@ -2006,7 +2045,10 @@ kubectl apply -f deployment.yaml \
 # 解决方案 2：协调两个管理器，避免管理相同字段
 ```
 
-##<!-- chunk: 实际应用场景 -->## 实际应用场景
+## 实际应用场景
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. GitOps 场景：ArgoCD 使用 SSA
@@ -2035,7 +2077,7 @@ kubectl apply -f app-config.yaml \
 
 <!-- chunk: 8. 资源版本演进 -->## 8. 资源版本演进
 
-#<!-- chunk: 8.1 API 版本生命周期 -->## 8.1 API 版本生命周期
+## 8.1 API 版本生命周期
 
 Kubernetes API 遵循**语义化版本控制**，经历三个阶段：
 
@@ -2046,7 +2088,7 @@ Alpha (v1alpha1) → Beta (v1beta1) → Stable (v1/v2)
  默认禁用           默认启用          生产可用
 ```
 
-##<!-- chunk: 版本标识规则 -->## 版本标识规则
+## 版本标识规则
 
 | 版本格式 | 稳定性 | 向后兼容 | 默认启用 | 弃用策略 | 示例 |
 |---------|--------|---------|---------|---------|------|
@@ -2054,7 +2096,7 @@ Alpha (v1alpha1) → Beta (v1beta1) → Stable (v1/v2)
 | **v1beta1, v2beta2** | ⚠️  较稳定 | ⚠️  尽力而为 | ✅ 是 | 9 个月 + 2 版本 | `autoscaling/v2beta2` |
 | **v1, v2** | ✅ 稳定 | ✅ 是 | ✅ 是 | 12 个月 + 2 版本 | `apps/v1`, `batch/v1` |
 
-##<!-- chunk: 弃用策略详解 -->## 弃用策略详解
+## 弃用策略详解
 
 **规则 4a（GA API 版本）**：
 - GA API 版本至少支持 **12 个月** 或 **2 个 Kubernetes 小版本**（取较长者）
@@ -2079,9 +2121,9 @@ Alpha (v1alpha1) → Beta (v1beta1) → Stable (v1/v2)
             - autoscaling/v2beta2 正式移除（9 个月 + 2 个版本）
 ```
 
-#<!-- chunk: 8.2 版本迁移策略 -->## 8.2 版本迁移策略
+## 8.2 版本迁移策略
 
-##<!-- chunk: 1. 查看资源使用的 API 版本 -->## 1. 查看资源使用的 API 版本
+## 1. 查看资源使用的 API 版本
 
 ```bash
 # 查看集群中所有 API 版本
@@ -2094,10 +2136,13 @@ horizontalpodautoscalers  hpa          autoscaling/v2          true         Hori
 
 # 检查资源是否使用弃用的 API 版本
 kubectl get hpa -o yaml | grep apiVersion
-apiVersion: autoscaling/v2beta2  # ⚠️  弃用版本
+apiVersion: autoscaling/v2beta2
 ```
 
-##<!-- chunk: 2. 手动迁移步骤 -->## 2. 手动迁移步骤
+## 2. 手动迁移步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1：导出现有资源
@@ -2117,7 +2162,10 @@ kubectl get hpa my-hpa -o yaml | grep apiVersion
 apiVersion: autoscaling/v2  # ✅ 新版本
 ```
 
-##<!-- chunk: 3. 批量迁移脚本 -->## 3. 批量迁移脚本
+## 3. 批量迁移脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash
@@ -2137,7 +2185,7 @@ while read ns name; do
 done
 ```
 
-##<!-- chunk: 4. 版本差异处理 -->## 4. 版本差异处理
+## 4. 版本差异处理
 
 某些 API 版本变更会引入**字段变化**，需要手动调整。
 
@@ -2187,7 +2235,7 @@ spec:
       stabilizationWindowSeconds: 300
 ```
 
-##<!-- chunk: 5. 使用 Pluto 检测弃用 API -->## 5. 使用 Pluto 检测弃用 API
+## 5. 使用 Pluto 检测弃用 API
 
 ```bash
 # 安装 Pluto（API 弃用检测工具）
@@ -2205,13 +2253,14 @@ pluto detect-helm --helm-version 3
 
 # 检测 Helm Chart
 pluto detect-helm -owide --helm-version=3
+
 ```
 
 ---
 
 <!-- chunk: 9. 快速查询索引表 -->## 9. 快速查询索引表
 
-#<!-- chunk: 9.1 按 apiVersion 分组的资源清单 -->## 9.1 按 apiVersion 分组的资源清单
+## 9.1 按 apiVersion 分组的资源清单
 
 | apiVersion | kind | shortName | namespaced | description |
 |-----------|------|-----------|-----------|-------------|
@@ -2258,7 +2307,7 @@ pluto detect-helm -owide --helm-version=3
 | **certificates.k8s.io/v1** | | | | |
 | certificates.k8s.io/v1 | CertificateSigningRequest | csr | ❌ | 证书签名请求 |
 
-#<!-- chunk: 9.2 常用 kubectl 命令速查 -->## 9.2 常用 kubectl 命令速查
+## 9.2 常用 kubectl 命令速查
 
 | 命令 | 用途 | 示例 |
 |------|------|------|
@@ -2281,13 +2330,13 @@ pluto detect-helm -owide --helm-version=3
 
 <!-- chunk: 10. 相关资源 -->## 10. 相关资源
 
-#<!-- chunk: 内部参考文档 -->## 内部参考文档
+## 内部参考文档
 
 - [02 - Namespace / ResourceQuota / LimitRange YAML 配置参考](./02-namespace-resourcequota-limitrange.md)
 - [Domain 5 - 网络深入](../domain-03-networking-traffic/README.md)
 - [Domain 3 - 工作负载与调度](../domain-3-workload-scheduling/README.md)
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 
 - [Kubernetes API 概念](https://kubernetes.io/docs/reference/using-api/api-concepts/)
 - [对象元数据](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/object-meta/)
@@ -2295,7 +2344,7 @@ pluto detect-helm -owide --helm-version=3
 - [API 弃用策略](https://kubernetes.io/docs/reference/using-api/deprecation-policy/)
 - [Server-side Apply](https://kubernetes.io/docs/reference/using-api/server-side-apply/)
 
-#<!-- chunk: 工具链 -->## 工具链
+## 工具链
 
 - [kubectl Reference](https://kubernetes.io/docs/reference/kubectl/)
 - [Helm](https://helm.sh/) - Kubernetes 包管理器
@@ -2321,7 +2370,7 @@ pluto detect-helm -owide --helm-version=3
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
 - 03 - Pod 完整规格说明书
@@ -2339,3 +2388,5 @@ pluto detect-helm -owide --helm-version=3
 - 36-ecosystem-kustomize-helm-argocd
 - 02-namespace-resourcequota-limitrange
 - 03-pod-specification-complete
+
+```

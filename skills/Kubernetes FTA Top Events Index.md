@@ -152,17 +152,17 @@ bottom_event:
 
 ## Related
 
-- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[skills/FTA Methodology and Core Principles|FTA Methodology and Core Principles]]
-- [[skills/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
-- [[skills/Symptom Vector Matching Engine|Symptom Vector Matching Engine]]
-- [[skills/Kubernetes Diagnostic Skills Overview|Kubernetes Diagnostic Skills Overview]]
-- [[concepts/etcd Operational Reference|etcd Operational Reference]]
-- [[synthesis/Kubernetes Fault Distribution and MTTR|Kubernetes Fault Distribution and MTTR]]
-- [[docs/ERROR-FTA-MAP|KUDIG 错误码 → FTA 映射]] — Cross-reference
-- [[docs/COMMAND-DOC-MAP|KUDIG 命令 → 文档映射]] — Cross-reference
-- [[docs/API-DOC-MAP|KUDIG API → 文档映射]] — Cross-reference
+- [[skills/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[skills/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
+- [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
+- [[skills/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
+- [[concepts/etcd Operational Reference.md|etcd Operational Reference]]
+- [[concepts/Kubernetes Fault Distribution and MTTR.md|Kubernetes Fault Distribution and MTTR]]
+- [[docs/ERROR-FTA-MAP.md|KUDIG 错误码 → FTA 映射]] — Cross-reference
+- [[docs/COMMAND-DOC-MAP.md|KUDIG 命令 → 文档映射]] — Cross-reference
+- [[docs/API-DOC-MAP.md|KUDIG API → 文档映射]] — Cross-reference

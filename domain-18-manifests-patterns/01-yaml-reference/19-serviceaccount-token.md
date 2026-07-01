@@ -98,7 +98,7 @@ ServiceAccount 是 Kubernetes 中为 Pod 提供身份标识的资源对象。从
 
 <!-- chunk: 1. ServiceAccount 基础配置 -->## 1. ServiceAccount 基础配置
 
-#<!-- chunk: 1.1 基本 ServiceAccount -->## 1.1 基本 ServiceAccount
+## 1.1 基本 ServiceAccount
 
 ```yaml
 apiVersion: v1
@@ -130,7 +130,7 @@ imagePullSecrets:
 #   - name: my-service-account-token
 ```
 
-#<!-- chunk: 1.2 禁用自动挂载 Token 的 ServiceAccount -->## 1.2 禁用自动挂载 Token 的 ServiceAccount
+## 1.2 禁用自动挂载 Token 的 ServiceAccount
 
 ```yaml
 apiVersion: v1
@@ -147,7 +147,7 @@ metadata:
 automountServiceAccountToken: false
 ```
 
-#<!-- chunk: 1.3 带镜像拉取密钥的 ServiceAccount -->## 1.3 带镜像拉取密钥的 ServiceAccount
+## 1.3 带镜像拉取密钥的 ServiceAccount
 
 ```yaml
 apiVersion: v1
@@ -175,7 +175,7 @@ imagePullSecrets:
 
 <!-- chunk: 2. Pod 中使用 ServiceAccount -->## 2. Pod 中使用 ServiceAccount
 
-#<!-- chunk: 2.1 Pod 指定 ServiceAccount -->## 2.1 Pod 指定 ServiceAccount
+## 2.1 Pod 指定 ServiceAccount
 
 ```yaml
 apiVersion: v1
@@ -227,7 +227,7 @@ spec:
               fieldPath: metadata.namespace
 ```
 
-#<!-- chunk: 2.2 禁用 Token 挂载的 Pod -->## 2.2 禁用 Token 挂载的 Pod
+## 2.2 禁用 Token 挂载的 Pod
 
 ```yaml
 apiVersion: v1
@@ -248,7 +248,7 @@ spec:
     - containerPort: 80
 ```
 
-#<!-- chunk: 2.3 自定义 Token 过期时间 -->## 2.3 自定义 Token 过期时间
+## 2.3 自定义 Token 过期时间
 
 ```yaml
 apiVersion: v1
@@ -291,7 +291,7 @@ spec:
 
 <!-- chunk: 3. TokenRequest API (v1.22+) -->## 3. TokenRequest API (v1.22+)
 
-#<!-- chunk: 3.1 TokenRequest 对象 -->## 3.1 TokenRequest 对象
+## 3.1 TokenRequest 对象
 
 TokenRequest 是 ServiceAccount 的子资源,用于请求短期 token。
 
@@ -331,7 +331,10 @@ status:
   expirationTimestamp: "2026-02-10T14:30:00Z"
 ```
 
-#<!-- chunk: 3.2 使用 kubectl 请求 Token -->## 3.2 使用 kubectl 请求 Token
+## 3.2 使用 kubectl 请求 Token
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 TokenRequest
@@ -349,7 +352,7 @@ kubectl create token my-service-account \
   --bound-object-uid "a7f3d9e2-5c1b-4e8f-9a2d-3f7e8c1b4a6d"
 ```
 
-#<!-- chunk: 3.3 在 Pod 中使用 TokenRequest -->## 3.3 在 Pod 中使用 TokenRequest
+## 3.3 在 Pod 中使用 TokenRequest
 
 ```yaml
 apiVersion: v1
@@ -393,7 +396,7 @@ spec:
 
 v1.24+ 不再自动创建长期 token,需要手动创建。**生产环境不推荐使用长期 token**。
 
-#<!-- chunk: 4.1 创建 Token Secret -->## 4.1 创建 Token Secret
+## 4.1 创建 Token Secret
 
 ```yaml
 apiVersion: v1
@@ -415,7 +418,7 @@ type: kubernetes.io/service-account-token
 #   token: <base64-encoded-jwt-token>
 ```
 
-#<!-- chunk: 4.2 使用长期 Token Secret -->## 4.2 使用长期 Token Secret
+## 4.2 使用长期 Token Secret
 
 ```yaml
 apiVersion: v1
@@ -461,7 +464,7 @@ spec:
 
 TokenReview 用于验证 token 的有效性和获取 token 关联的身份信息。
 
-#<!-- chunk: 5.1 TokenReview 对象 -->## 5.1 TokenReview 对象
+## 5.1 TokenReview 对象
 
 ```yaml
 apiVersion: authentication.k8s.io/v1
@@ -513,7 +516,10 @@ status:
   # error: "token is expired"
 ```
 
-#<!-- chunk: 5.2 使用 kubectl 验证 Token -->## 5.2 使用 kubectl 验证 Token
+## 5.2 使用 kubectl 验证 Token
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 验证 token
@@ -534,7 +540,7 @@ EOF
 
 CSR 用于请求 X.509 证书,常用于 TLS 认证和节点证书管理。
 
-#<!-- chunk: 6.1 基本 CSR -->## 6.1 基本 CSR
+## 6.1 基本 CSR
 
 ```yaml
 apiVersion: certificates.k8s.io/v1
@@ -600,7 +606,7 @@ status:
     LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJBZ0lRQWx...
 ```
 
-#<!-- chunk: 6.2 用于客户端认证的 CSR -->## 6.2 用于客户端认证的 CSR
+## 6.2 用于客户端认证的 CSR
 
 ```yaml
 apiVersion: certificates.k8s.io/v1
@@ -626,7 +632,7 @@ spec:
     - "client auth"
 ```
 
-#<!-- chunk: 6.3 用于 Kubelet 服务端证书的 CSR -->## 6.3 用于 Kubelet 服务端证书的 CSR
+## 6.3 用于 Kubelet 服务端证书的 CSR
 
 ```yaml
 apiVersion: certificates.k8s.io/v1
@@ -649,7 +655,7 @@ spec:
     - "server auth"             # 服务端认证
 ```
 
-#<!-- chunk: 6.4 批准和拒绝 CSR -->## 6.4 批准和拒绝 CSR
+## 6.4 批准和拒绝 CSR
 
 ```bash
 # 批准 CSR
@@ -669,7 +675,7 @@ kubectl get csr my-app-csr -o jsonpath='{.status.certificate}' | base64 -d > cli
 
 <!-- chunk: 7. 内部原理: Bound Service Account Token (v1.22+) -->## 7. 内部原理: Bound Service Account Token (v1.22+)
 
-#<!-- chunk: 7.1 工作机制 -->## 7.1 工作机制
+## 7.1 工作机制
 
 Bound Service Account Token 是 v1.22 引入的安全增强特性:
 
@@ -678,7 +684,7 @@ Bound Service Account Token 是 v1.22 引入的安全增强特性:
 3. **受众绑定**: Token 包含 audience 声明,只能用于指定的服务
 4. **自动轮转**: Kubelet 会在 token 过期前自动刷新
 
-#<!-- chunk: 7.2 Token 结构 (JWT) -->## 7.2 Token 结构 (JWT)
+## 7.2 Token 结构 (JWT)
 
 ```json
 {
@@ -704,7 +710,7 @@ Bound Service Account Token 是 v1.22 引入的安全增强特性:
 }
 ```
 
-#<!-- chunk: 7.3 与旧版 Token 的区别 -->## 7.3 与旧版 Token 的区别
+## 7.3 与旧版 Token 的区别
 
 | 特性 | 旧版 Token (v1.23-) | Bound Token (v1.22+) |
 |------|---------------------|----------------------|
@@ -715,7 +721,7 @@ Bound Service Account Token 是 v1.22 引入的安全增强特性:
 | 受众验证 | 否 | 是 |
 | 安全性 | 低 | 高 |
 
-#<!-- chunk: 7.4 Kubelet 自动轮转 -->## 7.4 Kubelet 自动轮转
+## 7.4 Kubelet 自动轮转
 
 Kubelet 负责管理 Pod 中的 token:
 
@@ -742,7 +748,7 @@ Token 轮转逻辑:
 
 <!-- chunk: 8. 生产案例 -->## 8. 生产案例
 
-#<!-- chunk: 8.1 案例 1: 微服务应用的 ServiceAccount 隔离 -->## 8.1 案例 1: 微服务应用的 ServiceAccount 隔离
+## 8.1 案例 1: 微服务应用的 ServiceAccount 隔离
 
 **场景**: 多租户 SaaS 平台,每个租户的微服务需要独立的身份和权限。
 
@@ -866,7 +872,7 @@ spec:
 
 ---
 
-#<!-- chunk: 8.2 案例 2: CI/CD Pipeline 的 Token 管理 -->## 8.2 案例 2: CI/CD Pipeline 的 Token 管理
+## 8.2 案例 2: CI/CD Pipeline 的 Token 管理
 
 **场景**: GitLab CI/CD 需要部署应用到 Kubernetes,使用短期 token 而非长期凭证。
 
@@ -982,7 +988,7 @@ deploy:
 
 ---
 
-#<!-- chunk: 8.3 案例 3: 多集群应用的 Token 绑定 -->## 8.3 案例 3: 多集群应用的 Token 绑定
+## 8.3 案例 3: 多集群应用的 Token 绑定
 
 **场景**: 应用需要访问多个 Kubernetes 集群,使用不同受众的 token。
 
@@ -1142,7 +1148,7 @@ func createClient(tokenPath, caPath, host string) *kubernetes.Clientset {
 
 ---
 
-#<!-- chunk: 8.4 案例 4: Vault 集成的 Token 管理 -->## 8.4 案例 4: Vault 集成的 Token 管理
+## 8.4 案例 4: Vault 集成的 Token 管理
 
 **场景**: 应用使用 HashiCorp Vault 管理敏感配置,需要专用的 Vault token。
 
@@ -1258,7 +1264,7 @@ path "secret/data/myapp/*" {
 
 ---
 
-#<!-- chunk: 8.5 案例 5: 临时 Debug Pod 的 Token 管理 -->## 8.5 案例 5: 临时 Debug Pod 的 Token 管理
+## 8.5 案例 5: 临时 Debug Pod 的 Token 管理
 
 **场景**: SRE 需要创建临时 debug pod 访问集群,使用短期 token。
 
@@ -1361,6 +1367,9 @@ spec:
 
 **使用方式**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. 创建 debug pod
 kubectl apply -f debug-pod.yaml
@@ -1384,7 +1393,7 @@ kubectl get pods --all-namespaces
 
 <!-- chunk: 9. 最佳实践 -->## 9. 最佳实践
 
-#<!-- chunk: 9.1 安全建议 -->## 9.1 安全建议
+## 9.1 安全建议
 
 1. **最小权限原则**:
    - 为每个应用创建专用 ServiceAccount
@@ -1410,7 +1419,7 @@ kubectl get pods --all-namespaces
    - 不要通过环境变量传递 token (优先使用 volume)
    - 使用 `emptyDir.medium: Memory` 存储 token
 
-#<!-- chunk: 9.2 运维建议 -->## 9.2 运维建议
+## 9.2 运维建议
 
 1. **监控 Token 使用**:
    ```bash
@@ -1433,6 +1442,10 @@ kubectl get pods --all-namespaces
    - 定期审查 ServiceAccount 权限
 
 3. **定期清理**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
    ```bash
    # 清理未使用的 ServiceAccount
    kubectl get sa --all-namespaces | grep -v "default\|system:"
@@ -1441,7 +1454,7 @@ kubectl get pods --all-namespaces
    kubectl delete csr $(kubectl get csr -o jsonpath='{.items[?(@.status.conditions[0].type=="Approved")].metadata.name}')
    ```
 
-#<!-- chunk: 9.3 迁移到 Bound Token -->## 9.3 迁移到 Bound Token
+## 9.3 迁移到 Bound Token
 
 如果集群从 v1.21- 升级到 v1.22+,需要迁移到 Bound Token:
 
@@ -1449,6 +1462,7 @@ kubectl get pods --all-namespaces
    ```bash
    kubectl get secrets --all-namespaces -o json | \
      jq -r '.items[] | select(.type=="kubernetes.io/service-account-token") | "\(.metadata.namespace)/\(.metadata.name)"'
+
    ```
 
 2. **更新应用配置**:
@@ -1465,7 +1479,7 @@ kubectl get pods --all-namespaces
 
 <!-- chunk: 10. 常见问题排查 -->## 10. 常见问题排查
 
-#<!-- chunk: 10.1 Token 无效或过期 -->## 10.1 Token 无效或过期
+## 10.1 Token 无效或过期
 
 **症状**:
 ```
@@ -1473,6 +1487,10 @@ error: You must be logged in to the server (Unauthorized)
 ```
 
 **排查步骤**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 检查 token 是否存在
@@ -1497,7 +1515,7 @@ kubectl get pod <pod> -o jsonpath='{.spec.serviceAccountName}'
 kubectl get sa <serviceaccount> -o yaml
 ```
 
-#<!-- chunk: 10.2 Token 未自动挂载 -->## 10.2 Token 未自动挂载
+## 10.2 Token 未自动挂载
 
 **症状**:
 ```
@@ -1521,7 +1539,7 @@ kubectl get pod <pod> -o jsonpath='{.spec.volumes}' | jq .
 journalctl -u kubelet | grep -i "serviceaccount"
 ```
 
-#<!-- chunk: 10.3 CSR 未被批准 -->## 10.3 CSR 未被批准
+## 10.3 CSR 未被批准
 
 **症状**:
 ```
@@ -1566,7 +1584,7 @@ kubectl auth can-i approve certificatesigningrequests --as=system:serviceaccount
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -1584,3 +1602,5 @@ kubectl auth can-i approve certificatesigningrequests --as=system:serviceaccount
 - 18-csi-driver-resources
 - 20-rbac-role-rolebinding
 - 21-rbac-clusterrole-clusterrolebinding
+
+```

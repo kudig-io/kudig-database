@@ -113,7 +113,7 @@ k8s_versions:
 
 <!-- chunk: 1. Scaffolder 架构深度解析 -->## 1. Scaffolder 架构深度解析
 
-#<!-- chunk: 1.1 Scaffolder 工作原理 -->## 1.1 Scaffolder 工作原理
+## 1.1 Scaffolder 工作原理
 
 Backstage Scaffolder 是一个工作流执行引擎，允许平台团队定义标准化的创建流程（模板），开发者通过填写表单来触发这些流程：
 
@@ -145,7 +145,7 @@ sequenceDiagram
     Portal-->>Dev: 显示结果链接
 ```
 
-#<!-- chunk: 1.2 Scaffolder 核心组件 -->## 1.2 Scaffolder 核心组件
+## 1.2 Scaffolder 核心组件
 
 ```mermaid
 graph TB
@@ -185,7 +185,7 @@ graph TB
     TemplateEngine --> GHActions
 ```
 
-#<!-- chunk: 1.3 模板执行生命周期 -->## 1.3 模板执行生命周期
+## 1.3 模板执行生命周期
 
 ```
 模板执行生命周期
@@ -221,7 +221,7 @@ graph TB
 
 <!-- chunk: 2. template.yaml 完整语法指南 -->## 2. template.yaml 完整语法指南
 
-#<!-- chunk: 2.1 模板基础结构 -->## 2.1 模板基础结构
+## 2.1 模板基础结构
 
 ```yaml
 # template.yaml 完整结构注解
@@ -571,7 +571,7 @@ spec:
           3. 触发首次部署到 staging 环境
 ```
 
-#<!-- chunk: 2.2 JSON Schema 高级用法 -->## 2.2 JSON Schema 高级用法
+## 2.2 JSON Schema 高级用法
 
 ```yaml
 # 高级表单控件和验证
@@ -671,7 +671,7 @@ parameters:
 
 <!-- chunk: 3. 黄金路径模板库 -->## 3. 黄金路径模板库
 
-#<!-- chunk: 3.1 模板库目录结构 -->## 3.1 模板库目录结构
+## 3.1 模板库目录结构
 
 ```
 backstage-templates/
@@ -712,7 +712,7 @@ backstage-templates/
     └── template-development-guide.md
 ```
 
-#<!-- chunk: 3.2 Go 微服务模板骨架 -->## 3.2 Go 微服务模板骨架
+## 3.2 Go 微服务模板骨架
 
 ```
 go-microservice/skeleton/ 目录结构:
@@ -757,7 +757,7 @@ go-microservice/skeleton/ 目录结构:
 │           └── production/
 ```
 
-#<!-- chunk: 3.3 模板骨架文件示例 -->## 3.3 模板骨架文件示例
+## 3.3 模板骨架文件示例
 
 ```yaml
 # skeleton/catalog-info.yaml
@@ -1067,7 +1067,7 @@ jobs:
 
 <!-- chunk: 4. 内置 Action 完整参考 -->## 4. 内置 Action 完整参考
 
-#<!-- chunk: 4.1 文件操作 Actions -->## 4.1 文件操作 Actions
+## 4.1 文件操作 Actions
 
 ```yaml
 # fetch:template - 从模板目录拉取文件并渲染变量
@@ -1115,7 +1115,7 @@ jobs:
       - ./temp-directory/
 ```
 
-#<!-- chunk: 4.2 GitHub Actions -->## 4.2 GitHub Actions
+## 4.2 GitHub Actions
 
 ```yaml
 # publish:github - 创建 GitHub 仓库并推送代码
@@ -1185,7 +1185,7 @@ jobs:
     targetBranchName: main
 ```
 
-#<!-- chunk: 4.3 Catalog Actions -->## 4.3 Catalog Actions
+## 4.3 Catalog Actions
 
 ```yaml
 # catalog:register - 注册实体到目录
@@ -1227,7 +1227,7 @@ jobs:
         owner: ${{ parameters.owner }}
 ```
 
-#<!-- chunk: 4.4 其他内置 Actions -->## 4.4 其他内置 Actions
+## 4.4 其他内置 Actions
 
 ```yaml
 # debug:log - 调试日志输出
@@ -1263,7 +1263,7 @@ jobs:
 
 <!-- chunk: 5. GitHub 集成模板 -->## 5. GitHub 集成模板
 
-#<!-- chunk: 5.1 完整 GitHub 微服务创建模板 -->## 5.1 完整 GitHub 微服务创建模板
+## 5.1 完整 GitHub 微服务创建模板
 
 ```yaml
 # templates/github-service/template.yaml
@@ -1442,7 +1442,7 @@ spec:
 
 <!-- chunk: 6. GitLab 集成模板 -->## 6. GitLab 集成模板
 
-#<!-- chunk: 6.1 GitLab 服务创建模板 -->## 6.1 GitLab 服务创建模板
+## 6.1 GitLab 服务创建模板
 
 ```yaml
 # GitLab 集成模板
@@ -1539,7 +1539,7 @@ spec:
 
 <!-- chunk: 7. 自定义 Action 开发 -->## 7. 自定义 Action 开发
 
-#<!-- chunk: 7.1 自定义 Action 基础框架 -->## 7.1 自定义 Action 基础框架
+## 7.1 自定义 Action 基础框架
 
 ```typescript
 // plugins/scaffolder-backend-module-internal/src/actions/createK8sNamespace.ts
@@ -1716,7 +1716,7 @@ async function waitForNamespaceReady(
 }
 ```
 
-#<!-- chunk: 7.2 自定义 Action 注册 -->## 7.2 自定义 Action 注册
+## 7.2 自定义 Action 注册
 
 ```typescript
 // plugins/scaffolder-backend-module-internal/src/module.ts
@@ -1763,7 +1763,7 @@ export const scaffolderModuleInternalActions = createBackendModule({
 });
 ```
 
-#<!-- chunk: 7.3 Vault 密钥创建 Action -->## 7.3 Vault 密钥创建 Action
+## 7.3 Vault 密钥创建 Action
 
 ```typescript
 // plugins/scaffolder-backend-module-internal/src/actions/createVaultSecret.ts
@@ -1874,7 +1874,7 @@ path "${mount}/metadata/${path}/*" {
 
 <!-- chunk: 8. 工作流自动化 -->## 8. 工作流自动化
 
-#<!-- chunk: 8.1 复杂工作流模板 -->## 8.1 复杂工作流模板
+## 8.1 复杂工作流模板
 
 ```yaml
 # 完整的企业级服务创建工作流
@@ -2041,7 +2041,7 @@ spec:
 
 <!-- chunk: 9. 模板测试与验证 -->## 9. 模板测试与验证
 
-#<!-- chunk: 9.1 模板单元测试 -->## 9.1 模板单元测试
+## 9.1 模板单元测试
 
 ```typescript
 // plugins/scaffolder-backend-module-internal/src/actions/createK8sNamespace.test.ts
@@ -2125,7 +2125,7 @@ describe('platform:kubernetes:create-namespace', () => {
 });
 ```
 
-#<!-- chunk: 9.2 模板集成测试 -->## 9.2 模板集成测试
+## 9.2 模板集成测试
 
 ```typescript
 // 模板集成测试
@@ -2220,7 +2220,7 @@ describe('Go Microservice Template Integration Test', () => {
 
 <!-- chunk: 10. 高级模板模式 -->## 10. 高级模板模式
 
-#<!-- chunk: 10.1 条件步骤执行 -->## 10.1 条件步骤执行
+## 10.1 条件步骤执行
 
 ```yaml
 # 使用 if 条件控制步骤执行
@@ -2267,7 +2267,7 @@ steps:
         maxReplicas: 50
 ```
 
-#<!-- chunk: 10.2 步骤间数据传递 -->## 10.2 步骤间数据传递
+## 10.2 步骤间数据传递
 
 ```yaml
 # 步骤间的输出引用
@@ -2310,7 +2310,7 @@ steps:
         - Backstage: ${{ steps.register.output.entityRef }}
 ```
 
-#<!-- chunk: 10.3 Nunjucks 模板高级用法 -->## 10.3 Nunjucks 模板高级用法
+## 10.3 Nunjucks 模板高级用法
 
 ```yaml
 # skeleton/catalog-info.yaml 中的高级 Nunjucks 用法
@@ -2372,7 +2372,7 @@ spec:
 
 <!-- chunk: 11. 模板版本管理 -->## 11. 模板版本管理
 
-#<!-- chunk: 11.1 模板版本化策略 -->## 11.1 模板版本化策略
+## 11.1 模板版本化策略
 
 ```yaml
 # 模板版本化目录结构
@@ -2415,7 +2415,7 @@ spec:
   # ... 模板内容
 ```
 
-#<!-- chunk: 11.2 模板变更日志维护 -->## 11.2 模板变更日志维护
+## 11.2 模板变更日志维护
 
 ```markdown
 # 模板变更日志
@@ -2423,16 +2423,16 @@ spec:
 
 <!-- chunk: v2.3.0 (2026-03-04) -->## v2.3.0 (2026-03-04)
 
-#<!-- chunk: 新增 -->## 新增
+## 新增
 - 支持 Go 1.22
 - 添加 SBOM 生成到 CI 流水线
 - 新增 OpenTelemetry 自动注入配置
 
-#<!-- chunk: 修复 -->## 修复
+## 修复
 - 修复 Dockerfile 安全漏洞（升级基础镜像到 alpine:3.19）
 - 修复 K8s 资源配额计算错误
 
-#<!-- chunk: 变更 -->## 变更
+## 变更
 - 升级 golangci-lint 到 v1.56
 - 默认 CPU request 从 100m 调整为 250m（更准确的资源估算）
 
@@ -2440,22 +2440,22 @@ spec:
 
 <!-- chunk: v2.2.0 (2026-01-15) -->## v2.2.0 (2026-01-15)
 
-#<!-- chunk: 新增 -->## 新增
+## 新增
 - 添加 GitHub Dependabot 配置
 - 新增 Cosign 镜像签名步骤
 
-#<!-- chunk: 变更 -->## 变更
+## 变更
 - Kubernetes 部署使用 topology spread constraints
 
 ---
 
 <!-- chunk: v2.1.0 (2025-11-20) -->## v2.1.0 (2025-11-20)
 
-#<!-- chunk: 新增 -->## 新增
+## 新增
 - 支持 Redis 作为缓存层
 - 添加数据库连接池配置示例
 
-#<!-- chunk: 弃用 -->## 弃用
+## 弃用
 - `dbPoolSize` 参数已弃用，使用 `database.pool.maxConnections` 代替
 ```
 
@@ -2463,7 +2463,7 @@ spec:
 
 <!-- chunk: 12. 企业级模板治理 -->## 12. 企业级模板治理
 
-#<!-- chunk: 12.1 模板审核流程 -->## 12.1 模板审核流程
+## 12.1 模板审核流程
 
 ```yaml
 # 新模板提交审核流程
@@ -2514,7 +2514,7 @@ template_review_process:
       - "发送变更通知到 #platform-updates"
 ```
 
-#<!-- chunk: 12.2 模板使用度量与改进 -->## 12.2 模板使用度量与改进
+## 12.2 模板使用度量与改进
 
 ```typescript
 // 模板使用度量收集
@@ -2569,7 +2569,7 @@ async function collectTemplateMetrics(
 }
 ```
 
-#<!-- chunk: 12.3 模板自动化测试 CI -->## 12.3 模板自动化测试 CI
+## 12.3 模板自动化测试 CI
 
 ```yaml
 # .github/workflows/test-templates.yml
@@ -2664,7 +2664,7 @@ print(f'✅ $template_dir 格式验证通过')
 
 Backstage Scaffolder 是平台工程中**黄金路径**的核心实现工具。通过精心设计的模板系统，可以：
 
-#<!-- chunk: 核心收益 -->## 核心收益
+## 核心收益
 
 1. **统一标准**：所有新服务通过模板创建，天然遵循平台规范
 2. **减少等待**：从"提交工单等待运维"到"自助创建，30分钟上线"
@@ -2672,7 +2672,7 @@ Backstage Scaffolder 是平台工程中**黄金路径**的核心实现工具。�
 4. **降低错误**：模板化减少人工配置错误
 5. **知识沉淀**：平台最佳实践以代码形式保存和传播
 
-#<!-- chunk: 关键设计原则 -->## 关键设计原则
+## 关键设计原则
 
 ```
 模板设计黄金法则:
@@ -2707,7 +2707,7 @@ Backstage Scaffolder 是平台工程中**黄金路径**的核心实现工具。�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Domain 36: 平台工程 (Platform Engineering)]]
+- [[domain-07-platform-engineering/README.md|Domain 07: 平台工程 (Platform Engineering)]]
 - Domain-36 平台工程 — 开源项目索引
 - 平台工程概述与成熟度模型
 - 内部开发者平台设计原则

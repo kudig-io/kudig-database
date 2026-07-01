@@ -218,11 +218,16 @@ data:
 
 切换操作步骤：
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 kubectl edit configmap eni-config -n kube-system
 kubectl rollout restart ds terway-eniip -n kube-system
 kubectl rollout restart ds kube-proxy -n kube-system
-kubectl delete pods -A --all
+kubectl delete pods -A --all  # ⚠️ 批量删除，波及面大
 ```
 
 ### 2.5 ENIIP-Trunking 模式配置
@@ -272,6 +277,9 @@ data:
 | VLAN ID 范围 | 2-4094，Terway 自动分配 |
 
 **验证步骤:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 确认 Trunk ENI 已启用
@@ -327,6 +335,9 @@ data:
 ```
 
 启用后确认：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 kubectl get pods -n kube-system -l k8s-app=cilium -o wide
@@ -503,6 +514,9 @@ spec:
 | `reclaimPolicy` | 回收策略：`Delete`（自动释放）/ `Retain`（保留记录） |
 
 ### 4.4 验证固定 IP
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 kubectl exec -n kube-system $(kubectl get pods -n kube-system -l app=terway -o jsonpath='{.items[0].metadata.name}') -- terway-cli show | grep "fixed"
@@ -746,6 +760,9 @@ data:
 
 ### 8.2 验证双栈 Pod
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 kubectl get pods -o wide
 kubectl exec <pod-name> -- ip addr show eth0
@@ -795,6 +812,9 @@ kubectl exec <pod-name> -- ip -6 route
 
 ### 10.1 PodENI
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 kubectl get podeni -A
 kubectl get podeni <name> -n <namespace> -o yaml
@@ -805,6 +825,9 @@ kubectl get podeni -A -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec
 
 ### 10.2 NodeNetworking
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl get nodenetworking
 kubectl get nodenetworking <node-name> -o yaml
@@ -814,6 +837,10 @@ kubectl patch nodenetworking <node-name> --type merge -p '{"spec":{"eniConfig":{
 
 ### 10.3 PodNetworking
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 kubectl get podnetworking
 kubectl get podnetworking <name> -o yaml
@@ -822,6 +849,10 @@ kubectl delete podnetworking <name>
 ```
 
 ### 10.4 ReservedIP
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 kubectl get reservedip
@@ -952,6 +983,9 @@ spec:
 
 **验证带宽限速:**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查 TC 规则是否已挂载
 kubectl exec -n kube-system <terway-pod> -- tc qdisc show dev eth0
@@ -1002,6 +1036,9 @@ aliyun cen PublishRouteEntries --CenId cen-xxx --ChildInstanceId vpc-xxx1 --Chil
 ```
 
 **验证：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 kubectl exec -n default test-pod-cluster1 -- ping <pod-ip-in-cluster2>
@@ -1067,4 +1104,4 @@ kubectl exec -n default test-pod-cluster1 -- ping <pod-ip-in-cluster2>
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]

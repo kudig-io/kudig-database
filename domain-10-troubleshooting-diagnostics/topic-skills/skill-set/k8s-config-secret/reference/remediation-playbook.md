@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-config-secret"
 created: "2026-05-22"
 updated: "2026-05-22"
+last_updated: 2026-05-22
 tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
@@ -46,6 +47,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 对比 Pod spec 中引用的 key 名
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案 A: 添加缺失的 key
   kubectl patch configmap <name> -n <namespace> --type='json' -p='
@@ -56,6 +61,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   [{"op": "replace", "path": "/spec/containers/0/env/0/valueFrom/configMapKeyRef/key", "value": "<correct-key>"}]'
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl get configmap <name> -n <namespace>
   kubectl delete pod <pod> -n <namespace>  # 重建 Pod 使新配置生效
@@ -70,6 +79,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 检查解码后的内容是否正确
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 正确创建 Secret（数据会自动 base64 编码）
   kubectl create secret generic <name> \
@@ -96,6 +109,11 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # ConfigMap + Secret 大小限制约 1MiB
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 将大配置拆分为多个 ConfigMap
   kubectl create configmap <name>-part1 --from-file=part1.conf -n <namespace>
@@ -121,6 +139,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl get pod <pod> -n <namespace> -o jsonpath='{.spec.containers[*].volumeMounts}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 修正挂载路径
   kubectl patch pod <pod> -n <namespace> --type='json' -p='
@@ -131,6 +153,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   [{"op": "replace", "path": "/spec/containers/0/volumeMounts/0/subPath", "value": "app.conf"}]'
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   kubectl get pod <pod> -n <namespace>
   kubectl exec <pod> -n <namespace> -- ls -la <mount-path>
@@ -153,6 +179,11 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
      # 修改 data 中的内容，移除 resourceVersion 和 uid
      ```
   3. **删除并重新创建**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      kubectl delete configmap <name> -n <namespace>
      kubectl apply -f /tmp/<name>-backup.yaml
@@ -165,6 +196,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   - 确认删除期间不会影响生产流量（如有备用 Pod）
   - 备份原始配置
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f /tmp/<name>-backup.yaml
   ```
@@ -172,6 +207,9 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
 ## 验证确认
 
 ### 即时验证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # V1: Pod 不在 CreateContainerConfigError

@@ -283,6 +283,9 @@ nodes:
     protocol: TCP
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kind create cluster --name k8s-lab --config kind-ingress.yaml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
@@ -376,7 +379,7 @@ minikube addons list
 
 ## 方案 C：k3d（轻量之选）
 
-k3d 在 Docker 里跑 [[entities/k3s|k3s]]](https://k3s.io/)（Rancher 出品的轻量 K8s 发行版），资源占用极低。
+k3d 在 Docker 里跑 [[entities/k3s.md|k3s]]](https://k3s.io/)（Rancher 出品的轻量 K8s 发行版），资源占用极低。
 
 ### 安装 k3d
 
@@ -427,6 +430,10 @@ k3d image load my-app:v1 -c k8s-lab
 
 完成安装后，逐条验证：
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # ✅ 1. 集群状态正常
 kubectl get nodes
@@ -455,7 +462,7 @@ kubectl get svc -n test
 # minikube service nginx -n test --url
 
 # ✅ 7. 清理测试资源
-kubectl delete namespace test
+kubectl delete namespace test  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
 全部通过 = 你的实验环境 100% 就绪！
@@ -500,9 +507,12 @@ kubectl top pods --all-namespaces
 
 实验产生的资源要及时清理，避免资源泄漏：
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```bash
 # 删除所有实验 namespace
-kubectl delete ns $(kubectl get ns -o jsonpath='{.items[*].metadata.name}' | tr ' ' '\n' | grep -E 'test|demo|lab')
+kubectl delete ns $(kubectl get ns -o jsonpath='{.items[*].metadata.name}' | tr ' ' '\n' | grep -E 'test|demo|lab')  # ⚠️ 不可逆：永久删除命名空间及全部资源
 
 # 或者暴力重建集群（kind 30 秒搞定）
 kind delete cluster --name k8s-lab
@@ -541,11 +551,15 @@ ERROR: failed to create cluster: docker failed to start
 ERROR: failed to create cluster: node already exists
 ```
 **解决**: 
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+
 ```bash
 kind delete cluster --name k8s-lab
 # 或
 docker ps -a | grep k8s-lab
-docker rm -f $(docker ps -a | grep k8s-lab | awk '{print $1}')
+docker rm -f $(docker ps -a | grep k8s-lab | awk '{print $1}')  # ⚠️ 强制清理，可能杀运行中容器
 ```
 
 ### Q3: 内存不足

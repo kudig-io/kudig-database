@@ -117,6 +117,9 @@ Step 3: kubectl logs <name> --previous (if crashed)
 
 ### Example: [[Service|Service]] Not Reachable
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 Step 1: kubectl get service <name>
   -> Service exists with correct type?
@@ -143,18 +146,18 @@ Step 3: kubectl exec -it <pod> -- curl <service-ip>
 
 ## Related
 
-- [[entities/statefulset|statefulset]] — StatefulSet
+- [[entities/statefulset.md|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
-- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[cni]] — CNI (Container Network Interface)
-- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
-- [[skills/Symptom Vector Matching Engine|Symptom Vector Matching Engine]]
-- [[skills/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
-- [[synthesis/Production Troubleshooting Playbook|Production Troubleshooting Playbook]]
-- [[synthesis/Structural Troubleshooting Framework|Structural Troubleshooting Framework]]
-- [[skills/Kubernetes Diagnostic Skills Overview|Kubernetes Diagnostic Skills Overview]]
+- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
+- [[skills/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
+- [[concepts/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
+- [[concepts/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]]
+- [[skills/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
 
-- [[templates/decision-tree-template|decision-tree-template]]
-- [[docs/ERROR-FTA-MAP|KUDIG 错误码 → FTA 映射]] — Cross-reference
-- [[docs/COMMAND-DOC-MAP|KUDIG 命令 → 文档映射]] — Cross-reference
-- [[docs/API-DOC-MAP|KUDIG API → 文档映射]] — Cross-reference
+- [[scripts/templates/decision-tree-template.md|decision-tree-template]]
+- [[docs/ERROR-FTA-MAP.md|KUDIG 错误码 → FTA 映射]] — Cross-reference
+- [[docs/COMMAND-DOC-MAP.md|KUDIG 命令 → 文档映射]] — Cross-reference
+- [[docs/API-DOC-MAP.md|KUDIG API → 文档映射]] — Cross-reference

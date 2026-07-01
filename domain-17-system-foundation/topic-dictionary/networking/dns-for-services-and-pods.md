@@ -34,6 +34,7 @@ prerequisites:
 - cloud-provider-basics
 - redis-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # DNS for Services and [[Pods|Pods]]
@@ -186,6 +187,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Pod 的 DNS 配置
 kubectl exec <pod> -- cat /etc/resolv.conf
@@ -219,4 +223,4 @@ kubectl run dnsutils --rm -it --image=registry.k8s.io/e2e-test-images/jessie-dns
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]

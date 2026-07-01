@@ -76,16 +76,16 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 项目概述 -->## 1. 项目概述
 
-Envoy Gateway（简称 EG）是 Envoy 社区于 2022 年正式发起的官方 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]] 网关项目，目标是以 **Gateway API First** 的设计原则，为 Envoy Proxy 提供标准化、云原生的控制平面。
+Envoy Gateway（简称 EG）是 Envoy 社区于 2022 年正式发起的官方 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 网关项目，目标是以 **Gateway API First** 的设计原则，为 Envoy Proxy 提供标准化、云原生的控制平面。
 
-#<!-- chunk: 核心定位 -->## 核心定位
+## 核心定位
 
 - **CNCF 官方项目**：与 Envoy Proxy 同属 CNCF 生态，2023 年加入沙箱，2024 年晋升孵化级
 - **Gateway API First**：100% 以 Kubernetes Gateway API 为主接口，不引入自有私有 CRD 作为核心路由对象
 - **官方背书**：由 Envoy 核心维护者主导，矩阵涵盖 Tetrate、Microsoft、VMware 等主要贡献者
 - **轻量控制面**：相比 [[Istio|Istio]]/Contour 等，控制面极为精简，仅运行单个 `envoy-gateway` 控制器 Pod
 
-#<!-- chunk: 适用场景 -->## 适用场景
+## 适用场景
 
 | 场景 | 推荐理由 |
 |------|---------|
@@ -94,7 +94,7 @@ Envoy Gateway（简称 EG）是 Envoy 社区于 2022 年正式发起的官方 [[
 | 替换 Ingress 走向标准化 | 平滑迁移路径，官方社区支持 |
 | 多租户 Kubernetes 平台 | 细粒度命名空间隔离策略 |
 
-#<!-- chunk: 版本里程碑 -->## 版本里程碑
+## 版本里程碑
 
 | 版本 | 重要特性 |
 |------|---------|
@@ -107,7 +107,7 @@ Envoy Gateway（简称 EG）是 Envoy 社区于 2022 年正式发起的官方 [[
 
 <!-- chunk: 2. 核心架构 -->## 2. 核心架构
 
-#<!-- chunk: 整体架构图 -->## 整体架构图
+## 整体架构图
 
 ```
 ┌────────────────────────────────────────────────────────────────────┐
@@ -152,7 +152,7 @@ Envoy Gateway（简称 EG）是 Envoy 社区于 2022 年正式发起的官方 [[
 └────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: xDS 配置流转 -->## xDS 配置流转
+## xDS 配置流转
 
 ```
 Kubernetes CRD                IR（内部表示）             xDS 资源
@@ -163,7 +163,7 @@ GatewayClass
                └─ BackendRef ──▶  ClusterIR         ──▶  Cluster + Endpoint
 ```
 
-#<!-- chunk: 组件说明 -->## 组件说明
+## 组件说明
 
 | 组件 | 职责 |
 |------|------|
@@ -176,7 +176,10 @@ GatewayClass
 
 <!-- chunk: 3. 部署安装 -->## 3. 部署安装
 
-#<!-- chunk: 前置要求 -->## 前置要求
+## 前置要求
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 检查 Kubernetes 版本（需要 1.26+）
@@ -189,7 +192,10 @@ kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/downloa
 kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/experimental-install.yaml
 ```
 
-#<!-- chunk: Helm 安装 -->## Helm 安装
+## Helm 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 添加 Helm 仓库
@@ -210,7 +216,10 @@ helm install eg envoy-gateway/gateway-helm \
 kubectl get pods -n envoy-gateway-system
 ```
 
-#<!-- chunk: 快速验证 -->## 快速验证
+## 快速验证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 部署示例应用
@@ -227,7 +236,7 @@ export GATEWAY_HOST=$(kubectl get gateway/eg -n default -o jsonpath='{.status.ad
 curl -H "Host: www.example.com" http://$GATEWAY_HOST/
 ```
 
-#<!-- chunk: EnvoyProxy 自定义配置 -->## EnvoyProxy 自定义配置
+## EnvoyProxy 自定义配置
 
 ```yaml
 # envoyproxy-config.yaml
@@ -269,7 +278,7 @@ spec:
 
 <!-- chunk: 4. Gateway API 原生使用 -->## 4. Gateway API 原生使用
 
-#<!-- chunk: GatewayClass 配置 -->## GatewayClass 配置
+## GatewayClass 配置
 
 ```yaml
 # gatewayclass.yaml
@@ -286,7 +295,7 @@ spec:
     namespace: envoy-gateway-system
 ```
 
-#<!-- chunk: Gateway 多监听器配置 -->## Gateway 多监听器配置
+## Gateway 多监听器配置
 
 ```yaml
 # gateway-multi-listener.yaml
@@ -325,7 +334,7 @@ spec:
         name: grpc-tls-secret
 ```
 
-#<!-- chunk: HTTPRoute 路由规则 -->## HTTPRoute 路由规则
+## HTTPRoute 路由规则
 
 ```yaml
 # httproute-advanced.yaml
@@ -405,7 +414,7 @@ spec:
         statusCode: 301
 ```
 
-#<!-- chunk: GRPCRoute 配置 -->## GRPCRoute 配置
+## GRPCRoute 配置
 
 ```yaml
 # grpcroute.yaml
@@ -436,7 +445,7 @@ spec:
       port: 9090
 ```
 
-#<!-- chunk: TCPRoute 四层路由 -->## TCPRoute 四层路由
+## TCPRoute 四层路由
 
 ```yaml
 # tcproute.yaml
@@ -461,7 +470,7 @@ spec:
 
 Envoy Gateway 通过**策略附着（Policy Attachment）**模式在 Gateway API 对象上叠加能力，遵循 GEP-713 规范。
 
-#<!-- chunk: 策略层级关系 -->## 策略层级关系
+## 策略层级关系
 
 ```
 GatewayClass
@@ -472,7 +481,7 @@ GatewayClass
                               ←── RateLimitPolicy (附着在 HTTPRoute)
 ```
 
-#<!-- chunk: SecurityPolicy（认证/授权） -->## SecurityPolicy（认证/授权）
+## SecurityPolicy（认证/授权）
 
 ```yaml
 # security-policy.yaml
@@ -509,7 +518,7 @@ spec:
     maxAge: 3600
 ```
 
-#<!-- chunk: RateLimitPolicy（限流） -->## RateLimitPolicy（限流）
+## RateLimitPolicy（限流）
 
 ```yaml
 # ratelimit-policy.yaml
@@ -544,7 +553,7 @@ spec:
           unit: Hour
 ```
 
-#<!-- chunk: BackendTLSPolicy（后端 TLS） -->## BackendTLSPolicy（后端 TLS）
+## BackendTLSPolicy（后端 TLS）
 
 ```yaml
 # backend-tls-policy.yaml
@@ -566,7 +575,7 @@ spec:
     hostname: secure-backend.default.svc.cluster.local
 ```
 
-#<!-- chunk: ClientTrafficPolicy（客户端流量控制） -->## ClientTrafficPolicy（客户端流量控制）
+## ClientTrafficPolicy（客户端流量控制）
 
 ```yaml
 # client-traffic-policy.yaml
@@ -602,9 +611,7 @@ spec:
 
 `EnvoyPatchPolicy` 允许对 Envoy Gateway 生成的 xDS 配置进行**直接修改**，适用于 EG 尚未通过策略 API 暴露的底层 Envoy 能力。
 
-> ⚠️ **警告**：EnvoyPatchPolicy 绕过了 EG 的抽象层，可能导致升级不兼容，建议仅在无其他方案时使用。
-
-#<!-- chunk: 架构示意 -->## 架构示意
+## 架构示意
 
 ```
 Gateway API CRD
@@ -619,7 +626,7 @@ Patched xDS Config
 Envoy Proxy（加载最终配置）
 ```
 
-#<!-- chunk: 示例：添加自定义 Lua Filter -->## 示例：添加自定义 Lua Filter
+## 示例：添加自定义 Lua Filter
 
 ```yaml
 # envoy-patch-lua.yaml
@@ -650,7 +657,7 @@ spec:
             end
 ```
 
-#<!-- chunk: 示例：调整 Cluster 连接池参数 -->## 示例：调整 Cluster 连接池参数
+## 示例：调整 Cluster 连接池参数
 
 ```yaml
 # envoy-patch-cluster.yaml
@@ -685,7 +692,7 @@ spec:
           max_pending_requests: 500
 ```
 
-#<!-- chunk: 验证 Patch 效果 -->## 验证 Patch 效果
+## 验证 Patch 效果
 
 ```bash
 # 检查 EnvoyPatchPolicy 状态
@@ -707,7 +714,7 @@ curl http://localhost:19000/config_dump?resource=cluster | jq '.configs[].dynami
 
 Envoy Gateway 通过 `EnvoyExtensionPolicy` 支持加载 WebAssembly（Wasm）插件，实现自定义流量处理逻辑。
 
-#<!-- chunk: Wasm 插件加载方式 -->## Wasm 插件加载方式
+## Wasm 插件加载方式
 
 | 方式 | 场景 |
 |------|------|
@@ -715,7 +722,7 @@ Envoy Gateway 通过 `EnvoyExtensionPolicy` 支持加载 WebAssembly（Wasm）�
 | HTTP URL | 简单测试场景 |
 | ConfigMap | 小型 Wasm 模块 |
 
-#<!-- chunk: EnvoyExtensionPolicy 配置 -->## EnvoyExtensionPolicy 配置
+## EnvoyExtensionPolicy 配置
 
 ```yaml
 # envoy-extension-wasm.yaml
@@ -744,7 +751,7 @@ spec:
     failOpen: false
 ```
 
-#<!-- chunk: Wasm 插件开发（Go SDK 示例） -->## Wasm 插件开发（Go SDK 示例）
+## Wasm 插件开发（Go SDK 示例）
 
 ```go
 // main.go - 使用 proxy-wasm-go-sdk
@@ -805,7 +812,7 @@ docker push registry.example.com/wasm-plugins/custom-auth:v1.2.0
 
 <!-- chunk: 8. 可观测性 -->## 8. 可观测性
 
-#<!-- chunk: Prometheus 指标采集 -->## Prometheus 指标采集
+## Prometheus 指标采集
 
 ```yaml
 # prometheus-podmonitor.yaml
@@ -830,7 +837,7 @@ spec:
       targetLabel: namespace
 ```
 
-#<!-- chunk: 关键 Envoy 指标 -->## 关键 Envoy 指标
+## 关键 Envoy 指标
 
 | 指标类别 | 指标名称示例 | 含义 |
 |---------|------------|------|
@@ -841,7 +848,7 @@ spec:
 | 后端健康 | `envoy_cluster_upstream_cx_active` | 上游活跃连接 |
 | 限流 | `envoy_http_local_rate_limit_rate_limited` | 限流拦截请求数 |
 
-#<!-- chunk: 访问日志配置 -->## 访问日志配置
+## 访问日志配置
 
 ```yaml
 # access-log-policy.yaml
@@ -877,7 +884,7 @@ spec:
             port: 4317
 ```
 
-#<!-- chunk: 分布式追踪 -->## 分布式追踪
+## 分布式追踪
 
 ```yaml
 # tracing-config.yaml
@@ -906,7 +913,10 @@ spec:
             defaultValue: "unknown"
 ```
 
-#<!-- chunk: Grafana 仪表盘推荐 -->## Grafana 仪表盘推荐
+## Grafana 仪表盘推荐
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 导入 Envoy Gateway 官方 Grafana Dashboard
@@ -922,7 +932,7 @@ helm install prometheus prometheus-community/kube-prometheus-stack \
 
 <!-- chunk: 9. 生产部署建议 -->## 9. 生产部署建议
 
-#<!-- chunk: 高可用架构 -->## 高可用架构
+## 高可用架构
 
 ```
                     ┌──────────────────────────────────────┐
@@ -944,7 +954,7 @@ helm install prometheus prometheus-community/kube-prometheus-stack \
   envoy-gateway Controller: 单活（Leader Election via K8s lease）
 ```
 
-#<!-- chunk: 资源规划 -->## 资源规划
+## 资源规划
 
 | 组件 | 请求（Request） | 限制（Limit） | 副本数 |
 |------|---------------|-------------|-------|
@@ -954,7 +964,7 @@ helm install prometheus prometheus-community/kube-prometheus-stack \
 | envoy-proxy（大型） | 1 CPU / 1Gi | 4 CPU / 4Gi | 5+ |
 | rate-limit service | 100m CPU / 128Mi | 500m CPU / 512Mi | 2 |
 
-#<!-- chunk: HPA 自动扩缩配置 -->## HPA 自动扩缩配置
+## HPA 自动扩缩配置
 
 ```yaml
 # hpa-envoy-proxy.yaml
@@ -998,7 +1008,7 @@ spec:
         periodSeconds: 30
 ```
 
-#<!-- chunk: PodDisruptionBudget -->## PodDisruptionBudget
+## PodDisruptionBudget
 
 ```yaml
 # pdb-envoy-proxy.yaml
@@ -1015,7 +1025,7 @@ spec:
       gateway.envoyproxy.io/owning-gateway-name: eg
 ```
 
-#<!-- chunk: 生产检查清单 -->## 生产检查清单
+## 生产检查清单
 
 ```bash
 # ✅ 验证 GatewayClass 状态
@@ -1075,7 +1085,7 @@ curl http://localhost:19000/ready
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-40-cloud-native-api-gateway MOC
-- [[domain-03-networking-traffic/README|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
 - Domain-40 云原生 API 网关 — 开源项目索引
 - 01 - 云原生 API 网关架构总览
 - 02 - Kubernetes Gateway API 标准深度解析
@@ -1093,3 +1103,5 @@ curl http://localhost:19000/ready
 - 06-kong-enterprise-gateway
 - 08-traefik-enterprise-gateway
 - 09-nginx-ingress-migration-guide
+
+```

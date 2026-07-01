@@ -168,6 +168,12 @@ kubectl api-versions           # 支持的 API 版本
 
 ## 四、kubectl — 节点管理
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 查看节点
 kubectl get nodes -o wide
@@ -194,6 +200,11 @@ kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
 
 ## 五、kubectl — Pod 操作
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Pod
 kubectl get pods -o wide
@@ -219,12 +230,15 @@ kubectl cp <pod>:/path/file ./local-file
 # 生命周期
 kubectl run <name> --image=<image>
 kubectl delete pod <pod>
-kubectl delete pod <pod> --force --grace-period=0
+kubectl delete pod <pod> --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
 ---
 
 ## 六、kubectl — Deployment / [[StatefulSet|StatefulSet]]
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # Deployment
@@ -259,6 +273,9 @@ kubectl describe ingress <name>
 ---
 
 ## 八、kubectl — 存储
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # StorageClass

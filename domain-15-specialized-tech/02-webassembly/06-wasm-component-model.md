@@ -72,7 +72,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 组件模型概述 -->## 1. 组件模型概述
 
-#<!-- chunk: 1.1 为什么需要组件模型 -->## 1.1 为什么需要组件模型
+## 1.1 为什么需要组件模型
 
 传统 WebAssembly 模块（Core Module）存在以下局限性：
 
@@ -112,7 +112,7 @@ graph TB
     Lang --> CSharp
 ```
 
-#<!-- chunk: 1.2 组件模型核心概念 -->## 1.2 组件模型核心概念
+## 1.2 组件模型核心概念
 
 | 概念 | 说明 |
 |------|------|
@@ -123,7 +123,7 @@ graph TB
 | **Canonical ABI** | 规范化应用二进制接口，定义高级类型如何映射到线性内存 |
 | **Linking** | 组件之间的静态或动态组合机制 |
 
-#<!-- chunk: 1.3 规范发展历程 -->## 1.3 规范发展历程
+## 1.3 规范发展历程
 
 ```
 2019  Interface Types 提案发布
@@ -135,7 +135,7 @@ graph TB
 2025  Component Model 进入 Phase 3
 ```
 
-#<!-- chunk: 1.4 与传统模块对比 -->## 1.4 与传统模块对比
+## 1.4 与传统模块对比
 
 ```mermaid
 graph LR
@@ -156,7 +156,7 @@ graph LR
 
 <!-- chunk: 2. WIT 接口定义语言 -->## 2. WIT 接口定义语言
 
-#<!-- chunk: 2.1 WIT 基本语法 -->## 2.1 WIT 基本语法
+## 2.1 WIT 基本语法
 
 WIT（WebAssembly Interface Types）是一种专为 Wasm 接口设计的 IDL。
 
@@ -219,7 +219,7 @@ world calculator-world {
 }
 ```
 
-#<!-- chunk: 2.2 WIT 类型系统 -->## 2.2 WIT 类型系统
+## 2.2 WIT 类型系统
 
 ```wit
 // types-showcase.wit
@@ -302,7 +302,7 @@ interface type-demo {
 }
 ```
 
-#<!-- chunk: 2.3 WIT 包管理与版本控制 -->## 2.3 WIT 包管理与版本控制
+## 2.3 WIT 包管理与版本控制
 
 ```wit
 // 包声明格式: <namespace>:<name>@<semver>
@@ -343,7 +343,7 @@ world enhanced-http-world {
 }
 ```
 
-#<!-- chunk: 2.4 接口继承与组合 -->## 2.4 接口继承与组合
+## 2.4 接口继承与组合
 
 ```wit
 package example:service@0.1.0;
@@ -392,7 +392,7 @@ world microservice-world {
 
 <!-- chunk: 3. 组件结构与编码 -->## 3. 组件结构与编码
 
-#<!-- chunk: 3.1 组件二进制格式 -->## 3.1 组件二进制格式
+## 3.1 组件二进制格式
 
 WebAssembly Component 是对 Core Module 的封装，其二进制格式如下：
 
@@ -413,7 +413,7 @@ Component Binary Format:
 └─────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 3.2 Canonical ABI 类型映射 -->## 3.2 Canonical ABI 类型映射
+## 3.2 Canonical ABI 类型映射
 
 ```mermaid
 graph TD
@@ -471,7 +471,7 @@ graph TD
 // 7. 返回 (ptr, len)
 ```
 
-#<!-- chunk: 3.3 组件嵌套结构 -->## 3.3 组件嵌套结构
+## 3.3 组件嵌套结构
 
 ```mermaid
 graph TB
@@ -504,7 +504,7 @@ graph TB
 
 <!-- chunk: 4. 组件组合机制 -->## 4. 组件组合机制
 
-#<!-- chunk: 4.1 静态组合（Composition） -->## 4.1 静态组合（Composition）
+## 4.1 静态组合（Composition）
 
 使用 `wac` 或 `wasm-compose` 进行静态组合：
 
@@ -535,7 +535,7 @@ let app = new example:main {
 export app...;
 ```
 
-#<!-- chunk: 4.2 组合拓扑示例 -->## 4.2 组合拓扑示例
+## 4.2 组合拓扑示例
 
 ```mermaid
 graph LR
@@ -556,7 +556,7 @@ graph LR
     D --> |满足导入| C
 ```
 
-#<!-- chunk: 4.3 动态组合（Runtime Linking） -->## 4.3 动态组合（Runtime Linking）
+## 4.3 动态组合（Runtime Linking）
 
 ```rust
 // 使用 wasmtime 进行动态组件组合
@@ -608,7 +608,7 @@ fn main() -> anyhow::Result<()> {
 }
 ```
 
-#<!-- chunk: 4.4 接口适配器（Adapter） -->## 4.4 接口适配器（Adapter）
+## 4.4 接口适配器（Adapter）
 
 ```wit
 // 当组件接口不完全匹配时，使用适配器组件
@@ -665,7 +665,7 @@ impl Guest for Adapter {
 
 <!-- chunk: 5. wasm-tools 工具链 -->## 5. wasm-tools 工具链
 
-#<!-- chunk: 5.1 安装与基本使用 -->## 5.1 安装与基本使用
+## 5.1 安装与基本使用
 
 ```bash
 # 安装 wasm-tools
@@ -678,7 +678,7 @@ wasm-tools --version
 wasm-tools help
 ```
 
-#<!-- chunk: 5.2 WIT 操作命令 -->## 5.2 WIT 操作命令
+## 5.2 WIT 操作命令
 
 ```bash
 # 验证 WIT 文件语法
@@ -697,7 +697,7 @@ wasm-tools component wit ./wit/world.wit --document
 wasm-tools wit-smith wit/  # 模糊测试生成
 ```
 
-#<!-- chunk: 5.3 组件操作命令 -->## 5.3 组件操作命令
+## 5.3 组件操作命令
 
 ```bash
 # 将 Core Module 转换为 Component
@@ -722,7 +722,7 @@ wasm-tools print my_component.wasm -o my_component.wat
 wasm-tools objdump my_component.wasm
 ```
 
-#<!-- chunk: 5.4 组件组合命令 -->## 5.4 组件组合命令
+## 5.4 组件组合命令
 
 ```bash
 # 使用 wasm-compose 合并组件
@@ -745,7 +745,7 @@ wasm-compose \
 #       query: database.query
 ```
 
-#<!-- chunk: 5.5 优化命令 -->## 5.5 优化命令
+## 5.5 优化命令
 
 ```bash
 # 使用 wasm-opt 优化（需要安装 binaryen）
@@ -771,7 +771,7 @@ wasm-tools component embed \
   -o embedded.wasm
 ```
 
-#<!-- chunk: 5.6 调试与检测命令 -->## 5.6 调试与检测命令
+## 5.6 调试与检测命令
 
 ```bash
 # 检测 wasm 文件信息
@@ -800,7 +800,7 @@ wasm-tools print my_component.wasm | grep -E "(import|export)"
 
 <!-- chunk: 6. cargo-component 开发 -->## 6. cargo-component 开发
 
-#<!-- chunk: 6.1 环境搭建 -->## 6.1 环境搭建
+## 6.1 环境搭建
 
 ```bash
 # 安装 cargo-component
@@ -818,7 +818,7 @@ cargo install wac-cli
 cargo component --version
 ```
 
-#<!-- chunk: 6.2 创建新组件项目 -->## 6.2 创建新组件项目
+## 6.2 创建新组件项目
 
 ```bash
 # 创建新的组件项目
@@ -860,7 +860,7 @@ world = "my-world"
 "wasi:http" = { path = "./wit/deps/http" }
 ```
 
-#<!-- chunk: 6.3 完整业务组件示例 -->## 6.3 完整业务组件示例
+## 6.3 完整业务组件示例
 
 ```wit
 // wit/world.wit
@@ -1131,7 +1131,7 @@ fn deserialize_order(_s: &str) -> Option<Order> {
 export!(OrderService);
 ```
 
-#<!-- chunk: 6.4 构建与测试 -->## 6.4 构建与测试
+## 6.4 构建与测试
 
 ```bash
 # 构建组件
@@ -1162,7 +1162,7 @@ wasm-opt -Oz \
 
 <!-- chunk: 7. Go 语言组件开发 -->## 7. Go 语言组件开发
 
-#<!-- chunk: 7.1 使用 TinyGo 构建组件 -->## 7.1 使用 TinyGo 构建组件
+## 7.1 使用 TinyGo 构建组件
 
 ```bash
 # 安装 TinyGo
@@ -1240,7 +1240,7 @@ wasm-tools component new greeter.wasm \
 wasm-tools component wit greeter-component.wasm
 ```
 
-#<!-- chunk: 7.2 使用 wazero 运行组件 -->## 7.2 使用 wazero 运行组件
+## 7.2 使用 wazero 运行组件
 
 ```go
 // host/main.go - 使用 wazero 运行 Wasm 组件
@@ -1343,7 +1343,7 @@ func readString(mod api.Module, ptr, length uint32) string {
 
 <!-- chunk: 8. 接口类型系统 -->## 8. 接口类型系统
 
-#<!-- chunk: 8.1 Resource 类型详解 -->## 8.1 Resource 类型详解
+## 8.1 Resource 类型详解
 
 Resource 是 Component Model 中用于管理带状态对象生命周期的特殊类型：
 
@@ -1492,7 +1492,7 @@ impl GuestFileHandle for FileHandleResource {
 }
 ```
 
-#<!-- chunk: 8.2 类型兼容性规则 -->## 8.2 类型兼容性规则
+## 8.2 类型兼容性规则
 
 ```mermaid
 graph TD
@@ -1513,7 +1513,7 @@ graph TD
 
 <!-- chunk: 9. WASI 标准接口 -->## 9. WASI 标准接口
 
-#<!-- chunk: 9.1 WASI Preview 2 接口列表 -->## 9.1 WASI Preview 2 接口列表
+## 9.1 WASI Preview 2 接口列表
 
 ```
 WASI Preview 2 (基于 Component Model) 接口：
@@ -1560,7 +1560,7 @@ wasi:nn (神经网络)
   └── inference       # AI 推理接口
 ```
 
-#<!-- chunk: 9.2 使用 WASI HTTP 接口 -->## 9.2 使用 WASI HTTP 接口
+## 9.2 使用 WASI HTTP 接口
 
 ```rust
 // 使用 WASI HTTP 构建 HTTP 服务器组件
@@ -1639,7 +1639,7 @@ fn handle_api_request(request: &IncomingRequest) -> (u16, String) {
 
 <!-- chunk: 10. 组件注册与分发 -->## 10. 组件注册与分发
 
-#<!-- chunk: 10.1 OCI 注册表存储 -->## 10.1 OCI 注册表存储
+## 10.1 OCI 注册表存储
 
 ```bash
 # 将 Wasm 组件推送到 OCI 注册表
@@ -1666,7 +1666,7 @@ wkg pull \
   -o my-component-pulled.wasm
 ```
 
-#<!-- chunk: 10.2 WARG 协议注册表 -->## 10.2 WARG 协议注册表
+## 10.2 WARG 协议注册表
 
 ```bash
 # 安装 warg 客户端
@@ -1697,7 +1697,7 @@ warg install example:my-component@1.0.0
 # "example:my-component" = "1.0.0"
 ```
 
-#<!-- chunk: 10.3 Wasmtime 远程加载 -->## 10.3 Wasmtime 远程加载
+## 10.3 Wasmtime 远程加载
 
 ```rust
 // 从远程加载并缓存组件
@@ -1740,7 +1740,7 @@ async fn load_component_from_registry(
 
 <!-- chunk: 11. 运行时适配层 -->## 11. 运行时适配层
 
-#<!-- chunk: 11.1 wasmtime 组件运行时 -->## 11.1 wasmtime 组件运行时
+## 11.1 wasmtime 组件运行时
 
 ```rust
 // 完整的 wasmtime 组件运行时示例
@@ -1829,7 +1829,7 @@ fn main() -> Result<()> {
 }
 ```
 
-#<!-- chunk: 11.2 jco (JavaScript Component 工具) -->## 11.2 jco (JavaScript Component 工具)
+## 11.2 jco (JavaScript Component 工具)
 
 ```bash
 # 安装 jco
@@ -1884,7 +1884,7 @@ export function divide(a: number, b: number):
 
 <!-- chunk: 12. 生产实践案例 -->## 12. 生产实践案例
 
-#<!-- chunk: 12.1 微服务插件系统 -->## 12.1 微服务插件系统
+## 12.1 微服务插件系统
 
 ```mermaid
 graph TB
@@ -2035,7 +2035,7 @@ async fn main() -> anyhow::Result<()> {
 }
 ```
 
-#<!-- chunk: 12.2 多语言数据处理管道 -->## 12.2 多语言数据处理管道
+## 12.2 多语言数据处理管道
 
 ```yaml
 # 数据处理管道配置
@@ -2087,7 +2087,7 @@ pipeline:
 
 <!-- chunk: 13. 性能调优 -->## 13. 性能调优
 
-#<!-- chunk: 13.1 组件编译缓存 -->## 13.1 组件编译缓存
+## 13.1 组件编译缓存
 
 ```rust
 use wasmtime::{Engine, Config};
@@ -2140,7 +2140,7 @@ fn load_component_with_cache(
 }
 ```
 
-#<!-- chunk: 13.2 Store 复用与池化 -->## 13.2 Store 复用与池化
+## 13.2 Store 复用与池化
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -2192,7 +2192,7 @@ impl ComponentPool {
 }
 ```
 
-#<!-- chunk: 13.3 性能基准数据 -->## 13.3 性能基准数据
+## 13.3 性能基准数据
 
 ```
 Component Model 性能指标（典型场景）：
@@ -2220,7 +2220,7 @@ Component Model 性能指标（典型场景）：
 
 <!-- chunk: 14. 常见问题与排错 -->## 14. 常见问题与排错
 
-#<!-- chunk: 14.1 常见错误与解决方案 -->## 14.1 常见错误与解决方案
+## 14.1 常见错误与解决方案
 
 **错误 1：WIT 类型不匹配**
 ```
@@ -2247,7 +2247,7 @@ Error: attempted to use a resource after it was dropped
 ```
 **解决**：确保 Resource handle 在使用期间未被 drop，Rust 中使用 `ManuallyDrop` 或正确的生命周期标注。
 
-#<!-- chunk: 14.2 调试工具使用 -->## 14.2 调试工具使用
+## 14.2 调试工具使用
 
 ```bash
 # 详细错误输出
@@ -2271,7 +2271,7 @@ wasm-tools objdump my-component.wasm \
   | head -20
 ```
 
-#<!-- chunk: 14.3 版本兼容性矩阵 -->## 14.3 版本兼容性矩阵
+## 14.3 版本兼容性矩阵
 
 ```
 工具链版本兼容性（2025年）：
@@ -2317,7 +2317,7 @@ Wasm Component Model 通过 WIT 接口定义、Canonical ABI 和组件组合机�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
+- [[domain-15-specialized-tech/README.md|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
 - index.md|Domain-38 WebAssembly 云原生 — 开源项目索引]]
 - WebAssembly 云原生基础
 - containerd Wasm 运行时

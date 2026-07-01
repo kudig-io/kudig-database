@@ -158,7 +158,7 @@ kudig:TC-INFRA rdf:type kudig:TicketCategory ;
 
 kudig:TC-APP rdf:type kudig:TicketCategory ;
     skos:prefLabel "应用层" ;
-    skos:scopeNote "[[concepts/pod-lifecycle|pod]]、Deployment、Service 等应用运行时问题" .
+    skos:scopeNote "[[concepts/pod-lifecycle.md|pod]]、Deployment、Service 等应用运行时问题" .
 
 kudig:TC-SEC rdf:type kudig:TicketCategory ;
     skos:prefLabel "安全合规" ;

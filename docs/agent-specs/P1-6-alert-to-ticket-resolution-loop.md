@@ -108,30 +108,27 @@ route:
   # 按服务/组件路由
   routes:
     # P0 告警 - 直接触发 Agent 并通知值班
-    - match:
-        severity: critical
-        team: sre
-      receiver: 'agent-skill-trigger'
+    - matchers:
+      - severity="critical"
+      - team="sre"
+      receiver: agent-skill-trigger
       group_wait: 0s
       repeat_interval: 1h
-
     # 安全告警 - 直接触发 Agent 并升级安全团队
-    - match:
-        alertname: SecurityAlert
-      receiver: 'agent-security-trigger'
+    - matchers:
+      - alertname="SecurityAlert"
+      receiver: agent-security-trigger
       group_wait: 0s
-
     # P1 告警 - Agent 处理，失败则通知
-    - match:
-        severity: warning
-        team: ops
-      receiver: 'agent-skill-trigger'
+    - matchers:
+      - severity="warning"
+      - team="ops"
+      receiver: agent-skill-trigger
       group_wait: 2m
-
     # P2/P3 告警 - Agent 处理，静默
-    - match:
-        severity: info
-      receiver: 'agent-skill-trigger'
+    - matchers:
+      - severity="info"
+      receiver: agent-skill-trigger
       group_wait: 5m
       repeat_interval: 0s  # 静默重复
 ```
@@ -545,7 +542,7 @@ receivers:
 
   - name: 'pagerduty-critical'
     pagerduty_configs:
-      - service_key: '${PAGERDUTY_KEY}'
+      - routing_key: '${PAGERDUTY_KEY}'
         severity: critical
         description: '{{ .GroupLabels.alertname }}'
         details:
@@ -566,21 +563,19 @@ route:
   repeat_interval: 4h
 
   routes:
-    - match:
-        severity: critical
-      receiver: 'agent-skill-trigger'
-      routes:
-        - match:
-            team: sre
-          receiver: 'pagerduty-critical'
-
-    - match:
-        severity: warning
-      receiver: 'agent-skill-trigger'
-
-    - match_re:
-        alertname: 'Security.*'
-      receiver: 'pagerduty-critical'
+    - matchers:
+      - severity="critical"
+      receiver: agent-skill-trigger
+      continue: true
+    - matchers:
+      - team="sre"
+      receiver: pagerduty-critical
+    - matchers:
+      - severity="warning"
+      receiver: agent-skill-trigger
+    - matchers:
+      - alertname=~"Security.*"
+      receiver: pagerduty-critical
       continue: true
 ```
 
@@ -691,5 +686,5 @@ storm_handling:
 **关联文档**:
 - [P0-1: 工单分类体系与意图识别语料库](./P0-1-ticket-classification-intent-recognition.md)
 - [P0-3: 会话上下文管理机制](./P0-3-session-context-management.md)
-- [domain-10-troubleshooting-diagnostics/[[domain-04-storage-data/README|README]].md](../domain-10-troubleshooting-diagnostics/topic-skills/README.md)
+- [domain-10-troubleshooting-diagnostics/[[domain-04-storage-data/README.md|README]].md](../domain-10-troubleshooting-diagnostics/topic-skills/README.md)
 - [domain-06-observability/](../domain-06-observability/) — 监控告警详细文档

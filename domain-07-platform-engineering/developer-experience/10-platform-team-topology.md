@@ -126,7 +126,7 @@ k8s_versions:
 
 <!-- chunk: Team Topologies 基础框架 -->## Team Topologies 基础框架
 
-#<!-- chunk: 核心理念 -->## 核心理念
+## 核心理念
 
 Team Topologies 由 Matthew Skelton 和 Manuel Pais 提出，核心理念是：**软件架构会反映组织结构（Conway's Law）**，因此应该反过来 **有意识地设计团队结构来驱动期望的软件架构**（Inverse Conway Maneuver）。
 
@@ -155,7 +155,7 @@ graph TB
     style "Result" fill:#e3f2fd
 ```
 
-#<!-- chunk: 认知负载（Cognitive Load） -->## 认知负载（Cognitive Load）
+## 认知负载（Cognitive Load）
 
 Team Topologies 的另一核心概念是**认知负载管理**：
 
@@ -205,9 +205,9 @@ graph TD
     style CST fill:#f3e5f5
 ```
 
-#<!-- chunk: 各团队类型详解 -->## 各团队类型详解
+## 各团队类型详解
 
-##<!-- chunk: 1. Stream-Aligned Team（流对齐团队） -->## 1. Stream-Aligned Team（流对齐团队）
+## 1. Stream-Aligned Team（流对齐团队）
 
 ```mermaid
 graph LR
@@ -228,7 +228,7 @@ graph LR
 
 **示例**：支付团队（Payment Team）负责从支付 UI 到支付服务到对账系统的完整链路。
 
-##<!-- chunk: 2. Platform Team（平台团队） -->## 2. Platform Team（平台团队）
+## 2. Platform Team（平台团队）
 
 ```mermaid
 graph TB
@@ -242,7 +242,7 @@ graph TB
 
 **关键原则**：平台团队的成功衡量标准是**开发者能否在不联系平台团队的情况下完成大多数任务**。
 
-##<!-- chunk: 3. Enabling Team（赋能团队） -->## 3. Enabling Team（赋能团队）
+## 3. Enabling Team（赋能团队）
 
 ```yaml
 # 赋能团队的典型任务周期
@@ -272,7 +272,7 @@ enabling_team_engagement:
     - "同时支持太多团队（推荐最多3个）"
 ```
 
-##<!-- chunk: 4. Complicated-Subsystem Team（复杂子系统团队） -->## 4. Complicated-Subsystem Team（复杂子系统团队）
+## 4. Complicated-Subsystem Team（复杂子系统团队）
 
 | 适用场景 | 示例 |
 |---------|------|
@@ -307,7 +307,7 @@ graph TD
     FACIL --> SC3
 ```
 
-#<!-- chunk: 交互模式的演变 -->## 交互模式的演变
+## 交互模式的演变
 
 ```mermaid
 graph LR
@@ -327,7 +327,7 @@ graph LR
     XAAS1 -->|需要扩大采用时| FACIL1
 ```
 
-#<!-- chunk: 平台团队与 SAT 的交互设计 -->## 平台团队与 SAT 的交互设计
+## 平台团队与 SAT 的交互设计
 
 ```yaml
 # 平台团队与流对齐团队的交互协议
@@ -375,7 +375,7 @@ interaction_protocol:
 
 <!-- chunk: 平台团队定位 -->## 平台团队定位
 
-#<!-- chunk: 平台作为内部产品 -->## 平台作为内部产品
+## 平台作为内部产品
 
 ```mermaid
 graph TB
@@ -407,7 +407,7 @@ graph TB
     style "平台产品模式" fill:#e8f5e9
 ```
 
-#<!-- chunk: Platform as a Product 核心实践 -->## Platform as a Product 核心实践
+## Platform as a Product 核心实践
 
 ```mermaid
 mindmap
@@ -438,7 +438,7 @@ mindmap
 
 <!-- chunk: 平台团队组织结构 -->## 平台团队组织结构
 
-#<!-- chunk: 规模化平台团队结构 -->## 规模化平台团队结构
+## 规模化平台团队结构
 
 ```mermaid
 graph TD
@@ -492,7 +492,7 @@ graph TD
     end
 ```
 
-#<!-- chunk: 小团队（Startup/Scale-up）结构 -->## 小团队（Startup/Scale-up）结构
+## 小团队（Startup/Scale-up）结构
 
 ```mermaid
 graph TD
@@ -520,7 +520,7 @@ graph TD
     end
 ```
 
-#<!-- chunk: 平台工程师 vs 传统 DevOps -->## 平台工程师 vs 传统 DevOps
+## 平台工程师 vs 传统 DevOps
 
 | 维度 | 传统 DevOps/SRE | 平台工程师 |
 |------|----------------|-----------|
@@ -531,7 +531,7 @@ graph TD
 | **技能栈** | Linux, 网络, 监控 | K8s, 自动化, 产品思维 |
 | **与开发者关系** | 守门人 | 服务提供者 |
 
-#<!-- chunk: 招聘技能矩阵 -->## 招聘技能矩阵
+## 招聘技能矩阵
 
 ```yaml
 # 平台工程师技能矩阵
@@ -584,7 +584,7 @@ platform_engineer_skills:
 
 <!-- chunk: 支持模式设计 -->## 支持模式设计
 
-#<!-- chunk: 支持层级设计 -->## 支持层级设计
+## 支持层级设计
 
 ```mermaid
 graph TD
@@ -605,7 +605,7 @@ graph TD
     style T3 fill:#ffebee
 ```
 
-#<!-- chunk: Slack 支持渠道规范 -->## Slack 支持渠道规范
+## Slack 支持渠道规范
 
 ```markdown
 # 平台支持渠道使用指南
@@ -642,7 +642,7 @@ graph TD
 - **鼓励**: 大胆批评，不设门槛
 ```
 
-#<!-- chunk: On-Call 轮值设计 -->## On-Call 轮值设计
+## On-Call 轮值设计
 
 ```yaml
 # 平台团队 On-Call 配置
@@ -687,7 +687,7 @@ oncall:
     - "On-call 期间无 Sprint 承诺"
 ```
 
-#<!-- chunk: 支持工单优先级矩阵 -->## 支持工单优先级矩阵
+## 支持工单优先级矩阵
 
 ```mermaid
 quadrantChart
@@ -713,7 +713,7 @@ quadrantChart
 
 <!-- chunk: Toil 识别与削减 -->## Toil 识别与削减
 
-#<!-- chunk: 什么是 Toil（重复性苦工） -->## 什么是 Toil（重复性苦工）
+## 什么是 Toil（重复性苦工）
 
 Google SRE 对 Toil 的定义：
 - **手动的**（Manual）
@@ -749,7 +749,7 @@ graph LR
     style E fill:#e8f5e9
 ```
 
-#<!-- chunk: Toil 识别清单 -->## Toil 识别清单
+## Toil 识别清单
 
 ```yaml
 # 平台团队 Toil 审计模板
@@ -802,9 +802,9 @@ toil_audit:
         - "有多少生产部署需要人工审批且审批是橡皮图章？"
 ```
 
-#<!-- chunk: Toil 削减实施案例 -->## Toil 削减实施案例
+## Toil 削减实施案例
 
-##<!-- chunk: 案例1：自动化证书管理 -->## 案例1：自动化证书管理
+## 案例1：自动化证书管理
 
 ```yaml
 # Before: 手动申请和更新 TLS 证书
@@ -850,7 +850,7 @@ spec:
 # 回收期: 2.1 个月
 ```
 
-##<!-- chunk: 案例2：自动化命名空间配置 -->## 案例2：自动化命名空间配置
+## 案例2：自动化命名空间配置
 
 ```python
 # Before: 平台工程师手动创建命名空间
@@ -932,7 +932,7 @@ def apply_resource_quota(k8s, namespace: str, tier: str):
     )
 ```
 
-##<!-- chunk: Toil 削减追踪 -->## Toil 削减追踪
+## Toil 削减追踪
 
 ```python
 # toil_tracker.py
@@ -971,7 +971,7 @@ class ToilReductionTracker:
         }
 ```
 
-#<!-- chunk: Toil 目标与基准 -->## Toil 目标与基准
+## Toil 目标与基准
 
 Google SRE 建议 Toil 占工作时间不超过 **50%**，理想情况下 **< 30%**。
 
@@ -993,7 +993,7 @@ xychart-beta
 
 <!-- chunk: 平台运营节奏 -->## 平台运营节奏
 
-#<!-- chunk: 运营节奏框架 -->## 运营节奏框架
+## 运营节奏框架
 
 ```mermaid
 graph TD
@@ -1030,7 +1030,7 @@ graph TD
     end
 ```
 
-#<!-- chunk: Sprint 运作规范 -->## Sprint 运作规范
+## Sprint 运作规范
 
 ```yaml
 # 平台团队 Sprint 规范
@@ -1079,19 +1079,19 @@ sprint_cadence:
       action_tracking: "Jira Ticket 追踪，下期 Sprint Review 前完成"
 ```
 
-#<!-- chunk: 平台更新通讯模板 -->## 平台更新通讯模板
+## 平台更新通讯模板
 
 ```markdown
 # 🚀 Platform Update — Sprint 24 (Jan 15 - Jan 29, 2024)
 
 <!-- chunk: 🎉 新功能发布 -->## 🎉 新功能发布
-#<!-- chunk: PostgreSQL Promise v1.3.0 -->## PostgreSQL Promise v1.3.0
+## PostgreSQL Promise v1.3.0
 - **新增**: 支持 PostgreSQL 16
 - **改进**: 备份恢复时间缩短 40%
 - **修复**: 修复多可用区配置问题
 - 文档: https://platform.internal/docs/postgresql
 
-#<!-- chunk: 开发者门户：新增成本看板 -->## 开发者门户：新增成本看板
+## 开发者门户：新增成本看板
 - 现在可以在开发者门户查看团队的云资源成本
 - 支持按服务、环境、时间段筛选
 - 文档: https://platform.internal/docs/cost-dashboard
@@ -1105,7 +1105,7 @@ sprint_cadence:
 | 平台 API 可用性 | 99.96% | 99.91% | ↑ |
 
 <!-- chunk: ⚠️ 即将变更（需要关注） -->## ⚠️ 即将变更（需要关注）
-#<!-- chunk: CI Runner 升级 (Feb 5) -->## CI Runner 升级 (Feb 5)
+## CI Runner 升级 (Feb 5)
 - GitHub Actions Runner 将升级到 Ubuntu 22.04
 - **需要**: 检查是否依赖 Ubuntu 20.04 特有的包
 - 受影响团队：@platform-announce 中已列出
@@ -1124,7 +1124,7 @@ sprint_cadence:
 
 <!-- chunk: 变更管理与沟通 -->## 变更管理与沟通
 
-#<!-- chunk: 变更分级制度 -->## 变更分级制度
+## 变更分级制度
 
 ```mermaid
 graph TD
@@ -1141,7 +1141,7 @@ graph TD
     style C4 fill:#e8f5e9
 ```
 
-#<!-- chunk: RFC（Request for Comments）流程 -->## RFC（Request for Comments）流程
+## RFC（Request for Comments）流程
 
 ```markdown
 # RFC 模板
@@ -1193,7 +1193,7 @@ YYYY-MM-DD
 |--------|------|------|
 ```
 
-#<!-- chunk: 维护窗口沟通 -->## 维护窗口沟通
+## 维护窗口沟通
 
 ```yaml
 # 维护通知模板
@@ -1231,7 +1231,7 @@ maintenance_notification:
 
 <!-- chunk: 平台路线图规划 -->## 平台路线图规划
 
-#<!-- chunk: 路线图优先级框架 -->## 路线图优先级框架
+## 路线图优先级框架
 
 ```mermaid
 quadrantChart
@@ -1253,7 +1253,7 @@ quadrantChart
     自动化合规报告: [0.70, 0.75]
 ```
 
-#<!-- chunk: 年度路线图模板 -->## 年度路线图模板
+## 年度路线图模板
 
 ```yaml
 # 平台工程年度路线图
@@ -1324,7 +1324,7 @@ roadmap_2024:
 
 <!-- chunk: 平台团队成熟度模型 -->## 平台团队成熟度模型
 
-#<!-- chunk: 五级成熟度模型 -->## 五级成熟度模型
+## 五级成熟度模型
 
 ```mermaid
 graph LR
@@ -1341,7 +1341,7 @@ graph LR
     style L5 fill:#b3e5fc
 ```
 
-#<!-- chunk: 成熟度自评表 -->## 成熟度自评表
+## 成熟度自评表
 
 ```yaml
 # 平台团队成熟度自评
@@ -1385,7 +1385,7 @@ maturity_assessment:
       level_5: "预测分析，先进的 DX 度量体系"
 ```
 
-#<!-- chunk: 成熟度提升路径 -->## 成熟度提升路径
+## 成熟度提升路径
 
 ```mermaid
 gantt
@@ -1415,7 +1415,7 @@ gantt
 
 <!-- chunk: 总结 (Summary) -->## 总结 (Summary)
 
-#<!-- chunk: 核心要点 -->## 核心要点
+## 核心要点
 
 ```mermaid
 mindmap
@@ -1442,7 +1442,7 @@ mindmap
       鼓励贡献
 ```
 
-#<!-- chunk: 关键成功因素 -->## 关键成功因素
+## 关键成功因素
 
 | 因素 | 描述 | 常见失败原因 |
 |------|------|------------|
@@ -1471,7 +1471,7 @@ mindmap
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Domain 36: 平台工程 (Platform Engineering)]]
+- [[domain-07-platform-engineering/README.md|Domain 07: 平台工程 (Platform Engineering)]]
 - Domain-36 平台工程 — 开源项目索引
 - 平台工程概述与成熟度模型
 - 内部开发者平台设计原则

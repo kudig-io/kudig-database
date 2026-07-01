@@ -32,13 +32,14 @@ prerequisites:
 - cloud-provider-basics
 - gpu-scheduling-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 动态资源分配（DRA）集群管理员最佳实践
 
 ## 概述
 
-动态资源分配（[[Dynamic Resource Allocation|Dynamic Resource Allocation]], DRA）是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 中用于管理专用硬件资源（如 GPU、FPGA 等）的一套机制。本文档面向集群管理员，介绍在配置和使用 DRA 时的最佳实践，包括驱动部署、升级、监控和性能调优等方面的建议。
+动态资源分配（[[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]], DRA）是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 中用于管理专用硬件资源（如 GPU、FPGA 等）的一套机制。本文档面向集群管理员，介绍在配置和使用 DRA 时的最佳实践，包括驱动部署、升级、监控和性能调优等方面的建议。
 
 ## 核心概念/原理
 
@@ -137,3 +138,9 @@ kubectl get resourceclaims -A
 ## 参考链接
 
 - [Good practices for Dynamic Resource Allocation as a Cluster Admin - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/dra/)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-group.md|API 组]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]

@@ -35,6 +35,9 @@ created: "2026-05-23"
 
 ### 故障排查命令速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 检查 Higress 系统组件状态
 kubectl get pods -n higress-system
@@ -74,18 +77,18 @@ openssl s_client -connect <gateway>:443 -servername <sni>
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 
 ## Related
 
-- [[skills/ts-cluster-operations|ts-cluster-operations]] — 集群运维故障排查
+- [[skills/ts-cluster-operations.md|ts-cluster-operations]] — 集群运维故障排查
 - storage.md|ts-storage]] — 存储故障排查
-- [[skills/skill-19-node-resource-pressure|skill-19-node-resource-pressure]] — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
+- [[skills/skill-19-node-resource-pressure.md|skill-19-node-resource-pressure]] — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 - [[certificate-fta]] — 证书异常故障树分析
 - [[envoy]] — Envoy
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/higress-fta|Higress 网关异常故障树分析]]
-- [[skills/skill-README|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
-- [[skills/FTA-Driven Runbook Automation|FTA-Driven Runbook Automation]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/higress-fta.md|Higress 网关异常故障树分析]]
+- [[skills/skill-README.md|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
+- [[skills/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]

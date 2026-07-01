@@ -1,5 +1,5 @@
 ---
-title: Day 3: 值班交接 SOP [quick-start]
+title: "Day 3: 值班交接 SOP [quick-start]"
 description: '## 概述'
 category: learning
 tags:
@@ -34,7 +34,7 @@ created: "2026-05-23"
 
 # Day 3: 值班交接 SOP
 
-> **适用对象**: oncall 值班工程师 | **版本**: [[entities/kubernetes|[[Kubernetes 生产环境速查卡|k8s]]]] 1.28-1.33
+> **适用对象**: oncall 值班工程师 | **版本**: [[entities/kubernetes.md|[[Kubernetes 生产环境速查卡|k8s]]]] 1.28-1.33
 
 ---
 

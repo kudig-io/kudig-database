@@ -73,7 +73,7 @@ created: "2026-05-23"
 
 # AI基础设施架构
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [NVIDIA AI Enterprise](https://www.nvidia.com/en-us/data-center/products/ai-enterprise/) | [[entities/kubeflow|Kubeflow]]](https://www.kubeflow.org/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [NVIDIA AI Enterprise](https://www.nvidia.com/en-us/data-center/products/ai-enterprise/) | [[entities/kubeflow.md|Kubeflow]]](https://www.kubeflow.org/)
 
 <!-- chunk: AI Infra 全景架构 -->
 ## AI Infra 全景架构
@@ -172,6 +172,9 @@ created: "2026-05-23"
 - NUMA感知
 
 #### Helm安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add volcano-sh https://volcano-sh.github.io/helm-charts
@@ -699,6 +702,9 @@ export NCCL_P2P_LEVEL=SYS
 
 #### Helm部署
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 helm repo add juicefs https://juicedata.github.io/charts/
 helm install juicefs-csi-driver juicefs/juicefs-csi-driver \
@@ -1153,7 +1159,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-11-ai-infra KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
 - Domain-11 AI 基础设施 — 开源项目索引
 - 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
 - GPU 调度与管理
@@ -1176,8 +1182,8 @@ spec:
 - 分布式训练框架
 - 相关知识域: domain-02-workloads-applications
 - 相关知识域: domain-03-networking-traffic
-- [[domain-17-system-foundation/topic-cheat-sheet/go|速查卡: go]]
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|速查卡: go]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
 
 ## See Also
 
@@ -1185,3 +1191,5 @@ spec:
 - 99-kubeflow-ai-platform-guide
 - 02-ai-ml-workloads
 - 03-gpu-scheduling-management
+
+```

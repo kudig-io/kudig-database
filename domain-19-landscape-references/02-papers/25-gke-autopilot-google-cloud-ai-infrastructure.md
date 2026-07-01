@@ -122,7 +122,7 @@ GKE（Google Kubernetes Engine）在 2026 年已成为全球最成熟的托管 K
 
 <!-- chunk: 1. GKE Autopilot 2026 状态 -->## 1. GKE Autopilot 2026 状态
 
-#<!-- chunk: 1.1 Standard vs Autopilot 全面对比 -->## 1.1 Standard vs Autopilot 全面对比
+## 1.1 Standard vs Autopilot 全面对比
 
 GKE 提供两种运维模式，满足不同用户需求：
 
@@ -144,7 +144,7 @@ GKE 提供两种运维模式，满足不同用户需求：
 | **DaemonSet** | 完整支持 | 受限支持 |
 | **HostPath Volume** | 支持 | 不支持 |
 
-#<!-- chunk: 1.2 Dynamic Defaults 机制 -->## 1.2 Dynamic Defaults 机制
+## 1.2 Dynamic Defaults 机制
 
 GKE Autopilot 的 Dynamic Defaults 是 2025 年引入的智能资源管理机制：
 
@@ -169,7 +169,7 @@ Dynamic Defaults 填充:
 注意: 用户显式设置的值不会被覆盖
 ```
 
-#<!-- chunk: 1.3 GKE Autopilot 演进时间线 -->## 1.3 GKE Autopilot 演进时间线
+## 1.3 GKE Autopilot 演进时间线
 
 ```
 GKE Autopilot 发展历程：
@@ -207,7 +207,7 @@ GKE Autopilot 发展历程：
 
 <!-- chunk: 2. GKE Autopilot 核心特性 -->## 2. GKE Autopilot 核心特性
 
-#<!-- chunk: 2.1 自动节点供应 -->## 2.1 自动节点供应
+## 2.1 自动节点供应
 
 Autopilot 根据 Pod 的资源请求和约束自动选择最合适的节点类型：
 
@@ -250,7 +250,7 @@ spec:
         memory: "640Gi"
 ```
 
-#<!-- chunk: 2.2 Pod Security Baseline 强制执行 -->## 2.2 Pod Security Baseline 强制执行
+## 2.2 Pod Security Baseline 强制执行
 
 Autopilot 强制执行 Kubernetes Pod Security Standards (PSS) Baseline 级别：
 
@@ -294,7 +294,7 @@ spec:
       claimName: data-pvc
 ```
 
-#<!-- chunk: 2.3 蓝绿节点升级 -->## 2.3 蓝绿节点升级
+## 2.3 蓝绿节点升级
 
 ```
 蓝绿节点升级流程 (零中断)：
@@ -320,7 +320,7 @@ spec:
   所有 Pod 正常运行，零停机时间
 ```
 
-#<!-- chunk: 2.4 跨 AZ 反亲和性 -->## 2.4 跨 AZ 反亲和性
+## 2.4 跨 AZ 反亲和性
 
 ```yaml
 # Autopilot 最佳实践：配置跨可用区分散
@@ -358,7 +358,7 @@ spec:
 
 <!-- chunk: 3. TPU Ironwood on GKE -->## 3. TPU Ironwood on GKE
 
-#<!-- chunk: 3.1 TPU Ironwood 规格详解 -->## 3.1 TPU Ironwood 规格详解
+## 3.1 TPU Ironwood 规格详解
 
 第六代 TPU Ironwood 于 2026 年 1 月 GA，是 Google 专为大规模 AI 训练设计的超级芯片：
 
@@ -373,7 +373,7 @@ spec:
 | **适用场景** | 推理/小模型训练 | 大模型训练 | 超大规模 LLM 训练 |
 | **GKE 支持** | ✅ | ✅ | ✅ (Autopilot 2026 GA) |
 
-#<!-- chunk: 3.2 TPU Pod Slice 配置 -->## 3.2 TPU Pod Slice 配置
+## 3.2 TPU Pod Slice 配置
 
 ```yaml
 # tpu-ironwood-training-job.yaml
@@ -471,7 +471,7 @@ spec:
 #   --node-locations=us-central1-a
 ```
 
-#<!-- chunk: 3.3 Checkpoint 容错训练 -->## 3.3 Checkpoint 容错训练
+## 3.3 Checkpoint 容错训练
 
 TPU 训练中断是常见问题，自动 Checkpoint 是关键容错机制：
 
@@ -557,7 +557,7 @@ class FaultTolerantTPUTrainer:
 
 <!-- chunk: 4. Ray on GKE with TPU -->## 4. Ray on GKE with TPU
 
-#<!-- chunk: 4.1 KubeRay + TPU 架构 -->## 4.1 KubeRay + TPU 架构
+## 4.1 KubeRay + TPU 架构
 
 ```mermaid
 graph TB
@@ -605,7 +605,7 @@ graph TB
     style GPU_W1 fill:#FF6B35,color:#fff
 ```
 
-#<!-- chunk: 4.2 GKE TPU Ray Cluster YAML -->## 4.2 GKE TPU Ray Cluster YAML
+## 4.2 GKE TPU Ray Cluster YAML
 
 ```yaml
 # ray-cluster-tpu-gpu.yaml
@@ -740,7 +740,7 @@ spec:
               memory: "1760Gi"
 ```
 
-#<!-- chunk: 4.3 JAX 分布式训练示例 -->## 4.3 JAX 分布式训练示例
+## 4.3 JAX 分布式训练示例
 
 ```python
 # distributed_llm_training.py - JAX + Ray on TPU
@@ -838,7 +838,7 @@ ray.get(coordinate_training.remote())
 
 <!-- chunk: 5. Gemini CLI 与 GKE 运维 -->## 5. Gemini CLI 与 GKE 运维
 
-#<!-- chunk: 5.1 AI 辅助 Kubernetes 运维 -->## 5.1 AI 辅助 Kubernetes 运维
+## 5.1 AI 辅助 Kubernetes 运维
 
 Gemini CLI 将大语言模型能力集成到 Kubernetes 运维工作流，2026 年 3 月 GA：
 
@@ -864,7 +864,10 @@ gcloud gemini kubectl -- \
 # 4. 整合结果并以可读格式展示
 ```
 
-#<!-- chunk: 5.2 上下文感知故障诊断 -->## 5.2 上下文感知故障诊断
+## 5.2 上下文感知故障诊断
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 场景：服务延迟突然升高，AI 辅助排查
@@ -898,7 +901,7 @@ gcloud gemini diagnose --cluster=production-cluster \
 #   3. 添加数据库 N+1 监控告警
 ```
 
-#<!-- chunk: 5.3 Gemini 辅助 YAML 生成 -->## 5.3 Gemini 辅助 YAML 生成
+## 5.3 Gemini 辅助 YAML 生成
 
 ```bash
 # 自然语言生成 Kubernetes YAML
@@ -931,7 +934,7 @@ gcloud gemini create -- \
 
 <!-- chunk: 6. Autopilot GPU 工作负载 -->## 6. Autopilot GPU 工作负载
 
-#<!-- chunk: 6.1 L4 GPU 推理配置 -->## 6.1 L4 GPU 推理配置
+## 6.1 L4 GPU 推理配置
 
 ```yaml
 # l4-gpu-inference-deployment.yaml
@@ -1032,7 +1035,7 @@ spec:
           value: "0"
 ```
 
-#<!-- chunk: 6.2 Spot VM 混合部署 -->## 6.2 Spot VM 混合部署
+## 6.2 Spot VM 混合部署
 
 ```yaml
 # spot-ondemand-mixed-deployment.yaml
@@ -1106,7 +1109,7 @@ spec:
             nvidia.com/gpu: "1"
 ```
 
-#<!-- chunk: 6.3 快速节点池创建 (<1 分钟) -->## 6.3 快速节点池创建 (<1 分钟)
+## 6.3 快速节点池创建 (<1 分钟)
 
 GKE Autopilot 2026 的节点供应速度显著提升：
 
@@ -1130,7 +1133,7 @@ TPU Ironwood (v6)     N/A           5-8分钟
 
 <!-- chunk: 7. Container-Optimized OS -->## 7. Container-Optimized OS
 
-#<!-- chunk: 7.1 COS 安全架构 -->## 7.1 COS 安全架构
+## 7.1 COS 安全架构
 
 Container-Optimized OS (COS) 是 Google 专为运行容器而设计的 Linux 发行版，基于 Chromium OS：
 
@@ -1163,7 +1166,7 @@ COS 安全架构：
 └──────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 7.2 COS vs Ubuntu 对比 -->## 7.2 COS vs Ubuntu 对比
+## 7.2 COS vs Ubuntu 对比
 
 | 特性 | Container-Optimized OS | Ubuntu (GKE Ubuntu) |
 |-----|------------------------|---------------------|
@@ -1180,7 +1183,7 @@ COS 安全架构：
 | **启动时间** | 更快 | 标准 |
 | **适用场景** | 生产环境推荐 | 需要完整 Linux 环境 |
 
-#<!-- chunk: 7.3 COS eBPF 能力 -->## 7.3 COS eBPF 能力
+## 7.3 COS eBPF 能力
 
 ```yaml
 # 在 COS 节点上部署 eBPF 工具 (需要 privileged)
@@ -1226,7 +1229,7 @@ spec:
 
 <!-- chunk: 8. 成本优化策略 -->## 8. 成本优化策略
 
-#<!-- chunk: 8.1 Autopilot 计费模型 -->## 8.1 Autopilot 计费模型
+## 8.1 Autopilot 计费模型
 
 GKE Autopilot 按 Pod 请求的资源计费，而非按节点计费：
 
@@ -1246,7 +1249,7 @@ Committed Use Discount:
   3年: -55%
 ```
 
-#<!-- chunk: 8.2 TCO 对比分析 -->## 8.2 TCO 对比分析
+## 8.2 TCO 对比分析
 
 | 场景 | GKE Standard | GKE Autopilot | 节省 |
 |------|-------------|--------------|------|
@@ -1255,7 +1258,7 @@ Committed Use Discount:
 | **AI 推理 (持续)** | GPU 节点常驻 | On-Demand 稳定 | 10-20% |
 | **开发测试环境** | 手动管理 | Scale-to-Zero | 70-85% |
 
-#<!-- chunk: 8.3 废弃资源消除策略 -->## 8.3 废弃资源消除策略
+## 8.3 废弃资源消除策略
 
 ```yaml
 # 使用 Vertical Pod Autoscaler (VPA) 优化资源请求
@@ -1304,7 +1307,7 @@ spec:
       query: sum(rate(http_requests_total{app="api-service"}[1m]))
 ```
 
-#<!-- chunk: 8.4 成本优化检查清单 -->## 8.4 成本优化检查清单
+## 8.4 成本优化检查清单
 
 ```
 💰 Autopilot 成本优化
@@ -1343,7 +1346,7 @@ spec:
 
 <!-- chunk: 9. 未来趋势 -->## 9. 未来趋势
 
-#<!-- chunk: 9.1 AI 超算集群 (2026-2028) -->## 9.1 AI 超算集群 (2026-2028)
+## 9.1 AI 超算集群 (2026-2028)
 
 ```
 Google Distributed Cloud + GKE AI 超算愿景：
@@ -1366,7 +1369,7 @@ Google Distributed Cloud + GKE AI 超算愿景：
   📋 全球分布式训练 (跨数据中心 TPU Pod)
 ```
 
-#<!-- chunk: 9.2 Google Distributed Cloud -->## 9.2 Google Distributed Cloud
+## 9.2 Google Distributed Cloud
 
 ```yaml
 # Google Distributed Cloud (GDC) - 本地运行 GKE
@@ -1394,7 +1397,7 @@ spec:
         cloud.google.com/fleet-cluster: "true"
 ```
 
-#<!-- chunk: 9.3 跨领域关联 -->## 9.3 跨领域关联
+## 9.3 跨领域关联
 
 | 相关技术 | 关联点 | 参考文档 |
 |---------|-------|---------|
@@ -1426,7 +1429,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -1447,4 +1450,4 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

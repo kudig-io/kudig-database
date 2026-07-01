@@ -60,6 +60,9 @@ Frontend (Nginx) → Backend (Python API) → Database (MySQL) + Cache (Redis)
 
 **步骤**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. 创建命名空间
 kubectl create namespace production
@@ -265,6 +268,9 @@ kubectl get ingress -n production
 
 ### 2.1 场景：Web 应用无法访问
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # ========== 故障排查 SOP ==========
 
@@ -455,7 +461,7 @@ related_topics:
   - storage
   - security
 related:
-  - domain-11-production-operations/topic-learn/public-training/[[domain-04-storage-data/README|README]].md
+  - domain-11-production-operations/topic-learn/public-training/[[domain-04-storage-data/README.md|README]].md
   - domain-10-troubleshooting-diagnostics/00-troubleshooting-overview.md
 ---
 ```
@@ -504,3 +510,5 @@ ReadWriteOnce (单节点 RW) / ReadOnlyMany (多节点 RO) / ReadWriteMany (多�
 
 </details>
 
+
+```

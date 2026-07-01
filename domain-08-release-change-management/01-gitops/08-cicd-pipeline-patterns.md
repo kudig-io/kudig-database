@@ -92,7 +92,7 @@ CI/CD 流水线模式和部署策略是软件交付过程中的核心决策。�
 
 <!-- chunk: 二、架构设计 -->## 二、架构设计
 
-#<!-- chunk: 2.1 分支策略对比 -->## 2.1 分支策略对比
+## 2.1 分支策略对比
 
 ```mermaid
 graph TB
@@ -128,7 +128,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 2.2 渐进式交付架构 -->## 2.2 渐进式交付架构
+## 2.2 渐进式交付架构
 
 ```mermaid
 graph LR
@@ -155,7 +155,7 @@ graph LR
     end
 ```
 
-#<!-- chunk: 2.3 分支策略对比表 -->## 2.3 分支策略对比表
+## 2.3 分支策略对比表
 
 | 维度 | Trunk-Based | GitFlow | GitHub Flow |
 |:---|:---|:---|:---|
@@ -170,7 +170,7 @@ graph LR
 
 <!-- chunk: 三、核心配置 -->## 三、核心配置
 
-#<!-- chunk: 3.1 Trunk-Based + Argo CD 模式 -->## 3.1 Trunk-Based + Argo CD 模式
+## 3.1 Trunk-Based + Argo CD 模式
 
 ```yaml
 # GitHub Actions: 构建 + 推送 + 更新 GitOps
@@ -206,7 +206,7 @@ jobs:
           git push origin main
 ```
 
-#<!-- chunk: 3.2 Argo Rollouts 金丝雀发布 -->## 3.2 Argo Rollouts 金丝雀发布
+## 3.2 Argo Rollouts 金丝雀发布
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -286,7 +286,7 @@ spec:
             periodSeconds: 10
 ```
 
-#<!-- chunk: 3.3 AnalysisTemplate 指标分析 -->## 3.3 AnalysisTemplate 指标分析
+## 3.3 AnalysisTemplate 指标分析
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -347,7 +347,7 @@ spec:
             sum(rate(http_requests_total{service="myapp-canary"}[1m]))
 ```
 
-#<!-- chunk: 3.4 蓝绿部署 -->## 3.4 蓝绿部署
+## 3.4 蓝绿部署
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -410,7 +410,7 @@ spec:
       targetPort: 8080
 ```
 
-#<!-- chunk: 3.5 环境晋升 Pipeline -->## 3.5 环境晋升 Pipeline
+## 3.5 环境晋升 Pipeline
 
 ```yaml
 # 环境晋升流水线 (GitHub Actions)
@@ -455,7 +455,7 @@ jobs:
 
 <!-- chunk: 四、安全与合规 -->## 四、安全与合规
 
-#<!-- chunk: 4.1 发布审批策略 -->## 4.1 发布审批策略
+## 4.1 发布审批策略
 
 ```yaml
 # 环境保护规则
@@ -473,7 +473,7 @@ environments:
     wait_timer: 60
 ```
 
-#<!-- chunk: 4.2 回滚安全 -->## 4.2 回滚安全
+## 4.2 回滚安全
 
 ```yaml
 rollback_policy:
@@ -496,7 +496,7 @@ rollback_policy:
 
 <!-- chunk: 五、多环境管理策略 -->## 五、多环境管理策略
 
-#<!-- chunk: 5.1 Promotion 矩阵 -->## 5.1 Promotion 矩阵
+## 5.1 Promotion 矩阵
 
 ```yaml
 promotion_matrix:
@@ -517,7 +517,7 @@ promotion_matrix:
       - manual_approval: required
 ```
 
-#<!-- chunk: 5.2 多集群金丝雀 -->## 5.2 多集群金丝雀
+## 5.2 多集群金丝雀
 
 ```yaml
 # 逐集群金丝雀发布
@@ -545,7 +545,7 @@ spec:
 
 <!-- chunk: 六、监控与回滚 -->## 六、监控与回滚
 
-#<!-- chunk: 6.1 Rollout 监控 -->## 6.1 Rollout 监控
+## 6.1 Rollout 监控
 
 ```yaml
 - alert: RolloutStuck
@@ -575,7 +575,7 @@ spec:
     summary: "金丝雀版本错误率超过 5%"
 ```
 
-#<!-- chunk: 6.2 回滚操作 -->## 6.2 回滚操作
+## 6.2 回滚操作
 
 ```bash
 # Argo Rollouts 回滚
@@ -598,7 +598,7 @@ kubectl argo rollouts retry myapp -n production
 
 <!-- chunk: 七、最佳实践 -->## 七、最佳实践
 
-#<!-- chunk: 7.1 部署策略选择 -->## 7.1 部署策略选择
+## 7.1 部署策略选择
 
 ```
 滚动更新 (RollingUpdate):
@@ -617,7 +617,7 @@ kubectl argo rollouts retry myapp -n production
   缺点: 配置复杂、需要流量管理
 ```
 
-#<!-- chunk: 7.2 AnalysisTemplate 最佳实践 -->## 7.2 AnalysisTemplate 最佳实践
+## 7.2 AnalysisTemplate 最佳实践
 
 ```yaml
 1. 指标选择:
@@ -684,7 +684,7 @@ kubectl get virtualservice myapp-vsvc -n production -o yaml
 
 <!-- chunk: 九、环境晋升自动化 -->## 九、环境晋升自动化
 
-#<!-- chunk: 9.1 晋升流水线设计 -->## 9.1 晋升流水线设计
+## 9.1 晋升流水线设计
 
 环境晋升（Environment Promotion）是将经过验证的制品从一个环境推进到下一个更高级环境的过程。在 GitOps 模式下，晋升的本质是更新 GitOps 清单仓库中的镜像标签引用。一个设计良好的晋升流程应该包含自动化验证门禁和必要的人工审批点。
 
@@ -750,7 +750,7 @@ jobs:
           git push origin main
 ```
 
-#<!-- chunk: 9.2 Trunk-Based 开发与持续部署 -->## 9.2 Trunk-Based 开发与持续部署
+## 9.2 Trunk-Based 开发与持续部署
 
 Trunk-Based Development（主干开发）是高绩效团队的首选分支策略。它的核心理念是所有开发者在 main 分支（主干）上频繁提交，通过短命的 feature 分支和自动化流水线确保代码质量。结合 Argo CD 的自动同步模式，可以实现从代码提交到生产部署的全自动化。
 
@@ -780,7 +780,7 @@ jobs:
           git push
 ```
 
-#<!-- chunk: 9.3 GitFlow 版本发布策略 -->## 9.3 GitFlow 版本发布策略
+## 9.3 GitFlow 版本发布策略
 
 GitFlow 适用于发布周期较长、需要同时维护多个版本的企业级应用。它通过 develop（开发集成）、release（发布准备）、hotfix（紧急修复）等长期分支管理不同阶段的代码。结合 Argo CD 的手动同步模式，可以在 release 分支准备就绪后触发生产部署。
 
@@ -815,7 +815,7 @@ jobs:
 
 <!-- chunk: 十、渐进式交付深度实践 -->## 十、渐进式交付深度实践
 
-#<!-- chunk: 10.1 Argo Rollouts 金丝雀发布 -->## 10.1 Argo Rollouts 金丝雀发布
+## 10.1 Argo Rollouts 金丝雀发布
 
 Argo Rollouts 是 Kubernetes Deployment 的替代控制器，提供了原生的金丝雀发布和蓝绿部署能力。与 Deployment 的滚动更新相比，Argo Rollouts 支持基于流量百分比的精确控制、自动回滚和集成外部指标分析。
 
@@ -863,7 +863,7 @@ spec:
       abortScaleDownDelaySeconds: 30
 ```
 
-#<!-- chunk: 10.2 Flagger 自动化分析 -->## 10.2 Flagger 自动化分析
+## 10.2 Flagger 自动化分析
 
 Flagger 是 [[Flux|Flux]] 生态中的渐进式交付工具，支持 Istio、[[Linkerd|Linkerd]]、App Mesh、Contour、NGINX 和 Gloo 等多种服务网格和 Ingress 控制器。Flagger 的 AnalysisTemplate 支持 Prometheus、Datadog、CloudWatch 和 Webhook 等多种指标来源，可以根据业务指标自动决定是否继续发布或回滚。
 
@@ -911,7 +911,7 @@ spec:
           namespace: flagger-system
 ```
 
-#<!-- chunk: 10.3 发布窗口与维护策略 -->## 10.3 发布窗口与维护策略
+## 10.3 发布窗口与维护策略
 
 企业级发布管理需要考虑发布窗口、维护计划和业务影响。推荐的策略是：工作日白天发布低风险变更，工作日晚上发布中风险变更，周末发布高风险变更。紧急修复（Hotfix）可以突破发布窗口限制，但需要额外的审批流程。
 
@@ -946,13 +946,14 @@ release_policy:
       - 根因分析（24小时内）
       - 补充回归测试
       - 更新文档
+
 ```
 
 ---
 
 <!-- chunk: 十一、CI/CD 平台迁移策略 -->## 十一、CI/CD 平台迁移策略
 
-#<!-- chunk: 11.1 从传统 CI/CD 迁移到 GitOps -->## 11.1 从传统 CI/CD 迁移到 GitOps
+## 11.1 从传统 CI/CD 迁移到 GitOps
 
 企业从传统 CI/CD（如 Jenkins + kubectl apply）迁移到 GitOps 需要分阶段进行。推荐的迁移路径是：第一阶段将部署脚本转换为 Kubernetes 清单并存入 Git 仓库；第二阶段引入 Argo CD 或 Flux 进行自动化同步；第三阶段将 CI 和 CD 解耦，CI 只负责构建和推送镜像，CD 完全由 GitOps 工具接管。
 
@@ -977,7 +978,7 @@ release_policy:
     - 完善安全扫描和合规流程
 ```
 
-#<!-- chunk: 11.2 多 CI 平台共存 -->## 11.2 多 CI 平台共存
+## 11.2 多 CI 平台共存
 
 在大型企业中，往往存在多个 CI 平台共存的局面（如 Jenkins 处理遗留项目、GitHub Actions 处理开源项目、Tekton 处理云原生项目）。GitOps 可以作为统一的部署层，屏蔽底层 CI 平台的差异。无论使用哪个 CI 平台，最终的部署都是通过更新 GitOps 清单仓库来触发。
 
@@ -1029,7 +1030,7 @@ release_policy:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-08-release-change-management MOC
-- [[domain-08-release-change-management/README|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
+- [[domain-08-release-change-management/README.md|Domain 08: GitOps与CI/CD (GitOps & CI/CD)]]
 - Domain-23 GitOps & CI/CD — 开源项目索引
 - Argo CD企业级GitOps实践指南
 - Jenkins企业级CI/CD流水线深度实践
@@ -1047,3 +1048,5 @@ release_policy:
 - 07-gitops-security-compliance
 - 99-argo-cd-gitops-guide
 - 99-flux-gitops-guide
+
+```

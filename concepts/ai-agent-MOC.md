@@ -139,8 +139,8 @@ AI Agent — AI 智能体架构、工具调用、Agent 工作流
 
 - [[skill-k8s-node-notready-SKILL]] — Skill
 - [[deployment]] — Deployment
-- [[concepts/deployment-controller-architecture|Deployment 控制器架构]] — Cross-reference
+- [[concepts/deployment-controller-architecture.md|Deployment 控制器架构]] — Cross-reference
 
 ## 相关合成分析
 
-- [[synthesis/gpu-scheduling-ai-workloads|gpu-scheduling-ai-workloads]]
+- [[concepts/gpu-scheduling-ai-workloads.md|gpu-scheduling-ai-workloads]]

@@ -73,7 +73,7 @@ created: "2026-05-23"
 
 <!-- chunk: 事件索引表 -->## 事件索引表
 
-#<!-- chunk: Job Controller Events -->## Job Controller Events
+## Job Controller Events
 
 | Event Reason | Type | 频率 | 起始版本 | 描述 |
 |--------------|------|------|----------|------|
@@ -90,7 +90,7 @@ created: "2026-05-23"
 | FailedJob | Warning | 低频 | v1.26+ | Indexed Job 失败 |
 | SuccessCriteriaMet | Normal | 低频 | v1.28+ | 满足成功策略 |
 
-#<!-- chunk: CronJob Controller Events -->## CronJob Controller Events
+## CronJob Controller Events
 
 | Event Reason | Type | 频率 | 起始版本 | 描述 |
 |--------------|------|------|----------|------|
@@ -107,7 +107,7 @@ created: "2026-05-23"
 
 <!-- chunk: Job 控制器事件 -->## Job 控制器事件
 
-#<!-- chunk: 1. SuccessfulCreate (Pod 创建成功) -->## 1. SuccessfulCreate (Pod 创建成功)
+## 1. SuccessfulCreate (Pod 创建成功)
 
 **事件模板:**
 ```yaml
@@ -167,7 +167,7 @@ spec:
 
 ---
 
-#<!-- chunk: 2. SuccessfulDelete (Pod 删除成功) -->## 2. SuccessfulDelete (Pod 删除成功)
+## 2. SuccessfulDelete (Pod 删除成功)
 
 **事件模板:**
 ```yaml
@@ -224,7 +224,7 @@ spec:
 
 ---
 
-#<!-- chunk: 3. FailedCreate (Pod 创建失败) -->## 3. FailedCreate (Pod 创建失败)
+## 3. FailedCreate (Pod 创建失败)
 
 **事件模板:**
 ```yaml
@@ -327,7 +327,7 @@ spec:
 
 ---
 
-#<!-- chunk: 4. Completed (Job 完成) -->## 4. Completed (Job 完成)
+## 4. Completed (Job 完成)
 
 **事件模板:**
 ```yaml
@@ -385,7 +385,7 @@ status:
 
 ---
 
-#<!-- chunk: 5. BackoffLimitExceeded (重试上限已达) -->## 5. BackoffLimitExceeded (重试上限已达)
+## 5. BackoffLimitExceeded (重试上限已达)
 
 **事件模板:**
 ```yaml
@@ -544,7 +544,7 @@ spec:
 
 ---
 
-#<!-- chunk: 6. DeadlineExceeded (活跃截止时间超时) -->## 6. DeadlineExceeded (活跃截止时间超时)
+## 6. DeadlineExceeded (活跃截止时间超时)
 
 **事件模板:**
 ```yaml
@@ -612,7 +612,7 @@ spec:
 
 ---
 
-#<!-- chunk: 7. TooManyActivePods (活跃 Pod 过多) -->## 7. TooManyActivePods (活跃 Pod 过多)
+## 7. TooManyActivePods (活跃 Pod 过多)
 
 **事件模板:**
 ```yaml
@@ -653,7 +653,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager --tail=200 | gr
 
 ---
 
-#<!-- chunk: 8. TooManySucceededPods (成功 Pod 过多) -->## 8. TooManySucceededPods (成功 Pod 过多)
+## 8. TooManySucceededPods (成功 Pod 过多)
 
 **事件模板:**
 ```yaml
@@ -682,7 +682,7 @@ Count: 1
 
 ---
 
-#<!-- chunk: 9. Suspended (Job 已暂停) -->## 9. Suspended (Job 已暂停)
+## 9. Suspended (Job 已暂停)
 
 **事件模板:**
 ```yaml
@@ -713,6 +713,10 @@ Count: 1
 - 💾 保留 Job 状态和配置
 
 **使用场景:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 暂停 Job
 kubectl patch job batch-processor -p '{"spec":{"suspend":true}}'
@@ -751,7 +755,7 @@ kubectl patch job non-critical-batch -p '{"spec":{"suspend":false}}'
 
 ---
 
-#<!-- chunk: 10. Resumed (Job 已恢复) -->## 10. Resumed (Job 已恢复)
+## 10. Resumed (Job 已恢复)
 
 **事件模板:**
 ```yaml
@@ -779,6 +783,10 @@ Count: 1
 - 📊 可配合监控和自动化
 
 **观测示例:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 恢复 Job
 kubectl patch job batch-processor -p '{"spec":{"suspend":false}}'
@@ -789,7 +797,7 @@ kubectl get events --field-selector involvedObject.name=batch-processor --sort-b
 
 ---
 
-#<!-- chunk: 11. FailedJob (Indexed Job 失败) -->## 11. FailedJob (Indexed Job 失败)
+## 11. FailedJob (Indexed Job 失败)
 
 **事件模板:**
 ```yaml
@@ -847,7 +855,7 @@ spec:
 
 ---
 
-#<!-- chunk: 12. SuccessCriteriaMet (满足成功策略) -->## 12. SuccessCriteriaMet (满足成功策略)
+## 12. SuccessCriteriaMet (满足成功策略)
 
 **事件模板:**
 ```yaml
@@ -899,7 +907,7 @@ spec:
 
 <!-- chunk: CronJob 控制器事件 -->## CronJob 控制器事件
 
-#<!-- chunk: 13. SuccessfulCreate (Job 创建成功) -->## 13. SuccessfulCreate (Job 创建成功)
+## 13. SuccessfulCreate (Job 创建成功)
 
 **事件模板:**
 ```yaml
@@ -943,7 +951,7 @@ kubectl get cronjob hourly-backup -o jsonpath='{.status.active}'
 
 ---
 
-#<!-- chunk: 14. SuccessfulDelete (Job 删除成功) -->## 14. SuccessfulDelete (Job 删除成功)
+## 14. SuccessfulDelete (Job 删除成功)
 
 **事件模板:**
 ```yaml
@@ -995,7 +1003,7 @@ spec:
 
 ---
 
-#<!-- chunk: 15. SawCompletedJob (发现已完成 Job) -->## 15. SawCompletedJob (发现已完成 Job)
+## 15. SawCompletedJob (发现已完成 Job)
 
 **事件模板:**
 ```yaml
@@ -1027,7 +1035,7 @@ Count: 1
 
 ---
 
-#<!-- chunk: 16. UnexpectedJob (发现未预期 Job) -->## 16. UnexpectedJob (发现未预期 Job)
+## 16. UnexpectedJob (发现未预期 Job)
 
 **事件模板:**
 ```yaml
@@ -1068,7 +1076,7 @@ kubectl get cronjob hourly-backup -o yaml
 
 ---
 
-#<!-- chunk: 17. MissingJob (预期 Job 未找到) -->## 17. MissingJob (预期 Job 未找到)
+## 17. MissingJob (预期 Job 未找到)
 
 **事件模板:**
 ```yaml
@@ -1097,7 +1105,7 @@ Count: 1
 
 ---
 
-#<!-- chunk: 18. TooManyMissedTimes (错过太多执行时间) -->## 18. TooManyMissedTimes (错过太多执行时间)
+## 18. TooManyMissedTimes (错过太多执行时间)
 
 **事件模板:**
 ```yaml
@@ -1172,7 +1180,7 @@ spec:
 
 ---
 
-#<!-- chunk: 19. FailedCreate (Job 创建失败) -->## 19. FailedCreate (Job 创建失败)
+## 19. FailedCreate (Job 创建失败)
 
 **事件模板:**
 ```yaml
@@ -1215,6 +1223,10 @@ Error creating job: admission webhook "validate.job" denied the request: invalid
 - 📊 持续失败会积压调度
 
 **故障排查:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. 验证 Job 模板
 kubectl create job test-job --from=cronjob/hourly-backup --dry-run=server
@@ -1269,7 +1281,7 @@ subjects:
 
 ---
 
-#<!-- chunk: 20. ForbidConcurrent (并发策略禁止) -->## 20. ForbidConcurrent (并发策略禁止)
+## 20. ForbidConcurrent (并发策略禁止)
 
 **事件模板:**
 ```yaml
@@ -1396,7 +1408,11 @@ spec:
 
 <!-- chunk: 批处理执行生命周期 -->## 批处理执行生命周期
 
-#<!-- chunk: Job 执行流程 -->## Job 执行流程
+## Job 执行流程
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -1489,7 +1505,7 @@ spec:
               重新创建 Pod
 ```
 
-#<!-- chunk: CronJob 调度流程 -->## CronJob 调度流程
+## CronJob 调度流程
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -1606,7 +1622,7 @@ Job 监控:
 
 <!-- chunk: 深度分析 -->## 深度分析
 
-#<!-- chunk: 1. BackoffLimitExceeded 深度剖析 -->## 1. BackoffLimitExceeded 深度剖析
+## 1. BackoffLimitExceeded 深度剖析
 
 **退避算法实现:**
 ```go
@@ -1770,7 +1786,7 @@ groups:
 
 ---
 
-#<!-- chunk: 2. Job Suspend/Resume 特性 (v1.22+) -->## 2. Job Suspend/Resume 特性 (v1.22+)
+## 2. Job Suspend/Resume 特性 (v1.22+)
 
 **使用场景:**
 
@@ -1878,7 +1894,7 @@ kubectl describe job db-migration | grep -A 5 "Suspended\|Resumed"
 
 ---
 
-#<!-- chunk: 3. Indexed Jobs (v1.24 GA) -->## 3. Indexed Jobs (v1.24 GA)
+## 3. Indexed Jobs (v1.24 GA)
 
 **完整示例:**
 ```yaml
@@ -2052,7 +2068,7 @@ kubectl logs -l job-name=data-processor,batch.kubernetes.io/job-completion-index
 
 ---
 
-#<!-- chunk: 4. CronJob 时区支持 (v1.25+) -->## 4. CronJob 时区支持 (v1.25+)
+## 4. CronJob 时区支持 (v1.25+)
 
 **时区配置:**
 ```yaml
@@ -2088,7 +2104,7 @@ spec:
 
 <!-- chunk: 故障排查模式 -->## 故障排查模式
 
-#<!-- chunk: 问题 1: Job 长时间不创建 Pod -->## 问题 1: Job 长时间不创建 Pod
+## 问题 1: Job 长时间不创建 Pod
 
 **症状:**
 ```bash
@@ -2101,6 +2117,10 @@ kubectl get pods -l job-name=my-job
 ```
 
 **排查步骤:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. 检查 Job 事件
 kubectl describe job my-job | grep Events -A 20
@@ -2130,7 +2150,7 @@ kubectl create job test --image=busybox --dry-run=server
 
 ---
 
-#<!-- chunk: 问题 2: CronJob 不按时执行 -->## 问题 2: CronJob 不按时执行
+## 问题 2: CronJob 不按时执行
 
 **症状:**
 ```bash
@@ -2166,6 +2186,11 @@ kubectl logs -n kube-system -l component=kube-controller-manager --tail=100 | gr
 ```
 
 **解决方案:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方案 1: 清理卡住的 Job
 kubectl delete job -l cronjob-name=hourly-backup --field-selector=status.successful!=1
@@ -2182,7 +2207,7 @@ kubectl patch cronjob hourly-backup -p '{"spec":{"jobTemplate":{"spec":{"activeD
 
 ---
 
-#<!-- chunk: 问题 3: Job 频繁达到 BackoffLimitExceeded -->## 问题 3: Job 频繁达到 BackoffLimitExceeded
+## 问题 3: Job 频繁达到 BackoffLimitExceeded
 
 **症状:**
 ```bash
@@ -2276,7 +2301,7 @@ spec:
 
 <!-- chunk: 相关参考 -->## 相关参考
 
-#<!-- chunk: 内部文档 -->## 内部文档
+## 内部文档
 
 **Domain-33 Kubernetes Events:**
 - [01-pod-lifecycle-events.md](./01-pod-lifecycle-events.md) - Pod 生命周期事件（FailedScheduling 等）
@@ -2296,7 +2321,7 @@ spec:
 - [domain-8-kubernetes-workloads/](../domain-8-kubernetes-workloads/) - Workload 工作负载详解
 - [domain-17-batch-processing/](../domain-17-batch-processing/) - 批处理模式最佳实践
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 
 **Job/CronJob:**
 - [Jobs - Run to Completion](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
@@ -2310,7 +2335,7 @@ spec:
 - [KEP-3329: Pod Failure Policy](https://github.com/kubernetes/enhancements/tree/master/keps/sig-apps/3329-retriable-and-non-retriable-failures)
 - [KEP-3998: Job Success/Completion Policy](https://github.com/kubernetes/enhancements/tree/master/keps/sig-apps/3998-job-success-completion-policy)
 
-#<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
 
 **资源配置:**
 ```yaml
@@ -2464,7 +2489,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-33-kubernetes-events MOC
-- [[domain-17-system-foundation/README|Domain-33: Kubernetes Events 全域事件大全]]
+- [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
 - Domain-33 K8s 事件 — 开源项目索引
 - 01 - Kubernetes 事件系统架构与 API 参考
 - 02 - Pod 与容器生命周期事件
@@ -2485,4 +2510,4 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

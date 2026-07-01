@@ -123,6 +123,10 @@ related:
 
 ### 任务 1: 安装 Nginx Ingress Controller (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 方式 1: 使用 Helm (推荐)
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
@@ -144,6 +148,9 @@ kubectl get svc -n ingress-nginx
 ```
 
 ### 任务 2: 配置 Ingress 路由 (45min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建测试应用
@@ -231,6 +238,9 @@ curl -H "Host: app1.local" http://$INGRESS_IP/
 
 ### 任务 3: 配置 TLS (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 生成自签名证书
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
@@ -275,6 +285,11 @@ rm tls.key tls.crt
 ```
 
 ### 任务 4: NetworkPolicy 实践 (45min)
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 创建测试 namespace
@@ -367,7 +382,7 @@ kubectl exec -n netpol-test web -- wget -qO- --timeout=2 db
 # 应该超时
 
 # 清理
-kubectl delete namespace netpol-test
+kubectl delete namespace netpol-test  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
 ---

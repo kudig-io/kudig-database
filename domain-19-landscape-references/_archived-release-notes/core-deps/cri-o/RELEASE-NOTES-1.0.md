@@ -39,7 +39,7 @@ Welcome to the v1.0.9 release of CRI-O!
 
 
 Please try out the release binaries and report any issues at
-https://github.[[entities/kubernetes|kubernetes]]-incubator/cri-o/issues.
+https://github.[[entities/kubernetes.md|kubernetes]]-incubator/cri-o/issues.
 
 
 

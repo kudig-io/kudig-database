@@ -511,6 +511,10 @@ ETCDCTL_API=3 etcdctl snapshot status /backup/etcd-snapshot-20240101.db --write-
 
 ### 场景 2: 从快照恢复 etcd
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 停止所有控制面组件
 crictl stop $(crictl ps --name etcd -q)
@@ -790,9 +794,9 @@ curl -s http://127.0.0.1:2381/metrics | grep -E 'etcd_server_has_leader|etcd_ser
 ## Related
 
 - [[hot|hot]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/operations/certificates|certificates]]
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/operations/certificates.md|certificates]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

@@ -255,6 +255,9 @@ kubectl get pods -n kube-system -l app=csi-*
 
 #### 2.3.3 网络标识检查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查 Headless Service
 kubectl get svc <service-name> -o yaml
@@ -323,6 +326,9 @@ Events:
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. 检查 PVC 状态
 kubectl get pvc -l app=<statefulset-name>
@@ -375,6 +381,9 @@ mysql-0   0/1     Running   0          5m
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 检查 Pod-0 的 Ready 条件
 kubectl describe pod <statefulset>-0 | grep -A5 "Conditions:"
@@ -407,12 +416,19 @@ kubectl patch sts <name> -p '{"spec":{"podManagementPolicy":"Parallel"}}'
 #### 场景 1：Headless Service 配置错误
 
 **问题现象：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 $ kubectl exec mysql-0 -- nslookup mysql-1.mysql-headless
 nslookup: can't resolve 'mysql-1.mysql-headless'
 ```
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 检查 Headless Service 配置
@@ -461,6 +477,9 @@ kubectl get sts <name> -o jsonpath='{.spec.serviceName}'
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 检查 CoreDNS 状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns
@@ -491,6 +510,10 @@ Waiting for 1 pods to be ready...
 ```
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 查看更新状态
@@ -526,6 +549,9 @@ kubectl rollout status sts <name>
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 查看更新历史
 kubectl rollout history sts <name>
@@ -546,6 +572,10 @@ kubectl rollout status sts <name>
 #### 场景 3：分区更新 (金丝雀发布)
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 设置 partition，只更新序号 >= partition 的 Pod
@@ -573,6 +603,10 @@ kubectl patch sts <name> -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partit
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 列出关联的 PVC
 kubectl get pvc -l app=<statefulset>
@@ -598,6 +632,11 @@ kubectl patch pv <pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"
 #### 场景 2：存储容量扩展
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 确认 StorageClass 支持扩展
@@ -646,6 +685,10 @@ kubectl get pvc -l app=<statefulset>
 
 **解决步骤：**
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 缩容 StatefulSet
 kubectl scale sts <name> --replicas=2
@@ -660,7 +703,7 @@ kubectl get pvc -l app=<statefulset>
 kubectl delete pvc <pvc-name>
 
 # 5. 如果 Pod 删除卡住
-kubectl delete pod <pod-name> --grace-period=0 --force
+kubectl delete pod <pod-name> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
 **风险提示：**
@@ -761,6 +804,10 @@ spec:
 
 ### 常用排查命令速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # StatefulSet 状态
 kubectl get sts -o wide
@@ -791,21 +838,23 @@ kubectl scale sts <name> --replicas=<n>
 
 ### 相关文档
 
-- [Pod 故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting|01-pod-troubleshooting]].md)
-- [PV/PVC 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting|01-pv-pvc-troubleshooting]].md)
-- [DNS 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting|02-dns-troubleshooting]].md)
-- [调度故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting|03-scheduler-troubleshooting]].md)
+- [Pod 故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
+- [PV/PVC 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md|01-pv-pvc-troubleshooting]].md)
+- [DNS 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]].md)
+- [调度故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/openkruise-index|OpenKruise 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/openkruise-index.md|OpenKruise 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting|01-pod-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|02-deployment-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting|04-daemonset-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting|05-job-cronjob-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting.md|04-daemonset-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting.md|05-job-cronjob-troubleshooting]]
+
+```

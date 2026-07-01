@@ -114,7 +114,7 @@ k8s_versions:
 
 从信息系统角度看，分布式能源是一个典型的工业物联网（IIoT）+ 边缘计算场景。每个分布式站点（工商业屋顶、储能电站、充电站）部署边缘计算网关，负责设备级实时控制和安全联锁；云平台负责全局监控、能量优化调度、数据分析和运维管理。AI 技术广泛应用于光伏功率预测、负荷预测、储能调度优化、故障诊断等场景。
 
-#<!-- chunk: 1.1 行业背景 -->## 1.1 行业背景
+## 1.1 行业背景
 
 | 挑战 | 说明 | 架构影响 |
 |:---|:---|:---|
@@ -124,7 +124,7 @@ k8s_versions:
 | 运维分散 | 数万站点远程运维 | IoT 平台 + 数字孪生 |
 | 收益计算 | 自发自用/余电上网/峰谷套利 | 精细化计量 + 结算系统 |
 
-#<!-- chunk: 1.2 核心场景 -->## 1.2 核心场景
+## 1.2 核心场景
 
 - **光伏电站监控**: 组串级监控、逆变器管理、发电效率分析
 - **储能系统管理**: BMS（电池管理）/PCS（功率变换）/EMS（能量管理）协同
@@ -136,19 +136,19 @@ k8s_versions:
 
 <!-- chunk: 2. 设计原则 -->## 2. 设计原则
 
-#<!-- chunk: 2.1 云边协同原则 -->## 2.1 云边协同原则
+## 2.1 云边协同原则
 
 分布式能源系统采用"边缘控制+云端优化"的协同模式。边缘侧负责设备级实时控制（毫秒级响应），包括 PCS 控制、BMS 管理、并网保护等；云端负责全局优化（分钟级/小时级），包括能量调度、功率预测、运维决策等。边缘节点必须具备离线自治能力，在通信中断时维持设备安全运行。
 
-#<!-- chunk: 2.2 安全可靠原则 -->## 2.2 安全可靠原则
+## 2.2 安全可靠原则
 
 分布式能源涉及高压电气设备和电池储能系统，安全是首要考虑。架构设计需要：电气安全（并网保护、绝缘监测、防孤岛保护）、消防安全（储能热管理、灭火系统联动）、数据安全（远程控制命令加密认证）。关键控制链路采用硬接线或独立安全 PLC，不依赖通信网络。
 
-#<!-- chunk: 2.3 数据驱动原则 -->## 2.3 数据驱动原则
+## 2.3 数据驱动原则
 
 分布式能源的优化依赖大量运行数据：光伏组串的 I-V 曲线、储能电池的 SOC/SOH 变化、负荷的时序特征等。通过建立数字孪生模型，实现发电预测、储能寿命预测、问题预警等高级功能。数据采集频率根据应用需求分级：实时控制数据 1s、监控数据 10s、分析数据 1min。
 
-#<!-- chunk: 2.4 开放互联原则 -->## 2.4 开放互联原则
+## 2.4 开放互联原则
 
 分布式能源系统需要与电网调度系统、电力交易平台、碳交易系统等外部系统互联。架构设计需要基于标准协议（IEC 61850、Modbus、MQTT、OpenADR），提供标准化 API，支持与上下游系统的数据互通和业务协同。
 
@@ -156,7 +156,7 @@ k8s_versions:
 
 <!-- chunk: 3. 架构模式 -->## 3. 架构模式
 
-#<!-- chunk: 3.1 分布式能源全景架构 -->## 3.1 分布式能源全景架构
+## 3.1 分布式能源全景架构
 
 ```mermaid
 graph TB
@@ -203,7 +203,7 @@ graph TB
     C1 & C2 & C3 --> P1 & P2 & P3 & P4 & P5
 ```
 
-#<!-- chunk: 3.2 EMS 能量管理系统架构 -->## 3.2 EMS 能量管理系统架构
+## 3.2 EMS 能量管理系统架构
 
 ```mermaid
 graph LR
@@ -233,7 +233,7 @@ graph LR
     E3 --> O1 & O2 & O3 & O4
 ```
 
-#<!-- chunk: 3.3 虚拟电厂聚合架构 -->## 3.3 虚拟电厂聚合架构
+## 3.3 虚拟电厂聚合架构
 
 ```mermaid
 graph TB
@@ -268,7 +268,7 @@ graph TB
 
 <!-- chunk: 4. 实现示例 -->## 4. 实现示例
 
-#<!-- chunk: 4.1 光伏功率预测 -->## 4.1 光伏功率预测
+## 4.1 光伏功率预测
 
 ```python
 import numpy as np
@@ -343,7 +343,7 @@ class SolarPowerPredictor:
         ]
 ```
 
-#<!-- chunk: 4.2 储能调度优化 -->## 4.2 储能调度优化
+## 4.2 储能调度优化
 
 ```python
 from dataclasses import dataclass
@@ -414,7 +414,7 @@ class EnergyScheduler:
         return schedule
 ```
 
-#<!-- chunk: 4.3 站点监控数据采集 -->## 4.3 站点监控数据采集
+## 4.3 站点监控数据采集
 
 ```go
 package energy
@@ -540,7 +540,7 @@ func (sc *SiteCollector) Flush() []TelemetryPoint {
 
 <!-- chunk: 5. 在 Kubernetes 上的部署 -->## 5. 在 Kubernetes 上的部署
 
-#<!-- chunk: 5.1 EMS 能量管理核心服务 -->## 5.1 EMS 能量管理核心服务
+## 5.1 EMS 能量管理核心服务
 
 ```yaml
 apiVersion: apps/v1
@@ -591,7 +591,7 @@ spec:
               cpu: "2000m"
 ```
 
-#<!-- chunk: 5.2 边缘采集网关 DaemonSet -->## 5.2 边缘采集网关 DaemonSet
+## 5.2 边缘采集网关 DaemonSet
 
 ```yaml
 apiVersion: apps/v1
@@ -630,7 +630,7 @@ spec:
               cpu: "500m"
 ```
 
-#<!-- chunk: 5.3 AI 功率预测服务 -->## 5.3 AI 功率预测服务
+## 5.3 AI 功率预测服务
 
 ```yaml
 apiVersion: apps/v1
@@ -671,21 +671,21 @@ spec:
 
 <!-- chunk: 6. 最佳实践 -->## 6. 最佳实践
 
-#<!-- chunk: 6.1 能量管理优化 -->## 6.1 能量管理优化
+## 6.1 能量管理优化
 
 - **多时间尺度调度**: 日前计划（24h）、日内修正（1h）、实时调整（5min）三层调度体系
 - **电价响应**: 根据分时电价信号自动调整储能充放电策略，实现峰谷套利
 - **需量控制**: 监控最大需量，通过储能放电削峰，降低基本电费
 - **绿电优先**: 优先使用光伏等可再生能源，余电上网或储存
 
-#<!-- chunk: 6.2 运维管理 -->## 6.2 运维管理
+## 6.2 运维管理
 
 - **组串级监控**: 光伏系统监控到组串级别，及时发现遮挡、问题、衰减
 - **SOC 均衡**: 多簇电池并联运行时，主动均衡各簇 SOC，延长整体寿命
 - **热管理**: 储能系统温度监控，过高时降功率运行，触发灭火系统联动
 - **远程运维**: 通过 VPN 安全通道实现远程诊断和参数调整
 
-#<!-- chunk: 6.3 数据管理 -->## 6.3 数据管理
+## 6.3 数据管理
 
 - **时序数据高效存储**: 使用 Lindorm TSDB 存储高频传感器数据
 - **数据分级**: 实时数据 10s 精度保留 30 天、历史数据 1min 精度保留 2 年
@@ -695,31 +695,31 @@ spec:
 
 <!-- chunk: 7. 反模式 -->## 7. 反模式
 
-#<!-- chunk: 7.1 忽视并网保护 -->## 7.1 忽视并网保护
+## 7.1 忽视并网保护
 
 储能或光伏系统未配置并网保护装置，电网问题时继续向电网送电，危害维修人员安全。
 
 **解决方案**: 配置防孤岛保护装置，电网断电时 0.2s 内自动断开并网开关。定期测试并网保护功能的有效性。
 
-#<!-- chunk: 7.2 储能过充过放 -->## 7.2 储能过充过放
+## 7.2 储能过充过放
 
 储能系统缺乏 SOC 管理策略，长期过充过放导致电池加速衰减甚至热失控。
 
 **解决方案**: BMS 严格限制 SOC 在 10%-90% 范围内运行。PCS 根据电池温度和 SOC 动态调整充放电功率。设置多级告警阈值。
 
-#<!-- chunk: 7.3 忽视通信安全 -->## 7.3 忽视通信安全
+## 7.3 忽视通信安全
 
 边缘网关使用明文通信，远程控制命令未加密，存在被篡改和攻击的风险。
 
 **解决方案**: 所有远程通信使用 TLS 加密。控制命令使用数字签名认证。实施网络安全分区，控制网络与管理网络隔离。
 
-#<!-- chunk: 7.4 单一数据源预测 -->## 7.4 单一数据源预测
+## 7.4 单一数据源预测
 
 光伏功率预测仅依赖历史数据，未融合天气预报，预测精度低。
 
 **解决方案**: 融合数值天气预报（NWP）、卫星云图、天空成像仪等多源数据。使用集成学习方法提升预测鲁棒性。
 
-#<!-- chunk: 7.5 忽视电池衰减 -->## 7.5 忽视电池衰减
+## 7.5 忽视电池衰减
 
 储能调度策略未考虑电池循环寿命衰减，频繁浅充浅放导致寿命缩短。
 
@@ -729,7 +729,7 @@ spec:
 
 <!-- chunk: 8. 参考资源 -->## 8. 参考资源
 
-#<!-- chunk: 8.1 阿里云组件映射 -->## 8.1 阿里云组件映射
+## 8.1 阿里云组件映射
 
 | 功能域 | **阿里云云原生方案** |
 |:---|:---|
@@ -741,7 +741,7 @@ spec:
 | 消息队列 | **RocketMQ** |
 | 可观测性 | **ARMS + SLS** |
 
-#<!-- chunk: 8.2 生产检查清单 -->## 8.2 生产检查清单
+## 8.2 生产检查清单
 
 - [ ] 并网保护功能验证（防孤岛保护 < 0.2s）
 - [ ] 储能系统热管理测试（温升 < 5°C/h）
@@ -752,7 +752,7 @@ spec:
 - [ ] 功率预测精度 > 85%（日前）
 - [ ] 系统可用性 99.9% 验证
 
-#<!-- chunk: 8.3 外部参考 -->## 8.3 外部参考
+## 8.3 外部参考
 
 - IEC 61850 — 电力系统通信标准
 - IEEE 2030.5 — 智能能源通信协议
@@ -769,17 +769,17 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

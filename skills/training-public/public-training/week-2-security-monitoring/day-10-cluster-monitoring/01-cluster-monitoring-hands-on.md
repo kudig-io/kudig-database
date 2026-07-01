@@ -51,7 +51,7 @@ created: "2026-05-23"
 | 层 | 指标 | 采集工具 | 说明 |
 |---|------|---------|------|
 | 基础设施层 | CPU/内存/磁盘/网络 | node_exporter | 节点级别资源使用 |
-| [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 层 | Pod/Deployment/Node 状态 | kube-state-metrics | K8s 对象状态 |
+| [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 层 | Pod/Deployment/Node 状态 | kube-state-metrics | K8s 对象状态 |
 | 应用层 | 业务指标（QPS/Latency/Error） | 应用自暴露 | Pod 内应用 metrics |
 
 ### 1.2 监控组件清单
@@ -71,6 +71,9 @@ Prometheus Operator (监控中枢)
 
 ### 2.1 使用 kube-prometheus-stack
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 添加 Prometheus Community Helm repo
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -89,6 +92,9 @@ helm install prometheus prometheus-community/kube-prometheus-stack \
 ```
 
 ### 2.2 关键组件验证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查所有组件状态
@@ -274,6 +280,9 @@ spec:
 
 ### 5.1 导入官方仪表盘
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 常用仪表盘 ID（可直接在 Grafana UI 导入）
 # Kubernetes / Nodes - 15764
@@ -321,18 +330,17 @@ route:
   group_interval: 5m
   repeat_interval: 4h
   routes:
-    - match:
-        severity: critical
-      receiver: "critical-alert"
+    - matchers:
+      - severity="critical"
+      receiver: critical-alert
       group_wait: 10s
       continue: true
-    - match:
-        severity: warning
-      receiver: "warning-alert"
-    - match:
-        alertname: "Watchdog"
-      receiver: "watchdog"
-
+    - matchers:
+      - severity="warning"
+      receiver: warning-alert
+    - matchers:
+      - alertname="Watchdog"
+      receiver: watchdog
 receivers:
   - name: "default"
     email_configs:
@@ -340,7 +348,7 @@ receivers:
         send_resolved: true
   - name: "critical-alert"
     pagerduty_configs:
-      - service_key: "YOUR_PD_KEY"
+      - routing_key: "YOUR_PD_KEY"
         severity: critical
     webhook_configs:
       - url: "https://oapi.dingtalk.com/robot/send?access_token=YOUR_TOKEN"
@@ -422,4 +430,5 @@ related:
   - domain-06-observability/01-prometheus-operator-deep-dive.md
   - domain-06-observability/05-alert-manager-configuration.md
 ---
+```
 ```

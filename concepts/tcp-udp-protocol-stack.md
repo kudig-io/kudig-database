@@ -91,10 +91,10 @@ Kube-proxy implements Service load balancing through iptables NAT rules (default
 ## Related
 
 - [[etcd]] — etcd
-- [[concepts/linux-sysctl-tuning|linux-sysctl-tuning]] — Linux Sysctl Tuning for Kubernetes
-- [[concepts/cilium-ebpf-networking|cilium-ebpf-networking]] — Cilium eBPF Networking
-- [[concepts/service-mesh-architecture|service-mesh-architecture]] — Service Mesh Architecture
+- [[concepts/linux-sysctl-tuning.md|linux-sysctl-tuning]] — Linux Sysctl Tuning for Kubernetes
+- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]] — Cilium eBPF Networking
+- [[concepts/service-mesh-architecture.md|service-mesh-architecture]] — Service Mesh Architecture
 - [[cilium]] — Cilium
-- [[concepts/linux-sysctl-tuning|Linux Sysctl Tuning]]
-- [[concepts/service-mesh-architecture|Service Mesh Architecture]]
-- [[concepts/cilium-ebpf-networking|Cilium eBPF Networking]]
+- [[concepts/linux-sysctl-tuning.md|Linux Sysctl Tuning]]
+- [[concepts/service-mesh-architecture.md|Service Mesh Architecture]]
+- [[concepts/cilium-ebpf-networking.md|Cilium eBPF Networking]]

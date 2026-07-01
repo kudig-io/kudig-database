@@ -29,7 +29,7 @@ created: "2026-05-23"
 
 ## 概述
 
-本页面描述了针对 Windows 操作系统的安全考虑和最佳实践。Windows 节点在 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 集群中的行为与 Linux 节点存在显著差异，特别是在 Secret 保护、容器用户和 Pod 安全隔离方面。
+本页面描述了针对 Windows 操作系统的安全考虑和最佳实践。Windows 节点在 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群中的行为与 Linux 节点存在显著差异，特别是在 Secret 保护、容器用户和 Pod 安全隔离方面。
 
 ## 核心概念/原理
 
@@ -72,3 +72,9 @@ created: "2026-05-23"
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/security/windows-security/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/security/admission-controller.md|准入控制器]]
+- [[domain-17-system-foundation/topic-dictionary/security/application-security-checklist.md|应用安全清单]]
+- [[domain-17-system-foundation/topic-dictionary/security/athenz.md|Athenz 身份认证与授权]]

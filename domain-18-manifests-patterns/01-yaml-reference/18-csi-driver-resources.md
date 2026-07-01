@@ -67,7 +67,7 @@ created: "2026-05-23"
 
 <!-- chunk: 一、CSI 架构概述 -->## 一、CSI 架构概述
 
-#<!-- chunk: 1.1 CSI (Container Storage Interface) 介绍 -->## 1.1 CSI (Container Storage Interface) 介绍
+## 1.1 CSI (Container Storage Interface) 介绍
 
 **CSI** 是 Kubernetes 定义的容器存储接口标准,用于解耦存储供应商实现与 Kubernetes 核心代码。
 
@@ -106,7 +106,7 @@ created: "2026-05-23"
 └────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.2 CSI 三阶段挂载流程 -->## 1.2 CSI 三阶段挂载流程
+## 1.2 CSI 三阶段挂载流程
 
 ```
 ========== 阶段 1: Controller Publish (控制平面) ==========
@@ -145,7 +145,7 @@ NodeUnpublishVolume → NodeUnstageVolume → ControllerUnpublishVolume
 
 <!-- chunk: 二、CSIDriver (驱动注册) -->## 二、CSIDriver (驱动注册)
 
-#<!-- chunk: 2.1 API 资源信息 -->## 2.1 API 资源信息
+## 2.1 API 资源信息
 
 ```yaml
 # API 元数据
@@ -163,7 +163,7 @@ metadata:
 - **驱动能力声明**: 告知 Kubernetes 驱动支持哪些功能
 - **可选创建**: 驱动可在部署时自动创建此对象
 
-#<!-- chunk: 2.2 核心字段结构 -->## 2.2 核心字段结构
+## 2.2 核心字段结构
 
 ```yaml
 spec:
@@ -183,7 +183,7 @@ spec:
 
 ---
 
-#<!-- chunk: 2.3 attachRequired (挂载需求) -->## 2.3 attachRequired (挂载需求)
+## 2.3 attachRequired (挂载需求)
 
 ```yaml
 spec:
@@ -232,7 +232,7 @@ Kubelet 直接调用 NodeStageVolume (跳过 Attach)
 | **true** | 块存储 | ebs.csi.aws.com, disk.csi.azure.com, pd.csi.storage.gke.io |
 | **false** | 网络文件系统 | nfs.csi.k8s.io, cephfs.csi.ceph.com |
 
-#<!-- chunk: 2.4 podInfoOnMount (Pod 信息注入) -->## 2.4 podInfoOnMount (Pod 信息注入)
+## 2.4 podInfoOnMount (Pod 信息注入)
 
 ```yaml
 spec:
@@ -289,7 +289,7 @@ spec:
         secretProviderClass: "aws-secrets"  # 驱动根据 Pod SA 获取权限
 ```
 
-#<!-- chunk: 2.5 volumeLifecycleModes (卷生命周期模式) -->## 2.5 volumeLifecycleModes (卷生命周期模式)
+## 2.5 volumeLifecycleModes (卷生命周期模式)
 
 ```yaml
 spec:
@@ -329,7 +329,7 @@ spec:
 # Pod 删除时,卷自动删除
 ```
 
-#<!-- chunk: 2.6 fsGroupPolicy (文件系统组策略) -->## 2.6 fsGroupPolicy (文件系统组策略)
+## 2.6 fsGroupPolicy (文件系统组策略)
 
 ```yaml
 spec:
@@ -388,7 +388,7 @@ spec:
   fsGroupPolicy: None
 ```
 
-#<!-- chunk: 2.7 storageCapacity (存储容量) -->## 2.7 storageCapacity (存储容量)
+## 2.7 storageCapacity (存储容量)
 
 ```yaml
 spec:
@@ -438,7 +438,7 @@ nodeTopology:
 capacity: 500Gi                  # node-01 上还有 500GB 可用
 ```
 
-#<!-- chunk: 2.8 requiresRepublish (定期重新发布) -->## 2.8 requiresRepublish (定期重新发布)
+## 2.8 requiresRepublish (定期重新发布)
 
 ```yaml
 spec:
@@ -454,7 +454,7 @@ spec:
 - Kubelet 每 `node_publish_interval` (默认 5 分钟) 调用一次 NodePublishVolume
 - 驱动可利用此机会刷新挂载状态
 
-#<!-- chunk: 2.9 tokenRequests (令牌请求) -->## 2.9 tokenRequests (令牌请求)
+## 2.9 tokenRequests (令牌请求)
 
 ```yaml
 spec:
@@ -520,9 +520,9 @@ spec:
 
 ---
 
-#<!-- chunk: 2.10 配置模板 -->## 2.10 配置模板
+## 2.10 配置模板
 
-##<!-- chunk: 模板 1: 块存储驱动 (AWS EBS) -->## 模板 1: 块存储驱动 (AWS EBS)
+## 模板 1: 块存储驱动 (AWS EBS)
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: CSIDriver
@@ -540,7 +540,7 @@ spec:
   storageCapacity: false         # 云盘容量无限
 ```
 
-##<!-- chunk: 模板 2: 网络文件系统驱动 (NFS) -->## 模板 2: 网络文件系统驱动 (NFS)
+## 模板 2: 网络文件系统驱动 (NFS)
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: CSIDriver
@@ -555,7 +555,7 @@ spec:
   storageCapacity: false
 ```
 
-##<!-- chunk: 模板 3: Local PV 驱动 -->## 模板 3: Local PV 驱动
+## 模板 3: Local PV 驱动
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: CSIDriver
@@ -570,7 +570,7 @@ spec:
   storageCapacity: true          # 必须报告节点容量
 ```
 
-##<!-- chunk: 模板 4: Secret Store 驱动 -->## 模板 4: Secret Store 驱动
+## 模板 4: Secret Store 驱动
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: CSIDriver
@@ -592,7 +592,7 @@ spec:
 
 <!-- chunk: 三、CSINode (节点拓扑) -->## 三、CSINode (节点拓扑)
 
-#<!-- chunk: 3.1 API 资源信息 -->## 3.1 API 资源信息
+## 3.1 API 资源信息
 
 ```yaml
 # API 元数据
@@ -610,7 +610,7 @@ metadata:
 - **自动创建**: Kubelet 自动创建/更新此对象
 - **拓扑信息**: 报告节点上安装的 CSI 驱动及其拓扑域
 
-#<!-- chunk: 3.2 核心字段结构 -->## 3.2 核心字段结构
+## 3.2 核心字段结构
 
 ```yaml
 spec:
@@ -623,7 +623,7 @@ spec:
       count: 39                  # 可附加的卷数量
 ```
 
-#<!-- chunk: 3.3 Drivers (驱动列表) -->## 3.3 Drivers (驱动列表)
+## 3.3 Drivers (驱动列表)
 
 ```yaml
 spec:
@@ -655,9 +655,9 @@ spec:
 - 报告节点可附加的最大卷数(如 AWS m5.large 最多 39 个 EBS 卷)
 - 调度器避免超出限制
 
-#<!-- chunk: 3.4 实际示例 -->## 3.4 实际示例
+## 3.4 实际示例
 
-##<!-- chunk: 示例 1: AWS EBS CSI 节点 -->## 示例 1: AWS EBS CSI 节点
+## 示例 1: AWS EBS CSI 节点
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: CSINode
@@ -686,7 +686,7 @@ kubectl get csinode
 kubectl get csinode ip-10-0-1-100.us-west-2.compute.internal -o yaml
 ```
 
-##<!-- chunk: 示例 2: 多驱动节点 -->## 示例 2: 多驱动节点
+## 示例 2: 多驱动节点
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: CSINode
@@ -711,7 +711,7 @@ spec:
 
 <!-- chunk: 四、CSIStorageCapacity (存储容量) -->## 四、CSIStorageCapacity (存储容量)
 
-#<!-- chunk: 4.1 API 资源信息 -->## 4.1 API 资源信息
+## 4.1 API 资源信息
 
 ```yaml
 # API 元数据
@@ -730,7 +730,7 @@ metadata:
 - **自动创建**: CSI Driver 的 External Provisioner 自动创建/更新
 - **调度优化**: 调度器根据容量信息避免调度到容量不足的节点
 
-#<!-- chunk: 4.2 核心字段结构 -->## 4.2 核心字段结构
+## 4.2 核心字段结构
 
 ```yaml
 storageClassName: local-storage  # 关联的 StorageClass(必填)
@@ -741,7 +741,7 @@ capacity: 500Gi                  # 可用容量(可选,与 maximumVolumeSize 二
 maximumVolumeSize: 1Ti           # 单个卷的最大大小(可选)
 ```
 
-#<!-- chunk: 4.3 使用场景 -->## 4.3 使用场景
+## 4.3 使用场景
 
 **场景 1: Local PV 容量感知**
 ```yaml
@@ -796,9 +796,9 @@ maximumVolumeSize: 16Ti          # AWS EBS gp3 最大 16TiB
 # 注意: 云盘通常不报告 capacity (容量"无限")
 ```
 
-#<!-- chunk: 4.4 配置示例 -->## 4.4 配置示例
+## 4.4 配置示例
 
-##<!-- chunk: 示例 1: Local PV 容量 -->## 示例 1: Local PV 容量
+## 示例 1: Local PV 容量
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: CSIStorageCapacity
@@ -815,7 +815,7 @@ nodeTopology:
 capacity: 1Ti                    # node-03 的 NVMe 盘还有 1TB
 ```
 
-##<!-- chunk: 示例 2: 多可用区容量 -->## 示例 2: 多可用区容量
+## 示例 2: 多可用区容量
 ```yaml
 # 可用区 A
 apiVersion: storage.k8s.io/v1
@@ -853,7 +853,7 @@ capacity: 5Ti                    # zone-b 的 Ceph 池还有 5TB
 
 <!-- chunk: 五、生产案例 -->## 五、生产案例
 
-#<!-- chunk: 5.1 案例 1: 部署 AWS EBS CSI Driver -->## 5.1 案例 1: 部署 AWS EBS CSI Driver
+## 5.1 案例 1: 部署 AWS EBS CSI Driver
 
 **完整部署配置**:
 
@@ -1119,6 +1119,11 @@ spec:
 ```
 
 **验证步骤**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 检查 CSI Driver 注册
 kubectl get csidriver
@@ -1157,7 +1162,7 @@ kubectl exec test-pod -- df -h /data
 # /dev/nvme1n1    9.8G   24M  9.7G   1% /data
 ```
 
-#<!-- chunk: 5.2 案例 2: 监控 CSI Driver -->## 5.2 案例 2: 监控 CSI Driver
+## 5.2 案例 2: 监控 CSI Driver
 
 **[[Prometheus|Prometheus]] 监控配置**:
 
@@ -1244,7 +1249,7 @@ groups:
 
 <!-- chunk: 六、故障排查 -->## 六、故障排查
 
-#<!-- chunk: 6.1 PV 无法 Attach -->## 6.1 PV 无法 Attach
+## 6.1 PV 无法 Attach
 
 **症状**:
 ```bash
@@ -1281,7 +1286,7 @@ kubectl logs -n kube-system -l app=ebs-csi-controller -c csi-attacher
 # - 使用 NVMe 实例类型(更高卷限制)
 ```
 
-#<!-- chunk: 6.2 挂载失败 -->## 6.2 挂载失败
+## 6.2 挂载失败
 
 **症状**:
 ```bash
@@ -1330,7 +1335,7 @@ csc node stage \
   /var/lib/kubelet/plugins/kubernetes.io/csi/pv/pvc-abc123/globalmount
 ```
 
-#<!-- chunk: 6.3 容量不足调度失败 -->## 6.3 容量不足调度失败
+## 6.3 容量不足调度失败
 
 **症状**:
 ```bash
@@ -1367,7 +1372,7 @@ kubectl logs -n kube-system -l app=local-csi-controller -c csi-provisioner
 
 <!-- chunk: 七、最佳实践总结 -->## 七、最佳实践总结
 
-#<!-- chunk: 7.1 CSI Driver 部署 -->## 7.1 CSI Driver 部署
+## 7.1 CSI Driver 部署
 
 ```yaml
 # ✅ 使用官方 Helm Chart
@@ -1405,7 +1410,7 @@ livenessProbe:
   periodSeconds: 10
 ```
 
-#<!-- chunk: 7.2 监控与告警 -->## 7.2 监控与告警
+## 7.2 监控与告警
 
 ```yaml
 # ✅ 关键指标
@@ -1424,7 +1429,7 @@ livenessProbe:
 # - 灾难恢复演练
 ```
 
-#<!-- chunk: 7.3 安全加固 -->## 7.3 安全加固
+## 7.3 安全加固
 
 ```yaml
 # ✅ 使用 IAM/RBAC 最小权限
@@ -1447,13 +1452,13 @@ parameters:
 
 <!-- chunk: 八、参考资源 -->## 八、参考资源
 
-#<!-- chunk: 8.1 官方文档 -->## 8.1 官方文档
+## 8.1 官方文档
 
 - [CSI Specification](https://github.com/container-storage-interface/spec)
 - [Kubernetes CSI Documentation](https://kubernetes-csi.github.io/docs/)
 - [CSI Driver List](https://kubernetes-csi.github.io/docs/drivers.html)
 
-#<!-- chunk: 8.2 主流 CSI Driver -->## 8.2 主流 CSI Driver
+## 8.2 主流 CSI Driver
 
 - [AWS EBS CSI Driver](https://github.com/kubernetes-sigs/aws-ebs-csi-driver)
 - [Azure Disk CSI Driver](https://github.com/kubernetes-sigs/azuredisk-csi-driver)
@@ -1461,7 +1466,7 @@ parameters:
 - [Ceph CSI Driver](https://github.com/ceph/ceph-csi)
 - [NFS CSI Driver](https://github.com/kubernetes-csi/csi-driver-nfs)
 
-#<!-- chunk: 8.3 版本差异 -->## 8.3 版本差异
+## 8.3 版本差异
 
 | 功能 | v1.25 | v1.26 | v1.27 | v1.28 | v1.29 | v1.30 | v1.31 | v1.32 |
 |------|-------|-------|-------|-------|-------|-------|-------|-------|
@@ -1480,7 +1485,7 @@ parameters:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests KUDIG Database — Global MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -1501,7 +1506,7 @@ parameters:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]

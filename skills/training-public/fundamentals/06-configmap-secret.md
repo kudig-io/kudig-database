@@ -130,6 +130,9 @@ Secret：存储敏感信息（密码、密钥、证书）
 
 ### 2.1 创建 ConfigMap
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 【方式一：从字面值创建】
 
@@ -228,6 +231,9 @@ ConfigMap 的值是明文存储的。
 
 ### 3.2 创建 Secret
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 【方式一：从字面值创建】
 
@@ -296,6 +302,9 @@ volumeMounts:
 
 ### 4.1 私有仓库认证
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 【场景】
 
@@ -329,6 +338,10 @@ spec:
 ## 5. 常见问题
 
 ### 5.1 ConfigMap/Secret 更新后 Pod 不生效
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```
 【问题】
@@ -367,6 +380,9 @@ kubectl describe secret <name>
 ---
 
 ## 6. 总结
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
 【命令速查】

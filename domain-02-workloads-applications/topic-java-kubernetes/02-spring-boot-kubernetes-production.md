@@ -57,7 +57,7 @@ Spring Boot 是目前 Java 微服务领域使用最广泛的框架，而 Kuberne
 
 ```mermaid
 graph TB
-    subgraph "Spring Boot on [[entities/kubernetes|k8s]] 生产架构"
+    subgraph "Spring Boot on [[entities/kubernetes.md|k8s]] 生产架构"
         SRC[源代码] --> BUILD[镜像构建]
         BUILD --> |Jib/Buildpacks<br/>Multi-stage| IMG[容器镜像]
         IMG --> REG[镜像仓库]
@@ -1089,6 +1089,7 @@ metadata:
   name: myapp-sa
   namespace: production
 automountServiceAccountToken: false
+
 ```
 
 ### 4.3 资源 Sizing 经验值
@@ -1121,6 +1122,9 @@ automountServiceAccountToken: false
 
 ### 5.2 诊断脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 POD_NAME=$1
@@ -1149,6 +1153,9 @@ kubectl exec "$POD_NAME" -n "$NAMESPACE" -- curl -s http://localhost:8081/actuat
 ```
 
 ### 5.3 优雅停机问题排查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
 问题: Pod 收到 SIGTERM 后仍有请求失败
@@ -1181,3 +1188,5 @@ kubectl exec "$POD_NAME" -n "$NAMESPACE" -- curl -s http://localhost:8081/actuat
 - [Spring Cloud Kubernetes](https://spring.io/projects/spring-cloud-kubernetes)
 - [Micrometer Tracing Documentation](https://docs.micrometer.io/tracing/reference/)
 - [Kubernetes HPA Documentation](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
+
+```

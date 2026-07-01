@@ -1,6 +1,6 @@
 ---
 title: Scheduling Algorithm
-description: '- [[references/scheduling-terms|scheduling-terms]] — K8s 调度术语参考'
+description: '- [[entities/scheduling-terms.md|scheduling-terms]] — K8s 调度术语参考'
 category: concepts
 tags:
 - k8s
@@ -69,12 +69,12 @@ When no node can satisfy a Pod, the scheduler may evict lower-priority Pods to m
 
 ## Related
 
-- [[references/scheduling-terms|scheduling-terms]] — K8s 调度术语参考
-- [[references/k8s-workload-management|k8s-workload-management]] — 工作负载管理：Pod 生命周期、调度策略与弹性伸缩
-- [[entities/kube-scheduler|kube-scheduler]] — kube-scheduler
-- [[concepts/resource-management|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[entities/scheduling-terms.md|scheduling-terms]] — K8s 调度术语参考
+- [[entities/k8s-workload-management.md|k8s-workload-management]] — 工作负载管理：Pod 生命周期、调度策略与弹性伸缩
+- [[entities/kube-scheduler.md|kube-scheduler]] — kube-scheduler
+- [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
 - [[score]] — Score
-- [[entities/kube-scheduler|kube-scheduler]]
+- [[entities/kube-scheduler.md|kube-scheduler]]
 - PriorityClass
 - [[pod-lifecycle|Pod Lifecycle]]
-- [[concepts/resource-management|Resource Management]]
+- [[concepts/resource-management.md|Resource Management]]

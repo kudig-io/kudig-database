@@ -51,7 +51,7 @@ created: "2026-05-23"
 
 ### 推荐起步
 - domain-11-production-operations/topic-learn/: 1 个月学习计划（系统化路径）
-- domain-17-system-foundation/topic-cheat-sheet/k8s.md: [[entities/kubernetes|kubernetes]] 速查卡
+- domain-17-system-foundation/topic-cheat-sheet/k8s.md: [[entities/kubernetes.md|kubernetes]] 速查卡
 - domain-08-release-change-management/topic-deployment/01: 本地 Demo 部署
 - domain-13-container-runtime/01: Docker 架构概述
 - domain-17-system-foundation/09: Linux 运维基础

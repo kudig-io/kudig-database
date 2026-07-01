@@ -771,6 +771,9 @@ dashboard:
 
 #### 6.1 常见问题诊断
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 查看 Deployment 状态
 kubectl describe deployment <deployment-name> -n <namespace>
@@ -798,6 +801,9 @@ kubectl rollout resume deployment/<deployment-name> -n <namespace>
 ```
 
 #### 6.2 自动化恢复脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 #!/bin/bash
@@ -1374,7 +1380,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications MOC
-- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
 - Domain-4 工作负载 — 开源项目索引
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)

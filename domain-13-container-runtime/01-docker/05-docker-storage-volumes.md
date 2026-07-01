@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 <!-- chunk: 存储架构概述 -->## 存储架构概述
 
-#<!-- chunk: Docker 存储层级 -->## Docker 存储层级
+## Docker 存储层级
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -104,7 +104,7 @@ created: "2026-05-23"
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 存储类型对比 -->## 存储类型对比
+## 存储类型对比
 
 | 类型 | 存储位置 | 生命周期 | 性能 | 共享 | 备份 |
 |:---|:---|:---|:---|:---|:---|
@@ -117,7 +117,7 @@ created: "2026-05-23"
 
 <!-- chunk: 存储驱动 -->## 存储驱动
 
-#<!-- chunk: 存储驱动对比 -->## 存储驱动对比
+## 存储驱动对比
 
 | 驱动 | 后端文件系统 | 支持版本 | 特点 | 推荐场景 |
 |:---|:---|:---|:---|:---|
@@ -128,7 +128,7 @@ created: "2026-05-23"
 | **devicemapper** | 直接块设备 | - | 废弃中 | 旧版 CentOS |
 | **vfs** | 任意 | - | 无 CoW、性能差 | 测试/特殊场景 |
 
-#<!-- chunk: overlay2 原理 -->## overlay2 原理
+## overlay2 原理
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -145,7 +145,7 @@ created: "2026-05-23"
 └───────────────┘  └───────────────┘  └─────────────────┘
 ```
 
-#<!-- chunk: overlay2 配置 -->## overlay2 配置
+## overlay2 配置
 
 ```json
 // /etc/docker/daemon.json
@@ -158,7 +158,7 @@ created: "2026-05-23"
 }
 ```
 
-#<!-- chunk: 查看存储驱动 -->## 查看存储驱动
+## 查看存储驱动
 
 ```bash
 # 查看当前存储驱动
@@ -178,7 +178,7 @@ ls -la /var/lib/docker/overlay2/
 
 <!-- chunk: 数据卷类型 -->## 数据卷类型
 
-#<!-- chunk: Volume (命名卷) -->## Volume (命名卷)
+## Volume (命名卷)
 
 ```bash
 # 创建卷
@@ -200,7 +200,7 @@ docker run -d \
 - 易于备份和迁移
 - 推荐用于持久化数据
 
-#<!-- chunk: Bind Mount (绑定挂载) -->## Bind Mount (绑定挂载)
+## Bind Mount (绑定挂载)
 
 ```bash
 # 使用 -v
@@ -223,7 +223,7 @@ docker run -d \
 - 主机和容器共享文件
 - 适合开发环境
 
-#<!-- chunk: tmpfs 挂载 -->## tmpfs 挂载
+## tmpfs 挂载
 
 ```bash
 # 使用 --tmpfs
@@ -233,6 +233,7 @@ docker run -d --tmpfs /app/temp:size=100m,mode=1777 myapp
 docker run -d \
   --mount type=tmpfs,target=/app/temp,tmpfs-size=100m,tmpfs-mode=1777 \
   myapp
+
 ```
 
 **特点**:
@@ -245,7 +246,7 @@ docker run -d \
 
 <!-- chunk: Volume 管理 -->## Volume 管理
 
-#<!-- chunk: 卷操作命令 -->## 卷操作命令
+## 卷操作命令
 
 | 命令 | 说明 | 示例 |
 |:---|:---|:---|
@@ -255,7 +256,7 @@ docker run -d \
 | `docker volume rm` | 删除卷 | `docker volume rm mydata` |
 | `docker volume prune` | 清理未用卷 | `docker volume prune -f` |
 
-#<!-- chunk: 创建卷选项 -->## 创建卷选项
+## 创建卷选项
 
 ```bash
 # 基本创建
@@ -276,7 +277,7 @@ docker volume create \
 docker volume create --label env=prod --label team=platform mydata
 ```
 
-#<!-- chunk: 本地卷驱动选项 -->## 本地卷驱动选项
+## 本地卷驱动选项
 
 ```bash
 # tmpfs 类型卷
@@ -303,7 +304,7 @@ docker volume create \
   bind-vol
 ```
 
-#<!-- chunk: 卷数据查看 -->## 卷数据查看
+## 卷数据查看
 
 ```bash
 # 卷存储位置
@@ -317,7 +318,7 @@ sudo ls -la /var/lib/docker/volumes/mydata/_data
 docker run --rm -v mydata:/data alpine ls -la /data
 ```
 
-#<!-- chunk: 卷共享 -->## 卷共享
+## 卷共享
 
 ```bash
 # 多容器共享同一卷
@@ -332,7 +333,7 @@ docker run -d --volumes-from source_container myapp
 
 <!-- chunk: Bind Mount -->## Bind Mount
 
-#<!-- chunk: 挂载语法对比 -->## 挂载语法对比
+## 挂载语法对比
 
 ```bash
 # -v 语法 (旧)
@@ -349,7 +350,7 @@ docker run \
   myapp
 ```
 
-#<!-- chunk: 挂载选项 -->## 挂载选项
+## 挂载选项
 
 | 选项 | 说明 | 示例 |
 |:---|:---|:---|
@@ -357,7 +358,7 @@ docker run \
 | `bind-propagation` | 传播模式 | `bind-propagation=rslave` |
 | `consistency` | 一致性 (macOS) | `consistency=cached` |
 
-#<!-- chunk: 绑定传播 -->## 绑定传播
+## 绑定传播
 
 | 传播模式 | 说明 |
 |:---|:---|
@@ -375,7 +376,7 @@ docker run -d \
   myapp
 ```
 
-#<!-- chunk: SELinux 标签 -->## SELinux 标签
+## SELinux 标签
 
 ```bash
 # z: 共享标签 (多容器共享)
@@ -388,7 +389,7 @@ docker run -v /host/path:/container/path:Z myapp
 --mount type=bind,source=/host/path,target=/path,bind-selinux-opt=z
 ```
 
-#<!-- chunk: 常见问题 -->## 常见问题
+## 常见问题
 
 | 问题 | 原因 | 解决方案 |
 |:---|:---|:---|
@@ -401,7 +402,7 @@ docker run -v /host/path:/container/path:Z myapp
 
 <!-- chunk: tmpfs 挂载 -->## tmpfs 挂载
 
-#<!-- chunk: tmpfs 配置 -->## tmpfs 配置
+## tmpfs 配置
 
 ```bash
 # 基本 tmpfs
@@ -418,7 +419,7 @@ docker run -d \
   myapp
 ```
 
-#<!-- chunk: tmpfs 选项 -->## tmpfs 选项
+## tmpfs 选项
 
 | 选项 | 说明 | 示例 |
 |:---|:---|:---|
@@ -431,7 +432,7 @@ docker run -d \
 | `nosuid` | 忽略 SUID | `nosuid` |
 | `nodev` | 忽略设备文件 | `nodev` |
 
-#<!-- chunk: 使用场景 -->## 使用场景
+## 使用场景
 
 ```bash
 # 敏感临时数据
@@ -456,7 +457,7 @@ docker run -d \
 
 <!-- chunk: 存储性能优化 -->## 存储性能优化
 
-#<!-- chunk: 存储驱动优化 -->## 存储驱动优化
+## 存储驱动优化
 
 ```json
 // /etc/docker/daemon.json
@@ -468,7 +469,7 @@ docker run -d \
 }
 ```
 
-#<!-- chunk: 文件系统选择 -->## 文件系统选择
+## 文件系统选择
 
 | 文件系统 | overlay2 支持 | 特点 | 推荐 |
 |:---|:---:|:---|:---|
@@ -477,7 +478,7 @@ docker run -d \
 | **btrfs** | 使用 btrfs 驱动 | CoW、快照 | btrfs 环境 |
 | **zfs** | 使用 zfs 驱动 | 高级功能 | ZFS 环境 |
 
-#<!-- chunk: XFS 优化 -->## XFS 优化
+## XFS 优化
 
 ```bash
 # 创建 XFS (确保 d_type)
@@ -491,7 +492,7 @@ xfs_info /dev/sdb1 | grep ftype
 mount -o noatime,nodiratime /dev/sdb1 /var/lib/docker
 ```
 
-#<!-- chunk: 卷性能对比 -->## 卷性能对比
+## 卷性能对比
 
 | 类型 | 顺序读写 | 随机 IO | 延迟 | 适用场景 |
 |:---|:---|:---|:---|:---|
@@ -501,7 +502,7 @@ mount -o noatime,nodiratime /dev/sdb1 /var/lib/docker
 | **NFS** | 中 | 低 | 高 | 共享存储 |
 | **云盘** | 中 | 中 | 中 | 云环境 |
 
-#<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
 
 ```bash
 # 分离数据和日志
@@ -527,7 +528,10 @@ docker run -d \
 
 <!-- chunk: 数据备份与恢复 -->## 数据备份与恢复
 
-#<!-- chunk: 卷备份 -->## 卷备份
+## 卷备份
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
 ```bash
 # 方法1: 使用临时容器备份
@@ -543,10 +547,10 @@ sudo tar czf mydata-backup.tar.gz \
 # 方法3: 使用 docker cp
 docker run -d --name temp -v mydata:/data alpine sleep infinity
 docker cp temp:/data ./backup
-docker rm -f temp
+docker rm -f temp  # ⚠️ 强制清理，可能杀运行中容器
 ```
 
-#<!-- chunk: 卷恢复 -->## 卷恢复
+## 卷恢复
 
 ```bash
 # 创建新卷并恢复
@@ -558,7 +562,7 @@ docker run --rm \
   alpine tar xzf /backup/mydata-backup.tar.gz -C /target
 ```
 
-#<!-- chunk: 容器备份 -->## 容器备份
+## 容器备份
 
 ```bash
 # 导出容器文件系统
@@ -574,7 +578,7 @@ docker run --rm \
   alpine tar czf /backup/full-backup.tar.gz /data /logs
 ```
 
-#<!-- chunk: 数据迁移 -->## 数据迁移
+## 数据迁移
 
 ```bash
 # 跨主机迁移卷数据
@@ -590,7 +594,7 @@ docker run --rm -v mydata:/data -v $(pwd):/backup alpine \
   tar xzf /backup/mydata.tar.gz -C /data
 ```
 
-#<!-- chunk: 自动备份脚本 -->## 自动备份脚本
+## 自动备份脚本
 
 ```bash
 #!/bin/bash
@@ -616,7 +620,7 @@ find "$BACKUP_DIR" -name "*.tar.gz" -mtime +7 -delete
 echo "Backup completed: $BACKUP_DIR"
 ```
 
-#<!-- chunk: 卷驱动插件 -->## 卷驱动插件
+## 卷驱动插件
 
 | 插件 | 用途 | 特点 |
 |:---|:---|:---|
@@ -651,3 +655,5 @@ docker volume create --driver rexray/ebs --opt size=100 ebs-volume
 - 04-docker-networking-deep-dive
 - 06-docker-compose-orchestration
 - 07-docker-security-best-practices
+
+```

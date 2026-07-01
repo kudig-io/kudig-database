@@ -63,7 +63,7 @@ Step 4: 就绪确认
 用户输入 → 任务类型识别:
 
 关键词匹配:
-  "Pending" / "调度" / "schedule"      → [[concepts/pod-lifecycle|pod]] 调度诊断
+  "Pending" / "调度" / "schedule"      → [[concepts/pod-lifecycle.md|pod]] 调度诊断
   "CrashLoop" / "重启" / "OOM"         → Pod 运行异常诊断
   "NotReady" / "节点异常"               → Node 诊断
   "Service 不通" / "DNS" / "网络"       → 网络诊断

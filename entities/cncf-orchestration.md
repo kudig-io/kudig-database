@@ -86,7 +86,7 @@ Karmada 是 K8s 多集群管理平台。
 
 ### [[open-cluster-management]] — 沙箱项目
 
-OCM（[[entities/open-cluster-management|Open Cluster Management]]）提供多集群生命周期管理。
+OCM（[[entities/open-cluster-management.md|Open Cluster Management]]）提供多集群生命周期管理。
 
 ### [[clusternet]] — 沙箱项目
 
@@ -114,7 +114,7 @@ KCP 提供 K8s API 的多租户控制平面。
 
 ### [[operator-framework]] — 孵化项目
 
-[[Operator Framework|Operator Framework]] 构建 K8s Operator 的工具链。
+Operator Framework 构建 K8s Operator 的工具链。
 
 - **Operator SDK**: 快速生成 Operator 代码
 - **Operator Lifecycle Manager (OLM)**: 管理 Operator 生命周期
@@ -226,9 +226,9 @@ KubeEdge 将 K8s 扩展到边缘计算。
 
 ## 相关页面
 
-- [[entities/cncf-cicd|cncf-cicd]] — CI/CD 与发布管理
-- [[entities/cncf-networking|cncf-networking]] — 网络与服务网格
-- [[entities/cncf-security|cncf-security]] — 安全与合规
+- [[entities/cncf-cicd.md|cncf-cicd]] — CI/CD 与发布管理
+- [[entities/cncf-networking.md|cncf-networking]] — 网络与服务网格
+- [[entities/cncf-security.md|cncf-security]] — 安全与合规
 
 ## Related
 
@@ -238,11 +238,11 @@ KubeEdge 将 K8s 扩展到边缘计算。
 - [[open-cluster-management]] — Open Cluster Management (OCM)
 - [[operator-framework]] — Operator Framework
 
-- [[entities/cohdi|Cohdi]]
-- [[entities/kubefleet|KubeFleet]]
-- [[entities/clusternet|Clusternet]]
-- [[entities/kured|Kured (KUbernetes REboot Daemon)]]
-- [[entities/kubevela|KubeVela]]
-- [[entities/kubestellar|KubeStellar]]
-- [[entities/microcks|Microcks]]
-- [[entities/kudo|KUDO]]
+- [[entities/cohdi.md|Cohdi]]
+- [[entities/kubefleet.md|KubeFleet]]
+- [[entities/clusternet.md|Clusternet]]
+- [[entities/kured.md|Kured (KUbernetes REboot Daemon)]]
+- [[entities/kubevela.md|KubeVela]]
+- [[entities/kubestellar.md|KubeStellar]]
+- [[entities/microcks.md|Microcks]]
+- [[entities/kudo.md|KUDO]]

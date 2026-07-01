@@ -29,13 +29,14 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 容器生命周期钩子（Container Lifecycle Hooks）
 
 ## 概述
 
-类似于 Angular 等编程框架中的组件生命周期钩子，[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 为容器提供了生命周期钩子（Lifecycle Hooks）机制。该机制使容器能够感知自身管理生命周期中的事件，并在相应钩子触发时执行处理程序（handler）中的代码。
+类似于 Angular 等编程框架中的组件生命周期钩子，[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 为容器提供了生命周期钩子（Lifecycle Hooks）机制。该机制使容器能够感知自身管理生命周期中的事件，并在相应钩子触发时执行处理程序（handler）中的代码。
 
 ## 核心概念/原理
 
@@ -294,6 +295,10 @@ Pod 终止
 
 ## 命令快速参考
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 查看 Pod 的生命周期钩子配置
 kubectl get pod <name> -o jsonpath='{.spec.containers[0].lifecycle}' | jq .
@@ -310,18 +315,24 @@ kubectl delete pod <name> --grace-period=60 &
 kubectl get pod <name> -w
 
 # 强制终止（跳过 PreStop）
-kubectl delete pod <name> --grace-period=0 --force
+kubectl delete pod <name> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
 ## 交叉引用
 
 - [Pod 生命周期](pod-lifecycle.md) — 完整的 Pod 生命周期阶段和终止流程
 - [容器环境](container-environment.md) — 容器运行时的环境信息
-- [[domain-17-system-foundation/topic-dictionary/workloads/disruptions|Disruptions]]](disruptions.md) — PDB 与优雅终止的配合
-- [[domain-17-system-foundation/topic-dictionary/workloads/deployments|Deployments]]](deployments.md) — 滚动更新中的 PreStop 行为
+- [[domain-17-system-foundation/topic-dictionary/workloads/disruptions.md|Disruptions]]](disruptions.md) — PDB 与优雅终止的配合
+- [[domain-17-system-foundation/topic-dictionary/workloads/deployments.md|Deployments]]](deployments.md) — 滚动更新中的 PreStop 行为
 
 ## 参考链接
 
 - [Kubernetes 官方文档：容器生命周期钩子](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/)
 - [Pod 终止行为](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination)
 - [为容器生命周期事件附加 handler（实践任务）](https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]

@@ -96,7 +96,7 @@ KEDA 架构
     └── 自定义: External, Metrics API
 ```
 
-#<!-- chunk: KEDA vs 原生 HPA -->## KEDA vs 原生 HPA
+## KEDA vs 原生 HPA
 
 | 能力 | HPA v2 | KEDA |
 |:---|:---|:---|
@@ -112,6 +112,9 @@ KEDA 架构
 
 <!-- chunk: 二、安装部署 -->## 二、安装部署
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 helm repo add kedacore https://kedacore.github.io/charts
 helm repo update
@@ -122,7 +125,7 @@ helm install keda kedacore/keda \
   --version 2.16.0
 ```
 
-#<!-- chunk: 验证安装 -->## 验证安装
+## 验证安装
 
 ```bash
 kubectl get pods -n keda
@@ -190,7 +193,7 @@ spec:
 
 <!-- chunk: 四、内置 Scaler 详解 -->## 四、内置 Scaler 详解
 
-#<!-- chunk: 4.1 Kafka Scaler (最常用) -->## 4.1 Kafka Scaler (最常用)
+## 4.1 Kafka Scaler (最常用)
 
 ```yaml
 triggers:
@@ -228,7 +231,7 @@ spec:
     key: password
 ```
 
-#<!-- chunk: 4.2 RabbitMQ Scaler -->## 4.2 RabbitMQ Scaler
+## 4.2 RabbitMQ Scaler
 
 ```yaml
 triggers:
@@ -242,7 +245,7 @@ triggers:
     name: rabbitmq-auth
 ```
 
-#<!-- chunk: 4.3 PostgreSQL Scaler -->## 4.3 PostgreSQL Scaler
+## 4.3 PostgreSQL Scaler
 
 ```yaml
 triggers:
@@ -259,7 +262,7 @@ triggers:
     name: postgres-auth
 ```
 
-#<!-- chunk: 4.4 Prometheus Scaler -->## 4.4 Prometheus Scaler
+## 4.4 Prometheus Scaler
 
 ```yaml
 triggers:
@@ -274,7 +277,7 @@ triggers:
     name: prometheus-auth
 ```
 
-#<!-- chunk: 4.5 Redis Streams Scaler -->## 4.5 Redis Streams Scaler
+## 4.5 Redis Streams Scaler
 
 ```yaml
 triggers:
@@ -286,7 +289,7 @@ triggers:
     pendingEntriesCount: "10"
 ```
 
-#<!-- chunk: 4.6 AWS SQS Scaler -->## 4.6 AWS SQS Scaler
+## 4.6 AWS SQS Scaler
 
 ```yaml
 triggers:
@@ -303,7 +306,7 @@ triggers:
 
 <!-- chunk: 五、生产级配置 -->## 五、生产级配置
 
-#<!-- chunk: 5.1 从 0 缩放的 Serverless 模式 -->## 5.1 从 0 缩放的 Serverless 模式
+## 5.1 从 0 缩放的 Serverless 模式
 
 ```yaml
 spec:
@@ -316,7 +319,7 @@ spec:
       activationLagThreshold: "1"  # 有消息就立即启动
 ```
 
-#<!-- chunk: 5.2 预留容量模式 -->## 5.2 预留容量模式
+## 5.2 预留容量模式
 
 ```yaml
 spec:
@@ -328,7 +331,7 @@ spec:
       threshold: "80"
 ```
 
-#<!-- chunk: 5.3 稳定性优化 -->## 5.3 稳定性优化
+## 5.3 稳定性优化
 
 ```yaml
 spec:
@@ -452,7 +455,7 @@ spec:
 | 数据库队列处理 | ❌ 不支持 | ✅ PostgreSQL/MySQL Scaler |
 | 混合指标驱动 | ❌ 单触发器 | ✅ 多触发器 OR 逻辑 |
 
-#<!-- chunk: 联合使用建议 -->## 联合使用建议
+## 联合使用建议
 
 ```
 Web 层 (HPA)
@@ -473,7 +476,7 @@ Worker 层 (KEDA)
 
 <!-- chunk: 九、监控与告警 -->## 九、监控与告警
 
-#<!-- chunk: 9.1 KEDA 指标 -->## 9.1 KEDA 指标
+## 9.1 KEDA 指标
 
 ```bash
 # 查看 ScaledObject 状态
@@ -484,7 +487,7 @@ kubectl describe scaledobject order-processor -n production
 kubectl get hpa -n production
 ```
 
-#<!-- chunk: 9.2 Prometheus 告警 -->## 9.2 Prometheus 告警
+## 9.2 Prometheus 告警
 
 ```yaml
 - alert: KEDAScalerErrors
@@ -530,9 +533,9 @@ kubectl get hpa -n production
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations KUDIG Database — Global MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -551,4 +554,6 @@ kubectl get hpa -n production
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+```

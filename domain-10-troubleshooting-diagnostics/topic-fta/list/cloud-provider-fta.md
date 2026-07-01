@@ -134,18 +134,18 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 
 ## Related
 
 - [[calico-fta]] — Calico Fta
-- [[skills/ts-gitops-devops|ts-gitops-devops]] — GitOps/DevOps 排查
-- [[skills/Agent Orchestration Patterns|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
+- [[skills/ts-gitops-devops.md|ts-gitops-devops]] — GitOps/DevOps 排查
+- [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
 - [[service-fta]] — Service 异常故障树分析
 - [[resource-quota-fta]] — ResourceQuota 异常故障树分析
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cloud-provider-fta|云平台集成异常故障树分析]]
-- [[skills/Symptom Vector Matching Engine|Symptom Vector Matching Engine]] — Cross-reference
-- [[skills/skills-run-README|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cloud-provider-fta.md|云平台集成异常故障树分析]]
+- [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
+- [[skills/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]

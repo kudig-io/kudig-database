@@ -68,7 +68,7 @@ Edge computing presents unique challenges for storage and networking: limited de
 1. [边缘存储架构总览](#1-边缘存储架构总览)
 2. [本地存储方案](#2-本地存储方案)
 3. [边缘分布式存储](#3-边缘分布式存储)
-4. [[entities/kubernetes|Kubernetes]] 边缘存储](#4-kubernetes-边缘存储)
+4. [[entities/kubernetes.md|Kubernetes]] 边缘存储](#4-kubernetes-边缘存储)
 5. [弱网络优化策略](#5-弱网络优化策略)
 6. [离线数据同步](#6-离线数据同步)
 7. [断线重连机制](#7-断线重连机制)
@@ -82,7 +82,7 @@ Edge computing presents unique challenges for storage and networking: limited de
 
 <!-- chunk: 1. 边缘存储架构总览 -->## 1. 边缘存储架构总览
 
-#<!-- chunk: 1.1 边缘存储层次模型 -->## 1.1 边缘存储层次模型
+## 1.1 边缘存储层次模型
 
 ```mermaid
 graph TB
@@ -125,7 +125,7 @@ graph TB
     style L4 fill:#fff3e0,stroke:#e65100
 ```
 
-#<!-- chunk: 1.2 边缘存储挑战与对策 -->## 1.2 边缘存储挑战与对策
+## 1.2 边缘存储挑战与对策
 
 | 挑战 | 具体表现 | 解决方案 |
 |------|---------|---------|
@@ -140,7 +140,7 @@ graph TB
 
 <!-- chunk: 2. 本地存储方案 -->## 2. 本地存储方案
 
-#<!-- chunk: 2.1 嵌入式数据库选型 -->## 2.1 嵌入式数据库选型
+## 2.1 嵌入式数据库选型
 
 ```mermaid
 graph LR
@@ -167,7 +167,7 @@ graph LR
     end
 ```
 
-#<!-- chunk: 2.2 RocksDB 边缘存储实践 -->## 2.2 RocksDB 边缘存储实践
+## 2.2 RocksDB 边缘存储实践
 
 ```python
 # edge_rocksdb_storage.py
@@ -542,7 +542,7 @@ class EdgeLocalCache:
 
 <!-- chunk: 3. 边缘分布式存储 -->## 3. 边缘分布式存储
 
-#<!-- chunk: 3.1 [[Longhorn|Longhorn]] 边缘存储 -->## 3.1 Longhorn 边缘存储
+## 3.1 Longhorn 边缘存储
 
 Longhorn 是 Rancher 开源的轻量级 Kubernetes 原生分布式块存储系统，特别适合边缘场景：
 
@@ -582,7 +582,7 @@ graph TB
     LonghornManager -->|"调度"| Engine2
 ```
 
-#<!-- chunk: 3.2 Longhorn 安装配置 -->## 3.2 Longhorn 安装配置
+## 3.2 Longhorn 安装配置
 
 ```yaml
 # longhorn-values.yaml - Helm Chart 配置
@@ -673,7 +673,7 @@ reclaimPolicy: Retain
 allowVolumeExpansion: true
 ```
 
-#<!-- chunk: 3.3 MinIO 边缘对象存储 -->## 3.3 MinIO 边缘对象存储
+## 3.3 MinIO 边缘对象存储
 
 ```yaml
 # minio-edge-deployment.yaml
@@ -772,7 +772,7 @@ spec:
 
 <!-- chunk: 4. Kubernetes 边缘存储 -->## 4. Kubernetes 边缘存储
 
-#<!-- chunk: 4.1 CSI 驱动适配 -->## 4.1 CSI 驱动适配
+## 4.1 CSI 驱动适配
 
 ```yaml
 # 边缘节点 local-path-provisioner 配置
@@ -815,7 +815,7 @@ data:
           command: ["sh", "/script/setup"]
 ```
 
-#<!-- chunk: 4.2 边缘 PV 管理 -->## 4.2 边缘 PV 管理
+## 4.2 边缘 PV 管理
 
 ```yaml
 # 边缘节点手动创建 Local PV（性能最优）
@@ -871,7 +871,7 @@ spec:
 
 <!-- chunk: 5. 弱网络优化策略 -->## 5. 弱网络优化策略
 
-#<!-- chunk: 5.1 弱网络特征分析 -->## 5.1 弱网络特征分析
+## 5.1 弱网络特征分析
 
 ```mermaid
 graph LR
@@ -904,7 +904,7 @@ graph LR
     Offline --> S6
 ```
 
-#<!-- chunk: 5.2 QUIC 协议应用 -->## 5.2 QUIC 协议应用
+## 5.2 QUIC 协议应用
 
 ```python
 # quic_edge_transport.py
@@ -1059,7 +1059,7 @@ class AdaptiveBandwidthController:
         return max(65536, min(bdp, 10 * 1024 * 1024))  # 64KB - 10MB
 ```
 
-#<!-- chunk: 5.3 数据压缩策略 -->## 5.3 数据压缩策略
+## 5.3 数据压缩策略
 
 ```python
 # edge_compression.py
@@ -1199,7 +1199,7 @@ class EdgeDataCompressor:
 
 <!-- chunk: 6. 离线数据同步 -->## 6. 离线数据同步
 
-#<!-- chunk: 6.1 离线同步架构 -->## 6.1 离线同步架构
+## 6.1 离线同步架构
 
 ```mermaid
 sequenceDiagram
@@ -1230,7 +1230,7 @@ sequenceDiagram
     SyncEngine->>LocalDB: 清理已同步记录
 ```
 
-#<!-- chunk: 6.2 冲突解决策略 -->## 6.2 冲突解决策略
+## 6.2 冲突解决策略
 
 ```python
 # sync_engine.py
@@ -1608,7 +1608,7 @@ class EdgeSyncEngine:
 
 <!-- chunk: 7. 断线重连机制 -->## 7. 断线重连机制
 
-#<!-- chunk: 7.1 指数退避重连 -->## 7.1 指数退避重连
+## 7.1 指数退避重连
 
 ```python
 # reconnect_manager.py
@@ -1789,7 +1789,7 @@ class EdgeReconnectManager:
 
 <!-- chunk: 8. 带宽优化技术 -->## 8. 带宽优化技术
 
-#<!-- chunk: 8.1 数据分层传输 -->## 8.1 数据分层传输
+## 8.1 数据分层传输
 
 ```yaml
 # edge-bandwidth-management.yaml
@@ -1861,7 +1861,7 @@ data:
         - batch_sync
 ```
 
-#<!-- chunk: 8.2 增量数据传输 -->## 8.2 增量数据传输
+## 8.2 增量数据传输
 
 ```python
 # delta_sync.py
@@ -2023,7 +2023,7 @@ class DeltaSyncEngine:
 
 <!-- chunk: 9. 边缘 CDN 与缓存 -->## 9. 边缘 CDN 与缓存
 
-#<!-- chunk: 9.1 边缘缓存架构 -->## 9.1 边缘缓存架构
+## 9.1 边缘缓存架构
 
 ```mermaid
 graph TB
@@ -2055,7 +2055,7 @@ graph TB
     RegionalCache -.->|"缓存未命中"| Origin
 ```
 
-#<!-- chunk: 9.2 Nginx 边缘缓存配置 -->## 9.2 Nginx 边缘缓存配置
+## 9.2 Nginx 边缘缓存配置
 
 ```nginx
 # /etc/nginx/nginx.conf - 边缘 CDN 缓存配置
@@ -2142,7 +2142,7 @@ http {
 
 <!-- chunk: 10. 数据本地性优化 -->## 10. 数据本地性优化
 
-#<!-- chunk: 10.1 数据感知调度 -->## 10.1 数据感知调度
+## 10.1 数据感知调度
 
 ```yaml
 # 数据感知 Pod 调度：将计算调度到数据所在节点
@@ -2222,7 +2222,7 @@ spec:
 
 <!-- chunk: 11. 存储监控与运维 -->## 11. 存储监控与运维
 
-#<!-- chunk: 11.1 存储监控配置 -->## 11.1 存储监控配置
+## 11.1 存储监控配置
 
 ```yaml
 # Prometheus 存储监控规则
@@ -2284,7 +2284,10 @@ spec:
             description: "P95 写入延迟超过 100ms"
 ```
 
-#<!-- chunk: 11.2 存储巡检脚本 -->## 11.2 存储巡检脚本
+## 11.2 存储巡检脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -2361,7 +2364,7 @@ echo "巡检完成"
 
 <!-- chunk: 12. 最佳实践总结 -->## 12. 最佳实践总结
 
-#<!-- chunk: 12.1 边缘存储选型矩阵 -->## 12.1 边缘存储选型矩阵
+## 12.1 边缘存储选型矩阵
 
 | 场景 | 推荐存储 | 理由 |
 |------|---------|------|
@@ -2372,7 +2375,7 @@ echo "巡检完成"
 | 实时流数据 | Kafka + 本地 Partition | 持久化队列，断网缓冲 |
 | 配置状态 | etcd (单节点) | K8s 兼容，强一致性 |
 
-#<!-- chunk: 12.2 弱网络优化总结 -->## 12.2 弱网络优化总结
+## 12.2 弱网络优化总结
 
 ```mermaid
 mindmap
@@ -2399,31 +2402,31 @@ mindmap
       幂等操作设计
 ```
 
-#<!-- chunk: 12.3 生产环境检查清单 -->## 12.3 生产环境检查清单
+## 12.3 生产环境检查清单
 
 ```markdown
 <!-- chunk: 边缘存储网络生产检查清单 -->## 边缘存储网络生产检查清单
 
-#<!-- chunk: 存储配置 -->## 存储配置
+## 存储配置
 - [ ] 使用独立数据盘（不与系统盘共享）
 - [ ] 配置存储配额，防止数据膨胀
 - [ ] 设置数据保留策略（TTL 自动清理）
 - [ ] Longhorn 卷副本数 ≥ 2（生产环境）
 - [ ] 配置 MinIO 到云端的异步复制
 
-#<!-- chunk: 同步配置 -->## 同步配置  
+## 同步配置  
 - [ ] 实现幂等写入（支持重试不重复）
 - [ ] 配置合理的同步间隔（实时数据 30s，批量数据 5min）
 - [ ] 离线缓存容量 ≥ 断线预期时长内产生的数据量
 - [ ] 冲突解决策略已明确定义
 
-#<!-- chunk: 网络配置 -->## 网络配置
+## 网络配置
 - [ ] 配置 QoS 流量分类
 - [ ] 上行带宽限速（避免影响控制面）
 - [ ] 启用 QUIC 或 HTTP/2（弱网场景）
 - [ ] 关键数据传输配置 TLS 1.3
 
-#<!-- chunk: 监控配置 -->## 监控配置
+## 监控配置
 - [ ] 磁盘使用率告警（>85%）
 - [ ] 同步队列积压告警
 - [ ] 网络带宽利用率监控
@@ -2439,7 +2442,7 @@ mindmap
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-37-edge-computing MOC
-- [[domain-15-specialized-tech/README|Domain 37: 边缘计算 (Edge Computing)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: 边缘计算 (Edge Computing)]]
 - Domain-37 边缘计算 — 开源项目索引
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)

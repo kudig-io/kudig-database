@@ -60,7 +60,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. Harbor架构深度解析 -->## 1. Harbor架构深度解析
 
-#<!-- chunk: 1.1 核心组件架构 -->## 1.1 核心组件架构
+## 1.1 核心组件架构
 
 ```mermaid
 graph TB
@@ -99,7 +99,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 1.2 组件功能详解 -->## 1.2 组件功能详解
+## 1.2 组件功能详解
 
 ```yaml
 Harbor组件说明:
@@ -151,7 +151,7 @@ Harbor组件说明:
 
 <!-- chunk: 2. 企业级高可用部署 -->## 2. 企业级高可用部署
 
-#<!-- chunk: 2.1 [[Harbor|Harbor]] Helm部署配置 -->## 2.1 Harbor Helm部署配置
+## 2.1 Harbor Helm部署配置
 
 ```yaml
 # harbor-values.yaml
@@ -302,7 +302,7 @@ jobservice:
       cpu: "500m"
 ```
 
-#<!-- chunk: 2.2 外部数据库部署 -->## 2.2 外部数据库部署
+## 2.2 外部数据库部署
 
 ```yaml
 # PostgreSQL主从部署
@@ -430,7 +430,7 @@ spec:
 
 <!-- chunk: 3. 镜像安全扫描管理 -->## 3. 镜像安全扫描管理
 
-#<!-- chunk: 3.1 漏洞扫描配置 -->## 3.1 漏洞扫描配置
+## 3.1 漏洞扫描配置
 
 ```yaml
 # Trivy扫描器配置
@@ -478,7 +478,7 @@ clair:
       endpoint: "http://harbor-core:8080/service/notifications/clair"
 ```
 
-#<!-- chunk: 3.2 镜像签名与验证 -->## 3.2 镜像签名与验证
+## 3.2 镜像签名与验证
 
 ```yaml
 # Notary签名配置
@@ -507,7 +507,7 @@ notary:
 
 <!-- chunk: 4. 镜像复制与分发 -->## 4. 镜像复制与分发
 
-#<!-- chunk: 4.1 复制策略配置 -->## 4.1 复制策略配置
+## 4.1 复制策略配置
 
 ```yaml
 # 镜像复制规则
@@ -544,7 +544,7 @@ replication:
       speed: 1000  # 1000KB/s
 ```
 
-#<!-- chunk: 4.2 多地域分发配置 -->## 4.2 多地域分发配置
+## 4.2 多地域分发配置
 
 ```yaml
 # 多地域Harbor集群配置
@@ -576,7 +576,7 @@ multi_region:
 
 <!-- chunk: 5. 权限管理与RBAC -->## 5. 权限管理与RBAC
 
-#<!-- chunk: 5.1 项目权限配置 -->## 5.1 项目权限配置
+## 5.1 项目权限配置
 
 ```yaml
 # 项目权限模型
@@ -620,7 +620,7 @@ projects:
         enabled: true
 ```
 
-#<!-- chunk: 5.2 LDAP集成配置 -->## 5.2 LDAP集成配置
+## 5.2 LDAP集成配置
 
 ```yaml
 # LDAP认证配置
@@ -644,7 +644,7 @@ ldap:
 
 <!-- chunk: 6. 存储优化与管理 -->## 6. 存储优化与管理
 
-#<!-- chunk: 6.1 对象存储集成 -->## 6.1 对象存储集成
+## 6.1 对象存储集成
 
 ```yaml
 # S3存储配置
@@ -703,7 +703,7 @@ storage_cleanup:
 
 <!-- chunk: 7. 监控与告警 -->## 7. 监控与告警
 
-#<!-- chunk: 7.1 系统监控配置 -->## 7.1 系统监控配置
+## 7.1 系统监控配置
 
 ```yaml
 # Prometheus监控配置
@@ -758,7 +758,7 @@ monitoring:
           description: "Harbor存储空间剩余 {{ $value }}%"
 ```
 
-#<!-- chunk: 7.2 日志收集配置 -->## 7.2 日志收集配置
+## 7.2 日志收集配置
 
 ```yaml
 # Fluentd日志收集配置
@@ -807,7 +807,10 @@ monitoring:
 
 <!-- chunk: 8. 备份与灾难恢复 -->## 8. 备份与灾难恢复
 
-#<!-- chunk: 8.1 自动备份策略 -->## 8.1 自动备份策略
+## 8.1 自动备份策略
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
 ```bash
 #!/bin/bash
@@ -856,7 +859,7 @@ EOF
 tar -czf ${BACKUP_DIR}/${BACKUP_NAME}.tar.gz -C ${BACKUP_DIR} ${BACKUP_NAME}
 
 # 7. 清理临时目录
-rm -rf ${BACKUP_DIR}/${BACKUP_NAME}
+rm -rf ${BACKUP_DIR}/${BACKUP_NAME}  # ⚠️ 删除系统/数据文件
 
 # 8. 上传到远程存储
 if [ -n "$REMOTE_STORAGE" ]; then
@@ -867,7 +870,7 @@ fi
 echo "Backup completed: ${BACKUP_DIR}/${BACKUP_NAME}.tar.gz"
 ```
 
-#<!-- chunk: 8.2 灾难恢复流程 -->## 8.2 灾难恢复流程
+## 8.2 灾难恢复流程
 
 ```yaml
 # 灾难恢复计划
@@ -924,37 +927,37 @@ disaster_recovery:
 
 <!-- chunk: 9. 最佳实践与安全建议 -->## 9. 最佳实践与安全建议
 
-#<!-- chunk: 9.1 安全配置最佳实践 -->## 9.1 安全配置最佳实践
+## 9.1 安全配置最佳实践
 
 ```markdown
 <!-- chunk: 🔐 Harbor安全最佳实践 -->## 🔐 Harbor安全最佳实践
 
-#<!-- chunk: 1. 访问控制 -->## 1. 访问控制
+## 1. 访问控制
 - 启用HTTPS加密传输
 - 配置严格的RBAC权限
 - 定期轮换访问凭证
 - 实施多因素认证
 
-#<!-- chunk: 2. 镜像安全管理 -->## 2. 镜像安全管理
+## 2. 镜像安全管理
 - 强制执行漏洞扫描
 - 启用内容信任签名
 - 设置镜像保留策略
 - 定期清理无用镜像
 
-#<!-- chunk: 3. 网络安全 -->## 3. 网络安全
+## 3. 网络安全
 - 限制管理接口访问
 - 配置防火墙规则
 - 启用网络策略隔离
 - 监控异常访问行为
 
-#<!-- chunk: 4. 合规性要求 -->## 4. 合规性要求
+## 4. 合规性要求
 - 定期安全审计
 - 符合行业标准（如SOC2）
 - 实施数据保护措施
 - 保持系统更新补丁
 ```
 
-#<!-- chunk: 9.2 性能优化建议 -->## 9.2 性能优化建议
+## 9.2 性能优化建议
 
 ```yaml
 性能优化建议:
@@ -979,7 +982,7 @@ disaster_recovery:
 
 <!-- chunk: 10. 未来发展与趋势 -->## 10. 未来发展与趋势
 
-#<!-- chunk: 10.1 容器镜像技术演进 -->## 10.1 容器镜像技术演进
+## 10.1 容器镜像技术演进
 
 ```yaml
 容器镜像技术发展趋势:
@@ -1010,7 +1013,7 @@ disaster_recovery:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-22-container-image-management KUDIG Database — Global MOC
-- [[domain-13-container-runtime/README|[[Domain 22: 容器镜像管理 (Container Image Management)|Domain 22: 容器镜像管理 (Container Image Management)]]]]
+- [[domain-13-container-runtime/README.md|[[Domain 22: 容器镜像管理 (Container Image Management)|Domain 22: 容器镜像管理 (Container Image Management)]]]]
 - index.md|Domain-22 容器镜像管理 — 开源项目索引]]
 - distribution.md|Docker Registry企业级镜像分发深度实践]]
 - JFrog Artifactory Enterprise Container Registry Platform

@@ -32,7 +32,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-# Docker Architecture and [[Container Runtime|Container Runtime]]
+# Docker Architecture and Container Runtime
 
 ## Runtime Layered Architecture
 
@@ -98,14 +98,14 @@ Production nodes should use [[containerd|containerd]] or [[cri-o|CRI-O]] as the 
 
 ## Related
 
-- [[concepts/container-runtime-comparison|container-runtime-comparison]] — Container Runtime Comparison
+- [[concepts/container-runtime-comparison.md|container-runtime-comparison]] — Container Runtime Comparison
 - [[docker]] — Docker
-- [[entities/container-runtime|container-runtime]] — Container Runtime
+- [[entities/container-runtime.md|container-runtime]] — Container Runtime
 - [[containerd]] — containerd
 - [[youki]] — youki
-- [[concepts/linux-container-foundation|Linux Container Foundation]]
-- [[concepts/container-runtime-comparison|Container Runtime Comparison]]
-- [[concepts/overlayfs-storage|OverlayFS Storage]]
+- [[concepts/linux-container-foundation.md|Linux Container Foundation]]
+- [[concepts/container-runtime-comparison.md|Container Runtime Comparison]]
+- [[concepts/overlayfs-storage.md|OverlayFS Storage]]
 - [[containerd|containerd]]
 - [[docker|Docker]]
 - OCI Standard

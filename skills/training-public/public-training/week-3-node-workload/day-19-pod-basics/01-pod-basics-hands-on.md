@@ -35,7 +35,7 @@ title: Day 19: Pod 容器组基础实操
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] Pod 生命周期
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] Pod 生命周期
   - Pod 探针配置
   - CrashLoopBackOff 排查
   - Pod QoS 等级
@@ -236,6 +236,9 @@ kubectl logs -f <pod-name> --tail=100
 ```
 
 ### 3.2 进入容器调试
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 进入容器（如有 shell）

@@ -608,6 +608,9 @@ kubeadm certs check-expiration
 
 ### 场景 2: 手动续签证书
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 续签所有证书
 kubeadm certs renew all
@@ -831,8 +834,8 @@ done
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/operations/certificates|certificates]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/01-overview|01-overview]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/operations/certificates.md|certificates]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/01-overview.md|01-overview]]

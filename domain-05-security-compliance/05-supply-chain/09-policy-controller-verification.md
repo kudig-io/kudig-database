@@ -109,7 +109,7 @@ Policy Controller 是 Kubernetes 准入控制层的核心组件，通过拦截 P
 
 <!-- chunk: 1. 镜像验证架构全景 (Image Verification Architecture Overview) -->## 1. 镜像验证架构全景 (Image Verification Architecture Overview)
 
-#<!-- chunk: 1.1 准入控制流程 (Admission Control Flow) -->## 1.1 准入控制流程 (Admission Control Flow)
+## 1.1 准入控制流程 (Admission Control Flow)
 
 ```mermaid
 graph TB
@@ -156,7 +156,7 @@ graph TB
     OPA -->|"验证签名"| REG
 ```
 
-#<!-- chunk: 1.2 策略决策矩阵 (Policy Decision Matrix) -->## 1.2 策略决策矩阵 (Policy Decision Matrix)
+## 1.2 策略决策矩阵 (Policy Decision Matrix)
 
 | 场景 | Kyverno | Sigstore Policy Controller | OPA Gatekeeper |
 |------|---------|--------------------------|----------------|
@@ -173,7 +173,10 @@ graph TB
 
 <!-- chunk: 2. Kyverno 镜像验证 (Kyverno Image Verification) -->## 2. Kyverno 镜像验证 (Kyverno Image Verification)
 
-#<!-- chunk: 2.1 安装 Kyverno (Installing Kyverno) -->## 2.1 安装 Kyverno (Installing Kyverno)
+## 2.1 安装 Kyverno (Installing Kyverno)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 使用 Helm 安装 Kyverno
@@ -202,7 +205,7 @@ kubectl get pods -n kyverno
 kubectl get crd | grep kyverno
 ```
 
-#<!-- chunk: 2.2 基础镜像签名验证策略 (Basic Image Signature Verification Policy) -->## 2.2 基础镜像签名验证策略 (Basic Image Signature Verification Policy)
+## 2.2 基础镜像签名验证策略 (Basic Image Signature Verification Policy)
 
 ```yaml
 # kyverno-verify-image-basic.yaml
@@ -263,7 +266,7 @@ spec:
           verifyDigest: true
 ```
 
-#<!-- chunk: 2.3 高级镜像验证策略 (Advanced Image Verification Policy) -->## 2.3 高级镜像验证策略 (Advanced Image Verification Policy)
+## 2.3 高级镜像验证策略 (Advanced Image Verification Policy)
 
 ```yaml
 # kyverno-verify-image-advanced.yaml
@@ -436,7 +439,7 @@ spec:
                       value: ["CRITICAL"]
 ```
 
-#<!-- chunk: 2.4 基于公钥的验证策略 (Key-Based Verification Policy) -->## 2.4 基于公钥的验证策略 (Key-Based Verification Policy)
+## 2.4 基于公钥的验证策略 (Key-Based Verification Policy)
 
 ```yaml
 # kyverno-verify-image-key.yaml
@@ -525,7 +528,7 @@ spec:
           required: true
 ```
 
-#<!-- chunk: 2.5 Kyverno 策略异常 (Kyverno Policy Exceptions) -->## 2.5 Kyverno 策略异常 (Kyverno Policy Exceptions)
+## 2.5 Kyverno 策略异常 (Kyverno Policy Exceptions)
 
 ```yaml
 # kyverno-policy-exception.yaml
@@ -596,7 +599,10 @@ spec:
 
 <!-- chunk: 3. Sigstore Policy Controller (Sigstore Policy Controller) -->## 3. Sigstore Policy Controller (Sigstore Policy Controller)
 
-#<!-- chunk: 3.1 安装 Policy Controller (Installing Policy Controller) -->## 3.1 安装 Policy Controller (Installing Policy Controller)
+## 3.1 安装 Policy Controller (Installing Policy Controller)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 使用 Helm 安装
@@ -623,7 +629,7 @@ kubectl get validatingwebhookconfiguration | grep cosign
 kubectl describe validatingwebhookconfiguration policy.sigstore.dev
 ```
 
-#<!-- chunk: 3.2 ClusterImagePolicy 基础配置 (ClusterImagePolicy Basic Configuration) -->## 3.2 ClusterImagePolicy 基础配置 (ClusterImagePolicy Basic Configuration)
+## 3.2 ClusterImagePolicy 基础配置 (ClusterImagePolicy Basic Configuration)
 
 ```yaml
 # cluster-image-policy-basic.yaml
@@ -739,7 +745,7 @@ spec:
               }
 ```
 
-#<!-- chunk: 3.3 命名空间级别策略控制 (Namespace-Level Policy Control) -->## 3.3 命名空间级别策略控制 (Namespace-Level Policy Control)
+## 3.3 命名空间级别策略控制 (Namespace-Level Policy Control)
 
 ```yaml
 # namespace-policy-opt-out.yaml
@@ -795,7 +801,10 @@ spec:
 
 <!-- chunk: 4. OPA Gatekeeper 签名验证 (OPA Gatekeeper Signature Verification) -->## 4. OPA Gatekeeper 签名验证 (OPA Gatekeeper Signature Verification)
 
-#<!-- chunk: 4.1 安装 Gatekeeper (Installing Gatekeeper) -->## 4.1 安装 Gatekeeper (Installing Gatekeeper)
+## 4.1 安装 Gatekeeper (Installing Gatekeeper)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 使用 Helm 安装 OPA Gatekeeper
@@ -817,7 +826,7 @@ kubectl get pods -n gatekeeper-system
 kubectl get constrainttemplate
 ```
 
-#<!-- chunk: 4.2 外部数据提供者配置 (External Data Provider Configuration) -->## 4.2 外部数据提供者配置 (External Data Provider Configuration)
+## 4.2 外部数据提供者配置 (External Data Provider Configuration)
 
 ```yaml
 # gatekeeper-external-data-provider.yaml
@@ -881,7 +890,7 @@ spec:
             secretName: cosign-provider-tls
 ```
 
-#<!-- chunk: 4.3 Gatekeeper ConstraintTemplate (Gatekeeper ConstraintTemplate) -->## 4.3 Gatekeeper ConstraintTemplate (Gatekeeper ConstraintTemplate)
+## 4.3 Gatekeeper ConstraintTemplate (Gatekeeper ConstraintTemplate)
 
 ```yaml
 # gatekeeper-constraint-template.yaml
@@ -1020,7 +1029,7 @@ spec:
 
 <!-- chunk: 5. 多集群策略管理 (Multi-Cluster Policy Management) -->## 5. 多集群策略管理 (Multi-Cluster Policy Management)
 
-#<!-- chunk: 5.1 集中式策略仓库结构 (Centralized Policy Repository Structure) -->## 5.1 集中式策略仓库结构 (Centralized Policy Repository Structure)
+## 5.1 集中式策略仓库结构 (Centralized Policy Repository Structure)
 
 ```
 policy-repo/
@@ -1055,7 +1064,7 @@ policy-repo/
     └── fleet.yaml  # Fleet 多集群配置
 ```
 
-#<!-- chunk: 5.2 Kustomize 策略覆盖 (Kustomize Policy Overlays) -->## 5.2 Kustomize 策略覆盖 (Kustomize Policy Overlays)
+## 5.2 Kustomize 策略覆盖 (Kustomize Policy Overlays)
 
 ```yaml
 # overlays/prod-us-east/kustomization.yaml
@@ -1103,7 +1112,7 @@ spec:
   failurePolicy: Fail
 ```
 
-#<!-- chunk: 5.3 Argo CD 多集群策略同步 (Argo CD Multi-Cluster Policy Sync) -->## 5.3 Argo CD 多集群策略同步 (Argo CD Multi-Cluster Policy Sync)
+## 5.3 Argo CD 多集群策略同步 (Argo CD Multi-Cluster Policy Sync)
 
 ```yaml
 # argocd-policy-app.yaml
@@ -1196,7 +1205,7 @@ rules:
 
 <!-- chunk: 6. 策略测试与验证 (Policy Testing and Validation) -->## 6. 策略测试与验证 (Policy Testing and Validation)
 
-#<!-- chunk: 6.1 Kyverno CLI 测试 (Kyverno CLI Testing) -->## 6.1 Kyverno CLI 测试 (Kyverno CLI Testing)
+## 6.1 Kyverno CLI 测试 (Kyverno CLI Testing)
 
 ```bash
 # 安装 Kyverno CLI
@@ -1270,7 +1279,10 @@ spec:
       image: docker.io/library/nginx:latest  # 未签名
 ```
 
-#<!-- chunk: 6.2 策略评估工具 (Policy Evaluation Tools) -->## 6.2 策略评估工具 (Policy Evaluation Tools)
+## 6.2 策略评估工具 (Policy Evaluation Tools)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 使用 kubectl dry-run 测试策略效果
@@ -1313,7 +1325,10 @@ kubectl run test-unsigned \
 
 <!-- chunk: 7. 准入控制器调试与故障排查 (Admission Controller Debugging and Troubleshooting) -->## 7. 准入控制器调试与故障排查 (Admission Controller Debugging and Troubleshooting)
 
-#<!-- chunk: 7.1 Kyverno 故障排查 (Kyverno Troubleshooting) -->## 7.1 Kyverno 故障排查 (Kyverno Troubleshooting)
+## 7.1 Kyverno 故障排查 (Kyverno Troubleshooting)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 查看 Kyverno 准入控制器日志
@@ -1358,7 +1373,11 @@ kubectl annotate ns production \
 kubectl get cm kyverno -n kyverno -o yaml
 ```
 
-#<!-- chunk: 7.2 Policy Controller 故障排查 (Policy Controller Troubleshooting) -->## 7.2 Policy Controller 故障排查 (Policy Controller Troubleshooting)
+## 7.2 Policy Controller 故障排查 (Policy Controller Troubleshooting)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 查看 Policy Controller 日志
@@ -1404,7 +1423,13 @@ kubectl patch validatingwebhookconfiguration \
   -p='[{"op": "replace", "path": "/webhooks/0/failurePolicy", "value": "Fail"}]'
 ```
 
-#<!-- chunk: 7.3 常见问题解决方案 (Common Issue Solutions) -->## 7.3 常见问题解决方案 (Common Issue Solutions)
+## 7.3 常见问题解决方案 (Common Issue Solutions)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 问题 1: webhook timeout
@@ -1459,7 +1484,7 @@ kubectl logs -n kyverno -l app.kubernetes.io/component=admission-controller \
 
 <!-- chunk: 8. 策略监控与报告 (Policy Monitoring and Reporting) -->## 8. 策略监控与报告 (Policy Monitoring and Reporting)
 
-#<!-- chunk: 8.1 Prometheus 策略指标 (Prometheus Policy Metrics) -->## 8.1 Prometheus 策略指标 (Prometheus Policy Metrics)
+## 8.1 Prometheus 策略指标 (Prometheus Policy Metrics)
 
 ```yaml
 # prometheus-kyverno-rules.yaml
@@ -1515,7 +1540,7 @@ spec:
             description: "策略执行 webhook 已停止响应，安全控制可能失效"
 ```
 
-#<!-- chunk: 8.2 策略合规性仪表板 (Policy Compliance Dashboard) -->## 8.2 策略合规性仪表板 (Policy Compliance Dashboard)
+## 8.2 策略合规性仪表板 (Policy Compliance Dashboard)
 
 ```yaml
 # grafana-dashboard-kyverno.yaml
@@ -1570,7 +1595,7 @@ data:
 
 <!-- chunk: 9. 零信任镜像准入架构 (Zero Trust Image Admission Architecture) -->## 9. 零信任镜像准入架构 (Zero Trust Image Admission Architecture)
 
-#<!-- chunk: 9.1 分层防御模型 (Defense-in-Depth Model) -->## 9.1 分层防御模型 (Defense-in-Depth Model)
+## 9.1 分层防御模型 (Defense-in-Depth Model)
 
 ```mermaid
 graph TB
@@ -1601,7 +1626,7 @@ graph TB
     L6 --> L7
 ```
 
-#<!-- chunk: 9.2 完整准入控制配置示例 (Complete Admission Control Configuration) -->## 9.2 完整准入控制配置示例 (Complete Admission Control Configuration)
+## 9.2 完整准入控制配置示例 (Complete Admission Control Configuration)
 
 ```yaml
 # zero-trust-admission.yaml
@@ -1723,7 +1748,10 @@ spec:
 
 <!-- chunk: 10. 策略即代码最佳实践 (Policy-as-Code Best Practices) -->## 10. 策略即代码最佳实践 (Policy-as-Code Best Practices)
 
-#<!-- chunk: 10.1 策略版本管理 (Policy Version Management) -->## 10.1 策略版本管理 (Policy Version Management)
+## 10.1 策略版本管理 (Policy Version Management)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # Git 工作流用于策略变更
@@ -1757,7 +1785,7 @@ gh pr create --title "Add SBOM verification policy" \
 git log --follow -p -- policies/verify-sbom.yaml
 ```
 
-#<!-- chunk: 10.2 策略门控流水线 (Policy Gate Pipeline) -->## 10.2 策略门控流水线 (Policy Gate Pipeline)
+## 10.2 策略门控流水线 (Policy Gate Pipeline)
 
 ```yaml
 # .github/workflows/policy-validation.yml
@@ -1815,7 +1843,7 @@ jobs:
 
 <!-- chunk: 11. 参考资料与扩展阅读 (References and Further Reading) -->## 11. 参考资料与扩展阅读 (References and Further Reading)
 
-#<!-- chunk: 11.1 官方文档 -->## 11.1 官方文档
+## 11.1 官方文档
 
 | 资源 | URL |
 |------|-----|
@@ -1825,7 +1853,7 @@ jobs:
 | OPA Gatekeeper | https://open-policy-agent.github.io/gatekeeper/website/ |
 | Kubernetes 准入控制 | https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/ |
 
-#<!-- chunk: 11.2 安全标准参考 -->## 11.2 安全标准参考
+## 11.2 安全标准参考
 
 - **NIST SP 800-204D**: DevSecOps 工具链安全指南
 - **CIS Kubernetes Benchmark**: 包含镜像来源验证要求
@@ -1860,8 +1888,8 @@ Policy Controller 镜像验证是 Kubernetes 供应链安全的最后一道防�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 39: 供应链安全 (Supply Chain Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-39 供应链安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 供应链安全 (Supply Chain Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
 - 供应链安全概述 (Supply Chain Security Overview)
 - 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 - SBOM 生成与管理 (SBOM Generation and Management)
@@ -1879,4 +1907,4 @@ Policy Controller 镜像验证是 Kubernetes 供应链安全的最后一道防�
 - 10-compliance-automation-audit
 - 99-slsa-supply-chain-security-guide
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

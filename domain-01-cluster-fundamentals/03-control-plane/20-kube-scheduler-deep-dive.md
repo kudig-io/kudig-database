@@ -313,6 +313,9 @@ created: "2026-05-23"
 
 ### 3.1 完整调度流程
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                           Complete Scheduling Workflow                           │
@@ -1089,6 +1092,9 @@ spec:
         memory: "128Mi"
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 查看 Pod 调度状态 - PodSchedulingReadiness condition
 kubectl get pod gated-pod -o jsonpath='{.status.conditions[?(@.type=="PodSchedulingReady")]}'
@@ -1159,6 +1165,9 @@ kubectl patch pod gated-pod --type=merge -p '{"spec":{"schedulingGates":[]}}'
 
 #### kubectl 操作命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 查看带 schedulingGates 的 Pod
 kubectl get pods -o custom-columns=NAME:.metadata.name,SCHEDULING_GATES:.spec.schedulingGates
@@ -1176,6 +1185,7 @@ kubectl patch pod <pod-name> --type=merge -p \
 
 # 查看调度器日志中 PreEnqueue 阶段信息
 kubectl logs -n kube-system -l component=kube-scheduler | grep -i "scheduling gate"
+
 ```
 
 #### 故障排查
@@ -1579,6 +1589,9 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep "Unable to schedu
 | 抢占频繁 | 优先级配置问题 | 检查 PriorityClass | 调整优先级值 |
 
 ### 10.2 Pod Pending 问题排查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 查看 Pod 事件
@@ -2023,6 +2036,9 @@ spec:
 
 ### B. 常用 kubectl 命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 查看 Pod 调度结果
 kubectl get pod -o wide
@@ -2075,7 +2091,7 @@ kubectl delete pod <pod-name>
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -2096,4 +2112,6 @@ kubectl delete pod <pod-name>
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+```

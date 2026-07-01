@@ -1,6 +1,6 @@
 ---
 title: Manage Persistent Storage
-description: '- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-storage]] — 发布说明索引 — 存储'
+description: '- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-storage]] — 发布说明索引 — 存储'
 category: skills
 tags:
 - k8s
@@ -72,6 +72,10 @@ volumes:
 ### Expand
 
 If `allowVolumeExpansion: true` is set on the StorageClass, increase PVC size:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch pvc my-pvc -p '{"spec":{"resources":{"requests":{"storage":"100Gi"}}}}'
 ```
@@ -94,14 +98,14 @@ kubectl get pv                           # Check PV status and reclaim policy
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-storage]] — 发布说明索引 — 存储
-- [[skills/ts-storage|ts-storage]] — 存储故障排查
-- [[skills/troubleshoot-pod-issues|troubleshoot-pod-issues]] — [[Troubleshoot Pod Issues|Troubleshoot Pod Issues]]
+- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-storage]] — 发布说明索引 — 存储
+- [[skills/ts-storage.md|ts-storage]] — 存储故障排查
+- [[skills/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — [[skills/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
 - [[deployment]] — Deployment
-- [[concepts/storage-model|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
-- [[concepts/storage-model|Persistent Storage Model]]
-- [[entities/statefulset|StatefulSet]]
-- [[entities/csi-drivers|CSI Drivers]]
-- [[skills/troubleshoot-pod-issues|Troubleshoot Pod Issues]]
+- [[concepts/storage-model.md|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
+- [[concepts/storage-model.md|Persistent Storage Model]]
+- [[entities/statefulset.md|StatefulSet]]
+- [[entities/csi-drivers.md|CSI Drivers]]
+- [[skills/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
 
-- [[synthesis/Pod 生命周期 × 存储模型|Pod 生命周期 × 存储模型]]
+- [[concepts/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]

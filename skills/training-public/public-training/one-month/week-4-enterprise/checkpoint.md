@@ -75,7 +75,7 @@ estimated_read_time: 90min
 related_domains:
   - domain-20-enterprise-monitoring-alerting
   - domain-08-release-change-management
-  - domain-25-[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security|cloud-native-security]]
+  - domain-25-[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]
 related_topics:
   - domain-11-production-operations/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
   - domain-11-production-operations/topic-learn/public-training/one-month/projects/p5-graduation-project
@@ -483,4 +483,4 @@ Payment Service 5xx 激增
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

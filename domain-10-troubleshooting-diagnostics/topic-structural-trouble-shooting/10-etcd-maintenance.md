@@ -92,7 +92,7 @@ k8s_versions:
 
 <!-- chunk: 1. etcd 核心概念速查 -->## 1. etcd 核心概念速查
 
-#<!-- chunk: 1.1 关键指标 -->## 1.1 关键指标
+## 1.1 关键指标
 
 | 指标 | 正常值 | 告警阈值 | 说明 |
 |------|--------|---------|------|
@@ -103,7 +103,7 @@ k8s_versions:
 | `applied_index` | 持续增长 | 停滞 | 复制状态 |
 | `commited_index` | ≥ applied_index | 差距持续扩大 | 提交状态 |
 
-#<!-- chunk: 1.2 常用诊断命令 -->## 1.2 常用诊断命令
+## 1.2 常用诊断命令
 
 ```bash
 # 基本健康检查
@@ -142,7 +142,7 @@ du -sh /var/lib/etcd/
 
 <!-- chunk: 2. 问题场景 -->## 2. 问题场景
 
-#<!-- chunk: 2.1 磁盘空间不释放（最常见） -->## 2.1 磁盘空间不释放（最常见）
+## 2.1 磁盘空间不释放（最常见）
 
 **问题现象**: 删除大量历史资源后，`du -sh /var/lib/etcd/` 显示空间未减少，`db.size` 仍然很大
 
@@ -192,7 +192,7 @@ du -sh /var/lib/etcd/
 
 ---
 
-#<!-- chunk: 2.2 etcd space quota exceeded -->## 2.2 etcd space quota exceeded
+## 2.2 etcd space quota exceeded
 
 **问题现象**: API Server 报 "etcdserver: mvcc: database space exceeded"，写入被拒绝
 
@@ -258,7 +258,7 @@ kubectl get pods -n kube-system | grep etcd  # 确认所有 etcd pod 健康
 
 ---
 
-#<!-- chunk: 2.3 Leadership election 失败（leader 频繁切换） -->## 2.3 Leadership election 失败（leader 频繁切换）
+## 2.3 Leadership election 失败（leader 频繁切换）
 
 **问题现象**: etcd 日志显示 "raft term changed" 或 "lost leader"，集群不稳定
 
@@ -281,6 +281,10 @@ top
 ```
 
 **修复步骤**：
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 方案 1: 降低心跳间隔（临时）
 # 编辑 /etc/kubernetes/etcd.config.yaml
@@ -297,11 +301,16 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 
 ---
 
-#<!-- chunk: 2.4 Member add 失败 -->## 2.4 Member add 失败
+## 2.4 Member add 失败
 
 **问题现象**: `etcdctl member add` 成功但新节点无法加入，日志报 "conflicting cluster ID" 或 "peer cluster not found"
 
 **排查步骤**：
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 查看现有成员
 ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 member list -w table
@@ -312,7 +321,7 @@ cat /etc/kubernetes/etcd/etcd.conf.yaml | grep ETCD_INITIAL_CLUSTER
 # 确认与现有集群的 INITIAL_CLUSTER 一致
 
 # 3. 清理新节点的残留数据
-sudo rm -rf /var/lib/etcd/
+sudo rm -rf /var/lib/etcd/  # ⚠️ 删除系统/数据文件
 sudo systemctl restart etcd
 ```
 
@@ -331,15 +340,21 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 kubeadm join phase etcd https://<existing-ip>:2379 --token <token> \
   --discovery-token-ca-cert-hash sha256:<hash> \
   --control-plane --certificate-key <cert-key>
+
 ```
 
 ---
 
-#<!-- chunk: 2.5 Member remove 失败（节点退役） -->## 2.5 Member remove 失败（节点退役）
+## 2.5 Member remove 失败（节点退役）
 
 **问题现象**: `etcdctl member remove` 卡住或超时
 
 **排查步骤**：
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 查看 member 状态
 ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 member list -w table
@@ -353,13 +368,13 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
   member remove <member-id> --force
 
 # 4. 在被移除的节点上清理残留
-sudo rm -rf /var/lib/etcd/
+sudo rm -rf /var/lib/etcd/  # ⚠️ 删除系统/数据文件
 sudo systemctl stop etcd
 ```
 
 ---
 
-#<!-- chunk: 2.6 Snapshot backup 验证失败 -->## 2.6 Snapshot backup 验证失败
+## 2.6 Snapshot backup 验证失败
 
 **问题现象**: `etcdctl snapshot save` 成功，但 restore 时报错 "snapshot file is not valid"
 
@@ -382,6 +397,11 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 endpoint status -w json
 ```
 
 **正确的 backup/restore 流程**：
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # ========== BACKUP ==========
 # 1. 创建 snapshot
@@ -421,7 +441,7 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 endpoint health
 
 <!-- chunk: 3. 性能调优 -->## 3. 性能调优
 
-#<!-- chunk: 3.1 磁盘 I/O 优化 -->## 3.1 磁盘 I/O 优化
+## 3.1 磁盘 I/O 优化
 
 ```bash
 # 检查当前 I/O 延迟
@@ -434,7 +454,7 @@ iostat -x 1 10 | grep -E "avgqu-sz|avg-cpu"
 # - 隔离 WAL 日志到独立磁盘（避免写入竞争）
 ```
 
-#<!-- chunk: 3.2 网络优化 -->## 3.2 网络优化
+## 3.2 网络优化
 
 ```bash
 # 检查节点间 RTT 延迟
@@ -444,7 +464,7 @@ ping -c 50 <other-etcd-node-ip> | tail -1
 # 避免跨地域部署 etcd（延迟太高影响写入性能）
 ```
 
-#<!-- chunk: 3.3 参数调优 -->## 3.3 参数调优
+## 3.3 参数调优
 
 ```yaml
 # /etc/kubernetes/etcd.config.yaml 关键参数
@@ -462,7 +482,7 @@ auto-compaction-retention: "1h"  # 保留 1 小时历史
 
 <!-- chunk: 4. 监控指标 -->## 4. 监控指标
 
-#<!-- chunk: 4.1 Prometheus 告警规则 -->## 4.1 Prometheus 告警规则
+## 4.1 Prometheus 告警规则
 
 ```yaml
 groups:
@@ -553,21 +573,23 @@ related:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/MOC|topic-structural-trouble-shooting [[KUDIG Database — Global MOC|MOC]]]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README|Kubernetes 结构化故障排查知识库]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-dra-troubleshooting|DRA（动态资源分配）故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer|症状快速映射层 (Symptom-SOP-RootCause Mapping)]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/MOC.md|topic-structural-trouble-shooting [[KUDIG Database — Global MOC|MOC]]]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md|Kubernetes 结构化故障排查知识库]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-dra-troubleshooting.md|DRA（动态资源分配）故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer.md|症状快速映射层 (Symptom-SOP-RootCause Mapping)]]
 
 ## Related
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology|00-configuration-first-methodology]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-dra-troubleshooting|09-dra-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer|symptom-mapping-layer]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology|00-configuration-first-methodology]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md|00-configuration-first-methodology]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-dra-troubleshooting.md|09-dra-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer.md|symptom-mapping-layer]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md|00-configuration-first-methodology]]
+
+```

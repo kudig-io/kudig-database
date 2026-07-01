@@ -813,6 +813,9 @@ env:
 
 ### 9.2 JFR 持续录制
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 在 K8s 中启动 JFR 录制
 kubectl exec deployment/spring-app -- \
@@ -872,8 +875,8 @@ kubectl cp deployment/spring-app:/tmp/recording.jfr ./recording.jfr
 ## Obsidian 相关文档
 
 - domain-06-observability MOC
-- [[domain-06-observability/README|Observability Domain (可观测性领域)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-8 可观测性 — 开源项目索引]]
+- [[domain-06-observability/README.md|Observability Domain (可观测性领域)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
 - 03 - 日志收集架构详解 (Logging Architecture)
@@ -886,10 +889,10 @@ kubectl cp deployment/spring-app:/tmp/recording.jfr ./recording.jfr
 
 ## Related
 
-- [[release-notes/12-demo-env-guide|12-demo-env-guide]]
-- [[release-notes/21-platform-selection-guide|21-platform-selection-guide]]
+- 12-demo-env-guide
+- 21-platform-selection-guide
 
-- [[domain-06-observability/README|返回目录]]- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-06-observability/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ## See Also
 

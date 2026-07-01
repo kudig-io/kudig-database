@@ -141,4 +141,4 @@ created: "2026-05-23"
 
 ## 相关
 
-- [[domain-09-reliability-engineering/06-postmortem/02-postmortem-culture-guide]]
+- [[domain-09-reliability-engineering/06-postmortem/02-postmortem-culture-guide.md|02 postmortem culture guide]]

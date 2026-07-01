@@ -59,7 +59,7 @@ created: "2026-05-23"
 
 # 08 - 安全最佳实践表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/concepts/security](https://kubernetes.io/docs/concepts/security/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/security](https://kubernetes.io/docs/concepts/security/)
 
 <!-- chunk: Pod安全标准(Pod Securityod Security Standards]]) -->
 ## Pod安全标准(Pod Security Standards)
@@ -191,6 +191,9 @@ rules:
 | 4.x | Worker节点 | kube-bench | v1.24+ CRI相关 |
 | 5.x | Policies | kube-bench | v1.25+ PSA替代PSP |
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 运行kube-bench
 kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml
@@ -211,8 +214,8 @@ kubectl logs -f job/kube-bench
 ## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Security Domain]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-7 安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Security Domain]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
 - Kubernetes 认证授权体系详解
 - 网络安全策略与零信任架构
 - 运行时安全防护与威胁检测
@@ -230,8 +233,8 @@ kubectl logs -f job/kube-bench
 - 09-security-hardening-production
 - 10-certificate-management
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

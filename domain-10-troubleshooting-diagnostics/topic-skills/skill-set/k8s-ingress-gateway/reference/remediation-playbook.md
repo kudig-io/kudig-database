@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-ingress-gateway"
 created: "2026-05-22"
 updated: "2026-05-22"
+last_updated: 2026-05-22
 tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
@@ -46,6 +47,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 检查 path、backend service name/port、host
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 修正 backend service
   kubectl patch ingress <name> -n <namespace> --type='json' -p='
@@ -74,6 +79,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   openssl x509 -in <(kubectl get secret <tls-secret> -n <namespace> -o jsonpath='{.data.tls\.crt}' | base64 -d) -noout -enddate
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 从 cert-manager 重新签发
   kubectl cert-manager renew --namespace=<namespace> <certificate-name>
@@ -120,6 +129,11 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --tail=50
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 方案 A: 重启 Ingress Controller
   kubectl rollout restart deployment ingress-nginx-controller -n ingress-nginx
@@ -145,6 +159,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   kubectl get pods -n <namespace> -l app=<backend-label>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 根据后端服务具体问题修复
   # 可能涉及: Pod 重启、Deployment 修复、Service 端口修正
@@ -165,6 +183,10 @@ tags: ["reference", "remediation", "playbook", "visibility/public"]
   # 预期: 无输出（未安装）
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 安装 Gateway API CRD
   kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml

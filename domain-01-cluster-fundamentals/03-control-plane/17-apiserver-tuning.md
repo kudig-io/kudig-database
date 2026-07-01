@@ -245,10 +245,6 @@ spec:
     - --allow-privileged=true
     - --enable-admission-plugins=NodeRestriction,ResourceQuota,LimitRanger,PodSecurity,ValidatingAdmissionPolicy
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
     - --disable-admission-plugins=PodSecurityPolicy
     
     # ==================== 认证授权 ====================
@@ -1109,7 +1105,7 @@ kubectl get events -n kube-system --field-selector source=kube-apiserver
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -1123,8 +1119,8 @@ kubectl get events -n kube-system --field-selector source=kube-apiserver
 
 ## Related
 
-- [[domain-02-workloads-applications/03-jvm-gc-container-tuning|03-jvm-gc-container-tuning]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 

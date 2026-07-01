@@ -110,6 +110,9 @@ tags: [week-4, day-23, ingress, networking, k8s, k8s-1.28-1.33]
 
 ### 任务 1: Nginx Ingress Controller 基础路由 (40min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 确认 Nginx Ingress Controller 已安装
 kubectl get pods -n kube-system | grep nginx-ingress
@@ -163,6 +166,9 @@ curl -H "Host: demo.example.com" http://${INGRESS_IP}/v2
 
 ### 任务 2: TLS 证书配置 (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建自签名证书 (测试用)
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
@@ -204,6 +210,9 @@ curl -k -H "Host: demo.example.com" https://${INGRESS_IP}/
 ```
 
 ### 任务 3: 灰度发布 (Canary) (40min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建灰度 Ingress (将 20% 流量导向 v2)
@@ -261,6 +270,11 @@ curl -H "Host: demo.example.com" -H "x-canary: true" http://${INGRESS_IP}/
 
 ### 任务 4: ALB Ingress Controller (30min)
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 确认 ALB Ingress Controller 是否安装
 kubectl get pods -n kube-system | grep alb
@@ -290,7 +304,7 @@ spec:
 EOF
 
 # 清理
-kubectl delete ingress --all
+kubectl delete ingress --all  # ⚠️ 批量删除，波及面大
 kubectl delete secret demo-tls
 kubectl delete svc app-v1 app-v2
 kubectl delete deploy app-v1 app-v2

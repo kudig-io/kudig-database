@@ -4,6 +4,7 @@ category: assessment
 tags: [assessment, llm-wiki, expert-reading, pretraining, finetuning, quality]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 ---
 
 # KUDIG 语料库深度评估报告

@@ -341,6 +341,10 @@ metadata:
 
 **回滚流程详解**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 查看历史版本
 kubectl rollout history deployment myapp
@@ -394,6 +398,9 @@ spec:
 #### 1.1.4 金丝雀发布 (Canary Deployment)
 
 **方案 1: 手动金丝雀 (使用 Pause)**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 1. 更新镜像并立即暂停
@@ -478,6 +485,10 @@ spec:
 ```
 
 **金丝雀流量切换流程**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 阶段 1: 10% 流量到金丝雀
@@ -565,6 +576,11 @@ spec:
 
 **蓝绿切换流程**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 部署绿环境 (不接收流量)
 kubectl apply -f myapp-green-deployment.yaml
@@ -591,6 +607,7 @@ kubectl delete deployment myapp-blue
 # 7. 下次发版时，蓝绿角色互换
 # 将新版本部署到 myapp-blue (原蓝环境)
 # 从 green 切换到 blue
+
 ```
 
 **蓝绿部署优缺点**
@@ -849,6 +866,10 @@ kubectl get pods -l app=<label> -o jsonpath='{range .items[?(@.status.phase!="Ru
 
 #### 3.1.2 解决方案
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 方案 1：暂停更新，排查问题
 kubectl rollout pause deployment <name>
@@ -900,6 +921,9 @@ kubectl describe pod <pod-name> | grep -A5 "Readiness"
 
 #### 3.2.2 解决方案
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 调整探针参数
 kubectl patch deployment <name> --type='json' -p='[
@@ -929,6 +953,11 @@ kubectl patch deployment <name> --type='json' -p='[
 ### 3.3 资源不足导致 Pod Pending
 
 #### 3.3.1 解决方案
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 方案 1：减少资源请求
@@ -961,6 +990,11 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"priorityClassN
 ### 3.4 镜像拉取失败
 
 #### 3.4.1 解决方案
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 检查镜像名称是否正确
@@ -1062,6 +1096,9 @@ spec:
 | ReplicaFailure | True | FailedCreate | Pod 创建失败 |
 
 ### C. 常用命令速查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 更新镜像
@@ -1202,6 +1239,10 @@ kubectl describe deployment <name> | grep -A10 Conditions
 
 **场景 2: PDB + 节点维护导致更新阻塞**
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```
 触发条件:
   - 配置了严格的 PodDisruptionBudget (minAvailable=100%)
@@ -1226,6 +1267,10 @@ kubectl describe deployment <name> | grep -A10 Conditions
 ```
 
 **场景 3: 配置漂移导致回滚失败**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```
 触发条件:
@@ -1353,6 +1398,10 @@ spec:
 
 **PDB 阻塞滚动更新的诊断**
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 检查 PDB 状态
 kubectl get pdb <pdb-name> -o yaml
@@ -1372,7 +1421,7 @@ kubectl get events --field-selector=reason=EvictionBlocked
 # 临时绕过 PDB (紧急情况)
 kubectl delete pdb <pdb-name>
 # 或直接强制删除 Pod (跳过 Eviction API)
-kubectl delete pod <pod> --grace-period=0 --force
+kubectl delete pod <pod> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
 #### 2.5.2 PDB 与滚动更新策略的冲突
@@ -1642,6 +1691,10 @@ $ kubectl rollout history deployment order-service --revision=1 | grep REDIS
 
 **修复方案**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 方案 1: 立即回滚 (选择此方案)
 $ kubectl rollout undo deployment order-service
@@ -1805,9 +1858,14 @@ $ journalctl -u kubelet | tail -50
 
 **修复方案**
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 紧急修复: 强制删除 Terminating Pod
-$ kubectl delete pod recommendation-engine-old-xyz-20 --grace-period=0 --force
+$ kubectl delete pod recommendation-engine-old-xyz-20 --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 Warning: Immediate deletion does not wait for confirmation...
 pod "recommendation-engine-old-xyz-20" force deleted
 
@@ -1977,6 +2035,10 @@ $ docker history 012345678.dkr.ecr.us-west-2.amazonaws.com/api-gateway:v3.6
 4. **级联效应**: ImagePullBackOff 导致退避等待，更新停滞
 
 **修复方案**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 方案 1: 镜像预拉取 (立即生效)
@@ -2385,16 +2447,18 @@ spec:
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm|helm]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/openkruise-index|OpenKruise 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/openkruise-index.md|OpenKruise 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting|06-configmap-secret-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting|01-pod-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting|03-statefulset-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting|04-daemonset-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting.md|04-daemonset-troubleshooting]]
+
+```

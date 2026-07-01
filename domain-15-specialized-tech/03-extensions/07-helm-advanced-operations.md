@@ -64,6 +64,9 @@ created: "2026-05-23"
 
 ### 多环境配置管理
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 环境特定值文件
 values.yaml              # 默认配置
@@ -792,6 +795,9 @@ spec:
 
 ### 调试命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 模板渲染调试
 helm template mychart/ --debug
@@ -810,6 +816,7 @@ helm dependency build .
 helm install myrelease . --debug --dry-run
 helm install myrelease . --timeout=10m --wait=false
 kubectl describe pods -l app=myapp
+
 ```
 
 ### 常见问题解决
@@ -926,7 +933,7 @@ podLabels:
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
 - Domain-10 扩展与自定义 — 开源项目索引
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现
@@ -947,5 +954,7 @@ podLabels:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/helm-index|Helm 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/helm-index.md|Helm 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

@@ -85,14 +85,14 @@ spec:
   - reviews
   http:
   # 基于Header路由
-  - match:
-    - headers:
-        end-user:
-          exact: jason
-    route:
-    - destination:
-        host: reviews
-        subset: v2
+  - matchers:
+    - - headers=""
+    - end-user=""
+    - exact="jason"
+    - route=""
+    - - destination=""
+    - host="reviews"
+    - subset="v2"
   # 流量分割
   - route:
     - destination:
@@ -347,7 +347,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README|Domain-10: [[Kubernetes|Kubernetes]] 扩展生态]]
+- [[domain-15-specialized-tech/README.md|Domain-10: [[Kubernetes|Kubernetes]] 扩展生态]]
 - index.md|Domain-10 扩展与自定义 — 开源项目索引]]
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现
@@ -368,4 +368,4 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]

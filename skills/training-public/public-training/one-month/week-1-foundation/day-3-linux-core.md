@@ -83,6 +83,7 @@ related:
   - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-4-linux-network.md
   - domain-17-system-foundation/01-linux-system-architecture.md
 ---
+
 ```
 
 > **学习时间**: 4-5 小时 | **主题**: Linux 系统架构与进程管理
@@ -339,6 +340,9 @@ lsof +D /var/log
 
 ### 任务 3: Namespace 实验 (30min)
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+
 ```bash
 # 查看当前 Shell 进程的 namespace
 ls -la /proc/$$/ns/
@@ -395,10 +399,13 @@ sudo nsenter -t $CONTAINER_PID -p pstree -p
 
 # 清理
 sudo ip netns delete test-ns
-docker rm -f test-ns-container
+docker rm -f test-ns-container  # ⚠️ 强制清理，可能杀运行中容器
 ```
 
 ### 任务 4: Cgroup 实验 (30min)
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
 ```bash
 # 查看 cgroup 挂载点
@@ -446,7 +453,7 @@ docker exec cg-test sh -c 'while true; do :; done' &
 
 # 清理
 kill %1 2>/dev/null
-docker rm -f cg-test
+docker rm -f cg-test  # ⚠️ 强制清理，可能杀运行中容器
 ```
 
 ### 任务 5: 排障命令练习 (30min)
@@ -580,6 +587,8 @@ namespace 是进程级别的隔离，共享宿主机内核。虚拟机是硬件�
 ## 延伸阅读
 
 - [Linux 系统架构](../../domain-17-system-foundation/01-linux-system-architecture.md)
-- [Linux 进程管理](../../[[domain-17-system-foundation/01-linux/02-linux-process-management|02-linux-process-management]].md)
+- [Linux 进程管理](../../[[domain-17-system-foundation/01-linux/02-linux-process-management.md|02-linux-process-management]].md)
 - [Linux 容器基础原理](../../domain-17-system-foundation/08-linux-container-fundamentals.md)
 - [Linux 命令参考](../../domain-17-system-foundation/99-linux-commands-reference.md)
+
+```

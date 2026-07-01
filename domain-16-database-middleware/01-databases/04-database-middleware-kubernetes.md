@@ -70,7 +70,7 @@ created: "2026-05-23"
 
 本文档深入探讨三大主流数据库中间件在 K8s 上的实践：Vitess（CNCF Graduated，MySQL 水平扩展）、Apache ShardingSphere（分布式数据库代理）、ProxySQL（高性能 MySQL 代理）。内容覆盖 Operator 部署、分片策略、连接池模式、读写分离、性能调优和监控告警。
 
-#<!-- chunk: 数据库中间件的演进与定位 -->## 数据库中间件的演进与定位
+## 数据库中间件的演进与定位
 
 数据库中间件的出现源于关系型数据库在水平扩展能力上的天然局限。传统的关系型数据库（MySQL、PostgreSQL）采用单机架构，垂直扩展存在硬件上限，主从复制只能解决读扩展问题而无法解决写扩展和数据容量扩展问题。数据库中间件通过在应用和数据库之间引入代理层，实现了透明的数据分片、查询路由和连接管理。
 
@@ -84,7 +84,7 @@ ProxySQL 则专注于 MySQL 代理层的极致优化。它是一个高性能的 
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 数据库中间件总体架构 -->## 数据库中间件总体架构
+## 数据库中间件总体架构
 
 ```mermaid
 graph TB
@@ -134,7 +134,7 @@ graph TB
     SS_CENTER --> SS
 ```
 
-#<!-- chunk: 中间件选型对比 -->## 中间件选型对比
+## 中间件选型对比
 
 | 维度 | Vitess | ShardingSphere | ProxySQL |
 |:---|:---|:---|:---|
@@ -152,7 +152,11 @@ graph TB
 
 <!-- chunk: 核心组件配置 -->## 核心组件配置
 
-#<!-- chunk: Vitess Operator on K8s -->## Vitess Operator on K8s
+## Vitess Operator on K8s
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # Install Vitess Operator
@@ -172,7 +176,7 @@ echo "NAME                                      READY   STATUS    RESTARTS   AGE
 echo "vitess-operator-controller-manager-xxx   1/1     Running   0          60s"
 ```
 
-#<!-- chunk: Vitess 集群部署 -->## Vitess 集群部署
+## Vitess 集群部署
 
 ```yaml
 # vitess-cluster.yaml
@@ -294,7 +298,7 @@ spec:
         memory: "512Mi"
 ```
 
-#<!-- chunk: Vitess VReplication 工作流配置 -->## Vitess VReplication 工作流配置
+## Vitess VReplication 工作流配置
 
 ```yaml
 apiVersion: planetscale.com/v2
@@ -316,7 +320,7 @@ spec:
     delayThreshold: "30s"
 ```
 
-#<!-- chunk: ShardingSphere Proxy on K8s -->## ShardingSphere Proxy on K8s
+## ShardingSphere Proxy on K8s
 
 ```yaml
 # shardingsphere-proxy-deployment.yaml
@@ -392,7 +396,7 @@ spec:
           averageUtilization: 70
 ```
 
-#<!-- chunk: ShardingSphere 分片配置 -->## ShardingSphere 分片配置
+## ShardingSphere 分片配置
 
 ```yaml
 # shardingsphere-config ConfigMap
@@ -516,7 +520,7 @@ data:
               worker-id: 1
 ```
 
-#<!-- chunk: ProxySQL on K8s -->## ProxySQL on K8s
+## ProxySQL on K8s
 
 ```yaml
 apiVersion: apps/v1
@@ -657,7 +661,7 @@ data:
 
 <!-- chunk: ProxySQL 管理变量参考 -->## ProxySQL 管理变量参考
 
-#<!-- chunk: ProxySQL Admin 变量表 -->## ProxySQL Admin 变量表
+## ProxySQL Admin 变量表
 
 | 变量名 | 默认值 | 说明 | 推荐值 |
 |:---|:---|:---|:---|
@@ -667,7 +671,7 @@ data:
 | `web_port` | 6080 | Web 界面端口 | 6080 |
 | `restapi_enabled` | false | 启用 REST API | true |
 
-#<!-- chunk: ProxySQL MySQL 变量表 -->## ProxySQL MySQL 变量表
+## ProxySQL MySQL 变量表
 
 | 变量名 | 默认值 | 说明 | 推荐值 |
 |:---|:---|:---|:---|
@@ -695,7 +699,7 @@ data:
 
 <!-- chunk: 分片策略完整示例 -->## 分片策略完整示例
 
-#<!-- chunk: Hash 分片示例 -->## Hash 分片示例
+## Hash 分片示例
 
 ```yaml
 Hash分片策略:
@@ -717,7 +721,7 @@ Hash分片策略:
     表达式: ds_${user_id % 3}
 ```
 
-#<!-- chunk: Range 分片示例 -->## Range 分片示例
+## Range 分片示例
 
 ```yaml
 Range分片策略:
@@ -743,7 +747,7 @@ Range分片策略:
       shardingSeconds: "2592000"  # 30 days
 ```
 
-#<!-- chunk: 一致性哈希分片示例 -->## 一致性哈希分片示例
+## 一致性哈希分片示例
 
 ```yaml
 Consistent_Hash分片策略:
@@ -759,7 +763,7 @@ Consistent_Hash分片策略:
       virtualNodeCount: 128
 ```
 
-#<!-- chunk: Vitess VIndex 完整配置 -->## Vitess VIndex 完整配置
+## Vitess VIndex 完整配置
 
 ```yaml
 Vitess_VIndex分片配置:
@@ -802,7 +806,7 @@ Vitess_VIndex分片配置:
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: 连接池模式对比 -->## 连接池模式对比
+## 连接池模式对比
 
 | 连接池模式 | 实现方式 | 复用粒度 | 优点 | 缺点 |
 |:---|:---|:---|:---|:---|
@@ -811,7 +815,7 @@ Vitess_VIndex分片配置:
 | Statement PgBouncer | 语句间复用连接 | 语句级 | 最高复用率 | 不支持事务，有限制 |
 | Vitess VTGate | 内建连接池 | 事务级 | 透明，无需客户端配置 | 依赖VTGate实现 |
 
-#<!-- chunk: 连接池容量计算 -->## 连接池容量计算
+## 连接池容量计算
 
 ```yaml
 连接池容量计算公式:
@@ -840,7 +844,7 @@ Vitess_VIndex分片配置:
     queryserver-config-stream-pool-size: 流式查询连接数
 ```
 
-#<!-- chunk: 分片策略性能对比 -->## 分片策略性能对比
+## 分片策略性能对比
 
 | 分片策略 | 算法 | 优点 | 缺点 | 适用场景 |
 |:---|:---|:---|:---|:---|
@@ -854,7 +858,7 @@ Vitess_VIndex分片配置:
 
 <!-- chunk: 性能基准测试结果 -->## 性能基准测试结果
 
-#<!-- chunk: 测试环境 -->## 测试环境
+## 测试环境
 
 ```yaml
 测试环境:
@@ -873,7 +877,7 @@ Vitess_VIndex分片配置:
   并发数: 50, 100, 200, 500, 1000
 ```
 
-#<!-- chunk: 基准测试结果表 -->## 基准测试结果表
+## 基准测试结果表
 
 | 配置 | 并发数 | QPS | P95 延迟 (ms) | P99 延迟 (ms) | 连接利用率 |
 |:---|:---|:---|:---|:---|:---|
@@ -896,7 +900,7 @@ Vitess_VIndex分片配置:
 | ShardingSphere (3 shard) | 500 | 38,200 | 17.6 | 34.8 | 86% |
 | ShardingSphere (3 shard) | 1000 | 44,100 | 26.3 | 52.7 | 93% |
 
-#<!-- chunk: 基准测试结论 -->## 基准测试结论
+## 基准测试结论
 
 ```yaml
 测试结论:
@@ -925,7 +929,7 @@ Vitess_VIndex分片配置:
 
 <!-- chunk: 高可用与容灾 -->## 高可用与容灾
 
-#<!-- chunk: ProxySQL 高可用部署 -->## ProxySQL 高可用部署
+## ProxySQL 高可用部署
 
 ```yaml
 apiVersion: v1
@@ -958,7 +962,7 @@ spec:
       app: proxysql
 ```
 
-#<!-- chunk: Vitess 自动故障转移 -->## Vitess 自动故障转移
+## Vitess 自动故障转移
 
 ```yaml
 Vitess故障转移流程 (via vtorc):
@@ -1001,7 +1005,7 @@ Vitess故障转移流程 (via vtorc):
 
 <!-- chunk: 监控告警 -->## 监控告警
 
-#<!-- chunk: Prometheus 监控配置 -->## Prometheus 监控配置
+## Prometheus 监控配置
 
 ```yaml
 groups:
@@ -1052,7 +1056,10 @@ groups:
 
 <!-- chunk: 运维管理 -->## 运维管理
 
-#<!-- chunk: Vitess 运维脚本 -->## Vitess 运维脚本
+## Vitess 运维脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1128,7 +1135,7 @@ esac
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 中间件选型决策树 -->## 中间件选型决策树
+## 中间件选型决策树
 
 | 需求场景 | 推荐方案 | 理由 |
 |:---|:---|:---|
@@ -1139,7 +1146,7 @@ esac
 | PostgreSQL 扩展 | CloudNativePG / CockroachDB | 原生分布式，无需中间件 |
 | 高性能连接池 | ProxySQL | 多路复用，10-50x 复用率 |
 
-#<!-- chunk: 灰度切换 -->## 灰度切换
+## 灰度切换
 
 ```bash
 # ProxySQL Traffic Gradual Migration
@@ -1175,7 +1182,7 @@ echo "Traffic split: 100% new / 0% old"
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题速查表 -->## 常见问题速查表
+## 常见问题速查表
 
 | 问题现象 | 可能原因 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
@@ -1187,7 +1194,7 @@ echo "Traffic split: 100% new / 0% old"
 | VTGate OOM | 查询结果集过大 | 监控内存使用 | 限制结果集大小/streaming |
 | 跨分片事务超时 | 分布式事务耗时 | 查看事务日志 | 避免跨分片事务 |
 
-#<!-- chunk: ProxySQL 故障排查脚本 -->## ProxySQL 故障排查脚本
+## ProxySQL 故障排查脚本
 
 ```bash
 #!/bin/bash
@@ -1252,7 +1259,7 @@ echo "=== Diagnostic Complete ==="
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-28-enterprise-database-middleware MOC
-- [[domain-16-database-middleware/README|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
+- [[domain-16-database-middleware/README.md|Domain 16: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
 - Domain-28 企业数据库与中间件 — 开源项目索引
 - MySQL 企业级数据库运维管理
 - PostgreSQL 企业级数据库高可用架构

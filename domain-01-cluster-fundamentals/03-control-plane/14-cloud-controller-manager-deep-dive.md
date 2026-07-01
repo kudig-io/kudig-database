@@ -2038,6 +2038,9 @@ grep -E "node|Node|service|Service|loadbalancer|LoadBalancer|route|Route" <ccm-l
 
 ### 10.4 问题修复流程
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 节点未初始化问题排查流程:
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -2226,7 +2229,7 @@ grep -E "node|Node|service|Service|loadbalancer|LoadBalancer|route|Route" <ccm-l
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -2247,4 +2250,4 @@ grep -E "node|Node|service|Service|loadbalancer|LoadBalancer|route|Route" <ccm-l
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]

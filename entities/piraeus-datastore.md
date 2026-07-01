@@ -42,7 +42,7 @@ Piraeus Datastore 是基于 LINSTOR 和 DRBD 技术的 Kubernetes 高可用存�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -59,22 +59,22 @@ Piraeus Datastore 是基于 LINSTOR 和 DRBD 技术的 Kubernetes 高可用存�
 ## 参考链接
 
 - [[operator-pattern]]
-- [[concepts/controller-pattern|controller-pattern]]
-- [[concepts/storage-model|storage-model]]
+- [[concepts/controller-pattern.md|controller-pattern]]
+- [[concepts/storage-model.md|storage-model]]
 - [[pod-lifecycle]]
-- [[entities/csi-drivers|csi-drivers]]
+- [[entities/csi-drivers.md|csi-drivers]]
 
 ## Related
 
 - [[spin]] — Spin
 - [[backstage]] — Backstage
-- [[entities/emissary-ingress|ingress]]]] — Emissary-Ingress
+- [[entities/emissary-ingress.md|ingress]]]] — Emissary-Ingress
 - [[kubevela]] — KubeVela
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - piraeus-datastore
-- [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-storage.md|CNCF 存储与数据库项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

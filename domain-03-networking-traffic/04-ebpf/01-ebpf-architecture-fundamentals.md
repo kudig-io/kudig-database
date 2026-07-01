@@ -71,7 +71,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. eBPF 概述与历史演进 -->## 1. eBPF 概述与历史演进
 
-#<!-- chunk: 1.1 什么是 eBPF (What is eBPF) -->## 1.1 什么是 eBPF (What is eBPF)
+## 1.1 什么是 eBPF (What is eBPF)
 
 eBPF（Extended Berkeley Packet Filter）是 Linux 内核中的一项革命性技术，允许在内核空间安全运行沙箱程序，无需修改内核源码或加载内核模块。它本质上是一个在内核中运行的虚拟机，提供了一种安全、高效的方式来扩展内核功能。
 
@@ -85,7 +85,7 @@ eBPF（Extended Berkeley Packet Filter）是 Linux 内核中的一项革命性�
 | 网络性能 | 用户态网络栈开销大 | XDP 内核最早处理点，接近线速 |
 | 安全策略 | SELinux/AppArmor 规则固化 | LSM eBPF 动态策略 |
 
-#<!-- chunk: 1.2 历史演进：cBPF → eBPF (Historical Evolution) -->## 1.2 历史演进：cBPF → eBPF (Historical Evolution)
+## 1.2 历史演进：cBPF → eBPF (Historical Evolution)
 
 ```
 时间线：Berkeley Packet Filter 的发展历程
@@ -165,7 +165,7 @@ eBPF（Extended Berkeley Packet Filter）是 Linux 内核中的一项革命性�
         └─────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.3 cBPF vs eBPF 技术对比 (Technical Comparison) -->## 1.3 cBPF vs eBPF 技术对比 (Technical Comparison)
+## 1.3 cBPF vs eBPF 技术对比 (Technical Comparison)
 
 ```c
 /* cBPF 程序示例：过滤 TCP 包 (tcpdump -d 'tcp') */
@@ -226,7 +226,7 @@ char LICENSE[] SEC("license") = "GPL";
 
 <!-- chunk: 2. eBPF 虚拟机架构 -->## 2. eBPF 虚拟机架构
 
-#<!-- chunk: 2.1 整体架构图 (Overall Architecture) -->## 2.1 整体架构图 (Overall Architecture)
+## 2.1 整体架构图 (Overall Architecture)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -274,7 +274,7 @@ char LICENSE[] SEC("license") = "GPL";
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 2.2 eBPF 寄存器集 (Register Set) -->## 2.2 eBPF 寄存器集 (Register Set)
+## 2.2 eBPF 寄存器集 (Register Set)
 
 eBPF 虚拟机拥有 11 个 64 位通用寄存器和一个程序计数器：
 
@@ -342,7 +342,7 @@ int demo_register_usage(struct xdp_md *ctx) {
 }
 ```
 
-#<!-- chunk: 2.3 指令集架构 (Instruction Set Architecture) -->## 2.3 指令集架构 (Instruction Set Architecture)
+## 2.3 指令集架构 (Instruction Set Architecture)
 
 eBPF 使用 64 位固定长度指令（部分指令为 128 位，用于立即数加载）：
 
@@ -395,7 +395,7 @@ int trace_write(struct trace_event_raw_sys_enter *ctx) {
 }
 ```
 
-#<!-- chunk: 2.4 eBPF 栈 (Stack) -->## 2.4 eBPF 栈 (Stack)
+## 2.4 eBPF 栈 (Stack)
 
 eBPF 程序拥有 512 字节的栈空间：
 
@@ -470,7 +470,7 @@ int kprobe_vfs_write(struct pt_regs *ctx) {
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 2.5 Helper 函数系统 (Helper Functions) -->## 2.5 Helper 函数系统 (Helper Functions)
+## 2.5 Helper 函数系统 (Helper Functions)
 
 ```c
 /* eBPF Helper 函数分类与使用 */
@@ -537,7 +537,7 @@ cgroup/sock        bpf_setsockopt, bpf_getsockopt, bpf_sock_ops_cb_flags_set
 
 <!-- chunk: 3. eBPF 验证器工作原理 -->## 3. eBPF 验证器工作原理
 
-#<!-- chunk: 3.1 验证器架构 (Verifier Architecture) -->## 3.1 验证器架构 (Verifier Architecture)
+## 3.1 验证器架构 (Verifier Architecture)
 
 ```
 eBPF 验证器工作流程
@@ -596,7 +596,7 @@ eBPF 验证器工作流程
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 3.2 寄存器类型系统 (Register Type System) -->## 3.2 寄存器类型系统 (Register Type System)
+## 3.2 寄存器类型系统 (Register Type System)
 
 ```c
 /* 验证器追踪的寄存器状态 (内核源码简化版) */
@@ -626,7 +626,7 @@ enum bpf_reg_type {
 };
 ```
 
-#<!-- chunk: 3.3 常见验证失败原因与修复 (Common Verification Failures) -->## 3.3 常见验证失败原因与修复 (Common Verification Failures)
+## 3.3 常见验证失败原因与修复 (Common Verification Failures)
 
 ```c
 /* 错误示例 1: 未检查 NULL 指针 */
@@ -746,7 +746,7 @@ int good_stack_usage(struct pt_regs *ctx) {
 
 <!-- chunk: 4. JIT 编译器与性能优化 -->## 4. JIT 编译器与性能优化
 
-#<!-- chunk: 4.1 JIT 编译流程 (JIT Compilation Pipeline) -->## 4.1 JIT 编译流程 (JIT Compilation Pipeline)
+## 4.1 JIT 编译流程 (JIT Compilation Pipeline)
 
 ```
 eBPF JIT 编译流程
@@ -789,7 +789,7 @@ JIT 编译器 (arch/x86/net/bpf_jit_comp.c)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-#<!-- chunk: 4.2 JIT 编译器配置 (JIT Configuration) -->## 4.2 JIT 编译器配置 (JIT Configuration)
+## 4.2 JIT 编译器配置 (JIT Configuration)
 
 ```bash
 # 启用 JIT 编译 (现代内核默认启用)
@@ -812,7 +812,7 @@ bpftool prog dump jited id <prog_id>
 bpftool prog dump xlated id <prog_id>  # 查看 eBPF 字节码 (BTF 注解)
 ```
 
-#<!-- chunk: 4.3 JIT 性能对比 (Performance Comparison) -->## 4.3 JIT 性能对比 (Performance Comparison)
+## 4.3 JIT 性能对比 (Performance Comparison)
 
 ```
 性能基准对比 (以 XDP 处理 64字节包为例)
@@ -836,9 +836,9 @@ DPDK (对比)              ~80-100 Mpps     ~20-50 ns   用户态，独占 CPU
 
 <!-- chunk: 5. eBPF 程序类型详解 -->## 5. eBPF 程序类型详解
 
-#<!-- chunk: 5.1 XDP (eXpress Data Path) 网络加速 -->## 5.1 XDP (eXpress Data Path) 网络加速
+## 5.1 XDP (eXpress Data Path) 网络加速
 
-##<!-- chunk: XDP 工作原理 -->## XDP 工作原理
+## XDP 工作原理
 
 ```
 XDP 数据包处理路径
@@ -889,7 +889,7 @@ XDP 数据包处理路径
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-##<!-- chunk: XDP 程序实战示例 -->## XDP 程序实战示例
+## XDP 程序实战示例
 
 ```c
 /* XDP DDoS 防护程序 - IP 黑名单 */
@@ -1021,9 +1021,9 @@ data:
     bpftool map dump pinned /sys/fs/bpf/stats_map
 ```
 
-#<!-- chunk: 5.2 TC (Traffic Control) 流量控制 -->## 5.2 TC (Traffic Control) 流量控制
+## 5.2 TC (Traffic Control) 流量控制
 
-##<!-- chunk: TC Hook 点 -->## TC Hook 点
+## TC Hook 点
 
 ```
 TC (Traffic Control) eBPF Hook 点
@@ -1215,7 +1215,7 @@ bpftool net show
 bpftool prog show tag <prog_tag>
 ```
 
-#<!-- chunk: 5.3 kprobe/kretprobe 内核跟踪 -->## 5.3 kprobe/kretprobe 内核跟踪
+## 5.3 kprobe/kretprobe 内核跟踪
 
 ```c
 /* kprobe 跟踪内核函数示例 */
@@ -1330,7 +1330,7 @@ int BPF_PROG(fexit_tcp_connect, struct sock *sk, int ret) {
 }
 ```
 
-#<!-- chunk: 5.4 Tracepoint 静态跟踪点 -->## 5.4 Tracepoint 静态跟踪点
+## 5.4 Tracepoint 静态跟踪点
 
 ```c
 /* Tracepoint 示例 - 跟踪调度器事件 */
@@ -1420,7 +1420,7 @@ int tp_sched_switch(struct sched_switch_args *ctx) {
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 5.5 LSM (Linux Security Module) 安全钩子 -->## 5.5 LSM (Linux Security Module) 安全钩子
+## 5.5 LSM (Linux Security Module) 安全钩子
 
 ```c
 /* LSM eBPF 程序 - 运行时安全策略 */
@@ -1516,7 +1516,7 @@ int BPF_PROG(lsm_bprm_check, struct linux_binprm *bprm) {
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 5.6 cgroup 程序类型 -->## 5.6 cgroup 程序类型
+## 5.6 cgroup 程序类型
 
 ```c
 /* cgroup eBPF 程序 - 容器网络控制 */
@@ -1587,7 +1587,7 @@ bpftool cgroup attach ${CGROUP_PATH} connect4 \
 # Cilium 自动为每个 Pod 的 cgroup 挂载策略程序
 ```
 
-#<!-- chunk: 5.7 Socket 过滤器 -->## 5.7 Socket 过滤器
+## 5.7 Socket 过滤器
 
 ```c
 /* Socket Filter 程序 - 捕获特定流量 */
@@ -1635,7 +1635,7 @@ char LICENSE[] SEC("license") = "GPL";
 
 <!-- chunk: 6. eBPF 程序生命周期管理 -->## 6. eBPF 程序生命周期管理
 
-#<!-- chunk: 6.1 程序生命周期 (Program Lifecycle) -->## 6.1 程序生命周期 (Program Lifecycle)
+## 6.1 程序生命周期 (Program Lifecycle)
 
 ```
 eBPF 程序生命周期
@@ -1679,7 +1679,7 @@ eBPF 程序生命周期
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-#<!-- chunk: 6.2 使用 libbpf 管理程序生命周期 -->## 6.2 使用 libbpf 管理程序生命周期
+## 6.2 使用 libbpf 管理程序生命周期
 
 ```c
 /* 用户态程序: 使用 libbpf 加载和管理 eBPF 程序 */
@@ -1794,7 +1794,7 @@ cleanup:
 }
 ```
 
-#<!-- chunk: 6.3 BPF 文件系统 (BPF Filesystem) -->## 6.3 BPF 文件系统 (BPF Filesystem)
+## 6.3 BPF 文件系统 (BPF Filesystem)
 
 ```bash
 # BPF 文件系统操作
@@ -1839,7 +1839,7 @@ bpftool prog show  # 现在显示运行时间统计
 
 <!-- chunk: 7. BTF 与 CO-RE -->## 7. BTF 与 CO-RE
 
-#<!-- chunk: 7.1 BTF (BPF Type Format) 概述 -->## 7.1 BTF (BPF Type Format) 概述
+## 7.1 BTF (BPF Type Format) 概述
 
 ```
 BTF 架构与作用
@@ -1879,7 +1879,7 @@ BTF 信息来源:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-#<!-- chunk: 7.2 CO-RE (Compile Once - Run Everywhere) -->## 7.2 CO-RE (Compile Once - Run Everywhere)
+## 7.2 CO-RE (Compile Once - Run Everywhere)
 
 ```c
 /* CO-RE 使用示例 */
@@ -2002,7 +2002,7 @@ bpftool btf dump file my_prog.o        # 查看程序 BTF
 pahole -J --btf_encode_detached external.btf vmlinux
 ```
 
-#<!-- chunk: 7.3 vmlinux.h 的使用 -->## 7.3 vmlinux.h 的使用
+## 7.3 vmlinux.h 的使用
 
 ```c
 /* 使用 vmlinux.h 无需内核头文件 */
@@ -2044,7 +2044,7 @@ int BPF_PROG(fentry_tcp_v4_connect, struct sock *sk) {
 
 <!-- chunk: 8. 最佳实践与常见问题 -->## 8. 最佳实践与常见问题
 
-#<!-- chunk: 8.1 性能最佳实践 (Performance Best Practices) -->## 8.1 性能最佳实践 (Performance Best Practices)
+## 8.1 性能最佳实践 (Performance Best Practices)
 
 ```c
 /* 最佳实践 1: 使用 Per-CPU Map 避免锁竞争 */
@@ -2125,7 +2125,7 @@ struct {
 } proto_stats SEC(".maps");
 ```
 
-#<!-- chunk: 8.2 调试技巧 (Debugging Tips) -->## 8.2 调试技巧 (Debugging Tips)
+## 8.2 调试技巧 (Debugging Tips)
 
 ```bash
 # 调试技巧 1: 查看验证器日志
@@ -2177,7 +2177,7 @@ dmesg | grep -i bpf
 journalctl -k | grep -i bpf
 ```
 
-#<!-- chunk: 8.3 常见问题与解决方案 (Common Issues) -->## 8.3 常见问题与解决方案 (Common Issues)
+## 8.3 常见问题与解决方案 (Common Issues)
 
 ```
 常见问题速查表
@@ -2230,7 +2230,7 @@ kubectl -n kube-system exec -it ds/cilium -- cilium bpf policy list
 kubectl -n kube-system exec -it ds/cilium -- cilium bpf nat list
 ```
 
-#<!-- chunk: 8.4 安全注意事项 (Security Considerations) -->## 8.4 安全注意事项 (Security Considerations)
+## 8.4 安全注意事项 (Security Considerations)
 
 ```
 eBPF 安全最佳实践
@@ -2337,9 +2337,9 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-35-ebpf-technology KUDIG Database — Global MOC
-- [[domain-03-networking-traffic/README|[[Domain 35: eBPF 技术体系 (eBPF Technology Stack)|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]]]
+- [[domain-03-networking-traffic/README.md|[[Domain 35: eBPF 技术体系 (eBPF Technology Stack)|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]]]
 - Domain-35 eBPF 技术 — 开源项目索引
-- [[domain-03-networking-traffic/04-ebpf/02-ebpf-map-types-data-structures]]
+- [[domain-03-networking-traffic/04-ebpf/02-ebpf-map-types-data-structures.md|02 ebpf map types data structures]]
 - Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)
 - Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)
 - Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sideca...

@@ -95,7 +95,7 @@ Envoy Gateway 定位
 └── 适合: 纯网关场景 (不需要服务网格)
 ```
 
-#<!-- chunk: Gateway API 角色模型 -->## Gateway API 角色模型
+## Gateway API 角色模型
 
 | 角色 | 管理资源 | 关注点 |
 |:---|:---|:---|
@@ -107,7 +107,10 @@ Envoy Gateway 定位
 
 <!-- chunk: 二、安装部署 -->## 二、安装部署
 
-#<!-- chunk: 2.1 Helm 安装 -->## 2.1 Helm 安装
+## 2.1 Helm 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add eg https://charts.envoyproxy.io
@@ -119,7 +122,7 @@ helm install eg eg/gateway-helm \
   --version v1.3.0
 ```
 
-#<!-- chunk: 2.2 生产级配置 -->## 2.2 生产级配置
+## 2.2 生产级配置
 
 ```yaml
 # values-envoy-gateway.yaml
@@ -156,7 +159,7 @@ observability:
       scrapeInterval: 30s
 ```
 
-#<!-- chunk: 2.3 GatewayClass 创建 -->## 2.3 GatewayClass 创建
+## 2.3 GatewayClass 创建
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -176,7 +179,7 @@ spec:
 
 <!-- chunk: 三、Gateway 与 Listener 配置 -->## 三、Gateway 与 Listener 配置
 
-#<!-- chunk: 3.1 基础 Gateway -->## 3.1 基础 Gateway
+## 3.1 基础 Gateway
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -226,7 +229,7 @@ spec:
             gateway-access: admin
 ```
 
-#<!-- chunk: 3.2 EnvoyProxy 自定义配置 -->## 3.2 EnvoyProxy 自定义配置
+## 3.2 EnvoyProxy 自定义配置
 
 ```yaml
 apiVersion: gateway.envoyproxy.io/v1alpha1
@@ -256,7 +259,7 @@ spec:
 
 <!-- chunk: 四、HTTPRoute 流量路由 -->## 四、HTTPRoute 流量路由
 
-#<!-- chunk: 4.1 基础路由 -->## 4.1 基础路由
+## 4.1 基础路由
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -324,7 +327,7 @@ spec:
 
 <!-- chunk: 五、TLS 终止与 mTLS -->## 五、TLS 终止与 mTLS
 
-#<!-- chunk: 5.1 TLS 终止 -->## 5.1 TLS 终止
+## 5.1 TLS 终止
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -344,7 +347,7 @@ spec:
         name: example-com-cert
 ```
 
-#<!-- chunk: 5.2 上游 mTLS -->## 5.2 上游 mTLS
+## 5.2 上游 mTLS
 
 ```yaml
 apiVersion: gateway.envoyproxy.io/v1alpha1
@@ -367,7 +370,7 @@ spec:
 
 <!-- chunk: 六、速率限制与熔断 -->## 六、速率限制与熔断
 
-#<!-- chunk: 6.1 本地速率限制 -->## 6.1 本地速率限制
+## 6.1 本地速率限制
 
 ```yaml
 apiVersion: gateway.envoyproxy.io/v1alpha1
@@ -399,7 +402,7 @@ spec:
             type: Exact
 ```
 
-#<!-- chunk: 6.2 重试与超时 -->## 6.2 重试与超时
+## 6.2 重试与超时
 
 ```yaml
 apiVersion: gateway.envoyproxy.io/v1alpha1
@@ -431,7 +434,7 @@ spec:
 
 <!-- chunk: 七、认证与授权 -->## 七、认证与授权
 
-#<!-- chunk: 7.1 JWT 验证 -->## 7.1 JWT 验证
+## 7.1 JWT 验证
 
 ```yaml
 apiVersion: gateway.envoyproxy.io/v1alpha1
@@ -457,7 +460,7 @@ spec:
         claim: email
 ```
 
-#<!-- chunk: 7.2 基础认证 -->## 7.2 基础认证
+## 7.2 基础认证
 
 ```yaml
 apiVersion: gateway.envoyproxy.io/v1alpha1
@@ -479,7 +482,7 @@ spec:
 
 <!-- chunk: 八、可观测性集成 -->## 八、可观测性集成
 
-#<!-- chunk: 8.1 Access Log 配置 -->## 8.1 Access Log 配置
+## 8.1 Access Log 配置
 
 ```yaml
 apiVersion: gateway.envoyproxy.io/v1alpha1
@@ -511,7 +514,7 @@ spec:
             path: /dev/stdout
 ```
 
-#<!-- chunk: 8.2 Prometheus Metrics -->## 8.2 Prometheus Metrics
+## 8.2 Prometheus Metrics
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -554,7 +557,7 @@ spec:
 | 可扩展性 | Lua/NJS | WASM, ExtProc |
 | 学习曲线 | 低 | 中等 |
 
-#<!-- chunk: 迁移路径 -->## 迁移路径
+## 迁移路径
 
 ```
 现有 Ingress
@@ -589,7 +592,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-40-cloud-native-api-gateway MOC
-- [[domain-03-networking-traffic/README|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
 - Domain-40 云原生 API 网关 — 开源项目索引
 - 01 - 云原生 API 网关架构总览
 - 02 - Kubernetes Gateway API 标准深度解析
@@ -607,3 +610,5 @@ spec:
 - 14-api-gateway-production-operations
 - 01-api-gateway-architecture-overview
 - 02-kubernetes-gateway-api-deep-dive
+
+```

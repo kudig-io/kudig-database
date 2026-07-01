@@ -340,6 +340,9 @@ spec:
 
 **验证**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply -f pvc.yaml
 kubectl get pvc data-pvc
@@ -354,6 +357,10 @@ kubectl get pvc data-pvc
 ### 5. 写出扩容 PVC 到 40Gi 的命令:
 
 **参考答案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # Step 1: 检查 StorageClass 是否允许扩容
@@ -638,4 +645,4 @@ ReadWriteOnce (单节点读写)、ReadOnlyMany (多节点只读)、ReadWriteMany
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

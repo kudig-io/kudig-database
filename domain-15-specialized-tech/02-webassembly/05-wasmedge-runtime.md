@@ -55,7 +55,7 @@ created: "2026-05-23"
 1. [WasmEdge 概述](#1-wasmedge-概述)
 2. [架构与核心组件](#2-架构与核心组件)
 3. [WASI 支持与扩展](#3-wasi-支持与扩展)
-4. [[entities/kubernetes|Kubernetes]] 集成](#4-kubernetes-集成)
+4. [[entities/kubernetes.md|Kubernetes]] 集成](#4-kubernetes-集成)
 5. [边缘部署](#5-边缘部署)
 6. 网络插件](#6-网络插件)
 7. [AI 推理支持](#7-ai-推理支持)
@@ -69,7 +69,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. WasmEdge 概述 -->## 1. WasmEdge 概述
 
-#<!-- chunk: 1.1 什么是 WasmEdge / What is WasmEdge -->## 1.1 什么是 WasmEdge / What is WasmEdge
+## 1.1 什么是 WasmEdge / What is WasmEdge
 
 WasmEdge 是一个轻量级、高性能、可扩展的 WebAssembly 运行时，专为云原生、边缘计算和分布式应用设计。它是 CNCF 的沙箱项目（2021年加入）：
 
@@ -106,7 +106,7 @@ WasmEdge 核心特性
 └─────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.2 WasmEdge vs 其他运行时 / Runtime Comparison -->## 1.2 WasmEdge vs 其他运行时 / Runtime Comparison
+## 1.2 WasmEdge vs 其他运行时 / Runtime Comparison
 
 ```mermaid
 graph TD
@@ -127,7 +127,7 @@ graph TD
     end
 ```
 
-#<!-- chunk: 1.3 版本历史与路线图 / History & Roadmap -->## 1.3 版本历史与路线图 / History & Roadmap
+## 1.3 版本历史与路线图 / History & Roadmap
 
 ```
 WasmEdge 版本历程
@@ -151,7 +151,7 @@ WasmEdge 版本历程
 
 <!-- chunk: 2. 架构与核心组件 -->## 2. 架构与核心组件
 
-#<!-- chunk: 2.1 整体架构 / Overall Architecture -->## 2.1 整体架构 / Overall Architecture
+## 2.1 整体架构 / Overall Architecture
 
 ```mermaid
 graph TD
@@ -198,7 +198,7 @@ graph TD
     N --> O & P & Q & R & S & T
 ```
 
-#<!-- chunk: 2.2 核心 C API / Core C API -->## 2.2 核心 C API / Core C API
+## 2.2 核心 C API / Core C API
 
 ```c
 // WasmEdge C API 使用示例
@@ -257,7 +257,7 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-#<!-- chunk: 2.3 Rust 绑定 / Rust Bindings -->## 2.3 Rust 绑定 / Rust Bindings
+## 2.3 Rust 绑定 / Rust Bindings
 
 ```rust
 // Cargo.toml
@@ -312,7 +312,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-#<!-- chunk: 2.4 Go 绑定 / Go Bindings -->## 2.4 Go 绑定 / Go Bindings
+## 2.4 Go 绑定 / Go Bindings
 
 ```go
 // go.mod
@@ -405,7 +405,7 @@ func main() {
 
 <!-- chunk: 3. WASI 支持与扩展 -->## 3. WASI 支持与扩展
 
-#<!-- chunk: 3.1 WASI 实现概述 / WASI Implementation -->## 3.1 WASI 实现概述 / WASI Implementation
+## 3.1 WASI 实现概述 / WASI Implementation
 
 ```mermaid
 graph LR
@@ -430,7 +430,7 @@ graph LR
     end
 ```
 
-#<!-- chunk: 3.2 WASI Socket 扩展 / WASI Socket -->## 3.2 WASI Socket 扩展 / WASI Socket
+## 3.2 WASI Socket 扩展 / WASI Socket
 
 ```rust
 // WasmEdge 异步网络 - HTTP 服务器
@@ -493,7 +493,7 @@ async fn main() {
 }
 ```
 
-#<!-- chunk: 3.3 WASI Crypto 扩展 / Crypto Extension -->## 3.3 WASI Crypto 扩展 / Crypto Extension
+## 3.3 WASI Crypto 扩展 / Crypto Extension
 
 ```rust
 // WasmEdge WASI-Crypto 使用示例
@@ -564,7 +564,7 @@ fn hash_data(data: &[u8]) -> Vec<u8> {
 
 <!-- chunk: 4. Kubernetes 集成 -->## 4. Kubernetes 集成
 
-#<!-- chunk: 4.1 WasmEdge containerd shim / containerd Integration -->## 4.1 WasmEdge containerd shim / containerd Integration
+## 4.1 WasmEdge containerd shim / containerd Integration
 
 ```bash
 # 安装 WasmEdge containerd shim
@@ -616,7 +616,7 @@ version = 2
       WasmEdgePluginDir = "/root/.wasmedge/plugin"
 ```
 
-#<!-- chunk: 4.2 RuntimeClass 配置 / RuntimeClass Configuration -->## 4.2 RuntimeClass 配置 / RuntimeClass Configuration
+## 4.2 RuntimeClass 配置 / RuntimeClass Configuration
 
 ```yaml
 # WasmEdge RuntimeClass
@@ -662,7 +662,7 @@ overhead:
     cpu: "500m"
 ```
 
-#<!-- chunk: 4.3 Kubernetes 部署示例 / Kubernetes Deployment -->## 4.3 Kubernetes 部署示例 / Kubernetes Deployment
+## 4.3 Kubernetes 部署示例 / Kubernetes Deployment
 
 ```yaml
 # WasmEdge HTTP 服务 Deployment
@@ -784,7 +784,7 @@ spec:
 
 <!-- chunk: 5. 边缘部署 -->## 5. 边缘部署
 
-#<!-- chunk: 5.1 边缘架构 / Edge Architecture -->## 5.1 边缘架构 / Edge Architecture
+## 5.1 边缘架构 / Edge Architecture
 
 ```mermaid
 graph TD
@@ -818,7 +818,7 @@ graph TD
     G --> A
 ```
 
-#<!-- chunk: 5.2 边缘节点安装 / Edge Node Installation -->## 5.2 边缘节点安装 / Edge Node Installation
+## 5.2 边缘节点安装 / Edge Node Installation
 
 ```bash
 # 在 ARM64 边缘设备上安装 WasmEdge
@@ -853,7 +853,7 @@ curl -sfL https://get.k3s.io | \
   sh -
 ```
 
-#<!-- chunk: 5.3 边缘 Wasm 应用示例 / Edge Wasm App -->## 5.3 边缘 Wasm 应用示例 / Edge Wasm App
+## 5.3 边缘 Wasm 应用示例 / Edge Wasm App
 
 ```rust
 // 边缘传感器数据处理 Wasm 应用
@@ -1028,7 +1028,7 @@ fn main() {
 
 <!-- chunk: 6. 网络插件 -->## 6. 网络插件
 
-#<!-- chunk: 6.1 WasmEdge 网络能力 / Networking Capabilities -->## 6.1 WasmEdge 网络能力 / Networking Capabilities
+## 6.1 WasmEdge 网络能力 / Networking Capabilities
 
 ```
 WasmEdge 网络插件层次
@@ -1051,7 +1051,7 @@ WasmEdge 网络插件层次
 └──────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 6.2 异步 HTTP 服务器 / Async HTTP Server -->## 6.2 异步 HTTP 服务器 / Async HTTP Server
+## 6.2 异步 HTTP 服务器 / Async HTTP Server
 
 ```rust
 // 使用 WasmEdge 异步运行时构建高性能 HTTP 服务器
@@ -1191,7 +1191,7 @@ async fn main() {
 
 <!-- chunk: 7. AI 推理支持 -->## 7. AI 推理支持
 
-#<!-- chunk: 7.1 WASI-NN 标准 / WASI-NN Standard -->## 7.1 WASI-NN 标准 / WASI-NN Standard
+## 7.1 WASI-NN 标准 / WASI-NN Standard
 
 ```mermaid
 graph TD
@@ -1245,7 +1245,7 @@ get-output: func(
 ) -> result<tensor, error>
 ```
 
-#<!-- chunk: 7.2 图像分类完整示例 / Image Classification Example -->## 7.2 图像分类完整示例 / Image Classification Example
+## 7.2 图像分类完整示例 / Image Classification Example
 
 ```rust
 // 使用 WasmEdge WASI-NN 进行图像分类
@@ -1399,7 +1399,7 @@ fn main() {
 
 <!-- chunk: 8. ONNX 集成 -->## 8. ONNX 集成
 
-#<!-- chunk: 8.1 ONNX 模型准备 / ONNX Model Preparation -->## 8.1 ONNX 模型准备 / ONNX Model Preparation
+## 8.1 ONNX 模型准备 / ONNX Model Preparation
 
 ```python
 # Python: 将 PyTorch 模型导出为 ONNX
@@ -1469,7 +1469,7 @@ print("优化后模型大小:",
 EOF
 ```
 
-#<!-- chunk: 8.2 Rust ONNX 推理 / Rust ONNX Inference -->## 8.2 Rust ONNX 推理 / Rust ONNX Inference
+## 8.2 Rust ONNX 推理 / Rust ONNX Inference
 
 ```rust
 // Rust ONNX 推理（使用 WasmEdge WASI-NN ONNX 后端）
@@ -1550,7 +1550,7 @@ fn batch_inference(images: Vec<Vec<f32>>) -> Vec<Vec<f32>> {
 
 <!-- chunk: 9. TensorFlow Lite 集成 -->## 9. TensorFlow Lite 集成
 
-#<!-- chunk: 9.1 TFLite 模型推理 / TFLite Inference -->## 9.1 TFLite 模型推理 / TFLite Inference
+## 9.1 TFLite 模型推理 / TFLite Inference
 
 ```rust
 // TensorFlow Lite 推理（WasmEdge TFLite 后端）
@@ -1645,7 +1645,7 @@ impl TFLiteClassifier {
 }
 ```
 
-#<!-- chunk: 9.2 目标检测 / Object Detection -->## 9.2 目标检测 / Object Detection
+## 9.2 目标检测 / Object Detection
 
 ```rust
 // YOLO 目标检测（使用 TFLite）
@@ -1802,7 +1802,7 @@ impl YoloDetector {
 
 <!-- chunk: 10. LLM 推理 -->## 10. LLM 推理
 
-#<!-- chunk: 10.1 WasmEdge LLM 支持 / LLM Support -->## 10.1 WasmEdge LLM 支持 / LLM Support
+## 10.1 WasmEdge LLM 支持 / LLM Support
 
 ```
 WasmEdge LLM 推理方案
@@ -1822,7 +1822,7 @@ WasmEdge LLM 推理方案
   支持 OpenAI 兼容 API
 ```
 
-#<!-- chunk: 10.2 LlamaEdge API 服务 / LlamaEdge API Server -->## 10.2 LlamaEdge API 服务 / LlamaEdge API Server
+## 10.2 LlamaEdge API 服务 / LlamaEdge API Server
 
 ```bash
 # 安装 WasmEdge 及 GGML 插件
@@ -1939,7 +1939,7 @@ async fn chat_completion(
 }
 ```
 
-#<!-- chunk: 10.3 Kubernetes LLM 推理部署 / K8s LLM Deployment -->## 10.3 Kubernetes LLM 推理部署 / K8s LLM Deployment
+## 10.3 Kubernetes LLM 推理部署 / K8s LLM Deployment
 
 ```yaml
 # WasmEdge LLM 推理服务
@@ -2039,7 +2039,7 @@ spec:
 
 <!-- chunk: 11. 性能优化 -->## 11. 性能优化
 
-#<!-- chunk: 11.1 AOT 编译优化 / AOT Compilation -->## 11.1 AOT 编译优化 / AOT Compilation
+## 11.1 AOT 编译优化 / AOT Compilation
 
 ```bash
 # WasmEdge AOT 编译
@@ -2095,7 +2095,7 @@ fn compile_wasm_to_aot(wasm_path: &str, output_path: &str) -> Result<(), Box<dyn
 }
 ```
 
-#<!-- chunk: 11.2 SIMD 加速 / SIMD Acceleration -->## 11.2 SIMD 加速 / SIMD Acceleration
+## 11.2 SIMD 加速 / SIMD Acceleration
 
 ```rust
 // 利用 WasmEdge SIMD128 进行向量加速
@@ -2178,7 +2178,7 @@ pub unsafe fn matrix_multiply_simd(
 }
 ```
 
-#<!-- chunk: 11.3 内存优化 / Memory Optimization -->## 11.3 内存优化 / Memory Optimization
+## 11.3 内存优化 / Memory Optimization
 
 ```bash
 # WasmEdge 内存配置优化
@@ -2198,7 +2198,7 @@ wasmedge \
 
 <!-- chunk: 12. 生产实践 -->## 12. 生产实践
 
-#<!-- chunk: 12.1 生产部署架构 / Production Deployment -->## 12.1 生产部署架构 / Production Deployment
+## 12.1 生产部署架构 / Production Deployment
 
 ```yaml
 # 完整生产级 WasmEdge 部署
@@ -2349,7 +2349,7 @@ spec:
         effect: NoSchedule
 ```
 
-#<!-- chunk: 12.2 CI/CD 流水线 / CI/CD Pipeline -->## 12.2 CI/CD 流水线 / CI/CD Pipeline
+## 12.2 CI/CD 流水线 / CI/CD Pipeline
 
 ```yaml
 # .github/workflows/wasmedge-deploy.yml
@@ -2426,7 +2426,7 @@ jobs:
         kubectl rollout status deployment/wasmedge-prod -n production
 ```
 
-#<!-- chunk: 12.3 监控告警 / Monitoring Alerts -->## 12.3 监控告警 / Monitoring Alerts
+## 12.3 监控告警 / Monitoring Alerts
 
 ```yaml
 # WasmEdge 生产告警规则
@@ -2491,21 +2491,21 @@ spec:
 
 <!-- chunk: 参考资料 / References -->## 参考资料 / References
 
-#<!-- chunk: 官方资源 / Official Resources -->## 官方资源 / Official Resources
+## 官方资源 / Official Resources
 - [WasmEdge 官方文档](https://wasmedge.org/docs/)
 - [WasmEdge GitHub](https://github.com/WasmEdge/WasmEdge)
 - [WasmEdge 插件](https://wasmedge.org/docs/start/install#wasmedge-plug-ins)
 
-#<!-- chunk: AI 推理 / AI Inference -->## AI 推理 / AI Inference
+## AI 推理 / AI Inference
 - [WASI-NN 规范](https://github.com/WebAssembly/wasi-nn)
 - [LlamaEdge](https://github.com/LlamaEdge/LlamaEdge)
 - [WasmEdge AI Examples](https://github.com/second-state/WasmEdge-WASINN-examples)
 
-#<!-- chunk: CNCF 相关 / CNCF Related -->## CNCF 相关 / CNCF Related
+## CNCF 相关 / CNCF Related
 - [WasmEdge CNCF Sandbox](https://www.cncf.io/projects/wasmedge-runtime/)
 - [containerd runwasi](https://github.com/containerd/runwasi)
 
-#<!-- chunk: 学习资源 / Learning Resources -->## 学习资源 / Learning Resources
+## 学习资源 / Learning Resources
 - [WasmEdge Book](https://wasmedge.org/docs/)
 - [WasmEdge Rust SDK](https://github.com/second-state/wasmedge-rust-sdk)
 - [Second State 博客](https://www.secondstate.io/articles/)
@@ -2520,7 +2520,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native MOC
-- [[domain-15-specialized-tech/README|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: WebAssembly 云原生 (WebAssembly Cloud Native)]]
 - Domain-38 WebAssembly 云原生 — 开源项目索引
 - WebAssembly 云原生基础
 - containerd Wasm 运行时

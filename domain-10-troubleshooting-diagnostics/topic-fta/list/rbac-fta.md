@@ -176,18 +176,18 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine|FTA 诊断执行引擎]]
-- [[skills/ts-security-auth|安全认证排查]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[skills/ts-security-auth.md|安全认证排查]]
 
 ## Related
 
 - [[helm-fta]] — Helm 发布异常故障树分析
-- [[skills/skill-reference-diagnostic-workflow|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
-- [[skills/ts-command-output|ts-command-output]] — 命令输出根因解析
-- [[skills/ts-resources-scheduling|ts-resources-scheduling]] — 资源调度故障排查
-- [[skills/Kubernetes Diagnostic Skills Overview|Kubernetes Diagnostic Skills Overview]] — Kubernetes Diagnostic Skills Overview
+- [[skills/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
+- [[skills/ts-command-output.md|ts-command-output]] — 命令输出根因解析
+- [[skills/ts-resources-scheduling.md|ts-resources-scheduling]] — 资源调度故障排查
+- [[skills/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]] — Kubernetes Diagnostic Skills Overview
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/rbac-fta|RBAC 异常故障树分析]]
-- [[skills/skill-23-job-cronjob-failure|Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/rbac-fta.md|RBAC 异常故障树分析]]
+- [[skills/skill-23-job-cronjob-failure.md|Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

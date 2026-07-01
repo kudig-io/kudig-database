@@ -59,6 +59,10 @@ Service (selector: app=web)
 
 ### 操作
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 当前稳定版本
 kubectl get deployment web-stable
@@ -145,6 +149,9 @@ spec:
 
 利用 `kubectl rollout pause` 将 RollingUpdate 暂停在中间状态：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 触发更新，立即暂停
 kubectl set image deployment/web web=myapp:v2.0.0
@@ -160,6 +167,9 @@ kubectl rollout undo deployment/web
 ```
 
 pause 和 resume 的本质操作：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 kubectl patch deployment web -p '{"spec":{"paused":true}}'
@@ -178,6 +188,11 @@ Service (selector: 动态切换)
 ```
 
 ### 操作
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 部署绿版本（不影响生产流量）
@@ -239,14 +254,16 @@ spec:
 
 ## 相关技能
 
-- [[skills/deployment-rolling-update|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
-- [[skills/deployment-workload-selection|[[工作负载控制器选型|工作负载控制器选型]]]]
+- [[skills/deployment-rolling-update.md|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
+- [[skills/deployment-workload-selection.md|[[工作负载控制器选型|工作负载控制器选型]]]]
 - [[deployment|Deployment]]
 
 ## Related
 
-- [[skills/k8s-deployment-strategies-guide|k8s-deployment-strategies-guide]] — Kubernetes 部署策略最佳实践
+- [[skills/k8s-deployment-strategies-guide.md|k8s-deployment-strategies-guide]] — Kubernetes 部署策略最佳实践
 - [[deployment]] — Deployment
 - [[istio]] — Istio
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[argo]] — Argo Workflows
+
+```

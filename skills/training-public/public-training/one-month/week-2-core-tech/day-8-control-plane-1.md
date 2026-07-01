@@ -42,7 +42,7 @@ created: "2026-05-23"
 ---
 id: LEARN-ONE-MONTH-W2-DAY8
 title: Day 8 - 控制平面 - etcd + API Server
-topic: [[entities/kubernetes|kubernetes]]
+topic: [[entities/kubernetes.md|kubernetes]]
 type: hands-on-guide
 tags: [etcd, apiserver, control-plane, raft, authentication, authorization, admission, hands-on, week-2]
 last_updated: 2026-05-18
@@ -184,6 +184,9 @@ API Server 是 Kubernetes 的核心网关，所有对集群的访问都经过 AP
 
 ### 任务 1: etcd 操作实践 (1h)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Step 1: 获取 etcd Pod 名称
 ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}')
@@ -269,6 +272,9 @@ etcdctl snapshot status /var/lib/etcd/snapshot-20260518.db --write-table
 
 ### 任务 2: API Server 请求追踪 (45min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # Step 1: 使用 verbose 模式查看完整请求
 kubectl get pods -v=8
@@ -329,6 +335,10 @@ kill %1
 ```
 
 ### 任务 3: 准入控制实验 (45min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # Step 1: 查看启用的准入控制器
@@ -478,6 +488,10 @@ kubectl delete resourcequota compute-quota
 ### Q3: etcd 备份应该怎么做？
 
 **A**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 定期备份命令
 ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}')

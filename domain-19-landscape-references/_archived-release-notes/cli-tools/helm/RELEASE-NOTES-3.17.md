@@ -42,7 +42,7 @@ Helm v3.17.4 is a patch release, this bring is the security release noted below.
 
 The community keeps growing, and we'd love to see you there!
 
-- Join the discussion in [[entities/kubernetes|Kubernetes]] Slack](https://kubernetes.slack.com):
+- Join the discussion in [[entities/kubernetes.md|Kubernetes]] Slack](https://kubernetes.slack.com):
   -  for questions and just to hang out
   -  for discussing PRs, code, and bugs
 - Hang out at the Public Developer Call: Thursday, 9:30 Pacific via [Zoom](https://zoom.us/j/696660622)

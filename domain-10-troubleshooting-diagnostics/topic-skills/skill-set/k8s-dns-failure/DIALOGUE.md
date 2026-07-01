@@ -4,6 +4,7 @@ category: "troubleshooting"
 tags: ["networking", "remote-consultant"]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 dialogue_id: "DIALOGUE-SKILL-NET-001"
 skill_id: "SKILL-NET-001"
 version: "1.0.0"
@@ -11,15 +12,15 @@ role: "remote-consultant"
 language: "zh"
 summary: "DNS解析问题的远程顾问对话脚本，覆盖CoreDNS、Service DNS、NodeLocal DNSCache排查。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL]]"
+  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
     type: uses
-  - target: "[[entities/coredns]]"
+  - target: "[[entities/coredns.md]]"
     type: uses
-  - target: "[[entities/deployment]]"
+  - target: "[[entities/deployment.md]]"
     type: uses
-  - target: "[[entities/kubelet]]"
+  - target: "[[entities/kubelet.md]]"
     type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service]]"
+  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service.md]]"
     type: uses
 ---
 
@@ -33,7 +34,7 @@ relationships:
 
 ### 入口 A：工程师明确报告 DNS 问题
 
-**工程师**：「Pod 里域名解析失败了」/「nslookup 不通」/「[[entities/coredns|CoreDNS]] 好像挂了」
+**工程师**：「Pod 里域名解析失败了」/「nslookup 不通」/「[[entities/coredns.md|CoreDNS]] 好像挂了」
 
 **顾问回应**：
 > 收到，DNS 问题直接影响服务发现，我们尽快排查。作为远程顾问，我无法直连你的集群，请你配合执行检查命令，我会根据输出给出下一步。
@@ -217,7 +218,7 @@ relationships:
 **顾问指令**：
 > Pod DNS 配置正确，解析失败说明 CoreDNS 服务端没有响应。
 >
-> 1. 确认 CoreDNS [[domain-17-system-foundation/topic-dictionary/networking/service|Service]] ClusterIP：`kubectl get svc kube-dns -n kube-system`
+> 1. 确认 CoreDNS [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]] ClusterIP：`kubectl get svc kube-dns -n kube-system`
 >    **如果没有 kube-dns 服务名** → `kubectl get svc -n kube-system | grep -i dns`
 > 2. 从 Pod 内直接测试 CoreDNS 服务 IP：`kubectl exec -it <pod-name> -n <namespace> -- nc -vz <kube-dns-cluster-ip> 53`
 >    **如果没有 nc** → `kubectl exec -it <pod-name> -n <namespace> -- sh -c "echo '' > /dev/udp/<kube-dns-cluster-ip>/53"`
@@ -237,7 +238,7 @@ relationships:
 **顾问指令**：
 > Pod 使用了节点本地 DNS 而非集群 DNS。需要修复 dnsPolicy。
 >
-> 1. 确认当前配置：`kubectl get [[entities/deployment|deployment]] <deploy-name> -n <namespace> -o yaml | grep -A 3 dnsPolicy`
+> 1. 确认当前配置：`kubectl get [[entities/deployment.md|deployment]] <deploy-name> -n <namespace> -o yaml | grep -A 3 dnsPolicy`
 >    **如果是裸 Pod** → `kubectl get pod <pod-name> -n <namespace> -o yaml | grep -A 3 dnsPolicy`
 > 2. 修改为 `ClusterFirst`：`kubectl patch deployment <deploy-name> -n <namespace> --type merge -p '{"spec":{"template":{"spec":{"dnsPolicy":"ClusterFirst"}}}}'`
 >    **如果是裸 Pod** → `kubectl delete pod <pod-name> -n <namespace>`，然后修改 YAML 重新创建
@@ -254,7 +255,7 @@ relationships:
 ### Round 2 — 分支 C：Pod 配置异常深度排查
 
 **顾问指令**：
-> resolv.conf 缺失或为空非常异常，可能由 [[entities/kubelet|kubelet]] 或容器运行时 Bug 引起。
+> resolv.conf 缺失或为空非常异常，可能由 [[entities/kubelet.md|kubelet]] 或容器运行时 Bug 引起。
 >
 > 1. 检查 Pod 完整 spec：`kubectl get pod <pod-name> -n <namespace> -o yaml | head -100`
 > 2. 检查节点状态：`kubectl get node <node-name> -o wide`
@@ -377,7 +378,7 @@ relationships:
 >    **如果无法执行** → `kubectl get pods -n kube-system`，把非 Running 的 Pod 告诉我
 
 **分支决策**：
-- **I1**：CNI Pod 异常 → 升级决策点（网络深度诊断 [[skills/skill-k8s-node-notready-SKILL|SKILL]]-NET-003）
+- **I1**：CNI Pod 异常 → 升级决策点（网络深度诊断 [[skills/skill-k8s-node-notready-SKILL.md|SKILL]]-NET-003）
 - **I2**：只有 CoreDNS 受影响 → 检查 CoreDNS 亲和性/反亲和性配置
 - **I3**：节点上大量 Pod 异常 → 节点级网络问题，Round 3 — 分支 M（节点恢复）
 
@@ -550,6 +551,11 @@ relationships:
 ---
 
 ## 附录：常用命令速查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # Pod 内 DNS 测试

@@ -174,6 +174,9 @@ kubectl describe pod <pod-name> | grep -A5 "Limits"
 
 ### 2.3 Pod 处于 ImagePullBackOff
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 【问题】
 
@@ -242,6 +245,9 @@ kubectl get pods -n <namespace>
 ```
 
 ### 3.2 DNS 解析失败
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
 【问题】
@@ -312,6 +318,10 @@ ping myapp.example.com
 ## 4. 资源问题
 
 ### 4.1 配额超限
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```
 【问题】
@@ -442,6 +452,9 @@ kubectl describe networkpolicy <name> -n <namespace>
 
 ### 5.3 存储诊断
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 【查看 PV/PVC】
 
@@ -509,7 +522,7 @@ kubectl top pods -n <namespace>
 
 ## Related
 
-- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[deployment]] — Deployment
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)

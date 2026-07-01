@@ -82,6 +82,7 @@ related:
   - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-6-k8s-cluster.md
   - domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md
 ---
+
 ```
 
 > **学习时间**: 4-5 小时 | **主题**: K8s 核心架构与组件 (核心日)
@@ -143,6 +144,7 @@ API Server ← Watch ← Controller Manager (监听资源变化)
 API Server ← Watch ← kubelet (获取 Pod 定义，上报状态)
 kubelet → containerd (gRPC/CRI) → 容器
 kube-proxy ← Watch ← API Server (Service/Endpoints 变化) → iptables/IPVS
+
 ```
 
 ### kubectl apply 的完整事件链
@@ -295,6 +297,11 @@ kubectl api-versions
 
 ### 任务 3: kubectl 基础命令 (45min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 基础查询
 kubectl get pods                       # 查看 Pod
@@ -427,6 +434,7 @@ spec:
   - port: 80
     targetPort: 80
   type: ClusterIP
+
 ```
 
 ---
@@ -481,4 +489,6 @@ Filter 策略包括：PodFitsResources（节点资源充足）、PodFitsHostPort
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

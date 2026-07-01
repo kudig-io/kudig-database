@@ -88,13 +88,13 @@ k8s_versions:
 
 > **所属系列**: FEBM 法医鉴定循证方法论深度解析  
 > **关联主文档**: [FEBM 方法论深度解析](./febm-methodology-deep-dive.md)  
-> **下一章**: [第二章：FEBM 技术实现体系](./[[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation|02-febm-technical-implementation]].md)
+> **下一章**: [第二章：FEBM 技术实现体系](./[[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|02-febm-technical-implementation]].md)
 
 ---
 
 <!-- chunk: 1.1 定义与起源 -->## 1.1 定义与起源
 
-#<!-- chunk: 1.1.1 什么是 FEBM -->## 1.1.1 什么是 FEBM
+## 1.1.1 什么是 FEBM
 
 法医鉴定循证方法论（Forensic Evidence-Based Methodology, FEBM）是一套源于传统法医学、适配数字环境的系统化调查方法。它将物理世界中积累了数百年的法医学原理、证据科学和刑事侦查方法论，迁移并重构为适用于数字系统——特别是云原生基础设施——的工程化实践框架。
 
@@ -104,7 +104,7 @@ FEBM 不是一个单一的工具或技术，而是一套完整的**认识论体�
 - 如何确保这些知识的**可验证性、可审计性和可辩护性？**
 - 如何将分散在多源异构数据中的碎片信息**重建为完整的因果叙事？**
 
-#<!-- chunk: 1.1.2 洛卡德交换原理：FEBM 的哲学基石 -->## 1.1.2 洛卡德交换原理：FEBM 的哲学基石
+## 1.1.2 洛卡德交换原理：FEBM 的哲学基石
 
 FEBM 的核心哲学可追溯至 **洛卡德交换原理（Locard's Exchange Principle）**：
 
@@ -144,7 +144,7 @@ FEBM 的核心哲学可追溯至 **洛卡德交换原理（Locard's Exchange Pri
 
 洛卡德原理的力量在于其**普遍性**——它不依赖于对具体故障模式的预知，只依赖于一个基本事实：交互必然产生痕迹。这使得 FEBM 天然适应动态、未知、复杂的系统环境。
 
-#<!-- chunk: 1.1.3 学科交叉定位 -->## 1.1.3 学科交叉定位
+## 1.1.3 学科交叉定位
 
 FEBM 的学科定位横跨三个核心领域，每个领域贡献了独特的方法论要素：
 
@@ -206,7 +206,7 @@ NIST SP 800-61（计算机安全事件处理指南）定义的四阶段响应框
 - **自动化能力**：SOAR（Security Orchestration, Automation and Response）平台的编排能力
 - **持续改进循环**：Lessons Learned → 检测规则更新 → 响应手册优化
 
-#<!-- chunk: 1.1.4 从传统法医到云原生取证的演进 -->## 1.1.4 从传统法医到云原生取证的演进
+## 1.1.4 从传统法医到云原生取证的演进
 
 FEBM 的发展经历了四个历史阶段：
 
@@ -307,7 +307,7 @@ FEBM 的方法论体系建立在四大核心支柱之上。这四大支柱不是
 └────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.2.1 支柱一：证据中心性（Evidence Centricity） -->## 1.2.1 支柱一：证据中心性（Evidence Centricity）
+## 1.2.1 支柱一：证据中心性（Evidence Centricity）
 
 **核心原则：** FEBM 拒绝一切无证据支撑的推断。每一个分析结论都必须能够追溯到具体的、可验证的数字证据。
 
@@ -392,7 +392,7 @@ Kubernetes 证据来源层级模型:
 └─────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.2.2 支柱二：程序规范性（Procedural Rigor） -->## 1.2.2 支柱二：程序规范性（Procedural Rigor）
+## 1.2.2 支柱二：程序规范性（Procedural Rigor）
 
 **核心原则：** 证据的价值不仅取决于内容本身，更取决于其采集、处理和存储过程的规范性。未经规范程序处理的证据，即使内容真实，也可能在合规审计或法律程序中被质疑。
 
@@ -442,7 +442,7 @@ Chain of Custody 文档记录要素:
   → 分析工具名称和版本记录
 ```
 
-#<!-- chunk: 1.2.3 支柱三：时效敏感性（Time Sensitivity） -->## 1.2.3 支柱三：时效敏感性（Time Sensitivity）
+## 1.2.3 支柱三：时效敏感性（Time Sensitivity）
 
 **核心原则：** 数字证据的易失性决定了 FEBM 的响应时效要求。在 Kubernetes 环境中，证据消失的速度远快于传统环境。
 
@@ -513,7 +513,7 @@ T+∞      GitOps 仓库 ────────── 永久保存（如果不
 
 这就是为什么 FEBM 强调**持续取证（Continuous Forensics）**——不是等到事件发生后才开始采集，而是始终在线采集并持久化关键证据。
 
-#<!-- chunk: 1.2.4 支柱四：结论可辩护性（Defensible Conclusions） -->## 1.2.4 支柱四：结论可辩护性（Defensible Conclusions）
+## 1.2.4 支柱四：结论可辩护性（Defensible Conclusions）
 
 **核心原则：** FEBM 的分析结论必须能够经受技术审查、合规审计甚至法律程序的挑战。
 
@@ -563,7 +563,7 @@ T+∞      GitOps 仓库 ────────── 永久保存（如果不
 
 <!-- chunk: 1.3 FEBM vs. FTA：认识论根本差异 -->## 1.3 FEBM vs. FTA：认识论根本差异
 
-#<!-- chunk: 1.3.1 思维范式对比 -->## 1.3.1 思维范式对比
+## 1.3.1 思维范式对比
 
 理解 FEBM 必须将其与传统的故障树分析（FTA）进行认识论层面的对比。两者的差异不仅是技术手段的不同，而是**思维范式的根本分歧**：
 
@@ -614,7 +614,7 @@ FEBM 思维模型:
   → ④生成候选假设 → ⑤证据验证假设 → ⑥排除替代解释 → ⑦确认根因
 ```
 
-#<!-- chunk: 1.3.2 在 Kubernetes 环境中的适配性分析 -->## 1.3.2 在 Kubernetes 环境中的适配性分析
+## 1.3.2 在 Kubernetes 环境中的适配性分析
 
 Kubernetes 环境的五大特征决定了 FEBM 相对于 FTA 的适配性优势：
 
@@ -682,7 +682,7 @@ FEBM 的机遇:
 
 与硬件不同，软件组件的失效模式缺乏稳定的统计规律——同一个 Bug 可能在特定条件组合下才触发，而这些条件组合在生产环境中不断变化。
 
-#<!-- chunk: 1.3.3 互补而非替代 -->## 1.3.3 互补而非替代
+## 1.3.3 互补而非替代
 
 FEBM 和 FTA 并非互斥的方法论。在成熟的运维实践中，两者形成互补：
 
@@ -724,7 +724,7 @@ FEBM 和 FTA 并非互斥的方法论。在成熟的运维实践中，两者形�
 
 <!-- chunk: 1.4 FEBM 的认知模型与推理框架 -->## 1.4 FEBM 的认知模型与推理框架
 
-#<!-- chunk: 1.4.1 OODA 循环的 FEBM 映射 -->## 1.4.1 OODA 循环的 FEBM 映射
+## 1.4.1 OODA 循环的 FEBM 映射
 
 FEBM 的运行时推理过程可以映射到 John Boyd 的 OODA（Observe-Orient-Decide-Act）循环：
 
@@ -752,7 +752,7 @@ FEBM-OODA 循环:
   └─────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.4.2 认知偏差防范 -->## 1.4.2 认知偏差防范
+## 1.4.2 认知偏差防范
 
 FEBM 方法论明确识别并防范运维分析中常见的认知偏差：
 
@@ -773,21 +773,21 @@ FEBM 方法论明确识别并防范运维分析中常见的认知偏差：
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-febm/MOC|topic-febm MOC]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/README|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation|第二章:FEBM 技术实现体系]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices|第三章：FEBM 最佳实践]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing|第四章：FEBM 对云平台工单智能体托管的意义]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology|第五章：FEBM 体系建设方法论]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution|第六章：未来演进方向]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix|第七章:附录]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive|法医鉴定循证方法论（FEBM）深度解析]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis|FTA-FEBM 联合诊断最佳实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/MOC.md|topic-febm MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|第二章:FEBM 技术实现体系]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices.md|第三章：FEBM 最佳实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|第六章：未来演进方向]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix.md|第七章:附录]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive|febm-methodology-deep-dive]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis|fta-febm-joint-diagnosis]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation|02-febm-technical-implementation]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices|03-febm-best-practices]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|febm-methodology-deep-dive]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis.md|fta-febm-joint-diagnosis]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|02-febm-technical-implementation]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices.md|03-febm-best-practices]]

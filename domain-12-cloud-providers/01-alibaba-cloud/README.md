@@ -4,6 +4,7 @@ category: "cloud-provider"
 tags: ["cloud-providers"]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 summary: "阿里云专有云与ACK文档索引及快速入口。"
 ---
 
@@ -13,12 +14,12 @@ summary: "阿里云专有云与ACK文档索引及快速入口。"
 
 | # | 文档 | 说明 |
 |---|:---|:---|
-| 1 | [[01-专有云架构概述]] | 阿里云专有云产品矩阵、部署模式、与公有云差异 |
-| 2 | [[02-ACK集群运维]] | ACK专有版/托管版集群管理、日志监控、安全 |
-| 3 | [[03-Terway-CNI网络]] | Terway模式详解、常见问题排查、IP管理 |
-| 4 | [[04-阿里云存储集成]] | 云盘/ESSD、NAS、OSS、CSI驱动 |
-| 5 | [[05-阿里云SLB与Ingress]] | SLB/ALB/NLB、Ingress Controller、CDN/WAF |
-| 6 | [[06-阿里云专有云远程顾问指南]] | 远程诊断方法论、受限场景替代方案、升级话术 |
+| 1 | [[domain-12-cloud-providers/01-alibaba-cloud/01-专有云架构概述.md|01 专有云架构概述]] | 阿里云专有云产品矩阵、部署模式、与公有云差异 |
+| 2 | [[domain-12-cloud-providers/01-alibaba-cloud/02-ACK集群运维.md|02 ACK集群运维]] | ACK专有版/托管版集群管理、日志监控、安全 |
+| 3 | [[domain-12-cloud-providers/01-alibaba-cloud/03-Terway-CNI网络.md|03 Terway CNI网络]] | Terway模式详解、常见问题排查、IP管理 |
+| 4 | [[domain-12-cloud-providers/01-alibaba-cloud/04-阿里云存储集成.md|04 阿里云存储集成]] | 云盘/ESSD、NAS、OSS、CSI驱动 |
+| 5 | [[domain-12-cloud-providers/01-alibaba-cloud/05-阿里云SLB与Ingress.md|05 阿里云SLB与Ingress]] | SLB/ALB/NLB、Ingress Controller、CDN/WAF |
+| 6 | [[domain-12-cloud-providers/01-alibaba-cloud/06-阿里云专有云远程顾问指南.md|06 阿里云专有云远程顾问指南]] | 远程诊断方法论、受限场景替代方案、升级话术 |
 
 ## 适用场景
 
@@ -40,7 +41,7 @@ summary: "阿里云专有云与ACK文档索引及快速入口。"
 
 ## 快速入口
 
-- **节点问题**：[[video-scripts/node-notready]] → 查看阿里云特定分支
+- **节点问题**：[[scripts/video-scripts/node-notready.md|node notready]] → 查看阿里云特定分支
 - **网络问题**：k8s-dns-failure → 查看阿里云DNS特定分支
 - **存储问题**：k8s-pvc-storage → 查看阿里云CSI特定分支
 - **Ingress问题**：k8s-ingress-gateway-failure → 查看SLB特定分支

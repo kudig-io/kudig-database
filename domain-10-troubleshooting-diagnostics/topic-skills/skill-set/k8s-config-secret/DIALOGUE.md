@@ -4,6 +4,7 @@ category: "troubleshooting"
 tags: ["security", "remote-consultant"]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 dialogue_id: "DIALOGUE-K8S_CONFIG_SECRET"
 skill_id: "k8s-config-secret"
 version: "1.0.0"
@@ -11,9 +12,9 @@ role: "remote-consultant"
 language: "zh"
 summary: "ConfigMap与Secret问题的远程顾问对话脚本，覆盖配置加载失败、Secret解码、热更新。"
 relationships:
-  - target: "[[entities/deployment]]"
+  - target: "[[entities/deployment.md]]"
     type: uses
-  - target: "[[entities/helm]]"
+  - target: "[[entities/helm.md]]"
     type: uses
 ---
 
@@ -70,7 +71,7 @@ relationships:
 ### 分支 1：ConfigMap Key不匹配
 - `kubectl create configmap <cm> -n <ns> --from-literal=<key>=<value> --dry-run=client -o yaml | kubectl apply -f -`
   - 如无法执行：请提供当前可执行的环境信息
-- `kubectl rollout restart [[entities/deployment|deployment]]/<d> -n <ns>`
+- `kubectl rollout restart [[entities/deployment.md|deployment]]/<d> -n <ns>`
   > 💬 **顾问确认**：如果命令执行失败，请提供错误信息，我会调整方案。
   - 如无法执行：请提供当前可执行的环境信息
 
@@ -103,7 +104,7 @@ relationships:
   - 如无法执行：请提供当前可执行的环境信息
 - `检查ConfigMap/Secret的subPath挂载`
   - 如无法执行：请提供当前可执行的环境信息
-- `如使用Helm: [[entities/helm|helm]] upgrade <release> <chart> --set <key>=<value>`
+- `如使用Helm: [[entities/helm.md|helm]] upgrade <release> <chart> --set <key>=<value>`
   - 如无法执行：请提供当前可执行的环境信息
 
 
@@ -149,6 +150,10 @@ aliyun ram ListPoliciesForUser --UserName <user>
 **步骤 4：阿里云特定修复**
 
 如KMS密钥失效：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 禁用旧密钥，启用新密钥
 aliyun kms DisableKey --KeyId <old-key-id>
@@ -269,10 +274,10 @@ kubectl annotate secret <secret-name> kms-key-id=<new-key-id> --overwrite
 
 ## 相关案例
 
-- [[synthesis/case-studies/2026-05-15-configmap-no-rolling-update|2026-05-15-configmap-no-rolling-update]]
-- [[synthesis/case-studies/2026-10-25-secret未更新导致rolling-update新旧版本配置不一致|2026-10-25-secret未更新导致rolling-update新旧版本配置不一致]]
+- [[concepts/case-studies/2026-05-15-configmap-no-rolling-update.md|2026-05-15-configmap-no-rolling-update]]
+- [[concepts/case-studies/2026-10-25-secret未更新导致rolling-update新旧版本配置不一致.md|2026-10-25-secret未更新导致rolling-update新旧版本配置不一致]]
 ## Related
 
-- [[domain-17-system-foundation/03-kubernetes-events/02-pod-container-lifecycle-events|02 - Pod 与容器生命周期事件]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git|Git 速查卡]]
-- [[domain-17-system-foundation/topic-cheat-sheet/gitops|GitOps 速查卡]]
+- [[domain-17-system-foundation/03-kubernetes-events/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git.md|Git 速查卡]]
+- [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|GitOps 速查卡]]

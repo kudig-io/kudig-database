@@ -40,7 +40,7 @@ ContainerSSH 是一个 SSH 服务器，它为每个 SSH 连接动态启动一个
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -56,10 +56,10 @@ ContainerSSH 是一个 SSH 服务器，它为每个 SSH 连接动态启动一个
 
 ## 参考链接
 
-- [[concepts/storage-model|storage-model]]
-- [[concepts/secrets-management|secrets-management]]
+- [[concepts/storage-model.md|storage-model]]
+- [[concepts/secrets-management.md|secrets-management]]
 - [[pod-lifecycle]]
-- [[concepts/ci-cd-pipeline-patterns|ci-cd-pipeline-patterns]]
+- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
 
 ## Related
 
@@ -70,5 +70,5 @@ ContainerSSH 是一个 SSH 服务器，它为每个 SSH 连接动态启动一个
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - containerssh
-- [[entities/cncf-security|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference
+- [[entities/cncf-security.md|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference
 - index/etcd-index|etcd 知识图谱索引]]

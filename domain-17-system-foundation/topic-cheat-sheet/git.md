@@ -639,5 +639,5 @@ git count-objects -vH
 
 ## 相关文档
 
-- [domain-08-release-change-management/](../domain-08-release-change-management/) - [[concepts/gitops-principles|[[GitOps 速查卡|gitops]]]] 与 CI/CD
+- [domain-08-release-change-management/](../domain-08-release-change-management/) - [[concepts/gitops-principles.md|[[GitOps 速查卡|gitops]]]] 与 CI/CD
 - [Git 官方文档](https://git-scm.com/doc)

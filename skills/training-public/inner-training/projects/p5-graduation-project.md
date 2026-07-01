@@ -254,6 +254,9 @@ aliyun cs POST /clusters/<cluster_id>/nodepools --body "$(cat data-pool.json)"
 | 安全审计 | 全集群 | 只读 |
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建命名空间
 kubectl create namespace app-ns
@@ -345,6 +348,9 @@ kubectl auth can-i create pods -n app-ns --as=test@example.com
 
 #### 2.2 资源配额
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 cat > resource-quota.yaml << 'EOF'
 apiVersion: v1
@@ -391,6 +397,9 @@ kubectl get quota,limitrange -n app-ns
 ```
 
 #### 2.3 NetworkPolicy (如使用 Terway)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > network-policy.yaml << 'EOF'
@@ -452,6 +461,9 @@ kubectl get networkpolicy -n app-ns
 ### Phase 3: 应用部署 (2h)
 
 #### 3.1 数据库层
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > database.yaml << 'EOF'
@@ -565,6 +577,9 @@ kubectl get pods,svc,pvc -n app-ns -l tier=database
 
 #### 3.2 API 后端
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 cat > backend.yaml << 'EOF'
 apiVersion: v1
@@ -663,6 +678,9 @@ kubectl apply -f backend.yaml
 ```
 
 #### 3.3 Web 前端
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > frontend.yaml << 'EOF'
@@ -806,6 +824,10 @@ curl -k -H "Host: app.graduation.local" https://${INGRESS_IP}/
 
 #### 4.1 监控配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 确认 Prometheus 监控可用
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -853,6 +875,12 @@ kubectl get prometheusrule -n monitoring
 ```
 
 #### 4.2 故障演练
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 演练 1: 模拟 Pod 问题
@@ -910,13 +938,17 @@ kubectl describe pvc -n app-ns
 
 ## 清理资源
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```bash
 # 删除应用
-kubectl delete namespace app-ns
+kubectl delete namespace app-ns  # ⚠️ 不可逆：永久删除命名空间及全部资源
 
 # 删除监控
-helm uninstall prometheus -n monitoring
-kubectl delete namespace monitoring
+helm uninstall prometheus -n monitoring  # ⚠️ 删除 release 及关联资源
+kubectl delete namespace monitoring  # ⚠️ 不可逆：永久删除命名空间及全部资源
 
 # 删除集群 (如不再需要)
 aliyun cs DELETE /clusters/<cluster_id> --body '{"retain_all_resources": false}'
@@ -939,4 +971,4 @@ aliyun cs DELETE /clusters/<cluster_id> --body '{"retain_all_resources": false}'
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

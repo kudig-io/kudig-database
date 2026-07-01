@@ -117,7 +117,7 @@ related:
 | NET | 网络栈 | 独立的 IP、端口、路由表 | Pod 网络（CNI） |
 | IPC | 进程间通信 | 信号量、消息队列隔离 | Pod 内容器通信 |
 | MNT | 文件系统挂载 | 独立的文件系统视图 | Volume 挂载 |
-| UTS | 主机名和域名 | 容器有自己的 hostname | [[Pod Hostname|Pod hostname]] |
+| UTS | 主机名和域名 | 容器有自己的 hostname | [[domain-17-system-foundation/topic-dictionary/workloads/pod-hostname.md|Pod hostname]] |
 | USER | 用户和组 ID | 容器内 root ≠ 宿主机 root | securityContext |
 | CGROUP | cgroup 根目录 | cgroup 视图隔离 | 容器内不可见宿主 cgroup |
 
@@ -149,6 +149,7 @@ Docker 采用 Client-Server 架构。Docker Client（docker 命令）通过 REST
 ```
 Created → Running → Paused → Stopped → Deleted
                    ↘ Running → Stopped (exit 0: 正常, exit ≠ 0: 异常)
+
 ```
 
 Dockerfile 是构建镜像的蓝图。常用指令包括：`FROM`（基础镜像）、`RUN`（执行命令）、`COPY`/`ADD`（复制文件）、`ENV`（设置环境变量）、`EXPOSE`（声明端口）、`CMD`/`ENTRYPOINT`（定义启动命令）。镜像构建优化的核心原则是：减少层数、利用缓存、减小镜像体积。
@@ -341,22 +342,24 @@ kind 使用 Docker 容器模拟节点，启动快、支持多节点、适合 CI/
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
+- [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
+- [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
-- [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
+- [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+
+```

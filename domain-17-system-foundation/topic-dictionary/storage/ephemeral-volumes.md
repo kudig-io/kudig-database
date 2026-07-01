@@ -168,6 +168,8 @@ kubectl get csinodes
 
 ## Related
 
-- index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|[[Storage 存储知识图谱索引|Storage 存储知识图谱索引]]]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume.md|Persistent Volume]]
+- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume-claim.md|Persistent Volume Claim]]
+- [[domain-17-system-foundation/topic-dictionary/storage/storage-class.md|Storage Class]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volume.md|Volume]]
+- [[domain-17-system-foundation/topic-dictionary/storage/emptydir.md|Emptydir]]

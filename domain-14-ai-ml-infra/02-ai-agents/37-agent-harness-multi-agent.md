@@ -93,7 +93,7 @@ k8s_versions:
 
 <!-- chunk: 1. 多 Agent 编排模式 -->## 1. 多 Agent 编排模式
 
-#<!-- chunk: 1.1 四种核心编排模式 -->## 1.1 四种核心编排模式
+## 1.1 四种核心编排模式
 
 ```
 多 Agent 编排模式:
@@ -126,7 +126,7 @@ k8s_versions:
    示例: 两个诊断 Agent 交叉验证根因
 ```
 
-#<!-- chunk: 1.2 模式选择矩阵 -->## 1.2 模式选择矩阵
+## 1.2 模式选择矩阵
 
 | 模式 | 适用场景 | 延迟 | 成本 | 可靠性 | 复杂度 |
 |------|---------|------|------|--------|--------|
@@ -139,7 +139,7 @@ k8s_versions:
 
 <!-- chunk: 2. Orchestrator 设计 -->## 2. Orchestrator 设计
 
-#<!-- chunk: 2.1 编排器架构 -->## 2.1 编排器架构
+## 2.1 编排器架构
 
 ```python
 from dataclasses import dataclass, field
@@ -312,7 +312,7 @@ class Orchestrator:
 
 <!-- chunk: 3. Agent 间通信 -->## 3. Agent 间通信
 
-#<!-- chunk: 3.1 消息协议 -->## 3.1 消息协议
+## 3.1 消息协议
 
 ```python
 from dataclasses import dataclass, field
@@ -399,7 +399,7 @@ class MessageBus:
                 ))
 ```
 
-#<!-- chunk: 3.2 共享上下文管理 -->## 3.2 共享上下文管理
+## 3.2 共享上下文管理
 
 ```python
 class SharedContext:
@@ -446,7 +446,7 @@ class SharedContext:
 
 <!-- chunk: 4. Harness 隔离原则 -->## 4. Harness 隔离原则
 
-#<!-- chunk: 4.1 Agent 隔离架构 -->## 4.1 Agent 隔离架构
+## 4.1 Agent 隔离架构
 
 ```
 多 Agent Harness 隔离:
@@ -479,7 +479,7 @@ class SharedContext:
 └──────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 4.2 隔离配置实现 -->## 4.2 隔离配置实现
+## 4.2 隔离配置实现
 
 ```python
 class IsolatedHarnessFactory:
@@ -576,7 +576,7 @@ class IsolatedHarnessFactory:
 
 <!-- chunk: 5. 冲突解决 -->## 5. 冲突解决
 
-#<!-- chunk: 5.1 冲突类型与解决策略 -->## 5.1 冲突类型与解决策略
+## 5.1 冲突类型与解决策略
 
 ```python
 class ConflictResolver:
@@ -673,7 +673,7 @@ class ConflictResolver:
 
 <!-- chunk: 6. K8S 问题处置多 Agent 编排 -->## 6. K8S 问题处置多 Agent 编排
 
-#<!-- chunk: 6.1 问题处置流水线 -->## 6.1 问题处置流水线
+## 6.1 问题处置流水线
 
 ```python
 class IncidentResponsePipeline:
@@ -750,7 +750,7 @@ class IncidentResponsePipeline:
 
 <!-- chunk: 7. 分层 Harness 架构 -->## 7. 分层 Harness 架构
 
-#<!-- chunk: 7.1 基础层 + 场景层 + 用户层 -->## 7.1 基础层 + 场景层 + 用户层
+## 7.1 基础层 + 场景层 + 用户层
 
 ```python
 class LayeredHarnessArchitecture:
@@ -814,7 +814,7 @@ class LayeredHarnessArchitecture:
 
 <!-- chunk: 8. 最佳实践 -->## 8. 最佳实践
 
-#<!-- chunk: 8.1 多 Agent 编排核心原则 -->## 8.1 多 Agent 编排核心原则
+## 8.1 多 Agent 编排核心原则
 
 | 原则 | 说明 | 实践建议 |
 |------|------|---------|
@@ -825,7 +825,7 @@ class LayeredHarnessArchitecture:
 | **分层配置** | 基础+场景+用户三层 Harness | 使用 LayeredHarnessArchitecture |
 | **异步通信** | Agent 间通过消息总线通信 | 使用 MessageBus 解耦 |
 
-#<!-- chunk: 8.2 反模式 -->## 8.2 反模式
+## 8.2 反模式
 
 | 反模式 | 问题 | 正确做法 |
 |--------|------|----------|
@@ -865,17 +865,17 @@ class LayeredHarnessArchitecture:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|[[AI Agent 工程专题|AI Agent 工程专题]]]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 

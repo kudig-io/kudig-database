@@ -57,7 +57,7 @@ Graylog is an open-source enterprise log management platform that provides power
 
 <!-- chunk: 架构设计 (Architecture Design) -->## 架构设计 (Architecture Design)
 
-#<!-- chunk: Graylog 企业级架构 (Enterprise Graylog Architecture) -->## Graylog 企业级架构 (Enterprise Graylog Architecture)
+## Graylog 企业级架构 (Enterprise Graylog Architecture)
 
 ```yaml
 # Graylog 集群部署配置
@@ -115,7 +115,7 @@ graylog_cluster:
         - "mongo-3:27017"
 ```
 
-#<!-- chunk: 架构图 (Architecture Diagram) -->## 架构图 (Architecture Diagram)
+## 架构图 (Architecture Diagram)
 
 ```mermaid
 graph TB
@@ -200,7 +200,7 @@ graph TB
 
 <!-- chunk: 核心组件配置 (Core Component Configuration) -->## 核心组件配置 (Core Component Configuration)
 
-#<!-- chunk: 输入配置 (Input Configuration) -->## 输入配置 (Input Configuration)
+## 输入配置 (Input Configuration)
 
 ```yaml
 # Graylog 输入配置
@@ -251,7 +251,7 @@ inputs:
       threads: 4
 ```
 
-#<!-- chunk: 处理管道配置 (Processing Pipeline Configuration) -->## 处理管道配置 (Processing Pipeline Configuration)
+## 处理管道配置 (Processing Pipeline Configuration)
 
 ```json
 {
@@ -277,7 +277,7 @@ inputs:
 }
 ```
 
-#<!-- chunk: 字段提取器配置 (Field Extractor Configuration) -->## 字段提取器配置 (Field Extractor Configuration)
+## 字段提取器配置 (Field Extractor Configuration)
 
 ```yaml
 # 字段提取器配置
@@ -335,7 +335,7 @@ field_extractors:
 
 <!-- chunk: 存储优化 (Storage Optimization) -->## 存储优化 (Storage Optimization)
 
-#<!-- chunk: Elasticsearch 索引策略 (Elasticsearch Index Strategy) -->## Elasticsearch 索引策略 (Elasticsearch Index Strategy)
+## Elasticsearch 索引策略 (Elasticsearch Index Strategy)
 
 ```yaml
 # Elasticsearch 索引生命周期管理
@@ -403,7 +403,7 @@ index_lifecycle_management:
             type: "keyword"
 ```
 
-#<!-- chunk: 数据保留策略 (Data Retention Policy) -->## 数据保留策略 (Data Retention Policy)
+## 数据保留策略 (Data Retention Policy)
 
 ```json
 {
@@ -446,7 +446,7 @@ index_lifecycle_management:
 
 <!-- chunk: 告警和通知 (Alerting and Notifications) -->## 告警和通知 (Alerting and Notifications)
 
-#<!-- chunk: 告警规则配置 (Alert Rule Configuration) -->## 告警规则配置 (Alert Rule Configuration)
+## 告警规则配置 (Alert Rule Configuration)
 
 ```yaml
 # Graylog 告警规则配置
@@ -502,7 +502,7 @@ alert_rules:
       backlog: 5
 ```
 
-#<!-- chunk: 通知渠道配置 (Notification Channel Configuration) -->## 通知渠道配置 (Notification Channel Configuration)
+## 通知渠道配置 (Notification Channel Configuration)
 
 ```json
 {
@@ -510,7 +510,7 @@ alert_rules:
     "pagerduty_integration": {
       "type": "org.graylog2.plugins.pagerduty.PagerDutyAlarmCallback",
       "configuration": {
-        "service_key": "your_pagerduty_service_key",
+        "routing_key": "your_pagerduty_service_key",
         "incident_key_prefix": "graylog-alert",
         "client_name": "Graylog Monitoring System",
         "client_url": "https://graylog.yourcompany.com"
@@ -561,7 +561,7 @@ alert_rules:
 
 <!-- chunk: 仪表板和可视化 (Dashboards and Visualization) -->## 仪表板和可视化 (Dashboards and Visualization)
 
-#<!-- chunk: 企业级仪表板配置 (Enterprise Dashboard Configuration) -->## 企业级仪表板配置 (Enterprise Dashboard Configuration)
+## 企业级仪表板配置 (Enterprise Dashboard Configuration)
 
 ```json
 {
@@ -668,7 +668,10 @@ alert_rules:
 
 <!-- chunk: 运维管理 (Operational Management) -->## 运维管理 (Operational Management)
 
-#<!-- chunk: 日常维护脚本 (Daily Maintenance Scripts) -->## 日常维护脚本 (Daily Maintenance Scripts)
+## 日常维护脚本 (Daily Maintenance Scripts)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -847,7 +850,7 @@ main
 
 <!-- chunk: 最佳实践 (Best Practices) -->## 最佳实践 (Best Practices)
 
-#<!-- chunk: 部署最佳实践 (Deployment Best Practices) -->## 部署最佳实践 (Deployment Best Practices)
+## 部署最佳实践 (Deployment Best Practices)
 
 1. **高可用部署**
    ```yaml
@@ -900,7 +903,7 @@ main
        output_buffer: "10000"
    ```
 
-#<!-- chunk: 监控最佳实践 (Monitoring Best Practices) -->## 监控最佳实践 (Monitoring Best Practices)
+## 监控最佳实践 (Monitoring Best Practices)
 
 1. **关键指标监控**
    ```yaml
@@ -954,8 +957,8 @@ main
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-21-logging-management-analytics MOC
-- [[domain-06-observability/README|Domain 21: 日志管理与分析 (Logging Management & Analytics)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-21 日志管理与分析 — 开源项目索引]]
+- [[domain-06-observability/README.md|Domain 06: 日志管理与分析 (Logging Management & Analytics)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-21 日志管理与分析 — 开源项目索引]]
 - ELK Stack企业级日志管理系统深度实践
 - Fluentd企业级日志收集与处理深度实践
 - Loki Enterprise Log Aggregation and Analytics Platform
@@ -972,8 +975,8 @@ main
 - 04-splunk-enterprise-siem
 - 05-real-time-analytics-business-insights
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

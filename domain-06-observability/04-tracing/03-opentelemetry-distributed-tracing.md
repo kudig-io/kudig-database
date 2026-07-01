@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. OpenTelemetry架构深度解析 -->## 1. OpenTelemetry架构深度解析
 
-#<!-- chunk: 1.1 核心组件架构 -->## 1.1 核心组件架构
+## 1.1 核心组件架构
 
 ```mermaid
 graph TB
@@ -114,7 +114,7 @@ graph TB
     T --> W
 ```
 
-#<!-- chunk: 1.2 OpenTelemetry数据模型 -->## 1.2 OpenTelemetry数据模型
+## 1.2 OpenTelemetry数据模型
 
 ```yaml
 otel_data_model:
@@ -154,7 +154,7 @@ otel_data_model:
 
 <!-- chunk: 2. 企业级部署架构 -->## 2. 企业级部署架构
 
-#<!-- chunk: 2.1 OpenTelemetry Collector部署 -->## 2.1 OpenTelemetry Collector部署
+## 2.1 OpenTelemetry Collector部署
 
 ```yaml
 # otel-collector-config.yaml
@@ -273,7 +273,7 @@ service:
       exporters: [elasticsearch, kafka]
 ```
 
-#<!-- chunk: 2.2 Kubernetes部署配置 -->## 2.2 Kubernetes部署配置
+## 2.2 Kubernetes部署配置
 
 ```yaml
 # otel-collector-deployment.yaml
@@ -392,7 +392,7 @@ spec:
 
 <!-- chunk: 3. 应用程序埋点实践 -->## 3. 应用程序埋点实践
 
-#<!-- chunk: 3.1 Java应用埋点 -->## 3.1 Java应用埋点
+## 3.1 Java应用埋点
 
 ```java
 // OpenTelemetry Java示例
@@ -463,7 +463,7 @@ public class UserService {
 }
 ```
 
-#<!-- chunk: 3.2 Python应用埋点 -->## 3.2 Python应用埋点
+## 3.2 Python应用埋点
 
 ```python
 # OpenTelemetry Python示例
@@ -546,7 +546,7 @@ def get_order(order_id):
             return {"error": str(e)}, 500
 ```
 
-#<!-- chunk: 3.3 Go应用埋点 -->## 3.3 Go应用埋点
+## 3.3 Go应用埋点
 
 ```go
 // OpenTelemetry Go示例
@@ -752,7 +752,7 @@ func main() {
 
 <!-- chunk: 4. 采样策略与配置 -->## 4. 采样策略与配置
 
-#<!-- chunk: 4.1 采样策略配置 -->## 4.1 采样策略配置
+## 4.1 采样策略配置
 
 ```yaml
 # sampling-strategies.yaml
@@ -792,7 +792,7 @@ sampling:
     max_sampling_probability: 1.0
 ```
 
-#<!-- chunk: 4.2 高级采样配置 -->## 4.2 高级采样配置
+## 4.2 高级采样配置
 
 ```json
 {
@@ -830,7 +830,7 @@ sampling:
 
 <!-- chunk: 5. 数据可视化与分析 -->## 5. 数据可视化与分析
 
-#<!-- chunk: 5.1 Grafana Tempo配置 -->## 5.1 Grafana Tempo配置
+## 5.1 Grafana Tempo配置
 
 ```yaml
 # grafana-tempo-datasource.yaml
@@ -867,7 +867,7 @@ datasources:
         enabled: true
 ```
 
-#<!-- chunk: 5.2 追踪查询DSL -->## 5.2 追踪查询DSL
+## 5.2 追踪查询DSL
 
 ```python
 # Tempo查询示例
@@ -955,7 +955,7 @@ trace_detail = tempo.get_trace_by_id("abcdef123456")
 
 <!-- chunk: 6. 性能优化与最佳实践 -->## 6. 性能优化与最佳实践
 
-#<!-- chunk: 6.1 追踪数据优化 -->## 6.1 追踪数据优化
+## 6.1 追踪数据优化
 
 ```yaml
 # otel-performance-optimization.yaml
@@ -1003,30 +1003,30 @@ performance_optimization:
       - process.command_args
 ```
 
-#<!-- chunk: 6.2 最佳实践指南 -->## 6.2 最佳实践指南
+## 6.2 最佳实践指南
 
 ```markdown
 <!-- chunk: 📊 OpenTelemetry实施最佳实践 -->## 📊 OpenTelemetry实施最佳实践
 
-#<!-- chunk: 1. 埋点策略 -->## 1. 埋点策略
+## 1. 埋点策略
 - **自动埋点优先**: 使用自动仪器化减少手动工作
 - **关键路径埋点**: 重点关注业务核心流程
 - **适度冗余**: 避免过度埋点影响性能
 - **语义化命名**: 使用清晰、一致的命名规范
 
-#<!-- chunk: 2. 采样策略 -->## 2. 采样策略
+## 2. 采样策略
 - **分层采样**: 不同服务采用不同采样率
 - **错误优先**: 错误和异常100%采样
 - **自适应调整**: 根据系统负载动态调整采样率
 - **业务相关**: 关键业务流程提高采样频率
 
-#<!-- chunk: 3. 数据治理 -->## 3. 数据治理
+## 3. 数据治理
 - **属性标准化**: 建立统一的属性命名规范
 - **敏感信息过滤**: 自动过滤PII等敏感数据
 - **数据生命周期**: 合理设置数据保留期限
 - **成本控制**: 监控和优化数据存储成本
 
-#<!-- chunk: 4. 性能考量 -->## 4. 性能考量
+## 4. 性能考量
 - **异步处理**: 避免阻塞主线程
 - **批量发送**: 减少网络请求次数
 - **内存控制**: 设置合理的内存限制
@@ -1035,7 +1035,10 @@ performance_optimization:
 
 <!-- chunk: 7. 故障排查与监控 -->## 7. 故障排查与监控
 
-#<!-- chunk: 7.1 常见问题诊断 -->## 7.1 常见问题诊断
+## 7.1 常见问题诊断
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1069,7 +1072,7 @@ if [ -n "$trace_id" ]; then
 fi
 ```
 
-#<!-- chunk: 7.2 监控告警配置 -->## 7.2 监控告警配置
+## 7.2 监控告警配置
 
 ```yaml
 # otel-monitoring-alerts.yaml
@@ -1129,7 +1132,7 @@ groups:
 
 <!-- chunk: 8. 未来发展与趋势 -->## 8. 未来发展与趋势
 
-#<!-- chunk: 8.1 技术演进方向 -->## 8.1 技术演进方向
+## 8.1 技术演进方向
 
 ```yaml
 future_trends:
@@ -1166,9 +1169,9 @@ future_trends:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-20-enterprise-monitoring-alerting KUDIG Database — Global MOC
-- [[domain-06-observability/README|[[Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]nitoring]] & Alerting)]]
+- [[domain-06-observability/README.md|[[Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]nitoring]] & Alerting)]]
 - index.md|Domain-20 企业监控与告警 — 开源项目索引]]
-- [[entities/prometheus]]
+- [[entities/prometheus.md|prometheus]]
 - Grafana Enterprise Observability Platform 深度实践
 - Thanos Enterprise Metrics Federation and Long-term Storage
 - Datadog企业级APM深度实践
@@ -1185,8 +1188,8 @@ future_trends:
 - 04-thanos-enterprise-metrics-federation
 - 05-datadog-enterprise-apm
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

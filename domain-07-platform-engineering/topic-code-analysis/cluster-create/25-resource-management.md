@@ -344,6 +344,9 @@ func applyDefaults(container *v1.Container, limit v1.LimitRangeItem) {
 
 ### ResourceQuota 检查流程
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 步骤 1: 用户创建 Pod (kubectl apply)
     ↓
@@ -798,8 +801,8 @@ kubectl get priorityclasses
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/storage/volumes|volumes]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/pods|pods]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volumes.md|volumes]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/pods.md|pods]]

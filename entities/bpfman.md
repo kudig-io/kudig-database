@@ -45,7 +45,7 @@ bpfman 是一个 eBPF 程序管理器，提供系统守护进程和 Kubernetes O
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -62,10 +62,10 @@ bpfman 是一个 eBPF 程序管理器，提供系统守护进程和 Kubernetes O
 ## 参考链接
 
 - [[cilium]]
-- [[entities/argocd|[[ArgoCD|argocd]]]]
-- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]
-- [[concepts/cilium-ebpf-networking|cilium-ebpf-networking]]
+- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
 
 ## Related
 
@@ -76,4 +76,4 @@ bpfman 是一个 eBPF 程序管理器，提供系统守护进程和 Kubernetes O
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - bpfman
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

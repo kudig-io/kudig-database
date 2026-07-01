@@ -87,7 +87,7 @@ created: "2026-05-23"
 2. [CNI 规范详解](#2-cni-规范详解)
 3. [CNI 插件类型](#3-cni-插件类型)
 4. [Calico 深度解析](#4-calico-深度解析)
-5. [[entities/cilium|Cilium]] 深度解析](#5-cilium-深度解析)
+5. [[entities/cilium.md|Cilium]] 深度解析](#5-cilium-深度解析)
 6. [其他主流 CNI](#6-其他主流-cni)
 7. [网络策略实现](#7-网络策略实现)
 8. [CNI 配置与调优](#8-cni-配置与调优)
@@ -127,7 +127,7 @@ created: "2026-05-23"
 
 | 概念 | 描述 | 作用 |
 |------|------|------|
-| **[[Container Runtime|Container Runtime]]** | 容器运行时 ([[containerd|containerd]]/CRI-O) | 调用 CNI 插件 |
+| **[[concepts/container-runtime.md|Container Runtime]]** | 容器运行时 ([[containerd|containerd]]/CRI-O) | 调用 CNI 插件 |
 | **CNI Plugin** | 网络插件可执行文件 | 配置容器网络 |
 | **CNI Config** | JSON 配置文件 | 定义网络参数 |
 | **Network Namespace** | 网络命名空间 | 隔离容器网络 |
@@ -590,6 +590,9 @@ spec:
 
 ### 4.4 Calico 安装配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 使用 Operator 安装 Calico
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
@@ -922,6 +925,9 @@ spec:
 
 ### 5.3 Cilium 安装配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 使用 Helm 安装 Cilium
 helm repo add cilium https://helm.cilium.io/
@@ -1155,10 +1161,10 @@ spec:
             - name: local_service
               domains: ["*"]
               routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: default/my-service
+              - matchers:
+                - prefix="/"
+                - route=""
+                - cluster="default/my-service"
 ```
 
 ---
@@ -1217,6 +1223,10 @@ data:
 | ipsec | IPsec 加密 | 低 |
 
 ### 6.2 Weave Net
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 安装 Weave Net
@@ -1563,6 +1573,9 @@ hubble:
 | **felix_int_dataplane_failures** | 数据平面失败 | Calico |
 
 ### 9.2 故障排查命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # Calico 排查
@@ -1921,7 +1934,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -1942,5 +1955,5 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]

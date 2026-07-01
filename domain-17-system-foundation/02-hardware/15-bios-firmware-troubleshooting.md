@@ -325,7 +325,7 @@ CMOS重置方法:
 ## Obsidian 相关文档
 
 - domain-31-hardware KUDIG Database — Global MOC
-- [[domain-17-system-foundation/README|Domain 31 - 硬件基础设施]]
+- [[domain-17-system-foundation/README.md|Domain 31 - 硬件基础设施]]
 - index.md|Domain-31 硬件 — 开源项目索引]]
 - 云平台硬件基础架构
 - 服务器架构原理
@@ -336,9 +336,9 @@ CMOS重置方法:
 - SSD固态硬盘技术
 - 网络硬件技术
 - 硬件厂商生态
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 

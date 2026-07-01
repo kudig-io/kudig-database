@@ -5,6 +5,7 @@ tags: ["skill", "domain-10", "visibility/public"]
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 status: reviewed
 ---
 
@@ -59,6 +60,6 @@ curl -H "Host: <domain>" http://<lb-ip>/version
 
 ## 相关概念
 
-- [[concepts/blue-green-deployment|蓝绿部署]] — 蓝绿发布切换机制、流量路由与回滚策略
-- [[concepts/deployment-controller-architecture|Deployment 控制器架构]] — Deployment 滚动更新与副本管理原理
-- [[concepts/canary-deployment|金丝雀部署]] — 渐进式发布策略与流量权重控制
+- [[concepts/blue-green-deployment.md|蓝绿部署]] — 蓝绿发布切换机制、流量路由与回滚策略
+- [[concepts/deployment-controller-architecture.md|Deployment 控制器架构]] — Deployment 滚动更新与副本管理原理
+- [[concepts/canary-deployment.md|金丝雀部署]] — 渐进式发布策略与流量权重控制

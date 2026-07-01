@@ -269,6 +269,9 @@ spec:
 
 ### 3.1 启用条件
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 1. 确认 K8s 版本 >= v1.33
 kubectl version | grep Server
@@ -511,6 +514,10 @@ parameters:
 
 ### 8.1 nftables kube-proxy (v1.33 Beta)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 评估是否迁移到 nftables
 # 适用条件:
@@ -632,7 +639,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
 - index.md|Domain-1 架构基础 — 开源项目索引]]
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析

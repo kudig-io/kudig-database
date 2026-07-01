@@ -57,9 +57,9 @@ created: "2026-05-23"
 
 <!-- chunk: 🎯 变更管理框架 -->## 🎯 变更管理框架
 
-#<!-- chunk: RFC流程设计 -->## RFC流程设计
+## RFC流程设计
 
-##<!-- chunk: 1. 变更请求模板 -->## 1. 变更请求模板
+## 1. 变更请求模板
 ```yaml
 # RFC自定义资源定义
 apiVersion: apiextensions.k8s.io/v1
@@ -243,7 +243,7 @@ spec:
     securityTestsPassed: true
 ```
 
-##<!-- chunk: 2. RFC审批工作流 -->## 2. RFC审批工作流
+## 2. RFC审批工作流
 ```python
 #!/usr/bin/env python3
 # RFC审批工作流引擎
@@ -626,9 +626,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 🎨 灰度发布策略 -->## 🎨 灰度发布策略
 
-#<!-- chunk: 渐进式部署配置 -->## 渐进式部署配置
+## 渐进式部署配置
 
-##<!-- chunk: 1. [[Argo|Argo]] Rollouts配置 -->## 1. Argo Rollouts配置
+## 1. Argo Rollouts配置
 ```yaml
 # Argo Rollouts灰度发布配置
 apiVersion: argoproj.io/v1alpha1
@@ -811,7 +811,7 @@ spec:
         query: avg(container_memory_working_set_bytes) / avg(kube_pod_container_resource_limits{resource="memory"})
 ```
 
-##<!-- chunk: 2. Istio流量管理配置 -->## 2. Istio流量管理配置
+## 2. Istio流量管理配置
 ```yaml
 # Istio虚拟服务配置
 apiVersion: networking.istio.io/v1beta1
@@ -871,9 +871,9 @@ spec:
 
 <!-- chunk: 🔁 回滚机制 -->## 🔁 回滚机制
 
-#<!-- chunk: 自动化回滚配置 -->## 自动化回滚配置
+## 自动化回滚配置
 
-##<!-- chunk: 1. 回滚触发器 -->## 1. 回滚触发器
+## 1. 回滚触发器
 ```python
 #!/usr/bin/env python3
 # 自动化回滚控制器
@@ -1206,7 +1206,11 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-##<!-- chunk: 2. 手动回滚脚本 -->## 2. 手动回滚脚本
+## 2. 手动回滚脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 #!/bin/bash
 # 手动回滚脚本
@@ -1353,9 +1357,9 @@ main "$@"
 
 <!-- chunk: 📊 变更效果评估 -->## 📊 变更效果评估
 
-#<!-- chunk: 变更后验证 -->## 变更后验证
+## 变更后验证
 
-##<!-- chunk: 1. 变更验证检查清单 -->## 1. 变更验证检查清单
+## 1. 变更验证检查清单
 ```yaml
 # 变更验证配置
 apiVersion: v1
@@ -1428,7 +1432,7 @@ data:
           timeout: "2h"
 ```
 
-##<!-- chunk: 2. 变更效果评估脚本 -->## 2. 变更效果评估脚本
+## 2. 变更效果评估脚本
 ```python
 #!/usr/bin/env python3
 # 变更效果评估工具
@@ -1840,7 +1844,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 变更管理体系建设 -->## 变更管理体系建设
+## 变更管理体系建设
 - [ ] 建立RFC流程和审批机制
 - [ ] 实施灰度发布和渐进式部署
 - [ ] 配置自动化回滚机制
@@ -1848,7 +1852,7 @@ if __name__ == "__main__":
 - [ ] 实施变更效果评估体系
 - [ ] 建立变更管理文档和培训
 
-#<!-- chunk: 技术实施 -->## 技术实施
+## 技术实施
 - [ ] 部署变更管理工具链
 - [ ] 配置监控告警和通知系统
 - [ ] 实施自动化测试和验证
@@ -1856,7 +1860,7 @@ if __name__ == "__main__":
 - [ ] 配置变更审计和合规检查
 - [ ] 实施变更风险管理策略
 
-#<!-- chunk: 运营维护 -->## 运营维护
+## 运营维护
 - [ ] 制定变更管理操作手册
 - [ ] 建立变更审批和执行标准
 - [ ] 实施变更后评估和改进
@@ -1873,9 +1877,9 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations KUDIG Database — Global MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]])]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]])]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -1894,4 +1898,4 @@ if __name__ == "__main__":
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

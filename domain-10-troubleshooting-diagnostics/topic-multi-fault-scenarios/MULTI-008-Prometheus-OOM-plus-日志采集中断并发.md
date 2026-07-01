@@ -4,6 +4,7 @@ type: "multi-fault"
 skills: ['15-monitoring-alerting-failure', '16-logging-pipeline-failure']
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 title: "Prometheus OOM + 日志采集中断并发"
 category: uncategorized
 tags: ["uncategorized", "visibility/public"]

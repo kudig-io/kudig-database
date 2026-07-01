@@ -224,6 +224,9 @@ providerID 是 Kubernetes Node 对象中用于唯一标识云实例的字段。�
 
 ### 2.2 providerID 设置与查询
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # kubelet 自动设置 providerID (通过 cloud provider)
 # 查看 providerID
@@ -362,6 +365,9 @@ kubernetes.azure.com/agentpool=spot:NoSchedule            # Spot 节点池
 
 ### 4.2 自定义污点管理
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+
 ```bash
 # 添加污点
 kubectl taint nodes <node> dedicated=gpu:NoSchedule
@@ -480,7 +486,9 @@ curl -s -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-versio
 ## Related
 
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/cloud-controller-manager|cloud-controller-manager]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/cloud-controller-manager.md|cloud-controller-manager]]
+
+```

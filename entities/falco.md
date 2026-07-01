@@ -61,12 +61,12 @@ Falco deploys as a [[DaemonSet|DaemonSet]] with one pod per node, monitoring all
 
 - [[kuasar]] — Kuasar
 - [[deployment]] — Deployment
-- [[concepts/cloud-native-defense-in-depth|cloud-native-defense-in-depth]] — [[Cloud Native Defense in Depth|Cloud Native Defense in Depth]]
+- [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
 - networking.md|cilium-ebpf-networking]] — Cilium eBPF Networking
 - [[cilium]] — Cilium
-- [[concepts/cloud-native-defense-in-depth|Cloud Native Defense in Depth]]
-- [[concepts/cilium-ebpf-networking|Cilium eBPF Networking]]
-- [[entities/tetragon|Tetragon]]
+- [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
+- [[concepts/cilium-ebpf-networking.md|Cilium eBPF Networking]]
+- [[entities/tetragon.md|Tetragon]]
 
 - 99-falco-runtime-security-guide
 - 01-falco-cloud-native-security
@@ -114,12 +114,12 @@ Falco deploys as a [[DaemonSet|DaemonSet]] with one pod per node, monitoring all
 - RELEASE-NOTES-0.21
 - RELEASE-NOTES-0.15
 - RELEASE-NOTES-0.31
-- [[references/release-notes-security|发布说明索引 — 安全]] — Cross-reference
-- [[domain-19-landscape-references/98-merged-indexes/index|发布说明阅读指南]] — Cross-reference
-- [[synthesis/纵深防御 x 供应链安全|纵深防御 x 供应链安全]] — Cross-reference
-- [[synthesis/eBPF x 运行时安全|eBPF x 运行时安全]] — Cross-reference
-- [[concepts/security-tool-evolution|安全工具演进]] — Cross-reference
-- [[entities/trivy|Trivy]] — Cross-reference
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/release-notes-security.md|发布说明索引 — 安全]] — Cross-reference
+- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
+- [[concepts/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — Cross-reference
+- [[concepts/eBPF x 运行时安全.md|eBPF x 运行时安全]] — Cross-reference
+- [[concepts/security-tool-evolution.md|安全工具演进]] — Cross-reference
+- [[entities/trivy.md|Trivy]] — Cross-reference
+- [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

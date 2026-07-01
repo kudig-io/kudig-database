@@ -105,7 +105,7 @@ k8s_versions:
 
 <!-- chunk: 1. OpenYurt 概述 -->## 1. OpenYurt 概述
 
-#<!-- chunk: 1.1 项目简介 (Project Overview) -->## 1.1 项目简介 (Project Overview)
+## 1.1 项目简介 (Project Overview)
 
 OpenYurt 是阿里巴巴于 2020 年开源的 Kubernetes 边缘计算平台，其核心设计哲学是**"非侵入式"**地将标准 Kubernetes 集群改造为边缘就绪的集群，无需修改 K8s 核心代码。
 
@@ -121,7 +121,7 @@ OpenYurt 设计哲学:
 ✅ 边缘节点与 API Server 断连时自主运行
 ```
 
-#<!-- chunk: 1.2 OpenYurt 发展历程 -->## 1.2 OpenYurt 发展历程
+## 1.2 OpenYurt 发展历程
 
 ```
 2020.05 ── 阿里巴巴开源 OpenYurt v0.1
@@ -149,7 +149,7 @@ OpenYurt 设计哲学:
             统一管控 API
 ```
 
-#<!-- chunk: 1.3 OpenYurt 组件全景 -->## 1.3 OpenYurt 组件全景
+## 1.3 OpenYurt 组件全景
 
 ```mermaid
 mindmap
@@ -193,7 +193,7 @@ mindmap
 
 <!-- chunk: 2. 核心架构设计 -->## 2. 核心架构设计
 
-#<!-- chunk: 2.1 OpenYurt 整体架构图 -->## 2.1 OpenYurt 整体架构图
+## 2.1 OpenYurt 整体架构图
 
 ```mermaid
 graph TB
@@ -255,7 +255,7 @@ graph TB
     style EdgePool2 fill:#fff3e0,stroke:#e65100
 ```
 
-#<!-- chunk: 2.2 非侵入式改造原理 (Non-Intrusive Retrofit) -->## 2.2 非侵入式改造原理 (Non-Intrusive Retrofit)
+## 2.2 非侵入式改造原理 (Non-Intrusive Retrofit)
 
 OpenYurt 的核心创新在于**不修改 kubelet**，而是在 kubelet 和 API Server 之间插入 YurtHub 代理层：
 
@@ -291,7 +291,7 @@ yurtadm join ${CLOUD_SERVER_ADDR} \
 
 <!-- chunk: 3. YurtHub 详解 -->## 3. YurtHub 详解
 
-#<!-- chunk: 3.1 YurtHub 工作原理 (YurtHub Working Principle) -->## 3.1 YurtHub 工作原理 (YurtHub Working Principle)
+## 3.1 YurtHub 工作原理 (YurtHub Working Principle)
 
 ```mermaid
 graph TD
@@ -326,7 +326,7 @@ graph TD
     APIServer -->|Watch 实时更新缓存| CacheManager
 ```
 
-#<!-- chunk: 3.2 YurtHub 缓存机制 (Cache Mechanism) -->## 3.2 YurtHub 缓存机制 (Cache Mechanism)
+## 3.2 YurtHub 缓存机制 (Cache Mechanism)
 
 ```go
 // YurtHub 核心缓存逻辑 (简化版)
@@ -391,7 +391,7 @@ func (h *YurtHubHandler) serveFromLocalCache(w http.ResponseWriter, r *http.Requ
 }
 ```
 
-#<!-- chunk: 3.3 YurtHub 缓存存储结构 (Cache Storage Structure) -->## 3.3 YurtHub 缓存存储结构 (Cache Storage Structure)
+## 3.3 YurtHub 缓存存储结构 (Cache Storage Structure)
 
 ```
 YurtHub 磁盘缓存目录结构:
@@ -420,7 +420,7 @@ YurtHub 磁盘缓存目录结构:
     └── endpoints/
 ```
 
-#<!-- chunk: 3.4 YurtHub 请求过滤器 (Request Filters) -->## 3.4 YurtHub 请求过滤器 (Request Filters)
+## 3.4 YurtHub 请求过滤器 (Request Filters)
 
 ```go
 // YurtHub 内置过滤器 - 修改 API 响应以适配边缘场景
@@ -476,7 +476,7 @@ func (f *ServiceTopologyFilter) Filter(obj runtime.Object) runtime.Object {
 }
 ```
 
-#<!-- chunk: 3.5 YurtHub 配置 (YurtHub Configuration) -->## 3.5 YurtHub 配置 (YurtHub Configuration)
+## 3.5 YurtHub 配置 (YurtHub Configuration)
 
 ```yaml
 # YurtHub 配置 (作为 DaemonSet 运行在边缘节点)
@@ -531,7 +531,7 @@ data:
 
 <!-- chunk: 4. YurtTunnel 详解 -->## 4. YurtTunnel 详解
 
-#<!-- chunk: 4.1 YurtTunnel 解决的问题 (Problem YurtTunnel Solves) -->## 4.1 YurtTunnel 解决的问题 (Problem YurtTunnel Solves)
+## 4.1 YurtTunnel 解决的问题 (Problem YurtTunnel Solves)
 
 在标准 K8s 中，`kubectl logs/exec` 等命令需要 API Server 主动连接 kubelet (port 10250)。但边缘节点通常在 NAT 后面，API Server 无法直接访问边缘 kubelet。
 
@@ -560,7 +560,7 @@ graph LR
     end
 ```
 
-#<!-- chunk: 4.2 YurtTunnel 工作原理 -->## 4.2 YurtTunnel 工作原理
+## 4.2 YurtTunnel 工作原理
 
 ```mermaid
 sequenceDiagram
@@ -585,7 +585,7 @@ sequenceDiagram
     K8sAPI-->>User: 日志输出
 ```
 
-#<!-- chunk: 4.3 YurtTunnel Server 部署 -->## 4.3 YurtTunnel Server 部署
+## 4.3 YurtTunnel Server 部署
 
 ```yaml
 # YurtTunnel Server (云端 Deployment)
@@ -654,7 +654,7 @@ spec:
     nodePort: 31264
 ```
 
-#<!-- chunk: 4.4 YurtTunnel Agent 部署 (边缘) -->## 4.4 YurtTunnel Agent 部署 (边缘)
+## 4.4 YurtTunnel Agent 部署 (边缘)
 
 ```yaml
 # YurtTunnel Agent (边缘 DaemonSet)
@@ -709,7 +709,7 @@ spec:
 
 <!-- chunk: 5. NodePool 节点池管理 -->## 5. NodePool 节点池管理
 
-#<!-- chunk: 5.1 NodePool 概念与设计 (NodePool Concept) -->## 5.1 NodePool 概念与设计 (NodePool Concept)
+## 5.1 NodePool 概念与设计 (NodePool Concept)
 
 NodePool 是 OpenYurt 将边缘节点按地理位置、业务属性等进行分组管理的核心机制：
 
@@ -745,7 +745,7 @@ graph TD
     style Pool3 fill:#fff3e0
 ```
 
-#<!-- chunk: 5.2 NodePool 定义 (NodePool Definition) -->## 5.2 NodePool 定义 (NodePool Definition)
+## 5.2 NodePool 定义 (NodePool Definition)
 
 ```yaml
 # NodePool 创建
@@ -792,7 +792,7 @@ kubectl get nodepool factory-a
 kubectl describe nodepool factory-a
 ```
 
-#<!-- chunk: 5.3 NodePool 状态管理 -->## 5.3 NodePool 状态管理
+## 5.3 NodePool 状态管理
 
 ```yaml
 # NodePool 状态示例
@@ -811,7 +811,7 @@ status:
       type: "PoolReady"
 ```
 
-#<!-- chunk: 5.4 NodeBucket (节点元数据同步) -->## 5.4 NodeBucket (节点元数据同步)
+## 5.4 NodeBucket (节点元数据同步)
 
 ```yaml
 # NodeBucket - 用于边缘节点批量获取节点信息
@@ -834,7 +834,7 @@ spec:
 
 <!-- chunk: 6. UnitedDeployment 统一部署 -->## 6. UnitedDeployment 统一部署
 
-#<!-- chunk: 6.1 UnitedDeployment 概念 (UnitedDeployment Concept) -->## 6.1 UnitedDeployment 概念 (UnitedDeployment Concept)
+## 6.1 UnitedDeployment 概念 (UnitedDeployment Concept)
 
 UnitedDeployment 是 OpenYurt 的核心工作负载 CRD，允许用户使用一个 CR 管理分布在多个 NodePool 中的应用，并支持每个 NodePool 有独立的配置：
 
@@ -857,7 +857,7 @@ graph TD
     style Pool_C fill:#fff3e0
 ```
 
-#<!-- chunk: 6.2 UnitedDeployment 完整示例 -->## 6.2 UnitedDeployment 完整示例
+## 6.2 UnitedDeployment 完整示例
 
 ```yaml
 # UnitedDeployment - 全国门店部署不同版本应用
@@ -969,7 +969,7 @@ spec:
                   value: "true"
 ```
 
-#<!-- chunk: 6.3 YurtAppSet (新版 UnitedDeployment) -->## 6.3 YurtAppSet (新版 UnitedDeployment)
+## 6.3 YurtAppSet (新版 UnitedDeployment)
 
 OpenYurt v1.3+ 推出 YurtAppSet 替代 UnitedDeployment，功能更强大：
 
@@ -1017,7 +1017,7 @@ spec:
   revisionHistoryLimit: 5
 ```
 
-#<!-- chunk: 6.4 YurtAppDaemon (跨池 DaemonSet) -->## 6.4 YurtAppDaemon (跨池 DaemonSet)
+## 6.4 YurtAppDaemon (跨池 DaemonSet)
 
 ```yaml
 # YurtAppDaemon - 在多个 NodePool 的所有节点运行 DaemonSet
@@ -1071,7 +1071,7 @@ spec:
 
 <!-- chunk: 7. 边缘自治能力 -->## 7. 边缘自治能力
 
-#<!-- chunk: 7.1 YurtCoordinator (边缘节点高可用) -->## 7.1 YurtCoordinator (边缘节点高可用)
+## 7.1 YurtCoordinator (边缘节点高可用)
 
 YurtCoordinator 解决了边缘节点组内的高可用问题，当边缘节点与 API Server 断连时，通过本地 Leader 选举保持服务可用：
 
@@ -1134,7 +1134,7 @@ spec:
       memory: "4Gi"
 ```
 
-#<!-- chunk: 7.2 离线自治场景分析 (Offline Autonomy Scenarios) -->## 7.2 离线自治场景分析 (Offline Autonomy Scenarios)
+## 7.2 离线自治场景分析 (Offline Autonomy Scenarios)
 
 ```
 场景 1: 短暂断线 (< 30分钟)
@@ -1165,7 +1165,7 @@ spec:
     offline-cache-timeout: 720h  # 30天
 ```
 
-#<!-- chunk: 7.3 节点重启后的状态恢复 -->## 7.3 节点重启后的状态恢复
+## 7.3 节点重启后的状态恢复
 
 ```go
 // YurtHub 节点重启后缓存恢复逻辑
@@ -1203,7 +1203,11 @@ func (m *CacheManager) RecoverFromDisk() error {
 
 <!-- chunk: 8. 部署安装 -->## 8. 部署安装
 
-#<!-- chunk: 8.1 前置条件 (Prerequisites) -->## 8.1 前置条件 (Prerequisites)
+## 8.1 前置条件 (Prerequisites)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 检查 K8s 版本 (需要 v1.20+)
@@ -1222,7 +1226,10 @@ kubectl label node edge-node-001 openyurt.io/is-edge-worker=true
 kubectl label node edge-node-002 openyurt.io/is-edge-worker=true
 ```
 
-#<!-- chunk: 8.2 Helm 安装 OpenYurt -->## 8.2 Helm 安装 OpenYurt
+## 8.2 Helm 安装 OpenYurt
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 添加 OpenYurt Helm 仓库
@@ -1243,7 +1250,7 @@ helm install openyurt openyurt/openyurt \
 kubectl get pods -n kube-system | grep yurt
 ```
 
-#<!-- chunk: 8.3 yurtadm 命令行工具 -->## 8.3 yurtadm 命令行工具
+## 8.3 yurtadm 命令行工具
 
 ```bash
 # 安装 yurtadm
@@ -1269,7 +1276,12 @@ yurtadm convert --nodes edge-node-001 \
 yurtadm revert --nodes edge-node-001
 ```
 
-#<!-- chunk: 8.4 完整部署流程 -->## 8.4 完整部署流程
+## 8.4 完整部署流程
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 #!/bin/bash
@@ -1363,7 +1375,7 @@ kubectl get nodepool
 
 <!-- chunk: 9. 流量拓扑管理 -->## 9. 流量拓扑管理
 
-#<!-- chunk: 9.1 拓扑感知路由 (Topology-Aware Routing) -->## 9.1 拓扑感知路由 (Topology-Aware Routing)
+## 9.1 拓扑感知路由 (Topology-Aware Routing)
 
 OpenYurt 确保边缘节点的流量优先访问同一 NodePool 内的服务，避免跨区域低效路由：
 
@@ -1405,7 +1417,7 @@ spec:
     - "*"
 ```
 
-#<!-- chunk: 9.2 NodePool 服务隔离 -->## 9.2 NodePool 服务隔离
+## 9.2 NodePool 服务隔离
 
 ```yaml
 # 不同 NodePool 使用不同的服务实例
@@ -1437,7 +1449,7 @@ data:
   opcua-server: "opc.tcp://10.20.1.200:4840"
 ```
 
-#<!-- chunk: 9.3 Raven (新版网络方案) -->## 9.3 Raven (新版网络方案)
+## 9.3 Raven (新版网络方案)
 
 OpenYurt v1.1+ 推出 Raven 替代 YurtTunnel，提供更强大的跨节点池通信：
 
@@ -1470,7 +1482,7 @@ spec:
 
 <!-- chunk: 10. OpenYurt vs KubeEdge 详细对比 -->## 10. OpenYurt vs KubeEdge 详细对比
 
-#<!-- chunk: 10.1 架构对比 (Architecture Comparison) -->## 10.1 架构对比 (Architecture Comparison)
+## 10.1 架构对比 (Architecture Comparison)
 
 ```mermaid
 graph TB
@@ -1502,7 +1514,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 10.2 功能对比矩阵 (Feature Comparison Matrix) -->## 10.2 功能对比矩阵 (Feature Comparison Matrix)
+## 10.2 功能对比矩阵 (Feature Comparison Matrix)
 
 | 特性 | OpenYurt | KubeEdge | 说明 |
 |------|---------|---------|------|
@@ -1523,7 +1535,7 @@ graph TB
 | **大规模管理** | ✅ NodePool 批量 | ⚠️ 较弱 | OY 适合大规模边缘 |
 | **运维复杂度** | 中等 | 较高 | KE 组件更多 |
 
-#<!-- chunk: 10.3 选型建议 (Selection Guide) -->## 10.3 选型建议 (Selection Guide)
+## 10.3 选型建议 (Selection Guide)
 
 ```
 选择 OpenYurt 的场景:
@@ -1554,7 +1566,7 @@ graph TB
 ╚════════════════════════════════════════════════════════╝
 ```
 
-#<!-- chunk: 10.4 性能对比数据 -->## 10.4 性能对比数据
+## 10.4 性能对比数据
 
 ```
 压测环境:
@@ -1577,7 +1589,7 @@ API 请求延迟 (离线)      1ms             1ms
 
 <!-- chunk: 11. 生产实践 -->## 11. 生产实践
 
-#<!-- chunk: 11.1 大规模零售门店部署案例 -->## 11.1 大规模零售门店部署案例
+## 11.1 大规模零售门店部署案例
 
 ```yaml
 # 场景: 全国 5000 家连锁门店
@@ -1634,7 +1646,7 @@ spec:
                   value: "0.13"
 ```
 
-#<!-- chunk: 11.2 OTA 应用升级策略 (OTA Upgrade Strategy) -->## 11.2 OTA 应用升级策略 (OTA Upgrade Strategy)
+## 11.2 OTA 应用升级策略 (OTA Upgrade Strategy)
 
 ```yaml
 # 灰度升级 - 先升旗舰店, 再升普通店
@@ -1653,7 +1665,7 @@ kubectl set image uniteddeployment/store-app store-app=store-app:v2.1 -n retail
 kubectl rollout status uniteddeployment/store-app -n retail
 ```
 
-#<!-- chunk: 11.3 多集群边缘管理 -->## 11.3 多集群边缘管理
+## 11.3 多集群边缘管理
 
 ```yaml
 # 使用 OpenYurt + Clusternet 实现多集群边缘管理
@@ -1684,7 +1696,10 @@ spec:
 
 <!-- chunk: 12. 故障排查与运维 -->## 12. 故障排查与运维
 
-#<!-- chunk: 12.1 YurtHub 故障排查 -->## 12.1 YurtHub 故障排查
+## 12.1 YurtHub 故障排查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # ====== YurtHub 诊断 ======
@@ -1720,7 +1735,7 @@ kubectl delete pod -n kube-system -l app=yurt-hub
 # YurtHub 作为 DaemonSet 会自动重建
 ```
 
-#<!-- chunk: 12.2 YurtTunnel 故障排查 -->## 12.2 YurtTunnel 故障排查
+## 12.2 YurtTunnel 故障排查
 
 ```bash
 # ====== YurtTunnel 诊断 ======
@@ -1751,7 +1766,7 @@ kubectl get gateways -A
 kubectl describe gateway factory-a-gw
 ```
 
-#<!-- chunk: 12.3 NodePool 和 UnitedDeployment 排查 -->## 12.3 NodePool 和 UnitedDeployment 排查
+## 12.3 NodePool 和 UnitedDeployment 排查
 
 ```bash
 # ====== NodePool/UnitedDeployment 诊断 ======
@@ -1782,7 +1797,10 @@ kubectl rollout history uniteddeployment/store-app -n retail
 kubectl logs -n kube-system -l app=yurt-manager | grep -E "ERROR|nodepool|uniteddeployment"
 ```
 
-#<!-- chunk: 12.4 边缘节点网络诊断 -->## 12.4 边缘节点网络诊断
+## 12.4 边缘节点网络诊断
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # ====== 网络诊断 ======
@@ -1816,7 +1834,11 @@ curl http://127.0.0.1:10262/healthz
 # 输出: {"RemoteServer": "Healthy", "YurtHub": "Healthy"}
 ```
 
-#<!-- chunk: 12.5 运维最佳实践 -->## 12.5 运维最佳实践
+## 12.5 运维最佳实践
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # ====== 日常运维命令 ======
@@ -1906,7 +1928,7 @@ KubeEdge 更适合: IoT 设备管理、工业场景、资源受限设备
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-37-edge-computing MOC
-- [[domain-15-specialized-tech/README|Domain 37: 边缘计算 (Edge Computing)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: 边缘计算 (Edge Computing)]]
 - Domain-37 边缘计算 — 开源项目索引
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)

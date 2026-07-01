@@ -179,6 +179,9 @@ kubectl logs -n kube-system -l app=etcd-operator --tail=50
 
 #### Step 2: 检查磁盘空间
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查 etcd 节点磁盘空间
 kubectl exec -n kube-system etcd-{node-name} -- df -h /var/lib/etcd
@@ -265,9 +268,12 @@ kubectl get backup -n velero pre-drill-backup -o jsonpath='{.status.phase}'
 
 #### Step 2: 模拟数据丢失
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```bash
 # 删除目标 Namespace（模拟灾难）
-kubectl delete namespace production
+kubectl delete namespace production  # ⚠️ 不可逆：永久删除命名空间及全部资源
 
 # 验证 Namespace 已删除
 kubectl get namespace production
@@ -296,6 +302,9 @@ echo "恢复耗时: ${DURATION} 秒"
 ```
 
 #### Step 4: 验证数据完整性
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查 Pod 恢复状态
@@ -873,13 +882,15 @@ sla_reporting:
 ## Related
 
 - 08-docker-troubleshooting-guide
-- [[entities/kubernetes|kubernetes]]
+- [[entities/kubernetes.md|kubernetes]]
 - [[hot|hot]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/cronjob|cronjob]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/cronjob.md|cronjob]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting|02-tekton-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/03-flux-image-automation-troubleshooting|03-flux-image-automation-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting|01-gitops-devops-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting|02-tekton-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting.md|02-tekton-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting.md|01-gitops-devops-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting.md|02-tekton-troubleshooting]]
+
+```

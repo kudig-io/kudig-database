@@ -34,6 +34,7 @@ prerequisites:
 - gitops-basics
 - iac-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # GitOps 与持续交付
@@ -214,7 +215,5 @@ flux logs --all-namespaces
 - [CNCF GitOps Landscape](https://landscape.cncf.io/card-mode?category=continuous-delivery&grouping=category)
 
 ## Related
-
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/helm-index|Helm 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/helm-index.md|Helm 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

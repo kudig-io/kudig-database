@@ -115,7 +115,7 @@ k8s_versions:
 
 <!-- chunk: 一、架构设计 -->## 一、架构设计
 
-#<!-- chunk: 1.1 企业级分层架构 -->## 1.1 企业级分层架构
+## 1.1 企业级分层架构
 
 ```
 ┌───────────────────────────── 生产集群架构 ─────────────────────────────┐
@@ -148,7 +148,7 @@ k8s_versions:
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.2 生产环境规模分级 -->## 1.2 生产环境规模分级
+## 1.2 生产环境规模分级
 
 | 规模等级 | 节点数 | Pod 数 | Master 规格 | Worker 规格 | etcd 部署方式 |
 |----------|--------|--------|-------------|-------------|--------------|
@@ -157,7 +157,7 @@ k8s_versions:
 | **大型** | 200-1000 | 8K-40K | 16C/64G/1T NVMe | 32C/128G/2T | External + 高性能 NVMe |
 | **超大型** | 1000+ | 40K+ | 32C/128G/2T NVMe | 按负载定制 | External + 分片 |
 
-#<!-- chunk: 1.3 节点规划示例 (小型生产集群) -->## 1.3 节点规划示例 (小型生产集群)
+## 1.3 节点规划示例 (小型生产集群)
 
 | 角色 | 主机名 | IP | CPU | 内存 | 存储 | 说明 |
 |------|--------|-----|-----|------|------|------|
@@ -169,7 +169,7 @@ k8s_versions:
 | Worker | worker-3 | 10.0.1.23 | 16C | 64GB | 500GB NVMe + 2TB HDD | 应用节点 |
 | LB (VIP) | - | 10.0.1.100 | - | - | - | HAProxy VIP |
 
-#<!-- chunk: 1.4 部署前检查清单 -->## 1.4 部署前检查清单
+## 1.4 部署前检查清单
 
 ```yaml
 # 在开始部署前，确认以下事项全部完成:
@@ -203,7 +203,7 @@ production_precheck:
 > **为什么需要 LB？** 3 个 Master 各有一个 API Server，kubectl 和 kubelet 需要一个统一入口。  
 > HAProxy 做 TCP 负载均衡 + Keepalived 做 VIP 浮动 = API Server 高可用。
 
-#<!-- chunk: 2.1 在所有 Master 节点安装 HAProxy + Keepalived -->## 2.1 在所有 Master 节点安装 HAProxy + Keepalived
+## 2.1 在所有 Master 节点安装 HAProxy + Keepalived
 
 ```bash
 # 在 master-1, master-2, master-3 上执行
@@ -211,7 +211,10 @@ sudo apt-get install -y haproxy keepalived
 # CentOS: sudo yum install -y haproxy keepalived
 ```
 
-#<!-- chunk: 2.2 配置 HAProxy -->## 2.2 配置 HAProxy
+## 2.2 配置 HAProxy
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 在所有 Master 节点配置 (内容相同)
@@ -265,7 +268,10 @@ sudo systemctl status haproxy
 # 查看监控页面: http://10.0.1.10:9000/stats
 ```
 
-#<!-- chunk: 2.3 配置 Keepalived (VIP 浮动) -->## 2.3 配置 Keepalived (VIP 浮动)
+## 2.3 配置 Keepalived (VIP 浮动)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # ===== master-1 (MASTER 角色，优先级最高) =====
@@ -325,7 +331,7 @@ curl -k https://10.0.1.100:8443/healthz
 
 <!-- chunk: 三、部署 HA 控制平面 (kubeadm) -->## 三、部署 HA 控制平面 (kubeadm)
 
-#<!-- chunk: 3.1 所有节点: 系统准备 -->## 3.1 所有节点: 系统准备
+## 3.1 所有节点: 系统准备
 
 > 参考 [02-单节点部署 → 通用系统准备](./02-single-node-deployment.md)，在所有节点执行:
 > swap 关闭、内核模块加载、网络参数配置、containerd 安装、kubeadm 安装、时间同步。
@@ -366,7 +372,7 @@ cat <<EOF | sudo tee -a /etc/security/limits.conf
 EOF
 ```
 
-#<!-- chunk: 3.2 初始化第一个 Master -->## 3.2 初始化第一个 Master
+## 3.2 初始化第一个 Master
 
 ```yaml
 # kubeadm-config-ha.yaml - 生产 HA 集群配置
@@ -466,7 +472,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl get nodes
 ```
 
-#<!-- chunk: 3.3 加入其他 Master 节点 -->## 3.3 加入其他 Master 节点
+## 3.3 加入其他 Master 节点
 
 ```bash
 # 在 master-2 和 master-3 上执行 (使用 kubeadm init 输出的 control-plane join 命令)
@@ -485,7 +491,7 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-#<!-- chunk: 3.4 加入 Worker 节点 -->## 3.4 加入 Worker 节点
+## 3.4 加入 Worker 节点
 
 ```bash
 # 在每个 Worker 节点执行 (使用 kubeadm init 输出的 worker join 命令)
@@ -494,7 +500,10 @@ sudo kubeadm join 10.0.1.100:8443 \
   --discovery-token-ca-cert-hash sha256:<hash>
 ```
 
-#<!-- chunk: 3.5 安装 CNI (Calico 生产配置) -->## 3.5 安装 CNI (Calico 生产配置)
+## 3.5 安装 CNI (Calico 生产配置)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 使用 Tigera Operator 安装 Calico (推荐的生产安装方式)
@@ -550,7 +559,7 @@ curl -k https://10.0.1.100:8443/healthz
 
 <!-- chunk: 四、安全合规部署 -->## 四、安全合规部署
 
-#<!-- chunk: 4.1 零信任网络策略 -->## 4.1 零信任网络策略
+## 4.1 零信任网络策略
 
 ```yaml
 # 生产环境: 默认拒绝所有流量，按需开放
@@ -613,7 +622,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: 4.2 RBAC 生产策略 -->## 4.2 RBAC 生产策略
+## 4.2 RBAC 生产策略
 
 ```yaml
 # 生产环境 RBAC: 最小权限原则
@@ -661,7 +670,10 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-#<!-- chunk: 4.3 Pod 安全标准 (Pod Security Standards) -->## 4.3 Pod 安全标准 (Pod Security Standards)
+## 4.3 Pod 安全标准 (Pod Security Standards)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 对生产 namespace 启用 restricted 安全级别
@@ -678,7 +690,7 @@ kubectl label namespace production \
 # - 使用只读根文件系统 (readOnlyRootFilesystem: true)
 ```
 
-#<!-- chunk: 4.4 审计日志策略 -->## 4.4 审计日志策略
+## 4.4 审计日志策略
 
 ```yaml
 # audit-policy.yaml - 放在 /etc/kubernetes/audit-policy.yaml
@@ -719,7 +731,7 @@ rules:
 
 <!-- chunk: 五、生产级 Deployment 模板 -->## 五、生产级 Deployment 模板
 
-#<!-- chunk: 5.1 完整的 Web 应用 Deployment -->## 5.1 完整的 Web 应用 Deployment
+## 5.1 完整的 Web 应用 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -847,9 +859,10 @@ spec:
       volumes:
       - name: tmp
         emptyDir: {}                       # 临时卷 (Pod 删除后消失)
+
 ```
 
-#<!-- chunk: 5.2 PodDisruptionBudget (PDB) -->## 5.2 PodDisruptionBudget (PDB)
+## 5.2 PodDisruptionBudget (PDB)
 
 > **PDB 是什么？** 保证在维护操作 (如 `kubectl drain`) 时，始终保持最低可用副本数。
 
@@ -871,7 +884,10 @@ spec:
 
 <!-- chunk: 六、监控告警体系 -->## 六、监控告警体系
 
-#<!-- chunk: 6.1 Prometheus + Grafana 生产部署 -->## 6.1 Prometheus + Grafana 生产部署
+## 6.1 Prometheus + Grafana 生产部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 生产环境使用更详细的配置
@@ -895,7 +911,7 @@ helm install monitoring prometheus-community/kube-prometheus-stack \
 # alertmanager replicas=3 - Alertmanager 3 副本
 ```
 
-#<!-- chunk: 6.2 关键告警规则 -->## 6.2 关键告警规则
+## 6.2 关键告警规则
 
 ```yaml
 # critical-alerts.yaml
@@ -968,7 +984,7 @@ spec:
 
 <!-- chunk: 七、备份灾备策略 -->## 七、备份灾备策略
 
-#<!-- chunk: 7.1 etcd 自动备份 -->## 7.1 etcd 自动备份
+## 7.1 etcd 自动备份
 
 ```bash
 #!/bin/bash
@@ -1009,7 +1025,7 @@ sudo chmod +x /usr/local/bin/etcd-backup.sh
 echo "0 2 * * * /usr/local/bin/etcd-backup.sh >> /var/log/etcd-backup.log 2>&1" | sudo crontab -
 ```
 
-#<!-- chunk: 7.2 Velero 集群备份 -->## 7.2 Velero 集群备份
+## 7.2 Velero 集群备份
 
 ```bash
 # 安装 Velero CLI
@@ -1052,6 +1068,9 @@ velero restore create --from-backup daily-backup-xxxx
 
 <!-- chunk: 八、证书管理与轮转 -->## 八、证书管理与轮转
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 查看证书过期时间
 sudo kubeadm certs check-expiration
@@ -1077,6 +1096,10 @@ sudo systemctl restart kubelet
 <!-- chunk: 九、集群升级流程 -->## 九、集群升级流程
 
 > **生产升级原则**: 一次只升级一个小版本 (如 1.27 → 1.28)，不能跳版本。
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # ===== 1. 升级前准备 =====
@@ -1132,7 +1155,7 @@ kubectl get pods -A | grep -v Running | grep -v Completed
 
 <!-- chunk: 十、成本优化 -->## 十、成本优化
 
-#<!-- chunk: 10.1 资源配额 -->## 10.1 资源配额
+## 10.1 资源配额
 
 ```yaml
 apiVersion: v1
@@ -1150,7 +1173,7 @@ spec:
     persistentvolumeclaims: "50"
 ```
 
-#<!-- chunk: 10.2 节点自动伸缩 (Cluster Autoscaler) -->## 10.2 节点自动伸缩 (Cluster Autoscaler)
+## 10.2 节点自动伸缩 (Cluster Autoscaler)
 
 > **备注**: Cluster Autoscaler 主要适用于云环境，自建机房通常使用预规划容量。
 
@@ -1202,7 +1225,7 @@ nodeGroups:
 
 <!-- chunk: 十二、实施检查清单 -->## 十二、实施检查清单
 
-#<!-- chunk: 部署实施阶段 -->## 部署实施阶段
+## 部署实施阶段
 - [ ] HAProxy + Keepalived 部署完成，VIP 可用
 - [ ] 3 个 Master 节点加入集群
 - [ ] N 个 Worker 节点加入集群
@@ -1210,26 +1233,26 @@ nodeGroups:
 - [ ] Calico CNI 安装完成，跨节点 Pod 通信正常
 - [ ] 所有系统 Pod Running
 
-#<!-- chunk: 安全加固阶段 -->## 安全加固阶段
+## 安全加固阶段
 - [ ] NetworkPolicy 默认拒绝已应用
 - [ ] RBAC 策略已配置
 - [ ] Pod Security Standards 已启用
 - [ ] 审计日志已配置
 - [ ] 证书过期时间已确认
 
-#<!-- chunk: 可观测性阶段 -->## 可观测性阶段
+## 可观测性阶段
 - [ ] Prometheus + Grafana 部署完成
 - [ ] 关键告警规则已配置
 - [ ] 告警通知渠道已测试
 - [ ] 日志收集系统已部署
 
-#<!-- chunk: 灾备保障阶段 -->## 灾备保障阶段
+## 灾备保障阶段
 - [ ] etcd 自动备份已配置并验证
 - [ ] Velero 备份计划已创建
 - [ ] 灾难恢复流程已文档化
 - [ ] 恢复演练已执行
 
-#<!-- chunk: 运营就绪阶段 -->## 运营就绪阶段
+## 运营就绪阶段
 - [ ] 集群升级流程已文档化
 - [ ] 值班和应急响应流程已建立
 - [ ] 容量规划已完成
@@ -1248,15 +1271,17 @@ nodeGroups:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-deployment MOC
-- [[domain-08-release-change-management/topic-deployment/README|Kubernetes 部署方案指南 (Deployment Guide)]]
-- [[domain-08-release-change-management/topic-deployment/01-local-demo-deployment|01 - 本机单机 Demo 部署]]
-- [[domain-08-release-change-management/topic-deployment/02-single-node-deployment|02 - 单节点部署 (Single Node All-in-One)]]
-- [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment|03 - 研发环境部署 (Development Environment Deployment)]]
+- [[domain-08-release-change-management/topic-deployment/README.md|Kubernetes 部署方案指南 (Deployment Guide)]]
+- [[domain-08-release-change-management/topic-deployment/01-local-demo-deployment.md|01 - 本机单机 Demo 部署]]
+- [[domain-08-release-change-management/topic-deployment/02-single-node-deployment.md|02 - 单节点部署 (Single Node All-in-One)]]
+- [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment)]]
 
 ## Related
 
 - [[README|README]]
 - [[MOC|MOC]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm|helm]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+
+```

@@ -293,6 +293,10 @@ PVC 一旦绑定，PV 就被这个 PVC 独占。
 
 ### 4.3 存储空间不足
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 【排查】
 
@@ -309,6 +313,10 @@ PVC 一旦绑定，PV 就被这个 PVC 独占。
 ---
 
 ## 5. 总结
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
 【命令速查】
@@ -356,10 +364,10 @@ kubectl delete pvc <pvc-name>
 ## 相关概念
 
 - 持久化存储
-- [[domain-17-system-foundation/topic-dictionary/storage/storage-classes|storage-classes]]
+- [[domain-17-system-foundation/topic-dictionary/storage/storage-classes.md|storage-classes]]
 
 ## Related
 
-- [[references/fundamentals-terms|fundamentals-terms]] — K8s 基础概念术语参考
-- [[skills/learn-analogy-dictionary|learn-analogy-dictionary]] — K8S 概念类比词典
-- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
+- [[entities/fundamentals-terms.md|fundamentals-terms]] — K8s 基础概念术语参考
+- [[skills/learn-analogy-dictionary.md|learn-analogy-dictionary]] — K8S 概念类比词典
+- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill

@@ -54,14 +54,14 @@ created: "2026-05-23"
 
 <!-- chunk: 演讲概述 -->## 演讲概述
 
-#<!-- chunk: 目标受众 -->## 目标受众
+## 目标受众
 
 - 架构师：理解调度策略对业务可用性的影响
 - SRE 工程师：掌握调度相关问题的排查方法
 - 应用运维：合理配置资源请求和调度约束
 - 平台工程师：设计多租户环境的调度策略
 
-#<!-- chunk: 预计时长 -->## 预计时长
+## 预计时长
 
 | 阶段 | 内容 | 时长 |
 |------|------|------|
@@ -74,7 +74,7 @@ created: "2026-05-23"
 | Q&A | 互动问答 | 15 分钟 |
 | **合计** | | **约 3 小时** |
 
-#<!-- chunk: 核心学习目标 -->## 核心学习目标
+## 核心学习目标
 
 完成本次培训后，学员能够：
 
@@ -85,7 +85,7 @@ created: "2026-05-23"
 5. 排查 Pod Pending 等调度失败问题
 6. 理解 QoS 类别对 Pod 驱逐和调度的影响
 
-#<!-- chunk: 核心要点 -->## 核心要点
+## 核心要点
 
 1. 调度器的工作原理：过滤（Filtering）→ 打分（Scoring）→ 绑定（Binding）
 2. nodeSelector 是最简单的调度约束，Affinity 是进阶方案
@@ -114,7 +114,7 @@ created: "2026-05-23"
 
 <!-- chunk: 核心概念讲解 -->## 核心概念讲解
 
-#<!-- chunk: 调度器做了什么？ -->## 调度器做了什么？
+## 调度器做了什么？
 
 Kubernetes 调度器（kube-scheduler）的核心任务是将待调度的 Pod 分配到最合适的 Node 上。这个过程分为三个阶段：
 
@@ -152,7 +152,7 @@ Kubernetes 调度器（kube-scheduler）的核心任务是将待调度的 Pod �
 
 将 Pod 绑定到得分最高的 Node，写入 [[etcd|etcd]]。如果多个 Node 得分相同，则随机选择。
 
-#<!-- chunk: 基础调度约束 -->## 基础调度约束
+## 基础调度约束
 
 **nodeSelector — 最简单的标签匹配：**
 
@@ -168,6 +168,9 @@ spec:
   - name: app
     image: nginx
 ```
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 给节点打标签
@@ -195,7 +198,7 @@ spec:
 
 > **注意**: `nodeName` 完全绕过调度器，生产环境中**严禁滥用**。如果指定的节点不可用，Pod 将永远无法运行。
 
-#<!-- chunk: 高级调度策略 -->## 高级调度策略
+## 高级调度策略
 
 **节点亲和性 (Node Affinity)：**
 
@@ -342,9 +345,12 @@ spec:
 | `whenUnsatisfiable: DoNotSchedule` | 硬性约束，无法满足则不调度 |
 | `whenUnsatisfiable: ScheduleAnyway` | 软性约束，尽量满足但不强制 |
 
-#<!-- chunk: 污点与容忍 (Taints & Tolerations) -->## 污点与容忍 (Taints & Tolerations)
+## 污点与容忍 (Taints & Tolerations)
 
 **污点 (Taint)**: Node 拒绝 Pod 进来。**容忍 (Toleration)**: Pod 声明可以接受污点。
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
 
 ```bash
 # 给节点添加污点
@@ -376,6 +382,7 @@ spec:
   containers:
   - name: postgres
     image: postgres:15
+
 ```
 
 **污点效果 (Effect)：**
@@ -406,7 +413,7 @@ spec:
 | `key="key", operator="Exists"` | `key=*:*` | 只要 key 存在即匹配 |
 | `operator="Exists"` | `*:*:*` | 容忍所有污点（危险！） |
 
-#<!-- chunk: 优先级与抢占 (Priority & Preemption) -->## 优先级与抢占 (Priority & Preemption)
+## 优先级与抢占 (Priority & Preemption)
 
 当集群资源不足时，高优先级 Pod 可以"抢占"低优先级 Pod 的资源：
 
@@ -460,7 +467,7 @@ spec:
 | `development` | 100000 | 开发测试 |
 | `batch` | 50000 | 批处理任务 |
 
-#<!-- chunk: QoS 类别与资源管理 -->## QoS 类别与资源管理
+## QoS 类别与资源管理
 
 Kubernetes 根据 Pod 的 resources 配置将其分为三个 QoS 级别：
 
@@ -503,7 +510,7 @@ resources:
 
 <!-- chunk: 架构图 -->## 架构图
 
-#<!-- chunk: 调度器工作流程 -->## 调度器工作流程
+## 调度器工作流程
 
 ```mermaid
 graph TB
@@ -527,7 +534,7 @@ graph TB
     style PENDING fill:#f3e5f5,stroke:#7b1fa2
 ```
 
-#<!-- chunk: 调度约束关系图 -->## 调度约束关系图
+## 调度约束关系图
 
 ```mermaid
 graph TB
@@ -563,7 +570,7 @@ graph TB
     style Res fill:#e8f5e9,stroke:#2e7d32
 ```
 
-#<!-- chunk: 优先级抢占流程 -->## 优先级抢占流程
+## 优先级抢占流程
 
 ```mermaid
 sequenceDiagram
@@ -590,7 +597,10 @@ sequenceDiagram
 
 <!-- chunk: 实战演示步骤 -->## 实战演示步骤
 
-#<!-- chunk: 演示 1：理解调度器过滤与打分 -->## 演示 1：理解调度器过滤与打分
+## 演示 1：理解调度器过滤与打分
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 查看节点资源和标签
@@ -642,7 +652,11 @@ kubectl describe pod big-pod | grep -A 10 Events
 #   cpu 4 insufficient on 3 nodes, memory 8Gi insufficient on 2 nodes.
 ```
 
-#<!-- chunk: 演示 2：nodeSelector 与 NodeAffinity -->## 演示 2：nodeSelector 与 NodeAffinity
+## 演示 2：nodeSelector 与 NodeAffinity
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 步骤 1: 给节点打标签
@@ -704,7 +718,10 @@ EOF
 kubectl get pod affinity-demo -o wide
 ```
 
-#<!-- chunk: 演示 3：Pod 反亲和性（防单点问题） -->## 演示 3：Pod 反亲和性（防单点问题）
+## 演示 3：Pod 反亲和性（防单点问题）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 创建强制反亲和的 Deployment
@@ -752,7 +769,12 @@ kubectl get pods -l app=web-ha -o wide
 # 预期: 3 个 Running，2 个 Pending（因为只有 3 个节点）
 ```
 
-#<!-- chunk: 演示 4：污点与容忍（专用节点） -->## 演示 4：污点与容忍（专用节点）
+## 演示 4：污点与容忍（专用节点）
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 步骤 1: 为数据库创建专用节点
@@ -826,7 +848,10 @@ kubectl describe pod no-tolerations-pod | grep -A 5 Events
 # 预期: 0/1 nodes are available: 1 node(s) had taint {dedicated: db}, that the pod didn't tolerate.
 ```
 
-#<!-- chunk: 演示 5：优先级与抢占 -->## 演示 5：优先级与抢占
+## 演示 5：优先级与抢占
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 创建 PriorityClass
@@ -897,7 +922,10 @@ kubectl get pods -o wide
 # critical-pod 应该是 Running，low-priority-job 的 Pod 被终止
 ```
 
-#<!-- chunk: 演示 6：QoS 类别验证 -->## 演示 6：QoS 类别验证
+## 演示 6：QoS 类别验证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建三种 QoS 的 Pod
@@ -955,7 +983,7 @@ kubectl get pod besteffort-pod -o jsonpath='{.status.qosClass}'
 # 预期输出: BestEffort
 ```
 
-#<!-- chunk: 演示 7：调度器性能监控 -->## 演示 7：调度器性能监控
+## 演示 7：调度器性能监控
 
 ```bash
 # 查看调度器指标
@@ -979,9 +1007,14 @@ kubectl get pods -A --field-selector status.phase=Pending
 
 <!-- chunk: 动手实验 -->## 动手实验
 
-#<!-- chunk: 实验 1：构建跨可用区高可用部署 -->## 实验 1：构建跨可用区高可用部署
+## 实验 1：构建跨可用区高可用部署
 
 **目标**：使用 TopologySpreadConstraints 实现均匀跨 AZ 分布
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 1. 给节点打可用区标签（如果还没有）
@@ -1028,9 +1061,13 @@ kubectl cordon <node-1>
 kubectl get pods -l app=ha-app -o wide -w
 ```
 
-#<!-- chunk: 实验 2：调度失败排查演练 -->## 实验 2：调度失败排查演练
+## 实验 2：调度失败排查演练
 
 **目标**：模拟多种调度失败场景并排查
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 场景 1: 资源不足
@@ -1050,7 +1087,7 @@ spec:
 EOF
 kubectl describe pod too-big-pod | grep -A 5 Events
 # 预期: Insufficient cpu, Insufficient memory
-kubectl delete pod too-big-pod --force --grace-period=0
+kubectl delete pod too-big-pod --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 场景 2: nodeSelector 不匹配
 cat <<EOF | kubectl apply -f -
@@ -1067,7 +1104,7 @@ spec:
 EOF
 kubectl describe pod no-match-pod | grep -A 5 Events
 # 预期: Node didn't match Pod's node affinity/selector
-kubectl delete pod no-match-pod --force --grace-period=0
+kubectl delete pod no-match-pod --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 场景 3: PVC 无法挂载
 cat <<EOF | kubectl apply -f -
@@ -1089,38 +1126,38 @@ spec:
 EOF
 kubectl describe pod pvc-pod | grep -A 5 Events
 # 预期: persistentvolumeclaim "non-existent-pvc" not found
-kubectl delete pod pvc-pod --force --grace-period=0
+kubectl delete pod pvc-pod --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
 ---
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
 
-#<!-- chunk: Q1: 为什么 Pod 一直处于 Pending 状态？ -->## Q1: 为什么 Pod 一直处于 Pending 状态？
+## Q1: 为什么 Pod 一直处于 Pending 状态？
 
 **回答**: Pod Pending 意味着调度器无法为其找到合适的 Node。排查步骤：(1) `kubectl describe pod <name>` 查看 Events；(2) 常见原因：资源不足（CPU/Memory requests 超过所有节点剩余）、PVC 无法挂载、nodeSelector/Affinity 不匹配任何节点、所有节点都有不可容忍的 Taint。最常见的原因是资源 requests 过大。可以用 `kubectl describe node <name>` 查看节点的 Allocatable 和已分配资源。
 
-#<!-- chunk: Q2: 反亲和性会不会导致 Pod 无法调度？ -->## Q2: 反亲和性会不会导致 Pod 无法调度？
+## Q2: 反亲和性会不会导致 Pod 无法调度？
 
 **回答**: 会。如果使用 `requiredDuringSchedulingIgnoredDuringExecution`（硬性反亲和），当副本数超过节点数时，多余的 Pod 将无法调度。解决方案：(1) 使用 `preferredDuringSchedulingIgnoredDuringExecution`（软性反亲和），不满足也能调度；(2) 确保集群有足够的节点容纳所有副本；(3) 配合集群自动扩缩（Cluster Autoscaler）；(4) 使用 TopologySpreadConstraints 替代反亲和性，控制更精细。
 
-#<!-- chunk: Q3: 资源的 requests 和 limits 应该如何设置？ -->## Q3: 资源的 requests 和 limits 应该如何设置？
+## Q3: 资源的 requests 和 limits 应该如何设置？
 
 **回答**: requests 决定调度，limits 决定运行上限。最佳实践：(1) **requests 设置为 P99 使用量**（确保调度到有足够资源的节点）；(2) **limits 设置为 requests 的 1.5-2 倍**（允许突发流量）；(3) 关键业务使用 Guaranteed QoS（requests == limits）。监控 `resource_request` 和 `resource_usage` 的差距，差距越大说明资源浪费越严重。内存的 limits 不建议设置过大，因为内存是不可压缩资源，超限会被 OOMKill。
 
-#<!-- chunk: Q4: 如何实现跨可用区高可用部署？ -->## Q4: 如何实现跨可用区高可用部署？
+## Q4: 如何实现跨可用区高可用部署？
 
-**回答**: 使用 Pod 反亲和性或 TopologySpreadConstraints 配合 topology key：(1) `requiredDuringSchedulingIgnoredDuringExecution` + `topology.kubernetes.io/zone`：强制跨 AZ 分散；(2) TopologySpreadConstraints + `maxSkew: 1`：更均匀的分布；(3) 结合 Pod Disruption Budget（PDB）限制同时不可用的 Pod 数量；(4) 确保每个 AZ 有足够的节点资源；(5) 使用拓扑感知的 [[Service|Service]] 流量路由（[[Topology Aware Routing|Topology Aware Routing]]）。
+**回答**: 使用 Pod 反亲和性或 TopologySpreadConstraints 配合 topology key：(1) `requiredDuringSchedulingIgnoredDuringExecution` + `topology.kubernetes.io/zone`：强制跨 AZ 分散；(2) TopologySpreadConstraints + `maxSkew: 1`：更均匀的分布；(3) 结合 Pod Disruption Budget（PDB）限制同时不可用的 Pod 数量；(4) 确保每个 AZ 有足够的节点资源；(5) 使用拓扑感知的 [[Service|Service]] 流量路由（[[domain-17-system-foundation/topic-dictionary/networking/topology-aware-routing.md|Topology Aware Routing]]）。
 
-#<!-- chunk: Q5: Descheduler 是什么？什么时候需要？ -->## Q5: Descheduler 是什么？什么时候需要？
+## Q5: Descheduler 是什么？什么时候需要？
 
 **回答**: Descheduler 是一个重调度工具，解决集群长时间运行后的负载不均问题。调度器只在 Pod 创建时做一次调度决策，不会因为后续的资源变化而重新调度已有 Pod。Descheduler 定期检查并根据策略驱逐不平衡的 Pod（如节点资源使用率差异过大、违反反亲和性、Pod 拓扑分布不均等）。推荐在 100+ 节点的集群中部署。支持的策略：RemoveDuplicates、LowNodeUtilization、HighNodeUtilization、RemovePodsViolatingAntiAffinity 等。
 
-#<!-- chunk: Q6: 如何调试调度失败的原因？ -->## Q6: 如何调试调度失败的原因？
+## Q6: 如何调试调度失败的原因？
 
 **回答**: (1) `kubectl describe pod <name>` 查看 Events 中的调度失败原因；(2) `kubectl get events --field-selector involvedObject.name=<pod-name>`；(3) 查看调度器日志：`kubectl logs -n kube-system kube-scheduler-<master>`；(4) 使用 `kubectl debug` 创建调试 Pod 检查节点状态；(5) 检查 `kubectl describe node <name>` 中的 Allocatable 和 Allocated resources；(6) 使用 `kubectl get pods -A --field-selector status.phase=Pending` 批量查看 Pending Pod。
 
-#<!-- chunk: Q7: 如何实现"尽量在同一节点"的亲和调度？ -->## Q7: 如何实现"尽量在同一节点"的亲和调度？
+## Q7: 如何实现"尽量在同一节点"的亲和调度？
 
 **回答**: 使用 `podAffinity` + `preferredDuringSchedulingIgnoredDuringExecution`。例如 Web 服务和缓存服务放在同一节点以减少网络延迟：
 
@@ -1134,19 +1171,20 @@ affinity:
           matchLabels:
             app: cache
         topologyKey: kubernetes.io/hostname
+
 ```
 
 注意使用 `preferred` 而非 `required`，因为硬性约束可能导致调度失败。
 
-#<!-- chunk: Q8: 调度器的性能瓶颈在哪里？ -->## Q8: 调度器的性能瓶颈在哪里？
+## Q8: 调度器的性能瓶颈在哪里？
 
 **回答**: 在大规模集群（5000+ 节点、150000+ Pod）中，调度器的瓶颈在：(1) 过滤阶段的 Node 数量（O(n) 遍历所有节点）；(2) 打分阶段的计算复杂度（每个 Node 执行所有打分器）；(3) 绑定阶段的 API Server 写入延迟。Kubernetes 通过调度缓存（Scheduler Cache）和绑定速率限制来优化。v1.27+ 引入了 Scheduling Framework，允许通过插件扩展调度逻辑。建议开启 `percentageOfNodesToScore` 参数，在大规模集群中只对部分节点打分。
 
-#<!-- chunk: Q9: 如何处理节点维护期间的调度？ -->## Q9: 如何处理节点维护期间的调度？
+## Q9: 如何处理节点维护期间的调度？
 
 **回答**: (1) `kubectl cordon <node>`：标记节点为不可调度，新 Pod 不会被调度到该节点，已有 Pod 不受影响；(2) `kubectl drain <node> --ignore-daemonsets --delete-emptydir-data`：驱逐节点上的所有 Pod（DaemonSet 和 emptyDir 除外）；(3) 被驱逐的 Pod 由 Deployment/ReplicaSet 控制器在其他节点重建；(4) 确保配置了 PodDisruptionBudget（PDB）限制同时驱逐的数量；(5) 维护完成后 `kubectl uncordon <node>` 恢复调度。
 
-#<!-- chunk: Q10: 如何监控调度器的健康状况？ -->## Q10: 如何监控调度器的健康状况？
+## Q10: 如何监控调度器的健康状况？
 
 **回答**: 关键指标：`scheduler_schedule_attempts_total{result="error"}`（调度错误率）、`scheduler_scheduling_algorithm_duration_seconds`（调度耗时，P99 应 < 100ms）、`scheduler_pending_pods`（Pending Pod 数量，持续增长需要关注）、`scheduler_preemption_attempts_total`（抢占频率过高需要关注告警）。建议在 Grafana 中创建调度器专用面板。
 
@@ -1154,7 +1192,7 @@ affinity:
 
 <!-- chunk: 要点总结 -->## 要点总结
 
-#<!-- chunk: 调度策略速查表 -->## 调度策略速查表
+## 调度策略速查表
 
 | 需求 | 方案 | 复杂度 | 生产推荐 |
 |------|------|--------|---------|
@@ -1167,7 +1205,7 @@ affinity:
 | 资源不足时保证 | PriorityClass + Preemption | 高 | 必须 |
 | 长期负载均衡 | Descheduler | 高 | 大集群推荐 |
 
-#<!-- chunk: 资源配置速查表 -->## 资源配置速查表
+## 资源配置速查表
 
 | 应用类型 | CPU requests | CPU limits | Memory requests | Memory limits | QoS |
 |---------|-------------|------------|----------------|--------------|-----|
@@ -1176,7 +1214,7 @@ affinity:
 | 批处理 | 平均值 | P99 × 2 | 平均值 × 1.5 | 平均值 × 3 | Burstable |
 | 开发测试 | 100m | 500m | 128Mi | 512Mi | Burstable |
 
-#<!-- chunk: SRE 运维红线 -->## SRE 运维红线
+## SRE 运维红线
 
 | 红线 | 说明 | 违反后果 |
 |------|------|---------|
@@ -1192,7 +1230,7 @@ affinity:
 
 <!-- chunk: 延伸阅读 -->## 延伸阅读
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 
 | 资源 | 链接 | 说明 |
 |------|------|------|
@@ -1202,7 +1240,7 @@ affinity:
 | Descheduler | https://github.com/kubernetes-sigs/descheduler | 重调度器 |
 | Pod 拓扑分布 | https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/ | 拓扑约束 |
 
-#<!-- chunk: 关联培训专题 -->## 关联培训专题
+## 关联培训专题
 
 - `kubernetes-architecture-fundamentals-presentation.md` — 控制平面与调度器的关系
 - `kubernetes-workload-presentation.md` — Deployment/StatefulSet 的调度需求
@@ -1237,3 +1275,5 @@ affinity:
 - kubernetes-observability-presentation
 - kubernetes-security-rbac-presentation
 - kubernetes-service-presentation
+
+```

@@ -160,6 +160,9 @@ spec:
     image: nginx
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 给节点打标签
 kubectl label node <node-name> disktype=ssd
@@ -337,6 +340,9 @@ spec:
 
 **污点 (Taint)**: Node 拒绝 Pod 进来。**容忍 (Toleration)**: Pod 声明可以接受污点。
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+
 ```bash
 # 给节点添加污点
 kubectl taint nodes worker-1 dedicated=db:NoSchedule
@@ -367,6 +373,7 @@ spec:
   containers:
   - name: postgres
     image: postgres:15
+
 ```
 
 **污点效果 (Effect)：**
@@ -402,7 +409,7 @@ spec:
 当集群资源不足时，高优先级 Pod 可以"抢占"低优先级 Pod 的资源：
 
 ```yaml
-apiVersion: scheduling.[[entities/kubernetes|k8s]].io/v1
+apiVersion: scheduling.[[entities/kubernetes.md|k8s]].io/v1
 kind: PriorityClass
 metadata:
   name: high-priority
@@ -583,6 +590,9 @@ sequenceDiagram
 
 ### 演示 1：理解调度器过滤与打分
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 步骤 1: 查看节点资源和标签
 kubectl get nodes -o wide
@@ -634,6 +644,10 @@ kubectl describe pod big-pod | grep -A 10 Events
 ```
 
 ### 演示 2：nodeSelector 与 NodeAffinity
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 步骤 1: 给节点打标签
@@ -697,6 +711,9 @@ kubectl get pod affinity-demo -o wide
 
 ### 演示 3：Pod 反亲和性（防单点问题）
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 步骤 1: 创建强制反亲和的 Deployment
 cat <<EOF | kubectl apply -f -
@@ -744,6 +761,11 @@ kubectl get pods -l app=web-ha -o wide
 ```
 
 ### 演示 4：污点与容忍（专用节点）
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 步骤 1: 为数据库创建专用节点
@@ -819,6 +841,9 @@ kubectl describe pod no-tolerations-pod | grep -A 5 Events
 
 ### 演示 5：优先级与抢占
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 步骤 1: 创建 PriorityClass
 cat <<EOF | kubectl apply -f -
@@ -889,6 +914,9 @@ kubectl get pods -o wide
 ```
 
 ### 演示 6：QoS 类别验证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建三种 QoS 的 Pod
@@ -974,6 +1002,11 @@ kubectl get pods -A --field-selector status.phase=Pending
 
 **目标**：使用 TopologySpreadConstraints 实现均匀跨 AZ 分布
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 1. 给节点打可用区标签（如果还没有）
 kubectl label node <node-1> topology.kubernetes.io/zone=cn-hangzhou-a
@@ -1023,6 +1056,10 @@ kubectl get pods -l app=ha-app -o wide -w
 
 **目标**：模拟多种调度失败场景并排查
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 场景 1: 资源不足
 cat <<EOF | kubectl apply -f -
@@ -1041,7 +1078,7 @@ spec:
 EOF
 kubectl describe pod too-big-pod | grep -A 5 Events
 # 预期: Insufficient cpu, Insufficient memory
-kubectl delete pod too-big-pod --force --grace-period=0
+kubectl delete pod too-big-pod --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 场景 2: nodeSelector 不匹配
 cat <<EOF | kubectl apply -f -
@@ -1058,7 +1095,7 @@ spec:
 EOF
 kubectl describe pod no-match-pod | grep -A 5 Events
 # 预期: Node didn't match Pod's node affinity/selector
-kubectl delete pod no-match-pod --force --grace-period=0
+kubectl delete pod no-match-pod --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 场景 3: PVC 无法挂载
 cat <<EOF | kubectl apply -f -
@@ -1080,7 +1117,7 @@ spec:
 EOF
 kubectl describe pod pvc-pod | grep -A 5 Events
 # 预期: persistentvolumeclaim "non-existent-pvc" not found
-kubectl delete pod pvc-pod --force --grace-period=0
+kubectl delete pod pvc-pod --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
 ---
@@ -1125,6 +1162,7 @@ affinity:
           matchLabels:
             app: cache
         topologyKey: kubernetes.io/hostname
+
 ```
 
 注意使用 `preferred` 而非 `required`，因为硬性约束可能导致调度失败。
@@ -1204,3 +1242,5 @@ affinity:
 ---
 
 > **Kusheet Project** | 作者: Allen Galler (allengaller@gmail.com)
+
+```

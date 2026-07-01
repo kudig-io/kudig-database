@@ -95,6 +95,12 @@ TOOLS.md 与 SOUL.md 构成**双重安全检查**：SOUL.md 约束"绝不能做�
 
 ### 1.1 四级权限模型
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 TOOLS.md 四级权限模型:
 
@@ -114,7 +120,7 @@ Level 2: 高风险（需二次确认 + 影响评估后执行）
 Level 3: 禁止（绝对不可执行）
      kubectl delete / cordon / taint --effect=NoExecute
      etcdctl del / defrag
-     helm uninstall
+     helm uninstall  # ⚠️ 删除 release 及关联资源
 
 原则: 默认只授权 Level 0
       Level 1+ 需在 TOOLS.md 中显式声明
@@ -129,6 +135,9 @@ Level 3: 禁止（绝对不可执行）
 | 权限最低 | 默认只读，写操作逐个授权 | 全部授权写权限 → 误操作风险极高 |
 | 工具组合 | 预定义常见诊断的工具链 | 无指导 → Agent 随机组合工具，效率低 |
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 Vercel 教训:
   Before: 15 个工具注册 → Agent 准确率 40%
@@ -142,6 +151,9 @@ K8S Agent 推荐:
 ```
 
 ### 1.3 工具使用优先级
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
 诊断场景的工具调用金字塔:
@@ -240,6 +252,9 @@ Agent 按模板顺序执行，避免遗漏关键步骤
 ```
 
 ### 3.2 案例：权限检查拦截
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```
 场景: Agent 判断需要重启 Deployment 来解决问题
@@ -482,17 +497,17 @@ TOOLS.md 配置验证:
 ## Obsidian 相关文档
 
 - topic-ai-agent MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 
@@ -500,3 +515,5 @@ TOOLS.md 配置验证:
 - 46-openclaw-agents-mechanism
 - 48-openclaw-skill-mechanism
 - 49-openclaw-memory-mechanism
+
+```

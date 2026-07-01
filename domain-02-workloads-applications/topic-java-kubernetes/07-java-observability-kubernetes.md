@@ -1294,6 +1294,9 @@ spec:
 
 ### 6.3 端到端可观测性验证脚本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 set -euo pipefail

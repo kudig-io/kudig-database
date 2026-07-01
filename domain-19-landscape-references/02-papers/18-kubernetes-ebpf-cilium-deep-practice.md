@@ -74,7 +74,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. eBPF技术基础 -->## 1. eBPF技术基础
 
-#<!-- chunk: 1.1 eBPF内核架构 -->## 1.1 eBPF内核架构
+## 1.1 eBPF内核架构
 
 ```yaml
 eBPF核心概念:
@@ -114,7 +114,7 @@ eBPF核心概念:
     最佳: 6.1+ (最新helper和Map类型)
 ```
 
-#<!-- chunk: 1.2 eBPF在Kubernetes的挂载点 -->## 1.2 eBPF在Kubernetes的挂载点
+## 1.2 eBPF在Kubernetes的挂载点
 
 ```mermaid
 graph TB
@@ -145,7 +145,7 @@ graph TB
 
 <!-- chunk: 2. Cilium架构深度解析 -->## 2. Cilium架构深度解析
 
-#<!-- chunk: 2.1 Cilium组件架构 -->## 2.1 Cilium组件架构
+## 2.1 Cilium组件架构
 
 ```mermaid
 graph TB
@@ -184,7 +184,7 @@ graph TB
     A --> F
 ```
 
-#<!-- chunk: 2.2 Cilium替代kube-proxy -->## 2.2 Cilium替代kube-proxy
+## 2.2 Cilium替代kube-proxy
 
 ```yaml
 # Cilium完全替代kube-proxy的配置
@@ -243,7 +243,7 @@ data:
   | Maglev哈希 | 否 | 是 | 是 |
 ```
 
-#<!-- chunk: 2.3 从传统CNI迁移到Cilium -->## 2.3 从传统CNI迁移到Cilium
+## 2.3 从传统CNI迁移到Cilium
 
 ```yaml
 迁移路径:
@@ -275,7 +275,7 @@ data:
 
 <!-- chunk: 3. Cilium网络策略实践 -->## 3. Cilium网络策略实践
 
-#<!-- chunk: 3.1 CiliumNetworkPolicy vs Kubernetes [[NetworkPolicy|NetworkPolicy]] -->## 3.1 CiliumNetworkPolicy vs Kubernetes NetworkPolicy
+## 3.1 CiliumNetworkPolicy vs Kubernetes NetworkPolicy
 
 ```yaml
 # Kubernetes标准NetworkPolicy(L3/L4)
@@ -354,7 +354,7 @@ spec:
                 path: "/payment.PaymentService/GetStatus"
 ```
 
-#<!-- chunk: 3.2 CiliumClusterwideNetworkPolicy -->## 3.2 CiliumClusterwideNetworkPolicy
+## 3.2 CiliumClusterwideNetworkPolicy
 
 ```yaml
 # 集群级默认拒绝策略
@@ -405,7 +405,7 @@ spec:
               protocol: TCP
 ```
 
-#<!-- chunk: 3.3 ClusterMesh跨集群策略 -->## 3.3 ClusterMesh跨集群策略
+## 3.3 ClusterMesh跨集群策略
 
 ```yaml
 # Cilium ClusterMesh配置
@@ -453,7 +453,7 @@ spec:
 
 <!-- chunk: 4. Tetragon运行时安全 -->## 4. Tetragon运行时安全
 
-#<!-- chunk: 4.1 Tetragon架构 -->## 4.1 Tetragon架构
+## 4.1 Tetragon架构
 
 ```mermaid
 graph TB
@@ -481,7 +481,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: 4.2 TracingPolicy配置 -->## 4.2 TracingPolicy配置
+## 4.2 TracingPolicy配置
 
 ```yaml
 # Tetragon安装
@@ -600,7 +600,7 @@ spec:
             - action: Sigkill
 ```
 
-#<!-- chunk: 4.3 Tetragon vs Falco对比 -->## 4.3 Tetragon vs Falco对比
+## 4.3 Tetragon vs Falco对比
 
 ```yaml
 运行时安全工具对比:
@@ -624,7 +624,7 @@ spec:
 
 <!-- chunk: 5. Hubble网络可观测性 -->## 5. Hubble网络可观测性
 
-#<!-- chunk: 5.1 Hubble架构与部署 -->## 5.1 Hubble架构与部署
+## 5.1 Hubble架构与部署
 
 ```yaml
 # Cilium + Hubble 启用配置
@@ -717,7 +717,7 @@ spec:
             - containerPort: 8090
 ```
 
-#<!-- chunk: 5.2 Hubble观测能力 -->## 5.2 Hubble观测能力
+## 5.2 Hubble观测能力
 
 ```yaml
 Hubble可观测性层级:
@@ -768,7 +768,7 @@ Hubble可观测性层级:
     hubble observe --to-pod production/api-server --verdict DENIED
 ```
 
-#<!-- chunk: 5.3 Hubble Prometheus指标 -->## 5.3 Hubble Prometheus指标
+## 5.3 Hubble Prometheus指标
 
 ```yaml
 # Hubble关键Prometheus指标
@@ -832,7 +832,7 @@ spec:
 
 <!-- chunk: 6. 无Sidecar服务网格 -->## 6. 无Sidecar服务网格
 
-#<!-- chunk: 6.1 Cilium Service Mesh架构 -->## 6.1 Cilium Service Mesh架构
+## 6.1 Cilium Service Mesh架构
 
 ```yaml
 Cilium Service Mesh vs 传统Sidecar模式:
@@ -869,7 +869,7 @@ Cilium Service Mesh vs 传统Sidecar模式:
     生态兼容性: Istio (Envoy生态最完整)
 ```
 
-#<!-- chunk: 6.2 Cilium mTLS配置 -->## 6.2 Cilium mTLS配置
+## 6.2 Cilium mTLS配置
 
 ```yaml
 # Cilium Service Mesh mTLS配置
@@ -901,7 +901,7 @@ spec:
 
 <!-- chunk: 7. 带宽管理与QoS -->## 7. 带宽管理与QoS
 
-#<!-- chunk: 7.1 Pod带宽限速 -->## 7.1 Pod带宽限速
+## 7.1 Pod带宽限速
 
 ```yaml
 # Cilium Bandwidth Manager配置
@@ -945,7 +945,7 @@ spec:
         - "0.0.0.0/0"
 ```
 
-#<!-- chunk: 7.2 BBR拥塞控制 -->## 7.2 BBR拥塞控制
+## 7.2 BBR拥塞控制
 
 ```yaml
 # Cilium BBR拥塞控制(高带宽长延迟场景)
@@ -967,7 +967,7 @@ data:
 
 <!-- chunk: 8. 最佳实践检查清单 -->## 8. 最佳实践检查清单
 
-#<!-- chunk: 8.1 Cilium部署检查 -->## 8.1 Cilium部署检查
+## 8.1 Cilium部署检查
 
 ```yaml
 Cilium生产部署检查清单:
@@ -1010,7 +1010,7 @@ Cilium生产部署检查清单:
     ☐ DNS解析正常
 ```
 
-#<!-- chunk: 8.2 性能调优 -->## 8.2 性能调优
+## 8.2 性能调优
 
 ```yaml
 Cilium性能调优要点:
@@ -1037,7 +1037,7 @@ Cilium性能调优要点:
 
 <!-- chunk: 9. 2026展望 -->## 9. 2026展望
 
-#<!-- chunk: 9.1 eBPF技术趋势 -->## 9.1 eBPF技术趋势
+## 9.1 eBPF技术趋势
 
 ```yaml
 eBPF生态发展趋势(2026-2027):
@@ -1080,7 +1080,7 @@ eBPF生态发展趋势(2026-2027):
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers KUDIG Database — Global MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...

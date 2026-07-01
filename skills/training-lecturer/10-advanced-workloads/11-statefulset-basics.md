@@ -90,7 +90,7 @@ Deployment 管理的是无状态应用：
 ```
 【场景】
 
-你需要在 [[entities/kubernetes|k8s]] 上部署 MySQL 数据库集群：
+你需要在 [[entities/kubernetes.md|k8s]] 上部署 MySQL 数据库集群：
 • 1 个主库（写）
 • 2 个从库（读）
 
@@ -403,6 +403,9 @@ PVC 无法绑定（存储不足、StorageClass 不存在等）。
 
 ### 6.2 StatefulSet 无法更新
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 【排查步骤】
 
@@ -541,6 +544,10 @@ StatefulSet 确保：
 ---
 
 ## 8. 总结
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
 【命令速查】

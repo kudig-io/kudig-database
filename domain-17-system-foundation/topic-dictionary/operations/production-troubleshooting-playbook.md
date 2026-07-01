@@ -39,6 +39,7 @@ prerequisites:
 - mysql-basics
 - logging-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 16 - 生产环境故障排查剧本
@@ -360,6 +361,12 @@ troubleshootingToolbox:
 ```
 
 **工具使用速查卡**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 #!/bin/bash
@@ -786,6 +793,9 @@ YAML
 
 **内存泄漏诊断（Java应用示例）**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # java-memory-leak-diagnosis.sh - Java应用内存泄漏诊断
@@ -907,6 +917,10 @@ kubectl get pods --all-namespaces -o json | \
 DNS就像电话簿，服务名(my-service)是姓名，IP地址是电话号码。DNS解析失败就像查不到电话号码，自然无法拨打。
 
 **问题现象**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 容器内无法解析服务名
 $ kubectl exec -it app-pod -- nslookup my-service
@@ -1216,6 +1230,10 @@ wget: bad address 'my-service'
 ```
 
 **诊断脚本**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # service-connectivity-troubleshooting.sh - 服务连通性诊断
@@ -1300,6 +1318,10 @@ kubectl run debug-pod --image=nicolaka/netshoot --rm -it --restart=Never -- cat 
 #### 剧本6：NetworkPolicy 阻断流量
 
 **诊断脚本**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # network-policy-troubleshooting.sh - 网络策略诊断
@@ -1415,6 +1437,10 @@ esac
 #### 剧本8：存储性能下降
 
 **诊断脚本**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # storage-performance-troubleshooting.sh - 存储性能诊断
@@ -1641,6 +1667,9 @@ Events:
 
 **快速诊断流程**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # imagepull-troubleshooting.sh - ImagePullBackOff完整诊断
@@ -1803,6 +1832,10 @@ my-app-7d5b7c9f8c-def56        0/1     Pending             0          5m
 ```
 
 **综合诊断脚本**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # pod-troubleshooting.sh - Pod问题综合诊断
@@ -1860,6 +1893,10 @@ kubectl exec $POD_NAME -n $NAMESPACE -- df -h
 #### 剧本10：应用响应慢
 
 **诊断脚本**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # application-performance-troubleshooting.sh - 应用性能诊断
@@ -1962,6 +1999,10 @@ kubectl run net-test --image=busybox --rm -it --restart=Never -- wget -qO- --tim
 #### 剧本12：Pod 调度失败
 
 **诊断脚本**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # scheduler-troubleshooting.sh - 调度器故障诊断
@@ -2204,6 +2245,10 @@ app-pod    0/1     OOMKilled   3          25m
 
 **快速诊断流程**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 #!/bin/bash
 # memory-leak-diagnosis.sh - 内存泄漏诊断
@@ -2428,6 +2473,10 @@ kubectl run network-test --image=praqma/network-multitool --rm -it --restart=Nev
 #### 剧本14：监控指标异常
 
 **诊断脚本**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # monitoring-metrics-troubleshooting.sh - 监控指标异常诊断
@@ -2512,6 +2561,9 @@ hypotheses:
 
 **4. 假设验证过程**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 验证H1: 流量激增
 $ kubectl top pods -n production -l app=order-service --use-protocol-buffers
@@ -2550,6 +2602,10 @@ rootCause:
 ```
 
 **6. 紧急修复**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 #!/bin/bash
 # 紧急修复步骤
@@ -2834,6 +2890,10 @@ kubectl run nettest --image=nicolaka/netshoot --rm -it -- bash
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级
 
+## 参考链接
+
+- [Production Troubleshooting Playbook]()
+
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

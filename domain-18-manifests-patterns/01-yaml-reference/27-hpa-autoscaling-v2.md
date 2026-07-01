@@ -76,7 +76,7 @@ created: "2026-05-23"
 
 <!-- chunk: 概述 -->## 概述
 
-#<!-- chunk: HorizontalPodAutoscaler v2 -->## HorizontalPodAutoscaler v2
+## HorizontalPodAutoscaler v2
 
 HPA v2 是 Kubernetes 核心自动扩缩容机制，支持多种指标类型和精细化行为控制。
 
@@ -96,7 +96,7 @@ HPA v2 是 Kubernetes 核心自动扩缩容机制，支持多种指标类型和�
 
 <!-- chunk: 完整字段说明 -->## 完整字段说明
 
-#<!-- chunk: 基础结构 -->## 基础结构
+## 基础结构
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -176,9 +176,9 @@ status:
 
 <!-- chunk: 指标类型详解 -->## 指标类型详解
 
-#<!-- chunk: 1. Resource 指标 (CPU/Memory) -->## 1. Resource 指标 (CPU/Memory)
+## 1. Resource 指标 (CPU/Memory)
 
-##<!-- chunk: CPU 使用率扩缩容 -->## CPU 使用率扩缩容
+## CPU 使用率扩缩容
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -208,7 +208,7 @@ averageUtilization = (当前 CPU 使用量 / CPU Request) * 100
 目标值: 所有 Pod 的平均 CPU 使用率不超过 70%
 ```
 
-##<!-- chunk: Memory 绝对值扩缩容 -->## Memory 绝对值扩缩容
+## Memory 绝对值扩缩容
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -236,7 +236,7 @@ spec:
 - `Utilization`: 适合 CPU（通常设置 60-80%）
 - `AverageValue`: 适合 Memory（避免触碰 Limit 导致 OOMKilled）
 
-#<!-- chunk: 2. ContainerResource 指标 (v1.27+) -->## 2. ContainerResource 指标 (v1.27+)
+## 2. ContainerResource 指标 (v1.27+)
 
 针对特定容器的资源指标（适用于 Sidecar 场景）。
 
@@ -268,7 +268,7 @@ spec:
 - **多容器 Pod**: 仅基于主容器指标扩缩容
 - **[[DaemonSet|Daemonset]] + Sidecar**: 精确监控业务容器
 
-#<!-- chunk: 3. Pods 自定义指标 -->## 3. Pods 自定义指标
+## 3. Pods 自定义指标
 
 基于 Pod 自身暴露的业务指标（需配合 Metrics Adapter）。
 
@@ -317,7 +317,7 @@ rules:
   metricsQuery: 'rate(<<.Series>>{<<.LabelMatchers>>}[1m])'
 ```
 
-#<!-- chunk: 4. Object 指标 -->## 4. Object 指标
+## 4. Object 指标
 
 基于集群中其他对象的指标（如 Ingress、Service）。
 
@@ -358,7 +358,7 @@ desiredReplicas = currentReplicas * (currentMetricValue / targetValue)
 desiredReplicas = 5 * (15000 / 10000) = 7.5 → 向上取整 8
 ```
 
-#<!-- chunk: 5. External 指标 -->## 5. External 指标
+## 5. External 指标
 
 基于集群外部系统的指标（如云监控、消息队列）。
 
@@ -394,7 +394,7 @@ spec:
 - **RabbitMQ**: 队列深度
 - **Redis**: Key 数量、内存使用
 
-#<!-- chunk: 6. 多指标组合 -->## 6. 多指标组合
+## 6. 多指标组合
 
 多个指标同时生效，取**最大副本数**。
 
@@ -464,7 +464,7 @@ spec:
 
 <!-- chunk: 扩缩容行为控制 -->## 扩缩容行为控制
 
-#<!-- chunk: behavior 字段结构 -->## behavior 字段结构
+## behavior 字段结构
 
 > **Feature Status**: v1.18 Alpha → v1.23 GA
 
@@ -504,9 +504,9 @@ spec:
         periodSeconds: 60
 ```
 
-#<!-- chunk: 扩容行为配置 -->## 扩容行为配置
+## 扩容行为配置
 
-##<!-- chunk: 快速扩容策略（处理流量突增） -->## 快速扩容策略（处理流量突增）
+## 快速扩容策略（处理流量突增）
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -557,7 +557,7 @@ spec:
 60s:  26 → 36 (限制为 +50% 或 +10, 取 Max = +10)
 ```
 
-##<!-- chunk: 渐进式扩容（避免过度扩容） -->## 渐进式扩容（避免过度扩容）
+## 渐进式扩容（避免过度扩容）
 
 ```yaml
 behavior:
@@ -573,9 +573,9 @@ behavior:
       periodSeconds: 30
 ```
 
-#<!-- chunk: 缩容行为配置 -->## 缩容行为配置
+## 缩容行为配置
 
-##<!-- chunk: 保守缩容（避免抖动） -->## 保守缩容（避免抖动）
+## 保守缩容（避免抖动）
 
 ```yaml
 behavior:
@@ -598,7 +598,7 @@ behavior:
 - 缩容时每 2 分钟最多减少 1 个 Pod
 - 避免因短暂流量下降导致的频繁缩容
 
-##<!-- chunk: 禁用缩容（仅扩容不缩容） -->## 禁用缩容（仅扩容不缩容）
+## 禁用缩容（仅扩容不缩容）
 
 ```yaml
 behavior:
@@ -617,7 +617,7 @@ behavior:
 - 防止缓存失效（Pod 缩容导致缓存丢失）
 - 成本优化窗口（仅在特定时间允许缩容）
 
-#<!-- chunk: 不同时间段差异化策略 -->## 不同时间段差异化策略
+## 不同时间段差异化策略
 
 ```yaml
 # 工作时间: 快速扩容 + 保守缩容
@@ -664,7 +664,7 @@ spec:
 
 > **注意**: VPA 是社区项目，非 Kubernetes 核心组件
 
-#<!-- chunk: VPA vs HPA 对比 -->## VPA vs HPA 对比
+## VPA vs HPA 对比
 
 | 维度           | HPA (水平扩缩容)          | VPA (垂直扩缩容)          |
 |----------------|---------------------------|---------------------------|
@@ -675,7 +675,7 @@ spec:
 | **成本优化**   | 中等                      | 高 (精确资源分配)         |
 | **兼容性**     | 原生支持                  | 需安装 VPA 组件           |
 
-#<!-- chunk: VPA 基础配置 -->## VPA 基础配置
+## VPA 基础配置
 
 **安装 VPA** (社区项目):
 ```bash
@@ -730,7 +730,7 @@ spec:
 - **Recreate**: 主动重启 Pod 更新资源
 - **Auto**: 在 Pod 重启时自动更新（推荐）
 
-#<!-- chunk: HPA + VPA 联合使用 -->## HPA + VPA 联合使用
+## HPA + VPA 联合使用
 
 > **警告**: HPA 和 VPA 同时作用于 CPU/Memory 会冲突！
 
@@ -789,7 +789,7 @@ spec:
 
 <!-- chunk: 内部原理 -->## 内部原理
 
-#<!-- chunk: HPA 控制循环 -->## HPA 控制循环
+## HPA 控制循环
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -812,9 +812,9 @@ spec:
 └─────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 计算算法 -->## 计算算法
+## 计算算法
 
-##<!-- chunk: 基础公式 -->## 基础公式
+## 基础公式
 
 ```
 desiredReplicas = ceil[currentReplicas * (currentMetricValue / targetMetricValue)]
@@ -834,7 +834,7 @@ desiredReplicas = ceil[3 * (900 / 500)]
                 = 6  # 需要 6 个副本
 ```
 
-##<!-- chunk: 容忍度机制 -->## 容忍度机制
+## 容忍度机制
 
 避免微小波动导致频繁扩缩容:
 
@@ -858,7 +858,7 @@ if abs(currentMetricValue - targetMetricValue) / targetMetricValue < tolerance {
 - CPU 80%: 触发扩容
 ```
 
-##<!-- chunk: 多指标聚合 -->## 多指标聚合
+## 多指标聚合
 
 ```go
 var maxReplicas int32
@@ -873,9 +873,9 @@ for _, metric := range hpa.Spec.Metrics {
 return min(maxReplicas, hpa.Spec.MaxReplicas)
 ```
 
-#<!-- chunk: 指标采集链路 -->## 指标采集链路
+## 指标采集链路
 
-##<!-- chunk: 架构图 -->## 架构图
+## 架构图
 
 ```
 ┌───────────────┐
@@ -903,7 +903,7 @@ return min(maxReplicas, hpa.Spec.MaxReplicas)
 └───────────────────────────┘
 ```
 
-##<!-- chunk: Metrics API 分层 -->## Metrics API 分层
+## Metrics API 分层
 
 ```yaml
 # 1. Resource Metrics API (核心指标)
@@ -922,7 +922,7 @@ GET /apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/http_requests_
 GET /apis/external.metrics.k8s.io/v1beta1/namespaces/default/sqs_queue_messages_visible
 ```
 
-#<!-- chunk: 关键参数调优 -->## 关键参数调优
+## 关键参数调优
 
 ```yaml
 # kube-controller-manager 参数
@@ -937,7 +937,7 @@ GET /apis/external.metrics.k8s.io/v1beta1/namespaces/default/sqs_queue_messages_
 
 <!-- chunk: 生产案例 -->## 生产案例
 
-#<!-- chunk: 案例1: 电商平台 - CPU 扩缩容 -->## 案例1: 电商平台 - CPU 扩缩容
+## 案例1: 电商平台 - CPU 扩缩容
 
 **场景**: 电商 API 服务，处理用户请求，CPU 密集型。
 
@@ -1037,7 +1037,7 @@ kubectl get hpa ecommerce-api-hpa --watch
 kubectl describe hpa ecommerce-api-hpa
 ```
 
-#<!-- chunk: 案例2: 消息队列消费者 - 外部指标扩缩容 -->## 案例2: 消息队列消费者 - 外部指标扩缩容
+## 案例2: 消息队列消费者 - 外部指标扩缩容
 
 **场景**: Kafka 消费者服务，根据消费延迟动态扩缩容。
 
@@ -1126,7 +1126,7 @@ kubectl get hpa kafka-consumer-hpa
 # desiredReplicas = 500 / 1000 = 0.5 → 3 (minReplicas)
 ```
 
-#<!-- chunk: 案例3: 在线视频服务 - 多指标混合扩缩容 -->## 案例3: 在线视频服务 - 多指标混合扩缩容
+## 案例3: 在线视频服务 - 多指标混合扩缩容
 
 **场景**: 视频转码服务，同时考虑 CPU、内存、队列长度。
 
@@ -1218,7 +1218,7 @@ spec:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 1. 合理设置资源请求 -->## 1. 合理设置资源请求
+## 1. 合理设置资源请求
 
 **错误示例** (未设置 requests):
 
@@ -1248,7 +1248,7 @@ containers:
       memory: "4Gi"
 ```
 
-#<!-- chunk: 2. 避免 HPA 与手动扩缩容冲突 -->## 2. 避免 HPA 与手动扩缩容冲突
+## 2. 避免 HPA 与手动扩缩容冲突
 
 **问题场景**:
 
@@ -1274,7 +1274,7 @@ behavior:
     selectPolicy: Disabled
 ```
 
-#<!-- chunk: 3. 配置 PDB 防止过度缩容 -->## 3. 配置 PDB 防止过度缩容
+## 3. 配置 PDB 防止过度缩容
 
 **避免缩容导致服务不可用**:
 
@@ -1298,7 +1298,7 @@ spec:
   maxReplicas: 50
 ```
 
-#<!-- chunk: 4. 监控和告警 -->## 4. 监控和告警
+## 4. 监控和告警
 
 **关键指标监控**:
 
@@ -1337,7 +1337,7 @@ kubectl describe hpa myapp-hpa
 #   Normal   SuccessfulRescale  New size: 8; reason: cpu resource utilization (percentage of request) above target
 ```
 
-#<!-- chunk: 5. 指标选择建议 -->## 5. 指标选择建议
+## 5. 指标选择建议
 
 | 应用类型       | 推荐指标                          | 目标值建议        |
 |----------------|-----------------------------------|-------------------|
@@ -1348,7 +1348,7 @@ kubectl describe hpa myapp-hpa
 | 数据库 (只读)  | ContainerResource (db CPU)        | 70%               |
 | 批处理任务     | Object (Job Completion Time)      | < 30 分钟         |
 
-#<!-- chunk: 6. 测试和验证 -->## 6. 测试和验证
+## 6. 测试和验证
 
 **负载测试**:
 
@@ -1367,7 +1367,7 @@ kubectl get events --sort-by='.lastTimestamp' | grep myapp
 
 <!-- chunk: 常见问题 -->## 常见问题
 
-#<!-- chunk: Q1: HPA 不工作,状态显示 `<unknown>`? -->## Q1: HPA 不工作,状态显示 `<unknown>`?
+## Q1: HPA 不工作,状态显示 `<unknown>`?
 
 **症状**:
 
@@ -1403,7 +1403,7 @@ kubectl describe hpa myapp-hpa
 - 确保 Metrics Server 正常运行
 - Pod 必须设置 `resources.requests`
 
-#<!-- chunk: Q2: HPA 频繁扩缩容 (抖动)? -->## Q2: HPA 频繁扩缩容 (抖动)?
+## Q2: HPA 频繁扩缩容 (抖动)?
 
 **原因**: 指标波动 + 稳定窗口过短
 
@@ -1419,7 +1419,7 @@ behavior:
     stabilizationWindowSeconds: 600  # 从 300 改为 600
 ```
 
-#<!-- chunk: Q3: 自定义指标 HPA 不生效? -->## Q3: 自定义指标 HPA 不生效?
+## Q3: 自定义指标 HPA 不生效?
 
 **排查 Custom Metrics API**:
 
@@ -1437,9 +1437,12 @@ kubectl get cm adapter-config -n monitoring -o yaml
 kubectl logs -n monitoring deployment/prometheus-adapter
 ```
 
-#<!-- chunk: Q4: HPA 达到 maxReplicas 但仍超负载? -->## Q4: HPA 达到 maxReplicas 但仍超负载?
+## Q4: HPA 达到 maxReplicas 但仍超负载?
 
 **临时解决**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 提高 maxReplicas
@@ -1451,7 +1454,7 @@ kubectl patch hpa myapp-hpa -p '{"spec":{"maxReplicas":200}}'
 - 优化应用性能 (减少 CPU/Memory 消耗)
 - 考虑分片架构
 
-#<!-- chunk: Q5: HPA 与 Cluster Autoscaler 冲突? -->## Q5: HPA 与 Cluster Autoscaler 冲突?
+## Q5: HPA 与 Cluster Autoscaler 冲突?
 
 **场景**: HPA 扩容但节点资源不足
 
@@ -1499,7 +1502,7 @@ kubectl get events --field-selector reason=TriggeredScaleUp
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -1520,4 +1523,4 @@ kubectl get events --field-selector reason=TriggeredScaleUp
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]

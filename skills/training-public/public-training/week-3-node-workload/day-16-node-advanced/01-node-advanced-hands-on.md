@@ -40,7 +40,7 @@ title: Day 16: Node 节点进阶实操
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 节点池扩缩容
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 节点池扩缩容
   - Cluster Autoscaler 配置
   - Pod 亲和性反亲和性
   - 拓扑分布约束
@@ -102,6 +102,10 @@ topology.kubernetes.io/zone=us-east-1a        # 可用区
 ## 2. 节点池扩缩容
 
 ### 2.1 手动扩缩容
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 手动增加节点（使用云厂商 CLI）
@@ -276,6 +280,9 @@ kubectl get nodes -o jsonpath='{.items[*].spec.taints}'
 
 ### 4.2 调度器故障排查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 检查调度器是否运行
 kubectl get pods -n kube-system -l component=kube-scheduler
@@ -364,6 +371,10 @@ chmod +x node-health-check.sh
 
 ### 6.1 批量节点维护流程
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # ========== 批量节点维护 SOP ==========
 CLUSTER="production"
@@ -436,3 +447,5 @@ kubectl get pdb -A
 
 ---
 
+
+```

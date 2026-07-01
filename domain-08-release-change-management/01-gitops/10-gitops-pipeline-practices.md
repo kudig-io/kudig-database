@@ -59,9 +59,9 @@ GitOps是一种以Git为单一事实来源的运维范式。本文档详细介�
 
 <!-- chunk: 🏗️ GitOps架构设计 -->## 🏗️ GitOps架构设计
 
-#<!-- chunk: 核心组件架构 -->## 核心组件架构
+## 核心组件架构
 
-##<!-- chunk: 1. ArgoCD部署配置 -->## 1. ArgoCD部署配置
+## 1. ArgoCD部署配置
 ```yaml
 # ArgoCD安装配置
 apiVersion: argoproj.io/v1alpha1
@@ -117,7 +117,7 @@ data:
   policy.default: role:readonly
 ```
 
-##<!-- chunk: 2. 应用仓库结构 -->## 2. 应用仓库结构
+## 2. 应用仓库结构
 ```
 applications/
 ├── production/
@@ -141,9 +141,9 @@ clusters/
 
 <!-- chunk: 🎯 应用部署策略 -->## 🎯 应用部署策略
 
-#<!-- chunk: 蓝绿部署配置 -->## 蓝绿部署配置
+## 蓝绿部署配置
 
-##<!-- chunk: 1. ArgoCD蓝绿部署 -->## 1. ArgoCD蓝绿部署
+## 1. ArgoCD蓝绿部署
 ```yaml
 # 蓝绿部署Application配置
 apiVersion: argoproj.io/v1alpha1
@@ -178,7 +178,7 @@ spec:
       previewReplicaCount: 1
 ```
 
-##<!-- chunk: 2. 金丝雀部署配置 -->## 2. 金丝雀部署配置
+## 2. 金丝雀部署配置
 ```yaml
 # 金丝雀部署Rollout配置
 apiVersion: argoproj.io/v1alpha1
@@ -222,9 +222,9 @@ spec:
             cpu: 1m
 ```
 
-#<!-- chunk: 多环境管理 -->## 多环境管理
+## 多环境管理
 
-##<!-- chunk: 1. 环境特定配置 -->## 1. 环境特定配置
+## 1. 环境特定配置
 ```yaml
 # ApplicationSet多环境配置
 apiVersion: argoproj.io/v1alpha1
@@ -268,7 +268,7 @@ spec:
         - CreateNamespace=true
 ```
 
-##<!-- chunk: 2. Helm环境配置 -->## 2. Helm环境配置
+## 2. Helm环境配置
 ```yaml
 # values-production.yaml
 replicaCount: 3
@@ -306,9 +306,9 @@ ingress:
 
 <!-- chunk: 🔧 自动化流水线 -->## 🔧 自动化流水线
 
-#<!-- chunk: CI/CD集成配置 -->## CI/CD集成配置
+## CI/CD集成配置
 
-##<!-- chunk: 1. Tekton流水线配置 -->## 1. Tekton流水线配置
+## 1. Tekton流水线配置
 ```yaml
 # Tekton CI/CD流水线
 apiVersion: tekton.dev/v1beta1
@@ -369,7 +369,7 @@ spec:
       value: $(params.git-revision)
 ```
 
-##<!-- chunk: 2. ArgoCD自动同步 -->## 2. ArgoCD自动同步
+## 2. ArgoCD自动同步
 ```yaml
 # 自动化部署配置
 apiVersion: argoproj.io/v1alpha1
@@ -405,9 +405,9 @@ spec:
         maxDuration: 3m
 ```
 
-#<!-- chunk: 部署门禁控制 -->## 部署门禁控制
+## 部署门禁控制
 
-##<!-- chunk: 1. 预部署检查 -->## 1. 预部署检查
+## 1. 预部署检查
 ```yaml
 # 预部署检查Job
 apiVersion: batch/v1
@@ -445,7 +445,7 @@ spec:
       restartPolicy: Never
 ```
 
-##<!-- chunk: 2. 部署后验证 -->## 2. 部署后验证
+## 2. 部署后验证
 ```yaml
 # 部署后验证配置
 apiVersion: argoproj.io/v1alpha1
@@ -485,9 +485,9 @@ spec:
 
 <!-- chunk: 📊 监控与可观测性 -->## 📊 监控与可观测性
 
-#<!-- chunk: GitOps状态监控 -->## GitOps状态监控
+## GitOps状态监控
 
-##<!-- chunk: 1. ArgoCD指标收集 -->## 1. ArgoCD指标收集
+## 1. ArgoCD指标收集
 ```yaml
 # Prometheus ServiceMonitor配置
 apiVersion: monitoring.coreos.com/v1
@@ -545,7 +545,7 @@ spec:
     }
 ```
 
-##<!-- chunk: 2. 部署健康监控 -->## 2. 部署健康监控
+## 2. 部署健康监控
 ```yaml
 # 应用健康检查配置
 apiVersion: argoproj.io/v1alpha1
@@ -581,9 +581,9 @@ spec:
 
 <!-- chunk: 🔐 安全与权限管理 -->## 🔐 安全与权限管理
 
-#<!-- chunk: 访问控制配置 -->## 访问控制配置
+## 访问控制配置
 
-##<!-- chunk: 1. OIDC集成 -->## 1. OIDC集成
+## 1. OIDC集成
 ```yaml
 # ArgoCD OIDC配置
 apiVersion: v1
@@ -615,7 +615,7 @@ data:
   oidc.okta.clientSecret: <base64-encoded-secret>
 ```
 
-##<!-- chunk: 2. 项目级权限控制 -->## 2. 项目级权限控制
+## 2. 项目级权限控制
 ```yaml
 # ArgoCD项目配置
 apiVersion: argoproj.io/v1alpha1
@@ -649,9 +649,9 @@ spec:
     - production-app-team
 ```
 
-#<!-- chunk: 签名与验证 -->## 签名与验证
+## 签名与验证
 
-##<!-- chunk: 1. 配置签名验证 -->## 1. 配置签名验证
+## 1. 配置签名验证
 ```yaml
 # 签名验证配置
 apiVersion: v1
@@ -676,7 +676,7 @@ data:
       - PipelineRun
 ```
 
-##<!-- chunk: 2. Git仓库签名校验 -->## 2. Git仓库签名校验
+## 2. Git仓库签名校验
 ```yaml
 # Git签名校验Job
 apiVersion: batch/v1
@@ -708,9 +708,9 @@ spec:
 
 <!-- chunk: 🛠️ 问题排除与最佳实践 -->## 🛠️ 问题排除与最佳实践
 
-#<!-- chunk: 常见问题解决 -->## 常见问题解决
+## 常见问题解决
 
-##<!-- chunk: 1. 同步失败处理 -->## 1. 同步失败处理
+## 1. 同步失败处理
 ```yaml
 # 同步失败诊断脚本
 apiVersion: v1
@@ -741,7 +741,7 @@ data:
     kubectl auth can-i get pods --namespace=$(argocd app get $APP_NAME -o jsonpath='{.spec.destination.namespace}')
 ```
 
-##<!-- chunk: 2. 性能优化配置 -->## 2. 性能优化配置
+## 2. 性能优化配置
 ```yaml
 # ArgoCD性能调优
 apiVersion: v1
@@ -766,7 +766,7 @@ data:
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 基础设施准备 -->## 基础设施准备
+## 基础设施准备
 - [ ] 部署ArgoCD/FluxCD控制器
 - [ ] 配置Git仓库访问权限
 - [ ] 建立应用配置仓库结构
@@ -774,7 +774,7 @@ data:
 - [ ] 设置RBAC和访问控制
 - [ ] 集成身份认证系统
 
-#<!-- chunk: 流水线建设 -->## 流水线建设
+## 流水线建设
 - [ ] 配置CI/CD工具集成
 - [ ] 实现自动化测试和验证
 - [ ] 建立部署门禁控制
@@ -782,7 +782,7 @@ data:
 - [ ] 实施回滚和灾难恢复
 - [ ] 建立监控告警机制
 
-#<!-- chunk: 安全合规 -->## 安全合规
+## 安全合规
 - [ ] 实施配置签名验证
 - [ ] 配置镜像安全扫描
 - [ ] 建立权限最小化原则
@@ -790,7 +790,7 @@ data:
 - [ ] 配置安全策略检查
 - [ ] 建立合规性监控
 
-#<!-- chunk: 运营维护 -->## 运营维护
+## 运营维护
 - [ ] 建立GitOps操作手册
 - [ ] 配置监控仪表板
 - [ ] 实施问题排除流程
@@ -807,9 +807,9 @@ data:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations KUDIG Database — Global MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -828,6 +828,6 @@ data:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/helm-index|Helm 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/helm-index.md|Helm 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

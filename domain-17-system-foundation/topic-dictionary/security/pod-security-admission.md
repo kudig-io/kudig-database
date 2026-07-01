@@ -114,10 +114,6 @@ kube-apiserver 暴露以下 Prometheus 指标：
 
 - 对于多租户集群，建议为不同租户命名空间配置不同的 Pod 安全级别。
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 - 在从 PodSecurityPolicy（PSP）迁移时，可以参考官方迁移指南，将策略映射到 Pod Security Admission 和/或第三方准入控制器。
 - 谨慎配置豁免规则，避免过度放宽导致安全策略失效。
 - 使用版本标签（`-version`）将策略固定在特定的 Kubernetes 版本，以避免集群升级后策略行为发生意外变化。
@@ -128,4 +124,4 @@ kube-apiserver 暴露以下 Prometheus 指标：
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

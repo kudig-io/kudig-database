@@ -39,7 +39,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-# [[skills/training-public/inner-training/week-4-network-storage/day-23-ingress|Day 23: Ingress]]ss|Ingress]] 实操
+# [[skills/training-public/inner-training/week-4-network-storage/day-23-ingress.md|Day 23: Ingress]]ss|Ingress]] 实操
 
 > **日期**: Week 4 Day 2 | **主题**: Ingress 路由规则与控制器配置 | **版本**: K8s 1.28-1.33
 
@@ -69,6 +69,10 @@ created: "2026-05-23"
 ## 2. 安装 Ingress Controller
 
 ### 2.1 NGINX Ingress Controller
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 方式 1: Helm 安装
@@ -248,6 +252,9 @@ spec:
 ```
 
 ### 4.3 创建 TLS Secret
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 从证书文件创建
@@ -474,3 +481,5 @@ ReadWriteOnce (单节点 RW) / ReadOnlyMany (多节点 RO) / ReadWriteMany (多�
 
 </details>
 
+
+```

@@ -68,7 +68,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 调度器架构原理 -->## 1. 调度器架构原理
 
-#<!-- chunk: 1.1 调度器核心组件 -->## 1.1 调度器核心组件
+## 1.1 调度器核心组件
 
 ```yaml
 调度器架构组件:
@@ -89,7 +89,7 @@ created: "2026-05-23"
     - Bind: 绑定阶段
 ```
 
-#<!-- chunk: 1.2 调度流程详解 -->## 1.2 调度流程详解
+## 1.2 调度流程详解
 
 ```mermaid
 graph TD
@@ -117,7 +117,7 @@ graph TD
 
 <!-- chunk: 2. 调度策略优化 -->## 2. 调度策略优化
 
-#<!-- chunk: 2.1 高性能调度器配置 -->## 2.1 高性能调度器配置
+## 2.1 高性能调度器配置
 
 ```yaml
 # 高性能调度器配置
@@ -283,7 +283,7 @@ spec:
         effect: NoSchedule
 ```
 
-#<!-- chunk: 2.2 调度算法优化 -->## 2.2 调度算法优化
+## 2.2 调度算法优化
 
 ```go
 // 自定义调度器插件示例
@@ -455,7 +455,7 @@ func New(obj runtime.Object, handle framework.Handle) (framework.Plugin, error) 
 
 <!-- chunk: 3. 高级调度策略 -->## 3. 高级调度策略
 
-#<!-- chunk: 3.1 拓扑感知调度 -->## 3.1 拓扑感知调度
+## 3.1 拓扑感知调度
 
 ```yaml
 # 拓扑感知调度配置
@@ -504,7 +504,7 @@ spec:
         memory: "4Gi"
 ```
 
-#<!-- chunk: 3.2 亲和性与反亲和性调度 -->## 3.2 亲和性与反亲和性调度
+## 3.2 亲和性与反亲和性调度
 
 ```yaml
 # 节点亲和性调度
@@ -569,7 +569,7 @@ spec:
 
 <!-- chunk: 4. 资源优化调度 -->## 4. 资源优化调度
 
-#<!-- chunk: 4.1 资源均衡调度 -->## 4.1 资源均衡调度
+## 4.1 资源均衡调度
 
 ```yaml
 # 资源均衡调度配置
@@ -609,7 +609,7 @@ data:
             weight: 2
 ```
 
-#<!-- chunk: 4.2 优先级和抢占调度 -->## 4.2 优先级和抢占调度
+## 4.2 优先级和抢占调度
 
 ```yaml
 # 优先级类定义
@@ -659,7 +659,7 @@ spec:
 
 <!-- chunk: 5. 自定义调度器开发 -->## 5. 自定义调度器开发
 
-#<!-- chunk: 5.1 自定义调度器实现 -->## 5.1 自定义调度器实现
+## 5.1 自定义调度器实现
 
 ```go
 // 自定义调度器实现
@@ -980,7 +980,7 @@ func main() {
 }
 ```
 
-#<!-- chunk: 5.2 调度器扩展插件 -->## 5.2 调度器扩展插件
+## 5.2 调度器扩展插件
 
 ```yaml
 # 调度器扩展配置
@@ -1032,7 +1032,7 @@ data:
 
 <!-- chunk: 6. 监控与性能分析 -->## 6. 监控与性能分析
 
-#<!-- chunk: 6.1 调度性能监控 -->## 6.1 调度性能监控
+## 6.1 调度性能监控
 
 ```yaml
 # 调度器监控配置
@@ -1066,7 +1066,7 @@ spec:
       targetLabel: __name__
 ```
 
-#<!-- chunk: 6.2 调度性能指标 -->## 6.2 调度性能指标
+## 6.2 调度性能指标
 
 ```prometheus
 # 调度器关键性能指标
@@ -1092,7 +1092,7 @@ increase(scheduler_cache_updates_total[5m]) > 500
 histogram_quantile(0.99, rate(scheduler_binding_duration_seconds_bucket[5m])) > 1
 ```
 
-#<!-- chunk: 6.3 调度分析工具 -->## 6.3 调度分析工具
+## 6.3 调度分析工具
 
 ```bash
 #!/bin/bash
@@ -1154,33 +1154,33 @@ kubectl get events --all-namespaces --field-selector involvedObject.kind=Pod -o 
 
 <!-- chunk: 7. 最佳实践与优化策略 -->## 7. 最佳实践与优化策略
 
-#<!-- chunk: 7.1 调度优化原则 -->## 7.1 调度优化原则
+## 7.1 调度优化原则
 
 ```markdown
 <!-- chunk: ⚡ 调度优化原则 -->## ⚡ 调度优化原则
 
-#<!-- chunk: 1. 资源规划 -->## 1. 资源规划
+## 1. 资源规划
 - 合理设置资源请求和限制
 - 使用垂直Pod自动扩缩容(VPA)
 - 实施资源配额管理
 
-#<!-- chunk: 2. 调度策略 -->## 2. 调度策略
+## 2. 调度策略
 - 启用Pod拓扑分布约束
 - 配置节点亲和性和反亲和性
 - 使用优先级和抢占机制
 
-#<!-- chunk: 3. 性能调优 -->## 3. 性能调优
+## 3. 性能调优
 - 优化调度器配置参数
 - 调整调度器并发度
 - 启用调度器缓存优化
 
-#<!-- chunk: 4. 监控告警 -->## 4. 监控告警
+## 4. 监控告警
 - 建立调度延迟监控
 - 设置队列积压告警
 - 监控调度失败率
 ```
 
-#<!-- chunk: 7.2 实施检查清单 -->## 7.2 实施检查清单
+## 7.2 实施检查清单
 
 ```yaml
 调度优化实施清单:
@@ -1213,7 +1213,7 @@ kubectl get events --all-namespaces --field-selector involvedObject.kind=Pod -o 
 
 > **更新时间**: 2026-03-03 | 涵盖 K8s 1.33 DRA Beta、NVIDIA KAI Scheduler 集成及拓扑感知增强
 
-#<!-- chunk: 8.1 NVIDIA KAI Scheduler集成 -->## 8.1 NVIDIA KAI Scheduler集成
+## 8.1 NVIDIA KAI Scheduler集成
 
 ```yaml
 KAI Scheduler与默认调度器的关系:
@@ -1228,7 +1228,7 @@ KAI Scheduler与默认调度器的关系:
   详见: "[17-AI/ML GPU调度与LLM推理](./17-kubernetes-aiml-gpu-scheduling-llm-inference.md)"
 ```
 
-##<!-- chunk: Gang Scheduling示例：PodGroup + Job -->## Gang Scheduling示例：PodGroup + Job
+## Gang Scheduling示例：PodGroup + Job
 
 ```yaml
 # 第一步：创建PodGroup，声明Gang调度约束
@@ -1286,7 +1286,7 @@ spec:
 
 > **Gang Scheduling工作原理**：KAI Scheduler持续检查`minMember`数量的Pod是否能同时在集群中找到满足资源需求的节点。若资源不足，所有Pod进入等待队列（而非部分调度），避免死锁和资源浪费。
 
-#<!-- chunk: 8.2 [[Dynamic Resource Allocation|Dynamic Resource Allocation]] (DRA) -->## 8.2 Dynamic Resource Allocation (DRA)
+## 8.2 Dynamic Resource Allocation (DRA)
 
 ```yaml
 DRA调度集成(K8s 1.33 Beta):
@@ -1308,7 +1308,7 @@ DRA调度集成(K8s 1.33 Beta):
     5. 分配设备并绑定Pod到节点
 ```
 
-##<!-- chunk: ResourceClaim YAML示例（CEL选择器） -->## ResourceClaim YAML示例（CEL选择器）
+## ResourceClaim YAML示例（CEL选择器）
 
 ```yaml
 # DeviceClass：定义NVIDIA GPU设备类型
@@ -1388,7 +1388,7 @@ spec:
 > | 动态参数 | ❌ | ✅ opaque config |
 > | 驱动集成 | 有限 | 原生DRA驱动 |
 
-#<!-- chunk: 8.3 拓扑感知调度增强 -->## 8.3 拓扑感知调度增强
+## 8.3 拓扑感知调度增强
 
 ```yaml
 GPU工作负载NUMA感知调度:
@@ -1452,7 +1452,7 @@ spec:
 
 <!-- chunk: 9. 未来发展趋势 -->## 9. 未来发展趋势
 
-#<!-- chunk: 9.1 智能调度 -->## 9.1 智能调度
+## 9.1 智能调度
 
 ```yaml
 智能调度发展趋势:
@@ -1486,13 +1486,13 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers KUDIG Database — Global MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - index.md|Domain-19 论文与参考 — 开源项目索引]]
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
 - Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Imp...
 - Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Archit...
-- [[domain-19-landscape-references/02-papers/05-kubernetes-gitops-complete-practice-guide]]
+- [[domain-19-landscape-references/02-papers/05-kubernetes-gitops-complete-practice-guide.md|05 kubernetes gitops complete practice guide]]
 - Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and F...
 - Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface ...
 - Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro...
@@ -1507,5 +1507,5 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]

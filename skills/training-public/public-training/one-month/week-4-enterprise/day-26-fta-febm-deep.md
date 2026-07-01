@@ -43,7 +43,7 @@ title: Day 26: FTA/FEBM 专题深化
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 故障树分析进阶
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 故障树分析进阶
   - FEBM 取证循证方法深化
   - AI Agent 运维模式
   - K8s 问题全景树
@@ -325,6 +325,11 @@ kubectl logs -n kube-system terway-xxx --tail=200 | grep -i "error\|warn"
 
 **修复方案**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 临时缓解: 重启受影响的 Terway Pod
 kubectl delete pod -n kube-system terway-xxx
@@ -554,3 +559,5 @@ spec:
 - [文件: `../../domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns.md`](../../domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns.md)
 - [NASA FTA Handbook](https://ntrs.nasa.gov/citations/20020003100)
 - [Google SRE Book - Understanding Outages](https://sre.google/sre-book/understanding-outages/)
+
+```

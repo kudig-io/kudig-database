@@ -68,7 +68,7 @@ created: "2026-05-23"
 
 # 01 - CRD自定义资源定义开发指南
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/concepts/extend-kubernetes/api-extension/custom-resources/](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/extend-kubernetes/api-extension/custom-resources/](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
 
 <!-- chunk: CRD核心概念与架构 -->
 ## CRD核心概念与架构
@@ -440,6 +440,11 @@ spec:
 
 ### 9. 生产环境部署策略
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 #!/bin/bash
 # production-crd-deployment.sh
@@ -597,6 +602,10 @@ main "$@"
 ## CRD部署与管理
 
 ### 1. 部署脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 #!/bin/bash
@@ -813,6 +822,10 @@ spec:
 ```
 
 ### 5. 部署与升级策略
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 #!/bin/bash
@@ -1063,6 +1076,10 @@ spec:
 ```
 
 ### 5. 部署与升级策略
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 #!/bin/bash
@@ -1322,6 +1339,9 @@ kubectl auth can-i create mysqlclusters.database.example.com
 
 ### 调试命令集合
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 查看CRD详细信息
 kubectl get crd mysqlclusters.database.example.com -o yaml
@@ -1419,11 +1439,11 @@ echo "✅ CRD健康检查完成"
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
 - index.md|Domain-10 扩展与自定义 — 开源项目索引]]
 - 02 - Operator开发模式与控制器实现
 - 03 - 准入控制器(Webhook)配置与实现
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|the kubernetes api]]
 - 包管理与应用分发工具
 - 47 - Helm Chart开发与管理
 - 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践
@@ -1433,7 +1453,7 @@ echo "✅ CRD健康检查完成"
 
 ## Related
 
-- [[synthesis/Operator 模式 × 可观测性|Operator 模式 × 可观测性]]
+- [[concepts/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
 
 - 包管理与应用分发
 - CI/CD 管道

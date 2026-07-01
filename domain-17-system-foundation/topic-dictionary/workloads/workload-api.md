@@ -36,7 +36,7 @@ created: "2026-05-23"
 # Workload API
 
 ## 概述
-Workload API 是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] v1.35 引入的 Alpha 特性（默认禁用，需启用 `GenericWorkload` 特性门控和 `scheduling.k8s.io/v1alpha1` API 组）。它提供了一种结构化的、机器可读的多 Pod 应用调度需求定义，补充了现有工作负载控制器的运行时行为。
+Workload API 是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] v1.35 引入的 Alpha 特性（默认禁用，需启用 `GenericWorkload` 特性门控和 `scheduling.k8s.io/v1alpha1` API 组）。它提供了一种结构化的、机器可读的多 Pod 应用调度需求定义，补充了现有工作负载控制器的运行时行为。
 
 ## 核心概念/原理
 - **Workload 资源**：属于 `scheduling.k8s.io/v1alpha1` API 组，用于定义一组 Pod 的调度策略和放置约束。
@@ -126,6 +126,7 @@ spec:
             memory: "32Gi"
       restartPolicy: Never
   backoffLimit: 3
+
 ```
 
 ## Workload API 字段对照表
@@ -161,6 +162,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 查看 API 组是否可用
 kubectl api-versions | grep scheduling.k8s.io
@@ -180,10 +184,18 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep -i "workload\|gan
 
 ## 交叉引用
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/workload-reference|Workload Reference]]](workload-reference.md) — Pod 端的 workloadRef 字段说明
-- [[domain-17-system-foundation/topic-dictionary/workloads/pod-group-policies|Pod Group Policies]]](pod-group-policies.md) — basic 和 gang 策略的详细行为
+- [[domain-17-system-foundation/topic-dictionary/workloads/workload-reference.md|Workload Reference]]](workload-reference.md) — Pod 端的 workloadRef 字段说明
+- [[domain-17-system-foundation/topic-dictionary/workloads/pod-group-policies.md|Pod Group Policies]]](pod-group-policies.md) — basic 和 gang 策略的详细行为
 - [Jobs](jobs.md) — 批处理 Job 与 Workload API 的集成
 - [CronJob](cronjob.md) — 周期性任务场景下的 Workload 使用
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/workload-api/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+
+```

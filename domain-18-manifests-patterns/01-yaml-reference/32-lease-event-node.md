@@ -75,7 +75,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. Lease 租约配置 -->## 1. Lease 租约配置
 
-#<!-- chunk: 1.1 Lease 基础概念 -->## 1.1 Lease 基础概念
+## 1.1 Lease 基础概念
 
 Lease(租约)是 Kubernetes 中的**分布式锁机制**,主要用于:
 
@@ -83,7 +83,7 @@ Lease(租约)是 Kubernetes 中的**分布式锁机制**,主要用于:
 - **Leader Election**: 控制器通过竞争 Lease 实现 Leader 选举(确保同一时间只有一个实例运行)
 - **API Server Identity**: API Server 实例通过 Lease 标识身份(v1.26+)
 
-#<!-- chunk: 1.2 Lease 完整字段 -->## 1.2 Lease 完整字段
+## 1.2 Lease 完整字段
 
 ```yaml
 apiVersion: coordination.k8s.io/v1
@@ -125,9 +125,9 @@ spec:
   strategy: OldestEmulationVersion  # 或 nil
 ```
 
-#<!-- chunk: 1.3 Lease 用途详解 -->## 1.3 Lease 用途详解
+## 1.3 Lease 用途详解
 
-##<!-- chunk: 1.3.1 节点心跳(kube-node-lease) -->## 1.3.1 节点心跳(kube-node-lease)
+## 1.3.1 节点心跳(kube-node-lease)
 
 从 Kubernetes v1.14 开始,Kubelet 使用 Lease 替代 Node Status 更新作为心跳机制:
 
@@ -169,7 +169,7 @@ spec:
 --node-status-update-frequency=10s         # Node Status 更新频率(保留用于状态变更)
 ```
 
-##<!-- chunk: 1.3.2 Leader Election(控制器) -->## 1.3.2 Leader Election(控制器)
+## 1.3.2 Leader Election(控制器)
 
 控制器通过竞争 Lease 实现 Leader 选举:
 
@@ -274,7 +274,7 @@ func runLeaderElection(clientset *kubernetes.Clientset) {
 }
 ```
 
-##<!-- chunk: 1.3.3 API Server Identity(v1.26+) -->## 1.3.3 API Server Identity(v1.26+)
+## 1.3.3 API Server Identity(v1.26+)
 
 API Server 使用 Lease 标识自己的身份,用于协调和监控:
 
@@ -302,7 +302,7 @@ spec:
 
 <!-- chunk: 2. Event 事件配置 -->## 2. Event 事件配置
 
-#<!-- chunk: 2.1 Event 基础概念 -->## 2.1 Event 基础概念
+## 2.1 Event 基础概念
 
 Event(事件)是 Kubernetes 中的**审计和调试机制**,记录集群中发生的重要操作:
 
@@ -310,9 +310,9 @@ Event(事件)是 Kubernetes 中的**审计和调试机制**,记录集群中发�
 - **系统告警**: 节点资源不足、镜像拉取失败、卷挂载失败等
 - **控制器行为**: Deployment 滚动更新、HPA 扩缩容、PVC 绑定等
 
-#<!-- chunk: 2.2 Event 完整字段 -->## 2.2 Event 完整字段
+## 2.2 Event 完整字段
 
-##<!-- chunk: 2.2.1 events.k8s.io/v1 (推荐,v1.19+) -->## 2.2.1 events.k8s.io/v1 (推荐,v1.19+)
+## 2.2.1 events.k8s.io/v1 (推荐,v1.19+)
 
 ```yaml
 apiVersion: events.k8s.io/v1
@@ -380,7 +380,7 @@ spec:
   note: "Pod triggered scale-up"
 ```
 
-##<!-- chunk: 2.2.2 v1/Event (旧版本,已弃用但仍兼容) -->## 2.2.2 v1/Event (旧版本,已弃用但仍兼容)
+## 2.2.2 v1/Event (旧版本,已弃用但仍兼容)
 
 ```yaml
 apiVersion: v1
@@ -414,9 +414,9 @@ source:
   host: node1
 ```
 
-#<!-- chunk: 2.3 常见 Event Reason 列表 -->## 2.3 常见 Event Reason 列表
+## 2.3 常见 Event Reason 列表
 
-##<!-- chunk: Pod 生命周期事件 -->## Pod 生命周期事件
+## Pod 生命周期事件
 
 | Reason | Type | 描述 |
 |--------|------|------|
@@ -432,7 +432,7 @@ source:
 | **Preempting** | Normal | Pod 被抢占(优先级更高的 Pod 到达) |
 | **Unhealthy** | Warning | 健康检查失败 |
 
-##<!-- chunk: 节点事件 -->## 节点事件
+## 节点事件
 
 | Reason | Type | 描述 |
 |--------|------|------|
@@ -443,7 +443,7 @@ source:
 | **RegisteredNode** | Normal | 新节点注册到集群 |
 | **RemovingNode** | Warning | 节点正在被移除 |
 
-##<!-- chunk: 存储事件 -->## 存储事件
+## 存储事件
 
 | Reason | Type | 描述 |
 |--------|------|------|
@@ -454,7 +454,7 @@ source:
 | **VolumeResizeFailed** | Warning | 卷扩容失败 |
 | **VolumeResizeSuccessful** | Normal | 卷扩容成功 |
 
-##<!-- chunk: 控制器事件 -->## 控制器事件
+## 控制器事件
 
 | Reason | Type | 描述 |
 |--------|------|------|
@@ -468,7 +468,7 @@ source:
 
 <!-- chunk: 3. Node 节点配置 -->## 3. Node 节点配置
 
-#<!-- chunk: 3.1 Node 基础概念 -->## 3.1 Node 基础概念
+## 3.1 Node 基础概念
 
 Node(节点)是 Kubernetes 集群的**工作负载载体**,运行 Kubelet 和容器:
 
@@ -477,7 +477,7 @@ Node(节点)是 Kubernetes 集群的**工作负载载体**,运行 Kubelet 和容
 - **标签管理**: 通过标签实现节点选择器、亲和性调度
 - **污点管理**: 通过污点(Taint)驱逐或阻止 Pod 调度
 
-#<!-- chunk: 3.2 Node 完整字段 -->## 3.2 Node 完整字段
+## 3.2 Node 完整字段
 
 ```yaml
 apiVersion: v1
@@ -680,7 +680,7 @@ status:
       devicePath: /dev/xvda
 ```
 
-#<!-- chunk: 3.3 Node Condition 详解 -->## 3.3 Node Condition 详解
+## 3.3 Node Condition 详解
 
 | Condition Type | Status=True 含义 | Status=False 含义 |
 |---------------|-----------------|------------------|
@@ -710,7 +710,7 @@ status:
 
 <!-- chunk: 4. 生产案例 -->## 4. 生产案例
 
-#<!-- chunk: 4.1 案例 1: Leader Election 高可用控制器 -->## 4.1 案例 1: Leader Election 高可用控制器
+## 4.1 案例 1: Leader Election 高可用控制器
 
 **场景**: 部署一个自定义控制器,使用 Leader Election 确保单实例运行
 
@@ -830,6 +830,9 @@ subjects:
 
 **验证 Leader Election**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 查看 Lease 状态
 kubectl get lease my-controller -n default -o yaml
@@ -858,9 +861,12 @@ kubectl logs -n default -l app=my-controller --tail=20 -f
 # Pod my-controller-7d8f9b5c6-def456: Became the leader!
 ```
 
-#<!-- chunk: 4.2 案例 2: 通过 Event 调试 Pod 启动失败 -->## 4.2 案例 2: 通过 Event 调试 Pod 启动失败
+## 4.2 案例 2: 通过 Event 调试 Pod 启动失败
 
 **场景**: Pod 一直处于 Pending 状态
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 查看 Pod 基本信息
@@ -898,9 +904,13 @@ kubectl edit pod my-app -n production
 # 或 方案 3: 驱逐低优先级 Pod
 ```
 
-#<!-- chunk: 4.3 案例 3: 节点维护 - 添加污点驱逐 Pod -->## 4.3 案例 3: 节点维护 - 添加污点驱逐 Pod
+## 4.3 案例 3: 节点维护 - 添加污点驱逐 Pod
 
 **场景**: 需要维护 node2,将所有 Pod 迁移到其他节点
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
 
 ```bash
 # 1. 标记节点为不可调度(禁止新 Pod 调度)
@@ -934,6 +944,9 @@ kubectl uncordon node2                                  # 恢复调度
 
 **优雅驱逐(Drain)**:
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 使用 kubectl drain 命令(相当于 cordon + taint + 等待 Pod 终止)
 kubectl drain node2 --ignore-daemonsets --delete-emptydir-data
@@ -947,9 +960,13 @@ kubectl drain node2 --ignore-daemonsets --delete-emptydir-data
 kubectl uncordon node2
 ```
 
-#<!-- chunk: 4.4 案例 4: 节点标签管理 - 按硬件类型调度 -->## 4.4 案例 4: 节点标签管理 - 按硬件类型调度
+## 4.4 案例 4: 节点标签管理 - 按硬件类型调度
 
 **场景**: 集群有 GPU 节点和 CPU 节点,AI 训练 Pod 需要调度到 GPU 节点
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 1. 为 GPU 节点添加标签
@@ -1030,7 +1047,7 @@ spec:
       image: nvidia/cuda:12.0-runtime
 ```
 
-#<!-- chunk: 4.5 案例 5: 监控节点心跳 Lease -->## 4.5 案例 5: 监控节点心跳 Lease
+## 4.5 案例 5: 监控节点心跳 Lease
 
 **场景**: 监控节点是否在线(通过 Lease 比 Node Status 更实时)
 
@@ -1074,7 +1091,7 @@ time() - kube_lease_renew_time{namespace="kube-node-lease"}
 
 <!-- chunk: 5. 故障排查 -->## 5. 故障排查
 
-#<!-- chunk: 5.1 Leader Election 频繁切换 -->## 5.1 Leader Election 频繁切换
+## 5.1 Leader Election 频繁切换
 
 **症状**: Lease.spec.leaseTransitions 不断增加,控制器日志频繁出现 "lost leadership"
 
@@ -1101,7 +1118,7 @@ kubectl get lease my-controller -n default -o jsonpath='{.spec.leaseDurationSeco
 # 3. 检查 API Server 负载(是否限流)
 ```
 
-#<!-- chunk: 5.2 节点 NotReady 但 Lease 正常 -->## 5.2 节点 NotReady 但 Lease 正常
+## 5.2 节点 NotReady 但 Lease 正常
 
 **症状**: Node Condition 为 NotReady,但 Lease 仍在更新
 
@@ -1137,9 +1154,13 @@ kubectl logs -n kube-system -l app=calico-node --field-selector spec.nodeName=no
 journalctl -u kubelet -n 100
 ```
 
-#<!-- chunk: 5.3 Event 过多导致 etcd 压力 -->## 5.3 Event 过多导致 etcd 压力
+## 5.3 Event 过多导致 etcd 压力
 
 **症状**: etcd 存储空间增长过快,大量 Event 对象
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 查看 Event 数量
@@ -1165,10 +1186,10 @@ limits:
     cacheSize: 2000
 
 # 3. 清理历史 Event(临时方案)
-kubectl delete events --all-namespaces --field-selector reason=FailedScheduling,type=Warning
+kubectl delete events --all-namespaces --field-selector reason=FailedScheduling,type=Warning  # ⚠️ 批量删除，波及面大
 ```
 
-#<!-- chunk: 5.4 Pod 调度失败 - 无可用节点 -->## 5.4 Pod 调度失败 - 无可用节点
+## 5.4 Pod 调度失败 - 无可用节点
 
 **症状**: Pod Pending,Event 显示 "0/5 nodes are available"
 
@@ -1203,7 +1224,10 @@ spec:
 # 方案 3: 扩容集群节点
 ```
 
-#<!-- chunk: 5.5 调试技巧 -->## 5.5 调试技巧
+## 5.5 调试技巧
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 实时监听 Event
@@ -1226,6 +1250,7 @@ kubectl describe nodes | grep -A 5 "Allocated resources:"
 
 # 7. 模拟调度(检查 Pod 为何无法调度)
 kubectl get pod my-pod -o yaml | kubectl apply --dry-run=server -f -
+
 ```
 
 ---
@@ -1243,21 +1268,21 @@ kubectl get pod my-pod -o yaml | kubectl apply --dry-run=server -f -
 
 **最佳实践总结**:
 
-#<!-- chunk: Lease 最佳实践: -->## Lease 最佳实践:
+## Lease 最佳实践:
 
 1. **Leader Election 配置**: 使用推荐值 `leaseDuration=15s, renewDeadline=10s, retryPeriod=2s`
 2. **监控切换次数**: 监控 `leaseTransitions`,异常增长说明稳定性问题
 3. **避免多个 Lease**: 每个控制器使用唯一的 Lease 名称,避免冲突
 4. **命名规范**: Lease 名称与控制器名称一致,便于排查
 
-#<!-- chunk: Event 最佳实践: -->## Event 最佳实践:
+## Event 最佳实践:
 
 1. **使用 events.k8s.io/v1**: 优先使用新版本 Event API(v1.19+)
 2. **控制 Event 数量**: 配置合理的 `--event-ttl` 和 EventRateLimit
 3. **结构化日志**: 关键操作同时记录日志和 Event,便于审计
 4. **避免高频 Event**: 使用 Event Series 机制聚合重复事件
 
-#<!-- chunk: Node 最佳实践: -->## Node 最佳实践:
+## Node 最佳实践:
 
 1. **标签规范化**: 使用标准标签 `topology.kubernetes.io/zone`, `node.kubernetes.io/instance-type` 等
 2. **污点管理**: 维护时使用 `kubectl drain`,避免手动删除 Pod
@@ -1273,7 +1298,7 @@ kubectl get pod my-pod -o yaml | kubectl apply --dry-run=server -f -
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -1294,5 +1319,7 @@ kubectl get pod my-pod -o yaml | kubectl apply --dry-run=server -f -
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+
+```

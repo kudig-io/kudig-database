@@ -106,7 +106,7 @@ Kubernetes 控制平面域深入解析 API Server、[[etcd]]、Scheduler、Contr
 | 12 | [API Server深度解析](./12-apiserver-deep-dive.md) | 请求处理、认证授权、API聚合 | ⭐⭐⭐⭐⭐ |
 | 13 | [kube-controller-manager深度解析](./13-kube-controller-manager-deep-dive.md) | 控制循环、资源协调、故障恢复 | ⭐⭐⭐⭐⭐ |
 | 14 | [cloud-controller-manager深度解析](./14-cloud-controller-manager-deep-dive.md) | 云提供商集成、资源管理、适配器模式 | ⭐⭐⭐⭐⭐ |
-| 15 | [kubelet深度解析](./15-[[entities/kubelet|kubelet]]-deep-dive.md) | 节点代理、Pod生命周期、容器运行时 | ⭐⭐⭐⭐⭐ |
+| 15 | [kubelet深度解析](./15-[[entities/kubelet.md|kubelet]]-deep-dive.md) | 节点代理、Pod生命周期、容器运行时 | ⭐⭐⭐⭐⭐ |
 | 16 | [kube-proxy深度解析](./16-kube-proxy-deep-dive.md) | 网络代理、服务发现、负载均衡 | ⭐⭐⭐⭐⭐ |
 
 ### 高级调优与配置 (17-19)
@@ -193,13 +193,13 @@ Kubernetes 控制平面域深入解析 API Server、[[etcd]]、Scheduler、Contr
 
 - [[etcd]]
 - [[docker]]
-- [[entities/kubelet|kubelet]]
+- [[entities/kubelet.md|kubelet]]
 
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-02-workloads-applications
 - 相关知识域: domain-03-networking-traffic
 - 相关知识域: domain-04-storage-data
 - 相关知识域: domain-05-security-compliance
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|速查卡: k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet|速查卡: kubectl-scene-cheatsheet]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/README|Node Create 模块函数索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/README.md|Node Create 模块函数索引]]

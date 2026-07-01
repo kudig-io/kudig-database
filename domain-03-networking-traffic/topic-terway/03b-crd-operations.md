@@ -344,6 +344,10 @@ chmod +x check-podeni-status.sh
 
 #### 更新安全组
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl edit podeni <podeni-name> -n <namespace>
 
@@ -372,6 +376,9 @@ kubectl apply -f update-podeni.yaml
 
 #### 更新 vSwitch
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch podeni <podeni-name> -n <namespace> --type='merge' -p='
 {
@@ -385,6 +392,9 @@ kubectl patch podeni <podeni-name> -n <namespace> --type='merge' -p='
 
 #### 通过 Annotation 更新 Pod 网络配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 kubectl annotate pod <pod-name> -n <namespace> \
   k8s.aliyun.com/security-group="sg-xxxxx" \
@@ -397,10 +407,14 @@ kubectl annotate pod <pod-name> -n <namespace> \
 
 ### 3.5 Delete
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 kubectl delete podeni <podeni-name> -n <namespace>
 
-kubectl delete podenis -n <namespace> --all
+kubectl delete podenis -n <namespace> --all  # ⚠️ 批量删除，波及面大
 
 kubectl delete podeni <podeni-name> -n <namespace> \
   --force --grace-period=0
@@ -414,6 +428,9 @@ kubectl get podenis -A -o json | \
 ```
 
 #### Finalizer 清理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 kubectl patch podeni <podeni-name> -n <namespace> \
@@ -554,6 +571,9 @@ chmod +x check-node-networking.sh
 
 ### 4.4 Update
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch nodenetworking <node-name> --type='merge' -p='
 {
@@ -594,10 +614,14 @@ kubectl patch nodenetworking <node-name> --type='merge' -p='
 
 ### 4.5 Delete
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 kubectl delete nodenetworking <node-name>
 
-kubectl delete nodenetworkings --all
+kubectl delete nodenetworkings --all  # ⚠️ 批量删除，波及面大
 ```
 
 ---
@@ -717,6 +741,9 @@ kubectl get pod <pod-name> -o jsonpath='{.metadata.annotations.k8s\.aliyun\.com/
 
 ### 5.4 Update
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch podnetworking <name> --type='json' -p='[
   {
@@ -739,6 +766,9 @@ kubectl edit podnetworking <name>
 ```
 
 ### 5.5 Delete
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 kubectl delete podnetworking <name>
@@ -884,6 +914,9 @@ chmod +x check-reserved-ips.sh
 
 ### 6.4 Update
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch reservedip <name> -n <namespace> --type='merge' -p='
 {
@@ -905,6 +938,9 @@ kubectl patch reservedip <name> -n <namespace> --type='merge' -p='
 ```
 
 ### 6.5 Delete
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 kubectl delete reservedip <name> -n <namespace>
@@ -1075,6 +1111,9 @@ kubectl get cm eni-config -n kube-system -o jsonpath='{.data.eni_conf}' | jq .
 
 #### 用 jq 添加 vSwitch
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl get cm eni-config -n kube-system -o json | \
   jq '.data.eni_conf = (.data.eni_conf | fromjson |
@@ -1083,6 +1122,9 @@ kubectl get cm eni-config -n kube-system -o json | \
 ```
 
 #### 用 jq 更新 IP 池大小
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 kubectl patch cm eni-config -n kube-system --type='json' -p='[
@@ -1095,6 +1137,10 @@ kubectl patch cm eni-config -n kube-system --type='json' -p='[
 ```
 
 ### 8.4 配置重载流程
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 kubectl edit cm eni-config -n kube-system
@@ -1181,6 +1227,10 @@ chmod +x terway-diagnose.sh
 
 ### PodENI
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl get podenis -A                           # 列出所有
 kubectl get podeni <name> -n <ns> -o yaml        # 查看详情
@@ -1192,6 +1242,10 @@ kubectl patch podeni <name> -n <ns> -p '{"metadata":{"finalizers":[]}}' --type=m
 
 ### NodeNetworking
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl get nodenetworkings                      # 列出所有
 kubectl get nodenetworking <name> -o yaml        # 查看详情
@@ -1201,6 +1255,10 @@ kubectl delete nodenetworking <name>             # 删除
 
 ### PodNetworking
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl get podnetworkings                       # 列出所有
 kubectl get podnetworking <name> -o yaml         # 查看详情
@@ -1209,6 +1267,11 @@ kubectl delete podnetworking <name>              # 删除
 ```
 
 ### ReservedIP
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 kubectl get reservedips -A                       # 列出所有固定 IP
@@ -1226,6 +1289,10 @@ kubectl get ipinstances -A --field-selector spec.nodeName=<node>  # 按节点筛
 ```
 
 ### ConfigMap
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 kubectl get cm eni-config -n kube-system -o yaml # 查看 ENI 配置
@@ -1257,7 +1324,7 @@ kubectl describe podeni <name> -n <ns>           # 查看 PodENI 事件
 
 | 文档 | 说明 |
 |:---|:---|
-| [03-usage.md](./[[domain-03-networking-traffic/topic-terway/03-usage|03-usage]].md) | Terway 使用指南, 包含基础操作与场景示例 |
+| [03-usage.md](./[[domain-03-networking-traffic/topic-terway/03-usage.md|03-usage]].md) | Terway 使用指南, 包含基础操作与场景示例 |
 | [02-architecture.md](./02-architecture.md) | Terway 架构设计, CNI 插件原理与组件交互 |
 | [04-operations.md](./04-operations.md) | Terway 运维手册, 日常运维与故障处理 |
 | [domain-03-networking-traffic/37](../domain-03-networking-traffic/37-terway-resources-crud-operations.md) | 原始 CRUD 操作指南 (本文档提取源) |
@@ -1275,4 +1342,4 @@ kubectl describe podeni <name> -n <ns>           # 查看 PodENI 事件
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]

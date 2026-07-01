@@ -34,7 +34,7 @@ created: "2026-05-23"
 
 Source: [v0.2.0](https://github.com/tektoncd/pipeline/releases/tag/v0.2.0)
 
-# 🎉 Tekton Pipelines with Graphs; without [[Init Containers|init containers]]! 🎉
+# 🎉 Tekton Pipelines with Graphs; without [[domain-17-system-foundation/topic-dictionary/workloads/init-containers.md|init containers]]! 🎉
 
 * [Docs @ v0.2.0](https://github.com/tektoncd/pipeline/tree/v0.2.0/docs#tekton-pipelines)
 * [Examples @ v0.2.0](https://github.com/tektoncd/pipeline/tree/v0.2.0/examples)

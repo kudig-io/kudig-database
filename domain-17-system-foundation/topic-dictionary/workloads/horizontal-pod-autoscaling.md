@@ -33,12 +33,13 @@ prerequisites:
 - cloud-provider-basics
 - prometheus-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Horizontal Pod Autoscaling
 
 ## 概述
-HorizontalPodAutoscaler（HPA）是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 的 API 资源和控制器，可根据观察到的指标（如 CPU 利用率、内存利用率或自定义指标）自动调整工作负载（Deployment、[[StatefulSet|StatefulSet]] 等）的副本数量。
+HorizontalPodAutoscaler（HPA）是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 的 API 资源和控制器，可根据观察到的指标（如 CPU 利用率、内存利用率或自定义指标）自动调整工作负载（Deployment、[[StatefulSet|StatefulSet]] 等）的副本数量。
 
 ## 核心概念/原理
 - **控制循环**：HPA 控制器在 kube-controller-manager 中以固定周期运行（默认 15 秒），查询指标并调整目标副本数。
@@ -208,6 +209,7 @@ spec:
   
   # 查看副本数变化趋势
   kubectl get hpa web-api-hpa -n prod -w
+
   ```
 - **解决方案**: 增大 `scaleDown.stabilizationWindowSeconds`（建议 300-600 秒）；调整目标利用率留出更大缓冲。
 
@@ -258,3 +260,11 @@ kubectl top nodes
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/autoscaling/horizontal-pod-autoscale/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+
+```

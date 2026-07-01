@@ -328,7 +328,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-24-infrastructure-as-code MOC
-- [[domain-08-release-change-management/README|Domain 24: 基础设施即代码 (Infrastructure as Code)]]
+- [[domain-08-release-change-management/README.md|Domain 08: 基础设施即代码 (Infrastructure as Code)]]
 - Terraform企业级基础设施即代码实践
 - Ansible企业级自动化运维深度实践
 - Pulumi Enterprise Infrastructure as Code Platform

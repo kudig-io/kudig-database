@@ -36,6 +36,7 @@ prerequisites:
 - cni-basics
 - gpu-scheduling-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 14 - 变更管理与发布策略
@@ -194,6 +195,7 @@ executionWindow: "10:00-16:00 weekdays"
 deploymentStrategy: "canary (5% → 10% → 25% → 50% → 100%)"
 rollbackPlan: "argo rollouts abort"
 estimatedRollbackTime: "30 minutes"
+
 ```
 
 ---
@@ -813,6 +815,9 @@ spec:
 
 **蓝绿切换脚本**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 #!/bin/bash
 # blue-green-switch.sh - 蓝绿切换脚本
@@ -1232,6 +1237,7 @@ spec:
               }
             ]
           }'
+
 ```
 
 ---
@@ -1562,6 +1568,10 @@ rollbackStrategy:
 ```
 
 ### 4.2 回滚执行脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 #!/bin/bash
@@ -2574,6 +2584,9 @@ microserviceRelease:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 查看 Deployment 发布状态
 kubectl rollout status deployment/<name> -n <namespace>
@@ -2603,6 +2616,12 @@ kubectl get rs -n <namespace> -l app=<name>
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级
 
+## 参考链接
+
+- [Change Management Release]()
+
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

@@ -55,7 +55,7 @@ Kubernetes 中有五种主要的代理类型：
 - 客户端到代理使用 HTTP。
 - 代理到 apiserver 使用 HTTPS。
 - 自动定位 apiserver 并添加认证头。
-- 常用于本地安全访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]]。
+- 常用于本地安全访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]]。
 
 ### 2. apiserver proxy
 
@@ -126,7 +126,7 @@ Kubernetes 中有五种主要的代理类型：
 |------|---------|-------------|
 | `kubectl proxy` 启动后无法连接 | 端口被占用或 kubeconfig 错误 | `lsof -i :8001` 检查端口；`kubectl cluster-info` 验证连接 |
 | apiserver proxy 返回 502/503 | 目标 Pod/Service 不可达 | `kubectl get endpoints <svc>` 检查后端；`kubectl logs` 查看目标 Pod |
-| Service 无法访问（kube-proxy） | kube-proxy 未运行或 iptables 规则异常 | `kubectl -n kube-system get [[Pods|pods]] -l [[entities/kubernetes|[[Kubernetes 生产环境速查卡|k8s]]]]-app=kube-proxy`；`iptables-save \| grep <svc-name>` |
+| Service 无法访问（kube-proxy） | kube-proxy 未运行或 iptables 规则异常 | `kubectl -n kube-system get [[Pods|pods]] -l [[entities/kubernetes.md|[[Kubernetes 生产环境速查卡|k8s]]]]-app=kube-proxy`；`iptables-save \| grep <svc-name>` |
 | 外部无法访问 LoadBalancer Service | 云 LB 未就绪或安全组限制 | `kubectl get svc <name>` 检查 EXTERNAL-IP；云控制台检查 LB 状态和安全组 |
 | apiserver 间歇性不可达 | 前端 LB 健康检查失败 | 检查 LB 目标组健康状态；`kubectl get componentstatuses` |
 | kube-proxy 模式不匹配 | 期望 IPVS 但回退到 iptables | `kubectl -n kube-system logs <kube-proxy-pod> \| grep "Using"` |
@@ -187,3 +187,9 @@ kubectl get svc -A --field-selector spec.type=LoadBalancer
 ## 参考链接
 
 - [Proxies in Kubernetes - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/proxies/)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-group.md|API 组]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]

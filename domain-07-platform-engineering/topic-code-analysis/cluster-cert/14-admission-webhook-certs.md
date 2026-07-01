@@ -264,6 +264,10 @@ mgr.GetWebhookServer().Register("/validate", &webhook.Admission{Handler: validat
 
 ### 模式 3: 手动管理（生产不推荐）
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 生成 CA
 openssl genrsa -out webhook-ca.key 2048
@@ -360,6 +364,9 @@ func (r *WebhookReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ct
 
 ## Webhook 证书故障排查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 检查 Webhook 配置的 caBundle
 kubectl get validatingwebhookconfiguration -o yaml | grep -A2 caBundle
@@ -427,8 +434,8 @@ Kubernetes v1.30+ 引入 **ValidatingAdmissionPolicy**（内置 CEL 表达式验
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[entities/cert-manager|cert-manager]]
-- [[entities/kserve|kserve]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/cert-manager.md|cert-manager]]
+- [[entities/kserve.md|kserve]]

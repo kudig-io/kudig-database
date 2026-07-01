@@ -32,7 +32,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-title: [[domain-17-system-foundation/topic-dictionary/workloads/replicaset|replicaset]] 控制器源码分析
+title: [[domain-17-system-foundation/topic-dictionary/workloads/replicaset.md|replicaset]] 控制器源码分析
 category: deployment
 tags:
 - replicaset
@@ -391,6 +391,9 @@ func (rsc *ReplicaSetController) updateReplicaSetStatus(ctx context.Context, rs 
 
 ## ReplicaSet 与 Deployment 的数据流
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 用户: kubectl apply -f deployment.yaml
          │
@@ -436,6 +439,6 @@ kubelet: 在节点上创建容器
 ## Related
 
 - [[README|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

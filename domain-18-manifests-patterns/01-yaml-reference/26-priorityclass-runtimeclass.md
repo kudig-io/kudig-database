@@ -67,7 +67,7 @@ created: "2026-05-23"
 
 <!-- chunk: 概述 -->## 概述
 
-#<!-- chunk: PriorityClass -->## PriorityClass
+## PriorityClass
 用于定义 Pod 的优先级，影响调度顺序和抢占行为。
 
 **核心能力**:
@@ -76,7 +76,7 @@ created: "2026-05-23"
 - **抢占策略**: `PreemptLowerPriority` / `Never`
 - **系统保留**: 值 ≥ 10⁹ 仅限系统使用
 
-#<!-- chunk: RuntimeClass -->## RuntimeClass
+## RuntimeClass
 定义容器运行时处理器（如 Kata、gVisor），支持沙箱隔离。
 
 **核心能力**:
@@ -84,7 +84,7 @@ created: "2026-05-23"
 - **资源开销**: `overhead.podFixed`
 - **调度约束**: `nodeSelector` / `tolerations`
 
-#<!-- chunk: ResourceClaim（[[Dynamic Resource Allocation|Dynamic Resource Allocation]]） -->## ResourceClaim（Dynamic Resource Allocation）
+## ResourceClaim（Dynamic Resource Allocation）
 动态资源分配（DRA）用于 GPU、FPGA 等设备的动态管理。
 
 **版本兼容性**:
@@ -95,7 +95,7 @@ created: "2026-05-23"
 
 <!-- chunk: PriorityClass 完整配置 -->## PriorityClass 完整配置
 
-#<!-- chunk: 基础示例 -->## 基础示例
+## 基础示例
 
 ```yaml
 apiVersion: scheduling.k8s.io/v1
@@ -113,7 +113,7 @@ preemptionPolicy: PreemptLowerPriority
 description: "高优先级业务应用,可以抢占低优先级 Pod"
 ```
 
-#<!-- chunk: 系统级优先级（保留范围） -->## 系统级优先级（保留范围）
+## 系统级优先级（保留范围）
 
 ```yaml
 apiVersion: scheduling.k8s.io/v1
@@ -131,7 +131,7 @@ description: "集群关键组件(如 kube-dns, metrics-server)"
 - `system-cluster-critical`: 2000000000（集群关键组件）
 - `system-node-critical`: 2000001000（节点关键组件，如 [[kubelet|kubelet]]）
 
-#<!-- chunk: 禁止抢占策略 -->## 禁止抢占策略
+## 禁止抢占策略
 
 ```yaml
 apiVersion: scheduling.k8s.io/v1
@@ -145,7 +145,7 @@ preemptionPolicy: Never
 description: "高优先级但不会驱逐其他 Pod"
 ```
 
-#<!-- chunk: 多层级优先级体系 -->## 多层级优先级体系
+## 多层级优先级体系
 
 ```yaml
 ---
@@ -188,7 +188,7 @@ preemptionPolicy: Never
 description: "批处理任务,最低优先级"
 ```
 
-#<!-- chunk: Pod 中使用 PriorityClass -->## Pod 中使用 PriorityClass
+## Pod 中使用 PriorityClass
 
 ```yaml
 apiVersion: v1
@@ -211,7 +211,7 @@ spec:
 
 <!-- chunk: RuntimeClass 完整配置 -->## RuntimeClass 完整配置
 
-#<!-- chunk: 基础示例（默认运行时） -->## 基础示例（默认运行时）
+## 基础示例（默认运行时）
 
 ```yaml
 apiVersion: node.k8s.io/v1
@@ -223,7 +223,7 @@ metadata:
 handler: runc
 ```
 
-#<!-- chunk: Kata Containers 沙箱运行时 -->## Kata Containers 沙箱运行时
+## Kata Containers 沙箱运行时
 
 ```yaml
 apiVersion: node.k8s.io/v1
@@ -250,7 +250,7 @@ scheduling:
     effect: "NoSchedule"
 ```
 
-#<!-- chunk: gVisor 沙箱运行时 -->## gVisor 沙箱运行时
+## gVisor 沙箱运行时
 
 ```yaml
 apiVersion: node.k8s.io/v1
@@ -271,7 +271,7 @@ scheduling:
     effect: "NoSchedule"
 ```
 
-#<!-- chunk: NVIDIA GPU 运行时 -->## NVIDIA GPU 运行时
+## NVIDIA GPU 运行时
 
 ```yaml
 apiVersion: node.k8s.io/v1
@@ -289,7 +289,7 @@ scheduling:
     effect: "NoSchedule"
 ```
 
-#<!-- chunk: Pod 中使用 RuntimeClass -->## Pod 中使用 RuntimeClass
+## Pod 中使用 RuntimeClass
 
 ```yaml
 apiVersion: v1
@@ -319,7 +319,7 @@ spec:
 > **Feature Gate**: `DynamicResourceAllocation`  
 > **状态**: v1.26 Alpha → v1.30 Beta → v1.32 稳定中
 
-#<!-- chunk: ResourceClaim 基础示例 -->## ResourceClaim 基础示例
+## ResourceClaim 基础示例
 
 ```yaml
 apiVersion: resource.k8s.io/v1alpha2
@@ -339,7 +339,7 @@ spec:
   allocationMode: WaitForFirstConsumer  # 延迟绑定
 ```
 
-#<!-- chunk: ResourceClaimTemplate（动态创建） -->## ResourceClaimTemplate（动态创建）
+## ResourceClaimTemplate（动态创建）
 
 ```yaml
 apiVersion: resource.k8s.io/v1alpha2
@@ -357,7 +357,7 @@ spec:
       name: ml-training
 ```
 
-#<!-- chunk: Pod 中使用 ResourceClaim -->## Pod 中使用 ResourceClaim
+## Pod 中使用 ResourceClaim
 
 ```yaml
 apiVersion: v1
@@ -380,7 +380,7 @@ spec:
         request: "1"  # 请求 1 个 GPU
 ```
 
-#<!-- chunk: 使用 ResourceClaimTemplate -->## 使用 ResourceClaimTemplate
+## 使用 ResourceClaimTemplate
 
 ```yaml
 apiVersion: v1
@@ -401,7 +401,7 @@ spec:
       - name: gpu
 ```
 
-#<!-- chunk: ResourceClass 配置（驱动侧） -->## ResourceClass 配置（驱动侧）
+## ResourceClass 配置（驱动侧）
 
 ```yaml
 apiVersion: resource.k8s.io/v1alpha2
@@ -428,9 +428,9 @@ suitableNodes:
 
 <!-- chunk: 内部原理 -->## 内部原理
 
-#<!-- chunk: PriorityClass 优先级抢占算法 -->## PriorityClass 优先级抢占算法
+## PriorityClass 优先级抢占算法
 
-##<!-- chunk: 调度流程 -->## 调度流程
+## 调度流程
 
 ```
 1. Pod 进入调度队列
@@ -448,7 +448,7 @@ suitableNodes:
    └─ 执行驱逐并等待资源释放
 ```
 
-##<!-- chunk: 抢占算法 -->## 抢占算法
+## 抢占算法
 
 **关键代码逻辑** (`pkg/scheduler/framework/plugins/defaultpreemption`):
 ```go
@@ -476,9 +476,9 @@ func SelectNodesForPreemption(pod *Pod) {
 - `system-cluster-critical` 和 `system-node-critical` 不会被抢占
 - 同优先级 Pod 之间不会互相抢占
 
-#<!-- chunk: RuntimeClass Admission Controller -->## RuntimeClass Admission Controller
+## RuntimeClass Admission Controller
 
-##<!-- chunk: 工作流程 -->## 工作流程
+## 工作流程
 
 ```
 1. API Server 接收 Pod 创建请求
@@ -501,7 +501,7 @@ func SelectNodesForPreemption(pod *Pod) {
    └─ CRI 调用: RunPodSandbox(handler=runtimeClass.handler)
 ```
 
-##<!-- chunk: Containerd 配置示例 -->## Containerd 配置示例
+## Containerd 配置示例
 
 ```toml
 # /etc/containerd/config.toml
@@ -519,9 +519,9 @@ func SelectNodesForPreemption(pod *Pod) {
     runtime_type = "io.containerd.runsc.v1"
 ```
 
-#<!-- chunk: Dynamic Resource Allocation (DRA) 设备分配 -->## Dynamic Resource Allocation (DRA) 设备分配
+## Dynamic Resource Allocation (DRA) 设备分配
 
-##<!-- chunk: 架构组件 -->## 架构组件
+## 架构组件
 
 ```
 ┌────────────────────────────────────────────────────────┐
@@ -548,7 +548,7 @@ func SelectNodesForPreemption(pod *Pod) {
                    └─────────────────┘
 ```
 
-##<!-- chunk: 分配流程 -->## 分配流程
+## 分配流程
 
 ```
 1. 用户创建 ResourceClaim
@@ -578,7 +578,7 @@ func SelectNodesForPreemption(pod *Pod) {
 
 <!-- chunk: 生产案例 -->## 生产案例
 
-#<!-- chunk: 案例1: 多租户集群优先级体系 -->## 案例1: 多租户集群优先级体系
+## 案例1: 多租户集群优先级体系
 
 **场景**: 企业多租户集群，需确保生产业务优先级。
 
@@ -672,7 +672,7 @@ spec:
 - 开发环境 Pod 最先被驱逐
 - 系统组件始终受保护
 
-#<!-- chunk: 案例2: 金融业务安全隔离 (Kata Containers) -->## 案例2: 金融业务安全隔离 (Kata Containers)
+## 案例2: 金融业务安全隔离 (Kata Containers)
 
 **场景**: 金融服务需强隔离沙箱运行时。
 
@@ -736,13 +736,17 @@ spec:
 
 **节点标签配置**:
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 为支持 Kata 的节点打标签
 kubectl label nodes node-01 node-role.kubernetes.io/kata=""
 kubectl taint nodes node-01 kata-only=true:NoSchedule
 ```
 
-#<!-- chunk: 案例3: GPU 动态分配 (DRA) -->## 案例3: GPU 动态分配 (DRA)
+## 案例3: GPU 动态分配 (DRA)
 
 **场景**: AI 训练平台，动态分配 NVIDIA GPU。
 
@@ -862,7 +866,7 @@ spec:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: PriorityClass 设计原则 -->## PriorityClass 设计原则
+## PriorityClass 设计原则
 
 1. **明确分层体系**
    ```
@@ -901,7 +905,7 @@ spec:
          values: ["prod-online"]
    ```
 
-#<!-- chunk: RuntimeClass 使用建议 -->## RuntimeClass 使用建议
+## RuntimeClass 使用建议
 
 1. **合理评估 Overhead**
    - Kata: 200-500m CPU, 256-512Mi Memory
@@ -909,6 +913,11 @@ spec:
    - 实际测试后调整
 
 2. **节点隔离策略**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
    ```bash
    # 专用节点组
    kubectl label nodes kata-node-{1..3} runtime=kata
@@ -924,7 +933,7 @@ spec:
    - pod_startup_duration{runtime_class="kata"} vs {runtime_class="runc"}
    ```
 
-#<!-- chunk: ResourceClaim DRA 注意事项 -->## ResourceClaim DRA 注意事项
+## ResourceClaim DRA 注意事项
 
 1. **版本兼容性检查**
    ```bash
@@ -974,9 +983,12 @@ spec:
 
 <!-- chunk: 常见问题 -->## 常见问题
 
-#<!-- chunk: PriorityClass FAQ -->## PriorityClass FAQ
+## PriorityClass FAQ
 
 **Q: Pod 无法调度，提示优先级不足？**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 检查事件
@@ -1025,7 +1037,7 @@ rules:
   resourceNames: ["dev-default", "staging"]
 ```
 
-#<!-- chunk: RuntimeClass FAQ -->## RuntimeClass FAQ
+## RuntimeClass FAQ
 
 **Q: Pod 报错 `RuntimeClass not found`？**
 
@@ -1053,6 +1065,10 @@ kubectl get pod -o jsonpath='{.spec.overhead}' <pod-name>
 **Q: Containerd 报错 `unknown handler "kata"`？**
 
 **排查步骤**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 检查 containerd 配置
 cat /etc/containerd/config.toml | grep -A 5 "kata"
@@ -1067,7 +1083,7 @@ systemctl restart containerd
 ctr run --runtime io.containerd.kata.v2 docker.io/library/busybox:latest test-kata
 ```
 
-#<!-- chunk: ResourceClaim FAQ -->## ResourceClaim FAQ
+## ResourceClaim FAQ
 
 **Q: ResourceClaim 一直 Pending？**
 
@@ -1101,6 +1117,9 @@ kubectl get resourceclaim <claim-name> -o yaml | grep allocation -A 20
 ```
 
 **Q: 如何释放已分配但未使用的 ResourceClaim？**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 手动删除 (如果 Pod 已删除)
@@ -1144,7 +1163,7 @@ kubectl get resourceclaim --all-namespaces -o json | \
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests KUDIG Database — Global MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - index.md|Domain-32 YAML 清单 — 开源项目索引]]
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -1165,4 +1184,4 @@ kubectl get resourceclaim --all-namespaces -o json | \
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]

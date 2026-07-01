@@ -87,7 +87,7 @@ func getVariantVersion(kubernetesVersion string, imageRepository string) (string
 | 参数名 | 类型 | 说明 | 验证规则 |
 |--------|------|------|---------|
 | `cfgPath` | `string` | 配置文件路径 | 可选，与 CLI 参数互斥 |
-| `kubernetesVersion` | `string` | [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 版本 | 必须是有效 semver (如 v1.28.0) |
+| `kubernetesVersion` | `string` | [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 版本 | 必须是有效 semver (如 v1.28.0) |
 | `controlPlaneEndpoint` | `string` | API Server 负载均衡地址 | 格式: host:port |
 | `apiserverAdvertiseAddress` | `string` | API Server 广播地址 | 有效 IPv4/IPv6 地址 |
 | `apiserverBindPort` | `int32` | API Server 监听端口 | 范围 1-65535，默认 6443 |
@@ -378,6 +378,9 @@ func (r *Runner) Run() error {
 
 ### kubeadm init 完整阶段
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```
 步骤 1:  [preflight]      预检
     → 检查系统要求 (swap, ports, kernel, CRI)
@@ -447,6 +450,9 @@ func (r *Runner) Run() error {
 
 ### 场景 1: 标准单节点集群初始化
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 初始化集群
 kubeadm init \
@@ -499,10 +505,6 @@ apiServer:
   extraArgs:
     authorization-mode: "Node,RBAC"
     service-node-port-range: "30000-32767"
-
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
 
     enable-admission-plugins: "NodeRestriction,PodSecurityPolicy"
   certSANs:
@@ -658,6 +660,9 @@ controllerManager:
 
 ### 标准 init 输出
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubeadm init --pod-network-cidr=10.244.0.0/16
 # [init] Using Kubernetes version: v1.28.0
@@ -732,6 +737,7 @@ kubeadm init phase upload-config all --config=kubeadm-config.yaml
 kubeadm init phase bootstrap-token --config=kubeadm-config.yaml
 kubeadm init phase mark-control-plane --config=kubeadm-config.yaml
 kubeadm init phase addon all --config=kubeadm-config.yaml
+
 ```
 
 ## 常见错误
@@ -740,7 +746,7 @@ kubeadm init phase addon all --config=kubeadm-config.yaml
 |------|------|---------|
 | `[ERROR Swap]: running with swap on is not supported` | 开启了 swap | `swapoff -a` 并注释 `/etc/fstab` 中的 swap 行 |
 | `[ERROR Port-6443]: Port 6443 is in use` | API Server 端口被占用 | 释放端口: `lsof -i :6443` 或更换端口 |
-| `[ERROR CRI]: [[Container Runtime|container runtime]] is not ready` | CRI 运行时未安装或未启动 | 安装并启动 containerd |
+| `[ERROR CRI]: [[concepts/container-runtime.md|container runtime]] is not ready` | CRI 运行时未安装或未启动 | 安装并启动 containerd |
 | `[ERROR FileContent--proc-sys-net-ipv4-ip_forward]` | 未开启 IP 转发 | `sysctl -w net.ipv4.ip_forward=1` |
 | `[ERROR DirAvailable--var-lib-etcd]: /var/lib/etcd is not empty` | etcd 数据目录不为空 | 清理: `rm -rf /var/lib/etcd/*` |
 | `[ERROR Service-Docker]: docker service is not enabled` | Docker 服务问题 | 改用 containerd 作为 CRI |
@@ -759,3 +765,5 @@ kubeadm init phase addon all --config=kubeadm-config.yaml
 - [初始化阶段](17-init-phases.md) — phase 详细说明
 - [CRI 运行时](18-cri-runtime.md) — CRI 预检和容器运行时
 - [高级配置](11-advanced.md) — InitConfiguration 详解
+
+```

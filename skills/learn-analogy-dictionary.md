@@ -129,8 +129,8 @@ created: "2026-05-23"
 
 ## Related
 
-- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
-- [[entities/statefulset|statefulset]] — StatefulSet
+- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[entities/statefulset.md|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)

@@ -413,6 +413,10 @@ D1.2: Endpoints 是否为空？
 
 **Step D2.4**: 直接 Pod 连通性测试（绕过 Service）
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 从测试 Pod 直接访问后端 Pod IP（绕过 Service ClusterIP）
   kubectl exec <test-pod> -n <test-namespace> -- curl -s -o /dev/null -w "%{http_code}" --connect-timeout 5 http://<pod-ip>:<container-port>/
@@ -591,11 +595,12 @@ D1.2: Endpoints 是否为空？
 
 ### Phase 3: 主动探测（低风险，可能需审批）
 
-> ⚠️ 以下步骤涉及主动网络请求或轻量修改操作。在 L2-semi-auto 模式下，🟢 低风险步骤可自动执行，🟡 中风险步骤需人工确认。
-> **预计耗时**: 3-10 分钟
-
 **Step D3.1**: 完整连通性矩阵测试
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 从多个不同节点上的 Pod 测试 Service 连通性
   # Pod A (节点1) → Service
@@ -619,6 +624,10 @@ D1.2: Endpoints 是否为空？
 
 **Step D3.2**: 协议级测试
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # TCP 连通性测试
   kubectl exec <test-pod> -- nc -zv <service-cluster-ip> <port> -w 5
@@ -640,6 +649,10 @@ D1.2: Endpoints 是否为空？
 
 **Step D3.3**: 负载测试确认容量问题
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 快速并发测试（10 个并发请求）
   kubectl exec <test-pod> -- sh -c 'for i in $(seq 1 10); do curl -s -o /dev/null -w "%{http_code} %{time_total}s\n" --connect-timeout 5 http://<service-cluster-ip>:<port>/ & done; wait'
@@ -853,6 +866,10 @@ D1.2: Endpoints 是否为空？
 
 **Step D5.4**: 验证 BackendRef 目标 Service 可达性
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 获取 HTTPRoute 的 backendRefs
   kubectl get httproute <route-name> -n <namespace> -o jsonpath='{.spec.rules[*].backendRefs[*]}' | jq .
@@ -916,6 +933,10 @@ D1.2: Endpoints 是否为空？
   kubectl get pods -n <namespace> -l <any-known-label> --show-labels
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案A: 修复 Service 的 selector（推荐，不影响已运行 Pod）
   kubectl patch svc <service> -n <namespace> -p '{"spec":{"selector":{"app":"<correct-value>","version":"<correct-value>"}}}'
@@ -935,6 +956,10 @@ D1.2: Endpoints 是否为空？
   # 预期: EndpointSlice 中包含就绪地址
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 恢复原始 selector
   kubectl patch svc <service> -n <namespace> -p '{"spec":{"selector":{"app":"<original-value>"}}}'
@@ -943,6 +968,10 @@ D1.2: Endpoints 是否为空？
 #### REM-002: 修复 Service targetPort/port 映射
 - **适用根因**: RC-003, RC-010
 - **前置检查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 确认容器实际监听的端口
   kubectl exec <pod> -n <namespace> -- ss -tlnp 2>/dev/null || \
@@ -950,6 +979,10 @@ D1.2: Endpoints 是否为空？
   # 记录实际监听的端口号和协议
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 修复 targetPort
   kubectl patch svc <service> -n <namespace> --type='json' \
@@ -960,6 +993,10 @@ D1.2: Endpoints 是否为空？
     -p='[{"op":"replace","path":"/spec/ports/0/protocol","value":"<TCP-or-UDP>"}]'
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 测试连通性
   kubectl exec <test-pod> -- curl -s -o /dev/null -w "%{http_code}" --connect-timeout 5 http://<service-cluster-ip>:<port>/
@@ -969,6 +1006,10 @@ D1.2: Endpoints 是否为空？
   kubectl get svc <service> -n <namespace> -o jsonpath='{range .spec.ports[*]}{"port:"}{.port}{" targetPort:"}{.targetPort}{" protocol:"}{.protocol}{"\n"}{end}'
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 恢复原始 targetPort
   kubectl patch svc <service> -n <namespace> --type='json' \
@@ -987,6 +1028,10 @@ D1.2: Endpoints 是否为空？
   kubectl get pods -n <namespace> -l <selector> -o custom-columns=NAME:.metadata.name,READY:.status.containerStatuses[*].ready
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 删除 Endpoints 对象（controller 会自动重建）
   kubectl delete endpoints <service> -n <namespace>
@@ -1025,6 +1070,10 @@ D1.2: Endpoints 是否为空？
   kubectl get deployment <deployment> -n <namespace> -o jsonpath='{.spec.strategy}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 示例: 增加 initialDelaySeconds 和 timeoutSeconds
   kubectl patch deployment <deployment> -n <namespace> --type='json' \
@@ -1045,6 +1094,10 @@ D1.2: Endpoints 是否为空？
   # 预期: ENDPOINTS 中包含新 Pod IP
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 回滚 Deployment 到上一版本
   kubectl rollout undo deployment/<deployment> -n <namespace>
@@ -1064,6 +1117,11 @@ D1.2: Endpoints 是否为空？
   kubectl describe networkpolicy <policy-name> -n <namespace>
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 方案A: 为现有 default-deny 策略添加允许规则
   kubectl apply -f - <<EOF
@@ -1095,6 +1153,10 @@ D1.2: Endpoints 是否为空？
   # kubectl delete networkpolicy <blocking-policy-name> -n <namespace>
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 测试连通性
   kubectl exec <client-pod> -n <client-namespace> -- curl -s -o /dev/null -w "%{http_code}" --connect-timeout 5 http://<service>.<namespace>.svc.cluster.local:<port>/
@@ -1104,6 +1166,11 @@ D1.2: Endpoints 是否为空？
   kubectl get networkpolicy -n <namespace>
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 方案A 回滚: 删除新添加的允许策略
   kubectl delete networkpolicy allow-to-<service> -n <namespace>
@@ -1125,12 +1192,20 @@ D1.2: Endpoints 是否为空？
   kubectl logs -n kube-system -l k8s-app=kube-proxy --field-selector spec.nodeName=<node-name> --tail=20
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 删除特定节点上的 kube-proxy Pod（DaemonSet controller 会自动重建）
   KUBE_PROXY_POD=$(kubectl get pods -n kube-system -l k8s-app=kube-proxy --field-selector spec.nodeName=<node-name> -o jsonpath='{.items[0].metadata.name}')
   kubectl delete pod $KUBE_PROXY_POD -n kube-system
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 等待新 Pod 启动
   sleep 30
@@ -1166,6 +1241,10 @@ D1.2: Endpoints 是否为空？
   # 需人工确认
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch svc <service> -n <namespace> -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'
   ```
@@ -1180,6 +1259,10 @@ D1.2: Endpoints 是否为空？
   # 预期: Cluster
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   kubectl patch svc <service> -n <namespace> -p '{"spec":{"externalTrafficPolicy":"Local"}}'
   ```
@@ -1206,6 +1289,13 @@ D1.2: Endpoints 是否为空？
   kubectl logs <pod-name> -n <namespace> -c linkerd-proxy --tail=50 2>/dev/null
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 方案A: 重启 Pod 以触发 sidecar 重新注入（最常用）
   kubectl delete pod <pod-name> -n <namespace>
@@ -1245,6 +1335,10 @@ D1.2: Endpoints 是否为空？
   EOF
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 确认 sidecar 注入成功
   kubectl get pod <new-pod-name> -n <namespace> -o jsonpath='{.spec.containers[*].name}' | grep -E 'istio-proxy|linkerd-proxy'
@@ -1267,6 +1361,12 @@ D1.2: Endpoints 是否为空？
   # 预期: 无大量错误指标
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 方案A 回滚: Pod 重启为幂等操作，无需回滚
   
@@ -1320,6 +1420,10 @@ D1.2: Endpoints 是否为空？
      kubectl get configmap kube-proxy -n kube-system -o yaml > kube-proxy-configmap-backup.yaml
      ```
   2. **修改 kube-proxy ConfigMap**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
      ```bash
      kubectl edit configmap kube-proxy -n kube-system
      # 修改 mode 字段:
@@ -1327,6 +1431,10 @@ D1.2: Endpoints 是否为空？
      # 如果切换到 IPVS，确保节点内核加载了 ip_vs 模块
      ```
   3. **滚动重启 kube-proxy DaemonSet**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
      ```bash
      kubectl rollout restart daemonset kube-proxy -n kube-system
      kubectl rollout status daemonset kube-proxy -n kube-system --timeout=300s
@@ -1342,6 +1450,11 @@ D1.2: Endpoints 是否为空？
   - 确认集群内无依赖特定 kube-proxy 模式行为的组件
   - 建议在维护窗口内执行
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 恢复原始 ConfigMap
   kubectl apply -f kube-proxy-configmap-backup.yaml
@@ -1360,6 +1473,10 @@ D1.2: Endpoints 是否为空？
      ls /etc/cni/net.d/  # 通过 kubectl debug node 执行
      ```
   2. **重启问题节点上的 CNI Pod**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      # Calico 示例
      kubectl delete pod -n kube-system -l k8s-app=calico-node --field-selector spec.nodeName=<problem-node>
@@ -1374,6 +1491,10 @@ D1.2: Endpoints 是否为空？
      kubectl debug node/<healthy-node> -it --image=busybox -- cat /host/etc/cni/net.d/10-calico.conflist
      ```
   4. **验证跨节点连通性恢复**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
      ```bash
      kubectl exec <pod-on-node-a> -- ping -c 3 <pod-ip-on-node-b>
      kubectl exec <pod-on-node-a> -- curl -s --connect-timeout 5 http://<pod-ip-on-node-b>:<port>/
@@ -1382,6 +1503,10 @@ D1.2: Endpoints 是否为空？
   - 确认修改不影响其他正常节点的网络
   - 如需修改 CNI 配置，先在非生产节点验证
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
   ```bash
   # 恢复原始 CNI 配置文件（需提前备份）
   # 重启 CNI DaemonSet Pod
@@ -1408,6 +1533,10 @@ D1.2: Endpoints 是否为空？
      # 确认 maxUnavailable 不超过节点总数的 25%
      ```
   3. **执行滚动重启**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
      ```bash
      kubectl rollout restart daemonset kube-proxy -n kube-system
      ```
@@ -1416,6 +1545,10 @@ D1.2: Endpoints 是否为空？
      kubectl rollout status daemonset kube-proxy -n kube-system --timeout=600s
      ```
   5. **验证全集群 Service 连通性**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
      ```bash
      # 在多个节点上的 Pod 中测试 Service 访问
      for pod in <pod1> <pod2> <pod3>; do
@@ -1423,6 +1556,10 @@ D1.2: Endpoints 是否为空？
      done
      ```
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 如果重启导致大规模 Service 中断
   # 恢复 DaemonSet 配置
@@ -1435,6 +1572,9 @@ D1.2: Endpoints 是否为空？
 ## 7. 验证确认
 
 ### 7.1 即时验证（修复后 1-2 分钟内）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # V1: 确认 Endpoints 已填充后端 Pod IP
@@ -1668,7 +1808,7 @@ kubectl get events -n <namespace> --field-selector involvedObject.name=<service>
 |------|---------|---------|
 | Kubernetes 网络模型与 Service 实现 | `domain-03-networking-traffic/` | 理解 Service 的底层实现（iptables/IPVS/nftables 规则生成机制） |
 | Service 故障树分析 | `domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md` | 理解 Service 连通性问题的完整因果链和概率模型 |
-| Ingress 故障树分析 | `domain-10-troubleshooting-diagnostics/topic-fta/[[skills/ingress-fta|ingress-fta]].md` | 当问题涉及 Ingress → Service 链路时的参考 |
+| Ingress 故障树分析 | `domain-10-troubleshooting-diagnostics/topic-fta/[[skills/ingress-fta.md|ingress-fta]].md` | 当问题涉及 Ingress → Service 链路时的参考 |
 | 网络故障排查深度指南 | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/` | 超出本 Skill 覆盖范围的深度网络排查方法 |
 | Kubernetes 故障排查方法论 | `domain-10-troubleshooting-diagnostics/` | 系统化故障排查的理论基础和方法论 |
 | DNS 诊断 | `SKILL-NET-001` | 当问题根因在 DNS 层面时的关联 Skill |
@@ -1730,6 +1870,9 @@ danger_operations:
 
 ### 通用验证步骤
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 确认 Service 有 Endpoints
 kubectl get endpoints <svc> -n <ns>
@@ -1746,4 +1889,6 @@ kubectl exec <test-pod> -n <test-ns> -- curl -s -o /dev/null -w "%{http_code}" -
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+
+```

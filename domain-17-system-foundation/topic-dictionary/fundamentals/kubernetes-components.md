@@ -46,7 +46,7 @@ Kubernetes 集群由控制平面（Control Plane）和一组工作节点（Worke
 控制平面负责管理集群的整体状态，决策全局操作：
 
 - **kube-apiserver**：Kubernetes 的核心组件，暴露 HTTP API，是用户和集群内部组件交互的入口。
-- **[[etcd|etcd]]**：一致且高可用的键值存储，保存所有 API 服务器的数据，是集群状态的单一事实来源。
+- **[[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]]**：一致且高可用的键值存储，保存所有 API 服务器的数据，是集群状态的单一事实来源。
 - **kube-scheduler**：负责监听未绑定到节点的 Pod，并根据资源需求、策略约束等为每个 Pod 分配合适的节点。
 - **kube-controller-manager**：运行多个控制器（如节点控制器、副本控制器、端点控制器等），将集群状态驱动到期望状态。
 - **cloud-controller-manager**（可选）：与底层云提供商集成，负责节点、路由、负载均衡器等云资源的生命周期管理。
@@ -82,4 +82,8 @@ Kubernetes 集群由控制平面（Control Plane）和一组工作节点（Worke
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/pod.md|Pod]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/container.md|Container]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/node.md|Node]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/namespace.md|Namespace]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/cluster.md|Cluster]]

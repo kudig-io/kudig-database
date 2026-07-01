@@ -114,7 +114,7 @@ k8s_versions:
 
 <!-- chunk: 前置条件 -->## 前置条件
 
-#<!-- chunk: 操作系统支持 -->## 操作系统支持
+## 操作系统支持
 
 | 发行版 | 版本 | 说明 |
 |--------|------|------|
@@ -124,7 +124,7 @@ k8s_versions:
 | **Debian** | 11 / 12 | 稳定可靠 |
 | **Rocky Linux** | 8.x / 9.x | CentOS 替代品 |
 
-#<!-- chunk: 硬件要求 -->## 硬件要求
+## 硬件要求
 
 | 方案 | CPU (最低/推荐) | 内存 (最低/推荐) | 磁盘 (最低/推荐) | 网络 |
 |------|----------------|-----------------|-----------------|------|
@@ -138,7 +138,7 @@ k8s_versions:
 
 > **重要**: 以下步骤适用于所有方案 (k3s / kubeadm / MicroK8s)，请务必完成。
 
-#<!-- chunk: 1. 设置主机名 -->## 1. 设置主机名
+## 1. 设置主机名
 
 ```bash
 # 设置有意义的主机名
@@ -154,7 +154,7 @@ ping -c 1 $(hostname)
 # 预期: 能 ping 通
 ```
 
-#<!-- chunk: 2. 关闭 Swap -->## 2. 关闭 Swap
+## 2. 关闭 Swap
 
 > **为什么要关闭 Swap？** kubelet 默认要求关闭 swap，因为 swap 会导致 Pod 的内存限制失效，影响调度器的决策准确性。
 
@@ -172,9 +172,12 @@ free -h | grep Swap
 # 如果 Swap total 不是 0，说明没关成功
 ```
 
-#<!-- chunk: 3. 关闭防火墙 (开发/测试环境) -->## 3. 关闭防火墙 (开发/测试环境)
+## 3. 关闭防火墙 (开发/测试环境)
 
 > **备注**: 生产环境不建议关闭防火墙，而是配置允许规则。这里为了简化操作先关闭。
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # ===== Ubuntu/Debian =====
@@ -204,7 +207,7 @@ sudo systemctl status firewalld
 # sudo firewall-cmd --reload
 ```
 
-#<!-- chunk: 4. 关闭 SELinux (CentOS/RHEL) -->## 4. 关闭 SELinux (CentOS/RHEL)
+## 4. 关闭 SELinux (CentOS/RHEL)
 
 > **为什么？** SELinux 的严格模式会阻止 kubelet 和容器的某些操作。可以设为 permissive (只记录不阻止)。
 
@@ -224,7 +227,7 @@ getenforce
 # 预期输出: Permissive
 ```
 
-#<!-- chunk: 5. 加载内核模块 -->## 5. 加载内核模块
+## 5. 加载内核模块
 
 > **为什么需要这些模块？**  
 > - `overlay`: 容器文件系统 (OverlayFS) 需要  
@@ -248,7 +251,7 @@ lsmod | grep -E "overlay|br_netfilter"
 # overlay                xxxxx  0
 ```
 
-#<!-- chunk: 6. 配置内核网络参数 -->## 6. 配置内核网络参数
+## 6. 配置内核网络参数
 
 > **为什么需要这些参数？**  
 > - `bridge-nf-call-iptables`: 确保 Pod 间的桥接流量能被 iptables/netfilter 处理  
@@ -271,7 +274,7 @@ sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables ne
 # 预期输出: 三个值都是 1
 ```
 
-#<!-- chunk: 7. 时间同步 -->## 7. 时间同步
+## 7. 时间同步
 
 > **为什么重要？** 证书验证、日志时间戳、etcd 一致性都依赖准确的时间。
 
@@ -299,7 +302,7 @@ timedatectl
 > **特点**: 单个二进制文件 (~60MB)，内置 Traefik Ingress、CoreDNS、本地存储、ServiceLB。  
 > **最适合**: 个人开发、边缘计算、IoT、资源受限场景。
 
-#<!-- chunk: A1. 在线安装 -->## A1. 在线安装
+## A1. 在线安装
 
 ```bash
 # ===== 最简安装 (一条命令) =====
@@ -325,7 +328,7 @@ sudo k3s kubectl get nodes
 # k8s-single-node   Ready    control-plane,master   1m    v1.28.x+k3s1
 ```
 
-#<!-- chunk: A2. 配置 kubectl (免 sudo) -->## A2. 配置 kubectl (免 sudo)
+## A2. 配置 kubectl (免 sudo)
 
 ```bash
 # 复制 kubeconfig 到用户目录
@@ -353,7 +356,7 @@ kubectl get pods -A
 # kube-system   traefik-xxx                               1/1     Running   0          2m  ← Ingress Controller
 ```
 
-#<!-- chunk: A3. 自定义安装选项 -->## A3. 自定义安装选项
+## A3. 自定义安装选项
 
 ```bash
 # ===== 常用安装参数 =====
@@ -378,7 +381,7 @@ curl -sfL https://get.k3s.io | sh -s - \
   --datastore-endpoint="mysql://user:pass@tcp(db-host:3306)/k3s"
 ```
 
-#<!-- chunk: A4. k3s 配置文件方式 (推荐) -->## A4. k3s 配置文件方式 (推荐)
+## A4. k3s 配置文件方式 (推荐)
 
 > **备注**: 对于复杂配置，使用配置文件比命令行参数更清晰、易维护。
 
@@ -424,7 +427,7 @@ sudo systemctl restart k3s
 sudo k3s check-config
 ```
 
-#<!-- chunk: A5. k3s 离线安装 -->## A5. k3s 离线安装
+## A5. k3s 离线安装
 
 > **场景**: 服务器没有互联网访问，需要提前下载安装包。
 
@@ -458,7 +461,10 @@ INSTALL_K3S_SKIP_DOWNLOAD=true ./install.sh
 sudo k3s kubectl get nodes
 ```
 
-#<!-- chunk: A6. k3s 管理命令 -->## A6. k3s 管理命令
+## A6. k3s 管理命令
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 查看服务状态
@@ -495,11 +501,15 @@ ps aux | grep k3s  # 查看运行时参数
 > **特点**: 完全标准的 K8s，与生产环境一致的组件架构，但需要手动安装更多组件。  
 > **最适合**: 想深入理解 K8s 架构、准备向多节点/生产环境过渡的场景。
 
-#<!-- chunk: B1. 安装容器运行时 (containerd) -->## B1. 安装容器运行时 (containerd)
+## B1. 安装容器运行时 (containerd)
 
 > **为什么选 containerd？** 从 K8s 1.24 开始，Docker 不再直接支持作为运行时。containerd 是目前最主流的选择，轻量且稳定。
 
 **Ubuntu/Debian**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 安装 containerd
 sudo apt-get update
@@ -533,6 +543,10 @@ containerd config dump | grep SystemdCgroup
 ```
 
 **CentOS/RHEL/Rocky**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 添加 Docker 仓库 (containerd 在 Docker 仓库中)
 sudo yum install -y yum-utils
@@ -549,7 +563,7 @@ sudo systemctl restart containerd
 sudo systemctl enable containerd
 ```
 
-#<!-- chunk: B2. 安装 kubeadm、kubelet、kubectl -->## B2. 安装 kubeadm、kubelet、kubectl
+## B2. 安装 kubeadm、kubelet、kubectl
 
 **Ubuntu/Debian**:
 ```bash
@@ -599,7 +613,7 @@ sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 sudo systemctl enable kubelet
 ```
 
-#<!-- chunk: B3. 初始化集群 -->## B3. 初始化集群
+## B3. 初始化集群
 
 ```bash
 # ===== 预检查 (可选但推荐) =====
@@ -646,9 +660,12 @@ kubectl get nodes
 # 备注: NotReady 是正常的! 安装 CNI 后会变为 Ready
 ```
 
-#<!-- chunk: B4. 允许 Master 节点调度 Pod -->## B4. 允许 Master 节点调度 Pod
+## B4. 允许 Master 节点调度 Pod
 
 > **为什么？** 默认情况下，K8s 不允许在控制平面节点上运行用户 Pod (有 taint)。单节点模式必须移除这个限制。
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
 
 ```bash
 # 移除 control-plane 的 taint
@@ -661,9 +678,12 @@ kubectl describe node | grep -A 3 Taints
 # 预期输出: Taints: <none>
 ```
 
-#<!-- chunk: B5. 安装 CNI 网络插件 -->## B5. 安装 CNI 网络插件
+## B5. 安装 CNI 网络插件
 
 > **CNI (Container Network Interface)** 负责为 Pod 分配 IP、实现 Pod 间通信。没有 CNI，Pod 无法联网。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # ===== 方案 1: Flannel (简单、适合学习) =====
@@ -701,6 +721,9 @@ kubectl get nodes
 
 > **MicroK8s** 是 Canonical (Ubuntu 母公司) 推出的轻量 K8s 发行版，通过 snap 包管理。  
 > **最适合**: Ubuntu 系统用户、想要插件化管理的场景。
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
 
 ```bash
 # 安装 (仅限支持 snap 的 Linux 发行版)
@@ -750,9 +773,13 @@ microk8s dashboard-proxy
 
 > **备注**: k3s 已内置以下大部分组件，MicroK8s 通过插件管理。kubeadm 需要手动安装。
 
-#<!-- chunk: 安装 metrics-server -->## 安装 metrics-server
+## 安装 metrics-server
 
 > **作用**: 提供节点和 Pod 的 CPU/内存指标，是 `kubectl top` 和 HPA 的数据来源。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
@@ -775,9 +802,14 @@ kubectl top pods -A
 # 预期: 显示所有 Pod 的 CPU/内存使用
 ```
 
-#<!-- chunk: 安装本地存储 (StorageClass) -->## 安装本地存储 (StorageClass)
+## 安装本地存储 (StorageClass)
 
 > **作用**: 提供 PVC 动态供给能力，应用可以声明存储需求并自动创建 PV。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 安装 local-path-provisioner (Rancher 出品，与 k3s 内置的相同)
@@ -812,7 +844,10 @@ kubectl get pvc test-pvc
 kubectl delete pvc test-pvc
 ```
 
-#<!-- chunk: 安装 Ingress Controller -->## 安装 Ingress Controller
+## 安装 Ingress Controller
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 Nginx Ingress Controller (裸金属版本)
@@ -938,7 +973,10 @@ ETCDCTL_API=3 sudo etcdctl snapshot status /backup/etcd-$(date +%Y%m%d).db --wri
 
 <!-- chunk: 常见问题 (FAQ) -->## 常见问题 (FAQ)
 
-#<!-- chunk: Q1: kubeadm init 报错 "container runtime is not running" -->## Q1: kubeadm init 报错 "container runtime is not running"
+## Q1: kubeadm init 报错 "container runtime is not running"
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # containerd 配置问题，检查并修复
@@ -950,7 +988,7 @@ sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/conf
 sudo systemctl restart containerd
 ```
 
-#<!-- chunk: Q2: 节点一直 NotReady -->## Q2: 节点一直 NotReady
+## Q2: 节点一直 NotReady
 
 ```bash
 # 通常是 CNI 未安装或安装失败
@@ -960,7 +998,7 @@ sudo journalctl -u kubelet -n 50 --no-pager  # 查看 kubelet 日志
 # 常见原因: CNI 未安装 → 安装 Flannel 或 Calico
 ```
 
-#<!-- chunk: Q3: k3s 安装后 kubectl 报权限错误 -->## Q3: k3s 安装后 kubectl 报权限错误
+## Q3: k3s 安装后 kubectl 报权限错误
 
 ```bash
 # k3s 的 kubeconfig 默认只有 root 可读
@@ -968,14 +1006,20 @@ sudo chmod 644 /etc/rancher/k3s/k3s.yaml
 # 或复制到用户目录 (参考 A2 步骤)
 ```
 
-#<!-- chunk: Q4: Pod 一直 Pending，提示 "1 node(s) had untolerated taint" -->## Q4: Pod 一直 Pending，提示 "1 node(s) had untolerated taint"
+## Q4: Pod 一直 Pending，提示 "1 node(s) had untolerated taint"
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
 
 ```bash
 # kubeadm 单节点忘记移除 taint
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 ```
 
-#<!-- chunk: Q5: 镜像拉取失败 (国内网络) -->## Q5: 镜像拉取失败 (国内网络)
+## Q5: 镜像拉取失败 (国内网络)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # k3s: 使用 /etc/rancher/k3s/registries.yaml 配置镜像代理
@@ -997,15 +1041,20 @@ sudo systemctl restart k3s
 
 <!-- chunk: 清理/卸载 -->## 清理/卸载
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
+
 ```bash
 # ===== k3s 卸载 =====
 /usr/local/bin/k3s-uninstall.sh
 # 清理残留数据 (可选)
-sudo rm -rf /var/lib/rancher /etc/rancher
+sudo rm -rf /var/lib/rancher /etc/rancher  # ⚠️ 删除系统/数据文件
 
 # ===== kubeadm 卸载 =====
-sudo kubeadm reset -f
-sudo rm -rf /etc/kubernetes/ /var/lib/kubelet/ /var/lib/etcd/ ~/.kube/
+sudo kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
+sudo rm -rf /etc/kubernetes/ /var/lib/kubelet/ /var/lib/etcd/ ~/.kube/  # ⚠️ 删除系统/数据文件
 # 清理 iptables 规则
 sudo iptables -F && sudo iptables -t nat -F && sudo iptables -t mangle -F && sudo iptables -X
 # 卸载软件包
@@ -1035,15 +1084,17 @@ sudo snap remove microk8s
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-deployment MOC
-- [[domain-08-release-change-management/topic-deployment/README|Kubernetes 部署方案指南 (Deployment Guide)]]
-- [[domain-08-release-change-management/topic-deployment/01-local-demo-deployment|01 - 本机单机 Demo 部署]]
-- [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment|03 - 研发环境部署 (Development Environment Deployment)]]
-- [[domain-08-release-change-management/topic-deployment/04-production-environment-deployment|04 - 生产环境部署 (Production Environment Deployment)]]
+- [[domain-08-release-change-management/topic-deployment/README.md|Kubernetes 部署方案指南 (Deployment Guide)]]
+- [[domain-08-release-change-management/topic-deployment/01-local-demo-deployment.md|01 - 本机单机 Demo 部署]]
+- [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment)]]
+- [[domain-08-release-change-management/topic-deployment/04-production-environment-deployment.md|04 - 生产环境部署 (Production Environment Deployment)]]
 
 ## Related
 
 - [[README|README]]
 - [[MOC|MOC]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux|linux]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+
+```

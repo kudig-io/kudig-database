@@ -95,10 +95,10 @@ securityContext:
 
 ## Related
 
-- [[concepts/secrets-management|secrets-management]] — [[Secrets|Secrets]]ts Management|Secrets Management]]
-- [[entities/kubelet|[[kubelet|kubelet]]]] — kubelet
+- [[concepts/secrets-management.md|secrets-management]] — [[Secrets|Secrets]]ts Management|Secrets Management]]
+- [[entities/kubelet.md|[[kubelet|kubelet]]]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/linux-container-foundation|linux-container-foundation]] — Linux Container Foundation
-- [[concepts/cloud-native-defense-in-depth|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
-- [[concepts/linux-container-foundation|Linux Container Foundation]]
-- [[concepts/cloud-native-defense-in-depth|Cloud Native Defense in Depth]]
+- [[concepts/linux-container-foundation.md|linux-container-foundation]] — Linux Container Foundation
+- [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
+- [[concepts/linux-container-foundation.md|Linux Container Foundation]]
+- [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]

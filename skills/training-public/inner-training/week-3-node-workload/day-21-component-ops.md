@@ -43,7 +43,7 @@ title: Day 21: K8S 组件运维
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] control plane components运维
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] control plane components运维
   - [[CoreDNS|CoreDNS]] troubleshooting DNS resolution
   - kube-proxy iptables IPVS mode
   - CNI Terway Flannel network troubleshooting
@@ -206,6 +206,10 @@ kubectl cluster-info
 
 ### 任务 2: CoreDNS 检查与排查 (40min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 查看 CoreDNS 运行状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns
@@ -272,6 +276,9 @@ kubectl rollout restart deployment coredns -n kube-system
 ```
 
 ### 任务 3: kube-proxy 与网络插件检查 (40min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 查看 kube-proxy 运行状态
@@ -349,6 +356,10 @@ aliyun cs GET /clusters/<cluster_id>/components --body '{"name":"coredns"}'
 ```
 
 ### 任务 5: 组件故障排查演练 (30min)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 场景 1: CoreDNS Pod 异常
@@ -582,3 +593,5 @@ API Server 暴露了 Prometheus 指标（`:443/metrics`），关键指标包括 
 - [组件故障排查总览](../../domain-10-troubleshooting-diagnostics/01-troubleshooting-overview.md)
 - [CoreDNS 排障指南](../../domain-10-troubleshooting-diagnostics/11-coredns-troubleshooting.md)
 - [kube-proxy 排障指南](../../domain-10-troubleshooting-diagnostics/10-kube-proxy-troubleshooting.md)
+
+```

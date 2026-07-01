@@ -71,7 +71,7 @@ Envoy Proxy 是由 Lyft 开发的高性能 L3/L4/L7 网络代理，2017年成为
 
 本文档从企业级运维专家角度，深入探讨 Envoy 的核心架构、xDS 配置管理、HTTP 连接管理器、高级负载均衡、安全配置（mTLS/RBAC）、性能调优、监控告警和故障排查。所有配置均可直接应用于生产环境，既适用于独立 Envoy 部署，也为理解服务网格底层数据平面提供参考。
 
-#<!-- chunk: Envoy 核心架构 -->## Envoy 核心架构
+## Envoy 核心架构
 
 ```mermaid
 graph TB
@@ -144,7 +144,7 @@ graph TB
 
 <!-- chunk: 核心配置 — 生产级 Envoy 部署 -->## 核心配置 — 生产级 Envoy 部署
 
-#<!-- chunk: 完整静态配置 -->## 完整静态配置
+## 完整静态配置
 
 ```yaml
 static_resources:
@@ -166,24 +166,24 @@ static_resources:
                     - name: backend
                       domains: ["*"]
                       routes:
-                        - match:
-                            prefix: "/api/v1/"
-                          route:
-                            cluster: api_backend
-                            timeout: 30s
-                            retry_policy:
-                              retry_on: "5xx,gateway-error,connect-failure,refused-stream"
-                              num_retries: 3
-                              per_try_timeout: 10s
-                              retry_back_off:
-                                base_interval: 0.5s
-                                max_interval: 10s
-                        - match:
-                            prefix: "/health"
-                          direct_response:
-                            status: 200
-                            body:
-                              inline_string: "OK"
+                        - matchers:
+                          - prefix="/api/v1/"
+                          - route=""
+                          - cluster="api_backend"
+                          - timeout="30s"
+                          - retry_policy=""
+                          - retry_on="5xx,gateway-error,connect-failure,refused-stream"
+                          - num_retries="3"
+                          - per_try_timeout="10s"
+                          - retry_back_off=""
+                          - base_interval="0.5s"
+                          - max_interval="10s"
+                        - matchers:
+                          - prefix="/health"
+                          - direct_response=""
+                          - status="200"
+                          - body=""
+                          - inline_string="OK"
                 http_filters:
                   - name: envoy.filters.http.fault
                     typed_config:
@@ -268,11 +268,11 @@ static_resources:
                     - name: secure_backend
                       domains: ["api.company.com"]
                       routes:
-                        - match:
-                            prefix: "/"
-                          route:
-                            cluster: api_backend
-                            timeout: 30s
+                        - matchers:
+                          - prefix="/"
+                          - route=""
+                          - cluster="api_backend"
+                          - timeout="30s"
                 http_filters:
                   - name: envoy.filters.http.router
                     typed_config:
@@ -385,10 +385,9 @@ stats_config:
     - tag_name: "response_code"
       regex: "\\.response_code:(\\d{3})"
   histogram_bucket_settings:
-    - match:
-        prefix: "http."
-      buckets: [0.5, 1.0, 5.0, 10.0, 25.0, 50.0, 100.0, 250.0, 500.0, 1000.0]
-
+    - matchers:
+      - prefix="http."
+      - buckets="[0.5, 1.0, 5.0, 10.0, 25.0, 50.0, 100.0, 250.0, 500.0, 1000.0]"
 admin:
   access_log_path: /dev/null
   address:
@@ -401,7 +400,7 @@ admin:
 
 <!-- chunk: 流量管理实战 -->## 流量管理实战
 
-#<!-- chunk: 高级负载均衡 -->## 高级负载均衡
+## 高级负载均衡
 
 ```yaml
 clusters:
@@ -444,7 +443,7 @@ clusters:
               end: 299
 ```
 
-#<!-- chunk: mTLS 安全配置 -->## mTLS 安全配置
+## mTLS 安全配置
 
 ```yaml
 clusters:
@@ -471,7 +470,7 @@ clusters:
         sni: "backend.service.consul"
 ```
 
-#<!-- chunk: RBAC 访问控制 -->## RBAC 访问控制
+## RBAC 访问控制
 
 ```yaml
 http_filters:
@@ -510,7 +509,7 @@ http_filters:
 
 <!-- chunk: Envoy 关键配置参数参考 -->## Envoy 关键配置参数参考
 
-#<!-- chunk: Listener 参数 -->## Listener 参数
+## Listener 参数
 
 | 参数 | 默认值 | 说明 | 推荐值 (生产) |
 |:---|:---|:---|:---|
@@ -521,7 +520,7 @@ http_filters:
 | socket_options.tcp_keepalive_intvl | - | TCP Keepalive 间隔 | 15s |
 | socket_options.tcp_keepalive_probes | - | TCP Keepalive 探测数 | 3 |
 
-#<!-- chunk: HTTP Connection Manager 参数 -->## HTTP Connection Manager 参数
+## HTTP Connection Manager 参数
 
 | 参数 | 默认值 | 说明 | 推荐值 (生产) |
 |:---|:---|:---|:---|
@@ -534,7 +533,7 @@ http_filters:
 | common_http_protocol_options.max_connection_duration | 0 (无限制) | 连接最大持续时间 | 按需 |
 | common_http_protocol_options.max_requests_per_connection | 0 (无限制) | 每连接最大请求数 | 1000 |
 
-#<!-- chunk: Cluster 参数 -->## Cluster 参数
+## Cluster 参数
 
 | 参数 | 默认值 | 说明 | 推荐值 (生产) |
 |:---|:---|:---|:---|
@@ -554,7 +553,7 @@ http_filters:
 
 <!-- chunk: 可观测性 — Prometheus, Jaeger, StatsD 集成 -->## 可观测性 — Prometheus, Jaeger, StatsD 集成
 
-#<!-- chunk: Prometheus 指标导出 -->## Prometheus 指标导出
+## Prometheus 指标导出
 
 ```yaml
 stats_sinks:
@@ -567,7 +566,7 @@ stats_sinks:
           cluster_name: metrics_service
 ```
 
-#<!-- chunk: 分布式追踪配置 -->## 分布式追踪配置
+## 分布式追踪配置
 
 ```yaml
 tracing:
@@ -581,7 +580,7 @@ tracing:
       service_name: "envoy-proxy"
 ```
 
-#<!-- chunk: 关键监控指标 -->## 关键监控指标
+## 关键监控指标
 
 ```promql
 envoy_cluster_upstream_rq_2xx_total / envoy_cluster_upstream_rq_total
@@ -592,7 +591,7 @@ envoy_server_memory_allocated / envoy_server_memory_heap_size
 rate(envoy_cluster_health_check_failure[5m]) / rate(envoy_cluster_health_check_attempt[5m])
 ```
 
-#<!-- chunk: Prometheus 告警规则 -->## Prometheus 告警规则
+## Prometheus 告警规则
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -665,7 +664,7 @@ spec:
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: 连接和线程优化 -->## 连接和线程优化
+## 连接和线程优化
 
 ```bash
 #!/bin/bash
@@ -681,7 +680,10 @@ envoy \
   --max-obj-name-len 256
 ```
 
-#<!-- chunk: 内核参数优化 -->## 内核参数优化
+## 内核参数优化
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
 
 ```bash
 sysctl -w net.core.rmem_max=134217728
@@ -694,7 +696,7 @@ sysctl -w net.ipv4.tcp_max_syn_backlog=65535
 ulimit -n 1048576
 ```
 
-#<!-- chunk: Envoy Admin API 输出示例 -->## Envoy Admin API 输出示例
+## Envoy Admin API 输出示例
 
 ```bash
 $ curl -s http://localhost:9901/server_info | jq '.'
@@ -747,7 +749,7 @@ $ curl -s http://localhost:9901/memory | jq '.'
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 诊断脚本 -->## 诊断脚本
+## 诊断脚本
 
 ```bash
 #!/bin/bash
@@ -781,7 +783,7 @@ echo "=== 9. 配置导出 ==="
 curl -s http://localhost:$ADMIN_PORT/config_dump > /tmp/envoy_config_dump.json
 ```
 
-#<!-- chunk: 常见问题速查 -->## 常见问题速查
+## 常见问题速查
 
 | 症状 | 可能原因 | 解决方案 |
 |:---|:---|:---|
@@ -824,7 +826,7 @@ curl -s http://localhost:$ADMIN_PORT/config_dump > /tmp/envoy_config_dump.json
 
 <!-- chunk: Kubernetes 部署实践 -->## Kubernetes 部署实践
 
-#<!-- chunk: Envoy 作为独立网关 -->## Envoy 作为独立网关
+## Envoy 作为独立网关
 
 ```yaml
 apiVersion: apps/v1
@@ -908,7 +910,7 @@ spec:
       targetPort: 443
 ```
 
-#<!-- chunk: Envoy xDS 动态配置 -->## Envoy xDS 动态配置
+## Envoy xDS 动态配置
 
 ```yaml
 # 使用控制平面 (如 go-control-plane) 提供 xDS 动态配置
@@ -958,7 +960,7 @@ static_resources:
           sni: xds-server.envoy-system
 ```
 
-#<!-- chunk: WASM 过滤器扩展 -->## WASM 过滤器扩展
+## WASM 过滤器扩展
 
 ```yaml
 http_filters:
@@ -990,7 +992,7 @@ http_filters:
 
 <!-- chunk: 高级可观测性配置 -->## 高级可观测性配置
 
-#<!-- chunk: Grafana Dashboard JSON (Envoy 代理概览) -->## Grafana Dashboard JSON (Envoy 代理概览)
+## Grafana Dashboard JSON (Envoy 代理概览)
 
 ```yaml
 apiVersion: v1
@@ -1038,7 +1040,7 @@ data:
 
 <!-- chunk: Envoy 高级流量管理 — 请求路由与重写 -->## Envoy 高级流量管理 — 请求路由与重写
 
-#<!-- chunk: 基于权重的流量分割 -->## 基于权重的流量分割
+## 基于权重的流量分割
 
 Envoy 支持多种高级流量分割策略，包括基于权重的流量分配、基于请求头的路由匹配、基于路径前缀的路由重写。以下配置展示了如何实现一个完整的蓝绿发布和金丝雀发布混合路由策略。其中稳定版本接收 90% 的流量，金丝雀版本接收 10% 的流量，同时内部测试用户的请求会被路由到金丝雀版本进行完整验证。
 
@@ -1062,40 +1064,40 @@ static_resources:
                     - name: backend_services
                       domains: ["api.company.com"]
                       routes:
-                        - match:
-                            headers:
-                              - name: "x-internal-test"
-                                exact_match: "true"
-                          route:
-                            cluster: api_canary
-                            timeout: 30s
-                        - match:
-                            prefix: "/api/v2/"
-                          route:
-                            cluster: api_v2
-                            prefix_rewrite: "/api/"
-                            timeout: 30s
-                            retry_policy:
-                              retry_on: "5xx,gateway-error,connect-failure"
-                              num_retries: 3
-                              per_try_timeout: 10s
-                        - match:
-                            prefix: "/"
-                          route:
-                            weighted_clusters:
-                              clusters:
-                                - name: api_stable
-                                  weight: 90
-                                - name: api_canary
-                                  weight: 10
-                            timeout: 30s
+                        - matchers:
+                          - headers=""
+                          - - name="x-internal-test"
+                          - exact_match="true"
+                          - route=""
+                          - cluster="api_canary"
+                          - timeout="30s"
+                        - matchers:
+                          - prefix="/api/v2/"
+                          - route=""
+                          - cluster="api_v2"
+                          - prefix_rewrite="/api/"
+                          - timeout="30s"
+                          - retry_policy=""
+                          - retry_on="5xx,gateway-error,connect-failure"
+                          - num_retries="3"
+                          - per_try_timeout="10s"
+                        - matchers:
+                          - prefix="/"
+                          - route=""
+                          - weighted_clusters=""
+                          - clusters=""
+                          - - name="api_stable"
+                          - weight="90"
+                          - - name="api_canary"
+                          - weight="10"
+                          - timeout="30s"
                 http_filters:
                   - name: envoy.filters.http.router
                     typed_config:
                       "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
 ```
 
-#<!-- chunk: Envoy 请求镜像（流量影子） -->## Envoy 请求镜像（流量影子）
+## Envoy 请求镜像（流量影子）
 
 请求镜像是 Envoy 的一项强大功能，它将生产流量的副本发送到影子集群进行测试，而不影响原始请求的响应。这对于验证新版本的性能和正确性非常有用。镜像流量是"发后即忘"（fire-and-forget）的，镜像请求的响应会被丢弃，镜像集群的延迟和错误不会影响生产流量。建议在生产环境中使用 1-10% 的镜像比例，避免对影子集群造成过大压力。
 
@@ -1105,26 +1107,26 @@ route_config:
     - name: shadow_backend
       domains: ["api.company.com"]
       routes:
-        - match:
-            prefix: "/api/"
-          route:
-            cluster: api_production
-            timeout: 30s
-          request_mirror_policies:
-            - cluster: api_shadow
-              runtime_fraction:
-                default_value:
-                  numerator: 10
-                  denominator: HUNDRED
-                runtime_key: "routing.request_mirror.api_shadow"
-              trace_sampled: true
+        - matchers:
+          - prefix="/api/"
+          - route=""
+          - cluster="api_production"
+          - timeout="30s"
+          - request_mirror_policies=""
+          - - cluster="api_shadow"
+          - runtime_fraction=""
+          - default_value=""
+          - numerator="10"
+          - denominator="HUNDRED"
+          - runtime_key="routing.request_mirror.api_shadow"
+          - trace_sampled="true"
 ```
 
 ---
 
 <!-- chunk: Envoy gRPC-JSON 转码配置 -->## Envoy gRPC-JSON 转码配置
 
-#<!-- chunk: gRPC 到 REST 的透明转换 -->## gRPC 到 REST 的透明转换
+## gRPC 到 REST 的透明转换
 
 Envoy 的 gRPC-JSON 转码过滤器允许 RESTful JSON API 客户端直接访问 gRPC 后端服务，无需修改后端代码。这对于同时支持移动端（gRPC）和 Web 端（REST JSON）的 API 服务特别有用。转码器根据 Protocol Buffers 服务定义自动将 JSON 请求转换为 gRPC 调用，并将 gRPC 响应转回 JSON 格式。
 
@@ -1150,11 +1152,11 @@ http_filters:
 
 <!-- chunk: Envoy 生产环境调优 — 内存与连接管理 -->## Envoy 生产环境调优 — 内存与连接管理
 
-#<!-- chunk: 内存优化策略 -->## 内存优化策略
+## 内存优化策略
 
 Envoy 代理的内存使用量直接影响 Kubernetes 集群的总资源消耗。在 Sidecar 模式下，每个 Pod 都运行一个 Envoy 代理，1000 个 Pod 的集群意味着 1000 个 Envoy 实例。因此，每个代理节省 10MB 内存就能为整个集群节省约 10GB 内存。以下是经过生产验证的内存优化策略：第一，合理配置 stats 前缀匹配规则，只收集必要的指标；第二，使用 statsd 或 metrics_service 导出指标而非 Prometheus 直接抓取，减少内存中的指标缓存；第三，配置 overload_manager 防止 OOM Kill；第四，对于低流量服务，降低连接池参数以减少空闲连接占用的内存。
 
-#<!-- chunk: 连接管理最佳实践 -->## 连接管理最佳实践
+## 连接管理最佳实践
 
 Envoy 的连接管理是影响性能和资源使用的核心因素。以下表格总结了关键参数的推荐值和调优建议：
 
@@ -1167,7 +1169,7 @@ Envoy 的连接管理是影响性能和资源使用的核心因素。以下表�
 | idleTimeout | 300s | 120s | 60s | 高流量可缩短空闲超时回收连接 |
 | connectTimeout | 1s | 3s | 5s | 跨集群调用建议 5s 以上 |
 
-#<!-- chunk: Envoy 监控指标筛选 -->## Envoy 监控指标筛选
+## Envoy 监控指标筛选
 
 Envoy 默认导出数千个指标，在 Sidecar 模式下会消耗大量内存。通过 stats_config 的 stats_tags 和 histogram_bucket_settings 可以精确控制哪些指标被收集和导出。生产环境推荐只收集以下关键指标类别：cluster 级别的 upstream 请求和延迟指标、listener 级别的 downstream 连接指标、server 级别的内存和 CPU 指标。以下配置展示了如何通过 inclusion_regexps 过滤指标：
 
@@ -1182,9 +1184,9 @@ stats_config:
     - tag_name: "response_code"
       regex: "\\.response_code:(\\d{3})"
   histogram_bucket_settings:
-    - match:
-        prefix: "cluster."
-      buckets: [1, 5, 10, 25, 50, 100, 250, 500, 1000, 5000]
+    - matchers:
+      - prefix="cluster."
+      - buckets="[1, 5, 10, 25, 50, 100, 250, 500, 1000, 5000]"
 ```
 
 ---
@@ -1197,7 +1199,7 @@ stats_config:
 
 <!-- chunk: Envoy 高级流量管理 — 请求 mirroring 与 shadow 测试 -->## Envoy 高级流量管理 — 请求 mirroring 与 shadow 测试
 
-#<!-- chunk: 请求镜像（Traffic Mirroring） -->## 请求镜像（Traffic Mirroring）
+## 请求镜像（Traffic Mirroring）
 
 请求镜像（也称为 Shadow Traffic）是一种零风险的生产测试技术，它将生产流量实时复制到镜像服务，不影响原始请求的响应。镜像功能在以下场景中特别有价值：验证新版本服务的正确性，在真实流量下测试数据库查询性能，评估新架构的延迟表现，收集新系统在真实请求模式下的指标数据。Envoy 的请求镜像配置非常简单，只需要在路由级别添加 request_mirror_policies 即可。镜像请求的响应会被 Envoy 忽略，不会影响原始请求的延迟和结果。
 
@@ -1214,7 +1216,7 @@ request_mirror_policies:
 
 镜像百分比可以通过 runtime_key 动态调整，无需重启 Envoy。在上面的配置中，默认镜像 10% 的流量到 v2 版本。通过修改 runtime 配置（如 via xDS 动态配置或文件系统），可以将镜像比例从 0% 平滑调整到 100%。这在逐步验证新服务时非常有用：先镜像 1% 流量观察 10 分钟，然后逐步提升到 10%、50%，最终切换到金丝雀发布或全量发布。
 
-#<!-- chunk: Shadow 测试最佳实践 -->## Shadow 测试最佳实践
+## Shadow 测试最佳实践
 
 使用请求镜像进行 Shadow 测试时，需要特别注意以下几点以避免对生产环境造成影响。首先，确保镜像目标服务使用独立的数据库或存储后端，避免镜像写入污染生产数据。对于数据库写操作，推荐使用镜像服务的独立 Schema 或 Namespace 隔离测试数据。其次，监控镜像服务的资源使用情况，确保镜像流量不会导致目标服务过载——设置连接池限制和熔断器保护镜像服务。第三，配置镜像服务的日志级别为 INFO 或 DEBUG，收集详细的请求处理日志用于后续分析。第四，对于包含敏感信息的请求（如支付、认证），确保镜像服务遵守相同的数据安全策略，或使用数据脱敏工具处理镜像请求中的敏感字段。
 
@@ -1223,7 +1225,7 @@ request_mirror_policies:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
 - Domain-26 服务网格与微服务 — 开源项目索引
 - Istio 企业级服务网格架构与实践
 - Linkerd 企业级服务网格深度实践
@@ -1244,4 +1246,4 @@ request_mirror_policies:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]

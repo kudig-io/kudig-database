@@ -200,7 +200,7 @@ MPI Operator 基于 Kubernetes CRD 实现 MPI 作业调度，其核心架构：
 
 ## 相关链接
 
-- [[references/k8s-knowledge-map|K8s 知识图谱]]
+- [[entities/k8s-knowledge-map.md|K8s 知识图谱]]
 
 ## Related
 

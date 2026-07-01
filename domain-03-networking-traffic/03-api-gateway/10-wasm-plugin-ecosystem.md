@@ -68,7 +68,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 为什么选择 Wasm -->## 1. 为什么选择 Wasm
 
-#<!-- chunk: 1.1 Wasm 插件价值主张 -->## 1.1 Wasm 插件价值主张
+## 1.1 Wasm 插件价值主张
 
 WebAssembly（Wasm）作为云原生 API 网关的插件运行时，相较于 Lua 脚本或原生 C++ 插件具备四大核心优势：
 
@@ -96,7 +96,7 @@ WebAssembly（Wasm）作为云原生 API 网关的插件运行时，相较于 Lu
 └────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.2 适用场景 -->## 1.2 适用场景
+## 1.2 适用场景
 
 | 场景类型 | 描述 | 推荐原因 |
 |---------|------|---------|
@@ -110,7 +110,7 @@ WebAssembly（Wasm）作为云原生 API 网关的插件运行时，相较于 Lu
 
 <!-- chunk: 2. proxy-wasm ABI 规范 -->## 2. proxy-wasm ABI 规范
 
-#<!-- chunk: 2.1 规范概述 -->## 2.1 规范概述
+## 2.1 规范概述
 
 proxy-wasm 是由 Envoy 社区主导、多家厂商共同制定的 WebAssembly 插件 ABI（Application Binary Interface）规范，定义了 Wasm 插件与代理宿主（host）之间的标准接口。
 
@@ -145,7 +145,7 @@ proxy-wasm 是由 Envoy 社区主导、多家厂商共同制定的 WebAssembly �
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 2.2 ABI 版本与 SDK 对应关系 -->## 2.2 ABI 版本与 SDK 对应关系
+## 2.2 ABI 版本与 SDK 对应关系
 
 | ABI 版本 | 发布时间 | 主要 SDK | 关键变化 |
 |---------|---------|---------|---------|
@@ -154,7 +154,7 @@ proxy-wasm 是由 Envoy 社区主导、多家厂商共同制定的 WebAssembly �
 | **0.2.1** | 2022-Q2 | 同上 | 修复内存模型 Bug，增加 shared_data |
 | **0.3.0（草案）** | 2024-Q1 | 实验性支持 | 支持异步 HTTP 调用、计时器精度提升 |
 
-#<!-- chunk: 2.3 内存模型 -->## 2.3 内存模型
+## 2.3 内存模型
 
 proxy-wasm 插件运行在独立的线性内存空间中。宿主与插件之间通过明确定义的缓冲区交换数据：
 
@@ -174,7 +174,7 @@ proxy-wasm 插件运行在独立的线性内存空间中。宿主与插件之间
 └──────────────────────┘            └──────────────────────┘
 ```
 
-#<!-- chunk: 2.4 核心 Host 回调分类 -->## 2.4 核心 Host 回调分类
+## 2.4 核心 Host 回调分类
 
 | 回调类别 | 函数示例 | 说明 |
 |---------|---------|------|
@@ -212,7 +212,7 @@ proxy-wasm 插件运行在独立的线性内存空间中。宿主与插件之间
 └──────────────────┴──────────────┴───────────────┴────────────────┴─────────────────┘
 ```
 
-#<!-- chunk: 3.1 Higress WasmPlugin CRD 示例 -->## 3.1 Higress WasmPlugin CRD 示例
+## 3.1 Higress WasmPlugin CRD 示例
 
 ```yaml
 apiVersion: extensions.higress.io/v1alpha1
@@ -232,7 +232,7 @@ spec:
     token_header: "X-Auth-Token"
 ```
 
-#<!-- chunk: 3.2 APISIX Wasm 插件配置示例 -->## 3.2 APISIX Wasm 插件配置示例
+## 3.2 APISIX Wasm 插件配置示例
 
 ```yaml
 # apisix/conf/config.yaml
@@ -257,7 +257,7 @@ routes:
 
 <!-- chunk: 4. Go Wasm 插件开发（TinyGo） -->## 4. Go Wasm 插件开发（TinyGo）
 
-#<!-- chunk: 4.1 开发环境准备 -->## 4.1 开发环境准备
+## 4.1 开发环境准备
 
 ```bash
 # 安装 TinyGo（推荐 0.31+）
@@ -272,7 +272,7 @@ go get github.com/tetratelabs/proxy-wasm-go-sdk@latest
 tinygo version   # tinygo version 0.31.2 ...
 ```
 
-#<!-- chunk: 4.2 完整插件示例：请求鉴权插件 -->## 4.2 完整插件示例：请求鉴权插件
+## 4.2 完整插件示例：请求鉴权插件
 
 ```go
 // plugin/main.go
@@ -385,7 +385,7 @@ func computeHMAC(message, key string) string {
 }
 ```
 
-#<!-- chunk: 4.3 构建步骤 -->## 4.3 构建步骤
+## 4.3 构建步骤
 
 ```bash
 # 1. 初始化 Go 模块
@@ -416,7 +416,7 @@ docker buildx build \
   -f Dockerfile.wasm .
 ```
 
-#<!-- chunk: 4.4 Dockerfile.wasm 示例 -->## 4.4 Dockerfile.wasm 示例
+## 4.4 Dockerfile.wasm 示例
 
 ```dockerfile
 FROM scratch
@@ -427,7 +427,7 @@ COPY wasm-auth-plugin.opt.wasm /plugin.wasm
 
 <!-- chunk: 5. Rust Wasm 插件开发 -->## 5. Rust Wasm 插件开发
 
-#<!-- chunk: 5.1 开发环境准备 -->## 5.1 开发环境准备
+## 5.1 开发环境准备
 
 ```bash
 # 安装 Rust Wasm 目标
@@ -441,7 +441,7 @@ rustup target add wasm32-unknown-unknown
 # serde_json = "1"
 ```
 
-#<!-- chunk: 5.2 完整插件示例：请求速率统计插件 -->## 5.2 完整插件示例：请求速率统计插件
+## 5.2 完整插件示例：请求速率统计插件
 
 ```rust
 // src/lib.rs
@@ -569,7 +569,7 @@ pub fn _start() {
 }
 ```
 
-#<!-- chunk: 5.3 Cargo.toml 配置 -->## 5.3 Cargo.toml 配置
+## 5.3 Cargo.toml 配置
 
 ```toml
 [package]
@@ -596,7 +596,7 @@ opt-level = "s"   # 优化体积
 strip = true
 ```
 
-#<!-- chunk: 5.4 构建步骤 -->## 5.4 构建步骤
+## 5.4 构建步骤
 
 ```bash
 # 编译 Wasm
@@ -625,7 +625,7 @@ docker buildx build \
 
 <!-- chunk: 6. 插件生命周期管理 -->## 6. 插件生命周期管理
 
-#<!-- chunk: 6.1 OCI 镜像分发架构 -->## 6.1 OCI 镜像分发架构
+## 6.1 OCI 镜像分发架构
 
 ```
 开发者工作站                   CI/CD 流水线               生产集群
@@ -650,7 +650,7 @@ docker buildx build \
                                                           └──────────────────────────┘
 ```
 
-#<!-- chunk: 6.2 版本管理策略 -->## 6.2 版本管理策略
+## 6.2 版本管理策略
 
 ```yaml
 # 生产环境：固定 digest 防止镜像被覆盖
@@ -673,7 +673,10 @@ spec:
   imagePullPolicy: Always
 ```
 
-#<!-- chunk: 6.3 热加载流程（Higress 为例） -->## 6.3 热加载流程（Higress 为例）
+## 6.3 热加载流程（Higress 为例）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
 时间轴
@@ -700,7 +703,7 @@ spec:
 
 <!-- chunk: 7. 性能开销分析 -->## 7. 性能开销分析
 
-#<!-- chunk: 7.1 延迟开销基准测试 -->## 7.1 延迟开销基准测试
+## 7.1 延迟开销基准测试
 
 测试环境：4c8g 节点，wrk 压测，1000 RPS，请求体 1KB
 
@@ -715,7 +718,7 @@ spec:
 
 > **注意**：Wasm 插件的主要延迟来源是数据拷贝（宿主 ↔ Wasm 内存），而非计算本身。对于仅操作 Header 的插件，开销极低。
 
-#<!-- chunk: 7.2 内存开销 -->## 7.2 内存开销
+## 7.2 内存开销
 
 | 组件 | 内存基准 | 说明 |
 |------|---------|------|
@@ -724,7 +727,7 @@ spec:
 | **每个请求上下文** | ~4 KB | 栈空间 + HttpContext 对象 |
 | **Shared Data（KV）** | 配置上限 | 默认 64MB，可通过配置调整 |
 
-#<!-- chunk: 7.3 优化建议 -->## 7.3 优化建议
+## 7.3 优化建议
 
 ```
 性能优化优先级（从高到低）
@@ -749,7 +752,7 @@ spec:
 
 <!-- chunk: 8. Wasm vs Lua vs 原生插件对比 -->## 8. Wasm vs Lua vs 原生插件对比
 
-#<!-- chunk: 8.1 综合对比表 -->## 8.1 综合对比表
+## 8.1 综合对比表
 
 | 维度 | Wasm 插件 | Lua 插件 | 原生插件（C++/Go） |
 |------|----------|---------|-----------------|
@@ -763,7 +766,7 @@ spec:
 | **开发复杂度** | ⭐⭐⭐ 需要了解 proxy-wasm ABI，构建链稍复杂 | ⭐⭐⭐⭐ 开发简单，脚本即插件 | ⭐⭐ 编译型语言，构建部署较繁琐 |
 | **推荐场景** | 复杂业务逻辑、多语言团队、跨产品复用 | 简单 Header 变换、快速原型 | 极致性能要求、底层协议处理 |
 
-#<!-- chunk: 8.2 选型决策树 -->## 8.2 选型决策树
+## 8.2 选型决策树
 
 ```
                  需要跨网关产品复用插件？
@@ -804,7 +807,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-40-cloud-native-api-gateway KUDIG Database — Global MOC
-- [[domain-03-networking-traffic/README|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
 - Domain-40 云原生 API 网关 — 开源项目索引
 - 01 - 云原生 API 网关架构总览
 - 02 - Kubernetes Gateway API 标准深度解析

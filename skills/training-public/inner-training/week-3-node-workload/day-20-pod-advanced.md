@@ -33,7 +33,7 @@ title: Day 20: Pod 容器组进阶
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] Pod scheduling affinity anti-affinity
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] Pod scheduling affinity anti-affinity
   - Pod liveness readiness startup probes
   - Pod resources requests limits
   - Kubernetes nodeSelector nodeAffinity
@@ -114,6 +114,10 @@ related_topics:
 
 ### 任务 1: nodeSelector 与 Affinity 调度 (40min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 给节点打标签
 kubectl label nodes <node-name> workload=web
@@ -159,6 +163,9 @@ kubectl get pod selector-demo affinity-demo -o wide
 
 ### 任务 2: Pod 反亲和性 (高可用部署) (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建 Deployment 并配置反亲和性 (Pod 分散到不同节点)
 cat <<EOF | kubectl apply -f -
@@ -197,6 +204,10 @@ kubectl get pod -l app=ha-app -o wide
 ```
 
 ### 任务 3: 健康探针配置 (40min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 创建带三种探针的 Pod
@@ -245,6 +256,10 @@ kubectl get pod probe-demo -w   # 观察 READY 变化
 ```
 
 ### 任务 4: 资源请求与限制 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 创建带资源配置的 Pod

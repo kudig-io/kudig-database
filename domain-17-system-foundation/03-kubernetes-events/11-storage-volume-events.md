@@ -71,9 +71,9 @@ created: "2026-05-23"
 
 <!-- chunk: 一、事件总览 -->## 一、事件总览
 
-#<!-- chunk: 1.1 本文档覆盖的事件列表 -->## 1.1 本文档覆盖的事件列表
+## 1.1 本文档覆盖的事件列表
 
-##<!-- chunk: **kubelet Volume Events (卷操作相关)** -->## **kubelet Volume Events (卷操作相关)**
+## **kubelet Volume Events (卷操作相关)**
 
 | 事件原因 (Reason) | 类型 | 生产频率 | 适用版本 | 简要说明 |
 |:---|:---|:---|:---|:---|
@@ -88,7 +88,7 @@ created: "2026-05-23"
 | `FileSystemResizeSuccessful` | Normal | 低频 | v1.15+ | 文件系统扩容成功 |
 | `FileSystemResizeFailed` | Warning | 低频 | v1.15+ | 文件系统扩容失败 |
 
-##<!-- chunk: **PV Controller Events (PV/PVC 管理相关)** -->## **PV Controller Events (PV/PVC 管理相关)**
+## **PV Controller Events (PV/PVC 管理相关)**
 
 | 事件原因 (Reason) | 类型 | 生产频率 | 适用版本 | 简要说明 |
 |:---|:---|:---|:---|:---|
@@ -109,7 +109,7 @@ created: "2026-05-23"
 - kubelet: `source.component: kubelet`
 - PV Controller: `source.component: persistentvolume-controller`
 
-#<!-- chunk: 1.2 快速索引 -->## 1.2 快速索引
+## 1.2 快速索引
 
 | 问题场景 | 关注事件 | 跳转章节 |
 |:---|:---|:---|
@@ -123,7 +123,7 @@ created: "2026-05-23"
 
 <!-- chunk: 二、卷生命周期状态与事件关系 -->## 二、卷生命周期状态与事件关系
 
-#<!-- chunk: 2.1 卷生命周期完整流程 -->## 2.1 卷生命周期完整流程
+## 2.1 卷生命周期完整流程
 
 ```
 卷生命周期阶段               产生的主要事件
@@ -208,7 +208,7 @@ created: "2026-05-23"
                 (Retain:保留 PV,Recycle:回收数据,已弃用)
 ```
 
-#<!-- chunk: 2.2 PV 与 PVC 状态转换 -->## 2.2 PV 与 PVC 状态转换
+## 2.2 PV 与 PVC 状态转换
 
 ```
 PV 状态               PVC 状态              触发事件
@@ -243,7 +243,7 @@ Failed
 (回收/删除失败)
 ```
 
-#<!-- chunk: 2.3 卷类型与事件关系 -->## 2.3 卷类型与事件关系
+## 2.3 卷类型与事件关系
 
 | 卷类型 | Attach 阶段 | Mount 阶段 | 常见事件 |
 |:---|:---|:---|:---|
@@ -258,7 +258,7 @@ Failed
 
 <!-- chunk: 三、CSI 驱动架构与事件流 -->## 三、CSI 驱动架构与事件流
 
-#<!-- chunk: 3.1 CSI 组件架构 -->## 3.1 CSI 组件架构
+## 3.1 CSI 组件架构
 
 ```
 ┌────────────────────────────────────────────────────────────────┐
@@ -316,7 +316,7 @@ Failed
 └───────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 3.2 CSI 卷操作流程与事件 -->## 3.2 CSI 卷操作流程与事件
+## 3.2 CSI 卷操作流程与事件
 
 ```
 步骤                  CSI 接口                  Kubernetes 事件
@@ -360,7 +360,7 @@ Failed
                                      VolumeFailedDelete
 ```
 
-#<!-- chunk: 3.3 StorageClass 与 ReclaimPolicy -->## 3.3 StorageClass 与 ReclaimPolicy
+## 3.3 StorageClass 与 ReclaimPolicy
 
 | 字段 | 值 | 说明 | 影响的事件 |
 |:---|:---|:---|:---|
@@ -393,9 +393,9 @@ allowVolumeExpansion: true         # 支持在线扩容
 
 <!-- chunk: 四、kubelet 卷挂载事件 -->## 四、kubelet 卷挂载事件
 
-#<!-- chunk: 4.1 SuccessfulAttachVolume - 卷附加成功 -->## 4.1 SuccessfulAttachVolume - 卷附加成功
+## 4.1 SuccessfulAttachVolume - 卷附加成功
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -405,17 +405,17 @@ allowVolumeExpansion: true         # 支持在线扩容
 | **适用版本** | v1.0+ |
 | **生产频率** | 高频 (每次 Pod 启动使用持久化卷) |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 AttachDetach Controller (AD Controller) 成功将卷附加到节点。对于云盘类型 (AWS EBS、Azure Disk、GCE PD),这一步骤会调用云提供商 API 将卷附加到 VM 实例。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 AttachVolume.Attach succeeded for volume "pvc-abc123"
 ```
 
-##<!-- chunk: **事件触发条件** -->## **事件触发条件**
+## **事件触发条件**
 
 1. **云盘类型卷** (EBS/Disk/PD):
    - AD Controller 调用云 API 成功
@@ -425,7 +425,7 @@ AttachVolume.Attach succeeded for volume "pvc-abc123"
    - `ControllerPublishVolume` RPC 调用成功
    - `VolumeAttachment` 对象状态更新为 `Attached: true`
 
-##<!-- chunk: **关联 Kubernetes 对象** -->## **关联 Kubernetes 对象**
+## **关联 Kubernetes 对象**
 
 ```yaml
 # VolumeAttachment (CSI)
@@ -444,7 +444,7 @@ status:
     DevicePath: /dev/xvdba
 ```
 
-##<!-- chunk: **排查路径** -->## **排查路径**
+## **排查路径**
 
 **正常流程**:
 ```
@@ -462,9 +462,9 @@ status:
 
 ---
 
-#<!-- chunk: 4.2 FailedAttachVolume - 卷附加失败 -->## 4.2 FailedAttachVolume - 卷附加失败
+## 4.2 FailedAttachVolume - 卷附加失败
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -474,11 +474,11 @@ status:
 | **适用版本** | v1.0+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 AttachDetach Controller 无法将卷附加到节点。这通常是云控制器或节点层面的问题,会导致 Pod 无法启动 (一直 `ContainerCreating` 状态)。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 AttachVolume.Attach failed for volume "pvc-abc123" : 
@@ -492,7 +492,7 @@ googleapi: Error 400: The disk resource 'projects/my-project/zones/us-central1-a
 is already being used by 'projects/my-project/zones/us-central1-b/instances/node-2'
 ```
 
-##<!-- chunk: **常见原因与解决方案** -->## **常见原因与解决方案**
+## **常见原因与解决方案**
 
 | 错误消息 | 根因 | 解决方案 | 严重程度 |
 |:---|:---|:---|:---|
@@ -504,7 +504,7 @@ is already being used by 'projects/my-project/zones/us-central1-b/instances/node
 | `Throttling: Rate exceeded` | 云 API 限流 | 1. 减少 Pod 创建速率<br>2. 请求提高配额 | **低** |
 | `Unauthorized: IAM permissions` | 节点 IAM 角色缺少权限 | 添加 `ec2:AttachVolume` 权限 | **高** |
 
-##<!-- chunk: **排查步骤** -->## **排查步骤**
+## **排查步骤**
 
 **步骤 1: 检查 VolumeAttachment 对象**
 ```bash
@@ -545,7 +545,7 @@ kubectl get node <node> -o json | jq '.status.volumesAttached | length'
 kubectl get node <node> -o json | jq '.status.allocatable."attachable-volumes-aws-ebs"'
 ```
 
-##<!-- chunk: **生产案例: 节点异常导致卷泄漏** -->## **生产案例: 节点异常导致卷泄漏**
+## **生产案例: 节点异常导致卷泄漏**
 
 **现象**:
 - Pod 无法启动,一直 `ContainerCreating`
@@ -556,9 +556,13 @@ kubectl get node <node> -o json | jq '.status.allocatable."attachable-volumes-aw
 节点突然宕机,AD Controller 未及时 Detach 卷
 
 **解决方案**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+
 ```bash
 # 1. 强制删除旧 Pod (如果存在)
-kubectl delete pod <old-pod> --grace-period=0 --force
+kubectl delete pod <old-pod> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 2. 手动 Detach 卷
 aws ec2 detach-volume --volume-id vol-xxx --force
@@ -572,9 +576,9 @@ aws ec2 detach-volume --volume-id vol-xxx --force
 
 ---
 
-#<!-- chunk: 4.3 SuccessfulMountVolume - 卷挂载成功 -->## 4.3 SuccessfulMountVolume - 卷挂载成功
+## 4.3 SuccessfulMountVolume - 卷挂载成功
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -584,11 +588,11 @@ aws ec2 detach-volume --volume-id vol-xxx --force
 | **适用版本** | v1.0+ |
 | **生产频率** | 高频 |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 kubelet 成功将卷挂载到 Pod 的容器路径。这是卷生命周期的最后一步,完成后容器才能访问存储。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 MountVolume.SetUp succeeded for volume "pvc-abc123"
@@ -598,7 +602,7 @@ MountVolume.SetUp succeeded for volume "pvc-abc123"
 MountVolume.SetUp succeeded for volume "config-volume" (UniqueName: "kubernetes.io/configmap/<pod-uid>-config-volume")
 ```
 
-##<!-- chunk: **挂载路径结构** -->## **挂载路径结构**
+## **挂载路径结构**
 
 ```
 # 全局挂载路径 (NodeStageVolume)
@@ -610,7 +614,7 @@ MountVolume.SetUp succeeded for volume "config-volume" (UniqueName: "kubernetes.
 └─▶ Bind Mount 到容器 ─▶ /data (容器内路径)
 ```
 
-##<!-- chunk: **不同卷类型的挂载行为** -->## **不同卷类型的挂载行为**
+## **不同卷类型的挂载行为**
 
 | 卷类型 | 挂载方式 | 挂载时间 | 备注 |
 |:---|:---|:---|:---|
@@ -623,9 +627,9 @@ MountVolume.SetUp succeeded for volume "config-volume" (UniqueName: "kubernetes.
 
 ---
 
-#<!-- chunk: 4.4 FailedMount - 卷挂载失败 -->## 4.4 FailedMount - 卷挂载失败
+## 4.4 FailedMount - 卷挂载失败
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -635,11 +639,11 @@ MountVolume.SetUp succeeded for volume "config-volume" (UniqueName: "kubernetes.
 | **适用版本** | v1.0+ |
 | **生产频率** | 中频 (生产环境常见问题) |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 kubelet 无法挂载卷到 Pod。这是 **最常见的存储问题**,会导致 Pod 一直停留在 `ContainerCreating` 状态。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 MountVolume.SetUp failed for volume "pvc-abc123" : 
@@ -655,7 +659,7 @@ unattached volumes=[config data kube-api-access-xxx]:
 timed out waiting for the condition
 ```
 
-##<!-- chunk: **常见原因与解决方案** -->## **常见原因与解决方案**
+## **常见原因与解决方案**
 
 | 错误消息 | 根因 | 解决方案 | 严重程度 |
 |:---|:---|:---|:---|
@@ -668,7 +672,7 @@ timed out waiting for the condition
 | `configmap "xxx" not found` | ConfigMap 不存在 | 创建 ConfigMap | **高** |
 | `secret "xxx" not found` | Secret 不存在 | 创建 Secret | **高** |
 
-##<!-- chunk: **排查步骤** -->## **排查步骤**
+## **排查步骤**
 
 **步骤 1: 检查 Pod 事件**
 ```bash
@@ -706,7 +710,7 @@ file -s /dev/xvdba
 /dev/xvdba: Linux rev 1.0 ext4 filesystem data  # ✅ ext4
 ```
 
-##<!-- chunk: **生产案例: ConfigMap 不存在导致 Pod 无法启动** -->## **生产案例: ConfigMap 不存在导致 Pod 无法启动**
+## **生产案例: ConfigMap 不存在导致 Pod 无法启动**
 
 **现象**:
 - Pod 一直 `ContainerCreating`
@@ -716,6 +720,10 @@ file -s /dev/xvdba
 [[Helm|Helm]] Chart 定义了 ConfigMap 挂载,但未实际创建 ConfigMap
 
 **解决方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建 ConfigMap
 kubectl create configmap app-config --from-file=config.yaml
@@ -725,9 +733,9 @@ kubectl create configmap app-config --from-file=config.yaml
 
 ---
 
-#<!-- chunk: 4.5 FailedUnmount - 卷卸载失败 -->## 4.5 FailedUnmount - 卷卸载失败
+## 4.5 FailedUnmount - 卷卸载失败
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -737,11 +745,11 @@ kubectl create configmap app-config --from-file=config.yaml
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 kubelet 无法卸载卷。这会导致 Pod 删除卡住 (Terminating 状态),并可能阻止卷被其他 Pod 使用。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 Unable to unmount volume "pvc-abc123": 
@@ -749,7 +757,7 @@ UnmountVolume.TearDown failed for volume "pvc-abc123" :
 target is busy: [/var/lib/kubelet/pods/<pod-uid>/volumes/...]
 ```
 
-##<!-- chunk: **常见原因** -->## **常见原因**
+## **常见原因**
 
 1. **进程占用挂载点**:
    - 容器内进程未正常终止
@@ -762,7 +770,10 @@ target is busy: [/var/lib/kubelet/pods/<pod-uid>/volumes/...]
 3. **节点资源耗尽**:
    - 无法执行 umount 命令
 
-##<!-- chunk: **排查步骤** -->## **排查步骤**
+## **排查步骤**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 检查占用进程
@@ -780,9 +791,9 @@ systemctl restart kubelet
 
 ---
 
-#<!-- chunk: 4.6 FailedMapVolume - 块设备映射失败 -->## 4.6 FailedMapVolume - 块设备映射失败
+## 4.6 FailedMapVolume - 块设备映射失败
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -792,11 +803,11 @@ systemctl restart kubelet
 | **适用版本** | v1.14+ |
 | **生产频率** | 罕见 (仅 Block 模式卷) |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 kubelet 无法将块设备映射到 Pod。这只影响 `volumeMode: Block` 的 PV (原始块设备,非文件系统)。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 MapVolume.MapPodDevice failed for volume "pvc-abc123" : 
@@ -804,7 +815,7 @@ failed to create symbolic link for raw-block device:
 /dev/xvdba to /var/lib/kubelet/pods/<pod-uid>/volumeDevices/...
 ```
 
-##<!-- chunk: **使用场景** -->## **使用场景**
+## **使用场景**
 
 ```yaml
 # PVC 示例 (Block 模式)
@@ -827,7 +838,7 @@ kind: Pod
 spec:
   containers:
   - name: app
-    volumeDevices:  # ⚠️ 使用 volumeDevices 而非 volumeMounts
+    volumeDevices:
     - name: data
       devicePath: /dev/xvda  # 容器内设备路径
   volumes:
@@ -842,9 +853,9 @@ spec:
 
 <!-- chunk: 五、PV Controller 动态供应事件 -->## 五、PV Controller 动态供应事件
 
-#<!-- chunk: 5.1 ExternalProvisioning - 等待外部 Provisioner -->## 5.1 ExternalProvisioning - 等待外部 Provisioner
+## 5.1 ExternalProvisioning - 等待外部 Provisioner
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -854,17 +865,17 @@ spec:
 | **适用版本** | v1.4+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 PV Controller 检测到 PVC 需要动态供应,正在等待外部 Provisioner (如 CSI Driver) 创建 PV。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 waiting for a volume to be created, either by external provisioner "ebs.csi.aws.com" or manually created by system administrator
 ```
 
-##<!-- chunk: **流程说明** -->## **流程说明**
+## **流程说明**
 
 ```
 1. 用户创建 PVC
@@ -878,7 +889,7 @@ waiting for a volume to be created, either by external provisioner "ebs.csi.aws.
 9. 触发 ProvisioningSucceeded 事件
 ```
 
-##<!-- chunk: **排查超时问题** -->## **排查超时问题**
+## **排查超时问题**
 
 如果 PVC 长时间停留在此状态:
 
@@ -898,9 +909,9 @@ kubectl get csidrivers
 
 ---
 
-#<!-- chunk: 5.2 ProvisioningFailed - 动态供应失败 -->## 5.2 ProvisioningFailed - 动态供应失败
+## 5.2 ProvisioningFailed - 动态供应失败
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -910,11 +921,11 @@ kubectl get csidrivers
 | **适用版本** | v1.4+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 外部 Provisioner 创建卷失败。这是 PVC 无法绑定的主要原因之一。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 Failed to provision volume with StorageClass "fast-ssd": 
@@ -927,7 +938,7 @@ Failed to provision volume:
 InvalidParameterValue: The availability zone 'us-east-1d' does not exist
 ```
 
-##<!-- chunk: **常见原因与解决方案** -->## **常见原因与解决方案**
+## **常见原因与解决方案**
 
 | 错误消息 | 根因 | 解决方案 | 严重程度 |
 |:---|:---|:---|:---|
@@ -938,7 +949,7 @@ InvalidParameterValue: The availability zone 'us-east-1d' does not exist
 | `VolumeLimitExceeded` | 请求的卷大小超过限制 | 降低卷大小或使用其他卷类型 | **中** |
 | `storageclass.storage.k8s.io "xxx" not found` | StorageClass 不存在 | 创建 StorageClass | **高** |
 
-##<!-- chunk: **排查步骤** -->## **排查步骤**
+## **排查步骤**
 
 ```bash
 # 1. 检查 PVC 详细信息
@@ -954,7 +965,7 @@ aws ec2 describe-volumes --filters "Name=tag:kubernetes.io/cluster/<cluster-name
 aws iam get-role-policy --role-name <csi-controller-role> --policy-name <policy-name>
 ```
 
-##<!-- chunk: **生产案例: 云配额不足导致 StatefulSet 扩容失败** -->## **生产案例: 云配额不足导致 StatefulSet 扩容失败**
+## **生产案例: 云配额不足导致 StatefulSet 扩容失败**
 
 **现象**:
 - StatefulSet 扩容时新 Pod 一直 Pending
@@ -964,6 +975,10 @@ aws iam get-role-policy --role-name <csi-controller-role> --policy-name <policy-
 AWS 账号 EBS 卷数量达到配额上限 (默认 5000)
 
 **解决方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 清理未使用的 PV
 kubectl get pv | grep Released | awk '{print $1}' | xargs kubectl delete pv
@@ -979,9 +994,9 @@ aws service-quotas request-service-quota-increase \
 
 ---
 
-#<!-- chunk: 5.3 ProvisioningSucceeded - 动态供应成功 -->## 5.3 ProvisioningSucceeded - 动态供应成功
+## 5.3 ProvisioningSucceeded - 动态供应成功
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -991,17 +1006,17 @@ aws service-quotas request-service-quota-increase \
 | **适用版本** | v1.4+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 外部 Provisioner 成功创建 PV,PVC 进入 `Bound` 状态。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 Successfully provisioned volume pvc-abc123 using ebs.csi.aws.com
 ```
 
-##<!-- chunk: **关联对象** -->## **关联对象**
+## **关联对象**
 
 ```yaml
 # PV (自动创建)
@@ -1024,9 +1039,9 @@ spec:
 
 ---
 
-#<!-- chunk: 5.4 FailedBinding - PVC 绑定失败 -->## 5.4 FailedBinding - PVC 绑定失败
+## 5.4 FailedBinding - PVC 绑定失败
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -1036,11 +1051,11 @@ spec:
 | **适用版本** | v1.0+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 PV Controller 找不到满足 PVC 要求的可用 PV。这通常发生在 **静态供应** 场景。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 no persistent volumes available for this claim and no storage class is set
@@ -1050,14 +1065,17 @@ no persistent volumes available for this claim and no storage class is set
 Failed to bind volumes: timeout expired waiting for volumes to bind
 ```
 
-##<!-- chunk: **常见原因** -->## **常见原因**
+## **常见原因**
 
 1. **静态供应场景**: 没有预先创建匹配的 PV
 2. **容量不足**: PV 容量小于 PVC 请求
 3. **访问模式不匹配**: PV 是 `ReadWriteOnce`,但 PVC 请求 `ReadWriteMany`
 4. **标签选择器不匹配**: PVC 的 `selector` 与 PV 标签不匹配
 
-##<!-- chunk: **解决方案** -->## **解决方案**
+## **解决方案**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 检查可用 PV
@@ -1084,9 +1102,9 @@ EOF
 
 ---
 
-#<!-- chunk: 5.5 WaitForFirstConsumer - 等待首次消费者 -->## 5.5 WaitForFirstConsumer - 等待首次消费者
+## 5.5 WaitForFirstConsumer - 等待首次消费者
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -1096,17 +1114,17 @@ EOF
 | **适用版本** | v1.12+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 StorageClass 配置了 `volumeBindingMode: WaitForFirstConsumer`,PV Controller 等待 Pod 调度后再绑定 PVC。这是推荐的最佳实践,可避免跨可用区问题。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 waiting for first consumer to be created before binding
 ```
 
-##<!-- chunk: **延迟绑定的优势** -->## **延迟绑定的优势**
+## **延迟绑定的优势**
 
 ```
 传统 Immediate 绑定模式:
@@ -1121,7 +1139,7 @@ WaitForFirstConsumer 模式:
 4. ✅ Pod 正常启动
 ```
 
-##<!-- chunk: **配置示例** -->## **配置示例**
+## **配置示例**
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -1142,9 +1160,9 @@ allowedTopologies:
 
 <!-- chunk: 六、卷扩容事件 -->## 六、卷扩容事件
 
-#<!-- chunk: 6.1 VolumeResizeFailed - 卷扩容失败 -->## 6.1 VolumeResizeFailed - 卷扩容失败
+## 6.1 VolumeResizeFailed - 卷扩容失败
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -1154,11 +1172,11 @@ allowedTopologies:
 | **适用版本** | v1.11+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 控制平面卷扩容失败 (CSI ControllerExpandVolume)。这是卷扩容的第一阶段,失败后不会进行文件系统扩容。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 resize volume "pvc-abc123" by resizer "ebs.csi.aws.com" failed: 
@@ -1167,7 +1185,7 @@ Could not resize volume "vol-0abc123":
 InvalidParameterValue: Volume vol-0abc123 is not in a state that allows modification
 ```
 
-##<!-- chunk: **常见原因** -->## **常见原因**
+## **常见原因**
 
 | 错误消息 | 根因 | 解决方案 |
 |:---|:---|:---|
@@ -1176,7 +1194,7 @@ InvalidParameterValue: Volume vol-0abc123 is not in a state that allows modifica
 | `maximum volume size exceeded` | 请求大小超过卷类型限制 | 降低目标大小 |
 | `allowVolumeExpansion is false` | StorageClass 禁止扩容 | 修改 StorageClass (⚠️ 不影响已创建 PV) |
 
-##<!-- chunk: **卷扩容流程** -->## **卷扩容流程**
+## **卷扩容流程**
 
 ```
 步骤 1: 用户编辑 PVC,增加 spec.resources.requests.storage
@@ -1192,7 +1210,7 @@ InvalidParameterValue: Volume vol-0abc123 is not in a state that allows modifica
     └─▶ ❌ FileSystemResizeFailed (文件系统错误)
 ```
 
-##<!-- chunk: **排查步骤** -->## **排查步骤**
+## **排查步骤**
 
 ```bash
 # 1. 检查 PVC 状态
@@ -1216,9 +1234,9 @@ aws ec2 describe-volumes-modifications --volume-ids vol-0abc123
 
 ---
 
-#<!-- chunk: 6.2 VolumeResizeSuccessful - 卷扩容成功 -->## 6.2 VolumeResizeSuccessful - 卷扩容成功
+## 6.2 VolumeResizeSuccessful - 卷扩容成功
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -1228,19 +1246,22 @@ aws ec2 describe-volumes-modifications --volume-ids vol-0abc123
 | **适用版本** | v1.11+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 控制平面成功扩容卷 (如 AWS ModifyVolume API),但文件系统尚未扩容。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 External resizer ebs.csi.aws.com has successfully resized volume pvc-abc123
 ```
 
-##<!-- chunk: **注意事项** -->## **注意事项**
+## **注意事项**
 
 ⚠️ **卷扩容成功 ≠ 可用空间增加**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 控制平面扩容完成
@@ -1256,9 +1277,9 @@ kubectl exec <pod> -- df -h /data
 
 ---
 
-#<!-- chunk: 6.3 FileSystemResizeFailed - 文件系统扩容失败 -->## 6.3 FileSystemResizeFailed - 文件系统扩容失败
+## 6.3 FileSystemResizeFailed - 文件系统扩容失败
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -1268,25 +1289,28 @@ kubectl exec <pod> -- df -h /data
 | **适用版本** | v1.15+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 kubelet 无法扩容文件系统 (如 `resize2fs` 命令失败)。这会导致控制平面扩容成功,但容器内看不到新空间。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 File system resize failed for volume "pvc-abc123": 
 resize2fs: Bad magic number in super-block while trying to open /dev/xvdba
 ```
 
-##<!-- chunk: **常见原因** -->## **常见原因**
+## **常见原因**
 
 1. **文件系统损坏**: 超级块错误
 2. **文件系统不支持在线扩容**: 如 ext3
 3. **Pod 未重启**: 某些情况需要重启 Pod
 4. **权限不足**: kubelet 无法执行 `resize2fs`
 
-##<!-- chunk: **解决方案** -->## **解决方案**
+## **解决方案**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 检查文件系统类型
@@ -1304,9 +1328,9 @@ kubectl exec <pod> -- df -h /data
 
 ---
 
-#<!-- chunk: 6.4 FileSystemResizeSuccessful - 文件系统扩容成功 -->## 6.4 FileSystemResizeSuccessful - 文件系统扩容成功
+## 6.4 FileSystemResizeSuccessful - 文件系统扩容成功
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -1316,17 +1340,21 @@ kubectl exec <pod> -- df -h /data
 | **适用版本** | v1.15+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 kubelet 成功扩容文件系统,容器内可见新空间。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 MountVolume.NodeExpandVolume succeeded for volume "pvc-abc123"
 ```
 
-##<!-- chunk: **完整扩容流程示例** -->## **完整扩容流程示例**
+## **完整扩容流程示例**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 编辑 PVC
@@ -1353,16 +1381,16 @@ kubectl exec db-0 -- df -h /var/lib/postgresql/data
 
 ---
 
-#<!-- chunk: 6.5 ExternalExpanding 和 Resizing - 扩容进行中 -->## 6.5 ExternalExpanding 和 Resizing - 扩容进行中
+## 6.5 ExternalExpanding 和 Resizing - 扩容进行中
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 事件 | 含义 |
 |:---|:---|
 | `ExternalExpanding` | 等待 external-resizer 处理 |
 | `Resizing` | external-resizer 正在调用 CSI ControllerExpandVolume |
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 waiting for an external controller to resize volume pvc-abc123
@@ -1372,7 +1400,7 @@ waiting for an external controller to resize volume pvc-abc123
 External resizer is resizing volume pvc-abc123
 ```
 
-##<!-- chunk: **区别说明** -->## **区别说明**
+## **区别说明**
 
 ```
 ExternalExpanding (等待阶段)
@@ -1388,22 +1416,25 @@ FileSystemResizeSuccessful (完全完成)
 
 ---
 
-#<!-- chunk: 6.6 FileSystemResizeRequired - 需要文件系统扩容 -->## 6.6 FileSystemResizeRequired - 需要文件系统扩容
+## 6.6 FileSystemResizeRequired - 需要文件系统扩容
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 控制平面扩容完成,但需要 kubelet 执行文件系统扩容 (通常在 Pod 重启或卷重新挂载时自动完成)。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 Require file system resize of volume on node
 ```
 
-##<!-- chunk: **触发条件** -->## **触发条件**
+## **触发条件**
 
 - 对于某些 CSI Driver,控制平面扩容后需要 Pod 重启才能触发文件系统扩容
 - 解决方案: 滚动重启 Pod
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 kubectl rollout restart statefulset <name>
@@ -1413,9 +1444,9 @@ kubectl rollout restart statefulset <name>
 
 <!-- chunk: 七、卷回收与删除事件 -->## 七、卷回收与删除事件
 
-#<!-- chunk: 7.1 VolumeDeleted - 卷删除成功 -->## 7.1 VolumeDeleted - 卷删除成功
+## 7.1 VolumeDeleted - 卷删除成功
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -1425,17 +1456,17 @@ kubectl rollout restart statefulset <name>
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 PV Controller 成功删除 PV (当 `reclaimPolicy: Delete` 时)。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 Volume pvc-abc123 has been successfully deleted
 ```
 
-##<!-- chunk: **触发条件** -->## **触发条件**
+## **触发条件**
 
 ```yaml
 # PV 配置
@@ -1451,6 +1482,10 @@ spec:
 ```
 
 **删除流程**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 1. kubectl delete pvc data-db-0
 2. PVC 状态 → Terminating
@@ -1463,9 +1498,9 @@ spec:
 
 ---
 
-#<!-- chunk: 7.2 VolumeFailedDelete - 卷删除失败 -->## 7.2 VolumeFailedDelete - 卷删除失败
+## 7.2 VolumeFailedDelete - 卷删除失败
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -1475,11 +1510,11 @@ spec:
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 PV Controller 无法删除 PV。这会导致 PV 和云卷泄漏,需要手动清理。
 
-##<!-- chunk: **典型事件消息** -->## **典型事件消息**
+## **典型事件消息**
 
 ```
 Failed to delete volume pvc-abc123: 
@@ -1488,7 +1523,7 @@ DeleteVolume failed for volume vol-0abc123:
 VolumeInUse: Volume vol-0abc123 is currently attached to i-0def456
 ```
 
-##<!-- chunk: **常见原因** -->## **常见原因**
+## **常见原因**
 
 | 错误消息 | 根因 | 解决方案 |
 |:---|:---|:---|
@@ -1497,7 +1532,11 @@ VolumeInUse: Volume vol-0abc123 is currently attached to i-0def456
 | `AccessDenied: IAM permissions` | IAM 角色缺少 `ec2:DeleteVolume` 权限 | 添加权限 |
 | `InvalidVolume.NotFound` | 卷已被手动删除 | 移除 PV finalizer |
 
-##<!-- chunk: **手动清理步骤** -->## **手动清理步骤**
+## **手动清理步骤**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 检查 PV 状态
@@ -1511,13 +1550,14 @@ aws ec2 delete-volume --volume-id vol-0abc123
 
 # 4. 删除 PV
 kubectl delete pv pvc-abc123
+
 ```
 
 ---
 
-#<!-- chunk: 7.3 VolumeRecycleFailed - 卷回收失败 (已弃用) -->## 7.3 VolumeRecycleFailed - 卷回收失败 (已弃用)
+## 7.3 VolumeRecycleFailed - 卷回收失败 (已弃用)
 
-##<!-- chunk: **事件基本信息** -->## **事件基本信息**
+## **事件基本信息**
 
 | 字段 | 值 |
 |:---|:---|
@@ -1526,7 +1566,7 @@ kubectl delete pv pvc-abc123
 | **适用版本** | v1.0+ (Deprecated in v1.14) |
 | **生产频率** | 罕见 (已弃用) |
 
-##<!-- chunk: **事件含义** -->## **事件含义**
+## **事件含义**
 
 ⚠️ **已弃用**: `reclaimPolicy: Recycle` 策略已在 v1.14 弃用,不建议使用。
 
@@ -1541,9 +1581,9 @@ kubectl delete pv pvc-abc123
 
 <!-- chunk: 八、综合排查案例 -->## 八、综合排查案例
 
-#<!-- chunk: 案例 1: Pod 一直 ContainerCreating (FailedMount) -->## 案例 1: Pod 一直 ContainerCreating (FailedMount)
+## 案例 1: Pod 一直 ContainerCreating (FailedMount)
 
-##<!-- chunk: **现象** -->## **现象**
+## **现象**
 
 ```bash
 kubectl get pod
@@ -1551,7 +1591,7 @@ kubectl get pod
 # web-0  0/1     ContainerCreating   0          5m
 ```
 
-##<!-- chunk: **排查步骤** -->## **排查步骤**
+## **排查步骤**
 
 ```bash
 # 1. 检查事件
@@ -1565,9 +1605,12 @@ kubectl describe pod web-0 | grep -A 20 "Events:"
 # 2. 诊断: 磁盘未格式化或文件系统损坏
 ```
 
-##<!-- chunk: **解决方案** -->## **解决方案**
+## **解决方案**
 
 **方法 1: 重新格式化 (⚠️ 数据丢失)**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 进入节点
@@ -1596,9 +1639,9 @@ mount /dev/xvdba /mnt/test
 
 ---
 
-#<!-- chunk: 案例 2: StatefulSet 扩容时 PVC 无法创建 (ProvisioningFailed) -->## 案例 2: StatefulSet 扩容时 PVC 无法创建 (ProvisioningFailed)
+## 案例 2: StatefulSet 扩容时 PVC 无法创建 (ProvisioningFailed)
 
-##<!-- chunk: **现象** -->## **现象**
+## **现象**
 
 ```bash
 kubectl scale sts db --replicas=5
@@ -1613,7 +1656,7 @@ kubectl get pvc data-db-4
 # data-db-4    Pending                                      fast-ssd
 ```
 
-##<!-- chunk: **排查步骤** -->## **排查步骤**
+## **排查步骤**
 
 ```bash
 # 1. 检查 PVC 事件
@@ -1633,9 +1676,12 @@ aws service-quotas get-service-quota \
 # Value: 5000 (已达上限)
 ```
 
-##<!-- chunk: **解决方案** -->## **解决方案**
+## **解决方案**
 
 **临时方案**: 清理未使用卷
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 查找 Released 状态的 PV
@@ -1661,9 +1707,13 @@ aws service-quotas request-service-quota-increase \
 
 ---
 
-#<!-- chunk: 案例 3: PVC 扩容后容器内空间未增加 -->## 案例 3: PVC 扩容后容器内空间未增加
+## 案例 3: PVC 扩容后容器内空间未增加
 
-##<!-- chunk: **现象** -->## **现象**
+## **现象**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 扩容 PVC
@@ -1679,7 +1729,7 @@ kubectl exec db-0 -- df -h /var/lib/postgresql/data
 # /dev/xvdba  10G  9.5G  500M  96% /data  ❌
 ```
 
-##<!-- chunk: **排查步骤** -->## **排查步骤**
+## **排查步骤**
 
 ```bash
 # 1. 检查 PVC 事件
@@ -1692,7 +1742,11 @@ kubectl get events --field-selector involvedObject.name=data-db-0
 # 2. 诊断: 文件系统扩容未触发 (需要 Pod 重启)
 ```
 
-##<!-- chunk: **解决方案** -->## **解决方案**
+## **解决方案**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 滚动重启 StatefulSet
@@ -1708,9 +1762,12 @@ kubectl exec db-0 -- df -h /var/lib/postgresql/data
 
 ---
 
-#<!-- chunk: 案例 4: PVC 删除后卷未自动删除 (VolumeFailedDelete) -->## 案例 4: PVC 删除后卷未自动删除 (VolumeFailedDelete)
+## 案例 4: PVC 删除后卷未自动删除 (VolumeFailedDelete)
 
-##<!-- chunk: **现象** -->## **现象**
+## **现象**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 删除 PVC
@@ -1727,7 +1784,7 @@ kubectl get pv pvc-xyz789
 # pvc-xyz789   Released   ...
 ```
 
-##<!-- chunk: **排查步骤** -->## **排查步骤**
+## **排查步骤**
 
 ```bash
 # 1. 检查 PV 事件
@@ -1745,7 +1802,11 @@ aws ec2 describe-volumes --volume-ids vol-xyz789
 # "Attachments": [{"InstanceId": "i-terminated-instance"}]  ❌
 ```
 
-##<!-- chunk: **解决方案** -->## **解决方案**
+## **解决方案**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 强制 Detach 卷
@@ -1767,9 +1828,9 @@ kubectl delete pvc data-test --grace-period=0 --force
 
 <!-- chunk: 九、生产环境最佳实践 -->## 九、生产环境最佳实践
 
-#<!-- chunk: 9.1 StorageClass 配置最佳实践 -->## 9.1 StorageClass 配置最佳实践
+## 9.1 StorageClass 配置最佳实践
 
-##<!-- chunk: **推荐配置** -->## **推荐配置**
+## **推荐配置**
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -1790,7 +1851,7 @@ volumeBindingMode: WaitForFirstConsumer  # ✅ 延迟绑定 (避免跨 AZ)
 allowVolumeExpansion: true  # ✅ 支持在线扩容
 ```
 
-##<!-- chunk: **生产环境分级 StorageClass** -->## **生产环境分级 StorageClass**
+## **生产环境分级 StorageClass**
 
 ```yaml
 # 高性能数据库卷
@@ -1835,9 +1896,9 @@ allowVolumeExpansion: false
 
 ---
 
-#<!-- chunk: 9.2 卷监控与告警 -->## 9.2 卷监控与告警
+## 9.2 卷监控与告警
 
-##<!-- chunk: **关键指标** -->## **关键指标**
+## **关键指标**
 
 ```yaml
 # Prometheus 监控规则
@@ -1889,9 +1950,9 @@ groups:
 
 ---
 
-#<!-- chunk: 9.3 卷性能优化 -->## 9.3 卷性能优化
+## 9.3 卷性能优化
 
-##<!-- chunk: **EBS 卷优化 (AWS)** -->## **EBS 卷优化 (AWS)**
+## **EBS 卷优化 (AWS)**
 
 ```yaml
 # 1. 使用 gp3 代替 gp2 (性价比高 20%)
@@ -1909,7 +1970,10 @@ parameters:
 # 选择 EBS-Optimized 实例类型 (如 m5.large)
 ```
 
-##<!-- chunk: **卷 I/O 性能测试** -->## **卷 I/O 性能测试**
+## **卷 I/O 性能测试**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 进入 Pod
@@ -1930,9 +1994,9 @@ fio --name=randwrite --ioengine=libaio --iodepth=32 \
 
 ---
 
-#<!-- chunk: 9.4 卷容量管理 -->## 9.4 卷容量管理
+## 9.4 卷容量管理
 
-##<!-- chunk: **自动扩容策略** -->## **自动扩容策略**
+## **自动扩容策略**
 
 ```yaml
 # 使用 Prometheus Operator 自动扩容
@@ -1954,7 +2018,7 @@ spec:
             -p '{"spec":{"resources":{"requests":{"storage":"{{ $value | humanize }}"}}}}'
 ```
 
-##<!-- chunk: **容量规划** -->## **容量规划**
+## **容量规划**
 
 ```bash
 # 查看所有 PVC 使用率
@@ -1970,9 +2034,9 @@ kubectl get pv -o json | jq '[.items[].spec.capacity.storage | rtrimstr("Gi") | 
 
 ---
 
-#<!-- chunk: 9.5 卷备份与恢复 -->## 9.5 卷备份与恢复
+## 9.5 卷备份与恢复
 
-##<!-- chunk: **使用 VolumeSnapshot (CSI)** -->## **使用 VolumeSnapshot (CSI)**
+## **使用 VolumeSnapshot (CSI)**
 
 ```yaml
 # 1. 创建 VolumeSnapshotClass
@@ -2012,7 +2076,7 @@ spec:
       storage: 20Gi
 ```
 
-##<!-- chunk: **定时备份 [[CronJob|CronJob]]** -->## **定时备份 CronJob**
+## **定时备份 CronJob**
 
 ```yaml
 apiVersion: batch/v1
@@ -2048,9 +2112,9 @@ spec:
 
 ---
 
-#<!-- chunk: 9.6 多租户存储隔离 -->## 9.6 多租户存储隔离
+## 9.6 多租户存储隔离
 
-##<!-- chunk: **使用 ResourceQuota 限制存储** -->## **使用 ResourceQuota 限制存储**
+## **使用 ResourceQuota 限制存储**
 
 ```yaml
 apiVersion: v1
@@ -2065,7 +2129,7 @@ spec:
     <storageclass-name>.storageclass.storage.k8s.io/requests.storage: 50Gi  # 按 StorageClass 限制
 ```
 
-##<!-- chunk: **使用 LimitRange 限制 PVC 大小** -->## **使用 LimitRange 限制 PVC 大小**
+## **使用 LimitRange 限制 PVC 大小**
 
 ```yaml
 apiVersion: v1
@@ -2084,16 +2148,19 @@ spec:
 
 ---
 
-#<!-- chunk: 9.7 故障恢复剧本 -->## 9.7 故障恢复剧本
+## 9.7 故障恢复剧本
 
-##<!-- chunk: **卷附加失败 (VolumeInUse)** -->## **卷附加失败 (VolumeInUse)**
+## **卷附加失败 (VolumeInUse)**
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 
 ```bash
 # 1. 确认原 Pod 已删除
 kubectl get pod -A -o wide | grep <node-name>
 
 # 2. 强制删除旧 Pod (如果仍存在)
-kubectl delete pod <pod> --grace-period=0 --force
+kubectl delete pod <pod> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 3. 检查云卷附加状态
 aws ec2 describe-volumes --volume-ids <volume-id>
@@ -2105,7 +2172,10 @@ aws ec2 detach-volume --volume-id <volume-id> --force
 kubectl get pod <pod> -w
 ```
 
-##<!-- chunk: **卷挂载失败 (FailedMount)** -->## **卷挂载失败 (FailedMount)**
+## **卷挂载失败 (FailedMount)**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 1. 检查事件详细错误
@@ -2128,7 +2198,11 @@ e2fsck -f /dev/<device>
 kubectl delete pod <pod>
 ```
 
-##<!-- chunk: **PVC 无法删除 (Terminating)** -->## **PVC 无法删除 (Terminating)**
+## **PVC 无法删除 (Terminating)**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 检查是否有 Pod 使用 PVC
@@ -2149,7 +2223,7 @@ kubectl delete pvc <pvc-name> --grace-period=0 --force
 
 <!-- chunk: 十、相关文档参考 -->## 十、相关文档参考
 
-#<!-- chunk: 10.1 相关事件文档 -->## 10.1 相关事件文档
+## 10.1 相关事件文档
 
 | 文档 | 相关事件 |
 |:---|:---|
@@ -2157,14 +2231,14 @@ kubectl delete pvc <pvc-name> --grace-period=0 --force
 | [05 - 调度与抢占事件](./05-scheduling-preemption-events.md) | `WaitForFirstConsumer` → 延迟绑定等待调度 |
 | [06 - 节点生命周期事件](./06-node-lifecycle-condition-events.md) | `FailedAttachVolume` → 节点异常导致 Attach 失败 |
 
-#<!-- chunk: 10.2 Kubernetes 官方文档 -->## 10.2 Kubernetes 官方文档
+## 10.2 Kubernetes 官方文档
 
 - [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 - [CSI Volume Plugins](https://kubernetes.io/docs/concepts/storage/volumes/#csi)
 - [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)
 - [Volume Snapshots](https://kubernetes.io/docs/concepts/storage/volume-snapshots/)
 
-#<!-- chunk: 10.3 CSI 驱动文档 -->## 10.3 CSI 驱动文档
+## 10.3 CSI 驱动文档
 
 - [AWS EBS CSI Driver](https://github.com/kubernetes-sigs/aws-ebs-csi-driver)
 - [Azure Disk CSI Driver](https://github.com/kubernetes-sigs/azuredisk-csi-driver)
@@ -2179,7 +2253,7 @@ kubectl delete pvc <pvc-name> --grace-period=0 --force
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-33-kubernetes-events MOC
-- [[domain-17-system-foundation/README|Domain-33: Kubernetes Events 全域事件大全]]
+- [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
 - Domain-33 K8s 事件 — 开源项目索引
 - 01 - Kubernetes 事件系统架构与 API 参考
 - 02 - Pod 与容器生命周期事件
@@ -2200,6 +2274,8 @@ kubectl delete pvc <pvc-name> --grace-period=0 --force
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+```

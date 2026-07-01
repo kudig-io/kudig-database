@@ -44,7 +44,7 @@ description: '## 项目概述'
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -56,11 +56,11 @@ description: '## 项目概述'
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[deployment]]
-- [[concepts/observability-pillars|observability-pillars]]
-- [[concepts/storage-model|storage-model]]
-- [[concepts/secrets-management|secrets-management]]
+- [[concepts/observability-pillars.md|observability-pillars]]
+- [[concepts/storage-model.md|storage-model]]
+- [[concepts/secrets-management.md|secrets-management]]
 
 ## Related
 
@@ -113,9 +113,9 @@ description: '## 项目概述'
 - RELEASE-NOTES-0.21
 - RELEASE-NOTES-0.15
 - RELEASE-NOTES-0.31
-- [[references/release-notes-observability|发布说明索引 — 可观测性]] — Cross-reference
-- [[references/k8s-observability-ecosystem|可观测性体系：指标、日志、链路追踪与混沌工程]] — Cross-reference
-- [[concepts/observability-stack-evolution|可观测性栈演进]] — Cross-reference
-- [[skills/monitoring-fta|监控与告警异常故障树分析]] — Cross-reference
-- [[entities/cncf-observability|CNCF 可观测性项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[entities/release-notes-observability.md|发布说明索引 — 可观测性]] — Cross-reference
+- [[entities/k8s-observability-ecosystem.md|可观测性体系：指标、日志、链路追踪与混沌工程]] — Cross-reference
+- [[concepts/observability-stack-evolution.md|可观测性栈演进]] — Cross-reference
+- [[skills/monitoring-fta.md|监控与告警异常故障树分析]] — Cross-reference
+- [[entities/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

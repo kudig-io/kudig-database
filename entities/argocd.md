@@ -1,6 +1,6 @@
 ---
 title: ArgoCD
-description: '- [[synthesis/CI-CD 流水线 × Secret 管理|CI-CD 流水线 × Secret 管理]] — 综合'
+description: '- [[concepts/CI-CD 流水线 × Secret 管理.md|CI-CD 流水线 × Secret 管理]] — 综合'
 category: entities
 tags:
 - argocd
@@ -36,7 +36,7 @@ created: "2026-05-23"
 
 ## Overview
 
-ArgoCD is a CNCF graduated project implementing the [[concepts/gitops-principles|[[GitOps 速查卡|GitOps]]]] pattern for Kubernetes. It continuously monitors Git repositories and automatically synchronizes cluster state to match the desired state declared in manifests.
+ArgoCD is a CNCF graduated project implementing the [[concepts/gitops-principles.md|[[GitOps 速查卡|GitOps]]]] pattern for Kubernetes. It continuously monitors Git repositories and automatically synchronizes cluster state to match the desired state declared in manifests.
 
 ## Architecture
 
@@ -135,25 +135,25 @@ kubectl logs -n argocd -l app.kubernetes.io/name=argocd-application-controller
 ## Integration Points
 
 - Integrates with [[supply-chain-security|Supply Chain Security]] via image updater for automated tag tracking
-- Connects to [[entities/vault|Vault]] for secret injection via Vault Agent templates
+- Connects to [[entities/vault.md|Vault]] for secret injection via Vault Agent templates
 - Works with [[kyverno|Kyverno]] for policy enforcement post-sync
-- Part of broader [[concepts/ci-cd-pipeline-patterns|CI/CD Pipeline Patterns]] ecosystem
+- Part of broader [[concepts/ci-cd-pipeline-patterns.md|CI/CD Pipeline Patterns]] ecosystem
 
 ## Related
-- [[synthesis/CI-CD 流水线 × Secret 管理|CI-CD 流水线 × Secret 管理]] — 综合
+- [[concepts/CI-CD 流水线 × Secret 管理.md|CI-CD 流水线 × Secret 管理]] — 综合
 
-- [[concepts/infrastructure-as-code|infrastructure-as-code]] — Infrastructure as Code
+- [[concepts/infrastructure-as-code.md|infrastructure-as-code]] — Infrastructure as Code
 - [[supply-chain-security]] — Software Supply Chain Security
 - [[grpc]] — gRPC
 - [[helm]] — Helm
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/gitops-principles|GitOps Principles]]
+- [[concepts/gitops-principles.md|GitOps Principles]]
 - [[flux|Flux]]
-- [[concepts/ci-cd-pipeline-patterns|CI/CD Pipeline Patterns]]
+- [[concepts/ci-cd-pipeline-patterns.md|CI/CD Pipeline Patterns]]
 - [[supply-chain-security|Supply Chain Security]]
 
 - 36-ecosystem-kustomize-helm-argocd
 - 09-gitops-workflow-argocd
-- [[domain-10-troubleshooting-diagnostics/38-gitops-argocd-troubleshooting|38-gitops-argocd-troubleshooting]]
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd|06-java-cicd-tekton-argocd]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/gitops-argocd-fta|GitOps(ArgoCD) 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/38-gitops-argocd-troubleshooting.md|38-gitops-argocd-troubleshooting]]
+- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/gitops-argocd-fta.md|GitOps(ArgoCD) 异常故障树分析]]

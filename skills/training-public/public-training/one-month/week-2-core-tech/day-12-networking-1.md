@@ -120,6 +120,10 @@ related:
 
 ### 任务 1: 探索 Pod 网络 (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 创建两个 Pod
 kubectl run pod1 --image=nginx:alpine
@@ -142,6 +146,10 @@ kubectl delete pod pod1 pod2
 ```
 
 ### 任务 2: Service 类型实践 (1h)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 创建测试 Deployment
@@ -185,6 +193,10 @@ kubectl delete svc web-clusterip web-nodeport web-lb external-db
 
 ### 任务 3: Service 实现原理 - iptables (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 创建 Service
 kubectl create deployment nginx --image=nginx:alpine --replicas=2
@@ -215,6 +227,10 @@ kubectl delete svc nginx
 ```
 
 ### 任务 4: CoreDNS 服务发现 (30min)
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 查看 CoreDNS 配置
@@ -263,7 +279,7 @@ kubectl apply -f headless-svc.yaml
 kubectl run dns-test2 --image=busybox -it --rm -- nslookup web-headless.dns-test
 
 # 清理
-kubectl delete namespace dns-test
+kubectl delete namespace dns-test  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
 ---

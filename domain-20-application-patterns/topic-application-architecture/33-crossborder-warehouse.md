@@ -118,7 +118,7 @@ k8s_versions:
 
 <!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-#<!-- chunk: 1.1 市场规模与趋势 -->## 1.1 市场规模与趋势
+## 1.1 市场规模与趋势
 
 海外仓是跨境电商的关键物流基础设施，直接影响物流时效、消费者体验和运营成本。全球跨境电商市场规模预计从 2024 年的 6 万亿美元增长到 2030 年的 15 万亿美元。海外仓作为跨境物流核心模式，以"本地发货、快速送达"优势替代传统直邮模式，市场渗透率持续提升。
 
@@ -130,7 +130,7 @@ k8s_versions:
 | 平均尾程配送时效 | 3-5 天 | 2-3 天 | 1-2 天 |
 | 退货率 | 8-12% | 6-9% | 4-6% |
 
-#<!-- chunk: 1.2 行业痛点 -->## 1.2 行业痛点
+## 1.2 行业痛点
 
 | 痛点 | 说明 | 数字化转型驱动 |
 |:---|:---|:---|
@@ -141,7 +141,7 @@ k8s_versions:
 | 退货处理 | 跨境退货成本高、流程复杂 | 本地退货仓 + 智能质检 |
 | 尾程配送 | 多物流商比价与追踪 | TMS 集成 + 智能分拨 |
 
-#<!-- chunk: 1.3 数字化转型架构影响 -->## 1.3 数字化转型架构影响
+## 1.3 数字化转型架构影响
 
 海外仓系统需要支持全球多区域分布式部署、多时区多语言、实时库存同步、多电商平台对接、多物流商集成和各国税务合规。架构核心是高可用的分布式 WMS 系统，需要就近部署到各仓库区域以降低延迟。
 
@@ -149,23 +149,23 @@ k8s_versions:
 
 <!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-#<!-- chunk: 2.1 智能入库管理 -->## 2.1 智能入库管理
+## 2.1 智能入库管理
 
 覆盖从国内集货到海外仓入库的全流程：收货预约、卸货验收、质检抽检、条码扫描、库位分配、上架入库。系统需要支持 ASN（预到货通知）、质检规则配置、异常处理（短缺/损坏/多收），并与头程物流系统对接跟踪在途货物。
 
-#<!-- chunk: 2.2 精准库存管理 -->## 2.2 精准库存管理
+## 2.2 精准库存管理
 
 实现多仓库存实时可视、批次/效期管理、库位级精确管理、安全库存预警。支持跨仓调拨、库存冻结/解冻、盘点管理（动盘/盲盘/全盘）。库存数据需实时同步至各电商平台，避免超卖。
 
-#<!-- chunk: 2.3 高效订单履约 -->## 2.3 高效订单履约
+## 2.3 高效订单履约
 
 支持 B2C 一件代发和B2B 整箱转运两种模式。B2C 订单从电商平台实时抓取，经智能分仓、波次拣货、打包贴标、称重出库、尾程配送。系统需要支持每分钟数千单的峰值处理能力。
 
-#<!-- chunk: 2.4 退货逆向物流 -->## 2.4 退货逆向物流
+## 2.4 退货逆向物流
 
 处理消费者退货申请，支持本地退货仓接收、质检分级（可二次销售/维修/销毁）、换标重新上架。系统需要与电商平台退货流程联动，自动更新库存和财务数据。
 
-#<!-- chunk: 2.5 头程物流管理 -->## 2.5 头程物流管理
+## 2.5 头程物流管理
 
 管理从国内到海外仓的运输过程，包括集货、报关、海运/空运/铁路、清关、海外内陆运输。系统需要提供全程可视化追踪、ETA 预测和异常预警。
 
@@ -173,7 +173,7 @@ k8s_versions:
 
 <!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-#<!-- chunk: 3.1 海外仓全景架构 -->## 3.1 海外仓全景架构
+## 3.1 海外仓全景架构
 
 ```mermaid
 graph TB
@@ -247,7 +247,7 @@ graph TB
 
 <!-- chunk: 5. Kubernetes 部署方案 -->## 5. Kubernetes 部署方案
 
-#<!-- chunk: 5.1 WMS 核心服务 Deployment -->## 5.1 WMS 核心服务 Deployment
+## 5.1 WMS 核心服务 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -346,7 +346,7 @@ spec:
             periodSeconds: 10
 ```
 
-#<!-- chunk: 5.2 订单处理服务 Deployment -->## 5.2 订单处理服务 Deployment
+## 5.2 订单处理服务 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -385,7 +385,7 @@ spec:
               cpu: "2000m"
 ```
 
-#<!-- chunk: 5.3 ConfigMap, Service 与 Secret -->## 5.3 ConfigMap, Service 与 Secret
+## 5.3 ConfigMap, Service 与 Secret
 
 ```yaml
 apiVersion: v1
@@ -457,7 +457,7 @@ stringData:
 
 <!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-#<!-- chunk: 6.1 库存实时同步数据流 -->## 6.1 库存实时同步数据流
+## 6.1 库存实时同步数据流
 
 ```mermaid
 flowchart TB
@@ -487,7 +487,7 @@ flowchart TB
     SY3 --> C1 & C2 & C3 & C4
 ```
 
-#<!-- chunk: 6.2 数据流说明 -->## 6.2 数据流说明
+## 6.2 数据流说明
 
 - **库存同步**: 任何库存变动通过 RocketMQ 事件总线广播，经 Flink 实时聚合后更新库存中心
 - **订单流**: 电商平台订单通过 API 网关接入 OMS，经智能分仓后路由至对应仓库 WMS
@@ -498,7 +498,7 @@ flowchart TB
 
 <!-- chunk: 7. AI/ML 组件 -->## 7. AI/ML 组件
 
-#<!-- chunk: 7.1 核心模型 -->## 7.1 核心模型
+## 7.1 核心模型
 
 | 模型 | 用途 | 输入 | 输出 | 框架 |
 |:---|:---|:---|:---|:---|
@@ -512,7 +512,7 @@ flowchart TB
 
 <!-- chunk: 8. 安全与合规 -->## 8. 安全与合规
 
-#<!-- chunk: 8.1 行业法规与标准 -->## 8.1 行业法规与标准
+## 8.1 行业法规与标准
 
 | 法规/标准 | 适用范围 | 架构要求 |
 |:---|:---|:---|
@@ -523,7 +523,7 @@ flowchart TB
 | PCI-DSS | 支付数据安全 | 支付信息加密 + 令牌化 |
 | 数据出境安全评估 | 中国数据出境 | 数据本地化 + 安全评估 |
 
-#<!-- chunk: 8.2 安全架构要点 -->## 8.2 安全架构要点
+## 8.2 安全架构要点
 
 - **多区域部署**: 各海外仓就近部署 WMS 节点，降低延迟
 - **数据本地化**: 欧洲/美国用户数据本地存储，符合 GDPR/CCPA
@@ -577,17 +577,17 @@ flowchart TB
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

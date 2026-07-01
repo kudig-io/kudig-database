@@ -65,7 +65,7 @@ created: "2026-05-23"
 
 # 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubeedge|KubeEdge]]](https://kubeedge.io/), [[entities/openyurt|OpenYurt]]](https://openyurt.io/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubeedge.md|KubeEdge]]](https://kubeedge.io/), [[entities/openyurt.md|OpenYurt]]](https://openyurt.io/)
 
 <!-- chunk: 边缘计算架构概览 -->
 ## 边缘计算架构概览
@@ -618,6 +618,9 @@ spec:
 
 #### 8.1 远程诊断工具
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # edge_diagnostics.sh - 边缘节点诊断工具
@@ -721,10 +724,6 @@ spec:
 # 边缘节点安全策略
 apiVersion: policy/v1beta1
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 kind: PodSecurityPolicy
 metadata:
   name: edge-node-psp
@@ -818,7 +817,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications KUDIG Database — Global MOC
-- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
 - index.md|Domain-4 工作负载 — 开源项目索引]]
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)

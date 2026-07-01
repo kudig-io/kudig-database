@@ -40,7 +40,7 @@ created: "2026-05-23"
 
 Kubernetes is built on several foundational design principles:
 
-- **[[Declarative API|Declarative API]]**: Desired state is declared, controllers reconcile actual state to match
+- **[[concepts/declarative-api.md|Declarative API]]**: Desired state is declared, controllers reconcile actual state to match
 - **Controller Pattern**: Continuous reconciliation loops maintain system state
 - **etcd Consensus**: Raft algorithm ensures consistent distributed state
 - **Immutability**: [[Pods|Pods]] are immutable once created; changes create new Pods
@@ -110,11 +110,11 @@ KUDIG covers Kubernetes v1.25 through v1.32, including:
 
 ## Related
 
-- [[concepts/declarative-api|declarative-api]] — Declarative API
-- [[entities/kube-scheduler|kube-scheduler]] — kube-scheduler
+- [[concepts/declarative-api.md|declarative-api]] — Declarative API
+- [[entities/kube-scheduler.md|kube-scheduler]] — kube-scheduler
 - [[cilium]] — Cilium
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
-- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]]
-- [[concepts/etcd Operational Reference|etcd Operational Reference]]
-- [[references/KUDIG Tag Dictionary|KUDIG Tag Dictionary]]
+- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
+- [[concepts/etcd Operational Reference.md|etcd Operational Reference]]
+- [[entities/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]

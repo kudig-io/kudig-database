@@ -127,7 +127,7 @@ created: "2026-05-23"
     - [Client Binaries](#client-binaries-12)
     - [Server Binaries](#server-binaries-12)
     - [Node Binaries](#node-binaries-12)
-- [[entities/kubernetes|Kubernetes]] 1.13 Release Notes](#kubernetes-113-release-notes)
+- [[entities/kubernetes.md|Kubernetes]] 1.13 Release Notes](#kubernetes-113-release-notes)
   - [Security Content](#security-content)
   - [Urgent Upgrade Notes](#urgent-upgrade-notes)
     - [(No, really, you MUST do this before you upgrade)](#no-really-you-must-do-this-before-you-upgrade)

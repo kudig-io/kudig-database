@@ -260,10 +260,10 @@ tags: [onboarding, day-1, setup, new-engineer, quick-start, k8s-1.28-1.33]
 
 ## Related
 
-- [[skills/learn-05-ingress-basics|learn-05-ingress-basics]]
+- [[skills/learn-05-ingress-basics.md|learn-05-ingress-basics]]
 
 - [[deployment]] — Deployment
-- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

@@ -4,13 +4,14 @@ category: dialogue
 tags: [dialogue, remote-advisor, k8s-performance, skill, performance, cpu, memory, io, latency]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 summary: "性能瓶颈的远程顾问对话脚本，覆盖CPU、内存、磁盘、网络性能分析。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL]]"
+  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
     type: uses
-  - target: "[[entities/etcd]]"
+  - target: "[[entities/etcd.md]]"
     type: uses
-  - target: "[[entities/istio]]"
+  - target: "[[entities/istio.md]]"
     type: uses
 ---
 
@@ -224,6 +225,9 @@ kubectl get storageclass
 
 顾问："网络瓶颈已确认。请执行以下命令深入分析：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Pod 的网络连接状态
 kubectl exec -it <pod-name> -n <namespace> -- netstat -s | grep -E 'drop|error|timeout'
@@ -242,7 +246,7 @@ kubectl get pods -n kube-system | grep -E 'cni|calico|flannel|cilium|weave'
 
 同时请确认：
 1. 延迟高是发生在 Pod 到 Service、Pod 到 Pod，还是 Pod 到外部服务？
-2. 是否使用了 Service Mesh（[[entities/istio|Istio]] / Linkerd）？如果是，请检查 sidecar 资源使用
+2. 是否使用了 Service Mesh（[[entities/istio.md|Istio]] / Linkerd）？如果是，请检查 sidecar 资源使用
 3. 节点网络带宽使用率是否接近上限？"
 
 #### 分支 2.5：应用级性能问题（非基础设施瓶颈）
@@ -283,6 +287,9 @@ kubectl get hpa -n <namespace>
 
 步骤 1：调整 CPU limit
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl edit deployment/<deployment-name> -n <namespace>
 # 修改 resources.limits.cpu 为当前值的 1.5-2 倍
@@ -320,6 +327,9 @@ kubectl top pod <pod-name> -n <namespace>
 
 步骤 1：调整内存 limit
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl edit deployment/<deployment-name> -n <namespace>
 # 修改 resources.limits.memory 为当前值的 1.5-2 倍
@@ -356,6 +366,10 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.containerStatuse
 **修复步骤**（请按顺序执行）：
 
 步骤 1：临时缓解——驱逐低优先级 Pod
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 标记节点不可调度，防止新 Pod 调度上来
@@ -454,6 +468,9 @@ kubectl top pod <pod-name> -n <namespace> -c istio-proxy
 
 步骤 3：优化网络配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 检查 Service 的 Endpoints 分布
 kubectl get endpoints <service-name> -n <namespace>
@@ -476,7 +493,7 @@ kubectl annotate service <service-name> service.kubernetes.io/topology-mode=Auto
 - **多个节点同时资源饱和**（CPU > 90% 或内存 > 95%），且无法快速扩容
 - **集群级别资源耗尽**，新 Pod 无法调度
 - **性能问题伴随节点 NotReady** 或 Pod 频繁驱逐，呈扩散趋势
-- **磁盘 IO 饱和导致 [[entities/etcd|etcd]] 响应慢**，影响整个集群稳定性
+- **磁盘 IO 饱和导致 [[entities/etcd.md|etcd]] 响应慢**，影响整个集群稳定性
 
 ### 🟠 建议升级（P1）
 
@@ -495,7 +512,7 @@ kubectl annotate service <service-name> service.kubernetes.io/topology-mode=Auto
 
 ### 升级话术
 
-顾问："当前情况已超出本 [[skills/skill-k8s-node-notready-SKILL|Skill]] 的自主修复范围，建议立即升级。
+顾问："当前情况已超出本 [[skills/skill-k8s-node-notready-SKILL.md|Skill]] 的自主修复范围，建议立即升级。
 
 **请执行以下操作**：
 1. 通知值班经理 / 高级 SRE 团队 / 应用开发团队
@@ -601,9 +618,9 @@ aliyun ess ExecuteScalingRule --ScalingRuleId <rule-id>
 
 ## 相关案例
 
-- [[synthesis/case-studies/2026-09-01-gpu-memory-leak|2026-09-01-gpu-memory-leak]]
-- [[synthesis/case-studies/2026-10-05-节点内核参数不一致导致sysctl配置冲突|2026-10-05-节点内核参数不一致导致sysctl配置冲突]]
+- [[concepts/case-studies/2026-09-01-gpu-memory-leak.md|2026-09-01-gpu-memory-leak]]
+- [[concepts/case-studies/2026-10-05-节点内核参数不一致导致sysctl配置冲突.md|2026-10-05-节点内核参数不一致导致sysctl配置冲突]]
 ## Related
 
-- [[entities/deployment|Deployment]]
-- [[entities/kubernetes|Kubernetes (CNCF Graduated)]]
+- [[entities/deployment.md|Deployment]]
+- [[entities/kubernetes.md|Kubernetes (CNCF Graduated)]]

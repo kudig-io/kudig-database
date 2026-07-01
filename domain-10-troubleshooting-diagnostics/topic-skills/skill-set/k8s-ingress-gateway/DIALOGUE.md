@@ -4,6 +4,7 @@ category: "troubleshooting"
 tags: ["networking", "remote-consultant"]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 dialogue_id: "DIALOGUE-K8S_INGRESS_GATEWAY"
 skill_id: "k8s-ingress-gateway"
 version: "1.0.0"
@@ -11,11 +12,11 @@ role: "remote-consultant"
 language: "zh"
 summary: "Ingress网关问题的远程顾问对话脚本，覆盖Nginx、Traefik、证书配置排查。"
 relationships:
-  - target: "[[domain-17-system-foundation/topic-dictionary/networking/ingress]]"
+  - target: "[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]"
     type: uses
 ---
 
-# [[domain-17-system-foundation/topic-dictionary/networking/ingress|Ingress]]/网关问题 — 远程顾问对话脚本
+# [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]/网关问题 — 远程顾问对话脚本
 
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
@@ -296,10 +297,10 @@ kubectl get pod <ingress-pod> -n kube-system -o wide
 
 ## 相关案例
 
-- [[synthesis/case-studies/2026-04-10-ingress-502-bad-gateway|2026-04-10-ingress-502-bad-gateway]]
+- [[concepts/case-studies/2026-04-10-ingress-502-bad-gateway.md|2026-04-10-ingress-502-bad-gateway]]
 ## Related
 
-- [[domain-12-cloud-providers/01-alibaba-cloud/05-阿里云SLB与Ingress|阿里云SLB与Ingress]]
-- [[domain-17-system-foundation/03-kubernetes-events/02-pod-container-lifecycle-events|02 - Pod 与容器生命周期事件]]
-- [[domain-10-troubleshooting-diagnostics/15-ingress-troubleshooting|15 - Ingress 故障排查 (Ingress Troubleshooting)]]
-- [[entities/argo|Argo Workflows]]
+- [[domain-12-cloud-providers/01-alibaba-cloud/05-阿里云SLB与Ingress.md|阿里云SLB与Ingress]]
+- [[domain-17-system-foundation/03-kubernetes-events/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
+- [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/15-ingress-troubleshooting.md|15 - Ingress 故障排查 (Ingress Troubleshooting)]]
+- [[entities/argo.md|Argo Workflows]]

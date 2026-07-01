@@ -30,7 +30,7 @@ created: "2026-05-23"
 
 # kind v0.5 Release Notes
 
-Source: [v0.5.1](https://github.[[entities/kubernetes|kubernetes]]-sigs/kind/releases/tag/v0.5.1)
+Source: [v0.5.1](https://github.[[entities/kubernetes.md|kubernetes]]-sigs/kind/releases/tag/v0.5.1)
 
 This release is a minor patch to upgrade `kustomize` to `v3.1.1-0.20190821175718-4b67a6de1296`, fixing builds for Windows. This release also contains fixes to our release tooling & CI to ensure we don't regress on this.
 

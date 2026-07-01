@@ -19,6 +19,7 @@ prerequisites:
   - "kubectl-basics"
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 title: "Control Plane Failure"
 tags: ["skills", "control-plane", "troubleshooting", "visibility/public"]
 ---
@@ -27,7 +28,7 @@ tags: ["skills", "control-plane", "troubleshooting", "visibility/public"]
 
 ## 概述
 
-API [[entities/etcd|etcd]]/Scheduler 问题的诊断与修复 Skill。
+API [[entities/etcd.md|etcd]]/Scheduler 问题的诊断与修复 Skill。
 
 ## 快速诊断
 
@@ -136,11 +137,11 @@ API [[entities/etcd|etcd]]/Scheduler 问题的诊断与修复 Skill。
 
 本Skill诊断过程中可能涉及的其他Skill：
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry.md|06 certificate expiry]]
 
-- [[video-scripts/node-notready]]
+- [[scripts/video-scripts/node-notready.md|node notready]]
 
-- [[skills/best-practices/scenarios/security-incident]]
+- [[skills/best-practices/scenarios/security-incident.md|security incident]]
 
 
 当本Skill的诊断步骤无法定位根因时，建议按上述顺序排查相关Skill。
@@ -233,6 +234,7 @@ flowchart TD
     H -->|修复失败| J[升级给高级SRE]
     I --> K[更新监控告警]
     J --> L[准备问题报告]
+
 ```
 
 ## 工具速查表
@@ -307,6 +309,11 @@ ETCDCTL_API=3 etcdctl snapshot status /backup/etcd-<timestamp>.db -w json | jq .
 
 ### etcd 数据恢复
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 停止所有 etcd 成员（确保数据一致性）
 systemctl stop etcd
@@ -323,7 +330,7 @@ ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-<timestamp>.db \
   --initial-advertise-peer-urls=https://10.0.0.1:2380
 
 # 4. 替换数据目录并重启
-rm -rf /var/lib/etcd
+rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
 mv /var/lib/etcd-new /var/lib/etcd
 systemctl start etcd
 
@@ -333,12 +340,15 @@ ETCDCTL_API=3 etcdctl endpoint health
 
 ### etcd 成员管理
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+
 ```bash
 # 查看成员列表
 ETCDCTL_API=3 etcdctl member list -w table
 
 # 移除问题成员（quorum 未丢失时）
-ETCDCTL_API=3 etcdctl member remove <member-id>
+ETCDCTL_API=3 etcdctl member remove <member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
 
 # 添加新成员
 ETCDCTL_API=3 etcdctl member add <new-member-name> --peer-urls=https://<ip>:2380
@@ -430,6 +440,7 @@ kubeadm upgrade plan
 
 # 5. 确认 CNI 插件兼容性
 kubectl get pods -n kube-system -l k8s-app=calico-node  # 或其他 CNI
+
 ```
 
 ### 升级步骤（滚动升级）
@@ -510,4 +521,6 @@ kubectl get pods -n kube-system -l k8s-app=calico-node  # 或其他 CNI
 
 ## 相关概念
 
-- [[concepts/kubernetes-architecture-overview|Kubernetes 架构概览]] — Kubernetes 控制平面与工作节点架构设计
+- [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构概览]] — Kubernetes 控制平面与工作节点架构设计
+
+```

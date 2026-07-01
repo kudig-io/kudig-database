@@ -4,13 +4,14 @@ category: dialogue
 tags: [dialogue, remote-advisor, autoscaling, hpa, vpa, cluster-autoscaler]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 summary: "自动伸缩问题的远程顾问对话脚本，覆盖HPA、VPA、Cluster Autoscaler排查。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL]]"
+  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
     type: uses
-  - target: "[[entities/helm]]"
+  - target: "[[entities/helm.md]]"
     type: uses
-  - target: "[[entities/kubelet]]"
+  - target: "[[entities/kubelet.md]]"
     type: uses
 ---
 
@@ -198,7 +199,7 @@ kubectl get deployment metrics-server -n kube-system -o yaml | grep -A 10 'args:
 
 > **如果无法查看 Pod 详情**：请告诉我 metrics-server Pod 的状态（Running / Pending / CrashLoopBackOff）。如果是 Pending，可能是节点资源不足或调度约束导致。
 > 
-> **如果无法查看 deployment 配置**：请通过 Dashboard 查看 metrics-server 的启动参数，特别关注 `--[[entities/kubelet|kubelet]]-preferred-address-types` 和 `--kubelet-insecure-tls` 等参数。
+> **如果无法查看 deployment 配置**：请通过 Dashboard 查看 metrics-server 的启动参数，特别关注 `--[[entities/kubelet.md|kubelet]]-preferred-address-types` 和 `--kubelet-insecure-tls` 等参数。
 
 **工程师回复选项**：
 - **A1-1**：metrics-server Pod 为 Pending 状态，Events 显示无法调度
@@ -243,7 +244,7 @@ kubectl describe clusterrole cluster-autoscaler
 kubectl get deployment cluster-autoscaler -n kube-system -o yaml | grep -A 20 'args:'
 ```
 
-> **如果无法查看 clusterrole**：请确认你是否有查看 RBAC 配置的权限。如果没有，请告诉我你们使用的集群类型（EKS/AKS/GKE/ACK/自建），以及 CA 的安装方式（[[entities/helm|helm]] chart / 云厂商插件 / 手动部署）。
+> **如果无法查看 clusterrole**：请确认你是否有查看 RBAC 配置的权限。如果没有，请告诉我你们使用的集群类型（EKS/AKS/GKE/ACK/自建），以及 CA 的安装方式（[[entities/helm.md|helm]] chart / 云厂商插件 / 手动部署）。
 > 
 > **如果 CA 部署在命名空间之外**：请确认 CA 的实际部署位置和配置方式。有些集群的 CA 作为云厂商的托管组件运行，不在 kube-system 中。
 
@@ -383,6 +384,10 @@ kubectl get deployment metrics-server -n kube-system -o yaml > /tmp/metrics-serv
 > **如果无法备份**：请确保你有修改 kube-system 命名空间资源的权限。如果没有，请告诉我，我需要提供无需修改 kube-system 的替代方案。
 
 **步骤 2**：如果是证书问题（常见于自签证书集群），添加 insecure-tls 参数：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch deployment metrics-server -n kube-system --type='json' -p='[
   {"op": "add", "path": "/spec/template/spec/containers/0/args/-", "value": "--kubelet-insecure-tls"}
@@ -407,6 +412,10 @@ kubectl get hpa -n <namespace>
 **顾问**：根因是 HPA 或 Deployment 配置有误。请按以下步骤修复：
 
 **步骤 1**：如果 Deployment 缺少 resources.requests，请添加：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch deployment <deployment-name> -n <namespace> --type='json' -p='[
   {"op": "add", "path": "/spec/template/spec/containers/0/resources", "value": {"requests": {"cpu": "100m", "memory": "128Mi"}}}
@@ -418,6 +427,10 @@ kubectl patch deployment <deployment-name> -n <namespace> --type='json' -p='[
 > **如果 edit 也无法使用**：请告诉我当前的 Deployment YAML 内容，或准备一个新的 YAML 文件执行 `kubectl apply`。
 
 **步骤 2**：如果 HPA 的 scaleTargetRef 错误，请修正：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch hpa <hpa-name> -n <namespace> --type='merge' -p='{
   "spec": {
@@ -469,6 +482,10 @@ kubectl get sa cluster-autoscaler -n kube-system -o yaml | grep 'eks.amazonaws.c
 > **如果无法确认**：请通过 GCP Console 检查集群的 Node Pool autoscaling 配置。
 
 **步骤 3**：修正后重启 CA
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 kubectl rollout restart deployment/cluster-autoscaler -n kube-system
 kubectl rollout status deployment/cluster-autoscaler -n kube-system
@@ -481,6 +498,10 @@ kubectl rollout status deployment/cluster-autoscaler -n kube-system
 **顾问**：根因是资源上限阻止了扩缩容。请按以下步骤处理：
 
 **步骤 1**：如果 ResourceQuota 不足，请调整：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 查看当前配额
 kubectl get resourcequota <quota-name> -n <namespace> -o yaml
@@ -571,7 +592,7 @@ kubectl logs -n kube-system deployment/cluster-autoscaler --tail=50 | grep -i 's
 
 > **升级路径选择**：
 > 1. **继续深入排查** → 需要检查 prometheus-adapter 或自定义指标适配器配置
-> 2. **升级至监控专家** → 如果涉及 Prometheus/Thanos/Grafana 等监控系统，转接至 [[skills/skill-k8s-node-notready-SKILL|SKILL]]-MON-001
+> 2. **升级至监控专家** → 如果涉及 Prometheus/Thanos/Grafana 等监控系统，转接至 [[skills/skill-k8s-node-notready-SKILL.md|SKILL]]-MON-001
 > 3. **升级至控制平面专家** → 如果怀疑 apiserver 或 kubelet 指标接口异常，转接至 SKILL-CONT-001
 > 4. **升级至平台工程专家** → 如果涉及多租户配额策略或复杂的资源调度策略
 
@@ -662,9 +683,9 @@ kubectl get vpa <vpa-name> -n <namespace> -o yaml | grep -A 20 "recommendation"
 
 ## 相关案例
 
-- [[synthesis/case-studies/2026-02-18-hpa-thrashing|2026-02-18-hpa-thrashing]]
-- [[synthesis/case-studies/2026-08-18-cluster-autoscaler-scale-down-delay|2026-08-18-cluster-autoscaler-scale-down-delay]]
+- [[concepts/case-studies/2026-02-18-hpa-thrashing.md|2026-02-18-hpa-thrashing]]
+- [[concepts/case-studies/2026-08-18-cluster-autoscaler-scale-down-delay.md|2026-08-18-cluster-autoscaler-scale-down-delay]]
 ## Related
 
-- [[entities/deployment|Deployment]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes|Nodes（节点）]]
+- [[entities/deployment.md|Deployment]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|Nodes（节点）]]

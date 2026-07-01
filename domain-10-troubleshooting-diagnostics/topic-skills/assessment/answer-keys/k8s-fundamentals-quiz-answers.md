@@ -127,6 +127,9 @@ Pod 创建后经历以下阶段：
 
 **参考答案**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 排查步骤：
 
@@ -333,6 +336,10 @@ data:
 
 **参考答案**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # ========== 排查步骤 ==========
 
@@ -427,4 +434,5 @@ related:
   - domain-10-troubleshooting-diagnostics/topic-skills/assessment/k8s-fundamentals-quiz.md
   - domain-10-troubleshooting-diagnostics/topic-skills/assessment/troubleshooting-lab-exam.md
 ---
+```
 ```

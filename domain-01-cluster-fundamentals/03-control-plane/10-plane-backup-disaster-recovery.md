@@ -260,6 +260,10 @@ backup_strategies:
 
 ### 2.2 备份验证机制
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
 #!/bin/bash
 # 备份验证脚本
@@ -291,11 +295,11 @@ validate_etcd_backup() {
     if [ -d "$temp_dir/data/member" ]; then
         local db_size=$(du -sh $temp_dir/data | cut -f1)
         log "✓ etcd备份验证通过，数据库大小: $db_size"
-        rm -rf $temp_dir
+        rm -rf $temp_dir  # ⚠️ 删除系统/数据文件
         return 0
     else
         log "✗ etcd备份验证失败"
-        rm -rf $temp_dir
+        rm -rf $temp_dir  # ⚠️ 删除系统/数据文件
         return 1
     fi
 }
@@ -536,6 +540,11 @@ main_backup
 ```
 
 ### 3.2 etcd恢复操作
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -882,6 +891,10 @@ main_config_backup
 ```
 
 ### 4.2 配置恢复脚本
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -1297,6 +1310,12 @@ EOF
 
 ### 7.1 定期演练计划
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # 灾备演练脚本
@@ -1476,7 +1495,7 @@ verify_recovery() {
 cleanup_drill_environment() {
     log "清理演练环境..."
     
-    kubectl delete namespace "$TEST_NAMESPACE" --ignore-not-found=true
+    kubectl delete namespace "$TEST_NAMESPACE" --ignore-not-found=true  # ⚠️ 不可逆：永久删除命名空间及全部资源
     rm -f /tmp/drill-test-app.yaml
     
     log "✓ 演练环境清理完成"
@@ -1611,6 +1630,7 @@ main_drill
 ### 阶段1: 环境准备 (预计时间: 15分钟)
 
 1. **隔离问题环境**
+
    ```bash
    # 标记问题节点为不可调度
    kubectl cordon <faulty-node>
@@ -1633,6 +1653,7 @@ main_drill
 ### 阶段2: etcd恢复 (预计时间: 30分钟)
 
 1. **停止相关服务**
+
    ```bash
    systemctl stop kube-apiserver
    systemctl stop kube-controller-manager
@@ -1641,6 +1662,7 @@ main_drill
    ```
 
 2. **恢复etcd数据**
+
    ```bash
    # 选择最新的备份
    LATEST_BACKUP=$(find /backup/etcd -name "*.db" -type f -mtime -7 | sort -r | head -1)
@@ -1716,6 +1738,7 @@ main_drill
    ```
 
 3. **恢复应用服务**
+
    ```bash
    # 恢复关键应用
    kubectl apply -f /backup/applications/critical-services.yaml
@@ -1956,6 +1979,9 @@ spec:
 
 ### 10.2 灾备运维规范
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 #!/bin/bash
 # 灾备系统日常运维脚本
@@ -2127,7 +2153,7 @@ done
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -2141,9 +2167,9 @@ done
 
 ## Related
 
-- [[release-notes/13-backup-demo-video|13-backup-demo-video]]
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- 13-backup-demo-video
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 
@@ -2151,3 +2177,5 @@ done
 - 09-plane-scalability-guide
 - 11-etcd-deep-dive
 - 12-apiserver-deep-dive
+
+```

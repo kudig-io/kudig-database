@@ -47,12 +47,12 @@ created: "2026-05-23"
 ### etcd
 
 - v3.0：v3 API 引入，lease 机制，snapshot restore
-- 参见 [[concepts/core-dependency-version-matrix|[[核心依赖版本矩阵|核心依赖版本矩阵]]]] 了解完整版本矩阵
+- 参见 [[concepts/core-dependency-version-matrix.md|[[核心依赖版本矩阵|核心依赖版本矩阵]]]] 了解完整版本矩阵
 
 ### containerd
 
 - v1.0：CRI 支持初版，FIFO 死锁修复
-- 参见 [[entities/container-runtime|[[Container Runtime|Container Runtime]]]] 了解容器运行时架构
+- 参见 [[entities/container-runtime.md|[[Container Runtime|Container Runtime]]]] 了解容器运行时架构
 
 ### CRI-O
 

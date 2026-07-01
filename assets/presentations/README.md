@@ -5,6 +5,7 @@ tags: ["index", "presentations", "assets", "visibility/public"]
 sources: ["assets/presentations/"]
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 status: reviewed
 ---
 
@@ -12,16 +13,16 @@ status: reviewed
 
 > Kubernetes 核心主题的演示文稿集合。
 
-- [[assets/presentations/README|README]]
-- [[assets/presentations/kubernetes-architecture-fundamentals-presentation|kubernetes-architecture-fundamentals-presentation]]
-- [[assets/presentations/kubernetes-coredns-presentation|kubernetes-coredns-presentation]]
-- [[assets/presentations/kubernetes-ingress-presentation|kubernetes-ingress-presentation]]
-- [[assets/presentations/kubernetes-observability-presentation|kubernetes-observability-presentation]]
-- [[assets/presentations/kubernetes-scheduling-presentation|kubernetes-scheduling-presentation]]
-- [[assets/presentations/kubernetes-security-rbac-presentation|kubernetes-security-rbac-presentation]]
-- [[assets/presentations/kubernetes-service-presentation|kubernetes-service-presentation]]
-- [[assets/presentations/kubernetes-storage-presentation|kubernetes-storage-presentation]]
-- [[assets/presentations/kubernetes-terway-presentation|kubernetes-terway-presentation]]
-- [[assets/presentations/kubernetes-troubleshooting-methodology-presentation|kubernetes-troubleshooting-methodology-presentation]]
-- [[assets/presentations/kubernetes-workload-presentation|kubernetes-workload-presentation]]
-- [[assets/presentations/presentation-template|presentation-template]]
+- [[assets/presentations/README.md|README]]
+- [[assets/presentations/kubernetes-architecture-fundamentals-presentation.md|kubernetes-architecture-fundamentals-presentation]]
+- [[assets/presentations/kubernetes-coredns-presentation.md|kubernetes-coredns-presentation]]
+- [[assets/presentations/kubernetes-ingress-presentation.md|kubernetes-ingress-presentation]]
+- [[assets/presentations/kubernetes-observability-presentation.md|kubernetes-observability-presentation]]
+- [[assets/presentations/kubernetes-scheduling-presentation.md|kubernetes-scheduling-presentation]]
+- [[assets/presentations/kubernetes-security-rbac-presentation.md|kubernetes-security-rbac-presentation]]
+- [[assets/presentations/kubernetes-service-presentation.md|kubernetes-service-presentation]]
+- [[assets/presentations/kubernetes-storage-presentation.md|kubernetes-storage-presentation]]
+- [[assets/presentations/kubernetes-terway-presentation.md|kubernetes-terway-presentation]]
+- [[assets/presentations/kubernetes-troubleshooting-methodology-presentation.md|kubernetes-troubleshooting-methodology-presentation]]
+- [[assets/presentations/kubernetes-workload-presentation.md|kubernetes-workload-presentation]]
+- [[assets/presentations/presentation-template.md|presentation-template]]

@@ -70,7 +70,7 @@ created: "2026-05-23"
 
 <!-- chunk: 镜像分层原理 -->## 镜像分层原理
 
-#<!-- chunk: 镜像层级结构 -->## 镜像层级结构
+## 镜像层级结构
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -89,7 +89,7 @@ created: "2026-05-23"
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: UnionFS 联合文件系统 -->## UnionFS 联合文件系统
+## UnionFS 联合文件系统
 
 | 存储驱动 | 文件系统要求 | 特点 | 推荐场景 |
 |:---|:---|:---|:---|
@@ -99,7 +99,7 @@ created: "2026-05-23"
 | **zfs** | zfs | 高级存储功能 | 需要 ZFS 特性 |
 | **vfs** | 任意 | 无 CoW，性能差 | 测试/特殊场景 |
 
-#<!-- chunk: 镜像层内容寻址 -->## 镜像层内容寻址
+## 镜像层内容寻址
 
 ```bash
 # 镜像 manifest
@@ -112,7 +112,7 @@ docker image inspect nginx:1.25 --format '{{range .RootFS.Layers}}{{.}}{{println
 ls /var/lib/docker/overlay2/
 ```
 
-#<!-- chunk: OCI 镜像结构 -->## OCI 镜像结构
+## OCI 镜像结构
 
 | 组件 | 文件 | 说明 |
 |:---|:---|:---|
@@ -126,7 +126,7 @@ ls /var/lib/docker/overlay2/
 
 <!-- chunk: Dockerfile 完全参考 -->## Dockerfile 完全参考
 
-#<!-- chunk: 指令参考表 -->## 指令参考表
+## 指令参考表
 
 | 指令 | 语法 | 说明 | 示例 |
 |:---|:---|:---|:---|
@@ -148,7 +148,7 @@ ls /var/lib/docker/overlay2/
 | **STOPSIGNAL** | `STOPSIGNAL signal` | 停止信号 | `STOPSIGNAL SIGTERM` |
 | **ONBUILD** | `ONBUILD instruction` | 延迟执行 | `ONBUILD COPY . /app` |
 
-#<!-- chunk: HEALTHCHECK 配置 -->## HEALTHCHECK 配置
+## HEALTHCHECK 配置
 
 ```dockerfile
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
@@ -163,7 +163,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 | `--retries` | 3 | 重试次数 |
 | `--start-interval` (1.44+) | 5s | 启动期间检查间隔 |
 
-#<!-- chunk: CMD vs ENTRYPOINT -->## CMD vs ENTRYPOINT
+## CMD vs ENTRYPOINT
 
 | 场景 | CMD | ENTRYPOINT | 效果 |
 |:---|:---|:---|:---|
@@ -181,7 +181,7 @@ docker run nginx               # 执行: nginx -g daemon off;
 docker run nginx -c /etc/nginx.conf  # 执行: nginx -c /etc/nginx.conf
 ```
 
-#<!-- chunk: Shell 形式 vs Exec 形式 -->## Shell 形式 vs Exec 形式
+## Shell 形式 vs Exec 形式
 
 | 形式 | 语法 | PID 1 | 信号处理 | 变量展开 |
 |:---|:---|:---|:---|:---|
@@ -200,7 +200,7 @@ CMD ["echo", "Hello"]     # 直接执行: echo Hello
 
 <!-- chunk: 多阶段构建 -->## 多阶段构建
 
-#<!-- chunk: 基本多阶段构建 -->## 基本多阶段构建
+## 基本多阶段构建
 
 ```dockerfile
 # ========== 构建阶段 ==========
@@ -228,7 +228,7 @@ EXPOSE 8080
 ENTRYPOINT ["/app/server"]
 ```
 
-#<!-- chunk: 高级多阶段模式 -->## 高级多阶段模式
+## 高级多阶段模式
 
 ```dockerfile
 # ========== 基础依赖 ==========
@@ -267,7 +267,7 @@ EXPOSE 3000
 CMD ["node", "dist/main.js"]
 ```
 
-#<!-- chunk: 跨阶段复制 -->## 跨阶段复制
+## 跨阶段复制
 
 ```dockerfile
 # 从指定阶段复制
@@ -287,7 +287,7 @@ ENTRYPOINT ["/server"]
 
 <!-- chunk: BuildKit 高级特性 -->## BuildKit 高级特性
 
-#<!-- chunk: 启用 BuildKit -->## 启用 BuildKit
+## 启用 BuildKit
 
 ```bash
 # 方式1: 环境变量
@@ -305,7 +305,7 @@ docker buildx build .
 }
 ```
 
-#<!-- chunk: BuildKit 缓存挂载 -->## BuildKit 缓存挂载
+## BuildKit 缓存挂载
 
 ```dockerfile
 # 包管理器缓存
@@ -327,7 +327,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     pip install -r requirements.txt
 ```
 
-#<!-- chunk: BuildKit Secret 挂载 -->## BuildKit Secret 挂载
+## BuildKit Secret 挂载
 
 ```dockerfile
 # 使用 secret
@@ -347,7 +347,7 @@ docker buildx build --secret id=npmrc,src=$HOME/.npmrc .
 docker buildx build --ssh default .
 ```
 
-#<!-- chunk: BuildKit 并行构建 -->## BuildKit 并行构建
+## BuildKit 并行构建
 
 ```dockerfile
 # syntax=docker/dockerfile:1.6
@@ -372,7 +372,7 @@ COPY --from=builder-worker /worker /usr/local/bin/
 COPY --from=builder-cli /cli /usr/local/bin/
 ```
 
-#<!-- chunk: 多平台构建 -->## 多平台构建
+## 多平台构建
 
 ```bash
 # 创建多平台构建器
@@ -388,7 +388,7 @@ docker buildx build \
 docker buildx build --platform linux/arm64 -t app:arm64 --load .
 ```
 
-#<!-- chunk: 构建进度输出 -->## 构建进度输出
+## 构建进度输出
 
 ```bash
 # 纯文本输出 (CI 环境)
@@ -405,7 +405,7 @@ docker buildx build --progress=auto .
 
 <!-- chunk: 镜像仓库管理 -->## 镜像仓库管理
 
-#<!-- chunk: 常用镜像仓库 -->## 常用镜像仓库
+## 常用镜像仓库
 
 | 仓库 | 类型 | 特点 | 地址 |
 |:---|:---|:---|:---|
@@ -417,7 +417,7 @@ docker buildx build --progress=auto .
 | **Harbor** | 私有 | 企业级、功能丰富 | 自建 |
 | **Nexus** | 私有 | 多格式仓库 | 自建 |
 
-#<!-- chunk: Harbor 部署 -->## Harbor 部署
+## Harbor 部署
 
 ```bash
 # 下载Harbor
@@ -462,7 +462,7 @@ trivy:
 ./install.sh --with-trivy --with-notary
 ```
 
-#<!-- chunk: 镜像操作命令 -->## 镜像操作命令
+## 镜像操作命令
 
 ```bash
 # 登录仓库
@@ -486,7 +486,7 @@ docker manifest inspect registry.example.com/project/myapp:v1.0
 # ECR: aws ecr batch-delete-image
 ```
 
-#<!-- chunk: 镜像仓库认证配置 -->## 镜像仓库认证配置
+## 镜像仓库认证配置
 
 ```bash
 # ~/.docker/config.json
@@ -507,7 +507,10 @@ docker manifest inspect registry.example.com/project/myapp:v1.0
 }
 ```
 
-#<!-- chunk: Kubernetes 镜像拉取凭据 -->## Kubernetes 镜像拉取凭据
+## Kubernetes 镜像拉取凭据
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 Secret
@@ -530,7 +533,7 @@ spec:
 
 <!-- chunk: 镜像安全扫描 -->## 镜像安全扫描
 
-#<!-- chunk: 扫描工具对比 -->## 扫描工具对比
+## 扫描工具对比
 
 | 工具 | 类型 | 漏洞库 | 集成 |
 |:---|:---|:---|:---|
@@ -540,7 +543,7 @@ spec:
 | **Snyk** | 商业 | 自有 | CI/CD, IDE |
 | **Docker Scout** | 商业 | 多来源 | Docker Desktop |
 
-#<!-- chunk: Trivy 使用 -->## Trivy 使用
+## Trivy 使用
 
 ```bash
 # 安装 Trivy
@@ -575,7 +578,7 @@ trivy fs /path/to/project
 trivy sbom --artifact-type oci-image nginx:1.25
 ```
 
-#<!-- chunk: Trivy 配置文件 -->## Trivy 配置文件
+## Trivy 配置文件
 
 ```yaml
 # trivy.yaml
@@ -596,7 +599,7 @@ db:
   download-java-db: false
 ```
 
-#<!-- chunk: CI/CD 集成示例 -->## CI/CD 集成示例
+## CI/CD 集成示例
 
 ```yaml
 # GitHub Actions
@@ -630,7 +633,7 @@ jobs:
 
 <!-- chunk: 镜像签名与验证 -->## 镜像签名与验证
 
-#<!-- chunk: Docker Content Trust (DCT) -->## Docker Content Trust (DCT)
+## Docker Content Trust (DCT)
 
 ```bash
 # 启用 DCT
@@ -653,7 +656,7 @@ docker trust signer remove alice myregistry/myimage
 docker trust revoke myregistry/myimage:v1
 ```
 
-#<!-- chunk: Cosign (Sigstore) -->## Cosign (Sigstore)
+## Cosign (Sigstore)
 
 ```bash
 # 安装 cosign
@@ -682,7 +685,7 @@ cosign attach sbom --sbom sbom.spdx myregistry/myimage:v1
 cosign verify-attestation --key cosign.pub myregistry/myimage:v1
 ```
 
-#<!-- chunk: Kubernetes Admission 验证 -->## Kubernetes Admission 验证
+## Kubernetes Admission 验证
 
 ```yaml
 # Kyverno Policy - 强制签名验证
@@ -710,13 +713,14 @@ spec:
                       -----BEGIN PUBLIC KEY-----
                       MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE...
                       -----END PUBLIC KEY-----
+
 ```
 
 ---
 
 <!-- chunk: 镜像优化最佳实践 -->## 镜像优化最佳实践
 
-#<!-- chunk: 减小镜像体积 -->## 减小镜像体积
+## 减小镜像体积
 
 | 技术 | 节省比例 | 说明 |
 |:---|:---|:---|
@@ -729,7 +733,7 @@ spec:
 | **使用 .dockerignore** | 可变 | 排除不必要文件 |
 | **压缩二进制** | 20-50% | UPX 压缩 |
 
-#<!-- chunk: 基础镜像选择 -->## 基础镜像选择
+## 基础镜像选择
 
 | 镜像 | 大小 | 特点 | 适用场景 |
 |:---|:---|:---|:---|
@@ -740,7 +744,7 @@ spec:
 | **debian-slim** | ~75MB | glibc, apt | 需要 apt 的场景 |
 | **ubuntu** | ~78MB | 完整 Ubuntu | 开发/调试 |
 
-#<!-- chunk: .dockerignore 示例 -->## .dockerignore 示例
+## .dockerignore 示例
 
 ```dockerfile
 # Git
@@ -782,7 +786,7 @@ docker-compose*
 secrets.yaml
 ```
 
-#<!-- chunk: 最佳实践 Dockerfile 示例 -->## 最佳实践 Dockerfile 示例
+## 最佳实践 Dockerfile 示例
 
 ```dockerfile
 # syntax=docker/dockerfile:1.6
@@ -837,7 +841,7 @@ LABEL org.opencontainers.image.title="My Application" \
 ENTRYPOINT ["python", "-m", "src.main"]
 ```
 
-#<!-- chunk: 镜像分析工具 -->## 镜像分析工具
+## 镜像分析工具
 
 ```bash
 # Dive - 分析镜像层
@@ -872,4 +876,6 @@ slim build --target nginx:1.25 --tag nginx:slim
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+```

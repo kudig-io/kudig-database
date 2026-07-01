@@ -91,7 +91,7 @@ k8s_versions:
 
 <!-- chunk: 一、API 资源信息 -->## 一、API 资源信息
 
-#<!-- chunk: 1.1 基本信息 -->## 1.1 基本信息
+## 1.1 基本信息
 
 ```yaml
 # API 元数据
@@ -113,7 +113,7 @@ metadata:
 - **声明式**: 声明需求(容量、访问模式),由 Kubernetes 匹配或动态创建 PV
 - **生命周期**: 可独立于 Pod 存在,数据持久化
 
-#<!-- chunk: 1.2 核心字段结构 -->## 1.2 核心字段结构
+## 1.2 核心字段结构
 
 ```yaml
 spec:
@@ -139,7 +139,7 @@ status:
 
 <!-- chunk: 二、完整字段详解 -->## 二、完整字段详解
 
-#<!-- chunk: 2.1 访问模式 (accessModes) -->## 2.1 访问模式 (accessModes)
+## 2.1 访问模式 (accessModes)
 
 ```yaml
 spec:
@@ -172,7 +172,7 @@ accessModes:
 # 原因: 会减少可匹配的 PV 数量(必须 PV 同时支持两种模式)
 ```
 
-#<!-- chunk: 2.2 资源需求 (resources) -->## 2.2 资源需求 (resources)
+## 2.2 资源需求 (resources)
 
 ```yaml
 spec:
@@ -213,7 +213,7 @@ resources:
 # k, M, G, T (十进制 1000 进制,不推荐)
 ```
 
-#<!-- chunk: 2.3 存储类 (storageClassName) -->## 2.3 存储类 (storageClassName)
+## 2.3 存储类 (storageClassName)
 
 ```yaml
 spec:
@@ -231,6 +231,10 @@ spec:
 | 不设置该字段 | 1. 使用默认 StorageClass (如果有)<br>2. 或匹配未设置 storageClassName 的 PV | 快速开发,使用默认类 |
 
 **默认 StorageClass**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 查看默认 StorageClass
 kubectl get storageclass
@@ -261,7 +265,7 @@ PV 自动绑定到 PVC
 PVC 状态变为 Bound
 ```
 
-#<!-- chunk: 2.4 卷模式 (volumeMode) -->## 2.4 卷模式 (volumeMode)
+## 2.4 卷模式 (volumeMode)
 
 ```yaml
 spec:
@@ -332,7 +336,7 @@ mount /dev/xvda /data
 # PostgreSQL 可以配置 tablespace 直接使用块设备
 ```
 
-#<!-- chunk: 2.5 静态绑定 (volumeName) -->## 2.5 静态绑定 (volumeName)
+## 2.5 静态绑定 (volumeName)
 
 ```yaml
 spec:
@@ -386,7 +390,7 @@ spec:
 - 指定 volumeName 后,仍需满足其他匹配条件(容量、访问模式等)
 - 常用于静态供给场景
 
-#<!-- chunk: 2.6 标签选择器 (selector) -->## 2.6 标签选择器 (selector)
+## 2.6 标签选择器 (selector)
 
 ```yaml
 spec:
@@ -457,7 +461,7 @@ spec:
 - 过于严格的 selector 可能导致无可用 PV
 - 动态供给场景下 selector 通常不需要(StorageClass 已定义属性)
 
-#<!-- chunk: 2.7 数据源 (dataSource) -->## 2.7 数据源 (dataSource)
+## 2.7 数据源 (dataSource)
 
 ```yaml
 spec:
@@ -469,7 +473,7 @@ spec:
 
 **支持的数据源类型**:
 
-##<!-- chunk: (1) 从 PVC 克隆 -->## (1) 从 PVC 克隆
+## (1) 从 PVC 克隆
 
 ```yaml
 # 原始 PVC
@@ -520,7 +524,7 @@ CSI Driver 执行克隆操作
 - 蓝绿部署: 快速创建应用副本
 - 数据分析: 复制生产数据库用于离线分析
 
-##<!-- chunk: (2) 从 VolumeSnapshot 恢复 -->## (2) 从 VolumeSnapshot 恢复
+## (2) 从 VolumeSnapshot 恢复
 
 ```yaml
 # 步骤 1: 创建快照
@@ -569,7 +573,7 @@ PVC 绑定到新 PV
 - 数据回滚: 恢复到已知良好状态
 - 环境复制: 从快照快速创建新环境
 
-#<!-- chunk: 2.8 数据源引用 (dataSourceRef) -->## 2.8 数据源引用 (dataSourceRef)
+## 2.8 数据源引用 (dataSourceRef)
 
 ```yaml
 spec:
@@ -631,7 +635,7 @@ spec:
 
 <!-- chunk: 三、卷扩容 (Volume Expansion) -->## 三、卷扩容 (Volume Expansion)
 
-#<!-- chunk: 3.1 在线扩容 -->## 3.1 在线扩容
+## 3.1 在线扩容
 
 ```yaml
 # 前提条件:
@@ -675,6 +679,10 @@ kubectl describe pvc mysql-pvc
 | Complete | - | status.capacity.storage | 扩容完成,容量更新 |
 
 **扩容状态监控**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 实时监控扩容进度
 kubectl get pvc mysql-pvc -o jsonpath='{.status.conditions[?(@.type=="Resizing")]}' | jq
@@ -686,7 +694,7 @@ kubectl get events --field-selector involvedObject.name=mysql-pvc --sort-by='.la
 kubectl exec mysql-0 -- df -h /var/lib/mysql
 ```
 
-#<!-- chunk: 3.2 离线扩容 -->## 3.2 离线扩容
+## 3.2 离线扩容
 
 某些存储系统需要 Pod 停止才能扩容:
 
@@ -707,7 +715,7 @@ kubectl wait --for=condition=FileSystemResizeSuccessful pvc/mysql-pvc --timeout=
 kubectl scale statefulset mysql --replicas=3
 ```
 
-#<!-- chunk: 3.3 扩容限制 -->## 3.3 扩容限制
+## 3.3 扩容限制
 
 ```yaml
 # ❌ 不支持的操作
@@ -745,7 +753,7 @@ kubectl logs -n kube-system -l app=ebs-csi-controller
 
 <!-- chunk: 四、内部原理 -->## 四、内部原理
 
-#<!-- chunk: 4.1 PVC 生命周期 -->## 4.1 PVC 生命周期
+## 4.1 PVC 生命周期
 
 ```yaml
 status:
@@ -786,7 +794,7 @@ status:
 | **Bound** | 已绑定到 PV | 正常工作状态 | - |
 | **Lost** | 绑定的 PV 丢失 | PV 被手动删除 | 恢复 PV 或重建 PVC |
 
-#<!-- chunk: 4.2 动态供给流程 -->## 4.2 动态供给流程
+## 4.2 动态供给流程
 
 **组件角色**:
 - **PVC Controller**: 监控 PVC,触发动态供给
@@ -857,7 +865,7 @@ PVC 创建 → Pending 状态
     Pod 继续启动
 ```
 
-#<!-- chunk: 4.3 绑定控制器算法 -->## 4.3 绑定控制器算法
+## 4.3 绑定控制器算法
 
 ```go
 // 伪代码展示 PVC-PV 绑定逻辑
@@ -914,7 +922,7 @@ func findMatchingPVs(pvc *PVC) []*PV {
 
 <!-- chunk: 五、配置模板 -->## 五、配置模板
 
-#<!-- chunk: 5.1 最小配置 (开发环境) -->## 5.1 最小配置 (开发环境)
+## 5.1 最小配置 (开发环境)
 
 ```yaml
 apiVersion: v1
@@ -929,7 +937,7 @@ spec:
       storage: 1Gi
 ```
 
-#<!-- chunk: 5.2 生产级配置 (动态供给) -->## 5.2 生产级配置 (动态供给)
+## 5.2 生产级配置 (动态供给)
 
 ```yaml
 apiVersion: v1
@@ -955,7 +963,7 @@ spec:
   #     tier: database
 ```
 
-#<!-- chunk: 5.3 静态绑定配置 -->## 5.3 静态绑定配置
+## 5.3 静态绑定配置
 
 ```yaml
 apiVersion: v1
@@ -973,7 +981,7 @@ spec:
       storage: 50Gi
 ```
 
-#<!-- chunk: 5.4 克隆配置 -->## 5.4 克隆配置
+## 5.4 克隆配置
 
 ```yaml
 apiVersion: v1
@@ -996,7 +1004,7 @@ spec:
       storage: 100Gi              # 可以 >= 源 PVC
 ```
 
-#<!-- chunk: 5.5 快照恢复配置 -->## 5.5 快照恢复配置
+## 5.5 快照恢复配置
 
 ```yaml
 apiVersion: v1
@@ -1019,7 +1027,7 @@ spec:
       storage: 150Gi              # 可以大于快照大小(扩容恢复)
 ```
 
-#<!-- chunk: 5.6 共享存储配置 (RWX) -->## 5.6 共享存储配置 (RWX)
+## 5.6 共享存储配置 (RWX)
 
 ```yaml
 apiVersion: v1
@@ -1039,7 +1047,7 @@ spec:
       storage: 500Gi
 ```
 
-#<!-- chunk: 5.7 块设备配置 -->## 5.7 块设备配置
+## 5.7 块设备配置
 
 ```yaml
 apiVersion: v1
@@ -1064,7 +1072,7 @@ spec:
 
 <!-- chunk: 六、生产案例 -->## 六、生产案例
 
-#<!-- chunk: 6.1 案例 1: StatefulSet 使用动态 PVC -->## 6.1 案例 1: StatefulSet 使用动态 PVC
+## 6.1 案例 1: StatefulSet 使用动态 PVC
 
 **场景**: MySQL 主从复制,3 副本 StatefulSet
 
@@ -1143,6 +1151,10 @@ spec:
 ```
 
 **扩容数据卷**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 增加 mysql-0 的数据卷容量
 kubectl patch pvc data-mysql-0 -n database -p '{"spec":{"resources":{"requests":{"storage":"300Gi"}}}}'
@@ -1153,7 +1165,7 @@ kubectl get pvc -n database data-mysql-0
 # data-mysql-0    Bound    pvc-abc123    300Gi      RWO            mysql-storage    10d
 ```
 
-#<!-- chunk: 6.2 案例 2: 从快照恢复数据库 -->## 6.2 案例 2: 从快照恢复数据库
+## 6.2 案例 2: 从快照恢复数据库
 
 **场景**: 生产数据库误删除数据,需要从昨天快照恢复
 
@@ -1248,7 +1260,7 @@ kubectl patch pvc mysql-pvc-restored -n database -p '{"metadata":{"name":"mysql-
 kubectl scale statefulset mysql -n database --replicas=3
 ```
 
-#<!-- chunk: 6.3 案例 3: 开发环境快速克隆生产数据 -->## 6.3 案例 3: 开发环境快速克隆生产数据
+## 6.3 案例 3: 开发环境快速克隆生产数据
 
 **场景**: 开发团队需要完整的生产数据副本进行测试
 
@@ -1381,7 +1393,7 @@ spec:
           restartPolicy: OnFailure
 ```
 
-#<!-- chunk: 6.4 案例 4: 共享存储 Web 静态资源 -->## 6.4 案例 4: 共享存储 Web 静态资源
+## 6.4 案例 4: 共享存储 Web 静态资源
 
 **场景**: 10 个 Nginx Pod 共享静态资源(图片/CSS/JS)
 
@@ -1487,7 +1499,7 @@ spec:
 
 <!-- chunk: 七、故障排查 -->## 七、故障排查
 
-#<!-- chunk: 7.1 PVC 一直 Pending -->## 7.1 PVC 一直 Pending
+## 7.1 PVC 一直 Pending
 
 **症状**:
 ```bash
@@ -1543,7 +1555,7 @@ kubectl run test-pod --image=nginx --overrides='
 | WaitForFirstConsumer | 延迟绑定等待 Pod | 创建使用该 PVC 的 Pod |
 | insufficient capacity | 节点存储空间不足 | 清理空间或添加节点 |
 
-#<!-- chunk: 7.2 克隆/快照恢复失败 -->## 7.2 克隆/快照恢复失败
+## 7.2 克隆/快照恢复失败
 
 **症状**:
 ```bash
@@ -1575,7 +1587,7 @@ kubectl get volumesnapshot my-snapshot -o jsonpath='{.status.readyToUse}'
 kubectl logs -n kube-system -l app=ebs-csi-controller -c csi-snapshotter
 ```
 
-#<!-- chunk: 7.3 PVC 扩容卡住 -->## 7.3 PVC 扩容卡住
+## 7.3 PVC 扩容卡住
 
 **症状**:
 ```bash
@@ -1594,6 +1606,12 @@ kubectl describe pvc mysql-pvc
 **原因**: 某些文件系统需要 Pod 重启才能识别新容量
 
 **解决方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 方法 1: 滚动重启 Pod
 kubectl rollout restart statefulset mysql
@@ -1609,9 +1627,13 @@ kubectl exec mysql-0 -- xfs_growfs /data       # xfs
 kubectl exec mysql-0 -- df -h /var/lib/mysql
 ```
 
-#<!-- chunk: 7.4 PVC 无法删除 -->## 7.4 PVC 无法删除
+## 7.4 PVC 无法删除
 
 **症状**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 kubectl delete pvc my-pvc
 # pvc "my-pvc" deleted
@@ -1625,6 +1647,11 @@ kubectl get pvc
 **原因**: PVC 有 finalizers 保护,通常因为仍被 Pod 使用
 
 **排查步骤**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 检查 finalizers
 kubectl get pvc my-pvc -o jsonpath='{.metadata.finalizers}'
@@ -1650,7 +1677,7 @@ kubectl get pv pvc-abc123 -o jsonpath='{.spec.persistentVolumeReclaimPolicy}'
 
 <!-- chunk: 八、最佳实践总结 -->## 八、最佳实践总结
 
-#<!-- chunk: 8.1 命名规范 -->## 8.1 命名规范
+## 8.1 命名规范
 
 ```yaml
 # ✅ 推荐: 语义化命名
@@ -1666,7 +1693,7 @@ metadata:
   name: pvc-001                   # 难以识别用途
 ```
 
-#<!-- chunk: 8.2 资源规划 -->## 8.2 资源规划
+## 8.2 资源规划
 
 ```yaml
 # ✅ 容量预留 20-30%
@@ -1683,7 +1710,7 @@ resources:
 # Alibaba Cloud: 最小 20Gi
 ```
 
-#<!-- chunk: 8.3 存储类选择 -->## 8.3 存储类选择
+## 8.3 存储类选择
 
 ```yaml
 # ✅ 显式指定 storageClassName
@@ -1698,7 +1725,7 @@ spec:
   storageClassName: ""            # 仅用于静态供给
 ```
 
-#<!-- chunk: 8.4 数据保护 -->## 8.4 数据保护
+## 8.4 数据保护
 
 ```yaml
 # ✅ 重要数据使用 Retain 策略的 StorageClass
@@ -1742,7 +1769,7 @@ metadata:
     backup-policy: daily          # 标记备份策略
 ```
 
-#<!-- chunk: 8.5 监控告警 -->## 8.5 监控告警
+## 8.5 监控告警
 
 ```yaml
 # Prometheus 告警规则示例
@@ -1783,21 +1810,21 @@ groups:
 
 <!-- chunk: 九、参考资源 -->## 九、参考资源
 
-#<!-- chunk: 9.1 官方文档 -->## 9.1 官方文档
+## 9.1 官方文档
 
 - [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 - [Dynamic Volume Provisioning](https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/)
 - [Volume Snapshots](https://kubernetes.io/docs/concepts/storage/volume-snapshots/)
 - [Storage Capacity Tracking](https://kubernetes.io/docs/concepts/storage/storage-capacity/)
 
-#<!-- chunk: 9.2 相关 KEP -->## 9.2 相关 KEP
+## 9.2 相关 KEP
 
 - [KEP-1495: Volume Health Monitoring](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/1495-volume-health-monitor)
 - [KEP-1682: Skip Volume Ownership Change](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/1682-csi-driver-skip-permission)
 - [KEP-1790: Recover from Expansion Failure](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/1790-recover-resize-failure)
 - [KEP-3294: Cross Namespace Data Sources](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/3294-provision-volumes-from-cross-namespace-snapshots)
 
-#<!-- chunk: 9.3 版本差异 -->## 9.3 版本差异
+## 9.3 版本差异
 
 | 功能 | v1.25 | v1.26 | v1.27 | v1.28 | v1.29 | v1.30 | v1.31 | v1.32 |
 |------|-------|-------|-------|-------|-------|-------|-------|-------|
@@ -1816,7 +1843,7 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -1837,6 +1864,6 @@ groups:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]

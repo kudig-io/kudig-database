@@ -45,7 +45,7 @@ created: "2026-05-23"
 | 成熟期 | v1.6 - v1.9 | 自动扩缩、RBAC、[[NetworkPolicy|NetworkPolicy]] GA |
 | 云原生平台 | v1.10 - v1.13 | CSI、[[kubelet|Kubelet]] 插件化、TTL 控制 |
 | 标准化 | v1.14 - v1.17 | kubectl 成熟、kubeadm GA、拓扑感知调度 |
-| 现代化 | v1.18 - v1.21 | [[CronJob|CronJob]] GA、[[Ephemeral Containers|Ephemeral Containers]]、ServiceAccount 自动创建 |
+| 现代化 | v1.18 - v1.21 | [[CronJob|CronJob]] GA、Ephemeral Containers、ServiceAccount 自动创建 |
 | 增强期 | v1.22 - v1.25 | 结构化日志、Sidecar Containers、Pod 安全准入 |
 | 持续演进 | v1.26 - v1.36 | API 持续优化、调度增强、安全加固 |
 
@@ -245,7 +245,7 @@ Kubernetes 第一个正式生产版本，确立了核心 API 对象模型：
 
 1. **跳版本升级**：Kubernetes 支持相邻小版本升级（如 v1.28 -> v1.29），不支持跨多版本直接升级
 2. **API 迁移**：升级前使用 `kubectl api-resources` 检查已弃用的 API
-3. **组件兼容**：确保 etcd、coredns、kube-proxy 等核心组件版本与 [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]] 版本兼容
+3. **组件兼容**：确保 etcd、coredns、kube-proxy 等核心组件版本与 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]] 版本兼容
 
 ## 来源文档
 
@@ -256,11 +256,11 @@ Kubernetes 第一个正式生产版本，确立了核心 API 对象模型：
 
 ## Related
 
-- [[entities/statefulset|statefulset]] — StatefulSet
-- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/statefulset.md|statefulset]] — StatefulSet
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[coredns]] — CoreDNS
 - [[etcd]] — etcd
 - [[kubernetes]] — [[kubernetes|Kubernetes (CNCF Graduated)]]
 
 - [[CHANGELOG|CHANGELOG]]
-- [[entities/networkpolicy|networkpolicy]]
+- [[entities/networkpolicy.md|networkpolicy]]

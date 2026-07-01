@@ -188,7 +188,7 @@ dns-fta.md
 gateway-api-fta.md
 hpa-fta.md
 helm-fta.md
-[[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta|ingress-fta]].md
+[[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|ingress-fta]].md
 service-fta.md
 monitoring-fta.md
 networkpolicy-fta.md

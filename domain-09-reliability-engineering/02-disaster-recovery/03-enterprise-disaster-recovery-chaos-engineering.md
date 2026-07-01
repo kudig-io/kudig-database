@@ -61,9 +61,9 @@ created: "2026-05-23"
 
 <!-- chunk: 概述 -->## 概述
 
-在云原生和微服务架构日益普及的今天，系统复杂性呈指数级增长，传统的"预防为主"的灾备思路已经无法应对分布式系统中的各种不确定性。混沌工程（[[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering|Chaos Engineering]]）作为一种主动发现系统弱点的学科方法论，通过在受控条件下向系统注入问题，验证系统的韧性（Resilience）能力，已成为现代灾备体系中不可或缺的环节。本文档深入探讨企业级容灾架构设计和混沌工程实践，提供从灾备策略到故障演练的完整技术指南。
+在云原生和微服务架构日益普及的今天，系统复杂性呈指数级增长，传统的"预防为主"的灾备思路已经无法应对分布式系统中的各种不确定性。混沌工程（[[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]]）作为一种主动发现系统弱点的学科方法论，通过在受控条件下向系统注入问题，验证系统的韧性（Resilience）能力，已成为现代灾备体系中不可或缺的环节。本文档深入探讨企业级容灾架构设计和混沌工程实践，提供从灾备策略到故障演练的完整技术指南。
 
-#<!-- chunk: RPO 与 RTO 定义 -->## RPO 与 RTO 定义
+## RPO 与 RTO 定义
 
 - **RPO（Recovery Point Objective，恢复点目标）**：系统可容忍的最大数据丢失量。在混沌工程中，RPO 直接影响实验设计——若系统的 RPO 要求为秒级，则需要重点验证数据同步和持久化机制的可靠性。
 - **RTO（Recovery Time Objective，恢复时间目标）**：系统从问题中恢复到正常服务的最大允许时间。混沌实验通过测量系统在故障注入后的实际恢复时间，验证 RTO 目标是否可达成。
@@ -90,7 +90,7 @@ chaos_engineering_rpo_rto:
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 企业级容灾等级架构 -->## 企业级容灾等级架构
+## 企业级容灾等级架构
 
 ```mermaid
 graph TB
@@ -136,7 +136,7 @@ graph TB
     F4 & F5 --> E1
 ```
 
-#<!-- chunk: 容灾架构选型 -->## 容灾架构选型
+## 容灾架构选型
 
 | 容灾等级 | RPO | RTO | 成本指数 | 技术方案 | 适用行业 |
 |:---|:---|:---|:---|:---|:---|
@@ -145,7 +145,7 @@ graph TB
 | Level 2 同城双活 | 秒级 | 分钟级 | 5x | 同步复制 + 自动切换 | 金融、电信 |
 | Level 3 多活异地 | 接近零 | 秒级 | 10x+ | 多主复制 + GSLB | 互联网、支付 |
 
-#<!-- chunk: 双活架构实现 -->## 双活架构实现
+## 双活架构实现
 
 ```yaml
 # active-active-architecture.yaml
@@ -238,7 +238,7 @@ disaster_recovery_architecture:
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: 混沌工程实验框架 -->## 混沌工程实验框架
+## 混沌工程实验框架
 
 ```python
 # chaos-engineering-framework.py
@@ -549,7 +549,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 备份策略 -->## 备份策略
 
-#<!-- chunk: 容灾备份与混沌工程的结合 -->## 容灾备份与混沌工程的结合
+## 容灾备份与混沌工程的结合
 
 混沌工程并不是独立于备份策略存在的。相反，它通过主动验证来确保备份策略在关键时刻确实可用。
 
@@ -584,7 +584,7 @@ chaos_driven_backup_validation:
 
 <!-- chunk: 恢复流程 -->## 恢复流程
 
-#<!-- chunk: 分级恢复流程 -->## 分级恢复流程
+## 分级恢复流程
 
 ```yaml
 # 企业级灾备恢复流程
@@ -691,7 +691,7 @@ recovery_procedures:
 
 <!-- chunk: 容灾演练方案 -->## 容灾演练方案
 
-#<!-- chunk: 年度混沌工程 Game Day 计划 -->## 年度混沌工程 Game Day 计划
+## 年度混沌工程 Game Day 计划
 
 ```yaml
 # Game Day 演练计划
@@ -781,7 +781,7 @@ game_day_program:
 
 <!-- chunk: 监控告警 -->## 监控告警
 
-#<!-- chunk: 韧性监控体系 -->## 韧性监控体系
+## 韧性监控体系
 
 ```yaml
 # 混沌工程和灾备监控配置
@@ -830,7 +830,7 @@ resilience_monitoring:
       target: "100%"
 ```
 
-#<!-- chunk: [[Prometheus|Prometheus]] 告警规则 -->## Prometheus 告警规则
+## Prometheus 告警规则
 
 ```yaml
 apiVersion: v1
@@ -872,7 +872,7 @@ data:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 混沌工程原则 -->## 混沌工程原则
+## 混沌工程原则
 
 1. **建立稳态假设**：在注入问题前，先定义系统"正常"的行为基线
 2. **最小爆炸半径**：从最小范围的实验开始，逐步扩大影响范围
@@ -880,7 +880,7 @@ data:
 4. **自动化和可重复**：所有实验应可脚本化执行和自动回滚
 5. **持续进行**：混沌工程不是一次性活动，而是持续验证过程
 
-#<!-- chunk: 容灾架构最佳实践 -->## 容灾架构最佳实践
+## 容灾架构最佳实践
 
 1. **设计优先恢复**：在架构层面消除单点问题，而非依赖灾备工具
 2. **数据层韧性**：数据库多副本、跨 AZ 部署、自动故障切换
@@ -892,7 +892,11 @@ data:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 混沌实验故障排查 -->## 混沌实验故障排查
+## 混沌实验故障排查
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 #!/bin/bash
@@ -923,11 +927,11 @@ kubectl get events -A --sort-by='.lastTimestamp' | grep -i chaos | tail -20
 
 # 6. 紧急回滚所有实验
 echo "[6] 紧急回滚（如需执行）"
-echo "  kubectl delete chaosengine -A --all"
+echo "  kubectl delete chaosengine -A --all"  # ⚠️ 批量删除，波及面大
 echo "  kubectl delete networkpolicy -A -l chaos-experiment=true"
 ```
 
-#<!-- chunk: 常见问题手册 -->## 常见问题手册
+## 常见问题手册
 
 | 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
 |:---|:---|:---|:---|
@@ -948,7 +952,7 @@ echo "  kubectl delete networkpolicy -A -l chaos-experiment=true"
 
 <!-- chunk: 混沌工程实验设计方法论 -->## 混沌工程实验设计方法论
 
-#<!-- chunk: 实验设计四步法 -->## 实验设计四步法
+## 实验设计四步法
 
 混沌工程实验的设计应遵循严格的科学方法论。Netflix 提出的混沌工程四步法是目前业界最广泛采用的框架：定义稳态、提出假设、注入问题、验证假设。
 
@@ -1005,7 +1009,7 @@ chaos_experiment_template:
     recommendations: []
 ```
 
-#<!-- chunk: 实验结果分析与改进 -->## 实验结果分析与改进
+## 实验结果分析与改进
 
 ```python
 # 混沌实验结果分析器
@@ -1095,7 +1099,7 @@ class ChaosExperimentAnalyzer:
 
 <!-- chunk: 业务影响分析 -->## 业务影响分析
 
-#<!-- chunk: 业务连续性管理框架 -->## 业务连续性管理框架
+## 业务连续性管理框架
 
 业务影响分析（Business Impact Analysis, BIA）是灾备规划的起点。通过对所有业务流程进行系统性分析，确定每个流程的关键性等级、可容忍的最大中断时间和数据丢失量，以及恢复的优先级顺序。BIA 的结果直接决定了灾备架构的设计和技术方案的选择。
 
@@ -1165,7 +1169,7 @@ business_impact_analysis:
         recovery_priority: 3
 ```
 
-#<!-- chunk: 事件响应分级 -->## 事件响应分级
+## 事件响应分级
 
 ```yaml
 # 事件响应分级标准
@@ -1211,7 +1215,7 @@ incident_response_levels:
 
 <!-- chunk: 灾备通信计划 -->## 灾备通信计划
 
-#<!-- chunk: 多通道通信体系 -->## 多通道通信体系
+## 多通道通信体系
 
 在灾难发生时，有效的通信是快速恢复的关键。企业应建立多通道、多层次的灾备通信体系，确保信息能够及时传达到所有相关方。
 
@@ -1267,7 +1271,7 @@ disaster_communication_plan:
 
 <!-- chunk: 灾备体系成熟度评估 -->## 灾备体系成熟度评估
 
-#<!-- chunk: 能力成熟度模型 -->## 能力成熟度模型
+## 能力成熟度模型
 
 企业灾备体系的成熟度可以按照五个等级评估。每个等级对应不同的技术能力、管理水平和组织成熟度。
 
@@ -1332,7 +1336,7 @@ dr_maturity_model:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-30-disaster-recovery-business-continuity KUDIG Database — Global MOC
-- [[domain-09-reliability-engineering/README|Domain 30: 企业级灾备与业务连续性 (Enterprise [[Kubernetes 灾难恢复最佳实践|Disaster Recovery]] & Busin...]]
+- [[domain-09-reliability-engineering/README.md|Domain 09: 企业级灾备与业务连续性 (Enterprise [[Kubernetes 灾难恢复最佳实践|Disaster Recovery]] & Busin...]]
 - index.md|Domain-30 灾备与业务连续性 — 开源项目索引]]
 - VMware vSphere 企业级灾备与业务连续性
 - Veeam Backup & Replication 企业级备份恢复解决方案

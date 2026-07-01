@@ -57,7 +57,7 @@ Kubernetes 集群运维中，硬件问题是导致节点异常、Pod 驱逐、�
 
 <!-- chunk: K8s 硬件问题影响矩阵 -->## K8s 硬件问题影响矩阵
 
-#<!-- chunk: 硬件问题与 K8s 症状映射 -->## 硬件问题与 K8s 症状映射
+## 硬件问题与 K8s 症状映射
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -104,7 +104,7 @@ Kubernetes 集群运维中，硬件问题是导致节点异常、Pod 驱逐、�
 
 <!-- chunk: Node NotReady 硬件根因分析 -->## Node NotReady 硬件根因分析
 
-#<!-- chunk: Node NotReady 诊断流程 -->## Node NotReady 诊断流程
+## Node NotReady 诊断流程
 
 ```yaml
 Node_NotReady_硬件诊断:
@@ -141,7 +141,7 @@ Node_NotReady_硬件诊断:
       - 从其他节点 ping 测试
 ```
 
-#<!-- chunk: PLEG 问题与硬件关联 -->## PLEG 问题与硬件关联
+## PLEG 问题与硬件关联
 
 ```bash
 #!/bin/bash
@@ -251,7 +251,7 @@ main
 
 <!-- chunk: Pod 异常与硬件问题关联 -->## Pod 异常与硬件问题关联
 
-#<!-- chunk: Pod OOMKilled 硬件误判分析 -->## Pod OOMKilled 硬件误判分析
+## Pod OOMKilled 硬件误判分析
 
 ```yaml
 OOMKilled_硬件误判场景:
@@ -303,7 +303,7 @@ OOMKilled_硬件误判场景:
       cat /proc/pagetypeinfo
 ```
 
-#<!-- chunk: Pod CrashLoopBackOff 硬件排查 -->## Pod CrashLoopBackOff 硬件排查
+## Pod CrashLoopBackOff 硬件排查
 
 ```bash
 #!/bin/bash
@@ -353,7 +353,7 @@ EOF
 
 <!-- chunk: etcd 硬件问题影响 -->## etcd 硬件问题影响
 
-#<!-- chunk: etcd 磁盘性能要求 -->## etcd 磁盘性能要求
+## etcd 磁盘性能要求
 
 ```yaml
 etcd_硬件要求:
@@ -391,7 +391,7 @@ etcd_磁盘问题症状:
     - 配置变更不生效
 ```
 
-#<!-- chunk: etcd 硬件故障诊断 -->## etcd 硬件故障诊断
+## etcd 硬件故障诊断
 
 ```bash
 #!/bin/bash
@@ -485,7 +485,11 @@ echo "4. 定期检查 SMART 状态和磁盘健康度"
 
 <!-- chunk: 硬件问题下的 K8s 应急响应 -->## 硬件问题下的 K8s 应急响应
 
-#<!-- chunk: Node 硬件问题应急流程 -->## Node 硬件问题应急流程
+## Node 硬件问题应急流程
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────┐
@@ -573,7 +577,7 @@ echo "4. 定期检查 SMART 状态和磁盘健康度"
 └─────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 批量节点硬件检查脚本 -->## 批量节点硬件检查脚本
+## 批量节点硬件检查脚本
 
 ```bash
 #!/bin/bash
@@ -641,7 +645,7 @@ generate_report
 
 <!-- chunk: K8s 监控集成 -->## K8s 监控集成
 
-#<!-- chunk: [[Prometheus|Prometheus]] 硬件监控指标 -->## Prometheus 硬件监控指标
+## Prometheus 硬件监控指标
 
 ```yaml
 # Prometheus 硬件监控规则
@@ -745,7 +749,7 @@ groups:
           description: "节点 {{ $labels.instance }} 磁盘写入延迟过高，可能影响 etcd"
 ```
 
-#<!-- chunk: Node Problem Detector 配置 -->## Node Problem Detector 配置
+## Node Problem Detector 配置
 
 ```yaml
 # Node Problem Detector 硬件问题检测配置
@@ -826,11 +830,12 @@ data:
         }
       ]
     }
+
 ```
 
 <!-- chunk: 参考资源 -->## 参考资源
 
-#<!-- chunk: 命令速查表 -->## 命令速查表
+## 命令速查表
 
 | 场景 | 命令 |
 |------|------|
@@ -847,7 +852,7 @@ data:
 | NVMe 健康检查 | `nvme smart-log /dev/nvme0` |
 | IPMI 事件日志 | `ipmitool sel elist` |
 
-#<!-- chunk: 相关文档 -->## 相关文档
+## 相关文档
 
 - [10-hardware-troubleshooting-methodology.md](./10-hardware-troubleshooting-methodology.md) - 硬件故障排查方法论
 - [11-cpu-memory-troubleshooting.md](./11-cpu-memory-troubleshooting.md) - CPU与内存故障排查
@@ -859,7 +864,7 @@ data:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-31-hardware MOC
-- [[domain-17-system-foundation/README|Domain 31 - 硬件基础设施]]
+- [[domain-17-system-foundation/README.md|Domain 31 - 硬件基础设施]]
 - Domain-31 硬件 — 开源项目索引
 - 云平台硬件基础架构
 - 服务器架构原理
@@ -870,9 +875,9 @@ data:
 - SSD固态硬盘技术
 - 网络硬件技术
 - 硬件厂商生态
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
@@ -880,3 +885,5 @@ data:
 - 15-bios-firmware-troubleshooting
 - 17-hardware-error-codes-reference
 - 18-hardware-failure-case-studies
+
+```

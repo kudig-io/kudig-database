@@ -52,7 +52,7 @@ KServe（前身 KFServing）是 Kubernetes 上的标准化模型推理平台。�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -68,11 +68,11 @@ KServe（前身 KFServing）是 Kubernetes 上的标准化模型推理平台。�
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[istio]]
-- [[concepts/autoscaling-strategies|autoscaling-strategies]]
-- [[concepts/storage-model|storage-model]]
-- [[concepts/secrets-management|secrets-management]]
+- [[concepts/autoscaling-strategies.md|autoscaling-strategies]]
+- [[concepts/storage-model.md|storage-model]]
+- [[concepts/secrets-management.md|secrets-management]]
 
 ## Related
 
@@ -83,10 +83,10 @@ KServe（前身 KFServing）是 Kubernetes 上的标准化模型推理平台。�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - kserve
-- [[references/specialized-workloads-terms|K8s 专用工作负载术语参考]] — Cross-reference
-- [[references/root-terms|K8s Root术语参考]] — Cross-reference
-- [[skills/ts-ai-ml-workloads|AI/ML 工作负载排查]] — Cross-reference
-- [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/specialized-workloads-terms.md|K8s 专用工作负载术语参考]] — Cross-reference
+- [[entities/root-terms.md|K8s Root术语参考]] — Cross-reference
+- [[skills/ts-ai-ml-workloads.md|AI/ML 工作负载排查]] — Cross-reference
+- [[entities/cncf-edge-ai.md|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

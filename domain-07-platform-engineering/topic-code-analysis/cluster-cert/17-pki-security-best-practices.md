@@ -109,6 +109,9 @@ Kubernetes 集群的 PKI 安全不仅关乎证书是否正确配置，更涉及�
 
 ### 1.1 文件系统权限
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
+
 ```bash
 # 当前权限检查
 ls -la /etc/kubernetes/pki/
@@ -475,9 +478,11 @@ echo "Inventory saved to $OUTPUT"
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git|git]]
-- [[entities/sops|sops]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
+- [[entities/sops.md|sops]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+
+```

@@ -231,5 +231,5 @@ cross_refs:
 - [[istio]] — Istio
 - [[linkerd]] — Linkerd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[skills/k8s-network-security-guide|k8s-network-security-guide]] — Kubernetes 网络安全最佳实践
-- [[entities/vault|vault]] — HashiCorp Vault
+- [[skills/k8s-network-security-guide.md|k8s-network-security-guide]] — Kubernetes 网络安全最佳实践
+- [[entities/vault.md|vault]] — HashiCorp Vault

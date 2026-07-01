@@ -41,7 +41,7 @@ created: "2026-05-23"
 ---
 id: LEARN-ONE-MONTH-W2-DAY14
 title: Day 14 - 存储体系 + 综合实践
-topic: [[entities/kubernetes|kubernetes]]
+topic: [[entities/kubernetes.md|kubernetes]]
 type: hands-on-guide
 tags: [pv, pvc, storageclass, dynamic-provisioning, statefulset, csi, hands-on, week-2]
 last_updated: 2026-05-18
@@ -114,6 +114,11 @@ related:
 ## 实践任务 (2.5h)
 
 ### 任务 1: PV/PVC 静态供应 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 创建 PV (hostPath 类型，仅用于测试)
@@ -189,6 +194,10 @@ kubectl delete pv pv-static
 
 ### 任务 2: StorageClass 动态供应 (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 查看现有 StorageClass
 kubectl get storageclass
@@ -236,6 +245,9 @@ kubectl delete pvc pvc-dynamic
 **项目: 生产级应用全栈编排**
 
 详细指南见: [../projects/p2-production-app-orchestration.md](../projects/p2-production-app-orchestration.md)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 namespace
@@ -518,8 +530,11 @@ Day 14:   存储体系 (PV, PVC, StorageClass) + 综合实践
 
 ## 清理资源
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```bash
-kubectl delete namespace production-app
+kubectl delete namespace production-app  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
 恭喜完成 Week 2 的学习!

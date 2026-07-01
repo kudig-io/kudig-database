@@ -97,7 +97,7 @@ Tekton 的技术优势包括：完全 Kubernetes 原生（所有资源都是 CRD
 
 <!-- chunk: 二、架构设计 -->## 二、架构设计
 
-#<!-- chunk: 2.1 Tekton 组件全景图 -->## 2.1 Tekton 组件全景图
+## 2.1 Tekton 组件全景图
 
 ```mermaid
 graph TB
@@ -161,7 +161,7 @@ graph TB
     TASK --> NOTIFY
 ```
 
-#<!-- chunk: 2.2 核心概念详解 -->## 2.2 核心概念详解
+## 2.2 核心概念详解
 
 ```yaml
 Tekton资源层次:
@@ -211,7 +211,10 @@ Tekton资源层次:
 
 <!-- chunk: 三、核心配置 -->## 三、核心配置
 
-#<!-- chunk: 3.1 生产级安装 -->## 3.1 生产级安装
+## 3.1 生产级安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 Tekton Pipelines
@@ -235,7 +238,7 @@ kubectl get pods -n tekton-pipelines
 kubectl get pods -n tekton-chains
 ```
 
-#<!-- chunk: 3.2 生产级默认配置 -->## 3.2 生产级默认配置
+## 3.2 生产级默认配置
 
 ```yaml
 apiVersion: v1
@@ -272,7 +275,7 @@ data:
   require-git-ssh-secret-known-hosts: "true"
 ```
 
-#<!-- chunk: 3.3 Pipeline 详解 (DAG 编排) -->## 3.3 Pipeline 详解 (DAG 编排)
+## 3.3 Pipeline 详解 (DAG 编排)
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -427,7 +430,7 @@ spec:
           workspace: shared-source
 ```
 
-#<!-- chunk: 3.4 EventListener 与 Triggers 完整配置 -->## 3.4 EventListener 与 Triggers 完整配置
+## 3.4 EventListener 与 Triggers 完整配置
 
 ```yaml
 # TriggerTemplate: 定义 PipelineRun 模板
@@ -566,7 +569,7 @@ spec:
 
 <!-- chunk: 四、安全与合规 -->## 四、安全与合规
 
-#<!-- chunk: 4.1 Tekton Chains 供应链安全 -->## 4.1 Tekton Chains 供应链安全
+## 4.1 Tekton Chains 供应链安全
 
 ```yaml
 # Chains 配置 - SLSA Level 3
@@ -594,6 +597,9 @@ data:
   builder.id: "tekton-chains"
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 配置签名密钥
 kubectl create secret generic signing-secrets \
@@ -606,7 +612,7 @@ kubectl create secret generic signing-secrets \
 cosign verify registry.example.com/app:v1.2.3
 ```
 
-#<!-- chunk: 4.2 Pod 安全上下文 -->## 4.2 Pod 安全上下文
+## 4.2 Pod 安全上下文
 
 ```yaml
 # 全局安全配置
@@ -631,7 +637,7 @@ data:
             drop: ["ALL"]
 ```
 
-#<!-- chunk: 4.3 RBAC 配置 -->## 4.3 RBAC 配置
+## 4.3 RBAC 配置
 
 ```yaml
 apiVersion: v1
@@ -672,7 +678,7 @@ roleRef:
 
 <!-- chunk: 五、多环境管理策略 -->## 五、多环境管理策略
 
-#<!-- chunk: 5.1 Workspace 类型与策略 -->## 5.1 Workspace 类型与策略
+## 5.1 Workspace 类型与策略
 
 | Workspace 类型 | 用途 | 生命周期 | 适用场景 |
 |:---|:---|:---|:---|
@@ -682,7 +688,7 @@ roleRef:
 | ConfigMap | 配置文件 | 永久 | Maven settings.xml |
 | Secret | 敏感数据 | 永久 | Registry 凭证 |
 
-#<!-- chunk: 5.2 多环境 Pipeline -->## 5.2 多环境 Pipeline
+## 5.2 多环境 Pipeline
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -733,7 +739,7 @@ spec:
 
 <!-- chunk: 六、监控与回滚 -->## 六、监控与回滚
 
-#<!-- chunk: 6.1 Tekton Results API -->## 6.1 Tekton Results API
+## 6.1 Tekton Results API
 
 ```bash
 # Results API 持久化 PipelineRun 结果
@@ -747,7 +753,7 @@ tkn results records <result-name>
 grpcurl -plaintext tekton-results-api:8080 api.v1alpha1.Results/ListResults
 ```
 
-#<!-- chunk: 6.2 Prometheus 监控 -->## 6.2 Prometheus 监控
+## 6.2 Prometheus 监控
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -783,7 +789,7 @@ spec:
     summary: "TaskRun 失败率超过 30%"
 ```
 
-#<!-- chunk: 6.3 CLI 调试 -->## 6.3 CLI 调试
+## 6.3 CLI 调试
 
 ```bash
 # PipelineRun 状态
@@ -806,7 +812,7 @@ tkn pipelinerun cancel <name>
 
 <!-- chunk: 七、最佳实践 -->## 七、最佳实践
 
-#<!-- chunk: 7.1 Task 设计原则 -->## 7.1 Task 设计原则
+## 7.1 Task 设计原则
 
 ```yaml
 1. 单一职责:
@@ -830,7 +836,7 @@ tkn pipelinerun cancel <name>
    - 使用 Workspace 共享构建产物
 ```
 
-#<!-- chunk: 7.2 Tekton Hub 复用 -->## 7.2 Tekton Hub 复用
+## 7.2 Tekton Hub 复用
 
 ```bash
 # 搜索可用 Task
@@ -896,7 +902,7 @@ kubectl logs -n cicd deploy/el-github-listener
 
 <!-- chunk: 九、Tekton 高级模式与实践 -->## 九、Tekton 高级模式与实践
 
-#<!-- chunk: 9.1 自定义任务 (CustomTask) -->## 9.1 自定义任务 (CustomTask)
+## 9.1 自定义任务 (CustomTask)
 
 CustomTask 是 Tekton 的扩展机制，允许实现非标准执行模式的任务类型。例如，可以创建一个等待人工审批的 CustomTask，在 Pipeline 执行到某个阶段时暂停，等待外部信号后继续执行。另一个常见用例是 Matrix 任务——在多个配置组合下并行执行同一个 Task。
 
@@ -929,9 +935,12 @@ spec:
         name: kubectl-deploy
 ```
 
-#<!-- chunk: 9.2 Tekton Results 结果持久化 -->## 9.2 Tekton Results 结果持久化
+## 9.2 Tekton Results 结果持久化
 
 Tekton Results 是一个可选组件，提供 PipelineRun 和 TaskRun 执行结果的持久化存储与查询能力。默认情况下，Tekton 将执行结果存储在 etcd 中（通过 TaskRun/PipelineRun CRD），但 etcd 有存储限制且不适合长期保存历史记录。Results API 通过 gRPC 接口将结果持久化到外部数据库（如 SQLite、PostgreSQL），即使 CRD 被清理，历史结果仍然可查。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 Results API
@@ -946,7 +955,7 @@ grpcurl -plaintext tekton-results-api:8080 \
   api.v1alpha1.Results/ListResults
 ```
 
-#<!-- chunk: 9.3 Tekton Catalog 社区生态 -->## 9.3 Tekton Catalog 社区生态
+## 9.3 Tekton Catalog 社区生态
 
 Tekton Hub 是社区共享 Task 的平台，提供了 100+ 预制 Task 覆盖常见的 CI/CD 场景。使用社区 Task 可以显著减少自定义 Task 的工作量，同时获得社区维护的质量保证。
 
@@ -978,7 +987,7 @@ tkn hub install task trivy-scanner --version 0.2
 
 <!-- chunk: 十、Tekton 生产环境运维 -->## 十、Tekton 生产环境运维
 
-#<!-- chunk: 10.1 资源配额与限制 -->## 10.1 资源配额与限制
+## 10.1 资源配额与限制
 
 在多团队共享的 Kubernetes 集群中，Tekton 的资源配额管理至关重要。通过 LimitRange 和 ResourceQua 配置，可以防止单个 PipelineRun 消耗过多资源，确保所有团队公平地共享构建资源。
 
@@ -1020,7 +1029,7 @@ spec:
       type: Container
 ```
 
-#<!-- chunk: 10.2 清理策略 -->## 10.2 清理策略
+## 10.2 清理策略
 
 Tekton 的 TaskRun 和 PipelineRun 会创建大量的 CRD 对象和 Pod，如果不定期清理，会导致 etcd 存储压力和 API Server 性能下降。推荐使用 `kubectl` 的 `--field-selector` 或 Tekton 的 gc 配置自动清理已完成的资源。
 
@@ -1038,6 +1047,9 @@ data:
   enable-api-fields: "beta"
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 清理已完成的 TaskRun (保留最近7天)
 kubectl delete taskruns -n cicd \
@@ -1054,7 +1066,7 @@ kubectl delete pipelineruns -n cicd \
 
 <!-- chunk: 十一、Tekton 生态系统与扩展 -->## 十一、Tekton 生态系统与扩展
 
-#<!-- chunk: 11.1 Tekton Catalog 与 Hub -->## 11.1 Tekton Catalog 与 Hub
+## 11.1 Tekton Catalog 与 Hub
 
 Tekton Catalog 是官方维护的可复用 Task 集合，涵盖了从代码检出、构建、测试到部署的完整生命周期。Tekton Hub 提供了可视化的浏览和搜索界面。在企业中使用 Catalog Task 的最佳实践是：直接引用官方 Catalog 作为基础，然后通过 Pipeline 组合和参数化来满足业务需求，避免重复造轮子。
 
@@ -1084,7 +1096,7 @@ spec:
             value: "0.7"
 ```
 
-#<!-- chunk: 11.2 自定义 Resolver -->## 11.2 自定义 Resolver
+## 11.2 自定义 Resolver
 
 除了内置的集群（Cluster Resolver）和 Hub Resolver 外，Tekton 支持自定义 Resolver 来从任意来源获取 Task 和 Pipeline 定义。例如，可以编写一个 Git Resolver 从私有 Git 仓库获取 Task 定义，或者编写一个 Bundle Resolver 从 OCI Registry 获取打包好的 Task 集合。
 
@@ -1123,7 +1135,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-08-release-change-management MOC
-- [[domain-08-release-change-management/README|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
+- [[domain-08-release-change-management/README.md|Domain 08: GitOps与CI/CD (GitOps & CI/CD)]]
 - Domain-23 GitOps & CI/CD — 开源项目索引
 - Argo CD企业级GitOps实践指南
 - Jenkins企业级CI/CD流水线深度实践

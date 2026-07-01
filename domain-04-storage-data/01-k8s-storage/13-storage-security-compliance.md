@@ -328,10 +328,6 @@ rules:
 # 限制容器直接访问主机存储
 apiVersion: policy/v1beta1
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 kind: PodSecurityPolicy
 metadata:
   name: restricted-storage-access
@@ -899,6 +895,10 @@ spec:
 
 ### 密钥轮换策略
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 #!/bin/bash
 # key-rotation-manager.sh
@@ -1027,6 +1027,11 @@ fi
 
 ### 数据泄露应急流程
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # data-breach-response.sh
@@ -1044,7 +1049,7 @@ immediate_response() {
   
   # 2. 阻止进一步数据访问
   echo "$(date): 阻止数据访问" | tee -a $RESPONSE_LOG
-  kubectl delete networkpolicy -n affected-namespace --all
+  kubectl delete networkpolicy -n affected-namespace --all  # ⚠️ 批量删除，波及面大
   
   # 3. 创建取证快照
   echo "$(date): 创建取证快照" | tee -a $RESPONSE_LOG
@@ -1145,7 +1150,7 @@ main
 ## Obsidian 相关文档
 
 - domain-04-storage-data KUDIG Database — Global MOC
-- [[domain-04-storage-data/README|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
+- [[domain-04-storage-data/README.md|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
 - index.md|Domain-6 存储 — 开源项目索引]]
 - 存储架构概览与核心组件
 - PV/PVC 核心概念与企业级实践
@@ -1166,4 +1171,4 @@ main
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]

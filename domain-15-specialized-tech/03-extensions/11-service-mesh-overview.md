@@ -59,7 +59,7 @@ created: "2026-05-23"
 
 # 20 - 服务网格集成表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/istio|istio]].io/latest/docs](https://istio.io/latest/docs/) | [[entities/linkerd|linkerd]].io/docs](https://linkerd.io/docs/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/istio.md|istio]].io/latest/docs](https://istio.io/latest/docs/) | [[entities/linkerd.md|linkerd]].io/docs](https://linkerd.io/docs/)
 
 <!-- chunk: 服务网格对比 -->
 ## 服务网格对比
@@ -88,6 +88,9 @@ created: "2026-05-23"
 
 <!-- chunk: Istio安装 -->
 ## Istio安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 使用istioctl安装
@@ -143,14 +146,14 @@ spec:
   hosts:
   - reviews
   http:
-  - match:
-    - headers:
-        end-user:
-          exact: jason
-    route:
-    - destination:
-        host: reviews
-        subset: v2
+  - matchers:
+    - - headers=""
+    - end-user=""
+    - exact="jason"
+    - route=""
+    - - destination=""
+    - host="reviews"
+    - subset="v2"
   - route:
     - destination:
         host: reviews
@@ -251,6 +254,10 @@ spec:
 
 <!-- chunk: Linkerd安装 -->
 ## Linkerd安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 安装CLI
@@ -526,7 +533,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech MOC
-- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
 - Domain-10 扩展与自定义 — 开源项目索引
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现
@@ -547,4 +554,6 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+
+```

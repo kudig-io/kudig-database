@@ -121,13 +121,13 @@ k8s_versions:
 
 <!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-#<!-- chunk: 1.1 行业背景 -->## 1.1 行业背景
+## 1.1 行业背景
 
 云游戏（Cloud Gaming）将游戏的渲染和计算过程从终端设备转移到云端服务器，玩家通过视频串流技术远程操控游戏。这一模式打破了终端硬件性能的限制，使得手机、平板、智能电视等轻量级设备也能运行 3A 级大作。全球云游戏市场规模在 2025 年已超过 60 亿美元，微软 xCloud、NVIDIA GeForce Now、Sony PlayStation Now 等平台已积累了数千万活跃用户。
 
 中国云游戏市场呈现出独特的特征：移动端为主（占比 > 70%）、社交属性强（弹幕/观战/联机）、内容版权严格。腾讯 START 云游戏、网易云游戏、咪咕快游等平台正在快速扩张。5G 网络的普及为云游戏提供了低延迟、高带宽的传输基础，而 GPU 虚拟化技术（vGPU、MIG）的成熟使得单台服务器的并发路数持续提升。
 
-#<!-- chunk: 1.2 行业挑战 -->## 1.2 行业挑战
+## 1.2 行业挑战
 
 | 挑战 | 说明 | 架构影响 |
 |:---|:---|:---|
@@ -140,7 +140,7 @@ k8s_versions:
 | 版权保护 | 游戏内容防盗版防录屏 | DRM + 水印 + 安全执行环境 |
 | 反作弊 | 云端渲染需防外挂 | 服务端渲染天然优势 + 行为检测 |
 
-#<!-- chunk: 1.3 市场格局 -->## 1.3 市场格局
+## 1.3 市场格局
 
 全球云游戏市场由科技巨头主导：微软凭借 Xbox 生态和 Azure 云基础设施布局 xCloud；NVIDIA 以 GeForce Now 面向硬核玩家；Google Stadia 虽已关闭但留下了技术遗产。中国市场上，腾讯 START、网易云游戏依托自有游戏内容生态，咪咕快游依托运营商网络优势，各平台在内容、技术、渠道上展开差异化竞争。
 
@@ -148,23 +148,23 @@ k8s_versions:
 
 <!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-#<!-- chunk: 2.1 游戏串流 -->## 2.1 游戏串流
+## 2.1 游戏串流
 
 云端渲染 + 视频推流是云游戏的核心技术。游戏在云端 GPU 服务器上运行，渲染画面经过硬件编码器（NVENC）压缩为 H.264/H.265/AV1 视频流，通过 WebRTC/RTSP 协议传输到玩家终端。玩家的输入指令（手柄/键鼠/触屏）通过可靠传输通道回传到云端，游戏进程处理后更新画面。端到端延迟由采集→编码→传输→解码→显示五个环节组成。
 
-#<!-- chunk: 2.2 游戏商店与分发 -->## 2.2 游戏商店与分发
+## 2.2 游戏商店与分发
 
 游戏版本管理和分发平台。核心功能包括：游戏库管理（元数据/截图/视频/评分）、版本管理（多版本并存/灰度更新）、资源预加载（游戏资产预分发到边缘节点）、数字版权管理（DRM 许可证分发）、游戏推荐（基于玩家画像的个性化推荐）。游戏资产（贴图/模型/音频）可达数十 GB，需要高效的 CDN 分发和边缘缓存策略。
 
-#<!-- chunk: 2.3 社交互动 -->## 2.3 社交互动
+## 2.3 社交互动
 
 语音/文字/观战是云游戏的社交增强功能。场景包括：实时语音聊天（游戏内 VoIP）、弹幕互动（观众发弹幕与主播互动）、观战模式（观看好友游戏画面，延迟 < 3 秒）、联机匹配（跨平台多人匹配）。社交功能需要独立的信令服务器和媒体中继服务。
 
-#<!-- chunk: 2.4 存档云同步 -->## 2.4 存档云同步
+## 2.4 存档云同步
 
 跨平台无缝续玩需要云存档服务。核心挑战：不同平台（PC/手机/主机）的游戏存档格式可能不同，需要标准化存档格式或平台适配层；存档同步需要保证一致性，避免冲突覆盖；存档数据涉及玩家隐私，需要加密存储。
 
-#<!-- chunk: 2.5 多输入设备适配 -->## 2.5 多输入设备适配
+## 2.5 多输入设备适配
 
 手柄/键鼠/触屏的统一输入映射。不同输入设备的操作精度和方式差异大（手柄摇杆 vs 鼠标指针），需要智能映射算法。移动端触屏虚拟按键的布局和灵敏度需要可配置。
 
@@ -172,7 +172,7 @@ k8s_versions:
 
 <!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-#<!-- chunk: 3.1 云游戏全景架构 -->## 3.1 云游戏全景架构
+## 3.1 云游戏全景架构
 
 ```mermaid
 graph TB
@@ -220,7 +220,7 @@ graph TB
     P1 & P2 & P3 & P4 & P5 --> DL1 & DL2 & DL3 & DL4
 ```
 
-#<!-- chunk: 3.2 游戏串流时序 -->## 3.2 游戏串流时序
+## 3.2 游戏串流时序
 
 ```mermaid
 sequenceDiagram
@@ -274,7 +274,7 @@ sequenceDiagram
 
 <!-- chunk: 5. K8s 部署方案 -->## 5. K8s 部署方案
 
-#<!-- chunk: 5.1 游戏渲染 Pod -->## 5.1 游戏渲染 Pod
+## 5.1 游戏渲染 Pod
 
 ```yaml
 apiVersion: v1
@@ -349,7 +349,7 @@ spec:
         sizeLimit: 2Gi
 ```
 
-#<!-- chunk: 5.2 自动伸缩 -->## 5.2 自动伸缩
+## 5.2 自动伸缩
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -393,7 +393,7 @@ spec:
           periodSeconds: 120
 ```
 
-#<!-- chunk: 5.3 存档同步服务 -->## 5.3 存档同步服务
+## 5.3 存档同步服务
 
 ```yaml
 apiVersion: apps/v1
@@ -450,7 +450,7 @@ spec:
 
 <!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-#<!-- chunk: 6.1 数据分层 -->## 6.1 数据分层
+## 6.1 数据分层
 
 | 数据类型 | 存储方案 | 访问模式 | 数据量级 |
 |:---|:---|:---|:---|
@@ -503,19 +503,19 @@ spec:
 
 <!-- chunk: 10. 反模式 -->## 10. 反模式
 
-#<!-- chunk: 10.1 所有游戏同一规格 -->## 10.1 所有游戏同一规格
+## 10.1 所有游戏同一规格
 
 所有游戏都分配完整的 GPU 实例，休闲游戏浪费 GPU 资源。
 
 **解决方案**: 根据游戏的 GPU 需求分级（重度/中度/轻度），重度游戏分配完整 GPU，中度游戏使用 MIG 切分，轻度游戏使用 CPU 渲染。
 
-#<!-- chunk: 10.2 忽视冷启动延迟 -->## 10.2 忽视冷启动延迟
+## 10.2 忽视冷启动延迟
 
 玩家点击游戏后需要等待数分钟加载，体验极差。
 
 **解决方案**: 热门游戏预启动容器池（warm pool），新游戏使用快照技术加速启动，启动期间展示加载动画和游戏介绍。
 
-#<!-- chunk: 10.3 单一数据中心部署 -->## 10.3 单一数据中心部署
+## 10.3 单一数据中心部署
 
 所有 GPU 渲染集中在单一区域，远离玩家的用户延迟过高。
 
@@ -525,7 +525,7 @@ spec:
 
 <!-- chunk: 11. 参考资源 -->## 11. 参考资源
 
-#<!-- chunk: 11.1 阿里云组件映射 -->## 11.1 阿里云组件映射
+## 11.1 阿里云组件映射
 
 | 功能域 | 阿里云云原生方案 | 说明 |
 |:---|:---|:---|
@@ -538,7 +538,7 @@ spec:
 | 缓存 | **Redis 企业版** | 会话状态/排行榜 |
 | 可观测性 | **ARMS + SLS** | 全链路监控 |
 
-#<!-- chunk: 11.2 生产检查清单 -->## 11.2 生产检查清单
+## 11.2 生产检查清单
 
 - [ ] GPU 实例负载均衡验证
 - [ ] 边缘节点网络延迟 < 20ms 端到端测试
@@ -558,17 +558,17 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

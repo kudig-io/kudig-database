@@ -49,11 +49,11 @@ tags:
 - taxonomy
 - metadata
 relationships:
-- target: '[[docs/FRONTMATTER-SPEC|KUDIG Frontmatter 规范]]'
+- target: "[[docs/FRONTMATTER-SPEC.md|KUDIG Frontmatter 规范]]"
   type: related_to
-- target: '[[docs/SCENARIO-TAXONOMY|KUDIG 场景分类体系]]'
+- target: "[[docs/SCENARIO-TAXONOMY.md|KUDIG 场景分类体系]]"
   type: related_to
-- target: '[[docs/SYNONYM-DICTIONARY|KUDIG 同义词与别名词典]]'
+- target: "[[docs/SYNONYM-DICTIONARY.md|KUDIG 同义词与别名词典]]"
   type: related_to
 difficulty: intermediate
 reading_level: intermediate
@@ -250,13 +250,13 @@ tags: [k8s, etcd, control-plane, best-practice, production]
 
 ## Obsidian 相关文档
 
-- [[docs/index|KUDIG-DATABASE 首页]]
+- [[docs/index.md|KUDIG-DATABASE 首页]]
 
 ---
 
 ## Related
 
-- [[references/KUDIG Frontmatter Spec|KUDIG Frontmatter Spec]]
-- [[references/KUDIG Scenario Taxonomy|KUDIG Scenario Taxonomy]]
-- [[docs/SYNONYM-DICTIONARY|KUDIG 同义词与别名词典]]
-- [[docs/FRONTMATTER-SPEC|KUDIG Frontmatter 规范]]
+- [[entities/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
+- [[entities/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
+- [[docs/SYNONYM-DICTIONARY.md|KUDIG 同义词与别名词典]]
+- [[docs/FRONTMATTER-SPEC.md|KUDIG Frontmatter 规范]]

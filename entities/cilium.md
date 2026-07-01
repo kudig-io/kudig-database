@@ -66,25 +66,25 @@ Hubble provides network flow observability:
 Cilium can replace kube-proxy entirely using eBPF for Service load balancing. Benefits: higher throughput, lower latency, no iptables/IPVS rules to manage.
 
 ## Related
-- [[synthesis/Cilium eBPF × 可观测性|Cilium eBPF × 可观测性]] — 综合
+- [[concepts/Cilium eBPF × 可观测性.md|Cilium eBPF × 可观测性]] — 综合
 
 - [[envoy]] — Envoy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/cilium-ebpf-networking|cilium-ebpf-networking]] — Cilium eBPF Networking
-- [[concepts/service-mesh-architecture|service-mesh-architecture]] — Service Mesh Architecture
-- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
-- [[concepts/cilium-ebpf-networking|Cilium eBPF Networking]]
-- [[concepts/service-mesh-architecture|Service Mesh Architecture]]
-- [[entities/tetragon|Tetragon]]
+- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]] — Cilium eBPF Networking
+- [[concepts/service-mesh-architecture.md|service-mesh-architecture]] — Service Mesh Architecture
+- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[concepts/cilium-ebpf-networking.md|Cilium eBPF Networking]]
+- [[concepts/service-mesh-architecture.md|Service Mesh Architecture]]
+- [[entities/tetragon.md|Tetragon]]
 - Hubble
 
-- [[synthesis/CNI 插件 × NetworkPolicy|CNI 插件 × NetworkPolicy]]
+- [[concepts/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
 - 18-kubernetes-ebpf-cilium-deep-practice
 - 03-cilium-cni-architecture
 - 99-cilium-ebpf-network-guide
 - 05-cilium-service-mesh
 - 04-cilium-network-policy
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta|cilium-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md|cilium-fta]]
 - RELEASE-NOTES-1.9
 - RELEASE-NOTES-0.8
 - RELEASE-NOTES-1.18
@@ -109,20 +109,20 @@ Cilium can replace kube-proxy entirely using eBPF for Service load balancing. Be
 - RELEASE-NOTES-1.11
 - RELEASE-NOTES-0.10
 - RELEASE-NOTES-0.11
-- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[references/k8s-networking-ecosystem|网络体系：CNI、Service、Ingress、Gateway API 与多集群网络]] — Cross-reference
-- [[references/k8s-difficulty-index|Kubernetes Difficulty Index]] — Cross-reference
-- [[references/k8s-networking-domain-guide|Kubernetes Networking Domain Guide]] — Cross-reference
-- [[synthesis/eBPF x 运行时安全|eBPF x 运行时安全]] — Cross-reference
-- [[concepts/service-mesh-evolution|服务网格演进]] — Cross-reference
-- [[concepts/cni-networking-model|CNI 网络模型与插件对比]] — Cross-reference
-- [[concepts/Kubernetes Core Concepts|Kubernetes Core Concepts]] — Cross-reference
-- [[concepts/tcp-udp-protocol-stack|TCP/UDP Protocol Stack]] — Cross-reference
-- [[skills/skill-20-networkpolicy-connectivity|NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting]] — Cross-reference
-- [[skills/networkpolicy-fta|NetworkPolicy 异常故障树分析]] — Cross-reference
-- [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
-- [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[entities/k8s-networking-ecosystem.md|网络体系：CNI、Service、Ingress、Gateway API 与多集群网络]] — Cross-reference
+- [[entities/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
+- [[entities/k8s-networking-domain-guide.md|Kubernetes Networking Domain Guide]] — Cross-reference
+- [[concepts/eBPF x 运行时安全.md|eBPF x 运行时安全]] — Cross-reference
+- [[concepts/service-mesh-evolution.md|服务网格演进]] — Cross-reference
+- [[concepts/cni-networking-model.md|CNI 网络模型与插件对比]] — Cross-reference
+- [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]] — Cross-reference
+- [[concepts/tcp-udp-protocol-stack.md|TCP/UDP Protocol Stack]] — Cross-reference
+- [[skills/skill-20-networkpolicy-connectivity.md|NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting]] — Cross-reference
+- [[skills/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]] — Cross-reference
+- [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
+- [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
+- [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

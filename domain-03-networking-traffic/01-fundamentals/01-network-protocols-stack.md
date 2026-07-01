@@ -71,7 +71,7 @@ created: "2026-05-23"
 
 <!-- chunk: 网络模型对比 -->## 网络模型对比
 
-#<!-- chunk: OSI vs TCP/IP -->## OSI vs TCP/IP
+## OSI vs TCP/IP
 
 ```
 ┌─────────────────┐    ┌─────────────────┐
@@ -114,7 +114,7 @@ created: "2026-05-23"
 
 <!-- chunk: TCP/IP 四层模型 -->## TCP/IP 四层模型
 
-#<!-- chunk: 应用层 -->## 应用层
+## 应用层
 
 | 协议 | 端口 | 功能 |
 |:---|:---:|:---|
@@ -125,14 +125,14 @@ created: "2026-05-23"
 | SMTP | 25 | 邮件发送 |
 | SNMP | 161 | 网络管理 |
 
-#<!-- chunk: 传输层 -->## 传输层
+## 传输层
 
 | 协议 | 特点 | 使用场景 |
 |:---|:---|:---|
 | **TCP** | 可靠、有序、流控 | Web, SSH, 邮件 |
 | **UDP** | 无连接、快速 | DNS, 视频, 游戏 |
 
-#<!-- chunk: 网络层 -->## 网络层
+## 网络层
 
 | 协议 | 功能 |
 |:---|:---|
@@ -141,7 +141,7 @@ created: "2026-05-23"
 | **ARP** | IP→MAC 解析 |
 | **RARP** | MAC→IP 解析 |
 
-#<!-- chunk: 网络接口层 -->## 网络接口层
+## 网络接口层
 
 | 协议/标准 | 功能 |
 |:---|:---|
@@ -171,7 +171,7 @@ created: "2026-05-23"
 └───────────────┘                       └───────────────┘
 ```
 
-#<!-- chunk: MTU 与分片 -->## MTU 与分片
+## MTU 与分片
 
 | 网络类型 | 典型 MTU |
 |:---|:---:|
@@ -195,7 +195,7 @@ ping -M do -s 1472 target
 
 <!-- chunk: 常用协议概览 -->## 常用协议概览
 
-#<!-- chunk: IP 协议 -->## IP 协议
+## IP 协议
 
 | 字段 | 说明 |
 |:---|:---|
@@ -205,7 +205,7 @@ ping -M do -s 1472 target
 | Source IP | 源地址 |
 | Dest IP | 目标地址 |
 
-#<!-- chunk: ICMP 类型 -->## ICMP 类型
+## ICMP 类型
 
 | 类型 | 说明 |
 |:---:|:---|
@@ -215,7 +215,7 @@ ping -M do -s 1472 target
 | 8 | Echo Request (ping 请求) |
 | 11 | Time Exceeded |
 
-#<!-- chunk: ARP 工作流程 -->## ARP 工作流程
+## ARP 工作流程
 
 ```
 1. 主机 A 需要发送数据给 IP_B
@@ -239,7 +239,7 @@ ip neigh flush all
 
 <!-- chunk: Linux 网络栈 -->## Linux 网络栈
 
-#<!-- chunk: 网络栈架构 -->## 网络栈架构
+## 网络栈架构
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -267,7 +267,7 @@ ip neigh flush all
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 查看网络配置 -->## 查看网络配置
+## 查看网络配置
 
 ```bash
 # 接口信息
@@ -291,7 +291,7 @@ nstat
 
 Netfilter 是 Linux 内核的数据包过滤框架，iptables 是其用户空间工具。[[Kubernetes|Kubernetes]] 的 [[Service|Service]]、[[NetworkPolicy|NetworkPolicy]] 均依赖此机制。
 
-#<!-- chunk: 数据包经过 Netfilter 的完整路径 -->## 数据包经过 Netfilter 的完整路径
+## 数据包经过 Netfilter 的完整路径
 
 ```
 数据包进入
@@ -313,7 +313,7 @@ Netfilter 是 Linux 内核的数据包过滤框架，iptables 是其用户空间
                                                      数据包发出
 ```
 
-#<!-- chunk: Kubernetes 关键 iptables 链 -->## Kubernetes 关键 iptables 链
+## Kubernetes 关键 iptables 链
 
 | 链名 | 所属表 | 功能 | 组件 |
 |------|---------|------|------|
@@ -333,7 +333,7 @@ Netfilter 是 Linux 内核的数据包过滤框架，iptables 是其用户空间
 
 conntrack 是 Netfilter 的有状态数据包检查模块，Kubernetes Service 的 DNAT/SNAT 完全依赖它。
 
-#<!-- chunk: conntrack 状态机 -->## conntrack 状态机
+## conntrack 状态机
 
 | 状态 | 含义 | 默认超时 |
 |------|------|----------|
@@ -343,7 +343,7 @@ conntrack 是 Netfilter 的有状态数据包检查模块，Kubernetes Service �
 | INVALID | 无法识别的包 | 立即删除 |
 | TIME_WAIT | TCP 连接关闭后等待 | 120s |
 
-#<!-- chunk: conntrack 与 Kubernetes Service 的关系 -->## conntrack 与 Kubernetes Service 的关系
+## conntrack 与 Kubernetes Service 的关系
 
 ```
 Pod A 发送请求到 Service IP (10.96.0.100:80)
@@ -368,7 +368,7 @@ conntrack 记录:
 Pod A 看到回包来自 10.96.0.100:80 ✅
 ```
 
-#<!-- chunk: conntrack 诊断命令 -->## conntrack 诊断命令
+## conntrack 诊断命令
 
 ```bash
 # 查看使用率
@@ -388,7 +388,7 @@ dmesg | grep "nf_conntrack: table full"
 
 <!-- chunk: 网络命名空间与 veth pair 基础 -->## 网络命名空间与 veth pair 基础
 
-#<!-- chunk: 网络命名空间 (Network Namespace) -->## 网络命名空间 (Network Namespace)
+## 网络命名空间 (Network Namespace)
 
 Linux 网络命名空间是容器网络隔离的基础。每个命名空间拥有独立的网络接口、路由表、iptables 规则、conntrack 表。
 
@@ -410,7 +410,7 @@ nsenter -t $PID -n ip route show
 nsenter -t $PID -n iptables -L -n -v
 ```
 
-#<!-- chunk: veth pair (虚拟以太网对) -->## veth pair (虚拟以太网对)
+## veth pair (虚拟以太网对)
 
 veth pair 是成对存在的虚拟网络接口，一端在 Pod 命名空间，另一端在宿主机。这是 Pod 和宿主机通信的“虚拟网线”。
 
@@ -426,6 +426,9 @@ veth pair 是成对存在的虚拟网络接口，一端在 Pod 命名空间，�
                           └────────────────────┘
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 定位 Pod 对应的 veth
 POD_IFINDEX=$(kubectl exec -it <pod> -- cat /sys/class/net/eth0/iflink | tr -d '\r')
@@ -436,7 +439,7 @@ ip -s link show <veth-name>
 ethtool -S <veth-name>
 ```
 
-#<!-- chunk: Linux bridge (虚拟交换机) -->## Linux bridge (虚拟交换机)
+## Linux bridge (虚拟交换机)
 
 Flannel 使用 cni0 bridge 连接同节点的 Pod。
 
@@ -455,7 +458,7 @@ ip -s link show cni0
 
 <!-- chunk: Overlay 网络基础 -->## Overlay 网络基础
 
-#<!-- chunk: VXLAN (Virtual Extensible LAN) -->## VXLAN (Virtual Extensible LAN)
+## VXLAN (Virtual Extensible LAN)
 
 VXLAN 通过 UDP 封装二层帧，实现跨三层网络的二层连通。
 
@@ -480,7 +483,7 @@ bridge fdb show dev flannel.1
 tcpdump -i eth0 -nn udp port 4789
 ```
 
-#<!-- chunk: IPIP (IP-in-IP) -->## IPIP (IP-in-IP)
+## IPIP (IP-in-IP)
 
 比 VXLAN 轻量，仅 20 字节开销，但不支持多租户。
 
@@ -494,7 +497,7 @@ MTU 影响: 外层头 20 字节
          物理 MTU 1500 → Pod MTU 应设为 1480
 ```
 
-#<!-- chunk: BGP 路由（无封装） -->## BGP 路由（无封装）
+## BGP 路由（无封装）
 
 通过 BGP 协议在节点间分发 Pod 子网路由，无封装开销，但要求节点在同一 L2/L3 网络或上游路由器支持 BGP。
 
@@ -510,9 +513,9 @@ ip route show | grep "proto bird"
 ---
 <!-- chunk: 生产环境网络运维最佳实践 -->## 生产环境网络运维最佳实践
 
-#<!-- chunk: 网络性能监控 -->## 网络性能监控
+## 网络性能监控
 
-##<!-- chunk: 关键性能指标 (KPIs) -->## 关键性能指标 (KPIs)
+## 关键性能指标 (KPIs)
 
 | 指标类别 | 指标名称 | 正常范围 | 监控工具 |
 |:---|:---|:---|:---|
@@ -522,7 +525,7 @@ ip route show | grep "proto bird"
 | **丢包率** | Packet loss | < 0.1% | ping, tcpdump |
 | **错误率** | Errors/drops | 0 | ethtool, dmesg |
 
-##<!-- chunk: 生产环境监控配置 -->## 生产环境监控配置
+## 生产环境监控配置
 
 ```bash
 # 网络接口监控脚本
@@ -553,9 +556,9 @@ while true; do
 done
 ```
 
-#<!-- chunk: 网络故障诊断方法论 -->## 网络故障诊断方法论
+## 网络故障诊断方法论
 
-##<!-- chunk: 三层诊断法 -->## 三层诊断法
+## 三层诊断法
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -578,7 +581,7 @@ done
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: 常用诊断命令组合 -->## 常用诊断命令组合
+## 常用诊断命令组合
 
 ```bash
 # 网络连通性全套诊断
@@ -618,9 +621,9 @@ diagnose_network() {
 # diagnose_network google.com
 ```
 
-#<!-- chunk: 网络调优最佳实践 -->## 网络调优最佳实践
+## 网络调优最佳实践
 
-##<!-- chunk: 内核网络参数优化 -->## 内核网络参数优化
+## 内核网络参数优化
 
 ```bash
 # /etc/sysctl.conf - 生产环境网络优化
@@ -652,7 +655,7 @@ net.ipv4.ip_forward = 0
 sysctl -p
 ```
 
-##<!-- chunk: 网络设备调优 -->## 网络设备调优
+## 网络设备调优
 
 ```bash
 # 网卡中断绑定优化
@@ -674,7 +677,7 @@ ethtool -G eth0 rx 4096 tx 4096
 
 <!-- chunk: 网络性能基准测试 -->## 网络性能基准测试
 
-#<!-- chunk: 网络性能测试工具矩阵 -->## 网络性能测试工具矩阵
+## 网络性能测试工具矩阵
 
 | 测试工具 | 适用场景 | 测试指标 | 优势特点 |
 |:---|:---|:---|:---|
@@ -684,7 +687,7 @@ ethtool -G eth0 rx 4096 tx 4096
 | **mtr** | 路径分析 | 跳数、丢包、延迟 | 实时路径追踪 |
 | **tcptrace** | 流量分析 | 连接状态、重传率 | 深度包分析 |
 
-#<!-- chunk: 生产环境网络基准测试方案 -->## 生产环境网络基准测试方案
+## 生产环境网络基准测试方案
 
 ```bash
 #!/bin/bash
@@ -753,7 +756,7 @@ check_performance_degradation
 
 <!-- chunk: 高级网络故障诊断技巧 -->## 高级网络故障诊断技巧
 
-#<!-- chunk: 网络故障诊断决策树 -->## 网络故障诊断决策树
+## 网络故障诊断决策树
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -773,7 +776,7 @@ check_performance_degradation
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 高级诊断命令组合 -->## 高级诊断命令组合
+## 高级诊断命令组合
 
 ```bash
 # 网络性能深度分析脚本
@@ -840,7 +843,7 @@ advanced_network_diagnostics() {
 
 <!-- chunk: 生产环境调优案例 -->## 生产环境调优案例
 
-#<!-- chunk: 案例1: 高并发Web服务器网络优化 -->## 案例1: 高并发Web服务器网络优化
+## 案例1: 高并发Web服务器网络优化
 
 ```bash
 # 场景: 高并发Web服务器出现连接堆积
@@ -890,7 +893,7 @@ EOF
 # optimize_high_concurrency_web
 ```
 
-#<!-- chunk: 案例2: 数据库主从复制网络优化 -->## 案例2: 数据库主从复制网络优化
+## 案例2: 数据库主从复制网络优化
 
 ```bash
 # 场景: MySQL主从复制延迟严重
@@ -931,7 +934,10 @@ EOF
 # optimize_database_replication
 ```
 
-#<!-- chunk: 案例3: 容器网络性能优化 -->## 案例3: 容器网络性能优化
+## 案例3: 容器网络性能优化
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 场景: Kubernetes集群中Pod网络性能不佳

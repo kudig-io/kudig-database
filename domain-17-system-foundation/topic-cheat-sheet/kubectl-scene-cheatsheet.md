@@ -46,6 +46,9 @@ created: "2026-05-23"
 
 ### 节点 NotReady / Unknown
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 诊断命令（3 步）
 kubectl get nodes -o wide                           # Step 1: 查看节点状态
@@ -61,6 +64,9 @@ ssh <node-ip> "sudo systemctl restart kubelet"     # 重启 kubelet（需审批�
 
 ### 节点磁盘/内存压力
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 诊断命令
 ssh <node-ip> "df -h / /var/lib/kubelet"           # 检查磁盘
@@ -72,6 +78,10 @@ kubectl cordon <node-name> && kubectl drain <node-name> --ignore-daemonsets --de
 ```
 
 ### 批量节点维护
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 维护前
@@ -90,6 +100,11 @@ kubectl uncordon <node-name>                        # 解封节点
 
 ### Pod Pending（调度失败）
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 诊断命令
 kubectl get pods -o wide                            # 查看 Pod 状态
@@ -102,13 +117,17 @@ kubectl scale deployment <name> --replicas=0       # 临时减少副本（低风
 
 # 原因 2: 污点不容忍
 kubectl get nodes -o jsonpath='{.items[*].spec.taints}'  # 查看节点污点
-kubectl patch pod <pod-name> -p '{"spec":{"tolerations":[{"key":"node.[[entities/kubernetes|kubernetes]].io/not-ready","operator":"Exists","effect":"NoExecute","tolerationSeconds":300}]}}'  # 临时添加容忍
+kubectl patch pod <pod-name> -p '{"spec":{"tolerations":[{"key":"node.[[entities/kubernetes.md|kubernetes]].io/not-ready","operator":"Exists","effect":"NoExecute","tolerationSeconds":300}]}}'  # 临时添加容忍
 
 # 原因 3: nodeSelector 不匹配
 kubectl label node <node-name> <label-key>=<value>  # 添加标签匹配
 ```
 
 ### Pod CrashLoopBackOff / Error
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 诊断命令
@@ -126,6 +145,9 @@ kubectl delete pod <pod-name>                      # 删除 Pod（Deployment 会
 
 ### Pod OOMKilled（退出码 137）
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 诊断命令
 kubectl describe pod <pod-name> | grep -A10 "Last State"  # 查看上次终止原因
@@ -136,6 +158,10 @@ kubectl patch deployment <deploy-name> -n <namespace> --patch '{"spec":{"templat
 ```
 
 ### Pod ImagePullBackOff
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 诊断命令
@@ -160,6 +186,9 @@ kubectl run test --image=curlimages/curl --restart=Never -it -- sh  # 调试网�
 
 ### [[Service|Service]] 无 Endpoints / 503
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 诊断命令
 kubectl get svc <svc-name> -n <namespace>         # 查看 Service 配置
@@ -175,6 +204,10 @@ kubectl rollout restart deployment <deploy-name> -n <namespace>  # 重启 Deploy
 ```
 
 ### DNS 解析失败
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 诊断命令
@@ -217,6 +250,9 @@ kubectl get secret <tls-secret> -n <namespace>     # 确认证书 secret 存在
 
 ### Pod 之间跨节点不通
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 诊断命令
 kubectl exec -it <pod-a> -- ping -c 3 <pod-b-ip>  # 测试 Pod 间连通性
@@ -257,6 +293,11 @@ kubectl get pods -n kube-system                     # 检查 Pod 状态
 ```
 
 ### Scheduler 不工作（Pod 一直 Pending）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 诊断命令
@@ -322,6 +363,9 @@ kubectl get storageclass | grep <sc-name>          # 确认存在
 
 ### PVC 挂载失败（MountVolume failed）
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 诊断命令
 kubectl describe pod <pod-name> | grep -A15 "Events:"  # 查看挂载错误
@@ -336,6 +380,9 @@ kubectl delete pod <pod-name>                      # 删除 Pod 让 Deployment �
 ```
 
 ### 数据只读（ReadOnly）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 诊断命令
@@ -355,6 +402,9 @@ aws ec2 describe-volumes --volume-ids <vol-id> | grep State
 ## 6. 证书与认证场景
 
 ### kubelet 证书过期
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 诊断命令
@@ -382,6 +432,9 @@ kubeadm kubeconfig user --org team --cluster <cluster-name> > kube.conf  # 重�
 
 ### RBAC Forbidden / 权限不足
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 诊断命令
 kubectl auth can-i <verb> <resource>              # 测试当前用户权限
@@ -393,6 +446,10 @@ kubectl create rolebinding <name> --role=<role-name> --user=<user>  # 绑定到�
 ```
 
 ### ServiceAccount 无法访问 API
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 诊断命令
@@ -427,6 +484,9 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 version
 
 ### 节点升级失败（kubelet 不升级）
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 诊断命令
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.nodeInfo.kubeletVersion}{"\n"}'
@@ -444,6 +504,9 @@ kubectl get nodes | grep <node-name>
 ## 9. HPA / 扩缩容场景
 
 ### HPA 不触发
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 诊断命令
@@ -465,6 +528,9 @@ kubectl logs -n kube-system metrics-server-xxx --tail=20
 
 ### HPA 达到最大副本但 CPU 仍高
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 诊断命令
 kubectl get hpa -n <namespace>                    # 查看 HPA 状态
@@ -478,6 +544,10 @@ kubectl patch hpa <hpa-name> -n <namespace> --patch '{"spec":{"maxReplicas":20}}
 ---
 
 ## 10. 快速命令速查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # === 节点状态 ===
@@ -521,4 +591,5 @@ related:
   - domain-10-troubleshooting-diagnostics/00-troubleshooting-overview.md
   - P1-5-oncall-quick-reference-card.md
 ---
+```
 ```

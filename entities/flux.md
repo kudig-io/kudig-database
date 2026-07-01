@@ -59,14 +59,14 @@ Flux is lighter and simpler, with built-in SOPS decryption and image automation.
 - [[helm]] — Helm
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[sops]] — SOPS (Secrets OPerationS)
-- [[entities/argocd|argocd]] — ArgoCD
-- [[concepts/gitops-principles|gitops-principles]] — GitOps Principles and Practice
-- [[concepts/gitops-principles|GitOps Principles]]
-- [[entities/argocd|ArgoCD]]
+- [[entities/argocd.md|argocd]] — ArgoCD
+- [[concepts/gitops-principles.md|gitops-principles]] — GitOps Principles and Practice
+- [[concepts/gitops-principles.md|GitOps Principles]]
+- [[entities/argocd.md|ArgoCD]]
 
 - 06-flux-gitops-continuous-delivery
 - 99-flux-gitops-guide
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/03-flux-image-automation-troubleshooting|03-flux-image-automation-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
 - flux
 - RELEASE-NOTES-0.12
 - RELEASE-NOTES-0.26
@@ -100,12 +100,12 @@ Flux is lighter and simpler, with built-in SOPS decryption and image automation.
 - RELEASE-NOTES-0.4
 - RELEASE-NOTES-2.6
 - RELEASE-NOTES-0.0
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/flux/RELEASE-NOTES-2.7|RELEASE-NOTES-2.7]]
+- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/flux/RELEASE-NOTES-2.7.md|RELEASE-NOTES-2.7]]
 - RELEASE-NOTES-0.1
 - RELEASE-NOTES-2.3
 - RELEASE-NOTES-0.5
 - RELEASE-NOTES-0.20
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/flux/RELEASE-NOTES-2.8|RELEASE-NOTES-2.8]]
+- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/flux/RELEASE-NOTES-2.8.md|RELEASE-NOTES-2.8]]
 - RELEASE-NOTES-0.14
 - RELEASE-NOTES-0.30
 - RELEASE-NOTES-0.10
@@ -119,13 +119,13 @@ Flux is lighter and simpler, with built-in SOPS decryption and image automation.
 - RELEASE-NOTES-0.21
 - RELEASE-NOTES-0.15
 - RELEASE-NOTES-0.31
-- [[references/release-notes-cicd-gitops|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
-- [[references/k8s-production-operations|生产运维：GitOps、FinOps、灾备恢复与变更管理]] — Cross-reference
-- [[synthesis/IaC x 多集群管理|基础设施即代码 x 多集群管理]] — Cross-reference
-- [[synthesis/GitOps x 平台工程|GitOps x 平台工程]] — Cross-reference
-- [[concepts/gitops-tool-evolution|GitOps 工具演进]] — Cross-reference
-- [[skills/ts-gitops-devops|GitOps/DevOps 排查]] — Cross-reference
-- [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/helm-index|Helm 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/release-notes-cicd-gitops.md|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
+- [[entities/k8s-production-operations.md|生产运维：GitOps、FinOps、灾备恢复与变更管理]] — Cross-reference
+- [[concepts/IaC x 多集群管理.md|基础设施即代码 x 多集群管理]] — Cross-reference
+- [[concepts/GitOps x 平台工程.md|GitOps x 平台工程]] — Cross-reference
+- [[concepts/gitops-tool-evolution.md|GitOps 工具演进]] — Cross-reference
+- [[skills/ts-gitops-devops.md|GitOps/DevOps 排查]] — Cross-reference
+- [[entities/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/helm-index.md|Helm 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

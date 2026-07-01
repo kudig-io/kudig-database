@@ -141,6 +141,7 @@ dependencies:
     version: "17.x.x"
     repository: https://charts.bitnami.com/bitnami
     condition: redis.enabled
+
 ```
 
 <!-- chunk: 常用Helm命令 -->
@@ -214,6 +215,9 @@ spec:
 <!-- chunk: OCI仓库支持 -->
 ## OCI仓库支持
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 登录OCI仓库
 helm registry login registry.example.com
@@ -248,7 +252,7 @@ helm install myrelease oci://registry.example.com/charts/mychart
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
 - Domain-10 扩展与自定义 — 开源项目索引
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现
@@ -269,5 +273,7 @@ helm install myrelease oci://registry.example.com/charts/mychart
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/helm-index|Helm 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/helm-index.md|Helm 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

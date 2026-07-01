@@ -46,7 +46,7 @@ OAuth2 Proxy 是一个反向代理，提供基于 OAuth2/OIDC 协议的身份认
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -63,10 +63,10 @@ OAuth2 Proxy 是一个反向代理，提供基于 OAuth2/OIDC 协议的身份认
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[deployment]]
-- [[concepts/controller-pattern|controller-pattern]]
-- [[concepts/secrets-management|secrets-management]]
+- [[concepts/controller-pattern.md|controller-pattern]]
+- [[concepts/secrets-management.md|secrets-management]]
 
 ## Related
 
@@ -77,4 +77,4 @@ OAuth2 Proxy 是一个反向代理，提供基于 OAuth2/OIDC 协议的身份认
 - [[keycloak]] — Keycloak
 
 - oauth2-proxy
-- [[entities/cncf-security|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference
+- [[entities/cncf-security.md|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference

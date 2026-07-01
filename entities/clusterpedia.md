@@ -76,4 +76,4 @@ Clusterpedia 是一个多集群资源的统一搜索和查询引擎，类似于 
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - index/cluster-index|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

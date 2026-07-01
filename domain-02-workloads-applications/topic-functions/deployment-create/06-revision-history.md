@@ -95,6 +95,7 @@ func FindNewReplicaSet(deployment *apps.Deployment, rsList []*apps.ReplicaSet) *
 func (dc *DeploymentController) rollbackToRevision(ctx context.Context, deployment *apps.Deployment, rsList []*apps.ReplicaSet, toRevision int64) (*apps.Deployment, error)
 func (dc *DeploymentController) cleanupOldReplicaSets(ctx context.Context, oldRSs []*apps.ReplicaSet, deployment *apps.Deployment) ([]*apps.ReplicaSet, error)
 func SortReplicaSetsByRevision(rsList []*apps.ReplicaSet)
+
 ```
 
 ## 源码位置
@@ -325,6 +326,9 @@ Step 4: Revision 4 RS: replicas=100, Revision 3 RS: replicas=0
 
 ### 回滚场景：镜像拉取失败回滚
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 场景：更新后镜像拉取失败
 kubectl set image deployment/nginx nginx=nginx:1.99
@@ -357,6 +361,9 @@ spec:
           value: "postgresql://invalid-host:5432/db"  # 错误配置
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 检测到问题后回滚
 kubectl rollout undo deployment/nginx --to-revision=5
@@ -367,6 +374,10 @@ kubectl get deployment nginx -o jsonpath='{.spec.template.spec.containers[0].env
 ```
 
 ### 回滚场景：金丝雀验证后回滚
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 场景：金丝雀发布验证失败需要回滚
@@ -409,6 +420,7 @@ sequenceDiagram
     Controller->>RS: 新 RS 扩容 replicas=100
     Controller->>RS: 旧 RS 缩容 replicas=0
     Controller->>API: 更新 Deployment.Status
+
 ```
 
 ## 使用场景
@@ -456,6 +468,12 @@ spec:
 
 ### 版本历史管理
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 查看版本历史
 kubectl rollout history deployment/nginx
@@ -497,6 +515,10 @@ kubectl patch deployment nginx -p '{"spec":{"revisionHistoryLimit":5}}'
 
 ### 金丝雀发布
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 更新镜像
 kubectl set image deployment/nginx nginx=nginx:2.0
@@ -521,6 +543,7 @@ kubectl rollout resume deployment/nginx
 
 # 6. 或验证失败回滚
 kubectl rollout undo deployment/nginx
+
 ```
 
 ## 常见错误
@@ -544,7 +567,9 @@ kubectl rollout undo deployment/nginx
 ## Related
 
 - [[README|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/deployments|deployments]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/deployments.md|deployments]]
+
+```

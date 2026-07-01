@@ -110,7 +110,7 @@ Sigstore 是 Linux Foundation 旗下的开源项目，旨在为软件供应链�
 
 <!-- chunk: 1. Sigstore 生态系统全景 (Sigstore Ecosystem Overview) -->## 1. Sigstore 生态系统全景 (Sigstore Ecosystem Overview)
 
-#<!-- chunk: 1.1 核心组件架构 (Core Component Architecture) -->## 1.1 核心组件架构 (Core Component Architecture)
+## 1.1 核心组件架构 (Core Component Architecture)
 
 ```mermaid
 graph TB
@@ -151,7 +151,7 @@ graph TB
     PC -->|"查询透明日志"| RK
 ```
 
-#<!-- chunk: 1.2 Sigstore 解决的问题 (Problems Sigstore Solves) -->## 1.2 Sigstore 解决的问题 (Problems Sigstore Solves)
+## 1.2 Sigstore 解决的问题 (Problems Sigstore Solves)
 
 ```mermaid
 graph LR
@@ -178,7 +178,7 @@ graph LR
     P5 --> S5
 ```
 
-#<!-- chunk: 1.3 Sigstore 公共实例 (Sigstore Public Good Infrastructure) -->## 1.3 Sigstore 公共实例 (Sigstore Public Good Infrastructure)
+## 1.3 Sigstore 公共实例 (Sigstore Public Good Infrastructure)
 
 | 服务 | 生产实例 URL | 用途 |
 |------|-------------|------|
@@ -191,7 +191,7 @@ graph LR
 
 <!-- chunk: 2. Cosign 安装与配置 (Cosign Installation and Configuration) -->## 2. Cosign 安装与配置 (Cosign Installation and Configuration)
 
-#<!-- chunk: 2.1 安装方式 (Installation Methods) -->## 2.1 安装方式 (Installation Methods)
+## 2.1 安装方式 (Installation Methods)
 
 ```bash
 # 方法 1: Go install（推荐开发环境）
@@ -239,7 +239,7 @@ cosign version
 # Platform:      linux/amd64
 ```
 
-#<!-- chunk: 2.2 环境变量配置 (Environment Variable Configuration) -->## 2.2 环境变量配置 (Environment Variable Configuration)
+## 2.2 环境变量配置 (Environment Variable Configuration)
 
 ```bash
 # Sigstore 相关环境变量
@@ -273,9 +273,9 @@ export NO_PROXY="localhost,127.0.0.1,.company.com"
 
 <!-- chunk: 3. 容器镜像签名 (Container Image Signing) -->## 3. 容器镜像签名 (Container Image Signing)
 
-#<!-- chunk: 3.1 无密钥签名（OIDC）(Keyless Signing with OIDC) -->## 3.1 无密钥签名（OIDC）(Keyless Signing with OIDC)
+## 3.1 无密钥签名（OIDC）(Keyless Signing with OIDC)
 
-##<!-- chunk: 3.1.1 交互式无密钥签名 (Interactive Keyless Signing) -->## 3.1.1 交互式无密钥签名 (Interactive Keyless Signing)
+## 3.1.1 交互式无密钥签名 (Interactive Keyless Signing)
 
 ```bash
 # 无密钥签名（会打开浏览器进行 OIDC 认证）
@@ -304,7 +304,7 @@ cosign sign \
   ghcr.io/your-org/your-app:v1.0.0
 ```
 
-##<!-- chunk: 3.1.2 GitHub Actions 中的无密钥签名 (Keyless Signing in GitHub Actions) -->## 3.1.2 GitHub Actions 中的无密钥签名 (Keyless Signing in GitHub Actions)
+## 3.1.2 GitHub Actions 中的无密钥签名 (Keyless Signing in GitHub Actions)
 
 ```yaml
 # .github/workflows/sign-image.yml
@@ -391,7 +391,7 @@ jobs:
           echo "Image signed: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-push.outputs.digest }}"
 ```
 
-#<!-- chunk: 3.2 基于密钥的签名 (Key-based Signing) -->## 3.2 基于密钥的签名 (Key-based Signing)
+## 3.2 基于密钥的签名 (Key-based Signing)
 
 ```bash
 # 生成密钥对
@@ -427,7 +427,7 @@ cosign sign \
   ghcr.io/your-org/your-app:v1.0.0
 ```
 
-#<!-- chunk: 3.3 GitHub Actions 中使用 KMS 签名 (KMS Signing in GitHub Actions) -->## 3.3 GitHub Actions 中使用 KMS 签名 (KMS Signing in GitHub Actions)
+## 3.3 GitHub Actions 中使用 KMS 签名 (KMS Signing in GitHub Actions)
 
 ```yaml
 # .github/workflows/kms-sign-image.yml
@@ -490,7 +490,7 @@ jobs:
 
 <!-- chunk: 4. Blob 文件签名 (Blob File Signing) -->## 4. Blob 文件签名 (Blob File Signing)
 
-#<!-- chunk: 4.1 通用文件签名 (Generic File Signing) -->## 4.1 通用文件签名 (Generic File Signing)
+## 4.1 通用文件签名 (Generic File Signing)
 
 ```bash
 # 无密钥签名文件
@@ -522,7 +522,7 @@ for FILE in dist/*.tar.gz dist/*.zip; do
 done
 ```
 
-#<!-- chunk: 4.2 文件签名验证 (File Signature Verification) -->## 4.2 文件签名验证 (File Signature Verification)
+## 4.2 文件签名验证 (File Signature Verification)
 
 ```bash
 # 使用 bundle 验证（推荐：包含签名、证书、SCT）
@@ -558,7 +558,7 @@ cosign verify-blob \
   my-app-v1.0.0-linux-amd64.tar.gz
 ```
 
-#<!-- chunk: 4.3 GitHub Release 中集成 Blob 签名 (Blob Signing in GitHub Release) -->## 4.3 GitHub Release 中集成 Blob 签名 (Blob Signing in GitHub Release)
+## 4.3 GitHub Release 中集成 Blob 签名 (Blob Signing in GitHub Release)
 
 ```yaml
 # .github/workflows/release-with-signing.yml
@@ -634,7 +634,7 @@ jobs:
 
 <!-- chunk: 5. 证明与附件 (Attestations and Attachments) -->## 5. 证明与附件 (Attestations and Attachments)
 
-#<!-- chunk: 5.1 生成证明 (Generating Attestations) -->## 5.1 生成证明 (Generating Attestations)
+## 5.1 生成证明 (Generating Attestations)
 
 ```bash
 # 将 SBOM 作为证明附加到镜像
@@ -701,7 +701,7 @@ cosign attest \
   ghcr.io/your-org/your-app:v1.0.0
 ```
 
-#<!-- chunk: 5.2 验证证明 (Verifying Attestations) -->## 5.2 验证证明 (Verifying Attestations)
+## 5.2 验证证明 (Verifying Attestations)
 
 ```bash
 # 验证 SBOM 证明并输出内容
@@ -731,7 +731,7 @@ cosign verify-attestation \
 cosign tree ghcr.io/your-org/your-app:v1.0.0
 ```
 
-#<!-- chunk: 5.3 镜像签名树结构 (Image Signing Tree Structure) -->## 5.3 镜像签名树结构 (Image Signing Tree Structure)
+## 5.3 镜像签名树结构 (Image Signing Tree Structure)
 
 ```bash
 # 查看镜像的完整签名树
@@ -752,7 +752,7 @@ cosign tree ghcr.io/your-org/your-app:v1.0.0
 
 <!-- chunk: 6. 签名验证详解 (Signature Verification Deep Dive) -->## 6. 签名验证详解 (Signature Verification Deep Dive)
 
-#<!-- chunk: 6.1 容器镜像验证 (Container Image Verification) -->## 6.1 容器镜像验证 (Container Image Verification)
+## 6.1 容器镜像验证 (Container Image Verification)
 
 ```bash
 # 基本无密钥验证
@@ -802,7 +802,7 @@ cat signatures.json | jq '.[0] | {
 }'
 ```
 
-#<!-- chunk: 6.2 验证策略配置 (Verification Policy Configuration) -->## 6.2 验证策略配置 (Verification Policy Configuration)
+## 6.2 验证策略配置 (Verification Policy Configuration)
 
 ```bash
 # 创建验证策略文件
@@ -822,7 +822,7 @@ cosign verify \
   ghcr.io/your-org/your-app:v1.0.0
 ```
 
-#<!-- chunk: 6.3 签名信息解析 (Signature Information Parsing) -->## 6.3 签名信息解析 (Signature Information Parsing)
+## 6.3 签名信息解析 (Signature Information Parsing)
 
 ```bash
 # 提取并解析签名中的证书信息
@@ -866,7 +866,7 @@ EOF
 
 <!-- chunk: 7. 完整 CI/CD 签名流水线 (Complete CI/CD Signing Pipeline) -->## 7. 完整 CI/CD 签名流水线 (Complete CI/CD Signing Pipeline)
 
-#<!-- chunk: 7.1 端到端容器镜像安全流水线 (End-to-End Container Image Security Pipeline) -->## 7.1 端到端容器镜像安全流水线 (End-to-End Container Image Security Pipeline)
+## 7.1 端到端容器镜像安全流水线 (End-to-End Container Image Security Pipeline)
 
 ```mermaid
 graph LR
@@ -912,7 +912,7 @@ graph LR
     L --> M
 ```
 
-#<!-- chunk: 7.2 完整生产流水线配置 (Complete Production Pipeline Configuration) -->## 7.2 完整生产流水线配置 (Complete Production Pipeline Configuration)
+## 7.2 完整生产流水线配置 (Complete Production Pipeline Configuration)
 
 ```yaml
 # .github/workflows/full-security-pipeline.yml
@@ -1158,7 +1158,7 @@ jobs:
 
 <!-- chunk: 8. 多注册表签名策略 (Multi-Registry Signing Strategy) -->## 8. 多注册表签名策略 (Multi-Registry Signing Strategy)
 
-#<!-- chunk: 8.1 跨注册表镜像复制与签名 (Cross-Registry Image Copy and Signing) -->## 8.1 跨注册表镜像复制与签名 (Cross-Registry Image Copy and Signing)
+## 8.1 跨注册表镜像复制与签名 (Cross-Registry Image Copy and Signing)
 
 ```bash
 # 将签名随镜像一起复制到另一个注册表
@@ -1179,7 +1179,7 @@ cosign verify \
   docker.io/yourorg/your-app:v1.0.0
 ```
 
-#<!-- chunk: 8.2 镜像签名转移工作流 (Image Signing Transfer Workflow) -->## 8.2 镜像签名转移工作流 (Image Signing Transfer Workflow)
+## 8.2 镜像签名转移工作流 (Image Signing Transfer Workflow)
 
 ```yaml
 # .github/workflows/promote-and-sign.yml
@@ -1258,7 +1258,10 @@ jobs:
 
 <!-- chunk: 9. 私有 Sigstore 实例部署 (Private Sigstore Instance Deployment) -->## 9. 私有 Sigstore 实例部署 (Private Sigstore Instance Deployment)
 
-#<!-- chunk: 9.1 使用 Scaffold 部署 (Deployment with Scaffold) -->## 9.1 使用 Scaffold 部署 (Deployment with Scaffold)
+## 9.1 使用 Scaffold 部署 (Deployment with Scaffold)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 克隆 Sigstore 部署工具
@@ -1290,7 +1293,7 @@ helm install ctlog sigstore/ctlog \
   --namespace sigstore-system
 ```
 
-#<!-- chunk: 9.2 私有实例配置文件 (Private Instance Configuration Files) -->## 9.2 私有实例配置文件 (Private Instance Configuration Files)
+## 9.2 私有实例配置文件 (Private Instance Configuration Files)
 
 ```yaml
 # rekor-values.yaml
@@ -1348,7 +1351,7 @@ fulcio:
       parent: "projects/my-project/locations/us-east1/caPools/fulcio-ca"
 ```
 
-#<!-- chunk: 9.3 配置 Cosign 使用私有实例 (Configuring Cosign to Use Private Instance) -->## 9.3 配置 Cosign 使用私有实例 (Configuring Cosign to Use Private Instance)
+## 9.3 配置 Cosign 使用私有实例 (Configuring Cosign to Use Private Instance)
 
 ```bash
 # 方法 1: 环境变量
@@ -1380,7 +1383,7 @@ curl -s "https://fulcio.your-company.com/api/v2/configuration" | jq .
 
 <!-- chunk: 10. Gitsign：Git 提交签名 (Gitsign: Git Commit Signing) -->## 10. Gitsign：Git 提交签名 (Gitsign: Git Commit Signing)
 
-#<!-- chunk: 10.1 Gitsign 安装与配置 (Gitsign Installation and Configuration) -->## 10.1 Gitsign 安装与配置 (Gitsign Installation and Configuration)
+## 10.1 Gitsign 安装与配置 (Gitsign Installation and Configuration)
 
 ```bash
 # 安装 Gitsign
@@ -1404,7 +1407,7 @@ git config --global gitsign.rekor "https://rekor.your-company.com"
 git config --global gitsign.connectorID "https://your-keycloak.company.com/realms/your-realm"
 ```
 
-#<!-- chunk: 10.2 Git 提交验证 (Git Commit Verification) -->## 10.2 Git 提交验证 (Git Commit Verification)
+## 10.2 Git 提交验证 (Git Commit Verification)
 
 ```bash
 # 签名提交（会触发 OIDC 浏览器认证）
@@ -1443,7 +1446,7 @@ done
 
 <!-- chunk: 11. 监控与告警 (Monitoring and Alerting) -->## 11. 监控与告警 (Monitoring and Alerting)
 
-#<!-- chunk: 11.1 签名验证监控工作流 (Signature Verification Monitoring Workflow) -->## 11.1 签名验证监控工作流 (Signature Verification Monitoring Workflow)
+## 11.1 签名验证监控工作流 (Signature Verification Monitoring Workflow)
 
 ```yaml
 # .github/workflows/verify-signatures.yml
@@ -1514,7 +1517,7 @@ jobs:
           EOF
 ```
 
-#<!-- chunk: 11.2 签名生命周期追踪 (Signature Lifecycle Tracking) -->## 11.2 签名生命周期追踪 (Signature Lifecycle Tracking)
+## 11.2 签名生命周期追踪 (Signature Lifecycle Tracking)
 
 ```bash
 # 查询 Rekor 中的签名记录
@@ -1547,43 +1550,43 @@ rekor-cli search \
 
 <!-- chunk: 12. 安全最佳实践 (Security Best Practices) -->## 12. 安全最佳实践 (Security Best Practices)
 
-#<!-- chunk: 12.1 签名安全清单 (Signing Security Checklist) -->## 12.1 签名安全清单 (Signing Security Checklist)
+## 12.1 签名安全清单 (Signing Security Checklist)
 
 ```markdown
 <!-- chunk: Cosign 签名安全清单 -->## Cosign 签名安全清单
 
-#<!-- chunk: 无密钥签名（推荐） -->## 无密钥签名（推荐）
+## 无密钥签名（推荐）
 - [x] 使用 GitHub Actions OIDC 令牌进行无密钥签名
 - [x] 确保 `id-token: write` 权限限制在最小范围
 - [x] 在专用 job 中进行签名（隔离权限）
 - [x] 验证证书中的 `job_workflow_ref` 匹配预期工作流
 
-#<!-- chunk: 基于密钥的签名 -->## 基于密钥的签名
+## 基于密钥的签名
 - [x] 私钥存储在 KMS 中，而非 GitHub Secrets
 - [x] 使用 AWS KMS / GCP KMS / Azure Key Vault
 - [x] 定期轮换签名密钥
 - [x] 记录所有密钥使用操作到审计日志
 
-#<!-- chunk: 验证策略 -->## 验证策略
+## 验证策略
 - [x] 始终通过摘要（digest）引用镜像，而非标签
 - [x] 在部署前强制验证签名
 - [x] 使用 Policy Controller 实现 Kubernetes 准入控制
 - [x] 定期运行自动化签名验证
 
-#<!-- chunk: 证明管理 -->## 证明管理
+## 证明管理
 - [x] 为所有生产镜像生成 SBOM 证明
 - [x] 附加漏洞扫描结果证明
 - [x] 保留 SLSA 来源证明
 - [x] 定期审计证明的时效性
 
-#<!-- chunk: 注册表安全 -->## 注册表安全
+## 注册表安全
 - [x] 启用注册表内容信任（Content Trust）
 - [x] 限制注册表访问权限
 - [x] 配置镜像不可变标签（Immutable Tags）
 - [x] 定期清理过期镜像和签名
 ```
 
-#<!-- chunk: 12.2 常见错误与解决方案 (Common Errors and Solutions) -->## 12.2 常见错误与解决方案 (Common Errors and Solutions)
+## 12.2 常见错误与解决方案 (Common Errors and Solutions)
 
 ```bash
 # 错误 1: "no signatures found"
@@ -1653,8 +1656,8 @@ Sigstore 和 Cosign 提供了一个现代化、易用的软件签名框架：
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 39: 供应链安全 (Supply Chain Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-39 供应链安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 供应链安全 (Supply Chain Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
 - 供应链安全概述 (Supply Chain Security Overview)
 - 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 - SBOM 生成与管理 (SBOM Generation and Management)
@@ -1672,8 +1675,8 @@ Sigstore 和 Cosign 提供了一个现代化、易用的软件签名框架：
 - 08-fulcio-rekor-transparency
 - 09-policy-controller-verification
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

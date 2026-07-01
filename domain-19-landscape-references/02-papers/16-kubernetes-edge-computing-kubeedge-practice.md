@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 边缘计算架构基础 -->## 1. 边缘计算架构基础
 
-#<!-- chunk: 1.1 边缘计算核心概念 -->## 1.1 边缘计算核心概念
+## 1.1 边缘计算核心概念
 
 ```yaml
 边缘计算架构要素:
@@ -89,7 +89,7 @@ created: "2026-05-23"
     - 故障自愈能力
 ```
 
-#<!-- chunk: 1.2 KubeEdge架构组件 -->## 1.2 KubeEdge架构组件
+## 1.2 KubeEdge架构组件
 
 ```mermaid
 graph TB
@@ -126,7 +126,7 @@ graph TB
 
 <!-- chunk: 2. KubeEdge安装部署 -->## 2. KubeEdge安装部署
 
-#<!-- chunk: 2.1 云端组件部署 -->## 2.1 云端组件部署
+## 2.1 云端组件部署
 
 ```yaml
 # KubeEdge云端组件部署
@@ -279,7 +279,7 @@ data:
         enable: true
 ```
 
-#<!-- chunk: 2.2 边缘节点部署 -->## 2.2 边缘节点部署
+## 2.2 边缘节点部署
 
 ```bash
 #!/bin/bash
@@ -331,7 +331,7 @@ echo "边缘节点 $EDGE_NODE_NAME 安装完成!"
 
 <!-- chunk: 3. 边缘应用部署管理 -->## 3. 边缘应用部署管理
 
-#<!-- chunk: 3.1 边缘应用部署策略 -->## 3.1 边缘应用部署策略
+## 3.1 边缘应用部署策略
 
 ```yaml
 # 边缘应用部署配置
@@ -421,7 +421,7 @@ spec:
               number: 8080
 ```
 
-#<!-- chunk: 3.2 本地存储管理 -->## 3.2 本地存储管理
+## 3.2 本地存储管理
 
 ```yaml
 # 边缘节点本地存储配置
@@ -471,7 +471,7 @@ volumeBindingMode: WaitForFirstConsumer
 
 <!-- chunk: 4. 设备管理与物联网集成 -->## 4. 设备管理与物联网集成
 
-#<!-- chunk: 4.1 设备孪生管理 -->## 4.1 设备孪生管理
+## 4.1 设备孪生管理
 
 ```yaml
 # 设备模型定义
@@ -567,7 +567,7 @@ spec:
           path: /dev
 ```
 
-#<!-- chunk: 4.2 MQTT消息集成 -->## 4.2 MQTT消息集成
+## 4.2 MQTT消息集成
 
 ```yaml
 # MQTT网关配置
@@ -681,7 +681,7 @@ spec:
 
 <!-- chunk: 5. 边缘自治与断网处理 -->## 5. 边缘自治与断网处理
 
-#<!-- chunk: 5.1 边缘自治配置 -->## 5.1 边缘自治配置
+## 5.1 边缘自治配置
 
 ```yaml
 # 边缘节点自治配置
@@ -761,7 +761,7 @@ data:
       outputActions: ["alert_generation", "automatic_shutdown"]
 ```
 
-#<!-- chunk: 5.2 断网恢复机制 -->## 5.2 断网恢复机制
+## 5.2 断网恢复机制
 
 ```python
 #!/usr/bin/env python3
@@ -997,7 +997,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 6. 监控与运维管理 -->## 6. 监控与运维管理
 
-#<!-- chunk: 6.1 边缘监控架构 -->## 6.1 边缘监控架构
+## 6.1 边缘监控架构
 
 ```yaml
 # 边缘监控配置
@@ -1090,7 +1090,7 @@ data:
         expr: rate(container_network_transmit_bytes_total{container="app"}[5m])
 ```
 
-#<!-- chunk: 6.2 边缘日志管理 -->## 6.2 边缘日志管理
+## 6.2 边缘日志管理
 
 ```yaml
 # 边缘日志收集配置
@@ -1195,7 +1195,7 @@ data:
 
 <!-- chunk: 7. 安全与合规管理 -->## 7. 安全与合规管理
 
-#<!-- chunk: 7.1 边缘安全策略 -->## 7.1 边缘安全策略
+## 7.1 边缘安全策略
 
 ```yaml
 # 边缘节点安全配置
@@ -1266,7 +1266,7 @@ spec:
   - client auth
 ```
 
-#<!-- chunk: 7.2 合规性检查 -->## 7.2 合规性检查
+## 7.2 合规性检查
 
 ```python
 #!/usr/bin/env python3
@@ -1475,33 +1475,33 @@ if __name__ == "__main__":
 
 <!-- chunk: 8. 最佳实践与实施指南 -->## 8. 最佳实践与实施指南
 
-#<!-- chunk: 8.1 边缘计算实施原则 -->## 8.1 边缘计算实施原则
+## 8.1 边缘计算实施原则
 
 ```markdown
 <!-- chunk: 🌐 边缘计算实施原则 -->## 🌐 边缘计算实施原则
 
-#<!-- chunk: 1. 本地化处理 -->## 1. 本地化处理
+## 1. 本地化处理
 - 数据就近处理，减少传输延迟
 - 实施边缘缓存和预取策略
 - 建立本地决策机制
 
-#<!-- chunk: 2. 资源优化 -->## 2. 资源优化
+## 2. 资源优化
 - 合理分配计算和存储资源
 - 实施动态资源调度
 - 优化能耗管理
 
-#<!-- chunk: 3. 可靠性保障 -->## 3. 可靠性保障
+## 3. 可靠性保障
 - 建立边缘自治能力
 - 实施故障自愈机制
 - 确保断网情况下正常运行
 
-#<!-- chunk: 4. 安全防护 -->## 4. 安全防护
+## 4. 安全防护
 - 实施多层次安全防护
 - 建立设备身份认证体系
 - 实施数据加密传输
 ```
 
-#<!-- chunk: 8.2 实施检查清单 -->## 8.2 实施检查清单
+## 8.2 实施检查清单
 
 ```yaml
 边缘计算实施检查清单:
@@ -1532,12 +1532,12 @@ if __name__ == "__main__":
 
 <!-- chunk: N. 边缘计算 2026更新 -->## N. 边缘计算 2026更新
 
-#<!-- chunk: N.1 边缘AI推理 -->## N.1 边缘AI推理
+## N.1 边缘AI推理
 - KubeEdge + AI模型分发（EdgeMesh + 模型推理服务）
 - 边缘轻量化模型部署（ONNX Runtime/TFLite）
 - 联邦学习架构（云-边协同训练）
 
-#<!-- chunk: N.2 WebAssembly边缘部署 -->## N.2 WebAssembly边缘部署
+## N.2 WebAssembly边缘部署
 - Wasm在资源受限边缘节点的优势（<1MB运行时、毫秒级冷启动）
 - KubeEdge + [[containerd|containerd]] Wasm shim集成
 - 边缘Wasm应用热更新策略
@@ -1545,7 +1545,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 9. 未来发展趋势 -->## 9. 未来发展趋势
 
-#<!-- chunk: 9.1 边缘计算演进方向 -->## 9.1 边缘计算演进方向
+## 9.1 边缘计算演进方向
 
 ```yaml
 边缘计算发展趋势:
@@ -1574,7 +1574,7 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers KUDIG Database — Global MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - index.md|Domain-19 论文与参考 — 开源项目索引]]
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -1595,4 +1595,4 @@ if __name__ == "__main__":
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

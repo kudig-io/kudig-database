@@ -496,9 +496,6 @@ echo 'query: predict_linear(node_filesystem_avail_bytes[1h], 3600) < 0'
 
 ### Phase 3: 主动探测（低风险，可能需审批）
 
-> ⚠️ 以下步骤涉及磁盘清理或进程检查，在 L1-advisory 模式下，Agent 应**提出建议并等待人工确认**后执行。
-> **预计耗时**: 5-10 分钟
-
 **Step D3.1**: 检查可安全清理的资源
 - **命令**:
   ```bash
@@ -613,13 +610,18 @@ echo 'query: predict_linear(node_filesystem_avail_bytes[1h], 3600) < 0'
   # 确认要清理的 Pod
   ```
 - **执行命令**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 方式1: 删除 Pod 让其重建（推荐，安全）
   kubectl delete pod <pod-name> -n <namespace>
   # Pod 重建后 emptyDir 会被清空
 
   # 方式2: 直接进入 emptyDir 清理（风险更高，需确认应用状态）
-  ssh <node-ip> "rm -rf /var/lib/kubelet/pods/<pod-uid>/volumes/kubernetes.io~empty-dir/<volume-name>/*"
+  ssh <node-ip> "rm -rf /var/lib/kubelet/pods/<pod-uid>/volumes/kubernetes.io~empty-dir/<volume-name>/*"  # ⚠️ 删除系统/数据文件
   ```
 - **后置验证**:
   ```bash
@@ -669,6 +671,10 @@ echo 'query: predict_linear(node_filesystem_avail_bytes[1h], 3600) < 0'
   # 记录当前阈值
   ```
 - **执行命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   # 修改 kubelet 配置（需根据实际配置路径调整）
   ssh <node-ip> "sudo sed -i 's/memory.available<100Mi/memory.available<50Mi/' /var/lib/kubelet/config.yaml"
@@ -680,6 +686,10 @@ echo 'query: predict_linear(node_filesystem_avail_bytes[1h], 3600) < 0'
   # 预期: Pressure 条件消失或改善
   ```
 - **回滚命令**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
   ```bash
   ssh <node-ip> "sudo sed -i 's/memory.available<50Mi/memory.available<100Mi/' /var/lib/kubelet/config.yaml"
   ssh <node-ip> "sudo systemctl restart kubelet"
@@ -720,6 +730,10 @@ echo 'query: predict_linear(node_filesystem_avail_bytes[1h], 3600) < 0'
        QOS:.status.qosClass,PRIORITY:.spec.priority | sort -k3,3
      ```
   2. 优先驱逐 BestEffort 和低优先级的 Pod
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      kubectl delete pod <pod-name> -n <namespace>
      ```
@@ -760,14 +774,26 @@ echo 'query: predict_linear(node_filesystem_avail_bytes[1h], 3600) < 0'
 - **数据备份**: 确认节点上无独占本地数据（emptyDir 数据会丢失）
 - **操作步骤**:
   1. 标记节点不可调度
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+
      ```bash
      kubectl cordon <node-name>
      ```
   2. 排空节点上的 Pod
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
      ```bash
      kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data --force
      ```
   3. 从集群中删除节点（云环境通常会自动替换）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      kubectl delete node <node-name>
      ```
@@ -997,3 +1023,5 @@ receivers:
 *Skill ID: SKILL-NODE-002*  
 *创建时间: 2026-05*  
 *维护者: Kudig Team*
+
+```

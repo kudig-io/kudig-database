@@ -5,6 +5,7 @@ tags: ['pod', 'metadata', 'api', 'visibility/public']
 sources: ["conceptss/"]
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 status: stub
 ---
 # Downward API
@@ -20,4 +21,4 @@ Downward API 允许容器获取自身 Pod 和节点的元数据信息，如标�
 
 ## 相关链接
 
-- [[concepts/kubernetes|Kubernetes]] — 核心概念
+- [[concepts/kubernetes.md|Kubernetes]] — 核心概念

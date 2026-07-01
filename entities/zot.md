@@ -44,7 +44,7 @@ zot 是一个生产就绪的、OCI 原生的容器镜像注册表，完全基于
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -61,24 +61,24 @@ zot 是一个生产就绪的、OCI 原生的容器镜像注册表，完全基于
 
 ## 参考链接
 
-- [[entities/trivy|trivy]]
+- [[entities/trivy.md|trivy]]
 - [[deployment]]
-- [[concepts/storage-model|storage-model]]
-- [[concepts/security-defense-depth|security-defense-depth]]
+- [[concepts/storage-model.md|storage-model]]
+- [[concepts/security-defense-depth.md|security-defense-depth]]
 
 ## Related
 
 - [[envoy]] — Envoy
 - [[cert-manager]] — cert-manager
-- [[entities/trivy|trivy]] — Trivy
+- [[entities/trivy.md|trivy]] — Trivy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[distribution]] — Distribution
 
 - zot
-- [[entities/modelpack|[[ModelPack|ModelPack]]]]
-- [[entities/kitops|KitOps]]
-- [[entities/copa|Copa (Copacetic)]]
-- [[entities/stacker|Stacker]]
-- [[entities/xregistry|xRegistry]]
-- [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[entities/modelpack.md|[[ModelPack|ModelPack]]]]
+- [[entities/kitops.md|KitOps]]
+- [[entities/copa.md|Copa (Copacetic)]]
+- [[entities/stacker.md|Stacker]]
+- [[entities/xregistry.md|xRegistry]]
+- [[entities/cncf-storage.md|CNCF 存储与数据库项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

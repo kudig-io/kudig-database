@@ -155,6 +155,9 @@ Prometheus ──> Alertmanager ──> Route ──> Receiver (钉钉/企微/Sl
 
 ### 任务 1: 部署 Loki Stack (45min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # Step 1: 添加 Grafana Helm repo
 helm repo add grafana https://grafana.github.io/helm-charts
@@ -314,6 +317,10 @@ EOF
 
 ### 任务 3: Alertmanager 路由配置 (45min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # Step 1: 查看当前 Alertmanager 配置
 kubectl get secret -n monitoring \
@@ -355,22 +362,22 @@ stringData:
         group_wait: 10s
         repeat_interval: 1h
         continue: false
-      - match:
-          severity: warning
+      - matchers:
+        - severity="warning"
         receiver: 'warning-receiver'
         group_wait: 30s
         repeat_interval: 4h
-      - match_re:
-          namespace: ^(production|prod)$
+      - matchers:
+        - namespace=~"^(production|prod)$"
         receiver: 'production-receiver'
         group_wait: 15s
         repeat_interval: 2h
 
     inhibit_rules:
-    - source_match:
-        severity: 'critical'
-      target_match:
-        severity: 'warning'
+    - source_matchers:
+      - severity="critical"
+      target_matchers:
+      - severity="warning"
       equal: ['alertname', 'namespace']
 
     receivers:
@@ -435,6 +442,9 @@ kubectl get pods -n monitoring -l app.kubernetes.io/name=alertmanager
 
 ### 任务 4: 日志查询实践 (30min)
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+
 ```bash
 # Step 1: 生成测试日志
 kubectl run log-test --image=busybox --restart=Never -- sh -c 'for i in $(seq 1 1000); do echo "[$(date '+%Y-%m-%d %H:%M:%S')] Log message $i - status: $([ $((i % 10)) -eq 0 ] && echo ERROR || echo INFO)"; sleep 1; done'
@@ -469,7 +479,7 @@ kubectl get pod log-test
 # {pod="log-test"} | logfmt | line_format "{{.status}}"
 
 # Step 4: 清理
-kubectl delete pod log-test --force
+kubectl delete pod log-test --force  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
 ---
@@ -570,20 +580,20 @@ scrape_configs:
     - cri: {}
     - labels:
         stream:
-    - match:
-        selector: '{app=~"nginx.+"}'
-        stages:
-        - regex:
-            expression: '^(?P<remote_addr>[\w\.]+) - (?P<remote_user>\S+) \[(?P<time>[^\]]+)\] "(?P<method>\w+) (?P<path>\S+) (?P<protocol>\S+)" (?P<status>\d+) (?P<body_bytes_sent>\d+)'
-        - labels:
-            method:
-            status:
-        - metrics:
-            http_requests_total:
-              type: Counter
-              description: "Total HTTP requests"
-              config:
-                action: inc
+    - matchers:
+      - selector="{app=~"nginx.+"}"
+      - stages=""
+      - - regex=""
+      - expression="^(?P<remote_addr>[\w\.]+) - (?P<remote_user>\S+) \[(?P<time>[^\]]+)\] "(?P<method>\w+) (?P<path>\S+) (?P<protocol>\S+)" (?P<status>\d+) (?P<body_bytes_sent>\d+)"
+      - - labels=""
+      - method=""
+      - status=""
+      - - metrics=""
+      - http_requests_total=""
+      - type="Counter"
+      - description="Total HTTP requests"
+      - config=""
+      - action="inc"
     relabel_configs:
     - source_labels:
       - __meta_kubernetes_pod_node_name
@@ -600,6 +610,7 @@ scrape_configs:
     - source_labels:
       - __meta_kubernetes_pod_label_app
       target_label: app
+
 ```
 
 ### Alertmanager 路由参数说明
@@ -708,4 +719,6 @@ amtool silence expire <silence-id>
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

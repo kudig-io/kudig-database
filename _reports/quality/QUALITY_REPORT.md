@@ -29,7 +29,14 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - monitoring-basics
-created: "2026-05-23"
+created: '2026-05-23'
+relationships:
+- target: "_reports/execution-plan.md"
+  type: related_to
+- target: "_reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md"
+  type: related_to
+- target: "_reports/CONTENT-DEEP-EVALUATION-2026-05-19.md"
+  type: related_to
 ---
 
 # Domain-10 扩展生态质量报告
@@ -193,3 +200,11 @@ CRD开发   包管理     运维基础   企业管理
 **维护团队**: Kusheet Extensions Team  
 **联系方式**: allen.galler@example.com  
 **许可证**: MIT
+
+## Related
+
+- _reports/execution-plan.md
+- _reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md
+- _reports/CONTENT-DEEP-EVALUATION-2026-05-19.md
+- _reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md
+- _reports/CONTENT-DEEP-EVALUATION-2026-05-19.md

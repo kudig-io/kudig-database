@@ -219,6 +219,10 @@ spec:
 ### 3.2 证书管理
 
 #### 自动生成证书
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 生成服务证书
 openssl req -x509 -newkey rsa:4096 -keyout tls.key -out tls.crt -days 365 -nodes \
@@ -488,6 +492,12 @@ func (s *APIServer) setupConversion() error {
 ### 6.3 升级迁移方案
 
 #### 渐进式升级
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 部署新版本服务
 kubectl apply -f metrics-apiserver-v2.yaml
@@ -577,7 +587,7 @@ API聚合机制为Kubernetes提供了强大的扩展能力，使开发者能够�
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
 - index.md|Domain-10 扩展与自定义 — 开源项目索引]]
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现

@@ -1,5 +1,5 @@
 ---
-title: Day 28: 综合复习与实践 [week-4-network-storage]
+title: "Day 28: 综合复习与实践 [week-4-network-storage]"
 description: '# Day 28: 综合复习与实践'
 category: learning
 tags:
@@ -149,6 +149,9 @@ Week 4: 网络与存储
 
 #### Phase 1: 环境准备 (20min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建专用 Namespace
 kubectl create namespace final-demo
@@ -192,6 +195,9 @@ kubectl get quota,limitrange -n final-demo
 ```
 
 #### Phase 2: 应用部署 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 ConfigMap 和 Secret
@@ -244,7 +250,7 @@ spec:
                 - key: app
                   operator: In
                   values: [web-app]
-              topologyKey: [[entities/kubernetes|kubernetes]].io/hostname
+              topologyKey: [[entities/kubernetes.md|kubernetes]].io/hostname
       containers:
       - name: web
         image: registry.cn-hangzhou.aliyuncs.com/acs-sample/nginx:1.24
@@ -292,6 +298,9 @@ kubectl get pods -n final-demo -w
 
 #### Phase 3: 服务暴露 (20min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建 Service
 cat <<EOF | kubectl apply -f -
@@ -337,6 +346,9 @@ kubectl get svc,ingress -n final-demo
 
 #### Phase 4: 验证与清理 (20min)
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```bash
 # 全面检查
 echo "=== Pod 状态 ==="
@@ -360,7 +372,7 @@ kubectl run test -n final-demo \
   --rm -it --restart=Never -- wget -qO- http://web-app-svc
 
 # 清理
-kubectl delete namespace final-demo
+kubectl delete namespace final-demo  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
 ---

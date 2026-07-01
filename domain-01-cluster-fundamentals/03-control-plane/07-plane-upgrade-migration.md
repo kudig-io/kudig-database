@@ -283,6 +283,9 @@ upgrade_process:
 
 ### 4.1 etcd升级策略
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # etcd滚动升级脚本
@@ -424,6 +427,10 @@ progressive_upgrade:
 ## 6. 回滚策略
 
 ### 6.1 快速回滚机制
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -598,6 +605,10 @@ handle_api_migrations() {
 
 ### 8.1 kubeadm升级
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 使用kubeadm进行升级
 #!/bin/bash
@@ -766,10 +777,10 @@ upgrade_validation_checklist:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - index.md|Domain-3 控制平面 — 开源项目索引]]
-- [[concepts/kubernetes-architecture-overview]]
-- [[domain-01-cluster-fundamentals/03-control-plane/02-plane-components-interaction]]
+- [[concepts/kubernetes-architecture-overview.md|kubernetes architecture overview]]
+- [[domain-01-cluster-fundamentals/03-control-plane/02-plane-components-interaction.md|02 plane components interaction]]
 - 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...
 - 控制平面安全加固指南 (Control Plane Security Hardening Guide)
 - 控制平面监控与可观测性 (Control Plane Monitoring & Observability)

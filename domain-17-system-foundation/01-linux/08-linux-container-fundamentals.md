@@ -64,7 +64,7 @@ created: "2026-05-23"
 
 <!-- chunk: 核心概念详解 -->## 核心概念详解
 
-#<!-- chunk: 容器 vs 虚拟机 -->## 容器 vs 虚拟机
+## 容器 vs 虚拟机
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -96,7 +96,7 @@ created: "2026-05-23"
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 容器核心技术栈 -->## 容器核心技术栈
+## 容器核心技术栈
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -132,11 +132,11 @@ created: "2026-05-23"
 
 ---
 
-#<!-- chunk: Namespaces 详解 -->## Namespaces 详解
+## Namespaces 详解
 
 Namespaces 是 Linux 内核提供的资源隔离机制，容器运行时通过创建不同的命名空间来实现进程的隔离视图。
 
-##<!-- chunk: Namespace 类型详解 -->## Namespace 类型详解
+## Namespace 类型详解
 
 | 类型 | Flag | 隔离内容 | 内核版本 | 容器用途 |
 |:---|:---|:---|:---|:---|
@@ -149,7 +149,7 @@ Namespaces 是 Linux 内核提供的资源隔离机制，容器运行时通过�
 | **Cgroup** | CLONE_NEWCGROUP | Cgroup 根目录视图 | 4.6 | Cgroup 视图隔离 |
 | **Time** | CLONE_NEWTIME | 系统时间 | 5.6 | 时间命名空间 |
 
-##<!-- chunk: Namespace 操作 -->## Namespace 操作
+## Namespace 操作
 
 ```bash
 # 查看进程的所有 namespace
@@ -196,7 +196,7 @@ mount --bind /tmp /mnt
 # 只在当前命名空间中可见
 ```
 
-##<!-- chunk: Kubernetes 中的 Namespace 使用 -->## Kubernetes 中的 Namespace 使用
+## Kubernetes 中的 Namespace 使用
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -230,11 +230,11 @@ mount --bind /tmp /mnt
 
 ---
 
-#<!-- chunk: Cgroups 详解 -->## Cgroups 详解
+## Cgroups 详解
 
 Cgroups (Control Groups) 实现 Linux 内核级别的资源限制、优先级分配和资源统计。Kubernetes 通过 cgroups 实现 Pod 的 resources.limits 和 resources.requests。
 
-##<!-- chunk: Cgroups v2 控制器详解 -->## Cgroups v2 控制器详解
+## Cgroups v2 控制器详解
 
 | 控制器 | 功能 | 关键参数 | Kubernetes 对应 |
 |:---|:---|:---|:---|
@@ -247,7 +247,7 @@ Cgroups (Control Groups) 实现 Linux 内核级别的资源限制、优先级分
 | **rdma** | RDMA 资源 | rdma.max | RDMA 设备限制 |
 | **misc** | 杂项设备 | misc.max | 其他设备限制 |
 
-##<!-- chunk: Cgroups v2 实操 -->## Cgroups v2 实操
+## Cgroups v2 实操
 
 ```bash
 # 查看 cgroups 版本和挂载
@@ -317,11 +317,11 @@ cat /sys/fs/cgroup/mycontainer/cgroup.procs
 
 ---
 
-#<!-- chunk: OverlayFS 详解 -->## OverlayFS 详解
+## OverlayFS 详解
 
 OverlayFS 是 Linux 内核的联合文件系统，Docker 和 Kubernetes 使用它来实现镜像的分层存储和容器的写时复制（Copy-on-Write）。
 
-##<!-- chunk: OverlayFS 架构 -->## OverlayFS 架构
+## OverlayFS 架构
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -359,7 +359,10 @@ OverlayFS 是 Linux 内核的联合文件系统，Docker 和 Kubernetes 使用�
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: OverlayFS 实操 -->## OverlayFS 实操
+## OverlayFS 实操
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
 ```bash
 # Docker 的 overlay2 存储驱动
@@ -420,14 +423,14 @@ cat /tmp/overlay/upper/file3.txt    # 新文件在 upper 层
 
 # 清理
 umount /tmp/overlay/merged
-rm -rf /tmp/overlay
+rm -rf /tmp/overlay  # ⚠️ 删除系统/数据文件
 ```
 
 ---
 
-#<!-- chunk: 容器安全特性 -->## 容器安全特性
+## 容器安全特性
 
-##<!-- chunk: Linux Capabilities -->## Linux Capabilities
+## Linux Capabilities
 
 Linux Capabilities 将传统的 root 权限细分为约 40 种独立的能力，容器运行时默认只保留必要的 capabilities。
 
@@ -483,7 +486,7 @@ setcap -r /usr/bin/python3
 # CAP_SETFCAP
 ```
 
-##<!-- chunk: Seccomp (Secure Computing Mode) -->## Seccomp (Secure Computing Mode)
+## Seccomp (Secure Computing Mode)
 
 Seccomp 限制进程可以使用的系统调用，是容器安全的重要防线。
 
@@ -545,7 +548,7 @@ docker run --security-opt seccomp=unconfined nginx
 
 <!-- chunk: 常用命令参考 -->## 常用命令参考
 
-#<!-- chunk: 容器调试命令 -->## 容器调试命令
+## 容器调试命令
 
 ```bash
 # 查看容器进程信息
@@ -579,7 +582,7 @@ nsenter --target <pid> --net iptables -t nat -L -n
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: 容器性能优化 -->## 容器性能优化
+## 容器性能优化
 
 ```bash
 # 1. 镜像大小优化
@@ -604,7 +607,7 @@ dockerd --log-driver=json-file --log-opt max-size=10m --log-opt max-file=3
 
 <!-- chunk: 安全加固 -->## 安全加固
 
-#<!-- chunk: 容器安全最佳实践 -->## 容器安全最佳实践
+## 容器安全最佳实践
 
 ```yaml
 # Kubernetes Pod 安全最佳实践
@@ -654,7 +657,7 @@ spec:
 
 <!-- chunk: 与 Kubernetes 的关系 -->## 与 Kubernetes 的关系
 
-#<!-- chunk: 容器运行时接口 (CRI) -->## 容器运行时接口 (CRI)
+## 容器运行时接口 (CRI)
 
 Kubernetes 通过 CRI (Container Runtime Interface) 与容器运行时交互，支持 containerd、CRI-O 等：
 
@@ -710,7 +713,10 @@ Kubernetes 通过 CRI (Container Runtime Interface) 与容器运行时交互，�
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 容器常见问题 -->## 容器常见问题
+## 容器常见问题
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
 ```bash
 # 容器无法启动
@@ -735,12 +741,12 @@ cat /sys/fs/cgroup/.../memory.max
 
 # overlay2 磁盘空间不足
 docker system df                     # 查看 Docker 磁盘使用
-docker system prune -a               # 清理未使用的镜像和容器
+docker system prune -a               # 清理未使用的镜像和容器  # ⚠️ 强制清理，可能杀运行中容器
 ```
 
 ---
 
-#<!-- chunk: 手动创建容器 -->## 手动创建容器
+## 手动创建容器
 
 理解容器底层原理的最佳方式是手动创建一个容器。以下步骤展示了容器运行时的核心操作：
 
@@ -768,7 +774,7 @@ unshare --pid --fork --mount --uts --ipc --net \
 # - 独立的网络 (只有 lo 接口)
 ```
 
-##<!-- chunk: 使用 runc 创建 OCI 标准容器 -->## 使用 runc 创建 OCI 标准容器
+## 使用 runc 创建 OCI 标准容器
 
 ```bash
 # 1. 创建 bundle 目录
@@ -792,7 +798,7 @@ runc list
 runc exec mycontainer ps aux
 ```
 
-##<!-- chunk: 容器运行时对比 -->## 容器运行时对比
+## 容器运行时对比
 
 | 特性 | runc | crun | containerd | CRI-O |
 |:---|:---|:---|:---|:---|
@@ -802,7 +808,7 @@ runc exec mycontainer ps aux
 | **rootless** | 支持 | 支持 | 支持 | 支持 |
 | **K8s 使用** | 底层运行时 | 底层运行时 | 直接使用 | 直接使用 |
 
-#<!-- chunk: 容器镜像安全扫描 -->## 容器镜像安全扫描
+## 容器镜像安全扫描
 
 ```bash
 # Trivy - 镜像漏洞扫描
@@ -820,7 +826,10 @@ kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metada
   done
 ```
 
-#<!-- chunk: 容器运行时安全监控 -->## 容器运行时安全监控
+## 容器运行时安全监控
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # Falco - 运行时安全监控
@@ -844,7 +853,7 @@ kubectl logs -n falco -l app=falco -f
   tags: [container, shell]
 ```
 
-#<!-- chunk: rootless 容器 -->## rootless 容器
+## rootless 容器
 
 rootless 容器是容器安全的重要发展方向，它允许非 root 用户运行容器，即使容器被攻破，攻击者也只能获得普通用户权限，无法影响宿主机系统。
 
@@ -891,3 +900,5 @@ cat /etc/subgid
 - 07-linux-security-hardening
 - 09-linux-operations-basics
 - 99-linux-commands-reference
+
+```

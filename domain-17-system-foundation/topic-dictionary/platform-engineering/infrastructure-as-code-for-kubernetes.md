@@ -36,13 +36,14 @@ prerequisites:
 - etcd-basics
 - policy-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # [[Kubernetes|Kubernetes]] 基础设施即代码（IaC）
 
 ## 概述
 
-**基础设施即代码（[[Infrastructure as Code|Infrastructure as Code]], IaC）** 是通过代码和声明式配置文件来管理和配置基础设施的实践。在 Kubernetes 生态中，IaC 不仅包括集群本身的创建（Terraform / Pulumi / [[Crossplane|Crossplane]]），还包括集群内部资源的编排（YAML / [[Helm|Helm]] / Kustomize / GitOps）。2026 年的最佳实践要求企业建立**从底层云资源到 K8s 应用配置的完整 IaC 流水线**，实现版本控制、可审计、可重复和自动化的基础设施管理。
+**基础设施即代码（[[concepts/infrastructure-as-code.md|Infrastructure as Code]], IaC）** 是通过代码和声明式配置文件来管理和配置基础设施的实践。在 Kubernetes 生态中，IaC 不仅包括集群本身的创建（Terraform / Pulumi / [[Crossplane|Crossplane]]），还包括集群内部资源的编排（YAML / [[Helm|Helm]] / Kustomize / GitOps）。2026 年的最佳实践要求企业建立**从底层云资源到 K8s 应用配置的完整 IaC 流水线**，实现版本控制、可审计、可重复和自动化的基础设施管理。
 
 ## 核心概念/原理
 
@@ -303,6 +304,4 @@ snyk iac test
 - [OpenTofu - Open Source Terraform Fork](https://opentofu.org/docs/)
 
 ## Related
-
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

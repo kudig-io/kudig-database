@@ -361,8 +361,8 @@ Spot 实例叠加 Graviton = 最高性价比组合
 
 ## Related
 
-- [[entities/kubernetes|kubernetes]]
-- [[entities/cni|cni]]
-- [[entities/containerd|containerd]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/docker|docker]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/cni.md|cni]]
+- [[entities/containerd.md|containerd]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]

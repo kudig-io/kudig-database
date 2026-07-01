@@ -52,7 +52,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-title: [[Kubernetes|Kubernetes]] 平台工程与内部开发者平台 ([[synthesis/platform-engineering-sre|Platform Engineering]] and Internal Developer Platform)
+title: [[Kubernetes|Kubernetes]] 平台工程与内部开发者平台 ([[concepts/platform-engineering-sre.md|Platform Engineering]] and Internal Developer Platform)
 description: '**作者:** 平台工程架构专家 | **版本:** v1.0 | **更新时间:** 2026-03-03 | **适用场景:** 开发者平台建设、DevEx优化、自助服务
   | **复杂度:** ⭐⭐⭐⭐⭐'
 category: papers
@@ -129,7 +129,7 @@ k8s_versions:
 
 <!-- chunk: 1. 平台工程背景与核心理念 -->## 1. 平台工程背景与核心理念
 
-#<!-- chunk: 1.1 行业背景与驱动力 -->## 1.1 行业背景与驱动力
+## 1.1 行业背景与驱动力
 
 随着云原生技术栈的日趋复杂，开发者需要掌握的工具和概念呈指数级增长：Kubernetes、服务网格、可观测性栈、CI/CD 流水线、安全合规、成本管理……**认知负载（Cognitive Overload）** 问题成为制约研发效能的关键瓶颈。
 
@@ -154,7 +154,7 @@ k8s_versions:
 └── 实际业务逻辑开发                     → 仅剩 10%
 ```
 
-#<!-- chunk: 1.2 平台工程 vs DevOps vs SRE 定位 -->## 1.2 平台工程 vs DevOps vs SRE 定位
+## 1.2 平台工程 vs DevOps vs SRE 定位
 
 三者并非替代关系，而是互补的实践体系：
 
@@ -185,7 +185,7 @@ graph TB
 | 服务对象 | 应用开发团队 | 整个工程组织 | 运维与可靠性 |
 | 技术重心 | 平台产品化 | 自动化与协作 | 监控与响应 |
 
-#<!-- chunk: 1.3 Team Topologies 与平台团队模型 -->## 1.3 Team Topologies 与平台团队模型
+## 1.3 Team Topologies 与平台团队模型
 
 Matthew Skelton 和 Manuel Pais 的 **Team Topologies** 框架为平台工程提供了组织模型基础：
 
@@ -220,7 +220,7 @@ graph LR
 
 <!-- chunk: 2. IDP 架构设计 -->## 2. IDP 架构设计
 
-#<!-- chunk: 2.1 IDP 能力层次模型 -->## 2.1 IDP 能力层次模型
+## 2.1 IDP 能力层次模型
 
 ```mermaid
 graph TB
@@ -241,7 +241,7 @@ graph TB
     style L1 fill:#2C3E50,color:#fff
 ```
 
-#<!-- chunk: 2.2 Platform API 设计原则 -->## 2.2 Platform API 设计原则
+## 2.2 Platform API 设计原则
 
 优秀的 Platform API 应遵循以下设计原则：
 
@@ -298,7 +298,7 @@ platform_api_design_principles:
       - external_access: "对外暴露服务"
 ```
 
-#<!-- chunk: 2.3 平台团队组织模型 -->## 2.3 平台团队组织模型
+## 2.3 平台团队组织模型
 
 ```mermaid
 graph TB
@@ -338,7 +338,7 @@ graph TB
 
 <!-- chunk: 3. Backstage 平台门户实践 -->## 3. Backstage 平台门户实践
 
-#<!-- chunk: 3.1 Backstage 项目概述 -->## 3.1 Backstage 项目概述
+## 3.1 Backstage 项目概述
 
 [Backstage](https://backstage.io) 由 Spotify 开源，2022 年成为 **CNCF Incubating** 项目，2024 年晋升为 **CNCF Graduated** 项目。它是目前最广泛采用的开发者门户框架，被 Spotify、Netflix、American Airlines、Box 等数百家企业使用。
 
@@ -352,7 +352,7 @@ graph TB
 | **Search** | 跨所有数据源的统一搜索 |
 | **Plugins** | 可扩展插件生态，支持集成任意工具 |
 
-#<!-- chunk: 3.2 Backstage 架构图 -->## 3.2 Backstage 架构图
+## 3.2 Backstage 架构图
 
 ```mermaid
 graph TB
@@ -402,7 +402,7 @@ graph TB
     style SCAF fill:#E67E22,color:#fff
 ```
 
-#<!-- chunk: 3.3 在 Kubernetes 上部署 Backstage -->## 3.3 在 Kubernetes 上部署 Backstage
+## 3.3 在 Kubernetes 上部署 Backstage
 
 ```yaml
 # backstage-deployment.yaml
@@ -654,7 +654,7 @@ spec:
                   number: 80
 ```
 
-#<!-- chunk: 3.4 自定义软件模板（Scaffolder Template） -->## 3.4 自定义软件模板（Scaffolder Template）
+## 3.4 自定义软件模板（Scaffolder Template）
 
 ```yaml
 # template-spring-boot-service.yaml
@@ -835,7 +835,7 @@ spec:
           4. 在 Backstage 中查看服务状态
 ```
 
-#<!-- chunk: 3.5 Kubernetes Plugin 集成配置 -->## 3.5 Kubernetes Plugin 集成配置
+## 3.5 Kubernetes Plugin 集成配置
 
 ```yaml
 # backstage app-config.yaml 中的 K8s plugin 配置
@@ -882,7 +882,7 @@ kubernetes:
 
 <!-- chunk: 4. Kratix 多集群 IDP 管理 -->## 4. Kratix 多集群 IDP 管理
 
-#<!-- chunk: 4.1 Kratix 简介与架构 -->## 4.1 Kratix 简介与架构
+## 4.1 Kratix 简介与架构
 
 [Kratix](https://kratix.io) 是由 Syntasso 开发的开源框架，专为构建平台即产品（Platform as a Product）设计。它通过 **Promise** 概念将平台能力封装为可组合的服务，并通过 GitOps 工作流将请求分发到多个工作集群。
 
@@ -927,7 +927,7 @@ graph TB
     style DEV fill:#E67E22,color:#fff
 ```
 
-#<!-- chunk: 4.2 Promise 定义示例（自助服务数据库） -->## 4.2 Promise 定义示例（自助服务数据库）
+## 4.2 Promise 定义示例（自助服务数据库）
 
 ```yaml
 # kratix-postgresql-promise.yaml
@@ -1068,7 +1068,7 @@ spec:
   enableBackup: true
 ```
 
-#<!-- chunk: 4.3 GitOps 工作流集成 -->## 4.3 GitOps 工作流集成
+## 4.3 GitOps 工作流集成
 
 ```yaml
 # Flux HelmRelease 用于工作集群同步 Kratix 输出
@@ -1115,7 +1115,7 @@ spec:
 
 <!-- chunk: 5. 黄金路径设计与治理 -->## 5. 黄金路径设计与治理
 
-#<!-- chunk: 5.1 三条核心黄金路径 -->## 5.1 三条核心黄金路径
+## 5.1 三条核心黄金路径
 
 黄金路径（Golden Path）是平台团队为常见业务场景预先设计的标准化端到端路径，包含从代码到生产的完整工具链配置：
 
@@ -1151,7 +1151,7 @@ graph LR
     style D1 fill:#E67E22,color:#fff
 ```
 
-#<!-- chunk: 5.2 后端服务黄金路径模板内容 -->## 5.2 后端服务黄金路径模板内容
+## 5.2 后端服务黄金路径模板内容
 
 ```yaml
 # golden-path-backend-service.yaml
@@ -1290,7 +1290,7 @@ golden_path:
         condition: restart_count > 3
         severity: critical
 
-#<!-- chunk: 5.3 黄金路径偏差治理 -->## 5.3 黄金路径偏差治理
+## 5.3 黄金路径偏差治理
 
 ```yaml
 # deviation-governance-policy.yaml
@@ -1335,7 +1335,7 @@ spec:
 
 <!-- chunk: 6. 开发者体验指标体系 -->## 6. 开发者体验指标体系
 
-#<!-- chunk: 6.1 DORA 指标集成 -->## 6.1 DORA 指标集成
+## 6.1 DORA 指标集成
 
 DORA（DevOps Research and Assessment）四项指标是衡量软件交付效能的行业标准：
 
@@ -1396,7 +1396,7 @@ dora_metrics:
       calculation: "incident_resolved_time - incident_created_time"
 ```
 
-#<!-- chunk: 6.2 SPACE 框架应用 -->## 6.2 SPACE 框架应用
+## 6.2 SPACE 框架应用
 
 SPACE 框架由 GitHub/Microsoft 研究团队提出，提供更全面的开发者生产力度量视角：
 
@@ -1478,7 +1478,7 @@ space_framework:
         target: "< 2 天（使用黄金路径模板）"
 ```
 
-#<!-- chunk: 6.3 平台 NPS 监测配置 -->## 6.3 平台 NPS 监测配置
+## 6.3 平台 NPS 监测配置
 
 ```yaml
 # platform-nps-cronjob.yaml
@@ -1520,7 +1520,7 @@ spec:
 
 <!-- chunk: 7. 自助服务能力构建 -->## 7. 自助服务能力构建
 
-#<!-- chunk: 7.1 Namespace 自动化创建（Crossplane + Backstage） -->## 7.1 Namespace 自动化创建（Crossplane + Backstage）
+## 7.1 Namespace 自动化创建（Crossplane + Backstage）
 
 ```mermaid
 sequenceDiagram
@@ -1553,7 +1553,7 @@ sequenceDiagram
     end
 ```
 
-#<!-- chunk: 7.2 Crossplane Composition 配置 -->## 7.2 Crossplane Composition 配置
+## 7.2 Crossplane Composition 配置
 
 ```yaml
 # crossplane-namespace-composition.yaml
@@ -1763,7 +1763,7 @@ spec:
                   description: "AD 组名，用于 RBAC 绑定"
 ```
 
-#<!-- chunk: 7.3 数据库自助服务请求流程 -->## 7.3 数据库自助服务请求流程
+## 7.3 数据库自助服务请求流程
 
 ```mermaid
 flowchart TD
@@ -1800,7 +1800,7 @@ flowchart TD
     style KRATIX fill:#9B59B6,color:#fff
 ```
 
-#<!-- chunk: 7.4 环境克隆能力 -->## 7.4 环境克隆能力
+## 7.4 环境克隆能力
 
 平台提供"环境克隆"能力，允许开发者基于生产环境快速创建测试环境：
 
@@ -1857,7 +1857,7 @@ spec:
 
 <!-- chunk: 8. 最佳实践与反模式 -->## 8. 最佳实践与反模式
 
-#<!-- chunk: 8.1 Platform as Product 思维 -->## 8.1 Platform as Product 思维
+## 8.1 Platform as Product 思维
 
 ```yaml
 # platform-as-product-principles.yaml
@@ -1868,7 +1868,7 @@ platform_as_product:
     practices:
       - name: "用户研究驱动"
         description: "定期与开发者进行用户访谈，理解真实痛点"
-        [[entities/cadence|cadence]]: "每季度至少 10 次 1:1 开发者访谈"
+        [[entities/cadence.md|cadence]]: "每季度至少 10 次 1:1 开发者访谈"
 
       - name: "产品路线图公开"
         description: "平台路线图对所有工程师透明可见"
@@ -1894,7 +1894,7 @@ platform_as_product:
           - "CI 流水线启动时间: P95 < 30 秒"
 ```
 
-#<!-- chunk: 8.2 避免过度抽象原则 -->## 8.2 避免过度抽象原则
+## 8.2 避免过度抽象原则
 
 ```yaml
 # anti-patterns.yaml
@@ -1946,7 +1946,7 @@ platform_anti_patterns:
       用策略引擎（OPA/Kyverno）替代人工审批低风险请求。
 ```
 
-#<!-- chunk: 8.3 平台成熟度评估清单 -->## 8.3 平台成熟度评估清单
+## 8.3 平台成熟度评估清单
 
 ```yaml
 # platform-maturity-checklist.yaml
@@ -2023,7 +2023,7 @@ platform_maturity_checklist:
 
 <!-- chunk: 9. 未来趋势 -->## 9. 未来趋势
 
-#<!-- chunk: 9.1 AI Copilot 融入 IDP -->## 9.1 AI Copilot 融入 IDP
+## 9.1 AI Copilot 融入 IDP
 
 AI 能力正在深度融合进内部开发者平台，形成下一代 AI-augmented IDP：
 
@@ -2086,7 +2086,7 @@ ai_copilot_capabilities:
       - create_incident_summary
 ```
 
-#<!-- chunk: 9.2 平台工程标准化进展 -->## 9.2 平台工程标准化进展
+## 9.2 平台工程标准化进展
 
 ```yaml
 # 平台工程标准化趋势（2025-2026）
@@ -2124,7 +2124,7 @@ standardization_trends:
     salary_trend: "2025-2026 年平台工程师薪资溢价约 15-25%"
 ```
 
-#<!-- chunk: 9.3 技术演进路线图 -->## 9.3 技术演进路线图
+## 9.3 技术演进路线图
 
 ```mermaid
 gantt
@@ -2152,7 +2152,7 @@ gantt
     IDP 多租户隔离标准化           :         2026-01-01, 2026-12-31
 ```
 
-#<!-- chunk: 9.4 相关文档参考 -->## 9.4 相关文档参考
+## 9.4 相关文档参考
 
 本文与知识库中以下文档密切关联，建议结合阅读：
 
@@ -2193,7 +2193,7 @@ gantt
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -2214,4 +2214,4 @@ gantt
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

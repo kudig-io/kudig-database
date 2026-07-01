@@ -78,7 +78,7 @@ related_topics:
   - kubernetes
   - troubleshooting
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/[[domain-04-storage-data/README|README]].md
+  - domain-11-production-operations/topic-learn/public-training/one-month/[[domain-04-storage-data/README.md|README]].md
   - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-1-docker-basics.md
 ---
 ```
@@ -229,6 +229,9 @@ spec:
 
 组件交互流程:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 kubectl apply → API Server → etcd
                    ↓
@@ -332,7 +335,6 @@ Docker 镜像分层结构:
 (在此写下你的答案)
 
 
-
 ```
 
 **参考要点:**
@@ -343,6 +345,9 @@ Docker 镜像分层结构:
 - 不开启会导致: 同节点 Pod 可通信，跨节点 Pod 不通
 
 验证命令:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
 
 ```bash
 sysctl net.ipv4.ip_forward
@@ -360,7 +365,6 @@ echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.d/99-k8s.conf
 
 ```
 (在此写下你的答案)
-
 
 
 ```
@@ -433,6 +437,7 @@ docker info | grep "Storage Driver"
 Deployment (声明期望状态)
   └── ReplicaSet (版本管理，维护副本数)
         └── Pod (实际运行的容器组)
+
 ```
 
 | 资源 | 职责 | 生命周期 |
@@ -457,6 +462,9 @@ Deployment (声明期望状态)
 **参考答案:** 回滚到上一个版本的 Deployment
 
 相关命令:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 kubectl rollout history deployment/nginx
@@ -501,6 +509,9 @@ kubectl port-forward pod/nginx 8080:80 9090:9090
 **参考答案:** 显示节点资源使用情况，需要安装 metrics-server
 
 安装 metrics-server:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
@@ -591,6 +602,7 @@ kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.n
 
 ```bash
 kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}'
+
 ```
 
 ---
@@ -603,8 +615,6 @@ kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}'
 
 ```
 (在此写下你的答案)
-
-
 
 
 ```
@@ -655,8 +665,6 @@ Step 5: kubelet 执行
 
 ```
 (在此写下你的答案)
-
-
 
 
 ```
@@ -740,8 +748,6 @@ spec:
 (在此写下你的答案)
 
 
-
-
 ```
 
 **参考要点:**
@@ -760,8 +766,6 @@ spec:
 
 ```
 (在此写下你的答案)
-
-
 
 
 ```
@@ -797,9 +801,6 @@ kubectl get events --field-selector involvedObject.name=<name>
 (在此写下你的答案)
 
 
-
-
-
 ```
 
 **参考要点:**
@@ -830,9 +831,6 @@ API (Deployment + ClusterIP Service + HPA)
 (在此写下你的答案)
 
 
-
-
-
 ```
 
 **参考答案:**
@@ -859,6 +857,9 @@ spec:
 ```
 
 前提: frontend 命名空间需要有 `name: frontend` 标签:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 kubectl label namespace frontend name=frontend
@@ -893,9 +894,7 @@ kubectl label namespace frontend name=frontend
 1.
 
 
-
 2.
-
 
 
 3.
@@ -947,4 +946,6 @@ kubectl label namespace frontend name=frontend
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

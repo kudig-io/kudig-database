@@ -29,7 +29,7 @@ created: "2026-05-23"
 
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
-> **用途**: DNS (CoreDNS之外)、Load Balancer、VPN/隧道等非 [[entities/kubernetes|k8s]] 基础设施的问题排查
+> **用途**: DNS (CoreDNS之外)、Load Balancer、VPN/隧道等非 [[entities/kubernetes.md|k8s]] 基础设施的问题排查
 > **关联**: domain-14-linux, domain-03-networking-traffic
 
 ---
@@ -70,6 +70,9 @@ rndc flush  # 清除缓存
 | DNS 不解析 | `dig @localhost <domain>` | dnsmasq 未运行 | `systemctl restart dnsmasq` |
 | 上游 DNS 不工作 | `cat /etc/resolv.conf` | upstream DNS 配置错误 | 检查 /etc/dnsmasq.conf |
 | DHCP 冲突 | `journalctl -u dnsmasq` | IP 分配冲突 | 修复 DHCP 范围 |
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # Dnsmasq 日志
@@ -220,6 +223,9 @@ journalctl -u wg-quick@wg0 --since "10m"
 | IKE 握手失败 | `ipsec status` | 预共享密钥错误 | 检查 psk 配置 |
 | CHILD SA 未建立 | `ipsec status` | Phase 2 参数不匹配 | 检查 encryption/auth 算法 |
 | 隧道不稳定 | `ip xfrm state` | NAT-T 配置问题 | 检查 nat_traversal |
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # StrongSwan 诊断

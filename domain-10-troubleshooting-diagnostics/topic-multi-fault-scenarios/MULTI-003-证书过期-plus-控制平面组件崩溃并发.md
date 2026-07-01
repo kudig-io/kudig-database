@@ -4,6 +4,7 @@ type: "multi-fault"
 skills: ['06-certificate-expiry', '11-control-plane-failure']
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 title: "证书过期 + 控制平面组件崩溃并发"
 category: uncategorized
 tags: ["uncategorized", "visibility/public"]

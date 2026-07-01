@@ -62,7 +62,6 @@ created: "2026-05-23"
 ---
 
 
-
 # RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 
 ---
@@ -90,8 +89,6 @@ RBAC（Role-Based Access Control）和 ResourceQuota 是 [[Kubernetes|Kubernetes
   - `jq` >= 1.6（可选但推荐）
 - **监控系统**: Prometheus + kube-state-metrics >= v2.10（用于 trigger_metrics 匹配）
 - **可选**: `kubectl-who-can` 插件、`rbac-lookup` 工具
-
-> ⚠️ **重要**: 本 Skill 覆盖 RBAC、ResourceQuota、LimitRange 以及 Admission Controller（OPA/Gatekeeper/Kyverno）导致的访问拒绝和资源创建失败场景。
 
 ---
 
@@ -300,6 +297,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
 
 **Step D1.5**: Token 有效性检查
 - **命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查 Pod 中的 token 挂载
   kubectl exec -it POD_NAME -n NS -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
@@ -524,6 +525,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   kubectl get clusterrole ROLE_NAME
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 创建 RoleBinding（Namespace 级权限）
   kubectl create rolebinding BINDING_NAME \
@@ -542,6 +547,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   # 预期: yes
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl delete rolebinding BINDING_NAME -n TARGET_NS
   # 或
@@ -558,6 +567,11 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   kubectl api-resources | grep RESOURCE_NAME
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 使用 kubectl patch 添加规则
   kubectl patch role ROLE_NAME -n NS --type='json' -p='[
@@ -579,6 +593,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   # 预期: yes
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f role-backup.yaml
   ```
@@ -593,6 +611,11 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   kubectl top nodes
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案一：增加配额上限
   kubectl patch resourcequota QUOTA_NAME -n NS --type='merge' -p='{"spec":{"hard":{"requests.cpu":"10","requests.memory":"20Gi","pods":"50"}}}'
@@ -610,6 +633,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   # 预期: pod/test-pod created (dry run)
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 恢复原配额值
   kubectl patch resourcequota QUOTA_NAME -n NS --type='merge' -p='{"spec":{"hard":{"requests.cpu":"ORIGINAL_VALUE"}}}'
@@ -629,6 +656,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   kubectl get pods -n NS -o jsonpath='{range .items[*]}{.metadata.name}{": CPU="}{.spec.containers[*].resources.requests.cpu}{", Memory="}{.spec.containers[*].resources.requests.memory}{"\n"}{end}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 备份当前配置
   kubectl get limitrange -n NS -o yaml > limitrange-backup.yaml
@@ -654,6 +685,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   kubectl run test-pod --image=nginx -n NS --dry-run=server
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f limitrange-backup.yaml
   ```
@@ -663,6 +698,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
 - **影响说明**: 重建 Pod 会导致短暂中断，但会获得新的有效 Token。对于长期运行的 Pod，需要评估重启影响。
 - **审批提示**: "建议重启 Pod `<POD_NAME>` 以获取新的 ServiceAccount Token。该操作会导致 Pod 短暂中断。是否批准？"
 - **前置检查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 确认 Token 确实无效
   kubectl exec -it POD_NAME -n NS -- cat /var/run/secrets/kubernetes.io/serviceaccount/token | cut -d'.' -f2 | base64 -d 2>/dev/null | jq -r '.exp | . - now | . < 0'
@@ -670,6 +709,11 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   kubectl get pod POD_NAME -n NS -o jsonpath='{.spec.restartPolicy}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   # 方案一：删除并重建 Pod（适用于 Deployment/StatefulSet 管理的 Pod）
   kubectl delete pod POD_NAME -n NS
@@ -679,6 +723,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   # 通过应用程序配置使用新 Token
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
   ```bash
   # 检查新 Pod 的 Token 有效性
   kubectl exec -it NEW_POD_NAME -n NS -- curl -sk \
@@ -687,6 +735,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   # 预期: 返回 Namespace 列表而非 Unauthorized
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # Pod 删除后会自动重建（如果由控制器管理）
   # 如果是手动创建的 Pod，需要从备份恢复
@@ -705,6 +757,11 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   kubectl get clusterrole -l rbac.authorization.k8s.io/aggregate-to-edit=true
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   # 方案一：为子 Role 添加正确标签
   kubectl label clusterrole CHILD_ROLE rbac.authorization.k8s.io/aggregate-to-PARENT=true
@@ -729,6 +786,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   kubectl auth can-i --list --as=system:serviceaccount:NS:SA
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
   ```bash
   kubectl label clusterrole CHILD_ROLE rbac.authorization.k8s.io/aggregate-to-PARENT-
   ```
@@ -745,6 +806,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   kubectl get constraint CONSTRAINT_NAME -o jsonpath='{.status.violations}'
   ```
 - **执行命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
   ```bash
   # 方案一：添加例外（排除特定 Namespace）
   kubectl patch constraint CONSTRAINT_NAME --type='merge' -p='
@@ -775,6 +840,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   }'
   ```
 - **后置验证**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 重新尝试创建资源
   kubectl apply -f RESOURCE.yaml --dry-run=server
@@ -782,6 +851,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   kubectl get constraint CONSTRAINT_NAME -o jsonpath='{.status.totalViolations}'
   ```
 - **回滚命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   # 恢复原约束配置
   kubectl apply -f constraint-backup.yaml
@@ -801,6 +874,11 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
      echo "$(date): Emergency cluster-admin granted to SA_NAME by OPERATOR for REASON" >> /var/log/rbac-emergency.log
      ```
   2. **创建临时 ClusterRoleBinding**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
      ```bash
      kubectl create clusterrolebinding emergency-admin-SA_NAME \
        --clusterrole=cluster-admin \
@@ -815,12 +893,20 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
      kubectl apply -f emergency-binding-annotated.yaml
      ```
   3. **设置自动过期提醒**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      # 2小时后提醒撤销
      echo "kubectl delete clusterrolebinding emergency-admin-SA_NAME" | at now + 2 hours
      ```
   4. **验证并执行紧急操作**
   5. **问题解决后立即撤销**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      kubectl delete clusterrolebinding emergency-admin-SA_NAME
      ```
@@ -829,6 +915,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
   - 通知安全团队此次紧急授权
   - 设置 2 小时自动过期提醒
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
   ```bash
   kubectl delete clusterrolebinding emergency-admin-SA_NAME
   ```
@@ -850,6 +940,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
      kubectl get events -n NS > events-backup.txt
      ```
   3. **执行清理**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      # 清理已完成的 Pod
      kubectl delete pods -n NS --field-selector=status.phase=Succeeded
@@ -859,6 +953,11 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
      kubectl get pods -n NS -o json | jq -r '.items[] | select(.status.phase=="Evicted") | .metadata.name' | xargs -r kubectl delete pod -n NS
      ```
   4. **重置配额（如需要）**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      kubectl delete resourcequota QUOTA_NAME -n NS
      kubectl apply -f new-quota.yaml
@@ -896,6 +995,11 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
      - 设计 Role 层级结构
      - 确定聚合规则
   3. **逐步迁移**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
      ```bash
      # 创建新的 Role/ClusterRole
      kubectl apply -f new-roles/
@@ -912,6 +1016,10 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
      kubectl get events -A --field-selector reason=Forbidden --watch
      ```
 - **回滚方案**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
   ```bash
   kubectl apply -f rbac-full-backup.yaml
   ```
@@ -921,6 +1029,9 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied\|re
 ## 7. 验证确认
 
 ### 7.1 即时验证（修复后 1-2 分钟内）
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # V1: 确认权限已生效
@@ -1158,6 +1269,9 @@ kubectl exec -it POD_NAME -n NS -- curl -sk \
 
 ### A.1 RBAC 诊断命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # === 权限检查 ===
 # 检查特定操作权限
@@ -1204,6 +1318,9 @@ kubectl create token SA_NAME -n NS --duration=3600s
 ```
 
 ### A.2 Quota/LimitRange 诊断命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # === ResourceQuota 检查 ===
@@ -1531,4 +1648,6 @@ echo "检测完成"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+
+```

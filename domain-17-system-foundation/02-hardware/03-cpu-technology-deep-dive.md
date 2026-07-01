@@ -49,7 +49,7 @@ created: "2026-05-23"
 
 <!-- chunk: 服务器CPU厂商与产品线 -->## 服务器CPU厂商与产品线
 
-#<!-- chunk: Intel服务器处理器 -->## Intel服务器处理器
+## Intel服务器处理器
 
 ```yaml
 Intel Xeon产品线:
@@ -89,7 +89,7 @@ Intel Xeon产品线:
     应用: 超大规模AI、HPC
 ```
 
-#<!-- chunk: AMD服务器处理器 -->## AMD服务器处理器
+## AMD服务器处理器
 
 ```yaml
 AMD EPYC产品线:
@@ -140,7 +140,7 @@ AMD EPYC产品线:
       延迟: 优化的跨CCD访问
 ```
 
-#<!-- chunk: ARM服务器处理器 -->## ARM服务器处理器
+## ARM服务器处理器
 
 ```yaml
 ARM服务器处理器:
@@ -182,7 +182,7 @@ ARM服务器处理器:
 
 <!-- chunk: CPU微架构详解 -->## CPU微架构详解
 
-#<!-- chunk: 执行流水线 -->## 执行流水线
+## 执行流水线
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -239,7 +239,7 @@ ARM服务器处理器:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 分支预测技术 -->## 分支预测技术
+## 分支预测技术
 
 ```yaml
 分支预测器组件:
@@ -273,7 +273,7 @@ ARM服务器处理器:
   - 避免间接跳转
 ```
 
-#<!-- chunk: SIMD向量扩展 -->## SIMD向量扩展
+## SIMD向量扩展
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -315,7 +315,7 @@ ARM服务器处理器:
 
 <!-- chunk: CPU性能指标 -->## CPU性能指标
 
-#<!-- chunk: 关键性能参数 -->## 关键性能参数
+## 关键性能参数
 
 | 参数 | 含义 | 典型值范围 | 影响因素 |
 |------|------|------------|----------|
@@ -328,7 +328,7 @@ ARM服务器处理器:
 | 内存带宽 | 内存吞吐能力 | 200-500GB/s | 通道数/频率 |
 | PCIe通道 | I/O扩展能力 | 80-128通道 | 外设支持 |
 
-#<!-- chunk: IPC与性能评估 -->## IPC与性能评估
+## IPC与性能评估
 
 ```yaml
 IPC (Instructions Per Cycle):
@@ -370,7 +370,7 @@ IPC (Instructions Per Cycle):
       - HPC LINPACK
 ```
 
-#<!-- chunk: CPU性能分析 -->## CPU性能分析
+## CPU性能分析
 
 ```python
 # CPU性能分析工具
@@ -478,7 +478,7 @@ class CPUProfiler:
 
 <!-- chunk: CPU选型指南 -->## CPU选型指南
 
-#<!-- chunk: 应用场景匹配 -->## 应用场景匹配
+## 应用场景匹配
 
 ```yaml
 CPU选型矩阵:
@@ -553,7 +553,7 @@ CPU选型矩阵:
       - AMD EPYC 9654
 ```
 
-#<!-- chunk: 性价比分析 -->## 性价比分析
+## 性价比分析
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -590,7 +590,7 @@ CPU选型矩阵:
 
 <!-- chunk: CPU调优与优化 -->## CPU调优与优化
 
-#<!-- chunk: BIOS/UEFI设置 -->## BIOS/UEFI设置
+## BIOS/UEFI设置
 
 ```yaml
 CPU相关BIOS设置:
@@ -640,7 +640,7 @@ CPU相关BIOS设置:
       建议: 按需配置
 ```
 
-#<!-- chunk: Linux内核调优 -->## Linux内核调优
+## Linux内核调优
 
 ```bash
 #!/bin/bash
@@ -676,7 +676,7 @@ done
 # GRUB_CMDLINE_LINUX="isolcpus=2-7 nohz_full=2-7 rcu_nocbs=2-7"
 ```
 
-#<!-- chunk: 进程亲和性配置 -->## 进程亲和性配置
+## 进程亲和性配置
 
 ```python
 # CPU亲和性管理
@@ -780,7 +780,7 @@ class CPUAffinityManager:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-31-hardware KUDIG Database — Global MOC
-- [[domain-17-system-foundation/README|Domain 31 - 硬件基础设施]]
+- [[domain-17-system-foundation/README.md|Domain 31 - 硬件基础设施]]
 - index.md|Domain-31 硬件 — 开源项目索引]]
 - 云平台硬件基础架构
 - 服务器架构原理

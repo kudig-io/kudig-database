@@ -45,7 +45,7 @@ K8up 是一个 Kubernetes 备份 Operator，基于 Restic 实现 PersistentVolum
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -62,24 +62,24 @@ K8up 是一个 Kubernetes 备份 Operator，基于 Restic 实现 PersistentVolum
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
-- [[entities/crd-custom-resources|crd-custom-resources]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]
-- [[concepts/secrets-management|secrets-management]]
+- [[concepts/secrets-management.md|secrets-management]]
 - [[pod-lifecycle]]
 
 ## Related
 
 - [[backstage]] — Backstage
-- [[entities/emissary-ingress|ingress]]]] — Emissary-Ingress
+- [[entities/emissary-ingress.md|ingress]]]] — Emissary-Ingress
 - [[kubevela]] — KubeVela
-- [[piraeus-datastore]] — [[Piraeus Datastore|Piraeus Datastore]]
+- [[piraeus-datastore]] — Piraeus Datastore
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - k8up
-- [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-storage.md|CNCF 存储与数据库项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

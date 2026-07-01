@@ -46,7 +46,7 @@ Minor Improvements:
 * Add solution message for when `cri-docker` is missing [#14483](https://github.com/kubernetes/minikube/pull/14483)
 * Limit number of audit entries [#14695](https://github.com/kubernetes/minikube/pull/14695)
 * Optimize audit logging [#14596](https://github.com/kubernetes/minikube/pull/14596)
-* Show the [[Container Runtime|container runtime]] when running without kubernetes #13432  [#14200](https://github.com/kubernetes/minikube/pull/14200)
+* Show the [[concepts/container-runtime.md|container runtime]] when running without kubernetes #13432  [#14200](https://github.com/kubernetes/minikube/pull/14200)
 * Add warning when enabling thrid-party addons [#14499](https://github.com/kubernetes/minikube/pull/14499)
 
 Bug fixes:

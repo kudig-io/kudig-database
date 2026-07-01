@@ -74,7 +74,7 @@ created: "2026-05-23"
 
 <!-- chunk: 自动化运维体系架构 -->## 自动化运维体系架构
 
-#<!-- chunk: 企业级自动化运维全景图 -->## 企业级自动化运维全景图
+## 企业级自动化运维全景图
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -113,24 +113,24 @@ created: "2026-05-23"
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 自动化成熟度模型 -->## 自动化成熟度模型
+## 自动化成熟度模型
 
-##<!-- chunk: Level 1: 手动操作 -->## Level 1: 手动操作
+## Level 1: 手动操作
 - 手工构建镜像
 - 手工部署容器
 - 手工配置环境
 
-##<!-- chunk: Level 2: 脚本化 -->## Level 2: 脚本化
+## Level 2: 脚本化
 - Shell 脚本自动化
 - 基础的 CI/CD 流水线
 - 简单的配置管理
 
-##<!-- chunk: Level 3: 平台化 -->## Level 3: 平台化
+## Level 3: 平台化
 - 完整的 CI/CD 平台
 - 基础设施即代码
 - 自动化测试覆盖
 
-##<!-- chunk: Level 4: 智能化 (推荐) -->## Level 4: 智能化 (推荐)
+## Level 4: 智能化 (推荐)
 - AI 辅助决策
 - 自适应部署策略
 - 预测性运维
@@ -138,9 +138,9 @@ created: "2026-05-23"
 
 <!-- chunk: 基础设施即代码 (IaC) -->## 基础设施即代码 (IaC)
 
-#<!-- chunk: Docker Compose 生产级配置 -->## Docker Compose 生产级配置
+## Docker Compose 生产级配置
 
-##<!-- chunk: 多环境配置管理 -->## 多环境配置管理
+## 多环境配置管理
 ```yaml
 # docker-compose.base.yml - 基础配置
 version: '3.8'
@@ -207,7 +207,7 @@ services:
       start_period: 40s
 ```
 
-##<!-- chunk: 配置文件组织结构 -->## 配置文件组织结构
+## 配置文件组织结构
 ```bash
 # 项目配置结构
 .
@@ -230,9 +230,9 @@ services:
     └── health-check.sh
 ```
 
-#<!-- chunk: Terraform Docker Provider 配置 -->## Terraform Docker Provider 配置
+## Terraform Docker Provider 配置
 
-##<!-- chunk: 基础设施定义 -->## 基础设施定义
+## 基础设施定义
 ```hcl
 # main.tf
 terraform {
@@ -348,7 +348,7 @@ resource "docker_service" "app" {
 }
 ```
 
-##<!-- chunk: 变量和输出配置 -->## 变量和输出配置
+## 变量和输出配置
 ```hcl
 # variables.tf
 variable "environment" {
@@ -394,9 +394,9 @@ output "service_name" {
 
 <!-- chunk: CI/CD 流水线设计 -->## CI/CD 流水线设计
 
-#<!-- chunk: GitHub Actions 流水线 -->## GitHub Actions 流水线
+## GitHub Actions 流水线
 
-##<!-- chunk: 完整的 CI/CD 工作流 -->## 完整的 CI/CD 工作流
+## 完整的 CI/CD 工作流
 ```yaml
 # .github/workflows/ci-cd.yml
 name: CI/CD Pipeline
@@ -551,9 +551,9 @@ jobs:
           curl -f http://deploy-host:${{ matrix.environment == 'staging' && 8080 || 80 }}/health || exit 1
 ```
 
-#<!-- chunk: GitLab CI/CD 配置 -->## GitLab CI/CD 配置
+## GitLab CI/CD 配置
 
-##<!-- chunk: 多阶段流水线 -->## 多阶段流水线
+## 多阶段流水线
 ```yaml
 # .gitlab-ci.yml
 stages:
@@ -649,9 +649,9 @@ deploy-production:
 
 <!-- chunk: 镜像构建自动化 -->## 镜像构建自动化
 
-#<!-- chunk: 多阶段构建优化 -->## 多阶段构建优化
+## 多阶段构建优化
 
-##<!-- chunk: 生产级 Dockerfile 示例 -->## 生产级 Dockerfile 示例
+## 生产级 Dockerfile 示例
 ```dockerfile
 # Dockerfile.prod
 # 构建阶段
@@ -710,9 +710,9 @@ ENTRYPOINT ["dumb-init", "--"]
 CMD ["npm", "start"]
 ```
 
-#<!-- chunk: 构建缓存优化策略 -->## 构建缓存优化策略
+## 构建缓存优化策略
 
-##<!-- chunk: BuildKit 高级特性 -->## BuildKit 高级特性
+## BuildKit 高级特性
 ```dockerfile
 # 利用 BuildKit 特性
 # syntax=docker/dockerfile:1.4
@@ -737,7 +737,7 @@ RUN if [ "$BUILD_ENV" = "production" ]; then \
     fi
 ```
 
-##<!-- chunk: 构建脚本自动化 -->## 构建脚本自动化
+## 构建脚本自动化
 ```bash
 #!/bin/bash
 # build.sh - 智能构建脚本
@@ -801,9 +801,9 @@ main "$@"
 
 <!-- chunk: 容器部署自动化 -->## 容器部署自动化
 
-#<!-- chunk: 蓝绿部署策略 -->## 蓝绿部署策略
+## 蓝绿部署策略
 
-##<!-- chunk: Docker Compose 蓝绿部署 -->## Docker Compose 蓝绿部署
+## Docker Compose 蓝绿部署
 ```bash
 #!/bin/bash
 # blue-green-deploy.sh
@@ -872,9 +872,9 @@ docker stack rm $CURRENT_STACK
 echo "Deployment completed successfully"
 ```
 
-#<!-- chunk: 滚动更新配置 -->## 滚动更新配置
+## 滚动更新配置
 
-##<!-- chunk: [[Kubernetes|Kubernetes]] 滚动更新策略 -->## Kubernetes 滚动更新策略
+## Kubernetes 滚动更新策略
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -928,9 +928,9 @@ spec:
 
 <!-- chunk: 配置管理与密钥管理 -->## 配置管理与密钥管理
 
-#<!-- chunk: HashiCorp Vault 集成 -->## HashiCorp Vault 集成
+## HashiCorp Vault 集成
 
-##<!-- chunk: 密钥管理架构 -->## 密钥管理架构
+## 密钥管理架构
 ```yaml
 # vault-agent 配置
 auto_auth:
@@ -954,7 +954,7 @@ template:
     perms: 0644
 ```
 
-##<!-- chunk: 应用配置模板 -->## 应用配置模板
+## 应用配置模板
 ```go
 // app-config.ctmpl
 DATABASE_URL=postgresql://{{ with secret "database/creds/app" }}{{ .Data.username }}:{{ .Data.password }}@postgres:5432/app{{ end }}
@@ -964,9 +964,9 @@ JWT_SECRET={{ with secret "app/jwt-secret" }}{{ .Data.secret }}{{ end }}
 LOG_LEVEL={{ env "LOG_LEVEL" | default "info" }}
 ```
 
-#<!-- chunk: 配置热更新机制 -->## 配置热更新机制
+## 配置热更新机制
 
-##<!-- chunk: Consul Template 集成 -->## Consul Template 集成
+## Consul Template 集成
 ```go
 // 配置监听和热更新
 package main
@@ -1076,9 +1076,9 @@ func main() {
 
 <!-- chunk: 监控告警自动化 -->## 监控告警自动化
 
-#<!-- chunk: [[Prometheus|Prometheus]] 监控集成 -->## Prometheus 监控集成
+## Prometheus 监控集成
 
-##<!-- chunk: 服务发现配置 -->## 服务发现配置
+## 服务发现配置
 ```yaml
 # prometheus.yml
 global:
@@ -1116,7 +1116,7 @@ scrape_configs:
       - targets: ['node-exporter:9100']
 ```
 
-##<!-- chunk: 告警规则定义 -->## 告警规则定义
+## 告警规则定义
 ```yaml
 # alert.rules.yml
 groups:
@@ -1159,9 +1159,9 @@ groups:
           description: "Disk space on {{ $labels.mountpoint }} is below 15%"
 ```
 
-#<!-- chunk: 自动化运维脚本 -->## 自动化运维脚本
+## 自动化运维脚本
 
-##<!-- chunk: 健康检查和自愈脚本 -->## 健康检查和自愈脚本
+## 健康检查和自愈脚本
 ```bash
 #!/bin/bash
 # auto-healing.sh
@@ -1332,9 +1332,9 @@ main "$@"
 
 <!-- chunk: 灾备与回滚机制 -->## 灾备与回滚机制
 
-#<!-- chunk: 数据备份策略 -->## 数据备份策略
+## 数据备份策略
 
-##<!-- chunk: 自动化备份脚本 -->## 自动化备份脚本
+## 自动化备份脚本
 ```bash
 #!/bin/bash
 # backup-docker-data.sh
@@ -1422,9 +1422,9 @@ main() {
 main "$@"
 ```
 
-#<!-- chunk: 快速回滚机制 -->## 快速回滚机制
+## 快速回滚机制
 
-##<!-- chunk: 回滚脚本 -->## 回滚脚本
+## 回滚脚本
 ```bash
 #!/bin/bash
 # rollback.sh
@@ -1499,7 +1499,7 @@ echo "Rollback process completed"
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-13-container-runtime KUDIG Database — Global MOC
-- [[domain-13-container-runtime/README|Docker 容器技术深度解析]]
+- [[domain-13-container-runtime/README.md|Docker 容器技术深度解析]]
 - Domain-13 Docker — 开源项目索引
 - Docker 架构概述与核心概念
 - Docker 镜像管理详解
@@ -1520,4 +1520,4 @@ echo "Rollback process completed"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

@@ -5,6 +5,7 @@ tags: ['pod', 'runtime', 'resource', 'visibility/public']
 sources: ["conceptss/"]
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 status: stub
 ---
 # Pod Overhead
@@ -20,4 +21,4 @@ Pod Overhead 是 Kubernetes 中用于计算 Pod 运行时额外资源开销的�
 
 ## 相关链接
 
-- [[concepts/kubernetes|Kubernetes]] — 核心概念
+- [[concepts/kubernetes.md|Kubernetes]] — 核心概念

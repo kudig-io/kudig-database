@@ -34,13 +34,14 @@ prerequisites:
 - cilium-basics
 - cni-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 集群网络（Cluster Networking）
 
 ## 概述
 
-网络是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 的核心组成部分，理解其预期工作方式对于集群管理员至关重要。Kubernetes 需要解决四种不同的网络通信问题：容器到容器通信、Pod 到 Pod 通信、Pod 到 [[Service|Service]] 通信、外部到 Service 通信。本文档重点讨论 Pod 到 Pod 的通信以及集群网络的实现方式。
+网络是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 的核心组成部分，理解其预期工作方式对于集群管理员至关重要。Kubernetes 需要解决四种不同的网络通信问题：容器到容器通信、Pod 到 Pod 通信、Pod 到 [[Service|Service]] 通信、外部到 Service 通信。本文档重点讨论 Pod 到 Pod 的通信以及集群网络的实现方式。
 
 ## 核心概念/原理
 
@@ -176,6 +177,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看节点分配的 Pod CIDR
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.podCIDR}{"\n"}{end}'
@@ -201,3 +205,9 @@ kubectl exec <pod> -- ip route
 ## 参考链接
 
 - [Cluster Networking - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
+- [[domain-17-system-foundation/topic-dictionary/networking/akri.md|Akri 边缘设备发现]]
+- [[domain-17-system-foundation/topic-dictionary/networking/antrea.md|Antrea 网络方案]]

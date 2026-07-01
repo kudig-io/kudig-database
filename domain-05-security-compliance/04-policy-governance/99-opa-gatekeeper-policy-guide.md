@@ -70,7 +70,7 @@ OPA（Open Policy Agent）是一个通用的开源策略引擎，采用 Rego 语
 
 与 [[Kyverno|Kyverno]] 的 YAML 原生语法不同，OPA Gatekeeper 使用 Rego 策略语言。Rego 是一种声明式的策略查询语言，具有强大的模式匹配和数据查询能力，适合表达复杂的安全策略逻辑。学习 Rego 需要一定的投入，但一旦掌握，可以实现非常灵活和强大的策略控制，包括跨资源关联查询、复合条件判断、集合运算等高级功能。对于需要在 Kubernetes 之外也统一策略管理的场景（如 API 网关、Kafka 授权、SSH 访问控制等），OPA/Rego 是更好的选择。
 
-#<!-- chunk: 威胁模型分析 -->## 威胁模型分析
+## 威胁模型分析
 
 在 Kubernetes 集群中，如果没有统一的策略执行机制，开发人员和运维人员可能会创建不安全的工作负载配置，导致严重的安全风险。OPA Gatekeeper 重点防护的威胁场景包括：
 
@@ -101,7 +101,7 @@ OPA（Open Policy Agent）是一个通用的开源策略引擎，采用 Rego 语
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 核心组件架构 -->## 核心组件架构
+## 核心组件架构
 
 ```mermaid
 graph TB
@@ -156,9 +156,12 @@ graph TB
     style OPA fill:#22c55e,stroke:#16a34a,color:#fff
 ```
 
-#<!-- chunk: 部署配置 -->## 部署配置
+## 部署配置
 
 生产环境的 Gatekeeper 部署需要考虑高可用性（至少 3 个控制器副本）、审计频率和资源分配。Controller Manager 负责准入控制，需要充足的 CPU 和内存以保证低延迟。Audit Controller 负责存量资源的定期合规扫描，在大规模集群中需要较长的审计间隔和分块处理以减少 API Server 负载。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 helm repo add gatekeeper https://open-policy-agent.github.io/gatekeeper/charts
@@ -239,7 +242,7 @@ metrics:
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: ConstraintTemplate 策略模板 -->## ConstraintTemplate 策略模板
+## ConstraintTemplate 策略模板
 
 ConstraintTemplate 是 Gatekeeper 的核心概念。每个 ConstraintTemplate 包含一段 Rego 策略代码和一个 CRD Schema 定义。Rego 代码定义了策略的检查逻辑，CRD Schema 定义了 Constraint 可以接受的参数。这种模板化设计使得同一个 ConstraintTemplate 可以被多个 Constraint 实例化，每个实例使用不同的参数，实现策略的复用和灵活配置。
 
@@ -494,7 +497,7 @@ spec:
         }
 ```
 
-#<!-- chunk: Constraint 策略实例 -->## Constraint 策略实例
+## Constraint 策略实例
 
 Constraint 是 ConstraintTemplate 的实例化，定义了策略的匹配范围和参数。通过 `match` 字段可以精确控制策略应用的资源范围，包括资源类型、命名空间、标签选择器等。通过 `excludedNamespaces` 可以排除系统命名空间，避免策略影响关键系统组件。
 
@@ -607,7 +610,7 @@ spec:
 
 <!-- chunk: 安全策略实战 -->## 安全策略实战
 
-#<!-- chunk: 变异策略自动注入安全配置 -->## 变异策略自动注入安全配置
+## 变异策略自动注入安全配置
 
 Gatekeeper 的变异功能通过 Assign 和 AssignMetadata CRD 实现，可以在资源创建时自动注入安全配置。Assign 用于修改 spec 级别的字段，AssignMetadata 用于修改 metadata 级别的字段（如标签和注释）。变异操作仅在字段不存在时生效（使用 `path` 匹配），不会覆盖用户已设置的值。
 
@@ -701,7 +704,7 @@ spec:
       value: "true"
 ```
 
-#<!-- chunk: 渐进式策略部署 -->## 渐进式策略部署
+## 渐进式策略部署
 
 生产环境的策略落地应该采用渐进式方法。首先以 dryrun（审计）模式部署策略，观察违规情况但不阻断任何操作。确认策略逻辑正确且无重大误报后，在非关键命名空间切换为 deny（强制）模式。稳定后逐步扩展到所有命名空间。这种分阶段部署方式可以最大程度降低策略上线对业务的影响。
 
@@ -742,7 +745,7 @@ spec:
       - key: app.kubernetes.io/version
 ```
 
-#<!-- chunk: 高级 Rego 策略示例 -->## 高级 Rego 策略示例
+## 高级 Rego 策略示例
 
 以下示例展示了 Rego 语言的强大表达能力，包括跨资源关联查询、复合条件判断等高级功能。
 
@@ -807,7 +810,7 @@ spec:
 
 <!-- chunk: 合规与审计 -->## 合规与审计
 
-#<!-- chunk: 审计配置 -->## 审计配置
+## 审计配置
 
 Gatekeeper 的审计功能通过 Audit Controller 实现，定期扫描集群中的存量资源，将合规状态写入 Constraint 的 `status.violations` 字段。审计间隔、扫描范围和资源同步都通过 Config CRD 配置。
 
@@ -851,7 +854,7 @@ spec:
         dump: "All"
 ```
 
-#<!-- chunk: 违规查看 -->## 违规查看
+## 违规查看
 
 ```bash
 # 查看所有违规
@@ -902,7 +905,7 @@ kubectl get constraints -o json | jq '{
 }'
 ```
 
-#<!-- chunk: OPA vs Kyverno 对比 -->## OPA vs Kyverno 对比
+## OPA vs Kyverno 对比
 
 | 维度 | OPA Gatekeeper | Kyverno |
 |:---|:---|:---|
@@ -920,7 +923,7 @@ kubectl get constraints -o json | jq '{
 
 <!-- chunk: 监控与告警 -->## 监控与告警
 
-#<!-- chunk: Prometheus 告警规则 -->## Prometheus 告警规则
+## Prometheus 告警规则
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -991,7 +994,7 @@ spec:
             description: "资源同步失败可能影响策略评估准确性"
 ```
 
-#<!-- chunk: Grafana Dashboard -->## Grafana Dashboard
+## Grafana Dashboard
 
 ```json
 {
@@ -1072,7 +1075,7 @@ spec:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 策略开发流程 -->## 策略开发流程
+## 策略开发流程
 
 策略开发应遵循结构化流程：首先明确策略目标和适用范围，编写 ConstraintTemplate 和 Constraint。使用 `conftest` 在本地进行单元测试。在开发集群中以 Audit 模式部署观察，确认无误报后切换 Enforce 模式。最后将策略纳入 GitOps 流程，通过代码审查和 CI/CD 管道管理策略变更。
 
@@ -1083,7 +1086,10 @@ spec:
 5. **强制部署**：确认无误后切换为 deny 模式
 6. **GitOps 集成**：通过 Argo CD/Flux 管理策略生命周期
 
-#<!-- chunk: Rego 策略测试 -->## Rego 策略测试
+## Rego 策略测试
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 conftest
@@ -1100,7 +1106,7 @@ for f in policies/gatekeeper/templates/*.yaml; do
 done
 ```
 
-#<!-- chunk: CI/CD 集成 -->## CI/CD 集成
+## CI/CD 集成
 
 ```yaml
 # .github/workflows/gatekeeper-policy-test.yml
@@ -1137,7 +1143,7 @@ jobs:
           ./opa fmt --list policies/gatekeeper/policies/
 ```
 
-#<!-- chunk: GitOps 集成 -->## GitOps 集成
+## GitOps 集成
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -1190,7 +1196,7 @@ spec:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 完整诊断脚本 -->## 完整诊断脚本
+## 完整诊断脚本
 
 ```bash
 #!/bin/bash
@@ -1237,7 +1243,7 @@ echo "=== Config Status ==="
 kubectl get config -n gatekeeper-system -o yaml
 ```
 
-#<!-- chunk: 常见问题 -->## 常见问题
+## 常见问题
 
 **ConstraintTemplate 无法创建**：检查 Rego 语法是否正确。使用 `opa check` 命令验证 Rego 代码语法。检查 CRD Schema 定义是否正确，参数类型是否与 Rego 代码中的引用匹配。
 
@@ -1246,6 +1252,9 @@ kubectl get config -n gatekeeper-system -o yaml
 **审计不运行**：检查 Config CRD 中的 `sync.syncOnly` 是否包含了需要审计的资源类型。检查 Audit Controller Pod 是否正常运行。查看 Audit Controller 日志是否有错误。
 
 **Webhook 拒绝所有请求**：紧急恢复方法是将 Webhook 的 failurePolicy 改为 Ignore：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 紧急恢复
@@ -1268,8 +1277,8 @@ done
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
@@ -1287,8 +1296,8 @@ done
 - 99-vault-k8s-secrets-guide
 - 01-falco-cloud-native-security
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]

@@ -406,7 +406,7 @@ spec:
 | **Cluster Autoscaler** | 标准 K8s 集群 | 社区标准，云厂商支持 |
 | **Karpenter** | AWS EKS | 更快速的节点供给，灵活实例类型 |
 | **Cluster API** | 多集群/混合云 | 跨云统一管理 |
-| **[[Virtual Kubelet|Virtual Kubelet]]et|Kubelet]]** | 突发流量 | 无缝扩展到 Serverless |
+| **Virtual Kubeletet|Kubelet]]** | 突发流量 | 无缝扩展到 Serverless |
 
 **自动化效果度量**:
 ```promql

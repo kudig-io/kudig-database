@@ -64,7 +64,7 @@ created: "2026-05-23"
 > **架构师洞察**：
 > 混沌工程不只是简单的“随手杀进程”，它是对分布式系统假设的严谨验证。
 > 1. **爆炸半径 (Blast [[Radius|Radius]]) 是红线**：在生产环境进行实验时，必须具备完善的“自动熔断”机制。当业务指标（如下单成功率）出现非预期下跌时，混沌系统应能在毫秒级停止故障注入并触发恢复逻辑。
-> 2. **eBPF 驱动的无侵入混沌**：现代混沌工具（如 [[Chaos Mesh|Chaos Mesh]]）正向 eBPF 演进，通过在内核态拦截系统调用来模拟 I/O 延迟或 DNS 错误。这种方式相比传统的 Sidecar 拦截或 iptables 更加透明，且能模拟更底层的硬件/内核异常。
+> 2. **eBPF 驱动的无侵入混沌**：现代混沌工具（如 Chaos Mesh）正向 eBPF 演进，通过在内核态拦截系统调用来模拟 I/O 延迟或 DNS 错误。这种方式相比传统的 Sidecar 拦截或 iptables 更加透明，且能模拟更底层的硬件/内核异常。
 > 3. **混沌工程的终局是自动化**：实验不应是偶尔的“演习”，而应集成到 CI/CD 流水线中。每上线一个新服务，都应自动通过一套基础的问题集验证，确保系统的稳态（Steady State）是可维持的。
 
 <!-- chunk: 概述 -->
@@ -1362,7 +1362,7 @@ class AdaptiveChaosController:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README|Domain-2: Kubernetes 设计原则与核心机制]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
 - index.md|Domain-2 设计原则 — 开源项目索引]]
 - Kubernetes 设计原则与哲学
 - 声明式 API 与面向终态设计

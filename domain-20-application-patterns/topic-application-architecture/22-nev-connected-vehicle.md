@@ -118,7 +118,7 @@ k8s_versions:
 
 <!-- chunk: 1. 行业背景 -->## 1. 行业背景
 
-#<!-- chunk: 1.1 业务特点 -->## 1.1 业务特点
+## 1.1 业务特点
 
 新能源汽车车联网是"车-路-云-网-图"一体化的复杂系统：
 
@@ -130,7 +130,7 @@ k8s_versions:
 | 功能安全 | ASIL-D 等级要求 | 冗余架构 + 故障隔离 |
 | 地理分布 | 车辆全国流动 | 云边协同 + 就近接入 |
 
-#<!-- chunk: 1.2 核心场景 -->## 1.2 核心场景
+## 1.2 核心场景
 
 - **T-Box 接入**: 车辆实时状态上报与远程控制
 - **电池管理 BMS**: 实时监控、问题预警、寿命预测
@@ -142,7 +142,7 @@ k8s_versions:
 
 <!-- chunk: 2. 业务架构 -->## 2. 业务架构
 
-#<!-- chunk: 2.1 车路云一体化架构 -->## 2.1 车路云一体化架构
+## 2.1 车路云一体化架构
 
 ```mermaid
 graph TB
@@ -190,7 +190,7 @@ graph TB
     DT2 --> DT4
 ```
 
-#<!-- chunk: 2.2 OTA 升级状态机 -->## 2.2 OTA 升级状态机
+## 2.2 OTA 升级状态机
 
 ```mermaid
 stateDiagram-v2
@@ -215,7 +215,7 @@ stateDiagram-v2
     版本确认 --> [*]
 ```
 
-#<!-- chunk: 2.3 V2X 车路协同时序 -->## 2.3 V2X 车路协同时序
+## 2.3 V2X 车路协同时序
 
 ```mermaid
 sequenceDiagram
@@ -241,7 +241,7 @@ sequenceDiagram
 
 <!-- chunk: 3. 技术架构 -->## 3. 技术架构
 
-#<!-- chunk: 3.1 边缘-云协同 K8s 架构 -->## 3.1 边缘-云协同 K8s 架构
+## 3.1 边缘-云协同 K8s 架构
 
 ```mermaid
 graph TB
@@ -281,7 +281,7 @@ graph TB
     ACK_C --> POLAR & LIND & MQ & PAI & MAX
 ```
 
-#<!-- chunk: 3.2 K8s YAML 配置 -->## 3.2 K8s YAML 配置
+## 3.2 K8s YAML 配置
 
 ```yaml
 # 车辆接入服务 Deployment
@@ -427,7 +427,7 @@ spec:
 
 <!-- chunk: 4. 核心数据流 -->## 4. 核心数据流
 
-#<!-- chunk: 4.1 车辆实时数据上报流 -->## 4.1 车辆实时数据上报流
+## 4.1 车辆实时数据上报流
 
 ```mermaid
 flowchart LR
@@ -442,7 +442,7 @@ flowchart LR
     G --> J[离线数据挖掘]
 ```
 
-#<!-- chunk: 4.2 远程控制指令下发 -->## 4.2 远程控制指令下发
+## 4.2 远程控制指令下发
 
 ```mermaid
 sequenceDiagram
@@ -472,7 +472,7 @@ sequenceDiagram
 
 <!-- chunk: 5. 安全与合规 -->## 5. 安全与合规
 
-#<!-- chunk: 5.1 车联网安全体系 -->## 5.1 车联网安全体系
+## 5.1 车联网安全体系
 
 ```mermaid
 graph TB
@@ -502,7 +502,7 @@ graph TB
     SEC6 --> SEC10
 ```
 
-#<!-- chunk: 5.2 网络安全策略 -->## 5.2 网络安全策略
+## 5.2 网络安全策略
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -549,7 +549,7 @@ spec:
 
 <!-- chunk: 6. 可观测性 -->## 6. 可观测性
 
-#<!-- chunk: 6.1 监控架构 -->## 6.1 监控架构
+## 6.1 监控架构
 
 - **车辆在线率**: ARMS 自定义指标，实时展示各区域车辆在线比例
 - **MQTT 连接质量**: EMQX 内置指标 + Prometheus Exporter
@@ -597,17 +597,17 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

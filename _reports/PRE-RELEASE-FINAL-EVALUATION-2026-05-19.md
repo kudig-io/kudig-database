@@ -225,7 +225,7 @@ created: "2026-05-23"
 | domain-22-container-image-management | 10 | 7,384 |
 | domain-08-release-change-management | 14 | 15,336 |
 | domain-24-infrastructure-as-code | 8 | 6,020 |
-| domain-25-[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security|cloud-native-security]] | 17 | 18,276 |
+| domain-25-[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]] | 17 | 18,276 |
 | domain-03-networking-traffic | 15 | 15,976 |
 | domain-27-multi-cloud-hybrid | 12 | 15,164 |
 | domain-28-enterprise-database-middleware | 11 | 10,401 |

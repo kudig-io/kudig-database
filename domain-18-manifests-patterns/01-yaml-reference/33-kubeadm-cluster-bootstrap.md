@@ -71,7 +71,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 概述 -->## 1. 概述
 
-#<!-- chunk: 1.1 kubeadm 配置 API 版本演进 -->## 1.1 kubeadm 配置 API 版本演进
+## 1.1 kubeadm 配置 API 版本演进
 
 ```yaml
 # v1.25-v1.32 推荐使用的 API 版本
@@ -89,7 +89,10 @@ apiVersion: kubeadm.k8s.io/v1beta3
 kind: ResetConfiguration
 ```
 
-#<!-- chunk: 1.2 配置文件使用方式 -->## 1.2 配置文件使用方式
+## 1.2 配置文件使用方式
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 
 ```bash
 # 初始化集群
@@ -99,7 +102,7 @@ kubeadm init --config kubeadm-init-config.yaml
 kubeadm join --config kubeadm-join-config.yaml
 
 # 重置节点
-kubeadm reset --config kubeadm-reset-config.yaml
+kubeadm reset --config kubeadm-reset-config.yaml  # ⚠️ 清理节点所有 K8s 配置
 
 # 打印默认配置
 kubeadm config print init-defaults
@@ -113,7 +116,7 @@ kubeadm config validate --config kubeadm-config.yaml
 
 <!-- chunk: 2. ClusterConfiguration -->## 2. ClusterConfiguration
 
-#<!-- chunk: 2.1 完整字段规范 -->## 2.1 完整字段规范
+## 2.1 完整字段规范
 
 ```yaml
 apiVersion: kubeadm.k8s.io/v1beta3
@@ -271,7 +274,7 @@ scheduler:
 ---
 ```
 
-#<!-- chunk: 2.2 基础配置示例 -->## 2.2 基础配置示例
+## 2.2 基础配置示例
 
 ```yaml
 # 最小化配置（单节点开发环境）
@@ -282,7 +285,7 @@ networking:
   podSubnet: "10.244.0.0/16"
 ```
 
-#<!-- chunk: 2.3 生产级配置示例 -->## 2.3 生产级配置示例
+## 2.3 生产级配置示例
 
 ```yaml
 # 生产环境 HA 配置（Stacked etcd）
@@ -373,7 +376,7 @@ scheduler:
     feature-gates: "EphemeralContainers=true"
 ```
 
-#<!-- chunk: 2.4 外部 etcd 配置示例 -->## 2.4 外部 etcd 配置示例
+## 2.4 外部 etcd 配置示例
 
 ```yaml
 apiVersion: kubeadm.k8s.io/v1beta3
@@ -406,7 +409,7 @@ apiServer:
 
 <!-- chunk: 3. InitConfiguration -->## 3. InitConfiguration
 
-#<!-- chunk: 3.1 完整字段规范 -->## 3.1 完整字段规范
+## 3.1 完整字段规范
 
 ```yaml
 apiVersion: kubeadm.k8s.io/v1beta3
@@ -506,7 +509,7 @@ localAPIEndpoint:
 ---
 ```
 
-#<!-- chunk: 3.2 基础初始化配置 -->## 3.2 基础初始化配置
+## 3.2 基础初始化配置
 
 ```yaml
 # 最小化初始化配置
@@ -519,7 +522,7 @@ nodeRegistration:
   criSocket: unix:///var/run/containerd/containerd.sock
 ```
 
-#<!-- chunk: 3.3 生产初始化配置 -->## 3.3 生产初始化配置
+## 3.3 生产初始化配置
 
 ```yaml
 # 生产环境初始化配置（第一个控制平面节点）
@@ -586,7 +589,7 @@ apiServer:
     - "127.0.0.1"
 ```
 
-#<!-- chunk: 3.4 离线部署配置 -->## 3.4 离线部署配置
+## 3.4 离线部署配置
 
 ```yaml
 # 离线环境初始化配置（使用本地镜像仓库）
@@ -630,7 +633,7 @@ etcd:
 
 <!-- chunk: 4. JoinConfiguration -->## 4. JoinConfiguration
 
-#<!-- chunk: 4.1 完整字段规范 -->## 4.1 完整字段规范
+## 4.1 完整字段规范
 
 ```yaml
 apiVersion: kubeadm.k8s.io/v1beta3
@@ -713,7 +716,7 @@ controlPlane:
 ---
 ```
 
-#<!-- chunk: 4.2 工作节点加入配置 -->## 4.2 工作节点加入配置
+## 4.2 工作节点加入配置
 
 ```yaml
 # 基础工作节点加入配置
@@ -734,7 +737,7 @@ nodeRegistration:
     node-labels: "node-role.kubernetes.io/worker="
 ```
 
-#<!-- chunk: 4.3 生产工作节点加入配置 -->## 4.3 生产工作节点加入配置
+## 4.3 生产工作节点加入配置
 
 ```yaml
 # 生产环境工作节点加入配置
@@ -782,7 +785,7 @@ nodeRegistration:
     registry-qps: "5"
 ```
 
-#<!-- chunk: 4.4 控制平面节点加入配置（HA） -->## 4.4 控制平面节点加入配置（HA）
+## 4.4 控制平面节点加入配置（HA）
 
 ```yaml
 # HA 集群第二/三个控制平面节点加入配置
@@ -821,7 +824,7 @@ controlPlane:
   certificateKey: "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
 ```
 
-#<!-- chunk: 4.5 使用文件发现（更安全） -->## 4.5 使用文件发现（更安全）
+## 4.5 使用文件发现（更安全）
 
 ```yaml
 # 使用 kubeconfig 文件发现（避免 token 泄露）
@@ -869,7 +872,7 @@ scp /tmp/bootstrap-kubelet.conf worker01:/etc/kubernetes/
 
 <!-- chunk: 5. ResetConfiguration -->## 5. ResetConfiguration
 
-#<!-- chunk: 5.1 完整字段规范 -->## 5.1 完整字段规范
+## 5.1 完整字段规范
 
 ```yaml
 # v1.28+ 新增配置（用于 kubeadm reset）
@@ -905,7 +908,7 @@ unmountFlags:
 ---
 ```
 
-#<!-- chunk: 5.2 基础重置配置 -->## 5.2 基础重置配置
+## 5.2 基础重置配置
 
 ```yaml
 # 基础重置配置
@@ -915,7 +918,7 @@ force: true
 cleanupTmpDir: true
 ```
 
-#<!-- chunk: 5.3 生产重置配置 -->## 5.3 生产重置配置
+## 5.3 生产重置配置
 
 ```yaml
 # 生产环境重置配置（谨慎使用）
@@ -942,6 +945,12 @@ unmountFlags:
 
 **完整重置流程（手动）**:
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 1. 驱逐 Pod（可选）
 kubectl drain <node-name> --delete-emptydir-data --force --ignore-daemonsets
@@ -950,15 +959,15 @@ kubectl drain <node-name> --delete-emptydir-data --force --ignore-daemonsets
 kubectl delete node <node-name>
 
 # 3. 重置节点
-kubeadm reset --config kubeadm-reset-config.yaml
+kubeadm reset --config kubeadm-reset-config.yaml  # ⚠️ 清理节点所有 K8s 配置
 
 # 4. 清理 iptables/ipvs 规则
 iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
 ipvsadm --clear
 
 # 5. 清理 CNI 配置
-rm -rf /etc/cni/net.d
-rm -rf /var/lib/cni
+rm -rf /etc/cni/net.d  # ⚠️ 删除系统/数据文件
+rm -rf /var/lib/cni  # ⚠️ 删除系统/数据文件
 
 # 6. 清理 containerd 状态
 crictl rmp -fa
@@ -973,7 +982,7 @@ systemctl stop kubelet
 
 <!-- chunk: 6. 内部机制 -->## 6. 内部机制
 
-#<!-- chunk: 6.1 kubeadm init 阶段 -->## 6.1 kubeadm init 阶段
+## 6.1 kubeadm init 阶段
 
 ```bash
 # 查看所有阶段
@@ -986,7 +995,7 @@ kubeadm init \
 # 等价于以下阶段（按顺序执行）:
 ```
 
-##<!-- chunk: 阶段 1: preflight（预检） -->## 阶段 1: preflight（预检）
+## 阶段 1: preflight（预检）
 
 ```bash
 kubeadm init phase preflight --config kubeadm-init-config.yaml
@@ -1003,7 +1012,7 @@ kubeadm init phase preflight --config kubeadm-init-config.yaml
 # - 防火墙和 iptables 配置
 ```
 
-##<!-- chunk: 阶段 2: certs（生成证书） -->## 阶段 2: certs（生成证书）
+## 阶段 2: certs（生成证书）
 
 ```bash
 # 生成所有证书
@@ -1053,7 +1062,7 @@ kubeadm certs check-expiration
 kubeadm certs renew all
 ```
 
-##<!-- chunk: 阶段 3: kubeconfig（生成 kubeconfig 文件） -->## 阶段 3: kubeconfig（生成 kubeconfig 文件）
+## 阶段 3: kubeconfig（生成 kubeconfig 文件）
 
 ```bash
 # 生成所有 kubeconfig
@@ -1073,7 +1082,7 @@ kubeadm init phase kubeconfig scheduler          # scheduler.conf
 # └── scheduler.conf             # Scheduler 配置
 ```
 
-##<!-- chunk: 阶段 4: control-plane（生成静态 Pod 清单） -->## 阶段 4: control-plane（生成静态 Pod 清单）
+## 阶段 4: control-plane（生成静态 Pod 清单）
 
 ```bash
 # 生成所有控制平面组件
@@ -1091,7 +1100,7 @@ kubeadm init phase control-plane scheduler
 # └── kube-scheduler.yaml
 ```
 
-##<!-- chunk: 阶段 5: etcd（生成 etcd 静态 Pod 清单） -->## 阶段 5: etcd（生成 etcd 静态 Pod 清单）
+## 阶段 5: etcd（生成 etcd 静态 Pod 清单）
 
 ```bash
 # 生成 etcd（仅本地 etcd）
@@ -1102,7 +1111,7 @@ kubeadm init phase etcd local --config kubeadm-init-config.yaml
 # └── etcd.yaml
 ```
 
-##<!-- chunk: 阶段 6: upload-config（上传配置到 ConfigMap） -->## 阶段 6: upload-config（上传配置到 ConfigMap）
+## 阶段 6: upload-config（上传配置到 ConfigMap）
 
 ```bash
 # 上传配置
@@ -1117,7 +1126,7 @@ kubeadm init phase upload-config kubelet  # kubelet-config-1.32 ConfigMap
 # - kube-system/kubelet-config-1.32   # Kubelet 配置
 ```
 
-##<!-- chunk: 阶段 7: upload-certs（上传证书到 Secret） -->## 阶段 7: upload-certs（上传证书到 Secret）
+## 阶段 7: upload-certs（上传证书到 Secret）
 
 ```bash
 # 上传证书（用于 HA 集群）
@@ -1130,7 +1139,7 @@ kubeadm init phase upload-certs --upload-certs --config kubeadm-init-config.yaml
 # - kube-system/kubeadm-certs  # 证书（加密存储，2小时后自动删除）
 ```
 
-##<!-- chunk: 阶段 8: mark-control-plane（标记控制平面节点） -->## 阶段 8: mark-control-plane（标记控制平面节点）
+## 阶段 8: mark-control-plane（标记控制平面节点）
 
 ```bash
 # 标记节点
@@ -1144,7 +1153,7 @@ kubeadm init phase mark-control-plane --config kubeadm-init-config.yaml
 #   - node-role.kubernetes.io/control-plane:NoSchedule
 ```
 
-##<!-- chunk: 阶段 9: bootstrap-token（创建 Bootstrap Token） -->## 阶段 9: bootstrap-token（创建 Bootstrap Token）
+## 阶段 9: bootstrap-token（创建 Bootstrap Token）
 
 ```bash
 # 创建 Bootstrap Token
@@ -1154,7 +1163,7 @@ kubeadm init phase bootstrap-token --config kubeadm-init-config.yaml
 # - kube-system/bootstrap-token-<token-id>  # Bootstrap Token
 ```
 
-##<!-- chunk: 阶段 10: kubelet-finalize（完成 Kubelet 配置） -->## 阶段 10: kubelet-finalize（完成 Kubelet 配置）
+## 阶段 10: kubelet-finalize（完成 Kubelet 配置）
 
 ```bash
 # 完成 Kubelet 配置
@@ -1164,7 +1173,7 @@ kubeadm init phase kubelet-finalize all --config kubeadm-init-config.yaml
 kubeadm init phase kubelet-finalize experimental-cert-rotation  # 启用证书轮换
 ```
 
-##<!-- chunk: 阶段 11: addon（安装插件） -->## 阶段 11: addon（安装插件）
+## 阶段 11: addon（安装插件）
 
 ```bash
 # 安装所有插件
@@ -1179,7 +1188,7 @@ kubeadm init phase addon kube-proxy  # kube-proxy
 # - kube-proxy: DaemonSet, ServiceAccount, ClusterRoleBinding, ConfigMap, Role, RoleBinding
 ```
 
-#<!-- chunk: 6.2 kubeadm join 阶段 -->## 6.2 kubeadm join 阶段
+## 6.2 kubeadm join 阶段
 
 ```bash
 # 查看所有阶段
@@ -1215,24 +1224,28 @@ kubeadm join phase control-plane-join all --config kubeadm-join-config.yaml
 # - etcd: 添加 etcd 成员
 # - update-status: 更新状态
 # - mark-control-plane: 标记节点
+
 ```
 
-#<!-- chunk: 6.3 kubeadm reset 阶段 -->## 6.3 kubeadm reset 阶段
+## 6.3 kubeadm reset 阶段
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 
 ```bash
-# kubeadm reset 阶段
-kubeadm reset --config kubeadm-reset-config.yaml
+# kubeadm reset 阶段  # ⚠️ 清理节点所有 K8s 配置
+kubeadm reset --config kubeadm-reset-config.yaml  # ⚠️ 清理节点所有 K8s 配置
 
 # 等价于:
 
 # 1. preflight - 预检
-kubeadm reset phase preflight
+kubeadm reset phase preflight  # ⚠️ 清理节点所有 K8s 配置
 
 # 2. remove-etcd-member - 删除 etcd 成员（控制平面节点）
-kubeadm reset phase remove-etcd-member
+kubeadm reset phase remove-etcd-member  # ⚠️ 清理节点所有 K8s 配置
 
 # 3. cleanup-node - 清理节点
-kubeadm reset phase cleanup-node
+kubeadm reset phase cleanup-node  # ⚠️ 清理节点所有 K8s 配置
 # - 停止 kubelet
 # - 删除 /etc/kubernetes/
 # - 删除 /var/lib/kubelet/
@@ -1241,7 +1254,7 @@ kubeadm reset phase cleanup-node
 # - 清理容器
 ```
 
-#<!-- chunk: 6.4 配置存储位置 -->## 6.4 配置存储位置
+## 6.4 配置存储位置
 
 ```bash
 # 证书
@@ -1279,7 +1292,7 @@ kubeadm reset phase cleanup-node
 
 <!-- chunk: 7. 生产案例 -->## 7. 生产案例
 
-#<!-- chunk: 7.1 案例 1: HA 控制平面（Stacked etcd） -->## 7.1 案例 1: HA 控制平面（Stacked etcd）
+## 7.1 案例 1: HA 控制平面（Stacked etcd）
 
 **架构**:
 - 3 个控制平面节点（master01, master02, master03）
@@ -1294,7 +1307,7 @@ kubeadm reset phase cleanup-node
 - Pod CIDR: 172.16.0.0/16
 - Service CIDR: 10.96.0.0/12
 
-##<!-- chunk: 步骤 1: 配置 HAProxy + Keepalived -->## 步骤 1: 配置 HAProxy + Keepalived
+## 步骤 1: 配置 HAProxy + Keepalived
 
 **所有控制平面节点安装 HAProxy 和 Keepalived**:
 
@@ -1388,7 +1401,7 @@ systemctl start haproxy keepalived
 systemctl status haproxy keepalived
 ```
 
-##<!-- chunk: 步骤 2: 初始化第一个控制平面节点 -->## 步骤 2: 初始化第一个控制平面节点
+## 步骤 2: 初始化第一个控制平面节点
 
 **kubeadm-init-config.yaml** (master01):
 
@@ -1462,6 +1475,9 @@ scheduler:
 
 **执行初始化**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 初始化
 kubeadm init --config kubeadm-init-config.yaml --upload-certs
@@ -1479,7 +1495,7 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 ```
 
-##<!-- chunk: 步骤 3: 加入第二个控制平面节点 -->## 步骤 3: 加入第二个控制平面节点
+## 步骤 3: 加入第二个控制平面节点
 
 **kubeadm-join-config.yaml** (master02):
 
@@ -1516,11 +1532,11 @@ controlPlane:
 kubeadm join --config kubeadm-join-config.yaml
 ```
 
-##<!-- chunk: 步骤 4: 加入第三个控制平面节点 -->## 步骤 4: 加入第三个控制平面节点
+## 步骤 4: 加入第三个控制平面节点
 
 **同步骤 3，修改 IP 和节点名**
 
-##<!-- chunk: 步骤 5: 验证集群 -->## 步骤 5: 验证集群
+## 步骤 5: 验证集群
 
 ```bash
 # 查看节点
@@ -1544,7 +1560,7 @@ kubectl get --raw='/readyz?verbose'
 
 ---
 
-#<!-- chunk: 7.2 案例 2: HA 控制平面（外部 etcd） -->## 7.2 案例 2: HA 控制平面（外部 etcd）
+## 7.2 案例 2: HA 控制平面（外部 etcd）
 
 **架构**:
 - 3 个控制平面节点（master01, master02, master03）
@@ -1560,7 +1576,7 @@ kubectl get --raw='/readyz?verbose'
 - etcd02: 10.0.2.11
 - etcd03: 10.0.2.12
 
-##<!-- chunk: 步骤 1: 部署外部 etcd 集群 -->## 步骤 1: 部署外部 etcd 集群
+## 步骤 1: 部署外部 etcd 集群
 
 **所有 etcd 节点执行**:
 
@@ -1704,7 +1720,7 @@ etcdctl --endpoints=https://10.0.2.10:2379,https://10.0.2.11:2379,https://10.0.2
   member list -w table
 ```
 
-##<!-- chunk: 步骤 2: 初始化第一个控制平面节点 -->## 步骤 2: 初始化第一个控制平面节点
+## 步骤 2: 初始化第一个控制平面节点
 
 **复制 etcd 证书到控制平面节点**:
 
@@ -1766,14 +1782,14 @@ kubeadm init --config kubeadm-init-config.yaml --upload-certs
 
 ---
 
-#<!-- chunk: 7.3 案例 3: 离线部署 -->## 7.3 案例 3: 离线部署
+## 7.3 案例 3: 离线部署
 
 **准备工作**:
 1. 下载镜像并推送到内网镜像仓库
 2. 配置内网 DNS
 3. 准备离线安装包
 
-##<!-- chunk: 步骤 1: 准备镜像 -->## 步骤 1: 准备镜像
+## 步骤 1: 准备镜像
 
 ```bash
 # 在联网机器上导出镜像
@@ -1810,7 +1826,7 @@ docker save -o k8s-images-v1.32.0.tar \
 docker load -i k8s-images-v1.32.0.tar
 ```
 
-##<!-- chunk: 步骤 2: 配置 containerd 使用内网镜像仓库 -->## 步骤 2: 配置 containerd 使用内网镜像仓库
+## 步骤 2: 配置 containerd 使用内网镜像仓库
 
 **/etc/containerd/config.toml**:
 
@@ -1838,11 +1854,14 @@ version = 2
           password = "Harbor12345"
 ```
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 systemctl restart containerd
 ```
 
-##<!-- chunk: 步骤 3: kubeadm 配置 -->## 步骤 3: kubeadm 配置
+## 步骤 3: kubeadm 配置
 
 **kubeadm-init-config.yaml**:
 
@@ -1886,7 +1905,7 @@ kubeadm init --config kubeadm-init-config.yaml
 
 <!-- chunk: 总结 -->## 总结
 
-#<!-- chunk: kubeadm 配置最佳实践 -->## kubeadm 配置最佳实践
+## kubeadm 配置最佳实践
 
 1. **生产环境必须**:
    - HA 控制平面（至少 3 节点）
@@ -1930,7 +1949,7 @@ kubeadm init --config kubeadm-init-config.yaml
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests KUDIG Database — Global MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -1951,4 +1970,6 @@ kubeadm init --config kubeadm-init-config.yaml
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+
+```

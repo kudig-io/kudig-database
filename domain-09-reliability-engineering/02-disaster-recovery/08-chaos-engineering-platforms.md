@@ -56,7 +56,7 @@ authors:
 created: "2026-05-23"
 ---
 
-# 混沌工程平台实践：LitmusChaos 与 [[Chaos Mesh|Chaos Mesh]]
+# 混沌工程平台实践：LitmusChaos 与 Chaos Mesh
 
 > **作者**: SRE 架构师 | **版本**: v1.0 | **更新时间**: 2026-05-18
 > **适用场景**: [[Kubernetes|Kubernetes]] 混沌工程平台部署与演练 | **复杂度**: ⭐⭐⭐⭐⭐
@@ -65,9 +65,9 @@ created: "2026-05-23"
 
 <!-- chunk: 概述 -->## 概述
 
-混沌工程（[[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering|Chaos Engineering]]）是在分布式系统上进行实验的学科，目的是建立对系统抵御生产环境中失控条件能力的信心。与传统的被动式灾备不同，混沌工程主动向系统注入问题，在受控条件下发现系统的潜在弱点，从而在真实灾难发生之前修复问题。本文档深入探讨两大主流混沌工程平台——LitmusChaos（CNCF Incubating）和 Chaos Mesh（CNCF Incubating）——的部署、配置、实验设计和企业级实践，以及如何通过稳态假设（Steady State Hypothesis）和 Game Day 活动构建持续韧性验证体系。
+混沌工程（[[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]]）是在分布式系统上进行实验的学科，目的是建立对系统抵御生产环境中失控条件能力的信心。与传统的被动式灾备不同，混沌工程主动向系统注入问题，在受控条件下发现系统的潜在弱点，从而在真实灾难发生之前修复问题。本文档深入探讨两大主流混沌工程平台——LitmusChaos（CNCF Incubating）和 Chaos Mesh（CNCF Incubating）——的部署、配置、实验设计和企业级实践，以及如何通过稳态假设（Steady State Hypothesis）和 Game Day 活动构建持续韧性验证体系。
 
-#<!-- chunk: RPO 与 RTO 的混沌验证 -->## RPO 与 RTO 的混沌验证
+## RPO 与 RTO 的混沌验证
 
 混沌工程并非直接设定 RPO 和 RTO，而是**验证**这些目标是否可达：
 
@@ -103,7 +103,7 @@ chaos_rpo_rto_validation:
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 混沌工程平台架构 -->## 混沌工程平台架构
+## 混沌工程平台架构
 
 ```mermaid
 graph TB
@@ -168,7 +168,7 @@ graph TB
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: Chaos Mesh 部署 -->## Chaos Mesh 部署
+## Chaos Mesh 部署
 
 ```yaml
 # Chaos Mesh Helm values
@@ -213,6 +213,10 @@ dnsServer:
   name: chaos-mesh-dns-server
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 安装 Chaos Mesh
 helm repo add chaos-mesh https://charts.chaos-mesh.org
@@ -229,7 +233,10 @@ kubectl get pods -n chaos-mesh
 kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333
 ```
 
-#<!-- chunk: LitmusChaos 部署 -->## LitmusChaos 部署
+## LitmusChaos 部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 LitmusChaos
@@ -243,7 +250,7 @@ kubectl apply -f https://litmuschaos.github.io/litmus/litmus-operator-v3.12.0.ya
 kubectl get pods -n litmus
 ```
 
-#<!-- chunk: 稳态假设（Steady State Hypothesis） -->## 稳态假设（Steady State Hypothesis）
+## 稳态假设（Steady State Hypothesis）
 
 稳态假设是混沌实验的核心概念：在注入问题前，定义系统"正常"行为可测量的指标；注入问题后，持续监控这些指标是否仍在可接受范围内。如果超出范围，说明假设被证伪——系统在问题条件下无法维持正常服务水平。
 
@@ -287,7 +294,7 @@ data:
           100 * mysql_connection_pool_active / mysql_connection_pool_max
 ```
 
-#<!-- chunk: Pod 问题实验 -->## Pod 问题实验
+## Pod 问题实验
 
 ```yaml
 # Chaos Mesh - Pod 问题实验
@@ -324,7 +331,7 @@ spec:
         timeout: 3s
 ```
 
-#<!-- chunk: 网络问题实验 -->## 网络问题实验
+## 网络问题实验
 
 ```yaml
 # Chaos Mesh - 网络延迟注入
@@ -380,7 +387,7 @@ spec:
   duration: "10m"
 ```
 
-#<!-- chunk: 资源压力实验 -->## 资源压力实验
+## 资源压力实验
 
 ```yaml
 # Chaos Mesh - CPU 压力
@@ -403,7 +410,7 @@ spec:
   duration: "5m"
 ```
 
-#<!-- chunk: Chaos Workflow 编排 -->## Chaos Workflow 编排
+## Chaos Workflow 编排
 
 ```yaml
 # Chaos Mesh - 复合问题工作流
@@ -481,7 +488,7 @@ spec:
 
 <!-- chunk: 备份策略 -->## 备份策略
 
-#<!-- chunk: 混沌实验配置备份 -->## 混沌实验配置备份
+## 混沌实验配置备份
 
 ```yaml
 # 混沌实验 GitOps 管理（推荐）
@@ -513,7 +520,10 @@ chaos_experiment_gitops:
 
 <!-- chunk: 恢复流程 -->## 恢复流程
 
-#<!-- chunk: 混沌实验紧急中止 -->## 混沌实验紧急中止
+## 混沌实验紧急中止
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
 
 ```bash
 #!/bin/bash
@@ -523,18 +533,18 @@ echo "=== 紧急中止所有混沌实验 ==="
 
 # Chaos Mesh
 echo "[1] 中止 Chaos Mesh 实验"
-kubectl delete podchaos --all -A 2>/dev/null
-kubectl delete networkchaos --all -A 2>/dev/null
-kubectl delete stresschaos --all -A 2>/dev/null
-kubectl delete iochaos --all -A 2>/dev/null
-kubectl delete timechaos --all -A 2>/dev/null
-kubectl delete dnschaos --all -A 2>/dev/null
-kubectl delete schedule --all -n chaos-mesh 2>/dev/null
-kubectl delete workflow --all -n chaos-mesh 2>/dev/null
+kubectl delete podchaos --all -A 2>/dev/null  # ⚠️ 批量删除，波及面大
+kubectl delete networkchaos --all -A 2>/dev/null  # ⚠️ 批量删除，波及面大
+kubectl delete stresschaos --all -A 2>/dev/null  # ⚠️ 批量删除，波及面大
+kubectl delete iochaos --all -A 2>/dev/null  # ⚠️ 批量删除，波及面大
+kubectl delete timechaos --all -A 2>/dev/null  # ⚠️ 批量删除，波及面大
+kubectl delete dnschaos --all -A 2>/dev/null  # ⚠️ 批量删除，波及面大
+kubectl delete schedule --all -n chaos-mesh 2>/dev/null  # ⚠️ 批量删除，波及面大
+kubectl delete workflow --all -n chaos-mesh 2>/dev/null  # ⚠️ 批量删除，波及面大
 
 # LitmusChaos
 echo "[2] 中止 LitmusChaos 实验"
-kubectl delete chaosengine --all -A 2>/dev/null
+kubectl delete chaosengine --all -A 2>/dev/null  # ⚠️ 批量删除，波及面大
 
 # 验证
 echo "[3] 验证清理状态"
@@ -548,7 +558,7 @@ echo "建议检查系统状态: kubectl get pods -A | grep -v Running"
 
 <!-- chunk: 容灾演练方案 (Game Day) -->## 容灾演练方案 (Game Day)
 
-#<!-- chunk: Game Day 组织方案 -->## Game Day 组织方案
+## Game Day 组织方案
 
 ```yaml
 game_day_program:
@@ -605,7 +615,7 @@ game_day_program:
     - "管理层决定中止"
 ```
 
-#<!-- chunk: Game Day 场景库 -->## Game Day 场景库
+## Game Day 场景库
 
 ```yaml
 game_day_scenarios:
@@ -698,7 +708,7 @@ chaos_monitoring:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题诊断 -->## 常见问题诊断
+## 常见问题诊断
 
 ```bash
 #!/bin/bash
@@ -727,7 +737,7 @@ echo "[5] Chaos Daemon 日志"
 kubectl logs -n chaos-mesh daemonset/chaos-daemon --tail=50
 ```
 
-#<!-- chunk: 故障排查手册 -->## 故障排查手册
+## 故障排查手册
 
 | 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
 |:---|:---|:---|:---|
@@ -748,7 +758,7 @@ kubectl logs -n chaos-mesh daemonset/chaos-daemon --tail=50
 
 <!-- chunk: LitmusChaos 深度实践 -->## LitmusChaos 深度实践
 
-#<!-- chunk: LitmusChaos 实验定义 -->## LitmusChaos 实验定义
+## LitmusChaos 实验定义
 
 LitmusChaos 使用 ChaosEngine CRD 定义实验。每个 ChaosEngine 指定目标应用、问题类型、稳态假设和持续时间。与 Chaos Mesh 相比，LitmusChaos 的优势在于其 ChaosHub 生态系统——一个包含数百个预定义实验的公共仓库，覆盖了从 Pod 问题、网络延迟到云平台 API 模拟的广泛场景。
 
@@ -797,7 +807,7 @@ spec:
               attempts: 3
 ```
 
-#<!-- chunk: LitmusChaos 稳态假设验证 -->## LitmusChaos 稳态假设验证
+## LitmusChaos 稳态假设验证
 
 LitmusChaos 的 Probe 机制是其区别于 Chaos Mesh 的重要特性。Probe 分为四种类型：HTTP 探针（检查 HTTP 端点响应）、命令探针（在目标 Pod 内执行命令）、Prometheus 探针（查询 Prometheus 指标）和 K8s 探针（检查 Kubernetes 资源状态）。每个探针可以配置为前置检查（Pre-Chaos）、持续检查（During-Chaos）或后置检查（Post-Chaos），从而全面验证系统在不同阶段的稳态。
 
@@ -858,7 +868,7 @@ spec:
 
 <!-- chunk: Chaos Mesh 与 LitmusChaos 对比 -->## Chaos Mesh 与 LitmusChaos 对比
 
-#<!-- chunk: 平台选型指南 -->## 平台选型指南
+## 平台选型指南
 
 | 特性 | Chaos Mesh | LitmusChaos |
 |:---|:---|:---|
@@ -880,7 +890,7 @@ spec:
 
 <!-- chunk: 混沌工程成熟度模型 -->## 混沌工程成熟度模型
 
-#<!-- chunk: 企业级混沌工程演进路径 -->## 企业级混沌工程演进路径
+## 企业级混沌工程演进路径
 
 混沌工程的实施不是一蹴而就的。企业应按照成熟度模型逐步推进，从简单的 Pod 故障注入开始，逐步扩展到基础设施级和全系统级演练。
 
@@ -935,7 +945,7 @@ chaos_engineering_maturity:
 
 <!-- chunk: 混沌工程安全准则 -->## 混沌工程安全准则
 
-#<!-- chunk: 安全实验原则 -->## 安全实验原则
+## 安全实验原则
 
 混沌工程实验涉及向生产系统注入问题，如果操作不当可能造成严重的业务影响。以下是企业级混沌工程的安全准则：
 
@@ -990,7 +1000,7 @@ experiment_safety_policy:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-30-disaster-recovery-business-continuity MOC
-- [[domain-09-reliability-engineering/README|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
+- [[domain-09-reliability-engineering/README.md|Domain 09: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
 - Domain-30 灾备与业务连续性 — 开源项目索引
 - VMware vSphere 企业级灾备与业务连续性
 - Veeam Backup & Replication 企业级备份恢复解决方案

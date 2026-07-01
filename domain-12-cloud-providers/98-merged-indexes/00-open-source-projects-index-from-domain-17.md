@@ -134,11 +134,11 @@ created: "2026-05-23"
 ## Obsidian 相关文档
 
 - domain-12-cloud-providers MOC
-- [[domain-12-cloud-providers/README|Domain-17: 云厂商Kubernetes服务企业级深度指南]]
+- [[domain-12-cloud-providers/README.md|Domain-17: 云厂商Kubernetes服务企业级深度指南]]
 
 ## See Also
 
-- [[domain-12-cloud-providers/13-alicloud-apsara-ack/252-apsara-stack-pop-operations|252-apsara-stack-pop-operations]]
-- [[domain-12-cloud-providers/13-alicloud-apsara-ack/alicloud-apsara-ack-overview|alicloud-apsara-ack-overview]]
-- [[domain-12-cloud-providers/01-aws-eks/aws-eks-overview|aws-eks-overview]]
-- [[domain-12-cloud-providers/02-google-cloud-gke/google-cloud-gke-overview|google-cloud-gke-overview]]
+- [[domain-12-cloud-providers/15-alicloud-apsara-ack/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
+- [[domain-12-cloud-providers/15-alicloud-apsara-ack/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
+- [[domain-12-cloud-providers/02-aws-eks/aws-eks-overview.md|aws-eks-overview]]
+- [[domain-12-cloud-providers/03-google-cloud-gke/google-cloud-gke-overview.md|google-cloud-gke-overview]]

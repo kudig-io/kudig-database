@@ -86,7 +86,7 @@ Context（上下文层）和 Persistence（持久化层）是 Agent Harness 六�
 
 <!-- chunk: 1. 上下文工程核心理论 -->## 1. 上下文工程核心理论
 
-#<!-- chunk: 1.1 上下文即决策依据 -->## 1.1 上下文即决策依据
+## 1.1 上下文即决策依据
 
 ```
 上下文对 Agent 输出的影响（实证数据）:
@@ -105,7 +105,7 @@ Context（上下文层）和 Persistence（持久化层）是 Agent Harness 六�
   4. 上下文构建是工程问题，不是提示词问题
 ```
 
-#<!-- chunk: 1.2 信噪比原则 -->## 1.2 信噪比原则
+## 1.2 信噪比原则
 
 ```
 上下文信噪比（SNR）优化:
@@ -133,7 +133,7 @@ Context（上下文层）和 Persistence（持久化层）是 Agent Harness 六�
 
 <!-- chunk: 2. 上下文分层构建架构 -->## 2. 上下文分层构建架构
 
-#<!-- chunk: 2.1 四层上下文模型 -->## 2.1 四层上下文模型
+## 2.1 四层上下文模型
 
 ```
 上下文四层模型:
@@ -162,7 +162,7 @@ Token 预算分配（以 128K 窗口为例）:
   Reserved:    ~43K tokens (34%, 留给模型输出和推理)
 ```
 
-#<!-- chunk: 2.2 上下文管理器完整实现 -->## 2.2 上下文管理器完整实现
+## 2.2 上下文管理器完整实现
 
 ```python
 from dataclasses import dataclass, field
@@ -355,7 +355,7 @@ class ContextManager:
 
 <!-- chunk: 3. RAG 集成深度设计 -->## 3. RAG 集成深度设计
 
-#<!-- chunk: 3.1 知识库索引架构 -->## 3.1 知识库索引架构
+## 3.1 知识库索引架构
 
 ```
 K8S 运维知识库索引架构:
@@ -383,7 +383,7 @@ K8S 运维知识库索引架构:
   └── 重排序: Cross-encoder 精排
 ```
 
-#<!-- chunk: 3.2 RAG 检索器实现 -->## 3.2 RAG 检索器实现
+## 3.2 RAG 检索器实现
 
 ```python
 from dataclasses import dataclass
@@ -519,7 +519,7 @@ class ContextAwareRetriever:
 
 <!-- chunk: 4. 记忆系统架构 -->## 4. 记忆系统架构
 
-#<!-- chunk: 4.1 三层记忆模型 -->## 4.1 三层记忆模型
+## 4.1 三层记忆模型
 
 ```
 Agent 记忆三层模型:
@@ -548,7 +548,7 @@ Agent 记忆三层模型:
   语义记忆 ──(检索注入)──→ 短期记忆
 ```
 
-#<!-- chunk: 4.2 记忆系统完整实现 -->## 4.2 记忆系统完整实现
+## 4.2 记忆系统完整实现
 
 ```python
 from dataclasses import dataclass, field
@@ -746,7 +746,7 @@ class MemorySystem:
 
 <!-- chunk: 5. 上下文窗口管理 -->## 5. 上下文窗口管理
 
-#<!-- chunk: 5.1 动态窗口策略 -->## 5.1 动态窗口策略
+## 5.1 动态窗口策略
 
 ```python
 class DynamicWindowManager:
@@ -805,7 +805,7 @@ class DynamicWindowManager:
             )
 ```
 
-#<!-- chunk: 5.2 增量上下文更新 -->## 5.2 增量上下文更新
+## 5.2 增量上下文更新
 
 ```python
 class IncrementalContextUpdater:
@@ -866,7 +866,7 @@ class IncrementalContextUpdater:
 
 <!-- chunk: 6. K8S 运维上下文模板 -->## 6. K8S 运维上下文模板
 
-#<!-- chunk: 6.1 集群环境扫描器 -->## 6.1 集群环境扫描器
+## 6.1 集群环境扫描器
 
 ```python
 class K8sEnvironmentScanner:
@@ -946,7 +946,7 @@ class K8sEnvironmentScanner:
         return "\n".join(parts)
 ```
 
-#<!-- chunk: 6.2 诊断任务上下文模板 -->## 6.2 诊断任务上下文模板
+## 6.2 诊断任务上下文模板
 
 ```python
 class DiagnosisContextTemplate:
@@ -1007,7 +1007,7 @@ class DiagnosisContextTemplate:
 
 <!-- chunk: 7. 最佳实践 -->## 7. 最佳实践
 
-#<!-- chunk: 7.1 上下文工程核心原则 -->## 7.1 上下文工程核心原则
+## 7.1 上下文工程核心原则
 
 | 原则 | 说明 | 实践建议 |
 |------|------|---------|
@@ -1018,7 +1018,7 @@ class DiagnosisContextTemplate:
 | **智能压缩** | 历史信息保留关键步骤 | 错误步骤 + 关键发现 + 最近 N 步 |
 | **环境预扫描** | 任务开始前收集环境信息 | 使用 EnvironmentScanner |
 
-#<!-- chunk: 7.2 记忆系统核心原则 -->## 7.2 记忆系统核心原则
+## 7.2 记忆系统核心原则
 
 | 原则 | 说明 | 实践建议 |
 |------|------|---------|
@@ -1059,17 +1059,17 @@ class DiagnosisContextTemplate:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|[[AI Agent 工程专题|AI Agent 工程专题]]]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|[[AI Agent 基础与核心架构|AI Agent 基础与核心架构]]]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|[[AI Agent 基础与核心架构|AI Agent 基础与核心架构]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 

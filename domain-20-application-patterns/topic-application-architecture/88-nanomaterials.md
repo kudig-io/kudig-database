@@ -117,7 +117,7 @@ k8s_versions:
 
 从架构角度看，纳米材料平台需要解决三个核心问题：一是如何高效管理大规模计算任务（每天数千个 DFT/MD 计算任务）；二是如何管理和关联海量材料数据（结构、性能、文献、实验数据）；三是如何建立计算-实验闭环，加速材料发现周期。
 
-#<!-- chunk: 1.1 行业背景 -->## 1.1 行业背景
+## 1.1 行业背景
 
 | 挑战 | 说明 | 架构影响 |
 |:---|:---|:---|
@@ -127,7 +127,7 @@ k8s_versions:
 | 性能预测 | 构效关系建模复杂 | 深度学习 + 图神经网络 |
 | 安全评估 | 纳米材料毒理学数据匮乏 | 数据收集 + 风险模型 |
 
-#<!-- chunk: 1.2 核心场景 -->## 1.2 核心场景
+## 1.2 核心场景
 
 - **材料计算**: DFT（VASP/Quantum ESPRESSO）、MD（LAMMPS/GROMACS）、有限元（FEniCS）模拟
 - **高通量筛选**: 自动化计算流水线，每日处理数千材料组合
@@ -139,19 +139,19 @@ k8s_versions:
 
 <!-- chunk: 2. 设计原则 -->## 2. 设计原则
 
-#<!-- chunk: 2.1 计算-数据-AI 闭环原则 -->## 2.1 计算-数据-AI 闭环原则
+## 2.1 计算-数据-AI 闭环原则
 
 纳米材料研发的核心方法论是"计算-数据-AI"闭环：通过第一性原理计算生成高质量材料数据，将数据用于训练 AI 预测模型，AI 模型指导新的计算方向，形成正向循环。架构设计需要支撑这一闭环的数据流和计算流。
 
-#<!-- chunk: 2.2 多尺度协同原则 -->## 2.2 多尺度协同原则
+## 2.2 多尺度协同原则
 
 材料模拟涉及从电子结构（DFT）到分子动力学（MD）到相场模拟再到有限元分析的多尺度计算。架构需要支持跨尺度的计算编排和数据传递，包括参数自动传递、网格自适应、结果可视化等。
 
-#<!-- chunk: 2.3 高通量自动化原则 -->## 2.3 高通量自动化原则
+## 2.3 高通量自动化原则
 
 高通量筛选的核心是自动化。从材料结构生成、输入文件准备、计算提交、结果解析到数据入库的每个环节都需要自动化。架构设计需要基于工作流引擎（如 Argo Workflows、FireWorks）构建可编排、可复现的计算流水线。
 
-#<!-- chunk: 2.4 数据标准化原则 -->## 2.4 数据标准化原则
+## 2.4 数据标准化原则
 
 材料数据的标准化是实现数据共享和 AI 训练的基础。架构设计需要采用国际通用的材料数据标准（如 CIF、POSCAR、LMDB），建立统一的数据模型和 API，支持与 Materials Project、AFLOW、OQMD 等国际数据库的数据互通。
 
@@ -159,7 +159,7 @@ k8s_versions:
 
 <!-- chunk: 3. 架构模式 -->## 3. 架构模式
 
-#<!-- chunk: 3.1 纳米材料平台全景架构 -->## 3.1 纳米材料平台全景架构
+## 3.1 纳米材料平台全景架构
 
 ```mermaid
 graph TB
@@ -206,7 +206,7 @@ graph TB
     A1 & A2 & A3 & A4 --> W1 & W2
 ```
 
-#<!-- chunk: 3.2 高通量筛选流水线架构 -->## 3.2 高通量筛选流水线架构
+## 3.2 高通量筛选流水线架构
 
 ```mermaid
 flowchart LR
@@ -220,7 +220,7 @@ flowchart LR
     H --> I[实验验证推荐]
 ```
 
-#<!-- chunk: 3.3 多尺度计算编排架构 -->## 3.3 多尺度计算编排架构
+## 3.3 多尺度计算编排架构
 
 ```mermaid
 graph TB
@@ -261,7 +261,7 @@ graph TB
 
 <!-- chunk: 4. 实现示例 -->## 4. 实现示例
 
-#<!-- chunk: 4.1 高通量材料结构生成器 -->## 4.1 高通量材料结构生成器
+## 4.1 高通量材料结构生成器
 
 ```python
 from pymatgen.core import Structure, Lattice
@@ -353,7 +353,7 @@ class HighThroughputStructureGenerator:
         return unique
 ```
 
-#<!-- chunk: 4.2 材料性能预测图神经网络 -->## 4.2 材料性能预测图神经网络
+## 4.2 材料性能预测图神经网络
 
 ```python
 import torch
@@ -411,7 +411,7 @@ class MaterialPropertyPredictor(nn.Module):
         return self.predictor(x).squeeze(-1)
 ```
 
-#<!-- chunk: 4.3 高通量计算任务管理器 -->## 4.3 高通量计算任务管理器
+## 4.3 高通量计算任务管理器
 
 ```go
 package htcompute
@@ -524,7 +524,7 @@ func (tm *TaskManager) runMLPredict(ctx context.Context, task *ComputeTask) erro
 
 <!-- chunk: 5. 在 Kubernetes 上的部署 -->## 5. 在 Kubernetes 上的部署
 
-#<!-- chunk: 5.1 高通量计算 GPU Job -->## 5.1 高通量计算 GPU Job
+## 5.1 高通量计算 GPU Job
 
 ```yaml
 apiVersion: batch/v1
@@ -588,7 +588,7 @@ spec:
       restartPolicy: OnFailure
 ```
 
-#<!-- chunk: 5.2 AI 推理服务 -->## 5.2 AI 推理服务
+## 5.2 AI 推理服务
 
 ```yaml
 apiVersion: apps/v1
@@ -647,7 +647,7 @@ spec:
       targetPort: 8080
 ```
 
-#<!-- chunk: 5.3 材料数据 API 服务 -->## 5.3 材料数据 API 服务
+## 5.3 材料数据 API 服务
 
 ```yaml
 apiVersion: apps/v1
@@ -691,20 +691,20 @@ spec:
 
 <!-- chunk: 6. 最佳实践 -->## 6. 最佳实践
 
-#<!-- chunk: 6.1 计算资源管理 -->## 6.1 计算资源管理
+## 6.1 计算资源管理
 
 - **GPU 共享调度**: 使用 GPU 时间分片（MPS/MIG）提高 GPU 利用率，DFT 后处理和 AI 推理可共享 GPU
 - **弹性队列调度**: 使用 Kubernetes Volcano 或 YuniKorn 管理计算队列，支持优先级抢占和公平调度
 - **Spot 实例利用**: 非紧急计算任务使用抢占式实例，降低成本 70%+
 - **检查点机制**: 长时间 DFT 计算任务定期保存检查点，失败后可从检查点恢复
 
-#<!-- chunk: 6.2 数据管理 -->## 6.2 数据管理
+## 6.2 数据管理
 
 - **数据版本化**: 使用 DVC（Data Version Control）管理材料数据集，支持数据溯源和可复现性
 - **分级存储**: 热数据（活跃项目）存 SSD、温数据（已完成项目）存 HDD、冷数据（历史数据）归档 OSS
 - **标准化接口**: 提供符合 OPTIMADE 标准的 REST API，支持与 Materials Project 等数据库互操作
 
-#<!-- chunk: 6.3 AI 模型管理 -->## 6.3 AI 模型管理
+## 6.3 AI 模型管理
 
 - **模型注册中心**: 使用 MLflow 或 PAI 模型管理平台管理模型版本和实验记录
 - **自动重训练**: 当新数据积累到一定量时，自动触发模型重训练和评估
@@ -714,31 +714,31 @@ spec:
 
 <!-- chunk: 7. 反模式 -->## 7. 反模式
 
-#<!-- chunk: 7.1 计算与数据脱节 -->## 7.1 计算与数据脱节
+## 7.1 计算与数据脱节
 
 大量计算任务盲目执行，不建立系统化的数据收集和管理机制，导致计算结果散落无法复用。
 
 **解决方案**: 建立统一的材料数据库，所有计算任务的结果自动解析入库。通过标准 API 提供数据访问，确保计算产出的数据可发现、可访问、可复用。
 
-#<!-- chunk: 7.2 单一尺度模拟 -->## 7.2 单一尺度模拟
+## 7.2 单一尺度模拟
 
 仅关注单一尺度的计算（如只做 DFT 或只做 MD），忽视跨尺度信息的传递和协同。
 
 **解决方案**: 构建多尺度计算编排平台，支持从 DFT 到 MD 到介观到宏观的自动参数传递。使用 AI 模型建立跨尺度映射，减少多尺度耦合计算的成本。
 
-#<!-- chunk: 7.3 忽视计算可复现性 -->## 7.3 忽视计算可复现性
+## 7.3 忽视计算可复现性
 
 计算环境、软件版本、参数设置等信息不记录，导致计算结果无法复现。
 
 **解决方案**: 使用容器化（Docker/Singularity）封装计算环境，使用工作流引擎记录完整的计算流程和参数。确保每个计算结果都能追溯到完整的输入和执行环境。
 
-#<!-- chunk: 7.4 AI 模型过度拟合 -->## 7.4 AI 模型过度拟合
+## 7.4 AI 模型过度拟合
 
 训练数据量不足或多样性不够时，AI 模型可能对已知材料过度拟合，对新材料预测能力差。
 
 **解决方案**: 使用交叉验证评估模型泛化能力。对 AI 预测结果进行不确定性量化（如集成方法）。将 AI 预测结果与 DFT 计算进行对比验证。
 
-#<!-- chunk: 7.5 数据孤岛 -->## 7.5 数据孤岛
+## 7.5 数据孤岛
 
 不同研究组、不同项目之间的数据不共享，形成数据孤岛，限制了数据驱动发现的能力。
 
@@ -748,7 +748,7 @@ spec:
 
 <!-- chunk: 8. 参考资源 -->## 8. 参考资源
 
-#<!-- chunk: 8.1 阿里云组件映射 -->## 8.1 阿里云组件映射
+## 8.1 阿里云组件映射
 
 | 功能域 | **阿里云云原生方案** |
 |:---|:---|
@@ -760,7 +760,7 @@ spec:
 | 工作流 | **Argo Workflows on ACK** |
 | 可观测性 | **ARMS + SLS** |
 
-#<!-- chunk: 8.2 生产检查清单 -->## 8.2 生产检查清单
+## 8.2 生产检查清单
 
 - [ ] 计算模型精度与实验数据对比验证
 - [ ] 高通量计算并行效率（> 80%）
@@ -771,7 +771,7 @@ spec:
 - [ ] 数据备份与灾难恢复演练
 - [ ] GPU 集群利用率监控告警
 
-#<!-- chunk: 8.3 外部参考 -->## 8.3 外部参考
+## 8.3 外部参考
 
 - Materials Project (materialsproject.org) — 材料数据库
 - OPTIMADE API Specification — 材料数据 API 标准
@@ -789,17 +789,17 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

@@ -4,6 +4,7 @@ category: "troubleshooting"
 tags: ["security", "remote-consultant"]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 dialogue_id: "DIALOGUE-K8S_RBAC_QUOTA"
 skill_id: "k8s-rbac-quota"
 version: "1.0.0"
@@ -11,9 +12,9 @@ role: "remote-consultant"
 language: "zh"
 summary: "RBAC与配额问题的远程顾问对话脚本，覆盖权限不足、ResourceQuota、LimitRange排查。"
 relationships:
-  - target: "[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces]]"
+  - target: "[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md]]"
     type: uses
-  - target: "[[domain-17-system-foundation/topic-dictionary/workloads/pods]]"
+  - target: "[[domain-17-system-foundation/topic-dictionary/workloads/pods.md]]"
     type: uses
 ---
 
@@ -102,7 +103,7 @@ relationships:
 ### 分支 1：权限验证
 - `kubectl auth can-i <verb> <resource> -n <ns> --as <user>`
   - 如无法执行：请提供当前可执行的环境信息
-- `kubectl get [[domain-17-system-foundation/topic-dictionary/workloads/pods|pods]] -n <ns>`
+- `kubectl get [[domain-17-system-foundation/topic-dictionary/workloads/pods.md|pods]] -n <ns>`
   - 如无法执行：请提供当前可执行的环境信息
 - `测试实际操作`
   - 如无法执行：请提供当前可执行的环境信息
@@ -345,7 +346,7 @@ aliyun ram CreatePolicy --PolicyName ack-custom --PolicyDocument '{"Version":"1"
 
 | 角色 | 资源范围 | 典型verbs | 适用场景 |
 |:---|:---|:---|:---|
-| view | [[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces|命名空间]] | get, list, watch | 只读用户 |
+| view | [[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md|命名空间]] | get, list, watch | 只读用户 |
 | edit | 命名空间 | 除rbac外所有 | 开发团队 |
 | admin | 命名空间 | 全部 | 命名空间管理员 |
 | cluster-admin | 集群 | 全部 | 平台管理员 |
@@ -404,9 +405,9 @@ aliyun ram CreatePolicy --PolicyName ack-custom --PolicyDocument '{"Version":"1"
 
 ## 相关案例
 
-- [[synthesis/case-studies/2026-06-25-resourcequota-exceeded|2026-06-25-resourcequota-exceeded]]
+- [[concepts/case-studies/2026-06-25-resourcequota-exceeded.md|2026-06-25-resourcequota-exceeded]]
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]
-- [[domain-17-system-foundation/03-kubernetes-events/02-pod-container-lifecycle-events|02 - Pod 与容器生命周期事件]]
-- [[domain-17-system-foundation/03-kubernetes-events/10-service-networking-events|10 - Service 与网络事件]]
+- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
+- [[domain-17-system-foundation/03-kubernetes-events/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
+- [[domain-17-system-foundation/03-kubernetes-events/10-service-networking-events.md|10 - Service 与网络事件]]

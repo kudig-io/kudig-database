@@ -61,7 +61,7 @@ created: "2026-05-23"
 - [概述](#概述)
 - [节点生命周期状态机](#节点生命周期状态机)
 - [节点状态类型详解](#节点状态类型详解)
-- [[entities/kubelet|Kubelet]] 节点状态事件](#kubelet-节点状态事件)
+- [[entities/kubelet.md|Kubelet]] 节点状态事件](#kubelet-节点状态事件)
 - [Node Controller 事件](#node-controller-事件)
 - [节点驱逐机制](#节点驱逐机制)
 - [生产环境监控建议](#生产环境监控建议)
@@ -80,6 +80,9 @@ created: "2026-05-23"
 ---
 
 <!-- chunk: 节点生命周期状态机 -->## 节点生命周期状态机
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -155,7 +158,7 @@ Kubernetes 节点有以下五种核心 Condition 类型：
 
 <!-- chunk: Kubelet 节点状态事件 -->## Kubelet 节点状态事件
 
-#<!-- chunk: `Starting` - kubelet 启动 -->## `Starting` - kubelet 启动
+## `Starting` - kubelet 启动
 
 | 属性 | 说明 |
 |:---|:---|
@@ -165,13 +168,13 @@ Kubernetes 节点有以下五种核心 Condition 类型：
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 (仅在 kubelet 启动时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示节点上的 kubelet 组件正在启动。kubelet 是每个节点上的核心组件，负责管理 Pod 和容器的生命周期，与 API Server 通信，并报告节点状态。
 
 在 kubelet 启动时，它会进行一系列初始化操作，包括加载配置、初始化容器运行时客户端、设置网络、注册节点到 API Server 等。此事件是节点生命周期的起点。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Normal
@@ -180,13 +183,13 @@ Message: Starting kubelet.
 Source:  kubelet, node1.example.com
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **集群影响**：单个节点的 kubelet 启动不影响其他节点
 - **调度影响**：在节点变为 Ready 之前，scheduler 不会将 Pod 调度到此节点
 - **现有 Pod**：如果是重启，节点上的 Pod 需要重新同步和启动
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看 kubelet 启动事件
@@ -203,7 +206,7 @@ kubelet --version
 ps aux | grep kubelet
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 场景 | 建议 |
 |:---|:---|
@@ -214,7 +217,7 @@ ps aux | grep kubelet
 
 ---
 
-#<!-- chunk: `NodeReady` - 节点就绪 -->## `NodeReady` - 节点就绪
+## `NodeReady` - 节点就绪
 
 | 属性 | 说明 |
 |:---|:---|
@@ -224,13 +227,13 @@ ps aux | grep kubelet
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 (状态变化时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示节点已成功通过所有健康检查，变为 Ready 状态，可以接受 Pod 调度。kubelet 会定期检查节点的各项资源和组件状态，包括容器运行时、网络插件、存储插件等。
 
 当节点的 Ready Condition 从 False/Unknown 变为 True 时，会产生此事件。这是节点生命周期中的重要里程碑，标志着节点可以开始承载工作负载。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Normal
@@ -247,13 +250,13 @@ Conditions:
   Ready            True    Mon, 10 Feb 2026 10:30:00 +0800  Mon, 10 Feb 2026 10:25:00 +0800  KubeletReady                 kubelet is posting ready status
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **集群影响**：增加集群的可用容量
 - **调度影响**：scheduler 开始可以将 Pod 调度到此节点
 - **现有 Pod**：如果是从 NotReady 恢复，节点上的 Pod 会重新启动
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看节点状态
@@ -272,7 +275,7 @@ kubectl get node <node-name> -o jsonpath='{.status.capacity}' | jq
 kubectl get node <node-name> -o jsonpath='{.status.allocatable}' | jq
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 场景 | 建议 |
 |:---|:---|
@@ -283,7 +286,7 @@ kubectl get node <node-name> -o jsonpath='{.status.allocatable}' | jq
 
 ---
 
-#<!-- chunk: `NodeNotReady` - 节点未就绪 -->## `NodeNotReady` - 节点未就绪
+## `NodeNotReady` - 节点未就绪
 
 | 属性 | 说明 |
 |:---|:---|
@@ -293,13 +296,13 @@ kubectl get node <node-name> -o jsonpath='{.status.allocatable}' | jq
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 (问题时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示节点的健康检查失败，节点变为 NotReady 状态。这可能是由于 kubelet 本身的问题、容器运行时问题、网络问题或其他关键组件问题导致的。
 
 当节点变为 NotReady 状态时，scheduler 将不再调度新的 Pod 到此节点。如果节点持续 NotReady 超过一定时间（默认 5 分钟），node-controller 会开始驱逐节点上的 Pod。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Warning
@@ -325,7 +328,7 @@ Message: Node node1.example.com status is now: NodeNotReady (node-controller det
 Source:  node-controller
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **集群影响**：减少集群可用容量，可能触发告警
 - **调度影响**：新 Pod 不会被调度到此节点
@@ -334,7 +337,7 @@ Source:  node-controller
   - 5 分钟后（默认 pod-eviction-timeout）：Pod 被驱逐，在其他节点重建
 - **服务影响**：如果节点上有 [[Service|Service]] 的 endpoints，会被标记为 NotReady
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看节点状态和条件
@@ -366,9 +369,10 @@ curl -k https://<api-server-ip>:6443/healthz
 # 检查系统日志
 journalctl -n 200 --no-pager
 dmesg | tail -100
+
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 原因 | 解决方案 |
 |:---|:---|
@@ -383,7 +387,7 @@ dmesg | tail -100
 
 ---
 
-#<!-- chunk: `NodeSchedulable` - 节点可调度 -->## `NodeSchedulable` - 节点可调度
+## `NodeSchedulable` - 节点可调度
 
 | 属性 | 说明 |
 |:---|:---|
@@ -393,13 +397,13 @@ dmesg | tail -100
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 (调度状态变化时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示节点的 `spec.unschedulable` 字段被设置为 `false`，节点恢复可调度状态。这通常发生在执行 `kubectl uncordon` 命令之后。
 
 节点可调度意味着 Kubernetes scheduler 可以将新的 Pod 调度到此节点。这不影响已经运行在节点上的 Pod。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Normal
@@ -408,13 +412,13 @@ Message: Node node1.example.com status is now: NodeSchedulable
 Source:  kubelet, node1.example.com
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **集群影响**：增加集群的可调度容量
 - **调度影响**：scheduler 可以调度新 Pod 到此节点
 - **现有 Pod**：不受影响，继续运行
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看节点可调度状态
@@ -426,9 +430,10 @@ kubectl describe node <node-name>
 
 # 取消节点不可调度标记
 kubectl uncordon <node-name>
+
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 场景 | 建议 |
 |:---|:---|
@@ -438,7 +443,7 @@ kubectl uncordon <node-name>
 
 ---
 
-#<!-- chunk: `NodeNotSchedulable` - 节点不可调度 -->## `NodeNotSchedulable` - 节点不可调度
+## `NodeNotSchedulable` - 节点不可调度
 
 | 属性 | 说明 |
 |:---|:---|
@@ -448,13 +453,13 @@ kubectl uncordon <node-name>
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 (调度状态变化时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示节点的 `spec.unschedulable` 字段被设置为 `true`，节点被标记为不可调度。这通常由管理员执行 `kubectl cordon` 命令触发，用于维护前的准备工作。
 
 节点不可调度意味着 scheduler 不会将新的 Pod 调度到此节点，但已经运行的 Pod 不受影响，继续正常运行。这是安全排空节点（drain）的第一步。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Normal
@@ -469,14 +474,17 @@ NAME                 STATUS                     ROLES    AGE   VERSION
 node1.example.com    Ready,SchedulingDisabled   worker   10d   v1.28.0
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **集群影响**：减少集群的可调度容量
 - **调度影响**：新 Pod 不会被调度到此节点
 - **现有 Pod**：不受影响，继续运行
 - **DaemonSet**：即使节点不可调度，DaemonSet Pod 仍会被调度
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
 
 ```bash
 # 查看不可调度的节点
@@ -498,7 +506,7 @@ kubectl cordon <node-name>
 kubectl uncordon <node-name>
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 场景 | 建议 |
 |:---|:---|
@@ -509,7 +517,7 @@ kubectl uncordon <node-name>
 
 ---
 
-#<!-- chunk: `NodeHasSufficientMemory` - 节点内存充足 -->## `NodeHasSufficientMemory` - 节点内存充足
+## `NodeHasSufficientMemory` - 节点内存充足
 
 | 属性 | 说明 |
 |:---|:---|
@@ -519,13 +527,13 @@ kubectl uncordon <node-name>
 | **适用版本** | v1.4+ |
 | **生产频率** | 低频 (MemoryPressure 状态变化时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示节点的可用内存恢复到正常水平，MemoryPressure condition 从 True 变为 False。kubelet 会定期检查节点的内存使用情况，当可用内存超过驱逐阈值时，会产生此事件。
 
 这意味着节点从内存压力状态中恢复，可以继续接受新的 Pod 调度（如果之前因内存压力被标记为不可调度）。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Normal
@@ -542,13 +550,13 @@ Conditions:
   MemoryPressure   False   KubeletHasSufficientMemory   kubelet has sufficient memory available
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **集群影响**：节点恢复正常服务能力
 - **调度影响**：如果之前因 MemoryPressure 被 scheduler 避免，现在可以正常调度
 - **驱逐影响**：停止基于内存压力的 Pod 驱逐
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看节点 MemoryPressure 状态
@@ -565,7 +573,7 @@ vmstat 1 5
 kubectl top pods --all-namespaces --field-selector spec.nodeName=<node-name> --sort-by=memory
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 场景 | 建议 |
 |:---|:---|
@@ -575,7 +583,7 @@ kubectl top pods --all-namespaces --field-selector spec.nodeName=<node-name> --s
 
 ---
 
-#<!-- chunk: `NodeHasNoDiskPressure` - 节点无磁盘压力 -->## `NodeHasNoDiskPressure` - 节点无磁盘压力
+## `NodeHasNoDiskPressure` - 节点无磁盘压力
 
 | 属性 | 说明 |
 |:---|:---|
@@ -585,13 +593,13 @@ kubectl top pods --all-namespaces --field-selector spec.nodeName=<node-name> --s
 | **适用版本** | v1.4+ |
 | **生产频率** | 低频 (DiskPressure 状态变化时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示节点的磁盘空间恢复到正常水平，DiskPressure condition 从 True 变为 False。kubelet 监控节点的磁盘使用情况，包括根文件系统（nodefs）和容器镜像文件系统（imagefs）。
 
 当磁盘可用空间超过驱逐阈值时，节点从磁盘压力状态中恢复。这意味着节点可以继续拉取镜像和创建容器。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Normal
@@ -608,13 +616,13 @@ Conditions:
   DiskPressure     False   KubeletHasNoDiskPressure   kubelet has no disk pressure
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **集群影响**：节点恢复正常服务能力
 - **调度影响**：scheduler 恢复正常调度到此节点
 - **容器影响**：可以正常拉取镜像和创建容器
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看节点 DiskPressure 状态
@@ -635,7 +643,7 @@ crictl images
 du -sh /var/lib/containerd  # 或 /var/lib/docker
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 场景 | 建议 |
 |:---|:---|
@@ -645,7 +653,7 @@ du -sh /var/lib/containerd  # 或 /var/lib/docker
 
 ---
 
-#<!-- chunk: `NodeHasSufficientPID` - 节点 PID 充足 -->## `NodeHasSufficientPID` - 节点 PID 充足
+## `NodeHasSufficientPID` - 节点 PID 充足
 
 | 属性 | 说明 |
 |:---|:---|
@@ -655,13 +663,13 @@ du -sh /var/lib/containerd  # 或 /var/lib/docker
 | **适用版本** | v1.14+ |
 | **生产频率** | 罕见 (PIDPressure 状态变化时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示节点的可用进程 ID 恢复到正常水平，PIDPressure condition 从 True 变为 False。Linux 系统对进程数量有限制（kernel.pid_max），当节点上的进程数接近此限制时会触发 PID 压力。
 
 PID 压力的恢复意味着节点上的进程数降低到安全水平，可以继续创建新进程和容器。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Normal
@@ -678,13 +686,13 @@ Conditions:
   PIDPressure      False   KubeletHasSufficientPID   kubelet has sufficient PID available
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **集群影响**：节点恢复正常服务能力
 - **调度影响**：scheduler 恢复正常调度到此节点
 - **容器影响**：可以正常创建新容器和进程
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看节点 PIDPressure 状态
@@ -703,7 +711,7 @@ cat /sys/fs/cgroup/pids/kubepods/pids.current
 cat /sys/fs/cgroup/pids/kubepods/pids.max
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 场景 | 建议 |
 |:---|:---|
@@ -713,7 +721,7 @@ cat /sys/fs/cgroup/pids/kubepods/pids.max
 
 ---
 
-#<!-- chunk: `NodeHasInsufficientMemory` - 节点内存不足 -->## `NodeHasInsufficientMemory` - 节点内存不足
+## `NodeHasInsufficientMemory` - 节点内存不足
 
 | 属性 | 说明 |
 |:---|:---|
@@ -723,7 +731,7 @@ cat /sys/fs/cgroup/pids/kubepods/pids.max
 | **适用版本** | v1.4+ |
 | **生产频率** | 中频 (资源压力场景) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示节点的可用内存低于 kubelet 配置的驱逐阈值，MemoryPressure condition 被设置为 True。这是节点进入资源压力状态的关键信号。
 
@@ -734,7 +742,7 @@ cat /sys/fs/cgroup/pids/kubepods/pids.max
 
 kubelet 会优先驱逐 QoS 等级较低的 Pod（BestEffort > Burstable > Guaranteed）。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Warning
@@ -751,7 +759,7 @@ Conditions:
   MemoryPressure   True    KubeletHasInsufficientMemory   kubelet has insufficient memory available
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **集群影响**：节点可用性降低，可能触发集群级别告警
 - **调度影响**：scheduler 会避免调度新 Pod 到此节点
@@ -761,7 +769,7 @@ Conditions:
   - QoS=Guaranteed 的 Pod 最后被驱逐
 - **服务影响**：被驱逐的 Pod 会在其他节点重建，可能导致短暂的服务中断
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看节点内存状态
@@ -791,7 +799,7 @@ kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig.e
 kubectl get events --all-namespaces --field-selector reason=Evicted,involvedObject.kind=Pod
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 原因 | 解决方案 |
 |:---|:---|
@@ -805,7 +813,7 @@ kubectl get events --all-namespaces --field-selector reason=Evicted,involvedObje
 
 ---
 
-#<!-- chunk: `NodeHasDiskPressure` - 节点磁盘压力 -->## `NodeHasDiskPressure` - 节点磁盘压力
+## `NodeHasDiskPressure` - 节点磁盘压力
 
 | 属性 | 说明 |
 |:---|:---|
@@ -815,7 +823,7 @@ kubectl get events --all-namespaces --field-selector reason=Evicted,involvedObje
 | **适用版本** | v1.4+ |
 | **生产频率** | 中频 (资源压力场景) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示节点的磁盘空间或 inode 低于 kubelet 配置的驱逐阈值，DiskPressure condition 被设置为 True。kubelet 监控两个文件系统：
 
@@ -828,7 +836,7 @@ kubectl get events --all-namespaces --field-selector reason=Evicted,involvedObje
 3. 执行容器垃圾回收（Container GC），删除已停止的容器
 4. 如果仍然不足，开始驱逐 Pod（优先驱逐占用磁盘最多的 Pod）
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Warning
@@ -845,7 +853,7 @@ Conditions:
   DiskPressure     True    KubeletHasDiskPressure   kubelet has disk pressure
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **集群影响**：节点可用性降低，可能触发集群级别告警
 - **调度影响**：scheduler 会避免调度新 Pod 到此节点
@@ -854,7 +862,7 @@ Conditions:
 - **现有 Pod**：占用磁盘最多的 Pod 会被优先驱逐
 - **日志收集**：Pod 日志可能无法正常写入
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看节点磁盘状态
@@ -890,7 +898,7 @@ kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig.i
 kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig.evictionHard, .kubeletconfig.evictionSoft'
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 原因 | 解决方案 |
 |:---|:---|
@@ -906,7 +914,7 @@ kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig.e
 
 ---
 
-#<!-- chunk: `NodeHasInsufficientPID` - 节点 PID 不足 -->## `NodeHasInsufficientPID` - 节点 PID 不足
+## `NodeHasInsufficientPID` - 节点 PID 不足
 
 | 属性 | 说明 |
 |:---|:---|
@@ -916,7 +924,7 @@ kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig.e
 | **适用版本** | v1.14+ |
 | **生产频率** | 罕见 (特殊场景) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示节点的可用进程 ID 低于 kubelet 配置的驱逐阈值，PIDPressure condition 被设置为 True。这是一种相对罕见但严重的资源压力状态。
 
@@ -927,7 +935,7 @@ Linux 系统对进程数量有限制（由 `kernel.pid_max` 控制，通常为 3
 2. 无法创建新进程和容器
 3. 如果达到驱逐阈值，开始驱逐 Pod
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Warning
@@ -944,7 +952,7 @@ Conditions:
   PIDPressure      True    KubeletHasInsufficientPID   kubelet has insufficient PID available
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **集群影响**：节点无法创建新进程，严重影响可用性
 - **调度影响**：scheduler 会避免调度新 Pod 到此节点
@@ -952,7 +960,7 @@ Conditions:
 - **现有 Pod**：部分 Pod 会被驱逐以释放 PID
 - **系统影响**：系统命令可能无法执行，SSH 登录可能受阻
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看节点 PID 压力状态
@@ -988,9 +996,10 @@ kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig.e
 
 # 查找创建进程最多的 Pod
 kubectl top pods --all-namespaces --field-selector spec.nodeName=<node-name>
+
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 原因 | 解决方案 |
 |:---|:---|
@@ -1004,7 +1013,7 @@ kubectl top pods --all-namespaces --field-selector spec.nodeName=<node-name>
 
 ---
 
-#<!-- chunk: `Rebooted` - 节点重启 -->## `Rebooted` - 节点重启
+## `Rebooted` - 节点重启
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1014,7 +1023,7 @@ kubectl top pods --all-namespaces --field-selector spec.nodeName=<node-name>
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 (节点重启后) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示 kubelet 检测到节点已重启（通过 boot ID 变化检测）。节点重启可能是计划内的维护操作，也可能是意外的系统崩溃、断电或内核 panic。
 
@@ -1026,7 +1035,7 @@ kubectl top pods --all-namespaces --field-selector spec.nodeName=<node-name>
 
 节点重启会导致所有非持久化数据丢失，包括 EmptyDir 卷、容器缓存等。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Warning
@@ -1044,7 +1053,7 @@ Message: Node rebooted, boot id changed
 Source:  kubelet, node1.example.com
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **集群影响**：节点在重启期间不可用，降低集群容量
 - **Pod 影响**：
@@ -1061,7 +1070,7 @@ Source:  kubelet, node1.example.com
   - iptables 规则需要重建
 - **服务影响**：节点重启导致的服务中断时间取决于重启速度和 Pod 启动时间
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看节点重启事件
@@ -1096,7 +1105,7 @@ mount | grep kubelet
 kubectl get volumeattachments | grep <node-name>
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 重启原因 | 解决方案 |
 |:---|:---|
@@ -1112,7 +1121,7 @@ kubectl get volumeattachments | grep <node-name>
 
 ---
 
-#<!-- chunk: `NodeAllocatableEnforced` - 节点可分配资源限制已更新 -->## `NodeAllocatableEnforced` - 节点可分配资源限制已更新
+## `NodeAllocatableEnforced` - 节点可分配资源限制已更新
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1122,7 +1131,7 @@ kubectl get volumeattachments | grep <node-name>
 | **适用版本** | v1.6+ |
 | **生产频率** | 低频 (kubelet 启动或配置更改时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示 kubelet 已应用或更新节点的 Allocatable 资源限制。Allocatable 是节点上可供 Pod 使用的资源量，计算公式为：
 
@@ -1138,7 +1147,7 @@ Allocatable = Capacity - Reserved(System) - Reserved(Kubernetes) - Eviction Thre
 
 kubelet 使用 cgroup 强制执行这些限制，确保系统和 Kubernetes 组件不会被 Pod 耗尽资源。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Normal
@@ -1156,14 +1165,14 @@ Message: Updated limits for pod cgroup: memory=16Gi, cpu=8
 Source:  kubelet, node1.example.com
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **资源管理**：确保系统和 Kubernetes 组件有足够资源运行
 - **调度影响**：scheduler 使用 Allocatable 值进行调度决策
 - **Pod 限制**：所有 Pod 的资源使用总和不能超过 Allocatable
 - **防止节点不稳定**：通过保留资源防止 OOM 和系统进程被杀
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看节点的 Capacity 和 Allocatable
@@ -1189,7 +1198,7 @@ kubectl top node <node-name>
 kubectl describe node <node-name> | grep -A 15 "Allocated resources"
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 场景 | 建议 |
 |:---|:---|
@@ -1224,7 +1233,7 @@ enforceNodeAllocatable:
 
 ---
 
-#<!-- chunk: `InvalidDiskCapacity` - 磁盘容量无效 -->## `InvalidDiskCapacity` - 磁盘容量无效
+## `InvalidDiskCapacity` - 磁盘容量无效
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1234,7 +1243,7 @@ enforceNodeAllocatable:
 | **适用版本** | v1.0+ |
 | **生产频率** | 罕见 (配置错误时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示 kubelet 检测到文件系统的容量为 0 或无效。这通常是由于文件系统挂载失败、磁盘问题或 cadvisor 获取磁盘信息失败导致的。
 
@@ -1244,7 +1253,7 @@ enforceNodeAllocatable:
 3. 容器垃圾回收（Container GC）无法正常工作
 4. 驱逐机制可能失效
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Warning
@@ -1262,14 +1271,14 @@ Message: failed to get fs info for "imagefs": unable to find data in memory cach
 Source:  kubelet, node1.example.com
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **监控影响**：无法准确监控磁盘使用情况
 - **GC 影响**：垃圾回收机制可能失效
 - **驱逐影响**：基于磁盘压力的驱逐可能不工作
 - **调度影响**：可能导致 DiskPressure condition 不准确
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看节点磁盘相关事件
@@ -1300,9 +1309,10 @@ stat -f /var/lib/containerd
 # 检查磁盘错误
 dmesg | grep -i "disk\|error\|fail"
 smartctl -a /dev/sda  # 需要安装 smartmontools
+
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 原因 | 解决方案 |
 |:---|:---|
@@ -1316,7 +1326,7 @@ smartctl -a /dev/sda  # 需要安装 smartmontools
 
 ---
 
-#<!-- chunk: `FreeDiskSpaceFailed` - 磁盘空间清理失败 -->## `FreeDiskSpaceFailed` - 磁盘空间清理失败
+## `FreeDiskSpaceFailed` - 磁盘空间清理失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1326,7 +1336,7 @@ smartctl -a /dev/sda  # 需要安装 smartmontools
 | **适用版本** | v1.0+ |
 | **生产频率** | 中频 (磁盘压力时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示 kubelet 尝试通过垃圾回收（GC）释放磁盘空间，但未能释放足够的空间以满足要求。这通常发生在节点磁盘使用率很高，且镜像 GC 和容器 GC 都无法释放足够空间的情况下。
 
@@ -1337,7 +1347,7 @@ smartctl -a /dev/sda  # 需要安装 smartmontools
 
 这是磁盘压力升级的信号，表明常规的垃圾回收机制已经不够用了。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Warning
@@ -1355,7 +1365,7 @@ Message: failed to free disk space: failed to garbage collect required amount of
 Source:  kubelet, node1.example.com
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **磁盘状态**：节点继续处于 DiskPressure 状态
 - **镜像拉取**：可能无法拉取新镜像
@@ -1363,7 +1373,7 @@ Source:  kubelet, node1.example.com
 - **Pod 驱逐**：kubelet 可能开始驱逐 Pod
 - **服务影响**：可能导致服务中断和 Pod 迁移
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看磁盘空间清理失败事件
@@ -1398,7 +1408,7 @@ journalctl -u kubelet | grep -i "garbage collect\|image gc\|container gc"
 kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig | {imageGCHighThresholdPercent, imageGCLowThresholdPercent, imageMinimumGCAge}'
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 原因 | 解决方案 |
 |:---|:---|
@@ -1434,7 +1444,7 @@ yum clean all  # RHEL/CentOS
 
 ---
 
-#<!-- chunk: `EvictionThresholdMet` - 驱逐阈值已达到 -->## `EvictionThresholdMet` - 驱逐阈值已达到
+## `EvictionThresholdMet` - 驱逐阈值已达到
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1444,7 +1454,7 @@ yum clean all  # RHEL/CentOS
 | **适用版本** | v1.4+ |
 | **生产频率** | 中频 (资源压力时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示节点的资源使用已经达到 kubelet 配置的驱逐阈值（eviction threshold），kubelet 将开始驱逐 Pod 以回收资源。驱逐阈值分为两类：
 
@@ -1462,7 +1472,7 @@ kubelet 驱逐 Pod 的优先级顺序：
 3. **Burstable** Pods（使用量未超过 requests 的）
 4. **Guaranteed** Pods（requests == limits）
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Warning
@@ -1485,14 +1495,14 @@ Message: Attempting to reclaim ephemeral-storage
 Source:  kubelet, node1.example.com
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **Pod 驱逐**：符合条件的 Pod 会被终止
 - **服务中断**：被驱逐的 Pod 需要在其他节点重建，可能短暂中断服务
 - **调度影响**：节点被标记为压力状态，新 Pod 不会调度到此节点
 - **级联效应**：驱逐的 Pod 迁移到其他节点，可能导致其他节点也产生压力
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看驱逐阈值事件
@@ -1523,7 +1533,7 @@ journalctl -u kubelet | grep -i "evict\|threshold"
 kubectl get pods --all-namespaces -o json | jq '.items[] | select(.status.reason=="Evicted") | {name: .metadata.name, namespace: .metadata.namespace, reason: .status.reason, message: .status.message}'
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 场景 | 解决方案 |
 |:---|:---|
@@ -1562,7 +1572,7 @@ evictionMaxPodGracePeriod: 60
 
 ---
 
-#<!-- chunk: `ContainerGCFailed` - 容器垃圾回收失败 -->## `ContainerGCFailed` - 容器垃圾回收失败
+## `ContainerGCFailed` - 容器垃圾回收失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1572,7 +1582,7 @@ evictionMaxPodGracePeriod: 60
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 (GC 失败时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示 kubelet 尝试清理已停止的容器（Container Garbage Collection）时失败。Container GC 负责删除已经退出的容器，释放磁盘空间。
 
@@ -1587,7 +1597,7 @@ GC 失败可能由以下原因导致：
 3. 容器文件系统无法删除
 4. 权限问题
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Warning
@@ -1603,14 +1613,14 @@ Message: failed to garbage collect containers: rpc error accessing container run
 Source:  kubelet, node1.example.com
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **磁盘空间**：无法通过 Container GC 释放磁盘空间
 - **容器数量**：死亡容器堆积，占用资源
 - **性能影响**：过多容器可能影响容器运行时性能
 - **磁盘压力**：可能加剧 DiskPressure 状态
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看 Container GC 失败事件
@@ -1646,9 +1656,10 @@ journalctl -u containerd | grep -i "remove\|delete\|error"
 
 # 检查磁盘 I/O
 iostat -x 1 5
+
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 原因 | 解决方案 |
 |:---|:---|
@@ -1663,7 +1674,7 @@ iostat -x 1 5
 
 ---
 
-#<!-- chunk: `ImageGCFailed` - 镜像垃圾回收失败 -->## `ImageGCFailed` - 镜像垃圾回收失败
+## `ImageGCFailed` - 镜像垃圾回收失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1673,7 +1684,7 @@ iostat -x 1 5
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 (GC 失败时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示 kubelet 尝试清理未使用的容器镜像（Image Garbage Collection）时失败。Image GC 负责删除不再使用的镜像，释放磁盘空间。
 
@@ -1690,7 +1701,7 @@ GC 失败可能由以下原因导致：
 3. 镜像文件系统损坏
 4. 权限问题
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Warning
@@ -1713,14 +1724,14 @@ Message: rpc error: code = Unknown desc = failed to remove image: image is being
 Source:  kubelet, node1.example.com
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **磁盘空间**：无法通过 Image GC 释放磁盘空间
 - **镜像堆积**：未使用的镜像堆积，占用磁盘
 - **磁盘压力**：可能导致或加剧 DiskPressure 状态
 - **镜像拉取**：可能无法拉取新镜像
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看 Image GC 失败事件
@@ -1760,9 +1771,10 @@ journalctl -u containerd | grep -i "image\|remove\|delete"
 
 # 尝试手动删除未使用的镜像
 crictl rmi --prune
+
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 原因 | 解决方案 |
 |:---|:---|
@@ -1796,7 +1808,7 @@ crictl images
 
 <!-- chunk: Node Controller 事件 -->## Node Controller 事件
 
-#<!-- chunk: `RegisteredNode` - 节点已注册 -->## `RegisteredNode` - 节点已注册
+## `RegisteredNode` - 节点已注册
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1806,13 +1818,13 @@ crictl images
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 (新节点加入时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示新节点已成功注册到 Kubernetes 集群的控制平面。当 kubelet 首次启动时，它会向 API Server 注册节点对象，node-controller 检测到新节点后会产生此事件。
 
 节点注册是节点加入集群的第一步，之后 node-controller 会持续监控节点的健康状态。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Normal
@@ -1830,13 +1842,13 @@ Message: Registered node node1.example.com
 Source:  controllermanager
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **集群影响**：集群增加一个新的工作节点
 - **容量影响**：集群总容量增加
 - **监控影响**：node-controller 开始监控此节点
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看节点注册事件
@@ -1854,9 +1866,10 @@ kubectl get node <node-name> -o json | jq '.metadata.labels, .metadata.annotatio
 
 # 查看 node-controller 日志（需要访问控制平面）
 kubectl logs -n kube-system <controller-manager-pod> | grep -i "register\|node"
+
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 场景 | 建议 |
 |:---|:---|
@@ -1866,7 +1879,7 @@ kubectl logs -n kube-system <controller-manager-pod> | grep -i "register\|node"
 
 ---
 
-#<!-- chunk: `RemovingNode` - 从控制器移除节点 -->## `RemovingNode` - 从控制器移除节点
+## `RemovingNode` - 从控制器移除节点
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1876,13 +1889,13 @@ kubectl logs -n kube-system <controller-manager-pod> | grep -i "register\|node"
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 (节点删除时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示 node-controller 正在将节点从其管理列表中移除。这通常发生在执行 `kubectl delete node` 命令后，或者节点对象被 API Server 删除时。
 
 移除节点后，node-controller 将不再监控此节点的健康状态。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Normal
@@ -1891,13 +1904,13 @@ Message: Removing Node node1.example.com from Controller
 Source:  node-controller
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **集群影响**：集群容量减少
 - **监控影响**：node-controller 停止监控此节点
 - **Pod 影响**：节点上的 Pod 已经或将要被删除
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看节点删除事件
@@ -1910,7 +1923,7 @@ kubectl get nodes
 kubectl logs -n kube-system <controller-manager-pod> | grep -i "remove\|delete"
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 场景 | 建议 |
 |:---|:---|
@@ -1920,7 +1933,7 @@ kubectl logs -n kube-system <controller-manager-pod> | grep -i "remove\|delete"
 
 ---
 
-#<!-- chunk: `DeletingNode` - 删除节点 -->## `DeletingNode` - 删除节点
+## `DeletingNode` - 删除节点
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1930,11 +1943,11 @@ kubectl logs -n kube-system <controller-manager-pod> | grep -i "remove\|delete"
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 (节点删除时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示 node-controller 正在删除节点对象。这是节点生命周期的终点。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Normal
@@ -1943,13 +1956,13 @@ Message: Deleting Node node1.example.com
 Source:  node-controller
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **节点对象**：节点对象将从 API Server 删除
 - **Pod 影响**：节点上的 Pod 应该已经被删除
 - **资源影响**：节点的资源不再计入集群容量
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看节点删除事件
@@ -1962,7 +1975,7 @@ kubectl get nodes | grep <node-name>
 kubectl get nodes
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 场景 | 建议 |
 |:---|:---|
@@ -1972,7 +1985,7 @@ kubectl get nodes
 
 ---
 
-#<!-- chunk: `DeletingAllPods` - 删除节点上的所有 Pod -->## `DeletingAllPods` - 删除节点上的所有 Pod
+## `DeletingAllPods` - 删除节点上的所有 Pod
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1982,7 +1995,7 @@ kubectl get nodes
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 (节点失败时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示 node-controller 检测到节点持续 NotReady 超过 pod-eviction-timeout（默认 5 分钟），开始强制删除节点上的所有 Pod。这是节点失败后的自动恢复机制。
 
@@ -1993,7 +2006,7 @@ kubectl get nodes
 
 注意：这只是删除 API 对象，实际的容器进程可能仍在问题节点上运行（如果节点只是网络隔离而非真正宕机）。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Normal
@@ -2009,7 +2022,7 @@ Message: Node node1.example.com event: Deleting all Pods because of NodeNotReady
 Source:  node-controller
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **Pod 生命周期**：节点上所有 Pod 的 API 对象被删除
 - **服务影响**：
@@ -2023,7 +2036,7 @@ Source:  node-controller
   - PV 卷需要重新挂载（可能受 VolumeAttachment 限制）
 - **恢复时间**：取决于 Pod 重新调度和启动的时间
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看 DeletingAllPods 事件
@@ -2054,9 +2067,10 @@ kubectl get volumeattachments | grep <node-name>
 # 查看受影响的服务
 kubectl get svc --all-namespaces
 kubectl get endpoints --all-namespaces
+
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 场景 | 解决方案 |
 |:---|:---|
@@ -2085,7 +2099,7 @@ kubectl get endpoints --all-namespaces
 
 ---
 
-#<!-- chunk: `TerminatingEvictedPod` - 终止被驱逐的 Pod -->## `TerminatingEvictedPod` - 终止被驱逐的 Pod
+## `TerminatingEvictedPod` - 终止被驱逐的 Pod
 
 | 属性 | 说明 |
 |:---|:---|
@@ -2095,13 +2109,13 @@ kubectl get endpoints --all-namespaces
 | **适用版本** | v1.0+ |
 | **生产频率** | 中频 (节点失败时) |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 此事件表示 node-controller 正在标记特定的 Pod 为删除状态。这通常发生在节点持续 NotReady，node-controller 开始驱逐节点上的 Pod 时。
 
 每个被驱逐的 Pod 都会产生一个 TerminatingEvictedPod 事件。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```yaml
 Type:    Normal
@@ -2119,13 +2133,13 @@ Message: Marking for deletion Pod my-app-xxx
 Source:  node-controller
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **Pod 生命周期**：Pod 被标记为 Terminating 状态
 - **服务影响**：Pod 对应的 Endpoint 被移除，流量不再路由到此 Pod
 - **重建**：如果 Pod 有控制器（Deployment 等），会在其他节点重建
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 查看 TerminatingEvictedPod 事件
@@ -2145,9 +2159,10 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.nodeName}'
 
 # 查看节点状态
 kubectl describe node <node-name>
+
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 场景 | 解决方案 |
 |:---|:---|
@@ -2160,11 +2175,11 @@ kubectl describe node <node-name>
 
 <!-- chunk: 节点驱逐机制 -->## 节点驱逐机制
 
-#<!-- chunk: kubelet 驱逐（Node-pressure Eviction） -->## kubelet 驱逐（Node-pressure Eviction）
+## kubelet 驱逐（Node-pressure Eviction）
 
 kubelet 会主动监控节点资源，当资源不足时驱逐 Pod。
 
-##<!-- chunk: 驱逐信号（Eviction Signals） -->## 驱逐信号（Eviction Signals）
+## 驱逐信号（Eviction Signals）
 
 | 信号 | 含义 | 描述 |
 |:---|:---|:---|
@@ -2175,7 +2190,7 @@ kubelet 会主动监控节点资源，当资源不足时驱逐 Pod。
 | `imagefs.inodesFree` | 镜像文件系统可用 inode | `imagefs.inodesFree := node.stats.runtime.imagefs.inodesFree` |
 | `pid.available` | 可用进程 ID | `pid.available := node.stats.rlimit.maxpid - node.stats.rlimit.curproc` |
 
-##<!-- chunk: 驱逐阈值类型 -->## 驱逐阈值类型
+## 驱逐阈值类型
 
 **硬驱逐阈值（Hard Eviction Thresholds）**：
 - 达到阈值立即驱逐，没有宽限期
@@ -2203,7 +2218,7 @@ kubelet 会主动监控节点资源，当资源不足时驱逐 Pod。
   evictionMaxPodGracePeriod: 90
   ```
 
-##<!-- chunk: 驱逐策略 -->## 驱逐策略
+## 驱逐策略
 
 **1. 驱逐顺序（按优先级）**：
 
@@ -2233,11 +2248,11 @@ evictionMinimumReclaim:
   imagefs.available: "2Gi"
 ```
 
-#<!-- chunk: node-controller 驱逐（Taint-based Eviction） -->## node-controller 驱逐（Taint-based Eviction）
+## node-controller 驱逐（Taint-based Eviction）
 
 node-controller 通过 taint 机制驱逐 Pod。
 
-##<!-- chunk: Taint 类型 -->## Taint 类型
+## Taint 类型
 
 当节点出现问题时，node-controller 会自动添加 taint：
 
@@ -2251,7 +2266,7 @@ node-controller 通过 taint 机制驱逐 Pod。
 | `node.kubernetes.io/network-unavailable` | NoSchedule | NetworkUnavailable=True | 网络不可用 |
 | `node.kubernetes.io/unschedulable` | NoSchedule | spec.unschedulable=true | 节点不可调度 |
 
-##<!-- chunk: 容忍时间（Toleration Seconds） -->## 容忍时间（Toleration Seconds）
+## 容忍时间（Toleration Seconds）
 
 Pod 可以通过 toleration 设置对 taint 的容忍时间：
 
@@ -2277,7 +2292,7 @@ DaemonSet 的 Pod 会有特殊的 toleration，不会因为节点问题被驱逐
 
 <!-- chunk: 生产环境监控建议 -->## 生产环境监控建议
 
-#<!-- chunk: 监控指标 -->## 监控指标
+## 监控指标
 
 **节点级别指标**：
 
@@ -2311,7 +2326,7 @@ kube_event_count{reason="Rebooted"} > 0
 kube_event_count{reason=~"ImageGCFailed|ContainerGCFailed"} > 0
 ```
 
-#<!-- chunk: 告警规则 -->## 告警规则
+## 告警规则
 
 **Prometheus AlertManager 规则示例**：
 
@@ -2401,7 +2416,7 @@ groups:
       description: "Node {{ $labels.node }} has failed to garbage collect resources."
 ```
 
-#<!-- chunk: 仪表板（Dashboard） -->## 仪表板（Dashboard）
+## 仪表板（Dashboard）
 
 **Grafana 仪表板关键面板**：
 
@@ -2437,7 +2452,7 @@ groups:
    - 节点资源请求 vs 使用
    - 节点 Pod 数量
 
-#<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
 
 1. **资源预留配置**
    ```yaml
@@ -2504,6 +2519,11 @@ groups:
    - 设置合理的 PriorityClass
 
 6. **节点维护流程**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
    ```bash
    # 1. 标记节点不可调度
    kubectl cordon <node-name>
@@ -2537,7 +2557,7 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-33-kubernetes-events MOC
-- [[domain-17-system-foundation/README|Domain-33: Kubernetes Events 全域事件大全]]
+- [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
 - Domain-33 K8s 事件 — 开源项目索引
 - 01 - Kubernetes 事件系统架构与 API 参考
 - 02 - Pod 与容器生命周期事件
@@ -2558,5 +2578,7 @@ groups:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+
+```

@@ -32,6 +32,7 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Vertical Pod Autoscaling
@@ -252,4 +253,4 @@ kubectl get pods -n kube-system -l 'app in (vpa-recommender,vpa-updater,vpa-admi
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]

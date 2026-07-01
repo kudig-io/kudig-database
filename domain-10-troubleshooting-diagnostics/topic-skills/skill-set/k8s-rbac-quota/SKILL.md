@@ -222,7 +222,7 @@ RBAC 和 ResourceQuota 问题是 [[Kubernetes|Kubernetes]] 中导致 Pod 创建�
 
 本Skill诊断过程中可能涉及的其他Skill：
 
-- [[skills/best-practices/scenarios/security-incident]]
+- [[skills/best-practices/scenarios/security-incident.md|security incident]]
 
 - k8s-namespace-quota
 
@@ -326,6 +326,7 @@ flowchart TD
      annotations:
        kubernetes.io/service-account.name: gitlab-runner
    type: kubernetes.io/service-account-token
+
    ```
 2. 更新 GitLab Runner 的 kubeconfig 引用新 Token
 3. 验证流水线：`kubectl auth can-i create deployments -n <ns> --as system:serviceaccount:gitlab-runner:gitlab-runner`
@@ -353,9 +354,14 @@ flowchart TD
 - 连锁反应：租户 A 占满配额后，其他租户不受影响，但平台监控误报
 **修复方案**：
 1. 紧急清理已完成 Pod：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
    ```bash
    kubectl delete pods -n tenant-a --field-selector=status.phase=Succeeded
    kubectl delete pods -n tenant-a --field-selector=status.phase=Failed
+
    ```
 2. 为 CronJob 添加 `ttlSecondsAfterFinished: 3600`
 3. 调整 ResourceQuota 策略，区分 `pods` 和 `services` 等配额
@@ -383,6 +389,10 @@ flowchart TD
 - 部分遗留应用使用 root 用户运行，违反 restricted 策略
 **修复方案**：
 1. 短期方案：为受影响的 Namespace 设置 `baseline` 级别
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
    ```bash
    kubectl label ns <ns> pod-security.kubernetes.io/enforce=baseline --overwrite
    ```
@@ -450,6 +460,9 @@ kubectl get clusterrolebinding -o json | \
 
 ### 4. Admission Webhook 拦截诊断
 当 Pod 创建失败但 RBAC 看似正常时：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 检查活跃的 MutatingWebhookConfiguration
@@ -568,4 +581,6 @@ spec:
 
 ## 相关概念
 
-- [[concepts/rbac-authorization|RBAC 授权]] — Kubernetes 基于角色的访问控制与权限模型
+- [[concepts/rbac-authorization.md|RBAC 授权]] — Kubernetes 基于角色的访问控制与权限模型
+
+```

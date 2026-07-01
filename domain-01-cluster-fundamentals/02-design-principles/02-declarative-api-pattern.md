@@ -330,6 +330,7 @@ metadata:
     uid: 12345678-1234-1234-1234-123456789012
     controller: true      # 标记为控制器
     blockOwnerDeletion: true
+
 ```
 
 <!-- chunk: API请求流程 -->
@@ -366,7 +367,7 @@ metadata:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-2: Kubernetes 设计原则与核心机制]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
 - Domain-2 设计原则 — 开源项目索引
 - Kubernetes 设计原则与哲学
 - 控制器模式与调谐循环
@@ -385,7 +386,7 @@ metadata:
 - API Server 深度解析
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-01-cluster-fundamentals
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 
@@ -393,3 +394,5 @@ metadata:
 - 01-design-principles-foundations
 - 03-controller-pattern
 - 04-watch-list-mechanism
+
+```

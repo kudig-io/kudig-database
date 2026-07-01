@@ -87,9 +87,9 @@ k8s_versions:
 
 <!-- chunk: 🔐 零信任核心原则 -->## 🔐 零信任核心原则
 
-#<!-- chunk: 身份验证与授权 -->## 身份验证与授权
+## 身份验证与授权
 
-##<!-- chunk: 1. 统一身份认证平台 -->## 1. 统一身份认证平台
+## 1. 统一身份认证平台
 ```yaml
 # Keycloak身份认证配置
 apiVersion: apps/v1
@@ -145,7 +145,7 @@ spec:
           periodSeconds: 10
 ```
 
-##<!-- chunk: 2. 多因素认证配置 -->## 2. 多因素认证配置
+## 2. 多因素认证配置
 ```yaml
 # MFA策略配置
 apiVersion: keycloak.org/v1alpha1
@@ -177,9 +177,9 @@ spec:
     failureFactor: 30
 ```
 
-#<!-- chunk: 动态访问控制 -->## 动态访问控制
+## 动态访问控制
 
-##<!-- chunk: 1. OPA Gatekeeper策略 -->## 1. OPA Gatekeeper策略
+## 1. OPA Gatekeeper策略
 ```yaml
 # OPA Gatekeeper约束模板
 apiVersion: templates.gatekeeper.sh/v1
@@ -224,7 +224,7 @@ spec:
     labels: ["owner", "environment", "cost-center"]
 ```
 
-##<!-- chunk: 2. 精细化RBAC控制 -->## 2. 精细化RBAC控制
+## 2. 精细化RBAC控制
 ```yaml
 # 基于角色的访问控制
 apiVersion: rbac.authorization.k8s.io/v1
@@ -259,9 +259,9 @@ roleRef:
 
 <!-- chunk: 🛡️ 网络安全防护 -->## 🛡️ 网络安全防护
 
-#<!-- chunk: 微分段网络策略 -->## 微分段网络策略
+## 微分段网络策略
 
-##<!-- chunk: 1. 层次化网络隔离 -->## 1. 层次化网络隔离
+## 1. 层次化网络隔离
 ```yaml
 # 应用层网络策略
 apiVersion: networking.k8s.io/v1
@@ -327,7 +327,7 @@ spec:
       port: 53
 ```
 
-##<!-- chunk: 2. 服务网格安全 -->## 2. 服务网格安全
+## 2. 服务网格安全
 ```yaml
 # Istio安全策略
 apiVersion: security.istio.io/v1beta1
@@ -368,9 +368,9 @@ spec:
 
 <!-- chunk: 🔑 密钥管理 -->## 🔑 密钥管理
 
-#<!-- chunk: HashiCorp Vault集成 -->## HashiCorp Vault集成
+## HashiCorp Vault集成
 
-##<!-- chunk: 1. Vault Operator部署 -->## 1. Vault Operator部署
+## 1. Vault Operator部署
 ```yaml
 # Vault集群配置
 apiVersion: vault.banzaicloud.com/v1alpha1
@@ -414,7 +414,7 @@ spec:
         ttl: 1h
 ```
 
-##<!-- chunk: 2. 应用密钥注入 -->## 2. 应用密钥注入
+## 2. 应用密钥注入
 ```yaml
 # Vault Agent Injector配置
 apiVersion: apps/v1
@@ -447,9 +447,9 @@ spec:
 
 <!-- chunk: 🕵️ 威胁检测与响应 -->## 🕵️ 威胁检测与响应
 
-#<!-- chunk: 运行时安全监控 -->## 运行时安全监控
+## 运行时安全监控
 
-##<!-- chunk: 1. Falco入侵检测 -->## 1. Falco入侵检测
+## 1. Falco入侵检测
 ```yaml
 # Falco配置
 apiVersion: apps/v1
@@ -521,7 +521,7 @@ spec:
           path: /proc
 ```
 
-##<!-- chunk: 2. 自定义威胁规则 -->## 2. 自定义威胁规则
+## 2. 自定义威胁规则
 ```yaml
 # Falco自定义规则
 - rule: Detect crypto miners
@@ -545,9 +545,9 @@ spec:
   tags: [network, mitre_exfiltration]
 ```
 
-#<!-- chunk: 安全事件响应 -->## 安全事件响应
+## 安全事件响应
 
-##<!-- chunk: 1. 自动化响应机制 -->## 1. 自动化响应机制
+## 1. 自动化响应机制
 ```yaml
 # 安全事件响应工作流
 apiVersion: argoproj.io/v1alpha1
@@ -599,9 +599,9 @@ spec:
 
 <!-- chunk: 🔍 合规与审计 -->## 🔍 合规与审计
 
-#<!-- chunk: 安全基线检查 -->## 安全基线检查
+## 安全基线检查
 
-##<!-- chunk: 1. CIS基准自动化检查 -->## 1. CIS基准自动化检查
+## 1. CIS基准自动化检查
 ```yaml
 # kube-bench配置
 apiVersion: batch/v1
@@ -643,7 +643,7 @@ spec:
           restartPolicy: OnFailure
 ```
 
-##<!-- chunk: 2. 安全配置审计 -->## 2. 安全配置审计
+## 2. 安全配置审计
 ```yaml
 # Kubernetes安全审计配置
 apiVersion: audit.k8s.io/v1
@@ -676,9 +676,9 @@ rules:
 
 <!-- chunk: 🛠️ 安全工具链 -->## 🛠️ 安全工具链
 
-#<!-- chunk: 漏洞扫描集成 -->## 漏洞扫描集成
+## 漏洞扫描集成
 
-##<!-- chunk: 1. Trivy镜像扫描 -->## 1. Trivy镜像扫描
+## 1. Trivy镜像扫描
 ```yaml
 # Trivy扫描CronJob
 apiVersion: batch/v1
@@ -717,7 +717,7 @@ spec:
           restartPolicy: OnFailure
 ```
 
-##<!-- chunk: 2. 运行时安全扫描 -->## 2. 运行时安全扫描
+## 2. 运行时安全扫描
 ```yaml
 # Clair配置
 apiVersion: apps/v1
@@ -772,7 +772,7 @@ data:
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 安全架构部署 -->## 安全架构部署
+## 安全架构部署
 - [ ] 部署统一身份认证平台
 - [ ] 实施多因素认证机制
 - [ ] 配置动态访问控制策略
@@ -780,7 +780,7 @@ data:
 - [ ] 集成密钥管理系统
 - [ ] 部署运行时安全监控
 
-#<!-- chunk: 威胁防护体系 -->## 威胁防护体系
+## 威胁防护体系
 - [ ] 实施入侵检测和预防系统
 - [ ] 建立安全事件响应机制
 - [ ] 配置自动化威胁响应
@@ -788,7 +788,7 @@ data:
 - [ ] 建立威胁情报集成
 - [ ] 配置安全日志分析
 
-#<!-- chunk: 合规与审计 -->## 合规与审计
+## 合规与审计
 - [ ] 实施安全基线自动化检查
 - [ ] 配置安全审计日志收集
 - [ ] 建立合规性监控体系
@@ -805,9 +805,9 @@ data:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -905,9 +905,9 @@ data:
 - 44-martech-adtech
 - 95-industrial-metaverse
 
-- [[domain-05-security-compliance/README|返回目录]]- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[domain-05-security-compliance/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 ## See Also
 
@@ -918,5 +918,5 @@ data:
 
 ## 相关合成分析
 
-- [[synthesis/service-mesh-zero-trust-security|Service Mesh 零信任安全架构]]
+- [[concepts/service-mesh-zero-trust-security.md|Service Mesh 零信任安全架构]]
 

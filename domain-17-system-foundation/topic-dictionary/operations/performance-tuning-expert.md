@@ -41,6 +41,7 @@ prerequisites:
 - gpu-scheduling-basics
 - policy-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 03 - [[Kubernetes|Kubernetes]] 性能调优专家指南
@@ -60,7 +61,7 @@ created: "2026-05-23"
 - **专家**: 负责生产环境性能调优的SRE/运维工程师,需要深入掌握各层面性能优化技术和实战案例
 
 **前置知识要求**:
-- **基础**: Kubernetes架构(API Server、[[etcd|etcd]]、调度器)、Pod生命周期、资源请求与限制
+- **基础**: Kubernetes架构(API Server、[[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]]、调度器)、Pod生命周期、资源请求与限制
 - **中级**: 存储类(StorageClass)、网络插件(CNI)、监控体系([[Prometheus|Prometheus]]/Grafana)
 - **专家**: Linux内核调优、容器运行时原理、网络栈优化、应用性能分析
 
@@ -135,6 +136,10 @@ kubectl get componentstatuses
 ```
 
 **Level 2 - 进阶分析**: 
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 使用Prometheus查询API延迟
 kubectl port-forward -n monitoring svc/prometheus 9090:9090 &
@@ -162,6 +167,11 @@ kubectl debug node/worker-1 -it --image=nicolaka/netshoot -- iostat -xz 5 3
 | **etcd瓶颈** | 数据读写慢、leader切换 | WAL延迟、fsync时间长 | 高 | P0 |
 
 ### 1.2 性能诊断工具链
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -342,6 +352,10 @@ graph TD
 4. **优先优化高影响瓶颈**: 先解决P0级别的控制平面和资源瓶颈,再优化其他问题
 
 **故障排查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 快速定位瓶颈类型
 # 1. 检查是否为CPU瓶颈
@@ -1524,6 +1538,10 @@ data:
 
 ### 5.3 存储监控和基准测试
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # ========== 存储性能基准测试 ==========
@@ -1598,7 +1616,7 @@ jq '.jobs[].read' /tmp/storage-benchmark-results.json
 jq '.jobs[].write' /tmp/storage-benchmark-results.json
 
 # 5. 清理测试资源
-kubectl delete namespace ${TEST_NAMESPACE}
+kubectl delete namespace ${TEST_NAMESPACE}  # ⚠️ 不可逆：永久删除命名空间及全部资源
 
 echo "存储性能测试完成"
 ```
@@ -1618,6 +1636,10 @@ echo "存储性能测试完成"
 4. **定期基准测试**: 使用FIO工具定期测试存储性能,及时发现性能退化
 
 **故障排查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 使用FIO测试IOPS
 kubectl run fio-test --rm -it --image=ljishen/fio -- fio --name=test --rw=randread --bs=4k --iodepth=16 --size=1g --numjobs=4 --runtime=60 --group_reporting
@@ -1913,6 +1935,10 @@ spec:
 4. **分层启动探测**: 使用startupProbe(慢)、livenessProbe(中)、readinessProbe(快)分层检测
 
 **故障排查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Java应用堆内存分析
 kubectl exec <java-pod> -- jmap -heap 1
@@ -2058,6 +2084,10 @@ spec:
 ```
 
 ### 7.2 自动化性能测试
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 #!/bin/bash
@@ -2293,6 +2323,7 @@ kubectl port-forward -n monitoring svc/grafana 3000:80
 万级节点集群API Server QPS达到2000+时出现明显延迟，影响集群管理效率
 
 **问题诊断**:
+
 ```bash
 # 监控API Server性能指标
 kubectl get --raw /metrics | grep apiserver_request_duration_seconds | \
@@ -3041,6 +3072,12 @@ cat /proc/sys/net/netfilter/nf_conntrack_count && cat /proc/sys/net/netfilter/nf
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级
 
+## 参考链接
+
+- [Performance Tuning Expert]()
+
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

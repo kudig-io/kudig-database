@@ -41,7 +41,7 @@ Shipwright 是一个在 Kubernetes 上构建容器镜像的框架。它抽象了
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -58,10 +58,10 @@ Shipwright 是一个在 Kubernetes 上构建容器镜像的框架。它抽象了
 
 ## 参考链接
 
-- [[entities/crd-custom-resources|crd-custom-resources]]
-- [[concepts/controller-pattern|controller-pattern]]
-- [[concepts/storage-model|storage-model]]
-- [[concepts/secrets-management|secrets-management]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[concepts/controller-pattern.md|controller-pattern]]
+- [[concepts/storage-model.md|storage-model]]
+- [[concepts/secrets-management.md|secrets-management]]
 - [[pod-lifecycle]]
 
 ## Related
@@ -73,10 +73,10 @@ Shipwright 是一个在 Kubernetes 上构建容器镜像的框架。它抽象了
 - [[buildpacks]] — Cloud Native Buildpacks
 
 - shipwright
-- [[entities/atlantis|Atlantis]]
-- [[entities/dalec|Dalec]]
-- [[entities/werf|werf]]
-- [[entities/pipecd|PipeCD]]
-- [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/atlantis.md|Atlantis]]
+- [[entities/dalec.md|Dalec]]
+- [[entities/werf.md|werf]]
+- [[entities/pipecd.md|PipeCD]]
+- [[entities/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

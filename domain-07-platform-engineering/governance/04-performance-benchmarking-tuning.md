@@ -430,6 +430,11 @@ network_plugin_benchmark:
 ```
 
 ### 网络性能测试脚本
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # 网络性能基准测试
@@ -501,7 +506,7 @@ EOF
         }'
     
     # 清理测试环境
-    kubectl delete namespace $test_namespace
+    kubectl delete namespace $test_namespace  # ⚠️ 不可逆：永久删除命名空间及全部资源
 }
 
 test_network_performance
@@ -511,6 +516,11 @@ test_network_performance
 ## 存储性能调优
 
 ### CSI驱动性能测试
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 #!/bin/bash
 # 存储性能基准测试
@@ -682,6 +692,10 @@ spec:
 ## 调优最佳实践
 
 ### 1. 系统级调优
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # Linux系统性能调优脚本
@@ -843,7 +857,7 @@ performance_tuning_checklist
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Platform Ops Domain (平台运维领域)]]
+- [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
 - Domain-9 平台运维 — 开源项目索引
 - 平台运维概述
 - 集群生命周期管理
@@ -857,7 +871,7 @@ performance_tuning_checklist
 
 ## Related
 
-- [[domain-02-workloads-applications/03-jvm-gc-container-tuning|03-jvm-gc-container-tuning]]
+- [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
 
 ## See Also
 

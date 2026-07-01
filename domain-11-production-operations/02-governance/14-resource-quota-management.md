@@ -59,9 +59,9 @@ created: "2026-05-23"
 
 <!-- chunk: 🏗️ 配额管理架构 -->## 🏗️ 配额管理架构
 
-#<!-- chunk: 多层级配额体系 -->## 多层级配额体系
+## 多层级配额体系
 
-##<!-- chunk: 1. 集群级配额 -->## 1. 集群级配额
+## 1. 集群级配额
 ```yaml
 # 集群级资源配额
 apiVersion: v1
@@ -123,7 +123,7 @@ globalDefault: true
 description: "Medium priority workloads"
 ```
 
-##<!-- chunk: 2. 命名空间级配额 -->## 2. 命名空间级配额
+## 2. 命名空间级配额
 ```yaml
 # 命名空间配额模板
 apiVersion: v1
@@ -197,9 +197,9 @@ spec:
     services.nodeports: "10"
 ```
 
-#<!-- chunk: 动态配额管理 -->## 动态配额管理
+## 动态配额管理
 
-##<!-- chunk: 1. 配额控制器 -->## 1. 配额控制器
+## 1. 配额控制器
 ```python
 #!/usr/bin/env python3
 # 动态配额管理控制器
@@ -467,7 +467,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-##<!-- chunk: 2. 配额申请和审批流程 -->## 2. 配额申请和审批流程
+## 2. 配额申请和审批流程
 ```yaml
 # 配额申请CRD定义
 apiVersion: apiextensions.k8s.io/v1
@@ -616,9 +616,9 @@ data:
 
 <!-- chunk: 📊 配额监控和报告 -->## 📊 配额监控和报告
 
-#<!-- chunk: 实时配额监控 -->## 实时配额监控
+## 实时配额监控
 
-##<!-- chunk: 1. 配额使用率仪表板 -->## 1. 配额使用率仪表板
+## 1. 配额使用率仪表板
 ```json
 {
   "dashboard": {
@@ -659,7 +659,7 @@ data:
 }
 ```
 
-##<!-- chunk: 2. 配额告警规则 -->## 2. 配额告警规则
+## 2. 配额告警规则
 ```yaml
 # 配额告警配置
 apiVersion: monitoring.coreos.com/v1
@@ -705,9 +705,9 @@ spec:
         description: "Quota will expire in less than 24 hours"
 ```
 
-#<!-- chunk: 配额分析报告 -->## 配额分析报告
+## 配额分析报告
 
-##<!-- chunk: 1. 配额使用分析脚本 -->## 1. 配额使用分析脚本
+## 1. 配额使用分析脚本
 ```python
 #!/usr/bin/env python3
 # 配额使用分析报告生成器
@@ -952,7 +952,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 配额体系设计 -->## 配额体系设计
+## 配额体系设计
 - [ ] 设计多层级配额管理体系
 - [ ] 制定配额分配策略和标准
 - [ ] 建立配额申请和审批流程
@@ -960,7 +960,7 @@ if __name__ == "__main__":
 - [ ] 实施配额使用监控和告警
 - [ ] 建立配额优化和回收机制
 
-#<!-- chunk: 技术实施 -->## 技术实施
+## 技术实施
 - [ ] 部署配额管理控制器
 - [ ] 配置配额监控仪表板
 - [ ] 实施配额使用率分析工具
@@ -968,7 +968,7 @@ if __name__ == "__main__":
 - [ ] 配置配额到期提醒系统
 - [ ] 实施配额审计和合规检查
 
-#<!-- chunk: 运营管理 -->## 运营管理
+## 运营管理
 - [ ] 制定配额管理操作手册
 - [ ] 建立配额管理员角色和职责
 - [ ] 实施配额使用培训和指导
@@ -985,9 +985,9 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations KUDIG Database — Global MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系

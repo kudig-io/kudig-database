@@ -216,6 +216,7 @@ spec:
   ports:
   - port: 80
     targetPort: 8080
+
 ```
 
 ## 常用 kubectl 操作速查
@@ -257,6 +258,12 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 预览变更（不实际应用）
 kubectl diff -f manifests/
@@ -290,5 +297,7 @@ kubectl get deploy -n production -o name | xargs -I{} kubectl scale {} --replica
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

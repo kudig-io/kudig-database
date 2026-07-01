@@ -79,14 +79,14 @@ graph TD
 
 - domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md
 - domain-01-cluster-fundamentals/18-upgrade-migration-strategy.md
-- [[domain-08-release-change-management/topic-migration/README]]
+- [[domain-08-release-change-management/topic-migration/README.md|README]]
 
 
 ---
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-upgrade-fta]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-upgrade-fta.md|cluster upgrade fta]]
 
 
 ---
@@ -105,6 +105,6 @@ graph TD
 
 ## Related
 
-- [[references/kudig-metadata-index|README]].md|README]]
-- [[skills/cluster-upgrade-fta|cluster-upgrade-fta]]
+- [[entities/kudig-metadata-index.md|README]].md|README]]
+- [[skills/cluster-upgrade-fta.md|cluster-upgrade-fta]]
 - 07-upgrade-paths-strategy

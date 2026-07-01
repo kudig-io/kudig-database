@@ -91,9 +91,6 @@ k8s_versions:
 >
 > **版本说明**:
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-
 > - v1.25+ 移除 PodSecurityPolicy，使用 PSA 替代
 > - v1.27+ 移除部分废弃 API (如 CSIStorageCapacity v1beta1)
 > - v1.28+ 支持 UVIP (Unknown Version Interoperability Proxy)
@@ -124,6 +121,11 @@ k8s_versions:
 ## 问题现象与影响分析
 
 ### 集群升级架构与流程
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
@@ -367,6 +369,9 @@ kubectl top nodes
 
 #### 控制平面升级
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 查看可用版本
 apt-cache madison kubeadm  # Debian/Ubuntu
@@ -401,6 +406,12 @@ systemctl restart kubelet
 
 #### 节点维护
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 禁止调度
 kubectl cordon <node-name>
@@ -422,8 +433,8 @@ kubectl uncordon <node-name>
 kubectl delete node <node-name>
 
 # 在节点上重置 (用于重新加入)
-kubeadm reset
-rm -rf /etc/kubernetes/ /var/lib/kubelet/ /var/lib/etcd/
+kubeadm reset  # ⚠️ 清理节点所有 K8s 配置
+rm -rf /etc/kubernetes/ /var/lib/kubelet/ /var/lib/etcd/  # ⚠️ 删除系统/数据文件
 
 # 生成加入 token
 kubeadm token create --print-join-command
@@ -433,6 +444,9 @@ kubeadm join <api-server>:6443 --token <token> --discovery-token-ca-cert-hash sh
 ```
 
 #### etcd 备份恢复
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
 ```bash
 # 设置环境变量
@@ -488,6 +502,9 @@ kubectl get nodes
 
 #### 控制平面回滚
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 如果升级过程中失败，etcd 数据未损坏
 # 1. 恢复旧版本 kubeadm
@@ -507,6 +524,9 @@ systemctl restart kubelet
 ```
 
 #### 使用 etcd 备份完整回滚
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
 ```bash
 # 1. 停止所有控制平面节点的控制平面组件
@@ -549,6 +569,11 @@ kubectl get pdb -A -o jsonpath='{range .items[*]}{.metadata.name}: {.status.disr
 ```
 
 #### 解决方案
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 方案 1：使用更强的 drain 选项
@@ -601,6 +626,9 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 ```
 
 #### kubelet 证书续期
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 检查 kubelet 证书
@@ -721,6 +749,11 @@ echo "=== 检查完成 ==="
 
 ### 常用命令速查
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 版本检查
 kubectl version
@@ -744,7 +777,7 @@ kubeadm certs renew all
 # etcd 备份
 etcdctl snapshot save /path/to/backup.db
 etcdctl snapshot status /path/to/backup.db
-etcdctl snapshot restore /path/to/backup.db --data-dir=/var/lib/etcd
+etcdctl snapshot restore /path/to/backup.db --data-dir=/var/lib/etcd  # ⚠️ 覆盖 etcd 数据，集群状态回退
 
 # Token 管理
 kubeadm token list
@@ -764,16 +797,16 @@ kubeadm token create --print-join-command
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/05-crd-operator-troubleshooting|05-crd-operator-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/06-kustomize-troubleshooting|06-kustomize-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/02-logging-monitoring-troubleshooting|02-logging-monitoring-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting|03-helm-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/05-crd-operator-troubleshooting.md|05-crd-operator-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/06-kustomize-troubleshooting.md|06-kustomize-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/02-logging-monitoring-troubleshooting.md|02-logging-monitoring-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]

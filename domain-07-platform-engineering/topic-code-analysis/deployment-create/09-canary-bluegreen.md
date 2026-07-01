@@ -60,7 +60,7 @@ related_topics:
 created: "2026-05-23"
 ---
 
-# Deployment [[skills/deployment-canary-and-bluegreen|deployment-canary-and-bluegreen]]模式
+# Deployment [[skills/deployment-canary-and-bluegreen.md|deployment-canary-and-bluegreen]]模式
 
 ## 函数签名
 
@@ -190,6 +190,10 @@ Service (selector: app=web)
 
 ### 实战操作
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 当前稳定版本
 kubectl get deployment web-stable
@@ -288,6 +292,9 @@ spec:
 
 利用 `kubectl rollout pause` 将 RollingUpdate 暂停在中间状态，实现部分副本跑新版本的金丝雀效果。
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 触发更新，立即暂停
 kubectl set image deployment/web web=myapp:v2.0.0
@@ -309,6 +316,9 @@ kubectl rollout undo deployment/web
 
 ### pause 命令的 API 操作
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # kubectl rollout pause 本质上执行的操作
 kubectl patch deployment web -p '{"spec":{"paused":true}}'
@@ -329,6 +339,11 @@ Service (selector: 动态切换)
 ```
 
 ### 实战操作
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 当前蓝版本生产中
@@ -480,7 +495,7 @@ flowchart TD
 
 ## Related
 
-- [[entities/argo|argo]]
-- [[entities/kubernetes|kubernetes]]
-- [[entities/linkerd|Linkerd]]
-- [[entities/istio|Istio]]
+- [[entities/argo.md|argo]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/linkerd.md|Linkerd]]
+- [[entities/istio.md|Istio]]

@@ -321,4 +321,4 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/deployment-controller-architecture|Deployment 控制器架构]] — Deployment 滚动更新与副本管理原理
+- [[concepts/deployment-controller-architecture.md|Deployment 控制器架构]] — Deployment 滚动更新与副本管理原理

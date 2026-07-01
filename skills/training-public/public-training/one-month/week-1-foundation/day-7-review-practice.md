@@ -80,6 +80,7 @@ related:
   - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/checkpoint.md
   - domain-11-production-operations/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup.md
 ---
+
 ```
 
 > **学习时间**: 4-5 小时 | **主题**: Week 1 总结与实践项目
@@ -210,6 +211,9 @@ kubectl get pods -n kube-system
 
 #### Step 2: 创建 Namespace (10min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建项目 namespace
 kubectl create namespace web-app
@@ -227,6 +231,9 @@ kubectl get namespace web-app
 ```
 
 #### Step 3: 部署 Deployment (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建完整的 Deployment YAML
@@ -336,6 +343,9 @@ kubectl get replicaset
 
 #### Step 4: 创建 Service (20min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建 ClusterIP 和 NodePort 两种 Service
 cat > service.yaml << 'EOF'
@@ -392,6 +402,12 @@ kubectl get endpoints nginx-service
 ```
 
 #### Step 5: 测试和调试 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 测试 ClusterIP Service（集群内部访问）
@@ -626,9 +642,12 @@ spec:
 
 ### Q6: 如何清理 kind 集群中的所有资源？
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```bash
 # 删除命名空间（会删除其中所有资源）
-kubectl delete namespace web-app
+kubectl delete namespace web-app  # ⚠️ 不可逆：永久删除命名空间及全部资源
 
 # 删除整个集群
 kind delete cluster --name production-sim
@@ -669,4 +688,6 @@ Week 2 将深入 K8s 核心技术：控制平面组件详解（etcd、API Server
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

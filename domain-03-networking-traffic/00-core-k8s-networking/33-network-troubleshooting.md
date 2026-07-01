@@ -171,6 +171,9 @@ spec:
 
 ### 3.1 DNS 诊断
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 测试DNS解析
 kubectl exec -it netshoot -- nslookup kubernetes.default
@@ -194,6 +197,9 @@ kubectl exec -it netshoot -- cat /etc/resolv.conf | grep ndots
 ```
 
 ### 3.2 连通性诊断 - 按场景
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # ========== Pod-to-Pod（同节点）==========
@@ -289,6 +295,9 @@ hubble observe --verdict DROPPED       # 被策略丢弃的流量
 
 跨节点通信失败时，需要在路径上每个接口同时抓包。
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # ========== 源节点 ==========
 # 跳1: Pod 的 veth pair
@@ -313,6 +322,9 @@ kubectl exec -it <src-pod> -- ping -c 5 <dst-pod-ip>
 ```
 
 ### 4.2 定位 Pod 对应的 veth
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 方法1: 通过 Pod 内 ifindex
@@ -377,6 +389,9 @@ echo "conntrack: $CT_C / $CT_M ($((CT_C*100/CT_M))%)"
 
 ### 6.1 MTU 问题诊断
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查各接口 MTU
 ip link show | grep mtu
@@ -395,6 +410,9 @@ kubectl exec -it netshoot -- ping -M do -s 1440 <target>
 ```
 
 ### 6.2 性能测试
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 带宽测试 (iperf3)
@@ -447,7 +465,7 @@ kubectl exec -it netshoot -- ab -n 1000 -c 100 http://<service>/
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -458,9 +476,9 @@ kubectl exec -it netshoot -- ab -n 1000 -c 100 http://<service>/
 - Flannel WireGuard 加密后端配置
 - Flannel IPv6 Dual Stack 支持
 - Flannel Windows 节点支持
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
@@ -471,4 +489,4 @@ kubectl exec -it netshoot -- ab -n 1000 -c 100 http://<service>/
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]

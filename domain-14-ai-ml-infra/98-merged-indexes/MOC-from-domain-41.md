@@ -124,7 +124,7 @@ AI Agent — AI 智能体架构、工具调用、Agent 工作流
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - cost-optimization
 - daily-ops
-- [[man/INSTALL|INSTALL]]
+- [[scripts/man/INSTALL.md|INSTALL]]

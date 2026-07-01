@@ -85,7 +85,7 @@ related_topics:
 - cluster-create/01-overview
 - cluster-create/03-certs
 - cluster-create/07-etcd
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/15-upgrade-advanced|15-upgrade-advanced]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/15-upgrade-advanced.md|15-upgrade-advanced]]
 authors:
 - name: KUDIG Team
   role: contributor
@@ -337,6 +337,10 @@ func RunNode(flags *NodeFlags) error {
 
 ### 场景 1: 标准升级 1.28→1.29
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 查看升级计划
 kubeadm upgrade plan
@@ -371,6 +375,10 @@ kubectl get nodes
 
 ### 场景 2: HA 滚动升级
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 逐个升级 control-plane 节点
 for node in master-1 master-2 master-3; do
@@ -393,6 +401,10 @@ done
 
 ### 场景 3: 升级失败回滚
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 查找备份
 ls /etc/kubernetes/tmp/
@@ -402,7 +414,7 @@ ls /etc/kubernetes/tmp/
 cp /etc/kubernetes/tmp/kubeadm-backup-*/manifests/*.yaml /etc/kubernetes/manifests/
 
 # 恢复 etcd
-ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-snapshot.db --data-dir=/var/lib/etcd
+ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-snapshot.db --data-dir=/var/lib/etcd  # ⚠️ 覆盖 etcd 数据，集群状态回退
 
 # 重启 kubelet
 systemctl restart kubelet
@@ -674,7 +686,7 @@ kubectl set image daemonset/kube-proxy kube-proxy=registry.k8s.io/kube-proxy:v1.
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/daemonset|daemonset]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/daemonset.md|daemonset]]

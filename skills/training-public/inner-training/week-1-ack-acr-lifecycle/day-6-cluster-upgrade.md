@@ -41,7 +41,7 @@ last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
   - ACK cluster upgrade strategy in-place replacement
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] version upgrade path compatibility
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] version upgrade path compatibility
   - kubent API deprecation check upgrade
   - Cluster upgrade verification rollback
   - ACK managed cluster upgrade process
@@ -299,6 +299,10 @@ kubectl get nodes
 ```
 
 #### 3.2 逐个迁移旧节点
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 OLD_NODE="old-node-01"

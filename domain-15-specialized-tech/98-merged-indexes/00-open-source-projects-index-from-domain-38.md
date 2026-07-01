@@ -91,7 +91,7 @@ created: "2026-05-23"
 ## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native MOC
-- [[domain-15-specialized-tech/README|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: WebAssembly 云原生 (WebAssembly Cloud Native)]]
 - WebAssembly 云原生基础
 - containerd Wasm 运行时
 - SpinKube 框架实践

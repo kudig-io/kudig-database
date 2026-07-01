@@ -72,7 +72,7 @@ created: "2026-05-23"
 
 <!-- chunk: 一、事件总览 -->## 一、事件总览
 
-#<!-- chunk: 1.1 本文档覆盖的事件列表 -->## 1.1 本文档覆盖的事件列表
+## 1.1 本文档覆盖的事件列表
 
 | 事件原因 (Reason) | 类型 | 来源组件 | 生产频率 | 适用版本 | 简要说明 |
 |:---|:---|:---|:---|:---|:---|
@@ -97,7 +97,7 @@ created: "2026-05-23"
 | `DisruptionAllowed` | Normal | disruption-controller | 中频 | v1.21+ | 允许驱逐 Pod |
 | `InsufficientBudget` | Warning | disruption-controller | 中频 | v1.5+ | 预算不足，无法驱逐 |
 
-#<!-- chunk: 1.2 快速索引 -->## 1.2 快速索引
+## 1.2 快速索引
 
 | 问题场景 | 关注事件 | 跳转章节 |
 |:---|:---|:---|
@@ -112,7 +112,10 @@ created: "2026-05-23"
 
 <!-- chunk: 二、Namespace 生命周期与终止流程 -->## 二、Namespace 生命周期与终止流程
 
-#<!-- chunk: 2.1 Namespace 状态机 -->## 2.1 Namespace 状态机
+## 2.1 Namespace 状态机
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
 Namespace 生命周期
@@ -155,11 +158,15 @@ Namespace 生命周期
   [Namespace 被彻底删除，从 etcd 移除]
 ```
 
-#<!-- chunk: 2.2 Namespace 删除的四个阶段 -->## 2.2 Namespace 删除的四个阶段
+## 2.2 Namespace 删除的四个阶段
 
 **阶段 1: 标记删除** (用户操作)
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```bash
-$ kubectl delete namespace my-namespace
+$ kubectl delete namespace my-namespace  # ⚠️ 不可逆：永久删除命名空间及全部资源
 
 # Namespace 状态变化:
 # - metadata.deletionTimestamp: 设置为当前时间
@@ -198,7 +205,7 @@ namespace-controller 工作流程:
 3. kube-apiserver 从 etcd 删除 Namespace 对象
 ```
 
-#<!-- chunk: 2.3 Namespace Terminating 卡住的常见原因 -->## 2.3 Namespace Terminating 卡住的常见原因
+## 2.3 Namespace Terminating 卡住的常见原因
 
 | 卡住原因 | 现象 | 排查方法 | 典型场景 |
 |:---|:---|:---|:---|
@@ -212,7 +219,7 @@ namespace-controller 工作流程:
 
 <!-- chunk: 三、垃圾回收机制与 OwnerReferences -->## 三、垃圾回收机制与 OwnerReferences
 
-#<!-- chunk: 3.1 OwnerReferences 详解 -->## 3.1 OwnerReferences 详解
+## 3.1 OwnerReferences 详解
 
 Kubernetes 使用 `ownerReferences` 字段建立资源间的从属关系，实现**级联删除**（Cascade Deletion）。
 
@@ -236,9 +243,12 @@ metadata:
 - `controller: true`: 表示这是**控制器引用**（一个对象只能有一个 controller owner）
 - `blockOwnerDeletion: true`: 阻止 owner 被删除，直到该 dependent 被删除（用于关键资源保护）
 
-#<!-- chunk: 3.2 垃圾回收的三种删除策略 -->## 3.2 垃圾回收的三种删除策略
+## 3.2 垃圾回收的三种删除策略
 
 **1. Foreground 删除（前台删除）**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 $ kubectl delete deployment my-app --cascade=foreground
@@ -263,6 +273,9 @@ $ kubectl delete deployment my-app --cascade=foreground
 
 **2. Background 删除（后台删除，默认）**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 $ kubectl delete deployment my-app
 # 等同于:
@@ -282,6 +295,9 @@ $ kubectl delete deployment my-app --cascade=background
 ```
 
 **3. Orphan 删除（孤立删除）**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 $ kubectl delete deployment my-app --cascade=orphan
@@ -307,7 +323,7 @@ $ kubectl delete deployment my-app --cascade=orphan
 | **Foreground** | 慢 | 等待所有 dependents 删除后 | 需要保证 dependents 先删除的场景（如数据一致性） |
 | **Orphan** | 最快 | 立即删除 | 只删除控制器，保留 Pod/PVC 等资源 |
 
-#<!-- chunk: 3.3 垃圾回收器工作原理 -->## 3.3 垃圾回收器工作原理
+## 3.3 垃圾回收器工作原理
 
 ```
 Garbage Collector 架构
@@ -345,7 +361,7 @@ Garbage Collector 架构
 
 <!-- chunk: 四、Namespace Controller 事件 -->## 四、Namespace Controller 事件
 
-#<!-- chunk: 4.1 `NamespaceDeletionContentFailure` - Namespace 内容删除失败 -->## 4.1 `NamespaceDeletionContentFailure` - Namespace 内容删除失败
+## 4.1 `NamespaceDeletionContentFailure` - Namespace 内容删除失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -355,7 +371,7 @@ Garbage Collector 架构
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 namespace-controller 在尝试删除 Namespace 中的资源时遇到错误，导致某些资源无法被删除。这会阻止 Namespace 的删除流程。
 
@@ -365,7 +381,7 @@ namespace-controller 在尝试删除 Namespace 中的资源时遇到错误，导
 - Validating Webhook 拒绝删除请求
 - API Server 返回错误（如网络超时、权限不足）
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe namespace my-namespace
@@ -382,14 +398,14 @@ Events:
 Failed to delete content: <具体错误原因>
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 高 - Namespace 无法删除，卡在 Terminating 状态
 - **服务影响**: 中 - 如果是测试环境，会占用集群资源
 - **集群影响**: 低 - 不影响其他 Namespace，但会占用 etcd 空间
 - **关联事件链**: `NamespaceDeletionContentFailure` → `NamespaceContentRemaining` (持续等待)
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 1. 查看 Namespace 状态
@@ -415,7 +431,7 @@ kubectl get crd
 kubectl api-resources --verbs=list --namespaced -o name | grep -v "^/"
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 错误消息关键词 | 根本原因 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
@@ -428,6 +444,11 @@ kubectl api-resources --verbs=list --namespaced -o name | grep -v "^/"
 **典型案例解决方案**:
 
 **案例 1: CRD 已删除，CR 实例残留**
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 现象: could not find the requested resource "mycustomresources.example.com"
@@ -442,7 +463,7 @@ kubectl get mycustomresources -n my-namespace
 
 # 解决方案 1: 重新创建 CRD，删除 CR，再删除 CRD
 kubectl apply -f my-crd.yaml
-kubectl delete mycustomresources --all -n my-namespace
+kubectl delete mycustomresources --all -n my-namespace  # ⚠️ 批量删除，波及面大
 kubectl delete crd mycustomresources.example.com
 
 # 解决方案 2: 直接移除 Namespace 的 finalizers (强制删除，谨慎操作)
@@ -452,6 +473,10 @@ kubectl get namespace my-namespace -o json | \
 ```
 
 **案例 2: 资源被 Webhook 拦截**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 现象: webhook "validator.example.com" denied the request
@@ -485,6 +510,9 @@ kubectl patch namespace my-namespace -p '{"metadata":{"finalizers":[]}}' --type=
 
 **案例 3: 资源有 finalizer 无法删除**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 现象: Pod 无法删除，卡在 Terminating
 
@@ -502,7 +530,7 @@ kubectl get pods -n my-namespace -o name | \
 
 ---
 
-#<!-- chunk: 4.2 `NamespaceContentRemaining` - Namespace 仍有资源未删除 -->## 4.2 `NamespaceContentRemaining` - Namespace 仍有资源未删除
+## 4.2 `NamespaceContentRemaining` - Namespace 仍有资源未删除
 
 | 属性 | 说明 |
 |:---|:---|
@@ -512,7 +540,7 @@ kubectl get pods -n my-namespace -o name | \
 | **适用版本** | v1.0+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 namespace-controller 正在等待 Namespace 中的资源被删除。这是正常的删除过程事件，用于跟踪删除进度。
 
@@ -520,7 +548,7 @@ namespace-controller 正在等待 Namespace 中的资源被删除。这是正常
 - namespace-controller 每隔 5 秒检查一次 Namespace 中的资源
 - 如果仍有资源存在，产生此事件并记录剩余资源类型和数量
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe namespace my-namespace
@@ -537,14 +565,14 @@ Events:
 Some resources are remaining: <resource-type> has <count> resource instances[, ...]
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 低 - 正常删除过程，需要耐心等待
 - **服务影响**: 无
 - **集群影响**: 无
 - **关联事件链**: `NamespaceContentRemaining` (循环) → (所有资源删除) → Namespace 删除完成
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 1. 查看 Namespace 中剩余的资源类型
@@ -561,9 +589,10 @@ kubectl get all -n my-namespace -o json | \
 # 4. 查看资源的 finalizers
 kubectl get pods -n my-namespace -o json | \
   jq -r '.items[] | select(.metadata.finalizers != null) | "\(.metadata.name): \(.metadata.finalizers)"'
+
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 **正常情况**: 耐心等待资源删除完成（通常 30-60 秒）
 
@@ -577,9 +606,14 @@ kubectl get pods -n my-namespace -o json | \
 | 自定义资源卡住 | CR 的 finalizer 未处理 | 移除 finalizer 或重启相关 controller |
 
 **加速 Namespace 删除的方法**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 1. 并行强制删除所有 Pod (谨慎操作！)
-kubectl delete pods --all -n my-namespace --grace-period=0 --force
+kubectl delete pods --all -n my-namespace --grace-period=0 --force  # ⚠️ 批量删除，波及面大
 
 # 2. 删除所有有 finalizer 的资源的 finalizer
 for resource in $(kubectl api-resources --verbs=delete --namespaced -o name); do
@@ -593,7 +627,7 @@ kubectl patch namespace my-namespace -p '{"metadata":{"finalizers":[]}}' --type=
 
 ---
 
-#<!-- chunk: 4.3 `NamespaceFinalizersRemaining` - Finalizers 未处理完成 -->## 4.3 `NamespaceFinalizersRemaining` - Finalizers 未处理完成
+## 4.3 `NamespaceFinalizersRemaining` - Finalizers 未处理完成
 
 | 属性 | 说明 |
 |:---|:---|
@@ -603,7 +637,7 @@ kubectl patch namespace my-namespace -p '{"metadata":{"finalizers":[]}}' --type=
 | **适用版本** | v1.0+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 Namespace 的所有资源已删除，但 `metadata.finalizers` 列表中仍有 finalizer 未被移除，导致 Namespace 无法彻底删除。
 
@@ -616,7 +650,7 @@ Namespace 的所有资源已删除，但 `metadata.finalizers` 列表中仍有 f
 | `kubernetes.io/pv-protection` | pv-protection-controller | 保护使用中的 PV | PVC 删除后自动移除 |
 | 自定义 finalizer | 自定义 controller | 清理外部资源（如云资源） | 自定义 controller 处理完成后 |
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe namespace my-namespace
@@ -645,14 +679,14 @@ status:
   phase: Terminating
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 高 - Namespace 卡在 Terminating 状态，无法删除
 - **服务影响**: 中 - 该 Namespace 无法重建（名称冲突）
 - **集群影响**: 低 - 占用 etcd 空间，影响集群整洁度
 - **关联事件链**: `NamespaceFinalizersRemaining` (循环) → (finalizer 未移除) → Namespace 永久卡住
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 1. 查看 Namespace 的 finalizers 列表
@@ -674,7 +708,7 @@ kubectl get deployments,daemonsets,statefulsets -A | grep -i "<finalizer-name>"
 kubectl logs -n <controller-namespace> <controller-pod> | grep "my-namespace"
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 **方案 1: 等待负责的 controller 处理 finalizer** (推荐)
 
@@ -690,6 +724,9 @@ kubectl logs -n <controller-namespace> <controller-pod> -f
 
 **方案 2: 重启负责的 controller**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 如果 controller 卡住或有 bug，尝试重启
 kubectl rollout restart deployment/<controller-name> -n <controller-namespace>
@@ -698,6 +735,10 @@ kubectl rollout restart deployment/<controller-name> -n <controller-namespace>
 ```
 
 **方案 3: 手动移除 finalizer** (谨慎操作！)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # ⚠️ 警告: 移除 finalizer 可能导致资源泄漏（如云资源未清理）
@@ -716,6 +757,10 @@ kubectl get namespace my-namespace -o json | \
 ```
 
 **方案 4: 删除特定 finalizer（保留其他）**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 仅移除 "example.com/my-finalizer"，保留 "kubernetes"
@@ -736,6 +781,9 @@ kubectl get namespace my-namespace -o json | \
 
 **案例 1: Rancher Namespace 卡住**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 现象: Finalizer 为 "controller.cattle.io/namespace-auth"
 
@@ -746,6 +794,10 @@ kubectl patch namespace my-namespace -p '{"metadata":{"finalizers":[]}}' --type=
 ```
 
 **案例 2: 自定义 CRD 的 finalizer 残留**
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 现象: Finalizer 为 "finalizer.example.com"
@@ -758,7 +810,7 @@ kubectl get <crd-name> -n my-namespace
 
 # 解决:
 # 1. 如果 CRD 仍存在，删除所有 CR
-kubectl delete <crd-name> --all -n my-namespace
+kubectl delete <crd-name> --all -n my-namespace  # ⚠️ 批量删除，波及面大
 
 # 2. 如果 CRD 已删除，直接移除 Namespace finalizer
 kubectl patch namespace my-namespace -p '{"metadata":{"finalizers":[]}}' --type=merge
@@ -768,7 +820,7 @@ kubectl patch namespace my-namespace -p '{"metadata":{"finalizers":[]}}' --type=
 
 <!-- chunk: 五、Garbage Collector 事件 -->## 五、Garbage Collector 事件
 
-#<!-- chunk: 5.1 `DeletingDependents` - 正在删除依赖对象 -->## 5.1 `DeletingDependents` - 正在删除依赖对象
+## 5.1 `DeletingDependents` - 正在删除依赖对象
 
 | 属性 | 说明 |
 |:---|:---|
@@ -778,7 +830,7 @@ kubectl patch namespace my-namespace -p '{"metadata":{"finalizers":[]}}' --type=
 | **适用版本** | v1.5+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 Garbage Collector 检测到资源被标记删除（`deletionTimestamp` 已设置），正在根据级联删除策略删除其依赖对象（dependents）。
 
@@ -786,7 +838,7 @@ Garbage Collector 检测到资源被标记删除（`deletionTimestamp` 已设置
 - 删除策略为 `Foreground` 或 `Background`
 - 资源有 `ownerReferences` 引用的 dependents
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe deployment my-app
@@ -803,7 +855,7 @@ Events:
 Deleting dependents in <foreground|background>
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 低 - 正常删除流程
 - **服务影响**: 取决于删除的资源（如删除 Deployment 会导致 Pod 终止）
@@ -812,7 +864,7 @@ Deleting dependents in <foreground|background>
   - Foreground: `DeletingDependents` → (等待 dependents 删除) → Owner 删除
   - Background: Owner 删除 → `DeletingDependents` (异步)
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 1. 查看资源的 ownerReferences
@@ -825,9 +877,10 @@ kubectl get <resource-type> <resource-name> -o jsonpath='{.metadata.finalizers}'
 # 例如: Deployment → ReplicaSet → Pod
 kubectl get replicasets -l app=my-app -o json | jq -r '.items[] | "\(.metadata.name) owner: \(.metadata.ownerReferences[0].name)"'
 kubectl get pods -l app=my-app -o json | jq -r '.items[] | "\(.metadata.name) owner: \(.metadata.ownerReferences[0].name)"'
+
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 **正常情况**: 无需干预，等待删除完成
 
@@ -837,7 +890,7 @@ kubectl get pods -l app=my-app -o json | jq -r '.items[] | "\(.metadata.name) ow
 
 ---
 
-#<!-- chunk: 5.2 `GracefulDeletion` - 开始优雅删除 -->## 5.2 `GracefulDeletion` - 开始优雅删除
+## 5.2 `GracefulDeletion` - 开始优雅删除
 
 | 属性 | 说明 |
 |:---|:---|
@@ -847,11 +900,11 @@ kubectl get pods -l app=my-app -o json | jq -r '.items[] | "\(.metadata.name) ow
 | **适用版本** | v1.5+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 Garbage Collector 开始执行优雅删除流程，处理资源的 finalizers。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 Events:
@@ -860,7 +913,7 @@ Events:
   Normal  GracefulDeletion  10s   garbage-collector     Graceful deletion started
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 低 - 正常删除过程
 - **服务影响**: 无
@@ -868,7 +921,7 @@ Events:
 
 ---
 
-#<!-- chunk: 5.3 `OrphanFinal` - 孤立依赖对象 -->## 5.3 `OrphanFinal` - 孤立依赖对象
+## 5.3 `OrphanFinal` - 孤立依赖对象
 
 | 属性 | 说明 |
 |:---|:---|
@@ -878,7 +931,7 @@ Events:
 | **适用版本** | v1.7+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 资源使用 `--cascade=orphan` 策略删除，其 dependents 被孤立（orphaned），不会被级联删除。
 
@@ -887,7 +940,7 @@ Events:
 - 删除 [[StatefulSet|StatefulSet]] 但保留 PVC (避免数据丢失)
 - 删除自定义 CR 但保留关联资源
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe deployment my-app
@@ -903,13 +956,13 @@ Events:
 Orphaning dependents
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 中 - 需要手动管理孤立的资源
 - **服务影响**: 低 - Pod 继续运行，但失去控制器管理
 - **集群影响**: 低 - 孤立资源会占用集群资源，直到手动删除
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 1. 查找孤立的资源 (没有 ownerReferences)
@@ -924,9 +977,14 @@ kubectl get pods -o json | \
 kubectl get replicaset <owner-name>
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 **如果需要重新管理孤立资源**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 方案 1: 重新创建控制器（Deployment 会自动接管匹配 label 的 Pod）
@@ -953,7 +1011,7 @@ kubectl delete pod <orphaned-pod>
 
 <!-- chunk: 六、ResourceQuota 事件 -->## 六、ResourceQuota 事件
 
-#<!-- chunk: 6.1 `FailedQuota` - 超过资源配额 -->## 6.1 `FailedQuota` - 超过资源配额
+## 6.1 `FailedQuota` - 超过资源配额
 
 | 属性 | 说明 |
 |:---|:---|
@@ -963,7 +1021,7 @@ kubectl delete pod <orphaned-pod>
 | **适用版本** | v1.1+ |
 | **生产频率** | 中频 ⚠️ |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 创建或更新资源时，超过了 Namespace 的 ResourceQuota 限制，导致操作被拒绝。这是生产环境中常见的资源限制事件。
 
@@ -981,7 +1039,7 @@ kubectl delete pod <orphaned-pod>
 | **服务资源** | `services.loadbalancers` | LoadBalancer 类型 Service 数量 | `services.loadbalancers: "5"` |
 | | `services.nodeports` | NodePort 类型 Service 数量 | `services.nodeports: "10"` |
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe pod my-app-7d5bc-xyz12
@@ -1004,7 +1062,7 @@ Error creating: <resource> "<name>" is forbidden: exceeded quota: <quota-name>, 
 - Service 创建时 (检查 Service 数量配额)
 - 任何配额资源的 CREATE/UPDATE 操作
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: **高** - Pod 无法创建，Deployment 无法扩容
 - **服务影响**: **严重** - 如果 Deployment 的所有副本都失败，服务完全不可用
@@ -1013,7 +1071,7 @@ Error creating: <resource> "<name>" is forbidden: exceeded quota: <quota-name>, 
   - Deployment: `FailedCreate` (ReplicaSet 事件) → `FailedQuota` (Pod 事件)
   - HPA: `FailedGetScale` (HPA 无法扩容)
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 1. 查看 Namespace 的 ResourceQuota
@@ -1046,7 +1104,7 @@ kubectl get events -n <namespace> --field-selector reason=FailedQuota
 kubectl describe replicaset <rs-name> -n <namespace> | grep -A 5 "FailedCreate"
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 问题场景 | 根本原因 | 短期解决方案 | 长期解决方案 |
 |:---|:---|:---|:---|
@@ -1059,6 +1117,10 @@ kubectl describe replicaset <rs-name> -n <namespace> | grep -A 5 "FailedCreate"
 **典型案例解决方案**:
 
 **案例 1: Pod 数量配额不足**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 现象: exceeded quota: pod-quota, requested: pods=1, used: pods=50, limited: pods=50
@@ -1095,6 +1157,10 @@ kubectl edit resourcequota pod-quota -n my-namespace
 
 **案例 2: CPU 配额不足**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 现象: exceeded quota: resource-quota, requested: requests.cpu=500m, used: requests.cpu=9.5, limited: requests.cpu=10
 
@@ -1129,6 +1195,10 @@ kubectl delete deployment <unused-deployment>
 
 **案例 3: 存储配额不足**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 现象: exceeded quota: storage-quota, requested: requests.storage=10Gi, used: requests.storage=95Gi, limited: requests.storage=100Gi
 
@@ -1157,6 +1227,9 @@ kubectl edit resourcequota storage-quota -n my-namespace
 ```
 
 **案例 4: 配额检查失败导致 Pod 创建慢**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 现象: Pod 创建延迟数秒，事件显示配额检查
@@ -1188,7 +1261,7 @@ kubectl delete resourcequota <old-quota-1> <old-quota-2> -n my-namespace
 
 ---
 
-#<!-- chunk: 6.2 `FailedQuotaCheck` - 配额检查失败 -->## 6.2 `FailedQuotaCheck` - 配额检查失败
+## 6.2 `FailedQuotaCheck` - 配额检查失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1198,7 +1271,7 @@ kubectl delete resourcequota <old-quota-1> <old-quota-2> -n my-namespace
 | **适用版本** | v1.1+ |
 | **生产频率** | 罕见 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 API Server 在执行资源配额检查时遇到错误，导致无法判断是否超过配额。这通常表明集群内部问题。
 
@@ -1207,7 +1280,7 @@ API Server 在执行资源配额检查时遇到错误，导致无法判断是否
 - API Server 无法连接到 quota-controller
 - etcd 问题导致配额状态无法读取
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 Events:
@@ -1216,13 +1289,13 @@ Events:
   Warning  FailedQuotaCheck  10s   quota  Failed to check quota: unable to get resource quota "my-quota": connection refused
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 高 - 资源创建失败
 - **服务影响**: 严重 - 无法创建新 Pod
 - **集群影响**: 高 - 通常表明 API Server 或 etcd 有问题
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 1. 检查 ResourceQuota 对象是否存在
@@ -1241,7 +1314,7 @@ kubectl get --raw /metrics | grep etcd
 kubectl logs -n kube-system -l component=kube-controller-manager | grep quota
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 错误原因 | 解决方案 |
 |:---|:---|
@@ -1253,7 +1326,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep quota
 
 <!-- chunk: 七、LimitRange 事件 -->## 七、LimitRange 事件
 
-#<!-- chunk: 7.1 `LimitRangeDefaults` - 应用默认资源限制 -->## 7.1 `LimitRangeDefaults` - 应用默认资源限制
+## 7.1 `LimitRangeDefaults` - 应用默认资源限制
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1263,7 +1336,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep quota
 | **适用版本** | v1.0+ |
 | **生产频率** | 高频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 LimitRanger admission controller 自动为未设置资源 requests/limits 的容器应用默认值。这是 Kubernetes 资源管理的重要机制。
 
@@ -1313,7 +1386,7 @@ spec:
         storage: "1Gi"
 ```
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe pod my-app-7d5bc-xyz12
@@ -1329,14 +1402,14 @@ Events:
 Container "<container-name>" set with default <resource> request "<value>", <resource> limit "<value>"[, ...]
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 低 - 自动配置，简化 Pod 定义
 - **服务影响**: 无
 - **集群影响**: 正面 - 确保资源合理分配，避免资源不受限的 Pod
 - **关联事件链**: `LimitRangeDefaults` → Pod 创建成功
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 1. 查看 Namespace 的 LimitRange
@@ -1352,7 +1425,7 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[*].reso
 kubectl get pod <pod-name> -n <namespace> -o yaml | grep -A 10 "resources:"
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 **正常情况**: 无需干预，这是推荐的最佳实践
 
@@ -1365,6 +1438,10 @@ kubectl get pod <pod-name> -n <namespace> -o yaml | grep -A 10 "resources:"
 | 希望容器使用自定义值 | 在 Pod spec 中显式设置 `resources` |
 
 **修改 LimitRange**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 编辑 LimitRange
 kubectl edit limitrange resource-limits -n my-namespace
@@ -1409,7 +1486,7 @@ spec:
 
 ---
 
-#<!-- chunk: 7.2 `InvalidLimitRange` - LimitRange 配置无效 -->## 7.2 `InvalidLimitRange` - LimitRange 配置无效
+## 7.2 `InvalidLimitRange` - LimitRange 配置无效
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1419,7 +1496,7 @@ spec:
 | **适用版本** | v1.0+ |
 | **生产频率** | 罕见 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 Pod 的资源配置违反了 LimitRange 的限制，导致 Pod 创建被拒绝。
 
@@ -1429,7 +1506,7 @@ Pod 的资源配置违反了 LimitRange 的限制，导致 Pod 创建被拒绝�
 - `limits.cpu / requests.cpu` 超过了 `maxLimitRequestRatio.cpu`
 - Pod 的资源总和超过了 Pod 级别的 `max`
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 Events:
@@ -1445,14 +1522,14 @@ Events:
 Pod "<pod-name>" is forbidden: <violation-reason>
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 高 - Pod 无法创建
 - **服务影响**: 严重 - Deployment 无法部署
 - **集群影响**: 低 - 仅影响该 Pod
 - **关联事件链**: `InvalidLimitRange` → `FailedCreate` (ReplicaSet)
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 1. 查看 Pod 的资源配置
@@ -1470,7 +1547,7 @@ kubectl describe limitrange -n <namespace>
 # 检查 LimitRange 的 maxLimitRequestRatio.cpu 是否小于 10
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 违反类型 | 解决方案 |
 |:---|:---|
@@ -1494,13 +1571,14 @@ resources:
     cpu: "500m"      # 比例 = 2000/500 = 4 ✅
   limits:
     cpu: "2000m"     # 符合 LimitRange max ✅
+
 ```
 
 ---
 
 <!-- chunk: 八、PodDisruptionBudget 事件 -->## 八、PodDisruptionBudget 事件
 
-#<!-- chunk: 8.1 PodDisruptionBudget (PDB) 原理 -->## 8.1 PodDisruptionBudget (PDB) 原理
+## 8.1 PodDisruptionBudget (PDB) 原理
 
 **PDB 的作用**:
 保护应用在**自愿性驱逐**（Voluntary Disruptions）时的可用性，确保至少保留一定数量或比例的 Pod。
@@ -1553,7 +1631,7 @@ status:
 
 ---
 
-#<!-- chunk: 8.2 `NoPods` - PDB 未找到匹配的 Pod -->## 8.2 `NoPods` - PDB 未找到匹配的 Pod
+## 8.2 `NoPods` - PDB 未找到匹配的 Pod
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1563,7 +1641,7 @@ status:
 | **适用版本** | v1.5+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 PDB 的 `selector` 未匹配到任何 Pod，导致 PDB 无法生效。
 
@@ -1572,7 +1650,7 @@ PDB 的 `selector` 未匹配到任何 Pod，导致 PDB 无法生效。
 - 目标 Deployment/StatefulSet 尚未创建 Pod
 - 目标 Pod 的 label 与 PDB 不匹配
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe pdb my-app-pdb
@@ -1583,14 +1661,14 @@ Events:
   Warning  NoPods  10s   disruption-controller   No matching pods found
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 中 - PDB 无法提供保护，驱逐操作可能影响所有 Pod
 - **服务影响**: 中 - 没有 PDB 保护，可能导致服务完全不可用
 - **集群影响**: 无
 - **关联事件链**: `NoPods` (持续) → PDB 不生效
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 1. 查看 PDB 的 selector
@@ -1607,7 +1685,7 @@ kubectl get pdb my-app-pdb -o yaml
 # 检查 status.expectedPods 是否为 0
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 问题场景 | 根本原因 | 解决方案 |
 |:---|:---|:---|
@@ -1616,6 +1694,10 @@ kubectl get pdb my-app-pdb -o yaml
 | **Namespace 不匹配** | PDB 和 Pod 不在同一个 Namespace | 将 PDB 移动到正确的 Namespace |
 
 **修正 PDB selector**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 查看 Pod 的 labels
 kubectl get pod -l app=my-app -n my-namespace --show-labels
@@ -1629,7 +1711,7 @@ kubectl edit pdb my-app-pdb -n my-namespace
 
 ---
 
-#<!-- chunk: 8.3 `CalculateExpectedPodCountFailed` - 计算期望 Pod 数失败 -->## 8.3 `CalculateExpectedPodCountFailed` - 计算期望 Pod 数失败
+## 8.3 `CalculateExpectedPodCountFailed` - 计算期望 Pod 数失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1639,11 +1721,11 @@ kubectl edit pdb my-app-pdb -n my-namespace
 | **适用版本** | v1.5+ |
 | **生产频率** | 罕见 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 disruption-controller 无法计算 PDB 保护的 Pod 期望数量，通常是因为 PDB 配置错误或控制器问题。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 Events:
@@ -1652,13 +1734,13 @@ Events:
   Warning  CalculateExpectedPodCountFailed  10s   disruption-controller   Failed to calculate the number of expected pods: unable to find controller for pod
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 高 - PDB 无法正常工作
 - **服务影响**: 中 - 没有 PDB 保护
 - **集群影响**: 低 - 可能表明 controller-manager 有问题
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 1. 检查 PDB 配置
@@ -1671,7 +1753,7 @@ kubectl get pods -l app=my-app -o jsonpath='{.items[*].metadata.ownerReferences}
 kubectl logs -n kube-system -l component=kube-controller-manager | grep disruption
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 问题原因 | 解决方案 |
 |:---|:---|
@@ -1681,7 +1763,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep disrupti
 
 ---
 
-#<!-- chunk: 8.4 `Stale` - PDB 状态过期 -->## 8.4 `Stale` - PDB 状态过期
+## 8.4 `Stale` - PDB 状态过期
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1691,21 +1773,22 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep disrupti
 | **适用版本** | v1.5+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 PDB 的状态长时间未更新，可能是 disruption-controller 异常。
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 检查 kube-controller-manager 健康状态
 kubectl get pods -n kube-system -l component=kube-controller-manager
 kubectl logs -n kube-system -l component=kube-controller-manager | tail -100
+
 ```
 
 ---
 
-#<!-- chunk: 8.5 `InsufficientBudget` - 预算不足,无法驱逐 -->## 8.5 `InsufficientBudget` - 预算不足,无法驱逐
+## 8.5 `InsufficientBudget` - 预算不足,无法驱逐
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1715,7 +1798,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager | tail -100
 | **适用版本** | v1.5+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 尝试驱逐 Pod 时，因 PDB 的限制而被拒绝。这是 PDB 保护机制的正常工作表现。
 
@@ -1723,7 +1806,10 @@ kubectl logs -n kube-system -l component=kube-controller-manager | tail -100
 - 执行 `kubectl drain` 时，尝试驱逐的 Pod 超过了 PDB 允许的数量
 - 手动删除 Pod 时，剩余 Pod 数低于 PDB 的 `minAvailable`
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # kubectl drain 时的输出
@@ -1743,16 +1829,17 @@ Events:
 **message 格式**:
 ```
 Cannot evict pod as it would violate the pod's disruption budget
+
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 中 - `kubectl drain` 操作被阻塞，需要等待
 - **服务影响**: 无 - 这是保护机制，确保服务可用性
 - **集群影响**: 低 - 节点维护被延迟
 - **关联事件链**: `InsufficientBudget` → (等待其他 Pod Ready) → 驱逐成功
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 ```bash
 # 1. 查看 PDB 的当前状态
@@ -1771,9 +1858,10 @@ kubectl get pods -l app=my-app -n my-namespace -o jsonpath='{range .items[*]}{.m
 
 # 4. 查看 Deployment 的副本数
 kubectl get deployment my-app -n my-namespace -o jsonpath='{.spec.replicas} desired, {.status.replicas} current, {.status.readyReplicas} ready'
+
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 **正常情况**: 等待其他 Pod Ready 后，PDB 会自动允许驱逐
 
@@ -1790,6 +1878,10 @@ kubectl get deployment my-app -n my-namespace -o jsonpath='{.spec.replicas} desi
 **典型案例解决方案**:
 
 **案例 1: kubectl drain 被 PDB 阻塞**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 现象: Cannot evict pod as it would violate the pod's disruption budget
@@ -1826,6 +1918,10 @@ kubectl drain node-1 --ignore-daemonsets
 ```
 
 **案例 2: PDB 阻止滚动更新**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 现象: Deployment 滚动更新卡住
@@ -1870,6 +1966,10 @@ kubectl delete pdb my-app-pdb -n my-namespace
 
 **案例 3: 所有 Pod 在同一节点，无法 drain**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 现象: 3 副本 Pod 全在同一节点
 
@@ -1913,7 +2013,7 @@ kubectl rollout restart deployment my-app -n my-namespace
 
 ---
 
-#<!-- chunk: 8.6 `DisruptionAllowed` - 允许驱逐 Pod -->## 8.6 `DisruptionAllowed` - 允许驱逐 Pod
+## 8.6 `DisruptionAllowed` - 允许驱逐 Pod
 
 | 属性 | 说明 |
 |:---|:---|
@@ -1923,11 +2023,11 @@ kubectl rollout restart deployment my-app -n my-namespace
 | **适用版本** | v1.21+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 PDB 检查通过，允许驱逐该 Pod。这是正常的驱逐流程事件。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 Events:
@@ -1936,7 +2036,7 @@ Events:
   Normal  DisruptionAllowed  10s   disruption-controller   Disruption is allowed for this pod
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: 无 - 正常流程
 - **服务影响**: 低 - Pod 会被驱逐，但 PDB 确保了足够的可用副本
@@ -1946,19 +2046,27 @@ Events:
 
 <!-- chunk: 九、典型排查场景 -->## 九、典型排查场景
 
-#<!-- chunk: 9.1 场景: Namespace 卡在 Terminating 状态 -->## 9.1 场景: Namespace 卡在 Terminating 状态
+## 9.1 场景: Namespace 卡在 Terminating 状态
 
 **问题描述**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```bash
 $ kubectl get namespace test-namespace
 NAME             STATUS        AGE
 test-namespace   Terminating   10m
 
-$ kubectl delete namespace test-namespace
+$ kubectl delete namespace test-namespace  # ⚠️ 不可逆：永久删除命名空间及全部资源
 # 命令无响应或提示 namespace 已在删除中
 ```
 
 **排查流程**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 查看 Namespace 的 finalizers
@@ -1977,8 +2085,8 @@ kubectl api-resources --verbs=list --namespaced -o name | \
   xargs -n 1 kubectl get --show-kind --ignore-not-found -n test-namespace
 
 # 4. 如果有资源残留，尝试强制删除
-kubectl delete pods --all -n test-namespace --grace-period=0 --force
-kubectl delete pvc --all -n test-namespace
+kubectl delete pods --all -n test-namespace --grace-period=0 --force  # ⚠️ 批量删除，波及面大
+kubectl delete pvc --all -n test-namespace  # ⚠️ 批量删除，波及面大
 
 # 5. 如果是 finalizer 问题，移除 finalizer (谨慎操作)
 kubectl patch namespace test-namespace -p '{"metadata":{"finalizers":[]}}' --type=merge
@@ -1986,6 +2094,7 @@ kubectl patch namespace test-namespace -p '{"metadata":{"finalizers":[]}}' --typ
 # 6. 验证 Namespace 是否删除
 kubectl get namespace test-namespace
 # 应输出: Error from server (NotFound)
+
 ```
 
 **常见原因对照表**:
@@ -1999,7 +2108,7 @@ kubectl get namespace test-namespace
 
 ---
 
-#<!-- chunk: 9.2 场景: Pod 创建失败,提示超过配额 -->## 9.2 场景: Pod 创建失败,提示超过配额
+## 9.2 场景: Pod 创建失败,提示超过配额
 
 **问题描述**:
 ```bash
@@ -2013,6 +2122,10 @@ Events:
 ```
 
 **排查流程**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 查看 ResourceQuota 状态
@@ -2050,13 +2163,18 @@ kubectl edit resourcequota resource-quota -n my-namespace
 
 # 4. 验证 Pod 是否创建成功
 kubectl get pods -n my-namespace -w
+
 ```
 
 ---
 
-#<!-- chunk: 9.3 场景: kubectl drain 被 PDB 阻塞 -->## 9.3 场景: kubectl drain 被 PDB 阻塞
+## 9.3 场景: kubectl drain 被 PDB 阻塞
 
 **问题描述**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 $ kubectl drain node-1 --ignore-daemonsets
 evicting pod my-namespace/my-app-7d5bc-xyz12
@@ -2064,6 +2182,9 @@ error when evicting pod "my-app-7d5bc-xyz12": Cannot evict pod as it would viola
 ```
 
 **排查流程**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 1. 查看 PDB 状态
@@ -2114,7 +2235,7 @@ kubectl drain node-1 --ignore-daemonsets --disable-eviction --force
 
 <!-- chunk: 十、生产环境最佳实践 -->## 十、生产环境最佳实践
 
-#<!-- chunk: 10.1 Namespace 管理 -->## 10.1 Namespace 管理
+## 10.1 Namespace 管理
 
 **Namespace 生命周期管理**:
 ```yaml
@@ -2132,6 +2253,11 @@ metadata:
 ```
 
 **防止误删 Namespace**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 使用 finalizer 保护重要 Namespace
 kubectl patch namespace production -p '
@@ -2143,7 +2269,7 @@ kubectl patch namespace production -p '
 
 # 删除保护 (需先移除 finalizer)
 kubectl patch namespace production -p '{"metadata":{"finalizers":[]}}' --type=merge
-kubectl delete namespace production
+kubectl delete namespace production  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
 **自动化清理策略**:
@@ -2176,7 +2302,7 @@ spec:
 
 ---
 
-#<!-- chunk: 10.2 ResourceQuota 最佳实践 -->## 10.2 ResourceQuota 最佳实践
+## 10.2 ResourceQuota 最佳实践
 
 **为每个 Namespace 设置配额**:
 ```yaml
@@ -2266,7 +2392,7 @@ groups:
 
 ---
 
-#<!-- chunk: 10.3 LimitRange 最佳实践 -->## 10.3 LimitRange 最佳实践
+## 10.3 LimitRange 最佳实践
 
 **为每个 Namespace 设置 LimitRange**:
 ```yaml
@@ -2345,7 +2471,7 @@ spec:
 
 ---
 
-#<!-- chunk: 10.4 PodDisruptionBudget 最佳实践 -->## 10.4 PodDisruptionBudget 最佳实践
+## 10.4 PodDisruptionBudget 最佳实践
 
 **为关键应用设置 PDB**:
 ```yaml
@@ -2443,6 +2569,10 @@ spec:
 ```
 
 **PDB 监控**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 查看所有 PDB 的状态
 kubectl get pdb -A -o custom-columns=\
@@ -2479,7 +2609,7 @@ groups:
 
 ---
 
-#<!-- chunk: 10.5 垃圾回收策略 -->## 10.5 垃圾回收策略
+## 10.5 垃圾回收策略
 
 **为资源设置合适的级联删除策略**:
 ```yaml
@@ -2525,7 +2655,7 @@ data:
 
 ---
 
-#<!-- chunk: 10.6 事件监控和告警 -->## 10.6 事件监控和告警
+## 10.6 事件监控和告警
 
 **使用 Prometheus 监控事件**:
 ```yaml
@@ -2589,4 +2719,6 @@ groups:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+```

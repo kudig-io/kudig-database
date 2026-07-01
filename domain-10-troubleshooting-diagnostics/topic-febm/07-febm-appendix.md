@@ -1,5 +1,5 @@
 ---
-title: 第七章:附录 [domain-10-troubleshooting-diagnostics]
+title: "第七章:附录 [domain-10-troubleshooting-diagnostics]"
 description: 'description: ''**所属系列**: FEBM 法医鉴定循证方法论深度解析'''
 category: febm
 tags:
@@ -96,7 +96,7 @@ k8s_versions:
 
 <!-- chunk: A. 核心术语表 -->## A. 核心术语表
 
-#<!-- chunk: A.1 方法论术语 -->## A.1 方法论术语
+## A.1 方法论术语
 
 | 术语 | 英文全称 | 定义 | 示例 |
 |------|---------|------|------|
@@ -109,7 +109,7 @@ k8s_versions:
 | **IOC** | Indicator of Compromise | 入侵指标,表明系统可能被攻击的证据 | 异常的出站网络连接、未知进程、文件系统修改 |
 | **APT** | Advanced Persistent Threat | 高级持续性威胁 | 国家级黑客组织针对关键基础设施的长期渗透 |
 
-#<!-- chunk: A.2 Kubernetes 术语 -->## A.2 Kubernetes 术语
+## A.2 Kubernetes 术语
 
 | 术语 | 英文全称 | 定义 | FEBM 相关性 |
 |------|---------|------|------------|
@@ -122,7 +122,7 @@ k8s_versions:
 | **Admission Controller** | - | 准入控制器,拦截 API 请求并执行策略 | 可作为取证点,记录所有变更尝试 |
 | **Service Mesh** | - | 服务网格 (如 Istio, Linkerd) | 提供详细的流量追踪,是网络取证的关键工具 |
 
-#<!-- chunk: A.3 取证技术术语 -->## A.3 取证技术术语
+## A.3 取证技术术语
 
 | 术语 | 英文全称 | 定义 | 在 FEBM 中的应用 |
 |------|---------|------|-----------------|
@@ -135,7 +135,7 @@ k8s_versions:
 | **Live Forensics** | - | 实时取证,在系统运行时收集证据 | 通过 eBPF 追踪而不停止 Pod |
 | **Post-Mortem Analysis** | - | 事后分析 | 在事件结束后分析日志、指标等历史数据 |
 
-#<!-- chunk: A.4 安全威胁术语 -->## A.4 安全威胁术语
+## A.4 安全威胁术语
 
 | 术语 | 英文全称 | 定义 | 检测方法 |
 |------|---------|------|---------|
@@ -148,7 +148,7 @@ k8s_versions:
 | **Zero-Day Exploit** | - | 零日漏洞利用 | 行为分析,检测与已知模式不符的活动 |
 | **Crypto Mining** | - | 加密货币挖矿 | CPU 使用率异常、挖矿进程特征 |
 
-#<!-- chunk: A.5 可观测性术语 -->## A.5 可观测性术语
+## A.5 可观测性术语
 
 | 术语 | 英文全称 | 定义 | 取证价值 |
 |------|---------|------|---------|
@@ -160,7 +160,7 @@ k8s_versions:
 | **Cardinality** | - | 基数,指标标签的唯一值数量 | 高基数指标可能导致存储和查询性能问题 |
 | **Exemplar** | - | 范例,Prometheus 中的追踪样本 | 将指标与具体请求 trace 关联 |
 
-#<!-- chunk: A.6 其他相关术语 -->## A.6 其他相关术语
+## A.6 其他相关术语
 
 | 术语 | 英文全称 | 定义 | 应用场景 |
 |------|---------|------|---------|
@@ -177,9 +177,9 @@ k8s_versions:
 
 <!-- chunk: B. 参考标准与规范 -->## B. 参考标准与规范
 
-#<!-- chunk: B.1 数字取证标准 -->## B.1 数字取证标准
+## B.1 数字取证标准
 
-##<!-- chunk: NIST SP 800-61 Rev.2 -->## NIST SP 800-61 Rev.2
+## NIST SP 800-61 Rev.2
 **标题**: Computer Security Incident Handling Guide  
 **组织**: 美国国家标准与技术研究院 (NIST)  
 **发布时间**: 2012 年  
@@ -196,7 +196,7 @@ FEBM 的证据链管理和报告生成遵循该指南的框架。
 
 ---
 
-##<!-- chunk: NIST IR 8006 -->## NIST IR 8006
+## NIST IR 8006
 **标题**: NIST Cloud Computing Forensic Science Challenges  
 **组织**: NIST  
 **发布时间**: 2020 年  
@@ -213,7 +213,7 @@ FEBM 的证据链管理和报告生成遵循该指南的框架。
 
 ---
 
-##<!-- chunk: ISO/IEC 27037:2012 -->## ISO/IEC 27037:2012
+## ISO/IEC 27037:2012
 **标题**: Information technology — Security techniques — Guidelines for identification, collection, acquisition and preservation of digital evidence  
 **组织**: 国际标准化组织 (ISO)  
 
@@ -229,7 +229,7 @@ FEBM 的 Chain of Custody 实现基于该标准。
 
 ---
 
-##<!-- chunk: ISO/IEC 27041:2015 -->## ISO/IEC 27041:2015
+## ISO/IEC 27041:2015
 **标题**: Information technology — Security techniques — Guidance on assuring suitability and adequacy of incident investigative method  
 **组织**: ISO  
 
@@ -243,7 +243,7 @@ FEBM 的 Chain of Custody 实现基于该标准。
 
 ---
 
-##<!-- chunk: ISO/IEC 27042:2015 -->## ISO/IEC 27042:2015
+## ISO/IEC 27042:2015
 **标题**: Information technology — Security techniques — Guidelines for the analysis and interpretation of digital evidence  
 **组织**: ISO  
 
@@ -257,7 +257,7 @@ FEBM 的证据关联分析流程参考该标准。
 
 ---
 
-##<!-- chunk: ISO/IEC 27043:2015 -->## ISO/IEC 27043:2015
+## ISO/IEC 27043:2015
 **标题**: Information technology — Security techniques — Incident investigation principles and processes  
 **组织**: ISO  
 
@@ -271,7 +271,7 @@ FEBM 的证据关联分析流程参考该标准。
 
 ---
 
-##<!-- chunk: RFC 3227 -->## RFC 3227
+## RFC 3227
 **标题**: Guidelines for Evidence Collection and Archiving  
 **组织**: IETF  
 **发布时间**: 2002 年  
@@ -288,9 +288,9 @@ FEBM 在容器取证中遵循该易失性顺序原则。
 
 ---
 
-#<!-- chunk: B.2 云原生安全标准 -->## B.2 云原生安全标准
+## B.2 云原生安全标准
 
-##<!-- chunk: MITRE ATT&CK for Containers -->## MITRE ATT&CK for Containers
+## MITRE ATT&CK for Containers
 **标题**: MITRE ATT&CK Framework - Containers Matrix  
 **组织**: MITRE Corporation  
 
@@ -313,7 +313,7 @@ Initial Access → Execution → Persistence → Privilege Escalation
 
 ---
 
-##<!-- chunk: CIS Kubernetes Benchmark -->## CIS Kubernetes Benchmark
+## CIS Kubernetes Benchmark
 **标题**: CIS Kubernetes Benchmark v1.8  
 **组织**: Center for Internet Security (CIS)  
 
@@ -329,7 +329,7 @@ Initial Access → Execution → Persistence → Privilege Escalation
 
 ---
 
-##<!-- chunk: NIST SP 800-86 -->## NIST SP 800-86
+## NIST SP 800-86
 **标题**: Guide to Integrating Forensic Techniques into Incident Response  
 **组织**: NIST  
 
@@ -345,9 +345,9 @@ Initial Access → Execution → Persistence → Privilege Escalation
 
 ---
 
-#<!-- chunk: B.3 数据保护与合规 -->## B.3 数据保护与合规
+## B.3 数据保护与合规
 
-##<!-- chunk: GDPR (General Data Protection Regulation) -->## GDPR (General Data Protection Regulation)
+## GDPR (General Data Protection Regulation)
 **组织**: 欧盟  
 **生效时间**: 2018 年 5 月  
 
@@ -364,7 +364,7 @@ Initial Access → Execution → Persistence → Privilege Escalation
 
 ---
 
-##<!-- chunk: CCPA (California Consumer Privacy Act) -->## CCPA (California Consumer Privacy Act)
+## CCPA (California Consumer Privacy Act)
 **组织**: 美国加利福尼亚州  
 **生效时间**: 2020 年 1 月  
 
@@ -375,7 +375,7 @@ Initial Access → Execution → Persistence → Privilege Escalation
 
 ---
 
-##<!-- chunk: SOC 2 Type II -->## SOC 2 Type II
+## SOC 2 Type II
 **组织**: AICPA (American Institute of CPAs)  
 
 **Trust Service Criteria**:
@@ -392,7 +392,7 @@ Initial Access → Execution → Persistence → Privilege Escalation
 
 <!-- chunk: C. 工具速查表 -->## C. 工具速查表
 
-#<!-- chunk: C.1 运行时安全与检测 -->## C.1 运行时安全与检测
+## C.1 运行时安全与检测
 
 | 工具名称 | 类别 | FEBM 角色 | 许可证 | 成熟度 | 官方链接 |
 |---------|------|----------|--------|--------|---------|
@@ -408,7 +408,7 @@ Initial Access → Execution → Persistence → Privilege Escalation
 
 ---
 
-#<!-- chunk: C.2 漏洞扫描 -->## C.2 漏洞扫描
+## C.2 漏洞扫描
 
 | 工具名称 | 类别 | FEBM 角色 | 许可证 | 扫描范围 | 官方链接 |
 |---------|------|----------|--------|---------|---------|
@@ -428,7 +428,7 @@ fi
 
 ---
 
-#<!-- chunk: C.3 日志聚合与分析 -->## C.3 日志聚合与分析
+## C.3 日志聚合与分析
 
 | 工具名称 | 类别 | FEBM 角色 | 许可证 | 部署模式 | 官方链接 |
 |---------|------|----------|--------|---------|---------|
@@ -448,7 +448,7 @@ Pod Logs → Fluent Bit (采集) → Fluentd (聚合) → Elasticsearch (存储)
 
 ---
 
-#<!-- chunk: C.4 指标监控 -->## C.4 指标监控
+## C.4 指标监控
 
 | 工具名称 | 类别 | FEBM 角色 | 许可证 | 数据模型 | 官方链接 |
 |---------|------|----------|--------|---------|---------|
@@ -459,7 +459,7 @@ Pod Logs → Fluent Bit (采集) → Fluentd (聚合) → Elasticsearch (存储)
 
 ---
 
-#<!-- chunk: C.5 分布式追踪 -->## C.5 分布式追踪
+## C.5 分布式追踪
 
 | 工具名称 | 类别 | FEBM 角色 | 许可证 | 协议支持 | 官方链接 |
 |---------|------|----------|--------|---------|---------|
@@ -470,7 +470,7 @@ Pod Logs → Fluent Bit (采集) → Fluentd (聚合) → Elasticsearch (存储)
 
 ---
 
-#<!-- chunk: C.6 数字取证工具 -->## C.6 数字取证工具
+## C.6 数字取证工具
 
 | 工具名称 | 类别 | FEBM 角色 | 许可证 | 分析对象 | 官方链接 |
 |---------|------|----------|--------|---------|---------|
@@ -482,7 +482,7 @@ Pod Logs → Fluent Bit (采集) → Fluentd (聚合) → Elasticsearch (存储)
 
 ---
 
-#<!-- chunk: C.7 编排与自动化 -->## C.7 编排与自动化
+## C.7 编排与自动化
 
 | 工具名称 | 类别 | FEBM 角色 | 许可证 | 工作流引擎 | 官方链接 |
 |---------|------|----------|--------|-----------|---------|
@@ -493,7 +493,7 @@ Pod Logs → Fluent Bit (采集) → Fluentd (聚合) → Elasticsearch (存储)
 
 ---
 
-#<!-- chunk: C.8 威胁情报 -->## C.8 威胁情报
+## C.8 威胁情报
 
 | 工具名称 | 类别 | FEBM 角色 | 许可证 | 数据源 | 官方链接 |
 |---------|------|----------|--------|--------|---------|
@@ -503,7 +503,7 @@ Pod Logs → Fluent Bit (采集) → Fluentd (聚合) → Elasticsearch (存储)
 
 ---
 
-#<!-- chunk: C.9 策略引擎 -->## C.9 策略引擎
+## C.9 策略引擎
 
 | 工具名称 | 类别 | FEBM 角色 | 许可证 | 策略语言 | 官方链接 |
 |---------|------|----------|--------|---------|---------|
@@ -515,7 +515,7 @@ Pod Logs → Fluent Bit (采集) → Fluentd (聚合) → Elasticsearch (存储)
 
 <!-- chunk: D. Kubernetes 审计策略模板 -->## D. Kubernetes 审计策略模板
 
-#<!-- chunk: D.1 取证就绪审计策略 -->## D.1 取证就绪审计策略
+## D.1 取证就绪审计策略
 
 ```yaml
 apiVersion: audit.k8s.io/v1
@@ -625,7 +625,7 @@ rules:
     omitManagedFields: true
 ```
 
-#<!-- chunk: D.2 审计级别说明 -->## D.2 审计级别说明
+## D.2 审计级别说明
 
 | 级别 | 记录内容 | 使用场景 | 存储开销 |
 |------|---------|---------|---------|
@@ -634,7 +634,7 @@ rules:
 | **Request** | Metadata + 请求体 | 变更操作 | 中 |
 | **RequestResponse** | Request + 响应体 | 敏感操作 (RBAC, Secret) | 高 |
 
-#<!-- chunk: D.3 审计日志字段映射 -->## D.3 审计日志字段映射
+## D.3 审计日志字段映射
 
 ```json
 {
@@ -683,7 +683,7 @@ rules:
 
 <!-- chunk: E. Falco 检测规则模板集 -->## E. Falco 检测规则模板集
 
-#<!-- chunk: E.1 容器逃逸检测 -->## E.1 容器逃逸检测
+## E.1 容器逃逸检测
 
 ```yaml
 # 规则: 检测容器内启动 privileged 容器
@@ -726,7 +726,7 @@ rules:
   tags: [container_escape, mitre_persistence]
 ```
 
-#<!-- chunk: E.2 横向移动检测 -->## E.2 横向移动检测
+## E.2 横向移动检测
 
 ```yaml
 # 规则: 检测异常的网络连接
@@ -758,7 +758,7 @@ rules:
   tags: [lateral_movement, mitre_discovery]
 ```
 
-#<!-- chunk: E.3 数据外泄检测 -->## E.3 数据外泄检测
+## E.3 数据外泄检测
 
 ```yaml
 # 规则: 检测大量数据传输
@@ -790,7 +790,7 @@ rules:
   tags: [credential_access, mitre_credential_dumping]
 ```
 
-#<!-- chunk: E.4 加密货币挖矿检测 -->## E.4 加密货币挖矿检测
+## E.4 加密货币挖矿检测
 
 ```yaml
 # 规则: 检测挖矿进程
@@ -822,7 +822,7 @@ rules:
   tags: [crypto_mining, mitre_impact]
 ```
 
-#<!-- chunk: E.5 权限提升检测 -->## E.5 权限提升检测
+## E.5 权限提升检测
 
 ```yaml
 # 规则: 检测 setuid/setgid 调用
@@ -854,7 +854,7 @@ rules:
   tags: [privilege_escalation, mitre_valid_accounts]
 ```
 
-#<!-- chunk: E.6 持久化检测 -->## E.6 持久化检测
+## E.6 持久化检测
 
 ```yaml
 # 规则: 检测 cron 作业创建
@@ -887,7 +887,10 @@ rules:
 
 <!-- chunk: F. FEBM 事件响应 Checklist -->## F. FEBM 事件响应 Checklist
 
-#<!-- chunk: F.1 初始响应 (0-15分钟) -->## F.1 初始响应 (0-15分钟)
+## F.1 初始响应 (0-15分钟)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
 
 ```
 □ 确认事件真实性
@@ -913,7 +916,7 @@ rules:
   □ 撤销可疑账户权限
 ```
 
-#<!-- chunk: F.2 证据收集 (15分钟 - 2小时) -->## F.2 证据收集 (15分钟 - 2小时)
+## F.2 证据收集 (15分钟 - 2小时)
 
 ```
 □ 日志证据
@@ -947,7 +950,7 @@ rules:
   □ 镜像分析 (Trivy/Dive)
 ```
 
-#<!-- chunk: F.3 分析与诊断 (2-6小时) -->## F.3 分析与诊断 (2-6小时)
+## F.3 分析与诊断 (2-6小时)
 
 ```
 □ 时间线重建
@@ -981,7 +984,7 @@ rules:
   □ 供应链完整性验证
 ```
 
-#<!-- chunk: F.4 遏制与根除 (6-12小时) -->## F.4 遏制与根除 (6-12小时)
+## F.4 遏制与根除 (6-12小时)
 
 ```
 □ 短期遏制
@@ -1003,7 +1006,7 @@ rules:
   □ 验证清除完整性
 ```
 
-#<!-- chunk: F.5 恢复与验证 (12-24小时) -->## F.5 恢复与验证 (12-24小时)
+## F.5 恢复与验证 (12-24小时)
 
 ```
 □ 系统恢复
@@ -1025,7 +1028,7 @@ rules:
   □ 监控异常行为
 ```
 
-#<!-- chunk: F.6 事后活动 (1周内) -->## F.6 事后活动 (1周内)
+## F.6 事后活动 (1周内)
 
 ```
 □ 文档编写
@@ -1057,7 +1060,7 @@ rules:
 
 <!-- chunk: G. 相关阅读与学习资源 -->## G. 相关阅读与学习资源
 
-#<!-- chunk: G.1 学术论文 -->## G.1 学术论文
+## G.1 学术论文
 
 1. **"X-Force: A Formal Framework for Root Cause Analysis"**  
    - 作者: Aceto et al.  
@@ -1081,7 +1084,7 @@ rules:
    - 文件: [./FTA-vs-FEBM.pdf](./FTA-vs-FEBM.pdf)  
    - 摘要: 系统性比较 FTA 与 FEBM 在 K8s 运维中的适用性
 
-#<!-- chunk: G.2 书籍推荐 -->## G.2 书籍推荐
+## G.2 书籍推荐
 
 1. **《Site Reliability Engineering》**  
    - 作者: Betsy Beyer et al. (Google SRE)  
@@ -1106,7 +1109,7 @@ rules:
    - ISBN: 978-1118825099  
    - 相关章节: 第 17 章 "Linux Memory Forensics"
 
-#<!-- chunk: G.3 在线课程 -->## G.3 在线课程
+## G.3 在线课程
 
 1. **Cloud Forensics (Coursera)**  
    - 提供者: University of Colorado  
@@ -1122,7 +1125,7 @@ rules:
    - 链接: https://www.sans.org/cyber-security-courses/advanced-incident-response-threat-hunting-training/  
    - 内容: 高级取证技术
 
-#<!-- chunk: G.4 开源项目与工具 -->## G.4 开源项目与工具
+## G.4 开源项目与工具
 
 1. **Kubernetes Goat**  
    - 链接: https://github.com/madhuakula/kubernetes-goat  
@@ -1136,7 +1139,7 @@ rules:
    - 链接: https://github.com/kubernetes-forensics/workshop  
    - 描述: 动手实验室,练习容器取证技能
 
-#<!-- chunk: G.5 会议与社区 -->## G.5 会议与社区
+## G.5 会议与社区
 
 1. **KubeCon + CloudNativeCon**  
    - 链接: https://www.cncf.io/kubecon-cloudnativecon-events/  
@@ -1154,7 +1157,7 @@ rules:
    - 链接: https://github.com/cncf/tag-security  
    - 内容: CNCF 安全技术咨询组,发布指南文档
 
-#<!-- chunk: G.6 博客与专栏 -->## G.6 博客与专栏
+## G.6 博客与专栏
 
 1. **Falco Blog**  
    - 链接: https://falco.org/blog/  
@@ -1172,7 +1175,7 @@ rules:
    - 链接: https://isc.sans.edu/  
    - 内容: 最新威胁情报与分析
 
-#<!-- chunk: G.7 Podcast -->## G.7 Podcast
+## G.7 Podcast
 
 1. **The Kubernetes Podcast from Google**  
    - 链接: https://kubernetespodcast.com/  
@@ -1182,7 +1185,7 @@ rules:
    - 链接: https://darknetdiaries.com/  
    - 推荐集数: Episode 120 "Container Escapes"
 
-#<!-- chunk: G.8 YouTube 频道 -->## G.8 YouTube 频道
+## G.8 YouTube 频道
 
 1. **CNCF [Cloud Native Computing Foundation]**  
    - 链接: https://www.youtube.com/@cncf  
@@ -1200,7 +1203,7 @@ rules:
 
 <!-- chunk: H. 配套资源下载 -->## H. 配套资源下载
 
-#<!-- chunk: H.1 本系列文档 -->## H.1 本系列文档
+## H.1 本系列文档
 
 | 文档 | 描述 | 链接 |
 |------|------|------|
@@ -1214,7 +1217,7 @@ rules:
 | 第七章 | 附录 (本文档) | [07-febm-appendix.md](./07-febm-appendix.md) |
 | 学术论文 | FTA 与 FEBM 对比研究 | [FTA-vs-FEBM.pdf](./FTA-vs-FEBM.pdf) |
 
-#<!-- chunk: H.2 代码示例仓库 -->## H.2 代码示例仓库
+## H.2 代码示例仓库
 
 ```bash
 # 克隆配套代码仓库
@@ -1237,9 +1240,13 @@ cd febm-examples
 └── docs/                  # 额外文档
 ```
 
-#<!-- chunk: H.3 虚拟实验环境 -->## H.3 虚拟实验环境
+## H.3 虚拟实验环境
 
 **Kind 集群快速启动**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建取证就绪的 Kind 集群
 cat <<EOF | kind create cluster --config=-
@@ -1286,7 +1293,7 @@ kubectl apply -f https://raw.githubusercontent.com/kudig-io/febm-examples/main/o
 
 本文档系列是开源项目,欢迎社区贡献!
 
-#<!-- chunk: 如何贡献 -->## 如何贡献
+## 如何贡献
 
 1. **报告问题**  
    在 GitHub Issues 中提交错误报告或改进建议:  
@@ -1307,7 +1314,7 @@ kubectl apply -f https://raw.githubusercontent.com/kudig-io/febm-examples/main/o
 3. **分享案例**  
    如果你在实践中使用了 FEBM 方法论,欢迎分享你的案例研究!
 
-#<!-- chunk: 贡献者名单 -->## 贡献者名单
+## 贡献者名单
 
 感谢以下贡献者 (按字母顺序):
 
@@ -1358,21 +1365,21 @@ kubectl apply -f https://raw.githubusercontent.com/kudig-io/febm-examples/main/o
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-febm/MOC|topic-febm MOC]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/README|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations|第一章：FEBM 方法论原理与理论基础]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation|第二章:FEBM 技术实现体系]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices|第三章：FEBM 最佳实践]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing|第四章：FEBM 对云平台工单智能体托管的意义]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology|第五章：FEBM 体系建设方法论]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution|第六章：未来演进方向]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive|法医鉴定循证方法论（FEBM）深度解析]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis|FTA-FEBM 联合诊断最佳实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/MOC.md|topic-febm MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md|第一章：FEBM 方法论原理与理论基础]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|第二章:FEBM 技术实现体系]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices.md|第三章：FEBM 最佳实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|第六章：未来演进方向]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology|05-febm-construction-methodology]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution|06-febm-future-evolution]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start|08-febm-production-quick-start]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive|febm-methodology-deep-dive]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|05-febm-construction-methodology]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|06-febm-future-evolution]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|08-febm-production-quick-start]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|febm-methodology-deep-dive]]

@@ -59,12 +59,12 @@ created: "2026-05-23"
 <!-- chunk: 目录 / Table of Contents -->## 目录 / Table of Contents
 
 1. [SpinKube 概述](#1-spinkube-概述)
-2. [[entities/spin|Spin]] 应用模型](#2-spin-应用模型)
+2. [[entities/spin.md|Spin]] 应用模型](#2-spin-应用模型)
 3. [SpinKube 架构](#3-spinkube-架构)
 4. [SpinApp CRD](#4-spinapp-crd)
 5. [安装与配置](#5-安装与配置)
 6. [HTTP 触发器](#6-http-触发器)
-7. [[entities/keda|KEDA]] 集成与 Scale-to-Zero](#7-keda-集成与-scale-to-zero)
+7. [[entities/keda.md|KEDA]] 集成与 Scale-to-Zero](#7-keda-集成与-scale-to-zero)
 8. [存储系统集成](#8-存储系统集成)
 9. [Redis 与 KV Store](#9-redis-与-kv-store)
 10. [SQLite 集成](#10-sqlite-集成)
@@ -75,7 +75,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. SpinKube 概述 -->## 1. SpinKube 概述
 
-#<!-- chunk: 1.1 什么是 SpinKube / What is SpinKube -->## 1.1 什么是 SpinKube / What is SpinKube
+## 1.1 什么是 SpinKube / What is SpinKube
 
 SpinKube 是基于 Fermyon Spin 的 [[Kubernetes|Kubernetes]] 原生 WebAssembly 运行时项目，是 CNCF Sandbox 项目。它将 Spin 的开发者友好体验带入 Kubernetes，实现了 Wasm Serverless 工作负载的云原生部署：
 
@@ -97,7 +97,7 @@ github.com/spinkube
 └── docs                 # 文档
 ```
 
-#<!-- chunk: 1.2 SpinKube vs 其他方案 / SpinKube vs Alternatives -->## 1.2 SpinKube vs 其他方案 / SpinKube vs Alternatives
+## 1.2 SpinKube vs 其他方案 / SpinKube vs Alternatives
 
 ```mermaid
 graph TD
@@ -117,7 +117,7 @@ graph TD
     end
 ```
 
-#<!-- chunk: 1.3 核心特性 / Core Features -->## 1.3 核心特性 / Core Features
+## 1.3 核心特性 / Core Features
 
 | 特性 | 描述 |
 |------|------|
@@ -134,7 +134,7 @@ graph TD
 
 <!-- chunk: 2. Spin 应用模型 -->## 2. Spin 应用模型
 
-#<!-- chunk: 2.1 Spin 框架概述 / Spin Framework Overview -->## 2.1 Spin 框架概述 / Spin Framework Overview
+## 2.1 Spin 框架概述 / Spin Framework Overview
 
 Spin 是 Fermyon 开发的 WebAssembly Serverless 框架，专注于快速构建 HTTP 微服务：
 
@@ -155,7 +155,7 @@ graph LR
     end
 ```
 
-#<!-- chunk: 2.2 spin.toml 应用清单 / Application Manifest -->## 2.2 spin.toml 应用清单 / Application Manifest
+## 2.2 spin.toml 应用清单 / Application Manifest
 
 ```toml
 # spin.toml - Spin 应用配置清单
@@ -237,7 +237,7 @@ description = "异步任务处理"
 hosts = ["https://api.external-service.com"]
 ```
 
-#<!-- chunk: 2.3 Rust Spin 应用开发 / Rust Spin Development -->## 2.3 Rust Spin 应用开发 / Rust Spin Development
+## 2.3 Rust Spin 应用开发 / Rust Spin Development
 
 ```rust
 // Cargo.toml
@@ -548,7 +548,7 @@ fn chrono_like_timestamp() -> String {
 
 <!-- chunk: 3. SpinKube 架构 -->## 3. SpinKube 架构
 
-#<!-- chunk: 3.1 整体架构 / Overall Architecture -->## 3.1 整体架构 / Overall Architecture
+## 3.1 整体架构 / Overall Architecture
 
 ```mermaid
 graph TD
@@ -592,7 +592,7 @@ graph TD
     end
 ```
 
-#<!-- chunk: 3.2 spin-operator 控制器 / spin-operator Controller -->## 3.2 spin-operator 控制器 / spin-operator Controller
+## 3.2 spin-operator 控制器 / spin-operator Controller
 
 ```
 spin-operator 工作流程
@@ -724,7 +724,7 @@ func (r *SpinAppReconciler) reconcileDeployment(
 
 <!-- chunk: 4. SpinApp CRD -->## 4. SpinApp CRD
 
-#<!-- chunk: 4.1 SpinApp 资源定义 / SpinApp Resource Definition -->## 4.1 SpinApp 资源定义 / SpinApp Resource Definition
+## 4.1 SpinApp 资源定义 / SpinApp Resource Definition
 
 ```yaml
 # SpinApp CRD 完整示例
@@ -829,7 +829,7 @@ status:
   phase: "Ready"
 ```
 
-#<!-- chunk: 4.2 SpinApp 自动伸缩配置 / Autoscaling Configuration -->## 4.2 SpinApp 自动伸缩配置 / Autoscaling Configuration
+## 4.2 SpinApp 自动伸缩配置 / Autoscaling Configuration
 
 ```yaml
 # 结合 KEDA 的 SpinApp
@@ -865,7 +865,7 @@ spec:
     pollingInterval: 10   # 每 10 秒检查一次
 ```
 
-#<!-- chunk: 4.3 SpinAppExec CRD / Execution Configuration -->## 4.3 SpinAppExec CRD / Execution Configuration
+## 4.3 SpinAppExec CRD / Execution Configuration
 
 ```yaml
 # SpinAppExec - 为 SpinApp 定义执行环境
@@ -914,7 +914,11 @@ spec:
 
 <!-- chunk: 5. 安装与配置 -->## 5. 安装与配置
 
-#<!-- chunk: 5.1 使用 Helm 安装 SpinKube / Install with Helm -->## 5.1 使用 Helm 安装 SpinKube / Install with Helm
+## 5.1 使用 Helm 安装 SpinKube / Install with Helm
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 添加 SpinKube Helm 仓库
@@ -942,6 +946,9 @@ kubectl get crd | grep spin
 # spinapps.core.spinoperator.dev
 # spinappexecs.core.spinoperator.dev
 ```
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 安装 containerd-shim-spin（需要在每个工作节点执行）
@@ -990,7 +997,12 @@ spec:
 EOF
 ```
 
-#<!-- chunk: 5.2 配置 RuntimeClass / Configure RuntimeClass -->## 5.2 配置 RuntimeClass / Configure RuntimeClass
+## 5.2 配置 RuntimeClass / Configure RuntimeClass
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 使用官方 RuntimeClass 配置
@@ -1024,7 +1036,10 @@ kubectl get pod test-spin
 kubectl delete pod test-spin
 ```
 
-#<!-- chunk: 5.3 安装 KEDA / Install KEDA -->## 5.3 安装 KEDA / Install KEDA
+## 5.3 安装 KEDA / Install KEDA
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 使用 Helm 安装 KEDA
@@ -1055,7 +1070,7 @@ kubectl -n keda get pods | grep http
 
 <!-- chunk: 6. HTTP 触发器 -->## 6. HTTP 触发器
 
-#<!-- chunk: 6.1 HTTP 路由配置 / HTTP Routing -->## 6.1 HTTP 路由配置 / HTTP Routing
+## 6.1 HTTP 路由配置 / HTTP Routing
 
 ```toml
 # spin.toml - 复杂 HTTP 路由示例
@@ -1095,7 +1110,7 @@ source = "admin.wasm"
 executor = { type = "http" }
 ```
 
-#<!-- chunk: 6.2 HTTP 中间件模式 / HTTP Middleware Pattern -->## 6.2 HTTP 中间件模式 / HTTP Middleware Pattern
+## 6.2 HTTP 中间件模式 / HTTP Middleware Pattern
 
 ```rust
 // src/lib.rs - HTTP 中间件实现
@@ -1250,7 +1265,7 @@ fn handle_request(req: Request) -> Result<impl IntoResponse> {
 }
 ```
 
-#<!-- chunk: 6.3 出站 HTTP 请求 / Outbound HTTP -->## 6.3 出站 HTTP 请求 / Outbound HTTP
+## 6.3 出站 HTTP 请求 / Outbound HTTP
 
 ```rust
 // Spin 出站 HTTP 客户端
@@ -1290,7 +1305,7 @@ fn handle_request(req: Request) -> Result<impl IntoResponse> {
 
 <!-- chunk: 7. KEDA 集成与 Scale-to-Zero -->## 7. KEDA 集成与 Scale-to-Zero
 
-#<!-- chunk: 7.1 Scale-to-Zero 原理 / Scale-to-Zero Principle -->## 7.1 Scale-to-Zero 原理 / Scale-to-Zero Principle
+## 7.1 Scale-to-Zero 原理 / Scale-to-Zero Principle
 
 ```mermaid
 sequenceDiagram
@@ -1320,7 +1335,7 @@ sequenceDiagram
     Note over Spin: 状态: 0 副本（节省资源）
 ```
 
-#<!-- chunk: 7.2 KEDA ScaledObject 配置 / ScaledObject Configuration -->## 7.2 KEDA ScaledObject 配置 / ScaledObject Configuration
+## 7.2 KEDA ScaledObject 配置 / ScaledObject Configuration
 
 ```yaml
 # HTTP 触发的 scale-to-zero
@@ -1412,7 +1427,7 @@ spec:
     max: 50
 ```
 
-#<!-- chunk: 7.3 预扩容与预热 / Pre-scaling and Warmup -->## 7.3 预扩容与预热 / Pre-scaling and Warmup
+## 7.3 预扩容与预热 / Pre-scaling and Warmup
 
 ```yaml
 # CronJob 在高峰前预热 Wasm 实例
@@ -1475,7 +1490,7 @@ spec:
 
 <!-- chunk: 8. 存储系统集成 -->## 8. 存储系统集成
 
-#<!-- chunk: 8.1 Spin 存储架构 / Spin Storage Architecture -->## 8.1 Spin 存储架构 / Spin Storage Architecture
+## 8.1 Spin 存储架构 / Spin Storage Architecture
 
 ```mermaid
 graph TD
@@ -1496,7 +1511,7 @@ graph TD
     end
 ```
 
-#<!-- chunk: 8.2 KV Store 配置 / KV Store Configuration -->## 8.2 KV Store 配置 / KV Store Configuration
+## 8.2 KV Store 配置 / KV Store Configuration
 
 ```yaml
 # Kubernetes ConfigMap - Spin KV Store 配置
@@ -1552,7 +1567,7 @@ spec:
 
 <!-- chunk: 9. Redis 与 KV Store -->## 9. Redis 与 KV Store
 
-#<!-- chunk: 9.1 KV Store 操作 / KV Store Operations -->## 9.1 KV Store 操作 / KV Store Operations
+## 9.1 KV Store 操作 / KV Store Operations
 
 ```rust
 // KV Store 完整操作示例
@@ -1698,7 +1713,7 @@ fn current_time() -> u64 {
 }
 ```
 
-#<!-- chunk: 9.2 Redis 后端部署 / Redis Backend Deployment -->## 9.2 Redis 后端部署 / Redis Backend Deployment
+## 9.2 Redis 后端部署 / Redis Backend Deployment
 
 ```yaml
 # 为 SpinKube 部署 Redis
@@ -1777,7 +1792,7 @@ spec:
 
 <!-- chunk: 10. SQLite 集成 -->## 10. SQLite 集成
 
-#<!-- chunk: 10.1 SQLite 数据库操作 / SQLite Operations -->## 10.1 SQLite 数据库操作 / SQLite Operations
+## 10.1 SQLite 数据库操作 / SQLite Operations
 
 ```rust
 // Spin SQLite 完整操作示例
@@ -1928,7 +1943,7 @@ impl UserRow {
 }
 ```
 
-#<!-- chunk: 10.2 libSQL/Turso 云数据库 / Cloud Database -->## 10.2 libSQL/Turso 云数据库 / Cloud Database
+## 10.2 libSQL/Turso 云数据库 / Cloud Database
 
 ```toml
 # spin.toml - 配置 libSQL/Turso 数据库
@@ -1982,7 +1997,7 @@ stringData:
 
 <!-- chunk: 11. 高级配置与安全 -->## 11. 高级配置与安全
 
-#<!-- chunk: 11.1 TLS 配置 / TLS Configuration -->## 11.1 TLS 配置 / TLS Configuration
+## 11.1 TLS 配置 / TLS Configuration
 
 ```yaml
 # SpinApp TLS 配置
@@ -2005,6 +2020,9 @@ spec:
   httpToHttpsRedirect: true
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 生成自签名证书（开发用）
 openssl req -x509 -nodes -days 365 \
@@ -2022,7 +2040,7 @@ kubectl create secret tls api-tls-cert \
 # 使用 cert-manager 自动证书管理
 ```
 
-#<!-- chunk: 11.2 RBAC 与安全策略 / RBAC and Security Policies -->## 11.2 RBAC 与安全策略 / RBAC and Security Policies
+## 11.2 RBAC 与安全策略 / RBAC and Security Policies
 
 ```yaml
 # spin-operator ServiceAccount
@@ -2089,7 +2107,7 @@ spec:
         cpu: "500m"
 ```
 
-#<!-- chunk: 11.3 网络策略 / Network Policies -->## 11.3 网络策略 / Network Policies
+## 11.3 网络策略 / Network Policies
 
 ```yaml
 # SpinKube 网络策略
@@ -2156,7 +2174,7 @@ spec:
 
 <!-- chunk: 12. 监控与可观测性 -->## 12. 监控与可观测性
 
-#<!-- chunk: 12.1 Prometheus 指标 / Prometheus Metrics -->## 12.1 Prometheus 指标 / Prometheus Metrics
+## 12.1 Prometheus 指标 / Prometheus Metrics
 
 ```yaml
 # Prometheus ServiceMonitor for SpinKube
@@ -2233,7 +2251,7 @@ spec:
         description: "P99 延迟 {{ $value }}s 超过 1 秒阈值"
 ```
 
-#<!-- chunk: 12.2 Grafana Dashboard 配置 / Grafana Dashboard -->## 12.2 Grafana Dashboard 配置 / Grafana Dashboard
+## 12.2 Grafana Dashboard 配置 / Grafana Dashboard
 
 ```json
 {
@@ -2280,7 +2298,7 @@ spec:
 }
 ```
 
-#<!-- chunk: 12.3 日志收集 / Log Collection -->## 12.3 日志收集 / Log Collection
+## 12.3 日志收集 / Log Collection
 
 ```yaml
 # Fluentd 日志收集配置（针对 SpinKube）
@@ -2332,16 +2350,16 @@ data:
 
 <!-- chunk: 参考资料 / References -->## 参考资料 / References
 
-#<!-- chunk: 官方文档 / Official Documentation -->## 官方文档 / Official Documentation
+## 官方文档 / Official Documentation
 - [SpinKube 官方文档](https://www.spinkube.dev/docs/)
 - [spin-operator GitHub](https://github.com/spinkube/spin-operator)
 - [Fermyon Spin 文档](https://developer.fermyon.com/spin/)
 
-#<!-- chunk: CNCF 相关 / CNCF Related -->## CNCF 相关 / CNCF Related
+## CNCF 相关 / CNCF Related
 - [SpinKube CNCF Sandbox](https://www.cncf.io/projects/spinkube/)
 - [KEDA 官方文档](https://keda.sh/docs/)
 
-#<!-- chunk: 示例代码 / Example Code -->## 示例代码 / Example Code
+## 示例代码 / Example Code
 - [Spin 示例仓库](https://github.com/fermyon/spin-samples)
 - [SpinKube 示例](https://github.com/spinkube/spin-operator/tree/main/config/samples)
 
@@ -2355,7 +2373,7 @@ data:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native MOC
-- [[domain-15-specialized-tech/README|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: WebAssembly 云原生 (WebAssembly Cloud Native)]]
 - Domain-38 WebAssembly 云原生 — 开源项目索引
 - WebAssembly 云原生基础
 - containerd Wasm 运行时

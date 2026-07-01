@@ -624,6 +624,9 @@ parameters:
   type: cloud_essd
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 扩容 PVC
 kubectl patch pvc mysql-data -p '{"spec":{"resources":{"requests":{"storage":"200Gi"}}}}'
@@ -645,6 +648,10 @@ kubectl wait --for=condition=FileSystemResizePending pvc/mysql-data --timeout=30
 
 ### 6.3 扩容失败回滚
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 如果扩容失败，需要恢复原始大小
 # 注意：不是所有存储都支持缩容
@@ -665,6 +672,12 @@ kubectl patch pvc mysql-data -p '{"spec":{"resources":{"requests":{"storage":"10
 | CSI 驱动不支持在线文件系统扩容 | 需要卸载后执行 `xfs_growfs` / `resize2fs` |
 | PVC 使用 Block volumeMode | 无文件系统层，需要应用自行管理 |
 | 内核版本过低（< 4.2） | 不支持在线 resize |
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 离线扩容操作步骤:
@@ -1194,7 +1207,7 @@ manage_pvc_operations
 ## Obsidian 相关文档
 
 - domain-04-storage-data MOC
-- [[domain-04-storage-data/README|Storage Domain 存储领域知识库]]
+- [[domain-04-storage-data/README.md|Storage Domain 存储领域知识库]]
 - Domain-6 存储 — 开源项目索引
 - 存储架构概览与核心组件
 - PV/PVC 核心概念与企业级实践
@@ -1208,10 +1221,10 @@ manage_pvc_operations
 
 ## Related
 
-- [[synthesis/Pod 生命周期 × 存储模型|Pod 生命周期 × 存储模型]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[concepts/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 ## See Also
 

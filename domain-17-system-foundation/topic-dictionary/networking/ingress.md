@@ -195,6 +195,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 查看 Ingress 列表和 ADDRESS
 kubectl get ingress -n production
@@ -215,7 +218,7 @@ kubectl get endpointslices -l kubernetes.io/service-name=api-server -n productio
 
 ## 交叉引用
 
-- [[domain-17-system-foundation/topic-dictionary/networking/ingress-controllers|Ingress Controllers]]](ingress-controllers.md) — 控制器选型和 IngressClass 配置
+- [[domain-17-system-foundation/topic-dictionary/networking/ingress-controllers.md|Ingress Controllers]]](ingress-controllers.md) — 控制器选型和 IngressClass 配置
 - [Gateway API](gateway-api.md) — Ingress 的推荐继任方案
 - [Service](service.md) — Ingress 后端 Service 的类型和端口映射
 - [Network Policies](network-policies.md) — 控制到 Ingress Controller 的入站流量
@@ -223,3 +226,9 @@ kubectl get endpointslices -l kubernetes.io/service-name=api-server -n productio
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/services-networking/ingress/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
+- [[domain-17-system-foundation/topic-dictionary/networking/akri.md|Akri 边缘设备发现]]
+- [[domain-17-system-foundation/topic-dictionary/networking/antrea.md|Antrea 网络方案]]

@@ -176,6 +176,9 @@ Alertmanager 提供了多种告警优化机制：
 
 ### 任务 1: SLO/SLI 设计与告警规则 (1.5h)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建 SLO 告警规则
 cat > slo-rules.yaml << 'EOF'
@@ -289,6 +292,9 @@ kubectl port-forward -n monitoring svc/prometheus-grafana 3000:80
 
 ### 任务 3: Alertmanager 告警路由配置 (1h)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 查看 Alertmanager 配置
 kubectl get secret -n monitoring alertmanager-prometheus-kube-prometheus-alertmanager \
@@ -313,21 +319,21 @@ stringData:
       repeat_interval: 4h
       receiver: 'default'
       routes:
-      - match:
-          severity: critical
+      - matchers:
+        - severity="critical"
         receiver: 'critical'
         group_wait: 10s
         repeat_interval: 1h
-      - match:
-          severity: warning
+      - matchers:
+        - severity="warning"
         receiver: 'warning'
         group_wait: 30s
     
     inhibit_rules:
-    - source_match:
-        severity: 'critical'
-      target_match:
-        severity: 'warning'
+    - source_matchers:
+      - severity="critical"
+      target_matchers:
+      - severity="warning"
       equal: ['alertname', 'cluster', 'namespace']
     
     receivers:

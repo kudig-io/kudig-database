@@ -230,7 +230,7 @@ eBPF（extended Berkeley Packet Filter）允许在内核中安全执行沙箱程
 
 ## 相关链接
 
-- [[skills/monitor-kubernetes-metrics|K8s 监控指标]]
+- [[skills/monitor-kubernetes-metrics.md|K8s 监控指标]]
 
 ## Related
 
@@ -239,4 +239,4 @@ eBPF（extended Berkeley Packet Filter）允许在内核中安全执行沙箱程
 - [[pixie]] — Pixie
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[skills/monitoring-fta|监控与告警异常故障树分析]] — Cross-reference
+- [[skills/monitoring-fta.md|监控与告警异常故障树分析]] — Cross-reference

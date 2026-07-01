@@ -4,6 +4,7 @@ category: assessment
 tags: [assessment, remote-advisor, chatbot, sre, expert-system]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 ---
 
 # KUDIG 语料库深度评估报告

@@ -233,6 +233,4 @@ kubectl get nodes -o custom-columns='NAME:.metadata.name,ZONE:.metadata.labels.t
 - [Kubernetes 官方文档 - Pod Topology Spread Constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/)
 
 ## Related
-
-- index/etcd-index|[[etcd|etcd]]cd 知识图谱索引|etcd 知识图谱索引]]]]
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]

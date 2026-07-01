@@ -70,7 +70,7 @@ created: "2026-05-23"
 | Category | 当前语料条数 | 建议目标 | 差距 |
 |----------|-------------|---------|------|
 | TC-INFRA-NODE | ~15条 | 500+ | -485 |
-| TC-APP-[[concepts/pod-lifecycle|pod]] | ~12条 | 500+ | -488 |
+| TC-APP-[[concepts/pod-lifecycle.md|pod]] | ~12条 | 500+ | -488 |
 | TC-INFRA-NET | ~10条 | 500+ | -490 |
 | TC-SEC | ~8条 | 500+ | -492 |
 | TC-DATA | 0条 | 500+ | -500 |

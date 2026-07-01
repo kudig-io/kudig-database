@@ -44,7 +44,7 @@ created: "2026-05-23"
 ### 1. Kubernetes Secret 的局限
 
 原生 Secret 存在以下安全风险：
-- **默认未加密存储**：[[etcd|etcd]] 中的 Secret 默认以 Base64 编码存储，若 etcd 被攻破则 Secret 泄露
+- **默认未加密存储**：[[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]] 中的 Secret 默认以 Base64 编码存储，若 etcd 被攻破则 Secret 泄露
 - **访问控制粗粒度**：任何具有 Pod 创建权限的用户都可能读取同一 Namespace 中的 Secret
 - **无自动轮转**：Kubernetes 本身不提供 Secret 的自动过期和更新机制
 - **缺乏审计**：无法追踪谁、在何时、以何种方式使用了 Secret
@@ -100,6 +100,9 @@ spec:
 - 集群中的 Controller 是唯一能够解密的实体
 - 适合 GitOps 工作流，但不如 ESO 灵活（不支持动态 Secret 和自动轮转）
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 加密 Secret
 echo -n 'my-password' | kubectl create secret generic my-secret \
@@ -128,6 +131,7 @@ spec:
   dnsNames:
     - example.com
     - www.example.com
+
 ```
 
 ## 关键机制或特性
@@ -186,7 +190,7 @@ spec:
 - [Kubernetes Secret Encryption at Rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/)
 
 ## Related
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+```

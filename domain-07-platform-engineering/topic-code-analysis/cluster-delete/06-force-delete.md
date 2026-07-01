@@ -133,12 +133,16 @@ func runPreflight(c workflow.RunData) error {
 
 ### 1.2 使用场景
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
 # 自动化脚本中避免交互
-kubeadm reset -f
+kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 
 # 等价于
-echo "y" | kubeadm reset
+echo "y" | kubeadm reset  # ⚠️ 清理节点所有 K8s 配置
+
 ```
 
 ---
@@ -220,8 +224,11 @@ if err != nil {
 
 ### 3.1 --skip-phases
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
-kubeadm reset --skip-phases=remove-etcd-member
+kubeadm reset --skip-phases=remove-etcd-member  # ⚠️ 清理节点所有 K8s 配置
 ```
 
 **常见使用场景**:
@@ -261,16 +268,21 @@ force: true
 
 **处理**:
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 在可达的控制面节点上
 kubectl delete node <unreachable-node>
 
 # 手动移除 etcd 成员
 etcdctl member list
-etcdctl member remove <member-id>
+etcdctl member remove <member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
 
 # 如果节点恢复可达后，在节点上执行
-kubeadm reset -f
+kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 ```
 
 ### 4.2 API Server 不可用
@@ -296,12 +308,16 @@ if err == nil {
 
 **手动处理**:
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
 # 直接在节点上执行
-kubeadm reset -f --skip-phases=remove-etcd-member
+kubeadm reset -f --skip-phases=remove-etcd-member  # ⚠️ 清理节点所有 K8s 配置
 
 # 手动清理 etcd
-rm -rf /var/lib/etcd
+rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
 ```
 
 ### 4.3 etcd 仲裁丢失
@@ -314,6 +330,10 @@ rm -rf /var/lib/etcd
 ```
 
 **处理**:
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
 ```bash
 # 在剩余节点上强制恢复（会丢失数据共识）
@@ -328,8 +348,8 @@ etcdctl --endpoints=https://127.0.0.1:2379 \
   member list
 
 # 如果无法操作，直接清理
-kubeadm reset -f
-rm -rf /var/lib/etcd
+kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
+rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
 ```
 
 ### 4.4 容器运行时异常
@@ -345,6 +365,10 @@ if err := removeContainers(r.CRISocketPath()); err != nil {
 
 **手动处理**:
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # containerd
 ctr -n k8s.io containers rm $(ctr -n k8s.io containers -q)
@@ -354,7 +378,7 @@ ctr -n k8s.io tasks kill $(ctr -n k8s.io tasks -q)
 systemctl restart containerd
 
 # 然后重新执行 reset
-kubeadm reset -f
+kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 ```
 
 ### 4.5 卸载挂载点失败
@@ -374,6 +398,9 @@ if err := syscall.Unmount(m[1], flagsInt); err != nil {
 
 **手动处理**:
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
 # 查看挂载点
 mount | grep kubelet
@@ -385,7 +412,7 @@ umount -f $(mount | grep kubelet | awk '{print $3}')
 umount -l $(mount | grep kubelet | awk '{print $3}')
 
 # 使用 ResetConfiguration
-kubeadm reset --config=reset.yaml
+kubeadm reset --config=reset.yaml  # ⚠️ 清理节点所有 K8s 配置
 # reset.yaml:
 # unmountFlags: ["MNT_DETACH"]
 ```
@@ -405,6 +432,12 @@ if certsDir != kubeadmapiv1.DefaultCertificatesDir {
 
 ## 5. 完整的灾难恢复删除脚本
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 set -e
@@ -414,7 +447,7 @@ NODE_NAME=$(hostname)
 echo "=== Force Reset Node: ${NODE_NAME} ==="
 
 # 1. 尝试正常 reset
-kubeadm reset -f || true
+kubeadm reset -f || true  # ⚠️ 清理节点所有 K8s 配置
 
 # 2. 停止所有服务
 systemctl stop kubelet 2>/dev/null || true
@@ -426,17 +459,17 @@ mount | grep '/var/lib/kubelet' | awk '{print $3}' | while read mp; do
 done
 
 # 4. 清理容器运行时
-rm -rf /var/lib/containerd/*
-rm -rf /var/lib/docker/*
+rm -rf /var/lib/containerd/*  # ⚠️ 删除系统/数据文件
+rm -rf /var/lib/docker/*  # ⚠️ 删除系统/数据文件
 systemctl start containerd
 
 # 5. 清理 Kubernetes 数据
-rm -rf /etc/kubernetes/
-rm -rf /var/lib/kubelet/
-rm -rf /var/lib/etcd/
-rm -rf /etc/cni/net.d/
-rm -rf /opt/cni/
-rm -rf $HOME/.kube/
+rm -rf /etc/kubernetes/  # ⚠️ 删除系统/数据文件
+rm -rf /var/lib/kubelet/  # ⚠️ 删除系统/数据文件
+rm -rf /var/lib/etcd/  # ⚠️ 删除系统/数据文件
+rm -rf /etc/cni/net.d/  # ⚠️ 删除系统/数据文件
+rm -rf /opt/cni/  # ⚠️ 删除系统/数据文件
+rm -rf $HOME/.kube/  # ⚠️ 删除系统/数据文件
 
 # 6. 清理网络规则
 iptables -F 2>/dev/null || true
@@ -453,6 +486,7 @@ ip link show type dummy | grep -o '^[0-9]*: [^@]*' | cut -d: -f2 | tr -d ' ' | w
 done
 
 echo "=== Node ${NODE_NAME} has been fully reset ==="
+
 ```
 
 ---
@@ -466,7 +500,9 @@ echo "=== Node ${NODE_NAME} has been fully reset ==="
 ## Related
 
 - [[README|README]]
-- [[man/INSTALL|INSTALL]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git|git]]
+- [[scripts/man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
+
+```

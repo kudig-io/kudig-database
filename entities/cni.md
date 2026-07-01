@@ -53,7 +53,7 @@ CNI (Container Network Interface) 是一个定义容器网络配置的规范和�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -71,14 +71,14 @@ CNI (Container Network Interface) 是一个定义容器网络配置的规范和�
 
 - [[cilium]]
 - [[containerd]]
-- [[concepts/cilium-ebpf-networking|cilium-ebpf-networking]]
-- [[entities/networkpolicy|networkpolicy]]
-- [[concepts/container-runtime-comparison|container-runtime-comparison]]
+- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
+- [[entities/networkpolicy.md|networkpolicy]]
+- [[concepts/container-runtime-comparison.md|container-runtime-comparison]]
 
 ## Related
 
 - [[slimtoolkit]] — SlimToolkit
-- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
+- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[containerd]] — containerd
 - [[cri-o]] — CRI-O
@@ -87,9 +87,9 @@ CNI (Container Network Interface) 是一个定义容器网络配置的规范和�
 - 27-cni-troubleshooting-optimization
 - 03-cni-plugins-comparison
 - CNI 架构与核心原理
-- [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting|03-networking-cni-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/03-networking-cni-troubleshooting.md|03-networking-cni-troubleshooting]]
 - 03-cilium-cni-architecture
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting|01-cni-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
 - cni
 - RELEASE-NOTES-1.9
 - RELEASE-NOTES-0.8
@@ -105,48 +105,48 @@ CNI (Container Network Interface) 是一个定义容器网络配置的规范和�
 - RELEASE-NOTES-1.1
 - RELEASE-NOTES-1.0
 - RELEASE-NOTES-1.4
-- [[journal/digest-2026-05-21-full|Wiki 全量知识库摘要 — 2026-05-21]] — Cross-reference
-- [[references/linux-sysctl-reference|Linux Sysctl Reference for Kubernetes]] — Cross-reference
-- [[references/networking-terms|K8s 网络术语参考]] — Cross-reference
-- [[references/k8s-workloads-domain-guide|Kubernetes Workloads Domain Guide]] — Cross-reference
-- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[references/k8s-structured-troubleshooting|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
-- [[references/k8s-architecture-fundamentals|K8s 架构基础与核心组件原理]] — Cross-reference
-- [[references/root-terms|K8s Root术语参考]] — Cross-reference
-- [[references/k8s-control-plane-deep-dive|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]] — Cross-reference
-- [[references/k8s-cloud-provider-comparison|云厂商托管 Kubernetes 服务全景对比（13 家）]] — Cross-reference
-- [[references/k8s-networking-ecosystem|网络体系：CNI、Service、Ingress、Gateway API 与多集群网络]] — Cross-reference
-- [[references/k8s-cluster-delete|Kubernetes 集群删除操作指南]] — Cross-reference
-- [[references/release-notes-cli-tools|发布说明索引 — CLI 工具]] — Cross-reference
-- [[references/k8s-node-create|Kubernetes 节点管理操作指南]] — Cross-reference
-- [[references/platform-engineering-terms|K8s 平台工程术语参考]] — Cross-reference
-- [[references/version-upgrade-guide|版本升级指南]] — Cross-reference
-- [[references/k8s-networking-domain-guide|Kubernetes Networking Domain Guide]] — Cross-reference
-- [[synthesis/kubeadm-cluster-operations|kubeadm 集群运维全景]] — Cross-reference
-- [[synthesis/IaC x 多集群管理|基础设施即代码 x 多集群管理]] — Cross-reference
-- [[synthesis/Production Troubleshooting Playbook|Production Troubleshooting Playbook]] — Cross-reference
-- [[concepts/k8s-mttr-benchmark|K8s 问题分布与 MTTR 基准]] — Cross-reference
-- [[concepts/cni-networking-model|CNI 网络模型与插件对比]] — Cross-reference
-- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[concepts/node-lifecycle-management|节点生命周期管理]] — Cross-reference
-- [[concepts/Kubernetes Core Concepts|Kubernetes Core Concepts]] — Cross-reference
-- [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/k8s-network-security-guide|Kubernetes 网络安全最佳实践]] — Cross-reference
-- [[skills/ts-node-components|节点组件故障排查]] — Cross-reference
-- [[skills/learn-13-daemonset-basics|第13课：DaemonSet 与节点守护]] — Cross-reference
-- [[skills/kubeadm-cluster-lifecycle|kubeadm 集群创建生命周期]] — Cross-reference
-- [[skills/skill-20-networkpolicy-connectivity|NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting]] — Cross-reference
-- [[skills/skill-21-statefulset-failure|StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[skills/networkpolicy-fta|NetworkPolicy 异常故障树分析]] — Cross-reference
-- [[skills/kubeadm-cluster-deletion|kubeadm 集群删除操作]] — Cross-reference
-- [[skills/skill-reference-root-cause-catalog|Root Cause Catalog]] — Cross-reference
-- [[skills/deployment-workload-selection|工作负载控制器选型]] — Cross-reference
-- [[skills/k8s-network-configuration-guide|Kubernetes 网络配置最佳实践]] — Cross-reference
-- [[skills/learn-04-debug-tools-setup|Day 4: 调试工具全家桶安装]] — Cross-reference
-- [[skills/learn-oncall-quick-qa|工单数字人快速问答 - On-Call 速查]] — Cross-reference
-- [[skills/learn-12-common-problems|第十课：常见问题排查]] — Cross-reference
-- [[skills/learn-analogy-dictionary|K8S 概念类比词典]] — Cross-reference
-- [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
+- Wiki 全量知识库摘要 — 2026-05-21 — Cross-reference
+- [[entities/linux-sysctl-reference.md|Linux Sysctl Reference for Kubernetes]] — Cross-reference
+- [[entities/networking-terms.md|K8s 网络术语参考]] — Cross-reference
+- [[entities/k8s-workloads-domain-guide.md|Kubernetes Workloads Domain Guide]] — Cross-reference
+- [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[entities/k8s-structured-troubleshooting.md|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
+- [[entities/k8s-architecture-fundamentals.md|K8s 架构基础与核心组件原理]] — Cross-reference
+- [[entities/root-terms.md|K8s Root术语参考]] — Cross-reference
+- [[entities/k8s-control-plane-deep-dive.md|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]] — Cross-reference
+- [[entities/k8s-cloud-provider-comparison.md|云厂商托管 Kubernetes 服务全景对比（13 家）]] — Cross-reference
+- [[entities/k8s-networking-ecosystem.md|网络体系：CNI、Service、Ingress、Gateway API 与多集群网络]] — Cross-reference
+- [[entities/k8s-cluster-delete.md|Kubernetes 集群删除操作指南]] — Cross-reference
+- [[entities/release-notes-cli-tools.md|发布说明索引 — CLI 工具]] — Cross-reference
+- [[entities/k8s-node-create.md|Kubernetes 节点管理操作指南]] — Cross-reference
+- [[entities/platform-engineering-terms.md|K8s 平台工程术语参考]] — Cross-reference
+- [[entities/version-upgrade-guide.md|版本升级指南]] — Cross-reference
+- [[entities/k8s-networking-domain-guide.md|Kubernetes Networking Domain Guide]] — Cross-reference
+- [[concepts/kubeadm-cluster-operations.md|kubeadm 集群运维全景]] — Cross-reference
+- [[concepts/IaC x 多集群管理.md|基础设施即代码 x 多集群管理]] — Cross-reference
+- [[concepts/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Cross-reference
+- [[concepts/k8s-mttr-benchmark.md|K8s 问题分布与 MTTR 基准]] — Cross-reference
+- [[concepts/cni-networking-model.md|CNI 网络模型与插件对比]] — Cross-reference
+- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[concepts/node-lifecycle-management.md|节点生命周期管理]] — Cross-reference
+- [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]] — Cross-reference
+- [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[skills/k8s-network-security-guide.md|Kubernetes 网络安全最佳实践]] — Cross-reference
+- [[skills/ts-node-components.md|节点组件故障排查]] — Cross-reference
+- [[skills/learn-13-daemonset-basics.md|第13课：DaemonSet 与节点守护]] — Cross-reference
+- [[skills/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]] — Cross-reference
+- [[skills/skill-20-networkpolicy-connectivity.md|NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting]] — Cross-reference
+- [[skills/skill-21-statefulset-failure.md|StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[skills/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]] — Cross-reference
+- [[skills/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]] — Cross-reference
+- [[skills/skill-reference-root-cause-catalog.md|Root Cause Catalog]] — Cross-reference
+- [[skills/deployment-workload-selection.md|工作负载控制器选型]] — Cross-reference
+- [[skills/k8s-network-configuration-guide.md|Kubernetes 网络配置最佳实践]] — Cross-reference
+- [[skills/learn-04-debug-tools-setup.md|Day 4: 调试工具全家桶安装]] — Cross-reference
+- [[skills/learn-oncall-quick-qa.md|工单数字人快速问答 - On-Call 速查]] — Cross-reference
+- [[skills/learn-12-common-problems.md|第十课：常见问题排查]] — Cross-reference
+- [[skills/learn-analogy-dictionary.md|K8S 概念类比词典]] — Cross-reference
+- [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]

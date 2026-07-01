@@ -45,7 +45,7 @@ WasmEdge 是一个轻量级、高性能、可扩展的 WebAssembly (Wasm) 运行
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -63,7 +63,7 @@ WasmEdge 是一个轻量级、高性能、可扩展的 WebAssembly (Wasm) 运行
 ## 参考链接
 
 - [[containerd]]
-- [[entities/argocd|[[ArgoCD|argocd]]]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 - [[pod-lifecycle]]
 
 ## Related
@@ -77,5 +77,5 @@ WasmEdge 是一个轻量级、高性能、可扩展的 WebAssembly (Wasm) 运行
 - 05-wasmedge-runtime
 - 99-wasmedge-cloud-native-guide
 - wasmedge
-- [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[entities/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

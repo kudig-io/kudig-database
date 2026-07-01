@@ -32,6 +32,7 @@ related_skills:
   - "SKILL-NODE-001"
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 title: "证书过期问题诊断与修复"
 tags: ["skills", "certificate-expiry", "troubleshooting", "visibility/public"]
 ---
@@ -183,11 +184,11 @@ tags: ["skills", "certificate-expiry", "troubleshooting", "visibility/public"]
 
 本Skill诊断过程中可能涉及的其他Skill：
 
-- [[skills/ts-control-plane]]
+- [[skills/ts-control-plane.md|ts control plane]]
 
 - k8s-ingress-gateway
 
-- [[skills/best-practices/scenarios/security-incident]]
+- [[skills/best-practices/scenarios/security-incident.md|security incident]]
 
 
 当本Skill的诊断步骤无法定位根因时，建议按上述顺序排查相关Skill。
@@ -207,6 +208,7 @@ tags: ["skills", "certificate-expiry", "troubleshooting", "visibility/public"]
   for: 1h
   labels:
     severity: warning
+
 ```
 
 ## 典型生产案例
@@ -270,4 +272,6 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/kubernetes-pki-certificate-system|Kubernetes PKI 证书体系]] — Kubernetes 组件证书签发、轮转与过期管理
+- [[concepts/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]] — Kubernetes 组件证书签发、轮转与过期管理
+
+```

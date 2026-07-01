@@ -69,7 +69,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. WebAssembly 概述 -->## 1. WebAssembly 概述
 
-#<!-- chunk: 1.1 什么是 WebAssembly / What is WebAssembly -->## 1.1 什么是 WebAssembly / What is WebAssembly
+## 1.1 什么是 WebAssembly / What is WebAssembly
 
 WebAssembly（缩写 Wasm）是一种基于栈式虚拟机的二进制指令格式。它被设计为编程语言的可移植编译目标，可以在 Web 上部署高性能客户端和服务端应用。
 
@@ -85,7 +85,7 @@ WebAssembly 核心特性：
 
 WebAssembly 于 2019 年 12 月成为 W3C 官方标准，并被所有主流浏览器所支持。自 2020 年起，其在服务端和云原生领域的应用快速增长。
 
-#<!-- chunk: 1.2 历史演进 / History & Evolution -->## 1.2 历史演进 / History & Evolution
+## 1.2 历史演进 / History & Evolution
 
 ```mermaid
 timeline
@@ -108,7 +108,7 @@ timeline
          : AI/ML 推理场景爆发
 ```
 
-#<!-- chunk: 1.3 为什么关注云原生 Wasm / Why Cloud Native Wasm -->## 1.3 为什么关注云原生 Wasm / Why Cloud Native Wasm
+## 1.3 为什么关注云原生 Wasm / Why Cloud Native Wasm
 
 ```mermaid
 graph TD
@@ -143,7 +143,7 @@ graph TD
 
 <!-- chunk: 2. Wasm 二进制格式与架构 -->## 2. Wasm 二进制格式与架构
 
-#<!-- chunk: 2.1 模块结构 / Module Structure -->## 2.1 模块结构 / Module Structure
+## 2.1 模块结构 / Module Structure
 
 WebAssembly 模块是二进制编码的，由多个 Section（节）组成：
 
@@ -168,7 +168,7 @@ WebAssembly 二进制格式结构
 └─────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 2.2 WAT - WebAssembly 文本格式 / Text Format -->## 2.2 WAT - WebAssembly 文本格式 / Text Format
+## 2.2 WAT - WebAssembly 文本格式 / Text Format
 
 WAT (WebAssembly Text Format) 是 Wasm 二进制的人类可读表示：
 
@@ -210,7 +210,7 @@ WAT (WebAssembly Text Format) 是 Wasm 二进制的人类可读表示：
 )
 ```
 
-#<!-- chunk: 2.3 栈式虚拟机 / Stack-based Virtual Machine -->## 2.3 栈式虚拟机 / Stack-based Virtual Machine
+## 2.3 栈式虚拟机 / Stack-based Virtual Machine
 
 ```mermaid
 graph LR
@@ -243,7 +243,7 @@ WebAssembly 值类型
     └── externref - 外部引用
 ```
 
-#<!-- chunk: 2.4 指令集架构 / Instruction Set -->## 2.4 指令集架构 / Instruction Set
+## 2.4 指令集架构 / Instruction Set
 
 ```wat
 ;; 控制流指令
@@ -307,7 +307,7 @@ WebAssembly 值类型
 
 <!-- chunk: 3. 线性内存模型 -->## 3. 线性内存模型
 
-#<!-- chunk: 3.1 内存概念 / Memory Concepts -->## 3.1 内存概念 / Memory Concepts
+## 3.1 内存概念 / Memory Concepts
 
 WebAssembly 的内存模型基于线性内存（Linear Memory），是一块连续的字节数组：
 
@@ -337,7 +337,7 @@ WebAssembly 的内存模型基于线性内存（Linear Memory），是一块连�
 - Memory64 提案支持 64 位地址空间
 ```
 
-#<!-- chunk: 3.2 内存操作 / Memory Operations -->## 3.2 内存操作 / Memory Operations
+## 3.2 内存操作 / Memory Operations
 
 ```rust
 // Rust 示例：通过 wasm-bindgen 与 JS 共享内存
@@ -396,7 +396,7 @@ uint32_t copy_string(const char* src, uint32_t len) {
 }
 ```
 
-#<!-- chunk: 3.3 内存增长 / Memory Growth -->## 3.3 内存增长 / Memory Growth
+## 3.3 内存增长 / Memory Growth
 
 ```wat
 ;; 动态内存增长
@@ -418,7 +418,7 @@ uint32_t copy_string(const char* src, uint32_t len) {
 )
 ```
 
-#<!-- chunk: 3.4 共享内存与线程 / Shared Memory & Threads -->## 3.4 共享内存与线程 / Shared Memory & Threads
+## 3.4 共享内存与线程 / Shared Memory & Threads
 
 ```javascript
 // JavaScript 中创建共享内存
@@ -443,7 +443,7 @@ Atomics.load(i32, 1);         // 原子读取
 
 <!-- chunk: 4. WASI - WebAssembly 系统接口 -->## 4. WASI - WebAssembly 系统接口
 
-#<!-- chunk: 4.1 WASI 概述 / WASI Overview -->## 4.1 WASI 概述 / WASI Overview
+## 4.1 WASI 概述 / WASI Overview
 
 WASI (WebAssembly System Interface) 是 WebAssembly 的系统级 API 标准，让 Wasm 模块能够以安全、可移植的方式访问系统资源：
 
@@ -471,7 +471,7 @@ graph TD
     end
 ```
 
-#<!-- chunk: 4.2 WASI Preview 1 核心 API / Core APIs -->## 4.2 WASI Preview 1 核心 API / Core APIs
+## 4.2 WASI Preview 1 核心 API / Core APIs
 
 ```rust
 // Rust 使用 WASI 文件系统操作
@@ -524,7 +524,7 @@ name = "wasi-example"
 # 构建命令: cargo build --target wasm32-wasi
 ```
 
-#<!-- chunk: 4.3 WASI Preview 2 与组件模型 / Component Model -->## 4.3 WASI Preview 2 与组件模型 / Component Model
+## 4.3 WASI Preview 2 与组件模型 / Component Model
 
 ```
 WASI Preview 2 核心接口 (WIT 格式)
@@ -572,7 +572,7 @@ impl wasi::exports::http::incoming_handler::Guest for HttpHandler {
 wasi::http::proxy::export!(HttpHandler);
 ```
 
-#<!-- chunk: 4.4 能力安全模型 / Capability Security Model -->## 4.4 能力安全模型 / Capability Security Model
+## 4.4 能力安全模型 / Capability Security Model
 
 ```
 WASI 能力安全 (Capability-based Security)
@@ -633,7 +633,7 @@ func main() {
 }
 ```
 
-#<!-- chunk: 4.5 WASI 网络接口 / Network Interface -->## 4.5 WASI 网络接口 / Network Interface
+## 4.5 WASI 网络接口 / Network Interface
 
 ```rust
 // WASI HTTP 客户端 (Preview 2)
@@ -683,7 +683,7 @@ pub fn fetch_url(url: &str) -> Result<String, String> {
 
 <!-- chunk: 5. Wasm vs 容器对比 -->## 5. Wasm vs 容器对比
 
-#<!-- chunk: 5.1 架构对比 / Architecture Comparison -->## 5.1 架构对比 / Architecture Comparison
+## 5.1 架构对比 / Architecture Comparison
 
 ```mermaid
 graph TD
@@ -703,7 +703,7 @@ graph TD
     end
 ```
 
-#<!-- chunk: 5.2 详细对比表 / Detailed Comparison -->## 5.2 详细对比表 / Detailed Comparison
+## 5.2 详细对比表 / Detailed Comparison
 
 | 维度 | Docker 容器 | Wasm 模块 | 备注 |
 |------|------------|-----------|------|
@@ -723,7 +723,7 @@ graph TD
 | **生态系统** | 极其成熟 | 快速发展 | 容器生态更大 |
 | **OCI 兼容** | 是 | 是（OCI Wasm Artifact）| 统一分发 |
 
-#<!-- chunk: 5.3 使用场景选择 / Use Case Selection -->## 5.3 使用场景选择 / Use Case Selection
+## 5.3 使用场景选择 / Use Case Selection
 
 ```
 何时使用 Wasm（而非容器）：
@@ -744,7 +744,7 @@ graph TD
   - 长运行的有状态服务（容器更成熟）
 ```
 
-#<!-- chunk: 5.4 混合部署模式 / Hybrid Deployment -->## 5.4 混合部署模式 / Hybrid Deployment
+## 5.4 混合部署模式 / Hybrid Deployment
 
 ```yaml
 # Kubernetes 中混合部署：容器 + Wasm
@@ -774,7 +774,7 @@ spec:
 
 <!-- chunk: 6. 云原生用例 -->## 6. 云原生用例
 
-#<!-- chunk: 6.1 Serverless / FaaS -->## 6.1 Serverless / FaaS
+## 6.1 Serverless / FaaS
 
 ```mermaid
 sequenceDiagram
@@ -823,7 +823,7 @@ fn handle_request(req: Request) -> anyhow::Result<impl IntoResponse> {
 }
 ```
 
-#<!-- chunk: 6.2 边缘计算 / Edge Computing -->## 6.2 边缘计算 / Edge Computing
+## 6.2 边缘计算 / Edge Computing
 
 ```
 边缘计算 Wasm 部署架构
@@ -845,7 +845,7 @@ fn handle_request(req: Request) -> anyhow::Result<impl IntoResponse> {
   - 低内存占用，适合资源受限设备
 ```
 
-#<!-- chunk: 6.3 插件系统 / Plugin System -->## 6.3 插件系统 / Plugin System
+## 6.3 插件系统 / Plugin System
 
 ```go
 // Go 实现 Wasm 插件系统（使用 wazero）
@@ -933,7 +933,7 @@ func (pm *PluginManager) CallPlugin(name, funcName string, args ...uint64) ([]ui
 }
 ```
 
-#<!-- chunk: 6.4 AI 推理 / AI Inference -->## 6.4 AI 推理 / AI Inference
+## 6.4 AI 推理 / AI Inference
 
 ```
 Wasm AI 推理架构
@@ -994,7 +994,7 @@ fn run_inference(model_path: &str, input: &[f32]) -> Vec<f32> {
 }
 ```
 
-#<!-- chunk: 6.5 数据处理管道 / Data Processing Pipeline -->## 6.5 数据处理管道 / Data Processing Pipeline
+## 6.5 数据处理管道 / Data Processing Pipeline
 
 ```yaml
 # Knative + Wasm 数据处理管道
@@ -1025,7 +1025,7 @@ spec:
 
 <!-- chunk: 7. 工具链与编译 -->## 7. 工具链与编译
 
-#<!-- chunk: 7.1 编译目标 / Compilation Targets -->## 7.1 编译目标 / Compilation Targets
+## 7.1 编译目标 / Compilation Targets
 
 ```
 主要 Wasm 编译目标
@@ -1037,7 +1037,7 @@ spec:
   wasm32-unknown-emscripten - Emscripten（浏览器 + POSIX）
 ```
 
-#<!-- chunk: 7.2 Rust 工具链 / Rust Toolchain -->## 7.2 Rust 工具链 / Rust Toolchain
+## 7.2 Rust 工具链 / Rust Toolchain
 
 ```bash
 # 安装 Rust Wasm 工具链
@@ -1083,7 +1083,7 @@ panic = "abort"       # 避免 panic 处理代码
 strip = true          # 剥离符号表
 ```
 
-#<!-- chunk: 7.3 Go 工具链 / Go Toolchain -->## 7.3 Go 工具链 / Go Toolchain
+## 7.3 Go 工具链 / Go Toolchain
 
 ```bash
 # TinyGo - 面向嵌入式和 Wasm 的 Go 编译器
@@ -1129,7 +1129,7 @@ func main() {
 }
 ```
 
-#<!-- chunk: 7.4 AssemblyScript / TypeScript-like -->## 7.4 AssemblyScript / TypeScript-like
+## 7.4 AssemblyScript / TypeScript-like
 
 ```typescript
 // AssemblyScript - TypeScript 子集，编译为 Wasm
@@ -1167,7 +1167,7 @@ export function deallocate(ptr: i32): void {
 }
 ```
 
-#<!-- chunk: 7.5 WASM 工具 / Tools -->## 7.5 WASM 工具 / Tools
+## 7.5 WASM 工具 / Tools
 
 ```bash
 # wabt - WebAssembly 二进制工具包
@@ -1196,7 +1196,7 @@ wasm-opt -O3 -o optimized.wasm input.wasm
 
 <!-- chunk: 8. 组件模型 -->## 8. 组件模型
 
-#<!-- chunk: 8.1 组件模型概述 / Component Model Overview -->## 8.1 组件模型概述 / Component Model Overview
+## 8.1 组件模型概述 / Component Model Overview
 
 ```mermaid
 graph TD
@@ -1225,7 +1225,7 @@ graph TD
     D --> I
 ```
 
-#<!-- chunk: 8.2 WIT - Wasm 接口类型 / Interface Types -->## 8.2 WIT - Wasm 接口类型 / Interface Types
+## 8.2 WIT - Wasm 接口类型 / Interface Types
 
 ```wit
 // world.wit - 定义组件世界（接口）
@@ -1279,7 +1279,7 @@ world http-service {
 }
 ```
 
-#<!-- chunk: 8.3 组件组合 / Component Composition -->## 8.3 组件组合 / Component Composition
+## 8.3 组件组合 / Component Composition
 
 ```bash
 # 使用 wasm-tools 组合组件
@@ -1303,7 +1303,7 @@ wasm-tools compose \
 
 <!-- chunk: 9. 安全模型 -->## 9. 安全模型
 
-#<!-- chunk: 9.1 Wasm 沙箱 / Wasm Sandbox -->## 9.1 Wasm 沙箱 / Wasm Sandbox
+## 9.1 Wasm 沙箱 / Wasm Sandbox
 
 ```
 WebAssembly 安全层次
@@ -1330,7 +1330,7 @@ WebAssembly 安全层次
 └─────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 9.2 多租户安全 / Multi-tenant Security -->## 9.2 多租户安全 / Multi-tenant Security
+## 9.2 多租户安全 / Multi-tenant Security
 
 ```rust
 // 多租户 Wasm 执行引擎
@@ -1393,7 +1393,7 @@ impl MultiTenantRuntime {
 }
 ```
 
-#<!-- chunk: 9.3 Spectre 防护 / Spectre Mitigation -->## 9.3 Spectre 防护 / Spectre Mitigation
+## 9.3 Spectre 防护 / Spectre Mitigation
 
 ```
 Wasmtime Spectre 防护措施：
@@ -1415,7 +1415,7 @@ Wasmtime Spectre 防护措施：
 
 <!-- chunk: 10. 性能分析与优化 -->## 10. 性能分析与优化
 
-#<!-- chunk: 10.1 编译策略 / Compilation Strategies -->## 10.1 编译策略 / Compilation Strategies
+## 10.1 编译策略 / Compilation Strategies
 
 ```
 Wasm 执行引擎编译策略
@@ -1441,7 +1441,7 @@ Wasm 执行引擎编译策略
   - 适合：已知负载的生产环境
 ```
 
-#<!-- chunk: 10.2 性能基准 / Performance Benchmarks -->## 10.2 性能基准 / Performance Benchmarks
+## 10.2 性能基准 / Performance Benchmarks
 
 ```
 WebAssembly vs Native 性能对比（近似值）
@@ -1464,7 +1464,7 @@ IO 密集：
   Wasm (JIT):        10x 更快启动
 ```
 
-#<!-- chunk: 10.3 优化技巧 / Optimization Tips -->## 10.3 优化技巧 / Optimization Tips
+## 10.3 优化技巧 / Optimization Tips
 
 ```rust
 // Rust Wasm 优化技巧
@@ -1512,7 +1512,7 @@ pub extern "C" fn batch_process(ptr: *mut u8, len: usize) -> usize {
 
 <!-- chunk: 11. 生态系统与运行时 -->## 11. 生态系统与运行时
 
-#<!-- chunk: 11.1 主要 Wasm 运行时对比 / Runtime Comparison -->## 11.1 主要 Wasm 运行时对比 / Runtime Comparison
+## 11.1 主要 Wasm 运行时对比 / Runtime Comparison
 
 | 运行时 | 语言 | 许可证 | 特点 | 主要用途 |
 |--------|------|--------|------|----------|
@@ -1523,7 +1523,7 @@ pub extern "C" fn batch_process(ptr: *mut u8, len: usize) -> usize {
 | **V8** | C++ | BSD | 最成熟, JS 引擎 | 浏览器、Deno |
 | **SpiderMonkey** | C++ | MPL-2.0 | Firefox 引擎 | 浏览器 |
 
-#<!-- chunk: 11.2 云原生 Wasm 项目 / Cloud Native Projects -->## 11.2 云原生 Wasm 项目 / Cloud Native Projects
+## 11.2 云原生 Wasm 项目 / Cloud Native Projects
 
 ```mermaid
 graph TD
@@ -1547,7 +1547,7 @@ graph TD
     end
 ```
 
-#<!-- chunk: 11.3 OCI Wasm 工件标准 / OCI Wasm Artifact -->## 11.3 OCI Wasm 工件标准 / OCI Wasm Artifact
+## 11.3 OCI Wasm 工件标准 / OCI Wasm Artifact
 
 ```bash
 # 将 Wasm 模块打包为 OCI 镜像
@@ -1575,7 +1575,7 @@ docker manifest inspect ghcr.io/myorg/myapp:latest
 
 <!-- chunk: 12. 实践示例 -->## 12. 实践示例
 
-#<!-- chunk: 12.1 完整 Rust WASI 应用 / Complete Rust WASI App -->## 12.1 完整 Rust WASI 应用 / Complete Rust WASI App
+## 12.1 完整 Rust WASI 应用 / Complete Rust WASI App
 
 ```rust
 // src/main.rs - 完整 WASI Web 服务器（使用 Spin）
@@ -1662,7 +1662,7 @@ fn delete_user(_req: Request, params: Params) -> Result<impl IntoResponse> {
 }
 ```
 
-#<!-- chunk: 12.2 Kubernetes 部署配置 / Kubernetes Deployment -->## 12.2 Kubernetes 部署配置 / Kubernetes Deployment
+## 12.2 Kubernetes 部署配置 / Kubernetes Deployment
 
 ```yaml
 # RuntimeClass 配置（需要 containerd wasm shim）
@@ -1751,7 +1751,7 @@ spec:
         averageUtilization: 70
 ```
 
-#<!-- chunk: 12.3 完整构建流水线 / Complete CI/CD Pipeline -->## 12.3 完整构建流水线 / Complete CI/CD Pipeline
+## 12.3 完整构建流水线 / Complete CI/CD Pipeline
 
 ```yaml
 # .github/workflows/wasm-build.yml
@@ -1820,7 +1820,7 @@ jobs:
         kubectl rollout status deployment/wasm-app
 ```
 
-#<!-- chunk: 12.4 性能测试 / Performance Testing -->## 12.4 性能测试 / Performance Testing
+## 12.4 性能测试 / Performance Testing
 
 ```go
 // 性能测试：Wasm vs Native
@@ -1879,24 +1879,24 @@ func BenchmarkNativeFibonacci(b *testing.B) {
 
 <!-- chunk: 参考资料 / References -->## 参考资料 / References
 
-#<!-- chunk: 官方规范 / Official Specifications -->## 官方规范 / Official Specifications
+## 官方规范 / Official Specifications
 - [WebAssembly 核心规范](https://webassembly.github.io/spec/core/)
 - [WASI Preview 2 规范](https://github.com/WebAssembly/WASI)
 - [WebAssembly 组件模型](https://github.com/WebAssembly/component-model)
 - [W3C WebAssembly 标准](https://www.w3.org/TR/wasm-core-2/)
 
-#<!-- chunk: 运行时文档 / Runtime Documentation -->## 运行时文档 / Runtime Documentation
+## 运行时文档 / Runtime Documentation
 - [Wasmtime 官方文档](https://docs.wasmtime.dev/)
 - [WasmEdge 官方文档](https://wasmedge.org/docs/)
 - [Wasmer 官方文档](https://docs.wasmer.io/)
 - [wazero 官方文档](https://wazero.io/)
 
-#<!-- chunk: 云原生集成 / Cloud Native Integration -->## 云原生集成 / Cloud Native Integration
+## 云原生集成 / Cloud Native Integration
 - [containerd runwasi](https://github.com/containerd/runwasi)
 - [Fermyon Spin 文档](https://developer.fermyon.com/spin/)
 - [wasmCloud 文档](https://wasmcloud.com/docs/)
 
-#<!-- chunk: 学习资源 / Learning Resources -->## 学习资源 / Learning Resources
+## 学习资源 / Learning Resources
 - [Rust Wasm 书籍](https://rustwasm.github.io/docs/book/)
 - [WASI Tutorial](https://github.com/bytecodealliance/wasmtime/blob/main/docs/WASI-tutorial.md)
 - [WebAssembly.org](https://webassembly.org/)
@@ -1911,7 +1911,7 @@ func BenchmarkNativeFibonacci(b *testing.B) {
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: WebAssembly 云原生 (WebAssembly Cloud Native)]]
 - Domain-38 WebAssembly 云原生 — 开源项目索引
 - containerd Wasm 运行时
 - SpinKube 框架实践

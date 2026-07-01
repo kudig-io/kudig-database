@@ -717,6 +717,10 @@ spec:
 
 ### 7.2 OpenCost快速部署
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 部署OpenCost
 helm install opencost opencost/opencost \
@@ -814,6 +818,9 @@ ROI = (业务价值 - 总成本) / 总成本 × 100%
 
 ### 9.2 常用命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Kubecost成本查询
 kubectl cost namespace --window 7d --show-all-resources
@@ -845,7 +852,7 @@ kubectl get pods -A -o json | jq '[.items[] | select(.metadata.labels["cost-cent
 ## Obsidian 相关文档
 
 - domain-11-ai-infra MOC
-- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
 - Domain-11 AI 基础设施 — 开源项目索引
 - AI 基础设施架构
 - 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
@@ -866,4 +873,4 @@ kubectl get pods -A -o json | jq '[.items[] | select(.metadata.labels["cost-cent
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]

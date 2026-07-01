@@ -8,6 +8,7 @@ tags:
   - k8s
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # 多集群灾备与自动化
@@ -367,6 +368,6 @@ spec:
 
 ## Related
 
-- [[concepts/storage-data-protection]] — 存储数据保护与灾备
-- [[concepts/chaos-engineering-platforms]] — 混沌工程平台
-- [[concepts/gitops-production-operations]] — GitOps 生产运维
+- [[concepts/storage-data-protection.md|storage data protection]] — 存储数据保护与灾备
+- [[concepts/chaos-engineering-platforms.md|chaos engineering platforms]] — 混沌工程平台
+- [[concepts/gitops-production-operations.md|gitops production operations]] — GitOps 生产运维

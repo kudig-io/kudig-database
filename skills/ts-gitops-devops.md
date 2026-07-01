@@ -264,7 +264,7 @@ kubectl get pods -n kube-system | grep csi
 
 ## 相关链接
 
-- [[skills/develop-crd-operator|CRD/Operator 开发]]
+- [[skills/develop-crd-operator.md|CRD/Operator 开发]]
 
 ## Related
 
@@ -272,4 +272,4 @@ kubectl get pods -n kube-system | grep csi
 - [[helm]] — Helm
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[entities/argocd|argocd]] — ArgoCD
+- [[entities/argocd.md|argocd]] — ArgoCD

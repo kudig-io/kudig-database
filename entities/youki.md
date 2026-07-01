@@ -43,7 +43,7 @@ youki 是一个用 Rust 实现的 OCI 容器运行时，作为 runc 的替代品
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -71,7 +71,7 @@ youki 是一个用 Rust 实现的 OCI 容器运行时，作为 runc 的替代品
 - [[containerd]] — containerd
 
 - youki
-- [[concepts/container-runtime-comparison|[[Container Runtime|Container Runtime]]me Comparison|Container Runtime Comparison]]]] — Cross-reference
-- [[concepts/docker-architecture|[[Docker Architecture and Container Runtime|Docker Architecture and Container Runtime]]]] — Cross-reference
-- [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[concepts/container-runtime-comparison.md|[[Container Runtime|Container Runtime]]me Comparison|Container Runtime Comparison]]]] — Cross-reference
+- [[concepts/docker-architecture.md|[[Docker Architecture and Container Runtime|Docker Architecture and Container Runtime]]]] — Cross-reference
+- [[entities/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

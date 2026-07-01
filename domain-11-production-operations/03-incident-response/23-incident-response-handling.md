@@ -62,9 +62,9 @@ created: "2026-05-23"
 
 <!-- chunk: 1. SRE理念与事件管理 -->## 1. SRE理念与事件管理
 
-#<!-- chunk: 1.1 Site Reliability Engineering核心原则 -->## 1.1 Site Reliability Engineering核心原则
+## 1.1 Site Reliability Engineering核心原则
 
-##<!-- chunk: Google SRE三大支柱 -->## Google SRE三大支柱
+## Google SRE三大支柱
 ```yaml
 可靠性工程核心理念:
   服务级别目标(SLO):
@@ -83,7 +83,7 @@ created: "2026-05-23"
     - 人机协作优化
 ```
 
-##<!-- chunk: SRE vs 传统运维对比 -->## SRE vs 传统运维对比
+## SRE vs 传统运维对比
 | 维度 | 传统运维 | SRE |
 |------|----------|-----|
 | 关注点 | 系统稳定性 | 用户体验 |
@@ -91,9 +91,9 @@ created: "2026-05-23"
 | 处理方式 | 被动响应 | 主动预防 |
 | 自动化程度 | 手工操作为主 | 高度自动化 |
 
-#<!-- chunk: 1.2 事件分级与响应标准 -->## 1.2 事件分级与响应标准
+## 1.2 事件分级与响应标准
 
-##<!-- chunk: 事件严重性等级定义 -->## 事件严重性等级定义
+## 事件严重性等级定义
 ```yaml
 事件分级标准:
   P0 - 紧急:
@@ -117,7 +117,7 @@ created: "2026-05-23"
     解决时限: 72小时内解决
 ```
 
-##<!-- chunk: Kubernetes特定事件分类 -->## Kubernetes特定事件分类
+## Kubernetes特定事件分类
 ```bash
 # 集群层面事件
 kubectl get events --all-namespaces --field-selector type!=Normal
@@ -133,9 +133,9 @@ kubectl get events --field-selector involvedObject.kind=Node
 
 <!-- chunk: 2. 事件响应流程 -->## 2. 事件响应流程
 
-#<!-- chunk: 2.1 标准事件响应流程 -->## 2.1 标准事件响应流程
+## 2.1 标准事件响应流程
 
-##<!-- chunk: ITIL事件管理流程 -->## ITIL事件管理流程
+## ITIL事件管理流程
 ```mermaid
 graph TD
     A[事件检测] --> B[事件分类]
@@ -149,7 +149,7 @@ graph TD
     I --> J[持续改进]
 ```
 
-##<!-- chunk: 详细响应步骤 -->## 详细响应步骤
+## 详细响应步骤
 ```yaml
 事件响应阶段:
   第一阶段 - 检测与通知:
@@ -178,9 +178,13 @@ graph TD
     - 关闭事件工单
 ```
 
-#<!-- chunk: 2.2 Kubernetes事件处理实战 -->## 2.2 Kubernetes事件处理实战
+## 2.2 Kubernetes事件处理实战
 
-##<!-- chunk: 事件信息收集脚本 -->## 事件信息收集脚本
+## 事件信息收集脚本
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
 #!/bin/bash
 # incident-collector.sh - 事件信息自动收集脚本
@@ -230,12 +234,12 @@ kubectl get pvc --all-namespaces > ${INCIDENT_DIR}/persistent-volume-claims.txt
 
 # 打包收集结果
 tar -czf "/tmp/incident_${TIMESTAMP}.tar.gz" -C /tmp "incident_${TIMESTAMP}"
-rm -rf ${INCIDENT_DIR}
+rm -rf ${INCIDENT_DIR}  # ⚠️ 删除系统/数据文件
 
 echo "事件信息收集完成: /tmp/incident_${TIMESTAMP}.tar.gz"
 ```
 
-##<!-- chunk: 事件快速诊断命令集 -->## 事件快速诊断命令集
+## 事件快速诊断命令集
 ```bash
 # 快速健康检查
 alias khealth='kubectl get nodes && kubectl get pods --all-namespaces'
@@ -254,9 +258,9 @@ alias kpressure='kubectl top nodes && kubectl top pods --all-namespaces'
 
 <!-- chunk: 3. 根本原因分析(RCA) -->## 3. 根本原因分析(RCA)
 
-#<!-- chunk: 3.1 RCA方法论 -->## 3.1 RCA方法论
+## 3.1 RCA方法论
 
-##<!-- chunk: 5 Whys分析法 -->## 5 Whys分析法
+## 5 Whys分析法
 ```markdown
 问题: API Server响应缓慢
 
@@ -270,7 +274,7 @@ alias kpressure='kubectl top nodes && kubectl top pods --all-namespaces'
 解决方案: 配置etcd自动压缩和日志轮转
 ```
 
-##<!-- chunk: 鱼骨图分析法 -->## 鱼骨图分析法
+## 鱼骨图分析法
 ```
 API Server性能问题
 ├── 人员因素
@@ -288,9 +292,9 @@ API Server性能问题
     └── 云服务商问题
 ```
 
-#<!-- chunk: 3.2 Kubernetes常见故障模式 -->## 3.2 Kubernetes常见故障模式
+## 3.2 Kubernetes常见故障模式
 
-##<!-- chunk: 控制平面问题 -->## 控制平面问题
+## 控制平面问题
 ```yaml
 问题类型:
   API Server问题:
@@ -323,7 +327,7 @@ API Server性能问题
       kubectl logs -n kube-system -l component=kube-controller-manager
 ```
 
-##<!-- chunk: 工作节点问题 -->## 工作节点问题
+## 工作节点问题
 ```yaml
 问题类型:
   Node NotReady:
@@ -361,9 +365,9 @@ API Server性能问题
 
 <!-- chunk: 4. 事后总结与改进 -->## 4. 事后总结与改进
 
-#<!-- chunk: 4.1 事件复盘会议 -->## 4.1 事件复盘会议
+## 4.1 事件复盘会议
 
-##<!-- chunk: 复盘会议流程 -->## 复盘会议流程
+## 复盘会议流程
 ```markdown
 事件复盘标准流程:
 
@@ -385,7 +389,7 @@ API Server性能问题
    - 更新应急预案
 ```
 
-##<!-- chunk: 复盘报告模板 -->## 复盘报告模板
+## 复盘报告模板
 ```markdown
 # 事件复盘报告
 
@@ -399,9 +403,9 @@ API Server性能问题
 <!-- chunk: 事件时间线 -->## 事件时间线
 ```
 
-#<!-- chunk: 4.2 持续改进机制 -->## 4.2 持续改进机制
+## 4.2 持续改进机制
 
-##<!-- chunk: 改进措施跟踪系统 -->## 改进措施跟踪系统
+## 改进措施跟踪系统
 ```yaml
 改进措施管理:
   记录格式:
@@ -418,7 +422,7 @@ API Server性能问题
     - 季度: 整体回顾
 ```
 
-##<!-- chunk: 预防措施实施 -->## 预防措施实施
+## 预防措施实施
 ```bash
 # 自动化检查脚本
 #!/bin/bash
@@ -451,9 +455,9 @@ echo "预防性检查完成"
 
 <!-- chunk: 5. 事件管理系统集成 -->## 5. 事件管理系统集成
 
-#<!-- chunk: 5.1 告警与工单系统 -->## 5.1 告警与工单系统
+## 5.1 告警与工单系统
 
-##<!-- chunk: Prometheus告警规则示例 -->## Prometheus告警规则示例
+## Prometheus告警规则示例
 ```yaml
 # alert-rules.yaml
 groups:
@@ -493,7 +497,7 @@ groups:
       description: "服务 {{ $labels.service }} 不可用"
 ```
 
-##<!-- chunk: ServiceNow集成示例 -->## ServiceNow集成示例
+## ServiceNow集成示例
 ```python
 # servicenow_integration.py
 import requests
@@ -551,9 +555,9 @@ incident_number = manager.create_incident({
 print(f"创建事件工单: {incident_number}")
 ```
 
-#<!-- chunk: 5.2 自动化响应机制 -->## 5.2 自动化响应机制
+## 5.2 自动化响应机制
 
-##<!-- chunk: ChatOps机器人集成 -->## ChatOps机器人集成
+## ChatOps机器人集成
 ```yaml
 # chatbot-config.yaml
 chatbot:
@@ -594,29 +598,29 @@ chatbot:
 
 <!-- chunk: 6. 最佳实践总结 -->## 6. 最佳实践总结
 
-#<!-- chunk: 6.1 关键成功因素 -->## 6.1 关键成功因素
+## 6.1 关键成功因素
 
-##<!-- chunk: 组织层面 -->## 组织层面
+## 组织层面
 ✅ **建立SRE文化**: 将可靠性作为核心价值
 ✅ **跨团队协作**: 开发、运维、安全团队紧密配合
 ✅ **投资自动化**: 减少人工干预，提高响应速度
 ✅ **持续学习**: 定期复盘，不断优化流程
 
-##<!-- chunk: 技术层面 -->## 技术层面
+## 技术层面
 ✅ **全面监控**: 覆盖所有关键组件和服务
 ✅ **智能告警**: 减少噪音，提高告警准确性
 ✅ **快速诊断**: 标准化的诊断工具和流程
 ✅ **自动化修复**: 对于已知问题实现自动恢复
 
-#<!-- chunk: 6.2 常见陷阱避免 -->## 6.2 常见陷阱避免
+## 6.2 常见陷阱避免
 
-##<!-- chunk: ❌ 避免的做法 -->## ❌ 避免的做法
+## ❌ 避免的做法
 - 依赖个人经验而非标准化流程
 - 忽视告警疲劳问题
 - 缺少事后总结和改进
 - 过度依赖手工操作
 
-##<!-- chunk: ✅ 推荐做法 -->## ✅ 推荐做法
+## ✅ 推荐做法
 - 建立完善的事件响应手册
 - 实施告警分级和路由机制
 - 定期进行故障演练
@@ -626,17 +630,17 @@ chatbot:
 
 <!-- chunk: 📚 参考资源 -->## 📚 参考资源
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 - [Google SRE Workbook](https://sre.google/workbook/)
 - [Kubernetes故障排查指南](https://kubernetes.io/docs/tasks/debug/)
 - [Prometheus告警最佳实践](https://prometheus.io/docs/practices/alerting/)
 
-#<!-- chunk: 工具推荐 -->## 工具推荐
+## 工具推荐
 - **事件管理**: PagerDuty, Opsgenie, ServiceNow
 - **协作工具**: Slack, Microsoft Teams, Discord
 - **文档管理**: Confluence, Notion, Wiki系统
 
-#<!-- chunk: 社区资源 -->## 社区资源
+## 社区资源
 - CNCF SRE工作组
 - Kubernetes SIG Instrumentation
 - DevOps Institute认证课程
@@ -649,9 +653,9 @@ chatbot:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations KUDIG Database — Global MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -670,4 +674,4 @@ chatbot:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

@@ -132,7 +132,7 @@ FEBM: 解决"怎么判断"的问题 (方法)
 ### 必读文档
 
 1. **结构化故障排查框架**
-   - 文件: `../../domain-10-troubleshooting-diagnostics/[[domain-04-storage-data/README|[[KUDIG Database]]]].md`
+   - 文件: `../../domain-10-troubleshooting-diagnostics/[[domain-04-storage-data/README.md|[[KUDIG Database]]]].md`
    - 重点: 排障框架总览
 
 2. **FTA 核心原理**
@@ -259,6 +259,9 @@ Node NotReady (顶事件)
 
 #### 2.1 创建会 Pending 的 Pod
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 cat > pending-pod.yaml << 'EOF'
 apiVersion: v1
@@ -326,6 +329,10 @@ kubectl describe node <node-name> | grep -A 5 Allocatable
 ```
 Step 5: 修复
 ```
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 kubectl delete pod pending-test
@@ -506,6 +513,7 @@ echo "========== 排查完毕 =========="
 - [ ] 添加内存使用告警 (> 85%)
 - [ ] 添加 CI 内存泄漏检测
 - [ ] 代码 review 关注资源释放
+
 ```
 
 ---
@@ -559,3 +567,5 @@ echo "========== 排查完毕 =========="
 - [Pod Pending 诊断](../../domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md)
 - [Node NotReady 诊断](../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md)
 - [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
+
+```

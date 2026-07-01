@@ -80,6 +80,9 @@ created: "2026-05-23"
 
 ### 节点维护（内核升级）
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 1. 驱逐 Pod
 kubectl drain node-1 \
@@ -98,6 +101,11 @@ kubectl uncordon node-1
 ```
 
 ### 集群升级时逐个 drain
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 for node in $(kubectl get nodes -l node-role.kubernetes.io/worker -o name); do
@@ -150,15 +158,17 @@ spec:
 
 ## 相关技能
 
-- [[skills/kubeadm-cluster-deletion|[[kubeadm 集群删除操作|kubeadm 集群删除操作]]]]
-- [[skills/kubelet-eviction-mechanism|[[kubelet 资源驱逐机制|kubelet 资源驱逐机制]]]]
-- [[skills/backup-restore-etcd|备份和恢复 etcd]]
-- [[concepts/resource-management|资源管理]]
+- [[skills/kubeadm-cluster-deletion.md|[[kubeadm 集群删除操作|kubeadm 集群删除操作]]]]
+- [[skills/kubelet-eviction-mechanism.md|[[kubelet 资源驱逐机制|kubelet 资源驱逐机制]]]]
+- [[skills/backup-restore-etcd.md|备份和恢复 etcd]]
+- [[concepts/resource-management.md|资源管理]]
 
 ## Related
 
-- [[skills/kubeadm-cluster-deletion|kubeadm-cluster-deletion]] — kubeadm 集群删除操作
-- [[entities/statefulset|[[StatefulSet|statefulset]]]] — StatefulSet
-- [[entities/kubelet|kubelet]] — kubelet
+- [[skills/kubeadm-cluster-deletion.md|kubeadm-cluster-deletion]] — kubeadm 集群删除操作
+- [[entities/statefulset.md|[[StatefulSet|statefulset]]]] — StatefulSet
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
+
+```

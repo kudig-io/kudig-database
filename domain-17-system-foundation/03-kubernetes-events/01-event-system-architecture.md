@@ -74,13 +74,13 @@ created: "2026-05-23"
 
 <!-- chunk: 一、事件系统概述 -->## 一、事件系统概述
 
-#<!-- chunk: 1.1 什么是 Kubernetes Event -->## 1.1 什么是 Kubernetes Event
+## 1.1 什么是 Kubernetes Event
 
 Kubernetes Event 是集群中发生的状态变化或操作的记录对象。每当一个组件（如 [[kubelet|kubelet]]、kube-scheduler、kube-controller-manager）执行了某个动作或检测到异常状况时，都会向 API Server 报告一个 Event 对象。
 
 Event 是 Kubernetes 内置的「可观测性」基础设施之一，与 metrics 和 logs 并列构成集群运维的三大信息源。
 
-#<!-- chunk: 1.2 Event 的设计定位 -->## 1.2 Event 的设计定位
+## 1.2 Event 的设计定位
 
 | 维度 | 说明 |
 |:---|:---|
@@ -90,7 +90,7 @@ Event 是 Kubernetes 内置的「可观测性」基础设施之一，与 metrics
 | **类型** | 仅有两种: `Normal`（正常操作）和 `Warning`（异常/需关注） |
 | **存储** | 存储在 [[etcd|etcd]] 中，与其他 API 对象共享存储空间 |
 
-#<!-- chunk: 1.3 初学者快速理解 -->## 1.3 初学者快速理解
+## 1.3 初学者快速理解
 
 可以把 Event 类比为操作系统的系统日志（syslog）：
 
@@ -103,7 +103,7 @@ Event 是 Kubernetes 内置的「可观测性」基础设施之一，与 metrics
 
 <!-- chunk: 二、事件数据模型 -->## 二、事件数据模型
 
-#<!-- chunk: 2.1 core/v1 Event 完整字段参考 -->## 2.1 core/v1 Event 完整字段参考
+## 2.1 core/v1 Event 完整字段参考
 
 ```yaml
 apiVersion: v1
@@ -153,7 +153,7 @@ related:                                   # 关联的第二个对象（可选�
   name: node-01
 ```
 
-#<!-- chunk: 2.2 关键字段解读 -->## 2.2 关键字段解读
+## 2.2 关键字段解读
 
 | 字段 | 类型 | 说明 | 生产要点 |
 |:---|:---|:---|:---|
@@ -171,7 +171,7 @@ related:                                   # 关联的第二个对象（可选�
 | `reportingComponent` | string | 报告组件 | events.k8s.io/v1 替代 source.component |
 | `reportingInstance` | string | 报告实例 | events.k8s.io/v1 替代 source.host |
 
-#<!-- chunk: 2.3 Event Type 分类 -->## 2.3 Event Type 分类
+## 2.3 Event Type 分类
 
 | Type | 含义 | 数量占比 | 处理建议 |
 |:---|:---|:---|:---|
@@ -184,7 +184,7 @@ related:                                   # 关联的第二个对象（可选�
 
 <!-- chunk: 三、事件 API 版本演进 -->## 三、事件 API 版本演进
 
-#<!-- chunk: 3.1 API 版本对比 -->## 3.1 API 版本对比
+## 3.1 API 版本对比
 
 | 特性 | core/v1 Event | events.k8s.io/v1beta1 | events.k8s.io/v1 |
 |:---|:---|:---|:---|
@@ -196,7 +196,7 @@ related:                                   # 关联的第二个对象（可选�
 | **动作字段** | 无 | action (string) | action (string) |
 | **当前状态** | 持续支持 | v1.25 废弃 | 推荐使用 |
 
-#<!-- chunk: 3.2 版本演进时间线 -->## 3.2 版本演进时间线
+## 3.2 版本演进时间线
 
 ```
 v1.0  ─── core/v1 Event 引入（基础事件系统）
@@ -212,7 +212,7 @@ v1.26 ─── kubectl events 子命令引入（替代 kubectl get events）
 v1.32 ─── 当前最新稳定版本
 ```
 
-#<!-- chunk: 3.3 events.k8s.io/v1 示例 -->## 3.3 events.k8s.io/v1 示例
+## 3.3 events.k8s.io/v1 示例
 
 ```yaml
 apiVersion: events.k8s.io/v1
@@ -243,7 +243,7 @@ type: Normal
 
 <!-- chunk: 四、事件生命周期 -->## 四、事件生命周期
 
-#<!-- chunk: 4.1 事件流转过程 -->## 4.1 事件流转过程
+## 4.1 事件流转过程
 
 ```
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
@@ -257,7 +257,7 @@ type: Normal
                     └─────────────┘     └─────────────┘
 ```
 
-#<!-- chunk: 4.2 事件聚合机制 -->## 4.2 事件聚合机制
+## 4.2 事件聚合机制
 
 当同一个组件对同一个资源重复产生相同 reason 的事件时，Kubernetes 会进行事件聚合而非创建新的 Event 对象：
 
@@ -274,7 +274,7 @@ type: Normal
 - `lastTimestamp` 更新为最近发生时间
 - `series.count` 和 `series.lastObservedTime` 更新（events.k8s.io/v1）
 
-#<!-- chunk: 4.3 事件 TTL 与 GC -->## 4.3 事件 TTL 与 GC
+## 4.3 事件 TTL 与 GC
 
 | 参数 | 默认值 | 配置方式 | 说明 |
 |:---|:---|:---|:---|
@@ -291,7 +291,7 @@ type: Normal
 
 <!-- chunk: 五、事件来源组件 -->## 五、事件来源组件
 
-#<!-- chunk: 5.1 核心组件事件来源 -->## 5.1 核心组件事件来源
+## 5.1 核心组件事件来源
 
 | 组件 | source.component | 产生的事件类别 | 关联资源 |
 |:---|:---|:---|:---|
@@ -317,7 +317,7 @@ type: Normal
 | **clusterrole-aggregation-controller** | `clusterrole-aggregation-controller` | ClusterRole 聚合 | ClusterRole |
 | **disruption-controller** | `disruption-controller` | PDB 管理 | PodDisruptionBudget |
 
-#<!-- chunk: 5.2 事件来源与文档映射 -->## 5.2 事件来源与文档映射
+## 5.2 事件来源与文档映射
 
 | 事件来源 | 详细文档 |
 |:---|:---|
@@ -340,7 +340,7 @@ type: Normal
 
 <!-- chunk: 六、事件查看与监控 -->## 六、事件查看与监控
 
-#<!-- chunk: 6.1 kubectl 命令参考 -->## 6.1 kubectl 命令参考
+## 6.1 kubectl 命令参考
 
 ```bash
 # ========== 基础查看 ==========
@@ -401,7 +401,7 @@ kubectl get events -A -w
 kubectl get events -A -w --field-selector type=Warning
 ```
 
-#<!-- chunk: 6.2 API 直接查询 -->## 6.2 API 直接查询
+## 6.2 API 直接查询
 
 ```bash
 # 使用 API 查询事件
@@ -414,7 +414,7 @@ kubectl get --raw '/apis/events.k8s.io/v1/namespaces/default/events' | jq .
 kubectl get events -A -o json | jq '[.items[].reason] | group_by(.) | map({reason: .[0], count: length}) | sort_by(-.count)'
 ```
 
-#<!-- chunk: 6.3 Prometheus 监控事件 -->## 6.3 Prometheus 监控事件
+## 6.3 Prometheus 监控事件
 
 ```yaml
 # 使用 kube-state-metrics 暴露事件指标
@@ -454,7 +454,7 @@ groups:
 
 <!-- chunk: 七、事件持久化方案 -->## 七、事件持久化方案
 
-#<!-- chunk: 7.1 为什么需要事件持久化 -->## 7.1 为什么需要事件持久化
+## 7.1 为什么需要事件持久化
 
 | 挑战 | 说明 |
 |:---|:---|
@@ -463,7 +463,7 @@ groups:
 | **跨集群关联** | 多集群环境需要统一的事件视图 |
 | **合规要求** | 部分合规标准要求保留审计记录 |
 
-#<!-- chunk: 7.2 常见持久化方案 -->## 7.2 常见持久化方案
+## 7.2 常见持久化方案
 
 | 方案 | 说明 | 适用场景 |
 |:---|:---|:---|
@@ -473,7 +473,7 @@ groups:
 | **Fluentd/Fluent Bit** | 通过日志采集管道收集事件 | 已有日志平台的场景 |
 | **自定义 Controller** | Watch 事件并写入自定义存储 | 定制化需求 |
 
-#<!-- chunk: 7.3 Event Exporter 配置示例 -->## 7.3 Event Exporter 配置示例
+## 7.3 Event Exporter 配置示例
 
 ```yaml
 apiVersion: apps/v1
@@ -516,10 +516,10 @@ data:
     logFormat: json
     route:
       routes:
-        - match:
-            - receiver: "elasticsearch"
-          drop:
-            - type: "Normal"   # 可选：仅导出 Warning 事件
+        - matchers:
+          - - receiver="elasticsearch"
+          - drop=""
+          - - type="Normal"   # 可选：仅导出 Warning 事件"
     receivers:
       - name: "elasticsearch"
         elasticsearch:
@@ -534,7 +534,7 @@ data:
 
 <!-- chunk: 八、生产环境最佳实践 -->## 八、生产环境最佳实践
 
-#<!-- chunk: 8.1 事件监控策略 -->## 8.1 事件监控策略
+## 8.1 事件监控策略
 
 | 策略 | 说明 | 优先级 |
 |:---|:---|:---|
@@ -544,7 +544,7 @@ data:
 | **事件持久化** | 将事件导出到外部存储做长期分析 | 中 |
 | **事件聚合分析** | 按 reason 聚合分析事件分布 | 低 |
 
-#<!-- chunk: 8.2 生产环境必知事项 -->## 8.2 生产环境必知事项
+## 8.2 生产环境必知事项
 
 1. **事件不保证可靠传递**: Event 采用「尽力而为」的投递模型，在 API Server 高负载或网络分区时可能丢失事件
 2. **事件不应作为唯一告警源**: 应结合 metrics 和 logs 建立完整的监控体系
@@ -552,7 +552,7 @@ data:
 4. **rate limiting**: kubelet 和 controller-manager 都有事件创建的速率限制，避免事件风暴
 5. **events.k8s.io/v1 优先**: 新代码应优先使用 `events.k8s.io/v1` API
 
-#<!-- chunk: 8.3 常用诊断脚本 -->## 8.3 常用诊断脚本
+## 8.3 常用诊断脚本
 
 ```bash
 #!/bin/bash
@@ -590,7 +590,7 @@ echo "Warning: $(kubectl get events -A --field-selector type=Warning --no-header
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-33-kubernetes-events MOC
-- [[domain-17-system-foundation/README|Domain-33: Kubernetes Events 全域事件大全]]
+- [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
 - Domain-33 K8s 事件 — 开源项目索引
 - 02 - Pod 与容器生命周期事件
 - 03 - 镜像拉取事件
@@ -611,4 +611,4 @@ echo "Warning: $(kubectl get events -A --field-selector type=Warning --no-header
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

@@ -51,9 +51,9 @@ created: "2026-05-23"
 
 ### CSI 故障排查
 - troubleshooting|CSI 存储驱动故障排查]]
-- [[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting|04 - Storage CSI 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta|[[CSI 存储异常故障树分析|CSI FTA]] 故障树]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting|PV/PVC 存储深度排查与持久化治理指南]]
+- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/04-storage-csi-troubleshooting.md|04 - Storage CSI 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md|[[CSI 存储异常故障树分析|CSI FTA]] 故障树]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
 
 ### CSI YAML 配置
 - StorageClass / VolumeSnapshot YAML 配置参考
@@ -70,9 +70,9 @@ created: "2026-05-23"
 
 ### 存储高级特性
 - 存储高级特性
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting|CSI 快照与卷备份故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting|存储 I/O 性能故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting|[[StorageClass 配置与动态供给故障排查指南|StorageClass 配置与动态供给故障排查指南]]]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting.md|CSI 快照与卷备份故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting.md|存储 I/O 性能故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting.md|[[StorageClass 配置与动态供给故障排查指南|StorageClass 配置与动态供给故障排查指南]]]]
 
 ### 存储日常运维
 - 存储日常运维操作手册
@@ -87,21 +87,21 @@ created: "2026-05-23"
 ## 扩展参考
 
 ### 存储技能与故障处理
-- [[domain-10-troubleshooting-diagnostics/topic-skills/07-pvc-storage-failure|PVC/PV/CSI 存储故障诊断与修复]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/07-pvc-storage-failure.md|PVC/PV/CSI 存储故障诊断与修复]]
 - PV/PVC故障排查
 
 ### 存储术语词典
-- [[domain-17-system-foundation/topic-dictionary/storage/csi-volume-cloning|CSI Volume Cloning]]
-- [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshots|Volume Snapshots]]
-- [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshot-classes|Volume Snapshot Classes]]
-- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes|Persistent Volumes]]
-- [[domain-17-system-foundation/topic-dictionary/storage/storage-classes|Storage Classes]]
-- [[domain-17-system-foundation/topic-dictionary/storage/volume-health-monitoring|[[Volume Health Monitoring（卷健康监控）|Volume Health Monitoring]]]]
-- [[domain-17-system-foundation/topic-dictionary/storage/ephemeral-volumes|Ephemeral Volumes]]
-- [[domain-17-system-foundation/topic-dictionary/storage/dynamic-volume-provisioning|[[Dynamic Volume Provisioning（动态卷供给）|Dynamic Volume Provisioning]]]]
-- [[domain-17-system-foundation/topic-dictionary/storage/volume-attributes-classes|[[Volume Attributes Classes（卷属性类）|Volume Attributes Classes]]]]
-- [[domain-17-system-foundation/topic-dictionary/storage/storage-capacity|Storage Capacity]]
-- [[domain-17-system-foundation/topic-dictionary/storage/node-specific-volume-limits|[[Node-specific Volume Limits（节点特定卷限制）|Node Specific Volume Limits]]]]
+- [[domain-17-system-foundation/topic-dictionary/storage/csi-volume-cloning.md|CSI Volume Cloning]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshots.md|Volume Snapshots]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshot-classes.md|Volume Snapshot Classes]]
+- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes.md|Persistent Volumes]]
+- [[domain-17-system-foundation/topic-dictionary/storage/storage-classes.md|Storage Classes]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volume-health-monitoring.md|[[Volume Health Monitoring（卷健康监控）|Volume Health Monitoring]]]]
+- [[domain-17-system-foundation/topic-dictionary/storage/ephemeral-volumes.md|Ephemeral Volumes]]
+- [[domain-17-system-foundation/topic-dictionary/storage/dynamic-volume-provisioning.md|[[Dynamic Volume Provisioning（动态卷供给）|Dynamic Volume Provisioning]]]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volume-attributes-classes.md|[[Volume Attributes Classes（卷属性类）|Volume Attributes Classes]]]]
+- [[domain-17-system-foundation/topic-dictionary/storage/storage-capacity.md|Storage Capacity]]
+- [[domain-17-system-foundation/topic-dictionary/storage/node-specific-volume-limits.md|[[Node-specific Volume Limits（节点特定卷限制）|Node Specific Volume Limits]]]]
 
 ### CSI Driver 特定内容
 - [AWS EBS CSI Driver](https://github.com/kubernetes-sigs/aws-ebs-csi-driver)
@@ -128,7 +128,7 @@ created: "2026-05-23"
 - 灾难恢复演练
 
 ### Kubernetes 版本相关
-- [[domain-19-landscape-references/_archived-release-notes/kubernetes/CHANGELOG-1.25|CHANGELOG-1.25 - CSI Ephemeral Volume GA]]
+- [[domain-19-landscape-references/_archived-release-notes/kubernetes/CHANGELOG-1.25.md|CHANGELOG-1.25 - CSI Ephemeral Volume GA]]
 - CHANGELOG-1.23 - CSI Volume Mount Group
 - CHANGELOG-1.21 - CSI Health Monitoring
 - CHANGELOG-1.19 - CSI Health Monitoring Alpha
@@ -141,6 +141,6 @@ created: "2026-05-23"
 - CubeFS
 
 ### 其他相关
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/storage-versions|存储版本]]
-- [[domain-17-system-foundation/topic-dictionary/storage/high-performance-storage-networks|高性能存储网络]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/storage-versions.md|存储版本]]
+- [[domain-17-system-foundation/topic-dictionary/storage/high-performance-storage-networks.md|高性能存储网络]]
 - 块存储、文件存储、对象存储

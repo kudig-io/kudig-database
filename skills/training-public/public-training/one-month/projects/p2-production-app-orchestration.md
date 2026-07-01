@@ -145,6 +145,9 @@ related_topics:
 
 ### Step 1: 创建 Namespace (5min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl create namespace production-app
 # 预期输出: namespace/production-app created
@@ -153,6 +156,9 @@ kubectl config set-context --current --namespace=production-app
 ```
 
 ### Step 2: 部署后端 StatefulSet (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > backend.yaml << 'EOF'
@@ -264,6 +270,9 @@ kubectl run dns-test --image=busybox --rm -it --restart=Never -- \
 
 ### Step 3: 部署前端 Deployment + HPA (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 cat > frontend.yaml << 'EOF'
 apiVersion: apps/v1
@@ -350,6 +359,9 @@ kubectl get hpa frontend-hpa
 
 ### Step 4: 创建 Service (15min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 cat > services.yaml << 'EOF'
 apiVersion: v1
@@ -395,6 +407,9 @@ kubectl get endpoints
 ```
 
 ### Step 5: 创建 Ingress (20min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > ingress.yaml << 'EOF'
@@ -448,6 +463,9 @@ curl -H "Host: app.local" http://$INGRESS_IP/api
 ```
 
 ### Step 6: 创建 NetworkPolicy (20min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > networkpolicy.yaml << 'EOF'
@@ -520,6 +538,10 @@ kubectl get networkpolicy
 ```
 
 ### Step 7: 验证和测试 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 查看所有资源
@@ -738,6 +760,7 @@ spec:
           app: frontend
     ports:
     - port: 80
+
 ```
 
 ---
@@ -791,8 +814,11 @@ NetworkPolicy 需要支持它的 CNI 插件（如 Calico、Cilium、Terway）。
 
 ## 清理资源
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```bash
-kubectl delete namespace production-app
+kubectl delete namespace production-app  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
 ---
@@ -807,4 +833,6 @@ kubectl delete namespace production-app
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

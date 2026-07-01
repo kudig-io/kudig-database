@@ -236,6 +236,9 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.pod
 
 ### 5.3 Terway IPAM
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 ENI IP 分配
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli show
@@ -259,6 +262,9 @@ Pod A ──▶ veth ──▶ Bridge/路由 ──▶ veth ──▶ Pod B
 
 ### 6.2 veth pair 深度诊断
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # ========== 定位 Pod 对应的 veth ==========
 POD_IFINDEX=$(kubectl exec -it <pod-a> -- cat /sys/class/net/eth0/iflink | tr -d '\r')
@@ -281,6 +287,9 @@ ip route show | grep $VETH_A
 ```
 
 ### 6.3 诊断命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 查看 Pod 网络配置
@@ -395,6 +404,9 @@ ethtool -S eth0 | grep -E "error|drop"
 
 ### 8.1 排查步骤
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 检查 CoreDNS 状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns
@@ -508,6 +520,9 @@ done
 <!-- chunk: 11. conntrack 诊断 -->
 ## 11. conntrack 诊断
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
+
 ```bash
 # 使用率
 CT_COUNT=$(sysctl -n net.netfilter.nf_conntrack_count)
@@ -597,6 +612,7 @@ groups:
           severity: warning
         annotations:
           summary: "IP 池即将耗尽"
+
 ```
 
 ---
@@ -654,7 +670,7 @@ groups:
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -665,9 +681,9 @@ groups:
 - Flannel WireGuard 加密后端配置
 - Flannel IPv6 Dual Stack 支持
 - Flannel Windows 节点支持
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
@@ -678,4 +694,6 @@ groups:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+```

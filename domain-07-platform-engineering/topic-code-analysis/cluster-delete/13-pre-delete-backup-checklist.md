@@ -66,6 +66,9 @@ created: "2026-05-23"
 
 ## 删除前检查总览
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                  集群删除前准备流程                                    │
@@ -88,7 +91,7 @@ created: "2026-05-23"
 │  └── 验证目标集群接管完毕                                             │
 │                                                                     │
 │  第四阶段：执行删除                                                   │
-│  └── kubeadm reset / kubectl delete node / 清理网络和存储           │
+│  └── kubeadm reset / kubectl delete node / 清理网络和存储           │  # ⚠️ 清理节点所有 K8s 配置
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -128,6 +131,9 @@ kubectl get clusterpolicies --all-namespaces 2>/dev/null || echo "无跨集群�
 ### 2.1 etcd 快照备份（最关键）
 
 etcd 存储了集群的全部状态，快照备份是集群删除前的首要操作。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 方法一：在 etcd Pod 容器内执行（适用于 kubeadm 集群）
@@ -272,6 +278,9 @@ kubectl get pods --all-namespaces --context=target-cluster | grep -v Running | g
 
 ### 删除前最终确认检查
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+
 ```bash
 #!/bin/bash
 # pre-delete-final-check.sh — 删除前最终确认脚本
@@ -307,7 +316,7 @@ else
 fi
 
 echo ""
-echo "请确认以上检查项后，执行: kubeadm reset"
+echo "请确认以上检查项后，执行: kubeadm reset"  # ⚠️ 清理节点所有 K8s 配置
 ```
 
 ## 执行流程
@@ -338,6 +347,9 @@ flowchart TD
 
 如果删除后需要恢复，可使用 etcd 快照恢复整个集群状态：
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+
 ```bash
 # 1. 重新初始化集群
 kubeadm init --config kubeadm-config.yaml
@@ -357,6 +369,7 @@ ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-snapshot.db \
 # 4. 更新 etcd manifest 指向新数据目录
 # 5. 恢复 kube-apiserver
 mv /tmp/kube-apiserver.yaml /etc/kubernetes/manifests/
+
 ```
 
 ## 常见问题
@@ -382,8 +395,10 @@ mv /tmp/kube-apiserver.yaml /etc/kubernetes/manifests/
 
 ## Related
 
-- [[entities/kubernetes|kubernetes]]
+- [[entities/kubernetes.md|kubernetes]]
 - [[hot|hot]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/02-reset|02-reset]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/07-ha-delete|07-ha-delete]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/05-etcd-cleanup|05-etcd-cleanup]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/02-reset.md|02-reset]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/07-ha-delete.md|07-ha-delete]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/05-etcd-cleanup.md|05-etcd-cleanup]]
+
+```

@@ -5,6 +5,7 @@ tags: ['pod', 'init', 'startup', 'visibility/public']
 sources: ["conceptss/"]
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 status: stub
 ---
 # Init Containers
@@ -20,4 +21,4 @@ Init Containers 在应用容器启动前运行，用于执行初始化任务如�
 
 ## 相关链接
 
-- [[concepts/kubernetes|Kubernetes]] — 核心概念
+- [[concepts/kubernetes.md|Kubernetes]] — 核心概念

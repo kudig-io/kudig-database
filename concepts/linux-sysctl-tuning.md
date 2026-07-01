@@ -54,7 +54,7 @@ created: "2026-05-23"
 | Parameter | Recommended | K8s Impact |
 |-----------|-------------|-----------|
 | fs.inotify.max_user_watches | 524288 | [[kubelet|kubelet]] file watcher, must be increased |
-| fs.inotify.max_user_instances | 8192 | kubelet + [[Container Runtime|container runtime]] |
+| fs.inotify.max_user_instances | 8192 | kubelet + container runtime |
 | fs.file-max | 2097152 | System-wide file descriptor limit |
 | fs.nr_open | 1048576 | Per-process file descriptor limit |
 | fs.may_detach_mounts | 1 | Required for containerd/docker container deletion |
@@ -113,9 +113,9 @@ sysctl --system
 
 - [[containerd]] — containerd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/tcp-udp-protocol-stack|tcp-udp-protocol-stack]] — TCP/UDP Protocol Stack
-- [[concepts/block-file-object-storage|block-file-object-storage]] — Block, File, and Object Storage
-- [[concepts/linux-container-foundation|linux-container-foundation]] — Linux Container Foundation
-- [[concepts/linux-container-foundation|Linux Container Foundation]]
-- [[concepts/tcp-udp-protocol-stack|TCP/UDP Protocol Stack]]
-- [[concepts/block-file-object-storage|Block, File, and Object Storage]]
+- [[concepts/tcp-udp-protocol-stack.md|tcp-udp-protocol-stack]] — TCP/UDP Protocol Stack
+- [[concepts/block-file-object-storage.md|block-file-object-storage]] — Block, File, and Object Storage
+- [[concepts/linux-container-foundation.md|linux-container-foundation]] — Linux Container Foundation
+- [[concepts/linux-container-foundation.md|Linux Container Foundation]]
+- [[concepts/tcp-udp-protocol-stack.md|TCP/UDP Protocol Stack]]
+- [[concepts/block-file-object-storage.md|Block, File, and Object Storage]]

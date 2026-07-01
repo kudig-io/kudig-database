@@ -56,7 +56,7 @@ JUnit 5 is the most advanced unit testing framework in the Java ecosystem, provi
 
 <!-- chunk: 架构设计 (Architecture Design) -->## 架构设计 (Architecture Design)
 
-#<!-- chunk: JUnit 5 架构组件 (JUnit 5 Architecture Components) -->## JUnit 5 架构组件 (JUnit 5 Architecture Components)
+## JUnit 5 架构组件 (JUnit 5 Architecture Components)
 
 ```java
 // JUnit 5 模块化架构
@@ -73,7 +73,7 @@ module com.company.testing {
 }
 ```
 
-#<!-- chunk: JUnit 5 架构图 (JUnit 5 Architecture Diagram) -->## JUnit 5 架构图 (JUnit 5 Architecture Diagram)
+## JUnit 5 架构图 (JUnit 5 Architecture Diagram)
 
 ```mermaid
 graph TB
@@ -131,7 +131,7 @@ graph TB
 
 <!-- chunk: 核心特性配置 (Core Feature Configuration) -->## 核心特性配置 (Core Feature Configuration)
 
-#<!-- chunk: Maven项目配置 (Maven Project Configuration) -->## Maven项目配置 (Maven Project Configuration)
+## Maven项目配置 (Maven Project Configuration)
 
 ```xml
 <!-- pom.xml - JUnit 5 完整配置 -->
@@ -267,7 +267,7 @@ graph TB
 </project>
 ```
 
-#<!-- chunk: Gradle项目配置 (Gradle Project Configuration) -->## Gradle项目配置 (Gradle Project Configuration)
+## Gradle项目配置 (Gradle Project Configuration)
 
 ```gradle
 // build.gradle - JUnit 5 Gradle配置
@@ -373,7 +373,7 @@ jacocoTestReport {
 
 <!-- chunk: 高级测试特性 (Advanced Testing Features) -->## 高级测试特性 (Advanced Testing Features)
 
-#<!-- chunk: 参数化测试 (Parameterized Tests) -->## 参数化测试 (Parameterized Tests)
+## 参数化测试 (Parameterized Tests)
 
 ```java
 // 参数化测试示例
@@ -433,7 +433,7 @@ class CalculatorParameterizedTest {
 }
 ```
 
-#<!-- chunk: 动态测试 (Dynamic Tests) -->## 动态测试 (Dynamic Tests)
+## 动态测试 (Dynamic Tests)
 
 ```java
 // 动态测试示例
@@ -493,7 +493,7 @@ Stream<DynamicNode> dynamicUserValidationTests() {
 }
 ```
 
-#<!-- chunk: 自定义扩展 (Custom Extensions) -->## 自定义扩展 (Custom Extensions)
+## 自定义扩展 (Custom Extensions)
 
 ```java
 // 自定义测试扩展示例
@@ -585,7 +585,7 @@ class UserServiceTest {
 
 <!-- chunk: 测试策略与框架 (Testing Strategy and Framework) -->## 测试策略与框架 (Testing Strategy and Framework)
 
-#<!-- chunk: 测试分层架构 (Test Layered Architecture) -->## 测试分层架构 (Test Layered Architecture)
+## 测试分层架构 (Test Layered Architecture)
 
 ```java
 // 测试分层结构示例
@@ -723,7 +723,7 @@ class UserRegistrationE2ETest {
 }
 ```
 
-#<!-- chunk: 测试数据管理 (Test Data Management) -->## 测试数据管理 (Test Data Management)
+## 测试数据管理 (Test Data Management)
 
 ```java
 // 测试数据工厂模式
@@ -835,7 +835,7 @@ public class TestDataFactory {
 
 <!-- chunk: 持续集成配置 (Continuous Integration Configuration) -->## 持续集成配置 (Continuous Integration Configuration)
 
-#<!-- chunk: GitHub Actions配置 (GitHub Actions Configuration) -->## GitHub Actions配置 (GitHub Actions Configuration)
+## GitHub Actions配置 (GitHub Actions Configuration)
 
 ```yaml
 # .github/workflows/java-ci.yml
@@ -923,7 +923,7 @@ jobs:
 
 <!-- chunk: 监控与报告 (Monitoring and Reporting) -->## 监控与报告 (Monitoring and Reporting)
 
-#<!-- chunk: 测试报告配置 (Test Report Configuration) -->## 测试报告配置 (Test Report Configuration)
+## 测试报告配置 (Test Report Configuration)
 
 ```java
 // 自定义测试监听器
@@ -1011,7 +1011,7 @@ public class TestMetricsCollector {
 
 <!-- chunk: 运维管理 (Operational Management) -->## 运维管理 (Operational Management)
 
-#<!-- chunk: 故障排查工具 (Troubleshooting Tools) -->## 故障排查工具 (Troubleshooting Tools)
+## 故障排查工具 (Troubleshooting Tools)
 
 ```bash
 #!/bin/bash
@@ -1068,7 +1068,7 @@ check_dependency_conflicts() {
 }
 ```
 
-#<!-- chunk: 日常运维脚本 (Daily Operations Scripts) -->## 日常运维脚本 (Daily Operations Scripts)
+## 日常运维脚本 (Daily Operations Scripts)
 
 ```bash
 #!/bin/bash
@@ -1167,7 +1167,7 @@ test_environment_health() {
 
 <!-- chunk: 最佳实践 (Best Practices) -->## 最佳实践 (Best Practices)
 
-#<!-- chunk: 测试设计最佳实践 (Test Design Best Practices) -->## 测试设计最佳实践 (Test Design Best Practices)
+## 测试设计最佳实践 (Test Design Best Practices)
 
 1. **测试命名规范**
    ```java
@@ -1218,7 +1218,7 @@ test_environment_health() {
    }
    ```
 
-#<!-- chunk: 基础设施最佳实践 (Infrastructure Best Practices) -->## 基础设施最佳实践 (Infrastructure Best Practices)
+## 基础设施最佳实践 (Infrastructure Best Practices)
 
 1. **测试配置管理**
    ```properties
@@ -1257,7 +1257,7 @@ test_environment_health() {
    </configuration>
    ```
 
-#<!-- chunk: 质量保证最佳实践 (Quality Assurance Best Practices) -->## 质量保证最佳实践 (Quality Assurance Best Practices)
+## 质量保证最佳实践 (Quality Assurance Best Practices)
 
 1. **测试覆盖率目标**
    ```xml
@@ -1309,7 +1309,7 @@ test_environment_health() {
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-29-automated-testing-quality KUDIG Database — Global MOC
-- [[domain-08-release-change-management/README|Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
+- [[domain-08-release-change-management/README.md|Domain 08: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
 - Domain-29 自动化测试与质量 — 开源项目索引
 - Selenium 企业级自动化测试平台
 - 企业级AI测试与质量保障深度实践

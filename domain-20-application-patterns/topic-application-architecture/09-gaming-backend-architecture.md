@@ -199,7 +199,7 @@ flowchart TB
     style Match fill:#e8f5e9
 ```
 
-#<!-- chunk: 匹配算法流程 -->## 匹配算法流程
+## 匹配算法流程
 
 ```mermaid
 sequenceDiagram
@@ -259,7 +259,7 @@ flowchart TB
     style BattleServer fill:#e3f2fd
 ```
 
-#<!-- chunk: 游戏服务器 K8s 部署 -->## 游戏服务器 K8s 部署
+## 游戏服务器 K8s 部署
 
 ```yaml
 apiVersion: apps/v1
@@ -440,7 +440,7 @@ flowchart TB
     style StateSync fill:#e8f5e9
 ```
 
-#<!-- chunk: 同步方案选型 -->## 同步方案选型
+## 同步方案选型
 
 | 特性 | 帧同步 | 状态同步 |
 |:---|:---|:---|
@@ -514,7 +514,7 @@ flowchart TB
 
 <!-- chunk: 八、K8s 部署架构 -->## 八、K8s 部署架构
 
-#<!-- chunk: 游戏区服架构 -->## 游戏区服架构
+## 游戏区服架构
 
 ```mermaid
 flowchart TB
@@ -553,7 +553,7 @@ flowchart TB
     style Zone2 fill:#e8f5e9
 ```
 
-#<!-- chunk: 游戏服 K8s 配置 -->## 游戏服 K8s 配置
+## 游戏服 K8s 配置
 
 ```yaml
 apiVersion: v1
@@ -636,17 +636,17 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture KUDIG Database — Global MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture|智慧零售与新零售Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture.md|智慧零售与新零售Kubernetes生产架构设计]]
 
 ## See Also
 

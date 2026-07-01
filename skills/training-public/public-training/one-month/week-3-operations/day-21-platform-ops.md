@@ -147,7 +147,7 @@ related_topics:
    - 重点: etcd 备份、Velero
 
 3. **监控 Playbooks**
-   - 文件: `../../[[domain-06-observability/05-alerting/21-monitoring-playbooks|21-monitoring-playbooks]].md`
+   - 文件: `../../[[domain-06-observability/05-alerting/21-monitoring-playbooks.md|21-monitoring-playbooks]].md`
    - 重点: 监控配置模板
 
 ---
@@ -184,6 +184,9 @@ kubectl port-forward -n monitoring svc/prometheus-k8s 9090:9090
 ---
 
 ### Step 2: 配置核心告警规则 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat > core-alerts.yaml << 'EOF'
@@ -291,6 +294,9 @@ kubectl describe prometheusrule core-alerts -n monitoring
 
 #### 4.1 准备测试环境
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl create namespace fault-drill
 kubectl create deployment app --image=nginx:alpine -n fault-drill --replicas=3
@@ -302,6 +308,10 @@ kubectl get svc -n fault-drill
 ```
 
 #### 4.2 问题 1: 模拟 OOM
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 cat > oom-inject.yaml << 'EOF'
@@ -350,6 +360,9 @@ kubectl delete pod oom-inject -n fault-drill
 
 #### 4.3 问题 2: 模拟 Service 不可用
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 删除 Endpoints (模拟 selector 不匹配)
 kubectl delete endpoints app -n fault-drill
@@ -380,6 +393,10 @@ kubectl get endpoints app -n fault-drill
 ```
 
 #### 4.4 问题 3: 模拟节点问题
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 选择一个节点
@@ -533,3 +550,5 @@ Week 4 将学习网络与存储，包括 Service/Ingress 配置、Terway/Flannel
 - [备份恢复策略](../../domain-07-platform-engineering/12-backup-recovery-strategy.md)
 - [监控 Playbooks](../../domain-06-observability/21-monitoring-playbooks.md)
 - [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
+
+```

@@ -58,17 +58,13 @@ created: "2026-05-23"
 <!-- chunk: 概述 -->## 概述
 
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 [[Kubernetes|Kubernetes]] v1.25 中正式移除。
-> 请使用 Pod Securityod Security Admission]] (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 安全是生产环境 Linux 系统运维的基石。在 Kubernetes 环境中，一个被攻破的节点意味着攻击者可能获取集群中所有工作负载的访问权限。本文档从内核安全机制到应用层防护，全面深入地讲解 Linux 安全加固的各个方面，包括用户权限管理、SSH 安全、PAM 认证、SELinux/AppArmor 强制访问控制、审计日志、容器安全特性（Namespaces、cgroups、Capabilities、Seccomp）以及与 Kubernetes 安全策略（PodSecurityPolicy/PodSecurityStandards、NetworkPolicy）的紧密关联。掌握这些内容是构建安全可靠的容器平台基础设施的必要前提。
 
 ---
 
 <!-- chunk: 核心概念详解 -->## 核心概念详解
 
-#<!-- chunk: Linux 安全模型 -->## Linux 安全模型
+## Linux 安全模型
 
 Linux 安全模型是一个多层防御体系，从外到内逐层保护系统资源：
 
@@ -117,9 +113,9 @@ Linux 安全模型是一个多层防御体系，从外到内逐层保护系统�
 
 ---
 
-#<!-- chunk: 用户与权限管理 -->## 用户与权限管理
+## 用户与权限管理
 
-##<!-- chunk: 用户管理基础 -->## 用户管理基础
+## 用户管理基础
 
 Linux 通过 /etc/passwd、/etc/shadow、/etc/group 三个文件管理用户和组信息。每个用户有唯一的 UID，系统通过 UID 而非用户名来识别身份。
 
@@ -149,7 +145,7 @@ su - username                                  # 切换用户
 sudo -u username command                       # 以指定用户执行
 ```
 
-##<!-- chunk: 密码策略 -->## 密码策略
+## 密码策略
 
 ```bash
 # /etc/login.defs - 密码策略全局配置
@@ -184,7 +180,10 @@ usermod -U username                 # 解锁
 usermod -s /sbin/nologin username   # 禁止登录
 ```
 
-##<!-- chunk: sudo 权限控制 -->## sudo 权限控制
+## sudo 权限控制
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # /etc/sudoers 或 /etc/sudoers.d/ 目录下的文件
@@ -218,9 +217,12 @@ Defaults passwd_tries=3                # 密码尝试次数
 
 ---
 
-#<!-- chunk: SSH 安全配置 -->## SSH 安全配置
+## SSH 安全配置
 
 SSH 是 Linux 服务器最主要的远程管理方式，也是攻击者最常尝试入侵的入口。严格的安全配置至关重要。
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # /etc/ssh/sshd_config - SSH 服务端安全配置
@@ -273,7 +275,7 @@ Banner /etc/issue.net               # 登录前横幅
 systemctl restart sshd
 ```
 
-##<!-- chunk: SSH 密钥管理 -->## SSH 密钥管理
+## SSH 密钥管理
 
 ```bash
 # 生成密钥对 (推荐 ed25519)
@@ -315,7 +317,7 @@ Host internal-*
 
 ---
 
-#<!-- chunk: PAM 认证配置 -->## PAM 认证配置
+## PAM 认证配置
 
 PAM (Pluggable Authentication Modules) 是 Linux 的可插拔认证框架，控制着系统登录、密码修改、sudo 等所有认证行为。
 
@@ -352,11 +354,11 @@ echo "console" > /etc/securetty
 
 ---
 
-#<!-- chunk: SELinux 深度解析 -->## SELinux 深度解析
+## SELinux 深度解析
 
 SELinux (Security-Enhanced Linux) 是由 NSA 开发的强制访问控制 (MAC) 系统，默认在 RHEL/CentOS 中启用。它通过安全上下文标签对每个进程和文件进行细粒度访问控制。
 
-##<!-- chunk: SELinux 模式和策略 -->## SELinux 模式和策略
+## SELinux 模式和策略
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -379,7 +381,7 @@ SELinux (Security-Enhanced Linux) 是由 NSA 开发的强制访问控制 (MAC) �
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: SELinux 上下文 -->## SELinux 上下文
+## SELinux 上下文
 
 ```bash
 # 查看文件安全上下文
@@ -419,7 +421,7 @@ setsebool -P container_manage_cgroup on      # 容器管理 cgroup
 setsebool -P container_use_ceph on           # 容器使用 Ceph
 ```
 
-##<!-- chunk: SELinux 故障排查 -->## SELinux 故障排查
+## SELinux 故障排查
 
 ```bash
 # 查看 SELinux 日志
@@ -446,7 +448,7 @@ SELINUXTYPE=targeted
 
 ---
 
-#<!-- chunk: AppArmor -->## AppArmor
+## AppArmor
 
 AppArmor 是 Canonical 开发的 MAC 系统，在 Ubuntu 中默认启用，通过路径匹配实现访问控制。
 
@@ -495,7 +497,7 @@ apparmor_parser -r /etc/apparmor.d/usr.sbin.nginx
 
 <!-- chunk: 常用命令参考 -->## 常用命令参考
 
-#<!-- chunk: 安全检查命令 -->## 安全检查命令
+## 安全检查命令
 
 ```bash
 # 检查 UID 0 账户 (应仅有 root)
@@ -543,7 +545,7 @@ who
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: 安全与性能的平衡 -->## 安全与性能的平衡
+## 安全与性能的平衡
 
 ```bash
 # SELinux 性能影响通常 < 5%，不建议为性能禁用
@@ -564,7 +566,10 @@ auditctl -D                           # 临时清空规则（调试用）
 
 <!-- chunk: 安全加固 -->## 安全加固
 
-#<!-- chunk: 系统安全加固脚本 -->## 系统安全加固脚本
+## 系统安全加固脚本
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -675,7 +680,10 @@ EOF
 echo "=== 安全加固完成 ==="
 ```
 
-#<!-- chunk: 审计配置 -->## 审计配置
+## 审计配置
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # /etc/audit/rules.d/production.rules
@@ -735,7 +743,7 @@ aureport -x --summary                    # 可执行文件报告
 aureport -u --summary                    # 用户报告
 ```
 
-#<!-- chunk: 文件完整性监控 (AIDE) -->## 文件完整性监控 (AIDE)
+## 文件完整性监控 (AIDE)
 
 ```bash
 # 安装 AIDE
@@ -763,7 +771,7 @@ echo "0 3 * * * /usr/sbin/aide --check | mail -s 'AIDE Report' admin@company.com
 
 <!-- chunk: 与 Kubernetes 的关系 -->## 与 Kubernetes 的关系
 
-#<!-- chunk: 容器安全特性 -->## 容器安全特性
+## 容器安全特性
 
 Kubernetes 利用 Linux 内核安全特性来隔离和保护容器：
 
@@ -776,7 +784,7 @@ Kubernetes 利用 Linux 内核安全特性来隔离和保护容器：
 | **SELinux** | SELinuxOptions | 文件访问控制 |
 | **AppArmor** | Annotation | 进程行为限制 |
 
-##<!-- chunk: Pod 安全上下文 (SecurityContext) -->## Pod 安全上下文 (SecurityContext)
+## Pod 安全上下文 (SecurityContext)
 
 ```yaml
 apiVersion: v1
@@ -810,7 +818,7 @@ spec:
     emptyDir: {}
 ```
 
-##<!-- chunk: Pod Security Standards -->## Pod Security Standards
+## Pod Security Standards
 
 ```yaml
 # Pod Security Standards (PSS) 通过命名空间标签实施
@@ -846,7 +854,7 @@ metadata:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 安全相关故障诊断 -->## 安全相关故障诊断
+## 安全相关故障诊断
 
 ```bash
 # SELinux 阻止了操作
@@ -909,3 +917,5 @@ faillock --user username       # 查看锁定状态
 - 06-linux-performance-tuning
 - 08-linux-container-fundamentals
 - 09-linux-operations-basics
+
+```

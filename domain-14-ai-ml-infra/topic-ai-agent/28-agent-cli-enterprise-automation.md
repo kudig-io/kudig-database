@@ -99,7 +99,7 @@ Agent CLI 的**无头模式（Headless Mode）** 使其能够脱离交互式终�
 
 <!-- chunk: 1. 无头模式（Headless Mode）详解 -->## 1. 无头模式（Headless Mode）详解
 
-#<!-- chunk: 1.1 各工具无头模式对比 -->## 1.1 各工具无头模式对比
+## 1.1 各工具无头模式对比
 
 | 工具 | 无头命令 | 输入方式 | 输出格式 | 工具权限控制 |
 |------|---------|---------|---------|------------|
@@ -108,7 +108,7 @@ Agent CLI 的**无头模式（Headless Mode）** 使其能够脱离交互式终�
 | **Gemini CLI** | `gemini -p "<prompt>"` | `-p` 参数 | Text / JSON | `--sandbox` |
 | **Aider** | `echo "<prompt>" \| aider --yes` | stdin / `--message` | Text / Git diff | `--yes` 自动确认 |
 
-#<!-- chunk: 1.2 Claude Code 无头模式深度配置 -->## 1.2 Claude Code 无头模式深度配置
+## 1.2 Claude Code 无头模式深度配置
 
 ```bash
 # 基础用法
@@ -131,7 +131,7 @@ claude -p "查看 staging 环境的 Pod 状态并诊断异常" \
   --allowedTools "Read,mcp__kubernetes__list_pods,mcp__kubernetes__get_pod_logs"
 ```
 
-#<!-- chunk: 1.3 输出解析 -->## 1.3 输出解析
+## 1.3 输出解析
 
 ```bash
 # Claude Code JSON stream 输出格式
@@ -153,7 +153,7 @@ echo "$RESULT"
 
 <!-- chunk: 2. GitHub Actions 集成 -->## 2. GitHub Actions 集成
 
-#<!-- chunk: 2.1 自动代码审查（PR Review Bot） -->## 2.1 自动代码审查（PR Review Bot）
+## 2.1 自动代码审查（PR Review Bot）
 
 ```yaml
 # .github/workflows/agent-code-review.yml
@@ -213,7 +213,7 @@ jobs:
             });
 ```
 
-#<!-- chunk: 2.2 自动修复 Lint/Test 错误 -->## 2.2 自动修复 Lint/Test 错误
+## 2.2 自动修复 Lint/Test 错误
 
 ```yaml
 # .github/workflows/agent-auto-fix.yml
@@ -269,7 +269,7 @@ jobs:
             --base main
 ```
 
-#<!-- chunk: 2.3 Issue 自动响应与修复 -->## 2.3 Issue 自动响应与修复
+## 2.3 Issue 自动响应与修复
 
 ```yaml
 # .github/workflows/agent-issue-fix.yml
@@ -324,7 +324,7 @@ jobs:
 
 <!-- chunk: 3. GitLab CI/CD 集成 -->## 3. GitLab CI/CD 集成
 
-#<!-- chunk: 3.1 Merge Request 审查 -->## 3.1 Merge Request 审查
+## 3.1 Merge Request 审查
 
 ```yaml
 # .gitlab-ci.yml
@@ -356,7 +356,7 @@ agent-review:
 
 <!-- chunk: 4. 批量处理与多仓库管理 -->## 4. 批量处理与多仓库管理
 
-#<!-- chunk: 4.1 批量代码迁移 -->## 4.1 批量代码迁移
+## 4.1 批量代码迁移
 
 ```bash
 #!/bin/bash
@@ -408,7 +408,7 @@ for repo in "${REPOS[@]}"; do
 done
 ```
 
-#<!-- chunk: 4.2 定期维护任务 -->## 4.2 定期维护任务
+## 4.2 定期维护任务
 
 ```yaml
 # .github/workflows/agent-maintenance.yml
@@ -455,7 +455,7 @@ jobs:
 
 <!-- chunk: 5. 企业级部署架构 -->## 5. 企业级部署架构
 
-#<!-- chunk: 5.1 集中式 Agent CLI 服务 -->## 5.1 集中式 Agent CLI 服务
+## 5.1 集中式 Agent CLI 服务
 
 ```
 ┌──────────────────────────────────────────────────────┐
@@ -493,7 +493,7 @@ jobs:
 └──────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 5.2 K8s Worker 部署 -->## 5.2 K8s Worker 部署
+## 5.2 K8s Worker 部署
 
 ```yaml
 # agent-cli-worker.yaml
@@ -544,7 +544,7 @@ spec:
           sizeLimit: 10Gi
 ```
 
-#<!-- chunk: 5.3 成本控制策略 -->## 5.3 成本控制策略
+## 5.3 成本控制策略
 
 | 策略 | 实现方式 | 效果 |
 |------|---------|------|
@@ -566,7 +566,7 @@ claude -p "$PROMPT" \
 
 <!-- chunk: 6. 监控与可观测性 -->## 6. 监控与可观测性
 
-#<!-- chunk: 6.1 关键指标 -->## 6.1 关键指标
+## 6.1 关键指标
 
 | 指标 | 说明 | 告警阈值 |
 |------|------|---------|
@@ -577,7 +577,7 @@ claude -p "$PROMPT" \
 | **代码采纳率** | Agent PR 被合并 / 总 PR | 跟踪趋势 |
 | **测试通过率** | Agent 修改后测试通过率 | < 95% |
 
-#<!-- chunk: 6.2 Grafana 仪表板指标 -->## 6.2 Grafana 仪表板指标
+## 6.2 Grafana 仪表板指标
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -605,7 +605,7 @@ claude -p "$PROMPT" \
 
 <!-- chunk: 7. 常见集成模式 -->## 7. 常见集成模式
 
-#<!-- chunk: 7.1 模式总览 -->## 7.1 模式总览
+## 7.1 模式总览
 
 | 模式 | 触发 | 任务 | 输出 |
 |------|------|------|------|
@@ -617,7 +617,7 @@ claude -p "$PROMPT" \
 | **Migration Helper** | 手动触发 | 批量代码迁移 | 迁移 PR |
 | **Security Scanner** | 定时/PR | 安全审计 | 报告/Issue |
 
-#<!-- chunk: 7.2 安全注意事项 -->## 7.2 安全注意事项
+## 7.2 安全注意事项
 
 | 风险 | 缓解措施 |
 |------|---------|
@@ -658,17 +658,17 @@ Agent CLI 的 CI/CD 集成是将 AI 编码能力从"个人提效"扩展到"团�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 

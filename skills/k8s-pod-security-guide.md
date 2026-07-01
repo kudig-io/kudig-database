@@ -106,15 +106,15 @@ labels:
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
-- [[concepts/security-defense-depth|Defense-in-Depth Security]]
-- [[concepts/secrets-management|[[Secrets Management|Secrets Management]]]]
-- [[skills/audit-rbac-configurations|Audit RBAC Configurations]]
+- [[concepts/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
+- [[concepts/security-defense-depth.md|Defense-in-Depth Security]]
+- [[concepts/secrets-management.md|[[Secrets Management|Secrets Management]]]]
+- [[skills/audit-rbac-configurations.md|Audit RBAC Configurations]]
 
 ## Related
 
-- [[entities/trivy|trivy]] — Trivy
+- [[entities/trivy.md|trivy]] — Trivy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/secrets-management|secrets-management]] — Secrets Management
-- [[concepts/k8s-production-best-practices|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
-- [[concepts/security-defense-depth|security-defense-depth]] — Defense-in-Depth Security
+- [[concepts/secrets-management.md|secrets-management]] — Secrets Management
+- [[concepts/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[concepts/security-defense-depth.md|security-defense-depth]] — Defense-in-Depth Security

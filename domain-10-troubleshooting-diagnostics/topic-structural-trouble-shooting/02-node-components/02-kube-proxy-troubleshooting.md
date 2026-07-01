@@ -418,6 +418,10 @@ curl http://localhost:10249/metrics | grep kubeproxy
 
 #### 3.1.1 解决步骤
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 步骤 1：检查 Pod 状态
 kubectl get pods -n kube-system -l k8s-app=kube-proxy -o wide
@@ -464,6 +468,9 @@ kubectl get pods -n kube-system -l k8s-app=kube-proxy
 ### 3.2 Service 访问不通
 
 #### 3.2.1 解决步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 步骤 1：确认 Service 和 Endpoints 存在
@@ -518,6 +525,9 @@ kubectl run test --rm -it --image=busybox -- wget -qO- http://<cluster-ip>:<port
 
 #### 3.3.1 解决步骤
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 步骤 1：检查规则是否存在
 iptables -t nat -L KUBE-SERVICES -n | grep <cluster-ip>
@@ -571,6 +581,10 @@ iptables -t nat -L KUBE-SERVICES -n --line-numbers
 ### 3.4 IPVS 模式问题
 
 #### 3.4.1 解决步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 步骤 1：确认 IPVS 模式生效
@@ -628,6 +642,10 @@ kubectl rollout restart daemonset -n kube-system kube-proxy
 ### 3.5 从 iptables 模式切换到 IPVS 模式
 
 #### 3.5.1 解决步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 步骤 1：加载必要的内核模块
@@ -697,6 +715,9 @@ kubectl run test --rm -it --image=busybox -- wget -qO- http://<cluster-ip>:<port
 ### 3.6 conntrack 表问题
 
 #### 3.6.1 解决步骤
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
 
 ```bash
 # 步骤 1：检查 conntrack 表状态
@@ -784,15 +805,15 @@ kubectl run test --rm -it --image=busybox -- wget -qO- http://<cluster-ip>:<port
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux|linux]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting|06-gpu-device-plugin-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting|01-kubelet-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting|03-container-runtime-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting|04-node-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.md|06-gpu-device-plugin-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting.md|04-node-troubleshooting]]

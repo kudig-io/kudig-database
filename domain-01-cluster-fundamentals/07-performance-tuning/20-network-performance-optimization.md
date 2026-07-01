@@ -90,9 +90,9 @@ k8s_versions:
 
 <!-- chunk: 🌐 CNI插件性能优化 -->## 🌐 CNI插件性能优化
 
-#<!-- chunk: Calico网络优化 -->## Calico网络优化
+## Calico网络优化
 
-##<!-- chunk: 1. Calico配置优化 -->## 1. Calico配置优化
+## 1. Calico配置优化
 ```yaml
 # Calico高性能配置
 apiVersion: crd.projectcalico.org/v1
@@ -186,7 +186,7 @@ spec:
             memory: 1Gi
 ```
 
-##<!-- chunk: 2. Calico BPF模式配置 -->## 2. Calico BPF模式配置
+## 2. Calico BPF模式配置
 ```yaml
 # 启用Calico eBPF模式
 apiVersion: crd.projectcalico.org/v1
@@ -226,9 +226,9 @@ data:
     net.ipv4.tcp_fastopen=3
 ```
 
-#<!-- chunk: Cilium网络优化 -->## Cilium网络优化
+## Cilium网络优化
 
-##<!-- chunk: 1. Cilium高性能配置 -->## 1. Cilium高性能配置
+## 1. Cilium高性能配置
 ```yaml
 # Cilium优化配置
 apiVersion: v1
@@ -355,9 +355,9 @@ spec:
 
 <!-- chunk: 🎯 网络策略优化 -->## 🎯 网络策略优化
 
-#<!-- chunk: 策略性能调优 -->## 策略性能调优
+## 策略性能调优
 
-##<!-- chunk: 1. 高效网络策略配置 -->## 1. 高效网络策略配置
+## 1. 高效网络策略配置
 ```yaml
 # 网络策略优化示例
 apiVersion: networking.k8s.io/v1
@@ -448,7 +448,7 @@ spec:
       port: 53
 ```
 
-##<!-- chunk: 2. 策略管理工具 -->## 2. 策略管理工具
+## 2. 策略管理工具
 ```python
 #!/usr/bin/env python3
 # 网络策略优化和管理工具
@@ -879,9 +879,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 🚀 服务网格性能优化 -->## 🚀 服务网格性能优化
 
-#<!-- chunk: Istio性能调优 -->## Istio性能调优
+## Istio性能调优
 
-##<!-- chunk: 1. Istio Sidecar优化 -->## 1. Istio Sidecar优化
+## 1. Istio Sidecar优化
 ```yaml
 # Istio Sidecar资源优化
 apiVersion: v1
@@ -980,7 +980,7 @@ data:
                 idle_timeout: 1h
 ```
 
-##<!-- chunk: 2. Istio性能配置 -->## 2. Istio性能配置
+## 2. Istio性能配置
 ```yaml
 # Istio Pilot优化配置
 apiVersion: v1
@@ -1102,9 +1102,9 @@ spec:
 
 <!-- chunk: 📊 网络性能监控 -->## 📊 网络性能监控
 
-#<!-- chunk: 网络指标收集 -->## 网络指标收集
+## 网络指标收集
 
-##<!-- chunk: 1. Prometheus网络监控规则 -->## 1. Prometheus网络监控规则
+## 1. Prometheus网络监控规则
 ```yaml
 # 网络性能监控规则
 apiVersion: monitoring.coreos.com/v1
@@ -1147,7 +1147,7 @@ spec:
       expr: sum(node_netstat_Tcp_PassiveOpens) by (instance)
 ```
 
-##<!-- chunk: 2. 网络性能仪表板 -->## 2. 网络性能仪表板
+## 2. 网络性能仪表板
 ```json
 {
   "dashboard": {
@@ -1208,7 +1208,7 @@ spec:
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 网络基础设施优化 -->## 网络基础设施优化
+## 网络基础设施优化
 - [ ] 选择和配置高性能CNI插件
 - [ ] 优化网络插件配置参数
 - [ ] 实施网络策略最佳实践
@@ -1216,7 +1216,7 @@ spec:
 - [ ] 优化DNS和负载均衡配置
 - [ ] 实施网络监控和告警机制
 
-#<!-- chunk: 性能调优实施 -->## 性能调优实施
+## 性能调优实施
 - [ ] 分析现有网络性能瓶颈
 - [ ] 实施CNI插件性能优化
 - [ ] 优化网络策略复杂度
@@ -1224,7 +1224,7 @@ spec:
 - [ ] 实施网络QoS策略
 - [ ] 配置网络问题排除工具
 
-#<!-- chunk: 监控和维护 -->## 监控和维护
+## 监控和维护
 - [ ] 部署网络性能监控系统
 - [ ] 建立网络性能基线
 - [ ] 实施自动化网络诊断
@@ -1241,9 +1241,9 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -1257,10 +1257,10 @@ spec:
 
 - 69-6g-core-network
 - 80-tsn-network
-- [[domain-02-workloads-applications/03-jvm-gc-container-tuning|03-jvm-gc-container-tuning]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 ## See Also
 

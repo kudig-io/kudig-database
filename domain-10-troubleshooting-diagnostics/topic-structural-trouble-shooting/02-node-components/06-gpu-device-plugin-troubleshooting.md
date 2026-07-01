@@ -257,6 +257,9 @@ cat /etc/nvidia-container-runtime/config.toml
 
 ### 2.1 排查决策树
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```
 GPU/设备 Pod 问题
         │
@@ -443,6 +446,9 @@ journalctl -u kubelet | grep -i "ListAndWatch" | tail -20
 
 **解决步骤**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 步骤 1: 检查设备插件 DaemonSet 是否存在且运行正常
 kubectl get ds -n kube-system nvidia-device-plugin-daemonset
@@ -485,6 +491,10 @@ version = 2
 [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.nvidia.options]
   BinaryName = "/usr/bin/nvidia-container-runtime"
 ```
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 重启 containerd (需要排空节点上的工作负载)
@@ -548,6 +558,9 @@ spec:
 
 **解决步骤**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 步骤 1: 查看 kubelet 日志定位具体错误
 journalctl -u kubelet | grep -i "allocate\|device" | tail -50
@@ -577,6 +590,9 @@ kubectl delete pods -n kube-system -l app=nvidia-device-plugin-daemonset
 **问题现象**：Pod 运行中，但容器内 `nvidia-smi` 失败或 CUDA 程序报错。
 
 **解决步骤**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 步骤 1: 进入容器检查
@@ -626,6 +642,9 @@ spec:
 
 **解决步骤**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 步骤 1: 检查节点驱动版本支持的 CUDA 版本
 nvidia-smi  # 右上角显示支持的最高 CUDA 版本
@@ -658,6 +677,10 @@ kubectl exec <pod-name> -- nvcc --version
 **问题现象**：MIG 模式启用但设备不可用，或 MIG 实例不符合预期。
 
 **解决步骤**：
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 步骤 1: 检查 GPU 是否支持 MIG (A100, A30, H100 等)
@@ -733,6 +756,10 @@ data:
 
 **解决步骤**：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 步骤 1: 应用时间片配置
 kubectl apply -f nvidia-device-plugin-config.yaml
@@ -753,6 +780,9 @@ kubectl describe node <gpu-node> | grep nvidia.com/gpu
 **问题现象**：高性能网络设备不可用，分布式训练性能差。
 
 **解决步骤**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 检查 RDMA 设备插件
@@ -888,18 +918,20 @@ spec:
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/docker|docker]]
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting|04-node-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting|05-image-registry-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting|01-kubelet-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting|02-kube-proxy-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting.md|04-node-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting.md|05-image-registry-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting.md|02-kube-proxy-troubleshooting]]
+
+```

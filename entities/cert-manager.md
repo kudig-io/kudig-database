@@ -42,7 +42,7 @@ description: '## 项目概述'
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -54,10 +54,10 @@ description: '## 项目概述'
 
 ## 参考链接
 
-- [[entities/vault|[[HashiCorp Vault|vault]]]]
-- [[entities/crd-custom-resources|crd-custom-resources]]
-- [[concepts/controller-pattern|controller-pattern]]
-- [[concepts/secrets-management|secrets-management]]
+- [[entities/vault.md|[[HashiCorp Vault|vault]]]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[concepts/controller-pattern.md|controller-pattern]]
+- [[concepts/secrets-management.md|secrets-management]]
 - [[pod-lifecycle]]
 
 ## Related
@@ -107,20 +107,20 @@ description: '## 项目概述'
 - RELEASE-NOTES-0.10
 - RELEASE-NOTES-0.11
 - RELEASE-NOTES-0.15
-- [[entities/kubearmor|KubeArmor]]
-- [[entities/openfga|OpenFGA]]
-- [[references/release-notes-security|发布说明索引 — 安全]] — Cross-reference
-- [[references/kudig-man-pages-index|KUDIG Man Pages Index]] — Cross-reference
-- [[synthesis/控制器模式 × Operator 模式|控制器模式 × Operator 模式]] — Cross-reference
-- [[concepts/cloud-native-defense-in-depth|Cloud Native Defense in Depth]] — Cross-reference
-- [[concepts/security-tool-evolution|安全工具演进]] — Cross-reference
-- [[skills/ts-ai-ml-workloads|AI/ML 工作负载排查]] — Cross-reference
-- [[skills/ts-security-auth|安全认证故障排查]] — Cross-reference
-- [[skills/Kubernetes Diagnostic Skills Overview|Kubernetes Diagnostic Skills Overview]] — Cross-reference
-- [[skills/ts-control-plane|控制平面故障排查]] — Cross-reference
-- [[skills/Agent Orchestration Patterns|Agent Orchestration Patterns for FTA]] — Cross-reference
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/kubearmor.md|KubeArmor]]
+- [[entities/openfga.md|OpenFGA]]
+- [[entities/release-notes-security.md|发布说明索引 — 安全]] — Cross-reference
+- [[entities/kudig-man-pages-index.md|KUDIG Man Pages Index]] — Cross-reference
+- [[concepts/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]] — Cross-reference
+- [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]] — Cross-reference
+- [[concepts/security-tool-evolution.md|安全工具演进]] — Cross-reference
+- [[skills/ts-ai-ml-workloads.md|AI/ML 工作负载排查]] — Cross-reference
+- [[skills/ts-security-auth.md|安全认证故障排查]] — Cross-reference
+- [[skills/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]] — Cross-reference
+- [[skills/ts-control-plane.md|控制平面故障排查]] — Cross-reference
+- [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
+- [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

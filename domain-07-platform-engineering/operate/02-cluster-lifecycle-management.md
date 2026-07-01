@@ -205,10 +205,6 @@ subjects:
 - 资源配额(ResourceQuota)设置
 - 限制范围(LimitRange)配置
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 - Pod安全策略(PodSecurityPolicy)实施
 
 #### 监控告警配置
@@ -377,7 +373,7 @@ resource "aws_eks_cluster" "main" {
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Platform Ops Domain (平台运维领域)]]
+- [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
 - Domain-9 平台运维 — 开源项目索引
 - 平台运维概述
 - 容量规划与资源评估 (Capacity Planning & Resource Assessment)
@@ -396,8 +392,8 @@ resource "aws_eks_cluster" "main" {
 - 相关知识域: domain-06-observability
 - 相关知识域: domain-15-specialized-tech
 - 相关知识域: domain-10-troubleshooting-diagnostics
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 

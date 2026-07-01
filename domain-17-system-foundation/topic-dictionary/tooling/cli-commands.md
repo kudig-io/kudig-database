@@ -42,6 +42,7 @@ prerequisites:
 - gpu-scheduling-basics
 - policy-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 ﻿# [[Kubernetes|Kubernetes]] & AI/ML 命令行清单 (Complete CLI Commands Reference)
@@ -347,6 +348,9 @@ kubectl events -A --types=Warning --sort-by='.lastTimestamp' | head -50
 
 ### 2.1 资源创建命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建命名空间
 kubectl create namespace <name>
@@ -393,6 +397,11 @@ kubectl diff -f deployment.yaml
 
 ### 2.2 资源删除命令
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 删除单个资源
 kubectl delete pod nginx
@@ -407,10 +416,10 @@ kubectl delete -f deployment.yaml
 kubectl delete pods -l app=nginx
 
 # 删除命名空间下所有 Pod
-kubectl delete pods --all -n <namespace>
+kubectl delete pods --all -n <namespace>  # ⚠️ 批量删除，波及面大
 
 # 强制删除 (绕过优雅终止)
-kubectl delete pod nginx --force --grace-period=0
+kubectl delete pod nginx --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 级联删除策略
 kubectl delete deployment nginx --cascade=foreground  # 等待所有依赖删除
@@ -478,6 +487,9 @@ kubectl api-resources -o wide
 > ```
 
 ### 3.1 容器命令执行
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 在 Pod 中执行命令
@@ -658,6 +670,9 @@ kubectl debug node/<node-name> -it --image=ubuntu
 
 ### 4.1 资源编辑与补丁
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 编辑资源
 kubectl edit deployment nginx
@@ -759,6 +774,9 @@ kubectl patch deployment nginx --type='json' -p='[{"op":"add","path":"/spec/temp
 ```
 
 ### 4.2 资源设置命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 更新镜像
@@ -944,6 +962,9 @@ RuntimeClass
 
 ### 6.1 GPU Operator 部署
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 部署GPU Operator
 helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
@@ -1060,6 +1081,9 @@ nvidia-smi mig -lcip
 
 ### 6.3 GPU 资源配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # Time-Slicing 配置
 kubectl label node gpu-train-01 nvidia.com/device-plugin.config=none
@@ -1080,6 +1104,9 @@ kubectl label node gpu-node-01 nvidia.com/mig.config="all-1g.10gb"
 
 ### 7.1 [[Kubeflow|Kubeflow]] 训练任务
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 提交 PyTorchJob
 kubectl apply -f pytorchjob.yaml
@@ -1099,6 +1126,9 @@ kubectl logs -f -l pytorch-job-name=<job-name> -c pytorch
 ```
 
 ### 7.2 模型推理服务
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 部署 KServe InferenceService
@@ -1123,6 +1153,9 @@ curl -X POST \
 ```
 
 ### 7.3 Spark 数据处理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 提交 Spark Application
@@ -1154,6 +1187,9 @@ kubectl port-forward <driver-pod> 4040:4040
 > | 存储问题 | `kubectl describe pvc` + `kubectl get events` | 检查PVC绑定和事件 |
 
 ### 8.1 K9s 使用
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 启动 K9s
@@ -1281,6 +1317,9 @@ kubectl ns monitoring               # 切换namespace
 
 ### 9.1 RBAC 管理
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建 ServiceAccount
 kubectl create serviceaccount <sa-name>
@@ -1306,6 +1345,9 @@ kubectl auth reconcile -f rbac.yaml
 ```
 
 ### 9.2 证书管理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建 CSR
@@ -1399,6 +1441,9 @@ kubectl version
 
 ### 11.1 大规模集群管理
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+
 ```bash
 # 查看集群整体健康状态
 kubectl cluster-info dump --output-directory=/tmp/cluster-dump
@@ -1410,7 +1455,7 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.c
 kubectl get resourcequotas --all-namespaces -o wide
 
 # 批量清理已完成的 Job
-kubectl delete jobs --field-selector=status.successful=1 --all-namespaces
+kubectl delete jobs --field-selector=status.successful=1 --all-namespaces  # ⚠️ 批量删除，波及面大
 
 # 查看命名空间资源消耗排名
 kubectl top pods --all-namespaces | sort -k3 -nr | head -20
@@ -1472,6 +1517,9 @@ kubectl cost deployment --show-all-resources
 
 ### 12.2 混合云运维命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 跨云网络连通性测试
 kubectl exec -it <pod-name> -- ping <external-ip>
@@ -1485,6 +1533,9 @@ kubectl get services --all-namespaces -o jsonpath='{.items[*].metadata.annotatio
 ```
 
 ### 12.3 云资源管理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # Terraform 状态管理
@@ -1537,6 +1588,9 @@ kubectl get constraints -A
 
 ### 13.3 合规性检查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # CIS 基准检查
 kube-bench run --targets node,policies,managedservices
@@ -1550,6 +1604,10 @@ kubectl get compliancescans -n compliance
 ```
 
 ### 13.4 密钥管理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # HashiCorp Vault 操作
@@ -1648,6 +1706,7 @@ spec:
       port: 80
       targetPort: 80
   type: ClusterIP
+
 ```
 
 ---
@@ -1850,6 +1909,11 @@ kube-capacity -o json
 
 ### 12.3 kubectl 插件和别名
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # kubectl tree - 查看资源依赖树
 kubectl tree deployment myapp
@@ -1961,6 +2025,9 @@ tcpdump -i eth0 -nn port 80
 
 ### 13.3 DNS 诊断工具
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 基本查询 (在Pod中执行)
 dig @10.96.0.10 nginx.default.svc.cluster.local
@@ -1989,6 +2056,9 @@ kubectl exec <pod> -- cat /etc/resolv.conf
 ```
 
 ### 13.4 网络故障排查命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查 Pod 网络配置
@@ -2036,6 +2106,10 @@ kubectl exec <pod> -- nslookup <service-name>.<namespace>
 
 ### 14.1 etcd 诊断命令
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+
 ```bash
 # 基础操作
 etcdctl put key value                    # 写入
@@ -2047,13 +2121,13 @@ etcdctl watch key                        # 监听变化
 # 集群管理
 etcdctl member list                      # 成员列表
 etcdctl member add name --peer-urls=url  # 添加成员
-etcdctl member remove id                 # 移除成员
+etcdctl member remove id                 # 移除成员  # ⚠️ 移除 etcd 成员，可能丢数据
 etcdctl endpoint health --cluster        # 健康检查
 etcdctl endpoint status --cluster        # 状态详情
 
 # 维护操作
 etcdctl snapshot save file.db            # 快照备份
-etcdctl snapshot restore file.db         # 恢复
+etcdctl snapshot restore file.db         # 恢复  # ⚠️ 覆盖 etcd 数据，集群状态回退
 etcdctl compact revision                 # 压缩
 etcdctl defrag                           # 碎片整理
 etcdctl alarm list                       # 告警列表
@@ -2210,6 +2284,10 @@ kubectl debug node/<node-name> -it --image=busybox -- ls -la /var/lib/kubelet/pl
 
 ### 16.1 Helm 命令
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 仓库管理
 helm repo add NAME URL          # 添加仓库
@@ -2221,7 +2299,7 @@ helm install NAME CHART         # 安装
 helm upgrade NAME CHART         # 升级
 helm upgrade --install NAME     # 安装或升级
 helm rollback NAME REVISION     # 回滚
-helm uninstall NAME             # 卸载
+helm uninstall NAME             # 卸载  # ⚠️ 删除 release 及关联资源
 
 # 调试
 helm template NAME CHART        # 渲染模板
@@ -2242,6 +2320,9 @@ helm get values NAME            # 获取 Values
 ```
 
 ### 16.2 Kustomize 命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 构建
@@ -2271,6 +2352,9 @@ kustomize create --resources <resource-file>  # 创建kustomization.yaml
 ## 17. 系统级运维命令
 
 ### 17.1 Linux 文件系统命令
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
 
 ```bash
 # 挂载相关命令
@@ -2334,6 +2418,12 @@ rsync --dry-run -avz /source/ /destination/  # 预览操作
 
 ### 18.1 紧急操作命令
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+
 ```bash
 # 紧急回滚
 kubectl rollout undo deployment/<name>
@@ -2345,7 +2435,7 @@ kubectl scale deployment/<name> --replicas=10
 kubectl scale deployment/<name> --replicas=0
 
 # 强制删除卡住的 Pod
-kubectl delete pod <name> --force --grace-period=0
+kubectl delete pod <name> --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 
 # 紧急排空节点
 kubectl drain <node> --ignore-daemonsets --delete-emptydir-data --force
@@ -2367,6 +2457,11 @@ kubectl get --raw='/healthz/etcd'
 ```
 
 ### 18.2 Pod 故障诊断命令
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # Pod诊断
@@ -2579,6 +2674,9 @@ kubectl logs -l app=<app-name> --all-containers=true  # 查看带特定标签的
 
 ### 场景1: 应用部署与验证
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. 部署应用
 kubectl apply -f deployment.yaml
@@ -2597,6 +2695,9 @@ kubectl run test-curl --rm -it --image=curlimages/curl -- curl http://<service�
 ```
 
 ### 场景2: Pod 故障排查完整流程
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 发现异常 Pod
@@ -2622,6 +2723,10 @@ kubectl exec <pod名> -- curl -s http://<目标service>:<端口>/health
 ```
 
 ### 场景3: 节点维护（安全驱逐）
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```bash
 # 1. 查看节点上的 Pod
@@ -2659,6 +2764,9 @@ kubectl get pods -l app=<名称> -w
 ```
 
 ### 场景5: 回滚发布
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 1. 查看发布历史
@@ -2856,6 +2964,11 @@ cat /proc/<container-pid>/mountinfo  # 查看挂载信息
 
 ### 23.3 CLI 增强工具
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # kubectx / kubens 快速切换
 kubectx                              # 列出所有上下文
@@ -2929,6 +3042,12 @@ kubectl krew install tail            # 日志追踪
 
 ### 23.4 生产环境运维脚本
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl cordon`：标记节点不可调度
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 集群健康检查脚本
 kubectl cluster-info                 # 集群基本信息
@@ -2953,7 +3072,7 @@ kubectl delete pods --field-selector=status.phase==Succeeded -A 2>/dev/null # �
 
 # 紧急操作
 kubectl scale deployment/<name> --replicas=0 # 紧急停止 (缩容到 0)
-kubectl delete pod <name> --force --grace-period=0 # 强制删除卡住的 Pod
+kubectl delete pod <name> --force --grace-period=0 # 强制删除卡住的 Pod  # ⚠️ 跳过优雅终止，可能丢数据
 kubectl cordon <node>              # 紧急隔离节点
 kubectl get --raw='/healthz?verbose' # 查看 API Server 健康
 
@@ -3100,6 +3219,9 @@ kubectl label namespace <ns> pod-security.kubernetes.io/warn=restricted  # 警�
 
 ### 23.7 容器运行时配置与管理
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # containerd 配置管理
 containerd config default > /etc/containerd/config.toml  # 生成默认配置
@@ -3243,6 +3365,9 @@ kubectl get pods -l 'env notin (dev,test)' # 标签 notin 查询
 
 ### 24.1 容器运行时配置命令
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # containerd 配置管理
 containerd config default > /etc/containerd/config.toml  # 生成默认配置
@@ -3368,6 +3493,7 @@ spec:
   containers:
   - name: app
     image: nginx
+
 ```
 
 ### 24.5 从Docker迁移到containerd
@@ -3379,6 +3505,9 @@ spec:
 | 3 | 配置kubelet | `--container-runtime-endpoint=unix:///run/containerd/containerd.sock` |
 | 4 | 重启kubelet | `systemctl restart kubelet` |
 | 5 | 验证 | `crictl info` |
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # Docker到containerd迁移检查
@@ -3510,7 +3639,11 @@ kubectl get nodes
 ---
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级
 
-## Related
+## 参考链接
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [Cli Commands]()
+
+## Related
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

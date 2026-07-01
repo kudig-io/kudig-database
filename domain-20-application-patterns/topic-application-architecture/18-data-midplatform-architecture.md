@@ -123,13 +123,13 @@ k8s_versions:
 
 <!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-#<!-- chunk: 1.1 行业背景 -->## 1.1 行业背景
+## 1.1 行业背景
 
 数据中台是企业数字化转型的基础设施，通过统一的数据采集、存储、计算、治理和服务化能力，打破数据孤岛，实现数据资产的统一管理和高效复用。数据中台的概念由阿里巴巴在 2015 年提出并在内部大规模实践，随后成为各行各业数字化转型的标准架构模式。数据中台不仅是一个技术平台，更是一套数据管理方法论和组织协作模式。
 
 数据中台的核心价值在于：数据资产化（将数据视为企业核心资产进行管理）、数据服务化（将数据能力封装为 API 服务供业务系统调用）、数据业务化（通过数据分析和 AI 模型驱动业务决策）。典型的数据中台建设包括：数据湖/湖仓一体的存储架构、离线+实时的双流计算架构、数据治理（元数据管理/数据质量/数据血缘/数据安全）体系、Data API 数据服务化层、BI 分析与可视化平台。
 
-#<!-- chunk: 1.2 行业挑战 -->## 1.2 行业挑战
+## 1.2 行业挑战
 
 | 挑战 | 说明 | 架构影响 |
 |:---|:---|:---|
@@ -141,7 +141,7 @@ k8s_versions:
 | 人才稀缺 | 数据工程师/数据科学家供给不足 | 低代码/No-Code 数据开发平台 |
 | 数据治理 | 元数据缺失、血缘不清、标准不统一 | 元数据管理 + 数据血缘 + 标准体系 |
 
-#<!-- chunk: 1.3 市场格局 -->## 1.3 市场格局
+## 1.3 市场格局
 
 数据中台市场可分为三类参与者：云厂商（阿里云 DataWorks + MaxCompute 体系、AWS、GCP）、专业数据平台厂商（Snowflake、Databricks、Palantir）、行业解决方案商（面向金融/制造/零售等行业定制）。中国市场以阿里云体系为主流选择，DataWorks 作为数据开发治理平台，配合 MaxCompute（离线）、Hologres（实时）、Flink（流计算）组成完整的数据中台技术栈。
 
@@ -149,23 +149,23 @@ k8s_versions:
 
 <!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-#<!-- chunk: 2.1 数据采集与接入 -->## 2.1 数据采集与接入
+## 2.1 数据采集与接入
 
 数据采集是数据中台的起点，需要覆盖多种数据源和多种接入模式。批量采集（DataX/Sqoop）用于历史数据迁移和定期全量同步；实时采集（Flink CDC/Canal）用于数据库变更数据的实时捕获；日志采集（[[Fluentd|Fluentd]]/Logstash/Beats）用于应用日志和服务器日志的实时采集；消息接入（Kafka/RocketMQ）用于业务事件的流式接入。数据接入层需要提供统一的 schema 管理和数据格式标准化。
 
-#<!-- chunk: 2.2 数据存储与计算 -->## 2.2 数据存储与计算
+## 2.2 数据存储与计算
 
 湖仓一体（Lakehouse）是数据中台的存储计算核心。数据分层模型：ODS（原始数据层，保持原始格式）→ DWD（明细数据层，清洗标准化后的事实数据）→ DWS（汇总数据层，面向主题的宽表聚合）→ ADS（应用数据层，面向业务应用的指标数据）。计算引擎包括离线批处理（Spark/MaxCompute）和实时流处理（Flink），通过统一元数据层实现流批一体的查询体验。
 
-#<!-- chunk: 2.3 数据治理 -->## 2.3 数据治理
+## 2.3 数据治理
 
 数据治理是保障数据资产质量的管理体系。核心功能包括：元数据管理（数据地图，自动发现和注册数据表的元信息）、数据血缘（SQL 解析追踪数据从源到端的流转链路）、数据质量（规则引擎自动检测数据的完整性/准确性/一致性/时效性）、数据标准（统一的命名规范/编码规范/指标口径）、数据安全（敏感数据识别/脱敏/加密/访问控制）。
 
-#<!-- chunk: 2.4 数据服务化 -->## 2.4 数据服务化
+## 2.4 数据服务化
 
 数据服务化（Data API）将数据中台的数据能力封装为标准 API 接口，供业务系统直接调用。场景包括：实时查询接口（用户画像查询、商品推荐特征获取）、批量导出接口（报表数据下载）、数据订阅接口（数据变更事件推送）。数据 API 需要统一网关管理，提供认证鉴权、限流熔断、版本管理、调用审计等能力。
 
-#<!-- chunk: 2.5 BI 分析与可视化 -->## 2.5 BI 分析与可视化
+## 2.5 BI 分析与可视化
 
 BI 分析是数据中台的终端消费场景。功能包括：自助式数据分析（拖拽式报表构建）、数据大屏（DataV 可视化）、固定报表（定期生成的经营分析报表）、即席查询（Ad-hoc SQL 分析）、移动端看板（管理者手机端查看关键指标）。BI 层需要与数据中台的 ADS 层紧密对接，保证数据的实时性和准确性。
 
@@ -173,7 +173,7 @@ BI 分析是数据中台的终端消费场景。功能包括：自助式数据�
 
 <!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-#<!-- chunk: 3.1 数据中台全景架构 -->## 3.1 数据中台全景架构
+## 3.1 数据中台全景架构
 
 ```mermaid
 flowchart TB
@@ -232,7 +232,7 @@ flowchart TB
     style Governance fill:#ffebee
 ```
 
-#<!-- chunk: 3.2 实时数仓架构 -->## 3.2 实时数仓架构
+## 3.2 实时数仓架构
 
 ```mermaid
 flowchart LR
@@ -246,7 +246,7 @@ flowchart LR
     F --> I[离线分析/报表]
 ```
 
-#<!-- chunk: 3.3 数据治理闭环 -->## 3.3 数据治理闭环
+## 3.3 数据治理闭环
 
 ```mermaid
 flowchart LR
@@ -281,7 +281,7 @@ flowchart LR
 
 <!-- chunk: 5. K8s 部署方案 -->## 5. K8s 部署方案
 
-#<!-- chunk: 5.1 Flink on ACK 实时计算 -->## 5.1 Flink on ACK 实时计算
+## 5.1 Flink on ACK 实时计算
 
 ```yaml
 apiVersion: flink.apache.org/v1beta1
@@ -326,7 +326,7 @@ spec:
       - "60000"
 ```
 
-#<!-- chunk: 5.2 Spark on K8s 离线任务 -->## 5.2 Spark on K8s 离线任务
+## 5.2 Spark on K8s 离线任务
 
 ```yaml
 apiVersion: sparkoperator.k8s.io/v1beta2
@@ -356,7 +356,7 @@ spec:
     - "oss://data-warehouse/dws/daily/"
 ```
 
-#<!-- chunk: 5.3 Data API 网关服务 -->## 5.3 Data API 网关服务
+## 5.3 Data API 网关服务
 
 ```yaml
 apiVersion: apps/v1
@@ -413,7 +413,7 @@ spec:
 
 <!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-#<!-- chunk: 6.1 数据分层模型 -->## 6.1 数据分层模型
+## 6.1 数据分层模型
 
 ```mermaid
 flowchart TB
@@ -443,7 +443,7 @@ flowchart TB
     ODS --> DWD --> DWS --> ADS
 ```
 
-#<!-- chunk: 6.2 存储策略 -->## 6.2 存储策略
+## 6.2 存储策略
 
 | 数据层 | 存储引擎 | 格式 | 保留策略 | 访问模式 |
 |:---|:---|:---|:---|:---|
@@ -468,7 +468,7 @@ flowchart TB
 
 <!-- chunk: 8. 安全合规 -->## 8. 安全合规
 
-#<!-- chunk: 8.1 数据安全体系 -->## 8.1 数据安全体系
+## 8.1 数据安全体系
 
 | 安全层级 | 措施 | 技术实现 |
 |:---|:---|:---|
@@ -479,7 +479,7 @@ flowchart TB
 | 审计追踪 | 全链路操作审计 | SLS 审计日志 + 不可篡改 |
 | 隐私计算 | 联邦学习/安全多方计算 | MPC + TEE + 差分隐私 |
 
-#<!-- chunk: 8.2 合规框架 -->## 8.2 合规框架
+## 8.2 合规框架
 
 - **数据安全法**: 数据分类分级保护，重要数据目录管理
 - **个人信息保护法**: 个人信息最小化采集，脱敏处理，用户授权管理
@@ -501,19 +501,19 @@ flowchart TB
 
 <!-- chunk: 10. 反模式 -->## 10. 反模式
 
-#<!-- chunk: 10.1 数据沼泽 -->## 10.1 数据沼泽
+## 10.1 数据沼泽
 
 将所有数据倒入数据湖不做治理，数据湖变成无法使用的沼泽。
 
 **解决方案**: 建立严格的数据接入规范和元数据管理制度，数据入湖前必须注册元数据、定义 schema、配置质量规则。
 
-#<!-- chunk: 10.2 过度批处理 -->## 10.2 过度批处理
+## 10.2 过度批处理
 
 所有数据处理都走 T+1 批处理，无法满足业务实时需求。
 
 **解决方案**: 评估业务时效性需求，对实时性要求高的场景（风控/推荐/监控）采用 Flink 实时计算，保持批处理用于历史分析和报表。
 
-#<!-- chunk: 10.3 忽视数据质量 -->## 10.3 忽视数据质量
+## 10.3 忽视数据质量
 
 只关注数据量不关注数据质量，脏数据影响下游分析准确性。
 
@@ -523,7 +523,7 @@ flowchart TB
 
 <!-- chunk: 11. 参考资源 -->## 11. 参考资源
 
-#<!-- chunk: 11.1 阿里云组件映射 -->## 11.1 阿里云组件映射
+## 11.1 阿里云组件映射
 
 | 架构层 | 阿里云方案 | 说明 |
 |:---|:---|:---|
@@ -539,7 +539,7 @@ flowchart TB
 | 容器平台 | **ACK Pro** | 计算任务调度 |
 | 可观测性 | **ARMS + SLS** | 全链路监控 |
 
-#<!-- chunk: 11.2 生产检查清单 -->## 11.2 生产检查清单
+## 11.2 生产检查清单
 
 - [ ] 数据接入完整性验证（源端 vs 目标端数据量对比）
 - [ ] 数据质量规则覆盖率 > 80%
@@ -559,17 +559,17 @@ flowchart TB
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

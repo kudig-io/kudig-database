@@ -97,7 +97,7 @@ This document provides comprehensive exploration of Loggly cloud log management 
 
 <!-- chunk: 1. Loggly Enterprise Architecture -->## 1. Loggly Enterprise Architecture
 
-#<!-- chunk: 1.1 Core Platform Components -->## 1.1 Core Platform Components
+## 1.1 Core Platform Components
 
 ```mermaid
 graph TB
@@ -169,7 +169,7 @@ graph TB
     X --> Y
 ```
 
-#<!-- chunk: 1.2 Enterprise Deployment Patterns -->## 1.2 Enterprise Deployment Patterns
+## 1.2 Enterprise Deployment Patterns
 
 ```yaml
 loggly_enterprise_patterns:
@@ -216,7 +216,10 @@ loggly_enterprise_patterns:
 
 <!-- chunk: 2. Advanced Log Ingestion Configuration -->## 2. Advanced Log Ingestion Configuration
 
-#<!-- chunk: 2.1 Rsyslog Integration Setup -->## 2.1 Rsyslog Integration Setup
+## 2.1 Rsyslog Integration Setup
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -256,7 +259,7 @@ sudo systemctl enable rsyslog
 logger "Test message sent to Loggly at $(date)"
 ```
 
-#<!-- chunk: 2.2 Docker Logging Driver Configuration -->## 2.2 Docker Logging Driver Configuration
+## 2.2 Docker Logging Driver Configuration
 
 ```json
 {
@@ -274,7 +277,7 @@ logger "Test message sent to Loggly at $(date)"
 }
 ```
 
-#<!-- chunk: 2.3 Fluentd Plugin Configuration -->## 2.3 Fluentd Plugin Configuration
+## 2.3 Fluentd Plugin Configuration
 
 ```ruby
 # fluentd_loggly.conf
@@ -328,7 +331,7 @@ logger "Test message sent to Loggly at $(date)"
 
 <!-- chunk: 3. Advanced Search and Analytics -->## 3. Advanced Search and Analytics
 
-#<!-- chunk: 3.1 Loggly Query Language Examples -->## 3.1 Loggly Query Language Examples
+## 3.1 Loggly Query Language Examples
 
 ```sql
 -- 高级搜索查询示例
@@ -384,7 +387,7 @@ tag:business* AND event_type:"TRANSACTION"
 | sort total_revenue desc
 ```
 
-#<!-- chunk: 3.2 Custom Dashboard Configuration -->## 3.2 Custom Dashboard Configuration
+## 3.2 Custom Dashboard Configuration
 
 ```json
 {
@@ -460,7 +463,7 @@ tag:business* AND event_type:"TRANSACTION"
 
 <!-- chunk: 4. Alerting and Notification System -->## 4. Alerting and Notification System
 
-#<!-- chunk: 4.1 Advanced Alert Configuration -->## 4.1 Advanced Alert Configuration
+## 4.1 Advanced Alert Configuration
 
 ```json
 {
@@ -491,7 +494,7 @@ tag:business* AND event_type:"TRANSACTION"
         },
         {
           "type": "pagerduty",
-          "service_key": "YOUR_PAGERDUTY_SERVICE_KEY",
+          "routing_key": "YOUR_PAGERDUTY_SERVICE_KEY",
           "incident_key": "db_connection_pool_{{host}}"
         }
       ]
@@ -528,7 +531,7 @@ tag:business* AND event_type:"TRANSACTION"
 }
 ```
 
-#<!-- chunk: 4.2 Webhook Integration Examples -->## 4.2 Webhook Integration Examples
+## 4.2 Webhook Integration Examples
 
 ```python
 #!/usr/bin/env python3
@@ -641,7 +644,7 @@ if __name__ == '__main__':
 
 <!-- chunk: 5. Performance Optimization -->## 5. Performance Optimization
 
-#<!-- chunk: 5.1 Tag Management Best Practices -->## 5.1 Tag Management Best Practices
+## 5.1 Tag Management Best Practices
 
 ```bash
 #!/bin/bash
@@ -706,7 +709,7 @@ analyze_tag_usage() {
 }
 ```
 
-#<!-- chunk: 5.2 Search Performance Optimization -->## 5.2 Search Performance Optimization
+## 5.2 Search Performance Optimization
 
 ```sql
 -- 搜索性能优化查询
@@ -755,7 +758,7 @@ tag:system* metric:"cpu_usage"
 
 <!-- chunk: 6. Integration and Automation -->## 6. Integration and Automation
 
-#<!-- chunk: 6.1 Terraform Integration -->## 6.1 Terraform Integration
+## 6.1 Terraform Integration
 
 ```hcl
 # loggly_terraform.tf
@@ -857,7 +860,7 @@ resource "loggly_dashboard" "operations_overview" {
 }
 ```
 
-#<!-- chunk: 6.2 CI/CD Pipeline Integration -->## 6.2 CI/CD Pipeline Integration
+## 6.2 CI/CD Pipeline Integration
 
 ```yaml
 # .github/workflows/loggly-deployment-tracking.yml
@@ -921,7 +924,7 @@ jobs:
 
 <!-- chunk: 7. Security and Compliance -->## 7. Security and Compliance
 
-#<!-- chunk: 7.1 Data Protection Configuration -->## 7.1 Data Protection Configuration
+## 7.1 Data Protection Configuration
 
 ```json
 {
@@ -982,7 +985,7 @@ jobs:
 }
 ```
 
-#<!-- chunk: 7.2 Compliance Reporting -->## 7.2 Compliance Reporting
+## 7.2 Compliance Reporting
 
 ```sql
 -- 合规性报告查询
@@ -1023,8 +1026,8 @@ tag:application* contains:"personal_data"
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-21-logging-management-analytics MOC
-- [[domain-06-observability/README|Domain 21: 日志管理与分析 (Logging Management & Analytics)]]
-- [[domain-06-observability/00-open-source-projects-index|Domain-21 日志管理与分析 — 开源项目索引]]
+- [[domain-06-observability/README.md|Domain 06: 日志管理与分析 (Logging Management & Analytics)]]
+- [[domain-06-observability/00-open-source-projects-index.md|Domain-21 日志管理与分析 — 开源项目索引]]
 - ELK Stack企业级日志管理系统深度实践
 - Fluentd企业级日志收集与处理深度实践
 - Loki Enterprise Log Aggregation and Analytics Platform
@@ -1041,4 +1044,4 @@ tag:application* contains:"personal_data"
 - 01-elk-stack-enterprise-logging
 - 02-fluentd-enterprise-log-processing
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]

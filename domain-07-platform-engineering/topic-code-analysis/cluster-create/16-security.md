@@ -1,5 +1,5 @@
 ---
-title: 安全机制: ServiceAccount Token 与 Audit [cluster-create]
+title: "安全机制: ServiceAccount Token 与 Audit [cluster-create]"
 description: 'title: ''安全机制: ServiceAccount Token 与 Audit'''
 category: general
 tags:
@@ -180,6 +180,9 @@ spec:
 
 ## TokenRequest API
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 手动创建有期限的 ServiceAccount Token
 kubectl create token <serviceaccount-name> --duration=1h
@@ -329,13 +332,10 @@ NodeRestriction 限制 kubelet 的操作:
 # API Server 启动参数控制访问:
 --anonymous-auth=false       # 禁用匿名访问
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 --enable-admission-plugins=NodeRestriction,PodSecurityPolicy
 --encryption-provider-config # 加密存储
 --audit-policy-file          # 审计日志
+
 ```
 
 ---
@@ -353,7 +353,9 @@ NodeRestriction 限制 kubelet 的操作:
 ## Related
 
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/configuration/secrets|secrets]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/configuration/secrets.md|secrets]]
+
+```

@@ -70,9 +70,9 @@ created: "2026-05-23"
 | 文件 | 大小 | 覆盖范围 | 底事件数 |
 |:---|---:|:---|:---:|
 | [pod-fta.md](pod-fta.md) | 58.8 KB | Pod 全生命周期异常（调度/镜像/运行时/健康检查/网络/存储/安全/节点/控制面） | ~80 |
-| [deployment-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta|deployment-fta]].md) | 21.4 KB | Deployment 滚动更新/副本管理/选择器/镜像拉取 | ~25 |
-| [statefulset-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta|statefulset-fta]].md) | 20.8 KB | [[StatefulSet|StatefulSet]] 有序部署/持久卷/网络标识/扩缩容 | ~24 |
-| [daemonset-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/daemonset-fta|daemonset-fta]].md) | 29.9 KB | [[DaemonSet|DaemonSet]] 节点调度/污点容忍/滚动更新/资源竞争 | ~35 |
+| [deployment-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md|deployment-fta]].md) | 21.4 KB | Deployment 滚动更新/副本管理/选择器/镜像拉取 | ~25 |
+| [statefulset-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta.md|statefulset-fta]].md) | 20.8 KB | [[StatefulSet|StatefulSet]] 有序部署/持久卷/网络标识/扩缩容 | ~24 |
+| [daemonset-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/daemonset-fta.md|daemonset-fta]].md) | 29.9 KB | [[DaemonSet|DaemonSet]] 节点调度/污点容忍/滚动更新/资源竞争 | ~35 |
 | [job-cronjob-fta.md](job-cronjob-fta.md) | 28.8 KB | Job/CronJob 调度/并发/完成策略/超时/时区 | ~32 |
 
 ### 2. 网络与流量
@@ -81,10 +81,10 @@ created: "2026-05-23"
 |:---|---:|:---|:---:|
 | [dns-fta.md](dns-fta.md) | 24.2 KB | CoreDNS/集群 DNS/外部 DNS 解析/缓存/NXDOMAIN | ~28 |
 | [service-fta.md](service-fta.md) | 25.9 KB | Service 类型/Endpoints/kube-proxy/负载均衡/会话亲和 | ~30 |
-| [ingress-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta|ingress-fta]].md) | 26.3 KB | Ingress Controller/TLS 终止/路由/后端健康/注解 | ~30 |
-| [networkpolicy-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta|networkpolicy-fta]].md) | 21.7 KB | NetworkPolicy 入站/出站/选择器/CNI 支持/调试 | ~25 |
-| [gateway-api-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/gateway-api-fta|gateway-api-fta]].md) | 24.1 KB | Gateway API/HTTPRoute/GRPCRoute/TLSRoute/ReferenceGrant | ~28 |
-| [terway-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/terway-fta|terway-fta]].md) | 16.8 KB | Terway ENI/IP 池/VPC 路由/安全组/控制面依赖 | ~20 |
+| [ingress-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|ingress-fta]].md) | 26.3 KB | Ingress Controller/TLS 终止/路由/后端健康/注解 | ~30 |
+| [networkpolicy-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta.md|networkpolicy-fta]].md) | 21.7 KB | NetworkPolicy 入站/出站/选择器/CNI 支持/调试 | ~25 |
+| [gateway-api-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/gateway-api-fta.md|gateway-api-fta]].md) | 24.1 KB | Gateway API/HTTPRoute/GRPCRoute/TLSRoute/ReferenceGrant | ~28 |
+| [terway-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/terway-fta.md|terway-fta]].md) | 16.8 KB | Terway ENI/IP 池/VPC 路由/安全组/控制面依赖 | ~20 |
 
 ### 3. 控制面组件
 
@@ -92,7 +92,7 @@ created: "2026-05-23"
 |:---|---:|:---|:---:|
 | [apiserver-fta.md](apiserver-fta.md) | 36.1 KB | API Server 认证/授权/准入/etcd 连接/限流/审计 | ~42 |
 | [scheduler-fta.md](scheduler-fta.md) | 30.3 KB | Scheduler 过滤/打分/抢占/亲和性/资源/扩展点 | ~35 |
-| [controller-manager-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta|controller-manager-fta]].md) | 29.4 KB | Controller Manager Leader 选举/控制器/同步/限速 | ~34 |
+| [controller-manager-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta.md|controller-manager-fta]].md) | 29.4 KB | Controller Manager Leader 选举/控制器/同步/限速 | ~34 |
 | [etcd-fta.md](etcd-fta.md) | 27.4 KB | etcd 集群/Raft/存储/快照/认证/性能 | ~32 |
 
 ### 4. 存储
@@ -120,8 +120,8 @@ created: "2026-05-23"
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine|FTA 诊断执行引擎]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 
 ## Related
 
@@ -131,72 +131,72 @@ created: "2026-05-23"
 - [[psp-scc-fta]] — PSP/SCC 异常故障树分析
 - [[nodepool-fta]] — NodePool 异常故障树分析
 
-- [[domain-17-system-foundation/README|Domain-33: Kubernetes Events 全域事件大全]]
-- [[domain-02-workloads-applications/README|Java on Kubernetes 综合实践指南]]
-- [[domain-13-container-runtime/README|Docker 容器技术深度解析]]
-- [[domain-05-security-compliance/README|Domain 39: 供应链安全 (Supply Chain Security)]]
-- [[domain-08-release-change-management/README|Domain 24: 基础设施即代码 (Infrastructure as Code)]]
-- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microservices Governance)]]
-- [[domain-08-release-change-management/README|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers and Best Practices)]]
-- [[domain-03-networking-traffic/README|Domain-15: 网络基础]]
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
-- [[domain-07-platform-engineering/README|Domain 36: 平台工程 (Platform Engineering)]]
-- [[domain-06-observability/README|Observability Domain (可观测性领域)]]
-- [[domain-12-cloud-providers/README|Domain-17: 云厂商Kubernetes服务企业级深度指南]]
-- [[domain-19-landscape-references/README|Domain-34: CNCF Landscape 开源项目]]
-- [[domain-07-platform-engineering/README|Platform Ops Domain (平台运维领域)]]
-- [[domain-14-ai-ml-infra/README|AI Agent 工程专题]]
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
+- [[domain-02-workloads-applications/README.md|Java on Kubernetes 综合实践指南]]
+- [[domain-13-container-runtime/README.md|Docker 容器技术深度解析]]
+- [[domain-05-security-compliance/README.md|Domain 05: 供应链安全 (Supply Chain Security)]]
+- [[domain-08-release-change-management/README.md|Domain 08: 基础设施即代码 (Infrastructure as Code)]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microservices Governance)]]
+- [[domain-08-release-change-management/README.md|Domain 08: GitOps与CI/CD (GitOps & CI/CD)]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers and Best Practices)]]
+- [[domain-03-networking-traffic/README.md|Domain-15: 网络基础]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
+- [[domain-07-platform-engineering/README.md|Domain 07: 平台工程 (Platform Engineering)]]
+- [[domain-06-observability/README.md|Observability Domain (可观测性领域)]]
+- [[domain-12-cloud-providers/README.md|Domain-17: 云厂商Kubernetes服务企业级深度指南]]
+- [[domain-19-landscape-references/README.md|Domain-34: CNCF Landscape 开源项目]]
+- [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
+- [[domain-14-ai-ml-infra/README.md|AI Agent 工程专题]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - README-old
-- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
-- [[domain-06-observability/README|Domain 21: 日志管理与分析 (Logging Management & Analytics)]]
-- [[domain-06-observability/README|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
-- [[domain-17-system-foundation/README|Domain-14: Linux 基础知识体系]]
-- [[domain-01-cluster-fundamentals/README|Domain-2: Kubernetes 设计原则与核心机制]]
-- [[domain-15-specialized-tech/README|Domain 37: 边缘计算 (Edge Computing)]]
-- [[domain-20-application-patterns/README|Topic 应用层架构设计最佳实践]]
-- [[domain-04-storage-data/README|Storage Domain 存储领域知识库]]
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
-- [[domain-04-storage-data/README|Domain-16: 存储基础]]
-- [[domain-09-reliability-engineering/README|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]]
-- [[domain-16-database-middleware/README|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Operations)]]
-- [[domain-01-cluster-fundamentals/README|Domain-1: Kubernetes架构基础]]
-- [[domain-05-security-compliance/README|Security Domain]]
-- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
-- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
-- [[domain-10-troubleshooting-diagnostics/README|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-12-cloud-providers/README|Domain 27: 多云与混合云架构管理]]
-- [[domain-13-container-runtime/README|Domain 22: 容器镜像管理 (Container Image Management)]]
-- [[domain-03-networking-traffic/README|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technology Stack)]]
-- [[domain-03-networking-traffic/README|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
-- [[domain-15-specialized-tech/README|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
-- [[domain-08-release-change-management/README|Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance)]]
-- [[domain-17-system-foundation/README|Domain 31 - 硬件基础设施]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm/README|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
-- [[domain-10-troubleshooting-diagnostics/tools/README|Domain-12 故障排查工具套件使用说明]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README|Kubernetes 结构化故障排查知识库]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/README|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/README|FTA 故障树清单索引]]
+- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
+- [[domain-06-observability/README.md|Domain 06: 日志管理与分析 (Logging Management & Analytics)]]
+- [[domain-06-observability/README.md|Domain 06: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
+- [[domain-17-system-foundation/README.md|Domain-14: Linux 基础知识体系]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
+- [[domain-15-specialized-tech/README.md|Domain 15: 边缘计算 (Edge Computing)]]
+- [[domain-20-application-patterns/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-04-storage-data/README.md|Storage Domain 存储领域知识库]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
+- [[domain-04-storage-data/README.md|Domain-16: 存储基础]]
+- [[domain-09-reliability-engineering/README.md|Domain 09: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]]
+- [[domain-16-database-middleware/README.md|Domain 16: 企业级数据库与中间件运维 (Enterprise Database & Middleware Operations)]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
+- [[domain-05-security-compliance/README.md|Security Domain]]
+- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
+- [[domain-05-security-compliance/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
+- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
+- [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
+- [[domain-12-cloud-providers/README.md|Domain 12: 多云与混合云架构管理]]
+- [[domain-13-container-runtime/README.md|Domain 13: 容器镜像管理 (Container Image Management)]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technology Stack)]]
+- [[domain-03-networking-traffic/README.md|Domain 03: eBPF 技术体系 (eBPF Technology Stack)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: WebAssembly 云原生 (WebAssembly Cloud Native)]]
+- [[domain-08-release-change-management/README.md|Domain 08: 自动化测试与质量保障 (Automated Testing & Quality Assurance)]]
+- [[domain-17-system-foundation/README.md|Domain 31 - 硬件基础设施]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
+- [[domain-10-troubleshooting-diagnostics/tools/README.md|Domain-12 故障排查工具套件使用说明]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md|Kubernetes 结构化故障排查知识库]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/README.md|FTA 故障树清单索引]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
+- [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
+- [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
-- [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
+- [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]

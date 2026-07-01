@@ -68,7 +68,7 @@ Java 应用在 Kubernetes 上的安全加固涉及多个层面：容器运行时
 
 Java 应用在 Kubernetes 上面临的安全挑战与其他语言有所不同。首先是 JVM 的内存管理——JVM 默认不感知容器的内存限制，可能使用超过容器限制的内存导致 OOMKilled。其次是 Java 的 KeyStore/TrustStore 机制——Java 应用使用 JKS/PKCS12 格式的密钥库，而不是原生的文件证书，需要额外的转换步骤。第三是 Java 生态的复杂依赖——一个 Spring Boot 应用可能包含数百个传递依赖，每个依赖都可能包含已知漏洞。第四是 SecurityManager 的弃用——传统的 Java 安全管理器将逐步移除，需要依赖平台级的安全控制。
 
-#<!-- chunk: 威胁模型分析 -->## 威胁模型分析
+## 威胁模型分析
 
 **容器逃逸**：以 root 用户运行的 Java 容器一旦被入侵，攻击者可利用容器配置缺陷获取宿主机控制权。Java 进程通常不需要 root 权限——它只需要监听高端口（>1024）、读写应用目录和临时目录。以 root 运行的风险在于，攻击者可以利用特权模式或危险 capabilities 实现容器逃逸，获取宿主机的完全控制权。即使应用代码本身没有漏洞，以 root 运行的容器也可能被利用 Java 进程的漏洞（如反序列化漏洞、JNDI 注入）实现代码执行，进而利用容器配置缺陷逃逸。
 
@@ -95,7 +95,7 @@ Java 应用在 Kubernetes 上面临的安全挑战与其他语言有所不同。
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: Java 应用 Kubernetes 安全架构 -->## Java 应用 Kubernetes 安全架构
+## Java 应用 Kubernetes 安全架构
 
 ```mermaid
 graph TB
@@ -141,7 +141,7 @@ graph TB
     end
 ```
 
-#<!-- chunk: SecurityManager 弃用说明 -->## SecurityManager 弃用说明
+## SecurityManager 弃用说明
 
 JDK 21 中 SecurityManager 已标记为弃用（JEP 411），将在未来版本移除。在 Kubernetes 环境下，以下平台级机制替代了 SecurityManager 的功能：
 
@@ -156,7 +156,7 @@ JDK 21 中 SecurityManager 已标记为弃用（JEP 411），将在未来版本�
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: SecurityContext 完整配置 -->## SecurityContext 完整配置
+## SecurityContext 完整配置
 
 ```yaml
 apiVersion: apps/v1
@@ -322,7 +322,7 @@ spec:
               secretProviderClass: vault-spring-app
 ```
 
-#<!-- chunk: Pod Security Standards 实施 -->## Pod Security Standards 实施
+## Pod Security Standards 实施
 
 ```yaml
 apiVersion: v1
@@ -336,7 +336,7 @@ metadata:
     pod-security.kubernetes.io/warn: restricted
 ```
 
-#<!-- chunk: Kyverno 策略: 强制 Java 安全基线 -->## Kyverno 策略: 强制 Java 安全基线
+## Kyverno 策略: 强制 Java 安全基线
 
 ```yaml
 apiVersion: kyverno.io/v1
@@ -432,7 +432,7 @@ spec:
 
 <!-- chunk: 安全策略实战 -->## 安全策略实战
 
-#<!-- chunk: 密钥与证书管理 -->## 密钥与证书管理
+## 密钥与证书管理
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -477,7 +477,7 @@ spec:
         secretKey: "secretKey"
 ```
 
-#<!-- chunk: Spring Security 集成 -->## Spring Security 集成
+## Spring Security 集成
 
 ```java
 @Configuration
@@ -565,7 +565,7 @@ logging:
     org.springframework.security: WARN
 ```
 
-#<!-- chunk: 依赖安全与 SBOM -->## 依赖安全与 SBOM
+## 依赖安全与 SBOM
 
 ```bash
 #!/bin/bash
@@ -654,7 +654,7 @@ spec:
         - /workspace/output/sbom.json
 ```
 
-#<!-- chunk: 安全编码实践 -->## 安全编码实践
+## 安全编码实践
 
 ```java
 @RestController
@@ -709,7 +709,7 @@ public class OrderRepository {
 }
 ```
 
-#<!-- chunk: 网络安全策略 -->## 网络安全策略
+## 网络安全策略
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -775,7 +775,7 @@ spec:
 
 <!-- chunk: 合规与审计 -->## 合规与审计
 
-#<!-- chunk: K8s 审计策略 -->## K8s 审计策略
+## K8s 审计策略
 
 ```yaml
 apiVersion: audit.k8s.io/v1
@@ -804,7 +804,7 @@ rules:
     verbs: ["create", "update", "delete"]
 ```
 
-#<!-- chunk: 安全检查清单 -->## 安全检查清单
+## 安全检查清单
 
 | 类别 | 检查项 | 命令/方法 | 优先级 |
 |:---|:---|:---|:---|
@@ -831,7 +831,7 @@ rules:
 | **监控** | 健康检查探针 | Liveness/Readiness | P1 |
 | **监控** | 安全告警 | Prometheus Rules | P1 |
 
-#<!-- chunk: CIS Benchmark 检查 -->## CIS Benchmark 检查
+## CIS Benchmark 检查
 
 ```bash
 #!/bin/bash
@@ -975,7 +975,7 @@ spec:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: Dockerfile 安全 -->## Dockerfile 安全
+## Dockerfile 安全
 
 ```dockerfile
 FROM eclipse-temurin:21-jre-alpine AS builder
@@ -991,7 +991,7 @@ HEALTHCHECK --interval=10s --timeout=3s CMD ["/usr/bin/java", "-cp", "app.jar", 
 ENTRYPOINT ["java", "-jar", "app.jar"]
 ```
 
-#<!-- chunk: JVM 内存配置最佳实践 -->## JVM 内存配置最佳实践
+## JVM 内存配置最佳实践
 
 | 配置 | 说明 | 推荐值 |
 |:---|:---|:---|
@@ -1003,7 +1003,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 | InitialRAMPercentage | 初始堆内存百分比 | 50.0 |
 | ThreadStackSize | 线程栈大小 | 默认（通常不需要调整） |
 
-#<!-- chunk: 持续安全扫描 -->## 持续安全扫描
+## 持续安全扫描
 
 在 CI/CD 管道的每个阶段嵌入安全扫描：代码提交时进行静态分析（SpotBugs、OWASP Dependency-Check），构建时生成 SBOM 并扫描漏洞，部署前验证镜像签名，运行时持续监控异常行为。
 
@@ -1021,7 +1021,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题 -->## 常见问题
+## 常见问题
 
 **OOMKilled**：Java 容器的堆内存超过容器内存限制。使用 `-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0` 替代固定 `-Xmx` 参数，确保 JVM 感知容器内存限制。避免使用 `-Xmx` 固定堆大小，因为当容器 limits 变化时需要同步修改 JVM 参数。如果使用 MaxRAMPercentage=75.0 仍然 OOM，可能是非堆内存（Metaspace、线程栈、直接内存）过多，需要分别限制。
 
@@ -1033,7 +1033,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 **JVM 僵死（无响应）**：可能是 Full GC 导致的 Stop-The-World。检查 GC 日志确认是否有长时间的 Full GC。考虑使用 G1GC 或 ZGC 减少停顿时间。如果是内存泄漏导致，需要分析堆转储定位泄漏对象。
 
-#<!-- chunk: 完整诊断脚本 -->## 完整诊断脚本
+## 完整诊断脚本
 
 ```bash
 #!/bin/bash
@@ -1098,8 +1098,8 @@ kubectl get pods -n production -o json | \
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
@@ -1117,4 +1117,4 @@ kubectl get pods -n production -o json | \
 - 99-kyverno-policy-guide
 - 99-opa-gatekeeper-policy-guide
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

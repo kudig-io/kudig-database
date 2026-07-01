@@ -220,4 +220,10 @@ kubectl get pod <pod-name> -n prod -o jsonpath='{.status.conditions[?(@.type=="I
 - [Pod 综合故障排查手册](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
 
 ## 参考链接
-- https://[[entities/kubernetes|[[Kubernetes|kubernetes]]]].io/docs/concepts/workloads/pods/init-containers/
+- https://[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]].io/docs/concepts/workloads/pods/init-containers/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]

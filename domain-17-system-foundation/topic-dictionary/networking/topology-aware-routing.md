@@ -40,7 +40,7 @@ created: "2026-05-23"
 
 ## 关键机制或特性
 
-- **启用方式**：通过在 Service 上添加注解 `service.[[entities/kubernetes|[[Kubernetes|kubernetes]]]].io/topology-mode: Auto` 开启。在 Kubernetes 1.27 之前，使用旧注解 `service.kubernetes.io/topology-aware-hints`。
+- **启用方式**：通过在 Service 上添加注解 `service.[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]].io/topology-mode: Auto` 开启。在 Kubernetes 1.27 之前，使用旧注解 `service.kubernetes.io/topology-aware-hints`。
 - **保护机制（Safeguards）**：当以下任一条件不满足时，系统会回退到全集群范围的路由，避免流量不均衡或黑洞：
   1. 端点数量少于集群 zone 数量。
   2. 无法在各区之间实现可接受的均衡分配（预期过载值超过阈值）。
@@ -156,11 +156,17 @@ kubectl get svc <name> -o jsonpath='{.metadata.annotations}'
 
 ## 交叉引用
 
-- [[domain-17-system-foundation/topic-dictionary/networking/service-internal-traffic-policy|Service Internal Traffic Policy]]](service-internal-traffic-policy.md) — 节点本地路由（互斥特性）
-- [[domain-17-system-foundation/topic-dictionary/networking/endpointslices|EndpointSlices]]](endpointslices.md) — hints 字段和 zone 信息
+- [[domain-17-system-foundation/topic-dictionary/networking/service-internal-traffic-policy.md|Service Internal Traffic Policy]]](service-internal-traffic-policy.md) — 节点本地路由（互斥特性）
+- [[domain-17-system-foundation/topic-dictionary/networking/endpointslices.md|EndpointSlices]]](endpointslices.md) — hints 字段和 zone 信息
 - [Service](service.md) — trafficDistribution 字段
 - [Cluster Networking](cluster-networking.md) — 跨可用区流量优化
 
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/services-networking/topology-aware-routing/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
+- [[domain-17-system-foundation/topic-dictionary/networking/akri.md|Akri 边缘设备发现]]
+- [[domain-17-system-foundation/topic-dictionary/networking/antrea.md|Antrea 网络方案]]

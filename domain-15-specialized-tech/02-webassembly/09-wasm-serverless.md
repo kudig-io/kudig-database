@@ -63,8 +63,8 @@ created: "2026-05-23"
 
 1. [Wasm Serverless 架构概述](#1-wasm-serverless-架构概述)
 2. [冷启动优化原理](#2-冷启动优化原理)
-3. [[entities/spin|Spin]] 框架详解](#3-spin-框架详解)
-4. [[entities/wasmcloud|wasmCloud]]ud 平台|wasmCloud 平台]]](#4-wasmcloud-平台)
+3. [[entities/spin.md|Spin]] 框架详解](#3-spin-框架详解)
+4. [[entities/wasmcloud.md|wasmCloud]]ud 平台|wasmCloud 平台]]](#4-wasmcloud-平台)
 5. [Fermyon Cloud 部署](#5-fermyon-cloud-部署)
 6. [事件触发器系统](#6-事件触发器系统)
 7. [Scale-to-Zero 实现](#7-scale-to-zero-实现)
@@ -80,7 +80,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. Wasm Serverless 架构概述 -->## 1. Wasm Serverless 架构概述
 
-#<!-- chunk: 1.1 传统 Serverless 的局限 -->## 1.1 传统 Serverless 的局限
+## 1.1 传统 Serverless 的局限
 
 ```mermaid
 graph LR
@@ -107,7 +107,7 @@ graph LR
     WasmFaaS --> Portable
 ```
 
-#<!-- chunk: 1.2 Wasm Serverless 生态全景 -->## 1.2 Wasm Serverless 生态全景
+## 1.2 Wasm Serverless 生态全景
 
 ```mermaid
 graph TB
@@ -148,7 +148,7 @@ graph TB
     CloudflareWorkers --> V8
 ```
 
-#<!-- chunk: 1.3 核心技术指标对比 -->## 1.3 核心技术指标对比
+## 1.3 核心技术指标对比
 
 ```
 Serverless 平台对比（2025年）：
@@ -170,7 +170,7 @@ Serverless 平台对比（2025年）：
 
 <!-- chunk: 2. 冷启动优化原理 -->## 2. 冷启动优化原理
 
-#<!-- chunk: 2.1 传统容器 vs Wasm 冷启动 -->## 2.1 传统容器 vs Wasm 冷启动
+## 2.1 传统容器 vs Wasm 冷启动
 
 ```mermaid
 graph TD
@@ -202,7 +202,7 @@ graph TD
     Wasm冷启动 --> Pool
 ```
 
-#<!-- chunk: 2.2 AOT 预编译优化 -->## 2.2 AOT 预编译优化
+## 2.2 AOT 预编译优化
 
 ```rust
 // wasmtime AOT 预编译与缓存
@@ -295,7 +295,7 @@ fn sha256_file(path: &str) -> anyhow::Result<String> {
 }
 ```
 
-#<!-- chunk: 2.3 实例预热池（Warm Pool） -->## 2.3 实例预热池（Warm Pool）
+## 2.3 实例预热池（Warm Pool）
 
 ```rust
 // 实例预热池实现
@@ -460,7 +460,7 @@ impl wasmtime_wasi::WasiView for InstanceState {
 }
 ```
 
-#<!-- chunk: 2.4 冷启动时间测量 -->## 2.4 冷启动时间测量
+## 2.4 冷启动时间测量
 
 ```rust
 // 冷启动基准测试
@@ -523,7 +523,7 @@ struct BenchResult {
 
 <!-- chunk: 3. Spin 框架详解 -->## 3. Spin 框架详解
 
-#<!-- chunk: 3.1 Spin 安装与项目创建 -->## 3.1 Spin 安装与项目创建
+## 3.1 Spin 安装与项目创建
 
 ```bash
 # 安装 Spin CLI
@@ -559,7 +559,7 @@ spin up \
   --env "API_KEY=secret-key"
 ```
 
-#<!-- chunk: 3.2 spin.toml 配置详解 -->## 3.2 spin.toml 配置详解
+## 3.2 spin.toml 配置详解
 
 ```toml
 # spin.toml - 完整配置示例
@@ -662,7 +662,7 @@ component = "cleanup-job"
 source = "components/cleanup/target/wasm32-wasi/release/cleanup.wasm"
 ```
 
-#<!-- chunk: 3.3 完整 Spin HTTP API 实现 -->## 3.3 完整 Spin HTTP API 实现
+## 3.3 完整 Spin HTTP API 实现
 
 ```rust
 // components/api-handler/src/lib.rs
@@ -961,7 +961,7 @@ fn publish_event(event_type: &str, data: &impl Serialize) -> anyhow::Result<()> 
 }
 ```
 
-#<!-- chunk: 3.4 Spin 外向 HTTP 调用 -->## 3.4 Spin 外向 HTTP 调用
+## 3.4 Spin 外向 HTTP 调用
 
 ```rust
 // 在 Spin 组件中发起外部 HTTP 请求
@@ -1031,7 +1031,7 @@ async fn call_with_retry(
 
 <!-- chunk: 4. wasmCloud 平台 -->## 4. wasmCloud 平台
 
-#<!-- chunk: 4.1 wasmCloud 架构 -->## 4.1 wasmCloud 架构
+## 4.1 wasmCloud 架构
 
 ```mermaid
 graph TB
@@ -1069,7 +1069,7 @@ graph TB
     Console --> NATS
 ```
 
-#<!-- chunk: 4.2 wasmCloud Actor 开发 -->## 4.2 wasmCloud Actor 开发
+## 4.2 wasmCloud Actor 开发
 
 ```rust
 // wasmCloud Actor 示例（使用 wasmcloud-actor SDK）
@@ -1139,7 +1139,7 @@ fn uuid_v4() -> String {
 }
 ```
 
-#<!-- chunk: 4.3 OAM 应用描述符（wadm） -->## 4.3 OAM 应用描述符（wadm）
+## 4.3 OAM 应用描述符（wadm）
 
 ```yaml
 # wasmcloud-app.yaml - 使用 OAM 描述符部署应用
@@ -1246,7 +1246,7 @@ spec:
 
 <!-- chunk: 5. Fermyon Cloud 部署 -->## 5. Fermyon Cloud 部署
 
-#<!-- chunk: 5.1 部署到 Fermyon Cloud -->## 5.1 部署到 Fermyon Cloud
+## 5.1 部署到 Fermyon Cloud
 
 ```bash
 # 登录 Fermyon Cloud
@@ -1282,7 +1282,7 @@ spin cloud metrics \
   --since 1h
 ```
 
-#<!-- chunk: 5.2 多环境部署 -->## 5.2 多环境部署
+## 5.2 多环境部署
 
 ```bash
 # 开发环境
@@ -1319,7 +1319,7 @@ spin cloud routes set \
 
 <!-- chunk: 6. 事件触发器系统 -->## 6. 事件触发器系统
 
-#<!-- chunk: 6.1 多种触发器类型 -->## 6.1 多种触发器类型
+## 6.1 多种触发器类型
 
 ```toml
 # spin.toml 中配置各种触发器
@@ -1354,7 +1354,7 @@ topic = "sensors/#"
 component = "sensor-processor"
 ```
 
-#<!-- chunk: 6.2 Redis 事件处理器 -->## 6.2 Redis 事件处理器
+## 6.2 Redis 事件处理器
 
 ```rust
 // components/event-processor/src/lib.rs
@@ -1511,7 +1511,7 @@ fn current_timestamp() -> u64 {
 }
 ```
 
-#<!-- chunk: 6.3 Cron 定时任务 -->## 6.3 Cron 定时任务
+## 6.3 Cron 定时任务
 
 ```rust
 // components/metrics-aggregator/src/lib.rs
@@ -1638,7 +1638,7 @@ fn current_timestamp() -> u64 {
 
 <!-- chunk: 7. Scale-to-Zero 实现 -->## 7. Scale-to-Zero 实现
 
-#<!-- chunk: 7.1 Knative + Wasm Scale-to-Zero -->## 7.1 Knative + Wasm Scale-to-Zero
+## 7.1 Knative + Wasm Scale-to-Zero
 
 ```yaml
 # knative-wasm-service.yaml
@@ -1721,7 +1721,7 @@ spec:
         listLength: "5"   # 每5个任务启动一个实例
 ```
 
-#<!-- chunk: 7.2 自适应预热策略 -->## 7.2 自适应预热策略
+## 7.2 自适应预热策略
 
 ```rust
 // 自适应实例预热管理器
@@ -1810,7 +1810,7 @@ fn predict_required_warm(rps: u64) -> usize {
 
 <!-- chunk: 8. FaaS 设计模式 -->## 8. FaaS 设计模式
 
-#<!-- chunk: 8.1 函数链（Function Chaining） -->## 8.1 函数链（Function Chaining）
+## 8.1 函数链（Function Chaining）
 
 ```mermaid
 graph LR
@@ -1913,7 +1913,7 @@ fn apply_transform(transform: &str, data: Value) -> anyhow::Result<Value> {
 }
 ```
 
-#<!-- chunk: 8.2 扇出模式（Fan-Out） -->## 8.2 扇出模式（Fan-Out）
+## 8.2 扇出模式（Fan-Out）
 
 ```rust
 // 扇出处理：并行调用多个函数
@@ -1951,7 +1951,7 @@ async fn fan_out_aggregate(
 }
 ```
 
-#<!-- chunk: 8.3 Saga 模式（分布式事务） -->## 8.3 Saga 模式（分布式事务）
+## 8.3 Saga 模式（分布式事务）
 
 ```rust
 // Saga 补偿事务
@@ -2015,7 +2015,7 @@ impl SagaOrchestrator {
 
 <!-- chunk: 9. 有状态 Serverless -->## 9. 有状态 Serverless
 
-#<!-- chunk: 9.1 状态持久化模式 -->## 9.1 状态持久化模式
+## 9.1 状态持久化模式
 
 ```mermaid
 graph TB
@@ -2172,7 +2172,7 @@ fn current_timestamp() -> u64 {
 
 <!-- chunk: 10. 多云 Serverless 部署 -->## 10. 多云 Serverless 部署
 
-#<!-- chunk: 10.1 云厂商中立部署配置 -->## 10.1 云厂商中立部署配置
+## 10.1 云厂商中立部署配置
 
 ```yaml
 # 使用 Spin 跨云部署
@@ -2229,7 +2229,7 @@ compatibility_date = "2024-01-01"
 ENVIRONMENT = "production"
 API_KEY = "..."
 
-[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces]]
+[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md|namespaces]]
 binding = "KV_STORE"
 id = "abc123..."
 
@@ -2240,7 +2240,7 @@ EOF
 wrangler deploy
 ```
 
-#<!-- chunk: 10.2 边缘 + 云混合部署 -->## 10.2 边缘 + 云混合部署
+## 10.2 边缘 + 云混合部署
 
 ```yaml
 # k8s-edge-cloud-hybrid.yaml
@@ -2287,7 +2287,7 @@ spec:
 
 <!-- chunk: 11. Serverless 可观测性 -->## 11. Serverless 可观测性
 
-#<!-- chunk: 11.1 [[OpenTelemetry|OpenTelemetry]] 集成 -->## 11.1 OpenTelemetry 集成
+## 11.1 OpenTelemetry 集成
 
 ```rust
 // 在 Spin 组件中集成 OpenTelemetry
@@ -2387,7 +2387,7 @@ async fn process_request(req: IncomingRequest) -> anyhow::Result<OutgoingRespons
 }
 ```
 
-#<!-- chunk: 11.2 [[Prometheus|Prometheus]] 指标暴露 -->## 11.2 Prometheus 指标暴露
+## 11.2 Prometheus 指标暴露
 
 ```rust
 // Serverless 函数指标收集
@@ -2482,7 +2482,7 @@ async fn metrics_handler(_req: IncomingRequest) -> anyhow::Result<OutgoingRespon
 
 <!-- chunk: 12. 边缘 Serverless -->## 12. 边缘 Serverless
 
-#<!-- chunk: 12.1 Cloudflare Workers -->## 12.1 Cloudflare Workers
+## 12.1 Cloudflare Workers
 
 ```javascript
 // cloudflare-worker.js - 边缘 Wasm Serverless
@@ -2551,7 +2551,7 @@ export default {
 };
 ```
 
-#<!-- chunk: 12.2 Fastly Compute@Edge -->## 12.2 Fastly Compute@Edge
+## 12.2 Fastly Compute@Edge
 
 ```rust
 // fastly-compute/src/main.rs
@@ -2655,7 +2655,7 @@ fn verify_webhook_signature(body: &str, signature: &str) -> bool {
 
 <!-- chunk: 13. 性能基准与对比 -->## 13. 性能基准与对比
 
-#<!-- chunk: 13.1 冷启动延迟对比 -->## 13.1 冷启动延迟对比
+## 13.1 冷启动延迟对比
 
 ```
 Serverless 冷启动延迟对比（2025年实测）：
@@ -2681,7 +2681,7 @@ Serverless 冷启动延迟对比（2025年实测）：
 - K8s 包含容器调度开销
 ```
 
-#<!-- chunk: 13.2 吞吐量对比 -->## 13.2 吞吐量对比
+## 13.2 吞吐量对比
 
 ```python
 # benchmark_serverless.py
@@ -2751,7 +2751,7 @@ asyncio.run(main())
 
 <!-- chunk: 14. 生产运维最佳实践 -->## 14. 生产运维最佳实践
 
-#<!-- chunk: 14.1 蓝绿部署流程 -->## 14.1 蓝绿部署流程
+## 14.1 蓝绿部署流程
 
 ```bash
 #!/bin/bash
@@ -2822,7 +2822,7 @@ spin cloud apps delete "${APP_NAME}-blue" || true
 spin cloud apps rename "${APP_NAME}-green" "${APP_NAME}-blue" || true
 ```
 
-#<!-- chunk: 14.2 监控告警配置 -->## 14.2 监控告警配置
+## 14.2 监控告警配置
 
 ```yaml
 # grafana-dashboard.yaml - Wasm Serverless 监控仪表板
@@ -2940,7 +2940,7 @@ Wasm Serverless 通过独特的技术优势重新定义了 FaaS 计算：
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native MOC
-- [[domain-15-specialized-tech/README|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: WebAssembly 云原生 (WebAssembly Cloud Native)]]
 - Domain-38 WebAssembly 云原生 — 开源项目索引
 - WebAssembly 云原生基础
 - containerd Wasm 运行时

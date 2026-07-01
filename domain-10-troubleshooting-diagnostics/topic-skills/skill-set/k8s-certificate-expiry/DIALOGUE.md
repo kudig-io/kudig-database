@@ -9,15 +9,16 @@ agent_role: "远程顾问"
 execution_mode: "L1-advisory"
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 summary: "证书过期问题的远程顾问对话脚本，覆盖TLS、CA、kubelet证书续期操作。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL]]"
+  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
     type: uses
-  - target: "[[entities/etcd]]"
+  - target: "[[entities/etcd.md]]"
     type: uses
-  - target: "[[entities/kubelet]]"
+  - target: "[[entities/kubelet.md]]"
     type: uses
-  - target: "[[skills/kubelet-certificate-rotation]]"
+  - target: "[[skills/kubelet-certificate-rotation.md]]"
     type: uses
 ---
 
@@ -72,7 +73,7 @@ relationships:
 >
 > 同时请确认：报错中是否包含 `x509`、`certificate`、`unauthorized`？集群是 kubeadm 部署还是托管集群？
 
-### 入口 D：工程师提到 [[entities/kubelet|kubelet]] 报错
+### 入口 D：工程师提到 [[entities/kubelet.md|kubelet]] 报错
 
 **工程师**："kubelet 日志里有证书错误" / "FailedToUpdateNodeStatus"
 
@@ -127,18 +128,13 @@ relationships:
 ### Round 1 — 分支 C：完全无法执行任何命令
 
 **顾问**：当前信息有限。请尽可能收集：
-> 1. **监控截图**：是否有 apiserver、[[entities/etcd|etcd]]、kubelet 告警？
+> 1. **监控截图**：是否有 apiserver、[[entities/etcd.md|etcd]]、kubelet 告警？
 > 2. **告警内容**：告警通知的完整内容
 > 3. **应用表现**：业务是否还能访问？错误页面是什么？
 > 4. **变更记录**：最近 24-48 小时是否有运维变更？
 > 5. **集群信息**：K8s 版本、节点数、部署方式
 >
 > **如果以上信息都无法提供**：信息严重不足，建议置信度会降低。如业务已中断且影响严重，**建议立即升级**给有集群管理员权限的高级 SRE。
-
-> ⚠️ **升级建议**：完全无法连接集群且业务已中断，属于**紧急事件**。请立即：
-> 1. 联系有集群管理员权限的同事或云厂商技术支持
-> 2. 继续收集能获取的任何信息，我协助准备交接材料
-> 3. kubeadm 自建集群的管理员可能需要物理/堡垒机登录控制平面节点修复
 
 ## Round 2：深度诊断 — 定位过期证书
 
@@ -185,7 +181,7 @@ relationships:
 > - **替代方案 B**：查看 `/var/log/messages` 或 `/var/log/syslog`
 > - **替代方案 C**：`kubectl debug node/<node> -it --image=busybox`
 >
-> 这可能需要引导至 [[skills/skill-k8s-node-notready-SKILL|SKILL]]-NODE-001（节点问题诊断）。
+> 这可能需要引导至 [[skills/skill-k8s-node-notready-SKILL.md|SKILL]]-NODE-001（节点问题诊断）。
 
 ### Round 2 — 分支 B：只能 SSH 到节点，手动检查
 
@@ -252,30 +248,6 @@ relationships:
 ### Round 3 — 分支 A：非 CA 证书过期，kubeadm 续期
 
 **顾问**：以下证书需要续期：`[列出过期证书]`。CA 证书未过期，可用 kubeadm 安全续期。
-> ⚠️ **重要提醒**：续期会导致控制平面组件重启，可能产生 **30-60 秒** 短暂不可用。请确认：
-> 1. 当前是否处于业务低峰期？
-> 2. 是否有维护窗口？
-> 3. 是否已备份 `/etc/kubernetes/pki`？
->
-> **如果未备份，请先执行**：
-> ```bash
-> cp -r /etc/kubernetes/pki /etc/kubernetes/pki.bak.$(date +%Y%m%d-%H%M%S)
-> ```
-> **如果无法备份到本地**：
-> - **替代方案 A**：`tar czf /tmp/pki-backup-$(date +%Y%m%d).tar.gz /etc/kubernetes/pki`
-> - **替代方案 B**：磁盘空间不足时至少备份关键文件：`cp /etc/kubernetes/pki/ca.crt /etc/kubernetes/pki/ca.key /tmp/`
->
-> **确认备份完成后执行**：
-> ```bash
-> kubeadm certs renew all
-> ```
-> **如果只需续期特定证书**：
-> - **替代方案 A**：`kubeadm certs renew apiserver`
-> - **替代方案 B**：`kubeadm certs renew apiserver-etcd-client`
-> - **替代方案 C**：`kubeadm certs renew front-proxy-client`
->
-> 请告诉我输出结果。
-
 **工程师反馈路径**：
 
 #### A1：续期成功
@@ -342,7 +314,7 @@ relationships:
 
 ### Round 3 — 分支 C：kubelet 证书问题 — CSR 处理
 
-**顾问**：确认是 kubelet 证书问题。请先确认集群的 [[skills/kubelet-certificate-rotation|kubelet 证书轮换机制]]（自动/手动）。
+**顾问**：确认是 kubelet 证书问题。请先确认集群的 [[skills/kubelet-certificate-rotation.md|kubelet 证书轮换机制]]（自动/手动）。
 > **自动轮换场景**，请执行：
 > ```bash
 > kubectl get csr
@@ -551,4 +523,4 @@ kubectl get certificate -A -w
 > 如有新的证书相关问题，可引用本次对话或重新发起。还有其他我可以帮助的吗？
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/ingress|Ingress]]
+- [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]

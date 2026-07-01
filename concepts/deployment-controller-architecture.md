@@ -115,6 +115,9 @@ spec:
 
 ## 执行流程
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 1. 用户执行 kubectl apply -f deployment.yaml
 2. API Server 接收请求，验证并写入 etcd
@@ -139,36 +142,36 @@ spec:
 
 ## 相关概念
 
-- [[skills/deployment-rolling-update|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
-- [[skills/deployment-canary-and-bluegreen|[[金丝雀与蓝绿发布|金丝雀与蓝绿发布]]]]
+- [[skills/deployment-rolling-update.md|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
+- [[skills/deployment-canary-and-bluegreen.md|[[金丝雀与蓝绿发布|金丝雀与蓝绿发布]]]]
 - [[deployment|Deployment]]
-- [[concepts/controller-pattern|控制器模式]]
-- [[concepts/watch-mechanism|Watch 机制]]
+- [[concepts/controller-pattern.md|控制器模式]]
+- [[concepts/watch-mechanism.md|Watch 机制]]
 
 ## Related
 
-- [[concepts/bp-security|bp-security]]
+- [[concepts/bp-security.md|bp-security]]
 
 - MOC]]
 
 - README.md|bp-README]]
 
-- [[concepts/ai-agent-openclaw-workspace|ai-agent-openclaw-workspace]]
+- [[concepts/ai-agent-openclaw-workspace.md|ai-agent-openclaw-workspace]]
 
 - [[bp-MOC]]
 
-- [[concepts/bp-operations|bp-operations]]
+- [[concepts/bp-operations.md|bp-operations]]
 
-- [[concepts/bp-observability|bp-observability]]
+- [[concepts/bp-observability.md|bp-observability]]
 
-- [[concepts/bp-infrastructure|bp-infrastructure]]
+- [[concepts/bp-infrastructure.md|bp-infrastructure]]
 
-- [[concepts/bp-common-best-practices|bp-common-best-practices]]
+- [[concepts/bp-common-best-practices.md|bp-common-best-practices]]
 
 - [[operator-pattern]] — Operator Pattern (CRD + Controller)
-- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[deployment]] — Deployment
 
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|Deployment Create — Kubernetes Deployment 控制器源码分析]]
+- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|Deployment Create — Kubernetes Deployment 控制器源码分析]]

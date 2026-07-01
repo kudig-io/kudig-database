@@ -63,7 +63,7 @@ created: "2026-05-23"
 
 VMware vSphere 是业界最成熟的企业级虚拟化平台，承载着全球大量企业关键业务工作负载。在灾难恢复领域，vSphere 提供了从高可用（HA）、容错（FT）到站点恢复管理（SRM）的完整灾备技术栈。本文档从生产环境运维专家角度，深入探讨 vSphere 的企业级灾备架构设计、业务连续性策略制定以及运维管理最佳实践。
 
-#<!-- chunk: RPO 与 RTO 定义 -->## RPO 与 RTO 定义
+## RPO 与 RTO 定义
 
 在设计 vSphere 灾备方案之前，必须明确定义两大核心指标：
 
@@ -103,7 +103,7 @@ rpo_rto_targets:
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 双站点灾备架构 -->## 双站点灾备架构
+## 双站点灾备架构
 
 企业级 vSphere 灾备通常采用主备站点（Active-Standby）或双活站点（Active-Active）架构。以下是典型的主备站点灾备架构，涵盖计算、存储、网络和管理四个层面。
 
@@ -182,7 +182,7 @@ graph TB
     ALERTING --> VROPS
 ```
 
-#<!-- chunk: 架构选型对比 -->## 架构选型对比
+## 架构选型对比
 
 | 架构类型 | RPO | RTO | 成本 | 复杂度 | 适用场景 |
 |:---|:---|:---|:---|:---|:---|
@@ -195,7 +195,7 @@ graph TB
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: vCenter Server 高可用配置 -->## vCenter Server 高可用配置
+## vCenter Server 高可用配置
 
 ```yaml
 # vCenter Server 高可用部署配置
@@ -263,7 +263,7 @@ vcenter_ha:
       shell: 10          # 分钟
 ```
 
-#<!-- chunk: ESXi 主机配置 -->## ESXi 主机配置
+## ESXi 主机配置
 
 ```bash
 #!/bin/bash
@@ -323,7 +323,7 @@ esxcli system snmp set --targets=192.168.10.100@162/public
 esxcli system snmp set --port=161
 ```
 
-#<!-- chunk: Site Recovery Manager 配置 -->## Site Recovery Manager 配置
+## Site Recovery Manager 配置
 
 ```yaml
 # SRM 恢复计划配置
@@ -414,7 +414,7 @@ srm_recovery_plan:
 
 <!-- chunk: 备份策略 -->## 备份策略
 
-#<!-- chunk: 备份分层设计 -->## 备份分层设计
+## 备份分层设计
 
 企业级 vSphere 环境需要根据虚拟机的重要性制定差异化的备份策略，在数据安全性和存储成本之间取得平衡。
 
@@ -468,7 +468,7 @@ backup_tier_policy:
     replication: null
 ```
 
-#<!-- chunk: vSphere 存储复制配置 -->## vSphere 存储复制配置
+## vSphere 存储复制配置
 
 ```bash
 #!/bin/bash
@@ -523,7 +523,7 @@ verify_dr_array() {
 
 <!-- chunk: 恢复流程 -->## 恢复流程
 
-#<!-- chunk: 步骤一：灾难确认与决策 -->## 步骤一：灾难确认与决策
+## 步骤一：灾难确认与决策
 
 ```yaml
 disaster_confirmation:
@@ -561,7 +561,7 @@ disaster_confirmation:
       - "L3 (1小时): IT总监决策启动灾备切换"
 ```
 
-#<!-- chunk: 步骤二：灾备切换执行 -->## 步骤二：灾备切换执行
+## 步骤二：灾备切换执行
 
 ```bash
 #!/bin/bash
@@ -623,7 +623,7 @@ echo "完成时间: $(date)"
 echo "请执行应用层验证..."
 ```
 
-#<!-- chunk: 步骤三：恢复后验证 -->## 步骤三：恢复后验证
+## 步骤三：恢复后验证
 
 ```yaml
 post_recovery_validation:
@@ -658,7 +658,7 @@ post_recovery_validation:
 
 <!-- chunk: 容灾演练方案 -->## 容灾演练方案
 
-#<!-- chunk: 年度演练计划 -->## 年度演练计划
+## 年度演练计划
 
 ```yaml
 dr_drill_schedule:
@@ -718,7 +718,7 @@ dr_drill_schedule:
 
 <!-- chunk: 监控告警 -->## 监控告警
 
-#<!-- chunk: vRealize Operations 监控配置 -->## vRealize Operations 监控配置
+## vRealize Operations 监控配置
 
 ```yaml
 # vRealize Operations Manager 灾备监控配置
@@ -753,7 +753,7 @@ management_packs:
           - rpo_compliance
 ```
 
-#<!-- chunk: 关键告警规则 -->## 关键告警规则
+## 关键告警规则
 
 ```yaml
 # vSphere 灾备告警规则
@@ -805,7 +805,7 @@ alert_rules:
     message: "虚拟机快照过大可能影响备份和存储性能"
 ```
 
-#<!-- chunk: [[Prometheus|Prometheus]] 集成监控 -->## Prometheus 集成监控
+## Prometheus 集成监控
 
 ```yaml
 # Prometheus vSphere Exporter 配置
@@ -850,7 +850,7 @@ data:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 部署最佳实践 -->## 部署最佳实践
+## 部署最佳实践
 
 **硬件规划**：vCenter Server 最小 4 核 16GB 内存（推荐 8 核 32GB），ESXi 主机推荐双路 CPU、128GB 以上内存。主备站点硬件规格应对等，确保灾备站点能承载全部关键负载。
 
@@ -858,7 +858,7 @@ data:
 
 **存储配置**：使用 RAID 10 或 RAID 6 配置存储多路径。启用存储 DRS 实现负载均衡。定期验证存储复制链路健康状态。
 
-#<!-- chunk: 灾备策略最佳实践 -->## 灾备策略最佳实践
+## 灾备策略最佳实践
 
 1. **3-2-1 备份原则**：至少 3 份数据副本、2 种不同存储介质、1 份异地保存
 2. **自动化优先**：所有恢复流程尽可能脚本化，减少人为操作失误
@@ -866,7 +866,7 @@ data:
 4. **文档先行**：维护完整的灾备操作手册、联系人清单和系统架构图
 5. **持续验证**：备份完成后自动验证数据可恢复性，而非等到灾难发生时才发现备份损坏
 
-#<!-- chunk: 安全最佳实践 -->## 安全最佳实践
+## 安全最佳实践
 
 - 最小权限原则分配 vSphere 权限，定期审查用户角色
 - 启用多因素认证（MFA），会话超时设置不超过 30 分钟
@@ -878,7 +878,7 @@ data:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题诊断 -->## 常见问题诊断
+## 常见问题诊断
 
 ```bash
 #!/bin/bash
@@ -926,7 +926,7 @@ govc metric.sample -n 10 -t host/*/storage/latency.write.average
 govc metric.sample -n 10 -t host/*/net/throughput.contention.average
 ```
 
-#<!-- chunk: 故障排查手册 -->## 故障排查手册
+## 故障排查手册
 
 | 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
 |:---|:---|:---|:---|
@@ -947,7 +947,7 @@ govc metric.sample -n 10 -t host/*/net/throughput.contention.average
 
 <!-- chunk: VMware Site Recovery Manager 深度实践 -->## VMware Site Recovery Manager 深度实践
 
-#<!-- chunk: SRM 恢复计划详解 -->## SRM 恢复计划详解
+## SRM 恢复计划详解
 
 VMware Site Recovery Manager（SRM）是 vSphere 生态中最核心的灾备自动化工具。它通过与 vCenter Server 和存储阵列复制紧密集成，提供一键式的灾难恢复能力。SRM 的核心概念包括保护组（Protection Group）、恢复计划（Recovery Plan）和恢复步骤（Recovery Steps）。
 
@@ -1071,7 +1071,7 @@ srm_recovery_plan_detailed:
         subject: "灾备切换完成通知"
 ```
 
-#<!-- chunk: SRM 测试恢复 -->## SRM 测试恢复
+## SRM 测试恢复
 
 SRM 的测试恢复（Test Recovery）功能允许在不影响生产的情况下验证恢复计划的有效性。测试恢复会在灾备站点创建一个隔离的网络环境（使用 vApp 或 VLAN 隔离），启动恢复的虚拟机，执行所有恢复步骤，然后自动清理。
 
@@ -1103,7 +1103,7 @@ srm_test_recovery:
 
 <!-- chunk: vSAN 拉伸集群配置 -->## vSAN 拉伸集群配置
 
-#<!-- chunk: 同城双活 vSAN 架构 -->## 同城双活 vSAN 架构
+## 同城双活 vSAN 架构
 
 vSAN 拉伸集群（Stretched Cluster）是 vSphere 实现同城双活的核心技术。通过将 vSAN 集群横跨两个数据中心，配合见证主机（Witness Host）在第三个位置，实现数据同步复制和自动故障切换。当任一数据中心发生问题时，另一个数据中心的虚拟机无需手动干预即可继续运行。
 
@@ -1150,7 +1150,7 @@ vsan_stretched_cluster:
       witness_network: "10.0.1.0/24"
 ```
 
-#<!-- chunk: vSAN 运维脚本 -->## vSAN 运维脚本
+## vSAN 运维脚本
 
 ```bash
 #!/bin/bash
@@ -1187,7 +1187,7 @@ govc metric.sample -n 10 -t cluster/*/vsan/perf.*
 
 <!-- chunk: vSphere 安全加固 -->## vSphere 安全加固
 
-#<!-- chunk: 安全基线配置 -->## 安全基线配置
+## 安全基线配置
 
 企业级 vSphere 环境应遵循 VMware 安全加固指南（Security Hardening Guide），从管理平面、控制平面和数据平面三个维度进行安全加固。
 
@@ -1244,7 +1244,7 @@ vsphere_security_hardening:
       - "启用 VM Encryption（存储加密）"
 ```
 
-#<!-- chunk: 审计与合规 -->## 审计与合规
+## 审计与合规
 
 ```yaml
 # vSphere 审计配置
@@ -1278,7 +1278,7 @@ vsphere_audit:
 
 <!-- chunk: 容量规划与性能优化 -->## 容量规划与性能优化
 
-#<!-- chunk: vSphere 容量管理 -->## vSphere 容量管理
+## vSphere 容量管理
 
 企业级 vSphere 环境需要建立系统性的容量管理流程，定期预测资源需求，避免资源瓶颈影响业务。
 
@@ -1327,7 +1327,7 @@ capacity_management:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-30-disaster-recovery-business-continuity KUDIG Database — Global MOC
-- [[domain-09-reliability-engineering/README|Domain 30: 企业级灾备与业务连续性 (Enterprise [[Kubernetes 灾难恢复最佳实践|Disaster Recovery]] & Busin...]]
+- [[domain-09-reliability-engineering/README.md|Domain 09: 企业级灾备与业务连续性 (Enterprise [[Kubernetes 灾难恢复最佳实践|Disaster Recovery]] & Busin...]]
 - index.md|Domain-30 灾备与业务连续性 — 开源项目索引]]
 - Veeam Backup & Replication 企业级备份恢复解决方案
 - 企业级容灾架构与混沌工程深度实践
@@ -1347,4 +1347,4 @@ capacity_management:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]

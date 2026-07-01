@@ -125,6 +125,7 @@ func RunCleanup(cmd *cobra.Command, args []string) error
 func removeETCDMember(cfg *kubeadmapi.InitConfiguration) error
 
 func cleanupNode(dirsToClean []string) error
+
 ```
 
 ---
@@ -191,6 +192,7 @@ graph TD
     R --> S[停止 kubelet]
     R --> T[删除容器]
     R --> U[清理配置目录]
+
 ```
 
 ---
@@ -302,6 +304,7 @@ func (tc *noExecuteTaintManager) taintEviction(node *v1.Node) error {
     }
     return nil
 }
+
 ```
 
 **Pod 驱逐策略**：
@@ -386,6 +389,12 @@ func removeETCDMember(cfg *kubeadmapi.InitConfiguration) error {
 
 ## 执行流程
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 kubectl drain <node>
   │
@@ -406,12 +415,12 @@ kubectl delete node <node>
   │     └── deletePodsForNode → 清理 Pod
   └── ReplicaSet Controller → 重建 Pod
 
-kubeadm reset (在目标节点上)
+kubeadm reset (在目标节点上)  # ⚠️ 清理节点所有 K8s 配置
   │
   ├── preflight: 检查 root 权限
   ├── removeETCDMember (控制面节点)
   │     ├── 连接 etcd 集群
-  │     └── etcdctl member remove
+  │     └── etcdctl member remove  # ⚠️ 移除 etcd 成员，可能丢数据
   ├── 停止 kubelet
   ├── 删除所有容器 (crictl rm -a)
   ├── 清理 /etc/kubernetes/
@@ -425,38 +434,59 @@ kubeadm reset (在目标节点上)
 
 ### 场景 1：正常节点下线
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 kubectl drain worker-1 --ignore-daemonsets --delete-emptydir-data
 kubectl delete node worker-1
 # 在 worker-1 上:
-kubeadm reset -f
+kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 iptables -F && iptables -t nat -F && iptables -t mangle -F
 ipvsadm -C
-rm -rf /etc/cni/net.d
+rm -rf /etc/cni/net.d  # ⚠️ 删除系统/数据文件
 ```
 
 ### 场景 2：不可达节点强制删除
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 kubectl delete node unreachable-node --force --grace-period=0
 # 节点恢复后执行:
-kubeadm reset -f
+kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 ```
 
 ### 场景 3：控制面节点删除（HA 集群）
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 kubectl drain cp-2 --ignore-daemonsets --delete-emptydir-data
 kubectl delete node cp-2
 # 在 cp-2 上:
-kubeadm reset -f
+kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 # 在其他控制面节点上确认:
 etcdctl member list
 # 如果未自动移除:
-etcdctl member remove <member-id>
+etcdctl member remove <member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
 ```
 
 ### 场景 4：大规模节点快速删除（滚动）
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 场景：需要快速删除多个节点
@@ -472,12 +502,18 @@ kubectl delete node $NODES
 
 # 在所有节点上执行 reset（并行）
 for node in $NODES; do
-    ssh $node "kubeadm reset -f" &
+    ssh $node "kubeadm reset -f" &  # ⚠️ 清理节点所有 K8s 配置
 done
 wait
 ```
 
 ### 场景 5：节点网络不可达但本地登录可执行 reset
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 场景：节点网络不可达，但可以通过 console/IPMI 登录
@@ -487,10 +523,10 @@ kubectl delete node unreachable-node --grace-period=0
 
 # 在目标节点上本地执行 reset（通过 console）
 # 登录后执行:
-kubeadm reset -f
+kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 
 # 手动清理网络
-rm -rf /etc/cni/net.d
+rm -rf /etc/cni/net.d  # ⚠️ 删除系统/数据文件
 iptables -F && iptables -t nat -F
 ipvsadm -C
 ```
@@ -532,6 +568,9 @@ kubectl get pods --all-namespaces --field-selector spec.nodeName=worker-1 -o wid
 
 ### 示例 2：安全驱逐 Pod（带超时）
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 kubectl drain worker-1 --ignore-daemonsets --delete-emptydir-data --timeout=120s --grace-period=60
 ```
@@ -554,11 +593,15 @@ kubectl get pods --all-namespaces --field-selector spec.nodeName=deleted-node
 
 ### 示例 5：reset 后手动清理 CNI
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
-rm -rf /etc/cni/net.d/*
-rm -rf /var/lib/cni/
+rm -rf /etc/cni/net.d/*  # ⚠️ 删除系统/数据文件
+rm -rf /var/lib/cni/  # ⚠️ 删除系统/数据文件
 ip link delete cni0
 ip link delete flannel.1
+
 ```
 
 ---
@@ -593,7 +636,9 @@ ip link delete flannel.1
 ## Related
 
 - [[README|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[entities/cni|cni]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/cni.md|cni]]
+
+```

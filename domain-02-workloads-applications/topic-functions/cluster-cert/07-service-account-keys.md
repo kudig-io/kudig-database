@@ -278,6 +278,11 @@ diff /etc/kubernetes/pki/sa.pub /tmp/sa.key.pub
 ```
 
 **修复**：
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 确保两个组件使用同一密钥对
 # 方式 1: 从私钥重新导出公钥
@@ -290,7 +295,7 @@ sudo openssl genrsa -out /etc/kubernetes/pki/sa.key 2048
 sudo openssl rsa -in /etc/kubernetes/pki/sa.key -pubout -out /etc/kubernetes/pki/sa.pub
 sudo systemctl restart kubelet
 # 然后删除所有 Pod 使其重新获取 Token
-kubectl delete pods --all -n <namespace>
+kubectl delete pods --all -n <namespace>  # ⚠️ 批量删除，波及面大
 ```
 
 ---
@@ -394,6 +399,11 @@ SA 密钥轮换是 Kubernetes 证书体系中最困难的操作，因为：
 
 ### 手动轮换步骤
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 1. 备份当前密钥
 sudo cp /etc/kubernetes/pki/sa.key /etc/kubernetes/pki/sa.key.backup
@@ -411,7 +421,7 @@ openssl rsa -in /etc/kubernetes/pki/sa.key -pubout -out /etc/kubernetes/pki/sa.p
 sudo systemctl restart kubelet
 
 # 5. 删除所有 ServiceAccount Secret，强制重新生成 Token
-kubectl delete secret --all -n <namespace>
+kubectl delete secret --all -n <namespace>  # ⚠️ 批量删除，波及面大
 
 # 6. 滚动重启所有 Pod，获取新 Token
 kubectl rollout restart deployment/<name> -n <namespace>
@@ -544,8 +554,8 @@ echo "$TOKEN" | cut -d. -f2 | base64 -d | jq .
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[entities/vault|vault]]
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/vault.md|vault]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]

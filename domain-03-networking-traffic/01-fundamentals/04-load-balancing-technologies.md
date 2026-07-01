@@ -70,7 +70,7 @@ created: "2026-05-23"
 
 <!-- chunk: 负载均衡概述 -->## 负载均衡概述
 
-#<!-- chunk: 负载均衡类型 -->## 负载均衡类型
+## 负载均衡类型
 
 | 类型 | OSI 层 | 特点 | 代表产品 |
 |:---|:---:|:---|:---|
@@ -78,7 +78,7 @@ created: "2026-05-23"
 | **四层负载均衡** | 传输层 | 高性能、低延迟 | LVS, HAProxy, NLB |
 | **七层负载均衡** | 应用层 | 灵活路由、内容感知 | Nginx, HAProxy, ALB |
 
-#<!-- chunk: 部署架构 -->## 部署架构
+## 部署架构
 
 ```
                         互联网
@@ -107,7 +107,7 @@ created: "2026-05-23"
 
 <!-- chunk: 负载均衡算法 -->## 负载均衡算法
 
-#<!-- chunk: 常用算法 -->## 常用算法
+## 常用算法
 
 | 算法 | 说明 | 适用场景 |
 |:---|:---|:---|
@@ -119,7 +119,7 @@ created: "2026-05-23"
 | **一致性哈希** | 减少重新映射 | 缓存场景 |
 | **最快响应** | 选择响应最快 | 动态负载 |
 
-#<!-- chunk: 算法选择 -->## 算法选择
+## 算法选择
 
 | 场景 | 推荐算法 |
 |:---|:---|
@@ -133,7 +133,7 @@ created: "2026-05-23"
 
 <!-- chunk: 四层负载均衡 -->## 四层负载均衡
 
-#<!-- chunk: LVS (Linux Virtual Server) -->## LVS (Linux Virtual Server)
+## LVS (Linux Virtual Server)
 
 | 模式 | 说明 | 特点 |
 |:---|:---|:---|
@@ -141,7 +141,7 @@ created: "2026-05-23"
 | **DR** | 直接路由 | 高性能、同网段 |
 | **TUN** | IP 隧道 | 跨网段、复杂 |
 
-##<!-- chunk: LVS-DR 配置 -->## LVS-DR 配置
+## LVS-DR 配置
 
 ```bash
 # Director 配置
@@ -155,7 +155,7 @@ echo 1 > /proc/sys/net/ipv4/conf/all/arp_ignore
 echo 2 > /proc/sys/net/ipv4/conf/all/arp_announce
 ```
 
-#<!-- chunk: IPVS ([[Kubernetes|Kubernetes]]) -->## IPVS (Kubernetes)
+## IPVS (Kubernetes)
 
 ```bash
 # 启用 IPVS 模式
@@ -172,7 +172,7 @@ ipvsadm -Ln
 
 <!-- chunk: 七层负载均衡 -->## 七层负载均衡
 
-#<!-- chunk: Nginx 配置 -->## Nginx 配置
+## Nginx 配置
 
 ```nginx
 upstream backend {
@@ -206,7 +206,7 @@ server {
 }
 ```
 
-#<!-- chunk: HAProxy 配置 -->## HAProxy 配置
+## HAProxy 配置
 
 ```
 global
@@ -235,7 +235,7 @@ backend http_back
 
 <!-- chunk: 健康检查 -->## 健康检查
 
-#<!-- chunk: 检查类型 -->## 检查类型
+## 检查类型
 
 | 类型 | 层次 | 检查内容 |
 |:---|:---|:---|
@@ -244,7 +244,7 @@ backend http_back
 | **HTTPS** | L7 | 证书+状态码 |
 | **自定义** | L7 | 脚本/命令 |
 
-#<!-- chunk: 配置参数 -->## 配置参数
+## 配置参数
 
 | 参数 | 说明 | 推荐值 |
 |:---|:---|:---|
@@ -253,7 +253,7 @@ backend http_back
 | unhealthy | 失败阈值 | 2-3 |
 | healthy | 成功阈值 | 2-3 |
 
-#<!-- chunk: Nginx 健康检查 -->## Nginx 健康检查
+## Nginx 健康检查
 
 ```nginx
 upstream backend {
@@ -266,7 +266,7 @@ upstream backend {
 
 <!-- chunk: 会话保持 -->## 会话保持
 
-#<!-- chunk: 实现方式 -->## 实现方式
+## 实现方式
 
 | 方式 | 说明 | 优缺点 |
 |:---|:---|:---|
@@ -275,7 +275,7 @@ upstream backend {
 | **URL 参数** | URL 中标识 | 对应用透明 |
 | **Session 共享** | 外部存储 | 无状态后端 |
 
-#<!-- chunk: Nginx Cookie 会话 -->## Nginx Cookie 会话
+## Nginx Cookie 会话
 
 ```nginx
 upstream backend {
@@ -286,7 +286,7 @@ upstream backend {
 }
 ```
 
-#<!-- chunk: 无状态设计 (推荐) -->## 无状态设计 (推荐)
+## 无状态设计 (推荐)
 
 ```
 ┌─────────┐     ┌─────────┐     ┌─────────┐
@@ -303,9 +303,9 @@ upstream backend {
 
 <!-- chunk: 负载均衡器选型与性能基准 -->## 负载均衡器选型与性能基准
 
-#<!-- chunk: 负载均衡器选型指南 -->## 负载均衡器选型指南
+## 负载均衡器选型指南
 
-##<!-- chunk: 选型决策矩阵 -->## 选型决策矩阵
+## 选型决策矩阵
 
 | 需求场景 | 推荐方案 | 理由 | 典型配置 |
 |:---|:---|:---|:---|
@@ -315,7 +315,7 @@ upstream backend {
 | **全球部署** | Cloud Load Balancer | 地理分布、自动扩缩 | 按需付费 |
 | **金融交易** | F5 BIG-IP | 企业级、安全合规 | 专用硬件 |
 
-##<!-- chunk: 性能基准测试 -->## 性能基准测试
+## 性能基准测试
 
 ```bash
 # L4 负载均衡器性能测试 (iperf3)
@@ -342,7 +342,7 @@ wrk -t12 -c400 -d60s --timeout 30s \
     http://lb-domain/api/health
 ```
 
-##<!-- chunk: 负载均衡器性能对比 -->## 负载均衡器性能对比
+## 负载均衡器性能对比
 
 | 负载均衡器 | L4性能 (req/s) | L7性能 (req/s) | 内存占用 | 特色功能 |
 |:---|:---:|:---:|:---:|:---|
@@ -352,9 +352,9 @@ wrk -t12 -c400 -d60s --timeout 30s \
 | **Traefik** | 80K+ | 40K+ | 40MB | Let's Encrypt、Docker |
 | **F5 BIG-IP** | 500K+ | 200K+ | 2GB+ | 企业级、硬件加速 |
 
-#<!-- chunk: 高可用负载均衡架构 -->## 高可用负载均衡架构
+## 高可用负载均衡架构
 
-##<!-- chunk: 双活架构设计 -->## 双活架构设计
+## 双活架构设计
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -377,7 +377,7 @@ wrk -t12 -c400 -d60s --timeout 30s \
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: Keepalived + LVS 高可用配置 -->## Keepalived + LVS 高可用配置
+## Keepalived + LVS 高可用配置
 
 ```bash
 # Keepalived 配置 (MASTER)
@@ -447,7 +447,10 @@ else
 fi
 ```
 
-##<!-- chunk: 负载均衡器监控告警 -->## 负载均衡器监控告警
+## 负载均衡器监控告警
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 负载均衡器健康监控脚本
@@ -505,9 +508,9 @@ while true; do
 done
 ```
 
-#<!-- chunk: 负载均衡器性能调优 -->## 负载均衡器性能调优
+## 负载均衡器性能调优
 
-##<!-- chunk: 内核参数优化 -->## 内核参数优化
+## 内核参数优化
 
 ```bash
 # /etc/sysctl.conf - 负载均衡器专用优化
@@ -538,7 +541,7 @@ net.netfilter.nf_conntrack_tcp_timeout_established = 600
 sysctl -p
 ```
 
-##<!-- chunk: Nginx 负载均衡器优化配置 -->## Nginx 负载均衡器优化配置
+## Nginx 负载均衡器优化配置
 
 ```nginx
 # Nginx 负载均衡器生产级配置
@@ -663,7 +666,7 @@ http {
 }
 ```
 
-##<!-- chunk: HAProxy 负载均衡器优化配置 -->## HAProxy 负载均衡器优化配置
+## HAProxy 负载均衡器优化配置
 
 ```haproxy
 # HAProxy 生产级配置

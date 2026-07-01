@@ -170,7 +170,7 @@ spec:
   subdomain: cluster
   setHostnameAsFQDN: true
   # hostname 命令返回：myapp.cluster.production.svc.cluster.local
-  # ⚠️ FQDN 长度不能超过 64 字符（Linux 内核限制）
+
   containers:
   - name: app
     image: registry.example.com/apps/fqdn-aware:v1.0
@@ -191,6 +191,7 @@ spec:
         │             └─ 否 → 不设置
         │
         └─ 否 → 使用 hostnameOverride（不影响 DNS）
+
 ```
 
 ## 故障排查
@@ -213,6 +214,9 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Pod 内部主机名
 kubectl exec <pod> -- hostname
@@ -232,9 +236,17 @@ echo -n "myhost.mysub.mynamespace.svc.cluster.local" | wc -c
 
 ## 交叉引用
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/statefulsets|StatefulSets]]](statefulsets.md) — 自动管理稳定网络标识的首选方案
+- [[domain-17-system-foundation/topic-dictionary/workloads/statefulsets.md|StatefulSets]]](statefulsets.md) — 自动管理稳定网络标识的首选方案
 - [Pods](pods.md) — Pod 基础概念和 metadata.name
 - [Downward API](downward-api.md) — 在容器内获取 Pod 元数据的其他方式
 
 ## 参考链接
-- https://[[entities/kubernetes|kubernetes]].io/docs/concepts/workloads/pods/pod-hostname/
+- https://[[entities/kubernetes.md|kubernetes]].io/docs/concepts/workloads/pods/pod-hostname/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+
+```

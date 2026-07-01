@@ -95,7 +95,7 @@ created: "2026-05-23"
 ## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 39: 供应链安全 (Supply Chain Security)]]
+- [[domain-05-security-compliance/README.md|Domain 05: 供应链安全 (Supply Chain Security)]]
 - 供应链安全概述 (Supply Chain Security Overview)
 - 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 - SBOM 生成与管理 (SBOM Generation and Management)
@@ -109,9 +109,9 @@ created: "2026-05-23"
 
 ## See Also
 
-- [[domain-05-security-compliance/07-incident-response/20-incident-response-process|20-incident-response-process]]
-- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-25|00-open-source-projects-index-from-domain-05-security-compliance]]
-- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-7|00-open-source-projects-index-from-domain-05-security-compliance]]
-- [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-25|MOC-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/07-incident-response/20-incident-response-process.md|20-incident-response-process]]
+- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-25.md|00-open-source-projects-index-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-domain-05-security-compliance]]
+- [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-25.md|MOC-from-domain-05-security-compliance]]
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

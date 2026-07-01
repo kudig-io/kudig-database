@@ -70,7 +70,7 @@ created: "2026-05-23"
 
 <!-- chunk: 容器状态机 -->## 容器状态机
 
-#<!-- chunk: 状态流转图 -->## 状态流转图
+## 状态流转图
 
 ```
                         docker create
@@ -99,7 +99,7 @@ created: "2026-05-23"
        └───────────┘                              └───────────┘
 ```
 
-#<!-- chunk: 容器状态详解 -->## 容器状态详解
+## 容器状态详解
 
 | 状态 | 说明 | docker ps 显示 | 触发条件 |
 |:---|:---|:---|:---|
@@ -111,7 +111,7 @@ created: "2026-05-23"
 | **dead** | 死亡状态 | Dead | 删除失败等异常 |
 | **removing** | 删除中 | Removal In Progress | `docker rm` |
 
-#<!-- chunk: 退出码含义 -->## 退出码含义
+## 退出码含义
 
 | 退出码 | 含义 | 常见原因 |
 |:---|:---|:---|
@@ -131,9 +131,9 @@ created: "2026-05-23"
 
 <!-- chunk: 容器创建与运行 -->## 容器创建与运行
 
-#<!-- chunk: docker run 完整参数参考 -->## docker run 完整参数参考
+## docker run 完整参数参考
 
-##<!-- chunk: 基本配置 -->## 基本配置
+## 基本配置
 
 | 参数 | 说明 | 示例 |
 |:---|:---|:---|
@@ -146,7 +146,7 @@ created: "2026-05-23"
 | `-w, --workdir` | 工作目录 | `-w /app` |
 | `--entrypoint` | 覆盖入口点 | `--entrypoint /bin/sh` |
 
-##<!-- chunk: 环境与配置 -->## 环境与配置
+## 环境与配置
 
 | 参数 | 说明 | 示例 |
 |:---|:---|:---|
@@ -155,7 +155,7 @@ created: "2026-05-23"
 | `-l, --label` | 标签 | `-l "app=web"` |
 | `--label-file` | 标签文件 | `--label-file labels.txt` |
 
-##<!-- chunk: 网络配置 -->## 网络配置
+## 网络配置
 
 | 参数 | 说明 | 示例 |
 |:---|:---|:---|
@@ -170,7 +170,7 @@ created: "2026-05-23"
 | `--ip` | 指定 IP | `--ip 172.18.0.100` |
 | `--link` | 连接容器 (废弃) | `--link mysql:db` |
 
-##<!-- chunk: 存储配置 -->## 存储配置
+## 存储配置
 
 | 参数 | 说明 | 示例 |
 |:---|:---|:---|
@@ -180,7 +180,7 @@ created: "2026-05-23"
 | `--volumes-from` | 继承卷 | `--volumes-from datacontainer` |
 | `--read-only` | 只读根文件系统 | `--read-only` |
 
-#<!-- chunk: mount 类型详解 -->## mount 类型详解
+## mount 类型详解
 
 ```bash
 # bind mount
@@ -196,7 +196,7 @@ created: "2026-05-23"
 --mount type=npipe,source=\\.\pipe\docker_engine,target=\\.\pipe\docker_engine
 ```
 
-#<!-- chunk: 容器层级配置 -->## 容器层级配置
+## 容器层级配置
 
 ```bash
 # 完整生产配置示例
@@ -233,7 +233,7 @@ docker run -d \
 
 <!-- chunk: 资源限制配置 -->## 资源限制配置
 
-#<!-- chunk: 内存限制 -->## 内存限制
+## 内存限制
 
 | 参数 | 说明 | 示例 |
 |:---|:---|:---|
@@ -245,7 +245,7 @@ docker run -d \
 | `--oom-score-adj` | OOM 优先级调整 | `--oom-score-adj -500` |
 | `--kernel-memory` | 内核内存限制 (废弃) | - |
 
-##<!-- chunk: Swap 配置说明 -->## Swap 配置说明
+## Swap 配置说明
 
 | --memory | --memory-swap | 效果 |
 |:---|:---|:---|
@@ -255,7 +255,7 @@ docker run -d \
 | 512m | -1 | 无限 swap |
 | 512m | 0 | 不设置 (同不设置) |
 
-#<!-- chunk: CPU 限制 -->## CPU 限制
+## CPU 限制
 
 | 参数 | 说明 | 示例 |
 |:---|:---|:---|
@@ -268,7 +268,7 @@ docker run -d \
 | `--cpu-rt-period` | 实时调度周期 | `--cpu-rt-period 1000000` |
 | `--cpu-rt-runtime` | 实时调度时间 | `--cpu-rt-runtime 950000` |
 
-##<!-- chunk: CPU 限制换算 -->## CPU 限制换算
+## CPU 限制换算
 
 ```
 --cpus 1.5  ≈  --cpu-period 100000 --cpu-quota 150000
@@ -278,7 +278,7 @@ cpus = cpu-quota / cpu-period
 例: 150000 / 100000 = 1.5 个 CPU
 ```
 
-#<!-- chunk: I/O 限制 -->## I/O 限制
+## I/O 限制
 
 | 参数 | 说明 | 示例 |
 |:---|:---|:---|
@@ -289,7 +289,7 @@ cpus = cpu-quota / cpu-period
 | `--device-read-iops` | 读取 IOPS 限制 | `--device-read-iops /dev/sda:1000` |
 | `--device-write-iops` | 写入 IOPS 限制 | `--device-write-iops /dev/sda:1000` |
 
-#<!-- chunk: 其他限制 -->## 其他限制
+## 其他限制
 
 | 参数 | 说明 | 示例 |
 |:---|:---|:---|
@@ -299,7 +299,7 @@ cpus = cpu-quota / cpu-period
 | `--gpus` | GPU 访问 | `--gpus all` |
 | `--device` | 设备访问 | `--device /dev/nvidia0` |
 
-#<!-- chunk: ulimit 常用配置 -->## ulimit 常用配置
+## ulimit 常用配置
 
 ```bash
 docker run -d \
@@ -322,7 +322,7 @@ docker run -d \
 
 <!-- chunk: 健康检查配置 -->## 健康检查配置
 
-#<!-- chunk: 健康检查参数 -->## 健康检查参数
+## 健康检查参数
 
 | 参数 | 默认值 | 说明 |
 |:---|:---|:---|
@@ -334,7 +334,7 @@ docker run -d \
 | `--health-start-interval` | 5s | 启动期检查间隔 (Docker 25+) |
 | `--no-healthcheck` | - | 禁用健康检查 |
 
-#<!-- chunk: 健康检查状态 -->## 健康检查状态
+## 健康检查状态
 
 | 状态 | 说明 | 触发条件 |
 |:---|:---|:---|
@@ -342,7 +342,7 @@ docker run -d \
 | **healthy** | 健康 | 检查命令返回 0 |
 | **unhealthy** | 不健康 | 连续 N 次检查失败 |
 
-#<!-- chunk: 健康检查示例 -->## 健康检查示例
+## 健康检查示例
 
 ```bash
 # HTTP 健康检查
@@ -373,7 +373,7 @@ docker run -d \
   myapp
 ```
 
-#<!-- chunk: Dockerfile 健康检查 -->## Dockerfile 健康检查
+## Dockerfile 健康检查
 
 ```dockerfile
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
@@ -383,7 +383,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
 HEALTHCHECK NONE
 ```
 
-#<!-- chunk: 查看健康状态 -->## 查看健康状态
+## 查看健康状态
 
 ```bash
 # 查看健康状态
@@ -400,7 +400,7 @@ docker events --filter 'event=health_status'
 
 <!-- chunk: 容器日志管理 -->## 容器日志管理
 
-#<!-- chunk: 日志驱动对比 -->## 日志驱动对比
+## 日志驱动对比
 
 | 驱动 | 特点 | 存储位置 | docker logs |
 |:---|:---|:---|:---:|
@@ -415,7 +415,7 @@ docker events --filter 'event=health_status'
 | **gcplogs** | GCP Logging | GCP | ✗ |
 | **none** | 禁用日志 | 无 | ✗ |
 
-#<!-- chunk: json-file 配置 -->## json-file 配置
+## json-file 配置
 
 ```bash
 docker run -d \
@@ -435,7 +435,7 @@ docker run -d \
 | labels | - | 添加到日志的标签 |
 | env | - | 添加到日志的环境变量 |
 
-#<!-- chunk: 日志命令 -->## 日志命令
+## 日志命令
 
 ```bash
 # 查看日志
@@ -457,7 +457,7 @@ docker logs -t container_name
 docker logs container_name 2>&1 | grep ERROR
 ```
 
-#<!-- chunk: 全局日志配置 -->## 全局日志配置
+## 全局日志配置
 
 ```json
 // /etc/docker/daemon.json
@@ -471,7 +471,7 @@ docker logs container_name 2>&1 | grep ERROR
 }
 ```
 
-#<!-- chunk: 清理日志 -->## 清理日志
+## 清理日志
 
 ```bash
 # 查看日志文件位置
@@ -490,7 +490,7 @@ done
 
 <!-- chunk: 信号处理与优雅停止 -->## 信号处理与优雅停止
 
-#<!-- chunk: Linux 信号参考 -->## Linux 信号参考
+## Linux 信号参考
 
 | 信号 | 编号 | 说明 | 默认行为 |
 |:---|:---:|:---|:---|
@@ -502,7 +502,7 @@ done
 | SIGUSR1 | 10 | 用户自定义 | 终止 |
 | SIGUSR2 | 12 | 用户自定义 | 终止 |
 
-#<!-- chunk: 停止容器流程 -->## 停止容器流程
+## 停止容器流程
 
 ```
 docker stop container
@@ -518,7 +518,7 @@ docker stop container
     └── 超时 → 发送 SIGKILL → 强制终止
 ```
 
-#<!-- chunk: 停止命令 -->## 停止命令
+## 停止命令
 
 ```bash
 # 优雅停止 (SIGTERM + 10s 超时 + SIGKILL)
@@ -537,7 +537,7 @@ docker kill -s SIGUSR1 container_name
 docker stop $(docker ps -q)
 ```
 
-#<!-- chunk: 应用端优雅停止实现 -->## 应用端优雅停止实现
+## 应用端优雅停止实现
 
 ```python
 # Python 示例
@@ -603,7 +603,7 @@ func main() {
 }
 ```
 
-#<!-- chunk: Dockerfile STOPSIGNAL -->## Dockerfile STOPSIGNAL
+## Dockerfile STOPSIGNAL
 
 ```dockerfile
 # 设置停止信号
@@ -618,7 +618,7 @@ STOPSIGNAL SIGQUIT
 
 <!-- chunk: 容器重启策略 -->## 容器重启策略
 
-#<!-- chunk: 重启策略类型 -->## 重启策略类型
+## 重启策略类型
 
 | 策略 | 说明 | docker run 参数 |
 |:---|:---|:---|
@@ -627,7 +627,7 @@ STOPSIGNAL SIGQUIT
 | **on-failure** | 仅失败时重启 | `--restart on-failure[:max]` |
 | **unless-stopped** | 除非手动停止 | `--restart unless-stopped` |
 
-#<!-- chunk: 策略对比 -->## 策略对比
+## 策略对比
 
 | 场景 | no | always | on-failure | unless-stopped |
 |:---|:---:|:---:|:---:|:---:|
@@ -636,7 +636,7 @@ STOPSIGNAL SIGQUIT
 | Docker daemon 重启 | ✗ | ✓ | ✓ | ✓ |
 | 手动 docker stop 后 daemon 重启 | ✗ | ✓ | ✗ | ✗ |
 
-#<!-- chunk: 使用示例 -->## 使用示例
+## 使用示例
 
 ```bash
 # 基本配置
@@ -652,7 +652,7 @@ docker update --restart unless-stopped container_name
 docker inspect --format='{{.RestartCount}}' container_name
 ```
 
-#<!-- chunk: 重启延迟 -->## 重启延迟
+## 重启延迟
 
 Docker 使用指数退避算法：
 - 首次等待 100ms
@@ -664,7 +664,7 @@ Docker 使用指数退避算法：
 
 <!-- chunk: 容器监控与调试 -->## 容器监控与调试
 
-#<!-- chunk: 资源监控 -->## 资源监控
+## 资源监控
 
 ```bash
 # 实时资源统计
@@ -680,7 +680,7 @@ docker stats --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}"
 docker stats --format '{{json .}}'
 ```
 
-#<!-- chunk: 容器内进程 -->## 容器内进程
+## 容器内进程
 
 ```bash
 # 查看进程
@@ -693,7 +693,7 @@ docker top container_name -aux
 docker top container_name -o pid,ppid,user,cmd
 ```
 
-#<!-- chunk: 调试技术 -->## 调试技术
+## 调试技术
 
 ```bash
 # 进入运行中的容器
@@ -713,7 +713,7 @@ docker cp container_name:/app/logs/app.log ./
 docker cp ./config.json container_name:/app/config/
 ```
 
-#<!-- chunk: 调试镜像 -->## 调试镜像
+## 调试镜像
 
 ```bash
 # 使用调试镜像
@@ -732,7 +732,7 @@ docker run --rm -it \
   busybox
 ```
 
-#<!-- chunk: 事件监控 -->## 事件监控
+## 事件监控
 
 ```bash
 # 监听所有事件
@@ -751,7 +751,7 @@ docker events --since '2024-01-01' --until '2024-01-02'
 docker events --format '{{json .}}'
 ```
 
-#<!-- chunk: 容器 diff -->## 容器 diff
+## 容器 diff
 
 ```bash
 # 查看文件系统变化
@@ -782,4 +782,4 @@ docker diff container_name
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

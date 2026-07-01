@@ -60,16 +60,16 @@ created: "2026-05-23"
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning|01 - 迁移评估与规划]] |  | migration, upgrade |  |
-| 2 | [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design|02 - ACK 目标集群设计与搭建]] |  | migration, upgrade |  |
-| 3 | [[domain-08-release-change-management/topic-migration/03-application-workload-migration|03 - 应用工作负载迁移]] |  | migration, upgrade |  |
-| 4 | [[domain-08-release-change-management/topic-migration/04-storage-data-migration|04 - 存储与数据迁移]] |  | migration, upgrade, storage |  |
-| 5 | [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover|05 - 网络迁移与流量切换]] |  | migration, upgrade, networking |  |
-| 6 | [[domain-08-release-change-management/topic-migration/06-stateful-services-migration|06 - 有状态服务迁移]] |  | migration, upgrade |  |
-| 7 | [[domain-08-release-change-management/topic-migration/07-observability-security-migration|07 - 可观测性与安全迁移]] |  | migration, upgrade, observability |  |
-| 8 | [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission|08 - 验收、切换与旧集群退役]] |  | migration, upgrade |  |
-| 9 | [[domain-08-release-change-management/topic-migration/09-migration-toolchain|09 - 迁移工具链参考]] |  | migration, upgrade |  |
-| 10 | [[domain-08-release-change-management/topic-migration/10-real-world-case-study|10 - 生产迁移实战案例]] |  | migration, upgrade, tutorial |  |
+| 1 | [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]] |  | migration, upgrade |  |
+| 2 | [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]] |  | migration, upgrade |  |
+| 3 | [[domain-08-release-change-management/topic-migration/03-application-workload-migration.md|03 - 应用工作负载迁移]] |  | migration, upgrade |  |
+| 4 | [[domain-08-release-change-management/topic-migration/04-storage-data-migration.md|04 - 存储与数据迁移]] |  | migration, upgrade, storage |  |
+| 5 | [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换]] |  | migration, upgrade, networking |  |
+| 6 | [[domain-08-release-change-management/topic-migration/06-stateful-services-migration.md|06 - 有状态服务迁移]] |  | migration, upgrade |  |
+| 7 | [[domain-08-release-change-management/topic-migration/07-observability-security-migration.md|07 - 可观测性与安全迁移]] |  | migration, upgrade, observability |  |
+| 8 | [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission.md|08 - 验收、切换与旧集群退役]] |  | migration, upgrade |  |
+| 9 | [[domain-08-release-change-management/topic-migration/09-migration-toolchain.md|09 - 迁移工具链参考]] |  | migration, upgrade |  |
+| 10 | [[domain-08-release-change-management/topic-migration/10-real-world-case-study.md|10 - 生产迁移实战案例]] |  | migration, upgrade, tutorial |  |
 
 ---
 
@@ -85,28 +85,28 @@ created: "2026-05-23"
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/networking|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
 - 01-observability-architecture-overview
 - storage
 - 05-network-migration-traffic-cutover
-- [[_reports/WIKI-LINT-REPORT-2026-05-21|Wiki Lint Report — 2026-05-21]] — Cross-reference
-- [[domain-19-landscape-references/98-merged-indexes/index|[[发布说明索引 — 存储|发布说明索引 — 存储]]]] — Cross-reference
-- [[references/release-notes-observability|发布说明索引 — 可观测性]] — Cross-reference
-- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[references/release-notes-kubernetes|发布说明索引 — Kubernetes]] — Cross-reference
-- [[references/release-notes-security|发布说明索引 — 安全]] — Cross-reference
-- [[references/k8s-knowledge-map|Kubernetes Knowledge Map]] — Cross-reference
-- [[references/release-notes-cicd-gitops|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
-- [[references/release-notes-cli-tools|发布说明索引 — CLI 工具]] — Cross-reference
-- [[references/release-notes-core-deps|发布说明索引 — 核心依赖]] — Cross-reference
-- [[references/k8s-difficulty-index|Kubernetes Difficulty Index]] — Cross-reference
+- Wiki Lint Report — 2026-05-21 — Cross-reference
+- [[domain-19-landscape-references/98-merged-indexes/index.md|[[发布说明索引 — 存储|发布说明索引 — 存储]]]] — Cross-reference
+- [[entities/release-notes-observability.md|发布说明索引 — 可观测性]] — Cross-reference
+- [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[entities/release-notes-kubernetes.md|发布说明索引 — Kubernetes]] — Cross-reference
+- [[entities/release-notes-security.md|发布说明索引 — 安全]] — Cross-reference
+- [[entities/k8s-knowledge-map.md|Kubernetes Knowledge Map]] — Cross-reference
+- [[entities/release-notes-cicd-gitops.md|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
+- [[entities/release-notes-cli-tools.md|发布说明索引 — CLI 工具]] — Cross-reference
+- [[entities/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
+- [[entities/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference
-- [[domain-03-networking-traffic/00-core-k8s-networking/02-cni-architecture-fundamentals|CNI 架构与核心原理]] — Cross-reference
-- [[domain-06-observability/01-overview/01-observability-architecture-overview|Kubernetes 可观测性架构体系]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
+- [[domain-03-networking-traffic/00-core-k8s-networking/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]] — Cross-reference
+- [[domain-06-observability/01-overview/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
-- [[domain-01-cluster-fundamentals/05-kubectl/05-kubectl-commands-reference|kubectl 命令完整参考]] — Cross-reference
-- [[domain-01-cluster-fundamentals/01-architecture-overview/02-core-components-deep-dive|Kubernetes 核心组件深度剖析]] — Cross-reference
-- [[domain-04-storage-data/01-k8s-storage/02-pv-architecture-fundamentals|PV/PVC 核心概念与企业级实践]] — Cross-reference
-- [[domain-04-storage-data/01-k8s-storage/01-storage-architecture-overview|存储架构概览与核心组件]] — Cross-reference
+- [[domain-01-cluster-fundamentals/05-kubectl/05-kubectl-commands-reference.md|kubectl 命令完整参考]] — Cross-reference
+- [[domain-01-cluster-fundamentals/01-architecture-overview/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]] — Cross-reference
+- [[domain-04-storage-data/01-k8s-storage/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]] — Cross-reference
+- [[domain-04-storage-data/01-k8s-storage/01-storage-architecture-overview.md|存储架构概览与核心组件]] — Cross-reference

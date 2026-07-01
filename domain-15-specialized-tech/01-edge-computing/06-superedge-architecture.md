@@ -77,7 +77,7 @@ SuperEdge is Tencent's open-source Kubernetes-native edge computing management f
 
 <!-- chunk: 1. SuperEdge 整体架构 -->## 1. SuperEdge 整体架构
 
-#<!-- chunk: 1.1 架构设计目标 -->## 1.1 架构设计目标
+## 1.1 架构设计目标
 
 SuperEdge 的核心设计目标：
 
@@ -89,7 +89,7 @@ SuperEdge 的核心设计目标：
 | **流量闭环** | 边缘服务流量在边缘节点内部闭环 |
 | **零改造接入** | 原生 Kubernetes 工作负载无需修改 |
 
-#<!-- chunk: 1.2 整体架构图 -->## 1.2 整体架构图
+## 1.2 整体架构图
 
 ```mermaid
 graph TB
@@ -142,7 +142,7 @@ graph TB
     style Edge2 fill:#fff3e0,stroke:#e65100
 ```
 
-#<!-- chunk: 1.3 与标准 Kubernetes 的对比 -->## 1.3 与标准 Kubernetes 的对比
+## 1.3 与标准 Kubernetes 的对比
 
 ```mermaid
 graph LR
@@ -165,11 +165,11 @@ graph LR
 
 <!-- chunk: 2. 核心组件详解 -->## 2. 核心组件详解
 
-#<!-- chunk: 2.1 组件清单 -->## 2.1 组件清单
+## 2.1 组件清单
 
 SuperEdge 包含以下核心组件：
 
-##<!-- chunk: 云端组件 (Cloud Components) -->## 云端组件 (Cloud Components)
+## 云端组件 (Cloud Components)
 
 | 组件名 | 功能 | 部署位置 |
 |--------|------|----------|
@@ -177,7 +177,7 @@ SuperEdge 包含以下核心组件：
 | `edge-controller` | 管理边缘节点生命周期 | Cloud Master |
 | `application-grid-controller` | 管理 ServiceGroup CRD | Cloud Master |
 
-##<!-- chunk: 边缘组件 (Edge Components) -->## 边缘组件 (Edge Components)
+## 边缘组件 (Edge Components)
 
 | 组件名 | 功能 | 部署位置 |
 |--------|------|----------|
@@ -186,7 +186,7 @@ SuperEdge 包含以下核心组件：
 | `edge-health` | 分布式节点健康检查 | Edge Node (DaemonSet) |
 | `application-grid-wrapper` | 服务流量本地化代理 | Edge Node (DaemonSet) |
 
-#<!-- chunk: 2.2 组件交互流程 -->## 2.2 组件交互流程
+## 2.2 组件交互流程
 
 ```mermaid
 sequenceDiagram
@@ -208,7 +208,7 @@ sequenceDiagram
     TunnelCloud-->>APIServer: 更新节点状态
 ```
 
-#<!-- chunk: 2.3 安装配置 -->## 2.3 安装配置
+## 2.3 安装配置
 
 ```bash
 # 使用 edgeadm 工具安装 SuperEdge
@@ -230,13 +230,14 @@ edgeadm init \
 edgeadm change \
   --kubeconfig=/etc/kubernetes/admin.conf \
   --master-public-addr=<MASTER_PUBLIC_IP>:6443
+
 ```
 
 ---
 
 <!-- chunk: 3. tunnel 隧道机制 -->## 3. tunnel 隧道机制
 
-#<!-- chunk: 3.1 tunnel 设计原理 -->## 3.1 tunnel 设计原理
+## 3.1 tunnel 设计原理
 
 tunnel 是 SuperEdge 解决云边网络连通性的核心组件。由于边缘节点通常位于 NAT 后面或防火墙限制的网络中，云端 Master 无法直接访问边缘节点。tunnel 通过以下方式解决：
 
@@ -271,7 +272,7 @@ sequenceDiagram
     TunnelCloud-->>APIServer: 返回结果
 ```
 
-#<!-- chunk: 3.2 tunnel-cloud 配置 -->## 3.2 tunnel-cloud 配置
+## 3.2 tunnel-cloud 配置
 
 ```yaml
 # tunnel-cloud ConfigMap
@@ -373,7 +374,7 @@ spec:
             secretName: tunnel-cloud-cert
 ```
 
-#<!-- chunk: 3.3 tunnel-edge 配置 -->## 3.3 tunnel-edge 配置
+## 3.3 tunnel-edge 配置
 
 ```yaml
 # tunnel-edge ConfigMap
@@ -461,7 +462,7 @@ spec:
             secretName: tunnel-edge-cert
 ```
 
-#<!-- chunk: 3.4 隧道数据流详解 -->## 3.4 隧道数据流详解
+## 3.4 隧道数据流详解
 
 ```mermaid
 flowchart LR
@@ -492,7 +493,7 @@ flowchart LR
 
 <!-- chunk: 4. edge-health 分布式健康检查 -->## 4. edge-health 分布式健康检查
 
-#<!-- chunk: 4.1 问题背景 -->## 4.1 问题背景
+## 4.1 问题背景
 
 在标准 Kubernetes 中，节点健康检查完全依赖云端 Master：如果节点心跳超时，Master 会将节点标记为 `NotReady` 并驱逐 Pod。
 
@@ -502,7 +503,7 @@ flowchart LR
 - 云端误判节点不健康，驱逐边缘 Pod
 - 边缘业务中断
 
-#<!-- chunk: 4.2 edge-health 解决方案 -->## 4.2 edge-health 解决方案
+## 4.2 edge-health 解决方案
 
 ```mermaid
 graph TB
@@ -538,7 +539,7 @@ graph TB
     style EC fill:#e3f2fd,stroke:#1565c0
 ```
 
-#<!-- chunk: 4.3 edge-health 工作机制 -->## 4.3 edge-health 工作机制
+## 4.3 edge-health 工作机制
 
 **分布式投票流程：**
 
@@ -559,7 +560,7 @@ stateDiagram-v2
     Evicting --> [*] : Pod 被驱逐
 ```
 
-#<!-- chunk: 4.4 edge-health 配置 -->## 4.4 edge-health 配置
+## 4.4 edge-health 配置
 
 ```yaml
 # edge-health ConfigMap
@@ -644,7 +645,7 @@ spec:
             name: edge-health-config
 ```
 
-#<!-- chunk: 4.5 NodeHealthz CRD -->## 4.5 NodeHealthz CRD
+## 4.5 NodeHealthz CRD
 
 ```yaml
 # NodeHealthz CRD 定义
@@ -711,7 +712,7 @@ spec:
 
 <!-- chunk: 5. ServiceGroup 服务拓扑 -->## 5. ServiceGroup 服务拓扑
 
-#<!-- chunk: 5.1 ServiceGroup 概念 -->## 5.1 ServiceGroup 概念
+## 5.1 ServiceGroup 概念
 
 ServiceGroup 是 SuperEdge 解决边缘流量本地化的核心机制。它通过自定义 CRD 实现：
 
@@ -719,7 +720,7 @@ ServiceGroup 是 SuperEdge 解决边缘流量本地化的核心机制。它通�
 - **多区域部署**：同一工作负载在多个边缘区域独立部署
 - **区域隔离**：不同边缘区域之间服务独立，互不干扰
 
-#<!-- chunk: 5.2 ServiceGroup 核心 CRD -->## 5.2 ServiceGroup 核心 CRD
+## 5.2 ServiceGroup 核心 CRD
 
 ```mermaid
 classDiagram
@@ -751,7 +752,7 @@ classDiagram
     ServiceGrid --> NodeGroup : "通过 GridUniqKey 关联"
 ```
 
-#<!-- chunk: 5.3 DeploymentGrid 示例 -->## 5.3 DeploymentGrid 示例
+## 5.3 DeploymentGrid 示例
 
 ```yaml
 # DeploymentGrid - 跨边缘区域部署工作负载
@@ -798,7 +799,7 @@ spec:
   defaultReplicas: 1
 ```
 
-#<!-- chunk: 5.4 ServiceGrid 示例 -->## 5.4 ServiceGrid 示例
+## 5.4 ServiceGrid 示例
 
 ```yaml
 # ServiceGrid - 为 DeploymentGrid 创建对应 Service
@@ -820,7 +821,7 @@ spec:
     type: ClusterIP
 ```
 
-#<!-- chunk: 5.5 节点分组配置 -->## 5.5 节点分组配置
+## 5.5 节点分组配置
 
 ```yaml
 # 为边缘节点打 zone 标签，实现节点分组
@@ -841,7 +842,7 @@ kubectl get deployments -l superedge.io/grid-uniq-key=zone
 # nginx-deployment-grid-zone-2  2/2     2            2
 ```
 
-#<!-- chunk: 5.6 ServiceGroup 流量路由 -->## 5.6 ServiceGroup 流量路由
+## 5.6 ServiceGroup 流量路由
 
 ```mermaid
 flowchart TD
@@ -880,7 +881,7 @@ flowchart TD
 
 <!-- chunk: 6. 边缘节点自治 -->## 6. 边缘节点自治
 
-#<!-- chunk: 6.1 自治场景 -->## 6.1 自治场景
+## 6.1 自治场景
 
 边缘节点自治指：**当云边网络断开时，边缘节点能够独立维持业务运行**。
 
@@ -906,7 +907,7 @@ timeline
                 : 恢复正常运行
 ```
 
-#<!-- chunk: 6.2 自治实现机制 -->## 6.2 自治实现机制
+## 6.2 自治实现机制
 
 ```mermaid
 graph LR
@@ -934,7 +935,7 @@ graph LR
     TunnelEdge -->|"断线通知"| LiteAPI
 ```
 
-#<!-- chunk: 6.3 lite-apiserver 缓存策略 -->## 6.3 lite-apiserver 缓存策略
+## 6.3 lite-apiserver 缓存策略
 
 ```yaml
 # lite-apiserver 静态 Pod 配置
@@ -982,7 +983,7 @@ spec:
         path: /etc/lite-apiserver/pki
 ```
 
-#<!-- chunk: 6.4 断网恢复流程 -->## 6.4 断网恢复流程
+## 6.4 断网恢复流程
 
 ```mermaid
 sequenceDiagram
@@ -1019,7 +1020,7 @@ sequenceDiagram
 
 <!-- chunk: 7. lite-apiserver 设计 -->## 7. lite-apiserver 设计
 
-#<!-- chunk: 7.1 架构职责 -->## 7.1 架构职责
+## 7.1 架构职责
 
 `lite-apiserver` 是运行在每个边缘节点上的轻量级 API Server 代理，承担以下职责：
 
@@ -1044,7 +1045,7 @@ mindmap
       状态合并
 ```
 
-#<!-- chunk: 7.2 请求处理流程 -->## 7.2 请求处理流程
+## 7.2 请求处理流程
 
 ```mermaid
 flowchart TD
@@ -1068,7 +1069,7 @@ flowchart TD
     MemCache -->|"缓存未命中"| DiskCache
 ```
 
-#<!-- chunk: 7.3 缓存资源类型 -->## 7.3 缓存资源类型
+## 7.3 缓存资源类型
 
 ```go
 // lite-apiserver 支持缓存的 Kubernetes 资源类型
@@ -1103,11 +1104,11 @@ type CacheConfig struct {
 
 <!-- chunk: 8. application-grid-wrapper -->## 8. application-grid-wrapper
 
-#<!-- chunk: 8.1 功能定位 -->## 8.1 功能定位
+## 8.1 功能定位
 
 `application-grid-wrapper` 是实现 ServiceGroup 流量本地化的关键组件，它作为 DNS 和 kube-proxy 之间的代理层，将 Service 请求拦截并重定向到本地区域的 Endpoint。
 
-#<!-- chunk: 8.2 工作原理 -->## 8.2 工作原理
+## 8.2 工作原理
 
 ```mermaid
 flowchart LR
@@ -1124,7 +1125,7 @@ flowchart LR
     end
 ```
 
-#<!-- chunk: 8.3 配置示例 -->## 8.3 配置示例
+## 8.3 配置示例
 
 ```yaml
 # application-grid-wrapper ConfigMap
@@ -1161,7 +1162,7 @@ data:
 
 <!-- chunk: 9. 部署与配置实践 -->## 9. 部署与配置实践
 
-#<!-- chunk: 9.1 边缘节点接入流程 -->## 9.1 边缘节点接入流程
+## 9.1 边缘节点接入流程
 
 ```mermaid
 flowchart TD
@@ -1174,7 +1175,7 @@ flowchart TD
     Verify --> Done["接入完成"]
 ```
 
-#<!-- chunk: 9.2 完整部署示例 -->## 9.2 完整部署示例
+## 9.2 完整部署示例
 
 ```bash
 #!/bin/bash
@@ -1206,7 +1207,7 @@ kubectl logs -n edge-system \
   | grep "${NODE_NAME}"
 ```
 
-#<!-- chunk: 9.3 多区域部署示例 -->## 9.3 多区域部署示例
+## 9.3 多区域部署示例
 
 ```yaml
 # 完整的 ServiceGroup 多区域部署示例
@@ -1306,7 +1307,7 @@ spec:
 # kubectl label node workshop-node-6 workshop=workshop-C
 ```
 
-#<!-- chunk: 9.4 RBAC 配置 -->## 9.4 RBAC 配置
+## 9.4 RBAC 配置
 
 ```yaml
 # edge-health RBAC
@@ -1368,9 +1369,9 @@ rules:
 
 <!-- chunk: 10. 故障排查与运维 -->## 10. 故障排查与运维
 
-#<!-- chunk: 10.1 常见问题排查 -->## 10.1 常见问题排查
+## 10.1 常见问题排查
 
-##<!-- chunk: 问题 1: 边缘节点 NotReady -->## 问题 1: 边缘节点 NotReady
+## 问题 1: 边缘节点 NotReady
 
 ```bash
 # 检查节点状态
@@ -1391,7 +1392,7 @@ kubectl logs -n edge-system <tunnel-cloud-pod-name> | grep "edge-node-1"
 # 3. tunnel-cloud 地址配置错误 → 检查 ConfigMap
 ```
 
-##<!-- chunk: 问题 2: edge-health 投票异常 -->## 问题 2: edge-health 投票异常
+## 问题 2: edge-health 投票异常
 
 ```bash
 # 查看 NodeHealthz 对象
@@ -1408,7 +1409,7 @@ curl -k https://edge-node-2:10250/healthz
 kubectl logs -n edge-system <edge-controller-pod-name> | grep -E "taint|healthz"
 ```
 
-##<!-- chunk: 问题 3: ServiceGroup 流量未本地化 -->## 问题 3: ServiceGroup 流量未本地化
+## 问题 3: ServiceGroup 流量未本地化
 
 ```bash
 # 检查节点是否有正确的 zone 标签
@@ -1425,7 +1426,7 @@ kubectl logs -n edge-system <app-grid-wrapper-pod> | grep "endpoint"
 iptables -t nat -L KUBE-SERVICES | grep <service-cluster-ip>
 ```
 
-#<!-- chunk: 10.2 诊断脚本 -->## 10.2 诊断脚本
+## 10.2 诊断脚本
 
 ```bash
 #!/bin/bash
@@ -1489,7 +1490,7 @@ echo ""
 echo "诊断完成"
 ```
 
-#<!-- chunk: 10.3 监控指标 -->## 10.3 监控指标
+## 10.3 监控指标
 
 ```yaml
 # Prometheus 监控配置 - SuperEdge 关键指标
@@ -1557,7 +1558,7 @@ spec:
 
 <!-- chunk: 11. 性能优化 -->## 11. 性能优化
 
-#<!-- chunk: 11.1 tunnel 性能优化 -->## 11.1 tunnel 性能优化
+## 11.1 tunnel 性能优化
 
 ```yaml
 # tunnel-cloud 高性能配置
@@ -1643,7 +1644,7 @@ spec:
       timeoutSeconds: 10800
 ```
 
-#<!-- chunk: 11.2 lite-apiserver 缓存优化 -->## 11.2 lite-apiserver 缓存优化
+## 11.2 lite-apiserver 缓存优化
 
 ```yaml
 # 针对大量 ConfigMap/Secret 的优化配置
@@ -1665,7 +1666,7 @@ command:
   - --timeout=10
 ```
 
-#<!-- chunk: 11.3 边缘节点资源规划 -->## 11.3 边缘节点资源规划
+## 11.3 边缘节点资源规划
 
 ```yaml
 # 边缘节点资源预留（kubelet 配置）
@@ -1699,7 +1700,7 @@ nodeStatusReportFrequency: "5m"
 
 <!-- chunk: 12. 最佳实践总结 -->## 12. 最佳实践总结
 
-#<!-- chunk: 12.1 架构设计原则 -->## 12.1 架构设计原则
+## 12.1 架构设计原则
 
 ```mermaid
 mindmap
@@ -1726,26 +1727,26 @@ mindmap
       带宽限速保护
 ```
 
-#<!-- chunk: 12.2 生产环境检查清单 -->## 12.2 生产环境检查清单
+## 12.2 生产环境检查清单
 
 ```markdown
 <!-- chunk: SuperEdge 生产环境检查清单 -->## SuperEdge 生产环境检查清单
 
-#<!-- chunk: 部署前检查 -->## 部署前检查
+## 部署前检查
 - [ ] 云端 Master 节点高可用（≥3 节点）
 - [ ] tunnel-cloud 多副本部署（≥2 副本）
 - [ ] 边缘节点每个区域 ≥2 个节点（保证 edge-health 投票）
 - [ ] 证书有效期 ≥1 年，配置自动续期
 - [ ] 防火墙放行 9000/tcp（tunnel gRPC 端口）
 
-#<!-- chunk: 部署后验证 -->## 部署后验证
+## 部署后验证
 - [ ] 所有边缘节点状态为 Ready
 - [ ] tunnel-edge 日志无 ERROR（连接建立成功）
 - [ ] edge-health 投票正常
 - [ ] ServiceGrid 流量路由到本地区域
 - [ ] 断网测试：断开云边链路，验证边缘 Pod 继续运行
 
-#<!-- chunk: 日常运维 -->## 日常运维
+## 日常运维
 - [ ] 每日检查节点健康状态
 - [ ] 每周检查证书有效期
 - [ ] 每月演练云边断网自治场景
@@ -1753,7 +1754,10 @@ mindmap
 - [ ] 保留至少 30 天的日志
 ```
 
-#<!-- chunk: 12.3 版本升级策略 -->## 12.3 版本升级策略
+## 12.3 版本升级策略
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # SuperEdge 滚动升级脚本
@@ -1831,7 +1835,7 @@ SuperEdge 已在腾讯内部数万台边缘节点的生产环境中验证，是�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-37-edge-computing KUDIG Database — Global MOC
-- [[domain-15-specialized-tech/README|[[Domain 37: 边缘计算 (Edge Computing)|Domain 37: 边缘计算 (Edge Computing)]]]]
+- [[domain-15-specialized-tech/README.md|[[Domain 37: 边缘计算 (Edge Computing)|Domain 37: 边缘计算 (Edge Computing)]]]]
 - Domain-37 边缘计算 — 开源项目索引
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
@@ -1849,3 +1853,5 @@ SuperEdge 已在腾讯内部数万台边缘节点的生产环境中验证，是�
 - 05-openyurt-architecture
 - 07-edge-ai-inference-federated-learning
 - 08-edge-storage-network
+
+```

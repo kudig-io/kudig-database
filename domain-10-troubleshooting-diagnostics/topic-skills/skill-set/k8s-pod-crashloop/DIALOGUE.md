@@ -4,13 +4,14 @@ category: dialogue
 tags: [dialogue, remote-advisor, pod-crashloop]
 created: "2026-05-23"
 updated: "2026-05-23"
+last_updated: 2026-05-23
 summary: "Pod反复重启问题的远程顾问对话脚本，覆盖OOMKilled、启动失败、探针配置排查。"
 relationships:
-  - target: "[[skills/skill-k8s-node-notready-SKILL]]"
+  - target: "[[skills/skill-k8s-node-notready-SKILL.md]]"
     type: uses
-  - target: "[[entities/cilium]]"
+  - target: "[[entities/cilium.md]]"
     type: uses
-  - target: "[[entities/deployment]]"
+  - target: "[[entities/deployment.md]]"
     type: uses
 ---
 
@@ -81,7 +82,7 @@ kubectl describe pod <pod-name> -n <namespace> | tail -n 30
 kubectl get pods -n <namespace> -o wide | grep -E "CrashLoopBackOff|Error|OOMKilled"
 ```
 
-> **如果无法执行**：请手动统计一下：有多少个 Pod 受影响？它们是否属于同一个 [[entities/deployment|Deployment]]/StatefulSet/DaemonSet？是否分布在不同的节点上？
+> **如果无法执行**：请手动统计一下：有多少个 Pod 受影响？它们是否属于同一个 [[entities/deployment.md|Deployment]]/StatefulSet/DaemonSet？是否分布在不同的节点上？
 
 **工程师回复选项**：
 - **C1**：所有受影响 Pod 属于同一个 Deployment，分布在不同节点
@@ -260,6 +261,10 @@ kubectl get configmap <configmap-name> -n <namespace> -o yaml
 > **如果无法执行**：如果你知道配置错误在哪里，可以直接告诉我需要修改的值，我会帮你生成正确的配置内容。
 
 **步骤 2**：修复配置后重新加载
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply -f <fixed-config.yaml> -n <namespace>
 ```
@@ -267,6 +272,10 @@ kubectl apply -f <fixed-config.yaml> -n <namespace>
 > **如果无法执行 `kubectl apply`**：请使用 `kubectl edit configmap <configmap-name> -n <namespace>` 手动修改。如果 edit 也无法使用，请告诉我你平时如何修改配置（GitOps？Dashboard？），按你的流程操作即可，修改后告诉我已更新。
 
 **步骤 3**：重启 Pod 使配置生效
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 kubectl rollout restart deployment/<deployment-name> -n <namespace>
 ```
@@ -278,6 +287,10 @@ kubectl rollout restart deployment/<deployment-name> -n <namespace>
 **顾问**：根因是内存限制过低。请按以下步骤调整：
 
 **步骤 1**：编辑 Deployment 增加内存 limit
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl edit deployment <deployment-name> -n <namespace>
 ```
@@ -314,6 +327,10 @@ kubectl get secret -n <namespace> | grep dockerconfigjson
 > **如果无法执行**：请确认你的镜像仓库是否需要认证。如果需要，请检查 Pod 的 spec.imagePullSecrets 是否正确引用了 Secret。如果不知道 Secret 名称，请告诉我你们使用的镜像仓库类型（Harbor? Docker Hub? ECR? ACR?），我来提供对应的配置方式。
 
 **步骤 3**：修复后重新创建 Pod
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 kubectl delete pod <pod-name> -n <namespace>
 ```
@@ -338,7 +355,7 @@ kubectl get endpoints <dependency-svc> -n <dependency-namespace>
 kubectl get networkpolicy -n <namespace>
 ```
 
-> **如果无法执行**：请确认你们是否使用了 [[entities/cilium|Cilium]] 等网络策略。如果使用了，请检查是否有规则阻止了 Pod 访问依赖服务。如果无法确认，可以暂时将网络策略全部删除测试（仅限测试环境）。
+> **如果无法执行**：请确认你们是否使用了 [[entities/cilium.md|Cilium]] 等网络策略。如果使用了，请检查是否有规则阻止了 Pod 访问依赖服务。如果无法确认，可以暂时将网络策略全部删除测试（仅限测试环境）。
 
 **步骤 3**：临时缓解方案
 > 如果依赖服务确实不可用且短时间内无法恢复，建议：1) 如果应用支持启动重试，可以增加 `initialDelaySeconds` 和 `failureThreshold` 让 Pod 有更多时间等待依赖恢复；2) 如果业务可以降级，可以临时将该 Deployment 的副本数缩为 0，等依赖恢复后再扩容。请告诉我你的选择。
@@ -355,6 +372,10 @@ kubectl rollout history deployment/<deployment-name> -n <namespace>
 > **如果无法执行**：请告诉我你记得的上一版本的镜像 tag，或者你们是否使用 GitOps（如 ArgoCD/Flux），可以通过 GitOps 回滚。
 
 **步骤 2**：执行回滚
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 kubectl rollout undo deployment/<deployment-name> -n <namespace>
 # 或者回滚到指定版本
@@ -430,7 +451,7 @@ kubectl logs <pod-name> -n <namespace> --tail=50
 
 > **升级路径选择**：
 > 1. **继续深入排查** → 我需要你执行更详细的诊断命令，包括节点级别检查
-> 2. **升级至存储专家** → 如果涉及数据库/消息队列等有状态服务，我将转接至 [[skills/skill-k8s-node-notready-SKILL|SKILL]]-STORE-001
+> 2. **升级至存储专家** → 如果涉及数据库/消息队列等有状态服务，我将转接至 [[skills/skill-k8s-node-notready-SKILL.md|SKILL]]-STORE-001
 > 3. **升级至节点专家** → 如果怀疑是节点/内核级别问题，我将转接至 SKILL-NODE-001
 > 4. **升级至工作负载专家** → 如果涉及复杂的 Deployment/StatefulSet 编排问题，我将转接至 SKILL-WORK-001
 
@@ -467,6 +488,9 @@ kubectl logs <pod-name> -n <namespace> --tail=100
 ## 附录：常用命令速查
 
 > 以下命令供现场工程师快速复制使用，顾问可根据实际情况选择性提供。
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 快速查看 Pod 状态
@@ -509,9 +533,9 @@ kubectl exec -it <pod-name> -n <namespace> -- /bin/bash
 
 ## 相关案例
 
-- [[synthesis/case-studies/2026-03-15-oomkilled-java-restart|2026-03-15-oomkilled-java-restart]]
-- [[synthesis/case-studies/2026-08-10-容器内存限制过严导致java应用频繁oom|2026-08-10-容器内存限制过严导致java应用频繁oom]]
+- [[concepts/case-studies/2026-03-15-oomkilled-java-restart.md|2026-03-15-oomkilled-java-restart]]
+- [[concepts/case-studies/2026-08-10-容器内存限制过严导致java应用频繁oom.md|2026-08-10-容器内存限制过严导致java应用频繁oom]]
 ## Related
 
-- [[video-scripts/pod-crashloop|Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本 (video-scripts)]]
-- [[domain-17-system-foundation/topic-dictionary/configuration/secrets|Secrets]]
+- [[scripts/video-scripts/pod-crashloop.md|Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本 (video-scripts)]]
+- [[domain-17-system-foundation/topic-dictionary/configuration/secrets.md|Secrets]]

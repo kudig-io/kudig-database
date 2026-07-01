@@ -97,6 +97,9 @@ related_topics:
 
 ### Step 1: 创建项目 Namespace 与存储 (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1.1 创建 Namespace
 kubectl create namespace microservice-demo
@@ -137,6 +140,9 @@ kubectl create secret generic db-credentials -n microservice-demo \
 ```
 
 ### Step 2: 部署后端服务 (数据库 + 缓存) (40min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 2.1 部署数据库 (StatefulSet + PVC)
@@ -239,6 +245,9 @@ EOF
 
 ### Step 3: 部署前端 Web 应用 (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 3.1 部署 Web 前端 (多副本 + 反亲和)
 cat <<EOF | kubectl apply -f -
@@ -310,6 +319,9 @@ EOF
 ```
 
 ### Step 4: 配置 Ingress 路由 (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 4.1 创建 Ingress 规则
@@ -393,10 +405,13 @@ kubectl get ingress -n microservice-demo
 
 ## 清理资源
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+
 ```bash
-kubectl delete namespace microservice-demo
+kubectl delete namespace microservice-demo  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]

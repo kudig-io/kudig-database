@@ -69,7 +69,7 @@ created: "2026-05-23"
 
 # 35 - 工作负载控制器详解 (Workload Controllers)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|Kubernetes]] Workloads](https://kubernetes.io/docs/concepts/workloads/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|Kubernetes]] Workloads](https://kubernetes.io/docs/concepts/workloads/)
 
 <!-- chunk: 控制器核心特征矩阵 (Controller Matrix) -->
 ## 控制器核心特征矩阵 (Controller Matrix)
@@ -138,6 +138,7 @@ spec:
             port: 8080
           initialDelaySeconds: 30
           periodSeconds: 10
+
 ```
 
 ### 1.2 关键优化点
@@ -318,7 +319,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications MOC
-- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
 - Domain-4 工作负载 — 开源项目索引
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
@@ -338,12 +339,14 @@ spec:
 - 调度器配置与优化
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-06-observability
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|速查卡: k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
 
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/10-workload-comparison|Deployment vs StatefulSet vs DaemonSet 选型指南]]
+- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/10-workload-comparison.md|Deployment vs StatefulSet vs DaemonSet 选型指南]]
 ## See Also
 
 - 08-multi-cloud-workload-strategy
 - 09-edge-computing-deployment
 - 11-pod-lifecycle-events
 - 12-advanced-pod-patterns
+
+```

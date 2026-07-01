@@ -93,7 +93,7 @@ k8s_versions:
 
 <!-- chunk: 1. 多 Agent 架构模式 -->## 1. 多 Agent 架构模式
 
-#<!-- chunk: 1.1 六大核心模式 -->## 1.1 六大核心模式
+## 1.1 六大核心模式
 
 ```
 多 Agent 架构模式
@@ -127,7 +127,7 @@ k8s_versions:
 
 <!-- chunk: 2. Supervisor-Worker 模式（生产最常用） -->## 2. Supervisor-Worker 模式（生产最常用）
 
-#<!-- chunk: 2.1 架构设计 -->## 2.1 架构设计
+## 2.1 架构设计
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -152,7 +152,7 @@ k8s_versions:
                      └──────────────┘
 ```
 
-#<!-- chunk: 2.2 LangGraph 实现 -->## 2.2 LangGraph 实现
+## 2.2 LangGraph 实现
 
 ```python
 from langgraph.graph import StateGraph, END
@@ -449,7 +449,7 @@ class BlackboardAgent:
 
 <!-- chunk: 5. 多 Agent 通信协议 -->## 5. 多 Agent 通信协议
 
-#<!-- chunk: 5.1 标准化消息格式 -->## 5.1 标准化消息格式
+## 5.1 标准化消息格式
 
 ```python
 from dataclasses import dataclass
@@ -524,7 +524,7 @@ result_message = AgentMessage(
 )
 ```
 
-#<!-- chunk: 5.2 消息队列集成 -->## 5.2 消息队列集成
+## 5.2 消息队列集成
 
 ```python
 import asyncio
@@ -715,7 +715,7 @@ class ConflictResolver:
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 7.1 K8s 上的多 Agent 部署 -->## 7.1 K8s 上的多 Agent 部署
+## 7.1 K8s 上的多 Agent 部署
 
 ```yaml
 # Agent Worker Deployment 模板
@@ -804,7 +804,7 @@ spec:
 
 <!-- chunk: 8. 最佳实践与反模式 -->## 8. 最佳实践与反模式
 
-#<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
 
 - **明确边界**：每个 Agent 的职责范围要清晰，避免越界调用其他 Agent 的工具
 - **异步通信**：Agent 间通过消息队列通信而非直接调用，提高解耦性和弹性
@@ -812,7 +812,7 @@ spec:
 - **强模型当 Orchestrator**：任务分解和质量把控用 GPT-4o/Claude，执行用便宜模型
 - **超时防护**：给每个 Worker 设置最大执行时间，避免一个卡住阻塞整体
 
-#<!-- chunk: 反模式 -->## 反模式
+## 反模式
 
 - **过度拆分**：3 步任务拆成 5 个 Agent，沟通成本超过了并行收益
 - **Agent 间直接调用**：点对点依赖导致强耦合，改用消息总线
@@ -841,17 +841,17 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-ai-agent KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README|[[AI Agent 工程专题|AI Agent 工程专题]]]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals|[[AI Agent 基础与核心架构|AI Agent 基础与核心架构]]]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models|[[LLM 基座模型选型与评估|LLM 基座模型选型与评估]]]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails|安全护栏、提示注入防护与合规]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/11-cost-latency-optimization|成本与延迟优化策略]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|[[AI Agent 基础与核心架构|AI Agent 基础与核心架构]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|[[LLM 基座模型选型与评估|LLM 基座模型选型与评估]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/11-cost-latency-optimization.md|成本与延迟优化策略]]
 
 ## See Also
 

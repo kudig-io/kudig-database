@@ -333,6 +333,9 @@ T+185s Pod 从 checkpoint 恢复，继续执行
 
 ## 命令快速参考
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+
 ```bash
 # 查看 Spot 节点
 kubectl get nodes -l karpenter.sh/capacity-type=spot
@@ -371,4 +374,4 @@ kubectl get events -A --field-selector reason=Evicted --sort-by='.lastTimestamp'
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

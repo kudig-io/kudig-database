@@ -77,7 +77,7 @@ Linkerd 2026年的发展重点包括：持续优化 Rust 代理的性能和资�
 
 本指南从安装到生产配置，覆盖 Linkerd 的所有核心功能，包括自动 mTLS、流量管理、可观测性、多集群连接、安全策略和故障排查。所有配置均基于 Linkerd v2.18+，可直接用于生产环境。
 
-#<!-- chunk: 架构图 -->## 架构图
+## 架构图
 
 ```mermaid
 graph TB
@@ -124,7 +124,7 @@ graph TB
 
 <!-- chunk: 一、架构与设计理念 -->## 一、架构与设计理念
 
-#<!-- chunk: 核心设计原则 -->## 核心设计原则
+## 核心设计原则
 
 | 原则 | 说明 | 与 [[Istio|Istio]] 对比 |
 |:---|:---|:---|
@@ -135,7 +135,7 @@ graph TB
 | 可组合性 | 独立组件（Viz, Multicluster）可按需安装 | Istio 扩展较重 |
 | 安全默认 | 最小权限、自动证书轮换、默认加密 | Istio 需要额外配置 |
 
-#<!-- chunk: Linkerd 控制平面组件详解 -->## Linkerd 控制平面组件详解
+## Linkerd 控制平面组件详解
 
 | 组件 | 功能 | 默认资源 |
 |:---|:---|:---|
@@ -148,7 +148,7 @@ graph TB
 
 <!-- chunk: 二、安装部署 -->## 二、安装部署
 
-#<!-- chunk: 2.1 CLI 安装 -->## 2.1 CLI 安装
+## 2.1 CLI 安装
 
 ```bash
 # macOS
@@ -172,7 +172,10 @@ linkerd check --pre
 # pre-kubernetes-setup: has CRD access ..................................... [ok]
 ```
 
-#<!-- chunk: 2.2 控制平面安装 -->## 2.2 控制平面安装
+## 2.2 控制平面安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 开发/测试环境
@@ -204,7 +207,11 @@ linkerd check
 # linkerd-api: control plane pods are ready ................................ [ok]
 ```
 
-#<!-- chunk: 2.3 生产级 [[Helm|Helm]] 安装 -->## 2.3 生产级 Helm 安装
+## 2.3 生产级 Helm 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 helm repo add linkerd https://helm.linkerd.io/stable
@@ -235,7 +242,10 @@ helm install linkerd-control-plane linkerd/linkerd-control-plane \
   --wait
 ```
 
-#<!-- chunk: 2.4 Viz 扩展 (监控) -->## 2.4 Viz 扩展 (监控)
+## 2.4 Viz 扩展 (监控)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 linkerd viz install | kubectl apply -f -
@@ -251,7 +261,10 @@ kubectl get pods -n linkerd-viz
 # linkerd-web-xxx                 2/2     Running   0          1m
 ```
 
-#<!-- chunk: 2.5 多集群扩展 -->## 2.5 多集群扩展
+## 2.5 多集群扩展
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # Cluster A (east)
@@ -271,7 +284,7 @@ linkerd multicluster gateways
 
 <!-- chunk: 三、自动 mTLS -->## 三、自动 mTLS
 
-#<!-- chunk: 默认行为 -->## 默认行为
+## 默认行为
 
 Linkerd 安装后自动启用 mTLS，无需任何配置。Identity Controller 为每个 Pod 签发 SPIFFE 标准身份证书（24h TTL，自动轮换）。证书的格式为 `spiffe://<trust.domain>/<namespace>/<serviceaccount>`，为每个工作负载提供唯一的加密身份标识。
 
@@ -292,7 +305,7 @@ kubectl -n linkerd exec deploy/linkerd-identity -- \
   openssl x509 -in /var/run/linkerd/identity/issuer.crt -text -noout | head -20
 ```
 
-#<!-- chunk: 外部 CA (cert-manager) -->## 外部 CA (cert-manager)
+## 外部 CA (cert-manager)
 
 ```yaml
 apiVersion: linkerd.io/v1alpha2
@@ -337,7 +350,7 @@ spec:
     - client auth
 ```
 
-#<!-- chunk: STRICT mTLS 模式 -->## STRICT mTLS 模式
+## STRICT mTLS 模式
 
 ```yaml
 apiVersion: policy.linkerd.io/v1alpha1
@@ -361,11 +374,11 @@ spec:
 
 <!-- chunk: 四、流量管理 -->## 四、流量管理
 
-#<!-- chunk: 4.1 自动负载均衡 -->## 4.1 自动负载均衡
+## 4.1 自动负载均衡
 
 Linkerd 自动使用 EWMA (Exponential Weighted Moving Average) 算法进行基于延迟感知的负载均衡，无需任何配置。这种算法会根据每个端点的历史延迟数据动态调整权重，将更多流量分配给响应更快的服务实例。相比传统的轮询（Round Robin）或最少连接（Least Connections）算法，EWMA 能够更快地感知后端服务的性能变化，实现更精确的负载分配。
 
-#<!-- chunk: 4.2 重试与超时 -->## 4.2 重试与超时
+## 4.2 重试与超时
 
 ```yaml
 apiVersion: linkerd.io/v1alpha2
@@ -411,7 +424,7 @@ spec:
     isRetryable: false
 ```
 
-#<!-- chunk: 4.3 流量分割 (金丝雀发布) -->## 4.3 流量分割 (金丝雀发布)
+## 4.3 流量分割 (金丝雀发布)
 
 ```yaml
 apiVersion: split.smi-spec.io/v1alpha4
@@ -506,7 +519,7 @@ spec:
             - containerPort: 8080
 ```
 
-#<!-- chunk: 4.4 故障注入 -->## 4.4 故障注入
+## 4.4 故障注入
 
 ```yaml
 apiVersion: policy.linkerd.io/v1alpha1
@@ -542,7 +555,7 @@ spec:
 
 <!-- chunk: 五、可观测性 -->## 五、可观测性
 
-#<!-- chunk: 5.1 黄金指标 -->## 5.1 黄金指标
+## 5.1 黄金指标
 
 ```bash
 # 服务级黄金指标
@@ -571,7 +584,7 @@ linkerd viz tap deployment/myapp -n production --duration 10s
 # rsp id=0:1 proxy=in  src=10.0.0.1:38422 dst=10.0.0.2:8080 :status=200 latency=12ms
 ```
 
-#<!-- chunk: 5.2 Prometheus 集成 -->## 5.2 Prometheus 集成
+## 5.2 Prometheus 集成
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -609,7 +622,7 @@ spec:
       interval: 15s
 ```
 
-#<!-- chunk: 5.3 关键 PromQL 查询 -->## 5.3 关键 PromQL 查询
+## 5.3 关键 PromQL 查询
 
 ```promql
 # 服务成功率
@@ -630,7 +643,7 @@ container_memory_working_set_bytes{container="linkerd-proxy"} /
 container_spec_memory_limit_bytes{container="linkerd-proxy"}
 ```
 
-#<!-- chunk: 5.4 Prometheus 告警规则 -->## 5.4 Prometheus 告警规则
+## 5.4 Prometheus 告警规则
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -693,7 +706,7 @@ spec:
 
 <!-- chunk: 六、多集群连接 -->## 六、多集群连接
 
-#<!-- chunk: 架构 -->## 架构
+## 架构
 
 ```
 Cluster A (east)                              Cluster B (west)
@@ -705,7 +718,12 @@ Cluster A (east)                              Cluster B (west)
 └── Pods with linkerd-proxy                       └── Pods with linkerd-proxy
 ```
 
-#<!-- chunk: 连接配置 -->## 连接配置
+## 连接配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # Cluster A: 安装多集群组件并导出服务
@@ -732,7 +750,7 @@ kubectl exec -n production deploy/test-client -- curl -s http://myapp-east/healt
 
 <!-- chunk: 七、Linkerd vs Istio 对比 -->## 七、Linkerd vs Istio 对比
 
-#<!-- chunk: 功能与性能对比 -->## 功能与性能对比
+## 功能与性能对比
 
 | 维度 | Linkerd | Istio |
 |:---|:---|:---|
@@ -751,7 +769,7 @@ kubectl exec -n production deploy/test-client -- curl -s http://myapp-east/healt
 | **Gateway API** | 实验性 | 完整支持 |
 | **商业支持** | Buoyant Enterprise | Google, Solo.io |
 
-#<!-- chunk: 选型决策 -->## 选型决策
+## 选型决策
 
 ```yaml
 选择 Linkerd 的场景:
@@ -774,7 +792,7 @@ kubectl exec -n production deploy/test-client -- curl -s http://myapp-east/healt
 
 <!-- chunk: 八、生产级配置 -->## 八、生产级配置
 
-#<!-- chunk: 8.1 命名空间注入控制 -->## 8.1 命名空间注入控制
+## 8.1 命名空间注入控制
 
 ```yaml
 apiVersion: v1
@@ -827,7 +845,7 @@ spec:
           image: modern-app:v2.0
 ```
 
-#<!-- chunk: 8.2 Proxy 资源限制 -->## 8.2 Proxy 资源限制
+## 8.2 Proxy 资源限制
 
 ```bash
 linkerd install \
@@ -838,7 +856,7 @@ linkerd install \
   --set proxy.await=true
 ```
 
-#<!-- chunk: 8.3 高可用反亲和 -->## 8.3 高可用反亲和
+## 8.3 高可用反亲和
 
 ```yaml
 apiVersion: apps/v1
@@ -869,7 +887,7 @@ spec:
                 topologyKey: topology.kubernetes.io/zone
 ```
 
-#<!-- chunk: 8.4 授权策略 -->## 8.4 授权策略
+## 8.4 授权策略
 
 ```yaml
 apiVersion: policy.linkerd.io/v1alpha1
@@ -947,7 +965,7 @@ spec:
     unauthenticated: false
 ```
 
-#<!-- chunk: 8.5 网络策略 -->## 8.5 网络策略
+## 8.5 网络策略
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -996,7 +1014,7 @@ spec:
 
 <!-- chunk: 九、故障排查 -->## 九、故障排查
 
-#<!-- chunk: 9.1 诊断命令 -->## 9.1 诊断命令
+## 9.1 诊断命令
 
 ```bash
 #!/bin/bash
@@ -1043,9 +1061,10 @@ echo "=== 11. 控制平面日志 ==="
 kubectl logs -n linkerd deploy/linkerd-destination --tail=50
 kubectl logs -n linkerd deploy/linkerd-identity --tail=50
 kubectl logs -n linkerd deploy/linkerd-proxy-injector --tail=50
+
 ```
 
-#<!-- chunk: 9.2 常见问题 -->## 9.2 常见问题
+## 9.2 常见问题
 
 | 问题 | 原因 | 解决 |
 |:---|:---|:---|
@@ -1065,7 +1084,7 @@ kubectl logs -n linkerd deploy/linkerd-proxy-injector --tail=50
 
 <!-- chunk: 十、性能基准 -->## 十、性能基准
 
-#<!-- chunk: Linkerd vs Istio vs 无网格性能对比 -->## Linkerd vs Istio vs 无网格性能对比
+## Linkerd vs Istio vs 无网格性能对比
 
 ```yaml
 测试环境:
@@ -1119,7 +1138,7 @@ Istio Ambient (L4 only):
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
 - Domain-26 服务网格与微服务 — 开源项目索引
 - Istio 企业级服务网格架构与实践
 - Linkerd 企业级服务网格深度实践
@@ -1140,4 +1159,6 @@ Istio Ambient (L4 only):
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+
+```

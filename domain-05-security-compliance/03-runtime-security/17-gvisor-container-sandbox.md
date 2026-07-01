@@ -141,6 +141,9 @@ Sentry 实现了约 240 个 Linux 系统调用 (覆盖 70% 常用调用):
 
 ### 3.1 安装 gVisor ([[containerd|containerd]])
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 安装 runsc
 wget https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc
@@ -193,6 +196,10 @@ spec:
 ```
 
 ### 3.4 节点标签 + 调度
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 标记安装了 gVisor 的节点
@@ -373,8 +380,8 @@ spec:
 ## Obsidian 相关文档
 
 - domain-05-security-compliance MOC
-- [[domain-05-security-compliance/README|Domain 25: 云原生安全 (Cloud Native Security)]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-25 云原生安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
@@ -392,4 +399,5 @@ spec:
 - 99-cert-manager-tls-guide
 - 99-falco-runtime-security-guide
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]
+```

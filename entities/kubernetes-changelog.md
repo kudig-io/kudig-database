@@ -54,7 +54,7 @@ created: "2026-05-23"
 | v1.15 | 286 KB | CRD Webhooks |
 | v1.16 | 354 KB | 15 个 GA API |
 | v1.17 | 355 KB | 拓扑感知调度 |
-| v1.18 | 383 KB | [[Ephemeral Containers|Ephemeral Containers]] |
+| v1.18 | 383 KB | Ephemeral Containers |
 | v1.19 | 502 KB | 大规模版本 |
 | v1.20 | 420 KB | Docker 弃用警告 |
 | v1.21 | 377 KB | PSP 弃用 |
@@ -80,7 +80,7 @@ created: "2026-05-23"
 
 ## 使用方式
 
-1. 参考 [[concepts/kubernetes-version-evolution|Kubernetes 版本演进]] 了解里程碑版本的关键变更
+1. 参考 [[concepts/kubernetes-version-evolution.md|Kubernetes 版本演进]] 了解里程碑版本的关键变更
 2. 查看具体 CHANGELOG 文件了解某个版本的完整变更详情
 3. 关注弃用和移除的 API，在升级前做好准备
 
@@ -91,7 +91,7 @@ domain-19-landscape-references/_archived-release-notes/kubernetes/ 目录下全�
 ## Related
 
 - [[docker]] — Docker
-- [[entities/networkpolicy|networkpolicy]] — NetworkPolicy
-- [[entities/statefulset|statefulset]] — StatefulSet
+- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[entities/statefulset.md|statefulset]] — StatefulSet
 - [[coredns]] — CoreDNS
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

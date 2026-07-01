@@ -459,27 +459,27 @@ cross_refs: [{ type: "domain", path: "...", label: "..." }]
 
 ## Obsidian 相关文档
 
-- [[reports/CONTENT-DEEP-EVALUATION-2026-05-19|kudig-database 内容深度评估报告]]
-- [[reports/README|项目报告 (Reports)]]
-- [[reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19|kudig-database 内容深度评估 + 修复进展]]
-- [[reports/CONTENT-GAP-ANALYSIS|内容缺口分析报告]]
-- [[reports/DEEP-RESEARCH-ASSESSMENT|深度研究能力评估报告]]
-- [[reports/EVALUATION-2026-05-19|kudig-database 双维度评估报告]]
-- [[reports/EXTRACT-TROUBLESHOOTING|KUDIG Gitbook ZIP 解压问题诊断与解决方案]]
-- [[reports/FIX-SUMMARY-2026-05-19|kudig-database 全面质量修复完成报告]]
-- [[reports/FULL-FIX-PROGRESS-2026-05-19|kudig-database 全面修复进展总览]]
-- [[reports/PRE-RELEASE-FINAL-EVALUATION-2026-05-19|kudig-database 发布前终局评估]]
-- [[reports/QUALITY-BLIND-SPOT-SCAN-2026-05-19|kudig-database 质量盲区深度扫描报告]]
+- _reports/CONTENT-DEEP-EVALUATION-2026-05-19.md
+- [[domain-19-landscape-references/topic-release-notes/README.md|项目报告 (Reports)]]
+- _reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md
+- _reports/CONTENT-GAP-ANALYSIS.md
+- _reports/DEEP-RESEARCH-ASSESSMENT.md
+- _reports/EVALUATION-2026-05-19.md
+- _reports/EXTRACT-TROUBLESHOOTING.md
+- _reports/FIX-SUMMARY-2026-05-19.md
+- _reports/FULL-FIX-PROGRESS-2026-05-19.md
+- _reports/PRE-RELEASE-FINAL-EVALUATION-2026-05-19.md
+- _reports/QUALITY-BLIND-SPOT-SCAN-2026-05-19.md
 
 ---
 
 ## Related
 
-- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]]
-- [[docs/TAG-DICTIONARY|KUDIG 全局标签字典]]
-- [[docs/FRONTMATTER-SPEC|KUDIG Frontmatter 规范]]
-- [[docs/SCENARIO-TAXONOMY|KUDIG 场景分类体系]]
+- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
+- [[docs/TAG-DICTIONARY.md|KUDIG 全局标签字典]]
+- [[docs/FRONTMATTER-SPEC.md|KUDIG Frontmatter 规范]]
+- [[docs/SCENARIO-TAXONOMY.md|KUDIG 场景分类体系]]
 
 - [[README|README]]
 - [[MOC|MOC]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

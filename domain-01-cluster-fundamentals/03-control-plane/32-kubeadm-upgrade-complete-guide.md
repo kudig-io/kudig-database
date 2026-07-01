@@ -278,6 +278,9 @@ kubectl get nodes -o wide
 
 ### 3.5 步骤 4: 升级 kube-controller-manager 和 kube-scheduler
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # kubeadm upgrade apply 已自动升级 controller-manager 和 scheduler
 # 如需手动刷新配置：
@@ -289,6 +292,9 @@ kubectl get pods -n kube-system kube-scheduler-<node-name>
 ```
 
 ### 3.6 步骤 5: 升级 kubelet
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 在控制平面节点执行
@@ -315,6 +321,9 @@ kubectl get nodes -o wide
 ## 4. 控制平面组件升级（其他控制平面节点）
 
 ### 4.1 单节点依次升级
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # SSH 到第二个控制平面节点（node-2）
@@ -363,6 +372,10 @@ kubectl get pods -n kube-system -l k8s-app=kube-proxy -o jsonpath='{.items[*].sp
 
 每个 worker 节点依次升级，不能同时升级所有 worker 节点（避免服务中断）。
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 升级 worker 节点（逐节点执行）
 
@@ -404,6 +417,9 @@ kubectl get pods --all-namespaces -o wide -w
 ## 6. 升级后验证
 
 ### 6.1 完整验证清单
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 1. 检查所有节点版本
@@ -477,6 +493,9 @@ https://127.0.0.1:2379 is healthy: true
 
 ### 7.2 API Server 回滚步骤
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 1. 停止 kubelet
 systemctl stop kubelet
@@ -495,6 +514,10 @@ kubectl get pods -n kube-system kube-apiserver-<node-name>
 ```
 
 ### 7.3 etcd 回滚步骤
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 1. 停止所有控制平面节点上的 etcd
@@ -519,6 +542,9 @@ curl -sk https://localhost:6443/healthz
 ```
 
 ### 7.4 kubelet 版本回滚
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 在出问题的节点上
@@ -599,6 +625,10 @@ kubectl get configmap -n kube-system kube-scheduler -o yaml
 <!-- chunk: 9. 升级完成后的收尾工作 -->
 ## 9. 升级完成后的收尾工作
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 1. 更新 kubectl 客户端（如使用外部 kubectl）
 apt-get install -y kubectl=1.XX.Y-1*  # Debian/Ubuntu
@@ -669,7 +699,7 @@ related:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -683,8 +713,8 @@ related:
 
 ## Related
 
-- [[release-notes/12-demo-env-guide|12-demo-env-guide]]
-- [[release-notes/21-platform-selection-guide|21-platform-selection-guide]]
+- 12-demo-env-guide
+- 21-platform-selection-guide
 
 ## See Also
 
@@ -692,3 +722,5 @@ related:
 - 32-kubeadm-cluster-lifecycle
 - 33-kubelet-eviction-thresholds
 - final-completion-check
+
+```

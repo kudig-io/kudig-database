@@ -77,7 +77,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. eBPF 性能基础与瓶颈分析 -->## 1. eBPF 性能基础与瓶颈分析
 
-#<!-- chunk: 1.1 eBPF 执行模型与性能特征 -->## 1.1 eBPF 执行模型与性能特征
+## 1.1 eBPF 执行模型与性能特征
 
 eBPF（Extended Berkeley Packet Filter）程序运行于 Linux 内核的 JIT 编译执行环境中，其性能特征与传统内核模块、用户态程序存在显著差异。理解 eBPF 的执行模型是进行性能优化的前提。
 
@@ -107,7 +107,7 @@ graph TB
     style J fill:#9999ff
 ```
 
-##<!-- chunk: 1.1.1 JIT 编译性能 -->## 1.1.1 JIT 编译性能
+## 1.1.1 JIT 编译性能
 
 Linux 内核的 eBPF JIT 编译器将 BPF 字节码转换为本地机器码，极大提升了执行效率。
 
@@ -117,6 +117,9 @@ Linux 内核的 eBPF JIT 编译器将 BPF 字节码转换为本地机器码，�
 | JIT 模式 | 4-10x | 生产环境 |
 | XDP Native | 10-50x | 高速网络 |
 | XDP Offload | 50-200x | SmartNIC |
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
 
 ```bash
 # 查看 JIT 编译状态
@@ -134,7 +137,7 @@ echo 2 > /proc/sys/net/core/bpf_jit_enable
 dmesg | grep "JIT"
 ```
 
-##<!-- chunk: 1.1.2 性能瓶颈分类 -->## 1.1.2 性能瓶颈分类
+## 1.1.2 性能瓶颈分类
 
 ```mermaid
 mindmap
@@ -166,9 +169,9 @@ mindmap
       内存带宽
 ```
 
-#<!-- chunk: 1.2 性能分析工具链 -->## 1.2 性能分析工具链
+## 1.2 性能分析工具链
 
-##<!-- chunk: 1.2.1 BPF 内置性能分析 -->## 1.2.1 BPF 内置性能分析
+## 1.2.1 BPF 内置性能分析
 
 ```c
 // 使用 BPF_PERF_EVENT_ARRAY 进行性能采样
@@ -234,7 +237,7 @@ int xdp_perf_monitor(struct xdp_md *ctx)
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-##<!-- chunk: 1.2.2 perf 与 eBPF 协同分析 -->## 1.2.2 perf 与 eBPF 协同分析
+## 1.2.2 perf 与 eBPF 协同分析
 
 ```bash
 #!/bin/bash
@@ -262,7 +265,7 @@ perf script | stackcollapse-perf.pl > out.perf-folded
 flamegraph.pl out.perf-folded > perf.svg
 ```
 
-#<!-- chunk: 1.3 性能基准测试框架 -->## 1.3 性能基准测试框架
+## 1.3 性能基准测试框架
 
 ```c
 // ebpf_benchmark.c - eBPF 基准测试框架
@@ -336,7 +339,7 @@ void print_bench_result(const bench_result_t *r)
 
 <!-- chunk: 2. XDP 性能优化 -->## 2. XDP 性能优化
 
-#<!-- chunk: 2.1 XDP 工作模式深度对比 -->## 2.1 XDP 工作模式深度对比
+## 2.1 XDP 工作模式深度对比
 
 XDP（eXpress Data Path）是 eBPF 在网络性能优化中最重要的技术，提供三种工作模式，各有适用场景。
 
@@ -363,7 +366,7 @@ graph LR
     style XDP_GENERIC fill:#aa6600,color:#fff
 ```
 
-##<!-- chunk: 2.1.1 Native XDP 性能优化 -->## 2.1.1 Native XDP 性能优化
+## 2.1.1 Native XDP 性能优化
 
 ```c
 // xdp_native_optimized.c
@@ -518,7 +521,7 @@ int xdp_optimized_filter(struct xdp_md *ctx)
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 2.2 AF_XDP 零拷贝优化 -->## 2.2 AF_XDP 零拷贝优化
+## 2.2 AF_XDP 零拷贝优化
 
 AF_XDP（Address Family XDP）提供了内核到用户空间的零拷贝数据传输能力，是高性能用户态网络处理的关键技术。
 
@@ -548,7 +551,7 @@ graph TB
     style B1 fill:#aa0000,color:#fff
 ```
 
-##<!-- chunk: 2.2.1 AF_XDP UMEM 配置 -->## 2.2.1 AF_XDP UMEM 配置
+## 2.2.1 AF_XDP UMEM 配置
 
 ```c
 // af_xdp_zero_copy.c - AF_XDP 零拷贝实现
@@ -685,7 +688,7 @@ static int rx_process_batch(struct xsk_socket_info *xsk,
 }
 ```
 
-#<!-- chunk: 2.3 XDP 批处理优化 -->## 2.3 XDP 批处理优化
+## 2.3 XDP 批处理优化
 
 ```c
 // xdp_batch_processing.c - XDP 批处理优化
@@ -770,7 +773,7 @@ char LICENSE[] SEC("license") = "GPL";
 
 <!-- chunk: 3. TC 性能优化 -->## 3. TC 性能优化
 
-#<!-- chunk: 3.1 TC Direct Action 模式 -->## 3.1 TC Direct Action 模式
+## 3.1 TC Direct Action 模式
 
 TC（Traffic Control）子系统中的 eBPF 程序支持 Direct Action 模式，允许 BPF 程序直接返回 TC 动作，避免了多个 classifer/action 之间的传递开销。
 
@@ -796,7 +799,7 @@ graph TB
     style J fill:#00aa00,color:#fff
 ```
 
-##<!-- chunk: 3.1.1 TC Direct Action 实现 -->## 3.1.1 TC Direct Action 实现
+## 3.1.1 TC Direct Action 实现
 
 ```c
 // tc_direct_action.c - TC Direct Action 优化
@@ -965,7 +968,7 @@ int tc_egress_qos(struct __sk_buff *skb)
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 3.2 TC 硬件卸载优化 -->## 3.2 TC 硬件卸载优化
+## 3.2 TC 硬件卸载优化
 
 ```bash
 #!/bin/bash
@@ -1000,7 +1003,7 @@ tc -s filter show dev $INTERFACE ingress
 
 <!-- chunk: 4. Map 性能优化 -->## 4. Map 性能优化
 
-#<!-- chunk: 4.1 Map 类型选择策略 -->## 4.1 Map 类型选择策略
+## 4.1 Map 类型选择策略
 
 Map 是 eBPF 程序的核心数据结构，选择合适的 Map 类型对性能至关重要。
 
@@ -1032,7 +1035,7 @@ graph TD
     style I fill:#aaaa00
 ```
 
-##<!-- chunk: 4.1.1 Per-CPU Map 性能优化 -->## 4.1.1 Per-CPU Map 性能优化
+## 4.1.1 Per-CPU Map 性能优化
 
 ```c
 // percpu_map_optimization.c - Per-CPU Map 优化
@@ -1122,7 +1125,7 @@ void aggregate_percpu_stats(int map_fd) {
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 4.2 Map Batch 操作 -->## 4.2 Map Batch 操作
+## 4.2 Map Batch 操作
 
 Kernel 5.6+ 引入了 Map Batch 操作，允许一次系统调用完成多个 Map 条目的读写，显著降低系统调用开销。
 
@@ -1241,7 +1244,7 @@ int batch_delete_expired(int map_fd, uint64_t timeout_ns)
 }
 ```
 
-#<!-- chunk: 4.3 Map 预分配与内存优化 -->## 4.3 Map 预分配与内存优化
+## 4.3 Map 预分配与内存优化
 
 ```c
 // map_prealloc_config.c - Map 预分配配置
@@ -1279,7 +1282,7 @@ struct bpf_map_create_opts opts = {
 
 <!-- chunk: 5. 验证器优化 -->## 5. 验证器优化
 
-#<!-- chunk: 5.1 验证器工作原理 -->## 5.1 验证器工作原理
+## 5.1 验证器工作原理
 
 eBPF 验证器（Verifier）是 eBPF 安全的核心，但也是程序复杂度的限制因素。了解验证器的工作原理有助于编写更高效、合规的程序。
 
@@ -1306,7 +1309,7 @@ flowchart TD
     style M fill:#aa0000,color:#fff
 ```
 
-#<!-- chunk: 5.2 循环优化技术 -->## 5.2 循环优化技术
+## 5.2 循环优化技术
 
 ```c
 // verifier_loop_optimization.c - 循环优化技术
@@ -1397,7 +1400,7 @@ int xdp_bpf_loop(struct xdp_md *ctx)
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 5.3 内联函数与代码复用 -->## 5.3 内联函数与代码复用
+## 5.3 内联函数与代码复用
 
 ```c
 // inline_optimization.c - 内联函数优化
@@ -1458,7 +1461,7 @@ int xdp_main_entry(struct xdp_md *ctx)
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 5.4 栈空间优化 -->## 5.4 栈空间优化
+## 5.4 栈空间优化
 
 eBPF 程序栈空间限制为 512 字节，合理管理栈空间是避免验证器失败的关键。
 
@@ -1537,7 +1540,7 @@ char LICENSE[] SEC("license") = "GPL";
 
 <!-- chunk: 6. 内存管理与栈优化 -->## 6. 内存管理与栈优化
 
-#<!-- chunk: 6.1 内存访问模式优化 -->## 6.1 内存访问模式优化
+## 6.1 内存访问模式优化
 
 ```mermaid
 graph LR
@@ -1564,7 +1567,7 @@ graph LR
     style MEM fill:#aa0000,color:#fff
 ```
 
-##<!-- chunk: 6.1.1 Cache 友好的数据结构设计 -->## 6.1.1 Cache 友好的数据结构设计
+## 6.1.1 Cache 友好的数据结构设计
 
 ```c
 // cache_friendly_structures.c - 缓存友好数据结构
@@ -1618,7 +1621,7 @@ void prefetch_next_packet(void *next_pkt)
 }
 ```
 
-#<!-- chunk: 6.2 BPF Ring Buffer 高效内存管理 -->## 6.2 BPF Ring Buffer 高效内存管理
+## 6.2 BPF Ring Buffer 高效内存管理
 
 ```c
 // ringbuf_management.c - Ring Buffer 高效使用
@@ -1690,7 +1693,7 @@ char LICENSE[] SEC("license") = "GPL";
 
 <!-- chunk: 7. Tail Call 与程序链优化 -->## 7. Tail Call 与程序链优化
 
-#<!-- chunk: 7.1 Tail Call 机制与性能 -->## 7.1 Tail Call 机制与性能
+## 7.1 Tail Call 机制与性能
 
 Tail Call 允许 eBPF 程序跳转到另一个 BPF 程序，绕过单个程序的指令数限制，实现程序链式处理。
 
@@ -1714,7 +1717,7 @@ graph LR
     style E fill:#00aa44,color:#fff
 ```
 
-##<!-- chunk: 7.1.1 Tail Call 程序链实现 -->## 7.1.1 Tail Call 程序链实现
+## 7.1.1 Tail Call 程序链实现
 
 ```c
 // tail_call_chain.c - 程序链优化实现
@@ -1852,7 +1855,7 @@ int prog_parse_l4(struct xdp_md *ctx)
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 7.2 BPF-to-BPF 函数调用优化 -->## 7.2 BPF-to-BPF 函数调用优化
+## 7.2 BPF-to-BPF 函数调用优化
 
 ```c
 // bpf_function_calls.c - BPF 函数调用优化
@@ -1931,7 +1934,7 @@ char LICENSE[] SEC("license") = "GPL";
 
 <!-- chunk: 8. 大规模部署性能调优 -->## 8. 大规模部署性能调优
 
-#<!-- chunk: 8.1 多网卡并行处理架构 -->## 8.1 多网卡并行处理架构
+## 8.1 多网卡并行处理架构
 
 ```mermaid
 graph TB
@@ -1973,7 +1976,10 @@ graph TB
     end
 ```
 
-##<!-- chunk: 8.1.1 NUMA 感知部署配置 -->## 8.1.1 NUMA 感知部署配置
+## 8.1.1 NUMA 感知部署配置
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -2010,7 +2016,7 @@ ethtool -L eth1 combined 16
 ethtool -l eth0
 ```
 
-#<!-- chunk: 8.2 BPF 程序热更新（Zero-Downtime Update） -->## 8.2 BPF 程序热更新（Zero-Downtime Update）
+## 8.2 BPF 程序热更新（Zero-Downtime Update）
 
 ```c
 // hot_update_manager.c - 零停机 BPF 程序热更新
@@ -2095,7 +2101,7 @@ int hot_update_xdp_program(const char *ifname,
 }
 ```
 
-#<!-- chunk: 8.3 大规模 Map 管理 -->## 8.3 大规模 Map 管理
+## 8.3 大规模 Map 管理
 
 ```bash
 #!/bin/bash
@@ -2141,7 +2147,7 @@ chmod +x /usr/local/bin/bpf_map_exporter.sh
 
 <!-- chunk: 9. 性能测试与基准方法 -->## 9. 性能测试与基准方法
 
-#<!-- chunk: 9.1 网络数据路径基准测试 -->## 9.1 网络数据路径基准测试
+## 9.1 网络数据路径基准测试
 
 ```bash
 #!/bin/bash
@@ -2242,7 +2248,7 @@ EOF
 python3 /tmp/map_bench.py
 ```
 
-#<!-- chunk: 9.2 性能指标与监控 -->## 9.2 性能指标与监控
+## 9.2 性能指标与监控
 
 ```python
 #!/usr/bin/env python3
@@ -2351,19 +2357,19 @@ if __name__ == "__main__":
     monitor.run_monitoring_loop()
 ```
 
-#<!-- chunk: 9.3 基准测试报告模板 -->## 9.3 基准测试报告模板
+## 9.3 基准测试报告模板
 
 ```markdown
 <!-- chunk: eBPF XDP 性能基准报告 -->## eBPF XDP 性能基准报告
 
-#<!-- chunk: 测试环境 -->## 测试环境
+## 测试环境
 - CPU: Intel Xeon E5-2699 v4 @ 2.20GHz (44 cores, 88 threads)
 - 内存: 128GB DDR4-2133
 - 网卡: Intel X710-DA4 (4x 10Gbps)
 - 内核: Linux 5.15.0-LTS
 - eBPF JIT: 启用
 
-#<!-- chunk: XDP 性能测试结果 -->## XDP 性能测试结果
+## XDP 性能测试结果
 
 | 程序类型 | 模式 | 包大小(bytes) | 吞吐量(Mpps) | CPU使用率 | 延迟(ns) |
 |---------|------|-------------|------------|---------|---------|
@@ -2374,7 +2380,7 @@ if __name__ == "__main__":
 | L4 Filter | Native | 64 | 14.7 | 78% | 68 |
 | Full L7 | Native | 1500 | 8.9 | 82% | 112 |
 
-#<!-- chunk: Map 操作性能 -->## Map 操作性能
+## Map 操作性能
 
 | Map 类型 | 操作 | QPS(M/s) | P99延迟(ns) |
 |---------|------|---------|-----------|
@@ -2389,7 +2395,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 10. 生产案例与最佳实践 -->## 10. 生产案例与最佳实践
 
-#<!-- chunk: 10.1 生产案例：高频交易网络加速 -->## 10.1 生产案例：高频交易网络加速
+## 10.1 生产案例：高频交易网络加速
 
 ```mermaid
 graph TB
@@ -2488,7 +2494,7 @@ int trace_tcp_ack(struct pt_regs *ctx)
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-#<!-- chunk: 10.2 生产案例：云原生网络加速 -->## 10.2 生产案例：云原生网络加速
+## 10.2 生产案例：云原生网络加速
 
 ```yaml
 # cilium-performance-config.yaml
@@ -2531,7 +2537,7 @@ data:
   # 通过 DaemonSet 环境变量传递
 ```
 
-#<!-- chunk: 10.3 最佳实践总结 -->## 10.3 最佳实践总结
+## 10.3 最佳实践总结
 
 ```mermaid
 mindmap
@@ -2580,7 +2586,10 @@ mindmap
         Per-CPU 计数器聚合
 ```
 
-##<!-- chunk: 10.3.1 性能清单（Performance Checklist） -->## 10.3.1 性能清单（Performance Checklist）
+## 10.3.1 性能清单（Performance Checklist）
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
 
 ```bash
 #!/bin/bash
@@ -2652,7 +2661,7 @@ echo "检查完成，请根据上述建议进行优化配置"
 echo "============================================="
 ```
 
-##<!-- chunk: 10.3.2 性能优化路线图 -->## 10.3.2 性能优化路线图
+## 10.3.2 性能优化路线图
 
 ```mermaid
 gantt
@@ -2680,23 +2689,23 @@ gantt
 
 <!-- chunk: 参考资料 (References) -->## 参考资料 (References)
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 - [Linux Kernel BPF Documentation](https://www.kernel.org/doc/html/latest/bpf/)
 - [Cilium BPF and XDP Reference Guide](https://docs.cilium.io/en/stable/bpf/)
 - [libbpf Documentation](https://libbpf.readthedocs.io/)
 
-#<!-- chunk: 技术论文 -->## 技术论文
+## 技术论文
 - "The eXpress Data Path: Fast Programmable Packet Processing in the Operating System Kernel" - Toke Høiland-Jørgensen et al.
 - "AF_XDP: Sending and Receiving Packets without the Socket Layer" - Magnus Karlsson, Björn Töpel
 - "Programmable Packet Filtering at Line Rate" - Cloudflare Research
 
-#<!-- chunk: 工具与框架 -->## 工具与框架
+## 工具与框架
 - [bpftool](https://github.com/torvalds/linux/tree/master/tools/bpf/bpftool) - BPF 系统工具
 - [BCC Tools](https://github.com/iovisor/bcc) - BPF 编译工具集
 - [libbpf-bootstrap](https://github.com/libbpf/libbpf-bootstrap) - 现代 eBPF 开发框架
 - [xdp-tools](https://github.com/xdp-project/xdp-tools) - XDP 实用工具集
 
-#<!-- chunk: 性能基准 -->## 性能基准
+## 性能基准
 - [XDP 性能测试数据集](https://github.com/xdp-project/xdp-paper)
 - [Cilium 性能基准报告](https://cilium.io/blog/2021/05/11/cni-benchmark)
 
@@ -2709,10 +2718,10 @@ gantt
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-35-ebpf-technology KUDIG Database — Global MOC
-- [[domain-03-networking-traffic/README|[[Domain 35: eBPF 技术体系 (eBPF Technology Stack)|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]]]
+- [[domain-03-networking-traffic/README.md|[[Domain 35: eBPF 技术体系 (eBPF Technology Stack)|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]]]
 - Domain-35 eBPF 技术 — 开源项目索引
 - eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...
-- [[domain-03-networking-traffic/04-ebpf/02-ebpf-map-types-data-structures]]
+- [[domain-03-networking-traffic/04-ebpf/02-ebpf-map-types-data-structures.md|02 ebpf map types data structures]]
 - Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)
 - Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)
 - Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sideca...

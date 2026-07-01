@@ -75,7 +75,7 @@ PostgreSQL 的核心优势包括：完整的 ACID 事务支持、多版本并发
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 企业级 PostgreSQL 高可用架构 -->## 企业级 PostgreSQL 高可用架构
+## 企业级 PostgreSQL 高可用架构
 
 ```mermaid
 graph TB
@@ -148,7 +148,7 @@ graph TB
     PROM --> ALERT
 ```
 
-#<!-- chunk: PostgreSQL 进程模型 -->## PostgreSQL 进程模型
+## PostgreSQL 进程模型
 
 ```mermaid
 graph LR
@@ -206,7 +206,7 @@ graph LR
 
 <!-- chunk: 核心组件配置 -->## 核心组件配置
 
-#<!-- chunk: PostgreSQL 主节点完整配置 -->## PostgreSQL 主节点完整配置
+## PostgreSQL 主节点完整配置
 
 ```ini
 # postgresql.conf - PostgreSQL 17 生产优化配置
@@ -361,7 +361,7 @@ idle_in_transaction_session_timeout = 600000
 statement_timeout             = 0
 ```
 
-#<!-- chunk: Patroni 高可用配置 -->## Patroni 高可用配置
+## Patroni 高可用配置
 
 ```yaml
 # patroni.yml - Patroni 生产配置
@@ -463,7 +463,7 @@ watchdog:
   safety_margin: -1
 ```
 
-#<!-- chunk: PgBouncer 连接池配置 -->## PgBouncer 连接池配置
+## PgBouncer 连接池配置
 
 ```ini
 # pgbouncer.ini - PgBouncer 生产配置
@@ -520,7 +520,7 @@ app_user = pool_mode=transaction max_user_connections=200
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: 内存参数计算公式 -->## 内存参数计算公式
+## 内存参数计算公式
 
 ```
 PostgreSQL 内存分配参考（64GB 物理内存）：
@@ -539,7 +539,7 @@ work_mem = (总可用内存 - shared_buffers - OS保留) / (max_connections × a
         = ~75MB → 建议设为 32MB（保守值，避免极端情况 OOM）
 ```
 
-#<!-- chunk: 关键性能参数对照表 -->## 关键性能参数对照表
+## 关键性能参数对照表
 
 | 参数 | 默认值 | 推荐值（64GB/SSD） | 说明 |
 |:---|:---|:---|:---|
@@ -554,7 +554,7 @@ work_mem = (总可用内存 - shared_buffers - OS保留) / (max_connections × a
 | `wal_buffers` | -1(auto) | 64MB | WAL 缓冲区 |
 | `autovacuum_max_workers` | 3 | 4 | 自动清理工作进程数 |
 
-#<!-- chunk: 查询性能诊断 SQL -->## 查询性能诊断 SQL
+## 查询性能诊断 SQL
 
 ```sql
 -- 1. Top 20 最耗时的查询
@@ -650,7 +650,7 @@ ORDER BY conn_count DESC;
 
 <!-- chunk: 高可用与容灾 -->## 高可用与容灾
 
-#<!-- chunk: Patroni 集群管理操作 -->## Patroni 集群管理操作
+## Patroni 集群管理操作
 
 ```bash
 #!/bin/bash
@@ -705,7 +705,7 @@ case "${1:-status}" in
 esac
 ```
 
-#<!-- chunk: 跨机房容灾方案 -->## 跨机房容灾方案
+## 跨机房容灾方案
 
 ```yaml
 # 跨机房容灾架构配置
@@ -740,7 +740,10 @@ disaster_recovery:
 
 <!-- chunk: 备份恢复 -->## 备份恢复
 
-#<!-- chunk: WAL-G 备份配置 -->## WAL-G 备份配置
+## WAL-G 备份配置
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
 ```bash
 #!/bin/bash
@@ -795,7 +798,7 @@ restore_to_latest() {
     "$confirm" != "yes" && echo "Aborted" && exit 1
 
     sudo -u postgres pg_ctlcluster 17 main stop
-    rm -rf /var/lib/postgresql/17/main/*
+    rm -rf /var/lib/postgresql/17/main/*  # ⚠️ 删除系统/数据文件
     wal-g backup-fetch /var/lib/postgresql/17/main LATEST
 
     cat > /var/lib/postgresql/17/main/recovery.signal <<EOF
@@ -815,7 +818,7 @@ point_in_time_restore() {
     "$confirm" != "yes" && echo "Aborted" && exit 1
 
     sudo -u postgres pg_ctlcluster 17 main stop
-    rm -rf /var/lib/postgresql/17/main/*
+    rm -rf /var/lib/postgresql/17/main/*  # ⚠️ 删除系统/数据文件
     wal-g backup-fetch /var/lib/postgresql/17/main LATEST
 
     cat > /var/lib/postgresql/17/main/recovery.signal <<EOF
@@ -846,7 +849,7 @@ esac
 
 <!-- chunk: 监控告警 -->## 监控告警
 
-#<!-- chunk: Prometheus Exporter 配置 -->## Prometheus Exporter 配置
+## Prometheus Exporter 配置
 
 ```yaml
 scrape_configs:
@@ -871,7 +874,7 @@ scrape_configs:
         - pg_settings
 ```
 
-#<!-- chunk: 生产级告警规则 -->## 生产级告警规则
+## 生产级告警规则
 
 ```yaml
 groups:
@@ -962,7 +965,7 @@ groups:
 
 <!-- chunk: 运维管理 -->## 运维管理
 
-#<!-- chunk: 综合运维脚本 -->## 综合运维脚本
+## 综合运维脚本
 
 ```bash
 #!/bin/bash
@@ -1082,7 +1085,7 @@ esac
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 0. 生产环境部署清单 -->## 0. 生产环境部署清单
+## 0. 生产环境部署清单
 
 PostgreSQL 生产环境部署需要在硬件选型、操作系统调优和数据库参数配置三个层面进行系统性优化。以下清单基于多个大规模 PostgreSQL 集群（数据量 10TB+、QPS 10万+）的运维经验总结。
 
@@ -1105,14 +1108,14 @@ ALTER TABLE large_table SET (
 
 同时，建议启用 `log_autovacuum_min_duration=0` 记录所有 autovacuum 操作，以便监控 vacuum 频率和耗时，及时调整参数。
 
-#<!-- chunk: 1. 连接池设计 -->## 1. 连接池设计
+## 1. 连接池设计
 
 - 使用 PgBouncer 做事务级连接池，`pool_mode = transaction`
 - `default_pool_size` 设置为 `(max_connections × 0.8) / pool_count`
 - 应用层使用 `PgBouncer` 端口（6432），不直连 PostgreSQL
 - 读写分离使用 PgBouncer 配置不同数据库指向主/从节点
 
-#<!-- chunk: 2. Vacuum 管理策略 -->## 2. Vacuum 管理策略
+## 2. Vacuum 管理策略
 
 ```sql
 -- 对写入频繁的大表设置更激进的 autovacuum 参数
@@ -1130,7 +1133,7 @@ SELECT pid, datname, relid::regclass, phase,
 FROM pg_stat_progress_vacuum;
 ```
 
-#<!-- chunk: 3. 分区表设计 -->## 3. 分区表设计
+## 3. 分区表设计
 
 ```sql
 -- 按月声明式分区（PostgreSQL 17）
@@ -1164,7 +1167,7 @@ CREATE TABLE access_logs_default PARTITION OF access_logs DEFAULT;
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题速查表 -->## 常见问题速查表
+## 常见问题速查表
 
 | 问题现象 | 可能原因 | 排查方法 | 解决方案 |
 |:---|:---|:---|:---|
@@ -1190,7 +1193,7 @@ CREATE TABLE access_logs_default PARTITION OF access_logs DEFAULT;
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-28-enterprise-database-middleware MOC
-- [[domain-16-database-middleware/README|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
+- [[domain-16-database-middleware/README.md|Domain 16: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
 - Domain-28 企业数据库与中间件 — 开源项目索引
 - MySQL 企业级数据库运维管理
 - 分布式数据库企业级实践深度指南

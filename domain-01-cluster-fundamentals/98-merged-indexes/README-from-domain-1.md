@@ -180,5 +180,5 @@ Kubernetes架构基础域深入解析K8s核心架构设计原理，涵盖控制�
 
 - 相关知识域: domain-13-container-runtime
 - 相关知识域: domain-01-cluster-fundamentals
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|速查卡: k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet|速查卡: kubectl-scene-cheatsheet]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]

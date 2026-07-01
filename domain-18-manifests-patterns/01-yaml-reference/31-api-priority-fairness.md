@@ -69,7 +69,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. APF 基础概念 -->## 1. APF 基础概念
 
-#<!-- chunk: 1.1 什么是 API Priority and Fairness -->## 1.1 什么是 API Priority and Fairness
+## 1.1 什么是 API Priority and Fairness
 
 API Priority and Fairness (APF) 是 Kubernetes v1.29 GA 的**流量控制机制**,用于保护 API Server 免受过载:
 
@@ -79,7 +79,7 @@ API Priority and Fairness (APF) 是 Kubernetes v1.29 GA 的**流量控制机制*
 - **动态限流**: 根据 API Server 负载动态调整并发数,避免硬编码限制
 - **替代 Max-inflight-requests**: 取代旧的 `--max-requests-inflight` 和 `--max-mutating-requests-inflight` 参数
 
-#<!-- chunk: 1.2 核心概念 -->## 1.2 核心概念
+## 1.2 核心概念
 
 ```
 客户端请求
@@ -105,7 +105,7 @@ API Priority and Fairness (APF) 是 Kubernetes v1.29 GA 的**流量控制机制*
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.3 与旧机制对比 -->## 1.3 与旧机制对比
+## 1.3 与旧机制对比
 
 | 特性 | APF (v1.29+) | Max Inflight Requests (已弃用) |
 |------|--------------|-------------------------------|
@@ -120,7 +120,7 @@ API Priority and Fairness (APF) 是 Kubernetes v1.29 GA 的**流量控制机制*
 
 <!-- chunk: 2. FlowSchema 完整字段 -->## 2. FlowSchema 完整字段
 
-#<!-- chunk: 2.1 基础结构 -->## 2.1 基础结构
+## 2.1 基础结构
 
 ```yaml
 apiVersion: flowcontrol.apiserver.k8s.io/v1
@@ -193,7 +193,7 @@ spec:
           verbs: ["get"]
 ```
 
-#<!-- chunk: 2.2 Subjects 类型详解 -->## 2.2 Subjects 类型详解
+## 2.2 Subjects 类型详解
 
 ```yaml
 subjects:
@@ -222,7 +222,7 @@ subjects:
   # - system:serviceaccounts:<ns> 特定命名空间的所有 ServiceAccount
 ```
 
-#<!-- chunk: 2.3 ResourceRules 匹配示例 -->## 2.3 ResourceRules 匹配示例
+## 2.3 ResourceRules 匹配示例
 
 ```yaml
 resourceRules:
@@ -257,7 +257,7 @@ resourceRules:
     verbs: ["get", "list"]
 ```
 
-#<!-- chunk: 2.4 NonResourceRules 示例 -->## 2.4 NonResourceRules 示例
+## 2.4 NonResourceRules 示例
 
 ```yaml
 nonResourceRules:
@@ -286,7 +286,7 @@ nonResourceRules:
 
 <!-- chunk: 3. PriorityLevelConfiguration 完整字段 -->## 3. PriorityLevelConfiguration 完整字段
 
-#<!-- chunk: 3.1 基础结构 -->## 3.1 基础结构
+## 3.1 基础结构
 
 ```yaml
 apiVersion: flowcontrol.apiserver.k8s.io/v1
@@ -334,7 +334,7 @@ spec:
         handSize: 8
 ```
 
-#<!-- chunk: 3.2 Exempt 类型(豁免限流) -->## 3.2 Exempt 类型(豁免限流)
+## 3.2 Exempt 类型(豁免限流)
 
 ```yaml
 apiVersion: flowcontrol.apiserver.k8s.io/v1
@@ -371,7 +371,7 @@ Kubernetes 默认提供以下内置 FlowSchema(v1.29):
 | **global-default** | global-default | 默认 FlowSchema(最低优先级) | 9900 |
 | **catch-all** | catch-all | 兜底 FlowSchema | 10000 |
 
-#<!-- chunk: 4.1 内置 PriorityLevelConfiguration -->## 4.1 内置 PriorityLevelConfiguration
+## 4.1 内置 PriorityLevelConfiguration
 
 | PriorityLevel 名称 | 并发份额 | 队列数 | 描述 |
 |-------------------|---------|-------|------|
@@ -384,7 +384,7 @@ Kubernetes 默认提供以下内置 FlowSchema(v1.29):
 | **global-default** | 20 | 128 | 默认优先级 |
 | **catch-all** | 5 | 0(Reject) | 兜底优先级(直接拒绝) |
 
-#<!-- chunk: 4.2 查看内置配置 -->## 4.2 查看内置配置
+## 4.2 查看内置配置
 
 ```bash
 # 查看所有 FlowSchema(按优先级排序)
@@ -404,7 +404,7 @@ kubectl get prioritylevelconfiguration workload-high -o yaml
 
 <!-- chunk: 5. 内部原理 -->## 5. 内部原理
 
-#<!-- chunk: 5.1 请求分类流程 -->## 5.1 请求分类流程
+## 5.1 请求分类流程
 
 ```
 客户端请求: GET /api/v1/namespaces/default/pods
@@ -438,7 +438,7 @@ kubectl get prioritylevelconfiguration workload-high -o yaml
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 5.2 Fair Queuing 算法 -->## 5.2 Fair Queuing 算法
+## 5.2 Fair Queuing 算法
 
 ```
 请求到达 PriorityLevelConfiguration: workload-low
@@ -510,7 +510,7 @@ X-Retry-After: 1
 }
 ```
 
-#<!-- chunk: 5.3 Shuffle Sharding 隔离原理 -->## 5.3 Shuffle Sharding 隔离原理
+## 5.3 Shuffle Sharding 隔离原理
 
 **目标**: 防止单个问题 Flow(如问题控制器循环调用)影响其他 Flow
 
@@ -544,7 +544,7 @@ Flow C: 问题循环(每秒 1000 个!)
 
 <!-- chunk: 6. 生产案例 -->## 6. 生产案例
 
-#<!-- chunk: 6.1 案例 1: 租户隔离(多团队共享集群) -->## 6.1 案例 1: 租户隔离(多团队共享集群)
+## 6.1 案例 1: 租户隔离(多团队共享集群)
 
 **场景**: 3 个团队共享集群,防止某团队的控制器问题影响其他团队
 
@@ -635,7 +635,7 @@ spec:
         handSize: 8
 ```
 
-#<!-- chunk: 6.2 案例 2: 保护 API Server - 限制 List 大请求 -->## 6.2 案例 2: 保护 API Server - 限制 List 大请求
+## 6.2 案例 2: 保护 API Server - 限制 List 大请求
 
 **场景**: 防止 `kubectl get pods --all-namespaces` 类大查询压垮 API Server
 
@@ -705,7 +705,7 @@ spec:
           verbs: ["get", "watch"]  # 小查询
 ```
 
-#<!-- chunk: 6.3 案例 3: Leader Election 优先级提升 -->## 6.3 案例 3: Leader Election 优先级提升
+## 6.3 案例 3: Leader Election 优先级提升
 
 **场景**: 确保控制器的 Leader Election 请求不受限流影响
 
@@ -741,7 +741,7 @@ spec:
           verbs: ["get", "create", "update"]
 ```
 
-#<!-- chunk: 6.4 案例 4: Webhook 超时保护 -->## 6.4 案例 4: Webhook 超时保护
+## 6.4 案例 4: Webhook 超时保护
 
 **场景**: Admission Webhook 调用 API Server 时避免死锁(Webhook 等待 API Server,API Server 等待 Webhook)
 
@@ -784,7 +784,7 @@ spec:
       type: Reject  # 直接拒绝(避免排队导致 Webhook 超时)
 ```
 
-#<!-- chunk: 6.5 案例 5: 监控指标收集优先级 -->## 6.5 案例 5: 监控指标收集优先级
+## 6.5 案例 5: 监控指标收集优先级
 
 **场景**: [[Prometheus|Prometheus]] 等监控系统定期抓取 `/metrics` 端点
 
@@ -846,7 +846,7 @@ spec:
 
 <!-- chunk: 7. 故障排查 -->## 7. 故障排查
 
-#<!-- chunk: 7.1 请求被限流(429 Too Many Requests) -->## 7.1 请求被限流(429 Too Many Requests)
+## 7.1 请求被限流(429 Too Many Requests)
 
 **症状**: 客户端频繁收到 429 响应
 
@@ -870,6 +870,9 @@ kubectl get flowschemas --sort-by=.spec.matchingPrecedence
 
 1. **提高并发份额**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch prioritylevelconfiguration workload-low --type=json -p='[
   {"op": "replace", "path": "/spec/limited/nominalConcurrencyShares", "value": 150}
@@ -877,6 +880,9 @@ kubectl patch prioritylevelconfiguration workload-low --type=json -p='[
 ```
 
 2. **增加队列长度**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 kubectl patch prioritylevelconfiguration workload-low --type=json -p='[
@@ -910,7 +916,7 @@ spec:
           verbs: ["*"]
 ```
 
-#<!-- chunk: 7.2 查看请求匹配的 FlowSchema -->## 7.2 查看请求匹配的 FlowSchema
+## 7.2 查看请求匹配的 FlowSchema
 
 ```bash
 # 启用 API Server 审计日志(需要配置 audit policy)
@@ -936,7 +942,7 @@ spec:
 }
 ```
 
-#<!-- chunk: 7.3 FlowSchema 未生效 -->## 7.3 FlowSchema 未生效
+## 7.3 FlowSchema 未生效
 
 **症状**: 创建了 FlowSchema 但请求仍匹配到 `global-default`
 
@@ -963,7 +969,7 @@ resourceRules:
 # 如果上述配置生效,再逐步添加具体限制
 ```
 
-#<!-- chunk: 7.4 监控 APF 性能 -->## 7.4 监控 APF 性能
+## 7.4 监控 APF 性能
 
 ```bash
 # 查看 APF 相关指标
@@ -1023,7 +1029,7 @@ groups:
           description: "PriorityLevel {{ $labels.priority_level }} has {{ $value }} requests queued"
 ```
 
-#<!-- chunk: 7.5 迁移旧配置(从 Max-inflight-requests) -->## 7.5 迁移旧配置(从 Max-inflight-requests)
+## 7.5 迁移旧配置(从 Max-inflight-requests)
 
 如果集群仍使用旧的 `--max-requests-inflight` 参数:
 
@@ -1073,7 +1079,7 @@ kubectl -n kube-system describe pod kube-apiserver-xxx | grep max-requests-infli
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests KUDIG Database — Global MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - index.md|Domain-32 YAML 清单 — 开源项目索引]]
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考

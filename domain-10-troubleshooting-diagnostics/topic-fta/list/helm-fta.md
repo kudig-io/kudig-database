@@ -97,6 +97,7 @@ flowchart TD
   STATE_OR --> ST2[回滚失败]
   STATE_OR --> ST3[Release Secret 损坏]
   STATE_OR --> ST4[资源漂移/手动修改]
+
 ```
 
 ---
@@ -144,60 +145,60 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine|FTA 诊断执行引擎]]
-- [[skills/ts-cluster-operations|集群运维排查]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[skills/ts-cluster-operations.md|集群运维排查]]
 
 ## Related
 
 - [[flannel-fta]] — Flannel 网络异常故障树分析
-- [[skills/skill-22-daemonset-failure|skill-22-daemonset-failure]] — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
+- [[skills/skill-22-daemonset-failure.md|skill-22-daemonset-failure]] — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 - [[csi-fta]] — CSI 存储异常故障树分析
 - [[flux]] — Flux
 - [[helm]] — Helm
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta|Helm 发布异常故障树分析]]
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-4.0|RELEASE-NOTES-4.0]]
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.18|RELEASE-NOTES-3.18]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta.md|Helm 发布异常故障树分析]]
+- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-4.0.md|RELEASE-NOTES-4.0]]
+- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.18.md|RELEASE-NOTES-3.18]]
 - RELEASE-NOTES-2.16
 - RELEASE-NOTES-2.12
 - RELEASE-NOTES-2.13
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-4.1|RELEASE-NOTES-4.1]]
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.19|RELEASE-NOTES-3.19]]
+- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-4.1.md|RELEASE-NOTES-4.1]]
+- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.19.md|RELEASE-NOTES-3.19]]
 - RELEASE-NOTES-2.17
 - RELEASE-NOTES-2.4
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.12|RELEASE-NOTES-3.12]]
+- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.12.md|RELEASE-NOTES-3.12]]
 - RELEASE-NOTES-3.5
 - RELEASE-NOTES-2.0
 - RELEASE-NOTES-3.1
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.16|RELEASE-NOTES-3.16]]
+- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.16.md|RELEASE-NOTES-3.16]]
 - RELEASE-NOTES-2.1
 - RELEASE-NOTES-3.0
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.17|RELEASE-NOTES-3.17]]
+- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.17.md|RELEASE-NOTES-3.17]]
 - RELEASE-NOTES-2.5
 - RELEASE-NOTES-1.2
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.13|RELEASE-NOTES-3.13]]
+- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.13.md|RELEASE-NOTES-3.13]]
 - RELEASE-NOTES-3.4
 - RELEASE-NOTES-2.2
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.14|RELEASE-NOTES-3.14]]
+- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.14.md|RELEASE-NOTES-3.14]]
 - RELEASE-NOTES-3.3
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.20|RELEASE-NOTES-3.20]]
+- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.20.md|RELEASE-NOTES-3.20]]
 - RELEASE-NOTES-2.6
 - RELEASE-NOTES-3.7
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.10|RELEASE-NOTES-3.10]]
+- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.10.md|RELEASE-NOTES-3.10]]
 - RELEASE-NOTES-2.7
 - RELEASE-NOTES-3.6
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.11|RELEASE-NOTES-3.11]]
+- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.11.md|RELEASE-NOTES-3.11]]
 - RELEASE-NOTES-2.3
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.15|RELEASE-NOTES-3.15]]
+- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.15.md|RELEASE-NOTES-3.15]]
 - RELEASE-NOTES-3.2
 - RELEASE-NOTES-2.8
 - RELEASE-NOTES-2.10
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.9|RELEASE-NOTES-3.9]]
+- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.9.md|RELEASE-NOTES-3.9]]
 - RELEASE-NOTES-2.14
 - RELEASE-NOTES-2.15
 - RELEASE-NOTES-2.9
 - RELEASE-NOTES-2.11
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.8|RELEASE-NOTES-3.8]]
-- [[skills/ts-command-output|命令输出根因解析]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/helm-index|Helm 全局索引]]
+- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.8.md|RELEASE-NOTES-3.8]]
+- [[skills/ts-command-output.md|命令输出根因解析]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/helm-index.md|Helm 全局索引]]

@@ -31,6 +31,7 @@ prerequisites:
 - cloud-provider-basics
 - gpu-scheduling-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # Pod Scheduling Readiness
@@ -102,6 +103,9 @@ spec:
 
 ### 外部控制器移除 Scheduling Gate（示例 patch）
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 当数据集准备就绪时，外部控制器移除对应的 gate
 kubectl patch pod ml-training-worker-0 -n ml-platform \
@@ -130,6 +134,9 @@ kubectl patch pod ml-training-worker-0 -n ml-platform \
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 查看所有 SchedulingGated 状态的 Pod
 kubectl get pods --all-namespaces --field-selector=status.phase=Pending \
@@ -149,7 +156,7 @@ curl -sk https://localhost:10259/metrics | grep 'scheduler_pending_pods.*gated'
 ## 交叉引用
 
 - [Kubernetes 调度器](./kubernetes-scheduler.md) — 调度器如何处理 gated Pod
-- [[domain-17-system-foundation/topic-dictionary/scheduling/gang-scheduling|Gang Scheduling]]](./gang-scheduling.md) — 结合 scheduling gate 实现组调度前置检查
+- [[domain-17-system-foundation/topic-dictionary/scheduling/gang-scheduling.md|Gang Scheduling]]](./gang-scheduling.md) — 结合 scheduling gate 实现组调度前置检查
 - [动态资源分配](./dynamic-resource-allocation.md) — DRA ResourceClaim 就绪后移除 gate
 - Karpenter 自动扩缩容](./karpenter-autoscaling.md) — 避免 gated Pod 触发不必要的扩容
 
@@ -159,4 +166,6 @@ curl -sk https://localhost:10259/metrics | grep 'scheduler_pending_pods.*gated'
 
 ## Related
 
-- index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/scheduling/affinity.md|亲和性]]
+- [[domain-17-system-foundation/topic-dictionary/scheduling/anti-affinity.md|反亲和性]]
+- [[domain-17-system-foundation/topic-dictionary/scheduling/api-initiated-eviction.md|API-initiated Eviction]]

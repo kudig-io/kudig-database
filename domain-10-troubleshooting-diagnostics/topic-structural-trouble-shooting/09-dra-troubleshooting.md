@@ -103,7 +103,7 @@ k8s_versions:
 
 ### 1.1 DRA vs 传统 Volume 的区别
 
-| 维度 | 传统 Volume | DRA ([[Dynamic Resource Allocation|Dynamic Resource Allocation]]) |
+| 维度 | 传统 Volume | DRA ([[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]]) |
 |------|------------|--------------------------------|
 | 资源类型 | 存储（块/文件） | 硬件设备（GPU/FPGA/智能网卡） |
 | 调度时机 | Pod 创建后 | Pod 创建前（调度时即分配） |
@@ -290,6 +290,10 @@ kubectl get node <node-name> -o jsonpath='{.metadata.labels}' | jq 'keys'
 **问题现象**: GPU Pod 卡在 ContainerCreating 或 `nvidia-smi` 在容器内不可用
 
 **排查步骤**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 确认节点有 NVIDIA GPU
 lspci | grep -i nvidia
@@ -315,6 +319,11 @@ kubectl exec -it <pod-name> -- nvidia-smi
 **问题现象**: `kubectl logs` 显示 "failed to register device plugin: socket path already exists"
 
 **排查步骤**：
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 1. 查看 kubelet 的 device plugin 目录
 ls -la /var/lib/kubelet/device-plugins/
@@ -420,6 +429,7 @@ spec:
   resourceClaims:
   - name: gpu-claim-1
     source: resourceclaim/gpu-claim-1
+
 ```
 
 ---
@@ -464,21 +474,21 @@ related:
 
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/MOC|topic-structural-trouble-shooting MOC]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README|Kubernetes 结构化故障排查知识库]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance|etcd 维护专项文档]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer|症状快速映射层 (Symptom-SOP-RootCause Mapping)]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/certificate-fta|证书异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta|cilium FTA 树：eBPF/Cilium CNI 故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cloud-provider-fta|云平台集成异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-autoscaler-fta|Cluster Autoscaler 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-upgrade-fta|集群升级异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta|Controller Manager 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/crd-operator-fta|CRD/Operator 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/MOC.md|topic-structural-trouble-shooting MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md|Kubernetes 结构化故障排查知识库]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance.md|etcd 维护专项文档]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer.md|症状快速映射层 (Symptom-SOP-RootCause Mapping)]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/certificate-fta.md|证书异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md|cilium FTA 树：eBPF/Cilium CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cloud-provider-fta.md|云平台集成异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-autoscaler-fta.md|Cluster Autoscaler 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-upgrade-fta.md|集群升级异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta.md|Controller Manager 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/crd-operator-fta.md|CRD/Operator 异常故障树分析]]
 
 ## Related
 
@@ -487,7 +497,9 @@ related:
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer|symptom-mapping-layer]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology|00-configuration-first-methodology]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance|10-etcd-maintenance]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer|symptom-mapping-layer]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer.md|symptom-mapping-layer]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md|00-configuration-first-methodology]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance.md|10-etcd-maintenance]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer.md|symptom-mapping-layer]]
+
+```

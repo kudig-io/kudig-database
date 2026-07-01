@@ -227,6 +227,9 @@ else:
 
 **常见GPU故障处理**：
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # GPU驱动问题
 # 重启nvidia驱动
@@ -1330,6 +1333,9 @@ if __name__ == "__main__":
 
 ### 5.1 系统级优化
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 # system_optimization.sh - 系统性能优化脚本
@@ -1439,7 +1445,7 @@ echo "系统优化完成！请重启相关服务使配置生效。"
 ## Obsidian 相关文档
 
 - domain-11-ai-infra MOC
-- [[domain-14-ai-ml-infra/README|Domain-11: AI基础设施]]
+- [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
 - Domain-11 AI 基础设施 — 开源项目索引
 - AI 基础设施架构
 - 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
@@ -1450,9 +1456,9 @@ echo "系统优化完成！请重启相关服务使配置生效。"
 - AI实验管理与MLOps平台
 - AutoML与超参数调优
 - AI模型注册中心与版本管理
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
@@ -1460,3 +1466,5 @@ echo "系统优化完成！请重启相关服务使配置生效。"
 - 13-ai-platform-observability
 - 15-llm-data-pipeline
 - 16-llm-finetuning
+
+```

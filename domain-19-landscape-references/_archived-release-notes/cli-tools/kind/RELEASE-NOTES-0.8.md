@@ -30,7 +30,7 @@ created: "2026-05-23"
 
 # kind v0.8 Release Notes
 
-Source: [v0.8.1](https://github.[[entities/kubernetes|kubernetes]]-sigs/kind/releases/tag/v0.8.1)
+Source: [v0.8.1](https://github.[[entities/kubernetes.md|kubernetes]]-sigs/kind/releases/tag/v0.8.1)
 
 **This is a tiny patch release to pick up the fix for [Can't create ipv4 clusters if ipv6 is disabled at kernel level](https://github.com/kubernetes-sigs/kind/issues/1544).**
 

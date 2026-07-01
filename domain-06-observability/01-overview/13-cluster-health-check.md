@@ -69,7 +69,7 @@ created: "2026-05-23"
 
 # 13 - 集群健康检查指南 (Cluster Health Check Guide)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/tasks/debug/debug-cluster](https://kubernetes.io/docs/tasks/debug/debug-cluster/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/tasks/debug/debug-cluster](https://kubernetes.io/docs/tasks/debug/debug-cluster/)
 
 <!-- chunk: 集群健康检查架构 -->
 ## 集群健康检查架构
@@ -538,6 +538,11 @@ kubectl get networkpolicy -A --no-headers 2>/dev/null | wc -l
 
 ### 网络连通性测试
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 #!/bin/bash
 # network-connectivity-test.sh
@@ -583,7 +588,7 @@ if [ -n "$OTHER_POD_IP" ]; then
 fi
 
 # 清理
-kubectl delete pod network-test --force --grace-period=0 2>/dev/null
+kubectl delete pod network-test --force --grace-period=0 2>/dev/null  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
 <!-- chunk: 存储健康检查 -->
@@ -1125,7 +1130,7 @@ aliyun cs DescribeClusterNodes --ClusterId <cluster-id>
 ## Obsidian 相关文档
 
 - observability/MOC.md|domain-06-observability MOC]]
-- [[domain-06-observability/README|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
+- [[domain-06-observability/README.md|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
 - index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
@@ -1144,8 +1149,10 @@ aliyun cs DescribeClusterNodes --ClusterId <cluster-id>
 - 14-chaos-engineering
 - 15-enterprise-scale-monitoring
 
-- [[domain-06-observability/README|返回目录]]
+- [[domain-06-observability/README.md|返回目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+```

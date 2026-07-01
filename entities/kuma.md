@@ -51,7 +51,7 @@ Kuma 是一个通用服务网格控制平面，设计简单易用且功能强大
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -68,11 +68,11 @@ Kuma 是一个通用服务网格控制平面，设计简单易用且功能强大
 
 ## 参考链接
 
-- [[entities/prometheus-grafana|prometheus-grafana]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[deployment]]
-- [[concepts/service-mesh-architecture|service-mesh-architecture]]
-- [[concepts/gitops-principles|gitops-principles]]
-- [[concepts/observability-pillars|observability-pillars]]
+- [[concepts/service-mesh-architecture.md|service-mesh-architecture]]
+- [[concepts/gitops-principles.md|gitops-principles]]
+- [[concepts/observability-pillars.md|observability-pillars]]
 
 ## Related
 
@@ -83,5 +83,5 @@ Kuma 是一个通用服务网格控制平面，设计简单易用且功能强大
 - [[jaeger]] — Jaeger
 
 - kuma
-- [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

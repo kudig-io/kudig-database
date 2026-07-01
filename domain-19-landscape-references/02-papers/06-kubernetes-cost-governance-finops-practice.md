@@ -65,7 +65,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 成本治理框架概述 -->## 1. 成本治理框架概述
 
-#<!-- chunk: 1.1 FinOps核心原则 -->## 1.1 FinOps核心原则
+## 1.1 FinOps核心原则
 
 ```yaml
 FinOps三大原则:
@@ -85,30 +85,30 @@ FinOps三大原则:
      - 灵活的成本调整机制
 ```
 
-#<!-- chunk: 1.2 Kubernetes成本构成分析 -->## 1.2 Kubernetes成本构成分析
+## 1.2 Kubernetes成本构成分析
 
 ```markdown
 <!-- chunk: 💰 Kubernetes成本结构 -->## 💰 Kubernetes成本结构
 
-#<!-- chunk: 基础设施成本 (60-70%) -->## 基础设施成本 (60-70%)
+## 基础设施成本 (60-70%)
 - 计算资源 (CPU/内存)
 - 存储资源 (磁盘/对象存储)
 - 网络资源 (带宽/负载均衡)
 - 管理节点成本
 
-#<!-- chunk: 运维成本 (20-25%) -->## 运维成本 (20-25%)
+## 运维成本 (20-25%)
 - 监控告警系统
 - 安全合规工具
 - 备份恢复服务
 - 运维人员投入
 
-#<!-- chunk: 优化工具成本 (5-10%) -->## 优化工具成本 (5-10%)
+## 优化工具成本 (5-10%)
 - 成本分析平台
 - 优化建议工具
 - 自动化脚本开发
 - 第三方服务费用
 
-#<!-- chunk: 浪费成本 (5-15%) -->## 浪费成本 (5-15%)
+## 浪费成本 (5-15%)
 - 未使用的资源
 - 过度配置的资源
 - 闲置的集群节点
@@ -117,7 +117,7 @@ FinOps三大原则:
 
 <!-- chunk: 2. 成本监控与分析体系 -->## 2. 成本监控与分析体系
 
-#<!-- chunk: 2.1 核心监控指标 -->## 2.1 核心监控指标
+## 2.1 核心监控指标
 
 ```yaml
 成本关键指标 (KCMs):
@@ -139,9 +139,9 @@ FinOps三大原则:
     - 优化效果: 优化措施的成本节约
 ```
 
-#<!-- chunk: 2.2 监控工具链配置 -->## 2.2 监控工具链配置
+## 2.2 监控工具链配置
 
-##<!-- chunk: Prometheus成本指标收集 -->## Prometheus成本指标收集
+## Prometheus成本指标收集
 ```yaml
 # 成本相关指标配置
 apiVersion: monitoring.coreos.com/v1
@@ -163,7 +163,7 @@ spec:
       targetLabel: __name__
 ```
 
-##<!-- chunk: 自定义成本指标 -->## 自定义成本指标
+## 自定义成本指标
 ```bash
 # 自定义成本指标脚本
 #!/bin/bash
@@ -213,7 +213,7 @@ calculate_resource_cost() {
 }
 ```
 
-#<!-- chunk: 2.3 成本可视化仪表板 -->## 2.3 成本可视化仪表板
+## 2.3 成本可视化仪表板
 
 ```yaml
 # Grafana成本仪表板配置
@@ -269,9 +269,9 @@ data:
 
 <!-- chunk: 3. 预算管理与告警 -->## 3. 预算管理与告警
 
-#<!-- chunk: 3.1 预算配置策略 -->## 3.1 预算配置策略
+## 3.1 预算配置策略
 
-##<!-- chunk: 分层预算管理 -->## 分层预算管理
+## 分层预算管理
 ```yaml
 # 企业级预算管理体系
 apiVersion: costmanagement.k8s.io/v1
@@ -308,7 +308,7 @@ spec:
     action: require-approval
 ```
 
-##<!-- chunk: 动态预算调整 -->## 动态预算调整
+## 动态预算调整
 ```python
 #!/usr/bin/env python3
 # dynamic-budget-adjuster.py
@@ -379,7 +379,7 @@ if __name__ == "__main__":
     manager.adjust_budget("frontend-team", 10000)
 ```
 
-#<!-- chunk: 3.2 智能告警机制 -->## 3.2 智能告警机制
+## 3.2 智能告警机制
 
 ```yaml
 # 成本告警规则配置
@@ -431,9 +431,9 @@ spec:
 
 <!-- chunk: 4. 资源优化策略 -->## 4. 资源优化策略
 
-#<!-- chunk: 4.1 智能资源调度 -->## 4.1 智能资源调度
+## 4.1 智能资源调度
 
-##<!-- chunk: 垂直Pod自动扩缩容 (VPA) -->## 垂直Pod自动扩缩容 (VPA)
+## 垂直Pod自动扩缩容 (VPA)
 ```yaml
 # VPA配置示例
 apiVersion: autoscaling.k8s.io/v1
@@ -460,7 +460,7 @@ spec:
       controlledResources: ["cpu", "memory"]
 ```
 
-##<!-- chunk: 水平Pod自动扩缩容 (HPA) -->## 水平Pod自动扩缩容 (HPA)
+## 水平Pod自动扩缩容 (HPA)
 ```yaml
 # HPA高级配置
 apiVersion: autoscaling/v2
@@ -503,9 +503,9 @@ spec:
         periodSeconds: 60
 ```
 
-#<!-- chunk: 4.2 节点资源优化 -->## 4.2 节点资源优化
+## 4.2 节点资源优化
 
-##<!-- chunk: 集群自动扩缩容 (CA) -->## 集群自动扩缩容 (CA)
+## 集群自动扩缩容 (CA)
 ```yaml
 # Cluster Autoscaler配置
 apiVersion: apps/v1
@@ -545,7 +545,7 @@ spec:
             memory: 300Mi
 ```
 
-##<!-- chunk: Spot实例优化策略 -->## Spot实例优化策略
+## Spot实例优化策略
 ```yaml
 # Spot实例节点组配置
 apiVersion: eksctl.io/v1alpha5
@@ -570,7 +570,7 @@ managedNodeGroups:
     k8s.io/cluster-autoscaler/node-template/label/lifecycle: spot
 ```
 
-#<!-- chunk: 4.3 存储成本优化 -->## 4.3 存储成本优化
+## 4.3 存储成本优化
 
 ```yaml
 # 存储优化策略
@@ -604,7 +604,7 @@ mountOptions:
 
 <!-- chunk: 5. 成本分配与分摊 -->## 5. 成本分配与分摊
 
-#<!-- chunk: 5.1 成本标签体系 -->## 5.1 成本标签体系
+## 5.1 成本标签体系
 
 ```yaml
 # 标准化标签策略
@@ -632,7 +632,7 @@ data:
       deployment_labels_inherit_to_pods: true
 ```
 
-##<!-- chunk: 自动标签应用 -->## 自动标签应用
+## 自动标签应用
 ```python
 #!/usr/bin/env python3
 # auto-labeler.py
@@ -707,7 +707,7 @@ if __name__ == "__main__":
     labeler.propagate_labels_to_pods()
 ```
 
-#<!-- chunk: 5.2 成本分摊模型 -->## 5.2 成本分摊模型
+## 5.2 成本分摊模型
 
 ```yaml
 # 成本分摊配置
@@ -744,7 +744,7 @@ spec:
 
 <!-- chunk: 6. 优化工具与平台 -->## 6. 优化工具与平台
 
-#<!-- chunk: 6.1 Kubecost集成 -->## 6.1 Kubecost集成
+## 6.1 Kubecost集成
 
 ```yaml
 # Kubecost部署配置
@@ -790,7 +790,7 @@ spec:
             memory: 2Gi
 ```
 
-#<!-- chunk: 6.2 自研成本优化工具 -->## 6.2 自研成本优化工具
+## 6.2 自研成本优化工具
 
 ```python
 #!/usr/bin/env python3
@@ -948,7 +948,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 7. 实施效果评估 -->## 7. 实施效果评估
 
-#<!-- chunk: 7.1 成本优化效果追踪 -->## 7.1 成本优化效果追踪
+## 7.1 成本优化效果追踪
 
 ```yaml
 # 成本优化效果评估配置
@@ -984,7 +984,7 @@ spec:
     schedule: "0 9 1 * *"  # 每月1日9点发送报告
 ```
 
-#<!-- chunk: 7.2 持续改进机制 -->## 7.2 持续改进机制
+## 7.2 持续改进机制
 
 ```python
 #!/usr/bin/env python3
@@ -1058,33 +1058,33 @@ if __name__ == "__main__":
 
 <!-- chunk: 8. 最佳实践总结 -->## 8. 最佳实践总结
 
-#<!-- chunk: 8.1 成本治理原则 -->## 8.1 成本治理原则
+## 8.1 成本治理原则
 
 ```markdown
 <!-- chunk: 💡 成本治理核心原则 -->## 💡 成本治理核心原则
 
-#<!-- chunk: 1. 预防为主 -->## 1. 预防为主
+## 1. 预防为主
 - 在资源申请阶段就考虑成本因素
 - 建立成本意识文化
 - 实施预算前置控制
 
-#<!-- chunk: 2. 精准计量 -->## 2. 精准计量
+## 2. 精准计量
 - 建立完善的标签体系
 - 实现细粒度成本追踪
 - 确保成本分摊准确性
 
-#<!-- chunk: 3. 持续优化 -->## 3. 持续优化
+## 3. 持续优化
 - 定期成本分析和评估
 - 自动化优化工具应用
 - 建立持续改进机制
 
-#<!-- chunk: 4. 价值导向 -->## 4. 价值导向
+## 4. 价值导向
 - 成本投入与业务价值对齐
 - ROI驱动的资源配置
 - 灵活的成本调整策略
 ```
 
-#<!-- chunk: 8.2 实施检查清单 -->## 8.2 实施检查清单
+## 8.2 实施检查清单
 
 ```yaml
 成本治理实施清单:
@@ -1115,13 +1115,13 @@ if __name__ == "__main__":
 
 <!-- chunk: N. FinOps 2026更新 -->## N. FinOps 2026更新
 
-#<!-- chunk: N.1 GPU成本治理 -->## N.1 GPU成本治理
+## N.1 GPU成本治理
 - GPU资源单价远高于CPU（H100 $3-5/小时/卡 vs CPU $0.05/核/小时）
 - GPU利用率监控（DCGM Exporter + Kubecost集成）
 - GPU碎片化成本分析（不可调度GPU的浪费量化）
 - GPU共享策略的成本效益（MIG/时间片/MPS）
 
-#<!-- chunk: N.2 GKE Autopilot按Pod计费模型 -->## N.2 GKE Autopilot按Pod计费模型
+## N.2 GKE Autopilot按Pod计费模型
 - Autopilot按Pod实际请求资源计费（无节点浪费）
 - vs Standard模式的TCO对比（Autopilot典型节省30-40%）
 - 适用场景分析（波动型工作负载最受益）
@@ -1129,7 +1129,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 9. 未来发展趋势 -->## 9. 未来发展趋势
 
-#<!-- chunk: 9.1 智能化成本管理 -->## 9.1 智能化成本管理
+## 9.1 智能化成本管理
 
 ```yaml
 未来发展方向:
@@ -1158,13 +1158,13 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers KUDIG Database — Global MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - index.md|Domain-19 论文与参考 — 开源项目索引]]
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
 - Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Imp...
 - Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Archit...
-- [[domain-19-landscape-references/02-papers/05-kubernetes-gitops-complete-practice-guide]]
+- [[domain-19-landscape-references/02-papers/05-kubernetes-gitops-complete-practice-guide.md|05 kubernetes gitops complete practice guide]]
 - Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface ...
 - Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro...
 - Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and ...

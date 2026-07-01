@@ -9,6 +9,7 @@ tags:
   - k8s
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 ---
 
 # 平台工程与内部开发者平台（IDP）
@@ -141,6 +142,6 @@ GitOps (ArgoCD / Flux)
 
 ## Related
 
-- [[concepts/gitops-production-operations]] — GitOps 生产运维
-- [[concepts/progressive-delivery-strategies]] — 渐进式交付策略
-- [[concepts/finops-greenops-practices]] — FinOps 与绿色运维实践
+- [[concepts/gitops-production-operations.md|gitops production operations]] — GitOps 生产运维
+- [[concepts/progressive-delivery-strategies.md|progressive delivery strategies]] — 渐进式交付策略
+- [[concepts/finops-greenops-practices.md|finops greenops practices]] — FinOps 与绿色运维实践

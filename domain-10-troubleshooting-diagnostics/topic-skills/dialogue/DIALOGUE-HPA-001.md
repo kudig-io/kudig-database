@@ -7,6 +7,7 @@ severity: "medium"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 title: "HPA 不扩容，流量高峰期服务响应慢 — 远程顾问对话脚本"
 category: dialogue
 tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
@@ -14,7 +15,7 @@ tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 
 # HPA 不扩容，流量高峰期服务响应慢 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/horizontal-pod-autoscaler|HPA]]
+> 对应概念：[[concepts/horizontal-pod-autoscaler.md|HPA]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -163,6 +164,9 @@ kubectl get hpa <hpa-name> -n <namespace> -o yaml | grep -A 20 scaleUp
 
 #### 方案 A：安装 metrics-server
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
@@ -171,6 +175,9 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 
 #### 方案 B：调整 target 配置
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch hpa <hpa-name> -n <namespace> --type='merge' -p='{"spec":{"metrics":[{"type":"Resource","resource":{"name":"cpu","target":{"type":"Utilization","averageUtilization":50}}}]}}'
 ```
@@ -178,6 +185,9 @@ kubectl patch hpa <hpa-name> -n <namespace> --type='merge' -p='{"spec":{"metrics
 > **如果无法执行**：请使用 `kubectl edit hpa <hpa-name> -n <namespace>` 手动降低 `averageUtilization` 的值（如从 80% 改为 50%）。
 
 #### 方案 C：修改 behavior 配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat <<EOF | kubectl apply -f -
@@ -220,6 +230,9 @@ EOF
 
 #### 方案 D：修正 scaleTargetRef
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch hpa <hpa-name> -n <namespace> --type='merge' -p='{"spec":{"scaleTargetRef":{"apiVersion":"apps/v1","kind":"Deployment","name":"<correct-deployment>"}}}'
 ```
@@ -238,6 +251,6 @@ kubectl get hpa <hpa-name> -n <namespace> -w
 
 ## 相关概念
 
-- [[concepts/horizontal-pod-autoscaler|HPA]]
-- [[concepts/metrics-server|Metrics Server]]
-- [[concepts/horizontal-pod-autoscaler|自动扩缩容策略]]
+- [[concepts/horizontal-pod-autoscaler.md|HPA]]
+- [[concepts/metrics-server.md|Metrics Server]]
+- [[concepts/horizontal-pod-autoscaler.md|自动扩缩容策略]]

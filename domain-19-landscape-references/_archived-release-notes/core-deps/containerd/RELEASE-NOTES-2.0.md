@@ -52,7 +52,7 @@ The seventh patch release for containerd 2.0 includes various bug fixes and upda
 
 ### Highlights
 
-#### [[Container Runtime|Container Runtime]] Interface (CRI)
+#### [[concepts/container-runtime.md|Container Runtime]] Interface (CRI)
 
 * **Disable event subscriber during task cleanup** ([#12406](https://github.com/containerd/containerd/pull/12406))
 * **Add SystemdCgroup to default runtime options** ([#12254](https://github.com/containerd/containerd/pull/12254))

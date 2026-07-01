@@ -93,6 +93,9 @@ echo "Status PodIP:  $POD_IP"
 
 ### 1.4 Pod 内网络接口检查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 echo "=== 网络接口 ==="
 kubectl exec terway-test-1 -- ip addr show
@@ -118,6 +121,9 @@ kubectl exec terway-test-1 -- ip link show
 
 异常排查：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 若 Pod 内无 eth0 或 IP 异常，检查 Terway 日志
 kubectl logs -n kube-system -l app=terway --tail=200 | grep -i "error\|fail"
@@ -132,6 +138,9 @@ kubectl exec -n kube-system $(kubectl get pods -n kube-system -l app=terway -o j
 
 ### 2.1 同节点 Pod 通信
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 TEST1_IP=$(kubectl get pod terway-test-1 -o jsonpath='{.status.podIP}')
 TEST2_IP=$(kubectl get pod terway-test-2 -o jsonpath='{.status.podIP}')
@@ -143,6 +152,9 @@ kubectl exec terway-test-1 -- ping -c 3 -W 2 $TEST2_IP
 **异常排查**: 若同节点 Pod 不通，检查 veth pair 是否正确创建：`ip link show type veth`（在节点上执行）。
 
 ### 2.2 跨节点 Pod 通信
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 获取节点列表，在第二个节点上创建测试 Pod
@@ -167,6 +179,9 @@ kubectl exec terway-test-1 -- ping -c 3 -W 2 $TEST3_IP
 
 ### 2.3 Pod → Node 通信
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 NODE_IP=$(kubectl get node $NODE1 -o jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}')
 echo "Node IP: $NODE_IP"
@@ -177,6 +192,9 @@ kubectl exec terway-test-1 -- ping -c 3 -W 2 $NODE_IP
 **预期**: 成功，延迟 < 1ms。
 
 ### 2.4 Pod → 外网通信
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 echo "=== ICMP 测试 ==="
@@ -192,6 +210,9 @@ kubectl exec terway-test-1 -- wget -q -O- http://ifconfig.me 2>/dev/null || \
 
 ### 2.5 Pod → VPC 元数据服务
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 echo "=== 元数据服务 ==="
 kubectl exec terway-test-1 -- wget -q -O- http://100.100.100.200/latest/meta-data/instance-id
@@ -204,6 +225,9 @@ kubectl exec terway-test-1 -- wget -q -O- http://100.100.100.200/latest/meta-dat
 **异常排查**: 若无法访问 100.100.100.200，检查 vSwitch 是否在正确 VPC 内，以及安全组是否阻断。
 
 ### 2.6 连通性测试汇总脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -256,12 +280,18 @@ NP_SERVER_IP=$(kubectl get pod np-server -o jsonpath='{.status.podIP}')
 
 验证无策略时可访问：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 kubectl exec terway-test-1 -- wget -q -T 3 -O- http://$NP_SERVER_IP:80
 echo "无策略时应返回 0: $?"
 ```
 
 应用默认拒绝策略：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 kubectl apply -f - <<EOF
@@ -278,6 +308,9 @@ EOF
 ```
 
 验证策略生效：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 kubectl exec terway-test-1 -- wget -T 5 -q -O- http://$NP_SERVER_IP:80
@@ -324,6 +357,9 @@ spec:
       port: 80
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply -f - <<EOF
 apiVersion: networking.k8s.io/v1
@@ -347,6 +383,9 @@ EOF
 ```
 
 验证：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 echo "=== 前端 Pod (app=frontend) 访问 ==="
@@ -393,6 +432,10 @@ spec:
 
 验证出站限制：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 kubectl apply -f - <<EOF
 apiVersion: networking.k8s.io/v1
@@ -435,9 +478,13 @@ echo "预期: 超时"
 
 ### 3.4 清理所有测试策略和 Pod
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 kubectl delete networkpolicy deny-all-ingress allow-frontend-to-server egress-allow-dns-only --ignore-not-found
-kubectl delete pod np-server np-frontend np-other --force --grace-period=0 --ignore-not-found
+kubectl delete pod np-server np-frontend np-other --force --grace-period=0 --ignore-not-found  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
 ---
@@ -530,8 +577,11 @@ kubectl get pods -l run -o wide --no-headers | grep "density-test" | awk '{print
 
 清理密度测试 Pod：
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+
 ```bash
-for i in $(seq 1 50); do kubectl delete pod density-test-$i --force --grace-period=0 & done; wait
+for i in $(seq 1 50); do kubectl delete pod density-test-$i --force --grace-period=0 & done; wait  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
 ---
@@ -556,6 +606,9 @@ spec:
   - sg-xxx
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply -f podnetworking-fixed-ip.yaml
 ```
@@ -576,6 +629,9 @@ spec:
     command: ["sleep", "3600"]
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply -f fixed-ip-pod.yaml
 kubectl wait --for=condition=Ready pod/fixed-ip-pod --timeout=60s
@@ -586,8 +642,12 @@ echo "Pod 首次 IP: $ORIGINAL_IP"
 
 ### 5.3 删除 Pod 并验证 IP 保留
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
-kubectl delete pod fixed-ip-pod --force --grace-period=0
+kubectl delete pod fixed-ip-pod --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 
 echo "=== 检查 PodENI 资源保留 ==="
 kubectl get podeni -A
@@ -602,6 +662,9 @@ kubectl exec -n kube-system $TERWAY_POD -- terway-cli show | grep -i "fixed"
 
 ### 5.4 重建 Pod 验证 IP 一致性
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubectl apply -f fixed-ip-pod.yaml
 kubectl wait --for=condition=Ready pod/fixed-ip-pod --timeout=60s
@@ -615,8 +678,12 @@ echo "原始 IP:       $ORIGINAL_IP"
 
 清理：
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
-kubectl delete pod fixed-ip-pod --force --grace-period=0 --ignore-not-found
+kubectl delete pod fixed-ip-pod --force --grace-period=0 --ignore-not-found  # ⚠️ 跳过优雅终止，可能丢数据
 kubectl delete podnetworking fixed-ip-test --ignore-not-found
 ```
 
@@ -625,6 +692,9 @@ kubectl delete podnetworking fixed-ip-test --ignore-not-found
 ## 6. GC (垃圾回收) 验证
 
 ### 6.1 记录当前 IP 分配状态
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 TERWAY_POD=$(kubectl get pods -n kube-system -l app=terway -o jsonpath='{.items[0].metadata.name}')
@@ -638,6 +708,9 @@ kubectl get ipinstance -A -o wide
 
 ### 6.2 创建并删除测试 Pod
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+
 ```bash
 kubectl run gc-test-1 --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/busybox:1.36 --command -- sleep 60
 kubectl run gc-test-2 --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/busybox:1.36 --command -- sleep 60
@@ -649,10 +722,13 @@ GC_IP2=$(kubectl get pod gc-test-2 -o jsonpath='{.status.podIP}')
 echo "gc-test-1 IP: $GC_IP1"
 echo "gc-test-2 IP: $GC_IP2"
 
-kubectl delete pod gc-test-1 gc-test-2 --force --grace-period=0
+kubectl delete pod gc-test-1 gc-test-2 --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
 ### 6.3 等待 GC 周期并验证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 echo "等待 GC 周期 (约 120s)..."
@@ -666,6 +742,9 @@ kubectl exec -n kube-system $TERWAY_POD -- terway-cli garbage-collect
 ```
 
 ### 6.4 验证 IP 已回收
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 echo "=== GC 后 IP 分配 ==="
@@ -729,6 +808,9 @@ kubectl get podeni -A -o json | jq '.items[] | {
 
 ### 7.4 安全组连通性验证
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 echo "=== 测试安全组是否放行 Pod 网段 ==="
 POD_CIDR=$(kubectl get configmap -n kube-system eni-config -o jsonpath='{.data.eni_conf}' | grep -o '"vswitches":{[^}]*}')
@@ -739,7 +821,7 @@ kubectl exec terway-test-1 -- ping -c 1 -W 2 $TEST3_IP
 echo "若跨节点 Pod 不通，检查安全组是否放行 Pod CIDR 互访"
 ```
 
-> 安全组配置参考: [03-usage.md](./[[domain-03-networking-traffic/topic-terway/03-usage|03-usage]].md) 第 2 节
+> 安全组配置参考: [03-usage.md](./[[domain-03-networking-traffic/topic-terway/03-usage.md|03-usage]].md) 第 2 节
 
 ---
 
@@ -772,6 +854,9 @@ kubectl run iperf3-client --rm -it --restart=Never \
 
 ### 8.2 延迟测试
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 echo "=== Pod 间延迟 (100 次) ==="
 kubectl exec terway-test-1 -- ping -c 100 -i 0.1 $TEST3_IP
@@ -797,6 +882,9 @@ kubectl run hping3-client --rm -it --restart=Never \
 
 ### 8.4 DNS 解析性能测试
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 echo "=== CoreDNS 解析延迟 ==="
 kubectl exec terway-test-1 -- nslookup kubernetes.default.svc.cluster.local
@@ -812,8 +900,11 @@ kubectl exec terway-test-1 -- nslookup aliyun.com
 
 清理性能测试 Pod：
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+
 ```bash
-kubectl delete pod iperf3-server --force --grace-period=0 --ignore-not-found
+kubectl delete pod iperf3-server --force --grace-period=0 --ignore-not-found  # ⚠️ 跳过优雅终止，可能丢数据
 ```
 
 ---
@@ -821,6 +912,9 @@ kubectl delete pod iperf3-server --force --grace-period=0 --ignore-not-found
 ## 9. MTU 测试
 
 ### 9.1 检查各接口 MTU
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 echo "=== 节点接口 MTU ==="
@@ -845,6 +939,9 @@ kubectl exec terway-test-1 -- ip link show | grep mtu
 | VPC 路由 | 1500 | 1500 | host-gw 模式, 无额外封装 (非 VXLAN) |
 
 ### 9.3 大包测试 (DF 位)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 echo "=== 1500 字节 (预期: ENIIP 成功, VPC 路由失败) ==="
@@ -873,6 +970,10 @@ ip link set eth0 mtu 1500
 ## 10. 端到端测试套件
 
 以下脚本可一键运行所有验证项，输出 PASS/FAIL 汇总。
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1004,7 +1105,7 @@ fi
 # --- 清理 ---
 echo ""
 echo "清理测试 Pod..."
-kubectl delete pod e2e-test-1 e2e-test-2 --force --grace-period=0 2>/dev/null || true
+kubectl delete pod e2e-test-1 e2e-test-2 --force --grace-period=0 2>/dev/null || true  # ⚠️ 跳过优雅终止，可能丢数据
 
 # --- 汇总 ---
 echo ""
@@ -1067,4 +1168,6 @@ chmod +x terway-e2e-test.sh
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+```

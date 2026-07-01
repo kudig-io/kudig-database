@@ -30,7 +30,7 @@ created: "2026-05-23"
 
 # 工具体系与权限模型
 
-> **文档类型**: 核心能力专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Tools, Permissions, Custom Tools, bash, edit, read, grep, [[domain-05-security-compliance/README|security]], TypeScript
+> **文档类型**: 核心能力专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Tools, Permissions, Custom Tools, bash, edit, read, grep, [[domain-05-security-compliance/README.md|security]], TypeScript
 
 ---
 

@@ -247,6 +247,10 @@ kubectl debug node/<node-name> -it --image=busybox
 - "批量重启所有 Pod（发送 SIG HUP）"
 
 **输出示例**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 在所有 nginx Pod 中执行 ls /app
 kubectl exec-all -l app=nginx -- ls /app
@@ -261,6 +265,10 @@ kubectl exec-all -l app=nginx -- ls /app
 ```
 
 **典型故障排查**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 问题：需要同时查看多个 Pod 的日志
 kubectl exec-all -l app=nginx -- tail -f /var/log/nginx/access.log
@@ -422,13 +430,16 @@ kubectl purge jobs,deployments -n <namespace> --older-than=24h
 
 ### 4.2 krew 自身问题
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
 # 重置 krew（如果 krew 命令本身出错）
 kubectl krew version
 # 如版本显示正常但安装插件失败：
 
 # 清理并重新安装 krew
-rm -rf ~/.krew
+rm -rf ~/.krew  # ⚠️ 删除系统/数据文件
 # 重新执行 krew 安装脚本
 ```
 
@@ -528,7 +539,7 @@ related:
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Platform Ops Domain (平台运维领域)]]
+- [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
 - Domain-9 平台运维 — 开源项目索引
 - 平台运维概述
 - 集群生命周期管理
@@ -546,3 +557,5 @@ related:
 - 25-virtual-clusters
 - 99-java-k8s-client-operator-guide
 - 99-kubernetes-v1.33-platform-ops-guide
+
+```

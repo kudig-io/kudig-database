@@ -155,4 +155,6 @@ curl -s http://kube-state-metrics:8080/metrics | grep kube_pod_overhead
 
 ## Related
 
-- index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/scheduling/affinity.md|亲和性]]
+- [[domain-17-system-foundation/topic-dictionary/scheduling/anti-affinity.md|反亲和性]]
+- [[domain-17-system-foundation/topic-dictionary/scheduling/api-initiated-eviction.md|API-initiated Eviction]]

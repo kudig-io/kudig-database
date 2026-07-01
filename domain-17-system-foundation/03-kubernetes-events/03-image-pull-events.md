@@ -75,7 +75,7 @@ created: "2026-05-23"
 
 <!-- chunk: 一、镜像拉取事件总览 -->## 一、镜像拉取事件总览
 
-#<!-- chunk: 1.1 镜像拉取事件汇总表 -->## 1.1 镜像拉取事件汇总表
+## 1.1 镜像拉取事件汇总表
 
 | Event Reason | 中文名称 | 类型 | 来源组件 | 关联资源 | 适用版本 | 生产频率 |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -87,7 +87,7 @@ created: "2026-05-23"
 | `ErrImageNeverPull` | 镜像策略禁止拉取 | Warning | kubelet | Pod | v1.0+ | 低频 |
 | `InspectFailed` | 镜像检查失败 | Warning | kubelet | Pod | v1.0+ | 罕见 |
 
-#<!-- chunk: 1.2 事件流转示意图 -->## 1.2 事件流转示意图
+## 1.2 事件流转示意图
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -165,7 +165,7 @@ created: "2026-05-23"
 
 <!-- chunk: 二、镜像拉取策略与事件流程 -->## 二、镜像拉取策略与事件流程
 
-#<!-- chunk: 2.1 imagePullPolicy 配置详解 -->## 2.1 imagePullPolicy 配置详解
+## 2.1 imagePullPolicy 配置详解
 
 | 策略 | 英文全称 | 行为说明 | 适用场景 | 对应事件 |
 |:---|:---|:---|:---|:---|
@@ -173,7 +173,7 @@ created: "2026-05-23"
 | `IfNotPresent` | Pull If Not Present | 仅当本地不存在时拉取镜像 | 开发测试环境,节省流量 | `AlreadyPresent` / `Pulling` → `Pulled` |
 | `Never` | Never Pull | 永不拉取,仅使用本地镜像 | 离线环境/预加载镜像场景 | `AlreadyPresent` / `ErrImageNeverPull` |
 
-#<!-- chunk: 2.2 默认策略规则 -->## 2.2 默认策略规则
+## 2.2 默认策略规则
 
 ```yaml
 # Kubernetes 的 imagePullPolicy 默认逻辑:
@@ -204,7 +204,7 @@ spec:
       imagePullPolicy: Always    # 明确指定
 ```
 
-#<!-- chunk: 2.3 镜像拉取流程决策树 -->## 2.3 镜像拉取流程决策树
+## 2.3 镜像拉取流程决策树
 
 ```
 开始
@@ -230,7 +230,7 @@ spec:
 
 <!-- chunk: 三、Normal 事件详解 -->## 三、Normal 事件详解
 
-#<!-- chunk: 3.1 Pulling - 开始拉取镜像 -->## 3.1 Pulling - 开始拉取镜像
+## 3.1 Pulling - 开始拉取镜像
 
 | 属性 | 说明 |
 |:---|:---|
@@ -240,7 +240,7 @@ spec:
 | **适用版本** | v1.0+ |
 | **生产频率** | 高频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 `Pulling` 事件表示 kubelet 已开始从容器镜像仓库拉取指定的容器镜像。此事件标志着镜像拉取流程的开始阶段,是 Pod 启动流程中的关键步骤之一。
 
@@ -251,7 +251,7 @@ spec:
 
 此事件的出现意味着网络流量即将发生,镜像大小和网络带宽将直接影响拉取耗时。在大规模集群中,同时拉取大量镜像可能导致镜像仓库负载升高或网络带宽瓶颈。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe pod nginx-deployment-7d5bc-xyz12
@@ -272,14 +272,14 @@ LAST SEEN   TYPE     REASON    OBJECT                             MESSAGE
 12s         Normal   Pulling   pod/redis-cluster-0                Pulling image "redis:7.2-alpine"
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: Pod 启动时间延长,取决于镜像大小和网络速度(通常几秒到几分钟)
 - **服务影响**: 如果是新部署或滚动更新,会影响服务就绪时间和流量切换速度
 - **集群影响**: 大规模拉取(如 [[DaemonSet|DaemonSet]] 部署到所有节点)会产生显著网络流量和镜像仓库负载
 - **关联事件链**: `Scheduled` → `Pulling` → `Pulled` → `Created` → `Started`
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 当 `Pulling` 事件持续时间过长(超过预期)时,可以进行以下排查:
 
@@ -334,7 +334,7 @@ sudo journalctl -u kubelet -f | grep -E "Pulling|image"
 ps aux | grep kubelet | grep -E "serialize-image-pulls|registry-"
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 问题原因 | 解决方案 | 优先级 |
 |:---|:---|:---|
@@ -347,7 +347,7 @@ ps aux | grep kubelet | grep -E "serialize-image-pulls|registry-"
 
 ---
 
-#<!-- chunk: 3.2 Pulled - 镜像拉取成功 -->## 3.2 Pulled - 镜像拉取成功
+## 3.2 Pulled - 镜像拉取成功
 
 | 属性 | 说明 |
 |:---|:---|
@@ -357,7 +357,7 @@ ps aux | grep kubelet | grep -E "serialize-image-pulls|registry-"
 | **适用版本** | v1.0+ |
 | **生产频率** | 高频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 `Pulled` 事件表示 kubelet 已成功从镜像仓库下载完整的容器镜像,并完成镜像层的解压和验证。镜像现在已缓存在节点本地,可以用于创建容器。
 
@@ -369,7 +369,7 @@ ps aux | grep kubelet | grep -E "serialize-image-pulls|registry-"
 
 此事件的出现是 Pod 能够正常启动的前置条件,紧接着会触发容器创建和启动流程。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe pod nginx-deployment-7d5bc-xyz12
@@ -394,14 +394,14 @@ LAST SEEN   TYPE     REASON   OBJECT                             MESSAGE
 45s         Normal   Pulled   pod/mysql-statefulset-0            Successfully pulled image "mysql:8.0.35" in 25.6s
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: Pod 启动流程顺利进行,即将进入容器创建和启动阶段
 - **服务影响**: 正向影响,表明服务部署/更新流程正常
 - **集群影响**: 节点镜像缓存已更新,后续相同镜像的 Pod 可直接使用本地镜像(如果策略为 IfNotPresent)
 - **关联事件链**: `Pulling` → `Pulled` → `Created` → `Started` → `Ready`(如有 readinessProbe)
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 虽然 `Pulled` 是成功事件,但在性能优化场景下需要关注拉取耗时:
 
@@ -438,7 +438,7 @@ kubectl get events -A --field-selector reason=Pulled -o json | \
   sort
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 观察到的现象 | 优化方案 | 优先级 |
 |:---|:---|:---|
@@ -450,7 +450,7 @@ kubectl get events -A --field-selector reason=Pulled -o json | \
 
 ---
 
-#<!-- chunk: 3.3 AlreadyPresent - 镜像已存在本地 -->## 3.3 AlreadyPresent - 镜像已存在本地
+## 3.3 AlreadyPresent - 镜像已存在本地
 
 | 属性 | 说明 |
 |:---|:---|
@@ -460,7 +460,7 @@ kubectl get events -A --field-selector reason=Pulled -o json | \
 | **适用版本** | v1.0+ |
 | **生产频率** | 高频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 `AlreadyPresent` 事件表示 kubelet 检测到所需的容器镜像已经缓存在节点本地存储中,无需从远程镜像仓库拉取。这是镜像管理中最理想的情况,可以显著加快 Pod 启动速度。
 
@@ -471,7 +471,7 @@ kubectl get events -A --field-selector reason=Pulled -o json | \
 
 在生产环境中,高比例的 `AlreadyPresent` 事件意味着良好的镜像缓存命中率,这对于减少镜像仓库负载、降低网络流量和加快应用部署速度都非常有益。对于滚动更新场景,如果节点上已有旧版本镜像,新版本镜像仍需拉取,不会触发此事件。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe pod nginx-deployment-7d5bc-abc89
@@ -494,14 +494,14 @@ LAST SEEN   TYPE     REASON           OBJECT                             MESSAGE
 32s         Normal   AlreadyPresent   pod/redis-cluster-1                Container image "redis:7.2-alpine" already present on machine
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: Pod 启动速度最快,无镜像拉取延迟(通常 < 1秒进入容器创建阶段)
 - **服务影响**: 正向影响,滚动更新或扩容时响应速度快
 - **集群影响**: 无额外网络流量,不增加镜像仓库负载,节省带宽成本
 - **关联事件链**: `Scheduled` → `AlreadyPresent` → `Created` → `Started`(跳过 Pulling/Pulled 阶段)
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 `AlreadyPresent` 是正常且高效的事件,但在某些场景下需要注意:
 
@@ -552,7 +552,7 @@ kubectl get pod nginx-deployment-7d5bc-abc89 -o jsonpath='{.spec.containers[*].i
 # 预期应该是 Always,但可能被错误设置为 IfNotPresent
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 场景 | 建议方案 | 优先级 |
 |:---|:---|:---|
@@ -566,7 +566,7 @@ kubectl get pod nginx-deployment-7d5bc-abc89 -o jsonpath='{.spec.containers[*].i
 
 <!-- chunk: 四、Warning 事件详解 -->## 四、Warning 事件详解
 
-#<!-- chunk: 4.1 Failed (ErrImagePull) - 镜像拉取失败 -->## 4.1 Failed (ErrImagePull) - 镜像拉取失败
+## 4.1 Failed (ErrImagePull) - 镜像拉取失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -576,7 +576,7 @@ kubectl get pod nginx-deployment-7d5bc-abc89 -o jsonpath='{.spec.containers[*].i
 | **适用版本** | v1.0+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 `Failed` 事件(reason 为 `ErrImagePull`)表示 kubelet 在尝试拉取容器镜像时遇到了错误,导致镜像拉取失败。这是容器启动失败的最常见原因之一,通常由配置错误、网络问题或镜像仓库访问权限问题引起。
 
@@ -589,7 +589,7 @@ kubectl get pod nginx-deployment-7d5bc-abc89 -o jsonpath='{.spec.containers[*].i
 - **镜像仓库限流**: 超过 Docker Hub 等公共仓库的拉取速率限制
 - **TLS 证书问题**: HTTPS 连接证书验证失败
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe pod nginx-deployment-7d5bc-xyz12
@@ -620,14 +620,14 @@ default     2m10s       Warning   Failed   pod/nginx-deployment-...    Failed to
 default     1m30s       Warning   Failed   pod/redis-cluster-0         Failed to pull image "redis:wrong-tag": rpc error...
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: Pod 无法启动,停留在 `ErrImagePull` 或 `ImagePullBackOff` 状态,服务不可用
 - **服务影响**: 如果是新部署,服务无法上线;如果是滚动更新,可能触发回滚或部署卡住
 - **集群影响**: 持续的失败重试会产生大量事件对象和 kubelet 日志,增加 etcd 和日志存储压力
 - **关联事件链**: `Pulling` → `Failed` (ErrImagePull) → `BackOff` (ImagePullBackOff,循环重试)
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 1. **分析错误消息确定失败原因**
 
@@ -699,7 +699,7 @@ sudo journalctl -u containerd -n 200 | grep -E "pull|image"
 sudo journalctl -u docker -n 200 | grep -E "pull|image"
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 错误原因 | 解决方案 | 优先级 |
 |:---|:---|:---|
@@ -713,7 +713,7 @@ sudo journalctl -u docker -n 200 | grep -E "pull|image"
 
 ---
 
-#<!-- chunk: 4.2 BackOff (ImagePullBackOff) - 退避重试拉取镜像 -->## 4.2 BackOff (ImagePullBackOff) - 退避重试拉取镜像
+## 4.2 BackOff (ImagePullBackOff) - 退避重试拉取镜像
 
 | 属性 | 说明 |
 |:---|:---|
@@ -723,7 +723,7 @@ sudo journalctl -u docker -n 200 | grep -E "pull|image"
 | **适用版本** | v1.0+ |
 | **生产频率** | 中频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 `BackOff` 事件(对应 Pod 状态 `ImagePullBackOff`)表示 kubelet 在首次镜像拉取失败后,正处于指数退避(Exponential Backoff)重试阶段。这是 Kubernetes 的自我保护机制,避免频繁的失败重试给镜像仓库和网络带来过大压力。
 
@@ -738,7 +738,7 @@ sudo journalctl -u docker -n 200 | grep -E "pull|image"
 - Pod 被删除或更新
 - 等待时间超过 Pod 的 `spec.activeDeadlineSeconds`(如果设置)
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe pod nginx-deployment-7d5bc-xyz12
@@ -771,14 +771,14 @@ default/nginx-deployment-7d5bc-xyz12
 production/api-server-abc123
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: Pod 长时间无法启动,服务持续不可用,用户请求失败
 - **服务影响**: 如果是滚动更新,旧版本 Pod 可能已被删除,导致服务容量下降或完全不可用
 - **集群影响**: 持续的重试产生大量事件聚合(`count` 字段不断增长),消耗 etcd 存储和 API Server 资源
 - **关联事件链**: `Failed` (ErrImagePull) → `BackOff` → `Failed` (ImagePullBackOff) → `BackOff` (循环往复)
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 1. **检查 Pod 状态和重试计数**
 
@@ -824,9 +824,10 @@ kubectl describe deployment <deployment-name>
 
 # 检查是否有多个 ReplicaSet(滚动更新卡住)
 kubectl get replicaset -l app=<app-label>
+
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 场景 | 解决方案 | 优先级 |
 |:---|:---|:---|
@@ -839,7 +840,7 @@ kubectl get replicaset -l app=<app-label>
 
 ---
 
-#<!-- chunk: 4.3 ErrImageNeverPull - 镜像策略禁止拉取 -->## 4.3 ErrImageNeverPull - 镜像策略禁止拉取
+## 4.3 ErrImageNeverPull - 镜像策略禁止拉取
 
 | 属性 | 说明 |
 |:---|:---|
@@ -849,7 +850,7 @@ kubectl get replicaset -l app=<app-label>
 | **适用版本** | v1.0+ |
 | **生产频率** | 低频 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 `ErrImageNeverPull` 事件表示容器的 `imagePullPolicy` 被设置为 `Never`,要求仅使用节点本地已存在的镜像,但 kubelet 在本地未找到该镜像。由于策略禁止从远程仓库拉取镜像,Pod 将无法启动。
 
@@ -861,7 +862,7 @@ kubectl get replicaset -l app=<app-label>
 
 与 `ErrImagePull` 不同,此错误不会触发退避重试机制,因为 kubelet 知道重试也无法拉取镜像。Pod 会立即进入 `ErrImageNeverPull` 状态并保持失败,直到问题解决(镜像被加载到节点或策略被修改)。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe pod offline-app-xyz12
@@ -890,14 +891,14 @@ NAMESPACE   LAST SEEN   TYPE      REASON              OBJECT                   M
 default     2m15s       Warning   ErrImageNeverPull   pod/offline-app-xyz12    Container image "myapp:v1.0" is not present...
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: Pod 完全无法启动,服务不可用,且不会自动恢复
 - **服务影响**: 如果是关键服务,会导致服务完全下线,需要人工介入修复
 - **集群影响**: 影响较小,不会产生大量重试事件,但会阻塞 Pod 调度队列
 - **关联事件链**: `Scheduled` → `ErrImageNeverPull` → `Failed`(停止,不再重试)
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 1. **验证 imagePullPolicy 配置**
 
@@ -948,7 +949,7 @@ curl -v https://registry-1.docker.io/v2/
 # 如果无法连接,确认是否为预期的离线环境
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 问题原因 | 解决方案 | 优先级 |
 |:---|:---|:---|
@@ -961,7 +962,7 @@ curl -v https://registry-1.docker.io/v2/
 
 ---
 
-#<!-- chunk: 4.4 InspectFailed - 镜像检查失败 -->## 4.4 InspectFailed - 镜像检查失败
+## 4.4 InspectFailed - 镜像检查失败
 
 | 属性 | 说明 |
 |:---|:---|
@@ -971,7 +972,7 @@ curl -v https://registry-1.docker.io/v2/
 | **适用版本** | v1.0+ |
 | **生产频率** | 罕见 |
 
-##<!-- chunk: 事件含义 -->## 事件含义
+## 事件含义
 
 `InspectFailed` 事件表示 kubelet 在镜像拉取成功后,尝试检查(inspect)镜像元数据时发生错误。这通常意味着镜像数据已下载到节点,但在解析镜像配置、层信息或元数据时遇到了问题。
 
@@ -984,7 +985,7 @@ curl -v https://registry-1.docker.io/v2/
 
 与 `ErrImagePull` 不同,`InspectFailed` 发生在镜像拉取之后,这意味着网络和仓库访问都是正常的,问题出在节点本地的镜像处理环节。
 
-##<!-- chunk: 典型事件消息 -->## 典型事件消息
+## 典型事件消息
 
 ```bash
 $ kubectl describe pod corrupted-image-xyz12
@@ -1015,14 +1016,14 @@ NAMESPACE   LAST SEEN   TYPE      REASON          OBJECT                        
 default     3m15s       Warning   InspectFailed   pod/corrupted-image-xyz12      Failed to inspect image "myapp:v1.0": rpc error...
 ```
 
-##<!-- chunk: 影响面说明 -->## 影响面说明
+## 影响面说明
 
 - **用户影响**: Pod 无法启动,即使镜像已拉取到节点
 - **服务影响**: 服务部署失败,需要人工介入诊断和修复
 - **集群影响**: 可能指示节点存储或容器运行时问题,影响该节点上其他 Pod 的镜像操作
 - **关联事件链**: `Pulling` → `Pulled` → `InspectFailed` → `Failed`
 
-##<!-- chunk: 排查建议 -->## 排查建议
+## 排查建议
 
 1. **检查镜像完整性**
 
@@ -1088,9 +1089,10 @@ skopeo inspect docker://<image-name> | jq .
 # 检查镜像的 manifest 和 config
 crane manifest <image-name>
 crane config <image-name> | jq .
+
 ```
 
-##<!-- chunk: 解决建议 -->## 解决建议
+## 解决建议
 
 | 问题原因 | 解决方案 | 优先级 |
 |:---|:---|:---|
@@ -1106,11 +1108,14 @@ crane config <image-name> | jq .
 
 <!-- chunk: 五、私有仓库认证排查 -->## 五、私有仓库认证排查
 
-#<!-- chunk: 5.1 ImagePullSecret 配置详解 -->## 5.1 ImagePullSecret 配置详解
+## 5.1 ImagePullSecret 配置详解
 
 Kubernetes 使用 `imagePullSecrets` 机制为私有镜像仓库提供认证凭据。
 
-##<!-- chunk: 5.1.1 创建 Docker Registry Secret -->## 5.1.1 创建 Docker Registry Secret
+## 5.1.1 创建 Docker Registry Secret
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 方法1: 使用命令行创建(推荐)
@@ -1140,7 +1145,7 @@ data:
 EOF
 ```
 
-##<!-- chunk: 5.1.2 在 Pod 中使用 ImagePullSecret -->## 5.1.2 在 Pod 中使用 ImagePullSecret
+## 5.1.2 在 Pod 中使用 ImagePullSecret
 
 ```yaml
 # 方法1: 在 Pod spec 中直接指定
@@ -1187,7 +1192,10 @@ spec:
           image: myregistry.example.com/private/app:v1.0
 ```
 
-##<!-- chunk: 5.1.3 为默认 ServiceAccount 添加 ImagePullSecret -->## 5.1.3 为默认 ServiceAccount 添加 ImagePullSecret
+## 5.1.3 为默认 ServiceAccount 添加 ImagePullSecret
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 方法1: 使用 kubectl patch
@@ -1204,9 +1212,9 @@ kubectl edit serviceaccount default -n default
 kubectl get serviceaccount default -n default -o yaml | grep -A 2 imagePullSecrets
 ```
 
-#<!-- chunk: 5.2 常见认证错误排查 -->## 5.2 常见认证错误排查
+## 5.2 常见认证错误排查
 
-##<!-- chunk: 5.2.1 401 Unauthorized - 认证失败 -->## 5.2.1 401 Unauthorized - 认证失败
+## 5.2.1 401 Unauthorized - 认证失败
 
 ```bash
 # 错误消息示例
@@ -1229,7 +1237,10 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.imagePullSecrets[*].name}'
 kubectl get serviceaccount default -o jsonpath='{.imagePullSecrets[*].name}'
 ```
 
-##<!-- chunk: 5.2.2 Secret 未关联到 Pod -->## 5.2.2 Secret 未关联到 Pod
+## 5.2.2 Secret 未关联到 Pod
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 现象: Pod 描述中无 imagePullSecrets 信息
@@ -1252,7 +1263,11 @@ kubectl edit deployment <deployment-name>
 #   - name: my-registry-secret
 ```
 
-##<!-- chunk: 5.2.3 Secret 格式错误 -->## 5.2.3 Secret 格式错误
+## 5.2.3 Secret 格式错误
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 检查 Secret 数据格式
@@ -1284,7 +1299,10 @@ kubectl create secret docker-registry my-registry-secret \
   -n default
 ```
 
-##<!-- chunk: 5.2.4 多仓库认证配置 -->## 5.2.4 多仓库认证配置
+## 5.2.4 多仓库认证配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 场景: Pod 需要从多个私有仓库拉取镜像
@@ -1318,7 +1336,11 @@ imagePullSecrets:
   - name: registry2-secret
 ```
 
-#<!-- chunk: 5.3 Harbor 私有仓库集成 -->## 5.3 Harbor 私有仓库集成
+## 5.3 Harbor 私有仓库集成
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # Harbor 仓库认证配置示例
@@ -1356,7 +1378,10 @@ sudo update-ca-certificates
 sudo systemctl restart containerd
 ```
 
-#<!-- chunk: 5.4 云厂商容器镜像仓库集成 -->## 5.4 云厂商容器镜像仓库集成
+## 5.4 云厂商容器镜像仓库集成
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # ========== AWS ECR ==========
@@ -1407,7 +1432,7 @@ kubectl create secret docker-registry acr-secret \
 
 <!-- chunk: 六、常见镜像拉取失败场景 -->## 六、常见镜像拉取失败场景
 
-#<!-- chunk: 6.1 镜像名称或标签错误 -->## 6.1 镜像名称或标签错误
+## 6.1 镜像名称或标签错误
 
 ```bash
 # 现象: NotFound 错误
@@ -1428,7 +1453,11 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].image}'
 kubectl set image deployment/<deployment-name> <container-name>=nginx:1.25.3
 ```
 
-#<!-- chunk: 6.2 DNS 解析失败 -->## 6.2 DNS 解析失败
+## 6.2 DNS 解析失败
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 现象: DNS 相关错误
@@ -1462,7 +1491,10 @@ kubectl rollout restart deployment coredns -n kube-system
 kubectl set image deployment/<name> <container>=nginx@sha256:xxxxx
 ```
 
-#<!-- chunk: 6.3 网络连接超时 -->## 6.3 网络连接超时
+## 6.3 网络连接超时
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 现象: Timeout 或 Connection refused
@@ -1498,7 +1530,10 @@ sudo systemctl restart containerd
 # 2. 使用本地镜像仓库或镜像
 ```
 
-#<!-- chunk: 6.4 TLS 证书验证失败 -->## 6.4 TLS 证书验证失败
+## 6.4 TLS 证书验证失败
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 现象: x509 证书错误
@@ -1531,7 +1566,7 @@ sudo systemctl restart containerd
     insecure_skip_verify = true
 ```
 
-#<!-- chunk: 6.5 镜像层下载中断 -->## 6.5 镜像层下载中断
+## 6.5 镜像层下载中断
 
 ```bash
 # 现象: unexpected EOF 或 context canceled
@@ -1567,7 +1602,7 @@ imageMaximumGCAge: 0s
 
 <!-- chunk: 七、Docker Hub 限流问题 -->## 七、Docker Hub 限流问题
 
-#<!-- chunk: 7.1 Docker Hub 限流策略 -->## 7.1 Docker Hub 限流策略
+## 7.1 Docker Hub 限流策略
 
 | 用户类型 | 拉取限制 | 计费周期 | 限流依据 |
 |:---|:---|:---|:---|
@@ -1578,7 +1613,7 @@ imageMaximumGCAge: 0s
 
 > **重要**: 在 Kubernetes 集群中,如果不使用认证,所有节点的拉取会算作同一个源 IP(通常是 NAT 网关 IP),极易触发限流。
 
-#<!-- chunk: 7.2 限流错误识别 -->## 7.2 限流错误识别
+## 7.2 限流错误识别
 
 ```bash
 # 典型限流错误消息
@@ -1589,7 +1624,7 @@ Failed to pull image "nginx:1.25.3": rpc error: code = Unknown desc = failed to 
 # - toomanyrequests: You have reached your pull rate limit
 ```
 
-#<!-- chunk: 7.3 检查当前限流状态 -->## 7.3 检查当前限流状态
+## 7.3 检查当前限流状态
 
 ```bash
 # 方法1: 使用 curl 检查剩余配额(匿名)
@@ -1607,9 +1642,14 @@ curl -s --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2
 # ratelimit-remaining: 185;w=21600
 ```
 
-#<!-- chunk: 7.4 解决 Docker Hub 限流问题 -->## 7.4 解决 Docker Hub 限流问题
+## 7.4 解决 Docker Hub 限流问题
 
-##<!-- chunk: 方案1: 使用 Docker Hub 认证(提高限额到 200 次) -->## 方案1: 使用 Docker Hub 认证(提高限额到 200 次)
+## 方案1: 使用 Docker Hub 认证(提高限额到 200 次)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 1. 创建 Docker Hub 账户凭据 Secret
@@ -1631,7 +1671,10 @@ kubectl get serviceaccount default -o yaml | grep -A 2 imagePullSecrets
 kubectl rollout restart deployment/<deployment-name>
 ```
 
-##<!-- chunk: 方案2: 使用镜像仓库镜像(Mirror) -->## 方案2: 使用镜像仓库镜像(Mirror)
+## 方案2: 使用镜像仓库镜像(Mirror)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 配置 containerd 使用国内镜像(如阿里云/腾讯云/DaoCloud)
@@ -1653,7 +1696,7 @@ sudo systemctl restart containerd
 sudo crictl info | jq .config.registry
 ```
 
-##<!-- chunk: 方案3: 迁移到私有镜像仓库 -->## 方案3: 迁移到私有镜像仓库
+## 方案3: 迁移到私有镜像仓库
 
 ```bash
 # 1. 搭建 Harbor/Registry 私有仓库
@@ -1680,7 +1723,10 @@ images:
     newTag: 1.25.3
 ```
 
-##<!-- chunk: 方案4: 使用镜像预热(减少拉取次数) -->## 方案4: 使用镜像预热(减少拉取次数)
+## 方案4: 使用镜像预热(减少拉取次数)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 使用 DaemonSet 预热镜像到所有节点
@@ -1717,7 +1763,10 @@ spec:
 EOF
 ```
 
-##<!-- chunk: 方案5: 使用镜像缓存代理(Pull-Through Cache) -->## 方案5: 使用镜像缓存代理(Pull-Through Cache)
+## 方案5: 使用镜像缓存代理(Pull-Through Cache)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 部署 Registry 作为 Pull-Through Cache
@@ -1799,7 +1848,7 @@ EOF
 
 <!-- chunk: 八、镜像仓库镜像与代理配置 -->## 八、镜像仓库镜像与代理配置
 
-#<!-- chunk: 8.1 配置 containerd 镜像加速 -->## 8.1 配置 containerd 镜像加速
+## 8.1 配置 containerd 镜像加速
 
 ```toml
 # /etc/containerd/config.toml 完整配置示例
@@ -1852,6 +1901,9 @@ version = 2
         endpoint = ["https://k8s.dockerproxy.com"]
 ```
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 应用配置
 sudo systemctl restart containerd
@@ -1863,7 +1915,7 @@ sudo crictl info | jq .config.registry
 sudo crictl pull docker.io/library/nginx:1.25.3
 ```
 
-#<!-- chunk: 8.2 国内镜像加速服务 -->## 8.2 国内镜像加速服务
+## 8.2 国内镜像加速服务
 
 | 提供商 | Docker Hub 镜像地址 | 说明 |
 |:---|:---|:---|
@@ -1876,7 +1928,10 @@ sudo crictl pull docker.io/library/nginx:1.25.3
 
 > **注意**: 部分镜像服务可能不稳定或有使用限制,建议企业用户搭建私有镜像仓库。
 
-#<!-- chunk: 8.3 配置 HTTP 代理 -->## 8.3 配置 HTTP 代理
+## 8.3 配置 HTTP 代理
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # ========== containerd 配置代理 ==========
@@ -1923,7 +1978,11 @@ sudo systemctl daemon-reload
 sudo systemctl restart kubelet
 ```
 
-#<!-- chunk: 8.4 搭建 Harbor 私有仓库 -->## 8.4 搭建 Harbor 私有仓库
+## 8.4 搭建 Harbor 私有仓库
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 使用 Helm 部署 Harbor
@@ -2007,7 +2066,7 @@ kubectl get pods -n harbor -w
 
 <!-- chunk: 九、生产环境最佳实践 -->## 九、生产环境最佳实践
 
-#<!-- chunk: 9.1 镜像拉取性能优化 -->## 9.1 镜像拉取性能优化
+## 9.1 镜像拉取性能优化
 
 | 实践 | 说明 | 影响 |
 |:---|:---|:---|
@@ -2019,7 +2078,7 @@ kubectl get pods -n harbor -w
 | **并发拉取** | 配置 `--serialize-image-pulls=false` | 提高多镜像 Pod 的启动速度 |
 | **配置镜像 GC** | 合理设置 GC 阈值,避免频繁删除常用镜像 | 提高缓存命中率 |
 
-#<!-- chunk: 9.2 镜像安全最佳实践 -->## 9.2 镜像安全最佳实践
+## 9.2 镜像安全最佳实践
 
 ```bash
 # 1. 使用镜像 digest 确保完整性和不变性
@@ -2093,7 +2152,7 @@ securityContext:
       - ALL
 ```
 
-#<!-- chunk: 9.3 镜像拉取监控和告警 -->## 9.3 镜像拉取监控和告警
+## 9.3 镜像拉取监控和告警
 
 ```yaml
 # Prometheus 告警规则示例
@@ -2184,7 +2243,7 @@ chmod +x dockerhub-ratelimit-exporter.sh
 # 部署为 Kubernetes CronJob,定期更新指标
 ```
 
-#<!-- chunk: 9.4 镜像拉取故障排查清单 -->## 9.4 镜像拉取故障排查清单
+## 9.4 镜像拉取故障排查清单
 
 ```bash
 # ========== 快速诊断脚本 ==========
@@ -2270,7 +2329,7 @@ echo ""
 echo "=== Diagnostic Complete ==="
 ```
 
-#<!-- chunk: 9.5 镜像拉取配置检查脚本 -->## 9.5 镜像拉取配置检查脚本
+## 9.5 镜像拉取配置检查脚本
 
 ```bash
 #!/bin/bash
@@ -2318,39 +2377,39 @@ echo "=== Audit Complete ==="
 
 <!-- chunk: 十、相关文档交叉引用 -->## 十、相关文档交叉引用
 
-#<!-- chunk: 10.1 Domain-33 内部文档 -->## 10.1 Domain-33 内部文档
+## 10.1 Domain-33 内部文档
 
 - **[01-event-system-architecture.md](./01-event-system-architecture.md)** - Kubernetes 事件系统架构与 API 参考
 - **[02-pod-container-lifecycle-events.md](./02-pod-container-lifecycle-events.md)** - Pod 和容器生命周期事件
 
-#<!-- chunk: 10.2 Domain-22: 容器镜像管理 -->## 10.2 Domain-22: 容器镜像管理
+## 10.2 Domain-22: 容器镜像管理
 
 - **[Domain-22: Container Image Management](../domain-13-container-runtime/README.md)** - 镜像构建、存储、分发和安全管理
 - **[Domain-22: Dockerfile Best Practices](../domain-13-container-runtime/01-dockerfile-best-practices.md)** - 镜像构建最佳实践
 - **[Domain-22: Image Registry Setup](../domain-13-container-runtime/02-image-registry-setup.md)** - 镜像仓库搭建和配置
 
-#<!-- chunk: 10.3 Domain-12: 故障排查 -->## 10.3 Domain-12: 故障排查
+## 10.3 Domain-12: 故障排查
 
 - **[Domain-12: Troubleshooting / 27-image-registry-troubleshooting.md](../../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting.md)** - 镜像仓库故障排查
 - **[Domain-12: Troubleshooting / 03-container-runtime-troubleshooting.md](../../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md)** - 容器运行时(containerd/docker)故障排查
 - **[Domain-12: Troubleshooting / 01-pod-troubleshooting.md](../../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md)** - Pod 故障排查综合指南
 
-#<!-- chunk: 10.4 Domain-2: 节点管理 -->## 10.4 Domain-2: 节点管理
+## 10.4 Domain-2: 节点管理
 
 - **[Domain-2: Node Management](../domain-2-node-management/README.md)** - 节点配置和管理
 - **[Domain-2: Kubelet Configuration](../domain-2-node-management/02-kubelet-configuration.md)** - kubelet 配置参数详解
 
-#<!-- chunk: 10.5 Domain-5: 网络 -->## 10.5 Domain-5: 网络
+## 10.5 Domain-5: 网络
 
 - **[Domain-5: Networking / DNS Configuration](../domain-03-networking-traffic/03-dns-configuration.md)** - DNS 配置和故障排查(影响镜像仓库域名解析)
 - **[Domain-5: Networking / Proxy Configuration](../domain-03-networking-traffic/05-proxy-configuration.md)** - 代理配置(影响镜像拉取)
 
-#<!-- chunk: 10.6 Domain-7: 安全 -->## 10.6 Domain-7: 安全
+## 10.6 Domain-7: 安全
 
 - **[Domain-7: Security / Secret Management](../domain-05-security-compliance/03-secret-management.md)** - Secret 管理(包括 ImagePullSecret)
 - **[Domain-7: Security / RBAC](../domain-05-security-compliance/01-rbac.md)** - RBAC 权限管理(ServiceAccount imagePullSecrets)
 
-#<!-- chunk: 10.7 运维工具 -->## 10.7 运维工具
+## 10.7 运维工具
 
 - **[crictl 命令参考](https://kubernetes.io/docs/tasks/debug/debug-cluster/crictl/)** - 容器运行时 CLI 工具
 - **[skopeo 工具](https://github.com/containers/skopeo)** - 镜像检查和迁移工具
@@ -2365,7 +2424,7 @@ echo "=== Audit Complete ==="
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-33-kubernetes-events MOC
-- [[domain-17-system-foundation/README|Domain-33: Kubernetes Events 全域事件大全]]
+- [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
 - Domain-33 K8s 事件 — 开源项目索引
 - 01 - Kubernetes 事件系统架构与 API 参考
 - 02 - Pod 与容器生命周期事件
@@ -2386,4 +2445,6 @@ echo "=== Audit Complete ==="
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+```

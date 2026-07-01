@@ -661,7 +661,7 @@ func (c *Controller) syncHandler(key string) error {
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-2: Kubernetes 设计原则与核心机制]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
 - Domain-2 设计原则 — 开源项目索引
 - Kubernetes 设计原则与哲学
 - 声明式 API 与面向终态设计
@@ -680,8 +680,8 @@ func (c *Controller) syncHandler(key string) error {
 - Operator 开发指南
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-01-cluster-fundamentals
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 

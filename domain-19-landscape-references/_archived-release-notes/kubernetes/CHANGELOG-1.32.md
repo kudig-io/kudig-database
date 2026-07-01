@@ -159,7 +159,7 @@ created: "2026-05-23"
     - [Container Images](#container-images-7)
   - [Changelog since v1.32.5](#changelog-since-v1325)
   - [Important Security Information](#important-security-information-1)
-    - [CVE-2025-4563: Nodes can bypass [[Dynamic Resource Allocation|dynamic resource allocation]] authorization checks](#cve-2025-4563-nodes-can-bypass-dynamic-resource-allocation-authorization-checks)
+    - [CVE-2025-4563: Nodes can bypass [[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation.md|dynamic resource allocation]] authorization checks](#cve-2025-4563-nodes-can-bypass-dynamic-resource-allocation-authorization-checks)
   - [Changes by Kind](#changes-by-kind-7)
     - [Feature](#feature-6)
     - [Bug or Regression](#bug-or-regression-6)

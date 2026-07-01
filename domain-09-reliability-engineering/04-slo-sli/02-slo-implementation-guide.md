@@ -214,7 +214,7 @@ print(f"激进建议: {recommendation['aggressive']:.4%}")
 
 ### Step 2: 识别 SLI
 
-为每个关键步骤选择合适的 SLI（参考 [[domain-09-reliability-engineering/04-slo-sli/01-sli-definition-selection]]）：
+为每个关键步骤选择合适的 SLI（参考 [[domain-09-reliability-engineering/04-slo-sli/01-sli-definition-selection.md|01 sli definition selection]]）：
 
 ```
 步骤 3: 提交订单
@@ -585,6 +585,10 @@ groups:
 ```
 
 ### 部署 Recording Rules
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 将规则文件放入 Prometheus 配置目录
@@ -999,6 +1003,6 @@ escalation:
 
 ## 相关
 
-- [[domain-09-reliability-engineering/04-slo-sli/01-sli-definition-selection]] — SLI 定义与选择方法论
-- [[domain-09-reliability-engineering/04-slo-sli/03-error-budget-management]] — 错误预算管理
-- [[domain-06-observability/06-slo-sli/18-slo-sli-system]] — SLO/SLI 体系概述
+- [[domain-09-reliability-engineering/04-slo-sli/01-sli-definition-selection.md|01 sli definition selection]] — SLI 定义与选择方法论
+- [[domain-09-reliability-engineering/04-slo-sli/03-error-budget-management.md|03 error budget management]] — 错误预算管理
+- [[domain-06-observability/06-slo-sli/18-slo-sli-system.md|18 slo sli system]] — SLO/SLI 体系概述

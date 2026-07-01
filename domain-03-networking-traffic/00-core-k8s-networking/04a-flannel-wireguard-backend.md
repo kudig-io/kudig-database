@@ -169,6 +169,9 @@ data:
 
 **方式一：手动配置（仅推荐测试环境）**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 在每个节点上设置密钥
 kubectl create secret generic flannel-keys \
@@ -305,6 +308,9 @@ ip route | grep 10.244
 
 ### 6.1 吞吐量测试
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 使用 iperf3 测试（需在两个 Pod 中运行）
 kubectl exec -it <pod-a> -- iperf3 -s -D
@@ -316,6 +322,9 @@ kubectl exec -it <pod-b> -- iperf3 -c <pod-a-ip> -P 4
 ```
 
 ### 6.2 延迟对比
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 使用 qperf 测试
@@ -391,6 +400,10 @@ iptables-save > /etc/iptables/rules.v4
 
 如需回滚，修改 ConfigMap：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 kubectl edit configmap -n kube-flannel kube-flannel-cfg
 
@@ -413,7 +426,7 @@ kubectl rollout restart ds/kube-flannel-ds -n kube-flannel
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic KUDIG Database — Global MOC
-- [[domain-03-networking-traffic/README|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]working]] 网络]]
+- [[domain-03-networking-traffic/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]working]] 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -434,4 +447,4 @@ kubectl rollout restart ds/kube-flannel-ds -n kube-flannel
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]

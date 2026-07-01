@@ -73,6 +73,9 @@ etcd is a distributed, reliable key-value store that serves as Kubernetes' singl
 
 ### Cluster Management
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+
 ```bash
 # List cluster members
 etcdctl member list
@@ -81,7 +84,7 @@ etcdctl member list
 etcdctl member add <name> --peer-urls=<urls>
 
 # Remove a member
-etcdctl member remove <member_id>
+etcdctl member remove <member_id>  # ⚠️ 移除 etcd 成员，可能丢数据
 
 # Check cluster health
 etcdctl endpoint health
@@ -114,6 +117,9 @@ etcdctl get /prefix --prefix
 
 ### Backup and Restore
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+
 ```bash
 # Create snapshot
 etcdctl snapshot save /path/to/backup.db
@@ -122,7 +128,7 @@ etcdctl snapshot save /path/to/backup.db
 etcdctl snapshot status /path/to/backup.db
 
 # Restore from snapshot
-etcdctl snapshot restore /path/to/backup.db --data-dir=/var/lib/etcd
+etcdctl snapshot restore /path/to/backup.db --data-dir=/var/lib/etcd  # ⚠️ 覆盖 etcd 数据，集群状态回退
 ```
 
 ## Critical Failure Modes (from FTA)
@@ -146,30 +152,30 @@ etcdctl snapshot restore /path/to/backup.db --data-dir=/var/lib/etcd
 
 ## Related
 
-- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
-- [[concepts/high-availability-patterns|high-availability-patterns]] — High Availability Patterns
+- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[skills/backup-restore-etcd|backup-restore-etcd]] — Backup and Restore etcd
-- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]]
+- [[skills/backup-restore-etcd.md|backup-restore-etcd]] — Backup and Restore etcd
+- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
 - [[etcd|etcd]]
-- [[synthesis/Kubernetes Fault Distribution and MTTR|Kubernetes Fault Distribution and MTTR]]
-- [[skills/backup-restore-etcd|Backup and Restore etcd]]
-- [[skills/Kubernetes FTA Top Events Index|Kubernetes FTA Top Events Index]]
+- [[concepts/Kubernetes Fault Distribution and MTTR.md|Kubernetes Fault Distribution and MTTR]]
+- [[skills/backup-restore-etcd.md|Backup and Restore etcd]]
+- [[skills/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
 - [[kudig-man-pages-index]]
 
 - RELEASE-NOTES-0.2
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.5|RELEASE-NOTES-3.5]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.0|RELEASE-NOTES-2.0]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.1|RELEASE-NOTES-3.1]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.1|RELEASE-NOTES-2.1]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.0|RELEASE-NOTES-3.0]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.5.md|RELEASE-NOTES-3.5]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.1.md|RELEASE-NOTES-3.1]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.0.md|RELEASE-NOTES-3.0]]
 - RELEASE-NOTES-0.3
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.4|RELEASE-NOTES-3.4]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.2|RELEASE-NOTES-2.2]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.3|RELEASE-NOTES-3.3]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.4.md|RELEASE-NOTES-3.4]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.3.md|RELEASE-NOTES-3.3]]
 - RELEASE-NOTES-0.4
 - RELEASE-NOTES-0.1
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.6|RELEASE-NOTES-3.6]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.3|RELEASE-NOTES-2.3]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.2|RELEASE-NOTES-3.2]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.6.md|RELEASE-NOTES-3.6]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.3.md|RELEASE-NOTES-2.3]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.2.md|RELEASE-NOTES-3.2]]

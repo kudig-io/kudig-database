@@ -36,6 +36,7 @@ prerequisites:
 - cilium-basics
 - cni-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 安装插件（Installing Addons）
@@ -166,6 +167,10 @@ kubectl get events --field-selector source=node-problem-detector
 - [Installing Addons - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/addons/)
 - 相关主题：[Network Plugins](../platform-engineering/network-plugins.md) · [Cluster Networking](../networking/cluster-networking.md) · [DNS for Services and Pods](../networking/dns-for-services-and-pods.md)
 
+## 参考链接
+
+- [Installing Addons]()
+
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

@@ -55,13 +55,13 @@ created: "2026-05-23"
 
 <!-- chunk: 演讲概述 -->## 演讲概述
 
-#<!-- chunk: 目标受众 -->## 目标受众
+## 目标受众
 
 - 安全工程师：构建 Kubernetes 安全防御体系
 - SRE 工程师：理解 RBAC 配置与安全最佳实践
 - 系统管理员：管理集群访问权限和审计
 
-#<!-- chunk: 预计时长 -->## 预计时长
+## 预计时长
 
 | 阶段 | 内容 | 时长 |
 |------|------|------|
@@ -73,7 +73,7 @@ created: "2026-05-23"
 | Q&A | 互动问答 | 15 分钟 |
 | **合计** | | **约 2.5 小时** |
 
-#<!-- chunk: 核心要点 -->## 核心要点
+## 核心要点
 
 1. 安全 4C 模型：Cloud → Cluster → Container → Code
 2. API Server 的三层安全防护：认证 → 授权 → 准入控制
@@ -85,7 +85,7 @@ created: "2026-05-23"
 
 <!-- chunk: 核心概念讲解 -->## 核心概念讲解
 
-#<!-- chunk: 安全 4C 模型 -->## 安全 4C 模型
+## 安全 4C 模型
 
 Kubernetes 安全遵循从外到内的分层防御策略：
 
@@ -111,7 +111,7 @@ Kubernetes 安全遵循从外到内的分层防御策略：
 | **Container** | 镜像与运行时安全 | 镜像扫描、非 root 运行、只读文件系统 |
 | **Code** | 代码与应用安全 | 输入验证、TLS 加密、依赖管理 |
 
-#<!-- chunk: API Server 安全链 -->## API Server 安全链
+## API Server 安全链
 
 每个到达 API Server 的请求都要经过三层安全检查：
 
@@ -148,7 +148,7 @@ Kubernetes 安全遵循从外到内的分层防御策略：
         写入 etcd
 ```
 
-#<!-- chunk: RBAC 深度解析 -->## RBAC 深度解析
+## RBAC 深度解析
 
 RBAC（Role-Based Access Control）是 Kubernetes 最常用的授权模式。
 
@@ -191,7 +191,7 @@ ClusterRoleBinding│ 不适用       │ 集群权限
 | `delete` | 删除 | `kubectl delete pod xxx` |
 | `deletecollection` | 批量删除 | `kubectl delete pods --all` |
 
-#<!-- chunk: 准入控制 (Admission Control) -->## 准入控制 (Admission Control)
+## 准入控制 (Admission Control)
 
 准入控制是 API Server 的最后一道防线，可以在资源持久化到 etcd 之前进行拦截和修改。
 
@@ -210,15 +210,11 @@ ClusterRoleBinding│ 不适用       │ 集群权限
 | `LimitRanger` | 确保资源限制在 LimitRange 范围内 |
 | `ResourceQuota` | 检查是否超过 ResourceQuota |
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
-
 | `PodSecurity` | 替代 PodSecurityPolicy 的安全策略 |
 | `DefaultStorageClass` | 自动分配默认 StorageClass |
 | `DefaultTolerationSeconds` | 设置默认容忍时间 |
 
-#<!-- chunk: NetworkPolicy -->## NetworkPolicy
+## NetworkPolicy
 
 NetworkPolicy 是 Pod 级别的防火墙，控制 Pod 之间的网络通信：
 
@@ -265,7 +261,7 @@ spec:
 
 <!-- chunk: 架构图 -->## 架构图
 
-#<!-- chunk: API Server 安全链 -->## API Server 安全链
+## API Server 安全链
 
 ```mermaid
 sequenceDiagram
@@ -298,7 +294,7 @@ sequenceDiagram
     ETCD-->>Client: 201 Created
 ```
 
-#<!-- chunk: RBAC 对象关系 -->## RBAC 对象关系
+## RBAC 对象关系
 
 ```mermaid
 graph TB
@@ -342,7 +338,7 @@ graph TB
     style Resources fill:#fce4ec,stroke:#c62828
 ```
 
-#<!-- chunk: 准入控制流程 -->## 准入控制流程
+## 准入控制流程
 
 ```mermaid
 graph LR
@@ -366,7 +362,10 @@ graph LR
 
 <!-- chunk: 实战演示步骤 -->## 实战演示步骤
 
-#<!-- chunk: 演示 1：创建 RBAC 权限体系 -->## 演示 1：创建 RBAC 权限体系
+## 演示 1：创建 RBAC 权限体系
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 创建开发人员角色（只能读 Pod 和查看日志）
@@ -433,7 +432,10 @@ roleRef:
 EOF
 ```
 
-#<!-- chunk: 演示 2：验证 RBAC 权限 -->## 演示 2：验证 RBAC 权限
+## 演示 2：验证 RBAC 权限
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 获取 ServiceAccount Token
@@ -456,7 +458,11 @@ kubectl auth can-i create deployments --as=system:serviceaccount:production:deve
 kubectl auth can-i --list --as=system:serviceaccount:production:developer-sa -n production
 ```
 
-#<!-- chunk: 演示 3：NetworkPolicy 部署 -->## 演示 3：NetworkPolicy 部署
+## 演示 3：NetworkPolicy 部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 步骤 1: 部署测试应用
@@ -512,7 +518,7 @@ kubectl exec -it deployment/frontend -n security-test -- wget -qO- backend:80
 kubectl exec -it deployment/attacker -n security-test -- wget -T5 -qO- backend:80
 ```
 
-#<!-- chunk: 演示 4：审计日志配置 -->## 演示 4：审计日志配置
+## 演示 4：审计日志配置
 
 ```bash
 # 步骤 1: 创建审计策略文件
@@ -545,7 +551,10 @@ kubectl get clusterrolebinding -o wide | grep -v system
 kubectl auth can-i --list --as=system:anonymous
 ```
 
-#<!-- chunk: 演示 5：Pod 安全标准 -->## 演示 5：Pod 安全标准
+## 演示 5：Pod 安全标准
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 创建安全标签的命名空间
@@ -604,43 +613,43 @@ EOF
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
 
-#<!-- chunk: Q1: User 和 ServiceAccount 的区别是什么？ -->## Q1: User 和 ServiceAccount 的区别是什么？
+## Q1: User 和 ServiceAccount 的区别是什么？
 
 **回答**: User 是 Kubernetes 外部的身份（如开发人员、运维人员），Kubernetes 本身不管理 User，而是依赖外部认证系统（证书、OIDC）。ServiceAccount 是 Kubernetes 内部管理的身份，用于 Pod 内进程访问 API Server。每个命名空间自动创建一个 `default` ServiceAccount，Pod 默认使用它。
 
-#<!-- chunk: Q2: RoleBinding 可以绑定 ClusterRole 吗？ -->## Q2: RoleBinding 可以绑定 ClusterRole 吗？
+## Q2: RoleBinding 可以绑定 ClusterRole 吗？
 
 **回答**: 可以。RoleBinding 绑定 ClusterRole 时，ClusterRole 中定义的集群级权限会被**缩减**为 RoleBinding 所在命名空间的权限。这在需要为多个命名空间授予相同权限时非常有用——只需定义一个 ClusterRole，然后在每个命名空间创建 RoleBinding 绑定它。
 
-#<!-- chunk: Q3: 如何防止 ServiceAccount 被赋予 cluster-admin 权限？ -->## Q3: 如何防止 ServiceAccount 被赋予 cluster-admin 权限？
+## Q3: 如何防止 ServiceAccount 被赋予 cluster-admin 权限？
 
 **回答**: (1) 禁止为 ServiceAccount 创建 cluster-admin ClusterRoleBinding；(2) 使用 OPA/Gatekeeper 创建策略：禁止 ClusterRoleBinding 的 roleRef 为 cluster-admin；(3) 定期审计：`kubectl get clusterrolebinding -o json | jq '.items[] | select(.roleRef.name=="cluster-admin")'`；(4) 启用审计日志记录所有 RBAC 变更。
 
-#<!-- chunk: Q4: NetworkPolicy 的默认行为是什么？ -->## Q4: NetworkPolicy 的默认行为是什么？
+## Q4: NetworkPolicy 的默认行为是什么？
 
 **回答**: 如果没有 NetworkPolicy，所有 Pod 之间可以自由通信（允许所有 Ingress 和 Egress）。一旦创建了任何 NetworkPolicy，只有被明确允许的流量才能通过。最佳实践：先部署 default-deny-all 策略，然后逐步添加白名单规则。
 
-#<!-- chunk: Q5: 如何实现镜像安全扫描？ -->## Q5: 如何实现镜像安全扫描？
+## Q5: 如何实现镜像安全扫描？
 
 **回答**: (1) **Trivy**：开源镜像漏洞扫描工具，可集成到 CI/CD；(2) **OPA/Gatekeeper**：通过 ValidatingWebhook 禁止部署有漏洞的镜像；(3) **Kyverno**：策略引擎，可以自动校验镜像来源和签名；(4) **镜像签名**：使用 Cosign/Notary 对镜像签名，确保镜像未被篡改。
 
-#<!-- chunk: Q6: 如何管理多个团队的 RBAC 权限？ -->## Q6: 如何管理多个团队的 RBAC 权限？
+## Q6: 如何管理多个团队的 RBAC 权限？
 
 **回答**: 推荐方案：(1) 为每个团队创建专属 Namespace；(2) 创建通用 ClusterRole（如 developer、viewer、admin）；(3) 在每个 Namespace 创建 RoleBinding 绑定到团队 Group；(4) 使用 OIDC Group 同步企业身份系统；(5) 通过 GitOps 管理 RBAC 配置（所有变更走 PR 审批）。
 
-#<!-- chunk: Q7: Pod Security Standards 的三个级别是什么？ -->## Q7: Pod Security Standards 的三个级别是什么？
+## Q7: Pod Security Standards 的三个级别是什么？
 
 **回答**: (1) **Privileged**：无限制，适合系统和特权级应用（如 CNI 插件）；(2) **Baseline**：最小限制，禁止已知的危险提权（如禁止 hostNetwork、privileged）；(3) **Restricted**：最严格，要求非 root、只读文件系统、丢弃所有 capabilities。生产环境推荐至少 Baseline，核心业务使用 Restricted。
 
-#<!-- chunk: Q8: 如何审计 Kubernetes 集群的安全状态？ -->## Q8: 如何审计 Kubernetes 集群的安全状态？
+## Q8: 如何审计 Kubernetes 集群的安全状态？
 
 **回答**: (1) **kube-bench**：自动化检查 CIS Kubernetes Benchmark 合规性；(2) **kubectl auth can-i --list**：审查每个 SA 的权限；(3) **审计日志**：记录所有 API 操作；(4) **RBAC 审计**：`kubectl get clusterrolebinding -o json` 查找过度授权；(5) **定期安全扫描**：Trivy + kubeaudit 工具。
 
-#<!-- chunk: Q9: 如何防止 Secret 泄露？ -->## Q9: 如何防止 Secret 泄露？
+## Q9: 如何防止 Secret 泄露？
 
 **回答**: (1) 使用外部密钥管理系统（Vault/AWS Secrets Manager）；(2) 启用 etcd 加密（EncryptionConfiguration）；(3) 使用 RBAC 限制 Secret 访问权限；(4) 禁止在 Pod Spec 中明文写入 Secret；（5) 使用 GitOps 时避免将 Secret 提交到 Git（使用 Sealed Secrets 或 External Secrets Operator）。
 
-#<!-- chunk: Q10: MutatingWebhook 和 ValidatingWebhook 的执行顺序？ -->## Q10: MutatingWebhook 和 ValidatingWebhook 的执行顺序？
+## Q10: MutatingWebhook 和 ValidatingWebhook 的执行顺序？
 
 **回答**: 执行顺序是：先执行所有 MutatingWebhook（修改阶段），再执行所有 ValidatingWebhook（校验阶段）。在修改阶段，Webhook 可以修改请求内容（如注入 Sidecar、添加 Label）；在校验阶段，Webhook 只能接受或拒绝请求。这种设计确保校验的是最终状态。
 
@@ -648,7 +657,7 @@ EOF
 
 <!-- chunk: 要点总结 -->## 要点总结
 
-#<!-- chunk: 安全防御层级 -->## 安全防御层级
+## 安全防御层级
 
 ```
 Kubernetes 安全
@@ -678,7 +687,7 @@ Kubernetes 安全
     └── 只读文件系统
 ```
 
-#<!-- chunk: SRE 运维红线 -->## SRE 运维红线
+## SRE 运维红线
 
 | 红线 | 说明 | 违反后果 |
 |------|------|---------|
@@ -692,7 +701,7 @@ Kubernetes 安全
 
 <!-- chunk: 延伸阅读 -->## 延伸阅读
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 
 | 资源 | 链接 | 说明 |
 |------|------|------|
@@ -701,7 +710,7 @@ Kubernetes 安全
 | NetworkPolicy | https://kubernetes.io/docs/concepts/services-networking/network-policies/ | 网络策略 |
 | Pod Security | https://kubernetes.io/docs/concepts/security/pod-security-standards/ | 安全标准 |
 
-#<!-- chunk: 推荐工具 -->## 推荐工具
+## 推荐工具
 
 | 工具 | 说明 | 链接 |
 |------|------|------|
@@ -711,7 +720,7 @@ Kubernetes 安全
 | Kyverno | 策略管理 | https://kyverno.io/ |
 | Falco | 运行时安全 | https://falco.org/ |
 
-#<!-- chunk: 关联培训专题 -->## 关联培训专题
+## 关联培训专题
 
 - `kubernetes-architecture-fundamentals-presentation.md` — API Server 安全链详解
 - `kubernetes-networking-presentation.md` — NetworkPolicy 与网络隔离

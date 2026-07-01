@@ -86,7 +86,7 @@ Kubernetes工作负载域深入解析Pod、Deployment、[[StatefulSet|StatefulSe
 | 05 | [Job批处理](./05-job-batch-processing.md) | 批处理任务、定时任务、并行处理 | ⭐⭐⭐⭐ |
 | 06 | [CronJob定时任务](./06-cronjob-scheduled-tasks.md) | 定时调度、任务管理、失败处理 | ⭐⭐⭐⭐ |
 | 07 | [ReplicaSet管理](./07-replicaset-management.md) | 副本管理、标签选择器、扩缩容 | ⭐⭐⭐⭐ |
-| 08 | [[domain-17-system-foundation/topic-dictionary/workloads/replicationcontroller|ReplicationController]]](./08-replicationcontroller.md) | 传统副本控制器、迁移指南 | ⭐⭐⭐ |
+| 08 | [[domain-17-system-foundation/topic-dictionary/workloads/replicationcontroller.md|ReplicationController]]](./08-replicationcontroller.md) | 传统副本控制器、迁移指南 | ⭐⭐⭐ |
 
 ### 高级配置 (09-16)
 | # | 文档 | 关键内容 | 重要程度 |
@@ -152,7 +152,7 @@ Kubernetes工作负载域深入解析Pod、Deployment、[[StatefulSet|StatefulSe
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications MOC
-- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
 - Domain-4 工作负载 — 开源项目索引
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)

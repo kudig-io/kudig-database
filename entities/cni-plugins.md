@@ -73,15 +73,15 @@ Choose based on:
 - **Performance**: Cilium eBPF > Calico BGP > Flannel VXLAN
 
 ## Related
-- [[synthesis/CNI 插件 × NetworkPolicy|CNI 插件 × NetworkPolicy]] — 综合
+- [[concepts/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]] — 综合
 
 - [[cilium]] — Cilium
-- [[entities/kubelet|kubelet]] — kubelet
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/service-networking|service-networking]] — Service Networking
-- [[concepts/service-networking|Service Networking]]
-- [[entities/networkpolicy|NetworkPolicy]]
+- [[concepts/service-networking.md|service-networking]] — Service Networking
+- [[concepts/service-networking.md|Service Networking]]
+- [[entities/networkpolicy.md|NetworkPolicy]]
 - Kubernetes Network Model
 
 - 03-cni-plugins-comparison

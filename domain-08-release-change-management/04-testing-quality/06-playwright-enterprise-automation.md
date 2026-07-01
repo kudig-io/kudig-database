@@ -58,7 +58,7 @@ This document provides comprehensive exploration of Playwright enterprise deploy
 
 <!-- chunk: 1. Playwright Enterprise Architecture -->## 1. Playwright Enterprise Architecture
 
-#<!-- chunk: 1.1 Core Component Architecture -->## 1.1 Core Component Architecture
+## 1.1 Core Component Architecture
 
 ```mermaid
 graph TB
@@ -141,7 +141,7 @@ graph TB
     AC --> AD
 ```
 
-#<!-- chunk: 1.2 Enterprise Test Suite Architecture -->## 1.2 Enterprise Test Suite Architecture
+## 1.2 Enterprise Test Suite Architecture
 
 ```typescript
 // playwright.config.ts
@@ -243,7 +243,7 @@ export default defineConfig({
 
 <!-- chunk: 2. Advanced Test Automation Framework -->## 2. Advanced Test Automation Framework
 
-#<!-- chunk: 2.1 Page Object Model Implementation -->## 2.1 Page Object Model Implementation
+## 2.1 Page Object Model Implementation
 
 ```typescript
 // Base Page Class
@@ -465,7 +465,7 @@ export class ForgotPasswordPage extends BasePage {
 }
 ```
 
-#<!-- chunk: 2.2 Fixture-Based Test Structure -->## 2.2 Fixture-Based Test Structure
+## 2.2 Fixture-Based Test Structure
 
 ```typescript
 // tests/fixtures/authenticated-user.ts
@@ -506,7 +506,7 @@ export const test = base.extend<AuthenticatedUserFixtures>({
 export { expect } from '@playwright/test';
 ```
 
-#<!-- chunk: 2.3 Custom Test Utilities -->## 2.3 Custom Test Utilities
+## 2.3 Custom Test Utilities
 
 ```typescript
 // tests/utils/test-helpers.ts
@@ -673,7 +673,7 @@ export class ApiClient {
 
 <!-- chunk: 3. Cross-Browser Testing Strategies -->## 3. Cross-Browser Testing Strategies
 
-#<!-- chunk: 3.1 Multi-Browser Test Configuration -->## 3.1 Multi-Browser Test Configuration
+## 3.1 Multi-Browser Test Configuration
 
 ```typescript
 // tests/browser-specific-tests.spec.ts
@@ -766,7 +766,7 @@ test.describe('Cross-Browser Compatibility', () => {
 });
 ```
 
-#<!-- chunk: 3.2 Device Emulation Testing -->## 3.2 Device Emulation Testing
+## 3.2 Device Emulation Testing
 
 ```typescript
 // tests/mobile-device-tests.spec.ts
@@ -867,7 +867,7 @@ test.describe('Various Screen Sizes', () => {
 
 <!-- chunk: 4. API and Integration Testing -->## 4. API and Integration Testing
 
-#<!-- chunk: 4.1 API Testing with Playwright -->## 4.1 API Testing with Playwright
+## 4.1 API Testing with Playwright
 
 ```typescript
 // tests/api-tests.spec.ts
@@ -978,7 +978,7 @@ test.describe('API Integration Tests', () => {
 });
 ```
 
-#<!-- chunk: 4.2 GraphQL Testing -->## 4.2 GraphQL Testing
+## 4.2 GraphQL Testing
 
 ```typescript
 // tests/graphql-tests.spec.ts
@@ -1064,7 +1064,7 @@ test.describe('GraphQL API Tests', () => {
 
 <!-- chunk: 5. Performance and Visual Testing -->## 5. Performance and Visual Testing
 
-#<!-- chunk: 5.1 Performance Testing -->## 5.1 Performance Testing
+## 5.1 Performance Testing
 
 ```typescript
 // tests/performance-tests.spec.ts
@@ -1166,7 +1166,7 @@ test.describe('Performance Testing', () => {
 });
 ```
 
-#<!-- chunk: 5.2 Visual Regression Testing -->## 5.2 Visual Regression Testing
+## 5.2 Visual Regression Testing
 
 ```typescript
 // tests/visual-tests.spec.ts
@@ -1258,7 +1258,7 @@ test.describe('Visual Regression Testing', () => {
 
 <!-- chunk: 6. CI/CD Integration and Reporting -->## 6. CI/CD Integration and Reporting
 
-#<!-- chunk: 6.1 GitHub Actions Pipeline -->## 6.1 GitHub Actions Pipeline
+## 6.1 GitHub Actions Pipeline
 
 ```yaml
 # .github/workflows/playwright-tests.yml
@@ -1360,7 +1360,7 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 ```
 
-#<!-- chunk: 6.2 Advanced Reporting Configuration -->## 6.2 Advanced Reporting Configuration
+## 6.2 Advanced Reporting Configuration
 
 ```typescript
 // playwright.config.ts - Enhanced Reporting
@@ -1401,7 +1401,7 @@ export default defineConfig({
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-29-automated-testing-quality KUDIG Database — Global MOC
-- [[domain-08-release-change-management/README|Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
+- [[domain-08-release-change-management/README.md|Domain 08: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
 - index.md|Domain-29 自动化测试与质量 — 开源项目索引]]
 - Selenium 企业级自动化测试平台
 - JUnit 5 企业级单元测试框架深度实践

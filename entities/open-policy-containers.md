@@ -31,7 +31,7 @@ prerequisites:
 created: "2026-05-23"
 ---
 
-# [[entities/open-policy-containers|Open Policy Containers]] (OPCR)
+# [[entities/open-policy-containers.md|Open Policy Containers]] (OPCR)
 
 > **CNCF 状态**: Sandbox | **类别**: Policy | **主要语言**: Go
 
@@ -45,7 +45,7 @@ Open Policy Containers (OPCR) 是一个将 OPA (Open Policy Agent) 策略打包�
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
 ## 生产部署要点
 
@@ -61,9 +61,9 @@ Open Policy Containers (OPCR) 是一个将 OPA (Open Policy Agent) 策略打包�
 
 ## 参考链接
 
-- [[entities/crd-custom-resources|crd-custom-resources]]
-- [[concepts/secrets-management|secrets-management]]
-- [[concepts/ci-cd-pipeline-patterns|ci-cd-pipeline-patterns]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[concepts/secrets-management.md|secrets-management]]
+- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
 
 ## Related
 
@@ -74,5 +74,5 @@ Open Policy Containers (OPCR) 是一个将 OPA (Open Policy Agent) 策略打包�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - open-policy-containers
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

@@ -172,6 +172,9 @@ spec:
 
 ### 6. 证书过期实验
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 模拟证书即将过期
 kubectl create secret tls expired-cert \
@@ -254,5 +257,5 @@ spec:
 
 ## 相关
 
-- [[domain-09-reliability-engineering/05-chaos-engineering/01-chaos-engineering-overview]]
+- [[domain-09-reliability-engineering/05-chaos-engineering/01-chaos-engineering-overview.md|01 chaos engineering overview]]
 - deployment]]

@@ -32,13 +32,14 @@ prerequisites:
 - cilium-basics
 - cni-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # IPv4/IPv6 dual-stack
 
 ## 概述
 
-[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 支持为 Pod 和 [[Service|Service]] 同时分配 IPv4 与 IPv6 地址，实现双栈（Dual-Stack）网络。自 v1.21 起，IPv4/IPv6 双栈默认启用，允许集群中的工作负载通过两种协议族同时进行通信，包括集群内部 Service 访问和 Pod 的集群外出网流量。
+[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 支持为 Pod 和 [[Service|Service]] 同时分配 IPv4 与 IPv6 地址，实现双栈（Dual-Stack）网络。自 v1.21 起，IPv4/IPv6 双栈默认启用，允许集群中的工作负载通过两种协议族同时进行通信，包括集群内部 Service 访问和 Pod 的集群外出网流量。
 
 ## 核心概念/原理
 
@@ -158,6 +159,10 @@ spec:
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Pod 双栈 IP
 kubectl get pod <name> -o jsonpath='{.status.podIPs}'
@@ -185,3 +190,9 @@ kubectl exec <pod> -- curl -6 http://[<ipv6-addr>]:80
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/services-networking/dual-stack/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
+- [[domain-17-system-foundation/topic-dictionary/networking/akri.md|Akri 边缘设备发现]]
+- [[domain-17-system-foundation/topic-dictionary/networking/antrea.md|Antrea 网络方案]]

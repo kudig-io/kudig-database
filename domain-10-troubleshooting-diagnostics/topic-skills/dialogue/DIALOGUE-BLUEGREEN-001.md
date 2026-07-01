@@ -7,6 +7,7 @@ severity: "high"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 title: "蓝绿部署切换后服务不可用 — 远程顾问对话脚本"
 category: dialogue
 tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
@@ -14,7 +15,7 @@ tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 
 # 蓝绿部署切换后服务不可用 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/blue-green-deployment|蓝绿部署]]
+> 对应概念：[[concepts/blue-green-deployment.md|蓝绿部署]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -128,6 +129,9 @@ kubectl get pod <green-pod> -n <namespace> -o yaml | grep -A 15 'readinessProbe:
 
 **顾问**：如果生产流量持续受损，请优先执行回滚：
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch svc <svc-name> -n <namespace> --type='merge' -p='{"spec":{"selector":{"version":"blue"}}}'
 ```
@@ -148,6 +152,9 @@ kubectl patch svc <svc-name> -n <namespace> --type='merge' -p='{"spec":{"selecto
 
 #### 方案 A：回滚 Selector 到蓝色版本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch svc <svc-name> -n <namespace> --type='merge' -p='{"spec":{"selector":{"version":"blue","app":"<app-name>"}}}'
 ```
@@ -156,6 +163,9 @@ kubectl patch svc <svc-name> -n <namespace> --type='merge' -p='{"spec":{"selecto
 
 #### 方案 B：修复绿环境 ReadinessProbe
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch deployment <green-deployment> -n <namespace> --type='merge' -p='{"spec":{"template":{"spec":{"containers":[{"name":"<container>","readinessProbe":{"httpGet":{"path":"/health","port":8080},"initialDelaySeconds":30,"periodSeconds":10}}]}}}}'
 ```
@@ -163,6 +173,9 @@ kubectl patch deployment <green-deployment> -n <namespace> --type='merge' -p='{"
 > **如果无法执行 patch**：请使用 `kubectl edit deployment <green-deployment>` 修改 readinessProbe 的配置（path、port、initialDelaySeconds）。
 
 #### 方案 C：重新部署绿版本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 kubectl rollout restart deployment <green-deployment> -n <namespace>
@@ -192,5 +205,5 @@ curl -s http://<svc-ip>/health
 
 ## 相关概念
 
-- [[concepts/blue-green-deployment|蓝绿部署]]
-- [[concepts/deployment-controller-architecture|Deployment 控制器]]
+- [[concepts/blue-green-deployment.md|蓝绿部署]]
+- [[concepts/deployment-controller-architecture.md|Deployment 控制器]]

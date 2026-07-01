@@ -124,7 +124,7 @@ k8s_versions:
 
 <!-- chunk: 1. 策略治理挑战 -->## 1. 策略治理挑战
 
-#<!-- chunk: 1.1 多租户/多集群一致性困境 -->## 1.1 多租户/多集群一致性困境
+## 1.1 多租户/多集群一致性困境
 
 在大型企业 Kubernetes 平台中，通常存在以下复杂场景：
 
@@ -135,7 +135,7 @@ k8s_versions:
 
 **策略漂移的危险性：** 策略漂移指集群实际运行状态与预期治理规则之间的偏差。一旦漂移，攻击者可能利用未打标签的工作负载绕过安全扫描，特权容器悄然运行于生产环境，资源滥用导致集群稳定性下降。
 
-#<!-- chunk: 1.2 策略即代码哲学 -->## 1.2 策略即代码哲学
+## 1.2 策略即代码哲学
 
 Policy-as-Code 的核心理念来源于基础设施即代码（IaC）：
 
@@ -150,7 +150,7 @@ PaC 模式：代码化规则 → 版本控制 → 自动执行 → 持续审计
 3. **可测试（Testable）**：策略在 CI 流水线中可独立验证
 4. **自动执行（Automated Enforcement）**：策略引擎自动拦截/修复违规
 
-#<!-- chunk: 1.3 治理生命周期全景 -->## 1.3 治理生命周期全景
+## 1.3 治理生命周期全景
 
 ```mermaid
 flowchart TD
@@ -197,7 +197,7 @@ flowchart TD
     style Evolve fill:#ede9fe,stroke:#8b5cf6
 ```
 
-#<!-- chunk: 1.4 主流策略引擎对比概览 -->## 1.4 主流策略引擎对比概览
+## 1.4 主流策略引擎对比概览
 
 | 维度 | Kyverno | OPA/Gatekeeper | ValidatingAdmissionPolicy |
 |------|---------|----------------|--------------------------|
@@ -213,7 +213,7 @@ flowchart TD
 
 <!-- chunk: 2. Kyverno 深度实践 -->## 2. Kyverno 深度实践
 
-#<!-- chunk: 2.1 Kyverno 简介与 CNCF Graduated 地位 -->## 2.1 Kyverno 简介与 CNCF Graduated 地位
+## 2.1 Kyverno 简介与 CNCF Graduated 地位
 
 Kyverno（来自希腊语"治理"）于 **2023 年正式晋升为 CNCF Graduated 项目**，标志着其在生产环境的成熟度得到广泛认可。核心特点：
 
@@ -222,7 +222,7 @@ Kyverno（来自希腊语"治理"）于 **2023 年正式晋升为 CNCF Graduated
 - **后台扫描**：对已存在的资源进行合规性检测，生成 PolicyReport
 - **命令行工具**：`kyverno` CLI 支持策略测试、lint 和模拟执行
 
-#<!-- chunk: 2.2 Kyverno 架构深度解析 -->## 2.2 Kyverno 架构深度解析
+## 2.2 Kyverno 架构深度解析
 
 ```mermaid
 graph TB
@@ -279,7 +279,7 @@ graph TB
     style Reports fill:#fce7f3,stroke:#ec4899
 ```
 
-#<!-- chunk: 2.3 ClusterPolicy vs Policy 作用域 -->## 2.3 ClusterPolicy vs Policy 作用域
+## 2.3 ClusterPolicy vs Policy 作用域
 
 ```yaml
 # ClusterPolicy：集群级别，适用于所有命名空间
@@ -308,9 +308,9 @@ spec:
 - 安全基线、合规要求 → **ClusterPolicy**
 - 团队特定规范、业务规则 → **Policy（命名空间级）**
 
-#<!-- chunk: 2.4 四类规则深度实践 -->## 2.4 四类规则深度实践
+## 2.4 四类规则深度实践
 
-##<!-- chunk: 2.4.1 Validate 规则 — 强制要求标签 -->## 2.4.1 Validate 规则 — 强制要求标签
+## 2.4.1 Validate 规则 — 强制要求标签
 
 ```yaml
 apiVersion: kyverno.io/v1
@@ -360,7 +360,7 @@ spec:
               cost-center: "CC-?????+"   # 正则：CC- 后跟数字
 ```
 
-##<!-- chunk: 2.4.2 Mutate 规则 — 自动注入默认值 -->## 2.4.2 Mutate 规则 — 自动注入默认值
+## 2.4.2 Mutate 规则 — 自动注入默认值
 
 ```yaml
 apiVersion: kyverno.io/v1
@@ -419,7 +419,7 @@ spec:
                         +(memory): "256Mi"
 ```
 
-##<!-- chunk: 2.4.3 Generate 规则 — 自动创建 NetworkPolicy -->## 2.4.3 Generate 规则 — 自动创建 NetworkPolicy
+## 2.4.3 Generate 规则 — 自动创建 NetworkPolicy
 
 ```yaml
 apiVersion: kyverno.io/v1
@@ -487,7 +487,7 @@ spec:
                   - podSelector: {}   # 仅允许同命名空间 Pod
 ```
 
-##<!-- chunk: 2.4.4 VerifyImages 规则 — Cosign 镜像签名验证 -->## 2.4.4 VerifyImages 规则 — Cosign 镜像签名验证
+## 2.4.4 VerifyImages 规则 — Cosign 镜像签名验证
 
 ```yaml
 apiVersion: kyverno.io/v1
@@ -541,7 +541,7 @@ spec:
           verifyDigest: true
           required: true
 
-#<!-- chunk: 2.5 后台扫描配置 -->## 2.5 后台扫描配置
+## 2.5 后台扫描配置
 
 ```yaml
 apiVersion: kyverno.io/v1
@@ -571,7 +571,7 @@ spec:
 
 <!-- chunk: 3. OPA/Gatekeeper 实践 -->## 3. OPA/Gatekeeper 实践
 
-#<!-- chunk: 3.1 OPA 架构与 Rego 语言 -->## 3.1 OPA 架构与 Rego 语言
+## 3.1 OPA 架构与 Rego 语言
 
 **Open Policy Agent（OPA）** 是一个通用策略引擎，CNCF Graduated 项目。**Gatekeeper** 是 OPA 的 Kubernetes 专用集成层，提供：
 
@@ -617,7 +617,7 @@ graph LR
     style K8s fill:#dbeafe,stroke:#3b82f6
 ```
 
-#<!-- chunk: 3.2 Rego 语言基础 -->## 3.2 Rego 语言基础
+## 3.2 Rego 语言基础
 
 Rego 是一种声明式查询语言，专为策略决策设计：
 
@@ -646,7 +646,7 @@ violation[{"msg": msg, "details": {"name": name}}] {
 }
 ```
 
-#<!-- chunk: 3.3 ConstraintTemplate 完整示例 -->## 3.3 ConstraintTemplate 完整示例
+## 3.3 ConstraintTemplate 完整示例
 
 ```yaml
 apiVersion: templates.gatekeeper.sh/v1
@@ -707,7 +707,7 @@ spec:
         }
 ```
 
-#<!-- chunk: 3.4 Constraint 实例化示例 -->## 3.4 Constraint 实例化示例
+## 3.4 Constraint 实例化示例
 
 ```yaml
 apiVersion: constraints.gatekeeper.sh/v1beta1
@@ -736,7 +736,7 @@ spec:
       - key: version
 ```
 
-#<!-- chunk: 3.5 Kyverno vs OPA/Gatekeeper 对比 -->## 3.5 Kyverno vs OPA/Gatekeeper 对比
+## 3.5 Kyverno vs OPA/Gatekeeper 对比
 
 | 对比维度 | Kyverno | OPA/Gatekeeper |
 |---------|---------|----------------|
@@ -761,7 +761,7 @@ spec:
 
 <!-- chunk: 4. ValidatingAdmissionPolicy（K8s 原生） -->## 4. ValidatingAdmissionPolicy（K8s 原生）
 
-#<!-- chunk: 4.1 CEL 表达式基础 -->## 4.1 CEL 表达式基础
+## 4.1 CEL 表达式基础
 
 **Common Expression Language（CEL）** 是 Google 开发的轻量级表达式语言，已被 Kubernetes 广泛采用：
 
@@ -794,7 +794,7 @@ object.spec.replicas <= 100
 object.spec.replicas <= params.maxReplicas
 ```
 
-#<!-- chunk: 4.2 ValidatingAdmissionPolicy 完整资源定义 -->## 4.2 ValidatingAdmissionPolicy 完整资源定义
+## 4.2 ValidatingAdmissionPolicy 完整资源定义
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -867,7 +867,7 @@ spec:
         : 'unknown'
 ```
 
-#<!-- chunk: 4.3 ValidatingAdmissionPolicyBinding -->## 4.3 ValidatingAdmissionPolicyBinding
+## 4.3 ValidatingAdmissionPolicyBinding
 
 ```yaml
 # 参数资源定义
@@ -914,7 +914,7 @@ spec:
         resourceNames: ["system-deployment"]  # 排除特定资源名称
 ```
 
-#<!-- chunk: 4.4 性能对比：CEL 原生 vs Webhook -->## 4.4 性能对比：CEL 原生 vs Webhook
+## 4.4 性能对比：CEL 原生 vs Webhook
 
 ```mermaid
 graph LR
@@ -949,7 +949,7 @@ graph LR
 | **可用性风险** | Webhook 服务问题影响准入 | 无额外问题点 |
 | **扩展性** | 独立扩缩 | 随 API Server 扩展 |
 
-#<!-- chunk: 4.5 K8s 1.30+ GA 采用建议 -->## 4.5 K8s 1.30+ GA 采用建议
+## 4.5 K8s 1.30+ GA 采用建议
 
 **推荐策略：**
 
@@ -969,7 +969,7 @@ graph LR
 
 <!-- chunk: 5. 策略生命周期管理 -->## 5. 策略生命周期管理
 
-#<!-- chunk: 5.1 GitOps 策略仓库设计 -->## 5.1 GitOps 策略仓库设计
+## 5.1 GitOps 策略仓库设计
 
 ```
 policy-repository/
@@ -1018,7 +1018,7 @@ policy-repository/
         └── kustomization.yaml     # 生产环境最严格配置
 ```
 
-#<!-- chunk: 5.2 分阶段推进策略落地 -->## 5.2 分阶段推进策略落地
+## 5.2 分阶段推进策略落地
 
 ```mermaid
 gantt
@@ -1059,7 +1059,7 @@ spec:
 #   -p '{"spec":{"validationFailureAction":"Enforce"}}'
 ```
 
-#<!-- chunk: 5.3 策略例外管理（PolicyException CRD） -->## 5.3 策略例外管理（PolicyException CRD）
+## 5.3 策略例外管理（PolicyException CRD）
 
 ```yaml
 # Kyverno PolicyException：为特定工作负载申请例外
@@ -1095,7 +1095,7 @@ spec:
               app: legacy-payment-processor
 ```
 
-#<!-- chunk: 5.4 版本控制与 CI 验证 -->## 5.4 版本控制与 CI 验证
+## 5.4 版本控制与 CI 验证
 
 ```yaml
 # .github/workflows/policy-ci.yml
@@ -1135,7 +1135,7 @@ jobs:
 
 <!-- chunk: 6. 命名空间治理 -->## 6. 命名空间治理
 
-#<!-- chunk: 6.1 标签标准强制执行 -->## 6.1 标签标准强制执行
+## 6.1 标签标准强制执行
 
 ```yaml
 # 强制命名空间必须包含治理标签
@@ -1193,7 +1193,7 @@ spec:
               slack-channel: "#?*"
 ```
 
-#<!-- chunk: 6.2 命名空间资源默认注入 -->## 6.2 命名空间资源默认注入
+## 6.2 命名空间资源默认注入
 
 ```yaml
 # 自动为新命名空间注入 LimitRange
@@ -1275,7 +1275,7 @@ spec:
               services.nodeports: "0"   # 禁止 NodePort
 ```
 
-#<!-- chunk: 6.3 命名空间生命周期管理流程 -->## 6.3 命名空间生命周期管理流程
+## 6.3 命名空间生命周期管理流程
 
 ```mermaid
 stateDiagram-v2
@@ -1324,7 +1324,7 @@ stateDiagram-v2
     Archiving --> [*]: 命名空间删除
 ```
 
-#<!-- chunk: 6.4 命名空间隔离策略矩阵 -->## 6.4 命名空间隔离策略矩阵
+## 6.4 命名空间隔离策略矩阵
 
 | 命名空间类型 | NetworkPolicy | ResourceQuota | LimitRange | PSA 级别 |
 |------------|--------------|---------------|------------|---------|
@@ -1337,7 +1337,7 @@ stateDiagram-v2
 
 <!-- chunk: 7. 策略报告与审计 -->## 7. 策略报告与审计
 
-#<!-- chunk: 7.1 PolicyReport/ClusterPolicyReport 资源 -->## 7.1 PolicyReport/ClusterPolicyReport 资源
+## 7.1 PolicyReport/ClusterPolicyReport 资源
 
 Kyverno 和 Gatekeeper 均支持将策略检查结果写入标准化的 PolicyReport CRD：
 
@@ -1402,7 +1402,7 @@ summary:
   skip: 5
 ```
 
-#<!-- chunk: 7.2 Prometheus 指标采集 -->## 7.2 Prometheus 指标采集
+## 7.2 Prometheus 指标采集
 
 ```yaml
 # Kyverno 暴露的关键 Prometheus 指标
@@ -1430,7 +1430,7 @@ spec:
       - kyverno
 ```
 
-#<!-- chunk: 7.3 Grafana 仪表板集成 -->## 7.3 Grafana 仪表板集成
+## 7.3 Grafana 仪表板集成
 
 ```mermaid
 graph TB
@@ -1478,7 +1478,7 @@ graph TB
     style Visualization fill:#dcfce7,stroke:#22c55e
 ```
 
-#<!-- chunk: 7.4 合规报告自动生成 -->## 7.4 合规报告自动生成
+## 7.4 合规报告自动生成
 
 ```yaml
 # policy-reporter 配置：自动生成合规报告
@@ -1527,7 +1527,7 @@ data:
       schedule: "0 0 * * *"   # 每日存档
 ```
 
-#<!-- chunk: 7.5 关键合规指标 -->## 7.5 关键合规指标
+## 7.5 关键合规指标
 
 | 指标名称 | 计算方式 | 健康阈值 | 告警阈值 |
 |---------|---------|---------|---------|
@@ -1541,7 +1541,7 @@ data:
 
 <!-- chunk: 8. 企业级策略体系建设 -->## 8. 企业级策略体系建设
 
-#<!-- chunk: 8.1 分层策略架构 -->## 8.1 分层策略架构
+## 8.1 分层策略架构
 
 ```mermaid
 graph TB
@@ -1585,7 +1585,7 @@ graph TB
     style Layer4 fill:#f3f4f6,stroke:#9ca3af
 ```
 
-#<!-- chunk: 8.2 多集群策略分发（ArgoCD + Kyverno） -->## 8.2 多集群策略分发（ArgoCD + Kyverno）
+## 8.2 多集群策略分发（ArgoCD + Kyverno）
 
 ```yaml
 # ArgoCD ApplicationSet：向多个集群分发策略
@@ -1637,7 +1637,7 @@ spec:
             - /status
 ```
 
-#<!-- chunk: 8.3 企业级策略体系建设检查清单 -->## 8.3 企业级策略体系建设检查清单
+## 8.3 企业级策略体系建设检查清单
 
 ```yaml
 # 分阶段建设检查清单
@@ -1718,7 +1718,7 @@ enterprise_policy_checklist:
         status: pending
 ```
 
-#<!-- chunk: 8.4 Kyverno 高可用部署配置 -->## 8.4 Kyverno 高可用部署配置
+## 8.4 Kyverno 高可用部署配置
 
 ```yaml
 # Kyverno 生产级 Helm values
@@ -1786,16 +1786,18 @@ serviceMonitor:
 
 <!-- chunk: 9. 未来趋势 -->## 9. 未来趋势
 
-#<!-- chunk: 9.1 CEL 在 Kubernetes 中的持续扩展 -->## 9.1 CEL 在 Kubernetes 中的持续扩展
+## 9.1 CEL 在 Kubernetes 中的持续扩展
 
 CEL 已从 ValidatingAdmissionPolicy 扩展到 Kubernetes 更多领域：
 
 ```
 K8s 1.25: CRD 验证规则（x-kubernetes-validations）
 K8s 1.26: ValidatingAdmissionPolicy Alpha
-K8s 1.28: ValidatingAdmissionPolicy Beta + MutatingAdmissionPolicy Alpha
-K8s 1.30: ValidatingAdmissionPolicy GA ✅
-K8s 1.31+: MutatingAdmissionPolicy 持续演进
+K8s 1.28: ValidatingAdmissionPolicy Beta（默认开启）
+K8s 1.30: ValidatingAdmissionPolicy GA ✅ + MutatingAdmissionPolicy Alpha（feature gate，默认关闭）
+K8s 1.32: MutatingAdmissionPolicy v1alpha1 API
+K8s 1.34: MutatingAdmissionPolicy v1beta1 API（默认关闭）
+K8s 1.36: MutatingAdmissionPolicy GA ✅
 未来:     更多 API 字段支持 CEL 表达式
 ```
 
@@ -1826,7 +1828,7 @@ spec:
           }
 ```
 
-#<!-- chunk: 9.2 AI 辅助策略生成 -->## 9.2 AI 辅助策略生成
+## 9.2 AI 辅助策略生成
 
 随着 LLM 技术的成熟，AI 辅助策略生成正在成为现实：
 
@@ -1863,7 +1865,7 @@ graph LR
 - **GitHub Copilot + 策略模板**：加速策略编写
 - **专业 LLM 提示词**：结构化生成符合规范的策略 YAML
 
-#<!-- chunk: 9.3 eBPF 与策略执行融合 -->## 9.3 eBPF 与策略执行融合
+## 9.3 eBPF 与策略执行融合
 
 ```
 传统准入控制：仅在资源创建/更新时执行
@@ -1877,7 +1879,7 @@ eBPF 运行时策略：持续监控运行时行为
 未来方向：准入策略 + 运行时策略统一管理平台
 ```
 
-#<!-- chunk: 9.4 跨文档知识关联 -->## 9.4 跨文档知识关联
+## 9.4 跨文档知识关联
 
 本文内容与以下文档密切相关，建议协同阅读：
 
@@ -1896,7 +1898,7 @@ eBPF 运行时策略：持续监控运行时行为
    → SBOM 合规性可通过策略强制要求
 ```
 
-#<!-- chunk: 9.5 策略即代码成熟度模型 -->## 9.5 策略即代码成熟度模型
+## 9.5 策略即代码成熟度模型
 
 ```
 Level 0：无策略（手工审核）
@@ -1933,20 +1935,20 @@ Level 5：持续优化（AI 辅助 + 多集群统一 + 运行时策略）
 
 <!-- chunk: 相关资源 -->## 相关资源
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 - [Kyverno 官方文档](https://kyverno.io/docs/)
 - [Kyverno 策略库](https://kyverno.io/policies/)
 - [OPA/Gatekeeper 文档](https://open-policy-agent.github.io/gatekeeper/)
 - [ValidatingAdmissionPolicy KEP](https://kubernetes.io/docs/reference/access-authn-authz/validating-admission-policy/)
 - [Policy Reporter](https://kyverno.github.io/policy-reporter/)
 
-#<!-- chunk: 工具 -->## 工具
+## 工具
 - [Kyverno Playground](https://playground.kyverno.io/)
 - [OPA Playground](https://play.openpolicyagent.org/)
 - [Conftest](https://www.conftest.dev/) — 策略测试框架
 - [Datree](https://www.datree.io/) — Kubernetes 配置验证
 
-#<!-- chunk: 相关论文与标准 -->## 相关论文与标准
+## 相关论文与标准
 - CIS Kubernetes Benchmark v1.8
 - NIST SP 800-190（容器安全指南）
 - SLSA Framework v1.0
@@ -1960,7 +1962,7 @@ Level 5：持续优化（AI 辅助 + 多集群统一 + 运行时策略）
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -1981,4 +1983,4 @@ Level 5：持续优化（AI 辅助 + 多集群统一 + 运行时策略）
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

@@ -234,6 +234,11 @@ spec:
 ## 恢复演练流程
 
 ### 恢复测试脚本
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # disaster-recovery-test.sh
@@ -275,7 +280,7 @@ fi
 
 # 6. 删除测试环境
 echo "6. Deleting test environment..."
-kubectl delete namespace $NAMESPACE --wait=false
+kubectl delete namespace $NAMESPACE --wait=false  # ⚠️ 不可逆：永久删除命名空间及全部资源
 
 # 7. 等待删除完成
 sleep 30
@@ -301,7 +306,7 @@ fi
 
 # 11. 清理测试资源
 echo "10. Cleaning up test resources..."
-kubectl delete namespace $NAMESPACE-restored
+kubectl delete namespace $NAMESPACE-restored  # ⚠️ 不可逆：永久删除命名空间及全部资源
 velero backup delete $BACKUP_NAME --confirm
 
 echo "🎉 Disaster Recovery Test Completed Successfully!"
@@ -786,11 +791,11 @@ improvement_tracking:
 ## Obsidian 相关文档
 
 - domain-07-platform-engineering KUDIG Database — Global MOC
-- [[domain-07-platform-engineering/README|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
+- [[domain-07-platform-engineering/README.md|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
 - index.md|Domain-9 平台运维 — 开源项目索引]]
 - 平台运维概述
 - 集群生命周期管理
-- [[domain-07-platform-engineering/governance/03-capacity-planning-resource-assessment]]
+- [[domain-07-platform-engineering/governance/03-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
 - 性能基准测试与调优 (Performance Benchmarking & Tuning)
 - 运维指标体系建设 (Operations Metrics System)
 - 监控告警体系

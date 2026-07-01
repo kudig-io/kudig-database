@@ -102,7 +102,7 @@ NetworkPolicy 是 Kubernetes 中用于控制 Pod 网络流量的资源对象。�
 
 <!-- chunk: 1. NetworkPolicy 基础配置 -->## 1. NetworkPolicy 基础配置
 
-#<!-- chunk: 1.1 基本 NetworkPolicy 结构 -->## 1.1 基本 NetworkPolicy 结构
+## 1.1 基本 NetworkPolicy 结构
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -202,7 +202,7 @@ spec:
 
 ---
 
-#<!-- chunk: 1.2 默认拒绝所有入站流量 -->## 1.2 默认拒绝所有入站流量
+## 1.2 默认拒绝所有入站流量
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -233,7 +233,7 @@ spec:
 
 ---
 
-#<!-- chunk: 1.3 默认拒绝所有出站流量 -->## 1.3 默认拒绝所有出站流量
+## 1.3 默认拒绝所有出站流量
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -264,7 +264,7 @@ spec:
 
 ---
 
-#<!-- chunk: 1.4 默认拒绝所有流量 (入站 + 出站) -->## 1.4 默认拒绝所有流量 (入站 + 出站)
+## 1.4 默认拒绝所有流量 (入站 + 出站)
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -294,7 +294,7 @@ spec:
 
 ---
 
-#<!-- chunk: 1.5 默认允许所有入站流量 -->## 1.5 默认允许所有入站流量
+## 1.5 默认允许所有入站流量
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -323,7 +323,7 @@ spec:
 
 ---
 
-#<!-- chunk: 1.6 默认允许所有出站流量 -->## 1.6 默认允许所有出站流量
+## 1.6 默认允许所有出站流量
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -353,7 +353,7 @@ spec:
 
 <!-- chunk: 2. from/to 选择器详解 -->## 2. from/to 选择器详解
 
-#<!-- chunk: 2.1 podSelector (同一 namespace) -->## 2.1 podSelector (同一 namespace)
+## 2.1 podSelector (同一 namespace)
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -389,7 +389,7 @@ spec:
 
 ---
 
-#<!-- chunk: 2.2 namespaceSelector (跨 namespace) -->## 2.2 namespaceSelector (跨 namespace)
+## 2.2 namespaceSelector (跨 namespace)
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -424,6 +424,9 @@ spec:
 
 **注意**: 确保 namespace 有正确的标签:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 给 namespace 添加标签
 kubectl label namespace monitoring name=monitoring
@@ -431,7 +434,7 @@ kubectl label namespace monitoring name=monitoring
 
 ---
 
-#<!-- chunk: 2.3 podSelector + namespaceSelector (AND 逻辑) -->## 2.3 podSelector + namespaceSelector (AND 逻辑)
+## 2.3 podSelector + namespaceSelector (AND 逻辑)
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -500,7 +503,7 @@ ingress:
 
 ---
 
-#<!-- chunk: 2.4 ipBlock (IP 地址块) -->## 2.4 ipBlock (IP 地址块)
+## 2.4 ipBlock (IP 地址块)
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -547,7 +550,7 @@ spec:
 
 ---
 
-#<!-- chunk: 2.5 混合选择器 (OR 逻辑) -->## 2.5 混合选择器 (OR 逻辑)
+## 2.5 混合选择器 (OR 逻辑)
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -598,7 +601,7 @@ spec:
 
 <!-- chunk: 3. 端口规则详解 -->## 3. 端口规则详解
 
-#<!-- chunk: 3.1 单个端口 -->## 3.1 单个端口
+## 3.1 单个端口
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -628,7 +631,7 @@ spec:
 
 ---
 
-#<!-- chunk: 3.2 多个端口 -->## 3.2 多个端口
+## 3.2 多个端口
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -668,7 +671,7 @@ spec:
 
 ---
 
-#<!-- chunk: 3.3 端口范围 (v1.25+) -->## 3.3 端口范围 (v1.25+)
+## 3.3 端口范围 (v1.25+)
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -709,7 +712,7 @@ spec:
 
 ---
 
-#<!-- chunk: 3.4 命名端口 -->## 3.4 命名端口
+## 3.4 命名端口
 
 ```yaml
 ---
@@ -772,7 +775,7 @@ spec:
 
 ---
 
-#<!-- chunk: 3.5 不指定端口 (允许所有端口) -->## 3.5 不指定端口 (允许所有端口)
+## 3.5 不指定端口 (允许所有端口)
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -804,7 +807,7 @@ spec:
 
 ---
 
-#<!-- chunk: 3.6 协议类型 -->## 3.6 协议类型
+## 3.6 协议类型
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -848,7 +851,7 @@ spec:
 
 <!-- chunk: 4. 常见场景配置 -->## 4. 常见场景配置
 
-#<!-- chunk: 4.1 允许 DNS 解析 -->## 4.1 允许 DNS 解析
+## 4.1 允许 DNS 解析
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -888,6 +891,9 @@ spec:
 - 如果使用 `default-deny-egress`,必须配合此策略
 - 确保 `kube-system` namespace 有正确的标签:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # v1.22+ 自动添加
 kubectl get namespace kube-system --show-labels
@@ -899,7 +905,7 @@ kubectl label namespace kube-system kubernetes.io/metadata.name=kube-system
 
 ---
 
-#<!-- chunk: 4.2 三层应用架构 (Frontend → Backend → Database) -->## 4.2 三层应用架构 (Frontend → Backend → Database)
+## 4.2 三层应用架构 (Frontend → Backend → Database)
 
 ```yaml
 ---
@@ -1079,7 +1085,7 @@ spec:
 
 ---
 
-#<!-- chunk: 4.3 允许来自 Ingress Controller 的流量 -->## 4.3 允许来自 Ingress Controller 的流量
+## 4.3 允许来自 Ingress Controller 的流量
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -1144,7 +1150,7 @@ spec:
 
 ---
 
-#<!-- chunk: 4.4 限制出站流量 (只允许特定域名) -->## 4.4 限制出站流量 (只允许特定域名)
+## 4.4 限制出站流量 (只允许特定域名)
 
 **问题**: NetworkPolicy 不直接支持域名,只能使用 IP 地址。
 
@@ -1244,7 +1250,7 @@ spec:
 
 ---
 
-#<!-- chunk: 4.5 PCI-DSS 合规: 信用卡处理环境隔离 -->## 4.5 PCI-DSS 合规: 信用卡处理环境隔离
+## 4.5 PCI-DSS 合规: 信用卡处理环境隔离
 
 ```yaml
 ---
@@ -1416,7 +1422,7 @@ spec:
 
 <!-- chunk: 5. 内部原理: CNI 实现差异 -->## 5. 内部原理: CNI 实现差异
 
-#<!-- chunk: 5.1 Calico 实现 -->## 5.1 Calico 实现
+## 5.1 Calico 实现
 
 **架构**:
 
@@ -1466,6 +1472,9 @@ iptables -t filter -L cali-INPUT -n -v
 
 **eBPF 实现** (Calico v3.13+):
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 启用 eBPF 模式
 kubectl patch felixconfiguration default --type='merge' -p '{"spec":{"bpfEnabled":true}}'
@@ -1489,7 +1498,7 @@ bpftool prog show
 
 ---
 
-#<!-- chunk: 5.2 Cilium 实现 -->## 5.2 Cilium 实现
+## 5.2 Cilium 实现
 
 **架构**:
 
@@ -1556,7 +1565,7 @@ cilium identity list
 
 ---
 
-#<!-- chunk: 5.3 其他 CNI 插件对比 -->## 5.3 其他 CNI 插件对比
+## 5.3 其他 CNI 插件对比
 
 | CNI 插件 | NetworkPolicy 支持 | 实现方式 | endPort 支持 | 扩展功能 | 性能 |
 |----------|-------------------|----------|--------------|----------|------|
@@ -1573,7 +1582,7 @@ cilium identity list
 
 <!-- chunk: 6. 生产案例 -->## 6. 生产案例
 
-#<!-- chunk: 6.1 案例 1: 零信任网络 (Zero Trust) -->## 6.1 案例 1: 零信任网络 (Zero Trust)
+## 6.1 案例 1: 零信任网络 (Zero Trust)
 
 **目标**: 所有流量默认拒绝,显式允许必要的通信。
 
@@ -1732,6 +1741,9 @@ spec:
 
 **验证零信任**:
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 测试: Frontend → Backend (应该成功)
 kubectl exec -it frontend-pod -n zerotrust -- curl http://backend-service:8080
@@ -1748,7 +1760,7 @@ kubectl exec -it backend-pod -n zerotrust -- psql -h database-service -p 5432
 
 ---
 
-#<!-- chunk: 6.2 案例 2: 微分段 (Microsegmentation) -->## 6.2 案例 2: 微分段 (Microsegmentation)
+## 6.2 案例 2: 微分段 (Microsegmentation)
 
 **目标**: 在同一 namespace 内对 Pods 进行细粒度隔离。
 
@@ -1950,7 +1962,7 @@ spec:
 
 ---
 
-#<!-- chunk: 6.3 案例 3: 控制 DNS 出站流量 -->## 6.3 案例 3: 控制 DNS 出站流量
+## 6.3 案例 3: 控制 DNS 出站流量
 
 **目标**: 限制 Pods 只能解析特定域名 (使用 Cilium FQDN 策略)。
 
@@ -2043,9 +2055,12 @@ spec:
 
 <!-- chunk: 7. 常见问题排查 -->## 7. 常见问题排查
 
-#<!-- chunk: 7.1 NetworkPolicy 不生效 -->## 7.1 NetworkPolicy 不生效
+## 7.1 NetworkPolicy 不生效
 
 **排查步骤**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 检查 CNI 插件是否支持 NetworkPolicy
@@ -2070,7 +2085,10 @@ kubectl describe networkpolicy <policy-name> -n <namespace>
 kubectl exec -it <source-pod> -n <namespace> -- curl <target-service>:8080
 ```
 
-#<!-- chunk: 7.2 Calico 特定问题 -->## 7.2 Calico 特定问题
+## 7.2 Calico 特定问题
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 检查 Calico 状态
@@ -2091,7 +2109,7 @@ iptables-save | grep cali
 kubectl patch felixconfiguration default -p '{"spec":{"logSeverityScreen":"Debug"}}'
 ```
 
-#<!-- chunk: 7.3 Cilium 特定问题 -->## 7.3 Cilium 特定问题
+## 7.3 Cilium 特定问题
 
 ```bash
 # 1. 检查 Cilium 状态
@@ -2114,7 +2132,7 @@ cilium bpf policy list
 
 <!-- chunk: 8. 最佳实践 -->## 8. 最佳实践
 
-#<!-- chunk: 8.1 策略设计原则 -->## 8.1 策略设计原则
+## 8.1 策略设计原则
 
 1. **默认拒绝 + 显式允许** (零信任):
    ```yaml
@@ -2153,7 +2171,10 @@ cilium bpf policy list
      owner: "platform-team@example.com"
    ```
 
-#<!-- chunk: 8.2 测试和验证 -->## 8.2 测试和验证
+## 8.2 测试和验证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 使用 kubectl auth can-i (RBAC)
@@ -2175,7 +2196,7 @@ hubble observe --from-pod frontend-pod --to-pod backend-pod
 kubectl exec -it frontend-pod -n production -- tcpdump -i any port 8080
 ```
 
-#<!-- chunk: 8.3 性能优化 -->## 8.3 性能优化
+## 8.3 性能优化
 
 1. **选择高性能 CNI**:
    - Cilium (eBPF 原生,推荐)
@@ -2217,7 +2238,7 @@ kubectl exec -it frontend-pod -n production -- tcpdump -i any port 8080
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -2236,9 +2257,9 @@ kubectl exec -it frontend-pod -n production -- tcpdump -i any port 8080
 - 23-pod-security-standards
 - 24-admission-webhook-configuration
 
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/19-cni-networking|19-cni-networking]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/19-cni-networking.md|19-cni-networking]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]

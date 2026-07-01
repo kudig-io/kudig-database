@@ -5,6 +5,7 @@ tags: ["index", "domain-19-landscape-references", "navigation"]
 sources: ["auto-generated"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 ---
 
 # Domain 19 内容索引
@@ -335,5 +336,5 @@ updated: 2026-05-21
 - [[README]] — README
 
 ## 相关 Domain
-- [[domain-01-cluster-fundamentals/98-merged-indexes/index|Domain 01 集群基础 索引]]
-- [[domain-07-platform-engineering/98-merged-indexes/index|Domain 07 平台工程 索引]]
+- [[domain-01-cluster-fundamentals/98-merged-indexes/index.md|Domain 01 集群基础 索引]]
+- [[domain-07-platform-engineering/98-merged-indexes/index.md|Domain 07 平台工程 索引]]

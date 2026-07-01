@@ -882,7 +882,7 @@ sum(rate(nginx_ingress_controller_requests[5m])) by (host)
 
 ## 相关
 
-- [[domain-09-reliability-engineering/04-slo-sli/02-slo-implementation-guide]] — SLO 设定与实施指南
-- [[domain-09-reliability-engineering/04-slo-sli/03-error-budget-management]] — 错误预算管理
-- [[domain-06-observability/06-slo-sli/18-slo-sli-system]] — SLO/SLI 体系概述
-- [[domain-06-observability/02-metrics/02-monitoring-metrics-system]] — 指标监控系统
+- [[domain-09-reliability-engineering/04-slo-sli/02-slo-implementation-guide.md|02 slo implementation guide]] — SLO 设定与实施指南
+- [[domain-09-reliability-engineering/04-slo-sli/03-error-budget-management.md|03 error budget management]] — 错误预算管理
+- [[domain-06-observability/06-slo-sli/18-slo-sli-system.md|18 slo sli system]] — SLO/SLI 体系概述
+- [[domain-06-observability/02-metrics/02-monitoring-metrics-system.md|02 monitoring metrics system]] — 指标监控系统

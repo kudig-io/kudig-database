@@ -323,7 +323,7 @@ kubectl logs -n kube-system -l component=kube-apiserver --tail=20
 | Pod 问题 | `domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md` ~ `08-pod-comprehensive-troubleshooting.md` |
 | Node 问题 | `domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md`, `09-node-comprehensive-troubleshooting.md` |
 | Network 问题 | `domain-10-troubleshooting-diagnostics/25-network-connectivity-troubleshooting.md`, `26-dns-troubleshooting.md` |
-| Storage 问题 | `domain-10-troubleshooting-diagnostics/14-pvc-storage-troubleshooting.md`, `[[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting|04-storage-csi-troubleshooting]].md` |
+| Storage 问题 | `domain-10-troubleshooting-diagnostics/14-pvc-storage-troubleshooting.md`, `[[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/04-storage-csi-troubleshooting.md|04-storage-csi-troubleshooting]].md` |
 | 性能问题 | `domain-10-troubleshooting-diagnostics/33-performance-bottleneck-troubleshooting.md` |
 | 故障树 | `domain-10-troubleshooting-diagnostics/topic-fta/` 完整故障树分析模型 |
 
@@ -334,5 +334,5 @@ kubectl logs -n kube-system -l component=kube-apiserver --tail=20
 ## Related
 
 - index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]

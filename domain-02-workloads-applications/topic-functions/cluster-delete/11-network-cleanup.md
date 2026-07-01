@@ -119,6 +119,7 @@ var manualCleanupInstructions = dedent.Dedent(`
     The reset process does not perform cleanup of CNI plugin configuration,
     network filtering rules and kubeconfig files.
 `)
+
 ```
 
 **原因**:
@@ -149,30 +150,39 @@ ls /etc/cni/net.d/
 
 ### 1.2 清理方法
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
 # 通用清理
-rm -rf /etc/cni/net.d/*
+rm -rf /etc/cni/net.d/*  # ⚠️ 删除系统/数据文件
 
 # CNI 二进制（可选，如果不再需要）
-rm -rf /opt/cni/bin/*
+rm -rf /opt/cni/bin/*  # ⚠️ 删除系统/数据文件
 ```
 
 ### 1.3 各 CNI 插件专用清理
 
 #### Flannel
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
-rm -rf /etc/cni/net.d/10-flannel.conflist
-rm -rf /var/lib/cni/flannel/*
+rm -rf /etc/cni/net.d/10-flannel.conflist  # ⚠️ 删除系统/数据文件
+rm -rf /var/lib/cni/flannel/*  # ⚠️ 删除系统/数据文件
 ip link delete flannel.1 2>/dev/null || true
 ```
 
 #### Calico
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
-rm -rf /etc/cni/net.d/10-calico.conflist
-rm -rf /etc/cni/net.d/calico-kubeconfig
-rm -rf /var/lib/cni/calico/*
+rm -rf /etc/cni/net.d/10-calico.conflist  # ⚠️ 删除系统/数据文件
+rm -rf /etc/cni/net.d/calico-kubeconfig  # ⚠️ 删除系统/数据文件
+rm -rf /var/lib/cni/calico/*  # ⚠️ 删除系统/数据文件
 ip link delete tunl0 2>/dev/null || true
 ip link delete vxlan.calico 2>/dev/null || true
 ip link delete cali.* 2>/dev/null || true   # calico 接口
@@ -180,9 +190,12 @@ ip link delete cali.* 2>/dev/null || true   # calico 接口
 
 #### Cilium
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
-rm -rf /etc/cni/net.d/05-cilium.conflist
-rm -rf /run/cilium/*
+rm -rf /etc/cni/net.d/05-cilium.conflist  # ⚠️ 删除系统/数据文件
+rm -rf /run/cilium/*  # ⚠️ 删除系统/数据文件
 cilium uninstall 2>/dev/null || true        # 如果 cilium agent 还在运行
 ip link delete cilium_host 2>/dev/null || true
 ip link delete cilium_net 2>/dev/null || true
@@ -190,9 +203,12 @@ ip link delete cilium_net 2>/dev/null || true
 
 #### Weave
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
-rm -rf /etc/cni/net.d/10-weave.conflist
-rm -rf /var/lib/weave/*
+rm -rf /etc/cni/net.d/10-weave.conflist  # ⚠️ 删除系统/数据文件
+rm -rf /var/lib/weave/*  # ⚠️ 删除系统/数据文件
 ip link delete weave 2>/dev/null || true
 ip link delete datapath 2>/dev/null || true
 ```
@@ -217,6 +233,9 @@ kube-proxy（iptables 模式）创建以下自定义链：
 | `KUBE-MARK-DROP` | nat | 标记需要丢弃的包 |
 
 ### 2.2 完整 iptables 清理
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 
 ```bash
 # 清理 filter 表
@@ -253,6 +272,9 @@ iptables -t nat -D POSTROUTING -j KUBE-POSTROUTING 2>/dev/null || true
 
 ### 2.3 一键清理脚本（仅 K8s 规则）
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
+
 ```bash
 #!/bin/bash
 # 仅清理 Kubernetes 相关的 iptables 规则
@@ -277,6 +299,9 @@ echo ">>> iptables KUBE 链已清理"
 ```
 
 ### 2.4 ⚠️ 危险操作：全表清空
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 
 ```bash
 # ⚠️ 会清除所有 iptables 规则（包括非 K8s 的）
@@ -440,6 +465,9 @@ ls /var/run/netns/ | grep cni
 
 ### 6.2 清理方法
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
 # 删除所有 CNI 网络命名空间
 for ns in $(ip netns list | awk '{print $1}'); do
@@ -447,19 +475,22 @@ for ns in $(ip netns list | awk '{print $1}'); do
 done
 
 # 清理残留的 netns 文件
-rm -rf /var/run/netns/*
+rm -rf /var/run/netns/*  # ⚠️ 删除系统/数据文件
 ```
 
 ---
 
 ## 7. 完整网络清理脚本
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
 #!/bin/bash
 echo "=== 开始网络清理 ==="
 
 # 1. CNI 配置
-rm -rf /etc/cni/net.d/*
+rm -rf /etc/cni/net.d/*  # ⚠️ 删除系统/数据文件
 
 # 2. iptables（仅 KUBE 链）
 for table in nat filter mangle; do
@@ -494,10 +525,11 @@ for ns in $(ip netns list 2>/dev/null | awk '{print $1}'); do
 done
 
 # 7. CNI 数据
-rm -rf /var/lib/cni/*
-rm -rf /opt/cni/bin/* 2>/dev/null || true
+rm -rf /var/lib/cni/*  # ⚠️ 删除系统/数据文件
+rm -rf /opt/cni/bin/* 2>/dev/null || true  # ⚠️ 删除系统/数据文件
 
 echo "=== 网络清理完成 ==="
+
 ```
 
 ---
@@ -512,6 +544,8 @@ echo "=== 网络清理完成 ==="
 
 - 22-networkpolicy-reference
 - [[README|README]]
-- [[man/INSTALL|INSTALL]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/networking|networking]]
+- [[scripts/man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+
+```

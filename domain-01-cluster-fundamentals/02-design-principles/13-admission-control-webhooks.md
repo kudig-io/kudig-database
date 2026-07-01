@@ -168,9 +168,6 @@ admission_controller_classification:
       - ValidatingAdmissionWebhook
       - ResourceQuota
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-
       - PodSecurity  # 替代已移除的 PodSecurityPolicy (v1.25+)
       - NamespaceLifecycle
       
@@ -1419,7 +1416,7 @@ production_checklist:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals MOC
-- [[domain-01-cluster-fundamentals/README|Domain-2: Kubernetes 设计原则与核心机制]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
 - Domain-2 设计原则 — 开源项目索引
 - Kubernetes 设计原则与哲学
 - 声明式 API 与面向终态设计

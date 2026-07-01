@@ -62,7 +62,7 @@ created: "2026-05-23"
 2. [测试环境规范](#2-测试环境规范)
 3. [基础代理性能对比](#3-基础代理性能对比)
 4. [带插件场景性能对比](#4-带插件场景性能对比)
-5. [[entities/envoy|Envoy]] 数据平面调优](#5-envoy-数据平面调优)
+5. [[entities/envoy.md|Envoy]] 数据平面调优](#5-envoy-数据平面调优)
 6. [OpenResty 数据平面调优](#6-openresty-数据平面调优)
 7. [Kubernetes 层面调优](#7-kubernetes-层面调优)
 8. [eBPF 加速路径](#8-ebpf-加速路径)
@@ -72,7 +72,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 基准测试方法论 -->## 1. 基准测试方法论
 
-#<!-- chunk: 1.1 测试工具对比 -->## 1.1 测试工具对比
+## 1.1 测试工具对比
 
 | 工具 | 类型 | 负载模型 | 最大连接数 | 精确延迟直方图 | 推荐场景 |
 |------|------|---------|-----------|--------------|---------|
@@ -83,9 +83,7 @@ created: "2026-05-23"
 | **k6** | HTTP/WS | 开放+闭合 | 高 | ✅ P95/P99 | 复杂场景脚本 |
 | **vegeta** | HTTP | 开放环回 | 高 | ✅ HdrHistogram | 持续速率攻击 |
 
-> ⚠️ **方法论警告**: 使用**开放环回**（open-loop）工具（如 wrk2、vegeta）是测量真实延迟分布的正确方式。闭合环回工具（如 ab、hey 默认模式）会因"协调遗漏"（Coordinated Omission）低估 P99/P999 延迟。
-
-#<!-- chunk: 1.2 测试场景分类 -->## 1.2 测试场景分类
+## 1.2 测试场景分类
 
 ```
 ┌───────────────────────────────────────────────────────────────┐
@@ -99,7 +97,7 @@ created: "2026-05-23"
 └────────────────────┴──────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 1.3 测试最佳实践 -->## 1.3 测试最佳实践
+## 1.3 测试最佳实践
 
 ```bash
 # 1. 系统预热：发送 10% 流量预热 60s，消除 JIT/连接池初始化噪声
@@ -121,7 +119,7 @@ hdrhistogram-plot /results/higress-passthrough.json
 # 4. 多轮取平均：至少 3 轮，取中位数结果，丢弃最高/最低轮
 ```
 
-#<!-- chunk: 1.4 避免常见测试陷阱 -->## 1.4 避免常见测试陷阱
+## 1.4 避免常见测试陷阱
 
 - **DNS 解析干扰**: 预先解析域名或直接使用 ClusterIP
 - **网络位置**: 测试客户端与网关在同一可用区，消除跨区延迟
@@ -133,7 +131,7 @@ hdrhistogram-plot /results/higress-passthrough.json
 
 <!-- chunk: 2. 测试环境规范 -->## 2. 测试环境规范
 
-#<!-- chunk: 2.1 硬件规格 -->## 2.1 硬件规格
+## 2.1 硬件规格
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -153,7 +151,7 @@ hdrhistogram-plot /results/higress-passthrough.json
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 2.2 Kubernetes 集群配置 -->## 2.2 Kubernetes 集群配置
+## 2.2 Kubernetes 集群配置
 
 ```yaml
 # 网关节点污点隔离
@@ -173,7 +171,7 @@ net.ipv4.tcp_wmem = 4096 65536 16777216
 fs.file-max = 2097152
 ```
 
-#<!-- chunk: 2.3 后端 Mock 服务 -->## 2.3 后端 Mock 服务
+## 2.3 后端 Mock 服务
 
 ```yaml
 # echo-server.yaml - 极简 Echo 服务，P99 < 0.5ms
@@ -223,7 +221,10 @@ spec:
     targetPort: 80
 ```
 
-#<!-- chunk: 2.4 预热流程 -->## 2.4 预热流程
+## 2.4 预热流程
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -254,14 +255,14 @@ kubectl exec -n $GATEWAY_NS $GATEWAY_POD -- \
 
 <!-- chunk: 3. 基础代理性能对比 -->## 3. 基础代理性能对比
 
-#<!-- chunk: 3.1 测试配置说明 -->## 3.1 测试配置说明
+## 3.1 测试配置说明
 
 - 场景: 单路由 HTTP/1.1 → HTTP/1.1 透明代理，无插件
 - 测试客户端: 2 个 fortio 实例 × 50 并发 × 开放环回
 - 请求体: 1KB 固定响应，模拟典型 API 响应大小
 - 测试时长: 300 秒稳定期
 
-#<!-- chunk: 3.2 综合性能对比表（HTTP/1.1 基础代理） -->## 3.2 综合性能对比表（HTTP/1.1 基础代理）
+## 3.2 综合性能对比表（HTTP/1.1 基础代理）
 
 | 网关产品 | 版本 | 副本数 | QPS (P50延迟=5ms) | P50 延迟 | P99 延迟 | P999 延迟 | CPU 使用率 | 内存使用 | 最大并发连接 |
 |---------|------|-------|-------------------|---------|---------|---------|-----------|---------|------------|
@@ -274,7 +275,7 @@ kubectl exec -n $GATEWAY_NS $GATEWAY_POD -- \
 
 > 注：Nginx Ingress 作为参照基线，仅支持基础代理能力，不具备动态 API 管理特性。
 
-#<!-- chunk: 3.3 HTTP/2 性能对比 -->## 3.3 HTTP/2 性能对比
+## 3.3 HTTP/2 性能对比
 
 | 网关产品 | HTTP/2 QPS | vs HTTP/1.1 | P99 延迟 | gRPC QPS | gRPC P99 |
 |---------|-----------|------------|---------|---------|---------|
@@ -284,7 +285,7 @@ kubectl exec -n $GATEWAY_NS $GATEWAY_POD -- \
 | **Kong** | 102,000 | +7% | 8.2ms | 55,000 | 11ms |
 | **Traefik** | 125,000 | +14% | 6.8ms | 65,000 | 9.2ms |
 
-#<!-- chunk: 3.4 延迟分布可视化（ASCII） -->## 3.4 延迟分布可视化（ASCII）
+## 3.4 延迟分布可视化（ASCII）
 
 ```
 延迟分布直方图 - Higress vs Kong（基础代理，10万 QPS）
@@ -308,7 +309,7 @@ kubectl exec -n $GATEWAY_NS $GATEWAY_POD -- \
 
 <!-- chunk: 4. 带插件场景性能对比 -->## 4. 带插件场景性能对比
 
-#<!-- chunk: 4.1 认证 + 限流插件链 -->## 4.1 认证 + 限流插件链
+## 4.1 认证 + 限流插件链
 
 | 网关产品 | 裸机 QPS | JWT认证 | JWT+限流 | JWT+限流+日志 | 性能损耗（完整链） |
 |---------|---------|--------|---------|-------------|----------------|
@@ -318,7 +319,7 @@ kubectl exec -n $GATEWAY_NS $GATEWAY_POD -- \
 | **Kong** | 95,000 | 72,000 (-24%) | 62,000 (-35%) | 55,000 (-42%) | **42%** |
 | **Traefik** | 110,000 | 88,000 (-20%) | 78,000 (-29%) | 70,000 (-36%) | **36%** |
 
-#<!-- chunk: 4.2 Wasm 插件性能开销 -->## 4.2 Wasm 插件性能开销
+## 4.2 Wasm 插件性能开销
 
 ```
 Wasm 插件执行开销（每请求额外延迟，μs）
@@ -333,7 +334,7 @@ JWT 验证（RS256）       320μs         380μs         295μs
 ─────────────────────────────────────────────────────────────────
 ```
 
-#<!-- chunk: 4.3 多插件链路性能（典型 AI 网关场景） -->## 4.3 多插件链路性能（典型 AI 网关场景）
+## 4.3 多插件链路性能（典型 AI 网关场景）
 
 ```yaml
 # 测试场景：AI API 代理插件链
@@ -358,7 +359,7 @@ Kong AI Gateway:
 
 <!-- chunk: 5. Envoy 数据平面调优 -->## 5. Envoy 数据平面调优
 
-#<!-- chunk: 5.1 Worker 线程调优 -->## 5.1 Worker 线程调优
+## 5.1 Worker 线程调优
 
 ```yaml
 # Higress / Envoy Gateway - Bootstrap 配置
@@ -390,7 +391,7 @@ kubectl set env deployment/higress-gateway \
   ENVOY_CONCURRENCY=15
 ```
 
-#<!-- chunk: 5.2 连接池优化 -->## 5.2 连接池优化
+## 5.2 连接池优化
 
 ```yaml
 # HTTPRoute 上游连接池配置（通过 BackendPolicy / EnvoyFilter）
@@ -416,7 +417,7 @@ spec:
       initialConnectionWindowSize: 1048576
 ```
 
-#<!-- chunk: 5.3 缓冲区与超时调优 -->## 5.3 缓冲区与超时调优
+## 5.3 缓冲区与超时调优
 
 ```yaml
 # Envoy 核心缓冲区参数（通过 EnvoyFilter 注入）
@@ -446,7 +447,7 @@ spec:
             initial_stream_window_size: 65536        # 64KB
 ```
 
-#<!-- chunk: 5.4 Envoy 性能调优检查清单 -->## 5.4 Envoy 性能调优检查清单
+## 5.4 Envoy 性能调优检查清单
 
 ```
 Envoy 数据平面调优清单
@@ -468,7 +469,7 @@ Envoy 数据平面调优清单
 
 <!-- chunk: 6. OpenResty 数据平面调优 -->## 6. OpenResty 数据平面调优
 
-#<!-- chunk: 6.1 Nginx 核心参数 -->## 6.1 Nginx 核心参数
+## 6.1 Nginx 核心参数
 
 ```nginx
 # /etc/nginx/nginx.conf - OpenResty/APISIX/Kong 适用
@@ -512,7 +513,7 @@ http {
 }
 ```
 
-#<!-- chunk: 6.2 Lua 共享内存调优（APISIX/Kong） -->## 6.2 Lua 共享内存调优（APISIX/Kong）
+## 6.2 Lua 共享内存调优（APISIX/Kong）
 
 ```nginx
 # APISIX config.yaml - Lua 共享内存配置
@@ -538,7 +539,7 @@ nginx_config:
     lua_max_pending_timers 16384;
 ```
 
-#<!-- chunk: 6.3 APISIX 性能关键配置 -->## 6.3 APISIX 性能关键配置
+## 6.3 APISIX 性能关键配置
 
 ```yaml
 # config.yaml
@@ -575,7 +576,7 @@ nginx_config:
 
 <!-- chunk: 7. Kubernetes 层面调优 -->## 7. Kubernetes 层面调优
 
-#<!-- chunk: 7.1 Pod 反亲和性与拓扑分布 -->## 7.1 Pod 反亲和性与拓扑分布
+## 7.1 Pod 反亲和性与拓扑分布
 
 ```yaml
 # 高性能网关部署配置
@@ -648,7 +649,7 @@ spec:
         # 需配合 kubelet CPU Manager Policy: static
 ```
 
-#<!-- chunk: 7.2 Resource Requests/Limits 最佳实践 -->## 7.2 Resource Requests/Limits 最佳实践
+## 7.2 Resource Requests/Limits 最佳实践
 
 ```yaml
 # 网关组件资源配置参考
@@ -673,7 +674,7 @@ resources:
     memory: 4Gi
 ```
 
-#<!-- chunk: 7.3 HPA 自动扩缩容配置 -->## 7.3 HPA 自动扩缩容配置
+## 7.3 HPA 自动扩缩容配置
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -719,7 +720,10 @@ spec:
         periodSeconds: 120
 ```
 
-#<!-- chunk: 7.4 CPU Manager Policy 静态绑核 -->## 7.4 CPU Manager Policy 静态绑核
+## 7.4 CPU Manager Policy 静态绑核
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # kubelet 配置 - 网关节点专用
@@ -742,7 +746,7 @@ kubectl exec -n gateway-system $GATEWAY_POD -- \
 
 > 💡 **相关文档**: 详细 eBPF 原理参见 [domain-03-networking-traffic eBPF 技术体系](../domain-03-networking-traffic/)，网络基础参见 [domain-03-networking-traffic Kubernetes 网络](../domain-03-networking-traffic/)
 
-#<!-- chunk: 8.1 Cilium + API 网关加速架构 -->## 8.1 Cilium + API 网关加速架构
+## 8.1 Cilium + API 网关加速架构
 
 ```
 传统数据路径（无 eBPF 加速）:
@@ -782,7 +786,7 @@ Backend Pod（同节点绕过 TCP stack）
 延迟: ~50-120μs（减少 60-75%）
 ```
 
-#<!-- chunk: 8.2 Cilium 加速配置 -->## 8.2 Cilium 加速配置
+## 8.2 Cilium 加速配置
 
 ```yaml
 # cilium-values.yaml
@@ -807,7 +811,7 @@ bandwidthManager:
   bbr: true
 ```
 
-#<!-- chunk: 8.3 eBPF 加速效果量化 -->## 8.3 eBPF 加速效果量化
+## 8.3 eBPF 加速效果量化
 
 | 场景 | 无 eBPF 延迟 | Cilium eBPF 延迟 | 提升幅度 |
 |------|------------|----------------|---------|
@@ -820,7 +824,7 @@ bandwidthManager:
 
 <!-- chunk: 9. 容量规划公式 -->## 9. 容量规划公式
 
-#<!-- chunk: 9.1 网关 CPU 容量估算 -->## 9.1 网关 CPU 容量估算
+## 9.1 网关 CPU 容量估算
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -842,7 +846,7 @@ CPU 容量规划公式：
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-#<!-- chunk: 9.2 内存容量估算 -->## 9.2 内存容量估算
+## 9.2 内存容量估算
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -863,7 +867,7 @@ CPU 容量规划公式：
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-#<!-- chunk: 9.3 副本数规划矩阵 -->## 9.3 副本数规划矩阵
+## 9.3 副本数规划矩阵
 
 | 日均 QPS | 峰值倍数 | 峰值 QPS | 推荐副本数 | 单副本规格 | 总 CPU |
 |---------|---------|---------|----------|----------|-------|
@@ -873,7 +877,7 @@ CPU 容量规划公式：
 | 500,000 | 2x | 1,000,000 | 16 | 16C/16G | 256C |
 | 1,000,000 | 2x | 2,000,000 | 24 | 16C/32G | 384C |
 
-#<!-- chunk: 9.4 性能测试自动化脚本 -->## 9.4 性能测试自动化脚本
+## 9.4 性能测试自动化脚本
 
 ```bash
 #!/bin/bash
@@ -943,7 +947,7 @@ echo "基准测试完成，结果保存至: $RESULTS_DIR"
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-40-cloud-native-api-gateway KUDIG Database — Global MOC
-- [[domain-03-networking-traffic/README|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
 - Domain-40 云原生 API 网关 — 开源项目索引
 - 01 - 云原生 API 网关架构总览
 - 02 - Kubernetes Gateway API 标准深度解析

@@ -59,7 +59,7 @@ Adds resource support for conditionals. Conditions have to declare the resources
 
 * :sparkles: Add sidecars to Tasks
 
-Tasks can now define a list of [[Sidecar Containers|sidecar containers]] to run alongside their steps (#1236)
+Tasks can now define a list of [[domain-17-system-foundation/topic-dictionary/workloads/sidecar-containers.md|sidecar containers]] to run alongside their steps (#1236)
 
 * :sparkles: Update build-gcs resource type to support .tar.gz archives (#1200)
 

@@ -5,6 +5,7 @@ tags: ["index", "domain-08-release-change-management", "navigation"]
 sources: ["auto-generated"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 ---
 
 # Domain 08 内容索引
@@ -89,5 +90,5 @@ updated: 2026-05-21
 - [[README]] — README
 
 ## 相关 Domain
-- [[domain-07-platform-engineering/98-merged-indexes/index|Domain 07 平台工程 索引]]
-- [[domain-09-reliability-engineering/98-merged-indexes/index|Domain 09 可靠性工程 索引]]
+- [[domain-07-platform-engineering/98-merged-indexes/index.md|Domain 07 平台工程 索引]]
+- [[domain-09-reliability-engineering/98-merged-indexes/index.md|Domain 09 可靠性工程 索引]]

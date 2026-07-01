@@ -1,5 +1,5 @@
 ---
-title: Day 1: 新人首日检查清单 [quick-start]
+title: "Day 1: 新人首日检查清单 [quick-start]"
 description: '# stern - 日志实时跟踪'
 category: learning
 tags:
@@ -195,7 +195,7 @@ kubectl auth can-i get services --namespace=kube-system
 1. `P1-5-oncall-quick-reference-card.md` — oncall 速查卡
 2. `domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md` — kubectl 场景速查
 3. `domain-10-troubleshooting-diagnostics/00-troubleshooting-overview.md` — 故障排查总览
-4. `domain-11-production-operations/topic-learn/public-training/[[domain-04-storage-data/README|[[KUDIG Database]]]].md` — Week 1 培训
+4. `domain-11-production-operations/topic-learn/public-training/[[domain-04-storage-data/README.md|[[KUDIG Database]]]].md` — Week 1 培训
 
 ---
 

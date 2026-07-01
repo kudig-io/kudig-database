@@ -1,5 +1,5 @@
 ---
-title: Week 2 Checkpoint: 自测检验 [week-2-security-monitoring]
+title: "Week 2 Checkpoint: 自测检验 [week-2-security-monitoring]"
 description: 'title: Week 2 自测: 安全认证与监控运维'
 category: learning
 tags:
@@ -246,6 +246,10 @@ spec:
 | **Restricted** | 严格限制 | 非 root、drop ALL capabilities、只读 FS | 安全敏感应用 |
 
 **启用方式**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 为 Namespace 启用 PSS
 kubectl label namespace <ns> pod-security.kubernetes.io/enforce=restricted
@@ -382,6 +386,9 @@ kubectl get pods -n kube-system -l k8s-app=metrics-server
 ```
 
 **参考答案:**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 启用 enforce + audit + warn 三个维度
@@ -661,4 +668,4 @@ Phase 4: 验证
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

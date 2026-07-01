@@ -1,5 +1,5 @@
 ---
-title: 高可用进阶: 负载均衡与证书分发 [cluster-create]
+title: "高可用进阶: 负载均衡与证书分发 [cluster-create]"
 description: 'description: // 1. CA 公钥/私钥 (加密存储)'
 category: general
 tags:
@@ -339,7 +339,7 @@ Controller Manager 和 Scheduler 使用 Kubernetes 内置的 leader election:
 ## Related
 
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[entities/kubernetes|kubernetes]]
-- [[entities/kube-vip|kube-vip]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/kube-vip.md|kube-vip]]

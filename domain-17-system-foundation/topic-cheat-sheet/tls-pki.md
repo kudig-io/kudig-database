@@ -266,6 +266,9 @@ kubeadm certs renew etcd-server
 
 ### [[cert-manager|cert-manager]] 操作
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 查看证书状态
 kubectl get certificate -A
@@ -480,4 +483,6 @@ kubectl logs -n cert-manager deployment/cert-manager-cainjector
 ## Related
 
 - index/observability-index|Observabilityty 可观测性知识图谱索引|Observability 可观测性知识图谱索引]]]]
-- [[domain-19-landscape-references/topic-index/cert-index|[[Certificate / TLS 证书知识图谱索引|Certificate / TLS 证书知识图谱索引]]]]
+- [[domain-19-landscape-references/topic-index/cert-index.md|[[Certificate / TLS 证书知识图谱索引|Certificate / TLS 证书知识图谱索引]]]]
+
+```

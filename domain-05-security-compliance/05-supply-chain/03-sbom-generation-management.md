@@ -60,7 +60,7 @@ created: "2026-05-23"
 1. [SBOM 基础概念](#1-sbom-基础概念)
 2. [SBOM 标准格式对比](#2-sbom-标准格式对比)
 3. [Syft CLI 完整指南](#3-syft-cli-完整指南)
-4. [[entities/trivy|Trivy]] SBOM 生成](#4-trivy-sbom-生成)
+4. [[entities/trivy.md|Trivy]] SBOM 生成](#4-trivy-sbom-生成)
 5. [其他 SBOM 生成工具](#5-其他-sbom-生成工具)
 6. [SBOM 生命周期管理](#6-sbom-生命周期管理)
 7. [CI/CD 集成实践](#7-cicd-集成实践)
@@ -74,7 +74,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. SBOM 基础概念 -->## 1. SBOM 基础概念
 
-#<!-- chunk: 1.1 什么是 SBOM -->## 1.1 什么是 SBOM
+## 1.1 什么是 SBOM
 
 软件物料清单（Software Bill of Materials, SBOM）是软件组件和依赖关系的正式机器可读清单，类似于制造业中的物料清单（BOM）。
 
@@ -108,7 +108,7 @@ SBOM 类比:
    ─ 依赖关系图
 ```
 
-#<!-- chunk: 1.2 SBOM 的价值 -->## 1.2 SBOM 的价值
+## 1.2 SBOM 的价值
 
 ```mermaid
 graph TD
@@ -134,7 +134,7 @@ graph TD
     V5 --> V5b[供应商风险量化]
 ```
 
-#<!-- chunk: 1.3 SBOM 的最小数据要素 -->## 1.3 SBOM 的最小数据要素
+## 1.3 SBOM 的最小数据要素
 
 根据 NTIA（美国国家电信和信息管理局）定义，最小 SBOM 应包含：
 
@@ -148,7 +148,7 @@ graph TD
 | SBOM 作者 | 创建 SBOM 的实体 | security@company.com |
 | 时间戳 | 创建或最后更新时间 | 2024-01-15T10:30:00Z |
 
-#<!-- chunk: 1.4 PURL (Package URL) 规范 -->## 1.4 PURL (Package URL) 规范
+## 1.4 PURL (Package URL) 规范
 
 ```bash
 # PURL 格式: scheme:type/namespace/name@version?qualifiers#subpath
@@ -189,7 +189,7 @@ print(f'Version: {purl.version}')
 
 <!-- chunk: 2. SBOM 标准格式对比 -->## 2. SBOM 标准格式对比
 
-#<!-- chunk: 2.1 SPDX vs CycloneDX -->## 2.1 SPDX vs CycloneDX
+## 2.1 SPDX vs CycloneDX
 
 ```
 格式对比总览:
@@ -212,7 +212,7 @@ print(f'Version: {purl.version}')
 └────────────────┴──────────────────┴─────────────────────┘
 ```
 
-#<!-- chunk: 2.2 SPDX 格式详解 -->## 2.2 SPDX 格式详解
+## 2.2 SPDX 格式详解
 
 ```json
 // SPDX 2.3 JSON 格式示例（简化版）
@@ -269,7 +269,7 @@ print(f'Version: {purl.version}')
 }
 ```
 
-#<!-- chunk: 2.3 CycloneDX 格式详解 -->## 2.3 CycloneDX 格式详解
+## 2.3 CycloneDX 格式详解
 
 ```json
 // CycloneDX 1.5 JSON 格式示例
@@ -363,7 +363,7 @@ print(f'Version: {purl.version}')
 }
 ```
 
-#<!-- chunk: 2.4 格式选择指南 -->## 2.4 格式选择指南
+## 2.4 格式选择指南
 
 ```
 格式选择决策树:
@@ -391,7 +391,7 @@ print(f'Version: {purl.version}')
 
 <!-- chunk: 3. Syft CLI 完整指南 -->## 3. Syft CLI 完整指南
 
-#<!-- chunk: 3.1 安装与配置 -->## 3.1 安装与配置
+## 3.1 安装与配置
 
 ```bash
 # 安装 Syft - 方式一: 官方脚本
@@ -448,7 +448,7 @@ exclude:
 EOF
 ```
 
-#<!-- chunk: 3.2 扫描目标类型 -->## 3.2 扫描目标类型
+## 3.2 扫描目标类型
 
 ```bash
 # ============ 容器镜像扫描 ============
@@ -501,7 +501,7 @@ syft file:./package.rpm
 syft file:./package.deb
 ```
 
-#<!-- chunk: 3.3 输出格式详解 -->## 3.3 输出格式详解
+## 3.3 输出格式详解
 
 ```bash
 # Syft 支持的所有输出格式
@@ -546,7 +546,7 @@ syft myapp:latest \
 syft myapp:latest -o template -t custom-template.tmpl
 ```
 
-#<!-- chunk: 3.4 高级扫描选项 -->## 3.4 高级扫描选项
+## 3.4 高级扫描选项
 
 ```bash
 # 深度扫描配置
@@ -586,7 +586,7 @@ syft myapp:latest \
   --metadata="document-namespace=https://mycompany.com/sbom/myapp-v1.0.0"
 ```
 
-#<!-- chunk: 3.5 Syft 结果解析 -->## 3.5 Syft 结果解析
+## 3.5 Syft 结果解析
 
 ```python
 #!/usr/bin/env python3
@@ -658,7 +658,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 4. Trivy SBOM 生成 -->## 4. Trivy SBOM 生成
 
-#<!-- chunk: 4.1 Trivy 安装与配置 -->## 4.1 Trivy 安装与配置
+## 4.1 Trivy 安装与配置
 
 ```bash
 # 安装 Trivy - macOS
@@ -686,7 +686,7 @@ trivy image --download-db-only
 trivy version
 ```
 
-#<!-- chunk: 4.2 Trivy SBOM 生成命令 -->## 4.2 Trivy SBOM 生成命令
+## 4.2 Trivy SBOM 生成命令
 
 ```bash
 # ============ 镜像 SBOM 生成 ============
@@ -753,7 +753,7 @@ trivy image \
   myregistry.io/myapp:v1.0.0
 ```
 
-#<!-- chunk: 4.3 Trivy 综合扫描（SBOM + 漏洞） -->## 4.3 Trivy 综合扫描（SBOM + 漏洞）
+## 4.3 Trivy 综合扫描（SBOM + 漏洞）
 
 ```bash
 # 同时生成 SBOM 并扫描漏洞
@@ -794,7 +794,7 @@ trivy image \
   myapp:latest
 ```
 
-#<!-- chunk: 4.4 Trivy 配置文件 -->## 4.4 Trivy 配置文件
+## 4.4 Trivy 配置文件
 
 ```yaml
 # trivy.yaml - Trivy 配置文件
@@ -878,7 +878,7 @@ CVE-2021-44228 openssl@1.1.1t-r4 # 不适用于此使用场景
 
 <!-- chunk: 5. 其他 SBOM 生成工具 -->## 5. 其他 SBOM 生成工具
 
-#<!-- chunk: 5.1 工具生态系统对比 -->## 5.1 工具生态系统对比
+## 5.1 工具生态系统对比
 
 ```
 SBOM 工具生态系统:
@@ -899,7 +899,7 @@ SBOM 工具生态系统:
 └──────────────┴───────────────────┴───────────────────┘
 ```
 
-#<!-- chunk: 5.2 CycloneDX CLI -->## 5.2 CycloneDX CLI
+## 5.2 CycloneDX CLI
 
 ```bash
 # 安装 CycloneDX CLI
@@ -929,7 +929,7 @@ npm install -g @cyclonedx/cyclonedx-library
 cyclonedx validate sbom.cdx.json --spec-version 1.5
 ```
 
-#<!-- chunk: 5.3 cdxgen -->## 5.3 cdxgen
+## 5.3 cdxgen
 
 ```bash
 # 安装 cdxgen - 支持40+语言/框架
@@ -963,7 +963,7 @@ cdxgen -t go \
   /path/to/project
 ```
 
-#<!-- chunk: 5.4 SBOM 格式转换 -->## 5.4 SBOM 格式转换
+## 5.4 SBOM 格式转换
 
 ```bash
 # SPDX Tools - SBOM 格式转换
@@ -999,7 +999,7 @@ syft convert sbom.cdx.json -o spdx-json > sbom.spdx.json
 
 <!-- chunk: 6. SBOM 生命周期管理 -->## 6. SBOM 生命周期管理
 
-#<!-- chunk: 6.1 SBOM 生命周期概览 -->## 6.1 SBOM 生命周期概览
+## 6.1 SBOM 生命周期概览
 
 ```mermaid
 graph LR
@@ -1018,7 +1018,7 @@ graph LR
     F -.-> F1[依赖更新时\n漏洞修复时\n定期刷新]
 ```
 
-#<!-- chunk: 6.2 SBOM 版本管理策略 -->## 6.2 SBOM 版本管理策略
+## 6.2 SBOM 版本管理策略
 
 ```bash
 # SBOM 版本命名约定
@@ -1067,7 +1067,7 @@ store_sbom() {
 }
 ```
 
-#<!-- chunk: 6.3 SBOM 完整性保护 -->## 6.3 SBOM 完整性保护
+## 6.3 SBOM 完整性保护
 
 ```bash
 # SBOM 签名和验证
@@ -1117,7 +1117,7 @@ gpg --armor --detach-sign sbom.cdx.json
 gpg --verify sbom.cdx.json.asc sbom.cdx.json
 ```
 
-#<!-- chunk: 6.4 SBOM 差异分析 -->## 6.4 SBOM 差异分析
+## 6.4 SBOM 差异分析
 
 ```python
 #!/usr/bin/env python3
@@ -1220,7 +1220,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 7. CI/CD 集成实践 -->## 7. CI/CD 集成实践
 
-#<!-- chunk: 7.1 GitHub Actions SBOM 工作流 -->## 7.1 GitHub Actions SBOM 工作流
+## 7.1 GitHub Actions SBOM 工作流
 
 ```yaml
 # .github/workflows/sbom-generation.yml
@@ -1329,7 +1329,7 @@ jobs:
           category: "sbom-vulnerability-scan"
 ```
 
-#<!-- chunk: 7.2 GitLab CI SBOM 配置 -->## 7.2 GitLab CI SBOM 配置
+## 7.2 GitLab CI SBOM 配置
 
 ```yaml
 # .gitlab-ci.yml SBOM 生成配置
@@ -1382,7 +1382,7 @@ scan-sbom:
     when: always
 ```
 
-#<!-- chunk: 7.3 Tekton Pipelines SBOM 任务 -->## 7.3 Tekton Pipelines SBOM 任务
+## 7.3 Tekton Pipelines SBOM 任务
 
 ```yaml
 # tekton-sbom-task.yaml
@@ -1487,7 +1487,7 @@ spec:
 
 <!-- chunk: 8. SBOM 存储与分发 -->## 8. SBOM 存储与分发
 
-#<!-- chunk: 8.1 OCI 注册表存储 -->## 8.1 OCI 注册表存储
+## 8.1 OCI 注册表存储
 
 ```bash
 # 使用 OCI 注册表存储 SBOM
@@ -1525,7 +1525,7 @@ oras pull \
 # 通过 Harbor UI 或 API 关联 SBOM 到镜像
 ```
 
-#<!-- chunk: 8.2 Dependency Track 平台 -->## 8.2 Dependency Track 平台
+## 8.2 Dependency Track 平台
 
 ```bash
 # Dependency Track - 开源 SBOM 管理平台
@@ -1591,7 +1591,7 @@ curl -s "$DT_API_URL/api/v1/vulnerability/project/${PROJECT_UUID}" \
   jq '[.[] | select(.severity == "CRITICAL")] | length'
 ```
 
-#<!-- chunk: 8.3 S3 SBOM 归档策略 -->## 8.3 S3 SBOM 归档策略
+## 8.3 S3 SBOM 归档策略
 
 ```bash
 #!/bin/bash
@@ -1683,7 +1683,7 @@ EOF
 
 <!-- chunk: 9. 依赖图谱分析 -->## 9. 依赖图谱分析
 
-#<!-- chunk: 9.1 依赖图谱可视化 -->## 9.1 依赖图谱可视化
+## 9.1 依赖图谱可视化
 
 ```python
 #!/usr/bin/env python3
@@ -1877,7 +1877,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 10. SBOM 质量评估 -->## 10. SBOM 质量评估
 
-#<!-- chunk: 10.1 SBOM 质量指标 -->## 10.1 SBOM 质量指标
+## 10.1 SBOM 质量指标
 
 ```python
 #!/usr/bin/env python3
@@ -2051,7 +2051,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 11. SBOM 自动化工作流 -->## 11. SBOM 自动化工作流
 
-#<!-- chunk: 11.1 完整自动化流程 -->## 11.1 完整自动化流程
+## 11.1 完整自动化流程
 
 ```bash
 #!/bin/bash
@@ -2193,7 +2193,7 @@ ls -lh "${ARCHIVE_DIR}/"
 
 <!-- chunk: 12. 企业级 SBOM 管理平台 -->## 12. 企业级 SBOM 管理平台
 
-#<!-- chunk: 12.1 平台架构设计 -->## 12.1 平台架构设计
+## 12.1 平台架构设计
 
 ```mermaid
 graph TB
@@ -2238,7 +2238,7 @@ graph TB
     D2 & D3 & D4 --> E1 & E2 & E3 & E4
 ```
 
-#<!-- chunk: 12.2 SBOM API 服务 -->## 12.2 SBOM API 服务
+## 12.2 SBOM API 服务
 
 ```python
 #!/usr/bin/env python3
@@ -2402,8 +2402,8 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-05-security-compliance KUDIG Database — Global MOC
-- [[domain-05-security-compliance/README|[[Domain 39: 供应链安全 (Supply Chain Security)|Domain 39: 供应链安全 (Supply Chain Security)]] Security]])]]
-- [[domain-05-security-compliance/00-open-source-projects-index|Domain-39 供应链安全 — 开源项目索引]]
+- [[domain-05-security-compliance/README.md|[[Domain 39: 供应链安全 (Supply Chain Security)|Domain 39: 供应链安全 (Supply Chain Security)]] Security]])]]
+- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
 - 供应链安全概述 (Supply Chain Security Overview)
 - 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 - SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance)
@@ -2421,4 +2421,4 @@ if __name__ == "__main__":
 - 04-sbom-vulnerability-analysis
 - 05-slsa-levels-implementation
 
-- [[domain-05-security-compliance/README|返回目录]]
+- [[domain-05-security-compliance/README.md|返回目录]]

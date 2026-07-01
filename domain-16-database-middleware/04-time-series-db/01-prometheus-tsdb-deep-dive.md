@@ -76,4 +76,4 @@ TSDB 存储结构:
 ## 相关
 
 - observability/02-metrics/02-monitoring-metrics-system]]
-- [[domain-16-database-middleware/04-time-series-db/02-influxdb-vs-timescaledb]]
+- [[domain-16-database-middleware/04-time-series-db/02-influxdb-vs-timescaledb.md|02 influxdb vs timescaledb]]

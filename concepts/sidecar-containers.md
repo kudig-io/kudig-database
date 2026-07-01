@@ -5,6 +5,7 @@ tags: ['sidecar', 'pod', 'patterns', 'visibility/public']
 sources: ["conceptss/"]
 created: 2026-05-24
 updated: 2026-05-24
+last_updated: 2026-05-24
 status: stub
 ---
 # Sidecar Containers
@@ -20,4 +21,4 @@ Sidecar 模式是一种常见的 Kubernetes 设计模式，将辅助功能容器
 
 ## 相关链接
 
-- [[concepts/kubernetes|Kubernetes]] — 核心概念
+- [[concepts/kubernetes.md|Kubernetes]] — 核心概念

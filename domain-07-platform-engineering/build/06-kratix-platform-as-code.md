@@ -122,7 +122,7 @@ Kratix's core value proposition: **Platform teams define capabilities; Applicati
 
 <!-- chunk: Kratix 核心概念 -->## Kratix 核心概念
 
-#<!-- chunk: 设计哲学 -->## 设计哲学
+## 设计哲学
 
 Kratix 将平台构建问题抽象为两个核心角色：
 
@@ -131,7 +131,7 @@ Kratix 将平台构建问题抽象为两个核心角色：
 | **Platform Team（平台团队）** | 编写和维护 Promise | 能力定义、安全规范、合规策略 |
 | **Application Team（应用团队）** | 提交 Resource Request | 服务消费、业务需求 |
 
-#<!-- chunk: 三大核心原语 (Core Primitives) -->## 三大核心原语 (Core Primitives)
+## 三大核心原语 (Core Primitives)
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -153,7 +153,7 @@ Kratix 将平台构建问题抽象为两个核心角色：
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: 整体架构图 -->## 整体架构图
+## 整体架构图
 
 ```mermaid
 graph TB
@@ -207,7 +207,7 @@ graph TB
     style "Worker Cluster B (工作集群B)" fill:#fff3e0,stroke:#e65100
 ```
 
-#<!-- chunk: 数据流向 -->## 数据流向
+## 数据流向
 
 ```mermaid
 sequenceDiagram
@@ -230,19 +230,19 @@ sequenceDiagram
     Kratix-->>Dev: Status.Conditions Updated
 ```
 
-#<!-- chunk: 组件详解 -->## 组件详解
+## 组件详解
 
-##<!-- chunk: Kratix Operator -->## Kratix Operator
+## Kratix Operator
 - 监听 Promise CRD 和 Resource Request CRD
 - 管理 Pipeline Worker 的生命周期
 - 协调状态存储与工作集群
 
-##<!-- chunk: State Store -->## State Store
+## State Store
 支持两种后端：
 - **Git Repository**: 版本化、可审计
 - **Bucket (S3/GCS)**: 高吞吐量场景
 
-##<!-- chunk: Pipeline Worker -->## Pipeline Worker
+## Pipeline Worker
 - 基于 Kubernetes Job/Pod 执行
 - 容器化，可携带任意工具链
 - 输入/输出通过挂载卷传递
@@ -251,7 +251,7 @@ sequenceDiagram
 
 <!-- chunk: Promise CRD 详解 -->## Promise CRD 详解
 
-#<!-- chunk: Promise 结构 -->## Promise 结构
+## Promise 结构
 
 一个 Promise 是 Kratix 中的核心 CRD，包含三个主要部分：
 
@@ -376,7 +376,7 @@ spec:
                 args: ["-c", "/scripts/cleanup.sh"]
 ```
 
-#<!-- chunk: Promise 字段说明 -->## Promise 字段说明
+## Promise 字段说明
 
 ```mermaid
 mindmap
@@ -406,7 +406,7 @@ mindmap
           Resource Removal
 ```
 
-#<!-- chunk: Promise 版本管理 -->## Promise 版本管理
+## Promise 版本管理
 
 ```yaml
 # Promise 版本标注最佳实践
@@ -431,7 +431,7 @@ spec:
 
 <!-- chunk: Resource Request 工作流 -->## Resource Request 工作流
 
-#<!-- chunk: Resource Request 示例 -->## Resource Request 示例
+## Resource Request 示例
 
 ```yaml
 # 开发者提交的资源请求
@@ -454,7 +454,7 @@ spec:
     schedule: "0 1 * * *"
 ```
 
-#<!-- chunk: Resource Request 生命周期 -->## Resource Request 生命周期
+## Resource Request 生命周期
 
 ```mermaid
 stateDiagram-v2
@@ -483,7 +483,7 @@ stateDiagram-v2
     Failed --> PipelineRunning : Manual retry / spec update
 ```
 
-#<!-- chunk: Status 字段结构 -->## Status 字段结构
+## Status 字段结构
 
 ```yaml
 status:
@@ -511,7 +511,7 @@ status:
 
 <!-- chunk: Pipeline Workers -->## Pipeline Workers
 
-#<!-- chunk: Pipeline 设计原则 -->## Pipeline 设计原则
+## Pipeline 设计原则
 
 Pipeline Worker 是 Kratix 中执行实际工作的核心组件。每个 Pipeline Step 是一个容器，遵循以下约定：
 
@@ -522,7 +522,7 @@ Pipeline Worker 是 Kratix 中执行实际工作的核心组件。每个 Pipelin
 /tmp/                <- 临时工作目录
 ```
 
-#<!-- chunk: Pipeline 容器文件结构 -->## Pipeline 容器文件结构
+## Pipeline 容器文件结构
 
 ```bash
 # Pipeline 容器目录布局
@@ -544,7 +544,7 @@ Pipeline Worker 是 Kratix 中执行实际工作的核心组件。每个 Pipelin
         └── destination-selectors.yaml  # 集群选择
 ```
 
-#<!-- chunk: 构建 Pipeline 容器 -->## 构建 Pipeline 容器
+## 构建 Pipeline 容器
 
 ```dockerfile
 # Dockerfile for PostgreSQL Promise Pipeline
@@ -569,7 +569,7 @@ WORKDIR /kratix
 ENTRYPOINT ["/scripts/generate.sh"]
 ```
 
-#<!-- chunk: generate.sh 实现示例 -->## generate.sh 实现示例
+## generate.sh 实现示例
 
 ```bash
 #!/bin/bash
@@ -744,7 +744,7 @@ echo "Generated manifests in $OUTPUT_DIR:"
 ls -la "$OUTPUT_DIR"
 ```
 
-#<!-- chunk: validate.sh 验证脚本 -->## validate.sh 验证脚本
+## validate.sh 验证脚本
 
 ```bash
 #!/bin/bash
@@ -787,7 +787,7 @@ fi
 echo "Validation passed"
 ```
 
-#<!-- chunk: 多步骤 Pipeline -->## 多步骤 Pipeline
+## 多步骤 Pipeline
 
 ```yaml
 apiVersion: platform.kratix.io/v1alpha1
@@ -849,7 +849,7 @@ spec:
 
 <!-- chunk: 自助式服务交付 -->## 自助式服务交付
 
-#<!-- chunk: 服务目录设计 -->## 服务目录设计
+## 服务目录设计
 
 ```mermaid
 graph LR
@@ -876,7 +876,7 @@ graph LR
     PORTAL -->|Creates Request| OBS
 ```
 
-#<!-- chunk: Backstage 集成 -->## Backstage 集成
+## Backstage 集成
 
 ```typescript
 // Backstage Software Template for Kratix Promise
@@ -948,7 +948,7 @@ spec:
           - **Size**: ${{ parameters.size }}
 ```
 
-#<!-- chunk: 自助式工作流对比 -->## 自助式工作流对比
+## 自助式工作流对比
 
 ```mermaid
 graph TB
@@ -973,7 +973,7 @@ graph TB
 
 <!-- chunk: 多集群分发 -->## 多集群分发
 
-#<!-- chunk: Destination（目标集群）注册 -->## Destination（目标集群）注册
+## Destination（目标集群）注册
 
 ```yaml
 # 注册工作集群
@@ -1012,7 +1012,7 @@ spec:
     namespace: kratix-platform-system
 ```
 
-#<!-- chunk: 集群标签策略 -->## 集群标签策略
+## 集群标签策略
 
 ```mermaid
 graph TD
@@ -1036,7 +1036,7 @@ graph TD
     T --> S3
 ```
 
-#<!-- chunk: Pipeline 中动态选择集群 -->## Pipeline 中动态选择集群
+## Pipeline 中动态选择集群
 
 ```bash
 #!/bin/bash
@@ -1079,7 +1079,7 @@ fi
 echo "Destination selectors written for env=$ENV"
 ```
 
-#<!-- chunk: 多集群生产拓扑 -->## 多集群生产拓扑
+## 多集群生产拓扑
 
 ```mermaid
 graph TB
@@ -1131,7 +1131,7 @@ graph TB
 
 <!-- chunk: GitOps 集成 -->## GitOps 集成
 
-#<!-- chunk: Flux CD 集成配置 -->## Flux CD 集成配置
+## Flux CD 集成配置
 
 ```yaml
 # Worker 集群上的 Flux 配置
@@ -1173,7 +1173,7 @@ spec:
       namespace: postgres-operator-system
 ```
 
-#<!-- chunk: ArgoCD 集成配置 -->## ArgoCD 集成配置
+## ArgoCD 集成配置
 
 ```yaml
 # ArgoCD Application for Kratix
@@ -1211,7 +1211,7 @@ spec:
 
 <!-- chunk: Promise 编写最佳实践 -->## Promise 编写最佳实践
 
-#<!-- chunk: Promise 设计原则 -->## Promise 设计原则
+## Promise 设计原则
 
 ```mermaid
 mindmap
@@ -1234,7 +1234,7 @@ mindmap
       可重用模板
 ```
 
-#<!-- chunk: Promise 分层设计 -->## Promise 分层设计
+## Promise 分层设计
 
 ```yaml
 # 基础 Promise：提供通用数据库能力
@@ -1281,7 +1281,7 @@ spec:
           default: true
 ```
 
-#<!-- chunk: 错误处理模式 -->## 错误处理模式
+## 错误处理模式
 
 ```bash
 #!/bin/bash
@@ -1333,7 +1333,7 @@ main() {
 main "$@"
 ```
 
-#<!-- chunk: Promise 测试策略 -->## Promise 测试策略
+## Promise 测试策略
 
 ```yaml
 # 使用 kratix test 框架
@@ -1369,7 +1369,7 @@ spec:
 
 <!-- chunk: 生产级示例 -->## 生产级示例
 
-#<!-- chunk: 完整的微服务平台 Promise -->## 完整的微服务平台 Promise
+## 完整的微服务平台 Promise
 
 ```yaml
 apiVersion: platform.kratix.io/v1alpha1
@@ -1532,7 +1532,7 @@ spec:
                 command: ["/scripts/cleanup.sh"]
 ```
 
-#<!-- chunk: 企业级 Promise 目录 -->## 企业级 Promise 目录
+## 企业级 Promise 目录
 
 ```mermaid
 graph TD
@@ -1572,7 +1572,7 @@ graph TD
 
 <!-- chunk: 可观测性与治理 -->## 可观测性与治理
 
-#<!-- chunk: Promise 指标收集 -->## Promise 指标收集
+## Promise 指标收集
 
 ```yaml
 # Prometheus ServiceMonitor for Kratix
@@ -1591,7 +1591,7 @@ spec:
       path: /metrics
 ```
 
-#<!-- chunk: 关键指标 -->## 关键指标
+## 关键指标
 
 | 指标 | 描述 | 告警阈值 |
 |------|------|----------|
@@ -1602,7 +1602,7 @@ spec:
 | `kratix_resource_ready_duration_seconds` | 资源就绪时长 | P95 > 600s |
 | `kratix_destinations_total` | 注册集群数 | N/A |
 
-#<!-- chunk: Grafana Dashboard 配置 -->## Grafana Dashboard 配置
+## Grafana Dashboard 配置
 
 ```json
 {
@@ -1644,7 +1644,7 @@ spec:
 }
 ```
 
-#<!-- chunk: 审计与合规 -->## 审计与合规
+## 审计与合规
 
 ```yaml
 # OPA Policy for Promise Governance
@@ -1680,7 +1680,7 @@ deny[msg] {
 
 <!-- chunk: Kratix vs 其他工具 -->## Kratix vs 其他工具
 
-#<!-- chunk: 对比分析 -->## 对比分析
+## 对比分析
 
 | 特性 | Kratix | Crossplane | Helm | Terraform |
 |------|--------|------------|------|-----------|
@@ -1692,7 +1692,7 @@ deny[msg] {
 | **学习曲线** | 中等 | 高 | 低 | 中等 |
 | **适用场景** | 平台即代码 | 云资源抽象 | 应用部署 | 基础设施管理 |
 
-#<!-- chunk: 决策框架 -->## 决策框架
+## 决策框架
 
 ```mermaid
 flowchart TD
@@ -1710,7 +1710,7 @@ flowchart TD
     Q3 -->|标准云资源抽象| A3[✅ 使用 Crossplane]
 ```
 
-#<!-- chunk: Kratix + Crossplane 组合模式 -->## Kratix + Crossplane 组合模式
+## Kratix + Crossplane 组合模式
 
 ```mermaid
 graph LR
@@ -1744,7 +1744,7 @@ graph LR
 
 Kratix 通过 **Promise 即服务目录、Pipeline 即自动化引擎、GitOps 即交付机制** 的三位一体架构，为平台工程实践提供了完整的技术基础：
 
-#<!-- chunk: 核心价值主张 -->## 核心价值主张
+## 核心价值主张
 
 1. **开发者自主权**: 自助式服务消费，无需等待 Ticket
 2. **平台团队效率**: 一次定义，多次复用，标准化交付
@@ -1752,7 +1752,7 @@ Kratix 通过 **Promise 即服务目录、Pipeline 即自动化引擎、GitOps �
 4. **多集群协调**: 跨环境一致性，GitOps 驱动
 5. **可扩展性**: 任意工具链，任意编程语言
 
-#<!-- chunk: 实施路径 -->## 实施路径
+## 实施路径
 
 ```mermaid
 gantt
@@ -1787,7 +1787,7 @@ gantt
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Domain 36: 平台工程 (Platform Engineering)]]
+- [[domain-07-platform-engineering/README.md|Domain 07: 平台工程 (Platform Engineering)]]
 - Domain-36 平台工程 — 开源项目索引
 - 平台工程概述与成熟度模型
 - 内部开发者平台设计原则

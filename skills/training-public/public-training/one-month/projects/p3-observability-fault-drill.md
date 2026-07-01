@@ -170,6 +170,9 @@ kubectl get servicemonitors -n monitoring
 
 ### Step 2: 配置告警规则 (30min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 cat > core-alerts.yaml << 'EOF'
 apiVersion: monitoring.coreos.com/v1
@@ -302,6 +305,9 @@ kubectl port-forward -n monitoring svc/prometheus-operated 9090:9090
 
 ### Step 4: 创建故障演练环境 (15min)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 创建测试 namespace
 kubectl create namespace fault-drill
@@ -329,6 +335,9 @@ kubectl get all -n fault-drill
 ### Step 5: 故障注入与排查 (45min)
 
 #### 问题 1: OOMKilled
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 注入问题：创建一个内存使用超过 limits 的 Pod
@@ -409,6 +418,9 @@ kubectl describe pod crash-app -n fault-drill | grep -A 10 "Last State"
 ```
 
 #### 问题 3: Service 不可访问
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 注入问题：删除 Endpoints（模拟 selector 不匹配）
@@ -574,8 +586,12 @@ Loki 使用 LogQL 查询语言。基本语法：`{label="value"}`（日志流选
 
 ## 清理资源
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
-kubectl delete namespace fault-drill
+kubectl delete namespace fault-drill  # ⚠️ 不可逆：永久删除命名空间及全部资源
 kubectl delete prometheusrule core-alerts -n monitoring
 ```
 
@@ -587,3 +603,5 @@ kubectl delete prometheusrule core-alerts -n monitoring
 - [FTA 故障树分析](../../../domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md)
 - [FEBM 取证循证方法](../../../domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md)
 - [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
+
+```

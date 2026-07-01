@@ -78,7 +78,7 @@ Dapr 的核心价值在于"可移植的分布式系统能力抽象"——相同�
 
 本文档从企业级生产环境角度，全面覆盖 Dapr 的架构设计、核心构建块配置、弹性模式、可观测性、安全策略、性能调优和故障排查。每个章节包含完整的 YAML 配置和可直接运行的代码示例。
 
-#<!-- chunk: Dapr 企业架构全景 -->## Dapr 企业架构全景
+## Dapr 企业架构全景
 
 ```mermaid
 graph TB
@@ -151,7 +151,10 @@ graph TB
 
 <!-- chunk: 核心配置 — 控制平面高可用部署 -->## 核心配置 — 控制平面高可用部署
 
-#<!-- chunk: 生产级 [[Helm|Helm]] 安装 -->## 生产级 Helm 安装
+## 生产级 Helm 安装
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 # 添加 Dapr Helm 仓库
@@ -177,7 +180,7 @@ helm install dapr dapr/dapr \
   --wait
 ```
 
-#<!-- chunk: Dapr CLI 安装 -->## Dapr CLI 安装
+## Dapr CLI 安装
 
 ```bash
 # 安装 Dapr CLI
@@ -202,7 +205,7 @@ dapr status -k
 # dapr-sidecar-injector  dapr-system  True     Running  2
 ```
 
-#<!-- chunk: 生产环境配置 -->## 生产环境配置
+## 生产环境配置
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -284,7 +287,7 @@ spec:
 
 <!-- chunk: 核心构建块配置 -->## 核心构建块配置
 
-#<!-- chunk: 状态管理 — 多后端配置 -->## 状态管理 — 多后端配置
+## 状态管理 — 多后端配置
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -364,7 +367,7 @@ spec:
       value: "state_collection"
 ```
 
-#<!-- chunk: 发布订阅 — Kafka 配置 -->## 发布订阅 — Kafka 配置
+## 发布订阅 — Kafka 配置
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -432,7 +435,7 @@ spec:
     - notification-service
 ```
 
-#<!-- chunk: 绑定 — 输入/输出触发器 -->## 绑定 — 输入/输出触发器
+## 绑定 — 输入/输出触发器
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -488,7 +491,7 @@ spec:
 
 <!-- chunk: 流量管理实战 — 服务调用与弹性 -->## 流量管理实战 — 服务调用与弹性
 
-#<!-- chunk: 弹性配置 -->## 弹性配置
+## 弹性配置
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -568,7 +571,7 @@ spec:
           circuitBreaker: dataCB
 ```
 
-#<!-- chunk: 服务调用代码示例 -->## 服务调用代码示例
+## 服务调用代码示例
 
 ```go
 package main
@@ -654,7 +657,7 @@ func main() {
 }
 ```
 
-#<!-- chunk: 状态管理代码示例 -->## 状态管理代码示例
+## 状态管理代码示例
 
 ```go
 func saveOrderState(ctx context.Context, c client.Client, order Order) error {
@@ -698,7 +701,7 @@ func transactionalSave(ctx context.Context, c client.Client, orders []Order) err
 
 <!-- chunk: 安全策略 — mTLS 与访问控制 -->## 安全策略 — mTLS 与访问控制
 
-#<!-- chunk: mTLS 配置 -->## mTLS 配置
+## mTLS 配置
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -753,7 +756,7 @@ spec:
             principals: ["*"]
 ```
 
-#<!-- chunk: 密钥管理 -->## 密钥管理
+## 密钥管理
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -817,7 +820,7 @@ spec:
 
 <!-- chunk: 可观测性 — OpenTelemetry, Prometheus, [[Jaeger|Jaeger]] 集成 -->## 可观测性 — OpenTelemetry, Prometheus, Jaeger 集成
 
-#<!-- chunk: 分布式追踪 -->## 分布式追踪
+## 分布式追踪
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -836,7 +839,7 @@ spec:
       enabled: true
 ```
 
-#<!-- chunk: OpenTelemetry Collector 配置 -->## OpenTelemetry Collector 配置
+## OpenTelemetry Collector 配置
 
 ```yaml
 apiVersion: v1
@@ -888,7 +891,7 @@ data:
           exporters: [elasticsearch]
 ```
 
-#<!-- chunk: 自定义指标与 ServiceMonitor -->## 自定义指标与 ServiceMonitor
+## 自定义指标与 ServiceMonitor
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -941,7 +944,7 @@ spec:
       interval: 15s
 ```
 
-#<!-- chunk: 关键 PromQL 查询 -->## 关键 PromQL 查询
+## 关键 PromQL 查询
 
 ```promql
 # Dapr Sidecar 运行时操作延迟
@@ -965,7 +968,7 @@ histogram_quantile(0.99, rate(dapr_runtime_service_invocation_latency_bucket[5m]
 dapr_runtime_component_init_total{status="error"}
 ```
 
-#<!-- chunk: Prometheus 告警规则 -->## Prometheus 告警规则
+## Prometheus 告警规则
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -1017,7 +1020,7 @@ spec:
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: Sidecar 资源优化 -->## Sidecar 资源优化
+## Sidecar 资源优化
 
 ```yaml
 apiVersion: apps/v1
@@ -1066,7 +1069,7 @@ spec:
               memory: "1Gi"
 ```
 
-#<!-- chunk: Dapr 控制平面调优 -->## Dapr 控制平面调优
+## Dapr 控制平面调优
 
 ```yaml
 apiVersion: apps/v1
@@ -1122,7 +1125,10 @@ spec:
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 完整诊断脚本 -->## 完整诊断脚本
+## 完整诊断脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -1193,7 +1199,7 @@ kubectl exec -n production deploy/order-service -c daprd -- \
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 部署最佳实践 -->## 部署最佳实践
+## 部署最佳实践
 
 ```yaml
 部署最佳实践清单:
@@ -1207,7 +1213,7 @@ kubectl exec -n production deploy/order-service -c daprd -- \
   8. 版本管理: 使用 Helm 管理控制平面, GitOps 管理组件配置
 ```
 
-#<!-- chunk: 安全最佳实践 -->## 安全最佳实践
+## 安全最佳实践
 
 ```yaml
 安全最佳实践清单:
@@ -1221,7 +1227,7 @@ kubectl exec -n production deploy/order-service -c daprd -- \
   8. 最小权限: ServiceAccount 仅授予必要的 RBAC 权限
 ```
 
-#<!-- chunk: 性能最佳实践 -->## 性能最佳实践
+## 性能最佳实践
 
 ```yaml
 性能最佳实践清单:
@@ -1235,7 +1241,7 @@ kubectl exec -n production deploy/order-service -c daprd -- \
   8. 组件选择: 根据场景选择最佳后端 (状态:Redis, PubSub:Kafka)
 ```
 
-#<!-- chunk: 运维最佳实践 -->## 运维最佳实践
+## 运维最佳实践
 
 ```yaml
 运维最佳实践清单:
@@ -1260,7 +1266,7 @@ kubectl exec -n production deploy/order-service -c daprd -- \
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
 - Domain-26 服务网格与微服务 — 开源项目索引
 - Istio 企业级服务网格架构与实践
 - Linkerd 企业级服务网格深度实践
@@ -1281,4 +1287,4 @@ kubectl exec -n production deploy/order-service -c daprd -- \
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]

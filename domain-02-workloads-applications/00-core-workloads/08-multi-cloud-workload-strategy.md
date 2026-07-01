@@ -64,7 +64,7 @@ created: "2026-05-23"
 
 # 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload Strategy)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes|Kubernetes]] Federation](https://github.com/kubernetes-sigs/kubefed)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|Kubernetes]] Federation](https://github.com/kubernetes-sigs/kubefed)
 
 <!-- chunk: 多云架构设计原则 -->
 ## 多云架构设计原则
@@ -629,7 +629,7 @@ spec:
     spec:
       containers:
       - name: thanos-query
-        image: quay.io/thanos/thanos:v0.32.0
+        image: quay.io/thanos/thanos:v0.37.0
         args:
         - query
         - --grpc-address=0.0.0.0:10901
@@ -763,7 +763,7 @@ echo "   - 网络策略清晰"
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications KUDIG Database — Global MOC
-- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
 - Domain-4 工作负载 — 开源项目索引
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)

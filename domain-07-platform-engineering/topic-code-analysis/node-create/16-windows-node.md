@@ -188,6 +188,9 @@ C:\k\kubeadm.exe join <control-plane-ip>:6443 `
 
 ### 为 Windows 节点添加 Taint
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+
 ```bash
 # 在 Linux 控制面执行
 kubectl taint nodes windows-worker-1 \
@@ -354,8 +357,8 @@ System Info:
 
 ## Related
 
-- [[entities/kubernetes|kubernetes]]
-- [[entities/cni|cni]]
-- [[entities/cri-o|CRI-O]]
-- [[entities/containerd|containerd]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux|linux]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/cni.md|cni]]
+- [[entities/cri-o.md|CRI-O]]
+- [[entities/containerd.md|containerd]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]

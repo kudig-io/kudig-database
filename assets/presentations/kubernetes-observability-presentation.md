@@ -431,6 +431,9 @@ graph TB
 
 ### 演示 1：部署 Prometheus + Grafana 监控栈
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 步骤 1: 添加 Helm 仓库
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -535,6 +538,9 @@ rate(kube_pod_container_status_restarts_total[15m]) > 0
 
 ### 演示 3：ServiceMonitor 自动发现
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 步骤 1: 部署一个带 metrics 端点的应用
 cat <<EOF | kubectl apply -f -
@@ -617,6 +623,9 @@ kubectl port-forward svc/monitoring-kube-prometheus-prometheus 9090:9090 -n moni
 ```
 
 ### 演示 4：告警规则配置
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 cat <<EOF | kubectl apply -f -
@@ -713,6 +722,9 @@ kubectl get prometheusrule -n monitoring
 
 ### 演示 5：日志查询 (Loki)
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 步骤 1: 部署 Loki + Promtail
 helm repo add grafana https://grafana.github.io/helm-charts
@@ -759,6 +771,9 @@ sum(count_over_time({app=~".+"} |= "error" [5m])) by (app)
 ### 实验 1：为应用添加自定义指标
 
 **目标**：理解白盒监控的实现方式
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 部署一个暴露自定义指标的应用
@@ -995,4 +1010,4 @@ Observability
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]

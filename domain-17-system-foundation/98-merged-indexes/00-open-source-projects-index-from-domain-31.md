@@ -84,7 +84,7 @@ created: "2026-05-23"
 ## Obsidian 相关文档
 
 - domain-31-hardware MOC
-- [[domain-17-system-foundation/README|Domain 31 - 硬件基础设施]]
+- [[domain-17-system-foundation/README.md|Domain 31 - 硬件基础设施]]
 - 云平台硬件基础架构
 - 服务器架构原理
 - CPU技术深度解析

@@ -54,7 +54,7 @@ authors:
 created: "2026-05-23"
 ---
 
-# [[Kubernetes|Kubernetes]] 网络策略与安全微隔离实践 ([[Network Policies|Network Policies]] and Security Micro-Segmentation Practice)
+# [[Kubernetes|Kubernetes]] 网络策略与安全微隔离实践 ([[domain-17-system-foundation/topic-dictionary/networking/network-policies.md|Network Policies]] and Security Micro-Segmentation Practice)
 
 > **作者**: 网络安全架构专家 | **版本**: v2.0 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级网络安全防护 | **复杂度**: ⭐⭐⭐⭐⭐
@@ -65,7 +65,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 网络策略基础概念 -->## 1. 网络策略基础概念
 
-#<!-- chunk: 1.1 网络策略核心原理 -->## 1.1 网络策略核心原理
+## 1.1 网络策略核心原理
 
 ```yaml
 网络策略工作原理:
@@ -84,7 +84,7 @@ created: "2026-05-23"
      - 逐层叠加 (Layered Application)
 ```
 
-#<!-- chunk: 1.2 网络策略生命周期 -->## 1.2 网络策略生命周期
+## 1.2 网络策略生命周期
 
 ```mermaid
 graph TD
@@ -102,7 +102,7 @@ graph TD
 
 <!-- chunk: 2. 高级网络策略配置 -->## 2. 高级网络策略配置
 
-#<!-- chunk: 2.1 默认拒绝策略 -->## 2.1 默认拒绝策略
+## 2.1 默认拒绝策略
 
 ```yaml
 # 默认拒绝所有流量策略
@@ -158,7 +158,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: 2.2 微服务间通信策略 -->## 2.2 微服务间通信策略
+## 2.2 微服务间通信策略
 
 ```yaml
 # 电商应用微服务网络策略
@@ -244,7 +244,7 @@ spec:
 
 <!-- chunk: 3. CNI网络插件深度集成 -->## 3. CNI网络插件深度集成
 
-#<!-- chunk: 3.1 Calico高级配置 -->## 3.1 Calico高级配置
+## 3.1 Calico高级配置
 
 ```yaml
 # Calico网络策略高级配置
@@ -317,7 +317,7 @@ spec:
       - 443
 ```
 
-#<!-- chunk: 3.2 [[Cilium|Cilium]] eBPF策略 -->## 3.2 Cilium eBPF策略
+## 3.2 Cilium eBPF策略
 
 ```yaml
 # Cilium eBPF网络策略
@@ -400,7 +400,7 @@ spec:
 
 <!-- chunk: 4. 安全微隔离架构 -->## 4. 安全微隔离架构
 
-#<!-- chunk: 4.1 零信任网络架构 -->## 4.1 零信任网络架构
+## 4.1 零信任网络架构
 
 ```yaml
 # 零信任网络策略框架
@@ -485,7 +485,7 @@ spec:
       port: 8080
 ```
 
-#<!-- chunk: 4.2 安全域隔离 -->## 4.2 安全域隔离
+## 4.2 安全域隔离
 
 ```yaml
 # 安全域隔离策略
@@ -574,7 +574,7 @@ spec:
 
 <!-- chunk: 5. 网络策略验证与测试 -->## 5. 网络策略验证与测试
 
-#<!-- chunk: 5.1 策略验证工具 -->## 5.1 策略验证工具
+## 5.1 策略验证工具
 
 ```python
 #!/usr/bin/env python3
@@ -749,7 +749,12 @@ if __name__ == "__main__":
         print(f"API调用失败: {e}")
 ```
 
-#<!-- chunk: 5.2 网络连通性测试 -->## 5.2 网络连通性测试
+## 5.2 网络连通性测试
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -809,7 +814,7 @@ echo "=== 网络连通性测试完成 ==="
 
 <!-- chunk: 6. 监控与审计 -->## 6. 监控与审计
 
-#<!-- chunk: 6.1 网络策略监控 -->## 6.1 网络策略监控
+## 6.1 网络策略监控
 
 ```yaml
 # 网络策略监控配置
@@ -858,7 +863,7 @@ data:
         type: counter
 ```
 
-#<!-- chunk: 6.2 网络审计策略 -->## 6.2 网络审计策略
+## 6.2 网络审计策略
 
 ```yaml
 # 网络审计配置
@@ -888,7 +893,7 @@ rules:
 
 <!-- chunk: 7. 高级安全策略 -->## 7. 高级安全策略
 
-#<!-- chunk: 7.1 威胁检测策略 -->## 7.1 威胁检测策略
+## 7.1 威胁检测策略
 
 ```yaml
 # 威胁检测网络策略
@@ -941,7 +946,7 @@ spec:
             regex: "curl|wget|python-urllib|Go-http-client"
 ```
 
-#<!-- chunk: 7.2 异常行为检测 -->## 7.2 异常行为检测
+## 7.2 异常行为检测
 
 ```yaml
 # 异常行为检测策略
@@ -998,33 +1003,33 @@ spec:
 
 <!-- chunk: 8. 最佳实践与实施指南 -->## 8. 最佳实践与实施指南
 
-#<!-- chunk: 8.1 网络策略设计原则 -->## 8.1 网络策略设计原则
+## 8.1 网络策略设计原则
 
 ```markdown
 <!-- chunk: 🛡️ 网络策略设计原则 -->## 🛡️ 网络策略设计原则
 
-#<!-- chunk: 1. 最小权限原则 -->## 1. 最小权限原则
+## 1. 最小权限原则
 - 只允许必需的网络连接
 - 从拒绝所有开始，逐步开放
 - 定期审查和清理策略
 
-#<!-- chunk: 2. 分层安全架构 -->## 2. 分层安全架构
+## 2. 分层安全架构
 - 实现网络分段隔离
 - 建立安全域边界
 - 实施深度防御策略
 
-#<!-- chunk: 3. 可观测性优先 -->## 3. 可观测性优先
+## 3. 可观测性优先
 - 启用详细的网络日志
 - 实施实时监控告警
 - 建立审计追踪机制
 
-#<!-- chunk: 4. 自动化管理 -->## 4. 自动化管理
+## 4. 自动化管理
 - 使用IaC管理网络策略
 - 实施策略验证流水线
 - 建立自动修复机制
 ```
 
-#<!-- chunk: 8.2 实施检查清单 -->## 8.2 实施检查清单
+## 8.2 实施检查清单
 
 ```yaml
 网络策略实施检查清单:
@@ -1055,7 +1060,7 @@ spec:
 
 <!-- chunk: 9. AdminNetworkPolicy与eBPF策略执行 — 2026更新 -->## 9. AdminNetworkPolicy与eBPF策略执行 — 2026更新
 
-#<!-- chunk: 9.1 AdminNetworkPolicy (集群级网络策略) -->## 9.1 AdminNetworkPolicy (集群级网络策略)
+## 9.1 AdminNetworkPolicy (集群级网络策略)
 
 AdminNetworkPolicy (ANP) 和 BaselineAdminNetworkPolicy (BANP) 是Kubernetes原生的集群级网络策略API，在K8s 1.32+进入Beta。它们补充了命名空间级NetworkPolicy，为平台管理员提供全局策略控制能力。
 
@@ -1162,7 +1167,7 @@ spec:
               - kubernetes.io/metadata.name
 ```
 
-#<!-- chunk: 9.2 Cilium替代传统CNI的网络策略增强 -->## 9.2 Cilium替代传统CNI的网络策略增强
+## 9.2 Cilium替代传统CNI的网络策略增强
 
 ```yaml
 # Cilium网络策略与ANP的协同工作
@@ -1184,7 +1189,7 @@ Cilium与AdminNetworkPolicy集成:
     - 详细迁移指南见 "[18-eBPF与Cilium深度实践](./18-kubernetes-ebpf-cilium-deep-practice.md)"
 ```
 
-#<!-- chunk: 9.3 eBPF网络策略执行引擎 -->## 9.3 eBPF网络策略执行引擎
+## 9.3 eBPF网络策略执行引擎
 
 ```yaml
 eBPF vs iptables策略执行对比:
@@ -1211,7 +1216,7 @@ eBPF vs iptables策略执行对比:
 
 <!-- chunk: 10. 未来发展趋势 -->## 10. 未来发展趋势
 
-#<!-- chunk: 10.1 智能化网络策略 -->## 10.1 智能化网络策略
+## 10.1 智能化网络策略
 
 ```yaml
 智能化网络策略趋势(2026-2027):
@@ -1244,7 +1249,7 @@ eBPF vs iptables策略执行对比:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers KUDIG Database — Global MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - index.md|Domain-19 论文与参考 — 开源项目索引]]
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...

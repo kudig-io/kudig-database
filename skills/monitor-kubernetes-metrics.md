@@ -83,9 +83,9 @@ Apply the four golden signals to application monitoring:
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/observability-pillars|observability-pillars]] — Observability Pillars
-- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
-- [[concepts/observability-pillars|Observability Pillars]]
-- [[concepts/kubernetes-architecture-overview|Kubernetes Architecture Overview]]
-- [[skills/troubleshoot-pod-issues|Troubleshoot Pod Issues]]
-- [[skills/backup-restore-etcd|Backup and Restore etcd]]
+- [[concepts/observability-pillars.md|observability-pillars]] — Observability Pillars
+- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/observability-pillars.md|Observability Pillars]]
+- [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
+- [[skills/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
+- [[skills/backup-restore-etcd.md|Backup and Restore etcd]]

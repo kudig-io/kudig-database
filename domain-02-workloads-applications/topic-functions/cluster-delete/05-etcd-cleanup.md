@@ -266,6 +266,9 @@ func RemoveStackedEtcdMemberFromCluster(
 
 ### 3.1 执行流程图
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+
 ```
 ┌────────────────────────────────────────────────────────────────┐
 │  RemoveStackedEtcdMemberFromCluster                             │
@@ -293,7 +296,7 @@ func RemoveStackedEtcdMemberFromCluster(
 │         否                                                       │
 │         ▼                                                        │
 │  RemoveMember(id)                                                │
-│    → etcdctl member remove <id>                                  │
+│    → etcdctl member remove <id>                                  │  # ⚠️ 移除 etcd 成员，可能丢数据
 │                                                                  │
 └────────────────────────────────────────────────────────────────┘
 ```
@@ -359,6 +362,7 @@ if !empty && !r.DryRun() {
         fmt.Printf("[reset] Deleted contents of the etcd data directory: %v\n", etcdDataDir)
     }
 }
+
 ```
 
 **场景**: 如果 `cleanup-node` 在 `remove-etcd-member` 之前被单独执行（通过 `kubeadm reset phase cleanup-node`），etcd.yaml 已被删除，但数据目录可能仍有残留文件。
@@ -372,6 +376,7 @@ if !empty && !r.DryRun() {
     fmt.Println("[reset] No etcd config found. Assuming external etcd")
     fmt.Println("[reset] Please, manually reset etcd to prevent further issues")
 }
+
 ```
 
 使用外部 etcd 时：
@@ -412,11 +417,16 @@ etcd 使用 Raft 协议，写操作需要 **多数派（quorum）** 确认：
 │  ⚠️ 关键: 每次删除一个，确认集群健康后再删下一个            │
 │  ⚠️ 不要同时 reset 多个控制面节点                           │
 └───────────────────────────────────────────────────────────┘
+
 ```
 
 ### 6.3 手动 etcd 成员移除
 
 当 `kubeadm reset` 的自动移除失败时：
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
 ```bash
 # 查看成员列表
@@ -434,7 +444,7 @@ etcdctl member remove <member-id> \
   --endpoints=https://127.0.0.1:2379
 
 # 清理数据目录
-rm -rf /var/lib/etcd
+rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
 ```
 
 ---
@@ -448,8 +458,10 @@ rm -rf /var/lib/etcd
 ## Related
 
 - [[README|README]]
-- [[man/INSTALL|INSTALL]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git|git]]
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
+- [[scripts/man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
+- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+
+```

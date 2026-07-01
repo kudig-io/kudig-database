@@ -91,9 +91,15 @@ kubectl describe apiservice <name>
 
 ## 交叉引用
 
-- 扩展 Kubernetes API](./extending-[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|the-kubernetes-api]].md) — API 扩展总览
+- 扩展 Kubernetes API](./extending-[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|the-kubernetes-api]].md) — API 扩展总览
 - Custom Resources](./custom-resources.md) — CRD 作为更简单的替代方案
 
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-group.md|API 组]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]

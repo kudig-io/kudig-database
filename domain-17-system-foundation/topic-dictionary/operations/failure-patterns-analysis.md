@@ -35,6 +35,7 @@ prerequisites:
 - redis-basics
 - tracing-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 02 - [[Kubernetes|Kubernetes]] 故障模式与根因分析字典
@@ -110,7 +111,7 @@ created: "2026-05-23"
 ```
 
 **问题影响传播**:
-- **上游问题影响下游**: [[etcd|etcd]] 问题 → API Server 无法读写 → 调度器无法工作 → 新 Pod 无法创建
+- **上游问题影响下游**: [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]] 问题 → API Server 无法读写 → 调度器无法工作 → 新 Pod 无法创建
 - **下游故障隔离**: 单个 Pod 崩溃 → 不影响其他 Pod（如果有多副本和 Service 负载均衡）
 
 ### 渐进式示例
@@ -242,6 +243,10 @@ kubectl logs <pod-name> -n <ns> --previous  # 查看上次崩溃日志
 ### 渐进式示例
 
 **Level 1 - 基础用法（简化版 5Why）**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```
 现象: 网站访问返回 502 错误
 
@@ -1166,6 +1171,7 @@ spec:
 - 14:35: 确认etcd集群出现脑裂
 
 **诊断过程**:
+
 ```bash
 # 检查etcd集群状态
 kubectl exec -n kube-system etcd-master1 -- etcdctl endpoint health
@@ -1253,6 +1259,7 @@ ResourceQuota配置过于保守，在流量激增时限制了必要的资源扩�
 - 16:25: 确认是网络策略配置问题
 
 **诊断过程**:
+
 ```bash
 # 测试服务连通性
 kubectl exec -it user-service-pod -- curl -v http://payment-service:8080/health
@@ -1593,6 +1600,9 @@ echo "✅ 混沌工程实验完成"
 
 ## 命令快速参考
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看最近的异常事件
 kubectl get events -A --sort-by=.metadata.creationTimestamp --field-selector=type=Warning | tail -20
@@ -1618,6 +1628,12 @@ kubectl exec -it <pod> -- ping <target-svc>.<ns>.svc.cluster.local
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级
 
+## 参考链接
+
+- [Failure Patterns Analysis]()
+
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+```

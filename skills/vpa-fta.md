@@ -170,12 +170,12 @@ flowchart TD
 
 ## 相关链接
 
-- [[FTA Methodology and Core Principles|FTA 方法论]]
-- [[FTA Diagnostic Execution Engine|FTA 诊断执行引擎]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 
 ## See Also
 
-- [[skills/ts-storage|ts-storage]]
-- [[skills/ts-workloads|ts-workloads]]
-- [[skills/webhook-admission-fta|webhook-admission-fta]]
-- [[skills/Agent Orchestration Patterns|Agent Orchestration Patterns]]
+- [[skills/ts-storage.md|ts-storage]]
+- [[skills/ts-workloads.md|ts-workloads]]
+- [[skills/webhook-admission-fta.md|webhook-admission-fta]]
+- [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]

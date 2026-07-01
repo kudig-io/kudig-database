@@ -57,7 +57,7 @@ This generates:
 
 ### Step 3: Implement Reconciliation
 
-The Reconcile() function follows the [[concepts/controller-pattern|[[Controller Pattern (Reconciliation Loop)|Controller Pattern]]]]:
+The Reconcile() function follows the [[concepts/controller-pattern.md|[[Controller Pattern (Reconciliation Loop)|Controller Pattern]]]]:
 
 1. Fetch the CR instance
 2. Determine desired state from spec
@@ -85,7 +85,7 @@ if !deletionTimestamp.IsZero() {
 
 Use `envtest` (provided by controller-runtime) for integration testing:
 - Spins up a real API Server and etcd
-- Tests reconciler against real [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]]
+- Tests reconciler against real [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]]
 - Fast, no full cluster needed
 
 ### Step 6: Package and Deploy
@@ -112,12 +112,12 @@ Build container image, generate RBAC manifests from kubebuilder markers, and dep
 
 ## Related
 
-- [[entities/crd-custom-resources|crd-custom-resources]] — CRD (Custom Resource Definition)
+- [[entities/crd-custom-resources.md|crd-custom-resources]] — CRD (Custom Resource Definition)
 - [[helm]] — Helm
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/controller-pattern|controller-pattern]] — Controller Pattern (Reconciliation Loop)
+- [[concepts/controller-pattern.md|controller-pattern]] — Controller Pattern (Reconciliation Loop)
 - [[operator-pattern|Operator Pattern]]
-- [[concepts/controller-pattern|Controller Pattern]]
-- [[entities/crd-custom-resources|CRD Custom Resources]]
-- [[entities/kube-apiserver|kube-apiserver]]
+- [[concepts/controller-pattern.md|Controller Pattern]]
+- [[entities/crd-custom-resources.md|CRD Custom Resources]]
+- [[entities/kube-apiserver.md|kube-apiserver]]

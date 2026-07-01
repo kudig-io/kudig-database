@@ -73,7 +73,7 @@ created: "2026-05-23"
 
 # 28 - 调度器配置与优化
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes|kubernetes]].io/docs/concepts/scheduling-eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/scheduling-eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/)
 
 <!-- chunk: 调度流程 -->
 ## 调度流程
@@ -376,6 +376,9 @@ spec:
     image: app:v1
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 移除调度门控(允许调度)
 kubectl patch pod gated-pod --type=json \
@@ -504,6 +507,9 @@ spec:
 <!-- chunk: 调度故障排查 -->
 ## 调度故障排查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 查看Pod调度状态
 kubectl describe pod <pod-name> | grep -A 10 Events
@@ -549,7 +555,7 @@ kubectl get configmap -n kube-system kube-scheduler -o yaml
 ## Obsidian 相关文档
 
 - domain-02-workloads-applications KUDIG Database — Global MOC
-- [[domain-02-workloads-applications/README|Domain-4: Kubernetes工作负载管理]]
+- [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
 - index.md|Domain-4 工作负载 — 开源项目索引]]
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
@@ -569,8 +575,8 @@ kubectl get configmap -n kube-system kube-scheduler -o yaml
 - Scheduler 深度解析
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-06-observability
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|速查卡: k8s]]
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
+- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ## See Also
 

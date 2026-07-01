@@ -7,6 +7,7 @@ severity: "high"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 title: "金丝雀发布后部分用户报告错误 — 远程顾问对话脚本"
 category: dialogue
 tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
@@ -14,7 +15,7 @@ tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 
 # 金丝雀发布后部分用户报告错误 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/canary-deployment|金丝雀部署]]
+> 对应概念：[[concepts/canary-deployment.md|金丝雀部署]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -148,6 +149,9 @@ kubectl get ingress <ingress-name> -n <namespace> -o yaml | grep -E 'canary-by-h
 
 #### 方案 A：降低 Canary 比例
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch ingress <ingress-name> -n <namespace> --type='merge' -p='{"metadata":{"annotations":{"nginx.ingress.kubernetes.io/canary-weight":"5"}}}'
 ```
@@ -162,11 +166,17 @@ kubectl scale deployment <canary-deployment> --replicas=1 -n <namespace>
 
 #### 方案 B：回滚到稳定版本
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch ingress <ingress-name> -n <namespace> --type='merge' -p='{"metadata":{"annotations":{"nginx.ingress.kubernetes.io/canary-weight":"0"}}}'
 ```
 
 > **如果无法执行 patch**：请将 canary-weight 设为 0，或删除金丝雀 Ingress 资源，使流量 100% 路由到稳定版本。
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl scale --replicas=0`：缩容到 0，立即停服
 
 ```bash
 kubectl scale deployment <canary-deployment> --replicas=0 -n <namespace>
@@ -190,6 +200,9 @@ kubectl rollout status deployment/<canary-deployment> -n <namespace>
 
 #### 方案 D：扩容金丝雀实例
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 kubectl patch deployment <canary-deployment> -n <namespace> --type='merge' -p='{"spec":{"template":{"spec":{"containers":[{"name":"<container>","resources":{"limits":{"cpu":"<higher-cpu>","memory":"<higher-mem>"}}}]}}}}'
 ```
@@ -209,5 +222,5 @@ kubectl logs -n <namespace> -l version=canary --tail=20 | grep -i error
 
 ## 相关概念
 
-- [[concepts/canary-deployment|金丝雀部署]]
-- [[concepts/ingress-controller|Ingress Controller]]
+- [[concepts/canary-deployment.md|金丝雀部署]]
+- [[concepts/ingress-controller.md|Ingress Controller]]

@@ -66,7 +66,7 @@ cross_refs:
 created: "2026-05-23"
 ---
 
-# 38 - Terway GC (垃圾回收) 机制详解 (Terway [[domain-17-system-foundation/topic-dictionary/fundamentals/garbage-collection|Garbage Collection]] Mechanism)
+# 38 - Terway GC (垃圾回收) 机制详解 (Terway [[domain-17-system-foundation/topic-dictionary/fundamentals/garbage-collection.md|Garbage Collection]] Mechanism)
 
 > **适用版本**: 阿里云 ACK v1.26 - v1.32 | **Terway 版本**: v1.5+ | **最后更新**: 2026-04
 
@@ -742,6 +742,10 @@ echo "=== 检测完成 ==="
 
 ### 6.3 手动触发 GC
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # ============================================
 # 方法 1: 重启特定节点的 Terway Pod (触发启动对账)
@@ -784,6 +788,10 @@ done
 ```
 
 ### 6.4 调整 GC 参数
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # ============================================
@@ -832,6 +840,10 @@ kubectl rollout restart ds/terway -n kube-system
 | 阿里云 API 超时 | GC 清理操作长时间无响应 | VPC API 限流或网络问题 | 检查节点到 VPC API 连通性，增大重试间隔 |
 
 ### 7.2 IP 泄漏紧急处理流程
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 #!/bin/bash
@@ -895,6 +907,9 @@ CMDS
 ```
 
 ### 7.3 CRD Finalizer 阻塞处理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # ============================================
@@ -1024,7 +1039,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 5: Networking 网络]]
+- [[domain-03-networking-traffic/README.md|Domain 03: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -1045,4 +1060,4 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]

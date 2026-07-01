@@ -41,7 +41,7 @@ This release was signed with `672C 657B E06B 4B30 969C 4A57 4614 49C2 5E36 B98E`
 
 The community keeps growing, and we'd love to see you there!
 
-- Join the discussion in [[entities/kubernetes|Kubernetes]] Slack](https://kubernetes.slack.com):
+- Join the discussion in [[entities/kubernetes.md|Kubernetes]] Slack](https://kubernetes.slack.com):
   -  for questions and just to hang out
   -  for discussing PRs, code, and bugs
 - Hang out at the Public Developer Call: Thursday, 9:30 Pacific via [Zoom](https://zoom.us/j/696660622)

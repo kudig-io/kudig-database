@@ -71,7 +71,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 服务网格架构基础 -->## 1. 服务网格架构基础
 
-#<!-- chunk: 1.1 服务网格核心概念 -->## 1.1 服务网格核心概念
+## 1.1 服务网格核心概念
 
 ```yaml
 服务网格架构组件:
@@ -93,7 +93,7 @@ created: "2026-05-23"
     - Grafana: 可视化展示
 ```
 
-#<!-- chunk: 1.2 Istio架构演进 -->## 1.2 Istio架构演进
+## 1.2 Istio架构演进
 
 ```mermaid
 graph TB
@@ -127,7 +127,7 @@ graph TB
 
 <!-- chunk: 2. Istio安装与配置 -->## 2. Istio安装与配置
 
-#<!-- chunk: 2.1 Istio控制平面部署 -->## 2.1 Istio控制平面部署
+## 2.1 Istio控制平面部署
 
 ```yaml
 # Istio控制平面完整配置
@@ -237,7 +237,7 @@ spec:
           maxReplicas: 5
 ```
 
-#<!-- chunk: 2.2 服务网格安全配置 -->## 2.2 服务网格安全配置
+## 2.2 服务网格安全配置
 
 ```yaml
 # Istio安全配置
@@ -302,7 +302,7 @@ spec:
 
 <!-- chunk: 3. 流量管理与路由 -->## 3. 流量管理与路由
 
-#<!-- chunk: 3.1 高级流量路由 -->## 3.1 高级流量路由
+## 3.1 高级流量路由
 
 ```yaml
 # 复杂流量路由策略
@@ -316,42 +316,42 @@ spec:
   - api.example.com
   http:
   # 基于用户身份的路由
-  - match:
-    - headers:
-        x-user-type:
-          exact: premium
-    route:
-    - destination:
-        host: api-service
-        subset: v2
-      weight: 100
+  - matchers:
+    - - headers=""
+    - x-user-type=""
+    - exact="premium"
+    - route=""
+    - - destination=""
+    - host="api-service"
+    - subset="v2"
+    - weight="100"
   # 基于地理位置的路由
-  - match:
-    - headers:
-        x-country-code:
-          exact: US
-    route:
-    - destination:
-        host: api-service
-        subset: us-east
-      weight: 100
+  - matchers:
+    - - headers=""
+    - x-country-code=""
+    - exact="US"
+    - route=""
+    - - destination=""
+    - host="api-service"
+    - subset="us-east"
+    - weight="100"
   # 基于请求路径的路由
-  - match:
-    - uri:
-        prefix: /api/v1
-    route:
-    - destination:
-        host: legacy-api
-        subset: v1
-      weight: 100
-  - match:
-    - uri:
-        prefix: /api/v2
-    route:
-    - destination:
-        host: modern-api
-        subset: v2
-      weight: 100
+  - matchers:
+    - - uri=""
+    - prefix="/api/v1"
+    - route=""
+    - - destination=""
+    - host="legacy-api"
+    - subset="v1"
+    - weight="100"
+  - matchers:
+    - - uri=""
+    - prefix="/api/v2"
+    - route=""
+    - - destination=""
+    - host="modern-api"
+    - subset="v2"
+    - weight="100"
   # 默认路由
   - route:
     - destination:
@@ -404,7 +404,7 @@ spec:
           http1MaxPendingRequests: 200
 ```
 
-#<!-- chunk: 3.2 流量分割与金丝雀发布 -->## 3.2 流量分割与金丝雀发布
+## 3.2 流量分割与金丝雀发布
 
 ```yaml
 # 金丝雀发布策略
@@ -417,15 +417,15 @@ spec:
   hosts:
   - frontend.example.com
   http:
-  - match:
-    - headers:
-        canary:
-          exact: "enabled"
-    route:
-    - destination:
-        host: frontend-service
-        subset: canary
-      weight: 100
+  - matchers:
+    - - headers=""
+    - canary=""
+    - exact="enabled"
+    - route=""
+    - - destination=""
+    - host="frontend-service"
+    - subset="canary"
+    - weight="100"
   - route:
     - destination:
         host: frontend-service
@@ -446,19 +446,19 @@ spec:
   hosts:
   - backend-service
   http:
-  - match:
-    - headers:
-        x-forwarded-for:
-          regex: "^(\\d{1,3}\\.){3}\\d{1,3}$"
-    route:
-    - destination:
-        host: backend-service
-        subset: v1
-      weight: 85
-    - destination:
-        host: backend-service
-        subset: v2
-      weight: 15
+  - matchers:
+    - - headers=""
+    - x-forwarded-for=""
+    - regex="^(\\d{1,3}\\.){3}\\d{1,3}$"
+    - route=""
+    - - destination=""
+    - host="backend-service"
+    - subset="v1"
+    - weight="85"
+    - - destination=""
+    - host="backend-service"
+    - subset="v2"
+    - weight="15"
 ---
 # 基于错误率的自动回滚
 apiVersion: networking.istio.io/v1alpha3
@@ -493,7 +493,7 @@ spec:
 
 <!-- chunk: 4. 安全与认证 -->## 4. 安全与认证
 
-#<!-- chunk: 4.1 mTLS配置与管理 -->## 4.1 mTLS配置与管理
+## 4.1 mTLS配置与管理
 
 ```yaml
 # 高级mTLS配置
@@ -566,7 +566,7 @@ spec:
         methods: ["GET", "POST"]
 ```
 
-#<!-- chunk: 4.2 证书管理与轮换 -->## 4.2 证书管理与轮换
+## 4.2 证书管理与轮换
 
 ```yaml
 # Istio证书管理配置
@@ -606,7 +606,7 @@ spec:
 
 <!-- chunk: 5. 监控与可观测性 -->## 5. 监控与可观测性
 
-#<!-- chunk: 5.1 遥测配置 -->## 5.1 遥测配置
+## 5.1 遥测配置
 
 ```yaml
 # Istio遥测配置
@@ -620,29 +620,29 @@ spec:
   - providers:
     - name: prometheus
     overrides:
-    - match:
-        metric: ALL_METRICS
-      tagOverrides:
+    - matchers:
+      - metric="ALL_METRICS"
+      - tagOverrides=""
         # 删除不需要的标签以减少存储
         response_code:
           operation: REMOVE
         response_flags:
           operation: REMOVE
     # 自定义指标
-    - match:
-        metric: REQUEST_COUNT
-      overrides:
-      - tagOverrides:
-          custom_tag:
-            value: "istio-proxy"
+    - matchers:
+      - metric="REQUEST_COUNT"
+      - overrides=""
+      - - tagOverrides=""
+      - custom_tag=""
+      - value="istio-proxy"
   - providers:
     - name: otel
     overrides:
-    - match:
-        metric: ALL_METRICS
-      tagOverrides:
-        cluster:
-          value: "production"
+    - matchers:
+      - metric="ALL_METRICS"
+      - tagOverrides=""
+      - cluster=""
+      - value="production"
   traces:
   - providers:
     - name: jaeger
@@ -678,7 +678,7 @@ spec:
     sample_rate: 0.1
 ```
 
-#<!-- chunk: 5.2 指标收集与分析 -->## 5.2 指标收集与分析
+## 5.2 指标收集与分析
 
 ```yaml
 # Prometheus指标配置
@@ -721,18 +721,18 @@ data:
     
     # 指标转换规则
     transforms:
-      - match:
-          metric: istio_requests_total
-        labels:
-          destination_service:
-            rename: service
-          response_code:
-            transform: "int(response_code)"
+      - matchers:
+        - metric="istio_requests_total"
+        - labels=""
+        - destination_service=""
+        - rename="service"
+        - response_code=""
+        - transform="int(response_code)"
 ```
 
 <!-- chunk: 6. 性能优化与调优 -->## 6. 性能优化与调优
 
-#<!-- chunk: 6.1 代理性能调优 -->## 6.1 代理性能调优
+## 6.1 代理性能调优
 
 ```yaml
 # Envoy代理性能优化
@@ -798,7 +798,7 @@ spec:
     - "./*.internal.example.com"
 ```
 
-#<!-- chunk: 6.2 网关性能优化 -->## 6.2 网关性能优化
+## 6.2 网关性能优化
 
 ```yaml
 # 高性能网关配置
@@ -840,22 +840,22 @@ spec:
   gateways:
   - performance-gateway
   http:
-  - match:
-    - uri:
-        prefix: /api/
-    route:
-    - destination:
-        host: api-service
-        port:
-          number: 8080
-      weight: 100
-    timeout: 30s
-    retries:
-      attempts: 3
-      perTryTimeout: 10s
-      retryOn: connect-failure,retriable-4xx,5xx
-    corsPolicy:
-      allowOrigin:
+  - matchers:
+    - - uri=""
+    - prefix="/api/"
+    - route=""
+    - - destination=""
+    - host="api-service"
+    - port=""
+    - number="8080"
+    - weight="100"
+    - timeout="30s"
+    - retries=""
+    - attempts="3"
+    - perTryTimeout="10s"
+    - retryOn="connect-failure,retriable-4xx,5xx"
+    - corsPolicy=""
+    - allowOrigin=""
       - "*"
       allowMethods:
       - GET
@@ -871,7 +871,7 @@ spec:
 
 <!-- chunk: 7. 问题排除与调试 -->## 7. 问题排除与调试
 
-#<!-- chunk: 7.1 服务网格诊断工具 -->## 7.1 服务网格诊断工具
+## 7.1 服务网格诊断工具
 
 ```bash
 #!/bin/bash
@@ -921,7 +921,7 @@ kubectl get virtualservices.networking.istio.io --all-namespaces
 echo "=== 诊断完成 ==="
 ```
 
-#<!-- chunk: 7.2 流量调试 -->## 7.2 流量调试
+## 7.2 流量调试
 
 ```yaml
 # 流量调试配置
@@ -934,20 +934,20 @@ spec:
   hosts:
   - debug-service.debug.svc.cluster.local
   http:
-  - match:
-    - headers:
-        x-debug-trace:
-          exact: "true"
-    route:
-    - destination:
-        host: debug-service
-        subset: debug
-      weight: 100
-    headers:
-      request:
-        add:
-          x-trace-id: "{%uuid%}"
-          x-debug-level: "verbose"
+  - matchers:
+    - - headers=""
+    - x-debug-trace=""
+    - exact="true"
+    - route=""
+    - - destination=""
+    - host="debug-service"
+    - subset="debug"
+    - weight="100"
+    - headers=""
+    - request=""
+    - add=""
+    - x-trace-id="{%uuid%}"
+    - x-debug-level="verbose"
   - route:
     - destination:
         host: debug-service
@@ -964,50 +964,50 @@ spec:
   hosts:
   - production-service
   http:
-  - match:
-    - headers:
-        x-env: "staging"
-    route:
-    - destination:
-        host: production-service
-        subset: v1
-      weight: 100
-    mirror:
-      host: production-service
-      subset: mirror
-    mirrorPercentage:
-      value: 100.0
+  - matchers:
+    - - headers=""
+    - x-env="staging"
+    - route=""
+    - - destination=""
+    - host="production-service"
+    - subset="v1"
+    - weight="100"
+    - mirror=""
+    - host="production-service"
+    - subset="mirror"
+    - mirrorPercentage=""
+    - value="100.0"
 ```
 
 <!-- chunk: 8. 最佳实践与实施指南 -->## 8. 最佳实践与实施指南
 
-#<!-- chunk: 8.1 服务网格实施原则 -->## 8.1 服务网格实施原则
+## 8.1 服务网格实施原则
 
 ```markdown
 <!-- chunk: 🌐 服务网格实施原则 -->## 🌐 服务网格实施原则
 
-#<!-- chunk: 1. 渐进式采用 -->## 1. 渐进式采用
+## 1. 渐进式采用
 - 从非关键服务开始试点
 - 逐步扩大服务网格覆盖范围
 - 建立回滚和降级机制
 
-#<!-- chunk: 2. 性能优先 -->## 2. 性能优先
+## 2. 性能优先
 - 优化Sidecar资源配置
 - 实施有效的流量管理
 - 监控性能影响
 
-#<!-- chunk: 3. 安全第一 -->## 3. 安全第一
+## 3. 安全第一
 - 默认启用mTLS
 - 实施细粒度访问控制
 - 定期轮换证书
 
-#<!-- chunk: 4. 可观测性驱动 -->## 4. 可观测性驱动
+## 4. 可观测性驱动
 - 建立完整的监控体系
 - 实施分布式追踪
 - 建立告警和响应机制
 ```
 
-#<!-- chunk: 8.2 实施检查清单 -->## 8.2 实施检查清单
+## 8.2 实施检查清单
 
 ```yaml
 服务网格实施检查清单:
@@ -1044,7 +1044,7 @@ spec:
 
 <!-- chunk: 9. 高级应用场景 -->## 9. 高级应用场景
 
-#<!-- chunk: 9.1 多集群服务网格 -->## 9.1 多集群服务网格
+## 9.1 多集群服务网格
 
 ```yaml
 # 多集群服务网格配置
@@ -1090,7 +1090,7 @@ spec:
       cluster: cluster2
 ```
 
-#<!-- chunk: 9.2 混合云服务网格 -->## 9.2 混合云服务网格
+## 9.2 混合云服务网格
 
 ```yaml
 # 混合云服务网格配置
@@ -1123,15 +1123,15 @@ spec:
   hosts:
   - hybrid-service
   http:
-  - match:
-    - headers:
-        x-cloud-type:
-          exact: "onprem"
-    route:
-    - destination:
-        host: vm-service
-        subset: onprem
-      weight: 100
+  - matchers:
+    - - headers=""
+    - x-cloud-type=""
+    - exact="onprem"
+    - route=""
+    - - destination=""
+    - host="vm-service"
+    - subset="onprem"
+    - weight="100"
   - route:
     - destination:
         host: k8s-service
@@ -1141,7 +1141,7 @@ spec:
 
 <!-- chunk: 10. Istio Ambient Mesh (2025 GA) — 2026更新 -->## 10. Istio Ambient Mesh (2025 GA) — 2026更新
 
-#<!-- chunk: 10.1 Ambient Mesh架构革新 -->## 10.1 Ambient Mesh架构革新
+## 10.1 Ambient Mesh架构革新
 
 Istio Ambient Mesh在2025年正式GA，是Istio架构的根本性变化——从Sidecar模式演进到无Sidecar模式，通过ztunnel（L4代理）和waypoint（L7代理）两层架构实现服务网格能力。
 
@@ -1202,7 +1202,7 @@ Ambient Mesh核心组件:
     | 升级影响 | 需重启Pod | ztunnel原地升级 |
 ```
 
-#<!-- chunk: 10.2 Ambient Mesh启用与配置 -->## 10.2 Ambient Mesh启用与配置
+## 10.2 Ambient Mesh启用与配置
 
 ```yaml
 # 安装Istio Ambient模式
@@ -1278,7 +1278,7 @@ spec:
             paths: ["/api/v1/*"]
 ```
 
-#<!-- chunk: 10.3 Istio + Gateway API集成 -->## 10.3 Istio + Gateway API集成
+## 10.3 Istio + Gateway API集成
 
 ```yaml
 # Istio作为Gateway API实现器
@@ -1357,7 +1357,7 @@ API迁移映射:
   | AuthorizationPolicy | 保持不变 | 继续使用 |
 ```
 
-#<!-- chunk: 10.4 Sidecar与Ambient混合运行 -->## 10.4 Sidecar与Ambient混合运行
+## 10.4 Sidecar与Ambient混合运行
 
 ```yaml
 # 混合集群配置：部分命名空间使用Sidecar，部分使用Ambient
@@ -1405,7 +1405,7 @@ metadata:
     - 统一使用Gateway API管理流量
 ```
 
-#<!-- chunk: 10.5 性能对比(2025 Benchmark) -->## 10.5 性能对比(2025 Benchmark)
+## 10.5 性能对比(2025 Benchmark)
 
 ```yaml
 Istio性能基准测试(2025年发布):
@@ -1434,7 +1434,7 @@ Istio性能基准测试(2025年发布):
 
 <!-- chunk: 11. 未来发展趋势 -->## 11. 未来发展趋势
 
-#<!-- chunk: 11.1 服务网格演进方向 -->## 11.1 服务网格演进方向
+## 11.1 服务网格演进方向
 
 ```yaml
 服务网格发展趋势(2026-2027):
@@ -1477,7 +1477,7 @@ Istio性能基准测试(2025年发布):
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers KUDIG Database — Global MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - Domain-19 论文与参考 — 开源项目索引
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
@@ -1498,4 +1498,4 @@ Istio性能基准测试(2025年发布):
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]

@@ -364,6 +364,9 @@ df -h /var/lib/containerd
 
 #### 场景 1：创建 imagePullSecret
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 方式 1: 从命令行创建
 kubectl create secret docker-registry my-registry-secret \
@@ -409,6 +412,10 @@ spec:
 
 #### 场景 3：为 ServiceAccount 配置默认 imagePullSecret
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 # 方式 1: 使用 kubectl patch
 kubectl patch serviceaccount default -n <namespace> \
@@ -429,6 +436,9 @@ EOF
 ### 3.2 网络和 TLS 问题
 
 #### 场景 1：私有仓库使用自签名证书
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 # 方式 1: 配置 containerd 信任证书
@@ -462,6 +472,9 @@ EOF
 
 #### 场景 2：配置镜像仓库代理/镜像
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # containerd 配置镜像加速
 cat > /etc/containerd/certs.d/docker.io/hosts.toml << EOF
@@ -491,6 +504,9 @@ toomanyrequests: You have reached your pull rate limit
 ```
 
 **解决方案：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 方案 1: 使用认证账户 (提升限额)
@@ -529,6 +545,10 @@ spec:
 ```
 
 #### 场景 2：强制更新镜像
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 方式 1: 删除 Pod 让其重建
@@ -730,6 +750,9 @@ spec:
 
 ### 常用命令速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # Pod 镜像检查
 kubectl describe pod <pod>
@@ -753,19 +776,21 @@ kubectl run debug --rm -it --image=curlimages/curl --restart=Never -- sh
 ### 相关文档
 
 - [kubelet 故障排查](./01-kubelet-troubleshooting.md)
-- [容器运行时故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting|03-container-runtime-troubleshooting]].md)
-- [ConfigMap/Secret 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting|06-configmap-secret-troubleshooting]].md)
-- [Pod 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting|01-pod-troubleshooting]].md)
+- [容器运行时故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]].md)
+- [ConfigMap/Secret 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]].md)
+- [Pod 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
-- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting|03-container-runtime-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting|04-node-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting|06-gpu-device-plugin-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting|01-kubelet-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting.md|04-node-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.md|06-gpu-device-plugin-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
+
+```

@@ -115,7 +115,7 @@ k8s_versions:
 
 <!-- chunk: Pod 概述 -->## Pod 概述
 
-#<!-- chunk: 什么是 Pod? -->## 什么是 Pod?
+## 什么是 Pod?
 
 **Pod** 是 Kubernetes 中最小的可部署计算单元,代表集群中运行的一个或多个容器的组合。
 
@@ -145,6 +145,12 @@ k8s_versions:
 | **Short Names** | po |
 
 **kubectl 常用命令**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 创建 Pod
 kubectl apply -f pod.yaml
@@ -173,7 +179,7 @@ kubectl debug <pod-name> -it --image=busybox
 
 <!-- chunk: 完整字段规格表 -->## 完整字段规格表
 
-#<!-- chunk: spec 顶层字段 -->## spec 顶层字段
+## spec 顶层字段
 
 | 字段 | 类型 | 必需 | 描述 | 默认值 |
 |------|------|------|------|--------|
@@ -217,7 +223,7 @@ kubectl debug <pod-name> -it --image=busybox
 
 <!-- chunk: Container 字段详解 -->## Container 字段详解
 
-#<!-- chunk: Container 完整字段 -->## Container 完整字段
+## Container 完整字段
 
 | 字段 | 类型 | 必需 | 描述 |
 |------|------|------|------|
@@ -246,7 +252,7 @@ kubectl debug <pod-name> -it --image=busybox
 | `resizePolicy` | []ContainerResizePolicy | ❌ | 容器调整大小策略(v1.27+) |
 | `restartPolicy` | string | ❌ | 容器重启策略(v1.28+,仅 Sidecar) |
 
-#<!-- chunk: 1. Image 配置 -->## 1. Image 配置
+## 1. Image 配置
 
 ```yaml
 apiVersion: v1
@@ -268,7 +274,7 @@ spec:
 - `image: nginx:latest` 或无标签 → `Always`
 - `image: nginx:1.25` (非 latest 标签) → `IfNotPresent`
 
-#<!-- chunk: 2. Command 和 Args -->## 2. Command 和 Args
+## 2. Command 和 Args
 
 ```yaml
 apiVersion: v1
@@ -302,7 +308,7 @@ spec:
 | ENTRYPOINT | command | 可执行文件 |
 | CMD | args | 参数 |
 
-#<!-- chunk: 3. Environment Variables -->## 3. Environment Variables
+## 3. Environment Variables
 
 ```yaml
 apiVersion: v1
@@ -391,7 +397,7 @@ spec:
 | `status.podIP` | Pod IP |
 | `status.podIPs` | Pod IPs (双栈) |
 
-#<!-- chunk: 4. Ports -->## 4. Ports
+## 4. Ports
 
 ```yaml
 apiVersion: v1
@@ -415,7 +421,7 @@ spec:
 
 **注意**: `ports` 字段仅是声明性的(文档作用),不配置也不影响网络连通性。
 
-#<!-- chunk: 5. Resources -->## 5. Resources
+## 5. Resources
 
 ```yaml
 apiVersion: v1
@@ -453,7 +459,7 @@ spec:
 | **Burstable** | 至少一个容器有 requests/limits | 中等 |
 | **BestEffort** | 无任何 requests/limits | 最高(最先驱逐) |
 
-#<!-- chunk: 6. VolumeMounts -->## 6. VolumeMounts
+## 6. VolumeMounts
 
 ```yaml
 apiVersion: v1
@@ -499,7 +505,7 @@ spec:
 - `HostToContainer`: 宿主机挂载传播到容器
 - `Bidirectional`: 双向传播(需要特权容器)
 
-#<!-- chunk: 7. Probes (探针) -->## 7. Probes (探针)
+## 7. Probes (探针)
 
 ```yaml
 apiVersion: v1
@@ -582,7 +588,7 @@ spec:
 3. **exec**: 执行命令(退出码 0 为成功)
 4. **grpc**: gRPC 健康检查(v1.24+)
 
-#<!-- chunk: 8. Lifecycle Hooks -->## 8. Lifecycle Hooks
+## 8. Lifecycle Hooks
 
 ```yaml
 apiVersion: v1
@@ -625,7 +631,7 @@ spec:
 - `postStart` 失败 → 容器被杀死并重启
 - `preStop` 失败 → 继续终止容器
 
-#<!-- chunk: 9. SecurityContext (容器级) -->## 9. SecurityContext (容器级)
+## 9. SecurityContext (容器级)
 
 ```yaml
 apiVersion: v1
@@ -687,7 +693,7 @@ metadata:
 
 <!-- chunk: Init Containers -->## Init Containers
 
-#<!-- chunk: 概述 -->## 概述
+## 概述
 
 **Init Containers** 在主容器启动前按顺序执行,用于执行初始化任务。
 
@@ -698,7 +704,7 @@ metadata:
 - 不支持 readinessProbe/livenessProbe
 - 支持与主容器不同的镜像和资源配置
 
-#<!-- chunk: 配置示例 -->## 配置示例
+## 配置示例
 
 ```yaml
 apiVersion: v1
@@ -756,7 +762,7 @@ spec:
     emptyDir: {}
 ```
 
-#<!-- chunk: 使用场景 -->## 使用场景
+## 使用场景
 
 1. **等待依赖服务**: 等待数据库、缓存等服务就绪
 2. **下载配置**: 从配置中心下载配置文件
@@ -769,7 +775,7 @@ spec:
 
 <!-- chunk: Sidecar Containers -->## Sidecar Containers
 
-#<!-- chunk: 概述 (v1.29+) -->## 概述 (v1.29+)
+## 概述 (v1.29+)
 
 **Sidecar Containers** 是与主容器同时运行的辅助容器,在 v1.29+ 通过 `restartPolicy: Always` 标识。
 
@@ -783,7 +789,7 @@ spec:
 - 在主容器终止后才终止
 - 影响 Pod 就绪状态
 
-#<!-- chunk: 配置示例 -->## 配置示例
+## 配置示例
 
 ```yaml
 apiVersion: v1
@@ -835,7 +841,7 @@ spec:
       name: envoy-config
 ```
 
-#<!-- chunk: 使用场景 -->## 使用场景
+## 使用场景
 
 1. **日志收集**: Fluent Bit, Filebeat
 2. **服务网格**: Envoy, Linkerd
@@ -843,7 +849,7 @@ spec:
 4. **安全**: 认证代理, 加密代理
 5. **配置同步**: 配置热更新
 
-#<!-- chunk: 版本对比 -->## 版本对比
+## 版本对比
 
 | 版本 | Sidecar 实现方式 | 限制 |
 |------|-----------------|------|
@@ -854,7 +860,7 @@ spec:
 
 <!-- chunk: Ephemeral Containers -->## Ephemeral Containers
 
-#<!-- chunk: 概述 -->## 概述
+## 概述
 
 **Ephemeral Containers**(临时容器)用于故障排查和调试,可动态添加到运行中的 Pod。
 
@@ -864,7 +870,7 @@ spec:
 - 不能在 Pod 创建时定义(只能通过 API 添加)
 - 共享 Pod 的网络和存储命名空间
 
-#<!-- chunk: 使用方法 -->## 使用方法
+## 使用方法
 
 ```bash
 # 方式1: kubectl debug 自动创建临时容器
@@ -878,7 +884,7 @@ kubectl debug -it my-pod --image=busybox --target=app \
   --share-processes -- sh
 ```
 
-#<!-- chunk: 手动添加临时容器(API) -->## 手动添加临时容器(API)
+## 手动添加临时容器(API)
 
 ```yaml
 # 获取 Pod 配置
@@ -911,7 +917,7 @@ kubectl replace --raw /api/v1/namespaces/default/pods/my-pod/ephemeralcontainers
 kubectl attach -it my-pod -c debugger
 ```
 
-#<!-- chunk: 使用场景 -->## 使用场景
+## 使用场景
 
 1. **Distroless 镜像调试**: 无 shell 的精简镜像
 2. **崩溃容器排查**: 容器不断重启时
@@ -923,7 +929,7 @@ kubectl attach -it my-pod -c debugger
 
 <!-- chunk: Volumes 所有类型 -->## Volumes 所有类型
 
-#<!-- chunk: Volume 类型总览 -->## Volume 类型总览
+## Volume 类型总览
 
 | 类型 | 用途 | 生命周期 | 数据持久化 |
 |------|------|---------|-----------|
@@ -950,7 +956,7 @@ kubectl attach -it my-pod -c debugger
 
 ---
 
-#<!-- chunk: 1. emptyDir -->## 1. emptyDir
+## 1. emptyDir
 
 **临时目录,Pod 删除时数据丢失**。
 
@@ -988,7 +994,7 @@ spec:
 
 ---
 
-#<!-- chunk: 2. hostPath -->## 2. hostPath
+## 2. hostPath
 
 **挂载宿主机目录或文件**。
 
@@ -1038,7 +1044,7 @@ spec:
 
 ---
 
-#<!-- chunk: 3. configMap -->## 3. configMap
+## 3. configMap
 
 **将 ConfigMap 挂载为文件**。
 
@@ -1093,7 +1099,7 @@ spec:
 
 ---
 
-#<!-- chunk: 4. secret -->## 4. secret
+## 4. secret
 
 **将 Secret 挂载为文件**(用法与 ConfigMap 类似)。
 
@@ -1152,7 +1158,7 @@ imagePullSecrets:
 
 ---
 
-#<!-- chunk: 5. persistentVolumeClaim -->## 5. persistentVolumeClaim
+## 5. persistentVolumeClaim
 
 **挂载 PersistentVolumeClaim**。
 
@@ -1190,7 +1196,7 @@ spec:
 
 ---
 
-#<!-- chunk: 6. projected -->## 6. projected
+## 6. projected
 
 **将多个卷源投影到同一目录**。
 
@@ -1259,7 +1265,7 @@ spec:
 
 ---
 
-#<!-- chunk: 7. downwardAPI -->## 7. downwardAPI
+## 7. downwardAPI
 
 **将 Pod/Container 元数据暴露为文件**。
 
@@ -1330,7 +1336,7 @@ spec:
 
 ---
 
-#<!-- chunk: 8. nfs -->## 8. nfs
+## 8. nfs
 
 **挂载 NFS 共享**。
 
@@ -1357,7 +1363,7 @@ spec:
 
 ---
 
-#<!-- chunk: 9. csi -->## 9. csi
+## 9. csi
 
 **使用 CSI(Container Storage Interface)驱动**。
 
@@ -1395,7 +1401,7 @@ spec:
 
 ---
 
-#<!-- chunk: 10. ephemeral (内联临时卷) -->## 10. ephemeral (内联临时卷)
+## 10. ephemeral (内联临时卷)
 
 **动态创建临时卷**(v1.23+)。
 
@@ -1495,7 +1501,7 @@ spec:
 
 <!-- chunk: 调度字段 -->## 调度字段
 
-#<!-- chunk: 1. nodeSelector (简单节点选择) -->## 1. nodeSelector (简单节点选择)
+## 1. nodeSelector (简单节点选择)
 
 ```yaml
 apiVersion: v1
@@ -1513,13 +1519,17 @@ spec:
 ```
 
 **给节点打标签**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 kubectl label nodes node-1 disktype=ssd region=us-west
 ```
 
 ---
 
-#<!-- chunk: 2. nodeName (直接指定节点) -->## 2. nodeName (直接指定节点)
+## 2. nodeName (直接指定节点)
 
 ```yaml
 apiVersion: v1
@@ -1538,7 +1548,7 @@ spec:
 
 ---
 
-#<!-- chunk: 3. affinity (亲和性与反亲和性) -->## 3. affinity (亲和性与反亲和性)
+## 3. affinity (亲和性与反亲和性)
 
 ```yaml
 apiVersion: v1
@@ -1630,7 +1640,7 @@ spec:
 
 ---
 
-#<!-- chunk: 4. tolerations (容忍度) -->## 4. tolerations (容忍度)
+## 4. tolerations (容忍度)
 
 ```yaml
 apiVersion: v1
@@ -1665,6 +1675,10 @@ spec:
 ```
 
 **节点污点操作**:
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `kubectl taint nodes`：变更污点影响 Pod 调度
+
 ```bash
 # 添加污点
 kubectl taint nodes node-1 key1=value1:NoSchedule
@@ -1683,7 +1697,7 @@ kubectl describe node node-1 | grep Taints
 
 ---
 
-#<!-- chunk: 5. topologySpreadConstraints (拓扑分布约束) -->## 5. topologySpreadConstraints (拓扑分布约束)
+## 5. topologySpreadConstraints (拓扑分布约束)
 
 ```yaml
 apiVersion: v1
@@ -1720,7 +1734,7 @@ spec:
 
 ---
 
-#<!-- chunk: 6. schedulerName (自定义调度器) -->## 6. schedulerName (自定义调度器)
+## 6. schedulerName (自定义调度器)
 
 ```yaml
 apiVersion: v1
@@ -1737,7 +1751,7 @@ spec:
 
 ---
 
-#<!-- chunk: 7. priority 和 priorityClassName (优先级) -->## 7. priority 和 priorityClassName (优先级)
+## 7. priority 和 priorityClassName (优先级)
 
 ```yaml
 # 定义 PriorityClass
@@ -1768,7 +1782,7 @@ spec:
 
 <!-- chunk: DNS 配置 -->## DNS 配置
 
-#<!-- chunk: dnsPolicy -->## dnsPolicy
+## dnsPolicy
 
 | 值 | 行为 |
 |---|------|
@@ -1792,7 +1806,7 @@ spec:
 
 ---
 
-#<!-- chunk: dnsConfig (自定义 DNS) -->## dnsConfig (自定义 DNS)
+## dnsConfig (自定义 DNS)
 
 ```yaml
 apiVersion: v1
@@ -1834,7 +1848,7 @@ spec:
 
 ---
 
-#<!-- chunk: hostname 和 subdomain -->## hostname 和 subdomain
+## hostname 和 subdomain
 
 ```yaml
 apiVersion: v1
@@ -1868,7 +1882,7 @@ spec:
 
 <!-- chunk: 配置示例 -->## 配置示例
 
-#<!-- chunk: 最小配置示例 -->## 最小配置示例
+## 最小配置示例
 
 ```yaml
 apiVersion: v1
@@ -1883,7 +1897,7 @@ spec:
 
 ---
 
-#<!-- chunk: 生产级配置示例 -->## 生产级配置示例
+## 生产级配置示例
 
 ```yaml
 apiVersion: v1
@@ -2257,7 +2271,7 @@ spec:
 
 <!-- chunk: 内部原理 -->## 内部原理
 
-#<!-- chunk: 1. Pod 生命周期状态机 -->## 1. Pod 生命周期状态机
+## 1. Pod 生命周期状态机
 
 ```
 ┌─────────┐
@@ -2307,7 +2321,7 @@ status:
 
 ---
 
-#<!-- chunk: 2. 容器状态 -->## 2. 容器状态
+## 2. 容器状态
 
 ```yaml
 status:
@@ -2336,7 +2350,7 @@ status:
 
 ---
 
-#<!-- chunk: 3. QoS 类别计算 -->## 3. QoS 类别计算
+## 3. QoS 类别计算
 
 **Guaranteed** (最高 QoS):
 ```yaml
@@ -2378,7 +2392,7 @@ containers:
 
 ---
 
-#<!-- chunk: 4. Downward API 可用字段汇总 -->## 4. Downward API 可用字段汇总
+## 4. Downward API 可用字段汇总
 
 **metadata 字段**:
 - `metadata.name`: Pod 名称
@@ -2406,7 +2420,10 @@ containers:
 
 ---
 
-#<!-- chunk: 5. Pod 创建流程 -->## 5. Pod 创建流程
+## 5. Pod 创建流程
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
 1. kubectl apply
@@ -2442,7 +2459,10 @@ containers:
 
 ---
 
-#<!-- chunk: 6. Pod 终止流程 -->## 6. Pod 终止流程
+## 6. Pod 终止流程
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
 1. kubectl delete pod
@@ -2507,7 +2527,7 @@ containers:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 1. 资源管理 -->## 1. 资源管理
+## 1. 资源管理
 
 ✅ **推荐**:
 - 所有容器设置 `requests` 和 `limits`
@@ -2521,7 +2541,7 @@ containers:
 
 ---
 
-#<!-- chunk: 2. 健康检查 -->## 2. 健康检查
+## 2. 健康检查
 
 ✅ **推荐**:
 - 慢启动应用使用 `startupProbe`
@@ -2536,7 +2556,7 @@ containers:
 
 ---
 
-#<!-- chunk: 3. 安全配置 -->## 3. 安全配置
+## 3. 安全配置
 
 ✅ **推荐**:
 ```yaml
@@ -2559,7 +2579,7 @@ securityContext:
 
 ---
 
-#<!-- chunk: 4. 高可用 -->## 4. 高可用
+## 4. 高可用
 
 ✅ **推荐**:
 - 使用 `podAntiAffinity` 分散副本
@@ -2574,7 +2594,7 @@ securityContext:
 
 ---
 
-#<!-- chunk: 5. 日志和监控 -->## 5. 日志和监控
+## 5. 日志和监控
 
 ✅ **推荐**:
 - 日志输出到 stdout/stderr
@@ -2588,7 +2608,7 @@ securityContext:
 
 ---
 
-#<!-- chunk: 6. 镜像管理 -->## 6. 镜像管理
+## 6. 镜像管理
 
 ✅ **推荐**:
 - 使用特定版本标签(如 `1.25.3`)
@@ -2603,7 +2623,7 @@ securityContext:
 
 ---
 
-#<!-- chunk: 7. 配置管理 -->## 7. 配置管理
+## 7. 配置管理
 
 ✅ **推荐**:
 - 使用 ConfigMap/Secret 存储配置
@@ -2617,7 +2637,7 @@ securityContext:
 
 ---
 
-#<!-- chunk: 8. 调度优化 -->## 8. 调度优化
+## 8. 调度优化
 
 ✅ **推荐**:
 - 关键服务使用 PriorityClass
@@ -2632,7 +2652,7 @@ securityContext:
 
 <!-- chunk: FAQ -->## FAQ
 
-#<!-- chunk: Q1: Pod 一直处于 Pending 状态? -->## Q1: Pod 一直处于 Pending 状态?
+## Q1: Pod 一直处于 Pending 状态?
 
 **原因**:
 1. 资源不足(CPU/Memory/PVC)
@@ -2649,7 +2669,7 @@ kubectl get nodes -o wide
 
 ---
 
-#<!-- chunk: Q2: Pod 频繁重启? -->## Q2: Pod 频繁重启?
+## Q2: Pod 频繁重启?
 
 **原因**:
 1. OOMKilled(内存超限)
@@ -2666,7 +2686,7 @@ kubectl get pod <pod-name> -o yaml | grep -A 10 "lastState:"
 
 ---
 
-#<!-- chunk: Q3: Init 容器与 Sidecar 容器如何选择? -->## Q3: Init 容器与 Sidecar 容器如何选择?
+## Q3: Init 容器与 Sidecar 容器如何选择?
 
 | 场景 | 使用 |
 |------|------|
@@ -2679,7 +2699,7 @@ kubectl get pod <pod-name> -o yaml | grep -A 10 "lastState:"
 
 ---
 
-#<!-- chunk: Q4: 如何实现容器间文件共享? -->## Q4: 如何实现容器间文件共享?
+## Q4: 如何实现容器间文件共享?
 
 **方法1**: emptyDir 卷
 ```yaml
@@ -2710,7 +2730,7 @@ volumes:
 
 ---
 
-#<!-- chunk: Q5: 如何调试 CrashLoopBackOff 的 Pod? -->## Q5: 如何调试 CrashLoopBackOff 的 Pod?
+## Q5: 如何调试 CrashLoopBackOff 的 Pod?
 
 **方法1**: 查看容器日志
 ```bash
@@ -2737,7 +2757,7 @@ kubectl get events --field-selector involvedObject.name=<pod-name>
 
 ---
 
-#<!-- chunk: Q6: Pod 如何访问宿主机服务? -->## Q6: Pod 如何访问宿主机服务?
+## Q6: Pod 如何访问宿主机服务?
 
 **方法1**: hostNetwork
 ```yaml
@@ -2765,7 +2785,7 @@ containers:
 
 ---
 
-#<!-- chunk: Q7: 如何限制 Pod 的临时存储使用? -->## Q7: 如何限制 Pod 的临时存储使用?
+## Q7: 如何限制 Pod 的临时存储使用?
 
 ```yaml
 containers:
@@ -2784,7 +2804,7 @@ volumes:
 
 ---
 
-#<!-- chunk: Q8: Pod 的 DNS 解析慢? -->## Q8: Pod 的 DNS 解析慢?
+## Q8: Pod 的 DNS 解析慢?
 
 **优化 dnsConfig**:
 ```yaml
@@ -2809,7 +2829,7 @@ spec:
 
 <!-- chunk: 生产案例 -->## 生产案例
 
-#<!-- chunk: 案例 1: 电商网站高可用部署 -->## 案例 1: 电商网站高可用部署
+## 案例 1: 电商网站高可用部署
 
 **需求**:
 - 多副本分散到不同节点和可用区
@@ -2918,7 +2938,7 @@ spec:
 
 ---
 
-#<!-- chunk: 案例 2: 机器学习训练任务 -->## 案例 2: 机器学习训练任务
+## 案例 2: 机器学习训练任务
 
 **需求**:
 - GPU 资源
@@ -2987,7 +3007,7 @@ spec:
 
 ---
 
-#<!-- chunk: 案例 3: 多租户 SaaS 平台 -->## 案例 3: 多租户 SaaS 平台
+## 案例 3: 多租户 SaaS 平台
 
 **需求**:
 - 租户隔离(不同 ServiceAccount)
@@ -3088,7 +3108,7 @@ Pod 是 Kubernetes 中最核心的资源对象,理解其完整规格对于构建
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -3109,4 +3129,6 @@ Pod 是 Kubernetes 中最核心的资源对象,理解其完整规格对于构建
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+
+```

@@ -334,6 +334,9 @@ kubeadm init --ignore-preflight-errors=all
 
 ### 场景 2: 预检前的系统准备
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # 关闭 swap
 swapoff -a
@@ -402,6 +405,10 @@ nodeRegistration:
 
 ### 常见预检错误及修复
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 # [ERROR Swap]: running with swap on is not supported
 swapoff -a
@@ -427,6 +434,9 @@ kubeadm init --ignore-preflight-errors=NumCPU
 ```
 
 ### 完整系统准备脚本
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -551,6 +561,7 @@ ports:
     port: 30000-32767
     protocol: TCP/UDP
     description: "NodePort Service 端口范围"
+
 ```
 
 ## 常见错误
@@ -657,8 +668,10 @@ func (c DirAvailableCheck) Check() error {
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/docker|docker]]
-- [[entities/kubernetes|kubernetes]]
-- [[entities/containerd|containerd]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/containerd.md|containerd]]
+
+```

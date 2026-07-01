@@ -52,14 +52,14 @@ created: "2026-05-23"
 
 <!-- chunk: 演讲概述 -->## 演讲概述
 
-#<!-- chunk: 目标受众 -->## 目标受众
+## 目标受众
 
 - Kubernetes 初学者：从零建立云原生思维模型
 - 运维工程师：深入理解控制平面与数据平面的协作机制
 - 开发人员：理解应用在 Kubernetes 上运行的底层逻辑
 - 架构师：掌握分布式系统设计哲学，指导技术选型
 
-#<!-- chunk: 预计时长 -->## 预计时长
+## 预计时长
 
 | 阶段 | 内容 | 时长 |
 |------|------|------|
@@ -72,7 +72,7 @@ created: "2026-05-23"
 | Q&A | 互动问答 | 15 分钟 |
 | **合计** | | **约 3.5 小时** |
 
-#<!-- chunk: 核心学习目标 -->## 核心学习目标
+## 核心学习目标
 
 完成本次培训后，学员能够：
 
@@ -83,7 +83,7 @@ created: "2026-05-23"
 5. 执行基本的集群健康检查和故障定位操作
 6. 设计符合生产要求的 etcd 备份恢复策略
 
-#<!-- chunk: 核心要点 -->## 核心要点
+## 核心要点
 
 1. Kubernetes 是分布式系统的"操作系统"，不是简单的容器编排工具
 2. 声明式 API 是 Kubernetes 的设计灵魂
@@ -112,7 +112,7 @@ created: "2026-05-23"
 
 <!-- chunk: 核心概念讲解 -->## 核心概念讲解
 
-#<!-- chunk: 什么是 Kubernetes？ -->## 什么是 Kubernetes？
+## 什么是 Kubernetes？
 
 Kubernetes（简称 K8s）是一个开源的容器编排平台，最初由 Google 设计并捐赠给 Cloud Native Computing Foundation（CNCF）。它的核心定位是**分布式系统的操作系统**（Cloud OS）——正如操作系统管理 CPU、内存、磁盘等硬件资源，Kubernetes 管理的是节点、网络、存储等分布式资源。
 
@@ -186,7 +186,7 @@ spec:
 | 冲突处理 | 后执行覆盖先执行 | 自动合并或报错 |
 | 适用场景 | 临时调试 | 生产环境 |
 
-#<!-- chunk: 核心术语清单 -->## 核心术语清单
+## 核心术语清单
 
 | 术语 | 定义 | 类比 |
 |------|------|------|
@@ -203,7 +203,7 @@ spec:
 | **ConfigMap** | 存储非敏感配置数据的键值对 | 公告栏 |
 | **Secret** | 存储敏感数据（密码、证书、Token） | 保险柜 |
 
-#<!-- chunk: 控制器模式 (Controller Pattern) -->## 控制器模式 (Controller Pattern)
+## 控制器模式 (Controller Pattern)
 
 控制器模式是 Kubernetes 极其重要的设计模式，几乎所有的 Kubernetes 功能都基于此实现。理解控制器模式，就理解了 Kubernetes 的运行本质。
 
@@ -245,7 +245,7 @@ spec:
 
 <!-- chunk: 架构图 -->## 架构图
 
-#<!-- chunk: Kubernetes 整体架构 -->## Kubernetes 整体架构
+## Kubernetes 整体架构
 
 ```mermaid
 graph TB
@@ -297,7 +297,7 @@ graph TB
     style DataPlane fill:#f3e5f5,stroke:#7b1fa2
 ```
 
-#<!-- chunk: 控制平面组件详解 -->## 控制平面组件详解
+## 控制平面组件详解
 
 ```mermaid
 graph LR
@@ -343,7 +343,7 @@ graph LR
 | **kube-proxy** | 维护 Service 的网络规则（iptables/IPVS），实现服务发现和负载均衡 | 楼层前台转接 | 10256 (Metrics) |
 | **Container Runtime** | 运行容器的软件（如 containerd、CRI-O） | 工位上的电脑 | N/A |
 
-#<!-- chunk: 请求完整生命周期 -->## 请求完整生命周期
+## 请求完整生命周期
 
 ```mermaid
 sequenceDiagram
@@ -398,7 +398,7 @@ sequenceDiagram
 
 <!-- chunk: 实战演示步骤 -->## 实战演示步骤
 
-#<!-- chunk: 演示 1：集群信息探索 -->## 演示 1：集群信息探索
+## 演示 1：集群信息探索
 
 ```bash
 # 查看集群信息
@@ -457,7 +457,10 @@ kubectl get pods -n kube-system -o wide
 # kube-scheduler-master            1/1     Running   0          30d   172.16.0.100    master
 ```
 
-#<!-- chunk: 演示 2：部署第一个应用并追踪生命周期 -->## 演示 2：部署第一个应用并追踪生命周期
+## 演示 2：部署第一个应用并追踪生命周期
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 步骤 1: 创建 Deployment
@@ -518,7 +521,10 @@ kubectl get events --field-selector reason=Started
 kubectl get events --field-selector reason=Created
 ```
 
-#<!-- chunk: 演示 3：声明式 API 验证——自愈能力 -->## 演示 3：声明式 API 验证——自愈能力
+## 演示 3：声明式 API 验证——自愈能力
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```bash
 # 步骤 1: 查看当前 Pod
@@ -548,7 +554,7 @@ kubectl get pods -l app=nginx-demo --no-headers | wc -l
 # 预期输出: 3
 ```
 
-#<!-- chunk: 演示 4：API Server 鉴权链追踪 -->## 演示 4：API Server 鉴权链追踪
+## 演示 4：API Server 鉴权链追踪
 
 ```bash
 # 查看当前用户权限
@@ -581,7 +587,7 @@ kubectl get --raw /livez
 kubectl get --raw /metrics | head -20
 ```
 
-#<!-- chunk: 演示 5：etcd 状态验证 -->## 演示 5：etcd 状态验证
+## 演示 5：etcd 状态验证
 
 ```bash
 # 查看 etcd 集群健康状态
@@ -641,7 +647,10 @@ kubectl -n kube-system exec -it etcd-master -- \
 # +----------+----------+------------+------------+
 ```
 
-#<!-- chunk: 演示 6：资源隔离与配额 -->## 演示 6：资源隔离与配额
+## 演示 6：资源隔离与配额
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 创建测试命名空间
@@ -731,15 +740,19 @@ kubectl describe resourcequota lab-quota -n lab
 
 <!-- chunk: 动手实验 -->## 动手实验
 
-#<!-- chunk: 实验 1：追踪 Pod 创建的完整生命周期 -->## 实验 1：追踪 Pod 创建的完整生命周期
+## 实验 1：追踪 Pod 创建的完整生命周期
 
 **目标**：理解从 YAML 提交到 Pod Running 的每一步
 
 **步骤**：
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 1. 清理环境
-kubectl delete deployment --all --force --grace-period=0 2>/dev/null
+kubectl delete deployment --all --force --grace-period=0 2>/dev/null  # ⚠️ 批量删除，波及面大
 
 # 2. 开启事件监控
 kubectl get events --sort-by=.lastTimestamp -w &
@@ -788,11 +801,16 @@ kubectl describe pod $POD_NAME | grep -A 20 Events
 
 **验证问题**：从事件中找出 Pod 经历了哪些阶段？每个阶段的执行组件是什么？
 
-#<!-- chunk: 实验 2：验证控制器自愈机制 -->## 实验 2：验证控制器自愈机制
+## 实验 2：验证控制器自愈机制
 
 **目标**：理解 ReplicaSet 控制器的 Watch-Diff-Reconcile 循环
 
 **步骤**：
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 1. 创建 Deployment
@@ -845,7 +863,7 @@ kubectl delete pod $REMAINING_POD
 
 **验证问题**：修改 Label 后为什么 ReplicaSet 会创建新 Pod？被改 Label 的 Pod 的命运是什么？
 
-#<!-- chunk: 实验 3：etcd 数据探索 -->## 实验 3：etcd 数据探索
+## 实验 3：etcd 数据探索
 
 **目标**：理解 etcd 存储了哪些数据
 
@@ -883,57 +901,58 @@ kubectl -n kube-system exec -it etcd-master -- \
 # 5. 验证备份
 kubectl -n kube-system exec -it etcd-master -- \
   etcdctl snapshot status /var/lib/etcd/lab-snapshot.db -w table
+
 ```
 
 ---
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
 
-#<!-- chunk: Q1: Kubernetes 和 Docker 的关系是什么？ -->## Q1: Kubernetes 和 Docker 的关系是什么？
+## Q1: Kubernetes 和 Docker 的关系是什么？
 
 **回答**: Docker 是一种容器运行时，负责构建和运行容器。Kubernetes 是容器编排平台，负责管理大规模的容器集群。在 Kubernetes v1.20 之后，Kubernetes 不再直接使用 Docker 作为运行时，而是通过符合 CRI（Container Runtime Interface）标准的运行时（如 containerd）来运行容器。实际上，Docker 构建的镜像仍然可以在 Kubernetes 中使用，因为镜像格式遵循 OCI 标准。简单来说：Docker 是"造集装箱"的，Kubernetes 是"调度整个港口"的。
 
-#<!-- chunk: Q2: 为什么 etcd 如此重要？能不用 etcd 吗？ -->## Q2: 为什么 etcd 如此重要？能不用 etcd 吗？
+## Q2: 为什么 etcd 如此重要？能不用 etcd 吗？
 
 **回答**: etcd 是 Kubernetes 集群状态的**唯一真实来源**（Single Source of Truth）。所有集群数据——Pod 定义、Service 配置、Secret、ConfigMap——全部存储在 etcd 中。如果 etcd 数据丢失，等同于整个集群彻底瘫痪。etcd 不能被替换（至少目前不能），因为 Kubernetes 深度依赖 etcd 的 Watch 机制来实现控制器模式。**SRE 红线**: 生产环境必须部署 3 个或 5 个 etcd 节点的集群，且必须使用 SSD 磁盘，定期备份数据。
 
-#<!-- chunk: Q3: kube-apiserver 为什么是唯一入口？Pod 能不能直接访问 etcd？ -->## Q3: kube-apiserver 为什么是唯一入口？Pod 能不能直接访问 etcd？
+## Q3: kube-apiserver 为什么是唯一入口？Pod 能不能直接访问 etcd？
 
 **回答**: kube-apiserver 是所有集群操作的**唯一入口**，这是安全设计的基本原则。如果允许 Pod 直接访问 etcd，就意味着任何应用都可以读写集群的所有状态数据——这是严重的安全风险。API Server 提供了认证（你是谁）、授权（你能做什么）、准入控制（你的操作是否合规）三层安全防护。即使在 kube-system 命名空间中，也只有 etcd Pod 本身可以访问 etcd。
 
-#<!-- chunk: Q4: Master 节点能不能运行业务 Pod？ -->## Q4: Master 节点能不能运行业务 Pod？
+## Q4: Master 节点能不能运行业务 Pod？
 
 **回答**: 生产环境中**严禁**在 Master 节点运行业务 Pod。原因有三：(1) Master 节点承载控制平面组件（apiserver、etcd、scheduler），业务 Pod 可能竞争 CPU/内存资源，导致控制平面不稳定；(2) Master 节点默认有 NoSchedule 污点（Taint），普通 Pod 不会被调度到 Master；(3) 如果 Master 因业务 Pod 的资源消耗而不可用，整个集群将无法调度新 Pod、无法处理故障恢复。
 
-#<!-- chunk: Q5: Namespace 和 Context 有什么区别？ -->## Q5: Namespace 和 Context 有什么区别？
+## Q5: Namespace 和 Context 有什么区别？
 
 **回答**: Namespace 是 Kubernetes **集群内部**的逻辑隔离机制，用于将同一集群中的资源分组（如按团队、环境、项目划分）。Context 是 **kubeconfig 文件中**的概念，定义了连接到哪个集群、使用哪个用户凭证、默认操作哪个 Namespace。Context 是客户端侧的概念，Namespace 是服务端侧的概念。一个 kubeconfig 可以有多个 Context，每个 Context 可以指向不同的集群。
 
-#<!-- chunk: Q6: 声明式 API 和命令式 API 各自的适用场景？ -->## Q6: 声明式 API 和命令式 API 各自的适用场景？
+## Q6: 声明式 API 和命令式 API 各自的适用场景？
 
 **回答**: 声明式 API（`kubectl apply -f`）适合生产环境，因为它天然支持版本控制（GitOps）、幂等操作（多次执行结果一致）、自愈能力。命令式 API（`kubectl run`、`kubectl scale`）适合临时调试和快速验证。在团队协作中，声明式 API 配合 Git 仓库可以实现完整的变更审计和回滚能力。建议：所有生产变更通过 GitOps 流程执行，命令式操作仅用于紧急排障。
 
-#<!-- chunk: Q7: 如何理解 Kubernetes 的"最终一致性"？ -->## Q7: 如何理解 Kubernetes 的"最终一致性"？
+## Q7: 如何理解 Kubernetes 的"最终一致性"？
 
 **回答**: Kubernetes 不保证集群状态在任意时刻都完全符合声明，但保证**最终**会趋向声明状态。例如你声明 3 个副本，但某个节点刚宕机——此时可能只有 2 个副本在运行，但控制器会检测到差异并在其他节点创建新 Pod，最终恢复到 3 个。这个过程中存在短暂的不一致窗口（通常几秒到几分钟），但系统会持续收敛。理解最终一致性对于设计分布式应用至关重要——不要假设状态变更立即生效。
 
-#<!-- chunk: Q8: etcd 的脑裂问题怎么解决？ -->## Q8: etcd 的脑裂问题怎么解决？
+## Q8: etcd 的脑裂问题怎么解决？
 
 **回答**: etcd 使用 Raft 共识算法来避免脑裂。关键设计是**必须部署奇数个节点**（3、5、7）。当网络分区发生时，只有拥有多数节点（quorum）的分区才能继续提供服务。例如 3 节点集群需要 2 节点存活，5 节点集群需要 3 节点存活。少数派分区会自动停止写入，避免数据不一致。生产环境推荐 3 节点起步（容忍 1 节点问题），超大规模集群使用 5 节点（容忍 2 节点问题）。
 
-#<!-- chunk: Q9: ResourceQuota 和 LimitRange 的区别是什么？ -->## Q9: ResourceQuota 和 LimitRange 的区别是什么？
+## Q9: ResourceQuota 和 LimitRange 的区别是什么？
 
 **回答**: ResourceQuota 是**命名空间级别**的总限额，限制整个命名空间能使用的资源总量（如最多 4 核 CPU、20 个 Pod）。LimitRange 是**单个容器级别**的上下限，定义每个容器的默认资源值和最大/最小值。两者配合使用：LimitRange 确保每个 Pod 有合理的资源配置，ResourceQuota 确保整个命名空间不会超支。当 Pod 未指定 resources 时，LimitRange 的 default 值会被自动应用。
 
-#<!-- chunk: Q10: 生产环境 etcd 的最佳实践是什么？ -->## Q10: 生产环境 etcd 的最佳实践是什么？
+## Q10: 生产环境 etcd 的最佳实践是什么？
 
 **回答**: (1) 使用 SSD/NVMe 磁盘，etcd 对磁盘延迟极度敏感，建议 fdatasync 延迟 < 10ms；(2) 部署 3 或 5 节点集群，禁止 2 节点（无法形成 quorum）；(3) 独立部署 etcd 集群，不要与 Master 组件共享节点资源；(4) 定期备份数据（`etcdctl snapshot save`），建议每小时自动备份一次；(5) 监控 etcd 指标：磁盘 WAL 写入延迟、MVCC 提交延迟、Leader 变更次数；(6) 控制数据库大小在 2GB 以内（默认限制 2GB）；(7) etcd 节点之间的网络延迟应 < 10ms。
 
-#<!-- chunk: Q11: kubelet 和 kube-proxy 是控制平面还是数据平面组件？ -->## Q11: kubelet 和 kube-proxy 是控制平面还是数据平面组件？
+## Q11: kubelet 和 kube-proxy 是控制平面还是数据平面组件？
 
 **回答**: kubelet 和 kube-proxy 属于**数据平面**（也称节点平面）组件。它们运行在每个 Node 上，负责具体的执行工作：kubelet 管理 Pod 生命周期，kube-proxy 管理网络规则。它们不是"控制"集群的组件，而是"执行"集群决策的组件。控制平面只包含 kube-apiserver、etcd、kube-scheduler、kube-controller-manager。
 
-#<!-- chunk: Q12: Deployment、ReplicaSet、Pod 之间的关系是什么？ -->## Q12: Deployment、ReplicaSet、Pod 之间的关系是什么？
+## Q12: Deployment、ReplicaSet、Pod 之间的关系是什么？
 
 **回答**: 它们是一个层级关系：Deployment 管理 ReplicaSet，ReplicaSet 管理 Pod。Deployment 是最上层，负责滚动更新和回滚策略；ReplicaSet 负责维护 Pod 副本数；Pod 是实际运行容器的最小单位。每次 Deployment 更新镜像版本时，会创建一个新的 ReplicaSet，逐步增加新 ReplicaSet 的副本数，同时减少旧 ReplicaSet 的副本数，实现滚动更新。
 
@@ -941,7 +960,7 @@ kubectl -n kube-system exec -it etcd-master -- \
 
 <!-- chunk: 要点总结 -->## 要点总结
 
-#<!-- chunk: 核心架构记忆口诀 -->## 核心架构记忆口诀
+## 核心架构记忆口诀
 
 | 口诀 | 含义 |
 |------|------|
@@ -951,7 +970,7 @@ kubectl -n kube-system exec -it etcd-master -- \
 | **两层平面** | 控制平面（决策）+ 数据平面（执行） |
 | **三个组件** | kubelet（管 Pod）、kube-proxy（管网络）、containerd（管容器） |
 
-#<!-- chunk: 核心概念速查表 -->## 核心概念速查表
+## 核心概念速查表
 
 | 概念 | 一句话解释 |
 |------|-----------|
@@ -963,7 +982,7 @@ kubectl -n kube-system exec -it etcd-master -- \
 | Namespace | 逻辑隔离环境，资源分组和权限控制 |
 | etcd | 集群状态的唯一真实来源，Raft 共识保证一致性 |
 
-#<!-- chunk: SRE 运维红线 -->## SRE 运维红线
+## SRE 运维红线
 
 | 红线 | 说明 | 违反后果 |
 |------|------|---------|
@@ -974,7 +993,7 @@ kubectl -n kube-system exec -it etcd-master -- \
 | **红线 5** | 定期备份 etcd 数据（建议每小时一次） | 数据丢失意味着整个集群需要从零重建 |
 | **红线 6** | 所有生产 Pod 必须配置 resources requests/limits | 资源竞争导致关键服务不可用 |
 
-#<!-- chunk: 生产注意事项 -->## 生产注意事项
+## 生产注意事项
 
 1. **etcd 备份**：设置 CronJob 每小时执行 `etcdctl snapshot save`，备份文件存储到远程存储
 2. **API Server 限流**：配置 `--max-requests-inflight` 和 `--max-mutating-requests-inflight` 防止过载
@@ -982,7 +1001,7 @@ kubectl -n kube-system exec -it etcd-master -- \
 4. **资源配额**：每个 Namespace 必须配置 ResourceQuota 和 LimitRange
 5. **证书管理**：所有组件证书有有效期，设置证书过期告警（提前 30 天）
 
-#<!-- chunk: 架构思维导图 -->## 架构思维导图
+## 架构思维导图
 
 ```
 Kubernetes Architecture
@@ -1018,7 +1037,7 @@ Kubernetes Architecture
 
 <!-- chunk: 延伸阅读 -->## 延伸阅读
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 
 | 资源 | 链接 | 说明 |
 |------|------|------|
@@ -1028,7 +1047,7 @@ Kubernetes Architecture
 | Kubernetes API 概念 | https://kubernetes.io/docs/reference/using-api/ | API 机制详解 |
 | Raft 论文 | https://raft.github.io/raft.pdf | Raft 共识算法 |
 
-#<!-- chunk: 推荐学习路径 -->## 推荐学习路径
+## 推荐学习路径
 
 | 阶段 | 学习内容 | 参考资源 |
 |------|---------|---------|
@@ -1037,7 +1056,7 @@ Kubernetes Architecture
 | 高级 | etcd 性能调优和集群高可用 | etcd 运维指南 |
 | 专家 | 源码级理解 API Server 和调度器 | Kubernetes 源码分析 |
 
-#<!-- chunk: 关联培训专题 -->## 关联培训专题
+## 关联培训专题
 
 - `kubernetes-workload-presentation.md` — 深入理解 Deployment、StatefulSet 等工作负载
 - `kubernetes-scheduling-presentation.md` — 调度器过滤与打分机制详解
@@ -1072,3 +1091,5 @@ Kubernetes Architecture
 - lecturer-persona
 - kubernetes-coredns-presentation
 - kubernetes-ingress-presentation
+
+```

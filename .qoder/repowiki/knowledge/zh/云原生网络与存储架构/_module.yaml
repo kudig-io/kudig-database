@@ -1,0 +1,9 @@
+schema_version: 1
+module_path: networking_and_storage
+title: 云原生网络与存储架构
+scope:
+    - domain-03-networking-traffic/
+    - domain-04-storage-data/
+source_files: []
+depends_on: []
+related_to: []

@@ -189,6 +189,9 @@ k8s_versions:
 
 ### 2.1 API Server性能测试
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # API Server性能基准测试脚本
@@ -904,6 +907,9 @@ service_level_objectives:
 ## 5. 测试工具集
 
 ### 5.1 核心测试工具
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash
@@ -1863,7 +1869,7 @@ performance_test_checklist:
 ## Obsidian 相关文档
 
 - domain-01-cluster-fundamentals KUDIG Database — Global MOC
-- [[domain-01-cluster-fundamentals/README|Domain-3: Kubernetes控制平面]]
+- [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
 - Domain-3 控制平面 — 开源项目索引
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
@@ -1877,7 +1883,7 @@ performance_test_checklist:
 
 ## Related
 
-- [[domain-02-workloads-applications/03-jvm-gc-container-tuning|03-jvm-gc-container-tuning]]
+- [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
 
 ## See Also
 
@@ -1885,3 +1891,5 @@ performance_test_checklist:
 - 07-plane-upgrade-migration
 - 09-plane-scalability-guide
 - 10-plane-backup-disaster-recovery
+
+```

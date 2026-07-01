@@ -176,7 +176,7 @@ flowchart TB
 
 <!-- chunk: 二、IM 消息系统架构 -->## 二、IM 消息系统架构
 
-#<!-- chunk: 消息收发流程 -->## 消息收发流程
+## 消息收发流程
 
 ```mermaid
 sequenceDiagram
@@ -208,7 +208,7 @@ sequenceDiagram
     Logic->>Storage: 更新已读状态
 ```
 
-#<!-- chunk: 消息存储模型 -->## 消息存储模型
+## 消息存储模型
 
 ```mermaid
 flowchart TB
@@ -240,7 +240,7 @@ flowchart TB
     style Storage fill:#e8f5e9
 ```
 
-#<!-- chunk: 消息队列 K8s 配置 -->## 消息队列 K8s 配置
+## 消息队列 K8s 配置
 
 ```yaml
 apiVersion: apps/v1
@@ -367,7 +367,7 @@ flowchart TB
     style Quality fill:#e8f5e9
 ```
 
-#<!-- chunk: WebRTC 信令流程 -->## WebRTC 信令流程
+## WebRTC 信令流程
 
 ```mermaid
 sequenceDiagram
@@ -507,7 +507,7 @@ flowchart TB
     style Output fill:#e8f5e9
 ```
 
-#<!-- chunk: Media Server K8s 部署 (基于 Mediasoup / Janus) -->## Media Server K8s 部署 (基于 Mediasoup / Janus)
+## Media Server K8s 部署 (基于 Mediasoup / Janus)
 
 ```yaml
 apiVersion: apps/v1
@@ -631,7 +631,7 @@ flowchart TB
 
 <!-- chunk: 八、K8s 部署架构 -->## 八、K8s 部署架构
 
-#<!-- chunk: Namespace 组织 -->## Namespace 组织
+## Namespace 组织
 
 ```mermaid
 flowchart TB
@@ -665,7 +665,7 @@ flowchart TB
     style Gateway fill:#e8f5e9
 ```
 
-#<!-- chunk: RTC 质量监控告警 -->## RTC 质量监控告警
+## RTC 质量监控告警
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -728,17 +728,17 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture|智慧零售与新零售Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture.md|智慧零售与新零售Kubernetes生产架构设计]]
 
 ## Related
 

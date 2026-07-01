@@ -30,7 +30,7 @@ created: "2026-05-23"
 
 ## 概述
 
-Node（节点）是 [[Kubernetes|Kubernetes]] 集群中的工作机器，可以是物理机或虚拟机。Kubernetes 通过将容器放入 Pod 中，并在 Node 上运行这些 Pod 来执行工作负载。一个集群通常包含多个节点，但在学习或资源受限的环境中也可能只有一个节点。每个节点由控制平面管理，包含运行 Pod 所必需的服务组件：[[kubelet|kubelet]]、容器运行时（[[Container Runtime|container runtime]]）和 kube-proxy。
+Node（节点）是 [[Kubernetes|Kubernetes]] 集群中的工作机器，可以是物理机或虚拟机。Kubernetes 通过将容器放入 Pod 中，并在 Node 上运行这些 Pod 来执行工作负载。一个集群通常包含多个节点，但在学习或资源受限的环境中也可能只有一个节点。每个节点由控制平面管理，包含运行 Pod 所必需的服务组件：[[kubelet|kubelet]]、容器运行时（[[concepts/container-runtime.md|container runtime]]）和 kube-proxy。
 
 ## 核心概念/原理
 
@@ -71,4 +71,6 @@ Node（节点）是 [[Kubernetes|Kubernetes]] 集群中的工作机器，可以�
 
 ## Related
 
-- index/etcd-index|etcd 知识图谱索引]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/annotations.md|注解]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/bpfman.md|bpfman eBPF 管理器]]

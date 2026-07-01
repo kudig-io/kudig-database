@@ -105,17 +105,17 @@ created: "2026-05-23"
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
-- [[concepts/observability-pillars|[[Observability Pillars|Observability Pillars]]]]
-- [[entities/prometheus-grafana|Prometheus + Grafana]]
-- [[skills/monitor-kubernetes-metrics|Monitor Kubernetes Metrics]]
-- [[skills/k8s-logging-management-guide|Kubernetes 日志管理最佳实践]]
-- [[skills/k8s-distributed-tracing-guide|Kubernetes 分布式追踪最佳实践]]
+- [[concepts/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
+- [[concepts/observability-pillars.md|[[Observability Pillars|Observability Pillars]]]]
+- [[entities/prometheus-grafana.md|Prometheus + Grafana]]
+- [[skills/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]]
+- [[skills/k8s-logging-management-guide.md|Kubernetes 日志管理最佳实践]]
+- [[skills/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]]
 
 ## Related
 
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/observability-pillars|observability-pillars]] — Observability Pillars
-- [[concepts/k8s-production-best-practices|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
-- [[skills/monitor-kubernetes-metrics|monitor-kubernetes-metrics]] — Monitor Kubernetes Metrics
+- [[concepts/observability-pillars.md|observability-pillars]] — Observability Pillars
+- [[concepts/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[skills/monitor-kubernetes-metrics.md|monitor-kubernetes-metrics]] — Monitor Kubernetes Metrics

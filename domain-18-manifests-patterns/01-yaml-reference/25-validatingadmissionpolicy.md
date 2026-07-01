@@ -102,7 +102,7 @@ k8s_versions:
 
 <!-- chunk: 概述 -->## 概述
 
-#<!-- chunk: 什么是 ValidatingAdmissionPolicy -->## 什么是 ValidatingAdmissionPolicy
+## 什么是 ValidatingAdmissionPolicy
 
 ValidatingAdmissionPolicy 是 Kubernetes v1.26 引入的声明式准入控制机制，使用 CEL (Common Expression Language) 表达式定义验证规则，无需编写和维护 Webhook。
 
@@ -128,7 +128,7 @@ ValidatingAdmissionPolicy 是 Kubernetes v1.26 引入的声明式准入控制机
 
 <!-- chunk: 核心概念 -->## 核心概念
 
-#<!-- chunk: 两个核心资源 -->## 两个核心资源
+## 两个核心资源
 
 1. **ValidatingAdmissionPolicy**: 定义验证规则和匹配条件
 2. **ValidatingAdmissionPolicyBinding**: 将策略绑定到特定资源并提供参数
@@ -157,7 +157,7 @@ ValidatingAdmissionPolicy 是 Kubernetes v1.26 引入的声明式准入控制机
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 工作流程 -->## 工作流程
+## 工作流程
 
 ```
 API 请求
@@ -189,7 +189,7 @@ API 请求
 
 <!-- chunk: ValidatingAdmissionPolicy 字段详解 -->## ValidatingAdmissionPolicy 字段详解
 
-#<!-- chunk: 基础结构 -->## 基础结构
+## 基础结构
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1  # v1.26+ beta, v1.30+ GA
@@ -238,7 +238,7 @@ spec:
 
 ---
 
-#<!-- chunk: 1. matchConstraints 字段 -->## 1. matchConstraints 字段
+## 1. matchConstraints 字段
 
 定义策略应用到哪些资源类型。
 
@@ -297,7 +297,7 @@ spec:
 
 ---
 
-#<!-- chunk: 2. validations 字段 -->## 2. validations 字段
+## 2. validations 字段
 
 定义验证规则列表，每个规则包含 CEL 表达式和错误处理。
 
@@ -355,7 +355,7 @@ spec:
 
 ---
 
-#<!-- chunk: 3. paramKind 字段 -->## 3. paramKind 字段
+## 3. paramKind 字段
 
 定义参数类型，支持参数化配置。
 
@@ -470,7 +470,7 @@ spec:
 
 ---
 
-#<!-- chunk: 4. auditAnnotations 字段 -->## 4. auditAnnotations 字段
+## 4. auditAnnotations 字段
 
 在审计日志中添加自定义注解，用于记录验证上下文。
 
@@ -523,7 +523,7 @@ spec:
 
 ---
 
-#<!-- chunk: 5. failurePolicy 字段 -->## 5. failurePolicy 字段
+## 5. failurePolicy 字段
 
 定义当策略评估失败（如 CEL 表达式错误）时的处理方式。
 
@@ -552,7 +552,7 @@ spec:
 
 ---
 
-#<!-- chunk: 6. matchConditions 字段 -->## 6. matchConditions 字段
+## 6. matchConditions 字段
 
 前置过滤条件，用于在执行 validations 前快速过滤请求（v1.27+）。
 
@@ -597,7 +597,7 @@ spec:
 
 ---
 
-#<!-- chunk: 7. variables 字段 -->## 7. variables 字段
+## 7. variables 字段
 
 定义可复用的 CEL 表达式变量（v1.28+）。
 
@@ -661,7 +661,7 @@ spec:
 
 <!-- chunk: ValidatingAdmissionPolicyBinding 字段详解 -->## ValidatingAdmissionPolicyBinding 字段详解
 
-#<!-- chunk: 基础结构 -->## 基础结构
+## 基础结构
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -696,7 +696,7 @@ spec:
 
 ---
 
-#<!-- chunk: 1. policyName 字段 -->## 1. policyName 字段
+## 1. policyName 字段
 
 ```yaml
 spec:
@@ -706,7 +706,7 @@ spec:
 
 ---
 
-#<!-- chunk: 2. paramRef 字段 -->## 2. paramRef 字段
+## 2. paramRef 字段
 
 引用参数对象，为策略提供配置。
 
@@ -740,7 +740,7 @@ spec:
 
 ---
 
-#<!-- chunk: 3. matchResources 字段 -->## 3. matchResources 字段
+## 3. matchResources 字段
 
 定义绑定应用到哪些资源。
 
@@ -800,7 +800,7 @@ spec:
 
 ---
 
-#<!-- chunk: 4. validationActions 字段 -->## 4. validationActions 字段
+## 4. validationActions 字段
 
 定义验证失败时的行为（v1.27+）。
 
@@ -858,7 +858,7 @@ validationActions:
 
 ---
 
-#<!-- chunk: 完整示例：多环境绑定 -->## 完整示例：多环境绑定
+## 完整示例：多环境绑定
 
 ```yaml
 # 1. 定义策略（适用于所有 Deployment）
@@ -958,7 +958,7 @@ spec:
 
 <!-- chunk: CEL 表达式详解 -->## CEL 表达式详解
 
-#<!-- chunk: CEL 基础 -->## CEL 基础
+## CEL 基础
 
 CEL (Common Expression Language) 是 Google 开发的表达式语言，用于安全的数据验证。
 
@@ -1004,7 +1004,7 @@ list.filter(x, condition)   // 过滤
 
 ---
 
-#<!-- chunk: 内置变量 -->## 内置变量
+## 内置变量
 
 ValidatingAdmissionPolicy 中可用的 CEL 变量：
 
@@ -1020,7 +1020,7 @@ ValidatingAdmissionPolicy 中可用的 CEL 变量：
 
 ---
 
-##<!-- chunk: 1. object 变量 -->## 1. object 变量
+## 1. object 变量
 
 表示当前请求的 Kubernetes 对象。
 
@@ -1053,7 +1053,7 @@ validations:
 
 ---
 
-##<!-- chunk: 2. oldObject 变量 -->## 2. oldObject 变量
+## 2. oldObject 变量
 
 表示更新前的对象，仅在 UPDATE 操作时可用。
 
@@ -1097,7 +1097,7 @@ expression: |
 
 ---
 
-##<!-- chunk: 3. request 变量 -->## 3. request 变量
+## 3. request 变量
 
 包含准入请求的元数据。
 
@@ -1170,7 +1170,7 @@ type AdmissionRequest struct {
 
 ---
 
-##<!-- chunk: 4. params 变量 -->## 4. params 变量
+## 4. params 变量
 
 引用 paramRef 指定的参数对象。
 
@@ -1290,7 +1290,7 @@ spec:
 
 ---
 
-##<!-- chunk: 5. namespaceObject 变量 -->## 5. namespaceObject 变量
+## 5. namespaceObject 变量
 
 表示对象所属的命名空间（Namespace 资源）。
 
@@ -1329,7 +1329,7 @@ validations:
 
 ---
 
-##<!-- chunk: 6. authorizer 变量 -->## 6. authorizer 变量
+## 6. authorizer 变量
 
 用于检查用户权限（v1.28+）。
 
@@ -1388,7 +1388,7 @@ authorizer.allowed(
 
 ---
 
-##<!-- chunk: 7. variables 变量 -->## 7. variables 变量
+## 7. variables 变量
 
 访问自定义变量（v1.28+）。
 
@@ -1418,9 +1418,9 @@ spec:
 
 ---
 
-#<!-- chunk: 常用 CEL 函数 -->## 常用 CEL 函数
+## 常用 CEL 函数
 
-##<!-- chunk: 字符串函数 -->## 字符串函数
+## 字符串函数
 
 ```yaml
 validations:
@@ -1454,7 +1454,7 @@ validations:
 
 ---
 
-##<!-- chunk: 集合函数 -->## 集合函数
+## 集合函数
 
 ```yaml
 validations:
@@ -1501,7 +1501,7 @@ validations:
 
 ---
 
-##<!-- chunk: 类型检查和转换 -->## 类型检查和转换
+## 类型检查和转换
 
 ```yaml
 validations:
@@ -1529,7 +1529,7 @@ validations:
 
 ---
 
-##<!-- chunk: 资源数量函数 -->## 资源数量函数
+## 资源数量函数
 
 Kubernetes 资源数量（如 CPU、内存）有特殊的处理函数。
 
@@ -1570,7 +1570,7 @@ validations:
 
 ---
 
-#<!-- chunk: 完整 CEL 示例：生产级验证 -->## 完整 CEL 示例：生产级验证
+## 完整 CEL 示例：生产级验证
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -1739,7 +1739,7 @@ spec:
 
 <!-- chunk: 内部原理 -->## 内部原理
 
-#<!-- chunk: CEL 编译和缓存 -->## CEL 编译和缓存
+## CEL 编译和缓存
 
 ```
 策略加载
@@ -1771,7 +1771,7 @@ spec:
 
 ---
 
-#<!-- chunk: 与 Webhook 对比 -->## 与 Webhook 对比
+## 与 Webhook 对比
 
 | 维度 | ValidatingAdmissionPolicy | ValidatingWebhook |
 |------|---------------------------|-------------------|
@@ -1806,7 +1806,7 @@ ValidatingWebhook:
 
 ---
 
-#<!-- chunk: 错误处理和失败模式 -->## 错误处理和失败模式
+## 错误处理和失败模式
 
 ```
 表达式执行
@@ -1843,7 +1843,7 @@ ValidatingWebhook:
 | **v1.29** | Beta | 性能优化<br/>改进错误消息 |
 | **v1.30** | **GA** | 正式版，API 稳定 |
 
-#<!-- chunk: Feature Gate -->## Feature Gate
+## Feature Gate
 
 | 版本 | Feature Gate | 默认值 |
 |------|--------------|--------|
@@ -1871,7 +1871,7 @@ spec:
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: 1. 策略设计原则 -->## 1. 策略设计原则
+## 1. 策略设计原则
 
 **DO ✅**:
 - ✅ 使用描述性的策略和绑定名称
@@ -1889,7 +1889,7 @@ spec:
 
 ---
 
-#<!-- chunk: 2. 性能优化 -->## 2. 性能优化
+## 2. 性能优化
 
 ```yaml
 spec:
@@ -1933,7 +1933,7 @@ spec:
 
 ---
 
-#<!-- chunk: 3. 安全性最佳实践 -->## 3. 安全性最佳实践
+## 3. 安全性最佳实践
 
 ```yaml
 # 安全策略示例
@@ -2027,7 +2027,7 @@ spec:
 
 ---
 
-#<!-- chunk: 4. 多环境管理 -->## 4. 多环境管理
+## 4. 多环境管理
 
 ```yaml
 # 环境配置模式
@@ -2127,7 +2127,12 @@ spec:
 
 ---
 
-#<!-- chunk: 5. 测试和验证 -->## 5. 测试和验证
+## 5. 测试和验证
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 # 1. 测试策略（DryRun 模式）
@@ -2158,7 +2163,7 @@ kubectl label namespace my-namespace policy.kubernetes.io/exempt=true
 
 <!-- chunk: 生产案例 -->## 生产案例
 
-#<!-- chunk: 案例 1: 镜像来源限制 -->## 案例 1: 镜像来源限制
+## 案例 1: 镜像来源限制
 
 **需求**: 所有容器镜像必须来自公司内部镜像仓库。
 
@@ -2264,7 +2269,7 @@ spec:
 
 ---
 
-#<!-- chunk: 案例 2: 强制标签规范 -->## 案例 2: 强制标签规范
+## 案例 2: 强制标签规范
 
 **需求**: 生产环境 Deployment 必须设置特定标签。
 
@@ -2388,7 +2393,7 @@ spec:
 
 ---
 
-#<!-- chunk: 案例 3: 副本数上限控制 -->## 案例 3: 副本数上限控制
+## 案例 3: 副本数上限控制
 
 **需求**: 根据命名空间配额动态限制 Deployment 副本数。
 
@@ -2544,7 +2549,7 @@ spec:
 
 <!-- chunk: 常见问题 FAQ -->## 常见问题 FAQ
 
-#<!-- chunk: Q1: ValidatingAdmissionPolicy 与 OPA/Gatekeeper 如何选择？ -->## Q1: ValidatingAdmissionPolicy 与 OPA/Gatekeeper 如何选择？
+## Q1: ValidatingAdmissionPolicy 与 OPA/Gatekeeper 如何选择？
 
 **对比**:
 
@@ -2564,9 +2569,12 @@ spec:
 
 ---
 
-#<!-- chunk: Q2: 如何调试 CEL 表达式错误？ -->## Q2: 如何调试 CEL 表达式错误？
+## Q2: 如何调试 CEL 表达式错误？
 
 **方法 1: 使用 DryRun 测试**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 测试部署（不实际创建）
@@ -2608,7 +2616,7 @@ validationActions:
 
 ---
 
-#<!-- chunk: Q3: 如何实现渐进式推广？ -->## Q3: 如何实现渐进式推广？
+## Q3: 如何实现渐进式推广？
 
 **推荐流程**:
 
@@ -2644,7 +2652,7 @@ validationActions:
 
 ---
 
-#<!-- chunk: Q4: 参数对象更新后策略何时生效？ -->## Q4: 参数对象更新后策略何时生效？
+## Q4: 参数对象更新后策略何时生效？
 
 **答案**: 立即生效（无需重启 API Server）。
 
@@ -2654,6 +2662,10 @@ validationActions:
 - 下一个请求使用新参数
 
 **验证方法**:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl edit/patch`：修改运行中的资源
 
 ```bash
 # 1. 更新参数
@@ -2665,7 +2677,7 @@ kubectl apply -f deployment.yaml --dry-run=server
 
 ---
 
-#<!-- chunk: Q5: 如何处理参数对象不存在的情况？ -->## Q5: 如何处理参数对象不存在的情况？
+## Q5: 如何处理参数对象不存在的情况？
 
 **配置 `parameterNotFoundAction`** (v1.28+):
 
@@ -2685,7 +2697,7 @@ spec:
 
 ---
 
-#<!-- chunk: Q6: 如何排除特定命名空间或对象？ -->## Q6: 如何排除特定命名空间或对象？
+## Q6: 如何排除特定命名空间或对象？
 
 **方法 1: 在 Binding 中使用 namespaceSelector**
 
@@ -2724,7 +2736,7 @@ validations:
 
 ---
 
-#<!-- chunk: Q7: CEL 表达式有哪些限制？ -->## Q7: CEL 表达式有哪些限制？
+## Q7: CEL 表达式有哪些限制？
 
 **限制**:
 
@@ -2744,7 +2756,7 @@ validations:
 
 ---
 
-#<!-- chunk: Q8: 如何监控策略执行情况？ -->## Q8: 如何监控策略执行情况？
+## Q8: 如何监控策略执行情况？
 
 **方法 1: Prometheus 指标**
 
@@ -2777,7 +2789,7 @@ kubectl get events --all-namespaces | grep -i "admission policy"
 
 <!-- chunk: 总结 -->## 总结
 
-#<!-- chunk: 核心要点 -->## 核心要点
+## 核心要点
 
 1. **声明式验证**: 使用 YAML + CEL 表达式，无需编写代码
 2. **高性能**: 进程内执行，比 Webhook 快 10-100 倍
@@ -2785,7 +2797,7 @@ kubectl get events --all-namespaces | grep -i "admission policy"
 4. **渐进式推广**: Audit → Warn → Deny
 5. **版本支持**: v1.26 Beta, v1.30 GA
 
-#<!-- chunk: 适用场景 -->## 适用场景
+## 适用场景
 
 ✅ **适合使用 ValidatingAdmissionPolicy**:
 - 标准验证规则（副本数、资源限制、标签检查）
@@ -2800,7 +2812,10 @@ kubectl get events --all-namespaces | grep -i "admission policy"
 - 需要修改对象（应使用 MutatingAdmissionPolicy）
 - 需要异步处理
 
-#<!-- chunk: 快速上手 -->## 快速上手
+## 快速上手
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 检查集群版本（需要 v1.26+）
@@ -2843,7 +2858,7 @@ kubectl describe validatingadmissionpolicy <name>
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考

@@ -73,7 +73,7 @@ Istio Ambient Mesh 代表了服务网格架构的下一代演进方向。传统�
 
 2026年，Istio v1.29 正式将 Ambient Mesh 标记为 GA（General Availability），标志着这项技术已具备生产环境部署的成熟度。本文档从生产环境运维专家的角度，全面覆盖 Ambient Mesh 的架构原理、ztunnel 配置、waypoint proxy 部署、L4/L7 策略配置、从 Sidecar 模式的迁移策略，以及生产环境的故障排查和性能调优实践。
 
-#<!-- chunk: Ambient Mesh 架构全景 -->## Ambient Mesh 架构全景
+## Ambient Mesh 架构全景
 
 ```mermaid
 graph TB
@@ -112,7 +112,7 @@ graph TB
 
 <!-- chunk: 一、Ambient Mesh 核心组件 -->## 一、Ambient Mesh 核心组件
 
-#<!-- chunk: 1.1 ztunnel 节点级代理 -->## 1.1 ztunnel 节点级代理
+## 1.1 ztunnel 节点级代理
 
 ztunnel 是 Ambient Mesh 的核心组件，以 DaemonSet 形式在每个 Kubernetes 节点上运行一个实例。它基于 Rust 实现，负责 L4 层的流量处理、mTLS 加密和基础路由功能：
 
@@ -181,7 +181,7 @@ ztunnel 核心能力：
 | 指标导出 | L4 层连接指标、字节计数、错误率 |
 | DNS 代理 | 节点级 DNS 解析，支持 K8s [[Service|Service]] 发现 |
 
-#<!-- chunk: 1.2 Waypoint Proxy L7 代理 -->## 1.2 Waypoint Proxy L7 代理
+## 1.2 Waypoint Proxy L7 代理
 
 Waypoint Proxy 是按需部署的 Envoy 代理实例，负责 L7 层的高级流量管理和安全策略。当命名空间或服务需要 L7 能力时（如流量分割、基于 HTTP 的授权策略、故障注入等），才需要部署 waypoint：
 
@@ -238,7 +238,7 @@ spec:
 
 <!-- chunk: 二、安装与配置 -->## 二、安装与配置
 
-#<!-- chunk: 2.1 Ambient 模式安装 -->## 2.1 Ambient 模式安装
+## 2.1 Ambient 模式安装
 
 ```bash
 istioctl install --set profile=ambient \
@@ -251,7 +251,7 @@ istioctl install --set profile=ambient \
 istioctl verify-install
 ```
 
-#<!-- chunk: 2.2 Ambient 安装验证输出 -->## 2.2 Ambient 安装验证输出
+## 2.2 Ambient 安装验证输出
 
 ```bash
 $ istioctl verify-install
@@ -289,7 +289,10 @@ kube-system       Active   30d
 monitoring        Active   30d   
 ```
 
-#<!-- chunk: 2.2 命名空间加入 Ambient 数据平面 -->## 2.2 命名空间加入 Ambient 数据平面
+## 2.2 命名空间加入 Ambient 数据平面
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```bash
 kubectl label namespace default istio.io/dataplane-mode=ambient
@@ -301,7 +304,7 @@ kubectl label namespace production istio.io/use-waypoint=namespace-waypoint
 kubectl label namespace staging istio.io/dataplane-mode=ambient istio.io/use-waypoint=none
 ```
 
-#<!-- chunk: 2.3 按服务级别控制 Waypoint 使用 -->## 2.3 按服务级别控制 Waypoint 使用
+## 2.3 按服务级别控制 Waypoint 使用
 
 ```yaml
 apiVersion: v1
@@ -339,7 +342,7 @@ spec:
 
 <!-- chunk: 三、L4 策略配置 -->## 三、L4 策略配置
 
-#<!-- chunk: 3.1 ztunnel L4 安全策略 -->## 3.1 ztunnel L4 安全策略
+## 3.1 ztunnel L4 安全策略
 
 Ambient 模式下，L4 层的安全策略由 ztunnel 直接执行，无需 waypoint 参与：
 
@@ -381,7 +384,7 @@ spec:
     mode: STRICT
 ```
 
-#<!-- chunk: 3.2 L4 流量可观测性 -->## 3.2 L4 流量可观测性
+## 3.2 L4 流量可观测性
 
 ```yaml
 apiVersion: telemetry.istio.io/v1alpha1
@@ -398,7 +401,7 @@ spec:
         - name: prometheus
 ```
 
-#<!-- chunk: 3.3 ztunnel Prometheus 告警规则 -->## 3.3 ztunnel Prometheus 告警规则
+## 3.3 ztunnel Prometheus 告警规则
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -454,7 +457,7 @@ spec:
 
 <!-- chunk: 四、L7 策略配置 -->## 四、L7 策略配置
 
-#<!-- chunk: 4.1 Waypoint 上的流量管理 -->## 4.1 Waypoint 上的流量管理
+## 4.1 Waypoint 上的流量管理
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -466,14 +469,14 @@ spec:
   hosts:
     - reviews
   http:
-    - match:
-        - headers:
-            end-user:
-              exact: jason
-      route:
-        - destination:
-            host: reviews
-            subset: v2
+    - matchers:
+      - - headers=""
+      - end-user=""
+      - exact="jason"
+      - route=""
+      - - destination=""
+      - host="reviews"
+      - subset="v2"
     - route:
         - destination:
             host: reviews
@@ -519,7 +522,7 @@ spec:
         version: v2
 ```
 
-#<!-- chunk: 4.2 L7 授权策略 -->## 4.2 L7 授权策略
+## 4.2 L7 授权策略
 
 ```yaml
 apiVersion: security.istio.io/v1beta1
@@ -552,7 +555,7 @@ spec:
           values: ["admin"]
 ```
 
-#<!-- chunk: 4.3 故障注入 -->## 4.3 故障注入
+## 4.3 故障注入
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -584,7 +587,7 @@ spec:
             subset: v1
 ```
 
-#<!-- chunk: 4.4 流量镜像 -->## 4.4 流量镜像
+## 4.4 流量镜像
 
 ```yaml
 apiVersion: networking.istio.io/v1
@@ -612,7 +615,7 @@ spec:
 
 <!-- chunk: 五、从 Sidecar 迁移到 Ambient -->## 五、从 Sidecar 迁移到 Ambient
 
-#<!-- chunk: 5.1 迁移架构 -->## 5.1 迁移架构
+## 5.1 迁移架构
 
 ```mermaid
 graph LR
@@ -643,7 +646,11 @@ graph LR
     A --> B --> C --> D --> E --> F --> G --> H --> I --> J --> K --> L
 ```
 
-#<!-- chunk: 5.2 迁移操作步骤 -->## 5.2 迁移操作步骤
+## 5.2 迁移操作步骤
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # Phase 2: 安装 Ambient 组件 (与现有 Sidecar 共存)
@@ -670,7 +677,10 @@ istioctl analyze -n default
 fortio load -t 60s -qps 1000 http://reviews:9080/reviews/0
 ```
 
-#<!-- chunk: 5.3 迁移验证输出 -->## 5.3 迁移验证输出
+## 5.3 迁移验证输出
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 $ kubectl rollout restart deployment -n default
@@ -694,7 +704,7 @@ $ istioctl analyze -n default
 ✔ All ztunnel pods are synced and healthy.
 ```
 
-#<!-- chunk: 5.4 迁移注意事项 -->## 5.4 迁移注意事项
+## 5.4 迁移注意事项
 
 ```yaml
 兼容性检查:
@@ -717,7 +727,7 @@ $ istioctl analyze -n default
 
 <!-- chunk: 六、可观测性配置 -->## 六、可观测性配置
 
-#<!-- chunk: 六、Ambient 模式监控栈 -->## 六、Ambient 模式监控栈
+## 六、Ambient 模式监控栈
 
 ```yaml
 apiVersion: telemetry.istio.io/v1alpha1
@@ -733,13 +743,13 @@ spec:
     - providers:
         - name: prometheus
       overrides:
-        - match:
-            metric: ALL_METRICS
-          tagOverrides:
-            source_canonical_service:
-              value: "source_workload"
-            destination_canonical_service:
-              value: "destination_workload"
+        - matchers:
+          - metric="ALL_METRICS"
+          - tagOverrides=""
+          - source_canonical_service=""
+          - value="source_workload"
+          - destination_canonical_service=""
+          - value="destination_workload"
   tracing:
     - providers:
         - name: otel-collector
@@ -782,7 +792,7 @@ data:
           exporters: [elasticsearch]
 ```
 
-#<!-- chunk: 6.2 ztunnel 关键指标 -->## 6.2 ztunnel 关键指标
+## 6.2 ztunnel 关键指标
 
 ```promql
 istio_connections_opened_total{reporter="ztunnel"}
@@ -792,7 +802,7 @@ istio_bytes_received_total{reporter="ztunnel"}
 istio_request_duration_milliseconds_bucket{reporter="ztunnel"}
 ```
 
-#<!-- chunk: 6.3 Waypoint 关键指标 -->## 6.3 Waypoint 关键指标
+## 6.3 Waypoint 关键指标
 
 ```promql
 istio_requests_total{reporter="waypoint"}
@@ -806,7 +816,7 @@ envoy_cluster_upstream_cx_active{cluster_name="waypoint"}
 
 <!-- chunk: 七、性能调优 -->## 七、性能调优
 
-#<!-- chunk: 7.1 ztunnel 资源配置 -->## 7.1 ztunnel 资源配置
+## 7.1 ztunnel 资源配置
 
 ```yaml
 apiVersion: apps/v1
@@ -835,7 +845,7 @@ spec:
               value: "warn"
 ```
 
-#<!-- chunk: 7.2 Waypoint 资源配置 -->## 7.2 Waypoint 资源配置
+## 7.2 Waypoint 资源配置
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -866,7 +876,7 @@ spec:
           averageValue: "1000"
 ```
 
-#<!-- chunk: 7.3 性能基准对比 -->## 7.3 性能基准对比
+## 7.3 性能基准对比
 
 ```yaml
 Sidecar vs Ambient 性能基准:
@@ -893,7 +903,7 @@ Sidecar vs Ambient 性能基准:
     总资源: ~3.5GB RAM
 ```
 
-#<!-- chunk: 7.4 Ambient Mesh 参数参考 -->## 7.4 Ambient Mesh 参数参考
+## 7.4 Ambient Mesh 参数参考
 
 | 参数 | 组件 | 默认值 | 说明 | 推荐值 (生产) |
 |:---|:---|:---|:---|:---|
@@ -909,7 +919,10 @@ Sidecar vs Ambient 性能基准:
 
 <!-- chunk: 八、故障排查 -->## 八、故障排查
 
-#<!-- chunk: 8.1 Ambient 故障排查命令 -->## 8.1 Ambient 故障排查命令
+## 8.1 Ambient 故障排查命令
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 #!/bin/bash
@@ -943,7 +956,7 @@ echo "=== 分析配置问题 ==="
 istioctl analyze -A
 ```
 
-#<!-- chunk: 8.2 ztunnel 日志分析输出 -->## 8.2 ztunnel 日志分析输出
+## 8.2 ztunnel 日志分析输出
 
 ```bash
 $ kubectl logs -n istio-system daemonset/ztunnel --tail=30
@@ -955,9 +968,10 @@ $ kubectl logs -n istio-system daemonset/ztunnel --tail=30
 2026-04-24T10:00:02.001Z WARN ztunnel::proxy::outbound: connection failed to upstream 10.0.3.5:9080 error=connection refused
 2026-04-24T10:00:05.123Z INFO ztunnel::dns: resolved reviews.default.svc.cluster.local -> [10.0.2.10, 10.0.2.11, 10.0.2.12]
 2026-04-24T10:00:10.456Z INFO ztunnel::proxy::inbound: accepted inbound connection src=10.0.1.8:42156 dst=10.0.2.11:9080
+
 ```
 
-#<!-- chunk: 8.3 常见问题与解决 -->## 8.3 常见问题与解决
+## 8.3 常见问题与解决
 
 | 问题 | 原因 | 诊断命令 | 解决方案 |
 |:---|:---|:---|:---|
@@ -976,7 +990,7 @@ $ kubectl logs -n istio-system daemonset/ztunnel --tail=30
 
 <!-- chunk: 九、最佳实践 -->## 九、最佳实践
 
-#<!-- chunk: 9.1 部署最佳实践 -->## 9.1 部署最佳实践
+## 9.1 部署最佳实践
 
 ```yaml
 推荐策略:
@@ -988,7 +1002,7 @@ $ kubectl logs -n istio-system daemonset/ztunnel --tail=30
   6. 保持 Istio 版本更新 (N-1 策略)
 ```
 
-#<!-- chunk: 9.2 Waypoint 设计原则 -->## 9.2 Waypoint 设计原则
+## 9.2 Waypoint 设计原则
 
 ```yaml
 Waypoint 粒度选择:
@@ -1012,7 +1026,7 @@ Waypoint 粒度选择:
 
 <!-- chunk: 十、Ambient Mesh 生产环境部署检查清单 -->## 十、Ambient Mesh 生产环境部署检查清单
 
-#<!-- chunk: 部署前验证步骤 -->## 部署前验证步骤
+## 部署前验证步骤
 
 在将 Istio Ambient Mesh 部署到生产环境之前，需要按照以下检查清单逐项验证，确保所有关键条件已满足。这些检查项涵盖了基础设施兼容性、控制平面健康状态、数据平面功能验证和安全策略确认等维度。每一步的验证命令和预期输出都已列出，方便运维人员快速执行。
 
@@ -1058,7 +1072,7 @@ Ambient_Mesh_生产检查清单:
     - 告警规则已配置: kubectl get prometheusrule -A
 ```
 
-#<!-- chunk: Ambient Mesh 端到端验证脚本 -->## Ambient Mesh 端到端验证脚本
+## Ambient Mesh 端到端验证脚本
 
 ```bash
 #!/bin/bash
@@ -1143,11 +1157,11 @@ fi
 
 <!-- chunk: 十一、Ambient Mesh 与 Sidecar 模式详细对比 -->## 十一、Ambient Mesh 与 Sidecar 模式详细对比
 
-#<!-- chunk: 两种模式的核心差异 -->## 两种模式的核心差异
+## 两种模式的核心差异
 
 Istio 的 Sidecar 模式和 Ambient 模式代表了服务网格架构的两个不同阶段。Sidecar 模式通过在每个应用 Pod 中注入一个独立的 Envoy 代理（约 100MB 内存），提供完整的 L4 和 L7 功能。这种模式在2023年之前是唯一选择，功能最为成熟和稳定。Ambient 模式通过将代理能力从 Pod 级别提升到节点级别，使用 Rust 实现的 ztunnel（约 50MB 每节点）处理 L4 流量和 mTLS，仅在需要 L7 功能时才按需部署 Waypoint Proxy。这种架构大幅降低了资源开销——在一个 50 节点、1000 个 Pod 的集群中，Sidecar 模式需要约 100GB 代理内存，而 Ambient L4 模式仅需约 2.5GB。
 
-#<!-- chunk: 功能完整性对比 -->## 功能完整性对比
+## 功能完整性对比
 
 | 功能 | Sidecar 模式 | Ambient L4 (ztunnel) | Ambient L7 (Waypoint) | 说明 |
 |:---|:---|:---|:---|:---|
@@ -1170,7 +1184,7 @@ Istio 的 Sidecar 模式和 Ambient 模式代表了服务网格架构的两个�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-03-networking-traffic MOC
-- [[domain-03-networking-traffic/README|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
+- [[domain-03-networking-traffic/README.md|Domain 03: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
 - Domain-26 服务网格与微服务 — 开源项目索引
 - Istio 企业级服务网格架构与实践
 - Linkerd 企业级服务网格深度实践
@@ -1188,3 +1202,5 @@ Istio 的 Sidecar 模式和 Ambient 模式代表了服务网格架构的两个�
 - 07-service-mesh-comparison-selection
 - 09-microservice-resilience-patterns
 - 10-api-gateway-service-mesh-integration
+
+```

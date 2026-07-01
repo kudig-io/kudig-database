@@ -74,7 +74,7 @@ created: "2026-05-23"
 
 <!-- chunk: API 概述与版本 -->## API 概述与版本
 
-#<!-- chunk: 基本信息 -->## 基本信息
+## 基本信息
 
 | 属性 | 值 |
 |------|-----|
@@ -84,7 +84,7 @@ created: "2026-05-23"
 | **命名空间作用域** | ✅ 是 |
 | **缩写** | `cm` |
 
-#<!-- chunk: 核心特性 -->## 核心特性
+## 核心特性
 
 ```yaml
 # ConfigMap 用途
@@ -95,7 +95,7 @@ created: "2026-05-23"
 # 5. 多环境配置 (开发/测试/生产)
 ```
 
-#<!-- chunk: 与 Secret 的差异 -->## 与 Secret 的差异
+## 与 Secret 的差异
 
 | 维度 | ConfigMap | Secret |
 |------|-----------|--------|
@@ -110,7 +110,7 @@ created: "2026-05-23"
 
 <!-- chunk: 字段规格表 -->## 字段规格表
 
-#<!-- chunk: 核心字段 -->## 核心字段
+## 核心字段
 
 | 字段路径 | 类型 | 必填 | 版本 | 说明 |
 |----------|------|------|------|------|
@@ -122,7 +122,7 @@ created: "2026-05-23"
 | `binaryData` | map[string][]byte | ❌ | v1 | 二进制数据(Base64) |
 | `immutable` | bool | ❌ | v1.21+ | 不可变标记 |
 
-#<!-- chunk: 限制说明 -->## 限制说明
+## 限制说明
 
 | 限制项 | 值 | 说明 |
 |--------|-----|------|
@@ -135,7 +135,7 @@ created: "2026-05-23"
 
 <!-- chunk: 基础配置示例 -->## 基础配置示例
 
-#<!-- chunk: 简单键值对 -->## 简单键值对
+## 简单键值对
 
 ```yaml
 apiVersion: v1
@@ -151,7 +151,7 @@ data:
   feature_flag: "true"
 ```
 
-#<!-- chunk: 多行配置文件 -->## 多行配置文件
+## 多行配置文件
 
 ```yaml
 apiVersion: v1
@@ -212,7 +212,7 @@ data:
       format: json
 ```
 
-#<!-- chunk: 二进制数据 (binaryData) -->## 二进制数据 (binaryData)
+## 二进制数据 (binaryData)
 
 ```yaml
 apiVersion: v1
@@ -230,7 +230,7 @@ data:
   text-file.txt: "This is plain text"
 ```
 
-#<!-- chunk: 不可变 ConfigMap (v1.21+) -->## 不可变 ConfigMap (v1.21+)
+## 不可变 ConfigMap (v1.21+)
 
 ```yaml
 apiVersion: v1
@@ -253,7 +253,7 @@ data:
 
 <!-- chunk: 环境变量注入 -->## 环境变量注入
 
-#<!-- chunk: 单个键作为环境变量 -->## 单个键作为环境变量
+## 单个键作为环境变量
 
 ```yaml
 apiVersion: v1
@@ -287,7 +287,7 @@ spec:
           optional: true
 ```
 
-#<!-- chunk: 所有键作为环境变量 (envFrom) -->## 所有键作为环境变量 (envFrom)
+## 所有键作为环境变量 (envFrom)
 
 ```yaml
 apiVersion: v1
@@ -319,7 +319,7 @@ spec:
     # ENABLE_CACHE=true
 ```
 
-#<!-- chunk: 添加前缀 (envFrom + prefix) -->## 添加前缀 (envFrom + prefix)
+## 添加前缀 (envFrom + prefix)
 
 ```yaml
 apiVersion: v1
@@ -342,7 +342,7 @@ spec:
     # APP_ENABLE_CACHE=true
 ```
 
-#<!-- chunk: 处理无效键名 -->## 处理无效键名
+## 处理无效键名
 
 ```yaml
 apiVersion: v1
@@ -379,7 +379,7 @@ spec:
 
 <!-- chunk: Volume 挂载 -->## Volume 挂载
 
-#<!-- chunk: 完整挂载 (所有键) -->## 完整挂载 (所有键)
+## 完整挂载 (所有键)
 
 ```yaml
 apiVersion: v1
@@ -423,7 +423,7 @@ spec:
       name: app-files
 ```
 
-#<!-- chunk: 选择性挂载 (items) -->## 选择性挂载 (items)
+## 选择性挂载 (items)
 
 ```yaml
 apiVersion: v1
@@ -454,7 +454,7 @@ spec:
       # /etc/config/db/settings.ini
 ```
 
-#<!-- chunk: 设置文件权限 (defaultMode) -->## 设置文件权限 (defaultMode)
+## 设置文件权限 (defaultMode)
 
 ```yaml
 apiVersion: v1
@@ -482,7 +482,7 @@ spec:
         mode: 0644  # rw-r--r-- (覆盖 defaultMode)
 ```
 
-#<!-- chunk: subPath 挂载 (单文件) -->## subPath 挂载 (单文件)
+## subPath 挂载 (单文件)
 
 ```yaml
 apiVersion: v1
@@ -521,7 +521,7 @@ spec:
       name: nginx-config
 ```
 
-#<!-- chunk: 避免覆盖现有目录 -->## 避免覆盖现有目录
+## 避免覆盖现有目录
 
 ```yaml
 apiVersion: v1
@@ -558,7 +558,7 @@ spec:
 
 <!-- chunk: 高级使用技巧 -->## 高级使用技巧
 
-#<!-- chunk: 组合多个 ConfigMap -->## 组合多个 ConfigMap
+## 组合多个 ConfigMap
 
 ```yaml
 apiVersion: v1
@@ -600,7 +600,7 @@ spec:
       name: nginx-files
 ```
 
-#<!-- chunk: Projected Volume (合并多个配置) -->## Projected Volume (合并多个配置)
+## Projected Volume (合并多个配置)
 
 ```yaml
 apiVersion: v1
@@ -647,7 +647,7 @@ spec:
       # /etc/config/secrets/api_key
 ```
 
-#<!-- chunk: 动态配置注入 (InitContainer) -->## 动态配置注入 (InitContainer)
+## 动态配置注入 (InitContainer)
 
 ```yaml
 apiVersion: v1
@@ -699,7 +699,10 @@ spec:
     emptyDir: {}
 ```
 
-#<!-- chunk: kubectl 命令行创建 -->## kubectl 命令行创建
+## kubectl 命令行创建
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 从字面量创建
@@ -735,7 +738,7 @@ kubectl create configmap test-config \
 
 <!-- chunk: 内部实现原理 -->## 内部实现原理
 
-#<!-- chunk: ConfigMap 更新传播机制 -->## ConfigMap 更新传播机制
+## ConfigMap 更新传播机制
 
 ```yaml
 # ConfigMap 更新到 Pod 的时间线
@@ -755,7 +758,7 @@ kubectl edit configmap app-config
 # - env/envFrom: 永不更新 (需要重启 Pod)
 ```
 
-#<!-- chunk: 为什么 subPath 不自动更新? -->## 为什么 subPath 不自动更新?
+## 为什么 subPath 不自动更新?
 
 ```yaml
 # 原理解析:
@@ -791,7 +794,7 @@ spec:
 # lrwxrwxrwx 1 root root 25 Feb 10 10:00 ..data -> ..2026_02_10_10_00_12_345
 ```
 
-#<!-- chunk: kubelet 同步周期调优 -->## kubelet 同步周期调优
+## kubelet 同步周期调优
 
 ```yaml
 # kubelet 配置参数
@@ -810,7 +813,7 @@ spec:
 # 注意: 即使使用 Watch, 挂载到 Pod 仍需等待 kubelet 缓存刷新
 ```
 
-#<!-- chunk: 不可变 ConfigMap 的性能优势 -->## 不可变 ConfigMap 的性能优势
+## 不可变 ConfigMap 的性能优势
 
 ```yaml
 apiVersion: v1
@@ -835,7 +838,7 @@ data:
 
 <!-- chunk: 生产实战案例 -->## 生产实战案例
 
-#<!-- chunk: 案例1: Nginx 配置热更新 -->## 案例1: Nginx 配置热更新
+## 案例1: Nginx 配置热更新
 
 ```yaml
 # 场景: Nginx 配置变更自动热加载, 无需重启 Pod
@@ -931,7 +934,7 @@ spec:
 # 输出: Version 2.0 (10-120秒后生效, 无需重启 Pod)
 ```
 
-#<!-- chunk: 案例2: 多环境配置管理 -->## 案例2: 多环境配置管理
+## 案例2: 多环境配置管理
 
 ```yaml
 # 场景: 同一应用在开发/测试/生产环境使用不同配置
@@ -1003,7 +1006,7 @@ spec:
             # name: app-config-v1  # 生产环境
 ```
 
-#<!-- chunk: 案例3: 应用配置文件注入 -->## 案例3: 应用配置文件注入
+## 案例3: 应用配置文件注入
 
 ```yaml
 # 场景: Spring Boot 应用使用 application.yaml 配置
@@ -1106,7 +1109,7 @@ spec:
           name: springboot-config
 ```
 
-#<!-- chunk: 案例4: 启动脚本注入 -->## 案例4: 启动脚本注入
+## 案例4: 启动脚本注入
 
 ```yaml
 # 场景: 数据库初始化脚本通过 ConfigMap 注入
@@ -1183,7 +1186,7 @@ spec:
 
 <!-- chunk: 版本兼容性与最佳实践 -->## 版本兼容性与最佳实践
 
-#<!-- chunk: 版本特性 -->## 版本特性
+## 版本特性
 
 | Kubernetes 版本 | ConfigMap 新特性 |
 |-----------------|------------------|
@@ -1192,9 +1195,9 @@ spec:
 | v1.25+ | 无重大变更 |
 | v1.32+ | 无重大变更 |
 
-#<!-- chunk: 最佳实践 -->## 最佳实践
+## 最佳实践
 
-##<!-- chunk: 1. 版本化管理 -->## 1. 版本化管理
+## 1. 版本化管理
 
 ```yaml
 # 推荐: 为 ConfigMap 添加版本后缀
@@ -1238,7 +1241,7 @@ spec:
             name: app-config-v2  # 明确指定版本
 ```
 
-##<!-- chunk: 2. 使用 immutable 提升性能 -->## 2. 使用 immutable 提升性能
+## 2. 使用 immutable 提升性能
 
 ```yaml
 # 适用场景:
@@ -1257,7 +1260,7 @@ data:
   release_notes_url: "https://example.com/releases/v1.0.0"
 ```
 
-##<!-- chunk: 3. 分离敏感与非敏感配置 -->## 3. 分离敏感与非敏感配置
+## 3. 分离敏感与非敏感配置
 
 ```yaml
 # ConfigMap: 非敏感配置
@@ -1305,7 +1308,7 @@ spec:
           key: database_password
 ```
 
-##<!-- chunk: 4. 避免过大的 ConfigMap -->## 4. 避免过大的 ConfigMap
+## 4. 避免过大的 ConfigMap
 
 ```yaml
 # 反模式: 单个 ConfigMap 接近 1MB 限制
@@ -1335,7 +1338,7 @@ data:
 # 或者: 使用外部存储 (如 S3, NFS, Git)
 ```
 
-##<!-- chunk: 5. 配置热更新策略 -->## 5. 配置热更新策略
+## 5. 配置热更新策略
 
 ```yaml
 # 场景1: 需要热更新 -> 使用 Volume 挂载 (非 subPath)
@@ -1369,14 +1372,17 @@ spec:
         name: app-config
 ```
 
-#<!-- chunk: FAQ -->## FAQ
+## FAQ
 
-##<!-- chunk: Q1: ConfigMap 更新后多久生效? -->## Q1: ConfigMap 更新后多久生效?
+## Q1: ConfigMap 更新后多久生效?
 
 **A:** 时间线分析:
 - **Volume 挂载**: 1-2 分钟 (kubelet 同步周期 + 缓存刷新)
 - **subPath 挂载**: 永不生效 (需重启 Pod)
 - **环境变量**: 永不生效 (需重启 Pod)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```bash
 # 加速更新方法:
@@ -1387,7 +1393,7 @@ kubectl rollout restart deployment/myapp
 # (创建新 ConfigMap, 更新 Deployment 引用)
 ```
 
-##<!-- chunk: Q2: 如何强制 Pod 使用最新配置? -->## Q2: 如何强制 Pod 使用最新配置?
+## Q2: 如何强制 Pod 使用最新配置?
 
 **A:** 三种方案:
 ```yaml
@@ -1419,7 +1425,7 @@ spec:
 # 自动监听 ConfigMap 变更并重启 Pod
 ```
 
-##<!-- chunk: Q3: subPath 挂载的文件能否更新? -->## Q3: subPath 挂载的文件能否更新?
+## Q3: subPath 挂载的文件能否更新?
 
 **A:** 不能自动更新, 原因:
 ```yaml
@@ -1437,7 +1443,7 @@ volumeMounts:
 # (复杂, 不推荐)
 ```
 
-##<!-- chunk: Q4: ConfigMap 能否跨命名空间引用? -->## Q4: ConfigMap 能否跨命名空间引用?
+## Q4: ConfigMap 能否跨命名空间引用?
 
 **A:** 不能, ConfigMap 必须与 Pod 在同一命名空间:
 ```yaml
@@ -1462,9 +1468,13 @@ spec:
 # 3. 使用 Secret + ReferenceGrant (仅适用于 Secret)
 ```
 
-##<!-- chunk: Q5: 如何验证 ConfigMap 是否生效? -->## Q5: 如何验证 ConfigMap 是否生效?
+## Q5: 如何验证 ConfigMap 是否生效?
 
 **A:** 诊断步骤:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 1. 检查 ConfigMap 内容
 kubectl get configmap app-config -o yaml
@@ -1486,16 +1496,16 @@ kubectl describe pod <pod-name> | grep "ConfigMap.*not found"
 
 <!-- chunk: 相关资源 -->## 相关资源
 
-#<!-- chunk: 官方文档 -->## 官方文档
+## 官方文档
 - ConfigMap 概念: https://kubernetes.io/docs/concepts/configuration/configmap/
 - 配置 Pod 使用 ConfigMap: https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/
 
-#<!-- chunk: 工具推荐 -->## 工具推荐
+## 工具推荐
 - **Reloader**: 自动重启使用 ConfigMap 的 Pod (https://github.com/stakater/Reloader)
 - **Kustomize**: ConfigMap 生成器 (自动添加哈希后缀)
 - **Helm**: 模板化 ConfigMap 管理
 
-#<!-- chunk: 本知识库相关文档 -->## 本知识库相关文档
+## 本知识库相关文档
 - [14 - Secret 全类型参考](./14-secret-all-types.md)
 - [01 - Pod 完整字段参考](./01-pod-all-fields.md)
 - [Volume 类型参考](./06-volume-types.md)
@@ -1509,7 +1519,7 @@ kubectl describe pod <pod-name> | grep "ConfigMap.*not found"
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-32-yaml-manifests KUDIG Database — Global MOC
-- [[domain-18-manifests-patterns/README|Domain-32: Kubernetes YAML 配置完整参考手册]]
+- [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
 - Domain-32 YAML 清单 — 开源项目索引
 - 01 - YAML 语法基础与 Kubernetes 资源通用规范
 - 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考

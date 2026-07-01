@@ -66,11 +66,11 @@ created: "2026-05-23"
 
 <!-- chunk: 核心概念详解 -->## 核心概念详解
 
-#<!-- chunk: 性能分析方法论 -->## 性能分析方法论
+## 性能分析方法论
 
 科学的性能分析方法论比工具本身更重要。以下是业界常用的三种方法论：
 
-##<!-- chunk: USE 方法 (Utilization, Saturation, Errors) -->## USE 方法 (Utilization, Saturation, Errors)
+## USE 方法 (Utilization, Saturation, Errors)
 
 USE 方法由 Brendan Gregg 提出，适用于任何资源类型。对每种资源检查三个指标：
 
@@ -95,7 +95,7 @@ USE 方法由 Brendan Gregg 提出，适用于任何资源类型。对每种资�
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: TSA 方法 (Trend, Statistic, Analysis) -->## TSA 方法 (Trend, Statistic, Analysis)
+## TSA 方法 (Trend, Statistic, Analysis)
 
 ```
 1. 趋势分析 (Trend)
@@ -114,7 +114,7 @@ USE 方法由 Brendan Gregg 提出，适用于任何资源类型。对每种资�
    └── 根因定位 (Root Cause Analysis)
 ```
 
-##<!-- chunk: Linux 性能分析工具全景 -->## Linux 性能分析工具全景
+## Linux 性能分析工具全景
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -137,9 +137,9 @@ USE 方法由 Brendan Gregg 提出，适用于任何资源类型。对每种资�
 
 ---
 
-#<!-- chunk: CPU 性能分析 -->## CPU 性能分析
+## CPU 性能分析
 
-##<!-- chunk: CPU 调度原理 -->## CPU 调度原理
+## CPU 调度原理
 
 Linux 使用 CFS（完全公平调度器）管理普通进程的 CPU 分配。理解 CPU 调度有助于排查容器中 CPU 限制相关的问题。
 
@@ -178,7 +178,7 @@ Linux 使用 CFS（完全公平调度器）管理普通进程的 CPU 分配。�
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: CPU 性能监控 -->## CPU 性能监控
+## CPU 性能监控
 
 ```bash
 # 全局 CPU 使用
@@ -216,7 +216,7 @@ cpupower frequency-info
 cat /proc/cpuinfo | grep -i "model name\|cpu MHz"
 ```
 
-##<!-- chunk: perf 深度分析 -->## perf 深度分析
+## perf 深度分析
 
 ```bash
 # 实时热点函数
@@ -258,9 +258,9 @@ offcputime                          # CPU 之外的等待时间
 
 ---
 
-#<!-- chunk: 内存性能分析 -->## 内存性能分析
+## 内存性能分析
 
-##<!-- chunk: Linux 内存管理模型 -->## Linux 内存管理模型
+## Linux 内存管理模型
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -295,7 +295,7 @@ offcputime                          # CPU 之外的等待时间
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: 内存监控命令 -->## 内存监控命令
+## 内存监控命令
 
 ```bash
 # 系统内存概览
@@ -340,7 +340,7 @@ numastat                            # NUMA 节点统计
 numastat -p <pid>                   # 进程 NUMA 分布
 ```
 
-##<!-- chunk: 内存调优参数 -->## 内存调优参数
+## 内存调优参数
 
 ```bash
 # /etc/sysctl.d/99-memory.conf
@@ -386,9 +386,9 @@ sysctl --system
 
 ---
 
-#<!-- chunk: I/O 性能分析 -->## I/O 性能分析
+## I/O 性能分析
 
-##<!-- chunk: 存储栈与 I/O 调度 -->## 存储栈与 I/O 调度
+## 存储栈与 I/O 调度
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -428,7 +428,7 @@ sysctl --system
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: I/O 监控命令 -->## I/O 监控命令
+## I/O 监控命令
 
 ```bash
 # iostat - I/O 统计
@@ -465,7 +465,7 @@ dmesg | grep -i "i/o error\|buffer i/o error"
 cat /sys/block/sda/stat              # 块设备统计
 ```
 
-##<!-- chunk: I/O 性能基准测试 -->## I/O 性能基准测试
+## I/O 性能基准测试
 
 ```bash
 # fio - 灵活的 I/O 测试工具
@@ -502,7 +502,7 @@ dd if=/tmp/test of=/dev/null bs=1M iflag=direct               # 读
 
 ---
 
-#<!-- chunk: 网络性能分析 -->## 网络性能分析
+## 网络性能分析
 
 ```bash
 # 网络连接统计
@@ -541,7 +541,7 @@ dig @<dns-server> <domain> | grep "Query time"
 
 <!-- chunk: 常用命令参考 -->## 常用命令参考
 
-#<!-- chunk: 综合性能监控 -->## 综合性能监控
+## 综合性能监控
 
 | 工具 | CPU | 内存 | I/O | 网络 | 安装 |
 |:---:|:---:|:---:|:---:|:---:|:---|
@@ -576,7 +576,7 @@ sar -s 08:00:00 -e 18:00:00        # 指定时间范围
 
 <!-- chunk: 性能调优 -->## 性能调优
 
-#<!-- chunk: 生产环境内核参数模板 -->## 生产环境内核参数模板
+## 生产环境内核参数模板
 
 ```bash
 # /etc/sysctl.d/99-production.conf
@@ -622,7 +622,7 @@ kernel.kptr_restrict = 2
 sysctl --system
 ```
 
-#<!-- chunk: ulimit 配置 -->## ulimit 配置
+## ulimit 配置
 
 ```bash
 # /etc/security/limits.d/99-production.conf
@@ -641,7 +641,10 @@ ulimit -a
 
 <!-- chunk: 安全加固 -->## 安全加固
 
-#<!-- chunk: 性能监控安全 -->## 性能监控安全
+## 性能监控安全
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `sysctl -w`：实时修改内核参数，全局生效
 
 ```bash
 # 限制 perf 访问 (防止信息泄露)
@@ -658,7 +661,7 @@ auditctl -a always,exit -F arch=b64 -S perf_event_open -k perf_access
 
 <!-- chunk: 与 Kubernetes 的关系 -->## 与 Kubernetes 的关系
 
-#<!-- chunk: 容器资源限制与性能 -->## 容器资源限制与性能
+## 容器资源限制与性能
 
 Kubernetes 通过 cgroups 实现容器资源限制，理解底层机制对于排查性能问题至关重要：
 
@@ -683,7 +686,7 @@ cat /sys/fs/cgroup/.../cpu.stat | grep throttled_time
 # / rate(container_cpu_cfs_periods_total[5m])
 ```
 
-#<!-- chunk: Kubernetes 性能监控 -->## Kubernetes 性能监控
+## Kubernetes 性能监控
 
 ```bash
 # kubectl top 命令
@@ -717,7 +720,7 @@ kubectl describe node <node> | grep -A5 "Pressure"
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 性能故障诊断流程 -->## 性能故障诊断流程
+## 性能故障诊断流程
 
 ```bash
 #!/bin/bash
@@ -755,7 +758,7 @@ dmesg | grep -i -E "error|oom|hung_task|blocked for" | tail -5
 
 ---
 
-#<!-- chunk: eBPF 高级性能分析 -->## eBPF 高级性能分析
+## eBPF 高级性能分析
 
 eBPF (extended Berkeley Packet Filter) 是现代 Linux 性能分析的革命性技术，允许在内核中安全地运行沙箱程序，无需修改内核源码。Cilium、[[Falco|Falco]] 等云原生工具都基于 eBPF 构建。
 
@@ -794,7 +797,7 @@ bpftrace -e 'tracepoint:syscalls:sys_enter_open { printf("%s %s\n", comm, str(ar
 bpftrace -e 'profile:hz:99 /pid == <pid>/ { @[ustack] = count(); }'
 ```
 
-#<!-- chunk: 容器性能调优场景 -->## 容器性能调优场景
+## 容器性能调优场景
 
 | 场景 | 优化方法 | 工具 |
 |:---|:---|:---|
@@ -804,7 +807,7 @@ bpftrace -e 'profile:hz:99 /pid == <pid>/ { @[ustack] = count(); }'
 | 网络延迟高 | 调整 TCP 参数, 检查 conntrack | ss, tcpdump, bpftrace |
 | 大量短连接 | 调整 TIME_WAIT 参数, 使用连接池 | ss -s, netstat -s |
 
-#<!-- chunk: 性能调优决策树 -->## 性能调优决策树
+## 性能调优决策树
 
 ```
 性能问题报告

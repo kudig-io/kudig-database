@@ -157,6 +157,9 @@ Deployment 是 K8s 中用来管理 Pod 的控制器。
 
 ### 2.1 YAML 方式
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 【YAML 示例】
 
@@ -197,6 +200,9 @@ kubectl get pods -l app=web
 ```
 
 ### 2.2 命令行快速创建
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
 【快速创建】
@@ -240,6 +246,9 @@ kubectl autoscale deployment my-app --cpu-percent=80 --min=2 --max=10
 
 ### 4.1 更新镜像
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```
 【更新镜像版本】
 
@@ -260,6 +269,9 @@ REVISION  CHANGE-CAUSE
 ```
 
 ### 4.2 回滚操作
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```
 【回滚到上一个版本】
@@ -308,6 +320,9 @@ spec:
 ---
 
 ## 6. 删除 Deployment
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
 【删除 Deployment】
@@ -370,6 +385,11 @@ kubectl get pods
 
 ## 8. 总结
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```
 【命令速查】
 
@@ -429,4 +449,4 @@ kubectl delete deployment my-app
 
 ## 参见
 
-- [[skills/training-public/fundamentals/03-deployment-basics|公开版]]
+- [[skills/training-public/fundamentals/03-deployment-basics.md|公开版]]

@@ -421,6 +421,9 @@ func (r *Runner) Run() error {
 
 ### kubeadm init 完整阶段
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```
 步骤 1:  [preflight]      预检
     → 检查系统要求 (swap, ports, kernel, CRI)
@@ -490,6 +493,9 @@ func (r *Runner) Run() error {
 
 ### 场景 1: 标准单节点集群初始化
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # 初始化集群
 kubeadm init \
@@ -542,10 +548,6 @@ apiServer:
   extraArgs:
     authorization-mode: "Node,RBAC"
     service-node-port-range: "30000-32767"
-
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
 
     enable-admission-plugins: "NodeRestriction,PodSecurityPolicy"
   certSANs:
@@ -701,6 +703,9 @@ controllerManager:
 
 ### 标准 init 输出
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 kubeadm init --pod-network-cidr=10.244.0.0/16
 # [init] Using Kubernetes version: v1.28.0
@@ -775,6 +780,7 @@ kubeadm init phase upload-config all --config=kubeadm-config.yaml
 kubeadm init phase bootstrap-token --config=kubeadm-config.yaml
 kubeadm init phase mark-control-plane --config=kubeadm-config.yaml
 kubeadm init phase addon all --config=kubeadm-config.yaml
+
 ```
 
 ## 常见错误
@@ -805,8 +811,10 @@ kubeadm init phase addon all --config=kubeadm-config.yaml
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/docker|docker]]
-- [[entities/kubernetes|kubernetes]]
-- [[entities/coredns|coredns]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/coredns.md|coredns]]
+
+```

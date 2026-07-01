@@ -39,7 +39,7 @@ created: "2026-05-23"
 
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
-> **用途**: AI/ML 工作负载在 [[entities/kubernetes|kubernetes]] 上的问题排查指南
+> **用途**: AI/ML 工作负载在 [[entities/kubernetes.md|kubernetes]] 上的问题排查指南
 > **覆盖**: 分布式训练 (MPI/NCCL)、模型服务 (KServe/Triton)、数据处理 (Spark/Flink)
 
 ---
@@ -56,6 +56,9 @@ created: "2026-05-23"
 | Rendezvous 失败 | `kubectl logs mpi-worker-0 \| grep -i " rendezvous"` | 网络不通 | 检查 Pod 网络策略 |
 
 ### 1.2 NCCL 通信问题
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查 NCCL 通信测试
@@ -115,6 +118,9 @@ kubectl logs -f deployment/<name> | grep -i "deepspeed\|ZeRO"
 
 ### 2.2 模型加载失败
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 检查模型格式
 kubectl exec -it <pod> -- ls -la /mnt/models/
@@ -147,6 +153,9 @@ print('Model loaded successfully')
 | 请求队列 | `kubectl describe isvc` | 队列过深需扩容 |
 | 模型量化 | 检查模型格式 | 使用 INT8/FP8 量化 |
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # KServe 推理延迟监控
 kubectl exec -it <pod> -- curl localhost:8080/metrics | grep prediction_latency
@@ -158,6 +167,9 @@ kubectl exec -it <pod> -- curl localhost:8080/metrics | grep prediction_latency
 ```
 
 ### 2.4 Triton 推理服务
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # Triton 日志
@@ -187,6 +199,9 @@ kubectl exec -it <triton-pod> -- tritonserver --model-repository=/models --metri
 | 任务卡住 | `kubectl exec spark-driver -- yarn app -list` | NM/RM 连接问题 | 检查 Spark 集群配置 |
 | 数据倾斜 | Spark UI Metrics | 分区不均 | 重新分区或加盐 |
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # Spark on K8s 常用命令
 kubectl exec -it spark-driver -- spark-submit \
@@ -209,6 +224,9 @@ kubectl port-forward spark-driver-ui 4040:4040
 | TaskManager 失败 | `kubectl logs flink-taskmanager-xxx` | 计算错误或资源不足 | 检查 TaskManager 日志 |
 | 检查点失败 | Flink Web UI | 状态后端问题 | 检查点配置 |
 | 背压严重 | Flink Web UI Backpressure | 数据倾斜或算子瓶颈 | 调整并行度 |
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # Flink 常用诊断
@@ -276,6 +294,9 @@ kubectl get pipelinerun <name> -n kubeflow -o yaml
 ## 6. 快速检查清单
 
 ### AI/ML 工作负载 on-call 速查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 检查 GPU 节点状态

@@ -5,6 +5,7 @@ tags: ["index", "domain-18-manifests-patterns", "navigation"]
 sources: ["auto-generated"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 ---
 
 # Domain 18 内容索引
@@ -62,5 +63,5 @@ updated: 2026-05-21
 - [[README-from-domain-32]] — README from domain 32
 
 ## 相关 Domain
-- [[domain-01-cluster-fundamentals/98-merged-indexes/index|Domain 01 集群基础 索引]]
-- [[domain-08-release-change-management/98-merged-indexes/index|Domain 08 发布与变更管理 索引]]
+- [[domain-01-cluster-fundamentals/98-merged-indexes/index.md|Domain 01 集群基础 索引]]
+- [[domain-08-release-change-management/98-merged-indexes/index.md|Domain 08 发布与变更管理 索引]]

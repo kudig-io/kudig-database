@@ -65,7 +65,7 @@ created: "2026-05-23"
 
 Velero（前身为 Heptio Ark）是 Kubernetes 生态中最成熟的开源备份与灾难恢复工具，由 VMware Tanzu 团队维护。Velero 能够备份 Kubernetes 集群的所有资源对象（[[Deployments|Deployments]]、Services、[[ConfigMaps|ConfigMaps]]、[[Secrets|Secrets]]、CRDs 等）以及持久卷（PV）数据，支持跨集群迁移和灾难恢复。本文档深入探讨 Velero 在企业级生产环境中的部署、配置、备份策略、恢复流程和最佳实践。
 
-#<!-- chunk: RPO 与 RTO 定义 -->## RPO 与 RTO 定义
+## RPO 与 RTO 定义
 
 Velero 的恢复能力直接决定了企业 Kubernetes 集群的灾备指标。RPO 取决于备份频率（Schedule 配置），RTO 取决于恢复的数据量和网络带宽。通过合理的配置组合，可以实现分钟级 RPO 和小时级 RTO。
 
@@ -92,7 +92,7 @@ velero_rpo_rto:
 
 <!-- chunk: 架构设计 -->## 架构设计
 
-#<!-- chunk: Velero 核心架构 -->## Velero 核心架构
+## Velero 核心架构
 
 ```mermaid
 graph TB
@@ -143,7 +143,7 @@ graph TB
     VELERO_SERVER --> AWS_PLUGIN & AZURE_PLUGIN & GCP_PLUGIN & CSI_PLUGIN
 ```
 
-#<!-- chunk: Velero 备份流程详解 -->## Velero 备份流程详解
+## Velero 备份流程详解
 
 Velero 的备份流程是一个精心设计的多步骤过程，确保了数据的一致性和完整性。理解这个流程对于排查备份问题和优化备份性能至关重要。
 
@@ -193,7 +193,7 @@ Velero备份执行流程:
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: [[Helm|Helm]] 生产级部署 -->## Helm 生产级部署
+## Helm 生产级部署
 
 ```yaml
 # values-velero-production.yaml
@@ -273,6 +273,9 @@ podAnnotations:
 priorityClassName: "system-cluster-critical"
 ```
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+
 ```bash
 # 安装命令
 helm repo add vmware-tanzu https://vmware-tanzu.github.io/helm-charts
@@ -288,7 +291,7 @@ velero backup-location get
 velero snapshot-location get
 ```
 
-#<!-- chunk: VolumeSnapshotClass 配置 -->## VolumeSnapshotClass 配置
+## VolumeSnapshotClass 配置
 
 ```yaml
 # VolumeSnapshotClass 配置 - AWS EBS
@@ -328,7 +331,7 @@ deletionPolicy: Retain
 
 <!-- chunk: 备份策略 -->## 备份策略
 
-#<!-- chunk: 企业级备份策略设计 -->## 企业级备份策略设计
+## 企业级备份策略设计
 
 企业级 Velero 备份策略需要根据业务的关键程度、数据变更频率和 RPO 要求来设计不同层级的备份计划。以下是一个完整的企业级备份策略配置：
 
@@ -441,7 +444,7 @@ spec:
   storageLocation: default
 ```
 
-#<!-- chunk: 备份策略矩阵 -->## 备份策略矩阵
+## 备份策略矩阵
 
 | 备份类型 | 频率 | 保留时间 | 范围 | 存储位置 | 适用场景 |
 |:---|:---|:---|:---|:---|:---|
@@ -456,7 +459,7 @@ spec:
 
 <!-- chunk: 恢复流程 -->## 恢复流程
 
-#<!-- chunk: 单命名空间恢复 -->## 单命名空间恢复
+## 单命名空间恢复
 
 ```bash
 # 步骤 1: 列出可用备份
@@ -484,7 +487,7 @@ velero restore create production-restore-$(date +%s) \
   --wait
 ```
 
-#<!-- chunk: 完整集群灾难恢复 -->## 完整集群灾难恢复
+## 完整集群灾难恢复
 
 ```bash
 #!/bin/bash
@@ -540,7 +543,7 @@ done
 echo "=== 集群灾难恢复完成 ==="
 ```
 
-#<!-- chunk: 跨集群迁移 -->## 跨集群迁移
+## 跨集群迁移
 
 ```bash
 # 源集群: 创建迁移备份
@@ -570,7 +573,7 @@ kubectl get all -n my-application-new
 
 <!-- chunk: PV 持久卷备份策略 -->## PV 持久卷备份策略
 
-#<!-- chunk: CSI 快照与文件系统备份对比 -->## CSI 快照与文件系统备份对比
+## CSI 快照与文件系统备份对比
 
 | 维度 | CSI 快照 | 文件系统备份 (FS Backup) |
 |:---|:---|:---|
@@ -621,7 +624,10 @@ velero_dr_drill:
       - "运行业务 2 小时"
 ```
 
-#<!-- chunk: 灾备演练自动化脚本 -->## 灾备演练自动化脚本
+## 灾备演练自动化脚本
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
 ```bash
 #!/bin/bash
@@ -662,7 +668,7 @@ case "$DR_TYPE" in
     echo "[5] 清理测试命名空间..."
     read -p "确认清理测试命名空间 $RESTORE_NS? (y/N) " confirm
     if [ "$confirm" = "y" ]; then
-      kubectl delete namespace "$RESTORE_NS"
+      kubectl delete namespace "$RESTORE_NS"  # ⚠️ 不可逆：永久删除命名空间及全部资源
       echo "清理完成"
     fi
     ;;
@@ -699,7 +705,7 @@ echo "=== 演练完成 ==="
 
 <!-- chunk: 监控告警 -->## 监控告警
 
-#<!-- chunk: Prometheus 告警规则 -->## Prometheus 告警规则
+## Prometheus 告警规则
 
 ```yaml
 apiVersion: v1
@@ -758,7 +764,7 @@ data:
 
 <!-- chunk: etcd 备份与恢复 -->## etcd 备份与恢复
 
-#<!-- chunk: etcd 定期自动备份 -->## etcd 定期自动备份
+## etcd 定期自动备份
 
 etcd 是 Kubernetes 集群的大脑，所有集群状态都存储在 etcd 中。Velero 备份的是通过 API Server 暴露的资源对象，但 etcd 本身包含更底层的集群状态。因此，etcd 备份是 Kubernetes 灾备体系中不可或缺的一环，必须独立配置。
 
@@ -829,7 +835,12 @@ spec:
           restartPolicy: OnFailure
 ```
 
-#<!-- chunk: etcd 恢复操作 -->## etcd 恢复操作
+## etcd 恢复操作
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
+> - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ```bash
 #!/bin/bash
@@ -875,7 +886,7 @@ kubectl get nodes
 
 <!-- chunk: 最佳实践 -->## 最佳实践
 
-#<!-- chunk: Velero 生产部署检查清单 -->## Velero 生产部署检查清单
+## Velero 生产部署检查清单
 
 ```yaml
 备份策略:
@@ -916,7 +927,7 @@ kubectl get nodes
 
 <!-- chunk: 故障排查 -->## 故障排查
 
-#<!-- chunk: 常见问题诊断 -->## 常见问题诊断
+## 常见问题诊断
 
 ```bash
 #!/bin/bash
@@ -953,7 +964,7 @@ echo "[8] 最近恢复"
 velero restore get --sort-by=.metadata.creationTimestamp | tail -5
 ```
 
-#<!-- chunk: 故障排查手册 -->## 故障排查手册
+## 故障排查手册
 
 | 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
 |:---|:---|:---|:---|
@@ -979,7 +990,7 @@ velero restore get --sort-by=.metadata.creationTimestamp | tail -5
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-30-disaster-recovery-business-continuity MOC
-- [[domain-09-reliability-engineering/README|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
+- [[domain-09-reliability-engineering/README.md|Domain 09: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
 - Domain-30 灾备与业务连续性 — 开源项目索引
 - VMware vSphere 企业级灾备与业务连续性
 - Veeam Backup & Replication 企业级备份恢复解决方案
@@ -999,4 +1010,4 @@ velero restore get --sort-by=.metadata.creationTimestamp | tail -5
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]

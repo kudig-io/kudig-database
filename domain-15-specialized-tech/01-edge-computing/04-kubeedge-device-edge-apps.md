@@ -71,7 +71,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 设备管理概述 -->## 1. 设备管理概述
 
-#<!-- chunk: 1.1 KubeEdge 设备管理架构 (Device Management Architecture) -->## 1.1 KubeEdge 设备管理架构 (Device Management Architecture)
+## 1.1 KubeEdge 设备管理架构 (Device Management Architecture)
 
 KubeEdge 通过扩展 [[Kubernetes|Kubernetes]] CRD 机制，将 IoT 设备作为 Kubernetes 的一等公民进行管理，实现了云端统一管控物理设备的能力。
 
@@ -110,7 +110,7 @@ graph TB
     style DeviceLayer fill:#fff3e0
 ```
 
-#<!-- chunk: 1.2 核心概念 (Core Concepts) -->## 1.2 核心概念 (Core Concepts)
+## 1.2 核心概念 (Core Concepts)
 
 ```
 KubeEdge 设备管理核心概念:
@@ -142,7 +142,7 @@ KubeEdge 设备管理核心概念:
 
 <!-- chunk: 2. DeviceModel 设备模型 -->## 2. DeviceModel 设备模型
 
-#<!-- chunk: 2.1 DeviceModel 结构 (DeviceModel Structure) -->## 2.1 DeviceModel 结构 (DeviceModel Structure)
+## 2.1 DeviceModel 结构 (DeviceModel Structure)
 
 ```yaml
 # DeviceModel 定义 - 温湿度传感器模型
@@ -201,7 +201,7 @@ spec:
           maximum: 60000
 ```
 
-#<!-- chunk: 2.2 工业设备模型示例 (Industrial Device Model) -->## 2.2 工业设备模型示例 (Industrial Device Model)
+## 2.2 工业设备模型示例 (Industrial Device Model)
 
 ```yaml
 # DeviceModel - 西门子 S7 PLC 模型
@@ -256,7 +256,7 @@ spec:
           defaultValue: 0
 ```
 
-#<!-- chunk: 2.3 属性数据类型 (Property Data Types) -->## 2.3 属性数据类型 (Property Data Types)
+## 2.3 属性数据类型 (Property Data Types)
 
 ```yaml
 # KubeEdge 支持的属性类型
@@ -297,7 +297,7 @@ property_types:
 
 <!-- chunk: 3. Device CRD 设备实例 -->## 3. Device CRD 设备实例
 
-#<!-- chunk: 3.1 Device 完整定义 (Complete Device Definition) -->## 3.1 Device 完整定义 (Complete Device Definition)
+## 3.1 Device 完整定义 (Complete Device Definition)
 
 ```yaml
 # Device 实例 - 工厂 A 1号温湿度传感器
@@ -397,7 +397,7 @@ status:
           timestamp: "1704067195000"
 ```
 
-#<!-- chunk: 3.2 MQTT 设备定义 (MQTT Device) -->## 3.2 MQTT 设备定义 (MQTT Device)
+## 3.2 MQTT 设备定义 (MQTT Device)
 
 ```yaml
 # Device - 通过 MQTT 连接的智能设备
@@ -442,7 +442,7 @@ spec:
       reportToCloud: true
 ```
 
-#<!-- chunk: 3.3 Bluetooth 设备定义 (Bluetooth Device) -->## 3.3 Bluetooth 设备定义 (Bluetooth Device)
+## 3.3 Bluetooth 设备定义 (Bluetooth Device)
 
 ```yaml
 # Device - 蓝牙 BLE 传感器
@@ -478,7 +478,7 @@ spec:
       reportCycle: 30000
 ```
 
-#<!-- chunk: 3.4 批量设备管理 (Bulk Device Management) -->## 3.4 批量设备管理 (Bulk Device Management)
+## 3.4 批量设备管理 (Bulk Device Management)
 
 ```python
 # Python 脚本: 批量创建设备实例
@@ -573,7 +573,7 @@ create_bulk_devices(devices)
 
 <!-- chunk: 4. DeviceTwin 机制详解 -->## 4. DeviceTwin 机制详解
 
-#<!-- chunk: 4.1 DeviceTwin 内部架构 (DeviceTwin Internal Architecture) -->## 4.1 DeviceTwin 内部架构 (DeviceTwin Internal Architecture)
+## 4.1 DeviceTwin 内部架构 (DeviceTwin Internal Architecture)
 
 ```mermaid
 graph TB
@@ -600,7 +600,7 @@ graph TB
     TwinModule -->|上报 reported| EdgeHub
 ```
 
-#<!-- chunk: 4.2 DeviceTwin MQTT 主题规范 (MQTT Topic Specification) -->## 4.2 DeviceTwin MQTT 主题规范 (MQTT Topic Specification)
+## 4.2 DeviceTwin MQTT 主题规范 (MQTT Topic Specification)
 
 ```
 KubeEdge DeviceTwin MQTT 主题规范:
@@ -626,7 +626,7 @@ $hw/events/node/{nodeID}/membership/updated
 消息体: {"event_id": "xxx", "added_devices": [...], "removed_devices": [...]}
 ```
 
-#<!-- chunk: 4.3 DeviceTwin 状态同步流程 -->## 4.3 DeviceTwin 状态同步流程
+## 4.3 DeviceTwin 状态同步流程
 
 ```mermaid
 sequenceDiagram
@@ -661,7 +661,7 @@ sequenceDiagram
     DC->>K8s: 更新 Device Status
 ```
 
-#<!-- chunk: 4.4 DeviceTwin SQLite 存储 -->## 4.4 DeviceTwin SQLite 存储
+## 4.4 DeviceTwin SQLite 存储
 
 ```sql
 -- DeviceTwin 存储结构
@@ -692,7 +692,7 @@ SELECT DISTINCT deviceid FROM device_twin;
 
 <!-- chunk: 5. MQTT 协议与集成 -->## 5. MQTT 协议与集成
 
-#<!-- chunk: 5.1 MQTT Broker 部署 (MQTT Broker Deployment) -->## 5.1 MQTT Broker 部署 (MQTT Broker Deployment)
+## 5.1 MQTT Broker 部署 (MQTT Broker Deployment)
 
 ```yaml
 # Mosquitto MQTT Broker 部署 (边缘 Pod)
@@ -811,7 +811,7 @@ data:
     max_inflight_messages 20
 ```
 
-#<!-- chunk: 5.2 MQTT 消息格式 (MQTT Message Format) -->## 5.2 MQTT 消息格式 (MQTT Message Format)
+## 5.2 MQTT 消息格式 (MQTT Message Format)
 
 ```python
 # 设备遥测数据上报格式
@@ -905,7 +905,7 @@ def on_threshold_change(prop, value):
 client.subscribe_desired_changes(on_threshold_change)
 ```
 
-#<!-- chunk: 5.3 EMQ X 边缘版配置 (EMQ X Edge Configuration) -->## 5.3 EMQ X 边缘版配置 (EMQ X Edge Configuration)
+## 5.3 EMQ X 边缘版配置 (EMQ X Edge Configuration)
 
 ```yaml
 # EMQ X Edge - 生产级 MQTT Broker (边缘部署)
@@ -970,7 +970,7 @@ spec:
 
 <!-- chunk: 6. Mapper 框架 -->## 6. Mapper 框架
 
-#<!-- chunk: 6.1 Mapper 架构 (Mapper Architecture) -->## 6.1 Mapper 架构 (Mapper Architecture)
+## 6.1 Mapper 架构 (Mapper Architecture)
 
 Mapper 是连接物理设备和 KubeEdge DeviceTwin 的协议适配器：
 
@@ -1004,7 +1004,7 @@ graph LR
     K8sClient -->|Watch 配置变更| DevicePanel
 ```
 
-#<!-- chunk: 6.2 内置 Mapper 列表 -->## 6.2 内置 Mapper 列表
+## 6.2 内置 Mapper 列表
 
 ```
 KubeEdge 官方 Mapper:
@@ -1028,7 +1028,7 @@ KubeEdge 官方 Mapper:
 └─────────────────┴────────────┴────────────────────────┘
 ```
 
-#<!-- chunk: 6.3 Modbus Mapper 部署 -->## 6.3 Modbus Mapper 部署
+## 6.3 Modbus Mapper 部署
 
 ```yaml
 # Modbus Mapper 部署
@@ -1093,7 +1093,7 @@ spec:
           path: /dev
 ```
 
-#<!-- chunk: 6.4 自定义 Mapper 开发 (Custom Mapper Development) -->## 6.4 自定义 Mapper 开发 (Custom Mapper Development)
+## 6.4 自定义 Mapper 开发 (Custom Mapper Development)
 
 ```go
 // 使用 KubeEdge Mapper Framework 开发自定义 Mapper
@@ -1177,7 +1177,7 @@ func main() {
 
 <!-- chunk: 7. 边缘应用部署 -->## 7. 边缘应用部署
 
-#<!-- chunk: 7.1 边缘应用调度 (Edge Application Scheduling) -->## 7.1 边缘应用调度 (Edge Application Scheduling)
+## 7.1 边缘应用调度 (Edge Application Scheduling)
 
 ```yaml
 # 部署边缘应用 - 使用 nodeSelector 和 tolerations
@@ -1262,7 +1262,7 @@ spec:
           name: data-collector-config
 ```
 
-#<!-- chunk: 7.2 NodeGroup 应用批量部署 (NodeGroup Batch Deployment) -->## 7.2 NodeGroup 应用批量部署 (NodeGroup Batch Deployment)
+## 7.2 NodeGroup 应用批量部署 (NodeGroup Batch Deployment)
 
 KubeEdge v1.14+ 支持 NodeGroup，可以将应用批量部署到一组边缘节点：
 
@@ -1328,7 +1328,7 @@ spec:
                 image: "registry.company.com/edge/monitor:v1.0"
 ```
 
-#<!-- chunk: 7.3 边缘 Job (Edge Batch [[Jobs|Jobs]]) -->## 7.3 边缘 Job (Edge Batch Jobs)
+## 7.3 边缘 Job (Edge Batch Jobs)
 
 ```yaml
 # 边缘批量作业 - 定期数据清理
@@ -1372,7 +1372,7 @@ spec:
               type: Directory
 ```
 
-#<!-- chunk: 7.4 镜像预拉取 (Image Pre-pulling) -->## 7.4 镜像预拉取 (Image Pre-pulling)
+## 7.4 镜像预拉取 (Image Pre-pulling)
 
 ```yaml
 # KubeEdge v1.14+ 支持镜像预拉取
@@ -1415,7 +1415,7 @@ spec:
 
 <!-- chunk: 8. 数据采集与处理 -->## 8. 数据采集与处理
 
-#<!-- chunk: 8.1 数据采集流水线 (Data Collection Pipeline) -->## 8.1 数据采集流水线 (Data Collection Pipeline)
+## 8.1 数据采集流水线 (Data Collection Pipeline)
 
 ```mermaid
 graph LR
@@ -1449,7 +1449,7 @@ graph LR
     Buffer --> CloudUpload
 ```
 
-#<!-- chunk: 8.2 边缘流处理 (Edge Stream Processing) -->## 8.2 边缘流处理 (Edge Stream Processing)
+## 8.2 边缘流处理 (Edge Stream Processing)
 
 ```python
 # 使用 Apache Flink 轻量版在边缘做流处理
@@ -1585,7 +1585,7 @@ processor.add_rule(ThresholdAlertRule("temperature", 85.0, ">"))
 processor.add_rule(ThresholdAlertRule("temperature", -10.0, "<"))
 ```
 
-#<!-- chunk: 8.3 时序数据库集成 (Time-Series DB Integration) -->## 8.3 时序数据库集成 (Time-Series DB Integration)
+## 8.3 时序数据库集成 (Time-Series DB Integration)
 
 ```yaml
 # TDengine 边缘部署 (轻量级时序数据库)
@@ -1706,7 +1706,7 @@ class EdgeTDengineClient:
 
 <!-- chunk: 9. 消息路由规则 -->## 9. 消息路由规则
 
-#<!-- chunk: 9.1 Rule 和 RuleEndpoint CRD (Message Routing Rules) -->## 9.1 Rule 和 RuleEndpoint CRD (Message Routing Rules)
+## 9.1 Rule 和 RuleEndpoint CRD (Message Routing Rules)
 
 KubeEdge 支持灵活的消息路由规则，将消息从一个源路由到另一个目的地：
 
@@ -1765,7 +1765,7 @@ spec:
     resource: "https://cloud-api.company.com/api/v1/temperature"
 ```
 
-#<!-- chunk: 9.2 规则链配置 (Rule Chain) -->## 9.2 规则链配置 (Rule Chain)
+## 9.2 规则链配置 (Rule Chain)
 
 ```yaml
 # 复杂路由: MQTT → 边缘应用处理 → 云端上报
@@ -1801,7 +1801,7 @@ spec:
 
 <!-- chunk: 10. 边缘 AI 推理 -->## 10. 边缘 AI 推理
 
-#<!-- chunk: 10.1 边缘 AI 推理架构 (Edge AI Inference Architecture) -->## 10.1 边缘 AI 推理架构 (Edge AI Inference Architecture)
+## 10.1 边缘 AI 推理架构 (Edge AI Inference Architecture)
 
 ```mermaid
 graph TB
@@ -1840,7 +1840,7 @@ graph TB
     style EdgeInference fill:#e8f5e9
 ```
 
-#<!-- chunk: 10.2 边缘 AI 推理应用部署 -->## 10.2 边缘 AI 推理应用部署
+## 10.2 边缘 AI 推理应用部署
 
 ```yaml
 # 边缘 AI 推理 Pod - 视觉检测
@@ -1940,7 +1940,7 @@ spec:
           type: CharDevice
 ```
 
-#<!-- chunk: 10.3 推理结果处理 (Inference Result Handling) -->## 10.3 推理结果处理 (Inference Result Handling)
+## 10.3 推理结果处理 (Inference Result Handling)
 
 ```python
 # 边缘推理结果处理器
@@ -2064,7 +2064,7 @@ class EdgeVisionInference:
 
 <!-- chunk: 11. 实践案例 -->## 11. 实践案例
 
-#<!-- chunk: 11.1 工业质检系统 (Industrial Quality Inspection) -->## 11.1 工业质检系统 (Industrial Quality Inspection)
+## 11.1 工业质检系统 (Industrial Quality Inspection)
 
 ```
 场景描述:
@@ -2181,7 +2181,7 @@ spec:
             memory: "8Gi"
 ```
 
-#<!-- chunk: 11.2 智能仓储 RFID 系统 -->## 11.2 智能仓储 RFID 系统
+## 11.2 智能仓储 RFID 系统
 
 ```python
 # RFID 仓储边缘应用
@@ -2273,7 +2273,7 @@ class RFIDWarehouseEdgeApp:
 
 <!-- chunk: 12. 故障排查 -->## 12. 故障排查
 
-#<!-- chunk: 12.1 设备连接问题排查 (Device Connection Troubleshooting) -->## 12.1 设备连接问题排查 (Device Connection Troubleshooting)
+## 12.1 设备连接问题排查 (Device Connection Troubleshooting)
 
 ```bash
 # ====== 设备连接排查 ======
@@ -2321,7 +2321,10 @@ SELECT * FROM device_twin WHERE deviceid = 'factory-a-temp-sensor-001';
 kubectl get device factory-a-temp-sensor-001 -o yaml | grep -A 20 "protocol:"
 ```
 
-#<!-- chunk: 12.2 边缘应用问题排查 -->## 12.2 边缘应用问题排查
+## 12.2 边缘应用问题排查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # ====== 边缘应用排查 ======
@@ -2362,7 +2365,10 @@ journalctl -u edgecore --since "30 minutes ago" | grep -E "ERROR|WARN"
 sqlite3 /var/lib/kubeedge/edgecore.db "SELECT key, type FROM meta WHERE type='pod';"
 ```
 
-#<!-- chunk: 12.3 网络问题排查 -->## 12.3 网络问题排查
+## 12.3 网络问题排查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # ====== 网络连接排查 ======
@@ -2391,7 +2397,11 @@ kubectl get pods -n kubeedge -l app=edgemesh-agent
 kubectl logs -n kubeedge -l app=edgemesh-agent | grep ERROR
 ```
 
-#<!-- chunk: 12.4 常见错误码 (Common Error Codes) -->## 12.4 常见错误码 (Common Error Codes)
+## 12.4 常见错误码 (Common Error Codes)
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
 KubeEdge 常见错误及解决方案:
@@ -2476,7 +2486,7 @@ AI 推理:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-37-edge-computing MOC
-- [[domain-15-specialized-tech/README|Domain 37: 边缘计算 (Edge Computing)]]
+- [[domain-15-specialized-tech/README.md|Domain 15: 边缘计算 (Edge Computing)]]
 - Domain-37 边缘计算 — 开源项目索引
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)

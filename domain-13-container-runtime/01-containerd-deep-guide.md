@@ -5,6 +5,7 @@ tags: ["domain-13", "containerd", "容器运行时", "CRI", "镜像管理", "Run
 sources: ["KUDIG Gap Analysis 2026-05-21"]
 created: 2026-05-21
 updated: 2026-05-21
+last_updated: 2026-05-21
 status: reviewed
 ---
 
@@ -160,7 +161,7 @@ data:
 
 ## 相关链接
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-image-pull/SKILL|image-pull-troubleshooting]] — 镜像拉取问题排查
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-image-pull/SKILL|k8s-image-pull]] — K8s 镜像拉取机制
-- [[domain-13-container-runtime/01-containerd-deep-guide|container-runtime-security]] — 容器运行时安全
-- [[domain-13-container-runtime/01-containerd-deep-guide|docker-migration-containerd]] — Docker 迁移至 containerd 指南
+- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-image-pull/SKILL.md|image-pull-troubleshooting]] — 镜像拉取问题排查
+- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-image-pull/SKILL.md|k8s-image-pull]] — K8s 镜像拉取机制
+- [[domain-13-container-runtime/01-containerd-deep-guide.md|container-runtime-security]] — 容器运行时安全
+- [[domain-13-container-runtime/01-containerd-deep-guide.md|docker-migration-containerd]] — Docker 迁移至 containerd 指南

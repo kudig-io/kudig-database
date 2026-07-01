@@ -86,9 +86,9 @@ k8s_versions:
 
 <!-- chunk: 🛠️ 核心工具组件 -->## 🛠️ 核心工具组件
 
-#<!-- chunk: 基础设施自动化 -->## 基础设施自动化
+## 基础设施自动化
 
-##<!-- chunk: 1. Ansible运维剧本 -->## 1. Ansible运维剧本
+## 1. Ansible运维剧本
 ```yaml
 # Kubernetes节点初始化剧本
 ---
@@ -143,7 +143,7 @@ k8s_versions:
       - kubelet
 ```
 
-##<!-- chunk: 2. 节点健康检查脚本 -->## 2. 节点健康检查脚本
+## 2. 节点健康检查脚本
 ```bash
 #!/bin/bash
 # 节点健康检查脚本
@@ -225,9 +225,14 @@ report_health() {
 report_health
 ```
 
-#<!-- chunk: 应用部署自动化 -->## 应用部署自动化
+## 应用部署自动化
 
-##<!-- chunk: 1. Helm部署脚本 -->## 1. Helm部署脚本
+## 1. Helm部署脚本
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 #!/bin/bash
 # 自动化Helm部署脚本
@@ -333,7 +338,13 @@ main() {
 main "$@"
 ```
 
-##<!-- chunk: 2. 蓝绿部署脚本 -->## 2. 蓝绿部署脚本
+## 2. 蓝绿部署脚本
+
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `helm uninstall`：删除 release 及其释放的所有资源
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```bash
 #!/bin/bash
 # 蓝绿部署自动化脚本
@@ -386,7 +397,7 @@ switch_traffic() {
 cleanup_blue() {
     echo "Cleaning up blue environment..."
     
-    helm uninstall "${APP_NAME}-blue" --namespace "$NAMESPACE" || true
+    helm uninstall "${APP_NAME}-blue" --namespace "$NAMESPACE" || true  # ⚠️ 删除 release 及关联资源
 }
 
 # 回滚函数
@@ -423,9 +434,9 @@ main "$@"
 
 <!-- chunk: 🤖 智能运维工具 -->## 🤖 智能运维工具
 
-#<!-- chunk: 自愈系统 -->## 自愈系统
+## 自愈系统
 
-##<!-- chunk: 1. 自动故障检测和恢复 -->## 1. 自动故障检测和恢复
+## 1. 自动故障检测和恢复
 ```python
 #!/usr/bin/env python3
 # 自动故障检测和恢复系统
@@ -575,9 +586,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-#<!-- chunk: 容量规划工具 -->## 容量规划工具
+## 容量规划工具
 
-##<!-- chunk: 1. 资源预测和规划 -->## 1. 资源预测和规划
+## 1. 资源预测和规划
 ```python
 #!/usr/bin/env python3
 # 容器资源预测工具
@@ -733,9 +744,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 📊 监控告警系统 -->## 📊 监控告警系统
 
-#<!-- chunk: 智能告警聚合 -->## 智能告警聚合
+## 智能告警聚合
 
-##<!-- chunk: 1. 告警去重和关联 -->## 1. 告警去重和关联
+## 1. 告警去重和关联
 ```python
 #!/usr/bin/env python3
 # 智能告警处理系统
@@ -998,7 +1009,7 @@ if __name__ == "__main__":
 
 <!-- chunk: 🔧 实施检查清单 -->## 🔧 实施检查清单
 
-#<!-- chunk: 自动化工具部署 -->## 自动化工具部署
+## 自动化工具部署
 - [ ] 部署基础设施自动化工具(Ansible/Terraform)
 - [ ] 配置应用部署自动化脚本
 - [ ] 实施智能故障检测和自愈系统
@@ -1006,7 +1017,7 @@ if __name__ == "__main__":
 - [ ] 建立智能告警处理机制
 - [ ] 配置监控和日志收集自动化
 
-#<!-- chunk: 运维流程优化 -->## 运维流程优化
+## 运维流程优化
 - [ ] 实施标准化运维操作流程
 - [ ] 建立自动化测试和验证机制
 - [ ] 配置变更管理和审批流程
@@ -1014,7 +1025,7 @@ if __name__ == "__main__":
 - [ ] 建立运维知识库和文档
 - [ ] 配置运维人员培训计划
 
-#<!-- chunk: 系统可靠性保障 -->## 系统可靠性保障
+## 系统可靠性保障
 - [ ] 实施多层次监控告警体系
 - [ ] 配置自动化故障转移机制
 - [ ] 建立性能基准和容量规划
@@ -1031,9 +1042,9 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-11-production-operations MOC
-- [[domain-11-production-operations/README|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles|01-生产架构设计原则]]
+- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -1045,8 +1056,8 @@ if __name__ == "__main__":
 
 ## Related
 
-- [[release-notes/22-production-checklist|22-production-checklist]]
-- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production|02-spring-boot-kubernetes-production]]
+- 22-production-checklist
+- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
 
 ## See Also
 

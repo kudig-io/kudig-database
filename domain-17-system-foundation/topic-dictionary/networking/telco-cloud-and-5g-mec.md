@@ -34,6 +34,7 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # 电信云与 5G 多接入边缘计算（MEC）
@@ -146,7 +147,7 @@ MEC 边缘节点 (K8s 集群)
 - **PTP 同步**：在边缘节点部署 PTP Grandmaster 和 Slave，确保基站和 UPF 之间的时间同步精度 < 1μs
 - **硬件加速优先**：对于 UPF、vRAN 等数据面网元，优先使用 SmartNIC 和 FPGA 加速
 - **严格的变更控制**：电信网络不允许频繁变更，CI/CD Pipeline 必须包含详尽的回归测试和金丝雀发布
-- **多层冗余**：控制平面采用多主 [[etcd|etcd]] 和跨区域备份；数据平面采用主备 UPF 和热切换机制
+- **多层冗余**：控制平面采用多主 [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]] 和跨区域备份；数据平面采用主备 UPF 和热切换机制
 - **监控电信级 KPI**：不仅监控 Pod CPU/内存，还要监控吞吐量（Gbps）、包转发率（Mpps）、连接建立成功率
 
 ## 生产 YAML 示例
@@ -251,4 +252,4 @@ pmc -u -b 0 'GET TIME_STATUS_NP'
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

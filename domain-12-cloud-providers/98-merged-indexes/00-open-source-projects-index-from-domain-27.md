@@ -117,7 +117,7 @@ k8s_versions:
 
 本文档索引了该领域最具影响力和生产就绪能力的开源项目，为企业技术选型提供全面的参考依据。每个项目都附有详细的评估维度：CNCF 状态、版本信息、社区活跃度、生产案例和推荐使用场景。通过系统性的选型矩阵和场景化推荐，帮助企业快速找到适合自身需求的多云开源工具组合。
 
-#<!-- chunk: 开源生态全景 -->## 开源生态全景
+## 开源生态全景
 
 ```mermaid
 graph TB
@@ -174,7 +174,7 @@ graph TB
 
 <!-- chunk: 核心项目 -->## 核心项目
 
-#<!-- chunk: 多集群编排与调度 -->## 多集群编排与调度
+## 多集群编排与调度
 
 | 项目 | 作用 | CNCF 状态 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -185,7 +185,7 @@ graph TB
 | **Liqo** | 多集群资源动态共享与卸载 | CNCF Sandbox | v0.10.0 | 3k+ | Apache-2.0 |
 | **KubeVela** | 多集群应用交付平台 | CNCF Incubating | v1.10.0 | 6k+ | Apache-2.0 |
 
-##<!-- chunk: Karmada 深度解析 -->## Karmada 深度解析
+## Karmada 深度解析
 
 Karmada（Kubernetes Armada）是华为云开源并捐赠给 CNCF 的多云多集群 Kubernetes 编排引擎，目前处于 CNCF Incubating 阶段。Karmada 的核心设计理念是"Kubernetes Native"，通过 CRD 和 Aggregated API Server 扩展 Kubernetes API，用户无需学习新的 API 概念即可管理多云环境。
 
@@ -279,7 +279,7 @@ spec:
         value: 3
 ```
 
-#<!-- chunk: 多集群管理平台 -->## 多集群管理平台
+## 多集群管理平台
 
 | 项目 | 作用 | CNCF 状态 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -288,7 +288,7 @@ spec:
 | **Clusternet** | 大规模集群管理（>1000 集群） | 非 CNCF | v0.20.0 | 1k+ | Apache-2.0 |
 | **Fleet** | Rancher GitOps 多集群分发 | Rancher | v0.12.0 | 1.5k+ | Apache-2.0 |
 
-##<!-- chunk: Rancher 多集群管理配置 -->## Rancher 多集群管理配置
+## Rancher 多集群管理配置
 
 ```yaml
 apiVersion: management.cattle.io/v3
@@ -332,7 +332,7 @@ spec:
     enabled: true
 ```
 
-#<!-- chunk: 虚拟化与控制平面 -->## 虚拟化与控制平面
+## 虚拟化与控制平面
 
 | 项目 | 作用 | CNCF 状态 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -340,7 +340,7 @@ spec:
 | **Kamaji** | 托管 K8s 控制平面（多租户隔离） | Clastix | v1.0.0 | 1k+ | Apache-2.0 |
 | **kcp** | 多租户 Kubernetes 控制平面 | 非 CNCF | v0.9.0 | 2k+ | Apache-2.0 |
 
-##<!-- chunk: vCluster 虚拟集群配置 -->## vCluster 虚拟集群配置
+## vCluster 虚拟集群配置
 
 ```yaml
 apiVersion: v1
@@ -445,7 +445,7 @@ spec:
           name: vcluster-config-tenant-a
 ```
 
-#<!-- chunk: 跨云网络互联 -->## 跨云网络互联
+## 跨云网络互联
 
 | 项目 | 作用 | CNCF 状态 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -454,7 +454,7 @@ spec:
 | **Cilium Cluster Mesh** | 基于 eBPF 的跨集群服务发现与路由 | CNCF Graduated | v1.16.0 | 20k+ | Apache-2.0 |
 | **Liqo** | 多集群资源动态共享与卸载 | CNCF Sandbox | v0.10.0 | 3k+ | Apache-2.0 |
 
-##<!-- chunk: Submariner 跨集群网络部署配置 -->## Submariner 跨集群网络部署配置
+## Submariner 跨集群网络部署配置
 
 ```yaml
 apiVersion: submariner.io/v1alpha1
@@ -512,7 +512,7 @@ spec:
   natEnabled: false
 ```
 
-##<!-- chunk: Cilium Cluster Mesh 配置 -->## Cilium Cluster Mesh 配置
+## Cilium Cluster Mesh 配置
 
 ```yaml
 apiVersion: v1
@@ -569,7 +569,7 @@ spec:
     app: backend
 ```
 
-#<!-- chunk: 多云基础设施编排 -->## 多云基础设施编排
+## 多云基础设施编排
 
 | 项目 | 作用 | CNCF 状态 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -580,7 +580,7 @@ spec:
 | **Cluster API Provider Azure** | Azure 集群生命周期 | K8s SIG | v1.17.0 | 300+ | Apache-2.0 |
 | **Cluster API Provider GCP** | GCP 集群生命周期 | K8s SIG | v1.6.0 | 200+ | Apache-2.0 |
 
-##<!-- chunk: Crossplane 多云资源编排配置 -->## Crossplane 多云资源编排配置
+## Crossplane 多云资源编排配置
 
 ```yaml
 apiVersion: pkg.crossplane.io/v1
@@ -707,7 +707,7 @@ spec:
   backupRetention: 7
 ```
 
-#<!-- chunk: 多云 GitOps 与配置管理 -->## 多云 GitOps 与配置管理
+## 多云 GitOps 与配置管理
 
 | 项目 | 作用 | CNCF 状态 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -715,7 +715,7 @@ spec:
 | **Flux** | Kubernetes 原生 GitOps | CNCF Graduated | v2.4.0 | 16k+ | Apache-2.0 |
 | **Config Sync** | 多集群配置同步（GKE Anthos 组件） | Google | v1.16.0 | 200+ | Apache-2.0 |
 
-##<!-- chunk: Argo CD ApplicationSet 多集群配置 -->## Argo CD ApplicationSet 多集群配置
+## Argo CD ApplicationSet 多集群配置
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -775,14 +775,14 @@ spec:
             maxDuration: 3m
 ```
 
-#<!-- chunk: 多云服务网格 -->## 多云服务网格
+## 多云服务网格
 
 | 项目 | 作用 | CNCF 状态 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
 | **Istio** | 多集群服务网格 | CNCF Graduated | v1.23.0 | 36k+ | Apache-2.0 |
 | **Linkerd** | 轻量级多集群服务网格 | CNCF Graduated | v2.16.0 | 10k+ | Apache-2.0 |
 
-##<!-- chunk: Istio 多集群服务网格配置 -->## Istio 多集群服务网格配置
+## Istio 多集群服务网格配置
 
 ```yaml
 apiVersion: install.istio.io/v1alpha1
@@ -865,7 +865,7 @@ spec:
     locality: eastus/azure-zone1
 ```
 
-#<!-- chunk: 多云可观测性 -->## 多云可观测性
+## 多云可观测性
 
 | 项目 | 作用 | CNCF 状态 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -875,7 +875,7 @@ spec:
 | **Grafana Mimir** | 可扩展 Prometheus 兼容 TSDB | Grafana Labs | v2.13.0 | 4k+ | AGPL-3.0 |
 | **Loki** | 多集群日志聚合 | Grafana Labs | v3.2.0 | 23k+ | AGPL-3.0 |
 
-##<!-- chunk: Thanos 全局监控配置 -->## Thanos 全局监控配置
+## Thanos 全局监控配置
 
 ```yaml
 apiVersion: v1
@@ -970,7 +970,7 @@ spec:
   type: ClusterIP
 ```
 
-#<!-- chunk: 多云安全与策略 -->## 多云安全与策略
+## 多云安全与策略
 
 | 项目 | 作用 | CNCF 状态 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -980,7 +980,7 @@ spec:
 | **Cert Manager** | 多集群证书管理 | CNCF Incubating | v1.16.0 | 12k+ | Apache-2.0 |
 | **External Secrets** | 多集群外部密钥同步 | 非 CNCF | v0.10.0 | 4k+ | Apache-2.0 |
 
-##<!-- chunk: Kyverno 多集群策略配置 -->## Kyverno 多集群策略配置
+## Kyverno 多集群策略配置
 
 ```yaml
 apiVersion: kyverno.io/v1
@@ -1084,7 +1084,7 @@ spec:
           - Egress
 ```
 
-#<!-- chunk: 多云灾备与迁移 -->## 多云灾备与迁移
+## 多云灾备与迁移
 
 | 项目 | 作用 | CNCF 状态 | 最新版本 | Stars | License |
 |:---|:---|:---|:---|:---|:---|
@@ -1158,7 +1158,7 @@ graph TB
 
 <!-- chunk: 多集群管理选型矩阵 -->## 多集群管理选型矩阵
 
-#<!-- chunk: 按功能需求选型 -->## 按功能需求选型
+## 按功能需求选型
 
 | 需求 | 推荐方案 | 说明 |
 |:---|:---|:---|
@@ -1175,7 +1175,7 @@ graph TB
 | 多集群 GitOps | Argo CD + ApplicationSet | 声明式多集群应用交付 |
 | 多集群服务网格 | Istio Multi-Cluster | 跨集群 mTLS 与流量管理 |
 
-#<!-- chunk: 按场景选型 -->## 按场景选型
+## 按场景选型
 
 | 场景 | 推荐组合 | 说明 |
 |:---|:---|:---|
@@ -1190,7 +1190,7 @@ graph TB
 
 <!-- chunk: 项目成熟度评估 -->## 项目成熟度评估
 
-#<!-- chunk: 生产就绪能力评估 -->## 生产就绪能力评估
+## 生产就绪能力评估
 
 | 项目 | 稳定性 | 社区活跃度 | 文档完善度 | 生产案例 | 企业支持 |
 |:---|:---|:---|:---|:---|:---|
@@ -1209,7 +1209,7 @@ graph TB
 
 <!-- chunk: 版本兼容性矩阵 -->## 版本兼容性矩阵
 
-#<!-- chunk: Kubernetes 版本支持 -->## Kubernetes 版本支持
+## Kubernetes 版本支持
 
 | 项目 | K8s 1.26 | K8s 1.27 | K8s 1.28 | K8s 1.29 | K8s 1.30 |
 |:---|:---|:---|:---|:---|:---|
@@ -1229,7 +1229,10 @@ graph TB
 
 <!-- chunk: 快速入门指南 -->## 快速入门指南
 
-#<!-- chunk: Karmada 多集群管理 -->## Karmada 多集群管理
+## Karmada 多集群管理
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
 
 ```bash
 #!/bin/bash
@@ -1335,7 +1338,7 @@ karmadactl get pods --kubeconfig /etc/karmada/karmada-apiserver.config
 echo "=== 快速入门完成 ==="
 ```
 
-#<!-- chunk: Submariner 跨集群网络 -->## Submariner 跨集群网络
+## Submariner 跨集群网络
 
 ```bash
 #!/bin/bash
@@ -1376,7 +1379,11 @@ subctl verify --kubeconfig /path/to/aws-cluster.kubeconfig \
 echo "=== Submariner 部署完成 ==="
 ```
 
-#<!-- chunk: Crossplane 多云资源编排 -->## Crossplane 多云资源编排
+## Crossplane 多云资源编排
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 #!/bin/bash
@@ -1429,7 +1436,7 @@ echo "=== Crossplane 部署完成 ==="
 
 <!-- chunk: 参考链接 -->## 参考链接
 
-#<!-- chunk: 项目官方文档 -->## 项目官方文档
+## 项目官方文档
 - [Karmada 文档](https://karmada.io/docs/)
 - [Cluster API 文档](https://cluster-api.sigs.k8s.io/)
 - [Rancher 文档](https://ranchermanager.docs.rancher.com/)
@@ -1444,7 +1451,7 @@ echo "=== Crossplane 部署完成 ==="
 - [Kyverno 文档](https://kyverno.io/docs/)
 - [Cilium Cluster Mesh 文档](https://docs.cilium.io/en/latest/network/clustermesh/)
 
-#<!-- chunk: 社区资源 -->## 社区资源
+## 社区资源
 - [CNCF 多云白皮书](https://www.cncf.io/reports/)
 - [Kubernetes 多集群 SIG](https://github.com/kubernetes/community/tree/master/sig-multicluster)
 - [多云最佳实践指南](https://github.com/cncf/tag-app-delivery)
@@ -1460,7 +1467,7 @@ echo "=== Crossplane 部署完成 ==="
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-27-multi-cloud-hybrid MOC
-- [[domain-12-cloud-providers/README|Domain 27: 多云与混合云架构管理]]
+- [[domain-12-cloud-providers/README.md|Domain 12: 多云与混合云架构管理]]
 - AWS EKS 企业级多云管理平台
 - Azure AKS 企业级多云管理平台
 - 企业级多云治理与成本优化深度实践

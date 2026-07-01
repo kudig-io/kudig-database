@@ -123,7 +123,7 @@ Golden Paths（黄金路径）是平台工程领域的核心实践之一，由 S
 
 <!-- chunk: Golden Paths 核心理念 -->## Golden Paths 核心理念
 
-#<!-- chunk: 什么是黄金路径？ -->## 什么是黄金路径？
+## 什么是黄金路径？
 
 ```mermaid
 graph LR
@@ -150,7 +150,7 @@ graph LR
     style "有黄金路径（有序）" fill:#e8f5e9
 ```
 
-#<!-- chunk: 黄金路径的三个维度 -->## 黄金路径的三个维度
+## 黄金路径的三个维度
 
 ```mermaid
 mindmap
@@ -172,7 +172,7 @@ mindmap
       Tested & Validated
 ```
 
-#<!-- chunk: 黄金路径的价值量化 -->## 黄金路径的价值量化
+## 黄金路径的价值量化
 
 | 指标 | 无黄金路径 | 有黄金路径 | 改善 |
 |------|-----------|-----------|------|
@@ -186,7 +186,7 @@ mindmap
 
 <!-- chunk: 铺路 vs 护栏 -->## 铺路 vs 护栏
 
-#<!-- chunk: 两种策略对比 -->## 两种策略对比
+## 两种策略对比
 
 ```mermaid
 graph TB
@@ -218,7 +218,7 @@ graph TB
     style "Best Practice" fill:#e3f2fd
 ```
 
-#<!-- chunk: 护栏实现示例 -->## 护栏实现示例
+## 护栏实现示例
 
 ```yaml
 # Kyverno 策略：强制镜像来自受信任仓库
@@ -311,7 +311,7 @@ spec:
 
 <!-- chunk: 黄金路径的构成要素 -->## 黄金路径的构成要素
 
-#<!-- chunk: 完整黄金路径组件 -->## 完整黄金路径组件
+## 完整黄金路径组件
 
 ```mermaid
 graph TD
@@ -363,7 +363,7 @@ graph TD
 
 <!-- chunk: Frontend 黄金路径 -->## Frontend 黄金路径
 
-#<!-- chunk: React/Next.js 前端黄金路径 -->## React/Next.js 前端黄金路径
+## React/Next.js 前端黄金路径
 
 ```yaml
 # Backstage Software Template: Frontend App
@@ -472,7 +472,7 @@ spec:
         path: k8s/overlays/production
 ```
 
-#<!-- chunk: 前端黄金路径 CI 模板 -->## 前端黄金路径 CI 模板
+## 前端黄金路径 CI 模板
 
 ```yaml
 # .github/workflows/frontend-golden-path.yml
@@ -646,7 +646,7 @@ jobs:
           BASE_URL: "https://staging.company.io/${{ github.event.repository.name }}"
 ```
 
-#<!-- chunk: 前端黄金路径基础镜像 -->## 前端黄金路径基础镜像
+## 前端黄金路径基础镜像
 
 ```dockerfile
 # Base image for Golden Path Frontend builds
@@ -706,7 +706,7 @@ CMD ["node", "server.js"]
 
 <!-- chunk: Backend 黄金路径 -->## Backend 黄金路径
 
-#<!-- chunk: 后端服务黄金路径架构 -->## 后端服务黄金路径架构
+## 后端服务黄金路径架构
 
 ```mermaid
 graph TB
@@ -750,7 +750,7 @@ graph TB
     SCAFFOLD --> HELM_CHART
 ```
 
-#<!-- chunk: Go 后端服务模板 -->## Go 后端服务模板
+## Go 后端服务模板
 
 ```go
 // main.go - Go Backend Golden Path Template
@@ -865,7 +865,7 @@ func applyMiddlewareStack(h http.Handler, log *zap.Logger) http.Handler {
 }
 ```
 
-#<!-- chunk: 后端黄金路径 Helm Chart -->## 后端黄金路径 Helm Chart
+## 后端黄金路径 Helm Chart
 
 ```yaml
 # helm/values.yaml - Standard Backend Service Values
@@ -974,7 +974,7 @@ commonLabels:
 
 <!-- chunk: Data Pipeline 黄金路径 -->## Data Pipeline 黄金路径
 
-#<!-- chunk: 数据管道黄金路径架构 -->## 数据管道黄金路径架构
+## 数据管道黄金路径架构
 
 ```mermaid
 flowchart LR
@@ -1015,7 +1015,7 @@ flowchart LR
     style "Serving（服务）" fill:#fce4ec
 ```
 
-#<!-- chunk: Spark 数据处理黄金路径模板 -->## Spark 数据处理黄金路径模板
+## Spark 数据处理黄金路径模板
 
 ```python
 # spark_job_template.py - Data Pipeline Golden Path
@@ -1188,7 +1188,7 @@ class GoldenPathSparkJob:
 
 <!-- chunk: ML/AI 黄金路径 -->## ML/AI 黄金路径
 
-#<!-- chunk: ML 工作流黄金路径 -->## ML 工作流黄金路径
+## ML 工作流黄金路径
 
 ```mermaid
 graph TD
@@ -1276,7 +1276,7 @@ spec:
 
 <!-- chunk: 模板设计原则 -->## 模板设计原则
 
-#<!-- chunk: PRISM 框架 -->## PRISM 框架
+## PRISM 框架
 
 ```mermaid
 mindmap
@@ -1303,7 +1303,7 @@ mindmap
       向后兼容
 ```
 
-#<!-- chunk: 模板参数设计原则 -->## 模板参数设计原则
+## 模板参数设计原则
 
 ```yaml
 # ✅ 好的模板参数设计
@@ -1337,7 +1337,7 @@ parameters:
     type: object
 ```
 
-#<!-- chunk: 模板文档标准 -->## 模板文档标准
+## 模板文档标准
 
 ```markdown
 <!-- 每个 Golden Path 模板必须包含以下文档 -->
@@ -1375,7 +1375,7 @@ parameters:
 
 <!-- chunk: 开发者门户集成 -->## 开发者门户集成
 
-#<!-- chunk: Backstage 软件目录配置 -->## Backstage 软件目录配置
+## Backstage 软件目录配置
 
 ```yaml
 # catalog-info.yaml - 黄金路径模板的标准 Catalog 条目
@@ -1419,7 +1419,7 @@ metadata:
       icon: chat
 ```
 
-#<!-- chunk: 开发者门户 Golden Path 展示页面 -->## 开发者门户 Golden Path 展示页面
+## 开发者门户 Golden Path 展示页面
 
 ```typescript
 // Backstage Custom Page: Golden Path Catalog
@@ -1480,7 +1480,7 @@ export const GoldenPathsPage = () => (
 
 <!-- chunk: Golden Path 生命周期管理 -->## Golden Path 生命周期管理
 
-#<!-- chunk: 版本管理策略 -->## 版本管理策略
+## 版本管理策略
 
 ```mermaid
 gitGraph
@@ -1500,7 +1500,7 @@ gitGraph
     commit id: "v2.1.0 Add HPA support"
 ```
 
-#<!-- chunk: 版本升级通知机制 -->## 版本升级通知机制
+## 版本升级通知机制
 
 ```yaml
 # Golden Path Version Notification ConfigMap
@@ -1542,7 +1542,7 @@ data:
     # ... 等等
 ```
 
-#<!-- chunk: 采用率追踪 -->## 采用率追踪
+## 采用率追踪
 
 ```python
 # 追踪黄金路径采用率的脚本
@@ -1587,7 +1587,7 @@ def measure_adoption(k8s_client):
 
 <!-- chunk: 反模式与陷阱 -->## 反模式与陷阱
 
-#<!-- chunk: 常见反模式 -->## 常见反模式
+## 常见反模式
 
 ```mermaid
 graph TD
@@ -1617,7 +1617,7 @@ graph TD
     AP6 -.->|改进| BP6
 ```
 
-#<!-- chunk: 黄金路径偏离登记流程 -->## 黄金路径偏离登记流程
+## 黄金路径偏离登记流程
 
 ```yaml
 # 受控偏离（Controlled Deviation）登记
@@ -1673,7 +1673,7 @@ spec:
 
 <!-- chunk: 成熟度模型 -->## 成熟度模型
 
-#<!-- chunk: Golden Path 成熟度分级 -->## Golden Path 成熟度分级
+## Golden Path 成熟度分级
 
 ```mermaid
 graph LR
@@ -1706,7 +1706,7 @@ graph LR
     style L4 fill:#b3e5fc
 ```
 
-#<!-- chunk: 成熟度自评表 -->## 成熟度自评表
+## 成熟度自评表
 
 | 维度 | Level 1 | Level 2 | Level 3 | Level 4 |
 |------|---------|---------|---------|---------|
@@ -1723,13 +1723,13 @@ graph LR
 
 Golden Paths 成功的关键在于以下三点：
 
-#<!-- chunk: 1. 以开发者为中心 -->## 1. 以开发者为中心
+## 1. 以开发者为中心
 
 > "The platform exists to serve developers, not the other way around."
 
 黄金路径必须降低开发者的认知负担，而不是增加新的学习成本。
 
-#<!-- chunk: 2. 价值驱动，而非强制 -->## 2. 价值驱动，而非强制
+## 2. 价值驱动，而非强制
 
 ```mermaid
 graph LR
@@ -1745,7 +1745,7 @@ graph LR
     style RESISTANCE fill:#ffebee
 ```
 
-#<!-- chunk: 3. 持续演进 -->## 3. 持续演进
+## 3. 持续演进
 
 黄金路径不是一次性交付物，而是持续维护的平台产品。需要：
 - 定期收集开发者反馈
@@ -1769,7 +1769,7 @@ graph LR
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-07-platform-engineering MOC
-- [[domain-07-platform-engineering/README|Domain 36: 平台工程 (Platform Engineering)]]
+- [[domain-07-platform-engineering/README.md|Domain 07: 平台工程 (Platform Engineering)]]
 - Domain-36 平台工程 — 开源项目索引
 - 平台工程概述与成熟度模型
 - 内部开发者平台设计原则

@@ -39,10 +39,15 @@ created: "2026-05-23"
 
 ## 完整节点移除流程
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```
 步骤 1: 驱逐 Pod     → kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
 步骤 2: 删除 Node    → kubectl delete node <node>
-步骤 3: reset 节点   → kubeadm reset --force
+步骤 3: reset 节点   → kubeadm reset --force  # ⚠️ 清理节点所有 K8s 配置
 步骤 4: 手动清理     → iptables/ipvs/CNI/证书/数据目录
 ```
 
@@ -84,23 +89,32 @@ kubeadm reset 不会自动清理以下内容，需要手动处理：
 
 ### 节点不可达
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+
 ```bash
 # 在可达的控制面节点上
 kubectl delete node <unreachable-node>
 
 # 手动移除 etcd 成员
-etcdctl member remove <member-id>
+etcdctl member remove <member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
 
 # 节点恢复后执行
-kubeadm reset -f
+kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 ```
 
 ### etcd 仲裁丢失
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+
 ```bash
 # 3 节点 etcd 中 2 个节点丢失
-kubeadm reset -f --skip-phases=remove-etcd-member
-rm -rf /var/lib/etcd
+kubeadm reset -f --skip-phases=remove-etcd-member  # ⚠️ 清理节点所有 K8s 配置
+rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
 ```
 
 ### 卸载挂载点卡住
@@ -126,12 +140,18 @@ umount -l $(mount | grep kubelet | awk '{print $3}')
 
 ## 灾难恢复删除脚本
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
+> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
+> - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 #!/bin/bash
 NODE_NAME=$(hostname)
 
 # 1. 尝试正常 reset
-kubeadm reset -f || true
+kubeadm reset -f || true  # ⚠️ 清理节点所有 K8s 配置
 
 # 2. 停止所有服务
 systemctl stop kubelet 2>/dev/null || true
@@ -143,8 +163,8 @@ mount | grep '/var/lib/kubelet' | awk '{print $3}' | while read mp; do
 done
 
 # 4. 清理数据
-rm -rf /etc/kubernetes/ /var/lib/kubelet/ /var/lib/etcd/
-rm -rf /etc/cni/net.d/ /opt/cni/ $HOME/.kube/
+rm -rf /etc/kubernetes/ /var/lib/kubelet/ /var/lib/etcd/  # ⚠️ 删除系统/数据文件
+rm -rf /etc/cni/net.d/ /opt/cni/ $HOME/.kube/  # ⚠️ 删除系统/数据文件
 
 # 5. 清理网络规则
 iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
@@ -155,10 +175,10 @@ ip link delete flannel.1 2>/dev/null || true
 
 ## 相关技能
 
-- [[skills/kubeadm-cluster-lifecycle|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
-- [[skills/node-drain-and-maintenance|[[节点驱逐与维护|节点驱逐与维护]]]]
-- [[skills/backup-restore-etcd|备份和恢复 etcd]]
-- [[concepts/kubernetes-pki-certificate-system|[[Kubernetes PKI 证书体系|Kubernetes PKI 证书体系]]]]
+- [[skills/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
+- [[skills/node-drain-and-maintenance.md|[[节点驱逐与维护|节点驱逐与维护]]]]
+- [[skills/backup-restore-etcd.md|备份和恢复 etcd]]
+- [[concepts/kubernetes-pki-certificate-system.md|[[Kubernetes PKI 证书体系|Kubernetes PKI 证书体系]]]]
 - [[etcd|etcd]]
 
 ## Related
@@ -167,6 +187,6 @@ ip link delete flannel.1 2>/dev/null || true
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/kubernetes-pki-certificate-system|kubernetes-pki-certificate-system]] — Kubernetes PKI 证书体系
+- [[concepts/kubernetes-pki-certificate-system.md|kubernetes-pki-certificate-system]] — Kubernetes PKI 证书体系
 
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/README|Cluster Delete — Kubernetes 集群删除源码分析]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/README.md|Cluster Delete — Kubernetes 集群删除源码分析]]

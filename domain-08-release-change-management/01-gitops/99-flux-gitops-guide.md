@@ -99,7 +99,7 @@ Weaveworks（Flux 创始公司）于 2024 年初倒闭后，Flux 已由 CNCF 社
 
 <!-- chunk: 二、架构设计 -->## 二、架构设计
 
-#<!-- chunk: 2.1 Flux 核心组件 -->## 2.1 Flux 核心组件
+## 2.1 Flux 核心组件
 
 ```mermaid
 graph TB
@@ -137,7 +137,7 @@ graph TB
     NC --> HC
 ```
 
-#<!-- chunk: 2.2 组件职责 -->## 2.2 组件职责
+## 2.2 组件职责
 
 ```
 Flux 核心组件
@@ -162,7 +162,7 @@ Flux 核心组件
 
 <!-- chunk: 三、Bootstrap 部署 -->## 三、Bootstrap 部署
 
-#<!-- chunk: 3.1 CLI 安装与初始化 -->## 3.1 CLI 安装与初始化
+## 3.1 CLI 安装与初始化
 
 ```bash
 # 安装 flux CLI
@@ -196,7 +196,7 @@ flux check
 flux get all -A
 ```
 
-#<!-- chunk: 3.2 目录结构约定 -->## 3.2 目录结构约定
+## 3.2 目录结构约定
 
 ```
 flux-gitops/
@@ -229,7 +229,7 @@ flux-gitops/
 
 <!-- chunk: 四、核心配置 -->## 四、核心配置
 
-#<!-- chunk: 4.1 GitRepository -->## 4.1 GitRepository
+## 4.1 GitRepository
 
 ```yaml
 apiVersion: source.toolkit.fluxcd.io/v1
@@ -249,7 +249,7 @@ spec:
     /tests/
 ```
 
-#<!-- chunk: 4.2 Kustomization -->## 4.2 Kustomization
+## 4.2 Kustomization
 
 ```yaml
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -276,7 +276,7 @@ spec:
     - name: cert-manager
 ```
 
-#<!-- chunk: 4.3 HelmRelease -->## 4.3 HelmRelease
+## 4.3 HelmRelease
 
 ```yaml
 apiVersion: source.toolkit.fluxcd.io/v1
@@ -324,7 +324,7 @@ spec:
                   storage: 50Gi
 ```
 
-#<!-- chunk: 4.4 镜像自动更新 -->## 4.4 镜像自动更新
+## 4.4 镜像自动更新
 
 ```yaml
 # 扫描镜像仓库
@@ -393,7 +393,7 @@ spec:
 
 <!-- chunk: 五、安全与合规 -->## 五、安全与合规
 
-#<!-- chunk: 5.1 SOPS 密钥加密 -->## 5.1 SOPS 密钥加密
+## 5.1 SOPS 密钥加密
 
 ```bash
 # 使用 SOPS 加密 Secret
@@ -423,7 +423,7 @@ spec:
       name: sops-gpg
 ```
 
-#<!-- chunk: 5.2 多租户 RBAC -->## 5.2 多租户 RBAC
+## 5.2 多租户 RBAC
 
 ```yaml
 apiVersion: v1
@@ -461,7 +461,7 @@ spec:
 
 <!-- chunk: 六、多环境管理策略 -->## 六、多环境管理策略
 
-#<!-- chunk: 6.1 多集群架构 -->## 6.1 多集群架构
+## 6.1 多集群架构
 
 ```
 Git Repo: flux-gitops/
@@ -480,7 +480,7 @@ Git Repo: flux-gitops/
     └── staging/         # 预发布覆盖
 ```
 
-#<!-- chunk: 6.2 环境差异化 -->## 6.2 环境差异化
+## 6.2 环境差异化
 
 ```yaml
 # staging 环境 Kustomization
@@ -507,7 +507,7 @@ spec:
 
 <!-- chunk: 七、监控与回滚 -->## 七、监控与回滚
 
-#<!-- chunk: 7.1 通知配置 -->## 7.1 通知配置
+## 7.1 通知配置
 
 ```yaml
 apiVersion: notification.toolkit.fluxcd.io/v1beta3
@@ -541,7 +541,7 @@ spec:
     - "HelmRelease.*install retries exhausted"
 ```
 
-#<!-- chunk: 7.2 Prometheus Metrics -->## 7.2 Prometheus Metrics
+## 7.2 Prometheus Metrics
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -567,7 +567,7 @@ spec:
 | 同步耗时 | `histogram_quantile(0.95, rate(gotk_reconcile_duration_seconds_bucket[5m]))` |
 | 源同步状态 | `gotk_resource_info{kind="GitRepository"}` |
 
-#<!-- chunk: 7.3 回滚 -->## 7.3 回滚
+## 7.3 回滚
 
 ```bash
 # Flux 回滚 - Git revert
@@ -586,7 +586,7 @@ flux reconcile helmrelease <name> --rollback
 
 <!-- chunk: 八、最佳实践 -->## 八、最佳实践
 
-#<!-- chunk: 8.1 Flux vs Argo CD 选型 -->## 8.1 Flux vs Argo CD 选型
+## 8.1 Flux vs Argo CD 选型
 
 | 维度 | Flux | Argo CD |
 |:---|:---|:---|
@@ -611,7 +611,7 @@ flux reconcile helmrelease <name> --rollback
   ✅ 需要 ApplicationSet 和 Generators
 ```
 
-#<!-- chunk: 8.2 与 Terraform 集成 -->## 8.2 与 Terraform 集成
+## 8.2 与 Terraform 集成
 
 ```yaml
 apiVersion: infra.contrib.fluxcd.io/v1alpha2
@@ -693,7 +693,7 @@ flux get providers -A
 
 <!-- chunk: 十、Flux 企业级实践 -->## 十、Flux 企业级实践
 
-#<!-- chunk: 10.1 OCI Registry 作为 Helm Chart 源 -->## 10.1 OCI Registry 作为 Helm Chart 源
+## 10.1 OCI Registry 作为 Helm Chart 源
 
 Flux 原生支持 OCI Registry 作为 Helm Chart 的来源，这使得企业可以利用现有的容器镜像仓库（如 GHCR、ECR、Harbor）来存储和分发 Helm Chart。与传统的 HTTP Helm Repository 相比，OCI Registry 提供了更好的安全性和性能。
 
@@ -714,7 +714,7 @@ spec:
     name: registry-certs
 ```
 
-#<!-- chunk: 10.2 通知高级配置 -->## 10.2 通知高级配置
+## 10.2 通知高级配置
 
 Flux 的 Notification Controller 支持多种通知渠道和灵活的事件过滤。通过配置 Provider 和 Alert 资源，可以将 Flux 的协调事件发送到 Slack、Microsoft Teams、Discord、Webhook 等渠道。事件过滤支持正则表达式匹配，可以精确控制哪些事件触发通知。
 
@@ -751,7 +751,7 @@ spec:
     - "Kustomization.*dependency.*not ready"
 ```
 
-#<!-- chunk: 10.3 与 Crossplane 协作 -->## 10.3 与 Crossplane 协作
+## 10.3 与 Crossplane 协作
 
 Flux 可以与 Crossplane 协作，实现基础设施和应用的统一 GitOps 管理。Flux 负责管理 Crossplane 的 Provider 和 Composition 配置，Crossplane 负责管理云资源（如 VPC、RDS、S3）。
 
@@ -771,7 +771,7 @@ Git Repo
 
 <!-- chunk: 十一、Flux 故障排查与调试 -->## 十一、Flux 故障排查与调试
 
-#<!-- chunk: 11.1 常见问题诊断 -->## 11.1 常见问题诊断
+## 11.1 常见问题诊断
 
 Flux 的故障排查遵循分层诊断原则：首先检查 Git 仓库连接和凭证，然后检查 Source Controller 的资源状态，最后检查 Kustomize/Helm Controller 的协调日志。Flux 提供了 `flux check` 命令快速检查所有组件的健康状态。
 
@@ -801,7 +801,7 @@ flux suspend kustomization myapp
 flux resume kustomization myapp
 ```
 
-#<!-- chunk: 11.2 性能调优 -->## 11.2 性能调优
+## 11.2 性能调优
 
 当管理大量资源时，Flux 的性能调优包括：调整协调间隔（interval）、启用服务端应用（server-side apply）、配置资源排除规则和优化 Git 仓库结构。合理的间隔配置可以平衡及时性和 API Server 负载。
 
@@ -825,8 +825,7 @@ spec:
       name: myapp
       namespace: myapp
   patches:
-    - target:
-        kind: Deployment
+    - target: "`kind: Deployment`"
       patch: |
         apiVersion: apps/v1
         kind: Deployment
@@ -839,7 +838,7 @@ spec:
                 kubectl.kubernetes.io/restartedAt: null
 ```
 
-#<!-- chunk: 11.3 灾难恢复 -->## 11.3 灾难恢复
+## 11.3 灾难恢复
 
 Flux 的灾难恢复策略以 Git 仓库为核心。只要 Git 仓库存在，就可以在任何新的 Kubernetes 集群上重新引导 Flux 并恢复所有配置。建议定期备份 Flux 的 CRD 和 Secret，并将 Flux 自身的配置也纳入 GitOps 管理。
 
@@ -867,7 +866,7 @@ kubectl get all -A | grep -E "Running|Completed"
 
 <!-- chunk: 十二、Flux 与 Terraform 集成 -->## 十二、Flux 与 Terraform 集成
 
-#<!-- chunk: 12.1 tf-controller 深度集成 -->## 12.1 tf-controller 深度集成
+## 12.1 tf-controller 深度集成
 
 tf-controller 是 Flux 生态中管理 Terraform 基础设施的核心组件。它将 Terraform 的状态管理纳入 GitOps 工作流，实现了基础设施即代码的自动化管理。tf-controller 支持 Terraform Plan 审批、自动 Apply、状态锁定和漂移检测。
 
@@ -899,7 +898,7 @@ spec:
             name: aws-credentials
 ```
 
-#<!-- chunk: 12.2 基础设施与应用协同 -->## 12.2 基础设施与应用协同
+## 12.2 基础设施与应用协同
 
 在 GitOps 工作流中，基础设施和应用的部署顺序至关重要。例如，应用需要等待数据库创建完成后才能启动。Flux 通过 Kustomization 的 `dependsOn` 字段实现依赖关系管理，确保基础设施先于应用部署。
 
@@ -938,7 +937,7 @@ spec:
 
 Flux 生态中的 Flagger 组件可以与多种 Service Mesh 和 Ingress Controller 集成，实现自动化渐进式交付。Flagger 支持 Istio、Linkerd、App Mesh、Contour、NGINX Ingress、Gloo 和 Traefik 等多种流量管理工具。每种集成都提供了基于流量百分比的精确金丝雀控制，结合 Prometheus 指标自动分析发布质量。
 
-#<!-- chunk: 13.1 Flagger + Istio 金丝雀发布 -->## 13.1 Flagger + Istio 金丝雀发布
+## 13.1 Flagger + Istio 金丝雀发布
 
 Flagger 与 Istio 的深度集成可以实现全自动的金丝雀发布。Flagger 自动创建 Canary Deployment、修改 Istio VirtualService 的流量权重、执行分析检查并根据指标自动决定继续发布或回滚。整个发布过程无需人工干预。
 
@@ -985,7 +984,7 @@ spec:
           cmd: "curl -sf http://myapp-canary:8080/health"
 ```
 
-#<!-- chunk: 13.2 自定义 Prometheus 指标分析 -->## 13.2 自定义 Prometheus 指标分析
+## 13.2 自定义 Prometheus 指标分析
 
 Flagger 的核心能力之一是基于 Prometheus 指标的自动化分析。通过 MetricTemplate，可以定义自定义的 Prometheus 查询来衡量发布质量。常用的指标包括请求成功率、请求延迟和自定义业务指标（如订单成功率、支付延迟等）。
 
@@ -1010,7 +1009,7 @@ spec:
 
 <!-- chunk: 十四、Flux 最佳实践总结 -->## 十四、Flux 最佳实践总结
 
-#<!-- chunk: 14.1 生产环境 Checklist -->## 14.1 生产环境 Checklist
+## 14.1 生产环境 Checklist
 
 ```yaml
 Flux 生产环境部署检查清单:
@@ -1035,7 +1034,7 @@ Flux 生产环境部署检查清单:
     - 定期清理过期资源 (flux suspend/resume)
 ```
 
-#<!-- chunk: 14.2 常见错误与解决方案 -->## 14.2 常见错误与解决方案
+## 14.2 常见错误与解决方案
 
 ```yaml
 常见问题:
@@ -1078,7 +1077,7 @@ Flux 生产环境部署检查清单:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-08-release-change-management MOC
-- [[domain-08-release-change-management/README|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
+- [[domain-08-release-change-management/README.md|Domain 08: GitOps与CI/CD (GitOps & CI/CD)]]
 - Domain-23 GitOps & CI/CD — 开源项目索引
 - Argo CD企业级GitOps实践指南
 - Jenkins企业级CI/CD流水线深度实践
@@ -1099,4 +1098,4 @@ Flux 生产环境部署检查清单:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

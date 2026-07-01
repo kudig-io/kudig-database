@@ -119,7 +119,7 @@ k8s_versions:
 
 <!-- chunk: 1. Kubernetes NetworkPolicy vs CiliumNetworkPolicy -->## 1. Kubernetes NetworkPolicy vs CiliumNetworkPolicy
 
-#<!-- chunk: 1.1 策略能力对比 (Policy Capability Comparison) -->## 1.1 策略能力对比 (Policy Capability Comparison)
+## 1.1 策略能力对比 (Policy Capability Comparison)
 
 ```mermaid
 graph TB
@@ -153,7 +153,7 @@ graph TB
     style CCNP_L7 fill:#afa,stroke:#0a0
 ```
 
-#<!-- chunk: 1.2 策略模型的核心差异 (Core Differences) -->## 1.2 策略模型的核心差异 (Core Differences)
+## 1.2 策略模型的核心差异 (Core Differences)
 
 | 特性 | Kubernetes NetworkPolicy | CiliumNetworkPolicy |
 |------|--------------------------|---------------------|
@@ -166,7 +166,7 @@ graph TB
 | 策略追踪调试 | ❌ | ✅ cilium policy trace |
 | 跨集群策略 | ❌ | ✅ Cluster Mesh |
 
-#<!-- chunk: 1.3 CiliumNetworkPolicy CRD 结构 (CRD Structure) -->## 1.3 CiliumNetworkPolicy CRD 结构 (CRD Structure)
+## 1.3 CiliumNetworkPolicy CRD 结构 (CRD Structure)
 
 ```yaml
 apiVersion: "cilium.io/v2"
@@ -233,7 +233,7 @@ spec:
         app: restricted
 ```
 
-#<!-- chunk: 1.4 策略执行模型 (Policy Enforcement Model) -->## 1.4 策略执行模型 (Policy Enforcement Model)
+## 1.4 策略执行模型 (Policy Enforcement Model)
 
 ```mermaid
 flowchart LR
@@ -270,7 +270,7 @@ cilium config PolicyEnforcement=never    # 禁用
 
 <!-- chunk: 2. L3 策略 - IP/CIDR 规则 -->## 2. L3 策略 - IP/CIDR 规则
 
-#<!-- chunk: 2.1 基于 Pod 标签的 L3 规则 (Pod Selector Rules) -->## 2.1 基于 Pod 标签的 L3 规则 (Pod Selector Rules)
+## 2.1 基于 Pod 标签的 L3 规则 (Pod Selector Rules)
 
 ```yaml
 # 场景：只允许 frontend Pod 访问 backend Pod
@@ -311,7 +311,7 @@ spec:
         app: prometheus
 ```
 
-#<!-- chunk: 2.2 基于 Namespace 的 L3 规则 -->## 2.2 基于 Namespace 的 L3 规则
+## 2.2 基于 Namespace 的 L3 规则
 
 ```yaml
 # 场景：允许特定 namespace 的所有 Pod 访问
@@ -344,7 +344,7 @@ spec:
         k8s-app: kube-proxy
 ```
 
-#<!-- chunk: 2.3 基于 CIDR 的 L3 规则 -->## 2.3 基于 CIDR 的 L3 规则
+## 2.3 基于 CIDR 的 L3 规则
 
 ```yaml
 # 场景 1: 只允许特定 IP 段访问（外部访问控制）
@@ -425,7 +425,7 @@ spec:
       - "100.64.0.0/10"     # 排除共享地址
 ```
 
-#<!-- chunk: 2.4 基于节点的 L3 规则 (Node Selector Rules) -->## 2.4 基于节点的 L3 规则 (Node Selector Rules)
+## 2.4 基于节点的 L3 规则 (Node Selector Rules)
 
 ```yaml
 # 允许来自特定节点的流量（用于系统级 DaemonSet）
@@ -455,7 +455,7 @@ spec:
 
 <!-- chunk: 3. L4 策略 - 端口/协议规则 -->## 3. L4 策略 - 端口/协议规则
 
-#<!-- chunk: 3.1 基础端口规则 (Basic Port Rules) -->## 3.1 基础端口规则 (Basic Port Rules)
+## 3.1 基础端口规则 (Basic Port Rules)
 
 ```yaml
 # 完整的 L4 策略示例
@@ -539,7 +539,7 @@ spec:
         protocol: TCP
 ```
 
-#<!-- chunk: 3.2 命名端口规则 (Named Port Rules) -->## 3.2 命名端口规则 (Named Port Rules)
+## 3.2 命名端口规则 (Named Port Rules)
 
 ```yaml
 # 使用端口名称而非端口号（推荐，更易维护）
@@ -595,7 +595,7 @@ spec:
         protocol: TCP
 ```
 
-#<!-- chunk: 3.3 协议限制示例 (Protocol Restriction Examples) -->## 3.3 协议限制示例 (Protocol Restriction Examples)
+## 3.3 协议限制示例 (Protocol Restriction Examples)
 
 ```yaml
 # 场景: 强制只允许 TCP（防止 UDP 隧道绕过）
@@ -646,7 +646,7 @@ spec:
 
 <!-- chunk: 4. L7 策略详解 -->## 4. L7 策略详解
 
-#<!-- chunk: 4.1 L7 策略工作原理 (How L7 Policy Works) -->## 4.1 L7 策略工作原理 (How L7 Policy Works)
+## 4.1 L7 策略工作原理 (How L7 Policy Works)
 
 ```mermaid
 graph TB
@@ -671,9 +671,9 @@ graph TB
     style FORWARD_L7 fill:#6f9,stroke:#363
 ```
 
-#<!-- chunk: 4.2 HTTP L7 策略 (HTTP L7 Policy) -->## 4.2 HTTP L7 策略 (HTTP L7 Policy)
+## 4.2 HTTP L7 策略 (HTTP L7 Policy)
 
-##<!-- chunk: 4.2.1 HTTP 方法和路径匹配 -->## 4.2.1 HTTP 方法和路径匹配
+## 4.2.1 HTTP 方法和路径匹配
 
 ```yaml
 # HTTP REST API 精细化控制
@@ -741,7 +741,7 @@ spec:
           path: "/metrics"
 ```
 
-##<!-- chunk: 4.2.2 HTTP Header 匹配 -->## 4.2.2 HTTP Header 匹配
+## 4.2.2 HTTP Header 匹配
 
 ```yaml
 # 基于 HTTP Header 的访问控制
@@ -791,7 +791,7 @@ spec:
           path: "/health"
 ```
 
-##<!-- chunk: 4.2.3 HTTP 综合示例 - 微服务 API 保护 -->## 4.2.3 HTTP 综合示例 - 微服务 API 保护
+## 4.2.3 HTTP 综合示例 - 微服务 API 保护
 
 ```yaml
 # 完整的微服务 API 保护策略
@@ -887,9 +887,9 @@ spec:
         protocol: UDP
 ```
 
-#<!-- chunk: 4.3 gRPC 策略 (gRPC Policy) -->## 4.3 gRPC 策略 (gRPC Policy)
+## 4.3 gRPC 策略 (gRPC Policy)
 
-##<!-- chunk: 4.3.1 gRPC 服务和方法过滤 -->## 4.3.1 gRPC 服务和方法过滤
+## 4.3.1 gRPC 服务和方法过滤
 
 ```yaml
 # gRPC 服务粒度访问控制
@@ -946,7 +946,7 @@ spec:
           method: POST
 ```
 
-##<!-- chunk: 4.3.2 gRPC 跨命名空间策略 -->## 4.3.2 gRPC 跨命名空间策略
+## 4.3.2 gRPC 跨命名空间策略
 
 ```yaml
 # 场景：前端命名空间中的服务调用后端 gRPC 服务
@@ -1001,9 +1001,9 @@ spec:
           method: POST
 ```
 
-#<!-- chunk: 4.4 Kafka 策略 (Kafka Policy) -->## 4.4 Kafka 策略 (Kafka Policy)
+## 4.4 Kafka 策略 (Kafka Policy)
 
-##<!-- chunk: 4.4.1 Kafka Topic 和 ClientID 策略 -->## 4.4.1 Kafka Topic 和 ClientID 策略
+## 4.4.1 Kafka Topic 和 ClientID 策略
 
 ```yaml
 # Kafka 访问控制 - Topic 级别
@@ -1099,7 +1099,7 @@ spec:
           topic: "purchase-events"
 ```
 
-##<!-- chunk: 4.4.2 Kafka clientID 过滤 -->## 4.4.2 Kafka clientID 过滤
+## 4.4.2 Kafka clientID 过滤
 
 ```yaml
 # 基于 Kafka clientID 的精细控制
@@ -1130,9 +1130,9 @@ spec:
           clientID: "payment-producer-.*"  # 支持正则
 ```
 
-#<!-- chunk: 4.5 DNS 策略 (DNS Policy) -->## 4.5 DNS 策略 (DNS Policy)
+## 4.5 DNS 策略 (DNS Policy)
 
-##<!-- chunk: 4.5.1 FQDN 过滤（DNS 出站策略） -->## 4.5.1 FQDN 过滤（DNS 出站策略）
+## 4.5.1 FQDN 过滤（DNS 出站策略）
 
 ```yaml
 # 场景：限制 Pod 只能访问特定域名（防数据外泄）
@@ -1232,7 +1232,7 @@ spec:
         protocol: TCP
 ```
 
-##<!-- chunk: 4.5.2 DNS 策略调试 -->## 4.5.2 DNS 策略调试
+## 4.5.2 DNS 策略调试
 
 ```bash
 # 查看 DNS 策略缓存（已解析的 FQDN -> IP 映射）
@@ -1253,7 +1253,7 @@ hubble observe --fqdn "*.stripe.com"
 
 <!-- chunk: 5. CiliumClusterwideNetworkPolicy -->## 5. CiliumClusterwideNetworkPolicy
 
-#<!-- chunk: 5.1 集群级策略概述 (Cluster-Wide Policy Overview) -->## 5.1 集群级策略概述 (Cluster-Wide Policy Overview)
+## 5.1 集群级策略概述 (Cluster-Wide Policy Overview)
 
 `CiliumClusterwideNetworkPolicy` (CCNP) 是不受 Namespace 限制的**集群级策略**，通常由集群管理员使用，用于设置全局安全基线。
 
@@ -1283,7 +1283,7 @@ graph TB
     style DEV fill:#69f,stroke:#336
 ```
 
-#<!-- chunk: 5.2 集群级基线策略 (Cluster Baseline Policies) -->## 5.2 集群级基线策略 (Cluster Baseline Policies)
+## 5.2 集群级基线策略 (Cluster Baseline Policies)
 
 ```yaml
 # ============================================================
@@ -1416,7 +1416,7 @@ spec:
         protocol: TCP
 ```
 
-#<!-- chunk: 5.3 合规性策略 (Compliance Policies) -->## 5.3 合规性策略 (Compliance Policies)
+## 5.3 合规性策略 (Compliance Policies)
 
 ```yaml
 # PCI DSS 合规：支付数据隔离
@@ -1489,7 +1489,7 @@ spec:
 
 <!-- chunk: 6. 基于身份 (Identity) 的策略 -->## 6. 基于身份 (Identity) 的策略
 
-#<!-- chunk: 6.1 安全身份机制 (Security Identity Mechanism) -->## 6.1 安全身份机制 (Security Identity Mechanism)
+## 6.1 安全身份机制 (Security Identity Mechanism)
 
 ```mermaid
 graph LR
@@ -1518,7 +1518,7 @@ graph LR
     style WORLD fill:#ffd,stroke:#aa0
 ```
 
-#<!-- chunk: 6.2 使用保留身份的策略 (Reserved Identity Policies) -->## 6.2 使用保留身份的策略 (Reserved Identity Policies)
+## 6.2 使用保留身份的策略 (Reserved Identity Policies)
 
 ```yaml
 # 使用保留身份控制特殊流量
@@ -1580,7 +1580,7 @@ spec:
         protocol: TCP
 ```
 
-#<!-- chunk: 6.3 跨集群身份策略 (Cross-Cluster Identity Policy) -->## 6.3 跨集群身份策略 (Cross-Cluster Identity Policy)
+## 6.3 跨集群身份策略 (Cross-Cluster Identity Policy)
 
 ```yaml
 # Cluster Mesh 场景下的跨集群策略
@@ -1615,7 +1615,7 @@ spec:
         io.cilium.k8s.policy.cluster: cluster-3
 ```
 
-#<!-- chunk: 6.4 身份感知的负载均衡 (Identity-Aware Load Balancing) -->## 6.4 身份感知的负载均衡 (Identity-Aware Load Balancing)
+## 6.4 身份感知的负载均衡 (Identity-Aware Load Balancing)
 
 ```yaml
 # 为不同来源提供不同服务级别
@@ -1678,7 +1678,7 @@ spec:
 
 <!-- chunk: 7. 策略可视化与审计 -->## 7. 策略可视化与审计
 
-#<!-- chunk: 7.1 Hubble 策略可视化 (Hubble Policy Visualization) -->## 7.1 Hubble 策略可视化 (Hubble Policy Visualization)
+## 7.1 Hubble 策略可视化 (Hubble Policy Visualization)
 
 ```bash
 # ============================================
@@ -1725,7 +1725,7 @@ hubble observe \
   sort | uniq -c | sort -rn | head -20
 ```
 
-#<!-- chunk: 7.2 策略追踪 (Policy Tracing) -->## 7.2 策略追踪 (Policy Tracing)
+## 7.2 策略追踪 (Policy Tracing)
 
 ```bash
 # ============================================
@@ -1762,7 +1762,7 @@ cilium endpoint list --output json | \
   jq -r '.[] | [.id, .labels["k8s:app"], .policy["realized"]["allowed-ingress-identities"]] | @tsv'
 ```
 
-#<!-- chunk: 7.3 策略审计模式 (Policy Audit Mode) -->## 7.3 策略审计模式 (Policy Audit Mode)
+## 7.3 策略审计模式 (Policy Audit Mode)
 
 ```bash
 # 开启审计模式（不实际阻断，只记录）
@@ -1790,7 +1790,7 @@ hubble observe --verdict AUDIT --output json | \
   sort | uniq -c | sort -rn
 ```
 
-#<!-- chunk: 7.4 生成策略报告 (Generate Policy Reports) -->## 7.4 生成策略报告 (Generate Policy Reports)
+## 7.4 生成策略报告 (Generate Policy Reports)
 
 ```bash
 # 导出所有 CiliumNetworkPolicy
@@ -1828,7 +1828,7 @@ cilium endpoint list --output json | jq '
 
 <!-- chunk: 8. AdminNetworkPolicy 集成 -->## 8. AdminNetworkPolicy 集成
 
-#<!-- chunk: 8.1 AdminNetworkPolicy 概述 (ANP Overview) -->## 8.1 AdminNetworkPolicy 概述 (ANP Overview)
+## 8.1 AdminNetworkPolicy 概述 (ANP Overview)
 
 `AdminNetworkPolicy` (ANP) 是 Kubernetes SIG Network 定义的新标准 API（beta in K8s 1.32），提供**集群管理员级别**的网络策略，Cilium 1.17+ 完整支持。
 
@@ -1849,7 +1849,7 @@ graph TB
     style CNP fill:#9f6,stroke:#363
 ```
 
-#<!-- chunk: 8.2 AdminNetworkPolicy 示例 -->## 8.2 AdminNetworkPolicy 示例
+## 8.2 AdminNetworkPolicy 示例
 
 ```yaml
 # 平台级 AdminNetworkPolicy：强制全局安全规则
@@ -1940,7 +1940,7 @@ spec:
     - sameNamespace: {}
 ```
 
-#<!-- chunk: 8.3 ANP 与 CiliumNetworkPolicy 协同使用 -->## 8.3 ANP 与 CiliumNetworkPolicy 协同使用
+## 8.3 ANP 与 CiliumNetworkPolicy 协同使用
 
 ```yaml
 # 场景：ANP 设置基线，CNP 允许额外访问
@@ -1993,7 +1993,7 @@ spec:
 
 <!-- chunk: 9. 策略优先级与冲突处理 -->## 9. 策略优先级与冲突处理
 
-#<!-- chunk: 9.1 策略优先级规则 (Policy Priority Rules) -->## 9.1 策略优先级规则 (Policy Priority Rules)
+## 9.1 策略优先级规则 (Policy Priority Rules)
 
 ```mermaid
 flowchart TD
@@ -2033,7 +2033,7 @@ flowchart TD
     style ALLOW5 fill:#6f6,stroke:#060,color:#fff
 ```
 
-#<!-- chunk: 9.2 同一端点多条策略的合并 (Policy Merging) -->## 9.2 同一端点多条策略的合并 (Policy Merging)
+## 9.2 同一端点多条策略的合并 (Policy Merging)
 
 ```yaml
 # 示例：同一 Pod 有多个 CiliumNetworkPolicy，规则取并集
@@ -2080,7 +2080,7 @@ spec:
 # - 其他来源 → DENY ❌（因为存在策略）
 ```
 
-#<!-- chunk: 9.3 Deny 规则的优先级 (Deny Rule Priority) -->## 9.3 Deny 规则的优先级 (Deny Rule Priority)
+## 9.3 Deny 规则的优先级 (Deny Rule Priority)
 
 ```yaml
 # 重要：ingressDeny/egressDeny 优先级高于 ingress/egress
@@ -2114,7 +2114,10 @@ spec:
 # 即使 ingress 规则允许，ingressDeny 会优先拒绝
 ```
 
-#<!-- chunk: 9.4 策略调试最佳实践 (Policy Debugging Best Practices) -->## 9.4 策略调试最佳实践 (Policy Debugging Best Practices)
+## 9.4 策略调试最佳实践 (Policy Debugging Best Practices)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # ============================================
@@ -2163,7 +2166,7 @@ echo "DROP count change: $before -> $after"
 
 <!-- chunk: 10. 企业级策略管理最佳实践 -->## 10. 企业级策略管理最佳实践
 
-#<!-- chunk: 10.1 策略即代码 (Policy as Code) -->## 10.1 策略即代码 (Policy as Code)
+## 10.1 策略即代码 (Policy as Code)
 
 ```mermaid
 graph LR
@@ -2179,7 +2182,7 @@ graph LR
     style ROLLBACK fill:#f96,stroke:#c33
 ```
 
-##<!-- chunk: GitOps 策略管理结构 -->## GitOps 策略管理结构
+## GitOps 策略管理结构
 
 ```
 network-policies/
@@ -2210,7 +2213,7 @@ network-policies/
     └── hipaa-policies.yaml          # HIPAA 合规策略
 ```
 
-#<!-- chunk: 10.2 策略模板与复用 (Policy Templates) -->## 10.2 策略模板与复用 (Policy Templates)
+## 10.2 策略模板与复用 (Policy Templates)
 
 ```yaml
 # 通用微服务策略模板（Kustomize 基础）
@@ -2321,7 +2324,7 @@ spec:
 {{- end }}
 ```
 
-#<!-- chunk: 10.3 策略测试框架 (Policy Testing Framework) -->## 10.3 策略测试框架 (Policy Testing Framework)
+## 10.3 策略测试框架 (Policy Testing Framework)
 
 ```yaml
 # 使用 Cilium 连通性测试验证策略
@@ -2410,7 +2413,7 @@ else
 fi
 ```
 
-#<!-- chunk: 10.4 Prometheus 告警规则 (Prometheus Alerting Rules) -->## 10.4 Prometheus 告警规则 (Prometheus Alerting Rules)
+## 10.4 Prometheus 告警规则 (Prometheus Alerting Rules)
 
 ```yaml
 # prometheus-cilium-policy-alerts.yaml
@@ -2488,7 +2491,7 @@ spec:
         description: "建议检查无策略保护的端点并应用适当的网络策略"
 ```
 
-#<!-- chunk: 10.5 Zero Trust 网络架构实施指南 -->## 10.5 Zero Trust 网络架构实施指南
+## 10.5 Zero Trust 网络架构实施指南
 
 ```mermaid
 graph TB
@@ -2507,6 +2510,9 @@ graph TB
     style S4 fill:#f96,stroke:#c33
     style S5 fill:#6f9,stroke:#363
 ```
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # ============================================
@@ -2560,7 +2566,7 @@ echo "策略现在严格执行，监控 DROP 事件..."
 hubble observe --verdict DROPPED --follow &
 ```
 
-#<!-- chunk: 10.6 多租户策略架构 (Multi-Tenant Policy Architecture) -->## 10.6 多租户策略架构 (Multi-Tenant Policy Architecture)
+## 10.6 多租户策略架构 (Multi-Tenant Policy Architecture)
 
 ```yaml
 # 多租户环境：平台团队管理基线，租户团队管理自己的策略
@@ -2630,7 +2636,7 @@ spec:
 
 <!-- chunk: 附录 A: 常见策略模式速查 (Common Policy Patterns) -->## 附录 A: 常见策略模式速查 (Common Policy Patterns)
 
-#<!-- chunk: A.1 默认拒绝 + 白名单模式 -->## A.1 默认拒绝 + 白名单模式
+## A.1 默认拒绝 + 白名单模式
 
 ```yaml
 # 最常用的安全模式：明确拒绝所有，然后逐一放行
@@ -2670,7 +2676,7 @@ spec:
         protocol: UDP
 ```
 
-#<!-- chunk: A.2 常用 Entity 引用 -->## A.2 常用 Entity 引用
+## A.2 常用 Entity 引用
 
 ```yaml
 # 各种 Entity 类型参考
@@ -2689,7 +2695,7 @@ spec:
     - all             # 所有流量（包含上述所有）
 ```
 
-#<!-- chunk: A.3 L7 HTTP 规则匹配语法 -->## A.3 L7 HTTP 规则匹配语法
+## A.3 L7 HTTP 规则匹配语法
 
 ```yaml
 # HTTP L7 规则完整语法参考
@@ -2777,7 +2783,7 @@ hubble observe \
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-35-ebpf-technology MOC
-- [[domain-03-networking-traffic/README|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
+- [[domain-03-networking-traffic/README.md|Domain 03: eBPF 技术体系 (eBPF Technology Stack)]]
 - Domain-35 eBPF 技术 — 开源项目索引
 - eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...
 - eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)

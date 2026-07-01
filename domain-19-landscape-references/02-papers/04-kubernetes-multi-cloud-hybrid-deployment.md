@@ -68,7 +68,7 @@ created: "2026-05-23"
 
 <!-- chunk: 1. 多云混合部署概述 -->## 1. 多云混合部署概述
 
-#<!-- chunk: 1.1 多云战略价值 -->## 1.1 多云战略价值
+## 1.1 多云战略价值
 
 ```yaml
 多云部署核心价值:
@@ -88,22 +88,22 @@ created: "2026-05-23"
     ✓ 架构演进灵活性
 ```
 
-#<!-- chunk: 1.2 部署模式分类 -->## 1.2 部署模式分类
+## 1.2 部署模式分类
 
 ```markdown
 <!-- chunk: 🏗️ 多云部署模式 -->## 🏗️ 多云部署模式
 
-#<!-- chunk: 1. 主备模式 (Active-Standby) -->## 1. 主备模式 (Active-Standby)
+## 1. 主备模式 (Active-Standby)
 - 一个云环境处理全部流量
 - 另一个云环境保持待机状态
 - 适合灾备和迁移场景
 
-#<!-- chunk: 2. 主主模式 (Active-Active) -->## 2. 主主模式 (Active-Active)
+## 2. 主主模式 (Active-Active)
 - 多个云环境同时处理流量
 - 负载均衡分发请求
 - 最大化资源利用率
 
-#<!-- chunk: 3. 混合模式 (Hybrid) -->## 3. 混合模式 (Hybrid)
+## 3. 混合模式 (Hybrid)
 - 部分服务部署在公有云
 - 核心数据保留在私有云
 - 满足合规和数据主权要求
@@ -111,7 +111,7 @@ created: "2026-05-23"
 
 <!-- chunk: 2. 架构设计原则 -->## 2. 架构设计原则
 
-#<!-- chunk: 2.1 核心设计原则 -->## 2.1 核心设计原则
+## 2.1 核心设计原则
 
 ```yaml
 多云架构设计原则:
@@ -136,7 +136,7 @@ created: "2026-05-23"
      - 跨云成本分析
 ```
 
-#<!-- chunk: 2.2 技术架构图 -->## 2.2 技术架构图
+## 2.2 技术架构图
 
 ```mermaid
 graph TB
@@ -175,9 +175,9 @@ graph TB
 
 <!-- chunk: 3. 核心技术实现 -->## 3. 核心技术实现
 
-#<!-- chunk: 3.1 统一集群管理 -->## 3.1 统一集群管理
+## 3.1 统一集群管理
 
-##<!-- chunk: Cluster API多云管理 -->## Cluster API多云管理
+## Cluster API多云管理
 ```yaml
 # Cluster API配置示例
 apiVersion: cluster.x-k8s.io/v1beta1
@@ -219,7 +219,7 @@ spec:
   subscriptionID: "your-subscription-id"
 ```
 
-##<!-- chunk: Rancher多集群管理 -->## Rancher多集群管理
+## Rancher多集群管理
 ```yaml
 # Rancher多集群配置
 apiVersion: management.cattle.io/v3
@@ -252,9 +252,9 @@ spec:
     masterVersion: "1.28.5"
 ```
 
-#<!-- chunk: 3.2 跨云网络连接 -->## 3.2 跨云网络连接
+## 3.2 跨云网络连接
 
-##<!-- chunk: 专线和VPN配置 -->## 专线和VPN配置
+## 专线和VPN配置
 ```yaml
 # AWS Direct Connect配置
 apiVersion: networking.aws.crossplane.io/v1alpha1
@@ -281,7 +281,7 @@ spec:
     name: "multi-cloud-router"
 ```
 
-##<!-- chunk: 服务网格跨云部署 -->## 服务网格跨云部署
+## 服务网格跨云部署
 ```yaml
 # Istio跨集群服务发现
 apiVersion: install.istio.io/v1alpha1
@@ -319,9 +319,9 @@ spec:
       remotePilotAddress: "istiod.istio-system.svc.cluster.local"
 ```
 
-#<!-- chunk: 3.3 数据同步策略 -->## 3.3 数据同步策略
+## 3.3 数据同步策略
 
-##<!-- chunk: 跨云数据库同步 -->## 跨云数据库同步
+## 跨云数据库同步
 ```yaml
 # Vitess跨云数据库集群
 apiVersion: planetscale.com/v2
@@ -359,7 +359,7 @@ spec:
     - gcp-us-central
 ```
 
-##<!-- chunk: 对象存储跨云同步 -->## 对象存储跨云同步
+## 对象存储跨云同步
 ```python
 #!/usr/bin/env python3
 # cross-cloud-storage-sync.py
@@ -423,9 +423,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 4. 部署策略与最佳实践 -->## 4. 部署策略与最佳实践
 
-#<!-- chunk: 4.1 应用部署策略 -->## 4.1 应用部署策略
+## 4.1 应用部署策略
 
-##<!-- chunk: 蓝绿部署跨云 -->## 蓝绿部署跨云
+## 蓝绿部署跨云
 ```yaml
 # 蓝绿部署配置
 apiVersion: apps/v1
@@ -476,7 +476,7 @@ spec:
         - containerPort: 8080
 ```
 
-##<!-- chunk: 金丝雀发布策略 -->## 金丝雀发布策略
+## 金丝雀发布策略
 ```yaml
 # Istio金丝雀发布
 apiVersion: networking.istio.io/v1alpha3
@@ -514,9 +514,9 @@ spec:
       version: v1.3.0
 ```
 
-#<!-- chunk: 4.2 成本优化策略 -->## 4.2 成本优化策略
+## 4.2 成本优化策略
 
-##<!-- chunk: 跨云资源调度 -->## 跨云资源调度
+## 跨云资源调度
 ```yaml
 # 自动化成本优化调度器
 apiVersion: apps/v1
@@ -556,7 +556,7 @@ spec:
               key: gcp-key
 ```
 
-##<!-- chunk: 成本分析脚本 -->## 成本分析脚本
+## 成本分析脚本
 ```python
 #!/usr/bin/env python3
 # multi-cloud-cost-analyzer.py
@@ -623,9 +623,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 5. 监控与运维管理 -->## 5. 监控与运维管理
 
-#<!-- chunk: 5.1 统一监控平台 -->## 5.1 统一监控平台
+## 5.1 统一监控平台
 
-##<!-- chunk: Prometheus联邦集群 -->## Prometheus联邦集群
+## Prometheus联邦集群
 ```yaml
 # Prometheus联邦配置
 apiVersion: monitoring.coreos.com/v1
@@ -645,7 +645,7 @@ spec:
     readRecent: true
 ```
 
-##<!-- chunk: 跨云日志收集 -->## 跨云日志收集
+## 跨云日志收集
 ```yaml
 # Fluentd跨云日志收集
 apiVersion: v1
@@ -676,9 +676,9 @@ data:
     </match>
 ```
 
-#<!-- chunk: 5.2 故障切换与容灾 -->## 5.2 故障切换与容灾
+## 5.2 故障切换与容灾
 
-##<!-- chunk: 自动故障检测 -->## 自动故障检测
+## 自动故障检测
 ```python
 #!/usr/bin/env python3
 # multi-cloud-failover.py
@@ -753,9 +753,9 @@ if __name__ == "__main__":
 
 <!-- chunk: 6. 安全与合规管理 -->## 6. 安全与合规管理
 
-#<!-- chunk: 6.1 统一身份认证 -->## 6.1 统一身份认证
+## 6.1 统一身份认证
 
-##<!-- chunk: 跨云身份联邦 -->## 跨云身份联邦
+## 跨云身份联邦
 ```yaml
 # AWS与GCP身份联邦配置
 apiVersion: v1
@@ -779,7 +779,7 @@ data:
     }
 ```
 
-#<!-- chunk: 6.2 合规性管理 -->## 6.2 合规性管理
+## 6.2 合规性管理
 
 ```yaml
 # 多云合规性检查配置
@@ -812,7 +812,7 @@ spec:
 
 <!-- chunk: 7. 实际案例分析 -->## 7. 实际案例分析
 
-#<!-- chunk: 7.1 金融行业多云部署 -->## 7.1 金融行业多云部署
+## 7.1 金融行业多云部署
 
 ```yaml
 案例背景:
@@ -838,7 +838,11 @@ spec:
   故障恢复时间: < 5分钟
 ```
 
-#<!-- chunk: 7.2 电商平台混合云部署 -->## 7.2 电商平台混合云部署
+## 7.2 电商平台混合云部署
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 电商平台多云部署脚本
@@ -883,37 +887,37 @@ kubectl apply -f global-loadbalancer.yaml
 
 <!-- chunk: 8. 最佳实践总结 -->## 8. 最佳实践总结
 
-#<!-- chunk: 8.1 实施建议 -->## 8.1 实施建议
+## 8.1 实施建议
 
 ```markdown
 <!-- chunk: 📋 多云部署实施建议 -->## 📋 多云部署实施建议
 
-#<!-- chunk: 阶段一：准备阶段 (1-2个月) -->## 阶段一：准备阶段 (1-2个月)
+## 阶段一：准备阶段 (1-2个月)
 1. 评估现有架构和应用适配性
 2. 选择合适的多云管理平台
 3. 建立跨云网络连接
 4. 制定迁移和部署策略
 
-#<!-- chunk: 阶段二：试点部署 (2-3个月) -->## 阶段二：试点部署 (2-3个月)
+## 阶段二：试点部署 (2-3个月)
 1. 选择非核心业务进行试点
 2. 验证跨云部署流程
 3. 建立监控和告警体系
 4. 完善运维文档和流程
 
-#<!-- chunk: 阶段三：全面推广 (3-6个月) -->## 阶段三：全面推广 (3-6个月)
+## 阶段三：全面推广 (3-6个月)
 1. 逐步迁移核心业务
 2. 优化成本和性能
 3. 建立自动化运维体系
 4. 完善安全和合规措施
 
-#<!-- chunk: 阶段四：持续优化 (持续) -->## 阶段四：持续优化 (持续)
+## 阶段四：持续优化 (持续)
 1. 定期评估和优化架构
 2. 跟踪新技术和最佳实践
 3. 持续改进运维流程
 4. 扩展多云能力边界
 ```
 
-#<!-- chunk: 8.2 关键成功因素 -->## 8.2 关键成功因素
+## 8.2 关键成功因素
 
 ```yaml
 多云部署成功要素:
@@ -938,13 +942,13 @@ kubectl apply -f global-loadbalancer.yaml
 
 <!-- chunk: N. 2026多云技术更新 -->## N. 2026多云技术更新
 
-#<!-- chunk: N.1 Cluster API v1.7+ ClusterClass -->## N.1 Cluster API v1.7+ ClusterClass
+## N.1 Cluster API v1.7+ ClusterClass
 ClusterClass实现集群模板化创建，统一多云集群配置：
 - ClusterClass定义YAML（包含controlPlane和workers模板引用）
 - 变量(variables)机制实现不同云的参数化配置
 - ClusterTopology引用ClusterClass一键创建集群
 
-#<!-- chunk: N.2 vCluster跨云多租户 -->## N.2 vCluster跨云多租户
+## N.2 vCluster跨云多租户
 vCluster作为跨云统一租户层，在不同云的Host集群上创建虚拟集群：
 - 租户视角统一的K8s API
 - 底层自动路由到对应云的资源
@@ -952,7 +956,7 @@ vCluster作为跨云统一租户层，在不同云的Host集群上创建虚拟�
 
 <!-- chunk: 9. 未来发展趋势 -->## 9. 未来发展趋势
 
-#<!-- chunk: 9.1 技术演进方向 -->## 9.1 技术演进方向
+## 9.1 技术演进方向
 
 ```yaml
 多云技术发展趋势:
@@ -981,12 +985,12 @@ vCluster作为跨云统一租户层，在不同云的Host集群上创建虚拟�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-19-papers KUDIG Database — Global MOC
-- [[domain-19-landscape-references/README|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
+- [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
 - index.md|Domain-19 论文与参考 — 开源项目索引]]
 - Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
 - Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Imp...
-- [[domain-19-landscape-references/02-papers/05-kubernetes-gitops-complete-practice-guide]]
+- [[domain-19-landscape-references/02-papers/05-kubernetes-gitops-complete-practice-guide.md|05 kubernetes gitops complete practice guide]]
 - Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and F...
 - Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface ...
 - Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro...

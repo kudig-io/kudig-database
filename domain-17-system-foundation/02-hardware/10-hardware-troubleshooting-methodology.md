@@ -52,7 +52,7 @@ created: "2026-05-23"
 
 <!-- chunk: 硬件问题分类 -->## 硬件问题分类
 
-#<!-- chunk: 问题类型矩阵 -->## 问题类型矩阵
+## 问题类型矩阵
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -114,7 +114,7 @@ created: "2026-05-23"
 
 <!-- chunk: 故障诊断流程 -->## 故障诊断流程
 
-#<!-- chunk: 标准诊断流程 -->## 标准诊断流程
+## 标准诊断流程
 
 ```yaml
 故障诊断六步法:
@@ -188,7 +188,7 @@ created: "2026-05-23"
       - 知识库更新
 ```
 
-#<!-- chunk: 故障诊断决策树 -->## 故障诊断决策树
+## 故障诊断决策树
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -244,7 +244,7 @@ created: "2026-05-23"
 
 <!-- chunk: 诊断工具体系 -->## 诊断工具体系
 
-#<!-- chunk: 硬件诊断工具 -->## 硬件诊断工具
+## 硬件诊断工具
 
 ```yaml
 带外诊断工具:
@@ -291,7 +291,7 @@ created: "2026-05-23"
     winsat: 性能评估
 ```
 
-#<!-- chunk: 诊断命令速查 -->## 诊断命令速查
+## 诊断命令速查
 
 ```bash
 #!/bin/bash
@@ -365,7 +365,7 @@ dmesg | grep -i error
 ipmitool sel elist
 ```
 
-#<!-- chunk: 厂商诊断工具 -->## 厂商诊断工具
+## 厂商诊断工具
 
 ```yaml
 Dell服务器:
@@ -408,7 +408,7 @@ HPE服务器:
 
 <!-- chunk: 常见问题快速定位 -->## 常见问题快速定位
 
-#<!-- chunk: 问题现象速查表 -->## 问题现象速查表
+## 问题现象速查表
 
 | 问题现象 | 可能原因 | 快速排查 | 优先检查 |
 |----------|----------|----------|----------|
@@ -420,7 +420,7 @@ HPE服务器:
 | 网络中断 | 网卡/线缆/交换机 | 链路状态 | 物理连接 |
 | 磁盘离线 | 硬盘/RAID/线缆 | SMART/RAID状态 | 磁盘灯 |
 
-#<!-- chunk: 蜂鸣代码参考 -->## 蜂鸣代码参考
+## 蜂鸣代码参考
 
 ```yaml
 AMI BIOS蜂鸣代码:
@@ -445,7 +445,7 @@ Award BIOS蜂鸣代码:
 
 <!-- chunk: 故障排查最佳实践 -->## 故障排查最佳实践
 
-#<!-- chunk: 排查原则 -->## 排查原则
+## 排查原则
 
 ```yaml
 故障排查原则:
@@ -492,7 +492,7 @@ Award BIOS蜂鸣代码:
     - 持续学习更新
 ```
 
-#<!-- chunk: 应急处理流程 -->## 应急处理流程
+## 应急处理流程
 
 ```yaml
 硬件问题应急流程:
@@ -530,7 +530,7 @@ Award BIOS蜂鸣代码:
 
 <!-- chunk: 预防性维护 -->## 预防性维护
 
-#<!-- chunk: 主动监控策略 -->## 主动监控策略
+## 主动监控策略
 
 ```python
 # 硬件预测性维护脚本
@@ -669,7 +669,7 @@ class PredictiveMaintenance:
         return recommendations
 ```
 
-#<!-- chunk: 备件管理 -->## 备件管理
+## 备件管理
 
 ```yaml
 备件管理策略:
@@ -714,7 +714,7 @@ class PredictiveMaintenance:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-31-hardware KUDIG Database — Global MOC
-- [[domain-17-system-foundation/README|Domain 31 - 硬件基础设施]]
+- [[domain-17-system-foundation/README.md|Domain 31 - 硬件基础设施]]
 - index.md|Domain-31 硬件 — 开源项目索引]]
 - 云平台硬件基础架构
 - 服务器架构原理
@@ -725,9 +725,9 @@ class PredictiveMaintenance:
 - SSD固态硬盘技术
 - 网络硬件技术
 - 硬件厂商生态
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 

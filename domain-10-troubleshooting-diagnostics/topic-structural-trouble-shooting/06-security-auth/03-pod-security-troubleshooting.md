@@ -94,9 +94,6 @@ k8s_versions:
 >
 > **版本说明**:
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
-
 > - v1.25+ Pod Security Admission (PSA) GA，替代 PodSecurityPolicy
 > - v1.25+ PodSecurityPolicy (PSP) 已移除
 > - v1.28+ 支持 AppArmor 作为 GA 特性
@@ -235,6 +232,9 @@ kubectl get namespaces -L pod-security.kubernetes.io/enforce
 
 #### 2.2.2 SecurityContext 检查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
 ```bash
 # 查看 Pod 的 SecurityContext
 kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}' | jq
@@ -255,6 +255,9 @@ capsh --decode=<hex-value>
 ```
 
 #### 2.2.3 文件权限检查
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 检查挂载卷的权限
@@ -309,6 +312,10 @@ Error: pods "myapp" is forbidden: violates PodSecurity "restricted:latest":
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 1. 查看命名空间 PSA 配置
 kubectl get namespace <namespace> -o yaml | grep pod-security
@@ -355,6 +362,9 @@ kubectl label namespace <namespace> \
 
 **解决步骤：**
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 1. 为系统命名空间设置 privileged 级别
 kubectl label namespace kube-system \
@@ -396,6 +406,11 @@ Error: cannot open /data/config.json: permission denied
 ```
 
 **解决步骤：**
+
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
+> - `kubectl edit/patch`：修改运行中的资源
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```bash
 # 1. 检查当前运行用户
@@ -439,6 +454,9 @@ Error: operation not permitted (binding to port 80)
 ```
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 确认需要哪个 capability
@@ -490,6 +508,9 @@ Error: read-only file system
 ```
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 检查是否设置了 readOnlyRootFilesystem
@@ -543,6 +564,9 @@ EOF
 应用报错 "operation not permitted" 但没有明显权限问题
 
 **解决步骤：**
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # 1. 检查当前 seccomp 配置
@@ -737,6 +761,10 @@ kubectl get namespaces -L pod-security.kubernetes.io/enforce
 
 ### 常用命令速查
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
+
 ```bash
 # 检查 PSA 配置
 kubectl get namespace <ns> -L pod-security.kubernetes.io/enforce
@@ -758,20 +786,22 @@ capsh --decode=<hex>
 
 ### 相关文档
 
-- [Pod 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting|01-pod-troubleshooting]].md)
+- [Pod 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
 - [RBAC 故障排查](./01-rbac-troubleshooting.md)
-- [Webhook/准入控制故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting|05-webhook-admission-troubleshooting]].md)
+- [Webhook/准入控制故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting|01-rbac-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting|02-certificate-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting|04-audit-logging-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting|01-rbac-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
+
+```

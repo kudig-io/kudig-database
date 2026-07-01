@@ -255,6 +255,9 @@ created: "2026-05-23"
 
 ## 常用快速命令
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+
 ```bash
 # 节点状态速查
 kubectl get nodes -o wide | grep -v Ready

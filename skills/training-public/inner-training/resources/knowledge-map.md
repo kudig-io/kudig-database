@@ -231,6 +231,9 @@ RAM 账号集成
 
 ## Week 4: 网络与存储
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```
 网络
 ├── Service

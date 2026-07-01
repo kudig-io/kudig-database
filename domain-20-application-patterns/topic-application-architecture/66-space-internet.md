@@ -126,7 +126,7 @@ k8s_versions:
 
 从架构角度看，太空互联网是一个典型的天地一体化分布式系统。空间段、地面段和用户段需要紧密协同，形成一个自适应、自愈合的智能网络。云原生技术为太空互联网的地面系统提供了弹性伸缩、快速迭代和高效运维的能力，使得卫星运管、数据处理、业务运营等核心系统能够以微服务方式敏捷交付。
 
-#<!-- chunk: 1.1 行业背景 -->## 1.1 行业背景
+## 1.1 行业背景
 
 | 挑战 | 说明 | 架构影响 |
 |:---|:---|:---|
@@ -136,7 +136,7 @@ k8s_versions:
 | 遥感大数据 | PB 级遥感图像 | 分布式处理 + AI 推理 |
 | 低延迟通信 | 卫星互联网接入 | 边缘计算 + 本地缓存 |
 
-#<!-- chunk: 1.2 核心场景 -->## 1.2 核心场景
+## 1.2 核心场景
 
 - **卫星宽带**: 全球互联网接入服务，面向个人和企业用户
 - **遥感服务**: 对地观测数据服务，支撑农业、环保、国防等领域
@@ -148,21 +148,21 @@ k8s_versions:
 
 <!-- chunk: 2. 设计原则 -->## 2. 设计原则
 
-#<!-- chunk: 2.1 天地一体化原则 -->## 2.1 天地一体化原则
+## 2.1 天地一体化原则
 
 太空互联网的架构设计必须将空间段和地面段作为统一系统考虑。卫星星座是网络的边缘节点，地面站是核心锚点，云平台是数据处理和业务运营的中枢。三者之间通过统一的控制平面进行协调管理。
 
 天地一体化的核心是建立标准的星地接口协议，包括测控协议、数传协议和业务协议。测控协议负责卫星平台的状态监控和指令上注，数传协议负责遥感数据和其他有效载荷数据的下行传输，业务协议负责用户面数据的管理和调度。
 
-#<!-- chunk: 2.2 高可用弹性原则 -->## 2.2 高可用弹性原则
+## 2.2 高可用弹性原则
 
 卫星运管系统需要 7x24 不间断运行，任何中断都可能导致卫星失控或数据丢失。系统设计需要采用多活架构，在不同地域部署独立的运管中心，实现问题自动切换。数据处理系统需要根据卫星过境频率和数据量动态伸缩，在卫星过境窗口内快速处理海量数据。
 
-#<!-- chunk: 2.3 数据驱动原则 -->## 2.3 数据驱动原则
+## 2.3 数据驱动原则
 
 太空互联网的核心价值在于数据。从卫星遥感到用户行为，从轨道参数到网络性能，所有数据都需要被采集、存储、分析和利用。架构设计需要建立完整的数据管道，从数据采集到数据消费形成闭环。AI/ML 技术广泛应用于遥感图像分析、轨道预测、网络优化等场景。
 
-#<!-- chunk: 2.4 安全可靠原则 -->## 2.4 安全可靠原则
+## 2.4 安全可靠原则
 
 太空互联网涉及国家安全，需要从物理安全、网络安全、数据安全多个维度进行防护。卫星测控链路需要加密保护，遥感数据需要分级管理，用户隐私需要端到端加密。系统需要具备抗干扰、抗毁伤能力，在部分节点失效时仍能维持核心服务。
 
@@ -170,7 +170,7 @@ k8s_versions:
 
 <!-- chunk: 3. 架构模式 -->## 3. 架构模式
 
-#<!-- chunk: 3.1 太空互联网全景架构 -->## 3.1 太空互联网全景架构
+## 3.1 太空互联网全景架构
 
 ```mermaid
 graph TB
@@ -221,7 +221,7 @@ graph TB
     S1 & S2 & S3 & S4 & S5 --> U1 & U2 & U3 & U4
 ```
 
-#<!-- chunk: 3.2 卫星运管微服务架构 -->## 3.2 卫星运管微服务架构
+## 3.2 卫星运管微服务架构
 
 卫星运管系统采用微服务架构，将传统的大型运管软件拆分为独立可部署的服务单元。每个服务专注于单一职责，通过 API 网关统一暴露接口，通过事件总线进行异步通信。
 
@@ -259,7 +259,7 @@ graph LR
     S3 --> A3
 ```
 
-#<!-- chunk: 3.3 遥感数据处理流水线架构 -->## 3.3 遥感数据处理流水线架构
+## 3.3 遥感数据处理流水线架构
 
 遥感数据从卫星下传到最终产品生成，需要经过辐射校正、几何校正、大气校正、融合拼接、目标识别等多个处理步骤。采用流水线架构可以将处理步骤编排为有向无环图（DAG），支持并行处理和增量更新。
 
@@ -277,7 +277,7 @@ flowchart LR
     I --> K[数据存档]
 ```
 
-#<!-- chunk: 3.4 星地协同边缘计算架构 -->## 3.4 星地协同边缘计算架构
+## 3.4 星地协同边缘计算架构
 
 在卫星上部署轻量级计算节点，实现数据的在轨处理和智能筛选。只有在轨处理结果和关键原始数据才通过星地链路下传，大幅降低数据传输量和地面处理压力。
 
@@ -315,7 +315,7 @@ graph TB
 
 <!-- chunk: 4. 实现示例 -->## 4. 实现示例
 
-#<!-- chunk: 4.1 轨道计算服务 -->## 4.1 轨道计算服务
+## 4.1 轨道计算服务
 
 轨道计算服务基于 SGP4/SDP4 模型，根据 TLE（Two-Line Element）数据计算卫星的实时位置和未来轨道预报。
 
@@ -396,7 +396,7 @@ func (s *OrbitService) GetPassPredictions(satID string, groundLat, groundLon flo
 }
 ```
 
-#<!-- chunk: 4.2 遥感数据处理工作流 -->## 4.2 遥感数据处理工作流
+## 4.2 遥感数据处理工作流
 
 使用 Argo Workflows 编排遥感数据处理流水线：
 
@@ -472,7 +472,7 @@ spec:
         dependencies: [geometric, ai-detect]
 ```
 
-#<!-- chunk: 4.3 卫星测控调度服务 -->## 4.3 卫星测控调度服务
+## 4.3 卫星测控调度服务
 
 ```python
 import heapq
@@ -537,7 +537,7 @@ class TelecommandScheduler:
 
 <!-- chunk: 5. 在 Kubernetes 上的部署 -->## 5. 在 Kubernetes 上的部署
 
-#<!-- chunk: 5.1 卫星运管核心服务部署 -->## 5.1 卫星运管核心服务部署
+## 5.1 卫星运管核心服务部署
 
 ```yaml
 apiVersion: apps/v1
@@ -625,7 +625,7 @@ spec:
             name: sat-ops-config
 ```
 
-#<!-- chunk: 5.2 遥感数据处理 GPU 节点池 -->## 5.2 遥感数据处理 GPU 节点池
+## 5.2 遥感数据处理 GPU 节点池
 
 ```yaml
 apiVersion: apps/v1
@@ -671,7 +671,7 @@ spec:
               cpu: "16000m"
 ```
 
-#<!-- chunk: 5.3 KEDA 自动伸缩配置 -->## 5.3 KEDA 自动伸缩配置
+## 5.3 KEDA 自动伸缩配置
 
 ```yaml
 apiVersion: keda.sh/v1alpha1
@@ -694,7 +694,7 @@ spec:
         lagThreshold: "10"
 ```
 
-#<!-- chunk: 5.4 关键 ConfigMap 和 Secret -->## 5.4 关键 ConfigMap 和 Secret
+## 5.4 关键 ConfigMap 和 Secret
 
 ```yaml
 apiVersion: v1
@@ -726,28 +726,28 @@ stringData:
 
 <!-- chunk: 6. 最佳实践 -->## 6. 最佳实践
 
-#<!-- chunk: 6.1 卫星运管自动化 -->## 6.1 卫星运管自动化
+## 6.1 卫星运管自动化
 
 - **TLE 数据自动同步**: 建立定时任务每 4 小时从 Space-Track 等来源同步 TLE 数据，并通过消息队列广播到所有运管微服务
 - **过境自动调度**: 根据轨道预报自动生成过境调度计划，提前分配信关站资源和测控任务
 - **异常自动检测**: 基于历史遥测数据训练异常检测模型，实时监控卫星健康状态，自动告警并触发应急处置流程
 - **批量操作管理**: 使用 Kubernetes Job 和 CronJob 管理批量卫星操作，如星座轨道维持、载荷标定等
 
-#<!-- chunk: 6.2 遥感数据处理优化 -->## 6.2 遥感数据处理优化
+## 6.2 遥感数据处理优化
 
 - **分级存储策略**: 热数据存储在 SSD，温数据存储在 HDD，冷数据归档到 OSS 归档存储。根据访问频率自动迁移
 - **GPU 加速推理**: 使用 TensorRT 或 ONNX Runtime 优化 AI 模型推理性能，在 NVIDIA GPU 上实现批量影像的实时目标检测
 - **分布式处理**: 使用 Spark 或 Flink 对大规模遥感数据进行分布式批处理和流处理
 - **增量更新**: 对于重复覆盖区域，采用增量处理策略，只处理变化部分，减少计算量
 
-#<!-- chunk: 6.3 网络与通信优化 -->## 6.3 网络与通信优化
+## 6.3 网络与通信优化
 
 - **延迟容忍网络 (DTN)**: 在星地链路不可用时，使用 DTN 协议栈实现数据的存储转发，确保数据最终送达
 - **自适应编码调制 (ACM)**: 根据链路质量动态调整调制编码方式，最大化链路吞吐量
 - **星间路由优化**: 使用强化学习算法优化星间路由策略，降低端到端延迟
 - **多信关站负载均衡**: 根据卫星可视性和链路负载，动态选择最优信关站
 
-#<!-- chunk: 6.4 可观测性实践 -->## 6.4 可观测性实践
+## 6.4 可观测性实践
 
 - **三层监控体系**: 基础设施层（CPU/内存/GPU/磁盘）、应用层（延迟/吞吐/错误率）、业务层（轨道精度/处理时效/用户满意度）
 - **分布式追踪**: 使用 OpenTelemetry 对跨服务请求进行全链路追踪，快速定位性能瓶颈
@@ -757,31 +757,31 @@ stringData:
 
 <!-- chunk: 7. 反模式 -->## 7. 反模式
 
-#<!-- chunk: 7.1 单一地面站瓶颈 -->## 7.1 单一地面站瓶颈
+## 7.1 单一地面站瓶颈
 
 将所有卫星通信集中在单一地面站，导致该站成为系统瓶颈。一旦地面站问题，整颗卫星或整个星座的通信中断。
 
 **解决方案**: 部署多个地理分布的地面站，实现地面站冗余和负载均衡。使用站点分集技术，同一颗卫星可以同时被多个地面站接收。
 
-#<!-- chunk: 7.2 忽视轨道动态性 -->## 7.2 忽视轨道动态性
+## 7.2 忽视轨道动态性
 
 将卫星网络视为静态拓扑，使用静态路由表。由于卫星高速运动，网络拓扑以分钟级变化，静态路由很快失效。
 
 **解决方案**: 采用软件定义网络（SDN）技术，根据实时轨道参数动态计算和更新路由表。使用星座仿真器在部署前验证路由算法的有效性。
 
-#<!-- chunk: 7.3 遥感数据全量下传 -->## 7.3 遥感数据全量下传
+## 7.3 遥感数据全量下传
 
 试图将卫星采集的所有原始数据全量下传到地面处理。卫星数据量可达 TB/天，远超星地链路带宽。
 
 **解决方案**: 在卫星上部署边缘计算能力，实现数据在轨预处理、智能筛选和压缩。只下传处理结果和关键原始数据，大幅降低数据传输量。
 
-#<!-- chunk: 7.4 紧耦合的运管系统 -->## 7.4 紧耦合的运管系统
+## 7.4 紧耦合的运管系统
 
 将轨道计算、测控调度、数据处理等功能紧耦合在单一系统中，导致系统难以扩展和维护。
 
 **解决方案**: 采用微服务架构，将功能拆分为独立可部署的服务。通过 API 网关和事件总线进行松耦合通信。每个服务可以独立扩展和升级。
 
-#<!-- chunk: 7.5 忽视安全合规 -->## 7.5 忽视安全合规
+## 7.5 忽视安全合规
 
 太空互联网涉及国家安全和频谱资源管理，忽视安全合规可能导致严重后果。常见问题包括：测控链路未加密、遥感数据未分级、用户隐私未保护。
 
@@ -791,7 +791,7 @@ stringData:
 
 <!-- chunk: 8. 参考资源 -->## 8. 参考资源
 
-#<!-- chunk: 8.1 阿里云组件映射 -->## 8.1 阿里云组件映射
+## 8.1 阿里云组件映射
 
 | 功能域 | **阿里云云原生方案** |
 |:---|:---|
@@ -804,7 +804,7 @@ stringData:
 | 可观测性 | **ARMS + SLS + Grafana** |
 | 工作流 | **Argo Workflows on ACK** |
 
-#<!-- chunk: 8.2 生产检查清单 -->## 8.2 生产检查清单
+## 8.2 生产检查清单
 
 - [ ] TLE 数据同步频率与轨道预报精度验证
 - [ ] 星地链路连通性与数传速率测试
@@ -816,7 +816,7 @@ stringData:
 - [ ] 遥感数据分级保护策略实施
 - [ ] 应急通信保障预案演练
 
-#<!-- chunk: 8.3 外部参考 -->## 8.3 外部参考
+## 8.3 外部参考
 
 - ITU Radio Regulations — 国际电联无线电规则
 - CCSDS Standards — 空间数据系统咨询委员会标准
@@ -833,17 +833,17 @@ stringData:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture MOC
-- [[domain-20-application-patterns/topic-application-architecture/README|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture|小程序平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture|内容管理系统 CMS 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture|实时通信 IM/RTC 架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture|金融科技FinTech Kubernetes生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture|物联网 IoT 平台架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture|AI/ML 推理服务 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture|游戏后端 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
 
 ## See Also
 

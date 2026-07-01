@@ -33,6 +33,7 @@ prerequisites:
 - service-mesh-basics
 - gpu-scheduling-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 # [[KServe|KServe]] 模型服务平台
@@ -125,6 +126,4 @@ KServe 支持多种推理协议：
 - [NVIDIA Triton Inference Server](https://developer.nvidia.com/triton-inference-server)
 
 ## Related
-
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

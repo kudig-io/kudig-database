@@ -50,6 +50,7 @@ prerequisites:
 - tracing-basics
 - observability-basics
 created: "2026-05-23"
+created: 2026-05
 ---
 
 ﻿# [[Kubernetes|Kubernetes]] 与 AI/ML 概念参考手册（完整恢复版）
@@ -86,9 +87,9 @@ created: "2026-05-23"
 | 7 | ConfigMap | §5 | 配置数据存储，像"应用的配置文件柜" |
 | 8 | Secret | §5 | 敏感数据存储，像"保险箱" |
 | 9 | Label | §1 | 对象标签，像"行李标签"用于分类和筛选 |
-| 10 | [[Container Runtime|Container Runtime]] | §4 | 运行容器的引擎，像"虚拟机里的操作系统" |
+| 10 | [[concepts/container-runtime.md|Container Runtime]] | §4 | 运行容器的引擎，像"虚拟机里的操作系统" |
 | 11 | kube-apiserver | §3 | API 入口，像"公司前台接待" |
-| 12 | [[etcd|etcd]] | §3 | 数据存储，像"公司的档案室" |
+| 12 | [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]] | §3 | 数据存储，像"公司的档案室" |
 | 13 | kubelet | §4 | 节点代理，像"每台机器上的管家" |
 | 14 | Ingress | §6 | 外部流量入口，像"大楼的门卫" |
 | 15 | PersistentVolume | §7 | 持久存储，像"云端硬盘" |
@@ -6119,8 +6120,10 @@ created: "2026-05-23"
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级+初学者友好
 
 
-## Related
+## 参考链接
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [Kubernetes Concepts Reference]()
+
+## Related
+- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

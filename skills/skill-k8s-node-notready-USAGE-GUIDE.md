@@ -1,6 +1,6 @@
 ---
 title: Usage Guide
-description: '- [[skills/troubleshoot-pod-issues|Pod 故障排查]]'
+description: '- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]'
 category: skills
 tags:
 - k8s
@@ -65,14 +65,14 @@ created: "2026-05-23"
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles|FTA 方法论]]
-- [[skills/Kubernetes Diagnostic Skills Overview|诊断技能总览]]
-- [[skills/troubleshoot-pod-issues|Pod 故障排查]]
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## Related
 
-- [[skills/ts-security-auth|ts-security-auth]] — 安全认证故障排查
-- [[skills/troubleshoot-pod-issues|troubleshoot-pod-issues]] — [[Troubleshoot Pod Issues|Troubleshoot Pod Issues]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta|node-fta]] — node-fta
-- [[entities/kubelet|kubelet]] — kubelet
+- [[skills/ts-security-auth.md|ts-security-auth]] — 安全认证故障排查
+- [[skills/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — [[skills/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node-fta]] — node-fta
+- [[entities/kubelet.md|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

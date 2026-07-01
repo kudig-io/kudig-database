@@ -45,7 +45,7 @@ intent_queries:
 - pulumi-enterprise-iac的最佳实践
 
 tier: peripheral---
-title: Pulumi Enterprise [[Infrastructure as Code|Infrastructure as Code]] Platform
+title: Pulumi Enterprise [[concepts/infrastructure-as-code.md|Infrastructure as Code]] Platform
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'
 category: infrastructure-as-code
 tags:
@@ -100,7 +100,7 @@ Pulumi is a modern infrastructure as code platform that supports managing cloud 
 
 <!-- chunk: 架构设计 (Architecture Design) -->## 架构设计 (Architecture Design)
 
-#<!-- chunk: 企业级架构 (Enterprise Architecture) -->## 企业级架构 (Enterprise Architecture)
+## 企业级架构 (Enterprise Architecture)
 
 ```yaml
 # Pulumi 企业级部署架构
@@ -168,7 +168,7 @@ data:
     )
 ```
 
-#<!-- chunk: 多云架构 (Multi-cloud Architecture) -->## 多云架构 (Multi-cloud Architecture)
+## 多云架构 (Multi-cloud Architecture)
 
 ```mermaid
 graph TB
@@ -220,7 +220,7 @@ graph TB
 
 <!-- chunk: 部署配置 (Deployment Configuration) -->## 部署配置 (Deployment Configuration)
 
-#<!-- chunk: Python 基础设施定义 (Python Infrastructure Definition) -->## Python 基础设施定义 (Python Infrastructure Definition)
+## Python 基础设施定义 (Python Infrastructure Definition)
 
 ```python
 # __main__.py - 企业级基础设施定义
@@ -475,7 +475,7 @@ class EnterpriseInfrastructure:
 infra = EnterpriseInfrastructure()
 ```
 
-#<!-- chunk: 多环境配置 (Multi-environment Configuration) -->## 多环境配置 (Multi-environment Configuration)
+## 多环境配置 (Multi-environment Configuration)
 
 ```python
 # environments.py - 环境配置管理
@@ -550,7 +550,7 @@ print(f"Instance type: {env_config.instance_type}")
 
 <!-- chunk: 团队协作 (Team Collaboration) -->## 团队协作 (Team Collaboration)
 
-#<!-- chunk: 项目结构 (Project Structure) -->## 项目结构 (Project Structure)
+## 项目结构 (Project Structure)
 
 ```python
 # project_structure.py - 项目结构定义
@@ -618,7 +618,7 @@ from .security_module import SecurityModule
 __all__ = ['VPCModule', 'SubnetModule', 'SecurityModule']
 ```
 
-#<!-- chunk: 权限管理 (Permission Management) -->## 权限管理 (Permission Management)
+## 权限管理 (Permission Management)
 
 ```python
 # iam_policies.py - IAM 策略管理
@@ -725,7 +725,7 @@ ec2_role = iam_manager.create_role("ec2-manager", ec2_role_trust, ["ec2-admin"])
 
 <!-- chunk: 监控告警 (Monitoring and Alerting) -->## 监控告警 (Monitoring and Alerting)
 
-#<!-- chunk: 基础设施监控 (Infrastructure Monitoring) -->## 基础设施监控 (Infrastructure Monitoring)
+## 基础设施监控 (Infrastructure Monitoring)
 
 ```python
 # monitoring.py - 监控告警配置
@@ -809,7 +809,7 @@ class MonitoringStack:
 monitoring = MonitoringStack(pulumi.get_stack(), infra.aws_vpc.id)
 ```
 
-#<!-- chunk: 成本管理 (Cost Management) -->## 成本管理 (Cost Management)
+## 成本管理 (Cost Management)
 
 ```python
 # cost_management.py - 成本管理配置
@@ -868,7 +868,7 @@ cost_mgmt = CostManagement(pulumi.get_stack())
 
 <!-- chunk: 问题排除 (Troubleshooting) -->## 问题排除 (Troubleshooting)
 
-#<!-- chunk: 常见问题诊断 (Common Issue Diagnosis) -->## 常见问题诊断 (Common Issue Diagnosis)
+## 常见问题诊断 (Common Issue Diagnosis)
 
 ```python
 # troubleshooting.py - 问题排除工具
@@ -928,7 +928,7 @@ pulumi.export("debug_report", debug_report)
 
 <!-- chunk: 最佳实践 (Best Practices) -->## 最佳实践 (Best Practices)
 
-#<!-- chunk: 代码组织最佳实践 (Code Organization Best Practices) -->## 代码组织最佳实践 (Code Organization Best Practices)
+## 代码组织最佳实践 (Code Organization Best Practices)
 
 1. **模块化设计**
    ```python
@@ -956,7 +956,7 @@ pulumi.export("debug_report", debug_report)
    resource_name = f"{environment}-{service}-{resource_type}-{unique_id}"
    ```
 
-#<!-- chunk: 安全最佳实践 (Security Best Practices) -->## 安全最佳实践 (Security Best Practices)
+## 安全最佳实践 (Security Best Practices)
 
 1. **最小权限原则**
    ```python
@@ -991,7 +991,7 @@ pulumi.export("debug_report", debug_report)
    )
    ```
 
-#<!-- chunk: 运维最佳实践 (Operations Best Practices) -->## 运维最佳实践 (Operations Best Practices)
+## 运维最佳实践 (Operations Best Practices)
 
 1. **状态管理**
    ```bash
@@ -1027,7 +1027,7 @@ pulumi.export("debug_report", debug_report)
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-24-infrastructure-as-code MOC
-- [[domain-08-release-change-management/README|Domain 24: 基础设施即代码 (Infrastructure as Code)]]
+- [[domain-08-release-change-management/README.md|Domain 08: 基础设施即代码 (Infrastructure as Code)]]
 - Domain-24 基础设施即代码 — 开源项目索引
 - Terraform企业级基础设施即代码实践
 - Ansible企业级自动化运维深度实践

@@ -335,6 +335,10 @@ HPA 在等待冷却时间结束，或者正在执行扩缩容操作。
 
 ## 5. 总结
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl delete`：删除资源（可由声明式清单重建）
+> - `kubectl edit/patch`：修改运行中的资源
+
 ```
 【命令速查】
 
@@ -380,8 +384,8 @@ kubectl edit hpa <name>
 
 ## Related
 
-- [[skills/learn-14-statefulset-basics|learn-14-statefulset-basics]] — 第14课：[[StatefulSet|StatefulSet]] - 有状态应用管理
-- [[skills/learn-root|learn-root]] — Kubernetes 培训：Root
-- [[skills/learn-11-job-cronjob|learn-11-job-cronjob]] — 第九课：Job 和 CronJob - 任务调度
-- [[skills/skill-k8s-node-notready-SKILL|skill-k8s-node-notready-SKILL]] — Skill
+- [[skills/learn-14-statefulset-basics.md|learn-14-statefulset-basics]] — 第14课：[[StatefulSet|StatefulSet]] - 有状态应用管理
+- [[skills/learn-root.md|learn-root]] — Kubernetes 培训：Root
+- [[skills/learn-11-job-cronjob.md|learn-11-job-cronjob]] — 第九课：Job 和 CronJob - 任务调度
+- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[deployment]] — Deployment

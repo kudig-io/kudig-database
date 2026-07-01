@@ -52,7 +52,7 @@ created: "2026-05-23"
 
 # 48 - GitOps工作流
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/opengitops|opengitops]].dev](https://opengitops.dev/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/opengitops.md|opengitops]].dev](https://opengitops.dev/)
 
 <!-- chunk: GitOps核心原则 -->
 ## GitOps核心原则
@@ -484,6 +484,10 @@ spec:
 | **镜像扫描** | ACR集成 | 自动触发扫描 |
 | **RRSA集成** | 无密钥访问 | OIDC配置 |
 
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `helm upgrade/install`：部署/升级 release
+> - `kubectl apply/create/replace`：创建/变更集群资源
+
 ```bash
 # ACK安装ArgoCD
 helm repo add argo https://argoproj.github.io/argo-helm
@@ -527,7 +531,7 @@ argocd repo add https://github.com/org/repo.git \
 ## Obsidian 相关文档
 
 - domain-15-specialized-tech MOC
-- [[domain-15-specialized-tech/README|Domain-10: Kubernetes 扩展生态]]
+- [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
 - Domain-10 扩展与自定义 — 开源项目索引
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现
@@ -548,4 +552,4 @@ argocd repo add https://github.com/org/repo.git \
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

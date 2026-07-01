@@ -163,12 +163,15 @@ docker pull -q nginx:latest 2>&1
 
 ### 清理磁盘
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+
 ```bash
 # 查看磁盘使用
 docker system df -v
 
 # 清理未使用资源
-docker system prune -af --volumes
+docker system prune -af --volumes  # ⚠️ 强制清理，可能杀运行中容器
 
 # 清理构建缓存
 docker builder prune -af
@@ -285,6 +288,9 @@ tail -f /var/log/docker.log
 
 ### Daemon 重启
 
+> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
+> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+
 ```bash
 systemctl restart docker
 
@@ -320,6 +326,9 @@ docker diff <container>
 
 ### 系统诊断
 
+> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
+> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
+
 ```bash
 # 系统信息
 docker info
@@ -332,7 +341,7 @@ docker system df -v
 docker events --since 1h
 
 # 清理资源
-docker system prune -af --volumes
+docker system prune -af --volumes  # ⚠️ 强制清理，可能杀运行中容器
 ```
 
 ### 网络诊断

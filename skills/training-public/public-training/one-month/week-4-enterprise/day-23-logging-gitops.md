@@ -47,7 +47,7 @@ difficulty: intermediate
 intent_queries:
   - ELK 企业日志架构
   - [[ArgoCD|ArgoCD]] GitOps 实践
-  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] Kustomize
+  - [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] Kustomize
   - 多环境配置管理
 trigger_keywords:
   - ELK
@@ -187,6 +187,9 @@ gitops-repo/
 ## 实战演练
 
 ### Step 1: 安装 ArgoCD (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # Step 1.1: 创建 namespace
@@ -364,8 +367,7 @@ replicas:
 - name: web-app
   count: 1
 patches:
-- target:
-    kind: Deployment
+- target: "`kind: Deployment`"
   patch: |
     - op: replace
       path: /spec/template/spec/containers/0/resources/limits/cpu
@@ -373,8 +375,7 @@ patches:
     - op: replace
       path: /spec/template/spec/containers/0/resources/limits/memory
       value: 128Mi
-- target:
-    kind: ConfigMap
+- target: "`kind: ConfigMap`"
     name: web-app-config
   patch: |
     - op: replace
@@ -396,8 +397,7 @@ replicas:
 - name: web-app
   count: 2
 patches:
-- target:
-    kind: ConfigMap
+- target: "`kind: ConfigMap`"
     name: web-app-config
   patch: |
     - op: replace
@@ -419,8 +419,7 @@ replicas:
 - name: web-app
   count: 3
 patches:
-- target:
-    kind: Deployment
+- target: "`kind: Deployment`"
   patch: |
     - op: replace
       path: /spec/template/spec/containers/0/resources/requests/cpu
@@ -434,8 +433,7 @@ patches:
     - op: replace
       path: /spec/template/spec/containers/0/resources/limits/memory
       value: 512Mi
-- target:
-    kind: ConfigMap
+- target: "`kind: ConfigMap`"
     name: web-app-config
   patch: |
     - op: replace
@@ -452,6 +450,9 @@ kubectl kustomize gitops-demo/overlays/prod/
 ```
 
 ### Step 3: 创建 ArgoCD Application (30min)
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```bash
 # Step 3.1: 创建 dev 环境 Application
@@ -741,6 +742,7 @@ filebeat:
       output.elasticsearch:
         hosts: ["elasticsearch-master:9200"]
       logging.level: info
+
 ```
 
 ---
@@ -811,3 +813,5 @@ filebeat:
 - [ELK on Kubernetes](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
 - [文件: `../../domain-06-observability/01-elk-stack-enterprise-logging.md`](../../domain-06-observability/01-elk-stack-enterprise-logging.md)
 - [文件: `../../domain-08-release-change-management/01-argo-cd-enterprise-gitops.md`](../../domain-08-release-change-management/01-argo-cd-enterprise-gitops.md)
+
+```

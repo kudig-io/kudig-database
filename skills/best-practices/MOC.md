@@ -60,9 +60,9 @@ topic-best-practices 专题
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[entities/kubernetes|Kubernetes 通用最佳实践参考]]]] |  | best-practice |  |
-| 2 | [[entities/kubernetes]] |  |  |  |
-| 3 | [[entities/kubernetes]] |  | networking |  |
+| 1 | [[entities/kubernetes.md|Kubernetes 通用最佳实践参考]]]] |  | best-practice |  |
+| 2 | [[entities/kubernetes.md|kubernetes]] |  |  |  |
+| 3 | [[entities/kubernetes.md|kubernetes]] |  | networking |  |
 | 4 | Kubernetes 存储配置最佳实践 |  | storage |  |
 | 5 | Kubernetes 日志管理最佳实践 |  |  |  |
 | 6 | Kubernetes 监控最佳实践 |  | monitoring |  |
@@ -88,25 +88,25 @@ topic-best-practices 专题
 
 ## Related
 
-- [[_reports/WIKI-LINT-REPORT-2026-05-21|Wiki Lint Report — 2026-05-21]] — Cross-reference
-- [[references/release-notes-storage|发布说明索引 — 存储]] — Cross-reference
-- [[references/release-notes-observability|发布说明索引 — 可观测性]] — Cross-reference
-- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[references/release-notes-kubernetes|发布说明索引 — Kubernetes]] — Cross-reference
-- [[references/release-notes-security|发布说明索引 — 安全]] — Cross-reference
-- [[references/k8s-knowledge-map|Kubernetes Knowledge Map]] — Cross-reference
-- [[references/release-notes-cicd-gitops|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
-- [[references/release-notes-cli-tools|发布说明索引 — CLI 工具]] — Cross-reference
-- [[references/release-notes-core-deps|发布说明索引 — 核心依赖]] — Cross-reference
-- [[references/k8s-difficulty-index|Kubernetes Difficulty Index]] — Cross-reference
+- Wiki Lint Report — 2026-05-21 — Cross-reference
+- [[entities/release-notes-storage.md|发布说明索引 — 存储]] — Cross-reference
+- [[entities/release-notes-observability.md|发布说明索引 — 可观测性]] — Cross-reference
+- [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[entities/release-notes-kubernetes.md|发布说明索引 — Kubernetes]] — Cross-reference
+- [[entities/release-notes-security.md|发布说明索引 — 安全]] — Cross-reference
+- [[entities/k8s-knowledge-map.md|Kubernetes Knowledge Map]] — Cross-reference
+- [[entities/release-notes-cicd-gitops.md|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
+- [[entities/release-notes-cli-tools.md|发布说明索引 — CLI 工具]] — Cross-reference
+- [[entities/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
+- [[entities/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference
-- [[domain-03-networking-traffic/00-core-k8s-networking/02-cni-architecture-fundamentals|CNI 架构与核心原理]] — Cross-reference
-- [[domain-06-observability/01-overview/01-observability-architecture-overview|Kubernetes 可观测性架构体系]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
+- [[domain-03-networking-traffic/00-core-k8s-networking/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]] — Cross-reference
+- [[domain-06-observability/01-overview/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
-- [[domain-01-cluster-fundamentals/05-kubectl/05-kubectl-commands-reference|kubectl 命令完整参考]] — Cross-reference
-- [[domain-01-cluster-fundamentals/01-architecture-overview/02-core-components-deep-dive|Kubernetes 核心组件深度剖析]] — Cross-reference
-- [[domain-04-storage-data/01-k8s-storage/02-pv-architecture-fundamentals|PV/PVC 核心概念与企业级实践]] — Cross-reference
-- [[domain-04-storage-data/01-k8s-storage/01-storage-architecture-overview|存储架构概览与核心组件]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/MOC|topic-index MOC]] — Cross-reference
+- [[domain-01-cluster-fundamentals/05-kubectl/05-kubectl-commands-reference.md|kubectl 命令完整参考]] — Cross-reference
+- [[domain-01-cluster-fundamentals/01-architecture-overview/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]] — Cross-reference
+- [[domain-04-storage-data/01-k8s-storage/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]] — Cross-reference
+- [[domain-04-storage-data/01-k8s-storage/01-storage-architecture-overview.md|存储架构概览与核心组件]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/MOC.md|topic-index MOC]] — Cross-reference
