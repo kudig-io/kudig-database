@@ -21,19 +21,19 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-17-system-foundation/topic-dictionary/configuration|Configuration]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals|Fundamentals]]
-- [[domain-17-system-foundation/topic-dictionary/multi-cloud|Multi Cloud]]
-- [[domain-17-system-foundation/topic-dictionary/networking|Networking]]
-- [[domain-17-system-foundation/topic-dictionary/observability|Observability]]
-- [[domain-17-system-foundation/topic-dictionary/operations|Operations]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering|Platform Engineering]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling|Scheduling]]
-- [[domain-17-system-foundation/topic-dictionary/security|Security]]
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads|Specialized Workloads]]
-- [[domain-17-system-foundation/topic-dictionary/storage|Storage]]
-- [[domain-17-system-foundation/topic-dictionary/tooling|Tooling]]
-- [[domain-17-system-foundation/topic-dictionary/workloads|Workloads]]
+- domain-17-system-foundation/topic-dictionary/configuration/
+- domain-17-system-foundation/topic-dictionary/fundamentals/
+- domain-17-system-foundation/topic-dictionary/multi-cloud/
+- domain-17-system-foundation/topic-dictionary/networking/
+- domain-17-system-foundation/topic-dictionary/observability/
+- domain-17-system-foundation/topic-dictionary/operations/
+- domain-17-system-foundation/topic-dictionary/platform-engineering/
+- domain-17-system-foundation/topic-dictionary/scheduling/
+- domain-17-system-foundation/topic-dictionary/security/
+- domain-17-system-foundation/topic-dictionary/specialized-workloads/
+- domain-17-system-foundation/topic-dictionary/storage/
+- domain-17-system-foundation/topic-dictionary/tooling/
+- domain-17-system-foundation/topic-dictionary/workloads/
 
 ## 文档
 

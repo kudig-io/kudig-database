@@ -17,9 +17,9 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-19-landscape-references/_archived-release-notes/observability/grafana|Grafana]]
-- [[domain-19-landscape-references/_archived-release-notes/observability/loki|Loki]]
-- [[domain-19-landscape-references/_archived-release-notes/observability/opentelemetry-collector|Opentelemetry Collector]]
-- [[domain-19-landscape-references/_archived-release-notes/observability/prometheus|Prometheus]]
-- [[domain-19-landscape-references/_archived-release-notes/observability/thanos|Thanos]]
+- domain-19-landscape-references/_archived-release-notes/observability/grafana/
+- domain-19-landscape-references/_archived-release-notes/observability/loki/
+- domain-19-landscape-references/_archived-release-notes/observability/opentelemetry-collector/
+- domain-19-landscape-references/_archived-release-notes/observability/prometheus/
+- domain-19-landscape-references/_archived-release-notes/observability/thanos/
 

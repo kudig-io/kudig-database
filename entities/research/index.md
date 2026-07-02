@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[entities/research/k8s-cloud-providers|K8S Cloud Providers]]
+- entities/research/k8s-cloud-providers/
 
 ## 文档
 

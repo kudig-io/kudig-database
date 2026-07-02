@@ -40,7 +40,7 @@ graph TB
 | `topic-skills/` | 30 | 1.7 MB | ~57 KB | YAML 前置元 + Section | 按 Section |
 | `topic-dictionary/` | 207 | 3.0 MB | ~13 KB | H1 → H2 → H3 条目式 | 按条目 |
 | `topic-cheat-sheet/` | 10 | 204 KB | ~20 KB | 紧凑表格 + 命令块 | 整文档 |
-| `topic-ai-agent/` | 58 | 1.2 MB | ~20 KB | H1 → H2 → 代码示例 | 按 H2 标题 |
+| `02-ai-agents/` | 58 | 1.2 MB | ~20 KB | H1 → H2 → 代码示例 | 按 H2 标题 |
 
 Sources: [README.md](corpus-config/README.md#L21-L31), [difficulty-index.md](metadata/difficulty-index.md#L1-L84), [tags-index.md](metadata/tags-index.md#L1-L137)
 
@@ -105,7 +105,7 @@ Sources: [rag-chunking-strategy.md](corpus-config/rag-chunking-strategy.md#L25-L
 
 | 分块策略 | 适用文档类型 | chunk_size | 语义边界 | 检索粒度 |
 |:---|:---|---:|:---|:---|
-| 按标题层级 | `domain-*`、`topic-ai-agent` | ~2000 字符 | H2/H3 标题 | 章节级 |
+| 按标题层级 | `domain-*`、`02-ai-agents` | ~2000 字符 | H2/H3 标题 | 章节级 |
 | 递归字符+重叠 | `topic-fta` 全量分析 | 2000 字符 + 200 重叠 | 段落/标题 | 段落级 |
 | 整文档保留 | `topic-cheat-sheet` | 全文 | 文档整体 | 文档级 |
 | 按条目分块 | `topic-dictionary` | ~500 字符 | H2/H3 条目 | 条目级 |

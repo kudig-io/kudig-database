@@ -21,13 +21,13 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-05-security-compliance/01-identity-access|Identity Access]]
-- [[domain-05-security-compliance/02-network-security|Network Security]]
-- [[domain-05-security-compliance/03-runtime-security|Runtime Security]]
-- [[domain-05-security-compliance/04-policy-governance|Policy Governance]]
-- [[domain-05-security-compliance/05-supply-chain|Supply Chain]]
-- [[domain-05-security-compliance/06-compliance|Compliance]]
-- [[domain-05-security-compliance/07-incident-response|Incident Response]]
+- domain-05-security-compliance/01-identity-access/
+- domain-05-security-compliance/02-network-security/
+- domain-05-security-compliance/03-runtime-security/
+- domain-05-security-compliance/04-policy-governance/
+- domain-05-security-compliance/05-supply-chain/
+- domain-05-security-compliance/06-compliance/
+- domain-05-security-compliance/07-incident-response/
 - [[domain-05-security-compliance/98-merged-indexes/index.md|Merged Indexes]]
 
 ## 文档

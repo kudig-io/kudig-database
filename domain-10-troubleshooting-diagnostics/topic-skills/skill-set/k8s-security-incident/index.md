@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-security-incident/reference|Reference]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-security-incident/scripts|Scripts]]
+- domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-security-incident/reference/
+- domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-security-incident/scripts/
 
 ## 文档
 

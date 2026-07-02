@@ -22,7 +22,7 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[entities/research|Research]]
+- entities/research/
 
 ## 文档
 

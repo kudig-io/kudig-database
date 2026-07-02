@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[skills/training-public/public-training/week-2-security-monitoring/day-08-rbac|Day 08 Rbac]]
-- [[skills/training-public/public-training/week-2-security-monitoring/day-09-audit-logs|Day 09 Audit Logs]]
-- [[skills/training-public/public-training/week-2-security-monitoring/day-10-cluster-monitoring|Day 10 Cluster Monitoring]]
-- [[skills/training-public/public-training/week-2-security-monitoring/day-11-risk-assessment|Day 11 Risk Assessment]]
+- skills/training-public/public-training/week-2-security-monitoring/day-08-rbac/
+- skills/training-public/public-training/week-2-security-monitoring/day-09-audit-logs/
+- skills/training-public/public-training/week-2-security-monitoring/day-10-cluster-monitoring/
+- skills/training-public/public-training/week-2-security-monitoring/day-11-risk-assessment/
 

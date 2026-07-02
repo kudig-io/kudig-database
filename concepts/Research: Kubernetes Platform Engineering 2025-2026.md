@@ -113,7 +113,7 @@ Model Context Protocol（MCP）为平台工程带来的变革：
 
 ## Related
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 
 <!-- risk-assessed -->

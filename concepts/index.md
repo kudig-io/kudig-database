@@ -26,7 +26,7 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[concepts/case-studies|Case Studies]]
+- concepts/case-studies/
 
 ## 文档
 

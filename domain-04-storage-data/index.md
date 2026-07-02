@@ -21,10 +21,10 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-04-storage-data/01-k8s-storage|K8S Storage]]
-- [[domain-04-storage-data/02-storage-fundamentals|Storage Fundamentals]]
-- [[domain-04-storage-data/03-distributed-storage|Distributed Storage]]
-- [[domain-04-storage-data/04-stateful-app-storage|Stateful App Storage]]
+- domain-04-storage-data/01-k8s-storage/
+- domain-04-storage-data/02-storage-fundamentals/
+- domain-04-storage-data/03-distributed-storage/
+- domain-04-storage-data/04-stateful-app-storage/
 - [[domain-04-storage-data/98-merged-indexes/index.md|Merged Indexes]]
 
 ## 文档

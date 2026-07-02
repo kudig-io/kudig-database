@@ -70,7 +70,7 @@ prerequisites:
 3. domain-32-yaml-manifests: 38文件, 162次
 4. topic-application-architecture: 46文件, 144次
 5. domain-8-observability: 34文件, 127次
-6. topic-ai-agent: 44文件, 111次
+6. 02-ai-agents: 44文件, 111次
 7. domain-3-control-plane: 38文件, 105次
 8. domain-19-papers: 28文件, 96次
 9. domain-5-networking: 43文件, 85次

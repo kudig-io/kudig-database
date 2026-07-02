@@ -17,11 +17,11 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[skills/training-public/public-training/week-3-node-workload/day-15-node-basics|Day 15 Node Basics]]
-- [[skills/training-public/public-training/week-3-node-workload/day-16-node-advanced|Day 16 Node Advanced]]
-- [[skills/training-public/public-training/week-3-node-workload/day-17-nodepool|Day 17 Nodepool]]
-- [[skills/training-public/public-training/week-3-node-workload/day-18-nodepool-advanced|Day 18 Nodepool Advanced]]
-- [[skills/training-public/public-training/week-3-node-workload/day-19-pod-basics|Day 19 Pod Basics]]
-- [[skills/training-public/public-training/week-3-node-workload/day-20-pod-advanced|Day 20 Pod Advanced]]
-- [[skills/training-public/public-training/week-3-node-workload/day-21-component-ops|Day 21 Component Ops]]
+- skills/training-public/public-training/week-3-node-workload/day-15-node-basics/
+- skills/training-public/public-training/week-3-node-workload/day-16-node-advanced/
+- skills/training-public/public-training/week-3-node-workload/day-17-nodepool/
+- skills/training-public/public-training/week-3-node-workload/day-18-nodepool-advanced/
+- skills/training-public/public-training/week-3-node-workload/day-19-pod-basics/
+- skills/training-public/public-training/week-3-node-workload/day-20-pod-advanced/
+- skills/training-public/public-training/week-3-node-workload/day-21-component-ops/
 

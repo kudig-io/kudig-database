@@ -855,7 +855,7 @@ dra_pending_resource_claims > 50  # 告警：待分配ResourceClaim积压
 
 - [[papers|#papers Hub]] — tag hub
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 

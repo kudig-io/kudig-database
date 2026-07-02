@@ -1018,7 +1018,7 @@ GitOps发展趋势:
 
 - [[papers|#papers Hub]] — tag hub
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

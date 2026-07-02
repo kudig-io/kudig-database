@@ -100,7 +100,7 @@ Tetragon 在 2025 年提供了内核级的实时策略执行能力：进程生�
 
 ## Related
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 
 <!-- risk-assessed -->

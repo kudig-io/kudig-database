@@ -21,8 +21,8 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[skills/training-public/public-training/one-month|One Month]]
-- [[skills/training-public/public-training/week-2-security-monitoring|Week 2 Security Monitoring]]
-- [[skills/training-public/public-training/week-3-node-workload|Week 3 Node Workload]]
-- [[skills/training-public/public-training/week-4-network-storage|Week 4 Network Storage]]
+- skills/training-public/public-training/one-month/
+- skills/training-public/public-training/week-2-security-monitoring/
+- skills/training-public/public-training/week-3-node-workload/
+- skills/training-public/public-training/week-4-network-storage/
 

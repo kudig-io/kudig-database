@@ -1191,7 +1191,7 @@ if __name__ == "__main__":
 
 - [[papers|#papers Hub]] — tag hub
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 
 <!-- risk-assessed -->

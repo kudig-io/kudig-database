@@ -1112,7 +1112,7 @@ eBPF生态发展趋势(2026-2027):
 
 - [[papers|#papers Hub]] — tag hub
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 
 <!-- risk-assessed -->

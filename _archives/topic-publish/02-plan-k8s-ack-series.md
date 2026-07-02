@@ -385,7 +385,7 @@ prerequisites:
 | 二十 | 云原生安全与供应链 | domain-05-security-compliance/39 | 3 | W21 | Falco/SBOM/SLSA |
 | 二十一 | 前沿技术 | domain-03-networking-traffic/36/37/38 | 4 | W21 | eBPF/平台工程/边缘/Wasm |
 | 二十二 | CNCF 全景与深度论文 | domain-19-landscape-references/19 | 4 | W22 | 218 项目 + 26 论文 |
-| 二十三 | AI Agent 工程 | domain-14-ai-ml-infra/topic-ai-agent/coding/openrouter | 7 | W22-23 | Agent/Harness 闭环 |
+| 二十三 | AI Agent 工程 | domain-14-ai-ml-infra/02-ai-agents/coding/openrouter | 7 | W22-23 | Agent/Harness 闭环 |
 | 二十四 | 部署迁移与收官 | domain-08-release-change-management/topic-deployment/migration | 3 | W24 | ACK 迁移 + 总结 |
 
 ---

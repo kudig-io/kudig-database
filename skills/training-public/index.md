@@ -21,15 +21,15 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[skills/training-public/beginner-guides|Beginner Guides]]
-- [[skills/training-public/fundamentals|Fundamentals]]
-- [[skills/training-public/inner-training|Inner Training]]
-- [[skills/training-public/oncall-qa|Oncall Qa]]
-- [[skills/training-public/public-training|Public Training]]
-- [[skills/training-public/quick-start|Quick Start]]
-- [[skills/training-public/resources|Resources]]
-- [[skills/training-public/topic-presentations|Topic Presentations]]
-- [[skills/training-public/troubleshooting|Troubleshooting]]
+- skills/training-public/beginner-guides/
+- skills/training-public/fundamentals/
+- skills/training-public/inner-training/
+- skills/training-public/oncall-qa/
+- skills/training-public/public-training/
+- skills/training-public/quick-start/
+- skills/training-public/resources/
+- skills/training-public/topic-presentations/
+- skills/training-public/troubleshooting/
 
 ## 文档
 

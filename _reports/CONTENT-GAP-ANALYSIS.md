@@ -71,7 +71,7 @@ prerequisites:
 | 7 | topic-skills | 144,011 | 30 | 4,800 |
 | 8 | domain-01-cluster-fundamentals | 132,505 | 36 | 3,681 |
 | 9 | domain-10-troubleshooting-diagnostics | 116,131 | 48 | 2,419 |
-| 10 | topic-ai-agent | 105,142 | 58 | 1,813 |
+| 10 | 02-ai-agents | 105,142 | 58 | 1,813 |
 | 11 | domain-11-ai-infra | 101,978 | 39 | 2,615 |
 | 12 | domain-03-networking-traffic | 98,672 | 42 | 2,349 |
 | 13 | domain-33-kubernetes-events | 89,327 | 17 | 5,254 |

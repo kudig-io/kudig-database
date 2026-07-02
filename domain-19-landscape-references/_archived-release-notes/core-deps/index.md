@@ -17,9 +17,9 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/containerd|Containerd]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/coredns|Coredns]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/cri-o|Cri O]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd|Etcd]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/runc|Runc]]
+- domain-19-landscape-references/_archived-release-notes/core-deps/containerd/
+- domain-19-landscape-references/_archived-release-notes/core-deps/coredns/
+- domain-19-landscape-references/_archived-release-notes/core-deps/cri-o/
+- domain-19-landscape-references/_archived-release-notes/core-deps/etcd/
+- domain-19-landscape-references/_archived-release-notes/core-deps/runc/
 

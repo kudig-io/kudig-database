@@ -60,7 +60,7 @@ prerequisites:
 
 2. **OpenCode** —— 强大的 AI 编程助手与 Agent CLI 工具，支持 75+ LLM Provider（包括 OpenRouter），提供智能代码补全、LSP 集成、MCP 工具调用、GitHub 自动化、自定义 Skills 等企业级开发能力。
 
-所有内容以 **2026 年最新官方文档和高质量社区实践** 为基础，提供可直接落地的配置示例、架构方案和最佳实践。本专题与 `topic-ai-agent`（Agent CLI 系列）深度联动，形成从 LLM 基础设施到上层智能体的完整知识闭环。
+所有内容以 **2026 年最新官方文档和高质量社区实践** 为基础，提供可直接落地的配置示例、架构方案和最佳实践。本专题与 `02-ai-agents`（Agent CLI 系列）深度联动，形成从 LLM 基础设施到上层智能体的完整知识闭环。
 
 > **OpenRouter** 提供统一 API 访问 400+ AI 模型，支持 OpenAI SDK 兼容接口、智能 Provider 路由与自动故障转移、Prompt Caching、Web Search 插件、Structured Outputs、BYOK（Bring Your Own Key）等企业级能力。作为 LLM 应用的"中间件层"，OpenRouter 已成为 AI 应用开发者最核心的基础设施之一。
 >
@@ -178,7 +178,7 @@ graph TB
 
 | 专题/领域 | 与本专题的关系 |
 |---------|--------------|
-| [topic-ai-agent](../domain-14-ai-ml-infra/topic-ai-agent/) | Agent CLI 系列，OpenRouter 是主流 Agent 工具的统一 LLM 后端 |
+| [02-ai-agents](../domain-14-ai-ml-infra/02-ai-agents/) | Agent CLI 系列，OpenRouter 是主流 Agent 工具的统一 LLM 后端 |
 | [domain-11-ai-infra](../domain-14-ai-ml-infra/) | AI 基础设施，OpenRouter 作为 LLM 推理服务的统一接入层 |
 | [domain-40-cloud-native-api-gateway](../domain-03-networking-traffic/) | 云原生 API 网关，OpenRouter 是 LLM 领域的 API Gateway 实践 |
 

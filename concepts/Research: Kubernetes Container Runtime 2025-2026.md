@@ -95,7 +95,7 @@ OCI 镜像规范和运行时规范在 2025 年进行了重大扩展，正式支�
 
 ## Related
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 
 <!-- risk-assessed -->

@@ -21,8 +21,8 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/glossary|Glossary]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list|List]]
+- domain-10-troubleshooting-diagnostics/topic-fta/glossary/
+- domain-10-troubleshooting-diagnostics/topic-fta/list/
 
 ## 文档
 

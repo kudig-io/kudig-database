@@ -698,8 +698,8 @@ kubectl get pods -A -o json | jq -r '
 ```
 ## Related
 
-- [[domain-02-workloads-applications/|工作负载与应用]]
-- [[domain-03-networking-traffic/|网络与流量]]
+- domain-02-workloads-applications//
+- domain-03-networking-traffic//
 - [[domain-20-application-patterns/sub-patterns/05-chaos-resilience-patterns|弹性与混沌模式]]
 
 ## See Also

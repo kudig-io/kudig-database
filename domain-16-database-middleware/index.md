@@ -21,12 +21,12 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-16-database-middleware/01-databases|Databases]]
-- [[domain-16-database-middleware/02-cache|Cache]]
-- [[domain-16-database-middleware/03-message-queues|Message Queues]]
-- [[domain-16-database-middleware/04-time-series-db|Time Series Db]]
-- [[domain-16-database-middleware/05-operator-management|Operator Management]]
-- [[domain-16-database-middleware/06-data-streaming|Data Streaming]]
+- domain-16-database-middleware/01-databases/
+- domain-16-database-middleware/02-cache/
+- domain-16-database-middleware/03-message-queues/
+- domain-16-database-middleware/04-time-series-db/
+- domain-16-database-middleware/05-operator-management/
+- domain-16-database-middleware/06-data-streaming/
 - [[domain-16-database-middleware/98-merged-indexes/index.md|Merged Indexes]]
 
 ## 文档

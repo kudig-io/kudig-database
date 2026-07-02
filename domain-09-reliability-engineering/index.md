@@ -21,15 +21,15 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-09-reliability-engineering/01-backup-recovery|Backup Recovery]]
-- [[domain-09-reliability-engineering/02-disaster-recovery|Disaster Recovery]]
-- [[domain-09-reliability-engineering/03-capacity-planning|Capacity Planning]]
-- [[domain-09-reliability-engineering/04-slo-sli|Slo Sli]]
-- [[domain-09-reliability-engineering/05-chaos-engineering|Chaos Engineering]]
-- [[domain-09-reliability-engineering/06-postmortem|Postmortem]]
-- [[domain-09-reliability-engineering/07-sre-practices|Sre Practices]]
-- [[domain-09-reliability-engineering/08-performance-testing|Performance Testing]]
-- [[domain-09-reliability-engineering/09-disaster-recovery-playbooks|Disaster Recovery Playbooks]]
+- domain-09-reliability-engineering/01-backup-recovery/
+- domain-09-reliability-engineering/02-disaster-recovery/
+- domain-09-reliability-engineering/03-capacity-planning/
+- domain-09-reliability-engineering/04-slo-sli/
+- domain-09-reliability-engineering/05-chaos-engineering/
+- domain-09-reliability-engineering/06-postmortem/
+- domain-09-reliability-engineering/07-sre-practices/
+- domain-09-reliability-engineering/08-performance-testing/
+- domain-09-reliability-engineering/09-disaster-recovery-playbooks/
 - [[domain-09-reliability-engineering/98-merged-indexes/index.md|Merged Indexes]]
 
 ## 文档

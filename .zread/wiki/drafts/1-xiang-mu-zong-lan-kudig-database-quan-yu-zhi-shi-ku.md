@@ -163,7 +163,7 @@ graph TD
     OBS --> TS["Domain 12<br/>故障排查"]
     TS --> FTA["topic-fta<br/>FTA 方法论"]
     FTA --> SKILLS["topic-skills<br/>Skill 库"]
-    SKILLS --> AGENT["topic-ai-agent<br/>Agent 工程"]
+    SKILLS --> AGENT["02-ai-agents<br/>Agent 工程"]
 
     style ARCH fill:#22c55e,stroke:#166534,color:#fff
     style TS fill:#ff6b6b,stroke:#c92a2a,color:#fff
@@ -171,7 +171,7 @@ graph TD
     style AGENT fill:#a855f7,stroke:#6b21a8,color:#fff
 ```
 
-对于不同经验水平的读者，推荐的学习起点也不同。入门级开发者建议从 `topic-learn/`（1 个月学习计划）开始，按照 Week 1（Docker/Linux/架构）→ Week 2（控制平面/网络/存储）→ Week 3（安全/可观测/排障）→ Week 4（GitOps/FTA/最佳实践）的节奏系统学习。有一定经验的运维工程师可以直接进入 Domain 12 故障排查或 `topic-fta/` 故障树分析。AI 工程师则可以从 `topic-ai-agent/` 入手，同时参考 `corpus-config/` 了解如何将知识库接入 RAG 系统。
+对于不同经验水平的读者，推荐的学习起点也不同。入门级开发者建议从 `topic-learn/`（1 个月学习计划）开始，按照 Week 1（Docker/Linux/架构）→ Week 2（控制平面/网络/存储）→ Week 3（安全/可观测/排障）→ Week 4（GitOps/FTA/最佳实践）的节奏系统学习。有一定经验的运维工程师可以直接进入 Domain 12 故障排查或 `topic-fta/` 故障树分析。AI 工程师则可以从 `02-ai-agents/` 入手，同时参考 `corpus-config/` 了解如何将知识库接入 RAG 系统。
 
 Sources: [metadata/knowledge-map.md](metadata/knowledge-map.md#L1-L84), [metadata/difficulty-index.md](metadata/difficulty-index.md#L1-L84)
 

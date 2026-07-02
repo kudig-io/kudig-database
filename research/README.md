@@ -87,4 +87,4 @@ status: draft | in-progress | done
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub

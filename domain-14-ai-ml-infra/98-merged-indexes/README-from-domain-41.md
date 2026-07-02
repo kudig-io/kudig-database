@@ -129,7 +129,7 @@ prerequisites:
 
 ```mermaid
 graph TB
-    ROOT["AI Agent 工程专题<br/>topic-ai-agent"]
+    ROOT["AI Agent 工程专题<br/>02-ai-agents"]
 
     subgraph L1["基础层 — 概念与选型"]
         A01["01 Agent 基础与核心架构<br/>ReAct / CoT / ToT / Reflexion"]

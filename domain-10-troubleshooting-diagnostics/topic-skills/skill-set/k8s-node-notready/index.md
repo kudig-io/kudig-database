@@ -17,9 +17,9 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/assets|Assets]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/reference|Reference]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/scripts|Scripts]]
+- domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/assets/
+- domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/reference/
+- domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/scripts/
 
 ## 文档
 

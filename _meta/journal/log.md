@@ -162,9 +162,9 @@ prerequisites:
 - [2026-05-21] 摄入 domain-11-production-operations/topic-best-practices/README.md → concepts/bp-README.md
 - [2026-05-21] 摄入 domain-11-production-operations/topic-best-practices/common-best-practices.md → concepts/bp-common-best-practices.md
 - [2026-05-21] 批量摄入 domain-11-production-operations/topic-best-practices/security/ → concepts/bp-security.md (3 篇)
-- [2026-05-21] 批量摄入 domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/ → concepts/ai-agent-openclaw-workspace.md (7 篇)
-- [2026-05-21] 摄入 domain-14-ai-ml-infra/topic-ai-agent/MOC.md → concepts/ai-agent-MOC.md
-- [2026-05-21] 摄入 domain-14-ai-ml-infra/topic-ai-agent/README.md → concepts/ai-agent-README.md
+- [2026-05-21] 批量摄入 domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/ → concepts/ai-agent-openclaw-workspace.md (7 篇)
+- [2026-05-21] 摄入 domain-14-ai-ml-infra/02-ai-agents/MOC.md → concepts/ai-agent-MOC.md
+- [2026-05-21] 摄入 domain-14-ai-ml-infra/02-ai-agents/README.md → concepts/ai-agent-README.md
 
 
 ## Wiki Ingest Batch — 2026-05-21

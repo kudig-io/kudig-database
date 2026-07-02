@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[assets/presentations|Presentations]]
+- assets/presentations/
 

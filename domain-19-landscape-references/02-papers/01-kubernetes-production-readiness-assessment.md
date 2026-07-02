@@ -579,7 +579,7 @@ trivy               # 镜像安全扫描
 
 - [[papers|#papers Hub]] — tag hub
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 
 <!-- risk-assessed -->

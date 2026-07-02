@@ -67,7 +67,7 @@ related_docs:
 - path: 03-gpu-scheduling-management.md
   type: depth
   desc: GPU 调度与管理
-- path: ../domain-14-ai-ml-infra/topic-ai-agent/
+- path: ../domain-14-ai-ml-infra/02-ai-agents/
   type: ai-agent
   desc: AI Agent 工程
 ---

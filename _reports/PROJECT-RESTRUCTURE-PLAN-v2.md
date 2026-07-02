@@ -202,7 +202,7 @@ kudig-database/
 │
 ├── domain-14-ai-ml-infra/
 │   ├── ...核心域文档...
-│   ├── domain-14-ai-ml-infra/topic-ai-agent/               # ← 迁入（58 个文件）
+│   ├── domain-14-ai-ml-infra/02-ai-agents/               # ← 迁入（58 个文件）
 │   └── domain-14-ai-ml-infra/topic-ai-coding/              # ← 迁入（25 个文件）
 │
 ├── domain-15-specialized-tech/
@@ -258,7 +258,7 @@ kudig-database/
 | **2** | Production Operations | 249 | `mv topic-best-practices topic-learn topic-k8s-lecturer topic-presentations topic-publish journal projects domain-11-production-operations/` |
 | **3** | Release & Change | 16 | `mv topic-deployment topic-migration domain-08-release-change-management/` |
 | **4** | System Foundation | 224 | `mv topic-dictionary topic-cheat-sheet domain-17-system-foundation/` |
-| **5** | AI Infra | 83 | `mv topic-ai-agent topic-ai-coding domain-14-ai-ml-infra/` |
+| **5** | AI Infra | 83 | `mv 02-ai-agents topic-ai-coding domain-14-ai-ml-infra/` |
 | **6** | Platform & Patterns | 273 | `mv topic-code-analysis domain-07-platform-engineering/`, `mv topic-application-architecture domain-20-application-patterns/`, `mv topic-functions topic-java-kubernetes domain-02-workloads-applications/` |
 | **7** | Landscape | 1,348 | `mv topic-release-notes topic-index domain-19-landscape-references/` |
 | **8** | Networking | 10 | `mv topic-terway domain-03-networking-traffic/` |

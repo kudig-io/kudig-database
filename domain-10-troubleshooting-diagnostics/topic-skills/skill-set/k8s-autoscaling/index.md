@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-autoscaling/reference|Reference]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-autoscaling/scripts|Scripts]]
+- domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-autoscaling/reference/
+- domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-autoscaling/scripts/
 
 ## 文档
 

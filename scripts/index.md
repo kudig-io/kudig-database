@@ -21,10 +21,10 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[scripts/corpus-generator|Corpus Generator]]
-- [[scripts/maintenance|Maintenance]]
-- [[scripts/man|Man]]
-- [[scripts/prompts|Prompts]]
-- [[scripts/templates|Templates]]
-- [[scripts/video-scripts|Video Scripts]]
+- scripts/corpus-generator/
+- scripts/maintenance/
+- scripts/man/
+- scripts/prompts/
+- scripts/templates/
+- scripts/video-scripts/
 

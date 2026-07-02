@@ -17,9 +17,9 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-19-landscape-references/01-cncf-landscape/graduated|Graduated]]
-- [[domain-19-landscape-references/01-cncf-landscape/incubating|Incubating]]
-- [[domain-19-landscape-references/01-cncf-landscape/sandbox|Sandbox]]
+- domain-19-landscape-references/01-cncf-landscape/graduated/
+- domain-19-landscape-references/01-cncf-landscape/incubating/
+- domain-19-landscape-references/01-cncf-landscape/sandbox/
 
 ## 文档
 

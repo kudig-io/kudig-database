@@ -381,7 +381,7 @@ curl -X POST http://localhost:4096/mcp -d '{
 | [05 - 工具与权限](./05-opencode-tools-permissions.md) | MCP 工具的权限配置 |
 | [04 - Agent 系统](./04-opencode-agents-system.md) | Per-Agent MCP 配置 |
 | [10 - Server API](./10-opencode-server-api.md) | MCP 动态管理 API |
-| [domain-14-ai-ml-infra/topic-ai-agent/25](../domain-14-ai-ml-infra/topic-ai-agent/25-agent-cli-mcp-integration.md) | MCP 协议通用指南 |
+| [domain-14-ai-ml-infra/02-ai-agents/25](../domain-14-ai-ml-infra/02-ai-agents/25-agent-cli-mcp-integration.md) | MCP 协议通用指南 |
 
 ---
 

@@ -26,21 +26,21 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-12-cloud-providers/01-alibaba-cloud|Alibaba Cloud]]
-- [[domain-12-cloud-providers/02-aws-eks|Aws Eks]]
-- [[domain-12-cloud-providers/03-google-cloud-gke|Google Cloud Gke]]
-- [[domain-12-cloud-providers/04-azure-aks|Azure Aks]]
-- [[domain-12-cloud-providers/05-alicloud-ack|Alicloud Ack]]
-- [[domain-12-cloud-providers/06-tencent-tke|Tencent Tke]]
-- [[domain-12-cloud-providers/07-huawei-cce|Huawei Cce]]
-- [[domain-12-cloud-providers/08-multi-cloud|Multi Cloud]]
-- [[domain-12-cloud-providers/09-ucloud-uk8s|Ucloud Uk8S]]
-- [[domain-12-cloud-providers/10-ibm-iks|Ibm Iks]]
-- [[domain-12-cloud-providers/11-oracle-oke|Oracle Oke]]
-- [[domain-12-cloud-providers/12-volcengine-vek|Volcengine Vek]]
-- [[domain-12-cloud-providers/13-ctyun-tke|Ctyun Tke]]
-- [[domain-12-cloud-providers/14-ecloud-cke|Ecloud Cke]]
-- [[domain-12-cloud-providers/15-alicloud-apsara-ack|Alicloud Apsara Ack]]
+- domain-12-cloud-providers/01-alibaba-cloud/
+- domain-12-cloud-providers/02-aws-eks/
+- domain-12-cloud-providers/03-google-cloud-gke/
+- domain-12-cloud-providers/04-azure-aks/
+- domain-12-cloud-providers/05-alicloud-ack/
+- domain-12-cloud-providers/06-tencent-tke/
+- domain-12-cloud-providers/07-huawei-cce/
+- domain-12-cloud-providers/08-multi-cloud/
+- domain-12-cloud-providers/09-ucloud-uk8s/
+- domain-12-cloud-providers/10-ibm-iks/
+- domain-12-cloud-providers/11-oracle-oke/
+- domain-12-cloud-providers/12-volcengine-vek/
+- domain-12-cloud-providers/13-ctyun-tke/
+- domain-12-cloud-providers/14-ecloud-cke/
+- domain-12-cloud-providers/15-alicloud-apsara-ack/
 - [[domain-12-cloud-providers/98-merged-indexes/index.md|Merged Indexes]]
 
 ## 文档

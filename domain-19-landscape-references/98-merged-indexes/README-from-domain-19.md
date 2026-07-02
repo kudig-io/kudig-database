@@ -293,7 +293,7 @@ Crossplane (基础设施抽象)
 
 - [[papers|#papers Hub]] — tag hub
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 - [[README]]
 - [[README]]

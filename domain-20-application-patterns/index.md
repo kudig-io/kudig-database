@@ -22,8 +22,8 @@ last_updated: 2026-07
 ## 子目录
 
 - [[domain-20-application-patterns/98-merged-indexes/index.md|Merged Indexes]]
-- [[domain-20-application-patterns/sub-patterns|Sub Patterns]]
-- [[domain-20-application-patterns/topic-application-architecture|Topic Application Architecture]]
+- domain-20-application-patterns/sub-patterns/
+- domain-20-application-patterns/topic-application-architecture/
 
 ## 文档
 

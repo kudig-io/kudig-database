@@ -17,9 +17,9 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-19-landscape-references/_archived-release-notes/security/cert-manager|Cert Manager]]
-- [[domain-19-landscape-references/_archived-release-notes/security/falco|Falco]]
-- [[domain-19-landscape-references/_archived-release-notes/security/gatekeeper|Gatekeeper]]
-- [[domain-19-landscape-references/_archived-release-notes/security/opa|Opa]]
-- [[domain-19-landscape-references/_archived-release-notes/security/trivy|Trivy]]
+- domain-19-landscape-references/_archived-release-notes/security/cert-manager/
+- domain-19-landscape-references/_archived-release-notes/security/falco/
+- domain-19-landscape-references/_archived-release-notes/security/gatekeeper/
+- domain-19-landscape-references/_archived-release-notes/security/opa/
+- domain-19-landscape-references/_archived-release-notes/security/trivy/
 

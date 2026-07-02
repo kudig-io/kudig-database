@@ -17,9 +17,9 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[web/src/components|Components]]
-- [[web/src/layouts|Layouts]]
-- [[web/src/lib|Lib]]
-- [[web/src/pages|Pages]]
-- [[web/src/styles|Styles]]
+- web/src/components/
+- web/src/layouts/
+- web/src/lib/
+- web/src/pages/
+- web/src/styles/
 

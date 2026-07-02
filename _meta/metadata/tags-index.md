@@ -155,7 +155,7 @@ prerequisites:
 
 ### llm
 - domain-14-ai-ml-infra/15-25: LLM 全生命周期
-- topic-ai-agent: AI Agent 工程
+- 02-ai-agents: AI Agent 工程
 
 ### distributed-training
 - domain-14-ai-ml-infra/05: 分布式训练框架

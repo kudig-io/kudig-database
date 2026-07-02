@@ -98,7 +98,7 @@ Unified tagging system for 3,337+ documents in the KUDIG knowledge base. Ensures
 | `java` | Java ecosystem | domain-java-kubernetes |
 | `terway` | Terway CNI | domain-03-networking-traffic |
 | `febm` | FEBM forensics | topic-febm |
-| `ai-agent` | AI agents | topic-ai-agent |
+| `ai-agent` | AI agents | 02-ai-agents |
 | `ai-coding` | AI coding | topic-ai-coding |
 
 ## Level 2 Tags (Components/Technology)

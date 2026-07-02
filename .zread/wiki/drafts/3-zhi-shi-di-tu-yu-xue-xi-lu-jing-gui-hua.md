@@ -233,10 +233,10 @@ Sources: [public-one-month-training.md](topic-learn/public-training/one-month/pu
 | D5 K8s 网络 | D15 网络基础（TCP/IP/DNS） | D12 网络排障 |
 | D6 K8s 存储 | D16 存储基础（RAID/分布式） | D12 存储排障 |
 | D8 可观测性 | D3 控制平面 + D4 工作负载 + D5 网络 | D9 平台运维 |
-| D11 AI 基础设施 | D4 工作负载 + GPU 基础概念 | topic-ai-agent |
+| D11 AI 基础设施 | D4 工作负载 + GPU 基础概念 | 02-ai-agents |
 | D12 故障排查 | D1~D8 任一知识域的基础理解 | FTA/FEBM/Skills |
 | FTA 故障树 | D12 排障基础经验 | Skills 运维技能库 |
-| Skills 技能库 | FTA 方法论 + D12 排障实践 | topic-ai-agent 自动化 |
+| Skills 技能库 | FTA 方法论 + D12 排障实践 | 02-ai-agents 自动化 |
 
 Sources: [knowledge-map.md](metadata/knowledge-map.md#L70-L84)
 
@@ -270,7 +270,7 @@ Sources: [README.md](topic-learn/public-training/one-month/README.md#L119-L128)
 | **SRE** | D7 安全、D8 可观测性、D12 排障、方法论 | D1 → D8 → D12 → FTA/FEBM | 独立构建 SLO 体系和排障 SOP |
 | **平台工程师** | D10 扩展生态、D3 控制平面、D2 设计原理 | D1 → D2 → D3 → D10 → Operator | 能开发自定义 CRD 和 Operator |
 | **安全工程师** | D7 安全合规、D25 云原生安全、D39 供应链安全 | D1 → D7 安全全系列 | 零信任架构设计与合规审计 |
-| **AI/ML 工程师** | D11 AI 基础设施、topic-ai-agent | D4 工作负载 → D11 → Agent 工程 | GPU 调度优化 + LLM 推理部署 |
+| **AI/ML 工程师** | D11 AI 基础设施、02-ai-agents | D4 工作负载 → D11 → Agent 工程 | GPU 调度优化 + LLM 推理部署 |
 
 Sources: [difficulty-index.md](metadata/difficulty-index.md#L18-L84), [tags-index.md](metadata/tags-index.md#L1-L137)
 

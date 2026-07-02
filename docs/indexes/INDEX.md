@@ -368,7 +368,7 @@ AI Agent、AI Coding 工具相关知识体系。
 
 | 专题 | 文档数 | 说明 |
 |:---|:---:|:---|
-| [AI Agent 工程](./domain-14-ai-ml-infra/topic-ai-agent/) | 50 | Agent 基础→Harness 工程→OpenClaw |
+| [AI Agent 工程](./domain-14-ai-ml-infra/02-ai-agents/) | 50 | Agent 基础→Harness 工程→OpenClaw |
 | [AI Coding 工具](./domain-14-ai-ml-infra/topic-ai-coding/) | 24 | OpenRouter、OpenCode |
 
 ---

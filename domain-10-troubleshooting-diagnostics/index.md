@@ -21,19 +21,19 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting|Core Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting|Resource Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting|Infrastructure Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting|Advanced Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/04-jvm-tuning|Jvm Tuning]]
+- domain-10-troubleshooting-diagnostics/00-core-troubleshooting/
+- domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/
+- domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/
+- domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/
+- domain-10-troubleshooting-diagnostics/04-jvm-tuning/
 - [[domain-10-troubleshooting-diagnostics/98-merged-indexes/index.md|Merged Indexes]]
-- [[domain-10-troubleshooting-diagnostics/tools|Tools]]
-- [[domain-10-troubleshooting-diagnostics/topic-febm|Topic Febm]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta|Topic Fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-multi-fault-scenarios|Topic Multi Fault Scenarios]]
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus|Topic Qa Corpus]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills|Topic Skills]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting|Topic Structural Trouble Shooting]]
+- domain-10-troubleshooting-diagnostics/tools/
+- domain-10-troubleshooting-diagnostics/topic-febm/
+- domain-10-troubleshooting-diagnostics/topic-fta/
+- domain-10-troubleshooting-diagnostics/topic-multi-fault-scenarios/
+- domain-10-troubleshooting-diagnostics/topic-qa-corpus/
+- domain-10-troubleshooting-diagnostics/topic-skills/
+- domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/
 
 ## 文档
 

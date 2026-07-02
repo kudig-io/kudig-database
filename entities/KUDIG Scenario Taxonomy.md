@@ -59,7 +59,7 @@ Organizes knowledge by **production scenario** rather than document structure. E
 | SC-07 | Backup & Restore | topic-scenarios/backup-restore.md | domain-30, domain-3, topic-fta | ~20 |
 | SC-08 | Upgrade & Migration | topic-scenarios/upgrade-migration.md | domain-1, topic-migration | ~25 |
 | SC-09 | Daily Operations | topic-scenarios/daily-ops.md | domain-9, topic-skills | ~40 |
-| SC-10 | AI Infrastructure | topic-scenarios/ai-infra-ops.md | domain-11, topic-ai-agent | ~30 |
+| SC-10 | AI Infrastructure | topic-scenarios/ai-infra-ops.md | domain-11, 02-ai-agents | ~30 |
 | SC-11 | Network Diagnosis | topic-scenarios/network-diagnosis.md | domain-5, domain-03-networking-traffic | ~25 |
 | SC-12 | Storage Issues | topic-scenarios/storage-issues.md | domain-6, domain-04-storage-data | ~20 |
 | SC-13 | Security Incident Response | topic-scenarios/security-incident.md | domain-7, domain-25, domain-05-security-compliance | ~15 |
@@ -94,7 +94,7 @@ Each scenario page should contain:
 | Backup & Restore | domain-01-cluster-fundamentals/* (etcd) | domain-09-reliability-engineering/* |
 | Upgrade & Migration | domain-01-cluster-fundamentals/07,18-upgrade* | domain-08-release-change-management/topic-migration/* |
 | Daily Operations | domain-07-platform-engineering/* | domain-10-troubleshooting-diagnostics/topic-skills/* |
-| AI Infrastructure | domain-14-ai-ml-infra/* | domain-14-ai-ml-infra/topic-ai-agent/* |
+| AI Infrastructure | domain-14-ai-ml-infra/* | domain-14-ai-ml-infra/02-ai-agents/* |
 
 ## Agent Routing
 

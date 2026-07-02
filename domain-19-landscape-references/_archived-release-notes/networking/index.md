@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-19-landscape-references/_archived-release-notes/networking/calico|Calico]]
-- [[domain-19-landscape-references/_archived-release-notes/networking/cilium|Cilium]]
-- [[domain-19-landscape-references/_archived-release-notes/networking/cni-plugins|Cni Plugins]]
-- [[domain-19-landscape-references/_archived-release-notes/networking/envoy|Envoy]]
-- [[domain-19-landscape-references/_archived-release-notes/networking/istio|Istio]]
-- [[domain-19-landscape-references/_archived-release-notes/networking/linkerd|Linkerd]]
+- domain-19-landscape-references/_archived-release-notes/networking/calico/
+- domain-19-landscape-references/_archived-release-notes/networking/cilium/
+- domain-19-landscape-references/_archived-release-notes/networking/cni-plugins/
+- domain-19-landscape-references/_archived-release-notes/networking/envoy/
+- domain-19-landscape-references/_archived-release-notes/networking/istio/
+- domain-19-landscape-references/_archived-release-notes/networking/linkerd/
 

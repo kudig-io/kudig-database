@@ -21,8 +21,8 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[_reports/quality|Quality]]
-- [[_reports/release-notes|Release Notes]]
+- _reports/quality/
+- _reports/release-notes/
 
 ## 文档
 

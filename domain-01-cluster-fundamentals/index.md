@@ -26,13 +26,13 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-01-cluster-fundamentals/01-architecture-overview|Architecture Overview]]
-- [[domain-01-cluster-fundamentals/02-design-principles|Design Principles]]
-- [[domain-01-cluster-fundamentals/03-control-plane|Control Plane]]
-- [[domain-01-cluster-fundamentals/04-api-versions|Api Versions]]
-- [[domain-01-cluster-fundamentals/05-kubectl|Kubectl]]
-- [[domain-01-cluster-fundamentals/06-upgrade-paths|Upgrade Paths]]
-- [[domain-01-cluster-fundamentals/07-performance-tuning|Performance Tuning]]
+- domain-01-cluster-fundamentals/01-architecture-overview/
+- domain-01-cluster-fundamentals/02-design-principles/
+- domain-01-cluster-fundamentals/03-control-plane/
+- domain-01-cluster-fundamentals/04-api-versions/
+- domain-01-cluster-fundamentals/05-kubectl/
+- domain-01-cluster-fundamentals/06-upgrade-paths/
+- domain-01-cluster-fundamentals/07-performance-tuning/
 - [[domain-01-cluster-fundamentals/98-merged-indexes/index.md|Merged Indexes]]
 
 ## 文档

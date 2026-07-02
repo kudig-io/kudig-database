@@ -130,7 +130,7 @@ GitOps 在变更管理中的核心作用：
 
 ## Related
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 
 <!-- risk-assessed -->

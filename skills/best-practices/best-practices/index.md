@@ -21,10 +21,10 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[skills/best-practices/best-practices/infrastructure|Infrastructure]]
-- [[skills/best-practices/best-practices/observability|Observability]]
-- [[skills/best-practices/best-practices/operations|Operations]]
-- [[skills/best-practices/best-practices/security|Security]]
+- skills/best-practices/best-practices/infrastructure/
+- skills/best-practices/best-practices/observability/
+- skills/best-practices/best-practices/operations/
+- skills/best-practices/best-practices/security/
 
 ## 文档
 

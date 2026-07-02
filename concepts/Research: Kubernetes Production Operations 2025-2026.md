@@ -107,7 +107,7 @@ lifecycle_changed: 2026-05-24
 
 ## Related
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 
 <!-- risk-assessed -->

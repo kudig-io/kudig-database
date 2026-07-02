@@ -1,7 +1,7 @@
 ---
-title: topic-ai-agent MOC (domain-14-ai-ml-infra)
-description: topic-ai-agent 专题导航页，覆盖 57 篇文档
-summary: topic-ai-agent 专题导航页，覆盖 57 篇文档
+title: 02-ai-agents MOC (domain-14-ai-ml-infra)
+description: 02-ai-agents 专题导航页，覆盖 57 篇文档
+summary: 02-ai-agents 专题导航页，覆盖 57 篇文档
 category: moc
 tags:
 - k8s
@@ -19,11 +19,11 @@ audience:
 - 所有工程师
 estimated_read_time: 5min
 intent_queries:
-- topic-ai-agent MOC 是什么
-- 如何 topic-ai-agent MOC
+- 02-ai-agents MOC 是什么
+- 如何 02-ai-agents MOC
 - Kubernetes 14 ai ml infra 最佳实践
 trigger_keywords:
-- topic-ai-agent
+- 02-ai-agents
 - MOC
 - ai
 - ml
@@ -39,10 +39,10 @@ prerequisites:
 
 
 
-# topic-ai-agent [[MOC|MOC]]
+# 02-ai-agents [[MOC|MOC]]
 
 > **MOC 版本**: 1.0
-> **专题**: topic-ai-agent
+> **专题**: 02-ai-agents
 > **文档数量**: 57 篇
 > **最后更新**: 2026-05-21
 > **用途**: 本专题的导航入口，汇总所有相关文档
@@ -57,7 +57,7 @@ AI Agent — AI 智能体架构、工具调用、Agent 工作流
 
 | 维度 | 说明 |
 |---|---|
-| **专题** | topic-ai-agent |
+| **专题** | 02-ai-agents |
 | **文档数量** | 57 篇（展示前 50 篇） |
 | **难度分布** | 入门 0 / 进阶 0 / 高级 0 / 专家 0 |
 

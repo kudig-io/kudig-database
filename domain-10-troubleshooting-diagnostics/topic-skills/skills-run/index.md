@@ -21,5 +21,5 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skills-run/scenarios|Scenarios]]
+- domain-10-troubleshooting-diagnostics/topic-skills/skills-run/scenarios/
 

@@ -1504,7 +1504,7 @@ data:
 
 ## Related
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 - 79-polar-research
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]

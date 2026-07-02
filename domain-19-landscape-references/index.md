@@ -21,12 +21,12 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-19-landscape-references/01-cncf-landscape|Cncf Landscape]]
-- [[domain-19-landscape-references/02-papers|Papers]]
+- domain-19-landscape-references/01-cncf-landscape/
+- domain-19-landscape-references/02-papers/
 - [[domain-19-landscape-references/98-merged-indexes/index.md|Merged Indexes]]
-- [[domain-19-landscape-references/_archived-release-notes|Archived Release Notes]]
-- [[domain-19-landscape-references/topic-index|Topic Index]]
-- [[domain-19-landscape-references/topic-release-notes|Topic Release Notes]]
+- domain-19-landscape-references/_archived-release-notes/
+- domain-19-landscape-references/topic-index/
+- domain-19-landscape-references/topic-release-notes/
 
 ## 文档
 

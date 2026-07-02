@@ -365,7 +365,7 @@ with:
 | [10 - Server 模式](./10-opencode-server-api.md) | 理解底层 Server 架构 |
 | [04 - Agent 系统](./04-opencode-agents-system.md) | 配置执行 Agent |
 | [12 - 进阶话题](./12-opencode-advanced-topics.md) | 非交互模式与安全 |
-| [domain-14-ai-ml-infra/topic-ai-agent/28](../domain-14-ai-ml-infra/topic-ai-agent/28-agent-cli-enterprise-automation.md) | Agent CLI 企业自动化通用指南 |
+| [domain-14-ai-ml-infra/02-ai-agents/28](../domain-14-ai-ml-infra/02-ai-agents/28-agent-cli-enterprise-automation.md) | Agent CLI 企业自动化通用指南 |
 
 ---
 

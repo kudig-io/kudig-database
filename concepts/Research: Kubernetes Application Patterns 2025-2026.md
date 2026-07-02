@@ -78,7 +78,7 @@ Kubernetes Gateway API 在 2025 年进入 GA，支持 HTTP/gRPC/TCP 路由、流
 
 ## Related
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 
 <!-- risk-assessed -->

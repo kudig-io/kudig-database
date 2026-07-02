@@ -21,12 +21,12 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-17-system-foundation/01-linux|Linux]]
-- [[domain-17-system-foundation/02-hardware|Hardware]]
-- [[domain-17-system-foundation/03-kubernetes-events|Kubernetes Events]]
+- domain-17-system-foundation/01-linux/
+- domain-17-system-foundation/02-hardware/
+- domain-17-system-foundation/03-kubernetes-events/
 - [[domain-17-system-foundation/98-merged-indexes/index.md|Merged Indexes]]
-- [[domain-17-system-foundation/topic-cheat-sheet|Topic Cheat Sheet]]
-- [[domain-17-system-foundation/topic-dictionary|Topic Dictionary]]
+- domain-17-system-foundation/topic-cheat-sheet/
+- domain-17-system-foundation/topic-dictionary/
 
 ## 文档
 

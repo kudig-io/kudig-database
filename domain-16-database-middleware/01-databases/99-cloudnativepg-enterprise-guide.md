@@ -93,7 +93,7 @@ CloudNativePG 的架构设计充分考虑了 Kubernetes 的特性，将 PostgreS
 
 **WAL 归档和备份**是 CNPG 数据安全的重要保障。CNPG 使用 Barman Cloud 作为备份引擎，支持 S3、GCS 和 Azure Blob 作为备份存储。WAL 归档是连续的（每产生一个 WAL 文件就上传），确保可以恢复到任意时间点（PITR）。基础备份（Base Backup）可以通过 `ScheduledBackup` CRD 定时执行，也可以通过 `Backup` CRD 按需执行。备份数据使用 gzip 或 zstd 压缩，支持并行上传以加速大型数据库的备份。
 
-**滚动升级机制**确保 PostgreSQL 版本升级的零停机。当修改 `Kafka` CRD 中的 `imageName` 字段时，CNPG 会按照特定的顺序执行升级：先逐一升级所有 Replica（确保每个 Replica 都成功启动并完成 recovery），然后执行一次 switchover 将升级后的 Replica 提升为 Primary，最后升级旧 Primary。这个过程中，应用连接通过 PgBouncer 连接池保持，不会因为短暂的主从切换而中断。
+**滚动升级机制**确保 PostgreSQL 版本升级的零停机。当修改 `Cluster` CRD 中的 `imageName` 字段时，CNPG 会按照特定的顺序执行升级：先逐一升级所有 Replica（确保每个 Replica 都成功启动并完成 recovery），然后执行一次 switchover 将升级后的 Replica 提升为 Primary，最后升级旧 Primary。这个过程中，应用连接通过 PgBouncer 连接池保持，不会因为短暂的主从切换而中断。
 
 **连接池集成**是 CNPG 区别于其他 PostgreSQL Operator 的一个亮点。CNPG 内置了 PgBouncer 集成，通过 `Pooler` CRD 管理 PgBouncer 实例。PgBouncer 以 Deployment 方式部署（独立于 PostgreSQL StatefulSet），支持事务级连接池（`pool_mode=transaction`），可以将数千个客户端连接复用到数百个 PostgreSQL 服务端连接。CNPG 还自动为 PgBouncer 创建专用的 PostgreSQL 用户（`_cnpg_pooler_pgbouncer`），并配置 `pg_hba.conf` 允许连接池连接。
 

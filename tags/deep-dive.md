@@ -27,7 +27,7 @@ tier: supporting
 - [[domain-01-cluster-fundamentals/03-control-plane/17-apiserver-tuning|API Server 性能调优]]
 - [[entities/aws-eks-overview|AWS EKS (Elastic Kubernetes Service) 概述]]
 - [[domain-12-cloud-providers/02-aws-eks/aws-eks-overview|AWS EKS (Elastic Kubernetes Service) 概述]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/16-agentscope-overview-installation|AgentScope 概述与安装入门 (domain-14-ai-ml-infra)]]
+- [[domain-14-ai-ml-infra/02-ai-agents/16-agentscope-overview-installation|AgentScope 概述与安装入门 (domain-14-ai-ml-infra)]]
 - [[domain-14-ai-ml-infra/02-ai-agents/16-agentscope-overview-installation|AgentScope 概述与安装入门 (domain-14-ai-ml-infra)]]
 - [[entities/azure-aks-overview|Azure AKS (Azure Kubernetes Service) 概述]]
 - [[domain-12-cloud-providers/04-azure-aks/azure-aks-overview|Azure AKS (Azure Kubernetes Service) 概述]]

@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-logging-pipeline/reference|Reference]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-logging-pipeline/scripts|Scripts]]
+- domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-logging-pipeline/reference/
+- domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-logging-pipeline/scripts/
 
 ## 文档
 

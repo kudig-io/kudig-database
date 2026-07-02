@@ -699,7 +699,7 @@ Platform Team (平台团队):
 ## Related
 
 - [[domain-07-platform-engineering/developer-experience/02-developer-onboarding-automation|开发者入职自动化]]
-- [[domain-07-platform-engineering/|平台工程]]
+- domain-07-platform-engineering//
 - [[CONTRIBUTING|贡献指南]]
 
 ## See Also

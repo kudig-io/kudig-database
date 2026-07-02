@@ -21,10 +21,10 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[_meta/corpus-config|Corpus Config]]
-- [[_meta/journal|Journal]]
-- [[_meta/metadata|Metadata]]
-- [[_meta/projects|Projects]]
+- _meta/corpus-config/
+- _meta/journal/
+- _meta/metadata/
+- _meta/projects/
 
 ## 文档
 

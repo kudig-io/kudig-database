@@ -21,13 +21,13 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-06-observability/01-overview|Overview]]
-- [[domain-06-observability/02-metrics|Metrics]]
-- [[domain-06-observability/03-logging|Logging]]
-- [[domain-06-observability/04-tracing|Tracing]]
-- [[domain-06-observability/05-alerting|Alerting]]
-- [[domain-06-observability/06-slo-sli|Slo Sli]]
-- [[domain-06-observability/07-tools|Tools]]
+- domain-06-observability/01-overview/
+- domain-06-observability/02-metrics/
+- domain-06-observability/03-logging/
+- domain-06-observability/04-tracing/
+- domain-06-observability/05-alerting/
+- domain-06-observability/06-slo-sli/
+- domain-06-observability/07-tools/
 - [[domain-06-observability/98-merged-indexes/index.md|Merged Indexes]]
 
 ## 文档

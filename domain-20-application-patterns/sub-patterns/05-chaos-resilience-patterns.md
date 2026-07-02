@@ -641,8 +641,8 @@ spec:
 ## Related
 
 - [[domain-20-application-patterns/sub-patterns/04-sidecar-ambassador-patterns|Sidecar 与 Ambassador 模式]]
-- [[domain-09-reliability-engineering/|可靠性工程]]
-- [[domain-10-troubleshooting-diagnostics/|故障排查与诊断]]
+- domain-09-reliability-engineering//
+- domain-10-troubleshooting-diagnostics//
 
 ## See Also
 

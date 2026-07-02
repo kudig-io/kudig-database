@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-19-landscape-references/_archived-release-notes/storage/longhorn|Longhorn]]
-- [[domain-19-landscape-references/_archived-release-notes/storage/rook|Rook]]
-- [[domain-19-landscape-references/_archived-release-notes/storage/velero|Velero]]
+- domain-19-landscape-references/_archived-release-notes/storage/longhorn/
+- domain-19-landscape-references/_archived-release-notes/storage/rook/
+- domain-19-landscape-references/_archived-release-notes/storage/velero/
 

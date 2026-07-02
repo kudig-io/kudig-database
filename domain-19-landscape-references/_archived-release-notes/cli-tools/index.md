@@ -22,11 +22,11 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm|Helm]]
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/kind|Kind]]
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/kops|Kops]]
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/kustomize|Kustomize]]
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/minikube|Minikube]]
+- domain-19-landscape-references/_archived-release-notes/cli-tools/helm/
+- domain-19-landscape-references/_archived-release-notes/cli-tools/kind/
+- domain-19-landscape-references/_archived-release-notes/cli-tools/kops/
+- domain-19-landscape-references/_archived-release-notes/cli-tools/kustomize/
+- domain-19-landscape-references/_archived-release-notes/cli-tools/minikube/
 
 
 

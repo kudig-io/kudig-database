@@ -823,8 +823,8 @@ metrics:
 ## Related
 
 - [[domain-07-platform-engineering/developer-experience/01-inner-source-contribution-model|内部开源贡献模型]]
-- [[domain-07-platform-engineering/|平台工程]]
-- [[domain-14-ai-ml-infra/|AI/ML 基础设施]]
+- domain-07-platform-engineering//
+- domain-14-ai-ml-infra//
 
 ## See Also
 

@@ -26,9 +26,9 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-18-manifests-patterns/01-yaml-reference|Yaml Reference]]
-- [[domain-18-manifests-patterns/02-kustomize-patterns|Kustomize Patterns]]
-- [[domain-18-manifests-patterns/03-helm-values-patterns|Helm Values Patterns]]
+- domain-18-manifests-patterns/01-yaml-reference/
+- domain-18-manifests-patterns/02-kustomize-patterns/
+- domain-18-manifests-patterns/03-helm-values-patterns/
 - [[domain-18-manifests-patterns/98-merged-indexes/index.md|Merged Indexes]]
 
 ## 文档

@@ -21,12 +21,12 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[skills/training-public/inner-training/projects|Projects]]
-- [[skills/training-public/inner-training/resources|Resources]]
-- [[skills/training-public/inner-training/week-1-ack-acr-lifecycle|Week 1 Ack Acr Lifecycle]]
-- [[skills/training-public/inner-training/week-2-security-monitoring|Week 2 Security Monitoring]]
-- [[skills/training-public/inner-training/week-3-node-workload|Week 3 Node Workload]]
-- [[skills/training-public/inner-training/week-4-network-storage|Week 4 Network Storage]]
+- skills/training-public/inner-training/projects/
+- skills/training-public/inner-training/resources/
+- skills/training-public/inner-training/week-1-ack-acr-lifecycle/
+- skills/training-public/inner-training/week-2-security-monitoring/
+- skills/training-public/inner-training/week-3-node-workload/
+- skills/training-public/inner-training/week-4-network-storage/
 
 ## 文档
 

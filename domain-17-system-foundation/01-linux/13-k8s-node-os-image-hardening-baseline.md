@@ -53,16 +53,21 @@ authors:
 
 # K8s 节点 OS 镜像加固基线
 
-本指南定义 Kubernetes 生产节点操作系统镜像的加固基线，适用于基于镜像构建（Image-based Provisioning）或 Ansible/CloudInit 初始化的节点。目标是在节点加入集群前，通过标准化配置消除常见攻击面，并为后续容器运行时、kubelet 与可观测性 Agent 提供稳定、可审计的运行环境。
+本指南定义 Kubernetes 生产节点操作系统镜像的加固基线，适用于基于镜像构建（Image-based Provisioning）或 Ansible/CloudInit 初始化的节点。目标是在节点加入集群前，通过标准化配置消除常见攻击面，并为后续容器运行时、kubelet 与可观测性 Agent 提供稳定、可审计的运行环境。节点是 Kubernetes 的底座，一旦节点被攻破，攻击者可能获取该节点上所有 Pod 的访问权限，甚至通过特权提升横向移动至整个集群，因此节点加固是生产安全的第一道防线。
 
 ## 1. 适用场景与范围
+
+本基线适用于以下场景：
 
 - 自建 Kubernetes 集群的节点镜像构建与初始化。
 - 云厂商托管 Kubernetes（ACK/EKS/GKE/AKS 等）的自定义节点池镜像。
 - 控制平面节点与工作节点均需遵循本基线，控制面节点应执行更严格的访问控制。
-- 不覆盖容器运行时内部安全策略，相关内容参考安全合规域与容器运行时域。
+
+本基线不覆盖容器运行时内部安全策略，相关内容参考安全合规域与容器运行时域。同时，本基线也不覆盖应用层安全，如容器镜像扫描、NetworkPolicy 等。
 
 ## 2. 前置条件与工具
+
+在开始加固前，请准备以下工具与流程：
 
 - 镜像构建工具：Packer、Kickstart、CloudInit、Ansible、Container Linux Config 等。
 - 合规扫描工具：CIS-CAT、OpenSCAP、Lynis 或 cloud provider 合规服务。
@@ -82,6 +87,8 @@ CIS（Center for Internet Security）提供针对各类 Linux 发行版的加固
 - 用户与权限管理
 - 网络参数安全
 
+CIS Benchmark 不是一成不变的清单，应根据实际业务需求与合规要求进行裁剪。例如，某些行业可能需要额外启用 FIPS 模式或禁用特定内核模块。
+
 ### 3.2 不可变基础设施
 
 节点镜像应视为不可变 artifact：
@@ -90,6 +97,8 @@ CIS（Center for Internet Security）提供针对各类 Linux 发行版的加固
 - 节点维护以“替换”代替“修复”，异常节点直接下线并重新扩缩容。
 - 配置文件纳入 Git 版本管理，镜像构建流水线记录 SBOM 与合规报告。
 - 需要持久化的运行时数据（日志、容器存储）应挂载到独立分区，避免污染根文件系统。
+
+不可变基础设施能够显著降低配置漂移风险，并缩短节点恢复时间。当节点出现异常时，SRE 只需将其下线并等待新节点自动加入，而不是花费时间排查节点本地修改。
 
 ## 4. 标准操作流程
 
@@ -104,7 +113,7 @@ for svc in cups bluetooth firewalld postfix avahi-daemon; do
 done
 ```
 
-保留服务：sshd（仅密钥认证）、chronyd/systemd-timesyncd、containerd、kubelet、auditd、rsyslog/journald。控制面节点还需保留 etcd 相关服务。
+保留服务：sshd（仅密钥认证）、chronyd/systemd-timesyncd、containerd、kubelet、auditd、rsyslog/journald。控制面节点还需保留 etcd 相关服务。在禁用任何服务前，应确认该服务不会被 Kubernetes、CNI 或云厂商 agent 依赖。
 
 ### 4.2 SSH 与访问控制
 
@@ -126,7 +135,7 @@ Banner /etc/ssh/banner
 systemctl restart sshd
 ```
 
-建议为不同角色配置独立的 sudoers 文件，限制可执行的命令集，并通过 auditd 记录所有 sudo 调用。
+建议为不同角色配置独立的 sudoers 文件，限制可执行的命令集，并通过 auditd 记录所有 sudo 调用。对于控制面节点，应进一步限制可登录用户列表，并启用多因素认证（MFA）。
 
 ### 4.3 磁盘分区规划
 
@@ -145,7 +154,7 @@ systemctl restart sshd
 UUID=<uuid> /var/lib/etcd ext4 noatime,nodiratime,barrier=1 0 2
 ```
 
-独立分区的价值在于：当容器日志或镜像数据异常增长时，不会导致根分区满而影响系统服务；同时便于针对 etcd 等关键路径使用更高性能的存储。
+独立分区的价值在于：当容器日志或镜像数据异常增长时，不会导致根分区满而影响系统服务；同时便于针对 etcd 等关键路径使用更高性能的存储。对于 etcd 数据盘，强烈建议使用 RAID-1 或云厂商提供的多副本块存储，以提升可靠性。
 
 ### 4.4 内核参数基线
 
@@ -185,7 +194,7 @@ net.ipv4.conf.default.accept_source_route=0
 sysctl --system
 ```
 
-注意：`tcp_tw_recycle` 已废弃，不应再使用；`nf_conntrack_max` 需与 CNI 规模匹配，避免连接跟踪表满导致网络异常。
+注意：`tcp_tw_recycle` 已废弃，不应再使用；`nf_conntrack_max` 需与 CNI 规模匹配，避免连接跟踪表满导致网络异常。同时，应监控 conntrack 使用率，并在大规模集群中适当提升该值。
 
 ### 4.5 auditd 审计策略
 
@@ -216,7 +225,7 @@ systemctl restart auditd
 ausearch -k k8s-config --start today
 ```
 
-auditd 日志应集中采集到 SIEM 或日志平台，保留期限根据合规要求设定，通常不少于 90 天。
+auditd 日志应集中采集到 SIEM 或日志平台，保留期限根据合规要求设定，通常不少于 90 天。审计策略应避免过宽，否则会产生大量噪声日志，反而掩盖关键事件。
 
 ### 4.6 containerd 加固
 
@@ -244,7 +253,7 @@ version = 2
     endpoint = ["https://internal-mirror.example.com"]
 ```
 
-同时建议启用镜像内容信任（Notary/cosign），拒绝未签名的镜像。
+同时建议启用镜像内容信任（Notary/cosign），拒绝未签名的镜像。对于多租户场景，可以通过 ImagePolicyWebhook 或 Kyverno 进一步限制允许拉取的镜像仓库。
 
 ### 4.7 kubelet 加固
 
@@ -267,7 +276,7 @@ serializeImagePulls: false
    nodefs.inodesFree: "5%"
 ```
 
-`protectKernelDefaults: true` 会阻止 kubelet 运行时不安全的内核参数，因此必须在镜像阶段将 sysctl 参数固化正确。
+`protectKernelDefaults: true` 会阻止 kubelet 运行时不安全的内核参数，因此必须在镜像阶段将 sysctl 参数固化正确。该选项是 kubelet 安全加固的重要开关，但也会提高对镜像基线一致性的要求。
 
 ### 4.8 更新节奏
 
@@ -275,6 +284,8 @@ serializeImagePulls: false
 - **containerd/kubelet 更新**：冻结小版本，高危 CVE 在变更窗口内升级。
 - **安全补丁**：高危漏洞应在 7–14 天内修复；极高危漏洞应在 72 小时内启动应急补丁流程。
 - **基线复审**：每季度重新执行 CIS 扫描，更新废弃配置项。
+
+更新节奏应在 SRE、安全与业务团队之间达成共识，并纳入变更日历，避免在业务高峰期执行节点替换。
 
 ## 5. 关键检查点与验证命令
 

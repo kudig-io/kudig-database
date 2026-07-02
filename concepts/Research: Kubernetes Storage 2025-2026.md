@@ -132,7 +132,7 @@ VolumeAttributesClass 等新特性正在补齐存储 QoS 短板。
 
 ## Related
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 
 <!-- risk-assessed -->

@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[scripts/corpus-generator/extractors|Extractors]]
-- [[scripts/corpus-generator/templates|Templates]]
-- [[scripts/corpus-generator/validators|Validators]]
+- scripts/corpus-generator/extractors/
+- scripts/corpus-generator/templates/
+- scripts/corpus-generator/validators/
 

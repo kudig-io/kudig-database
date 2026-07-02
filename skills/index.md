@@ -26,9 +26,9 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[skills/best-practices|Best Practices]]
-- [[skills/training-lecturer|Training Lecturer]]
-- [[skills/training-public|Training Public]]
+- skills/best-practices/
+- skills/training-lecturer/
+- skills/training-public/
 
 ## 文档
 

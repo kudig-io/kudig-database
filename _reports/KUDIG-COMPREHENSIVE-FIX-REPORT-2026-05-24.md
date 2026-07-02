@@ -233,7 +233,7 @@ af4cec65  feat: KUDIG知识缺口全面修复（17 files）
 | `topic-code-analysis/` | `domain-07-platform-engineering/topic-code-analysis/` | 87 |
 | `topic-functions/` | `domain-02-workloads-applications/topic-functions/` | 80 |
 | `02-ai-agents/` | `domain-14-ai-ml-infra/02-ai-agents/` | 7 |
-| `topic-ai-agent/` | `domain-14-ai-ml-infra/topic-ai-agent/` | 7 |
+| `02-ai-agents/` | `domain-14-ai-ml-infra/02-ai-agents/` | 7 |
 | `beginner-guides/` | `skills/training-public/beginner-guides/` | 4 |
 | `_reports/QUALITY_REPORT_*` | `_reports/quality/QUALITY_REPORT_*` | 4 |
 | `topic-skills/.../README` | `topic-skills/.../SKILL` | 7 |

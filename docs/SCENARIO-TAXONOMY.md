@@ -90,7 +90,7 @@ tier: peripheral---
 | SC-07 | 备份恢复 | `topic-scenarios/backup-restore.md` | domain-30, domain-3, topic-fta | ~20 |
 | SC-08 | 升级迁移 | `topic-scenarios/upgrade-migration.md` | domain-1, topic-migration | ~25 |
 | SC-09 | 日常运维 | `topic-scenarios/daily-ops.md` | domain-9, topic-skills | ~40 |
-| SC-10 | AI 基础设施 | `topic-scenarios/ai-infra-ops.md` | domain-11, topic-ai-agent | ~30 |
+| SC-10 | AI 基础设施 | `topic-scenarios/ai-infra-ops.md` | domain-11, 02-ai-agents | ~30 |
 | SC-11 | 网络诊断 | `topic-scenarios/network-diagnosis.md` | domain-5, domain-03-networking-traffic | ~25 |
 | SC-12 | 存储问题 | `topic-scenarios/storage-issues.md` | domain-6, domain-04-storage-data | ~20 |
 | SC-13 | 安全事件响应 | `topic-scenarios/security-incident.md` | domain-7, domain-25, domain-05-security-compliance | ~15 |
@@ -141,7 +141,7 @@ last_updated: "YYYY-MM-DD"
 | 备份恢复 | domain-01-cluster-fundamentals/* (etcd) | domain-09-reliability-engineering/* |
 | 升级迁移 | domain-01-cluster-fundamentals/07,18-upgrade* | domain-08-release-change-management/topic-migration/* |
 | 日常运维 | domain-07-platform-engineering/* | domain-10-troubleshooting-diagnostics/topic-skills/* |
-| AI 基础设施 | domain-14-ai-ml-infra/* | domain-14-ai-ml-infra/topic-ai-agent/* |
+| AI 基础设施 | domain-14-ai-ml-infra/* | domain-14-ai-ml-infra/02-ai-agents/* |
 
 ---
 

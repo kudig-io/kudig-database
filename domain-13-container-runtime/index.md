@@ -26,11 +26,11 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-13-container-runtime/01-docker|Docker]]
-- [[domain-13-container-runtime/02-image-management|Image Management]]
-- [[domain-13-container-runtime/03-containerd-cri-o|Containerd Cri O]]
-- [[domain-13-container-runtime/04-image-build|Image Build]]
-- [[domain-13-container-runtime/05-runtime-migration|Runtime Migration]]
+- domain-13-container-runtime/01-docker/
+- domain-13-container-runtime/02-image-management/
+- domain-13-container-runtime/03-containerd-cri-o/
+- domain-13-container-runtime/04-image-build/
+- domain-13-container-runtime/05-runtime-migration/
 - [[domain-13-container-runtime/98-merged-indexes/index.md|Merged Indexes]]
 
 ## 文档

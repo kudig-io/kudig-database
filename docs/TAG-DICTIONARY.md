@@ -134,7 +134,7 @@ tier: peripheral---
 | `java` | Java 生态 | domain-java-kubernetes, 相关 |
 | `terway` | Terway CNI | domain-5-networking, 相关 |
 | `febm` | FEBM 取证 | topic-febm, 相关 |
-| `ai-agent` | AI 智能体 | topic-ai-agent, 相关 |
+| `ai-agent` | AI 智能体 | 02-ai-agents, 相关 |
 | `ai-coding` | AI 编程 | topic-ai-coding, 相关 |
 | `qa` | QA 评测语料 | topic-qa-corpus, 相关 |
 | `moc` | MOC 导航页 | 所有 MOC.md 文件 |

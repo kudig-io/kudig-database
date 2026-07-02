@@ -96,7 +96,7 @@ The KUDIG-DB is a 3,532-file Kubernetes operations knowledge base designed for b
 │  topic-cheat-sheet Quick reference cards                     │
 ├─────────────────────────────────────────────────────────────┤
 │  Layer 5: Emerging Topics                                    │
-│  topic-ai-agent    AI Agent fundamentals, frameworks, deployment│
+│  02-ai-agents    AI Agent fundamentals, frameworks, deployment│
 │  topic-ai-coding   OpenRouter, OpenCode AI coding tools       │
 │  topic-application-architecture  96 industry architecture patterns│
 │  domain-java-kubernetes  Java on K8s                          │

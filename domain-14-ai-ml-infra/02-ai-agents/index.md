@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace|Openclaw Workspace]]
+- domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/
 
 ## 文档
 

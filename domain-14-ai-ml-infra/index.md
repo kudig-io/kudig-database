@@ -21,11 +21,11 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-14-ai-ml-infra/01-ai-infra|Ai Infra]]
-- [[domain-14-ai-ml-infra/02-ai-agents|Ai Agents]]
+- domain-14-ai-ml-infra/01-ai-infra/
+- domain-14-ai-ml-infra/02-ai-agents/
 - [[domain-14-ai-ml-infra/98-merged-indexes/index.md|Merged Indexes]]
-- [[domain-14-ai-ml-infra/topic-ai-agent|Topic Ai Agent]]
-- [[domain-14-ai-ml-infra/topic-ai-coding|Topic Ai Coding]]
+- domain-14-ai-ml-infra/02-ai-agents/
+- domain-14-ai-ml-infra/topic-ai-coding/
 
 ## 文档
 

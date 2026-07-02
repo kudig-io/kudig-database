@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/reference|Reference]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/scripts|Scripts]]
+- domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/reference/
+- domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/scripts/
 
 ## 文档
 

@@ -1,6 +1,6 @@
-本页是 AI Agent 工程的全域导航入口，覆盖从 RAG 检索增强生成、多 Agent 编排架构、安全护栏体系到 Kubernetes 生产部署的完整工程链路。内容源自 `topic-ai-agent` 专题 50 篇文档的生产级实践总结，面向需要在企业环境中落地 Agent 系统的高级工程师，提供架构决策依据、代码级实现参考和经过验证的运维指标。相邻页面 [AI 基础设施：GPU 调度、分布式训练、LLM 推理与成本优化](17-ai-ji-chu-she-shi-gpu-diao-du-fen-bu-shi-xun-lian-llm-tui-li-yu-cheng-ben-you-hua) 覆盖底层 GPU 与推理基础设施，[AI 语料库配置：RAG 分块策略、场景化 Profile 与向量库构建](19-ai-yu-liao-ku-pei-zhi-rag-fen-kuai-ce-lue-chang-jing-hua-profile-yu-xiang-liang-ku-gou-jian) 聚焦语料库分块策略与场景化 Profile 设计。
+本页是 AI Agent 工程的全域导航入口，覆盖从 RAG 检索增强生成、多 Agent 编排架构、安全护栏体系到 Kubernetes 生产部署的完整工程链路。内容源自 `02-ai-agents` 专题 50 篇文档的生产级实践总结，面向需要在企业环境中落地 Agent 系统的高级工程师，提供架构决策依据、代码级实现参考和经过验证的运维指标。相邻页面 [AI 基础设施：GPU 调度、分布式训练、LLM 推理与成本优化](17-ai-ji-chu-she-shi-gpu-diao-du-fen-bu-shi-xun-lian-llm-tui-li-yu-cheng-ben-you-hua) 覆盖底层 GPU 与推理基础设施，[AI 语料库配置：RAG 分块策略、场景化 Profile 与向量库构建](19-ai-yu-liao-ku-pei-zhi-rag-fen-kuai-ce-lue-chang-jing-hua-profile-yu-xiang-liang-ku-gou-jian) 聚焦语料库分块策略与场景化 Profile 设计。
 
-Sources: [README.md](topic-ai-agent/README.md#L1-L77)
+Sources: [README.md](02-ai-agents/README.md#L1-L77)
 
 ## 架构全景：Agent 工程的四层能力模型
 
@@ -43,7 +43,7 @@ graph TB
 
 **Agent 四大核心能力**定义了系统边界：**感知（Perceive）**接收环境输入（文本、API 响应、文件内容）；**规划（Plan）**通过 CoT/ToT 将复杂目标分解为子任务序列；**行动（Act）**通过 Function Calling 调用工具执行操作；**学习（Learn）**从执行结果获取反馈调整决策。Agent Loop 的终止条件设计是工程落地的第一道关卡——需要同时考虑任务完成度、最大迭代次数、超时阈值和连续失败次数四重约束。
 
-Sources: [01-ai-agent-fundamentals.md](topic-ai-agent/01-ai-agent-fundamentals.md#L9-L153), [README.md](topic-ai-agent/README.md#L80-L115)
+Sources: [01-ai-agent-fundamentals.md](02-ai-agents/01-ai-agent-fundamentals.md#L9-L153), [README.md](02-ai-agents/README.md#L80-L115)
 
 ## Agent 框架选型矩阵
 
@@ -61,7 +61,7 @@ Sources: [01-ai-agent-fundamentals.md](topic-ai-agent/01-ai-agent-fundamentals.m
 
 **选型决策树**：如果项目需要精确控制执行流程和状态管理 → LangGraph；如果 RAG 质量是核心诉求 → LlamaIndex；如果团队无 AI 工程师 → Dify；如果需要企业级多 Agent 编排 → AgentScope。LangChain 适合需要广泛集成能力的通用场景，但其多层抽象带来的调试复杂度需要在架构评审阶段充分评估。
 
-Sources: [03-agent-frameworks-comparison.md](topic-ai-agent/03-agent-frameworks-comparison.md#L1-L200)
+Sources: [03-agent-frameworks-comparison.md](02-ai-agents/03-agent-frameworks-comparison.md#L1-L200)
 
 ## RAG：检索增强生成的工程深水区
 
@@ -118,7 +118,7 @@ Re-ranking 是 RAG 管道中提升检索精度最有效的单一手段。使用 
 | 检索延迟 | <500ms | <200ms | P95 |
 | 端到端延迟 | <3s | <1.5s | 含检索+生成 |
 
-Sources: [04-rag-knowledge-retrieval.md](topic-ai-agent/04-rag-knowledge-retrieval.md#L1-L200), [04-rag-knowledge-retrieval.md](topic-ai-agent/04-rag-knowledge-retrieval.md#L202-L501), [04-rag-knowledge-retrieval.md](topic-ai-agent/04-rag-knowledge-retrieval.md#L618-L793)
+Sources: [04-rag-knowledge-retrieval.md](02-ai-agents/04-rag-knowledge-retrieval.md#L1-L200), [04-rag-knowledge-retrieval.md](02-ai-agents/04-rag-knowledge-retrieval.md#L202-L501), [04-rag-knowledge-retrieval.md](02-ai-agents/04-rag-knowledge-retrieval.md#L618-L793)
 
 ## Tool Use：从语言理解到行动执行
 
@@ -126,7 +126,7 @@ Tool Use 是 Agent 从"语言理解者"变为"行动执行者"的关键能力跃
 
 **工具描述质量**直接决定 LLM 的工具选择准确率——description 是 LLM 决定是否调用该工具的**唯一依据**。优秀工具描述应包含：功能一句话说明、适用场景、关键参数约束。反面教材是冗长的描述（约 150 tokens/工具），优化后可精简至 30 tokens/工具，对 20 个工具的 Agent 每次调用节省 2400 tokens。
 
-Sources: [05-tool-use-function-calling.md](topic-ai-agent/05-tool-use-function-calling.md#L1-L200)
+Sources: [05-tool-use-function-calling.md](02-ai-agents/05-tool-use-function-calling.md#L1-L200)
 
 ## 多 Agent 编排：六大架构模式
 
@@ -155,7 +155,7 @@ Sources: [05-tool-use-function-calling.md](topic-ai-agent/05-tool-use-function-c
 
 **Blackboard 模式**通过共享知识黑板实现 Agent 间的异步读写协作。每个 Agent 只关注自己专业的黑板 Key，写入分析结果并附带置信度。当多个 Agent 对同一 Key 写入冲突数据时，系统自动选择置信度最高的结果。Blackboard 支持订阅机制（observer pattern），当特定 Key 变更时自动通知相关 Agent。
 
-Sources: [06-multi-agent-orchestration.md](topic-ai-agent/06-multi-agent-orchestration.md#L1-L399)
+Sources: [06-multi-agent-orchestration.md](02-ai-agents/06-multi-agent-orchestration.md#L1-L399)
 
 ## 记忆管理：Agent 的持续学习能力
 
@@ -170,7 +170,7 @@ Sources: [06-multi-agent-orchestration.md](topic-ai-agent/06-multi-agent-orchest
 
 上下文窗口管理的关键工程决策是 Token 预算规划——需要为系统提示、工具定义、输出预留、对话历史分别分配 Token 配额。当历史超出预算时，智能截断策略（Hybrid = 滑动窗口 + 摘要压缩 + 重要性保留）在保留关键信息的同时控制 Token 消耗。
 
-Sources: [07-memory-context-management.md](topic-ai-agent/07-memory-context-management.md#L1-L200)
+Sources: [07-memory-context-management.md](02-ai-agents/07-memory-context-management.md#L1-L200)
 
 ## 安全护栏：OWASP LLM Top 10 防御体系
 
@@ -194,7 +194,7 @@ Agent 系统面临的安全威胁与传统 Web 安全截然不同——提示注
 
 使用 Microsoft Presidio 进行 PII 检测与脱敏处理，K8s 运维场景中需覆盖 IP 地址、邮箱、姓名、AWS Access Key、K8s Secret 等敏感类型。企业合规矩阵涵盖 GDPR（数据最小化）、SOC 2（审计日志）、ISO 27001（变更控制）、中国网络安全法（数据本地化）、生成式 AI 管理办法（内容安全 + AIGC 水印）等法规的 Agent 系统实施措施。
 
-Sources: [10-security-guardrails.md](topic-ai-agent/10-security-guardrails.md#L1-L200), [10-security-guardrails.md](topic-ai-agent/10-security-guardrails.md#L200-L598)
+Sources: [10-security-guardrails.md](02-ai-agents/10-security-guardrails.md#L1-L200), [10-security-guardrails.md](02-ai-agents/10-security-guardrails.md#L200-L598)
 
 ## 成本与延迟优化：10-100x 压缩空间
 
@@ -202,7 +202,7 @@ Sources: [10-security-guardrails.md](topic-ai-agent/10-security-guardrails.md#L1
 
 **三大优化杠杆**：系统提示从 ~500 tokens 压缩至 ~35 tokens（节省 93%）；工具描述从 ~150 tokens/个精简至 ~30 tokens/个；对话历史通过自适应压缩器智能截断（保留最近 2 轮 + 早期摘要）。结合语义缓存（对相似查询直接返回缓存结果）、模型路由（简单查询用 GPT-4o-mini、复杂查询用 GPT-4o）和 Prompt Caching（利用 LLM 前缀缓存机制），单次任务成本可压缩 90% 以上。
 
-Sources: [11-cost-latency-optimization.md](topic-ai-agent/11-cost-latency-optimization.md#L1-L200)
+Sources: [11-cost-latency-optimization.md](02-ai-agents/11-cost-latency-optimization.md#L1-L200)
 
 ## 评测体系与可观测性
 
@@ -210,7 +210,7 @@ Sources: [11-cost-latency-optimization.md](topic-ai-agent/11-cost-latency-optimi
 
 **LLM-as-Judge** 是自动化评测的核心方法——使用 GPT-4o 等强模型作为评委，对 Agent 输出从技术准确性、可操作性、完整性和安全性四维度打分（1-5 分）。可观测性工具链推荐 Langfuse（自托管，满足合规要求）配合 OpenTelemetry 全链路追踪，实现从用户请求到工具调用到 LLM 响应的完整轨迹可视化。
 
-Sources: [08-agent-evaluation-observability.md](topic-ai-agent/08-agent-evaluation-observability.md#L1-L200)
+Sources: [08-agent-evaluation-observability.md](02-ai-agents/08-agent-evaluation-observability.md#L1-L200)
 
 ## 生产部署：Kubernetes 上的 Agent 服务
 
@@ -234,7 +234,7 @@ LLM 推理服务（vLLM）是 GPU 资源消耗的核心组件。生产配置关�
 | 流式输出（SSE） | 对话场景、用户实时体验 | 无限制 | 中 |
 | 异步任务 | 长时间分析、批处理、多 Agent | 无限制 | 高 |
 
-Sources: [09-production-deployment-guide.md](topic-ai-agent/09-production-deployment-guide.md#L1-L240), [09-production-deployment-guide.md](topic-ai-agent/09-production-deployment-guide.md#L245-L599)
+Sources: [09-production-deployment-guide.md](02-ai-agents/09-production-deployment-guide.md#L1-L240), [09-production-deployment-guide.md](02-ai-agents/09-production-deployment-guide.md#L245-L599)
 
 ## 企业级实战：K8s 运维 AIOps Agent
 
@@ -244,22 +244,22 @@ Sources: [09-production-deployment-guide.md](topic-ai-agent/09-production-deploy
 
 核心工作流：**分诊（triage）** → **并行数据收集（collect_data）** → **知识检索（retrieve_knowledge，从 kudig-database + 历史工单）** → **综合诊断（diagnose）** → **人工审批（approve，高风险操作）** → **执行修复（execute_fix）**。每个节点通过 LangGraph StateGraph 串联，支持条件路由和人工门禁。
 
-Sources: [12-enterprise-case-studies.md](topic-ai-agent/12-enterprise-case-studies.md#L1-L200)
+Sources: [12-enterprise-case-studies.md](02-ai-agents/12-enterprise-case-studies.md#L1-L200)
 
 ## 学习路径与延伸阅读
 
-根据你的角色和目标，推荐以下学习路径（所有文档位于 `topic-ai-agent/` 目录）：
+根据你的角色和目标，推荐以下学习路径（所有文档位于 `02-ai-agents/` 目录）：
 
 **AI 应用工程师**（构建 Agent 核心能力）：
-1. [Agent 基础与核心架构](topic-ai-agent/01-ai-agent-fundamentals.md) → [框架对比](topic-ai-agent/03-agent-frameworks-comparison.md) → [RAG 深度指南](topic-ai-agent/04-rag-knowledge-retrieval.md) → [Tool Use 规范](topic-ai-agent/05-tool-use-function-calling.md) → [记忆管理](topic-ai-agent/07-memory-context-management.md)
+1. [Agent 基础与核心架构](02-ai-agents/01-ai-agent-fundamentals.md) → [框架对比](02-ai-agents/03-agent-frameworks-comparison.md) → [RAG 深度指南](02-ai-agents/04-rag-knowledge-retrieval.md) → [Tool Use 规范](02-ai-agents/05-tool-use-function-calling.md) → [记忆管理](02-ai-agents/07-memory-context-management.md)
 
 **架构师 / 平台工程师**（设计生产系统）：
-1. [多 Agent 编排](topic-ai-agent/06-multi-agent-orchestration.md) → [生产部署](topic-ai-agent/09-production-deployment-guide.md) → [评测与可观测性](topic-ai-agent/08-agent-evaluation-observability.md) → [Agent Harness 工程](topic-ai-agent/30-agent-harness-engineering.md)
+1. [多 Agent 编排](02-ai-agents/06-multi-agent-orchestration.md) → [生产部署](02-ai-agents/09-production-deployment-guide.md) → [评测与可观测性](02-ai-agents/08-agent-evaluation-observability.md) → [Agent Harness 工程](02-ai-agents/30-agent-harness-engineering.md)
 
 **安全 / 合规工程师**（构建防御体系）：
-1. [安全护栏](topic-ai-agent/10-security-guardrails.md) → [成本优化](topic-ai-agent/11-cost-latency-optimization.md) → [Harness 安全约束](topic-ai-agent/35-agent-harness-security-constraints.md)
+1. [安全护栏](02-ai-agents/10-security-guardrails.md) → [成本优化](02-ai-agents/11-cost-latency-optimization.md) → [Harness 安全约束](02-ai-agents/35-agent-harness-security-constraints.md)
 
 **技术决策者**（评估投资回报）：
-1. [企业级实战案例](topic-ai-agent/12-enterprise-case-studies.md) → [Agent 赋能设计](topic-ai-agent/14-agent-kudig-design-strategy.md) → [可信智能体体系](topic-ai-agent/13-trusted-agent-system-fiscal-plan.md)
+1. [企业级实战案例](02-ai-agents/12-enterprise-case-studies.md) → [Agent 赋能设计](02-ai-agents/14-agent-kudig-design-strategy.md) → [可信智能体体系](02-ai-agents/13-trusted-agent-system-fiscal-plan.md)
 
 **关联知识域**：本页内容与 [AI 基础设施](17-ai-ji-chu-she-shi-gpu-diao-du-fen-bu-shi-xun-lian-llm-tui-li-yu-cheng-ben-you-hua) 形成 GPU 底层到 Agent 应用层的闭环，与 [AI 语料库配置](19-ai-yu-liao-ku-pei-zhi-rag-fen-kuai-ce-lue-chang-jing-hua-profile-yu-xiang-liang-ku-gou-jian) 形成 RAG 数据管道的上下游衔接。故障排查场景可结合 [结构化故障排查](15-jie-gou-hua-gu-zhang-pai-cha-pei-zhi-you-xian-fang-fa-lun-yu-quan-zu-jian-pai-zhang-zhi-nan) 和 [FTA 故障树分析](13-fta-gu-zhang-shu-fen-xi-cong-yan-yi-tui-li-dao-ai-agent-zhi-shi-gu-jia) 的方法论作为 Agent 推理骨架。

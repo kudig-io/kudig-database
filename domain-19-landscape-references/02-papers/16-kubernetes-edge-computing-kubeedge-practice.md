@@ -1606,7 +1606,7 @@ if __name__ == "__main__":
 
 - [[papers|#papers Hub]] — tag hub
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 

@@ -86,7 +86,7 @@ graph LR
     FEBM --> |归纳法| TS
     TS12[domain-10-troubleshooting-diagnostics] --> TS
     STS[topic-structural] --> TS
-    SKILLS --> |自动化| AGENT[topic-ai-agent]
+    SKILLS --> |自动化| AGENT[02-ai-agents]
 ```
 
 ---
@@ -117,10 +117,10 @@ graph LR
 | domain-03-networking-traffic 网络 | domain-03-networking-traffic 网络基础 | domain-10-troubleshooting-diagnostics 排障 |
 | domain-04-storage-data 存储 | domain-04-storage-data 存储基础 | domain-10-troubleshooting-diagnostics 排障 |
 | domain-06-observability 可观测 | domain-01-cluster-fundamentals/4/5 | domain-07-platform-engineering 平台运维 |
-| domain-14-ai-ml-infra AI | domain-02-workloads-applications 工作负载 | topic-ai-agent |
+| domain-14-ai-ml-infra AI | domain-02-workloads-applications 工作负载 | 02-ai-agents |
 | domain-10-troubleshooting-diagnostics 排障 | domain-1~8 任一 | domain-10-troubleshooting-diagnostics/topic-fta/skills |
 | topic-fta | domain-10-troubleshooting-diagnostics 排障基础 | topic-skills |
-| topic-skills | topic-fta + domain-10-troubleshooting-diagnostics | topic-ai-agent |
+| topic-skills | topic-fta + domain-10-troubleshooting-diagnostics | 02-ai-agents |
 
 ---
 

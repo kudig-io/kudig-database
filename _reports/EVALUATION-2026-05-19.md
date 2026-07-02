@@ -67,10 +67,10 @@ prerequisites:
 
 **优势:**
 - [✓] 1,524,170 行、40 个知识域、97 个行业场景 — 远超同领域知识库
-- [✓] 已有自我差距分析 (`domain-14-ai-ml-infra/topic-ai-agent/15-agent-corpus-gap-analysis.md`)，精准识别了 10 大类缺失，方法论 (Agent Readiness 三层模型) 专业
+- [✓] 已有自我差距分析 (`domain-14-ai-ml-infra/02-ai-agents/15-agent-corpus-gap-analysis.md`)，精准识别了 10 大类缺失，方法论 (Agent Readiness 三层模型) 专业
 - [✓] 多粒度文档: domain 深度文档 + topic-fta 推理骨架 + topic-skills 诊断技能 + topic-cheat-sheet 速查卡 + topic-dictionary 术语词典
 - [✓] FTA 故障树 77 篇、排障文档 50 篇、运维技能 34 篇 — 排障推理链完整
-- [✓] topic-ai-agent 专题 58 篇，覆盖 Agent 全栈: 基础→框架→RAG→多 Agent→AgentScope→CLI Agent→Harness 工程→OpenClaw 架构
+- [✓] 02-ai-agents 专题 58 篇，覆盖 Agent 全栈: 基础→框架→RAG→多 Agent→AgentScope→CLI Agent→Harness 工程→OpenClaw 架构
 
 **差距:**
 - [△] 缺少真实生产工单/Case Study 语料 — 诊断-修复的闭环验证数据
@@ -95,7 +95,7 @@ prerequisites:
 ### 3. Agent 工程知识深度 — 评分: 9.0/10
 
 **优势:**
-- [✓] topic-ai-agent 系列是国内最完整的 Agent 工程知识体系之一
+- [✓] 02-ai-agents 系列是国内最完整的 Agent 工程知识体系之一
 - [✓] 包含代码级实现: LangGraph/AutoGen/AgentScope 完整代码示例
 - [✓] 06-multi-agent-orchestration.md 包含 6 大模式 + 生产代码
 - [✓] 42-model-harness-compatibility-matrix.md 全系列模型兼容性矩阵

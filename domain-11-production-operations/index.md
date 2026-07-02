@@ -21,13 +21,13 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-11-production-operations/01-finops|Finops]]
-- [[domain-11-production-operations/02-governance|Governance]]
-- [[domain-11-production-operations/03-incident-response|Incident Response]]
-- [[domain-11-production-operations/04-green-computing|Green Computing]]
+- domain-11-production-operations/01-finops/
+- domain-11-production-operations/02-governance/
+- domain-11-production-operations/03-incident-response/
+- domain-11-production-operations/04-green-computing/
 - [[domain-11-production-operations/98-merged-indexes/index.md|Merged Indexes]]
-- [[domain-11-production-operations/reply-templates|Reply Templates]]
-- [[domain-11-production-operations/ticket-cases|Ticket Cases]]
+- domain-11-production-operations/reply-templates/
+- domain-11-production-operations/ticket-cases/
 
 ## 文档
 

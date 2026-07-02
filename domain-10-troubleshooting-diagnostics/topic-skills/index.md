@@ -26,11 +26,11 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/assessment|Assessment]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue|Dialogue]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/scripts|Scripts]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set|Skill Set]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skills-run|Skills Run]]
+- domain-10-troubleshooting-diagnostics/topic-skills/assessment/
+- domain-10-troubleshooting-diagnostics/topic-skills/dialogue/
+- domain-10-troubleshooting-diagnostics/topic-skills/scripts/
+- domain-10-troubleshooting-diagnostics/topic-skills/skill-set/
+- domain-10-troubleshooting-diagnostics/topic-skills/skills-run/
 
 ## 文档
 

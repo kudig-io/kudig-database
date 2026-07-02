@@ -21,14 +21,14 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-03-networking-traffic/00-core-k8s-networking|Core K8S Networking]]
-- [[domain-03-networking-traffic/01-fundamentals|Fundamentals]]
-- [[domain-03-networking-traffic/02-service-mesh|Service Mesh]]
-- [[domain-03-networking-traffic/03-api-gateway|Api Gateway]]
-- [[domain-03-networking-traffic/04-ebpf|Ebpf]]
+- domain-03-networking-traffic/00-core-k8s-networking/
+- domain-03-networking-traffic/01-fundamentals/
+- domain-03-networking-traffic/02-service-mesh/
+- domain-03-networking-traffic/03-api-gateway/
+- domain-03-networking-traffic/04-ebpf/
 - [[domain-03-networking-traffic/98-merged-indexes/index.md|Merged Indexes]]
-- [[domain-03-networking-traffic/99-attachments|Attachments]]
-- [[domain-03-networking-traffic/topic-terway|Topic Terway]]
+- domain-03-networking-traffic/99-attachments/
+- domain-03-networking-traffic/topic-terway/
 
 ## 文档
 

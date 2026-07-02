@@ -115,7 +115,7 @@ prerequisites:
 
 **待改进示例**：
 - `domain-07-platform-engineering/01-platform-ops-overview.md`：最佳实践原则过于简短（仅4点）
-- `domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md`：最佳实践与反模式分离，缺乏详细说明
+- `domain-14-ai-ml-infra/02-ai-agents/06-multi-agent-orchestration.md`：最佳实践与反模式分离，缺乏详细说明
 
 ## 改进措施
 

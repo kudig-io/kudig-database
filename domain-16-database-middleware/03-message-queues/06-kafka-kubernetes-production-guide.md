@@ -53,29 +53,34 @@ authors:
 
 # Kafka Kubernetes 生产指南
 
-本指南面向需要在 Kubernetes 生产环境中运行 Apache Kafka 的 SRE 与平台工程师，提供从架构选型、Operator 部署、Topic 设计、性能调优到监控告警与灾难恢复的完整运行手册。内容基于 Strimzi 0.45+ 与 Kafka 3.9，并默认推荐 KRaft 模式以简化元数据管理。
+本指南面向需要在 Kubernetes 生产环境中运行 Apache Kafka 的 SRE 与平台工程师，提供从架构选型、Operator 部署、Topic 设计、性能调优到监控告警与灾难恢复的完整运行手册。内容基于 Strimzi 0.45+ 与 Kafka 3.9，并默认推荐 KRaft 模式以简化元数据管理。Kafka 作为事件驱动架构的核心枢纽，其稳定性直接影响微服务间的异步通信、日志聚合、CDC 数据管道以及实时流处理链路，因此生产部署必须从第一天就关注高可用、数据持久化、安全与可观测性。
 
 ## 1. 适用场景与范围
 
+本指南适用于以下场景：
+
 - 事件驱动微服务、日志聚合、CDC（变更数据捕获）、实时流处理等场景的 Kafka 集群运维。
 - 使用 Strimzi Operator 进行声明式管理的 Kafka on Kubernetes 部署。
-- 不覆盖自研 Helm Chart 或裸 Pod 部署的 Kafka 集群；如需手动部署，应额外评估控制面复杂度。
-- 重点关注生产就绪要求，包括高可用、持久化、安全、监控与可恢复性。
+- 需要为 Kafka 集群建立生产就绪基线、监控告警、备份恢复与升级流程的团队。
+
+本指南不覆盖自研 Helm Chart 或裸 Pod 部署的 Kafka 集群；如需手动部署，应额外评估控制面复杂度与长期维护成本。同时，本指南重点关注 Kafka Broker 与 Topic 的运维，对于 Kafka Connect、Kafka Streams 与 ksqlDB 的详细配置请参考官方文档与相关专题指南。
 
 ## 2. 前置条件与工具
 
-- Kubernetes 1.28–1.33，节点具备跨可用区（AZ）分布。
-- StorageClass 支持块存储或 SSD backing，建议 `volumeBindingMode: WaitForFirstConsumer`。
+在开始部署前，请确认以下前置条件已经满足：
+
+- Kubernetes 1.28–1.33，节点具备跨可用区（AZ）分布，控制面节点与工作节点之间网络稳定。
+- StorageClass 支持块存储或 SSD backing，建议 `volumeBindingMode: WaitForFirstConsumer`，以确保 PVC 与 Pod 调度到同一 AZ。
 - 已安装 Helm 3、kubectl，具备管理 CRD 的权限。
 - 已部署 Prometheus + Grafana，用于指标采集与可视化。
-- 可选：cert-manager 用于 TLS 证书自动轮换；Velero 用于命名空间级备份。
-- 建议预先完成内部镜像仓库与 Kafka 镜像同步，避免生产环境直接拉取公网镜像。
+- 可选但强烈建议：cert-manager 用于 TLS 证书自动轮换；Velero 用于命名空间级备份。
+- 建议预先完成内部镜像仓库与 Kafka 镜像同步，避免生产环境直接拉取公网镜像，以降低供应链风险并提升拉取速度。
 
 ## 3. 核心概念与架构
 
 ### 3.1 KRaft vs ZooKeeper
 
-Kafka 从 2.8 开始引入 KRaft（Kafka Raft）模式，从 3.3 起标记为生产可用。KRaft 用 Kafka 内部的 Raft 仲裁取代了外部 ZooKeeper，从而将元数据管理统一在 Kafka 内部。
+Kafka 从 2.8 开始引入 KRaft（Kafka Raft）模式，从 3.3 起标记为生产可用。KRaft 用 Kafka 内部的 Raft 仲裁取代了外部 ZooKeeper，从而将元数据管理统一在 Kafka 内部。这一架构变革显著降低了 Kafka on Kubernetes 的运维复杂度，因为不再需要为 ZooKeeper 维护独立的 StatefulSet、存储与升级流程。
 
 | 维度 | KRaft（推荐） | ZooKeeper（传统） |
 |---|---|---|
@@ -87,7 +92,7 @@ Kafka 从 2.8 开始引入 KRaft（Kafka Raft）模式，从 3.3 起标记为生
 | Strimzi 支持 | 0.35+ | 全版本 |
 | 迁移成本 | 一次性、不可逆 | 无需迁移 |
 
-生产环境建议优先使用 KRaft 模式，仅在遗留系统或依赖 ZooKeeper 的周边工具链无法迁移时保留 ZK。迁移到 KRaft 前，必须在 staging 环境完整演练，并准备元数据快照回退方案。
+生产环境建议优先使用 KRaft 模式，仅在遗留系统或依赖 ZooKeeper 的周边工具链无法迁移时保留 ZK。迁移到 KRaft 前，必须在 staging 环境完整演练，并准备元数据快照回退方案。需要特别注意的是，KRaft 模式下的 Controller 与 Broker 可以合并部署，也可以分离部署；对于生产环境，建议分离部署以获得更好的故障隔离能力。
 
 ### 3.2 Strimzi 架构要点
 
@@ -98,20 +103,20 @@ Strimzi 通过以下 CRD 管理 Kafka 生命周期：
 - `KafkaUser`：声明式用户与 ACL。
 - `KafkaConnect` / `KafkaMirrorMaker2`：流处理与跨集群复制。
 
-Topic Operator 与 User Operator 可采用实体 Operator（Entity Operator）或 Unidirectional 模式，生产环境建议启用并配置副本与反亲和性。实体 Operator 将 Topic 和 User 的管理集中在同一 Deployment，适合中小规模；Unidirectional 模式将两个 Operator 分离，便于独立扩缩容与故障隔离。
+Topic Operator 与 User Operator 可采用实体 Operator（Entity Operator）或 Unidirectional 模式，生产环境建议启用并配置副本与反亲和性。实体 Operator 将 Topic 和 User 的管理集中在同一 Deployment，适合中小规模；Unidirectional 模式将两个 Operator 分离，便于独立扩缩容与故障隔离。在生产环境中，Operator 本身也应被视为关键服务，配置至少两个副本并跨 AZ 分布。
 
 ### 3.3 Topic、Partition、Replica 设计
 
-Topic、Partition 与 Replica 是 Kafka 容量与可靠性的核心杠杆。
+Topic、Partition 与 Replica 是 Kafka 容量与可靠性的核心杠杆。合理的设计能够在吞吐、延迟与可用性之间取得平衡，而不当的设计则会导致热点、 rebalance 风暴或数据丢失风险。
 
-- **Topic 命名**：采用 `<domain>.<event-name>.<version>` 结构，便于权限治理与版本管理。例如 `payment.order.v1`、`log.app.v2`。
+- **Topic 命名**：采用 `<domain>.<event-name>.<version>` 结构，便于权限治理与版本管理。例如 `payment.order.v1`、`log.app.v2`。清晰的命名规范有助于在多团队共享集群时快速识别数据所有者与用途。
 - **Partition 数量**：
   - 计算方式：`max(目标吞吐 / 单 Partition 吞吐, 消费者实例数)`。
   - 单 Broker 建议不超过 1000–2000 个 Partition（含副本）。
   - 避免过度分区，过多 Partition 会增加 Controller 负担、Leader 选举时间与文件句柄消耗。
-  - 初始分区数建议为预期峰值消费者实例数的 2–3 倍，预留扩容空间。
-- **Replica Factor**：生产环境至少 `3`，关键 Topic 可配置 `min.insync.replicas=2` 与 `acks=all`，确保写入多数确认。
-- **Retention**：按业务与合规要求设置 `retention.ms` / `retention.bytes`，时序类数据优先使用压缩与降采样。金融类流水建议保留 7–30 天，日志类可缩短至 1–3 天。
+  - 初始分区数建议为预期峰值消费者实例数的 2–3 倍，预留扩容空间。扩容 Partition 会改变消息顺序保证，因此应在设计阶段尽量预留。
+- **Replica Factor**：生产环境至少 `3`，关键 Topic 可配置 `min.insync.replicas=2` 与 `acks=all`，确保写入多数确认。副本因子为 2 时，单节点故障可能导致部分 Partition 不可用；副本因子为 1 仅适用于开发测试环境。
+- **Retention**：按业务与合规要求设置 `retention.ms` / `retention.bytes`，时序类数据优先使用压缩与降采样。金融类流水建议保留 7–30 天，日志类可缩短至 1–3 天。Retention 过小可能导致消费者故障时数据被过早删除，过大则会增加存储成本。
 
 ### 3.4 高可用与拓扑分布
 
@@ -124,7 +129,19 @@ spec:
       topologyKey: topology.kubernetes.io/zone
 ```
 
-同时应配置 Pod 反亲和性，确保同一 Broker 的多个 Pod 不会调度到同一节点。
+同时应配置 Pod 反亲和性，确保同一 Broker 的多个 Pod 不会调度到同一节点。对于控制面节点上的 Kafka Controller，也应避免与 etcd 或 API Server 竞争磁盘与网络资源。
+
+### 3.5 存储规划
+
+Kafka 是磁盘密集型服务，存储性能直接决定吞吐与延迟上限。生产环境应优先选择 SSD 或 NVMe  backing 的 StorageClass，并满足以下要求：
+
+- **StorageClass 参数**：使用 `volumeBindingMode: WaitForFirstConsumer`，确保 PVC 与 Pod 调度到同一可用区；启用 `AllowVolumeExpansion: true`，支持在线扩容。
+- **磁盘类型**：SSD 是最低要求，NVMe 可显著降低 fsync 延迟；避免使用网络附加存储（如 NFS）作为 Kafka 数据目录。
+- **容量估算**：按 `日写入量 × 副本因子 × 保留天数 × 1.2` 估算，预留 20% 突发余量。例如日写入 1 TB、副本因子 3、保留 7 天，则单 Broker 约需 `(1 TB × 3 × 7 / 3) × 1.2 = 8.4 TB`。
+- **独立分区**：将 Kafka 日志目录放在独立分区或独立磁盘，避免与系统日志、容器运行时数据竞争 IO。对于 etcd 共存节点，必须物理隔离。
+- **快照与备份**：配置 CSI 快照计划，至少每日一次；关键 Topic 同时使用 MirrorMaker 2 复制到异地集群，避免单点存储故障。
+
+定期检查 `LogFlushLatency` 与节点 `iostat -x` 的 `await` 指标，若 `await` 持续高于 50 ms，应考虑升级到更高性能存储或拆分热点 Topic。
 
 ## 4. 标准操作流程
 
@@ -150,7 +167,7 @@ kubectl get deployment strimzi-cluster-operator -n kafka
 kubectl get crd | grep strimzi.io
 ```
 
-建议将 Operator 的镜像 tag 固定，避免自动升级引入未经测试的 CRD 变更。
+建议将 Operator 的镜像 tag 固定，避免自动升级引入未经测试的 CRD 变更。在多租户场景中，可以部署多个 Strimzi Operator 分别 watch 不同命名空间，以降低单一 Operator 故障的影响范围。
 
 ### 4.2 部署 KRaft Kafka 集群
 
@@ -286,7 +303,7 @@ spec:
 | `acks` | 1 / all | 按一致性要求选择 |
 | `compression.type` | lz4 / zstd | 降低网络与磁盘开销 |
 
-通过 Strimzi `spec.kafka.config` 注入 Broker 级配置；生产者/消费者配置在应用侧生效。对于高吞吐场景，建议优先调整 `batch.size` 与 `linger.ms`，而非盲目增加 Partition 数量。
+通过 Strimzi `spec.kafka.config` 注入 Broker 级配置；生产者/消费者配置在应用侧生效。对于高吞吐场景，建议优先调整 `batch.size` 与 `linger.ms`，而非盲目增加 Partition 数量。同时，应避免在生产环境中使用 `acks=0`，因为这会牺牲持久化保证。
 
 ### 4.6 滚动升级
 
@@ -312,6 +329,8 @@ spec:
 kubectl exec -n kafka prod-kafka-broker-0 -- \
   bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe | grep -c "Isr"
 ```
+
+升级过程中应密切关注 `UnderReplicatedPartitions` 与 `ActiveControllerCount` 指标，确保元数据一致性与副本同步正常。
 
 ## 5. 关键检查点与验证命令
 

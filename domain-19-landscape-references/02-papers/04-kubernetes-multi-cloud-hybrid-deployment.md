@@ -1017,7 +1017,7 @@ vCluster作为跨云统一租户层，在不同云的Host集群上创建虚拟�
 
 - [[papers|#papers Hub]] — tag hub
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 
 <!-- risk-assessed -->

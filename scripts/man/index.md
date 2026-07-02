@@ -21,8 +21,8 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[scripts/man/man1|Man1]]
-- [[scripts/man/man8|Man8]]
+- scripts/man/man1/
+- scripts/man/man8/
 
 ## 文档
 

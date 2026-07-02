@@ -42,7 +42,7 @@ updated: "2026-06-26"
 - `concepts/containerd-pod-lifecycle.md` — containerd 容器生命周期与 Pod 管理
 - `concepts/etcd-containerd-storage.md` — etcd 与 containerd 存储架构
 - `concepts/kubernetes-containerd-integration.md` — Kubernetes 与 containerd 集成深度分析
-- `concepts/ai-agent-MOC.md` — topic-ai-agent MOC
+- `concepts/ai-agent-MOC.md` — 02-ai-agents MOC
 - `concepts/prometheus-argocd-monitoring.md` — Prometheus 与 ArgoCD 监控集成
 - `skills/kubeadm-fta.md` — Kubeadm Fta
 - `skills/openkruise-fta.md` — OpenKruise 工作负载异常故障树分析 (skills)

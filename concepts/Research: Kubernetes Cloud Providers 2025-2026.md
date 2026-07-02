@@ -79,7 +79,7 @@ Karpenter 2025 年正式支持 Azure（预览），GCP 兼容层由社区维护�
 
 ## Related
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 
 <!-- risk-assessed -->

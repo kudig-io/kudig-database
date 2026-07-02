@@ -53,8 +53,9 @@ prerequisites:
 | 跨域生产 Runbook / 操作指南 | 8 | 覆盖证书、升级、灾备、Fleet GitOps、事件响应、FinOps、AI/ML、边缘 |
 | 第二波专项 Runbook / 指南 | 10 | PRR、AWS EKS、阿里云 ACK、运行时安全、供应链安全、SLO 运营、多集群、节点与运行时、Etcd、Redis |
 | 第三波专项 Runbook / 指南 | 6 | GKE、Azure AKS、PostgreSQL、MySQL、Wasm 生产部署、安全运营 |
+| 第四波专项 Runbook / 指南 | 5 | Kafka、MongoDB、节点 OS 加固基线、容量规划、可观测性运营 |
 | 缺口分析报告 | 1 | `_reports/domain-content-gap-analysis-2026-07-01.md` |
-| 合计 | **45** | 全部为新增或完整增强文件，未破坏已有内容 |
+| 合计 | **50** | 全部为新增或完整增强文件，未破坏已有内容 |
 
 ---
 
@@ -132,6 +133,18 @@ prerequisites:
 
 ---
 
+## 第四波专项 Runbook / 指南
+
+| 主题 | 文件路径 | 覆盖重点 |
+|:---|:---|:---|
+| Kafka on Kubernetes | `domain-16-database-middleware/03-message-queues/06-kafka-kubernetes-production-guide.md` | KRaft/ZooKeeper、Strimzi、Topic/Partition/Replica、吞吐调优、监控、升级、DR |
+| MongoDB on Kubernetes | `domain-16-database-middleware/01-databases/18-mongodb-kubernetes-production-guide.md` | ReplicaSet/Sharded、Operator、备份恢复、TLS、监控、故障转移 |
+| K8s 节点 OS 镜像加固基线 | `domain-17-system-foundation/01-linux/13-k8s-node-os-image-hardening-baseline.md` | CIS Benchmark、不可变基础设施、磁盘分区、auditd、sysctl、containerd 加固 |
+| 容量规划与上线就绪 | `domain-11-production-operations/05-capacity-planning-readiness.md` | 余量规则、饱和度信号、上线门禁、自动伸缩策略、成本感知规划 |
+| 可观测性运营 | `domain-11-production-operations/10-observability-operations.md` | SLO 评审、告警调优、Dashboard-as-Code、保留归档、值班规范 |
+
+---
+
 ## 质量校验
 
 - 所有新增文件均使用项目标准 frontmatter。
@@ -146,9 +159,9 @@ prerequisites:
 
 1. **按云厂商深度补齐**：腾讯云/华为云/UCloud/IBM/Oracle 等各自的升级、DR、IAM、网络、成本、排障 Runbook（AWS、阿里云 ACK、GKE、Azure AKS 已完成）。
 2. **垂直行业应用模式**：电商、金融科技、SaaS 多租户、IoT、游戏、IM/RTC、数据中台等生产架构模板。
-3. **中间件专项**：Kafka/Pulsar/NATS、MongoDB 的 Day-2 运维手册（Redis、PostgreSQL、MySQL、Etcd on K8s 已完成）。
-4. **安全合规深化**：VAP、节点 OS 加固、SIEM 集成、Registry 安全与镜像晋级（供应链安全、运行时安全、安全运营已完成）。
-5. **可观测性深化**：OpenTelemetry Collector 生产模式、告警治理（SLO 运营已完成）。
+3. **中间件专项**：Pulsar/NATS 的 Day-2 运维手册（Kafka、Redis、PostgreSQL、MySQL、MongoDB、Etcd on K8s 已完成）。
+4. **安全合规深化**：VAP、SIEM 集成、Registry 安全与镜像晋级（供应链安全、运行时安全、安全运营、节点 OS 加固已完成）。
+5. **可观测性深化**：OpenTelemetry Collector 生产模式、告警治理（SLO 运营、可观测性运营已完成）。
 
 完整清单与优先级参见 `_reports/domain-content-gap-analysis-2026-07-01.md` 第 4–6 节。
 

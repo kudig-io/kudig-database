@@ -37,7 +37,7 @@
 - domain-14-linux（约 10 个重复文件）
 - domain-18-production-operations（约 4 个重复文件）
 - domain-20 到 domain-40（每个目录约 10-40 个重复文件）
-- topic-ai-agent（1 个重复文件）
+- 02-ai-agents（1 个重复文件）
 - topic-ai-coding（约 25 个重复文件）
 - topic-cheat-sheet（约 10 个重复文件）
 - topic-deployment（约 5 个重复文件）
@@ -61,7 +61,7 @@
 - gitbook/ 下 6 个 "2/" 子目录
 - man/ 下 2 个 "2/" 子目录
 - reports/quality 2/
-- topic-ai-agent/openclaw-workspace 2/
+- 02-ai-agents/openclaw-workspace 2/
 - topic-dictionary/ 下 12 个 "2/" 子目录
 - topic-learn/ 下 2 个 "2/" 子目录
 - topic-release-notes/ 下 8 个 "2/" 子目录

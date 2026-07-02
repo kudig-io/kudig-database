@@ -21,15 +21,15 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/_schema|Schema]]
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/benchmark|Benchmark]]
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/capability-conversation|Capability Conversation]]
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/capability-knowledge|Capability Knowledge]]
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/capability-reasoning|Capability Reasoning]]
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/capability-safety|Capability Safety]]
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/capability-tool-use|Capability Tool Use]]
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated|Generated]]
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/seed|Seed]]
+- domain-10-troubleshooting-diagnostics/topic-qa-corpus/_schema/
+- domain-10-troubleshooting-diagnostics/topic-qa-corpus/benchmark/
+- domain-10-troubleshooting-diagnostics/topic-qa-corpus/capability-conversation/
+- domain-10-troubleshooting-diagnostics/topic-qa-corpus/capability-knowledge/
+- domain-10-troubleshooting-diagnostics/topic-qa-corpus/capability-reasoning/
+- domain-10-troubleshooting-diagnostics/topic-qa-corpus/capability-safety/
+- domain-10-troubleshooting-diagnostics/topic-qa-corpus/capability-tool-use/
+- domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/
+- domain-10-troubleshooting-diagnostics/topic-qa-corpus/seed/
 
 ## 文档
 

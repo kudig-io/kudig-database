@@ -53,16 +53,22 @@ authors:
 
 # MongoDB Kubernetes 生产指南
 
-本指南面向需要在 Kubernetes 生产环境中运行 MongoDB 的 SRE、DBA 与平台工程师，提供从架构选型、Operator 部署、安全加固、备份恢复到监控告警与故障转移的完整运行手册。
+本指南面向需要在 Kubernetes 生产环境中运行 MongoDB 的 SRE、DBA 与平台工程师，提供从架构选型、Operator 部署、安全加固、备份恢复到监控告警与故障转移的完整运行手册。MongoDB 作为文档型 NoSQL 数据库的代表，其灵活的 Schema、强大的水平扩展能力与丰富的查询能力使其在内容管理、物联网、实时分析与用户画像等场景得到广泛应用。在 Kubernetes 上运行 MongoDB 时，必须特别关注数据持久化、副本集高可用、分片集群设计以及备份恢复的可操作性。
 
 ## 1. 适用场景与范围
+
+本指南适用于以下场景：
 
 - 文档型 NoSQL 数据库的 Kubernetes 化部署，适用于内容管理、物联网、实时分析、用户画像等场景。
 - 使用 MongoDB Community Operator 或 Percona Operator for MongoDB 的声明式管理。
 - 覆盖 ReplicaSet 与 Sharded Cluster 两种拓扑；不覆盖裸 StatefulSet 手工部署。
 - 重点关注生产就绪要求，包括数据持久化、高可用、安全、备份恢复与可观测性。
 
+本指南不深入讲解 MongoDB 应用层设计，如 Schema 设计、索引优化等，这些内容应由 DBA 与开发团队共同负责。
+
 ## 2. 前置条件与工具
+
+在开始部署前，请确认以下前置条件已经满足：
 
 - Kubernetes 1.28–1.33，工作节点具备跨 AZ 分布。
 - StorageClass 使用 SSD backing，建议启用 `allowVolumeExpansion: true`。
@@ -84,14 +90,14 @@ authors:
 | 扩展方式 | 垂直扩容 / 增加 Secondary | 增加 Shard 或拆分热点分片 |
 | 一致性 | 强一致性，写操作落在 Primary | 跨 Shard 事务性能下降 |
 
-生产建议：数据量 < 1TB 且 QPS 可控时优先使用 ReplicaSet；超过单节点写入瓶颈或数据增长预期 > 2TB/年时采用 Sharded Cluster。分片键选择是 Sharded Cluster 设计的核心，应满足高基数、低频率、非单调三个条件。
+生产建议：数据量 < 1TB 且 QPS 可控时优先使用 ReplicaSet；超过单节点写入瓶颈或数据增长预期 > 2TB/年时采用 Sharded Cluster。分片键选择是 Sharded Cluster 设计的核心，应满足高基数、低频率、非单调三个条件。错误选择的分片键会导致数据倾斜、热点 Chunk 与均衡困难，最终影响集群性能与可用性。
 
 ### 3.2 Operator 选型
 
 - **MongoDB Community Operator**：官方开源，功能覆盖 ReplicaSet、用户、TLS，适合标准场景。
 - **Percona Operator for MongoDB**：功能更完整，支持备份、PITR、监控、Sharded Cluster，适合企业级需求。
 
-本指南以 Community Operator 为例，关键概念同样适用于 Percona Operator。对于需要 PITR 或多集群灾备的场景，建议评估 Percona Operator。
+本指南以 Community Operator 为例，关键概念同样适用于 Percona Operator。对于需要 PITR 或多集群灾备的场景，建议评估 Percona Operator。Operator 本身应配置多个副本并跨 AZ 分布，避免因 Operator 单点故障导致数据库集群无法协调。
 
 ### 3.3 存储与资源规划
 
@@ -107,6 +113,8 @@ MongoDB 的故障转移依赖于 ReplicaSet 多数派。因此：
 - 成员数必须为奇数，推荐 3 或 5。
 - Pod 必须通过 PodDisruptionBudget 与反亲和性跨 AZ/节点分布。
 - Arbiter 可用于偶数节点场景，但仲裁节点不存储数据，不能替代 Secondary 的读取能力。
+
+在 Kubernetes 环境中，StatefulSet 的有序部署特性与 MongoDB 的副本集初始化天然契合，但仍需通过反亲和性确保副本不会集中在同一节点或同一 AZ。
 
 ## 4. 标准操作流程
 
@@ -261,6 +269,7 @@ velero restore create --from-backup mongodb-daily \
 - 每日执行全量逻辑备份或文件系统快照。
 - 关键集合启用 Oplog 备份，支持时间点恢复（PITR）。
 - 每月至少执行一次恢复演练，验证备份完整性与 RTO。
+- 备份文件应存放在与生产集群不同的区域或对象存储桶。
 
 ### 4.5 扩容 PVC
 
@@ -269,7 +278,7 @@ kubectl patch pvc data-volume-prod-mongodb-0 -n mongodb -p \
   '{"spec":{"resources":{"requests":{"storage":"400Gi"}}}}'
 ```
 
-扩容后观察 StatefulSet 滚动更新与副本同步状态。
+扩容后观察 StatefulSet 滚动更新与副本同步状态。注意：StorageClass 必须启用 `allowVolumeExpansion: true`，否则 patch 会失败。
 
 ## 5. 关键检查点与验证命令
 

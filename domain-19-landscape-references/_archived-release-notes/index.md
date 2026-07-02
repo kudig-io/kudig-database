@@ -17,12 +17,12 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops|Cicd Gitops]]
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools|Cli Tools]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps|Core Deps]]
-- [[domain-19-landscape-references/_archived-release-notes/kubernetes|Kubernetes]]
-- [[domain-19-landscape-references/_archived-release-notes/networking|Networking]]
-- [[domain-19-landscape-references/_archived-release-notes/observability|Observability]]
-- [[domain-19-landscape-references/_archived-release-notes/security|Security]]
-- [[domain-19-landscape-references/_archived-release-notes/storage|Storage]]
+- domain-19-landscape-references/_archived-release-notes/cicd-gitops/
+- domain-19-landscape-references/_archived-release-notes/cli-tools/
+- domain-19-landscape-references/_archived-release-notes/core-deps/
+- domain-19-landscape-references/_archived-release-notes/kubernetes/
+- domain-19-landscape-references/_archived-release-notes/networking/
+- domain-19-landscape-references/_archived-release-notes/observability/
+- domain-19-landscape-references/_archived-release-notes/security/
+- domain-19-landscape-references/_archived-release-notes/storage/
 

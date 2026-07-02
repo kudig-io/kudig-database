@@ -99,7 +99,7 @@ relationships:
 | `topic-dictionary/...` | `domain-17-system-foundation/topic-dictionary/...` | 205 |
 | `topic-code-analysis/...` | `domain-07-platform-engineering/topic-code-analysis/...` | 88 |
 | `topic-functions/...` | 待确认 | 80 |
-| `topic-ai-agent/...` | 待确认 | 7 |
+| `02-ai-agents/...` | 待确认 | 7 |
 | `02-ai-agents/...` | 待确认 | 7 |
 | 其他零散 | — | ~24 |
 
@@ -107,7 +107,7 @@ relationships:
 - **影响**: 在 Obsidian 中可能正常工作，但在非 Obsidian 环境（如 LLM 直接解析 md）中会断裂
 
 #### 类 C：代码片段误匹配
-- `-t 0`、`'current_density', ...` 等 shell/Python 代码中的 `[[ ]]`
+- `-t 0`、`'current_density', ...` 等 shell/Python 代码中的 `/`
 - **数量**: 极少
 - **结论**: 非 wikilink，代码中的条件表达式被误匹配
 

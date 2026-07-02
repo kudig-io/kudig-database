@@ -728,7 +728,7 @@ grep -i huge /proc/meminfo
 
 ## Related
 
-- [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting|资源故障排查]]
+- domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/
 - [[domain-10-troubleshooting-diagnostics/tools/03-ebpf-diagnostic-tools|eBPF 诊断工具]]
 - [[domain-17-system-foundation/topic-cheat-sheet/linux.md|Linux 速查卡]]
 

@@ -70,7 +70,7 @@ related_docs:
 - path: 05-distributed-training-frameworks.md
   type: depth
   desc: 分布式训练框架
-- path: ../domain-14-ai-ml-infra/topic-ai-agent/
+- path: ../domain-14-ai-ml-infra/02-ai-agents/
   type: ai-agent
   desc: AI Agent 工程
 ---

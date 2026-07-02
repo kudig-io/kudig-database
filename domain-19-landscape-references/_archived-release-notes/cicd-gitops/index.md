@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd|Argo Cd]]
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/flux|Flux]]
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/tekton|Tekton]]
+- domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/
+- domain-19-landscape-references/_archived-release-notes/cicd-gitops/flux/
+- domain-19-landscape-references/_archived-release-notes/cicd-gitops/tekton/
 

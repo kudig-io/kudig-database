@@ -21,11 +21,11 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert|Cluster Cert]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create|Cluster Create]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete|Cluster Delete]]
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create|Deployment Create]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create|Node Create]]
+- domain-07-platform-engineering/topic-code-analysis/cluster-cert/
+- domain-07-platform-engineering/topic-code-analysis/cluster-create/
+- domain-07-platform-engineering/topic-code-analysis/cluster-delete/
+- domain-07-platform-engineering/topic-code-analysis/deployment-create/
+- domain-07-platform-engineering/topic-code-analysis/node-create/
 
 ## 文档
 

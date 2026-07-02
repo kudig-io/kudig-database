@@ -34,7 +34,7 @@
 - domain-20 到 domain-40
 
 ### 涉及的主题目录
-- topic-ai-agent, topic-ai-coding, topic-cheat-sheet
+- 02-ai-agents, topic-ai-coding, topic-cheat-sheet
 - topic-deployment, topic-dictionary, topic-febm, topic-fta
 - topic-learn, topic-migration, topic-presentations, topic-publish
 - topic-release-notes, topic-skills, topic-structural-trouble-shooting

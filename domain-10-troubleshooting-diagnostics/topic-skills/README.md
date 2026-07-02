@@ -358,7 +358,7 @@ Agent 在执行 Skill 后应记录：
 | FTA 故障树库 | [domain-10-troubleshooting-diagnostics/topic-fta/list/](../domain-10-troubleshooting-diagnostics/topic-fta/list/) | 每个 Skill 对应的故障分析模型 |
 | FEBM 循证方法论 | [domain-10-troubleshooting-diagnostics/topic-febm/](../domain-10-troubleshooting-diagnostics/topic-febm/) | Agent 工单处理的理论基础 |
 | 结构化故障排查 | [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/) | 深度排查参考指南 |
-| Agent 设计 | [domain-14-ai-ml-infra/topic-ai-agent/](../domain-14-ai-ml-infra/topic-ai-agent/) | AI Agent 工程与架构设计 |
+| Agent 设计 | [domain-14-ai-ml-infra/02-ai-agents/](../domain-14-ai-ml-infra/02-ai-agents/) | AI Agent 工程与架构设计 |
 | 事件管理 Runbook | [domain-17-system-foundation/topic-dictionary/12-incident-management-runbooks.md](../domain-17-system-foundation/topic-dictionary/12-incident-management-runbooks.md) | 事件管理流程模板 |
 | 生产排障 Playbook | [domain-17-system-foundation/topic-dictionary/16-production-troubleshooting-playbook.md](../domain-17-system-foundation/topic-dictionary/16-production-troubleshooting-playbook.md) | 生产环境排障手册 |
 | Skill 文档模板 | [skill-schema.md](./skill-schema.md) | 新建 Skill 的规范化模板 |

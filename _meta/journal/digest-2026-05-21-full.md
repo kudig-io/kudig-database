@@ -193,7 +193,7 @@ prerequisites:
 | topic-functions | 89 | 集群操作函数库 |
 | topic-fta | **82** | FTA 故障树分析方法论（含 44 棵故障树） |
 | topic-structural-trouble-shooting | 73 | 结构化故障排查知识库 |
-| topic-ai-agent | 59 | AI Agent 工程专题 |
+| 02-ai-agents | 59 | AI Agent 工程专题 |
 | topic-skills | 37 | 工单智能体 K8s 诊断 Skill 库 |
 | topic-ai-coding | 26 | AI 编程与 LLM 网关专题 |
 | topic-index | 25 | 深度研究入口使用指南 |

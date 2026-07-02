@@ -645,7 +645,7 @@ etcd_server_leader_changes_seen_total
 
 ## Related
 
-- [[domain-01-cluster-fundamentals/03-control-plane|控制平面架构]]
+- domain-01-cluster-fundamentals/03-control-plane/
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s 速查卡]]
 - [[domain-01-cluster-fundamentals/07-performance-tuning/19-cluster-performance-tuning|集群性能调优]]
 

@@ -21,13 +21,13 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-08-release-change-management/01-gitops|Gitops]]
-- [[domain-08-release-change-management/02-iac|Iac]]
-- [[domain-08-release-change-management/03-change-management|Change Management]]
-- [[domain-08-release-change-management/04-testing-quality|Testing Quality]]
+- domain-08-release-change-management/01-gitops/
+- domain-08-release-change-management/02-iac/
+- domain-08-release-change-management/03-change-management/
+- domain-08-release-change-management/04-testing-quality/
 - [[domain-08-release-change-management/98-merged-indexes/index.md|Merged Indexes]]
-- [[domain-08-release-change-management/topic-deployment|Topic Deployment]]
-- [[domain-08-release-change-management/topic-migration|Topic Migration]]
+- domain-08-release-change-management/topic-deployment/
+- domain-08-release-change-management/topic-migration/
 
 ## 文档
 

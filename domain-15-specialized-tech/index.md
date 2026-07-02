@@ -21,11 +21,11 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-15-specialized-tech/01-edge-computing|Edge Computing]]
-- [[domain-15-specialized-tech/02-webassembly|Webassembly]]
-- [[domain-15-specialized-tech/03-extensions|Extensions]]
-- [[domain-15-specialized-tech/04-serverless|Serverless]]
-- [[domain-15-specialized-tech/05-ebpf-programming|Ebpf Programming]]
+- domain-15-specialized-tech/01-edge-computing/
+- domain-15-specialized-tech/02-webassembly/
+- domain-15-specialized-tech/03-extensions/
+- domain-15-specialized-tech/04-serverless/
+- domain-15-specialized-tech/05-ebpf-programming/
 - [[domain-15-specialized-tech/98-merged-indexes/index.md|Merged Indexes]]
 
 ## 文档

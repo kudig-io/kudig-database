@@ -105,7 +105,7 @@ prerequisites:
 | 14 | `domain-17-system-foundation/topic-cheat-sheet/` | 15 | `domain-17-system-foundation/` | 速查表属于基础参考 |
 | 15 | `domain-02-workloads-applications/topic-functions/` | 80 | `domain-02-workloads-applications/` | 函数/工作负载管理 |
 | 16 | `domain-02-workloads-applications/topic-java-kubernetes/` | 7 | `domain-02-workloads-applications/` | Java on K8s 工作负载 |
-| 17 | `domain-14-ai-ml-infra/topic-ai-agent/` | 58 | `domain-14-ai-ml-infra/` | AI Agent 基础设施 |
+| 17 | `domain-14-ai-ml-infra/02-ai-agents/` | 58 | `domain-14-ai-ml-infra/` | AI Agent 基础设施 |
 | 18 | `domain-14-ai-ml-infra/topic-ai-coding/` | 25 | `domain-14-ai-ml-infra/` | AI 编码辅助 |
 | 19 | `domain-07-platform-engineering/topic-code-analysis/` | 89 | `domain-07-platform-engineering/` | 代码分析属于平台工程 |
 | 20 | `domain-20-application-patterns/topic-application-architecture/` | 97 | `domain-20-application-patterns/` | 应用架构模式 |
@@ -229,7 +229,7 @@ mv domain-17-system-foundation/topic-cheat-sheet/ domain-17-system-foundation/
 **目标**: ai-agent + ai-coding → domain-14
 **操作**:
 ```bash
-mv domain-14-ai-ml-infra/topic-ai-agent/ domain-14-ai-ml-infra/
+mv domain-14-ai-ml-infra/02-ai-agents/ domain-14-ai-ml-infra/
 mv domain-14-ai-ml-infra/topic-ai-coding/ domain-14-ai-ml-infra/
 ```
 **文件数**: 83 个
@@ -402,7 +402,7 @@ kudig-database/
 ├── domain-13-container-runtime/
 ├── domain-14-ai-ml-infra/
 │   ├── ...原有文件...
-│   ├── domain-14-ai-ml-infra/topic-ai-agent/           # ← 迁入
+│   ├── domain-14-ai-ml-infra/02-ai-agents/           # ← 迁入
 │   └── domain-14-ai-ml-infra/topic-ai-coding/          # ← 迁入
 ├── domain-15-specialized-tech/
 ├── domain-16-database-middleware/

@@ -523,7 +523,7 @@ Saga 设计检查清单:
 
 - [[domain-20-application-patterns/sub-patterns/02-event-sourcing-cqrs-patterns|Event Sourcing 与 CQRS]]
 - [[domain-20-application-patterns/sub-patterns/01-microservice-decomposition-strategies|微服务拆分策略]]
-- [[domain-08-release-change-management/|发布与变更管理]]
+- domain-08-release-change-management//
 
 ## See Also
 

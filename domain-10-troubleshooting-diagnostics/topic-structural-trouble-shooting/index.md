@@ -21,19 +21,19 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane|Control Plane]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components|Node Components]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking|Networking]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage|Storage]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads|Workloads]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth|Security Auth]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling|Resources Scheduling]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations|Cluster Operations]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider|Cloud Provider]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output|Command Output]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-ai-ml-workloads|Ai Ml Workloads]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops|Gitops Devops]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability|Monitoring Observability]]
+- domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/
+- domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/
+- domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/
+- domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/
+- domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/
+- domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/
+- domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/
+- domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/
+- domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/
+- domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/
+- domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-ai-ml-workloads/
+- domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/
+- domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/
 
 ## 文档
 

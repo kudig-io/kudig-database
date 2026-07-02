@@ -1612,7 +1612,7 @@ WebAssembly 不会取代容器，而是成为 Kubernetes 生态的重要补充�
 
 ## Related
 
-- [[research|#research Hub]] — tag hub
+- research/ — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 

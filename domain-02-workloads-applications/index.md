@@ -21,10 +21,10 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-02-workloads-applications/00-core-workloads|Core Workloads]]
+- domain-02-workloads-applications/00-core-workloads/
 - [[domain-02-workloads-applications/98-merged-indexes/index.md|Merged Indexes]]
-- [[domain-02-workloads-applications/topic-functions|Topic Functions]]
-- [[domain-02-workloads-applications/topic-java-kubernetes|Topic Java Kubernetes]]
+- domain-02-workloads-applications/topic-functions/
+- domain-02-workloads-applications/topic-java-kubernetes/
 
 ## 文档
 

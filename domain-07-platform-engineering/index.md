@@ -22,11 +22,11 @@ last_updated: 2026-07
 ## 子目录
 
 - [[domain-07-platform-engineering/98-merged-indexes/index.md|Merged Indexes]]
-- [[domain-07-platform-engineering/build|Build]]
-- [[domain-07-platform-engineering/developer-experience|Developer Experience]]
-- [[domain-07-platform-engineering/governance|Governance]]
-- [[domain-07-platform-engineering/operate|Operate]]
-- [[domain-07-platform-engineering/topic-code-analysis|Topic Code Analysis]]
+- domain-07-platform-engineering/build/
+- domain-07-platform-engineering/developer-experience/
+- domain-07-platform-engineering/governance/
+- domain-07-platform-engineering/operate/
+- domain-07-platform-engineering/topic-code-analysis/
 
 ## 文档
 

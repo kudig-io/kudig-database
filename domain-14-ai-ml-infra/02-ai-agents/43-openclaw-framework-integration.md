@@ -468,7 +468,7 @@ class HybridHarness:
 
 ```
 # 🟢 低风险：只读/信息收集，通常无副作用
-domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace/
+domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/
 ├── SOUL.md         # K8S 运维诊断专家人格
 ├── USER.md         # ACK 运维工程师用户画像
 ├── AGENTS.md       # 工单诊断工作流与行为规范
@@ -502,7 +502,7 @@ from agentscope.agent import ReActAgent
 from agentscope.tool import Toolkit, execute_shell_command, view_text_file
 
 # 1. 加载 OpenClaw 工作区配置
-workspace = "domain-14-ai-ml-infra/topic-ai-agent/openclaw-workspace"
+workspace = "domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace"
 
 # 2. 读取 SOUL.md 作为 sys_prompt
 with open(f"{workspace}/SOUL.md") as f:
@@ -652,24 +652,24 @@ agent = ReActAgent(
 
 ---
 
-*本文档为 kudig-database 项目 topic-ai-agent 专题原创内容，基于 OpenClaw 框架设计理念与 Harness Engineering 最佳实践编写。*
+*本文档为 kudig-database 项目 02-ai-agents 专题原创内容，基于 OpenClaw 框架设计理念与 Harness Engineering 最佳实践编写。*
 
 ---
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- topic-ai-agent MOC
-- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- 02-ai-agents MOC
+- [[domain-14-ai-ml-infra/02-ai-agents/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/02-ai-agents/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/02-ai-agents/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/02-ai-agents/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/02-ai-agents/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/02-ai-agents/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/02-ai-agents/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/02-ai-agents/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/02-ai-agents/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/02-ai-agents/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/02-ai-agents/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 

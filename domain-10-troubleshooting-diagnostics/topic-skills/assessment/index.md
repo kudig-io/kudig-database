@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/assessment/answer-keys|Answer Keys]]
+- domain-10-troubleshooting-diagnostics/topic-skills/assessment/answer-keys/
 
 ## 文档
 

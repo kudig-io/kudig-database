@@ -21,18 +21,18 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[skills/training-lecturer/01-introduction|Introduction]]
-- [[skills/training-lecturer/02-getting-started|Getting Started]]
-- [[skills/training-lecturer/03-networking|Networking]]
-- [[skills/training-lecturer/04-networking|Networking]]
-- [[skills/training-lecturer/05-configuration|Configuration]]
-- [[skills/training-lecturer/06-configuration|Configuration]]
-- [[skills/training-lecturer/07-storage|Storage]]
-- [[skills/training-lecturer/08-scaling|Scaling]]
-- [[skills/training-lecturer/09-troubleshooting|Troubleshooting]]
-- [[skills/training-lecturer/10-advanced-workloads|Advanced Workloads]]
-- [[skills/training-lecturer/10-workloads|Workloads]]
-- [[skills/training-lecturer/11-oncall-qa|Oncall Qa]]
-- [[skills/training-lecturer/11-scheduling|Scheduling]]
-- [[skills/training-lecturer/12-decision-tree|Decision Tree]]
+- skills/training-lecturer/01-introduction/
+- skills/training-lecturer/02-getting-started/
+- skills/training-lecturer/03-networking/
+- skills/training-lecturer/04-networking/
+- skills/training-lecturer/05-configuration/
+- skills/training-lecturer/06-configuration/
+- skills/training-lecturer/07-storage/
+- skills/training-lecturer/08-scaling/
+- skills/training-lecturer/09-troubleshooting/
+- skills/training-lecturer/10-advanced-workloads/
+- skills/training-lecturer/10-workloads/
+- skills/training-lecturer/11-oncall-qa/
+- skills/training-lecturer/11-scheduling/
+- skills/training-lecturer/12-decision-tree/
 

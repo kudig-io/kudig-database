@@ -17,11 +17,11 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-02-workloads-applications/topic-functions/cluster-cert|Cluster Cert]]
-- [[domain-02-workloads-applications/topic-functions/cluster-create|Cluster Create]]
-- [[domain-02-workloads-applications/topic-functions/cluster-delete|Cluster Delete]]
-- [[domain-02-workloads-applications/topic-functions/deployment-create|Deployment Create]]
-- [[domain-02-workloads-applications/topic-functions/node-create|Node Create]]
+- domain-02-workloads-applications/topic-functions/cluster-cert/
+- domain-02-workloads-applications/topic-functions/cluster-create/
+- domain-02-workloads-applications/topic-functions/cluster-delete/
+- domain-02-workloads-applications/topic-functions/deployment-create/
+- domain-02-workloads-applications/topic-functions/node-create/
 
 ## 文档
 

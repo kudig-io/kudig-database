@@ -21,14 +21,14 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[skills/best-practices/best-practices|Best Practices]]
-- [[skills/best-practices/deployment|Deployment]]
-- [[skills/best-practices/infrastructure|Infrastructure]]
-- [[skills/best-practices/migration|Migration]]
-- [[skills/best-practices/observability|Observability]]
-- [[skills/best-practices/operations|Operations]]
-- [[skills/best-practices/scenarios|Scenarios]]
-- [[skills/best-practices/security|Security]]
+- skills/best-practices/best-practices/
+- skills/best-practices/deployment/
+- skills/best-practices/infrastructure/
+- skills/best-practices/migration/
+- skills/best-practices/observability/
+- skills/best-practices/operations/
+- skills/best-practices/scenarios/
+- skills/best-practices/security/
 
 ## 文档
 

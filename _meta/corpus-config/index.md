@@ -21,8 +21,8 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[_meta/corpus-config/profiles|Profiles]]
-- [[_meta/corpus-config/scripts|Scripts]]
+- _meta/corpus-config/profiles/
+- _meta/corpus-config/scripts/
 
 ## 文档
 
