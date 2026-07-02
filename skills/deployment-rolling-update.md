@@ -1,7 +1,7 @@
 ---
 title: Deployment 滚动更新策略
 description: '## 概述'
-summary: '## 概述'
+summary: 'RollingUpdate 是 Deployment 最常用的更新策略，通过逐步替换 Pod 实现零停机更新。核心参数 `maxSurge` 和 `maxUnavailable` 控制替换速度和可用性保障。'
 category: skills
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 17 - StorageClass / VolumeSnapshot YAML 配置参考
 description: '# 17 - StorageClass / VolumeSnapshot YAML 配置参考'
-summary: '# 17 - StorageClass / VolumeSnapshot YAML 配置参考'
+summary: 'storageclass.kubernetes.io/is-default-class: "true"  # 标记为默认存储类'
 category: yaml-manifests
 tags:
 - k8s

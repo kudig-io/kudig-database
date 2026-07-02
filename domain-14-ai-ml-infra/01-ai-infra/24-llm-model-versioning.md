@@ -1,7 +1,7 @@
 ---
 title: 24 - LLM模型版本管理与治理
 description: '# 24 - LLM模型版本管理与治理'
-summary: '# 24 - LLM模型版本管理与治理'
+summary: 'preferredDuringSchedulingIgnoredDuringExecution:'
 category: ai-infra
 tags:
 - k8s

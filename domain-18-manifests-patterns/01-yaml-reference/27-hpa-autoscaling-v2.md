@@ -1,7 +1,7 @@
 ---
 title: 27 - HorizontalPodAutoscaler v2 YAML 配置参考
 description: '# 27 - HorizontalPodAutoscaler v2 YAML 配置参考'
-summary: '# 27 - HorizontalPodAutoscaler v2 YAML 配置参考'
+summary: 'HPA v2 是 Kubernetes 核心自动扩缩容机制，支持多种指标类型和精细化行为控制。'
 category: yaml-manifests
 tags:
 - k8s

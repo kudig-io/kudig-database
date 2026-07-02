@@ -1,7 +1,7 @@
 ---
 title: Tremor [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Tremor 是一个高性能的事件处理引擎，专为处理大规模数据流（日志、指标、追踪数据）而设计。它由 Wayfair 开源，用 Rust 实现，通过自定义的查询语言（Troy/Trickle）定义数据管道，支持背压处理、有保证的交付和复杂事件处理。'
 category: entities
 tags:
 - k8s

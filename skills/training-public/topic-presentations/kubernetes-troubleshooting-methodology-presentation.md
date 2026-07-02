@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 故障排查方法论全栈培训 (training-public)
 description: '# Kubernetes 故障排查方法论全栈培训'
-summary: '# Kubernetes 故障排查方法论全栈培训'
+summary: 'Kubernetes 问题可以从多个层级排查，建议从上到下（应用层 → 基础设施层）或根据问题现象从最可能的层开始：'
 category: presentations
 tags:
 - k8s

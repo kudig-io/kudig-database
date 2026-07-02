@@ -1,7 +1,7 @@
 ---
 title: Open Policy Containers (OPCR)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Open Policy Containers (OPCR) 是一个将 OPA (Open Policy Agent) 策略打包为 OCI 兼容镜像并分发的标准和工具集。它定义了 Policy as Code 的打包格式，使策略可以像容器镜像一样存储在任意 OCI Registry 中，并支持签名、版本化和分发。'
 category: entities
 tags:
 - k8s

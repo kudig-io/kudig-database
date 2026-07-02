@@ -1,7 +1,7 @@
 ---
 title: Cortex (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Cortex 是多租户、水平可扩展的 Prometheus 即服务解决方案。它为 Prometheus 提供长期存储、高可用性和全局视图能力，适合大规模 Kubernetes 监控场景。'
 category: entities
 tags:
 - k8s

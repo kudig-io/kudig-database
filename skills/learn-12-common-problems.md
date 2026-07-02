@@ -1,7 +1,7 @@
 ---
 title: 第十课：常见问题排查
 description: '# 第十课：常见问题排查'
-summary: '# 第十课：常见问题排查'
+summary: 'kubectl describe pod <pod-name> | grep -A3 "Containers"'
 category: skills
 tags:
 - k8s

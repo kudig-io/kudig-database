@@ -1,7 +1,7 @@
 ---
 title: Devfile [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Devfile 是一个开放标准，用于定义云原生开发环境。它通过 YAML 格式的 devfile.yaml 描述开发工具容器、端口转发、命令和生命周期事件，使开发环境可复现、可共享，并被多种 IDE 和开发工具支持（如 Eclipse Che、odo、OpenShift Dev Spaces）。'
 category: entities
 tags:
 - k8s

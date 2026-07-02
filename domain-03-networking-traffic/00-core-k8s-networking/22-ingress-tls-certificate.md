@@ -1,7 +1,7 @@
 ---
 title: 130 - Ingress TLS 与证书管理
 description: '# 130 - Ingress TLS 与证书管理'
-summary: '# 130 - Ingress TLS 与证书管理'
+summary: 'openssl pkcs12 -in certificate.pfx -out tls.crt -clcerts -nokeys'
 category: networking
 tags:
 - k8s

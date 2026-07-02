@@ -1,7 +1,7 @@
 ---
 title: 21 - 监控成本优化与治理 (Monitoring Cost Optimization & Governance)
 description: '# 21 - 监控成本优化与治理 (Monitoring Cost Optimization & Governance)'
-summary: '# 21 - 监控成本优化与治理 (Monitoring Cost Optimization & Governance)'
+summary: '本文档针对企业监控系统面临的成本挑战，提供全面的成本分析框架、优化策略、治理机制和ROI评估方法，帮助企业构建经济高效、可持续发展的可观测性体系。'
 category: observability
 tags:
 - k8s

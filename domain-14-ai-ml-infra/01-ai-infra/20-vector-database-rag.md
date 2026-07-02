@@ -1,7 +1,7 @@
 ---
 title: 147 - 向量数据库与RAG架构
 description: '# 147 - 向量数据库与RAG架构'
-summary: '# 147 - 向量数据库与RAG架构'
+summary: 'service.beta.kubernetes.io/aws-load-balancer-type: nlb'
 category: ai-infra
 tags:
 - k8s

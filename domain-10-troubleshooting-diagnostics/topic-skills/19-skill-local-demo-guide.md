@@ -1,7 +1,7 @@
 ---
 title: Skill 本地运行 Demo 指南
 description: '# Skill 本地运行 Demo 指南'
-summary: '# Skill 本地运行 Demo 指南'
+summary: 'topic-skills 定义了面向 AI Agent 的 [[Kubernetes|Kubernetes]] 故障诊断技能库（详见 README.md](./[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|README]].md)）。'
 category: demo
 tags:
 - k8s

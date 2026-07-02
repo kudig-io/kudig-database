@@ -1,7 +1,7 @@
 ---
 title: Cypress Enterprise Automation Testing 深度实践
 description: '# Cypress Enterprise Automation Testing 深度实践'
-summary: '# Cypress Enterprise Automation Testing 深度实践'
+summary: 'This document provides comprehensive exploration of Cypress enterprise deployment architecture, test automation frameworks, and quality assurance practices.'
 category: automated-testing-quality
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 12 - Operator 模式与控制器开发 (Operator Guide)
 description: '## 专家实践：Controller-Runtime 的 Cache 陷阱'
-summary: '## 专家实践：Controller-Runtime 的 Cache 陷阱'
+summary: '在编写生产级 Operator 时，过度依赖默认 Cache 会导致控制器内存爆炸。'
 category: design-principles
 tags:
 - k8s

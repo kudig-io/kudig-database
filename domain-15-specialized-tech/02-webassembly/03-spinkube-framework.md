@@ -1,7 +1,7 @@
 ---
 title: SpinKube 框架实践
 description: '# SpinKube 框架实践'
-summary: '# SpinKube 框架实践'
+summary: 'SpinKube 是基于 Fermyon Spin 的 [[Kubernetes|Kubernetes]] 原生 WebAssembly 运行时项目，是 CNCF Sandbox 项目。它将 Spin 的开发者友好体验带入 Kubernetes，实现了 Wasm Serverless 工作负载的云原生部署：'
 category: webassembly-cloud-native
 tags:
 - k8s

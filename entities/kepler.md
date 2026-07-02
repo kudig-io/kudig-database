@@ -1,7 +1,7 @@
 ---
 title: Kepler [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kepler (Kubernetes-based Efficient Power Level Exporter) 使用 eBPF 探测器采集系统计数器，结合机器学习模型估算 Kubernetes Pod 和节点级别的能耗。它将能耗数据导出为 Prometheus 指标，帮助组织了解工作负载的碳足迹，支持可持续计算和绿色IT决策。'
 category: entities
 tags:
 - k8s

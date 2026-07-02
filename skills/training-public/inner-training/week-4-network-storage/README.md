@@ -1,7 +1,7 @@
 ---
 title: 'Week 4: 网络与存储 (Day 22-28)'
 description: '# Week 4: 网络与存储 (Day 22-28)'
-summary: '# Week 4: 网络与存储 (Day 22-28)'
+summary: '第四周聚焦于 K8s 中两个最核心的基础设施领域：**网络**和**存储**。在前面三周中，你已经掌握了集群管理、安全监控和节点工作负载管理。本周将深入理解 K8s 的网络模型和存储体系，这是运行生产级应用的基础。'
 category: learning
 tags:
 - k8s

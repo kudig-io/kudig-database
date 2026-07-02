@@ -1,7 +1,7 @@
 ---
 title: Strimzi [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Strimzi 是在 Kubernetes 上运行 Apache Kafka 的开源项目，通过 Kubernetes Operator 模式简化 Kafka 集群的部署、配置和管理。它提供了声明式配置、自动化运维和无缝扩展能力。'
 category: entities
 tags:
 - k8s

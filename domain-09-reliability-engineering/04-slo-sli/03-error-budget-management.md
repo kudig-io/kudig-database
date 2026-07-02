@@ -1,7 +1,7 @@
 ---
 title: 错误预算管理
 description: '# 错误预算管理'
-summary: '# 错误预算管理'
+summary: 'print(f"等价停机时间: {error_time_seconds} 秒 = {error_time_seconds/60:.1f} 分钟")'
 category: domain
 tags:
 - sre

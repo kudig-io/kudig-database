@@ -1,7 +1,7 @@
 ---
 title: xRegistry (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'xRegistry 是一个通用的元数据注册中心规范，用于管理和发现事件驱动架构中的各类资源。它定义了一种标准化的 API 来注册、存储和查询消息定义、模式（Schema）、端点等元数据，支持 CloudEvents、AsyncAPI、OpenAPI 等多种规范，是构建可互操作事件驱动系统的基础设施。'
 category: entities
 tags:
 - k8s

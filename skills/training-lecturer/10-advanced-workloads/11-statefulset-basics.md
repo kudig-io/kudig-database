@@ -1,7 +1,7 @@
 ---
 title: 第14课：StatefulSet - 有状态应用管理 [10-advanced-workloads]
 description: '# 第14课：StatefulSet - 有状态应用管理'
-summary: '# 第14课：StatefulSet - 有状态应用管理'
+summary: '你需要在 [[entities/kubernetes.md|k8s]] 上部署 MySQL 数据库集群：'
 category: k8s-lecturer
 tags:
 - k8s

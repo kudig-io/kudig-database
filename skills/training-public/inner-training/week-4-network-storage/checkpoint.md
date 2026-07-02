@@ -1,7 +1,7 @@
 ---
 title: 'Week 4 自测: 网络与存储'
 description: '# Week 4 自测: 网络与存储'
-summary: '# Week 4 自测: 网络与存储'
+summary: 'Week 4 是整个培训的收官阶段，涵盖了 [[Kubernetes|Kubernetes]] 网络和存储两大核心基础设施主题。网络和存储是支撑业务应用运行的关键基础能力，理解 Service/Ingress 的路由机制、CNI 插件的工作原理、以及 PV/PVC 的生命周期管理，是运维工程师独立排障和架构设计的基础。'
 category: learning
 tags:
 - k8s

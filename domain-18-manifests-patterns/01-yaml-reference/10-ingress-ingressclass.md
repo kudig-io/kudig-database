@@ -1,7 +1,7 @@
 ---
 title: 10 - Ingress / IngressClass YAML 配置参考
 description: '# 10 - Ingress / IngressClass YAML 配置参考'
-summary: '# 10 - Ingress / IngressClass YAML 配置参考'
+summary: '外部流量 → LoadBalancer/NodePort → Ingress Controller → Ingress 规则 → Service → Pod'
 category: yaml-manifests
 tags:
 - k8s

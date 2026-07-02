@@ -1,7 +1,7 @@
 ---
 title: PostgreSQL 企业级数据库高可用架构
 description: '# PostgreSQL 企业级数据库高可用架构'
-summary: '# PostgreSQL 企业级数据库高可用架构'
+summary: 'PostgreSQL 是全球功能最丰富的开源对象关系型数据库系统，以其 ANSI-SQL 合规性、丰富的扩展生态、出色的并发控制（MVCC）机制和卓越的可扩展性而闻名。2026 年 PostgreSQL 17 版本在逻辑复制、并行查询、JSON 操作、性能诊断等方面持续增强，进一步巩固了其在企业级数据库市场的领先地位。'
 category: enterprise-database-middleware
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践
 description: '# 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践'
-summary: '# 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践'
+summary: '.helm_lint_template: &helm_lint_definition'
 category: extensions
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 资源调度故障排查
 description: '# 资源调度故障排查'
-summary: '# 资源调度故障排查'
+summary: '1. **配额状态**：`kubectl get resourcequota -n <ns>`、`kubectl describe resourcequota <name>`。'
 category: skills
 tags:
 - k8s

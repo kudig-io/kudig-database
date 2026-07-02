@@ -1,7 +1,7 @@
 ---
 title: CSI 存储驱动故障排查
 description: '# 04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)'
-summary: '# 04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)'
+summary: 'CSI (Container Storage Interface) 是Kubernetes的标准存储接口，允许存储供应商开发自己的存储插件。主要组件包括：'
 category: troubleshooting
 tags:
 - csi

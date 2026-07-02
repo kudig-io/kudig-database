@@ -1,7 +1,7 @@
 ---
 title: Docker Registry企业级镜像分发深度实践
 description: '# Docker Registry企业级镜像分发深度实践'
-summary: '# Docker Registry企业级镜像分发深度实践'
+summary: 'This document provides in-depth exploration of Docker Registry enterprise image distribution architecture design, deployment practices, and operational management.'
 category: container-image-management
 tags:
 - k8s

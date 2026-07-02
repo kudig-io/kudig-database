@@ -1,7 +1,7 @@
 ---
 title: 18 - CSI 驱动资源 YAML 配置参考
 description: '# 18 - CSI 驱动资源 YAML 配置参考'
-summary: '# 18 - CSI 驱动资源 YAML 配置参考'
+summary: 'External Attacher 调用 CSI Driver 的 ControllerPublishVolume'
 category: yaml-manifests
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: ko (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'ko 是一个快速的 Go 应用容器镜像构建和部署工具。它无需 Docker 或 Dockerfile，直接从 Go 源码构建 OCI 兼容的容器镜像，并推送到容器注册表。ko 的核心理念是简化 Go 应用的容器化流程，实现极速构建和部署。'
 category: entities
 tags:
 - k8s

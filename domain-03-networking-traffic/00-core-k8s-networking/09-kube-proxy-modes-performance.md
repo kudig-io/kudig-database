@@ -1,7 +1,7 @@
 ---
 title: Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)
 description: '# Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)'
-summary: '# Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)'
+summary: 'iptables -t nat -F KUBE-POSTROUTING 2>/dev/null || true'
 category: networking
 tags:
 - k8s

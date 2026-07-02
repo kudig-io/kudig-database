@@ -1,7 +1,7 @@
 ---
 title: 安装部署与快速入门
 description: '# 安装部署与快速入门'
-summary: '# 安装部署与快速入门'
+summary: '本文覆盖 OpenCode 的完整安装部署流程：从多平台安装方式、Provider API Key 配置、项目初始化到基础工作流掌握。无论你使用 macOS、Linux 还是 Windows，都可以在 5 分钟内开始使用 OpenCode。'
 category: ai-coding
 tags:
 - ai

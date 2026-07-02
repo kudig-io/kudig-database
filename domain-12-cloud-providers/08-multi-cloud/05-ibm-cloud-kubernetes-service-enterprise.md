@@ -1,7 +1,7 @@
 ---
 title: IBM Cloud Kubernetes Service (IKS) 企业级深度实践
 description: '# IBM Cloud Kubernetes Service (IKS) 企业级深度实践'
-summary: '# IBM Cloud Kubernetes Service (IKS) 企业级深度实践'
+summary: 'IBM Cloud Kubernetes Service (IKS) 是 IBM Cloud 握供的托管 Kubernetes 服务，结合了 IBM 在企业级计算领域的深厚积累与 Red Hat OpenShift 的开源生态优势。IKS 深度集成 IBM Watson AI 服务、Cloud Pak 数据平台和 Satellite 混合云架构，'
 category: multi-cloud-hybrid
 tags:
 - k8s

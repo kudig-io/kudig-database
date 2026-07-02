@@ -1,7 +1,7 @@
 ---
 title: 10-GitOps流水线实践
 description: '# 10-GitOps流水线实践'
-summary: '# 10-GitOps流水线实践'
+summary: 'GitOps是一种以Git为单一事实来源的运维范式。本文档详细介绍如何使用ArgoCD和FluxCD实现企业级GitOps流水线。'
 category: production-operations
 tags:
 - k8s

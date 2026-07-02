@@ -1,7 +1,7 @@
 ---
 title: 24 - 企业可观测性实施路线图 (Enterprise Observability Implementation Roadmap)
 description: '## 概述'
-summary: '## 概述'
+summary: '本文档从CTO/CIO战略视角，系统规划企业级可观测性平台的分阶段实施路线图，涵盖现状评估、架构设计、试点验证、规模化推广、持续优化等完整生命周期，结合 Fortune 500 企业数字化转型实践经验，为企业构建世界级可观测性能力提供可执行的战略蓝图。'
 category: observability
 tags:
 - k8s

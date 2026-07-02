@@ -1,7 +1,7 @@
 ---
 title: KubeElastic (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'KubeElastic 是一个 Kubernetes 原生的弹性伸缩和资源优化平台，专注于基于实时负载和成本的智能资源调整。它结合机器学习预测算法，自动调整 Pod 资源配额（VPA）和副本数（HPA），同时优化集群节点利用率，帮助用户在保证性能 SLO 的前提下降低云成本。'
 category: entities
 tags:
 - k8s

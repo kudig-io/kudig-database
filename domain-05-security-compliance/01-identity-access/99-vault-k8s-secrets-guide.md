@@ -1,7 +1,7 @@
 ---
 title: Vault K8s 密钥管理集成深度实践
 description: '# Vault K8s 密钥管理集成深度实践'
-summary: '# Vault K8s 密钥管理集成深度实践'
+summary: 'Kubernetes 原生 Secret 资源仅提供 base64 编码，缺乏细粒度的访问控制、审计追踪和自动轮换能力。HashiCorp Vault 作为企业级密钥管理平台，提供了集中式的密钥存储、动态凭证生成、加密即服务和完整的审计追踪功能。'
 category: cloud-native-security
 tags:
 - k8s

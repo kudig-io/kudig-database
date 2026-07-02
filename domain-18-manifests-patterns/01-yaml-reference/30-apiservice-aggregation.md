@@ -1,7 +1,7 @@
 ---
 title: 30 - APIService YAML 配置参考
 description: '# 30 - APIService YAML 配置参考'
-summary: '# 30 - APIService YAML 配置参考'
+summary: '1. [APIService 基础概念](#1-apiservice-基础概念)'
 category: yaml-manifests
 tags:
 - k8s

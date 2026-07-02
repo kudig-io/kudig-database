@@ -1,7 +1,7 @@
 ---
 title: 'Day 9: K8s 审计日志配置与分析实操'
 description: '# Day 9: K8s 审计日志配置与分析实操'
-summary: '# Day 9: K8s 审计日志配置与分析实操'
+summary: '请求 → API Server → 认证 → 授权 → 准入控制 → 审计日志记录 → 处理请求'
 category: learning
 tags:
 - k8s

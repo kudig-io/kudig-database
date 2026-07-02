@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 网络配置最佳实践
 description: '# Kubernetes 网络配置最佳实践'
-summary: '# Kubernetes 网络配置最佳实践'
+summary: '本指南提供生产环境 Kubernetes 网络配置的最佳实践，涵盖从 CNI 选型到网络策略的全方位内容 ^[inferred]。'
 category: skills
 tags:
 - k8s

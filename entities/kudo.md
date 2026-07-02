@@ -1,7 +1,7 @@
 ---
 title: KUDO
 description: '## 概述'
-summary: '## 概述'
+summary: 'KUDO 是一个构建 Kubernetes Operator 的声明式工具包，允许开发者仅使用 YAML 定义复杂的有状态应用生命周期管理逻辑，无需编写 Go 代码。它将 Operator 的常见模式（安装、升级、备份、恢复、扩缩容等）抽象为声明式 Plan，每个 Plan 由有序的 Phase 和 Step 组成，并支持参数化配置和模板渲染。'
 category: entities
 tags:
 - k8s

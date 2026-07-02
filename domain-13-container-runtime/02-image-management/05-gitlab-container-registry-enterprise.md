@@ -1,7 +1,7 @@
 ---
 title: GitLab Container Registry Enterprise 深度实践
 description: '# GitLab Container Registry Enterprise 深度实践'
-summary: '# GitLab Container Registry Enterprise 深度实践'
+summary: 'This document provides comprehensive exploration of GitLab Container Registry enterprise deployment architecture, security practices, and operational management.'
 category: container-image-management
 tags:
 - k8s

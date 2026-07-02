@@ -1,7 +1,7 @@
 ---
 title: OpenGitOps [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'OpenGitOps 是一个 CNCF Sandbox 项目，定义了 GitOps 的标准原则和最佳实践。它并非一个软件工具，而是一组社区驱动的 GitOps 规范和标准，为 GitOps 实践提供厂商中立的定义和指南。'
 category: entities
 tags:
 - k8s

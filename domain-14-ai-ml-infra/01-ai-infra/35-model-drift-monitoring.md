@@ -1,7 +1,7 @@
 ---
 title: 35 - 模型漂移监控与预警
 description: '# 35 - 模型漂移监控与预警'
-summary: '# 35 - 模型漂移监控与预警'
+summary: 'def population_stability_index(self, current_data, bins=10):'
 category: ai-infra
 tags:
 - k8s

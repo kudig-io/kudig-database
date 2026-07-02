@@ -1,7 +1,7 @@
 ---
 title: Karpenter 节点自动扩展实践指南
 description: '# Karpenter 节点自动扩展实践指南'
-summary: '# Karpenter 节点自动扩展实践指南'
+summary: 'Cluster Autoscaler              Karpenter'
 category: production-operations
 tags:
 - k8s

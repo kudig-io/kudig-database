@@ -1,7 +1,7 @@
 ---
 title: Kubernetes eBPF与Cilium深度实践 (eBPF and Cilium Deep Practice)
 description: '# Kubernetes eBPF与Cilium深度实践 (eBPF and Cilium Deep Practice)'
-summary: '# Kubernetes eBPF与Cilium深度实践 (eBPF and Cilium Deep Practice)'
+summary: '本文档深入探讨eBPF技术在Kubernetes中的应用以及Cilium作为新一代CNI的深度实践，涵盖Cilium网络架构（CNCF Graduated）、Tetragon运行时安全、Hubble网络可观测性、无Sidecar服务网格等2026年核心技术。基于大规模生产集群的eBPF实践经验，提供从网络策略到安全监控的完整技术指南。'
 category: papers
 tags:
 - k8s

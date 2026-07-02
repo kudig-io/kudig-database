@@ -1,7 +1,7 @@
 ---
 title: 06 - 存储性能与 IOPS
 description: '# 06 - 存储性能与 IOPS'
-summary: '# 06 - 存储性能与 IOPS'
+summary: 'lsblk -o NAME,SIZE,TYPE,MOUNTPOINT $device > $result_dir/lsblk_info.txt'
 category: storage-fundamentals
 tags:
 - storage

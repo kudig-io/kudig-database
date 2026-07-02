@@ -1,7 +1,7 @@
 ---
 title: 'Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南 [topic-java-kubernetes]'
 description: '# Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南'
-summary: '# Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南'
+summary: '在 Kubernetes 上为 Java 应用构建 CI/CD 流水线，需要解决一系列特定挑战：Maven/Gradle 依赖缓存管理、容器镜像构建优化、安全扫描集成、质量门禁、多架构构建以及 GitOps 部署策略。Tekton 提供声明式的流水线能力，ArgoCD 实现 GitOps 持续交付，'
 category: java-kubernetes
 tags:
 - java

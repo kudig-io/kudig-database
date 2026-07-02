@@ -1,7 +1,7 @@
 ---
 title: 128 - Ingress Controller 深入剖析
 description: '## 一、Ingress Controller 架构总览'
-summary: '## 一、Ingress Controller 架构总览'
+summary: 'requiredDuringSchedulingIgnoredDuringExecution:'
 category: networking
 tags:
 - k8s

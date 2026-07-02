@@ -1,7 +1,7 @@
 ---
 title: 平台升级与迁移策略 (Platform Upgrade & Migration Strategy)
 description: '## 概述'
-summary: '## 概述'
+summary: '本文档从资深平台工程师视角，系统阐述Kubernetes平台升级与迁移的完整策略体系，涵盖版本升级路径规划、零停机迁移方案、风险管控机制、回滚策略等核心内容，结合大型企业生产环境实践经验，为企业级平台演进提供专业指导。'
 category: platform-ops
 tags:
 - k8s

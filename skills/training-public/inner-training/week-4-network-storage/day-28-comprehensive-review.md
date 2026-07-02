@@ -1,7 +1,7 @@
 ---
 title: 'Day 28: 综合复习与实践 [week-4-network-storage]'
 description: '# Day 28: 综合复习与实践'
-summary: '# Day 28: 综合复习与实践'
+summary: 'kubectl get quota,limitrange -n final-demo'
 category: learning
 tags:
 - k8s

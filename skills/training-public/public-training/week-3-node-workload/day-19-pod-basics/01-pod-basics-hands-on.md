@@ -1,7 +1,7 @@
 ---
 title: 'Day 19: Pod 容器组基础实操'
 description: '- Pod 探针配置'
-summary: '- Pod 探针配置'
+summary: 'kubectl get pod <pod-name> -o jsonpath='{.status.conditions[*].type}''
 category: learning
 tags:
 - k8s

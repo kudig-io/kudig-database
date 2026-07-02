@@ -1,7 +1,7 @@
 ---
 title: Pod Pending 调度失败诊断与修复
 description: '# Pod Pending 调度失败诊断与修复'
-summary: '# Pod Pending 调度失败诊断与修复'
+summary: 'Pod Pending 是 Kubernetes 集群中最常见的工单类型之一。当 Pod 被创建但无法被调度到任何节点上运行时，其 `.status.phase` 将保持为 `Pending`。这种状态可能持续数秒（正常调度延迟）到数天（配置错误或资源不足），直接影响业务部署和弹性伸缩。'
 category: pod
 tags:
 - k8s

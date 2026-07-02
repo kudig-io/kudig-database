@@ -1,7 +1,7 @@
 ---
 title: Cadence (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Cadence 是一个分布式、可扩展、持久化的工作流编排引擎，用于以可靠、可扩展的方式执行异步长时间运行的业务逻辑。Cadence 由 Uber 开源，能将复杂的分布式系统交互逻辑简化为简单的编程模型，自动处理失败重试、状态持久化和超时管理。'
 category: entities
 tags:
 - k8s

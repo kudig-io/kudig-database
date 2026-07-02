@@ -1,7 +1,7 @@
 ---
 title: 'Domain-33: Kubernetes Events 全域事件大全'
 description: '## 领域概述'
-summary: '## 领域概述'
+summary: '本领域系统性收录 Kubernetes 生产环境中所有可能出现的事件 (Event)，'
 category: kubernetes-events
 tags:
 - k8s

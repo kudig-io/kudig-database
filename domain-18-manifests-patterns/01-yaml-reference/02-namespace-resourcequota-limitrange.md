@@ -1,7 +1,7 @@
 ---
 title: 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
 description: '# 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考'
-summary: '# 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考'
+summary: '3. [ResourceQuota（资源配额）](#3-resourcequota资源配额)'
 category: yaml-manifests
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 证书故障排查
 description: '# 13 - 证书故障排查 (Certificate Troubleshooting)'
-summary: '# 13 - 证书故障排查 (Certificate Troubleshooting)'
+summary: 'openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -dates'
 category: troubleshooting
 tags:
 - certificate

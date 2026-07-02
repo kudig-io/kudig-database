@@ -1,7 +1,7 @@
 ---
 title: 边缘存储与网络 (Edge Storage and Network)
 description: '# 边缘存储与网络 (Edge Storage and Network)'
-summary: '# 边缘存储与网络 (Edge Storage and Network)'
+summary: '边缘计算场景下的存储与网络面临独特挑战：边缘设备存储容量有限、网络连接不稳定、带宽资源紧张。本文档深入探讨边缘存储解决方案（本地存储、分布式存储）、弱网络优化策略、离线数据同步机制、断线重连策略和带宽优化技术，为构建可靠的边缘存储网络系统提供完整指南。'
 category: edge-computing
 tags:
 - k8s

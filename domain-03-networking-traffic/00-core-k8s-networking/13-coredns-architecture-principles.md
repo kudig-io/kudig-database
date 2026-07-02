@@ -1,7 +1,7 @@
 ---
 title: 53 - CoreDNS 架构与核心原理 (Architecture & Principles)
 description: '# 53 - CoreDNS 架构与核心原理 (Architecture & Principles)'
-summary: '# 53 - CoreDNS 架构与核心原理 (Architecture & Principles)'
+summary: 'CoreDNS 采用**模块化插件架构**，每个功能以独立插件实现，通过链式调用完成DNS请求处理。'
 category: networking
 tags:
 - k8s

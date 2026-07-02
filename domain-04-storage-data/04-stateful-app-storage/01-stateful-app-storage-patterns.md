@@ -49,6 +49,7 @@ authors:
   role: contributor
 created: "2026-06-26"
 updated: "2026-06-26"
+summary: '2. [StatefulSet + Headless Service 模式](#statefulset--headless-service-模式)'
 ---
 
 # 有状态应用 Kubernetes 存储模式

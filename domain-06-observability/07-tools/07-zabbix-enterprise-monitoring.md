@@ -1,7 +1,7 @@
 ---
 title: Zabbix Enterprise Monitoring Platform 深度实践
 description: '# Zabbix Enterprise Monitoring Platform 深度实践'
-summary: '# Zabbix Enterprise Monitoring Platform 深度实践'
+summary: 'This document provides comprehensive exploration of Zabbix enterprise monitoring platform architecture design, deployment practices, and operational management.'
 category: enterprise-monitoring-alerting
 tags:
 - k8s

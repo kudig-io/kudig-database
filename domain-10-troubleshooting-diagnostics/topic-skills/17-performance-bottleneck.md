@@ -1,7 +1,7 @@
 ---
 title: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
 description: '## 1. 概述'
-summary: '## 1. 概述'
+summary: '性能瓶颈是 [[Kubernetes|Kubernetes]] 集群和云原生应用中最常见但也最难定位的问题之一。性能问题往往表现为延迟增加、吞吐量下降、资源使用异常等，其根因可能涉及多个层次：从基础设施（CPU/内存/磁盘/网络）到 Kubernetes 平台（API Server/etcd/Scheduler）再到应用层（代码逻辑/GC/连接池）。'
 category: performance
 tags:
 - k8s

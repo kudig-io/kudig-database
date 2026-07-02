@@ -1,7 +1,7 @@
 ---
 title: Dex (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Dex 是一个身份联合服务，实现 OpenID Connect (OIDC) 协议。它作为身份代理，连接各种身份提供商（LDAP、SAML、GitHub、Google 等），为 Kubernetes 和其他应用提供统一的认证接口。'
 category: entities
 tags:
 - k8s

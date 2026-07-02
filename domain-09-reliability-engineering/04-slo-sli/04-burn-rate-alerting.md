@@ -1,7 +1,7 @@
 ---
 title: Burn Rate 告警与预算消耗监控
 description: '# Burn Rate 告警与预算消耗监控'
-summary: '# Burn Rate 告警与预算消耗监控'
+summary: 'Burn Rate | 30天窗口耗尽时间 | 28天窗口耗尽时间 | 告警级别'
 category: domain
 tags:
 - sre

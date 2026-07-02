@@ -1,7 +1,7 @@
 ---
 title: Kubernetes v1.33 弃用功能与迁移指南
 description: '# Kubernetes v1.33 弃用功能与迁移指南'
-summary: '# Kubernetes v1.33 弃用功能与迁移指南'
+summary: 'kubectl get psp restricted -o yaml > psp-restricted.yaml'
 category: architecture-fundamentals
 tags:
 - k8s

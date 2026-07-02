@@ -2,7 +2,7 @@
 title: Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps Practice)
 description: '# Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps
   Practice)'
-summary: '# Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps Practice)'
+summary: '本文档深入探讨了Kubernetes环境下的成本治理和FinOps实践方法，基于大型企业的真实成本优化案例，提供从成本分析、预算管理到优化策略的完整解决方案，帮助企业实现云资源的高效利用和成本可控。'
 category: papers
 tags:
 - k8s

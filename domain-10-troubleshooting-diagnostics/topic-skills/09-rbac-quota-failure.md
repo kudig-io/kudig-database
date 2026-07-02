@@ -1,7 +1,7 @@
 ---
 title: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 description: '## 1. 概述'
-summary: '## 1. 概述'
+summary: 'RBAC（Role-Based Access Control）和 ResourceQuota 是 [[Kubernetes|Kubernetes]] 中最核心的安全与资源治理机制。RBAC 问题会直接导致用户、ServiceAccount 或控制器无法执行预期操作，严重时可阻断整个 CI/CD 流水线或导致生产服务无法部署。'
 category: security
 tags:
 - k8s

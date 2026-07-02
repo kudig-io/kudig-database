@@ -1,7 +1,7 @@
 ---
 title: 05 - 告警管理策略 (Alerting Management)
 description: '# 05 - 告警管理策略 (Alerting Management)'
-summary: '# 05 - 告警管理策略 (Alerting Management)'
+summary: '本文档从生产环境运维专家视角，深入解析 [[Kubernetes|Kubernetes]] 告警管理体系，涵盖告警策略设计、规则编写、通知路由、抑制去重、SLO驱动告警、智能降噪、多租户管理等核心内容，结合大规模集群实践经验，为企业构建智能化、可扩展的告警系统提供完整指导。'
 category: observability
 tags:
 - k8s

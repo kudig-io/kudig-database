@@ -48,6 +48,7 @@ authors:
   role: contributor
 created: "2026-06-26"
 updated: "2026-06-26"
+summary: '4. [配置 BackupStorageLocation 与 VolumeSnapshotLocation](#配置-backupstoragelocation-与-volumesnapshotlocation)'
 ---
 
 # Velero 阿里云专有云备份恢复实战

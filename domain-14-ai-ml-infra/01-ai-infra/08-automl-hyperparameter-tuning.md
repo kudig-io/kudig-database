@@ -1,7 +1,7 @@
 ---
 title: AutoML与超参数调优
 description: '## 一、AutoML架构全景'
-summary: '## 一、AutoML架构全景'
+summary: 'from sklearn.gaussian_process import GaussianProcessRegressor'
 category: ai-infra
 tags:
 - k8s

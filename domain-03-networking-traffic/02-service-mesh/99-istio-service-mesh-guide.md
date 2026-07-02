@@ -1,7 +1,7 @@
 ---
 title: Istio 企业级服务网格入门指南
 description: '# Istio 企业级服务网格入门指南'
-summary: '# Istio 企业级服务网格入门指南'
+summary: 'Istio 是功能最全面的开源服务网格平台，提供流量管理、安全通信、可观测性和策略执行等四大核心能力。作为 CNCF 毕业项目（2023年），Istio 已被全球数以千计的企业用于生产环境，是服务网格领域的事实标准。本指南从零开始，'
 category: service-mesh-microservices
 tags:
 - k8s

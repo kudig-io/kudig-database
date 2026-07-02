@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 集群创建操作指南
 description: '# Kubernetes 集群创建操作指南'
-summary: '# Kubernetes 集群创建操作指南'
+summary: 'func NewCmdInit(out io.Writer, initFlags *initFlags) *cobra.Command'
 category: references
 tags:
 - k8s

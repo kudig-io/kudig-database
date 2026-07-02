@@ -1,7 +1,7 @@
 ---
 title: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 description: '## 1. 概述'
-summary: '## 1. 概述'
+summary: 'Deployment 滚动更新问题是 [[Kubernetes|Kubernetes]] 生产环境中**最常见的工作负载问题类型**之一。当滚动更新失败时，可能导致新版本无法上线、旧版本无法退役、甚至服务完全不可用。Deployment Controller 通过 [[ReplicaSet|ReplicaSet]] 管理 Pod 的创建和删除，'
 category: workload
 tags:
 - k8s

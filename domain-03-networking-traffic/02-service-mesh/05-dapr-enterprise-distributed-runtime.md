@@ -1,7 +1,7 @@
 ---
 title: Dapr (Distributed Application Runtime) Enterprise 深度实践
 description: '# Dapr (Distributed Application Runtime) Enterprise 深度实践'
-summary: '# Dapr (Distributed Application Runtime) Enterprise 深度实践'
+summary: 'Dapr (Distributed Application Runtime) 是微软于2019年发起、2023年从 CNCF 毕业的分布式应用运行时项目。与传统的服务网格在网络层提供透明代理不同，'
 category: service-mesh-microservices
 tags:
 - k8s

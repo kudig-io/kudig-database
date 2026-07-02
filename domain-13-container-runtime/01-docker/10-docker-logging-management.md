@@ -1,7 +1,7 @@
 ---
 title: Docker 日志管理与分析
 description: '# Docker 日志管理与分析'
-summary: '# Docker 日志管理与分析'
+summary: 'journalctl -u docker CONTAINER_NAME=web-service -f'
 category: docker
 tags:
 - docker

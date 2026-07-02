@@ -1,7 +1,7 @@
 ---
 title: etcd 数据清理与成员移除 — 源码分析 (topic-code-analysis)
 description: '## 概述'
-summary: '## 概述'
+summary: '阶段的 etcd 类型检测、数据目录获取、RemoveStackedEtcdMemberFromCluster 成员移除逻辑、唯一成员特殊处理以及外部 etcd'
 category: general
 tags:
 - reference

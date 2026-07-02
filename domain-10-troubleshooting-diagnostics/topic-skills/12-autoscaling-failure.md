@@ -1,7 +1,7 @@
 ---
 title: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 description: '## 1. 概述'
-summary: '## 1. 概述'
+summary: '弹性伸缩是 [[Kubernetes|Kubernetes]] 实现资源效率和应用高可用的核心能力。当弹性伸缩失效时，可能导致**资源浪费**（无法缩容）、**服务降级**（无法扩容）或**成本失控**。Kubernetes 提供三个层次的弹性伸缩机制，本 [[SKILL|Skill]] 覆盖它们的完整故障诊断：'
 category: scaling
 tags:
 - k8s

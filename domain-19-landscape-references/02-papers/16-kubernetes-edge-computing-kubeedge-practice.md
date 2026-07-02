@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 边缘计算与KubeEdge实践 (Edge Computing and KubeEdge Practice)
 description: '# Kubernetes 边缘计算与KubeEdge实践 (Edge Computing and KubeEdge Practice)'
-summary: '# Kubernetes 边缘计算与KubeEdge实践 (Edge Computing and KubeEdge Practice)'
+summary: '本文档深入探讨了Kubernetes边缘计算架构和KubeEdge的实践应用，基于大规模边缘计算平台的部署经验，提供从边缘节点管理到应用部署的完整技术指南，帮助企业构建高效、可靠的边缘计算解决方案。'
 category: papers
 tags:
 - k8s

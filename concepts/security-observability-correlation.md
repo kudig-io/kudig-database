@@ -1,7 +1,7 @@
 ---
 title: 安全事件与可观测性的关联分析
 description: '# 安全事件与可观测性的关联分析'
-summary: '# 安全事件与可观测性的关联分析'
+summary: 'Falco → Alertmanager → Loki (日志) + Prometheus (指标)'
 category: synthesis
 tags:
 - security

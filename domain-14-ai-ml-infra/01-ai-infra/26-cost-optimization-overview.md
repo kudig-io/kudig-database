@@ -1,7 +1,7 @@
 ---
 title: 26 - AI基础设施成本优化概览
 description: '# 26 - AI基础设施成本优化概览'
-summary: '# 26 - AI基础设施成本优化概览'
+summary: 'from kubernetes_asyncio import client, config'
 category: ai-infra
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 17 - 安全扫描与漏洞检测工具
 description: '# 17 - 安全扫描与漏洞检测工具'
-summary: '# 17 - 安全扫描与漏洞检测工具'
+summary: 'trivy.dbRepository: ghcr.io/aquasecurity/trivy-db'
 category: security
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Logging Operator [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Logging Operator 是一个 Kubernetes Operator，用于自动化部署和配置 Kubernetes 集群的日志收集管道。它基于 Fluentd 和 Fluent Bit 构建，通过 CRD 声明式地管理日志的收集、过滤、转换和路由，支持将日志发送到 Elasticsearch、Loki、S3、Kafka 等多种后端。'
 category: entities
 tags:
 - k8s

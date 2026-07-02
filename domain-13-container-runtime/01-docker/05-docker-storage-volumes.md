@@ -1,7 +1,7 @@
 ---
 title: Docker 存储与数据卷
 description: '# Docker 存储与数据卷'
-summary: '# Docker 存储与数据卷'
+summary: 'mount -o noatime,nodiratime /dev/sdb1 /var/lib/docker'
 category: docker
 tags:
 - docker

@@ -1,7 +1,7 @@
 ---
 title: 18 - Kubernetes 升级和迁移策略指南
 description: '# 18 - Kubernetes 升级和迁移策略指南'
-summary: '# 18 - Kubernetes 升级和迁移策略指南'
+summary: '本文档详细阐述 Kubernetes 集群的升级策略、迁移方案和版本管理最佳实践，涵盖从版本规划到回滚恢复的完整生命周期管理，确保集群升级过程的安全性和可靠性。'
 category: architecture-fundamentals
 tags:
 - k8s

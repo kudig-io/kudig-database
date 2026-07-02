@@ -1,7 +1,7 @@
 ---
 title: OpenChoreo (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'OpenChoreo 是一个云原生的内部开发者平台 (IDP) 框架，提供开箱即用的开发者自助服务门户。它基于 Kubernetes 构建，为开发团队提供应用创建、部署、监控的统一界面，同时让平台团队可以通过声明式配置定义黄金路径 (Golden Path) 和治理策略。'
 category: entities
 tags:
 - k8s

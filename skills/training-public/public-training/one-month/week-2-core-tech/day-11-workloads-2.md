@@ -1,7 +1,7 @@
 ---
 title: 'Day 11: 工作负载 - Pod 生命周期 + 资源管理 + HPA'
 description: '# Day 11: 工作负载 - Pod 生命周期 + 资源管理 + HPA'
-summary: '# Day 11: 工作负载 - Pod 生命周期 + 资源管理 + HPA'
+summary: 'kubectl get pod qos-guaranteed -o jsonpath='{.status.qosClass}''
 category: learning
 tags:
 - k8s

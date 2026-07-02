@@ -1,7 +1,7 @@
 ---
 title: 11 - 密钥与敏感信息管理工具
 description: '# 11 - 密钥与敏感信息管理工具'
-summary: '# 11 - 密钥与敏感信息管理工具'
+summary: 'preferredDuringSchedulingIgnoredDuringExecution:'
 category: security
 tags:
 - k8s

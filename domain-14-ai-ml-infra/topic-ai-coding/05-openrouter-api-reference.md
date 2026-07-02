@@ -1,7 +1,7 @@
 ---
 title: API 参考与请求/响应规范
 description: '## 概述'
-summary: '## 概述'
+summary: '本文提供 OpenRouter API 的完整参考：包括全部端点概览、Chat Completions 请求 Schema、消息类型、采样参数、响应格式（流式与非流式）、Tool Calling 类型、Assistant Prefill 技术、HTTP 状态码与错误处理以及 OpenAPI Spec 访问方式。'
 category: ai-coding
 tags:
 - ai

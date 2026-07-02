@@ -1,7 +1,7 @@
 ---
 title: CNI 网络插件故障排查
 description: '# 03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)'
-summary: '# 03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)'
+summary: 'kubectl get pods -o wide --all-namespaces | grep -v "Running"'
 category: troubleshooting
 tags:
 - cni

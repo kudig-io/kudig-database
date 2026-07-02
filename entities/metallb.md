@@ -1,7 +1,7 @@
 ---
 title: MetalLB (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'MetalLB 是为裸金属 Kubernetes 集群提供的负载均衡器实现。在云环境中，Kubernetes LoadBalancer 类型的 [[Service|Service]] 由云提供商自动配置。MetalLB 填补了裸金属环境的空白，通过 Layer 2 (ARP/NDP) 或 BGP 协议为 Service 分配和公告外部 IP 地址。'
 category: entities
 tags:
 - k8s

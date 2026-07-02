@@ -1,7 +1,7 @@
 ---
 title: Docker 故障排查指南
 description: '# Docker 故障排查指南'
-summary: '# Docker 故障排查指南'
+summary: 'docker run -it --entrypoint /bin/sh <image>'
 category: docker
 tags:
 - docker

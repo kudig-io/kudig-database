@@ -1,7 +1,7 @@
 ---
 title: bootc (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'bootc 是一个基于 OCI 容器镜像的 Linux 系统启动和升级工具，将容器镜像作为操作系统的部署单元。它允许使用标准的容器构建工具（如 Dockerfile）来定义和构建可启动的 Linux 系统，并通过事务性更新机制实现系统的原子升级和回滚。bootc 将容器工作流的优势（镜像注册中心、版本标签、CI/CD 流水线）引入操作系统管理领域。'
 category: entities
 tags:
 - k8s

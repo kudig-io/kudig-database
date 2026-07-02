@@ -1,7 +1,7 @@
 ---
 title: 12 - 存储监控告警与性能调优
 description: '# 12 - 存储监控告警与性能调优'
-summary: '# 12 - 存储监控告警与性能调优'
+summary: 'sum(kubelet_volume_stats_available_bytes) by (storageclass) /'
 category: storage
 tags:
 - k8s

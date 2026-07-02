@@ -1,7 +1,7 @@
 ---
 title: 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
 description: '# 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)'
-summary: '# 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)'
+summary: 'MaxIdleConns        int           // 最大空闲连接数'
 category: control-plane
 tags:
 - k8s

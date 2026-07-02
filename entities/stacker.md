@@ -1,7 +1,7 @@
 ---
 title: Stacker (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Stacker 是一个无需特权即可构建 OCI 容器镜像的工具。它使用声明式的 YAML 文件（stacker.yaml）定义镜像层，通过 overlay 文件系统构建镜像，无需 Docker daemon 或 root 权限。Stacker 支持可复现构建、内容寻址层缓存和多阶段构建，特别适合 CI/CD 流水线中的安全镜像构建。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 调度与编排策略全栈培训 (training-public)
 description: '# Kubernetes 调度与编排策略全栈培训'
-summary: '# Kubernetes 调度与编排策略全栈培训'
+summary: '2. 根据业务需求选择合适的调度策略（nodeSelector/Affinity/Taint）'
 category: presentations
 tags:
 - k8s

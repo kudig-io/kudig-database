@@ -1,7 +1,7 @@
 ---
 title: OpenYurt (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'OpenYurt 是阿里云开源的边缘计算平台，将原生 Kubernetes 能力无缝扩展到边缘场景。它解决了边缘网络不稳定、节点自治、多区域管理等边缘计算特有挑战。'
 category: entities
 tags:
 - k8s

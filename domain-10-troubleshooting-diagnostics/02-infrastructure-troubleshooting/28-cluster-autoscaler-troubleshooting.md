@@ -1,7 +1,7 @@
 ---
 title: 集群自动扩缩容故障排查
 description: '# 28 - 集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)'
-summary: '# 28 - 集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)'
+summary: 'kubectl get pods -n kube-system | grep cluster-autoscaler'
 category: troubleshooting
 tags:
 - cluster-autoscaler

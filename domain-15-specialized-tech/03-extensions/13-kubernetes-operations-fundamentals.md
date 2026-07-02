@@ -1,7 +1,7 @@
 ---
 title: 130 - Kubernetes 运维基础技能：日志管理、备份恢复、安全加固与性能调优
 description: '# 130 - Kubernetes 运维基础技能：日志管理、备份恢复、安全加固与性能调优'
-summary: '# 130 - Kubernetes 运维基础技能：日志管理、备份恢复、安全加固与性能调优'
+summary: 'Path              /var/log/containers/*.log'
 category: extensions
 tags:
 - k8s

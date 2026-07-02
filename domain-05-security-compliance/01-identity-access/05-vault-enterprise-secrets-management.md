@@ -1,7 +1,7 @@
 ---
 title: HashiCorp Vault 企业级密钥管理深度实践
 description: '# HashiCorp Vault 企业级密钥管理深度实践'
-summary: '# HashiCorp Vault 企业级密钥管理深度实践'
+summary: 'HashiCorp Vault 是企业级密钥管理和加密服务平台，提供集中式的密钥存储、动态凭证生成、加密即服务和完整的审计追踪能力。在云原生环境中，应用程序需要管理数据库凭证、API 密钥、TLS 证书、加密密钥等多种敏感数据，Vault 通过统一的 API 和策略引擎为这些需求提供安全、可审计的解决方案。'
 category: cloud-native-security
 tags:
 - k8s

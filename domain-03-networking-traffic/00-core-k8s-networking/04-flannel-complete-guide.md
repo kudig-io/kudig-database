@@ -1,7 +1,7 @@
 ---
 title: 142 - Flannel 完整指南 (Flannel Complete Guide)
 description: '# 142 - Flannel 完整指南 (Flannel Complete Guide)'
-summary: '# 142 - Flannel 完整指南 (Flannel Complete Guide)'
+summary: 'pod-security.kubernetes.io/enforce: privileged'
 category: networking
 tags:
 - k8s

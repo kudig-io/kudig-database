@@ -1,7 +1,7 @@
 ---
 title: 02 - 块存储、文件存储、对象存储
 description: '# 02 - 块存储、文件存储、对象存储'
-summary: '# 02 - 块存储、文件存储、对象存储'
+summary: '/> backstores/block create disk0 /dev/sdb'
 category: storage-fundamentals
 tags:
 - storage

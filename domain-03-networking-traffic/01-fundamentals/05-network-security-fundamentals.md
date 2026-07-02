@@ -1,7 +1,7 @@
 ---
 title: 网络安全基础
 description: '# 网络安全基础'
-summary: '# 网络安全基础'
+summary: 'iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT'
 category: network-fundamentals
 tags:
 - network

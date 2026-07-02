@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 部署方案指南 (Deployment Guide) [deployment]
 description: '# Kubernetes 部署方案指南 (Deployment Guide)'
-summary: '# Kubernetes 部署方案指南 (Deployment Guide)'
+summary: '本目录汇集了从本地开发到生产环境的完整 Kubernetes 集群部署方案。每篇文档均以**可直接动手操作**为标准编写，包含完整的命令、配置文件、预期输出和故障排查指南。'
 category: deployment
 tags:
 - k8s

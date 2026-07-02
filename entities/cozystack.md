@@ -1,7 +1,7 @@
 ---
 title: Cozystack (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Cozystack 是一个开源的 PaaS 平台，基于 Kubernetes 构建，旨在提供类似云厂商的托管服务体验。它允许平台工程师在裸金属或任何基础设施上快速搭建一个完整的云平台，提供托管 Kubernetes 集群、数据库（PostgreSQL、MySQL、Redis）、消息队列、监控等服务。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 31 - AI平台治理框架
 description: '## 一、AI平台治理全景架构'
-summary: '## 一、AI平台治理全景架构'
+summary: 'kubectl apply -f ai-governance-policy.yaml'
 category: ai-infra
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: KuDig Doctor — 身份标识 (02-ai-agents)
 description: '- 架构师'
-summary: '- 架构师'
+summary: '"就绪。请提供: 1) 异常资源类型 2) Namespace 3) 错误现象"'
 category: general
 tags:
 - ai

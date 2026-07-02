@@ -1,7 +1,7 @@
 ---
 title: Virtual Kubelet [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Virtual Kubelet 是一个开源框架，它模拟 Kubernetes kubelet，将自身注册为集群中的一个节点。但不同于真正的 kubelet 运行在物理/虚拟机上，Virtual Kubelet 将 Pod 调度到其他后端服务，'
 category: entities
 tags:
 - k8s

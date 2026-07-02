@@ -1,7 +1,7 @@
 ---
 title: AI模型注册中心与版本管理
 description: '# AI模型注册中心与版本管理'
-summary: '# AI模型注册中心与版本管理'
+summary: 'service.beta.kubernetes.io/aws-load-balancer-internal: "true"'
 category: ai-infra
 tags:
 - k8s

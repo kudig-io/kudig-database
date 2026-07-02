@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 存储体系全栈进阶培训 (从入门到专家) [topic-presentations]
 description: '# Kubernetes 存储体系全栈进阶培训 (从入门到专家)'
-summary: '# Kubernetes 存储体系全栈进阶培训 (从入门到专家)'
+summary: '2. 描述 CSI 挂载的完整流程（CreateVolume → Stage → Publish）'
 category: presentations
 tags:
 - k8s

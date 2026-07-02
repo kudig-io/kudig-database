@@ -1,7 +1,7 @@
 ---
 title: Kubernetes v1.33 生产环境最佳实践
 description: '# Kubernetes v1.33 生产环境最佳实践'
-summary: '# Kubernetes v1.33 生产环境最佳实践'
+summary: '从 ValidatingWebhook 迁移到 ValidatingAdmissionPolicy 如果:'
 category: architecture-fundamentals
 tags:
 - k8s

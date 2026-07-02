@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 监控最佳实践
 description: '# Kubernetes 监控最佳实践'
-summary: '# Kubernetes 监控最佳实践'
+summary: '本指南提供生产环境 Kubernetes 监控配置的最佳实践，涵盖从 Prometheus 部署到告警配置的全方位内容 ^[inferred]。'
 category: skills
 tags:
 - k8s

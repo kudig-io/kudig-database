@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 运维硬件故障排查专题
 description: '# Kubernetes 运维硬件故障排查专题'
-summary: '# Kubernetes 运维硬件故障排查专题'
+summary: 'Kubernetes 集群运维中，硬件问题是导致节点异常、Pod 驱逐、服务中断的重要原因。本文档专注于 K8s 场景下的硬件问题识别、诊断方法和应急处理流程。'
 category: hardware
 tags:
 - k8s

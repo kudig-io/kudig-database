@@ -1,7 +1,7 @@
 ---
 title: Linkerd 轻量级服务网格实践指南
 description: '# Linkerd 轻量级服务网格实践指南'
-summary: '# Linkerd 轻量级服务网格实践指南'
+summary: 'Linkerd 是 CNCF 第二个毕业的服务网格项目（2021年），以极简主义设计哲学著称。其 Rust 编写的 linkerd-proxy 仅消耗约 20MB 内存，P99 延迟增加低于 1ms，是资源敏感场景和快速落地需求的最佳选择。Linkerd 的核心理念是"做得更少但做得更好"——不追求功能大而全，'
 category: service-mesh-microservices
 tags:
 - k8s

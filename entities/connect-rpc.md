@@ -1,7 +1,7 @@
 ---
 title: Connect RPC [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Connect RPC 是一个轻量级、高性能的 RPC 框架，旨在简化 Protobuf 服务的开发和调用。它兼容 gRPC 协议的同时，支持标准 HTTP/1.1 和 HTTP/2，使得服务可以直接在浏览器中调用（无需代理）。Connect 提供 Go、TypeScript/JavaScript、Swift 和 Kotlin 的客户端和服务端实现，'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Docker 性能监控与调优
 description: '# Docker 性能监控与调优'
-summary: '# Docker 性能监控与调优'
+summary: 'docker inspect container_name | jq '.[].HostConfig.Memory''
 category: docker
 tags:
 - docker

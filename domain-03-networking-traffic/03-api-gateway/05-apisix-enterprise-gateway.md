@@ -1,7 +1,7 @@
 ---
 title: 05 - Apache APISIX 企业级 API 网关实践
 description: '# 05 - Apache APISIX 企业级 API 网关实践'
-summary: '# 05 - Apache APISIX 企业级 API 网关实践'
+summary: '7. [APISIX Ingress Controller](#7-apisix-ingress-controller)'
 category: cloud-native-api-gateway
 tags:
 - k8s

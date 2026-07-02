@@ -1,7 +1,7 @@
 ---
 title: Skills + FTA 使用指南 — k8s-node-notready & node-fta
 description: '# Skills + FTA 使用指南 — k8s-node-notready & node-fta'
-summary: '# Skills + FTA 使用指南 — k8s-node-notready & node-fta'
+summary: 'domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/'
 category: skills
 tags:
 - k8s

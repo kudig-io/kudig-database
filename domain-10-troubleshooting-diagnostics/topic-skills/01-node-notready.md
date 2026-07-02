@@ -1,7 +1,7 @@
 ---
 title: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
 description: '## 1. 概述'
-summary: '## 1. 概述'
+summary: 'Node NotReady 是 [[Kubernetes|Kubernetes]] 集群中**爆炸半径最大**的问题类型之一。当节点进入 NotReady 状态时，'
 category: node
 tags:
 - k8s

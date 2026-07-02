@@ -1,7 +1,7 @@
 ---
 title: 30 - etcd运维操作
 description: '# 30 - etcd运维操作'
-summary: '# 30 - etcd运维操作'
+summary: 'systemctl stop kube-apiserver kube-controller-manager kube-scheduler'
 category: control-plane
 tags:
 - k8s

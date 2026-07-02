@@ -1,7 +1,7 @@
 ---
 title: 'Day 25: Flannel 网络实操'
 description: '# Day 25: Flannel 网络实操'
-summary: '# Day 25: Flannel 网络实操'
+summary: 'kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml'
 category: learning
 tags:
 - k8s

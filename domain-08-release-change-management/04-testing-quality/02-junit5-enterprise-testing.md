@@ -1,7 +1,7 @@
 ---
 title: JUnit 5 企业级单元测试框架深度实践
 description: '# JUnit 5 企业级单元测试框架深度实践'
-summary: '# JUnit 5 企业级单元测试框架深度实践'
+summary: 'JUnit 5是Java生态系统中最先进的单元测试框架，提供了丰富的注解、扩展机制和现代化的测试功能。本文档从企业级测试专家角度，深入探讨JUnit 5的架构设计、高级特性、测试策略和最佳实践。'
 category: automated-testing-quality
 tags:
 - k8s

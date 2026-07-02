@@ -1,7 +1,7 @@
 ---
 title: Drasi (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Drasi 是由 Microsoft 开发的数据变更处理平台，允许你持续检测数据源中的变更并自动做出反应。它使用 Continuous Query（持续查询）对来自数据库、消息队列、事件流等多种数据源的变更进行实时过滤、聚合和关联，当查询结果发生变化时触发下游动作（如发送通知、调用 API、更新其他系统）。'
 category: entities
 tags:
 - k8s

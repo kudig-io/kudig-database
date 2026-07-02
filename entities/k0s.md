@@ -1,7 +1,7 @@
 ---
 title: K0s (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'K0s 是一个轻量级、全功能的 Kubernetes 发行版，打包为单一二进制文件，零依赖、零摩擦地安装和运行。k0s 的设计目标是简化 Kubernetes 的安装、运维和升级过程，适用于从边缘设备到大规模数据中心的各种场景。'
 category: entities
 tags:
 - k8s

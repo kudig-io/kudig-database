@@ -1,7 +1,7 @@
 ---
 title: 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)
 description: '# 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)'
-summary: '# 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)'
+summary: '4. [集群配置管理 (kubeadm config)](#4-集群配置管理-kubeadm-config)'
 category: control-plane
 tags:
 - k8s

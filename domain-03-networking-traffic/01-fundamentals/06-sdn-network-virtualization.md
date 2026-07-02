@@ -1,7 +1,7 @@
 ---
 title: SDN 与网络虚拟化
 description: '# SDN 与网络虚拟化'
-summary: '# SDN 与网络虚拟化'
+summary: 'kubectl apply -f https://raw.githubusercontent.com/cilium/cilium/v1.12/install/kubernetes/quick-install.yaml'
 category: network-fundamentals
 tags:
 - network

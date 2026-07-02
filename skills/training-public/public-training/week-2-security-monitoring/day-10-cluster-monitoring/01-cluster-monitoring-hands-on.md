@@ -1,7 +1,7 @@
 ---
 title: 'Day 10: K8s 集群监控体系搭建实操'
 description: '# Day 10: K8s 集群监控体系搭建实操'
-summary: '# Day 10: K8s 集群监控体系搭建实操'
+summary: 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
 category: learning
 tags:
 - k8s

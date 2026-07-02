@@ -1,7 +1,7 @@
 ---
 title: Flatcar Container Linux (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Flatcar Container Linux 是为容器优化的不可变 Linux 发行版，是 CoreOS Container Linux 的延续和替代品。它提供最小化、自动更新、安全的容器运行环境。'
 category: entities
 tags:
 - k8s

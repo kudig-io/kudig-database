@@ -1,7 +1,7 @@
 ---
 title: Harbor企业级容器镜像仓库深度实践
 description: '# Harbor企业级容器镜像仓库深度实践'
-summary: '# Harbor企业级容器镜像仓库深度实践'
+summary: '本文档深入探讨了Harbor企业级容器镜像仓库的架构设计、安全管理和运维实践，基于大规模生产环境的部署经验，提供从镜像存储到分发的完整技术指南，帮助企业构建安全、高效的容器镜像管理体系。'
 category: container-image-management
 tags:
 - k8s

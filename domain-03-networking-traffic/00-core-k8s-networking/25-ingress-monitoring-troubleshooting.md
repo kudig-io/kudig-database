@@ -1,7 +1,7 @@
 ---
 title: 133 - Ingress 监控与故障排查
 description: '# 133 - Ingress 监控与故障排查'
-summary: '# 133 - Ingress 监控与故障排查'
+summary: 'sum(rate(nginx_ingress_controller_requests{status=~"2..|3.."}[5m]))'
 category: networking
 tags:
 - k8s

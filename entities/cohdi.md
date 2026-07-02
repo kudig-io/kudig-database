@@ -1,7 +1,7 @@
 ---
 title: Cohdi
 description: '## 概述'
-summary: '## 概述'
+summary: 'CoHDI（Composable Hyperconverged Disaggregated Infrastructure）是一个 Kubernetes Operator，用于在分解式基础设施中动态组合和管理硬件资源。'
 category: entities
 tags:
 - k8s

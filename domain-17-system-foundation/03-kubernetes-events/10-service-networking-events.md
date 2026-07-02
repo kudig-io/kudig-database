@@ -1,7 +1,7 @@
 ---
 title: 10 - Service 与网络事件
 description: '# 10 - Service 与网络事件'
-summary: '# 10 - Service 与网络事件'
+summary: '$ kubectl describe service my-loadbalancer-svc'
 category: kubernetes-events
 tags:
 - k8s

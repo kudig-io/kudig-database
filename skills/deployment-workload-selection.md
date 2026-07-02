@@ -1,7 +1,7 @@
 ---
 title: 工作负载控制器选型
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kubernetes 提供多种工作负载控制器，每种适用于不同的业务场景。准确选择控制器类型是设计 Kubernetes 应用架构的基础。'
 category: skills
 tags:
 - k8s

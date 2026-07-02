@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 生产运维 1 个月学习计划
 description: '# Kubernetes 生产运维 1 个月学习计划'
-summary: '# Kubernetes 生产运维 1 个月学习计划'
+summary: '本学习计划旨在帮助运维工程师在一个月内从 Kubernetes 入门级提升到全栈运维能力。课程设计遵循"理论 + 实践"的黄金比例（40% 理论 : 60% 实践），每天 4-5 小时的学习时间，通过 28 天的系统性学习，覆盖从集群搭建到生产运维的完整知识体系。'
 category: learning
 tags:
 - k8s

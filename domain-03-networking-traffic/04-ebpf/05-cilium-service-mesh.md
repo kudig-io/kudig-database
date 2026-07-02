@@ -2,7 +2,7 @@
 title: Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sidecar-less Architecture)
 description: '# Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sidecar-less
   Architecture)'
-summary: '# Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sidecar-less Architecture)'
+summary: '4. [mTLS 与身份验证 (SPIFFE/SPIRE)](#4-mtls-与身份验证-spiffespire)'
 category: ebpf-technology
 tags:
 - k8s

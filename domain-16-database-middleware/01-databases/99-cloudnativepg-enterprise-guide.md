@@ -1,7 +1,7 @@
 ---
 title: CloudNativePG 企业级 PostgreSQL 运维指南
 description: '# CloudNativePG 企业级 PostgreSQL 运维指南'
-summary: '# CloudNativePG 企业级 PostgreSQL 运维指南'
+summary: 'CloudNativePG（CNPG）是一个由 EDB 主导开发、已进入 CNCF Sandbox 的 PostgreSQL [[Kubernetes|Kubernetes]] Operator。它以声明式 CRD 方式管理 PostgreSQL 集群的完整生命周期，包括集群创建、主从复制、自动故障转移、备份恢复、连接池管理、版本升级和监控集成。'
 category: enterprise-database-middleware
 tags:
 - k8s

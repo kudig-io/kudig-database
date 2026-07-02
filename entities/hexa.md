@@ -1,7 +1,7 @@
 ---
 title: Hexa
 description: '## 概述'
-summary: '## 概述'
+summary: 'Hexa 是一个统一的策略编排引擎，使用 IDQL (Identity Query Language) 作为通用策略语言，实现跨多个云平台和授权系统的访问控制策略管理。它支持将策略从一个授权系统（如 AWS IAM、Azure RBAC、Google IAP）翻译和同步到另一个系统，避免了在不同平台上重复维护相似策略的问题。'
 category: entities
 tags:
 - k8s

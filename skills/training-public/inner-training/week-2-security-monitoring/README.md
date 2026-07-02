@@ -1,7 +1,7 @@
 ---
 title: 'Week 2: 安全认证与监控运维 (Days 8-14)'
 description: '# Week 2: 安全认证与监控运维 (Days 8-14)'
-summary: '# Week 2: 安全认证与监控运维 (Days 8-14)'
+summary: '第二周进入 K8s 集群的安全与监控领域。在第一周中，你掌握了集群的创建、删除、升级等生命周期管理操作。本周将学习如何保护集群安全、识别和防范安全风险、配置审计日志，以及搭建基础监控体系。'
 category: learning
 tags:
 - k8s

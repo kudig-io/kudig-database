@@ -1,7 +1,7 @@
 ---
 title: eBPF 安全应用案例 (eBPF Security Applications and Use Cases)
 description: '# eBPF 安全应用案例 (eBPF Security Applications and Use Cases)'
-summary: '# eBPF 安全应用案例 (eBPF Security Applications and Use Cases)'
+summary: '传统安全工具依赖内核模块或用户态 ptrace，面临性能开销高、稳定性差、绕过风险大等问题。eBPF 在内核验证器保障下以近零开销运行，实现了安全监控的范式转变。'
 category: ebpf-technology
 tags:
 - k8s

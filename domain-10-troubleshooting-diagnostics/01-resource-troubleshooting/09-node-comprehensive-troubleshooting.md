@@ -1,7 +1,7 @@
 ---
 title: Node 全面故障排查
 description: '# 09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)'
-summary: '# 09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)'
+summary: 'kubectl describe node <node-name> | grep -A20 "Conditions:"'
 category: troubleshooting
 tags:
 - node

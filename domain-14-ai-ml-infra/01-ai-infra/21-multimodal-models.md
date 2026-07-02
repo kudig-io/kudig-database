@@ -1,7 +1,7 @@
 ---
 title: 21 - 多模态模型融合与部署
 description: '# 21 - 多模态模型融合与部署'
-summary: '# 21 - 多模态模型融合与部署'
+summary: 'requiredDuringSchedulingIgnoredDuringExecution:'
 category: ai-infra
 tags:
 - k8s

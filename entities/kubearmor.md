@@ -1,7 +1,7 @@
 ---
 title: KubeArmor (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'KubeArmor 是一个云原生运行时安全引擎，利用 Linux 安全模块 (LSM - AppArmor, BPF-LSM, SELinux) 在系统级别执行安全策略。它保护 Kubernetes Pod、容器和节点免受已知和未知的威胁，包括进程执行、文件访问和网络操作的细粒度控制。'
 category: entities
 tags:
 - k8s

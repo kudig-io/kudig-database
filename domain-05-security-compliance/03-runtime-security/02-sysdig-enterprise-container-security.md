@@ -1,7 +1,7 @@
 ---
 title: Sysdig企业级容器安全深度实践
 description: '# Sysdig企业级容器安全深度实践'
-summary: '# Sysdig企业级容器安全深度实践'
+summary: 'This document provides in-depth exploration of Sysdig enterprise container security platform architecture design, deployment practices, and operational management.'
 category: cloud-native-security
 tags:
 - k8s

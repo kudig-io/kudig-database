@@ -1,7 +1,7 @@
 ---
 title: 07 - 存储日常运维操作手册
 description: '# 07 - 存储日常运维操作手册'
-summary: '# 07 - 存储日常运维操作手册'
+summary: 'kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,CAPACITY:.spec.capacity.storage,ACCESS:.spec.accessModes,CLASS:.spec.storageClassName'
 category: storage
 tags:
 - k8s

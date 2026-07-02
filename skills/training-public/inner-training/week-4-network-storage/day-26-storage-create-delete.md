@@ -1,7 +1,7 @@
 ---
 title: 'Day 26: 存储卷创建 & 删除'
 description: '# Day 26: 存储卷创建 & 删除'
-summary: '# Day 26: 存储卷创建 & 删除'
+summary: '本文深入讲解 Kubernetes 存储体系的核心机制——PV/PVC/StorageClass 的创建、绑定和生命周期管理。存储是有状态应用（数据库、消息队列）运行的基石。在 ACK 环境中，你将学习如何使用阿里云的云盘（ESSD）、NAS、OSS 等存储产品，通过静态和动态两种方式创建存储卷，并理解不同回收策略对数据安全的影响。'
 category: learning
 tags:
 - k8s

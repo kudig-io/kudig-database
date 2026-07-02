@@ -1,7 +1,7 @@
 ---
 title: kgateway
 description: '## 概述'
-summary: '## 概述'
+summary: 'K Gateway（原 Gloo Gateway）是一个基于 Envoy 的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] Gateway，完全实现了 Kubernetes Gateway API 标准。'
 category: entities
 tags:
 - k8s

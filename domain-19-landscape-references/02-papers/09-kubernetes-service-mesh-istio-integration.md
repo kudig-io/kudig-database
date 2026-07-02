@@ -2,7 +2,7 @@
 title: Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and Istio Integration)
 description: '# Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and Istio
   Integration)'
-summary: '# Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and Istio Integration)'
+summary: '本文档深入探讨了Kubernetes环境下服务网格的架构设计、Istio集成实践和运维管理策略，基于大规模微服务架构的实际案例，提供从基础概念到高级特性的完整技术指南，帮助企业构建高效、可靠的微服务治理体系。'
 category: papers
 tags:
 - k8s

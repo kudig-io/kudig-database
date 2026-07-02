@@ -1,7 +1,7 @@
 ---
 title: Traefik Mesh Enterprise Service Mesh 深度实践
 description: '# Traefik Mesh Enterprise Service Mesh 深度实践'
-summary: '# Traefik Mesh Enterprise Service Mesh 深度实践'
+summary: 'Traefik Mesh（原名 Maesh）是基于 Traefik Proxy 的轻量级 [[Kubernetes|Kubernetes]] 原生服务网格。与 [[Istio|Istio]] 和 [[Linkerd|Linkerd]] 的 Sidecar 模式不同，Traefik Mesh 采用"每节点代理"（per-node proxy）架构，'
 category: service-mesh-microservices
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Java 应用性能调优与资源 Sizing 指南
 description: '# Java 应用性能调优与资源 Sizing 指南'
-summary: '# Java 应用性能调优与资源 Sizing 指南'
+summary: '容器内存使用率 = container_memory_working_set_bytes / container_spec_memory_limit_bytes'
 category: troubleshooting
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 'Domain 22: 容器镜像管理 (Container Image Management)'
 description: '# Domain 22: 容器镜像管理 (Container Image Management)'
-summary: '# Domain 22: 容器镜像管理 (Container Image Management)'
+summary: '本领域专注于企业级容器镜像管理系统的架构设计、安全实践和运维管理，涵盖从镜像存储到分发的完整技术体系，为企业构建安全、高效的容器镜像管理体系提供专业指导。包含Harbor、[[docker]] Registry、JFrog Artifactory、Quay等主流镜像平台的深度实践。'
 category: container-image-management
 tags:
 - k8s

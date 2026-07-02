@@ -1,7 +1,7 @@
 ---
 title: 09 - Kubernetes 源码结构与阅读指南 (Source Code)
 description: '# 09 - Kubernetes 源码结构与阅读指南 (Source Code)'
-summary: '# 09 - Kubernetes 源码结构与阅读指南 (Source Code)'
+summary: '理解控制逻辑的第一步是掌握 `staging/src/k8s.io/client-go`。'
 category: design-principles
 tags:
 - k8s

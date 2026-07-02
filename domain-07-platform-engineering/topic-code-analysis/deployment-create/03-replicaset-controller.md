@@ -1,7 +1,7 @@
 ---
 title: ReplicaSet 控制器源码分析 (topic-code-analysis)
 description: '## 概述'
-summary: '## 概述'
+summary: '期望状态对齐、Pod 创建流程、Status 更新以及与 Deployment 的数据流关系。'
 category: general
 tags:
 - reference

@@ -1,7 +1,7 @@
 ---
 title: 第15课：调度与亲和性
 description: '# 第15课：调度与亲和性'
-summary: '# 第15课：调度与亲和性'
+summary: 'kubectl describe pod <pod-name> | grep -A10 "Tolerations"'
 category: skills
 tags:
 - k8s

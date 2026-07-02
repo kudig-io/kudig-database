@@ -1,7 +1,7 @@
 ---
 title: KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)
 description: '# KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)'
-summary: '# KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)'
+summary: '2. [DeviceModel 设备模型](#2-devicemodel-设备模型)'
 category: edge-computing
 tags:
 - k8s

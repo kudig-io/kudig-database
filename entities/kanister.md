@@ -1,7 +1,7 @@
 ---
 title: Kanister (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kanister 是一个面向 Kubernetes 的应用级数据管理框架，专门用于有状态应用（数据库、消息队列等）的备份和恢复。它使用 Blueprint CRD 定义应用特定的备份/恢复操作流程，支持应用一致性的快照和备份。'
 category: entities
 tags:
 - k8s

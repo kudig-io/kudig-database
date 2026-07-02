@@ -1,7 +1,7 @@
 ---
 title: StatefulSet 故障排查
 description: '# 21 - StatefulSet 故障排查 (StatefulSet Troubleshooting)'
-summary: '# 21 - StatefulSet 故障排查 (StatefulSet Troubleshooting)'
+summary: 'kubectl get statefulsets --all-namespaces'
 category: troubleshooting
 tags:
 - statefulset

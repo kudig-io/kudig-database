@@ -1,7 +1,7 @@
 ---
 title: 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rate Limiting
 description: '# 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rate Limiting'
-summary: '# 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rate Limiting'
+summary: '在分布式微服务系统中，问题是不可避免的常态而非例外。网络分区、服务过载、依赖不可用、级联问题等问题随时可能发生。弹性模式（Resilience Patterns）通过在系统层面引入防御性编程机制，使得单个组件的问题不会蔓延为系统级的灾难。本文档从理论与实践两个维度，全面覆盖 [[Kubernetes|Kubernetes]] 环境下微服务弹性模式的实现，'
 category: service-mesh-microservices
 tags:
 - k8s

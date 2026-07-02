@@ -1,7 +1,7 @@
 ---
 title: OVN-Kubernetes (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'OVN-Kubernetes 是一个基于 OVN (Open Virtual Network) 的 Kubernetes CNI 网络插件，提供企业级的虚拟网络功能。它利用 OVN 的分布式虚拟路由、负载均衡、ACL 和 NAT 能力，为 Kubernetes 提供高性能、可扩展的 L2/L3/L4 网络。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 08 - 高可用架构模式 (HA Patterns)
 description: '# 08 - 高可用架构模式 (HA Patterns)'
-summary: '# 08 - 高可用架构模式 (HA Patterns)'
+summary: '在早期的 K8s 版本中，控制面组件（如 Scheduler）使用 `Endpoints` 或 `ConfigMap` 实现分布式锁。'
 category: design-principles
 tags:
 - k8s

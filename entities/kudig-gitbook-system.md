@@ -1,7 +1,7 @@
 ---
 title: Gitbook 本地文档浏览系统与构建指南
 description: '## 概述'
-summary: '## 概述'
+summary: '基于 [mdBook](https://rust-lang.github.io/mdBook/) 构建的本地知识库浏览系统，支持全文搜索、目录折叠导航。'
 category: reference
 tags:
 - k8s

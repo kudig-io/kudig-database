@@ -1,7 +1,7 @@
 ---
 title: Crossplane 平台工程实践指南
 description: '# Crossplane 平台工程实践指南'
-summary: '# Crossplane 平台工程实践指南'
+summary: 'helm repo add crossplane-stable https://charts.crossplane.io/stable'
 category: infrastructure-as-code
 tags:
 - k8s

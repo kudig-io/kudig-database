@@ -1,7 +1,7 @@
 ---
 title: 网络故障排查
 description: '# 网络故障排查'
-summary: '# 网络故障排查'
+summary: '1. **组件存活**：`kubectl get [[Pods|pods]] -n kube-system -l k8s-app=calico-node`/`-l app=flannel`/`-l k8s-app=[[Cilium|cilium]]`，若异常先看对应日志。'
 category: skills
 tags:
 - k8s

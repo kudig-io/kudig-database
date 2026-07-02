@@ -1,7 +1,7 @@
 ---
 title: Koordinator (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Koordinator 是一个基于 QoS 的 Kubernetes 混合调度系统，专为提高集群资源利用率而设计。它通过精细化的资源管理和混部（co-location）技术，在保证延迟敏感型（LS）工作负载 SLO 的同时，充分利用空闲资源运行尽力而为型（BE）任务，实现 60%+ 的集群利用率。'
 category: entities
 tags:
 - k8s

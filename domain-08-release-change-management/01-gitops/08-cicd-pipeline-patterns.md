@@ -1,7 +1,7 @@
 ---
 title: CI/CD 流水线模式与渐进式交付深度实践
 description: '# CI/CD 流水线模式与渐进式交付深度实践'
-summary: '# CI/CD 流水线模式与渐进式交付深度实践'
+summary: 'CI/CD 流水线模式和部署策略是软件交付过程中的核心决策。不同的分支策略（Trunk-Based、GitFlow、GitHub Flow）直接影响团队协作效率和发布节奏；不同的部署策略（滚动更新、蓝绿部署、金丝雀发布）直接影响用户感知和风险控制。选择合适的模式组合，是构建高效、安全交付流程的基础。'
 category: gitops-ci-cd
 tags:
 - k8s

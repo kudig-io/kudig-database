@@ -2,7 +2,7 @@
 title: Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference Serving)
 description: '# Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference
   Serving)'
-summary: '# Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference
+summary: '本文档深入探讨Kubernetes环境下AI/ML工作负载的GPU调度策略与LLM推理服务架构，涵盖NVIDIA KAI Scheduler、vLLM生产部署、Ray on Kubernetes、Google TPU/Ironwood等2026年最新技术实践。基于大规模GPU集群的生产运维经验，提供从GPU设备管理到推理服务优化的完整技术指南，'
   Serving)'
 category: papers
 tags:

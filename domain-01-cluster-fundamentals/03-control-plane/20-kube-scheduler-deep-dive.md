@@ -1,7 +1,7 @@
 ---
 title: Kubernetes Scheduler 深度解析 (Kube-Scheduler Deep Dive)
 description: '# Kubernetes Scheduler 深度解析 (Kube-Scheduler Deep Dive)'
-summary: '# Kubernetes Scheduler 深度解析 (Kube-Scheduler Deep Dive)'
+summary: 'func calculateScore(nodeImageStates map[string]*ImageStateSummary, pod *v1.Pod) int64 {'
 category: control-plane
 tags:
 - k8s

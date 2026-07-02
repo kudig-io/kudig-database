@@ -1,7 +1,7 @@
 ---
 title: 镜像仓库故障排查
 description: '# 27 - 镜像仓库故障排查 (Image Registry Troubleshooting)'
-summary: '# 27 - 镜像仓库故障排查 (Image Registry Troubleshooting)'
+summary: 'kubectl get pods --all-namespaces --field-selector=status.phase=Pending -o jsonpath='{'
 category: troubleshooting
 tags:
 - image

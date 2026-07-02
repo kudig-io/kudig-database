@@ -1,7 +1,7 @@
 ---
 title: Node NotReady 状态深度诊断
 description: '# 06 - Node NotReady 状态深度诊断 (Node NotReady Diagnosis)'
-summary: '# 06 - Node NotReady 状态深度诊断 (Node NotReady Diagnosis)'
+summary: 'echo "服务是否启用: $(systemctl is-enabled kubelet 2>/dev/null)"'
 category: troubleshooting
 tags:
 - node

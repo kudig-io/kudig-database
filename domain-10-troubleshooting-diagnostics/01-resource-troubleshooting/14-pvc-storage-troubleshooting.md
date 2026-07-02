@@ -1,7 +1,7 @@
 ---
 title: PVC 与存储全面故障排查
 description: '# 14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)'
-summary: '# 14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)'
+summary: 'kubectl get events -n <namespace> --field-selector involvedObject.name=<pvc-name>'
 category: troubleshooting
 tags:
 - pvc

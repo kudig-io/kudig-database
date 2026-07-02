@@ -1,7 +1,7 @@
 ---
 title: 01 - Linux 系统架构与内核深度解析：生产环境运维专家指南
 description: '# 01 - Linux 系统架构与内核深度解析：生产环境运维专家指南'
-summary: '# 01 - Linux 系统架构与内核深度解析：生产环境运维专家指南'
+summary: '本文档从生产环境运维专家视角，深入解析 Linux 系统架构、内核工作机制和企业级最佳实践。涵盖系统启动优化、内核参数调优、性能监控、故障排查等关键运维技能，为 [[Kubernetes|Kubernetes]] 和容器化环境提供坚实的基础支撑。'
 category: linux
 tags:
 - linux

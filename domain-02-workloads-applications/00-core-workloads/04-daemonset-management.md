@@ -1,7 +1,7 @@
 ---
 title: 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)
 description: '# 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)'
-summary: '# 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)'
+summary: 'kube_daemonset_status_number_misscheduled > 0'
 category: workloads
 tags:
 - k8s

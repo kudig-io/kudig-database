@@ -1,7 +1,7 @@
 ---
 title: 10 - Wasm 插件生态与开发实践
 description: '# 10 - Wasm 插件生态与开发实践'
-summary: '# 10 - Wasm 插件生态与开发实践'
+summary: '8. [Wasm vs Lua vs 原生插件对比](#8-wasm-vs-lua-vs-原生插件对比)'
 category: cloud-native-api-gateway
 tags:
 - k8s

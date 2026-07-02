@@ -1,7 +1,7 @@
 ---
 title: 企业级高级实践
 description: '# 企业级高级实践'
-summary: '# 企业级高级实践'
+summary: 'const keyInfo = await openRouter.apiKeys.getCurrent();'
 category: ai-coding
 tags:
 - ai

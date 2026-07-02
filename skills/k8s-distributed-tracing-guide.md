@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 分布式追踪最佳实践
 description: '# Kubernetes 分布式追踪最佳实践'
-summary: '# Kubernetes 分布式追踪最佳实践'
+summary: '本指南提供生产环境 Kubernetes 分布式追踪配置的最佳实践，涵盖从 Jaeger 部署到 [[OpenTelemetry|OpenTelemetry]] 集成的全方位内容 ^[inferred]。'
 category: skills
 tags:
 - k8s

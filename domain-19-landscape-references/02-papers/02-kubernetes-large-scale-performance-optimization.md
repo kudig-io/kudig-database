@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)
 description: '# Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)'
-summary: '# Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)'
+summary: '本文深入探讨了Kubernetes大规模集群的性能优化策略，基于5000+节点生产环境的实践经验，从控制平面、[[etcd|etcd]]、网络、存储等多个维度提供系统性的优化方案。通过实际案例分析和量化指标，帮助运维团队解决大规模集群的性能瓶颈问题。'
 category: papers
 tags:
 - k8s

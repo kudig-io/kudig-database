@@ -1,7 +1,7 @@
 ---
 title: 06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)
 description: '# 06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)'
-summary: '# 06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)'
+summary: '本文档从一线SRE工程师视角，深入解析Kubernetes监控告警的实战技巧、配置优化和运维经验，涵盖Prometheus告警规则编写、Alertmanager配置、智能降噪策略、多租户管理等核心技术，结合千次生产环境告警处理经验，为企业构建精准、高效的告警体系提供实用指导。'
 category: observability
 tags:
 - k8s

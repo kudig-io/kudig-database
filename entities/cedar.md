@@ -1,7 +1,7 @@
 ---
 title: Cedar (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Cedar 是一个由 AWS 开发的开源策略语言和评估引擎，用于定义和执行细粒度的访问控制策略。它专为应用程序的授权决策设计，提供人类可读的策略语法、形式化验证工具和高性能的策略评估引擎。'
 category: entities
 tags:
 - k8s

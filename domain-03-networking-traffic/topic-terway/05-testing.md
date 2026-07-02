@@ -1,7 +1,7 @@
 ---
 title: 05 - Terway 测试验证 (Testing & Validation)
 description: '## 1. Pod 网络基础验证'
-summary: '## 1. Pod 网络基础验证'
+summary: 'ENIIP 模式下 Pod IP 应属于 VPC 子网网段，可通过以下命令比对：'
 category: terway
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Athenz (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Athenz 是由 Yahoo (Verizon Media) 开发的开源平台，提供基于 X.509 证书的服务身份认证和细粒度的基于角色的访问控制 (RBAC)。它为微服务架构提供零信任安全模型，每个服务都获得唯一的 X.509 身份证书，所有服务间通信通过 mTLS 加密和验证。Athenz 同时支持集中式和去中心化的授权模式。'
 category: entities
 tags:
 - k8s

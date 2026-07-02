@@ -1,7 +1,7 @@
 ---
 title: kubeadm 集群创建生命周期
 description: '## 概述'
-summary: '## 概述'
+summary: '`kubeadm init` 是 Kubernetes 官方推荐的集群引导工具，采用"最小化集群引导"设计理念——只安装核心控制面组件，不安装 CNI 等附加组件。整个初始化过程被分解为 12 个有序的阶段（Phase），每个阶段完成特定任务，支持独立执行和跳过。'
 category: skills
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 可观测性全栈培训 (监控、日志、追踪) [topic-presentations]
 description: '# Kubernetes 可观测性全栈培训 (监控、日志、追踪)'
-summary: '# Kubernetes 可观测性全栈培训 (监控、日志、追踪)'
+summary: '1. 区分监控（Monitoring）和可观测性（Observability）的概念差异'
 category: presentations
 tags:
 - k8s

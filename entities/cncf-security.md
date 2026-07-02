@@ -1,7 +1,7 @@
 ---
 title: CNCF 安全与合规项目全景
 description: '# CNCF 安全与合规项目全景'
-summary: '# CNCF 安全与合规项目全景'
+summary: '云原生安全覆盖 **供应链安全**、**身份与访问管理**、**运行时安全**、**策略与合规** 四大领域。CNCF 安全项目形成纵深防御体系。'
 category: entities
 tags:
 - k8s

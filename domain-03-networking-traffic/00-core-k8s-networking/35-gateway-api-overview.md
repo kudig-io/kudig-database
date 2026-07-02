@@ -1,7 +1,7 @@
 ---
 title: 71 - Gateway API配置
 description: '# 71 - Gateway API配置'
-summary: '# 71 - Gateway API配置'
+summary: 'GAMMA (Gateway API for Mesh Management and Administration) 将 Gateway API 扩展到服务网格内部。'
 category: networking
 tags:
 - k8s

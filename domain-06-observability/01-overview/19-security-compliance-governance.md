@@ -1,7 +1,7 @@
 ---
 title: 23 - 监控安全与合规治理 (Monitoring Security & Compliance Governance)
 description: '# 23 - 监控安全与合规治理 (Monitoring Security & Compliance Governance)'
-summary: '# 23 - 监控安全与合规治理 (Monitoring Security & Compliance Governance)'
+summary: '本文档针对企业监控系统面临的安全威胁和合规要求，提供全面的安全防护体系、合规治理框架、风险管控机制和应急响应策略，帮助企业构建安全可信、合规可靠的可观测性平台。'
 category: observability
 tags:
 - k8s

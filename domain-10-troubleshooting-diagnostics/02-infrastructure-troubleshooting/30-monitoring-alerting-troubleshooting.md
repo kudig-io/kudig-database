@@ -1,7 +1,7 @@
 ---
 title: 监控告警故障排查
 description: '# 30 - 监控告警故障排查 (Monitoring and Alerting Troubleshooting)'
-summary: '# 30 - 监控告警故障排查 (Monitoring and Alerting Troubleshooting)'
+summary: 'kubectl get pods -n monitoring -l app=prometheus'
 category: troubleshooting
 tags:
 - prometheus

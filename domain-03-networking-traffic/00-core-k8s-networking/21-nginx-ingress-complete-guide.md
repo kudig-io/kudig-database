@@ -1,7 +1,7 @@
 ---
 title: 129 - NGINX Ingress 完整配置指南
 description: '# 129 - NGINX Ingress 完整配置指南'
-summary: '# 129 - NGINX Ingress 完整配置指南'
+summary: 'nginx.ingress.kubernetes.io/rewrite-target: /$2'
 category: networking
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 14 - Secret 全类型 YAML 配置参考
 description: '# 14 - Secret 全类型 YAML 配置参考'
-summary: '# 14 - Secret 全类型 YAML 配置参考'
+summary: '4. [kubernetes.io/service-account-token](#kubernetesioservice-account-token)'
 category: yaml-manifests
 tags:
 - k8s

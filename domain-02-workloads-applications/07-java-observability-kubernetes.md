@@ -1,7 +1,7 @@
 ---
 title: Java 可观测性 on Kubernetes 实践指南 (domain-02-workloads-applications)
 description: '# Java 可观测性 on Kubernetes 实践指南'
-summary: '# Java 可观测性 on Kubernetes 实践指南'
+summary: '可观测性（Observability）是生产环境 Java 应用的生命线。在 Kubernetes 中，一个 Java 应用的可观测性由三大支柱构成：**Metrics（指标）**、**Traces（追踪）** 和 **Logs（日志）**。本指南提供在 Kubernetes 上为 Java 应用构建完整可观测性体系的实战方案，'
 category: java-kubernetes
 tags:
 - java

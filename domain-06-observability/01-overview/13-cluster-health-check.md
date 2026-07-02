@@ -1,7 +1,7 @@
 ---
 title: 13 - 集群健康检查指南 (Cluster Health Check Guide)
 description: '# 13 - 集群健康检查指南 (Cluster Health Check Guide)'
-summary: '# 13 - 集群健康检查指南 (Cluster Health Check Guide)'
+summary: 'member list 2>/dev/null || echo "无法获取成员列表"'
 category: observability
 tags:
 - k8s

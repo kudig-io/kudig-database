@@ -1,7 +1,7 @@
 ---
 title: 安全工具演进
 description: '# 安全工具演进'
-summary: '# 安全工具演进'
+summary: 'OPA 是通用策略引擎，Gatekeeper 是其 Kubernetes 特定的实现。'
 category: concepts
 tags:
 - k8s

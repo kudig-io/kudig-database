@@ -1,7 +1,7 @@
 ---
 title: 进阶话题与生产最佳实践
 description: '# 进阶话题与生产最佳实践'
-summary: '# 进阶话题与生产最佳实践'
+summary: '本文覆盖 OpenCode 的生产级进阶话题：Auto Compact 上下文管理、Session 高级操作、非交互模式自动化、安全加固策略、成本控制、团队协作模式、配置管理最佳实践以及常见故障排查。'
 category: ai-coding
 tags:
 - ai

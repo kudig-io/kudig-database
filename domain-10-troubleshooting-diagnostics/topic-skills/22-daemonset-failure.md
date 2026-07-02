@@ -1,7 +1,7 @@
 ---
 title: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 description: '- 运维工程师'
-summary: '- 运维工程师'
+summary: 'DaemonSet 确保集群中每个（或部分）节点上运行一个 Pod 副本，是集群基础设施的核心载体（如 kube-proxy、CNI 插件、日志收集器、监控代理）。当 DaemonSet 问题时，影响的不是单一应用，而是整个节点或集群的基础功能：网络不通、日志丢失、监控中断、安全代理失效。'
 category: skills
 tags:
 - k8s

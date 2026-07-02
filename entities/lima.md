@@ -1,7 +1,7 @@
 ---
 title: Lima (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Lima（Linux virtual Machine）是 macOS 和 Linux 上的轻量级 Linux VM 管理工具。它类似于 WSL2，提供自动文件共享、端口转发和 containerd 集成，是 Docker Desktop 的开源替代方案。'
 category: entities
 tags:
 - k8s

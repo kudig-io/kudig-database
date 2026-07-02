@@ -1,7 +1,7 @@
 ---
 title: Confidential Containers (CoCo)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Confidential Containers (CoCo) 是一个为 Kubernetes 提供机密计算能力的项目，使容器工作负载能够在硬件 TEE（可信执行环境）中运行。通过利用 AMD SEV、Intel TDX、IBM SE 等硬件机密计算技术，CoCo 保护运行中的数据免受云提供商、管理员和其他特权软件的访问。'
 category: entities
 tags:
 - k8s

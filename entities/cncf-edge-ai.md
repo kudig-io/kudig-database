@@ -1,7 +1,7 @@
 ---
 title: CNCF 边缘计算与 AI/ML 项目全景
 description: '## 概述'
-summary: '## 概述'
+summary: '新兴计算范式覆盖 **边缘计算**、**AI/ML 平台**、**Serverless** 和 **裸机/设备管理** 四大领域。'
 category: entities
 tags:
 - k8s

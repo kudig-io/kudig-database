@@ -1,7 +1,7 @@
 ---
 title: Pixie [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Pixie 是一个 Kubernetes 原生的可观测性平台，使用 eBPF 自动采集遥测数据，无需代码变更或手动 instrumentation。它提供对服务通信 (HTTP、gRPC、DNS、MySQL、PostgreSQL、Redis、Kafka)、资源使用和应用性能的即时可见性。Pixie 数据在集群内处理，支持 PxL 查询语言进行分析。'
 category: entities
 tags:
 - k8s

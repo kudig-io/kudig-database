@@ -1,7 +1,7 @@
 ---
 title: 06 - 集群配置参数完全参考
 description: '# 06 - 集群配置参数完全参考'
-summary: '# 06 - 集群配置参数完全参考'
+summary: 'Allocatable = Capacity - kube-reserved - system-reserved - eviction-threshold'
 category: architecture-fundamentals
 tags:
 - k8s

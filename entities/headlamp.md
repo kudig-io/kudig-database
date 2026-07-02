@@ -1,7 +1,7 @@
 ---
 title: Headlamp (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Headlamp 是一个现代化的 Kubernetes Web UI，提供直观的集群管理界面。它可以作为桌面应用、Web 应用或集群内应用运行，支持插件扩展系统，允许用户自定义功能。Headlamp 注重用户体验，提供清晰的资源视图和操作界面。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Istio Ambient Mesh 与 L7 策略深度实践
 description: '# Istio Ambient Mesh 与 L7 策略深度实践'
-summary: '# Istio Ambient Mesh 与 L7 策略深度实践'
+summary: 'Istio Ambient Mesh 代表了服务网格架构的下一代演进方向。传统的 Sidecar 模式虽然功能成熟，但在资源开销、Pod 启动延迟、运维复杂度等方面存在固有局限。Ambient Mesh 通过将代理能力从每个 Pod 的 Sidecar 中抽离到节点级的共享代理（ztunnel）和按需部署的 L7 代理（waypoint proxy），'
 category: service-mesh-microservices
 tags:
 - k8s

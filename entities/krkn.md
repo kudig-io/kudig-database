@@ -1,7 +1,7 @@
 ---
 title: Krkn
 description: '## 概述'
-summary: '## 概述'
+summary: 'Krkn（原名 Kraken）是一个面向 Kubernetes 的混沌工程工具，通过向集群注入各种问题场景来测试系统的弹性和可靠性。它支持节点问题、Pod 中断、网络混沌、CPU/内存压力、时间偏移等多种混沌场景，并提供基于 Cerberus 的健康检查和告警机制，帮助团队在生产环境之前发现系统弱点。'
 category: entities
 tags:
 - k8s

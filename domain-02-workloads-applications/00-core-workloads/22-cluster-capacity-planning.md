@@ -1,7 +1,7 @@
 ---
 title: 集群容量规划
 description: '## 概述'
-summary: '## 概述'
+summary: '容量规划是确保 [[Kubernetes|Kubernetes]] 集群能够满足当前和未来工作负载需求的关键实践。本文档详细介绍集群规模限制、节点容量规划、资源预留策略和容量监控方法。'
 category: workloads
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 企业级AI测试与质量保障深度实践
 description: '# 企业级AI测试与质量保障深度实践'
-summary: '# 企业级AI测试与质量保障深度实践'
+summary: '本文档深入探讨企业级AI系统测试策略、自动化测试框架和质量保障体系，基于大模型、机器学习平台等AI系统的实践经验，提供从模型验证到系统集成的完整测试技术指南。'
 category: automated-testing-quality
 tags:
 - k8s

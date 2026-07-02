@@ -1,7 +1,7 @@
 ---
 title: 电源与散热故障排查
 description: '# 电源与散热故障排查'
-summary: '# 电源与散热故障排查'
+summary: '电源和散热系统是服务器稳定运行的基础保障。本文档详细解析电源供电、散热系统的故障诊断方法及排查技巧。'
 category: hardware
 tags:
 - k8s

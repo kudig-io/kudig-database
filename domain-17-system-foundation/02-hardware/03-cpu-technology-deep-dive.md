@@ -1,7 +1,7 @@
 ---
 title: CPU技术深度解析
 description: '# CPU技术深度解析'
-summary: '# CPU技术深度解析'
+summary: '中央处理器（CPU）是服务器的核心计算单元，其架构设计、制程工艺和技术特性直接决定系统的计算性能。本文档深入解析服务器CPU的技术架构、厂商产品线、选型策略及性能优化方法。'
 category: hardware
 tags:
 - k8s

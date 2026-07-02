@@ -1,7 +1,7 @@
 ---
 title: Service 全面故障排查
 description: '# 10 - Service 全面故障排查 (Service Comprehensive Troubleshooting)'
-summary: '# 10 - Service 全面故障排查 (Service Comprehensive Troubleshooting)'
+summary: 'kubectl logs -n kube-system -l k8s-app=kube-controller-manager'
 category: troubleshooting
 tags:
 - service

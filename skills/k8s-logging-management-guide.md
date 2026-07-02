@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 日志管理最佳实践
 description: '# Kubernetes 日志管理最佳实践'
-summary: '# Kubernetes 日志管理最佳实践'
+summary: '本指南提供生产环境 Kubernetes 日志管理配置的最佳实践，涵盖从日志收集到分析的全方位内容 ^[inferred]。'
 category: skills
 tags:
 - k8s

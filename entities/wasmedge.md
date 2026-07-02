@@ -1,7 +1,7 @@
 ---
 title: WasmEdge (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'WasmEdge 是一个轻量级、高性能、可扩展的 WebAssembly (Wasm) 运行时，适用于云原生、边缘计算和去中心化应用。它是目前最快的 Wasm 运行时之一，支持 AOT (Ahead-of-Time) 编译，并提供丰富的宿主函数扩展，包括网络套接字、TensorFlow 推理、Key-Value 存储等。'
 category: entities
 tags:
 - k8s

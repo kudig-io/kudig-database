@@ -1,7 +1,7 @@
 ---
 title: 32 - API聚合层配置
 description: '# 32 - API聚合层配置'
-summary: '# 32 - API聚合层配置'
+summary: 'opts := options.NewSecureServingOptions()'
 category: platform-ops
 tags:
 - k8s

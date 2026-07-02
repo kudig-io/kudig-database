@@ -1,7 +1,7 @@
 ---
 title: Keycloak [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Keycloak 是开源的身份和访问管理（IAM）解决方案，提供单点登录（SSO）、身份联合、用户管理和细粒度授权功能。它支持 OpenID Connect、OAuth 2.0 和 SAML 2.0 标准协议。'
 category: entities
 tags:
 - k8s

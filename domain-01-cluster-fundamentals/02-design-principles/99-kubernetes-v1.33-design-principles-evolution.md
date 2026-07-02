@@ -1,7 +1,7 @@
 ---
 title: Kubernetes v1.29-v1.33 设计原理演进与影响分析
 description: '# Kubernetes v1.29-v1.33 设计原理演进与影响分析'
-summary: '# Kubernetes v1.29-v1.33 设计原理演进与影响分析'
+summary: 'Pod (Claim 模板) → Scheduler (DRA 插件) → ResourceClaim (对象)'
 category: design-principles
 tags:
 - k8s

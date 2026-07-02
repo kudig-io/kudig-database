@@ -1,7 +1,7 @@
 ---
 title: 05-日志收集分析平台
 description: '# 05-日志收集分析平台'
-summary: '# 05-日志收集分析平台'
+summary: '完整的日志收集分析平台是可观测性体系的重要组成部分。本文档详细介绍基于ELK/EFK技术栈的企业级日志解决方案。'
 category: production-operations
 tags:
 - k8s

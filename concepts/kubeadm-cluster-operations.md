@@ -1,7 +1,7 @@
 ---
 title: kubeadm 集群运维全景
 description: '# kubeadm 集群运维全景'
-summary: '# kubeadm 集群运维全景'
+summary: '本文档综合梳理 kubeadm 集群运维的全生命周期知识，涵盖集群创建、高可用部署、证书管理、节点运维、工作负载管理和集群删除六大领域。知识来源为 domain-02-workloads-applications/topic-functions/ 下的 82 篇源文档，'
 category: synthesis
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: kubelet 证书轮换机制
 description: '## 概述'
-summary: '## 概述'
+summary: '每个 kubelet 都需要持有有效的客户端证书才能与 API Server 进行安全通信。证书过期后 kubelet 将无法连接 API Server，导致节点上的 Pod 无法被管理。kubelet 通过 TLS Bootstrap 和自动轮换机制确保证书持续有效，自 Kubernetes v1.19 起默认启用。'
 category: skills
 tags:
 - k8s

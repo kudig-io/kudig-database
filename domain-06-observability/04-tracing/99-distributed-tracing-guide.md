@@ -1,7 +1,7 @@
 ---
 title: K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry)
 description: '# K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry)'
-summary: '# K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry)'
+summary: 'helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts'
 category: enterprise-monitoring-alerting
 tags:
 - k8s

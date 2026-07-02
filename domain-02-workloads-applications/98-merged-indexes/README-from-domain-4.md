@@ -1,7 +1,7 @@
 ---
 title: 'Domain-4: Kubernetes工作负载管理'
 description: '# Domain-4: Kubernetes工作负载管理'
-summary: '# Domain-4: Kubernetes工作负载管理'
+summary: 'Kubernetes工作负载管理域专注于生产环境下的工作负载控制器设计、部署策略、运维优化和故障处理。涵盖从基础控制器到高级调度策略的完整技术体系。'
 category: workloads
 tags:
 - k8s

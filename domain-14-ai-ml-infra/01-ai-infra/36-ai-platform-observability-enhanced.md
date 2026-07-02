@@ -1,7 +1,7 @@
 ---
 title: 36 - AI平台增强可观测性
 description: '## 一、AI平台可观测性全景架构'
-summary: '## 一、AI平台可观测性全景架构'
+summary: 'avg_over_time(nvidia_gpu_utilization[5m])'
 category: ai-infra
 tags:
 - k8s

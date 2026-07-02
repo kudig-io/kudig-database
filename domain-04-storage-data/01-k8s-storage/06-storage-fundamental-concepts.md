@@ -1,7 +1,7 @@
 ---
 title: 06 - 存储基础概念详解
 description: '# 06 - 存储基础概念详解'
-summary: '# 06 - 存储基础概念详解'
+summary: 'storageclass.kubernetes.io/is-default-class: "false"'
 category: storage
 tags:
 - k8s

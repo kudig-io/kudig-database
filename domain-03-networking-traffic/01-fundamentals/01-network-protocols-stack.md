@@ -1,7 +1,7 @@
 ---
 title: 网络协议栈详解
 description: '# 网络协议栈详解'
-summary: '# 网络协议栈详解'
+summary: 'Netfilter 是 Linux 内核的数据包过滤框架，iptables 是其用户空间工具。[[Kubernetes|Kubernetes]] 的 [[Service|Service]]、[[NetworkPolicy|NetworkPolicy]] 均依赖此机制。'
 category: network-fundamentals
 tags:
 - network

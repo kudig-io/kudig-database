@@ -1,7 +1,7 @@
 ---
 title: Kubernetes v1.33 升级实操指南
 description: '# Kubernetes v1.33 升级实操指南'
-summary: '# Kubernetes v1.33 升级实操指南'
+summary: 'kubectl version -o json | jq '.serverVersion.gitVersion''
 category: architecture-fundamentals
 tags:
 - k8s

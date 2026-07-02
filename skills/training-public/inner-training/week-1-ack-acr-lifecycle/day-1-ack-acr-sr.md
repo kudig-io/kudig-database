@@ -1,7 +1,7 @@
 ---
 title: 'Day 1: ACK/ACR 管控 SR'
 description: '- 服务架构'
-summary: '- 服务架构'
+summary: '作为内部培训的第一天，本课程将系统性地介绍阿里云容器服务 ACK（Alibaba Cloud [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]]）和容器镜像服务 ACR（Alibaba Cloud Container Registry）的服务架构、产品形态和管控层组件。'
 category: learning
 tags:
 - k8s

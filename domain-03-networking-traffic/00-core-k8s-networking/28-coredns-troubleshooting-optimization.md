@@ -1,7 +1,7 @@
 ---
 title: 56 - CoreDNS 故障排查与性能优化 (Troubleshooting & Optimization)
 description: '# 56 - CoreDNS 故障排查与性能优化 (Troubleshooting & Optimization)'
-summary: '# 56 - CoreDNS 故障排查与性能优化 (Troubleshooting & Optimization)'
+summary: 'kubectl run dnstest --rm -it --image=busybox:1.36 --restart=Never -- nslookup kubernetes.default'
 category: networking
 tags:
 - k8s

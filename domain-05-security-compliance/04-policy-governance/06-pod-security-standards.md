@@ -1,7 +1,7 @@
 ---
 title: 06 - Pod安全标准详解
 description: '# 06 - Pod安全标准详解'
-summary: '# 06 - Pod安全标准详解'
+summary: 'pod-security.kubernetes.io/enforce: restricted'
 category: security
 tags:
 - k8s

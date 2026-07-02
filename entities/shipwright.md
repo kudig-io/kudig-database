@@ -1,7 +1,7 @@
 ---
 title: Shipwright (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Shipwright 是一个在 Kubernetes 上构建容器镜像的框架。它抽象了底层构建工具的差异，通过统一的 CRD API 支持 Buildpacks, Buildah, BuildKit, Kaniko 等多种构建策略。开发者只需定义源码位置和目标镜像，Shipwright 自动管理构建过程。'
 category: entities
 tags:
 - k8s

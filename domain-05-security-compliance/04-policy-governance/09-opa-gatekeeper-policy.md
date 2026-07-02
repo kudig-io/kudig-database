@@ -1,7 +1,7 @@
 ---
 title: OPA Gatekeeper 策略即代码深度实践
 description: '# OPA Gatekeeper 策略即代码深度实践'
-summary: '# OPA Gatekeeper 策略即代码深度实践'
+summary: 'OPA（Open Policy Agent）是一个通用的开源策略引擎，采用 Rego 语言声明式定义策略，能够与 Kubernetes、API 网关、CI/CD 管道等多种系统集成。Gatekeeper 是 OPA 在 Kubernetes 中的准入控制器实现，通过 CRD 将策略定义为 Kubernetes 原生资源，'
 category: cloud-native-security
 tags:
 - k8s

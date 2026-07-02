@@ -1,7 +1,7 @@
 ---
 title: 第九课：Job 和 CronJob - 任务调度
 description: '# 第九课：Job 和 CronJob - 任务调度'
-summary: '# 第九课：Job 和 CronJob - 任务调度'
+summary: '• concurrencyPolicy: Forbid → 跳过新执行，如果上一个还在运行'
 category: skills
 tags:
 - k8s

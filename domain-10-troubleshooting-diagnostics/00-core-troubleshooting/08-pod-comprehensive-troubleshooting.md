@@ -1,7 +1,7 @@
 ---
 title: Pod 全面故障排查
 description: '# 08 - Pod 全面故障排查 (Pod Comprehensive Troubleshooting)'
-summary: '# 08 - Pod 全面故障排查 (Pod Comprehensive Troubleshooting)'
+summary: 'kubectl get events -n <namespace> --field-selector involvedObject.name=<pod-name>'
 category: troubleshooting
 tags:
 - pod

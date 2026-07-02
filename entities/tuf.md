@@ -1,7 +1,7 @@
 ---
 title: TUF
 description: '## 概述'
-summary: '## 概述'
+summary: '该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]'
 category: entities
 tags:
 - k8s

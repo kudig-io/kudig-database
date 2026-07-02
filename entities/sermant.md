@@ -1,7 +1,7 @@
 ---
 title: Sermant (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Sermant 是华为开源的基于 Java Agent 的无代理服务网格方案，通过 Java Instrumentation 机制（字节码增强）为 Java 微服务提供服务治理能力，无需修改应用代码或部署 Sidecar 代理。它支持流量路由、限流熔断、负载均衡、服务注册发现等功能，特别适合 Java 技术栈的微服务架构。'
 category: entities
 tags:
 - k8s

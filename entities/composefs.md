@@ -1,7 +1,7 @@
 ---
 title: composefs (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'composefs 是一个 Linux 文件系统，设计用于高效挂载和共享容器镜像层。它结合了 EROFS（只读文件系统）作为元数据存储和 fs-verity 提供内容校验，实现了容器镜像的可验证挂载。composefs 允许多个容器镜像共享相同内容的文件块（基于内容寻址的对象存储），大幅减少磁盘空间占用，同时通过 fs-verity 确保镜像内容的完整性。'
 category: entities
 tags:
 - k8s

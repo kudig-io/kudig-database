@@ -1,7 +1,7 @@
 ---
 title: ModelPack (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'ModelPack 是一个 ML/AI 模型打包和分发标准，将机器学习模型、依赖、配置和元数据打包为 OCI 兼容的制品 (Artifact)。它定义了一套标准化的模型打包格式，使模型可以像容器镜像一样在 OCI Registry（如 Docker Hub、Harbor）中存储、版本化和分发，简化从训练到部署的 MLOps 流程。'
 category: entities
 tags:
 - k8s

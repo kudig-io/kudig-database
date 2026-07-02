@@ -1,7 +1,7 @@
 ---
 title: 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
 description: '## Job 类型详解与使用场景'
-summary: '## Job 类型详解与使用场景'
+summary: 'until kubectl get job data-extraction -o jsonpath='{.status.succeeded}' | grep -q 1; do'
 category: workloads
 tags:
 - k8s

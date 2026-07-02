@@ -1,7 +1,7 @@
 ---
 title: Kubelet 配置与调优
 description: '# Kubelet 配置与调优'
-summary: '# Kubelet 配置与调优'
+summary: 'Kubelet 是运行在每个节点上的主要代理组件，负责确保容器按照 PodSpec 的定义运行。本文档详细介绍 kubelet 配置参数、性能调优和生产最佳实践。'
 category: workloads
 tags:
 - k8s

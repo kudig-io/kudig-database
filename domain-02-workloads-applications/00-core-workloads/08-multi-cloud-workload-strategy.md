@@ -1,7 +1,7 @@
 ---
 title: 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload Strategy)
 description: '# 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload Strategy)'
-summary: '# 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload Strategy)'
+summary: 'topology.kubernetes.io/region: us-east-1'
 category: workloads
 tags:
 - k8s

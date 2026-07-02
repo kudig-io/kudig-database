@@ -1,7 +1,7 @@
 ---
 title: kubectl 插件生态知识手册
 description: '## 1. 插件概述'
-summary: '## 1. 插件概述'
+summary: 'kubectl 从 v1.14 开始支持插件机制，插件本质是名为 `kubectl-<name>` 的可执行文件，放在 `PATH` 中的任意位置（如 `/usr/local/bin/kubectl-foo`），即可通过 `kubectl foo` 调用。'
 category: platform-ops
 tags:
 - k8s

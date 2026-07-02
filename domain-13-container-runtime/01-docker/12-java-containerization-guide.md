@@ -1,7 +1,7 @@
 ---
 title: Java 应用容器化最佳实践指南
 description: '# Java 应用容器化最佳实践指南'
-summary: '# Java 应用容器化最佳实践指南'
+summary: '需要 shell 进入容器排查？ ─── 是 ──→ eclipse-temurin:21-jre'
 category: docker
 tags:
 - docker

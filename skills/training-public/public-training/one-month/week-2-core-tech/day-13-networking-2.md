@@ -1,7 +1,7 @@
 ---
 title: 'Day 13: 网络栈 - Ingress + NetworkPolicy'
 description: '# Day 13: 网络栈 - Ingress + NetworkPolicy'
-summary: '# Day 13: 网络栈 - Ingress + NetworkPolicy'
+summary: 'helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx'
 category: learning
 tags:
 - k8s

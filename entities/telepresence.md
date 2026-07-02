@@ -1,7 +1,7 @@
 ---
 title: Telepresence (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Telepresence 是一个 Kubernetes 本地开发工具，它在本地开发环境和远程 Kubernetes 集群之间创建网络隧道。开发者可以在本地运行服务，同时访问集群中的其他服务和资源，也可以将集群流量拦截到本地进行调试。'
 category: entities
 tags:
 - k8s

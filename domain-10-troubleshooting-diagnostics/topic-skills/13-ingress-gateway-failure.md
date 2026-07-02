@@ -1,7 +1,7 @@
 ---
 title: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation
 description: '## 1. 概述'
-summary: '## 1. 概述'
+summary: 'Ingress 和 Gateway API 是 [[Kubernetes|Kubernetes]] 集群中**南北向流量**的核心入口点。当 Ingress Controller 或 Gateway 发生问题时，所有通过该入口的外部请求都将受到影响，可能导致用户无法访问应用服务、API 调用失败、TLS 连接中断等严重后果。在微服务架构中，'
 category: network
 tags:
 - k8s

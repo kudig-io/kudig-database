@@ -1,7 +1,7 @@
 ---
 title: 23 - Pod Security Standards (PSS/PSA) YAML 配置参考
 description: '# 23 - Pod Security Standards (PSS/PSA) YAML 配置参考'
-summary: '# 23 - Pod Security Standards (PSS/PSA) YAML 配置参考'
+summary: '允许创建 Pod         记录审计日志          返回警告给用户'
 category: yaml-manifests
 tags:
 - k8s

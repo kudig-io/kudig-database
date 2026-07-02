@@ -1,7 +1,7 @@
 ---
 title: 11 - Gateway API 核心资源 YAML 配置参考
 description: '# 11 - Gateway API 核心资源 YAML 配置参考'
-summary: '# 11 - Gateway API 核心资源 YAML 配置参考'
+summary: '5. [HTTPRouteMatch 匹配规则](#httproutematch-匹配规则)'
 category: yaml-manifests
 tags:
 - k8s

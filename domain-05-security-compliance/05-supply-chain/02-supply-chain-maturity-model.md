@@ -1,7 +1,7 @@
 ---
 title: 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 description: '# 供应链安全成熟度模型 (Supply Chain Security Maturity Model)'
-summary: '# 供应链安全成熟度模型 (Supply Chain Security Maturity Model)'
+summary: '供应链安全成熟度模型（Supply Chain Security Maturity Model, SCSM）参考了 CMMI（能力成熟度模型集成）和 BSIMM（软件安全构建成熟度模型）的设计思想，专注于软件供应链安全领域。'
 category: supply-chain-security
 tags:
 - k8s

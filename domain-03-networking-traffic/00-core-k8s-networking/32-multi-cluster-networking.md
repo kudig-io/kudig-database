@@ -1,7 +1,7 @@
 ---
 title: 80 - 多集群网络互联
 description: '# 80 - 多集群网络互联'
-summary: '# 80 - 多集群网络互联'
+summary: 'curl -Ls https://get.submariner.io | bash'
 category: networking
 tags:
 - k8s

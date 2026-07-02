@@ -1,7 +1,7 @@
 ---
 title: 17 - 日志和审计表
 description: '# 17 - 日志和审计表'
-summary: '# 17 - 日志和审计表'
+summary: 'kubectl get events -A --sort-by='.lastTimestamp''
 category: observability
 tags:
 - k8s

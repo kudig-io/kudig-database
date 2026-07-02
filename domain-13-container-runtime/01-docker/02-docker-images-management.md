@@ -1,7 +1,7 @@
 ---
 title: Docker 镜像管理详解
 description: '# Docker 镜像管理详解'
-summary: '# Docker 镜像管理详解'
+summary: 'HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \'
 category: docker
 tags:
 - docker

@@ -1,7 +1,7 @@
 ---
 title: Kubernetes API Server 深度优化与扩展 (API Server Deep Optimization and Extension)
 description: '# Kubernetes API Server 深度优化与扩展 (API Server Deep Optimization and Extension)'
-summary: '# Kubernetes API Server 深度优化与扩展 (API Server Deep Optimization and Extension)'
+summary: '本文档深入探讨了Kubernetes API Server的架构原理、性能优化和扩展机制，基于大规模生产环境的实践经验，提供从基础配置到高级扩展的完整技术指南，帮助企业构建高性能、高可用的API Server架构。'
 category: papers
 tags:
 - k8s

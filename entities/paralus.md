@@ -1,7 +1,7 @@
 ---
 title: Paralus (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Paralus 是一个 Kubernetes 零信任访问管理平台，为多集群环境提供统一的身份认证、授权和审计能力。它作为 kubectl 和 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 之间的安全代理层，'
 category: entities
 tags:
 - k8s

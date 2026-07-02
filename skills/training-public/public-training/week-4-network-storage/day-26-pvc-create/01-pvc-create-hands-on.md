@@ -1,7 +1,7 @@
 ---
 title: 'Day 26: 存储卷创建与删除实操'
 description: '# Day 26: 存储卷创建与删除实操'
-summary: '# Day 26: 存储卷创建与删除实操'
+summary: 'PersistentVolumeClaim (PVC) - Pod 申请存储的请求'
 category: learning
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 'Week 4 Checkpoint: 终极自测'
 description: '- 企业级运维能力评估'
-summary: '- 企业级运维能力评估'
+summary: '本文档是整个一个月学习计划的终极自测。它涵盖了四个星期的核心知识点，从基础概念到企业级实践，帮助你评估学习成果并发现薄弱环节。'
 category: learning
 tags:
 - k8s

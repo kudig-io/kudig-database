@@ -1,7 +1,7 @@
 ---
 title: 'Domain-4: Kubernetes工作负载'
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kubernetes工作负载域深入解析Pod、Deployment、[[StatefulSet|StatefulSet]]、DaemonSet等核心工作负载资源的配置管理和最佳实践。'
 category: workloads
 tags:
 - k8s

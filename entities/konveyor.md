@@ -1,7 +1,7 @@
 ---
 title: Konveyor (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Konveyor 是一个应用现代化平台，帮助组织将传统应用（如 Java EE、Spring）迁移和重构到 Kubernetes 平台。它提供应用清单管理、依赖分析、迁移评估、自动化代码重构等能力。Konveyor 通过 AI 辅助分析识别迁移障碍，生成迁移路径建议，并提供 IDE 插件帮助开发者自动化完成代码变更。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 'Day 8: K8S 集群 RBAC'
 description: '- "权限配置"'
-summary: '- "权限配置"'
+summary: '本文深入讲解 Kubernetes 的 RBAC（Role-Based Access Control，基于角色的访问控制）权限模型。RBAC 是 K8s 安全体系的核心组件，它决定了"谁"可以在集群中"做什么"。理解 RBAC 对于实现最小权限原则、多租户隔离和审计合规至关重要。通过本文，你将掌握 RBAC 四种核心资源的创建与绑定，'
 category: learning
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program Types)
 description: '# eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program Types)'
-summary: '# eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program Types)'
+summary: 'eBPF（Extended Berkeley Packet Filter）是 Linux 内核中的一项革命性技术，允许在内核空间安全运行沙箱程序，无需修改内核源码或加载内核模块。它本质上是一个在内核中运行的虚拟机，提供了一种安全、高效的方式来扩展内核功能。'
 category: ebpf-technology
 tags:
 - k8s

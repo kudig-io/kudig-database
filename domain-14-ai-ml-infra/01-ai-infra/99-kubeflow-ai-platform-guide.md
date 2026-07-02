@@ -1,7 +1,7 @@
 ---
 title: Kubeflow AI 平台部署与实践指南
 description: '# Kubeflow AI 平台部署与实践指南'
-summary: '# Kubeflow AI 平台部署与实践指南'
+summary: 'def preprocess_data(input_path: str, output_path: str):'
 category: ai-infra
 tags:
 - k8s

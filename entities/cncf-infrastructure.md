@@ -1,7 +1,7 @@
 ---
 title: CNCF 基础设施与混沌工程项目全景
 description: '## 概述'
-summary: '## 概述'
+summary: 'CNCF 基础设施项目覆盖 **混沌工程**、**消息中间件**、**API 与服务**、**管理工具** 等辅助领域。'
 category: entities
 tags:
 - k8s

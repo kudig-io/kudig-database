@@ -1,7 +1,7 @@
 ---
 title: GitOps配置管理 (GitOps Configuration Management)
 description: '# GitOps配置管理 (GitOps Configuration Management)'
-summary: '# GitOps配置管理 (GitOps Configuration Management)'
+summary: 'GitOps是一种基于Git的运维理念和实践方法，通过将基础设施和应用程序配置存储在Git仓库中，实现声明式的配置管理和自动化的部署流程。'
 category: platform-ops
 tags:
 - k8s

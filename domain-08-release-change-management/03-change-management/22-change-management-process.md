@@ -1,7 +1,7 @@
 ---
 title: 22-变更管理流程
 description: '# 22-变更管理流程'
-summary: '# 22-变更管理流程'
+summary: '变更管理流程是保障生产环境稳定性的核心机制。本文档详细介绍RFC流程、灰度发布策略和回滚机制的最佳实践。'
 category: production-operations
 tags:
 - k8s

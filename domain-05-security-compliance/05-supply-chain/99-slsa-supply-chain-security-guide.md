@@ -1,7 +1,7 @@
 ---
 title: SLSA 软件供应链安全实践指南
 description: '# SLSA 软件供应链安全实践指南'
-summary: '# SLSA 软件供应链安全实践指南'
+summary: 'kubectl apply -f https://storage.googleapis.com/tekton-releases/chains/latest/release.yaml'
 category: supply-chain-security
 tags:
 - k8s

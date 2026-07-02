@@ -1,7 +1,7 @@
 ---
 title: 'Day 12: 网络栈 - CNI + Service + DNS'
 description: '# Day 12: 网络栈 - CNI + Service + DNS'
-summary: '# Day 12: 网络栈 - CNI + Service + DNS'
+summary: 'kubectl create deployment web --image=nginx:alpine --replicas=3'
 category: learning
 tags:
 - k8s

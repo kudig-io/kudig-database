@@ -1,7 +1,7 @@
 ---
 title: New Relic Enterprise APM Platform 深度实践
 description: '# New Relic Enterprise APM Platform 深度实践'
-summary: '# New Relic Enterprise APM Platform 深度实践'
+summary: 'This document provides comprehensive exploration of New Relic enterprise APM platform architecture design, deployment practices, and operational management.'
 category: enterprise-monitoring-alerting
 tags:
 - k8s

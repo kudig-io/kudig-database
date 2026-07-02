@@ -1,7 +1,7 @@
 ---
 title: 141 - AI成本分析与FinOps实践 (AI Cost Analysis & FinOps)
 description: '# 141 - AI成本分析与FinOps实践 (AI Cost Analysis & FinOps)'
-summary: '# 141 - AI成本分析与FinOps实践 (AI Cost Analysis & FinOps)'
+summary: '"stage3_param_persistence_threshold": 1e5'
 category: ai-infra
 tags:
 - k8s

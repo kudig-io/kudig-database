@@ -1,7 +1,7 @@
 ---
 title: 32 - Lease / Event / Node YAML 配置参考
 description: '# 32 - Lease / Event / Node YAML 配置参考'
-summary: '# 32 - Lease / Event / Node YAML 配置参考'
+summary: 'Lease(租约)是 Kubernetes 中的**分布式锁机制**,主要用于:'
 category: yaml-manifests
 tags:
 - k8s

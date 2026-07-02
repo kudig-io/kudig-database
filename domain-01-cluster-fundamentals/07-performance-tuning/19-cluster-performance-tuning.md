@@ -1,7 +1,7 @@
 ---
 title: 19-集群性能调优
 description: '- 性能优化'
-summary: '- 性能优化'
+summary: '集群性能调优是保障Kubernetes高效稳定运行的关键。本文档详细介绍内核参数优化、组件调优和性能监控的最佳实践。'
 category: general
 tags:
 - k8s

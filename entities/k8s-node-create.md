@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 节点管理操作指南
 description: '# Kubernetes 节点管理操作指南'
-summary: '# Kubernetes 节点管理操作指南'
+summary: '节点（Node）是 Kubernetes 集群中的工作单元，它是运行 Pod 的物理机或虚拟机。每个节点包含运行 Pod 所需的核心服务：kubelet（节点代理）、容器运行时（containerd/cri-o）和网络插件（CNI）。理解节点的完整生命周期——从创建、注册、运行到维护和移除——是有效管理 Kubernetes 集群的基础。'
 category: references
 tags:
 - k8s

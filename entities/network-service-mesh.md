@@ -1,7 +1,7 @@
 ---
 title: Network Service Mesh (NSM)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Network Service Mesh (NSM) 是一个混合/多云的 IP 服务网格，提供 L2/L3 层的网络服务连接能力。与传统的 Service Mesh（如 Istio、Linkerd 专注于 L4-L7）不同，NSM 专注于为应用提供底层网络服务，例如安全隧道、VPN、防火墙等网络功能的动态连接。'
 category: entities
 tags:
 - k8s

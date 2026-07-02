@@ -1,7 +1,7 @@
 ---
 title: OpenFeature [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'OpenFeature 是特性标志（Feature Flag）的开放标准，提供供应商无关的统一 API 和多语言 SDK。它允许开发者在不更换代码的情况下切换不同的特性标志提供商，实现渐进式发布、A/B 测试和功能开关。'
 category: entities
 tags:
 - k8s

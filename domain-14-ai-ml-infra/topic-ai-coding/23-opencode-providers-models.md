@@ -1,7 +1,7 @@
 ---
 title: Provider 与模型管理
 description: '# Provider 与模型管理'
-summary: '# Provider 与模型管理'
+summary: 'OpenCode 通过 **AI SDK** 和 **Models.dev** 支持 75+ LLM Provider。本文详细覆盖 Provider 接入配置、模型选型策略、OpenCode Zen/Go 托管服务、企业级 Provider（AWS Bedrock/Azure OpenAI）配置以及 Per-Agent 模型分配。'
 category: ai-coding
 tags:
 - ai

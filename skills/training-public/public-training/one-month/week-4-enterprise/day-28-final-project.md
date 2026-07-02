@@ -1,7 +1,7 @@
 ---
 title: 'Day 28: 综合复习 + 毕业项目'
 description: '- K8s 综合实践'
-summary: '- K8s 综合实践'
+summary: '今天是整个一个月学习计划的最后一天，也是最重要的一天。前三周你学习了大量的知识点——Docker 基础、Linux 运维、K8s 架构、工作负载管理、网络存储、安全体系、监控告警、GitOps、故障排查方法论。今天是检验你是否真正掌握这些知识的时刻。'
 category: learning
 tags:
 - k8s

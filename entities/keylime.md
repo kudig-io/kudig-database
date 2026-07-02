@@ -1,7 +1,7 @@
 ---
 title: Keylime (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Keylime 是一个基于 TPM (Trusted Platform Module) 的远程引导完整性验证和运行时完整性监控系统。它利用硬件 TPM 芯片提供加密度量，持续验证节点的引导过程和运行时状态是否被篡改，适用于零信任安全架构中的节点信任验证。'
 category: entities
 tags:
 - k8s

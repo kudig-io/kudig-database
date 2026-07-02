@@ -1,7 +1,7 @@
 ---
 title: GraalVM Native Image 云原生实践指南
 description: '# GraalVM Native Image 云原生实践指南'
-summary: '# GraalVM Native Image 云原生实践指南'
+summary: 'Note over SA: 从 main() 开始<br/>追踪所有可达的类/方法/字段'
 category: extensions
 tags:
 - k8s

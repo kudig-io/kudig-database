@@ -1,7 +1,7 @@
 ---
 title: Microcks (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Microcks 是一个 API Mock 和测试平台，用于将 OpenAPI、AsyncAPI、gRPC、GraphQL 和 SOAP 的契约规范自动转换为 Mock 服务和集成测试。它帮助开发团队在微服务开发中实现 API 优先（API-First）的工作流，加速并行开发和契约测试。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Atlantis (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Atlantis 是一个 Terraform/OpenTofu Pull Request 自动化工具。它监听 Git 仓库的 PR，自动执行 `terraform plan`，并在 PR 中显示执行计划。团队成员可以通过 PR 评论来审查和批准变更，然后通过评论命令执行 `terraform apply`，实现基础设施即代码的协作式工作流。'
 category: entities
 tags:
 - k8s

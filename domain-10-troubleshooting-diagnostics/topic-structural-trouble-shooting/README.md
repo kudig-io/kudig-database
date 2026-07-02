@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 结构化故障排查知识库 [domain-10-troubleshooting-diagnostics]
 description: '# Kubernetes 结构化故障排查知识库'
-summary: '# Kubernetes 结构化故障排查知识库'
+summary: '本目录包含 Kubernetes 各组件的全面故障排查指南，每篇文档均基于生产环境真实案例编写，提供：'
 category: structural-troubleshooting
 tags:
 - k8s

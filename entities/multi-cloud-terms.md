@@ -1,7 +1,7 @@
 ---
 title: K8s 多云架构术语参考
 description: '# K8s 多云架构术语参考'
-summary: '# K8s 多云架构术语参考'
+summary: '本页汇总了 **多云架构** 领域的 3 个 Kubernetes 术语定义与概念说明。'
 category: references
 tags:
 - k8s

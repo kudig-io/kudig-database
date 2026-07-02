@@ -1,7 +1,7 @@
 ---
 title: SlimFaas (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'SlimFaas 是一个轻量级的 Kubernetes 原生 Function-as-a-[[Service|Service]] (FaaS) 平台，专注于简单性和低资源占用。它可以将普通的 Kubernetes Deployment 作为函数运行，支持 Scale-to-Zero（缩容到零）和按需自动扩容，无需复杂的 FaaS 框架。'
 category: entities
 tags:
 - k8s

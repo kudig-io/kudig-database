@@ -1,7 +1,7 @@
 ---
 title: SOPS (Secrets OPerationS)
 description: '## 概述'
-summary: '## 概述'
+summary: 'SOPS (Secrets OPerationS) 是一个加密文件编辑器，支持 YAML、JSON、ENV 和 BINARY 格式。它使用 AWS KMS、GCP KMS、Azure Key Vault、HashiCorp Vault 或 PGP 密钥对文件中的值进行加密，而保持键名明文，便于版本控制和代码审查。'
 category: entities
 tags:
 - k8s

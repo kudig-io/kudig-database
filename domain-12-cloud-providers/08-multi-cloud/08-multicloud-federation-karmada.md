@@ -1,7 +1,7 @@
 ---
 title: Karmada 多集群联邦深度实践
 description: '# Karmada 多集群联邦深度实践'
-summary: '# Karmada 多集群联邦深度实践'
+summary: 'Karmada（[[Kubernetes|Kubernetes]] [[Armada|Armada]]）是华为云开源的多云多集群 Kubernetes 编排引擎，已捐赠至 CNCF 成为 Incubating 项目。Karmada 提供了 Kubernetes 原生的多云管理 API，'
 category: multi-cloud-hybrid
 tags:
 - k8s

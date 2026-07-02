@@ -1,7 +1,7 @@
 ---
 title: 安全、隐私与数据治理
 description: '# 安全、隐私与数据治理'
-summary: '# 安全、隐私与数据治理'
+summary: '本文覆盖 OpenRouter 的安全架构与数据治理体系：包括三种认证方式、API Key 安全实践、数据收集策略（Opt-in 日志 + 1% 折扣）、Zero Data Retention (ZDR)、EU Data Residency、BYOK（Bring Your Own Key）、Provisioning Keys 以及开发/生产/企业三阶段安全检'
 category: ai-coding
 tags:
 - ai

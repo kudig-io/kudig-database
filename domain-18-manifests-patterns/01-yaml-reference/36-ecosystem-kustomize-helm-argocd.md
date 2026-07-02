@@ -1,7 +1,7 @@
 ---
 title: 36 - 生态工具 (Kustomize / Helm / ArgoCD) YAML 配置参考
 description: '# 36 - 生态工具 (Kustomize / Helm / ArgoCD) YAML 配置参考'
-summary: '# 36 - 生态工具 (Kustomize / Helm / ArgoCD) YAML 配置参考'
+summary: '本文档提供 [[Kubernetes|Kubernetes]] 生态工具的完整 YAML 配置参考，涵盖：'
 category: yaml-manifests
 tags:
 - k8s

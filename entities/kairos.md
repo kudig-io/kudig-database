@@ -1,7 +1,7 @@
 ---
 title: Kairos (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kairos 是一个不可变 Linux 元发行版框架，专注于将任何 Linux 发行版转化为不可变的、基于容器镜像的操作系统，特别适用于边缘计算和 Kubernetes 节点的自动化部署。它支持通过 cloud-init 风格的 YAML 配置实现零接触安装（Zero-Touch Provisioning），'
 category: entities
 tags:
 - k8s

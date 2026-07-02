@@ -1,7 +1,7 @@
 ---
 title: Kubernetes v1.25 - v1.33 特性对比总表
 description: '## 二、网络 (Networking)'
-summary: '## 二、网络 (Networking)'
+summary: 'kubectl get --raw /api/v1/nodes/NODE/proxy/configz | jq '.kubeletconfig.featureGates''
 category: architecture-fundamentals
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 04 - List-Watch 机制深度解析 (List-Watch)
 description: '# 04 - List-Watch 机制深度解析 (List-Watch)'
-summary: '# 04 - List-Watch 机制深度解析 (List-Watch)'
+summary: '在大规模集群中，传统的 `List` 操作会瞬间消耗 API Server 大量内存。为了解决这个问题，[[Kubernetes|Kubernetes]] 引入了 **Streaming List-Watch**。'
 category: design-principles
 tags:
 - k8s

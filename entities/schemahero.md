@@ -1,7 +1,7 @@
 ---
 title: SchemaHero (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'SchemaHero 是一个 Kubernetes 原生的数据库 Schema 迁移工具。它采用声明式方法管理数据库表结构，开发者只需定义期望的 Schema 状态，SchemaHero 自动计算并执行所需的 DDL 变更。支持 PostgreSQL、MySQL、CockroachDB、SQLite 等数据库。'
 category: entities
 tags:
 - k8s

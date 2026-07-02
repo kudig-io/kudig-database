@@ -1,7 +1,7 @@
 ---
 title: LLM 成本监控与 FinOps
 description: '# LLM 成本监控与 FinOps'
-summary: '# LLM 成本监控与 FinOps'
+summary: 'LLM 工作负载的成本结构与传统应用显著不同,GPU 计算成本占主导地位。本文档详细介绍 LLM 成本监控体系、优化策略和 FinOps 实践。'
 category: ai-infra
 tags:
 - k8s

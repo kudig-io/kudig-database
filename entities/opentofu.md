@@ -1,7 +1,7 @@
 ---
 title: OpenTofu (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'OpenTofu 是 Terraform 的开源分支，在 Terraform 转向 BSL 许可后由社区创建。它是一个基础设施即代码 (IaC) 工具，允许使用声明式配置语言定义和管理云资源。'
 category: entities
 tags:
 - k8s

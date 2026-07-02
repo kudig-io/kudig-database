@@ -1,7 +1,7 @@
 ---
 title: Consul Connect 企业级服务网格管理
 description: '# Consul Connect 企业级服务网格管理'
-summary: '# Consul Connect 企业级服务网格管理'
+summary: 'Consul Connect 是 HashiCorp Consul 平台的服务网格扩展能力，将服务发现、健康检查、配置管理与服务网格功能统一在一个控制平面中。与 [[Istio|Istio]] 和 [[Linkerd|Linkerd]] 不同，'
 category: service-mesh-microservices
 tags:
 - k8s

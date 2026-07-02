@@ -1,7 +1,7 @@
 ---
 title: 'topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践 [topic-fta]'
 description: '# topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践'
-summary: '# topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践'
+summary: '本专题提供 FTA（Fault Tree Analysis）故障树分析方法论的完整知识体系，从传统安全工程理论到云原生 [[Kubernetes|Kubernetes]] 智能运维实践，涵盖方法论理论、构建实践、AI Agent 编排、AIOps 集成、工程化建设及生产环境快速落地。'
 category: fta
 tags:
 - k8s

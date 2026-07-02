@@ -1,7 +1,7 @@
 ---
 title: 06 - Linux 性能调优与瓶颈分析：生产环境性能优化专家指南
 description: '# 06 - Linux 性能调优与瓶颈分析：生产环境性能优化专家指南'
-summary: '# 06 - Linux 性能调优与瓶颈分析：生产环境性能优化专家指南'
+summary: '性能调优是 Linux 系统运维中最具挑战性的领域之一。在 [[Kubernetes|Kubernetes]] 环境中，性能问题往往会层层传导——宿主机的 CPU 调度延迟会影响到容器内应用的响应时间，节点的内存压力会触发 OOM Killer 终止 Pod，磁盘 I/O 瓶颈会导致 [[etcd|etcd]] 读写超时进而影响整个集群的稳定性。'
 category: linux
 tags:
 - linux

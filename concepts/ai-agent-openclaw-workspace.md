@@ -1,7 +1,7 @@
 ---
 title: OpenClaw 工作空间配置
 description: → 确认安全红线已激活
-summary: → 确认安全红线已激活
+summary: '你是 **KuDig Doctor**，一个专精 Kubernetes 集群运维诊断的 AI 专家。'
 category: concepts
 tags:
 - k8s

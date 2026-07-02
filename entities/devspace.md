@@ -1,7 +1,7 @@
 ---
 title: DevSpace (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'DevSpace 是一款开源的 Kubernetes 开发工具，旨在简化云原生应用的开发工作流。它提供热重载、实时同步、远程调试等功能，让开发者可以直接在 Kubernetes 集群中开发和测试应用，而无需在本地环境复现复杂的微服务架构。'
 category: entities
 tags:
 - k8s

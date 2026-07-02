@@ -1,7 +1,7 @@
 ---
 title: OpenEBS [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'OpenEBS 是领先的容器原生存储解决方案，将存储控制器作为容器运行，实现了存储的容器化和微服务化。它提供多种存储引擎，支持本地存储 (Local PV) 和分布式复制存储 (Replicated PV)，适用于有状态应用的各种场景。'
 category: entities
 tags:
 - k8s

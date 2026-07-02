@@ -1,7 +1,7 @@
 ---
 title: 54 - CoreDNS Corefile 配置详解 (Corefile Configuration)
 description: '# 54 - CoreDNS Corefile 配置详解 (Corefile Configuration)'
-summary: '# 54 - CoreDNS Corefile 配置详解 (Corefile Configuration)'
+summary: 'kubernetes cluster.local in-addr.arpa ip6.arpa {  # [4] K8s插件'
 category: networking
 tags:
 - k8s

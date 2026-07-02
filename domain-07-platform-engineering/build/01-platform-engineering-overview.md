@@ -1,7 +1,7 @@
 ---
 title: 平台工程概述与成熟度模型
 description: '# 平台工程概述与成熟度模型'
-summary: '# 平台工程概述与成熟度模型'
+summary: '4. [内部开发者平台 (IDP) 核心概念](#4-内部开发者平台-idp-核心概念)'
 category: platform-engineering
 tags:
 - k8s

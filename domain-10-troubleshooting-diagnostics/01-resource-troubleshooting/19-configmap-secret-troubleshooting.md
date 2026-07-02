@@ -1,7 +1,7 @@
 ---
 title: ConfigMap/Secret 故障排查
 description: '# 19 - ConfigMap/Secret 故障排查 (ConfigMap/Secret Troubleshooting)'
-summary: '# 19 - ConfigMap/Secret 故障排查 (ConfigMap/Secret Troubleshooting)'
+summary: 'kubectl get pods -n <namespace> -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.volumes[*].secret.secretName}{"\n"}{end}' | grep <secret-name>'
 category: troubleshooting
 tags:
 - configmap

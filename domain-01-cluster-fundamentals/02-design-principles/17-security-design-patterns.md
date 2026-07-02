@@ -1,7 +1,7 @@
 ---
 title: 17 - 安全设计模式
 description: '# 17 - 安全设计模式'
-summary: '# 17 - 安全设计模式'
+summary: '本文档深入探讨 [[Kubernetes|Kubernetes]] 系统的安全设计模式，涵盖零信任架构、最小权限原则、纵深防御等核心安全理念，为企业构建生产级安全防护体系提供理论指导和实践方案。'
 category: design-principles
 tags:
 - k8s

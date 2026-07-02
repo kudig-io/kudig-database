@@ -1,7 +1,7 @@
 ---
 title: 08 - 日志审计与合规管理 (Logging Auditing & Compliance)
 description: '# 08 - 日志审计与合规管理 (Logging Auditing & Compliance)'
-summary: '# 08 - 日志审计与合规管理 (Logging Auditing & Compliance)'
+summary: '本文档从信息安全官(CISO)视角，深入解析Kubernetes环境下日志审计体系的建设要求、合规标准和技术实现，涵盖审计策略制定、日志完整性保护、隐私数据处理、监管报告生成等核心内容，结合金融、医疗等行业合规实践经验，为企业构建符合国际标准的日志审计体系提供权威指导。'
 category: observability
 tags:
 - k8s

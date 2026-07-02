@@ -1,7 +1,7 @@
 ---
 title: Kuadrant (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kuadrant 是一个 Kubernetes Gateway API 的策略引擎，为 Gateway API 添加 API 管理能力，包括认证、授权、限流和 DNS 管理。它通过 Policy Attachment 模式将策略附加到 Gateway API 资源（Gateway、HTTPRoute）上，无需修改路由配置即可添加安全和流量管理策略，'
 category: entities
 tags:
 - k8s

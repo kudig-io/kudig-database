@@ -1,7 +1,7 @@
 ---
 title: youki [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'youki 是一个用 Rust 实现的 OCI 容器运行时，作为 runc 的替代品。它完全兼容 OCI Runtime Specification，同时利用 Rust 的内存安全特性减少潜在的安全漏洞。youki 可与 containerd、CRI-O、Podman 等高级容器运行时集成。'
 category: entities
 tags:
 - k8s

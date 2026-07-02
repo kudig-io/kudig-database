@@ -1,7 +1,7 @@
 ---
 title: 金丝雀与蓝绿发布
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kubernetes Deployment 原生支持多种发布策略。通过组合双 Deployment、[[Service|Service]] Selector 切换和 pause/resume 机制，可以实现金丝雀发布和蓝绿发布，满足不同场景的发布需求。'
 category: skills
 tags:
 - k8s

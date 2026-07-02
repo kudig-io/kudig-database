@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 架构与基础概念全栈培训 (training-public)
 description: '# Kubernetes 架构与基础概念全栈培训'
-summary: '# Kubernetes 架构与基础概念全栈培训'
+summary: '2. 跟踪一个 `kubectl apply` 请求从提交到 Pod 运行的完整生命周期'
 category: presentations
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: KubeStellar [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'KubeStellar 是一个多集群配置管理和工作负载分发平台，专注于将 Kubernetes 资源从中心控制面高效地分发到大量边缘集群。它采用 kcp（Kubernetes-like Control Plane）作为核心，支持管理数千个集群，特别适合边缘计算、零售、IoT 等需要管理大量分布式集群的场景。'
 category: entities
 tags:
 - k8s

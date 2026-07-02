@@ -1,7 +1,7 @@
 ---
 title: 分布式数据库企业级实践深度指南
 description: '# 分布式数据库企业级实践深度指南'
-summary: '# 分布式数据库企业级实践深度指南'
+summary: '分布式数据库是解决海量数据存储、高并发访问和跨地域容灾的核心基础设施。随着企业数据规模的指数级增长和全球化业务部署的需求，传统的单机数据库和简单主从复制架构已无法满足 RPO≈0、RTO<30s 的严苛要求。分布式数据库通过数据分片（Sharding）、多副本共识（Raft/Paxos）、分布式事务（2PC/1PC 优化）等技术，'
 category: enterprise-database-middleware
 tags:
 - k8s

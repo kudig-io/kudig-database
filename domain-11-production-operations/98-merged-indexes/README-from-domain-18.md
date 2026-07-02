@@ -1,7 +1,7 @@
 ---
 title: 'Domain 18: 生产环境运维最佳实践 (Production Operations Best Practices) [98-merged-indexes]'
 description: '# Domain 18: 生产环境运维最佳实践 (Production Operations Best Practices)'
-summary: '# Domain 18: 生产环境运维最佳实践 (Production Operations Best Practices)'
+summary: '本领域专注于企业级 Kubernetes 生产环境的运维实践，涵盖从架构设计到日常运营的全方位指导。所有内容均基于真实生产环境经验和行业最佳实践。'
 category: production-operations
 tags:
 - k8s

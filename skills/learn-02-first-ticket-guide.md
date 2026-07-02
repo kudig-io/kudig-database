@@ -1,7 +1,7 @@
 ---
 title: 'Day 2: 第一个工单处理指南'
 description: '- 第一个工单处理指南'
-summary: '- 第一个工单处理指南'
+summary: '1. "哪个集群/命名空间？" → kubectl get namespaces'
 category: skills
 tags:
 - k8s

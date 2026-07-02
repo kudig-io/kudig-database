@@ -1,7 +1,7 @@
 ---
 title: ChaosBlade [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'ChaosBlade 是阿里巴巴开源的混沌工程实验工具，用于模拟各种问题场景以测试系统的韧性。它支持对主机、容器、Kubernetes 和各种中间件 (Dubbo、RocketMQ、MySQL) 进行故障注入。ChaosBlade 提供统一的 CLI 和 Kubernetes Operator 两种使用方式。'
 category: entities
 tags:
 - k8s

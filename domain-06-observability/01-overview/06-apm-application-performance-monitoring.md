@@ -1,7 +1,7 @@
 ---
 title: 06-APM应用性能监控
 description: '# 06-APM应用性能监控'
-summary: '# 06-APM应用性能监控'
+summary: '应用性能监控(APM)是保障微服务架构稳定运行的关键工具。本文档详细介绍分布式追踪、性能指标收集和应用监控的最佳实践。'
 category: production-operations
 tags:
 - k8s

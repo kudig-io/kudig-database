@@ -1,7 +1,7 @@
 ---
 title: Deployment Status 计算逻辑 (topic-code-analysis)
 description: '## 概述'
-summary: '## 概述'
+summary: '计算、Available/Progressing 条件、ObservedGeneration 机制以及 Progress Deadline 超时检测。'
 category: general
 tags:
 - reference

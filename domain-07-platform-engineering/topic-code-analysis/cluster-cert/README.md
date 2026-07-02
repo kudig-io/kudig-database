@@ -1,7 +1,7 @@
 ---
 title: Cluster Cert — Kubernetes 集群证书体系源码分析 (topic-code-analysis)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kubernetes 集群的认证与授权体系高度依赖 PKI（Public Key Infrastructure，公钥基础设施）。一个标准的 kubeadm 部署的集群包含超过 10 组证书/密钥对，涵盖 API Server、etcd、kubelet、Controller Manager、Scheduler、Front Proxy 等所有组件的身份认证。'
 category: functions
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 'Day 24: Terway 网络实操'
 description: '# Day 24: Terway 网络实操'
-summary: '# Day 24: Terway 网络实操'
+summary: 'kubectl get pod <pod-name> -o jsonpath='{.metadata.annotations.tencentvpc~2Fpod-ip}''
 category: learning
 tags:
 - k8s

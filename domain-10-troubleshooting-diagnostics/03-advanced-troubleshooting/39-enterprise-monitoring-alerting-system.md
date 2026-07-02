@@ -1,7 +1,7 @@
 ---
 title: 企业级监控告警体系
 description: '# 39 - 企业级监控告警体系 (Enterprise Monitoring and Alerting System)'
-summary: '# 39 - 企业级监控告警体系 (Enterprise Monitoring and Alerting System)'
+summary: 'from sklearn.ensemble import IsolationForest'
 category: troubleshooting
 tags:
 - prometheus

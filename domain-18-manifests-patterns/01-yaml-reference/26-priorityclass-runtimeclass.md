@@ -1,7 +1,7 @@
 ---
 title: 26 - PriorityClass / RuntimeClass YAML 配置参考
 description: '# 26 - PriorityClass / RuntimeClass YAML 配置参考'
-summary: '# 26 - PriorityClass / RuntimeClass YAML 配置参考'
+summary: '3. 无可用节点时触发抢占 (preemptionPolicy: PreemptLowerPriority)'
 category: yaml-manifests
 tags:
 - k8s

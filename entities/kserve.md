@@ -1,7 +1,7 @@
 ---
 title: KServe (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'KServe（前身 KFServing）是 Kubernetes 上的标准化模型推理平台。它提供无服务器推理、自动扩缩容、金丝雀部署和模型解释能力，支持 TensorFlow、PyTorch、scikit-learn、XGBoost 等主流框架。'
 category: entities
 tags:
 - k8s

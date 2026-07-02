@@ -1,7 +1,7 @@
 ---
 title: 云服务商集成排查
 description: '# 云服务商集成排查'
-summary: '# 云服务商集成排查'
+summary: '1. **CCM 存活**：检查各云 Cloud Controller Manager Pod 状态与错误日志。'
 category: skills
 tags:
 - k8s

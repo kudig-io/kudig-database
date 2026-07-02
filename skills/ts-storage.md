@@ -1,7 +1,7 @@
 ---
 title: 存储故障排查
 description: '# 存储故障排查'
-summary: '# 存储故障排查'
+summary: '2. **PV/SC 对齐**：`kubectl get pv`、`kubectl get sc`，确认 StorageClass、`volumeBindingMode`、`reclaimPolicy` 是否符合预期。'
 category: skills
 tags:
 - k8s

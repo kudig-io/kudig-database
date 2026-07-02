@@ -1,7 +1,7 @@
 ---
 title: SSD固态硬盘技术
 description: '- 存储是什么？'
-summary: '- 存储是什么？'
+summary: '固态硬盘（SSD）基于闪存技术，相比机械硬盘具有更高的性能、更低的延迟和更好的抗震性。本文档深入解析SSD的技术架构、闪存类型、接口规范、企业级特性及在数据中心的应用。'
 category: general
 tags:
 - k8s

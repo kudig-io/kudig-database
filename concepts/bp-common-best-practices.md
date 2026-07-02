@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 通用最佳实践参考
 description: '- 通用最佳实践'
-summary: '- 通用最佳实践'
+summary: '本文档提供 Kubernetes 生产环境通用最佳实践参考，帮助团队建立统一的最佳实践标准和规范。'
 category: concepts
 tags:
 - k8s

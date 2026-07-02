@@ -1,7 +1,7 @@
 ---
 title: Linkerd 企业级服务网格深度实践
 description: '# Linkerd 企业级服务网格深度实践'
-summary: '# Linkerd 企业级服务网格深度实践'
+summary: 'Linkerd 是云原生计算基金会（CNCF）的第二个毕业项目（2021年），专注于为 [[Kubernetes|Kubernetes]] 提供极致轻量、安全默认、开箱即用的服务网格体验。与 [[Istio|Istio]] 的"功能全面"设计哲学不同，Linkerd 坚守"极简主义"——用最少的组件、最小的资源开销、最简的配置，'
 category: service-mesh-microservices
 tags:
 - k8s

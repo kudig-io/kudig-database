@@ -1,7 +1,7 @@
 ---
 title: 24 - Admission Webhook 配置参考
 description: '# 24 - Admission Webhook 配置参考'
-summary: '# 24 - Admission Webhook 配置参考'
+summary: 'Admission Webhook 是 Kubernetes 准入控制系统的扩展机制,允许在对象持久化到 [[etcd|etcd]] 之前拦截 API 请求并进行验证或修改。'
 category: yaml-manifests
 tags:
 - k8s

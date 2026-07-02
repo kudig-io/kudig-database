@@ -1,7 +1,7 @@
 ---
 title: OpenRouter 概述与核心架构
 description: '# OpenRouter 概述与核心架构'
-summary: '# OpenRouter 概述与核心架构'
+summary: '3. **内置插件生态**：Web Search、PDF 解析、Response Healing、Context Compression'
 category: ai-coding
 tags:
 - ai

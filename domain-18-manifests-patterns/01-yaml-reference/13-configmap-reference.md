@@ -1,7 +1,7 @@
 ---
 title: 13 - ConfigMap YAML 配置参考
 description: '# 13 - ConfigMap YAML 配置参考'
-summary: '# 13 - ConfigMap YAML 配置参考'
+summary: 'kubectl rollout restart deployment/myapp'
 category: yaml-manifests
 tags:
 - k8s

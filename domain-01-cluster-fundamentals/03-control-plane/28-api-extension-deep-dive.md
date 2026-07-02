@@ -1,7 +1,7 @@
 ---
 title: Kubernetes API扩展深度解析 (API Extensions Deep Dive)
 description: '# Kubernetes API扩展深度解析 (API Extensions Deep Dive)'
-summary: '# Kubernetes API扩展深度解析 (API Extensions Deep Dive)'
+summary: '2. [Custom Resource Definitions (CRD)](#2-custom-resource-definitions-crd)'
 category: control-plane
 tags:
 - k8s

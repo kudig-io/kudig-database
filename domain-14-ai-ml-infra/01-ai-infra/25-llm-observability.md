@@ -1,7 +1,7 @@
 ---
 title: 25 - LLM可观测性与监控体系
 description: '# 25 - LLM可观测性与监控体系'
-summary: '# 25 - LLM可观测性与监控体系'
+summary: 'from prometheus_client import Counter, Histogram, Gauge, Summary'
 category: ai-infra
 tags:
 - k8s

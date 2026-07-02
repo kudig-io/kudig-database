@@ -1,7 +1,7 @@
 ---
 title: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 description: '- 运维工程师'
-summary: '- 运维工程师'
+summary: 'StatefulSet 是 [[entities/kubernetes.md|kubernetes]] 中管理有状态应用的核心工作负载控制器。与 Deployment 不同，StatefulSet 为每个 Pod 提供稳定的网络标识（hostname）、稳定的存储（PVC）和有序的部署/扩展/更新保证。'
 category: skills
 tags:
 - k8s

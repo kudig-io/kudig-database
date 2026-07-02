@@ -1,7 +1,7 @@
 ---
 title: CNCF 可观测性项目全景
 description: '## 概述'
-summary: '## 概述'
+summary: '可观测性是云原生架构的核心支柱之一。CNCF 可观测性生态围绕 **指标（Metrics）**、**日志（Logging）**、**追踪（Tracing）** 三大信号构建，辅以成本管理和 AI 驱动的智能运维。'
 category: entities
 tags:
 - k8s

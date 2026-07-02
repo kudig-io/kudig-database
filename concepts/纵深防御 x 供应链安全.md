@@ -1,7 +1,7 @@
 ---
 title: 纵深防御 x 供应链安全
 description: '# 纵深防御 x 供应链安全'
-summary: '# 纵深防御 x 供应链安全'
+summary: '在 wiki 中，纵深防御和供应链安全被当作两个独立的安全域——[[concepts/security-defense-depth.md|security-defense-depth]] 覆盖运行时分层模型（认证、RBAC、[[entities/networkpolicy.'
 category: synthesis
 tags:
 - k8s

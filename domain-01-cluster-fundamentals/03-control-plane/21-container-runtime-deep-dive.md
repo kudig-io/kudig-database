@@ -1,7 +1,7 @@
 ---
 title: 容器运行时深度解析 (Container Runtime Interface Deep Dive)
 description: '# 容器运行时深度解析 (Container Runtime Interface Deep Dive)'
-summary: '# 容器运行时深度解析 (Container Runtime Interface Deep Dive)'
+summary: '4. [[entities/containerd.md|containerd]] 深度解析](#4-containerd-深度解析)'
 category: control-plane
 tags:
 - k8s

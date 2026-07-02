@@ -1,7 +1,7 @@
 ---
 title: BIOS与固件故障排查
 description: '# BIOS与固件故障排查'
-summary: '# BIOS与固件故障排查'
+summary: 'BIOS/UEFI固件是服务器启动和硬件初始化的核心。本文档详细解析BIOS问题、POST错误、固件更新问题的诊断方法。'
 category: hardware
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: SuperEdge 架构实践 (SuperEdge Architecture Practice)
 description: '# SuperEdge 架构实践 (SuperEdge Architecture Practice)'
-summary: '# SuperEdge 架构实践 (SuperEdge Architecture Practice)'
+summary: 'SuperEdge 是腾讯开源的 [[Kubernetes|Kubernetes]] 原生边缘计算管理框架，专为大规模边缘节点管理而设计。它将 Kubernetes 强大的容器编排能力延伸到边缘端，同时解决了边缘计算场景中的网络不稳定、节点自治、服务发现等核心挑战。'
 category: edge-computing
 tags:
 - k8s

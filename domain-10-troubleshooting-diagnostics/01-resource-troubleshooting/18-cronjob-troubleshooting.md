@@ -1,7 +1,7 @@
 ---
 title: CronJob 故障排查
 description: '# 18 - CronJob 故障排查 (CronJob Troubleshooting)'
-summary: '# 18 - CronJob 故障排查 (CronJob Troubleshooting)'
+summary: 'kubectl get cronjob <cronjob-name> -n <namespace> -o jsonpath='{.status.lastScheduleTime}''
 category: troubleshooting
 tags:
 - cronjob

@@ -1,7 +1,7 @@
 ---
 title: 第14课：StatefulSet - 有状态应用管理
 description: '# 第14课：StatefulSet - 有状态应用管理'
-summary: '# 第14课：StatefulSet - 有状态应用管理'
+summary: '• 如果用 Deployment，主库 Pod 挂了，新创建的 Pod IP 变了'
 category: skills
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 工作负载管理：Pod 生命周期、调度策略与弹性伸缩
 description: '# 工作负载管理'
-summary: '# 工作负载管理'
+summary: 'Init Containers → Main Containers → Sidecar Containers 执行顺序。'
 category: reference
 tags:
 - k8s

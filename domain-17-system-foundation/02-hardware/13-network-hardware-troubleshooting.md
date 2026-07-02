@@ -1,7 +1,7 @@
 ---
 title: 网络硬件故障排查
 description: '# 网络硬件故障排查'
-summary: '# 网络硬件故障排查'
+summary: '网络硬件问题会导致业务中断和性能下降。本文档详细解析网卡、交换机、光模块及布线问题的诊断方法和排查技巧。'
 category: hardware
 tags:
 - k8s

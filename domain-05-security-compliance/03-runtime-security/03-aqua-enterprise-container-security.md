@@ -1,7 +1,7 @@
 ---
 title: Aqua Security 企业级容器安全平台深度实践
 description: '# Aqua Security 企业级容器安全平台深度实践'
-summary: '# Aqua Security 企业级容器安全平台深度实践'
+summary: 'Aqua Security 是企业级容器和云原生安全平台，提供从镜像构建到运行时的全生命周期安全防护。Aqua 平台的核心能力包括镜像漏洞扫描、运行时防护、网络微隔离、合规检查和容器漂移检测。与开源工具相比，Aqua 提供了更完整的商业支持、企业级管理控制台、高级威胁检测引擎和合规报告自动化功能。'
 category: cloud-native-security
 tags:
 - k8s

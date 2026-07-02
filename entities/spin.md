@@ -1,7 +1,7 @@
 ---
 title: Spin (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Spin 是由 Fermyon 开发的 WebAssembly (Wasm) 微服务框架，用于构建和运行基于事件驱动的 Wasm 应用。它提供极快的冷启动时间（亚毫秒级），支持多种编程语言（Rust、Go、Python、JavaScript、C#等），并内置 HTTP 触发器、Redis 触发器、键值存储、SQL 数据库等能力。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 发布说明阅读指南
 description: '# 发布说明阅读指南'
-summary: '# 发布说明阅读指南'
+summary: 'kubectl api-resources --verbs=list --namespaced -o name \'
 category: references
 tags:
 - k8s

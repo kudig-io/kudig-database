@@ -1,7 +1,7 @@
 ---
 title: GitOps自动化运维实践 (GitOps Automation Operations Practice)
 description: '# GitOps自动化运维实践 (GitOps Automation Operations Practice)'
-summary: '# GitOps自动化运维实践 (GitOps Automation Operations Practice)'
+summary: 'token                  = var.kubernetes_token'
 category: control-plane
 tags:
 - k8s

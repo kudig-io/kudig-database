@@ -1,7 +1,7 @@
 ---
 title: K8sGPT (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'K8sGPT 是一款 AI 驱动的 Kubernetes 诊断工具，利用大语言模型 (LLM) 自动分析集群问题并提供人类可读的解释和建议。它扫描 Kubernetes 集群中的问题，结合 AI 能力生成诊断报告，帮助 SRE 和开发者快速定位和解决问题。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Quay Container Registry 企业级镜像管理深度实践
 description: '# Quay Container Registry 企业级镜像管理深度实践'
-summary: '# Quay Container Registry 企业级镜像管理深度实践'
+summary: 'Quay Container Registry是由Red Hat开发的企业级容器镜像仓库，提供安全的镜像存储、漏洞扫描、签名验证和团队协作功能。本文档从企业级DevOps专家角度，深入探讨Quay的架构设计、安全特性、CI/CD集成和最佳实践。'
 category: container-image-management
 tags:
 - k8s

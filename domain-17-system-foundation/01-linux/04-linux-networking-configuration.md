@@ -1,7 +1,7 @@
 ---
 title: 04 - Linux 网络配置与性能优化：生产环境网络运维专家指南
 description: '# 04 - Linux 网络配置与性能优化：生产环境网络运维专家指南'
-summary: '# 04 - Linux 网络配置与性能优化：生产环境网络运维专家指南'
+summary: '网络是 [[Kubernetes|Kubernetes]] 集群基础设施中最关键也是最复杂的层次之一。从 Pod 内部的网络通信到 [[Service|Service]] 的负载均衡，从 [[Ingress|Ingress]] 的流量入口到 CNI 插件的底层实现，每一个环节都依赖 Linux 内核网络子系统。本文档深入解析 Linux 网络架构的核心概念，'
 category: linux
 tags:
 - linux

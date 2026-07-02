@@ -1,7 +1,7 @@
 ---
 title: kubeadm 集群删除操作
 description: '## 概述'
-summary: '## 概述'
+summary: '集群删除是 Kubernetes 生命周期管理中不可忽视的环节。`kubeadm reset` 负责清理当前节点上的 Kubernetes 相关配置，但不会自动清理 CNI、iptables 等网络配置。完整的删除流程需要多个步骤配合。'
 category: skills
 tags:
 - k8s

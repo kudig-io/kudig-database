@@ -1,7 +1,7 @@
 ---
 title: kpt (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'kpt 是一个以 Git 为中心的 Kubernetes 配置包管理工具，由 Google 开发。它使用 Git 分发 Kubernetes 资源包（package），通过函数 (KRM Functions) 实现配置的声明式转换、验证和修改，并提供 GitOps 风格的资源管理能力。'
 category: entities
 tags:
 - k8s

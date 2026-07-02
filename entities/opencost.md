@@ -1,7 +1,7 @@
 ---
 title: OpenCost [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'OpenCost 是 Kubernetes 成本监控的开源标准。它提供实时成本分配、多维度成本分析和优化建议，帮助团队了解和优化 Kubernetes 基础设施支出。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 04-企业级监控体系
 description: '# 04-企业级监控体系'
-summary: '# 04-企业级监控体系'
+summary: '企业级监控体系是保障Kubernetes生产环境稳定运行的核心基础设施。本文档详细介绍完整的监控架构设计、组件选型和最佳实践。'
 category: production-operations
 tags:
 - k8s

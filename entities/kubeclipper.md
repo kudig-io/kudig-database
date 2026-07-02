@@ -1,7 +1,7 @@
 ---
 title: KubeClipper [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'KubeClipper 是一个轻量级的 Kubernetes 集群全生命周期管理平台，提供 Web UI 和 CLI 工具，支持在物理机、虚拟机和云主机上快速部署和管理 Kubernetes 集群。它采用 Agent 架构，无需依赖 Ansible 或 SSH，支持离线部署、集群扩缩容、版本升级、备份恢复等完整的集群运维能力。'
 category: entities
 tags:
 - k8s

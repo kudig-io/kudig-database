@@ -1,7 +1,7 @@
 ---
 title: 32 - MLOps端到端流水线
 description: '## 一、MLOps流水线架构'
-summary: '## 一、MLOps流水线架构'
+summary: 'from kfp.components import create_component_from_func'
 category: ai-infra
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 事件驱动架构故障排查
 description: '# 41 - 事件驱动架构故障排查 (Event-Driven Architecture Troubleshooting)'
-summary: '# 41 - 事件驱动架构故障排查 (Event-Driven Architecture Troubleshooting)'
+summary: 'kubectl exec -n kafka kafka-0 -- kafka-topics.sh --bootstrap-server localhost:9092 --describe --under-replicated-partitions'
 category: troubleshooting
 tags:
 - kafka

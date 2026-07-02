@@ -1,7 +1,7 @@
 ---
 title: OpenFGA (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'OpenFGA 是细粒度授权（Fine-Grained Authorization）系统，基于 Google Zanzibar 论文设计。它提供灵活的关系型访问控制，支持复杂的权限模型如 RBAC、ABAC 和 ReBAC。'
 category: entities
 tags:
 - k8s

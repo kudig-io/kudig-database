@@ -1,7 +1,7 @@
 ---
 title: OSCAL Compass (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'OSCAL Compass 是一套基于 NIST OSCAL (Open Security Controls Assessment Language) 标准的合规自动化工具集。它包括 Trestle (合规即代码框架)、C2P (合规到策略转换) 等组件，帮助组织将安全合规要求转换为可执行的代码和策略，'
 category: entities
 tags:
 - k8s

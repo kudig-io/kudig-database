@@ -1,7 +1,7 @@
 ---
 title: LoxiLB [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'LoxiLB 是一个基于 eBPF 的云原生负载均衡器，专注于为 Kubernetes 提供高性能的 L4 负载均衡服务。它可以作为 Kubernetes 的 [[Service|Service]] LoadBalancer、[[Ingress|Ingress]] 控制器或独立的负载均衡网关运行，利用 eBPF/XDP 技术在内核数据面实现线速转发，'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: InterLink (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'InterLink 是一个 Virtual Kubeletet|Kubelet]] 提供者实现，允许将 Kubernetes Pod 调度到远程 HPC（高性能计算）和云计算基础设施上执行。'
 category: entities
 tags:
 - k8s

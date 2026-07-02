@@ -1,7 +1,7 @@
 ---
 title: Litmus 混沌工程实践
 description: '# Litmus 混沌工程实践'
-summary: '# Litmus 混沌工程实践'
+summary: 'kubectl apply -f https://litmuschaos.github.io/litmus/3.12.0/litmus-3.12.0.yaml'
 category: domain
 tags:
 - litmus

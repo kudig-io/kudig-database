@@ -1,7 +1,7 @@
 ---
 title: Harbor企业级镜像安全扫描深度实践
 description: '# Harbor企业级镜像安全扫描深度实践'
-summary: '# Harbor企业级镜像安全扫描深度实践'
+summary: '本文档深入探讨Harbor企业级镜像安全扫描系统的架构设计、漏洞检测实践和安全治理策略，基于金融、医疗、政府等高度监管行业的实践经验，提供从镜像构建到部署的全生命周期安全管控技术指南。'
 category: container-image-management
 tags:
 - k8s

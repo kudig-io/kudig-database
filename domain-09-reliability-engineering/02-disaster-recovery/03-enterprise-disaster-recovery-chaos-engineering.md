@@ -1,7 +1,7 @@
 ---
 title: 企业级容灾架构与混沌工程深度实践
 description: '# 企业级容灾架构与混沌工程深度实践'
-summary: '# 企业级容灾架构与混沌工程深度实践'
+summary: '在云原生和微服务架构日益普及的今天，系统复杂性呈指数级增长，传统的"预防为主"的灾备思路已经无法应对分布式系统中的各种不确定性。混沌工程（[[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.'
 category: disaster-recovery
 tags:
 - k8s

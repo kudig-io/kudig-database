@@ -1,7 +1,7 @@
 ---
 title: 11 - 扩展性设计模式 (Extensibility)
 description: '# 11 - 扩展性设计模式 (Extensibility)'
-summary: '# 11 - 扩展性设计模式 (Extensibility)'
+summary: '1. **去 Webhook 化**: 以前复杂的验证必须写 Mutating/Validating Webhooks，现在直接在 CRD YAML 中通过 CEL 表达式即可完成。'
 category: design-principles
 tags:
 - k8s

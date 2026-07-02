@@ -1,7 +1,7 @@
 ---
 title: Aeraki Mesh [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Aeraki Mesh 是 Istio 服务网格的扩展框架，专注于为非 HTTP 协议提供流量管理能力。在微服务架构中，除了 HTTP/gRPC 之外，还广泛使用 Dubbo、Thrift、Redis、Kafka 等协议。Aeraki Mesh 通过扩展 Istio 的数据面（Envoy）和控制面，'
 category: entities
 tags:
 - k8s

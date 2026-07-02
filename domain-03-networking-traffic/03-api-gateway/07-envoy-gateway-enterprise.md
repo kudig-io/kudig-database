@@ -1,7 +1,7 @@
 ---
 title: 07 - Envoy Gateway 企业级实践
 description: '# 07 - Envoy Gateway 企业级实践'
-summary: '# 07 - Envoy Gateway 企业级实践'
+summary: '6. [EnvoyPatchPolicy 高级配置](#6-envoypatchpolicy-高级配置)'
 category: cloud-native-api-gateway
 tags:
 - k8s

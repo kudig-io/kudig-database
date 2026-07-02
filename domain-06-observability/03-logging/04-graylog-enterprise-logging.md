@@ -1,7 +1,7 @@
 ---
 title: Graylog 企业级日志管理平台深度实践
 description: '# Graylog 企业级日志管理平台深度实践'
-summary: '# Graylog 企业级日志管理平台深度实践'
+summary: 'Graylog是开源的企业级日志管理平台，提供强大的日志收集、存储、搜索和分析功能。本文档从企业级运维专家角度，深入探讨Graylog的架构设计、部署策略、日志处理管道和最佳实践。'
 category: logging-management-analytics
 tags:
 - k8s

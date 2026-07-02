@@ -1,7 +1,7 @@
 ---
 title: 供应链安全概述 (Supply Chain Security Overview)
 description: '# 供应链安全概述 (Supply Chain Security Overview)'
-summary: '# 供应链安全概述 (Supply Chain Security Overview)'
+summary: '供应链攻击是指攻击者通过破坏软件开发、构建或分发过程中的某个环节，将恶意代码或后门植入最终软件产品的攻击方式。'
 category: supply-chain-security
 tags:
 - k8s

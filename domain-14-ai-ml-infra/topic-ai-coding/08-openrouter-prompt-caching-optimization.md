@@ -1,7 +1,7 @@
 ---
 title: Prompt Caching 与成本优化
 description: '# Prompt Caching 与成本优化'
-summary: '# Prompt Caching 与成本优化'
+summary: 'Prompt Caching 是降低 LLM 推理成本的核心机制。OpenRouter 统一管理各 Provider 的缓存策略，并通过 **Provider Sticky Routing** 最大化缓存命中率。'
 category: ai-coding
 tags:
 - ai

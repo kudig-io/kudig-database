@@ -1,7 +1,7 @@
 ---
 title: kubeadm 高可用集群搭建
 description: '## 概述'
-summary: '## 概述'
+summary: '生产环境 Kubernetes 集群必须部署高可用控制面以消除单点问题。kubeadm 支持两种 etcd 高可用拓扑，并通过 `--control-plane-endpoint` 参数统一配置负载均衡入口。'
 category: skills
 tags:
 - k8s

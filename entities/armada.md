@@ -1,7 +1,7 @@
 ---
 title: Armada (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Armada 是一个多集群批处理作业调度系统，专为在多个 Kubernetes 集群上运行大规模批处理工作负载（如 HPC 计算、ML 训练、CI/CD 等）而设计。它提供统一的作业提交入口、跨集群的公平调度、优先级抢占和作业队列管理，能够管理数百万个并发作业在数千个节点上的高效调度。'
 category: entities
 tags:
 - k8s

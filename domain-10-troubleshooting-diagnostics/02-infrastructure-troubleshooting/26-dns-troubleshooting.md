@@ -1,7 +1,7 @@
 ---
 title: DNS 故障排查
 description: '# 26 - DNS 故障排查 (DNS Troubleshooting)'
-summary: '# 26 - DNS 故障排查 (DNS Troubleshooting)'
+summary: 'kubectl exec dns-test -- nslookup kubernetes.default.svc.cluster.local'
 category: troubleshooting
 tags:
 - dns

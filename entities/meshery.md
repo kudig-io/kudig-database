@@ -1,7 +1,7 @@
 ---
 title: Meshery (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Meshery 是云原生管理平面，提供服务网格和云原生基础设施的生命周期管理。它支持多种服务网格 (Istio, Linkerd, Consul, Kuma, NSM 等) 的安装、配置、性能测试和运维管理，并提供统一的 Web 界面和 CLI。Meshery 还定义了 MeshModel 标准，用于描述云原生基础设施。'
 category: entities
 tags:
 - k8s

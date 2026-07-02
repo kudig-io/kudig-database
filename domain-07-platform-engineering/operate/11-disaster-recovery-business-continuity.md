@@ -1,7 +1,7 @@
 ---
 title: 灾难恢复与业务连续性 (Disaster Recovery & Business Continuity)
 description: '## 概述'
-summary: '## 概述'
+summary: '灾难恢复与业务连续性是平台运维的生命线，通过建立完善的备份恢复策略、多活架构和应急响应机制，确保在各种问题场景下业务的持续可用性。'
 category: platform-ops
 tags:
 - k8s

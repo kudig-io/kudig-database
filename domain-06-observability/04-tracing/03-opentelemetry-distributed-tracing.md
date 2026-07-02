@@ -1,7 +1,7 @@
 ---
 title: OpenTelemetry分布式追踪与可观测性深度实践
 description: '# OpenTelemetry分布式追踪与可观测性深度实践'
-summary: '# OpenTelemetry分布式追踪与可观测性深度实践'
+summary: '本文档深入探讨了OpenTelemetry分布式追踪与可观测性体系的架构设计、实施部署和最佳实践，基于微服务架构的生产环境经验，提供从追踪埋点到数据可视化的完整技术指南，帮助企业构建统一、标准的可观测性平台。'
 category: enterprise-monitoring-alerting
 tags:
 - k8s

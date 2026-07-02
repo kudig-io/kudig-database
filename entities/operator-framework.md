@@ -1,7 +1,7 @@
 ---
 title: Operator Framework [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Operator Framework 是一个开源工具包，用于以高效、自动化和可扩展的方式管理 Kubernetes 原生应用（Operators）。它提供了构建、测试和分发 Operators 的完整解决方案。'
 category: entities
 tags:
 - k8s

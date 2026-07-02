@@ -1,7 +1,7 @@
 ---
 title: Topic 应用层架构设计最佳实践
 description: '# Topic: 应用层架构设计最佳实践'
-summary: '# Topic: 应用层架构设计最佳实践'
+summary: '本专题聚焦于**基于 Kubernetes 的生产级应用层架构设计**，覆盖电商、社交、金融、教育、游戏、IoT、AI 等核心行业场景。每篇文档均包含完整的 **Mermaid 架构图解**、**[[domain-17-system-foundation/topic-cheat-sheet/k8s.'
 category: application-architecture
 tags:
 - k8s

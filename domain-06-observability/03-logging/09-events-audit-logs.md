@@ -1,7 +1,7 @@
 ---
 title: 05 - 事件与审计日志管理 (Events & Audit Logs)
 description: '# 05 - 事件与审计日志管理 (Events & Audit Logs)'
-summary: '# 05 - 事件与审计日志管理 (Events & Audit Logs)'
+summary: '本文档深入探讨 Kubernetes 事件管理和审计日志体系，涵盖事件生命周期、审计策略配置、合规性要求、安全监控等核心内容，为企业构建完整的事件追溯和安全审计能力提供专业指导。'
 category: observability
 tags:
 - k8s

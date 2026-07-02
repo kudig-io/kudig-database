@@ -1,7 +1,7 @@
 ---
 title: 12 - API 网关可观测性：指标、日志与链路追踪
 description: '# 12 - API 网关可观测性：指标、日志与链路追踪'
-summary: '# 12 - API 网关可观测性：指标、日志与链路追踪'
+summary: '+ Alertmanager         Elasticsearch        Tempo'
 category: cloud-native-api-gateway
 tags:
 - k8s

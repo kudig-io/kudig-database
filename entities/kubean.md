@@ -1,7 +1,7 @@
 ---
 title: Kubean (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kubean 是一个基于 Kubespray 的 Kubernetes 集群生命周期管理 Operator。它将 Kubespray 的集群部署能力封装为 Kubernetes CRD，使用户可以通过声明式的方式在已有的 Kubernetes 集群（管理集群）上创建、升级和管理多个 Kubernetes 集群。Kubean 支持在线和离线部署，'
 category: entities
 tags:
 - k8s

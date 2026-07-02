@@ -1,7 +1,7 @@
 ---
 title: API Server 故障排查
 description: '# 01 - API Server 故障排查 (API Server Troubleshooting)'
-summary: '# 01 - API Server 故障排查 (API Server Troubleshooting)'
+summary: 'journalctl -u kube-apiserver -f --no-pager'
 category: troubleshooting
 tags:
 - apiserver

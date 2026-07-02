@@ -1,7 +1,7 @@
 ---
 title: 证书管理与 TLS 配置
 description: '# 证书管理与 TLS 配置'
-summary: '# 证书管理与 TLS 配置'
+summary: '证书管理是 [[Kubernetes|Kubernetes]] 安全体系的核心组成部分,涉及集群组件通信加密、服务间 mTLS、[[Ingress|Ingress]] HTTPS 等多个层面。本文档详细介绍 Kubernetes 证书体系、cert-manager 部署配置和证书生命周期管理。'
 category: security
 tags:
 - k8s

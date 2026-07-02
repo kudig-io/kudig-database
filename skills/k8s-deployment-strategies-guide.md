@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 部署策略最佳实践
 description: '# Kubernetes 部署策略最佳实践'
-summary: '# Kubernetes 部署策略最佳实践'
+summary: '本指南提供生产环境 Kubernetes 部署策略配置的最佳实践，涵盖从滚动更新到金丝雀部署的全方位内容 ^[inferred]。'
 category: skills
 tags:
 - k8s

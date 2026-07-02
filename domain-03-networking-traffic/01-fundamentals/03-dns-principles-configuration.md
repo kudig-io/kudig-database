@@ -1,7 +1,7 @@
 ---
 title: DNS 原理与配置
 description: '# DNS 原理与配置'
-summary: '# DNS 原理与配置'
+summary: 'echo "当前查询速率: $current_queries queries/10min"'
 category: network-fundamentals
 tags:
 - network

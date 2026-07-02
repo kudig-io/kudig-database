@@ -1,7 +1,7 @@
 ---
 title: 监控可观测性排查
 description: '# 监控可观测性排查'
-summary: '# 监控可观测性排查'
+summary: '1. **核心组件就绪**：Prometheus/Grafana/Loki/AlertManager Pod 是否 Running。'
 category: skills
 tags:
 - k8s

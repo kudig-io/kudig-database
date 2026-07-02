@@ -1,7 +1,7 @@
 ---
 title: Backstage 部署与配置
 description: '# Backstage 部署与配置'
-summary: '# Backstage 部署与配置'
+summary: '1. [Backstage 架构深度解析](#1-backstage-架构深度解析)'
 category: platform-engineering
 tags:
 - k8s

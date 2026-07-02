@@ -1,7 +1,7 @@
 ---
 title: Tekton Java CI/CD 流水线实践指南
 description: '# Tekton Java CI/CD 流水线实践指南'
-summary: '# Tekton Java CI/CD 流水线实践指南'
+summary: '本指南是 Tekton CI/CD 实践的 Java 语言专项指南，提供从 Maven/Gradle 构建到容器镜像推送的完整 CI/CD 流水线方案。Java 是企业级应用开发的主流语言，Spring Boot 和 Quarkus 等框架在微服务架构中被广泛采用。在云原生场景中，'
 category: gitops-ci-cd
 tags:
 - k8s

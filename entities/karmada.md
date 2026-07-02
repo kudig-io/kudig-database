@@ -1,7 +1,7 @@
 ---
 title: Karmada (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Karmada（Kubernetes Armada）是开放的多云多集群 Kubernetes 管理系统。它提供统一的 API 来管理跨多个 Kubernetes 集群的工作负载，支持跨集群调度、故障转移和策略驱动的资源分发。'
 category: entities
 tags:
 - k8s

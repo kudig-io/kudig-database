@@ -1,7 +1,7 @@
 ---
 title: Agent 系统深度指南
 description: '# Agent 系统深度指南'
-summary: '# Agent 系统深度指南'
+summary: 'OpenCode 的 Agent 系统是其核心差异化能力之一。与其他 Agent CLI 的固定模式不同，OpenCode 提供了完整的 Agent 抽象：内置 Primary Agent（Build/Plan）和 Subagent（General/Explore），支持通过 JSON 或 Markdown 自定义 Agent，'
 category: ai-coding
 tags:
 - ai

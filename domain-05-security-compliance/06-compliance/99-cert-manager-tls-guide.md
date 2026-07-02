@@ -1,7 +1,7 @@
 ---
 title: cert-manager 自动证书管理深度实践
 description: '# cert-manager 自动证书管理深度实践'
-summary: '# cert-manager 自动证书管理深度实践'
+summary: 'TLS 证书是云原生环境中服务间安全通信的基础。在 Kubernetes 集群中，[[Ingress|Ingress]] 端点、服务间 mTLS、Webhook 服务器等场景都需要大量证书。手动管理证书的签发、分发和轮换既繁琐又容易出错，证书过期导致的服务中断是常见的生产事故。cert-manager 是 Kubernetes 生态中最流行的证书管理工具，'
 category: cloud-native-security
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Gateway API
 description: '## 概述'
-summary: '## 概述'
+summary: 'Gateway API 是 [[Kubernetes|Kubernetes]] 中用于暴露网络服务的一组扩展 API（以 CustomResourceDefinition 实现），旨在提供比 [[Ingress|Ingress]] 更动态、更灵活、更面向角色的流量路由能力。它是 Ingress 的继任者，支持基础设施自动配置和高级路由策略，'
 category: dictionary
 tags:
 - k8s

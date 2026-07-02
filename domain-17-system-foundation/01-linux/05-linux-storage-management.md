@@ -1,7 +1,7 @@
 ---
 title: 05 - Linux 存储管理与RAID配置：生产环境存储架构专家指南
 description: '# 05 - Linux 存储管理与RAID配置：生产环境存储架构专家指南'
-summary: '# 05 - Linux 存储管理与RAID配置：生产环境存储架构专家指南'
+summary: '本文档从生产环境存储架构专家视角，深入解析 Linux 存储管理、RAID配置和企业级存储解决方案。涵盖LVM逻辑卷管理、软件RAID配置、I/O性能优化、存储虚拟化等核心技术，为构建高可用、高性能的企业存储基础设施提供专业指导。'
 category: linux
 tags:
 - linux

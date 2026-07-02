@@ -1,7 +1,7 @@
 ---
 title: 第四课：Service - 让应用可以被访问 [03-networking]
 description: 【解决方案】
-summary: 【解决方案】
+summary: '2. 掌握 ClusterIP、NodePort、LoadBalancer 三种类型'
 category: k8s-lecturer
 tags:
 - k8s

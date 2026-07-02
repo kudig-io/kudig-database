@@ -1,7 +1,7 @@
 ---
 title: 节点驱逐与维护
 description: '## 概述'
-summary: '## 概述'
+summary: '`kubectl drain` 是安全驱逐节点上所有 Pod 的标准操作，用于节点维护、升级或下线。drain 操作分为两个阶段：先将节点标记为不可调度（cordon），然后驱逐该节点上的 Pod。'
 category: skills
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Rubrik 企业级灾备与业务连续性深度实践
 description: '# Rubrik 企业级灾备与业务连续性深度实践'
-summary: '# Rubrik 企业级灾备与业务连续性深度实践'
+summary: 'Rubrik 是新一代云数据管理平台的代表，以零信任数据安全（Zero Trust Data Security）为核心理念，提供从备份恢复、灾难恢复、勒索软件防护到数据治理的一体化解决方案。与传统备份软件不同，Rubrik 采用超融合硬件（Brik）或纯软件（Rubrik Cloud Cluster）的部署方式，'
 category: disaster-recovery
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 05 - 调度与抢占事件
 description: '# 05 - 调度与抢占事件'
-summary: '# 05 - 调度与抢占事件'
+summary: '表示 Pod 已成功通过调度器的所有过滤和打分阶段,并被绑定到特定的节点上。这是 Pod 生命周期中最关键的事件之一,标志着 Pod 从 Pending 状态进入 Running 状态的转折点。调度器会记录调度决策的节点名称和调度耗时。'
 category: kubernetes-events
 tags:
 - k8s

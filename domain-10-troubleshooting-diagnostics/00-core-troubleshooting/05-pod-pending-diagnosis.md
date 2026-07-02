@@ -1,7 +1,7 @@
 ---
 title: Pod Pending 状态深度诊断
 description: '# 05 - Pod Pending 状态深度诊断 (Pod Pending Diagnosis)'
-summary: '# 05 - Pod Pending 状态深度诊断 (Pod Pending Diagnosis)'
+summary: 'Pod 处于 Pending 状态表示 Pod 已被 [[Kubernetes|Kubernetes]]es API|Kubernetes API]] Server 接受，但尚未被调度到节点或容器镜像尚未拉取。'
 category: troubleshooting
 tags:
 - pod

@@ -1,7 +1,7 @@
 ---
 title: 节点组件故障排查 (skills)
 description: '# 节点组件故障排查'
-summary: '# 节点组件故障排查'
+summary: '1. **节点面状态**：`kubectl get nodes -o wide`，抽样 `kubectl describe node <name>` 查看 Conditions/Taints，区分单点 vs 批量问题。'
 category: skills
 tags:
 - k8s

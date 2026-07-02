@@ -1,7 +1,7 @@
 ---
 title: Flux GitOps 实践指南
 description: '# Flux GitOps 实践指南'
-summary: '# Flux GitOps 实践指南'
+summary: 'Flux v2 是 CNCF 毕业的 GitOps 持续交付工具，基于 GitOps Toolkit 构建。与 [[Argo|Argo]] CD 的集中式管理架构不同，Flux 采用分布式设计——每个 [[Kubernetes|Kubernetes]] 集群运行自己的 Flux 实例，Git 仓库就是唯一的控制平面。'
 category: gitops-ci-cd
 tags:
 - k8s

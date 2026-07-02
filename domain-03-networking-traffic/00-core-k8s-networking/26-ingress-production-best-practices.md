@@ -1,7 +1,7 @@
 ---
 title: 134 - Ingress 生产最佳实践
 description: '# 134 - Ingress 生产最佳实践'
-summary: '# 134 - Ingress 生产最佳实践'
+summary: 'requiredDuringSchedulingIgnoredDuringExecution:'
 category: networking
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 21 - 多集群安全管理与联邦认证
 description: '# 21 - 多集群安全管理与联邦认证'
-summary: '# 21 - 多集群安全管理与联邦认证'
+summary: 'echo "Vault policy synchronization completed at $(date)"'
 category: security
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 网络体系：CNI、Service、Ingress、Gateway API 与多集群网络
 description: '# 网络体系'
-summary: '# 网络体系'
+summary: 'Service → Endpoints → Pod 的映射链路由 kube-proxy 维护（iptables 或 IPVS 模式）。'
 category: reference
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 25 - 可观测性工具生态系统 (Observability Tool Ecosystem)
 description: '## 概述'
-summary: '## 概述'
+summary: '本文档从技术架构师视角，全面梳理Kubernetes可观测性领域的工具生态系统，涵盖监控、日志、追踪、告警等各维度的主流开源和商业解决方案，结合企业选型实践和成本效益分析，为不同规模和需求的组织提供工具选型指导和集成方案。'
 category: observability
 tags:
 - k8s

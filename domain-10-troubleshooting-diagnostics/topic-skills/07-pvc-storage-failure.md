@@ -1,7 +1,7 @@
 ---
 title: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 description: '# PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation'
-summary: '# PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation'
+summary: 'PVC/PV/CSI 存储问题是 [[Kubernetes|Kubernetes]] 集群中**影响数据持久化和有状态服务**的关键问题类型。当存储子系统出现问题时，Pod 无法启动（卡在 ContainerCreating）、数据无法持久化、甚至可能导致数据丢失。对于 [[StatefulSet|StatefulSet]]、数据库等有状态工作负载，'
 category: storage
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: GitHub Actions Enterprise CI/CD Platform 深度实践
 description: '# GitHub Actions Enterprise CI/CD Platform 深度实践'
-summary: '# GitHub Actions Enterprise CI/CD Platform 深度实践'
+summary: 'GitHub Actions 是 GitHub 原生的 CI/CD 自动化平台，于 2019 年正式发布，迅速成为开发者最广泛使用的 CI/CD 工具之一。它通过 YAML 工作流文件（`.github/workflows/*.yml`）定义自动化流程，与 GitHub 的代码管理、Pull Request、Issue 等功能深度集成，'
 category: gitops-ci-cd
 tags:
 - k8s

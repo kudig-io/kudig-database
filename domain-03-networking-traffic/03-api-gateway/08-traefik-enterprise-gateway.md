@@ -1,7 +1,7 @@
 ---
 title: 08 - Traefik API 网关企业级实践
 description: '# 08 - Traefik API 网关企业级实践'
-summary: '# 08 - Traefik API 网关企业级实践'
+summary: '5. [IngressRoute CRD 路由配置](#5-ingressroute-crd-路由配置)'
 category: cloud-native-api-gateway
 tags:
 - k8s

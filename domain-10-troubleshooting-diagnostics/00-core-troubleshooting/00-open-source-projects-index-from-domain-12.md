@@ -1,7 +1,7 @@
 ---
 title: Domain-12 故障排查 — 开源项目索引
 description: '# Domain-12 故障排查 — 开源项目索引'
-summary: '# Domain-12 故障排查 — 开源项目索引'
+summary: 'kubectl get events --sort-by='.lastTimestamp' -A                    # 全局事件'
 category: troubleshooting
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 05 - CSI驱动集成与运维管理
 description: '# 05 - CSI驱动集成与运维管理'
-summary: '# 05 - CSI驱动集成与运维管理'
+summary: 'kubectl get volumesnapshot -n production -o name | \'
 category: storage
 tags:
 - k8s

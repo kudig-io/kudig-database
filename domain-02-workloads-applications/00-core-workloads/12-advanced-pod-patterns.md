@@ -1,7 +1,7 @@
 ---
 title: 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns)
 description: '# 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns)'
-summary: '# 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns)'
+summary: 'requiredDuringSchedulingIgnoredDuringExecution:'
 category: workloads
 tags:
 - k8s

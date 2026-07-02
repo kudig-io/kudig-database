@@ -1,7 +1,7 @@
 ---
 title: Java on Kubernetes 综合实践指南
 description: '# Java on Kubernetes 综合实践指南'
-summary: '# Java on Kubernetes 综合实践指南'
+summary: 'Java 是企业级后端开发的第一大语言，Kubernetes 是容器编排的事实标准。两者的结合构成了现代云原生应用的基石。然而，将 Java 应用**生产级别**地运行在 Kubernetes 上，需要深入理解 JVM 在容器中的行为、GC 在 cgroups 限制下的表现、镜像构建优化策略、探针与优雅停机、配置管理、安全加固、可观测性整合等众多领域。'
 category: java-kubernetes
 tags:
 - java

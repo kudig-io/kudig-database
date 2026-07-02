@@ -1,7 +1,7 @@
 ---
 title: 边缘安全架构 (Edge Security Architecture)
 description: '# 边缘安全架构 (Edge Security Architecture)'
-summary: '# 边缘安全架构 (Edge Security Architecture)'
+summary: '边缘计算将算力部署到物理上分散、网络环境复杂、人员难以管控的场所，安全挑战远比传统数据中心严峻。边缘节点可能被物理接触、网络环境不可信、设备软件栈难以统一管控。本文档从身份管理、通信安全、设备认证、安全启动、边缘防火墙和威胁模型六个维度，构建全面的边缘安全架构。'
 category: edge-computing
 tags:
 - k8s

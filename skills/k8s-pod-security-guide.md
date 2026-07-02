@@ -1,7 +1,7 @@
 ---
 title: Kubernetes Pod 安全最佳实践
 description: '# Kubernetes Pod 安全最佳实践'
-summary: '# Kubernetes Pod 安全最佳实践'
+summary: '本指南提供生产环境 Kubernetes Pod 安全配置的最佳实践，涵盖从 Pod 安全标准到运行时安全的全方位内容 ^[inferred]。'
 category: skills
 tags:
 - k8s

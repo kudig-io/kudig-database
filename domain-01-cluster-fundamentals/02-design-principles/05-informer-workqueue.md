@@ -1,7 +1,7 @@
 ---
 title: 05 - Informer 架构与工作队列 (Informer & Workqueue)
 description: '# 05 - Informer 架构与工作队列 (Informer & Workqueue)'
-summary: '# 05 - Informer 架构与工作队列 (Informer & Workqueue)'
+summary: '虽然 `SharedInformerFactory` 极大节省了资源，但在生产环境下使用时需注意以下几点：'
 category: design-principles
 tags:
 - k8s

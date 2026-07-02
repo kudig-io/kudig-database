@@ -1,7 +1,7 @@
 ---
 title: 09 - PV/PVC故障排查与解决方案
 description: '# 09 - PV/PVC故障排查与解决方案'
-summary: '# 09 - PV/PVC故障排查与解决方案'
+summary: 'kubectl get pvc --all-namespaces --field-selector=status.phase=Pending 2>/dev/null | wc -l'
 category: storage
 tags:
 - k8s

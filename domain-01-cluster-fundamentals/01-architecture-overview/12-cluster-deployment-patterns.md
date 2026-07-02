@@ -1,7 +1,7 @@
 ---
 title: 12 - Kubernetes 集群部署架构模式指南
 description: '# 12 - Kubernetes 集群部署架构模式指南'
-summary: '# 12 - Kubernetes 集群部署架构模式指南'
+summary: '本文档详细阐述 Kubernetes 集群的各种部署架构模式，涵盖从小规模开发环境到大规模生产环境的完整部署方案，提供架构设计原则、部署策略和技术选型指导。'
 category: architecture-fundamentals
 tags:
 - k8s

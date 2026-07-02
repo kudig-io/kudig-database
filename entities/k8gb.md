@@ -1,7 +1,7 @@
 ---
 title: K8GB
 description: '## 概述'
-summary: '## 概述'
+summary: 'K8GB 是一个 Kubernetes 原生的全局负载均衡解决方案，基于 DNS 实现跨集群的流量调度。它使用 Kubernetes CRD (GslbStrategy) 定义全局负载均衡策略，通过 CoreDNS 和 ExternalDNS 实现多集群间的 DNS 基础的流量管理，支持轮询、地理位置和故障转移策略。'
 category: entities
 tags:
 - k8s

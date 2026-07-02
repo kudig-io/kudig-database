@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)
 description: '# Kubernetes 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)'
-summary: '# Kubernetes 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)'
+summary: '本文档深入探讨了Kubernetes调度器的架构原理、调度算法和扩展机制，基于大规模生产环境的调度优化实践经验，提供从基础调度策略到自定义调度器开发的完整技术指南，帮助企业实现高效的资源调度和应用部署。'
 category: papers
 tags:
 - k8s

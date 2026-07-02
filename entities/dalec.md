@@ -1,7 +1,7 @@
 ---
 title: Dalec
 description: '## 概述'
-summary: '## 概述'
+summary: 'Dalec 是一个声明式的 Linux 系统包构建工具，通过简洁的 YAML 规范定义如何构建 RPM、DEB 等 Linux 包，而无需手动编写 spec 文件或 debian/rules。它基于 BuildKit 构建，能够交叉编译多架构包，支持自动依赖管理、补丁应用、签名等功能。Dalec 特别适合需要将软件打包为多个发行版格式的场景。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Kuma (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kuma 是一个通用服务网格控制平面，设计简单易用且功能强大。它基于 Envoy 代理构建，支持 Kubernetes 和虚拟机环境，可通过单一控制平面管理多个服务网格部署。Kuma 提供开箱即用的策略，帮助团队快速实现零信任安全、可观测性和流量管理。'
 category: entities
 tags:
 - k8s

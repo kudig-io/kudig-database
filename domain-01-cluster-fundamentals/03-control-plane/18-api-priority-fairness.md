@@ -1,7 +1,7 @@
 ---
 title: 68 - API 优先级与公平性 (API Priority and Fairness)
 description: '## APF 架构概览'
-summary: '## APF 架构概览'
+summary: '1. exempt (1)           → PriorityLevel: exempt'
 category: control-plane
 tags:
 - k8s

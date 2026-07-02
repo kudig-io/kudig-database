@@ -1,7 +1,7 @@
 ---
 title: Cartography (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Cartography 是一个基础设施资产图谱工具，能够自动收集多云环境（AWS、GCP、Azure）、SaaS 服务（GitHub、Okta、GSuite）和安全工具（CrowdStrike、Duo）的资产信息，并将其存储在 Neo4j 图数据库中，构建完整的基础设施关系图谱。'
 category: entities
 tags:
 - k8s

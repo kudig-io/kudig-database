@@ -1,7 +1,7 @@
 ---
 title: 11 - 存储与卷事件
 description: '# 11 - 存储与卷事件'
-summary: '# 11 - 存储与卷事件'
+summary: '(节点文件系统扩容)           FileSystemResizeFailed'
 category: kubernetes-events
 tags:
 - k8s

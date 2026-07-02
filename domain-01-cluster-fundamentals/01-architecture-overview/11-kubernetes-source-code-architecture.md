@@ -1,7 +1,7 @@
 ---
 title: 11 - Kubernetes 源码架构深度分析
 description: '# 11 - Kubernetes 源码架构深度分析'
-summary: '# 11 - Kubernetes 源码架构深度分析'
+summary: '本文档深入解析 Kubernetes 源码的整体架构、模块划分、核心组件实现原理以及开发最佳实践，为深入理解 Kubernetes 内部机制提供完整的技术参考。'
 category: architecture-fundamentals
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 04 - Terway 运维手册 (Operations Manual)
 description: '# 04 - Terway 运维手册 (Operations Manual)'
-summary: '# 04 - Terway 运维手册 (Operations Manual)'
+summary: '`terway-cli` 是内嵌在 Terway Pod 中的命令行诊断工具，可直接进入 Pod 执行。'
 category: terway
 tags:
 - k8s

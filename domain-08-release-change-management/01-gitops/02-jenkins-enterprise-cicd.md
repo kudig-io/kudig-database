@@ -1,7 +1,7 @@
 ---
 title: Jenkins企业级CI/CD流水线深度实践
 description: '# Jenkins企业级CI/CD流水线深度实践'
-summary: '# Jenkins企业级CI/CD流水线深度实践'
+summary: 'Jenkins 是持续集成/持续交付领域历史最悠久、生态最丰富的开源自动化服务器。自 2011 年从 Hudson 分支以来，Jenkins 已经发展成为拥有 1800+ 插件、覆盖几乎所有技术栈的 CI/CD 平台。在 Kubernetes 时代，'
 category: gitops-ci-cd
 tags:
 - k8s

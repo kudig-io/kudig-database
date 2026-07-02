@@ -1,7 +1,7 @@
 ---
 title: 103 - 容器镜像构建工具 (Container Image Build)
 description: '## 容器镜像构建生态架构'
-summary: '## 容器镜像构建生态架构'
+summary: 'scheduler.alpha.kubernetes.io/critical-pod: ""'
 category: extensions
 tags:
 - k8s

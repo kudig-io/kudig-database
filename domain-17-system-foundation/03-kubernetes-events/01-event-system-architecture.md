@@ -1,7 +1,7 @@
 ---
 title: 01 - Kubernetes 事件系统架构与 API 参考
 description: '# 01 - Kubernetes 事件系统架构与 API 参考'
-summary: '# 01 - Kubernetes 事件系统架构与 API 参考'
+summary: 'Kubernetes Event 是集群中发生的状态变化或操作的记录对象。每当一个组件（如 [[kubelet|kubelet]]、kube-scheduler、kube-controller-manager）执行了某个动作或检测到异常状况时，都会向 API Server 报告一个 Event 对象。'
 category: kubernetes-events
 tags:
 - k8s

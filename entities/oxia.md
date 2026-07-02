@@ -1,7 +1,7 @@
 ---
 title: Oxia (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Oxia 是一个可水平扩展的元数据存储和协调系统，旨在作为 ZooKeeper 和 etcd 的高可扩展性替代方案。它由 StreamNative 开发，最初用于解决 Apache Pulsar 在大规模场景下对 ZooKeeper 的扩展性瓶颈。Oxia 通过分片架构将数据分布到多个节点，支持百万级 Key 的元数据管理，'
 category: entities
 tags:
 - k8s

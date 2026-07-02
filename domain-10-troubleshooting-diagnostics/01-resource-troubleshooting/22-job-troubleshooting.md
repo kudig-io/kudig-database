@@ -1,7 +1,7 @@
 ---
 title: Job 故障排查
 description: '# 22 - Job 故障排查 (Job Troubleshooting)'
-summary: '# 22 - Job 故障排查 (Job Troubleshooting)'
+summary: 'kubectl get job <job-name> -n <namespace> -o jsonpath='{.spec.completionMode}''
 category: troubleshooting
 tags:
 - job

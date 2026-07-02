@@ -1,7 +1,7 @@
 ---
 title: 核心依赖变更日志索引
 description: '# 核心依赖变更日志索引'
-summary: '# 核心依赖变更日志索引'
+summary: 'domain-19-landscape-references/_archived-release-notes/core-deps/ 目录下全部 83 个文件。'
 category: entities
 tags:
 - k8s

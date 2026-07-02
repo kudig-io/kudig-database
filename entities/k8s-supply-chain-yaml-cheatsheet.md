@@ -1,7 +1,7 @@
 ---
 title: 供应链安全、YAML 配置清单与速查表
 description: '# 供应链安全、YAML 配置清单与速查表'
-summary: '# 供应链安全、YAML 配置清单与速查表'
+summary: '1. **SBOM（Software Bill of Materials）**：软件物料清单'
 category: reference
 tags:
 - k8s

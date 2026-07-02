@@ -1,7 +1,7 @@
 ---
 title: K8s Serverless / FaaS 实践指南
 description: '# K8s Serverless / FaaS 实践指南'
-summary: '# K8s Serverless / FaaS 实践指南'
+summary: 'autoscaling.knative.dev/targetBurstCapacity: "200"'
 category: extensions
 tags:
 - k8s

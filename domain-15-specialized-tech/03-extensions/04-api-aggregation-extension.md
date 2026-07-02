@@ -1,7 +1,7 @@
 ---
 title: Kubernetes API 聚合扩展机制详解
 description: '# Kubernetes API 聚合扩展机制详解'
-summary: '# Kubernetes API 聚合扩展机制详解'
+summary: '作为Kubernetes扩展生态系统的重要组成部分，API聚合机制允许开发者扩展Kubernetes原生API，提供自定义资源和服务。本文档深入解析API聚合的架构设计、实现原理和最佳实践。'
 category: extensions
 tags:
 - k8s

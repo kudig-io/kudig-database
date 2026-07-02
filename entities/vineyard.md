@@ -1,7 +1,7 @@
 ---
 title: Vineyard
 description: '## 概述'
-summary: '## 概述'
+summary: 'Vineyard 是一个内存中的不可变数据管理器，为大数据和 AI/ML 工作流提供零拷贝数据共享。它通过共享内存机制在同一节点上的不同计算引擎（如 Spark、PyTorch、Dask、GraphScope）之间实现高效数据传递，避免了传统方式中序列化/反序列化和磁盘 IO 的开销，可将数据流水线的端到端性能提升数倍。'
 category: entities
 tags:
 - k8s

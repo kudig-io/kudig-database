@@ -1,7 +1,7 @@
 ---
 title: GitOps/DevOps 排查
 description: '# GitOps/DevOps 排查'
-summary: '# GitOps/DevOps 排查'
+summary: '2. **同步状态**：`kubectl get applications/helmreleases/kustomizations -A`，定位 OutOfSync/Failed。'
 category: skills
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Docker 容器技术深度解析
 description: '# Docker 容器技术深度解析'
-summary: '# Docker 容器技术深度解析'
+summary: '本系列文档从生产环境运维专家的角度，全面深入地解析 Docker 容器技术的核心原理、最佳实践和企业级应用场景。涵盖了从基础架构到高级运维的完整知识体系，特别注重实际生产环境中的问题解决和性能优化。'
 category: docker
 tags:
 - docker

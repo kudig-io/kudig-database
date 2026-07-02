@@ -1,7 +1,7 @@
 ---
 title: Kubernetes PKI 证书体系
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kubernetes 集群的认证与授权体系高度依赖 PKI（公钥基础设施）。一个标准的 kubeadm 部署包含超过 14 组证书/密钥对，涵盖所有控制面组件的身份认证。整个 PKI 体系由三组独立的 CA 构成，每组 CA 服务于不同的安全域。'
 category: concepts
 tags:
 - k8s

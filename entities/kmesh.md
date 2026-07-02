@@ -1,7 +1,7 @@
 ---
 title: Kmesh (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kmesh 是一个基于 eBPF 和可编程内核的无 Sidecar 服务网格，在内核空间实现流量治理能力。与传统 Sidecar 模式（如 Istio/Envoy）不同，Kmesh 将 L4/L7 流量管理逻辑下沉到操作系统内核，消除了 Sidecar 代理带来的额外延迟和资源开销，同时保持与 Istio 控制平面的兼容性。'
 category: entities
 tags:
 - k8s

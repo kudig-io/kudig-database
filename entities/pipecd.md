@@ -1,7 +1,7 @@
 ---
 title: PipeCD [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'PipeCD 是一个统一的持续交付平台，为 Kubernetes、Terraform、CloudRun、Lambda、ECS 等多种应用平台提供一致的 GitOps 部署体验。它采用控制平面（Control Plane）+ 代理（Piped）架构，支持渐进式交付策略（金丝雀、蓝绿、滚动）和自动回滚。'
 category: entities
 tags:
 - k8s

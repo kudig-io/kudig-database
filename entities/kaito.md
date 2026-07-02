@@ -1,7 +1,7 @@
 ---
 title: KAITO
 description: '## 概述'
-summary: '## 概述'
+summary: 'KAITO 是一个 Kubernetes Operator，简化在 Kubernetes 集群上运行 AI/ML 推理和微调工作负载的流程。它自动化了 GPU 节点的配置、模型下载和推理服务部署，使开发者只需指定模型名称即可部署 AI 推理服务。'
 category: entities
 tags:
 - k8s

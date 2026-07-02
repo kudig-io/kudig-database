@@ -1,7 +1,7 @@
 ---
 title: Service 高级特性与应用案例 (Service Advanced Features)
 description: '## Service 高级特性架构'
-summary: '## Service 高级特性架构'
+summary: 'service.beta.kubernetes.io/aws-load-balancer-type: "nlb"'
 category: networking
 tags:
 - k8s

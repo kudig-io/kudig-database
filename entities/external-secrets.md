@@ -1,7 +1,7 @@
 ---
 title: External Secrets Operator (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'External Secrets Operator (ESO) 将外部密钥管理系统（如 AWS Secrets Manager、HashiCorp Vault、Azure Key Vault）的密钥同步到 Kubernetes Secrets，实现安全的密钥管理和自动轮换。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Kagent
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kagent 是一个 Kubernetes 原生的 AI Agent 平台，使开发者能够在 Kubernetes 上构建、部署和管理 AI Agent。它基于 AutoGen 框架，通过 CRD 声明式定义 AI Agent 的工具集、模型配置和对话流程，将 AI Agent 作为 Kubernetes 资源进行管理。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: AI实验管理与MLOps平台
 description: '# AI实验管理与MLOps平台'
-summary: '# AI实验管理与MLOps平台'
+summary: 'nginx.ingress.kubernetes.io/proxy-body-size: "500m"'
 category: ai-infra
 tags:
 - k8s

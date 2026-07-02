@@ -1,7 +1,7 @@
 ---
 title: AWS EKS 企业级多云管理平台
 description: '# AWS EKS 企业级多云管理平台'
-summary: '# AWS EKS 企业级多云管理平台'
+summary: 'Amazon Elastic Kubernetes Service (EKS)] [[Service|Service]] (EKS) 是 AWS 提供的托管 Kubernetes 服务，为企业提供高度可扩展、安全可靠的容器编排平台。EKS 自动管理 Kubernetes 控制平面的可用性和可扩展性，'
 category: multi-cloud-hybrid
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 'Day 11: K8s 安全风险识别与防护实操'
 description: '# Day 11: K8s 安全风险识别与防护实操'
-summary: '# Day 11: K8s 安全风险识别与防护实操'
+summary: 'kubectl get clusterrolebindings -A | grep -i "system:masters"'
 category: learning
 tags:
 - k8s

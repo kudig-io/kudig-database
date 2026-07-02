@@ -1,7 +1,7 @@
 ---
 title: K8up (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'K8up 是一个 Kubernetes 备份 Operator，基于 Restic 实现 PersistentVolume 的自动化备份。它通过 CRD 声明式管理备份、恢复、归档和清理策略，支持将备份存储到 S3、GCS、Azure Blob 等对象存储后端。'
 category: entities
 tags:
 - k8s

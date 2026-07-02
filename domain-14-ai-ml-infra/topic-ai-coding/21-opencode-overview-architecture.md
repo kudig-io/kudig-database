@@ -1,7 +1,7 @@
 ---
 title: OpenCode 概述与核心架构
 description: '# OpenCode 概述与核心架构'
-summary: '# OpenCode 概述与核心架构'
+summary: 'OpenCode 由 **Anomaly**（原 SST / ion 团队）主导开发，采用 **100% 开源** 策略，是 Claude Code 的核心替代方案。它支持 75+ LLM Provider、30+ 内置 LSP Server、20+ 内置 Formatter，'
 category: ai-coding
 tags:
 - ai

@@ -1,7 +1,7 @@
 ---
 title: Helm Chart 故障排查
 description: '# 36 - Helm Chart 故障排查 (Helm Chart Troubleshooting)'
-summary: '# 36 - Helm Chart 故障排查 (Helm Chart Troubleshooting)'
+summary: 'echo "3. Validating values structure..."'
 category: troubleshooting
 tags:
 - helm

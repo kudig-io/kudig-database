@@ -1,7 +1,7 @@
 ---
 title: Kube-OVN (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kube-OVN 是一个基于 OVN/OVS 的高级 Kubernetes 网络 CNI 插件，将 SDN（软件定义网络）的能力引入 Kubernetes。它提供子网管理、固定 IP、QoS、网络策略、EIP/SNAT、VPC 多租户等企业级网络功能，是 Kubernetes 网络功能最丰富的 CNI 之一。'
 category: entities
 tags:
 - k8s

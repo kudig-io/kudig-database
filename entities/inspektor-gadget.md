@@ -1,7 +1,7 @@
 ---
 title: Inspektor Gadget [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Inspektor Gadget 是一组基于 eBPF 的工具集合 ("gadgets")，用于调试和检查 Kubernetes 集群中的应用程序。它利用 eBPF 在内核级别收集数据，提供对容器和 Pod 的深入可观测性，无需修改应用程序代码或添加 sidecar。'
 category: general
 tags:
 - k8s

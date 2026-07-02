@@ -1,7 +1,7 @@
 ---
 title: 节点删除流程 — kubectl delete node 源码分析 (topic-code-analysis)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Node 对象、Node Lifecycle Controller 响应、kubeadm reset 重置、Taint Manager 驱逐以及 etcd 成员移除等关键环节。'
 category: general
 tags:
 - reference

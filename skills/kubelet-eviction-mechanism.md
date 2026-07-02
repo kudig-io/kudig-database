@@ -1,7 +1,7 @@
 ---
 title: kubelet 资源驱逐机制
 description: '## 概述'
-summary: '## 概述'
+summary: '当节点资源（内存、磁盘、PID）不足时，kubelet 的驱逐管理器（Eviction Manager）主动终止低优先级 Pod，释放资源保护高优先级工作负载和节点稳定性。这种机制比被动等待 Linux OOM Killer 更加优雅和可控。'
 category: skills
 tags:
 - k8s

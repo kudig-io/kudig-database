@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 安全与 RBAC 权限管理全栈培训 [training-public]
 description: '# Kubernetes 安全与 RBAC 权限管理全栈培训'
-summary: '# Kubernetes 安全与 RBAC 权限管理全栈培训'
+summary: '3. RBAC 四个核心对象：Role、ClusterRole、RoleBinding、ClusterRoleBinding'
 category: presentations
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: zot (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'zot 是一个生产就绪的、OCI 原生的容器镜像注册表，完全基于 OCI Distribution Specification 构建。它以单一二进制文件的形式提供，内置镜像存储、搜索、签名验证、漏洞扫描等功能，无需依赖外部数据库或缓存服务。'
 category: entities
 tags:
 - k8s

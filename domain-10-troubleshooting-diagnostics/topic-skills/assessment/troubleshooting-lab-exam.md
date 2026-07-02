@@ -1,7 +1,7 @@
 ---
 title: 故障排查实验考核
 description: '# 故障排查实验考核'
-summary: '# 故障排查实验考核'
+summary: '用户报告新创建的 Pod 一直处于 `Pending` 状态，无法调度到任何节点。'
 category: skills
 tags:
 - k8s

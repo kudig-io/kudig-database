@@ -1,7 +1,7 @@
 ---
 title: 安全认证故障排查
 description: '# 安全认证故障排查'
-summary: '# 安全认证故障排查'
+summary: '1. **确认身份**：`kubectl auth whoami` 与 `kubectl config current-context`，排除 kubeconfig 指向错误集群。'
 category: skills
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Deployment 控制器架构
 description: '# Deployment 控制器架构'
-summary: '# Deployment 控制器架构'
+summary: 'Deployment 控制器是 Kubernetes 中管理无状态工作负载的核心组件。它通过 [[ReplicaSet|ReplicaSet]] 间接管理 Pod，实现声明式更新、滚动发布、版本回滚等能力。控制器采用典型的 Kubernetes 控制器模式：Informer + WorkQueue + Reconcile Loop。'
 category: concepts
 tags:
 - k8s

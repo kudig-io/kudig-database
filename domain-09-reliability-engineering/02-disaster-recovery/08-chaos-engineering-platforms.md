@@ -1,7 +1,7 @@
 ---
 title: 混沌工程平台实践：LitmusChaos 与 Chaos Mesh
 description: '# 混沌工程平台实践：LitmusChaos 与 Chaos Mesh'
-summary: '# 混沌工程平台实践：LitmusChaos 与 Chaos Mesh'
+summary: '混沌工程（[[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]]）是在分布式系统上进行实验的学科，目的是建立对系统抵御生产环境中失控条件能力的信心。与传统的被动式灾备不同，混沌工程主动向系统注入问题，'
 category: disaster-recovery
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 18 - 性能优化原理
 description: '# 18 - 性能优化原理'
-summary: '# 18 - 性能优化原理'
+summary: '本文档深入探讨 [[Kubernetes|Kubernetes]] 系统的性能优化设计原理，涵盖调度优化、资源管理、网络性能、存储性能等核心领域，为企业构建高性能 Kubernetes 平台提供理论指导和最佳实践方案。'
 category: design-principles
 tags:
 - k8s

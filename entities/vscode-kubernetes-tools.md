@@ -1,7 +1,7 @@
 ---
 title: VS Code Kubernetes Tools (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'VS Code Kubernetes Tools 是一个功能强大的 Visual Studio Code 扩展，为 Kubernetes 开发者提供完整的开发体验。它集成了集群浏览、YAML 编辑、资源管理、日志查看、调试等功能，让开发者可以在 IDE 中完成几乎所有 Kubernetes 操作，大幅提升开发效率。'
 category: entities
 tags:
 - k8s

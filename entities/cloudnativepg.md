@@ -1,7 +1,7 @@
 ---
 title: CloudNativePG (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'CloudNativePG 是 Kubernetes 上的 PostgreSQL Operator，提供完整的数据库生命周期管理。它原生支持 PostgreSQL 流复制、自动故障转移、备份恢复和监控集成。'
 category: entities
 tags:
 - k8s

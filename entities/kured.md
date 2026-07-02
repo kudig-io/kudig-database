@@ -1,7 +1,7 @@
 ---
 title: Kured (KUbernetes REboot Daemon)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kured (KUbernetes REboot Daemon) 是一个 Kubernetes 守护进程，用于在节点需要重启时安全地执行重启操作。它检测节点上的重启信号 (如 /var/run/reboot-required 文件)，协调节点重启以避免同时重启多个节点，并在重启前正确驱逐工作负载。'
 category: entities
 tags:
 - k8s

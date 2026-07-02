@@ -1,7 +1,7 @@
 ---
 title: 70 - RuntimeClass配置
 description: '# 70 - RuntimeClass配置'
-summary: '# 70 - RuntimeClass配置'
+summary: 'TypeUrl = "io.containerd.runsc.v1.options"'
 category: workloads
 tags:
 - k8s

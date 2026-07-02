@@ -1,7 +1,7 @@
 ---
 title: CNCF 编排与应用管理项目全景
 description: '# CNCF 编排与应用管理项目全景'
-summary: '# CNCF 编排与应用管理项目全景'
+summary: 'CNCF 编排生态覆盖 **包管理**、**多集群编排**、**Operator 框架**、**应用定义**、**弹性伸缩** 五大领域。'
 category: entities
 tags:
 - k8s

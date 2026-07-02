@@ -1,7 +1,7 @@
 ---
 title: 08 - 多租户架构设计 (Multi-Tenancy Architecture)
 description: '# 08 - 多租户架构设计 (Multi-Tenancy Architecture)'
-summary: '# 08 - 多租户架构设计 (Multi-Tenancy Architecture)'
+summary: 'pod-security.kubernetes.io/enforce: restricted'
 category: architecture-fundamentals
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: RBAC 与 ResourceQuota 故障排查
 description: '# 12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)'
-summary: '# 12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)'
+summary: 'kubectl auth can-i create deployments --as=user@example.com -n production'
 category: troubleshooting
 tags:
 - rbac

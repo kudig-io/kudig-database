@@ -1,7 +1,7 @@
 ---
 title: Deployment 全面故障排查
 description: '# 11 - Deployment 全面故障排查 (Deployment Comprehensive Troubleshooting)'
-summary: '# 11 - Deployment 全面故障排查 (Deployment Comprehensive Troubleshooting)'
+summary: 'kubectl get deployment <name> -n <namespace>'
 category: troubleshooting
 tags:
 - deployment

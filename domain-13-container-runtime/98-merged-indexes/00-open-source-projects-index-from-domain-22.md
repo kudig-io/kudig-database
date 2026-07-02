@@ -1,7 +1,7 @@
 ---
 title: Domain-22 容器镜像管理 — 开源项目索引
 description: '# Domain-22 容器镜像管理 — 开源项目索引'
-summary: '# Domain-22 容器镜像管理 — 开源项目索引'
+summary: 'cosign sign --oidc-issuer https://token.actions.githubusercontent.com \'
 category: container-image-management
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Trickster [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Trickster 是一个 HTTP 反向代理/缓存，专为时序数据库（Prometheus, InfluxDB, ClickHouse）的 Dashboard 查询加速设计。它通过增量时间序列缓存（Delta Proxy Cache）显著减少对后端数据库的查询压力，降低 Grafana 等 Dashboard 的加载时间。'
 category: entities
 tags:
 - k8s

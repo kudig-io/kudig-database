@@ -1,7 +1,7 @@
 ---
 title: K8s 存储术语参考
 description: '# K8s 存储术语参考'
-summary: '# K8s 存储术语参考'
+summary: '本页汇总了 **存储** 领域的 17 个 Kubernetes 术语定义与概念说明。'
 category: references
 tags:
 - k8s

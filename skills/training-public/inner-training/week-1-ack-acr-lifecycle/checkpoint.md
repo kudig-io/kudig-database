@@ -1,7 +1,7 @@
 ---
 title: 'Week 1 Checkpoint: 自测检验 [week-1-ack-acr-lifecycle]'
 description: '## 概述'
-summary: '## 概述'
+summary: '本测验覆盖 Week 1 全部核心知识点，包括 ACK/ACR 服务架构、SDK/API 调用、集群创建/删除/升级流程和证书管理。测验分为四个部分，总计 80 分。答题时间限制 90 分钟。'
 category: learning
 tags:
 - k8s

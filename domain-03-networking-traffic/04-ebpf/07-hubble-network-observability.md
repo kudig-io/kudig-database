@@ -1,7 +1,7 @@
 ---
 title: Hubble 网络可观测性 (Hubble Network Observability)
 description: '# Hubble 网络可观测性 (Hubble Network Observability)'
-summary: '# Hubble 网络可观测性 (Hubble Network Observability)'
+summary: '4. [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]] Map 与依赖关系图](#4-service-map-与依赖关系图)'
 category: ebpf-technology
 tags:
 - k8s

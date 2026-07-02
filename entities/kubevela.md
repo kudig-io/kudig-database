@@ -1,7 +1,7 @@
 ---
 title: KubeVela [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'KubeVela 是现代应用交付平台，实现了开放应用模型（OAM）规范。它为开发者提供以应用为中心的抽象，简化 Kubernetes 上的应用部署、运维和多集群管理。'
 category: entities
 tags:
 - k8s

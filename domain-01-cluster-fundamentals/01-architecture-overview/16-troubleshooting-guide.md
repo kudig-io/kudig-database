@@ -1,7 +1,7 @@
 ---
 title: 16 - Kubernetes 故障排查专家级指南
 description: '# 16 - Kubernetes 故障排查专家级指南'
-summary: '# 16 - Kubernetes 故障排查专家级指南'
+summary: '在 Kubernetes 生产环境中，故障排查应遵循从底层到高层、从控制平面到数据平面的结构化路径。'
 category: architecture-fundamentals
 tags:
 - k8s

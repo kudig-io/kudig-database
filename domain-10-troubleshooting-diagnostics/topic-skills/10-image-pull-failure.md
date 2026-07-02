@@ -1,7 +1,7 @@
 ---
 title: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 description: '## 1. 概述'
-summary: '## 1. 概述'
+summary: '镜像拉取问题是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群中**最常见的 Pod 启动失败原因之一**，约占所有 Pod 异常工单的 20-30%。当容器镜像无法成功拉取时，Pod 将持续处于 `ImagePullBackOff` 或 `ErrImagePull` 状态，'
 category: pod
 tags:
 - k8s

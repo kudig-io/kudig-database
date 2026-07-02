@@ -1,7 +1,7 @@
 ---
 title: JVM GC 容器调优深度指南 (domain-02-workloads-applications) [topic-java-kubernetes]
 description: '# JVM GC 容器调优深度指南'
-summary: '# JVM GC 容器调优深度指南'
+summary: 'JVM 在容器环境中运行面临独特的挑战：内存限制严格、CPU 核心数可能不固定、GC 行为与裸金属环境大不相同。错误配置的 JVM 在 Kubernetes 中最常见的结局就是 `OOMKilled`——这不仅仅是 Java 层面的 OOM，而是容器被内核直接杀掉。'
 category: java-kubernetes
 tags:
 - java

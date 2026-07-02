@@ -1,7 +1,7 @@
 ---
 title: 节点生命周期管理
 description: '# 节点生命周期管理'
-summary: '# 节点生命周期管理'
+summary: 'Kubernetes 节点从加入到移除的完整生命周期涉及 [[kubelet|kubelet]]、Node Lifecycle Controller、Cluster Autoscaler 等多个组件的协作。无论控制面节点还是工作节点，都必须经过注册、认证、状态上报等关键流程。'
 category: concepts
 tags:
 - k8s

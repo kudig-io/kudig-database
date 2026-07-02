@@ -1,7 +1,7 @@
 ---
 title: Terway 运维手册
 description: '# Terway 运维手册'
-summary: '# Terway 运维手册'
+summary: 'Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod 直接接入 VPC 网络，提供与 [[cilium|Cilium]] 类似的高性能网络方案。与 networking.md|eBPF 网络]] 技术结合，可实现更高效的网络策略和流量管理。^[inferred]'
 category: entities
 tags:
 - k8s

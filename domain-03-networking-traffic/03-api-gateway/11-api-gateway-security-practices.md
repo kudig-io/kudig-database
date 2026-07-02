@@ -1,7 +1,7 @@
 ---
 title: 11 - API 网关安全体系：认证、鉴权与 WAF
 description: '# 11 - API 网关安全体系：认证、鉴权与 WAF'
-summary: '# 11 - API 网关安全体系：认证、鉴权与 WAF'
+summary: 'API 网关作为流量入口，是实施纵深防御（Defense in Depth）的核心位置。安全能力从外到内分为多个层次：'
 category: cloud-native-api-gateway
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 认证授权深度解析 (Authentication & Authorization Deep Dive)
 description: '# Kubernetes 认证授权深度解析 (Authentication & Authorization Deep Dive)'
-summary: '# Kubernetes 认证授权深度解析 (Authentication & Authorization Deep Dive)'
+summary: 'monitoring-token,monitoring-user,uid-123,"system:masters"'
 category: control-plane
 tags:
 - k8s

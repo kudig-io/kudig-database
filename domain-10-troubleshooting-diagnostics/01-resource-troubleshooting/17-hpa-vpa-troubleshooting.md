@@ -1,7 +1,7 @@
 ---
 title: HPA/VPA 故障排查
 description: '# 17 - HPA/VPA 故障排查 (HPA/VPA Troubleshooting)'
-summary: '# 17 - HPA/VPA 故障排查 (HPA/VPA Troubleshooting)'
+summary: 'kubectl get hpa <hpa-name> -n <namespace> -o jsonpath='{.status.conditions}''
 category: troubleshooting
 tags:
 - hpa

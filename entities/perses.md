@@ -1,7 +1,7 @@
 ---
 title: Perses (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Perses 是一个云原生的 Dashboard 即代码 (Dashboard-as-Code) 可视化平台，用于创建和管理可观测性仪表板。它旨在成为 Grafana 的开源替代方案之一，提供标准化的 Dashboard 定义规范，支持将仪表板作为代码进行版本控制和 GitOps 管理。'
 category: entities
 tags:
 - k8s

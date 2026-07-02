@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 集群配置最佳实践
 description: '# Kubernetes 集群配置最佳实践'
-summary: '# Kubernetes 集群配置最佳实践'
+summary: '本指南提供生产环境 Kubernetes 集群配置的最佳实践，涵盖从集群规划到配置优化的全方位内容 ^[inferred]。'
 category: skills
 tags:
 - k8s

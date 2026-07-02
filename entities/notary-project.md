@@ -1,7 +1,7 @@
 ---
 title: Notary Project (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Notary Project 提供容器镜像和 OCI 制品的签名、验证规范与工具。它是软件供应链安全的关键组件，通过数字签名确保制品的完整性和来源可信。'
 category: entities
 tags:
 - k8s

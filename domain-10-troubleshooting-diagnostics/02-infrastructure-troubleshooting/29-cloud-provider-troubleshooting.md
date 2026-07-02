@@ -1,7 +1,7 @@
 ---
 title: 云提供商集成故障排查
 description: '# 29 - 云提供商集成故障排查 (Cloud Provider Integration Troubleshooting)'
-summary: '# 29 - 云提供商集成故障排查 (Cloud Provider Integration Troubleshooting)'
+summary: 'aws ec2 describe-availability-zones --region us-west-2'
 category: troubleshooting
 tags:
 - cloud-provider

@@ -1,7 +1,7 @@
 ---
 title: 第三课：Deployment - 应用部署管理器
 description: '# 第三课：Deployment - 应用部署管理器'
-summary: '# 第三课：Deployment - 应用部署管理器'
+summary: '• selector.matchLabels → Deployment 管理哪些 Pod'
 category: skills
 tags:
 - k8s

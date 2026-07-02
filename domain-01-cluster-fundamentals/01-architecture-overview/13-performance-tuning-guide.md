@@ -1,7 +1,7 @@
 ---
 title: 13 - Kubernetes 性能调优专项指南
 description: '# 13 - Kubernetes 性能调优专项指南'
-summary: '# 13 - Kubernetes 性能调优专项指南'
+summary: '本文档提供 Kubernetes 集群性能调优的完整指南，涵盖系统层面、组件层面和应用层面的优化策略，通过量化指标和实际案例帮助实现最优性能表现。'
 category: architecture-fundamentals
 tags:
 - k8s

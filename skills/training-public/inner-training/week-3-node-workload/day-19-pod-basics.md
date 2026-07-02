@@ -1,7 +1,7 @@
 ---
 title: 'Day 19: Pod 容器组基础'
 description: '## 概述'
-summary: '## 概述'
+summary: '本文深入讲解 Kubernetes 中最核心的概念——Pod。Pod 是 K8s 调度的最小单元，理解 Pod 的生命周期、多容器模式、健康检查和基本操作是所有 K8s 运维工作的基础。通过本文的学习，你将掌握 Pod 的创建、查看、调试和删除操作，以及 Sidecar 多容器模式和 Init Container 的使用场景。'
 category: learning
 tags:
 - k8s

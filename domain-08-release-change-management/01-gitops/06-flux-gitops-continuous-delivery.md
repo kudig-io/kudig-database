@@ -1,7 +1,7 @@
 ---
 title: Flux v2 GitOps 持续交付深度实践
 description: '# Flux v2 GitOps 持续交付深度实践'
-summary: '# Flux v2 GitOps 持续交付深度实践'
+summary: 'Flux 是云原生计算基金会（CNCF）毕业项目，是 Kubernetes 原生的持续交付工具。与 Argo CD 不同，Flux 不提供 Web 界面，而是完全通过声明式 API 和 Git 工作流驱动。Flux 的设计哲学是"Git 是唯一的真实来源"，所有配置变更都通过 Git 提交触发，确保完整的审计追踪和可重复性。'
 category: gitops-ci-cd
 tags:
 - k8s

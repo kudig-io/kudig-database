@@ -1,7 +1,7 @@
 ---
 title: Namespace 故障排查
 description: '# 23 - Namespace 故障排查 (Namespace Troubleshooting)'
-summary: '# 23 - Namespace 故障排查 (Namespace Troubleshooting)'
+summary: 'kubectl get namespaces --field-selector status.phase=Terminating'
 category: troubleshooting
 tags:
 - namespace

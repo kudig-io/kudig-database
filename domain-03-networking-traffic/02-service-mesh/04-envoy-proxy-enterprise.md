@@ -1,7 +1,7 @@
 ---
 title: Envoy Proxy 企业级服务网格数据平面深度实践
 description: '# Envoy Proxy 企业级服务网格数据平面深度实践'
-summary: '# Envoy Proxy 企业级服务网格数据平面深度实践'
+summary: 'Envoy Proxy 是由 Lyft 开发的高性能 L3/L4/L7 网络代理，2017年成为 CNCF 项目，现已发展为云原生服务代理的事实标准。'
 category: service-mesh-microservices
 tags:
 - k8s

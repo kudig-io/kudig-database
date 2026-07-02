@@ -1,7 +1,7 @@
 ---
 title: 131 - Ingress 高级路由与流量管理
 description: '# 131 - Ingress 高级路由与流量管理'
-summary: '# 131 - Ingress 高级路由与流量管理'
+summary: 'nginx.ingress.kubernetes.io/canary: "true"'
 category: networking
 tags:
 - k8s

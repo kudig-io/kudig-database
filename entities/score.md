@@ -1,7 +1,7 @@
 ---
 title: Score (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Score 是一个与平台无关的工作负载规范，使开发者能够用统一的格式描述其工作负载需求（容器、资源依赖、环境变量等），然后由 Score 实现工具（score-compose, score-k8s, score-humanitec）将规范翻译为目标平台的原生配置。'
 category: entities
 tags:
 - k8s

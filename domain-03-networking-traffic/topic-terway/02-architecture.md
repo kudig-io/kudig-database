@@ -1,7 +1,7 @@
 ---
 title: 02 - Terway 架构原理 (Architecture Deep Dive)
 description: '# 02 - Terway 架构原理 (Architecture Deep Dive)'
-summary: '# 02 - Terway 架构原理 (Architecture Deep Dive)'
+summary: 'Terway 是阿里云 ACK 的容器网络接口 (CNI) 插件, 核心设计目标是将 [[Kubernetes|Kubernetes]] Pod 直接接入阿里云 VPC 网络, 使 Pod 获得 VPC 级别的网络连通性, 同时保持与原生 VPC 网络策略和安全组的一致性.'
 category: terway
 tags:
 - k8s

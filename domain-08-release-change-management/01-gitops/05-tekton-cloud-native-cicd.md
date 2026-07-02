@@ -1,7 +1,7 @@
 ---
 title: Tekton 云原生 CI/CD 深度实践
 description: '# Tekton 云原生 CI/CD 深度实践'
-summary: '# Tekton 云原生 CI/CD 深度实践'
+summary: 'Tekton 是由 Continuous Delivery Foundation (CDF) 托管的云原生 CI/CD 框架，它的设计理念是将 CI/CD 流水线分解为完全声明式、[[Kubernetes|Kubernetes]] 原生的资源对象。每个构建步骤在独立的容器中执行（Step → Container），'
 category: gitops-ci-cd
 tags:
 - k8s

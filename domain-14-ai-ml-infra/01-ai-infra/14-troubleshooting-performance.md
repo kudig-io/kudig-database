@@ -1,7 +1,7 @@
 ---
 title: AI平台故障排查与性能优化
 description: '# AI平台故障排查与性能优化'
-summary: '# AI平台故障排查与性能优化'
+summary: 'nvidia-smi --query-gpu=temperature.gpu,power.draw,enforced.power.limit --format=csv,noheader,nounits'
 category: ai-infra
 tags:
 - k8s

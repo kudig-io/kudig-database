@@ -1,7 +1,7 @@
 ---
 title: CNI (Container Network Interface)
 description: '## 概述'
-summary: '## 概述'
+summary: 'CNI (Container Network Interface) 是一个定义容器网络配置的规范和库，用于在 Linux 容器中配置网络接口。它是 Kubernetes 和其他容器编排平台的网络基础，提供了插件化的网络解决方案。'
 category: entities
 tags:
 - k8s

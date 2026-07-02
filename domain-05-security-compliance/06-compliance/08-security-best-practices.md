@@ -1,7 +1,7 @@
 ---
 title: 08 - 安全最佳实践表
 description: '# 08 - 安全最佳实践表'
-summary: '# 08 - 安全最佳实践表'
+summary: 'kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml'
 category: security
 tags:
 - k8s

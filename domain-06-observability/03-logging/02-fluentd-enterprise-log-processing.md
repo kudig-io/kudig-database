@@ -1,7 +1,7 @@
 ---
 title: Fluentd企业级日志收集与处理深度实践
 description: '# Fluentd企业级日志收集与处理深度实践'
-summary: '# Fluentd企业级日志收集与处理深度实践'
+summary: 'This document provides in-depth exploration of [[Fluentd|Fluentd]] enterprise log collection and processing architecture design, deployment practices, and operational management.'
 category: logging-management-analytics
 tags:
 - k8s

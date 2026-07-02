@@ -1,7 +1,7 @@
 ---
 title: Pod 生命周期 × 存储模型
 description: '# Pod 生命周期 × 存储模型'
-summary: '# Pod 生命周期 × 存储模型'
+summary: '两者的关系可以概括为：Pod 是 Volume 的生命周期宿主。没有 Pod，临时存储（emptyDir）立即消失；没有 Pod，PVC 的绑定关系失去意义。反之，没有 Volume，有状态 Pod 无法持久化数据；没有正确的存储配置，Pod 将永远卡在 Pending 状态。'
 category: synthesis
 tags:
 - k8s

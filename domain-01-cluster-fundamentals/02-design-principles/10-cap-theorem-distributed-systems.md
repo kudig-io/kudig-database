@@ -1,7 +1,7 @@
 ---
 title: 10 - CAP 定理与分布式系统基础 (CAP Theorem)
 description: '## 架构师解析：etcd 的 CP 属性如何影响 K8s？'
-summary: '## 架构师解析：etcd 的 CP 属性如何影响 K8s？'
+summary: '1. **水平触发 (Level-triggered)**：控制器不依赖"事件"本身，而是周期性全量对比 Spec vs Status'
 category: design-principles
 tags:
 - k8s

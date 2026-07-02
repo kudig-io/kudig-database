@@ -1,7 +1,7 @@
 ---
 title: 存储设备故障排查
 description: '# 存储设备故障排查'
-summary: '# 存储设备故障排查'
+summary: '存储设备问题直接影响数据安全和业务连续性。本文档详细解析HDD、SSD和RAID控制器的故障诊断、排查流程及数据恢复方法。'
 category: hardware
 tags:
 - k8s

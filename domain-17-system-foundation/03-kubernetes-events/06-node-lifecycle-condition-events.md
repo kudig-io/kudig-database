@@ -1,7 +1,7 @@
 ---
 title: 06 - 节点生命周期与状态事件
 description: '- [概述](#概述)'
-summary: '- [概述](#概述)'
+summary: '节点（Node）是 Kubernetes 集群中的工作机器，可以是物理机或虚拟机。节点的健康状态直接影响集群的可用性和稳定性。本文档详细记录了节点生命周期中的所有关键事件，包括：'
 category: kubernetes-events
 tags:
 - k8s

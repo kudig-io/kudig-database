@@ -1,7 +1,7 @@
 ---
 title: Serverless Devs [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Serverless Devs 是一个开源的 Serverless 开发者平台和命令行工具，致力于为开发者提供强大便捷的 Serverless 应用全生命周期管理能力。项目采用组件化设计，支持多云厂商的 Serverless 服务，让开发者能够使用统一的开发体验在不同云平台上开发、部署和管理 Serverless 应用。'
 category: entities
 tags:
 - k8s

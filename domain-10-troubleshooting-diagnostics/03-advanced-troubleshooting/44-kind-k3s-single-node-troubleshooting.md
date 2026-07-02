@@ -1,7 +1,7 @@
 ---
 title: Kind / K3s 单机集群故障排查
 description: '# Kind / K3s 单机集群故障排查'
-summary: '# Kind / K3s 单机集群故障排查'
+summary: 'Kind（[[Kubernetes|Kubernetes]] in Docker）用于本地开发/测试/CI，每个"节点"是一个 Docker 容器。'
 category: troubleshooting
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 'topic-febm: FEBM 法医鉴定循证方法论深度解析 [topic-febm]'
 description: '# topic-febm: FEBM 法医鉴定循证方法论深度解析'
-summary: '# topic-febm: FEBM 法医鉴定循证方法论深度解析'
+summary: '本专题提供 FEBM（Forensic Evidence-Based Methodology）法医鉴定循证方法论的完整知识体系，从传统法医学的洛卡德交换原理到云原生 [[Kubernetes|Kubernetes]] 环境中的数字取证实践，涵盖方法论理论、技术实现、最佳实践、AI Agent 工单处理集成、体系建设方法论及生产环境快速落地。'
 category: febm
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 安全合规管理 (Security & Compliance Management)
 description: '# 安全合规管理 (Security & Compliance Management)'
-summary: '# 安全合规管理 (Security & Compliance Management)'
+summary: '安全合规管理是平台运维的基础要求，通过实施零信任安全架构、持续安全监控和合规性检查，确保Kubernetes平台的安全稳定运行。本文档从首席安全官(CSO)视角，深入解析企业级安全合规体系的建设要求和实施策略，结合金融级安全标准和监管合规要求，为构建世界级安全平台提供专业指导。'
 category: platform-ops
 tags:
 - k8s

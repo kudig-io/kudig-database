@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 安全加固
 description: '# Kubernetes 安全加固'
-summary: '# Kubernetes 安全加固'
+summary: 'kubectl get pods -A -o json | jq -r '.items[] | select(.spec.containers[].securityContext.privileged==true) | .metadata.namespace + "/" + .metadata.name''
 category: security
 tags:
 - k8s

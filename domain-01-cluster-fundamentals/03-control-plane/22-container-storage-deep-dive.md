@@ -1,7 +1,7 @@
 ---
 title: CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive)
 description: '# CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive)'
-summary: '# CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive)'
+summary: 'rpc GetPluginInfo(GetPluginInfoRequest) returns (GetPluginInfoResponse);'
 category: control-plane
 tags:
 - k8s

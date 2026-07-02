@@ -1,7 +1,7 @@
 ---
 title: Ratify (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Ratify 是一个容器镜像供应链安全验证框架，用作 Kubernetes 准入控制器，在 Pod 创建时验证容器镜像的签名、SBOM、漏洞扫描报告等供应链工件（Artifacts）。它与 Gatekeeper/OPA 集成，通过可插拔的验证器架构支持 Notary v2 签名、Cosign 签名、SBOM 验证、漏洞报告检查等多种供应链安全策略。'
 category: entities
 tags:
 - k8s

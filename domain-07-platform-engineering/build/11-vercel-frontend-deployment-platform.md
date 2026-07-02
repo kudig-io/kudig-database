@@ -1,7 +1,7 @@
 ---
 title: Vercel 前端部署平台深度指南
 description: '# Vercel 前端部署平台深度指南'
-summary: '# Vercel 前端部署平台深度指南'
+summary: '5. [Serverless Functions](#5-serverless-functions)'
 category: platform-engineering
 tags:
 - k8s

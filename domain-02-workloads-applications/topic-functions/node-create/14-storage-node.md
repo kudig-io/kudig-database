@@ -1,7 +1,7 @@
 ---
 title: 14 - 节点存储
 description: 'title: 节点存储'
-summary: 'title: 节点存储'
+summary: 'CSI Node 插件以 DaemonSet 方式运行在每个节点上，负责卷的挂载和卸载：'
 category: general
 tags:
 - reference

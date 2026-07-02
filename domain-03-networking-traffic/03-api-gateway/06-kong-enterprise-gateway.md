@@ -1,7 +1,7 @@
 ---
 title: 06 - Kong API 网关企业级实践
 description: '# 06 - Kong API 网关企业级实践'
-summary: '# 06 - Kong API 网关企业级实践'
+summary: '5. [Kong Ingress Controller (KIC)](#5-kong-ingress-controller-kic)'
 category: cloud-native-api-gateway
 tags:
 - k8s

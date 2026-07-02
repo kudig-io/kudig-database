@@ -1,7 +1,7 @@
 ---
 title: Quarkus / Micronaut 云原生 Java 框架实践指南
 description: '# Quarkus / Micronaut 云原生 Java 框架实践指南'
-summary: '# Quarkus / Micronaut 云原生 Java 框架实践指南'
+summary: 'User entity = userRepository.findById(id);'
 category: extensions
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 51 - 容器镜像管理与仓库 (Container Images & Registry)
 description: '# 51 - 容器镜像管理与仓库 (Container Images & Registry)'
-summary: '# 51 - 容器镜像管理与仓库 (Container Images & Registry)'
+summary: 'ack.aliyun.com/image-pull-secrets: "acr-credentials"'
 category: workloads
 tags:
 - k8s

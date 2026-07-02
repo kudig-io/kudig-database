@@ -1,7 +1,7 @@
 ---
 title: JVM GC 容器调优深度指南
 description: '# JVM GC 容器调优深度指南'
-summary: '# JVM GC 容器调优深度指南'
+summary: '使用 MaxRAMPercentage=75.0 → Heap = 768MB (更精确)'
 category: troubleshooting
 tags:
 - k8s

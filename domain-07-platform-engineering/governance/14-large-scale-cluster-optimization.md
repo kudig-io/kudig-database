@@ -1,7 +1,7 @@
 ---
 title: 大规模集群性能优化 (Large Scale Cluster Optimization)
 description: '# 大规模集群性能优化 (Large Scale Cluster Optimization)'
-summary: '# 大规模集群性能优化 (Large Scale Cluster Optimization)'
+summary: '大规模Kubernetes集群（>1000节点）面临独特的性能挑战，包括API Server压力、etcd性能瓶颈、网络复杂性等问题。本文档提供针对大规模集群的专项优化策略和实践经验。'
 category: platform-ops
 tags:
 - k8s

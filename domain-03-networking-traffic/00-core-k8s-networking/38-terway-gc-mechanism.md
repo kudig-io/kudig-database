@@ -1,7 +1,7 @@
 ---
 title: 38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism)
 description: '# 38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism)'
-summary: '# 38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism)'
+summary: '在 Terway CNI 的 ENIIP 模式下，Pod 与 VPC 内的 ENI 辅助 IP 直接绑定。当 Pod 被删除、驱逐或异常退出时，理论上其占用的 IP 应当及时归还 IP 池。但在以下场景中，正常的 IP 释放流程可能失效：'
 category: networking
 tags:
 - k8s

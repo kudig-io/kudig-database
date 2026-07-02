@@ -1,7 +1,7 @@
 ---
 title: 21 - ClusterRole / ClusterRoleBinding YAML 配置参考
 description: '# 21 - ClusterRole / ClusterRoleBinding YAML 配置参考'
-summary: '# 21 - ClusterRole / ClusterRoleBinding YAML 配置参考'
+summary: 'ClusterRole 和 ClusterRoleBinding 是 [[Kubernetes|Kubernetes]] RBAC 的**集群级别**资源,用于授予跨 namespace 或集群资源的权限。'
 category: yaml-manifests
 tags:
 - k8s

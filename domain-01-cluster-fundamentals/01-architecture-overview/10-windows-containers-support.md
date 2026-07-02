@@ -1,7 +1,7 @@
 ---
 title: 10 - Windows 容器支持与集成指南
 description: '# 10 - Windows 容器支持与集成指南'
-summary: '# 10 - Windows 容器支持与集成指南'
+summary: 'node.kubernetes.io/windows-build: "10.0.17763"'
 category: architecture-fundamentals
 tags:
 - k8s

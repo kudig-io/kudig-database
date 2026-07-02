@@ -1,7 +1,7 @@
 ---
 title: 数据库中间件 Kubernetes 企业级实践
 description: '# 数据库中间件 Kubernetes 企业级实践'
-summary: '# 数据库中间件 Kubernetes 企业级实践'
+summary: '数据库中间件是解决关系型数据库水平扩展、读写分离、数据分片和连接池化等问题的核心组件。在 Kubernetes 环境中，数据库中间件的部署和管理面临新的挑战：如何与 K8s [[Service|Service]] 发现机制集成、如何管理有状态的数据库分片拓扑、如何实现中间件本身的弹性伸缩和高可用。'
 category: enterprise-database-middleware
 tags:
 - k8s

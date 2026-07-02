@@ -1,7 +1,7 @@
 ---
 title: SBOM 生成与管理 (SBOM Generation and Management)
 description: '# SBOM 生成与管理 (SBOM Generation and Management)'
-summary: '# SBOM 生成与管理 (SBOM Generation and Management)'
+summary: '软件物料清单（Software Bill of Materials, SBOM）是软件组件和依赖关系的正式机器可读清单，类似于制造业中的物料清单（BOM）。'
 category: supply-chain-security
 tags:
 - k8s

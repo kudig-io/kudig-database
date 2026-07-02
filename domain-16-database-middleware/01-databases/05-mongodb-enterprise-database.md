@@ -1,7 +1,7 @@
 ---
 title: MongoDB 企业级数据库运维深度实践
 description: '# MongoDB 企业级数据库运维深度实践'
-summary: '# MongoDB 企业级数据库运维深度实践'
+summary: 'MongoDB 是全球领先的文档型 NoSQL 数据库，以其灵活的文档模型（BSON/JSON）、丰富的查询语言、水平分片能力和完善的运维工具链，在内容管理、物联网、实时分析、用户画像等领域拥有广泛的企业级部署。MongoDB 8.0 进一步增强了可查询加密（Queryable Encryption）、向量化查询、分片集群自动分片等企业级特性。'
 category: enterprise-database-middleware
 tags:
 - k8s

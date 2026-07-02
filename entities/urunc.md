@@ -1,7 +1,7 @@
 ---
 title: urunc
 description: '## 概述'
-summary: '## 概述'
+summary: 'urunc 是一个符合 OCI 标准的容器运行时，专门用于在 Kubernetes 中运行 Unikernel 应用。Unikernel 是将应用与最小化操作系统库编译为单一镜像的技术，具有极小的攻击面、亚毫秒级启动时间和极低的内存占用。urunc 将 Unikernel 打包为 OCI 镜像，'
 category: entities
 tags:
 - k8s

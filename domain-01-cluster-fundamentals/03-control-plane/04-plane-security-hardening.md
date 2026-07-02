@@ -1,7 +1,7 @@
 ---
 title: 控制平面安全加固指南 (Control Plane Security Hardening Guide)
 description: '# 控制平面安全加固指南 (Control Plane Security Hardening Guide)'
-summary: '# 控制平面安全加固指南 (Control Plane Security Hardening Guide)'
+summary: 'NodeRestriction,PodSecurity,ValidatingAdmissionPolicy,'
 category: control-plane
 tags:
 - k8s

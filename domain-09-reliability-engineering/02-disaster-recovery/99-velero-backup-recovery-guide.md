@@ -1,7 +1,7 @@
 ---
 title: Velero 企业级备份恢复实践指南
 description: '# Velero 企业级备份恢复实践指南'
-summary: '# Velero 企业级备份恢复实践指南'
+summary: 'Velero（前身为 Heptio Ark）是 Kubernetes 生态中最成熟的开源备份与灾难恢复工具，由 VMware Tanzu 团队维护。'
 category: disaster-recovery
 tags:
 - k8s

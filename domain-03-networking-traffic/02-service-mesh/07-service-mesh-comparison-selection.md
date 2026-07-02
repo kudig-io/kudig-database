@@ -1,7 +1,7 @@
 ---
 title: 服务网格对比与选型决策指南
 description: '# 服务网格对比与选型决策指南'
-summary: '# 服务网格对比与选型决策指南'
+summary: '服务网格选型是微服务架构演进过程中最关键的基础设施决策之一。错误的选型不仅会导致资源浪费和运维复杂度激增，还可能在业务快速扩张时成为系统瓶颈。本文档从企业架构师的视角出发，对当前主流的五款服务网格/分布式运行时平台——Istio、Linkerd、Consul Connect、Dapr、Traefik Mesh——进行全面、客观、深度的横向对比分析，'
 category: service-mesh-microservices
 tags:
 - k8s

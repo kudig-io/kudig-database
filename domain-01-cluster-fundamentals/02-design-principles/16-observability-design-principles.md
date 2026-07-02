@@ -1,7 +1,7 @@
 ---
 title: 16 - 可观测性设计原则
 description: '# 16 - 可观测性设计原则'
-summary: '# 16 - 可观测性设计原则'
+summary: '本文档深入探讨 [[Kubernetes|Kubernetes]] 系统的可观测性设计原则，涵盖监控、日志、追踪三大支柱的核心设计理念和最佳实践，为企业构建生产级可观测性体系提供理论指导和技术方案。'
 category: design-principles
 tags:
 - k8s

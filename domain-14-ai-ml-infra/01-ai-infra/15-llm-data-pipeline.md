@@ -1,7 +1,7 @@
 ---
 title: 142 - LLM训练数据Pipeline与管理 (LLM Data Pipeline & Management)
 description: '# 142 - LLM训练数据Pipeline与管理 (LLM Data Pipeline & Management)'
-summary: '# 142 - LLM训练数据Pipeline与管理 (LLM Data Pipeline & Management)'
+summary: 'csi.storage.k8s.io/provisioner-secret-name: juicefs-secret'
 category: ai-infra
 tags:
 - k8s

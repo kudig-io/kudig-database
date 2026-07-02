@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 集群删除操作指南
 description: '# Kubernetes 集群删除操作指南'
-summary: '# Kubernetes 集群删除操作指南'
+summary: 'func newCmdReset(in io.Reader, out io.Writer, resetOptions *resetOptions) *cobra.Command'
 category: references
 tags:
 - k8s

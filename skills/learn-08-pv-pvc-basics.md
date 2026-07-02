@@ -1,7 +1,7 @@
 ---
 title: 第八课：存储 - PV 和 PVC
 description: '# 第八课：存储 - PV 和 PVC'
-summary: '# 第八课：存储 - PV 和 PVC'
+summary: 'PVC (PersistentVolumeClaim) = 持久化卷声明，应用申请的存储请求'
 category: skills
 tags:
 - k8s

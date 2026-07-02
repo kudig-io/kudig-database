@@ -1,7 +1,7 @@
 ---
 title: 14 - 多集群管理与联邦 (Multi-Cluster Management & Federation)
 description: '# 14 - 多集群管理与联邦 (Multi-Cluster Management & Federation)'
-summary: '# 14 - 多集群管理与联邦 (Multi-Cluster Management & Federation)'
+summary: 'cluster.x-k8s.io/cluster-name: production-cluster'
 category: extensions
 tags:
 - k8s

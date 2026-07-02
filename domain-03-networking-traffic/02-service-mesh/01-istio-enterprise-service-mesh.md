@@ -1,7 +1,7 @@
 ---
 title: Istio 企业级服务网格架构与实践
 description: '# Istio 企业级服务网格架构与实践'
-summary: '# Istio 企业级服务网格架构与实践'
+summary: 'Istio 是业界领先的开源服务网格平台，由 Google、IBM、Lyft 于2017年联合推出，2023年正式成为 CNCF 毕业项目。作为企业级微服务架构的核心基础设施，Istio 提供了流量管理、安全控制、可观测性和策略执行四大核心能力。通过将通信逻辑从应用代码中剥离到基础设施层（Sidecar 代理或节点级代理），'
 category: service-mesh-microservices
 tags:
 - k8s

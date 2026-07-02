@@ -1,7 +1,7 @@
 ---
 title: 第二课：Pod - K8s 的最小调度单元
 description: '# 第二课：Pod - K8s 的最小调度单元'
-summary: '# 第二课：Pod - K8s 的最小调度单元'
+summary: '• 边车容器 (Sidecar Containers) - 辅助功能（如日志收集）'
 category: skills
 tags:
 - k8s

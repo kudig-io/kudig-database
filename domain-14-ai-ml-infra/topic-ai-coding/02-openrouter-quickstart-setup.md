@@ -1,7 +1,7 @@
 ---
 title: 快速接入与环境配置
 description: '# 快速接入与环境配置'
-summary: '# 快速接入与环境配置'
+summary: '1. 登录 [openrouter.ai](https://openrouter.ai)'
 category: ai-coding
 tags:
 - ai

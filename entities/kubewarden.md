@@ -1,7 +1,7 @@
 ---
 title: Kubewarden [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kubewarden 是一个 Kubernetes 策略引擎，使用 WebAssembly (Wasm) 运行准入策略。它允许使用任何编译为 Wasm 的编程语言 (Rust、Go、C#、Swift 等) 编写策略，并通过 OCI 镜像仓库分发。Kubewarden 支持动态准入控制和审计模式。'
 category: entities
 tags:
 - k8s

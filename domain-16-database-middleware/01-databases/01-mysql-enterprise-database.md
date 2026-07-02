@@ -1,7 +1,7 @@
 ---
 title: MySQL 企业级数据库运维管理
 description: '# MySQL 企业级数据库运维管理'
-summary: '# MySQL 企业级数据库运维管理'
+summary: 'MySQL 是全球使用最广泛的开源关系型数据库管理系统，在 Web 应用、电商、金融、游戏等领域占据统治地位。根据 DB-Engines 2026 年排名，MySQL 仅次于 Oracle 数据库位居第二，其生态覆盖了从嵌入式设备到超大规模互联网服务的全场景。'
 category: enterprise-database-middleware
 tags:
 - k8s

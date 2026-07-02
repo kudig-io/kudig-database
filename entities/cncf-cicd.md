@@ -1,7 +1,7 @@
 ---
 title: CNCF CI/CD 与发布管理项目全景
 description: '# CNCF CI/CD 与发布管理项目全景'
-summary: '# CNCF CI/CD 与发布管理项目全景'
+summary: 'CNCF CI/CD 生态围绕 **GitOps 持续交付**、**渐进式发布**、**应用构建与打包**、**开发者平台** 四大领域构建。'
 category: entities
 tags:
 - k8s

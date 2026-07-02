@@ -1,7 +1,7 @@
 ---
 title: 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
 description: '# 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)'
-summary: '# 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)'
+summary: '云边协同面临的核心挑战在于：**如何在不可靠的广域网连接下，保证分布在边缘和云端的系统协调一致地工作**。'
 category: edge-computing
 tags:
 - k8s

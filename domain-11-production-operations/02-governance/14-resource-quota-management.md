@@ -1,7 +1,7 @@
 ---
 title: 14-资源配额管理
 description: '# 14-资源配额管理'
-summary: '# 14-资源配额管理'
+summary: '资源配额管理是实现多租户Kubernetes环境稳定运行的关键机制。本文档详细介绍资源配额的设计、实施和最佳实践。'
 category: production-operations
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 网络连通性故障排查
 description: '# 25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)'
-summary: '# 25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)'
+summary: 'kubectl get pods -n <namespace> -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.conditions[?(@.type=="Ready")].status}{"\n"}{end}' | grep False'
 category: troubleshooting
 tags:
 - network

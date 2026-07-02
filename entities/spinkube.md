@@ -1,7 +1,7 @@
 ---
 title: SpinKube [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'SpinKube 是一个在 Kubernetes 上运行 WebAssembly (Wasm) 微服务和应用的开源平台。它将 Fermyon Spin 框架与 Kubernetes 集成，使开发者能够像部署容器一样部署 Wasm 应用，同时获得更快的启动速度、更小的资源占用和更强的安全隔离。'
 category: entities
 tags:
 - k8s

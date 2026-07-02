@@ -1,7 +1,7 @@
 ---
 title: kcp
 description: '## 概述'
-summary: '## 概述'
+summary: 'kcp 是一个类 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 服务器，提供多租户、逻辑隔离的控制平面，不需要管理实际的容器或 Pod。'
 category: entities
 tags:
 - k8s

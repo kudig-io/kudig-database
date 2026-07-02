@@ -1,7 +1,7 @@
 ---
 title: 'Day 15: Node 节点基础'
 description: '## 概述'
-summary: '## 概述'
+summary: 'Node（节点）是 Kubernetes 集群的工作引擎，是实际运行容器应用的地方。每个 Node 都是一台物理机或虚拟机，上面运行着三个核心组件：kubelet、kube-proxy 和容器运行时（containerd）。理解 Node 的架构、状态机制和管理操作是 K8s 运维的基础。'
 category: learning
 tags:
 - k8s

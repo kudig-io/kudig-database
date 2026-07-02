@@ -1,7 +1,7 @@
 ---
 title: 'Day 6: K8s 架构深化 + 集群配置'
 description: '# Day 6: K8s 架构深化 + 集群配置'
-summary: '# Day 6: K8s 架构深化 + 集群配置'
+summary: '本文在 Day 5 的架构基础上，深入集群配置参数、API 版本管理，并通过部署第一个 Deployment 来体验 K8s 声明式管理的完整工作流。你将理解 Deployment → [[ReplicaSet|ReplicaSet]] → Pod 的层级关系，掌握滚动更新和回滚操作，并学会创建 Service 暴露应用。'
 category: learning
 tags:
 - k8s

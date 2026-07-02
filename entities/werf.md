@@ -1,7 +1,7 @@
 ---
 title: werf [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'werf 是一个一致且可复现的 CI/CD 交付工具，将 Git 作为唯一真相来源，集成了镜像构建、镜像发布、Helm 部署和清理策略。werf 提供从源码到部署的完整流水线，特别强调构建的可复现性和基于内容的标签策略。'
 category: entities
 tags:
 - k8s

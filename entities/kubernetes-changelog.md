@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 变更日志索引
 description: '# Kubernetes 变更日志索引'
-summary: '# Kubernetes 变更日志索引'
+summary: '此外，还包含 19 个 RELEASE-NOTES 文件（v0.4 - v1.1），记录了 Kubernetes 早期版本的关键变更。'
 category: entities
 tags:
 - k8s

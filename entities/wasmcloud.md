@@ -1,7 +1,7 @@
 ---
 title: wasmCloud (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'wasmCloud 是用于构建分布式 WebAssembly 应用的平台。它提供安全、可移植的应用运行环境，通过能力模型（Capability Model）实现组件与外部资源的解耦，支持跨云、边缘和本地的统一部署。'
 category: entities
 tags:
 - k8s

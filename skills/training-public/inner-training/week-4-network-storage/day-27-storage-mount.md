@@ -1,7 +1,7 @@
 ---
 title: 'Day 27: 存储卷挂载'
 description: '# Day 27: 存储卷挂载'
-summary: '# Day 27: 存储卷挂载'
+summary: 'kubectl create configmap app-config --from-literal=APP_ENV=production --from-literal=LOG_LEVEL=info'
 category: learning
 tags:
 - k8s

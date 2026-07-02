@@ -1,7 +1,7 @@
 ---
 title: Playwright Enterprise Automation Testing 深度实践
 description: '# Playwright Enterprise Automation Testing 深度实践'
-summary: '# Playwright Enterprise Automation Testing 深度实践'
+summary: 'This document provides comprehensive exploration of Playwright enterprise deployment architecture, multi-browser test automation frameworks, and quality assurance practices.'
 category: automated-testing-quality
 tags:
 - k8s

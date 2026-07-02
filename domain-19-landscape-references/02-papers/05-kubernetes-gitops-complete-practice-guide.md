@@ -1,7 +1,7 @@
 ---
 title: Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)
 description: '# Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)'
-summary: '# Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)'
+summary: '本文档提供了一套完整的GitOps实践指南，涵盖从基础概念到高级应用的全方位内容，基于ArgoCD和FluxCD两大主流GitOps工具的生产实践经验，帮助企业建立声明式、自动化、可审计的现代化运维体系。'
 category: papers
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Java Operator SDK 开发指南 (domain-02-workloads-applications)
 description: '# Java Operator SDK 开发指南'
-summary: '# Java Operator SDK 开发指南'
+summary: 'Kubernetes Operator 模式允许使用自定义资源（CRD）扩展 Kubernetes 平台能力。虽然 Go 是 Operator 开发的主流语言，但 Java 生态同样有成熟的 SDK——尤其是对于已有 Java 技术栈的团队，使用 Java Operator SDK 可以复用现有的业务逻辑、类库和 CI/CD 流水线。'
 category: java-kubernetes
 tags:
 - java

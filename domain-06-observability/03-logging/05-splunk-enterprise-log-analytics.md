@@ -1,7 +1,7 @@
 ---
 title: Splunk Enterprise Log Analytics Platform 深度实践
 description: '# Splunk Enterprise Log Analytics Platform 深度实践'
-summary: '# Splunk Enterprise Log Analytics Platform 深度实践'
+summary: 'This document provides comprehensive exploration of Splunk enterprise log analytics platform architecture design, deployment practices, and operational management.'
 category: logging-management-analytics
 tags:
 - k8s

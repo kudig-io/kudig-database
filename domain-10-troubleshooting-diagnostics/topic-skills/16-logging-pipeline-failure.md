@@ -1,7 +1,7 @@
 ---
 title: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
 description: '# 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation'
-summary: '# 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation'
+summary: '日志管道问题是 [[Kubernetes|Kubernetes]] 可观测性体系中**影响最广泛**的问题类型之一。当日志采集、传输或存储环节出现问题时，会导致应用日志缺失、审计日志不完整、告警延迟甚至安全事件无法追溯。在云原生环境中，'
 category: observability
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 生产环境最佳实践
 description: '# Kubernetes 生产环境最佳实践'
-summary: '# Kubernetes 生产环境最佳实践'
+summary: '本文档汇总 Kubernetes 生产环境的通用最佳实践原则，涵盖安全性、可靠性、可观测性和效率四大维度。'
 category: concepts
 tags:
 - k8s

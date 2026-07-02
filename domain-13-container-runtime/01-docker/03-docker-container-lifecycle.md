@@ -1,7 +1,7 @@
 ---
 title: Docker 容器生命周期管理
 description: '# Docker 容器生命周期管理'
-summary: '# Docker 容器生命周期管理'
+summary: 'HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \'
 category: docker
 tags:
 - docker

@@ -1,7 +1,7 @@
 ---
 title: Argo CD 企业级 GitOps 实践指南
 description: '# Argo CD 企业级 GitOps 实践指南'
-summary: '# Argo CD 企业级 GitOps 实践指南'
+summary: '本指南是 Argo CD GitOps 实践的操作手册，提供从安装部署到生产运维的完整技术方案。Argo CD 是 CNCF 毕业的 GitOps 持续交付工具，它将 Git 仓库作为 [[Kubernetes|Kubernetes]] 应用定义的唯一事实来源，自动检测并收敛集群状态到 Git 中声明的期望状态。'
 category: gitops-ci-cd
 tags:
 - k8s

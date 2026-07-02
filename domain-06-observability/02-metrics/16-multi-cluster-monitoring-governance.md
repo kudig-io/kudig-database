@@ -1,7 +1,7 @@
 ---
 title: 20 - 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance)
 description: '# 20 - 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance)'
-summary: '# 20 - 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance)'
+summary: '本文档针对企业多集群环境下的监控治理挑战，提供统一监控架构、跨集群数据融合、治理策略和运维管理的最佳实践，帮助企业构建集中化、标准化、智能化的多集群可观测性体系。'
 category: observability
 tags:
 - k8s

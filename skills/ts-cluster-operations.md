@@ -1,7 +1,7 @@
 ---
 title: 集群运维故障排查
 description: '# 集群运维故障排查'
-summary: '# 集群运维故障排查'
+summary: '1. **版本与倾斜**：`kubectl version --short` + `kubeadm upgrade plan`，确认版本跨度与倾斜策略。'
 category: skills
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 存储配置最佳实践
 description: '# Kubernetes 存储配置最佳实践'
-summary: '# Kubernetes 存储配置最佳实践'
+summary: '本指南提供生产环境 Kubernetes 存储配置的最佳实践，涵盖从存储类设计到数据备份的全方位内容 ^[inferred]。'
 category: skills
 tags:
 - k8s

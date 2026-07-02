@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 自动化运维与SRE实践 (Automation and SRE Practices)
 description: '# Kubernetes 自动化运维与SRE实践 (Automation and SRE Practices)'
-summary: '# Kubernetes 自动化运维与SRE实践 (Automation and SRE Practices)'
+summary: '本文档深入探讨了Kubernetes环境下的自动化运维和SRE（站点可靠性工程）实践，基于大型互联网公司的SRE实践经验，提供从监控告警、问题响应到自动化运维的完整解决方案，帮助企业建立高效、可靠的运维体系。'
 category: papers
 tags:
 - k8s

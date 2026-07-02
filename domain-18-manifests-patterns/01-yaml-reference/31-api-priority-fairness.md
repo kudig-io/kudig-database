@@ -1,7 +1,7 @@
 ---
 title: 31 - FlowSchema / PriorityLevelConfiguration YAML 配置参考
 description: '# 31 - FlowSchema / PriorityLevelConfiguration YAML 配置参考'
-summary: '# 31 - FlowSchema / PriorityLevelConfiguration YAML 配置参考'
+summary: '2. [FlowSchema 完整字段](#2-flowschema-完整字段)'
 category: yaml-manifests
 tags:
 - k8s

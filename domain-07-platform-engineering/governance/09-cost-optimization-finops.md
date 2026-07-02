@@ -1,7 +1,7 @@
 ---
 title: 成本优化与FinOps实践 (Cost Optimization & FinOps)
 description: '# 成本优化与FinOps实践 (Cost Optimization & FinOps)'
-summary: '# 成本优化与FinOps实践 (Cost Optimization & FinOps)'
+summary: '成本优化是平台运维的重要组成部分，通过FinOps(财务运营)实践，实现云资源的成本透明化、优化和控制，在保证业务需求的前提下最大化资源利用效率。'
 category: platform-ops
 tags:
 - k8s

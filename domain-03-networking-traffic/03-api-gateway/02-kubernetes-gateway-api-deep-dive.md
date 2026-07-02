@@ -1,7 +1,7 @@
 ---
 title: 02 - Kubernetes Gateway API 标准深度解析
 description: '# 02 - Kubernetes Gateway API 标准深度解析'
-summary: '# 02 - Kubernetes Gateway API 标准深度解析'
+summary: '1. [Gateway API 概述与设计动机](#1-gateway-api-概述与设计动机)'
 category: cloud-native-api-gateway
 tags:
 - k8s

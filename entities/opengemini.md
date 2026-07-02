@@ -1,7 +1,7 @@
 ---
 title: openGemini (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'openGemini 是一个高性能、分布式时序数据库，专为物联网 (IoT)、可观测性和工业互联网场景设计。它基于 InfluxDB 协议兼容，提供高速写入、低延迟查询和高效压缩，支持每秒千万级数据点的写入和 PB 级数据存储。openGemini 采用存算分离架构，可独立扩展计算和存储资源。'
 category: entities
 tags:
 - k8s

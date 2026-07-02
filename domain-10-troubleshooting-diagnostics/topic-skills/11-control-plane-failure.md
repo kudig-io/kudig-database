@@ -1,7 +1,7 @@
 ---
 title: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 description: '## 1. 概述'
-summary: '## 1. 概述'
+summary: '控制平面（Control Plane）是 [[Kubernetes|Kubernetes]] 集群的"大脑"，包括 API Server、etcd、Scheduler、Controller Manager 四大核心组件。控制平面问题是 Kubernetes 中**最严重的问题类型**，直接影响整个集群的可用性。etcd 作为唯一的状态存储，'
 category: control-plane
 tags:
 - k8s

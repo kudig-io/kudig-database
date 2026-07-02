@@ -1,7 +1,7 @@
 ---
 title: 29 - CustomResourceDefinition (CRD) YAML 配置参考
 description: '# 29 - CustomResourceDefinition (CRD) YAML 配置参考'
-summary: '# 29 - CustomResourceDefinition (CRD) YAML 配置参考'
+summary: 'CustomResourceDefinition (CRD) 是 Kubernetes 的扩展机制,允许用户定义自己的资源类型:'
 category: yaml-manifests
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)
 description: '# Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)'
-summary: '# Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)'
+summary: '本文档深入探讨了Kubernetes多云混合部署的架构设计、技术实现和运维管理策略，基于大型企业多云环境的实际案例，提供从架构规划到落地实施的完整解决方案，帮助企业实现云厂商锁定避免、成本优化和业务连续性保障。'
 category: papers
 tags:
 - k8s

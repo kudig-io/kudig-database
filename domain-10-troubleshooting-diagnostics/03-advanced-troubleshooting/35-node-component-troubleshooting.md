@@ -1,7 +1,7 @@
 ---
 title: 节点组件故障排查
 description: '# 35 - 节点组件故障排查 (Node Component Troubleshooting)'
-summary: '# 35 - 节点组件故障排查 (Node Component Troubleshooting)'
+summary: 'kubectl get node <node-name> -o jsonpath='{.status.conditions}''
 category: troubleshooting
 tags:
 - kubelet

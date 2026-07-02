@@ -1,7 +1,7 @@
 ---
 title: Kuasar (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kuasar 是一个统一的容器沙箱管理框架，支持在同一个节点上同时运行多种类型的沙箱（MicroVM、App Kernel、Wasm）。它重新设计了 containerd 的 Sandbox API，将沙箱管理逻辑从 shim 中分离出来，使得一个 Sandboxer 进程可以管理同类型的所有沙箱实例，大幅减少常驻进程数量和内存开销。'
 category: entities
 tags:
 - k8s

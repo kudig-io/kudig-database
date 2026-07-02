@@ -1,7 +1,7 @@
 ---
 title: K8s 架构基础与核心组件原理
 description: '# K8s 架构基础与核心组件原理'
-summary: '# K8s 架构基础与核心组件原理'
+summary: 'KUDIG-DATABASE（Kubernetes Universal Database & Intelligence Gateway）是一个开源的云原生技术全域知识库，覆盖 950+ 篇文档、41 个知识领域、4300 万+ 字符。以 **Domain（知识域）× Topic（专题）** 二维矩阵组织，具有明确依赖关系和学习路径。'
 category: reference
 tags:
 - k8s

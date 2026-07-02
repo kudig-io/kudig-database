@@ -1,7 +1,7 @@
 ---
 title: cdk8s (Cloud Development Kit for Kubernetes)
 description: '## 概述'
-summary: '## 概述'
+summary: 'cdk8s (Cloud Development Kit for Kubernetes) 是一个开源软件开发框架，允许使用熟悉的编程语言定义 Kubernetes 应用和可重用抽象。它生成标准的 Kubernetes YAML 清单，可与任何 Kubernetes 集群配合使用。cdk8s 借鉴了 AWS CDK 的理念，'
 category: entities
 tags:
 - k8s

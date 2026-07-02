@@ -1,7 +1,7 @@
 ---
 title: Domain-25 云原生安全 — 开源项目索引
 description: '# Domain-25 云原生安全 — 开源项目索引'
-summary: '# Domain-25 云原生安全 — 开源项目索引'
+summary: '云原生安全并非单一工具可以覆盖的领域，而是需要覆盖软件供应链全生命周期的纵深防御体系。从代码编写、镜像构建、集群部署到运行时保护，每个阶段都面临不同类型的威胁。现代云原生威胁模型涵盖以下核心攻击面：'
 category: cloud-native-security
 tags:
 - k8s

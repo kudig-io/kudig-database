@@ -1,7 +1,7 @@
 ---
 title: Cilium eBPF 网络与安全实践指南
 description: '# Cilium eBPF 网络与安全实践指南'
-summary: '# Cilium eBPF 网络与安全实践指南'
+summary: 'cilium clustermesh enable --context cluster1'
 category: network-fundamentals
 tags:
 - network

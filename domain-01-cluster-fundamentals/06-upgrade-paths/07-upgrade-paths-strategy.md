@@ -1,7 +1,7 @@
 ---
 title: 07 - 升级路径与策略指南
 description: '# 07 - 升级路径与策略指南'
-summary: '# 07 - 升级路径与策略指南'
+summary: 'kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data'
 category: architecture-fundamentals
 tags:
 - k8s

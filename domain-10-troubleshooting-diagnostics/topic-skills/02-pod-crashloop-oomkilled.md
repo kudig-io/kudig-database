@@ -1,7 +1,7 @@
 ---
 title: Pod CrashLoopBackOff & OOMKilled 诊断与修复
 description: '## 1. 概述'
-summary: '## 1. 概述'
+summary: '1. 应用代码 bug 导致进程启动后立即崩溃，Pod 进入 CrashLoopBackOff'
 category: pod
 tags:
 - k8s

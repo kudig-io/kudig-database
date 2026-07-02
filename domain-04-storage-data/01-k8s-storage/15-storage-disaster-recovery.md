@@ -1,7 +1,7 @@
 ---
 title: 15 - 存储灾备与迁移策略
 description: '# 15 - 存储灾备与迁移策略'
-summary: '# 15 - 存储灾备与迁移策略'
+summary: 'kubectl get pvc -n production -o json | \'
 category: storage
 tags:
 - k8s

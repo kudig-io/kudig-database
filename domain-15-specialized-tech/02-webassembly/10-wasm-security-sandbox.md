@@ -1,7 +1,7 @@
 ---
 title: Wasm 安全与沙箱 (Wasm Security and Sandbox)
 description: '# Wasm 安全与沙箱 (Wasm Security and Sandbox)'
-summary: '# Wasm 安全与沙箱 (Wasm Security and Sandbox)'
+summary: 'return Err(TrapCode::MemoryOutOfBounds);'
 category: webassembly-cloud-native
 tags:
 - k8s

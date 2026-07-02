@@ -1,7 +1,7 @@
 ---
 title: Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南
 description: '# Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南'
-summary: '# Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南'
+summary: 'Apache Kafka 是分布式流处理平台的行业标准，在企业级架构中承担着事件驱动架构的核心枢纽角色。从日志收集、实时数据处理、微服务异步通信到 CDC 数据管道，Kafka 的应用场景极其广泛。Strimzi 是 CNCF Sandbox 级别的 Kafka Operator，提供了在 Kubernetes 上运行 Kafka 的声明式管理方案。'
 category: enterprise-database-middleware
 tags:
 - k8s

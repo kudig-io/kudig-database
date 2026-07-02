@@ -1,7 +1,7 @@
 ---
 title: 'Day 14: 存储体系 + 综合实践'
 description: '# Day 14: 存储体系 + 综合实践'
-summary: '# Day 14: 存储体系 + 综合实践'
+summary: 'nginx.ingress.kubernetes.io/rewrite-target: /'
 category: learning
 tags:
 - k8s

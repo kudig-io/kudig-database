@@ -1,7 +1,7 @@
 ---
 title: Terraform企业级基础设施即代码实践
 description: '# Terraform企业级基础设施即代码实践'
-summary: '# Terraform企业级基础设施即代码实践'
+summary: '本文档深入探讨了Terraform企业级基础设施即代码的架构设计、最佳实践和运维管理，基于大规模云环境的部署经验，提供从基础资源配置到复杂架构编排的完整技术指南，帮助企业构建标准化、可重复的基础设施管理体系。'
 category: infrastructure-as-code
 tags:
 - k8s

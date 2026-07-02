@@ -1,7 +1,7 @@
 ---
 title: 04 - Kubernetes 源码结构深度解析
 description: '# 04 - Kubernetes 源码结构深度解析'
-summary: '# 04 - Kubernetes 源码结构深度解析'
+summary: '本文档提供 Kubernetes 源码结构的全景图，涵盖顶层目录、核心组件、关键模块的代码路径、接口定义、版本演变和生产环境排障价值。适用于源码阅读、组件开发、问题调试、二次开发场景。'
 category: architecture-fundamentals
 tags:
 - k8s

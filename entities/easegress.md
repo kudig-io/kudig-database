@@ -1,7 +1,7 @@
 ---
 title: Easegress (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Easegress 是一个云原生的全生命周期 API 编排和流量网关，提供高可用、高性能的流量调度能力。它支持丰富的流量治理功能，包括 API 编排、金丝雀发布、限流熔断、服务发现、WebSocket、MQTT 代理等。Easegress 采用过滤器链（Filter Pipeline）架构，用户可以灵活组合过滤器实现复杂的流量处理逻辑。'
 category: entities
 tags:
 - k8s

@@ -2,7 +2,7 @@
 title: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis
   & Remediation
 description: '- 运维工程师'
-summary: '- 运维工程师'
+summary: 'Namespace、ResourceQuota 和 LimitRange 是 [[Kubernetes|Kubernetes]] 多租户资源隔离的核心机制。ResourceQuota 限制 Namespace 级别的资源总量，LimitRange 限制单个 Pod/容器的资源范围。'
 category: skills
 tags:
 - k8s

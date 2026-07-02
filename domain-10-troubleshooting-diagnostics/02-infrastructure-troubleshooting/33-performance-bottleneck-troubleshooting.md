@@ -1,7 +1,7 @@
 ---
 title: 性能瓶颈故障排查
 description: '# 33 - 性能瓶颈故障排查 (Performance Bottleneck Troubleshooting)'
-summary: '# 33 - 性能瓶颈故障排查 (Performance Bottleneck Troubleshooting)'
+summary: 'kubectl top pods --all-namespaces --sort-by=cpu | head -10'
 category: troubleshooting
 tags:
 - performance

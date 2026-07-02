@@ -1,7 +1,7 @@
 ---
 title: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
 description: '## 1. 概述'
-summary: '## 1. 概述'
+summary: '证书（Certificate）是 [[Kubernetes|Kubernetes]] 安全模型的基石。'
 category: security
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 144 - CNI 故障排查与优化 (CNI Troubleshooting & Optimization)
 description: '# 144 - CNI 故障排查与优化 (CNI Troubleshooting & Optimization)'
-summary: '# 144 - CNI 故障排查与优化 (CNI Troubleshooting & Optimization)'
+summary: 'Warning  FailedCreatePodSandBox  kubelet  Failed to create pod sandbox:'
 category: networking
 tags:
 - k8s

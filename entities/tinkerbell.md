@@ -1,7 +1,7 @@
 ---
 title: Tinkerbell [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Tinkerbell 是一个裸金属服务器自动化配置（provisioning）框架，用于在物理服务器上自动安装操作系统和执行配置任务。它替代传统的 PXE/Cobbler 方案，通过声明式的工作流定义和容器化的操作步骤实现裸金属服务器的云原生式管理。'
 category: entities
 tags:
 - k8s

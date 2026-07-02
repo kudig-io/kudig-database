@@ -1,7 +1,7 @@
 ---
 title: 备份恢复故障排查指南 [topic-structural-trouble-shooting]
 description: '# 备份恢复故障排查指南'
-summary: '# 备份恢复故障排查指南'
+summary: '1. **Velero 状态检查**：`kubectl get [[Pods|pods]] -n velero`，确认 velero [[DaemonSet|DaemonSet]] 和 Deployment 均为 Running。'
 category: structural-troubleshooting
 tags:
 - backup

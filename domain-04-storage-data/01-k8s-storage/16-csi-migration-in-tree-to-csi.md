@@ -1,7 +1,7 @@
 ---
 title: 16 - CSI 迁移：从 In-Tree 存储插件到 CSI
 description: '# 16 - CSI 迁移：从 In-Tree 存储插件到 CSI'
-summary: '# 16 - CSI 迁移：从 In-Tree 存储插件到 CSI'
+summary: 'Kubernetes 自 v1.26 起正式移除了以下 In-Tree 存储插件：'
 category: storage
 tags:
 - k8s

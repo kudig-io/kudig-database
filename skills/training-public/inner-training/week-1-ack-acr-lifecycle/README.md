@@ -1,7 +1,7 @@
 ---
 title: 'Week 1: ACK/ACR 基础与集群生命周期 (Days 1-7)'
 description: '## 概述'
-summary: '## 概述'
+summary: '第一周是整个培训计划的基础阶段，聚焦于阿里云容器服务 ACK（Alibaba Cloud Kubernetes）和容器镜像服务 ACR（Alibaba Cloud Container Registry）的核心概念与操作。本周将带你从理解 ACK/ACR 的服务架构开始，逐步掌握 SDK/API 调用、控制台操作，'
 category: learning
 tags:
 - k8s

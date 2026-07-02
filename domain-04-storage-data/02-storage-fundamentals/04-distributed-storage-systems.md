@@ -1,7 +1,7 @@
 ---
 title: 04 - 分布式存储系统
 description: '# 04 - 分布式存储系统'
-summary: '# 04 - 分布式存储系统'
+summary: 'csi.storage.k8s.io/provisioner-secret-name: csi-rbd-secret'
 category: storage-fundamentals
 tags:
 - storage

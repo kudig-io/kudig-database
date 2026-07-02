@@ -1,7 +1,7 @@
 ---
 title: Prometheus 企业级监控部署指南
 description: '# Prometheus 企业级监控部署指南'
-summary: '# Prometheus 企业级监控部署指南'
+summary: 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
 category: enterprise-monitoring-alerting
 tags:
 - k8s

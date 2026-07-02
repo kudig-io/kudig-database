@@ -1,7 +1,7 @@
 ---
 title: Carina (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Carina 是一个 Kubernetes 本地存储供应器，基于 LVM（Logical Volume Manager）管理节点上的本地磁盘，为有状态应用提供高性能的本地持久化存储。它自动发现节点上的裸盘，组建 LVM VolumeGroup，并通过 CSI 接口为 Pod 动态分配 LogicalVolume 作为 PersistentVolume，'
 category: entities
 tags:
 - k8s

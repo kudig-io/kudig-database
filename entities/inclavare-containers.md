@@ -1,7 +1,7 @@
 ---
 title: Inclavare Containers (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Inclavare Containers 是一个基于硬件可信执行环境 (TEE) 的机密容器项目。它利用 Intel SGX、ARM TrustZone 等硬件安全技术，在隔离的 Enclave 中运行容器工作负载，保护数据和代码的机密性和完整性。即使宿主机操作系统或 Hypervisor 被攻破，Enclave 内的数据也不会泄露。'
 category: entities
 tags:
 - k8s

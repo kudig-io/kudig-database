@@ -1,7 +1,7 @@
 ---
 title: 'Kubernetes 供应链安全实践 (Supply Chain Security: SBOM, SLSA, and Sigstore)'
 description: '# Kubernetes 供应链安全实践 (Supply Chain Security: SBOM, SLSA, and Sigstore)'
-summary: '# Kubernetes 供应链安全实践 (Supply Chain Security: SBOM, SLSA, and Sigstore)'
+summary: '本文档系统梳理Kubernetes容器供应链安全的完整技术体系，覆盖从代码提交到生产部署的全链条安全实践。重点阐述SBOM软件物料清单（SPDX/CycloneDX）、SLSA构建来源证明（Level 1-4）与Sigstore无密钥签名体系（Cosign/Fulcio/Rekor）的企业级落地方案。'
 category: papers
 tags:
 - k8s

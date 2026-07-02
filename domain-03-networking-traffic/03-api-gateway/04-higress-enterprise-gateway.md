@@ -1,7 +1,7 @@
 ---
 title: 04 - Higress 云原生 API 网关企业级实践
 description: '# 04 - Higress 云原生 API 网关企业级实践'
-summary: '# 04 - Higress 云原生 API 网关企业级实践'
+summary: '4. [Kubernetes 集群部署](#4-kubernetes-集群部署)'
 category: cloud-native-api-gateway
 tags:
 - k8s

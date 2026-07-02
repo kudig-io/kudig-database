@@ -1,7 +1,7 @@
 ---
 title: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
 description: '# 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation'
-summary: '# 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation'
+summary: '监控告警体系是 [[Kubernetes|Kubernetes]] 集群可观测性的核心基础设施。当 [[Prometheus|Prometheus]]、AlertManager、Grafana 或长期存储组件（Thanos/VictoriaMetrics/Cortex）出现问题时，会直接导致**监控盲区**——运维团队无法感知集群状态变化，'
 category: observability
 tags:
 - k8s

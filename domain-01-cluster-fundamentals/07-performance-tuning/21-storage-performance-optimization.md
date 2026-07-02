@@ -1,7 +1,7 @@
 ---
 title: 21-存储性能优化
 description: '# 21-存储性能优化'
-summary: '# 21-存储性能优化'
+summary: '存储性能优化对于Kubernetes集群的整体性能至关重要。本文档详细介绍CSI驱动优化、存储类配置和性能监控的最佳实践。'
 category: production-operations
 tags:
 - k8s

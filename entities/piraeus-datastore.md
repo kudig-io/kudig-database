@@ -1,7 +1,7 @@
 ---
 title: Piraeus Datastore (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Piraeus Datastore 是基于 LINSTOR 和 DRBD 技术的 Kubernetes 高可用存储解决方案。它提供高性能的块存储，支持同步复制、快照、加密和灾难恢复。Piraeus 将成熟的 Linux 存储技术（DRBD 同步复制已有 20+ 年历史）与 Kubernetes 原生体验结合，为有状态应用提供企业级存储。'
 category: entities
 tags:
 - k8s

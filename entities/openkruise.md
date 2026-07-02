@@ -1,7 +1,7 @@
 ---
 title: OpenKruise [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'OpenKruise 是 Kubernetes 的增强工作负载套件，提供高级部署、原地升级、Sidecar 管理等能力。它扩展了 Kubernetes 原生工作负载，解决大规模应用管理的痛点问题。'
 category: entities
 tags:
 - k8s

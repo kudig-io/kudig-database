@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 备份与恢复深度实践
 description: '# Kubernetes 备份与恢复深度实践'
-summary: '# Kubernetes 备份与恢复深度实践'
+summary: 'Kubernetes 已经成为企业应用部署的标准平台，但 Kubernetes 自身并不提供内置的备份与灾难恢复能力。当集群遭遇灾难性问题——无论是 [[etcd|etcd]] 数据损坏、整个集群不可用、还是误操作删除关键资源——如果没有完善的备份策略，将面临严重的数据丢失和业务中断。本文档全面探讨 Kubernetes 环境下的备份与恢复实践，'
 category: disaster-recovery
 tags:
 - k8s

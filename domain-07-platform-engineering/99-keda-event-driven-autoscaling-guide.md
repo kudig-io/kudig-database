@@ -1,7 +1,7 @@
 ---
 title: KEDA 事件驱动自动缩放实践指南
 description: '# KEDA 事件驱动自动缩放实践指南'
-summary: '# KEDA 事件驱动自动缩放实践指南'
+summary: 'kubectl describe scaledobject order-processor -n production'
 category: production-operations
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 存储工具演进
 description: '# 存储工具演进'
-summary: '# 存储工具演进'
+summary: 'Rook 将分布式存储系统（Ceph 等）编排到 Kubernetes 原生环境中。'
 category: concepts
 tags:
 - k8s

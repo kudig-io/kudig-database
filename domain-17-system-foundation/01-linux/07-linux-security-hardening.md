@@ -1,7 +1,7 @@
 ---
 title: 07 - Linux 安全加固与合规管理：生产环境安全运维专家指南
 description: '# 07 - Linux 安全加固与合规管理：生产环境安全运维专家指南'
-summary: '# 07 - Linux 安全加固与合规管理：生产环境安全运维专家指南'
+summary: '安全是生产环境 Linux 系统运维的基石。在 Kubernetes 环境中，一个被攻破的节点意味着攻击者可能获取集群中所有工作负载的访问权限。本文档从内核安全机制到应用层防护，全面深入地讲解 Linux 安全加固的各个方面，'
 category: linux
 tags:
 - linux

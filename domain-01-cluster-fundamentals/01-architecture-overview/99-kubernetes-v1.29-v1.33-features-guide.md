@@ -1,7 +1,7 @@
 ---
 title: Kubernetes v1.29 - v1.33 版本特性深度指南
 description: '# Kubernetes v1.29 - v1.33 版本特性深度指南'
-summary: '# Kubernetes v1.29 - v1.33 版本特性深度指南'
+summary: '1. Sidecar 原生生命周期管理 (v1.29 Beta → v1.33 GA)'
 category: architecture-fundamentals
 tags:
 - k8s

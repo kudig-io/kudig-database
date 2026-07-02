@@ -1,7 +1,7 @@
 ---
 title: AI数据处理Pipeline与特征工程
 description: '## 一、AI数据Pipeline全景架构'
-summary: '## 一、AI数据Pipeline全景架构'
+summary: 'from ray.data.preprocessors import StandardScaler, OneHotEncoder'
 category: ai-infra
 tags:
 - k8s

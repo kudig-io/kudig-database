@@ -1,7 +1,7 @@
 ---
 title: HwameiStor (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'HwameiStor 是一个 Kubernetes 原生的高可用本地存储系统，能够将节点上的本地磁盘（HDD、SSD、NVMe）统一管理并提供分布式的本地存储服务。它通过 CSI 接口为有状态应用提供高性能的本地持久卷，并支持卷的高可用副本、数据迁移和自动化运维。HwameiStor 特别适合对 IOPS 和延迟敏感的工作负载，'
 category: entities
 tags:
 - k8s

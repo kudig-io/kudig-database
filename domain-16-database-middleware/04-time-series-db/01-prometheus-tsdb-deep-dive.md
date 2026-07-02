@@ -1,7 +1,7 @@
 ---
 title: Prometheus TSDB 深度解析
 description: '# Prometheus TSDB 深度解析'
-summary: '# Prometheus TSDB 深度解析'
+summary: '2h Block (内存) → Compaction → 8h Block → Compaction → 2d Block'
 category: domain
 tags:
 - prometheus

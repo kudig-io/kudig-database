@@ -1,7 +1,7 @@
 ---
 title: FAQ 文档
 description: '## 问题1：Kubernetes 网络从外部到 Pod 的完整链路是什么？'
-summary: '## 问题1：Kubernetes 网络从外部到 Pod 的完整链路是什么？'
+summary: '该分层的核心价值是：入口治理（Ingress/Gateway）与服务发现/负载均衡（Service）解耦，底层由 CNI 负责跨节点转发与策略能力。'
 category: networking
 tags:
 - k8s

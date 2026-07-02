@@ -1,7 +1,7 @@
 ---
 title: Docker 自动化运维与CI/CD集成
 description: '# Docker 自动化运维与CI/CD集成'
-summary: '# Docker 自动化运维与CI/CD集成'
+summary: 'docker-compose -f docker-compose.test.yml exec -T app npm run test:integration'
 category: docker
 tags:
 - docker

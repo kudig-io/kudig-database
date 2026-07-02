@@ -1,7 +1,7 @@
 ---
 title: Spring Boot on Kubernetes 生产实践指南 (domain-02-workloads-applications)
 description: '# Spring Boot on Kubernetes 生产实践指南'
-summary: '# Spring Boot on Kubernetes 生产实践指南'
+summary: 'public class ExternalServiceHealthIndicator implements HealthIndicator {'
 category: workloads
 tags:
 - k8s

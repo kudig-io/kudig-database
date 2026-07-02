@@ -1,7 +1,7 @@
 ---
 title: 16 - 大规模集群监控最佳实践 (Enterprise Scale Monitoring Best Practices)
 description: '# 16 - 大规模集群监控最佳实践 (Enterprise Scale Monitoring Best Practices)'
-summary: '# 16 - 大规模集群监控最佳实践 (Enterprise Scale Monitoring Best Practices)'
+summary: '本文档从首席架构师视角，深入分析大规模Kubernetes集群(>1000节点)的监控挑战与解决方案，涵盖企业级监控架构设计、联邦监控、性能优化、成本治理和智能运维等核心技术，结合财富500强企业实践经验，为企业构建世界级监控平台提供战略级指导。'
 category: observability
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 description: '- "网络策略"'
-summary: '- "网络策略"'
+summary: 'NetworkPolicy 是 Kubernetes 中实现零信任网络的核心机制。当 NetworkPolicy 配置错误时，可能导致合法流量被阻断（过度限制）或安全边界失效（策略未生效）。与 Service/DNS 连通性问题不同，NetworkPolicy 问题通常在应用部署或策略变更后出现，'
 category: skills
 tags:
 - k8s

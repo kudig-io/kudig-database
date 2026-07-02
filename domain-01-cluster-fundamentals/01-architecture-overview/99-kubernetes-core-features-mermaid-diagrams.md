@@ -1,7 +1,7 @@
 ---
 title: Kubernetes v1.29-v1.33 核心特性架构图集
 description: '# Kubernetes v1.29-v1.33 核心特性架构图集'
-summary: '# Kubernetes v1.29-v1.33 核心特性架构图集'
+summary: 'I1["initContainer: start sidecar<br/>⚠️ 后台启动，不可靠"]'
 category: architecture-fundamentals
 tags:
 - k8s

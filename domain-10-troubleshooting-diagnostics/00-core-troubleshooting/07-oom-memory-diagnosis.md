@@ -1,7 +1,7 @@
 ---
 title: OOM 和内存问题诊断
 description: '## Kubernetes内存管理架构'
-summary: '## Kubernetes内存管理架构'
+summary: 'kubectl get events -A --field-selector reason=OOMKilled --sort-by='.lastTimestamp' | tail -20'
 category: troubleshooting
 tags:
 - oom

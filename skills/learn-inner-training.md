@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 培训：Inner Training
 description: '- "集群管理"'
-summary: '- "集群管理"'
+summary: '本学习计划为内部运维工程师和技术支持人员设计，覆盖 ACK（阿里云容器服务）、ACR（阿里云容器镜像服务）和 Kubernetes 三大技术栈。通过 28 天的系统性学习，从基础概念到生产运维，逐步建立完整的云原生运维能力。'
 category: skills
 tags:
 - k8s

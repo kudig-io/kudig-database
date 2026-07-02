@@ -1,7 +1,7 @@
 ---
 title: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 description: '- 运维工程师'
-summary: '- 运维工程师'
+summary: 'Job 和 CronJob 是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 批处理工作负载的核心控制器。Job 用于一次性任务执行，CronJob 用于定时触发 Job。'
 category: skills
 tags:
 - k8s

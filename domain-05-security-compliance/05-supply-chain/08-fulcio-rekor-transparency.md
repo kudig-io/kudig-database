@@ -1,7 +1,7 @@
 ---
 title: Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)
 description: '# Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)'
-summary: '# Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)'
+summary: '本文档深入解析 Fulcio 的证书颁发流程、Rekor 的透明日志机制、证书透明度实现，以及在安全审计和事件调查中的应用。'
 category: supply-chain-security
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 升级迁移故障排查
 description: '# 34 - 升级迁移故障排查 (Upgrade and Migration Troubleshooting)'
-summary: '# 34 - 升级迁移故障排查 (Upgrade and Migration Troubleshooting)'
+summary: '.status.nodeInfo.containerRuntimeVersion'
 category: troubleshooting
 tags:
 - upgrade

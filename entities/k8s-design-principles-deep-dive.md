@@ -1,7 +1,7 @@
 ---
 title: 设计原理：声明式 API、控制器模式与 etcd 共识
 description: '# 设计原理：声明式 API、控制器模式与 etcd 共识'
-summary: '# 设计原理：声明式 API、控制器模式与 etcd 共识'
+summary: 'Kubernetes 采用**声明式（Declarative）API** 而非命令式（Imperative）：'
 category: reference
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Tokenetes (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Tokenetes（也称为 Vault CRD Operator）是一个 Kubernetes Operator，用于将 HashiCorp Vault 中的密钥自动同步到 Kubernetes [[Secrets|Secrets]]。它通过自定义资源 (CRD) 简化了 Vault 与 Kubernetes 的集成，支持多种认证方式和密钥类型，'
 category: entities
 tags:
 - k8s

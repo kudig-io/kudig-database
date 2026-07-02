@@ -1,7 +1,7 @@
 ---
 title: 24 - 监控运维手册与应急响应 (Monitoring Playbooks & Incident Response)
 description: '# 24 - 监控运维手册与应急响应 (Monitoring Playbooks & Incident Response)'
-summary: '# 24 - 监控运维手册与应急响应 (Monitoring Playbooks & Incident Response)'
+summary: '本文档提供生产环境监控系统的标准化运维手册、常见问题应急响应流程和SOP操作指南，帮助运维团队快速定位问题、标准化处理流程，提升问题响应效率和系统稳定性。'
 category: observability
 tags:
 - k8s

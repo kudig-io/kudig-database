@@ -1,7 +1,7 @@
 ---
 title: 'Day 4: Linux 网络 + 性能调优'
 description: '# Day 4: Linux 网络 + 性能调优'
-summary: '# Day 4: Linux 网络 + 性能调优'
+summary: 'docker rm -f iptables-test  # ⚠️ 强制清理，可能杀运行中容器'
 category: learning
 tags:
 - k8s

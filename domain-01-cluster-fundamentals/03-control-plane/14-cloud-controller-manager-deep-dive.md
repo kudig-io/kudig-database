@@ -1,7 +1,7 @@
 ---
 title: cloud-controller-manager 深度解析 (CCM Deep Dive)
 description: '# cloud-controller-manager 深度解析 (CCM Deep Dive)'
-summary: '# cloud-controller-manager 深度解析 (CCM Deep Dive)'
+summary: 'cloud-controller-manager (CCM) 是 Kubernetes 与云提供商集成的核心组件，负责管理云特定的控制逻辑，实现节点管理、负载均衡、路由配置等云平台集成功能。'
 category: control-plane
 tags:
 - k8s

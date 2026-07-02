@@ -1,7 +1,7 @@
 ---
 title: Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)
 description: '# Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)'
-summary: '# Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)'
+summary: '8. [Cilium 与 [[Kubernetes|Kubernetes]] 网络模型](#8-cilium-与-kubernetes-网络模型)'
 category: ebpf-technology
 tags:
 - k8s

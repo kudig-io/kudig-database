@@ -1,7 +1,7 @@
 ---
 title: KUDIG 项目运维报告：Comate 操作记录与计划
 description: '# KUDIG 项目运维报告'
-summary: '# KUDIG 项目运维报告'
+summary: 'domain-03-networking-traffic 和 domain-04-storage-data 的内容增强计划。'
 category: reference
 tags:
 - k8s

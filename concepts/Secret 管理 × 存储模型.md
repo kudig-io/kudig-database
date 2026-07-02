@@ -1,7 +1,7 @@
 ---
 title: Secret 管理 × 存储模型
 description: '# Secret 管理 × 存储模型'
-summary: '# Secret 管理 × 存储模型'
+summary: '传统的 Secret 卷（tmpfs）在容器重启时保持，但节点重启时丢失。CSI 加密卷提供了持久化的加密存储，可以用于：'
 category: synthesis
 tags:
 - k8s

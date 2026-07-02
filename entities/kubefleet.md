@@ -1,7 +1,7 @@
 ---
 title: KubeFleet [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'KubeFleet 是一个多集群资源编排平台，提供跨 Kubernetes 集群的工作负载分发、配置管理和策略驱动的资源放置能力。它通过 Hub-Member 架构和声明式 Placement 策略，实现将 Kubernetes 资源（Deployment、[[Service|Service]]、ConfigMap 等）自动分发到多个成员集群，'
 category: entities
 tags:
 - k8s

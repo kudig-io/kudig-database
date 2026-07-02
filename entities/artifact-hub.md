@@ -1,7 +1,7 @@
 ---
 title: Artifact Hub [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Artifact Hub 是云原生制品的发现和分发平台。它是 CNCF 生态系统的中央枢纽，支持搜索、发现和发布 Helm charts、OPA 策略、Falco 规则、KEDA scalers 等多种制品类型。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: eBPF 性能优化实践 (eBPF Performance Optimization Practice)
 description: '# eBPF 性能优化实践 (eBPF Performance Optimization Practice)'
-summary: '# eBPF 性能优化实践 (eBPF Performance Optimization Practice)'
+summary: '7. [Tail Call 与程序链优化](#7-tail-call-与程序链优化)'
 category: ebpf-technology
 tags:
 - k8s

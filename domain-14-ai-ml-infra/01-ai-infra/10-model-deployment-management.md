@@ -1,7 +1,7 @@
 ---
 title: AI模型部署与生命周期管理
 description: '# AI模型部署与生命周期管理'
-summary: '# AI模型部署与生命周期管理'
+summary: 'serving.kserve.io/inferenceservice: enabled'
 category: ai-infra
 tags:
 - k8s

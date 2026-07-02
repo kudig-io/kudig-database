@@ -1,7 +1,7 @@
 ---
 title: 14 - Kubernetes 安全架构深度分析
 description: '# 14 - Kubernetes 安全架构深度分析'
-summary: '# 14 - Kubernetes 安全架构深度分析'
+summary: '本文档深入分析 Kubernetes 安全架构的各个层面，涵盖身份认证、授权、网络安全、镜像安全等核心安全机制，提供企业级安全防护的最佳实践和实施指南。'
 category: architecture-fundamentals
 tags:
 - k8s

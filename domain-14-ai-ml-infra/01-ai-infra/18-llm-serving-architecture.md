@@ -1,7 +1,7 @@
 ---
 title: LLM模型Serving架构与推理优化
 description: '# LLM模型Serving架构与推理优化'
-summary: '# LLM模型Serving架构与推理优化'
+summary: 'python -m vllm.entrypoints.openai.api_server \'
 category: ai-infra
 tags:
 - k8s

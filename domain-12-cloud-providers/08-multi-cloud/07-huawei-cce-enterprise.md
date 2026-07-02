@@ -1,7 +1,7 @@
 ---
 title: 华为云 CCE 企业级容器平台深度实践
 description: '# 华为云 CCE 企业级容器平台深度实践'
-summary: '# 华为云 CCE 企业级容器平台深度实践'
+summary: '华为云容器引擎（Cloud Container Engine，CCE）是华为云提供的托管 [[Kubernetes|Kubernetes]] 服务，以 CCE Turbo 云原生网络、[[Volcano|Volcano]] 高性能调度器和裸金属容器实例为核心差异化能力。CCE Turbo 基于华为自研的 ENI 网络直通技术，实现容器网络零损耗，'
 category: multi-cloud-hybrid
 tags:
 - k8s

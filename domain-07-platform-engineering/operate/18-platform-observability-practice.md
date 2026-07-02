@@ -1,7 +1,7 @@
 ---
 title: 平台可观测性深度实践 (Platform Observability Deep Practice)
 description: '# 平台可观测性深度实践 (Platform Observability Deep Practice)'
-summary: '# 平台可观测性深度实践 (Platform Observability Deep Practice)'
+summary: '本文档从首席平台架构师视角，深入探讨Kubernetes平台级可观测性体系建设的深度实践，涵盖全栈监控架构、智能告警策略、性能分析优化、成本治理等核心内容，结合世界500强企业的平台可观测性建设经验，为企业构建世界级平台监控能力提供战略级指导。'
 category: platform-ops
 tags:
 - k8s

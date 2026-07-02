@@ -1,7 +1,7 @@
 ---
 title: 集群操作函数库
 description: '## 概述'
-summary: '## 概述'
+summary: '本主题包含 Kubernetes 集群常见操作函数和流程，提供标准化的操作模板。'
 category: general
 tags:
 - k8s

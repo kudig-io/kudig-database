@@ -1,7 +1,7 @@
 ---
 title: 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)
 description: '# 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)'
-summary: '# 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)'
+summary: 'requiredDuringSchedulingIgnoredDuringExecution:'
 category: workloads
 tags:
 - k8s

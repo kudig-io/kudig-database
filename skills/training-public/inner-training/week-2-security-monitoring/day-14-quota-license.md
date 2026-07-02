@@ -1,7 +1,7 @@
 ---
 title: 'Day 14: K8S 集群配额 & License'
 description: '- "ACK配额管理"'
-summary: '- "ACK配额管理"'
+summary: '在多团队共享集群的场景下，资源配额管理是保障公平性和稳定性的关键机制。今天你将学习 K8s 原生的 ResourceQuota 和 LimitRange 机制，理解 ACK 集群级别的配额限制，并掌握多团队资源配额方案的设计方法。'
 category: learning
 tags:
 - k8s

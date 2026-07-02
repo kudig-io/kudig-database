@@ -1,7 +1,7 @@
 ---
 title: Open Cluster Management (OCM)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Open Cluster Management (OCM) 是一个社区驱动的多集群管理平台，提供 Kubernetes 多集群编排的核心能力。OCM 采用 Hub-Spoke 架构，通过轻量级的代理模型实现集群注册、工作负载分发、策略治理和应用生命周期管理。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Akri (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Akri 是一个 Kubernetes 资源接口项目，用于在边缘环境中自动发现和使用异构叶设备（Leaf Devices）。它将 IP 摄像头、USB 传感器、OPC UA 服务器等物理设备抽象为 Kubernetes 原生资源，使 Pod 能够像使用 PersistentVolume 一样使用这些边缘设备。'
 category: entities
 tags:
 - k8s

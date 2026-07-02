@@ -1,7 +1,7 @@
 ---
 title: 'Day 8: K8s RBAC 权限配置实操'
 description: '# Day 8: K8s RBAC 权限配置实操'
-summary: '# Day 8: K8s RBAC 权限配置实操'
+summary: 'kubectl describe rolebinding app-team-readonly-binding -n app-team'
 category: learning
 tags:
 - k8s

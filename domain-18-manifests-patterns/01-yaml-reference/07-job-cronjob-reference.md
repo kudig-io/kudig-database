@@ -1,7 +1,7 @@
 ---
 title: 07 - Job / CronJob YAML 配置参考
 description: '# 07 - Job / CronJob YAML 配置参考'
-summary: '# 07 - Job / CronJob YAML 配置参考'
+summary: 'Job 创建一个或多个 Pod,并确保指定数量的 Pod 成功完成。Pod 成功完成后,Job 跟踪成功的次数。当成功次数达到指定值时,Job 本身完成。'
 category: yaml-manifests
 tags:
 - k8s

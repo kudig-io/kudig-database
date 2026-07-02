@@ -1,7 +1,7 @@
 ---
 title: LLM 隐私与安全
 description: '# LLM 隐私与安全'
-summary: '# LLM 隐私与安全'
+summary: 'LLM 应用面临独特的安全挑战,包括提示注入、数据泄露、模型窃取等威胁。本文档详细介绍 LLM 安全威胁分析、防御措施实现和 [[Kubernetes|Kubernetes]] 环境下的安全加固方案。'
 category: ai-infra
 tags:
 - k8s

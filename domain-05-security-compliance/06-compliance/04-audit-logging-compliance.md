@@ -1,7 +1,7 @@
 ---
 title: 04 - 审计日志与合规性管理
 description: '# 04 - 审计日志与合规性管理'
-summary: '# 04 - 审计日志与合规性管理'
+summary: 'Path              /var/log/kubernetes/audit/audit.log'
 category: security
 tags:
 - k8s

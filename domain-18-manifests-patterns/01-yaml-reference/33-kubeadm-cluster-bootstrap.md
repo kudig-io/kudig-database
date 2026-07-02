@@ -1,7 +1,7 @@
 ---
 title: 33 - kubeadm 集群引导配置 YAML 参考
 description: '# 33 - kubeadm 集群引导配置 YAML 参考'
-summary: '# 33 - kubeadm 集群引导配置 YAML 参考'
+summary: 'kubeadm reset --config kubeadm-reset-config.yaml  # ⚠️ 清理节点所有 K8s 配置'
 category: yaml-manifests
 tags:
 - k8s

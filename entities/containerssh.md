@@ -1,7 +1,7 @@
 ---
 title: ContainerSSH (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'ContainerSSH 是一个 SSH 服务器，它为每个 SSH 连接动态启动一个容器或 Kubernetes Pod，提供隔离的 shell 环境。用户通过 SSH 连接时，ContainerSSH 调用外部认证服务验证用户身份，然后根据配置为该用户启动专属的容器实例。这种架构非常适合提供安全的沙箱环境、蜜罐系统、CI/CD 执行器或多租户开发环境。'
 category: entities
 tags:
 - k8s

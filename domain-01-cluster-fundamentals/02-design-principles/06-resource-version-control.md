@@ -1,7 +1,7 @@
 ---
 title: 06 - 资源版本与并发控制 (Concurrency Control)
 description: '## 专家解析：410 Gone 的终极治理'
-summary: '## 专家解析：410 Gone 的终极治理'
+summary: '在生产环境中，频繁出现 `410 Gone (Too old resource version)` 错误通常意味着你的 Watch 客户端跟不上 [[etcd|etcd]] 的压缩 (Compaction) 速度。'
 category: design-principles
 tags:
 - k8s

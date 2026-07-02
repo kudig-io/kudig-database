@@ -1,7 +1,7 @@
 ---
 title: Parsec
 description: '## 概述'
-summary: '## 概述'
+summary: 'Parsec 是一个平台安全抽象层，为应用程序提供统一的 API 来访问底层硬件安全模块（HSM）、可信平台模块（TPM）和其他加密硬件。它通过 IPC 机制（Unix Domain Socket）对外提供统一的加密操作接口，屏蔽了不同安全硬件的差异，使应用无需关心底层使用的是 TPM 2.0、PKCS#11 HSM 还是 Arm TrustZone。'
 category: entities
 tags:
 - k8s

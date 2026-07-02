@@ -1,7 +1,7 @@
 ---
 title: 69 - Lease 与 Leader 选举机制 (Lease & Leader Election)
 description: '## Lease 机制架构概览'
-summary: '## Lease 机制架构概览'
+summary: 'node.kubernetes.io/instance-type: ecs.g6.xlarge'
 category: platform-ops
 tags:
 - k8s

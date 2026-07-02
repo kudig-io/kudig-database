@@ -1,7 +1,7 @@
 ---
 title: GPU监控与可观测性
 description: '# GPU监控与可观测性'
-summary: '# GPU监控与可观测性'
+summary: 'DCGM_FI_DEV_GPU_UTIL{gpu="0", kubernetes_node="node-1"}'
 category: ai-infra
 tags:
 - k8s

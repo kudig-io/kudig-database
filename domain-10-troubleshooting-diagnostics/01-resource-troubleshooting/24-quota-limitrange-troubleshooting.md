@@ -1,7 +1,7 @@
 ---
 title: Quota/LimitRange 故障排查
 description: '# 24 - Quota/LimitRange 故障排查 (Quota/LimitRange Troubleshooting)'
-summary: '# 24 - Quota/LimitRange 故障排查 (Quota/LimitRange Troubleshooting)'
+summary: 'kubectl get resourcequota --all-namespaces'
 category: troubleshooting
 tags:
 - quota

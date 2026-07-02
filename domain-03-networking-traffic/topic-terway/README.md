@@ -1,7 +1,7 @@
 ---
 title: 'Topic: Terway 专题 — 阿里云容器网络 (CNI) 全栈知识体系'
 description: '# Topic: Terway 专题 — 阿里云容器网络 (CNI) 全栈知识体系'
-summary: '# Topic: Terway 专题 — 阿里云容器网络 (CNI) 全栈知识体系'
+summary: '本专题从 **产品、架构、使用、运维、测试、性能、CRD 操作、故障树** 八个维度系统梳理阿里云 Terway CNI 的完整知识体系，面向 ACK 集群网络架构师、SRE 和云原生开发者。'
 category: terway
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 02 - Service Mesh 深度解析与生产实践
 description: '# 02 - Service Mesh 深度解析与生产实践'
-summary: '# 02 - Service Mesh 深度解析与生产实践'
+summary: 'iptables -t nat -L PREROUTING -n -v --line-numbers'
 category: networking
 tags:
 - k8s

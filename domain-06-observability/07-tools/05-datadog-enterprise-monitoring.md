@@ -1,7 +1,7 @@
 ---
 title: Datadog 企业级监控平台深度实践
 description: '# Datadog 企业级监控平台深度实践'
-summary: '# Datadog 企业级监控平台深度实践'
+summary: 'Datadog是业界领先的企业级监控平台，提供基础设施、应用程序和业务指标的统一监控解决方案。本文档从企业级运维专家角度，深入探讨Datadog的架构设计、监控策略、告警管理和最佳实践。'
 category: enterprise-monitoring-alerting
 tags:
 - k8s

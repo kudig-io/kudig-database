@@ -1,7 +1,7 @@
 ---
 title: 46 - Kubernetes客户端库
 description: '## 客户端库架构'
-summary: '## 客户端库架构'
+summary: 'metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"'
 category: platform-ops
 tags:
 - k8s

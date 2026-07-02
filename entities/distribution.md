@@ -1,7 +1,7 @@
 ---
 title: Distribution (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Distribution (原 Docker Registry) 是 OCI 容器镜像分发的参考实现。它提供了一个符合 OCI Distribution Specification 的镜像仓库服务器，用于存储和分发容器镜像及其他 OCI 工件。'
 category: entities
 tags:
 - k8s

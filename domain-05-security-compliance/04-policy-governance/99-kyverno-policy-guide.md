@@ -1,7 +1,7 @@
 ---
 title: Kyverno K8s 原生策略管理实践指南
 description: '# Kyverno K8s 原生策略管理实践指南'
-summary: '# Kyverno K8s 原生策略管理实践指南'
+summary: 'Kyverno 是专为 [[Kubernetes|Kubernetes]] 设计的策略引擎，以 CNCF 毕业项目的身份成为云原生策略管理的事实标准。与 OPA Gatekeeper 需要学习 Rego 语言不同，Kyverno 使用标准 K8s YAML 定义策略，直接使用 kubectl 管理策略资源，'
 category: cloud-native-security
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Emissary-Ingress (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Emissary-Ingress（原 Ambassador API Gateway）是 Kubernetes 原生的 API 网关，基于 Envoy Proxy 构建。它提供丰富的流量管理、认证授权和可观测性能力，是微服务架构的入口层解决方案。'
 category: entities
 tags:
 - k8s

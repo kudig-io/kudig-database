@@ -1,7 +1,7 @@
 ---
 title: 'Day 18: 节点池进阶'
 description: '## 概述'
-summary: '## 概述'
+summary: '在 Day 17 学习了节点池基础之后，今天将深入节点池的高级特性：自动伸缩策略配置、Spot 实例混合策略、节点池升级流程、以及节点池故障排查。这些进阶能力是生产环境运维的核心技能。'
 category: learning
 tags:
 - k8s

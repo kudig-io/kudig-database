@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 核心组件 v1.29 - v1.33 新特性速查
 description: '# 替代大部分 ValidatingWebhook 的零延迟方案'
-summary: '# 替代大部分 ValidatingWebhook 的零延迟方案'
+summary: 'object.spec.template.spec.containers.all('
 category: architecture-fundamentals
 tags:
 - k8s

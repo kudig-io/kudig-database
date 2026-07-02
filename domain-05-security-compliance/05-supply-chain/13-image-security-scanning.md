@@ -1,7 +1,7 @@
 ---
 title: 13 - 镜像安全扫描与漏洞管理
 description: '# 13 - 镜像安全扫描与漏洞管理'
-summary: '# 13 - 镜像安全扫描与漏洞管理'
+summary: 'IMAGES=$(curl -s "http://harbor-api/api/v2.0/projects/library/repositories/app/tags" | jq -r '.[].name')'
 category: security
 tags:
 - k8s

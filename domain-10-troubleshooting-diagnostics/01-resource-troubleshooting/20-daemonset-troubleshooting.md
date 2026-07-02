@@ -1,7 +1,7 @@
 ---
 title: DaemonSet 故障排查
 description: '# 20 - DaemonSet 故障排查 (DaemonSet Troubleshooting)'
-summary: '# 20 - DaemonSet 故障排查 (DaemonSet Troubleshooting)'
+summary: 'kubectl get daemonset <daemonset-name> -n <namespace> -o jsonpath='{.spec.template.spec.tolerations}''
 category: troubleshooting
 tags:
 - daemonset

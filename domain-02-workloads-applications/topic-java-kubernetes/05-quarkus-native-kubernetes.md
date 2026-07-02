@@ -1,7 +1,7 @@
 ---
 title: Quarkus Native 编译与 Kubernetes 部署指南 (domain-02-workloads-applications)
 description: '# Quarkus Native 编译与 Kubernetes 部署指南'
-summary: '# Quarkus Native 编译与 Kubernetes 部署指南'
+summary: 'Quarkus 是 Red Hat 主导的云原生 Java 框架，核心理念是"容器优先"（Container First）。通过 GraalVM Native Image 编译或 Mandrel 构建工具，'
 category: java-kubernetes
 tags:
 - java

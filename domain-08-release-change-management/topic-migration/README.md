@@ -1,7 +1,7 @@
 ---
 title: 自建 Kubernetes 迁移至阿里云 ACK 生产实践指南
 description: '# 自建 Kubernetes 迁移至阿里云 ACK 生产实践指南'
-summary: '# 自建 Kubernetes 迁移至阿里云 ACK 生产实践指南'
+summary: 'aliyun ram ListPoliciesForUser --UserName <your-user>'
 category: migration
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Amazon ECR (Elastic Container Registry) Enterprise 深度实践
 description: '# Amazon ECR (Elastic Container Registry) Enterprise 深度实践'
-summary: '# Amazon ECR (Elastic Container Registry) Enterprise 深度实践'
+summary: 'This document provides comprehensive exploration of Amazon ECR enterprise deployment architecture, security practices, and operational management.'
 category: container-image-management
 tags:
 - k8s

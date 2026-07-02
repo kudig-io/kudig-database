@@ -1,7 +1,7 @@
 ---
 title: HolmesGPT [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'HolmesGPT 是一个基于大语言模型（LLM）的 Kubernetes 故障排查助手，能够自动分析集群告警和事件，执行运维调查流程，提供根因分析（RCA）和修复建议。它将 AI 推理能力与 Kubernetes 原生工具（kubectl、Helm 等）结合，实现从告警到根因定位的自动化排查闭环。'
 category: entities
 tags:
 - k8s

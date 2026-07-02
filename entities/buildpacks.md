@@ -1,7 +1,7 @@
 ---
 title: Cloud Native Buildpacks
 description: '## 概述'
-summary: '## 概述'
+summary: 'Cloud Native Buildpacks (CNB) 将应用源代码转换为 OCI 容器镜像，无需编写 Dockerfile。它自动检测应用类型、安装依赖、配置运行环境，简化了容器化流程并提高镜像安全性。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: bpfman (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'bpfman 是一个 eBPF 程序管理器，提供系统守护进程和 Kubernetes Operator，用于集中加载、管理和监控 eBPF 程序。它解决了多个应用同时使用 eBPF 时的管理混乱问题，提供统一的 eBPF 程序生命周期管理、多程序共享挂载点、权限控制和可观测性，使 eBPF 程序的部署和运维更加安全和可控。'
 category: entities
 tags:
 - k8s

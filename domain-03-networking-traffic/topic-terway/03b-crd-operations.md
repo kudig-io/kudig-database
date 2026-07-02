@@ -1,7 +1,7 @@
 ---
 title: 03b - Terway CRD 深度操作指南 (CRD Operations Deep Dive)
 description: '# 03b - Terway CRD 深度操作指南 (CRD Operations Deep Dive)'
-summary: '# 03b - Terway CRD 深度操作指南 (CRD Operations Deep Dive)'
+summary: '1. 用户创建 Pod/StatefulSet, 通过 Annotation 或 PodNetworking 声明网络需求'
 category: terway
 tags:
 - k8s

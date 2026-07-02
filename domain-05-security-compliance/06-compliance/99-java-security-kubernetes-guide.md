@@ -1,7 +1,7 @@
 ---
 title: Java 应用 Kubernetes 安全加固深度实践
 description: '# Java 应用 Kubernetes 安全加固深度实践'
-summary: '# Java 应用 Kubernetes 安全加固深度实践'
+summary: 'Java 应用在 Kubernetes 上的安全加固涉及多个层面：容器运行时安全、密钥与证书管理、网络安全策略、依赖安全扫描和代码安全实践。随着 JDK 21 中 SecurityManager 的弃用（JEP 411），传统的 Java 沙箱机制将逐步移除，安全防护重心转移到容器和 Kubernetes 平台层面。本文从 Java 应用的视角出发，'
 category: cloud-native-security
 tags:
 - k8s

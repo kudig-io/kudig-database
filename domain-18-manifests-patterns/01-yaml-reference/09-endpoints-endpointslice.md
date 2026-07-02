@@ -1,7 +1,7 @@
 ---
 title: 09 - Endpoints / EndpointSlice YAML 配置参考
 description: '# 09 - Endpoints / EndpointSlice YAML 配置参考'
-summary: '# 09 - Endpoints / EndpointSlice YAML 配置参考'
+summary: 'GET /api/v1/namespaces/{namespace}/endpoints/{name}'
 category: yaml-manifests
 tags:
 - k8s

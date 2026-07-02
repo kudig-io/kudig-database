@@ -1,7 +1,7 @@
 ---
 title: Redis Kubernetes Operator 企业级实践
 description: '# Redis Kubernetes Operator 企业级实践'
-summary: '# Redis Kubernetes Operator 企业级实践'
+summary: '在 Kubernetes 环境中运行 Redis 是现代云原生架构的常见需求。相比传统的虚拟机或物理机部署，K8s 上的 Redis 面临独特的挑战：有状态数据管理（PVC 生命周期）、网络分区下的脑裂防护、持久化性能（网络存储 vs 本地存储）、以及 Operator 的选型与配置。'
 category: enterprise-database-middleware
 tags:
 - k8s

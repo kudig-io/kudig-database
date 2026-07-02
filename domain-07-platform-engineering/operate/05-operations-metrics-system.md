@@ -1,7 +1,7 @@
 ---
 title: 运维指标体系建设 (Operations Metrics System)
 description: '# 运维指标体系建设 (Operations Metrics System)'
-summary: '# 运维指标体系建设 (Operations Metrics System)'
+summary: '运维指标体系是衡量平台健康度、指导运维决策的核心工具。本文档从业务价值出发，构建完整的四级指标体系（USE、RED、Four Golden Signals、Error Budget），提供可落地的指标采集、分析和应用方案。'
 category: platform-ops
 tags:
 - k8s

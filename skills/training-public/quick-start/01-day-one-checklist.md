@@ -1,7 +1,7 @@
 ---
 title: 'Day 1: 新人首日检查清单 [quick-start]'
 description: '# stern - 日志实时跟踪'
-summary: '# stern - 日志实时跟踪'
+summary: '2. `domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md` — kubectl 场景速查'
 category: learning
 tags:
 - k8s

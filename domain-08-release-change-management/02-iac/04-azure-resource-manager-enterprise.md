@@ -1,7 +1,7 @@
 ---
 title: Azure Resource Manager (ARM) Enterprise 深度实践
 description: '# Azure Resource Manager (ARM) Enterprise 深度实践'
-summary: '# Azure Resource Manager (ARM) Enterprise 深度实践'
+summary: 'This document provides comprehensive exploration of Azure Resource Manager enterprise deployment architecture, security practices, and operational management.'
 category: infrastructure-as-code
 tags:
 - k8s

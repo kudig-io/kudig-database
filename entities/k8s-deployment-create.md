@@ -1,7 +1,7 @@
 ---
 title: Kubernetes Deployment 创建操作指南
 description: '# Kubernetes Deployment 创建操作指南'
-summary: '# Kubernetes Deployment 创建操作指南'
+summary: 'dInformer appsinformers.DeploymentInformer,'
 category: references
 tags:
 - k8s

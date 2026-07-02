@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 description: '# Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)'
-summary: '# Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)'
+summary: '控制平面是 Kubernetes 集群的大脑，负责整个集群的状态管理和协调工作。'
 category: control-plane
 tags:
 - k8s

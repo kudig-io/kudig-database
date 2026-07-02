@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 网络基础 Network in a Nutshell
 description: '# Kubernetes 网络基础 Network in a Nutshell'
-summary: '# Kubernetes 网络基础 Network in a Nutshell'
+summary: '在钻进 K8s 之前，先把 **5 个 Linux 网络概念**铺平。这些就是 K8s 网络的「砖瓦」，理解它们之后，后文一切都会豁然开朗。'
 category: networking
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 硬件厂商生态
 description: '## 概述'
-summary: '## 概述'
+summary: '服务器硬件生态涵盖服务器整机厂商、核心组件供应商及ODM/OEM厂商。了解厂商生态有助于硬件选型、供应链管理及技术支持决策。'
 category: hardware
 tags:
 - k8s

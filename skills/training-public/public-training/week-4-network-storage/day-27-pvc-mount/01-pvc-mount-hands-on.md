@@ -1,7 +1,7 @@
 ---
 title: 'Day 27: 存储卷挂载实操'
 description: '# Day 27: 存储卷挂载实操'
-summary: '# Day 27: 存储卷挂载实操'
+summary: 'kubectl get pod <pod-name> -o jsonpath='{.spec.volumes[*].mountPropagation}''
 category: learning
 tags:
 - k8s

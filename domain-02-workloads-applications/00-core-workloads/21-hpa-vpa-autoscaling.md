@@ -1,7 +1,7 @@
 ---
 title: HPA/VPA 自动伸缩配置
 description: '# HPA/VPA 自动伸缩配置'
-summary: '# HPA/VPA 自动伸缩配置'
+summary: 'kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/http_requests_per_second"'
 category: workloads
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
 description: '# 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)'
-summary: '# 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)'
+summary: '"synchronize_checkpoint_boundary": false,'
 category: ai-infra
 tags:
 - k8s

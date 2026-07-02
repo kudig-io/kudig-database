@@ -1,7 +1,7 @@
 ---
 title: Crossplane Enterprise Infrastructure Orchestration 深度实践
 description: '# Crossplane Enterprise Infrastructure Orchestration 深度实践'
-summary: '# Crossplane Enterprise Infrastructure Orchestration 深度实践'
+summary: 'This document provides comprehensive exploration of Crossplane enterprise deployment architecture, multi-cloud management practices, and operational orchestration.'
 category: infrastructure-as-code
 tags:
 - k8s

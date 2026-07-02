@@ -1,7 +1,7 @@
 ---
 title: SlimToolkit (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'SlimToolkit（原名 DockerSlim）是一个容器镜像优化工具，能够自动分析和瘦身容器镜像，将镜像大小缩减高达 30 倍，同时提升安全性。它通过动态分析识别应用实际需要的文件，移除不必要的组件，生成最小化、安全加固的生产镜像。'
 category: entities
 tags:
 - k8s

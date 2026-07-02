@@ -1,7 +1,7 @@
 ---
 title: 15 - Kubernetes 可观测性架构体系
 description: '# 15 - Kubernetes 可观测性架构体系'
-summary: '# 15 - Kubernetes 可观测性架构体系'
+summary: '本文档全面阐述 Kubernetes 可观测性架构的设计理念、技术组件和实施策略，涵盖指标监控、日志收集、链路追踪和告警管理等核心领域，为企业构建完整的可观测性平台提供指导。'
 category: architecture-fundamentals
 tags:
 - k8s

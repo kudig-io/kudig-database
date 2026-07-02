@@ -1,7 +1,7 @@
 ---
 title: 'Day 2: ACK SDK & API'
 description: '## 概述'
-summary: '## 概述'
+summary: 'ACK 提供了完整的 OpenAPI 接口，支持通过 aliyun CLI、Python SDK、Java SDK 等多种方式调用。掌握 API 调用是自动化运维的基础——从集群创建到节点管理，从组件安装到证书轮换，所有操作都可以通过 API 完成。今天你将学习 ACK API 的认证机制、核心接口分类，'
 category: learning
 tags:
 - k8s

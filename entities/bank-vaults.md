@@ -1,7 +1,7 @@
 ---
 title: Bank-Vaults (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Bank-Vaults 是一套围绕 HashiCorp Vault 构建的 Kubernetes 原生密钥管理工具集。它提供 Vault Operator 自动化部署和管理 Vault 集群、Webhook 自动注入密钥到 Pod 环境变量和文件、以及多种云 KMS 后端的自动解封能力。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: container2wasm (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'container2wasm 是一个将 Linux 容器镜像转换为 WebAssembly (WASM) 模块的工具。它通过嵌入 Linux 内核模拟器（基于 Bochs x86 模拟器或 TinyEMU RISC-V 模拟器），使原本为 x86_64/aarch64 编译的容器镜像能够在任何支持 WASM 的环境中运行，'
 category: entities
 tags:
 - k8s

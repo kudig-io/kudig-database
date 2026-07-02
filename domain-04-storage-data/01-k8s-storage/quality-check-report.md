@@ -1,7 +1,7 @@
 ---
 title: Domain-6 存储知识库质量检查报告
 description: '# Domain-6 存储知识库质量检查报告'
-summary: '# Domain-6 存储知识库质量检查报告'
+summary: '3. **04-StorageClass动态供给** - 多租户策略、成本控制、智能推荐'
 category: storage
 tags:
 - k8s

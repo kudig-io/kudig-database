@@ -1,7 +1,7 @@
 ---
 title: Hyperlight (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Hyperlight 是一个轻量级虚拟机管理器 (VMM)，专为在毫秒级启动时间内运行函数式工作负载而设计。它创建超轻量的 micro-VM，每个 VM 可在 1-2 毫秒内启动，内存开销仅为几 MB。Hyperlight 特别适合 Serverless 和 FaaS 场景，提供比容器更强的隔离性，同时保持接近容器的启动速度和资源效率。'
 category: entities
 tags:
 - k8s

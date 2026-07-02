@@ -1,7 +1,7 @@
 ---
 title: 34. Kubernetes 组件配置（Component Configuration）
 description: '# 34. Kubernetes 组件配置（Component Configuration）'
-summary: '# 34. Kubernetes 组件配置（Component Configuration）'
+summary: '从 Kubernetes v1.10 开始，控制平面和节点组件逐步支持通过**类型化配置文件**（Typed Configuration Files）进行配置，而不是仅依赖命令行标志（CLI flags）。这种方式提供了以下优势:'
 category: yaml-manifests
 tags:
 - k8s

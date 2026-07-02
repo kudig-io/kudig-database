@@ -1,7 +1,7 @@
 ---
 title: 07 - Deployment 与 ReplicaSet 控制器事件
 description: '- 应用部署'
-summary: '- 应用部署'
+summary: '本文档全面记录 Kubernetes Deployment Controller 和 ReplicaSet Controller 产生的所有事件类型，涵盖滚动更新、扩缩容、回滚、进度监控等核心场景。这些控制器负责管理应用的声明式更新和副本保证，是生产环境中最常用的工作负载资源。'
 category: general
 tags:
 - k8s

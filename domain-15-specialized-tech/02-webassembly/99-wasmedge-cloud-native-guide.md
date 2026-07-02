@@ -1,7 +1,7 @@
 ---
 title: WebAssembly (Wasm) 云原生实践指南
 description: '# WebAssembly (Wasm) 云原生实践指南'
-summary: '# WebAssembly (Wasm) 云原生实践指南'
+summary: 'Docker / containerd ──► runc ──► Linux Namespace/CGroup'
 category: webassembly-cloud-native
 tags:
 - k8s

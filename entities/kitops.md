@@ -1,7 +1,7 @@
 ---
 title: KitOps (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'KitOps 是一个 MLOps/AI 工件打包和版本管理工具，使用 OCI 标准将 AI/ML 项目的所有组件（模型权重、数据集、代码、配置）打包为称为 ModelKit 的 OCI Artifact。它允许数据科学家和 ML 工程师像管理容器镜像一样管理 AI 模型全生命周期的工件，并通过标准容器注册中心进行分发。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 新人上手快速路径（Quick Start） [quick-start]
 description: '## 概述'
-summary: '## 概述'
+summary: '本目录提供新人入职第一周的系统性上手路径，旨在帮助刚加入团队的 SRE 和运维工程师在最短时间内建立 [[Kubernetes|Kubernetes]] 生产运维的基本能力。新人培训是团队战斗力建设的关键环节，一个结构化的上手路径能够显著缩短新人从"第一天入职"到"能独立处理工单"的时间周期。'
 category: learning
 tags:
 - k8s

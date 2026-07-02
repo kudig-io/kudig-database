@@ -1,7 +1,7 @@
 ---
 title: 12 - Gateway API 高级路由 YAML 配置参考
 description: '# 12 - Gateway API 高级路由 YAML 配置参考'
-summary: '# 12 - Gateway API 高级路由 YAML 配置参考'
+summary: '6. [ReferenceGrant 跨命名空间授权](#referencegrant-跨命名空间授权)'
 category: yaml-manifests
 tags:
 - k8s

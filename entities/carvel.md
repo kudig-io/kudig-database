@@ -1,7 +1,7 @@
 ---
 title: Carvel (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Carvel 是一组专注于 Kubernetes 应用构建、配置和部署的工具集。它采用 Unix 哲学，每个工具专注于单一任务并可组合使用。主要包括 ytt (YAML 模板)、kbld (镜像构建)、kapp (应用部署)、imgpkg (OCI 镜像打包)、vendir (依赖管理) 和 kapp-controller (GitOps)。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Docker 安全最佳实践
 description: '# Docker 安全最佳实践'
-summary: '# Docker 安全最佳实践'
+summary: 'RUN pip install --user --no-cache-dir -r requirements.txt'
 category: docker
 tags:
 - docker

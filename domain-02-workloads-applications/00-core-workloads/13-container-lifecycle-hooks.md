@@ -1,7 +1,7 @@
 ---
 title: 74 - 容器生命周期钩子 (Container Lifecycle Hooks)
 description: '## 容器生命周期架构'
-summary: '## 容器生命周期架构'
+summary: 'echo "[$(date)] PostStart: Initializing application..."'
 category: workloads
 tags:
 - k8s

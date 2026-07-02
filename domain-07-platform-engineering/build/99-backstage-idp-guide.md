@@ -1,7 +1,7 @@
 ---
 title: Backstage 内部开发者平台 (IDP) 构建指南
 description: '# Backstage 内部开发者平台 (IDP) 构建指南'
-summary: '# Backstage 内部开发者平台 (IDP) 构建指南'
+summary: 'pagerduty.com/integration-key: "<INTEGRATION_KEY>"'
 category: platform-engineering
 tags:
 - k8s

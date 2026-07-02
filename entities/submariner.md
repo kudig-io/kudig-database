@@ -1,7 +1,7 @@
 ---
 title: Submariner (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Submariner 实现 Kubernetes 多集群之间的 Pod 和 [[Service|Service]] 网络直连。它在集群之间建立加密隧道 (IPsec/WireGuard)，允许跨集群的 Pod 直接通信和 Service 发现，解决了多集群环境下的网络连通性问题。'
 category: entities
 tags:
 - k8s

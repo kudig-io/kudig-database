@@ -1,7 +1,7 @@
 ---
 title: Kuberhealthy (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kuberhealthy 是一个 Kubernetes 综合健康检查和合成监控工具。它通过运行 Kubernetes Job 来执行健康检查，将检查结果以 Prometheus 指标格式输出。支持自定义检查，可以验证 DNS、部署、存储、网络等各方面的集群健康状态。'
 category: entities
 tags:
 - k8s

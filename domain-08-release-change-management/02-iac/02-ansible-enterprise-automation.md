@@ -1,7 +1,7 @@
 ---
 title: Ansible企业级自动化运维深度实践
 description: '# Ansible企业级自动化运维深度实践'
-summary: '# Ansible企业级自动化运维深度实践'
+summary: 'This document provides in-depth exploration of Ansible enterprise infrastructure automation architecture design, deployment practices, and operational management.'
 category: infrastructure-as-code
 tags:
 - k8s

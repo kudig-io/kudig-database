@@ -1,7 +1,7 @@
 ---
 title: KusionStack (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'KusionStack 是一个云原生可编程技术栈，提供以应用为中心的配置管理和交付能力。它使用 KCL (Kusion Configuration Language) 作为配置语言，结合 Kusion 引擎实现从应用配置到多云/多环境的一致性交付。KusionStack 支持 Kubernetes、Terraform 等多种 IaC 后端，'
 category: entities
 tags:
 - k8s

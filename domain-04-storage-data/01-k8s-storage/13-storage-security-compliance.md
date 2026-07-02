@@ -1,7 +1,7 @@
 ---
 title: 13 - 存储安全与合规管理
 description: '# 13 - 存储安全与合规管理'
-summary: '# 13 - 存储安全与合规管理'
+summary: 'storageclass.kubernetes.io/is-default-class: "false"'
 category: storage
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Spring Cloud Kubernetes 与服务网格集成指南
 description: '# Spring Cloud Kubernetes 与服务网格集成指南'
-summary: '# Spring Cloud Kubernetes 与服务网格集成指南'
+summary: 'Spring Cloud 是 Java 生态中最成熟的微服务框架，但在 Kubernetes 环境中，许多 Spring Cloud 组件的功能已被 K8s 原生能力替代。本指南深入探讨 Spring Cloud 微服务迁移到 Kubernetes 的策略、Spring Cloud Kubernetes 的配置实践、与 Istio 服务网格的集成模式，'
 category: service-mesh-microservices
 tags:
 - k8s

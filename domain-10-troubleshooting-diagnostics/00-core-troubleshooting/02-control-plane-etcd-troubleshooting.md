@@ -1,7 +1,7 @@
 ---
 title: etcd 故障排查
 description: '# 02 - etcd 故障排查 (etcd Troubleshooting)'
-summary: '# 02 - etcd 故障排查 (etcd Troubleshooting)'
+summary: 'export ETCDCTL_CACERT=/etc/kubernetes/pki/etcd/ca.crt'
 category: troubleshooting
 tags:
 - etcd

@@ -1,7 +1,7 @@
 ---
 title: Capsule (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Capsule 是一个 Kubernetes 多租户框架，允许在单个集群中实现多租户隔离。它通过 Tenant CRD 将多个命名空间组织为逻辑单元，为每个租户提供隔离的资源配额、网络策略和 RBAC 控制。与传统的每租户一集群方案相比，Capsule 显著降低了运维复杂度和成本。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 网络安全最佳实践
 description: '# Kubernetes 网络安全最佳实践'
-summary: '# Kubernetes 网络安全最佳实践'
+summary: '本指南提供生产环境 Kubernetes 网络安全配置的最佳实践，涵盖从网络策略到服务网格的全方位内容 ^[inferred]。'
 category: skills
 tags:
 - k8s

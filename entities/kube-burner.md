@@ -1,7 +1,7 @@
 ---
 title: Kube-burner (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kube-burner 是一个 Kubernetes 性能和规模测试工具，通过在集群中创建或删除大量对象来模拟各种负载场景，并收集详细的性能指标。它广泛用于 Kubernetes 发行版（如 OpenShift）的可扩展性测试和基准测试。'
 category: entities
 tags:
 - k8s

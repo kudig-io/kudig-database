@@ -1,7 +1,7 @@
 ---
 title: 多云灾备深度实践
 description: '# 多云灾备深度实践'
-summary: '# 多云灾备深度实践'
+summary: '多云灾备（Multi-Cloud Disaster Recovery）是企业业务连续性保障的关键策略。通过在多个云平台部署冗余工作负载和数据副本，当单一云平台发生区域级甚至云服务商级别的问题时，业务能够快速切换到备用云平台，确保 RPO（Recovery Point Objective，恢复点目标）和 RTO（Recovery Time Objective，'
 category: multi-cloud-hybrid
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 'Day 28: 综合复习与实践'
 description: '# Day 28: 综合复习与实践'
-summary: '# Day 28: 综合复习与实践'
+summary: 'kubectl apply -f backend-deployment.yaml'
 category: learning
 tags:
 - k8s

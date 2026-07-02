@@ -1,7 +1,7 @@
 ---
 title: CNI 网络模型与插件对比
 description: '# CNI 网络模型与插件对比'
-summary: '# CNI 网络模型与插件对比'
+summary: 'kubeadm init 完成后，集群节点间网络不通，必须安装 CNI（Container Network Interface）插件。[[kubelet|kubelet]] 通过 CRI 调用 CNI 插件的 ADD/DEL/CHECK 命令来管理 Pod 网络命名空间，实现 Pod IP 分配、跨节点通信和网络策略等能力。'
 category: concepts
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 33 - 网络故障诊断与链路排查 (Network Troubleshooting & Data Path Diagnosis)
 description: '# 33 - 网络故障诊断与链路排查 (Network Troubleshooting & Data Path Diagnosis)'
-summary: '# 33 - 网络故障诊断与链路排查 (Network Troubleshooting & Data Path Diagnosis)'
+summary: 'kubectl exec -it netshoot -- nslookup kubernetes.default'
 category: networking
 tags:
 - k8s

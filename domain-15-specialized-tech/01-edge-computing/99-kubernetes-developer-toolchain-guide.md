@@ -1,7 +1,7 @@
 ---
 title: K8s 开发者体验工具链指南
 description: '# K8s 开发者体验工具链指南'
-summary: '# K8s 开发者体验工具链指南'
+summary: 'curl -sS https://webinstall.dev/k9s | bash'
 category: edge-computing
 tags:
 - k8s

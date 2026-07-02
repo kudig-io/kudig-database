@@ -1,7 +1,7 @@
 ---
 title: 控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI
 description: '# 控制平面深度剖析'
-summary: '# 控制平面深度剖析'
+summary: '1. **认证（Authentication）**：x509 证书、Bearer Token、OIDC 等'
 category: reference
 tags:
 - k8s

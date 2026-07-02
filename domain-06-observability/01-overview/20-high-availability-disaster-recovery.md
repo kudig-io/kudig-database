@@ -2,7 +2,7 @@
 title: 24 - 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster Recovery)
 description: '# 24 - 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster
   Recovery)'
-summary: '# 24 - 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster Recovery)'
+summary: '本文档针对监控平台的高可用性和灾难恢复需求，提供完整的可靠性架构设计、故障转移策略、容灾备份方案和业务连续性保障措施，帮助企业构建99.99%以上可用性的可观测性基础设施。'
 category: observability
 tags:
 - k8s

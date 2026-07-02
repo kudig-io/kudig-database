@@ -1,7 +1,7 @@
 ---
 title: 19 - SLO/SLI体系建设与管理 (SLO/SLI System Construction & Management)
 description: '# 19 - SLO/SLI体系建设与管理 (SLO/SLI System Construction & Management)'
-summary: '# 19 - SLO/SLI体系建设与管理 (SLO/SLI System Construction & Management)'
+summary: '本文档从Google级SRE总监视角，系统阐述SLO([[Service|Service]] Level Objective)和SLI(Service Level Indicator)体系建设的企业级方法论，涵盖Google SRE最佳实践、金融级可靠性标准、智能告警策略和业务价值量化等核心技术，结合万亿级请求处理经验，'
 category: observability
 tags:
 - k8s

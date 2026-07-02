@@ -1,7 +1,7 @@
 ---
 title: CPU与内存故障排查
 description: '# CPU与内存故障排查'
-summary: '# CPU与内存故障排查'
+summary: 'CPU和内存是服务器核心计算组件，其问题往往导致系统不稳定或完全无法工作。本文档详细解析CPU和内存问题的诊断方法、排查技巧及修复方案。'
 category: hardware
 tags:
 - k8s

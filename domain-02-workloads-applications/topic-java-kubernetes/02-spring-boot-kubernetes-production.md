@@ -1,7 +1,7 @@
 ---
 title: Spring Boot on Kubernetes 生产实践指南 (domain-02-workloads-applications) [topic-java-kubernetes]
 description: '# Spring Boot on Kubernetes 生产实践指南'
-summary: '# Spring Boot on Kubernetes 生产实践指南'
+summary: 'Spring Boot 是目前 Java 微服务领域使用最广泛的框架，而 Kubernetes 已成为事实上的容器编排标准。将 Spring Boot 应用**生产级别**地运行在 Kubernetes 上，'
 category: java-kubernetes
 tags:
 - java

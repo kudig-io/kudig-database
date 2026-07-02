@@ -1,7 +1,7 @@
 ---
 title: 03 - API 网关选型指南与对比矩阵
 description: '# 03 - API 网关选型指南与对比矩阵'
-summary: '# 03 - API 网关选型指南与对比矩阵'
+summary: '1. **Gateway API 标准化**: 所有主流产品正在或已经支持 Gateway API，未来将成为统一接口'
 category: cloud-native-api-gateway
 tags:
 - k8s

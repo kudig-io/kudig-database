@@ -1,7 +1,7 @@
 ---
 title: 'Domain-11: AI基础设施'
 description: '## 概述'
-summary: '## 概述'
+summary: 'AI基础设施域全面覆盖 Kubernetes 上的 AI/ML 工作负载管理、GPU调度优化、分布式训练、模型部署、推理服务等核心技术。从基础AI架构到LLM大模型全栈解决方案，为企业构建生产级AI平台提供完整指导。'
 category: ai-infra
 tags:
 - k8s

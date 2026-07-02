@@ -1,7 +1,7 @@
 ---
 title: 15 - 混沌工程与故障注入设计
 description: '# 15 - 混沌工程与故障注入设计'
-summary: '# 15 - 混沌工程与故障注入设计'
+summary: '本文档深入探讨混沌工程在 [[Kubernetes|Kubernetes]] 环境中的实践方法，涵盖故障注入技术、实验设计原则和系统韧性验证，为企业构建高可用分布式系统提供科学的工程方法论。'
 category: design-principles
 tags:
 - k8s

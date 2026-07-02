@@ -1,7 +1,7 @@
 ---
 title: 17 - 生产环境运维最佳实践 (Production Operations Best Practices)
 description: '# 17 - 生产环境运维最佳实践 (Production Operations Best Practices)'
-summary: '# 17 - 生产环境运维最佳实践 (Production Operations Best Practices)'
+summary: 'pos_file /var/log/fluentd-containers.log.pos'
 category: architecture-fundamentals
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 28 - AI绿色计算与可持续发展
 description: '## 一、AI绿色计算全景架构'
-summary: '## 一、AI绿色计算全景架构'
+summary: 'Level 4: 智能优化 (Intelligent Optimization)'
 category: ai-infra
 tags:
 - k8s

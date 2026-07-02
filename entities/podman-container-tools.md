@@ -1,7 +1,7 @@
 ---
 title: Podman Desktop [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Podman Desktop 是一个开源的桌面容器管理工具，为开发者提供图形化界面来管理容器、镜像、Pod 和 Kubernetes 集群。它支持 Podman、Docker 和 Kubernetes 等多种容器引擎，让开发者可以在本地无缝地开发、测试和调试容器化应用，并轻松迁移到 Kubernetes 环境。'
 category: entities
 tags:
 - k8s

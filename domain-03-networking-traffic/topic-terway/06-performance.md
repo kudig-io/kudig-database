@@ -1,7 +1,7 @@
 ---
 title: 06 - Terway 性能调优 (Performance Tuning)
 description: '## 1. 网络模式性能对比'
-summary: '## 1. 网络模式性能对比'
+summary: 'kubectl get node <node-name> -o jsonpath='{.status.allocatable.pods}''
 category: terway
 tags:
 - k8s

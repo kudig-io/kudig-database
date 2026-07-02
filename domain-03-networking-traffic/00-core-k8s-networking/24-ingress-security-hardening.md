@@ -1,7 +1,7 @@
 ---
 title: 132 - Ingress 安全加固与防护
 description: '# 132 - Ingress 安全加固与防护'
-summary: '# 132 - Ingress 安全加固与防护'
+summary: 'nginx.ingress.kubernetes.io/denylist-source-range: "1.2.3.4/32,5.6.7.0/24"'
 category: networking
 tags:
 - k8s

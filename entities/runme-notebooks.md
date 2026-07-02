@@ -1,7 +1,7 @@
 ---
 title: Runme (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Runme 是一个交互式 Markdown 运行时，可以将 Markdown 文档中的代码块转化为可执行的交互式笔记本。它让开发者可以直接在 VS Code 中运行 README、runbook 和文档中的命令，并保存执行结果。Runme 特别适合 DevOps、SRE 运维手册和开发文档的交互式执行。'
 category: entities
 tags:
 - k8s

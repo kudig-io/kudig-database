@@ -1,7 +1,7 @@
 ---
 title: 工作负载故障排查
 description: '# 工作负载故障排查'
-summary: '# 工作负载故障排查'
+summary: '2. **定位阶段**：Pending/ContainerCreating/Running/CrashLoopBackOff/OOMKilled，结合 Events 判断主因。'
 category: skills
 tags:
 - k8s

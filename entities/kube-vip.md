@@ -1,7 +1,7 @@
 ---
 title: kube-vip (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'kube-vip 为 Kubernetes 集群提供虚拟 IP (VIP) 和负载均衡功能。它可以作为控制平面的高可用解决方案，提供浮动 VIP 确保 API Server 始终可访问。同时也可以作为 LoadBalancer 类型 [[Service|Service]] 的实现，为裸金属环境提供服务负载均衡。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: K8s 配置管理术语参考
 description: '# K8s 配置管理术语参考'
-summary: '# K8s 配置管理术语参考'
+summary: '本页汇总了 **配置管理** 领域的 6 个 Kubernetes 术语定义与概念说明。'
 category: references
 tags:
 - k8s

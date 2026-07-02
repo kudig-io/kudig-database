@@ -1,7 +1,7 @@
 ---
 title: Alibaba Cloud ACK 企业级混合云深度实践
 description: '# Alibaba Cloud ACK 企业级混合云深度实践'
-summary: '# Alibaba Cloud ACK 企业级混合云深度实践'
+summary: '阿里云容器服务 [[Kubernetes|Kubernetes]] 版（Alibaba Container [[Service|Service]] for Kubernetes，ACK）是阿里云提供的托管 Kubernetes 服务，在中国市场占有领先地位。'
 category: multi-cloud-hybrid
 tags:
 - k8s

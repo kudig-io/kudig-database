@@ -1,7 +1,7 @@
 ---
 title: 'Day 3: ACK/ACR 控制台 & 功能'
 description: '## 概述'
-summary: '## 概述'
+summary: '虽然 kubectl 和 API 是运维自动化的主要工具，但控制台在日常查看、紧急操作和新人上手方面仍然不可替代。今天你将系统性地巡览 ACK 和 ACR 控制台的所有功能模块，理解每个界面背后对应的 K8s 资源和 API 操作，并建立控制台操作与 kubectl 命令的对照关系。'
 category: learning
 tags:
 - k8s

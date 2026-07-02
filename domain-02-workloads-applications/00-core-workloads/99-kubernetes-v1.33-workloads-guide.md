@@ -1,7 +1,7 @@
 ---
 title: Kubernetes v1.29-v1.33 工作负载管理新特性指南
 description: '# Kubernetes v1.29-v1.33 工作负载管理新特性指南'
-summary: '# Kubernetes v1.29-v1.33 工作负载管理新特性指南'
+summary: '原生 Sidecar 容器通过 `initContainers` 中的 `restartPolicy: Always` 实现，解决了以下问题：'
 category: workloads
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 33 - 服务发现与 DNS 配置 (Service Discovery & DNS)
 description: '# 33 - 服务发现与 DNS 配置 (Service Discovery & DNS)'
-summary: '# 33 - 服务发现与 DNS 配置 (Service Discovery & DNS)'
+summary: 'kubernetes cluster.local in-addr.arpa ip6.arpa {'
 category: networking
 tags:
 - k8s

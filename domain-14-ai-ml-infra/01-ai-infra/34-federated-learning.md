@@ -1,7 +1,7 @@
 ---
 title: 34 - 联邦学习与分布式协同训练
 description: '## 一、联邦学习架构'
-summary: '## 一、联邦学习架构'
+summary: 'from sklearn.linear_model import LogisticRegression'
 category: ai-infra
 tags:
 - k8s

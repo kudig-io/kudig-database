@@ -1,7 +1,7 @@
 ---
 title: OAuth2 Proxy [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'OAuth2 Proxy 是一个反向代理，提供基于 OAuth2/OIDC 协议的身份认证功能。它充当应用程序前的认证网关，支持 Google、GitHub、Azure AD、Keycloak 等多种身份提供商（IdP），使后端应用无需自行实现认证逻辑即可获得统一的身份验证能力。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 description: '- 运维工程师'
-summary: '- 运维工程师'
+summary: '本 Skill 覆盖内存压力、磁盘压力（含 inode 耗尽）、PID 压力、镜像/容器存储膨胀、系统 OOM 等全部 10 种根因的诊断和修复。'
 category: skills
 tags:
 - k8s

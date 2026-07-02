@@ -1,7 +1,7 @@
 ---
 title: 20 - Role / RoleBinding YAML 配置参考
 description: '# 20 - Role / RoleBinding YAML 配置参考'
-summary: '# 20 - Role / RoleBinding YAML 配置参考'
+summary: 'Role 和 RoleBinding 是 [[Kubernetes|Kubernetes]] RBAC (Role-Based Access Control) 的核心资源,用于在 **namespace 级别** 定义和授予权限。Role 定义了一组权限规则,RoleBinding 将这些权限授予用户、组或 ServiceAccount。'
 category: yaml-manifests
 tags:
 - k8s

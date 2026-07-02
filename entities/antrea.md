@@ -1,7 +1,7 @@
 ---
 title: Antrea [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Antrea 是基于 Open vSwitch (OVS) 构建的 Kubernetes 网络解决方案，为 Pod 网络提供高性能数据平面。它实现了 Kubernetes [[NetworkPolicy|NetworkPolicy]] API，并扩展支持更细粒度的流量控制，包括 ClusterNetworkPolicy、Egress 和流量可观测性功能。'
 category: entities
 tags:
 - k8s

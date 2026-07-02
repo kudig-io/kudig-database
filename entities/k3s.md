@@ -1,7 +1,7 @@
 ---
 title: k3s 轻量级 Kubernetes
 description: '## 概述'
-summary: '## 概述'
+summary: 'k3s 是经过 CNCF 认证的轻量级 Kubernetes 发行版，专为资源受限环境设计。它将 Kubernetes 所需的所有组件打包到单个小于 100MB 的二进制文件中，非常适合 IoT、边缘计算、CI/CD 和开发环境。k3s 移除了遗留和可选组件，'
 category: entities
 tags:
 - k8s

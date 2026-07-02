@@ -1,7 +1,7 @@
 ---
 title: 03 - 准入控制器(Webhook)配置与实现
 description: '# 03 - 准入控制器(Webhook)配置与实现'
-summary: '# 03 - 准入控制器(Webhook)配置与实现'
+summary: 'requiredDuringSchedulingIgnoredDuringExecution:'
 category: extensions
 tags:
 - k8s

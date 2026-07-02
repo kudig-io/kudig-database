@@ -1,7 +1,7 @@
 ---
 title: 运维 Skill 库：AI Agent 可执行的工单诊断-修复闭环
 description: '# 运维 Skill 库'
-summary: '# 运维 Skill 库'
+summary: 'Skill 是 KUDIG 的核心知识单元，将运维经验编码为结构化的诊断-修复流程：'
 category: reference
 tags:
 - k8s

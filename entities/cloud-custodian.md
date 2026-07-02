@@ -1,7 +1,7 @@
 ---
 title: Cloud Custodian [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Cloud Custodian 是云资源治理和管理的规则引擎，通过 YAML 策略实现云资源的合规性、成本优化和安全管理。它支持 AWS、Azure、GCP 等主流云平台和 Kubernetes。'
 category: entities
 tags:
 - k8s

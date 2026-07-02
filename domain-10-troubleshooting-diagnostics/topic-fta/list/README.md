@@ -1,7 +1,7 @@
 ---
 title: FTA 故障树清单索引 (topic-fta)
 description: '## 概述'
-summary: '## 概述'
+summary: '本目录包含 [[Kubernetes|Kubernetes]] 生产环境各组件的故障树分析（FTA）文档。每个 FTA 文件提供：'
 category: fta
 tags:
 - k8s

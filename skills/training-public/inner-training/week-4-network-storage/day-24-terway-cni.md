@@ -1,7 +1,7 @@
 ---
 title: 'Day 24: Terway 网络'
 description: '# Day 24: Terway 网络'
-summary: '# Day 24: Terway 网络'
+summary: 'kubectl describe node <node-name> | grep -A 5 "Allocatable" | grep -i eni'
 category: learning
 tags:
 - k8s

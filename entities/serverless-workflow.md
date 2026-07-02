@@ -1,7 +1,7 @@
 ---
 title: Serverless Workflow (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Serverless Workflow 是一个厂商中立的开源工作流规范，用于定义和编排 Serverless 应用的工作流程。该规范由 CNCF Serverless Working Group 维护，旨在提供一种标准化的、声明式的方式来描述复杂的业务流程、事件驱动的工作流和微服务编排。'
 category: entities
 tags:
 - k8s

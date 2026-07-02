@@ -1,7 +1,7 @@
 ---
 title: 02 - Operator开发模式与控制器实现
 description: '## Operator核心架构模式'
-summary: '## Operator核心架构模式'
+summary: 'curl -L -o kubebuilder https://go.kubebuilder.io/dl/latest/$(go env GOOS)/$(go env GOARCH)'
 category: extensions
 tags:
 - k8s

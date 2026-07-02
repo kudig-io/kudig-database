@@ -1,7 +1,7 @@
 ---
 title: AI 基础设施：GPU 调度、分布式训练、LLM 推理与成本优化
 description: '## GPU 调度'
-summary: '## GPU 调度'
+summary: '关键 K8s 资源：PyTorchJob、TFJob、MPIJob（KubeFlow Operator）。'
 category: reference
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation)
 description: '# 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation)'
-summary: '# 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation)'
+summary: '本文档从企业级平台运维专家视角，深入解析Kubernetes多租户架构设计、资源隔离机制、安全管控策略和运营管理模式，结合大规模生产环境实践经验，为企业构建安全、高效、可扩展的多租户平台提供完整解决方案。'
 category: platform-ops
 tags:
 - k8s

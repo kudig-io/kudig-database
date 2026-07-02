@@ -1,7 +1,7 @@
 ---
 title: AI平台可观测性体系
 description: '## 一、AI平台可观测性全景架构'
-summary: '## 一、AI平台可观测性全景架构'
+summary: 'pos_file /var/log/fluentd-containers.log.pos'
 category: ai-infra
 tags:
 - k8s

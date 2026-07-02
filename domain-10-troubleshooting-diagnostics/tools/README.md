@@ -1,7 +1,7 @@
 ---
 title: Domain-12 故障排查工具套件使用说明
 description: '# Domain-12 故障排查工具套件使用说明'
-summary: '# Domain-12 故障排查工具套件使用说明'
+summary: '这是一个为Kubernetes生产环境设计的专业级故障排查工具套件，包含完整的诊断、分析和报告功能，帮助运维专家快速定位和解决集群问题。'
 category: troubleshooting
 tags:
 - k8s

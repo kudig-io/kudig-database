@@ -1,7 +1,7 @@
 ---
 title: Kubescape [entities]
 description: '## 概述'
-summary: '## 概述'
+summary: 'Kubescape 是第一个用于测试 Kubernetes 是否按照 NSA-CISA 和 MITRE ATT&CK 框架安全部署的开源工具。它提供全面的安全平台，包括风险分析、安全合规、镜像漏洞扫描和运行时安全监控。'
 category: entities
 tags:
 - k8s

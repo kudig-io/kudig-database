@@ -1,7 +1,7 @@
 ---
 title: 05 - 企业级存储管理与运维实践
 description: '# 05 - 企业级存储管理与运维实践'
-summary: '# 05 - 企业级存储管理与运维实践'
+summary: 'services=("multipathd" "nfs-server" "iscsi" "ceph-mon" "minio")'
 category: storage-fundamentals
 tags:
 - storage

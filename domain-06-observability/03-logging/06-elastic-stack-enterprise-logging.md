@@ -1,7 +1,7 @@
 ---
 title: Elastic Stack企业级日志分析深度实践
 description: '# Elastic Stack企业级日志分析深度实践'
-summary: '# Elastic Stack企业级日志分析深度实践'
+summary: '本文档深入探讨Elastic Stack企业级日志分析系统的架构设计、部署实践和运维管理，基于大规模企业环境的实践经验，提供从日志采集到智能分析的完整技术指南，帮助企业构建高效、可靠的日志治理体系。'
 category: enterprise-monitoring-alerting
 tags:
 - k8s

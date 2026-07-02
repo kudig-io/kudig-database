@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 集群证书管理操作指南
 description: '# Kubernetes 集群证书管理操作指南'
-summary: '# Kubernetes 集群证书管理操作指南'
+summary: 'Kubernetes 集群采用多 CA 架构，将不同信任域的证书隔离管理。整个 PKI 体系由 **三组独立的 CA** 构成，分别服务于控制面组件通信、etcd 集群通信和 API 聚合层扩展。本文档从源码层面全面分析 PKI 架构的设计原理、证书签发链路、组件加载顺序以及安全最佳实践。'
 category: references
 tags:
 - k8s

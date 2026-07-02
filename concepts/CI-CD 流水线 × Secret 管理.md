@@ -1,7 +1,7 @@
 ---
 title: CI-CD 流水线 × Secret 管理
 description: '# CI-CD 流水线 × Secret 管理'
-summary: '# CI-CD 流水线 × Secret 管理'
+summary: 'GitOps 的核心假设是"所有配置都应该可以回滚"。但 Secret 回滚的语义是模糊的：'
 category: synthesis
 tags:
 - k8s

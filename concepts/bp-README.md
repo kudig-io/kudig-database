@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 最佳实践指南
 description: '# Kubernetes 最佳实践指南'
-summary: '# Kubernetes 最佳实践指南'
+summary: '本指南提供系统化的 Kubernetes 生产环境最佳实践，帮助团队构建稳定、安全、高效的云原生平台。'
 category: concepts
 tags:
 - k8s

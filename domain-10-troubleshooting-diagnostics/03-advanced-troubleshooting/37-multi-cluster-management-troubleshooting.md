@@ -1,7 +1,7 @@
 ---
 title: 多集群管理故障排查
 description: '# 37 - 多集群管理故障排查 (Multi-Cluster Management Troubleshooting)'
-summary: '# 37 - 多集群管理故障排查 (Multi-Cluster Management Troubleshooting)'
+summary: 'echo "  ✗ Nodes: Unable to retrieve node information"'
 category: troubleshooting
 tags:
 - multi-cluster

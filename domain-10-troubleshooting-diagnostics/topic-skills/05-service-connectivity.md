@@ -1,7 +1,7 @@
 ---
 title: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 description: '## 1. 概述'
-summary: '## 1. 概述'
+summary: 'Service 是 [[Kubernetes|Kubernetes]] 中网络连通性的**核心抽象层**。它为一组功能相同的 Pod 提供稳定的虚拟 IP（ClusterIP）和 DNS 名称，解耦了服务消费者与服务提供者。当 Service 连通性出现问题时，表现为集群内部或外部的客户端无法通过 Service 地址访问后端 Pod，'
 category: network
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 12 - 合规与认证表
 description: '# 12 - 合规与认证表'
-summary: '# 12 - 合规与认证表'
+summary: 'kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml'
 category: security
 tags:
 - k8s

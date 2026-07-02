@@ -1,7 +1,7 @@
 ---
 title: AI 编程与 LLM 网关专题 — OpenRouter & OpenCode 全量指南
 description: '# AI 编程与 LLM 网关专题 — OpenRouter & OpenCode 全量指南'
-summary: '# AI 编程与 LLM 网关专题 — OpenRouter & OpenCode 全量指南'
+summary: '1. **OpenRouter** —— 当前最大的统一 LLM API 网关平台，覆盖从核心架构与快速接入，到模型与 Provider 管理、智能路由策略、完整 API 参考、Structured Outputs / Tool Calling、插件体系、Prompt Caching、主流框架集成，再到流式传输、安全隐私、企业级高级实践。'
 category: ai-coding
 tags:
 - ai

@@ -1,7 +1,7 @@
 ---
 title: 机械硬盘技术
 description: '- 存储是什么？'
-summary: '- 存储是什么？'
+summary: '机械硬盘（HDD）作为传统存储介质，在大容量、高性价比存储场景中仍占据重要地位。本文档深入解析HDD的工作原理、技术规格、企业级特性及在云计算环境中的应用。'
 category: general
 tags:
 - k8s

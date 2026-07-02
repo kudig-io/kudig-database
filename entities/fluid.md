@@ -1,7 +1,7 @@
 ---
 title: Fluid (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Fluid 是 Kubernetes 上的数据集编排和加速系统，为数据密集型应用（如 AI/ML、大数据分析）提供数据抽象层。它通过分布式缓存引擎加速数据访问，实现数据与计算的协同调度。'
 category: entities
 tags:
 - k8s

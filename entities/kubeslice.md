@@ -1,7 +1,7 @@
 ---
 title: KubeSlice (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'KubeSlice 是一个多集群网络平台，通过创建逻辑 Slice（网络切片）覆盖层，在多个 Kubernetes 集群之间建立扁平的、安全的网络连接。每个 Slice 提供独立的网络命名空间、QoS 策略和安全隔离，使跨集群的应用能够像在同一集群内一样通信，同时保持网络隔离和带宽保障。'
 category: entities
 tags:
 - k8s

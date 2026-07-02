@@ -1,7 +1,7 @@
 ---
 title: 'Day 25: Flannel 网络'
 description: '# Day 25: Flannel 网络'
-summary: '# Day 25: Flannel 网络'
+summary: 'kubectl exec flannel-test-1 -- wget -qO- --timeout=5 http://kubernetes.default.svc.cluster.local/version 2>/dev/null || echo "需要认证"'
 category: learning
 tags:
 - k8s

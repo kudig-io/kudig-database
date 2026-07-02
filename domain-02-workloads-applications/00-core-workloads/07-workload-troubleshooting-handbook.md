@@ -2,7 +2,7 @@
 title: 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook)
 description: '# 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response
   Handbook)'
-summary: '# 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook)'
+summary: 'debug_pending_pod "my-app-7d5b8c9f4-xl2v9" "production"'
 category: workloads
 tags:
 - k8s

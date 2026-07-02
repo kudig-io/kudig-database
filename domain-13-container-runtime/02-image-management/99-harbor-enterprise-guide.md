@@ -1,7 +1,7 @@
 ---
 title: Harbor 企业级镜像仓库部署指南
 description: '# Harbor 企业级镜像仓库部署指南'
-summary: '# Harbor 企业级镜像仓库部署指南'
+summary: 'cert-manager.io/cluster-issuer: "letsencrypt-prod"'
 category: container-image-management
 tags:
 - k8s

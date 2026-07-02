@@ -1,7 +1,7 @@
 ---
 title: 16 - 安全合规管理 (Security & Compliance Management)
 description: '# 16 - 安全合规管理 (Security & Compliance Management)'
-summary: '# 16 - 安全合规管理 (Security & Compliance Management)'
+summary: 'pod-security.kubernetes.io/enforce: restricted'
 category: extensions
 tags:
 - k8s

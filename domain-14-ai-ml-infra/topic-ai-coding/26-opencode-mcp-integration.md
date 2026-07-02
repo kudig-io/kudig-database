@@ -1,7 +1,7 @@
 ---
 title: MCP 协议集成指南
 description: '# MCP 协议集成指南'
-summary: '# MCP 协议集成指南'
+summary: 'OpenCode 完整支持 **MCP（Model Context Protocol）**，可通过 Local（stdio 子进程）和 Remote（HTTP）两种方式接入外部工具和服务。MCP 工具与内置工具一视同仁，在 Agent 对话中自动可用，且支持 Per-Agent 启用/禁用、OAuth 自动认证和组织级远程配置分发。'
 category: ai-coding
 tags:
 - ai

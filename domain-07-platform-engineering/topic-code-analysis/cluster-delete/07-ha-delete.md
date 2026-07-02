@@ -1,7 +1,7 @@
 ---
 title: HA 集群删除注意事项 (topic-code-analysis)
 description: '## 概述'
-summary: '## 概述'
+summary: '高可用（HA）Kubernetes 集群的删除比单节点集群复杂得多：需要维护 etcd 仲裁、处理负载均衡器、确保控制面组件正常退出。本文档分析 HA 集群删除的关键注意事项。'
 category: general
 tags:
 - reference

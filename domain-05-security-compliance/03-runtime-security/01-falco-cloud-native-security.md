@@ -1,7 +1,7 @@
 ---
 title: Falco 云原生安全监控深度实践
 description: '# Falco 云原生安全监控深度实践'
-summary: '# Falco 云原生安全监控深度实践'
+summary: 'Falco 是 CNCF 毕业项目，也是云原生运行时安全的事实标准。它通过 eBPF 或内核模块捕获 Linux 系统调用，结合灵活的规则引擎，实时检测容器、K8s 集群和主机层面的异常行为。Falco 的核心价值在于填补了传统安全工具在容器环境中的盲区——容器的短暂性（ephemeral nature）使得传统的基于日志的分析方法难以有效追踪安全事件，'
 category: cloud-native-security
 tags:
 - k8s

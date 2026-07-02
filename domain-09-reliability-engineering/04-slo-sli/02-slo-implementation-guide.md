@@ -1,7 +1,7 @@
 ---
 title: SLO 设定与实施指南
 description: '# SLO 设定与实施指南'
-summary: '# SLO 设定与实施指南'
+summary: 'mean = statistics.mean(historical_availability)'
 category: domain
 tags:
 - sre

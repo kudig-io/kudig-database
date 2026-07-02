@@ -1,7 +1,7 @@
 ---
 title: 第六课：ConfigMap 和 Secret - 配置管理
 description: '# 第六课：ConfigMap 和 Secret - 配置管理'
-summary: '# 第六课：ConfigMap 和 Secret - 配置管理'
+summary: 'kubectl rollout restart deployment <name>'
 category: skills
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 滚动更新源码分析 (topic-code-analysis)
 description: '## 概述'
-summary: '## 概述'
+summary: '扩容、reconcileOldReplicaSets 缩容、比例缩放算法以及暂停恢复机制。'
 category: general
 tags:
 - reference

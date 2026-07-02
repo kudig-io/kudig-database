@@ -1,7 +1,7 @@
 ---
 title: 03 - Terway 使用指南 (Usage Guide)
 description: '# 03 - Terway 使用指南 (Usage Guide)'
-summary: '# 03 - Terway 使用指南 (Usage Guide)'
+summary: '在 ACK 控制台创建集群时，网络插件选择 **Terway** 即自动完成安装。Terway 以 [[DaemonSet|DaemonSet]] 形态运行在每个节点上，并在 kube-system 命名空间中创建对应的 ConfigMap 和 RBAC 资源。'
 category: terway
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: RAG 分块策略指南与 Manpage 安装指南
 description: '## RAG 分块策略指南'
-summary: '## RAG 分块策略指南'
+summary: 'from langchain.text_splitter import MarkdownHeaderTextSplitter'
 category: reference
 tags:
 - k8s

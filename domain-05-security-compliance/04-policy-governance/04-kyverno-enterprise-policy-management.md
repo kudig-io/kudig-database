@@ -1,7 +1,7 @@
 ---
 title: Kyverno 企业级策略管理深度实践
 description: '# Kyverno 企业级策略管理深度实践'
-summary: '# Kyverno 企业级策略管理深度实践'
+summary: 'Kyverno 是专为 Kubernetes 设计的策略引擎，以原生 YAML 语法定义策略规则，无需学习新的策略语言。作为 Kubernetes 准入控制器，Kyverno 支持验证（Validate）、变异（Mutate）、生成（Generate）、清理（Cleanup）和镜像验证（VerifyImages）五种策略类型，'
 category: cloud-native-security
 tags:
 - k8s

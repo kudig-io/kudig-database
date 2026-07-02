@@ -1,7 +1,7 @@
 ---
 title: 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)
 description: '# 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)'
-summary: '# 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)'
+summary: '本文档详细阐述 [[Kubernetes|Kubernetes]] 环境下监控仪表板的设计原则、Grafana 最佳实践、面板配置技巧和可视化策略，为运维团队提供专业的监控可视化解决方案。'
 category: observability
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 版本升级指南
 description: '# 版本升级指南'
-summary: '# 版本升级指南'
+summary: 'kubectl api-resources | grep -E "DEPRECATED|removed"'
 category: references
 tags:
 - k8s

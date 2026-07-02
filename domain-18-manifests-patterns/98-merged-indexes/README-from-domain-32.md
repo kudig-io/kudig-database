@@ -1,7 +1,7 @@
 ---
 title: 'Domain-32: Kubernetes YAML 配置完整参考手册'
 description: '# Domain-32: Kubernetes YAML 配置完整参考手册'
-summary: '# Domain-32: Kubernetes YAML 配置完整参考手册'
+summary: 'Kubernetes 生产运维终极 YAML 配置参考手册，覆盖所有原生 API 资源及常用生态工具的完整 YAML 配置规范。每个资源包含字段级完整参考、源码级原理解释、版本兼容性矩阵和生产案例。'
 category: yaml-manifests
 tags:
 - k8s

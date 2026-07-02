@@ -1,7 +1,7 @@
 ---
 title: KCL (Kusion Configuration Language)
 description: '## 概述'
-summary: '## 概述'
+summary: 'KCL (Kusion Configuration Language) 是一个开源的基于约束的记录与函数式配置语言，专为云原生配置和策略管理设计。它提供类型系统、schema 约束、配置合并和覆盖等能力，帮助团队以编程方式管理复杂的 Kubernetes 和云基础设施配置，减少配置错误。'
 category: entities
 tags:
 - k8s

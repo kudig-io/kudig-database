@@ -1,7 +1,7 @@
 ---
 title: Envoy Gateway 企业级 API Gateway 实践指南
 description: '# Envoy Gateway 企业级 API Gateway 实践指南'
-summary: '# Envoy Gateway 企业级 API Gateway 实践指南'
+summary: 'Ingress (单一资源)              Gateway (基础设施定义)'
 category: cloud-native-api-gateway
 tags:
 - k8s

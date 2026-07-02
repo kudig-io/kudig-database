@@ -1,7 +1,7 @@
 ---
 title: Domain-6 存储知识库查漏补缺完成报告
 description: '# Domain-6 存储知识库查漏补缺完成报告'
-summary: '# Domain-6 存储知识库查漏补缺完成报告'
+summary: 'Domain-6存储知识库已经成功完成了高质量的查漏补缺工作，达到了企业级生产环境的标准要求。该知识库现在具备以下特征：'
 category: storage
 tags:
 - k8s

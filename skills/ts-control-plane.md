@@ -1,7 +1,7 @@
 ---
 title: 控制平面故障排查
 description: '# 控制平面故障排查'
-summary: '# 控制平面故障排查'
+summary: '1. **确认影响面**：`kubectl version --short && kubectl get --raw /readyz`，若失败同时检查 LB 健康检查与节点安全组端口 6443。'
 category: skills
 tags:
 - k8s

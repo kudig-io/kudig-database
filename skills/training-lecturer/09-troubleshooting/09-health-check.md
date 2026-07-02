@@ -1,7 +1,7 @@
 ---
 title: 第八课：健康检查 - Probe 详解 [09-troubleshooting]
 description: '# 第八课：健康检查 - Probe 详解'
-summary: '# 第八课：健康检查 - Probe 详解'
+summary: '2. 掌握 LivenessProbe、ReadinessProbe、StartupProbe 的区别'
 category: k8s-lecturer
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Redis 企业级缓存运维深度实践
 description: '# Redis 企业级缓存运维深度实践'
-summary: '# Redis 企业级缓存运维深度实践'
+summary: 'Redis 是全球使用最广泛的内存数据结构存储系统，在企业架构中承担着缓存加速、会话管理、消息队列、实时排行榜、分布式锁、限流器等关键角色。Redis 8.0 引入了多线程 I/O、原生函数支持、增强的 ACL 和模块化架构，使其在保持单线程模型简洁性的同时大幅提升了吞吐量。'
 category: enterprise-database-middleware
 tags:
 - k8s

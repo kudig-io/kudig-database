@@ -1,7 +1,7 @@
 ---
 title: 143 - Terway 高级指南 (Terway Advanced Guide)
 description: '# 143 - Terway 高级指南 (Terway Advanced Guide)'
-summary: '# 143 - Terway 高级指南 (Terway Advanced Guide)'
+summary: 'kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.annotations.k8s\.aliyun\.com/allocated-eniips}{"\n"}{end}''
 category: networking
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 灾难恢复最佳实践
 description: '# Kubernetes 灾难恢复最佳实践'
-summary: '# Kubernetes 灾难恢复最佳实践'
+summary: '本指南提供生产环境 Kubernetes 灾难恢复配置的最佳实践，涵盖从备份策略到业务连续性的全方位内容 ^[inferred]。'
 category: skills
 tags:
 - k8s

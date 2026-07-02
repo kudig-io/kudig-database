@@ -1,7 +1,7 @@
 ---
 title: Spiderpool (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'Spiderpool 是一个 Kubernetes 的 Underlay 网络 IPAM (IP Address Management) 解决方案，专为数据中心和云原生环境设计。它支持固定 IP、多网卡、双栈网络等高级特性，能够与多种 CNI 插件无缝集成，特别适合需要 Pod 与物理网络直接通信的场景。'
 category: entities
 tags:
 - k8s

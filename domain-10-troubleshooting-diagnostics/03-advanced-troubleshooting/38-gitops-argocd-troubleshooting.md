@@ -1,7 +1,7 @@
 ---
 title: GitOps 和 ArgoCD 故障排查
 description: '# 38 - GitOps和ArgoCD故障排查 (GitOps and ArgoCD Troubleshooting)'
-summary: '# 38 - GitOps和ArgoCD故障排查 (GitOps and ArgoCD Troubleshooting)'
+summary: 'argocd app get <application-name> --refresh'
 category: troubleshooting
 tags:
 - argocd

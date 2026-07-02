@@ -1,7 +1,7 @@
 ---
 title: CNCF 存储与数据库项目全景
 description: '# CNCF 存储与数据库项目全景'
-summary: '# CNCF 存储与数据库项目全景'
+summary: '云原生存储分为 **块/文件/对象存储**、**分布式数据库**、**数据分发与缓存** 三大类。CNCF 存储项目解决 K8s 有状态工作负载的持久化、备份和高性能数据访问需求。'
 category: entities
 tags:
 - k8s

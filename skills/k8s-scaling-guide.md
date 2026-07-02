@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 扩缩容最佳实践
 description: '# Kubernetes 扩缩容最佳实践'
-summary: '# Kubernetes 扩缩容最佳实践'
+summary: '本指南提供生产环境 Kubernetes 扩缩容配置的最佳实践，涵盖从 HPA 到集群自动扩缩容的全方位内容 ^[inferred]。'
 category: skills
 tags:
 - k8s

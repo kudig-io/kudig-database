@@ -1,7 +1,7 @@
 ---
 title: AI Agent 工程专题 (domain-14-ai-ml-infra)
 description: '# AI Agent 工程专题'
-summary: '# AI Agent 工程专题'
+summary: '本专题系统性地覆盖 **AI Agent 工程**的全生命周期：从基础概念与架构设计，到 LLM 选型、RAG 构建、工具调用规范、多 Agent 编排，再到生产部署、安全治理、成本优化与企业实战案例。'
 category: ai-agent
 tags:
 - ai

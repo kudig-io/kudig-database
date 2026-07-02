@@ -1,7 +1,7 @@
 ---
 title: kube-rs (entities)
 description: '## 概述'
-summary: '## 概述'
+summary: 'kube-rs 是 Rust 语言的 Kubernetes 客户端库，提供类型安全的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 交互能力。'
 category: entities
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 143 - LLM微调技术与实践 (LLM Fine-tuning Techniques & Practices)
 description: '# 143 - LLM微调技术与实践 (LLM Fine-tuning Techniques & Practices)'
-summary: '# 143 - LLM微调技术与实践 (LLM Fine-tuning Techniques & Practices)'
+summary: 'parser.add_argument("--gradient_accumulation_steps", type=int, default=4)'
 category: ai-infra
 tags:
 - k8s

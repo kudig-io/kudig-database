@@ -1,7 +1,7 @@
 ---
 title: 77 - Service实现机制
 description: '## IPVS调度算法'
-summary: '## IPVS调度算法'
+summary: 'service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: "internet"'
 category: networking
 tags:
 - k8s

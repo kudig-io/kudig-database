@@ -1,7 +1,7 @@
 ---
 title: kube-proxy 深度解析 (kube-proxy Deep Dive)
 description: '# kube-proxy 深度解析 (kube-proxy Deep Dive)'
-summary: '# kube-proxy 深度解析 (kube-proxy Deep Dive)'
+summary: 'kube-proxy --feature-gates=NFTablesProxyMode=true --proxy-mode=nftables'
 category: control-plane
 tags:
 - k8s

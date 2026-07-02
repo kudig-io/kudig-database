@@ -1,7 +1,7 @@
 ---
 title: DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
 description: '# DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation'
-summary: '# DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation'
+summary: 'DNS 是 Kubernetes 集群中**所有服务发现的基石**。集群内部的 [[Service|Service]] 访问（`<service>.<namespace>.svc.cluster.local`）、Headless Service 的 Pod 发现、以及 Pod 对外部域名的访问，全部依赖 DNS 解析。当 DNS 出现问题时，'
 category: network
 tags:
 - k8s

@@ -1,7 +1,7 @@
 ---
 title: 14 - Namespace、资源管理与垃圾回收事件
 description: '# 14 - Namespace、资源管理与垃圾回收事件'
-summary: '# 14 - Namespace、资源管理与垃圾回收事件'
+summary: '$ kubectl delete namespace my-namespace  # ⚠️ 不可逆：永久删除命名空间及全部资源'
 category: kubernetes-events
 tags:
 - k8s

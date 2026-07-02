@@ -1,7 +1,7 @@
 ---
 title: 84 - 网络性能调优
 description: '# 84 - 网络性能调优'
-summary: '# 84 - 网络性能调优'
+summary: 'net.netfilter.nf_conntrack_tcp_timeout_established = 86400'
 category: networking
 tags:
 - k8s

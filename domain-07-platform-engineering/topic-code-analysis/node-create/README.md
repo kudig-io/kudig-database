@@ -1,7 +1,7 @@
 ---
 title: Node Create 模块函数索引 (topic-code-analysis)
 description: '# Node Create — Kubernetes 节点生命周期管理'
-summary: '# Node Create — Kubernetes 节点生命周期管理'
+summary: 'func (kl *Kubelet) syncNodeStatus(ctx context.Context) error'
 category: functions
 tags:
 - k8s

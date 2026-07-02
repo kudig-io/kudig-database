@@ -1,7 +1,7 @@
 ---
 title: 运维自动化工具链 (Operations Automation Toolchain)
 description: '# 运维自动化工具链 (Operations Automation Toolchain)'
-summary: '# 运维自动化工具链 (Operations Automation Toolchain)'
+summary: '运维自动化工具链是现代平台运维的核心基础设施，通过整合各类自动化工具，实现从基础设施部署到应用交付的端到端自动化流程。'
 category: platform-ops
 tags:
 - k8s

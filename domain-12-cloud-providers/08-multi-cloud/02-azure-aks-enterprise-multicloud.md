@@ -1,7 +1,7 @@
 ---
 title: Azure AKS 企业级多云管理平台
 description: '# Azure AKS 企业级多云管理平台'
-summary: '# Azure AKS 企业级多云管理平台'
+summary: 'Azure Kubernetes Service (AKS)] [[Service|Service]] (AKS) 是微软 Azure 提供的托管 Kubernetes 服务，提供企业级的安全性、可扩展性和管理功能。AKS 在全球 60 多个 Azure 区域可用，'
 category: multi-cloud-hybrid
 tags:
 - k8s

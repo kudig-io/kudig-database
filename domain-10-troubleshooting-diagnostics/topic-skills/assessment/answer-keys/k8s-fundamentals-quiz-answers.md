@@ -1,7 +1,7 @@
 ---
 title: K8s 基础知识考核 - 答案解析
 description: '# K8s 基础知识考核 - 答案解析'
-summary: '# K8s 基础知识考核 - 答案解析'
+summary: 'kubectl get pods -n <namespace> | grep CrashLoopBackOff'
 category: skills
 tags:
 - k8s
