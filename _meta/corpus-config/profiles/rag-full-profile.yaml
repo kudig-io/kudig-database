@@ -43,19 +43,11 @@ include:
     chunking: by_h2
     priority: high
 
-  # Tier 4: 生产运维（仅保留核心子目录，排除培训/讲师/演示）
-  - path: "domain-11-production-operations/01-finops/"
-    chunking: by_h2
-    priority: medium
-  - path: "domain-11-production-operations/02-governance/"
-    chunking: by_h2
-    priority: medium
-  - path: "domain-11-production-operations/03-incident-response/"
+  # Tier 4: 生产运维（整域保留；培训/讲师/演示/发布策略由下方 exclude 精确剔除，
+  #        从而保留 ticket-cases、reply-templates、on-call/escalation playbook 等高价值运维内容）
+  - path: "domain-11-production-operations/"
     chunking: by_h2
     priority: high
-  - path: "domain-11-production-operations/04-green-computing/"
-    chunking: by_h2
-    priority: medium
 
   # Tier 5: 云厂商、运行时、AI Infra（按需保留）
   - path: "domain-12-cloud-providers/"
@@ -89,6 +81,10 @@ include:
   - path: "domain-19-landscape-references/02-papers/"
     chunking: by_h2
     priority: medium
+  - path: "domain-19-landscape-references/topic-index/"
+    chunking: by_h2
+    priority: medium
+    note: "知识图谱聚合页（25 个，均有实质内容），被正文大量引用"
   - path: "domain-20-application-patterns/"
     chunking: by_h2
     priority: low
@@ -144,7 +140,8 @@ exclude:
 
   # 低信噪比：版本更新日志（时效性强，知识密度低）
   - "domain-19-landscape-references/topic-release-notes/"
-  - "domain-19-landscape-references/topic-index/"   # 索引页，无实质内容
+  # 注：topic-index/ 保留（25 个知识图谱聚合页，均为实质内容，且被正文大量 [[引用]]，
+  #     排除会造成 ~1550 处断链）
 
   # 低信噪比：CNCF Sandbox 项目（1600+ 文件中大部分为一句话简介）
   - "domain-19-landscape-references/01-cncf-landscape/sandbox/"
